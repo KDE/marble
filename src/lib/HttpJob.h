@@ -27,6 +27,7 @@ enum  Priority { NoPriority, Low, Medium, High };
 enum  Status   { NoStatus, Pending, Activated, Finished, Expired, Aborted };
 
 class StoragePolicy;
+class HttpJobPrivate;
 
 class HttpJob: public QObject
 {
@@ -65,57 +66,9 @@ class HttpJob: public QObject
 
  private:
     Q_DISABLE_COPY( HttpJob )
-    QUrl        m_sourceUrl;
-    QString     m_destinationFileName;
-    // if there is a redirection, we have to know the original file name
-    // for proper blacklisting etc.
-    QString     m_originalDestinationFileName;
-    QString     m_initiatorId;
-    Status      m_status;
-    Priority    m_priority;
-    StoragePolicy *m_storagePolicy;
+    HttpJobPrivate *const d;
+    friend class HttpJobPrivate;
 };
-
-
-inline QUrl HttpJob::sourceUrl() const
-{
-    return m_sourceUrl;
-}
-
-inline void HttpJob::setSourceUrl( const QUrl & url )
-{
-    m_sourceUrl = url;
-}
-
-inline QString HttpJob::initiatorId() const
-{
-    return m_initiatorId;
-}
-
-inline void HttpJob::setInitiatorId( const QString & id )
-{
-    m_initiatorId = id;
-}
-
-inline QString HttpJob::destinationFileName() const
-{
-    return m_destinationFileName;
-}
-
-inline void HttpJob::setDestinationFileName( const QString & fileName )
-{
-    m_destinationFileName = fileName;
-}
-
-inline QString HttpJob::originalDestinationFileName() const
-{
-    return m_originalDestinationFileName;
-}
-
-inline void HttpJob::setStatus( const Status status )
-{
-    m_status = status;
-}
 
 }
 

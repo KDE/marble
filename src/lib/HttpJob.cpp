@@ -15,33 +15,96 @@
 
 using namespace Marble;
 
-HttpJob::HttpJob( const QUrl & sourceUrl, const QString & destFileName, const QString &id )
-        : m_sourceUrl ( sourceUrl ),
-        m_destinationFileName ( destFileName ),
-        m_originalDestinationFileName ( destFileName ),
-        m_initiatorId ( id ),
-        m_status ( NoStatus ),
-        m_priority ( NoPriority ),
-        m_storagePolicy( 0 )
+class Marble::HttpJobPrivate
 {
+ public:
+    HttpJobPrivate();
+
+    QUrl           m_sourceUrl;
+    QString        m_destinationFileName;
+    // if there is a redirection, we have to know the original file name
+    // for proper blacklisting etc.
+    QString        m_originalDestinationFileName;
+    QString        m_initiatorId;
+    Status         m_status;
+    Priority       m_priority;
+    StoragePolicy *m_storagePolicy;
+};
+
+HttpJobPrivate::HttpJobPrivate()
+    : m_status( NoStatus ),
+    m_priority( NoPriority ),
+    m_storagePolicy( 0 )
+{
+}
+
+
+HttpJob::HttpJob( const QUrl & sourceUrl, const QString & destFileName, const QString &id )
+    : d( new HttpJobPrivate )
+{
+    d->m_sourceUrl = sourceUrl;
+    d->m_destinationFileName = destFileName;
+    d->m_originalDestinationFileName = destFileName;
+    d->m_initiatorId = id;
 }
 
 HttpJob::~HttpJob()
 {
+    delete d;
 }
 
 void HttpJob::prepareExecution()
 {
 }
 
+QUrl HttpJob::sourceUrl() const
+{
+    return d->m_sourceUrl;
+}
+
+void HttpJob::setSourceUrl( const QUrl &url )
+{
+    d->m_sourceUrl = url;
+}
+
+QString HttpJob::initiatorId() const
+{
+    return d->m_initiatorId;
+}
+
+void HttpJob::setInitiatorId( const QString &id )
+{
+    d->m_initiatorId = id;
+}
+
+QString HttpJob::destinationFileName() const
+{
+    return d->m_destinationFileName;
+}
+
+void HttpJob::setDestinationFileName( const QString &fileName )
+{
+    d->m_destinationFileName = fileName;
+}
+
+QString HttpJob::originalDestinationFileName() const
+{
+    return d->m_originalDestinationFileName;
+}
+
+void HttpJob::setStatus( const Status status )
+{
+    d->m_status = status;
+}
+
 void HttpJob::setStoragePolicy( StoragePolicy *policy )
 {
-    m_storagePolicy = policy;
+    d->m_storagePolicy = policy;
 }
 
 StoragePolicy *HttpJob::storagePolicy() const
 {
-    return m_storagePolicy;
+    return d->m_storagePolicy;
 }
 
 #include "HttpJob.moc"
