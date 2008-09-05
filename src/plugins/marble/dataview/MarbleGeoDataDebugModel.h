@@ -15,8 +15,6 @@
 
 #include <QtCore/QAbstractItemModel>
 
-#include "marble_export.h"
-
 namespace Marble
 {
 class GeoDataDocument;
@@ -25,7 +23,7 @@ class GeoDataDocument;
  * @short The representation of GeoData in a model
  * This class represents all available data given by kml-data files.
  */
-class MARBLE_EXPORT MarbleGeoDataDebugModel : public QAbstractItemModel
+class MarbleGeoDataDebugModel : public QAbstractItemModel
 {
     Q_OBJECT
 
