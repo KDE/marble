@@ -1,5 +1,5 @@
 # add_subdirectory( test )
-# add_subdirectory( geodata )
+add_subdirectory( geodata )
 # add_subdirectory( placemarks )
 add_subdirectory( compass )
 #add_subdirectory( satellites )

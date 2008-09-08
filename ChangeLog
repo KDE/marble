@@ -1,5 +1,17 @@
 2008-09-08  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/plugins/marble/CMakeLists.txt
+    * src/plugins/marble/geodata/CMakeLists.txt
+    * src/plugins/marble/geodata/Marble writing.kml
+    * src/plugins/marble/geodata/MarbleGeoDataPlugin.{h|cpp}
+    * src/plugins/marble/geodata/MarbleGeoDataView.{h|cpp}
+
+    make the GeoDataPlugin be built for everybody
+    Add the GeoDataView which is attached to the MarbleGeometryModel
+    provided by the dataFacade.
+
+2008-09-08  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/CMakeLists.txt
     * src/lib/MarbleDataFacade.{h|cpp}
     * src/lib/MarbleGeometryModel.{h|cpp}

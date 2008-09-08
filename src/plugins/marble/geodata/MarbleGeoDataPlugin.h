@@ -21,6 +21,7 @@
 
 #include "MarbleRenderPlugin.h"
 
+#include "MarbleGeoDataView.h"
 
 namespace Marble
 {
@@ -32,7 +33,8 @@ class GeoDataDocument;
 /**
  * @short The class that specifies the Marble layer interface of the plugin.
  *
- * MarbleGeoDataPlugin is the beginning of a 
+ * MarbleGeoDataPlugin is the beginning of a Render plugin for vectorized data.
+ * This includes data which is generated at runtime as well as data that
  */
 
 class MarbleGeoDataPlugin : public MarbleRenderPlugin
@@ -40,15 +42,21 @@ class MarbleGeoDataPlugin : public MarbleRenderPlugin
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
 
-    void setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
+/*    void setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
     void setPenStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
     bool renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *geometry, QString styleUrl );
     bool renderGeoDataFeature( GeoPainter *painter, GeoDataFeature *feature );
 
     QBrush m_currentBrush;
-    QPen m_currentPen;
+    QPen m_currentPen;*/
+    
+    MarbleGeoDataView* m_view;
+//    MarbleGeometryModel* m_model;
+    
     
  public:
+    ~MarbleGeoDataPlugin();
+
     QStringList backendTypes() const;
 
     QString renderPolicy() const;
@@ -69,7 +77,6 @@ class MarbleGeoDataPlugin : public MarbleRenderPlugin
     void initialize ();
 
     bool isInitialized () const;
-
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 };

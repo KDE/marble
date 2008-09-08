@@ -38,6 +38,11 @@
 namespace Marble
 {
 
+MarbleGeoDataPlugin::~MarbleGeoDataPlugin()
+{
+    delete( m_view );
+}
+
 QStringList MarbleGeoDataPlugin::backendTypes() const
 {
     return QStringList( "geodata" );
@@ -81,19 +86,26 @@ QIcon MarbleGeoDataPlugin::icon () const
 
 void MarbleGeoDataPlugin::initialize ()
 {
-    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/germany.kml" );
-    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/poland.kml" );
-    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/czech.kml" );
-    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/Rabet.kml" );
-    m_currentBrush = QColor( 0xff, 0x0, 0x0 );
-    m_currentPen = QColor( 0xff, 0x0, 0x0 );
+
+//    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/europe.kml" );
+//    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/germany.kml" );
+//    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/poland.kml" );
+//    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/czech.kml" );
+//    dataFacade()->geoDataModel()->addGeoDataFile( GEODATA_DATA_PATH "/Rabet.kml" );
+
+//    GeoDataDocument* rootDoc = dataFacade()->geoDataModel()->geoDataRoot();
+    
+    m_view = new MarbleGeoDataView();
+
+/*    m_currentBrush = QColor( 0xff, 0x0, 0x0 );
+    m_currentPen = QColor( 0xff, 0x0, 0x0 );*/
 }
 
 bool MarbleGeoDataPlugin::isInitialized () const
 {
     return true;
 }
-
+/*
 void MarbleGeoDataPlugin::setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString mapped )
 {
     if( root->style( mapped ) && root->style( mapped )->polyStyle() ) {
@@ -162,25 +174,28 @@ bool MarbleGeoDataPlugin::renderGeoDataFeature( GeoPainter *painter, GeoDataFeat
     if( !feature ) return false;
     
     if( feature->featureId() == GeoDataDocumentId || feature->featureId() == GeoDataFolderId ) {
-        Q_FOREACH( GeoDataFeature *childFeature, static_cast<GeoDataContainer*>(feature)->features() ) {
+        Q_FOREACH( GeoDataFeature *childFeature, static_cast<GeoDataContainer*>( feature )->features() ) {
             renderGeoDataFeature( painter, childFeature );
         }
     }
     if( feature->featureId() == GeoDataPlacemarkId ) {
-        renderGeoDataGeometry( painter, dynamic_cast<GeoDataPlacemark*>(feature)->geometry(), dynamic_cast<GeoDataPlacemark*>(feature)->styleUrl() );
+        renderGeoDataGeometry( painter, dynamic_cast<GeoDataPlacemark*>( feature )->geometry(), dynamic_cast<GeoDataPlacemark*>( feature )->styleUrl() );
     }
     return true;
 }
-
+*/
 bool MarbleGeoDataPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
-    GeoDataDocument* rootDoc = dataFacade()->geoDataModel()->geoDataRoot();
-    renderGeoDataFeature( painter, dynamic_cast<GeoDataFeature*>( rootDoc ) );
+//    GeoDataDocument* rootDoc = dataFacade()->geoDataModel()->geoDataRoot();
+
+//    renderGeoDataFeature( painter, dynamic_cast<GeoDataFeature*>( rootDoc ) );
+    if( !m_view->model() ) m_view->setModel( dataFacade()->renderModel() );
+    m_view->setGeoPainter( painter );
     return true;
 }
 
 }
 
-Q_EXPORT_PLUGIN2(MarbleGeoDataPlugin, Marble::MarbleGeoDataPlugin)
+Q_EXPORT_PLUGIN2( MarbleGeoDataPlugin, Marble::MarbleGeoDataPlugin )
 
 #include "MarbleGeoDataPlugin.moc"
