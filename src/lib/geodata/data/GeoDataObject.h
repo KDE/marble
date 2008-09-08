@@ -115,6 +115,6 @@ public:
 
 }
 
-Q_DECLARE_METATYPE( Marble::GeoDataObject* );
+Q_DECLARE_METATYPE( Marble::GeoDataObject* )
 
 #endif // GEODATAOBJECT_H
