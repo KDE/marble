@@ -1,5 +1,13 @@
 2008-09-08  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/parser/GeoParser.h
+
+    make parentItem.nodeAs<T>() usable to check if the parentItem
+    returns a T* pointer. this way you can both check if the parent
+    element is valid and you can access it.
+
+2008-09-08  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/handlers/kml/KmlCoordinatesTagHandler.cpp
     * src/lib/geodata/handlers/kml/KmlInnerBoundaryIsTagHandler.cpp
     * src/lib/geodata/handlers/kml/KmlMultiGeometryTagHandler.{h|cpp}
