@@ -15026,7 +15026,7 @@ Villiers-sur-Marne	Val-de-Marne	fr	N	25,8	48.84°N	2.55°E
 Villemomble	Seine-Saint-Denis	fr	N	25,8	48.89°N	2.50°E
 Charenton-le-Pont	Val-de-Marne	fr	N	25,8	48.82°N	2.41°E
 Český Těšín	Moravskoslezský	cz	N	25,8	49.75°N	18.62°E
-Dubnica	Trenčianský	sk	N	25,8	48.97°N	18.18°E
+Dubnica nad Váhom	Trenčianský	sk	N	25,8	48.97°N	18.18°E
 Vallentuna	Stockholm	se	N	25,8	59.54°N	18.08°E
 Jarocin	Wielkopolskie	pl	N	25,8	51.98°N	17.50°E
 Minori	Ibaraki	jp	N	25,8	36.24°N	140.34°E
