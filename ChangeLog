@@ -1,4 +1,13 @@
-2008-09-05 Pino Toscano    <pino@kde.org>
+2008-09-08  Patrick Spendrin    <ps_ml@gmx.de>
+
+    * src/lib/geodata/data/GeoDataGeometry.h
+    * src/lib/geodata/data/GeoDataMultiGeometry.{h|cpp}
+    * src/lib/geodata/data/GeoDataMultiObject.h
+
+    add a new Type for GeoDataObject*
+    forbid copying of GeoDataMultiGeometry
+
+2008-09-05  Pino Toscano    <pino@kde.org>
 
     * src/lib/HttpJob.{cpp,h}:
 

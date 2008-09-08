@@ -24,12 +24,6 @@ GeoDataMultiGeometry::GeoDataMultiGeometry( GeoDataObject *parent )
 {
 }
 
-GeoDataMultiGeometry::GeoDataMultiGeometry( const GeoDataMultiGeometry& other )
-        : QVector<GeoDataGeometry*>( other ),
-          GeoDataGeometry( other )
-{
-}
-
 GeoDataMultiGeometry::~GeoDataMultiGeometry()
 {
     qDeleteAll( *this );

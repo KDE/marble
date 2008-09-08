@@ -18,6 +18,8 @@
 #include "GeoDocument.h" 
 #include "Serializable.h"
 
+#include <QtCore/QMetaType>
+
 namespace Marble
 {
 
@@ -112,5 +114,7 @@ public:
 };
 
 }
+
+Q_DECLARE_METATYPE( Marble::GeoDataObject* );
 
 #endif // GEODATAOBJECT_H

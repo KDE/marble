@@ -52,8 +52,6 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     void setAltitudeMode( const AltitudeMode altitudeMode );
 
     explicit GeoDataGeometry( GeoDataObject *parent = 0 );
-    GeoDataGeometry( const GeoDataGeometry & other );
-    GeoDataGeometry& operator=( const GeoDataGeometry& other );
     
     virtual ~GeoDataGeometry();
 
@@ -63,6 +61,8 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     virtual void unpack( QDataStream& stream );
 
  protected:
+    GeoDataGeometry( const GeoDataGeometry & other );
+    GeoDataGeometry& operator=( const GeoDataGeometry& other );
     GeoDataGeometryPrivate* const d;
 };
 

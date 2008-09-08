@@ -33,7 +33,6 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public QVector<GeoDataGeometry*>,
                                             public GeoDataGeometry {
  public:
     explicit GeoDataMultiGeometry( GeoDataObject *parent = 0 );
-    GeoDataMultiGeometry( const GeoDataMultiGeometry& );
 
     virtual ~GeoDataMultiGeometry();
 
@@ -43,6 +42,12 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public QVector<GeoDataGeometry*>,
     virtual void unpack( QDataStream& stream );
 
     virtual EnumGeometryId geometryId() const { return GeoDataMultiGeometryId; };
+ private:
+    /**
+    * Q_FOREACH containers are bad because they require a copy of the QVector
+    * Use iterators instead!!!
+    */
+    Q_DISABLE_COPY( GeoDataMultiGeometry )
 };
 
 }
