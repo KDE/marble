@@ -144,6 +144,8 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
         return qVariantFromValue( d->m_placeMarkContainer.at( index.row() )->coordinate() );
     } else if ( role == StyleRole ) {
         return qVariantFromValue( d->m_placeMarkContainer.at( index.row() )->style() );
+    } else if ( role == ObjectPointerRole ) {
+        return qVariantFromValue( dynamic_cast<GeoDataObject*>( d->m_placeMarkContainer.at( index.row() ) ) );
     } else
         return QVariant();
 }

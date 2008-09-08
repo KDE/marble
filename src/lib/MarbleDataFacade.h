@@ -31,6 +31,8 @@
 
 #include "global.h"
 
+class QAbstractItemModel;
+
 namespace Marble
 {
 
@@ -64,6 +66,8 @@ class MARBLE_EXPORT MarbleDataFacade
     QDateTime dateTime() const;
 
     MarbleGeoDataModel* geoDataModel();
+    
+    QAbstractItemModel* renderModel();
  private:
     MarbleDataFacadePrivate  * const d;
 };

@@ -21,6 +21,7 @@ namespace Marble
 class GeoDataDocument;
 class PlaceMarkContainer;
 class MarblePlacemarkModel;
+class MarbleGeometryModel;
 
 /**
  * This class is responsible for loading the
@@ -55,6 +56,20 @@ class PlaceMarkManager : public QObject
      * Note: The manager has not the ownership of the model.
      */
     MarblePlacemarkModel *model() const;
+
+    /**
+     * Returns the GeometryModel which represents the GeoData tree of the
+     * place mark manager. The above MarblePlacemarkModel only represents
+     * a part of the data (namely Placemarks)
+     *
+     * Note: The manager has not the ownership of the model.
+     */
+    MarbleGeometryModel *geomodel() const;
+    
+    /**
+     * Sets the GeometryModel to which the graphical views can be attached.
+     */
+    void setGeoModel( MarbleGeometryModel * model );
 
     /**
      * This methods loads the standard place mark files.
@@ -95,6 +110,7 @@ class PlaceMarkManager : public QObject
 
     Q_DISABLE_COPY( PlaceMarkManager )
     MarblePlacemarkModel* m_model;
+    MarbleGeometryModel* m_geomodel;
 
 #ifdef KML_GSOC
     void updateCacheIndex();

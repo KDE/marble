@@ -17,6 +17,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
+#include <QtCore/QAbstractItemModel>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QSortFilterProxyModel>
 
@@ -45,6 +46,7 @@
 #include "MarbleDataFacade.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
+#include "MarbleGeometryModel.h"
 #include "PlaceMarkManager.h"
 #include "PlaceMarkLayout.h"
 #include "PlaceMarkPainter.h"
@@ -97,6 +99,7 @@ class MarbleModelPrivate
     PlaceMarkManager      *m_placemarkmanager;
     MarblePlacemarkModel  *m_placemarkmodel;
     PlaceMarkLayout       *m_placeMarkLayout;
+    MarbleGeometryModel   *m_geometrymodel;
 
     // Misc stuff.
     ExtDateTime           *m_dateTime;
@@ -153,6 +156,8 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_placemarkmodel = new MarblePlacemarkModel( d->m_placemarkmanager, this );
     d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_placemarkmodel );
+    d->m_geometrymodel = new MarbleGeometryModel();
+    d->m_placemarkmanager->setGeoModel( d->m_geometrymodel );
 
     d->m_placeMarkLayout = new PlaceMarkLayout( this );
     connect( d->m_placemarkselectionmodel, SIGNAL( selectionChanged( QItemSelection,
@@ -204,6 +209,7 @@ MarbleModel::~MarbleModel()
     delete d->m_veccomposer;
     delete d->m_texcolorizer; 
     delete d->m_gridmap;
+    delete d->m_geometrymodel;
     delete d->m_placemarkmodel;
     delete d->m_placemarkmanager;
     delete d->m_gpsLayer;
@@ -643,6 +649,11 @@ QItemSelectionModel *MarbleModel::placeMarkSelectionModel() const
     return d->m_placemarkselectionmodel;
 }
 
+QAbstractItemModel *MarbleModel::geometryModel() const
+{
+    return d->m_geometrymodel;
+}
+
 VectorComposer    *MarbleModel::vectorComposer()   const
 {
     return d->m_veccomposer;
@@ -680,14 +691,14 @@ FileViewModel *MarbleModel::fileViewModel() const
 
 void MarbleModel::addPlaceMarkFile( const QString& filename )
 {
-    d->m_placemarkmanager->loadKml( filename, true );
+    d->m_placemarkmanager->loadKml( filename, false );
 
     d->notifyModelChanged();
 }
 
 void MarbleModel::addPlaceMarkData( const QString& data )
 {
-    d->m_placemarkmanager->loadKmlFromData( data, true );
+    d->m_placemarkmanager->loadKmlFromData( data, false );
 
     d->notifyModelChanged();
 }

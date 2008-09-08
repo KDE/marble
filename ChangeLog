@@ -1,5 +1,16 @@
 2008-09-08  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/CMakeLists.txt
+    * src/lib/MarbleDataFacade.{h|cpp}
+    * src/lib/MarbleGeometryModel.{h|cpp}
+    * src/lib/MarbleModel.{h|cpp}
+    * src/lib/PlaceMarkManager.{h|cpp}
+
+    add the MarbleGeometryModel which provides a model interface for
+    the geodata in the MarblePlacemarkModel.
+
+2008-09-08  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/parser/GeoParser.h
 
     make parentItem.nodeAs<T>() usable to check if the parentItem

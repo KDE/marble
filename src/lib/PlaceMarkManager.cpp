@@ -23,6 +23,7 @@
 
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
+#include "MarbleGeometryModel.h"
 #include "PlaceMarkContainer.h"
 
 #include "GeoDataDocument.h"
@@ -33,7 +34,8 @@ using namespace Marble;
 
 PlaceMarkManager::PlaceMarkManager( QObject *parent )
     : QObject( parent ),
-      m_model( 0 )
+      m_model( 0 ),
+      m_geomodel( new MarbleGeometryModel() )
 {
 }
 
@@ -46,12 +48,25 @@ PlaceMarkManager::~PlaceMarkManager()
     }
 #else
     delete m_model;
+    /* do not delete the m_geomodel here
+     * it is not this models property
+     */
 #endif
 }
 
 MarblePlacemarkModel* PlaceMarkManager::model() const
 {
     return m_model;
+}
+
+MarbleGeometryModel* PlaceMarkManager::geomodel() const
+{
+    return m_geomodel;
+}
+
+void PlaceMarkManager::setGeoModel( MarbleGeometryModel * model )
+{
+    m_geomodel = model;
 }
 
 void PlaceMarkManager::setPlaceMarkModel( MarblePlacemarkModel *model )
@@ -233,6 +248,9 @@ void PlaceMarkManager::importKml( const QString& filename,
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
     *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(), 
                                               QFileInfo( filename ).baseName() );
+
+    // This sets and initializes the geomodel
+    m_geomodel->setGeoDataRoot( dataDocument );
 }
 
 void PlaceMarkManager::importKmlFromData( const QString& data,
@@ -255,6 +273,8 @@ void PlaceMarkManager::importKmlFromData( const QString& data,
     // we might have to suppress caching for this part
     *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(),
                                               QString("DataImport") );
+    // This sets and initializes the geomodel
+    m_geomodel->setGeoDataRoot( dataDocument );
 }
 
 static const quint32 MarbleMagicNumber = 0x31415926;

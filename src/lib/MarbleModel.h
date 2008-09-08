@@ -38,6 +38,7 @@
 #include "ExtDateTime.h"
 
 class QItemSelectionModel;
+class QAbstractItemModel;
 
 namespace Marble
 {
@@ -134,6 +135,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     QAbstractItemModel*  placeMarkModel() const;
     QItemSelectionModel* placeMarkSelectionModel() const;
+    QAbstractItemModel*  geometryModel() const;
 
     /**
      * @brief Return the name of the current map theme.

@@ -62,6 +62,7 @@ set(marblewidget_SRCS
     MarbleWidgetPopupMenu.cpp
     MarblePlacemarkModel.cpp
     MarbleGeoDataModel.cpp
+    MarbleGeometryModel.cpp
     MarbleDataFacade.cpp
 
     ClipPainter.cpp

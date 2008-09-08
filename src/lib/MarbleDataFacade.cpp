@@ -16,6 +16,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QString>
 #include <QtCore/QDebug>
+#include <QtCore/QAbstractItemModel>
 
 #include "global.h"
 #include "MarbleModel.h"
@@ -62,6 +63,11 @@ QDateTime MarbleDataFacade::dateTime() const
 MarbleGeoDataModel* MarbleDataFacade::geoDataModel()
 {
     return d->m_geodatamodel;
+}
+
+QAbstractItemModel* MarbleDataFacade::renderModel()
+{
+    return d->m_model->geometryModel();
 }
 
 }
