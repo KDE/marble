@@ -1,5 +1,16 @@
 2008-09-08  Patrick Spendrin    <ps_ml@gmx.de>
 
+    * src/lib/geodata/handlers/kml/KmlCoordinatesTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlInnerBoundaryIsTagHandler.cpp
+    * src/lib/geodata/handlers/kml/KmlMultiGeometryTagHandler.{h|cpp}
+    * src/lib/geodata/handlers/kml/KmlOuterBoundaryIsTagHandler.cpp
+
+    fix some minor issues depending on the static_cast->dynamic_cast change
+    in the parser(see next commit)
+    Add MultiGeometry Tag (which was rotting here already)
+
+2008-09-08  Patrick Spendrin    <ps_ml@gmx.de>
+
     * src/lib/geodata/data/GeoDataGeometry.h
     * src/lib/geodata/data/GeoDataMultiGeometry.{h|cpp}
     * src/lib/geodata/data/GeoDataMultiObject.h

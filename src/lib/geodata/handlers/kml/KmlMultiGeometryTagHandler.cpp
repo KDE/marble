@@ -19,13 +19,14 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "KmlOuterBoundaryIsTagHandler.h"
+#include "KmlMultiGeometryTagHandler.h"
 
 #include <QtCore/QDebug>
 
 #include "KmlElementDictionary.h"
 
-#include "GeoDataPolygon.h"
+#include "GeoDataPlacemark.h"
+#include "GeoDataMultiGeometry.h"
 
 #include "GeoDataParser.h"
 
@@ -34,20 +35,31 @@ namespace Marble
 
 using namespace GeoDataElementDictionary;
 
-KML_DEFINE_TAG_HANDLER( outerBoundaryIs )
+KML_DEFINE_TAG_HANDLER( MultiGeometry )
 
-GeoNode* KmlouterBoundaryIsTagHandler::parse( GeoParser& parser ) const
+GeoNode* KmlMultiGeometryTagHandler::parse( GeoParser& parser ) const
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_outerBoundaryIs ) );
+    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_MultiGeometry ) );
 
     GeoStackItem parentItem = parser.parentElement();
 
+    GeoDataMultiGeometry* geom = 0;
+    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
+        geom = new GeoDataMultiGeometry();
+        parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( geom );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_outerBoundaryIs << ">"
+        qDebug() << "Parsed <" << kmlTag_MultiGeometry << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
-
-    return parentItem.nodeAs<GeoDataPolygon>();
+    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
+        geom = new GeoDataMultiGeometry();
+        parentItem.nodeAs<GeoDataMultiGeometry>()->append( geom );
+#ifdef DEBUG_TAGS
+        qDebug() << "Parsed <" << kmlTag_MultiGeometry << ">"
+                 << " parent item name: " << parentItem.qualifiedName().first;
+#endif
+    }
+    return geom;
 }
 
 }

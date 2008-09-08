@@ -19,35 +19,20 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "KmlOuterBoundaryIsTagHandler.h"
+#ifndef KmlMultiGeometryTagHandler_h
+#define KmlMultiGeometryTagHandler_h
 
-#include <QtCore/QDebug>
+#include "GeoTagHandler.h"
 
-#include "KmlElementDictionary.h"
-
-#include "GeoDataPolygon.h"
-
-#include "GeoDataParser.h"
-
-namespace Marble
+namespace Marble 
 {
 
-using namespace GeoDataElementDictionary;
-
-KML_DEFINE_TAG_HANDLER( outerBoundaryIs )
-
-GeoNode* KmlouterBoundaryIsTagHandler::parse( GeoParser& parser ) const
+class KmlMultiGeometryTagHandler : public GeoTagHandler 
 {
-    Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_outerBoundaryIs ) );
-
-    GeoStackItem parentItem = parser.parentElement();
-
-#ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_outerBoundaryIs << ">"
-                 << " parent item name: " << parentItem.qualifiedName().first;
-#endif
-
-    return parentItem.nodeAs<GeoDataPolygon>();
-}
+public:
+    virtual GeoNode* parse(GeoParser&) const;
+};
 
 }
+
+#endif // KmlMultiGeometryTagHandler_h

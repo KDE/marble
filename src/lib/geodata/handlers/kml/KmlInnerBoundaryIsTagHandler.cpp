@@ -47,7 +47,7 @@ GeoNode* KmlinnerBoundaryIsTagHandler::parse( GeoParser& parser ) const
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
 
-    return parentItem.nodeAs<GeoDataInnerBoundary>();
+    return parentItem.nodeAs<GeoDataPolygon>();
 }
 
 }

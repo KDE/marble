@@ -73,9 +73,9 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
 				coordinates.at( 2 ).toDouble() );
                 }
 
-                if ( parentItem.represents( kmlTag_LineString ) ) {
+                if ( parentItem.nodeAs<GeoDataLineString>() ) {
                     parentItem.nodeAs<GeoDataLineString>()->append( coord );
-                } else if ( parentItem.represents( kmlTag_LinearRing ) ) {
+                } else if ( parentItem.nodeAs<GeoDataLinearRing>() ) {
                     parentItem.nodeAs<GeoDataLinearRing>()->append( coord );
                 } else if ( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
                     GeoDataPoint* point = new GeoDataPoint();
