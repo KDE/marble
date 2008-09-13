@@ -26,8 +26,6 @@
 #ifdef Q_CC_MSVC
 #include <float.h>
 
-using namespace Marble;
-
 qreal msvc_asinh(qreal x)
 {
   if ( _isnan ( x ) ) {
