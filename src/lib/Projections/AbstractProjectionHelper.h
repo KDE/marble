@@ -48,10 +48,10 @@ class AbstractProjectionHelper
     virtual ~AbstractProjectionHelper();
 
     virtual void paintBase( GeoPainter     *painter, 
-			    ViewportParams *viewport, 
-			    QPen           &pen,
-			    QBrush         &brush,
-			    bool            antialiasing ) = 0;
+                            ViewportParams *viewport, 
+                            QPen           &pen,
+                            QBrush         &brush,
+                            bool            antialiasing ) = 0;
 
     virtual void createActiveRegion( ViewportParams *viewport ) = 0;
     void setActiveRegion( const QRegion& );

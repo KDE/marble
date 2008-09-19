@@ -33,10 +33,10 @@ EquirectProjectionHelper::~EquirectProjectionHelper()
 
 
 void EquirectProjectionHelper::paintBase( GeoPainter     *painter, 
-					  ViewportParams *viewport,
-					  QPen           &pen,
-					  QBrush         &brush,
-					  bool            antialiasing )
+                                          ViewportParams *viewport,
+                                          QPen           &pen,
+                                          QBrush         &brush,
+                                          bool            antialiasing )
 {
     // Convenience variables
     int  radius = viewport->radius();
@@ -59,9 +59,9 @@ void EquirectProjectionHelper::paintBase( GeoPainter     *painter,
 
     // Bound the values to the viewport.
     if ( yTop < 0 )
-	yTop = 0;
+        yTop = 0;
     if ( yBottom > height )
-	yBottom =  height;
+        yBottom =  height;
 
     painter->drawRect( 0, yTop, width - 1, yBottom - yTop );
 }
@@ -94,7 +94,7 @@ void EquirectProjectionHelper::createActiveRegion( ViewportParams *viewport )
                     navigationStripe() + yTop, 
                     width - 2 * navigationStripe(), 
                     yBottom - yTop - 2 * navigationStripe(),
-			        QRegion::Rectangle ) );
+                                QRegion::Rectangle ) );
 }
 
 void EquirectProjectionHelper::createProjectedRegion( ViewportParams *viewport )

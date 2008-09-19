@@ -44,11 +44,11 @@ AbstractProjectionHelper *SphericalProjection::helper()
 bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
                                              const ViewportParams *viewport,
                                              int& x, int& y,
-					     CoordinateType coordType )
+                                             CoordinateType coordType )
 {
     Quaternion  p( lon, lat );
     if ( coordType == originalCoordinates )
-	p.rotateAroundAxis( viewport->planetAxis().inverse() );
+        p.rotateAroundAxis( viewport->planetAxis().inverse() );
  
     x = (int)( viewport->width()  / 2 + (qreal)( viewport->radius() ) * p.v[Q_X] );
     y = (int)( viewport->height() / 2 - (qreal)( viewport->radius() ) * p.v[Q_Y] );
@@ -104,10 +104,10 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 }
 
 bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
-					     const ViewportParams *viewport,
-					     int *x, int &y,
-					     int &pointRepeatNum,
-					     bool &globeHidesPoint )
+                                             const ViewportParams *viewport,
+                                             int *x, int &y,
+                                             int &pointRepeatNum,
+                                             bool &globeHidesPoint )
 {
     qreal      absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = geopoint.quaternion();
@@ -144,7 +144,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
     // Skip placemarks that are outside the screen area
     if ( *x < 0 || *x >= viewport->width() 
-	 || y < 0 || y >= viewport->height() )
+         || y < 0 || y >= viewport->height() )
     {
         globeHidesPoint = false;
         return false;
@@ -201,7 +201,7 @@ bool SphericalProjection::geoCoordinates( int x, int y,
 }
 
 GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
-						       const ViewportParams *viewport )
+                                                       const ViewportParams *viewport )
 {
     // For the case where the whole viewport gets covered there is a 
     // pretty dirty and generic detection algorithm:
@@ -212,7 +212,7 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
     qreal pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
 
     if ( 2 * viewport->radius() + 1 <= viewport->height()
-	 &&  2 * viewport->radius() + 1 <= viewport->width() )
+         &&  2 * viewport->radius() + 1 <= viewport->width() )
     { 
         // Unless the planetaxis is in the screen plane the allowed longitude range
         // covers full -180 deg to +180 deg:

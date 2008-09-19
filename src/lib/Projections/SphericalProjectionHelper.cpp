@@ -30,16 +30,16 @@ SphericalProjectionHelper::~SphericalProjectionHelper()
 
 
 void SphericalProjectionHelper::paintBase( GeoPainter     *painter, 
-					   ViewportParams *viewport,
-					   QPen           &pen,
-					   QBrush         &brush,
-					   bool            antialiasing )
+                                           ViewportParams *viewport,
+                                           QPen           &pen,
+                                           QBrush         &brush,
+                                           bool            antialiasing )
 {
     int      imgrx      = viewport->width() / 2;
     int      imgry      = viewport->height() / 2;
     int      radius     = viewport->radius();
     quint64  imgradius2 = ( (quint64)imgrx * (quint64)imgrx
-			    + (quint64)imgry * (quint64)imgry );
+                            + (quint64)imgry * (quint64)imgry );
 
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
 
@@ -48,7 +48,7 @@ void SphericalProjectionHelper::paintBase( GeoPainter     *painter,
 
     if ( imgradius2 < (quint64)radius * (quint64)radius ) {
         painter->drawRect( 0, 0, 
-			   viewport->width(), viewport->height() );
+                           viewport->width(), viewport->height() );
     }
     else {
         painter->drawEllipse( imgrx - radius, imgry - radius, 

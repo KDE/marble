@@ -43,7 +43,7 @@ AbstractProjectionHelper *EquirectProjection::helper()
 bool EquirectProjection::screenCoordinates( const qreal lon, const qreal lat,
                                             const ViewportParams *viewport,
                                             int& x, int& y,
-					    CoordinateType coordType )
+                                            CoordinateType coordType )
 {
     Q_UNUSED( coordType );
 
@@ -66,9 +66,9 @@ bool EquirectProjection::screenCoordinates( const qreal lon, const qreal lat,
     // Return true if the calculated point is inside the screen area,
     // otherwise return false.
     return ( ( 0 <= y && y < height )
-	     && ( ( 0 <= x && x < width )
-		  || ( 0 <= x - 4 * radius && x - 4 * radius < width )
-		  || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
+             && ( ( 0 <= x && x < width )
+                  || ( 0 <= x - 4 * radius && x - 4 * radius < width )
+                  || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
 }
 
 bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
@@ -99,16 +99,16 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     // Return true if the calculated point is inside the screen area,
     // otherwise return false.
     return ( ( 0 <= y && y < height )
-	     && ( ( 0 <= x && x < width )
-		  || ( 0 <= x - 4 * radius && x - 4 * radius < width )
-		  || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
+             && ( ( 0 <= x && x < width )
+                  || ( 0 <= x - 4 * radius && x - 4 * radius < width )
+                  || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
 }
 
 bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
-					    const ViewportParams *viewport,
-					    int *x, int &y,
-					    int &pointRepeatNum,
-					    bool &globeHidesPoint )
+                                            const ViewportParams *viewport,
+                                            int *x, int &y,
+                                            int &pointRepeatNum,
+                                            bool &globeHidesPoint )
 {
     // On flat projections the observer's view onto the point won't be 
     // obscured by the target planet itself.
@@ -235,7 +235,7 @@ bool EquirectProjection::geoCoordinates( int x, int y,
 
 
 GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
-						      const ViewportParams *viewport )
+                                                      const ViewportParams *viewport )
 {
     // Convenience variables
     int  radius = viewport->radius();

@@ -42,10 +42,10 @@ class EquirectProjectionHelper : public AbstractProjectionHelper
     virtual ~EquirectProjectionHelper();
 
     void paintBase( GeoPainter     *painter, 
-		    ViewportParams *viewport,
-		    QPen           &pen,
-		    QBrush         &brush,
-		    bool            antialiasing );
+                    ViewportParams *viewport,
+                    QPen           &pen,
+                    QBrush         &brush,
+                    bool            antialiasing );
 
     void createActiveRegion( ViewportParams *viewport );
     void createProjectedRegion( ViewportParams *viewport );

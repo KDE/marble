@@ -45,10 +45,10 @@ AbstractProjectionHelper::~AbstractProjectionHelper()
 
 #if 0 // Made pure virtual (= 0)
 void AbstractProjectionHelper::paintBase( GeoPainter     *painter, 
-					  ViewportParams *viewport,
-					  QPen            &pen,
-					  QBrush          &brush,
-					  bool            antialiasing)
+                                          ViewportParams *viewport,
+                                          QPen            &pen,
+                                          QBrush          &brush,
+                                          bool            antialiasing)
 {
 }
 #endif

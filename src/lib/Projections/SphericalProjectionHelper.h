@@ -42,10 +42,10 @@ class SphericalProjectionHelper : public AbstractProjectionHelper
     virtual ~SphericalProjectionHelper();
 
     void paintBase( GeoPainter     *painter, 
-		    ViewportParams *viewport,
-		    QPen           &pen,
-		    QBrush         &brush,
-		    bool            antialiasing );
+                    ViewportParams *viewport,
+                    QPen           &pen,
+                    QBrush         &brush,
+                    bool            antialiasing );
 
     void createActiveRegion( ViewportParams *viewport );
     void createProjectedRegion( ViewportParams *viewport );

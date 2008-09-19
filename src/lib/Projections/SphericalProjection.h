@@ -55,16 +55,16 @@ class SphericalProjection : public AbstractProjection
     inline bool screenCoordinates( const qreal lon, const qreal lat,
                             const ViewportParams *params,
                             int& x, int& y,
-			    CoordinateType coordType = originalCoordinates );
+                            CoordinateType coordType = originalCoordinates );
 
     inline bool screenCoordinates( const GeoDataCoordinates &geopoint, 
-				   const ViewportParams *params,
-				   int &x, int &y, bool &globeHidesPoint );
+                                   const ViewportParams *params,
+                                   int &x, int &y, bool &globeHidesPoint );
 
     bool screenCoordinates( const GeoDataCoordinates &geopoint,
-			    const ViewportParams * viewport,
-			    int *x, int &y, int &pointRepeatNum,
-			    bool &globeHidesPoint );
+                            const ViewportParams * viewport,
+                            int *x, int &y, int &pointRepeatNum,
+                            bool &globeHidesPoint );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -76,9 +76,9 @@ class SphericalProjection : public AbstractProjection
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
     inline bool geoCoordinates( const int x, const int y,
-				const ViewportParams *params,
-				qreal& lon, qreal& lat,
-				GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree );
+                                const ViewportParams *params,
+                                qreal& lon, qreal& lat,
+                                GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree );
 
     /**
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.
@@ -89,11 +89,11 @@ class SphericalProjection : public AbstractProjection
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space
      */
     inline bool geoCoordinates( int x, int y, 
-				const ViewportParams *params,
-				Quaternion &q );
+                                const ViewportParams *params,
+                                Quaternion &q );
 
     GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
-				      const ViewportParams *viewport );
+                                      const ViewportParams *viewport );
 
     bool  mapCoversViewport( const ViewportParams *viewport ) const;
 

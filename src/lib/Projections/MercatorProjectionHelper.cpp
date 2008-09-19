@@ -31,10 +31,10 @@ MercatorProjectionHelper::~MercatorProjectionHelper()
 
 
 void MercatorProjectionHelper::paintBase( GeoPainter     *painter, 
-					   ViewportParams *viewport,
-					   QPen           &pen,
-					   QBrush         &brush,
-					   bool            antialiasing )
+                                           ViewportParams *viewport,
+                                           QPen           &pen,
+                                           QBrush         &brush,
+                                           bool            antialiasing )
 {
     // Convenience variables
     //int  radius = viewport->radius();
@@ -53,13 +53,13 @@ void MercatorProjectionHelper::paintBase( GeoPainter     *painter,
 
     // Get the top and bottom y coordinates of the projected map.
     proj->screenCoordinates( 0.0, +proj->maxLat(), viewport, 
-			     xDummy, yTop );
+                             xDummy, yTop );
     proj->screenCoordinates( 0.0, -proj->maxLat(), viewport, 
-			     xDummy, yBottom );
+                             xDummy, yBottom );
     if ( yTop < 0 )
-	yTop = 0;
+        yTop = 0;
     if ( yBottom > height )
-	yBottom = height;
+        yBottom = height;
 
     painter->drawRect( 0, yTop, width, yBottom - yTop );
 }
@@ -84,9 +84,9 @@ void MercatorProjectionHelper::createActiveRegion( ViewportParams *viewport )
 
     // Get the top and bottom y coordinates of the projected map.
     proj->screenCoordinates( 0.0, +proj->maxLat(), viewport, 
-			     xDummy, yTop );
+                             xDummy, yTop );
     proj->screenCoordinates( 0.0, -proj->maxLat(), viewport, 
-			     xDummy, yBottom );
+                             xDummy, yBottom );
 
     // Don't let the active area be outside the image, and also let a
     // thin strip navigationStripe be outside it.

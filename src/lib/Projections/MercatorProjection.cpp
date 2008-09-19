@@ -46,7 +46,7 @@ AbstractProjectionHelper *MercatorProjection::helper()
 bool MercatorProjection::screenCoordinates( const qreal lon, const qreal lat,
                                             const ViewportParams *viewport,
                                             int& x, int& y,
-					    CoordinateType coordType )
+                                            CoordinateType coordType )
 {
     Q_UNUSED( coordType );
 
@@ -103,15 +103,15 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     // Return true if the calculated point is inside the screen area,
     // otherwise return false.
     return ( ( 0 <= y && y < height )
-	     && ( ( 0 <= x && x < width )
-		  || ( 0 <= x - 4 * radius && x - 4 * radius < width )
-		  || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
+             && ( ( 0 <= x && x < width )
+                  || ( 0 <= x - 4 * radius && x - 4 * radius < width )
+                  || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
 }
 
 bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
-					    const ViewportParams *viewport,
-					    int *x, int &y, int &pointRepeatNum,
-					    bool &globeHidesPoint )
+                                            const ViewportParams *viewport,
+                                            int *x, int &y, int &pointRepeatNum,
+                                            bool &globeHidesPoint )
 {
     // On flat projections the observer's view onto the point won't be 
     // obscured by the target planet itself.
@@ -244,7 +244,7 @@ bool MercatorProjection::geoCoordinates( int x, int y,
 
 
 GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
-						      const ViewportParams *viewport )
+                                                      const ViewportParams *viewport )
 {
     // For the case where the whole viewport gets covered there is a 
     // pretty dirty and generic detection algorithm:

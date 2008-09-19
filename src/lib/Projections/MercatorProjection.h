@@ -55,16 +55,16 @@ class MercatorProjection : public AbstractProjection
     bool screenCoordinates( const qreal lon, const qreal lat,
                             const ViewportParams *params,
                             int& x, int& y,
-			    CoordinateType coordType = originalCoordinates );
+                            CoordinateType coordType = originalCoordinates );
 
     bool screenCoordinates( const GeoDataCoordinates &geopoint, 
                             const ViewportParams *params,
                             int &x, int &y, bool &globeHidesPoint );
 
     bool screenCoordinates( const GeoDataCoordinates &geopoint,
-			    const ViewportParams * viewport,
-			    int *x, int &y, int &pointRepeatNum,
-			    bool &globeHidesPoint );
+                            const ViewportParams * viewport,
+                            int *x, int &y, int &pointRepeatNum,
+                            bool &globeHidesPoint );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -93,7 +93,7 @@ class MercatorProjection : public AbstractProjection
                             Quaternion &q );
 
     GeoDataLatLonAltBox latLonAltBox( const QRect &screenRect,
-				      const ViewportParams *viewport );
+                                      const ViewportParams *viewport );
 
     bool  mapCoversViewport( const ViewportParams *viewport ) const;
 
