@@ -26,7 +26,7 @@ namespace Marble
 {
 
 /**
- * @short A base class for all projections in Marble.
+ * @short The projection helper for the Equirectangular projection
  */
 
 class EquirectProjectionHelper : public AbstractProjectionHelper

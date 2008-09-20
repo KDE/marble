@@ -27,7 +27,7 @@ namespace Marble
 {
 
 /**
- * @short A base class for all projections in Marble.
+ * @short A class to implement the Equirectangular projection used by the "Flat Map" view.
  */
 
 class EquirectProjection : public AbstractProjection

@@ -23,7 +23,7 @@
 #include "AbstractProjectionHelper.h"
 
 /**
- * @short A base class for all projections in Marble.
+ * @short The projection helper for the Mercator projection
  */
 
 namespace Marble

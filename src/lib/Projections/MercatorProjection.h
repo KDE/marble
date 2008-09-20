@@ -26,7 +26,7 @@ namespace Marble
 {
 
 /**
- * @short A base class for all projections in Marble.
+ * @short A class to implement the Mercator projection.
  */
 
 class MercatorProjection : public AbstractProjection
