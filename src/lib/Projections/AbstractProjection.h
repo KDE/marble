@@ -55,6 +55,7 @@ class AbstractProjection
     virtual ~AbstractProjection();
 
     virtual qreal  maxLat()  const        { return m_maxLat; }
+    virtual qreal  minLat()  const        { return m_minLat; }
     virtual bool    traversableMaxLat()  const        { return m_traversableMaxLat; }
 
     virtual bool    repeatX() const        { return m_repeatX; }
@@ -177,8 +178,9 @@ class AbstractProjection
     //AbstractProjectionPrivate  * const d;  Not exported so no need.
 
     qreal  m_maxLat;               // The max latitude.  Not always 90 degrees.
+    qreal  m_minLat;               // The min latitude. Not always the same as maxLat.
     qreal  m_traversableMaxLat;    // Whether it's possible to center beyond maxLat.
-    bool    m_repeatX;              // Map repeated in X direction.
+    bool   m_repeatX;              // Map repeated in X direction.
 
     void coordinateExtremes( qreal lon, qreal lat, 
                              qreal &westLon, qreal &eastLon,

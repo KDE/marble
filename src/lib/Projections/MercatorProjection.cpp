@@ -28,6 +28,7 @@ MercatorProjection::MercatorProjection()
 {
     // This is the max value where atanh( sin( lat ) ) is defined.
     m_maxLat  = 85.05113 * DEG2RAD;
+    m_minLat  = -85.05113 * DEG2RAD;
     m_traversableMaxLat = false;
     m_repeatX = true;
 }

@@ -27,6 +27,7 @@ EquirectProjection::EquirectProjection()
     : AbstractProjection()
 {
     m_maxLat  = 90.0 * DEG2RAD;
+    m_minLat  = -90.0 * DEG2RAD;
     m_traversableMaxLat = false;
     m_repeatX = true;
 }
@@ -285,8 +286,8 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
     // We need a point on the screen at maxLat that definetely gets displayed:
     qreal averageLongitude = latLonAltBox.east();
 
-    GeoDataCoordinates maxLatPoint( averageLongitude, +m_maxLat, 0.0, GeoDataCoordinates::Radian );
-    GeoDataCoordinates minLatPoint( averageLongitude, -m_maxLat, 0.0, GeoDataCoordinates::Radian );
+    GeoDataCoordinates maxLatPoint( averageLongitude, m_maxLat, 0.0, GeoDataCoordinates::Radian );
+    GeoDataCoordinates minLatPoint( averageLongitude, m_minLat, 0.0, GeoDataCoordinates::Radian );
 
     int dummyX, dummyY; // not needed
     bool dummyVal;

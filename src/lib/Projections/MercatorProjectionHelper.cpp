@@ -52,9 +52,9 @@ void MercatorProjectionHelper::paintBase( GeoPainter     *painter,
     AbstractProjection *proj = viewport->currentProjection();
 
     // Get the top and bottom y coordinates of the projected map.
-    proj->screenCoordinates( 0.0, +proj->maxLat(), viewport, 
+    proj->screenCoordinates( 0.0, proj->maxLat(), viewport,
                              xDummy, yTop );
-    proj->screenCoordinates( 0.0, -proj->maxLat(), viewport, 
+    proj->screenCoordinates( 0.0, proj->minLat(), viewport,
                              xDummy, yBottom );
     if ( yTop < 0 )
         yTop = 0;
@@ -83,9 +83,9 @@ void MercatorProjectionHelper::createActiveRegion( ViewportParams *viewport )
     AbstractProjection *proj = viewport->currentProjection();
 
     // Get the top and bottom y coordinates of the projected map.
-    proj->screenCoordinates( 0.0, +proj->maxLat(), viewport, 
+    proj->screenCoordinates( 0.0, proj->maxLat(), viewport,
                              xDummy, yTop );
-    proj->screenCoordinates( 0.0, -proj->maxLat(), viewport, 
+    proj->screenCoordinates( 0.0, proj->minLat(), viewport,
                              xDummy, yBottom );
 
     // Don't let the active area be outside the image, and also let a
@@ -121,9 +121,9 @@ void MercatorProjectionHelper::createProjectedRegion( ViewportParams *viewport )
     AbstractProjection *proj = viewport->currentProjection();
 
     // Get the top and bottom y coordinates of the projected map.
-    proj->screenCoordinates( 0.0, +proj->maxLat(), viewport, 
+    proj->screenCoordinates( 0.0, proj->maxLat(), viewport,
                  xDummy, yTop );
-    proj->screenCoordinates( 0.0, -proj->maxLat(), viewport, 
+    proj->screenCoordinates( 0.0, proj->minLat(), viewport,
                  xDummy, yBottom );
 
     if ( yTop < 0 )

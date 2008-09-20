@@ -51,8 +51,8 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
     qreal otherEastLon  = -M_PI; 
     qreal westLon  = +M_PI; 
     qreal otherWestLon  = +M_PI; 
-    qreal northLat = -m_maxLat; 
-    qreal southLat = +m_maxLat; 
+    qreal northLat = m_minLat;
+    qreal southLat = m_maxLat; 
 
     // Move along the screenborder and save the highest and lowest lon-lat values.
 
@@ -116,16 +116,16 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
     // We need a point on the screen at maxLat that definetely gets displayed:
     qreal averageLongitude = ( westLon + eastLon ) / 2.0;
 
-    GeoDataCoordinates maxLatPoint( averageLongitude, +m_maxLat, 0.0, GeoDataCoordinates::Radian );
-    GeoDataCoordinates minLatPoint( averageLongitude, -m_maxLat, 0.0, GeoDataCoordinates::Radian );
+    GeoDataCoordinates maxLatPoint( averageLongitude, m_maxLat, 0.0, GeoDataCoordinates::Radian );
+    GeoDataCoordinates minLatPoint( averageLongitude, m_minLat, 0.0, GeoDataCoordinates::Radian );
 
     int dummyX, dummyY; // not needed
 
     if ( screenCoordinates( maxLatPoint, viewport, dummyX, dummyY ) ) {
-        northLat = +m_maxLat;
+        northLat = m_maxLat;
     }
     if ( screenCoordinates( minLatPoint, viewport, dummyX, dummyY ) ) {
-        southLat = -m_maxLat;
+        southLat = m_minLat;
     }
 
     GeoDataLatLonAltBox latLonAltBox;
