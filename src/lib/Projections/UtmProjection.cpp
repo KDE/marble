@@ -54,6 +54,8 @@ bool UtmProjection::screenCoordinates( const qreal lon, const qreal lat,
     // fullw = width of the slice (radians)
     const qreal fullw = 6.0*DEG2RAD;
 
+    //we subtract 30 because there are 60 zones and they start at -pi
+    //so to restore justice and balance to the universe etc we shift it over
     int lonz = (int) ( floor( ( lon+M_PI ) / ( fullw ) ) - 30 );
     qreal clon = maxw + ( ( fullw ) * num );
 
