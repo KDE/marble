@@ -87,7 +87,7 @@ QString MarbleDataViewPlugin::nameId() const
 
 QString MarbleDataViewPlugin::description() const
 {
-    return tr( "A plugin that displays all the loaded data in a seperate window." );
+    return tr( "A plugin that displays all the loaded data in a separate window." );
 }
 
 QIcon MarbleDataViewPlugin::icon () const
