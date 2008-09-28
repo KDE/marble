@@ -103,7 +103,7 @@ bool twitterPlugin::render(GeoPainter *painter, ViewportParams *viewport,
     if (privateFlagForRenderingTwitts >= 1) {
         for (int counter = 0;counter < 4;counter++)
             painter->drawAnnotation(twitsWithLocation[counter].location,
-				    parsedData[counter].user + " said " + "\n"
+				    parsedData[counter].user + " said \n"
 				    + parsedData[counter].text,
 				    QSize(140, 140));
     } else {
