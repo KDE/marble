@@ -57,7 +57,7 @@ namespace Marble
 
 #ifdef Q_CC_MSVC
 # ifndef KDEWIN_MATH_H
-   static long qreal sqrt(int a) { return sqrt((long qreal)a); }
+   static long double sqrt(int a) { return sqrt((long double)a); }
 # endif
 #endif
 
