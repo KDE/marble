@@ -36,7 +36,7 @@ void Route::draw( ClipPainter *painter, const QSize &canvasSize,
     // Initialise first to the beginning of the vector.
     first = *(begin());
 
-    for ( it = constBegin(); it < constEnd(); it++){
+    for ( it = constBegin(); it < constEnd(); ++it){
         first->getPixelPos( canvasSize, viewParams,
                             &firstPos );
 

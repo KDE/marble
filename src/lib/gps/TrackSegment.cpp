@@ -40,7 +40,7 @@ void TrackSegment::draw( ClipPainter *painter,
     const_iterator it;
     
     for( it = constBegin(); it < constEnd();
-         it++ )
+         ++it )
     {
         draw = (*it)->getPixelPos(canvasSize, viewParams,
                  &position);
