@@ -254,11 +254,11 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     for(int i = 0; i < 4; i++) { firstletters.append( c[i].at(0) ); }
     // <frac> = fractional part; <sp> = whitespace
     //            <first coord ><decimal  ><frac><sp/symbol but NOT a direction>
-    regexstr = "^(-?\\+?\\d{1,3}" + dec + "?\\d*)\\s*[^\\d" + firstletters + "]*"
+    regexstr = "^(-?\\+?\\d{1,3}" + dec + "?\\d*)(?:\\s|[^\\d" + firstletters + dec + "]|"
     //           ^----------cap(1)--------------^
     //         <sp ><2nd coord     ><decimal ><frac>
-             + "\\s*(-?\\+?\\d{1,3}" + dec + "?\\d*)";
-    //              ^----------cap(2)--------------^
+             + "\\s)+(-?\\+?\\d{1,3}" + dec + "?\\d*)";
+    //               ^----------cap(2)--------------^
     regex = QRegExp( regexstr );
     if( input.contains( regex ) ) {
         qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
