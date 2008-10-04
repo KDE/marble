@@ -470,7 +470,7 @@ QString GeoDataCoordinates::toString( GeoDataCoordinates::Notation notation )
         return QString("%1\xb0 %2\' %3\"%4, %5\xb0 %6\' %7\"%8")
         .arg(londeg, 3, 10, QChar(' ') ).arg(lonmin, 2, 10, QChar('0') )
         .arg(lonsec, 2, 10, QChar('0') ).arg(westring)
-    	.arg(latdeg, 3, 10, QChar(' ') ).arg(latmin, 2, 10, QChar('0') )
+        .arg(latdeg, 3, 10, QChar(' ') ).arg(latmin, 2, 10, QChar('0') )
         .arg(latsec, 2, 10, QChar('0') ).arg(nsstring);
     }
     else // notation = GeoDataCoordinates::Decimal
