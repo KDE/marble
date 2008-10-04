@@ -252,7 +252,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     regexstr = "^(-?\\+?\\d{1,3}" + dec + "?\\d*)(?:\\s|[^\\d" + firstletters + dec + "]|"
     //           ^----------cap(1)--------------^
     //         <sp ><2nd coord     ><decimal ><frac>
-             + "\\s)+(-?\\+?\\d{1,3}" + dec + "?\\d*)";
+             + "\\s)+(-?\\+?\\d{1,3}" + dec + "?\\d*)\\s*$";
     //               ^----------cap(2)--------------^
     regex = QRegExp( regexstr );
     if( input.contains( regex ) ) {
@@ -296,7 +296,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     // #2: Two numbers with directions, eg 74.2245 N 32.2434 W etc
     regexstr = "^([\\-\\+]?\\d{1,3}" + dec + "?\\d*)(?:\\s|[^\\d" +dec+ "])+"
              + dir + ",?\\s*(-?\\+?\\d{1,3}" +  dec + "?\\d*)"
-             + "(?:\\s|[^\\d" +dec+ "])+" + dir;
+             + "(?:\\s|[^\\d" +dec+ "])+" + dir + "\\s*$";
     regex = QRegExp( regexstr );
     if( input.contains( regex ) ) {
         qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
@@ -339,7 +339,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     regexstr = "^(\\d{1,3})(?:\\s|[^\\d" +dec+ "])+(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+";
     regexstr += "(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+" +   dir  + ",?\\s*";
     regexstr += "(\\d{1,3})(?:\\s|[^\\d" +dec+ "])+(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+";
-    regexstr += "(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+"  +   dir;
+    regexstr += "(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+"  +  dir + "\\s*$";
     regex = QRegExp( regexstr );
     if( input.contains( regex ) ) {
         qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
@@ -366,20 +366,15 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
             latsec = regex.cap( 7 );
             latdir = regex.cap( 8 );
         }
+        lat = latdeg.toDouble() + (latmin.toDouble()/60.0) + (latsec.toDouble()/3600.0);
+        lon = londeg.toDouble() + (lonmin.toDouble()/60.0) + (lonsec.toDouble()/3600.0);
         
-        if( latdir == c[2] ) { //south
-            lat = latdeg.toDouble() + latmin.toDouble() + latsec.toDouble();
+        if( latdir == c[2] ) //south, so we invert
             lat *= -1.0;
-        } else { //north
-            lat = latdeg.toDouble() + latmin.toDouble() + latsec.toDouble();
-        }
             
-        if( londir == c[3] ) { //west
-            lon = londeg.toDouble() + lonmin.toDouble() + lonsec.toDouble();
+        if( londir == c[3] ) //west, so we invert
             lon *= -1.0;
-        } else { // east
-            lon = londeg.toDouble() + lonmin.toDouble() + lonsec.toDouble();
-        }
+
         qDebug() << "Created lat / lon " << lat << lon;
         
         GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
@@ -393,7 +388,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     regexstr = "^(\\d{1,3})(?:\\s|[^\\d" +dec+ "])+(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+"
              +   dir  + ",?\\s*"
              +  "(\\d{1,3})(?:\\s|[^\\d" +dec+ "])+(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+"
-             +   dir;
+             +   dir + "\\s*$";
     regex = QRegExp( regexstr );
     if( input.contains( regex ) ) {
         qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
@@ -416,20 +411,15 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
             latmin = regex.cap( 5 );
             latdir = regex.cap( 6 );
         }
-        
-        if( latdir == c[2] ) { //south
-            lat = latdeg.toDouble() + latmin.toDouble();
+        lat = latdeg.toDouble() + (latmin.toDouble()/60.0);
+        lon = londeg.toDouble() + (lonmin.toDouble()/60.0);
+
+        if( latdir == c[2] ) //south, so we invert
             lat *= -1.0;
-        } else { //north
-            lat = latdeg.toDouble() + latmin.toDouble();
-        }
-            
-        if( londir == c[3] ) { //west
-            lon = londeg.toDouble() + lonmin.toDouble();
+
+        if( londir == c[3] ) //west, so we invert
             lon *= -1.0;
-        } else { // east
-            lon = londeg.toDouble() + lonmin.toDouble();
-        }
+
         qDebug() << "Created lat / lon " << lat << lon;
         
         GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
