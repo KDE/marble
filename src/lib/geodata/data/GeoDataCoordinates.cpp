@@ -218,11 +218,6 @@ void GeoDataCoordinates::normalizeLonLat( qreal &lon, qreal &lat )
 
 GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& successful )
 {
-    //NOTE: when describing regexes in comments it will say eg
-    //becomes (?:(?:north|south)|[ns],?\\s).*(?:(?:east|west)|[ew])
-    //This is to give an idea of what the final regexp *looks like*, in english.
-    //Other languages/locals will obviously look different.
-    
     successful = false; //assume failure
     
     QString input = string.toLower();
@@ -299,16 +294,9 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     
     //BEGIN REGEX2
     // #2: Two numbers with directions, eg 74.2245 N 32.2434 W etc
-    // Or also 34 * W 12 * N etc
-    // <frac> = fractional part; <1coord> = 1st coord etc
-    //           <+ve/-ve><1coord ><decimal  ><frac><separator    >
-    regexstr = "^([\\-\\+]?\\d{1,3}" + dec + "?\\d*)\\s*[^\\d]*\\s*"
-    //           ^-----------cap(1)----------------^
-    //     <direction><sep ><+ve/-ve><2coord><decimal><frac>
+    regexstr = "^([\\-\\+]?\\d{1,3}" + dec + "?\\d*)(?:\\s|[^\\d" +dec+ "])+"
              + dir + ",?\\s*(-?\\+?\\d{1,3}" +  dec + "?\\d*)"
-    //       ^cap(2)^       ^-------------cap(3)------------^
-    //          <separator    >  <direction>
-             + "\\s*[^\\d]*\\s*" + dir; // dir --> cap(4)
+             + "(?:\\s|[^\\d" +dec+ "])+" + dir;
     regex = QRegExp( regexstr );
     if( input.contains( regex ) ) {
         qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
@@ -348,21 +336,10 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     
     //BEGIN REGEX3
     // #3: Sexagesimal
-    //becomes ^(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*
-    //         (north|east|south|west|[nsew]),?\\s*(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})
-    //         \\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*(north|east|south|west|[nsew])
-    //           <degrees ><separator    ><minutes ><separator    >
-    regexstr = "^(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*";
-    //           ^-cap(1)-^               ^-cap(2)-^
-    //           <seconds ><separator    > <direction><separator>
-    regexstr += "(\\d{1,2})\\s*[^\\d]*\\s*" +   dir  + ",?\\s*";
-    //          ^-cap(3)-^                  ^cap(4)^
-    //           <degrees ><separator    ><minutes ><separator    >
-    regexstr += "(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*";
-    //           ^-cap(5)-^               ^-cap(6)-^
-    //           <seconds ><separator    >    <direction>
-    regexstr += "(\\d{1,2})\\s*[^\\d]*\\s*"  +   dir;
-    //           ^-cap(6)-^                   ^sep(7)^
+    regexstr = "^(\\d{1,3})(?:\\s|[^\\d" +dec+ "])+(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+";
+    regexstr += "(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+" +   dir  + ",?\\s*";
+    regexstr += "(\\d{1,3})(?:\\s|[^\\d" +dec+ "])+(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+";
+    regexstr += "(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+"  +   dir;
     regex = QRegExp( regexstr );
     if( input.contains( regex ) ) {
         qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
@@ -413,19 +390,10 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     
     //BEGIN REGEX4
     // #4: Sexagesimal with minute precision
-    //becomes ^(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*(north|east|south|west|[nsew]),?\\s*
-    //         (\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*(north|east|south|west|[nsew])
-    //           <degrees ><separator    ><minutes ><separator    >
-    regexstr = "^(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*"
-    //           ^-cap(1)-^               ^-cap(2)-^
-    //       <direction><separator>
+    regexstr = "^(\\d{1,3})(?:\\s|[^\\d" +dec+ "])+(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+"
              +   dir  + ",?\\s*"
-    //       ^-cap(3)-^
-    //           <degrees ><separator    ><minutes ><separator    >
-             +  "(\\d{1,3})\\s*[^\\d]*\\s*(\\d{1,2})\\s*[^\\d]*\\s*"
-    //           ^-cap(4)-^               ^-cap(5)-^
+             +  "(\\d{1,3})(?:\\s|[^\\d" +dec+ "])+(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+"
              +   dir;
-    //         ^cap(6)^
     regex = QRegExp( regexstr );
     if( input.contains( regex ) ) {
         qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
