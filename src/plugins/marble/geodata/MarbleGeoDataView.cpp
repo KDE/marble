@@ -106,7 +106,7 @@ void MarbleGeoDataView::renderIndex( QModelIndex &index )
         {
             if( dynamic_cast<GeoDataPlacemark*>( object ) ) 
                 styleUrl = dynamic_cast<GeoDataPlacemark*>( object )->styleUrl();
-            if( model()->rowCount( childIndex ) > 0 )
+            if( childIndex.isValid() && model()->rowCount( childIndex ) > 0 )
             {
                 renderIndex( childIndex );
             }
