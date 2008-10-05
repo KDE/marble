@@ -40,7 +40,7 @@ class GeoDataPlacemarkPrivate
     GeoDataGeometry*    m_geometry;     // any GeoDataGeometry entry like locations
     GeoDataPoint        m_coordinate;     // The geographic position
     QString             m_countrycode;  // Country code.
-    qreal              m_area;         // Area in square kilometer
+    qreal               m_area;         // Area in square kilometer
     qint64              m_population;   // population in number of inhabitants
 };
 
@@ -67,7 +67,10 @@ GeoDataPlacemark::~GeoDataPlacemark()
 
 GeoDataGeometry* GeoDataPlacemark::geometry()
 {
-    return d->m_geometry;
+    if( d->m_geometry )
+        return d->m_geometry;
+    else
+        return &( d->m_coordinate );
 }
 
 GeoDataCoordinates GeoDataPlacemark::coordinate() const
