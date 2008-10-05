@@ -67,7 +67,7 @@ class MarbleGeometryModel::Private {
             }
         }
         if( feature->featureId() == GeoDataPlacemarkId ) {
-            if( dynamic_cast<GeoDataPlacemark*>( feature )->geometry()->geometryId() == GeoDataMultiGeometryId ) {
+            if( dynamic_cast<GeoDataPlacemark*>( feature )->geometry() && dynamic_cast<GeoDataPlacemark*>( feature )->geometry()->geometryId() == GeoDataMultiGeometryId ) {
                 m_parent[ dynamic_cast<GeoDataPlacemark*>( feature )->geometry() ] = feature;
                 mapGeometry( dynamic_cast<GeoDataPlacemark*>( feature )->geometry() );
             }
@@ -95,10 +95,12 @@ MarbleGeometryModel::~MarbleGeometryModel()
 
 void MarbleGeometryModel::setGeoDataRoot( GeoDataDocument* root )
 {
-    reset();
-    qDebug() << "resetting the base of the Geometry model" << root;
-    d->m_rootDocument = root;
-    d->mapFeature( d->m_rootDocument );
+    if( d->m_rootDocument != root ) {
+        reset();
+        qDebug() << "resetting the base of the Geometry model" << root;
+        d->m_rootDocument = root;
+        d->mapFeature( d->m_rootDocument );
+    }
 }
 
 int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
