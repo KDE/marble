@@ -153,8 +153,8 @@ void MarbleGeoDataView::setPenStyle( QString mapped )
                      << m_currentPen.widthF();*/
             m_currentPen.setColor( m_root->style( mapped )->lineStyle()->color() );
             m_currentPen.setWidthF( m_root->style( mapped )->lineStyle()->width() );
-            m_painter->setPen( m_currentPen );
         }
+        m_painter->setPen( m_currentPen );
     }
 }
 
