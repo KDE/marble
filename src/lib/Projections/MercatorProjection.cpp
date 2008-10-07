@@ -109,7 +109,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
                   || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
 }
 
-bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
+bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
                                             const ViewportParams *viewport,
                                             int *x, int &y, int &pointRepeatNum,
                                             bool &globeHidesPoint )
@@ -121,7 +121,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     qreal  lon;
     qreal  lat;
 
-    geopoint.geoCoordinates( lon, lat );
+    coordinates.geoCoordinates( lon, lat );
 
     if ( fabs( lat ) > maxLat() )
         return false;
@@ -188,6 +188,20 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     }
 
     // the requested point is out of the visible y range:
+    return false;
+}
+
+bool MercatorProjection::screenCoordinates( const GeoDataLineString &lineString, 
+                                    const ViewportParams *viewport,
+                                    QVector<QPolygon *> &polygons  )
+{
+    return false;
+}
+
+bool MercatorProjection::screenCoordinates( const GeoDataLinearRing &linearRing, 
+                                    const ViewportParams *viewport,
+                                    QVector<QPolygon *> &polygons  )
+{
     return false;
 }
 

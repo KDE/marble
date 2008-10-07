@@ -91,6 +91,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         MagneticPole,
         ShipWreck,
         AirPort,
+        Wikipedia,
 
         // Important: Make sure that this is always the last 
         // item and just use it to specify the array size

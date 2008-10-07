@@ -23,6 +23,7 @@
 #include <QtGui/QPainter>
 
 // marble
+#include "MarbleMath.h"
 #include "AbstractProjection.h"
 #include "GeoPainter.h"
 #include "Quaternion.h"
@@ -82,8 +83,7 @@ void MeasureTool::paint( GeoPainter *painter,
         (*it)->geoCoordinates( lon, lat );
 
         if ( it!= m_pMeasurePointList.constBegin() ) {
-            totalDistance += acos( sin( prevLat ) * sin( lat )
-                                   + cos( prevLat ) * cos( lat ) * cos( prevLon - lon ) ) * EARTH_RADIUS;
+            totalDistance += EARTH_RADIUS * distanceSphere( prevLon, prevLat, lon, lat ); 
 
             drawDistancePath( painter, prevqpos, qpos, viewport );
         }

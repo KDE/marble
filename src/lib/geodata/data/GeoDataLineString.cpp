@@ -61,7 +61,7 @@ GeoDataLineString::~GeoDataLineString()
 GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
 {
     if (d->m_dirtyBox) {
-    // calulate LatLonAltBox
+        return GeoDataLatLonAltBox::fromLineString( *this );
     }
     d->m_dirtyBox = false;
 

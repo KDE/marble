@@ -21,110 +21,28 @@
 
 #include "geodata_export.h"
 
+#include "GeoDataLatLonBox.h"
+
 namespace Marble
 {
 
-class GeoDataLatLonBoxPrivate;
-
-/**
- * @short A class that defines a 2D bounding box for geographic data.
- *
- * GeoDataLatLonBox is a 2D bounding box that describes a geographic area
- * in terms of latidude and longitude.
- *
- * Note that the bounding box itself doesn't get calculated from the 
- * original list of points in this class. Instead it should get calculated 
- * in the GeoDataLineString class (or similar) for performance reasons.
- */
-
-class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
-{
-    friend bool operator==( GeoDataLatLonBox const& lhs, GeoDataLatLonBox const& rhs );
-
- public:
-    GeoDataLatLonBox();
-    GeoDataLatLonBox( qreal north, qreal south, qreal east, qreal west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
-    GeoDataLatLonBox( const GeoDataLatLonBox & );
-    virtual ~GeoDataLatLonBox();
-
-    virtual bool isFolder() const { return false; }
-
-    GeoDataLatLonBox& operator=( const GeoDataLatLonBox& other );
-
-    /**
-     * @brief Get the northern boundary of the bounding box.
-     * @return the latitude of the northern boundary.
-     */
-    qreal north( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
-    void setNorth( const qreal north, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
-
-    /**
-     * @brief Get the southern boundary of the bounding box.
-     * @return the latitude of the southern boundary.
-     */
-    qreal south( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
-    void setSouth( const qreal south, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
-
-    /**
-     * @brief Get the eastern boundary of the bounding box.
-     * @return the longitude of the eastern boundary.
-     */
-    qreal east( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
-    void setEast( const qreal east, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
-
-    /**
-     * @brief Get the western boundary of the bounding box.
-     * @return the longitude of the western boundary.
-     */
-    qreal west( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
-    void setWest( const qreal west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
-
-    /**
-     * @brief Get the rotation of the bounding box.
-     * @return the rotation of the bounding box.
-     */
-    qreal rotation( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
-    void setRotation( const qreal rotation, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
-
-    void    boundaries( qreal &west, qreal &east, qreal &north, qreal &south, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
-    void    setBoundaries( qreal west, qreal east, qreal north, qreal south, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
-
-    /**
-     * @brief Detect whether the bounding box crosses the IDL.
-     * @return @c true  the bounding box crosses the +/+180 deg longitude.
-     *         @c false the bounding box doesn't cross the +/+180 deg longitude.
-     */
-    bool crossesDateLine() const;
-
-    bool     virtual contains( const GeoDataPoint & );
-    bool     virtual contains( const GeoDataCoordinates & );
-    bool     virtual intersects( const GeoDataLatLonBox & );
-
-    /**
-     * @brief Dumps the boundaries of the bounding box for debugging purpose.
-     */
-    QString  virtual text( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
-
-    /// Serialize the contents of the feature to @p stream.
-    virtual void pack( QDataStream& stream ) const;
-    /// Unserialize the contents of the feature from @p stream.
-    virtual void unpack( QDataStream& stream );
-
- private:
-    GeoDataLatLonBoxPrivate  * const d;
-};
-
 class GeoDataLatLonAltBoxPrivate;
+
+class GeoDataLineString;
+
 
 /**
  * @short A class that defines a 3D bounding box for geographic data.
  *
  * GeoDataLatLonAltBox is a 3D bounding box that describes a geographic area
- * in terms of latidude, longitude and altitude.
+ * in terms of latitude, longitude and altitude.
  *
- * Note that the bounding box itself doesn't get calculated from the 
- * original list of points in this class. Instead it should get calculated 
- * in the GeoDataLineString class (or similar) for performance reasons.
+ * The bounding box gets described by assigning the northern, southern, 
+ * eastern and western boundary.
+ * So usually the value of the eastern boundary is bigger than the
+ * value of the western boundary. Only if the bounding box crosses the
+ * date line then the eastern boundary has got a smaller value than 
+ * the western one.
  */
 
 class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
@@ -134,6 +52,8 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
  public:
     GeoDataLatLonAltBox();
     GeoDataLatLonAltBox( const GeoDataLatLonAltBox & );
+    GeoDataLatLonAltBox( const GeoDataLatLonBox & );
+
     virtual ~GeoDataLatLonAltBox();
 
     virtual bool isFolder() const { return false; }
@@ -155,7 +75,7 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     void setMaxAltitude( const qreal maxAltitude );
 
     /**
-     * @brief Get the reference system for the altitude.ar
+     * @brief Get the reference system for the altitude.
      * @return the point of reference which marks the origin 
      * for measuring the altitude.
      */
@@ -164,13 +84,28 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
 
     bool     virtual contains( const GeoDataPoint & );
     bool     virtual contains( const GeoDataCoordinates & );
+    bool     contains( const GeoDataLatLonAltBox & );
+
     bool     virtual intersects( const GeoDataLatLonAltBox & );
+
     using GeoDataLatLonBox::intersects;
 
     /**
-     * @brief Dumps the boundaries of the bounding box for debugging purpose.
+     * @brief Create a bounding box from a set of geographic points.
+     * @return the bounding box that contains the geographic points.
      */
-    QString  virtual text( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    static GeoDataLatLonAltBox fromLineString( const GeoDataLineString& lineString );
+
+    /**
+     * @brief Creates a text string of the bounding box
+     */
+    QString  virtual toString( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+
+    /**
+     * @brief Indicates whether the bounding box only contains a single 2D point ("singularity").
+     * @return Return value is true if the height and the width of the bounding box equal zero.
+     */
+    bool isNull() const;
 
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;

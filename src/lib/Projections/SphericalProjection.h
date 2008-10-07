@@ -25,6 +25,8 @@
 namespace Marble
 {
 
+class SphericalProjectionPrivate;
+
 /**
  * @short A class to implement the spherical projection used by the "Globe" view.
  */
@@ -57,14 +59,22 @@ class SphericalProjection : public AbstractProjection
                             int& x, int& y,
                             CoordinateType coordType = originalCoordinates );
 
-    inline bool screenCoordinates( const GeoDataCoordinates &geopoint, 
+    inline bool screenCoordinates( const GeoDataCoordinates &coordinates, 
                                    const ViewportParams *params,
                                    int &x, int &y, bool &globeHidesPoint );
 
-    bool screenCoordinates( const GeoDataCoordinates &geopoint,
+    bool screenCoordinates( const GeoDataCoordinates &coordinates,
                             const ViewportParams * viewport,
                             int *x, int &y, int &pointRepeatNum,
                             bool &globeHidesPoint );
+
+    bool screenCoordinates( const GeoDataLineString &lineString, 
+                            const ViewportParams *viewport,
+                            QVector<QPolygon *> &polygons );
+
+    bool screenCoordinates( const GeoDataLinearRing &linearRing, 
+                            const ViewportParams *viewport,
+                            QVector<QPolygon *> &polygons );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -98,7 +108,8 @@ class SphericalProjection : public AbstractProjection
     bool  mapCoversViewport( const ViewportParams *viewport ) const;
 
  private:
-    //SphericalProjectionPrivate  * const d;
+    Q_DISABLE_COPY( SphericalProjection )
+    SphericalProjectionPrivate  * const d;
 };
 
 }

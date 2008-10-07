@@ -20,10 +20,13 @@
  */
 
 #include <QtCore/QRect>
+#include <QtCore/QVector>
+#include <QtGui/QPolygon>
 
 #include "GeoDataLatLonAltBox.h"
-#include "GeoDataLinearRing.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLineString.h"
+#include "GeoDataLinearRing.h"
 
 namespace Marble
 {
@@ -125,15 +128,19 @@ class AbstractProjection
      *
      * @see ViewportParams
      */
-    virtual bool screenCoordinates( const Marble::GeoDataCoordinates &geopoint,
+    virtual bool screenCoordinates( const Marble::GeoDataCoordinates &coordinates,
                                     const ViewportParams *viewport,
                                     int *x, int &y, int &pointRepeatNum,
                                     bool &globeHidesPoint ) = 0;
-/*
-    bool screenCoordinates( const GeoDataLineString &geolinestring, 
-                            const ViewportParams *viewport,
-                            QVector<Polygon> polygons ) = 0;
-*/
+
+    virtual bool screenCoordinates( const GeoDataLineString &lineString, 
+                                    const ViewportParams *viewport,
+                                    QVector<QPolygon*> &polygons ) = 0;
+
+    virtual bool screenCoordinates( const GeoDataLinearRing &linearRing, 
+                                    const ViewportParams *viewport,
+                                    QVector<QPolygon*> &polygons ) = 0;
+
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
      * @param x      the x coordinate of the pixel

@@ -19,29 +19,12 @@
 #include <cmath>
 #include <math.h>
 
+#include "MarbleMath.h"
 #include "TileLoader.h"
 #include "TextureTile.h"
 #include "GeoSceneTexture.h"
 #include "MathHelper.h"
 
-namespace {
-    const qreal a1 = 1.0/6.0; 
-    const qreal a2 = 1.0/24.0; 
-    const qreal a3 = 61.0/5040; 
-    const qreal a4 = 277.0/72576.0;  
-    const qreal a5 = 50521.0/39916800.0; 
-    const qreal a6 = 41581.0/95800320.0; 
-    const qreal a7 = 199360981.0/1307674368000.0; 
-    const qreal a8 = 228135437.0/4184557977600.0; 
-    const qreal a9 = 2404879675441.0/121645100408832000.0; 
-    const qreal a10 = 14814847529501.0/2043637686868377600.0; 
-    const qreal a11 = 69348874393137901.0/25852016738884976640000.0; 
-    const qreal a12 = 238685140977801337.0/238634000666630553600000.0; 
-    const qreal a13 = 4087072509293123892361.0/10888869450418352160768000000.0;
-    const qreal a14 = 454540704683713199807.0/3209350995912777478963200000.0;
-    const qreal a15 = 441543893249023104553682821.0/8222838654177922817725562880000000.0;
-    const qreal a16 = 2088463430347521052196056349.0/102156677868375135241390522368000000.0;
-}
 
 namespace Marble
 {
@@ -203,15 +186,7 @@ inline qreal AbstractScanlineTextureMapper::rad2PixelY( const qreal lat ) const
 
         // We are using the Horner Scheme as a polynom representation
 
-        const qreal lat2 = lat * lat;
-
-            return - ( lat 
-        + lat * lat2 * (  a1
-        + lat2 * ( a2  + lat2 * ( a3  + lat2 * ( a4  + lat2 * ( a5
-        + lat2 * ( a6  + lat2 * ( a7  + lat2 * ( a8  + lat2 * ( a9
-        + lat2 * ( a10 + lat2 * ( a11 + lat2 * ( a12 + lat2 * ( a13
-        + lat2 * ( a14 + lat2 * ( a15 + lat2 * ( a16 ) ) ) ) ) ) ) ) ) ) ) ) ) ) ) )
-        ) * 0.5 * m_normGlobalHeight;
+            return - gdInv( lat ) * 0.5 * m_normGlobalHeight;
     }
         if ( lat >= +1.4835 )
             // asinh( tan (1.4835)) => 3.1309587

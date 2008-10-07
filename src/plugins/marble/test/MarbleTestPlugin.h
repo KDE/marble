@@ -17,7 +17,7 @@
 
 #include <QtCore/QObject>
 
-#include "MarbleAbstractLayer.h"
+#include "MarbleRenderPlugin.h"
 
 namespace Marble
 {
@@ -27,10 +27,10 @@ namespace Marble
  *
  */
 
-class MarbleTestPlugin : public MarbleAbstractLayer
+class MarbleTestPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleLayerInterface )
+    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
 
  public:
     QStringList backendTypes() const;
@@ -60,4 +60,4 @@ class MarbleTestPlugin : public MarbleAbstractLayer
 
 }
 
-#endif
+#endif // MARBLETESTPLUGIN_H

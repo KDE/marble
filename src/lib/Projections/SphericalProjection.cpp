@@ -17,13 +17,26 @@
 #include "ViewportParams.h"
 #include "GeoDataPoint.h"
 
-using namespace Marble;
+namespace Marble
+{
 
 static SphericalProjectionHelper  theHelper;
 
+class SphericalProjectionPrivate
+{
+ public:
+    SphericalProjectionPrivate()
+    {
+    }
+
+    ~SphericalProjectionPrivate()
+    {
+    }
+};
 
 SphericalProjection::SphericalProjection()
-    : AbstractProjection()
+    : AbstractProjection(), 
+      d( new SphericalProjectionPrivate() )
 {
     m_maxLat  = 90.0 * DEG2RAD;
     m_minLat  = -90.0 * DEG2RAD;
@@ -33,6 +46,7 @@ SphericalProjection::SphericalProjection()
 
 SphericalProjection::~SphericalProjection()
 {
+    delete d;
 }
 
 
@@ -57,18 +71,18 @@ bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
     return p.v[Q_Z] > 0;
 }
 
-bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
+bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinates, 
                                              const ViewportParams *viewport,
                                              int &x, int &y, bool &globeHidesPoint )
 {
-    qreal      absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
-    Quaternion  qpos             = geopoint.quaternion();
+    qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
+    Quaternion  qpos             = coordinates.quaternion();
 
     qpos.rotateAroundAxis( *( viewport->planetAxisMatrix() ) );
 
     qreal      pixelAltitude = ( ( viewport->radius() ) 
                                   / EARTH_RADIUS * absoluteAltitude );
-    if ( geopoint.altitude() < 10000 ) {
+    if ( coordinates.altitude() < 10000 ) {
         // Skip placemarks at the other side of the earth.
         if ( qpos.v[Q_Z] < 0 ) {
             globeHidesPoint = true;
@@ -104,20 +118,20 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     return true;
 }
 
-bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
+bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
                                              const ViewportParams *viewport,
                                              int *x, int &y,
                                              int &pointRepeatNum,
                                              bool &globeHidesPoint )
 {
-    qreal      absoluteAltitude = geopoint.altitude() + EARTH_RADIUS;
-    Quaternion  qpos             = geopoint.quaternion();
+    qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
+    Quaternion  qpos             = coordinates.quaternion();
 
     qpos.rotateAroundAxis( *( viewport->planetAxisMatrix() ) );
 
     qreal      pixelAltitude = ( ( viewport->radius() ) 
                                   / EARTH_RADIUS * absoluteAltitude );
-    if ( geopoint.altitude() < 10000 ) {
+    if ( coordinates.altitude() < 10000 ) {
         // Skip placemarks at the other side of the earth.
         if ( qpos.v[Q_Z] < 0 ) {
             globeHidesPoint = true;
@@ -157,6 +171,94 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     globeHidesPoint = false;
     return true;
 }
+
+
+bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString, 
+                                    const ViewportParams *viewport,
+                                    QVector<QPolygon *> &polygons  )
+{
+    int x, y;
+    bool previousGlobeHidesPoint;
+
+    QPolygon  *polygon = new QPolygon;
+    
+    GeoDataLineString::ConstIterator itPoint;
+    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
+
+    bool globeHidesPoint;
+
+    for ( itPoint = lineString.constBegin(); itPoint != itEnd; ++itPoint )
+    {
+        bool isVisible = screenCoordinates( **itPoint, viewport, x, y, globeHidesPoint );
+
+        if ( itPoint == lineString.constBegin() ){
+            previousGlobeHidesPoint = globeHidesPoint;
+        }
+
+        if ( !globeHidesPoint ) {
+            polygon->append( QPoint( x, y ) );
+        }
+        else {
+            if ( !previousGlobeHidesPoint ) {
+                polygons.append( polygon );
+                polygon = new QPolygon;
+            }
+        }
+
+        previousGlobeHidesPoint = globeHidesPoint;
+    }
+
+    if ( polygon->size() > 1 ){
+        polygons.append( polygon );
+    }
+    else {
+        delete polygon;
+    }
+}
+
+bool SphericalProjection::screenCoordinates( const GeoDataLinearRing &linearRing, 
+                                    const ViewportParams *viewport,
+                                    QVector<QPolygon *> &polygons  )
+{
+    int x, y;
+    bool previousGlobeHidesPoint;
+
+    QPolygon  *polygon = new QPolygon;
+    
+    GeoDataLinearRing::ConstIterator itPoint;
+    GeoDataLinearRing::ConstIterator itEnd = linearRing.constEnd();
+
+    bool globeHidesPoint;
+
+    for ( itPoint = linearRing.constBegin(); itPoint != itEnd; ++itPoint )
+    {
+        bool isVisible = screenCoordinates( **itPoint, viewport, x, y, globeHidesPoint );
+
+        if ( itPoint == linearRing.constBegin() ){
+            previousGlobeHidesPoint = globeHidesPoint;
+        }
+
+        if ( !globeHidesPoint ) {
+            polygon->append( QPoint( x, y ) );
+        }
+        else {
+            if ( !previousGlobeHidesPoint ) {
+                polygons.append( polygon );
+                polygon = new QPolygon;
+            }
+        }
+
+        previousGlobeHidesPoint = globeHidesPoint;
+    }
+
+    if ( polygon->size() > 1 ){
+        polygons.append( polygon );
+    }
+    else {
+        delete polygon;
+    }
+}
+
 
 bool SphericalProjection::geoCoordinates( const int x, const int y,
                                           const ViewportParams *viewport,
@@ -285,4 +387,6 @@ bool SphericalProjection::mapCoversViewport( const ViewportParams *viewport ) co
         return true;
 
     return false;
+}
+
 }

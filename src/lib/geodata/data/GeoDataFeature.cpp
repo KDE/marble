@@ -217,6 +217,10 @@ void GeoDataFeature::initializeDefaultStyles()
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/airport.png" ) ), 
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
 
+    s_defaultStyle[Wikipedia]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/wikipedia.png" ) ), 
+              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
+
     s_defaultStyleInitialized = true;
     s_defaultFont = QFont("Sans Serif");
 

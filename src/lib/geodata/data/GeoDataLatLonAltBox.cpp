@@ -14,303 +14,11 @@
 
 #include <QtCore/QDebug>
 
+#include "GeoDataCoordinates.h"
+#include "GeoDataLineString.h"
+
 namespace Marble
 {
-
-class GeoDataLatLonBoxPrivate
-{
- public:
-    GeoDataLatLonBoxPrivate()
-        : m_north( +M_PI / 2.0),
-          m_south( -M_PI / 2.0),
-          m_east(  +M_PI ),
-          m_west(  -M_PI ),
-          m_rotation( 0.0 )
-    {
-    }
-
-    qreal m_north;
-    qreal m_south;
-    qreal m_east;
-    qreal m_west;
-    qreal m_rotation; // NOT implemented yet!
-};
-
-bool operator==( GeoDataLatLonBox const& lhs, GeoDataLatLonBox const& rhs )
-{
-    return lhs.d->m_west == rhs.d->m_west
-        && lhs.d->m_east == rhs.d->m_east
-        && lhs.d->m_north == rhs.d->m_north
-        && lhs.d->m_south == rhs.d->m_south
-        && lhs.d->m_rotation == rhs.d->m_rotation;
-}
-
-GeoDataLatLonBox::GeoDataLatLonBox()
-    : GeoDataObject(),
-      d( new GeoDataLatLonBoxPrivate )
-{
-}
-
-GeoDataLatLonBox::GeoDataLatLonBox( qreal north, qreal south, qreal east, qreal west, GeoDataCoordinates::Unit unit )
-    : GeoDataObject(),
-      d( new GeoDataLatLonBoxPrivate )
-{
-    setBoundaries( north, south, east, west, unit );
-}
-
-GeoDataLatLonBox::GeoDataLatLonBox( const GeoDataLatLonBox & other )
-    : GeoDataObject( other ),
-      d( new GeoDataLatLonBoxPrivate( *other.d ))
-{
-}
-
-GeoDataLatLonBox::~GeoDataLatLonBox()
-{
-    delete d;
-}
-
-qreal GeoDataLatLonBox::north( GeoDataCoordinates::Unit unit ) const
-{
-    if ( unit == GeoDataCoordinates::Degree ) {
-        return d->m_north * RAD2DEG;
-    }
-    return d->m_north;
-}
-
-void GeoDataLatLonBox::setNorth( const qreal north, GeoDataCoordinates::Unit unit )
-{
-    switch( unit ){
-    case GeoDataCoordinates::Radian:
-        d->m_north = GeoDataPoint::normalizeLat( north );
-        break;
-    case GeoDataCoordinates::Degree:
-        d->m_north = GeoDataPoint::normalizeLat( north * DEG2RAD );
-        break;
-    }
-}
-
-qreal GeoDataLatLonBox::south( GeoDataCoordinates::Unit unit ) const
-{
-    if ( unit == GeoDataCoordinates::Degree ) {
-        return d->m_south * RAD2DEG;
-    }
-    return d->m_south;
-}
-
-void GeoDataLatLonBox::setSouth( const qreal south, GeoDataCoordinates::Unit unit )
-{
-    switch( unit ){
-    case GeoDataCoordinates::Radian:
-        d->m_south = GeoDataPoint::normalizeLat( south );
-        break;
-    case GeoDataCoordinates::Degree:
-        d->m_south = GeoDataPoint::normalizeLat( south * DEG2RAD );
-        break;
-    }
-}
-
-
-qreal GeoDataLatLonBox::east( GeoDataCoordinates::Unit unit ) const
-{
-    if ( unit == GeoDataCoordinates::Degree ) {
-        return d->m_east * RAD2DEG;
-    }
-    return d->m_east;
-}
-
-void GeoDataLatLonBox::setEast( const qreal east, GeoDataCoordinates::Unit unit )
-{
-    switch( unit ){
-    case GeoDataCoordinates::Radian:
-        d->m_east = GeoDataPoint::normalizeLon( east );
-        break;
-    case GeoDataCoordinates::Degree:
-        d->m_east = GeoDataPoint::normalizeLon( east * DEG2RAD );
-        break;
-    }
-}
-
-qreal GeoDataLatLonBox::west( GeoDataCoordinates::Unit unit ) const
-{
-    if ( unit == GeoDataCoordinates::Degree ) {
-        return d->m_west * RAD2DEG;
-    }
-    return d->m_west;
-}
-
-void GeoDataLatLonBox::setWest( const qreal west, GeoDataCoordinates::Unit unit )
-{
-    switch( unit ){
-    case GeoDataCoordinates::Radian:
-        d->m_west = GeoDataPoint::normalizeLon( west );
-        break;
-    case GeoDataCoordinates::Degree:
-        d->m_west = GeoDataPoint::normalizeLon( west * DEG2RAD );
-        break;
-    }
-}
-
-void GeoDataLatLonBox::setRotation( const qreal rotation, GeoDataCoordinates::Unit unit )
-{
-    switch( unit ){
-    case GeoDataCoordinates::Radian:
-        d->m_rotation = rotation;
-        break;
-    case GeoDataCoordinates::Degree:
-        d->m_rotation = rotation * DEG2RAD;
-        break;
-    }
-}
-
-qreal GeoDataLatLonBox::rotation( GeoDataCoordinates::Unit unit ) const
-{
-    if ( unit == GeoDataCoordinates::Degree ) {
-        return d->m_rotation * RAD2DEG;
-    }
-    return d->m_rotation;
-}
-
-void GeoDataLatLonBox::boundaries( qreal &west, qreal &east, qreal &north, qreal &south, GeoDataCoordinates::Unit unit )
-{
-    switch( unit ){
-    case GeoDataCoordinates::Radian:
-        north = d->m_north;
-        south = d->m_south;
-        east = d->m_east;
-        west = d->m_west;
-        break;
-    case GeoDataCoordinates::Degree:
-        north = d->m_north * RAD2DEG;
-        south = d->m_south * RAD2DEG;
-        east = d->m_east * RAD2DEG;
-        west = d->m_west * RAD2DEG;
-        break;
-    }
-}
-
-void GeoDataLatLonBox::setBoundaries( qreal west, qreal east, qreal north, qreal south, GeoDataCoordinates::Unit unit )
-{
-    switch( unit ){
-    case GeoDataCoordinates::Radian:
-        d->m_north = GeoDataPoint::normalizeLat( north );
-        d->m_south = GeoDataPoint::normalizeLat( south );
-        d->m_east =  GeoDataPoint::normalizeLon( east );
-        d->m_west =  GeoDataPoint::normalizeLon( west );
-        break;
-    case GeoDataCoordinates::Degree:
-        d->m_north = GeoDataPoint::normalizeLat( north * DEG2RAD );
-        d->m_south = GeoDataPoint::normalizeLat( south * DEG2RAD );
-        d->m_east =  GeoDataPoint::normalizeLon( east * DEG2RAD );
-        d->m_west =  GeoDataPoint::normalizeLon( west * DEG2RAD );
-        break;
-    }
-}
-
-bool GeoDataLatLonBox::crossesDateLine() const
-{
-    if ( d->m_east < d->m_west ) {
-        return true;
-    }
-
-    return false;
-}
-
-bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point )
-{
-    qreal lon, lat;
-
-    point.geoCoordinates( lon, lat );
-
-    // We need to take care of the normal case ...
-    if ( ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) ||
-    // ... and the case where the bounding box crosses the date line:
-       ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) )
-        return false;
-    
-    if ( lat < d->m_south || lat > d->m_north )
-        return false;
-
-    return true;
-}
-
-bool GeoDataLatLonBox::contains( const GeoDataPoint &point )
-{
-    qreal lon, lat;
-
-    point.geoCoordinates( lon, lat );
-
-    // We need to take care of the normal case ...
-    if ( ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) ||
-    // ... and the case where the bounding box crosses the date line:
-       ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) )
-        return false;
-    
-    if ( lat < d->m_south || lat > d->m_north )
-        return false;
-
-    return true;
-}
-
-bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox & box )
-{
-    // Case 1: east border of box intersects:
-    if ( d->m_east < box.east() && box.west() < d->m_east )
-        return true;
-
-    // Case 2: west border of box intersects:
-    if ( d->m_west > box.west() && box.east() > d->m_west )
-        return true;
-
-    // Case 3: north border of box intersects:
-    if ( d->m_north < box.north() && box.south() < d->m_north )
-        return true;
-
-    // Case 4: south border of box intersects:
-    if ( d->m_south > box.south() && box.north() > d->m_south )
-        return true;
-
-    return false;
-}
-
-QString GeoDataLatLonBox::text( GeoDataCoordinates::Unit unit ) const
-{
-    switch( unit ){
-    case GeoDataCoordinates::Radian:
-        return QString( "North: %1; West: %2 \n South: %3; East: %4 " )
-            .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ); 
-        break;
-    case GeoDataCoordinates::Degree:
-        return QString( "North: %1; West: %2 \n South: %3; East: %4 " )
-            .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ); 
-        break;
-    }
-
-    return QString( "GeoDataLatLonBox::text(): Error in unit: %1\n" )
-	.arg( unit );
-}
-
-GeoDataLatLonBox& GeoDataLatLonBox::operator=( const GeoDataLatLonBox &other )
-{
-    // FIXME: this check is not needed, remove or keep it?
-    if ( this == &other )
-        return *this;
-    *d = *other.d;
-    return *this;
-}
-
-void GeoDataLatLonBox::pack( QDataStream& stream ) const
-{
-    GeoDataObject::pack( stream );
-
-    stream << d->m_north << d->m_south << d->m_east << d->m_west << d->m_rotation;
-}
-
-void GeoDataLatLonBox::unpack( QDataStream& stream )
-{
-    GeoDataObject::unpack( stream );
-
-    stream >> d->m_north >> d->m_south >> d->m_east >> d->m_west >> d->m_rotation;
-}
 
 class GeoDataLatLonAltBoxPrivate
 {
@@ -355,6 +63,7 @@ GeoDataLatLonAltBox& GeoDataLatLonAltBox::operator=( const GeoDataLatLonAltBox &
     return *this;
 }
 
+
 GeoDataLatLonAltBox::GeoDataLatLonAltBox()
     : GeoDataLatLonBox(),
       d( new GeoDataLatLonAltBoxPrivate )
@@ -366,6 +75,21 @@ GeoDataLatLonAltBox::GeoDataLatLonAltBox( const GeoDataLatLonAltBox & other )
       d( new GeoDataLatLonAltBoxPrivate( *other.d ))
 {
 }
+
+GeoDataLatLonAltBox::GeoDataLatLonAltBox( const GeoDataLatLonBox & other )
+    : GeoDataLatLonBox( other ),
+      d( new GeoDataLatLonAltBoxPrivate )
+{
+    setWest(  other.west() );
+    setEast(  other.east() );
+    setNorth( other.north() );
+    setSouth( other.south() );
+    setRotation( other.rotation() );
+
+    d->m_minAltitude = 0;
+    d->m_maxAltitude = 0;
+}
+
 
 GeoDataLatLonAltBox::~GeoDataLatLonAltBox()
 {
@@ -426,6 +150,25 @@ bool GeoDataLatLonAltBox::contains( const GeoDataPoint &point )
     return true;
 }
 
+bool GeoDataLatLonAltBox::contains( const GeoDataLatLonAltBox &other )
+{
+    // check the contain criterion for the altitude first as this is trivial:
+
+    qDebug() << "this " << this->toString(GeoDataCoordinates::Degree);
+    qDebug() << "other" << other.toString(GeoDataCoordinates::Degree);
+
+    if ( d->m_maxAltitude >= other.maxAltitude() && d->m_minAltitude <= other.minAltitude() ) {
+
+        GeoDataLatLonBox tempThis(  *this );
+        GeoDataLatLonBox tempOther( other );
+        if ( tempThis.contains( tempOther ) ) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 bool GeoDataLatLonAltBox::intersects( const GeoDataLatLonAltBox & box )
 {
     if ( GeoDataLatLonBox::intersects( box ) == true )
@@ -442,7 +185,45 @@ bool GeoDataLatLonAltBox::intersects( const GeoDataLatLonAltBox & box )
     return false;
 }
 
-QString GeoDataLatLonAltBox::text( GeoDataCoordinates::Unit unit ) const
+GeoDataLatLonAltBox GeoDataLatLonAltBox::fromLineString(  const GeoDataLineString& lineString  )
+{
+    // If the line string is empty return a boundingbox that contains everything
+    if ( lineString.isEmpty() ) {
+        return GeoDataLatLonAltBox();
+    }
+
+    GeoDataLatLonAltBox temp ( GeoDataLatLonBox::fromLineString ( lineString ) );
+
+    qreal altitude = lineString.first()->altitude();
+    qreal maxAltitude = altitude;
+    qreal minAltitude = altitude;
+
+    // If there's only a single node stored then the boundingbox only contains that point
+    if ( lineString.size() == 1 ) {
+        temp.setMinAltitude( minAltitude );
+        temp.setMaxAltitude( maxAltitude );
+        return temp;
+    }
+
+    QVector<GeoDataCoordinates*>::ConstIterator it( lineString.begin() );
+    QVector<GeoDataCoordinates*>::ConstIterator itEnd( lineString.constEnd() );
+
+    for ( ; it != itEnd; ++it )
+    {
+        // Get coordinates and normalize them to the desired range.
+        altitude = (*it)->altitude();
+
+        // Determining the maximum and minimum latitude
+        if ( altitude > maxAltitude ) maxAltitude = altitude;
+        if ( altitude < minAltitude ) minAltitude = altitude;
+    }
+
+    temp.setMinAltitude( minAltitude );
+    temp.setMaxAltitude( maxAltitude );
+    return temp;
+}
+
+QString GeoDataLatLonAltBox::toString( GeoDataCoordinates::Unit unit ) const
 {
     switch( unit ){
     case GeoDataCoordinates::Radian:
@@ -461,6 +242,14 @@ QString GeoDataLatLonAltBox::text( GeoDataCoordinates::Unit unit ) const
 
     return QString( "GeoDataLatLonAltBox::text(): Error in unit: %1\n" )
 	.arg( unit );
+}
+
+bool GeoDataLatLonAltBox::isNull() const
+{
+    if ( GeoDataLatLonBox::isNull() && d->m_maxAltitude == d->m_minAltitude ) 
+        return true;
+
+    return false;
 }
 
 void GeoDataLatLonAltBox::pack( QDataStream& stream ) const

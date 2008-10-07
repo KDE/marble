@@ -78,43 +78,6 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent )
     /* NOOP */
 }
 
-
-MarbleMap::MarbleMap()
-    : d( new MarbleMapPrivate( this ) )
-{
-//    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
-
-    d->m_model        = new MarbleModel( this );
-    d->m_modelIsOwned = true;
-
-    d->construct();
-}
-
-
-MarbleMap::MarbleMap(MarbleModel *model)
-    : d( new MarbleMapPrivate( this ) )
-{
-//    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
-
-    d->m_model        = model;
-    d->m_modelIsOwned = false;
-
-    d->construct();
-}
-
-MarbleMap::~MarbleMap()
-{
-    // Some basic initializations.
-    d->m_width  = 0;
-    d->m_height = 0;
-
-    setDownloadManager( 0 );
-
-    if ( d->m_modelIsOwned )
-        delete d->m_model;
-    delete d;
-}
-
 void MarbleMapPrivate::construct()
 {
     // Some point that tackat defined. :-)
@@ -156,9 +119,244 @@ void MarbleMapPrivate::construct()
                         m_parent,              SLOT( centerSun() ) );
 }
 
+// Used to be resizeEvent()
+void MarbleMapPrivate::doResize()
+{
+    QSize size(m_parent->width(), m_parent->height());
+    m_viewParams.viewport()->setSize( size );
+    // Recreate the canvas image with the new size.
+    m_viewParams.setCanvasImage( new QImage( m_parent->width(), m_parent->height(),
+                                             QImage::Format_ARGB32_Premultiplied ));
+
+    if ( m_viewParams.showAtmosphere() ) {
+        drawAtmosphere();
+    }
+
+    // Recreate the 
+    m_viewParams.setCoastImage( new QImage( m_parent->width(), m_parent->height(),
+                                            QImage::Format_ARGB32_Premultiplied ));
+
+    m_justModified = true;
+}
+
+void MarbleMapPrivate::drawAtmosphere()
+{
+    // Only draw an atmosphere if projection is spherical
+    if ( m_viewParams.projection() != Spherical )
+        return;
+
+    // No use to draw atmosphere if it's not visible in the area. 
+    if ( m_viewParams.viewport()->mapCoversViewport() )
+        return;
+
+    // Ok, now we know that at least a little of the atmosphere is
+    // visible, if nothing else in the corners.  Draw the atmosphere
+    // by using a circular gradient.  This is a pure visual effect and
+    // has nothing to do with real physics.
+
+    int  imageHalfWidth  = m_parent->width() / 2;
+    int  imageHalfHeight = m_parent->height() / 2;
+
+    // Recalculate the atmosphere effect and paint it to canvasImage.
+    QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
+                           1.05 * m_parent->radius() );
+    grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
+    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
+
+    QBrush    brush1( grad1 );
+    QPen      pen1( Qt::NoPen );
+    QPainter  painter( m_viewParams.canvasImage() );
+    painter.setBrush( brush1 );
+    painter.setPen( pen1 );
+    painter.setRenderHint( QPainter::Antialiasing, false );
+    painter.drawEllipse( imageHalfWidth  - (int)( (qreal)(m_parent->radius()) * 1.05 ),
+                         imageHalfHeight - (int)( (qreal)(m_parent->radius()) * 1.05 ),
+                         (int)( 2.1 * (qreal)(m_parent->radius()) ),
+                         (int)( 2.1 * (qreal)(m_parent->radius()) ) );
+}
+
+void MarbleMapPrivate::drawFog( QPainter &painter )
+{
+    if ( m_viewParams.projection() != Spherical)
+        return;
+
+    // No use to draw the fog if it's not visible in the area. 
+    if ( m_viewParams.viewport()->mapCoversViewport() )
+        return;
+
+    int  imgWidth2  = m_parent->width() / 2;
+    int  imgHeight2 = m_parent->height() / 2;
+
+    // Recalculate the atmosphere effect and paint it to canvasImage.
+    QRadialGradient grad1( QPointF( imgWidth2, imgHeight2 ), m_parent->radius() );
+
+    // FIXME: Add a cosine relationship
+    grad1.setColorAt( 0.85, QColor( 255, 255, 255, 0 ) );
+    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 64 ) );
+
+    QBrush    brush1( grad1 );
+    QPen      pen1( Qt::NoPen );
+
+    painter.save();
+
+    painter.setBrush( brush1 );
+    painter.setPen( pen1 );
+    painter.setRenderHint( QPainter::Antialiasing, false );
+
+    // FIXME: Cut out what's really needed
+    painter.drawEllipse( imgWidth2  - m_parent->radius(),
+                         imgHeight2 - m_parent->radius(),
+                         2 * m_parent->radius(),
+                         2 * m_parent->radius() );
+
+    painter.restore();
+}
+
+void MarbleMapPrivate::setBoundingBox()
+{
+    QVector<QPointF>  points;
+    Quaternion        temp;
+
+    if ( m_parent->globalQuaternion( 0, 0, temp) ) {
+        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+    if ( m_parent->globalQuaternion( m_parent->width() / 2, 0, temp ) ) {
+        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+
+    if ( m_parent->globalQuaternion( m_parent->width(), 0, temp ) ) {
+        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+    if ( m_parent->globalQuaternion( 0, m_parent->height(), temp ) ) {
+        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+
+    if ( m_parent->globalQuaternion( m_parent->width()/2, m_parent->height(), temp ) ) {
+        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+
+    if ( m_parent->globalQuaternion( m_parent->width(), m_parent->height(), temp ) ) {
+        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
+    }
+
+    m_viewParams.viewport()->setBoundingBox( BoundingBox( points ) );
+}
+
+void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect)
+{
+    if ( !m_viewParams.mapTheme() ) {
+        qDebug() << "No theme yet!";
+        return;
+    }
+
+    bool  doClip = false;
+    if ( m_viewParams.projection() == Spherical )
+        doClip = ( m_viewParams.radius() > m_viewParams.canvasImage()->width() / 2
+                   || m_viewParams.radius() > m_viewParams.canvasImage()->height() / 2 );
+
+    m_model->paintGlobe( &painter,
+                            m_parent->width(), m_parent->height(), &m_viewParams,
+                            m_parent->needsUpdate()
+                            || m_viewParams.canvasImage()->isNull(),
+                            dirtyRect );
+    // FIXME: this is ugly, add method updatePlanetAxis() to ViewParams
+    m_viewParams.setPlanetAxisUpdated( m_viewParams.planetAxis() );
+    // FIXME: this is ugly, add method updateRadius() to ViewParams
+    m_viewParams.setRadiusUpdated( m_viewParams.radius() );
+    m_justModified                   = false;
+
+    // FIXME: This is really slow. That's why we defer this to
+    //        PrintQuality. Either cache on a pixmap - or maybe
+    //        better: Add to GlobeScanlineTextureMapper.
+
+    if ( m_viewParams.mapQuality() == Marble::Print )
+        drawFog(painter);
+}
+
+void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect)
+{
+//    int transparency = ( d->m_viewParams.mapQuality() == Marble::Low ) ? 255 : 192;
+
+    // 2. Paint the crosshair.
+    m_crosshair.paint( &painter,
+                          m_viewParams.canvasImage()->width(),
+                          m_viewParams.canvasImage()->height() );
+
+    // 3. Paint measure points if there are any.
+
+    bool antialiased = false;
+
+    if (   m_viewParams.mapQuality() == Marble::High
+        || m_viewParams.mapQuality() == Marble::Print ) {
+            antialiased = true;
+    }
+
+    m_measureTool->paint( &painter, m_viewParams.viewport(), antialiased );
+
+    // Set the Bounding Box
+    setBoundingBox();
+}
+
+void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps)
+{
+    Q_UNUSED(dirtyRect);
+
+    if ( m_showFrameRate == true ) {
+        QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
+
+        QPoint fpsLabelPos( 10, 20 );
+
+        painter.setFont( QFont( "Sans Serif", 10 ) );
+
+        painter.setPen( Qt::black );
+        painter.setBrush( Qt::black );
+        painter.drawText( fpsLabelPos, fpsString );
+
+        painter.setPen( Qt::white );
+        painter.setBrush( Qt::white );
+        painter.drawText( fpsLabelPos.x() - 1, fpsLabelPos.y() - 1, fpsString );
+    }
+}
+
 
 // ----------------------------------------------------------------
 
+
+MarbleMap::MarbleMap()
+    : d( new MarbleMapPrivate( this ) )
+{
+//    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
+
+    d->m_model        = new MarbleModel( this );
+    d->m_modelIsOwned = true;
+
+    d->construct();
+}
+
+
+MarbleMap::MarbleMap(MarbleModel *model)
+    : d( new MarbleMapPrivate( this ) )
+{
+//    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
+
+    d->m_model        = model;
+    d->m_modelIsOwned = false;
+
+    d->construct();
+}
+
+MarbleMap::~MarbleMap()
+{
+    // Some basic initializations.
+    d->m_width  = 0;
+    d->m_height = 0;
+
+    setDownloadManager( 0 );
+
+    if ( d->m_modelIsOwned )
+        delete d->m_model;
+    delete d;
+}
 
 MarbleModel *MarbleMap::model() const
 {
@@ -635,26 +833,6 @@ void MarbleMap::moveDown()
     rotateBy( 0, +moveStep() );
 }
 
-// Used to be resizeEvent()
-void MarbleMapPrivate::doResize()
-{
-    QSize size(m_parent->width(), m_parent->height());
-    m_viewParams.viewport()->setSize( size );
-    // Recreate the canvas image with the new size.
-    m_viewParams.setCanvasImage( new QImage( m_parent->width(), m_parent->height(),
-                                             QImage::Format_ARGB32_Premultiplied ));
-
-    if ( m_viewParams.showAtmosphere() ) {
-        drawAtmosphere();
-    }
-
-    // Recreate the 
-    m_viewParams.setCoastImage( new QImage( m_parent->width(), m_parent->height(),
-                                            QImage::Format_ARGB32_Premultiplied ));
-
-    m_justModified = true;
-}
-
 int MarbleMap::northPoleY()
 {
     Quaternion  northPole     = GeoDataCoordinates( 0.0, M_PI * 0.5 ).quaternion();
@@ -708,112 +886,6 @@ bool MarbleMap::globalQuaternion( int x, int y, Quaternion &q)
         return false;
     }
 }
-
-
-void MarbleMapPrivate::drawAtmosphere()
-{
-    // Only draw an atmosphere if projection is spherical
-    if ( m_viewParams.projection() != Spherical )
-        return;
-
-    // No use to draw atmosphere if it's not visible in the area. 
-    if ( m_viewParams.viewport()->mapCoversViewport() )
-        return;
-
-    // Ok, now we know that at least a little of the atmosphere is
-    // visible, if nothing else in the corners.  Draw the atmosphere
-    // by using a circular gradient.  This is a pure visual effect and
-    // has nothing to do with real physics.
-
-    int  imageHalfWidth  = m_parent->width() / 2;
-    int  imageHalfHeight = m_parent->height() / 2;
-
-    // Recalculate the atmosphere effect and paint it to canvasImage.
-    QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
-                           1.05 * m_parent->radius() );
-    grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
-    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
-
-    QBrush    brush1( grad1 );
-    QPen      pen1( Qt::NoPen );
-    QPainter  painter( m_viewParams.canvasImage() );
-    painter.setBrush( brush1 );
-    painter.setPen( pen1 );
-    painter.setRenderHint( QPainter::Antialiasing, false );
-    painter.drawEllipse( imageHalfWidth  - (int)( (qreal)(m_parent->radius()) * 1.05 ),
-                         imageHalfHeight - (int)( (qreal)(m_parent->radius()) * 1.05 ),
-                         (int)( 2.1 * (qreal)(m_parent->radius()) ),
-                         (int)( 2.1 * (qreal)(m_parent->radius()) ) );
-}
-
-
-void MarbleMapPrivate::drawFog( QPainter &painter )
-{
-    if ( m_viewParams.projection() != Spherical)
-        return;
-
-    // No use to draw the fog if it's not visible in the area. 
-    if ( m_viewParams.viewport()->mapCoversViewport() )
-        return;
-
-    int  imgWidth2  = m_parent->width() / 2;
-    int  imgHeight2 = m_parent->height() / 2;
-
-    // Recalculate the atmosphere effect and paint it to canvasImage.
-    QRadialGradient grad1( QPointF( imgWidth2, imgHeight2 ), m_parent->radius() );
-
-    // FIXME: Add a cosine relationship
-    grad1.setColorAt( 0.85, QColor( 255, 255, 255, 0 ) );
-    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 64 ) );
-
-    QBrush    brush1( grad1 );
-    QPen      pen1( Qt::NoPen );
-
-    painter.save();
-
-    painter.setBrush( brush1 );
-    painter.setPen( pen1 );
-    painter.setRenderHint( QPainter::Antialiasing, false );
-
-    // FIXME: Cut out what's really needed
-    painter.drawEllipse( imgWidth2  - m_parent->radius(),
-                         imgHeight2 - m_parent->radius(),
-                         2 * m_parent->radius(),
-                         2 * m_parent->radius() );
-
-    painter.restore();
-}
-
-void MarbleMapPrivate::setBoundingBox()
-{
-    QVector<QPointF>  points;
-    Quaternion        temp;
-
-    if ( m_parent->globalQuaternion( 0, 0, temp) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-    if ( m_parent->globalQuaternion( m_parent->width() / 2, 0, temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    if ( m_parent->globalQuaternion( m_parent->width(), 0, temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-    if ( m_parent->globalQuaternion( 0, m_parent->height(), temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    if ( m_parent->globalQuaternion( m_parent->width()/2, m_parent->height(), temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    if ( m_parent->globalQuaternion( m_parent->width(), m_parent->height(), temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    m_viewParams.viewport()->setBoundingBox( BoundingBox( points ) );
-}
-
 
 // Used to be paintEvent()
 void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect) 
@@ -1178,82 +1250,6 @@ QList<MarbleRenderPlugin *> MarbleMap::renderPlugins() const
 QList<MarbleAbstractFloatItem *> MarbleMap::floatItems() const
 {
     return d->m_model->floatItems();
-}
-
-void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect)
-{
-    if ( !m_viewParams.mapTheme() ) {
-        qDebug() << "No theme yet!";
-        return;
-    }
-
-    bool  doClip = false;
-    if ( m_viewParams.projection() == Spherical )
-        doClip = ( m_viewParams.radius() > m_viewParams.canvasImage()->width() / 2
-                   || m_viewParams.radius() > m_viewParams.canvasImage()->height() / 2 );
-
-    m_model->paintGlobe( &painter,
-                            m_parent->width(), m_parent->height(), &m_viewParams,
-                            m_parent->needsUpdate()
-                            || m_viewParams.canvasImage()->isNull(),
-                            dirtyRect );
-    // FIXME: this is ugly, add method updatePlanetAxis() to ViewParams
-    m_viewParams.setPlanetAxisUpdated( m_viewParams.planetAxis() );
-    // FIXME: this is ugly, add method updateRadius() to ViewParams
-    m_viewParams.setRadiusUpdated( m_viewParams.radius() );
-    m_justModified                   = false;
-
-    // FIXME: This is really slow. That's why we defer this to
-    //        PrintQuality. Either cache on a pixmap - or maybe
-    //        better: Add to GlobeScanlineTextureMapper.
-
-    if ( m_viewParams.mapQuality() == Marble::Print )
-        drawFog(painter);
-}
-
-void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect)
-{
-//    int transparency = ( d->m_viewParams.mapQuality() == Marble::Low ) ? 255 : 192;
-
-    // 2. Paint the crosshair.
-    m_crosshair.paint( &painter,
-                          m_viewParams.canvasImage()->width(),
-                          m_viewParams.canvasImage()->height() );
-
-    // 3. Paint measure points if there are any.
-
-    bool antialiased = false;
-
-    if (   m_viewParams.mapQuality() == Marble::High
-        || m_viewParams.mapQuality() == Marble::Print ) {
-            antialiased = true;
-    }
-
-    m_measureTool->paint( &painter, m_viewParams.viewport(), antialiased );
-
-    // Set the Bounding Box
-    setBoundingBox();
-}
-
-void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps)
-{
-    Q_UNUSED(dirtyRect);
-
-    if ( m_showFrameRate == true ) {
-        QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
-
-        QPoint fpsLabelPos( 10, 20 );
-
-        painter.setFont( QFont( "Sans Serif", 10 ) );
-
-        painter.setPen( Qt::black );
-        painter.setBrush( Qt::black );
-        painter.drawText( fpsLabelPos, fpsString );
-
-        painter.setPen( Qt::white );
-        painter.setBrush( Qt::white );
-        painter.drawText( fpsLabelPos.x() - 1, fpsLabelPos.y() - 1, fpsString );
-    }
 }
 
 #include "MarbleMap.moc"

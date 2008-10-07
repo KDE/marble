@@ -129,7 +129,7 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
     }
 
     GeoDataLatLonAltBox latLonAltBox;
-    latLonAltBox.setBoundaries( westLon, eastLon, northLat, southLat,
+    latLonAltBox.setBoundaries( northLat, southLat, eastLon, westLon, 
                                 GeoDataCoordinates::Radian  );
 
     latLonAltBox.setMinAltitude(      -100000000.0 );

@@ -184,6 +184,24 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     return false;
 }
 
+
+bool EquirectProjection::screenCoordinates( const GeoDataLineString &lineString, 
+                                    const ViewportParams *viewport,
+                                    QVector<QPolygon *> &polygons  )
+{
+    return false;
+}
+
+
+
+bool EquirectProjection::screenCoordinates( const GeoDataLinearRing &linearRing, 
+                                    const ViewportParams *viewport,
+                                    QVector<QPolygon *> &polygons  )
+{
+    return false;
+}
+
+
 bool EquirectProjection::geoCoordinates( const int x, const int y,
                                          const ViewportParams *viewport,
                                          qreal& lon, qreal& lat,

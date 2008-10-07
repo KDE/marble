@@ -14,7 +14,12 @@
 #include <QtGui/QPainterPath>
 
 #include "AbstractProjection.h"
+
 #include "GeoDataCoordinates.h"
+#include "GeoDataLineString.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPolygon.h"
+
 #include "global.h"
 #include "ViewportParams.h"
 
@@ -85,38 +90,17 @@ class GeoPainterPrivate
             }
         }
     }
-    
-    void createPolygonsFromVector( QVector<GeoDataCoordinates*> points, 
-                                   QVector<QPolygon *> &polygons, 
-                                   bool isGeoProjected = false )
+
+    void createPolygonsFromLineString( const GeoDataLineString & lineString, 
+                   QVector<QPolygon *> &polygons, 
+                   bool isGeoProjected = false )
     {
-        int x, y;
-        bool previousGlobeHidesPoint;
         AbstractProjection *projection = m_viewport->currentProjection();
 
         if ( isGeoProjected == false ) {
-
             QPolygon  *polygon = new QPolygon;
 
-            Q_FOREACH( GeoDataCoordinates* itPoint, points ) {
-                bool globeHidesPoint;
-                bool isVisible = projection->screenCoordinates( *itPoint, m_viewport, x, y, globeHidesPoint );
-
-                if ( itPoint == points.first() ){
-                    previousGlobeHidesPoint = globeHidesPoint;
-                }
-
-                if ( globeHidesPoint && !previousGlobeHidesPoint ) {
-                    polygons.append( polygon );
-                    polygon = new QPolygon;
-                }
-
-                if ( !globeHidesPoint ) {
-                    polygon->append( QPoint( x, y ) );
-                }
-
-                previousGlobeHidesPoint = globeHidesPoint;
-            }
+            bool isVisible = projection->screenCoordinates( lineString, m_viewport, polygons );
 
             if ( polygon->size() > 1 ){
                 polygons.append( polygon );
@@ -124,8 +108,30 @@ class GeoPainterPrivate
             else {
                 delete polygon;
             }
-        }    
+        }
     }
+
+
+    void createPolygonsFromLinearRing( const GeoDataLinearRing & linearRing, 
+                   QVector<QPolygon *> &polygons, 
+                   bool isGeoProjected = false )
+    {
+        AbstractProjection *projection = m_viewport->currentProjection();
+
+        if ( isGeoProjected == false ) {
+            QPolygon  *polygon = new QPolygon;
+
+            bool isVisible = projection->screenCoordinates( linearRing, m_viewport, polygons );
+
+            if ( polygon->size() > 1 ){
+                polygons.append( polygon );
+            }
+            else {
+                delete polygon;
+            }
+        }
+    }
+
 
     void createAnnotationLayout (  int x, int y, QSize bubbleSize, int bubbleOffsetX, int bubbleOffsetY, int xRnd, int yRnd, QPainterPath& path, QRectF& rect )
     {
@@ -399,11 +405,36 @@ void GeoPainter::drawPolyline ( const GeoDataCoordinates * points, int pointCoun
     qDeleteAll( polygons );
 }
 
-void GeoPainter::drawPolyline ( QVector<GeoDataCoordinates*> points, 
-			       bool isGeoProjected )
+void GeoPainter::drawPolygon ( const GeoDataCoordinates* points,
+                               int pointCount,
+                               Qt::FillRule fillRule, 
+                               bool isGeoProjected )
 {
+    Q_UNUSED( fillRule );
+
     QVector<QPolygon*> polygons;
-    d->createPolygonsFromVector( points, polygons, isGeoProjected );
+    d->createPolygonsFromPoints( points, pointCount, polygons, isGeoProjected );
+
+    foreach( QPolygon* itPolygon, polygons ) {
+        // Using QPainter instead of ClipPainter until some bugs are fixed.
+        QPainter::drawPolygon( *itPolygon );
+    }
+
+    qDeleteAll( polygons );
+}
+
+void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, bool isGeoProjected )
+{
+    // If the object is not visible in the viewport return 
+    if ( ! d->m_viewport->viewLatLonAltBox().contains( lineString.latLonAltBox() ) )
+    {
+        qDebug() << "Polyline doesn't get displayed on the viewport";
+        return;
+    }
+    qDebug() << "Drawing Polyline";
+
+    QVector<QPolygon*> polygons;
+    d->createPolygonsFromLineString( lineString, polygons, isGeoProjected );
 
     foreach( QPolygon* itPolygon, polygons ) {
         // Using QPainter instead of ClipPainter until some bugs are fixed.
@@ -413,14 +444,18 @@ void GeoPainter::drawPolyline ( QVector<GeoDataCoordinates*> points,
     qDeleteAll( polygons );
 }
 
-void GeoPainter::drawPolygon ( QVector<GeoDataCoordinates*> points,
-                               Qt::FillRule fillRule, 
-                               bool isGeoProjected )
+void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRule fillRule, bool isGeoProjected )
 {
-    Q_UNUSED( fillRule );
+    // If the object is not visible in the viewport return 
+    if ( ! d->m_viewport->viewLatLonAltBox().contains( linearRing.latLonAltBox() ) )
+    {
+        qDebug() << "Polylgon doesn't get displayed on the viewport";
+        return;
+    }
+    qDebug() << "Drawing Polygon";
 
     QVector<QPolygon*> polygons;
-    d->createPolygonsFromVector( points, polygons, isGeoProjected );
+    d->createPolygonsFromLinearRing( linearRing, polygons, isGeoProjected );
 
     foreach( QPolygon* itPolygon, polygons ) {
         // Using QPainter instead of ClipPainter until some bugs are fixed.
@@ -428,6 +463,10 @@ void GeoPainter::drawPolygon ( QVector<GeoDataCoordinates*> points,
     }
 
     qDeleteAll( polygons );
+}
+
+void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fillRule, bool isGeoProjected )
+{
 }
 
 void GeoPainter::drawRect ( const GeoDataCoordinates & centerPoint, int width, int height, bool isGeoProjected )

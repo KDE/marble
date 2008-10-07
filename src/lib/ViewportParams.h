@@ -72,8 +72,8 @@ class MARBLE_EXPORT ViewportParams
     void setHeight(int newHeight);
     void setSize(QSize newSize);
 
-    BoundingBox boundingBox() const;
-    void setBoundingBox( const BoundingBox & );
+    BoundingBox boundingBox() const; // DEPRECATED: Use viewLatLonAltBox() instead!
+    void setBoundingBox( const BoundingBox & ); // DEPRECATED: Determined by the Projection
 
     // Other functions
     void centerCoordinates( qreal &centerLon, qreal &centerLat ) const;
