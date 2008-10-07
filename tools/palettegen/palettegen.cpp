@@ -55,13 +55,12 @@ int main(int argc, char *argv[])
 
     QStringList  filelist;
     filelist << "../../data/seacolors.leg" << "../../data/landcolors.leg";
-    QString  filename;
 
     QPainter  painter(&gradimg);
     painter.setPen(Qt::NoPen);
 
     for ( int j = 0; j < 16; ++j ) {
-        foreach ( filename, filelist ) {
+        foreach ( const QString& filename, filelist ) {
 		
             QLinearGradient  gradient( 0, 0, 256, 0 );
 

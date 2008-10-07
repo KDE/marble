@@ -40,7 +40,6 @@ bool SVGXmlHandler::startElement(const QString& nspace,
         stringlist << coordinates.mid( 1 ).split( 'L' );
         // The last element is the first element
         //		stringlist.removeLast();
-        QString  str;
         bool     firstheader = true;
         QFile    file( m_targetfile );
 
@@ -51,7 +50,7 @@ bool SVGXmlHandler::startElement(const QString& nspace,
 
         int  count = 0;
         qDebug() << "Starting to write path" << atts.value( "id" );
-        foreach ( str, stringlist ) {
+        foreach ( const QString& str, stringlist ) {
             // qDebug()<<str;
             float  x;
             float  y;
