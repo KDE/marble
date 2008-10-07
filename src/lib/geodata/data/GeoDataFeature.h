@@ -123,17 +123,17 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /// Return the phone number of the feature
     QString phoneNumber() const;
     /// Set the phone number of this feature to @p value.
-    void setPhoneNumber( const QString &value);
+    void setPhoneNumber( const QString &value );
 
     /// Return the text description of the feature.
     QString description() const;
     /// Set the description of this feature to @p value.
-    void setDescription( const QString &value);
+    void setDescription( const QString &value );
 
     /// Return the styleUrl of the feature.
     QString styleUrl() const;
     /// Set the styleUrl of this feature to @p value.
-    void setStyleUrl( const QString &value);
+    void setStyleUrl( const QString &value );
     
     /// Return whether this feature is visible or not
     bool isVisible() const;
