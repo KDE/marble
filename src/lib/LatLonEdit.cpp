@@ -33,112 +33,144 @@
 
 using namespace Marble;
 
-LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension ) : QWidget( parent ),
-	m_layout(0),
-	m_degreesSpin(0),
-	m_minutesSpin(0),
-	m_secondsSpin(0),
-	m_degreesLabel(0),
-	m_minutesLabel(0),
-	m_secondsLabel(0),
-	m_comboBox(0)
+namespace Marble {
+
+class LatLonEditPrivate
 {
-	m_value = 0;
-	m_dimension = static_cast<int>( dimension );
+public:
+	QHBoxLayout *m_layout;
 
-	m_layout = new QHBoxLayout;
-	setLayout( m_layout );
+	int m_dimension;
 
-	m_degreesSpin = new QSpinBox;
-	m_comboBox = new QComboBox;
-	//in m_combobox, the +ve is 0 and the -ve is 1 in the index
-	if( m_dimension == Marble::Longitude ) {
-		m_degreesSpin->setMinimum( -180 );
-		m_degreesSpin->setMaximum( 180 );
-		m_comboBox->addItem( tr("E", "East, the direction" ) );
-		m_comboBox->addItem( tr("W", "West, the direction" ) );
-	} else if( m_dimension == Marble::Latitude ) {
-		m_degreesSpin->setMinimum( -90 );
-		m_degreesSpin->setMaximum( 90 );
-		m_comboBox->addItem( tr("N", "North, the direction" ) );
-		m_comboBox->addItem( tr("S", "South, the direction" ) );
+	QComboBox *m_comboBox;
+
+	QSpinBox *m_degreesSpin;
+	QSpinBox *m_minutesSpin;
+	QSpinBox *m_secondsSpin;
+
+	QLabel *m_degreesLabel;
+	QLabel *m_minutesLabel;
+	QLabel *m_secondsLabel;
+
+	qreal m_value;
+
+	LatLonEditPrivate() :
+		m_layout(0),
+		m_comboBox(0),
+		m_degreesSpin(0),
+		m_minutesSpin(0),
+		m_secondsSpin(0),
+		m_degreesLabel(0),
+		m_minutesLabel(0),
+		m_secondsLabel(0) { }
+};
+
+}
+
+LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension ) : QWidget( parent ),
+	d(new LatLonEditPrivate)
+{
+	d->m_value = 0;
+	d->m_dimension = static_cast<int>( dimension );
+
+	d->m_layout = new QHBoxLayout;
+	setLayout( d->m_layout );
+
+	d->m_degreesSpin = new QSpinBox;
+	d->m_comboBox = new QComboBox;
+	//in d->m_combobox, the +ve is 0 and the -ve is 1 in the index
+	if( d->m_dimension == Marble::Longitude ) {
+		d->m_degreesSpin->setMinimum( -180 );
+		d->m_degreesSpin->setMaximum( 180 );
+		d->m_comboBox->addItem( tr("E", "East, the direction" ) );
+		d->m_comboBox->addItem( tr("W", "West, the direction" ) );
+	} else if( d->m_dimension == Marble::Latitude ) {
+		d->m_degreesSpin->setMinimum( -90 );
+		d->m_degreesSpin->setMaximum( 90 );
+		d->m_comboBox->addItem( tr("N", "North, the direction" ) );
+		d->m_comboBox->addItem( tr("S", "South, the direction" ) );
 	} else {
 		qDebug() << "Unrecognized dimension";
 	}
-	m_degreesSpin->show();
+	d->m_degreesSpin->show();
 	//it's grayed out when it's 0, and that is the default
-	m_comboBox->setEnabled(false);
-	m_comboBox->show();
+	d->m_comboBox->setEnabled(false);
+	d->m_comboBox->show();
 
-	m_minutesSpin = new QSpinBox;
+	d->m_minutesSpin = new QSpinBox;
 	//minimum value is -1 so we can
 	//reduce the next one over
-	m_minutesSpin->setMinimum( -1 );
-	m_minutesSpin->setMaximum( 60 );
-	m_minutesSpin->show();
+	d->m_minutesSpin->setMinimum( -1 );
+	d->m_minutesSpin->setMaximum( 60 );
+	d->m_minutesSpin->show();
 
-	m_secondsSpin = new QSpinBox;
-	m_secondsSpin->setMinimum( -1 );
-	m_secondsSpin->setMaximum( 60 );
-	m_secondsSpin->show();
+	d->m_secondsSpin = new QSpinBox;
+	d->m_secondsSpin->setMinimum( -1 );
+	d->m_secondsSpin->setMaximum( 60 );
+	d->m_secondsSpin->show();
 
-	m_degreesLabel = new QLabel( QString::fromUtf8("\u00b0") );
-	m_minutesLabel = new QLabel( QString("\'") );
-	m_secondsLabel = new QLabel( QString("\"") );
+	d->m_degreesLabel = new QLabel( QString::fromUtf8("\u00b0") );
+	d->m_minutesLabel = new QLabel( QString("\'") );
+	d->m_secondsLabel = new QLabel( QString("\"") );
 
-	m_layout->addWidget( m_degreesSpin );
-	m_layout->addWidget( m_degreesLabel );
-	m_layout->addWidget( m_minutesSpin );
-	m_layout->addWidget( m_minutesLabel );
-	m_layout->addWidget( m_secondsSpin );
-	m_layout->addWidget( m_secondsLabel );
-	m_layout->addWidget( m_secondsLabel );
-	m_layout->addWidget( m_comboBox );
+	d->m_layout->addWidget( d->m_degreesSpin );
+	d->m_layout->addWidget( d->m_degreesLabel );
+	d->m_layout->addWidget( d->m_minutesSpin );
+	d->m_layout->addWidget( d->m_minutesLabel );
+	d->m_layout->addWidget( d->m_secondsSpin );
+	d->m_layout->addWidget( d->m_secondsLabel );
+	d->m_layout->addWidget( d->m_secondsLabel );
+	d->m_layout->addWidget( d->m_comboBox );
 
-	connect( m_secondsSpin, SIGNAL( valueChanged( int ) ),
+	connect( d->m_secondsSpin, SIGNAL( valueChanged( int ) ),
 	         this, SLOT( secondsOverflow( ) ) );
 
-	connect( m_minutesSpin, SIGNAL( valueChanged( int ) ),
+	connect( d->m_minutesSpin, SIGNAL( valueChanged( int ) ),
 	         this, SLOT( minutesOverflow( ) ) );
 	
-	connect( m_degreesSpin, SIGNAL( valueChanged( int ) ),
+	connect( d->m_degreesSpin, SIGNAL( valueChanged( int ) ),
 	         this, SLOT( recalculate( ) ) );
 
-	connect( m_comboBox, SIGNAL( currentIndexChanged( int ) ),
+	connect( d->m_comboBox, SIGNAL( currentIndexChanged( int ) ),
 	         this, SLOT( comboBoxChanged( int ) ) );
+}
+
+LatLonEdit::~LatLonEdit()
+{
+	delete d;
 }
 
 qreal LatLonEdit::value()
 {
-	return m_value;
+	return d->m_value;
 }
 
 void LatLonEdit::checkComboBox()
 {
-	if( m_value < 0 ) {
+	if( d->m_value < 0 ) {
 		//in case it was disabled by being set to 0
-		m_comboBox->setEnabled(true);
-		if( m_comboBox->currentIndex() == 0 ) {
-			m_comboBox->setCurrentIndex( 1 );
+		d->m_comboBox->setEnabled(true);
+		if( d->m_comboBox->currentIndex() == 0 ) {
+			d->m_comboBox->setCurrentIndex( 1 );
 		} 
-	} else if( m_value > 0 ) {
-		m_comboBox->setEnabled(true);
-		if( m_comboBox->currentIndex() == 1 ) {
-			m_comboBox->setCurrentIndex( 0 );
+	} else if( d->m_value > 0 ) {
+		d->m_comboBox->setEnabled(true);
+		if( d->m_comboBox->currentIndex() == 1 ) {
+			d->m_comboBox->setCurrentIndex( 0 );
 		} 
 	} else {
-		//m_value is zero, so long/lat do not apply
-		m_comboBox->setEnabled(false);
+		//d->m_value is zero, so long/lat do not apply
+		d->m_comboBox->setEnabled(false);
 	}
 }
 
 void LatLonEdit::comboBoxChanged( int index )
 {
-	if( index == 0 && m_value < 0 ) {
-		m_value -= m_value * 2;
+	if( index == 0 && d->m_value < 0 ) {
+		d->m_value -= d->m_value * 2;
 		reverseRecalculate();
-	} else if( index == 1 && m_value > 0 ) {
-		m_value -= m_value * 2;
+	} else if( index == 1 && d->m_value > 0 ) {
+		d->m_value -= d->m_value * 2;
 		reverseRecalculate();
 	}
 }
@@ -146,38 +178,38 @@ void LatLonEdit::comboBoxChanged( int index )
 void LatLonEdit::setDimension( Marble::Dimension dimension )
 {
 	//don't do anything
-	if( m_dimension == dimension ) {
+	if( d->m_dimension == dimension ) {
 		return;
 	}
 
-	//in m_combobox, the +ve is 0 and the -ve is 1 in the index
-	if( m_dimension == Marble::Longitude ) {
-		m_comboBox->removeItem( 0 );
-		m_comboBox->removeItem( 1 );
+	//in d->m_combobox, the +ve is 0 and the -ve is 1 in the index
+	if( d->m_dimension == Marble::Longitude ) {
+		d->m_comboBox->removeItem( 0 );
+		d->m_comboBox->removeItem( 1 );
 
-		m_comboBox->addItem( tr("N", "North, the direction" ) );
-		m_comboBox->addItem( tr("S", "South, the direction" ) );
-	} else if( m_dimension == Marble::Latitude ) {
-		m_comboBox->removeItem( 0 );
-		m_comboBox->removeItem( 1 );
+		d->m_comboBox->addItem( tr("N", "North, the direction" ) );
+		d->m_comboBox->addItem( tr("S", "South, the direction" ) );
+	} else if( d->m_dimension == Marble::Latitude ) {
+		d->m_comboBox->removeItem( 0 );
+		d->m_comboBox->removeItem( 1 );
 
-		m_comboBox->addItem( tr("E", "East, the direction" ) );
-		m_comboBox->addItem( tr("W", "West, the direction" ) );
+		d->m_comboBox->addItem( tr("E", "East, the direction" ) );
+		d->m_comboBox->addItem( tr("W", "West, the direction" ) );
 	} 
-	m_dimension = dimension;
+	d->m_dimension = dimension;
 
 }
 
 void LatLonEdit::secondsOverflow()
 {
-	if( m_secondsSpin->value() == 60 ) {
-		m_secondsSpin->setValue( 0 );
-		m_minutesSpin->setValue( m_minutesSpin->value() + 1 );
+	if( d->m_secondsSpin->value() == 60 ) {
+		d->m_secondsSpin->setValue( 0 );
+		d->m_minutesSpin->setValue( d->m_minutesSpin->value() + 1 );
 		recalculate();
 		return;
-	} else if( m_secondsSpin->value() == -1 ) {
-		m_secondsSpin->setValue( 59 );
-		m_minutesSpin->setValue( m_minutesSpin->value() - 1 );
+	} else if( d->m_secondsSpin->value() == -1 ) {
+		d->m_secondsSpin->setValue( 59 );
+		d->m_minutesSpin->setValue( d->m_minutesSpin->value() - 1 );
 		recalculate();
 		return;
 	}
@@ -186,14 +218,14 @@ void LatLonEdit::secondsOverflow()
 	
 void LatLonEdit::minutesOverflow()
 {
-	if( m_minutesSpin->value() == 60 ) {
-		m_minutesSpin->setValue( 0 );
-		m_degreesSpin->setValue( m_degreesSpin->value() + 1 );
+	if( d->m_minutesSpin->value() == 60 ) {
+		d->m_minutesSpin->setValue( 0 );
+		d->m_degreesSpin->setValue( d->m_degreesSpin->value() + 1 );
 		recalculate();
 		return;
-	} else if( m_minutesSpin->value() == -1 ) {
-		m_minutesSpin->setValue( 59 );
-		m_degreesSpin->setValue( m_degreesSpin->value() - 1 );
+	} else if( d->m_minutesSpin->value() == -1 ) {
+		d->m_minutesSpin->setValue( 59 );
+		d->m_degreesSpin->setValue( d->m_degreesSpin->value() - 1 );
 		recalculate();
 		return;
 	}
@@ -202,17 +234,17 @@ void LatLonEdit::minutesOverflow()
 
 void LatLonEdit::setValue( qreal newvalue )
 {
-	m_value = newvalue;
+	d->m_value = newvalue;
 	reverseRecalculate();
-	//qDebug() << "valueChanged: now " << m_value;
-	emit valueChanged( m_value );
+	//qDebug() << "valueChanged: now " << d->m_value;
+	emit valueChanged( d->m_value );
 }
 
 void LatLonEdit::recalculate()
 {
-	qreal newvalue = m_degreesSpin->value();
-	qreal minsfract = m_minutesSpin->value();
-	qreal secsfract = m_secondsSpin->value();
+	qreal newvalue = d->m_degreesSpin->value();
+	qreal minsfract = d->m_minutesSpin->value();
+	qreal secsfract = d->m_secondsSpin->value();
 
 	minsfract = minsfract / 60;
 	secsfract = secsfract / 3600;
@@ -225,7 +257,7 @@ void LatLonEdit::recalculate()
 
 	//we need two because if the degrees is neg,
 	//the mins/secs *subtract* from the value
-	if( m_degreesSpin->value() >= 0 ) {
+	if( d->m_degreesSpin->value() >= 0 ) {
 		newvalue += minsfract;
 		newvalue += secsfract;
 	} else {
@@ -233,34 +265,34 @@ void LatLonEdit::recalculate()
 		newvalue -= secsfract;
 	}
 
-	m_value = newvalue;
+	d->m_value = newvalue;
 
 	//you can't have 180*59'59" , only 180.
 	//but lat. & lon. have different maximums, so we check
-	if( m_degreesSpin->value() == m_degreesSpin->maximum() || 
-	    m_degreesSpin->value() == m_degreesSpin->minimum() ) {
-		m_minutesSpin->setValue( 0 );
-		m_secondsSpin->setValue( 0 );
+	if( d->m_degreesSpin->value() == d->m_degreesSpin->maximum() || 
+	    d->m_degreesSpin->value() == d->m_degreesSpin->minimum() ) {
+		d->m_minutesSpin->setValue( 0 );
+		d->m_secondsSpin->setValue( 0 );
 	} 
 
-	if( m_degreesSpin->value() < m_degreesSpin->minimum() ) {
-		m_degreesSpin->setValue( m_degreesSpin->minimum() );
-		m_minutesSpin->setValue( 0 );
-		m_secondsSpin->setValue( 0 );
+	if( d->m_degreesSpin->value() < d->m_degreesSpin->minimum() ) {
+		d->m_degreesSpin->setValue( d->m_degreesSpin->minimum() );
+		d->m_minutesSpin->setValue( 0 );
+		d->m_secondsSpin->setValue( 0 );
 	} 
 
-	if( m_degreesSpin->value() > m_degreesSpin->maximum() ) {
-		m_degreesSpin->setValue( m_degreesSpin->maximum() );
-		m_minutesSpin->setValue( 0 );
-		m_secondsSpin->setValue( 0 );
+	if( d->m_degreesSpin->value() > d->m_degreesSpin->maximum() ) {
+		d->m_degreesSpin->setValue( d->m_degreesSpin->maximum() );
+		d->m_minutesSpin->setValue( 0 );
+		d->m_secondsSpin->setValue( 0 );
 	} 
-	//qDebug() << "valueChanged: now " << m_value;
+	//qDebug() << "valueChanged: now " << d->m_value;
 
 	checkComboBox();
 
 	//put this last so combobox &c will be correct
 	//for stuff that needs it
-	emit valueChanged( m_value );
+	emit valueChanged( d->m_value );
 			
 }
 
@@ -272,20 +304,20 @@ void LatLonEdit::reverseRecalculate()
 	int secondsvalue = 0;
 
 	//degreesvalue is the whole degree part
-	if( m_value >= 0 ) {
-		degreesvalue = floor( m_value );
+	if( d->m_value >= 0 ) {
+		degreesvalue = floor( d->m_value );
 	} else {
-		degreesvalue = ceil( m_value );
+		degreesvalue = ceil( d->m_value );
 	}
 
 	//minutesremainder is the fraction of a degree that
 	//is left over
-	qreal minutesremainder = m_value - degreesvalue;
+	qreal minutesremainder = d->m_value - degreesvalue;
 	//multipy the fraction of a degree by 60 to
 	//turn it into minutes
 	minutesremainder = minutesremainder * 60;
 	//minutesvalue is the whole minutes part
-	if( m_value >= 0 ) {
+	if( d->m_value >= 0 ) {
 		minutesvalue = floor( minutesremainder );
 	} else {
 		minutesvalue = ceil( minutesremainder );
@@ -300,9 +332,9 @@ void LatLonEdit::reverseRecalculate()
 
 	//now we have all the values, we 
 	//put them on the boxes.
-	m_degreesSpin->setValue( degreesvalue );
-	m_minutesSpin->setValue( minutesvalue );
-	m_secondsSpin->setValue( secondsvalue );
+	d->m_degreesSpin->setValue( degreesvalue );
+	d->m_minutesSpin->setValue( minutesvalue );
+	d->m_secondsSpin->setValue( secondsvalue );
 
 	checkComboBox();
 }

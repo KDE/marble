@@ -36,6 +36,8 @@ class QLabel;
 namespace Marble
 {
 
+class LatLonEditPrivate;
+
 class MARBLE_EXPORT /* QDESIGNER_WIDGET_EXPORT*/ LatLonEdit : public QWidget
 {
 	Q_OBJECT
@@ -43,6 +45,7 @@ class MARBLE_EXPORT /* QDESIGNER_WIDGET_EXPORT*/ LatLonEdit : public QWidget
 	//Q_PROPERTY( int m_dimension READ dimension WRITE setDimension )
 public:
 	explicit LatLonEdit(QWidget *parent = 0, Marble::Dimension dimension = Marble::Longitude );
+	~LatLonEdit();
 	qreal value();
 	Marble::Dimension dimension();
 public Q_SLOTS:
@@ -63,21 +66,7 @@ private Q_SLOTS:
 	void secondsOverflow();
 	void minutesOverflow();
 private:
-	QHBoxLayout *m_layout;
-
-	int m_dimension;
-
-	QComboBox *m_comboBox;
-
-	QSpinBox *m_degreesSpin;
-	QSpinBox *m_minutesSpin;
-	QSpinBox *m_secondsSpin;
-
-	QLabel *m_degreesLabel;
-	QLabel *m_minutesLabel;
-	QLabel *m_secondsLabel;
-
-	qreal m_value;
+	LatLonEditPrivate * const d;
 };
 
 }
