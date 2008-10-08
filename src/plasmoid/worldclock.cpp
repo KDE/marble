@@ -45,10 +45,13 @@
 #include "SunLocator.h"
 #include "ViewParams.h"
 #include "GeoPainter.h"
+#include "LatLonEdit.h"
 
 //blah compile errors
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
+
+namespace Marble {
 
 WorldClock::WorldClock(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),
@@ -136,6 +139,9 @@ void WorldClock::init()
     m_map->setShowOtherPlaces( false );
 
     foreach( MarbleAbstractFloatItem* item, m_map->model()->floatItems() ) {
+        item->setVisible( false );
+    }
+    foreach( MarbleRenderPlugin* item, m_map->model()->renderPlugins() ) {
         item->setVisible( false );
     }
 
@@ -542,5 +548,7 @@ void WorldClock::configAccepted()
     cg.writeEntry("showfull", static_cast<int>(ui.showFullCheckBox->checkState()));
     cg.writeEntry("showdate", static_cast<int>(ui.showDateCheckBox->checkState()));
 }
+
+} //ns Marble
 
 #include "worldclock.moc"

@@ -23,9 +23,6 @@
 #include "ui_worldclockConfig.h"
 
 
-class MarbleMap;
-class SunLocator;
-
 class QGraphicsSceneHoverEvent;
 class QStyleOptionGraphicsItem;
 class QFont;
@@ -36,6 +33,11 @@ class QDateTime;
 class QPointF;
 
 class KTimeZone;
+
+namespace Marble {
+
+class MarbleMap;
+class SunLocator;
 
 class WorldClock : public Plasma::Applet
 {
@@ -108,7 +110,9 @@ class WorldClock : public Plasma::Applet
 	Ui::worldclockConfig ui;
 };
  
-K_EXPORT_PLASMA_APPLET(worldclock, WorldClock)
+} //ns Marble
+
+K_EXPORT_PLASMA_APPLET(worldclock, Marble::WorldClock)
 #endif
 
 
