@@ -209,7 +209,7 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 
     painter->drawAnnotation (  sotm, "State of the Map,\n  12-13 July 2008,\n OSM conference" );
 
-    GeoDataCoordinates akademy2008(4.5, 51.1, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates akademy2008(4.5, 51.068, 0.0, GeoDataCoordinates::Degree );
 
     painter->setPen( QColor( 99, 99, 0 ) );
 
