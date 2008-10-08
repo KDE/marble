@@ -34,6 +34,8 @@
 namespace Marble
 {
 
+class SunLocatorPrivate;
+
 class MARBLE_EXPORT SunLocator : public QObject
 {
     Q_OBJECT
@@ -74,6 +76,8 @@ class MARBLE_EXPORT SunLocator : public QObject
 	
  private:
     void updatePosition();
+
+    SunLocatorPrivate * const d;
 
  protected:
     Q_DISABLE_COPY( SunLocator )

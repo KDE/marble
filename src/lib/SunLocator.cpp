@@ -29,8 +29,15 @@ const int J2000 = 2451545; // epoch J2000 = 1 January 2000, noon Terrestrial Tim
 const qreal twilightZone = 0.1; // this equals 18 deg astronomical twilight.
 const int update_interval = 60000; // emit updateSun() every update_interval ms
 
+namespace Marble {
+
+class SunLocatorPrivate { };
+
+}
+
 SunLocator::SunLocator(ExtDateTime *dateTime)
   : QObject(),
+    d( new SunLocatorPrivate ),
     m_datetime( dateTime ),
     m_show( false ),
     m_citylights( false ),
@@ -40,6 +47,7 @@ SunLocator::SunLocator(ExtDateTime *dateTime)
 
 SunLocator::~SunLocator() {
 //     delete m_datetime;
+    delete d;
 }
 
 void SunLocator::updatePosition()
