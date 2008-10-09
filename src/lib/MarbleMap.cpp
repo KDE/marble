@@ -33,7 +33,6 @@
 
 // Marble
 #include "CrossHairFloatItem.h"
-#include "MapScaleFloatItem.h"
 
 #include "AbstractProjection.h"
 #include "AbstractScanlineTextureMapper.h"
