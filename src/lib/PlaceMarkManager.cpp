@@ -97,7 +97,7 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
     QString defaultsrcname;
     QString defaulthomecache;
 
-    if ( !filepath.contains( "\\" && !filepath.contains( '/' ) ) ) {
+    if ( !filepath.contains( "\\" ) && !filepath.contains( '/' ) ) {
         defaultcachename = MarbleDirs::path( "placemarks/" + filepath + ".cache" );
         defaultsrcname   = MarbleDirs::path( "placemarks/" + filepath + ".kml");
         defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + filepath + ".cache";

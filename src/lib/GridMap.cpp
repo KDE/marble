@@ -137,7 +137,7 @@ void GridMap::createCircles( const int lonNum, const int latNum,
         createCircle( +PIHALF, Longitude, precision, viewport );	
 
         for ( int i = 1; i < lonNum; ++i ) {
-            qreal cutOff = PIHALF / (qreal)(latNum);
+            qreal cutOff = latNum == 0 ? 0 : PIHALF / (qreal)(latNum);
             createCircle( +i * PIHALF / lonNum, Longitude, 
                           precision, viewport, cutOff );
             createCircle( -i * PIHALF / lonNum, Longitude,
