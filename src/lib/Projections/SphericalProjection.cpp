@@ -186,10 +186,11 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
     GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
 
     bool globeHidesPoint;
+    bool isVisible = false;
 
     for ( itPoint = lineString.constBegin(); itPoint != itEnd; ++itPoint )
     {
-        bool isVisible = screenCoordinates( **itPoint, viewport, x, y, globeHidesPoint );
+        isVisible |= screenCoordinates( **itPoint, viewport, x, y, globeHidesPoint );
 
         if ( itPoint == lineString.constBegin() ){
             previousGlobeHidesPoint = globeHidesPoint;
@@ -214,6 +215,8 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
     else {
         delete polygon;
     }
+
+    return isVisible;
 }
 
 bool SphericalProjection::screenCoordinates( const GeoDataLinearRing &linearRing, 
@@ -229,10 +232,11 @@ bool SphericalProjection::screenCoordinates( const GeoDataLinearRing &linearRing
     GeoDataLinearRing::ConstIterator itEnd = linearRing.constEnd();
 
     bool globeHidesPoint;
+    bool isVisible = false;
 
     for ( itPoint = linearRing.constBegin(); itPoint != itEnd; ++itPoint )
     {
-        bool isVisible = screenCoordinates( **itPoint, viewport, x, y, globeHidesPoint );
+        isVisible |= screenCoordinates( **itPoint, viewport, x, y, globeHidesPoint );
 
         if ( itPoint == linearRing.constBegin() ){
             previousGlobeHidesPoint = globeHidesPoint;
@@ -257,6 +261,8 @@ bool SphericalProjection::screenCoordinates( const GeoDataLinearRing &linearRing
     else {
         delete polygon;
     }
+
+    return isVisible;
 }
 
 
