@@ -23,6 +23,10 @@ add_subdirectory( lib )
 add_subdirectory( plugins )
 add_subdirectory( plasmoid )
 
+if( PLASMA_FOUND )
+    add_subdirectory( plasmoid )
+endif( PLASMA_FOUND )
+
 if(APPLE)
   add_subdirectory( mac )
 endif(APPLE)
