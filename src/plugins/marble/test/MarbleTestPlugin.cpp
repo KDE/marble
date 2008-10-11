@@ -17,6 +17,7 @@
 #include "GeoPainter.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
+#include "GeoDataLinearRing.h"
 
 namespace Marble
 {
@@ -186,22 +187,24 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     };
 
     painter->drawPolyline( ring, 37 ); 
-
+*/
     GeoDataCoordinates t1(0.0, 90.0, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates t2(-45.0, 60.0, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates t3(-135.0, 60.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t2(-45.0, 45.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t3(-135.0, 45.0, 0.0, GeoDataCoordinates::Degree );
 
-    static const GeoDataCoordinates triangle[3] = {
-        t1, t2, t3
-    };
+    GeoDataLinearRing triangle;
+
+    triangle.append(&t1);
+    triangle.append(&t2);
+    triangle.append(&t3);
 
     painter->setPen( QColor( 198, 99, 99, 255 ) );
     brush.setColor( QColor( 198, 99, 99, 180 ) );
     brush.setStyle( Qt::FDiagPattern );
     painter->setBrush( brush );
 
-    painter->drawPolygon( triangle, 3 ); 
-*/
+    painter->drawPolygon( triangle, Qt::OddEvenFill, true ); 
+
     GeoDataCoordinates sotm(-8.6, 52.66, 0.0, GeoDataCoordinates::Degree );
 
     painter->setPen( QColor( 198, 99, 99, 255 ) );

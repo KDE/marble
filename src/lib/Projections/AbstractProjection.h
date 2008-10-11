@@ -180,6 +180,10 @@ class AbstractProjection
                              qreal &westLon, qreal &eastLon,
                              qreal &otherWestLon, qreal &otherEastLon,
                              qreal &northLat, qreal &southLat );
+
+    QPolygonF polygonFromCoords( const GeoDataCoordinates &previousCoords, 
+                                 const GeoDataCoordinates &currentCoords, 
+                                 int count, const ViewportParams *viewport ); 
 };
 
 }

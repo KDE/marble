@@ -8,6 +8,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
+#include <QtCore/QDebug>
 
 // Local
 #include "AbstractProjection.h"
@@ -155,4 +156,37 @@ GeoDataLinearRing AbstractProjection::rectOutline( const QRect& screenRect,
                                  const ViewportParams *viewport )
 {
     return GeoDataLinearRing();
+}
+
+QPolygonF AbstractProjection::polygonFromCoords( const GeoDataCoordinates &previousCoords, 
+                                                 const GeoDataCoordinates &currentCoords,
+                                                 int count,
+                                                 const ViewportParams *viewport )
+{
+    Quaternion  itpos;
+    QPolygonF   path;
+
+    if ( count > 50 ) {
+        qDebug() << "Count of" << count << "exceeded maximum count.";
+        count = 50;
+    }
+
+    qDebug() << "Creating SLERP nodes:" << count;
+
+    for ( int i = 0; i < count; ++i ) {
+        qreal  t = (qreal)(i + 1) / (qreal)( count + 1 ) ;
+
+        qreal  lon = 0.0;
+        qreal  lat = 0.0;
+        int     x = 0;
+        int     y = 0;
+
+        // Let itpos be a quaternion that is between prevqpos and qpos.
+        itpos.slerp( previousCoords.quaternion(), currentCoords.quaternion(), t );
+        itpos.getSpherical( lon, lat );
+        screenCoordinates( lon, lat, viewport, x, y, originalCoordinates );
+
+        path << QPointF( x, y );
+    }
+    return path; 
 }

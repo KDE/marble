@@ -50,16 +50,7 @@ class GeoPainterPrivate
     {
         AbstractProjection *projection = m_viewport->currentProjection();
 
-        QPolygonF  *polygon = new QPolygonF;
-
-        bool isVisible = projection->screenCoordinates( lineString, m_viewport, polygons, isGeoProjected );
-
-        if ( polygon->size() > 1 ){
-            polygons.append( polygon );
-        }
-        else {
-            delete polygon;
-        }
+        projection->screenCoordinates( lineString, m_viewport, polygons, isGeoProjected );
     }
 
 
@@ -68,17 +59,8 @@ class GeoPainterPrivate
                    bool isGeoProjected = false )
     {
         AbstractProjection *projection = m_viewport->currentProjection();
-
-        QPolygonF  *polygon = new QPolygonF;
-
-        bool isVisible = projection->screenCoordinates( linearRing, m_viewport, polygons, isGeoProjected );
-
-        if ( polygon->size() > 1 ){
-            polygons.append( polygon );
-        }
-        else {
-            delete polygon;
-        }
+        qDebug() << "SIZE" << linearRing.size();
+        projection->screenCoordinates( linearRing, m_viewport, polygons, isGeoProjected );
     }
 
 
@@ -366,12 +348,14 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, bool isGeo
 
 void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRule fillRule, bool isGeoProjected )
 {
+/*
     // If the object is not visible in the viewport return 
     if ( ! d->m_viewport->viewLatLonAltBox().contains( linearRing.latLonAltBox() ) )
     {
         qDebug() << "LinearRing doesn't get displayed on the viewport";
         return;
     }
+*/
     qDebug() << "Drawing LinearRing";
 
     QVector<QPolygonF*> polygons;
@@ -379,6 +363,7 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRul
 
     foreach( QPolygonF* itPolygon, polygons ) {
         // Using QPainter instead of ClipPainter until some bugs are fixed.
+        qDebug() << "Polygons:" << polygons.count() << " : " << itPolygon->count();
         QPainter::drawPolygon( *itPolygon );
     }
 
@@ -390,7 +375,7 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fill
     // If the object is not visible in the viewport return 
     if ( ! d->m_viewport->viewLatLonAltBox().contains( polygon.outerBoundary().latLonAltBox() ) )
     {
-        qDebug() << "Polylgon doesn't get displayed on the viewport";
+        qDebug() << "Polygon doesn't get displayed on the viewport";
         return;
     }
     qDebug() << "Drawing Polygon";
