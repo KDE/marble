@@ -28,17 +28,16 @@ namespace Marble
 class GeoDataPolygonPrivate;
 
 /**
- * @short A class that defines a contiguous set of line segments.
+ * @short A class that defines a closed, contiguous set of line segments.
+ *        In addition to a LineString the Polygon can contain "holes"
  *
- * Also known as: non-closed Polyline
+ * Also known as: Polygon
  *
  * GeoDataPolygon consists of GeoDataCoordinates connected through line 
  * segments.
  * For convenience and performance we've added special methods 
  * to calculate the smallest GeoDataLatLonAltBox that contains the
  * GeoDataPolygon.
- * This class will at some point replace GeoPolygon which is
- * currently used for a very similar purpose.
  */
 
 class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {

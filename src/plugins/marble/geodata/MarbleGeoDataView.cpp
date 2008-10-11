@@ -177,7 +177,7 @@ bool MarbleGeoDataView::renderGeoDataGeometry( GeoDataGeometry *object, QString 
     if( object->geometryId() == GeoDataPolygonId ) {
         setBrushStyle( mapped );
         setPenStyle( mapped );
-        m_painter->drawPolygon( dynamic_cast<GeoDataPolygon*>( object )->outerBoundary() );
+        m_painter->drawPolygon( *dynamic_cast<GeoDataPolygon*>( object ) );
     }
     if( object->geometryId() == GeoDataLinearRingId ) {
         m_painter->setBrush( QColor( 0, 0, 0, 0 ) );

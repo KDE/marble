@@ -143,7 +143,8 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
         qreal  earthCenteredY = pixelAltitude * qpos.v[Q_Y];
         qreal  radius         = viewport->radius();
 
-        // Don't draw high placemarks (e.g. satellites) that aren't visible.
+        // Don't draw high placemarks (e.g. satellites) that aren't visible, 
+        // because they are "behind" the earth
         if ( qpos.v[Q_Z] < 0
              && ( ( earthCenteredX * earthCenteredX
                     + earthCenteredY * earthCenteredY )
@@ -175,38 +176,68 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
 
 bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygon *> &polygons  )
+                                    QVector<QPolygonF *> &polygons, 
+                                    bool isGeoProjected )
 {
     int x, y;
-    bool previousGlobeHidesPoint;
+    bool globeHidesPoint;
 
-    QPolygon  *polygon = new QPolygon;
+    int previousX, previousY;
+    bool previousGlobeHidesPoint;
+    bool previousIsVisible;
+
+    QPolygonF  *polygon = new QPolygonF;
     
     GeoDataLineString::ConstIterator itPoint;
     GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
 
-    bool globeHidesPoint;
     bool isVisible = false;
 
     for ( itPoint = lineString.constBegin(); itPoint != itEnd; ++itPoint )
     {
         isVisible |= screenCoordinates( **itPoint, viewport, x, y, globeHidesPoint );
 
-        if ( itPoint == lineString.constBegin() ){
+        // Initializing "previous" variables
+        if ( itPoint == lineString.constBegin() ) {
             previousGlobeHidesPoint = globeHidesPoint;
+            previousIsVisible = isVisible;
+            previousX = x;
+            previousY = y;
+        }
+
+        // TODO: on flat maps we need to take the date line into account right here.
+
+        // Adding interpolated nodes if the current or previous point is visible
+        if ( isVisible || previousIsVisible ) {
+
+            if ( globeHidesPoint || previousGlobeHidesPoint ) {
+                // Add interpolated "horizon" nodes 
+
+                // Assign the first or last horizon point to the current or
+                // previous point, so that we still get correct results for 
+                // the case where we need to geoproject the line segment.
+            }
+            if ( isGeoProjected ) {
+                // let the line segment follow the spherical surface
+                // if the distance between the previous point and the current point 
+                // on screen is too big
+            }
         }
 
         if ( !globeHidesPoint ) {
-            polygon->append( QPoint( x, y ) );
+            polygon->append( QPointF( x, y ) );
         }
         else {
             if ( !previousGlobeHidesPoint ) {
                 polygons.append( polygon );
-                polygon = new QPolygon;
+                polygon = new QPolygonF;
             }
         }
 
         previousGlobeHidesPoint = globeHidesPoint;
+        previousIsVisible = isVisible;
+        previousX = x;
+        previousY = y;
     }
 
     if ( polygon->size() > 1 ){
@@ -221,12 +252,13 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
 
 bool SphericalProjection::screenCoordinates( const GeoDataLinearRing &linearRing, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygon *> &polygons  )
+                                    QVector<QPolygonF *> &polygons, 
+                                    bool isGeoProjected )
 {
     int x, y;
     bool previousGlobeHidesPoint;
 
-    QPolygon  *polygon = new QPolygon;
+    QPolygonF  *polygon = new QPolygonF;
     
     GeoDataLinearRing::ConstIterator itPoint;
     GeoDataLinearRing::ConstIterator itEnd = linearRing.constEnd();
@@ -248,7 +280,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLinearRing &linearRing
         else {
             if ( !previousGlobeHidesPoint ) {
                 polygons.append( polygon );
-                polygon = new QPolygon;
+                polygon = new QPolygonF;
             }
         }
 
@@ -266,7 +298,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLinearRing &linearRing
 }
 
 
-bool SphericalProjection::geoCoordinates( const int x, const int y,
+bool SphericalProjection::geoCoordinates( int x, int y,
                                           const ViewportParams *viewport,
                                           qreal& lon, qreal& lat,
                                           GeoDataCoordinates::Unit unit )
@@ -299,14 +331,6 @@ bool SphericalProjection::geoCoordinates( const int x, const int y,
     }
 
     return noerr;
-}
-
-bool SphericalProjection::geoCoordinates( int x, int y, 
-                                          const ViewportParams *viewport,
-                                          Quaternion &q )
-{
-    // NYI
-    return false;
 }
 
 GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,

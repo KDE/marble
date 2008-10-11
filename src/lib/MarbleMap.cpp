@@ -422,7 +422,7 @@ int MarbleMap::radius() const
     return d->m_viewParams.radius();
 }
 
-void MarbleMap::setRadius(const int radius)
+void MarbleMap::setRadius(int radius)
 {
     d->m_viewParams.setRadius( radius );
 
@@ -788,7 +788,7 @@ void MarbleMap::home( qreal &lon, qreal &lat, int& zoom )
     zoom = d->m_homeZoom;
 }
 
-void MarbleMap::setHome( const qreal lon, const qreal lat, const int zoom)
+void MarbleMap::setHome( qreal lon, qreal lat, int zoom)
 {
     d->m_homePoint = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree );
     d->m_homeZoom = zoom;
@@ -841,7 +841,7 @@ int MarbleMap::northPoleY()
     return (int)( d->m_viewParams.radius() * northPole.v[Q_Y] );
 }
 
-bool MarbleMap::screenCoordinates( const qreal lon, const qreal lat,
+bool MarbleMap::screenCoordinates( qreal lon, qreal lat,
                                    int& x, int& y )
 {
     return d->m_viewParams.currentProjection()
@@ -850,7 +850,7 @@ bool MarbleMap::screenCoordinates( const qreal lon, const qreal lat,
                              x, y );
 }
 
-bool MarbleMap::geoCoordinates( const int x, const int y,
+bool MarbleMap::geoCoordinates( int x, int y,
                                 qreal& lon, qreal& lat,
                                 GeoDataCoordinates::Unit unit )
 {

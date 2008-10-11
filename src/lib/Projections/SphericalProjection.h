@@ -70,11 +70,13 @@ class SphericalProjection : public AbstractProjection
 
     bool screenCoordinates( const GeoDataLineString &lineString, 
                             const ViewportParams *viewport,
-                            QVector<QPolygon *> &polygons );
+                            QVector<QPolygonF *> &polygons, 
+                            bool isGeoProjected = false );
 
     bool screenCoordinates( const GeoDataLinearRing &linearRing, 
                             const ViewportParams *viewport,
-                            QVector<QPolygon *> &polygons );
+                            QVector<QPolygonF *> &polygons, 
+                            bool isGeoProjected = false );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -85,7 +87,7 @@ class SphericalProjection : public AbstractProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    inline bool geoCoordinates( const int x, const int y,
+    inline bool geoCoordinates( int x, int y,
                                 const ViewportParams *params,
                                 qreal& lon, qreal& lat,
                                 GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree );

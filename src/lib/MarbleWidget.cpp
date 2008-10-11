@@ -313,7 +313,7 @@ int MarbleWidget::radius() const
     return d->m_map->radius();
 }
 
-void MarbleWidget::setRadius(const int radius)
+void MarbleWidget::setRadius(int radius)
 {
     d->m_map->setRadius( radius );
 
@@ -680,7 +680,7 @@ void MarbleWidget::home( qreal &lon, qreal &lat, int& zoom )
     d->m_map->home( lon, lat, zoom );
 }
 
-void MarbleWidget::setHome( const qreal lon, const qreal lat, const int zoom)
+void MarbleWidget::setHome( qreal lon, qreal lat, int zoom )
 {
     d->m_map->setHome( lon, lat, zoom );
 }
@@ -771,13 +771,13 @@ int MarbleWidget::northPoleY()
     return d->m_map->northPoleY();
 }
 
-bool MarbleWidget::screenCoordinates( const qreal lon, const qreal lat,
+bool MarbleWidget::screenCoordinates( qreal lon, qreal lat,
                                       int& x, int& y )
 {
     return d->m_map->screenCoordinates( lon, lat, x, y );
 }
 
-bool MarbleWidget::geoCoordinates(const int x, const int y,
+bool MarbleWidget::geoCoordinates(int x, int y,
                                   qreal& lon, qreal& lat,
                                   GeoDataCoordinates::Unit unit )
 {

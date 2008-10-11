@@ -217,7 +217,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the radius of the globe in pixels.
      * @param  radius  The new globe radius value in pixels.
      */
-    void        setRadius(const int radius);
+    void        setRadius(int radius);
 
     /**
      * @brief Return the current zoom level.
@@ -268,7 +268,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    bool screenCoordinates( const qreal lon, const qreal lat,
+    bool screenCoordinates( qreal lon, qreal lat,
                             int& x, int& y );
 
     /**
@@ -286,7 +286,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool geoCoordinates( const int x, const int y,
+    bool geoCoordinates( int x, int y,
                          qreal& lon, qreal& lat,
                          GeoDataCoordinates::Unit = GeoDataCoordinates::Degree );
 
@@ -595,7 +595,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  lat  the latitude of the new home point.
      * @param  zoom the default zoom level for the new home point.
      */
-    void  setHome(const qreal lon, const qreal lat, const int zoom = 1050);
+    void  setHome(qreal lon, qreal lat, int zoom = 1050);
     /**
      * @brief  Set the home point
      * @param  homePoint  the new home point.

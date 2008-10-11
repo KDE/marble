@@ -55,7 +55,8 @@ GeoDataLineString::~GeoDataLineString()
     qDebug() << "delete Linestring";
 #endif
     delete d;
-    qDeleteAll(*this);
+//    FIXME: Ownership
+//    qDeleteAll(*this);
 }
 
 GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const

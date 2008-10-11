@@ -193,19 +193,21 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 
 bool MercatorProjection::screenCoordinates( const GeoDataLineString &lineString, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygon *> &polygons  )
+                                    QVector<QPolygonF *> &polygons, 
+                                    bool isGeoProjected )
 {
     return false;
 }
 
 bool MercatorProjection::screenCoordinates( const GeoDataLinearRing &linearRing, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygon *> &polygons  )
+                                    QVector<QPolygonF *> &polygons, 
+                                    bool isGeoProjected )
 {
     return false;
 }
 
-bool MercatorProjection::geoCoordinates( const int x, const int y,
+bool MercatorProjection::geoCoordinates( int x, int y,
                                          const ViewportParams *viewport,
                                          qreal& lon, qreal& lat,
                                          GeoDataCoordinates::Unit unit )
@@ -247,14 +249,6 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
     }
 
     return noerr;
-}
-
-bool MercatorProjection::geoCoordinates( int x, int y, 
-                                         const ViewportParams *viewport,
-                                         Quaternion &q)
-{
-    // NYI
-    return false;
 }
 
 

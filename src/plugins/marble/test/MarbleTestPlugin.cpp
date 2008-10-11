@@ -16,6 +16,7 @@
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLineString.h"
 
 namespace Marble
 {
@@ -90,16 +91,16 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     GeoDataCoordinates orbit( 105.6, 0.0, 3000000.0, GeoDataCoordinates::Degree );
 
     painter->setPen( QColor( 200, 200, 200, 255 ) );
-    static const GeoDataCoordinates points[5] = {
-        madrid,
-        flensburg,
-        linkoeping,
-        istanbul,
-        moscow
-    };
 
-    painter->drawPolyline( points, 5 ); 
+    GeoDataLineString lineString;
 
+    lineString.append(&madrid);
+    lineString.append(&flensburg);
+    lineString.append(&linkoeping);
+    lineString.append(&istanbul);
+    lineString.append(&moscow);
+
+    painter->drawPolyline( lineString ); 
 
     painter->setPen( QColor( 99, 198, 99, 255 ) );
     painter->setBrush( QColor( 99, 198, 99, 80 ) );
@@ -176,6 +177,7 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     GeoDataCoordinates m36(170.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates m37(180.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
 
+/*
     static const GeoDataCoordinates ring[37] = {
         m1, m2, m3, m4, m5, m6, m7, m8, m9,
         m10, m11, m12, m13, m14, m15, m16, m17, m18, m19,
@@ -199,7 +201,7 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     painter->setBrush( brush );
 
     painter->drawPolygon( triangle, 3 ); 
-
+*/
     GeoDataCoordinates sotm(-8.6, 52.66, 0.0, GeoDataCoordinates::Degree );
 
     painter->setPen( QColor( 198, 99, 99, 255 ) );

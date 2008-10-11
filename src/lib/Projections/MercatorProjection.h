@@ -68,11 +68,13 @@ class MercatorProjection : public AbstractProjection
 
     bool screenCoordinates( const GeoDataLineString &lineString, 
                             const ViewportParams *viewport,
-                            QVector<QPolygon *> &polygons );
+                            QVector<QPolygonF *> &polygons, 
+                            bool isGeoProjected = false );
 
     bool screenCoordinates( const GeoDataLinearRing &linearRing, 
                             const ViewportParams *viewport,
-                            QVector<QPolygon *> &polygons );
+                            QVector<QPolygonF *> &polygons, 
+                            bool isGeoProjected = false );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -83,22 +85,10 @@ class MercatorProjection : public AbstractProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool geoCoordinates( const int x, const int y,
+    bool geoCoordinates( int x, int y,
                          const ViewportParams *params,
                          qreal& lon, qreal& lat,
                          GeoDataCoordinates::Unit = GeoDataCoordinates::Degree );
-
-    /**
-     * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.
-     * @param x  the x coordinate of the pixel
-     * @param y  the y coordinate of the pixel
-     * @param q  the out parameter where the result is returned
-     * @return @c true  if the pixel (x, y) is within the globe
-     *         @c false if the pixel (x, y) is outside the globe, i.e. in space
-     */
-    bool    geoCoordinates( int x, int y, 
-                            const ViewportParams *params,
-                            Quaternion &q );
 
     GeoDataLatLonAltBox latLonAltBox( const QRect &screenRect,
                                       const ViewportParams *viewport );

@@ -187,7 +187,8 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
 bool EquirectProjection::screenCoordinates( const GeoDataLineString &lineString, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygon *> &polygons  )
+                                    QVector<QPolygonF *> &polygons, 
+                                    bool isGeoProjected )
 {
     return false;
 }
@@ -196,13 +197,14 @@ bool EquirectProjection::screenCoordinates( const GeoDataLineString &lineString,
 
 bool EquirectProjection::screenCoordinates( const GeoDataLinearRing &linearRing, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygon *> &polygons  )
+                                    QVector<QPolygonF *> &polygons, 
+                                    bool isGeoProjected )
 {
     return false;
 }
 
 
-bool EquirectProjection::geoCoordinates( const int x, const int y,
+bool EquirectProjection::geoCoordinates( int x, int y,
                                          const ViewportParams *viewport,
                                          qreal& lon, qreal& lat,
                                          GeoDataCoordinates::Unit unit )
@@ -242,16 +244,6 @@ bool EquirectProjection::geoCoordinates( const int x, const int y,
 
     return true;
 }
-
-
-bool EquirectProjection::geoCoordinates( int x, int y, 
-                                         const ViewportParams *viewport,
-                                         Quaternion &q )
-{
-    // NYI
-    return false;
-}
-
 
 GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
                                                       const ViewportParams *viewport )

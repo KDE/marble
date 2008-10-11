@@ -21,7 +21,7 @@
 
 #include <QtCore/QRect>
 #include <QtCore/QVector>
-#include <QtGui/QPolygon>
+#include <QtGui/QPolygonF>
 
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataCoordinates.h"
@@ -135,11 +135,13 @@ class AbstractProjection
 
     virtual bool screenCoordinates( const GeoDataLineString &lineString, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygon*> &polygons ) = 0;
+                                    QVector<QPolygonF*> &polygons, 
+                                    bool isGeoProjected = false ) = 0;
 
     virtual bool screenCoordinates( const GeoDataLinearRing &linearRing, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygon*> &polygons ) = 0;
+                                    QVector<QPolygonF*> &polygons, 
+                                    bool isGeoProjected = false ) = 0;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -152,25 +154,10 @@ class AbstractProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    virtual bool geoCoordinates( const int x, const int y,
+    virtual bool geoCoordinates( int x, int y,
                                  const ViewportParams *viewport,
                                  qreal& lon, qreal& lat,
                                  Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Degree ) = 0;
-
-    /**
-     * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.
-     *
-     * @param x  the x coordinate of the pixel
-     * @param y  the y coordinate of the pixel
-     * @param viewport the viewport parameters
-     * @param q  the out parameter where the result is returned
-     *
-     * @return @c true  if the pixel (x, y) is within the globe
-     *         @c false if the pixel (x, y) is outside the globe, i.e. in space
-     */
-    virtual bool geoCoordinates( int x, int y,
-                                 const ViewportParams *viewport,
-                                 Quaternion &q ) = 0;
 
     virtual Marble::GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
                                                       const ViewportParams *viewport );
