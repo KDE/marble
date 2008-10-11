@@ -59,6 +59,7 @@ Comment[uk]=Плазмоїд, який покаже вам час у різни�
 Comment[x-test]=xxPlasmoid to show you the time in different parts of the worldxx
 Comment[zh_CN]=显示世界各地时间的 Plasma 部件(Plasmoids)
 Comment[zh_TW]=顯示世界上不同地區的時間的 Plasmoid
+Icon=marble
 Type=Service
 ServiceTypes=Plasma/Applet
 

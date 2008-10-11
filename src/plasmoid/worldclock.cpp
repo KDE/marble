@@ -435,7 +435,7 @@ void WorldClock::paintInterface(QPainter *p,
     bool ok = m_map->viewParams()->viewport()->currentProjection()
               ->screenCoordinates(lon, lat, m_map->viewParams()->viewport(), tzx, tzy);
     //kDebug() << "Coordinates are at: " << tzx << tzy;
-    if ( ok && m_isHovered ) {
+    if ( ok /*&& m_isHovered*/ ) {
         //kDebug() << "returned x,y = " << tzx << tzy;
         QPoint tz( tzx, tzy );
         tz += m_t;
