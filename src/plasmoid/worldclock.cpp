@@ -55,12 +55,12 @@
 namespace Marble {
 
 WorldClock::WorldClock(QObject *parent, const QVariantList &args)
-    //: Plasma::Applet(parent, args),
-    : Plasma::Containment(parent, args),
+    : Plasma::Applet(parent, args),
+    //: Plasma::Containment(parent, args),
     m_map(0),
     m_sun(0)
 {
-    setContainmentType(DesktopContainment);
+    //setContainmentType(DesktopContainment);
     setHasConfigurationInterface(true);
     setAcceptHoverEvents(true);
     //The applet needs a 2:1 ratio
@@ -110,12 +110,12 @@ void WorldClock::init()
         m_showDate = true;
     }
 
-    m_lastRect = geometry().toRect();
+    m_lastRect = QRect(0,0,0,0);
 
     m_map = new MarbleMap(  );
     m_map->setProjection( Equirectangular );
     //m_map->setProjection( Mercator );
-    resizeMap(true);
+    //resizeMap(true);
     recalculateTranslation();
     
     //offset so that the date line isn't
@@ -162,7 +162,7 @@ void WorldClock::init()
 
 
     //We need to zoom the map every time we change size
-    connect(this, SIGNAL(geometryChanged()), this, SLOT(resizeMap()));
+    //connect(this, SIGNAL(geometryChanged()), this, SLOT(resizeMap()));
 }
  
 WorldClock::~WorldClock()
