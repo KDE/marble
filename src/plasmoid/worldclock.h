@@ -40,8 +40,8 @@ namespace Marble {
 class MarbleMap;
 class SunLocator;
 
-//class WorldClock : public Plasma::Containment 
-class WorldClock : public Plasma::Applet
+class WorldClock : public Plasma::Containment
+//class WorldClock : public Plasma::Applet
 {
     Q_OBJECT
     public:

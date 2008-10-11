@@ -55,12 +55,12 @@
 namespace Marble {
 
 WorldClock::WorldClock(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
-    //: Plasma::Containment(parent, args),
+    //: Plasma::Applet(parent, args),
+    : Plasma::Containment(parent, args),
     m_map(0),
     m_sun(0)
 {
-    //setContainmentType(DesktopContainment);
+    setContainmentType(DesktopContainment);
     setHasConfigurationInterface(true);
     setAcceptHoverEvents(true);
     //The applet needs a 2:1 ratio
@@ -70,7 +70,6 @@ WorldClock::WorldClock(QObject *parent, const QVariantList &args)
 
 void WorldClock::init()
 {
-    //kDebug() << "Loading available locations...";
     m_locations = KSystemTimeZones::zones();
     QList<QString> zones = m_locations.keys();
     for (int i = 0; i < zones.size(); i++ ) {
@@ -78,10 +77,6 @@ void WorldClock::init()
         if ( curzone.latitude() == KTimeZone::UNKNOWN || 
              curzone.longitude() == KTimeZone::UNKNOWN ) {
             m_locations.remove( zones.at(i) );
-            //kDebug() << "Removed TZ " << zones.at(i);
-        } else {
-            //kDebug() << "Kept TZ " << zones.at(i) << " at "
-                     //<< curzone.latitude() << "," << curzone.longitude();
         }
     }
     //we'll change the timezone before it's even
@@ -98,17 +93,15 @@ void WorldClock::init()
 
     m_timeDisplay = cg.readEntry("timedisplay", 24);
 
-    if (cg.readEntry("showfull", static_cast<int>(Qt::Unchecked)) == Qt::Unchecked ) {
+    if (cg.readEntry("showfull", static_cast<int>(Qt::Unchecked)) == Qt::Unchecked )
         m_showFull = false;
-    } else {
+    else
         m_showFull = true;
-    }
 
-    if (cg.readEntry("showdate", static_cast<int>(Qt::Unchecked)) == Qt::Unchecked ) {
+    if (cg.readEntry("showdate", static_cast<int>(Qt::Unchecked)) == Qt::Unchecked )
         m_showDate = false;
-    } else {
+    else
         m_showDate = true;
-    }
 
     m_lastRect = QRect(0,0,0,0);
 
@@ -135,12 +128,8 @@ void WorldClock::init()
     m_map->setShowRelief( true );
     m_map->setShowIceLayer( true );
 
-    foreach( MarbleAbstractFloatItem* item, m_map->model()->floatItems() ) {
+    foreach( MarbleRenderPlugin* item, m_map->model()->renderPlugins() )
         item->setVisible( false );
-    } 
-    foreach( MarbleRenderPlugin* item, m_map->model()->renderPlugins() ) {
-        item->setVisible( false );
-    }
 
     //Set up the Sun to draw night/day shadow
     m_sun = m_map->sunLocator();
@@ -155,14 +144,11 @@ void WorldClock::init()
     m_map->setNeedsUpdate();
 
     Plasma::DataEngine *m_timeEngine = dataEngine("time");
-    m_timeEngine->connectSource( "Local", this, 6000, 
-                                    Plasma::AlignToMinute);
+    m_timeEngine->connectSource( "Local", this, 6000, Plasma::AlignToMinute);
 
     m_points = QHash<QString, QPoint>();
-
-
-    //We need to zoom the map every time we change size
-    //connect(this, SIGNAL(geometryChanged()), this, SLOT(resizeMap()));
+    //all the size & proportion stuff will be done on painting because
+    //m_lastRect is not the same size as contentsRect
 }
  
 WorldClock::~WorldClock()
@@ -218,6 +204,7 @@ void WorldClock::resizeMap(bool changeAspect)
 void WorldClock::dataUpdated(const QString &source, 
                              const Plasma::DataEngine::Data &data)
 {
+    Q_UNUSED(source)
     //kDebug() << "Time = " << data["Time"].toTime();
     m_localtime = QDateTime( QDate::currentDate(), data["Time"].toTime() );
     m_time = KSystemTimeZones::local().convert(m_locations.value(m_locationkey),
@@ -251,29 +238,16 @@ void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 
 QString WorldClock::getZone()
 {
-    //kDebug() << "Finding Timezone";
     qreal lat, lon;
-    bool ok = m_map->viewParams()->viewport()->currentProjection()
-                                    ->geoCoordinates(                     
-                                    m_hover.x(), m_hover.y(),
-                                    m_map->viewParams()->viewport(),
-                                    lon, lat );
+    bool ok = m_map->viewParams()->viewport()->currentProjection()->geoCoordinates(
+                m_hover.x(), m_hover.y(), m_map->viewParams()->viewport(), lon, lat );
     
-    if( ok ) { 
-        //kDebug() << "Mouse is at lat " << lat << " lon " << lon;
-    } else { 
-        //kDebug() << "Mouse lat/lon value lookup FAILED";
-        lat = 0;
-        lon = 0;
-    }
+    if( !ok )
+        return KSystemTimeZones::local().name();
     
-    //if( m_locations.isEmpty() ) { kDebug() << "m_locations is EMPTY"; }
     QList<QString> zones = m_locations.keys();
-    //kDebug() << "zones: " << zones;
-    //default in case lookup fails, which it shouldn't,
-    //because if the lookup fails the default SHOULD be 0,0
-    QString closest = "America/Toronto";
-    
+
+    QString closest;
     qreal mindist = 10000;
     
     for (int i = 0; i < zones.size(); i++ ) {
@@ -284,14 +258,11 @@ QString WorldClock::getZone()
         latdelta = lat - tzlat;
         londelta = lon - tzlon;
         qreal dist = sqrt( (latdelta * latdelta) + (londelta * londelta) );
-        //kDebug() << "Distance between mouse and " << zones.at(i)
-                 //<< "is " << dist;
         if ( dist < mindist ) {
             mindist = dist;
             closest = zones.at( i );
         }
     }
-    //kDebug() << "Found " << m_locations.value( closest ).name();
     return m_locations.value( closest ).name();
 }
 
@@ -396,13 +367,14 @@ void WorldClock::recalculateTranslation()
 {
     m_t = QPoint(static_cast<int>( (m_lastRect.width()/2)  - (m_map->width()/2)   ),
                  static_cast<int>( (m_lastRect.height()/2) - (m_map->height()/2) ));
+    m_t += m_lastRect.topLeft();
 }
 
 void WorldClock::paintInterface(QPainter *p, 
                                 const QStyleOptionGraphicsItem *option,
                                 const QRect &contentsRect)
 {
-    //kDebug() << "contentsRect = " << contentsRect;
+    Q_UNUSED(option)
     if ( contentsRect != m_lastRect ) { 
         m_lastRect = contentsRect;
         resizeMap();
@@ -412,8 +384,11 @@ void WorldClock::paintInterface(QPainter *p,
     }
     p->setRenderHint( QPainter::TextAntialiasing , true );
     p->setRenderHint( QPainter::Antialiasing , true );
+    p->setPen( Qt::NoPen );
+    p->setBrush( QBrush( QColor( 0x00, 0x00, 0x00, 0xFF ) ) );
+    p->drawRect( m_lastRect );
     QPixmap pixmap( m_map->width(), m_map->height() );
-    pixmap.fill( /*Qt::transparent*/ Qt::black );
+    pixmap.fill( Qt::transparent );
     GeoPainter gp( &pixmap, m_map->viewParams()->viewport(), 
                    Marble::Normal, true );
     QRect mapRect( 0, 0, m_map->width(), m_map->height() );
@@ -431,12 +406,9 @@ void WorldClock::paintInterface(QPainter *p,
     qreal lat = m_locations.value(m_locationkey).latitude();
     lon *= DEG2RAD;
     lat *= DEG2RAD;
-    //kDebug() << "TZ " << m_locationkey <<  " lon, lat = " << lon << lat;
     bool ok = m_map->viewParams()->viewport()->currentProjection()
               ->screenCoordinates(lon, lat, m_map->viewParams()->viewport(), tzx, tzy);
-    //kDebug() << "Coordinates are at: " << tzx << tzy;
     if ( ok /*&& m_isHovered*/ ) {
-        //kDebug() << "returned x,y = " << tzx << tzy;
         QPoint tz( tzx, tzy );
         tz += m_t;
         int radius = m_lastRect.width() / 40;
@@ -445,10 +417,9 @@ void WorldClock::paintInterface(QPainter *p,
         grad.setColorAt( 0.33, QColor( 0xFF, 0xFF, 0x00, 0x46 ) );
         grad.setColorAt( 0.66, QColor( 0xFF, 0xFF, 0x00, 0x14 ) );
         grad.setColorAt( 1,    QColor( 0xFF, 0xFF, 0x00, 0x00 ) );
-        p->setPen( Qt::NoPen );
         p->setBrush( QBrush( grad ) );
         p->drawEllipse( tz, radius, radius );
-    } //else { kDebug() << "Pixel lookup failed!"; }
+    }
 
     p->setPen( QColor( 0xFF, 0xFF, 0xFF ) );
 
@@ -524,13 +495,10 @@ void WorldClock::configAccepted()
 {
     KConfigGroup cg = config();
 
-    if( ui.centerSunCheckBox->checkState() == Qt::Unchecked ) {
-        //kDebug() << "CentreSun box is unchecked, m_setCentred(false)";
+    if( ui.centerSunCheckBox->checkState() == Qt::Unchecked )
         m_sun->setCentered(false);
-    } else if( ui.centerSunCheckBox->checkState() == Qt::Checked ) {
-        //kDebug() << "CentreSun box is checked, m_setCentred(true)";
+    else if( ui.centerSunCheckBox->checkState() == Qt::Checked )
         m_sun->setCentered(true);
-    }
 
     // What is the centre longitude?
     if( ui.rotationLatLonEdit->value() != cg.readEntry("rotation", -20)  &&
@@ -542,24 +510,20 @@ void WorldClock::configAccepted()
     // Do we show the full TZ name?
     if( ui.showFullCheckBox->checkState() !=
             cg.readEntry("showfull", static_cast<int>(Qt::Unchecked)) ) {
-        if ( ui.showFullCheckBox->checkState() == Qt::Unchecked ) {
-            //kDebug() << "setting m_showFull as false";
+        if ( ui.showFullCheckBox->checkState() == Qt::Unchecked )
             m_showFull = false;
-        } else {
-            //kDebug() << "setting m_showFull as true";
+        else
             m_showFull = true;
-        }
         recalculateFonts();
     }
 
     // Do we show the date?
     if( ui.showDateCheckBox->checkState() !=
             cg.readEntry("showdate", static_cast<int>(Qt::Unchecked)) ) {
-        if ( ui.showDateCheckBox->checkState() == Qt::Unchecked ) {
+        if ( ui.showDateCheckBox->checkState() == Qt::Unchecked )
             m_showDate = false;
-        } else {
+        else
             m_showDate = true;
-        }
         recalculateFonts();
     }
 
@@ -578,11 +542,10 @@ void WorldClock::configAccepted()
         }
         recalculateFonts();
     }
-    // What projection?
+    // What projection? note: +1 because the spherical projection is 0
     if((ui.projectionComboBox->currentIndex() + 1) != cg.readEntry("projection",
                                           static_cast<int>(Equirectangular))  )
     {
-        kDebug() << "projection changed to" << ui.projectionComboBox->currentIndex();
         switch ( ui.projectionComboBox->currentIndex() ) {
             case 1:
                 kDebug() << "case 1, setting proj to mercator";
@@ -602,8 +565,6 @@ void WorldClock::configAccepted()
                 cg.writeEntry("projection", static_cast<int>(Equirectangular));
                 break;
         }
-    } else {
-        kDebug() << "no change in proj";
     }
     
     cg.writeEntry("rotation", ui.rotationLatLonEdit->value());
