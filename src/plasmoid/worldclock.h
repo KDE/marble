@@ -95,6 +95,7 @@ class WorldClock : public Plasma::Containment
         int m_timeDisplay;
         bool m_showFull;
         bool m_showDate;
+        bool m_mapOnly;
 
         //map of locations and key for accessing it.
         QString m_locationkey;

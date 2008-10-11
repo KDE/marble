@@ -9,7 +9,7 @@
     <x>0</x>
     <y>0</y>
     <width>505</width>
-    <height>312</height>
+    <height>307</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -33,72 +33,72 @@
   <property name="windowTitle" >
    <string>Worldclock Applet Configuration</string>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout" >
    <item>
-    <layout class="QVBoxLayout" >
+    <layout class="QHBoxLayout" name="horizontalLayout" >
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout" >
-       <item>
-        <widget class="QLabel" name="timeDisplayLabel" >
-         <property name="toolTip" >
-          <string/>
-         </property>
-         <property name="text" >
-          <string>Time Display</string>
-         </property>
-         <property name="buddy" >
-          <cstring>timeDisplayComboBox</cstring>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="timeDisplayComboBox" >
-         <property name="toolTip" >
-          <string>The format to display the time in</string>
-         </property>
-         <property name="whatsThis" >
-          <string>This box allows you to choose the way the time is displayed</string>
-         </property>
-         <item>
-          <property name="text" >
-           <string>24-hour clock</string>
-          </property>
-         </item>
-         <item>
-          <property name="text" >
-           <string>12-hour clock</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QLabel" name="timeDisplayLabel" >
+       <property name="toolTip" >
+        <string/>
+       </property>
+       <property name="text" >
+        <string>Time Display</string>
+       </property>
+       <property name="buddy" >
+        <cstring>timeDisplayComboBox</cstring>
+       </property>
+      </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2" >
+      <widget class="QComboBox" name="timeDisplayComboBox" >
+       <property name="toolTip" >
+        <string>The format to display the time in</string>
+       </property>
+       <property name="whatsThis" >
+        <string>This box allows you to choose the way the time is displayed</string>
+       </property>
        <item>
-        <widget class="QLabel" name="projectionLabel" >
-         <property name="text" >
-          <string>Projection</string>
-         </property>
-        </widget>
+        <property name="text" >
+         <string>24-hour clock</string>
+        </property>
        </item>
        <item>
-        <widget class="QComboBox" name="projectionComboBox" >
-         <item>
-          <property name="text" >
-           <string>Equirectangular</string>
-          </property>
-         </item>
-         <item>
-          <property name="text" >
-           <string>Mercator</string>
-          </property>
-         </item>
-        </widget>
+        <property name="text" >
+         <string>12-hour clock</string>
+        </property>
        </item>
-      </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2" >
+     <item>
+      <widget class="QLabel" name="projectionLabel" >
+       <property name="text" >
+        <string>Projection</string>
+       </property>
+      </widget>
      </item>
      <item>
+      <widget class="QComboBox" name="projectionComboBox" >
+       <item>
+        <property name="text" >
+         <string>Equirectangular</string>
+        </property>
+       </item>
+       <item>
+        <property name="text" >
+         <string>Mercator</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout" >
+     <item row="0" column="0" >
       <widget class="QCheckBox" name="showDateCheckBox" >
        <property name="toolTip" >
         <string>Check to show the date as well as the time</string>
@@ -114,7 +114,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item row="1" column="0" >
       <widget class="QCheckBox" name="showFullCheckBox" >
        <property name="toolTip" >
         <string>Chooses whether to show the full name of the timezone</string>
@@ -127,7 +127,14 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item row="0" column="1" >
+      <widget class="QCheckBox" name="showMapOnlyCheckBox" >
+       <property name="text" >
+        <string>Show map only</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1" >
       <widget class="QCheckBox" name="centerSunCheckBox" >
        <property name="toolTip" >
         <string>Check to centre the map on the area currently illuminated by the sun</string>
@@ -143,25 +150,25 @@
        </property>
       </widget>
      </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" >
      <item>
-      <layout class="QHBoxLayout" >
-       <item>
-        <widget class="QLabel" name="rotationLabel" >
-         <property name="toolTip" >
-          <string>This longitude will be the centre of the map</string>
-         </property>
-         <property name="whatsThis" >
-          <string>Here you can select the longitude which will be the centre of the map</string>
-         </property>
-         <property name="text" >
-          <string>Centre Longitude</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="Marble::LatLonEdit" native="1" name="rotationLatLonEdit" />
-       </item>
-      </layout>
+      <widget class="QLabel" name="rotationLabel" >
+       <property name="toolTip" >
+        <string>This longitude will be the centre of the map</string>
+       </property>
+       <property name="whatsThis" >
+        <string>Here you can select the longitude which will be the centre of the map</string>
+       </property>
+       <property name="text" >
+        <string>Centre Longitude</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Marble::LatLonEdit" name="rotationLatLonEdit" />
      </item>
     </layout>
    </item>

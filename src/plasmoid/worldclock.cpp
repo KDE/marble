@@ -103,12 +103,21 @@ void WorldClock::init()
     else
         m_showDate = true;
 
+    if (cg.readEntry("maponly", static_cast<int>(Qt::Unchecked)) == Qt::Unchecked )
+        m_mapOnly = false;
+    else
+        m_mapOnly = true;
+
     m_lastRect = QRect(0,0,0,0);
 
     m_map = new MarbleMap(  );
-    m_map->setProjection( Equirectangular );
-    //m_map->setProjection( Mercator );
-    //resizeMap(true);
+    if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Equirectangular)
+        m_map->setProjection(Equirectangular);
+    else if(cg.readEntry("projection", static_cast<int>(Mercator)) == Mercator)
+        m_map->setProjection(Mercator);
+    else
+        m_map->setProjection(Equirectangular);
+
     recalculateTranslation();
     
     //offset so that the date line isn't
@@ -220,18 +229,29 @@ void WorldClock::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = false;
     Applet::hoverLeaveEvent(event);
+    //no need to update TZ if we are not displaying it
+    if(m_mapOnly)
+        return;
     update();
 }
 void WorldClock::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = true;
     m_hover = event->pos() - m_t;
+    Applet::hoverEnterEvent(event);
+    //no need to update TZ if we are not displaying it
+    if(m_mapOnly)
+        return;
     setTz( getZone() );
     update();
 }
 void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     m_hover = event->pos() - m_t;
+    Applet::hoverMoveEvent(event);
+    //no need to update TZ if we are not displaying it
+    if(m_mapOnly)
+        return;
     setTz( getZone() );
     update();
 }
@@ -379,8 +399,10 @@ void WorldClock::paintInterface(QPainter *p,
         m_lastRect = contentsRect;
         resizeMap();
         recalculateTranslation();
-        recalculatePoints();
-        recalculateFonts();
+        if(!m_mapOnly) {
+            recalculatePoints();
+            recalculateFonts();
+        }
     }
     p->setRenderHint( QPainter::TextAntialiasing , true );
     p->setRenderHint( QPainter::Antialiasing , true );
@@ -394,6 +416,10 @@ void WorldClock::paintInterface(QPainter *p,
     QRect mapRect( 0, 0, m_map->width(), m_map->height() );
     m_map->paint(gp, mapRect );
     p->drawPixmap( m_t, pixmap );
+
+    //if we are only painting a map there is no need to continue
+    if(m_mapOnly)
+        return;
 
     if ( !m_isHovered ) {
         setTz( KSystemTimeZones::local().name() );
@@ -485,6 +511,8 @@ void WorldClock::createConfigurationInterface(KConfigDialog *parent)
         ui.showDateCheckBox->setChecked(true);
     if(cg.readEntry("showfull",  static_cast<int>(Qt::Unchecked)) == Qt::Checked)
         ui.showFullCheckBox->setChecked(true);
+    if(cg.readEntry("maponly",   static_cast<int>(Qt::Unchecked)) == Qt::Checked)
+        ui.showMapOnlyCheckBox->setChecked(true);
 
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
@@ -525,6 +553,15 @@ void WorldClock::configAccepted()
         else
             m_showDate = true;
         recalculateFonts();
+    }
+
+    // Do we show only the map?
+    if( ui.showMapOnlyCheckBox->checkState() !=
+            cg.readEntry("maponly", static_cast<int>(Qt::Unchecked)) ) {
+        if ( ui.showMapOnlyCheckBox->checkState() == Qt::Unchecked )
+            m_mapOnly = false;
+        else
+            m_mapOnly = true;
     }
 
     // What type of time display are we using? (12/24hr)
@@ -569,9 +606,11 @@ void WorldClock::configAccepted()
     
     cg.writeEntry("rotation", ui.rotationLatLonEdit->value());
 
-    cg.writeEntry("centersun", static_cast<int>(ui.centerSunCheckBox->checkState()));
-    cg.writeEntry("showfull", static_cast<int>(ui.showFullCheckBox->checkState()));
-    cg.writeEntry("showdate", static_cast<int>(ui.showDateCheckBox->checkState()));
+    cg.writeEntry("centersun", static_cast<int>(ui.centerSunCheckBox  ->checkState()));
+    cg.writeEntry("showfull",  static_cast<int>(ui.showFullCheckBox   ->checkState()));
+    cg.writeEntry("showdate",  static_cast<int>(ui.showDateCheckBox   ->checkState()));
+    cg.writeEntry("maponly",   static_cast<int>(ui.showMapOnlyCheckBox->checkState()));
+    emit configNeedsSaving();
 }
 
 } //ns Marble
