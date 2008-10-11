@@ -8,8 +8,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>329</width>
-    <height>173</height>
+    <width>505</width>
+    <height>312</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -67,6 +67,31 @@
          <item>
           <property name="text" >
            <string>12-hour clock</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2" >
+       <item>
+        <widget class="QLabel" name="projectionLabel" >
+         <property name="text" >
+          <string>Projection</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="projectionComboBox" >
+         <item>
+          <property name="text" >
+           <string>Equirectangular</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>Mercator</string>
           </property>
          </item>
         </widget>

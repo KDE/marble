@@ -35,6 +35,7 @@
 
 //Plasma
 #include <Plasma/Applet>
+#include <Plasma/Containment>
 #include <Plasma/DataEngine>
 
 //Marble
@@ -54,10 +55,12 @@
 namespace Marble {
 
 WorldClock::WorldClock(QObject *parent, const QVariantList &args)
-    : Plasma::Applet(parent, args),
+    //: Plasma::Applet(parent, args),
+    : Plasma::Containment(parent, args),
     m_map(0),
     m_sun(0)
 {
+    setContainmentType(DesktopContainment);
     setHasConfigurationInterface(true);
     setAcceptHoverEvents(true);
     //The applet needs a 2:1 ratio
@@ -95,15 +98,13 @@ void WorldClock::init()
 
     m_timeDisplay = cg.readEntry("timedisplay", 24);
 
-    if (cg.readEntry("showfull", static_cast<int>(Qt::Unchecked)) 
-                                               == Qt::Unchecked ) {
+    if (cg.readEntry("showfull", static_cast<int>(Qt::Unchecked)) == Qt::Unchecked ) {
         m_showFull = false;
     } else {
         m_showFull = true;
     }
 
-    if (cg.readEntry("showdate", static_cast<int>(Qt::Unchecked)) 
-                                               == Qt::Unchecked ) {
+    if (cg.readEntry("showdate", static_cast<int>(Qt::Unchecked)) == Qt::Unchecked ) {
         m_showDate = false;
     } else {
         m_showDate = true;
@@ -113,12 +114,10 @@ void WorldClock::init()
 
     m_map = new MarbleMap(  );
     m_map->setProjection( Equirectangular );
-
-    m_map->setSize(m_lastRect.width(), m_lastRect.height());
-    //The radius of the map using this projection 
-    //will always be 1/4 of the desired width.
-    m_map->setRadius( (m_lastRect.height() / 2 ) );
-
+    //m_map->setProjection( Mercator );
+    resizeMap(true);
+    recalculateTranslation();
+    
     //offset so that the date line isn't
     //right on the edge of the map
     //or user choice
@@ -135,12 +134,10 @@ void WorldClock::init()
     m_map->setShowOtherPlaces( false );
     m_map->setShowRelief( true );
     m_map->setShowIceLayer( true );
-    m_map->setShowPlaces( false );
-    m_map->setShowOtherPlaces( false );
 
     foreach( MarbleAbstractFloatItem* item, m_map->model()->floatItems() ) {
         item->setVisible( false );
-    }
+    } 
     foreach( MarbleRenderPlugin* item, m_map->model()->renderPlugins() ) {
         item->setVisible( false );
     }
@@ -150,8 +147,7 @@ void WorldClock::init()
     m_sun->setShow(true);
     m_sun->setCitylights(true);
     
-    if(cg.readEntry("centersun", static_cast<int>(Qt::Unchecked)) 
-                                               == Qt::Checked)
+    if(cg.readEntry("centersun", static_cast<int>(Qt::Unchecked)) == Qt::Checked)
          m_sun->setCentered(true);
          
     m_sun->update();
@@ -171,16 +167,52 @@ void WorldClock::init()
  
 WorldClock::~WorldClock()
 {
+/*
+    if(m_map)
+        delete m_map;
+    if(m_sun)
+        delete m_sun;
+*/
 }
  
-void WorldClock::resizeMap()
+void WorldClock::resizeMap(bool changeAspect)
 {
-    m_map->setSize(m_lastRect.width(), m_lastRect.height());
-    //The radius of the map using this projection 
-    //will always be 1/4 of the desired width.
-    m_map->setRadius( (m_lastRect.height() / 2 ) );
+    int width = 0;
+    int height = 0;
+    int radius = 0;
+    if( m_map->projection() == Equirectangular ) {
+        double ratio = m_lastRect.width() / m_lastRect.height();
+        if( ratio > 2 ) {
+            height = m_lastRect.height();
+            width = height*2;
+            radius = static_cast<int>(height/2);
+        } else {
+            width = m_lastRect.width();
+            height = static_cast<int>(width/2);
+            radius = static_cast<int>(width/4);
+        }
+    } else if( m_map->projection() == Mercator ) {
+        double ratio = m_lastRect.width() / m_lastRect.height();
+        if( ratio > 1 ) {
+            height = m_lastRect.height();
+            width = height;
+            radius = static_cast<int>(width/4);
+        } else {
+            width = m_lastRect.width();
+            height = width;
+            radius = static_cast<int>(width/4);
+        }
+    }
+
+    m_map->setSize(width, height);
+    m_map->setRadius( radius );
     m_map->setNeedsUpdate();
     update();
+    if(changeAspect) {
+        QRectF curGeo = geometry();
+        setGeometry( curGeo.x(), curGeo.y(), static_cast<double>(width),
+                                             static_cast<double>(height) );
+    }
 }
 
 void WorldClock::dataUpdated(const QString &source, 
@@ -206,13 +238,13 @@ void WorldClock::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 void WorldClock::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = true;
-    m_hover = event->pos();
+    m_hover = event->pos() - m_t;
     setTz( getZone() );
     update();
 }
 void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
-    m_hover = event->pos();
+    m_hover = event->pos() - m_t;
     setTz( getZone() );
     update();
 }
@@ -274,8 +306,8 @@ void WorldClock::setTz( QString newtz )
 
 void WorldClock::recalculatePoints()
 {
-    int x = m_lastRect.width();
-    int y = m_lastRect.height();
+    int x = m_map->width();
+    int y = m_map->height();
     //I originally used "top" as the top, but then decided to put the date
     //over top of that, and didn't want to change everything; so I put "super"
     m_points.insert( "superright", QPoint( ( x*0.666 ), ( y*0.15 ) ) );
@@ -360,6 +392,12 @@ void WorldClock::recalculateFonts( )
     return;
 }
 
+void WorldClock::recalculateTranslation()
+{
+    m_t = QPoint(static_cast<int>( (m_lastRect.width()/2)  - (m_map->width()/2)   ),
+                 static_cast<int>( (m_lastRect.height()/2) - (m_map->height()/2) ));
+}
+
 void WorldClock::paintInterface(QPainter *p, 
                                 const QStyleOptionGraphicsItem *option,
                                 const QRect &contentsRect)
@@ -367,20 +405,20 @@ void WorldClock::paintInterface(QPainter *p,
     //kDebug() << "contentsRect = " << contentsRect;
     if ( contentsRect != m_lastRect ) { 
         m_lastRect = contentsRect;
-        m_map->setSize( m_lastRect.size() );
-        m_map->setRadius( m_lastRect.width() / 4 );
+        resizeMap();
+        recalculateTranslation();
         recalculatePoints();
         recalculateFonts();
-        resizeMap();
     }
     p->setRenderHint( QPainter::TextAntialiasing , true );
     p->setRenderHint( QPainter::Antialiasing , true );
-    QPixmap pixmap( m_lastRect.size() );
-    pixmap.fill( Qt::transparent );
+    QPixmap pixmap( m_map->width(), m_map->height() );
+    pixmap.fill( /*Qt::transparent*/ Qt::black );
     GeoPainter gp( &pixmap, m_map->viewParams()->viewport(), 
                    Marble::Normal, true );
-    m_map->paint(gp, m_lastRect);
-    p->drawPixmap( 0, 0, pixmap );
+    QRect mapRect( 0, 0, m_map->width(), m_map->height() );
+    m_map->paint(gp, mapRect );
+    p->drawPixmap( m_t, pixmap );
 
     if ( !m_isHovered ) {
         setTz( KSystemTimeZones::local().name() );
@@ -395,19 +433,18 @@ void WorldClock::paintInterface(QPainter *p,
     lat *= DEG2RAD;
     //kDebug() << "TZ " << m_locationkey <<  " lon, lat = " << lon << lat;
     bool ok = m_map->viewParams()->viewport()->currentProjection()
-              ->screenCoordinates(lon, lat,
-                                  m_map->viewParams()->viewport(),
-                                  tzx, tzy);
+              ->screenCoordinates(lon, lat, m_map->viewParams()->viewport(), tzx, tzy);
     //kDebug() << "Coordinates are at: " << tzx << tzy;
     if ( ok && m_isHovered ) {
         //kDebug() << "returned x,y = " << tzx << tzy;
         QPoint tz( tzx, tzy );
+        tz += m_t;
         int radius = m_lastRect.width() / 40;
         QRadialGradient grad( tz, radius );
-        grad.setColorAt( 0,   QColor( 0xFF, 0xFF, 0x00, 0xFF ) );
+        grad.setColorAt( 0,    QColor( 0xFF, 0xFF, 0x00, 0xFF ) );
         grad.setColorAt( 0.33, QColor( 0xFF, 0xFF, 0x00, 0x46 ) );
         grad.setColorAt( 0.66, QColor( 0xFF, 0xFF, 0x00, 0x14 ) );
-        grad.setColorAt( 1,   QColor( 0xFF, 0xFF, 0x00, 0x00 ) );
+        grad.setColorAt( 1,    QColor( 0xFF, 0xFF, 0x00, 0x00 ) );
         p->setPen( Qt::NoPen );
         p->setBrush( QBrush( grad ) );
         p->drawEllipse( tz, radius, radius );
@@ -431,20 +468,20 @@ void WorldClock::paintInterface(QPainter *p,
     }
 
     p->setFont( m_timeFont );
-    p->drawText( QRect( m_points.value( "topleft" ), 
-                        m_points.value( "middleright" ) ),
+    p->drawText( QRect( m_points.value( "topleft" )     + m_t,
+                        m_points.value( "middleright" ) + m_t ),
                  Qt::AlignCenter, timestr );
 
     p->setFont( m_locationFont );
-    p->drawText( QRect( m_points.value( "middleleft" ), 
-                        m_points.value( "bottomright" ) ),
+    p->drawText( QRect( m_points.value( "middleleft" )  + m_t,
+                        m_points.value( "bottomright" ) + m_t ),
                  Qt::AlignCenter, locstr );
 
     if (m_showDate) {
         QString datestr = m_time.toString( "ddd d MMM yyyy" );
         p->setFont( m_dateFont );
-        p->drawText( QRect( m_points.value( "superleft" ), 
-                            m_points.value( "topright" ) ),
+        p->drawText( QRect( m_points.value( "superleft" ) + m_t,
+                            m_points.value( "topright" )  + m_t ),
                      Qt::AlignCenter, datestr );
     }
 
@@ -452,35 +489,35 @@ void WorldClock::paintInterface(QPainter *p,
 
 void WorldClock::createConfigurationInterface(KConfigDialog *parent)
 {
-QWidget *widget = new QWidget();
- ui.setupUi(widget);
- parent->setButtons(KDialog::Ok | KDialog::Apply | KDialog::Cancel); 
+    QWidget *widget = new QWidget();
+    ui.setupUi(widget);
+    parent->setButtons(KDialog::Ok | KDialog::Apply | KDialog::Cancel); 
 
- KConfigGroup cg = config();
+    KConfigGroup cg = config();
 
-     ui.rotationLatLonEdit->setValue(cg.readEntry("rotation", -20));
+    ui.rotationLatLonEdit->setValue(cg.readEntry("rotation", -20));
 
-     if(cg.readEntry("timedisplay", 24)  == 12) {
-         ui.timeDisplayComboBox->setCurrentIndex( 1 );
-     } else {
-         ui.timeDisplayComboBox->setCurrentIndex( 0 );
-     }
+    if(cg.readEntry("timedisplay", 24)  == 12) {
+        ui.timeDisplayComboBox->setCurrentIndex( 1 );
+    } else {
+        ui.timeDisplayComboBox->setCurrentIndex( 0 );
+    }
 
-     if(cg.readEntry("centersun", static_cast<int>(Qt::Unchecked)) 
-                                                == Qt::Checked)
-          ui.centerSunCheckBox->setChecked(true);
+    if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Equirectangular)
+        ui.projectionComboBox->setCurrentIndex(0);
+    else if(cg.readEntry("projection", static_cast<int>(Mercator)) == Mercator)
+        ui.projectionComboBox->setCurrentIndex(1);
 
-     if(cg.readEntry("showdate", static_cast<int>(Qt::Unchecked)) 
-                                               == Qt::Checked)
-          ui.showDateCheckBox->setChecked(true);
+    if(cg.readEntry("centersun", static_cast<int>(Qt::Unchecked)) == Qt::Checked)
+        ui.centerSunCheckBox->setChecked(true);
+    if(cg.readEntry("showdate",  static_cast<int>(Qt::Unchecked)) == Qt::Checked)
+        ui.showDateCheckBox->setChecked(true);
+    if(cg.readEntry("showfull",  static_cast<int>(Qt::Unchecked)) == Qt::Checked)
+        ui.showFullCheckBox->setChecked(true);
 
-     if(cg.readEntry("showfull", static_cast<int>(Qt::Unchecked)) 
-                                               == Qt::Checked)
-          ui.showFullCheckBox->setChecked(true);
-
-     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
-     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
-     parent->addPage(widget, parent->windowTitle(), icon());
+    connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
+    connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
+    parent->addPage(widget, parent->windowTitle(), icon());
 }
 
 void WorldClock::configAccepted()
@@ -540,6 +577,33 @@ void WorldClock::configAccepted()
                 break;
         }
         recalculateFonts();
+    }
+    // What projection?
+    if((ui.projectionComboBox->currentIndex() + 1) != cg.readEntry("projection",
+                                          static_cast<int>(Equirectangular))  )
+    {
+        kDebug() << "projection changed to" << ui.projectionComboBox->currentIndex();
+        switch ( ui.projectionComboBox->currentIndex() ) {
+            case 1:
+                kDebug() << "case 1, setting proj to mercator";
+                m_map->setProjection(Mercator);
+                m_map->setNeedsUpdate();
+                update();
+                resizeMap(true);
+                cg.writeEntry("projection", static_cast<int>(Mercator));
+                break;
+            //case 0 (and anything else that pops up)
+            default:
+                kDebug() << "case default, setting proj to Equirectangular";
+                m_map->setProjection(Equirectangular);
+                m_map->setNeedsUpdate();
+                update();
+                resizeMap(true);
+                cg.writeEntry("projection", static_cast<int>(Equirectangular));
+                break;
+        }
+    } else {
+        kDebug() << "no change in proj";
     }
     
     cg.writeEntry("rotation", ui.rotationLatLonEdit->value());

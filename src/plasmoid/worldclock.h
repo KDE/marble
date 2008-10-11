@@ -19,6 +19,7 @@
 
 
 #include <Plasma/Applet>
+#include <Plasma/Containment>
 #include <Plasma/DataEngine>
 #include "ui_worldclockConfig.h"
 
@@ -39,7 +40,8 @@ namespace Marble {
 class MarbleMap;
 class SunLocator;
 
-class WorldClock : public Plasma::Applet
+class WorldClock : public Plasma::Containment 
+//class WorldClock : public Plasma::Applet 
 {
     Q_OBJECT
     public:
@@ -60,13 +62,14 @@ class WorldClock : public Plasma::Applet
         void configAccepted();
     private slots:
         //connected to geometryChanged()
-        void resizeMap();
+        void resizeMap(bool changeAspect = false);
     private:
         void connectToEngine();
 
         //these are used for sizing & positioning text
         void recalculatePoints();
         void recalculateFonts();
+        void recalculateTranslation();
 
         //for changing zones based on mouse position
         void setTz( QString newtz );
@@ -77,9 +80,12 @@ class WorldClock : public Plasma::Applet
         //time in user's local zone
         QDateTime m_localtime;
 
+        //the translation
+        QPoint m_t;
+
         //the map
-        MarbleMap *m_map;
-	SunLocator *m_sun;
+        MarbleMap  *m_map;
+        SunLocator *m_sun;
 
         //hover stuff
         bool m_isHovered;
