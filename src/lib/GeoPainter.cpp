@@ -60,7 +60,7 @@ class GeoPainterPrivate
 
             QPolygon  *polygon = new QPolygon;
 
-            GeoDataCoordinates *itPoint = const_cast<GeoDataCoordinates *>( points );
+            const GeoDataCoordinates *itPoint = points;
             while ( itPoint < points + pointCount ) {
                 bool globeHidesPoint;
                 bool isVisible = projection->screenCoordinates( *itPoint, m_viewport, x, y, globeHidesPoint );
@@ -282,7 +282,7 @@ void GeoPainter::drawPoints (  const GeoDataCoordinates * points, int pointCount
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    GeoDataCoordinates * itPoint = const_cast<GeoDataCoordinates *>( points );
+    const GeoDataCoordinates * itPoint = points;
     while( itPoint < points + pointCount ) {
         bool visible = projection->screenCoordinates( *itPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
     
@@ -292,6 +292,8 @@ void GeoPainter::drawPoints (  const GeoDataCoordinates * points, int pointCount
                 QPainter::drawPoint( d->m_x[it], y );
             }
         }
+
+        ++itPoint;
     }
 }
 
