@@ -112,14 +112,14 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
     Quaternion  qbound;
 
     viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
-    GeoPolygon::PtrVector::Iterator       itPolyLine;
+    GeoPolygon::PtrVector::ConstIterator  itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
     //	const int detail = 0;
     const int  detail = getDetailLevel( viewport->radius() );
 
-    for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
-          itPolyLine < itEndPolyLine;
+    for ( itPolyLine = pntmap->constBegin();
+          itPolyLine != itEndPolyLine;
           ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
