@@ -163,15 +163,15 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
     qreal x, y;
 
     viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
-    GeoPolygon::PtrVector::Iterator       itPolyLine;
+    GeoPolygon::PtrVector::ConstIterator  itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
     ScreenPolygon  boundingPolygon;
     QRectF         visibleArea ( 0, 0, m_imgwidth, m_imgheight );
     const int      detail = getDetailLevel( radius );
 
-    for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
-          itPolyLine < itEndPolyLine;
+    for ( itPolyLine = pntmap->begin();
+          itPolyLine != itEndPolyLine;
           ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
@@ -257,15 +257,15 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
     qreal x, y;
 
     viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
-    GeoPolygon::PtrVector::Iterator       itPolyLine;
+    GeoPolygon::PtrVector::ConstIterator  itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
     ScreenPolygon  boundingPolygon;
     QRectF         visibleArea ( 0, 0, m_imgwidth, m_imgheight );
     const int      detail = getDetailLevel( radius );
 
-    for ( itPolyLine = const_cast<PntMap *>(pntmap)->begin();
-          itPolyLine < itEndPolyLine;
+    for ( itPolyLine = pntmap->begin();
+          itPolyLine != itEndPolyLine;
           ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
