@@ -8,10 +8,10 @@
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
 //
 
-#include <QtCore/QDebug>
-
 // Local
 #include "SphericalProjection.h"
+
+#include <QtCore/QDebug>
 
 // Marble
 #include "SphericalProjectionHelper.h"

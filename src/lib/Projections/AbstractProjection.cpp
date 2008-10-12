@@ -8,10 +8,10 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-#include <QtCore/QDebug>
-
 // Local
 #include "AbstractProjection.h"
+
+#include <QtCore/QDebug>
 
 // Marble
 #include "ViewportParams.h"
