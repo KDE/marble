@@ -391,9 +391,9 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
 
     // "idlCrossState" specifies the state concerning IDL crossage.
     // This is needed in order to create optimal bounding boxes in case of covering the IDL 
-    // Everytime the IDL gets crossed from east to west the idlCrossStatae value gets 
+    // Every time the IDL gets crossed from east to west the idlCrossState value gets 
     // increased by one.
-    // Everytime the IDL gets crossed from west to east the idlCrossState value gets 
+    // Every time the IDL gets crossed from west to east the idlCrossState value gets 
     // decreased by one.
     
     int idlCrossState = 0;
