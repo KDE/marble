@@ -189,21 +189,32 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     painter->drawPolyline( ring, 37 ); 
 */
     GeoDataCoordinates t1(0.0, 90.0, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates t2(-45.0, 45.0, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates t3(-135.0, 45.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t2(-12.5, 45.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t3(-77.5, 45.0, 0.0, GeoDataCoordinates::Degree );
 
-    GeoDataLinearRing triangle;
+    GeoDataLinearRing triangle( 0, Tessellate | RespectLatitudeCircle );
 
     triangle.append(&t1);
     triangle.append(&t2);
     triangle.append(&t3);
+
+    GeoDataLinearRing triangle2( 0, Tessellate );
+
+    GeoDataCoordinates t4(0.0, 90.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t5(-102.5, 45.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t6(-167.5, 45.0, 0.0, GeoDataCoordinates::Degree );
+
+    triangle2.append(&t4);
+    triangle2.append(&t5);
+    triangle2.append(&t6);
 
     painter->setPen( QColor( 198, 99, 99, 255 ) );
     brush.setColor( QColor( 198, 99, 99, 180 ) );
     brush.setStyle( Qt::FDiagPattern );
     painter->setBrush( brush );
 
-    painter->drawPolygon( triangle, Qt::OddEvenFill, true ); 
+    painter->drawPolygon( triangle, Qt::OddEvenFill ); 
+    painter->drawPolygon( triangle2, Qt::OddEvenFill ); 
 
     GeoDataCoordinates sotm(-8.6, 52.66, 0.0, GeoDataCoordinates::Degree );
 

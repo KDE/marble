@@ -19,19 +19,22 @@ namespace Marble
 class GeoDataLineStringPrivate
 {
  public:
-    GeoDataLineStringPrivate()
-         : m_dirtyBox( true )
+    GeoDataLineStringPrivate( TessellationFlags f )
+         : m_dirtyBox( true ),
+           m_tessellationFlags( f )
     {
     }
+
     bool         m_dirtyBox; // tells whether there have been changes to the
                              // GeoDataPoints since the LatLonAltBox has 
                              // been calculated. Saves performance. 
+    TessellationFlags m_tessellationFlags;
 };
 
-GeoDataLineString::GeoDataLineString( GeoDataObject *parent )
+GeoDataLineString::GeoDataLineString( GeoDataObject *parent, TessellationFlags f )
   : QVector<GeoDataCoordinates*>(),
-  GeoDataGeometry( parent ), 
-    d( new GeoDataLineStringPrivate )
+    GeoDataGeometry( parent ), 
+    d( new GeoDataLineStringPrivate( f ) )
 {
 }
 
@@ -57,6 +60,30 @@ GeoDataLineString::~GeoDataLineString()
     delete d;
 //    FIXME: Ownership
 //    qDeleteAll(*this);
+}
+
+bool GeoDataLineString::tessellate() const
+{
+    return d->m_tessellationFlags.testFlag(Tessellate);
+}
+
+void GeoDataLineString::setTessellate( bool tessellate )
+{
+    if ( tessellate ) {
+        d->m_tessellationFlags |= Tessellate; 
+    } else {
+        d->m_tessellationFlags ^= Tessellate; 
+    }
+}
+
+TessellationFlags GeoDataLineString::tessellationFlags() const
+{
+    return d->m_tessellationFlags;
+}
+
+void GeoDataLineString::setTessellationFlags( TessellationFlags f )
+{
+    d->m_tessellationFlags = f;
 }
 
 GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
@@ -101,6 +128,7 @@ void GeoDataLineString::pack( QDataStream& stream ) const
     GeoDataGeometry::pack( stream );
 
     stream << size();
+    stream << (qint32)(d->m_tessellationFlags);
     
     for( QVector<GeoDataCoordinates*>::const_iterator iterator 
           = constBegin(); 
@@ -116,10 +144,15 @@ void GeoDataLineString::pack( QDataStream& stream ) const
 void GeoDataLineString::unpack( QDataStream& stream )
 {
     GeoDataGeometry::unpack( stream );
-    int size;
-    
+    qint32 size;
+    qint32 tessellationFlags;
+
     stream >> size;
-    for(int i = 0; i < size; i++ ) {
+    stream >> tessellationFlags;
+
+    d->m_tessellationFlags = (TessellationFlags)(tessellationFlags);
+
+    for(qint32 i = 0; i < size; i++ ) {
         GeoDataCoordinates* coord = new GeoDataCoordinates();
         coord->unpack( stream );
         append( coord );

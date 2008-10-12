@@ -45,9 +45,6 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     bool extrude() const;
     void setExtrude( bool extrude );
 
-    bool tessellate() const;
-    void setTessellate( bool tessellate );
-
     AltitudeMode altitudeMode() const;
     void setAltitudeMode( const AltitudeMode altitudeMode );
 

@@ -158,11 +158,15 @@ GeoDataLinearRing AbstractProjection::rectOutline( const QRect& screenRect,
     return GeoDataLinearRing();
 }
 
-QPolygonF AbstractProjection::polygonFromCoords( const GeoDataCoordinates &previousCoords, 
-                                                 const GeoDataCoordinates &currentCoords,
-                                                 int count,
-                                                 const ViewportParams *viewport )
+QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &previousCoords, 
+                                                    const GeoDataCoordinates &currentCoords,
+                                                    int count,
+                                                    const ViewportParams *viewport,
+                                                    TessellationFlags f )
 {
+    bool clampToGround = f.testFlag( FollowGround );
+    bool followLatitudeCircle = false;     
+
     Quaternion  itpos;
     QPolygonF   path;
 
@@ -171,20 +175,56 @@ QPolygonF AbstractProjection::polygonFromCoords( const GeoDataCoordinates &previ
         count = 50;
     }
 
-    qDebug() << "Creating SLERP nodes:" << count;
+    qDebug() << "Creating tesselation nodes:" << count;
 
-    for ( int i = 0; i < count; ++i ) {
-        qreal  t = (qreal)(i + 1) / (qreal)( count + 1 ) ;
+    qreal previousAltitude = previousCoords.altitude();
+
+    qreal lonDiff;
+    qreal previousLongitude, previousLatitude;
+
+    if ( f.testFlag( RespectLatitudeCircle ) ) {
+        previousCoords.geoCoordinates( previousLongitude, previousLatitude );
+
+        qreal currentLongitude, currentLatitude;
+        currentCoords.geoCoordinates( currentLongitude, currentLatitude );
+
+        if ( previousLatitude == currentLatitude ) {
+            followLatitudeCircle = true;
+            lonDiff = currentLongitude - previousLongitude;
+        }
+    }
+    
+    qreal altDiff = currentCoords.altitude() - previousAltitude;
+
+    // Take the clampToGround property into account
+    int startNode = clampToGround ? 0 : 1;
+    int endNode = clampToGround ? count + 2 : count + 1;
+
+    for ( int i = startNode; i < endNode; ++i ) {
+        qreal  t = (qreal)(i) / (qreal)( count + 1 ) ;
 
         qreal  lon = 0.0;
         qreal  lat = 0.0;
         int     x = 0;
         int     y = 0;
 
-        // Let itpos be a quaternion that is between prevqpos and qpos.
-        itpos.slerp( previousCoords.quaternion(), currentCoords.quaternion(), t );
-        itpos.getSpherical( lon, lat );
-        screenCoordinates( lon, lat, viewport, x, y, originalCoordinates );
+        // interpolate the altitude, too
+        qreal altitude = clampToGround ? 0 : altDiff * t + previousAltitude;
+
+        if ( followLatitudeCircle ) {
+            // To tesselate along latitude circles use the 
+            // linear interpolation of the longitude.
+            lon = lonDiff * t + previousLongitude;
+            lat = previousLatitude;
+        }
+        else {
+            // To tesselate along great circles use the 
+            // spherical linear interpolation ("SLERP") for latitude and longitude.
+            itpos.slerp( previousCoords.quaternion(), currentCoords.quaternion(), t );
+            itpos.getSpherical( lon, lat );
+        }
+
+        screenCoordinates( GeoDataCoordinates( lon, lat, altitude ), viewport, x, y );
 
         path << QPointF( x, y );
     }

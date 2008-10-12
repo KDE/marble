@@ -23,13 +23,11 @@ class GeoDataGeometryPrivate
  public:
     GeoDataGeometryPrivate()
         : m_extrude( false ),
-          m_tessellate( false ),
           m_altitudeMode( ClampToGround )
     {
     }
 
     bool         m_extrude;
-    bool         m_tessellate;
     AltitudeMode m_altitudeMode;
 };
 
@@ -41,16 +39,6 @@ bool GeoDataGeometry::extrude() const
 void GeoDataGeometry::setExtrude( bool extrude )
 {
     d->m_extrude = extrude;
-}
-
-bool GeoDataGeometry::tessellate() const
-{
-    return d->m_tessellate;
-}
-
-void GeoDataGeometry::setTessellate( bool tessellate )
-{
-    d->m_tessellate = tessellate;
 }
 
 AltitudeMode GeoDataGeometry::altitudeMode() const
@@ -93,7 +81,6 @@ void GeoDataGeometry::pack( QDataStream& stream ) const
     GeoDataObject::pack( stream );
 
     stream << d->m_extrude;
-    stream << d->m_tessellate;
     stream << d->m_altitudeMode;
 }
 
@@ -103,7 +90,6 @@ void GeoDataGeometry::unpack( QDataStream& stream )
 
     int am;
     stream >> d->m_extrude;
-    stream >> d->m_tessellate;
     stream >> am;
     d->m_altitudeMode = (AltitudeMode) am;
 }

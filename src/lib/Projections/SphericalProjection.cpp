@@ -59,12 +59,10 @@ AbstractProjectionHelper *SphericalProjection::helper()
 
 bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
                                              const ViewportParams *viewport,
-                                             int& x, int& y,
-                                             CoordinateType coordType )
+                                             int& x, int& y )
 {
     Quaternion  p( lon, lat );
-    if ( coordType == originalCoordinates )
-        p.rotateAroundAxis( viewport->planetAxis().inverse() );
+    p.rotateAroundAxis( viewport->planetAxis().inverse() );
  
     x = (int)( viewport->width()  / 2 + (qreal)( viewport->radius() ) * p.v[Q_X] );
     y = (int)( viewport->height() / 2 - (qreal)( viewport->radius() ) * p.v[Q_Y] );
@@ -177,8 +175,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
 
 bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygonF *> &polygons, 
-                                    bool isGeoProjected )
+                                    QVector<QPolygonF *> &polygons )
 {
     int x, y;
     bool globeHidesPoint;
@@ -223,7 +220,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
 
         }
 
-        if ( isGeoProjected ) {
+        if ( lineString.tessellate() ) {
             // let the line segment follow the spherical surface
             // if the distance between the previous point and the current point 
             // on screen is too big
@@ -259,8 +256,8 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
             ){
                 if ( distance > precision ) {
                     qDebug() << "Distance: " << distance;
-                    *polygon << polygonFromCoords( previousCoords, **itCoords, 
-                                                   suggestedCount, viewport ); 
+                    *polygon << tessellateLineSegment( previousCoords, **itCoords, 
+                                                      suggestedCount, viewport, lineString.tessellationFlags() ); 
                 }
             }
         }
@@ -294,8 +291,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
 
 bool SphericalProjection::screenCoordinates( const GeoDataLinearRing &linearRing, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygonF *> &polygons, 
-                                    bool isGeoProjected )
+                                    QVector<QPolygonF *> &polygons )
 {
     int x, y;
     bool globeHidesPoint;
@@ -340,7 +336,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLinearRing &linearRing
 
         }
 
-        if ( isGeoProjected ) {
+        if ( linearRing.tessellate() ) {
             // let the line segment follow the spherical surface
             // if the distance between the previous point and the current point 
             // on screen is too big
@@ -376,8 +372,8 @@ bool SphericalProjection::screenCoordinates( const GeoDataLinearRing &linearRing
             ){
                 if ( distance > precision ) {
                     qDebug() << "Distance: " << distance;
-                    *polygon << polygonFromCoords( previousCoords, **itCoords, 
-                                                   suggestedCount, viewport ); 
+                    *polygon << tessellateLineSegment( previousCoords, **itCoords, 
+                                                      suggestedCount, viewport, linearRing.tessellationFlags() ); 
                 }
             }
         }

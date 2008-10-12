@@ -15,8 +15,9 @@
 namespace Marble
 {
 
-GeoDataLinearRing::GeoDataLinearRing( GeoDataObject *parent )
-    : GeoDataLineString( parent )
+GeoDataLinearRing::GeoDataLinearRing( GeoDataObject *parent,
+                                      TessellationFlags f )
+    : GeoDataLineString( parent, f )
 {
 }
 

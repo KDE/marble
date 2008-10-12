@@ -43,11 +43,8 @@ AbstractProjectionHelper *EquirectProjection::helper()
 
 bool EquirectProjection::screenCoordinates( const qreal lon, const qreal lat,
                                             const ViewportParams *viewport,
-                                            int& x, int& y,
-                                            CoordinateType coordType )
+                                            int& x, int& y )
 {
-    Q_UNUSED( coordType );
-
     // Convenience variables
     int  radius = viewport->radius();
     int  width  = viewport->width();
@@ -187,8 +184,7 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
 bool EquirectProjection::screenCoordinates( const GeoDataLineString &lineString, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygonF *> &polygons, 
-                                    bool isGeoProjected )
+                                    QVector<QPolygonF *> &polygons )
 {
     return false;
 }
@@ -197,8 +193,7 @@ bool EquirectProjection::screenCoordinates( const GeoDataLineString &lineString,
 
 bool EquirectProjection::screenCoordinates( const GeoDataLinearRing &linearRing, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygonF *> &polygons, 
-                                    bool isGeoProjected )
+                                    QVector<QPolygonF *> &polygons )
 {
     return false;
 }

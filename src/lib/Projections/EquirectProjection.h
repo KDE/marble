@@ -55,8 +55,7 @@ class EquirectProjection : public AbstractProjection
      */
     bool screenCoordinates( const qreal lon, const qreal lat,
                             const ViewportParams *params,
-                            int& x, int& y,
-                            CoordinateType coordType = originalCoordinates );
+                            int& x, int& y );
 
     bool screenCoordinates( const GeoDataCoordinates &geopoint, 
                             const ViewportParams *params,
@@ -69,13 +68,11 @@ class EquirectProjection : public AbstractProjection
 
     bool screenCoordinates( const GeoDataLineString &lineString, 
                             const ViewportParams *viewport,
-                            QVector<QPolygonF *> &polygons, 
-                            bool isGeoProjected = false );
+                            QVector<QPolygonF *> &polygons );
 
     bool screenCoordinates( const GeoDataLinearRing &linearRing, 
                             const ViewportParams *viewport,
-                            QVector<QPolygonF *> &polygons, 
-                            bool isGeoProjected = false );
+                            QVector<QPolygonF *> &polygons );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.

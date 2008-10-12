@@ -44,30 +44,52 @@ GeoNode* KmltessellateTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    GeoDataGeometry* geometry;
     bool validParents = false;
 
-    if( parentItem.nodeAs<GeoDataPlacemark>() && parentItem.represents( kmlTag_Point ) ) {
-        geometry = parentItem.nodeAs<GeoDataPlacemark>()->geometry();
+    QString content = parser.readElementText().trimmed();
+
+    if( parentItem.nodeAs<GeoDataLineString>() ) {
+        GeoDataLineString* lineString = parentItem.nodeAs<GeoDataLineString>();
+
+        if( content == QString( "1" ) ) {
+            lineString->setTessellate( true );
+        } else {
+            lineString->setTessellate( false );
+        }
+
         validParents = true;
-    } else if( parentItem.nodeAs<GeoDataGeometry>() ) {
-        geometry = parentItem.nodeAs<GeoDataGeometry>();
+
+    } else if( parentItem.nodeAs<GeoDataLinearRing>() ) {
+        GeoDataLinearRing* linearRing = parentItem.nodeAs<GeoDataLinearRing>();
+
+        if( content == QString( "1" ) ) {
+            linearRing->setTessellate( true );
+        } else {
+            linearRing->setTessellate( false );
+        }
+
         validParents = true;
+
+    } else if( parentItem.nodeAs<GeoDataPolygon>() ) {
+        GeoDataPolygon* polygon = parentItem.nodeAs<GeoDataPolygon>();
+
+        if( content == QString( "1" ) ) {
+            polygon->setTessellate( true );
+        } else {
+            polygon->setTessellate( false );
+        }
+
+        validParents = true;
+
     }
 
-    if( validParents ) {
-        QString content = parser.readElementText().trimmed();
         
-        if( content == QString( "1" ) ) {
-            geometry->setTessellate( true );
-        } else {
-            geometry->setTessellate( false );
-        }
 #ifdef DEBUG_TAGS
+    if( validParents ) {
         qDebug() << "Parsed <" << kmlTag_tessellate << "> containing: " << content
                  << " parent item name: " << parentItem.qualifiedName().first;
-#endif
     }
+#endif
 
     return 0;
 }

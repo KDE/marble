@@ -125,9 +125,8 @@ void MeasureTool::drawDistancePoints( GeoPainter *painter,
         qpos.getSpherical( lon, lat );
 
         if ( viewport->currentProjection()
-	     ->screenCoordinates( lon, lat, viewport,
-				  x, y,
-				  originalCoordinates ) )
+	     ->screenCoordinates( GeoDataCoordinates( lon, lat ), viewport,
+				  x, y ) )
 	{
             // Don't process markers if they are outside the screen area.
             // FIXME: Some part of it may be visible anyway.
@@ -207,9 +206,8 @@ void MeasureTool::drawDistancePath( GeoPainter* painter,
         itpos.slerp( prevqpos, qpos, t );
         itpos.getSpherical( lon, lat );
         if ( viewport->currentProjection()
-	     ->screenCoordinates( lon, lat, viewport,
-				  x, y,
-				  originalCoordinates /*mappedCoordinates*/ ) )
+	     ->screenCoordinates( GeoDataCoordinates( lon, lat ), viewport,
+				  x, y ) )
         {
             distancePath << QPointF( x, y );
         }

@@ -35,12 +35,6 @@ class ViewportParams;
 class AbstractProjectionHelper;
 
 
-typedef enum {
-    originalCoordinates,
-    mappedCoordinates
-}  CoordinateType;
-
-
 /**
  * @short A base class for all projections in Marble.
  */
@@ -85,8 +79,7 @@ class AbstractProjection
      */
     virtual bool screenCoordinates( const qreal lon, const qreal lat,
                                     const ViewportParams *viewport,
-                                    int& x, int& y,
-                                    CoordinateType coordType = originalCoordinates ) = 0;
+                                    int& x, int& y ) = 0;
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
@@ -135,13 +128,11 @@ class AbstractProjection
 
     virtual bool screenCoordinates( const GeoDataLineString &lineString, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygonF*> &polygons, 
-                                    bool isGeoProjected = false ) = 0;
+                                    QVector<QPolygonF*> &polygons ) = 0;
 
     virtual bool screenCoordinates( const GeoDataLinearRing &linearRing, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygonF*> &polygons, 
-                                    bool isGeoProjected = false ) = 0;
+                                    QVector<QPolygonF*> &polygons ) = 0;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -181,9 +172,16 @@ class AbstractProjection
                              qreal &otherWestLon, qreal &otherEastLon,
                              qreal &northLat, qreal &southLat );
 
-    QPolygonF polygonFromCoords( const GeoDataCoordinates &previousCoords, 
-                                 const GeoDataCoordinates &currentCoords, 
-                                 int count, const ViewportParams *viewport ); 
+    // This method tesselates a line segment in a way that the line segment
+    // follows great circles. The count parameter specifies the 
+    // number of nodes generated for the polygon. If the 
+    // clampToGround flag is added the polygon contains count + 2
+    // nodes as the clamped down start and end node get added.
+
+    QPolygonF tessellateLineSegment( const GeoDataCoordinates &previousCoords, 
+                                    const GeoDataCoordinates &currentCoords, 
+                                    int count, const ViewportParams *viewport,
+                                    TessellationFlags f = 0 ); 
 };
 
 }

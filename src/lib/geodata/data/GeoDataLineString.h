@@ -12,6 +12,7 @@
 #ifndef GEODATALINESTRING_H
 #define GEODATALINESTRING_H
 
+#include <QtCore/QFlags>
 #include <QtCore/QVector>
 
 #include "global.h"
@@ -43,12 +44,20 @@ class GeoDataLineStringPrivate;
 
 class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates*>,
                                          public GeoDataGeometry {
+
  public:
-    explicit GeoDataLineString( GeoDataObject *parent = 0 );
+
+    explicit GeoDataLineString( GeoDataObject *parent = 0, TessellationFlags f = NoTessellation);
     GeoDataLineString( const GeoDataLineString & );
     GeoDataLineString& operator=( const GeoDataLineString & );
 
     virtual ~GeoDataLineString();
+
+    bool tessellate() const;
+    void setTessellate( bool tessellate );
+
+    TessellationFlags tessellationFlags() const;
+    void setTessellationFlags( TessellationFlags f );
 
     GeoDataLatLonAltBox latLonAltBox() const;
 

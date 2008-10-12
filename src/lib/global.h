@@ -22,6 +22,16 @@
 namespace Marble
 {
 
+enum TessellationFlag {
+    NoTessellation = 0x0,
+    Tessellate = 0x1, 
+    RespectLatitudeCircle = 0x2,
+    FollowGround = 0x4,
+    RotationIndicatesFill = 0x8
+};
+
+Q_DECLARE_FLAGS(TessellationFlags, TessellationFlag)
+
 /**
  * @brief This enum is used to choose the projection shown in the view.
  */
@@ -136,5 +146,7 @@ const qreal RAD2INT = 21600.0 / M_PI;
 const qreal EARTH_RADIUS = 6378000.0;
 
 }
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::TessellationFlags)
 
 #endif

@@ -20,9 +20,10 @@ namespace Marble
 class GeoDataPolygonPrivate
 {
  public:
-    GeoDataPolygonPrivate( GeoDataPolygon *geoDataPolygon )
-	: outer( new GeoDataLinearRing( geoDataPolygon ) ),
-	  m_dirtyBox( true )
+    GeoDataPolygonPrivate( GeoDataPolygon *geoDataPolygon, TessellationFlags f  )
+        : outer( new GeoDataLinearRing( geoDataPolygon ) ),
+          m_dirtyBox( true ),
+          m_tessellationFlags( f )
     {
     }
     
@@ -39,14 +40,15 @@ class GeoDataPolygonPrivate
     
     GeoDataLinearRing*          outer;
     QVector<GeoDataLinearRing*> inner;
-    bool                        m_dirtyBox; // tells whether there have been changes to the
-                                            // GeoDataPoints since the LatLonAltBox has 
-                                            // been calculated. Saves performance. 
+    bool         m_dirtyBox; // tells whether there have been changes to the
+                             // GeoDataPoints since the LatLonAltBox has 
+                             // been calculated. Saves performance. 
+    TessellationFlags m_tessellationFlags;
 };
 
-GeoDataPolygon::GeoDataPolygon( GeoDataObject *parent )
+GeoDataPolygon::GeoDataPolygon( GeoDataObject *parent, TessellationFlags f )
   : GeoDataGeometry( parent ),
-    d( new GeoDataPolygonPrivate( this ) )
+    d( new GeoDataPolygonPrivate( this, f ) )
 {
 }
 
@@ -68,6 +70,30 @@ GeoDataPolygon::~GeoDataPolygon()
     qDebug() << "delete polygon";
 #endif
     delete d;
+}
+
+bool GeoDataPolygon::tessellate() const
+{
+    return d->m_tessellationFlags.testFlag(Tessellate);
+}
+
+void GeoDataPolygon::setTessellate( bool tessellate )
+{
+    if ( tessellate ) {
+        d->m_tessellationFlags |= Tessellate; 
+    } else {
+        d->m_tessellationFlags ^= Tessellate; 
+    }
+}
+
+TessellationFlags GeoDataPolygon::tessellationFlags() const
+{
+    return d->m_tessellationFlags;
+}
+
+void GeoDataPolygon::setTessellationFlags( TessellationFlags f )
+{
+    d->m_tessellationFlags = f;
 }
 
 GeoDataLatLonAltBox GeoDataPolygon::latLonAltBox() const
@@ -108,7 +134,8 @@ void GeoDataPolygon::pack( QDataStream& stream ) const
     d->outer->pack( stream );
     
     stream << d->inner.size();
-    
+    stream << (qint32)(d->m_tessellationFlags);
+   
     for( QVector<GeoDataLinearRing*>::const_iterator iterator 
           = d->inner.constBegin(); 
          iterator != d->inner.constEnd();
@@ -124,10 +151,16 @@ void GeoDataPolygon::unpack( QDataStream& stream )
     GeoDataObject::unpack( stream );
 
     d->outer->unpack( stream );
-    int size;
-    
+
+    qint32 size;
+    qint32 tessellationFlags;
+
     stream >> size;
-    for(int i = 0; i < size; i++ ) {
+    stream >> tessellationFlags;
+
+    d->m_tessellationFlags = (TessellationFlags)(tessellationFlags);
+
+    for(qint32 i = 0; i < size; i++ ) {
         GeoDataLinearRing* linearRing = new GeoDataLinearRing( this );
         linearRing->unpack( stream );
         d->inner.append( linearRing );

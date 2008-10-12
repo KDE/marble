@@ -46,11 +46,8 @@ AbstractProjectionHelper *MercatorProjection::helper()
 
 bool MercatorProjection::screenCoordinates( const qreal lon, const qreal lat,
                                             const ViewportParams *viewport,
-                                            int& x, int& y,
-                                            CoordinateType coordType )
+                                            int& x, int& y )
 {
-    Q_UNUSED( coordType );
-
     if ( fabs( lat ) > m_maxLat )
         return false;
 
@@ -193,16 +190,14 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 
 bool MercatorProjection::screenCoordinates( const GeoDataLineString &lineString, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygonF *> &polygons, 
-                                    bool isGeoProjected )
+                                    QVector<QPolygonF *> &polygons )
 {
     return false;
 }
 
 bool MercatorProjection::screenCoordinates( const GeoDataLinearRing &linearRing, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygonF *> &polygons, 
-                                    bool isGeoProjected )
+                                    QVector<QPolygonF *> &polygons )
 {
     return false;
 }

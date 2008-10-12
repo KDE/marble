@@ -45,22 +45,20 @@ class GeoPainterPrivate
     }
 
     void createPolygonsFromLineString( const GeoDataLineString & lineString, 
-                   QVector<QPolygonF *> &polygons, 
-                   bool isGeoProjected = false )
+                   QVector<QPolygonF *> &polygons )
     {
         AbstractProjection *projection = m_viewport->currentProjection();
 
-        projection->screenCoordinates( lineString, m_viewport, polygons, isGeoProjected );
+        projection->screenCoordinates( lineString, m_viewport, polygons );
     }
 
 
     void createPolygonsFromLinearRing( const GeoDataLinearRing & linearRing, 
-                   QVector<QPolygonF *> &polygons, 
-                   bool isGeoProjected = false )
+                   QVector<QPolygonF *> &polygons )
     {
         AbstractProjection *projection = m_viewport->currentProjection();
-        qDebug() << "SIZE" << linearRing.size();
-        projection->screenCoordinates( linearRing, m_viewport, polygons, isGeoProjected );
+
+        projection->screenCoordinates( linearRing, m_viewport, polygons );
     }
 
 
@@ -325,9 +323,10 @@ void GeoPainter::drawLine (  const GeoDataCoordinates & p1,  const GeoDataCoordi
     }
 }
 
-void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, bool isGeoProjected )
+void GeoPainter::drawPolyline ( const GeoDataLineString & lineString )
 {
     // If the object is not visible in the viewport return 
+    // FIXME: For better testing we are using "contains" instead of "intersects" right now
     if ( ! d->m_viewport->viewLatLonAltBox().contains( lineString.latLonAltBox() ) )
     {
         qDebug() << "LineString doesn't get displayed on the viewport";
@@ -336,7 +335,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, bool isGeo
     qDebug() << "Drawing LineString";
 
     QVector<QPolygonF*> polygons;
-    d->createPolygonsFromLineString( lineString, polygons, isGeoProjected );
+    d->createPolygonsFromLineString( lineString, polygons );
 
     foreach( QPolygonF* itPolygon, polygons ) {
         // Using QPainter instead of ClipPainter until some bugs are fixed.
@@ -346,33 +345,33 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, bool isGeo
     qDeleteAll( polygons );
 }
 
-void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRule fillRule, bool isGeoProjected )
+void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRule fillRule )
 {
-/*
     // If the object is not visible in the viewport return 
+    // FIXME: For better testing we are using "contains" instead of "intersects" right now
     if ( ! d->m_viewport->viewLatLonAltBox().contains( linearRing.latLonAltBox() ) )
     {
-        qDebug() << "LinearRing doesn't get displayed on the viewport";
+        qDebug() << "Polygon doesn't get displayed on the viewport";
         return;
     }
-*/
-    qDebug() << "Drawing LinearRing";
+
+    qDebug() << "Drawing Polygon";
 
     QVector<QPolygonF*> polygons;
-    d->createPolygonsFromLinearRing( linearRing, polygons, isGeoProjected );
+    d->createPolygonsFromLinearRing( linearRing, polygons );
 
     foreach( QPolygonF* itPolygon, polygons ) {
         // Using QPainter instead of ClipPainter until some bugs are fixed.
-        qDebug() << "Polygons:" << polygons.count() << " : " << itPolygon->count();
         QPainter::drawPolygon( *itPolygon );
     }
 
     qDeleteAll( polygons );
 }
 
-void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fillRule, bool isGeoProjected )
+void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fillRule )
 {
     // If the object is not visible in the viewport return 
+    // FIXME: For better testing we are using "contains" instead of "intersects" right now
     if ( ! d->m_viewport->viewLatLonAltBox().contains( polygon.outerBoundary().latLonAltBox() ) )
     {
         qDebug() << "Polygon doesn't get displayed on the viewport";
@@ -382,7 +381,7 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fill
 
     // Creating the outer screen polygons first
     QVector<QPolygonF*> outerPolygons;
-    d->createPolygonsFromLinearRing( polygon.outerBoundary(), outerPolygons, isGeoProjected );
+    d->createPolygonsFromLinearRing( polygon.outerBoundary(), outerPolygons );
 
     // Now creating the "holes" by cutting away the inner boundaries:
 
@@ -392,7 +391,7 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fill
     QVector<GeoDataLinearRing *> innerBoundaries = polygon.innerBoundaries(); 
     foreach( GeoDataLinearRing *itInnerBoundary, innerBoundaries ) {
         QVector<QPolygonF*> innerPolygons;
-        d->createPolygonsFromLinearRing( *itInnerBoundary, innerPolygons, isGeoProjected );
+        d->createPolygonsFromLinearRing( *itInnerBoundary, innerPolygons );
         
         foreach( QPolygonF* itOuterPolygon, outerPolygons ) {
             foreach( QPolygonF* itInnerPolygon, innerPolygons ) {

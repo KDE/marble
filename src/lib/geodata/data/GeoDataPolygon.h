@@ -42,11 +42,17 @@ class GeoDataPolygonPrivate;
 
 class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
  public:
-    explicit GeoDataPolygon( GeoDataObject *parent = 0 );
+    explicit GeoDataPolygon( GeoDataObject *parent = 0, TessellationFlags f = NoTessellation);
     GeoDataPolygon( const GeoDataPolygon & );
     GeoDataPolygon& operator=( const GeoDataPolygon & );
 
     virtual ~GeoDataPolygon();
+
+    bool tessellate() const;
+    void setTessellate( bool tessellate );
+
+    TessellationFlags tessellationFlags() const;
+    void setTessellationFlags( TessellationFlags f );
 
     GeoDataLatLonAltBox latLonAltBox() const;
 
