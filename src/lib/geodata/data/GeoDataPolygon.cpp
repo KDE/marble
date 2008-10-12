@@ -72,6 +72,11 @@ GeoDataPolygon::~GeoDataPolygon()
     delete d;
 }
 
+bool GeoDataPolygon::isClosed() const
+{
+    return true;
+}
+
 bool GeoDataPolygon::tessellate() const
 {
     return d->m_tessellationFlags.testFlag(Tessellate);

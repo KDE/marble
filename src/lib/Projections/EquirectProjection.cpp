@@ -190,15 +190,6 @@ bool EquirectProjection::screenCoordinates( const GeoDataLineString &lineString,
 }
 
 
-
-bool EquirectProjection::screenCoordinates( const GeoDataLinearRing &linearRing, 
-                                    const ViewportParams *viewport,
-                                    QVector<QPolygonF *> &polygons )
-{
-    return false;
-}
-
-
 bool EquirectProjection::geoCoordinates( int x, int y,
                                          const ViewportParams *viewport,
                                          qreal& lon, qreal& lat,

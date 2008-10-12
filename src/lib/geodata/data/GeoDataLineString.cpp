@@ -62,6 +62,11 @@ GeoDataLineString::~GeoDataLineString()
 //    qDeleteAll(*this);
 }
 
+bool GeoDataLineString::isClosed() const
+{
+    return false;
+}
+
 bool GeoDataLineString::tessellate() const
 {
     return d->m_tessellationFlags.testFlag(Tessellate);

@@ -130,10 +130,6 @@ class AbstractProjection
                                     const ViewportParams *viewport,
                                     QVector<QPolygonF*> &polygons ) = 0;
 
-    virtual bool screenCoordinates( const GeoDataLinearRing &linearRing, 
-                                    const ViewportParams *viewport,
-                                    QVector<QPolygonF*> &polygons ) = 0;
-
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
      * @param x      the x coordinate of the pixel

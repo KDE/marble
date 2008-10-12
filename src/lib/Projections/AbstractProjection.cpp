@@ -167,9 +167,6 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
     bool clampToGround = f.testFlag( FollowGround );
     bool followLatitudeCircle = false;     
 
-    Quaternion  itpos;
-    QPolygonF   path;
-
     if ( count > 50 ) {
         qDebug() << "Count of" << count << "exceeded maximum count.";
         count = 50;
@@ -179,13 +176,15 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
 
     qreal previousAltitude = previousCoords.altitude();
 
-    qreal lonDiff;
-    qreal previousLongitude, previousLatitude;
+    qreal lonDiff = 0.0;
+    qreal previousLongitude = 0.0;
+    qreal previousLatitude = 0.0;
 
     if ( f.testFlag( RespectLatitudeCircle ) ) {
         previousCoords.geoCoordinates( previousLongitude, previousLatitude );
 
-        qreal currentLongitude, currentLatitude;
+        qreal currentLongitude = 0.0;
+        qreal currentLatitude = 0.0;
         currentCoords.geoCoordinates( currentLongitude, currentLatitude );
 
         if ( previousLatitude == currentLatitude ) {
@@ -200,13 +199,17 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
     int startNode = clampToGround ? 0 : 1;
     int endNode = clampToGround ? count + 2 : count + 1;
 
+    qreal  lon = 0.0;
+    qreal  lat = 0.0;
+    int     x = 0;
+    int     y = 0;
+
+    Quaternion  itpos;
+    QPolygonF   path;
+
     for ( int i = startNode; i < endNode; ++i ) {
         qreal  t = (qreal)(i) / (qreal)( count + 1 ) ;
 
-        qreal  lon = 0.0;
-        qreal  lat = 0.0;
-        int     x = 0;
-        int     y = 0;
 
         // interpolate the altitude, too
         qreal altitude = clampToGround ? 0 : altDiff * t + previousAltitude;
@@ -221,12 +224,14 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
             // To tesselate along great circles use the 
             // spherical linear interpolation ("SLERP") for latitude and longitude.
             itpos.slerp( previousCoords.quaternion(), currentCoords.quaternion(), t );
+
             itpos.getSpherical( lon, lat );
         }
 
-        screenCoordinates( GeoDataCoordinates( lon, lat, altitude ), viewport, x, y );
-
-        path << QPointF( x, y );
+        bool visible = screenCoordinates( GeoDataCoordinates( lon, lat, altitude ), viewport, x, y );
+        if ( visible ) {
+            path << QPointF( x, y );
+        }
     }
     return path; 
 }

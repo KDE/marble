@@ -195,13 +195,6 @@ bool MercatorProjection::screenCoordinates( const GeoDataLineString &lineString,
     return false;
 }
 
-bool MercatorProjection::screenCoordinates( const GeoDataLinearRing &linearRing, 
-                                    const ViewportParams *viewport,
-                                    QVector<QPolygonF *> &polygons )
-{
-    return false;
-}
-
 bool MercatorProjection::geoCoordinates( int x, int y,
                                          const ViewportParams *viewport,
                                          qreal& lon, qreal& lat,

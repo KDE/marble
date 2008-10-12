@@ -48,6 +48,8 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
 
     virtual ~GeoDataPolygon();
 
+    virtual bool isClosed() const;
+
     bool tessellate() const;
     void setTessellate( bool tessellate );
 

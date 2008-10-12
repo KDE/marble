@@ -25,4 +25,10 @@ GeoDataLinearRing::~GeoDataLinearRing()
 {
 }
 
+bool GeoDataLinearRing::isClosed() const
+{
+    return true;
 }
+
+}
+

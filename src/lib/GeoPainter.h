@@ -121,7 +121,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     void drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fillRule = Qt::OddEvenFill );
 
 
-    void drawRect ( const GeoDataCoordinates & centerPoint, int width, int height, bool isGeoProjected = false );
+    void drawRect ( const GeoDataCoordinates & centerPoint, qreal width, qreal height, bool isGeoProjected = false );
     void drawRoundRect ( const GeoDataCoordinates & centerPoint, int w, int h, int xRnd = 25, int yRnd = 25, bool isGeoProjected = false );
 
 

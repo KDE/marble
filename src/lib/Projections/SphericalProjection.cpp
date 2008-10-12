@@ -67,7 +67,9 @@ bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
     x = (int)( viewport->width()  / 2 + (qreal)( viewport->radius() ) * p.v[Q_X] );
     y = (int)( viewport->height() / 2 - (qreal)( viewport->radius() ) * p.v[Q_Y] );
  
-    return p.v[Q_Z] > 0;
+    return (    ( 0 <= y && y < viewport->height() )
+             && ( 0 <= x && x < viewport->width() ) 
+             && p.v[Q_Z] > 0 );
 }
 
 bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinates, 
@@ -186,18 +188,20 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
     GeoDataCoordinates previousCoords;
 
     QPolygonF  *polygon = new QPolygonF;
-    
-    GeoDataLineString::ConstIterator itCoords;
-    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
 
     bool isVisible = false;
+    
+    GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
+    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
 
-    for ( itCoords = lineString.constBegin(); itCoords != itEnd; ++itCoords )
+    bool processingLastNode = false;
+
+    while ( itCoords != itEnd )
     {
         isVisible = screenCoordinates( **itCoords, viewport, x, y, globeHidesPoint );
 
         // Initializing variables that store the values of the previous iteration
-        if ( itCoords == lineString.constBegin() ) {
+        if ( !processingLastNode && itCoords == lineString.constBegin() ) {
             previousGlobeHidesPoint = globeHidesPoint;
             previousIsVisible = isVisible;
             previousCoords = **itCoords;
@@ -217,7 +221,6 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                 // previous point, so that we still get correct results for 
                 // the case where we need to geoproject the line segment.
             }
-
         }
 
         if ( lineString.tessellate() ) {
@@ -266,7 +269,10 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
             polygon->append( QPointF( x, y ) );
         }
         else {
-            if ( !previousGlobeHidesPoint ) {
+            if (   !previousGlobeHidesPoint 
+                   && !lineString.isClosed() // FIXME: this probably needs to take rotation 
+                                             //        into account for some cases
+                ) {
                 polygons.append( polygon );
                 polygon = new QPolygonF;
             }
@@ -277,122 +283,19 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
         previousCoords = **itCoords;
         previousX = x;
         previousY = y;
-    }
 
-    if ( polygon->size() > 1 ){
-        polygons.append( polygon );
-    }
-    else {
-        delete polygon;
-    }
+        // Here we modify the condition to be able to process the 
+        // first node after the last node in a LinearRing.
 
-    return polygons.isEmpty();
-}
-
-bool SphericalProjection::screenCoordinates( const GeoDataLinearRing &linearRing, 
-                                    const ViewportParams *viewport,
-                                    QVector<QPolygonF *> &polygons )
-{
-    int x, y;
-    bool globeHidesPoint;
-
-    int previousX, previousY;
-    bool previousGlobeHidesPoint;
-    bool previousIsVisible;
-    GeoDataCoordinates previousCoords;
-
-    QPolygonF  *polygon = new QPolygonF;
-    
-    GeoDataLineString::ConstIterator itCoords;
-    GeoDataLineString::ConstIterator itEnd = linearRing.constEnd();
-
-    bool isVisible = false;
-
-    for ( itCoords = linearRing.constBegin(); itCoords != itEnd; ++itCoords )
-    {
-        isVisible = screenCoordinates( **itCoords, viewport, x, y, globeHidesPoint );
-
-        // Initializing variables that store the values of the previous iteration
-        if ( itCoords == linearRing.constBegin() ) {
-            previousGlobeHidesPoint = globeHidesPoint;
-            previousIsVisible = isVisible;
-            previousCoords = **itCoords;
-            previousX = x;
-            previousY = y;
+        if ( processingLastNode ) {
+            break;
         }
+        ++itCoords;
 
-        // TODO: on flat maps we need to take the date line into account right here.
-
-        // Adding interpolated nodes if the current or previous point is visible
-        if ( isVisible || previousIsVisible ) {
-
-            if ( globeHidesPoint || previousGlobeHidesPoint ) {
-                // Add interpolated "horizon" nodes 
-
-                // Assign the first or last horizon point to the current or
-                // previous point, so that we still get correct results for 
-                // the case where we need to geoproject the line segment.
-            }
-
-        }
-
-        if ( linearRing.tessellate() ) {
-            // let the line segment follow the spherical surface
-            // if the distance between the previous point and the current point 
-            // on screen is too big
-
-            qreal precision = 70.0;
-
-            // We take the manhattan length as a distance approximation
-            // that can be too big by a factor of sqrt(2)
-            qreal distance =   fabs(x - previousX) + fabs(y - previousY);
-
-            // FIXME: This is a work around: remove as soon as we handle horizon crossing
-            if ( globeHidesPoint || previousGlobeHidesPoint ) {
-                distance = 350;
-            }
-
-            qreal suggestedCount = (int)( distance / precision );
-
-            const qreal safeDistance = -distance / 2.0;
-
-            // Interpolate additional nodes if the current or previous nodes are visible
-            // or if the line segment that connects them might cross the viewport.
-            // The latter can pretty safely excluded for most projections if both points 
-            // are located on the same side relative to the viewport boundaries and if they are 
-            // located more than half the line segment distance away from the viewport.
-
-            if (    isVisible || previousIsVisible
-                 || !( x < safeDistance && previousX < safeDistance )
-                 || !( y < safeDistance && previousY < safeDistance )
-                 || !( x + safeDistance > viewport->width() 
-                       && previousX + safeDistance > viewport->width() )
-                 || !( y + safeDistance > viewport->height()
-                       && previousY + safeDistance > viewport->height() )
-            ){
-                if ( distance > precision ) {
-                    qDebug() << "Distance: " << distance;
-                    *polygon << tessellateLineSegment( previousCoords, **itCoords, 
-                                                      suggestedCount, viewport, linearRing.tessellationFlags() ); 
-                }
-            }
-        }
-
-        if ( !globeHidesPoint ) {
-            polygon->append( QPointF( x, y ) );
-        }
-        else {
-            if ( !previousGlobeHidesPoint ) {
-                polygons.append( polygon );
-                polygon = new QPolygonF;
-            }
-        }
-
-        previousGlobeHidesPoint = globeHidesPoint;
-        previousIsVisible = isVisible;
-        previousCoords = **itCoords;
-        previousX = x;
-        previousY = y;
+        if ( itCoords == itEnd  && lineString.isClosed() ) {
+            itCoords = lineString.constBegin();
+            processingLastNode = true;
+        }        
     }
 
     if ( polygon->size() > 1 ){

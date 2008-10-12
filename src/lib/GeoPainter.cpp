@@ -409,7 +409,7 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fill
     qDeleteAll( outerPolygons );    
 }
 
-void GeoPainter::drawRect ( const GeoDataCoordinates & centerPoint, int width, int height, bool isGeoProjected )
+void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates, qreal width, qreal height, bool isGeoProjected )
 {
     int pointRepeatNum;
     int y;
@@ -418,14 +418,51 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerPoint, int width, i
 
     if ( isGeoProjected == false ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+        bool visible = projection->screenCoordinates( centerCoordinates, 
+                       d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                QPainter::drawRect( d->m_x[it] - ( width / 2 ), y - ( height / 2 ), width, height );
+                QPainter::drawRect( d->m_x[it] - ( width / 2.0 ), y - ( height / 2.0 ), width, height );
             }
         }
+    }
+    else {
+        qreal lon = 0.0;
+        qreal lat = 0.0;
+        qreal altitude = centerCoordinates.altitude();
+        centerCoordinates.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
+
+        if ( width > 180.0 ) width = 180.0;
+        qreal lonLeft = lon - width * 0.5;
+        qreal lonRight =  lon + width * 0.5;
+
+        qreal latTop = lat + height * 0.5;
+        if ( latTop > +90.0 ) latTop = 90.0;
+        if ( latTop < -90.0 ) latTop = -90.0;
+
+        qreal latBottom = lat - height * 0.5;
+        if ( latBottom > +90.0 ) latBottom = 90.0;
+        if ( latBottom < -90.0 ) latBottom = -90.0;
+
+        GeoDataCoordinates bottomLeft( lonLeft, latBottom,
+                                    altitude, GeoDataCoordinates::Degree );;
+        GeoDataCoordinates bottomRight( lonRight, latBottom,
+                                    altitude, GeoDataCoordinates::Degree );
+        GeoDataCoordinates topRight( lonRight, latTop,
+                                    altitude, GeoDataCoordinates::Degree );
+        GeoDataCoordinates topLeft( lonLeft, latTop,
+                                    altitude, GeoDataCoordinates::Degree );
+
+        GeoDataLinearRing rectangle( 0, Tessellate | RespectLatitudeCircle );
+
+        rectangle.append(&bottomLeft);
+        rectangle.append(&bottomRight);
+        rectangle.append(&topRight);
+        rectangle.append(&topLeft);
+
+        drawPolygon( rectangle, Qt::OddEvenFill ); 
     }
 }
 

@@ -53,6 +53,8 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates*>,
 
     virtual ~GeoDataLineString();
 
+    virtual bool isClosed() const;
+
     bool tessellate() const;
     void setTessellate( bool tessellate );
 

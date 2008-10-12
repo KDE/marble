@@ -208,6 +208,16 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     triangle2.append(&t5);
     triangle2.append(&t6);
 
+    GeoDataLinearRing triangle3( 0 );
+
+    GeoDataCoordinates t7(0.0, 90.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t8(102.5, 45.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t9(167.5, 45.0, 0.0, GeoDataCoordinates::Degree );
+
+    triangle3.append(&t7);
+    triangle3.append(&t8);
+    triangle3.append(&t9);
+
     painter->setPen( QColor( 198, 99, 99, 255 ) );
     brush.setColor( QColor( 198, 99, 99, 180 ) );
     brush.setStyle( Qt::FDiagPattern );
@@ -215,6 +225,10 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 
     painter->drawPolygon( triangle, Qt::OddEvenFill ); 
     painter->drawPolygon( triangle2, Qt::OddEvenFill ); 
+    painter->drawPolygon( triangle3, Qt::OddEvenFill ); 
+
+    GeoDataCoordinates rectCenter( -45.0, 20.0, 0.0, GeoDataCoordinates::Degree );
+    painter->drawRect( rectCenter, 20.0, 20.0, true ); 
 
     GeoDataCoordinates sotm(-8.6, 52.66, 0.0, GeoDataCoordinates::Degree );
 

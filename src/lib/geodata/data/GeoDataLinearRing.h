@@ -40,6 +40,9 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString {
                                 TessellationFlags f = NoTessellation);
 
     virtual ~GeoDataLinearRing();
+
+    virtual bool isClosed() const;
+
     virtual EnumGeometryId geometryId() const { return GeoDataLinearRingId; };
 };
 
