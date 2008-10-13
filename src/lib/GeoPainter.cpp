@@ -305,22 +305,15 @@ void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPoint, const QPix
 
 void GeoPainter::drawLine (  const GeoDataCoordinates & p1,  const GeoDataCoordinates & p2, bool isGeoProjected )
 {
-    int x1, y1, x2, y2;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
+    GeoDataLineString line;
+    line.setTessellate( isGeoProjected );
 
-    if ( isGeoProjected == false ) {
-        // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible1 = projection->screenCoordinates( p1, d->m_viewport, x1, y1 );
-        bool visible2 = projection->screenCoordinates( p2, d->m_viewport, x2, y2 );
+    GeoDataCoordinates c1 ( p1 );
+    GeoDataCoordinates c2 ( p2 );
 
-        if ( ( !visible1 && p2.altitude() > 0 ) || ( !visible2 && p1.altitude() >0 ) )
-            return;
+    line << &c1 << &c2;
 
-        QPolygonF polygon;
-        polygon << QPointF( x1, y1 ) << QPointF( x2, y2 );
-
-        ClipPainter::drawPolyline( polygon );
-    }
+    drawPolyline( line ); 
 }
 
 void GeoPainter::drawPolyline ( const GeoDataLineString & lineString )
@@ -457,10 +450,7 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates, qreal 
 
         GeoDataLinearRing rectangle( 0, Tessellate | RespectLatitudeCircle );
 
-        rectangle.append(&bottomLeft);
-        rectangle.append(&bottomRight);
-        rectangle.append(&topRight);
-        rectangle.append(&topLeft);
+        rectangle << &bottomLeft << &bottomRight << &topRight << &topLeft;
 
         drawPolygon( rectangle, Qt::OddEvenFill ); 
     }

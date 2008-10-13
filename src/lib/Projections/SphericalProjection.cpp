@@ -228,7 +228,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
             // if the distance between the previous point and the current point 
             // on screen is too big
 
-            qreal precision = 70.0;
+            qreal precision = 20.0;
 
             // We take the manhattan length as a distance approximation
             // that can be too big by a factor of sqrt(2)

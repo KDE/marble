@@ -116,11 +116,14 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
     void drawLine (  const GeoDataCoordinates & p1,  const GeoDataCoordinates & p2, bool isGeoProjected = false );
 
+    // For these classes use setTesselate( true ) or the TesselationOptions on the line string / linear ring
+    // to project the line segments onto the geographical coordinate system ("isGeoProjected").
     void drawPolyline ( const GeoDataLineString & lineString );
     void drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRule fillRule = Qt::OddEvenFill );
     void drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fillRule = Qt::OddEvenFill );
 
-
+    // For isGeoProjected == false the width and height are given in pixels.
+    // For isGeoProjected == true the width and height are given in degrees.
     void drawRect ( const GeoDataCoordinates & centerPoint, qreal width, qreal height, bool isGeoProjected = false );
     void drawRoundRect ( const GeoDataCoordinates & centerPoint, int w, int h, int xRnd = 25, int yRnd = 25, bool isGeoProjected = false );
 

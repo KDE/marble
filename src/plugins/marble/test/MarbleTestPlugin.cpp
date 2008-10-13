@@ -76,12 +76,16 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 {
     painter->autoMapQuality();
 
+    // Example: draw a straight line
+
     GeoDataCoordinates northpole1( 0.0, 90.0, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates northpole2( 0.0, 90.0, 3000000.0, GeoDataCoordinates::Degree );
 
     painter->setPen( QColor( 255, 255, 255, 255 ) );
 
     painter->drawLine( northpole1, northpole2 );
+
+    // Example: draw a straight line string ("polyline")
 
     GeoDataCoordinates madrid( -3.7, 40.4, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates flensburg( 9.4, 54.8, 0.0, GeoDataCoordinates::Degree );
@@ -94,14 +98,11 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     painter->setPen( QColor( 200, 200, 200, 255 ) );
 
     GeoDataLineString lineString;
-
-    lineString.append(&madrid);
-    lineString.append(&flensburg);
-    lineString.append(&linkoeping);
-    lineString.append(&istanbul);
-    lineString.append(&moscow);
+    lineString << &madrid << &flensburg << &linkoeping << &istanbul << &moscow;
 
     painter->drawPolyline( lineString ); 
+
+    // Example: draw plain filled circles with text on earth and in earth orbit
 
     painter->setPen( QColor( 99, 198, 99, 255 ) );
     painter->setBrush( QColor( 99, 198, 99, 80 ) );
@@ -121,10 +122,13 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 
     painter->drawText( orbit, "Claudiu" );
 
+    // Example: draw plain pixmaps
+
     painter->drawPixmap( istanbul, QPixmap( MarbleDirs::path( "bitmaps/earth_apollo.jpg" ) ) ); 
 
     painter->drawImage( brasilia, QImage( MarbleDirs::path( "bitmaps/earth_apollo.jpg" ) ) ); 
 
+    // Example: draw a plain rectangle and a rounded rectangle
 
     painter->setPen( QColor( 99, 198, 198, 255 ) );
     QBrush brush( QColor( 99, 198, 198, 80 ) );
@@ -139,64 +143,38 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 
     painter->drawRoundRect( moscow, 40, 40 ); 
 
+    // Example: draw earth orbit
+
     GeoDataCoordinates m1(-180.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m2(-170.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m3(-160.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m4(-150.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m5(-140.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m6(-130.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m7(-120.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m8(-110.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m9(-100.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m10(-90.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m11(-80.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m12(-70.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m13(-60.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m14(-50.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m15(-40.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m16(-30.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m17(-20.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m18(-10.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m2(-90.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m3(0.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m4(+90.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates m5(+180.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
 
-    GeoDataCoordinates m19(0.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m20(10.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m21(20.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m22(30.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m23(40.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m24(50.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m25(60.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m26(70.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m27(80.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m28(90.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m29(100.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m30(110.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m31(120.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m32(130.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m33(140.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m34(150.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m35(160.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m36(170.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates m37(180.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataLinearRing ring( 0, Tessellate | RespectLatitudeCircle );
 
-/*
-    static const GeoDataCoordinates ring[37] = {
-        m1, m2, m3, m4, m5, m6, m7, m8, m9,
-        m10, m11, m12, m13, m14, m15, m16, m17, m18, m19,
-        m20, m21, m22, m23, m24, m25, m26, m27, m28, m29,
-        m30, m31, m32, m33, m34, m35, m36, m37
-    };
+    ring << &m1 << &m2 << &m3 << &m4 << &m5;
 
-    painter->drawPolyline( ring, 37 ); 
-*/
+    painter->drawPolyline( ring ); 
+
+    // Example: draw a triangle with lines that follow the coordinate grid
+
+    painter->setPen( QColor( 198, 99, 99, 255 ) );
+    brush.setColor( QColor( 198, 99, 99, 180 ) );
+    brush.setStyle( Qt::FDiagPattern );
+    painter->setBrush( brush );
+
     GeoDataCoordinates t1(0.0, 90.0, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates t2(-12.5, 45.0, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates t3(-77.5, 45.0, 0.0, GeoDataCoordinates::Degree );
 
     GeoDataLinearRing triangle( 0, Tessellate | RespectLatitudeCircle );
 
-    triangle.append(&t1);
-    triangle.append(&t2);
-    triangle.append(&t3);
+    triangle << &t1 << &t2 << &t3;
+
+    painter->drawPolygon( triangle, Qt::OddEvenFill ); 
+
+    // Example: draw a triangle with lines that follow the great circles
 
     GeoDataLinearRing triangle2( 0, Tessellate );
 
@@ -204,31 +182,30 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     GeoDataCoordinates t5(-102.5, 45.0, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates t6(-167.5, 45.0, 0.0, GeoDataCoordinates::Degree );
 
-    triangle2.append(&t4);
-    triangle2.append(&t5);
-    triangle2.append(&t6);
+    triangle2 << &t4 << &t5 << &t6;
 
-    GeoDataLinearRing triangle3( 0 );
+    painter->drawPolygon( triangle2, Qt::OddEvenFill ); 
+
+    // Example: draw a triangle with straight lines
+
+    GeoDataLinearRing triangle3;
 
     GeoDataCoordinates t7(0.0, 90.0, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates t8(102.5, 45.0, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates t9(167.5, 45.0, 0.0, GeoDataCoordinates::Degree );
 
-    triangle3.append(&t7);
-    triangle3.append(&t8);
-    triangle3.append(&t9);
+    triangle3 << &t7 << &t8 << &t9;
 
-    painter->setPen( QColor( 198, 99, 99, 255 ) );
-    brush.setColor( QColor( 198, 99, 99, 180 ) );
-    brush.setStyle( Qt::FDiagPattern );
-    painter->setBrush( brush );
-
-    painter->drawPolygon( triangle, Qt::OddEvenFill ); 
-    painter->drawPolygon( triangle2, Qt::OddEvenFill ); 
     painter->drawPolygon( triangle3, Qt::OddEvenFill ); 
+
+
+    // Example: draw a rectangle with lines that follow the coordinate grid
 
     GeoDataCoordinates rectCenter( -45.0, 20.0, 0.0, GeoDataCoordinates::Degree );
     painter->drawRect( rectCenter, 20.0, 20.0, true ); 
+
+
+    // Example: draw annotations
 
     GeoDataCoordinates sotm(-8.6, 52.66, 0.0, GeoDataCoordinates::Degree );
 

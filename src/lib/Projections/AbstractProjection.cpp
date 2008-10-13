@@ -197,7 +197,7 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
 
     // Take the clampToGround property into account
     int startNode = clampToGround ? 0 : 1;
-    int endNode = clampToGround ? count + 2 : count + 1;
+    const int endNode = clampToGround ? count + 2 : count + 1;
 
     qreal  lon = 0.0;
     qreal  lat = 0.0;
@@ -209,7 +209,6 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
 
     for ( int i = startNode; i < endNode; ++i ) {
         qreal  t = (qreal)(i) / (qreal)( count + 1 ) ;
-
 
         // interpolate the altitude, too
         qreal altitude = clampToGround ? 0 : altDiff * t + previousAltitude;
