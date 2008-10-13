@@ -22,9 +22,9 @@ add_subdirectory( tilecreator )
 add_subdirectory( lib )
 add_subdirectory( plugins )
 
-if( PLASMA_FOUND )
-    add_subdirectory( plasmoid )
-endif( PLASMA_FOUND )
+# if( PLASMA_FOUND )
+#     add_subdirectory( plasmoid )
+# endif( PLASMA_FOUND )
 
 if(APPLE)
   add_subdirectory( mac )
