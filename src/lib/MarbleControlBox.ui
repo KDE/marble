@@ -54,9 +54,6 @@
      <property name="currentIndex" >
       <number>5</number>
      </property>
-     <property name="tabSpacing" >
-      <number>4</number>
-     </property>
      <widget class="QWidget" name="NavigationTab" >
       <property name="geometry" >
        <rect>
