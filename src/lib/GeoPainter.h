@@ -99,7 +99,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
     // all cases for isGeoProjected = false get implemented first, as this is much easier to implement.
 
-    void drawEllipse ( const GeoDataCoordinates & centerPoint, int width, int height, bool isGeoProjected = false );
+    void drawEllipse ( const GeoDataCoordinates & centerPoint, qreal width, qreal height, bool isGeoProjected = false );
 
     // isGeoProjected = true would project the image/pixmap onto the globe. This requires
     // to deal with the TextureMapping classes -> should get implemented later on

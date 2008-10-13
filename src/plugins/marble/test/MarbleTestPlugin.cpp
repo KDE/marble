@@ -94,6 +94,7 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     GeoDataCoordinates moscow( 37.6, 55.75, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates brasilia( -47.9, -15.75, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates orbit( 105.6, 0.0, 3000000.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates easteregg( 10.0, 70.0, 0.0, GeoDataCoordinates::Degree );
 
     painter->setPen( QColor( 200, 200, 200, 255 ) );
 
@@ -112,9 +113,14 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 
     painter->setPen( QColor( 198, 99, 99, 255 ) );
     painter->setBrush( QColor( 198, 99, 99, 80 ) );
-    painter->drawEllipse( linkoeping, 40, 40 ); 
+    painter->drawEllipse( linkoeping, 30, 30 ); 
 
     painter->drawText( linkoeping, "Inge" );
+
+    painter->drawEllipse( easteregg, 20, 10, true ); 
+
+    painter->drawText( easteregg, "Easter Egg" );
+
 
     painter->setPen( QColor( 99, 99, 198, 255 ) );
     painter->setBrush( QColor( 99, 99, 198, 80 ) );

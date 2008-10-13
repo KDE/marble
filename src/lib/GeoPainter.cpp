@@ -243,7 +243,7 @@ void GeoPainter::drawText ( const GeoDataCoordinates & position, const QString &
     }
 }
 
-void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, int width, int height, bool isGeoProjected )
+void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal width, qreal height, bool isGeoProjected )
 {
     int pointRepeatNum;
     int y;
@@ -257,10 +257,41 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, int width
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                QPainter::drawEllipse(  d->m_x[it] - width / 2, y - height / 2, width, height  );
+                QPainter::drawEllipse(  d->m_x[it] - width / 2.0, y - height / 2.0, width, height  );
             }
         }
     }
+    else {
+        qreal centerLon = 0.0;
+        qreal centerLat = 0.0;
+        qreal altitude = centerPoint.altitude();
+        centerPoint.geoCoordinates( centerLon, centerLat, GeoDataCoordinates::Degree );
+
+        GeoDataLinearRing ellipse;
+
+        qreal lon = 0.0;
+        qreal lat = 0.0;
+
+        // TODO: Optimize the precision by determining the size which the 
+        //       ellipse covers on the screen.
+        int precision = 100;
+
+        for ( int i = 0; i <= precision; ++i ) {
+            qreal t = 1.0 - 2.0 * (qreal)(i) / (qreal)(precision);
+            lat = centerLat + 0.5 * height * sqrt( 1.0 - t * t );
+            lon = centerLon + 0.5 * width * t;
+            ellipse << new GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
+        }
+        for ( int i = 0; i <= precision; ++i ) {
+            qreal t = 2.0 * (qreal)(i) / (qreal)(precision) -  1.0;
+            lat = centerLat - 0.5 * height * sqrt( 1.0 - t * t );
+            lon = centerLon + 0.5 * width * t;
+            ellipse << new GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
+        }
+
+        drawPolygon( ellipse );
+    }
+
 }
 
 void GeoPainter::drawImage ( const GeoDataCoordinates & centerPoint, const QImage & image, bool isGeoProjected )
