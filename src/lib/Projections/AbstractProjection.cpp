@@ -221,8 +221,8 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
         }
         else {
             // To tesselate along great circles use the 
-            // spherical linear interpolation ("SLERP") for latitude and longitude.
-            itpos.slerp( previousCoords.quaternion(), currentCoords.quaternion(), t );
+            // normalized linear interpolation ("NLERP") for latitude and longitude.
+            itpos.nlerp( previousCoords.quaternion(), currentCoords.quaternion(), t );
 
             itpos.getSpherical( lon, lat );
         }

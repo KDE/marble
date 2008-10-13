@@ -210,6 +210,19 @@ void Quaternion::slerp( const Quaternion &q1, const Quaternion &q2,
     v[Q_W] = p1 * q1.v[Q_W] + p2 * q2.v[Q_W];
 }
 
+void Quaternion::nlerp( const Quaternion &q1, const Quaternion &q2, 
+                        qreal t)
+{
+    qreal  p1 = 1.0 - t;
+ 
+    v[Q_X] = p1 * q1.v[Q_X] + t * q2.v[Q_X];
+    v[Q_Y] = p1 * q1.v[Q_Y] + t * q2.v[Q_Y];
+    v[Q_Z] = p1 * q1.v[Q_Z] + t * q2.v[Q_Z];
+    v[Q_W] = p1 * q1.v[Q_W] + t * q2.v[Q_W];
+
+    normalize();
+}
+
 void Quaternion::toMatrix(matrix &m) const
 {
 

@@ -39,7 +39,7 @@ GeoDataCoordinates MarblePhysics::suggestedPosition() const
     qreal t = m_timeLine->currentValue();
 
     // Spherical interpolation for current position between source position
-    // and target position
+    // and target position. We can't use Nlerp here, as the "t-velocity" needs to be constant.
     itpos.slerp( m_sourcePosition.quaternion(), m_targetPosition.quaternion(), t );
     itpos.getSpherical( lon, lat );
 

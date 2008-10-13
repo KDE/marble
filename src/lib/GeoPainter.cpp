@@ -290,6 +290,9 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal wid
         }
 
         drawPolygon( ellipse );
+
+        // FIXME: Remove this once GeoDataCoordinates gets implicitely shared ...
+        qDeleteAll( ellipse );
     }
 
 }

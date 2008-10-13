@@ -81,7 +81,9 @@ class MARBLE_EXPORT Quaternion {
     void        display() const;
 
     void        rotateAroundAxis(const Quaternion &q);
+
     void        slerp(const Quaternion &q1, const Quaternion &q2, qreal t);
+    void        nlerp(const Quaternion &q1, const Quaternion &q2, qreal t);
 
     void        scalar(qreal mult);
 

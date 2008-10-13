@@ -203,7 +203,7 @@ void MeasureTool::drawDistancePath( GeoPainter* painter,
         int     y = 0;
 
         // Let itpos be a quaternion that is between prevqpos and qpos.
-        itpos.slerp( prevqpos, qpos, t );
+        itpos.nlerp( prevqpos, qpos, t );
         itpos.getSpherical( lon, lat );
         if ( viewport->currentProjection()
 	     ->screenCoordinates( GeoDataCoordinates( lon, lat ), viewport,
