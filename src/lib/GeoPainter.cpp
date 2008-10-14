@@ -166,6 +166,11 @@ void GeoPainter::autoMapQuality ()
     setRenderHint( QPainter::Antialiasing, antialiased );
 }
 
+MapQuality GeoPainter::mapQuality() const
+{
+    return d->m_mapQuality;
+}
+
 void GeoPainter::drawAnnotation (  const GeoDataCoordinates & position, const QString & text, QSize bubbleSize, int bubbleOffsetX, int bubbleOffsetY, int xRnd, int yRnd )
 {
     int pointRepeatNum;

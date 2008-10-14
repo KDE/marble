@@ -72,6 +72,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
     ~GeoPainter();
     void autoMapQuality();
+    MapQuality mapQuality() const;
+
 
 //  We don't go for the percentual approach that Qt takes for rounded corners for
 //  reasons of bad aesthetics here.

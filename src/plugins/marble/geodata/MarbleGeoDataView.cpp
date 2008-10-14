@@ -154,6 +154,13 @@ void MarbleGeoDataView::setPenStyle( QString mapped )
             m_currentPen.setColor( m_root->style( mapped )->lineStyle()->color() );
             m_currentPen.setWidthF( m_root->style( mapped )->lineStyle()->width() );
         }
+        if ( m_painter->mapQuality() != Marble::High && m_painter->mapQuality() != Marble::Print )
+        {
+//            m_currentPen.setWidth( 0 );
+            QColor penColor = m_currentPen.color();
+            penColor.setAlpha( 255 );
+            m_currentPen.setColor( penColor );
+        }
         m_painter->setPen( m_currentPen );
     }
 }
