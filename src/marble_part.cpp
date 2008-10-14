@@ -438,6 +438,13 @@ void MarblePart::setupActions()
     connect( m_exportMapAction, SIGNAL(triggered( bool ) ),
              this,              SLOT( exportMapScreenShot() ) );
 
+    // Action: Work Offline
+    m_workOfflineAction = new KAction( this );
+    actionCollection()->addAction( "file_workOffline", m_workOfflineAction );
+    m_workOfflineAction->setText( i18n( "&Work Offline" ) );
+    m_workOfflineAction->setCheckable( true );
+    m_workOfflineAction->setChecked( false );
+
     // Action: Copy Map to the Clipboard
     m_copyMapAction = KStandardAction::copy( this, SLOT( copyMap() ),
 					     actionCollection() );

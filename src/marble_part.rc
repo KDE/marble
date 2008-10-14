@@ -8,6 +8,7 @@
     <Action name="exportMap"/>
     <Action name="file_print"/>
     <Separator/>
+    <Action name="file_workOffline"/>
     <Action name="file_quit"/>
   </Menu>
   <Menu name="edit" noMerge="1"><text>&amp;Edit</text>

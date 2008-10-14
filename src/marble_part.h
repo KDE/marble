@@ -88,6 +88,7 @@ class MarblePart: public KParts::ReadOnlyPart
     // Actions for the GUI.
     KAction      *m_exportMapAction;
     KAction      *m_printMapAction;
+    KAction      *m_workOfflineAction;
     KAction      *m_copyMapAction;
     KAction      *m_copyCoordinatesAction;
     KAction      *m_showCloudsAction;
