@@ -109,15 +109,15 @@ will skip asking the MergedLayerPainter to render the missing data.
 
   Code snippet:
 
-	GeoPainter painter( mapCanvasImage, viewParams );
-	painter.setPen( Qt::red );
+    bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
+    {
+    painter->autoMapQuality();
+    painter->setPen( Qt::red );
 
-	GeoDataPoint  place1( 54.8, 9.4, GeoDataPoint::Degree );
-	GeoDataPoint  place2( 52.5, 8.4, GeoDataPoint::Degree );
+    GeoDataCoordinates flensburg( 9.4, 54.8, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates madrid( -3.7, 40.4, 0.0, GeoDataCoordinates::Degree );
 
-	painter.drawGeoLine( place1, place2 );
-	painter.drawGeoPlacemark( "Flensburg", place1 );
-	painter.drawGeoEllipse( place1.lon(), place1.lat(), 5, 5 ); 
+    painter->drawLine( flensburg, madrid );
 	
   ( For more information on this topic have a look at paintingmaps.txt )
 

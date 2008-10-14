@@ -179,12 +179,14 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                                     const ViewportParams *viewport,
                                     QVector<QPolygonF *> &polygons )
 {
-    int x, y;
-    bool globeHidesPoint;
+    int x = 0;
+    int y = 0;
+    bool globeHidesPoint = false;
 
-    int previousX, previousY;
-    bool previousGlobeHidesPoint;
-    bool previousIsVisible;
+    int previousX = 0; 
+    int previousY = 0;
+    bool previousGlobeHidesPoint = false;
+    bool previousIsVisible = false;
     GeoDataCoordinates previousCoords;
 
     QPolygonF  *polygon = new QPolygonF;
@@ -195,6 +197,10 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
     GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
 
     bool processingLastNode = false;
+
+    // We use a while loop to be able to cover linestrings as well as linear rings:
+    // Linear rings require to tesselate the path from the last node to the first node
+    // which isn't really convenient to achieve with a for loop ...
 
     while ( itCoords != itEnd )
     {
@@ -258,9 +264,10 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                        && previousY + safeDistance > viewport->height() )
             ){
                 if ( distance > precision ) {
-                    qDebug() << "Distance: " << distance;
+//                    qDebug() << "Distance: " << distance;
                     *polygon << tessellateLineSegment( previousCoords, **itCoords, 
-                                                      suggestedCount, viewport, lineString.tessellationFlags() ); 
+                                                      suggestedCount, viewport,
+                                                      lineString.tessellationFlags() );
                 }
             }
         }
@@ -317,7 +324,7 @@ bool SphericalProjection::geoCoordinates( int x, int y,
     const qreal  inverseRadius = 1.0 / (qreal)(viewport->radius());
     bool          noerr         = false;
 
-    qreal radius = (qreal)( viewport->radius() );
+    qreal radius  = (qreal)( viewport->radius() );
     qreal centerX = (qreal)( x - viewport->width() / 2 );
     qreal centerY = (qreal)( y - viewport->height() / 2 );
 

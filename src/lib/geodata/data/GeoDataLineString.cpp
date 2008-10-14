@@ -74,10 +74,17 @@ bool GeoDataLineString::tessellate() const
 
 void GeoDataLineString::setTessellate( bool tessellate )
 {
+    // According to the KML reference the tesselation of line strings in Google Earth 
+    // is generally done along great circles. However for subsequent points that share 
+    // the same latitude the latitude circles are followed. Our Tesselate and RespectLatitude
+    // Flags provide this behaviour. For true polygons the latitude circles don't get considered. 
+
     if ( tessellate ) {
         d->m_tessellationFlags |= Tessellate; 
+        d->m_tessellationFlags |= RespectLatitudeCircle; 
     } else {
         d->m_tessellationFlags ^= Tessellate; 
+        d->m_tessellationFlags ^= RespectLatitudeCircle; 
     }
 }
 

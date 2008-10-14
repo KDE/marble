@@ -33,10 +33,10 @@ class GeoDataPolygon;
  * @short a painter that makes it easy to draw geometric items on the map
  *
  * This class enables application developers to paint simple geometric
- * shapes and objects on the map. The API is inspired by and
+ * shapes and objects on the map. The API is inspired by and is
  * compatible to QPainter.
  *
- * All methods are using Geographic coordinates to position the item.
+ * All methods are using geographic coordinates to position the item.
  * However while being placed in geographic coordinates the
  * shape of the objects could still use the screen coordinates
  * ( isGeoProjected = false ).
@@ -69,51 +69,36 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
  public:
     GeoPainter( QPaintDevice*pd, ViewportParams *params,
 		MapQuality mapQuality, bool clip = true );
-//    Ideally we'd like to have this constructor:
-
-//    GeoPainter( MarbleMap * map, bool clip );
-//    .. however I don't see a way to implement it in a way that
-//    would serialize API graphic calls on one hand and would stay
-//    compatible with the Qt Painter API on the other hand.
 
     ~GeoPainter();
     void autoMapQuality();
 
 //  We don't go for the percentual approach that Qt takes for rounded corners for
 //  reasons of bad aesthetics here.
-
     void drawAnnotation (  const GeoDataCoordinates & position, const QString & text, QSize bubbleSize = QSize( 130, 100 ), int bubbleOffsetX = -10, int bubbleOffsetY = -30, int xRnd = 5, int yRnd = 5 );
 
     void drawPoint (  const GeoDataCoordinates & position );
     void drawPoints (  const GeoDataCoordinates * points, int pointCount );
 
     // Of course in theory we could have the "isGeoProjected" parameter used
-    // for drawText as well. However this would largely complicate and slow
-    // down things to a crawl as we'd need to convert all glyphs to PainterPaths
-    // and convert thos ... . Given that for decent maps you don't really want
-    // this anyways we leave it out for now ...
+    // for drawText as well. However this would require us to convert all 
+    // glyphs to PainterPaths / QPolygons. From QPolygons we could create
+    // GeoDataPolygons which could get painted on screen. Any patches appreciated ;-)
     void drawText ( const GeoDataCoordinates & position, const QString & text );
 
 //    void drawPlaceMark ( const GeoDataCoordinates & position, const QString& name );
 //    void drawPlaceMark ( const GeoDataPlaceMark & placemark );
 
-    // all cases for isGeoProjected = false get implemented first, as this is much easier to implement.
-
     void drawEllipse ( const GeoDataCoordinates & centerPoint, qreal width, qreal height, bool isGeoProjected = false );
 
     // isGeoProjected = true would project the image/pixmap onto the globe. This requires
     // to deal with the TextureMapping classes -> should get implemented later on
-/*
-    void drawImage ( const GeoDataCoordinates & point, const QImage & image, const QRect & source, Qt::ImageConversionFlags flags = Qt::AutoColor, bool isGeoProjected = false );
-    void drawImage ( const GeoDataCoordinates & point, const QImage & image, int sx = 0, int sy = 0, int sw = -1, int sh = -1, Qt::ImageConversionFlags flags = Qt::AutoColor, bool isGeoProjected = false ); */
 
     void drawImage ( const GeoDataCoordinates & centerPoint, const QImage & image, bool isGeoProjected = false );
 
     void drawPixmap ( const GeoDataCoordinates & centerPoint, const QPixmap & pixmap, bool isGeoProjected = false );
-    // In the following cases isGeoProjected = true lets the line segments be bent according
-    // to the projection. This requires slerp to be used to interpolate the points inbetween
-    // (similar to how measure lines get calculated).-> should get implemented once lmc is in place.
 
+    // In the following case isGeoProjected = true lets the line be bent according to the projection.
     void drawLine (  const GeoDataCoordinates & p1,  const GeoDataCoordinates & p2, bool isGeoProjected = false );
 
     // For these classes use setTesselate( true ) or the TesselationOptions on the line string / linear ring

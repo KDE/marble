@@ -34,7 +34,7 @@ big weather map for printing):
     map.setMapTheme( earth/bluemarble/bluemarble.dgml );
     map.open( currentweather.kml );
 
-    map.paint( qpainter );
+    [...]
 
 So most of the Simple API deals with adjusting ViewParameters according
 to the needs. The actual "painting" gets triggered and done by a single
@@ -68,24 +68,25 @@ to draw in screen coordinates):
 
   Code snippet:
 
-    MarbleMap map;
-    GeoPainter painter( map );
-    painter.setPen( Qt::red );
+    bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
+    {
+    painter->autoMapQuality();
+    painter->setPen( Qt::red );
 
-    GeoDataPoint  place1( 54.8, 9.4, GeoDataPoint::Degree );
-    GeoDataPoint  place2( 52.5, 8.4, GeoDataPoint::Degree );
+    GeoDataCoordinates flensburg( 9.4, 54.8, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates madrid( -3.7, 40.4, 0.0, GeoDataCoordinates::Degree );
 
-    painter.drawLine( place1, place2 );
-    painter.drawPlacemark( "Flensburg", place1 );
+    painter->drawLine( flensburg, madrid );
+    painter->drawPlacemark( "Flensburg", flensburg ); // Yet to be implemented (doesn't work atm)
 
-    // isGeoProjected = true would paint a circle that might be 
+    // isGeoProjected = true paints a circle that might be 
     // "distorted" according to the geographical projection. 
     // The height and width would be 5 degrees
-    painter.drawEllipse( place1.lon(), place1.lat(), 5, 5, true ); 
+    painter->drawEllipse( flensburg, 5, 5, true ); 
 
     // isGeoProjected = true would paint a ("unprojected" circle that 
     // has got a width and height of 5 pixels. 
-    painter.drawEllipse( place1.lon(), place1.lat(), 5, 5, false ); 
+    painter->drawEllipse( flensburg, 5, 5, false ); 
 
 Using this API some backend plugins like the MeasureTool could get
 squeezed down to very little code.

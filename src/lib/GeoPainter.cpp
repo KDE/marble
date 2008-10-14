@@ -353,8 +353,7 @@ void GeoPainter::drawLine (  const GeoDataCoordinates & p1,  const GeoDataCoordi
 void GeoPainter::drawPolyline ( const GeoDataLineString & lineString )
 {
     // If the object is not visible in the viewport return 
-    // FIXME: For better testing we are using "contains" instead of "intersects" right now
-    if ( ! d->m_viewport->viewLatLonAltBox().contains( lineString.latLonAltBox() ) )
+    if ( ! d->m_viewport->viewLatLonAltBox().intersects( lineString.latLonAltBox() ) )
     {
         qDebug() << "LineString doesn't get displayed on the viewport";
         return;
@@ -375,8 +374,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString )
 void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRule fillRule )
 {
     // If the object is not visible in the viewport return 
-    // FIXME: For better testing we are using "contains" instead of "intersects" right now
-    if ( ! d->m_viewport->viewLatLonAltBox().contains( linearRing.latLonAltBox() ) )
+    if ( ! d->m_viewport->viewLatLonAltBox().intersects( linearRing.latLonAltBox() ) )
     {
         qDebug() << "Polygon doesn't get displayed on the viewport";
         return;
@@ -398,8 +396,7 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRul
 void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fillRule )
 {
     // If the object is not visible in the viewport return 
-    // FIXME: For better testing we are using "contains" instead of "intersects" right now
-    if ( ! d->m_viewport->viewLatLonAltBox().contains( polygon.outerBoundary().latLonAltBox() ) )
+    if ( ! d->m_viewport->viewLatLonAltBox().intersects( polygon.outerBoundary().latLonAltBox() ) )
     {
         qDebug() << "Polygon doesn't get displayed on the viewport";
         return;

@@ -169,18 +169,21 @@ bool GeoDataLatLonAltBox::contains( const GeoDataLatLonAltBox &other )
     return false;
 }
 
-bool GeoDataLatLonAltBox::intersects( const GeoDataLatLonAltBox & box )
+bool GeoDataLatLonAltBox::intersects( const GeoDataLatLonAltBox &other )
 {
-    if ( GeoDataLatLonBox::intersects( box ) == true )
-        return true;
+            // Case 1: maximum altitude of other box intersects:
+    if (    ( d->m_maxAltitude >= other.maxAltitude() && d->m_minAltitude <= other.maxAltitude() )
+            // Case 2: maximum altitude of this box intersects:
+         || ( other.maxAltitude() >= d->m_maxAltitude && other.minAltitude() <= d->m_maxAltitude )
+            // Case 3: minimum altitude of other box intersects:
+         || ( d->m_maxAltitude >= other.minAltitude() && d->m_minAltitude <= other.minAltitude() ) 
+            // Case 4: minimum altitude of this box intersects:
+         || ( other.maxAltitude() >= d->m_minAltitude && other.minAltitude() <= d->m_minAltitude ) ) {
 
-    // Case 1: minimum altitude of box intersects:
-    if ( d->m_minAltitude < box.maxAltitude() && box.minAltitude() < d->m_minAltitude )
-        return true;
+        if ( GeoDataLatLonBox::intersects( other ) )
+            return true;
 
-    // Case 2: maximum altitude of box intersects:
-    if ( d->m_maxAltitude > box.minAltitude() && box.maxAltitude() > d->m_maxAltitude )
-        return true;
+    }
 
     return false;
 }

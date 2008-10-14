@@ -101,7 +101,7 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
      */
     bool     crossesDateLine() const;
 
-    bool     virtual contains( const GeoDataPoint & );
+    bool     virtual contains( const GeoDataPoint & ); // NOTE: Why do we need this one?
     bool     virtual contains( const GeoDataCoordinates & );
     bool     contains( const GeoDataLatLonBox & );
 

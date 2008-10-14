@@ -157,7 +157,7 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     GeoDataCoordinates m4(+90.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates m5(+180.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
 
-    GeoDataLinearRing ring( 0, Tessellate | RespectLatitudeCircle );
+    GeoDataLineString ring( 0, Tessellate );
 
     ring << &m1 << &m2 << &m3 << &m4 << &m5;
 

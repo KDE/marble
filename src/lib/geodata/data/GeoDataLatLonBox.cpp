@@ -304,24 +304,57 @@ bool GeoDataLatLonBox::contains( const GeoDataLatLonBox &other )
     return false;
 }
 
-bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox & box )
+bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other )
 {
-    // FIXME: Needs to be corrected for crossesDateLine == true 
-    // Case 1: east border of box intersects:
-    if ( d->m_east < box.east() && box.west() < d->m_east )
-        return true;
+    // check the intersection criterion for the latitude first:
 
-    // Case 2: west border of box intersects:
-    if ( d->m_west > box.west() && box.east() > d->m_west )
-        return true;
+           // Case 1: northern boundary of other box intersects:
+    if (   ( d->m_north >= other.north() && d->m_south <= other.north() )
+           // Case 2: northern boundary of this box intersects:
+        || ( other.north() >= d->m_north && other.south() <= d->m_north )
+           // Case 3: southern boundary of other box intersects:
+        || ( d->m_north >= other.south() && d->m_south <= other.south() ) 
+           // Case 4: southern boundary of this box intersects:
+        || ( other.north() >= d->m_south && other.south() <= d->m_south ) ) {
 
-    // Case 3: north border of box intersects:
-    if ( d->m_north < box.north() && box.south() < d->m_north )
-        return true;
+        if ( !crossesDateLine() ) {
+            if ( !other.crossesDateLine() ) {
+                // "Normal" case: both bounding boxes don't cross the date line
+                        // Case 1: eastern boundary of other box intersects:
+                if (    ( d->m_east >= other.east() && d->m_west <= other.east() )
+                        // Case 2: eastern boundary of this box intersects:
+                    || ( other.east() >= d->m_east && other.west() <= d->m_east )
+                        // Case 3: western boundary of other box intersects:
+                    || ( d->m_east >= other.west() && d->m_west <= other.west() ) 
+                        // Case 4: western boundary of this box intersects:
+                    || ( other.east() >= d->m_west && other.west() <= d->m_west ) ) {
+                    return true;
+                }                
+            }
+            else {
+                // The other bounding box crosses the date line, "this" one does not:
+                // So the date line splits the other bounding box in two parts.
 
-    // Case 4: south border of box intersects:
-    if ( d->m_south > box.south() && box.north() > d->m_south )
-        return true;
+                if ( d->m_west <= other.east() || d->m_east >= other.west() ) {
+                        return true;
+                }                
+            }
+        }
+        else {
+            if ( other.crossesDateLine() ) {
+                // The trivial case: both bounding boxes cross the date line and intersect
+                return true;
+            }
+            else {
+                // "This" bounding box crosses the date line, the other one does not.
+                // So the date line splits "this" bounding box in two parts.
+
+                if ( other.west() <= d->m_east || other.east() >= d->m_west ) {
+                        return true;
+                }                
+            }
+        }
+    }
 
     return false;
 }

@@ -164,6 +164,8 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
                                                     const ViewportParams *viewport,
                                                     TessellationFlags f )
 {
+    QPolygonF   path;
+
     bool clampToGround = f.testFlag( FollowGround );
     bool followLatitudeCircle = false;     
 
@@ -172,7 +174,7 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
         count = 50;
     }
 
-    qDebug() << "Creating tesselation nodes:" << count;
+//    qDebug() << "Creating tesselation nodes:" << count;
 
     qreal previousAltitude = previousCoords.altitude();
 
@@ -190,6 +192,7 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
         if ( previousLatitude == currentLatitude ) {
             followLatitudeCircle = true;
             lonDiff = currentLongitude - previousLongitude;
+            if ( fabs( lonDiff ) == 360.0 ) return path; 
         }
     }
     
@@ -205,7 +208,8 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
     int     y = 0;
 
     Quaternion  itpos;
-    QPolygonF   path;
+
+    bool globeHidesPoint = false;
 
     for ( int i = startNode; i < endNode; ++i ) {
         qreal  t = (qreal)(i) / (qreal)( count + 1 ) ;
@@ -227,7 +231,7 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
             itpos.getSpherical( lon, lat );
         }
 
-        bool visible = screenCoordinates( GeoDataCoordinates( lon, lat, altitude ), viewport, x, y );
+        bool visible = screenCoordinates( GeoDataCoordinates( lon, lat, altitude ), viewport, x, y, globeHidesPoint );
         if ( visible ) {
             path << QPointF( x, y );
         }

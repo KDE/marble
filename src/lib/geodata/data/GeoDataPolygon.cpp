@@ -84,6 +84,11 @@ bool GeoDataPolygon::tessellate() const
 
 void GeoDataPolygon::setTessellate( bool tessellate )
 {
+    // According to the KML reference the tesselation is done along great circles
+    // for polygons in Google Earth. Our "Tesselate" flag does this. 
+    // Only for pure line strings and linear rings the 
+    // latitude circles are followed for subsequent points that share the same latitude.
+
     if ( tessellate ) {
         d->m_tessellationFlags |= Tessellate; 
     } else {
