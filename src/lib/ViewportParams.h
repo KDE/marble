@@ -55,6 +55,11 @@ class MARBLE_EXPORT ViewportParams
 
     GeoDataLatLonAltBox viewLatLonAltBox() const;
 
+    // Calculates an educated guess for the distance in radians covered per pixel
+    // Displaying seperate objects below this resolution usually doesn't make sense.
+    // So this method helps to filter out details.
+    qreal averageViewResolution() const;
+
     int radius() const;
     void setRadius(int newRadius);
 

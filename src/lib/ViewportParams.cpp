@@ -327,6 +327,13 @@ GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
                         this );
 }
 
+qreal ViewportParams::averageViewResolution() const
+{
+    // We essentially divide the diameter by 180 deg and
+    // take half of the result as a guess for the angle per pixel resolution. 
+    return 0.25 * M_PI / (qreal)(d->m_radius);
+}
+
 
 bool  ViewportParams::mapCoversViewport() const
 {

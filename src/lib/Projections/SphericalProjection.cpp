@@ -179,6 +179,11 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                                     const ViewportParams *viewport,
                                     QVector<QPolygonF *> &polygons )
 {
+    qreal averageViewResolution = viewport->averageViewResolution();
+
+    // TODO: Compare bounding box size of the line string with the averageViewResolution
+    //       Immediately return if the latLonAltBox is smaller (or just return a single point).
+
     int x = 0;
     int y = 0;
     bool globeHidesPoint = false;
@@ -207,10 +212,25 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
 
     while ( itCoords != itEnd )
     {
-        isVisible = screenCoordinates( **itCoords, viewport, x, y, globeHidesPoint );
+        // Optimization for big line strings ( >> 50 nodes ):
 
-        if ( globeHidesPoint == true && globeHidesPoint != previousGlobeHidesPoint
-             || x != previousX || y != previousY ) {
+        bool skipCalculation = false;
+
+        if ( lineString.size() > 50 ) {
+            qreal lon, lat;
+            (*itCoords)->geoCoordinates( lon, lat );
+            qreal previousLon, previousLat;
+            (*previousCoords)->geoCoordinates( previousLon, previousLat );
+
+            skipCalculation = ( fabs(lon - previousLon) + fabs( lat - previousLat )  
+                                < averageViewResolution );
+        }
+
+//      if ( skipCalculation ) qDebug() << "Skip calculation: " << fabs(lon - previousLon) + fabs( lat - previousLat )  << averageViewResolution;
+
+        if ( !skipCalculation ) {
+
+            isVisible = screenCoordinates( **itCoords, viewport, x, y, globeHidesPoint );
 
             // Initializing variables that store the values of the previous iteration
             if ( !processingLastNode && itCoords == lineString.constBegin() ) {
