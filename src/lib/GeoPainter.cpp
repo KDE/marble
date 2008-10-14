@@ -365,7 +365,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString )
 
     foreach( QPolygonF* itPolygon, polygons ) {
         // Using QPainter instead of ClipPainter until some bugs are fixed.
-        QPainter::drawPolyline( *itPolygon );
+        ClipPainter::drawPolyline( *itPolygon );
     }
 
     qDeleteAll( polygons );
@@ -387,7 +387,7 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRul
 
     foreach( QPolygonF* itPolygon, polygons ) {
         // Using QPainter instead of ClipPainter until some bugs are fixed.
-        QPainter::drawPolygon( *itPolygon );
+        ClipPainter::drawPolygon( *itPolygon );
     }
 
     qDeleteAll( polygons );
@@ -427,7 +427,7 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fill
 
     foreach( QPolygonF* itOuterPolygon, outerPolygons ) {
         // Using QPainter instead of ClipPainter until some bugs are fixed.
-        QPainter::drawPolygon( *itOuterPolygon );
+        ClipPainter::drawPolygon( *itOuterPolygon );
     }
 
     qDeleteAll( outerPolygons );    

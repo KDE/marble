@@ -187,13 +187,14 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
     int previousY = 0;
     bool previousGlobeHidesPoint = false;
     bool previousIsVisible = false;
-    GeoDataCoordinates previousCoords;
 
     QPolygonF  *polygon = new QPolygonF;
 
     bool isVisible = false;
     
     GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
+    GeoDataLineString::ConstIterator previousCoords = lineString.constBegin();
+
     GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
 
     bool processingLastNode = false;
@@ -201,6 +202,8 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
     // We use a while loop to be able to cover linestrings as well as linear rings:
     // Linear rings require to tesselate the path from the last node to the first node
     // which isn't really convenient to achieve with a for loop ...
+
+    qreal precision = 40.0;
 
     while ( itCoords != itEnd )
     {
@@ -210,7 +213,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
         if ( !processingLastNode && itCoords == lineString.constBegin() ) {
             previousGlobeHidesPoint = globeHidesPoint;
             previousIsVisible = isVisible;
-            previousCoords = **itCoords;
+            previousCoords = itCoords;
             previousX = x;
             previousY = y;
         }
@@ -234,8 +237,6 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
             // if the distance between the previous point and the current point 
             // on screen is too big
 
-            qreal precision = 20.0;
-
             // We take the manhattan length as a distance approximation
             // that can be too big by a factor of sqrt(2)
             qreal distance =   fabs(x - previousX) + fabs(y - previousY);
@@ -245,9 +246,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                 distance = 350;
             }
 
-            qreal suggestedCount = (int)( distance / precision );
-
-            const qreal safeDistance = -distance / 2.0;
+            const qreal safeDistance = - 0.5 * distance;
 
             // Interpolate additional nodes if the current or previous nodes are visible
             // or if the line segment that connects them might cross the viewport.
@@ -263,9 +262,11 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                  || !( y + safeDistance > viewport->height()
                        && previousY + safeDistance > viewport->height() )
             ){
+                int suggestedCount = (int)( distance / precision );
+
                 if ( distance > precision ) {
 //                    qDebug() << "Distance: " << distance;
-                    *polygon << tessellateLineSegment( previousCoords, **itCoords, 
+                    *polygon << tessellateLineSegment( **previousCoords, **itCoords, 
                                                       suggestedCount, viewport,
                                                       lineString.tessellationFlags() );
                 }
@@ -287,7 +288,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
 
         previousGlobeHidesPoint = globeHidesPoint;
         previousIsVisible = isVisible;
-        previousCoords = **itCoords;
+        previousCoords = itCoords;
         previousX = x;
         previousY = y;
 
