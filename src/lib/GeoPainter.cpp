@@ -269,26 +269,42 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal wid
         }
     }
     else {
+        // Initialize variables
         qreal centerLon = 0.0;
         qreal centerLat = 0.0;
         qreal altitude = centerPoint.altitude();
         centerPoint.geoCoordinates( centerLon, centerLat, GeoDataCoordinates::Degree );
 
-        GeoDataLinearRing ellipse;
+        // Ensure a valid latitude range: 
+        if ( centerLat + 0.5 * height > 90.0 || centerLat - 0.5 * height < -90.0 ) {
+            return;
+        }
 
+        // Don't show the ellipse if it's too small:
+        GeoDataLatLonBox ellipseBox( centerLat + 0.5 * height, centerLat - 0.5 * height,
+                                     centerLon + 0.5 * width,  centerLon - 0.5 * width, 
+                                     GeoDataCoordinates::Degree );
+        if ( !d->m_viewport->resolves( ellipseBox ) ) return;
+
+        GeoDataLinearRing ellipse;
         qreal lon = 0.0;
         qreal lat = 0.0;
 
-        // TODO: Optimize the precision by determining the size which the 
-        //       ellipse covers on the screen.
-        int precision = 100;
+        // Optimizing the precision by determining the size which the 
+        // ellipse covers on the screen:
+        qreal degreeResolution = d->m_viewport->angularResolution() * RAD2DEG;
+        // To create a circle shape even for very small precision we require uneven numbers:
+        int precision = width / degreeResolution / 8 + 1; 
+        if ( precision > 81 ) precision = 81;
 
+        // Calculate the shape of the upper half of the ellipse:
         for ( int i = 0; i <= precision; ++i ) {
             qreal t = 1.0 - 2.0 * (qreal)(i) / (qreal)(precision);
             lat = centerLat + 0.5 * height * sqrt( 1.0 - t * t );
             lon = centerLon + 0.5 * width * t;
             ellipse << new GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
         }
+        // Calculate the shape of the lower half of the ellipse:
         for ( int i = 0; i <= precision; ++i ) {
             qreal t = 2.0 * (qreal)(i) / (qreal)(precision) -  1.0;
             lat = centerLat - 0.5 * height * sqrt( 1.0 - t * t );
@@ -362,10 +378,10 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString )
     // If the object is not visible in the viewport return 
     if ( ! d->m_viewport->viewLatLonAltBox().intersects( lineString.latLonAltBox() ) )
     {
-        qDebug() << "LineString doesn't get displayed on the viewport";
+//        qDebug() << "LineString doesn't get displayed on the viewport";
         return;
     }
-    qDebug() << "Drawing LineString";
+//    qDebug() << "Drawing LineString";
 
     QVector<QPolygonF*> polygons;
     d->createPolygonsFromLineString( lineString, polygons );
@@ -387,10 +403,10 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRul
     // If the object is not visible in the viewport return 
     if ( ! d->m_viewport->viewLatLonAltBox().intersects( linearRing.latLonAltBox() ) )
     {
-        qDebug() << "Polygon doesn't get displayed on the viewport";
+//        qDebug() << "Polygon doesn't get displayed on the viewport";
         return;
     }
-    qDebug() << "Drawing Polygon";
+//    qDebug() << "Drawing Polygon";
 
     QVector<QPolygonF*> polygons;
     d->createPolygonsFromLinearRing( linearRing, polygons );
@@ -412,10 +428,10 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fill
     // If the object is not visible in the viewport return 
     if ( ! d->m_viewport->viewLatLonAltBox().intersects( polygon.outerBoundary().latLonAltBox() ) )
     {
-        qDebug() << "Polygon doesn't get displayed on the viewport";
+//        qDebug() << "Polygon doesn't get displayed on the viewport";
         return;
     }
-    qDebug() << "Drawing Polygon";
+//    qDebug() << "Drawing Polygon";
 
     // Creating the outer screen polygons first
     QVector<QPolygonF*> outerPolygons;

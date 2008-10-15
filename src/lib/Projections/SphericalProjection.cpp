@@ -179,14 +179,18 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                                     const ViewportParams *viewport,
                                     QVector<QPolygonF *> &polygons )
 {
-    qreal averageViewResolution = viewport->averageViewResolution();
+    // Compare bounding box size of the line string with the angularResolution
+    // Immediately return if the latLonAltBox is smaller.
 
-    // TODO: Compare bounding box size of the line string with the averageViewResolution
-    //       Immediately return if the latLonAltBox is smaller (or just return a single point).
+    if ( !viewport->resolves( lineString.latLonAltBox() ) ) {
+//      qDebug() << "Object too small to be resolved";
+        return false;
+    }
 
     int x = 0;
     int y = 0;
     bool globeHidesPoint = false;
+    bool isVisible = false;
 
     int previousX = -1; 
     int previousY = -1;
@@ -194,8 +198,6 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
     bool previousIsVisible = false;
 
     QPolygonF  *polygon = new QPolygonF;
-
-    bool isVisible = false;
     
     GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
     GeoDataLineString::ConstIterator previousCoords = lineString.constBegin();
@@ -208,27 +210,15 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
     // Linear rings require to tesselate the path from the last node to the first node
     // which isn't really convenient to achieve with a for loop ...
 
-    qreal precision = 40.0;
+    const qreal precision = 20.0;
+    const bool isLong = lineString.size() > 50;
 
     while ( itCoords != itEnd )
     {
-        // Optimization for big line strings ( >> 50 nodes ):
+        // Optimization for line strings with a big amount of nodes
+        bool skipNode = isLong && viewport->resolves( **previousCoords, **itCoords); 
 
-        bool skipCalculation = false;
-
-        if ( lineString.size() > 50 ) {
-            qreal lon, lat;
-            (*itCoords)->geoCoordinates( lon, lat );
-            qreal previousLon, previousLat;
-            (*previousCoords)->geoCoordinates( previousLon, previousLat );
-
-            skipCalculation = ( fabs(lon - previousLon) + fabs( lat - previousLat )  
-                                < averageViewResolution );
-        }
-
-//      if ( skipCalculation ) qDebug() << "Skip calculation: " << fabs(lon - previousLon) + fabs( lat - previousLat )  << averageViewResolution;
-
-        if ( !skipCalculation ) {
+        if ( !skipNode ) {
 
             isVisible = screenCoordinates( **itCoords, viewport, x, y, globeHidesPoint );
 
@@ -240,7 +230,6 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                 previousX = x;
                 previousY = y;
             }
-
 
             // TODO: on flat maps we need to take the date line into account right here.
 

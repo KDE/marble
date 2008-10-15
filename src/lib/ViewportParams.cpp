@@ -327,13 +327,30 @@ GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
                         this );
 }
 
-qreal ViewportParams::averageViewResolution() const
+qreal ViewportParams::angularResolution() const
 {
     // We essentially divide the diameter by 180 deg and
     // take half of the result as a guess for the angle per pixel resolution. 
-    return 0.25 * M_PI / (qreal)(d->m_radius);
+    return 0.25 * M_PI / fabs( (qreal)(d->m_radius) );
 }
 
+bool ViewportParams::resolves ( const GeoDataLatLonBox &latLonBox ) const
+{
+    return latLonBox.width() + latLonBox.height() > 2.0 * angularResolution();
+}
+
+bool ViewportParams::resolves ( const GeoDataCoordinates &coord1, 
+                                const GeoDataCoordinates &coord2 ) const
+{
+    qreal lon1, lat1;
+    coord1.geoCoordinates( lon1, lat1 );
+
+    qreal lon2, lat2;
+    coord2.geoCoordinates( lon2, lat2 );
+
+    // We take the manhattan length as an approximation for the distance
+    return ( fabs( lon2 - lon1 ) + fabs( lat2 - lat1 ) < angularResolution() );
+}
 
 bool  ViewportParams::mapCoversViewport() const
 {

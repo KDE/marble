@@ -74,7 +74,7 @@ void MarbleGeoDataView::setSelection( const QRect&, QItemSelectionModel::Selecti
 
 void MarbleGeoDataView::paintEvent( QPaintEvent *event )
 {
-    qDebug() << "starting paintEvent";
+//    qDebug() << "starting paintEvent";
     QModelIndex index = rootIndex();
     qDebug() << rootIndex();
     renderIndex( index );

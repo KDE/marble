@@ -55,12 +55,30 @@ class MARBLE_EXPORT ViewportParams
 
     GeoDataLatLonAltBox viewLatLonAltBox() const;
 
-    // Calculates an educated guess for the distance in radians covered per pixel
-    // Displaying seperate objects below this resolution usually doesn't make sense.
+    // Calculates an educated guess for the average angle in radians covered per pixel.
+    // Given a certain resolution it doesn't make much sense
+    // - to display an object that covers an angle that is smaller than that.
+    // - to display two points as distinct points if they are separated by a 
+    //   an angular distance that is smaller. Instead only one point should be shown.
     // So this method helps to filter out details.
-    qreal averageViewResolution() const;
+    // It's somewhat related to http://en.wikipedia.org/wiki/Angular_resolution
 
-    int radius() const;
+    qreal angularResolution() const;
+
+    // Determines whether a geographical feature is big enough so that it should 
+    // represent a single point on the screen already.
+    // See angularResolution()
+
+    bool resolves ( const GeoDataLatLonBox &latLonBox ) const;
+
+    // Determines whether two points are located enough apart so that it makes 
+    // sense to display them as distinct points. If this is not the case
+    // calculation and drawing of one point can be skipped as only a single
+    // point will be displayed on the screen.
+    
+    bool resolves ( const GeoDataCoordinates &coord1, const GeoDataCoordinates &coord2 ) const;
+
+    int  radius() const;
     void setRadius(int newRadius);
 
     bool  globeCoversViewport() const;

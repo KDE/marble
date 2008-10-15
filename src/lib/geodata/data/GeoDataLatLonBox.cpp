@@ -210,8 +210,9 @@ void GeoDataLatLonBox::setBoundaries( qreal north, qreal south, qreal east, qrea
 
 qreal GeoDataLatLonBox::width( GeoDataCoordinates::Unit unit ) const
 {
-    qreal width = crossesDateLine() ? 2 * M_PI - d->m_west + d->m_east
-                                    : d->m_east - d->m_west;
+    qreal width = fabs( (qreal)( crossesDateLine() 
+                                     ? 2 * M_PI - d->m_west + d->m_east
+                                     : d->m_east - d->m_west ) );
 
     if ( unit == GeoDataCoordinates::Degree ) {
         return width * RAD2DEG;
@@ -222,7 +223,7 @@ qreal GeoDataLatLonBox::width( GeoDataCoordinates::Unit unit ) const
 
 qreal GeoDataLatLonBox::height( GeoDataCoordinates::Unit unit ) const
 {
-    qreal height = d->m_south - d->m_north;
+    qreal height = fabs( (qreal)( d->m_south - d->m_north ) );
 
     if ( unit == GeoDataCoordinates::Degree ) {
         return height * RAD2DEG;

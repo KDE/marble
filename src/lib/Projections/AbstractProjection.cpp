@@ -170,7 +170,7 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
     bool followLatitudeCircle = false;     
 
     if ( count > 50 ) {
-        qDebug() << "Count of" << count << "exceeded maximum count.";
+//        qDebug() << "Count of" << count << "exceeded maximum count.";
         count = 50;
     }
 
