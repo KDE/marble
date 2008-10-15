@@ -34,11 +34,13 @@ class GeoDataPointPrivate;
  *
  * GeoDataPoint is the GeoDataGeometry class representing a single three
  * dimensional point. It reflects the Point tag of KML spec and can be contained
- * in objects holding GeoDataGeometry objects. Nevertheless GeoDataPoint
- * shouldn't be used to simply contain 3d vector data - this part is taken by
- * GeoDataCoordinates which has nearly the same features and is much more
- * light weight. Please consider this especially if you expect to have a high
- * amount of points e.g. for Vectors.
+ * in objects holding GeoDataGeometry objects. 
+ * Nevertheless GeoDataPoint shouldn't be used if you just want to store 
+ * 3d coordinates of a point that doesn't need to be inherited from GeoDataGeometry
+ * In that case use GeoDataCoordinates instead which has nearly the same features 
+ * and is much more light weight. 
+ * Please consider this especially if you expect to have a high
+ * amount of points e.g. for line strings, linear rings and polygons.
  * @see GeoDataCoordinates
  * @see GeoDataGeometry
 */

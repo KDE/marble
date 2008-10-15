@@ -263,7 +263,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
 
                 // We take the manhattan length as a distance approximation
                 // that can be too big by a factor of sqrt(2)
-                qreal distance =   fabs(x - previousX) + fabs(y - previousY);
+                qreal distance = fabs((qreal)(x - previousX)) + fabs((qreal)(y - previousY));
 
                 // FIXME: This is a work around: remove as soon as we handle horizon crossing
                 if ( globeHidesPoint || previousGlobeHidesPoint ) {

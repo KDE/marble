@@ -91,8 +91,8 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     using GeoDataLatLonBox::intersects;
 
     /**
-     * @brief Create a bounding box from a set of geographic points.
-     * @return the bounding box that contains the geographic points.
+     * @brief Create the smallest bounding box from a line string.
+     * @return the smallest bounding box that contains the linestring.
      */
     static GeoDataLatLonAltBox fromLineString( const GeoDataLineString& lineString );
 

@@ -95,6 +95,18 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     void    setBoundaries( qreal north, qreal south, qreal east, qreal west, GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
+     * @brief Get the width of the longitude interval
+     * @return the angle covered by the longitude range.
+     */
+    qreal width( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+
+    /**
+     * @brief Get the height of the latitude interval
+     * @return the angle covered by the latitude range.
+     */
+    qreal height( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+
+    /**
      * @brief Detect whether the bounding box crosses the IDL.
      * @return @c true  the bounding box crosses the +/-180 deg longitude.
      *         @c false the bounding box doesn't cross the +/-180 deg longitude.
@@ -115,8 +127,8 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     static GeoDataLatLonBox fromCoordinates( const QVector<GeoDataCoordinates*>& coordinates );
 
     /**
-     * @brief Create a bounding box from a set of geographic points.
-     * @return the bounding box that contains the geographic points.
+     * @brief Create the smallest bounding box from a line string.
+     * @return the smallest bounding box that contains the linestring.
      */
     static GeoDataLatLonBox fromLineString( const GeoDataLineString& lineString );
 
