@@ -16,6 +16,7 @@
 
 #include "AbstractProjection.h"
 #include "MarbleDirs.h"
+#include "MarbleDataFacade.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 
@@ -118,7 +119,7 @@ bool MapScaleFloatItem::renderFloatItem( GeoPainter *painter,
 
     setSize( QSizeF( viewport->width() / 2, 2 * padding() + fontHeight + 3 + m_scaleBarHeight ) ); 
 
-    m_scaleBarKm    = (qreal)(m_scaleBarWidth) * EARTH_RADIUS / 
+    m_scaleBarKm    = (qreal)(m_scaleBarWidth) * dataFacade()->planetRadius() / 
                       (qreal)(viewport->radius());
 
     calcScaleBar();

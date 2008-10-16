@@ -239,6 +239,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void stopPolling();
 
+    qreal                 planetRadius()   const;
+
     ExtDateTime*          dateTime()       const;
     SunLocator*           sunLocator()     const;
     MergedLayerDecorator* layerDecorator() const;

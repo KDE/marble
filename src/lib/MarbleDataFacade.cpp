@@ -55,6 +55,11 @@ MarbleDataFacade::~MarbleDataFacade()
     delete d;
 }
 
+qreal MarbleDataFacade::planetRadius() const
+{
+    return d->m_model->planetRadius();
+}
+
 QDateTime MarbleDataFacade::dateTime() const
 {
     return d->m_model->dateTime()->datetime();

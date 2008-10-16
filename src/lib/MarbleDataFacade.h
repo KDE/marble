@@ -62,6 +62,7 @@ class MARBLE_EXPORT MarbleDataFacade
     explicit MarbleDataFacade( MarbleModel *model );
     ~MarbleDataFacade();
 
+    qreal planetRadius() const;
 
     QDateTime dateTime() const;
 

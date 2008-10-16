@@ -143,6 +143,7 @@ const int tileDigits = 6;
 const qreal RAD2INT = 21600.0 / M_PI;
 
 // Average earth radius in m
+// Deprecated: Please use model()->planetRadius() instead.
 const qreal EARTH_RADIUS = 6378000.0;
 
 }
