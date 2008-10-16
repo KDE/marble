@@ -44,20 +44,20 @@ GeoNode* KmlcolorTagHandler::parse( GeoParser& parser ) const
     if ( parentItem.nodeAs<GeoDataColorStyle>() ) {
         bool ok;
         QRgb abgr = parser.readElementText().trimmed().toUInt( &ok, 16 );
-        unsigned r = (abgr << 24) >> 24; abgr = abgr >> 8;
-        unsigned g = (abgr << 16) >> 16; abgr = abgr >> 8;
-        unsigned b = (abgr << 8) >> 8; abgr = abgr >> 8;
-        unsigned a = abgr;
-        QRgb argb = (a << 24)|(r << 16)|(g << 8)|b;
+        unsigned a = abgr >> 24; abgr = abgr << 8; //"rgb0"
+        unsigned b = abgr >> 24; abgr = abgr << 8; //"gb00"
+        unsigned g = abgr >> 24; abgr = abgr << 8; //"b000"
+        unsigned r = abgr >> 24;
+        QRgb rgba = (a << 24)|(r << 16)|(g << 8)|(b);
         //
         // color tag uses AABBGGRR whereas QColor uses AARRGGBB - use some shifts for that
         // be aware that QRgb needs to be a typedef for 32 bit UInt for this to work properly
         if( ok ) {
             parentItem.nodeAs<GeoDataColorStyle>()->setColor( 
-            QColor::fromRgba( argb ) );
+            QColor::fromRgba( rgba ) );
         }
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_color << "> containing: " << argb
+        qDebug() << "Parsed <" << kmlTag_color << "> containing: " << rgba
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }
