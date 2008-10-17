@@ -82,11 +82,11 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     AltitudeMode altitudeMode() const;
     void setAltitudeMode( const AltitudeMode altitudeMode );
 
-    bool     virtual contains( const GeoDataPoint & ); // NOTE: Why do we need this one?
-    bool     virtual contains( const GeoDataCoordinates & );
+    virtual bool contains( const GeoDataPoint & ); // NOTE: Why do we need this one?
+    virtual bool contains( const GeoDataCoordinates & );
     bool     contains( const GeoDataLatLonAltBox & );
 
-    bool     virtual intersects( const GeoDataLatLonAltBox & );
+    virtual bool intersects( const GeoDataLatLonAltBox & );
 
     using GeoDataLatLonBox::intersects;
 
@@ -99,7 +99,7 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     /**
      * @brief Creates a text string of the bounding box
      */
-    QString  virtual toString( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    virtual QString toString( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
 
     /**
      * @brief Indicates whether the bounding box only contains a single 2D point ("singularity").

@@ -113,11 +113,11 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
      */
     bool     crossesDateLine() const;
 
-    bool     virtual contains( const GeoDataPoint & ); // NOTE: Why do we need this one?
-    bool     virtual contains( const GeoDataCoordinates & );
+    virtual bool contains( const GeoDataPoint & ); // NOTE: Why do we need this one?
+    virtual bool contains( const GeoDataCoordinates & );
     bool     contains( const GeoDataLatLonBox & );
 
-    bool     virtual intersects( const GeoDataLatLonBox & );
+    virtual bool intersects( const GeoDataLatLonBox & );
 
     /**
      * @brief Create a bounding box from a set of geographic points.
@@ -135,13 +135,13 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     /**
      * @brief Creates a text string of the bounding box
      */
-    QString  virtual toString( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
+    virtual QString toString( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
 
     /**
      * @brief Indicates whether the bounding box only contains a single 2D point ("singularity").
      * @return Return value is true if the height and the width of the bounding box equal zero.
      */
-    bool     virtual isNull() const;
+    virtual bool isNull() const;
 
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
