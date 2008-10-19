@@ -15,6 +15,7 @@
 
 
 #include <QtGui/QPainter>
+#include "marble_export.h"
 
 namespace Marble
 {
@@ -29,8 +30,9 @@ namespace Marble
 // So we introduce the ClipPainter that clips all vectors to only the
 // part of them that are actually shown.
 //
+// @internal
 
-class ClipPainter : public QPainter 
+class MARBLE_EXPORT ClipPainter : public QPainter 
 {
  public:
     ClipPainter();
