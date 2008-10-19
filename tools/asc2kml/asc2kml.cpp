@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
         // QTextStream targetstream( new QString() );
 
         targetstream << "<?xml version=\"1.0\" encoding=\"UTF-8\"?> \n"
-                     << "<kml xmlns=\"http://earth.google.com/kml/2.0\"> \n"
+                     << "<kml xmlns=\"http://earth.google.com/kml/2.1\"> \n"
                      << "<Document> \n";
 
         targetstream << "    <Schema name=\"MarblePlacemark\" parent=\"Placemark\"> \n";
