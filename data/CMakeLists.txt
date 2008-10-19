@@ -141,10 +141,10 @@ maps/earth/precip-dec/precip-dec-preview.png
 maps/earth/precip-dec/precip-dec.dgml
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/precip-dec)
 
-install (FILES
-maps/moon/clementine/clementine.jpg
-maps/moon/clementine/clementine.dgml
-DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/moon/clementine)
+#install (FILES
+#maps/moon/clementine/clementine.jpg
+#maps/moon/clementine/clementine.dgml
+#DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/moon/clementine)
 
 FILE (GLOB PNT_FILES mwdbii/*.PNT)
 install (FILES

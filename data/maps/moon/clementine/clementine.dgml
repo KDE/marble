@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
+    <document>
+        <head>
+            <name>Moon</name>
+            <target>moon</target>
+            <theme>clementine</theme>
+            <icon pixmap="clementine-preview.png"/>
+    
+            <!-- describes whether the map theme item will be hidden (e.g.
+                for a clouds layer): -->
+            <visible> true </visible>
+        
+            <!-- The description allows for rich text of course: -->
+            <description><![CDATA[<p>Earth as seen from Space.<p>The map is based on NASA's beautiful "Blue Marble Next Generation" pictures. Credits: NASA's Earth Observatory ]]></description>
+    
+            <zoom>
+                <minimum>   900  </minimum>
+                <maximum>  2400  </maximum>
+    
+                <!-- describes whether you can zoom trough the levels
+                    continuously -->
+                <discrete> false </discrete> 
+            </zoom>
+        </head>
+        
+            <!-- Now we create the layer structure that gets handled by the
+    layer management class -->
+        
+        <map bgcolor="#000000" labelColor="#ffffff">
+            <canvas/>
+            <!-- In this place one could e.g. insert a sky plugin -->
+            <target/>
+        
+            <!-- This layer creates the elevation model -->
+            <layer name="clementine" backend="texture">
+                <texture name="clementine_data"><!-- type="texture"-->
+                    <sourcedir format="JPG"> moon/clementine </sourcedir>
+                    <installmap> clementine.jpg </installmap>
+                </texture>
+            </layer>
+                            
+            <layer name="lunarplaces" backend="geodata">
+                <geodata name="lunarplacemarks">
+                    <sourcefile format="KML">lunarplacemarks.kml</sourcefile>
+                    <pick>placemark</pick> <!-- picks certain features from a
+                                            file -->
+                </geodata>
+            </layer>
+        </map>
+
+        <settings>
+-            <group name="Places">
+            </group>
+            <group name="Surface">
+                <property name="craters">
+                    <value>false</value>
+                    <available>false</available>
+                </property>
+                <property name="maria">
+                    <value>false</value>
+                    <available>false</available>
+                </property>
+            </group>
+
+            <property name="coordinate-grid">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="compass">
+                <value>true</value>
+                <available>true</available>
+            </property>
+            <property name="scalebar">
+                <value>true</value>
+                <available>true</available>
+            </property>
+        </settings>
+        
+        <!-- At last we define some legend properties -->
+        
+        <legend>
+            <section name="terrain" checkable="true" connect="terrain" spacing="12">
+                <heading>Terrain</heading>
+
+                <item name="mountain">
+                    <icon pixmap="bitmaps/mountain_1.png"/>
+                    <text>Mountain</text>
+                </item>
+                <item name="volcano">
+                    <icon pixmap="bitmaps/volcano_1.png"/>
+                    <text>Volcano</text>
+                </item>
+            </section>
+
+            <section name="otherplaces" checkable="true" connect="otherplaces" spacing="12">
+                <heading>Places of Interest</heading>
+
+                <item name="geographic-pole">
+                    <icon pixmap="bitmaps/pole_1.png"/>
+                    <text>Geographic Pole</text>
+                </item>
+                <item name="magnetic-pole">
+                    <icon pixmap="bitmaps/pole_2.png"/>
+                    <text>Magnetic Pole</text>
+                </item>
+            </section>
+
+            <section name="surface" checkable="false" spacing="12">
+                <heading>Surface</heading>
+
+                <item name="craters">
+                    <icon pixmap="maps/earth/bluemarble/legend/ice.png"/>
+                    <text>Craters</text>
+                </item>
+                <item name="maria">
+                    <icon pixmap="maps/earth/bluemarble/legend/mountain.png"/>
+                    <text>Maria (large plain)</text>
+                </item>
+            </section>
+
+            <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
+                <heading>Coordinate Grid</heading>
+            </section>
+        </legend>
+    </document>
+</dgml>
