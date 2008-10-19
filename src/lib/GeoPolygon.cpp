@@ -253,7 +253,7 @@ void PntMap::load(const QString &filename)
     qreal  lat     = 0.0;
 
     GeoPolygon::PtrVector::Iterator       itPolyLine;
-    GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = end();
+    GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = constEnd();
     GeoDataCoordinates::Vector::ConstIterator   itPoint;
 
     // Now we calculate the boundaries
@@ -271,7 +271,7 @@ void PntMap::load(const QString &filename)
         bool isOriginalSide = true;
         int  lastSign     = 0;
 
-        GeoDataCoordinates::Vector::ConstIterator  itEndPoint = (*itPolyLine)->end();
+        GeoDataCoordinates::Vector::ConstIterator  itEndPoint = (*itPolyLine)->constEnd();
 					
         for ( itPoint = (*itPolyLine)->begin();
                 itPoint != itEndPoint;

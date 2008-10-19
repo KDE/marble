@@ -71,6 +71,8 @@ class PlaceMarkManager : public QObject
      */
     void setGeoModel( MarbleGeometryModel * model );
 
+    void clearPlaceMarks();
+
     /**
      * This methods loads the standard place mark files.
      *

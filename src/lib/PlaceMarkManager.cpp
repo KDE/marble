@@ -74,6 +74,11 @@ void PlaceMarkManager::setPlaceMarkModel( MarblePlacemarkModel *model )
     m_model = model;
 }
 
+void PlaceMarkManager::clearPlaceMarks()
+{
+    m_model->clearPlaceMarks();
+}
+
 void PlaceMarkManager::loadStandardPlaceMarks()
 {
     addPlaceMarkFile( "cityplacemarks" );

@@ -1,3 +1,17 @@
+
+This TODO file outlines a few ideas that we have for future Marble
+development. 
+Of course there are lots of things that we have in mind that could 
+benefit Marble. However we've got ideas enough already, so 
+ideas only help so much as long as the person coming up with 
+an idea also commits itself to implement the feature near-term.
+
+Therefore the actual TODO list is rather located at:
+
+http://techbase.kde.org/Schedules/KDE4/4.2_Feature_Plan
+
+
+
 This file describes what we need to do before certain milestones.
 
 Mark those tasks that you want to perform with your name:
@@ -84,8 +98,6 @@ Vector backend
  * Better scalability                                                   ----
 
 Features:
- * Settings								----
-    - DMS  <-->  Degrees (decimal)					done
  * Support to display Timezones, Data available e.g. at:                ----
         http://sarangworld.com/NMLUG/WorldTZ_102.zip
 
@@ -97,8 +109,6 @@ Internal structure:
  * New class MarbleMap that can paint a map on any QPainter             DONE
     - Check Apidox if there is anything missing.                        --
  * Make MarbleModel a real model and MarbleWidget a real view           ----
-     Move to 4.2?  Probably...
- * Make it possible to paint on whatever QPainter Marble is given       ----
      Move to 4.2?  Probably...
  * Layer Management Class                                               TACK
     - Split off MapTheme / DGML parsing into geodata/parser.            done
@@ -127,12 +137,9 @@ Smaller issues
  * Make the about dialog for MarbleWidget more consistent with the      ----
    application About dialog.  Or perhaps disable it for the KDE
    version?
- * Cloud Layer                                                          STRE
 
 Installation issues
  * Only install the public include files                                ----
- * Creating tiles during build instead of first run                     DONE
-    - Create all maps?	       	       	  				--
 
 Integration with Qt designer
  * control files for the following widgets                              TACK

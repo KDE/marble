@@ -127,10 +127,10 @@ QVector<QPersistentModelIndex> PlaceMarkLayout::whichPlaceMarkAt( const QPoint& 
 
     QVector<QPersistentModelIndex> ret;
 
-    QVector<VisiblePlaceMark*>::const_iterator  it;
+    QVector<VisiblePlaceMark*>::ConstIterator  it;
+    QVector<VisiblePlaceMark*>::ConstIterator  itEnd = m_paintOrder.constEnd();
     for ( it = m_paintOrder.constBegin();
-          it != m_paintOrder.constEnd();
-          ++it )
+          it != itEnd; ++it )
     {
         const VisiblePlaceMark  *mark = *it; // no cast
 
@@ -321,7 +321,9 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
     const QItemSelection selection = selectionModel->selection();
 
     QList<QPersistentModelIndex>::ConstIterator it;
-    for ( it = m_persistentIndexList.begin(); it != m_persistentIndexList.end(); ++it )
+    QList<QPersistentModelIndex>::ConstIterator itEnd = m_persistentIndexList.constEnd();
+
+    for ( it = m_persistentIndexList.constBegin(); it != itEnd; ++it )
     {
         const QPersistentModelIndex& index = *it;
         const MarblePlacemarkModel *placemarkModel =
@@ -475,11 +477,12 @@ QRect PlaceMarkLayout::roomForLabel( GeoDataStyle * style,
                 labelRect.moveTo( xpos, ypos );
 
                 // Check if there is another label or symbol that overlaps.
-                for ( QVector<VisiblePlaceMark*>::const_iterator beforeit = currentsec.constBegin();
-                      beforeit != currentsec.constEnd();
-                      ++beforeit )
+                QVector<VisiblePlaceMark*>::const_iterator beforeItEnd = currentsec.constEnd();
+                for ( QVector<VisiblePlaceMark*>::ConstIterator beforeIt = currentsec.constBegin();
+                      beforeIt != beforeItEnd;
+                      ++beforeIt )
                 {
-                    if ( labelRect.intersects( (*beforeit)->labelRect()) ) {
+                    if ( labelRect.intersects( (*beforeIt)->labelRect()) ) {
                         isRoom = false;
                         break;
                     }
@@ -502,11 +505,11 @@ QRect PlaceMarkLayout::roomForLabel( GeoDataStyle * style,
                           textWidth, textHeight );
 
         // Check if there is another label or symbol that overlaps.
-        for ( QVector<VisiblePlaceMark*>::const_iterator beforeit = currentsec.constBegin();
-              beforeit != currentsec.constEnd();
-              ++beforeit )
+        QVector<VisiblePlaceMark*>::const_iterator beforeItEnd = currentsec.constEnd();
+        for ( QVector<VisiblePlaceMark*>::ConstIterator beforeIt = currentsec.constBegin();
+              beforeIt != beforeItEnd; ++beforeIt )
         {
-            if ( labelRect.intersects( (*beforeit)->labelRect() ) ) {
+            if ( labelRect.intersects( (*beforeIt)->labelRect() ) ) {
                 isRoom = false;
                 break;
             }

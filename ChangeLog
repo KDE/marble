@@ -1,3 +1,18 @@
+This changelog has effectively been discontinued.
+
+Until its usage is being continued again just use
+
+http://lists.kde.org/?l=kde-commits&w=2&r=1&s=marble&q=b
+
+or 
+
+svn log
+
+instead to follow code changes.
+
+Thanks!
+
+
 2008-09-08  Patrick Spendrin    <ps_ml@gmx.de>
 
     * src/plugins/marble/CMakeLists.txt
