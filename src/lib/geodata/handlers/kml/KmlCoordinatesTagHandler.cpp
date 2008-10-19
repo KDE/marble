@@ -45,12 +45,12 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_coordinates ) );
 
     GeoStackItem parentItem = parser.parentElement();
-    
-    if( parentItem.nodeAs<GeoDataGeometry>() ) {
+
+    if( parentItem.nodeAs<GeoDataGeometry>() || parentItem.nodeAs<GeoDataPlacemark>() ) {
         QStringList  coordinatesLines = parser.readElementText().trimmed().split( ' ', QString::SkipEmptyParts );
         Q_FOREACH( const QString& line, coordinatesLines ) {
             QStringList coordinates = line.trimmed().split( ',' );
-            if ( parentItem.represents( kmlTag_Point ) ) {
+            if ( parentItem.nodeAs<GeoDataPlacemark>() ) {
                 GeoDataPoint* coord = new GeoDataPoint();
                 if ( coordinates.size() == 2 ) {
                     coord->set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
