@@ -21,6 +21,7 @@ include_directories(
 add_subdirectory( tilecreator )
 add_subdirectory( lib )
 add_subdirectory( plugins )
+add_subdirectory( bindings )
 
 # if( PLASMA_FOUND )
 #     add_subdirectory( plasmoid )

@@ -1,0 +1,53 @@
+//
+// Copyright 2008 Simon Edwards <simon@simonzone.com>
+// 
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either 
+// version 2.1 of the License, or (at your option) any later version.
+// 
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public 
+// License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+namespace Marble
+{
+
+class GeoDataLatLonAltBox : Marble::GeoDataLatLonBox
+{
+%TypeHeaderCode
+#include <marble/GeoDataLatLonAltBox.h>
+%End
+
+public:
+                            GeoDataLatLonAltBox ();
+                            GeoDataLatLonAltBox (const Marble::GeoDataLatLonAltBox&);
+                            GeoDataLatLonAltBox (const Marble::GeoDataLatLonBox&);
+    virtual bool            isFolder () const;
+    qreal                   minAltitude () const;
+    void                    setMinAltitude (const qreal minAltitude);
+    qreal                   maxAltitude () const;
+    void                    setMaxAltitude (const qreal maxAltitude);
+    Marble::AltitudeMode    altitudeMode () const;
+    void                    setAltitudeMode (const Marble::AltitudeMode altitudeMode);
+    virtual bool            contains (const Marble::GeoDataPoint&);
+    virtual bool            contains (const Marble::GeoDataCoordinates&);
+    bool                    contains (const Marble::GeoDataLatLonAltBox&);
+    virtual bool            intersects (const Marble::GeoDataLatLonAltBox&);
+//FIXME    static Marble::GeoDataLatLonAltBox  fromLineString (const Marble::GeoDataLineString& lineString);
+
+    virtual QString    toString (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
+
+    bool                    isNull () const;
+    virtual void            pack (QDataStream& stream) const;
+    virtual void            unpack (QDataStream& stream);
+};   // GeoDataLatLonAltBox
+
+};   // Marble
+
+
