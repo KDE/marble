@@ -98,6 +98,8 @@ void MarbleRunnerManager::slotRunnerFinished( QVector<GeoDataPlacemark*> result 
     m_activeRunners--;
     qDebug() << "Runner finished, active runners: " << m_activeRunners;
     qDebug() << "Runner reports" << result.size() << "results";
+    if( result.isEmpty() )
+        return;
 
     PlaceMarkContainer cont( result, "Runner Results" );
     m_model->addPlaceMarks( cont, false );
