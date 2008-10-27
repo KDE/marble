@@ -2,21 +2,21 @@
 <dgml xmlns="http://edu.kde.org/marble/dgml/2.0">
     <document>
         <head>
-            <name>Moon</name>
-            <target>moon</target>
-            <theme>clementine</theme>
-            <icon pixmap="clementine-preview.png"/>
+            <name>Historical Map 1689</name>
+            <target>earth</target>
+            <theme>schagen1689</theme>
+            <icon pixmap="schagen1689-preview.png"/>
     
             <!-- describes whether the map theme item will be hidden (e.g.
                 for a clouds layer): -->
             <visible> true </visible>
         
             <!-- The description allows for rich text of course: -->
-            <description><![CDATA[<p>Earth as seen from Space.<p>The map is based on NASA's beautiful "Blue Marble Next Generation" pictures. Credits: NASA's Earth Observatory ]]></description>
+	    <description><![CDATA[<i>Historical world map</i> from the year 1689 created by G. van Schagen in Amsterdam.]]></description>
     
             <zoom>
-                <minimum>   900  </minimum>
-                <maximum>  2400  </maximum>
+                <minimum>  1000  </minimum>
+                <maximum>  1500  </maximum>
     
                 <!-- describes whether you can zoom trough the levels
                     continuously -->
@@ -33,18 +33,35 @@
             <target/>
         
             <!-- This layer creates the elevation model -->
-            <layer name="clementine" backend="texture">
-                <texture name="clementine_data"><!-- type="texture"-->
-                    <sourcedir format="JPG"> moon/clementine </sourcedir>
-                    <installmap> clementine.jpg </installmap>
+            <layer name="schagen1689" backend="texture">
+                <texture name="schagen1689_data"><!-- type="texture"-->
+                    <sourcedir format="JPG"> earth/schagen1689 </sourcedir>
+                    <installmap> schagen1689.jpg </installmap>
                 </texture>
             </layer>
                             
-            <layer name="lunarplaces" backend="geodata">
-                <geodata name="lunarplacemarks">
-                    <sourcefile format="KML">lunarplacemarks.kml</sourcefile>
+            <layer name="standardplaces" backend="geodata">
+                <geodata name="cityplacemarks">
+                    <sourcefile format="KML">cityplacemarks.kml</sourcefile>
                     <pick>placemark</pick> <!-- picks certain features from a
                                             file -->
+                </geodata>
+                <geodata name="baseplacemarks">
+                    <sourcefile format="KML">baseplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="elevplacemarks">
+                    <sourcefile format="KML">elevplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="otherplacemarks">
+                    <sourcefile
+                    format="KML">otherplacemarks.kml</sourcefile>
+                    <pick>placemark</pick>
+                </geodata>
+                <geodata name="boundaryplacemarks">
+                    <sourcefile format="KML">boundaryplacemarks</sourcefile>
+                    <pick>placemark</pick>
                 </geodata>
             </layer>
         </map>
@@ -56,30 +73,24 @@
                     <available>true</available>
                 </property>
                 <property name="cities">
-                    <value>true</value>
+                    <value>false</value>
                     <available>true</available>
                 </property>
                 <property name="terrain">
-                    <value>true</value>
+                    <value>false</value>
                     <available>true</available>
                 </property>
                 <property name="otherplaces">
-                    <value>true</value>
+                    <value>false</value>
                     <available>true</available>
-                </property>
-            </group>
-            <group name="Surface">
-                <property name="craters">
-                    <value>false</value>
-                    <available>false</available>
-                </property>
-                <property name="maria">
-                    <value>false</value>
-                    <available>false</available>
                 </property>
             </group>
 
             <property name="coordinate-grid">
+                <value>false</value>
+                <available>true</available>
+            </property>
+            <property name="overviewmap">
                 <value>true</value>
                 <available>true</available>
             </property>
@@ -96,16 +107,34 @@
         <!-- At last we define some legend properties -->
         
         <legend>
+            <section name="populatedplaces" checkable="false" spacing="12">
+                <heading></heading>
+
+                <item name="town">
+                    <icon pixmap="maps/earth/schagen1689/legend/town.png"/>
+                    <text>Town</text>
+                </item>
+            </section>
+
             <section name="terrain" checkable="true" connect="terrain" spacing="12">
                 <heading>Terrain</heading>
 
                 <item name="mountain">
-                    <icon pixmap="bitmaps/mountain_1.png"/>
+                    <icon pixmap="maps/earth/schagen1689/legend/mountain.png"/>
                     <text>Mountain</text>
                 </item>
-                <item name="volcano">
-                    <icon pixmap="bitmaps/volcano_1.png"/>
-                    <text>Volcano</text>
+            </section>
+
+            <section name="surface" checkable="false" spacing="12">
+                <heading>Surface</heading>
+
+                <item name="river">
+                    <icon pixmap="maps/earth/schagen1689/legend/river.png"/>
+                    <text>River</text>
+                </item>
+                <item name="lake">
+                    <icon pixmap="maps/earth/schagen1689/legend/lake.png"/>
+                    <text>Lake</text>
                 </item>
             </section>
 
@@ -115,23 +144,6 @@
                 <item name="geographic-pole">
                     <icon pixmap="bitmaps/pole_1.png"/>
                     <text>Geographic Pole</text>
-                </item>
-                <item name="magnetic-pole">
-                    <icon pixmap="bitmaps/pole_2.png"/>
-                    <text>Magnetic Pole</text>
-                </item>
-            </section>
-
-            <section name="surface" checkable="false" spacing="12">
-                <heading>Surface</heading>
-
-                <item name="craters">
-                    <icon pixmap="maps/earth/bluemarble/legend/ice.png"/>
-                    <text>Craters</text>
-                </item>
-                <item name="maria">
-                    <icon pixmap="maps/earth/bluemarble/legend/mountain.png"/>
-                    <text>Maria (large plain)</text>
                 </item>
             </section>
 

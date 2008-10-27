@@ -141,6 +141,22 @@ maps/earth/precip-dec/precip-dec-preview.png
 maps/earth/precip-dec/precip-dec.dgml
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/precip-dec)
 
+install (FILES
+maps/earth/schagen1689/legend.html
+maps/earth/schagen1689/schagen1689.jpg
+maps/earth/schagen1689/schagen1689.dgml
+maps/earth/schagen1689/schagen1689-preview.png
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/schagen1689)
+
+install (FILES
+maps/earth/schagen1689/legend/mountain.png
+maps/earth/schagen1689/legend/town.png
+maps/earth/schagen1689/legend/river.png
+maps/earth/schagen1689/legend/lake.png
+maps/earth/schagen1689/legend/schagen_title.png
+maps/earth/schagen1689/legend/schagen_orig.png
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/schagen1689/legend)
+
 #install (FILES
 #maps/moon/clementine/clementine.jpg
 #maps/moon/clementine/clementine.dgml

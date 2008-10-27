@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>Marble: Legend</title>
+  <link href="legend.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<p>
+    <img src="./legend/schagen_title.png">
+</p>
+
+<!-- 
+    To add a custom checkbox that can be monitored through 
+    LegendBrowser's API use this syntax:
+
+<a href="checkbox:checkboxid"><span style="text-decoration: none"><img src="checkbox:checkboxid">&nbsp;</span></a> 
+
+    where "checkboxid" needs to be replaced by a unique identifier 
+    string of your choice.
+-->
+
+<H4> <!--Locations checkbox--><a href="checkbox:cities"><span style="text-decoration: none"><img src="checkbox:cities">&nbsp;</span></a> Populated Places</H4>
+
+<!-- The following comment gives a hint to the MarbleLegendBrowser where further 
+     legend items which get generated from DGML should get inserted.
+     So DO NOT DELETE this comment: -->
+
+<!-- ##customLegendEntries:all## -->
+
+<!-- You can still appendfurther html and Marble-specific html attributes here: -->
+<p>More information about this map is available <a href="http://techbase.kde.org/Projects/Marble/HistoricalMaps">here</a>.
+</p>
+<p>
+    <img src="./legend/schagen_orig.png">
+</p>
+<br>
+</body>
