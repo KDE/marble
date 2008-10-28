@@ -103,6 +103,11 @@ void MarbleGeometryModel::setGeoDataRoot( GeoDataDocument* root )
     }
 }
 
+GeoDataDocument* MarbleGeometryModel::geoDataRoot() const
+{
+    return d->m_rootDocument;
+}
+
 int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
 {
     /* For now we will simply take over the mechanism of TreeModels:

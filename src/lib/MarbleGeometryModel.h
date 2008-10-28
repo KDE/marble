@@ -51,6 +51,11 @@ class MarbleGeometryModel : public QAbstractItemModel
      * set the geodataroot tree and initialize the model
      */
     void setGeoDataRoot( GeoDataDocument* root );
+    
+    /**
+    * return the value of the root document currently used
+    */
+    GeoDataDocument* geoDataRoot() const;
  
     /**
     * Return the data of an @p index with the specified @p role
