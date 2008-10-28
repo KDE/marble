@@ -121,7 +121,7 @@
                 </property>
             </group>
 
--            <group name="Boundaries">
+            <group name="Boundaries">
                 <property name="borders">
                     <value>true</value>
                     <available>true</available>

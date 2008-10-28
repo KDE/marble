@@ -39,6 +39,21 @@
                     <installmap> schagen1689.jpg </installmap>
                 </texture>
             </layer>
+
+            <layer name="mwdbii" backend="vector" role="polyline">
+                <vector name="pcoast" feature="coast">
+                    <sourcefile format="PNT"> earth/mwdbii/PCOAST.PNT </sourcefile>
+                    <pen color="#ffff00" />
+                </vector>
+                <vector name="international dateline" feature="border">
+                    <sourcefile format="PNT"> earth/mwdbii/DATELINE.PNT </sourcefile>
+                    <pen color="#ffffff" />
+                </vector>
+                <vector name="rivers" feature="river" connect="waterbodies">
+                    <sourcefile format="PNT"> earth/mwdbii/RIVER.PNT </sourcefile>
+                    <pen color="#ffffff" />
+                </vector>
+            </layer>
                             
             <layer name="standardplaces" backend="geodata">
                 <geodata name="cityplacemarks">
@@ -86,6 +101,40 @@
                 </property>
             </group>
 
+-            <group name="Boundaries">
+                <property name="borders">
+                    <value>false</value>
+                    <available>false</available>
+                </property>
+                <property name="international-boundaries">
+                    <available>false</available>
+                    <value>false</value>
+                </property>
+                <property name="state-boundaries">
+                    <available>false</available>
+                    <value>false</value>
+                </property>
+            </group>
+
+            <group name="Water Bodies">
+                <property name="coastlines">
+                    <available>true</available>
+                    <value>false</value>
+                </property>
+                <property name="waterbodies">
+                    <available>false</available>
+                    <value>false</value>
+                </property>
+                <property name="lakes">
+                    <available>false</available>
+                    <value>false</value>
+                </property>
+                <property name="rivers">
+                    <available>false</available>
+                    <value>false</value>
+                </property>
+            </group>
+
             <property name="coordinate-grid">
                 <value>false</value>
                 <available>true</available>
@@ -108,7 +157,7 @@
         
         <legend>
             <section name="populatedplaces" checkable="false" spacing="12">
-                <heading></heading>
+                <heading>Populated Places</heading>
 
                 <item name="town">
                     <icon pixmap="maps/earth/schagen1689/legend/town.png"/>
@@ -116,7 +165,7 @@
                 </item>
             </section>
 
-            <section name="terrain" checkable="true" connect="terrain" spacing="12">
+            <section name="terrain" checkable="false" spacing="12">
                 <heading>Terrain</heading>
 
                 <item name="mountain">
@@ -145,6 +194,10 @@
                     <icon pixmap="bitmaps/pole_1.png"/>
                     <text>Geographic Pole</text>
                 </item>
+            </section>
+
+            <section name="coastlines" checkable="true" connect="coastlines" spacing="12">
+                <heading>Accurate Coastline</heading>
             </section>
 
             <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
