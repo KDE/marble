@@ -162,9 +162,9 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_placeMarkLayout = new PlaceMarkLayout( this );
     connect( d->m_placemarkselectionmodel, SIGNAL( selectionChanged( QItemSelection,
                                                                         QItemSelection) ),
-                d->m_placeMarkLayout, SLOT( requestStyleReset() ) );
-    connect( d->m_placemarkmodel, SIGNAL( modelReset() ),
-                d->m_placeMarkLayout, SLOT( requestStyleReset() ) );
+             d->m_placeMarkLayout,         SLOT( requestStyleReset() ) );
+    connect( d->m_placemarkmodel,  SIGNAL( layoutChanged() ),
+             d->m_placeMarkLayout, SLOT( requestStyleReset() ) );
 
     d->m_placemarkmanager->loadStandardPlaceMarks();
 

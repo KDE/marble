@@ -43,6 +43,7 @@ class MarblePlacemarkModel::Private
     MarblePlacemarkModel  *m_parent;
     PlaceMarkManager      *m_manager;
     PlaceMarkContainer     m_placeMarkContainer;
+    QList<QPersistentModelIndex> m_persistantIndexList;
 };
 
 
@@ -69,16 +70,26 @@ MarblePlacemarkModel::~MarblePlacemarkModel()
     delete d;
 }
 
+void MarblePlacemarkModel::indexUpdate()
+{
+    generateIndex();
+}
+
+void MarblePlacemarkModel::generateIndex() const
+{
+    const int constRowCount = rowCount();
+    int count = 0;
+    qDebug() << "start generate indexes";
+    for ( int i = d->m_persistantIndexList.size(); i < constRowCount; ++i )
+    {
+        d->m_persistantIndexList << index( i, 0 );
+    }
+    qDebug() << "generated indexes";
+}
+
 QList<QPersistentModelIndex> MarblePlacemarkModel::persistentIndexList () const
 {
-    QList<QPersistentModelIndex> modelIndexList;
-    const int constRowCount = rowCount();
-
-    for ( int i = 0; i < constRowCount; ++i )
-    {
-        modelIndexList << index( i, 0 );
-    }
-    return modelIndexList;
+    return d->m_persistantIndexList;
 }
 
 int MarblePlacemarkModel::rowCount( const QModelIndex &parent ) const
@@ -190,16 +201,17 @@ void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks, bool c
 {
   // For now we simply remove any previous placemarks
     if ( clearPrevious ) {
-        qDeleteAll( d->m_placeMarkContainer.begin(), d->m_placeMarkContainer.end() );
+        qDeleteAll( d->m_placeMarkContainer );
         d->m_placeMarkContainer.clear();
     }
 
     createFilterProperties( placeMarks );
 
     d->m_placeMarkContainer << placeMarks;
-    d->m_placeMarkContainer.sort();
 
-    reset();
+    generateIndex();
+    d->m_placeMarkContainer.sort();
+    emit layoutChanged();
 }
 
 void MarblePlacemarkModel::clearPlaceMarks()

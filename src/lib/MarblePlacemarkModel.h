@@ -104,6 +104,18 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      */
     void addPlaceMarks( PlaceMarkContainer &placeMarks, bool clearPrevious = false );
 
+ public Q_SLOTS:
+    /**
+    * This slot should update the persistentIndex
+    */
+    void indexUpdate();
+
+ Q_SIGNALS:
+    /**
+     * @brief Signal that the persistant Index has been updated
+     */
+    void indexUpdated();
+
  private:
 
     /**
@@ -111,6 +123,8 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      * the model.
      */
     void clearPlaceMarks();
+    
+    void generateIndex() const;
 
     void createFilterProperties( PlaceMarkContainer &container );
 
