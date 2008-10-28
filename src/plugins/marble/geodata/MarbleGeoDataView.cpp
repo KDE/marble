@@ -39,7 +39,6 @@ void MarbleGeoDataView::setGeoPainter( GeoPainter* painter )
     m_painter = painter;
     /* the paintEvent function has to called by hand as the view is not 
      * connected to a widget (where you normally would get the event from) */
-    qDebug() << "Current model:" << model();
     if( model() ) paintEvent( 0 );
 }
 
@@ -74,9 +73,7 @@ void MarbleGeoDataView::setSelection( const QRect&, QItemSelectionModel::Selecti
 
 void MarbleGeoDataView::paintEvent( QPaintEvent *event )
 {
-//    qDebug() << "starting paintEvent";
     QModelIndex index = rootIndex();
-    qDebug() << rootIndex();
     renderIndex( index );
 }
 
@@ -88,8 +85,6 @@ void MarbleGeoDataView::renderIndex( QModelIndex &index )
      * then call the real render function. For the rest iterate through the
      * children and recurse.
      */
-    qDebug() << "model:" << model();
-    qDebug() << "rows:" << model()->rowCount( index );
     for ( int row = 0; row < model()->rowCount( index ); ++row )
     {
         QModelIndex childIndex = model()->index( row, 0, index );
