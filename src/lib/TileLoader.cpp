@@ -328,7 +328,6 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture *textureLayer )
 
             const QString tilepath = MarbleDirs::path( TileLoaderHelper::relativeTileFileName(
                 textureLayer, 0, column, row ));
-
             noerr = QFile::exists( tilepath );
         }
     }

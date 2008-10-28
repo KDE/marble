@@ -49,11 +49,12 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
                                        ViewportParams *viewport )
 {
     QVector<VisiblePlaceMark*>::const_iterator visit = visiblePlaceMarks.constEnd();
+    QVector<VisiblePlaceMark*>::const_iterator itEnd = visiblePlaceMarks.constBegin();
 
     VisiblePlaceMark *mark = 0;
     int imageWidth = viewport->width();
 
-    while ( visit != visiblePlaceMarks.constBegin() ) {
+    while ( visit != itEnd ) {
 	--visit;
 	mark = *visit;
 
@@ -68,7 +69,7 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
 
     visit = visiblePlaceMarks.constEnd();
 
-    while ( visit != visiblePlaceMarks.constBegin() ) {
+    while ( visit != itEnd ) {
 	--visit;
 	mark = *visit;
 

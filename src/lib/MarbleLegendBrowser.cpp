@@ -14,6 +14,7 @@
 
 #include <QtCore/QUrl>
 #include <QtCore/QDebug>
+#include <QtGui/QDesktopServices>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtGui/QPainter>
@@ -61,6 +62,8 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
 
     setTextInteractionFlags( Qt::LinksAccessibleByMouse
                              | Qt::LinksAccessibleByKeyboard );
+
+    setOpenLinks( false );
 
     connect ( this, SIGNAL( anchorClicked( QUrl ) ),
               this, SLOT( toggleCheckBoxStatus( QUrl ) ) );
@@ -301,7 +304,13 @@ QVariant MarbleLegendBrowser::loadResource ( int type, const QUrl & name )
 
 void MarbleLegendBrowser::toggleCheckBoxStatus( const QUrl &link )
 {
-    if ( link.toString().startsWith( "checkbox:", Qt::CaseInsensitive ) ) {
+    // If we got an HTTP Url, open a browser window 
+    if ( link.scheme() == "http" || link.scheme() == "https" ) {
+        QDesktopServices::openUrl( link );
+        return;
+    }
+
+    if ( link.scheme() == "checkbox" ) {
         QString checkBoxName = link.toString().section(":", 1, -1);
 
         if ( d->m_checkBoxMap.contains( checkBoxName ) ) {

@@ -109,6 +109,8 @@ int main(int argc, char *argv[])
             roleString  = splitline[18];
             description = splitline[19];
 
+            if ( roleString == "SF" ) continue;
+
             population = (int) ( 1000.0 * popString.toFloat() );
 
             lon = lonString.toFloat();

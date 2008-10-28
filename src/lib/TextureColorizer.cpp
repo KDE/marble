@@ -119,7 +119,9 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             }
         }
 
-        for (int y = yTop; y < yBottom; ++y) {
+        const int itEnd = yBottom;
+
+        for (int y = yTop; y < itEnd; ++y) {
 
             QRgb  *writeData         = (QRgb*)( origimg->scanLine( y ) );
             const QRgb  *coastData   = (QRgb*)( coastimg->scanLine( y ) );
