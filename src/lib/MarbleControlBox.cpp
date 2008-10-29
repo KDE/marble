@@ -241,16 +241,16 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 
 #ifndef KML_GSOC
     //set up everything for the FileModel
-    d->uiWidget.m_fileView->setModel( widget->gpxFileModel() );
+    d->uiWidget.m_fileView->setModel( widget->fileViewModel() );
 
     connect( d->uiWidget.m_fileView->selectionModel(),
 	     SIGNAL( selectionChanged( QItemSelection, QItemSelection )),
 	     this,
 	     SLOT( enableFileViewActions() ) );
     connect( d->uiWidget.m_saveButton,  SIGNAL( clicked() ) ,
-             widget->gpxFileModel(),    SLOT( saveFile() ) );
+             widget->fileViewModel(),    SLOT( saveFile() ) );
     connect( d->uiWidget.m_closeButton, SIGNAL( clicked() ) ,
-             widget->gpxFileModel(),    SLOT( closeFile() ) );
+             widget->fileViewModel(),    SLOT( closeFile() ) );
 #else
     FileViewModel* model = widget->fileViewModel();
     d->uiWidget.m_fileView->setModel( model );
