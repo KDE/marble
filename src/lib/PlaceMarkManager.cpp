@@ -194,7 +194,7 @@ void PlaceMarkManager::loadKml( const QString& filename, bool clearPrevious )
             cacheDocument( *document );
             updateCacheIndex();
 
-            emit kmlDocumentLoaded( *document );
+            emit geoDataDocumentLoaded( *document );
         }
     }
 #else
@@ -204,21 +204,19 @@ void PlaceMarkManager::loadKml( const QString& filename, bool clearPrevious )
     importKml( filename, &container );
 
     m_model->addPlaceMarks( container, clearPrevious );
+    qDebug() << "loaded placemarks in " << m_geomodel->geoDataRoot();
+    emit geoDataDocumentLoaded( *(m_geomodel->geoDataRoot()) );
 #endif
 }
 
 void PlaceMarkManager::loadKmlFromData( const QString& data, bool clearPrevious )
 {
-#ifdef KML_GSOC
-    // TODO
-#else
     Q_ASSERT( m_model != 0 && "You have called loadKmlFromData before creating a model!" );
 
     PlaceMarkContainer container;
     importKmlFromData( data, &container );
 
     m_model->addPlaceMarks( container, clearPrevious );
-#endif
 }
 
 
