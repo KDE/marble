@@ -188,9 +188,9 @@
                     <icon color="#efc8c8"/>
                     <text>Commercial Area</text>
                 </item>
-                <item name="healthland">
+                <item name="heathland">
                     <icon color="#ffffc0"/>
-                    <text>Healthland</text>
+                    <text>Heathland</text>
                 </item>
                 <item name="lake_reservoir">
                     <icon color="#b5d0d0"/>
