@@ -468,7 +468,6 @@ void MarblePart::setupActions()
 			   actionCollection() );
 
     // Action: Get hot new stuff
-    m_newStuffAction = KNS::standardAction(QString(), this, SLOT(showNewStuffDialog()), actionCollection(), "new_stuff");
     m_newStuffAction = KNS::standardAction( i18n("Maps..."), this, SLOT(showNewStuffDialog()), actionCollection(), "new_stuff");
     m_newStuffAction->setStatusTip(i18n("&Download new maps"));
     m_newStuffAction->setShortcut( Qt::CTRL + Qt::Key_N );
