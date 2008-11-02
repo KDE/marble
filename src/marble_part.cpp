@@ -469,11 +469,8 @@ void MarblePart::setupActions()
 
     // Action: Get hot new stuff
     m_newStuffAction = KNS::standardAction(QString(), this, SLOT(showNewStuffDialog()), actionCollection(), "new_stuff");
-    // FIXME: Enable the name and status tip when string freeze is lifted.
-#if 0
     m_newStuffAction = KNS::standardAction( i18n("Maps..."), this, SLOT(showNewStuffDialog()), actionCollection(), "new_stuff");
     m_newStuffAction->setStatusTip(i18n("&Download new maps"));
-#endif
     m_newStuffAction->setShortcut( Qt::CTRL + Qt::Key_N );
 
     KStandardAction::showStatusbar( this, SLOT( showStatusBar( bool ) ),
