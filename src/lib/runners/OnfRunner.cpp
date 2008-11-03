@@ -73,7 +73,7 @@ void OnfRunner::parse(const QString &input)
 {
     emit runnerStarted();
     if( input.isEmpty() ) {
-        return;
+        fail();
     }
     //no point to keep downloading if we're doing a new one
     /* //causes crash
@@ -102,7 +102,7 @@ void OnfRunner::slotRequestFinished( int id, bool error )
     }
     
     qDebug() << "ONF search result buffer size:" << m_buffer->size();
-    qDebug() << m_buffer->data();
+    //qDebug() << m_buffer->data();
     
     QByteArray array = m_buffer->data();
     QBuffer data( &array );
@@ -119,12 +119,10 @@ void OnfRunner::slotRequestFinished( int id, bool error )
     Q_ASSERT( results );
 
     QVector<GeoDataPlacemark*> placemarks = results->placemarks();
-    //TODO: get icons working
-/*
+
     foreach( GeoDataPlacemark* placemark, placemarks ) {
-        //SET ICON using name()
+        placemark->setVisualCategory( category() );
     }
-*/
     emit runnerFinished( placemarks );
     return;
 }

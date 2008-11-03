@@ -64,7 +64,7 @@ void LatLonRunner::parse(const QString &input)
     
     //TODO: FIXME
     if( successful ) {
-        //TODO: set placemark icon  
+        placemark->setVisualCategory( category() ); 
         placemark->setPopularity( 1000000000 );
         placemark->setPopularityIndex( 18 );
         vector.append( placemark );
