@@ -12,8 +12,8 @@
 // This class is a test plugin.
 //
 
-#ifndef MARBLEPANORAMIOPLUGIN_H
-#define MARBLEPANORAMIOPLUGIN_H
+#ifndef MARBLETWITTERPLUGIN_H
+#define MARBLETWITTERPLUGIN_H
 #define RADIANSTODEGREES 57.2957795
 
 #include <QtCore/QObject>
