@@ -29,8 +29,7 @@ class MarbleTest {
     void timeDemo();
     
     /**
-     * @brief load a gpx file and test the for average time, max time,
-     *        min time and total time
+     * @brief load a gpx file and test average, max, min, and total time
      */
     void gpsDemo();
 
