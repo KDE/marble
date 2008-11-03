@@ -95,7 +95,7 @@ int main(int argc, char *argv[])
             }
             rawline = rawline.replace( "\"|", "|" );
             rawline = rawline.replace( "|\"", "|" );
-            if ( rawline.startsWith("\"") && rawline.endsWith("\"") ) {
+            if ( rawline.startsWith('\"') && rawline.endsWith('\"') ) {
                 rawline = rawline.left( rawline.length() - 1 );
                 rawline = rawline.right( rawline.length() - 2 );
             }
