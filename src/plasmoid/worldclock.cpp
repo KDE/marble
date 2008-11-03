@@ -72,7 +72,7 @@ void WorldClock::init()
 {
     m_locations = KSystemTimeZones::zones();
     QList<QString> zones = m_locations.keys();
-    for (int i = 0; i < zones.size(); i++ ) {
+    for (int i = 0; i < zones.size(); ++i ) {
         KTimeZone curzone = m_locations.value( zones.at( i ) );
         if ( curzone.latitude() == KTimeZone::UNKNOWN || 
              curzone.longitude() == KTimeZone::UNKNOWN ) {
@@ -175,8 +175,11 @@ void WorldClock::resizeMap(bool changeAspect)
     int width = 0;
     int height = 0;
     int radius = 0;
+    double ratio = static_cast<double>(m_lastRect.width()) /
+                   static_cast<double>(m_lastRect.height());
     if( m_map->projection() == Equirectangular ) {
-        double ratio = m_lastRect.width() / m_lastRect.height();
+        kDebug() << "equirectangular with rect" << m_lastRect;
+        kDebug() << "w/h ratio:" << ratio;
         if( ratio > 2 ) {
             height = m_lastRect.height();
             width = height*2;
@@ -187,7 +190,8 @@ void WorldClock::resizeMap(bool changeAspect)
             radius = static_cast<int>(width/4);
         }
     } else if( m_map->projection() == Mercator ) {
-        double ratio = m_lastRect.width() / m_lastRect.height();
+        kDebug() << "mercator with rect" << m_lastRect;
+        kDebug() << "w/h ratio:" << ratio;
         if( ratio > 1 ) {
             height = m_lastRect.height();
             width = height;
@@ -198,6 +202,7 @@ void WorldClock::resizeMap(bool changeAspect)
             radius = static_cast<int>(width/4);
         }
     }
+    kDebug() << "width, height, radius:" << width << height << radius;
 
     m_map->setSize(width, height);
     m_map->setRadius( radius );
@@ -270,7 +275,7 @@ QString WorldClock::getZone()
     QString closest;
     qreal mindist = 10000;
     
-    for (int i = 0; i < zones.size(); i++ ) {
+    for (int i = 0; i < zones.size(); ++i ) {
         KTimeZone curzone = m_locations.value( zones.at( i ) );
         qreal tzlon = curzone.longitude();
         qreal tzlat = curzone.latitude();
@@ -337,7 +342,7 @@ void WorldClock::recalculateFonts( )
     //we set very small defaults and then increase them
     int lastSize = 3;
     //kDebug() << "Calculating Location Font Size ";
-    for ( int curSize = 4; ; curSize++, lastSize++ ) {
+    for ( int curSize = 4; ; ++curSize, ++lastSize ) {
         //kDebug() << "trying " << curSize << "pt";
         QFont font( "Helvetica", curSize, QFont::Bold);
         QFontMetrics metrics( font );
@@ -351,7 +356,7 @@ void WorldClock::recalculateFonts( )
     m_locationFont = QFont( "Helvetica", lastSize, QFont::Bold);
     //kDebug() << "Calculating Time Font Size ";
     lastSize = 3;
-    for ( int curSize = 4; ; curSize++, lastSize++ ) {
+    for ( int curSize = 4; ; ++curSize, ++lastSize ) {
         //kDebug() << "trying " << curSize << "pt";
         QFont font( "Helvetica", curSize, QFont::Bold);
         QFontMetrics metrics( font );
@@ -367,7 +372,7 @@ void WorldClock::recalculateFonts( )
         //kDebug() << "Calculating Date Font Size ";
         QString datestr = m_time.toString( "ddd d MMM yyyy" );
         lastSize = 3;
-        for ( int curSize = 4; ; curSize++, lastSize++ ) {
+        for ( int curSize = 4; ; ++curSize, ++lastSize ) {
             //kDebug() << "trying " << curSize << "pt";
             QFont font( "Helvetica", curSize, QFont::Bold);
             QFontMetrics metrics( font );
