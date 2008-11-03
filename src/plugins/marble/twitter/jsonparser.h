@@ -41,6 +41,7 @@ struct googleMapDataStructure {
 
 class jsonParser : public QObject
 {
+    Q_OBJECT
 public:
     jsonParser();
 

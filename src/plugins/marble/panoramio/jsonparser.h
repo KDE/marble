@@ -45,6 +45,7 @@ struct panoramioDataStructure {
 
 class jsonParser : public QObject
 {
+    Q_OBJECT
 public:
     jsonParser();
 
