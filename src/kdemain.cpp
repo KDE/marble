@@ -72,20 +72,19 @@ int main (int argc, char *argv[])
 
     MainWindow *window = new MainWindow();
     window->setAttribute( Qt::WA_DeleteOnClose, true );
-
-    MarbleTest *marbleTest = new MarbleTest( window->marbleWidget() );
-
     window->show();
 
     if ( args->isSet( "timedemo" ) ) {
         window->resize(900, 640);
-        marbleTest->timeDemo();
+        MarbleTest test( window->marbleWidget() );
+        test.timeDemo();
         return 0;
     }
     
     if ( args->isSet( "gpsdemo" ) ) {
         window->resize( 900, 640 );
-        marbleTest->gpsDemo();
+        MarbleTest test( window->marbleWidget() );
+        test.gpsDemo();
         return 0;
     }
     
@@ -108,8 +107,6 @@ int main (int argc, char *argv[])
         if ( QFile::exists( args->arg( i ) ) && i != dataPathIndex )
             window->marbleControl()->addPlaceMarkFile( args->arg( i ) );
     }
-
-    delete marbleTest;
 
     return app.exec();
 }
