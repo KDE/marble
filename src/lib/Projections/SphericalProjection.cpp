@@ -234,18 +234,31 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
             // TODO: on flat maps we need to take the date line into account right here.
 
             // Adding interpolated nodes if the current or previous point is visible
-            if ( isVisible || previousIsVisible ) {
+            if ( globeHidesPoint || previousGlobeHidesPoint ) {
+                if ( globeHidesPoint !=  previousGlobeHidesPoint ) {
+                    // the line string disappears behind the visible horizon or
+                    // it reappears at the horizon.
 
-                if ( globeHidesPoint || previousGlobeHidesPoint ) {
                     // Add interpolated "horizon" nodes 
 
                     // Assign the first or last horizon point to the current or
                     // previous point, so that we still get correct results for 
                     // the case where we need to geoproject the line segment.
+                    // horizonPoint( **previousCoords, **itCoords );
+
+
+                }
+                else {
+                    // Both nodes are located on the planet's hemisphere that is
+                    // not visible to the user. 
                 }
             }
 
-            if ( lineString.tessellate() ) {
+            // This if-clause contains the section that tesselates the line 
+            // segments of a linestring. If you are about to learn how the code of 
+            // this class works you can safely ignore this section for a start.
+
+            if ( lineString.tessellate() && ( isVisible || previousIsVisible ) ) {
                 // let the line segment follow the spherical surface
                 // if the distance between the previous point and the current point 
                 // on screen is too big
@@ -267,8 +280,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                 // are located on the same side relative to the viewport boundaries and if they are 
                 // located more than half the line segment distance away from the viewport.
 
-                if (    isVisible || previousIsVisible
-                    || !( x < safeDistance && previousX < safeDistance )
+                if (   !( x < safeDistance && previousX < safeDistance )
                     || !( y < safeDistance && previousY < safeDistance )
                     || !( x + safeDistance > viewport->width() 
                         && previousX + safeDistance > viewport->width() )

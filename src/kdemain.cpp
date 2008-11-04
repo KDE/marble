@@ -35,7 +35,7 @@ int main (int argc, char *argv[])
                           ki18n( "Marble Desktop Globe" ),
                           "Pre-0.7 SVN", 
                           ki18n( "A World Atlas." ),
-                          KAboutData::License_LGPL, ki18n( "(c) 2007, 2008" ),
+                          KAboutData::License_LGPL, ki18n( "(c) 2007, 2008, 2009" ),
                           KLocalizedString(),
                           "http://edu.kde.org/marble" );
     aboutData.addAuthor( ki18n( "Torsten Rahn" ),
