@@ -10,8 +10,8 @@
 //
 
 
-#ifndef MARBLERENDERPLUGINH
-#define MARBLERENDERPLUGINH
+#ifndef MARBLERENDERPLUGININTERFACEH
+#define MARBLERENDERPLUGININTERFACEH
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -132,4 +132,4 @@ class MarbleRenderPluginInterface
 
 Q_DECLARE_INTERFACE( Marble::MarbleRenderPluginInterface, "org.kde.Marble.MarbleRenderPluginInterface/1.02" )
 
-#endif // MARBLERENDERPLUGINH
+#endif // MARBLERENDERPLUGININTERFACEH
