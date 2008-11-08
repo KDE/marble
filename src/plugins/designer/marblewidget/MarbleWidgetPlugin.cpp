@@ -41,7 +41,7 @@ bool MarbleWidgetPlugin::isInitialized() const
 
 QWidget *MarbleWidgetPlugin::createWidget(QWidget *parent)
 {
-    MarbleWidget* marbleWidget = new MarbleWidget( parent );
+    Marble::MarbleWidget* marbleWidget = new Marble::MarbleWidget( parent );
     marbleWidget->setMapThemeId("earth/srtm/srtm.dgml");
     marbleWidget->setDownloadUrl( "http://download.kde.org/apps/marble/" );
 
@@ -50,7 +50,7 @@ QWidget *MarbleWidgetPlugin::createWidget(QWidget *parent)
 
 QString MarbleWidgetPlugin::name() const
 {
-    return "MarbleWidget";
+    return "Marble::MarbleWidget";
 }
 
 QString MarbleWidgetPlugin::group() const
@@ -80,7 +80,7 @@ bool MarbleWidgetPlugin::isContainer() const
 
 QString MarbleWidgetPlugin::domXml() const
 {
-    return "<widget class=\"MarbleWidget\" name=\"MarbleWidget\">\n"
+    return "<widget class=\"Marble::MarbleWidget\" name=\"MarbleWidget\">\n"
            " <property name=\"geometry\">\n"
            "  <rect>\n"
            "   <x>0</x>\n"

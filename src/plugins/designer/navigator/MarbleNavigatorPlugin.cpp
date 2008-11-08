@@ -41,12 +41,12 @@ bool MarbleNavigatorPlugin::isInitialized() const
 QWidget *MarbleNavigatorPlugin::createWidget(QWidget *parent)
 {
     // Create the Model (Globe) and one view.
-    return new MarbleNavigator( parent );
+    return new Marble::MarbleNavigator( parent );
 }
 
 QString MarbleNavigatorPlugin::name() const
 {
-    return "MarbleNavigator";
+    return "Marble::MarbleNavigator";
 }
 
 QString MarbleNavigatorPlugin::group() const
@@ -76,7 +76,7 @@ bool MarbleNavigatorPlugin::isContainer() const
 
 QString MarbleNavigatorPlugin::domXml() const
 {
-    return "<widget class=\"MarbleNavigator\" name=\"MarbleNavigator\">\n"
+    return "<widget class=\"Marble::MarbleNavigator\" name=\"MarbleNavigator\">\n"
            " <property name=\"geometry\">\n"
            "  <rect>\n"
            "   <x>0</x>\n"

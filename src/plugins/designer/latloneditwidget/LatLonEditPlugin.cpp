@@ -42,12 +42,12 @@ QIcon LatLonEditPlugin::icon() const
 }
 QString LatLonEditPlugin::domXml() const
 {
-    return "<widget class=\"LatLonEdit\" name=\"LatLonEdit\">\n"
+    return "<widget class=\"Marble::LatLonEdit\" name=\"LatLonEdit\">\n"
            "</widget>\n";
 }
 QString LatLonEditPlugin::group() const
 {
-    return QString( tr( "Input Widgets" ) );
+    return "Marble Desktop Globe";
 }
 QString LatLonEditPlugin::includeFile() const
 {
@@ -55,7 +55,7 @@ QString LatLonEditPlugin::includeFile() const
 }
 QString LatLonEditPlugin::name() const
 {
-    return QString( "LatLonEdit" );
+    return QString( "Marble::LatLonEdit" );
 }
 QString LatLonEditPlugin::toolTip() const
 {
@@ -67,7 +67,7 @@ QString LatLonEditPlugin::whatsThis() const
 }
 QWidget *LatLonEditPlugin::createWidget(QWidget *parent)
 {
-    return new LatLonEdit(parent);
+    return new Marble::LatLonEdit(parent);
 }
 
 Q_EXPORT_PLUGIN2(LatLonEditPlugin, LatLonEditPlugin)
