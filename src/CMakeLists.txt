@@ -23,9 +23,9 @@ add_subdirectory( lib )
 add_subdirectory( plugins )
 add_subdirectory( bindings )
 
-if( NOT QTONLY AND PLASMA_FOUND )
+if( NOT QTONLY )
     add_subdirectory( plasmoid )
-endif( NOT QTONLY AND PLASMA_FOUND )
+endif( NOT QTONLY )
 
 if(APPLE)
   add_subdirectory( mac )
