@@ -18,19 +18,23 @@
 #include "worldclock.h"
 
 //Qt
-#include <QPainter>
-#include <QRadialGradient>
-#include <QBrush>
-#include <QGraphicsSceneHoverEvent>
-#include <QList>
-#include <QSize>
-#include <QRect>
+#include <QtGui/QPainter>
+#include <QtGui/QRadialGradient>
+#include <QtGui/QBrush>
+#include <QtGui/QGraphicsSceneHoverEvent>
+#include <QtCore/QList>
+#include <QtCore/QSize>
+#include <QtCore/QRect>
+#include <QtCore/QTime>
+#include <QtCore/QDateTime>
 
 //KDE
 #include <KDebug>
+#include <KLocale>
 #include <KConfigDialog>
 #include <KConfigGroup>
 #include <KTimeZone>
+#include <KTimeZoneWidget>
 #include <KSystemTimeZone>
 
 //Plasma
@@ -47,8 +51,6 @@
 #include "ViewParams.h"
 #include "GeoPainter.h"
 #include "LatLonEdit.h"
-
-//blah compile errors
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
 
@@ -86,34 +88,14 @@ void WorldClock::init()
 
     //Font sizes will also change before painting
     m_timeFont = QFont( "Helvetica", 12, QFont::Bold);
-    m_dateFont = QFont( "Helvetica", 12, QFont::Bold);
     m_locationFont = QFont( "Helvetica", 12, QFont::Bold);
 
     KConfigGroup cg = config();
 
-    m_timeDisplay = cg.readEntry("timedisplay", 24);
-
-    if (cg.readEntry("showfull", static_cast<int>(Qt::Unchecked)) == Qt::Unchecked )
-        m_showFull = false;
-    else
-        m_showFull = true;
-
-    if (cg.readEntry("showdate", static_cast<int>(Qt::Unchecked)) == Qt::Unchecked )
-        m_showDate = false;
-    else
-        m_showDate = true;
-
-    if (cg.readEntry("maponly", static_cast<int>(Qt::Unchecked)) == Qt::Unchecked )
-        m_mapOnly = false;
-    else
-        m_mapOnly = true;
-
     m_lastRect = QRect(0,0,0,0);
 
     m_map = new MarbleMap(  );
-    if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Equirectangular)
-        m_map->setProjection(Equirectangular);
-    else if(cg.readEntry("projection", static_cast<int>(Mercator)) == Mercator)
+    if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Mercator)
         m_map->setProjection(Mercator);
     else
         m_map->setProjection(Equirectangular);
@@ -145,7 +127,7 @@ void WorldClock::init()
     m_sun->setShow(true);
     m_sun->setCitylights(true);
     
-    if(cg.readEntry("centersun", static_cast<int>(Qt::Unchecked)) == Qt::Checked)
+    if(cg.readEntry("centersun", false ))
          m_sun->setCentered(true);
          
     m_sun->update();
@@ -168,6 +150,14 @@ WorldClock::~WorldClock()
     if(m_sun)
         delete m_sun;
 */
+}
+
+QString WorldClock::klToQdt( QString str )
+{
+    return str.replace( "%k", "h" ) .replace( "%l", "h" )
+              .replace( "%H", "hh" ).replace( "%I", "hh" )
+              .replace( "%M", "mm" ).replace( "%S", "ss" )
+              .replace( "%p", "ap" );
 }
  
 void WorldClock::resizeMap(bool changeAspect)
@@ -234,9 +224,6 @@ void WorldClock::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
     m_isHovered = false;
     Applet::hoverLeaveEvent(event);
-    //no need to update TZ if we are not displaying it
-    if(m_mapOnly)
-        return;
     update();
 }
 void WorldClock::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
@@ -244,9 +231,6 @@ void WorldClock::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
     m_isHovered = true;
     m_hover = event->pos() - m_t;
     Applet::hoverEnterEvent(event);
-    //no need to update TZ if we are not displaying it
-    if(m_mapOnly)
-        return;
     setTz( getZone() );
     update();
 }
@@ -254,9 +238,6 @@ void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
     m_hover = event->pos() - m_t;
     Applet::hoverMoveEvent(event);
-    //no need to update TZ if we are not displaying it
-    if(m_mapOnly)
-        return;
     setTz( getZone() );
     update();
 }
@@ -282,7 +263,7 @@ QString WorldClock::getZone()
         qreal londelta, latdelta;
         latdelta = lat - tzlat;
         londelta = lon - tzlon;
-        qreal dist = sqrt( (latdelta * latdelta) + (londelta * londelta) );
+        qreal dist = sqrt( pow(latdelta, 2) + pow(londelta, 2) );
         if ( dist < mindist ) {
             mindist = dist;
             closest = zones.at( i );
@@ -304,10 +285,6 @@ void WorldClock::recalculatePoints()
 {
     int x = m_map->width();
     int y = m_map->height();
-    //I originally used "top" as the top, but then decided to put the date
-    //over top of that, and didn't want to change everything; so I put "super"
-    m_points.insert( "superright", QPoint( ( x*0.666 ), ( y*0.15 ) ) );
-    m_points.insert( "superleft", QPoint( ( x*0.333 ), ( y*0.15 ) ) );
     m_points.insert( "topright", QPoint( ( x*0.666 ), ( y*0.25 ) ) );
     m_points.insert( "topleft", QPoint( ( x*0.333 ), ( y*0.25 ) ) );
     m_points.insert( "middleright", QPoint( ( x*0.666 ), ( y*0.58333 ) ) );
@@ -320,21 +297,11 @@ void WorldClock::recalculatePoints()
 
 void WorldClock::recalculateFonts( )
 {
-    QString timestr;
-    if (m_timeDisplay == 12 ) {
-        timestr = m_time.toString( "h:mm AP" );
-    } else {
-        timestr = m_time.toString( "hh:mm" );
-    }
-    
+    QString timestr = m_time.toString(klToQdt(KGlobal::locale()->timeFormat()));
     QString locstr = m_locationkey;
-    if (!m_showFull) {
-        locstr.remove( 0, locstr.lastIndexOf( '/' ) + 1 ).replace( '_', ' ' );
-    } 
+    locstr.remove( 0, locstr.lastIndexOf( '/' ) + 1 ).replace( '_', ' ' );
     QRect timeRect( m_points.value( "topleft" ),
                     m_points.value( "middleright" ) );
-    QRect dateRect( m_points.value( "superleft" ), 
-                    m_points.value( "topright" ) );
     QRect locationRect( m_points.value( "middleleft" ),
                     m_points.value( "bottomright" ) );
     //kDebug() << "timeRect " << timeRect;
@@ -368,23 +335,6 @@ void WorldClock::recalculateFonts( )
     }
     //kDebug() << "Using " << lastSize << "pt";
     m_timeFont = QFont( "Helvetica", lastSize, QFont::Bold);
-    if (m_showDate) {
-        //kDebug() << "Calculating Date Font Size ";
-        QString datestr = m_time.toString( "ddd d MMM yyyy" );
-        lastSize = 3;
-        for ( int curSize = 4; ; ++curSize, ++lastSize ) {
-            //kDebug() << "trying " << curSize << "pt";
-            QFont font( "Helvetica", curSize, QFont::Bold);
-            QFontMetrics metrics( font );
-            QRect rect = metrics.boundingRect( datestr );
-            if ( rect.width()  > dateRect.width() ||
-                 rect.height() > dateRect.height() ) {
-                break;
-            }
-        }
-        //kDebug() << "Using " << lastSize << "pt";
-        m_dateFont = QFont( "Helvetica", lastSize, QFont::Bold);
-    }
     return;
 }
 
@@ -404,10 +354,8 @@ void WorldClock::paintInterface(QPainter *p,
         m_lastRect = contentsRect;
         resizeMap();
         recalculateTranslation();
-        if(!m_mapOnly) {
             recalculatePoints();
             recalculateFonts();
-        }
     }
     p->setRenderHint( QPainter::TextAntialiasing , true );
     p->setRenderHint( QPainter::Antialiasing , true );
@@ -421,10 +369,6 @@ void WorldClock::paintInterface(QPainter *p,
     QRect mapRect( 0, 0, m_map->width(), m_map->height() );
     m_map->paint(gp, mapRect );
     p->drawPixmap( m_t, pixmap );
-
-    //if we are only painting a map there is no need to continue
-    if(m_mapOnly)
-        return;
 
     if ( !m_isHovered ) {
         setTz( KSystemTimeZones::local().name() );
@@ -454,20 +398,9 @@ void WorldClock::paintInterface(QPainter *p,
 
     p->setPen( QColor( 0xFF, 0xFF, 0xFF ) );
 
-    QString timestr;
-    if (m_timeDisplay == 12 ) {
-        timestr = m_time.toString( "h:mm AP" );
-    } else {
-        timestr = m_time.toString( "hh:mm" );
-    }
-    
+    QString timestr = m_time.toString(klToQdt(KGlobal::locale()->timeFormat()));
     QString locstr = m_locationkey;
-    if (m_showFull) {
-        locstr.replace( '_', ' ' );
-    } else {
-        //remove TZ prefixes
-        locstr.remove( 0, locstr.lastIndexOf( '/' ) + 1 ).replace( '_', ' ' );
-    }
+    locstr.remove( 0, locstr.lastIndexOf( '/' ) + 1 ).replace( '_', ' ' );
 
     p->setFont( m_timeFont );
     p->drawText( QRect( m_points.value( "topleft" )     + m_t,
@@ -479,14 +412,6 @@ void WorldClock::paintInterface(QPainter *p,
                         m_points.value( "bottomright" ) + m_t ),
                  Qt::AlignCenter, locstr );
 
-    if (m_showDate) {
-        QString datestr = m_time.toString( "ddd d MMM yyyy" );
-        p->setFont( m_dateFont );
-        p->drawText( QRect( m_points.value( "superleft" ) + m_t,
-                            m_points.value( "topright" )  + m_t ),
-                     Qt::AlignCenter, datestr );
-    }
-
 }
 
 void WorldClock::createConfigurationInterface(KConfigDialog *parent)
@@ -497,27 +422,17 @@ void WorldClock::createConfigurationInterface(KConfigDialog *parent)
 
     KConfigGroup cg = config();
 
-    ui.rotationLatLonEdit->setValue(cg.readEntry("rotation", -20));
+    ui.longitudeEdit->setValue(cg.readEntry("rotation", -20));
 
-    if(cg.readEntry("timedisplay", 24)  == 12) {
-        ui.timeDisplayComboBox->setCurrentIndex( 1 );
-    } else {
-        ui.timeDisplayComboBox->setCurrentIndex( 0 );
-    }
+    if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Mercator)
+        ui.projection->setCurrentIndex(1);
+    else //Equirectangular is the default projection
+        ui.projection->setCurrentIndex(0);
 
-    if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Equirectangular)
-        ui.projectionComboBox->setCurrentIndex(0);
-    else if(cg.readEntry("projection", static_cast<int>(Mercator)) == Mercator)
-        ui.projectionComboBox->setCurrentIndex(1);
+    if(cg.readEntry("daylight", false ))
+        ui.daylightButton->setChecked(true);
 
-    if(cg.readEntry("centersun", static_cast<int>(Qt::Unchecked)) == Qt::Checked)
-        ui.centerSunCheckBox->setChecked(true);
-    if(cg.readEntry("showdate",  static_cast<int>(Qt::Unchecked)) == Qt::Checked)
-        ui.showDateCheckBox->setChecked(true);
-    if(cg.readEntry("showfull",  static_cast<int>(Qt::Unchecked)) == Qt::Checked)
-        ui.showFullCheckBox->setChecked(true);
-    if(cg.readEntry("maponly",   static_cast<int>(Qt::Unchecked)) == Qt::Checked)
-        ui.showMapOnlyCheckBox->setChecked(true);
+    ui.tzWidget->setSelectionMode( QTreeView::MultiSelection );
 
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
@@ -528,93 +443,39 @@ void WorldClock::configAccepted()
 {
     KConfigGroup cg = config();
 
-    if( ui.centerSunCheckBox->checkState() == Qt::Unchecked )
-        m_sun->setCentered(false);
-    else if( ui.centerSunCheckBox->checkState() == Qt::Checked )
+    if( ui.daylightButton->isChecked() )
         m_sun->setCentered(true);
-
-    // What is the centre longitude?
-    if( ui.rotationLatLonEdit->value() != cg.readEntry("rotation", -20)  &&
-              ui.centerSunCheckBox->checkState() != Qt::Checked ) {
-        m_map->centerOn(ui.rotationLatLonEdit->value(), 0);
+    else if( ui.longitudeEdit->value() != cg.readEntry("rotation", -20.0) ) {
+        m_map->centerOn(ui.longitudeEdit->value(), 0);
         update();
     }
 
-    // Do we show the full TZ name?
-    if( ui.showFullCheckBox->checkState() !=
-            cg.readEntry("showfull", static_cast<int>(Qt::Unchecked)) ) {
-        if ( ui.showFullCheckBox->checkState() == Qt::Unchecked )
-            m_showFull = false;
-        else
-            m_showFull = true;
-        recalculateFonts();
-    }
-
-    // Do we show the date?
-    if( ui.showDateCheckBox->checkState() !=
-            cg.readEntry("showdate", static_cast<int>(Qt::Unchecked)) ) {
-        if ( ui.showDateCheckBox->checkState() == Qt::Unchecked )
-            m_showDate = false;
-        else
-            m_showDate = true;
-        recalculateFonts();
-    }
-
-    // Do we show only the map?
-    if( ui.showMapOnlyCheckBox->checkState() !=
-            cg.readEntry("maponly", static_cast<int>(Qt::Unchecked)) ) {
-        if ( ui.showMapOnlyCheckBox->checkState() == Qt::Unchecked )
-            m_mapOnly = false;
-        else
-            m_mapOnly = true;
-    }
-
-    // What type of time display are we using? (12/24hr)
-    if(ui.timeDisplayComboBox->currentIndex() != cg.readEntry("showdate", 0)) {
-        switch ( ui.timeDisplayComboBox->currentIndex() ) {
-            case 1:
-                m_timeDisplay = 12;
-                cg.writeEntry("timedisplay", 12);
-                break;
-            //case 0 (and anything else that pops up)
-            default:
-                m_timeDisplay = 24;
-                cg.writeEntry("timedisplay", 24);
-                break;
-        }
-        recalculateFonts();
-    }
     // What projection? note: +1 because the spherical projection is 0
-    if((ui.projectionComboBox->currentIndex() + 1) != cg.readEntry("projection",
+    if((ui.projection->currentIndex() + 1) != cg.readEntry("projection",
                                           static_cast<int>(Equirectangular))  )
     {
-        switch ( ui.projectionComboBox->currentIndex() ) {
+        switch ( ui.projection->currentIndex() ) {
             case 1:
-                kDebug() << "case 1, setting proj to mercator";
+                //kDebug() << "case 1, setting proj to mercator";
                 m_map->setProjection(Mercator);
-                m_map->setNeedsUpdate();
-                update();
+                m_map->setNeedsUpdate(); update();
                 resizeMap(true);
                 cg.writeEntry("projection", static_cast<int>(Mercator));
                 break;
             //case 0 (and anything else that pops up)
             default:
-                kDebug() << "case default, setting proj to Equirectangular";
+                //kDebug() << "case default, setting proj to Equirectangular";
                 m_map->setProjection(Equirectangular);
-                m_map->setNeedsUpdate();
-                update();
+                m_map->setNeedsUpdate(); update();
                 resizeMap(true);
                 cg.writeEntry("projection", static_cast<int>(Equirectangular));
                 break;
         }
     }
     
-    cg.writeEntry("rotation", ui.rotationLatLonEdit->value());
+    cg.writeEntry("rotation", ui.longitudeEdit->value());
+    cg.writeEntry("centersun", ui.daylightButton->isChecked());
 
-    cg.writeEntry("centersun", static_cast<int>(ui.centerSunCheckBox  ->checkState()));
-    cg.writeEntry("showfull",  static_cast<int>(ui.showFullCheckBox   ->checkState()));
-    cg.writeEntry("showdate",  static_cast<int>(ui.showDateCheckBox   ->checkState()));
-    cg.writeEntry("maponly",   static_cast<int>(ui.showMapOnlyCheckBox->checkState()));
     emit configNeedsSaving();
 }
 

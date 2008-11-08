@@ -8,12 +8,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>505</width>
-    <height>307</height>
+    <width>495</width>
+    <height>272</height>
    </rect>
   </property>
   <property name="sizePolicy" >
-   <sizepolicy vsizetype="Minimum" hsizetype="Expanding" >
+   <sizepolicy vsizetype="MinimumExpanding" hsizetype="MinimumExpanding" >
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -33,148 +33,115 @@
   <property name="windowTitle" >
    <string>Worldclock Applet Configuration</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
+  <layout class="QHBoxLayout" name="horizontalLayout_2" >
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout" >
-     <item>
-      <widget class="QLabel" name="timeDisplayLabel" >
-       <property name="toolTip" >
-        <string/>
-       </property>
-       <property name="text" >
-        <string>Time Display</string>
-       </property>
-       <property name="buddy" >
-        <cstring>timeDisplayComboBox</cstring>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="timeDisplayComboBox" >
-       <property name="toolTip" >
-        <string>The format to display the time in</string>
-       </property>
-       <property name="whatsThis" >
-        <string>This box allows you to choose the way the time is displayed</string>
-       </property>
+    <widget class="QTabWidget" name="tabWidget" >
+     <property name="tabPosition" >
+      <enum>QTabWidget::North</enum>
+     </property>
+     <property name="tabShape" >
+      <enum>QTabWidget::Rounded</enum>
+     </property>
+     <property name="currentIndex" >
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>Map Display</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout" >
+       <item row="0" column="0" >
+        <widget class="QLabel" name="label" >
+         <property name="text" >
+          <string>Projection</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" >
+        <widget class="QComboBox" name="projection" >
+         <item>
+          <property name="text" >
+           <string>Equirectangular</string>
+          </property>
+         </item>
+         <item>
+          <property name="text" >
+           <string>Mercator</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QRadioButton" name="longitudeButton" >
+         <property name="text" >
+          <string>Center map on longitude</string>
+         </property>
+         <property name="checked" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" >
+        <widget class="Marble::LatLonEdit" name="longitudeEdit" />
+       </item>
+       <item row="2" column="0" >
+        <widget class="QRadioButton" name="daylightButton" >
+         <property name="text" >
+          <string>Center map on daylight</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2" >
+      <attribute name="title" >
+       <string>Time Zones</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout" >
        <item>
-        <property name="text" >
-         <string>24-hour clock</string>
-        </property>
+        <widget class="QCheckBox" name="customTz" >
+         <property name="enabled" >
+          <bool>true</bool>
+         </property>
+         <property name="text" >
+          <string>Use custom timezone selection</string>
+         </property>
+        </widget>
        </item>
        <item>
-        <property name="text" >
-         <string>12-hour clock</string>
-        </property>
+        <widget class="KTimeZoneWidget" name="tzWidget" >
+         <property name="enabled" >
+          <bool>false</bool>
+         </property>
+         <column>
+          <property name="text" >
+           <string>Area</string>
+          </property>
+         </column>
+         <column>
+          <property name="text" >
+           <string>Region</string>
+          </property>
+         </column>
+         <column>
+          <property name="text" >
+           <string>Comment</string>
+          </property>
+         </column>
+        </widget>
        </item>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2" >
-     <item>
-      <widget class="QLabel" name="projectionLabel" >
-       <property name="text" >
-        <string>Projection</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="projectionComboBox" >
-       <item>
-        <property name="text" >
-         <string>Equirectangular</string>
-        </property>
-       </item>
-       <item>
-        <property name="text" >
-         <string>Mercator</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QGridLayout" name="gridLayout" >
-     <item row="0" column="0" >
-      <widget class="QCheckBox" name="showDateCheckBox" >
-       <property name="toolTip" >
-        <string>Check to show the date as well as the time</string>
-       </property>
-       <property name="statusTip" >
-        <string/>
-       </property>
-       <property name="whatsThis" >
-        <string>This checkbox allows you to choose to show the date as well as the time</string>
-       </property>
-       <property name="text" >
-        <string>Show date</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" >
-      <widget class="QCheckBox" name="showFullCheckBox" >
-       <property name="toolTip" >
-        <string>Chooses whether to show the full name of the timezone</string>
-       </property>
-       <property name="whatsThis" >
-        <string>This checkbox chooses whether to show the full name of the timezone; eg "Europe/London" or simply "London"</string>
-       </property>
-       <property name="text" >
-        <string>Show full timezone name</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1" >
-      <widget class="QCheckBox" name="showMapOnlyCheckBox" >
-       <property name="text" >
-        <string>Show map only</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1" >
-      <widget class="QCheckBox" name="centerSunCheckBox" >
-       <property name="toolTip" >
-        <string>Check to centre the map on the area currently illuminated by the sun</string>
-       </property>
-       <property name="whatsThis" >
-        <string>This checkbox allows you to choose to centre the map over the area that is currently illuminated by the sun.</string>
-       </property>
-       <property name="text" >
-        <string>Centre Map on Sun</string>
-       </property>
-       <property name="checkable" >
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" >
-     <item>
-      <widget class="QLabel" name="rotationLabel" >
-       <property name="toolTip" >
-        <string>This longitude will be the centre of the map</string>
-       </property>
-       <property name="whatsThis" >
-        <string>Here you can select the longitude which will be the centre of the map</string>
-       </property>
-       <property name="text" >
-        <string>Centre Longitude</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="Marble::LatLonEdit" name="rotationLatLonEdit" />
-     </item>
-    </layout>
+      </layout>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KTimeZoneWidget</class>
+   <extends>QTreeWidget</extends>
+   <header>ktimezonewidget.h</header>
+  </customwidget>
   <customwidget>
    <class>Marble::LatLonEdit</class>
    <extends>QWidget</extends>
@@ -182,37 +149,45 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>projection</tabstop>
+  <tabstop>longitudeButton</tabstop>
+  <tabstop>daylightButton</tabstop>
+  <tabstop>customTz</tabstop>
+  <tabstop>tzWidget</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
-   <sender>centerSunCheckBox</sender>
+   <sender>longitudeButton</sender>
    <signal>toggled(bool)</signal>
-   <receiver>rotationLabel</receiver>
-   <slot>setDisabled(bool)</slot>
+   <receiver>longitudeEdit</receiver>
+   <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>161</x>
-     <y>16</y>
+     <x>144</x>
+     <y>89</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>82</x>
-     <y>51</y>
+     <x>283</x>
+     <y>86</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>centerSunCheckBox</sender>
+   <sender>customTz</sender>
    <signal>toggled(bool)</signal>
-   <receiver>rotationLatLonEdit</receiver>
-   <slot>setDisabled(bool)</slot>
+   <receiver>tzWidget</receiver>
+   <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>164</x>
-     <y>16</y>
+     <x>147</x>
+     <y>47</y>
     </hint>
     <hint type="destinationlabel" >
-     <x>244</x>
-     <y>82</y>
+     <x>147</x>
+     <y>79</y>
     </hint>
    </hints>
   </connection>

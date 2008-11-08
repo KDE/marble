@@ -71,6 +71,7 @@ X-KDE-PluginInfo-Email=hdevalence@gmail.com
 X-KDE-PluginInfo-Name=worldclock
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=
+X-KDE-PluginInfo-Category=Date and Time
 X-KDE-PluginInfo-Depends=
 X-KDE-PluginInfo-License=LGPL
 X-KDE-PluginInfo-EnabledByDefault=true

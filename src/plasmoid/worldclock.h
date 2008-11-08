@@ -71,6 +71,9 @@ class WorldClock : public Plasma::Containment
         void recalculateFonts();
         void recalculateTranslation();
 
+        //apparently KLocate::timeFormat() doesn't use the same format string
+        QString klToQdt( QString str );
+
         //for changing zones based on mouse position
         void setTz( QString newtz );
         QString getZone();
@@ -91,12 +94,6 @@ class WorldClock : public Plasma::Containment
         bool m_isHovered;
         QPointF m_hover;
 
-        //control preferences
-        int m_timeDisplay;
-        bool m_showFull;
-        bool m_showDate;
-        bool m_mapOnly;
-
         //map of locations and key for accessing it.
         QString m_locationkey;
         QMap<QString, KTimeZone> m_locations;
@@ -106,7 +103,6 @@ class WorldClock : public Plasma::Containment
         
         //Font sizing & positioning
         QFont m_timeFont;
-        QFont m_dateFont;
         QFont m_locationFont;
         QHash<QString, QPoint> m_points; 
 
@@ -114,7 +110,7 @@ class WorldClock : public Plasma::Containment
         Plasma::DataEngine *m_timeEngine;
 
         //config gui
-	Ui::worldclockConfig ui;
+        Ui::worldclockConfig ui;
 };
  
 } //ns Marble
