@@ -269,7 +269,7 @@ GeoSceneDocument* MarbleModel::mapTheme() const
 //
 
 void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
-			       Projection currentProjection )
+                               Projection currentProjection )
 {
     d->m_mapTheme = mapTheme;
 
@@ -319,10 +319,10 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
                                      (role == "dem") ? "true" : "false" );
 
             TileCreatorDialog  tileCreatorDlg( tileCreator, 0 );
-	    tileCreatorDlg.setSummary( d->m_mapTheme->head()->name(),
-				       d->m_mapTheme->head()->description() );
-	    tileCreatorDlg.exec();
-	    qDebug("Tile creation completed");
+            tileCreatorDlg.setSummary( d->m_mapTheme->head()->name(),
+                                       d->m_mapTheme->head()->description() );
+            tileCreatorDlg.exec();
+            qDebug("Tile creation completed");
         }
         d->m_tileLoader->setTextureLayer( texture );
     }
@@ -419,13 +419,13 @@ void MarbleModel::setupTextureMapper( Projection projection )
         case Equirectangular:
             d->m_texmapper = new EquirectScanlineTextureMapper( d->m_tileLoader, this );
             break;
-	case Mercator:
+        case Mercator:
             d->m_texmapper = new MercatorScanlineTextureMapper( d->m_tileLoader, this );
             break;
     }
 
     connect( d->m_texmapper, SIGNAL( mapChanged() ),
-	     this,           SLOT( notifyModelChanged() ) );
+             this,           SLOT( notifyModelChanged() ) );
 }
 
 HttpDownloadManager* MarbleModel::downloadManager() const
@@ -471,7 +471,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     if ( redrawBackground ) {
         if ( d->m_mapTheme->map()->hasTextureLayers() ) {
 
-	    // Create the height map image a.k.a viewParams->m_canvasImage.
+            // Create the height map image a.k.a viewParams->m_canvasImage.
             d->m_texmapper->mapTexture( viewParams );
 
             if ( !viewParams->showElevationModel()
@@ -516,7 +516,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     if ( d->m_mapTheme->map()->hasTextureLayers() ) {
         if ( viewParams->projection() == Spherical ) {
             QRect rect( width / 2 - radius, height / 2 - radius,
-			2 * radius, 2 * radius);
+                        2 * radius, 2 * radius);
             rect = rect.intersect( dirtyRect );
             painter->drawImage( rect, *viewParams->canvasImage(), rect );
         }
