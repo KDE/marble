@@ -43,7 +43,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex" >
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -63,10 +63,18 @@
           <property name="text" >
            <string>Equirectangular</string>
           </property>
+          <property name="icon" >
+           <iconset resource="../marble.qrc" >
+            <normaloff>:/icons/map-flat.png</normaloff>:/icons/map-flat.png</iconset>
+          </property>
          </item>
          <item>
           <property name="text" >
            <string>Mercator</string>
+          </property>
+          <property name="icon" >
+           <iconset resource="../marble.qrc" >
+            <normaloff>:/icons/map-mercator.png</normaloff>:/icons/map-mercator.png</iconset>
           </property>
          </item>
         </widget>
@@ -157,7 +165,9 @@
   <tabstop>customTz</tabstop>
   <tabstop>tzWidget</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../marble.qrc" />
+ </resources>
  <connections>
   <connection>
    <sender>longitudeButton</sender>

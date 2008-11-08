@@ -12,6 +12,9 @@ include_directories(
    )
  
 set(worldclock_SRCS worldclock.cpp )
+
+qt4_add_resources(worldclock_SRCS ../marble.qrc)
+
 kde4_add_ui_files( worldclock_SRCS worldclockConfig.ui )
  
 kde4_add_plugin(plasma_applet_worldclock ${worldclock_SRCS})
