@@ -360,8 +360,8 @@ void WorldClock::paintInterface(QPainter *p,
     p->setRenderHint( QPainter::TextAntialiasing , true );
     p->setRenderHint( QPainter::Antialiasing , true );
     p->setPen( Qt::NoPen );
-    p->setBrush( QBrush( QColor( 0x00, 0x00, 0x00, 0xFF ) ) );
-    p->drawRect( m_lastRect );
+    //p->setBrush( QBrush( QColor( 0x00, 0x00, 0x00, 0xFF ) ) );
+    //p->drawRect( m_lastRect );
     QPixmap pixmap( m_map->width(), m_map->height() );
     pixmap.fill( Qt::transparent );
     GeoPainter gp( &pixmap, m_map->viewParams()->viewport(), 
