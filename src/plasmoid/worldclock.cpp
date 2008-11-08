@@ -62,6 +62,7 @@ WorldClock::WorldClock(QObject *parent, const QVariantList &args)
     m_map(0),
     m_sun(0)
 {
+    KGlobal::locale()->insertCatalog("Marble");
     setContainmentType(DesktopContainment);
     setHasConfigurationInterface(true);
     setAcceptHoverEvents(true);
