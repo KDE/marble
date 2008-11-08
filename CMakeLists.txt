@@ -16,6 +16,13 @@ if( NOT QTONLY AND NOT KDE4_FOUND )
 endif( NOT QTONLY AND NOT KDE4_FOUND) 
 
 ###################################################
+# Check for Plasma
+if( NOT QTONLY )
+    macro_optional_find_package(Plasma)
+    macro_log_feature(PLASMA_FOUND "Plasma" "Plasma is the KDE4 desktop"
+                        "http://plasma.kde.org" FALSE ""
+                        "Builds the Marblebased World Clock plasmoid")
+endif( NOT QTONLY )
 
 ####################################################
 # build unit tests
