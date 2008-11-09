@@ -1,16 +1,16 @@
 // Copyright 2008 Henry de Valence <hdevalence@gmail.com>
-// 
+//
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either 
+// License as published by the Free Software Foundation; either
 // version 2.1 of the License, or (at your option) any later version.
-// 
+//
 // This library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 // Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public 
+//
+// You should have received a copy of the GNU Lesser General Public
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 
@@ -26,6 +26,7 @@
 #include <QtCore/QSize>
 #include <QtCore/QRect>
 #include <QtCore/QTime>
+#include <QtCore/QDate>
 #include <QtCore/QDateTime>
 
 //KDE
@@ -73,52 +74,23 @@ WorldClock::WorldClock(QObject *parent, const QVariantList &args)
 
 void WorldClock::init()
 {
-    m_locations = KSystemTimeZones::zones();
-    QList<QString> zones = m_locations.keys();
-    for (int i = 0; i < zones.size(); ++i ) {
-        KTimeZone curzone = m_locations.value( zones.at( i ) );
-        if ( curzone.latitude() == KTimeZone::UNKNOWN || 
-             curzone.longitude() == KTimeZone::UNKNOWN ) {
-            m_locations.remove( zones.at(i) );
-        }
-    }
-    //we'll change the timezone before it's even
-    //displayed to the user, so the default zone
-    //is not important
-    m_locationkey = QString( zones.at( 0 ) );
-
-    //Font sizes will also change before painting
-    m_timeFont = QFont( "Helvetica", 12, QFont::Bold);
-    m_locationFont = QFont( "Helvetica", 12, QFont::Bold);
-
     KConfigGroup cg = config();
-
-    m_lastRect = QRect(0,0,0,0);
-
     m_map = new MarbleMap(  );
     if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Mercator)
         m_map->setProjection(Mercator);
     else
         m_map->setProjection(Equirectangular);
 
-    recalculateTranslation();
-    
-    //offset so that the date line isn't
-    //right on the edge of the map
-    //or user choice
-    m_map->centerOn( cg.readEntry("rotation", -20), 0 );
-    
     //Set how we want the map to look
+    m_map->centerOn( cg.readEntry("rotation", -20), 0 );
     m_map->setMapThemeId( "earth/bluemarble/bluemarble.dgml" );
-    m_map->setShowCompass( false );
-    m_map->setShowClouds( false );
-    m_map->setShowScaleBar( false );
-    m_map->setShowGrid( false );
-    m_map->setShowPlaces( false );
-    m_map->setShowCities( false );
+    m_map->setShowCompass    ( false );
+    m_map->setShowClouds     ( false );
+    m_map->setShowScaleBar   ( false );
+    m_map->setShowGrid       ( false );
+    m_map->setShowPlaces     ( false );
+    m_map->setShowCities     ( false );
     m_map->setShowOtherPlaces( false );
-    m_map->setShowRelief( true );
-    m_map->setShowIceLayer( true );
 
     foreach( MarbleRenderPlugin* item, m_map->model()->renderPlugins() )
         item->setVisible( false );
@@ -127,22 +99,35 @@ void WorldClock::init()
     m_sun = m_map->sunLocator();
     m_sun->setShow(true);
     m_sun->setCitylights(true);
-    
     if(cg.readEntry("centersun", false ))
          m_sun->setCentered(true);
-         
+
     m_sun->update();
     m_map->updateSun();
     m_map->setNeedsUpdate();
 
+    m_locationkey = QString(KSystemTimeZones::local().name());
+    m_locations = KSystemTimeZones::zones();
+    QList<QString> zones = m_locations.keys();
+    for (int i = 0; i < zones.size(); ++i ) {
+        KTimeZone curzone = m_locations.value( zones.at( i ) );
+        if ( curzone.latitude() == KTimeZone::UNKNOWN ||
+             curzone.longitude() == KTimeZone::UNKNOWN ) {
+            m_locations.remove( zones.at(i) );
+        }
+    }
+
+    //Font sizes will change before painting
+    m_timeFont     = QFont( "Helvetica", 12, QFont::Bold);
+    m_locationFont = QFont( "Helvetica", 12, QFont::Bold);
+    m_points = QHash<QString, QPoint>();
+    m_lastRect = QRect(0,0,0,0);
+    m_showDate = cg.readEntry("showdate", false);
+
     Plasma::DataEngine *m_timeEngine = dataEngine("time");
     m_timeEngine->connectSource( "Local", this, 6000, Plasma::AlignToMinute);
-
-    m_points = QHash<QString, QPoint>();
-    //all the size & proportion stuff will be done on painting because
-    //m_lastRect is not the same size as contentsRect
 }
- 
+
 WorldClock::~WorldClock()
 {
 /*
@@ -153,14 +138,6 @@ WorldClock::~WorldClock()
 */
 }
 
-QString WorldClock::klToQdt( QString str )
-{
-    return str.replace( "%k", "h" ) .replace( "%l", "h" )
-              .replace( "%H", "hh" ).replace( "%I", "hh" )
-              .replace( "%M", "mm" ).replace( "%S", "ss" )
-              .replace( "%p", "ap" );
-}
- 
 void WorldClock::resizeMap(bool changeAspect)
 {
     int width = 0;
@@ -206,7 +183,7 @@ void WorldClock::resizeMap(bool changeAspect)
     }
 }
 
-void WorldClock::dataUpdated(const QString &source, 
+void WorldClock::dataUpdated(const QString &source,
                              const Plasma::DataEngine::Data &data)
 {
     Q_UNUSED(source)
@@ -248,23 +225,18 @@ QString WorldClock::getZone()
     qreal lat, lon;
     bool ok = m_map->viewParams()->viewport()->currentProjection()->geoCoordinates(
                 m_hover.x(), m_hover.y(), m_map->viewParams()->viewport(), lon, lat );
-    
+
     if( !ok )
         return KSystemTimeZones::local().name();
-    
+
     QList<QString> zones = m_locations.keys();
 
     QString closest;
-    qreal mindist = 10000;
-    
+    qreal mindist = 99999999999999999.9;
+
     for (int i = 0; i < zones.size(); ++i ) {
-        KTimeZone curzone = m_locations.value( zones.at( i ) );
-        qreal tzlon = curzone.longitude();
-        qreal tzlat = curzone.latitude();
-        qreal londelta, latdelta;
-        latdelta = lat - tzlat;
-        londelta = lon - tzlon;
-        qreal dist = sqrt( pow(latdelta, 2) + pow(londelta, 2) );
+        KTimeZone cz = m_locations.value( zones.at( i ) );
+        qreal dist = sqrt( pow(lat-cz.latitude(), 2) + pow(lon-cz.longitude(), 2) );
         if ( dist < mindist ) {
             mindist = dist;
             closest = zones.at( i );
@@ -298,20 +270,19 @@ void WorldClock::recalculatePoints()
 
 void WorldClock::recalculateFonts( )
 {
-    QString timestr = m_time.toString(klToQdt(KGlobal::locale()->timeFormat()));
+    QString timestr;
+    if(m_showDate)
+        timestr = KGlobal::locale()->formatDateTime( m_time );
+    else
+        timestr = KGlobal::locale()->formatTime( m_time.time() );
+
     QString locstr = m_locationkey;
     locstr.remove( 0, locstr.lastIndexOf( '/' ) + 1 ).replace( '_', ' ' );
-    QRect timeRect( m_points.value( "topleft" ),
-                    m_points.value( "middleright" ) );
-    QRect locationRect( m_points.value( "middleleft" ),
-                    m_points.value( "bottomright" ) );
-    //kDebug() << "timeRect " << timeRect;
-    //kDebug() << "locationRect " << locationRect;
+    QRect timeRect( m_points.value( "topleft" ), m_points.value( "middleright" ) );
+    QRect locationRect( m_points.value( "middleleft" ), m_points.value( "bottomright" ) );
     //we set very small defaults and then increase them
     int lastSize = 3;
-    //kDebug() << "Calculating Location Font Size ";
     for ( int curSize = 4; ; ++curSize, ++lastSize ) {
-        //kDebug() << "trying " << curSize << "pt";
         QFont font( "Helvetica", curSize, QFont::Bold);
         QFontMetrics metrics( font );
         QRect rect = metrics.boundingRect( locstr );
@@ -320,12 +291,9 @@ void WorldClock::recalculateFonts( )
             break;
         }
     }
-    //kDebug() << "Using " << lastSize << "pt";
     m_locationFont = QFont( "Helvetica", lastSize, QFont::Bold);
-    //kDebug() << "Calculating Time Font Size ";
     lastSize = 3;
     for ( int curSize = 4; ; ++curSize, ++lastSize ) {
-        //kDebug() << "trying " << curSize << "pt";
         QFont font( "Helvetica", curSize, QFont::Bold);
         QFontMetrics metrics( font );
         QRect rect = metrics.boundingRect( timestr );
@@ -334,7 +302,6 @@ void WorldClock::recalculateFonts( )
             break;
         }
     }
-    //kDebug() << "Using " << lastSize << "pt";
     m_timeFont = QFont( "Helvetica", lastSize, QFont::Bold);
     return;
 }
@@ -346,12 +313,12 @@ void WorldClock::recalculateTranslation()
     m_t += m_lastRect.topLeft();
 }
 
-void WorldClock::paintInterface(QPainter *p, 
+void WorldClock::paintInterface(QPainter *p,
                                 const QStyleOptionGraphicsItem *option,
                                 const QRect &contentsRect)
 {
     Q_UNUSED(option)
-    if ( contentsRect != m_lastRect ) { 
+    if ( contentsRect != m_lastRect ) {
         m_lastRect = contentsRect;
         resizeMap();
         recalculateTranslation();
@@ -365,7 +332,7 @@ void WorldClock::paintInterface(QPainter *p,
     //p->drawRect( m_lastRect );
     QPixmap pixmap( m_map->width(), m_map->height() );
     pixmap.fill( Qt::transparent );
-    GeoPainter gp( &pixmap, m_map->viewParams()->viewport(), 
+    GeoPainter gp( &pixmap, m_map->viewParams()->viewport(),
                    Marble::Normal, true );
     QRect mapRect( 0, 0, m_map->width(), m_map->height() );
     m_map->paint(gp, mapRect );
@@ -378,10 +345,8 @@ void WorldClock::paintInterface(QPainter *p,
     //Show the location on the map
     int tzx = 0;
     int tzy = 0;
-    qreal lon = m_locations.value(m_locationkey).longitude();
-    qreal lat = m_locations.value(m_locationkey).latitude();
-    lon *= DEG2RAD;
-    lat *= DEG2RAD;
+    qreal lon = m_locations.value(m_locationkey).longitude() * DEG2RAD;
+    qreal lat = m_locations.value(m_locationkey).latitude() * DEG2RAD;
     bool ok = m_map->viewParams()->viewport()->currentProjection()
               ->screenCoordinates(lon, lat, m_map->viewParams()->viewport(), tzx, tzy);
     if ( ok /*&& m_isHovered*/ ) {
@@ -399,9 +364,14 @@ void WorldClock::paintInterface(QPainter *p,
 
     p->setPen( QColor( 0xFF, 0xFF, 0xFF ) );
 
-    QString timestr = m_time.toString(klToQdt(KGlobal::locale()->timeFormat()));
     QString locstr = m_locationkey;
     locstr.remove( 0, locstr.lastIndexOf( '/' ) + 1 ).replace( '_', ' ' );
+
+    QString timestr;
+    if(m_showDate)
+        timestr = KGlobal::locale()->formatDateTime( m_time );
+    else
+        timestr = KGlobal::locale()->formatTime( m_time.time() );
 
     p->setFont( m_timeFont );
     p->drawText( QRect( m_points.value( "topleft" )     + m_t,
@@ -412,14 +382,13 @@ void WorldClock::paintInterface(QPainter *p,
     p->drawText( QRect( m_points.value( "middleleft" )  + m_t,
                         m_points.value( "bottomright" ) + m_t ),
                  Qt::AlignCenter, locstr );
-
 }
 
 void WorldClock::createConfigurationInterface(KConfigDialog *parent)
 {
     QWidget *widget = new QWidget();
     ui.setupUi(widget);
-    parent->setButtons(KDialog::Ok | KDialog::Apply | KDialog::Cancel); 
+    parent->setButtons(KDialog::Ok | KDialog::Apply | KDialog::Cancel);
 
     KConfigGroup cg = config();
 
@@ -432,6 +401,9 @@ void WorldClock::createConfigurationInterface(KConfigDialog *parent)
 
     if(cg.readEntry("daylight", false ))
         ui.daylightButton->setChecked(true);
+
+    if(cg.readEntry("showdate", false ))
+        ui.showdate->setChecked(true);
 
     ui.tzWidget->setSelectionMode( QTreeView::MultiSelection );
 
@@ -450,6 +422,9 @@ void WorldClock::configAccepted()
         m_map->centerOn(ui.longitudeEdit->value(), 0);
         update();
     }
+
+    if( ui.showdate->isChecked() != cg.readEntry("showdate", false))
+        m_showDate = ui.showdate->isChecked();
 
     // What projection? note: +1 because the spherical projection is 0
     if((ui.projection->currentIndex() + 1) != cg.readEntry("projection",
@@ -473,9 +448,10 @@ void WorldClock::configAccepted()
                 break;
         }
     }
-    
+
     cg.writeEntry("rotation", ui.longitudeEdit->value());
     cg.writeEntry("centersun", ui.daylightButton->isChecked());
+    cg.writeEntry("showdate", ui.showdate->isChecked());
 
     emit configNeedsSaving();
 }
