@@ -3,7 +3,7 @@ This file describes the design and structure of Marble
 1. The main structure
 =====================
 
-Marble, the application, currently consists two main widgets: 
+Marble, the application, currently consists two main widgets:
   - a MarbleWidget      that contains the view of the world, and
   - a MarbleControlBox  that controls it.
 
@@ -34,7 +34,7 @@ These classes comprise the main interface to the Marble library.
 
 These are mainly parts of the more complex MarbleControlBox.  The
 individual controls inside MarbleControlBox can be used by themselves
-if you want to create a simpler user interface.  
+if you want to create a simpler user interface.
 
 NOTE: MarbleNavigator is currently not part of the library, but it
       will be moved there before the next release.
@@ -137,7 +137,7 @@ FIXME: Explain the differences between the GeoPolygon and the
 
 FIXME: To be written...
 
-FIXME: Explain how PlaceMark labels are placed so they don't cover each 
+FIXME: Explain how PlaceMark labels are placed so they don't cover each
 other.
 
 
@@ -173,61 +173,61 @@ Here follows now a list of classes, their roles and how they interact.
 Basic classes
 - - - - - - -
 
-Quaternion	A simple implementation of the mathematical concept
-		quaternion. 
+Quaternion      A simple implementation of the mathematical concept
+                quaternion.
 
-GeoDataPoint	A point on the earth, (lon, lat)
-GeoPolygon	A path or polygon on the earth, consisting of a vector
-		of GeoDataPoints
-PntMap		A collection of GeoPolygons ( QVector<GeoPolygon *> )
-		FIXME: Rename and move from GeoPolygon.h into own file.
+GeoDataPoint    A point on the earth, (lon, lat)
+GeoPolygon      A path or polygon on the earth, consisting of a vector
+                of GeoDataPoints
+PntMap          A collection of GeoPolygons ( QVector<GeoPolygon *> )
+                FIXME: Rename and move from GeoPolygon.h into own file.
 
-ScreenPolygon	A path or polygon on the screen. Uses screen
-		coordinates.  Uses floats due to antialiasing.
-VectorMap	A Vector of ScreenPolygons.
-		Rename   FIXME
-GridMap		The grid of lat-lon lines on the map.
-		Another Vector of ScreenPolygons. Perhaps it should
-		inherit or contain a VectorMap.
+ScreenPolygon   A path or polygon on the screen. Uses screen
+                coordinates.  Uses floats due to antialiasing.
+VectorMap       A Vector of ScreenPolygons.
+                Rename   FIXME
+GridMap         The grid of lat-lon lines on the map.
+                Another Vector of ScreenPolygons. Perhaps it should
+                inherit or contain a VectorMap.
 
-PlaceMark	A point on the earth with some additional data. Can be
-		selected and manipulated. Has a name. Today mostly
-		used for cities of different size.
-		At this point somewhat arbitrary in its choice of
-		properties.  Contains (among others):
-		 - Coordinate (GeoDataPoint)
-		 - Role (QChar) -- city, capital, etc
-		 - Population (int)
-		 - Description (QString)
-		 - Countrycode (QString)
-		 - View stuff (selected, labelstring, boundingbox, etc)
+PlaceMark       A point on the earth with some additional data. Can be
+                selected and manipulated. Has a name. Today mostly
+                used for cities of different size.
+                At this point somewhat arbitrary in its choice of
+                properties.  Contains (among others):
+                 - Coordinate (GeoDataPoint)
+                 - Role (QChar) -- city, capital, etc
+                 - Population (int)
+                 - Description (QString)
+                 - Countrycode (QString)
+                 - View stuff (selected, labelstring, boundingbox, etc)
 
-PlaceContainer	A list of PlaceMarks ( QVector<Placemark *> )
+PlaceContainer  A list of PlaceMarks ( QVector<Placemark *> )
 
 
 Model / View
 - - - - - - -
 
-MarbleModel	The main model.  Contains (among others):
-		 - MapTheme
-		 - GridMap
+MarbleModel     The main model.  Contains (among others):
+                 - MapTheme
+                 - GridMap
                  - VectorComposer
-		 - PlaceMarkManager
-		 - PlaceMarkModel
+                 - PlaceMarkManager
+                 - PlaceMarkModel
 
-VectorComposer	Manages the different vector sub-layers which consist 
+VectorComposer  Manages the different vector sub-layers which consist
                 of coastlines, islands, lakes, glaciers, rivers
                 as well as borders for the countries and the US
                 States.  These are all stored in PntMaps, one for each
                 type.  FIXME: Change Name.
 
-MarbleWidget	The view of a MarbleModel.
+MarbleWidget    The view of a MarbleModel.
 
 
 Widgets
 -------
-KAtlasControl	The main window.  Contains a MarbleWidget and a
-		MarbleControlBox.
+KAtlasControl   The main window.  Contains a MarbleWidget and a
+                MarbleControlBox.
 
 
 Unsorted
