@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      David Roberts <dvdr18@gmail.com>
+// Copyright 2008      David Roberts  <dvdr18@gmail.com>
+// Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
 //
 
 
@@ -53,12 +54,13 @@ void SunControlWidget::showSunClicked(bool checked)
     else
         m_uiWidget.showToolButton->setText( tr("Sh&ow") );
 
-    emit showSun(checked);
+    emit showSun( checked );
 }
 
 void SunControlWidget::nowClicked(bool checked)
 {
     Q_UNUSED( checked )
+
     m_sunLocator->datetime()->setNow();
     m_sunLocator->update();
     updateDateTime();

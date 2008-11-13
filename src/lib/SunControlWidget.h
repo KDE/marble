@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      David Roberts <dvdr18@gmail.com>
+// Copyright 2008      David Roberts  <dvdr18@gmail.com>
+// Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
 //
 
 
@@ -53,8 +54,9 @@ class MARBLE_EXPORT SunControlWidget : public QDialog
 	
  protected:
     Q_DISABLE_COPY( SunControlWidget )
-    Ui::SunControlWidget m_uiWidget;
-    SunLocator* m_sunLocator;
+
+    Ui::SunControlWidget  m_uiWidget;
+    SunLocator           *m_sunLocator;
 };
 
 }

@@ -22,7 +22,7 @@
     <Action name="show_clouds"/>
     <Action name="show_atmosphere"/>
     <Separator/>
-    <Action name="show_sun"/>
+    <Action name="control_sun"/>
   </Menu>
   <Menu name="settings" noMerge="1"><text>&amp;Settings</text>
     <Action name="fullscreen"/>

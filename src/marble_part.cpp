@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Tobias Koenig  <tokoe@kde.org>"
+// Copyright 2007      Tobias Koenig  <tokoe@kde.org>
+// Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
 //
 
 
@@ -83,8 +84,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     m_distanceLabel( 0 )
 {
     // only set marble data path when a path was given
-    if(arguments.count() != 0 && !arguments.first().isEmpty())
-      MarbleDirs::setMarbleDataPath(arguments.first());
+    if ( arguments.count() != 0 && !arguments.first().isEmpty() )
+        MarbleDirs::setMarbleDataPath( arguments.first() );
 
     setComponentData( MarblePartFactory::componentData() );
 
@@ -259,17 +260,24 @@ void MarblePart::showStatusBar( bool isChecked )
     m_statusBarExtension->statusBar()->setVisible( isChecked );
 }
 
-void MarblePart::showSun()
+void MarblePart::controlSun()
 {
-    if (!m_sunControlDialog)
+    if ( !m_sunControlDialog ) {
         m_sunControlDialog = new SunControlWidget( NULL, m_controlView->sunLocator() );
-
+        connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
+                 this,               SLOT ( showSun( bool ) ) );
+    }
 
     m_sunControlDialog->show();
     m_sunControlDialog->raise();
     m_sunControlDialog->activateWindow();
 }
 
+
+void MarblePart::showSun( bool active )
+{
+    m_controlView->marbleWidget()->sunLocator()->setShow( active ); 
+}
 
 void MarblePart::copyMap()
 {
@@ -508,11 +516,11 @@ void MarblePart::setupActions()
 	     this,               SLOT( setShowClouds( bool ) ) );
 
     // Action: Show Sunshade options
-    m_showSunAct = new KAction( this );
-    actionCollection()->addAction( "show_sun", m_showSunAct );
-    m_showSunAct->setText( i18n( "S&un Control" ) );
-    connect( m_showSunAct, SIGNAL( triggered( bool ) ),
-	     this,         SLOT( showSun() ) );
+    m_controlSunAction = new KAction( this );
+    actionCollection()->addAction( "control_sun", m_controlSunAction );
+    m_controlSunAction->setText( i18n( "S&un Control..." ) );
+    connect( m_controlSunAction, SIGNAL( triggered( bool ) ),
+	     this,               SLOT( controlSun() ) );
 
     // Action: Lock float items
     m_lockFloatItemsAct = new KAction ( this );

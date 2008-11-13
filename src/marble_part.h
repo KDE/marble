@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Tobias Koenig  <tokoe@kde.org>"
+// Copyright 2007      Tobias Koenig  <tokoe@kde.org>
+// Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
 //
 
 #ifndef MARBLE_PART_H
@@ -62,7 +63,8 @@ class MarblePart: public KParts::ReadOnlyPart
     void  showSideBar( bool );
     void  showStatusBar( bool );
     void  lockFloatItemPosition( bool );
-    void  showSun();
+    void  controlSun();
+    void  showSun( bool );
     void  setupStatusBar();
     void  showNewStuffDialog();
 
@@ -82,8 +84,8 @@ class MarblePart: public KParts::ReadOnlyPart
 
   private:
     // All the functionality is provided by this widget.
-    ControlView  *m_controlView;
-    SunControlWidget* m_sunControlDialog;
+    ControlView       *m_controlView; // MarbleControlBox and MarbleWidget
+    SunControlWidget  *m_sunControlDialog;
 
     // Actions for the GUI.
     KAction      *m_exportMapAction;
@@ -97,7 +99,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_fullScreenAct;
     KAction      *m_openAct;
     KAction      *m_newStuffAction;
-    KAction      *m_showSunAct;
+    KAction      *m_controlSunAction;
     KAction      *m_lockFloatItemsAct;
 
     QStandardItemModel* m_pluginModel;
