@@ -91,7 +91,29 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         MagneticPole,
         ShipWreck,
         AirPort,
+
+        // Runners
         Wikipedia,
+        OsmSite,
+        Coordinate,
+
+        // Planets
+        Catena,     // a
+        Crater,     // c
+        Dorsum,     // d
+        Fossa,      // f
+        Lacus,      // l
+        LandingSite,// n
+        Mare,       // m
+        Mons,       // b
+        Oceanus,    // o
+        Palus,      // p
+        Planitia,   // i
+        Promontorium, // u
+        Rima,       // r
+        Rupes,      // e
+        Sinus,      // s
+        Vallis,     // v
 
         // Important: Make sure that this is always the last 
         // item and just use it to specify the array size

@@ -102,6 +102,11 @@ class SphericalProjection : public AbstractProjection
 
     bool  mapCoversViewport( const ViewportParams *viewport ) const;
 
+    GeoDataCoordinates  createHorizonCoordinates( const GeoDataCoordinates &previousCoords, 
+                                                  const GeoDataCoordinates &currentCoords, 
+                                                  const ViewportParams *viewport,
+                                                  TessellationFlags f = 0 );
+
  private:
     Q_DISABLE_COPY( SphericalProjection )
     SphericalProjectionPrivate  * const d;

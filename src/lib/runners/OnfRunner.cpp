@@ -56,7 +56,7 @@ OnfRunner::~OnfRunner()
 
 GeoDataFeature::GeoDataVisualCategory OnfRunner::category() const
 {
-    return GeoDataFeature::Default;
+    return GeoDataFeature::OsmSite;
 }
 
 void OnfRunner::fail()

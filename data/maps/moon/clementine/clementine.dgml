@@ -125,13 +125,21 @@
             <section name="surface" checkable="false" spacing="12">
                 <heading>Surface</heading>
 
-                <item name="craters">
-                    <icon pixmap="maps/earth/bluemarble/legend/ice.png"/>
-                    <text>Craters</text>
+                <item name="crater">
+                    <icon pixmap="maps/moon/clementine/legend/crater.png"/>
+                    <text>Crater</text>
                 </item>
-                <item name="maria">
-                    <icon pixmap="maps/earth/bluemarble/legend/mountain.png"/>
-                    <text>Maria (large plain)</text>
+                <item name="mare">
+                    <icon pixmap="maps/moon/clementine/legend/mare.png"/>
+                    <text>Mare (dark plain)</text>
+                </item>
+                <item name="mons">
+                    <icon pixmap="maps/moon/clementine/legend/mons.png"/>
+                    <text>Mons (mountain)</text>
+                </item>
+                <item name="landingsite">
+                    <icon pixmap="maps/moon/clementine/legend/landingsite.png"/>
+                    <text>Landing Site</text>
                 </item>
             </section>
 

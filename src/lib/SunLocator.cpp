@@ -103,13 +103,14 @@ void SunLocator::shadePixel(QRgb& pixcol, qreal brightness)
     if ( brightness < 0.00001 ) {
         // night
 //      Doing  "pixcol = qRgb(r/2, g/2, b/2);" by shifting some electrons around ;)
-        pixcol = (pixcol & 0xff000000) | ((pixcol >> 1) & 0x7f7f7f);
+        pixcol = qRgb(qRed(pixcol) * 0.35, qGreen(pixcol) * 0.35, qBlue(pixcol)  * 0.35); // by shifting some electrons around ;)
+        // pixcol = (pixcol & 0xff000000) | ((pixcol >> 1) & 0x7f7f7f);
     } else {
         // gradual shadowing
         int r = qRed( pixcol );
         int g = qGreen( pixcol );
         int b = qBlue( pixcol );
-        qreal  d = 0.5 * brightness + 0.5;
+        qreal  d = 0.65 * brightness + 0.35;
         pixcol = qRgb((int)(d * r), (int)(d * g), (int)(d * b));
     }
 }

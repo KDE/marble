@@ -221,19 +221,28 @@ void GeoDataFeature::initializeDefaultStyles()
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/wikipedia.png" ) ), 
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
 
+    s_defaultStyle[OsmSite]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/osm.png" ) ), 
+              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
+
+    s_defaultStyle[Coordinate]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/coordinate.png" ) ), 
+              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
+
     s_defaultStyleInitialized = true;
     s_defaultFont = QFont("Sans Serif");
 
     QFont tmp;
 
-/*
+
+#if QT_VERSION >= 0x040400
     // Fonts for areas ...
-    // This will only work with Qt 4.4
     tmp = s_defaultStyle[Continent] -> labelStyle()-> font();
-    tmp.setLetterSpacing( 2 );
-    tmp.setSmallCaps( true );
+    tmp.setLetterSpacing( QFont::AbsoluteSpacing, 2 );
+    tmp.setCapitalization( QFont::SmallCaps );
+    tmp.setBold( true );
     s_defaultStyle[Continent] -> labelStyle()-> setFont( tmp );
-*/
+#endif
 
     // Now we need to underline the capitals ...
 
@@ -336,9 +345,9 @@ GeoDataStyle* GeoDataFeature::style() const
     }
     else
     {
-        if ( d->m_style != 0 )
+        if ( d->m_style != 0 ) {
             return static_cast<GeoDataStyle*>(d->m_style);
-        else
+        } else
         {
             // This should not happen
             qDebug() << "No Style got assigned!";

@@ -25,6 +25,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
 
+#include <QtCore/QDebug>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QVector>
@@ -41,7 +42,7 @@ LatLonRunner::LatLonRunner(QObject *parent) : MarbleAbstractRunner(parent)
 
 GeoDataFeature::GeoDataVisualCategory LatLonRunner::category() const
 {
-    return GeoDataFeature::Default;
+    return GeoDataFeature::Coordinate;
 }
 
 LatLonRunner::~LatLonRunner()
@@ -62,7 +63,6 @@ void LatLonRunner::parse(const QString &input)
     placemark->setCoordinate( lon, lat );
     QVector<GeoDataPlacemark*> vector;
     
-    //TODO: FIXME
     if( successful ) {
         placemark->setVisualCategory( category() ); 
         placemark->setPopularity( 1000000000 );

@@ -200,14 +200,17 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
     QPolygonF  *polygon = new QPolygonF;
     
     GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
-    GeoDataLineString::ConstIterator previousCoords = lineString.constBegin();
+    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
+
+    GeoDataCoordinates previousCoords;
+    GeoDataCoordinates currentCoords;
 
     GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
 
     bool processingLastNode = false;
 
     // We use a while loop to be able to cover linestrings as well as linear rings:
-    // Linear rings require to tesselate the path from the last node to the first node
+    // Linear rings require to tessellate the path from the last node to the first node
     // which isn't really convenient to achieve with a for loop ...
 
     const qreal precision = 20.0;
@@ -216,17 +219,20 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
     while ( itCoords != itEnd )
     {
         // Optimization for line strings with a big amount of nodes
-        bool skipNode = isLong && viewport->resolves( **previousCoords, **itCoords); 
+        bool skipNode = isLong && viewport->resolves( **itPreviousCoords, **itCoords); 
 
         if ( !skipNode ) {
 
-            isVisible = screenCoordinates( **itCoords, viewport, x, y, globeHidesPoint );
+            previousCoords = **itPreviousCoords;
+            currentCoords  = **itCoords;
+
+            isVisible = screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
 
             // Initializing variables that store the values of the previous iteration
             if ( !processingLastNode && itCoords == lineString.constBegin() ) {
                 previousGlobeHidesPoint = globeHidesPoint;
                 previousIsVisible = isVisible;
-                previousCoords = itCoords;
+                itPreviousCoords = itCoords;
                 previousX = x;
                 previousY = y;
             }
@@ -244,9 +250,16 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                     // Assign the first or last horizon point to the current or
                     // previous point, so that we still get correct results for 
                     // the case where we need to geoproject the line segment.
-                    // horizonPoint( **previousCoords, **itCoords );
 
-
+                    if ( globeHidesPoint ) {
+                        currentCoords  = createHorizonCoordinates( previousCoords, 
+                                                                   currentCoords,
+                                                                   viewport, lineString.tessellationFlags() );
+                    } else {
+                        previousCoords = createHorizonCoordinates( previousCoords, 
+                                                                   currentCoords,
+                                                                   viewport, lineString.tessellationFlags() );
+                    }
                 }
                 else {
                     // Both nodes are located on the planet's hemisphere that is
@@ -254,7 +267,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                 }
             }
 
-            // This if-clause contains the section that tesselates the line 
+            // This if-clause contains the section that tessellates the line 
             // segments of a linestring. If you are about to learn how the code of 
             // this class works you can safely ignore this section for a start.
 
@@ -276,7 +289,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
 
                 // Interpolate additional nodes if the current or previous nodes are visible
                 // or if the line segment that connects them might cross the viewport.
-                // The latter can pretty safely excluded for most projections if both points 
+                // The latter can pretty safely be excluded for most projections if both points 
                 // are located on the same side relative to the viewport boundaries and if they are 
                 // located more than half the line segment distance away from the viewport.
 
@@ -291,7 +304,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
 
                     if ( distance > precision ) {
     //                    qDebug() << "Distance: " << distance;
-                        *polygon << tessellateLineSegment( **previousCoords, **itCoords, 
+                        *polygon << tessellateLineSegment( previousCoords, currentCoords, 
                                                         suggestedCount, viewport,
                                                         lineString.tessellationFlags() );
                     }
@@ -313,7 +326,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
 
             previousGlobeHidesPoint = globeHidesPoint;
             previousIsVisible = isVisible;
-            previousCoords = itCoords;
+            itPreviousCoords = itCoords;
             previousX = x;
             previousY = y;
         }
@@ -462,6 +475,52 @@ bool SphericalProjection::mapCoversViewport( const ViewportParams *viewport ) co
         return true;
 
     return false;
+}
+
+GeoDataCoordinates SphericalProjection::createHorizonCoordinates( 
+                                            const GeoDataCoordinates &previousCoords, 
+                                            const GeoDataCoordinates &currentCoords, 
+                                            const ViewportParams *viewport,
+                                            TessellationFlags f )
+{
+    bool globeHidesPoint;
+
+    int x, y;
+
+    screenCoordinates( previousCoords, viewport, x, y, globeHidesPoint );
+
+    GeoDataCoordinates invisibleCoords = globeHidesPoint ? previousCoords : currentCoords;
+    GeoDataCoordinates visibleCoords   = globeHidesPoint ? currentCoords  : previousCoords;
+
+    const int accuracy = 10;
+
+    for ( int i = 0; i < accuracy; ++i ) {
+        
+        // Calculate the altitude of the horizon point
+        bool clampToGround = false;
+        f.testFlag( FollowGround );
+        qreal altDiff = visibleCoords.altitude() - invisibleCoords.altitude();
+        qreal altitude = clampToGround ? 0 : altDiff * 0.5 + previousCoords.altitude();
+
+        // Interpolate the horizon point
+        Quaternion  itpos;
+        itpos.nlerp( visibleCoords.quaternion(), invisibleCoords.quaternion(), 0.5 );    
+
+        qreal  lon = 0.0;
+        qreal  lat = 0.0;
+        itpos.getSpherical( lon, lat );
+
+        screenCoordinates( GeoDataCoordinates ( lon, lat, altitude ), viewport, x, y, globeHidesPoint );
+
+        if ( globeHidesPoint ) {
+            invisibleCoords.set( lon, lat, altitude );
+        }
+        else {
+            visibleCoords.set( lon, lat, altitude );
+        }
+    }
+
+    return visibleCoords;
 }
 
 }

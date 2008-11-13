@@ -24,7 +24,7 @@
 #include "ViewportParams.h"
 
 // #define MARBLE_DEBUG
-#define GEOPAINTER_DEBUG
+// #define GEOPAINTER_DEBUG
 
 
 namespace Marble

@@ -298,8 +298,25 @@ void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container
             ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallNationCapital )
                 + ( placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
 
-        else if ( placemark->role() == ' ' && !hasPopularity )
+        else if ( placemark->role() == ' ' && !hasPopularity && placemark->visualCategory() == GeoDataPlacemark::Unknown )
             placemark->setVisualCategory( GeoDataPlacemark::Default ); // default location
+
+        else if ( placemark->role() == 'a' ) placemark->setVisualCategory( GeoDataPlacemark::Catena );
+        else if ( placemark->role() == 'c' ) placemark->setVisualCategory( GeoDataPlacemark::Crater );
+        else if ( placemark->role() == 'd' ) placemark->setVisualCategory( GeoDataPlacemark::Dorsum );
+        else if ( placemark->role() == 'f' ) placemark->setVisualCategory( GeoDataPlacemark::Fossa );
+        else if ( placemark->role() == 'l' ) placemark->setVisualCategory( GeoDataPlacemark::Lacus );
+        else if ( placemark->role() == 'n' ) placemark->setVisualCategory( GeoDataPlacemark::LandingSite);
+        else if ( placemark->role() == 'm' ) placemark->setVisualCategory( GeoDataPlacemark::Mare);
+        else if ( placemark->role() == 'b' ) placemark->setVisualCategory( GeoDataPlacemark::Mons);
+        else if ( placemark->role() == 'o' ) placemark->setVisualCategory( GeoDataPlacemark::Oceanus);
+        else if ( placemark->role() == 'p' ) placemark->setVisualCategory( GeoDataPlacemark::Palus);
+        else if ( placemark->role() == 'i' ) placemark->setVisualCategory( GeoDataPlacemark::Planitia);
+        else if ( placemark->role() == 'u' ) placemark->setVisualCategory( GeoDataPlacemark::Promontorium);
+        else if ( placemark->role() == 'r' ) placemark->setVisualCategory( GeoDataPlacemark::Rima);
+        else if ( placemark->role() == 'e' ) placemark->setVisualCategory( GeoDataPlacemark::Rupes);
+        else if ( placemark->role() == 's' ) placemark->setVisualCategory( GeoDataPlacemark::Sinus);
+        else if ( placemark->role() == 'v' ) placemark->setVisualCategory( GeoDataPlacemark::Vallis);
 
         if ( placemark->role() == 'W' && placemark->popularityIndex() > 12 )
             placemark->setPopularityIndex( 12 );
