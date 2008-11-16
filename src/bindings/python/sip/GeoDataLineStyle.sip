@@ -21,7 +21,7 @@ namespace Marble
 class GeoDataLineStyle : Marble::GeoDataColorStyle
 {
 %TypeHeaderCode
-#include <marble/GeoDataLineStyle.h>
+#include <GeoDataLineStyle.h>
 %End
 
 public:

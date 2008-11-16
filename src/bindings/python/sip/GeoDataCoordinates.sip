@@ -21,7 +21,7 @@ namespace Marble
 class GeoDataCoordinates
 {
 %TypeHeaderCode
-#include <marble/GeoDataCoordinates.h>
+#include <GeoDataCoordinates.h>
 %End
 
 public:

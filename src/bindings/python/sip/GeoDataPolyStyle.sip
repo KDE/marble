@@ -21,7 +21,7 @@ namespace Marble
 class GeoDataPolyStyle : Marble::GeoDataColorStyle
 {
 %TypeHeaderCode
-#include <marble/GeoDataPolyStyle.h>
+#include <GeoDataPolyStyle.h>
 %End
 
 public:

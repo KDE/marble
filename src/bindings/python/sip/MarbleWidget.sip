@@ -21,7 +21,7 @@ namespace Marble
 class MarbleWidget : QWidget
 {
 %TypeHeaderCode
-#include <marble/MarbleWidget.h>
+#include <MarbleWidget.h>
 %End
 
 public:

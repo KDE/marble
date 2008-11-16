@@ -21,7 +21,7 @@ namespace Marble
 class MarbleRenderPlugin : QObject, Marble::MarbleRenderPluginInterface /Abstract/
 {
 %TypeHeaderCode
-#include <marble/MarbleRenderPlugin.h>
+#include <MarbleRenderPlugin.h>
 %End
 
 public:

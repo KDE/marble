@@ -21,7 +21,7 @@ namespace Marble
 class GeoDataHotSpot : Marble::GeoDataObject
 {
 %TypeHeaderCode
-#include <marble/GeoDataHotSpot.h>
+#include <GeoDataHotSpot.h>
 %End
 
 public:

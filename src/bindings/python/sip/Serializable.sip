@@ -19,7 +19,7 @@
 class Serializable
 {
 %TypeHeaderCode
-#include <marble/Serializable.h>
+#include <Serializable.h>
 %End
 
 public:

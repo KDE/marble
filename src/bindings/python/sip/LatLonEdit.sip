@@ -21,7 +21,7 @@ namespace Marble
 class LatLonEdit : QWidget
 {
 %TypeHeaderCode
-#include <marble/LatLonEdit.h>
+#include <LatLonEdit.h>
 %End
 
 public:

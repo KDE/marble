@@ -21,7 +21,7 @@ namespace Marble
 class GeoDataPlacemark : Marble::GeoDataFeature
 {
 %TypeHeaderCode
-#include <marble/GeoDataPlacemark.h>
+#include <GeoDataPlacemark.h>
 %End
 
 public:

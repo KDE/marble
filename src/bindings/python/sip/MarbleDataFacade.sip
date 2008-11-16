@@ -21,7 +21,7 @@ namespace Marble
 class MarbleDataFacade /Abstract/
 {
 %TypeHeaderCode
-#include <marble/MarbleDataFacade.h>
+#include <MarbleDataFacade.h>
 %End
 
 public:

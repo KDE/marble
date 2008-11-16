@@ -21,7 +21,7 @@ namespace Marble
 class GeoDataPolygon : Marble::GeoDataGeometry
 {
 %TypeHeaderCode
-#include <marble/GeoDataPolygon.h>
+#include <GeoDataPolygon.h>
 %End
 
 public:
@@ -51,7 +51,7 @@ public:
 class GeoDataOuterBoundary : Marble::GeoDataPolygon
 {
 %TypeHeaderCode
-#include <marble/GeoDataPolygon.h>
+#include <GeoDataPolygon.h>
 %End
 };   // GeoDataOuterBoundary
 
@@ -59,7 +59,7 @@ class GeoDataOuterBoundary : Marble::GeoDataPolygon
 class GeoDataInnerBoundary : Marble::GeoDataPolygon
 {
 %TypeHeaderCode
-#include <marble/GeoDataPolygon.h>
+#include <GeoDataPolygon.h>
 %End
 };   // GeoDataInnerBoundary
 

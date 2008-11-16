@@ -34,7 +34,7 @@ typedef Marble::xmmfloat* matrix;
 class Quaternion
 {
 %TypeHeaderCode
-#include <marble/Quaternion.h>
+#include <Quaternion.h>
 %End
 
 public:

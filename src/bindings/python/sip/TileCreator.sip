@@ -21,7 +21,7 @@ namespace Marble
 class TileCreator : QThread
 {
 %TypeHeaderCode
-#include <marble/TileCreator.h>
+#include <TileCreator.h>
 %End
 
 public:

@@ -21,7 +21,7 @@ namespace Marble
 class SunLocator : QObject /Abstract/
 {
 %TypeHeaderCode
-#include <marble/SunLocator.h>
+#include <SunLocator.h>
 %End
 
 public:

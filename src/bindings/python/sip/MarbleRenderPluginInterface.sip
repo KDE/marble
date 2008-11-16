@@ -21,7 +21,7 @@ namespace Marble
 class MarbleRenderPluginInterface /Abstract/
 {
 %TypeHeaderCode
-#include <marble/MarbleRenderPluginInterface.h>
+#include <MarbleRenderPluginInterface.h>
 %End
 
 public:

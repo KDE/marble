@@ -21,7 +21,7 @@ namespace Marble
 class GeoDocument
 {
 %TypeHeaderCode
-#include <marble/GeoDocument.h>
+#include <GeoDocument.h>
 %End
 
 protected:
@@ -37,7 +37,7 @@ public:
 class GeoNode
 {
 %TypeHeaderCode
-#include <marble/GeoDocument.h>
+#include <GeoDocument.h>
 %End
 
 protected:

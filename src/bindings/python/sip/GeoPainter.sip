@@ -21,7 +21,7 @@ namespace Marble
 class GeoPainter : Marble::ClipPainter
 {
 %TypeHeaderCode
-#include <marble/GeoPainter.h>
+#include <GeoPainter.h>
 %End
 
 public:

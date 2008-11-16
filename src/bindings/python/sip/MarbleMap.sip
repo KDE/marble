@@ -21,7 +21,7 @@ namespace Marble
 class MarbleMap : QObject
 {
 %TypeHeaderCode
-#include <marble/MarbleMap.h>
+#include <MarbleMap.h>
 %End
 
 public:

@@ -21,7 +21,7 @@ namespace Marble
 class ViewportParams
 {
 %TypeHeaderCode
-#include <marble/ViewportParams.h>
+#include <ViewportParams.h>
 %End
 
 public:

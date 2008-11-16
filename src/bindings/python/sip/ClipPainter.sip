@@ -21,7 +21,7 @@ namespace Marble
 class ClipPainter : QPainter /Abstract/
 {
 %TypeHeaderCode
-#include <marble/ClipPainter.h>
+#include <ClipPainter.h>
 %End
 
 private:

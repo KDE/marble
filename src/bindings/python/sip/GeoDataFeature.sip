@@ -21,7 +21,7 @@ namespace Marble
 class GeoDataFeature : Marble::GeoDataObject
 {
 %TypeHeaderCode
-#include <marble/GeoDataFeature.h>
+#include <GeoDataFeature.h>
 %End
 
 public:

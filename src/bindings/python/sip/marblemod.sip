@@ -18,8 +18,8 @@
 %Module PyKDE4.marble
 
 %ModuleHeaderCode
-#include <marble/Quaternion.h>
-#include <marble/global.h>
+#include <Quaternion.h>
+#include <global.h>
 %End
 
 %Import QtCore/QtCoremod.sip

@@ -21,7 +21,7 @@ namespace Marble
 class MapThemeManager : QObject
 {
 %TypeHeaderCode
-#include <marble/MapThemeManager.h>
+#include <MapThemeManager.h>
 %End
 
 public:

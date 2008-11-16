@@ -21,7 +21,7 @@ namespace Marble
 class MarbleAbstractFloatItem : Marble::MarbleRenderPlugin
 {
 %TypeHeaderCode
-#include <marble/MarbleAbstractFloatItem.h>
+#include <MarbleAbstractFloatItem.h>
 %End
 
 public:

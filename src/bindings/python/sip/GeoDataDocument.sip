@@ -21,7 +21,7 @@ namespace Marble
 class GeoDataDocument : Marble::GeoDocument, Marble::GeoDataContainer
 {
 %TypeHeaderCode
-#include <marble/GeoDataDocument.h>
+#include <GeoDataDocument.h>
 %End
 
 public:

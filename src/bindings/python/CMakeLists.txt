@@ -1,5 +1,6 @@
 project(pythonmarble)
 
+
 # compile SIP
 include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  ${SIP_INCLUDE_DIR} ${PYTHON_INCLUDE_PATH}
     # Qt
@@ -7,6 +8,8 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  ${S
     # ${QT_QTOPENGL_INCLUDE_DIR} 
     # KDE
     ${KDE4_INCLUDE_DIR} ${KDE4_INCLUDE_DIR}/KDE ${KDE4_INCLUDE_DIR}/solid ${KDE4_INCLUDE_DIR}/kio ${KDE4_INCLUDE_DIR}/kdeprint ${KDE4_INCLUDE_DIR}/kdeprint/lpr ${KDE4_INCLUDE_DIR}/dom ${KDE4_INCLUDE_DIR}/ksettings
+    # Marble included
+    ../../../lib
 )
 
 set(SIP_INCLUDES ${PYQT4_SIP_DIR} ${PYKDE4_SIP_DIR} sip)

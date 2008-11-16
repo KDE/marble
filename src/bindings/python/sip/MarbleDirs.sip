@@ -21,7 +21,7 @@ namespace Marble
 class MarbleDirs
 {
 %TypeHeaderCode
-#include <marble/MarbleDirs.h>
+#include <MarbleDirs.h>
 %End
 
 public:

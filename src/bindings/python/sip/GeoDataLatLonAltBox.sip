@@ -21,7 +21,7 @@ namespace Marble
 class GeoDataLatLonAltBox : Marble::GeoDataLatLonBox
 {
 %TypeHeaderCode
-#include <marble/GeoDataLatLonAltBox.h>
+#include <GeoDataLatLonAltBox.h>
 %End
 
 public:
