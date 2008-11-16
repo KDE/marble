@@ -19,6 +19,7 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QFileSystemWatcher>
 #include <QtGui/QStandardItemModel>
+#include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QTimer>
 #include <QtCore/QDebug>
@@ -68,11 +69,10 @@ MapThemeManager::~MapThemeManager()
 
 void MapThemeManager::initFileSystemWatcher()
 {
-    QStringList paths = pathsToWatch();
+    const QStringList paths = pathsToWatch();
 
-    QStringListIterator it( paths );
-    while ( it.hasNext() )
-        qDebug() << "path to watch: " << it.next();
+    foreach(const QString& path, paths)
+        qDebug() << "path to watch: " << path;
 
     d->m_fileSystemWatcher = new QFileSystemWatcher( paths, this );
     connect( d->m_fileSystemWatcher, SIGNAL( directoryChanged( const QString& )),
