@@ -108,7 +108,7 @@ public:
     void                    setCenterLongitude (qreal lon);
     Marble::Projection      projection () const;
     void                    setProjection (int projection);
-    void                    setProjection (Marble::Projection projection);
+    void                    setProjection (Marble::Projection projection /Constrained/);
     void                    home (qreal& lon /out/, qreal& lat /out/, int& zoom /out/);
     void                    setHome (qreal lon, qreal lat, int zoom = 1050);
     void                    setHome (const Marble::GeoDataCoordinates& homePoint, int zoom = 1050);

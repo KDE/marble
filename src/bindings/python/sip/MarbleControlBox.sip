@@ -42,7 +42,7 @@ signals:
     void                    moveDown ();
     void                    centerOn (const QModelIndex&, bool);
     void                    selectMapTheme (const QString&);
-    void                    projectionSelected (Marble::Projection);
+    void                    projectionSelected (Marble::Projection /Constrained/);
     void                    gpsInputDisabled (bool);
     void                    gpsPositionChanged (qreal lat, qreal lon);
     void                    updateGps ();
