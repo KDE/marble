@@ -12,7 +12,7 @@
             <visible> true </visible>
         
             <!-- The description allows for rich text of course: -->
-            <description><![CDATA[<p>Earth as seen from Space.<p>The map is based on NASA's beautiful "Blue Marble Next Generation" pictures. Credits: NASA's Earth Observatory ]]></description>
+            <description><![CDATA[<p>The moon.<p>The map is based on data from the clementine mission. Credits: NASA ]]></description>
     
             <zoom>
                 <minimum>   900  </minimum>
@@ -69,13 +69,21 @@
                 </property>
             </group>
             <group name="Surface">
+                <property name="landingsite">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
                 <property name="craters">
-                    <value>false</value>
-                    <available>false</available>
+                    <value>true</value>
+                    <available>true</available>
                 </property>
                 <property name="maria">
-                    <value>false</value>
-                    <available>false</available>
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="otherfeatures">
+                    <value>true</value>
+                    <available>true</available>
                 </property>
             </group>
 
@@ -96,50 +104,50 @@
         <!-- At last we define some legend properties -->
         
         <legend>
-            <section name="terrain" checkable="true" connect="terrain" spacing="12">
-                <heading>Terrain</heading>
 
-                <item name="mountain">
-                    <icon pixmap="bitmaps/mountain_1.png"/>
-                    <text>Mountain</text>
+            <section name="landingsites" checkable="true" connect="landingsites" spacing="12">
+                <heading>Landing Sites</heading>
+                <item name="mannedlanding">
+                    <icon pixmap="bitmaps/mannedlanding.png"/>
+                    <text>Manned landing site</text>
                 </item>
-                <item name="volcano">
-                    <icon pixmap="bitmaps/volcano_1.png"/>
-                    <text>Volcano</text>
+                <item name="unmannedsoftlanding">
+                    <icon pixmap="bitmaps/unmannedsoftlanding.png"/>
+                    <text>Unmanned soft landing</text>
                 </item>
-            </section>
-
-            <section name="otherplaces" checkable="true" connect="otherplaces" spacing="12">
-                <heading>Places of Interest</heading>
-
-                <item name="geographic-pole">
-                    <icon pixmap="bitmaps/pole_1.png"/>
-                    <text>Geographic Pole</text>
-                </item>
-                <item name="magnetic-pole">
-                    <icon pixmap="bitmaps/pole_2.png"/>
-                    <text>Magnetic Pole</text>
+                <item name="unmannedhardlanding">
+                    <icon pixmap="bitmaps/unmannedhardlanding.png"/>
+                    <text>Unmanned hard landing</text>
                 </item>
             </section>
 
-            <section name="surface" checkable="false" spacing="12">
-                <heading>Surface</heading>
+            <section name="craters" checkable="true" connect="craters" spacing="12">
+                <heading>Craters</heading>
 
                 <item name="crater">
-                    <icon pixmap="maps/moon/clementine/legend/crater.png"/>
-                    <text>Crater</text>
+                    <icon pixmap="bitmaps/crater.png"/>
+                    <text>Crater, impact crater</text>
                 </item>
-                <item name="mare">
-                    <icon pixmap="maps/moon/clementine/legend/mare.png"/>
-                    <text>Mare (dark plain)</text>
-                </item>
+            </section>
+
+            <section name="maria" checkable="true" connect="maria" spacing="12">
+                <heading>Maria</heading>
+            </section>
+
+            <section name="otherfeatures" checkable="true" connect="otherfeatures" spacing="12">
+                <heading>Other features</heading>
+
                 <item name="mons">
-                    <icon pixmap="maps/moon/clementine/legend/mons.png"/>
-                    <text>Mons (mountain)</text>
+                    <icon pixmap="bitmaps/mountain_1.png"/>
+                    <text>Mons, mountain</text>
                 </item>
-                <item name="landingsite">
-                    <icon pixmap="maps/moon/clementine/legend/landingsite.png"/>
-                    <text>Landing Site</text>
+                <item name="vallis">
+                    <icon pixmap="bitmaps/vallis.png"/>
+                    <text>Vallis, valley</text>
+                </item>
+                <item name="other">
+                    <icon pixmap="bitmaps/other.png"/>
+                    <text>Other</text>
                 </item>
             </section>
 
