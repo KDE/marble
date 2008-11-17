@@ -132,7 +132,9 @@ void MarbleLegendBrowser::loadLegend()
     {
         GeoSceneDocument *currentMapTheme = d->m_marbleWidget->model()->mapTheme();
 
-        QString customLegendPath = MarbleDirs::path( "maps/earth/" + currentMapTheme->head()->theme() + "/legend.html" ); 
+        QString customLegendPath = MarbleDirs::path( "maps/" + 
+        currentMapTheme->head()->target() + '/' + 
+        currentMapTheme->head()->theme() + "/legend.html" ); 
         if ( !customLegendPath.isEmpty() )
             d->m_html = readHtml( QUrl::fromLocalFile( customLegendPath  ) );
         else

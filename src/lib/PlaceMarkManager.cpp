@@ -79,13 +79,25 @@ void PlaceMarkManager::clearPlaceMarks()
     m_model->clearPlaceMarks();
 }
 
-void PlaceMarkManager::loadStandardPlaceMarks()
+void PlaceMarkManager::loadStandardPlaceMarks(  const QString& target  )
 {
-    addPlaceMarkFile( "cityplacemarks" );
-    addPlaceMarkFile( "baseplacemarks" );
-    addPlaceMarkFile( "elevplacemarks" );
-    addPlaceMarkFile( "otherplacemarks" );
-    addPlaceMarkFile( "boundaryplacemarks" );
+    if ( target != m_target )
+    {
+        clearPlaceMarks();
+
+        if ( target == "earth" ){
+            addPlaceMarkFile( "cityplacemarks" );
+            addPlaceMarkFile( "baseplacemarks" );
+            addPlaceMarkFile( "elevplacemarks" );
+            addPlaceMarkFile( "otherplacemarks" );
+            addPlaceMarkFile( "boundaryplacemarks" );
+        }
+        if ( target == "moon" ){
+            addPlaceMarkFile( "moonlandingsites" );
+        }
+
+        m_target = target;
+    }
 }
 
 void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )

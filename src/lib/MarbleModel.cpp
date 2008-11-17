@@ -368,9 +368,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         }
     }
 
-    if ( d->m_mapTheme->head()->target().toLower() != "earth" ) {
-        d->m_placemarkmanager->clearPlaceMarks();
-    }
+    d->m_placemarkmanager->loadStandardPlaceMarks( d->m_mapTheme->head()->target() );
 
     d->m_placeMarkLayout->requestStyleReset();
     // FIXME: To be removed after MapTheme / KML refactoring

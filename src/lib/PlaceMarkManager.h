@@ -14,6 +14,7 @@
 #define PLACEMARKMANAGER_H
 
 #include <QtCore/QObject>
+#include <QtCore/QString>
 
 namespace Marble
 {
@@ -78,7 +79,7 @@ class PlaceMarkManager : public QObject
      *
      * Note: Call this method after you have create a method!
      */
-    void loadStandardPlaceMarks();
+    void loadStandardPlaceMarks( const QString& target = QString() );
 
     /**
      * Loads a new place mark file into the manager.
@@ -114,12 +115,15 @@ class PlaceMarkManager : public QObject
     MarblePlacemarkModel* m_model;
     MarbleGeometryModel* m_geomodel;
 
+    QString m_target;
+
 #ifdef KML_GSOC
     void updateCacheIndex();
     void cacheDocument( const KMLDocument& document );
     void loadDocumentFromCache ( QString &path, KMLDocument& document );
 
     QList < KMLDocument* > m_documentList;
+
 #endif
 };
 

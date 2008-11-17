@@ -50,7 +50,7 @@
         </map>
 
         <settings>
--            <group name="Places">
+            <group name="Places">
                 <property name="places">
                     <value>true</value>
                     <available>true</available>
@@ -69,7 +69,7 @@
                 </property>
             </group>
             <group name="Surface">
-                <property name="landingsite">
+                <property name="landingsites">
                     <value>true</value>
                     <available>true</available>
                 </property>
@@ -110,6 +110,10 @@
                 <item name="mannedlanding">
                     <icon pixmap="bitmaps/mannedlanding.png"/>
                     <text>Manned landing site</text>
+                </item>
+                <item name="roboticrover">
+                    <icon pixmap="bitmaps/roboticrover.png"/>
+                    <text>Robotic rover</text>
                 </item>
                 <item name="unmannedsoftlanding">
                     <icon pixmap="bitmaps/unmannedsoftlanding.png"/>
