@@ -34,7 +34,7 @@
         
             <!-- This layer creates the elevation model -->
             <layer name="clementine" backend="texture">
-                <texture name="clementine_data"><!-- type="texture"-->
+                <texture name="clementine_data" expire="604800"><!-- type="texture"-->
                     <sourcedir format="JPG"> moon/clementine </sourcedir>
                     <installmap> clementine.jpg </installmap>
                 </texture>

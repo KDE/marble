@@ -110,7 +110,16 @@ int MarblePlacemarkModel::columnCount( const QModelIndex &parent ) const
 
 GeoDataCoordinates MarblePlacemarkModel::coordinateData( const QModelIndex &index ) const
 {
-    return d->m_placeMarkContainer.at( index.row() )->coordinate();
+    if ( !index.isValid() ) {
+        qDebug() << "MarblePlacemarkModel: Error - index invalid";
+        return GeoDataCoordinates();
+    }
+    GeoDataPlacemark *placemark = d->m_placeMarkContainer.at( index.row() );
+    if ( placemark == 0 ) {
+        qDebug() << "MarblePlacemarkModel: Error - Placemark invalid";
+        return GeoDataCoordinates();
+    }
+    return placemark->coordinate();
 }
 
 GeoDataStyle* MarblePlacemarkModel::styleData( const QModelIndex &index ) const

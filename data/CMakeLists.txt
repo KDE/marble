@@ -158,7 +158,8 @@ maps/earth/schagen1689/legend/schagen_orig.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/schagen1689/legend)
 
 install (FILES
-#maps/moon/clementine/clementine.jpg
+maps/moon/clementine/clementine.jpg
+maps/moon/clementine/clementine-preview.png
 maps/moon/clementine/legend.html 
 maps/moon/clementine/clementine.dgml
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/moon/clementine)

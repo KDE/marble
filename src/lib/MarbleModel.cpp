@@ -166,7 +166,7 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( d->m_placemarkmodel,  SIGNAL( layoutChanged() ),
              d->m_placeMarkLayout, SLOT( requestStyleReset() ) );
 
-    d->m_placemarkmanager->loadStandardPlaceMarks();
+    // d->m_placemarkmanager->loadStandardPlaceMarks();
 
     d->m_gpxFileModel = new GpxFileModel( this );
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );

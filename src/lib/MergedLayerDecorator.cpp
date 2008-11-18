@@ -45,14 +45,17 @@ MergedLayerDecorator::MergedLayerDecorator(SunLocator* sunLocator)
     // look for the texture layers inside the themes
     // As long as we don't have an Layer Management Class we just lookup 
     // the name of the layer that has the same name as the theme ID
-    QString cityLightsId = m_cityLightsTheme->head()->theme();
-    m_cityLightsTextureLayer = static_cast<GeoSceneTexture*>(
-        m_cityLightsTheme->map()->layer( cityLightsId )->datasets().first() );
-
+    if (m_cityLightsTheme) {
+        QString cityLightsId = m_cityLightsTheme->head()->theme();
+        m_cityLightsTextureLayer = static_cast<GeoSceneTexture*>(
+            m_cityLightsTheme->map()->layer( cityLightsId )->datasets().first() );
+    }
     // the clouds texture layer is a layer in the bluemarble theme
-    QString blueMarbleId = m_blueMarbleTheme->head()->theme();
-    m_cloudsTextureLayer = static_cast<GeoSceneTexture*>(
-        m_blueMarbleTheme->map()->layer( blueMarbleId )->dataset( "clouds_data" ) );
+    if (m_blueMarbleTheme) {
+        QString blueMarbleId = m_blueMarbleTheme->head()->theme();
+        m_cloudsTextureLayer = static_cast<GeoSceneTexture*>(
+            m_blueMarbleTheme->map()->layer( blueMarbleId )->dataset( "clouds_data" ) );
+    }
 }
 
 MergedLayerDecorator::~MergedLayerDecorator()
