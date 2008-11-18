@@ -144,11 +144,6 @@ p, li { white-space: pre-wrap; }
          <widget class="QComboBox" name="sunShadingComboBox" >
           <item>
            <property name="text" >
-            <string>None</string>
-           </property>
-          </item>
-          <item>
-           <property name="text" >
             <string>Shadow</string>
            </property>
           </item>

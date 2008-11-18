@@ -54,6 +54,7 @@ void SunControlWidget::showSunClicked(bool checked)
     else
         m_uiWidget.showToolButton->setText( tr("Sh&ow") );
 
+    //m_sunLocator->setShow( checked );
     emit showSun( checked );
 }
 
@@ -68,15 +69,12 @@ void SunControlWidget::nowClicked(bool checked)
 
 void SunControlWidget::showSunShadingClicked( int index )
 {
-    if ( index == 0 ) {
-        m_sunLocator->setShow( false );
-    } else if ( index == 1 ) {
+    // Control whether the dark side should be a shadow or the
+    // Citylights theme.
+    if ( index == 0 )
         m_sunLocator->setCitylights( false );
-        m_sunLocator->setShow( true );
-    } else if ( index == 2 ) {
+    else if ( index == 1 )
         m_sunLocator->setCitylights( true );
-        m_sunLocator->setShow( true );
-    }
 }
 
 void SunControlWidget::centerSunClicked(bool checked)
