@@ -507,6 +507,15 @@ void MarblePart::setupActions()
 	     this,                   SLOT( setShowAtmosphere( bool ) ) );
 
     // Action: Show Clouds option
+    m_showCrosshairsAction = new KAction( this );
+    actionCollection()->addAction( "show_crosshairs", m_showCrosshairsAction );
+    m_showCrosshairsAction->setCheckable( true );
+    m_showCrosshairsAction->setChecked( true );
+    m_showCrosshairsAction->setText( i18n( "Cross&hairs" ) );
+//    connect( m_showCrosshairsAction, SIGNAL( triggered( bool ) ),
+//         this,               SLOT( setShowClouds( bool ) ) );
+
+    // Action: Show Clouds option
     m_showCloudsAction = new KAction( this );
     actionCollection()->addAction( "show_clouds", m_showCloudsAction );
     m_showCloudsAction->setCheckable( true );

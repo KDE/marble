@@ -93,6 +93,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_workOfflineAction;
     KAction      *m_copyMapAction;
     KAction      *m_copyCoordinatesAction;
+    KAction      *m_showCrosshairsAction;
     KAction      *m_showCloudsAction;
     KAction      *m_showAtmosphereAction;
     KAction      *m_sideBarAct;
