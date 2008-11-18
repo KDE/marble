@@ -108,19 +108,19 @@
             <section name="landingsites" checkable="true" connect="landingsites" spacing="12">
                 <heading>Landing Sites</heading>
                 <item name="mannedlanding">
-                    <icon pixmap="bitmaps/mannedlanding.png"/>
+                    <icon pixmap="bitmaps/manned_landing.png"/>
                     <text>Manned landing site</text>
                 </item>
                 <item name="roboticrover">
-                    <icon pixmap="bitmaps/roboticrover.png"/>
+                    <icon pixmap="bitmaps/robotic_rover.png"/>
                     <text>Robotic rover</text>
                 </item>
                 <item name="unmannedsoftlanding">
-                    <icon pixmap="bitmaps/unmannedsoftlanding.png"/>
+                    <icon pixmap="bitmaps/unmanned_soft_landing.png"/>
                     <text>Unmanned soft landing</text>
                 </item>
                 <item name="unmannedhardlanding">
-                    <icon pixmap="bitmaps/unmannedhardlanding.png"/>
+                    <icon pixmap="bitmaps/unmanned_hard_landing.png"/>
                     <text>Unmanned hard landing</text>
                 </item>
             </section>
@@ -146,7 +146,7 @@
                     <text>Mons, mountain</text>
                 </item>
                 <item name="vallis">
-                    <icon pixmap="bitmaps/vallis.png"/>
+                    <icon pixmap="bitmaps/valley.png"/>
                     <text>Vallis, valley</text>
                 </item>
                 <item name="other">
@@ -154,6 +154,17 @@
                     <text>Other</text>
                 </item>
             </section>
+
+
+            <section name="otherplaces" checkable="true" connect="otherplaces" spacing="12">
+                <heading>Places of Interest</heading>
+
+                <item name="geographic-pole">
+                    <icon pixmap="bitmaps/pole_1.png"/>
+                    <text>Geographic Pole</text>
+                </item>
+            </section>
+
 
             <section name="coordinate-grid" checkable="true" connect="coordinate-grid" spacing="12">
                 <heading>Coordinate Grid</heading>
