@@ -98,6 +98,18 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         Coordinate,
 
         // Planets
+        MannedLandingSite,       // h
+        RoboticRover,            // r
+        UnmannedSoftLandingSite, // u
+        UnmannedHardLandingSite, // i
+
+/*
+        Crater,                 // c
+        Mare,                   // m
+        Valley,                 // v
+        PlanetaryFeature        // v
+*/ 
+/*
         Catena,     // a
         Crater,     // c
         Dorsum,     // d
@@ -114,7 +126,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         Rupes,      // e
         Sinus,      // s
         Vallis,     // v
-
+*/
         // Important: Make sure that this is always the last 
         // item and just use it to specify the array size
         LastIndex

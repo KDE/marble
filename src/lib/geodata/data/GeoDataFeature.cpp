@@ -229,6 +229,23 @@ void GeoDataFeature::initializeDefaultStyles()
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/coordinate.png" ) ), 
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
 
+
+    s_defaultStyle[MannedLandingSite]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/manned_landing.png" ) ), 
+              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
+
+    s_defaultStyle[RoboticRover]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/robotic_rover.png" ) ), 
+              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
+
+    s_defaultStyle[UnmannedSoftLandingSite]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/unmanned_soft_landing.png" ) ), 
+              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
+
+    s_defaultStyle[UnmannedHardLandingSite]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/unmanned_hard_landing.png" ) ), 
+              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
+
     s_defaultStyleInitialized = true;
     s_defaultFont = QFont("Sans Serif");
 

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<kml xmlns="http://earth.google.com/kml/2.1"> 
+<Document>
+    <Schema name="MarblePlacemark" parent="Placemark"> 
+       <SimpleField name="pop" type="int"></SimpleField> 
+       <SimpleField name="CountryNameCode" type="string"></SimpleField> 
+       <SimpleField name="role" type="string"></SimpleField> 
+    </Schema>
+
+    <!--- Poles -->
+    <MarblePlacemark> 
+        <name>North Pole</name> 
+        <description><![CDATA[Selenographic North Pole]]></description> 
+        <role>P</role> 
+        <Point>
+            <coordinates>0.0,90.00</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>South Pole</name> 
+        <description><![CDATA[Selenographic South Pole]]></description> 
+        <role>P</role> 
+        <Point>
+            <coordinates>0.0,-90.00</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+ 
+    <!--- Apollo Moon Missions -->
+    <MarblePlacemark> 
+        <name>Apollo 11</name> 
+        <description><![CDATA[<p><i>21.7.1969:</i> <b>First manned lunar landing mission</b></p>
+                     <p>Neil A. Armstrong (commander), Michael Collins (CM pilot), Edwin E. (Buzz) Aldrin Jr. (LM pilot)</p>
+]]></description> 
+        <role>h</role> 
+        <Point>
+            <coordinates>23.63,0.71</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Apollo 12</name> 
+        <description><![CDATA[<p><i>19.11.1969:</i> <b>Second manned lunar landing mission. Retrieves Surveyor 3</b></p>
+                     <p>Charles Conrad Jr. (commander), Richard F. Gordon Jr. (CM pilot), Alan L. Bean (LM pilot)</p>
+]]></description> 
+        <role>h</role> 
+        <Point>
+            <coordinates>-23.42,-3.01</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Apollo 14</name> 
+        <description><![CDATA[<p><i>5.2.1971:</i> <b>Third manned lunar landing mission. ALSEP and other instruments deployed.</b></p>
+                     <p>Alan B. Shepard Jr. (commander), Stuart A. Roosa (CM pilot), Edgar D. Mitchell (LM pilot)
+]]></description> 
+        <role>h</role> 
+        <Point>
+            <coordinates>-17.48,-3.65</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Apollo 15</name> 
+        <description><![CDATA[<p><i>31.7.1971:</i> <b>Fourth manned lunar landing mission. Lunar Roving Vehicle, electric-powered, 4-wheel drive car, traversed total 27.9 km.</b></p>
+                     <p>David R. Scott (commander), Alfred M. Worden (CM pilot), James B. Irwin (LM pilot)
+]]></description> 
+        <role>h</role> 
+        <Point>
+            <coordinates>3.66,26.08</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Apollo 16</name> 
+        <description><![CDATA[<p><i>21.4.1972:</i> <b>Fifth manned lunar landing mission. First study of highlands area.</b></p>
+                     <p>John W. Young (commander), Thomas K. Mattingly II (CM pilot), Charles M. Duke Jr. (LM pilot)
+]]></description> 
+        <role>h</role> 
+        <Point>
+            <coordinates>15.51,-8.97</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Apollo 17</name> 
+        <description><![CDATA[<p><i>11.12.1972:</i> <b>Last manned lunar landing mission. First scientist-astronaut to land on Moon: Schmitt.</b></p>
+                     <p>Eugene A. Cernan (commander), Ronald E. Evans (CM pilot), Harrison H. Schmitt (LM pilot)
+]]></description> 
+        <role>h</role> 
+        <Point>
+            <coordinates>30.77,20.16</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+
+    <!--- Sovjet Hard Moon Landings -->
+    <MarblePlacemark> 
+        <name>Luna 2</name> 
+        <description><![CDATA[<p><i>12.9.1959:</i> <b>First spacecraft to reach the surface of the Moon. The successful impact was the highlight of this Sovjet mission.</b></p>
+]]></description> 
+        <role>i</role> 
+        <Point>
+            <coordinates>0.0,29.1</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Luna 9</name> 
+        <description><![CDATA[<p><i>31.1.1966:</i> <b>First unmanned Sovjet moon landing. Several photos.</b></p>
+]]></description> 
+        <role>u</role> 
+        <Point>
+            <coordinates>-64.37,7.13</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Luna 13</name> 
+        <description><![CDATA[<p><i>24.12.1966:</i> <b>Second unmanned Sovjet moon landing. Several photos.</b></p>
+]]></description> 
+        <role>u</role> 
+        <Point>
+            <coordinates>-62.05,18.87</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+
+    <!--- Sovjet Soft Moon Landings -->
+    <MarblePlacemark> 
+        <name>Luna 16</name> 
+        <description><![CDATA[<p><i>20.11.1970:</i> <b>Third unmanned Sovjet moon landing. Sample return mission: returned 100g moon dust back to Earth.</b></p>
+]]></description> 
+        <role>u</role> 
+        <Point>
+            <coordinates>56.3,-0.683</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Luna 17</name> 
+        <description><![CDATA[<p><i>10.11.1970:</i> <b>Unmanned Sovjet moon landing: First lunar rover Lunokhod-1 drove 10.5 km across the moon's surface.</b></p>
+]]></description> 
+        <role>r</role> 
+        <Point>
+            <coordinates>-35,38.28</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Luna 20</name> 
+        <description><![CDATA[<p><i>25.2.1972:</i> <b>Unmanned Sovjet moon landing. Sample return mission: returned 50g moon dust back to Earth</b></p>
+]]></description> 
+        <role>u</role> 
+        <Point>
+            <coordinates>56.50,3.57</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Luna 21</name> 
+        <description><![CDATA[<p><i>15.1.1973:</i> <b>Unmanned Sovjet moon landing: Second lunar rover Lunokhod-2 drove 37 km across the moon's surface.</b></p>
+]]></description> 
+        <role>r</role> 
+        <Point>
+            <coordinates>30.45,25.85</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Luna 24</name> 
+        <description><![CDATA[<p><i>18.8.1976:</i> <b>Unmanned Sovjet moon landing: Sample return mission: returned 170g moon dust back to Earth</b></p>
+]]></description> 
+        <role>u</role> 
+        <Point>
+            <coordinates>62.20,12.25</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+
+
+    <!--- American Hard Moon Landings -->
+    <MarblePlacemark> 
+        <name>Ranger 7</name> 
+        <description><![CDATA[<p><i>31.7.1964:</i> <b>First successful impact of an American lunar spacecraft.</b></p>
+]]></description> 
+        <role>i</role> 
+        <Point>
+            <coordinates>-20.6,-10.63</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Ranger 8</name> 
+        <description><![CDATA[<p><i>20.2.1965:</i> <b>Second successful impact of an American lunar spacecraft.</b></p>
+]]></description> 
+        <role>i</role> 
+        <Point>
+            <coordinates>24.61,2.72</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Ranger 9</name> 
+        <description><![CDATA[<p><i>24.3.1965:</i> <b>Third successful impact of an American lunar spacecraft.</b></p>
+]]></description> 
+        <role>i</role> 
+        <Point>
+            <coordinates>-2.37,12.83</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+
+    <!--- American Soft Moon Landings -->
+    <MarblePlacemark> 
+        <name>Surveyor 1</name> 
+        <description><![CDATA[<p><i>2.6.1966:</i> <b>First unmanned American moon landing. Transmitted more than 11,000 images.</b></p>
+]]></description> 
+        <role>u</role> 
+        <Point>
+            <coordinates>-43.22,-2.45</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Surveyor 3</name> 
+        <description><![CDATA[<p><i>20.4.1967:</i> <b>Second unmanned American moon landing. Transmitted more than 6,000 images.</b></p>
+]]></description> 
+        <role>u</role> 
+        <Point>
+            <coordinates>-23.34,-2.94</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Surveyor 5</name> 
+        <description><![CDATA[<p><i>11.9.1967:</i> <b>Third unmanned American moon landing. Transmitted more than 19,000 images. Alpha-scattering surface analyzer.</b></p>
+]]></description> 
+        <role>u</role> 
+        <Point>
+            <coordinates>23.18,1.41</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Surveyor 6</name> 
+        <description><![CDATA[<p><i>10.11.1967:</i> <b>Unmanned American moon landing. Transmitted more than 30,000 images. Robot arm and alpha scatter science.</b></p>
+]]></description> 
+        <role>u</role> 
+        <Point>
+            <coordinates>-1.37,0.46</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+    <MarblePlacemark> 
+        <name>Surveyor 7</name> 
+        <description><![CDATA[<p><i>7.1.1968:</i> <b>Unmanned American moon landing. Transmitted more than 21,000 images. Robot arm and alpha scatter science.</b></p>
+]]></description> 
+        <role>u</role> 
+        <Point>
+            <coordinates>-11.41,-41.01</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+
+    <!--- Indian Moon Missions -->
+    <MarblePlacemark> 
+        <name>MIP/Chandrayaan 1</name> 
+        <description><![CDATA[14.11.2008: First successful impact of an Indian lunar spacecraft.]]></description> 
+        <role>i</role> 
+        <Point>
+            <coordinates>16.3,0.00</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+
+</Document>
+</kml> 

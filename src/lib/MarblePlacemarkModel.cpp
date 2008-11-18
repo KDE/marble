@@ -266,6 +266,30 @@ void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container
             placemark->setPopularity( 10000000 );
             placemark->setPopularityIndex( 13 );
         }
+        // MannedLandingSite (h)
+        else if ( placemark->role() == 'h' )
+        {
+            placemark->setPopularity( 1000000000 );
+            placemark->setPopularityIndex( 18 );
+        }
+        // RoboticRover (r)
+        else if ( placemark->role() == 'r' )
+        {
+            placemark->setPopularity( 10000000 );
+            placemark->setPopularityIndex( 16 );
+        }
+        // UnmannedSoftLandingSite (u)
+        else if ( placemark->role() == 'u' )
+        {
+            placemark->setPopularity( 1000000 );
+            placemark->setPopularityIndex( 14 );
+        }
+        // UnmannedSoftLandingSite (i)
+        else if ( placemark->role() == 'i' )
+        {
+            placemark->setPopularity( 1000000 );
+            placemark->setPopularityIndex( 14 );
+        }
         else
         {
             qint64 population = placemark->population();
@@ -301,6 +325,11 @@ void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container
         else if ( placemark->role() == ' ' && !hasPopularity && placemark->visualCategory() == GeoDataPlacemark::Unknown )
             placemark->setVisualCategory( GeoDataPlacemark::Default ); // default location
 
+        else if ( placemark->role() == 'h' ) placemark->setVisualCategory( GeoDataPlacemark::MannedLandingSite );
+        else if ( placemark->role() == 'r' ) placemark->setVisualCategory( GeoDataPlacemark::RoboticRover );
+        else if ( placemark->role() == 'u' ) placemark->setVisualCategory( GeoDataPlacemark::UnmannedSoftLandingSite );
+        else if ( placemark->role() == 'i' ) placemark->setVisualCategory( GeoDataPlacemark::UnmannedHardLandingSite );
+/*
         else if ( placemark->role() == 'a' ) placemark->setVisualCategory( GeoDataPlacemark::Catena );
         else if ( placemark->role() == 'c' ) placemark->setVisualCategory( GeoDataPlacemark::Crater );
         else if ( placemark->role() == 'd' ) placemark->setVisualCategory( GeoDataPlacemark::Dorsum );
@@ -317,7 +346,7 @@ void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container
         else if ( placemark->role() == 'e' ) placemark->setVisualCategory( GeoDataPlacemark::Rupes);
         else if ( placemark->role() == 's' ) placemark->setVisualCategory( GeoDataPlacemark::Sinus);
         else if ( placemark->role() == 'v' ) placemark->setVisualCategory( GeoDataPlacemark::Vallis);
-
+*/
         if ( placemark->role() == 'W' && placemark->popularityIndex() > 12 )
             placemark->setPopularityIndex( 12 );
         if ( placemark->role() == 'O' )
