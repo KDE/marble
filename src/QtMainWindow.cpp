@@ -132,9 +132,9 @@ void MainWindow::createActions()
      m_showAtmosphereAct->setStatusTip(tr("Show Atmosphere"));
      connect(m_showAtmosphereAct, SIGNAL(triggered( bool )), this, SLOT( showAtmosphere( bool )));
 
-     m_showSunAct = new QAction( tr("S&un Control"), this);
-     m_showSunAct->setStatusTip(tr("Configure Sun Control"));
-     connect(m_showSunAct, SIGNAL(triggered()), this, SLOT( showSun()));
+     m_controlSunAct = new QAction( tr("S&un Control..."), this);
+     m_controlSunAct->setStatusTip(tr("Configure Sun Control"));
+     connect(m_controlSunAct, SIGNAL(triggered()), this, SLOT( controlSun()));
 
      m_whatsThisAct = new QAction( QIcon(":/icons/help-whatsthis.png"), tr("What's &This"), this);
      m_whatsThisAct->setShortcut(tr("Shift+F1"));
@@ -177,7 +177,7 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_showCloudsAct);
     m_fileMenu->addAction(m_showAtmosphereAct);
     m_fileMenu->addSeparator();
-    m_fileMenu->addAction(m_showSunAct);
+    m_fileMenu->addAction(m_controlSunAct);
 
     m_helpMenu = menuBar()->addMenu(tr("&Help"));
     m_helpMenu->addAction(m_whatsThisAct);
@@ -327,12 +327,22 @@ void MainWindow::showAtmosphere( bool isChecked )
     m_showAtmosphereAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
-void MainWindow::showSun()
+void MainWindow::controlSun()
 {
-     if (!m_sunControlDialog) m_sunControlDialog = new SunControlWidget( this, m_controlView->sunLocator() );
+    if (!m_sunControlDialog) {
+        m_sunControlDialog = new SunControlWidget( this, m_controlView->sunLocator() );
+        connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
+                 this,               SLOT ( showSun( bool ) ) );
+    }
+
      m_sunControlDialog->show();
      m_sunControlDialog->raise();
      m_sunControlDialog->activateWindow();
+}
+
+void MainWindow::showSun( bool active )
+{
+    m_controlView->marbleWidget()->sunLocator()->setShow( active ); 
 }
 
 void MainWindow::enterWhatsThis()

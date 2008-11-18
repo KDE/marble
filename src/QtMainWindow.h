@@ -67,7 +67,8 @@ class MainWindow : public QMainWindow
     void  showStatusBar( bool );
     void  showClouds( bool );
     void  showAtmosphere( bool );
-    void  showSun();
+    void  controlSun();
+    void  showSun( bool );
     void  enterWhatsThis();
     void  aboutMarble();
     void  openFile();
@@ -91,7 +92,7 @@ class MainWindow : public QMainWindow
     QAction *m_statusBarAct;
     QAction *m_showCloudsAct;
     QAction *m_showAtmosphereAct;
-    QAction *m_showSunAct;
+    QAction *m_controlSunAct;
     QAction *m_whatsThisAct;
     QAction *m_aboutMarbleAct;
     QAction *m_aboutQtAct;
