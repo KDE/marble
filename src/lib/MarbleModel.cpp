@@ -139,8 +139,8 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
 
-    connect( d->m_tileLoader, SIGNAL( paintTile(TextureTile*, int, int, int, GeoSceneTexture*, bool) ),
-             this,            SLOT( paintTile(TextureTile*, int, int, int, GeoSceneTexture*, bool) ) );
+//    connect( d->m_tileLoader, SIGNAL( paintTile(TextureTile*, int, int, int, GeoSceneTexture*, bool) ),
+//             this,            SLOT( paintTile(TextureTile*, int, int, int, GeoSceneTexture*, bool) ) );
 
     d->m_texmapper = 0;
     d->m_veccomposer = new VectorComposer();
