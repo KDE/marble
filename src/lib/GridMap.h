@@ -23,13 +23,14 @@
 namespace Marble
 {
 
+class MarbleModel;
 class ViewportParams;
 class GeoPainter;
 
 class GridMap : public ScreenPolygon::Vector
 {
  public:
-    GridMap();
+    GridMap( MarbleModel *model );
     ~GridMap();
 
     void createTropics( ViewportParams *viewport );
@@ -60,6 +61,8 @@ class GridMap : public ScreenPolygon::Vector
     const QPointF  horizonPoint( ViewportParams *viewport );
 
  private:
+    MarbleModel *m_model;
+
     matrix   m_planetAxisMatrix;
 
     ScreenPolygon m_polygon;

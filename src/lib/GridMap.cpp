@@ -20,10 +20,14 @@
 #include <QtGui/QColor>
 
 #include "global.h"
+#include "MarbleModel.h"
 #include "GeoPainter.h"
 #include "AbstractProjection.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
+
+#include "GeoSceneDocument.h"
+#include "GeoSceneHead.h"
 
 using namespace Marble;
 
@@ -36,13 +40,12 @@ const qreal  AXIALTILT = DEG2RAD * ( 23.0
 const qreal  PIHALF    = M_PI / 2.0;
 
 
-GridMap::GridMap()
+GridMap::GridMap( MarbleModel *model )
+    : m_model( model ),
+      m_pen( QPen( QColor( 255, 255, 255, 128) ) ), 
+      m_lastVisible( false ),
+      m_currentlyVisible( false )
 {
-    //	Initialising booleans for horizoncrossing
-    m_lastVisible      = false;
-    m_currentlyVisible = false;
-
-    m_pen = QPen(QColor( 255, 255, 255, 128));
 }
 
 GridMap::~GridMap()
@@ -55,9 +58,13 @@ void GridMap::createTropics( ViewportParams* viewport )
     clear();
     viewport->planetAxis().inverse().toMatrix( m_planetAxisMatrix );
 
+
+    GeoSceneDocument *mapTheme = m_model->mapTheme();
+    QString target = mapTheme->head()->target();
+
     // Turn on the major circles of latitude if we've zoomed in far
     // enough (radius > 400 pixels)
-    if ( viewport->radius() >  400 ) {
+    if ( target == "earth" && viewport->radius() >  400 ) {
         int  precision = getPrecision( viewport );
 
         // Arctic Circle

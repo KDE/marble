@@ -145,7 +145,7 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_texmapper = 0;
     d->m_veccomposer = new VectorComposer();
 
-    d->m_gridmap      = new GridMap();
+    d->m_gridmap      = new GridMap( this );
     d->m_texcolorizer = new TextureColorizer( MarbleDirs::path( "seacolors.leg" ),
                                               MarbleDirs::path( "landcolors.leg" ) );
 
