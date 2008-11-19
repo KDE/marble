@@ -85,10 +85,12 @@ bool MarbleOverviewMap::needsUpdate( ViewportParams *viewport )
     GeoDataLatLonAltBox latLonAltBox = viewport->currentProjection()->latLonAltBox( QRect( QPoint( 0, 0 ), viewport->size() ), viewport );
     qreal centerLon, centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
+    QString target = dataFacade()->target();
 
     if ( m_latLonAltBox == latLonAltBox 
 	&& m_centerLon == centerLon
-	&& m_centerLat == centerLat ) {
+	&& m_centerLat == centerLat 
+    && m_target == target ) {
         return false;
     }
     m_latLonAltBox = latLonAltBox;
