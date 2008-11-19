@@ -66,6 +66,8 @@ class MARBLE_EXPORT MarbleDataFacade
 
     QDateTime dateTime() const;
 
+    QString target() const;
+
     MarbleGeoDataModel* geoDataModel();
     
     QAbstractItemModel* renderModel();

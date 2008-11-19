@@ -21,8 +21,12 @@
 #include "global.h"
 #include "MarbleModel.h"
 #include "MarbleGeoDataModel.h"
+
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
+
+#include "GeoSceneDocument.h"
+#include "GeoSceneHead.h"
 
 namespace Marble
 {
@@ -63,6 +67,17 @@ qreal MarbleDataFacade::planetRadius() const
 QDateTime MarbleDataFacade::dateTime() const
 {
     return d->m_model->dateTime()->datetime();
+}
+
+QString MarbleDataFacade::target() const
+{
+    GeoSceneDocument *mapTheme = d->m_model->mapTheme();
+    if ( mapTheme )
+    {
+        return mapTheme->head()->target();
+    }
+
+    return QString();
 }
 
 MarbleGeoDataModel* MarbleDataFacade::geoDataModel()

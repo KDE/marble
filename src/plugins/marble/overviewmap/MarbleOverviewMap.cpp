@@ -17,6 +17,8 @@
 
 #include "AbstractProjection.h"
 #include "MarbleDirs.h"
+#include "MarbleDataFacade.h"
+
 #include "GeoPainter.h"
 #include "GeoDataPoint.h"
 #include "ViewportParams.h"
@@ -27,10 +29,10 @@ namespace Marble
 {
 
 MarbleOverviewMap::MarbleOverviewMap( const QPointF &point, const QSizeF &size )
-    : MarbleAbstractFloatItem( point, size )
+    : MarbleAbstractFloatItem( point, size ),
+      m_target(QString()),
+      m_svgobj(0)
 {
-    m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/worldmap.svg" ),
-                                 this );
 }
 
 MarbleOverviewMap::~MarbleOverviewMap()
@@ -105,8 +107,16 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
 
     QRectF mapRect( contentRect() );
 
+    QString target = dataFacade()->target();
+
+    if ( target != m_target ) {
+        changeBackground( target );
+    }
+
     // Rerender worldmap pixmap if the size has changed
-    if ( m_worldmap.size() != mapRect.size().toSize() ) {
+    if (    m_worldmap.size() != mapRect.size().toSize() 
+         || target != m_target ) {
+
         m_worldmap = QPixmap( mapRect.size().toSize() );
         m_worldmap.fill( Qt::transparent );
         QPainter mapPainter;
@@ -114,7 +124,10 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
         mapPainter.setViewport( m_worldmap.rect() );
         m_svgobj->render( &mapPainter );
         mapPainter.end(); 
+
+        m_target = target;
     }
+
     painter->drawPixmap( QPoint( 0, 0 ), m_worldmap );
 
     // Now draw the latitude longitude bounding box
@@ -224,6 +237,20 @@ bool MarbleOverviewMap::eventFilter( QObject *object, QEvent *e )
     }
 
     return MarbleAbstractFloatItem::eventFilter(object,e);
+}
+
+void MarbleOverviewMap::changeBackground( const QString& target ) {
+
+    delete m_svgobj;
+
+    if ( target == "moon" ) {
+        m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/lunarmap.svg" ),
+                                    this );        
+        return;
+    }
+
+    m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/worldmap.svg" ),
+                                 this );
 }
 
 }

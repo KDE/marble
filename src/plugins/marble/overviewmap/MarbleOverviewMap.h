@@ -65,6 +65,9 @@ class MarbleOverviewMap : public MarbleAbstractFloatItem
     bool eventFilter( QObject *object, QEvent *e );
 
  private:
+    void changeBackground( const QString& target );
+
+    QString m_target;
     QSvgRenderer  *m_svgobj;
     QPixmap        m_worldmap;
 
