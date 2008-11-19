@@ -208,7 +208,7 @@
         <name>Aldrin</name> 
         <role>c</role> 
         <pop>3000</pop> 
-        <description>Edwin Eugene, Jr. (\&quot;Buzz\&quot;); American astronaut (1930-Live).</description> 
+        <description>Edwin Eugene, Jr. (\Buzz\); American astronaut (1930-Live).</description> 
         <Point>
             <coordinates>22.1,1.4</coordinates> 
         </Point> 
@@ -5779,7 +5779,7 @@
         <name>Grissom</name> 
         <role>c</role> 
         <pop>58000</pop> 
-        <description>Virgil Ivan (\&quot;Gus\&quot;); American astronaut (1926-1967).</description> 
+        <description>Virgil Ivan (\Gus\); American astronaut (1926-1967).</description> 
         <Point>
             <coordinates>-147.4,-47</coordinates> 
         </Point> 
@@ -7849,7 +7849,7 @@
         <name>Lacus Aestatis</name> 
         <role>a</role> 
         <pop>90000</pop> 
-        <description>\&quot;Lake of Summer.\&quot;</description> 
+        <description>\Lake of Summer.\</description> 
         <Point>
             <coordinates>-69,-15</coordinates> 
         </Point> 
@@ -7858,7 +7858,7 @@
         <name>Lacus Autumni</name> 
         <role>a</role> 
         <pop>183000</pop> 
-        <description>\&quot;Lake of Autumn.\&quot;</description> 
+        <description>\Lake of Autumn.\</description> 
         <Point>
             <coordinates>-83.9,-9.9</coordinates> 
         </Point> 
@@ -7867,7 +7867,7 @@
         <name>Lacus Bonitatis</name> 
         <role>a</role> 
         <pop>92000</pop> 
-        <description>\&quot;Lake of Goodness.\&quot;</description> 
+        <description>\Lake of Goodness.\</description> 
         <Point>
             <coordinates>43.7,23.2</coordinates> 
         </Point> 
@@ -7876,7 +7876,7 @@
         <name>Lacus Doloris</name> 
         <role>a</role> 
         <pop>110000</pop> 
-        <description>\&quot;Lake of Sorrow.\&quot;</description> 
+        <description>\Lake of Sorrow.\</description> 
         <Point>
             <coordinates>9,17.1</coordinates> 
         </Point> 
@@ -7885,7 +7885,7 @@
         <name>Lacus Excellentiae</name> 
         <role>a</role> 
         <pop>184000</pop> 
-        <description>\&quot;Lake of Excellence.\&quot;</description> 
+        <description>\Lake of Excellence.\</description> 
         <Point>
             <coordinates>-44,-35.4</coordinates> 
         </Point> 
@@ -7894,7 +7894,7 @@
         <name>Lacus Felicitatis</name> 
         <role>a</role> 
         <pop>90000</pop> 
-        <description>\&quot;Lake of Happiness.\&quot;</description> 
+        <description>\Lake of Happiness.\</description> 
         <Point>
             <coordinates>5,19</coordinates> 
         </Point> 
@@ -7903,7 +7903,7 @@
         <name>Lacus Gaudii</name> 
         <role>a</role> 
         <pop>113000</pop> 
-        <description>\&quot;Lake of Joy.\&quot;</description> 
+        <description>\Lake of Joy.\</description> 
         <Point>
             <coordinates>12.6,16.2</coordinates> 
         </Point> 
@@ -7912,7 +7912,7 @@
         <name>Lacus Hiemalis</name> 
         <role>a</role> 
         <pop>50000</pop> 
-        <description>\&quot;Wintry Lake.\&quot;</description> 
+        <description>\Wintry Lake.\</description> 
         <Point>
             <coordinates>14,15</coordinates> 
         </Point> 
@@ -7921,7 +7921,7 @@
         <name>Lacus Lenitatis</name> 
         <role>a</role> 
         <pop>80000</pop> 
-        <description>\&quot;Lake of Softness.\&quot;</description> 
+        <description>\Lake of Softness.\</description> 
         <Point>
             <coordinates>12,14</coordinates> 
         </Point> 
@@ -7930,7 +7930,7 @@
         <name>Lacus Luxuriae</name> 
         <role>a</role> 
         <pop>50000</pop> 
-        <description>\&quot;Lake of Luxury.\&quot;</description> 
+        <description>\Lake of Luxury.\</description> 
         <Point>
             <coordinates>176,19</coordinates> 
         </Point> 
@@ -7939,7 +7939,7 @@
         <name>Lacus Mortis</name> 
         <role>a</role> 
         <pop>151000</pop> 
-        <description>\&quot;Lake of Death.\&quot;</description> 
+        <description>\Lake of Death.\</description> 
         <Point>
             <coordinates>27.2,45</coordinates> 
         </Point> 
@@ -7948,7 +7948,7 @@
         <name>Lacus Oblivionis</name> 
         <role>a</role> 
         <pop>50000</pop> 
-        <description>\&quot;Lake of Forgetfulness.\&quot;</description> 
+        <description>\Lake of Forgetfulness.\</description> 
         <Point>
             <coordinates>-168,-21</coordinates> 
         </Point> 
@@ -7957,7 +7957,7 @@
         <name>Lacus Odii</name> 
         <role>a</role> 
         <pop>70000</pop> 
-        <description>\&quot;Lake of Hatred.\&quot;</description> 
+        <description>\Lake of Hatred.\</description> 
         <Point>
             <coordinates>7,19</coordinates> 
         </Point> 
@@ -7966,7 +7966,7 @@
         <name>Lacus Perseverantiae</name> 
         <role>a</role> 
         <pop>70000</pop> 
-        <description>\&quot;Lake of Perseverance.\&quot;</description> 
+        <description>\Lake of Perseverance.\</description> 
         <Point>
             <coordinates>62,8</coordinates> 
         </Point> 
@@ -7975,7 +7975,7 @@
         <name>Lacus Solitudinis</name> 
         <role>a</role> 
         <pop>139000</pop> 
-        <description>\&quot;Lake of Solitude.\&quot;</description> 
+        <description>\Lake of Solitude.\</description> 
         <Point>
             <coordinates>104.3,-27.8</coordinates> 
         </Point> 
@@ -7984,7 +7984,7 @@
         <name>Lacus Somniorum</name> 
         <role>a</role> 
         <pop>384000</pop> 
-        <description>\&quot;Lake of Dreams.\&quot;</description> 
+        <description>\Lake of Dreams.\</description> 
         <Point>
             <coordinates>29.2,38</coordinates> 
         </Point> 
@@ -7993,7 +7993,7 @@
         <name>Lacus Spei</name> 
         <role>a</role> 
         <pop>80000</pop> 
-        <description>\&quot;Lake of Hope.\&quot;</description> 
+        <description>\Lake of Hope.\</description> 
         <Point>
             <coordinates>65,43</coordinates> 
         </Point> 
@@ -8002,7 +8002,7 @@
         <name>Lacus Temporis</name> 
         <role>a</role> 
         <pop>117000</pop> 
-        <description>\&quot;Lake of Time.\&quot;</description> 
+        <description>\Lake of Time.\</description> 
         <Point>
             <coordinates>58.4,45.9</coordinates> 
         </Point> 
@@ -8011,7 +8011,7 @@
         <name>Lacus Timoris</name> 
         <role>a</role> 
         <pop>117000</pop> 
-        <description>\&quot;Lake of Fear.\&quot;</description> 
+        <description>\Lake of Fear.\</description> 
         <Point>
             <coordinates>-27.3,-38.8</coordinates> 
         </Point> 
@@ -8020,7 +8020,7 @@
         <name>Lacus Veris</name> 
         <role>a</role> 
         <pop>396000</pop> 
-        <description>\&quot;Lake of Spring.\&quot;</description> 
+        <description>\Lake of Spring.\</description> 
         <Point>
             <coordinates>-86.1,-16.5</coordinates> 
         </Point> 
@@ -9127,7 +9127,7 @@
         <name>Mare Anguis</name> 
         <role>a</role> 
         <pop>150000</pop> 
-        <description>\&quot;Serpent Sea.\&quot;</description> 
+        <description>\Serpent Sea.\</description> 
         <Point>
             <coordinates>67.7,22.6</coordinates> 
         </Point> 
@@ -9136,7 +9136,7 @@
         <name>Mare Australe</name> 
         <role>a</role> 
         <pop>603000</pop> 
-        <description>\&quot;Southern Sea.\&quot;</description> 
+        <description>\Southern Sea.\</description> 
         <Point>
             <coordinates>93,-38.9</coordinates> 
         </Point> 
@@ -9145,7 +9145,7 @@
         <name>Mare Cognitum</name> 
         <role>a</role> 
         <pop>376000</pop> 
-        <description>\&quot;Sea that has become known.\&quot; Ranger VII impact site. </description> 
+        <description>\Sea that has become known.\ Ranger VII impact site. </description> 
         <Point>
             <coordinates>-23.1,-10</coordinates> 
         </Point> 
@@ -9154,7 +9154,7 @@
         <name>Mare Crisium</name> 
         <role>a</role> 
         <pop>418000</pop> 
-        <description>\&quot;Sea of Crises.\&quot;</description> 
+        <description>\Sea of Crises.\</description> 
         <Point>
             <coordinates>59.1,17</coordinates> 
         </Point> 
@@ -9163,7 +9163,7 @@
         <name>Mare Fecunditatis</name> 
         <role>a</role> 
         <pop>909000</pop> 
-        <description>\&quot;Sea of Fecundity.\&quot;</description> 
+        <description>\Sea of Fecundity.\</description> 
         <Point>
             <coordinates>51.3,-7.8</coordinates> 
         </Point> 
@@ -9172,7 +9172,7 @@
         <name>Mare Frigoris</name> 
         <role>a</role> 
         <pop>0</pop> 
-        <description>\&quot;Sea of Cold.\&quot;</description> 
+        <description>\Sea of Cold.\</description> 
         <Point>
             <coordinates>1.4,56</coordinates> 
         </Point> 
@@ -9190,7 +9190,7 @@
         <name>Mare Humorum</name> 
         <role>a</role> 
         <pop>389000</pop> 
-        <description>\&quot;Sea of Moisture.\&quot;</description> 
+        <description>\Sea of Moisture.\</description> 
         <Point>
             <coordinates>-38.6,-24.4</coordinates> 
         </Point> 
@@ -9199,7 +9199,7 @@
         <name>Mare Imbrium</name> 
         <role>a</role> 
         <pop>0</pop> 
-        <description>\&quot;Sea of Showers.\&quot;</description> 
+        <description>\Sea of Showers.\</description> 
         <Point>
             <coordinates>-15.6,32.8</coordinates> 
         </Point> 
@@ -9208,7 +9208,7 @@
         <name>Mare Ingenii</name> 
         <role>a</role> 
         <pop>318000</pop> 
-        <description>\&quot;Sea of Cleverness.\&quot;</description> 
+        <description>\Sea of Cleverness.\</description> 
         <Point>
             <coordinates>163.5,-33.7</coordinates> 
         </Point> 
@@ -9217,7 +9217,7 @@
         <name>Mare Insularum</name> 
         <role>a</role> 
         <pop>513000</pop> 
-        <description>\&quot;Sea of Islands.\&quot;</description> 
+        <description>\Sea of Islands.\</description> 
         <Point>
             <coordinates>-30.9,7.5</coordinates> 
         </Point> 
@@ -9226,7 +9226,7 @@
         <name>Mare Marginis</name> 
         <role>a</role> 
         <pop>420000</pop> 
-        <description>\&quot;Sea of the Edge.\&quot;</description> 
+        <description>\Sea of the Edge.\</description> 
         <Point>
             <coordinates>86.1,13.3</coordinates> 
         </Point> 
@@ -9235,7 +9235,7 @@
         <name>Mare Moscoviense</name> 
         <role>a</role> 
         <pop>277000</pop> 
-        <description>\&quot;Sea of Muscovy.\&quot;</description> 
+        <description>\Sea of Muscovy.\</description> 
         <Point>
             <coordinates>147.9,27.3</coordinates> 
         </Point> 
@@ -9244,7 +9244,7 @@
         <name>Mare Nectaris</name> 
         <role>a</role> 
         <pop>333000</pop> 
-        <description>\&quot;Sea of Nectar.\&quot;</description> 
+        <description>\Sea of Nectar.\</description> 
         <Point>
             <coordinates>35.5,-15.2</coordinates> 
         </Point> 
@@ -9253,7 +9253,7 @@
         <name>Mare Nubium</name> 
         <role>a</role> 
         <pop>715000</pop> 
-        <description>\&quot;Sea of Clouds.\&quot;</description> 
+        <description>\Sea of Clouds.\</description> 
         <Point>
             <coordinates>-16.6,-21.3</coordinates> 
         </Point> 
@@ -9262,7 +9262,7 @@
         <name>Mare Orientale</name> 
         <role>a</role> 
         <pop>327000</pop> 
-        <description>\&quot;Eastern sea.\&quot;</description> 
+        <description>\Eastern sea.\</description> 
         <Point>
             <coordinates>-92.8,-19.4</coordinates> 
         </Point> 
@@ -9271,7 +9271,7 @@
         <name>Mare Serenitatis</name> 
         <role>a</role> 
         <pop>707000</pop> 
-        <description>\&quot;Sea of Serenity.\&quot;</description> 
+        <description>\Sea of Serenity.\</description> 
         <Point>
             <coordinates>17.5,28</coordinates> 
         </Point> 
@@ -9289,7 +9289,7 @@
         <name>Mare Spumans</name> 
         <role>a</role> 
         <pop>139000</pop> 
-        <description>\&quot;Foaming Sea.\&quot;</description> 
+        <description>\Foaming Sea.\</description> 
         <Point>
             <coordinates>65.1,1.1</coordinates> 
         </Point> 
@@ -9298,7 +9298,7 @@
         <name>Mare Tranquillitatis</name> 
         <role>a</role> 
         <pop>873000</pop> 
-        <description>\&quot;Sea of Tranquility.\&quot;</description> 
+        <description>\Sea of Tranquility.\</description> 
         <Point>
             <coordinates>31.4,8.5</coordinates> 
         </Point> 
@@ -9307,7 +9307,7 @@
         <name>Mare Undarum</name> 
         <role>a</role> 
         <pop>243000</pop> 
-        <description>\&quot;Sea of Waves.\&quot;</description> 
+        <description>\Sea of Waves.\</description> 
         <Point>
             <coordinates>68.4,6.8</coordinates> 
         </Point> 
@@ -9316,7 +9316,7 @@
         <name>Mare Vaporum</name> 
         <role>a</role> 
         <pop>245000</pop> 
-        <description>\&quot;Sea of Vapors.\&quot;</description> 
+        <description>\Sea of Vapors.\</description> 
         <Point>
             <coordinates>3.6,13.3</coordinates> 
         </Point> 
@@ -10099,7 +10099,7 @@
         <name>Mons Pico</name> 
         <role>m</role> 
         <pop>25000</pop> 
-        <description>Spanish for \&quot;peak.\&quot;</description> 
+        <description>Spanish for \peak.\</description> 
         <Point>
             <coordinates>-8.9,45.7</coordinates> 
         </Point> 
@@ -10234,7 +10234,7 @@
         <name>Montes Cordillera</name> 
         <role>m</role> 
         <pop>574000</pop> 
-        <description>Spanish for \&quot;mountain chain.\&quot;</description> 
+        <description>Spanish for \mountain chain.\</description> 
         <Point>
             <coordinates>-81.6,-17.5</coordinates> 
         </Point> 
@@ -10279,7 +10279,7 @@
         <name>Montes Recti</name> 
         <role>m</role> 
         <pop>90000</pop> 
-        <description>Latin for \&quot;straight range.\&quot;</description> 
+        <description>Latin for \straight range.\</description> 
         <Point>
             <coordinates>-20,48</coordinates> 
         </Point> 
@@ -10315,7 +10315,7 @@
         <name>Montes Spitzbergen</name> 
         <role>m</role> 
         <pop>60000</pop> 
-        <description>German for \&quot;sharp peaks\&quot;, and named for resemblance to the terrestrial island group.</description> 
+        <description>German for \sharp peaks\, and named for resemblance to the terrestrial island group.</description> 
         <Point>
             <coordinates>-5,35</coordinates> 
         </Point> 
@@ -10864,7 +10864,7 @@
         <name>Oceanus Procellarum</name> 
         <role>a</role> 
         <pop>0</pop> 
-        <description>\&quot;Ocean of Storms.\&quot;</description> 
+        <description>\Ocean of Storms.\</description> 
         <Point>
             <coordinates>-57.4,18.4</coordinates> 
         </Point> 
@@ -11107,7 +11107,7 @@
         <name>Palus Epidemiarum</name> 
         <role>o</role> 
         <pop>286000</pop> 
-        <description>\&quot;Marsh of Epidemics.\&quot;</description> 
+        <description>\Marsh of Epidemics.\</description> 
         <Point>
             <coordinates>-28.2,-32</coordinates> 
         </Point> 
@@ -11116,7 +11116,7 @@
         <name>Palus Putredinis</name> 
         <role>o</role> 
         <pop>161000</pop> 
-        <description>\&quot;Marsh of Decay.\&quot;</description> 
+        <description>\Marsh of Decay.\</description> 
         <Point>
             <coordinates>0.4,26.5</coordinates> 
         </Point> 
@@ -11125,7 +11125,7 @@
         <name>Palus Somni</name> 
         <role>o</role> 
         <pop>143000</pop> 
-        <description>\&quot;Marsh of Sleep.\&quot;</description> 
+        <description>\Marsh of Sleep.\</description> 
         <Point>
             <coordinates>45,14.1</coordinates> 
         </Point> 
@@ -11215,7 +11215,7 @@
         <name>Parsons</name> 
         <role>c</role> 
         <pop>40000</pop> 
-        <description>John \&quot;Jack\&quot; Whiteside; American rocketry scientist (1914-1952).</description> 
+        <description>John \Jack\ Whiteside; American rocketry scientist (1914-1952).</description> 
         <Point>
             <coordinates>-171.2,37.3</coordinates> 
         </Point> 
@@ -11638,7 +11638,7 @@
         <name>Planitia Descensus</name> 
         <role>o</role> 
         <pop>0</pop> 
-        <description>Luna 9 landing site (\&quot;plain of descent\&quot;).</description> 
+        <description>Luna 9 landing site (\plain of descent\).</description> 
         <Point>
             <coordinates>-64.4,7.1</coordinates> 
         </Point> 
@@ -13663,7 +13663,7 @@
         <name>Rupes Recta</name> 
         <role>o</role> 
         <pop>134000</pop> 
-        <description>Latin for \&quot;straight cliff\&quot; (the straight wall).</description> 
+        <description>Latin for \straight cliff\ (the straight wall).</description> 
         <Point>
             <coordinates>-7.8,-22.1</coordinates> 
         </Point> 
@@ -14113,7 +14113,7 @@
         <name>Scobee</name> 
         <role>c</role> 
         <pop>40000</pop> 
-        <description>Francis Richard \&quot;Dick\&quot;; member of the Challenger crew (1939-1986).  &lt;em&gt;Note: Formerly Barringer L&lt;/em&gt;</description> 
+        <description>Francis Richard \Dick\; member of the Challenger crew (1939-1986).  &lt;em&gt;Note: Formerly Barringer L&lt;/em&gt;</description> 
         <Point>
             <coordinates>-148.9,-31.1</coordinates> 
         </Point> 
@@ -14482,7 +14482,7 @@
         <name>Sinus Aestuum</name> 
         <role>a</role> 
         <pop>290000</pop> 
-        <description>\&quot;Seething Bay.\&quot;</description> 
+        <description>\Seething Bay.\</description> 
         <Point>
             <coordinates>-8.8,10.9</coordinates> 
         </Point> 
@@ -14491,7 +14491,7 @@
         <name>Sinus Amoris</name> 
         <role>a</role> 
         <pop>130000</pop> 
-        <description>\&quot;Bay of Love.\&quot;</description> 
+        <description>\Bay of Love.\</description> 
         <Point>
             <coordinates>39.1,18.1</coordinates> 
         </Point> 
@@ -14500,7 +14500,7 @@
         <name>Sinus Asperitatis</name> 
         <role>a</role> 
         <pop>206000</pop> 
-        <description>\&quot;Bay of Roughness.\&quot;</description> 
+        <description>\Bay of Roughness.\</description> 
         <Point>
             <coordinates>27.4,-3.8</coordinates> 
         </Point> 
@@ -14509,7 +14509,7 @@
         <name>Sinus Concordiae</name> 
         <role>a</role> 
         <pop>142000</pop> 
-        <description>\&quot;Bay of Harmony.\&quot;</description> 
+        <description>\Bay of Harmony.\</description> 
         <Point>
             <coordinates>43.2,10.8</coordinates> 
         </Point> 
@@ -14518,7 +14518,7 @@
         <name>Sinus Fidei</name> 
         <role>a</role> 
         <pop>70000</pop> 
-        <description>\&quot;Bay of Trust.\&quot;</description> 
+        <description>\Bay of Trust.\</description> 
         <Point>
             <coordinates>2,18</coordinates> 
         </Point> 
@@ -14527,7 +14527,7 @@
         <name>Sinus Honoris</name> 
         <role>a</role> 
         <pop>109000</pop> 
-        <description>\&quot;Bay of Honor.\&quot;</description> 
+        <description>\Bay of Honor.\</description> 
         <Point>
             <coordinates>18.1,11.7</coordinates> 
         </Point> 
@@ -14536,7 +14536,7 @@
         <name>Sinus Iridum</name> 
         <role>a</role> 
         <pop>236000</pop> 
-        <description>\&quot;Bay of Rainbows.\&quot;</description> 
+        <description>\Bay of Rainbows.\</description> 
         <Point>
             <coordinates>-31.5,44.1</coordinates> 
         </Point> 
@@ -14545,7 +14545,7 @@
         <name>Sinus Lunicus</name> 
         <role>a</role> 
         <pop>126000</pop> 
-        <description>\&quot;Lunik Bay\&quot;-landing area of Luna (Lunik) 2.</description> 
+        <description>\Lunik Bay\-landing area of Luna (Lunik) 2.</description> 
         <Point>
             <coordinates>-1.4,31.8</coordinates> 
         </Point> 
@@ -14554,7 +14554,7 @@
         <name>Sinus Medii</name> 
         <role>a</role> 
         <pop>335000</pop> 
-        <description>\&quot;Bay of the center.\&quot;</description> 
+        <description>\Bay of the center.\</description> 
         <Point>
             <coordinates>1.7,2.4</coordinates> 
         </Point> 
@@ -14563,7 +14563,7 @@
         <name>Sinus Roris</name> 
         <role>a</role> 
         <pop>202000</pop> 
-        <description>\&quot;Bay of Dew.\&quot;</description> 
+        <description>\Bay of Dew.\</description> 
         <Point>
             <coordinates>-56.6,54</coordinates> 
         </Point> 
@@ -14572,7 +14572,7 @@
         <name>Sinus Successus</name> 
         <role>a</role> 
         <pop>132000</pop> 
-        <description>\&quot;Bay of Success.\&quot;</description> 
+        <description>\Bay of Success.\</description> 
         <Point>
             <coordinates>59,0.9</coordinates> 
         </Point> 
@@ -14878,7 +14878,7 @@
         <name>Statio Tranquillitatis</name> 
         <role>o</role> 
         <pop>0</pop> 
-        <description>\&quot;Tranquility Base,\&quot; Apollo 11 landing site.</description> 
+        <description>\Tranquility Base,\ Apollo 11 landing site.</description> 
         <Point>
             <coordinates>23.5,0.8</coordinates> 
         </Point> 
@@ -15832,7 +15832,7 @@
         <name>Vallis Alpes</name> 
         <role>v</role> 
         <pop>166000</pop> 
-        <description>\&quot;Alpine Valley.\&quot;</description> 
+        <description>\Alpine Valley.\</description> 
         <Point>
             <coordinates>3.2,48.5</coordinates> 
         </Point> 
