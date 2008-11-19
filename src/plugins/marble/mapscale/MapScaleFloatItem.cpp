@@ -26,6 +26,7 @@ namespace Marble
 MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
     : MarbleAbstractFloatItem( point, size ),
       m_radius(0),
+      m_target(QString()),
       m_invScale(0.0),
       m_leftBarMargin(0),
       m_rightBarMargin(0),
@@ -88,7 +89,10 @@ bool MapScaleFloatItem::needsUpdate( ViewportParams *viewport )
 {
     int viewportWidth = viewport->width();
 
-    if ( m_radius == viewport->radius() && viewportWidth == m_viewportWidth && m_scaleInitDone )
+    QString target = dataFacade()->target();
+
+    if (    m_radius == viewport->radius() && viewportWidth == m_viewportWidth 
+         && m_target == target && m_scaleInitDone )
     {
         return false;
     }

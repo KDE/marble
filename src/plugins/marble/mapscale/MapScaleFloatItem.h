@@ -61,6 +61,8 @@ class MapScaleFloatItem : public MarbleAbstractFloatItem
     int      m_radius;
     int      m_invScale;
 
+    QString  m_target;
+
     int      m_leftBarMargin;
     int      m_rightBarMargin;
     int      m_scaleBarWidth;

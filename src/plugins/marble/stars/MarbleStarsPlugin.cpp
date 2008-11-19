@@ -111,6 +111,13 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 				const QString& renderPos,
 				GeoSceneLayer * layer )
 {
+    QString target = dataFacade()->target();
+
+    // So far this starry sky plugin only supports displaying stars on earth.
+    if ( target != "earth" ) {
+        return true;
+    }
+
     painter->autoMapQuality();
 
     QPen starPen( Qt::NoPen );
