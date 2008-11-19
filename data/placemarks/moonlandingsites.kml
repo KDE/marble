@@ -242,8 +242,8 @@
 
     <!--- Indian Moon Missions -->
     <MarblePlacemark> 
-        <name>MIP/Chandrayaan 1</name> 
-        <description><![CDATA[14.11.2008: First successful impact of an Indian lunar spacecraft.]]></description> 
+        <name>Chandrayaan-1</name> 
+        <description><![CDATA[14.11.2008: Moon Impact Probe (MIP): First successful impact of an Indian lunar spacecraft.]]></description> 
         <role>i</role> 
         <Point>
             <coordinates>16.3,0.00</coordinates> 
