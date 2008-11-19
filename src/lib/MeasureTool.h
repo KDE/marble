@@ -27,6 +27,7 @@
 namespace Marble
 {
 
+class MarbleModel;
 class GeoDataCoordinates;
 class GeoPainter;
 class Quaternion;
@@ -37,7 +38,7 @@ class MeasureTool : public QObject
     Q_OBJECT
 
  public:
-    explicit MeasureTool( QObject *parent = 0 );
+    explicit MeasureTool( MarbleModel *model, QObject *parent = 0 );
 
     void  paint( GeoPainter *painter, ViewportParams *viewport,
                  bool antialiasing );
@@ -63,6 +64,8 @@ class MeasureTool : public QObject
 
     // The list of points in the distance path.
     QVector<GeoDataCoordinates*>  m_pMeasurePointList;
+
+    MarbleModel *m_model;
 
     QFont   m_font_regular;
     int     m_fontheight;

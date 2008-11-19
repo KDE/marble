@@ -24,6 +24,7 @@
 
 // marble
 #include "MarbleMath.h"
+#include "MarbleModel.h"
 #include "AbstractProjection.h"
 #include "GeoPainter.h"
 #include "Quaternion.h"
@@ -33,8 +34,9 @@
 
 using namespace Marble;
 
-MeasureTool::MeasureTool( QObject* parent )
-    : QObject( parent )
+MeasureTool::MeasureTool( MarbleModel *model, QObject* parent )
+    : QObject( parent ),
+      m_model( model )
 {
 #ifdef Q_OS_MACX
     m_font_regular = QFont( "Sans Serif", 10, 50, false );
@@ -83,7 +85,7 @@ void MeasureTool::paint( GeoPainter *painter,
         (*it)->geoCoordinates( lon, lat );
 
         if ( it!= m_pMeasurePointList.constBegin() ) {
-            totalDistance += EARTH_RADIUS * distanceSphere( prevLon, prevLat, lon, lat ); 
+            totalDistance += m_model->planetRadius() * distanceSphere( prevLon, prevLat, lon, lat ); 
 
             drawDistancePath( painter, prevqpos, qpos, viewport );
         }

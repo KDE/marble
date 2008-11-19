@@ -92,7 +92,7 @@ void MarbleMapPrivate::construct()
 
     m_justModified = false;
 
-    m_measureTool = new MeasureTool( m_parent );
+    m_measureTool = new MeasureTool( m_model, m_parent );
 
     m_parent->connect( m_model, SIGNAL( timeout() ),
                        m_parent, SLOT( updateGps() ) );
