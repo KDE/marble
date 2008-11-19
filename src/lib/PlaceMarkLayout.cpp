@@ -214,12 +214,17 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
     int x = 0;
     int y = 0;
 
+    // earth
     bool showPlaces, showCities, showTerrain, showOtherPlaces;
+    
+    // other planets
+    bool showLandingSites;
 
     viewParams->propertyValue( "places", showPlaces );
     viewParams->propertyValue( "cities", showCities );
     viewParams->propertyValue( "terrain", showTerrain );
     viewParams->propertyValue( "otherplaces", showOtherPlaces );
+    viewParams->propertyValue( "landingsites", showLandingSites );
 
     GeoDataLatLonAltBox latLonAltBox = viewParams->viewport()->viewLatLonAltBox();
 
@@ -361,6 +366,12 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
 
         if ( !showOtherPlaces
              && ( visualCategory >= 24 && visualCategory <= 27 ) )
+            continue;
+
+        // Skip terrain marks if we're not showing terrain.
+        if ( !showLandingSites
+             && (    visualCategory >= (int)(GeoDataFeature::MannedLandingSite) ) 
+                  && visualCategory <= (int)(GeoDataFeature::UnmannedHardLandingSite) )
             continue;
 
 
