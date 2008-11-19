@@ -189,6 +189,14 @@ void GeoDataFeature::initializeDefaultStyles()
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/volcano_1.png" ) ), 
               QFont( defaultFamily, (int)(defaultSize * 0.9 ), 50, false ), QColor( Qt::black ) );
 
+    s_defaultStyle[Mons]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/mountain_1.png" ) ), 
+              QFont( defaultFamily, (int)(defaultSize * 0.9 ), 50, false ), QColor( Qt::black ) );
+
+    s_defaultStyle[Valley]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/valley.png" ) ), 
+              QFont( defaultFamily, (int)(defaultSize * 0.9 ), 50, false ), QColor( Qt::black ) );
+
     s_defaultStyle[Continent]
         = new GeoDataStyle( QPixmap(), 
               QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, false ), QColor( "#bf0303" ) );
@@ -200,6 +208,20 @@ void GeoDataFeature::initializeDefaultStyles()
               QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, true ), QColor( "#2c72c7" ) );
     // Align area labels centered
     s_defaultStyle[Ocean] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
+
+    s_defaultStyle[OtherTerrain]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/other.png" ) ), 
+              QFont( defaultFamily, (int)(defaultSize * 0.9 ), 50, false ), QColor( Qt::black ) );
+
+    s_defaultStyle[Crater]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/crater.png" ) ), 
+              QFont( defaultFamily, (int)(defaultSize * 0.9 ), 50, false ), QColor( Qt::black ) );
+
+    s_defaultStyle[Mare]
+        = new GeoDataStyle( QPixmap(), 
+              QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, false ), QColor( "#bf0303" ) );
+    // Align area labels centered
+    s_defaultStyle[Mare] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
 
     s_defaultStyle[GeographicPole]
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/pole_1.png" ) ), 
@@ -259,6 +281,13 @@ void GeoDataFeature::initializeDefaultStyles()
     tmp.setCapitalization( QFont::SmallCaps );
     tmp.setBold( true );
     s_defaultStyle[Continent] -> labelStyle()-> setFont( tmp );
+
+    // Fonts for areas ...
+    tmp = s_defaultStyle[Mare] -> labelStyle()-> font();
+    tmp.setLetterSpacing( QFont::AbsoluteSpacing, 2 );
+    tmp.setCapitalization( QFont::SmallCaps );
+    tmp.setBold( true );
+    s_defaultStyle[Mare] -> labelStyle()-> setFont( tmp );
 #endif
 
     // Now we need to underline the capitals ...

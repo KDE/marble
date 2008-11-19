@@ -216,15 +216,18 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
 
     // earth
     bool showPlaces, showCities, showTerrain, showOtherPlaces;
-    
-    // other planets
-    bool showLandingSites;
 
     viewParams->propertyValue( "places", showPlaces );
     viewParams->propertyValue( "cities", showCities );
     viewParams->propertyValue( "terrain", showTerrain );
     viewParams->propertyValue( "otherplaces", showOtherPlaces );
+    
+    // other planets
+    bool showLandingSites, showCraters, showMaria;
+
     viewParams->propertyValue( "landingsites", showLandingSites );
+    viewParams->propertyValue( "craters", showCraters );
+    viewParams->propertyValue( "maria", showMaria );
 
     GeoDataLatLonAltBox latLonAltBox = viewParams->viewport()->viewLatLonAltBox();
 
@@ -361,19 +364,31 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
 
         // Skip terrain marks if we're not showing terrain.
         if ( !showTerrain
-             && ( visualCategory >= 20 && visualCategory <= 23 ) )
+             && (    visualCategory >= (int)(GeoDataFeature::Mountain) ) 
+                  && visualCategory <= (int)(GeoDataFeature::OtherTerrain) )
             continue;
 
+        // Skip other places if we're not showing other places.
         if ( !showOtherPlaces
-             && ( visualCategory >= 24 && visualCategory <= 27 ) )
+             && (    visualCategory >= (int)(GeoDataFeature::GeographicPole) ) 
+                  && visualCategory <= (int)(GeoDataFeature::AirPort) )
             continue;
 
-        // Skip terrain marks if we're not showing terrain.
+        // Skip landing sites if we're not showing landing sites.
         if ( !showLandingSites
              && (    visualCategory >= (int)(GeoDataFeature::MannedLandingSite) ) 
                   && visualCategory <= (int)(GeoDataFeature::UnmannedHardLandingSite) )
             continue;
 
+        // Skip craters if we're not showing craters.
+        if ( !showCraters
+             && (    visualCategory == (int)(GeoDataFeature::Crater) ) )
+            continue;
+
+        // Skip maria if we're not showing maria.
+        if ( !showMaria
+             && (    visualCategory == (int)(GeoDataFeature::Mare) ) )
+            continue;
 
         const bool isSelected = selection.contains( index );
 

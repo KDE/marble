@@ -83,9 +83,16 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         // Terrain
         Mountain,
         Volcano,
+        Mons,                    // m
+        Valley,                  // v
         Continent,
         Ocean,
+        OtherTerrain,            // o
 
+        // Space Terrain
+        Crater,                  // c
+        Mare,                    // a
+        
         // Places of Interest
         GeographicPole,
         MagneticPole,
@@ -103,30 +110,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         UnmannedSoftLandingSite, // u
         UnmannedHardLandingSite, // i
 
-/*
-        Crater,                 // c
-        Mare,                   // m
-        Valley,                 // v
-        PlanetaryFeature        // v
-*/ 
-/*
-        Catena,     // a
-        Crater,     // c
-        Dorsum,     // d
-        Fossa,      // f
-        Lacus,      // l
-        LandingSite,// n
-        Mare,       // m
-        Mons,       // b
-        Oceanus,    // o
-        Palus,      // p
-        Planitia,   // i
-        Promontorium, // u
-        Rima,       // r
-        Rupes,      // e
-        Sinus,      // s
-        Vallis,     // v
-*/
         // Important: Make sure that this is always the last 
         // item and just use it to specify the array size
         LastIndex

@@ -94,6 +94,7 @@ void PlaceMarkManager::loadStandardPlaceMarks(  const QString& target  )
             addPlaceMarkFile( "boundaryplacemarks" );
         }
         if ( target == "moon" ){
+            addPlaceMarkFile( "moonterrain" );
             addPlaceMarkFile( "moonlandingsites" );
         }
 

@@ -111,17 +111,25 @@ int main(int argc, char *argv[])
 
             if ( roleString == "SF" ) continue;
 
+            QString marbleRoleString = "o";
+
+            if ( roleString == "AA" ) marbleRoleString = "c";
+            if (    roleString == "ME" || roleString == "OC" 
+                 || roleString == "LC" || roleString == "SI" ) marbleRoleString = "a";
+            if ( roleString == "MO" ) marbleRoleString = "m";
+            if ( roleString == "VA" ) marbleRoleString = "v";
+
             population = (int) ( 1000.0 * popString.toFloat() );
 
             lon = lonString.toFloat();
 
             lat = latString.toFloat();
 
-            targetstream << "    <Placemark> \n";
+            targetstream << "    <MarblePlacemark> \n";
             targetstream << "        <name>" << escapeXml( nameString ) << "</name> \n";
-//            targetstream << "        <role>" << escapeXml( roleString ) << "</role> \n";
-//            targetstream << "        <pop>"
-//                         << escapeXml( QString::number( population ) ) << "</pop> \n";
+            targetstream << "        <role>" << escapeXml( marbleRoleString ) << "</role> \n";
+            targetstream << "        <pop>"
+                         << escapeXml( QString::number( population ) ) << "</pop> \n";
             targetstream << "        <description>" << escapeXml( description ) << "</description> \n";
             targetstream << "        <Point>\n"
                          << "            <coordinates>"
@@ -130,7 +138,7 @@ int main(int argc, char *argv[])
                          << escapeXml( QString::number( lat ) )
                          << "</coordinates> \n"
                          << "        </Point> \n";
-            targetstream << "    </Placemark> \n";
+            targetstream << "    </MarblePlacemark> \n";
         }
 
         targetstream << "</Document> \n"
