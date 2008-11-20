@@ -37,7 +37,7 @@ GeoSceneTexture::GeoSceneTexture( const QString& name )
       m_levelZeroRows( defaultLevelZeroRows ),
       m_projection( Equirectangular ),
       m_downloadUrls(),
-      m_nextUrl( m_downloadUrls.end() )
+      m_nextUrl( m_downloadUrls.constEnd() )
 {
 }
 
@@ -121,8 +121,8 @@ QUrl GeoSceneTexture::downloadUrl()
     if ( m_downloadUrls.empty() )
         return QUrl( "http://download.kde.org/apps/marble/" );
 
-    if ( m_nextUrl == m_downloadUrls.end() )
-        m_nextUrl = m_downloadUrls.begin();
+    if ( m_nextUrl == m_downloadUrls.constEnd() )
+        m_nextUrl = m_downloadUrls.constBegin();
 
     QUrl url = *m_nextUrl;
     ++m_nextUrl;
@@ -133,7 +133,7 @@ void GeoSceneTexture::addDownloadUrl( const QUrl & url )
 {
     m_downloadUrls.append( url );
     // FIXME: this could be done only once
-    m_nextUrl = m_downloadUrls.begin();
+    m_nextUrl = m_downloadUrls.constBegin();
 }
 
 QString GeoSceneTexture::type()

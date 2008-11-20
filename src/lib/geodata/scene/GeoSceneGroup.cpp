@@ -40,8 +40,8 @@ GeoSceneGroup::~GeoSceneGroup()
 
 bool GeoSceneGroup::propertyAvailable( const QString& name, bool& available )
 {
-    QVector<GeoSceneProperty*>::const_iterator it = m_properties.begin();
-    for (it = m_properties.begin(); it != m_properties.end(); ++it) {
+    QVector<GeoSceneProperty*>::const_iterator it = m_properties.constBegin();
+    for (it = m_properties.constBegin(); it != m_properties.constEnd(); ++it) {
         if ( (*it)->name() == name ) {
             available = (*it)->available();
             return true;
@@ -55,8 +55,8 @@ bool GeoSceneGroup::propertyAvailable( const QString& name, bool& available )
 
 bool GeoSceneGroup::setPropertyValue( const QString& name, bool value )
 {
-    QVector<GeoSceneProperty*>::const_iterator it = m_properties.begin();
-    for (it = m_properties.begin(); it != m_properties.end(); ++it) {
+    QVector<GeoSceneProperty*>::const_iterator it = m_properties.constBegin();
+    for (it = m_properties.constBegin(); it != m_properties.constEnd(); ++it) {
         if ( (*it)->name() == name ) {
             (*it)->setValue( value );
             return true;
@@ -68,8 +68,8 @@ bool GeoSceneGroup::setPropertyValue( const QString& name, bool value )
 
 bool GeoSceneGroup::propertyValue( const QString& name, bool& value )
 {
-    QVector<GeoSceneProperty*>::const_iterator it = m_properties.begin();
-    for (it = m_properties.begin(); it != m_properties.end(); ++it) {
+    QVector<GeoSceneProperty*>::const_iterator it = m_properties.constBegin();
+    for (it = m_properties.constBegin(); it != m_properties.constEnd(); ++it) {
         if ( (*it)->name() == name ) {
             value = (*it)->value();
             return true;
@@ -110,8 +110,8 @@ GeoSceneProperty* GeoSceneGroup::property( const QString& name )
 {
     GeoSceneProperty* property = 0;
 
-    QVector<GeoSceneProperty*>::const_iterator it = m_properties.begin();
-    for (it = m_properties.begin(); it != m_properties.end(); ++it) {
+    QVector<GeoSceneProperty*>::const_iterator it = m_properties.constBegin();
+    for (it = m_properties.constBegin(); it != m_properties.constEnd(); ++it) {
         if ( (*it)->name() == name )
             property = *it;
     }

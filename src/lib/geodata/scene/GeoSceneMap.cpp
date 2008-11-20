@@ -92,8 +92,8 @@ GeoSceneLayer* GeoSceneMap::layer( const QString& name )
 {
     GeoSceneLayer* layer = 0;
 
-    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.begin();
-    for (it = d->m_layers.begin(); it != d->m_layers.end(); ++it) {
+    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
+    for (it = d->m_layers.constBegin(); it != d->m_layers.constEnd(); ++it) {
         if ( (*it)->name() == name )
             layer = *it;
     }
@@ -138,8 +138,8 @@ GeoSceneFilter* GeoSceneMap::filter( const QString& name )
 {
     GeoSceneFilter* filter = 0;
 
-    QVector<GeoSceneFilter*>::const_iterator it = d->m_filters.begin();
-    for (it = d->m_filters.begin(); it != d->m_filters.end(); ++it) {
+    QVector<GeoSceneFilter*>::const_iterator it = d->m_filters.constBegin();
+    for (it = d->m_filters.constBegin(); it != d->m_filters.constEnd(); ++it) {
         if ( (*it)->name() == name )
             filter = *it;
     }
@@ -162,8 +162,8 @@ QVector<GeoSceneFilter*> GeoSceneMap::filters() const
 
 bool GeoSceneMap::hasTextureLayers() const
 {
-    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.begin();
-    for (it = d->m_layers.begin(); it != d->m_layers.end(); ++it) {
+    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
+    for (it = d->m_layers.constBegin(); it != d->m_layers.constEnd(); ++it) {
         if ( (*it)->backend() == dgmlValue_texture && (*it)->datasets().count() > 0 )
             return true;
     }
@@ -173,8 +173,8 @@ bool GeoSceneMap::hasTextureLayers() const
 
 bool GeoSceneMap::hasVectorLayers() const
 {
-    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.begin();
-    for (it = d->m_layers.begin(); it != d->m_layers.end(); ++it) {
+    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
+    for (it = d->m_layers.constBegin(); it != d->m_layers.constEnd(); ++it) {
         if ( (*it)->backend() == dgmlValue_vector && (*it)->datasets().count() > 0 )
             return true;
     }
