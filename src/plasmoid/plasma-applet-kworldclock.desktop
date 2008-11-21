@@ -38,6 +38,7 @@ Comment[pt]=Mostra a hora em diferentes partes do mundo
 Comment[pt_BR]=Mostra a hora em diferentes partes do mundo
 Comment[sv]=Visar tiden i olika delar av världen
 Comment[uk]=Показує вам час у різних частинах світу
+Comment[zh_TW]=顯示世界上不同地區的時間
 Icon=marble
 Type=Service
 ServiceTypes=Plasma/Applet
