@@ -125,7 +125,7 @@ int main(int argc, char *argv[])
 
             lat = latString.toFloat();
 
-            description = description.remove("\"");
+            description = description.remove('"');
 
             targetstream << "    <MarblePlacemark> \n";
             targetstream << "        <name>" << escapeXml( nameString ) << "</name> \n";
