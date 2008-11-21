@@ -95,7 +95,7 @@ void AbstractLayer::paintLayer( ClipPainter* painter,
 {
     QVector<AbstractLayerContainer *>::const_iterator it;
 
-    for( it = m_containers->begin(); it < m_containers->end(); ++it ){
+    for( it = m_containers->constBegin(); it < m_containers->constEnd(); ++it ){
         if ( (*it) != 0 ) {
             (*it)->draw( painter, screenSize, viewParams );
         }
@@ -109,7 +109,7 @@ void AbstractLayer::paintLayer( ClipPainter* painter,
 {
     QVector<AbstractLayerContainer *>::const_iterator it;
 
-    for( it = m_containers->begin(); it < m_containers->end(); ++it ){
+    for( it = m_containers->constBegin(); it < m_containers->constEnd(); ++it ){
         if ( (*it) != 0 ) {
             (*it)->draw( painter, screenSize, viewParams, bounding );
         }

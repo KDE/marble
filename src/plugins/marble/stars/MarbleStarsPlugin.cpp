@@ -149,7 +149,7 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
         QVector<StarPoint>::const_iterator i;
         QVector<StarPoint>::const_iterator itEnd = m_stars.constEnd();
-        for (i = m_stars.begin(); i != itEnd; ++i)
+        for (i = m_stars.constBegin(); i != itEnd; ++i)
         {
             Quaternion  qpos = (*i).quaternion();
 

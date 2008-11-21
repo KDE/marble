@@ -89,10 +89,10 @@ QString AbstractLayerContainer::name() const
 
 void AbstractLayerContainer::processVisible()
 {
-    QVector<AbstractLayerData*>::const_iterator i = m_data -> begin();
+    QVector<AbstractLayerData*>::const_iterator i = m_data -> constBegin();
     int temp;
     
-    for ( ; i < m_data -> end() ; ++i ) {
+    for ( ; i < m_data -> constEnd() ; ++i ) {
         if ( (*i) -> visible() ) {
             //iterator safety
             temp = m_data -> indexOf ( *i );
