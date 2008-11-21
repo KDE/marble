@@ -66,8 +66,8 @@ GeoSceneItem* GeoSceneSection::item( const QString& name )
 {
     GeoSceneItem* item = 0;
 
-    QVector<GeoSceneItem*>::const_iterator it = m_items.begin();
-    for (it = m_items.begin(); it != m_items.end(); ++it) {
+    QVector<GeoSceneItem*>::const_iterator it = m_items.constBegin();
+    for (; it != m_items.constEnd(); ++it) {
         if ( (*it)->name() == name )
             item = *it;
     }

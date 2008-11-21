@@ -356,8 +356,8 @@ void GridMap::paintGridMap(GeoPainter * painter, bool antialiasing)
 
     painter->setPen(m_pen);
 
-    ScreenPolygon::Vector::const_iterator  itEndPolygon = end();
-    for ( ScreenPolygon::Vector::const_iterator itPolygon=begin(); 
+    ScreenPolygon::Vector::const_iterator  itEndPolygon = constEnd();
+    for ( ScreenPolygon::Vector::const_iterator itPolygon=constBegin(); 
           itPolygon != itEndPolygon;
           ++itPolygon )
     {

@@ -30,7 +30,7 @@ Track::Track() :
 Track::~Track() 
 {
     iterator it;
-    for ( it = this->begin(); it < this->constEnd(); ++it ) {
+    for ( it = this->begin(); it < this->end(); ++it ) {
         delete (*it);
     }
     clear();
@@ -40,7 +40,7 @@ void Track::draw(ClipPainter *painter, const QSize &canvasSize,
                  ViewParams *viewParams )
 {
     const_iterator it;
-    for ( it = this->begin(); it < this->constEnd(); ++it ) {
+    for ( it = this->constBegin(); it < this->constEnd(); ++it ) {
         ( *it ) -> draw( painter, canvasSize, viewParams );
     }
 }
@@ -69,7 +69,7 @@ void Track::draw(ClipPainter *painter, const QSize &canvasSize,
     }
 #endif
     const_iterator it;
-    for( it = this->begin(); it < this->constEnd(); ++it ) {
+    for( it = this->constBegin(); it < this->constEnd(); ++it ) {
         ( *it ) -> draw( painter, canvasSize, viewParams );
     }
 }

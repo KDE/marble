@@ -79,8 +79,8 @@ GeoSceneSection* GeoSceneLegend::section( const QString& name )
 {
     GeoSceneSection* section = 0;
 
-    QVector<GeoSceneSection*>::const_iterator it = d->m_sections.begin();
-    for (it = d->m_sections.begin(); it != d->m_sections.end(); ++it) {
+    QVector<GeoSceneSection*>::const_iterator it = d->m_sections.constBegin();
+    for (it = d->m_sections.constBegin(); it != d->m_sections.constEnd(); ++it) {
         if ( (*it)->name() == name )
             section = *it;
     }

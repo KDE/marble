@@ -56,7 +56,7 @@ void WaypointContainer::draw( ClipPainter *painter,
     painter->setPen( QPen( Qt::black ) );
     painter->setBrush( QBrush( Qt::white ) );
     
-    for ( it = this->begin(); it < this->constEnd(); ++it ) {
+    for ( it = this->constBegin(); it < this->constEnd(); ++it ) {
         draw = (*it)->getPixelPos( canvasSize, viewParams,
                                    &position );
 

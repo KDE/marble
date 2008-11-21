@@ -170,7 +170,7 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
     QRectF         visibleArea ( 0, 0, m_imgwidth, m_imgheight );
     const int      detail = getDetailLevel( radius );
 
-    for ( itPolyLine = pntmap->begin();
+    for ( itPolyLine = pntmap->constBegin();
           itPolyLine != itEndPolyLine;
           ++itPolyLine )
     {
@@ -264,7 +264,7 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
     QRectF         visibleArea ( 0, 0, m_imgwidth, m_imgheight );
     const int      detail = getDetailLevel( radius );
 
-    for ( itPolyLine = pntmap->begin();
+    for ( itPolyLine = pntmap->constBegin();
           itPolyLine != itEndPolyLine;
           ++itPolyLine )
     {
@@ -702,8 +702,8 @@ void VectorMap::drawMap( QPaintDevice *origimg, bool antialiasing,
     painter.setPen( m_pen );
     painter.setBrush( m_brush );
 
-    ScreenPolygon::Vector::const_iterator  itEndPolygon = end();
-    for ( ScreenPolygon::Vector::const_iterator itPolygon = begin();
+    ScreenPolygon::Vector::const_iterator  itEndPolygon = constEnd();
+    for ( ScreenPolygon::Vector::const_iterator itPolygon = constBegin();
           itPolygon != itEndPolygon; 
           ++itPolygon )
     {
@@ -724,9 +724,9 @@ void VectorMap::paintMap(GeoPainter * painter, bool antialiasing)
     painter->setPen( m_pen );
     painter->setBrush( m_brush );
 
-    ScreenPolygon::Vector::const_iterator  itEndPolygon = end();
+    ScreenPolygon::Vector::const_iterator  itEndPolygon = constEnd();
 
-    for ( ScreenPolygon::Vector::const_iterator itPolygon = begin();
+    for ( ScreenPolygon::Vector::const_iterator itPolygon = constBegin();
           itPolygon != itEndPolygon;
           ++itPolygon )
     {

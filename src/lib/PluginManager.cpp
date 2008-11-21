@@ -55,7 +55,7 @@ QList<MarbleAbstractFloatItem *> PluginManager::floatItems() const
     QList<MarbleAbstractFloatItem *> floatItemList;
 
     QList<MarbleRenderPlugin *>::const_iterator i;
-    for (i = d->m_renderPlugins.begin(); i != d->m_renderPlugins.end(); ++i)
+    for (i = d->m_renderPlugins.constBegin(); i != d->m_renderPlugins.constEnd(); ++i)
     {
         MarbleAbstractFloatItem *floatItem = qobject_cast<MarbleAbstractFloatItem *>(*i);
         if ( floatItem )

@@ -252,13 +252,13 @@ void PntMap::load(const QString &filename)
     qreal  lastLon = 0.0;
     qreal  lat     = 0.0;
 
-    GeoPolygon::PtrVector::Iterator       itPolyLine;
+    GeoPolygon::PtrVector::ConstIterator       itPolyLine;
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = constEnd();
     GeoDataCoordinates::Vector::ConstIterator   itPoint;
 
     // Now we calculate the boundaries
 	
-    for ( itPolyLine = begin(); itPolyLine != itEndPolyLine; ++itPolyLine ) {
+    for ( itPolyLine = constBegin(); itPolyLine != itEndPolyLine; ++itPolyLine ) {
 		
         qreal  lonLeft       =  +M_PI;
         qreal  lonRight      =  -M_PI;
@@ -273,7 +273,7 @@ void PntMap::load(const QString &filename)
 
         GeoDataCoordinates::Vector::ConstIterator  itEndPoint = (*itPolyLine)->constEnd();
 					
-        for ( itPoint = (*itPolyLine)->begin();
+        for ( itPoint = (*itPolyLine)->constBegin();
                 itPoint != itEndPoint;
                 ++itPoint )
         {
@@ -281,7 +281,7 @@ void PntMap::load(const QString &filename)
 
             int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
 
-            if( itPoint == (*itPolyLine)->begin() ) {
+            if( itPoint == (*itPolyLine)->constBegin() ) {
                 lastSign = currentSign;
                 lastLon  = lon;
             }

@@ -98,8 +98,8 @@ GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name )
 {
     GeoSceneAbstractDataset* dataset = 0;
 
-    QVector<GeoSceneAbstractDataset*>::const_iterator it = m_datasets.begin();
-    for (it = m_datasets.begin(); it != m_datasets.end(); ++it) {
+    QVector<GeoSceneAbstractDataset*>::const_iterator it = m_datasets.constBegin();
+    for (; it != m_datasets.constEnd(); ++it) {
         if ( (*it)->name() == name )
             dataset = *it;
     }

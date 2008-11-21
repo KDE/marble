@@ -104,8 +104,8 @@ void MarbleLegendBrowser::initTheme()
 
         d->m_checkBoxMap.clear();
 
-        QVector<GeoSceneProperty*>::const_iterator it = allProperties.begin();
-        for (it = allProperties.begin(); it != allProperties.end(); ++it) {
+        QVector<GeoSceneProperty*>::const_iterator it = allProperties.constBegin();
+        for (; it != allProperties.constEnd(); ++it) {
             if ( (*it)->available() == true ) {
                 d->m_checkBoxMap[ (*it)->name() ] = (*it)->value();
             }
