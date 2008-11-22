@@ -68,8 +68,8 @@
              the world at your fingertips. Just like a real atlas or a conventional globe 
              &marble; allows you to freely move across its map and lookup places. 
              Furthermore &marble; allows you to zoom in and have many different views on the 
-             surface of the Earth. In its default configuration &marble; offers 9 different 
-             views: <guilabel>Atlas</guilabel>, <guilabel>Open Street Map</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel> and <guilabel>Temperature (July)</guilabel>.
+             surface of the Earth. In its default configuration &marble; offers 13 different 
+             views: <guilabel>Atlas</guilabel>, <guilabel>Open Street Map</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Historical Map 1689</guilabel>, <guilabel>Moon</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel> and <guilabel>Temperature (July)</guilabel>.
          </para>
          <para>
              &marble; comes with a small database of more than 12,000 locations (cities, mountains, volcanoes) which can be searched for and which are partially integrated with 
@@ -117,7 +117,7 @@
      <chapter id="map-views">
          <title>Choosing different map views for &marble;</title>
          <para>
-            &marble; comes with 9 different views: <guilabel>Atlas</guilabel>, <guilabel>Open Street Map</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel> and <guilabel>Temperature (July)</guilabel>. You can choose among these by pressing the <guilabel>Map View</guilabel> tab on the bottom of &marble;'s toolbox:
+            &marble; comes with 11 different views: <guilabel>Atlas</guilabel>, <guilabel>Open Street Map</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Historical Map 1689</guilabel>, <guilabel>Moon</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel> and <guilabel>Temperature (July)</guilabel>. You can choose among these by pressing the <guilabel>Map View</guilabel> tab on the bottom of &marble;'s toolbox:
          </para>
 
          <screenshot>
@@ -131,7 +131,7 @@
          <itemizedlist>
              <listitem>
                 <para>
-                    <guilabel>Atlas</guilabel>: A classic topographic map. It uses vector lines ( "MicroWorldDataBase II" ) to mark coastlines, country borders &etc; and bitmap graphics ( "ETOPO2" ) to create the height relief.
+                    <guilabel>Atlas</guilabel>: A classic topographic map. It uses vector lines ( "MicroWorldDataBase II" ) to mark coastlines, country borders &etc; and bitmap graphics ( "SRTM30" ) to create the height relief.
                 </para>
              </listitem>
               <listitem>
@@ -147,6 +147,16 @@
              <listitem>
                 <para>
                     <guilabel>Earth at Night</guilabel>: This image of Earth’s city lights was created with data from the Defense Meteorological Satellite Program (DMSP) Operational Linescan System (OLS). 
+                </para>
+             </listitem>
+             <listitem>
+                <para>
+                    <guilabel>Historical Map 1689</guilabel>: A historical world map from the year 1689 created by G. van Schagen in Amsterdam. 
+                </para>
+             </listitem>
+             <listitem>
+                <para>
+                    <guilabel>Moon</guilabel>: A map of the moon. The map is based on data from the Clementine Moon mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy USGS Astrogeology Research Program.  
                 </para>
              </listitem>
              <listitem>
