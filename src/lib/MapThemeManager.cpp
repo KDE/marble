@@ -114,8 +114,6 @@ GeoSceneDocument* MapThemeManager::loadMapThemeFile( const QString& mapThemePath
     GeoSceneDocument* document = static_cast<GeoSceneDocument*>(parser.releaseDocument());
     Q_ASSERT(document);
 
-    qDebug() << "\nSuccesfully parsed file!";
-
     return document;
 }
 
@@ -275,8 +273,7 @@ void MapThemeManager::updateMapThemeModel()
     while ( it.hasNext() ) {
         QString mapThemeID = it.next();
 
-    qDebug() << "MapThemeManager: Building Model, MapThemeID: ";
-	QList<QStandardItem *> itemList = createMapThemeRow( mapThemeID );
+    	QList<QStandardItem *> itemList = createMapThemeRow( mapThemeID );
         if ( !itemList.empty() ) {
             d->m_mapThemeModel->appendRow(itemList);
         }

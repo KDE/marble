@@ -286,7 +286,6 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 
     connect( d->m_widget, SIGNAL( themeChanged( QString ) ),
              this,        SLOT( selectTheme( QString ) ) );
-    selectTheme( d->m_widget->mapThemeId() );
 
     connect( d->m_widget, SIGNAL( projectionChanged( Projection ) ),
              this,        SLOT( selectProjection( Projection ) ) );
@@ -545,9 +544,16 @@ void MarbleControlBox::runnerModelChanged( MarblePlacemarkModel *newmodel )
 
 void MarbleControlBox::selectTheme( const QString &theme )
 {
-    qDebug() << "Entered selectTheme";
     if ( !d->m_mapSortProxy )
         return;
+
+    // Check if the new selected theme is different from the current one
+    QModelIndex currentIndex = d->uiWidget.marbleThemeSelectView->currentIndex();
+    QString indexTheme = d->m_mapSortProxy->data( d->m_mapSortProxy->index( 
+                         currentIndex.row(), 1, QModelIndex() ) ).toString();
+    if( theme == indexTheme || !currentIndex.isValid() )
+        return;
+
     for ( int row = 0; row < d->m_mapSortProxy->rowCount(); ++row ) {
         QModelIndex itIndexName = d->m_mapSortProxy->index( row, 1, QModelIndex() );
         QModelIndex itIndex     = d->m_mapSortProxy->index( row, 0, QModelIndex() );
