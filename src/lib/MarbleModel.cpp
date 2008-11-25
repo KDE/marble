@@ -79,43 +79,43 @@ class MarbleModelPrivate
     void  notifyModelChanged();
     void  geoDataDocumentLoaded( GeoDataDocument& document );
 
-    MarbleModel         *m_parent;
-    MarbleDataFacade    *m_dataFacade;
+    MarbleModel             *m_parent;
+    MarbleDataFacade        *m_dataFacade;
 
     // View and paint stuff
-    GeoSceneDocument    *m_mapTheme;
-    LayerManager        *m_layerManager;
-    TextureColorizer    *m_texcolorizer;
+    GeoSceneDocument        *m_mapTheme;
+    LayerManager            *m_layerManager;
+    TextureColorizer        *m_texcolorizer;
 
-    HttpDownloadManager *m_downloadManager;
+    HttpDownloadManager     *m_downloadManager;
 
-    TileLoader          *m_tileLoader;
+    TileLoader              *m_tileLoader;
     AbstractScanlineTextureMapper   *m_texmapper;
 
-    VectorComposer      *m_veccomposer; // FIXME: Make not a pointer.
-    GridMap             *m_gridmap;
+    VectorComposer          *m_veccomposer; // FIXME: Make not a pointer.
+    GridMap                 *m_gridmap;
 
     // Places on the map
-    PlaceMarkManager      *m_placemarkmanager;
-    MarblePlacemarkModel  *m_placemarkmodel;
-    PlaceMarkLayout       *m_placeMarkLayout;
-    MarbleGeometryModel   *m_geometrymodel;
+    PlaceMarkManager        *m_placemarkmanager;
+    MarblePlacemarkModel    *m_placemarkmodel;
+    PlaceMarkLayout         *m_placeMarkLayout;
+    MarbleGeometryModel     *m_geometrymodel;
 
     // Misc stuff.
-    ExtDateTime           *m_dateTime;
-    SunLocator            *m_sunLocator;
-    MergedLayerDecorator  *m_layerDecorator;
+    ExtDateTime             *m_dateTime;
+    SunLocator              *m_sunLocator;
+    MergedLayerDecorator    *m_layerDecorator;
 
     // Selection handling
-    QItemSelectionModel *m_placemarkselectionmodel;
+    QItemSelectionModel     *m_placemarkselectionmodel;
 
     //Gps Stuff
-    GpsLayer            *m_gpsLayer;
-    GpxFileModel        *m_gpxFileModel;
+    GpsLayer                *m_gpsLayer;
+    GpxFileModel            *m_gpxFileModel;
 
-    QTimer       *m_timer;
+    QTimer                  *m_timer;
 
-    FileViewModel       *m_fileviewmodel;
+    FileViewModel           *m_fileviewmodel;
 };
 
 MarbleModel::MarbleModel( QObject *parent )
