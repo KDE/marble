@@ -15,7 +15,11 @@
 
 #include <cmath>
 
-#include <QtCore/QAtomicInt>
+#if QT_VERSION < 0x040400
+# include <qatomic.h>
+#else
+# include <QtCore/QAtomicInt>
+#endif
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
@@ -65,6 +69,10 @@
 
 namespace Marble
 {
+
+#if QT_VERSION < 0x040400
+    typedef QAtomic QAtomicInt;
+#endif
 
 class MarbleModelPrivate
 {
