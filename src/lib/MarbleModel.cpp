@@ -8,12 +8,14 @@
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
 //
 
 #include "MarbleModel.h"
 
 #include <cmath>
 
+#include <QtCore/QAtomicInt>
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
@@ -79,20 +81,21 @@ class MarbleModelPrivate
     void  notifyModelChanged();
     void  geoDataDocumentLoaded( GeoDataDocument& document );
 
+    static QAtomicInt       refCounter;
     MarbleModel             *m_parent;
     MarbleDataFacade        *m_dataFacade;
 
     // View and paint stuff
     GeoSceneDocument        *m_mapTheme;
     LayerManager            *m_layerManager;
-    TextureColorizer        *m_texcolorizer;
+    static TextureColorizer *m_texcolorizer;
 
     HttpDownloadManager     *m_downloadManager;
 
     TileLoader              *m_tileLoader;
     AbstractScanlineTextureMapper   *m_texmapper;
 
-    VectorComposer          *m_veccomposer; // FIXME: Make not a pointer.
+    static VectorComposer   *m_veccomposer; // FIXME: Make not a pointer.
     GridMap                 *m_gridmap;
 
     // Places on the map
@@ -118,10 +121,15 @@ class MarbleModelPrivate
     FileViewModel           *m_fileviewmodel;
 };
 
+VectorComposer      *MarbleModelPrivate::m_veccomposer = 0;
+TextureColorizer    *MarbleModelPrivate::m_texcolorizer = 0;
+QAtomicInt           MarbleModelPrivate::refCounter(0);
+
 MarbleModel::MarbleModel( QObject *parent )
     : QObject( parent ),
       d( new MarbleModelPrivate( this ) )
 {
+    MarbleModelPrivate::refCounter.ref();
     d->m_dataFacade = new MarbleDataFacade( this );
     d->m_layerManager = new LayerManager( d->m_dataFacade, this );
 
@@ -143,11 +151,13 @@ MarbleModel::MarbleModel( QObject *parent )
 //             this,            SLOT( paintTile(TextureTile*, int, int, int, GeoSceneTexture*, bool) ) );
 
     d->m_texmapper = 0;
-    d->m_veccomposer = new VectorComposer();
-
     d->m_gridmap      = new GridMap( this );
-    d->m_texcolorizer = new TextureColorizer( MarbleDirs::path( "seacolors.leg" ),
-                                              MarbleDirs::path( "landcolors.leg" ) );
+    
+    if( MarbleModelPrivate::refCounter == 1 ) {
+        d->m_veccomposer = new VectorComposer();
+        d->m_texcolorizer = new TextureColorizer( MarbleDirs::path( "seacolors.leg" ),
+                                                  MarbleDirs::path( "landcolors.leg" ) );
+    }
 
     d->m_placemarkmanager   = new PlaceMarkManager();
 
@@ -206,8 +216,11 @@ MarbleModel::~MarbleModel()
     delete d->m_tileLoader; // disconnects from downloadManager in dtor
     delete d->m_downloadManager;
 
-    delete d->m_veccomposer;
-    delete d->m_texcolorizer; 
+    if( MarbleModelPrivate::refCounter == 1 ) {
+        delete d->m_veccomposer;
+        delete d->m_texcolorizer;
+        MarbleModelPrivate::refCounter.deref();
+    }
     delete d->m_gridmap;
     delete d->m_geometrymodel;
     delete d->m_placemarkmodel;
