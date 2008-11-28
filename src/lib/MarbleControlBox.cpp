@@ -551,37 +551,13 @@ void MarbleControlBox::selectTheme( const QString &theme )
     QModelIndex currentIndex = d->uiWidget.marbleThemeSelectView->currentIndex();
     QString indexTheme = d->m_mapSortProxy->data( d->m_mapSortProxy->index( 
                          currentIndex.row(), 1, QModelIndex() ) ).toString();
-    if( theme == indexTheme || !currentIndex.isValid() )
-        return;
 
-    for ( int row = 0; row < d->m_mapSortProxy->rowCount(); ++row ) {
-        QModelIndex itIndexName = d->m_mapSortProxy->index( row, 1, QModelIndex() );
-        QModelIndex itIndex     = d->m_mapSortProxy->index( row, 0, QModelIndex() );
-        qDebug() << "Select Theme: " << theme << " Stored: " << d->m_mapSortProxy->data( itIndexName ).toString();
-        // If  we have found the theme in the theme model,
-        //     and it is not the one that we already have,
-        // then
-        //     set the new one in the ui.
-        if ( theme == d->m_mapSortProxy->data( itIndexName ).toString()
-             && itIndexName != d->uiWidget.marbleThemeSelectView->currentIndex() ) {
-            // Mark the correct picture for the selected map theme and
-            // also make sure it's shown.
-            d->uiWidget.marbleThemeSelectView->setCurrentIndex( itIndex );
-            d->uiWidget.marbleThemeSelectView->scrollTo( itIndex );
-
-            // Dig out the min and max zoom and set the slider.
-            //
-            // Since this slot is called when a change of map theme is
-            // already finished, we can use the widget to get the
-            // values.
-            if ( ! d->m_widget )
-                break;
-            d->uiWidget.zoomSlider->setMinimum( d->m_widget->map()->minimumZoom() );
-            d->uiWidget.zoomSlider->setMaximum( d->m_widget->map()->maximumZoom() );
-            updateButtons( d->uiWidget.zoomSlider->value() );
-            // Break out of the loop
-            break;
-        }
+    if ( theme == indexTheme ) {
+        if ( ! d->m_widget )
+            return;
+        d->uiWidget.zoomSlider->setMinimum( d->m_widget->map()->minimumZoom() );
+        d->uiWidget.zoomSlider->setMaximum( d->m_widget->map()->maximumZoom() );
+        updateButtons( d->uiWidget.zoomSlider->value() );
     }
 }
 
