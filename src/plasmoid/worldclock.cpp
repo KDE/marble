@@ -75,7 +75,7 @@ WorldClock::WorldClock(QObject *parent, const QVariantList &args)
 void WorldClock::init()
 {
     KConfigGroup cg = config();
-    m_map = new MarbleMap(  );
+    m_map = new MarbleMap( this );
     if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Mercator)
         m_map->setProjection(Mercator);
     else
@@ -130,12 +130,12 @@ void WorldClock::init()
 
 WorldClock::~WorldClock()
 {
-/*
+
     if(m_map)
         delete m_map;
     if(m_sun)
         delete m_sun;
-*/
+
 }
 
 void WorldClock::resizeMap(bool changeAspect)
