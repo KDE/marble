@@ -1,5 +1,9 @@
 PROJECT(marblewidget)
-cmake_minimum_required(VERSION 2.4.0)
+
+if (QTONLY)
+   cmake_minimum_required(VERSION 2.4.0)
+endif (QTONLY)
+
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/lib
