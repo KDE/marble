@@ -309,7 +309,15 @@ void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container
             {
                 hasPopularity = true;
                 placemark->setPopularity( diameter );
-                placemark->setPopularityIndex( spacePopIdx( diameter ) );
+                if ( placemark->role() == 'c' ) {
+                    placemark->setPopularityIndex( spacePopIdx( diameter ) );
+                    if ( placemark->name() == "Tycho" || placemark->name() == "Copernicus" ) {
+                        placemark->setPopularityIndex( 17 );
+                    }
+                }
+                else {
+                    placemark->setPopularityIndex( spacePopIdx( diameter ) );
+                }
 
                 if ( placemark->role() == 'a' && diameter == 0 ) {
                     placemark->setPopularity( 1000000000 );
@@ -398,7 +406,7 @@ int MarblePlacemarkModel::cityPopIdx( qint64 population )
 
 int MarblePlacemarkModel::spacePopIdx( qint64 population )
 {
-    int popidx = 16;
+    int popidx = 18;
 
     if ( population < 1000 )        popidx=1;
     else if ( population < 2000)    popidx=2;
@@ -418,7 +426,6 @@ int MarblePlacemarkModel::spacePopIdx( qint64 population )
 
     return popidx;
 }
-
 
 int MarblePlacemarkModel::areaPopIdx( qreal area )
 {

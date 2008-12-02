@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
+// Copyright 2006-2009 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 // Copyright 2008      Carlos Licea <carlos.licea@kdemail.net>
 //
@@ -32,8 +32,6 @@
 //#include <QtDBus/QDBusConnection>
 
 // Marble
-#include "CrossHairFloatItem.h"
-
 #include "AbstractProjection.h"
 #include "AbstractScanlineTextureMapper.h"
 #include "BoundingBox.h"
@@ -274,14 +272,8 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect)
 
 void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect)
 {
-//    int transparency = ( d->m_viewParams.mapQuality() == Marble::Low ) ? 255 : 192;
-
-    // 2. Paint the crosshair.
-    m_crosshair.paint( &painter,
-                          m_viewParams.canvasImage()->width(),
-                          m_viewParams.canvasImage()->height() );
-
-    // 3. Paint measure points if there are any.
+    // FIXME: Add this stuff into the Layermanager as something to be 
+    // called before the float items.
 
     bool antialiased = false;
 
@@ -292,7 +284,8 @@ void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect)
 
     m_measureTool->paint( &painter, m_viewParams.viewport(), antialiased );
 
-    // Set the Bounding Box
+    // FIXME: Get rid of this:
+    // Set the Bounding Box 
     setBoundingBox();
 }
 
@@ -591,6 +584,11 @@ bool MarbleMap::showAtmosphere() const
     return d->m_viewParams.showAtmosphere();
 }
 
+bool MarbleMap::showCrosshairs() const
+{
+    return propertyValue( "crosshairs" );
+}
+
 bool MarbleMap::showPlaces() const
 {
     return propertyValue( "places" );
@@ -744,10 +742,11 @@ void MarbleMap::centerOn(const QModelIndex& index)
         centerOn( lon * RAD2DEG, lat * RAD2DEG );
 
         selectionModel->select( index, QItemSelectionModel::SelectCurrent );
-        d->m_crosshair.setEnabled( true );
+//        Maybe add some similar functionality later on again:
+//        d->m_crosshair.setEnabled( true );
     }
-    else
-        d->m_crosshair.setEnabled( false );
+//    else
+//        d->m_crosshair.setEnabled( false );
 }
 
 
@@ -963,6 +962,11 @@ void MarbleMap::setShowAtmosphere( bool visible )
     d->m_viewParams.setShowAtmosphere( visible );
     // Quick and dirty way to force a whole update of the view
     d->doResize();
+}
+
+void MarbleMap::setShowCrosshairs( bool visible )
+{
+    setPropertyValue( "crosshairs", visible );
 }
 
 void MarbleMap::setShowClouds( bool visible )

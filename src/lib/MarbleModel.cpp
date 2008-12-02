@@ -419,6 +419,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     }
     qDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );
+    d->m_sunLocator->setBody(d->m_mapTheme->head()->target().toLower());
 
     d->m_layerManager->syncViewParamsAndPlugins( mapTheme );
 

@@ -96,10 +96,10 @@ class MARBLE_EXPORT ViewParams
     void propertyValue( const QString& name, bool &value );
 
     int radius() const;
-    void setRadius(int newRadius);
+    void setRadius( int newRadius );
 
     Quaternion planetAxis() const;
-    void setPlanetAxis(const Quaternion &newAxis);
+    void setPlanetAxis( const Quaternion &newAxis );
 
     void centerCoordinates( qreal &centerLon, qreal &centerLat );
 
@@ -110,13 +110,13 @@ class MARBLE_EXPORT ViewParams
     void setCoastImage( QImage * const );
 
     bool showGps() const;
-    void setShowGps( const bool );
+    void setShowGps( bool );
 
     bool showElevationModel() const;
-    void setShowElevationModel( const bool );
+    void setShowElevationModel( bool );
 
     bool showAtmosphere() const;
-    void setShowAtmosphere( const bool );
+    void setShowAtmosphere( bool );
 
     // FIXME: We should try to get rid of these
     int radiusUpdated() const;

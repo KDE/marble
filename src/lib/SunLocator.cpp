@@ -24,8 +24,14 @@ using namespace Marble;
 using std::sin;
 using std::cos;
 using std::asin;
+using std::abs;
 
 const int J2000 = 2451545; // epoch J2000 = 1 January 2000, noon Terrestrial Time (11:58:55.816 UTC)
+
+// taking the full moon of 15 January 1900 19:07 UTC as the epoch for the moon
+const qreal MOON_EPOCH = 2415035.297; // value from http://home.hiwaay.net/~krcool/Astro/moon/fullmoon.htm
+const qreal MOON_SYNODIC_PERIOD = 29.530588;
+
 const qreal twilightZone = 0.1; // this equals 18 deg astronomical twilight.
 const int update_interval = 60000; // emit updateSun() every update_interval ms
 
@@ -41,7 +47,8 @@ SunLocator::SunLocator(ExtDateTime *dateTime)
     m_datetime( dateTime ),
     m_show( false ),
     m_citylights( false ),
-    m_centered( false )
+    m_centered( false ),
+    m_body( "" )
 {
 }
 
@@ -53,19 +60,31 @@ SunLocator::~SunLocator() {
 void SunLocator::updatePosition()
 {
     // Find the orientation of the sun.
-    // Find current Julian day number relative to epoch J2000.
-    long d = m_datetime->toJDN() - J2000;
-	
-    // Adapted from http://www.stargazing.net/kepler/sun.html
-    qreal       L = 4.89497 + 0.0172028 * d;                  // mean longitude
-    qreal       g = 6.24004 + 0.0172020 * d;                  // mean anomaly
-    qreal  lambda = L + 0.0334 * sin(g) + 3.49e-4 * sin(2*g); // ecliptic longitude
-    qreal epsilon = 0.40909 - 7e-9 * d;                       // obliquity of the ecliptic plane
-    qreal   delta = asin(sin(epsilon)*sin(lambda));           // declination
-	
-    // Convert position of sun to coordinates.
-    m_lon = M_PI - m_datetime->dayFraction() * 2*M_PI;
-    m_lat = -delta;
+    if( m_body == "moon" ) {
+        qreal d = (qreal)m_datetime->toJDN() + m_datetime->dayFraction() - MOON_EPOCH; // days since the first full moon of the 20th century
+        d /= MOON_SYNODIC_PERIOD; // number of orbits the moon has made (relative to the sun as observed from earth)
+        d = d - (int)d; // take fractional part
+        if(d < 0.0) d += 1.0; // for dates before MOON_EPOCH
+        
+        qDebug() << "MOON:" << (int)(d*100) << "% of orbit completed and" << (int)(abs((d-0.5)*2) * 100) << "% illuminated";
+        
+        m_lon = (1-d) * 2*M_PI;
+        m_lat = 0.0; // not necessarily accurate but close enough (only differs by about +-6 degrees of this value)
+    } else { // default to the earth
+        // Find current Julian day number relative to epoch J2000.
+        long d = m_datetime->toJDN() - J2000;
+    	
+        // Adapted from http://www.stargazing.net/kepler/sun.html
+        qreal       L = 4.89497 + 0.0172028 * d;                  // mean longitude
+        qreal       g = 6.24004 + 0.0172020 * d;                  // mean anomaly
+        qreal  lambda = L + 0.0334 * sin(g) + 3.49e-4 * sin(2*g); // ecliptic longitude
+        qreal epsilon = 0.40909 - 7e-9 * d;                       // obliquity of the ecliptic plane
+        qreal   delta = asin(sin(epsilon)*sin(lambda));           // declination
+    	
+        // Convert position of sun to coordinates.
+        m_lon = M_PI - m_datetime->dayFraction() * 2*M_PI;
+        m_lat = -delta;
+    }
 }
 
 
@@ -176,6 +195,14 @@ void SunLocator::setCentered(bool centered)
         emit centerSun();
     } else
         emit reenableWidgetInput();
+}
+
+void SunLocator::setBody(QString body)
+{
+    m_body = body;
+    updatePosition();
+
+    emit updateSun();
 }
 
 #include "SunLocator.moc"

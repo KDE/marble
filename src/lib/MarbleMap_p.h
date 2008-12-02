@@ -16,7 +16,6 @@
 
 #include "ViewParams.h"
 #include "TextureColorizer.h"
-#include "CrossHairFloatItem.h"
 
 namespace Marble
 {
@@ -69,9 +68,6 @@ class MarbleMapPrivate
     // Parameters for the maps appearance.
 
     bool             m_showFrameRate;
-
-    // Parts of the image in the Map
-    CrossHairFloatItem         m_crosshair;
 
     // Tools
     MeasureTool     *m_measureTool;

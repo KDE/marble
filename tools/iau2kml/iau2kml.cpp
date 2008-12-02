@@ -109,11 +109,11 @@ int main(int argc, char *argv[])
             roleString  = splitline[18];
             description = splitline[19];
 
-            if ( roleString == "SF" ) continue;
+            // if ( roleString == "SF" ) continue;
 
             QString marbleRoleString = "o";
 
-            if ( roleString == "AA" ) marbleRoleString = "c";
+            if ( roleString == "AA" || roleString == "SF" ) marbleRoleString = "c";
             if (    roleString == "ME" || roleString == "OC" 
                  || roleString == "LC" || roleString == "SI" ) marbleRoleString = "a";
             if ( roleString == "MO" ) marbleRoleString = "m";

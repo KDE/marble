@@ -25,6 +25,7 @@
 #include <QtGui/QCursor>
 
 class QTimer;
+class QRubberBand;
 
 namespace Marble
 {
@@ -102,6 +103,9 @@ class MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
 
     int      m_dragThreshold;
     QTime    m_dragtimer;
+
+    QPoint       m_selectionOrigin;
+    QRubberBand *m_selectionRubber;
 };
 
 }

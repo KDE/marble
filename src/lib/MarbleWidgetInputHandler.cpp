@@ -14,6 +14,7 @@
 #include <cmath>
 
 #include <QtCore/QDebug>
+#include <QRubberBand>
 
 #include "global.h"
 #include "GeoDataCoordinates.h"
@@ -77,10 +78,13 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler()
     arrowcur [1][2] = QCursor(curpmbc,11,18);
     arrowcur [2][2] = QCursor(curpmbr,19,19);
 
-    m_leftpressed = false;
-    m_midpressed  = false;
+    m_leftpressed     = false;
+    m_midpressed      = false;
 
-    m_dragThreshold = 3;
+    m_selectionRubber = new QRubberBand(QRubberBand::Rectangle, m_widget);
+    m_selectionRubber->hide();
+
+    m_dragThreshold   = 3;
 }
 
 void MarbleWidgetInputHandler::restoreViewContext()
@@ -199,7 +203,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         }
 
 
-        if ( activeRegion.contains( event->pos() ) ) {
+        if ( activeRegion.contains( event->pos() ) || m_selectionRubber->isVisible() ) {
 
             if ( e->type() == QEvent::MouseButtonDblClick) {
                 qDebug("check");
@@ -211,8 +215,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
                 m_dragtimer.restart();
 
-                m_leftpressed = true;
-                m_midpressed  = false;
+                m_leftpressed    = true;
+                m_midpressed     = false;
+                m_selectionRubber->hide();
 
                 // On the single event of a mouse button press these
                 // values get stored, to enable us to e.g. calculate the
@@ -230,16 +235,27 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
             if ( e->type() == QEvent::MouseButtonPress
                  && event->button() == Qt::MidButton) {
-                m_midpressed  = true;
-                m_leftpressed = false;
-                m_midpressedy = event->y();
+                m_midpressed     = true;
+                m_leftpressed    = false;
+                m_midpressedy    = event->y();
 
+                m_selectionRubber->hide();
                 m_widget->setViewContext( Marble::Animation );
             }
 
             if ( e->type() == QEvent::MouseButtonPress
                  && event->button() == Qt::RightButton ) {
                 emit rmbRequest( event->x(), event->y() );
+            }
+
+            if ( e->type() == QEvent::MouseButtonPress
+                 && event->button() == Qt::LeftButton 
+                 && (event->modifiers() & Qt::ControlModifier) )
+            {
+                qDebug("Marble: Starting selection");
+                m_selectionOrigin = event->globalPos();
+                m_selectionRubber->setGeometry(QRect(m_selectionOrigin, QSize()));
+                m_selectionRubber->show();
             }
 
             // Regarding mouse button releases:
@@ -285,8 +301,18 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                  && event->button() == Qt::RightButton) {
             }
 
+            if ( e->type() == QEvent::MouseButtonRelease
+                && event->button() == Qt::LeftButton 
+                 && m_selectionRubber->isVisible() ) 
+            {
+               qDebug("Marble: Leaving selection");
+               QRect r = QRect(m_widget->mapFromGlobal(m_selectionRubber->geometry().topLeft()),                                 m_widget->mapFromGlobal(m_selectionRubber->geometry().bottomRight()));
+               m_widget->setSelection(r);
+               m_selectionRubber->hide();
+            }
+
             // Regarding all kinds of mouse moves:
-            if ( m_leftpressed == true ) {
+            if ( m_leftpressed == true && !m_selectionRubber->isVisible() ) {
                 qreal  radius = (qreal)(m_widget->radius());
                 int     deltax = event->x() - m_leftpressedx;
                 int     deltay = event->y() - m_leftpressedy;
@@ -324,6 +350,13 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 m_midpressed = eventy;
                 m_widget->zoomViewBy( (int)( 2 * dy / 3 ) );
                 m_widget->repaint();
+            }
+
+            if ( m_selectionRubber->isVisible() ) 
+            {
+                // We change selection.
+                m_selectionRubber->setGeometry(QRect(m_selectionOrigin,
+                                                     event->globalPos()).normalized());
             }
         }
         else {

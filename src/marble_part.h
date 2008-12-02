@@ -59,6 +59,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  copyCoordinates();
     void  setShowClouds( bool );
     void  setShowAtmosphere( bool );
+    void  setShowCrosshairs( bool );
     void  showFullScreen( bool );
     void  showSideBar( bool );
     void  showStatusBar( bool );

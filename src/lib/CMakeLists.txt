@@ -79,7 +79,6 @@ set(marblewidget_SRCS
     QHttpNetworkPlugin.cpp
     LayerManager.cpp
     PluginManager.cpp
-    CrossHairFloatItem.cpp
     MarbleCacheSettingsWidget.cpp
     MarbleAbstractFloatItem.cpp
     MarbleDirs.cpp
@@ -277,7 +276,7 @@ else (APPLE AND QTONLY)
     MarbleAbstractFloatItem.h
     AbstractLayer/AbstractLayerInterface.h
     MapThemeManager.h
-
+    MarbleAboutDialog.h
     MarbleWidgetInputHandler.h
 
     MapThemeSortFilterProxyModel.h

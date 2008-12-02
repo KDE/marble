@@ -48,6 +48,7 @@ public:
     // FIXME: All of these parameters should get stored as a GeoSceneSettings 
     //        property object in the future instead ...
     bool        m_showAtmosphere;
+    bool        m_showCrosshairs;
 
     bool        m_showElevationModel;
     
@@ -261,7 +262,7 @@ int ViewParams::radiusUpdated() const
     return d->m_radiusUpdated;
 }
 
-void ViewParams::setRadiusUpdated( const int radiusUpdated )
+void ViewParams::setRadiusUpdated( int radiusUpdated )
 {
     d->m_radiusUpdated = radiusUpdated;
 }
@@ -271,7 +272,7 @@ bool ViewParams::showGps() const
     return d->m_showGps;
 }
 
-void ViewParams::setShowGps( bool const showGps )
+void ViewParams::setShowGps( bool showGps )
 {
     d->m_showGps = showGps;
 }
@@ -281,7 +282,7 @@ bool ViewParams::showElevationModel() const
     return d->m_showElevationModel;
 }
 
-void ViewParams::setShowElevationModel( const bool showElevationModel )
+void ViewParams::setShowElevationModel( bool showElevationModel )
 {
     d->m_showElevationModel = showElevationModel;
 }
@@ -291,7 +292,7 @@ bool ViewParams::showAtmosphere() const
     return d->m_showAtmosphere;
 }
 
-void ViewParams::setShowAtmosphere( const bool showAtmosphere )
+void ViewParams::setShowAtmosphere( bool showAtmosphere )
 {
     d->m_showAtmosphere = showAtmosphere;
 }

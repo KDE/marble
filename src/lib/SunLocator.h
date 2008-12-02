@@ -56,6 +56,7 @@ class MARBLE_EXPORT SunLocator : public QObject
     void  setShow(bool show);
     void  setCitylights(bool show) {m_citylights = show;}
     void  setCentered(bool show);
+    void  setBody(QString body);
 	
     bool getShow() {return m_show;}
     bool getCitylights() {return m_citylights;}
@@ -88,6 +89,7 @@ class MARBLE_EXPORT SunLocator : public QObject
     bool m_show;
     bool m_citylights;
     bool m_centered;
+    QString m_body;
 //     QTimer* m_timer;
 };
 

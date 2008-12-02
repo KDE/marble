@@ -219,6 +219,13 @@ void MarblePart::setShowAtmosphere( bool isChecked )
     m_showAtmosphereAction->setChecked( isChecked ); // Sync state with the GUI
 }
 
+void MarblePart::setShowCrosshairs( bool isChecked )
+{
+    m_controlView->marbleWidget()->setShowCrosshairs( isChecked );
+
+    m_showCrosshairsAction->setChecked( isChecked ); // Sync state with the GUI
+}
+
 void MarblePart::showFullScreen( bool isChecked )
 {
     if ( isChecked ) {
@@ -512,8 +519,8 @@ void MarblePart::setupActions()
     m_showCrosshairsAction->setCheckable( true );
     m_showCrosshairsAction->setChecked( true );
     m_showCrosshairsAction->setText( i18n( "Cross&hairs" ) );
-//    connect( m_showCrosshairsAction, SIGNAL( triggered( bool ) ),
-//         this,               SLOT( setShowClouds( bool ) ) );
+    connect( m_showCrosshairsAction, SIGNAL( triggered( bool ) ),
+         this,               SLOT( setShowShowCrosshairs( bool ) ) );
 
     // Action: Show Clouds option
     m_showCloudsAction = new KAction( this );

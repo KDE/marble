@@ -132,6 +132,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     Q_PROPERTY(bool showClouds   READ showClouds      WRITE setShowClouds)
     Q_PROPERTY(bool showAtmosphere READ showAtmosphere WRITE setShowAtmosphere)
+    Q_PROPERTY(bool showCrosshairs READ showCrosshairs WRITE setShowCrosshairs)
 
     Q_PROPERTY(bool showPlaces   READ showPlaces      WRITE setShowPlaces)
     Q_PROPERTY(bool showCities   READ showCities      WRITE setShowCities)
@@ -380,6 +381,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return The cloud cover visibility.
      */
     bool  showAtmosphere() const;
+
+    /**
+     * @brief  Return whether the crosshairs are visible.
+     * @return The crosshairs' visibility.
+     */
+    bool  showCrosshairs() const;
 
     /**
      * @brief  Return whether the coordinate grid is visible.
@@ -692,6 +699,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setShowAtmosphere( bool visible );
 
     /**
+     * @brief  Set whether the crosshairs are visible
+     * @param  visible  visibility of the crosshairs
+     */
+    void setShowCrosshairs( bool visible );
+
+    /**
      * @brief  Set whether the coordinate grid overlay is visible
      * @param  visible  visibility of the coordinate grid
      */
@@ -893,6 +906,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     QFont defaultFont() const;
     void setDefaultFont( const QFont& font );
 
+    void setSelection(const QRect& region);
+
  private Q_SLOTS:
 
     void updateAnimation( qreal currentValue );
@@ -921,6 +936,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  timeout();
 
     void  framesPerSecond( qreal fps );
+
+    /** This signal is emit when a new rectangle region is selected over the map 
+     *  The list of double values include coordinates in degrees using this order:
+     *  lon1, lat1, lon2, lat2 (or West, North, East, South) as left/top, right/bottom rectangle.
+     */
+    void  regionSelected(const QList<double>&);
 
  protected:
     /**

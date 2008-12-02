@@ -18,7 +18,7 @@
   <Menu name="view" noMerge="1"><text>&amp;View</text>
     <Merge name="StandardToolBarMenuHandler" />
     <Action name="options_show_statusbar"/>
-    <Action name="options_show_sidebar" group="show_merge"/>
+    <Action name="show_crosshairs" group="show_merge"/>
     <Separator/>
     <Menu name="infoboxes" noMerge="1"><text>&amp;Info Boxes</text>
     <Action name="options_lock_floatitems"/>

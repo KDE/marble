@@ -1,5 +1,6 @@
 # add_subdirectory( test )
 # add_subdirectory( coordinategrid )
+add_subdirectory( crosshairs )
 add_subdirectory( geodata )
 # add_subdirectory( placemarks )
 add_subdirectory( compass )

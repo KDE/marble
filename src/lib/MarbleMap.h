@@ -328,6 +328,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
     bool  showAtmosphere() const;
 
     /**
+     * @brief  Return whether the crosshairs are visible.
+     * @return The crosshairs' visibility.
+     */
+    bool  showCrosshairs() const;
+
+    /**
      * @brief  Return whether the coordinate grid is visible.
      * @return The coordinate grid visibility.
      */
@@ -625,6 +631,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  visible  visibility of the atmospheric glow
      */
     void setShowAtmosphere( bool visible );
+
+    /**
+     * @brief  Set whether the crosshairs are visible
+     * @param  visible  visibility of the crosshairs
+     */
+    void setShowCrosshairs( bool visible );
 
     /**
      * @brief  Set whether the coordinate grid overlay is visible

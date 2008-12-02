@@ -409,6 +409,11 @@ bool MarbleWidget::showAtmosphere() const
     return d->m_map->showAtmosphere();
 }
 
+bool MarbleWidget::showCrosshairs() const
+{
+//    return d->m_map->showAtmosphere();
+}
+
 bool MarbleWidget::showGrid() const
 {
     return d->m_map->showGrid();
@@ -951,6 +956,13 @@ void MarbleWidget::setShowAtmosphere( bool visible )
     repaint();
 }
 
+void MarbleWidget::setShowCrosshairs( bool visible )
+{
+//    d->m_map->setShowCrosshairs( visible );
+
+    repaint();
+}
+
 void MarbleWidget::setShowGrid( bool visible )
 {
     d->m_map->setShowGrid( visible );
@@ -1231,6 +1243,28 @@ QFont MarbleWidget::defaultFont() const
 void MarbleWidget::setDefaultFont( const QFont& font )
 {
     map()->setDefaultFont( font );
+}
+
+void MarbleWidget::setSelection(const QRect& region)
+{
+    QPoint tl = region.topLeft();
+    QPoint br = region.bottomRight();
+    qDebug() << "Selection region: (" << tl.x() << ", " <<  tl.y() << ") (" 
+             << br.x() << ", " << br.y() << ")" << endl;
+
+    AbstractProjection *proj = d->m_map->viewParams()->currentProjection();
+    GeoDataLatLonAltBox box  = proj->latLonAltBox(region, d->m_map->viewParams()->viewport());
+
+    // NOTE: coordinates as lon1, lat1, lon2, lat2 (or West, North, East, South)
+    // as left/top, right/bottom rectangle.
+    QList<double> coordinates;
+    coordinates << box.west(GeoDataPoint::Degree) << box.north(GeoDataPoint::Degree) 
+                << box.east(GeoDataPoint::Degree) << box.south(GeoDataPoint::Degree);
+
+    qDebug() << "West: " << coordinates[0] << " North: " <<  coordinates[1] 
+             << " East: " << coordinates[2] << " South: " << coordinates[3] << endl;
+
+    emit regionSelected(coordinates);
 }
 
 qreal MarbleWidget::distance() const
