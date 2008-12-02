@@ -32,11 +32,14 @@ namespace Marble
 //
 // @internal
 
+class ClipPainterPrivate;
 class MARBLE_EXPORT ClipPainter : public QPainter 
 {
  public:
     ClipPainter();
     ClipPainter(QPaintDevice*, bool);
+
+    ~ClipPainter();
 
     void setClipping( bool enable );
     bool isClipping() const;
@@ -56,33 +59,7 @@ class MARBLE_EXPORT ClipPainter : public QPainter
     const QPointF borderPoint();
 
  private:
-    // true if clipping is on.
-    bool    m_doClip;
-
-    // The limits
-    qreal  m_left;
-    qreal  m_right;
-    qreal  m_top;
-    qreal  m_bottom;
-
-    // Size of the image
-    int     m_imgWidth;
-    int     m_imgHeight;
-
-    // Used in the paint process of vectors..
-    int     m_currentSector;
-    int     m_currentXSector;
-    int     m_currentYSector;
-    int     m_lastSector;
-
-    //	int m_debugNodeCount;
-
-    QPointF    m_lastBorderPoint;
-    QPointF    m_currentPoint;
-    QPointF    m_lastPoint; 
-
-    // The resulting object from the clipping operation
-    QPolygonF  m_clippedObject;
+    ClipPainterPrivate * const d;
 };
 
 }

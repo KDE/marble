@@ -16,50 +16,88 @@
 
 #include <QtCore/QDebug>
 
+namespace Marble
+{
+
+class ClipPainterPrivate
+{
+ public:
+    // true if clipping is on.
+    bool    m_doClip;
+
+    // The limits
+    qreal  m_left;
+    qreal  m_right;
+    qreal  m_top;
+    qreal  m_bottom;
+
+    // Used in the paint process of vectors..
+    int     m_currentSector;
+    int     m_lastSector;
+
+    //	int m_debugNodeCount;
+
+    QPointF    m_lastBorderPoint;
+    QPointF    m_currentPoint;
+    QPointF    m_lastPoint; 
+
+    // The resulting object from the clipping operation
+    QPolygonF  m_clippedObject;
+};
+
+}
+
 using namespace Marble;
 
 // #define MARBLE_DEBUG
 
 ClipPainter::ClipPainter(QPaintDevice * pd, bool clip)
-    : QPainter( pd )
+    : QPainter( pd ), d(new ClipPainterPrivate)
 {
-    m_imgWidth       = pd->width(); 
-    m_imgHeight      = pd->height();
-    m_currentXSector = 0;
-    m_currentYSector = 0;
-
-    m_left   = -1.0; 
-    m_right  = (qreal)(m_imgWidth);
-    m_top    = -1.0; 
-    m_bottom = (qreal)(m_imgHeight);	
+    d->m_left   = -1.0; 
+    d->m_right  = (qreal)(pd->width());
+    d->m_top    = -1.0; 
+    d->m_bottom = (qreal)(pd->height());
 
     // m_debugNodeCount = 0;
-    m_doClip = clip;
+    d->m_doClip = clip;
     // penblue.setColor(QColor( 0, 0, 255, 255));
     // pengreen.setColor(QColor( 0, 255, 0, 255));
 }
 
 
+ClipPainter::ClipPainter()
+    : d(new ClipPainterPrivate)
+{
+}
+
+
+ClipPainter::~ClipPainter()
+{
+    delete d;
+}
+
+
 void ClipPainter::setClipping(bool enable)
 {
-    m_doClip = enable;
+    d->m_doClip = enable;
 }
 
 
 bool ClipPainter::isClipping() const
 {
-    return m_doClip;
+    return d->m_doClip;
 }
 
 
 void ClipPainter::drawPolygon ( const QPolygonF & polygon,
                                 Qt::FillRule fillRule )
 {
-    if ( m_doClip ) {	
+    if ( d->m_doClip ) {	
         clipPolyObject( polygon );
-        if ( m_clippedObject.size() > 2 ) {
+        if ( d->m_clippedObject.size() > 2 ) {
             // qDebug() << "Size: " << m_clippedObject.size();
-            QPainter::drawPolygon ( m_clippedObject, fillRule );
+            QPainter::drawPolygon ( d->m_clippedObject, fillRule );
             // qDebug() << "done";
         }
     }
@@ -70,11 +108,11 @@ void ClipPainter::drawPolygon ( const QPolygonF & polygon,
 
 void ClipPainter::drawPolyline( const QPolygonF & polygon )
 {
-    if ( m_doClip ) {	
+    if ( d->m_doClip ) {	
         clipPolyObject( polygon );
-        if ( m_clippedObject.size() > 1 ) {
+        if ( d->m_clippedObject.size() > 1 ) {
             // qDebug() << "Size: " << m_clippedObject.size();
-            QPainter::drawPolyline ( m_clippedObject );
+            QPainter::drawPolyline ( d->m_clippedObject );
             // qDebug() << "done";
         }
     }
@@ -98,7 +136,7 @@ void ClipPainter::clipPolyObject ( const QPolygonF & polygon )
     //
 
     //	qDebug() << "ClipPainter enabled." ;
-    m_clippedObject.clear();
+    d->m_clippedObject.clear();
 
     QVector<QPointF>::const_iterator        itPoint;
     const QVector<QPointF>::const_iterator  itStartPoint = polygon.begin();
@@ -106,50 +144,50 @@ void ClipPainter::clipPolyObject ( const QPolygonF & polygon )
 
     for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
 
-        m_currentPoint = (*itPoint);
+        d->m_currentPoint = (*itPoint);
         // qDebug() << "m_currentPoint.x()" << m_currentPoint.x() << "m_currentPOint.y()" << m_currentPoint.y();
 
         // Figure out the section of the current point.
-        m_currentXSector = 1;
-        if ( m_currentPoint.x() < m_left )
+        int m_currentXSector = 1;
+        if ( d->m_currentPoint.x() < d->m_left )
             m_currentXSector = 0;
-        else if ( m_currentPoint.x() > m_right ) 
+        else if ( d->m_currentPoint.x() > d->m_right ) 
             m_currentXSector = 2;
 							
-        m_currentYSector = 3;
-        if ( m_currentPoint.y() < m_top ) 
+        int m_currentYSector = 3;
+        if ( d->m_currentPoint.y() < d->m_top ) 
             m_currentYSector = 0;
-        else if ( m_currentPoint.y() > m_bottom ) 
+        else if ( d->m_currentPoint.y() > d->m_bottom ) 
             m_currentYSector = 6;
 
-        m_currentSector = m_currentYSector + m_currentXSector;
+        d->m_currentSector = m_currentYSector + m_currentXSector;
 
         // Initialize a few remaining variables.
         if ( itPoint == itStartPoint ) {
-            m_lastSector = m_currentSector;
+            d->m_lastSector = d->m_currentSector;
         }
 
         // If the current point reaches a new sector, take care of clipping.
-        if ( m_currentSector != m_lastSector ) {
-            if ( m_currentSector == 4 || m_lastSector == 4 ) {
-                m_lastBorderPoint = borderPoint();
-                m_clippedObject << m_lastBorderPoint;
+        if ( d->m_currentSector != d->m_lastSector ) {
+            if ( d->m_currentSector == 4 || d->m_lastSector == 4 ) {
+                d->m_lastBorderPoint = borderPoint();
+                d->m_clippedObject << d->m_lastBorderPoint;
             }
             else
                 manageOffScreen();		
 
-            m_lastSector = m_currentSector;
+            d->m_lastSector = d->m_currentSector;
         }
 
         // If the current point is onscreen, just add it to our final polygon.
-        if ( m_currentSector == 4 ) {
-            m_clippedObject << m_currentPoint;
+        if ( d->m_currentSector == 4 ) {
+            d->m_clippedObject << d->m_currentPoint;
 #ifdef MARBLE_DEBUG
-            ++m_debugNodeCount;
+            ++(d->m_debugNodeCount);
 #endif
         }
 
-        m_lastPoint = m_currentPoint;
+        d->m_lastPoint = d->m_currentPoint;
     }
 }
 
@@ -165,6 +203,18 @@ void ClipPainter::manageOffScreen()
     qreal  xa = 0;
     qreal  ya = 0;
 
+    // Avoid dereferencing all the time
+    const qreal m_left = d->m_left;
+    const qreal m_right = d->m_right;
+    const qreal m_top = d->m_top;
+    const qreal m_bottom = d->m_bottom;
+    int m_lastSector = d->m_lastSector;
+
+    QPolygonF&  m_clippedObject = d->m_clippedObject;
+    QPointF&    m_lastBorderPoint = d->m_lastBorderPoint;
+    QPointF&    m_currentPoint = d->m_currentPoint;
+    QPointF&    m_lastPoint = d->m_lastPoint;
+
     // Calculating the slope
     qreal  divisor = m_currentPoint.x() - m_lastPoint.x();
     if ( std::fabs( divisor ) < 0.000001 )
@@ -173,7 +223,7 @@ void ClipPainter::manageOffScreen()
 
     qreal  m = ( m_currentPoint.y() - m_lastPoint.y() ) / divisor;
 
-    switch ( m_currentSector ) {
+    switch ( d->m_currentSector ) {
     case 0:
         m_clippedObject << QPointF( m_left, m_top );
         break;
@@ -313,11 +363,20 @@ const QPointF ClipPainter::borderPoint()
     qreal  xa = 0;
     qreal  ya = 0;
 
+    // Avoid dereferencing all the time
+    const qreal m_left = d->m_left;
+    const qreal m_right = d->m_right;
+    const qreal m_top = d->m_top;
+    const qreal m_bottom = d->m_bottom;
+
+    const QPointF&    m_currentPoint = d->m_currentPoint;
+    const QPointF&    m_lastPoint = d->m_lastPoint;
+
     // Calculating the slope.
     qreal m = ( m_currentPoint.y() - m_lastPoint.y() ) 
         / ( m_currentPoint.x() - m_lastPoint.x() );
 
-    int offscreenpos = ( m_currentSector == 4 ) ? m_lastSector : m_currentSector;
+    int offscreenpos = ( d->m_currentSector == 4 ) ? d->m_lastSector : d->m_currentSector;
 
     // "Rise over run" for all possible situations .
     switch ( offscreenpos ) {
