@@ -36,7 +36,8 @@ QStringList MarbleCrosshairsPlugin::renderPosition() const
 
 QString MarbleCrosshairsPlugin::name() const
 {
-    return tr( "Crosshairs Plugin" );
+    // FIXME (once we are out of string freeze):
+    return tr( "Cross&hairs" ).remove( QChar( '&' ) ); // return tr( "Crosshairs" );
 }
 
 QString MarbleCrosshairsPlugin::guiString() const
@@ -51,7 +52,7 @@ QString MarbleCrosshairsPlugin::nameId() const
 
 QString MarbleCrosshairsPlugin::description() const
 {
-    return tr( "A plugin that shows crosshairs." );
+    return QString( "" ); // tr( "A plugin that shows crosshairs." );
 }
 
 QIcon MarbleCrosshairsPlugin::icon () const
