@@ -47,14 +47,14 @@ class WorldClock : public Plasma::Containment
     public:
         WorldClock(QObject *parent, const QVariantList &args);
         ~WorldClock();
-	void init();
+        void init();
         void paintInterface(QPainter *painter,
-	                    const QStyleOptionGraphicsItem *option,
-                            const QRect& contentsRect);
+                    const QStyleOptionGraphicsItem *option,
+                    const QRect& contentsRect);
     public slots:
         void dataUpdated(const QString &source,
-	                 const Plasma::DataEngine::Data &data);
-	void createConfigurationInterface(KConfigDialog *parent);
+                    const Plasma::DataEngine::Data &data);
+        void createConfigurationInterface(KConfigDialog *parent);
         void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
         void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
         void hoverMoveEvent(QGraphicsSceneHoverEvent *event);
