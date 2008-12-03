@@ -10,20 +10,20 @@ include_directories(
    ${CMAKE_BINARY_DIR}
    ${KDE4_INCLUDES}
    )
- 
+
 set(worldclock_SRCS worldclock.cpp )
 
 qt4_add_resources(worldclock_SRCS ../marble.qrc)
 
 kde4_add_ui_files( worldclock_SRCS worldclockConfig.ui )
- 
+
 kde4_add_plugin(plasma_applet_worldclock ${worldclock_SRCS})
 target_link_libraries(plasma_applet_worldclock
-                      ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_PLASMA_LIBS}
+                      ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} ${PLASMA_LIBS}
                       marblewidget )
- 
+
 install(TARGETS plasma_applet_worldclock
         DESTINATION ${PLUGIN_INSTALL_DIR})
- 
+
 install(FILES plasma-applet-kworldclock.desktop
         DESTINATION ${SERVICES_INSTALL_DIR})

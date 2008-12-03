@@ -75,7 +75,7 @@ WorldClock::WorldClock(QObject *parent, const QVariantList &args)
 void WorldClock::init()
 {
     KConfigGroup cg = config();
-    m_map = new MarbleMap( this );
+    m_map = new MarbleMap();
     if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Mercator)
         m_map->setProjection(Mercator);
     else
@@ -106,14 +106,25 @@ void WorldClock::init()
     m_map->updateSun();
     m_map->setNeedsUpdate();
 
+    m_customTz = cg.readEntry("customtz", false );
     m_locationkey = QString(KSystemTimeZones::local().name());
-    m_locations = KSystemTimeZones::zones();
-    QList<QString> zones = m_locations.keys();
-    for (int i = 0; i < zones.size(); ++i ) {
-        KTimeZone curzone = m_locations.value( zones.at( i ) );
-        if ( curzone.latitude() == KTimeZone::UNKNOWN ||
-             curzone.longitude() == KTimeZone::UNKNOWN ) {
-            m_locations.remove( zones.at(i) );
+    if(m_customTz) {
+        QStringList tzlist = cg.readEntry("tzlist", QStringList());
+        m_locations = QMap<QString, KTimeZone>();
+        foreach( const QString tzname, tzlist ) {
+            m_locations.insert(tzname, KSystemTimeZones::zone(tzname));
+        }
+        if(!m_locations.contains(m_locationkey))
+            m_locationkey = m_locations.keys().first();
+    } else {
+        m_locations = KSystemTimeZones::zones();
+        QList<QString> zones = m_locations.keys();
+        for (int i = 0; i < zones.size(); ++i ) {
+            KTimeZone curzone = m_locations.value( zones.at( i ) );
+            if ( curzone.latitude() == KTimeZone::UNKNOWN ||
+                curzone.longitude() == KTimeZone::UNKNOWN ) {
+                m_locations.remove( zones.at(i) );
+            }
         }
     }
 
@@ -405,7 +416,13 @@ void WorldClock::createConfigurationInterface(KConfigDialog *parent)
     if(cg.readEntry("showdate", false ))
         ui.showdate->setChecked(true);
 
+    if(cg.readEntry("customtz", false ))
+        ui.customTz->setChecked(true);
+
     ui.tzWidget->setSelectionMode( QTreeView::MultiSelection );
+    foreach(const QString tz, cg.readEntry("tzlist")) {
+        ui.tzWidget->setSelected(tz,true);
+    }
 
     connect(parent, SIGNAL(okClicked()), this, SLOT(configAccepted()));
     connect(parent, SIGNAL(applyClicked()), this, SLOT(configAccepted()));
@@ -425,6 +442,26 @@ void WorldClock::configAccepted()
 
     if( ui.showdate->isChecked() != cg.readEntry("showdate", false))
         m_showDate = ui.showdate->isChecked();
+
+    if( ui.customTz->isChecked() != cg.readEntry("customtz", false)) {
+        m_customTz = ui.customTz->isChecked();
+    }
+
+    if(m_customTz) {
+        QStringList tzlist = ui.tzWidget->selection();
+        kDebug() << "\tSetting TZLIST";
+        kDebug() << tzlist;
+        QMap<QString, KTimeZone> selectedZones;
+        selectedZones.insert(KSystemTimeZones::local().name(),
+                                KSystemTimeZones::local());
+        foreach( const QString tzname, tzlist ) {
+            selectedZones.insert(tzname, KSystemTimeZones::zone(tzname));
+        }
+        cg.writeEntry("tzlist",tzlist);
+        m_locations = selectedZones;
+        if(!m_locations.contains(m_locationkey))
+            m_locationkey = m_locations.keys().first();
+    }
 
     // What projection? note: +1 because the spherical projection is 0
     if((ui.projection->currentIndex() + 1) != cg.readEntry("projection",
@@ -452,6 +489,7 @@ void WorldClock::configAccepted()
     cg.writeEntry("rotation", ui.longitudeEdit->value());
     cg.writeEntry("centersun", ui.daylightButton->isChecked());
     cg.writeEntry("showdate", ui.showdate->isChecked());
+    cg.writeEntry("customtz", ui.customTz->isChecked());
 
     emit configNeedsSaving();
 }

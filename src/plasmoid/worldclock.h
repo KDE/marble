@@ -80,6 +80,8 @@ class WorldClock : public Plasma::Containment
         //time in user's local zone
         QDateTime m_localtime;
         bool m_showDate;
+        //use custom zone list?
+        bool m_customTz;
 
         //the translation
         QPoint m_t;
