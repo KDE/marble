@@ -10,6 +10,8 @@
 #ifndef BOUNDINGBOX_H
 #define BOUNDINGBOX_H
 
+#include "marble_export.h"
+
 
 #include <QtCore/QVector>
 #include <QtCore/QPointF>

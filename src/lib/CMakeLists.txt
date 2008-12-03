@@ -270,6 +270,7 @@ else (APPLE AND QTONLY)
   install( FILES
     MarbleWidget.h
     MarbleMap.h
+    MarbleModel.h
     MarbleControlBox.h
     MarbleNavigator.h
     MarbleDataFacade.h
@@ -308,7 +309,7 @@ else (APPLE AND QTONLY)
     marble_export.h
 
     LatLonEdit.h
-
+    BoundingBox.h
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
 endif (APPLE AND QTONLY)
