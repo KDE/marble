@@ -179,7 +179,8 @@ set (marblewidget_UI
     SunControlWidget.ui
 )
 
-qt4_add_resources(marblewidget_SRCS libmarble.qrc)
+# FIXME: cleaner approach of src/lib/MarbleControlBox.* vs. marble.qrc 
+qt4_add_resources(marblewidget_SRCS libmarble.qrc ../marble.qrc)
 
 if (QTONLY)
   qt4_wrap_ui(marblewidget_SRCS ${marblewidget_UI})
