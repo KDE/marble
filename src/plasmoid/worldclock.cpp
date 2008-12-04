@@ -142,7 +142,6 @@ void WorldClock::init()
 WorldClock::~WorldClock()
 {
     delete m_map;
-    delete m_sun;
 }
 
 void WorldClock::resizeMap(bool changeAspect)
