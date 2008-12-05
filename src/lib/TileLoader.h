@@ -138,12 +138,6 @@ class TileLoader : public QObject
         quint64 volatileCacheLimit() const;
 
         /**
-         * Returns the highest level in which all tiles are available for the given @p
-         * texture layer.
-         */
-        static int maxCompleteTileLevel( Marble::GeoSceneTexture *textureLayer );
-
-        /**
          * Returns the highest level in which some tiles are available for the given @p
          * texture layer.
          */

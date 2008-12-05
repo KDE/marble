@@ -244,46 +244,6 @@ quint64 TileLoader::volatileCacheLimit() const
     return d->m_tileCache.maxCost() / 1024;
 }
 
-int TileLoader::maxCompleteTileLevel( GeoSceneTexture *textureLayer )
-{
-    bool noerr = true;
-
-    int tilelevel = -1;
-    int trylevel  = 0;
-
-    const int levelZeroColumns = textureLayer->levelZeroColumns();
-    const int levelZeroRows = textureLayer->levelZeroRows();
-
-    // if ( m_bitmaplayer.type.toLower() == "bitmap" ){
-    while ( noerr == true ) {
-        const int maxRow = TileLoaderHelper::levelToRow( levelZeroRows, trylevel );
-
-        for ( int row = 0; noerr && row < maxRow; ++row ) {
-            const int maxColumn = TileLoaderHelper::levelToColumn( levelZeroColumns, trylevel );
-
-            for ( int column = 0; noerr && column < maxColumn; ++column ) {
-                QString tilepath = MarbleDirs::path(
-                    TileLoaderHelper::relativeTileFileName( textureLayer, trylevel, column, row ));
-                // qDebug() << tilepath;
-                noerr = QFile::exists( tilepath );
-            }
-        }
-
-        if ( noerr == true )
-            tilelevel = trylevel;
-
-        ++trylevel;
-    }
-
-    if ( tilelevel == -1 ) {
-        qDebug("No Tiles Found!");
-    }
-
-    //qDebug() << "Detected maximum complete tile level: " << tilelevel;
-
-    return tilelevel;
-}
-
 
 int TileLoader::maxPartialTileLevel( GeoSceneTexture *textureLayer )
 {
@@ -301,7 +261,6 @@ int TileLoader::maxPartialTileLevel( GeoSceneTexture *textureLayer )
          ++constIterator)
     {
         int value = (*constIterator).toInt( &ok, 10 );
-        // qDebug() << "Value: " << value  << "Ok: " << ok;
         if ( ok && value > maxtilelevel )
             maxtilelevel = value;
     }
@@ -321,8 +280,6 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture *textureLayer )
 
     // Check whether the tiles from the lowest texture level are available
     //
-    // FIXME: marble could theoretically start without local tiles, too.
-    //        They can be downloaded.
     for ( int column = 0; noerr && column < levelZeroColumns; ++column ) {
         for ( int row = 0; noerr && row < levelZeroRows; ++row ) {
 
@@ -331,9 +288,6 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture *textureLayer )
             noerr = QFile::exists( tilepath );
         }
     }
-
-    //qDebug() << "Mandatory most basic tile level is fully available: " 
-    //	     << noerr;
 
     return noerr;
 }

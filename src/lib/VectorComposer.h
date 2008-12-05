@@ -38,9 +38,16 @@ class ViewParams;
 
 class VectorComposer
 {
+
  public:
     VectorComposer();
     virtual ~VectorComposer();
+
+    // This method contains all the polygons that define the coast lines.
+    void loadCoastlines();
+
+    // This method contains all the other polygons
+    void loadOverlay();
 
     void  drawTextureMap( ViewParams *viewParams );
     void  paintBaseVectorMap( GeoPainter*, ViewParams* );

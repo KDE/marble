@@ -15,6 +15,7 @@
 
 #include <QtGui/QColor>
 #include <QtCore/QDebug>
+#include <QtCore/QTimer>
 
 #include "GeoPolygon.h"
 #include "GeoPainter.h"
@@ -27,35 +28,18 @@
 using namespace Marble;
 
 VectorComposer::VectorComposer()
+    : m_coastLines( new PntMap() ),
+      m_islands( new PntMap() ),
+      m_lakeislands( new PntMap() ),
+      m_lakes( new PntMap() ),
+      m_glaciers( new PntMap() ),
+      m_rivers( new PntMap() ),
+      m_countries( new PntMap() ),
+      m_usaStates( new PntMap() ),
+      m_dateLine( new PntMap() ),
+      m_vectorMap( new VectorMap() )
 {
-
-    m_coastLines = new PntMap();
-    m_coastLines->load( MarbleDirs::path( "mwdbii/PCOAST.PNT" ) );
-
-    m_islands = new PntMap();
-    m_islands->load( MarbleDirs::path( "mwdbii/PISLAND.PNT" ) );
-    m_lakeislands = new PntMap();
-    m_lakeislands->load( MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" ) );
-    m_lakes = new PntMap();
-    m_lakes->load( MarbleDirs::path( "mwdbii/PLAKE.PNT" ) );
-    m_glaciers = new PntMap();
-    m_glaciers->load( MarbleDirs::path( "mwdbii/PGLACIER.PNT" ) );
-    m_rivers = new PntMap();
-    m_rivers->load( MarbleDirs::path( "mwdbii/RIVER.PNT" ) );
-
-    // The countries.
-    m_countries = new PntMap();
-    m_countries->load( MarbleDirs::path( "mwdbii/PDIFFBORDER.PNT" ) );
-
-    // The States of the USA.
-    m_usaStates = new PntMap();
-    m_usaStates->load( MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" ) );
-
-    // The date "line", which in reality is rather crooked.
-    m_dateLine = new PntMap();
-    m_dateLine->load( MarbleDirs::path( "mwdbii/DATELINE.PNT" ) );
-
-    m_vectorMap = new VectorMap();
+    // Initialize the data
 
     m_textureLandPen   = QPen( Qt::NoPen );
     m_textureLandBrush = QBrush( QColor( 255, 0, 0 ) );
@@ -74,6 +58,9 @@ VectorComposer::VectorComposer()
     m_dateLinePen.setStyle( Qt::DashLine );
     m_dateLinePen.setColor( QColor( 0, 0, 0 ) );
     m_dateLineBrush = QBrush( Qt::NoBrush );
+
+    loadCoastlines();
+    loadOverlay();
 }
 
 VectorComposer::~VectorComposer()
@@ -88,6 +75,32 @@ VectorComposer::~VectorComposer()
     delete m_islands;
     delete m_coastLines;
     delete m_vectorMap;
+}
+
+void VectorComposer::loadCoastlines()
+{
+    m_coastLines->load( MarbleDirs::path( "mwdbii/PCOAST.PNT" ) );
+    m_islands->load( MarbleDirs::path( "mwdbii/PISLAND.PNT" ) );
+    m_lakeislands->load( MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" ) );
+    m_lakes->load( MarbleDirs::path( "mwdbii/PLAKE.PNT" ) );
+}
+
+void VectorComposer::loadOverlay()
+{
+    // Ice and snow ...
+    m_glaciers->load( MarbleDirs::path( "mwdbii/PGLACIER.PNT" ) );
+
+    // The rivers.
+    m_rivers->load( MarbleDirs::path( "mwdbii/RIVER.PNT" ) );
+
+    // The countries.
+    m_countries->load( MarbleDirs::path( "mwdbii/PDIFFBORDER.PNT" ) );
+
+    // The States of the USA.
+    m_usaStates->load( MarbleDirs::path( "mwdbii/PUSA48.DIFF.PNT" ) );
+
+    // The date "line", which in reality is rather crooked.
+    m_dateLine->load( MarbleDirs::path( "mwdbii/DATELINE.PNT" ) );
 }
 
 void VectorComposer::drawTextureMap(ViewParams *viewParams)
