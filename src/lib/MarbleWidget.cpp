@@ -412,6 +412,8 @@ bool MarbleWidget::showAtmosphere() const
 bool MarbleWidget::showCrosshairs() const
 {
 //    return d->m_map->showAtmosphere();
+    // ###
+    return false;
 }
 
 bool MarbleWidget::showGrid() const
