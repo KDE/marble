@@ -20,34 +20,50 @@
 // Marble
 #include "TileCreator.h"
 
-using namespace Marble;
+#include "ui_TileCreatorDialog.h"
 
-TileCreatorDialog::TileCreatorDialog(TileCreator *creator, QWidget *parent)
-    : QDialog(parent), m_creator( creator )
+namespace Marble
 {
-    setupUi(this);
 
-    connect( m_creator, SIGNAL( progress( int ) ),
+class TileCreatorDialogPrivate
+{
+ public:
+    Ui::TileCreatorDialog  uiWidget;
+
+    TileCreator *m_creator;
+};
+
+    
+TileCreatorDialog::TileCreatorDialog(TileCreator *creator, QWidget *parent)
+    : QDialog(parent),
+      d( new TileCreatorDialogPrivate )
+{
+    d->m_creator = creator;
+    
+    d->uiWidget.setupUi(this);
+
+    connect( d->m_creator, SIGNAL( progress( int ) ),
              this, SLOT( setProgress( int ) ), Qt::QueuedConnection );
 
     // Start the creation process
-    m_creator->start();
+    d->m_creator->start();
 }
 
 TileCreatorDialog::~TileCreatorDialog()
 {
-    disconnect( m_creator, SIGNAL( progress( int ) ),
+    disconnect( d->m_creator, SIGNAL( progress( int ) ),
                 this, SLOT( setProgress( int ) ) );
 
-    if ( m_creator->isRunning() )
-        m_creator->cancelTileCreation();
-    m_creator->wait();
-    m_creator->deleteLater();
+    if ( d->m_creator->isRunning() )
+        d->m_creator->cancelTileCreation();
+    d->m_creator->wait();
+    d->m_creator->deleteLater();
+    delete d;
 }
 
 void TileCreatorDialog::setProgress( int progress )
 {
-    progressBar->setValue( progress );
+    d->uiWidget.progressBar->setValue( progress );
 
     if ( progress == 100 )
 	{
@@ -59,7 +75,9 @@ void TileCreatorDialog::setSummary( const QString& name,
                                     const QString& description )
 { 
     const QString summary = "<B>" + tr( name.toUtf8() ) + "</B><BR>" + tr( description.toUtf8() );
-    descriptionLabel->setText( summary );
+    d->uiWidget.descriptionLabel->setText( summary );
+}
+
 }
 
 #include "TileCreatorDialog.moc"

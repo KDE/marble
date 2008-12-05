@@ -17,15 +17,17 @@
 #ifndef TILECREATORDIALOG_H
 #define TILECREATORDIALOG_H
 
+#include <QtGui/QDialog>
 
-#include "ui_TileCreatorDialog.h"
+#include "marble_export.h"
 
 namespace Marble
 {
 
 class TileCreator;
+class TileCreatorDialogPrivate;
 
-class TileCreatorDialog : public QDialog, private Ui::TileCreatorDialog
+class MARBLE_EXPORT TileCreatorDialog : public QDialog
 {
 
     Q_OBJECT
@@ -39,7 +41,8 @@ class TileCreatorDialog : public QDialog, private Ui::TileCreatorDialog
     void setSummary( const QString& name, const QString& description );
 
  private:
-    TileCreator *m_creator;
+    Q_DISABLE_COPY( TileCreatorDialog )
+    TileCreatorDialogPrivate  * const d;
 };
 
 }
