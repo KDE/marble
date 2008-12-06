@@ -35,6 +35,9 @@ class MarbleMapPrivate
     inline static int fromLogScale( int zoom ) { return (int)pow( M_E, ( (qreal)zoom / 200.0 ) ); }
 
     void  construct();
+
+    void  paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect );
+
     void  drawAtmosphere();
     void  drawFog(QPainter &painter);
     void  setBoundingBox();

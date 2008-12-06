@@ -32,7 +32,6 @@ const int J2000 = 2451545; // epoch J2000 = 1 January 2000, noon Terrestrial Tim
 const qreal MOON_EPOCH = 2415035.297; // value from http://home.hiwaay.net/~krcool/Astro/moon/fullmoon.htm
 const qreal MOON_SYNODIC_PERIOD = 29.530588;
 
-const qreal twilightZone = 0.1; // this equals 18 deg astronomical twilight.
 const int update_interval = 60000; // emit updateSun() every update_interval ms
 
 namespace Marble {
@@ -101,6 +100,12 @@ qreal SunLocator::shading(qreal lon, qreal lat)
       h = 1.0 // opposite side of earth to the sun
       theta = 2*asin(sqrt(h))
     */
+
+    qreal twilightZone = 0.0;
+
+    if ( m_body == "earth" || m_body == "venus" ) {
+        twilightZone = 0.1; // this equals 18 deg astronomical twilight.
+    }
 	
     qreal brightness;
     if ( h <= 0.5 - twilightZone / 2.0 )

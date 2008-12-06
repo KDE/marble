@@ -35,7 +35,7 @@ using namespace Marble;
 
 MergedLayerDecorator::MergedLayerDecorator(SunLocator* sunLocator)
  : m_sunLocator(sunLocator),
-   m_cloudlayer(false),
+   m_cloudlayer(true),
    m_showTileId(false),
    m_cityLightsTheme(MapThemeManager::loadMapTheme("earth/citylights/citylights.dgml")),
    m_blueMarbleTheme(MapThemeManager::loadMapTheme("earth/bluemarble/bluemarble.dgml")),

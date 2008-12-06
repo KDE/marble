@@ -52,7 +52,6 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
 
     connect( marbleWidget(), SIGNAL( themeChanged( QString ) ), 
 	     this, SLOT( setMapTitle() ) );
-    setMapTitle();
 }
 
 MainWindow::~MainWindow()
@@ -72,7 +71,10 @@ MarbleWidget* MainWindow::marbleWidget() const
 
 void MainWindow::setMapTitle()
 {
-    setCaption( marbleWidget()->mapTheme()->head()->name() );
+    GeoSceneDocument *mapTheme = marbleWidget()->mapTheme();
+    if ( mapTheme ) {
+        setCaption( mapTheme->head()->name() );
+    }
 }
 
 }

@@ -554,6 +554,11 @@ void GeoPainter::drawText ( int x, int y, const QString &text )
     QPainter::drawText( x, y, text );
 }
 
+void GeoPainter::drawText(  const QRect & rectangle, int flags, const QString & text, QRect * boundingRect )
+{
+    QPainter::drawText( rectangle, flags, text, boundingRect );
+}
+
 void GeoPainter::drawEllipse ( int x, int y, int width, int height )
 {
     QPainter::drawEllipse( x, y, width, height);

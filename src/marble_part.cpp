@@ -94,8 +94,6 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
 
     setupActions();
 
-    readSettings();
-
     setXMLFile( "marble_part.rc" );
 
     m_statusBarExtension = new KParts::StatusBarExtension( this );
@@ -103,7 +101,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     m_position = NOT_AVAILABLE;
     m_distance = m_controlView->marbleWidget()->distanceString();
 
-    QTimer::singleShot( 0, this, SLOT( setupStatusBar() ) );
+    QTimer::singleShot( 0, this, SLOT( initObject() ) );
 }
 
 MarblePart::~MarblePart()
@@ -111,6 +109,13 @@ MarblePart::~MarblePart()
     writeSettings();
     delete m_pluginModel;
     delete m_configDialog;
+}
+
+void MarblePart::initObject()
+{
+    QCoreApplication::processEvents ();
+    setupStatusBar();
+    readSettings();
 }
 
 ControlView* MarblePart::controlView() const
@@ -520,7 +525,7 @@ void MarblePart::setupActions()
     m_showCrosshairsAction->setChecked( true );
     m_showCrosshairsAction->setText( i18n( "Cross&hairs" ) );
     connect( m_showCrosshairsAction, SIGNAL( triggered( bool ) ),
-         this,               SLOT( setShowShowCrosshairs( bool ) ) );
+         this,               SLOT( setShowCrosshairs( bool ) ) );
 
     // Action: Show Clouds option
     m_showCloudsAction = new KAction( this );
@@ -550,8 +555,6 @@ void MarblePart::setupActions()
 
     KStandardAction::preferences( this, SLOT( editSettings() ),
 				  actionCollection() );
-
-    readSettings();
 }
 
 void MarblePart::createInfoBoxesMenu()

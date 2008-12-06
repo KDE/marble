@@ -104,11 +104,6 @@ void MarbleMapPrivate::construct()
     // FloatItems
     m_showFrameRate = false;
 
-    // Map translation
-    QString      locale = QLocale::system().name();
-    QTranslator  translator;
-    translator.load(QString("marblemap_") + locale);
-    QCoreApplication::installTranslator(&translator);
 
     m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
                         m_parent,              SLOT( updateSun() ) );
@@ -134,6 +129,33 @@ void MarbleMapPrivate::doResize()
                                             QImage::Format_ARGB32_Premultiplied ));
 
     m_justModified = true;
+}
+
+void  MarbleMapPrivate::paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect )
+{
+    painter.save();
+
+    QPixmap logoPixmap( MarbleDirs::path( "svg/marble-logo-inverted-72dpi.png" ) );
+
+    if ( logoPixmap.width() > m_parent->width() * 0.7 || logoPixmap.height() > m_parent->height() * 0.7 )
+    {
+        logoPixmap = logoPixmap.scaled( QSize( m_parent->width(), m_parent->height() ) * 0.7, Qt::KeepAspectRatio, Qt::SmoothTransformation );
+    }
+
+    QPoint logoPosition( ( m_parent->width()  - logoPixmap.width() ) / 2 , 
+                            ( m_parent->height() - logoPixmap.height() ) / 2 ); 
+    painter.drawPixmap( logoPosition, logoPixmap );
+
+    QString message = ""; // "Please assign a map theme!";
+
+    painter.setPen( Qt::white );
+
+    int yTop = logoPosition.y() + logoPixmap.height() + 10;
+    QRect textRect( 0, yTop,
+                    m_parent->width(), m_parent->height() - yTop );
+    painter.drawText( textRect, Qt::AlignHCenter | Qt::AlignTop, message ); 
+
+    painter.restore();
 }
 
 void MarbleMapPrivate::drawAtmosphere()
@@ -239,10 +261,12 @@ void MarbleMapPrivate::setBoundingBox()
     m_viewParams.viewport()->setBoundingBox( BoundingBox( points ) );
 }
 
-void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect)
+void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
 {
-    if ( !m_viewParams.mapTheme() ) {
+    if ( !m_viewParams.mapTheme() ) 
+    {
         qDebug() << "No theme yet!";
+        paintMarbleSplash( painter, dirtyRect );
         return;
     }
 
@@ -272,6 +296,11 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect)
 
 void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect)
 {
+    if ( !m_viewParams.mapTheme() ) 
+    {
+        return;
+    }
+
     // FIXME: Add this stuff into the Layermanager as something to be 
     // called before the float items.
 
@@ -903,7 +932,11 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
 void MarbleMap::customPaint(GeoPainter *painter)
 {
     Q_UNUSED( painter );
-    /* This is a NOOP */
+
+    if ( !viewParams()->mapTheme() ) 
+    {
+        return;
+    }
 }
 
 void MarbleMap::goHome()

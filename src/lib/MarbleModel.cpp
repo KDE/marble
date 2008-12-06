@@ -155,9 +155,6 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
 
-//    connect( d->m_tileLoader, SIGNAL( paintTile(TextureTile*, int, int, int, GeoSceneTexture*, bool) ),
-//             this,            SLOT( paintTile(TextureTile*, int, int, int, GeoSceneTexture*, bool) ) );
-
     d->m_texmapper = 0;
     d->m_gridmap      = new GridMap( this );
     
@@ -208,11 +205,6 @@ MarbleModel::MarbleModel( QObject *parent )
             d->m_sunLocator, SLOT( update() ) );
     connect( d->m_layerDecorator, SIGNAL( repaintMap() ),
                                   SIGNAL( modelChanged() ) );
-
-    // Initialize some settings.
-    // FIXME: Be able to set these somewhere
-    d->m_layerDecorator->setShowClouds( true );
-    d->m_layerDecorator->setShowTileId( false );
 }
 
 MarbleModel::~MarbleModel()

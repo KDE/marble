@@ -62,11 +62,6 @@ namespace Marble
 #endif
 
 
-// FIXME(IW): Why is the construct function in
-//            MarbleWidgetPrivate??  That class is only supposed to
-//            hold data for binary compatibility, not have functions.
-
-
 class MarbleWidgetPrivate
 {
  public:
@@ -91,8 +86,6 @@ class MarbleWidgetPrivate
     }
 
     void  construct();
-
-    void  paintEmptyMapWarning();
 
     MarbleWidget    *m_widget;
     // The model we are showing.
@@ -138,8 +131,6 @@ MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
 
     d->construct();
-    
-    setMapThemeId("earth/srtm/srtm.dgml");
 }
 
 MarbleWidget::~MarbleWidget()
@@ -217,12 +208,6 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->goHome();
 
-    // Widget translation
-    QString      locale = QLocale::system().name();
-    QTranslator  translator;
-    translator.load(QString("marblewidget_") + locale);
-    QCoreApplication::installTranslator(&translator);
-
     m_widget->connect( m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
                        m_widget, SLOT( enableInput() ) );
 
@@ -232,32 +217,6 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_physics, SIGNAL( valueChanged( qreal ) ),
                         m_widget, SLOT( updateAnimation( qreal ) ) );
 }
-
-void  MarbleWidgetPrivate::paintEmptyMapWarning()
-{
-    QPainter logoPainter;
-    logoPainter.begin( m_widget );
-
-    QPixmap logoPixmap( MarbleDirs::path( "svg/marble-logo-inverted-72dpi.png" ) );
-
-    if ( logoPixmap.width() > m_widget->width() * 0.7 || logoPixmap.height() > m_widget->height() * 0.7 )
-    {
-        logoPixmap = logoPixmap.scaled( m_widget->size() * 0.7, Qt::KeepAspectRatio, Qt::SmoothTransformation );
-    }
-
-    QPoint logoPosition( ( m_widget->width()  - logoPixmap.width() ) / 2 , 
-                            ( m_widget->height() - logoPixmap.height() ) / 2 ); 
-    logoPainter.drawPixmap( logoPosition, logoPixmap );
-
-    QString noThemeWarning = "Please assign a map theme!";
-
-    logoPainter.setPen( Qt::white );
-    QRect textRect( 0, logoPosition.y() + logoPixmap.height() + m_widget->fontMetrics().height(),
-                    m_widget->width(), m_widget->fontMetrics().height() );
-    logoPainter.drawText( textRect, Qt::AlignCenter, noThemeWarning ); 
-    logoPainter.end();
-}
-
 
 // ----------------------------------------------------------------
 
@@ -411,9 +370,7 @@ bool MarbleWidget::showAtmosphere() const
 
 bool MarbleWidget::showCrosshairs() const
 {
-//    return d->m_map->showAtmosphere();
-    // ###
-    return false;
+    return d->m_map->showCrosshairs();
 }
 
 bool MarbleWidget::showGrid() const
@@ -840,12 +797,6 @@ const QRegion MarbleWidget::projectedRegion()
 
 void MarbleWidget::paintEvent(QPaintEvent *evt)
 {
-    if ( mapThemeId().isEmpty() ) 
-    {
-        d->paintEmptyMapWarning();
-        return;
-    }
-
     QTime t;
     t.start();
 

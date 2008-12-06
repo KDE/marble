@@ -47,12 +47,14 @@ class MarblePart: public KParts::ReadOnlyPart
     void  createInfoBoxesMenu();
 
   public Q_SLOTS:
-    bool openUrl( const KUrl &url );
-    bool openFile();
+    bool  openUrl( const KUrl &url );
+    bool  openFile();
     void  showPosition( const QString& position);
     void  showDistance( const QString& position);
 
   private Q_SLOTS:
+    void  initObject();
+
     void  exportMapScreenShot();
     void  printMapScreenShot();
     void  copyMap();

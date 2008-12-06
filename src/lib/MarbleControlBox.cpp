@@ -180,10 +180,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->m_runnerManager = new MarbleRunnerManager( this );
     
     connect( d->m_runnerManager, SIGNAL( modelChanged(  MarblePlacemarkModel* ) ),
-             this,               SLOT( runnerModelChanged( MarblePlacemarkModel* ) ) );
-    
-    
-    
+             this,               SLOT( runnerModelChanged( MarblePlacemarkModel* ) ) );    
 }
 
 MarbleControlBox::~MarbleControlBox()
