@@ -33,9 +33,12 @@ QString TileId::toString() const
 
 TileId TileId::fromString( QString const& idStr )
 {
-    return TileId( idStr.section( ':', 0, 0 ).toInt(),
-                   idStr.section( ':', 1, 1 ).toInt(),
-                   idStr.section( ':', 2, 2 ).toInt() );
+    int first = idStr.indexOf( ':' );
+    int last = idStr.lastIndexOf( ':' );
+
+    return TileId( idStr.left( first ).toInt(),
+                   idStr.mid( first + 1, last - first - 1 ).toInt(),
+                   idStr.mid( last + 1 ).toInt() );
 }
 
 int TileId::x() const

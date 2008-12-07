@@ -322,9 +322,9 @@ void TextureColorizer::generatePalette(const QString& seafile,
 
         while ( !stream.atEnd() ) {
             stream >> evalstrg;
-            if ( !evalstrg.isEmpty() && evalstrg.contains( "=" ) ) {
-                QString  colorValue = evalstrg.section( "=", 0, 0 );
-                QString  colorPosition = evalstrg.section( "=", 1, 1 );
+            if ( !evalstrg.isEmpty() && evalstrg.contains( '=' ) ) {
+                QString  colorValue = evalstrg.left( evalstrg.indexOf( '=' ) );
+                QString  colorPosition = evalstrg.mid( evalstrg.indexOf( '=' ) + 1 );
                 gradient.setColorAt( colorPosition.toDouble(),
 				     QColor( colorValue ) );
             }
