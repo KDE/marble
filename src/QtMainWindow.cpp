@@ -63,13 +63,19 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWi
     createMenus();
     createStatusBar();
 
-    readSettings();
     setUpdatesEnabled( true );
 
     m_position = NOT_AVAILABLE;
     m_distance = marbleWidget()->distanceString();
 
+    QTimer::singleShot( 0, this, SLOT( initObject() ) );
+}
+
+void MainWindow::initObject()
+{
+    QCoreApplication::processEvents ();
     setupStatusBar();
+    readSettings();
 }
 
 void MainWindow::createActions()

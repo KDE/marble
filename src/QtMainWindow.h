@@ -58,6 +58,7 @@ class MainWindow : public QMainWindow
     void  showDistance( const QString& position);
 
  private Q_SLOTS:
+    void  initObject();
     void  exportMapScreenShot();
     void  printMapScreenShot();
     void  copyMap();
@@ -73,6 +74,8 @@ class MainWindow : public QMainWindow
     void  aboutMarble();
     void  openFile();
     void  setupStatusBar();
+
+    void createInfoBoxesMenu();
 
  private:
     ControlView *m_controlView;
@@ -105,7 +108,6 @@ class MainWindow : public QMainWindow
     QLabel       *m_positionLabel;
     QLabel       *m_distanceLabel;
 
-    void createInfoBoxesMenu();
     void updateStatusBar();
 };
 

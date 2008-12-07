@@ -70,10 +70,10 @@ MapThemeManager::~MapThemeManager()
 void MapThemeManager::initFileSystemWatcher()
 {
     const QStringList paths = pathsToWatch();
-
+/*
     foreach(const QString& path, paths)
         qDebug() << "path to watch: " << path;
-
+*/
     d->m_fileSystemWatcher = new QFileSystemWatcher( paths, this );
     connect( d->m_fileSystemWatcher, SIGNAL( directoryChanged( const QString& )),
              this, SLOT( directoryChanged( const QString& )));
@@ -229,12 +229,14 @@ QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThe
     }
     else {
         // Make sure we don't keep excessively large previews in memory
-        // TODO: Scale the icon down to the default icon size in katlasselectview.
+        // TODO: Scale the icon down to the default icon size in MarbleSelectView.
         //       For now maxIconSize already equals what's expected by the listview.
         QSize maxIconSize( 136, 136 );
-        themeIconPixmap = themeIconPixmap.scaled( maxIconSize, 
-                                                  Qt::KeepAspectRatio,
-                                                  Qt::SmoothTransformation );
+        if ( themeIconPixmap.size() != maxIconSize ) {
+            themeIconPixmap = themeIconPixmap.scaled( maxIconSize, 
+                                                    Qt::KeepAspectRatio,
+                                                    Qt::SmoothTransformation );
+        }
     }
 
     QIcon mapThemeIcon =  QIcon(themeIconPixmap);
