@@ -59,6 +59,7 @@ int main (int argc, char *argv[])
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
     KApplication app;
+    KGlobal::locale()->insertCatalog("marble_qt");
 
     QString  marbleDataPath;
     int      dataPathIndex = 0;
