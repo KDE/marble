@@ -1188,6 +1188,16 @@ void MarbleWidget::setDefaultAngleUnit( Marble::AngleUnit angleUnit )
     map()->setDefaultAngleUnit( angleUnit );
 }
 
+Marble::DistanceUnit MarbleWidget::defaultDistanceUnit() const
+{
+    return map()->defaultDistanceUnit();
+}
+
+void MarbleWidget::setDefaultDistanceUnit( Marble::DistanceUnit distanceUnit )
+{
+    map()->setDefaultDistanceUnit( distanceUnit );
+}
+
 QFont MarbleWidget::defaultFont() const
 {
     return map()->defaultFont();

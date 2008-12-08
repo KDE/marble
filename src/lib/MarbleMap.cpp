@@ -1241,6 +1241,16 @@ void MarbleMap::setDefaultAngleUnit( Marble::AngleUnit angleUnit )
     GeoDataCoordinates::setDefaultNotation( GeoDataCoordinates::DMS );
 }
 
+
+Marble::DistanceUnit MarbleMap::defaultDistanceUnit() const
+{
+    return Marble::Metric;
+}
+
+void MarbleMap::setDefaultDistanceUnit( Marble::DistanceUnit distanceUnit )
+{
+}
+
 QFont MarbleMap::defaultFont() const
 {
     return GeoDataFeature::defaultFont();
