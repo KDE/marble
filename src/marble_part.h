@@ -68,6 +68,8 @@ class MarblePart: public KParts::ReadOnlyPart
     void  lockFloatItemPosition( bool );
     void  controlSun();
     void  showSun( bool );
+    void  workOffline( bool );
+
     void  setupStatusBar();
     void  showNewStuffDialog();
 

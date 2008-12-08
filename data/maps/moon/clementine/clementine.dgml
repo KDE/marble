@@ -161,7 +161,7 @@
 
                 <item name="geographic-pole">
                     <icon pixmap="bitmaps/pole_1.png"/>
-                    <text>Geographic Pole</text>
+                    <text>Selenographic Pole</text>
                 </item>
             </section>
 

@@ -7,15 +7,6 @@
 //
 // Copyright 2008 Shashank Singh <shashank.personal@gmail.com>"
 //
-/** Note :lattitudes are 0° at the equator (low latitude) to 90° at the poles (90° N for the North Pole or 90° S for the South Pole AND "-" For South ; "+" for North
-likewise for
-longitudes are from 0° at the prime meridian to +180° eastward and ?180° westward
-use "E" for "+"
-and "W" for "-"
- This piece of information is written here for refrence in case , coder often gets confused about lat Lon like me :P
-
-Right now this plugin displays public twit from Twitter , and gecocodes [i.e getting lat lon from a given street address] using Google Map API , i plan to extend it to use OSM GeoCoding in net few days :) [The API key has been taken for  my personal website , please don't misuse it :) ]
-*/
 
 #include "twitterPlugin.h"
 
@@ -27,6 +18,9 @@ Right now this plugin displays public twit from Twitter , and gecocodes [i.e get
 
 namespace Marble
 {
+/**
+Right now this plugin displays public twit from Twitter , and gecocodes [i.e getting lat lon from a given street address] using Google Map API , i plan to extend it to use OSM GeoCoding in net few days :) [The API key has been taken for  my personal website , please don't misuse it :) ]
+*/
 
 twitterPlugin::~twitterPlugin()
 {

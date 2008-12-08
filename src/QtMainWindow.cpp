@@ -57,7 +57,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWi
 
     setWindowTitle( tr("Marble - Desktop Globe") );
     setWindowIcon( QIcon(":/icons/marble.png") );
-    setCentralWidget(m_controlView);
+    setCentralWidget( m_controlView );
 
     createActions();
     createMenus();
@@ -133,6 +133,10 @@ void MainWindow::createActions()
      m_showCloudsAct->setStatusTip(tr("Show Real Time Cloud Cover"));
      connect(m_showCloudsAct, SIGNAL(triggered( bool )), this, SLOT( showClouds( bool )));
 
+     m_workOfflineAct = new QAction( QIcon(":/icons/user-offline.png"), tr("&Work Offline"), this);
+     m_workOfflineAct->setCheckable( true );
+     connect(m_workOfflineAct, SIGNAL(triggered( bool )), this, SLOT( workOffline( bool )));
+
      m_showAtmosphereAct = new QAction( tr("&Atmosphere"), this);
      m_showAtmosphereAct->setCheckable( true );
      m_showAtmosphereAct->setStatusTip(tr("Show Atmosphere"));
@@ -164,6 +168,7 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_exportMapAct);
     m_fileMenu->addAction(m_printAct);
     m_fileMenu->addSeparator();
+    m_fileMenu->addAction(m_workOfflineAct);
     m_fileMenu->addAction(m_quitAct);
 
     m_fileMenu = menuBar()->addMenu(tr("&Edit"));
@@ -326,6 +331,16 @@ void MainWindow::showClouds( bool isChecked )
     m_showCloudsAct->setChecked( isChecked ); // Sync state with the GUI
 }
 
+void MainWindow::workOffline( bool offline )
+{
+    if ( offline ) {
+        m_controlView->marbleWidget()->setDownloadManager( 0 );
+    }
+    else {
+        m_controlView->marbleWidget()->setDownloadUrl( "http://download.kde.org/apps/marble/" );
+    }
+}
+
 void MainWindow::showAtmosphere( bool isChecked )
 {
     m_controlView->marbleWidget()->setShowAtmosphere( isChecked );
@@ -474,6 +489,7 @@ void MainWindow::readSettings()
          showSideBar(settings.value("sideBar", true ).toBool());
          showStatusBar(settings.value("statusBar", false ).toBool());
          showClouds(settings.value("showClouds", true ).toBool());
+         workOffline(settings.value("workOffline", false ).toBool());
          showAtmosphere(settings.value("showAtmosphere", true ).toBool());
      settings.endGroup();
 
@@ -508,6 +524,7 @@ void MainWindow::writeSettings()
          settings.setValue( "sideBar", m_sideBarAct->isChecked() );
          settings.setValue( "statusBar", m_statusBarAct->isChecked() );
          settings.setValue( "showClouds", m_showCloudsAct->isChecked() );
+         settings.setValue( "workOffline", m_workOfflineAct->isChecked() );
          settings.setValue( "showAtmosphere", m_showAtmosphereAct->isChecked() );
      settings.endGroup();
 

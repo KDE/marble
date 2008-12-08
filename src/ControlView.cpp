@@ -36,7 +36,6 @@ ControlView::ControlView( QWidget *parent )
     m_marbleWidget = new MarbleWidget( this );
     m_marbleWidget->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding,
                                                 QSizePolicy::MinimumExpanding ) );
-    m_marbleWidget->setDownloadUrl( "http://download.kde.org/apps/marble/" );
 
     QVBoxLayout *vlayout = new QVBoxLayout( this );
 

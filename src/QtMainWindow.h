@@ -67,6 +67,7 @@ class MainWindow : public QMainWindow
     void  showSideBar( bool );
     void  showStatusBar( bool );
     void  showClouds( bool );
+    void  workOffline( bool );
     void  showAtmosphere( bool );
     void  controlSun();
     void  showSun( bool );
@@ -94,6 +95,7 @@ class MainWindow : public QMainWindow
     QAction *m_fullScreenAct;
     QAction *m_statusBarAct;
     QAction *m_showCloudsAct;
+    QAction *m_workOfflineAct;
     QAction *m_showAtmosphereAct;
     QAction *m_controlSunAct;
     QAction *m_whatsThisAct;

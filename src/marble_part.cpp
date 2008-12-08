@@ -291,6 +291,16 @@ void MarblePart::showSun( bool active )
     m_controlView->marbleWidget()->sunLocator()->setShow( active ); 
 }
 
+void MarblePart::workOffline( bool offline )
+{
+    if ( offline ) {
+        m_controlView->marbleWidget()->setDownloadManager( 0 );
+    }
+    else {
+        m_controlView->marbleWidget()->setDownloadUrl( "http://download.kde.org/apps/marble/" );
+    }
+}
+
 void MarblePart::copyMap()
 {
     QPixmap      mapPixmap = m_controlView->mapScreenShot();
@@ -339,6 +349,10 @@ void MarblePart::readSettings()
 
     m_controlView->marbleWidget()->setShowClouds( MarbleSettings::showClouds() );
     m_showCloudsAction->setChecked( MarbleSettings::showClouds() );
+
+    workOffline( MarbleSettings::workOffline() );
+    m_workOfflineAction->setChecked( MarbleSettings::workOffline() );
+
     m_controlView->marbleWidget()->setShowAtmosphere( MarbleSettings::showAtmosphere() );
     m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
     m_lockFloatItemsAct->setChecked(MarbleSettings::lockFloatItemPositions());
@@ -403,6 +417,8 @@ void MarblePart::writeSettings()
     MarbleSettings::setProjection( m_controlView->marbleWidget()->projection() );
 
     MarbleSettings::setShowClouds( m_controlView->marbleWidget()->showClouds() );
+
+    MarbleSettings::setWorkOffline( m_workOfflineAction->isChecked() );
     MarbleSettings::setShowAtmosphere( m_controlView->marbleWidget()->showAtmosphere() );
 
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Marble::Still ) );
@@ -441,7 +457,6 @@ void MarblePart::setupActions()
 
     KAction action1( i18n("Open Map &Data..."), this );
     KAction action2( i18n("&Import Map Data..."), this );
-    KAction action3( i18n("Scale &Bar"), this );
 
     KAction action4( i18n("&Add Place"), this );
     KAction action5( i18n("Panoramio Photos"), this );
@@ -460,10 +475,13 @@ void MarblePart::setupActions()
 
     // Action: Work Offline
     m_workOfflineAction = new KAction( this );
-    actionCollection()->addAction( "file_workOffline", m_workOfflineAction );
+    actionCollection()->addAction( "workOffline", m_workOfflineAction );
     m_workOfflineAction->setText( i18n( "&Work Offline" ) );
+    m_workOfflineAction->setIcon( KIcon( "user-offline" ) );
     m_workOfflineAction->setCheckable( true );
     m_workOfflineAction->setChecked( false );
+    connect( m_workOfflineAction, SIGNAL( triggered( bool ) ),
+             this,                SLOT( workOffline( bool ) ) );
 
     // Action: Copy Map to the Clipboard
     m_copyMapAction = KStandardAction::copy( this, SLOT( copyMap() ),

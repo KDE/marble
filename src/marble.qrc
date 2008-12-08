@@ -17,6 +17,8 @@
         <file>icons/map-mercator.png</file>
         <file>icons/marble.png</file>
         <file>icons/wikipedia.png</file>
+        <file>icons/user-online.png</file>
+        <file>icons/user-offline.png</file>
         <file>icons/zoom-in.png</file>
         <file>icons/zoom-out.png</file>
     </qresource>
