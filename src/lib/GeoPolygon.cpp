@@ -218,7 +218,7 @@ void PntMapLoader::run()
 
     // qDebug("Loading PntMap ...");
     int    count = 0;
-    QFile  file( filename );
+    QFile  file( m_filename );
 
     file.open( QIODevice::ReadOnly );
     QDataStream stream( &file );  // read the data serialized from the file
@@ -240,7 +240,7 @@ void PntMapLoader::run()
 			
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
             GeoPolygon  *polyline = new GeoPolygon();
-            append( polyline );
+            m_parent->append( polyline );
 
             polyline->setIndex(header);
 
@@ -255,7 +255,7 @@ void PntMapLoader::run()
         }
         else {
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
-            last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) );
+            m_parent->last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) );
         }
         ++count;
     }
