@@ -25,10 +25,12 @@
 #include "MarblePlacemarkModel.h"
 #include "MarbleGeometryModel.h"
 #include "PlaceMarkContainer.h"
+#include "PlaceMarkLoader.h"
 
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
+
 
 using namespace Marble;
 
@@ -110,65 +112,9 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
      */
     loadKml( filepath );
 #else
-    Q_ASSERT( m_model != 0 && "You have called addPlaceMarkFile before creating a model!" );
-
-    QString defaultcachename;
-    QString defaultsrcname;
-    QString defaulthomecache;
-
-    if ( !filepath.contains( "\\" ) && !filepath.contains( '/' ) ) {
-        defaultcachename = MarbleDirs::path( "placemarks/" + filepath + ".cache" );
-        defaultsrcname   = MarbleDirs::path( "placemarks/" + filepath + ".kml");
-        defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + filepath + ".cache";
-    } else
-        return;
-
-    if ( QFile::exists( defaultcachename ) ) {
-        qDebug() << "Loading Default Placemark Cache File:" + defaultcachename;
-
-        bool      cacheoutdated = false;
-        QDateTime sourceLastModified;
-        QDateTime cacheLastModified;
-
-        if ( QFile::exists( defaultsrcname ) ) {
-            sourceLastModified = QFileInfo( defaultsrcname ).lastModified();
-            cacheLastModified  = QFileInfo( defaultcachename ).lastModified();
-
-            if ( cacheLastModified < sourceLastModified )
-                cacheoutdated = true;
-        }
-
-        bool loadok = false;
-
-        if ( cacheoutdated == false ) {
-            PlaceMarkContainer container;
-            loadok = loadFile( defaultcachename, &container );
-            if ( loadok )
-                m_model->addPlaceMarks( container );
-        }
-
-        if ( loadok == true )
-            return;
-    }
-
-    qDebug( "No recent Default Placemark Cache File available!" );
-
-    if ( QFile::exists( defaultsrcname ) ) {
-        PlaceMarkContainer container;
-
-        // Read the KML file.
-        importKml( defaultsrcname, &container );
-
-        qDebug() << "ContainerSize for" << filepath << ":" << container.size();
-        // Save the contents in the efficient cache format.
-        saveFile( defaulthomecache, &container );
-
-        // ...and finally add it to the PlaceMarkContainer
-        m_model->addPlaceMarks( container );
-    }
-    else {
-        qDebug() << "No Default Placemark Source File!";
-    }
+    PlaceMarkLoader* loader = new PlaceMarkLoader( this, m_model, filepath );
+    m_loaderList.append( loader );
+    loader->start();
 #endif
 }
 

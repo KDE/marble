@@ -16,6 +16,8 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
+#include "PlaceMarkLoader.h"
+
 namespace Marble
 {
 
@@ -114,6 +116,7 @@ class PlaceMarkManager : public QObject
     Q_DISABLE_COPY( PlaceMarkManager )
     MarblePlacemarkModel* m_model;
     MarbleGeometryModel* m_geomodel;
+    QList<PlaceMarkLoader*> m_loaderList;
 
     QString m_target;
 

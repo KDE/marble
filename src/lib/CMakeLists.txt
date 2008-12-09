@@ -102,6 +102,7 @@ set(marblewidget_SRCS
     PlaceMarkContainer.cpp
     PlaceMarkManager.cpp
     PlaceMarkLayout.cpp
+    PlaceMarkLoader.cpp
     PlaceMarkPainter.cpp
     PlaceMarkInfoDialog.cpp
     Quaternion.cpp
