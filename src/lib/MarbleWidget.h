@@ -487,6 +487,66 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     QList<MarbleRenderPlugin *>      renderPlugins() const;
     QList<MarbleAbstractFloatItem *> floatItems()    const;
 
+
+    /**
+     * @brief  Get the Projection used for the map
+     * @return @c Spherical         a Globe
+     * @return @c Equirectangular   a flat map
+     * @return @c Mercator          another flat map
+     */
+    Projection  projection() const;
+//    int         projection() const;
+
+    /**
+     * @brief Get the ID of the current map theme
+     * To ensure that a unique identifier is being used the theme does NOT 
+     * get represented by its name but the by relative location of the file 
+     * that specifies the theme:
+     *
+     * Example: 
+     *    mapThemeId = "earth/bluemarble/bluemarble.dgml"
+     */
+    QString mapThemeId() const;
+
+    /**
+     * @brief Get the GeoSceneDocument object of the current map theme
+     */
+    Marble::GeoSceneDocument *mapTheme() const;
+
+    /**
+     * @brief Return a QAbstractItemModel containing GPX files.
+     */
+    GpxFileModel  *gpxFileModel();
+
+    /**
+     * @brief Return a QAbstractItemModel containing files.
+     */
+    FileViewModel* fileViewModel() const;
+
+    /**
+     * @brief Retrieve the map quality depending on the view context 
+     */
+    Marble::MapQuality mapQuality( Marble::ViewContext = Marble::Still );
+
+    /**
+     * @brief Retrieve the view context (i.e. still or animated map) 
+     */
+    Marble::ViewContext viewContext( ) const;
+
+    /**
+     * @brief Retrieve whether travels to a point should get animated 
+     */
+    bool animationsEnabled() const;
+
+    Marble::AngleUnit defaultAngleUnit() const;
+    void setDefaultAngleUnit( Marble::AngleUnit angleUnit );
+
+    Marble::DistanceUnit defaultDistanceUnit() const;
+    void setDefaultDistanceUnit( Marble::DistanceUnit distanceUnit );
+
+    QFont defaultFont() const;
+    void setDefaultFont( const QFont& font );
+
  public Q_SLOTS:
 
     void updateSun();
@@ -574,15 +634,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setCenterLongitude( qreal lon );
 
     /**
-     * @brief  Get the Projection used for the map
-     * @return @c Spherical         a Globe
-     * @return @c Equirectangular   a flat map
-     * @return @c Mercator          another flat map
-     */
-    Projection  projection() const;
-//    int         projection() const;
-
-    /**
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
@@ -631,22 +682,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Center the view on the default start point with the default zoom.
      */
     void  goHome();
-
-    /**
-     * @brief Get the ID of the current map theme
-     * To ensure that a unique identifier is being used the theme does NOT 
-     * get represented by its name but the by relative location of the file 
-     * that specifies the theme:
-     *
-     * Example: 
-     *    mapThemeId = "earth/bluemarble/bluemarble.dgml"
-     */
-    QString mapThemeId() const;
-
-    /**
-     * @brief Get the GeoSceneDocument object of the current map theme
-     */
-    Marble::GeoSceneDocument *mapTheme() const;
 
     /**
      * @brief Set a new map theme
@@ -804,16 +839,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void openGpxFile( QString &filename );
 
-    /**
-     * @brief Return a QAbstractItemModel containing GPX files.
-     */
-    GpxFileModel  *gpxFileModel();
-
-    /**
-     * @brief Return a QAbstractItemModel containing files.
-     */
-    FileViewModel* fileViewModel() const;
-
     void clearPersistentTileCache();
     /**
      * @brief  Set the limit of the persistent (on hard disc) tile cache.
@@ -871,19 +896,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setDownloadUrl( const QUrl &url );
 
     /**
-     * @brief Retrieve the map quality depending on the view context 
-     */
-    Marble::MapQuality mapQuality( Marble::ViewContext = Marble::Still );
-
-    /**
      * @brief Set the map quality depending on the view context 
      */
     void setMapQuality( Marble::MapQuality, Marble::ViewContext = Marble::Still );
-
-    /**
-     * @brief Retrieve the view context (i.e. still or animated map) 
-     */
-    Marble::ViewContext viewContext( ) const;
 
     /**
      * @brief Set the view context (i.e. still or animated map) 
@@ -891,23 +906,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setViewContext( Marble::ViewContext viewContext );
 
     /**
-     * @brief Retrieve whether travels to a point should get animated 
-     */
-    bool animationsEnabled() const;
-
-    /**
      * @brief Set whether travels to a point should get animated 
      */
     void setAnimationsEnabled( bool enabled );
-
-    Marble::AngleUnit defaultAngleUnit() const;
-    void setDefaultAngleUnit( Marble::AngleUnit angleUnit );
-
-    Marble::DistanceUnit defaultDistanceUnit() const;
-    void setDefaultDistanceUnit( Marble::DistanceUnit distanceUnit );
-
-    QFont defaultFont() const;
-    void setDefaultFont( const QFont& font );
 
     void setSelection(const QRect& region);
 
