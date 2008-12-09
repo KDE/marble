@@ -115,7 +115,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
     if (   viewParams->mapQuality() == Marble::High
         || viewParams->mapQuality() == Marble::Print )
     {
-	antialiased = true;
+        antialiased = true;
     }
 
     // Coastlines

@@ -177,7 +177,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      * them.
      * @see centerOn
      */
-    void setLocations(QAbstractItemModel* locations);
+    void setLocations( MarblePlacemarkModel* locations );
 
     /**
      * @brief Sets the value of the slider.

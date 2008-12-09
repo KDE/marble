@@ -101,17 +101,22 @@ void PlaceMarkManager::loadStandardPlaceMarks(  const QString& target  )
 void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
 {
     PlaceMarkLoader* loader = new PlaceMarkLoader( this, filepath );
-    connect (   loader, SIGNAL( placeMarksLoaded( PlaceMarkContainer * ) ), 
-                this, SLOT( loadPlaceMarkContainer( PlaceMarkContainer * ) ) );
+    connect (   loader, SIGNAL( placeMarksLoaded( PlaceMarkLoader*, PlaceMarkContainer * ) ), 
+                this, SLOT( loadPlaceMarkContainer( PlaceMarkLoader*, PlaceMarkContainer * ) ) );
     m_loaderList.append( loader );
     loader->start();
 }
 
-void PlaceMarkManager::loadPlaceMarkContainer( PlaceMarkContainer * container )
+void PlaceMarkManager::loadPlaceMarkContainer( PlaceMarkLoader* loader, PlaceMarkContainer * container )
 {
+    m_loaderList.removeAll( loader );
+    if ( loader->isFinished() ) {
+         delete loader;
+    }
+
     if ( container )
-    {
-        m_model->addPlaceMarks( *container );
+    { 
+        m_model->addPlaceMarks( *container, false, m_loaderList.isEmpty() );
     }
 }
 

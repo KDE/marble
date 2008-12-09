@@ -67,7 +67,7 @@ void PlaceMarkLoader::run() {
         if ( cacheoutdated == false ) {
             loadok = loadFile( defaultcachename, container );
             if ( loadok )
-                emit placeMarksLoaded( container );
+                emit placeMarksLoaded( this, container );
         }
         qDebug() << "Loading ended" << loadok;
         if ( loadok == true )
@@ -86,7 +86,7 @@ void PlaceMarkLoader::run() {
         saveFile( defaulthomecache, container );
 
         // ...and finally add it to the PlaceMarkContainer
-        emit placeMarksLoaded( container );
+        emit placeMarksLoaded( this, container );
     }
     else {
         qDebug() << "No Default Placemark Source File for " << filepath;

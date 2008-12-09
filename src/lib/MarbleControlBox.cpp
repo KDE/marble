@@ -235,7 +235,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 
     // Make us aware of all the PlaceMarks in the MarbleModel so that
     // we can search them.
-    setLocations( d->m_widget->placeMarkModel() );
+    setLocations( static_cast<MarblePlacemarkModel*>(d->m_widget->placeMarkModel()) );
     d->uiWidget.locationListView->setSelectionModel( d->m_widget->placeMarkSelectionModel() );
 
 #ifndef KML_GSOC
@@ -342,7 +342,7 @@ void MarbleControlBox::setWidgetTabShown( QWidget * widget,
 }
 
 
-void MarbleControlBox::setLocations(QAbstractItemModel* locations)
+void MarbleControlBox::setLocations(MarblePlacemarkModel* locations)
 {
     d->m_sortproxy->setSourceModel( locations );
     d->m_sortproxy->setSortLocaleAware( true );
@@ -525,7 +525,7 @@ void MarbleControlBox::searchLineChanged(const QString &search)
     d->m_searchTerm = search;
     // if search line is empty, restore original geonames
     if ( d->m_searchTerm.isEmpty() )
-        setLocations( d->m_widget->placeMarkModel() );
+        setLocations( static_cast<MarblePlacemarkModel*>( d->m_widget->placeMarkModel() ) );
     if ( d->m_searchTriggered )
         return;
     d->m_searchTriggered = true;

@@ -14,6 +14,7 @@
 #define GEOPOLYGON_H
 
 #include <QtCore/QObject>
+#include <QtCore/QThread>
 #include <QtCore/QVector>
 #include <QtCore/QDebug>
 #include "marble_export.h"
@@ -55,12 +56,12 @@ class GEODATA_EXPORT GeoPolygon : public GeoDataCoordinates::Vector
 
     int  getIndex() const { return m_index; }
     bool getClosed() const { return m_closed; }
-    void setClosed(bool closed){ m_closed = closed; }
+    void setClosed( bool closed ){ m_closed = closed; }
 
-    void setIndex(int index){ m_index = index; }
+    void setIndex( int index ){ m_index = index; }
 
     int getDateLine() const { return m_dateLineCrossing; }
-    void setDateLine(int dateLineCrossing){ m_dateLineCrossing = dateLineCrossing; }
+    void setDateLine( int dateLineCrossing ){ m_dateLineCrossing = dateLineCrossing; }
 
     void setBoundary( qreal, qreal, qreal, qreal );
     GeoDataCoordinates::PtrVector getBoundary() const { return m_boundary; }
@@ -92,16 +93,47 @@ class GEODATA_EXPORT GeoPolygon : public GeoDataCoordinates::Vector
  * FIXME: Rename it (into GeoPolygonMap?)
  */
 
-class GEODATA_EXPORT PntMap : public GeoPolygon::PtrVector
+class PntMapLoader;
+
+class GEODATA_EXPORT PntMap : public QObject,
+                              public GeoPolygon::PtrVector
 {
+    Q_OBJECT
  public:
     PntMap();
     ~PntMap();
 
-    void load(const QString &);
+    bool isInitialized() const;
+
+    void load( const QString & );
+
+ Q_SIGNALS:
+    void initialized();
+
+ private Q_SLOTS:
+    void setInitialized( bool );
+
+ private:
+    bool m_isInitialized;
+    PntMapLoader* m_loader;
 
     Q_DISABLE_COPY( PntMap )
 };
+
+class PntMapLoader : public QThread {
+    Q_OBJECT
+    public:
+        PntMapLoader( PntMap* parent, const QString& filename );
+
+        void run();
+    Q_SIGNALS:
+        void pntMapLoaded( bool );
+
+    private:
+        PntMap *m_parent;
+        QString m_filename;
+};
+
 
 }
 

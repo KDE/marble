@@ -102,7 +102,9 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      *
      * Note: The model takes ownership of the place marks!
      */
-    void addPlaceMarks( PlaceMarkContainer &placeMarks, bool clearPrevious = false );
+    void addPlaceMarks( PlaceMarkContainer &placeMarks, 
+                        bool clearPrevious = false,
+                        bool finalize = true );
 
  public Q_SLOTS:
     /**

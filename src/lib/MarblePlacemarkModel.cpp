@@ -78,7 +78,7 @@ void MarblePlacemarkModel::indexUpdate()
 void MarblePlacemarkModel::generateIndex() const
 {
     const int constRowCount = rowCount();
-    int count = 0;
+
     qDebug() << "start generate indexes";
     for ( int i = d->m_persistantIndexList.size(); i < constRowCount; ++i )
     {
@@ -206,7 +206,9 @@ QModelIndexList MarblePlacemarkModel::approxMatch( const QModelIndex & start, in
     return results;
 }
 
-void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks, bool clearPrevious )
+void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks, 
+                                          bool clearPrevious,
+                                          bool finalize )
 {
   // For now we simply remove any previous placemarks
     if ( clearPrevious ) {
@@ -218,9 +220,11 @@ void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks, bool c
 
     d->m_placeMarkContainer << placeMarks;
 
-    generateIndex();
-    d->m_placeMarkContainer.sort();
-    emit layoutChanged();
+    if ( finalize ) {
+        generateIndex();
+        d->m_placeMarkContainer.sort();
+        emit layoutChanged();
+    }
 }
 
 void MarblePlacemarkModel::clearPlaceMarks()

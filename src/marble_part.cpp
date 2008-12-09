@@ -77,6 +77,7 @@ K_EXPORT_COMPONENT_FACTORY( libmarble_part, MarblePartFactory )
 
 MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringList &arguments )
   : KParts::ReadOnlyPart( parent ),
+    m_controlView( new ControlView( parentWidget ) ),
     m_sunControlDialog( 0 ),
     m_pluginModel( 0 ),
     m_configDialog( 0 ),
@@ -89,7 +90,6 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
 
     setComponentData( MarblePartFactory::componentData() );
 
-    m_controlView = new ControlView( parentWidget );
     setWidget( m_controlView );
 
     setupActions();
@@ -107,7 +107,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
 MarblePart::~MarblePart()
 {
     writeSettings();
-    delete m_pluginModel;
+
+    // Check whether this delete is really needed.
     delete m_configDialog;
 }
 
@@ -698,7 +699,7 @@ void MarblePart::editSettings()
 	     m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
 
     // plugin page
-    m_pluginModel = new QStandardItemModel();
+    m_pluginModel = new QStandardItemModel( this );
     QStandardItem  *parentItem = m_pluginModel->invisibleRootItem();
 
     QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();

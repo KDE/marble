@@ -10,6 +10,7 @@
 #ifndef PLACEMARKLOADER_H
 #define PLACEMARKLOADER_H
 
+#include <QtCore/QDebug>
 #include <QtCore/QThread>
 
 namespace Marble
@@ -21,15 +22,15 @@ class PlaceMarkLoader : public QThread {
     Q_OBJECT
     public:
         PlaceMarkLoader( QObject* parent, const QString& file );
+
         void run();
     Q_SIGNALS:
-        void placeMarksLoaded( PlaceMarkContainer * );
+        void placeMarksLoaded( PlaceMarkLoader*, PlaceMarkContainer * );
     private:
         bool loadFile( const QString& filename, PlaceMarkContainer* placeMarkContainer );
         void saveFile( const QString& filename, PlaceMarkContainer* placeMarkContainer );
         void importKml( const QString& filename, PlaceMarkContainer* placeMarkContainer );
 
-        MarblePlacemarkModel* m_model;
         QString filepath;
 };
 

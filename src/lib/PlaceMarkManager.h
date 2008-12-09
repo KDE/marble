@@ -102,7 +102,7 @@ class PlaceMarkManager : public QObject
     void geoDataDocumentLoaded( GeoDataDocument& );
 
  private Q_SLOTS:
-    void loadPlaceMarkContainer( PlaceMarkContainer * );
+    void loadPlaceMarkContainer( PlaceMarkLoader* loader, PlaceMarkContainer * );
 
  private:
     void importKml( const QString&, PlaceMarkContainer* );

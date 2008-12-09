@@ -102,7 +102,13 @@ void GeoPolygon::displayBoundary(){
 
 
 PntMap::PntMap()
+    : m_isInitialized( false )
 {
+}
+
+bool PntMap::isInitialized() const
+{
+    return m_isInitialized;
 }
 
 PntMap::~PntMap()
@@ -110,10 +116,32 @@ PntMap::~PntMap()
     qDeleteAll( begin(), end() );
 }
 
-
 void PntMap::load(const QString &filename)
 {
-//    qDebug("PntMap::load trying to load: " + filename.toLocal8Bit());
+    m_loader = new PntMapLoader( this, filename );
+
+    connect ( m_loader, SIGNAL( pntMapLoaded( bool ) ), SLOT( setInitialized( bool ) ) );
+    m_loader->start();
+}
+
+void PntMap::setInitialized( bool isInitialized )
+{
+    if ( m_loader->isFinished() )
+        delete m_loader;
+
+    m_isInitialized = isInitialized;
+    emit initialized();
+}
+
+PntMapLoader::PntMapLoader( PntMap* parent, const QString& filename )
+    : m_parent( parent ),
+      m_filename( filename )
+{
+}
+
+void PntMapLoader::run()
+{
+//    qDebug("PntMap::load trying to load: " + m_filename.toLocal8Bit());
     QTime *timer = new QTime();
     timer->restart();
 
@@ -123,8 +151,8 @@ void PntMap::load(const QString &filename)
     unsigned char* src; 
     struct stat  statbuf;
 
-    if ( (fd = open (filename.toLatin1(), O_RDONLY) ) < 0)  // krazy:exclude=syscalls
-        qDebug() << "cannot open" << filename << " for reading";
+    if ( (fd = open (m_filename.toLatin1(), O_RDONLY) ) < 0)  // krazy:exclude=syscalls
+        qDebug() << "cannot open" << m_filename << " for reading";
 
     if ( fstat (fd,&statbuf) < 0 ) // krazy:exclude=syscalls
         qDebug() << "fstat error";
@@ -160,7 +188,7 @@ void PntMap::load(const QString &filename)
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
 
             GeoPolygon  *polyline = new GeoPolygon();
-            append( polyline );
+            m_parent->append( polyline );
 
 //            polyline->m_sourceFileName=filename;
             polyline->setIndex( header );
@@ -176,7 +204,7 @@ void PntMap::load(const QString &filename)
         }
         else {
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
-            last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) ); 
+            m_parent->last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) ); 
         }
         ++count;
     }
@@ -253,12 +281,12 @@ void PntMap::load(const QString &filename)
     qreal  lat     = 0.0;
 
     GeoPolygon::PtrVector::ConstIterator       itPolyLine;
-    GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = constEnd();
+    GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = m_parent->constEnd();
     GeoDataCoordinates::Vector::ConstIterator   itPoint;
 
     // Now we calculate the boundaries
 	
-    for ( itPolyLine = constBegin(); itPolyLine != itEndPolyLine; ++itPolyLine ) {
+    for ( itPolyLine = m_parent->constBegin(); itPolyLine != itEndPolyLine; ++itPolyLine ) {
 		
         qreal  lonLeft       =  +M_PI;
         qreal  lonRight      =  -M_PI;
@@ -277,7 +305,7 @@ void PntMap::load(const QString &filename)
                 itPoint != itEndPoint;
                 ++itPoint )
         {
-            (*itPoint).geoCoordinates( lon, lat );
+            itPoint->geoCoordinates( lon, lat );
 
             int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
 
@@ -342,5 +370,7 @@ void PntMap::load(const QString &filename)
     }
 //    qDebug() << "Elapsed: " << timer->elapsed();
     delete timer;
+
+    emit pntMapLoaded( true );
 }
 
