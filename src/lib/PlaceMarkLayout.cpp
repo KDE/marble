@@ -334,6 +334,10 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
     for ( it = m_persistentIndexList.constBegin(); it != itEnd; ++it )
     {
         const QPersistentModelIndex& index = *it;
+        if( !index.isValid() ) {
+            qDebug() << "invalid index!!!";
+            continue;
+        }
         const MarblePlacemarkModel *placemarkModel =
             qobject_cast<const MarblePlacemarkModel*>( index.model() );
         Q_ASSERT( placemarkModel );
