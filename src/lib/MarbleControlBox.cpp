@@ -180,7 +180,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->m_runnerManager = new MarbleRunnerManager( this );
     
     connect( d->m_runnerManager, SIGNAL( modelChanged(  MarblePlacemarkModel* ) ),
-             this,               SLOT( runnerModelChanged( MarblePlacemarkModel* ) ) );    
+             this,               SLOT( setLocations( MarblePlacemarkModel* ) ) );    
 }
 
 MarbleControlBox::~MarbleControlBox()
@@ -344,7 +344,6 @@ void MarbleControlBox::setWidgetTabShown( QWidget * widget,
 
 void MarbleControlBox::setLocations(QAbstractItemModel* locations)
 {
-//     qDebug() << "setLocations";
     d->m_sortproxy->setSourceModel( locations );
     d->m_sortproxy->setSortLocaleAware( true );
     d->m_sortproxy->sort( 0 );
@@ -552,11 +551,6 @@ void MarbleControlBox::search()
     d->uiWidget.locationListView->selectItem( d->m_searchTerm );
     if ( currentSelected != d->uiWidget.locationListView->currentIndex().row() )
         d->uiWidget.locationListView->activate();
-}
-
-void MarbleControlBox::runnerModelChanged( MarblePlacemarkModel *newmodel )
-{
-    setLocations( newmodel );
 }
 
 void MarbleControlBox::selectTheme( const QString &theme )

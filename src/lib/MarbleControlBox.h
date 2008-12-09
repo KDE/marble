@@ -100,17 +100,6 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void addMarbleWidget( MarbleWidget *widget );
 
     /**
-     * @brief Set a list/set of placemark names for the search widget.
-     * @param locations  the QAbstractitemModel containing the placemarks
-     *
-     * This function is called to display a potentially large number
-     * of placemark names in a widget and let the user search between
-     * them.
-     * @see centerOn
-     */
-    void setLocations(QAbstractItemModel* locations);
-
-    /**
      * @brief Return the minimum zoom level set in the widget.
      * @return the minimum zoom level set in the widget.
      */
@@ -180,6 +169,17 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void selectProjection( Projection projection );
 
     /**
+     * @brief Set a list/set of placemark names for the search widget.
+     * @param locations  the QAbstractitemModel containing the placemarks
+     *
+     * This function is called to display a potentially large number
+     * of placemark names in a widget and let the user search between
+     * them.
+     * @see centerOn
+     */
+    void setLocations(QAbstractItemModel* locations);
+
+    /**
      * @brief Sets the value of the slider.
      * @param zoom The new zoom value.
      *
@@ -236,9 +236,6 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     /// called by the singleShot to initiate a search based on the searchLine
     void search();
     
-    /// called but the runner manager to notify of updates to the placemark model
-    void runnerModelChanged( MarblePlacemarkModel *newmodel );
-
     void updateButtons( int );
     void mapCenterOnSignal( const QModelIndex & );
 

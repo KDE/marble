@@ -27,18 +27,18 @@
 
 namespace Marble {
 
-PlaceMarkLoader::PlaceMarkLoader( QObject* parent, MarblePlacemarkModel* model, const QString& file )
+PlaceMarkLoader::PlaceMarkLoader( QObject* parent, const QString& file )
  : QThread( parent ), 
-   m_model( model ),
    filepath( file ) {
 }
 
 void PlaceMarkLoader::run() {
-    Q_ASSERT( m_model != 0 && "You have called addPlaceMarkFile before creating a model!" );
 
     QString defaultcachename;
     QString defaultsrcname;
     QString defaulthomecache;
+
+    PlaceMarkContainer *container = new PlaceMarkContainer;
 
     if ( !filepath.contains( "\\" ) && !filepath.contains( '/' ) ) {
         defaultcachename = MarbleDirs::path( "placemarks/" + filepath + ".cache" );
@@ -65,10 +65,9 @@ void PlaceMarkLoader::run() {
         bool loadok = false;
 
         if ( cacheoutdated == false ) {
-            PlaceMarkContainer container;
-            loadok = loadFile( defaultcachename, &container );
+            loadok = loadFile( defaultcachename, container );
             if ( loadok )
-                m_model->addPlaceMarks( container );
+                emit placeMarksLoaded( container );
         }
         qDebug() << "Loading ended" << loadok;
         if ( loadok == true )
@@ -78,24 +77,23 @@ void PlaceMarkLoader::run() {
     qDebug() << "No recent Default Placemark Cache File available for " << filepath;
 
     if ( QFile::exists( defaultsrcname ) ) {
-        PlaceMarkContainer container;
 
         // Read the KML file.
-        importKml( defaultsrcname, &container );
+        importKml( defaultsrcname, container );
 
-        qDebug() << "ContainerSize for" << filepath << ":" << container.size();
+        qDebug() << "ContainerSize for" << filepath << ":" << container->size();
         // Save the contents in the efficient cache format.
-        saveFile( defaulthomecache, &container );
+        saveFile( defaulthomecache, container );
 
         // ...and finally add it to the PlaceMarkContainer
-        m_model->addPlaceMarks( container );
+        emit placeMarksLoaded( container );
     }
     else {
         qDebug() << "No Default Placemark Source File for " << filepath;
     }
 }
 
-static const quint32 MarbleMagicNumber = 0x31415926;
+const quint32 MarbleMagicNumber = 0x31415926;
 
 void PlaceMarkLoader::importKml( const QString& filename,
                                  PlaceMarkContainer* placeMarkContainer )

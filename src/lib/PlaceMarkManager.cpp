@@ -45,16 +45,10 @@ PlaceMarkManager::PlaceMarkManager( QObject *parent )
 
 PlaceMarkManager::~PlaceMarkManager()
 {
-#ifdef KML_GSOC
-    foreach ( KMLDocument* document, m_documentList ) {
-        delete document;
-    }
-#else
     delete m_model;
     /* do not delete the m_geomodel here
      * it is not this models property
      */
-#endif
 }
 
 MarblePlacemarkModel* PlaceMarkManager::model() const
@@ -106,58 +100,23 @@ void PlaceMarkManager::loadStandardPlaceMarks(  const QString& target  )
 
 void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
 {
-#ifdef KML_GSOC
-    /*
-     * Simply call loadKml, should use cache in feature
-     */
-    loadKml( filepath );
-#else
-    PlaceMarkLoader* loader = new PlaceMarkLoader( this, m_model, filepath );
+    PlaceMarkLoader* loader = new PlaceMarkLoader( this, filepath );
+    connect (   loader, SIGNAL( placeMarksLoaded( PlaceMarkContainer * ) ), 
+                this, SLOT( loadPlaceMarkContainer( PlaceMarkContainer * ) ) );
     m_loaderList.append( loader );
     loader->start();
-#endif
 }
 
+void PlaceMarkManager::loadPlaceMarkContainer( PlaceMarkContainer * container )
+{
+    if ( container )
+    {
+        m_model->addPlaceMarks( *container );
+    }
+}
 
 void PlaceMarkManager::loadKml( const QString& filename, bool clearPrevious )
 {
-#ifdef KML_GSOC
-    if ( QFile::exists( filename ) ) {
-        QFile sourceFile( filename );
-
-        if ( sourceFile.open( QIODevice::ReadOnly ) ) {
-            /*
-             * Create KMLDocument and set it's name like input filename
-             */
-            KMLDocument* document = new KMLDocument;
-            document->setName( QFileInfo( sourceFile ).fileName() );
-
-            QTime t;
-            t.start();
-            document->load( sourceFile );
-            qDebug( "KML document loaded. Name: %s. Time: %d", 
-                    document->name().toAscii().data(), t.elapsed() );
-            t.start();
-
-            if ( ! m_documentList.isEmpty() ) {
-                const KMLDocument& lastLoadedDocument = *m_documentList.last();
-                document->setId( lastLoadedDocument.id() + 1 );
-            }
-
-            m_documentList.append( document );
-            sourceFile.close();
-
-            /*
-             * Pack document to it's own cache file
-             * and update cache index
-             */
-            cacheDocument( *document );
-            updateCacheIndex();
-
-            emit geoDataDocumentLoaded( *document );
-        }
-    }
-#else
     Q_ASSERT( m_model != 0 && "You have called loadKml before creating a model!" );
 
     PlaceMarkContainer container;
@@ -166,7 +125,6 @@ void PlaceMarkManager::loadKml( const QString& filename, bool clearPrevious )
     m_model->addPlaceMarks( container, clearPrevious );
     qDebug() << "loaded placemarks in " << m_geomodel->geoDataRoot();
     emit geoDataDocumentLoaded( *(m_geomodel->geoDataRoot()) );
-#endif
 }
 
 void PlaceMarkManager::loadKmlFromData( const QString& data, bool clearPrevious )
@@ -178,14 +136,6 @@ void PlaceMarkManager::loadKmlFromData( const QString& data, bool clearPrevious 
 
     m_model->addPlaceMarks( container, clearPrevious );
 }
-
-
-#ifdef KML_GSOC
-const QList < KMLFolder* >& PlaceMarkManager::getFolderList() const
-{
-    return ( QList < KMLFolder*>& ) m_documentList;
-}
-#endif
 
 void PlaceMarkManager::importKml( const QString& filename,
                                   PlaceMarkContainer* placeMarkContainer )
@@ -347,78 +297,5 @@ bool PlaceMarkManager::loadFile( const QString& filename,
 
     return true;
 }
-
-#ifdef KML_GSOC
-void PlaceMarkManager::updateCacheIndex()
-{
-    QString cacheIndexFileName = QString( "%1/placemarks/kmldocument-cache.index" )
-        .arg( MarbleDirs::localPath() );
-
-    QFile indexFile( cacheIndexFileName );
-    if ( indexFile.open( QIODevice::WriteOnly ) ) {
-        QDataStream stream( &indexFile );
-
-        /*
-         * TODO: Put some unique header here
-         */
-
-        for ( QList <KMLDocument*>::const_iterator iterator = m_documentList.constBegin();
-            iterator != m_documentList.constEnd();
-            ++iterator )
-        {
-            const KMLDocument& document = **iterator;
-
-            QString cacheFileName = QString( "%1.%2.cache" )
-                .arg( document.id() ).arg( document.name() );
-            stream << cacheFileName;
-        }
-
-        indexFile.close();
-        qDebug( "Create index cache file: %s", cacheIndexFileName.toAscii().data() );
-    }
-    else {
-        qDebug( "Unable to create index file: %s", cacheIndexFileName.toAscii().data() );
-    }
-}
-
-void PlaceMarkManager::cacheDocument( const KMLDocument& document )
-{
-    QString path = QString( "%1/placemarks/%2.%3.cache" );
-    path = path.arg( MarbleDirs::localPath() );
-    path = path.arg( document.id() );
-    path = path.arg( document.name() );
-
-    QFile cacheFile( path );
-    if ( cacheFile.open( QIODevice::WriteOnly ) ) {
-        QDataStream stream( &cacheFile );
-        document.pack( stream );
-        cacheFile.close();
-        qDebug( "Saved kml document to cache: %s", path.toAscii().data() );
-    }
-    else {
-        qDebug( "Unable to cache kml document to: %s", path.toAscii().data() );
-    }
-}
-
-void PlaceMarkManager::loadDocumentFromCache ( QString &path, KMLDocument& document )
-{
-    if ( QFile::exists( path ) ) {
-        QFile cacheFile( path );
-        if ( cacheFile.open( QIODevice::ReadOnly ) ) {
-            QDataStream stream( &cacheFile );
-            document.unpack( stream );
-            cacheFile.close();
-            qDebug( "Loaded document from cache '%s'", path.toAscii().data() );
-        }
-        else {
-            qDebug( "Unable to open cache file: %s", path.toAscii().data() );
-        }
-    }
-    else {
-        qDebug( "Cache file '%s' not exists!", path.toAscii().data() );
-    }
-}
-
-#endif
 
 #include "PlaceMarkManager.moc"

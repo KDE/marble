@@ -20,8 +20,10 @@ class PlaceMarkContainer;
 class PlaceMarkLoader : public QThread {
     Q_OBJECT
     public:
-        PlaceMarkLoader( QObject* parent, MarblePlacemarkModel* model, const QString& file );
+        PlaceMarkLoader( QObject* parent, const QString& file );
         void run();
+    Q_SIGNALS:
+        void placeMarksLoaded( PlaceMarkContainer * );
     private:
         bool loadFile( const QString& filename, PlaceMarkContainer* placeMarkContainer );
         void saveFile( const QString& filename, PlaceMarkContainer* placeMarkContainer );

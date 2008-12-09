@@ -88,10 +88,6 @@ class PlaceMarkManager : public QObject
      */
     void addPlaceMarkFile( const QString &fileName );
 
-#ifdef KML_GSOC
-    const QList < KMLFolder* >& getFolderList() const;
-#endif
-
     /**
      * Loads a new KML file into the manager.
      */
@@ -104,6 +100,9 @@ class PlaceMarkManager : public QObject
 
  Q_SIGNALS:
     void geoDataDocumentLoaded( GeoDataDocument& );
+
+ private Q_SLOTS:
+    void loadPlaceMarkContainer( PlaceMarkContainer * );
 
  private:
     void importKml( const QString&, PlaceMarkContainer* );
@@ -119,15 +118,6 @@ class PlaceMarkManager : public QObject
     QList<PlaceMarkLoader*> m_loaderList;
 
     QString m_target;
-
-#ifdef KML_GSOC
-    void updateCacheIndex();
-    void cacheDocument( const KMLDocument& document );
-    void loadDocumentFromCache ( QString &path, KMLDocument& document );
-
-    QList < KMLDocument* > m_documentList;
-
-#endif
 };
 
 }
