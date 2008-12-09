@@ -68,7 +68,6 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
     connect ( this, SIGNAL( anchorClicked( QUrl ) ),
               this, SLOT( toggleCheckBoxStatus( QUrl ) ) );
 
-   loadLegend();
 }
 
 MarbleLegendBrowser::~MarbleLegendBrowser()
@@ -80,8 +79,6 @@ void MarbleLegendBrowser::setMarbleWidget( MarbleWidget *marbleWidget )
 {
     // We need this to be able to get to the MapTheme.
     d->m_marbleWidget = marbleWidget;
-
-    initTheme();
 
     if ( d->m_marbleWidget ) {
         connect ( d->m_marbleWidget, SIGNAL( themeChanged( QString ) ),
