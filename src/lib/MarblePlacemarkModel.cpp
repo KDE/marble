@@ -227,8 +227,8 @@ void MarblePlacemarkModel::clearPlaceMarks()
 {
     qDeleteAll( d->m_placeMarkContainer );
     d->m_placeMarkContainer.clear();
-    d->m_persistantIndexList.clear();
     reset();
+    d->m_persistantIndexList.clear();
 }
 
 void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container )
