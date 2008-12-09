@@ -223,6 +223,8 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
 
  private Q_SLOTS:
 
+    /// whenever a new map gets inserted, the following slots will adapt the ListView accordingly
+    void checkNewRows( const QModelIndex& parent, int start, int end );
     void updateMapThemeView();
 
     /// called whenever the user types something new in the search box
