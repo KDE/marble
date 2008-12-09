@@ -279,12 +279,12 @@ QVariant MarbleLegendBrowser::loadResource ( int type, const QUrl & name )
     {
         QString checkBoxName = name.toString().section(":", 1, -1);
         if ( !d->m_checkBoxMap.contains( checkBoxName ) ) {
-            newName = "./bitmaps/checkbox_disabled.png";
+            newName = MarbleDirs::path( "bitmaps/checkbox_disabled.png" );
         }
         else if ( d->m_checkBoxMap.value( checkBoxName ) )
-            newName = "./bitmaps/checkbox_checked.png";
+            newName = MarbleDirs::path( "bitmaps/checkbox_checked.png" );
         else
-            newName = "./bitmaps/checkbox_empty.png";
+            newName = MarbleDirs::path( "bitmaps/checkbox_empty.png" );
 
         return QTextBrowser::loadResource( type, QUrl( newName ) );
     }
