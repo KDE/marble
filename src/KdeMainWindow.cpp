@@ -73,7 +73,7 @@ void MainWindow::setMapTitle()
 {
     GeoSceneDocument *mapTheme = marbleWidget()->mapTheme();
     if ( mapTheme ) {
-        setCaption( mapTheme->head()->name() );
+        setCaption( tr( mapTheme->head()->name().toLatin1() ) );
     }
 }
 
