@@ -246,7 +246,17 @@
         <description><![CDATA[14.11.2008: Moon Impact Probe (MIP): First successful impact of an Indian lunar spacecraft.]]></description> 
         <role>i</role> 
         <Point>
-            <coordinates>16.3,0.00</coordinates> 
+            <coordinates>16.3,-89.00</coordinates> 
+        </Point> 
+    </MarblePlacemark> 
+
+    <!--- European Moon Missions -->
+    <MarblePlacemark> 
+        <name>SMART-1</name> 
+        <description><![CDATA[3.9.2006: SMART-1: Scheduled crash .]]></description> 
+        <role>i</role> 
+        <Point>
+            <coordinates>-46.2,-34.4</coordinates> 
         </Point> 
     </MarblePlacemark> 
 
