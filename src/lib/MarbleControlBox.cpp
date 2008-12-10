@@ -195,8 +195,6 @@ void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel ) {
     d->uiWidget.marbleThemeSelectView->setModel( d->m_mapSortProxy );
     connect( d->m_mapThemeModel,       SIGNAL( rowsInserted( QModelIndex, int, int ) ),
              this,                     SLOT( updateMapThemeView() ) );
-    connect( d->m_mapThemeModel,       SIGNAL( rowsInserted( QModelIndex, int, int ) ),
-             this,                     SLOT( checkNewRows( const QModelIndex&, int, int ) ) );
     updateMapThemeView();
 }
 
@@ -352,24 +350,6 @@ void MarbleControlBox::setLocations(MarblePlacemarkModel* locations)
 int MarbleControlBox::minimumZoom() const
 {
     return d->m_widget->minimumZoom();
-}
-
-void MarbleControlBox::checkNewRows( const QModelIndex& parent, int start, int end )
-{
-    QModelIndex currentIndex = d->uiWidget.marbleThemeSelectView->currentIndex();
-    
-    if( !currentIndex.isValid() ) {
-        // expect that maps get added one by one - then start==end
-        QModelIndex iterIndex = d->m_mapThemeModel->index( start, 1, QModelIndex() );
-        
-        if( d->m_mapThemeModel->data( iterIndex ).toString() == d->m_widget->mapThemeId() ) {
-            QModelIndex iterIndexName = d->m_mapSortProxy->mapFromSource( 
-                                        d->m_mapThemeModel->index( start, 0, QModelIndex() ) );
-            d->uiWidget.marbleThemeSelectView->setCurrentIndex( iterIndexName );
-            d->uiWidget.marbleThemeSelectView->scrollTo( iterIndexName );
-        }
-    }
-
 }
 
 void MarbleControlBox::updateMapThemeView()
@@ -555,7 +535,7 @@ void MarbleControlBox::search()
 
 void MarbleControlBox::selectTheme( const QString &theme )
 {
-    if ( !d->m_mapSortProxy )
+    if ( !d->m_mapSortProxy || !d->m_widget )
         return;
 
     // Check if the new selected theme is different from the current one
@@ -564,11 +544,26 @@ void MarbleControlBox::selectTheme( const QString &theme )
                          currentIndex.row(), 1, QModelIndex() ) ).toString();
 
     if ( theme == indexTheme ) {
-        if ( ! d->m_widget )
-            return;
 
         d->uiWidget.zoomSlider->setMaximum( d->m_widget->map()->maximumZoom() );
         updateButtons( d->uiWidget.zoomSlider->value() );
+    } else {
+        /* indexTheme would be empty if the chosen map has not been set yet. As 
+        this needs to be done after the mapThemeId has been set, check if that is 
+        not empty first. The behaviour differs between Linux and Windows: on
+        Windows the reading of the settings is not delayed, thus the mapThemeId
+        is available earlier than on Linux.
+        */
+        if( indexTheme.isEmpty() && !d->m_widget->mapThemeId().isEmpty() ) {
+            QList<QStandardItem*> items = d->m_mapThemeModel->findItems( theme, Qt::MatchExactly, 1 );
+            if( items.size() >= 1 ) {
+                QModelIndex iterIndex = items.at( 0 )->index();
+                QModelIndex iterIndexName = d->m_mapSortProxy->mapFromSource( iterIndex.sibling( iterIndex.row(), 0 ) );
+
+                d->uiWidget.marbleThemeSelectView->setCurrentIndex( iterIndexName );
+                d->uiWidget.marbleThemeSelectView->scrollTo( iterIndexName );
+            }
+        }
     }
 }
 
