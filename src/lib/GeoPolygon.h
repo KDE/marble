@@ -29,7 +29,7 @@ namespace Marble
 	GeoDataPoint defines the nodes in a polyLine 
 */
 
-class GEODATA_EXPORT GeoPolygon : public GeoDataCoordinates::Vector
+class MARBLE_EXPORT GeoPolygon : public GeoDataCoordinates::Vector
 {
  public:
     GeoPolygon();
@@ -95,7 +95,7 @@ class GEODATA_EXPORT GeoPolygon : public GeoDataCoordinates::Vector
 
 class PntMapLoader;
 
-class GEODATA_EXPORT PntMap : public QObject,
+class MARBLE_EXPORT PntMap : public QObject,
                               public GeoPolygon::PtrVector
 {
     Q_OBJECT
@@ -120,7 +120,7 @@ class GEODATA_EXPORT PntMap : public QObject,
     Q_DISABLE_COPY( PntMap )
 };
 
-class PntMapLoader : public QThread {
+class MARBLE_EXPORT PntMapLoader : public QThread {
     Q_OBJECT
     public:
         PntMapLoader( PntMap* parent, const QString& filename );

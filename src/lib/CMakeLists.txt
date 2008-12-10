@@ -154,13 +154,13 @@ set(marblewidget_SRCS
     ExtDateTime.cpp
     SunControlWidget.cpp
     MergedLayerDecorator.cpp
-    
+
     MathHelper.cpp
 
     LatLonEdit.cpp
 
     MapThemeSortFilterProxyModel.cpp
-    
+
     MarbleRunnerManager.cpp
     runners/MarbleAbstractRunner.cpp
     runners/LatLonRunner.cpp
