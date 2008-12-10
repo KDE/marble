@@ -27,7 +27,7 @@ class MarbleControlBox : QWidget
 public:
     explicit                MarbleControlBox (QWidget* parent /TransferThis/ = 0);
     void                    addMarbleWidget (Marble::MarbleWidget* widget);
-    void                    setLocations (QAbstractItemModel* locations);
+    void                    setLocations (MarblePlacemarkModel* locations);
     int                     minimumZoom () const;
     void                    setMapThemeModel (QStandardItemModel* mapThemeModel);
 
