@@ -543,11 +543,10 @@ void MarbleControlBox::selectTheme( const QString &theme )
     QString indexTheme = d->m_mapSortProxy->data( d->m_mapSortProxy->index( 
                          currentIndex.row(), 1, QModelIndex() ) ).toString();
 
-    if ( theme == indexTheme ) {
 
-        d->uiWidget.zoomSlider->setMaximum( d->m_widget->map()->maximumZoom() );
-        updateButtons( d->uiWidget.zoomSlider->value() );
-    } else {
+    d->uiWidget.zoomSlider->setMaximum( d->m_widget->map()->maximumZoom() );
+    updateButtons( d->uiWidget.zoomSlider->value() );
+    if ( theme != indexTheme ) {
         /* indexTheme would be empty if the chosen map has not been set yet. As 
         this needs to be done after the mapThemeId has been set, check if that is 
         not empty first. The behaviour differs between Linux and Windows: on
