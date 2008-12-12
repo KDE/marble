@@ -43,6 +43,7 @@ class GeoSceneMapPrivate
     ~GeoSceneMapPrivate()
     {
         qDeleteAll( m_layers );
+        qDeleteAll( m_filters );
     }
 
     /// The vector holding all the sections in the legend.
