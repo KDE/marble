@@ -178,9 +178,10 @@ set (marblewidget_UI
     PlaceMarkInfoDialog.ui
     MarbleAboutDialog.ui
     SunControlWidget.ui
+    LatLonEdit.ui
 )
 
-# FIXME: cleaner approach of src/lib/MarbleControlBox.* vs. marble.qrc 
+# FIXME: cleaner approach of src/lib/MarbleControlBox.* vs. marble.qrc
 qt4_add_resources(marblewidget_SRCS libmarble.qrc ../marble.qrc)
 
 if (QTONLY)
@@ -231,8 +232,8 @@ endif(WIN32)
 configure_file(config-libgps.h.cmake
 ${CMAKE_CURRENT_BINARY_DIR}/config-libgps.h)
 
-set_target_properties(marblewidget  PROPERTIES 
-                                    VERSION ${GENERIC_LIB_VERSION} 
+set_target_properties(marblewidget  PROPERTIES
+                                    VERSION ${GENERIC_LIB_VERSION}
                                     SOVERSION ${GENERIC_LIB_SOVERSION}
                                     COMPILE_FLAGS "-DKML_LAZY_IMP")
 # needed for marble_export.h
