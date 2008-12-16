@@ -75,9 +75,6 @@ void twitterPlugin::initialize()
     m_downloadManager = new HttpDownloadManager(QUrl("http://twiter.com"), m_storagePolicy);
     downloadtwitter(0, 0, 0.0, 0.0, 0.0, 0.0);
 //     qDebug() << "twitter plugin was started";
-
-
-
 }
 
 bool twitterPlugin::isInitialized() const
@@ -160,4 +157,4 @@ void twitterPlugin::slotGeoCodingReplyRecieved(QString relativeUrlString, QStrin
 
 Q_EXPORT_PLUGIN2(twitterPlugin, Marble::twitterPlugin)
 
-#include "twitterPlugin.moc"
+// #include "twitterPlugin.moc"
