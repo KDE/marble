@@ -53,7 +53,9 @@ public:
      void                   boundaries (qreal& north /out/, qreal& south /out/, qreal& east /out/, qreal& west /out/, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
 
      void                   setBoundaries (qreal north, qreal south, qreal east, qreal west, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
-
+     qreal                  width (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
+     qreal                  height (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
+     
     bool                    crossesDateLine () const;
     virtual bool            contains (const Marble::GeoDataPoint&);
     virtual bool            contains (const Marble::GeoDataCoordinates&);

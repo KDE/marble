@@ -17,21 +17,22 @@
 
 namespace Marble
 {
-
-class ClipPainter : QPainter /Abstract/
+//ub class has undefined base class
+//ub class GeoDataMultiGeometry : QVector<GeoDataGeometry*>, Marble::GeoDataGeometry
 {
 %TypeHeaderCode
-#include <ClipPainter.h>
+#include <marble/GeoDataMultiGeometry.h>
 %End
 
 public:
-                            ClipPainter ();
-                            ClipPainter (QPaintDevice*, bool);
-    void                    setClipping (bool enable);
-    bool                    isClipping () const;
-    void                    drawPolygon (const QPolygonF&, Qt::FillRule fillRule = Qt::OddEvenFill);
-    void                    drawPolyline (const QPolygonF&);
-};   // ClipPainter
+    explicit                GeoDataMultiGeometry (Marble::GeoDataObject* parent = 0);
+    virtual void            pack (QDataStream& stream) const;
+    virtual void            unpack (QDataStream& stream);
+    virtual EnumGeometryId  geometryId () const;
+
+private:
+                            GeoDataMultiGeometry (const Marble::GeoDataMultiGeometry&);
+};   // GeoDataMultiGeometry
 
 };   // Marble
 

@@ -28,17 +28,14 @@ public:
     explicit                MarbleWidget (QWidget* parent /TransferThis/ = 0);
     explicit                MarbleWidget (Marble::MarbleMap* map, QWidget* parent /TransferThis/ = 0);
     Marble::MarbleMap*      map () const;
+    Marble::MarbleModel*    model () const;
 
-
-//mt undefined symbol: MarbleModel* None -- need mapped type?
-//mt     MarbleModel*       model () const;
-
-
-//FIXME    void                    setInputHandler (Marble::MarbleWidgetInputHandler* handler);
-
+// MarbleWidgetInputHandler isn't an exported class
+//ig    void                    setInputHandler (Marble::MarbleWidgetInputHandler* handler);
 
 //mt undefined symbol: HttpDownloadManager* downloadManager -- need mapped type?
 //mt     void               setDownloadManager (HttpDownloadManager* downloadManager);
+
 
     const QRegion           activeRegion ();
     const QRegion           projectedRegion ();
@@ -70,6 +67,7 @@ public:
     bool                    showCompass () const;
     bool                    showClouds () const;
     bool                    showAtmosphere () const;
+    bool                    showCrosshairs () const;
     bool                    showGrid () const;
     bool                    showPlaces () const;
     bool                    showCities () const;
@@ -91,6 +89,26 @@ public:
     quint16                 proxyPort () const;
     QList<Marble::MarbleRenderPlugin*>  renderPlugins () const;
     QList<Marble::MarbleAbstractFloatItem*>  floatItems () const;
+    Marble::Projection      projection () const;
+    QString                 mapThemeId () const;
+
+//mt undefined symbol: GeoSceneDocument* None -- need mapped type?
+//mt     Marble::GeoSceneDocument*  mapTheme () const;
+
+//mt undefined symbol: GpxFileModel* None -- need mapped type?
+//mt     GpxFileModel*      gpxFileModel ();
+
+//ig   FileViewModel*     fileViewModel () const;
+
+    Marble::MapQuality      mapQuality (Marble::ViewContext = Marble::Still);
+    Marble::ViewContext     viewContext () const;
+    bool                    animationsEnabled () const;
+    Marble::AngleUnit       defaultAngleUnit () const;
+    void                    setDefaultAngleUnit (Marble::AngleUnit angleUnit);
+    Marble::DistanceUnit    defaultDistanceUnit () const;
+    void                    setDefaultDistanceUnit (Marble::DistanceUnit distanceUnit);
+    QFont                   defaultFont () const;
+    void                    setDefaultFont (const QFont& font);
     void                    updateSun ();
     void                    centerSun ();
     void                    enableInput ();
@@ -106,7 +124,6 @@ public:
     void                    centerOn (const Marble::GeoDataCoordinates& point, bool animated = 0);
     void                    setCenterLatitude (qreal lat);
     void                    setCenterLongitude (qreal lon);
-    Marble::Projection      projection () const;
     void                    setProjection (int projection);
     void                    setProjection (Marble::Projection projection /Constrained/);
     void                    home (qreal& lon /out/, qreal& lat /out/, int& zoom /out/);
@@ -117,11 +134,6 @@ public:
     void                    moveUp ();
     void                    moveDown ();
     void                    goHome ();
-    QString                 mapThemeId () const;
-
-//mt undefined symbol: GeoSceneDocument* None -- need mapped type?
-//mt     Marble::GeoSceneDocument*  mapTheme () const;
-
     void                    setMapThemeId (const QString& maptheme);
     void                    setPropertyValue (const QString& name, bool value);
     void                    setShowOverviewMap (bool visible);
@@ -129,6 +141,7 @@ public:
     void                    setShowCompass (bool visible);
     void                    setShowClouds (bool visible);
     void                    setShowAtmosphere (bool visible);
+    void                    setShowCrosshairs (bool visible);
     void                    setShowGrid (bool visible);
     void                    setShowPlaces (bool visible);
     void                    setShowCities (bool visible);
@@ -146,13 +159,6 @@ public:
     void                    notifyMouseClick (int x, int y);
     void                    updateGps ();
     void                    openGpxFile (QString& filename);
-
-//mt undefined symbol: GpxFileModel* None -- need mapped type?
-//mt     GpxFileModel*      gpxFileModel ();
-
-//mt undefined symbol: FileViewModel* None -- need mapped type?
-//mt     FileViewModel*     fileViewModel () const;
-
     void                    clearPersistentTileCache ();
     void                    setPersistentTileCacheLimit (quint64 kiloBytes);
     void                    clearVolatileTileCache ();
@@ -160,21 +166,13 @@ public:
     void                    creatingTilesStart (Marble::TileCreator* creator, const QString& name, const QString& description);
     void                    updateChangedMap ();
 
-//mt undefined symbol: BoundingBox& None -- need mapped type?
-//mt     void               updateRegion (BoundingBox&);
-
+//    void                    updateRegion (Marble::BoundingBox&);
     void                    setDownloadUrl (const QString& url);
     void                    setDownloadUrl (const QUrl& url);
-    Marble::MapQuality      mapQuality (Marble::ViewContext = Marble::Still);
     void                    setMapQuality (Marble::MapQuality, Marble::ViewContext = Marble::Still);
-    Marble::ViewContext     viewContext () const;
     void                    setViewContext (Marble::ViewContext viewContext);
-    bool                    animationsEnabled () const;
     void                    setAnimationsEnabled (bool enabled);
-    Marble::AngleUnit       defaultAngleUnit () const;
-    void                    setDefaultAngleUnit (Marble::AngleUnit angleUnit);
-    QFont                   defaultFont () const;
-    void                    setDefaultFont (const QFont& font);
+    void                    setSelection (const QRect& region);
 
 signals:
     void                    zoomChanged (int zoom);
@@ -185,6 +183,9 @@ signals:
     void                    mouseClickGeoPosition (qreal lon, qreal lat, Marble::GeoDataCoordinates::Unit);
     void                    timeout ();
     void                    framesPerSecond (qreal fps);
+
+//mt undefined symbol: QList<double>& None -- need mapped type?
+//mt     void               regionSelected (const QList<double>&);
 
 protected:
     void                    leaveEvent (QEvent* event);

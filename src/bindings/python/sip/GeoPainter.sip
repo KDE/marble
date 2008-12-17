@@ -42,6 +42,7 @@ public:
     void                    drawRoundRect (const Marble::GeoDataCoordinates& centerPoint, int w, int h, int xRnd = 25, int yRnd = 25, bool isGeoProjected = 0);
     void                    drawText (int x, int y, const QString& text);
     void                    drawText (const QPoint& position, const QString& text);
+    void                    drawText (const QRect& rectangle, int flags, const QString& text, QRect* boundingRect = 0);
     void                    drawEllipse (int x, int y, int width, int height);
     void                    drawEllipse (const QRectF& rectangle);
     void                    drawImage (const QRect& target, const QImage& image, const QRect& source, Qt::ImageConversionFlags flags = Qt::AutoColor);

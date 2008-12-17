@@ -18,20 +18,18 @@
 namespace Marble
 {
 
-class ClipPainter : QPainter /Abstract/
+class MapThemeSortFilterProxyModel : QSortFilterProxyModel
 {
 %TypeHeaderCode
-#include <ClipPainter.h>
+#include <MapThemeSortFilterProxyModel.h>
 %End
 
 public:
-                            ClipPainter ();
-                            ClipPainter (QPaintDevice*, bool);
-    void                    setClipping (bool enable);
-    bool                    isClipping () const;
-    void                    drawPolygon (const QPolygonF&, Qt::FillRule fillRule = Qt::OddEvenFill);
-    void                    drawPolyline (const QPolygonF&);
-};   // ClipPainter
+                            MapThemeSortFilterProxyModel (QObject* parent /TransferThis/ = 0);
+
+protected:
+    bool                    lessThan (const QModelIndex& left, const QModelIndex& right) const;
+};   // MapThemeSortFilterProxyModel
 
 };   // Marble
 

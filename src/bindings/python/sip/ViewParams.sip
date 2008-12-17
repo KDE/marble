@@ -29,8 +29,8 @@ public:
     Marble::ViewportParams*  viewport ();
     void                    setMapThemeId (const QString&);
 
-// in .h but not in .cpp.
-//FIXME    QString                 mapThemeId ();
+// Defined but not implemented.
+//    QString                 mapThemeId ();
 
 
 //mt undefined symbol: GeoSceneDocument* None -- need mapped type?
@@ -51,15 +51,21 @@ public:
     void                    setPlanetAxis (const Marble::Quaternion& newAxis);
     void               centerCoordinates (qreal& centerLon /out/, qreal& centerLat /out/);
     QImage*                 canvasImage () const;
-    void                    setCanvasImage (QImage*);
+
+// FIXME const here causes trouble
+//    void                    setCanvasImage (QImage * const);
+
     QImage*                 coastImage () const;
-    void                    setCoastImage (QImage*);
+
+// FIXME const here causes trouble
+//    void                    setCoastImage (QImage *const);
+
     bool                    showGps () const;
-    void                    setShowGps (const bool);
+    void                    setShowGps (bool);
     bool                    showElevationModel () const;
-    void                    setShowElevationModel (const bool);
+    void                    setShowElevationModel (bool);
     bool                    showAtmosphere () const;
-    void                    setShowAtmosphere (const bool);
+    void                    setShowAtmosphere (bool);
     int                     radiusUpdated () const;
     void                    setRadiusUpdated (const int);
     Marble::Quaternion      planetAxisUpdated () const;

@@ -18,20 +18,18 @@
 namespace Marble
 {
 
-class ClipPainter : QPainter /Abstract/
+class MarbleAboutDialog : QDialog
 {
 %TypeHeaderCode
-#include <ClipPainter.h>
+#include <MarbleAboutDialog.h>
 %End
 
 public:
-                            ClipPainter ();
-                            ClipPainter (QPaintDevice*, bool);
-    void                    setClipping (bool enable);
-    bool                    isClipping () const;
-    void                    drawPolygon (const QPolygonF&, Qt::FillRule fillRule = Qt::OddEvenFill);
-    void                    drawPolyline (const QPolygonF&);
-};   // ClipPainter
+    explicit                MarbleAboutDialog (QWidget* parent /TransferThis/ = 0);
+
+private:
+                            MarbleAboutDialog (const Marble::MarbleAboutDialog&);
+};   // MarbleAboutDialog
 
 };   // Marble
 

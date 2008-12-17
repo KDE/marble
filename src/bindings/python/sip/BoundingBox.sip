@@ -18,20 +18,20 @@
 namespace Marble
 {
 
-class ClipPainter : QPainter /Abstract/
+class BoundingBox
 {
 %TypeHeaderCode
-#include <ClipPainter.h>
+#include <BoundingBox.h>
 %End
 
 public:
-                            ClipPainter ();
-                            ClipPainter (QPaintDevice*, bool);
-    void                    setClipping (bool enable);
-    bool                    isClipping () const;
-    void                    drawPolygon (const QPolygonF&, Qt::FillRule fillRule = Qt::OddEvenFill);
-    void                    drawPolyline (const QPolygonF&);
-};   // ClipPainter
+                            BoundingBox ();
+    explicit                BoundingBox (const QVector<QPointF>&);
+    bool                    contains (const QPointF&) const;
+    bool                    intersects (const Marble::BoundingBox&) const;
+    bool                    isValid () const;
+    QString                 string () const;
+};   // BoundingBox
 
 };   // Marble
 

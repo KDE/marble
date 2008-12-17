@@ -31,24 +31,25 @@ public:
     void                    setProjection (Marble::Projection newProjection);
     int                     polarity () const;
     Marble::GeoDataLatLonAltBox  viewLatLonAltBox () const;
+    qreal                   angularResolution () const;
+    bool                    resolves (const Marble::GeoDataLatLonBox& latLonBox) const;
+    bool                    resolves (const Marble::GeoDataCoordinates& coord1, const Marble::GeoDataCoordinates& coord2) const;
     int                     radius () const;
     void                    setRadius (int newRadius);
     bool                    globeCoversViewport () const;
     Marble::Quaternion      planetAxis () const;
     bool                    setPlanetAxis (const Marble::Quaternion& newAxis);
-//FIXME    Marble::matrix*         planetAxisMatrix () const;
+//FIXME
+//    Marble::matrix*         planetAxisMatrix () const;
     int                     width () const;
     int                     height () const;
     QSize                   size () const;
     void                    setWidth (int newWidth);
     void                    setHeight (int newHeight);
     void                    setSize (QSize newSize);
+//    Marble::BoundingBox     boundingBox () const;
+//    void                    setBoundingBox (const Marble::BoundingBox&);
 
-//mt undefined symbol: BoundingBox None -- need mapped type?
-//mt     BoundingBox        boundingBox () const;
-
-//mt undefined symbol: BoundingBox& None -- need mapped type?
-//mt     void               setBoundingBox (const BoundingBox&);
 
     void                    centerCoordinates (qreal& centerLon /out/, qreal& centerLat /out/) const;
     bool                    mapCoversViewport () const;

@@ -18,20 +18,17 @@
 namespace Marble
 {
 
-class ClipPainter : QPainter /Abstract/
+class GeoDataLinearRing : Marble::GeoDataLineString
 {
 %TypeHeaderCode
-#include <ClipPainter.h>
+#include <marble/GeoDataLinearRing.h>
 %End
 
 public:
-                            ClipPainter ();
-                            ClipPainter (QPaintDevice*, bool);
-    void                    setClipping (bool enable);
-    bool                    isClipping () const;
-    void                    drawPolygon (const QPolygonF&, Qt::FillRule fillRule = Qt::OddEvenFill);
-    void                    drawPolyline (const QPolygonF&);
-};   // ClipPainter
+    explicit                GeoDataLinearRing (Marble::GeoDataObject* parent = 0, Marble::TessellationFlags f = Marble::NoTessellation);
+    virtual bool            isClosed () const;
+    virtual EnumGeometryId  geometryId () const;
+};   // GeoDataLinearRing
 
 };   // Marble
 

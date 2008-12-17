@@ -18,20 +18,20 @@
 namespace Marble
 {
 
-class ClipPainter : QPainter /Abstract/
+class AbstractLayerInterface
 {
 %TypeHeaderCode
-#include <ClipPainter.h>
+#include <marble/AbstractLayerInterface.h>
 %End
 
 public:
-                            ClipPainter ();
-                            ClipPainter (QPaintDevice*, bool);
-    void                    setClipping (bool enable);
-    bool                    isClipping () const;
-    void                    drawPolygon (const QPolygonF&, Qt::FillRule fillRule = Qt::OddEvenFill);
-    void                    drawPolyline (const QPolygonF&);
-};   // ClipPainter
+    virtual void            draw (Marble::ClipPainter* painter, const QPoint& point) = 0;
+    virtual void            draw (Marble::ClipPainter* painter, const QSize& canvasSize, Marble::ViewParams* viewParams) = 0;
+    virtual void            draw (Marble::ClipPainter* painter, const QSize& canvasSize, Marble::ViewParams* viewParams, const Marble::BoundingBox& box) = 0;
+    virtual void            printToStream (QTextStream&) const;
+    bool                    visible () const;
+    void                    setVisible (bool visible);
+};   // AbstractLayerInterface
 
 };   // Marble
 

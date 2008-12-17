@@ -17,21 +17,23 @@
 
 namespace Marble
 {
-
-class ClipPainter : QPainter /Abstract/
+//ub class has undefined base class
+//ub class GeoDataStyleMap : Marble::GeoDataStyleSelector, QMap<QString,QString>
 {
 %TypeHeaderCode
-#include <ClipPainter.h>
+#include <marble/GeoDataStyleMap.h>
 %End
 
 public:
-                            ClipPainter ();
-                            ClipPainter (QPaintDevice*, bool);
-    void                    setClipping (bool enable);
-    bool                    isClipping () const;
-    void                    drawPolygon (const QPolygonF&, Qt::FillRule fillRule = Qt::OddEvenFill);
-    void                    drawPolyline (const QPolygonF&);
-};   // ClipPainter
+    QString                 lastKey ();
+    void                    setLastKey (QString key);
+    virtual void            pack (QDataStream& stream) const;
+    virtual void            unpack (QDataStream& stream);
+                            GeoDataStyleMap ();
+
+private:
+                            GeoDataStyleMap (const Marble::GeoDataStyleMap&);
+};   // GeoDataStyleMap
 
 };   // Marble
 

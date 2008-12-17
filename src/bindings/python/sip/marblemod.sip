@@ -34,23 +34,20 @@
 %Include GeoDataCoordinates.sip
 //%Include AbstractLayerInterface.sip
 %Include ClipPainter.sip
-//%Include ExtDateTime.sip
+
 %Include GeoPainter.sip
 %Include LatLonEdit.sip
 %Include MapThemeManager.sip
-//%Include MapThemeSortFilterProxyModel.sip
 %Include MarbleAbstractFloatItem.sip
 %Include MarbleControlBox.sip
 %Include MarbleDataFacade.sip
 %Include MarbleDirs.sip
 %Include MarbleMap.sip
+%Include MarbleModel.sip
 %Include MarbleNavigator.sip
 %Include MarbleRenderPlugin.sip
 %Include MarbleRenderPluginInterface.sip
 %Include MarbleWidget.sip
-
-// Not public
-//%Include MarbleWidgetInputHandler.sip
 
 %Include AbstractProjection.sip
 //%Include AbstractProjectionHelper.sip
@@ -91,3 +88,13 @@
 %Include Serializable.sip
 %Include GeoDocument.sip
 %Include global.sip
+%Include MarbleAboutDialog.sip
+
+// ---- API isn't exported.
+//%Include MapThemeSortFilterProxyModel.sip
+//%Include ExtDateTime.sip
+//%Include MarbleWidgetInputHandler.sip
+
+// ---- Not exported, and is deprecated
+//%Include BoundingBox.sip
+

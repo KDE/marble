@@ -18,20 +18,18 @@
 namespace Marble
 {
 
-class ClipPainter : QPainter /Abstract/
+class EquirectProjectionHelper : Marble::AbstractProjectionHelper
 {
 %TypeHeaderCode
-#include <ClipPainter.h>
+#include <marble/EquirectProjectionHelper.h>
 %End
 
 public:
-                            ClipPainter ();
-                            ClipPainter (QPaintDevice*, bool);
-    void                    setClipping (bool enable);
-    bool                    isClipping () const;
-    void                    drawPolygon (const QPolygonF&, Qt::FillRule fillRule = Qt::OddEvenFill);
-    void                    drawPolyline (const QPolygonF&);
-};   // ClipPainter
+    explicit                EquirectProjectionHelper ();
+    void                    paintBase (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, QPen& pen, QBrush& brush, bool antialiasing);
+    void                    createActiveRegion (Marble::ViewportParams* viewport);
+    void                    createProjectedRegion (Marble::ViewportParams* viewport);
+};   // EquirectProjectionHelper
 
 };   // Marble
 

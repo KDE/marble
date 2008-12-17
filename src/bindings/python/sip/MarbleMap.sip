@@ -26,17 +26,14 @@ class MarbleMap : QObject
 
 public:
     explicit                MarbleMap ();
-
-//mt undefined symbol: MarbleModel* model -- need mapped type?
-//mt     explicit           MarbleMap (MarbleModel* model);
-
-//mt undefined symbol: MarbleModel* None -- need mapped type?
-//mt     MarbleModel*       model () const;
-
+    explicit                MarbleMap (Marble::MarbleModel* model);
+    Marble::MarbleModel*    model () const;
     Marble::ViewParams*     viewParams ();
+
 
 //mt undefined symbol: MeasureTool* None -- need mapped type?
 //mt     MeasureTool*       measureTool ();
+
 
     void                    setSize (int width, int height);
     void                    setSize (QSize size);
@@ -44,8 +41,10 @@ public:
     int                     width () const;
     int                     height () const;
 
+
 //mt undefined symbol: HttpDownloadManager* downloadManager -- need mapped type?
 //mt     void               setDownloadManager (HttpDownloadManager* downloadManager);
+
 
     int                     radius () const;
     void                    setRadius (int radius);
@@ -76,6 +75,7 @@ public:
     bool                    showCompass () const;
     bool                    showClouds () const;
     bool                    showAtmosphere () const;
+    bool                    showCrosshairs () const;
     bool                    showGrid () const;
     bool                    showPlaces () const;
     bool                    showCities () const;
@@ -125,6 +125,7 @@ public:
     void                    setShowCompass (bool visible);
     void                    setShowClouds (bool visible);
     void                    setShowAtmosphere (bool visible);
+    void                    setShowCrosshairs (bool visible);
     void                    setShowGrid (bool visible);
     void                    setShowPlaces (bool visible);
     void                    setShowCities (bool visible);
@@ -143,33 +144,24 @@ public:
     void                    updateGps ();
     void                    openGpxFile (QString& filename);
 
-
 //mt undefined symbol: GpxFileModel* None -- need mapped type?
 //mt     GpxFileModel*      gpxFileModel ();
 
-
-
-
-//mt undefined symbol: FileViewModel* None -- need mapped type?
-//mt     FileViewModel*     fileViewModel () const;
-
+//ig     FileViewModel*     fileViewModel () const;
 
     void                    clearPersistentTileCache ();
     void                    setPersistentTileCacheLimit (quint64 kiloBytes);
     void                    clearVolatileTileCache ();
     void                    setVolatileTileCacheLimit (quint64 kiloBytes);
     void                    updateChangedMap ();
-
-
-//mt undefined symbol: BoundingBox& None -- need mapped type?
-//mt     void               updateRegion (BoundingBox&);
-
-
+//    void                    updateRegion (Marble::BoundingBox&);
     void                    setDownloadUrl (const QString& url);
     void                    setDownloadUrl (const QUrl& url);
     bool                    mapCoversViewport ();
     Marble::AngleUnit       defaultAngleUnit () const;
     void                    setDefaultAngleUnit (Marble::AngleUnit angleUnit);
+    Marble::DistanceUnit    defaultDistanceUnit () const;
+    void                    setDefaultDistanceUnit (Marble::DistanceUnit distanceUnit);
     QFont                   defaultFont () const;
     void                    setDefaultFont (const QFont& font);
 

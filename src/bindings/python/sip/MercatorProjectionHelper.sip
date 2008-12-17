@@ -18,20 +18,18 @@
 namespace Marble
 {
 
-class ClipPainter : QPainter /Abstract/
+class MercatorProjectionHelper : Marble::AbstractProjectionHelper
 {
 %TypeHeaderCode
-#include <ClipPainter.h>
+#include <marble/MercatorProjectionHelper.h>
 %End
 
 public:
-                            ClipPainter ();
-                            ClipPainter (QPaintDevice*, bool);
-    void                    setClipping (bool enable);
-    bool                    isClipping () const;
-    void                    drawPolygon (const QPolygonF&, Qt::FillRule fillRule = Qt::OddEvenFill);
-    void                    drawPolyline (const QPolygonF&);
-};   // ClipPainter
+    explicit                MercatorProjectionHelper ();
+    void                    paintBase (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, QPen& pen, QBrush& brush, bool antialiasing);
+    void                    createActiveRegion (Marble::ViewportParams* viewport);
+    void                    createProjectedRegion (Marble::ViewportParams* viewport);
+};   // MercatorProjectionHelper
 
 };   // Marble
 

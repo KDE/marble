@@ -32,6 +32,7 @@ public:
     void                    setShow (bool show);
     void                    setCitylights (bool show);
     void                    setCentered (bool show);
+    void                    setBody (QString body);
     bool                    getShow ();
     bool                    getCitylights ();
     bool                    getCentered ();

@@ -27,7 +27,6 @@ class MarbleControlBox : QWidget
 public:
     explicit                MarbleControlBox (QWidget* parent /TransferThis/ = 0);
     void                    addMarbleWidget (Marble::MarbleWidget* widget);
-    void                    setLocations (MarblePlacemarkModel* locations);
     int                     minimumZoom () const;
     void                    setMapThemeModel (QStandardItemModel* mapThemeModel);
 
@@ -50,6 +49,8 @@ signals:
 public:
     void                    selectTheme (const QString&);
     void                    selectProjection (Marble::Projection projection);
+// FIXME PlacemarkModel header isn't installed
+//    void                    setLocations (MarblePlacemarkModel* locations);
     void                    changeZoom (int zoom);
     void                    disableGpsInput (bool);
     void                    receiveGpsCoordinates (qreal, qreal, Marble::GeoDataCoordinates::Unit);
