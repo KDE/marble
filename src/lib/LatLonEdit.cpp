@@ -42,9 +42,8 @@ public:
 }
 
 LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension )
-    : QWidget( parent ), d(0)
+    : QWidget( parent ), d(new LatLonEditPrivate(this))
 {
-    d = new LatLonEditPrivate(this);
     d->m_value = 0;
     setDimension( dimension);
 

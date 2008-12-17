@@ -60,7 +60,7 @@ private Q_SLOTS:
     void secOverflow();
     void minOverflow();
 private:
-    LatLonEditPrivate *d;
+    LatLonEditPrivate * const d;
 };
 
 }
