@@ -111,7 +111,7 @@ void WorldClock::init()
     if(m_customTz) {
         QStringList tzlist = cg.readEntry("tzlist", QStringList());
         m_locations = QMap<QString, KTimeZone>();
-        foreach( const QString tzname, tzlist ) {
+        foreach( const QString& tzname, tzlist ) {
             m_locations.insert(tzname, KSystemTimeZones::zone(tzname));
         }
         if(!m_locations.contains(m_locationkey))
@@ -415,7 +415,7 @@ void WorldClock::createConfigurationInterface(KConfigDialog *parent)
         ui.customTz->setChecked(true);
 
     ui.tzWidget->setSelectionMode( QTreeView::MultiSelection );
-    foreach(const QString tz, cg.readEntry("tzlist")) {
+    foreach(const QString& tz, cg.readEntry("tzlist")) {
         ui.tzWidget->setSelected(tz,true);
     }
 
@@ -449,7 +449,7 @@ void WorldClock::configAccepted()
         QMap<QString, KTimeZone> selectedZones;
         selectedZones.insert(KSystemTimeZones::local().name(),
                                 KSystemTimeZones::local());
-        foreach( const QString tzname, tzlist ) {
+        foreach( const QString& tzname, tzlist ) {
             selectedZones.insert(tzname, KSystemTimeZones::zone(tzname));
         }
         cg.writeEntry("tzlist",tzlist);

@@ -12,8 +12,7 @@
 //
 // Quaternions provides a class that deals with quaternion operations.
 
-// krazy:excludeall=dpointer
-// krazy:excludeall=inline
+// krazy:excludeall=dpointer,inline
 
 #ifndef __MARBLE__QUATERNION_H
 #define __MARBLE__QUATERNION_H
