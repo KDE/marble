@@ -41,11 +41,25 @@ class TextureTile : public QObject {
     Q_OBJECT
 
  public:
+
+    enum TileState {
+        TileEmpty,
+        TilePartial,
+        TileComplete
+    };
+
+    enum DatasetState {
+        DatasetEmpty,
+        DatasetZeroLevel,
+        DatasetScaled,
+        DatasetComplete
+    };
+
     explicit TextureTile( TileId const& tid );
 
     virtual ~TextureTile();
     
-    void loadRawTile( Marble::GeoSceneTexture *textureLayer, int level, int x,
+    void loadDataset( Marble::GeoSceneTexture *textureLayer, int level, int x,
                       int y, QCache<TileId, TextureTile> *tileCache = 0 );
 
     TileId const& id() const  { return m_id; }
@@ -55,6 +69,9 @@ class TextureTile : public QObject {
     void setUsed( bool used ) { m_used = used; }
 
     int numBytes() const      { return m_rawtile.numBytes(); }
+
+    TileState state() const { return m_state; }
+    void setState( TileState state ) { m_state = state; }
 
     const QImage& rawtile()   { return m_rawtile; }
     QImage *tile()            { return &m_rawtile; }
@@ -95,6 +112,8 @@ class TextureTile : public QObject {
     int      m_depth;
     bool     m_isGrayscale;
     bool     m_used;
+
+    TileState m_state;
 
  private:
     Q_DISABLE_COPY( TextureTile )

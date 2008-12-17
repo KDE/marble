@@ -57,7 +57,7 @@ class MergedLayerDecorator : public QObject
     void repaintMap();
 	
  private:
-    QImage loadRawTile( GeoSceneTexture *textureLayer );
+    QImage loadDataset( GeoSceneTexture *textureLayer );
     int maxDivisor( int maximum, int fullLength );
     void paintSunShading();
     void paintClouds();

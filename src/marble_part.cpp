@@ -425,6 +425,7 @@ void MarblePart::writeSettings()
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Marble::Still ) );
     MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->mapQuality( Marble::Animation )  );
 
+    MarbleSettings::setDistanceUnit( m_controlView->marbleWidget()->defaultDistanceUnit() );
     MarbleSettings::setAngleUnit( m_controlView->marbleWidget()->defaultAngleUnit() );
 
     // Caches
@@ -761,6 +762,7 @@ void MarblePart::slotUpdateSettings()
     m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(), Marble::Animation );
 
     m_controlView->marbleWidget()->setDefaultAngleUnit( (Marble::AngleUnit) MarbleSettings::angleUnit() );
+    m_controlView->marbleWidget()->setDefaultDistanceUnit( (Marble::DistanceUnit) MarbleSettings::distanceUnit() );
 
     m_controlView->marbleWidget()->setAnimationsEnabled( MarbleSettings::animateTargetVoyage() );
 

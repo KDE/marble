@@ -64,6 +64,7 @@ TextureTile::TextureTile( TileId const& id )
       m_depth(0),
       m_isGrayscale(false),
       m_used(false),
+      m_state(TileEmpty),
       m_created(QDateTime::currentDateTime())
 {
 }
@@ -75,9 +76,9 @@ TextureTile::~TextureTile()
     delete [] jumpTable8;
 }
 
-void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, int y, QCache<TileId, TextureTile> *tileCache )
+void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, int y, QCache<TileId, TextureTile> *tileCache )
 {
-    // qDebug() << "TextureTile::loadRawTile" << level << x << y;
+    // qDebug() << "TextureTile::loadDataset" << level << x << y;
     QImage temptile;
 
     m_used = true; // Needed to avoid frequent deletion of tiles
@@ -162,7 +163,7 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
             if ( fileInfo.exists() ) {
 
                 temptile.load( absfilename );
-                // qDebug() << "TextureTile::loadRawTile "
+                // qDebug() << "TextureTile::loadDataset "
                 //          << "depth:" << temptile.depth()
                 //          << "format:" << temptile.format()
                 //          << "bytesPerLine:" << temptile.bytesPerLine()
@@ -177,6 +178,9 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
                 // Don't scale if the current tile isn't a fallback
                 if ( level != currentLevel ) { 
                     scaleTileFrom( textureLayer, temptile, currentX, currentY, currentLevel, x, y, level );
+                }
+                else {
+                    m_state = TileComplete;
                 }
 
                 m_rawtile = temptile;
@@ -194,7 +198,7 @@ void TextureTile::loadRawTile( GeoSceneTexture *textureLayer, int level, int x, 
         }
     }
 
-//    qDebug() << "TextureTile::loadRawTile end";
+//    qDebug() << "TextureTile::loadDataset end";
 
     m_depth = m_rawtile.depth();
 
@@ -271,6 +275,7 @@ void TextureTile::scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile, qr
     // same place for m_rawtile on the heap:
     tile = tile.copy( left, top, rectWidth, rectHeight );
     tile = tile.scaled( tilesize ); // TODO: use correct size
+    m_state = TilePartial;
     // qDebug() << "Finished scaling up the Temporary Tile.";
 
 }

@@ -98,7 +98,7 @@ bool MergedLayerDecorator::showTileId() const
     return m_showTileId;
 }
 
-QImage MergedLayerDecorator::loadRawTile( GeoSceneTexture *textureLayer )
+QImage MergedLayerDecorator::loadDataset( GeoSceneTexture *textureLayer )
 {
     // TODO use a TileLoader rather than directly accessing TextureTile?
     TextureTile tile(m_id);
@@ -106,13 +106,13 @@ QImage MergedLayerDecorator::loadRawTile( GeoSceneTexture *textureLayer )
     connect( &tile, SIGNAL( downloadTile( const QUrl&, const QString&, const QString& ) ),
              this, SIGNAL( downloadTile( const QUrl&, const QString&, const QString& ) ) );
 
-    tile.loadRawTile( textureLayer, m_level, m_x, m_y );
+    tile.loadDataset( textureLayer, m_level, m_x, m_y );
     return *(tile.tile());
 }
 
 void MergedLayerDecorator::paintClouds()
 {
-    QImage  cloudtile = loadRawTile( m_cloudsTextureLayer );
+    QImage  cloudtile = loadDataset( m_cloudsTextureLayer );
     if ( cloudtile.isNull() )
         return;
 
@@ -177,7 +177,7 @@ void MergedLayerDecorator::paintSunShading()
     const int ipRight = n * (int)( tileWidth / n );
 
     if ( m_sunLocator->getCitylights() ) {
-        QImage nighttile = loadRawTile( m_cityLightsTextureLayer );
+        QImage nighttile = loadDataset( m_cityLightsTextureLayer );
         if ( nighttile.isNull() )
             return;
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {

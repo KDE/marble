@@ -120,8 +120,14 @@ enum AltitudeMode {
 const int defaultLevelZeroColumns = 2;
 const int defaultLevelZeroRows = 1;
 
+// Conversion Metric / Imperial System: km vs. miles
+const qreal MI2KM = 1.852;
+const qreal KM2MI = 1.0 / MI2KM;
+
+// Conversion degree vs. radians
 const qreal DEG2RAD = M_PI / 180.0;
 const qreal RAD2DEG = 180.0 / M_PI;
+
 
 // Version definitions to use with an external application (as digiKam)
 

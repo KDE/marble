@@ -41,7 +41,7 @@
       <item row="0" column="1" >
        <widget class="QComboBox" name="kcfg_distanceUnit" >
         <property name="enabled" >
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
         <property name="sizePolicy" >
          <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
