@@ -34,15 +34,13 @@ public:
 //ig    virtual Marble::AbstractProjectionHelper*  helper ();
 
 //ig    virtual bool            screenCoordinates (const qreal lon, const qreal lat, const Marble::ViewportParams* viewport, int& x /out/, int& y /out/) = 0;
-
 //ig    virtual bool            screenCoordinates (const Marble::GeoDataCoordinates& geopoint, const Marble::ViewportParams* viewport, int& x /out/, int& y /out/, bool& globeHidesPoint /out/) = 0;
-
 //ig    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, const Marble::ViewportParams* viewport, int& x /out/, int& y /out/);
 
     virtual bool            screenCoordinates (const Marble::GeoDataCoordinates& coordinates, const Marble::ViewportParams* viewport, int* x /out/, int& y /out/, int& pointRepeatNum /out/, bool& globeHidesPoint /out/) = 0;
 
 //mt undefined symbol: QVector<QPolygonF*>& polygons -- need mapped type?
-//mt     virtual bool       screenCoordinates (const Marble::GeoDataLineString& lineString, const Marble::ViewportParams* viewport, QVector<QPolygonF*>& polygons) = 0;
+//mt    virtual bool       screenCoordinates (const Marble::GeoDataLineString& lineString, const Marble::ViewportParams* viewport, QVector<QPolygonF*>& polygons) = 0;
 
     virtual bool    geoCoordinates (int x, int y, const Marble::ViewportParams* viewport, qreal& lon /out/, qreal& lat /out/, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Degree) = 0;
 

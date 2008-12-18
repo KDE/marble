@@ -35,7 +35,7 @@ public:
     void                    drawImage (const Marble::GeoDataCoordinates& centerPoint, const QImage& image, bool isGeoProjected = 0);
     void                    drawPixmap (const Marble::GeoDataCoordinates& centerPoint, const QPixmap& pixmap, bool isGeoProjected = 0);
     void                    drawLine (const Marble::GeoDataCoordinates& p1, const Marble::GeoDataCoordinates& p2, bool isGeoProjected = 0);
-//FIXME    void                    drawPolyline (const Marble::GeoDataLineString& lineString);
+    void                    drawPolyline (const Marble::GeoDataLineString& lineString);
 //FIXME    void                    drawPolygon (const Marble::GeoDataLinearRing& linearRing, Qt::FillRule fillRule = Qt::OddEvenFill);
     void                    drawPolygon (const Marble::GeoDataPolygon& polygon, Qt::FillRule fillRule = Qt::OddEvenFill);
     void                    drawRect (const Marble::GeoDataCoordinates& centerPoint, qreal width, qreal height, bool isGeoProjected = 0);

@@ -73,7 +73,7 @@
 %Include GeoDataLabelStyle.sip
 %Include GeoDataLatLonAltBox.sip
 %Include GeoDataLatLonBox.sip
-//%Include GeoDataLineString.sip
+%Include GeoDataLineString.sip
 %Include GeoDataLineStyle.sip
 //%Include GeoDataLinearRing.sip
 //%Include GeoDataMultiGeometry.sip

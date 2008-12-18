@@ -39,7 +39,7 @@ public:
     virtual bool            contains (const Marble::GeoDataCoordinates&);
     bool                    contains (const Marble::GeoDataLatLonAltBox&);
     virtual bool            intersects (const Marble::GeoDataLatLonAltBox&);
-//FIXME    static Marble::GeoDataLatLonAltBox  fromLineString (const Marble::GeoDataLineString& lineString);
+    static Marble::GeoDataLatLonAltBox  fromLineString (const Marble::GeoDataLineString& lineString);
 
     virtual QString    toString (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
 

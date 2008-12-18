@@ -34,7 +34,7 @@ public:
     void                    setCoordinate (qreal longitude, qreal latitude, qreal altitude = 0);
     void                    setCoordinate (const Marble::GeoDataPoint& point);
     void                    setGeometry (Marble::GeoDataPoint* entry);
-//FIXME    void                    setGeometry (Marble::GeoDataLineString* entry);
+    void                    setGeometry (Marble::GeoDataLineString* entry);
 //FIXME    void                    setGeometry (Marble::GeoDataLinearRing* entry);
 //FIXME    void                    setGeometry (Marble::GeoDataMultiGeometry* entry);
     void                    setGeometry (Marble::GeoDataPolygon* entry);
