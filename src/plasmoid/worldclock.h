@@ -19,7 +19,6 @@
 
 
 #include <Plasma/Applet>
-#include <Plasma/Containment>
 #include <Plasma/DataEngine>
 #include "ui_worldclockConfig.h"
 
@@ -40,8 +39,7 @@ namespace Marble {
 class MarbleMap;
 class SunLocator;
 
-class WorldClock : public Plasma::Containment
-//class WorldClock : public Plasma::Applet
+class WorldClock : public Plasma::Applet
 {
     Q_OBJECT
     public:

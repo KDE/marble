@@ -40,7 +40,6 @@
 
 //Plasma
 #include <Plasma/Applet>
-#include <Plasma/Containment>
 #include <Plasma/DataEngine>
 
 //Marble
@@ -58,13 +57,11 @@
 namespace Marble {
 
 WorldClock::WorldClock(QObject *parent, const QVariantList &args)
-    //: Plasma::Applet(parent, args),
-    : Plasma::Containment(parent, args),
+    : Plasma::Applet(parent, args),
     m_map(0),
     m_sun(0)
 {
     KGlobal::locale()->insertCatalog("Marble");
-    setContainmentType(DesktopContainment);
     setHasConfigurationInterface(true);
     setAcceptHoverEvents(true);
     //The applet needs a 2:1 ratio
