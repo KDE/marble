@@ -104,20 +104,23 @@ void LatLonEdit::setDimension( Marble::Dimension dimension )
     }
 
     if( dimension == Marble::Longitude ) {
-        d->m_sign->removeItem(0); d->m_sign->removeItem(1);
+        for(int i = 0; i < d->m_sign->count(); ++i)
+            d->m_sign->removeItem(i);
         d->m_deg->setMinimum( -180 );
         d->m_deg->setMaximum( 180 );
         d->m_sign->addItem( tr("E", "East, the direction" ) );
         d->m_sign->addItem( tr("W", "West, the direction" ) );
     } else if( dimension == Marble::Latitude ) {
-        d->m_sign->removeItem(0); d->m_sign->removeItem(1);
+        for(int i = 0; i < d->m_sign->count(); ++i)
+            d->m_sign->removeItem(i);
         d->m_deg->setMinimum( -90 );
         d->m_deg->setMaximum( 90 );
         d->m_sign->addItem( tr("N", "North, the direction" ) );
         d->m_sign->addItem( tr("S", "South, the direction" ) );
     } else {
         qDebug() << "Unrecognized dimension" << dimension;
-        d->m_sign->removeItem(0); d->m_sign->removeItem(1);
+        for(int i = 0; i < d->m_sign->count(); ++i)
+            d->m_sign->removeItem(i);
         d->m_deg->setMinimum( -32768 );
         d->m_deg->setMaximum( 32767 );
         d->m_sign->addItem( "+" );
