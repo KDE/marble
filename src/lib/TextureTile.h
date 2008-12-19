@@ -62,34 +62,26 @@ class TextureTile : public QObject {
     void loadDataset( Marble::GeoSceneTexture *textureLayer, int level, int x,
                       int y, QCache<TileId, TextureTile> *tileCache = 0 );
 
-    TileId const& id() const  { return m_id; }
-    int  depth() const        { return m_depth; }
+    TileId const& id() const;
+    int depth() const;
 
-    bool used() const         { return m_used; }
-    void setUsed( bool used ) { m_used = used; }
+    bool used() const;
+    void setUsed( bool used );
 
-    int numBytes() const      { return m_rawtile.numBytes(); }
+    int numBytes() const;
 
-    TileState state() const { return m_state; }
-    void setState( TileState state ) { m_state = state; }
+    TileState state() const;
+    void setState( TileState state );
 
-    const QImage& rawtile()   { return m_rawtile; }
-    QImage *tile()            { return &m_rawtile; }
+    const QImage& rawtile();
+    QImage *tile();
     const QDateTime & created() const;
 
     // Here we retrieve the color value of the requested pixel on the tile.
     // This needs to be done differently for grayscale ( uchar, 1 byte ).
     // and color ( uint, 4 bytes ) images.
 
-    uint pixel( int x, int y ) const {
-        if ( m_depth == 1 || m_depth == 8 ) {
-            if ( !m_isGrayscale )
-                return m_rawtile.pixel( x, y );
-            else
-                return  jumpTable8[y][x];
-        }
-        return  jumpTable32[y][x];
-    }
+    uint pixel( int x, int y ) const;
 
  Q_SIGNALS:
     void tileUpdateDone();
@@ -101,19 +93,6 @@ class TextureTile : public QObject {
 
  protected:
     void     showTileId( QImage& worktile, QString theme, int level, int x, int y );
-
-    uchar  **jumpTable8;
-    uint   **jumpTable32;
-
-    TileId   m_id;
-
-    QImage   m_rawtile;
-
-    int      m_depth;
-    bool     m_isGrayscale;
-    bool     m_used;
-
-    TileState m_state;
 
  private:
     Q_DISABLE_COPY( TextureTile )

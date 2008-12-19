@@ -26,10 +26,36 @@ namespace Marble {
 
 class TextureTilePrivate {
  public:
+    uchar   **jumpTable8;
+    uint    **jumpTable32;
+
+    TileId    m_id;
+
+    QImage    m_rawtile;
+
+    int       m_depth;
+    bool      m_isGrayscale;
+    bool      m_used;
+
+    TextureTile::TileState m_state;
+
     QDateTime m_created;
 
-    TextureTilePrivate() :
+    TextureTilePrivate(const TileId& id) :
+      jumpTable8(0),
+      jumpTable32(0),
+      m_id(id),
+      m_rawtile(),
+      m_depth(0),
+      m_isGrayscale(false),
+      m_used(false),
+      m_state(TextureTile::TileEmpty),
       m_created(QDateTime::currentDateTime()) { }
+
+    ~TextureTilePrivate() {
+      delete [] jumpTable32;
+      delete [] jumpTable8;
+    }
 };
 
 };
@@ -69,23 +95,13 @@ static uchar **jumpTableFromQImage8( QImage &img )
 
 TextureTile::TextureTile( TileId const& id )
     : QObject(),
-      jumpTable8(0),
-      jumpTable32(0),
-      m_id(id),
-      m_rawtile(),
-      m_depth(0),
-      m_isGrayscale(false),
-      m_used(false),
-      m_state(TileEmpty),
-      d(new TextureTilePrivate)
+      d(new TextureTilePrivate(id))
 {
 }
 
 
 TextureTile::~TextureTile()
 {
-    delete [] jumpTable32;
-    delete [] jumpTable8;
     delete d;
 }
 
@@ -94,7 +110,7 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
     // qDebug() << "TextureTile::loadDataset" << level << x << y;
     QImage temptile;
 
-    m_used = true; // Needed to avoid frequent deletion of tiles
+    d->m_used = true; // Needed to avoid frequent deletion of tiles
 
     QString  absfilename;
 
@@ -193,10 +209,10 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
                     scaleTileFrom( textureLayer, temptile, currentX, currentY, currentLevel, x, y, level );
                 }
                 else {
-                    m_state = TileComplete;
+                    d->m_state = TileComplete;
                 }
 
-                m_rawtile = temptile;
+                d->m_rawtile = temptile;
                 d->m_created = lastModified;
                 tileFound = true;
             }
@@ -207,13 +223,13 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
             QString destFileName = TileLoaderHelper::relativeTileFileName( textureLayer,
                                                                            level, x, y );
 //            qDebug() << "emit downloadTile(" << sourceUrl << destFileName << ");";
-            emit downloadTile( sourceUrl, destFileName, m_id.toString() );
+            emit downloadTile( sourceUrl, destFileName, d->m_id.toString() );
         }
     }
 
 //    qDebug() << "TextureTile::loadDataset end";
 
-    m_depth = m_rawtile.depth();
+    d->m_depth = d->m_rawtile.depth();
 
 //    qDebug() << "m_depth =" << m_depth;
 }
@@ -222,30 +238,30 @@ void TextureTile::loadTile( bool requestTileUpdate )
 {
     //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
 
-    if ( m_rawtile.isNull() ) {
+    if ( d->m_rawtile.isNull() ) {
         qDebug() << "An essential tile is missing. Please rerun the application.";
         exit(-1);
     }
 
-    switch ( m_depth ) {
+    switch ( d->m_depth ) {
         case 48:
         case 32:
-            if ( jumpTable32 )
-                delete [] jumpTable32;
-            jumpTable32 = jumpTableFromQImage32( m_rawtile );
+            if ( d->jumpTable32 )
+                delete [] d->jumpTable32;
+            d->jumpTable32 = jumpTableFromQImage32( d->m_rawtile );
             break;
         case 8:
         case 1:
-            if ( jumpTable8 )
-                delete [] jumpTable8;
-            jumpTable8 = jumpTableFromQImage8( m_rawtile );
+            if ( d->jumpTable8 )
+                delete [] d->jumpTable8;
+            d->jumpTable8 = jumpTableFromQImage8( d->m_rawtile );
             break;
         default:
-            qDebug() << QString("Color m_depth %1 of tile could not be retrieved. Exiting.").arg(m_depth);
+            qDebug() << QString("Color m_depth %1 of tile could not be retrieved. Exiting.").arg(d->m_depth);
             exit( -1 );
     }
 
-    m_isGrayscale = m_rawtile.isGrayscale();
+    d->m_isGrayscale = d->m_rawtile.isGrayscale();
 
     if ( requestTileUpdate ) {
         // qDebug() << "TileUpdate available";
@@ -288,7 +304,7 @@ void TextureTile::scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile, qr
     // same place for m_rawtile on the heap:
     tile = tile.copy( left, top, rectWidth, rectHeight );
     tile = tile.scaled( tilesize ); // TODO: use correct size
-    m_state = TilePartial;
+    d->m_state = TilePartial;
     // qDebug() << "Finished scaling up the Temporary Tile.";
 
 }
@@ -297,5 +313,32 @@ const QDateTime & TextureTile::created() const
 {
     return d->m_created;
 }
+
+uint TextureTile::pixel( int x, int y ) const
+{
+    if ( d->m_depth == 1 || d->m_depth == 8 ) {
+        if ( !d->m_isGrayscale )
+            return d->m_rawtile.pixel( x, y );
+        else
+            return (d->jumpTable8)[y][x];
+    }
+    return (d->jumpTable32)[y][x];
+}
+
+TileId const& TextureTile::id() const { return d->m_id; }
+
+int TextureTile::depth() const { return d->m_depth; }
+
+bool TextureTile::used() const { return d->m_used; }
+void TextureTile::setUsed( bool used ) { d->m_used = used; }
+
+int TextureTile::numBytes() const { return d->m_rawtile.numBytes(); }
+
+TextureTile::TileState TextureTile::state() const { return d->m_state; }
+void TextureTile::setState( TileState state ) { d->m_state = state; }
+
+const QImage& TextureTile::rawtile() { return d->m_rawtile; }
+
+QImage * TextureTile::tile() { return &(d->m_rawtile); }
 
 #include "TextureTile.moc"
