@@ -25,8 +25,10 @@
 #include "TileLoader.h"
 
 #include "global.h"
+#include "GeoSceneLayer.h"
 #include "GeoSceneTexture.h"
 #include "HttpDownloadManager.h"
+#include "DatasetProvider.h"
 #include "TextureTile.h"
 #include "MarbleDirs.h"
 #include "TileId.h"
@@ -37,7 +39,6 @@
 #include <QtCore/QDebug>
 #include <QtCore/QHash>
 
-using namespace Marble;
 
 #ifdef Q_CC_MSVC
 # ifndef KDEWIN_MATH_H
@@ -45,22 +46,27 @@ using namespace Marble;
 # endif
 #endif
 
-class TileLoader::Private
+namespace Marble
+{
+
+class TileLoaderPrivate
 {
     public:
-        Private()
-            : m_downloadManager( 0 ),
-              m_textureLayer( 0 )
+        TileLoaderPrivate()
+            : m_datasetProvider( 0 ),
+              m_downloadManager( 0 ),
+              m_layer( 0 )
         {
             m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
         }
 
-        ~Private()
+        ~TileLoaderPrivate()
         {
         }
 
+        DatasetProvider *m_datasetProvider;
         HttpDownloadManager *m_downloadManager;
-        GeoSceneTexture     *m_textureLayer;
+        GeoSceneLayer *m_layer;
         QHash <TileId, TextureTile*>  m_tileHash;
         int           m_tileWidth;
         int           m_tileHeight;
@@ -70,7 +76,7 @@ class TileLoader::Private
 
 
 TileLoader::TileLoader( HttpDownloadManager *downloadManager, MarbleModel* parent)
-    : d( new Private() ),
+    : d( new TileLoaderPrivate() ),
       m_parent(parent)
 {
     setDownloadManager( downloadManager );
@@ -100,17 +106,20 @@ void TileLoader::setDownloadManager( HttpDownloadManager *downloadManager )
     }
 }
 
-void TileLoader::setTextureLayer( GeoSceneTexture *textureLayer )
+void TileLoader::setLayer( GeoSceneLayer * layer )
 {
     // Initialize map theme.
     flush();
     d->m_tileCache.clear();
 
-    d->m_textureLayer = textureLayer;
+    d->m_layer = layer;
 
     TileId id;
     TextureTile tile( id );
-    tile.loadDataset( d->m_textureLayer, 0, 0, 0 );
+
+    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
+
+    tile.loadDataset( texture, 0, 0, 0 );
 
     // We assume that all tiles have the same size. TODO: check to be safe
     d->m_tileWidth  = tile.rawtile().width();
@@ -172,14 +181,18 @@ int TileLoader::tileHeight() const
 
 int TileLoader::globalWidth( int level ) const
 {
-    return d->m_tileWidth * TileLoaderHelper::levelToColumn( d->m_textureLayer->levelZeroColumns(),
-                                                             level );
+    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
+
+    return d->m_tileWidth * TileLoaderHelper::levelToColumn( 
+                                texture ->levelZeroColumns(), level );
 }
 
 int TileLoader::globalHeight( int level ) const
 {
-    return d->m_tileHeight * TileLoaderHelper::levelToRow( d->m_textureLayer->levelZeroRows(),
-                                                           level );
+    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
+
+    return d->m_tileHeight * TileLoaderHelper::levelToRow( 
+                                texture->levelZeroRows(), level );
 }
 
 TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
@@ -197,10 +210,14 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     // the tile was not in the hash or has been removed because of expiration
     // so check if it is in the cache
     tile = d->m_tileCache.take( tileId );
+
+    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
+
     if ( tile ) {
         // the tile was in the cache, but is it up to date?
         const QDateTime now = QDateTime::currentDateTime();
-        if ( tile->created().secsTo( now ) < d->m_textureLayer->expire()) {
+
+        if ( tile->created().secsTo( now ) < texture->expire()) {
             d->m_tileHash[tileId] = tile;
             tile->setUsed( true );
             return tile;
@@ -224,19 +241,19 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     connect( tile, SIGNAL( tileUpdateDone() ),
              this, SIGNAL( tileUpdateAvailable() ) );
 
-    tile->loadDataset( d->m_textureLayer, tileLevel, tilx, tily, &( d->m_tileCache ) );
+    tile->loadDataset( texture, tileLevel, tilx, tily, &( d->m_tileCache ) );
     tile->loadTile( false );
 
     // TODO should emit signal rather than directly calling paintTile
     // emit paintTile( tile, tilx, tily, tileLevel, d->m_theme, false );
-    m_parent->paintTile( tile, tilx, tily, tileLevel, d->m_textureLayer, false );
+    m_parent->paintTile( tile, tilx, tily, tileLevel, texture, false );
 
     return tile;
 }
 
-GeoSceneTexture* TileLoader::textureLayer() const
+GeoSceneLayer * TileLoader::layer() const
 {
-    return d->m_textureLayer;
+    return d->m_layer;
 }
 
 quint64 TileLoader::volatileCacheLimit() const
@@ -245,9 +262,11 @@ quint64 TileLoader::volatileCacheLimit() const
 }
 
 
-int TileLoader::maxPartialTileLevel( GeoSceneTexture *textureLayer )
+int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
 {
-    QString tilepath = MarbleDirs::path( TileLoaderHelper::themeStr( textureLayer ) );
+    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( layer->groundDataset() );
+
+    QString tilepath = MarbleDirs::path( TileLoaderHelper::themeStr( texture ) );
 //    qDebug() << "TileLoader::maxPartialTileLevel tilepath" << tilepath;
     QStringList leveldirs = ( QDir( tilepath ) ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
 
@@ -272,11 +291,14 @@ int TileLoader::maxPartialTileLevel( GeoSceneTexture *textureLayer )
 }
 
 
-bool TileLoader::baseTilesAvailable( GeoSceneTexture *textureLayer )
+bool TileLoader::baseTilesAvailable( GeoSceneLayer * layer )
 {
     bool noerr = true; 
-    const int  levelZeroColumns = textureLayer->levelZeroColumns();
-    const int  levelZeroRows    = textureLayer->levelZeroRows();
+
+    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( layer->groundDataset() );
+
+    const int  levelZeroColumns = texture->levelZeroColumns();
+    const int  levelZeroRows    = texture->levelZeroRows();
 
     // Check whether the tiles from the lowest texture level are available
     //
@@ -284,7 +306,7 @@ bool TileLoader::baseTilesAvailable( GeoSceneTexture *textureLayer )
         for ( int row = 0; noerr && row < levelZeroRows; ++row ) {
 
             const QString tilepath = MarbleDirs::path( TileLoaderHelper::relativeTileFileName(
-                textureLayer, 0, column, row ));
+                texture, 0, column, row ));
             noerr = QFile::exists( tilepath );
         }
     }
@@ -310,8 +332,10 @@ void TileLoader::reloadTile( const QString &idStr )
 
         // TODO should emit signal rather than directly calling paintTile
 //         emit paintTile( d->m_tileHash[id], x, y, level, d->m_theme, true );
-        (d->m_tileHash[id])->loadDataset( d->m_textureLayer, level, x, y, &( d->m_tileCache ) ); 
-        m_parent->paintTile( d->m_tileHash[id], x, y, level, d->m_textureLayer, true );
+        GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
+
+        (d->m_tileHash[id])->loadDataset( texture, level, x, y, &( d->m_tileCache ) ); 
+        m_parent->paintTile( d->m_tileHash[id], x, y, level, texture, true );
 //         (d->m_tileHash[id]) -> reloadTile( x, y, level, d->m_theme );
     } else {
       // Remove "false" tile from cache so it doesn't get loaded anymore
@@ -343,6 +367,8 @@ void TileLoader::update()
     flush(); // trigger a reload of all tiles that are currently in use
     d->m_tileCache.clear(); // clear the tile cache in physical memory
     emit tileUpdateAvailable();
+}
+
 }
 
 #include "TileLoader.moc"

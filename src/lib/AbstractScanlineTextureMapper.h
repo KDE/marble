@@ -43,7 +43,7 @@ public:
 
     virtual void mapTexture( ViewParams *viewParams ) = 0;
 
-    void setTextureLayer( GeoSceneTexture *textureLayer );
+    void setLayer( GeoSceneLayer * layer );
     void setMaxTileLevel( int level );
     virtual void resizeMap( int width, int height );
     void selectTileLevel( ViewParams* viewParams );

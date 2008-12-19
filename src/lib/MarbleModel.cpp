@@ -312,14 +312,16 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         // the name of the layer that has the same name as the theme ID
         QString themeID = d->m_mapTheme->head()->theme();
 
+        GeoSceneLayer *layer = 
+            static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
         GeoSceneTexture *texture = 
-            static_cast<GeoSceneTexture*>( d->m_mapTheme->map()->layer( themeID )->datasets().first() );
+            static_cast<GeoSceneTexture*>( layer->groundDataset() );
 
         QString sourceDir = texture->sourceDir();
         QString installMap = texture->installMap();
         QString role = d->m_mapTheme->map()->layer( themeID )->role();
 
-        if ( !TileLoader::baseTilesAvailable( texture )
+        if ( !TileLoader::baseTilesAvailable( layer )
             && !installMap.isEmpty() )
         {
             qDebug() << "Base tiles not available. Creating Tiles ... \n"
@@ -337,7 +339,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             tileCreatorDlg.exec();
             qDebug("Tile creation completed");
         }
-        d->m_tileLoader->setTextureLayer( texture );
+        d->m_tileLoader->setLayer( layer );
     }
     else {
         d->m_tileLoader->flush();
@@ -829,14 +831,16 @@ void MarbleModel::clearPersistentTileCache()
         // the name of the layer that has the same name as the theme ID
         QString themeID = d->m_mapTheme->head()->theme();
 
+        GeoSceneLayer *layer = 
+            static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
         GeoSceneTexture *texture = 
-            static_cast<GeoSceneTexture*>( d->m_mapTheme->map()->layer( themeID )->datasets().first() );
+            static_cast<GeoSceneTexture*>( layer->groundDataset() );
 
         QString sourceDir = texture->sourceDir();
         QString installMap = texture->installMap();
         QString role = d->m_mapTheme->map()->layer( themeID )->role();
 
-        if ( !TileLoader::baseTilesAvailable( texture )
+        if ( !TileLoader::baseTilesAvailable( layer )
             && !installMap.isEmpty() )
         {
             qDebug() << "Base tiles not available. Creating Tiles ... \n"

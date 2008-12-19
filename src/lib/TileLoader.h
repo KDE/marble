@@ -33,7 +33,9 @@ class SunLocator;
 class TextureTile;
 class HttpDownloadManager;
 class MarbleModel;
-class GeoSceneTexture;
+class GeoSceneLayer;
+
+class TileLoaderPrivate;
 
 /**
  * @short Tile loading from a quad tree
@@ -85,12 +87,12 @@ class TileLoader : public QObject
         /**
          * Sets the texture layer @p the tiles shall be loaded for.
          */
-        void setTextureLayer( Marble::GeoSceneTexture *textureLayer );
+        void setLayer( Marble::GeoSceneLayer * layer );
 
         /**
          * Returns the texture layer the tiles shall be loaded for.
          */
-        Marble::GeoSceneTexture* textureLayer() const;
+        Marble::GeoSceneLayer * layer() const;
 
         /**
          * Resets the internal tile hash.
@@ -141,13 +143,13 @@ class TileLoader : public QObject
          * Returns the highest level in which some tiles are available for the given @p
          * texture layer.
          */
-        static int maxPartialTileLevel( Marble::GeoSceneTexture *textureLayer );
+        static int maxPartialTileLevel( Marble::GeoSceneLayer * layer );
 
         /**
          * Returns whether the mandatory most basic tile level is fully available for
          * the given @p texture layer.
          */
-        static bool baseTilesAvailable( Marble::GeoSceneTexture *textureLayer );
+        static bool baseTilesAvailable( Marble::GeoSceneLayer * layer );
 
     public Q_SLOTS:
         /**
@@ -181,7 +183,7 @@ class TileLoader : public QObject
         void tileUpdateAvailable();
         
         void paintTile(TextureTile* tile, int x, int y, int level,
-                       Marble::GeoSceneTexture *textureLayer,
+                       Marble::GeoSceneLayer * layer,
                        bool requestTileUpdate);
 
     private:
@@ -191,8 +193,8 @@ class TileLoader : public QObject
         void reloadTile( const QString &idStr );
 
         Q_DISABLE_COPY( TileLoader )
-        class Private;
-        Private* const d;
+
+        TileLoaderPrivate* const d;
         MarbleModel* m_parent;
 };
 

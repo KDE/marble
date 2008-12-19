@@ -115,6 +115,11 @@ GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name )
     return dataset;
 }
 
+GeoSceneAbstractDataset* GeoSceneLayer::groundDataset() const
+{
+    return m_datasets.first();
+}
+
 QVector<GeoSceneAbstractDataset*> GeoSceneLayer::datasets() const
 {
     return m_datasets;

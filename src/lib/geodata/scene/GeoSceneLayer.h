@@ -71,7 +71,10 @@ class GeoSceneLayer : public GeoNode {
      * @param  section  the new section
      */
     void addDataset( GeoSceneAbstractDataset* );
+
     GeoSceneAbstractDataset* dataset( const QString& );
+    GeoSceneAbstractDataset * groundDataset() const;
+
     QVector<GeoSceneAbstractDataset*> datasets() const;
 
     QString name() const;

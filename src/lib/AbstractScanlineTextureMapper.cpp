@@ -47,9 +47,6 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
       m_toTileCoordinatesLat( 0.0 ),
       m_interlaced( false ),
       m_tileLoader( tileLoader ),
-      m_tileProjection( tileLoader && tileLoader->textureLayer()
-                        ? tileLoader->textureLayer()->projection()
-                        : GeoSceneTexture::Equirectangular ),
       m_scanLine( 0 ),
       m_tile( 0 ),
       m_tileLevel( 0 ),
@@ -63,6 +60,15 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
       m_normGlobalWidth( 0.0 ),
       m_normGlobalHeight( 0.0 )
 {
+    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( tileLoader->layer()->groundDataset() );
+
+    m_tileProjection = tileLoader && texture
+                        ? texture->projection()
+                        : GeoSceneTexture::Equirectangular;
+
+    m_tileProjection = texture->projection();
+
+
     connect( m_tileLoader, SIGNAL( tileUpdateAvailable() ), 
              this,         SLOT( notifyMapChanged() ) );
 
@@ -77,10 +83,11 @@ AbstractScanlineTextureMapper::~AbstractScanlineTextureMapper()
 }
 
 
-void AbstractScanlineTextureMapper::setTextureLayer( GeoSceneTexture *textureLayer )
+void AbstractScanlineTextureMapper::setLayer( GeoSceneLayer * layer )
 {
-    m_tileLoader->setTextureLayer( textureLayer );
-    m_tileProjection = textureLayer->projection();
+    m_tileLoader->setLayer( layer );
+    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( layer->groundDataset() );
+    m_tileProjection = texture->projection();
     m_tileLevel = -1;
     detectMaxTileLevel();
 
@@ -152,13 +159,15 @@ void AbstractScanlineTextureMapper::centerTiles( ViewParams *viewParams,
     qreal centerLon, centerLat;
     viewParams->centerCoordinates( centerLon, centerLat );
 
-    tileCol = TileLoaderHelper::levelToColumn( m_tileLoader->textureLayer()->levelZeroColumns(),
-                                               tileLevel )
-              * ( 1.0 + centerLon / M_PI ) / 2.0;
+    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( m_tileLoader->layer()->groundDataset() );
 
-    tileRow = TileLoaderHelper::levelToRow( m_tileLoader->textureLayer()->levelZeroRows(),
-                                            tileLevel )
-              * ( 0.5 - centerLat / M_PI );
+    tileCol = TileLoaderHelper::levelToColumn( 
+                                texture->levelZeroColumns(), 
+                                tileLevel ) * ( 1.0 + centerLon / M_PI ) / 2.0;
+
+    tileRow = TileLoaderHelper::levelToRow( 
+                                texture->levelZeroRows(),
+                                tileLevel ) * ( 0.5 - centerLat / M_PI );
 }
 
 
@@ -328,7 +337,7 @@ void AbstractScanlineTextureMapper::notifyMapChanged()
 
 void AbstractScanlineTextureMapper::detectMaxTileLevel()
 {
-    m_maxTileLevel = TileLoader::maxPartialTileLevel( m_tileLoader->textureLayer() ) + 1 ;
+    m_maxTileLevel = TileLoader::maxPartialTileLevel( m_tileLoader->layer() ) + 1 ;
 //    qDebug() << "MaxTileLevel: " << m_maxTileLevel;
 }
 
