@@ -91,6 +91,11 @@ QUrl TileLoaderHelper::downloadUrl( GeoSceneTexture *textureLayer, int zoomLevel
         case GeoSceneTexture::OpenStreetMap:
             path += QString( "%1/%2/%3.%4" ).arg( zoomLevel ).arg( x ).arg( y ).arg( suffix );
             break;
+
+        case GeoSceneTexture::Custom:
+            qDebug() << "Warning: unhandled enum value GeoSceneTexture::Custom"
+                     << "in TileLoaderHelper::downloadUrl()";
+            break;
         }
         tileUrl.setPath( path );
     }
@@ -119,6 +124,11 @@ QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture *textureLayer, i
                 .arg( x )
                 .arg( y )
                 .arg( suffix );
+            break;
+
+        case GeoSceneTexture::Custom:
+            qDebug() << "Warning: unhandled enum value GeoSceneTexture::Custom"
+                     << "in TileLoaderHelper::relativeTileFileName()";
             break;
         }
     }

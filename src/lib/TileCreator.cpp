@@ -147,13 +147,13 @@ void TileCreator::run()
     // If the image size of the image source does not match the expected 
     // geometry we need to smooth-scale the image in advance to match
     // the required size 
-    bool needsScaling = ( imageWidth != 2 * maxRows * tileSize
-                          ||  imageHeight != maxRows * tileSize );
+    bool needsScaling = ( imageWidth != 2 * maxRows * (int)(tileSize)
+                          ||  imageHeight != maxRows * (int)(tileSize) );
 
     if ( needsScaling ) 
         qDebug() << "Image Size doesn't match 2*n*TILEWIDTH x n*TILEHEIGHT geometry. Scaling ...";  
 
-    uint  stdImageWidth  = 2 * maxRows * tileSize;
+    int  stdImageWidth  = 2 * maxRows * tileSize;
     if ( stdImageWidth == 0 )
         stdImageWidth = 2 * tileSize;
 
