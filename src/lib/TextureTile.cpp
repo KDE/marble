@@ -22,6 +22,18 @@
 #include "MarbleDirs.h"
 #include "TileLoaderHelper.h"
 
+namespace Marble {
+
+class TextureTilePrivate {
+ public:
+    QDateTime m_created;
+
+    TextureTilePrivate() :
+      m_created(QDateTime::currentDateTime()) { }
+};
+
+};
+
 using namespace Marble;
 
 static uint **jumpTableFromQImage32( QImage &img )
@@ -65,7 +77,7 @@ TextureTile::TextureTile( TileId const& id )
       m_isGrayscale(false),
       m_used(false),
       m_state(TileEmpty),
-      m_created(QDateTime::currentDateTime())
+      d(new TextureTilePrivate)
 {
 }
 
@@ -74,6 +86,7 @@ TextureTile::~TextureTile()
 {
     delete [] jumpTable32;
     delete [] jumpTable8;
+    delete d;
 }
 
 void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, int y, QCache<TileId, TextureTile> *tileCache )
@@ -184,7 +197,7 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
                 }
 
                 m_rawtile = temptile;
-                m_created = lastModified;
+                d->m_created = lastModified;
                 tileFound = true;
             }
         }
@@ -278,6 +291,11 @@ void TextureTile::scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile, qr
     m_state = TilePartial;
     // qDebug() << "Finished scaling up the Temporary Tile.";
 
+}
+
+const QDateTime & TextureTile::created() const
+{
+    return d->m_created;
 }
 
 #include "TextureTile.moc"

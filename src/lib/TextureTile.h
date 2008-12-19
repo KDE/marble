@@ -34,7 +34,7 @@ class QUrl;
 namespace Marble
 {
 
-class TextureTile;
+class TextureTilePrivate;
 class GeoSceneTexture;
 
 class TextureTile : public QObject {
@@ -117,17 +117,12 @@ class TextureTile : public QObject {
 
  private:
     Q_DISABLE_COPY( TextureTile )
-    QDateTime m_created;
+    TextureTilePrivate * const d;
 
     void scaleTileFrom( Marble::GeoSceneTexture *textureLayer, QImage &tile,
                         qreal sourceX, qreal sourceY, int sourceLevel,
                         int targetX, int targetY, int targetLevel );
 };
-
-inline const QDateTime & TextureTile::created() const
-{
-    return m_created;
-}
 
 }
 
