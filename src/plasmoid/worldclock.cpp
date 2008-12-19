@@ -427,17 +427,13 @@ void WorldClock::configAccepted()
 
     if( ui.daylightButton->isChecked() )
         m_sun->setCentered(true);
-    else if( ui.longitudeEdit->value() != cg.readEntry("rotation", -20.0) ) {
+    else {
         m_map->centerOn(ui.longitudeEdit->value(), 0);
         update();
     }
 
-    if( ui.showdate->isChecked() != cg.readEntry("showdate", false))
-        m_showDate = ui.showdate->isChecked();
-
-    if( ui.customTz->isChecked() != cg.readEntry("customtz", false)) {
-        m_customTz = ui.customTz->isChecked();
-    }
+    m_showDate = ui.showdate->isChecked();
+    m_customTz = ui.customTz->isChecked();
 
     if(m_customTz) {
         QStringList tzlist = ui.tzWidget->selection();
