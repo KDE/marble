@@ -53,6 +53,7 @@
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleGeometryModel.h"
+#include "MergedLayerDecorator.h"
 #include "PlaceMarkManager.h"
 #include "PlaceMarkLayout.h"
 #include "PlaceMarkPainter.h"

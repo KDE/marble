@@ -12,8 +12,10 @@
 
 #include "TextureTile.h"
 
+#include <QtCore/QDateTime>
 #include <QtCore/QDebug>
 #include <QtCore/QFileInfo>
+#include <QtGui/QImage>
 
 #include <cmath>
 

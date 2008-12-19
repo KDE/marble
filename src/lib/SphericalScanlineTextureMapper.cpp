@@ -14,6 +14,7 @@
 #include <cmath>
 
 #include <QtCore/QDebug>
+#include <QtGui/QImage>
 
 #include "global.h"
 #include "GeoPolygon.h"

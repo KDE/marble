@@ -20,15 +20,12 @@
 
 
 #include <QtCore/QCache>
-#include <QtCore/QDateTime>
 #include <QtCore/QObject>
-#include <QtGui/QImage>
-#include <QtCore/QString>
 
-#include "SunLocator.h"
 #include "TileId.h"
-#include "MergedLayerDecorator.h"
 
+class QDateTime;
+class QImage;
 class QUrl;
 
 namespace Marble
@@ -91,8 +88,8 @@ class TextureTile : public QObject {
  public Q_SLOTS:
     void   loadTile( bool requestTileUpdate = true );
 
- protected:
-    void     showTileId( QImage& worktile, QString theme, int level, int x, int y );
+//  protected:
+//     void     showTileId( QImage& worktile, QString theme, int level, int x, int y );
 
  private:
     Q_DISABLE_COPY( TextureTile )

@@ -18,6 +18,7 @@
 
 // Qt
 #include <QtCore/QDebug>
+#include <QtGui/QImage>
 
 // Marble
 #include "GeoPolygon.h"
