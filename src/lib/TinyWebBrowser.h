@@ -19,9 +19,11 @@
 #ifndef TINYWEBBROWSER_H
 #define TINYWEBBROWSER_H
 
-#include <QDebug>
+#include <QtCore/QString>
+#include <QtCore/QVariant>
 #include <QtGui/QTextBrowser>
-#include <QImage>
+
+class QUrl;
 
 namespace Marble
 {

@@ -16,6 +16,8 @@
 #include <QtCore/QPair>
 #include <QtCore/QString>
 
+class QByteArray;
+
 namespace Marble
 {
 

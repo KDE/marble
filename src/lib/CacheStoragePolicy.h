@@ -14,6 +14,9 @@
 #include "DiscCache.h"
 #include "StoragePolicy.h"
 
+#include <QtCore/QByteArray>
+#include <QtCore/QString>
+
 #include "marble_export.h"
 
 namespace Marble

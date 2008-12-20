@@ -21,6 +21,8 @@
 
 #include "marble_export.h"
 
+class QString;
+
 namespace Marble
 {
 

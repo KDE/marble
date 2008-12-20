@@ -22,10 +22,11 @@
 #define VECTORCOMPOSER_H
 
 
+#include <QtCore/QVector>
 #include <QtGui/QBrush>
-#include <QtGui/QImage>
 #include <QtGui/QPen>
-#include <QtGui/QPixmap>
+
+class QColor;
 
 namespace Marble
 {

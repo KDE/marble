@@ -16,6 +16,7 @@
 #define HTTPJOB_H
 
 #include <QtCore/QObject>
+#include <QtCore/QString>
 #include <QtCore/QUrl>
 
 class QHttp;

@@ -16,6 +16,8 @@
 
 #include "ExtDateTime.h"
 
+#include <QtCore/QTimer>
+
 using namespace Marble;
 
 ExtDateTime::ExtDateTime()

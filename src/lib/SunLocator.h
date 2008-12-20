@@ -24,8 +24,9 @@
 #endif
 
 #include <QtCore/QObject>
+#include <QtCore/QString>
 #include <QtGui/QColor>
-#include <QtCore/QTimer>
+//#include <QtCore/QTimer>
 
 #include "ExtDateTime.h"
 //FIXME: This class shouldn't be exposed but is needed by the worldclock plasmoid

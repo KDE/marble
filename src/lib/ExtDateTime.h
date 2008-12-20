@@ -19,7 +19,8 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QDateTime>
-#include <QtCore/QTimer>
+
+class QTimer;
 
 namespace Marble
 {
