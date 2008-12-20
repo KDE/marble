@@ -17,10 +17,11 @@
 #ifndef VISIBLEPLACEMARK_H
 #define VISIBLEPLACEMARK_H
 
-#include <QtGui/QFont>
 #include <QtGui/QPixmap>
 #include <QtCore/QPersistentModelIndex>
+#include <QtCore/QPoint>
 #include <QtCore/QRect>
+#include <QtCore/QString>
 
 namespace Marble
 {

@@ -13,15 +13,16 @@
 #ifndef VECTORMAP_H
 #define VECTORMAP_H
 
+#include <QtCore/QPointF>
 #include <QtGui/QPen>
 #include <QtGui/QBrush>
-#include <QtGui/QImage>
-#include <QtGui/QPixmap>
 
 #include "global.h"
 #include "Quaternion.h"
 #include "GeoDataCoordinates.h"
 #include "ScreenPolygon.h"
+
+class QPaintDevice;
 
 namespace Marble
 {

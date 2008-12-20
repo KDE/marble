@@ -14,9 +14,9 @@
 #define SUNCONTROLWIDGET_H
 
 
+#include <QtCore/QDateTime>
+#include <QtCore/QTime>
 #include <QtGui/QDialog>
-#include <QtCore/QDebug>
-#include <QtCore/QTimer>
 
 #include "ui_SunControlWidget.h"
 #include "SunLocator.h"

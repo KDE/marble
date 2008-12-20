@@ -24,7 +24,8 @@
 #define __MARBLE__TILELOADER_H
 
 #include <QtCore/QObject>
-#include <QtCore/QString>
+
+class QString;
 
 namespace Marble
 {

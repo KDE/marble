@@ -20,10 +20,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QUrl>
-#include <QtCore/QDir>
-#include <QtCore/QQueue>
 #include <QtCore/QList>
-#include <QtCore/QDebug>
 #include <QtCore/QStack>
 
 #include "marble_export.h"

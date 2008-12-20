@@ -26,6 +26,7 @@
 
 class QDateTime;
 class QImage;
+class QString;
 class QUrl;
 
 namespace Marble

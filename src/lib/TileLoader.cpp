@@ -38,6 +38,7 @@
 #include <QtCore/QCache>
 #include <QtCore/QDebug>
 #include <QtCore/QHash>
+#include <QtGui/QImage>
 
 
 #ifdef Q_CC_MSVC

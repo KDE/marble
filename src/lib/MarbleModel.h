@@ -28,17 +28,19 @@
 
 #include "marble_export.h"
 
-#include <QtCore/QAbstractListModel>
+#include <QtCore/QList>
 #include <QtCore/QObject>
-#include <QtGui/QPainter>
-#include <QtGui/QImage>
-#include <QtGui/QPixmap>
+#include <QtCore/QPersistentModelIndex>
+#include <QtCore/QString>
+#include <QtCore/QVector>
 
 #include "global.h"
 #include "ExtDateTime.h"
 
 class QItemSelectionModel;
 class QAbstractItemModel;
+class QPoint;
+class QRect;
 
 namespace Marble
 {
