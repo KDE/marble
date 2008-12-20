@@ -60,7 +60,7 @@ class TextureTilePrivate {
     }
 };
 
-};
+}
 
 using namespace Marble;
 
