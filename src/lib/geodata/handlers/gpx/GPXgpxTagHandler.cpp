@@ -28,9 +28,8 @@
 
 namespace Marble
 {
-
-using namespace GeoDataElementDictionary;
-
+namespace gpx
+{
 GPX_DEFINE_TAG_HANDLER(gpx)
 
 GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
@@ -41,4 +40,5 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     return 0;
 }
 
+}
 }

@@ -25,7 +25,8 @@ namespace Marble
 {
 
 // One static list of all tag names, to avoid string comparisons all-over-the-place
-namespace GeoDataElementDictionary {
+namespace gpx
+{
 
 const char* gpxTag_nameSpace10 = "http://www.topografix.com/GPX/1/0";
 const char* gpxTag_nameSpace11 = "http://www.topografix.com/GPX/1/1";

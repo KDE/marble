@@ -44,8 +44,6 @@
 namespace Marble
 {
 
-using namespace GeoDataElementDictionary;
-
 GeoDataParser::GeoDataParser(GeoDataSourceType source)
     : GeoParser(source)
 {
@@ -60,7 +58,7 @@ bool GeoDataParser::isValidDocumentElement() const
     switch ((GeoDataSourceType) m_source) {
     // TODO: case GeoData_GeoRSS:
     case GeoData_GPX:
-        return isValidElement(gpxTag_gpx);
+        return isValidElement(gpx::gpxTag_gpx);
     case GeoData_KML:
         return isValidElement(kml::kmlTag_kml);
     default:
@@ -93,7 +91,7 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
     switch ((GeoDataSourceType) m_source) {
     // TODO: case GeoData_GeoRSS:
     case GeoData_GPX:
-        return (namespaceUri() == gpxTag_nameSpace10 || namespaceUri() == gpxTag_nameSpace11);
+        return (namespaceUri() == gpx::gpxTag_nameSpace10 || namespaceUri() == gpx::gpxTag_nameSpace11);
     case GeoData_KML:
         return (namespaceUri() == kml::kmlTag_nameSpace20 || 
                 namespaceUri() == kml::kmlTag_nameSpace21 || 

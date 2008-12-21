@@ -27,7 +27,8 @@ namespace Marble
 {
 
 // Lists all known GPX 1.1 tags (http://www.topografix.com/GPX/1/1/)
-namespace GeoDataElementDictionary {
+namespace gpx
+{
     extern const char* gpxTag_nameSpace10;
     extern const char* gpxTag_nameSpace11;
 
