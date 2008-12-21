@@ -15,6 +15,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
+#include <QtCore/QStringList>
 #include <QtCore/QtPlugin>
 #include <QtGui/QIcon>
 

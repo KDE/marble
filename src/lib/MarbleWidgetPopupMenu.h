@@ -20,9 +20,10 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QPersistentModelIndex>
-#include <QtGui/QAction>
+#include <QtCore/QVector>
 
 
+class QAction;
 class QMenu;
 
 namespace Marble

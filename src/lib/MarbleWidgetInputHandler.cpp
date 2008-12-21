@@ -14,6 +14,7 @@
 #include <cmath>
 
 #include <QtCore/QDebug>
+#include <QtGui/QMouseEvent>
 #include <QRubberBand>
 
 #include "global.h"

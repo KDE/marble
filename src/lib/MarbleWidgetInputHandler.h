@@ -18,12 +18,14 @@
 #define MARBLEWIDGETINPUTHANDLER_H
 
 #include <QtCore/QObject>
-#include <QtCore/QEvent>
+#include <QtCore/QPoint>
+#include <QtCore/QString>
 #include <QtCore/QTime>
-#include <QtGui/QKeyEvent>
+#include <QtGui/QMouseEvent>
 #include <QtGui/QPixmap>
 #include <QtGui/QCursor>
 
+class QEvent;
 class QTimer;
 class QRubberBand;
 

@@ -14,6 +14,7 @@
 #define PLACEMARKCONTAINER_H
 
 
+#include <QtCore/QString>
 #include <QtCore/QVector>
 
 #include "GeoDataPlacemark.h"   // In geodata/data/

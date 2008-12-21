@@ -18,6 +18,9 @@
 
 #include "marble_export.h"
 
+class QModelIndex;
+class QString;
+
 namespace Marble
 {
 

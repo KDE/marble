@@ -15,7 +15,8 @@
 
 
 #include <QtCore/QPersistentModelIndex>
-#include <QtCore/QUrl>
+#include <QtCore/QString>
+#include <QtGui/QFont>
 #include <QtGui/QStatusBar>
 
 #include "DeferredFlag.h"

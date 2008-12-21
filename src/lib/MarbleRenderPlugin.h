@@ -14,6 +14,7 @@
 #define MARBLE_RENDER_PLUGIN_H
 
 #include <QtCore/QObject>
+#include <QtCore/QString>
 #include <QtCore/Qt>
 
 #include "MarbleRenderPluginInterface.h"

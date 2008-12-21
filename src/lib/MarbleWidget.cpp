@@ -19,6 +19,7 @@
 #include <QtCore/QAbstractItemModel>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QSizePolicy>
+#include <QtGui/QPaintEvent>
 #include <QtGui/QRegion>
 #include <QtGui/QStyleOptionGraphicsItem>
 #include <QtNetwork/QNetworkProxy>

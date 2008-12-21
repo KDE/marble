@@ -18,11 +18,13 @@
 #define MARBLETHEMESELECTVIEW_H
 
 
-#include <QtCore/QDebug>
-#include <QtGui/QStandardItemModel>
+#include <QtCore/QModelIndex>
 #include <QtGui/QListView>
 
 #include "marble_export.h"
+
+class QResizeEvent;
+class QString;
 
 namespace Marble
 {

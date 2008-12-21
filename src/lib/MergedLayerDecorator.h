@@ -22,6 +22,7 @@
 #include "SunLocator.h"
 #include "TileId.h"
 
+class QString;
 class QUrl;
 
 namespace Marble
