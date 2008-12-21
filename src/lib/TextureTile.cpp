@@ -92,12 +92,10 @@ void TextureTilePrivate::scaleTileFrom( Marble::GeoSceneTexture *textureLayer, Q
 {
     const int levelZeroColumns = textureLayer->levelZeroColumns();
     const int levelZeroRows = textureLayer->levelZeroRows();
-    qDebug() << "HERE?" ;
     const int rowsRequestedLevel = TileLoaderHelper::levelToRow( levelZeroRows, targetLevel );
     const int columnsRequestedLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, targetLevel );
     const int rowsCurrentLevel = TileLoaderHelper::levelToRow( levelZeroRows, sourceLevel );
     const int columnsCurrentLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, sourceLevel );
-    qDebug() << "HERE!" ;
 
     // qDebug() << "About to start cropping an existing image.";
 
