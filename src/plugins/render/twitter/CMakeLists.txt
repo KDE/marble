@@ -1,8 +1,8 @@
 PROJECT(twitter)
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/marble/twitter
- ${CMAKE_BINARY_DIR}/src/plugins/marble/twitter
+ ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/twitter
+ ${CMAKE_BINARY_DIR}/src/plugins/render/twitter
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})

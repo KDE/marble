@@ -1,8 +1,8 @@
 PROJECT(MarbleGeoDataPlugin)
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/marble/geodata
- ${CMAKE_BINARY_DIR}/src/plugins/marble/geodata
+ ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/geodata
+ ${CMAKE_BINARY_DIR}/src/plugins/render/geodata
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})

@@ -1,8 +1,8 @@
 PROJECT(Panoramio)
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/marble/panoramio
- ${CMAKE_BINARY_DIR}/src/plugins/marble/panoramio
+ ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/panoramio
+ ${CMAKE_BINARY_DIR}/src/plugins/render/panoramio
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})

@@ -1,8 +1,8 @@
 PROJECT(MarbleDataViewPlugin)
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/marble/dataview
- ${CMAKE_BINARY_DIR}/src/plugins/marble/dataview
+ ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/dataview
+ ${CMAKE_BINARY_DIR}/src/plugins/render/dataview
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})

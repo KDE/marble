@@ -1,8 +1,8 @@
 PROJECT(MarbleTestPlugin)
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/marble/test
- ${CMAKE_BINARY_DIR}/src/plugins/marble/test
+ ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/test
+ ${CMAKE_BINARY_DIR}/src/plugins/render/test
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})

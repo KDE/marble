@@ -1,8 +1,8 @@
 PROJECT(MarbleStarsPlugin)
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/marble/stars
- ${CMAKE_BINARY_DIR}/src/plugins/marble/stars
+ ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/stars
+ ${CMAKE_BINARY_DIR}/src/plugins/render/stars
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})

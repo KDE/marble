@@ -1,8 +1,8 @@
 PROJECT(MarbleCrosshairsPlugin)
 
 INCLUDE_DIRECTORIES(
- ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/marble/crosshairs
- ${CMAKE_BINARY_DIR}/src/plugins/marble/crosshairs
+ ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/crosshairs
+ ${CMAKE_BINARY_DIR}/src/plugins/render/crosshairs
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})
