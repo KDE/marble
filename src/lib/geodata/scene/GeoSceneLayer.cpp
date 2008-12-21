@@ -117,6 +117,9 @@ GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name )
 
 GeoSceneAbstractDataset* GeoSceneLayer::groundDataset() const
 {
+    if ( m_datasets.isEmpty() )
+        return 0;
+
     return m_datasets.first();
 }
 
