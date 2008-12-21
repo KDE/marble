@@ -23,9 +23,9 @@
 
 
 #include <QtCore/QSize>
+#include <QtCore/QString>
 #include <QtCore/QObject>
-#include <QtCore/QTimer>
-#include <QtGui/QImage>
+#include <QtGui/QFont>
 #include <QtGui/QPixmap>
 
 //#include <QtDBus/QtDBus>
@@ -39,6 +39,7 @@ class QAbstractItemModel;
 class QModelIndex;
 class QItemSelectionModel;
 class QStyleOptionGraphicsItem;
+class QUrl;
 
 namespace Marble
 {

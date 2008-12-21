@@ -13,6 +13,7 @@
 #define MARBLENETWORKPLUGININTERFACE_H
 
 #include <QtCore/QObject>
+#include <QtCore/QString>
 
 class QUrl;
 

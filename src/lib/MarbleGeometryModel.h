@@ -13,6 +13,8 @@
 #define MarbleGeometryModel_H
 
 #include <QtCore/QAbstractItemModel>
+#include <QtCore/QModelIndex>
+#include <QtCore/QVariant>
 
 namespace Marble
 {

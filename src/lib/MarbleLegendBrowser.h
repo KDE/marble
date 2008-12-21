@@ -18,10 +18,12 @@
 #define MARBLELEGENDBROWSER_H
 
 
-#include <QtCore/QDebug>
+#include <QtCore/QString>
 #include <QtGui/QTextBrowser>
 
 #include "marble_export.h"
+
+class QUrl;
 
 namespace Marble
 {

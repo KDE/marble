@@ -17,6 +17,9 @@
 #include "ViewParams.h"
 #include "TextureColorizer.h"
 
+class QPainter;
+class QRect;
+
 namespace Marble
 {
 

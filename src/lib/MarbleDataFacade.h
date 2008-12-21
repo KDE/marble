@@ -28,6 +28,7 @@
 #include "marble_export.h"
 
 #include <QtCore/QDateTime>
+#include <QtCore/QString>
 
 #include "global.h"
 
