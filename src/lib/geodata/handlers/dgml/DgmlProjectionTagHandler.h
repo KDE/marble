@@ -26,6 +26,8 @@
 
 namespace Marble
 {
+namespace dgml
+{
 
 class DgmlProjectionTagHandler : public GeoTagHandler
 {
@@ -33,6 +35,7 @@ public:
     virtual GeoNode* parse( GeoParser& ) const;
 };
 
+}
 }
 
 #endif // DgmlProjectionTagHandler_h

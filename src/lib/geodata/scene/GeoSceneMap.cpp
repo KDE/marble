@@ -28,8 +28,6 @@
 namespace Marble
 {
 
-using namespace GeoSceneAuxillaryDictionary;
-
 // FIXME: Filters are a Dataset.
 
 class GeoSceneMapPrivate
@@ -165,7 +163,7 @@ bool GeoSceneMap::hasTextureLayers() const
 {
     QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
     for (it = d->m_layers.constBegin(); it != d->m_layers.constEnd(); ++it) {
-        if ( (*it)->backend() == dgmlValue_texture && (*it)->datasets().count() > 0 )
+        if ( (*it)->backend() == dgml::dgmlValue_texture && (*it)->datasets().count() > 0 )
             return true;
     }
 
@@ -176,7 +174,7 @@ bool GeoSceneMap::hasVectorLayers() const
 {
     QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
     for (it = d->m_layers.constBegin(); it != d->m_layers.constEnd(); ++it) {
-        if ( (*it)->backend() == dgmlValue_vector && (*it)->datasets().count() > 0 )
+        if ( (*it)->backend() == dgml::dgmlValue_vector && (*it)->datasets().count() > 0 )
             return true;
     }
 

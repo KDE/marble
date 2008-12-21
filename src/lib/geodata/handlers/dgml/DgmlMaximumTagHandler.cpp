@@ -27,9 +27,8 @@
 
 namespace Marble
 {
-
-using namespace GeoSceneElementDictionary;
-
+namespace dgml
+{
 DGML_DEFINE_TAG_HANDLER(Maximum)
 
 GeoNode* DgmlMaximumTagHandler::parse(GeoParser& parser) const
@@ -54,4 +53,5 @@ GeoNode* DgmlMaximumTagHandler::parse(GeoParser& parser) const
     return 0;
 }
 
+}
 }

@@ -24,7 +24,7 @@
 
 namespace Marble
 {
-namespace GeoSceneAttributeDictionary
+namespace dgml
 {
 
 // One static list of all attribute names, to avoid string comparisons all-over-the-place

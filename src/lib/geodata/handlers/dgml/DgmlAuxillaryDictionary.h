@@ -27,7 +27,7 @@
 
 namespace Marble
 {
-namespace GeoSceneAuxillaryDictionary
+namespace dgml
 {
     extern const char* dgmlValue_true;
     extern const char* dgmlValue_on;

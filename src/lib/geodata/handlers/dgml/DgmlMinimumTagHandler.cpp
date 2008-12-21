@@ -27,9 +27,8 @@
 
 namespace Marble
 {
-
-using namespace GeoSceneElementDictionary;
-
+namespace dgml
+{
 DGML_DEFINE_TAG_HANDLER(Minimum)
 
 GeoNode* DgmlMinimumTagHandler::parse(GeoParser& parser) const
@@ -55,4 +54,5 @@ GeoNode* DgmlMinimumTagHandler::parse(GeoParser& parser) const
     return 0;
 }
 
+}
 }

@@ -25,7 +25,7 @@
 
 namespace Marble
 {
-namespace GeoSceneAttributeDictionary
+namespace dgml
 {
 
     // Lists all known DGML 2.0 attributes

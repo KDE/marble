@@ -28,6 +28,8 @@
 
 namespace Marble
 {
+namespace dgml
+{
 
 class DgmlFilterTagHandler : public GeoTagHandler
 {
@@ -35,6 +37,7 @@ public:
     virtual GeoNode* parse(GeoParser&) const;
 };
 
+}
 }
 
 #endif // DgmlFilterTagHandler_h

@@ -32,10 +32,8 @@
 
 namespace Marble
 {
-
-using namespace GeoSceneElementDictionary;
-using namespace GeoSceneAttributeDictionary;
-
+namespace dgml
+{
 DGML_DEFINE_TAG_HANDLER(Pen)
 
 GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
@@ -77,4 +75,5 @@ GeoNode* DgmlPenTagHandler::parse(GeoParser& parser) const
     return 0;
 }
 
+}
 }
