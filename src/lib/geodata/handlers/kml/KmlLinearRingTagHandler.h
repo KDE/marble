@@ -26,6 +26,8 @@
 
 namespace Marble
 {
+namespace kml
+{
 
 class KmlLinearRingTagHandler : public GeoTagHandler
 {
@@ -33,6 +35,7 @@ public:
     virtual GeoNode* parse(GeoParser&) const;
 };
 
+}
 }
 
 #endif // KmlLinearRingTagHandler_h

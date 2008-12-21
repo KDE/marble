@@ -31,9 +31,8 @@
 
 namespace Marble
 {
-
-using namespace GeoDataElementDictionary;
-
+namespace kml
+{
 KML_DEFINE_TAG_HANDLER( innerBoundaryIs )
 
 GeoNode* KmlinnerBoundaryIsTagHandler::parse( GeoParser& parser ) const
@@ -50,4 +49,5 @@ GeoNode* KmlinnerBoundaryIsTagHandler::parse( GeoParser& parser ) const
     return parentItem.nodeAs<GeoDataPolygon>();
 }
 
+}
 }

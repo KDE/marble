@@ -33,9 +33,8 @@
 
 namespace Marble
 {
-
-using namespace GeoDataElementDictionary;
-
+namespace kml
+{
 KML_DEFINE_TAG_HANDLER( altitudeMode )
 
 GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
@@ -74,4 +73,5 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
     return 0;
 }
 
+}
 }

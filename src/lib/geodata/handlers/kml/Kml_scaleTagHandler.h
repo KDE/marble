@@ -30,6 +30,8 @@
 
 namespace Marble
 {
+namespace kml
+{
 
 class KmlscaleTagHandler : public GeoTagHandler
 {
@@ -37,6 +39,7 @@ public:
     virtual GeoNode* parse(GeoParser&) const;
 };
 
+}
 }
 
 #endif // KmlscaleTagHandler_h

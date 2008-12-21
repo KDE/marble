@@ -31,9 +31,8 @@
 
 namespace Marble
 {
-
-using namespace GeoDataElementDictionary;
-
+namespace kml
+{
 KML_DEFINE_TAG_HANDLER( Schema )
 
 GeoNode* KmlSchemaTagHandler::parse( GeoParser& parser ) const
@@ -67,4 +66,5 @@ GeoNode* KmlSchemaTagHandler::parse( GeoParser& parser ) const
 
 }
 
+}
 }

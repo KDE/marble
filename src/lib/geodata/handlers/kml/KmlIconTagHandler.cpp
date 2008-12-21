@@ -29,9 +29,8 @@
 
 namespace Marble
 {
-
-using namespace GeoDataElementDictionary;
-
+namespace kml
+{
 KML_DEFINE_TAG_HANDLER( Icon )
 
 GeoNode* KmlIconTagHandler::parse( GeoParser& parser ) const
@@ -50,4 +49,5 @@ GeoNode* KmlIconTagHandler::parse( GeoParser& parser ) const
     return 0;
 }
 
+}
 }

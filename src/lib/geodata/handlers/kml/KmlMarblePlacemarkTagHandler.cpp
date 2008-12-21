@@ -33,9 +33,8 @@
 
 namespace Marble
 {
-
-using namespace GeoDataElementDictionary;
-
+namespace kml
+{
 KML_DEFINE_TAG_HANDLER( MarblePlacemark )
 
 GeoNode* KmlMarblePlacemarkTagHandler::parse( GeoParser& parser ) const
@@ -57,6 +56,7 @@ GeoNode* KmlMarblePlacemarkTagHandler::parse( GeoParser& parser ) const
     return placemark;
 }
 
+}
 }
 
 #endif

@@ -29,9 +29,8 @@
 
 namespace Marble
 {
-
-using namespace GeoDataElementDictionary;
-
+namespace kml
+{
 KML_DEFINE_TAG_HANDLER( visibility )
 
 GeoNode* KmlvisibilityTagHandler::parse( GeoParser& parser ) const
@@ -55,4 +54,5 @@ GeoNode* KmlvisibilityTagHandler::parse( GeoParser& parser ) const
     return 0;
 }
 
+}
 }

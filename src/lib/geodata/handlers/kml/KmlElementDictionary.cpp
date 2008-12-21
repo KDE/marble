@@ -25,7 +25,8 @@ namespace Marble
 {
 
 // One static list of all tag names, to avoid string comparisons all-over-the-place
-namespace GeoDataElementDictionary {
+namespace kml
+{
 
 const char* kmlTag_nameSpace20 = "http://earth.google.com/kml/2.0";
 const char* kmlTag_nameSpace21 = "http://earth.google.com/kml/2.1";

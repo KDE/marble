@@ -62,7 +62,7 @@ bool GeoDataParser::isValidDocumentElement() const
     case GeoData_GPX:
         return isValidElement(gpxTag_gpx);
     case GeoData_KML:
-        return isValidElement(kmlTag_kml);
+        return isValidElement(kml::kmlTag_kml);
     default:
         Q_ASSERT(false);
         return false;
@@ -95,9 +95,9 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
     case GeoData_GPX:
         return (namespaceUri() == gpxTag_nameSpace10 || namespaceUri() == gpxTag_nameSpace11);
     case GeoData_KML:
-        return (namespaceUri() == kmlTag_nameSpace20 || 
-                namespaceUri() == kmlTag_nameSpace21 || 
-                namespaceUri() == kmlTag_nameSpace22);
+        return (namespaceUri() == kml::kmlTag_nameSpace20 || 
+                namespaceUri() == kml::kmlTag_nameSpace21 || 
+                namespaceUri() == kml::kmlTag_nameSpace22);
     default:
         break;
     }

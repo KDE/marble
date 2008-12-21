@@ -25,6 +25,8 @@
 
 namespace Marble
 {
+namespace kml
+{
 
 class KmlroleTagHandler : public GeoTagHandler
 {
@@ -32,6 +34,7 @@ public:
     virtual GeoNode* parse(GeoParser&) const;
 };
 
+}
 }
 
 #endif // KmlroleTagHandler_h
