@@ -18,7 +18,6 @@
 #define TEXTURECOLORIZER_H
 
 #include <QtCore/QString>
-// FIXME: forward decl for QString
 
 namespace Marble
 {

@@ -13,6 +13,7 @@
 
 #include "QHttpNetworkPlugin.h"
 
+#include <QtCore/QBuffer>
 #include <QtCore/QMetaObject>
 #include <QtNetwork/QHttp>
 #include <QtNetwork/QHttpResponseHeader>

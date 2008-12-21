@@ -10,7 +10,7 @@
 #ifndef PLACEMARKLOADER_H
 #define PLACEMARKLOADER_H
 
-#include <QtCore/QDebug>
+#include <QtCore/QString>
 #include <QtCore/QThread>
 
 namespace Marble

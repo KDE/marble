@@ -13,6 +13,7 @@
 #ifndef PLACEMARKMANAGER_H
 #define PLACEMARKMANAGER_H
 
+#include <QtCore/QList>
 #include <QtCore/QObject>
 #include <QtCore/QString>
 

@@ -12,6 +12,7 @@
 #ifndef PLUGINMANAGER_H
 #define PLUGINMANAGER_H
 
+#include <QtCore/QList>
 #include <QtCore/QObject>
 #include "marble_export.h"
 

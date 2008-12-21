@@ -13,7 +13,6 @@
 #define SPHERICALSCANLINETEXTUREMAPPER_H
 
 
-#include <QtCore/QString>
 #include <QtGui/QColor>
 
 #include "AbstractScanlineTextureMapper.h"

@@ -18,10 +18,12 @@
 #include "MarbleNetworkPlugin.h"
 #include "HttpJob.h"
 
-#include <QtCore/QBuffer>
-#include <QtCore/QDebug>
+#include <QtCore/QByteArray>
+#include <QtCore/QString>
 
+class QBuffer;
 class QHttp;
+class QUrl;
 
 namespace Marble
 {

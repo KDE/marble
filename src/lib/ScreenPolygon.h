@@ -15,7 +15,7 @@
 
 
 #include <QtCore/QVector>
-#include <QtGui/QPolygon>
+#include <QtGui/QPolygonF>
 
 namespace Marble
 {

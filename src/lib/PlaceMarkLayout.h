@@ -18,9 +18,9 @@
 #define PLACEMARKLAYOUT_H
 
 
+#include <QtCore/QHash>
 #include <QtCore/QPersistentModelIndex>
 #include <QtCore/QRect>
-#include <QtCore/QSet>
 #include <QtCore/QVector>
 
 #include "Quaternion.h"
@@ -30,6 +30,7 @@
 class QAbstractItemModel;
 class QItemSelectionModel;
 class QPainter;
+class QPoint;
 
 
 namespace Marble
