@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2008 Pino Toscano <pino@kde.org>
+// Copyright 2008 Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
@@ -27,18 +28,17 @@ class MarbleNetworkPluginPrivate
 
 };
 
-
+// Do not create the MarbleNetworkPluginPrivate, because it holds
+// no data at the moment (may change in the future).
 MarbleNetworkPlugin::MarbleNetworkPlugin()
-    : d( new MarbleNetworkPluginPrivate() )
+    : d( 0 )
 {
 }
 
 MarbleNetworkPlugin::~MarbleNetworkPlugin()
 {
-    delete d;
 }
 
 }
 
 #include "MarbleNetworkPlugin.moc"
-
