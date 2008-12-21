@@ -35,6 +35,8 @@ class DatasetProvider : public QObject
 
  public Q_SLOTS:
 
+//    void loadDatasets( const Tile
+
  private:
     Q_DISABLE_COPY( DatasetProvider )
 

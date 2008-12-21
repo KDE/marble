@@ -115,6 +115,7 @@ set(marblewidget_SRCS
     CacheStoragePolicy.cpp
     FileStoragePolicy.cpp
     DatasetProvider.cpp
+    AbstractTile.cpp
     TextureTile.cpp
     TileId.cpp
     TileLoader.cpp

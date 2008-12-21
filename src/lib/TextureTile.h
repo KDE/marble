@@ -5,8 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Torsten Rahn <tackat@kde.org>"
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007-2009  Torsten Rahn <tackat@kde.org>"
+// Copyright 2007       Inge Wallin  <ingwa@kde.org>"
 //
 
 //
@@ -22,9 +22,8 @@
 #include <QtCore/QCache>
 #include <QtCore/QObject>
 
-#include "TileId.h"
+#include "AbstractTile.h"
 
-class QDateTime;
 class QImage;
 class QString;
 class QUrl;
@@ -35,45 +34,25 @@ namespace Marble
 class TextureTilePrivate;
 class GeoSceneTexture;
 
-class TextureTile : public QObject {
+class TextureTile : public AbstractTile {
     Q_OBJECT
 
  public:
 
-    enum TileState {
-        TileEmpty,
-        TilePartial,
-        TileComplete
-    };
-
-    enum DatasetState {
-        DatasetEmpty,
-        DatasetZeroLevel,
-        DatasetScaled,
-        DatasetComplete
-    };
-
-    explicit TextureTile( TileId const& tid );
+    explicit TextureTile( TileId const& tid, QObject * parent = 0 );
 
     virtual ~TextureTile();
     
+    // TODO: Move into DatasetProvider:
     void loadDataset( Marble::GeoSceneTexture *textureLayer, int level, int x,
                       int y, QCache<TileId, TextureTile> *tileCache = 0 );
 
-    TileId const& id() const;
     int depth() const;
-
-    bool used() const;
-    void setUsed( bool used );
 
     int numBytes() const;
 
-    TileState state() const;
-    void setState( TileState state );
-
-    const QImage& rawtile();
+    QImage rawtile();
     QImage *tile();
-    const QDateTime & created() const;
 
     // Here we retrieve the color value of the requested pixel on the tile.
     // This needs to be done differently for grayscale ( uchar, 1 byte ).
@@ -89,16 +68,12 @@ class TextureTile : public QObject {
  public Q_SLOTS:
     void   loadTile( bool requestTileUpdate = true );
 
-//  protected:
-//     void     showTileId( QImage& worktile, QString theme, int level, int x, int y );
+ protected:
+    TextureTile( TextureTilePrivate &dd, QObject *parent );
 
  private:
+    Q_DECLARE_PRIVATE( TextureTile )
     Q_DISABLE_COPY( TextureTile )
-    TextureTilePrivate * const d;
-
-    void scaleTileFrom( Marble::GeoSceneTexture *textureLayer, QImage &tile,
-                        qreal sourceX, qreal sourceY, int sourceLevel,
-                        int targetX, int targetY, int targetLevel );
 };
 
 }

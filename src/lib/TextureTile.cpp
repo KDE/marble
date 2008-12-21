@@ -11,8 +11,8 @@
 //
 
 #include "TextureTile.h"
+#include "TextureTile_p.h"
 
-#include <QtCore/QDateTime>
 #include <QtCore/QDebug>
 #include <QtCore/QFileInfo>
 #include <QtGui/QImage>
@@ -24,43 +24,6 @@
 #include "MarbleDirs.h"
 #include "TileLoaderHelper.h"
 
-namespace Marble {
-
-class TextureTilePrivate {
- public:
-    uchar   **jumpTable8;
-    uint    **jumpTable32;
-
-    TileId    m_id;
-
-    QImage    m_rawtile;
-
-    int       m_depth;
-    bool      m_isGrayscale;
-    bool      m_used;
-
-    TextureTile::TileState m_state;
-
-    QDateTime m_created;
-
-    TextureTilePrivate(const TileId& id) :
-      jumpTable8(0),
-      jumpTable32(0),
-      m_id(id),
-      m_rawtile(),
-      m_depth(0),
-      m_isGrayscale(false),
-      m_used(false),
-      m_state(TextureTile::TileEmpty),
-      m_created(QDateTime::currentDateTime()) { }
-
-    ~TextureTilePrivate() {
-      delete [] jumpTable32;
-      delete [] jumpTable8;
-    }
-};
-
-}
 
 using namespace Marble;
 
@@ -95,20 +58,98 @@ static uchar **jumpTableFromQImage8( QImage &img )
     return jumpTable;
 }
 
-TextureTile::TextureTile( TileId const& id )
-    : QObject(),
-      d(new TextureTilePrivate(id))
+
+TextureTilePrivate::TextureTilePrivate( const TileId& id ) :
+      AbstractTilePrivate( id ), 
+      jumpTable8(0),
+      jumpTable32(0),
+      m_rawtile(),
+      m_depth(0),
+      m_isGrayscale(false)
 {
 }
 
+TextureTilePrivate::~TextureTilePrivate()
+{
+      delete [] jumpTable32;
+      delete [] jumpTable8;
+}
+
+uint TextureTilePrivate::pixel( int x, int y ) const
+{
+    if ( m_depth == 1 || m_depth == 8 ) {
+        if ( !m_isGrayscale )
+            return m_rawtile.pixel( x, y );
+        else
+            return (jumpTable8)[y][x];
+    }
+    return (jumpTable32)[y][x];
+}
+
+void TextureTilePrivate::scaleTileFrom( Marble::GeoSceneTexture *textureLayer, QImage &tile,
+                    qreal sourceX, qreal sourceY, int sourceLevel,
+                    int targetX, int targetY, int targetLevel )
+{
+    const int levelZeroColumns = textureLayer->levelZeroColumns();
+    const int levelZeroRows = textureLayer->levelZeroRows();
+    qDebug() << "HERE?" ;
+    const int rowsRequestedLevel = TileLoaderHelper::levelToRow( levelZeroRows, targetLevel );
+    const int columnsRequestedLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, targetLevel );
+    const int rowsCurrentLevel = TileLoaderHelper::levelToRow( levelZeroRows, sourceLevel );
+    const int columnsCurrentLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, sourceLevel );
+    qDebug() << "HERE!" ;
+
+    // qDebug() << "About to start cropping an existing image.";
+
+    QSize tilesize = tile.size();
+    qreal normalizedX2 = (qreal)(targetX + 1) / (qreal)( rowsRequestedLevel );
+    qreal normalizedY2 = (qreal)(targetY + 1) / (qreal)( columnsRequestedLevel );
+    qreal currentX2    = normalizedX2 * (qreal)( rowsCurrentLevel );
+    qreal currentY2    = normalizedY2 * (qreal)( columnsCurrentLevel );
+
+    // Determine the rectangular section of the previous tile data 
+    // which we intend to copy from:
+    int left   = (int)( ( sourceX    - (int)( sourceX ) ) * tile.width() );
+    int top    = (int)( ( sourceY    - (int)( sourceY ) ) * tile.height() );
+    int right  = (int)( ( currentX2  - (int)( sourceX ) ) * tile.width() ) - 1;
+    int bottom = (int)( ( currentY2  - (int)( sourceY ) ) * tile.height() ) - 1;
+
+    // Important: Scaling a null image during the next step would be fatal
+    // So we make sure the width and height is at least 1.
+    int rectWidth  = ( right - left > 1 ) ? right  - left : 1;
+    int rectHeight = ( bottom - top > 1 ) ? bottom - top  : 1;
+
+    // This should not create any memory leaks as
+    // 'copy' and 'scaled' return a value (on the
+    // stack) which gets deep copied always into the
+    // same place for m_rawtile on the heap:
+    tile = tile.copy( left, top, rectWidth, rectHeight );
+    tile = tile.scaled( tilesize ); // TODO: use correct size
+    m_state = AbstractTile::TilePartial;
+    // qDebug() << "Finished scaling up the Temporary Tile.";
+}
+
+
+TextureTile::TextureTile( TileId const& id, QObject * parent )
+    : AbstractTile( *new TextureTilePrivate( id ), parent )
+{
+//    Q_D( TextureTile );
+//    d->q_ptr = this; 
+}
+
+TextureTile::TextureTile( TextureTilePrivate &dd, QObject * parent )
+    : AbstractTile( dd, parent )
+{
+}
 
 TextureTile::~TextureTile()
 {
-    delete d;
 }
 
 void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, int y, QCache<TileId, TextureTile> *tileCache )
 {
+    Q_D( TextureTile );
+
     // qDebug() << "TextureTile::loadDataset" << level << x << y;
     QImage temptile;
 
@@ -208,7 +249,7 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
 
                 // Don't scale if the current tile isn't a fallback
                 if ( level != currentLevel ) { 
-                    scaleTileFrom( textureLayer, temptile, currentX, currentY, currentLevel, x, y, level );
+                    d->scaleTileFrom( textureLayer, temptile, currentX, currentY, currentLevel, x, y, level );
                 }
                 else {
                     d->m_state = TileComplete;
@@ -238,6 +279,7 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
 
 void TextureTile::loadTile( bool requestTileUpdate )
 {
+    Q_D( TextureTile );
     //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
 
     if ( d->m_rawtile.isNull() ) {
@@ -271,76 +313,35 @@ void TextureTile::loadTile( bool requestTileUpdate )
     }
 }
 
-void TextureTile::scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile, qreal sourceX, qreal sourceY, int sourceLevel, int targetX, int targetY, int targetLevel )
-{
-    const int levelZeroColumns = textureLayer->levelZeroColumns();
-    const int levelZeroRows = textureLayer->levelZeroRows();
-    const int rowsRequestedLevel = TileLoaderHelper::levelToRow( levelZeroRows, targetLevel );
-    const int columnsRequestedLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, targetLevel );
-    const int rowsCurrentLevel = TileLoaderHelper::levelToRow( levelZeroRows, sourceLevel );
-    const int columnsCurrentLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, sourceLevel );
-
-    // qDebug() << "About to start cropping an existing image.";
-
-    QSize tilesize = tile.size();
-    qreal normalizedX2 = (qreal)(targetX + 1) / (qreal)( rowsRequestedLevel );
-    qreal normalizedY2 = (qreal)(targetY + 1) / (qreal)( columnsRequestedLevel );
-    qreal currentX2    = normalizedX2 * (qreal)( rowsCurrentLevel );
-    qreal currentY2    = normalizedY2 * (qreal)( columnsCurrentLevel );
-
-    // Determine the rectangular section of the previous tile data 
-    // which we intend to copy from:
-    int left   = (int)( ( sourceX    - (int)( sourceX ) ) * tile.width() );
-    int top    = (int)( ( sourceY    - (int)( sourceY ) ) * tile.height() );
-    int right  = (int)( ( currentX2  - (int)( sourceX ) ) * tile.width() ) - 1;
-    int bottom = (int)( ( currentY2  - (int)( sourceY ) ) * tile.height() ) - 1;
-
-    // Important: Scaling a null image during the next step would be fatal
-    // So we make sure the width and height is at least 1.
-    int rectWidth  = ( right - left > 1 ) ? right  - left : 1;
-    int rectHeight = ( bottom - top > 1 ) ? bottom - top  : 1;
-
-    // This should not create any memory leaks as
-    // 'copy' and 'scaled' return a value (on the
-    // stack) which gets deep copied always into the
-    // same place for m_rawtile on the heap:
-    tile = tile.copy( left, top, rectWidth, rectHeight );
-    tile = tile.scaled( tilesize ); // TODO: use correct size
-    d->m_state = TilePartial;
-    // qDebug() << "Finished scaling up the Temporary Tile.";
-
-}
-
-const QDateTime & TextureTile::created() const
-{
-    return d->m_created;
-}
-
 uint TextureTile::pixel( int x, int y ) const
 {
-    if ( d->m_depth == 1 || d->m_depth == 8 ) {
-        if ( !d->m_isGrayscale )
-            return d->m_rawtile.pixel( x, y );
-        else
-            return (d->jumpTable8)[y][x];
-    }
-    return (d->jumpTable32)[y][x];
+    Q_D( const TextureTile );
+
+    return d->pixel( x, y );
 }
 
-TileId const& TextureTile::id() const { return d->m_id; }
+int TextureTile::depth() const
+{
+    Q_D( const TextureTile );
+    return d->m_depth;
+}
 
-int TextureTile::depth() const { return d->m_depth; }
+int TextureTile::numBytes() const
+{
+    Q_D( const TextureTile );
+    return d->m_rawtile.numBytes();
+}
 
-bool TextureTile::used() const { return d->m_used; }
-void TextureTile::setUsed( bool used ) { d->m_used = used; }
+QImage TextureTile::rawtile() 
+{
+    Q_D( TextureTile );
+    return d->m_rawtile;
+}
 
-int TextureTile::numBytes() const { return d->m_rawtile.numBytes(); }
-
-TextureTile::TileState TextureTile::state() const { return d->m_state; }
-void TextureTile::setState( TileState state ) { d->m_state = state; }
-
-const QImage& TextureTile::rawtile() { return d->m_rawtile; }
-
-QImage * TextureTile::tile() { return &(d->m_rawtile); }
+QImage * TextureTile::tile()
+{
+    Q_D( TextureTile );
+    return &(d->m_rawtile);
+}
 
 #include "TextureTile.moc"
