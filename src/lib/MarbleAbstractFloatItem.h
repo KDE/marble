@@ -12,9 +12,9 @@
 #ifndef MARBLE_ABSTRACT_FLOATITEM_H
 #define MARBLE_ABSTRACT_FLOATITEM_H
 
-#include <QtCore/QObject>
 #include <QtCore/QPointF>
-#include <QtCore/QSize>
+#include <QtCore/QRectF>
+#include <QtCore/QSizeF>
 #include <QtCore/QString>
 #include <QtCore/Qt>
 
@@ -27,6 +27,7 @@
 #include "marble_export.h"
 
 class QAction;
+class QPainter;
 
 namespace Marble
 {

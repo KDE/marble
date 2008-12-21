@@ -13,6 +13,10 @@
 
 #include "StoragePolicy.h"
 
+#include <QtCore/QString>
+
+class QByteArray;
+
 namespace Marble
 {
 

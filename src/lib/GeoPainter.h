@@ -15,9 +15,19 @@
 
 #include "marble_export.h"
 
+#include <QtCore/QSize>
+
 // Marble
 #include "global.h"
 #include "ClipPainter.h"
+
+class QImage;
+class QPaintDevice;
+class QPixMap;
+class QPolygonF;
+class QRect;
+class QRectF;
+class QString;
 
 namespace Marble
 {

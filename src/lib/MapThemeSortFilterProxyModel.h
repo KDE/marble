@@ -13,6 +13,8 @@
 
 #include <QtGui/QSortFilterProxyModel>
 
+class QModelIndex;
+
 namespace Marble
 {
 

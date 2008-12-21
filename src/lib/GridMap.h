@@ -14,6 +14,7 @@
 #define GRIDMAP_H
 
 
+#include <QtCore/QPointF>
 #include <QtGui/QPen>
 
 #include "global.h"

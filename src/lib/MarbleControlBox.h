@@ -21,6 +21,7 @@
 
 #include "marble_export.h"
 
+#include <QtCore/QString>
 #include <QtGui/QWidget>
 
 #include "global.h"
@@ -37,6 +38,7 @@
 class QByteArray;
 class QModelIndex;
 class QAbstractItemModel;
+class QResizeEvent;
 class QStandardItemModel;
 
 namespace Marble

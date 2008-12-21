@@ -14,9 +14,9 @@
 #define GEOPOLYGON_H
 
 #include <QtCore/QObject>
+#include <QtCore/QString>
 #include <QtCore/QThread>
 #include <QtCore/QVector>
-#include <QtCore/QDebug>
 #include "marble_export.h"
 
 #include "Quaternion.h"

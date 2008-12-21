@@ -12,7 +12,6 @@
 #ifndef ABSTRACTSCANLINETEXTUREMAPPER_H
 #define ABSTRACTSCANLINETEXTUREMAPPER_H
 
-#include <QtCore/QDebug>
 #include <QtCore/QObject>
 #include <QtGui/QColor>
 

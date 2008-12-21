@@ -20,9 +20,9 @@
 
 #include "marble_export.h"
 
-class QFileSystemWatcher;
 class QStandardItem;
 class QStandardItemModel;
+class QString;
 
 namespace Marble
 {

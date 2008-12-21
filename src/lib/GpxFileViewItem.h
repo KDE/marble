@@ -13,6 +13,7 @@
 #define GPXFILEVIEWITEM_H
 
 #include <QtCore/QObject>
+#include <QtCore/QVariant>
 #include "AbstractFileViewItem.h"
 
 namespace Marble

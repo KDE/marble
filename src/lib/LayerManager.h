@@ -13,7 +13,9 @@
 #define LAYERMANAGER_H
 
 // Qt
+#include <QtCore/QList>
 #include <QtCore/QObject>
+#include <QtCore/QString>
 
 // Local dir
 #include "PluginManager.h"

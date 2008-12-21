@@ -16,7 +16,6 @@
 
 #include <math.h>
 
-#include <QtCore/QCoreApplication>
 #include <QtCore/QString>
 
 namespace Marble
