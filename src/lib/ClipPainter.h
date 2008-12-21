@@ -14,8 +14,12 @@
 #define CLIPPAINTER_H
 
 
+#include <QtCore/QPointF>
 #include <QtGui/QPainter>
 #include "marble_export.h"
+
+class QPaintDevice;
+class QPolygonF;
 
 namespace Marble
 {

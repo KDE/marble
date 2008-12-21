@@ -20,6 +20,8 @@
 
 
 #include <QtCore/QObject>
+#include <QtCore/QSize>
+#include <QtCore/QString>
 #include <QtGui/QPixmap>
 
 namespace Marble
