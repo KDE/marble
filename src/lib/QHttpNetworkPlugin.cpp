@@ -22,7 +22,8 @@
 
 using namespace Marble;
 
-QHttpHttpJob::QHttpHttpJob( const QUrl & sourceUrl, const QString & destFileName, const QString &id )
+QHttpHttpJob::QHttpHttpJob( const QUrl & sourceUrl, const QString & destFileName,
+                            const QString &id )
         : HttpJob( sourceUrl, destFileName, id ),
         m_data(),
         m_buffer( 0 ),
@@ -33,7 +34,6 @@ QHttpHttpJob::QHttpHttpJob( const QUrl & sourceUrl, const QString & destFileName
 
 QHttpHttpJob::~QHttpHttpJob()
 {
-
     delete m_http;
     delete m_buffer;
 }
@@ -44,8 +44,8 @@ void QHttpHttpJob::prepareExecution()
     // perhaps better to make a new job than (FIXME)
     if ( !m_http ) {
         m_http = new QHttp;
-        m_buffer = new QBuffer ( &m_data );
-        m_buffer->open ( QIODevice::WriteOnly );
+        m_buffer = new QBuffer( &m_data );
+        m_buffer->open( QIODevice::WriteOnly );
 
         connect( m_http, SIGNAL( requestFinished( int, bool ) ),
                  this, SLOT( httpRequestFinished( int, bool ) ) );
@@ -54,7 +54,7 @@ void QHttpHttpJob::prepareExecution()
 
 void QHttpHttpJob::execute()
 {
-    emit statusMessage ( tr ( "Downloading data..." ) );
+    emit statusMessage( tr( "Downloading data..." ) );
 
     m_http->setHost( sourceUrl().host(),
                      sourceUrl().port() != -1 ? sourceUrl().port() : 80 );
@@ -71,10 +71,10 @@ void QHttpHttpJob::execute()
     }
 
 //    qDebug() << sourceUrl().host() << "and path=" << cleanupPath;
-    QHttpRequestHeader header ( QLatin1String ( "GET" ), cleanupPath );
-    header.setValue ( "Connection", "Keep-Alive" );
-    header.setValue ( "User-Agent", "Marble TinyWebBrowser" );
-    header.setValue ( "Host", sourceUrl().host() );
+    QHttpRequestHeader header( QLatin1String( "GET" ), cleanupPath );
+    header.setValue( "Connection", "Keep-Alive" );
+    header.setValue( "User-Agent", "Marble TinyWebBrowser" );
+    header.setValue( "Host", sourceUrl().host() );
 
     m_currentRequest = m_http->request( header, 0, m_buffer );
 }
@@ -96,9 +96,9 @@ void QHttpHttpJob::httpRequestFinished( int requestId, bool error )
 
     if ( responseHeader.statusCode() == 301 )
     {
-        QUrl newLocation ( responseHeader.value ( "Location" ) );
-        setSourceUrl ( newLocation );
-        setDestinationFileName ( newLocation.path() );
+        QUrl newLocation( responseHeader.value( "Location" ) );
+        setSourceUrl( newLocation );
+        setDestinationFileName( newLocation.path() );
         m_currentRequest = -1;
 
         // Let's try again
@@ -108,35 +108,30 @@ void QHttpHttpJob::httpRequestFinished( int requestId, bool error )
 
     if ( responseHeader.statusCode() != 200 )
     {
-        emit statusMessage ( tr ( "Download failed: %1." )
-                             .arg ( responseHeader.reasonPhrase() ) );
-        emit jobDone ( this, 1 );
-
+        emit statusMessage( tr( "Download failed: %1." )
+                            .arg( responseHeader.reasonPhrase() ) );
+        emit jobDone( this, 1 );
         return;
     }
 
     if ( error != 0 )
     {
-        emit statusMessage ( tr ( "Download failed: %1." )
-                             .arg ( m_http->errorString() ) );
-        emit jobDone ( this, error );
-
+        emit statusMessage( tr( "Download failed: %1." )
+                            .arg( m_http->errorString() ) );
+        emit jobDone( this, error );
         return;
-
     }
 
-    if ( storagePolicy() && !storagePolicy()->updateFile ( originalDestinationFileName(), data() ) )
+    if ( storagePolicy() && !storagePolicy()->updateFile( originalDestinationFileName(), data() ) )
     {
-        emit statusMessage ( tr ( "Download failed: %1." )
-                             .arg ( storagePolicy()->lastErrorMessage() ) );
-        emit jobDone ( this, error );
-
+        emit statusMessage( tr( "Download failed: %1." )
+                            .arg( storagePolicy()->lastErrorMessage() ) );
+        emit jobDone( this, error );
         return;
     }
 
-    emit statusMessage ( tr ( "Download finished." ) );
-
-    emit jobDone ( this, 0 );
+    emit statusMessage( tr( "Download finished." ));
+    emit jobDone( this, 0 );
 }
 
 
