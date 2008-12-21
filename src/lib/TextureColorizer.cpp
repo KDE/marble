@@ -130,11 +130,11 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             const uchar *readDataEnd = readDataStart + imgwidth*4;
 
             emboss.buffer = 0;
-		
+        
             for ( uchar* readData = readDataStart; 
-		  readData < readDataEnd; 
-		  readData += 4, ++writeData, ++coastData )
-	    {
+                  readData < readDataEnd;
+                  readData += 4, ++writeData, ++coastData )
+            {
 
                 // Cheap Emboss / Bumpmapping
                 const uchar&  grey = *readData; // qBlue(*data);
@@ -220,9 +220,9 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
  
             for ( uchar* readData = readDataStart;
-		  readData < readDataEnd;
-		  readData += 4, ++writeData, ++coastData )
-	    {
+                  readData < readDataEnd;
+                  readData += 4, ++writeData, ++coastData )
+            {
                 // Cheap Embosss / Bumpmapping
 
                 const uchar& grey = *readData; // qBlue(*data);
@@ -289,7 +289,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 }
 
 void TextureColorizer::generatePalette(const QString& seafile,
-				       const QString& landfile)
+                                       const QString& landfile)
 {
     for(int i = 0; i < 16; i++) {
         for(int j = 0; j < 512; j++) {
@@ -326,11 +326,11 @@ void TextureColorizer::generatePalette(const QString& seafile,
                 QString  colorValue = evalstrg.left( evalstrg.indexOf( '=' ) );
                 QString  colorPosition = evalstrg.mid( evalstrg.indexOf( '=' ) + 1 );
                 gradient.setColorAt( colorPosition.toDouble(),
-				     QColor( colorValue ) );
+                                     QColor( colorValue ) );
             }
         }
         gradientPainter.setBrush( gradient );
-        gradientPainter.drawRect( 0, 0, 256, 3 );	
+        gradientPainter.drawRect( 0, 0, 256, 3 );        
 
         for ( int j = 0; j < 16; ++j ) {
   
