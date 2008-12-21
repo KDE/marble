@@ -11,6 +11,7 @@
 
 #include "QtMainWindow.h"
 
+#include <QtCore/QDebug>
 #include <QtCore/QSettings>
 #include <QtGui/QCloseEvent>
 
