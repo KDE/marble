@@ -64,7 +64,9 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
 
     if ( tileLoader ) {
         GeoSceneLayer * layer = tileLoader->layer();
-        texture = static_cast<GeoSceneTexture *>( layer->groundDataset() );
+        if ( layer ) {
+            texture = static_cast<GeoSceneTexture *>( layer->groundDataset() );
+        }
     }
 
     m_tileProjection = tileLoader && texture
