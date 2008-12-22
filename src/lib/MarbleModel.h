@@ -207,6 +207,12 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     PlaceMarkLayout    *placeMarkLayout()   const;
     VectorComposer     *vectorComposer()     const;
+    /**
+     * @brief Returns the map's TextureColorizer
+     * @warning The TextureColorizer pointer may be null since it is only
+     * initialized if the map theme requires it. Check for this possibility.
+     * @return A pointer to the TextureColorizer
+     */
     TextureColorizer   *textureColorizer()   const;
 
     AbstractScanlineTextureMapper  *textureMapper() const;
