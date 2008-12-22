@@ -295,19 +295,12 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 void TextureColorizer::generatePalette(const QString& seafile,
                                        const QString& landfile)
 {
-/*
-    for(int i = 0; i < 16; i++) {
-        for(int j = 0; j < 512; j++) {
-            texturepalette[i][j] = 0;
-        }
-    }
-*/
-    QImage   gradientImage ( 256, 5, QImage::Format_RGB32 );
+    QImage   gradientImage ( 256, 3, QImage::Format_RGB32 );
     QPainter  gradientPainter;
     gradientPainter.begin( &gradientImage );
     gradientPainter.setPen( Qt::NoPen );
 
-    QImage    shadingImage ( 256, 5, QImage::Format_RGB32 );
+    QImage    shadingImage ( 256, 3, QImage::Format_RGB32 );
     QPainter  shadingPainter;
     shadingPainter.begin( &shadingImage );
     shadingPainter.setPen( Qt::NoPen );
@@ -345,21 +338,22 @@ void TextureColorizer::generatePalette(const QString& seafile,
         shadeGradient.setColorAt(0.75, QColor(Qt::black));
         shadeGradient.setColorAt(1.00, QColor(Qt::black));
 
+        const QRgb * gradientScanLine  = (QRgb*)( gradientImage.scanLine( 1 ) );
+        const QRgb * shadingScanLine   = (QRgb*)( shadingImage.scanLine( 1 ) );
 
         for ( int i = 0; i < 256; ++i ) {
 
-            QRgb  shadeColor = gradientImage.pixel( i, 1 );
+            QRgb  shadeColor = *(gradientScanLine + i );
             shadeGradient.setColorAt(0.496, shadeColor);
             shadeGradient.setColorAt(0.504, shadeColor);
             shadingPainter.setBrush( shadeGradient );
             shadingPainter.drawRect( 0, 0, 256, 3 );  
 
-                // populate texturepalette[][]
+            // populate texturepalette[][]
             for ( int j = 0; j < 16; ++j ) {
     
                 int  shadeIndex = 120 + j;
-                QRgb  paletteColor = shadingImage.pixel( shadeIndex, 1 );
-                texturepalette[j][offset + i] = (uint)paletteColor;
+                texturepalette[j][offset + i] = *(shadingScanLine + shadeIndex );
             }
         }
 
