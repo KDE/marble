@@ -25,6 +25,8 @@
 #include <QtCore/QString>
 #include <QtCore/QVector>
 
+#include <geodata_export.h>
+
 #include "GeoDocument.h"
 #include "GeoSceneFilter.h"
 
@@ -34,7 +36,7 @@ namespace Marble
 /**
  * @short Contents used inside a layer.
  */
-class GeoSceneAbstractDataset : public GeoNode
+class GEODATA_EXPORT GeoSceneAbstractDataset : public GeoNode
 {
  public:
     virtual ~GeoSceneAbstractDataset() {};
@@ -61,7 +63,7 @@ class GeoSceneAbstractDataset : public GeoNode
  * @short Layer of a GeoScene document.
  */
 
-class GeoSceneLayer : public GeoNode {
+class GEODATA_EXPORT GeoSceneLayer : public GeoNode {
  public:
     explicit GeoSceneLayer( const QString& name );
     ~GeoSceneLayer();
