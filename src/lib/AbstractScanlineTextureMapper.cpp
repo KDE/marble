@@ -60,14 +60,16 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
       m_normGlobalWidth( 0.0 ),
       m_normGlobalHeight( 0.0 )
 {
-    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( tileLoader->layer()->groundDataset() );
+    GeoSceneTexture * texture = 0;
+
+    if ( tileLoader ) {
+        GeoSceneLayer * layer = tileLoader->layer();
+        texture = static_cast<GeoSceneTexture *>( layer->groundDataset() );
+    }
 
     m_tileProjection = tileLoader && texture
                         ? texture->projection()
                         : GeoSceneTexture::Equirectangular;
-
-    m_tileProjection = texture->projection();
-
 
     connect( m_tileLoader, SIGNAL( tileUpdateAvailable() ), 
              this,         SLOT( notifyMapChanged() ) );
