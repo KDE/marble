@@ -234,9 +234,13 @@ void AbstractScanlineTextureMapper::pixelValue(const qreal& lon,
         {
             nextTile( m_posX, m_posY );
         }
-    
-        QRgb topLeftValue = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
-        *scanLine = bilinearSmooth( topLeftValue );
+        if (m_tile) {
+            QRgb topLeftValue = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
+            *scanLine = bilinearSmooth( topLeftValue );
+        }
+        else {
+            *scanLine = 0;
+        }
     }
     else {
         // Convert the lon and lat coordinates of the position on the scanline
@@ -257,8 +261,13 @@ void AbstractScanlineTextureMapper::pixelValue(const qreal& lon,
         {
             nextTile( m_iPosX, m_iPosY );
         }
-    
-        *scanLine = m_tile->pixel( m_iPosX, m_iPosY ); 
+
+        if ( m_tile ) {
+            *scanLine = m_tile->pixel( m_iPosX, m_iPosY );
+        }
+        else {
+            *scanLine = 0;
+        }
     }
 }
 

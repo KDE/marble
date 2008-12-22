@@ -56,7 +56,9 @@ class TileLoaderPrivate
         TileLoaderPrivate()
             : m_datasetProvider( 0 ),
               m_downloadManager( 0 ),
-              m_layer( 0 )
+              m_layer( 0 ),
+              m_tileWidth( 0 ),
+              m_tileHeight( 0 )
         {
             m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
         }
@@ -112,6 +114,11 @@ void TileLoader::setLayer( GeoSceneLayer * layer )
     // Initialize map theme.
     flush();
     d->m_tileCache.clear();
+
+    if ( !layer ) {
+        qDebug() << "No layer specified! (GeoSceneLayer * layer = 0)";
+        return;
+    }
 
     d->m_layer = layer;
 
@@ -182,6 +189,8 @@ int TileLoader::tileHeight() const
 
 int TileLoader::globalWidth( int level ) const
 {
+    if ( !d->m_layer ) return 0;
+
     GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
 
     return d->m_tileWidth * TileLoaderHelper::levelToColumn( 
@@ -190,6 +199,8 @@ int TileLoader::globalWidth( int level ) const
 
 int TileLoader::globalHeight( int level ) const
 {
+    if ( !d->m_layer ) return 0;
+
     GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
 
     return d->m_tileHeight * TileLoaderHelper::levelToRow( 
@@ -198,6 +209,8 @@ int TileLoader::globalHeight( int level ) const
 
 TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
 {
+    if ( !d->m_layer ) return 0;
+
     TileId tileId( tileLevel, tilx, tily );
 
     // check if the tile is in the hash
@@ -265,13 +278,18 @@ quint64 TileLoader::volatileCacheLimit() const
 
 int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
 {
+    int maxtilelevel = -1;
+
+    if ( !layer ) return maxtilelevel;
+
     GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( layer->groundDataset() );
+
+    if ( !texture ) return maxtilelevel;
 
     QString tilepath = MarbleDirs::path( TileLoaderHelper::themeStr( texture ) );
 //    qDebug() << "TileLoader::maxPartialTileLevel tilepath" << tilepath;
     QStringList leveldirs = ( QDir( tilepath ) ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
 
-    int maxtilelevel = -1;
     QString str;
     bool ok = true;
 
@@ -294,12 +312,14 @@ int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
 
 bool TileLoader::baseTilesAvailable( GeoSceneLayer * layer )
 {
-    bool noerr = true; 
+    if ( !layer ) return false;
 
     GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( layer->groundDataset() );
 
     const int  levelZeroColumns = texture->levelZeroColumns();
     const int  levelZeroRows    = texture->levelZeroRows();
+
+    bool noerr = true; 
 
     // Check whether the tiles from the lowest texture level are available
     //
@@ -323,6 +343,8 @@ void TileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 
 void TileLoader::reloadTile( const QString &idStr )
 {
+    if ( !d->m_layer ) return;
+
 //    qDebug() << "TileLoader::reloadTile:" << idStr;
  
     const TileId id = TileId::fromString( idStr );

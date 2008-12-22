@@ -17,6 +17,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QString>
+#include <QtCore/QTime>
 #include <QtGui/QColor>
 #include <QtGui/QImage>
 #include <QtGui/QPainter>
@@ -36,7 +37,10 @@ uint TextureColorizer::texturepalette[16][512];
 TextureColorizer::TextureColorizer( const QString& seafile, 
                                     const QString& landfile )
 {
-   generatePalette(seafile, landfile);
+    QTime t;
+    t.start();
+    generatePalette(seafile, landfile);
+    qDebug("TextureColorizer: Time elapsed: %d ms", t.elapsed());
 }
 
 QString TextureColorizer::seafile() const
@@ -291,11 +295,13 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 void TextureColorizer::generatePalette(const QString& seafile,
                                        const QString& landfile)
 {
+    /*
     for(int i = 0; i < 16; i++) {
         for(int j = 0; j < 512; j++) {
             texturepalette[i][j] = 0;
         }
     }
+*/
     QImage   gradientImage ( 256, 10, QImage::Format_RGB32 );
     QPainter  gradientPainter;
     gradientPainter.begin( &gradientImage );

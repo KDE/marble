@@ -16,6 +16,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QList>
 #include <QtCore/QPluginLoader>
+#include <QtCore/QTime>
 
 // Local dir
 #include "MarbleDirs.h"
@@ -40,7 +41,10 @@ PluginManager::PluginManager( QObject *parent )
       d( new PluginManagerPrivate() )
 {
     // For testing:
+    QTime t;
+    t.start();
     loadPlugins();
+    qDebug("Time elapsed: %d ms", t.elapsed());
 }
 
 PluginManager::~PluginManager()
