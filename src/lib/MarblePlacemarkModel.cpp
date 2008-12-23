@@ -232,13 +232,11 @@ void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks,
         d->m_placeMarkContainer << placeMarks;
 
         d->m_containerMap[ placeMarks.name() ] = new PlaceMarkContainer( placeMarks );
-
-
-        if ( finalize ) {
-            generateIndex();
-            d->m_placeMarkContainer.sort();
-            emit layoutChanged();
-        }
+    }
+    if ( finalize ) {
+        generateIndex();
+        d->m_placeMarkContainer.sort();
+        emit layoutChanged();
     }
 }
 
@@ -256,12 +254,11 @@ void  MarblePlacemarkModel::removePlaceMarks( QString &containerName,
             delete placemark;
         }
         delete d->m_containerMap[ containerName ];
-
-        if ( finalize ) {
-            generateIndex();
-            d->m_placeMarkContainer.sort();
-            emit layoutChanged();
-        }
+    }
+    if ( finalize ) {
+        generateIndex();
+        d->m_placeMarkContainer.sort();
+        emit layoutChanged();
     }
 }
 

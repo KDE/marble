@@ -388,7 +388,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     }
 
     QStringList loadedContainers = d->m_placemarkmanager->model()->containers();
-    // load new standard Placemarks
+    QStringList loadList;
     QVector<GeoSceneLayer*>::const_iterator it = d->m_mapTheme->map()->layers().constBegin();
     QVector<GeoSceneLayer*>::const_iterator end = d->m_mapTheme->map()->layers().constEnd();
     for (; it != end; ++it) {
@@ -401,8 +401,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
                 GeoSceneAbstractDataset* dataset = *itds;
                 if( dataset->fileFormat() == "KML" ) {
                     loadedContainers.removeOne( dataset->name() );
-                    d->m_placemarkmanager->addPlaceMarkFile( dataset->name(), loadedContainers.isEmpty() );
-                    
+                    loadList << dataset->name();
                 }
             }
         }
@@ -410,8 +409,13 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     // unload old standard Placemarks which are not part of the new map
     foreach(QString container, loadedContainers) {
         loadedContainers.pop_front();
-        qDebug() << "removing container:" << container << loadedContainers.isEmpty();
+        qDebug() << "removing container:" << container << (loadList.isEmpty() && loadedContainers.isEmpty());
         d->m_placemarkmanager->model()->removePlaceMarks( container, loadedContainers.isEmpty() );
+    }
+    // load new standard Placemarks
+    foreach(QString container, loadList) {
+        loadList.pop_front();
+        d->m_placemarkmanager->addPlaceMarkFile( container, loadList.isEmpty() );
     }
     
 
