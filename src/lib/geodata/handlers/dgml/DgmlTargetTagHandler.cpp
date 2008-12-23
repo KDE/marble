@@ -46,8 +46,8 @@ GeoNode* DgmlTargetTagHandler::parse(GeoParser& parser) const
         parentItem.nodeAs<GeoSceneHead>()->setTarget( parser.readElementText().trimmed() );
 
     if (parentItem.represents(dgmlTag_Map)) {
-        layer = new GeoSceneLayer( "$MARBLETARGET$" );
-        parentItem.nodeAs<GeoSceneMap>()->addLayer( layer );
+/*        layer = new GeoSceneLayer( "$MARBLETARGET$" );
+        parentItem.nodeAs<GeoSceneMap>()->addLayer( layer );*/
     }
 
     return 0;
