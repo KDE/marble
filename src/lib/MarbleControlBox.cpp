@@ -29,6 +29,7 @@
 #include <QtCore/QDataStream>
 #include <QtCore/QtAlgorithms>
 #include <QtCore/QDebug>
+#include <QtCore/QTime>
 #include <QtCore/QTimer>
 #include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QStandardItemModel>
@@ -342,9 +343,12 @@ void MarbleControlBox::setWidgetTabShown( QWidget * widget,
 
 void MarbleControlBox::setLocations(MarblePlacemarkModel* locations)
 {
+    QTime t;
+    t.start();
     d->m_sortproxy->setSourceModel( locations );
     d->m_sortproxy->setSortLocaleAware( true );
     d->m_sortproxy->sort( 0 );
+    qDebug("MarbleControlBox (sort): Time elapsed: %d ms", t.elapsed());
 }
 
 int MarbleControlBox::minimumZoom() const

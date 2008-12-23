@@ -104,6 +104,13 @@ bool NavigationFloatItem::needsUpdate(ViewportParams *viewport)
     return false;
 }
 
+QPainterPath NavigationFloatItem::backgroundShape() const
+{
+    QPainterPath path;
+    path.addRoundedRect( QRectF( 0.0, 0.0, renderedRect().size().width() - 1, renderedRect().size().height() - 1 ), 6, 6 );
+    return path;
+}
+
 bool NavigationFloatItem::renderFloatItem(GeoPainter *painter,
         ViewportParams *viewport, GeoSceneLayer * layer)
 {

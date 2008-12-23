@@ -119,6 +119,8 @@ void MarbleLegendBrowser::initTheme()
 void MarbleLegendBrowser::loadLegend()
 {
     qDebug() << "loadLegend";
+    QTime t;
+    t.start();
 
     // Read the html string.
 
@@ -158,6 +160,8 @@ void MarbleLegendBrowser::loadLegend()
     format.setMargin(6);
     document()->rootFrame()->setFrameFormat( format );
     viewport()->update();
+
+    qDebug("loadLegend: Time elapsed: %d ms", t.elapsed());
 }
 
 QString MarbleLegendBrowser::readHtml( const QUrl & name )

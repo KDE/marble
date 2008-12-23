@@ -17,6 +17,7 @@
 // Qt
 #include <QtCore/QDebug>
 #include <QtCore/QModelIndex>
+#include <QtCore/QTime>
 #include <QtGui/QPixmap>
 
 // Marble
@@ -75,16 +76,22 @@ void MarblePlacemarkModel::indexUpdate()
     generateIndex();
 }
 
-void MarblePlacemarkModel::generateIndex() const
+void MarblePlacemarkModel::generateIndex()
 {
+    QTime t;
+    t.start();
+    qDebug() << "start generate indexes";
+
     const int constRowCount = rowCount();
 
-    qDebug() << "start generate indexes";
+
     for ( int i = d->m_persistantIndexList.size(); i < constRowCount; ++i )
     {
         d->m_persistantIndexList << index( i, 0 );
     }
     qDebug() << "generated indexes";
+
+    qDebug("MarblePlacemarkModel (generateIndex): Time elapsed: %d ms", t.elapsed());
 }
 
 QList<QPersistentModelIndex> MarblePlacemarkModel::persistentIndexList () const

@@ -56,6 +56,8 @@ Q_OBJECT
 
     bool needsUpdate( ViewportParams *viewport );
 
+    virtual QPainterPath backgroundShape() const;
+
     bool renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer *layer = 0 );
 
  protected:

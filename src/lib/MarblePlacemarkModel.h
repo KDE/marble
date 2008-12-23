@@ -130,7 +130,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      */
     void clearPlaceMarks();
     
-    void generateIndex() const;
+    void generateIndex();
 
     void createFilterProperties( PlaceMarkContainer &container );
 
