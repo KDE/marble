@@ -26,7 +26,7 @@ using namespace Marble;
 NavigationFloatItem::NavigationFloatItem(const QPointF &point,
         const QSizeF &size) :
     MarbleAbstractFloatItem(point, size), m_marbleWidget(0),
-            m_navigationParent(0), m_repaintScheduled(false)
+            m_navigationParent(0), m_repaintScheduled(true)
 {
     // Plugin is not enabled by default
     setEnabled(false);
