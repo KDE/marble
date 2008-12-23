@@ -32,6 +32,8 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneIcon.h"
+#include "GeoSceneLayer.h"
+#include "GeoSceneMap.h"
 #include "GeoSceneParser.h"
 #include "GeoSceneProperty.h"
 #include "GeoSceneSettings.h"
@@ -135,13 +137,36 @@ int main(int argc, char** argv)
         qDebug() << "Discrete: " << sceneDocument->head()->zoom()->discrete(); 
         qDebug() << "Minimum: " << sceneDocument->head()->zoom()->minimum(); 
         qDebug() << "Maximum: " << sceneDocument->head()->zoom()->maximum(); 
-        qDebug() << "Name: " << sceneDocument->settings()->property( "cities" )->name(); 
-        qDebug() << "Available: " << sceneDocument->settings()->property( "cities" )->available(); 
-        qDebug() << "Value: " << sceneDocument->settings()->property( "cities" )->value(); 
-        qDebug() << "Name: " << sceneDocument->settings()->property( "relief" )->name(); 
-        qDebug() << "Available: " << sceneDocument->settings()->property( "relief" )->available(); 
-        qDebug() << "Value: " << sceneDocument->settings()->property( "relief" )->value(); 
-        qDebug() << "Test query a nonexistent property: " << sceneDocument->settings()->property( "nonexistent" )->name();
+        if(sceneDocument->settings() && 
+           sceneDocument->settings()->property( "cities" ) && 
+           sceneDocument->settings()->property( "relief" )) {
+            qDebug() << "CitiesName: " << sceneDocument->settings()->property( "cities" )->name(); 
+            qDebug() << "Available: " << sceneDocument->settings()->property( "cities" )->available(); 
+            qDebug() << "Value: " << sceneDocument->settings()->property( "cities" )->value(); 
+            qDebug() << "ReliefName: " << sceneDocument->settings()->property( "relief" )->name(); 
+            qDebug() << "Available: " << sceneDocument->settings()->property( "relief" )->available(); 
+            qDebug() << "Value: " << sceneDocument->settings()->property( "relief" )->value(); 
+            qDebug() << "Test query a nonexistent property: " << sceneDocument->settings()->property( "nonexistent" )->name();
+        }
+        if(sceneDocument->map()) {
+            qDebug() << "layers:" << sceneDocument->map()->layers().size();
+            QVector<GeoSceneLayer*>::const_iterator it = sceneDocument->map()->layers().constBegin();
+            QVector<GeoSceneLayer*>::const_iterator end = sceneDocument->map()->layers().constEnd();
+            for (; it != end; it++) {
+                GeoSceneLayer* layer = *it;
+                qDebug() << "\t---------------------------------------------------------";
+                qDebug() << "\tLayerName: " << layer->name();
+                qDebug() << "\tBackend: " << layer->backend();
+                QVector<GeoSceneAbstractDataset*>::const_iterator it = layer->datasets().constBegin();
+                QVector<GeoSceneAbstractDataset*>::const_iterator end = layer->datasets().constEnd();
+                for (; it != end; ++it) {
+                    GeoSceneAbstractDataset* dataset = *it;
+                    qDebug() << "\t\tDatasetName: " << dataset->name();
+                    qDebug() << "\t\tFileformat: " << dataset->fileFormat();
+                    qDebug() << "\t\tType: " << dataset->type();
+                }
+            }
+        }
         dumpGeoSceneDocument(static_cast<GeoSceneDocument*>(document));
     }
     else {
@@ -149,9 +174,9 @@ int main(int argc, char** argv)
         Q_ASSERT(false);
     }
 
-    qDebug() << "\nSuccesfully parsed file!";
+    qDebug() << "\nSuccessfully parsed file!";
     delete document;
-
+    qDebug() << "\nSuccessfully deleted file!";
     return 0;
 }
 
