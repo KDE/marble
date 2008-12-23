@@ -29,7 +29,7 @@ namespace Marble {
 
 PlaceMarkLoader::PlaceMarkLoader( QObject* parent, const QString& file )
  : QThread( parent ), 
-   filepath( file ) {
+   m_filepath( file ) {
 }
 
 void PlaceMarkLoader::run() {
@@ -38,12 +38,12 @@ void PlaceMarkLoader::run() {
     QString defaultsrcname;
     QString defaulthomecache;
 
-    PlaceMarkContainer *container = new PlaceMarkContainer;
+    PlaceMarkContainer *container = new PlaceMarkContainer( m_filepath );
 
-    if ( !filepath.contains( "\\" ) && !filepath.contains( '/' ) ) {
-        defaultcachename = MarbleDirs::path( "placemarks/" + filepath + ".cache" );
-        defaultsrcname   = MarbleDirs::path( "placemarks/" + filepath + ".kml");
-        defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + filepath + ".cache";
+    if ( !m_filepath.contains( "\\" ) && !m_filepath.contains( '/' ) ) {
+        defaultcachename = MarbleDirs::path( "placemarks/" + m_filepath + ".cache" );
+        defaultsrcname   = MarbleDirs::path( "placemarks/" + m_filepath + ".kml");
+        defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + m_filepath + ".cache";
     } else
         exit(0);
 
@@ -74,14 +74,14 @@ void PlaceMarkLoader::run() {
             return;
     }
 
-    qDebug() << "No recent Default Placemark Cache File available for " << filepath;
+    qDebug() << "No recent Default Placemark Cache File available for " << m_filepath;
 
     if ( QFile::exists( defaultsrcname ) ) {
 
         // Read the KML file.
         importKml( defaultsrcname, container );
 
-        qDebug() << "ContainerSize for" << filepath << ":" << container->size();
+        qDebug() << "ContainerSize for" << m_filepath << ":" << container->size();
         // Save the contents in the efficient cache format.
         saveFile( defaulthomecache, container );
 
@@ -89,7 +89,7 @@ void PlaceMarkLoader::run() {
         emit placeMarksLoaded( this, container );
     }
     else {
-        qDebug() << "No Default Placemark Source File for " << filepath;
+        qDebug() << "No Default Placemark Source File for " << m_filepath;
     }
 }
 
@@ -118,7 +118,7 @@ void PlaceMarkLoader::importKml( const QString& filename,
 
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
     *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(), 
-                                              QFileInfo( filename ).baseName() );
+                                              m_filepath );
 
 }
 

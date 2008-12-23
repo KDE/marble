@@ -31,7 +31,7 @@ class PlaceMarkLoader : public QThread {
         void saveFile( const QString& filename, PlaceMarkContainer* placeMarkContainer );
         void importKml( const QString& filename, PlaceMarkContainer* placeMarkContainer );
 
-        QString filepath;
+        QString m_filepath;
 };
 
 } // namespace Marble
