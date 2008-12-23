@@ -110,6 +110,19 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
                         bool clearPrevious = false,
                         bool finalize = true );
 
+    /**
+     * This method is used by the PlaceMarkManager to remove
+     * place marks from the model.
+     *
+     * Note: The model takes ownership of the place marks!
+     */
+    void removePlaceMarks( QString &containerName,
+                           bool finalize = true );
+
+    /**
+    * This method returns a list of open Containers (== open kml files)
+    */
+    QStringList containers() const;
  public Q_SLOTS:
     /**
     * This slot should update the persistentIndex

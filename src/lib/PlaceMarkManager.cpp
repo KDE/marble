@@ -98,13 +98,17 @@ void PlaceMarkManager::loadStandardPlaceMarks(  const QString& target  )
     }
 }
 
-void PlaceMarkManager::addPlaceMarkFile( const QString& filepath )
+void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalize )
 {
-    PlaceMarkLoader* loader = new PlaceMarkLoader( this, filepath );
-    connect (   loader, SIGNAL( placeMarksLoaded( PlaceMarkLoader*, PlaceMarkContainer * ) ), 
-                this, SLOT( loadPlaceMarkContainer( PlaceMarkLoader*, PlaceMarkContainer * ) ) );
-    m_loaderList.append( loader );
-    loader->start();
+    m_finalized = finalize;
+    if( !(m_model->containers().contains( filepath ) ) ) {
+        qDebug() << "adding container:" << filepath << finalize;
+        PlaceMarkLoader* loader = new PlaceMarkLoader( this, filepath );
+        connect (   loader, SIGNAL( placeMarksLoaded( PlaceMarkLoader*, PlaceMarkContainer * ) ), 
+                    this, SLOT( loadPlaceMarkContainer( PlaceMarkLoader*, PlaceMarkContainer * ) ) );
+        m_loaderList.append( loader );
+        loader->start();
+    }
 }
 
 void PlaceMarkManager::loadPlaceMarkContainer( PlaceMarkLoader* loader, PlaceMarkContainer * container )
@@ -116,7 +120,7 @@ void PlaceMarkManager::loadPlaceMarkContainer( PlaceMarkLoader* loader, PlaceMar
 
     if ( container )
     { 
-        m_model->addPlaceMarks( *container, false, m_loaderList.isEmpty() );
+        m_model->addPlaceMarks( *container, false, m_finalized && m_loaderList.isEmpty() );
     }
 }
 

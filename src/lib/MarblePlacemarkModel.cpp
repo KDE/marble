@@ -44,7 +44,9 @@ class MarblePlacemarkModel::Private
     MarblePlacemarkModel  *m_parent;
     PlaceMarkManager      *m_manager;
     PlaceMarkContainer     m_placeMarkContainer;
-    QList<QPersistentModelIndex> m_persistantIndexList;
+    
+    QMap<QString, PlaceMarkContainer*>  m_containerMap;
+    QList<QPersistentModelIndex>        m_persistantIndexList;
 };
 
 
@@ -221,23 +223,58 @@ void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks,
     if ( clearPrevious ) {
         qDeleteAll( d->m_placeMarkContainer );
         d->m_placeMarkContainer.clear();
+        d->m_containerMap.clear();
     }
 
-    createFilterProperties( placeMarks );
+    if( !d->m_containerMap.contains( placeMarks.name() ) ) {
+        createFilterProperties( placeMarks );
 
-    d->m_placeMarkContainer << placeMarks;
+        d->m_placeMarkContainer << placeMarks;
 
-    if ( finalize ) {
-        generateIndex();
-        d->m_placeMarkContainer.sort();
-        emit layoutChanged();
+        d->m_containerMap[ placeMarks.name() ] = new PlaceMarkContainer( placeMarks );
+
+
+        if ( finalize ) {
+            generateIndex();
+            d->m_placeMarkContainer.sort();
+            emit layoutChanged();
+        }
     }
+}
+
+void  MarblePlacemarkModel::removePlaceMarks( QString &containerName,
+                                              bool finalize )
+{
+    if( !d->m_containerMap.contains( containerName ) ) {
+        QVector<Marble::GeoDataPlacemark*>::const_iterator iter = d->m_containerMap[ containerName ]->constBegin();
+        QVector<Marble::GeoDataPlacemark*>::const_iterator end = d->m_containerMap[ containerName ]->constEnd();
+        GeoDataPlacemark* placemark;
+        for(; iter != end;) {
+            placemark = *iter;
+            d->m_placeMarkContainer.remove( d->m_placeMarkContainer.indexOf( placemark ) );
+            d->m_containerMap[ containerName ]->pop_front();
+            delete placemark;
+        }
+        delete d->m_containerMap[ containerName ];
+
+        if ( finalize ) {
+            generateIndex();
+            d->m_placeMarkContainer.sort();
+            emit layoutChanged();
+        }
+    }
+}
+
+QStringList MarblePlacemarkModel::containers() const
+{
+    return d->m_containerMap.keys();
 }
 
 void MarblePlacemarkModel::clearPlaceMarks()
 {
     qDeleteAll( d->m_placeMarkContainer );
     d->m_placeMarkContainer.clear();
+    d->m_containerMap.clear();
     reset();
     d->m_persistantIndexList.clear();
 }

@@ -37,6 +37,8 @@
 #include "GeoSceneTexture.h"
 #include "GeoSceneVector.h"
 
+#include "DgmlAuxillaryDictionary.h"
+
 #include "GeoPainter.h"
 #include "FileViewModel.h"
 #include "SphericalScanlineTextureMapper.h"
@@ -48,7 +50,6 @@
 #include "HttpDownloadManager.h"
 #include "KmlFileViewItem.h"
 #include "LayerManager.h"
-#include "MapThemeManager.h"
 #include "MarbleDataFacade.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
@@ -386,7 +387,33 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         }
     }
 
-    d->m_placemarkmanager->loadStandardPlaceMarks( d->m_mapTheme->head()->target() );
+    QStringList loadedContainers = d->m_placemarkmanager->model()->containers();
+    // load new standard Placemarks
+    QVector<GeoSceneLayer*>::const_iterator it = d->m_mapTheme->map()->layers().constBegin();
+    QVector<GeoSceneLayer*>::const_iterator end = d->m_mapTheme->map()->layers().constEnd();
+    for (; it != end; ++it) {
+        GeoSceneLayer* layer = *it;
+        if ( layer->backend() == dgml::dgmlValue_geodata && layer->datasets().count() > 0 ) {
+            // look for documents
+            QVector<GeoSceneAbstractDataset*>::const_iterator itds = layer->datasets().constBegin();
+            QVector<GeoSceneAbstractDataset*>::const_iterator endds = layer->datasets().constEnd();
+            for (; itds != endds; ++itds) {
+                GeoSceneAbstractDataset* dataset = *itds;
+                if( dataset->fileFormat() == "KML" ) {
+                    loadedContainers.removeOne( dataset->name() );
+                    d->m_placemarkmanager->addPlaceMarkFile( dataset->name(), loadedContainers.isEmpty() );
+                    
+                }
+            }
+        }
+    }
+    // unload old standard Placemarks which are not part of the new map
+    foreach(QString container, loadedContainers) {
+        loadedContainers.pop_front();
+        qDebug() << "removing container:" << container << loadedContainers.isEmpty();
+        d->m_placemarkmanager->model()->removePlaceMarks( container, loadedContainers.isEmpty() );
+    }
+    
 
     d->m_placeMarkLayout->requestStyleReset();
     // FIXME: To be removed after MapTheme / KML refactoring

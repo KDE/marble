@@ -87,7 +87,7 @@ class PlaceMarkManager : public QObject
     /**
      * Loads a new place mark file into the manager.
      */
-    void addPlaceMarkFile( const QString &fileName );
+    void addPlaceMarkFile( const QString &fileName, bool finalize = true );
 
     /**
      * Loads a new KML file into the manager.
@@ -114,10 +114,12 @@ class PlaceMarkManager : public QObject
     void setPlaceMarkModel( MarblePlacemarkModel *model );
 
     Q_DISABLE_COPY( PlaceMarkManager )
+
     MarblePlacemarkModel* m_model;
     MarbleGeometryModel* m_geomodel;
     QList<PlaceMarkLoader*> m_loaderList;
 
+    bool m_finalized;
     QString m_target;
 };
 
