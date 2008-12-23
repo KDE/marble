@@ -243,17 +243,17 @@ void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks,
 void  MarblePlacemarkModel::removePlaceMarks( QString &containerName,
                                               bool finalize )
 {
-    if( !d->m_containerMap.contains( containerName ) ) {
+    if( d->m_containerMap.contains( containerName ) ) {
         QVector<Marble::GeoDataPlacemark*>::const_iterator iter = d->m_containerMap[ containerName ]->constBegin();
         QVector<Marble::GeoDataPlacemark*>::const_iterator end = d->m_containerMap[ containerName ]->constEnd();
         GeoDataPlacemark* placemark;
-        for(; iter != end;) {
+        for(; iter != end;iter++) {
             placemark = *iter;
             d->m_placeMarkContainer.remove( d->m_placeMarkContainer.indexOf( placemark ) );
-            d->m_containerMap[ containerName ]->pop_front();
             delete placemark;
         }
         delete d->m_containerMap[ containerName ];
+        d->m_containerMap.remove( containerName );
     }
     if ( finalize ) {
         generateIndex();
