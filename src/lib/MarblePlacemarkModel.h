@@ -116,7 +116,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      *
      * Note: The model takes ownership of the place marks!
      */
-    void removePlaceMarks( QString &containerName,
+    void removePlaceMarks( const QString &containerName,
                            bool finalize = true );
 
     /**

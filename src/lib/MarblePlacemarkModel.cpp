@@ -242,7 +242,7 @@ void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks,
     }
 }
 
-void  MarblePlacemarkModel::removePlaceMarks( QString &containerName,
+void  MarblePlacemarkModel::removePlaceMarks( const QString &containerName,
                                               bool finalize )
 {
     if( d->m_containerMap.contains( containerName ) ) {

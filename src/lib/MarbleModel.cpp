@@ -409,13 +409,13 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         }
     }
     // unload old standard Placemarks which are not part of the new map
-    foreach(QString container, loadedContainers) {
+    foreach(const QString& container, loadedContainers) {
         loadedContainers.pop_front();
         qDebug() << "removing container:" << container << (loadList.isEmpty() && loadedContainers.isEmpty());
         d->m_placemarkmanager->model()->removePlaceMarks( container, loadedContainers.isEmpty() );
     }
     // load new standard Placemarks
-    foreach(QString container, loadList) {
+    foreach(const QString& container, loadList) {
         loadList.pop_front();
         d->m_placemarkmanager->addPlaceMarkFile( container, loadList.isEmpty() );
     }
