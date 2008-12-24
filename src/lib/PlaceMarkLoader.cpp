@@ -38,6 +38,10 @@ void PlaceMarkLoader::run() {
     QString defaultsrcname;
     QString defaulthomecache;
 
+    if( m_filepath.endsWith(".kml") ) {
+        m_filepath.remove(QRegExp("\\.kml$"));
+    }
+    qDebug() << "starting parser for" << m_filepath;
     PlaceMarkContainer *container = new PlaceMarkContainer( m_filepath );
 
     if ( !m_filepath.contains( "\\" ) && !m_filepath.contains( '/' ) ) {

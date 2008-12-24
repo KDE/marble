@@ -36,6 +36,7 @@
 #include "GeoSceneMap.h"
 #include "GeoSceneTexture.h"
 #include "GeoSceneVector.h"
+#include "GeoSceneXmlDataSource.h"
 
 #include "DgmlAuxillaryDictionary.h"
 
@@ -400,8 +401,9 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             for (; itds != endds; ++itds) {
                 GeoSceneAbstractDataset* dataset = *itds;
                 if( dataset->fileFormat() == "KML" ) {
-                    loadedContainers.removeOne( dataset->name() );
-                    loadList << dataset->name();
+                    qDebug() << reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename();
+                    loadedContainers.removeOne( reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename() );
+                    loadList << reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename();
                 }
             }
         }
