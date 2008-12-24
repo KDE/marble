@@ -26,6 +26,7 @@ class PlaceMarkLoader : public QThread {
         void run();
     Q_SIGNALS:
         void placeMarksLoaded( PlaceMarkLoader*, PlaceMarkContainer * );
+        void placeMarkLoaderFailed( PlaceMarkLoader* );
     private:
         bool loadFile( const QString& filename, PlaceMarkContainer* placeMarkContainer );
         void saveFile( const QString& filename, PlaceMarkContainer* placeMarkContainer );

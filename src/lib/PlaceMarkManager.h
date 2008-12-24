@@ -104,6 +104,7 @@ class PlaceMarkManager : public QObject
 
  private Q_SLOTS:
     void loadPlaceMarkContainer( PlaceMarkLoader* loader, PlaceMarkContainer * );
+    void cleanupLoader( PlaceMarkLoader* loader );
 
  private:
     void importKml( const QString&, PlaceMarkContainer* );

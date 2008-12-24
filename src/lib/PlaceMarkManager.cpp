@@ -106,8 +106,18 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalize 
         PlaceMarkLoader* loader = new PlaceMarkLoader( this, filepath );
         connect (   loader, SIGNAL( placeMarksLoaded( PlaceMarkLoader*, PlaceMarkContainer * ) ), 
                     this, SLOT( loadPlaceMarkContainer( PlaceMarkLoader*, PlaceMarkContainer * ) ) );
+        connect (   loader, SIGNAL( placeMarkLoaderFailed( PlaceMarkLoader* ) ), 
+                    this, SLOT( cleanupLoader( PlaceMarkLoader* ) ) );
         m_loaderList.append( loader );
         loader->start();
+    }
+}
+
+void PlaceMarkManager::cleanupLoader( PlaceMarkLoader* loader )
+{
+    m_loaderList.removeAll( loader );
+    if ( loader->isFinished() ) {
+         delete loader;
     }
 }
 

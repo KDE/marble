@@ -44,8 +44,10 @@ void PlaceMarkLoader::run() {
         defaultcachename = MarbleDirs::path( "placemarks/" + m_filepath + ".cache" );
         defaultsrcname   = MarbleDirs::path( "placemarks/" + m_filepath + ".kml");
         defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + m_filepath + ".cache";
-    } else
+    } else {
+        emit placeMarkLoaderFailed( this );
         exit(0);
+    }
 
     if ( QFile::exists( defaultcachename ) ) {
         qDebug() << "Loading Default Placemark Cache File:" + defaultcachename;
@@ -90,6 +92,7 @@ void PlaceMarkLoader::run() {
     }
     else {
         qDebug() << "No Default Placemark Source File for " << m_filepath;
+        emit placeMarkLoaderFailed( this );
     }
 }
 
