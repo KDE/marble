@@ -51,3 +51,4 @@ QString GeoSceneXmlDataSource::type()
 }
 
 }
+
