@@ -84,16 +84,18 @@ void MarblePlacemarkModel::generateIndex()
     t.start();
     qDebug() << "start generate indexes";
 
+    d->m_persistantIndexList.clear();
+
     const int constRowCount = rowCount();
 
 
-    for ( int i = d->m_persistantIndexList.size(); i < constRowCount; ++i )
+    for ( int i = 0; i < constRowCount; ++i )
     {
         d->m_persistantIndexList << index( i, 0 );
     }
     qDebug() << "generated indexes";
 
-    qDebug("MarblePlacemarkModel (generateIndex): Time elapsed: %d ms", t.elapsed());
+    qDebug() << "MarblePlacemarkModel (generateIndex): Time elapsed:" << t.elapsed() << "ms";
 }
 
 QList<QPersistentModelIndex> MarblePlacemarkModel::persistentIndexList () const
