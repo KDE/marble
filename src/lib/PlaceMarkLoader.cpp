@@ -44,14 +44,9 @@ void PlaceMarkLoader::run() {
     qDebug() << "starting parser for" << m_filepath;
     PlaceMarkContainer *container = new PlaceMarkContainer( m_filepath );
 
-    if ( !m_filepath.contains( "\\" ) && !m_filepath.contains( '/' ) ) {
-        defaultcachename = MarbleDirs::path( "placemarks/" + m_filepath + ".cache" );
-        defaultsrcname   = MarbleDirs::path( "placemarks/" + m_filepath + ".kml");
-        defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + m_filepath + ".cache";
-    } else {
-        emit placeMarkLoaderFailed( this );
-        exit(0);
-    }
+    defaultcachename = MarbleDirs::path( "placemarks/" + m_filepath + ".cache" );
+    defaultsrcname   = MarbleDirs::path( "placemarks/" + m_filepath + ".kml");
+    defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + m_filepath + ".cache";
 
     if ( QFile::exists( defaultcachename ) ) {
         qDebug() << "Loading Default Placemark Cache File:" + defaultcachename;
