@@ -115,22 +115,51 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
         changeBackground( target );
     }
 
-    // Rerender worldmap pixmap if the size has changed
-    if (    m_worldmap.size() != mapRect.size().toSize() 
-         || target != m_target ) {
+    if ( m_svgobj ) {
+        // Rerender worldmap pixmap if the size has changed
+        if ( m_worldmap.size() != mapRect.size().toSize() 
+            || target != m_target ) {
 
-        m_worldmap = QPixmap( mapRect.size().toSize() );
-        m_worldmap.fill( Qt::transparent );
-        QPainter mapPainter;
-        mapPainter.begin(&m_worldmap);
-        mapPainter.setViewport( m_worldmap.rect() );
-        m_svgobj->render( &mapPainter );
-        mapPainter.end(); 
+            m_worldmap = QPixmap( mapRect.size().toSize() );
+            m_worldmap.fill( Qt::transparent );
+            QPainter mapPainter;
+            mapPainter.begin(&m_worldmap);
+            mapPainter.setViewport( m_worldmap.rect() );
+            m_svgobj->render( &mapPainter );
+            mapPainter.end(); 
+        }
 
-        m_target = target;
+        painter->drawPixmap( QPoint( 0, 0 ), m_worldmap );
+    }
+    else {
+        painter->setPen( QPen( Qt::DashLine ) );
+        painter->drawRect( QRectF( QPoint( 0, 0 ), mapRect.size().toSize() ) );
+
+        for ( int y = 1; y < 4; ++y ) {
+            if ( y == 2 ) {
+                painter->setPen( QPen( Qt::DashLine ) );
+            }
+            else {
+                painter->setPen( QPen( Qt::DotLine ) );
+            }
+
+            painter->drawLine( 0.0, 0.25 * y * mapRect.height(),
+                                mapRect.width(), 0.25 * y * mapRect.height() );
+        }
+        for ( int x = 1; x < 8; ++x ) {
+            if ( x == 4 ) {
+                painter->setPen( QPen( Qt::DashLine ) );
+            }
+            else {
+                painter->setPen( QPen( Qt::DotLine ) );
+            }
+
+            painter->drawLine( 0.125 * x * mapRect.width(), 0,
+                               0.125 * x * mapRect.width(), mapRect.height() );
+        }
     }
 
-    painter->drawPixmap( QPoint( 0, 0 ), m_worldmap );
+    m_target = target;
 
     // Now draw the latitude longitude bounding box
     qreal xWest = mapRect.width() / 2.0 
@@ -244,6 +273,7 @@ bool MarbleOverviewMap::eventFilter( QObject *object, QEvent *e )
 void MarbleOverviewMap::changeBackground( const QString& target ) {
 
     delete m_svgobj;
+    m_svgobj = 0;
 
     if ( target == "moon" ) {
         m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/lunarmap.svg" ),
@@ -251,8 +281,10 @@ void MarbleOverviewMap::changeBackground( const QString& target ) {
         return;
     }
 
-    m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/worldmap.svg" ),
-                                 this );
+    if ( target == "earth" ) {
+        m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/worldmap.svg" ),
+                                    this );
+    }
 }
 
 }

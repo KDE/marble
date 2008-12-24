@@ -779,31 +779,33 @@ qreal MarbleModel::planetRadius()   const
 
         // I'd like to be able to use strings in switch statements ... 
 
+        // Make sure to use the radius, not the diameter!
+
         // planets
                if ( target == "mercury" ) {
-            return  4880000.0;
+            return  2440000.0;
         } else if ( target == "venus" ) {
-            return 12103600.0;
+            return  6051800.0;
         } else if ( target == "earth" ) {
             return  6378000.0;
         } else if ( target == "mars" ) {
-            return  6794000.0;
+            return  3397000.0;
         } else if ( target == "jupiter" ) {
-            return  142984000.0;
+            return  71492000.0;
         } else if ( target == "saturn" ) {
-            return  120536000.0;
+            return  60268000.0;
         } else if ( target == "uranus" ) {
-            return  51118000.0;
+            return  25559000.0;
         } else if ( target == "neptune" ) {
-            return  49532000.0;
+            return  24766000.0;
 
         // dwarf planets ... (everybody likes pluto)
         } else if ( target == "pluto" ) {
-            return  49532000.0;
+            return  1151000.0;
 
         // sun and moon
         } else if ( target == "sun" ) {
-            return  1390000000.0;
+            return  695000000.0;
         } else if ( target == "moon" ) {
             return  1738000.0;
         }

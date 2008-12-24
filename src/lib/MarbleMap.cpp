@@ -161,6 +161,13 @@ void  MarbleMapPrivate::paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect
 
 void MarbleMapPrivate::drawAtmosphere()
 {
+    // Only draw an atmosphere if planet is earth
+    GeoSceneDocument * mapTheme = m_viewParams.mapTheme();
+    if ( mapTheme ) {
+        if ( mapTheme->head()->target() != "earth" )
+            return;
+    }
+
     // Only draw an atmosphere if projection is spherical
     if ( m_viewParams.projection() != Spherical )
         return;

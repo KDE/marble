@@ -187,7 +187,7 @@ QRectF MarbleAbstractFloatItem::renderedRect() const
 QPainterPath MarbleAbstractFloatItem::backgroundShape() const
 {
     QPainterPath path;
-    path.addRect( QRectF( 0.0, 0.0, d->m_renderedRect.size().width() - 1, d->m_renderedRect.size().height() - 1 ) );
+    path.addRect( QRectF( 0.0, 0.0, d->m_renderedRect.size().width(), d->m_renderedRect.size().height() ) );
     return path;
 }
 
@@ -380,8 +380,7 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
         // or other important common properties
         if ( ( d->s_pixmapCacheEnabled && d->m_newItemProperties ) || d->m_cachePixmap.isNull() ) {
             // Add extra space for the border
-            QSize cachePixmapSize = d->m_size.toSize();
-
+            QSize cachePixmapSize = d->m_size.toSize() + QSize( 1, 1 ); // adding a pixel for rounding errors
 
             if ( d->m_size.isValid() && !d->m_size.isNull() ) {
                 d->m_cachePixmap = QPixmap( cachePixmapSize ).copy();

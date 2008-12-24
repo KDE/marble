@@ -254,7 +254,14 @@ void NavigationFloatItem::updateButtons( int value )
         QRegion dirtyRegion(floatItemRect.toRect());
     
         m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,  false );
-        m_marbleWidget->repaint(dirtyRegion);
+
+        if ( m_repaintScheduled ) {
+            m_marbleWidget->repaint();
+        }
+        else {
+            m_marbleWidget->repaint(dirtyRegion);
+        }
+
         m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,  m_marbleWidget->map()->mapCoversViewport() );
         
         m_repaintScheduled = true;

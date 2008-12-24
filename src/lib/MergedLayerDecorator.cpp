@@ -72,8 +72,12 @@ void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapT
             paintClouds();
         }
     }
-    if ( m_sunLocator->getShow() )
-      paintSunShading();
+    if ( m_sunLocator->getShow() && mapTheme ) {
+        if (   mapTheme->head()->target() == "earth" 
+            || mapTheme->head()->target() == "moon" ) {
+            paintSunShading();
+        }
+    }
     if ( m_showTileId )
       paintTileId( themeId );
 }
