@@ -44,9 +44,26 @@ void PlaceMarkLoader::run() {
     qDebug() << "starting parser for" << m_filepath;
     PlaceMarkContainer *container = new PlaceMarkContainer( m_filepath );
 
-    defaultcachename = MarbleDirs::path( "placemarks/" + m_filepath + ".cache" );
-    defaultsrcname   = MarbleDirs::path( "placemarks/" + m_filepath + ".kml");
-    defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + m_filepath + ".cache";
+    QFileInfo fileinfo(m_filepath);
+    if ( fileinfo.isAbsolute() ) {
+        // We got an _absolute_ path now: e.g. "/patrick.kml"
+        defaultcachename = m_filepath + ".cache";
+        defaultsrcname   = m_filepath + ".kml";
+    }
+    else {
+        if ( m_filepath.contains( '/' ) ) {
+            // _relative_ path: "maps/mars/viking/patrick.kml" 
+            defaultcachename = MarbleDirs::path( m_filepath + ".cache" );
+            defaultsrcname   = MarbleDirs::path( m_filepath + ".kml");
+            defaulthomecache = MarbleDirs::localPath() + m_filepath + ".cache";
+        }
+        else {
+            // _standard_ shared placemarks: "placemarks/patrick.kml"
+            defaultcachename = MarbleDirs::path( "placemarks/" + m_filepath + ".cache" );
+            defaultsrcname   = MarbleDirs::path( "placemarks/" + m_filepath + ".kml");
+            defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + m_filepath + ".cache";
+        }
+    }
 
     if ( QFile::exists( defaultcachename ) ) {
         qDebug() << "Loading Default Placemark Cache File:" + defaultcachename;
