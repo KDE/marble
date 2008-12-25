@@ -51,7 +51,7 @@ static QString guessWikipediaDomain()
         }
     }
 
-    return  code;
+    return QString ( "http://%1.wikipedia.org/" ).arg ( code );
 }
 
 TinyWebBrowser::TinyWebBrowser ( QWidget *parent )
@@ -136,13 +136,11 @@ QVariant TinyWebBrowser::loadResource ( int type, const QUrl &url )
 void TinyWebBrowser::setSource ( const QString& urlString )
 {
     m_source = urlString;
-    m_source.remove(QRegExp("[Â|°]"));//this will remove the spurious Â° ,,thats creeping in urlString
-    QStringList localSplittedLatLon = m_source.split(QRegExp("(\\s|,|E|N)"), QString::SkipEmptyParts) ;
-    m_downloadManager->addJob(QUrl(QString("http://ws.geonames.org/")
-                                   + QString("findNearbyWikipediaJSON?radius=40&maxRows=10&lang=")
-                                   + guessWikipediaDomain()
-                                   + QString("&lat=") + localSplittedLatLon[1]
-                                   + QString("&lng=") + localSplittedLatLon[0]) , "wikia", "wikia");
+
+    if ( !m_storagePolicy->fileExists ( m_source ) )
+        m_downloadManager->addJob ( m_source, m_source );
+    else
+        slotDownloadFinished ( m_source, m_source );
 }
 
 void TinyWebBrowser::print()
@@ -156,50 +154,8 @@ void TinyWebBrowser::print()
 
 void TinyWebBrowser::slotDownloadFinished ( const QString& relativeUrlString, const QString &id )
 {
-    int localCounter;
-    localStorageOfParsedOutput = wikipediaJsonParser.parseAllObjects(QString::fromUtf8(m_storagePolicy->data(id)));
-    QString localCitySummary;
-    if (relativeUrlString == "wikia") 
-    {
-        QString htmlContent;
-        if (localStorageOfParsedOutput.empty() == true) 
-        {
-            htmlContent = "<h1>No Wikipedia article Found in this Region</h1>";
-        } 
-        else 
-        {
-            for (localCounter = 0 ; localCounter < localStorageOfParsedOutput[0].numberOfObjects ; localCounter++)
-            {
-            
-            if ( localStorageOfParsedOutput[localCounter].feature == "city" )
-            {
-            /*qDebug() << "citydistance" << localStorageOfParsedOutput [ localCounter ] . distance << localStorageOfParsedOutput [ localCounter ] . title ;*/
-            localCitySummary += "<p> <a href =\"http://"
-                                + localStorageOfParsedOutput[localCounter].wikipediaUrl
-                                + "\"><b>"
-                                + localStorageOfParsedOutput[localCounter].title + "</b></a><br><b>Summary:</b>"
-                                + localStorageOfParsedOutput[localCounter].summary
-                                + "</p>";
-            }
-            else 
-          {
-          /*qDebug() << "distance" <<localStorageOfParsedOutput [ localCounter ] . distance << localStorageOfParsedOutput [ localCounter ] . title ;*/
-             htmlContent +=  "<p> <a href =\"http://"
-                                + localStorageOfParsedOutput[localCounter].wikipediaUrl
-                                + "\"><b>"
-                                + localStorageOfParsedOutput[localCounter].title + "</b></a><br><b>Summary:</b>"
-                                + localStorageOfParsedOutput[localCounter].summary
-                                + "</p>";
-            }
-            }
-            
-            htmlContent = "<h1>Wikipedia articles from this Region</h1> " 
-                            +localCitySummary
-                            +htmlContent;
-        }
-        htmlContent += "<br><i>Provided under cc-by licence (creative commons attributions license) By GeoNames</i>"     ;  //The page is being converted to simple html
-        setContentHtml(htmlContent);
-    } 
+    if ( relativeUrlString == m_source )
+        setContentHtml ( QString::fromUtf8 ( m_storagePolicy->data ( id ) ) );//The page is being converted to simple html
     else
         viewport()->update();
 }

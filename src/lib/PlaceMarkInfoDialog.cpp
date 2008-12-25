@@ -38,7 +38,7 @@ PlaceMarkInfoDialog::PlaceMarkInfoDialog(const QPersistentModelIndex &index, QWi
 
     connect( m_pPrintButton, SIGNAL( clicked() ),
              m_pWikipediaBrowser, SLOT( print() ) );
-    // m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>() hold the coordinate of current placemark        
+    // m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>() hold the coordinate of current placemark	
     setWindowTitle( tr("Marble Info Center - %1").arg( m_index.data().toString() ) );
 //  The page to shown in placemark is emitted here ..
     connect( m_pWikipediaBrowser, SIGNAL( statusMessage( QString ) ),
@@ -192,7 +192,8 @@ void PlaceMarkInfoDialog::showContent()
         area_val_lbl->setVisible( false );
         area_lbl->setVisible( false );
     }
-    emit source ( m_index.data ( MarblePlacemarkModel::CoordinateRole ) . value<GeoDataCoordinates>() . toString ( GeoDataCoordinates::Decimal ) );
+
+    emit source( QString("wiki/%1").arg( m_index.data().toString() ) );
 }
 
 
@@ -204,7 +205,7 @@ void PlaceMarkInfoDialog::requestFlag( const QString& countrycode )
     if ( QFile::exists( filename ) ) {
         connect( m_flagcreator, SIGNAL( flagDone() ), 
                  this,          SLOT( setFlagLabel() ) );
-        QTimer::singleShot(100, m_flagcreator, SLOT(slotDrawFlag()));   
+        QTimer::singleShot(100, m_flagcreator, SLOT(slotDrawFlag()));	
     }
 } 
 
