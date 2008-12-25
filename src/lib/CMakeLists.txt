@@ -122,7 +122,7 @@ set(marblewidget_SRCS
     TileLoaderHelper.cpp
     TileCreator.cpp
     TinyWebBrowser.cpp
-    #jsonparser.cpp
+    jsonparser.cpp
     VectorComposer.cpp
     VectorMap.cpp
     BoundingBox.cpp

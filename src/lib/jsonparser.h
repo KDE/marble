@@ -1,0 +1,65 @@
+//
+// This file is part of the Marble Desktop Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+//
+// Author:  <Shashank Singh>, (C) 2008
+//
+
+#ifndef JSONPARSER_H
+#define JSONPARSER_H
+
+#include <QtScript/QtScript>
+#include <QList>
+#include <QObject>
+#include <QDebug>
+#include <QtScript/QScriptValue>
+#include <QtScript/QScriptEngine>
+/**
+This is a generic class built up for parsing Json that is JavaScript Object Notification
+FIXME: the class presently has no sanity checking mechanism,, it just can't check wether the input given to it is only JSON or Javascript ; a point of potential breach for the software.
+sanity checking would include :
+(1)regex matching for following characters "" {} , [a-zA-Z] everything else should be discarded (but some unicode names could pose problem)
+(2)checking for javascript constructs and eliminating them.
+(3)some other plan that i have yet not thought upon :)
+    @author Shashank Singh
+*/
+struct wikipediaLinkStructure {
+    int numberOfObjects;
+    QString summary;
+    double distance;
+    QString title;
+    QString wikipediaUrl;
+    int elevation;
+    QString countryCode;
+    double lng;
+    QString feature ;
+    QString lang;
+    double lat;
+    long int population;
+};
+
+class jsonParser : public QObject
+{
+public:
+    jsonParser();
+
+    ~jsonParser();
+
+    wikipediaLinkStructure parseObjectOnPosition(const QString &content, int requiredObjectPosition);   //for parsing single object
+
+    QList<wikipediaLinkStructure> parseAllObjects(const QString &content);   //for parsing a list objects
+
+private:
+    QList <wikipediaLinkStructure> parsedJsonOutput;
+
+    wikipediaLinkStructure dataStorage;
+
+    QScriptEngine myEngine;
+};
+
+
+#endif

@@ -23,6 +23,9 @@
 #include <QtCore/QVariant>
 #include <QtGui/QTextBrowser>
 
+#include "jsonparser.h"
+
+
 class QUrl;
 
 namespace Marble
@@ -62,6 +65,8 @@ class TinyWebBrowser : public QTextBrowser
         CacheStoragePolicy *m_storagePolicy;
         HttpDownloadManager *m_downloadManager;
         QString         m_source;
+    jsonParser wikipediaJsonParser;
+    QList <wikipediaLinkStructure> localStorageOfParsedOutput;
 };
 
 }
