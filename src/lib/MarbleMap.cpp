@@ -1012,8 +1012,14 @@ void MarbleMap::setShowCrosshairs( bool visible )
 
 void MarbleMap::setShowClouds( bool visible )
 {
+    bool previousVisible = d->m_model->layerDecorator()->showClouds();
+
     d->m_model->layerDecorator()->setShowClouds( visible );
-    d->m_model->update();
+
+    if ( previousVisible != visible ) {
+        qDebug() << "Changing cloud layer";
+        d->m_model->update();
+    }
 }
 
 void MarbleMap::setShowGrid( bool visible )
@@ -1274,7 +1280,7 @@ void MarbleMap::updateSun()
     // Update the sun shading.
     //SunLocator  *sunLocator = d->m_model->sunLocator();
 
-    //qDebug() << "Updating the sun shading map...";
+    qDebug() << "MarbleMap: Updating the sun shading map...";
     d->m_model->update();
     setNeedsUpdate();
     //qDebug() << "Finished updating the sun shading map";

@@ -16,6 +16,7 @@
 
 #include "ExtDateTime.h"
 
+#include <QtCore/QDebug>
 #include <QtCore/QTimer>
 
 using namespace Marble;
@@ -96,6 +97,7 @@ void ExtDateTime::timerTimeout()
     int  min = m_datetime.time().minute();
     if ( m_lastmin != min ) {
         m_lastmin = min;
+        qDebug() << "timeChanged";
         emit timeChanged();
     }
 }

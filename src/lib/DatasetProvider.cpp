@@ -16,6 +16,8 @@
 #include <QtCore/QDebug>
 
 // Local dir
+#include "AbstractTile.h"
+#include "TileId.h"
 
 namespace Marble
 {
@@ -38,6 +40,14 @@ DatasetProvider::~DatasetProvider()
 {
     delete d;
 }
+
+void DatasetProvider::loadDatasets( AbstractTile * tile )
+{
+    TileId id = tile->id();
+
+    qDebug() << "DatasetProvider" << id.toString();
+}
+
 
 
 }

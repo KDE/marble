@@ -248,6 +248,8 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     tile = new TextureTile( tileId );
     d->m_tileHash[tileId] = tile;
 
+    d->m_datasetProvider->loadDatasets( tile );
+
     if ( d->m_downloadManager != 0 ) {
         connect( tile, SIGNAL( downloadTile( QUrl, QString, QString ) ),
                  d->m_downloadManager, SLOT( addJob( QUrl, QString, QString ) ) );
@@ -387,6 +389,7 @@ void TileLoader::reloadTile( const QString& serverUrlString, const QString &rela
 
 void TileLoader::update()
 {
+    qDebug() << "TileLoader::update()";
     flush(); // trigger a reload of all tiles that are currently in use
     d->m_tileCache.clear(); // clear the tile cache in physical memory
     emit tileUpdateAvailable();

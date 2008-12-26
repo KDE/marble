@@ -771,6 +771,7 @@ void MarbleModelPrivate::geoDataDocumentLoaded( GeoDataDocument& document )
 
 void MarbleModel::update()
 {
+    qDebug() << "MarbleModel::update()";
     QTimer::singleShot( 0, d->m_tileLoader, SLOT( update() ) );
 }
 

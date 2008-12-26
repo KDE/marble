@@ -20,6 +20,8 @@ namespace Marble
 
 class DatasetProviderPrivate;
 
+class AbstractTile;
+
 /**
  * @short The class that provides datasets to the tiles.
  *
@@ -35,7 +37,7 @@ class DatasetProvider : public QObject
 
  public Q_SLOTS:
 
-//    void loadDatasets( const Tile
+    void loadDatasets( AbstractTile * tile ); 
 
  private:
     Q_DISABLE_COPY( DatasetProvider )

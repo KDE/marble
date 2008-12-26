@@ -1251,7 +1251,7 @@ void MarbleWidget::updateSun()
     // Update the sun shading.
     //SunLocator  *sunLocator = d->m_model->sunLocator();
 
-    //qDebug() << "Updating the sun shading map...";
+    qDebug() << "MarbleWidget: Updating the sun shading map...";
     d->m_model->update();
     setNeedsUpdate();
     //qDebug() << "Finished updating the sun shading map";

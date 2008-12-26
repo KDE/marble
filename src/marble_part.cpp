@@ -323,6 +323,7 @@ void MarblePart::copyCoordinates()
 
 void MarblePart::readSettings()
 {
+    qDebug() << "Start: MarblePart::readSettings()";
     // Last location on quit
     if ( MarbleSettings::onStartup() == Marble::LastLocationVisited ) {
         m_controlView->marbleWidget()->centerOn(
@@ -382,6 +383,7 @@ void MarblePart::readSettings()
     }
 
     slotUpdateSettings();
+    qDebug() << "Stop: MarblePart::readSettings()";
 }
 
 void MarblePart::writeSettings()

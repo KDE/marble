@@ -169,6 +169,7 @@ void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol,
 
 void SunLocator::update()
 {
+    qDebug() << "void SunLocator::update()";
     updatePosition();
     if ( m_show || m_centered )
     {
@@ -184,6 +185,11 @@ void SunLocator::update()
 
 void SunLocator::setShow(bool show)
 {
+    if ( show == m_show ) {
+        return;
+    }
+    
+    qDebug() << "void SunLocator::setShow( bool )";
     m_show = show;
     updatePosition();
 
@@ -192,6 +198,10 @@ void SunLocator::setShow(bool show)
 
 void SunLocator::setCentered(bool centered)
 {
+    if ( centered == m_centered ) {
+        return;
+    }
+
     qDebug() << "SunLocator::setCentered";
     qDebug() << "sunLocator =" << this;
     m_centered = centered;
@@ -204,10 +214,19 @@ void SunLocator::setCentered(bool centered)
 
 void SunLocator::setBody(QString body)
 {
+    if ( body == m_body ) {
+        return;
+    }
+
+    QString previousBody = m_body;
+
+    qDebug() << "SunLocator::setBody( QString )";    
     m_body = body;
     updatePosition();
 
-    emit updateSun();
+    if ( previousBody != "" ) {
+        emit updateSun();
+    }
 }
 
 #include "SunLocator.moc"
