@@ -224,7 +224,7 @@ void SunLocator::setBody(QString body)
     m_body = body;
     updatePosition();
 
-    if ( previousBody != "" ) {
+    if ( !previousBody.isEmpty() ) {
         emit updateSun();
     }
 }
