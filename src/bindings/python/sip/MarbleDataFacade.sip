@@ -29,9 +29,10 @@ public:
 
 //mt undefined symbol: MarbleModel* model -- need mapped type?
 //mt     explicit           MarbleDataFacade (MarbleModel* model);
-
+    qreal                   planetRadius () const;
 
     QDateTime               dateTime () const;
+    QString                 target () const;
 
 
 //mt undefined symbol: MarbleGeoDataModel* None -- need mapped type?

@@ -29,6 +29,7 @@ public:
     explicit                GeoDataIconStyle (const QPixmap& icon, const QPointF& hotSpot = QPointF(0.5,0.5));
     void                    setIcon (const QPixmap& icon);
     QPixmap                 icon () const;
+    void                    setIconPath (const QString& filename);
     void                    setHotSpot (const QPointF& hotSpot, Marble::GeoDataHotSpot::Units xunits, Marble::GeoDataHotSpot::Units yunits);
     const QPointF&          hotSpot () const;
     void                    setScale (const float& scale /in/);
