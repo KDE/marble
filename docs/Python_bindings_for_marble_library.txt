@@ -1,0 +1,5 @@
+These Python bindings are experimental meaning that there is no guarantee of backwards compatibility with future KDE 4 series releases. This is because the C++ marble library itself doesn't carry a guarantee of backwards compatibility, although this may change in the future.
+
+The bindings are not built by default. To build them pass the option -DEXPERIMENTAL_PYTHON_BINDINGS=TRUE to cmake and make sure that the Python support from the kde-bindings module is installed.
+
+-- Simon Edwards <simon@simonzone.com>
