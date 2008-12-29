@@ -21,7 +21,7 @@ namespace Marble
 class GeoDataLinearRing : Marble::GeoDataLineString
 {
 %TypeHeaderCode
-#include <marble/GeoDataLinearRing.h>
+#include <GeoDataLinearRing.h>
 %End
 
 public:

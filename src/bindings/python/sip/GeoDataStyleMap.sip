@@ -17,11 +17,10 @@
 
 namespace Marble
 {
-//ub class has undefined base class
-//ub class GeoDataStyleMap : Marble::GeoDataStyleSelector, QMap<QString,QString>
+class GeoDataStyleMap : Marble::GeoDataStyleSelector /*, QMap<QString,QString> */
 {
 %TypeHeaderCode
-#include <marble/GeoDataStyleMap.h>
+#include <GeoDataStyleMap.h>
 %End
 
 public:
@@ -30,6 +29,7 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
                             GeoDataStyleMap ();
+//FIXME explicitly add python dict methods.
 
 private:
                             GeoDataStyleMap (const Marble::GeoDataStyleMap&);

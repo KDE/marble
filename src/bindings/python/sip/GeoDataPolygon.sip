@@ -33,15 +33,15 @@ public:
     Marble::TessellationFlags  tessellationFlags () const;
     void                    setTessellationFlags (Marble::TessellationFlags f);
 //FIXME    Marble::GeoDataLatLonAltBox  latLonAltBox () const;
-//FIXME    Marble::GeoDataLinearRing&  outerBoundary () const;
-//FIXME    void                    setOuterBoundary (Marble::GeoDataLinearRing* boundary);
+    Marble::GeoDataLinearRing&  outerBoundary () const;
+    void                    setOuterBoundary (Marble::GeoDataLinearRing* boundary);
 
 
 //mt undefined symbol: QVector<Marble::GeoDataLinearRing*> None -- need mapped type?
 //mt     QVector<Marble::GeoDataLinearRing*>  innerBoundaries () const;
 
 
-//FIXME    void                    appendInnerBoundary (Marble::GeoDataLinearRing* boundary);
+    void                    appendInnerBoundary (Marble::GeoDataLinearRing* boundary);
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
     virtual EnumGeometryId  geometryId () const;

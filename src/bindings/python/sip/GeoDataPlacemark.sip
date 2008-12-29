@@ -35,8 +35,8 @@ public:
     void                    setCoordinate (const Marble::GeoDataPoint& point);
     void                    setGeometry (Marble::GeoDataPoint* entry);
     void                    setGeometry (Marble::GeoDataLineString* entry);
-//FIXME    void                    setGeometry (Marble::GeoDataLinearRing* entry);
-//FIXME    void                    setGeometry (Marble::GeoDataMultiGeometry* entry);
+    void                    setGeometry (Marble::GeoDataLinearRing* entry);
+    void                    setGeometry (Marble::GeoDataMultiGeometry* entry);
     void                    setGeometry (Marble::GeoDataPolygon* entry);
     qreal                   area () const;
     void                    setArea (qreal area);
