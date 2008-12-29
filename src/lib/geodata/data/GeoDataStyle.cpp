@@ -19,7 +19,7 @@ class GeoDataStylePrivate
   public:
     GeoDataStylePrivate()
         : m_iconStyle( 0 ),
-          m_labelStyle( 0 ),
+          m_labelStyle( new GeoDataLabelStyle() ),
           m_lineStyle( 0 ),
           m_polyStyle( 0 )
     {
