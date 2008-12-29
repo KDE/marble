@@ -100,6 +100,7 @@ class PlaceMarkManager : public QObject
     void loadKmlFromData( const QString& data, bool clearPrevious = false );
 
  Q_SIGNALS:
+    void geoDataDocumentAdded( GeoDataDocument* );
     void geoDataDocumentLoaded( GeoDataDocument& );
 
  private Q_SLOTS:

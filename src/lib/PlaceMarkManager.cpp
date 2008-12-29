@@ -108,6 +108,8 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalize 
                     this, SLOT( loadPlaceMarkContainer( PlaceMarkLoader*, PlaceMarkContainer * ) ) );
         connect (   loader, SIGNAL( placeMarkLoaderFailed( PlaceMarkLoader* ) ), 
                     this, SLOT( cleanupLoader( PlaceMarkLoader* ) ) );
+        connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
+                    this, SIGNAL( geoDataDocumentAdded( GeoDataDocument* ) ) );
         m_loaderList.append( loader );
         loader->start();
     }
