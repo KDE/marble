@@ -17,6 +17,7 @@ namespace Marble
 {
 class MarblePlacemarkModel;
 class PlaceMarkContainer;
+class GeoDataDocument;
 
 class PlaceMarkLoader : public QThread {
     Q_OBJECT
@@ -27,6 +28,7 @@ class PlaceMarkLoader : public QThread {
     Q_SIGNALS:
         void placeMarksLoaded( PlaceMarkLoader*, PlaceMarkContainer * );
         void placeMarkLoaderFailed( PlaceMarkLoader* );
+        void newGeoDataDocumentAdded( GeoDataDocument* );
     private:
         bool loadFile( const QString& filename, PlaceMarkContainer* placeMarkContainer );
         void saveFile( const QString& filename, PlaceMarkContainer* placeMarkContainer );

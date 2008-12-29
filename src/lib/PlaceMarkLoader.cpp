@@ -139,6 +139,7 @@ void PlaceMarkLoader::importKml( const QString& filename,
     *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(), 
                                               m_filepath );
 
+    emit newGeoDataDocumentAdded( dataDocument );
 }
 
 void PlaceMarkLoader::saveFile( const QString& filename,
