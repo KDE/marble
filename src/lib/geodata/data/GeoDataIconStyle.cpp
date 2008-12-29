@@ -21,14 +21,14 @@ class GeoDataIconStylePrivate
   public:
     GeoDataIconStylePrivate() 
         : m_scale( 1.0 ),
-          m_icon( QPixmap() ),
+          m_icon( 0 ),
           m_hotSpot( new GeoDataHotSpot() )
     {
     }
 
     GeoDataIconStylePrivate( const QPixmap& icon, const QPointF &hotSpot )
         : m_scale( 1.0 ),
-          m_icon( icon ),
+          m_icon( new QPixmap( icon ) ),
           m_hotSpot( new GeoDataHotSpot( hotSpot ) )
     {
     }
@@ -36,12 +36,14 @@ class GeoDataIconStylePrivate
     ~GeoDataIconStylePrivate()
     {
         delete m_hotSpot;
+        delete m_icon;
     }
 
     float            m_scale;
 
-    QPixmap          m_icon;    // To save memory we use a pointer
-    GeoDataHotSpot  *m_hotSpot; // default unit is "fraction"
+    QPixmap         *m_icon;
+    QString          m_iconPath;
+    GeoDataHotSpot  *m_hotSpot;
     mutable QPointF  m_pixelHotSpot;
 };
 
@@ -62,12 +64,23 @@ GeoDataIconStyle::~GeoDataIconStyle()
 
 void GeoDataIconStyle::setIcon( const QPixmap &icon )
 {
-    d->m_icon = icon;
+    delete d->m_icon;
+    d->m_icon = new QPixmap( icon );
+}
+
+void GeoDataIconStyle::setIconPath( const QString& filename )
+{
+    d->m_iconPath = filename;
 }
 
 QPixmap GeoDataIconStyle::icon() const
 {
-    return d->m_icon;
+    if(d->m_icon && !d->m_icon->isNull())
+        return *(d->m_icon);
+    else if(!d->m_iconPath.isEmpty())
+        return QPixmap(d->m_iconPath);
+    else
+        return QPixmap();
 }
 
 void GeoDataIconStyle::setHotSpot( const QPointF& hotSpot, 
@@ -85,17 +98,17 @@ const QPointF& GeoDataIconStyle::hotSpot() const // always in pixels, Origin upp
     d->m_pixelHotSpot = d->m_hotSpot->hotSpot( xunits, yunits );
 
     if ( xunits == GeoDataHotSpot::Fraction )
-        d->m_pixelHotSpot.setX( d->m_icon.width()  * d->m_pixelHotSpot.x() );
+        d->m_pixelHotSpot.setX( d->m_icon->width()  * d->m_pixelHotSpot.x() );
     else {
         if ( xunits == GeoDataHotSpot::InsetPixels )
-            d->m_pixelHotSpot.setX( d->m_icon.width()  - d->m_pixelHotSpot.x() );
+            d->m_pixelHotSpot.setX( d->m_icon->width()  - d->m_pixelHotSpot.x() );
     }
 
     if ( yunits == GeoDataHotSpot::Fraction )
-        d->m_pixelHotSpot.setY( d->m_icon.height() * ( 1.0 - d->m_pixelHotSpot.y() ) );
+        d->m_pixelHotSpot.setY( d->m_icon->height() * ( 1.0 - d->m_pixelHotSpot.y() ) );
     else {
         if ( yunits == GeoDataHotSpot::Pixels )
-            d->m_pixelHotSpot.setY( d->m_icon.height() - d->m_pixelHotSpot.y() );
+            d->m_pixelHotSpot.setY( d->m_icon->height() - d->m_pixelHotSpot.y() );
     }
 
     return d->m_pixelHotSpot;
@@ -116,7 +129,10 @@ void GeoDataIconStyle::pack( QDataStream& stream ) const
     GeoDataColorStyle::pack( stream );
 
     stream << d->m_scale;
-    stream << d->m_icon;
+    if(d->m_icon)
+        stream << *(d->m_icon);
+    else
+        stream << QPixmap();
     d->m_hotSpot->pack( stream );
 }
 
@@ -125,7 +141,9 @@ void GeoDataIconStyle::unpack( QDataStream& stream )
     GeoDataColorStyle::unpack( stream );
 
     stream >> d->m_scale;
-    stream >> d->m_icon;
+    if(!d->m_icon)
+        d->m_icon = new QPixmap;
+    stream >> *(d->m_icon);
     d->m_hotSpot->unpack( stream );
 }
 
