@@ -18,6 +18,8 @@
 %Module PyKDE4.marble
 
 %ModuleHeaderCode
+#pragma GCC visibility push(default)
+
 #include <Quaternion.h>
 #include <global.h>
 %End
