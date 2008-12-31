@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Marble.GeoDataGeometry</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference for Marble
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>GeoDataGeometry Class Reference</h1>
+<code>from PyKDE4.marble import *</code>
+<p>
+Inherits: <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
+Subclasses: <a href="../marble/Marble.GeoDataPolygon.html">Marble.GeoDataPolygon</a><br />
+Namespace: Marble<br />
+<h2>Detailed Description</h2>
+
+<p>A base class for all geodata features
+</p>
+<p>
+GeoDataGeometry is the base class for most geodata classes that
+deal with geometric data (points, linestrings, polygons, etc.)
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataLineString
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataLinearRing
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataPolygon
+</dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189781260">__init__</a> (self, <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189782380">__init__</a> (self, <a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">Marble.AltitudeMode&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189763052">altitudeMode</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189763148">extrude</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">EnumGeometryId&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189762572">geometryId</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189761836">isFolder</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189782028">pack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189762988">setAltitudeMode</a> (self, Marble.AltitudeMode altitudeMode)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189763468">setExtrude</a> (self, bool extrude)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189782892">unpack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj189781260"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj189782380"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td>
+<td class="paramname"><em>other</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj189763052"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">Marble.AltitudeMode altitudeMode</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj189763148"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool extrude</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj189762572"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">EnumGeometryId geometryId</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj189761836"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isFolder</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj189782028"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> pack</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a>&nbsp;</td>
+<td class="paramname"><em>stream</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Serialize the contents of the feature to <b>stream.</b>
+</p></div></div><a class="anchor" name="obj189762988"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setAltitudeMode</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Marble.AltitudeMode&nbsp;</td>
+<td class="paramname"><em>altitudeMode</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj189763468"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setExtrude</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>extrude</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj189782892"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> unpack</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a>&nbsp;</td>
+<td class="paramname"><em>stream</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Unserialize the contents of the feature from <b>stream.</b>
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../marble/index.html">marble</a></li>

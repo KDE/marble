@@ -1,0 +1,116 @@
+***
+*** README for KDE's Doxygen tools
+***
+
+This directory contains tools and data files for Doxygen
+generation. These are the GENERIC files; any module may
+override them by putting specific replacements in doc/api/ .
+This allows modules to customize their appearance as desired.
+The files that may be overridden are:
+
+- doxygen.css      Stylesheet.
+- mainheader.html  Header for front page of dox. This should
+                   not be terribly different from header.html.
+		   It might contain special CSS for the footer.
+- mainfooter.html  Footer for front page of dox. This should at
+                   least credit Doxygen [1] and point to the dox
+		   guidelines [2].
+- header.html      Header file for regular pages.
+- footer.html      Footer file for regular pages.
+- Doxyfile.global  The global (brief) Doxyfile. For a long-style
+                   Doxyfile, see KDE PIM's doc/api/Doxyfile.pim.
+
+The tool for generating dox lives in admin/ :
+
+- doxygen.sh       Script that does all the dox generation work.
+                   See below for usage information.
+
+
+In a configured build directory, you can use "make apidox" to
+generate the API dox for the module -- assuming it has any, of course.
+Writing dox is beyond the scope of this README -- see the notes at
+http://techbase.kde.org/Policies/Library_Documentation_Policy .
+You can generate dox by hand -- without even having a configured
+build directory -- as explained below. There is also documentation
+for the special tags you can enter in Makefile.am anywhere
+in a module to modify dox generation.
+
+
+
+***
+*** Tool usage.
+***
+
+Usage:
+
+doxygen.sh [--recurse] [--modulename] [--doxdatadir=<dir>] [--installdir=<dir>]
+           <top_srcdir> [<subdir>]
+
+--recurse     Also generate dox in subdirs of the given <subdir>. If no
+              <subdir> is given, --recurse is the default and can be
+              turned off with --no-recurse.
+--modulename  By default, apidox are generated in a subdirectory 
+              <modulename>-apidocs/ . You can use --no-modulename to
+              suppress the <modulename> and generate the apidox in
+              a subdirectory apidocs/ . Modulename is the last part of
+              the <top_srcdir> (usually a KDE SVN module name).
+--doxdatadir=<dir> Locate the HTML header files and support graphics.
+              In kdelibs, the subdirectory doc/common/ contains these
+              files (and this README). In an installed KDE system, 
+              $KDEDIR/share/doc/HTML/en/common/ contains a copy.
+              This argument is mandatory if doxygen.sh can't guess where
+              the doxdata lives.
+--installdir=<dir> Locate the directory where apidox from other modules
+              is installed. Subdirectories named *-apidocs/ under the
+              named <dir> are searched for tag files, for cross-module
+              cross-referencing.
+
+
+
+How to generate dox manually: <TODO>
+Plan to fit these tools into ../Doxyfile.am: <TODO>
+Differences with current dox: <TODO>
+
+# A shell script that builds dox without all the tedious mucking about with
+# autoconf and configure. Run it in the "top builddir" with one argument,
+# the "top srcdir". Something like this:
+#
+# cd /mnt/build/kdepim
+# sh /mnt/src/kdepim/doc/api/doxygen.sh /mnt/src/kdepim
+#
+# You can also build single subdirs (for instance, after updating some
+# dox and you don't want to rebuild for the enitre module) by giving the
+# subdirectory _relative to the top srcdir_ as a second argument:
+#
+# sh /mnt/src/kdepim/doc/api/doxygen.sh /mnt/src/kdepim kpilot/lib
+# 
+# When generating dox for kdelibs, a tag file for Qt is also created.
+# The location of Qt is specified indirectly through $QTDOCDIR or,
+# if that is not set, $QTDIR, or otherwise guessed. You may explicitly
+# set the location of a pre-generated tag file with $QTDOCTAG. One
+# typical approach might be:
+#
+# QTDOCTAG=$QTDIR/doc/qt.tag QTDOCDIR=http://doc.trolltech.com/3.3/
+#
+# Finally, there is a --no-recurse option for top-level generation
+# that avoids generating all the subdirectories as well. It also
+# suppresses cleaning up (rm -rf) of the dox direction beforehand.
+#
+# Post-finally, there is a --no-modulename option that builds the
+# dox in "apidocs/" instead of "modulename-apidocs". The former is
+# compatible with the KDE 3.4 build system, the latter is more convenient
+# for the installed dox.
+
+#
+# A shell script to post-process doxy-generated files; the purpose
+# is to make the menu on the left in the file match the actually
+# generated files (ie. leave out namespaces if there are none).
+#
+# Usage: doxyndex.sh <toplevel-apidocs-dir> <relative-html-output-directory>
+#
+# Typically, this means $(top_builddir)/apidocs and something like
+# libfoo/html for the output. For the top-level dig, set relative-html
+# to "." . In non-top directories, both <!-- menu --> and <!-- gmenu -->
+# are calculated and replaced. Top directories get an empty <!-- menu -->
+# if any.
+

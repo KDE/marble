@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Marble.GeoDataLabelStyle</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference for Marble
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>GeoDataLabelStyle Class Reference</h1>
+<code>from PyKDE4.marble import *</code>
+<p>
+Inherits: <a href="../marble/Marble.GeoDataColorStyle.html">Marble.GeoDataColorStyle</a> &#x2192; <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
+
+Namespace: Marble<br />
+<h2>Detailed Description</h2>
+
+<p>specifies how the <b>name</b> of a GeoDataFeature is drawn
+</p>
+<p>
+A GeoDataLabelStyle specifies how the <b>name</b> of a
+GeoDataFeature is drawn in the viewer. A custom color, color mode
+(both inherited from GeoDataColorStyle, and scale for the label
+(name) can be specified.
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj189632940">Alignment</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Corner, Center&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189618284">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189258572">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a> font, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qcolor.html">QColor</a> color)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189103884">__init__</a> (self, <a href="../marble/Marble.GeoDataLabelStyle.html">Marble.GeoDataLabelStyle</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">Marble.GeoDataLabelStyle.Alignment&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189232300">alignment</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189112812">font</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189113484">pack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189234828">scale</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189233004">setAlignment</a> (self, Marble.GeoDataLabelStyle.Alignment alignment)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189205388">setFont</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a> font)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189233164">setScale</a> (self, float scale)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189157004">unpack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj189618284"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Construct a new GeoDataLabelStyle
+</p></div></div><a class="anchor" name="obj189258572"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a>&nbsp;</td>
+<td class="paramname"><em>font</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qcolor.html">QColor</a>&nbsp;</td>
+<td class="paramname"><em>color</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Construct a new GeoDataLabelStyle
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> font the font to use when showing the name
+
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> color the color to use when showing the name <dl class="see" compact><dt><b>See also:</b></dt><dd> GeoDataColorStyle
+</dd></dl>
+</p></div></div><a class="anchor" name="obj189103884"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataLabelStyle.html">Marble.GeoDataLabelStyle</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj189232300"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">Marble.GeoDataLabelStyle.Alignment alignment</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the alignment of the label
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the current alignment
+</dd></dl>
+</p></div></div><a class="anchor" name="obj189112812"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a> font</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the current font of the label
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the current font
+</dd></dl>
+</p></div></div><a class="anchor" name="obj189113484"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> pack</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a>&nbsp;</td>
+<td class="paramname"><em>stream</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Serialize the style to a stream.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> stream the stream
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj189234828"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float scale</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the current scale of the label
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the current scale
+</dd></dl>
+</p></div></div><a class="anchor" name="obj189233004"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setAlignment</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Marble.GeoDataLabelStyle.Alignment&nbsp;</td>
+<td class="paramname"><em>alignment</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the alignment of the label
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> int the alignment
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj189205388"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setFont</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a>&nbsp;</td>
+<td class="paramname"><em>font</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the font of the label
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> font the new font
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj189233164"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setScale</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>scale</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the scale of the label
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> scale the new scale
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj189157004"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> unpack</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a>&nbsp;</td>
+<td class="paramname"><em>stream</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Unserialize the style from a stream
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> stream the stream
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj189632940"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">Alignment</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Corner</em>&nbsp;</td><td><tr><td valign="top"><em>Center</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../marble/index.html">marble</a></li>

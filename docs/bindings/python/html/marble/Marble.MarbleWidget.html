@@ -1,0 +1,3639 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Marble.MarbleWidget</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.2 PyKDE API Reference for Marble
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>MarbleWidget Class Reference</h1>
+<code>from PyKDE4.marble import *</code>
+<p>
+Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
+
+Namespace: Marble<br />
+<h2>Detailed Description</h2>
+
+<p>A widget class that displays a view of the earth.
+</p>
+<p>
+This widget displays a view of the earth or any other globe,
+depending on which dataset is used. The user can navigate the
+globe using either a control widget, e.g. the MarbleControlBox, or
+the mouse. The mouse and keyboard control is done through a
+MarbleWidgetInputHandler. Only some aspects of the widget can be
+controlled by the mouse and/or keyboard.
+</p>
+<p>
+By clicking on the globe and moving the mouse, the position can be
+changed. The user can also zoom by using the scroll wheel of the
+mouse in the widget. The zoom value is not tied to any units, but
+is an abstract value without any physical meaning. A value around
+1000 shows the full globe in a normal-sized window. Higher zoom
+values give a more zoomed-in view.
+</p>
+<p>
+The MarbleWidget needs to be provided with a data model to
+work. This model is contained in the MarbleModel class, and it is
+painted by using a MarbleMap. The widget can also construct its own
+map and model if none is given to the constructor. A MarbleModel
+contains 3 separate datatypes: <b>tiles</b> which provide the
+background, <b>vectors</b> which provide things like country
+borders and coastlines and <b>placemarks</b> which can show points
+of interest, such as cities, mountain tops or the poles.
+</p>
+<p>
+In addition to navigating with the mouse, you can also use it to
+get information about items on the map. You can either click on a
+placemark with the left mouse button or with the right mouse button
+anywhere on the map.
+</p>
+<p>
+The left mouse button opens up a menu with all the placemarks
+within a certain distance from the mouse pointer. When you choose
+one item from the menu, Marble will open up a dialog window with
+some information about the placemark and also try to connect to
+Wikipedia to retrieve an article about it. If there is such an
+article, you will get a mini-browser window with the article in a tab.
+</p>
+<p>
+The right mouse button controls a distance tool. The distance tool
+is implemented as a menu where you can choose to either create or
+remove so called Measure Points. Marble will keep track of the
+Measure Points and show the total distance in the upper left of the
+widget. Measure Points are shown on the map as a little white
+cross.
+</p>
+<p>
+<dl class="see" compact><dt><b>See also:</b></dt><dd> MarbleControlBox
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> MarbleMap
+</dd></dl> <dl class="see" compact><dt><b>See also:</b></dt><dd> MarbleModel
+</dd></dl>
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184743180">distanceChanged</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> distanceString)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj165388652">framesPerSecond</a> (float fps)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184085292">mouseClickGeoPosition</a> (float lon, float lat, Marble.GeoDataCoordinates.Unit a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184843660">mouseMoveGeoPosition</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186728428">projectionChanged</a> (Marble.Projection a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185932076">regionSelected</a> ([float] a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166533516">themeChanged</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> theme)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185930060">timeout</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180636364">zoomChanged</a> (int zoom)</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186900172">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186899180">__init__</a> (self, <a href="../marble/Marble.MarbleMap.html">Marble.MarbleMap</a> map, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188029004">__init__</a> (self, <a href="../marble/Marble.MarbleWidget.html">Marble.MarbleWidget</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregion.html">QRegion</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184921196">activeRegion</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187120492">addPlaceMarkData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> data)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187108332">addPlaceMarkFile</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filename)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185957228">animationsEnabled</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187107468">centerLatitude</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187108268">centerLongitude</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186503788">centerOn</a> (self, float lon, float lat, bool animated=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186505132">centerOn</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a> index, bool animated=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186506156">centerOn</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> point, bool animated=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186811116">centerSun</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186879468">changeCurrentPosition</a> (self, float lon, float lat)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187207980">clearPersistentTileCache</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187209580">clearVolatileTileCache</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188029132">connectNotify</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> signal)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj169326156">creatingTilesStart</a> (self, <a href="../marble/Marble.TileCreator.html">Marble.TileCreator</a> creator, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> description)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188027500">customPaint</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">Marble.AngleUnit&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185955628">defaultAngleUnit</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">Marble.DistanceUnit&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185957964">defaultDistanceUnit</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186812108">defaultFont</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186814380">disableInput</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188029676">disconnectNotify</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> signal)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187130892">distance</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184743180">distanceChanged</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> distanceString)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187133388">distanceString</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186813900">enableInput</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">FileViewModel&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185954956">fileViewModel</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[Marble::MarbleAbstractFloatIte]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186783980">floatItems</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj165388652">framesPerSecond</a> (self, float fps)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186907724">geoCoordinates</a> (self, int x, int y, float lon, float lat, Marble.GeoDataCoordinates.Unit a0=GeoDataCoordinates.Degree)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186908460">globalQuaternion</a> (self, int x, int y, <a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a> q)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186764876">goHome</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">GpxFileModel&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186782412">gpxFileModel</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185952748">home</a> (self, float lon, float lat, int zoom)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185930316">leaveEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MarbleMap.html">Marble.MarbleMap</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184918252">map</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">Marble.MapQuality&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186782252">mapQuality</a> (self, Marble.ViewContext a0=Marble.Still)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187121612">mapScreenShot</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">Marble.GeoSceneDocument&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185954828">mapTheme</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186785612">mapThemeId</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187129932">maximumZoom</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187133676">minimumZoom</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184919084">model</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184085292">mouseClickGeoPosition</a> (self, float lon, float lat, Marble.GeoDataCoordinates.Unit a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184843660">mouseMoveGeoPosition</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186764588">moveDown</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186762764">moveLeft</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186762412">moveRight</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187118188">moveStep</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186763980">moveUp</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187132908">needsUpdate</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186907212">northPoleY</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185932684">notifyMouseClick</a> (self, int x, int y)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187957516">openGpxFile</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> filename)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185933164">paintEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpaintevent.html">QPaintEvent</a> event)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">quint64&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186678252">persistentTileCacheLimit</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187107308">placeMarkModel</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qitemselectionmodel.html">QItemSelectionModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187106284">placeMarkSelectionModel</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187119948">planetAxis</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregion.html">QRegion</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184921484">projectedRegion</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">Marble.Projection&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186785580">projection</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186728428">projectionChanged</a> (self, Marble.Projection a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186783148">proxyHost</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186783660">proxyPort</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184921900">radius</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185932076">regionSelected</a> (self, [float] a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[Marble::MarbleRenderPlugi]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186782156">renderPlugins</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj188028684">resizeEvent</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qresizeevent.html">QResizeEvent</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186695020">rotateBy</a> (self, float deltaLon, float deltaLat)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186694348">rotateBy</a> (self, <a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a> incRot)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186904972">screenCoordinates</a> (self, float lon, float lat, int x, int y)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184857964">setAnimationsEnabled</a> (self, bool enabled)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186507084">setCenterLatitude</a> (self, float lat)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186505644">setCenterLongitude</a> (self, float lon)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185958316">setDefaultAngleUnit</a> (self, Marble.AngleUnit angleUnit)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185957804">setDefaultDistanceUnit</a> (self, Marble.DistanceUnit distanceUnit)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186812588">setDefaultFont</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a> font)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187133004">setDistance</a> (self, float distance)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184920780">setDownloadManager</a> (self, HttpDownloadManager downloadManager)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164654732">setDownloadUrl</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164654156">setDownloadUrl</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qurl.html">QUrl</a> url)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185954188">setHome</a> (self, float lon, float lat, int zoom=1050)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186761772">setHome</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> homePoint, int zoom=1050)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184919852">setInputHandler</a> (self, MarbleWidgetInputHandler handler)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj164651212">setMapQuality</a> (self, Marble.MapQuality a0, Marble.ViewContext a1=Marble.Still)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186765132">setMapThemeId</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> maptheme)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187133516">setNeedsUpdate</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187193964">setPersistentTileCacheLimit</a> (self, quint64 kiloBytes)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186504204">setProjection</a> (self, int projection)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185950572">setProjection</a> (self, Marble.Projection projection)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186831628">setPropertyValue</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, bool value)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186678124">setProxy</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> proxyHost, int proxyPort)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj184920908">setRadius</a> (self, int radius)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185495820">setSelection</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qrect.html">QRect</a> region)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186832396">setShowAtmosphere</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186848780">setShowBorders</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186710956">setShowCities</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186834764">setShowClouds</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186834092">setShowCompass</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186834732">setShowCrosshairs</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186849516">setShowElevationModel</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186876940">setShowFrameRate</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186876748">setShowGps</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186709228">setShowGrid</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186847916">setShowIceLayer</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186850380">setShowLakes</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186709580">setShowOtherPlaces</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186832556">setShowOverviewMap</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186710092">setShowPlaces</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186709484">setShowRelief</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186850892">setShowRivers</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186833324">setShowScaleBar</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186711564">setShowTerrain</a> (self, bool visible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj181476460">setViewContext</a> (self, Marble.ViewContext viewContext)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187349644">setVolatileTileCacheLimit</a> (self, quint64 kiloBytes)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178590668">showAtmosphere</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186519148">showBorders</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186516972">showCities</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178590860">showClouds</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178590828">showCompass</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178592460">showCrosshairs</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186519372">showElevationModel</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186677740">showFrameRate</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186677164">showGps</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186515852">showGrid</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186518028">showIceLayer</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186676652">showLakes</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186518252">showOtherPlaces</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187120652">showOverviewMap</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj178590220">showPlaces</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186518796">showRelief</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186516492">showRivers</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187120812">showScaleBar</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186517580">showTerrain</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.SunLocator.html">Marble.SunLocator</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186678732">sunLocator</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj166533516">themeChanged</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> theme)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj185930060">timeout</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187946604">updateChangedMap</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187959500">updateGps</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187945388">updateRegion</a> (self, BoundingBox a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186813484">updateSun</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">Marble.ViewContext&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186781996">viewContext</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">quint64&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186678892">volatileTileCacheLimit</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187131916">zoom</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj180636364">zoomChanged</a> (self, int zoom)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186694124">zoomIn</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186694668">zoomOut</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186691948">zoomView</a> (self, int zoom)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186693420">zoomViewBy</a> (self, int zoomStep)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj186900172"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Construct a new MarbleWidget.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent widget
+</td></tr>
+</table></dl>
+<p> This constructor should be used when you will only use one
+MarbleWidget. The widget will create its own MarbleModel when
+created.
+</p></div></div><a class="anchor" name="obj186899180"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.MarbleMap.html">Marble.MarbleMap</a>&nbsp;</td>
+<td class="paramname"><em>map</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Construct a new MarbleWidget.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>model</em>&nbsp;</td><td> the data model for the widget.
+
+<tr><td></td><td valign="top"><em>parent</em>&nbsp;</td><td> the parent widget
+</td></tr>
+</table></dl>
+<p> This constructor should be used when you plan to use more than
+one MarbleWidget for the same MarbleModel (not yet supported,
+but will be soon).
+</p></div></div><a class="anchor" name="obj188029004"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.MarbleWidget.html">Marble.MarbleWidget</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj184921196"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregion.html">QRegion</a> activeRegion</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the active region in which it's possible to drag the view using the mouse.
+</p></div></div><a class="anchor" name="obj187120492"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addPlaceMarkData</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>data</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add GeoDataPlacemark data as string to the model.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> data the string containing the PlaceMarks.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj187108332"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> addPlaceMarkFile</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>filename</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Add a GeoDataPlacemark file to the model.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> filename the filename of the file containing the PlaceMarks.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj185957228"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool animationsEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Retrieve whether travels to a point should get animated
+</p></div></div><a class="anchor" name="obj187107468"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float centerLatitude</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the latitude of the center point.
+</p></div></div><a class="anchor" name="obj187108268"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float centerLongitude</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the longitude of the center point.
+</p></div></div><a class="anchor" name="obj186503788"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> centerOn</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>animated=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Center the view on a geographical point
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> lat an angle parallel to the latitude lines
++90(N) - -90(S)
+
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> lon an angle parallel to the longitude lines
++180(W) - -180(E)
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186505132"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> centerOn</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qmodelindex.html">QModelIndex</a>&nbsp;</td>
+<td class="paramname"><em>index</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>animated=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Center the view on a point
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> index an index for a QModel, indicating a city
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186506156"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> centerOn</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>point</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>animated=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Center the view on a point
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> point the point above earth from which the view can be seen
+by looking vertically down.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186811116"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> centerSun</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj186879468"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> changeCurrentPosition</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the current Gps position
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>lat</em>&nbsp;</td><td> the new latitude value
+
+<tr><td></td><td valign="top"><em>lon</em>&nbsp;</td><td> the new longitude value
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj187207980"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearPersistentTileCache</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj187209580"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> clearVolatileTileCache</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj188029132"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> connectNotify</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>signal</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj169326156"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> creatingTilesStart</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.TileCreator.html">Marble.TileCreator</a>&nbsp;</td>
+<td class="paramname"><em>creator</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>description</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>A slot that is called when the model starts to create new tiles.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>creator</em>&nbsp;</td><td> the tile creator object.
+
+<tr><td></td><td valign="top"><em>name</em>&nbsp;</td><td> the name of the created theme.
+
+<tr><td></td><td valign="top"><em>description</em>&nbsp;</td><td> a descriptive text that can be shown in a dialog.
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> creatingTilesProgress
+</dd></dl> </p>
+<p>
+This function is connected to the models signal with the same
+name. When the model needs to create a cache of tiles in
+several different resolutions, it will emit creatingTilesStart
+once with a name of the theme and a descriptive text. The
+widget can then pop up a dialog to explain why there is a
+delay. The model will then call creatingTilesProgress several
+times until the parameter reaches 100 (100%), after which the
+creation process is finished. After this there will be no more
+calls to creatingTilesProgress, and the poup dialog can then be
+closed.
+</p></div></div><a class="anchor" name="obj188027500"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> customPaint</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a>&nbsp;</td>
+<td class="paramname"><em>painter</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Enables custom drawing onto the MarbleWidget straight after
+the globe and before all other layers has been rendered.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>painter</em>&nbsp;</td><td>
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj185955628"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">Marble.AngleUnit defaultAngleUnit</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj185957964"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">Marble.DistanceUnit defaultDistanceUnit</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj186812108"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a> defaultFont</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj186814380"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> disableInput</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj188029676"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> disconnectNotify</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>signal</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj187130892"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float distance</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the current distance.
+</p></div></div><a class="anchor" name="obj184743180"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> distanceChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>distanceString</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("distanceChanged(const QString&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj187133388"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> distanceString</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the current distance string.
+</p></div></div><a class="anchor" name="obj186813900"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> enableInput</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj185954956"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">FileViewModel fileViewModel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return a QAbstractItemModel containing files.
+</p></div></div><a class="anchor" name="obj186783980"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[Marble::MarbleAbstractFloatIte] floatItems</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj165388652"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> framesPerSecond</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>fps</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("framesPerSecond(qreal)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj186907724"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool geoCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>y</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Marble.GeoDataCoordinates.Unit&nbsp;</td>
+<td class="paramname"><em>a0=GeoDataCoordinates.Degree</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get the earth coordinates corresponding to a pixel in the widget.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinate of the pixel
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel
+
+<tr><td></td><td valign="top"><em>lon</em>&nbsp;</td><td> the longitude angle is returned through this parameter
+
+<tr><td></td><td valign="top"><em>lat</em>&nbsp;</td><td> the latitude angle is returned through this parameter
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the pixel (x, y) is within the globe
+</dd></dl> false if the pixel (x, y) is outside the globe, i.e. in space.
+</p></div></div><a class="anchor" name="obj186908460"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool globalQuaternion</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>y</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a>&nbsp;</td>
+<td class="paramname"><em>q</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get a quaternion representing a point on the earth corresponding to a pixel in the widget.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinate of the pixel
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel
+
+<tr><td></td><td valign="top"><em>q</em>&nbsp;</td><td> the out parameter where the result is returned
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the pixel (x, y) is within the globe
+</dd></dl> false if the pixel (x, y) is outside the globe, i.e. in space
+</p></div></div><a class="anchor" name="obj186764876"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> goHome</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Center the view on the default start point with the default zoom.
+</p></div></div><a class="anchor" name="obj186782412"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">GpxFileModel gpxFileModel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return a QAbstractItemModel containing GPX files.
+</p></div></div><a class="anchor" name="obj185952748"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> home</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>zoom</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get the home point
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> lon the longitude of the home point.
+
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> lat the latitude of the home point.
+
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> zoom the default zoom level of the home point.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj185930316"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> leaveEvent</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qevent.html">QEvent</a>&nbsp;</td>
+<td class="paramname"><em>event</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Reimplementation of the leaveEvent() function in QWidget.
+</p></div></div><a class="anchor" name="obj184918252"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.MarbleMap.html">Marble.MarbleMap</a> map</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the map that this view shows.
+</p></div></div><a class="anchor" name="obj186782252"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">Marble.MapQuality mapQuality</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Marble.ViewContext&nbsp;</td>
+<td class="paramname"><em>a0=Marble.Still</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Retrieve the map quality depending on the view context
+</p></div></div><a class="anchor" name="obj187121612"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpixmap.html">QPixmap</a> mapScreenShot</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return a QPixmap with the current contents of the widget.
+</p></div></div><a class="anchor" name="obj185954828"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">Marble.GeoSceneDocument mapTheme</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the GeoSceneDocument object of the current map theme
+</p></div></div><a class="anchor" name="obj186785612"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> mapThemeId</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the ID of the current map theme
+To ensure that a unique identifier is being used the theme does NOT
+get represented by its name but the by relative location of the file
+that specifies the theme:
+</p>
+<p>
+Example:
+mapThemeId = "earth/bluemarble/bluemarble.dgml"
+</p></div></div><a class="anchor" name="obj187129932"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int maximumZoom</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the minimum zoom value for the current map theme.
+</p></div></div><a class="anchor" name="obj187133676"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int minimumZoom</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the minimum zoom value for the current map theme.
+</p></div></div><a class="anchor" name="obj184919084"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.MarbleModel.html">Marble.MarbleModel</a> model</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the model that this view shows.
+</p></div></div><a class="anchor" name="obj184085292"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> mouseClickGeoPosition</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Marble.GeoDataCoordinates.Unit&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("mouseClickGeoPosition(qreal, qreal, Unit)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj184843660"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> mouseMoveGeoPosition</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("mouseMoveGeoPosition(QString)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj186764588"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> moveDown</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Move down by the moveStep.
+</p></div></div><a class="anchor" name="obj186762764"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> moveLeft</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Move left by the moveStep.
+</p></div></div><a class="anchor" name="obj186762412"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> moveRight</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Move right by the moveStep.
+</p></div></div><a class="anchor" name="obj187118188"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float moveStep</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return how much the map will move if one of the move slots are called.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The move step.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186763980"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> moveUp</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Move up by the moveStep.
+</p></div></div><a class="anchor" name="obj187132908"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool needsUpdate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return if the widget needs to be updated.
+</p></div></div><a class="anchor" name="obj186907212"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int northPoleY</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the Y coordinate of the North Pole.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the pixel address of the geographical north pole.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj185932684"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> notifyMouseClick</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>y</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Used to notify about the position of the mouse click
+</p></div></div><a class="anchor" name="obj187957516"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> openGpxFile</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>filename</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Opens a gpx file for viewing on the Marble Widget
+</p></div></div><a class="anchor" name="obj185933164"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> paintEvent</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpaintevent.html">QPaintEvent</a>&nbsp;</td>
+<td class="paramname"><em>event</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Reimplementation of the paintEvent() function in QWidget.
+</p></div></div><a class="anchor" name="obj186678252"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">quint64 persistentTileCacheLimit</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the limit of persistent tile cache
+</dd></dl>
+</p></div></div><a class="anchor" name="obj187107308"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qabstractitemmodel.html">QAbstractItemModel</a> placeMarkModel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the model for all the placemarks on the globe.
+</p></div></div><a class="anchor" name="obj187106284"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qitemselectionmodel.html">QItemSelectionModel</a> placeMarkSelectionModel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the selection model for all the placemarks on the globe.
+</p></div></div><a class="anchor" name="obj187119948"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a> planetAxis</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the quaternion that specifies the rotation of the globe.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The quaternion that describes the rotation of the globe.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj184921484"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregion.html">QRegion</a> projectedRegion</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the active region in which it's possible to drag the view using the mouse.
+</p></div></div><a class="anchor" name="obj186785580"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">Marble.Projection projection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Get the Projection used for the map
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> Spherical a Globe
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> Equirectangular a flat map
+</dd></dl> <dl class="return" compact><dt><b>Returns:</b></dt><dd> Mercator another flat map
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186728428"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> projectionChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Marble.Projection&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("projectionChanged(Projection)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj186783148"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> proxyHost</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj186783660"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int proxyPort</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj184921900"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int radius</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the radius of the globe in pixels.
+</p></div></div><a class="anchor" name="obj185932076"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> regionSelected</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">[float]&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>This signal is emit when a new rectangle region is selected over the map
+The list of double values include coordinates in degrees using this order:
+lon1, lat1, lon2, lat2 (or West, North, East, South) as left/top, right/bottom rectangle.
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("regionSelected(const QList<double>&)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj186782156"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">[Marble::MarbleRenderPlugi] renderPlugins</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj188028684"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> resizeEvent</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qresizeevent.html">QResizeEvent</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Reimplementation of the resizeEvent() function in QWidget.
+</p></div></div><a class="anchor" name="obj186695020"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> rotateBy</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>deltaLon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>deltaLat</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Rotate the view by the two angles phi and theta.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> deltaLon an angle that specifies the change in terms of longitude
+
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> deltaLat an angle that specifies the change in terms of latitude
+</td></tr>
+</table></dl>
+<p> This function rotates the view by two angles,
+deltaLon ("theta") and deltaLat ("phi").
+If we start at (0, 0), the result will be the exact equivalent
+of (lon, lat), otherwise the resulting angle will be the sum of
+the previous position and the two offsets.
+</p></div></div><a class="anchor" name="obj186694348"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> rotateBy</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a>&nbsp;</td>
+<td class="paramname"><em>incRot</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Rotate the view by the angle specified by a Quaternion.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> incRot a quaternion specifying the rotation
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186904972"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool screenCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>y</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Get the screen coordinates corresponding to geographical coordinates in the widget.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>lon</em>&nbsp;</td><td> the lon coordinate of the requested pixel position
+
+<tr><td></td><td valign="top"><em>lat</em>&nbsp;</td><td> the lat coordinate of the requested pixel position
+
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinate of the pixel is returned through this parameter
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel is returned through this parameter
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the geographical coordinates are visible on the screen
+</dd></dl> false if the geographical coordinates are not visible on the screen
+</p></div></div><a class="anchor" name="obj184857964"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setAnimationsEnabled</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>enabled</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether travels to a point should get animated
+</p></div></div><a class="anchor" name="obj186507084"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setCenterLatitude</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the latitude for the center point
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> lat the new value for the latitude
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186505644"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setCenterLongitude</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the longitude for the center point
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> lon the new value for the longitude
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj185958316"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDefaultAngleUnit</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Marble.AngleUnit&nbsp;</td>
+<td class="paramname"><em>angleUnit</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj185957804"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDefaultDistanceUnit</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Marble.DistanceUnit&nbsp;</td>
+<td class="paramname"><em>distanceUnit</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj186812588"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDefaultFont</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qfont.html">QFont</a>&nbsp;</td>
+<td class="paramname"><em>font</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj187133004"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDistance</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>distance</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the distance of the observer to the globe in km.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> distance The new distance in km.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj184920780"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDownloadManager</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">HttpDownloadManager&nbsp;</td>
+<td class="paramname"><em>downloadManager</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the download manager to load missing tiles
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>manager</em>&nbsp;</td><td> the manager instance
+</td></tr>
+</table></dl>
+<p> The instance will be destructed by MarbleWidget when not
+used any longer.
+</p></div></div><a class="anchor" name="obj164654732"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDownloadUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the download url to load missing tiles
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>url</em>&nbsp;</td><td> the url string
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj164654156"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDownloadUrl</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qurl.html">QUrl</a>&nbsp;</td>
+<td class="paramname"><em>url</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the download url to load missing tiles
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>url</em>&nbsp;</td><td> the url objects
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj185954188"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setHome</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>zoom=1050</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the home point
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> lon the longitude of the new home point.
+
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> lat the latitude of the new home point.
+
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> zoom the default zoom level for the new home point.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186761772"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setHome</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>homePoint</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>zoom=1050</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the home point
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> homePoint the new home point.
+
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> zoom the default zoom level for the new home point.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj184919852"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setInputHandler</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">MarbleWidgetInputHandler&nbsp;</td>
+<td class="paramname"><em>handler</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the input handler
+</p></div></div><a class="anchor" name="obj164651212"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setMapQuality</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Marble.MapQuality&nbsp;</td>
+<td class="paramname"><em>a0</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Marble.ViewContext&nbsp;</td>
+<td class="paramname"><em>a1=Marble.Still</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the map quality depending on the view context
+</p></div></div><a class="anchor" name="obj186765132"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setMapThemeId</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>maptheme</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set a new map theme
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>maptheme</em>&nbsp;</td><td> The ID of the new maptheme. To ensure that a unique
+identifier is being used the theme does NOT get represented by its
+name but the by relative location of the file that specifies the theme:
+</td></tr>
+</table></dl>
+<p> Example:
+maptheme = "earth/bluemarble/bluemarble.dgml"
+</p></div></div><a class="anchor" name="obj187133516"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setNeedsUpdate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Mark the widget as needing an update.
+</p></div></div><a class="anchor" name="obj187193964"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setPersistentTileCacheLimit</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">quint64&nbsp;</td>
+<td class="paramname"><em>kiloBytes</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the limit of the persistent (on hard disc) tile cache.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> kilobytes The limit in kilobytes.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186504204"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setProjection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>projection</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the Projection used for the map
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> projection projection type (e.g. Spherical, Equirectangular, Mercator)
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj185950572"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setProjection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Marble.Projection&nbsp;</td>
+<td class="paramname"><em>projection</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj186831628"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setPropertyValue</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>name</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>value</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Sets the value of a map theme property
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> value value of the property (usually: visibility)
+</td></tr>
+</table></dl>
+<p> Later on we might add a "setPropertyType and a QVariant
+if needed.
+</p></div></div><a class="anchor" name="obj186678124"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setProxy</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>proxyHost</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>proxyPort</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj184920908"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setRadius</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>radius</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the radius of the globe in pixels.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> radius The new globe radius value in pixels.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj185495820"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setSelection</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qrect.html">QRect</a>&nbsp;</td>
+<td class="paramname"><em>region</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj186832396"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowAtmosphere</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the atmospheric glow is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the atmospheric glow
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186848780"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowBorders</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the borders visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the borders
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186710956"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowCities</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the city place mark overlay is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the city place marks
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186834764"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowClouds</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the cloud cover is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the cloud cover
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186834092"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowCompass</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the compass overlay is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the compass
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186834732"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowCrosshairs</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the crosshairs are visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the crosshairs
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186849516"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowElevationModel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the elevation model is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the elevation model
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186876940"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowFrameRate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the frame rate gets shown
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>visible</em>&nbsp;</td><td> visibility of the frame rate
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186876748"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowGps</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether Gps Data is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>visible</em>&nbsp;</td><td> visibility of the Gps Data
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186709228"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowGrid</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the coordinate grid overlay is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the coordinate grid
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186847916"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowIceLayer</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the ice layer is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the ice layer
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186850380"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowLakes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the lakes are visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the lakes
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186709580"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowOtherPlaces</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the other places overlay is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of other places
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186832556"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowOverviewMap</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the overview map overlay is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the overview map
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186710092"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowPlaces</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the place mark overlay is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the place marks
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186709484"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowRelief</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the relief is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the relief
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186850892"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowRivers</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the rivers are visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the rivers
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186833324"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowScaleBar</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the scale bar overlay is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the scale bar
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj186711564"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setShowTerrain</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>visible</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set whether the terrain place mark overlay is visible
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> visible visibility of the terrain place marks
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj181476460"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setViewContext</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">Marble.ViewContext&nbsp;</td>
+<td class="paramname"><em>viewContext</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the view context (i.e. still or animated map)
+</p></div></div><a class="anchor" name="obj187349644"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setVolatileTileCacheLimit</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">quint64&nbsp;</td>
+<td class="paramname"><em>kiloBytes</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Set the limit of the volatile (in RAM) tile cache.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> kilobytes The limit in kilobytes.
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="obj178590668"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showAtmosphere</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the atmospheric glow is visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The cloud cover visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186519148"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showBorders</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the borders are visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The border visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186516972"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showCities</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the city place marks are visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The city place mark visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj178590860"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showClouds</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the cloud cover is visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The cloud cover visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj178590828"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showCompass</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the compass bar is visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The compass visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj178592460"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showCrosshairs</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the crosshairs are visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The crosshairs' visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186519372"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showElevationModel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the elevation model is visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The elevation model visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186677740"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showFrameRate</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the frame rate gets displayed.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the frame rates visibility
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186677164"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showGps</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether Gps Data is visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The Gps Data's visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186515852"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showGrid</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the coordinate grid is visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The coordinate grid visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186518028"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showIceLayer</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the ice layer is visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The ice layer visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186676652"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showLakes</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the lakes are visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The lakes' visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186518252"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showOtherPlaces</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether other places are visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The visibility of other places.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj187120652"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showOverviewMap</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the overview map is visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The overview map visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj178590220"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showPlaces</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the place marks are visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The place mark visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186518796"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showRelief</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the relief is visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The relief visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186516492"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showRivers</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the rivers are visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The rivers' visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj187120812"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showScaleBar</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the scale bar is visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The scale bar visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186517580"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool showTerrain</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return whether the terrain place marks are visible.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> The terrain place mark visibility.
+</dd></dl>
+</p></div></div><a class="anchor" name="obj186678732"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.SunLocator.html">Marble.SunLocator</a> sunLocator</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj166533516"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> themeChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
+<td class="paramname"><em>theme</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Signal that the theme has changed
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>theme</em>&nbsp;</td><td> Name of the new theme.
+</td></tr>
+</table></dl>
+<p>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("themeChanged(QString)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj185930060"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> timeout</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("timeout()"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj187946604"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> updateChangedMap</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Update the widget because the model changed.
+</p></div></div><a class="anchor" name="obj187959500"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> updateGps</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Updates the gps tracking point by polling
+</p></div></div><a class="anchor" name="obj187945388"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> updateRegion</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">BoundingBox&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Update part of the map as defined in the BoundingBox
+</p></div></div><a class="anchor" name="obj186813484"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> updateSun</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="obj186781996"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">Marble.ViewContext viewContext</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Retrieve the view context (i.e. still or animated map)
+</p></div></div><a class="anchor" name="obj186678892"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">quint64 volatileTileCacheLimit</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Returns the limit in kilobytes of the volatile (in RAM) tile cache.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> the limit of volatile tile cache
+</dd></dl>
+</p></div></div><a class="anchor" name="obj187131916"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int zoom</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Return the current zoom level.
+</p></div></div><a class="anchor" name="obj180636364"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> zoomChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>zoom</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Signal that the zoom has changed, and to what.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>zoom</em>&nbsp;</td><td> The new zoom value.
+</td></tr> </table></dl>
+<p> <dl class="see" compact><dt><b>See also:</b></dt><dd> zoomView()
+</dd></dl>
+</p><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("zoomChanged(int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="obj186694124"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> zoomIn</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Zoom in by the amount zoomStep.
+</p></div></div><a class="anchor" name="obj186694668"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> zoomOut</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Zoom out by the amount zoomStep.
+</p></div></div><a class="anchor" name="obj186691948"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> zoomView</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>zoom</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Zoom the view to a certain zoomlevel
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> zoom the new zoom level.
+</td></tr>
+</table></dl>
+<p> The zoom level is an abstract value without physical
+interpretation. A zoom value around 1000 lets the viewer see
+all of the earth in the default window.
+</p></div></div><a class="anchor" name="obj186693420"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> zoomViewBy</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>zoomStep</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><p>Zoom the view by a certain step
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em></em>&nbsp;</td><td> zoomStep the difference between the old zoom and the new
+</td></tr>
+</table></dl>
+<p>
+</p></div></div>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul>
+<li><a href="../marble/index.html">marble</a></li>
