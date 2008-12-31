@@ -31,6 +31,8 @@ class MainWin (KMainWindow):
         self.marble = Marble.MarbleWidget(self)
         self.marble.setMapThemeId("earth/bluemarble/bluemarble.dgml")
         self.setCentralWidget(self.marble)
+        self.marble.centerOn(5.8333, 51.8333)
+        self.marble.zoomView(2000)
 
 def main():
     appName     = "simple_marble"
