@@ -54,6 +54,8 @@
 
 #include <MarbleDirs.h>
 #include <ControlView.h>
+#include "global.h"
+#include "MarbleLocale.h"
 #include "settings.h"
 
 #include "MarbleAbstractFloatItem.h"
@@ -97,6 +99,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     setXMLFile( "marble_part.rc" );
 
     m_statusBarExtension = new KParts::StatusBarExtension( this );
+    m_statusBarExtension->statusBar()->setUpdatesEnabled( false );
 
     m_position = NOT_AVAILABLE;
     m_distance = m_controlView->marbleWidget()->distanceString();
@@ -117,6 +120,7 @@ void MarblePart::initObject()
     QCoreApplication::processEvents ();
     setupStatusBar();
     readSettings();
+    m_statusBarExtension->statusBar()->setUpdatesEnabled( true );
 }
 
 ControlView* MarblePart::controlView() const
@@ -427,7 +431,7 @@ void MarblePart::writeSettings()
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Marble::Still ) );
     MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->mapQuality( Marble::Animation )  );
 
-    MarbleSettings::setDistanceUnit( m_controlView->marbleWidget()->defaultDistanceUnit() );
+    MarbleSettings::setDistanceUnit( MarbleGlobal::getInstance()->locale()->distanceUnit() );
     MarbleSettings::setAngleUnit( m_controlView->marbleWidget()->defaultAngleUnit() );
 
     // Caches
@@ -618,7 +622,6 @@ void MarblePart::updateStatusBar()
 
 void MarblePart::setupStatusBar()
 {
-
     QFontMetrics statusBarFontMetrics( m_statusBarExtension->statusBar()->fontMetrics() );
 
     m_positionLabel = new QLabel( m_statusBarExtension->statusBar() );
@@ -764,7 +767,10 @@ void MarblePart::slotUpdateSettings()
     m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(), Marble::Animation );
 
     m_controlView->marbleWidget()->setDefaultAngleUnit( (Marble::AngleUnit) MarbleSettings::angleUnit() );
-    m_controlView->marbleWidget()->setDefaultDistanceUnit( (Marble::DistanceUnit) MarbleSettings::distanceUnit() );
+    MarbleGlobal::getInstance()->locale()->setDistanceUnit( (Marble::DistanceUnit) MarbleSettings::distanceUnit() );
+
+    m_distance = m_controlView->marbleWidget()->distanceString();
+    updateStatusBar();
 
     m_controlView->marbleWidget()->setAnimationsEnabled( MarbleSettings::animateTargetVoyage() );
 

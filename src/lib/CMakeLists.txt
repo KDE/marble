@@ -81,7 +81,9 @@ set(marblewidget_SRCS
     PluginManager.cpp
     MarbleCacheSettingsWidget.cpp
     MarbleAbstractFloatItem.cpp
+    global.cpp
     MarbleDirs.cpp
+    MarbleLocale.cpp
     MarblePhysics.cpp
     DeferredFlag.cpp
     TileCreatorDialog.cpp

@@ -47,6 +47,7 @@
 #include "GpxFileViewItem.h"
 #include "HttpDownloadManager.h"
 #include "MarbleDirs.h"
+#include "MarbleLocale.h"
 #include "MarbleModel.h"
 #include "MarblePlacemarkModel.h"
 #include "MeasureTool.h"
@@ -1225,7 +1226,20 @@ QString MarbleMap::distanceString() const
 			/ (qreal)( radius() )
 			/ tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
 
-    return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( tr("km") );
+    QString distanceUnitString;
+
+    Marble::DistanceUnit distanceUnit;
+    distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
+
+    if ( distanceUnit == Marble::Metric ) {
+        distanceUnitString = tr("km");
+    }
+    else {
+        distance *= KM2MI;
+        distanceUnitString = "mi";
+    }
+
+    return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( distanceUnitString );
 }
 
 
@@ -1253,16 +1267,6 @@ void MarbleMap::setDefaultAngleUnit( Marble::AngleUnit angleUnit )
     }
 
     GeoDataCoordinates::setDefaultNotation( GeoDataCoordinates::DMS );
-}
-
-
-Marble::DistanceUnit MarbleMap::defaultDistanceUnit() const
-{
-    return Marble::Metric;
-}
-
-void MarbleMap::setDefaultDistanceUnit( Marble::DistanceUnit distanceUnit )
-{
 }
 
 QFont MarbleMap::defaultFont() const

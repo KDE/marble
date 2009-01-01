@@ -15,6 +15,8 @@
 #include <QtGui/QPixmap>
 
 #include "AbstractProjection.h"
+#include "global.h"
+#include "MarbleLocale.h"
 #include "MarbleDirs.h"
 #include "MarbleDataFacade.h"
 #include "GeoPainter.h"
@@ -33,7 +35,7 @@ MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
       m_scaleBarWidth(0),
       m_viewportWidth(0),
       m_scaleBarHeight(5),
-      m_scaleBarKm(0.0),
+      m_scaleBarDistance(0.0),
       m_bestDivisor(0),
       m_pixelInterval(0),
       m_valueInterval(0),
@@ -123,8 +125,15 @@ bool MapScaleFloatItem::renderFloatItem( GeoPainter *painter,
 
     setSize( QSizeF( viewport->width() / 2, 2 * padding() + fontHeight + 3 + m_scaleBarHeight ) ); 
 
-    m_scaleBarKm    = (qreal)(m_scaleBarWidth) * dataFacade()->planetRadius() / 
+    m_scaleBarDistance = (qreal)(m_scaleBarWidth) * dataFacade()->planetRadius() / 
                       (qreal)(viewport->radius());
+
+    Marble::DistanceUnit distanceUnit;
+    distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
+
+    if ( distanceUnit == Marble::Imperial ) {
+        m_scaleBarDistance *= KM2MI;
+    }
 
     calcScaleBar();
 
@@ -151,14 +160,22 @@ bool MapScaleFloatItem::renderFloatItem( GeoPainter *painter,
                                fontHeight + 3, m_pixelInterval - 1,
                                m_scaleBarHeight );
 
+            Marble::DistanceUnit distanceUnit;
+            distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
 
-            if ( m_bestDivisor * m_valueInterval > 10000 ) {
-                m_unit = tr("km");
-                intervalStr.setNum( j * m_valueInterval / 1000 );
+            if ( distanceUnit == Marble::Metric ) {
+                if ( m_bestDivisor * m_valueInterval > 10000 ) {
+                    m_unit = tr("km");
+                    intervalStr.setNum( j * m_valueInterval / 1000 );
+                }
+                else {
+                    m_unit = tr("m");
+                    intervalStr.setNum( j * m_valueInterval );
+                }
             }
             else {
-                m_unit = tr("m");
-                intervalStr.setNum( j * m_valueInterval );
+                m_unit = "mi";
+                intervalStr.setNum( j * m_valueInterval / 1000 );                
             }
 
         if ( j == 0 ) {
@@ -186,7 +203,7 @@ void MapScaleFloatItem::calcScaleBar()
 
     // First we calculate the exact length of the whole area that is possibly 
     // available to the scalebar in kilometers
-    int  magValue = (int)( m_scaleBarKm );
+    int  magValue = (int)( m_scaleBarDistance );
 
     // We calculate the two most significant digits of the km-scalebar-length
     // and store them in magValue.

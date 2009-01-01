@@ -14,6 +14,7 @@
 #include <cmath>
 
 #include <QtCore/QCoreApplication>
+#include <QtCore/QDebug>
 #include <QtCore/QLocale>
 #include <QtCore/QTranslator>
 #include <QtCore/QAbstractItemModel>
@@ -1189,16 +1190,6 @@ void MarbleWidget::setDefaultAngleUnit( Marble::AngleUnit angleUnit )
     map()->setDefaultAngleUnit( angleUnit );
 }
 
-Marble::DistanceUnit MarbleWidget::defaultDistanceUnit() const
-{
-    return map()->defaultDistanceUnit();
-}
-
-void MarbleWidget::setDefaultDistanceUnit( Marble::DistanceUnit distanceUnit )
-{
-    map()->setDefaultDistanceUnit( distanceUnit );
-}
-
 QFont MarbleWidget::defaultFont() const
 {
     return map()->defaultFont();
@@ -1243,7 +1234,7 @@ void MarbleWidget::setDistance( qreal distance )
 
 QString MarbleWidget::distanceString() const
 {
-    return QString( "%L1 %2" ).arg( distance(), 8, 'f', 1, QChar(' ') ).arg( tr("km") );
+    return map()->distanceString();
 }
 
 void MarbleWidget::updateSun()

@@ -25,6 +25,7 @@
 // marble
 #include "MarbleMath.h"
 #include "MarbleModel.h"
+#include "MarbleLocale.h"
 #include "AbstractProjection.h"
 #include "GeoPainter.h"
 #include "Quaternion.h"
@@ -372,6 +373,24 @@ void MeasureTool::drawTotalDistanceLabel( GeoPainter *painter,
         distanceString = tr("Total Distance: %1 km").arg( totalDistance/1000.0 );
     else
         distanceString = tr("Total Distance: %1 m").arg( totalDistance );
+
+    QString distanceUnitString;
+
+    Marble::DistanceUnit distanceUnit;
+    distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
+
+    if ( distanceUnit == Marble::Metric ) {
+        if ( totalDistance >= 1000.0 ) {
+            distanceString = tr("Total Distance: %1 km").arg( totalDistance/1000.0 );
+        }
+        else {
+            distanceString = tr("Total Distance: %1 m").arg( totalDistance );
+        }
+    }
+    else {
+        distanceString = QString("Total Distance: %1 mi").arg( totalDistance/1000.0 * KM2MI );
+    }
+
 
     painter->setPen( QColor( Qt::black ) );
     painter->setBrush( QColor( 192, 192, 192, 192 ) );

@@ -18,6 +18,8 @@
 
 #include <QtCore/QString>
 
+#include "marble_export.h"
+
 namespace Marble
 {
 
@@ -120,7 +122,7 @@ const int defaultLevelZeroColumns = 2;
 const int defaultLevelZeroRows = 1;
 
 // Conversion Metric / Imperial System: km vs. miles
-const qreal MI2KM = 1.852;
+const qreal MI2KM = 1.609344;
 const qreal KM2MI = 1.0 / MI2KM;
 
 // Conversion degree vs. radians
@@ -150,6 +152,23 @@ const qreal RAD2INT = 21600.0 / M_PI;
 // Average earth radius in m
 // Deprecated: Please use model()->planetRadius() instead.
 const qreal EARTH_RADIUS = 6378000.0;
+
+class MarbleGlobalPrivate;
+class MarbleLocale;
+
+class  MARBLE_EXPORT MarbleGlobal {
+ public:
+    static MarbleGlobal * getInstance();
+    ~MarbleGlobal();
+
+    MarbleLocale * locale() const;
+
+ private:
+    MarbleGlobal();
+
+    Q_DISABLE_COPY( MarbleGlobal )
+    MarbleGlobalPrivate  * const d;
+};
 
 }
 
