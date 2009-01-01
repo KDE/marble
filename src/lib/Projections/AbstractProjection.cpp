@@ -57,15 +57,15 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
 
     // Move along the screenborder and save the highest and lowest lon-lat values.
 
-    for ( int x = 0; x < viewport->width(); x+=xStep ) {
-        if ( geoCoordinates( x, 0, viewport, lon, lat,
+    for ( int x = screenRect.left(); x < screenRect.right(); x+=xStep ) {
+        if ( geoCoordinates( x, screenRect.bottom(), viewport, lon, lat,
                              GeoDataCoordinates::Radian ) ) {
             coordinateExtremes( lon, lat, westLon, eastLon,
                                 otherWestLon, otherEastLon,
                                 northLat, southLat );
         }
 
-        if ( geoCoordinates( x, viewport->height() - 1,
+        if ( geoCoordinates( x, screenRect.top(),
                              viewport, lon, lat, GeoDataCoordinates::Radian ) ) {
             coordinateExtremes( lon, lat, westLon, eastLon,
                                 otherWestLon, otherEastLon,
@@ -73,27 +73,27 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
         }
     }
 
-    if ( geoCoordinates( viewport->width(), 0, viewport, lon, lat,
+    if ( geoCoordinates( screenRect.right(), screenRect.top(), viewport, lon, lat,
                          GeoDataCoordinates::Radian ) ) {
         coordinateExtremes( lon, lat, westLon, eastLon,
                             otherWestLon, otherEastLon, northLat, southLat );
     }
 
-    if ( geoCoordinates( viewport->width(), viewport->height() - 1,
+    if ( geoCoordinates( screenRect.right(), screenRect.bottom(),
                          viewport, lon, lat, GeoDataCoordinates::Radian ) ) {
         coordinateExtremes( lon, lat, westLon, eastLon,
                             otherWestLon, otherEastLon, northLat, southLat );
     }
 
-    for ( int y = 0; y < viewport->height(); y+=yStep ) {
-        if ( geoCoordinates( 0, y, viewport, lon, lat, 
+    for ( int y = screenRect.bottom(); y < screenRect.top(); y+=yStep ) {
+        if ( geoCoordinates( screenRect.left(), y, viewport, lon, lat, 
                              GeoDataCoordinates::Radian ) ) {
             coordinateExtremes( lon, lat, westLon, eastLon,
                                 otherWestLon, otherEastLon,
                                 northLat, southLat );
         }
 
-        if ( geoCoordinates( viewport->width() - 1, y,
+        if ( geoCoordinates( screenRect.right(), y,
                              viewport, lon, lat, GeoDataCoordinates::Radian ) ) {
             coordinateExtremes( lon, lat, westLon, eastLon,
                                 otherWestLon, otherEastLon,
