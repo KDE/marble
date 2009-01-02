@@ -11,13 +11,24 @@
 
 #include "GeoDataLabelStyle.h"
 
+#include <QtGui/QFont>
+
 namespace Marble
 {
+#ifdef Q_OS_MACX
+# define defaultSize 10
+#else
+# define defaultSize 8
+#endif
+
 
 class GeoDataLabelStylePrivate
 {
   public:
-    GeoDataLabelStylePrivate()
+    GeoDataLabelStylePrivate() 
+        : m_font( QFont("Sans Serif").family(), defaultSize, 50, false ),
+          m_alignment( GeoDataLabelStyle::Corner ),
+          m_scale( 1.0 )
     {
     }
 
@@ -43,6 +54,7 @@ class GeoDataLabelStylePrivate
 GeoDataLabelStyle::GeoDataLabelStyle()
     : d (new GeoDataLabelStylePrivate )
 {
+    setColor( QColor( Qt::black ) );
 }
 
 GeoDataLabelStyle::GeoDataLabelStyle( const QFont &font, const QColor &color )
