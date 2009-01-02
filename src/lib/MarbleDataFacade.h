@@ -41,6 +41,7 @@ class MarbleModel;
 class MarbleGeoDataModel;
 class MarbleDataFacadePrivate;
 class GeoDataDocument;
+class FileViewModel;
 
 
 /**
@@ -72,6 +73,8 @@ class MARBLE_EXPORT MarbleDataFacade
     MarbleGeoDataModel* geoDataModel();
     
     QAbstractItemModel* renderModel();
+    
+    FileViewModel* fileViewModel() const;
  private:
     MarbleDataFacadePrivate  * const d;
 };

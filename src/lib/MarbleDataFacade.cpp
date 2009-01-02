@@ -90,6 +90,14 @@ QAbstractItemModel* MarbleDataFacade::renderModel()
     return d->m_model->geometryModel();
 }
 
+FileViewModel* MarbleDataFacade::fileViewModel() const
+{
+    if(d->m_model)
+        return d->m_model->fileViewModel();
+    else
+        return 0;
+}
+
 }
 
 #include "MarbleDataFacade.moc"
