@@ -37,7 +37,10 @@ void KmlFileViewItem::closeFile()
 
 QVariant KmlFileViewItem::data() const
 {
-    return m_document.name();
+    if(!m_document.name().isEmpty())
+        return m_document.name();
+    else
+        return QString("KML Document"); // this should be replaced by the file name later
 }
 
 bool KmlFileViewItem::isShown() const
