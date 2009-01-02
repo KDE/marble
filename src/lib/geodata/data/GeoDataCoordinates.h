@@ -193,13 +193,13 @@ class GEODATA_EXPORT GeoDataCoordinates
     * @brief return a string representation of the coordinate
     * this is a convenience function which uses the default notation
     */
-    QString toString();
+    QString toString() const;
 
     /**
     * @brief return a string with the notation given by notation
     * @param notation set a notation different from the default one
     */
-    QString toString( GeoDataCoordinates::Notation notation );
+    QString toString( GeoDataCoordinates::Notation notation ) const;
     
     
     bool operator==( const GeoDataCoordinates& ) const;

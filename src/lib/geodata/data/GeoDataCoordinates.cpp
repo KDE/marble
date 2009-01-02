@@ -432,12 +432,12 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
 }
 
 
-QString GeoDataCoordinates::toString()
+QString GeoDataCoordinates::toString() const
 {
     return GeoDataCoordinates::toString( s_notation );
 }
 
-QString GeoDataCoordinates::toString( GeoDataCoordinates::Notation notation )
+QString GeoDataCoordinates::toString( GeoDataCoordinates::Notation notation ) const
 {
     QString nsstring = ( d->m_lat > 0 ) ? QCoreApplication::tr("N") : QCoreApplication::tr("S");  
     QString westring = ( d->m_lon < 0 ) ? QCoreApplication::tr("W") : QCoreApplication::tr("E");  
