@@ -38,6 +38,9 @@
 #include "GeoSceneVector.h"
 #include "GeoSceneXmlDataSource.h"
 
+#include "GeoDataDocument.h"
+#include "GeoDataStyle.h"
+
 #include "DgmlAuxillaryDictionary.h"
 
 #include "GeoPainter.h"
@@ -91,6 +94,7 @@ class MarbleModelPrivate
     void  resize( int width, int height );
     void  notifyModelChanged();
     void  geoDataDocumentLoaded( GeoDataDocument& document );
+    void geoDataDocumentAdded( GeoDataDocument* document );
 
     static QAtomicInt       refCounter;
     MarbleModel             *m_parent;
@@ -173,6 +177,8 @@ MarbleModel::MarbleModel( QObject *parent )
 
     connect( d->m_placemarkmanager, SIGNAL( geoDataDocumentLoaded( GeoDataDocument& ) ),
              this,                  SLOT( geoDataDocumentLoaded( GeoDataDocument& ) ) );
+    connect( d->m_placemarkmanager, SIGNAL( geoDataDocumentAdded( GeoDataDocument* ) ),
+             this,                  SLOT( geoDataDocumentAdded( GeoDataDocument* ) ) );
 
     d->m_placemarkmodel = new MarblePlacemarkModel( d->m_placemarkmanager, this );
     d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_placemarkmodel );
@@ -766,6 +772,19 @@ void MarbleModelPrivate::geoDataDocumentLoaded( GeoDataDocument& document )
     AbstractFileViewItem* item = new KmlFileViewItem( *m_placemarkmanager,
                                                       document );
 
+    m_fileviewmodel->append( item );
+}
+
+void MarbleModelPrivate::geoDataDocumentAdded( GeoDataDocument* document )
+{
+    AbstractFileViewItem* item = new KmlFileViewItem( *m_placemarkmanager,
+                                                      *document );
+
+    foreach(GeoDataPlacemark* placemark, document->placemarks())
+    {
+        QString styleUrl = placemark->styleUrl().replace("#", "");
+        placemark->setStyle( document->style( styleUrl ) );
+    };
     m_fileviewmodel->append( item );
 }
 

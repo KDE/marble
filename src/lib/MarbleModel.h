@@ -326,6 +326,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     Q_PRIVATE_SLOT( d, void notifyModelChanged() )
     Q_PRIVATE_SLOT( d, void geoDataDocumentLoaded( GeoDataDocument& ) )
+    Q_PRIVATE_SLOT( d, void geoDataDocumentAdded( GeoDataDocument* ) )
 };
 
 }
