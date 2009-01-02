@@ -17,13 +17,15 @@
 #include <QtCore/QModelIndex>
 #include <QtCore/QVariant>
 
+#include "marble_export.h"
+
 namespace Marble
 {
 
 class AbstractFileViewItem;
 class BoundingBox;
 
-class FileViewModel : public QAbstractListModel
+class MARBLE_EXPORT FileViewModel : public QAbstractListModel
 {
     Q_OBJECT
 
