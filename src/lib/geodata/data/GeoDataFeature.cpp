@@ -34,7 +34,7 @@ class GeoDataFeaturePrivate
   public:
     GeoDataFeaturePrivate() :
         m_popularity( 0 ),
-        m_popularityIndex( 0 ),
+        m_popularityIndex( 19 ),
         m_visible( true ),
         m_role(' '),
         m_style( 0 ),
