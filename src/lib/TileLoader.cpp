@@ -43,7 +43,7 @@
 
 #ifdef Q_CC_MSVC
 # ifndef KDEWIN_MATH_H
-   long qreal log(int i) { return log((long qreal)i); }
+   long double log(int i) { return log((long double)i); }
 # endif
 #endif
 
