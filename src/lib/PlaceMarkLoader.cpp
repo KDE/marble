@@ -10,6 +10,7 @@
 
 #include "PlaceMarkLoader.h"
 
+#include <QtCore/QBuffer>
 #include <QtCore/QDataStream>
 #include <QtCore/QDateTime>
 #include <QtCore/QDebug>
@@ -29,11 +30,19 @@ namespace Marble {
 
 PlaceMarkLoader::PlaceMarkLoader( QObject* parent, const QString& file )
  : QThread( parent ), 
-   m_filepath( file ) {
+   m_filepath( file ),
+   m_contents( QString() )   {
+}
+
+PlaceMarkLoader::PlaceMarkLoader( QObject* parent, const QString& contents, const QString& file )
+ : QThread( parent ), 
+   m_filepath( file ), 
+   m_contents( contents ) {
 }
 
 void PlaceMarkLoader::run() {
 
+if( m_contents.isEmpty() ) {
     QString defaultcachename;
     QString defaultsrcname;
     QString defaulthomecache;
@@ -110,6 +119,15 @@ void PlaceMarkLoader::run() {
         qDebug() << "No Default Placemark Source File for " << m_filepath;
         emit placeMarkLoaderFailed( this );
     }
+} else {
+    PlaceMarkContainer *container = new PlaceMarkContainer( m_filepath );
+
+    // Read the KML Data
+    importKmlFromData( container );
+
+    emit placeMarksLoaded( this, container );
+}
+
 }
 
 const quint32 MarbleMagicNumber = 0x31415926;
@@ -138,6 +156,32 @@ void PlaceMarkLoader::importKml( const QString& filename,
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
     *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(), 
                                               m_filepath );
+
+    file.close();
+
+    emit newGeoDataDocumentAdded( dataDocument );
+}
+
+void PlaceMarkLoader::importKmlFromData( PlaceMarkContainer* placeMarkContainer )
+{
+    GeoDataParser parser( GeoData_KML );
+
+    QByteArray ba( m_contents.toUtf8() );
+    QBuffer buffer( &ba );
+    buffer.open( QIODevice::ReadOnly );
+
+    if ( !parser.read( &buffer ) ) {
+        qWarning( "Could not parse buffer!" );
+        return;
+    }
+    GeoDocument* document = parser.releaseDocument();
+    Q_ASSERT( document );
+
+    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
+    *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(), 
+                                              m_filepath );
+
+    buffer.close();
 
     emit newGeoDataDocumentAdded( dataDocument );
 }

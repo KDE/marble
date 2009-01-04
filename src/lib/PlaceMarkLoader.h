@@ -23,6 +23,7 @@ class PlaceMarkLoader : public QThread {
     Q_OBJECT
     public:
         PlaceMarkLoader( QObject* parent, const QString& file );
+        PlaceMarkLoader( QObject* parent, const QString& contents, const QString& name );
 
         void run();
     Q_SIGNALS:
@@ -33,8 +34,10 @@ class PlaceMarkLoader : public QThread {
         bool loadFile( const QString& filename, PlaceMarkContainer* placeMarkContainer );
         void saveFile( const QString& filename, PlaceMarkContainer* placeMarkContainer );
         void importKml( const QString& filename, PlaceMarkContainer* placeMarkContainer );
+        void importKmlFromData( PlaceMarkContainer* placeMarkContainer );
 
         QString m_filepath;
+        QString m_contents;
 };
 
 } // namespace Marble
