@@ -117,12 +117,9 @@ bool NavigationFloatItem::renderFloatItem(GeoPainter *painter,
     Q_UNUSED(viewport);
     Q_UNUSED(layer);
 
-    painter->end();
     // Paint widget without a background
-    m_navigationParent->render( painter->device(), 
+    m_navigationParent->render( painter, 
           QPoint( padding(), padding() ), QRegion(),QWidget::RenderFlags(QWidget::DrawChildren));
-
-    painter->begin( painter->device() );
 
     return true;
 }
