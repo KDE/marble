@@ -57,7 +57,8 @@ public:
 
 
     void                    addPlaceMarkFile (const QString& filename);
-    void                    addPlaceMarkData (const QString& data);
+    void                    addPlaceMarkData (const QString& data, const QString& key = "data");
+    void                    removePlaceMarkKey( const QString& key );
     QVector<QPersistentModelIndex>  whichFeatureAt (const QPoint&) const;
 
 //mt undefined symbol: PlaceMarkLayout* None -- need mapped type?
