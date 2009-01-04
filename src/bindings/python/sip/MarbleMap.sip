@@ -66,7 +66,8 @@ public:
     QItemSelectionModel*    placeMarkSelectionModel () const;
     qreal                   moveStep ();
     void                    addPlaceMarkFile (const QString& filename);
-    void                    addPlaceMarkData (const QString& data);
+    void                    addPlaceMarkData (const QString& data, const QString& key = "data");
+    void                    removePlaceMarkKey( const QString& key );
     Marble::Quaternion      planetAxis () const;
     QPixmap                 mapScreenShot ();
     bool                    propertyValue (const QString& name) const;

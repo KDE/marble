@@ -342,7 +342,7 @@ void MarbleWidget::addPlaceMarkData( const QString &data, const QString &key )
 
 void MarbleWidget::removePlaceMarkKey( const QString &key )
 {
-    d->m_map->removePlaceMarkKey( data );
+    d->m_map->removePlaceMarkKey( key );
 }
 
 QPixmap MarbleWidget::mapScreenShot()

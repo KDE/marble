@@ -570,9 +570,14 @@ void MarbleMap::addPlaceMarkFile( const QString &filename )
     d->m_model->addPlaceMarkFile( filename );
 }
 
-void MarbleMap::addPlaceMarkData( const QString &data )
+void MarbleMap::addPlaceMarkData( const QString &data, const QString &key )
 {
-    d->m_model->addPlaceMarkData( data );
+    d->m_model->addPlaceMarkData( data, key );
+}
+
+void MarbleMap::removePlaceMarkKey( const QString &key )
+{
+    d->m_model->removePlaceMarkKey( key );
 }
 
 
