@@ -12,18 +12,10 @@ option(TILES_AT_COMPILETIME "generate the srtm tiles at compiletime" ON)
 ###################################################
 # Check if KDE4 is available
 if( NOT QTONLY AND NOT KDE4_FOUND )
-    find_package(KDE4)
+    find_package(KDE4 REQUIRED)
+    include (KDE4Defaults)
+    include (MacroLibrary)
 endif( NOT QTONLY AND NOT KDE4_FOUND) 
-
-###################################################
-# Check for Plasma
-if( NOT QTONLY AND KDE4_FOUND )
-    include(MacroOptionalAddSubdirectory)
-    macro_optional_find_package(Plasma)
-    macro_log_feature(PLASMA_FOUND "Plasma" "Plasma is the KDE4 desktop"
-                        "http://plasma.kde.org" FALSE ""
-                        "Builds the Marblebased World Clock plasmoid")
-endif( NOT QTONLY AND KDE4_FOUND )
 
 ####################################################
 # build unit tests
@@ -183,15 +175,10 @@ if(QTONLY)
   set( QT_USE_QTTEST     ON )
   set( QT_USE_QTSCRIPT   ON )
   include( ${QT_USE_FILE} )
-  
+
   # add a flag to be able to distinguish between qt 
   # and kde mode in the sources
   add_definitions(-DQTONLY)
-else(QTONLY)
-  # search packages used by KDE
-  find_package(KDE4 REQUIRED)
-  include (KDE4Defaults)
-  include (MacroLibrary)
 endif (QTONLY)
 
 #############################################################
