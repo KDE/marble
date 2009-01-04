@@ -160,8 +160,6 @@ public:
     bool                    mapCoversViewport ();
     Marble::AngleUnit       defaultAngleUnit () const;
     void                    setDefaultAngleUnit (Marble::AngleUnit angleUnit);
-    Marble::DistanceUnit    defaultDistanceUnit () const;
-    void                    setDefaultDistanceUnit (Marble::DistanceUnit distanceUnit);
     QFont                   defaultFont () const;
     void                    setDefaultFont (const QFont& font);
 
