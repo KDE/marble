@@ -97,22 +97,18 @@ class PlaceMarkManager : public QObject
     /**
      * Loads a new KML data as string into the manager.
      */
-    void loadKmlFromData( const QString& data, bool clearPrevious = false );
+    void loadKmlFromData( const QString& data, const QString& key = "data", bool finalize = true );
 
  Q_SIGNALS:
     void geoDataDocumentAdded( GeoDataDocument* );
     void geoDataDocumentLoaded( GeoDataDocument& );
+    void finalize();
 
  private Q_SLOTS:
     void loadPlaceMarkContainer( PlaceMarkLoader* loader, PlaceMarkContainer * );
     void cleanupLoader( PlaceMarkLoader* loader );
 
  private:
-    void importKml( const QString&, PlaceMarkContainer* );
-    void importKmlFromData( const QString&, PlaceMarkContainer* );
-    void saveFile( const QString&, PlaceMarkContainer* );
-    bool loadFile( const QString&, PlaceMarkContainer* );
-
     void setPlaceMarkModel( MarblePlacemarkModel *model );
 
     Q_DISABLE_COPY( PlaceMarkManager )

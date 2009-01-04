@@ -201,7 +201,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void setDownloadManager( HttpDownloadManager *downloadManager );
 
     void addPlaceMarkFile( const QString& filename );
-    void addPlaceMarkData( const QString& data );
+    void addPlaceMarkData( const QString& data, const QString& key = "data" );
+    void removePlaceMarkKey( const QString& key );
 
     QVector<QPersistentModelIndex> whichFeatureAt( const QPoint& ) const;
 

@@ -133,190 +133,33 @@ void PlaceMarkManager::loadPlaceMarkContainer( PlaceMarkLoader* loader, PlaceMar
     if ( container )
     { 
         m_model->addPlaceMarks( *container, false, m_finalized && m_loaderList.isEmpty() );
+        if( m_finalized ) 
+            emit finalize();
     }
 }
 
 void PlaceMarkManager::loadKml( const QString& filename, bool clearPrevious )
 {
-    Q_ASSERT( m_model != 0 && "You have called loadKml before creating a model!" );
-
-    PlaceMarkContainer container;
-    importKml( filename, &container );
-
-    m_model->addPlaceMarks( container, clearPrevious );
-    qDebug() << "loaded placemarks in " << m_geomodel->geoDataRoot();
-    emit geoDataDocumentLoaded( *(m_geomodel->geoDataRoot()) );
+    addPlaceMarkFile( filename, true );
 }
 
-void PlaceMarkManager::loadKmlFromData( const QString& data, bool clearPrevious )
+void PlaceMarkManager::loadKmlFromData( const QString& data, const QString& key, bool finalize )
 {
     Q_ASSERT( m_model != 0 && "You have called loadKmlFromData before creating a model!" );
 
     PlaceMarkContainer container;
-    importKmlFromData( data, &container );
 
-    m_model->addPlaceMarks( container, clearPrevious );
-}
-
-void PlaceMarkManager::importKml( const QString& filename,
-                                  PlaceMarkContainer* placeMarkContainer )
-{
-    GeoDataParser parser( GeoData_KML );
-
-    QFile file( filename );
-    if ( !file.exists() ) {
-        qWarning( "File does not exist!" );
-        return;
-    }
-
-    // Open file in right mode
-    file.open( QIODevice::ReadOnly );
-
-    if ( !parser.read( &file ) ) {
-        qWarning( "Could not parse file!" );
-        return;
-    }
-    GeoDocument* document = parser.releaseDocument();
-    Q_ASSERT( document );
-
-    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
-    *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(), 
-                                              QFileInfo( filename ).baseName() );
-
-    // This sets and initializes the geomodel
-    m_geomodel->setGeoDataRoot( dataDocument );
-}
-
-void PlaceMarkManager::importKmlFromData( const QString& data,
-                                         PlaceMarkContainer* placeMarkContainer )
-{
-    GeoDataParser parser( GeoData_KML );
-
-    QByteArray ba( data.toUtf8() );
-    QBuffer buffer( &ba );
-    buffer.open( QIODevice::ReadOnly );
-
-    if ( !parser.read( &buffer ) ) {
-        qWarning( "Could not parse data!" );
-        return;
-    }
-    GeoDocument* document = parser.releaseDocument();
-    Q_ASSERT( document );
-
-    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
-    // we might have to suppress caching for this part
-    *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(),
-                                              QString("DataImport") );
-    // This sets and initializes the geomodel
-    m_geomodel->setGeoDataRoot( dataDocument );
-}
-
-static const quint32 MarbleMagicNumber = 0x31415926;
-
-void PlaceMarkManager::saveFile( const QString& filename,
-                                 PlaceMarkContainer* placeMarkContainer )
-{
-    if ( QDir( MarbleDirs::localPath() + "/placemarks/" ).exists() == false )
-        ( QDir::root() ).mkpath( MarbleDirs::localPath() + "/placemarks/" );
-
-    QFile file( filename );
-    file.open( QIODevice::WriteOnly );
-    QDataStream out( &file );
-
-    // Write a header with a "magic number" and a version
-    // out << (quint32)0xA0B0C0D0;
-    out << (quint32)MarbleMagicNumber;
-    out << (qint32)014;
-
-    out.setVersion( QDataStream::Qt_4_2 );
-
-    qreal lon;
-    qreal lat;
-    qreal alt;
-
-    PlaceMarkContainer::const_iterator it = placeMarkContainer->constBegin();
-    PlaceMarkContainer::const_iterator const end = placeMarkContainer->constEnd();
-    for (; it != end; ++it )
-    {
-        out << (*it)->name();
-        (*it)->coordinate( lon, lat, alt );
-
-        out << lon << lat << alt;
-        out << QString( (*it)->role() );
-        out << QString( (*it)->description() );
-        out << QString( (*it)->countryCode() );
-        out << (qreal)(*it)->area();
-        out << (qint64)(*it)->population();
-    }
-}
-
-
-bool PlaceMarkManager::loadFile( const QString& filename,
-                                 PlaceMarkContainer* placeMarkContainer )
-{
-    QFile file( filename );
-    file.open( QIODevice::ReadOnly );
-    QDataStream in( &file );
-
-    // Read and check the header
-    quint32 magic;
-    in >> magic;
-    if ( magic != MarbleMagicNumber ) {
-        qDebug( "Bad file format!" );
-        return false;
-    }
-
-    // Read the version
-    qint32 version;
-    in >> version;
-    if ( version < 014 ) {
-        qDebug( "Bad file - too old!" );
-        return false;
-    }
-    /*
-      if (version > 002) {
-      qDebug( "Bad file - too new!" );
-      return;
-      }
-    */
-
-    in.setVersion( QDataStream::Qt_4_2 );
-
-    // Read the data itself
-    qreal   lon;
-    qreal   lat;
-    qreal   alt;
-    qreal   area;
-
-    QString  tmpstr;
-    qint64   tmpint64;
-
-    QString testo;
-
-    GeoDataPlacemark  *mark;
-    while ( !in.atEnd() ) {
-        mark = new GeoDataPlacemark;
-
-        in >> tmpstr;
-        mark->setName( tmpstr );
-        testo = tmpstr;
-        in >> lon >> lat >> alt;
-        mark->setCoordinate( lon, lat, alt );
-        in >> tmpstr;
-        mark->setRole( tmpstr.at(0) );
-        in >> tmpstr;
-        mark->setDescription( tmpstr );
-        in >> tmpstr;
-        mark->setCountryCode( tmpstr );
-        in >> area;
-        mark->setArea( area );
-        in >> tmpint64;
-        mark->setPopulation( tmpint64 );
-
-        placeMarkContainer->append( mark );
-    }
-
-    return true;
+    m_finalized = true;
+    qDebug() << "adding container:" << key;
+    PlaceMarkLoader* loader = new PlaceMarkLoader( this, data, key );
+    connect (   loader, SIGNAL( placeMarksLoaded( PlaceMarkLoader*, PlaceMarkContainer * ) ), 
+                this, SLOT( loadPlaceMarkContainer( PlaceMarkLoader*, PlaceMarkContainer * ) ) );
+    connect (   loader, SIGNAL( placeMarkLoaderFailed( PlaceMarkLoader* ) ), 
+                this, SLOT( cleanupLoader( PlaceMarkLoader* ) ) );
+    connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
+                this, SIGNAL( geoDataDocumentAdded( GeoDataDocument* ) ) );
+    m_loaderList.append( loader );
+    loader->start();
 }
 
 #include "PlaceMarkManager.moc"

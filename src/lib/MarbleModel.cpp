@@ -186,13 +186,13 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_placemarkmanager->setGeoModel( d->m_geometrymodel );
 
     d->m_placeMarkLayout = new PlaceMarkLayout( this );
-    connect( d->m_placemarkselectionmodel, SIGNAL( selectionChanged( QItemSelection,
-                                                                        QItemSelection) ),
-             d->m_placeMarkLayout,         SLOT( requestStyleReset() ) );
-    connect( d->m_placemarkmodel,  SIGNAL( layoutChanged() ),
-             d->m_placeMarkLayout, SLOT( requestStyleReset() ) );
-
-    // d->m_placemarkmanager->loadStandardPlaceMarks();
+    connect( d->m_placemarkmanager,         SIGNAL( finalize() ),
+             d->m_placeMarkLayout,          SLOT( requestStyleReset() ) );
+    connect( d->m_placemarkselectionmodel,  SIGNAL( selectionChanged( QItemSelection,
+                                                                      QItemSelection) ),
+             d->m_placeMarkLayout,          SLOT( requestStyleReset() ) );
+    connect( d->m_placemarkmodel,           SIGNAL( layoutChanged() ),
+             d->m_placeMarkLayout,          SLOT( requestStyleReset() ) );
 
     d->m_gpxFileModel = new GpxFileModel( this );
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
@@ -407,7 +407,6 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             for (; itds != endds; ++itds) {
                 GeoSceneAbstractDataset* dataset = *itds;
                 if( dataset->fileFormat() == "KML" ) {
-                    qDebug() << reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename();
                     loadedContainers.removeOne( reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename() );
                     loadList << reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename();
                 }
@@ -417,7 +416,6 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     // unload old standard Placemarks which are not part of the new map
     foreach(const QString& container, loadedContainers) {
         loadedContainers.pop_front();
-        qDebug() << "removing container:" << container << (loadList.isEmpty() && loadedContainers.isEmpty());
         d->m_placemarkmanager->model()->removePlaceMarks( container, loadedContainers.isEmpty() );
     }
     // load new standard Placemarks
@@ -427,7 +425,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     }
     
 
-    d->m_placeMarkLayout->requestStyleReset();
+//    d->m_placeMarkLayout->requestStyleReset();
     // FIXME: To be removed after MapTheme / KML refactoring
 
     // FIXME: Still needs to get fixed for the DGML2 refactoring
@@ -750,9 +748,25 @@ void MarbleModel::addPlaceMarkFile( const QString& filename )
     d->notifyModelChanged();
 }
 
-void MarbleModel::addPlaceMarkData( const QString& data )
+void MarbleModel::addPlaceMarkData( const QString& data, const QString& key )
 {
-    d->m_placemarkmanager->loadKmlFromData( data, false );
+    QStringList loadedContainers = d->m_placemarkmanager->model()->containers();
+    if( loadedContainers.contains( key ) )
+    {
+        d->m_placemarkmanager->model()->removePlaceMarks( key, false );
+    }
+    d->m_placemarkmanager->loadKmlFromData( data, key, false );
+
+    d->notifyModelChanged();
+}
+
+void MarbleModel::removePlaceMarkKey( const QString& key )
+{
+    QStringList loadedContainers = d->m_placemarkmanager->model()->containers();
+    if( loadedContainers.contains( key ) )
+    {
+        d->m_placemarkmanager->model()->removePlaceMarks( key, false );
+    }
 
     d->notifyModelChanged();
 }
