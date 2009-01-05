@@ -42,18 +42,7 @@ class MarbleGeoDataPlugin : public MarbleRenderPlugin
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
 
-/*    void setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
-    void setPenStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
-    bool renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *geometry, QString styleUrl );
-    bool renderGeoDataFeature( GeoPainter *painter, GeoDataFeature *feature );
-
-    QBrush m_currentBrush;
-    QPen m_currentPen;*/
-    
     MarbleGeoDataView* m_view;
-//    MarbleGeometryModel* m_model;
-    
-    
  public:
     ~MarbleGeoDataPlugin();
 
