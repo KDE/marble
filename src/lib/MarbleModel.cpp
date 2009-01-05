@@ -425,9 +425,6 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     }
     
 
-//    d->m_placeMarkLayout->requestStyleReset();
-    // FIXME: To be removed after MapTheme / KML refactoring
-
     // FIXME: Still needs to get fixed for the DGML2 refactoring
 //    d->m_placeMarkLayout->placeMarkPainter()->setDefaultLabelColor( d->m_maptheme->labelColor() );
 
