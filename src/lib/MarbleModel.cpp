@@ -414,6 +414,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         }
     }
     // unload old standard Placemarks which are not part of the new map
+    qDebug() << d->m_placemarkmanager->model()->containers() << loadedContainers;
     foreach(const QString& container, loadedContainers) {
         loadedContainers.pop_front();
         d->m_placemarkmanager->model()->removePlaceMarks( container, loadedContainers.isEmpty() );
@@ -800,6 +801,8 @@ void MarbleModelPrivate::geoDataDocumentAdded( GeoDataDocument* document )
         placemark->setStyle( document->style( styleUrl ) );
     };
     m_fileviewmodel->append( item );
+    
+    m_geometrymodel->setGeoDataRoot( document );
 }
 
 void MarbleModel::update()
