@@ -100,4 +100,3 @@ FileViewModel* MarbleDataFacade::fileViewModel() const
 
 }
 
-#include "MarbleDataFacade.moc"
