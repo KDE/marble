@@ -23,6 +23,7 @@
 
 #include <QtCore/QDebug>
 #include <QtCore/QStringList>
+#include <QtCore/QRegExp>
 
 #include "KmlElementDictionary.h"
 #include "GeoDataPlacemark.h"
@@ -46,7 +47,7 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
 
     if( parentItem.nodeAs<GeoDataGeometry>() || parentItem.nodeAs<GeoDataPlacemark>() ) {
-        QStringList  coordinatesLines = parser.readElementText().trimmed().split( ' ', QString::SkipEmptyParts );
+        QStringList  coordinatesLines = parser.readElementText().trimmed().split( QRegExp("\\s"), QString::SkipEmptyParts );
         Q_FOREACH( const QString& line, coordinatesLines ) {
             QStringList coordinates = line.trimmed().split( ',' );
             if ( parentItem.nodeAs<GeoDataPlacemark>() ) {
