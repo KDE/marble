@@ -23,9 +23,9 @@ add_subdirectory( lib )
 add_subdirectory( plugins )
 add_subdirectory( bindings )
 
-if( NOT QTONLY )
+if( NOT QTONLY AND KDE4_PLASMA_LIBS )   # don't try to build this against kdelibs < 4.2
    add_subdirectory( plasmoid )
-endif( NOT QTONLY )
+endif( NOT QTONLY AND KDE4_PLASMA_LIBS )
 
 if(APPLE)
   add_subdirectory( mac )
