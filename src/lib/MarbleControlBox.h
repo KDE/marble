@@ -216,6 +216,11 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      */
     void setCurrentLocationTabShown( bool show );
     /**
+     * @brief Control whether the Current Location tab is shown.
+     * @param show  boolean that controls if the Current Location tab is shown.
+     */
+    void setCurrentLocation2TabShown( bool show );
+    /**
      * @brief Control whether the File View tab is shown.
      * @param show  boolean that controls if the File View tab is shown.
      */

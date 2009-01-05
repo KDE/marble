@@ -64,6 +64,7 @@ class ControlView : public QWidget
     void setLegendTabShown( bool );
     void setMapViewTabShown( bool );
     void setCurrentLocationTabShown( bool );
+    void setCurrentLocation2TabShown( bool );
     void setFileViewTabShown( bool );
 
  private:

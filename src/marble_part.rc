@@ -17,6 +17,8 @@
   </Menu>
   <Menu name="view" noMerge="1"><text>&amp;View</text>
     <Merge name="StandardToolBarMenuHandler" />
+    <Action name="show_currentlocation" group="show_merge"/>
+    <Separator/>
     <Action name="show_crosshairs" group="show_merge"/>
     <Separator/>
     <Menu name="infoboxes" noMerge="1"><text>&amp;Info Boxes</text>

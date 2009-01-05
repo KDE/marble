@@ -115,6 +115,11 @@ void ControlView::setCurrentLocationTabShown( bool show )
     m_control->setCurrentLocationTabShown( show );
 }
 
+void ControlView::setCurrentLocation2TabShown( bool show )
+{
+    m_control->setCurrentLocation2TabShown( show );
+}
+
 void ControlView::setFileViewTabShown( bool show )
 {
     m_control->setFileViewTabShown( show );

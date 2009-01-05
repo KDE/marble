@@ -74,6 +74,7 @@ class MarbleControlBoxPrivate
     QWidget              *m_legendWidget;
     QWidget              *m_mapViewWidget;
     QWidget              *m_currentLocationWidget;
+    QWidget              *m_currentLocation2Widget;
     QWidget              *m_fileViewWidget;
 
     QStandardItemModel     *m_mapThemeModel;
@@ -119,6 +120,9 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->uiWidget.toolBox->setCurrentIndex( 4 );
     d->m_fileViewWidget = d->uiWidget.toolBox->currentWidget();
 
+    d->uiWidget.toolBox->setCurrentIndex( 5 );
+    d->m_currentLocation2Widget = d->uiWidget.toolBox->currentWidget();
+
     d->m_sortproxy = new QSortFilterProxyModel( d->uiWidget.locationListView );
     d->uiWidget.locationListView->setModel( d->m_sortproxy );
 
@@ -131,6 +135,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     //default
     setCurrentLocationTabShown( false );
+    setCurrentLocation2TabShown( false );
     setFileViewTabShown( false );
 
     setupGpsOption();
@@ -480,6 +485,11 @@ void MarbleControlBox::setFileViewTabShown( bool show )
     setWidgetTabShown( d->m_fileViewWidget, 4, show, title );
 }
 
+void MarbleControlBox::setCurrentLocation2TabShown( bool show )
+{
+    QString  title = tr( "Current Location" );
+    setWidgetTabShown( d->m_currentLocation2Widget, 5, show, title );
+}
 
 
 

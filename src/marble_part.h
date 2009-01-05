@@ -61,6 +61,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  copyCoordinates();
     void  setShowClouds( bool );
     void  setShowAtmosphere( bool );
+    void  setShowCurrentLocation( bool );
     void  setShowCrosshairs( bool );
     void  showFullScreen( bool );
     void  showSideBar( bool );
@@ -98,6 +99,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_workOfflineAction;
     KAction      *m_copyMapAction;
     KAction      *m_copyCoordinatesAction;
+    KAction      *m_currentLocationAction;
     KAction      *m_showCrosshairsAction;
     KAction      *m_showCloudsAction;
     KAction      *m_showAtmosphereAction;

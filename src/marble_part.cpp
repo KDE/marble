@@ -325,6 +325,12 @@ void MarblePart::copyCoordinates()
     clipboard->setText( positionString );
 }
 
+void MarblePart::setShowCurrentLocation( bool show )
+{
+    m_controlView->setCurrentLocationTabShown( show );
+//    m_controlView->setCurrentLocation2TabShown( show );
+}
+
 void MarblePart::readSettings()
 {
     qDebug() << "Start: MarblePart::readSettings()";
@@ -358,6 +364,9 @@ void MarblePart::readSettings()
 
     workOffline( MarbleSettings::workOffline() );
     m_workOfflineAction->setChecked( MarbleSettings::workOffline() );
+
+    setShowCurrentLocation( MarbleSettings::showCurrentLocation() );
+    m_currentLocationAction->setChecked( MarbleSettings::showCurrentLocation() );
 
     m_controlView->marbleWidget()->setShowAtmosphere( MarbleSettings::showAtmosphere() );
     m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
@@ -428,6 +437,8 @@ void MarblePart::writeSettings()
     MarbleSettings::setWorkOffline( m_workOfflineAction->isChecked() );
     MarbleSettings::setShowAtmosphere( m_controlView->marbleWidget()->showAtmosphere() );
 
+    MarbleSettings::setShowCurrentLocation( m_currentLocationAction->isChecked() );
+
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Marble::Still ) );
     MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->mapQuality( Marble::Animation )  );
 
@@ -490,6 +501,15 @@ void MarblePart::setupActions()
     m_workOfflineAction->setChecked( false );
     connect( m_workOfflineAction, SIGNAL( triggered( bool ) ),
              this,                SLOT( workOffline( bool ) ) );
+
+    // Action: Current Location
+    m_currentLocationAction = new KAction( this );
+    actionCollection()->addAction( "show_currentlocation", m_currentLocationAction );
+    m_currentLocationAction->setText( i18n( "Current Location" ) );
+    m_currentLocationAction->setCheckable( true );
+    m_currentLocationAction->setChecked( false );
+    connect( m_currentLocationAction, SIGNAL( triggered( bool ) ),
+             this,                SLOT( setShowCurrentLocation( bool ) ) );
 
     // Action: Copy Map to the Clipboard
     m_copyMapAction = KStandardAction::copy( this, SLOT( copyMap() ),
