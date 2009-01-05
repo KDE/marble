@@ -218,10 +218,7 @@ void GeoDataCoordinates::normalizeLonLat( qreal &lon, qreal &lat )
 
 GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& successful )
 {
-    successful = false; //assume failure
-    
-    QString input = string.toLower();
-    input = input.trimmed(); //remove front spaces
+    QString input = string.toLower().trimmed();
     qDebug() << "Creating GeoDataCoordinates from string " << input;
     
     qreal lat, lon;
@@ -315,16 +312,17 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
             latdeg = regex.cap( 3 );
             latdir = regex.cap( 4 );
         }
-        
-        if( latdir == c[2] ) //south
-            lat = latdeg.toDouble() * -1.0;
-        else //north
-            lat = latdeg.toDouble();
-            
-        if( londir == c[3] ) //west
-            lon = londeg.toDouble() * -1.0;
-        else // east
-            lon = londeg.toDouble();
+
+        //convert the string to a number
+        lat = latdeg.toDouble();
+        lon = londeg.toDouble();
+
+        //if south make the value negative
+        if( latdir == c[2].at(0) || latdir == c[2] ) 
+            lat *= -1.0;
+        //if west make the value negative
+        if( londir == c[3].at(0) || londir == c[3] ) 
+            lon *= -1.0;
         
         qDebug() << "Created lat / lon " << lat << lon;
         
@@ -366,13 +364,16 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
             latsec = regex.cap( 7 );
             latdir = regex.cap( 8 );
         }
+
+        //Add the fractional parts to make the total
         lat = latdeg.toDouble() + (latmin.toDouble()/60.0) + (latsec.toDouble()/3600.0);
         lon = londeg.toDouble() + (lonmin.toDouble()/60.0) + (lonsec.toDouble()/3600.0);
-        
-        if( latdir == c[2] ) //south, so we invert
+
+        //if the direction is south, make the value negative
+        if( latdir == c[2].at(0) || latdir == c[2] )
             lat *= -1.0;
-            
-        if( londir == c[3] ) //west, so we invert
+        //if the direction is west, make the value negative
+        if( londir == c[3].at(0) || londir == c[3] )
             lon *= -1.0;
 
         qDebug() << "Created lat / lon " << lat << lon;
@@ -414,10 +415,10 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
         lat = latdeg.toDouble() + (latmin.toDouble()/60.0);
         lon = londeg.toDouble() + (lonmin.toDouble()/60.0);
 
-        if( latdir == c[2] ) //south, so we invert
+        if( latdir == c[2].at(0) || latdir == c[2] ) //south, so we invert
             lat *= -1.0;
 
-        if( londir == c[3] ) //west, so we invert
+        if( londir == c[3].at(0) || londir == c[3] ) //west, so we invert
             lon *= -1.0;
 
         qDebug() << "Created lat / lon " << lat << lon;
@@ -427,7 +428,9 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
         return coords;
     }
     //END REGEX4
-    
+
+    //we didn't match so leave "successful" as FALSE and return empty coords
+    successful = false;
     return GeoDataCoordinates();
 }
 
