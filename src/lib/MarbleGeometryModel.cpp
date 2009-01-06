@@ -234,7 +234,6 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
                             parentItem )->features().at( row ) );
     }
 
-    GeoDataGeometry *test;
     if( dynamic_cast<GeoDataPlacemark*>( parentItem ) )
     {
         /* as said above - if you add styles, please check for the row over here */
