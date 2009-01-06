@@ -49,8 +49,37 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleRenderPlugin
                                       const QSizeF &size = QSizeF( 150.0, 50.0 ) );
     virtual ~MarbleAbstractFloatItem();
 
+    /**
+     * @brief Set the position of the float item
+     * @param pos Position
+     *
+     * Positive x-coordinates are counted left-aligned from the left map border.
+     * Negative x-coordinates are counted right-aligned from the right map border.
+     *
+     * Positive y-coordinates are counted top-aligned from the top map border.
+     * Negative y-coordinates are counted right-aligned from the bottom map border.
+     */
     void    setPosition( const QPointF& position );
+
+    /**
+     * @brief Return the position of the float item
+     *
+     * Positive x-coordinates are counted left-aligned from the left map border.
+     * Negative x-coordinates are counted right-aligned from the right map border.
+     *
+     * Positive y-coordinates are counted top-aligned from the top map border.
+     * Negative y-coordinates are counted right-aligned from the bottom map border.
+     */
     QPointF position() const;
+
+    /**
+     * @brief Return the positive position of the float item
+     * 
+     * All coordinates are counted positive and depend on the current viewport.
+     *
+     * Positive x-coordinates are counted left-aligned from the left map border.
+     * Positive y-coordinates are counted top-aligned from the top map border.
+     */
     QPointF positivePosition( const QRectF& viewPort ) const;
 
     void    setSize( const QSizeF& size );
