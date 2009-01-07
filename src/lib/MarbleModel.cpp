@@ -521,6 +521,8 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
                               bool redrawBackground,
                               const QRect& dirtyRect )
 {
+    if ( !d->m_texmapper ) return;
+
     d->resize( width, height );
 
     // FIXME: Remove this once the LMC is there:
