@@ -42,8 +42,6 @@ class LayerManagerPrivate
     MarbleModel      *m_model;
     MarbleDataFacade *m_dataFacade;
     PluginManager    *m_pluginManager;
-
-    QList<MarbleRenderPlugin *> m_renderPlugins;
 };
 
 
@@ -54,8 +52,7 @@ LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
     d->m_pluginManager = new PluginManager( this );
 
     // Just for initial testing
-    d->m_renderPlugins = d->m_pluginManager->renderPlugins();
-    foreach( MarbleRenderPlugin * renderPlugin,  d->m_renderPlugins ) {
+    foreach( MarbleRenderPlugin * renderPlugin,  d->m_pluginManager->renderPlugins() ) {
         renderPlugin->setDataFacade( d->m_dataFacade );
         renderPlugin->initialize();
     }
@@ -63,13 +60,15 @@ LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
 
 LayerManager::~LayerManager()
 {
+    foreach( MarbleRenderPlugin * renderPlugin,  d->m_pluginManager->renderPlugins() )
+        renderPlugin->setDataFacade( 0 );
     delete d->m_pluginManager;
     delete d;
 }
 
 QList<MarbleRenderPlugin *> LayerManager::renderPlugins() const
 {
-    return d->m_renderPlugins;
+    return d->m_pluginManager->renderPlugins();
 }
 
 QList<MarbleAbstractFloatItem *> LayerManager::floatItems() const
@@ -84,9 +83,12 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
         return;
     }
 
+    if( !d->m_pluginManager )
+        return;
+
     ViewportParams* viewport = viewParams->viewport();
 
-    foreach( MarbleRenderPlugin *renderPlugin,  d->m_renderPlugins ) {
+    foreach( MarbleRenderPlugin *renderPlugin,  d->m_pluginManager->renderPlugins() ) {
         if ( renderPlugin ){
             if ( renderPlugin->enabled() && renderPlugin->visible() ) {
                 renderPlugin->render( painter, viewport, "ALWAYS_ON_TOP" );
@@ -96,7 +98,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
 
     // Looping a second time through is a quick and dirty way to get 
     // the float items displayed on top:
-    foreach( MarbleRenderPlugin * renderPlugin,  d->m_renderPlugins ) {
+    foreach( MarbleRenderPlugin * renderPlugin,  d->m_pluginManager->renderPlugins() ) {
         if ( renderPlugin->renderPosition().contains("FLOAT_ITEM") ) {
             MarbleAbstractFloatItem *floatItem = dynamic_cast<MarbleAbstractFloatItem *>(renderPlugin);
             if ( floatItem
@@ -117,7 +119,7 @@ void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
 {
     d->m_mapTheme = mapTheme;
 
-    foreach( MarbleRenderPlugin * renderPlugin,  d->m_renderPlugins ) {
+    foreach( MarbleRenderPlugin * renderPlugin,  d->m_pluginManager->renderPlugins() ) {
         bool propertyAvailable = false;
         mapTheme->settings()->propertyAvailable( renderPlugin->nameId(), 
 						 propertyAvailable );
@@ -143,7 +145,7 @@ void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
 
 void LayerManager::syncActionWithProperty( QString nameId, bool checked )
 {
-    foreach( MarbleRenderPlugin * renderPlugin,  d->m_renderPlugins ) {
+    foreach( MarbleRenderPlugin * renderPlugin,  d->m_pluginManager->renderPlugins() ) {
         if ( nameId == renderPlugin->nameId() ) {
             if ( renderPlugin->visible() == checked )
                 return;
