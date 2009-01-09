@@ -95,6 +95,9 @@ bool MarbleGeoDataPlugin::isInitialized () const
 }
 bool MarbleGeoDataPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
+    if( !dataFacade()->renderModel() )
+        return false;
+
     if( !m_view->model() ) m_view->setModel( dataFacade()->renderModel() );
     m_view->setGeoPainter( painter );
     return true;
