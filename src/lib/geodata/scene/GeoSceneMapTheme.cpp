@@ -135,7 +135,7 @@ QDir::NoSymLinks );
     QStringListIterator  j( sysmapdirs );
     while ( j.hasNext() ) {
         themedir = j.next();
-        themedirname = QDir( themedir ).path().section( "/", -2, -1);
+        themedirname = QDir( themedir ).path().section( '/', -2, -1);
 
         tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
                                               QDir::Files |

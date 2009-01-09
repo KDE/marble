@@ -54,8 +54,8 @@ bool SVGXmlHandler::startElement(const QString& nspace,
             // qDebug()<<str;
             float  x;
             float  y;
-            x = str.section( ",", 0, 0 ).toFloat();
-            y = str.section( ",", 1, 1 ).toFloat();
+            x = str.section( ',', 0, 0 ).toFloat();
+            y = str.section( ',', 1, 1 ).toFloat();
 			
             // qDebug() << "x:" << x << "y:" << y;
 			

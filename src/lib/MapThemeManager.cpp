@@ -161,7 +161,7 @@ QStringList MapThemeManager::findMapThemes( const QString& basePath )
     QStringListIterator it( mapDirs );
     while ( it.hasNext() ) {
         QString themeDir = it.next() + '/';
-        QString themeDirName = QDir( themeDir ).path().section( "/", -2, -1);
+        QString themeDirName = QDir( themeDir ).path().section( '/', -2, -1);
         QStringList tmp = ( QDir( themeDir ) ).entryList( QStringList( "*.dgml" ),
                                               QDir::Files | QDir::NoSymLinks );
         if ( !tmp.isEmpty() ) {

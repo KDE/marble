@@ -281,7 +281,7 @@ QVariant MarbleLegendBrowser::loadResource ( int type, const QUrl & name )
     if ( type == QTextDocument::ImageResource
          && name.toString().startsWith("checkbox:", Qt::CaseInsensitive) )
     {
-        QString checkBoxName = name.toString().section(":", 1, -1);
+        QString checkBoxName = name.toString().section(':', 1, -1);
         if ( !d->m_checkBoxMap.contains( checkBoxName ) ) {
             newName = MarbleDirs::path( "bitmaps/checkbox_disabled.png" );
         }
@@ -296,7 +296,7 @@ QVariant MarbleLegendBrowser::loadResource ( int type, const QUrl & name )
     if ( type == QTextDocument::ImageResource
          && name.toString().startsWith("pixmap:", Qt::CaseInsensitive) )
     {
-        QString pixmapName = name.toString().section(":", 1, -1);
+        QString pixmapName = name.toString().section(':', 1, -1);
         if ( d->m_symbolMap.contains( pixmapName ) ) {
             return d->m_symbolMap.value( pixmapName );
         }
@@ -314,7 +314,7 @@ void MarbleLegendBrowser::toggleCheckBoxStatus( const QUrl &link )
     }
 
     if ( link.scheme() == "checkbox" ) {
-        QString checkBoxName = link.toString().section(":", 1, -1);
+        QString checkBoxName = link.toString().section(':', 1, -1);
 
         if ( d->m_checkBoxMap.contains( checkBoxName ) ) {
             d->m_checkBoxMap[ checkBoxName ] = !d->m_checkBoxMap.value( checkBoxName );
