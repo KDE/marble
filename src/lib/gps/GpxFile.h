@@ -11,6 +11,7 @@
 #ifndef GPXFILE_H
 #define GPXFILE_H
 
+#include <QtCore/QMetaType>
 #include <QtCore/QString>
 
 #include "AbstractLayerInterface.h"
@@ -72,5 +73,6 @@ class GpxFile : public AbstractLayerInterface
 };
 
 }
+Q_DECLARE_METATYPE(Marble::GpxFile*)
 
 #endif
