@@ -76,7 +76,7 @@ void GeoDataDocument::removeStyle( GeoDataStyle* style )
     d->m_styleHash.remove( style->styleId() );
 }
 
-GeoDataStyle* GeoDataDocument::style( const QString& styleId )
+GeoDataStyle* GeoDataDocument::style( const QString& styleId ) const
 {
     /*
      * FIXME: m_styleHash always should contain at least default
@@ -104,7 +104,7 @@ void GeoDataDocument::removeStyleMap( GeoDataStyleMap* map )
     d->m_styleMapHash.remove( map->styleId() );
 }
 
-GeoDataStyleMap* GeoDataDocument::styleMap( const QString& styleId )
+GeoDataStyleMap* GeoDataDocument::styleMap( const QString& styleId ) const
 {
     return d->m_styleMapHash.value( styleId );
 }
