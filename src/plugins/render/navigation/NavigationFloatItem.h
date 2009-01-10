@@ -32,7 +32,7 @@ class MarbleWidget;
 class NavigationFloatItem: public MarbleAbstractFloatItem {
 Q_OBJECT
 //Q_INTERFACES( MarbleLayerInterface )
-
+MARBLE_PLUGIN( NavigationFloatItem )
  public:
     explicit NavigationFloatItem( const QPointF &point = QPointF( -10, -10 ),
                             const QSizeF &size = QSizeF( 100.0, 250.0 ) );

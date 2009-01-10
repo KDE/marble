@@ -35,6 +35,7 @@ class PanoramioPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES(Marble::MarbleRenderPluginInterface)
+    MARBLE_PLUGIN(PanoramioPlugin)
 
 public:
     QStringList backendTypes() const;

@@ -31,6 +31,7 @@ class MarbleTestPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
+    MARBLE_PLUGIN( MarbleTestPlugin )
 
  public:
     QStringList backendTypes() const;

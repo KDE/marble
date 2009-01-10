@@ -43,6 +43,7 @@ class twitterPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES(Marble::MarbleRenderPluginInterface)
+    MARBLE_PLUGIN(twitterPlugin)
 
 public:
     QStringList backendTypes() const;

@@ -37,6 +37,7 @@ class FITemplateFloatItem  : public MarbleAbstractFloatItem
 {
     Q_OBJECT
     Q_INTERFACES( MarbleRenderPluginInterface )
+    MARBLE_PLUGIN(FITemplateFloatItem)
 
  public:
     explicit FITemplateFloatItem( const QPointF &point = QPointF( -1.0, 10.0 ),

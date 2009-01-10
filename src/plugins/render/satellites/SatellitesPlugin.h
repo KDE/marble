@@ -26,6 +26,7 @@ class SatellitesPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
+    MARBLE_PLUGIN( SatellitesPlugin )
 
  public:
     QStringList backendTypes() const;

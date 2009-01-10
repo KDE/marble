@@ -45,6 +45,7 @@ class MarbleDataViewPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
+    MARBLE_PLUGIN(MarbleDataViewPlugin)
 
     public:
 

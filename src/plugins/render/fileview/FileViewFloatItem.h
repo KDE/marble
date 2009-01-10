@@ -33,6 +33,7 @@ class MarbleWidget;
 class FileViewFloatItem: public MarbleAbstractFloatItem
 {
     Q_OBJECT
+    MARBLE_PLUGIN(FileViewFloatItem)
 
  public:
     explicit FileViewFloatItem( const QPointF &point = QPointF( -1, 10 ),

@@ -34,7 +34,7 @@ class CompassFloatItem  : public MarbleAbstractFloatItem
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-
+    MARBLE_PLUGIN( CompassFloatItem )
  public:
     explicit CompassFloatItem ( const QPointF &point = QPointF( -1.0, 10.0 ),
                                 const QSizeF &size = QSizeF( 75.0, 75.0 ) );

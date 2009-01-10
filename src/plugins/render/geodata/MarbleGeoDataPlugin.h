@@ -41,6 +41,7 @@ class MarbleGeoDataPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
+    MARBLE_PLUGIN(MarbleGeoDataPlugin)
 
     MarbleGeoDataView* m_view;
  public:
