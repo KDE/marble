@@ -414,7 +414,15 @@ void TileCreator::run()
                                            .arg( m, tileDigits, 10, QChar('0') ) );
                 QImage tile( tileName );
 
-                bool  ok = tile.save( tileName, "jpg", 85 );
+                bool ok;
+
+                if ( d->m_dem == "true" ) {
+                    ok = tile.save( tileName, "jpg", 70 );
+                }
+                else {
+                    ok = tile.save( tileName, "jpg", 85 );
+                }
+
                 if ( !ok )
                     qDebug() << "Error while writing Tile: " << tileName; 
                 // Don't exceed 99% as this would cancel the thread unexpectedly
