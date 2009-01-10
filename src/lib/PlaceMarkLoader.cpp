@@ -155,6 +155,7 @@ void PlaceMarkLoader::importKml( const QString& filename,
     Q_ASSERT( document );
 
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
+    dataDocument->setFileName( m_filepath );
     *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(), 
                                               m_filepath );
 
@@ -179,6 +180,7 @@ void PlaceMarkLoader::importKmlFromData( PlaceMarkContainer* placeMarkContainer 
     Q_ASSERT( document );
 
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
+    dataDocument->setFileName( m_filepath );
     *placeMarkContainer = PlaceMarkContainer( dataDocument->placemarks(), 
                                               m_filepath );
 

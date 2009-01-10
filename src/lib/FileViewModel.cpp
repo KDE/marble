@@ -54,6 +54,9 @@ QVariant FileViewModel::data( const QModelIndex & index, int role ) const
             else if ( role == Qt::CheckStateRole ) {
                 return item.isShown () ? Qt::Checked : Qt::Unchecked;
             }
+            else if ( role == AbstractFileViewItem::FilePointerRole ) {
+                return item.data( AbstractFileViewItem::FilePointerRole );
+            }
         }
     }
 

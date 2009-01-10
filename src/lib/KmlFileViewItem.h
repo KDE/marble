@@ -32,7 +32,7 @@ class KmlFileViewItem : public AbstractFileViewItem
      */
     virtual void saveFile();
     virtual void closeFile();
-    virtual QVariant data() const;
+    virtual QVariant data( int role = Qt::DisplayRole ) const;
     virtual bool isShown() const;
     virtual void setShown( bool value );
 

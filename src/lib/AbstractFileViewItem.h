@@ -20,11 +20,14 @@ namespace Marble
 class AbstractFileViewItem
 {
   public:
+    enum Roles {
+        FilePointerRole = Qt::UserRole + 1
+    };
     virtual ~AbstractFileViewItem() {};
 
     virtual void saveFile() = 0;
     virtual void closeFile() = 0;
-    virtual QVariant data() const = 0;
+    virtual QVariant data( int role = Qt::DisplayRole ) const = 0;
     virtual bool isShown() const = 0;
     virtual void setShown( bool value ) = 0;
 };

@@ -60,9 +60,14 @@ void GpxFileViewItem::closeFile()
     //TODO
 }
 
-QVariant GpxFileViewItem::data() const
+QVariant GpxFileViewItem::data( int role ) const
 {
-    return m_gpxFile->display();
+    if( role == Qt::DisplayRole )
+        return m_gpxFile->display();
+    else if( role == AbstractFileViewItem::FilePointerRole )
+        return m_gpxFile;
+    else
+        return QVariant();
 }
 
 bool GpxFileViewItem::isShown() const
