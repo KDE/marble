@@ -27,7 +27,7 @@ class MapScaleFloatItem : public MarbleAbstractFloatItem
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-
+    MARBLE_PLUGIN( MapScaleFloatItem )
  public:
     explicit MapScaleFloatItem( const QPointF &point = QPointF( 10.5, -10.5 ),
                                 const QSizeF &size = QSizeF( 0.0, 40.0 ) );

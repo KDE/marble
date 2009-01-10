@@ -66,7 +66,7 @@ class MarbleStarsPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-
+    MARBLE_PLUGIN( MarbleStarsPlugin )
  public:
     QStringList backendTypes() const;
 

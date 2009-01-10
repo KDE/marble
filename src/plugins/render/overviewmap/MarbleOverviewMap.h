@@ -34,7 +34,8 @@ class MarbleOverviewMap : public MarbleAbstractFloatItem
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-
+    MARBLE_PLUGIN( MarbleOverviewMap )
+    
  public:
     explicit MarbleOverviewMap( const QPointF &point = QPointF( 10.5, 10.5 ),
                                 const QSizeF &size = QSizeF( 166.0, 86.0 ) );

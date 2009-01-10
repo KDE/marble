@@ -40,6 +40,7 @@ class MarblePlacemarksPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
+    MARBLE_PLUGIN( MarblePlacemarksPlugin )
 
     void setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
     void setPenStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );

@@ -68,6 +68,8 @@ class MARBLE_EXPORT MarbleRenderPlugin : public QObject, public MarbleRenderPlug
     MarbleRenderPluginPrivate  * const d;
 };
 
+#define MARBLE_PLUGIN(T) public:\
+    virtual MarbleRenderPlugin* instance() { return new T(); };
 }
 
 #endif // MARBLE_RENDER_PLUGIN_H

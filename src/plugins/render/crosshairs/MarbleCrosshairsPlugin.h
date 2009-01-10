@@ -34,6 +34,7 @@ class MarbleCrosshairsPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
+    MARBLE_PLUGIN(MarbleCrosshairsPlugin)
 
  public:
     QStringList backendTypes() const;

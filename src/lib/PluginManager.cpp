@@ -49,8 +49,8 @@ PluginManager::PluginManager( QObject *parent )
 
 PluginManager::~PluginManager()
 {
-//    qDeleteAll( d->m_renderPlugins );
-//    d->m_renderPlugins.clear();
+    qDeleteAll( d->m_renderPlugins );
+    d->m_renderPlugins.clear();
     delete d;
 }
 
@@ -93,10 +93,11 @@ void PluginManager::loadPlugins()
         QPluginLoader loader( MarbleDirs::pluginPath( fileName ) );
 
         QObject *obj = loader.instance();
-        MarbleRenderPlugin * layerPlugin = qobject_cast<MarbleRenderPlugin *>(obj);
+        MarbleRenderPlugin* layerPlugin = qobject_cast<MarbleRenderPlugin *>(obj);
+        MarbleRenderPlugin* instance = layerPlugin->instance();
 
-        if( layerPlugin ) {
-            d->m_renderPlugins.append( layerPlugin );
+        if( layerPlugin && instance ) {
+            d->m_renderPlugins.append( instance );
         }
         else {
             qDebug() << "Plugin Failure: " << fileName << " is not a valid Marble Plugin:";
