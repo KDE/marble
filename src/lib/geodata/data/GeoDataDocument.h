@@ -24,6 +24,7 @@
 #define GeoDataDocument_h
 
 #include <QtCore/QHash>
+#include <QtCore/QMetaType>
 #include <QtCore/QVector>
 
 #include "geodata_export.h"
@@ -56,6 +57,21 @@ public:
 
     virtual EnumFeatureId featureId() const { return GeoDataDocumentId; };
     virtual bool isGeoDataDocument() const { return true; }
+
+    /**
+     * @brief The filename of the document
+     *
+     * The filename of the document is used internally to identify the files.
+     * it should never be empty as this could lead to potential collisions.
+     *
+     * @return The filename of this document
+     */
+    QString fileName() const;
+    /**
+     * @brief Set a new file name for this document
+     * @param value  the new name
+     */
+    void setFileName( const QString &value );
 
     /**
      * @brief Add a style to the style storage
@@ -114,5 +130,5 @@ private:
 };
 
 }
-
+Q_DECLARE_METATYPE(Marble::GeoDataDocument*)
 #endif // GeoDataDocument_h

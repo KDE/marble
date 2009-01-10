@@ -45,6 +45,7 @@ class GeoDataDocumentPrivate
 
     QHash<QString, GeoDataStyle*> m_styleHash;
     QHash<QString, GeoDataStyleMap*> m_styleMapHash;
+    QString m_filename;
 };
 
 GeoDataDocument::GeoDataDocument( GeoDataObject *parent )
@@ -60,6 +61,16 @@ GeoDataDocument::~GeoDataDocument()
     qDebug() << "delete Document";
 #endif
     delete d;
+}
+
+QString GeoDataDocument::fileName() const
+{
+    return d->m_filename;
+}
+
+void GeoDataDocument::setFileName( const QString &value )
+{
+    d->m_filename = value;
 }
 
 void GeoDataDocument::addStyle( GeoDataStyle* style )
