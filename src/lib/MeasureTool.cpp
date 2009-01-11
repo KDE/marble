@@ -208,15 +208,10 @@ void MeasureTool::drawDistancePath( GeoPainter* painter,
         // Let itpos be a quaternion that is between prevqpos and qpos.
         itpos.nlerp( prevqpos, qpos, t );
         itpos.getSpherical( lon, lat );
-        if ( viewport->currentProjection()
+        viewport->currentProjection()
 	     ->screenCoordinates( GeoDataCoordinates( lon, lat ), viewport,
-				  x, y ) )
-        {
-            distancePath << QPointF( x, y );
-        }
-        else {
-            //qDebug() << "(x,y): " << x << y;
-        }
+				  x, y );
+        distancePath << QPointF( x, y );
     }
 
     // Now actually paint the path. Repeat it if the projection allows it.
