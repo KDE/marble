@@ -56,13 +56,6 @@ class MARBLE_EXPORT ClipPainter : public QPainter
     //	int nodeCount(){ return m_debugNodeCount; }
 
  private:
-    // This function does the actual clipping.
-    void clipPolyObject ( const QPolygonF & );
-
-    void manageOffScreen();
-    const QPointF borderPoint();
-
- private:
     ClipPainterPrivate * const d;
 };
 
