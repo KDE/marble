@@ -14,6 +14,7 @@
 #include <QtCore/QRect>
 #include <QtCore/QPoint>
 #include <QtGui/QApplication>
+#include <QtGui/QFileDialog>
 #include <QtGui/QListView>
 #include <QtGui/QListWidget>
 #include <QtGui/QMenu>
@@ -227,6 +228,22 @@ void FileViewFloatItem::contextMenu( const QPoint& pos )
 
 void FileViewFloatItem::addFile()
 {
+    QString fileName;
+    fileName = QFileDialog::getOpenFileName(m_marbleWidget, tr("Open File"),
+                            QString(), 
+                            tr("All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*.kml)"));
+
+    if ( ! fileName.isNull() ) {
+        QString extension = fileName.section( '.', -1 );
+
+/*        if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
+            m_marbleWidget->openGpxFile( fileName );
+        }
+        else */
+        if ( extension.compare( "kml", Qt::CaseInsensitive ) == 0 ) {
+            m_marbleWidget->addPlaceMarkFile( fileName );
+        }
+    }
 }
 
 void FileViewFloatItem::removeFile()
