@@ -25,6 +25,11 @@ class GeoDataFeature : Marble::GeoDataObject
 %End
 
 public:
+    explicit                GeoDataFeature (Marble::GeoDataObject* parent = 0);
+    explicit                GeoDataFeature (const QString& name, Marble::GeoDataObject* parent = 0);
+    GeoDataFeature ( const GeoDataFeature& other );
+    void operator=( const GeoDataFeature& other );
+
     virtual bool            isFolder () const;
     virtual bool            isPlacemark () const;
     virtual EnumFeatureId   featureId () const;
@@ -105,13 +110,6 @@ public:
     virtual void            unpack (QDataStream& stream);
     static QFont            defaultFont ();
     static void             setDefaultFont (const QFont& font);
-
-protected:
-    explicit                GeoDataFeature (Marble::GeoDataObject* parent = 0);
-    explicit                GeoDataFeature (const QString& name, Marble::GeoDataObject* parent = 0);
-
-private:
-                            GeoDataFeature (const Marble::GeoDataFeature&);
 };   // GeoDataFeature
 
 };   // Marble
