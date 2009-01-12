@@ -126,7 +126,7 @@ void GeoDataLatLonAltBox::setAltitudeMode( const AltitudeMode altitudeMode )
     d->m_altitudeMode = altitudeMode;
 }
 
-bool GeoDataLatLonAltBox::contains( const GeoDataCoordinates &point )
+bool GeoDataLatLonAltBox::contains( const GeoDataCoordinates &point ) const
 {
     if ( !GeoDataLatLonBox::contains( point ) )
         return false;
@@ -138,7 +138,7 @@ bool GeoDataLatLonAltBox::contains( const GeoDataCoordinates &point )
     return true;
 }
 
-bool GeoDataLatLonAltBox::contains( const GeoDataPoint &point )
+bool GeoDataLatLonAltBox::contains( const GeoDataPoint &point ) const
 {
     if ( !GeoDataLatLonBox::contains( point ) )
         return false;
@@ -150,7 +150,7 @@ bool GeoDataLatLonAltBox::contains( const GeoDataPoint &point )
     return true;
 }
 
-bool GeoDataLatLonAltBox::contains( const GeoDataLatLonAltBox &other )
+bool GeoDataLatLonAltBox::contains( const GeoDataLatLonAltBox &other ) const
 {
     // check the contain criterion for the altitude first as this is trivial:
 
@@ -169,7 +169,7 @@ bool GeoDataLatLonAltBox::contains( const GeoDataLatLonAltBox &other )
     return false;
 }
 
-bool GeoDataLatLonAltBox::intersects( const GeoDataLatLonAltBox &other )
+bool GeoDataLatLonAltBox::intersects( const GeoDataLatLonAltBox &other ) const
 {
             // Case 1: maximum altitude of other box intersects:
     if (    ( d->m_maxAltitude >= other.maxAltitude() && d->m_minAltitude <= other.maxAltitude() )

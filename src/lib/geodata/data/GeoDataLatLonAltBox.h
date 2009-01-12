@@ -82,11 +82,11 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     AltitudeMode altitudeMode() const;
     void setAltitudeMode( const AltitudeMode altitudeMode );
 
-    virtual bool contains( const GeoDataPoint & ); // NOTE: Why do we need this one?
-    virtual bool contains( const GeoDataCoordinates & );
-    bool     contains( const GeoDataLatLonAltBox & );
+    virtual bool contains( const GeoDataPoint & ) const; // NOTE: Why do we need this one?
+    virtual bool contains( const GeoDataCoordinates & ) const;
+    bool     contains( const GeoDataLatLonAltBox & ) const;
 
-    virtual bool intersects( const GeoDataLatLonAltBox & );
+    virtual bool intersects( const GeoDataLatLonAltBox & ) const;
 
     using GeoDataLatLonBox::intersects;
 

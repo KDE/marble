@@ -113,11 +113,11 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
      */
     bool     crossesDateLine() const;
 
-    virtual bool contains( const GeoDataPoint & ); // NOTE: Why do we need this one?
-    virtual bool contains( const GeoDataCoordinates & );
-    bool     contains( const GeoDataLatLonBox & );
+    virtual bool contains( const GeoDataPoint & ) const; // NOTE: Why do we need this one?
+    virtual bool contains( const GeoDataCoordinates & ) const;
+    bool     contains( const GeoDataLatLonBox & ) const;
 
-    virtual bool intersects( const GeoDataLatLonBox & );
+    virtual bool intersects( const GeoDataLatLonBox & ) const;
 
     /**
      * @brief Create a bounding box from a set of geographic points.

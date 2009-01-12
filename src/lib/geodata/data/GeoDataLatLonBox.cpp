@@ -241,7 +241,7 @@ bool GeoDataLatLonBox::crossesDateLine() const
     return false;
 }
 
-bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point )
+bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point ) const
 {
     qreal lon, lat;
 
@@ -259,7 +259,7 @@ bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point )
     return true;
 }
 
-bool GeoDataLatLonBox::contains( const GeoDataPoint &point )
+bool GeoDataLatLonBox::contains( const GeoDataPoint &point ) const
 {
     qreal lon, lat;
 
@@ -277,7 +277,7 @@ bool GeoDataLatLonBox::contains( const GeoDataPoint &point )
     return true;
 }
 
-bool GeoDataLatLonBox::contains( const GeoDataLatLonBox &other )
+bool GeoDataLatLonBox::contains( const GeoDataLatLonBox &other ) const
 {
     // check the contain criterion for the latitude first as this is trivial:
 
@@ -328,7 +328,7 @@ bool GeoDataLatLonBox::contains( const GeoDataLatLonBox &other )
     return false;
 }
 
-bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other )
+bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other ) const
 {
     // check the intersection criterion for the latitude first:
 
