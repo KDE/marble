@@ -520,7 +520,7 @@ void GeoDataFeature::pack( QDataStream& stream ) const
     stream << d->m_phoneNumber;
     stream << d->m_description;
     stream << d->m_visible;
-    stream << d->m_visualCategory;
+//    stream << d->m_visualCategory;
     stream << d->m_role;
     stream << d->m_popularity;
     stream << d->m_popularityIndex;
@@ -535,7 +535,7 @@ void GeoDataFeature::unpack( QDataStream& stream )
     stream >> d->m_phoneNumber;
     stream >> d->m_description;
     stream >> d->m_visible;
-    stream >> d->m_visualCategory;
+//    stream >> (int)d->m_visualCategory;
     stream >> d->m_role;
     stream >> d->m_popularity;
     stream >> d->m_popularityIndex;
