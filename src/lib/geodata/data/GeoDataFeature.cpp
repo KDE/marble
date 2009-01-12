@@ -112,9 +112,10 @@ GeoDataFeature::~GeoDataFeature()
     delete d;
 }
 
-void GeoDataFeature::operator=( const GeoDataFeature& other )
+GeoDataFeature& GeoDataFeature::operator=( const GeoDataFeature& other )
 {
     *d = *other.d;
+    return *this;
 }
 
 void GeoDataFeature::initializeDefaultStyles()

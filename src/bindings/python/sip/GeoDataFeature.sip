@@ -28,7 +28,8 @@ public:
     explicit                GeoDataFeature (Marble::GeoDataObject* parent = 0);
     explicit                GeoDataFeature (const QString& name, Marble::GeoDataObject* parent = 0);
     GeoDataFeature ( const GeoDataFeature& other );
-    void operator=( const GeoDataFeature& other );
+    GeoDataFeature& operator=( const GeoDataFeature& other );
+    bool operator==( const GeoDataFeature& other ) const;
 
     virtual bool            isFolder () const;
     virtual bool            isPlacemark () const;
