@@ -48,6 +48,16 @@ class GeoDataFeaturePrivate;
 class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 {
  public:
+    explicit GeoDataFeature( GeoDataObject *parent = 0 );
+    /// Create a new GeoDataFeature with @p name as its name.
+    explicit GeoDataFeature( const QString& name, GeoDataObject *parent = 0 );
+
+    GeoDataFeature( const GeoDataFeature& other );
+    
+    virtual ~GeoDataFeature();
+
+    void operator=( const GeoDataFeature& other );
+
     virtual bool isFolder() const { return false; }
     virtual bool isPlacemark() const { return false; }
 
@@ -114,8 +124,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         // item and just use it to specify the array size
         LastIndex
     };
-
-    virtual ~GeoDataFeature();
 
     /**
      * @brief The name of the feature
@@ -265,21 +273,11 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     static QFont defaultFont();
     static void setDefaultFont( const QFont& font );
 
- protected:
-    explicit GeoDataFeature( GeoDataObject *parent = 0 );
-    /// Create a new GeoDataFeature with @p name as its name.
-    explicit GeoDataFeature( const QString& name, GeoDataObject *parent = 0 );
-
-    // FIXME: move member to d-pointer class
-    /// The visual category of this feature.  @see GeoDataVisualCategory
-    GeoDataVisualCategory  m_visualCategory;
-
  private:
     static void initializeDefaultStyles();
 
 
  private:
-    Q_DISABLE_COPY( GeoDataFeature )
     GeoDataFeaturePrivate * const d;
     // Static members
     static QFont         s_defaultFont;

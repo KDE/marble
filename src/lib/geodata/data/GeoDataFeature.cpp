@@ -38,14 +38,35 @@ class GeoDataFeaturePrivate
         m_visible( true ),
         m_role(' '),
         m_style( 0 ),
-        m_styleMap( 0 )
+        m_styleMap( 0 ),
+        m_visualCategory( GeoDataFeature::Unknown )
     {
     }
 
+    GeoDataFeaturePrivate( const GeoDataFeaturePrivate& other ) :
+        m_popularity( other.m_popularity ),
+        m_popularityIndex( other.m_popularityIndex ),
+        m_visible( other.m_visible ),
+        m_role( other.m_role ),
+        m_style( other.m_style ),               //FIXME: both style and stylemap need to be reworked internally!!!!
+        m_styleMap( other.m_styleMap ),
+        m_visualCategory( other.m_visualCategory )
+    {
+    }
+
+    void operator=( const GeoDataFeaturePrivate& other )
+    {
+        m_popularity = other.m_popularity;
+        m_popularityIndex = other.m_popularityIndex;
+        m_visible = other.m_visible;
+        m_role = other.m_role;
+        m_style = other.m_style;
+        m_styleMap = other.m_styleMap;
+        m_visualCategory = other.m_visualCategory;
+    }
+    
     ~GeoDataFeaturePrivate()
     {
-        delete m_style;
-        delete m_styleMap;
     }
 
     QString     m_name;         // Name of the feature. Is shown on screen
@@ -57,6 +78,8 @@ class GeoDataFeaturePrivate
     int         m_popularityIndex; // Index of population
 
     bool        m_visible;      // True if this feature should be shown.
+    GeoDataFeature::GeoDataVisualCategory  m_visualCategory; // the visual category
+
 
     QChar       m_role;
 
@@ -67,14 +90,18 @@ class GeoDataFeaturePrivate
 
 GeoDataFeature::GeoDataFeature( GeoDataObject* parent )
     : GeoDataObject( parent ),
-      m_visualCategory( Unknown ),
       d( new GeoDataFeaturePrivate() )
+{
+}
+
+GeoDataFeature::GeoDataFeature( const GeoDataFeature& other )
+    : GeoDataObject( other ),
+      d( new GeoDataFeaturePrivate( *other.d ) )
 {
 }
 
 GeoDataFeature::GeoDataFeature( const QString& name, GeoDataObject* parent )
     : GeoDataObject( parent ),
-      m_visualCategory( Unknown ),
       d( new GeoDataFeaturePrivate() )
 {
     d->m_name = name;
@@ -83,6 +110,11 @@ GeoDataFeature::GeoDataFeature( const QString& name, GeoDataObject* parent )
 GeoDataFeature::~GeoDataFeature()
 {
     delete d;
+}
+
+void GeoDataFeature::operator=( const GeoDataFeature& other )
+{
+    *d = *other.d;
 }
 
 void GeoDataFeature::initializeDefaultStyles()
@@ -385,9 +417,9 @@ GeoDataStyle* GeoDataFeature::style() const
     if ( s_defaultStyleInitialized == false )
         initializeDefaultStyles();
 
-    if ( m_visualCategory != None )
+    if ( d->m_visualCategory != None )
     {
-        return s_defaultStyle[ m_visualCategory ];
+        return s_defaultStyle[ d->m_visualCategory ];
     }
     else
     {
@@ -410,12 +442,12 @@ void GeoDataFeature::setStyle( GeoDataStyle* style )
 
 GeoDataFeature::GeoDataVisualCategory GeoDataFeature::visualCategory() const
 {
-    return m_visualCategory;
+    return d->m_visualCategory;
 }
 
 void GeoDataFeature::setVisualCategory( GeoDataFeature::GeoDataVisualCategory index )
 {
-    m_visualCategory = index;
+    d->m_visualCategory = index;
 }
 
 const QChar GeoDataFeature::role() const
@@ -488,6 +520,7 @@ void GeoDataFeature::pack( QDataStream& stream ) const
     stream << d->m_phoneNumber;
     stream << d->m_description;
     stream << d->m_visible;
+    stream << d->m_visualCategory;
     stream << d->m_role;
     stream << d->m_popularity;
     stream << d->m_popularityIndex;
@@ -502,6 +535,7 @@ void GeoDataFeature::unpack( QDataStream& stream )
     stream >> d->m_phoneNumber;
     stream >> d->m_description;
     stream >> d->m_visible;
+    stream >> d->m_visualCategory;
     stream >> d->m_role;
     stream >> d->m_popularity;
     stream >> d->m_popularityIndex;
