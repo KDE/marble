@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
+// Copyright 2006-2009 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
@@ -23,6 +23,17 @@ class QPolygonF;
 
 namespace Marble
 {
+/**
+ * @short A QPainter that does viewport clipping for polygons 
+ *
+ * This class introduces fast polygon/polyline clipping for QPainter
+ * to increase the performance.
+ * Clipping is accomplished using an algorithm (by Torsten Rahn) that 
+ * processes each polyline once. 
+ * To keep things fast each possible scenario of two subsequent 
+ * points is implemented case by case in a specialized handler which
+ * creates interpolated points and helper points.
+ */
 
 // The reason for this class is a terrible bug in some versions of the
 // X Server.  Suppose the widget size is, say, 1000 x 1000 and we have
@@ -31,8 +42,8 @@ namespace Marble
 // bitmap that is at least 100000 x 100000 and in the process eat all
 // available memory.
 //
-// So we introduce the ClipPainter that clips all vectors to only the
-// part of them that are actually shown.
+// So we introduce the ClipPainter that clips all polylines and polygons 
+// to the area that is actually visible in the viewport.
 //
 // @internal
 
