@@ -1,4 +1,4 @@
-add_subdirectory( test )
+# add_subdirectory( test )
 # add_subdirectory( coordinategrid )
 add_subdirectory( crosshairs )
 add_subdirectory( geodata )
