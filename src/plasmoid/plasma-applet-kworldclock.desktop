@@ -33,6 +33,7 @@ Name[x-test]=xxWorld Clockxx
 Name[zh_CN]=世界时钟
 Name[zh_TW]=世界時鐘
 Comment=Shows the time in different parts of the world
+Comment[ca]=Mostra l'hora en diverses parts del món
 Comment[da]=Viser tiden i forskellige dele af verden
 Comment[de]=Zeigt die Zeit in verschiedenen Erdteilen
 Comment[el]=Εμφάνιση της ώρας σε διάφορα μέρη του κόσμου
