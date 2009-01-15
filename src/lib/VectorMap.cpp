@@ -124,6 +124,8 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
     {
         // This sorts out polygons by bounding box which aren't visible at all.
         GeoDataCoordinates::PtrVector boundary = (*itPolyLine)->getBoundary();
+        // rather paint an invalid line then crashing here if the boundaries are not loaded yet
+        if(boundary.size() < 5) continue;
 
         for ( int i = 0; i < 5; ++i ) {
             qbound = boundary[i]->quaternion();
