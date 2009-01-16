@@ -184,6 +184,10 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 
         // Let's just use the top left and the bottom right bounding
         // box point for this projection.
+
+        // rather paint an invalid line then crashing here if the boundaries are not loaded yet
+        if(boundary.size() < 3) continue;
+
         for ( int i = 1; i < 3; ++i ) {
             boundary[i]->geoCoordinates(lon, lat);
             x = (qreal)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon);
@@ -278,6 +282,10 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
 
         // Let's just use the top left and the bottom right bounding box point for 
         // this projection
+
+        // rather paint an invalid line then crashing here if the boundaries are not loaded yet
+        if(boundary.size() < 3) continue;
+
         for ( int i = 1; i < 3; ++i ) {
             boundary[i]->geoCoordinates(lon, lat);
             x = (qreal)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon);
