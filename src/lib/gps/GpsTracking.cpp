@@ -82,11 +82,11 @@ void GpsTracking::construct( const QSize &canvasSize,
 
     bool draw = false;
 
-    draw = m_gpsCurrentPosition -> getPixelPos( canvasSize, viewParams,
-                                                &position );
+    draw = m_gpsCurrentPosition->getPixelPos( canvasSize, viewParams,
+                                              &position );
 
-    draw = m_gpsPreviousPosition -> getPixelPos( canvasSize, viewParams,
-                                                 &previousPosition );
+    draw = m_gpsPreviousPosition->getPixelPos( canvasSize, viewParams,
+                                               &previousPosition );
 
     if ( !draw ) {
         m_currentDraw.clear();
@@ -199,8 +199,8 @@ bool GpsTracking::update(const QSize &canvasSize, ViewParams *viewParams,
         //m_gpsdData has been successully set
         if ( m_gpsdData != 0 ){
             m_gpsdData =m_gpsd->query( "p" );
-            m_gpsTracking ->setPosition( m_gpsdData->fix.latitude,
-                                         m_gpsdData->fix.longitude );
+            m_gpsTracking->setPosition( m_gpsdData->fix.latitude,
+                                        m_gpsdData->fix.longitude );
 
             if (m_gpsTrackSeg == 0 ){
                 m_gpsTrackSeg = new TrackSegment();

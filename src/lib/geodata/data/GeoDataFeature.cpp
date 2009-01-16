@@ -212,7 +212,7 @@ void GeoDataFeature::initializeDefaultStyles()
         = new GeoDataStyle( QPixmap(), 
               QFont( defaultFamily, (int)(defaultSize * 1.2 ), 75, false ), QColor( "#404040" ) );
     // Align area labels centered
-    s_defaultStyle[Nation] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
+    s_defaultStyle[Nation]->labelStyle()->setAlignment( GeoDataLabelStyle::Center );
 
     s_defaultStyle[Mountain]
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/mountain_1.png" ) ), 
@@ -234,13 +234,13 @@ void GeoDataFeature::initializeDefaultStyles()
         = new GeoDataStyle( QPixmap(), 
               QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, false ), QColor( "#bf0303" ) );
     // Align area labels centered
-    s_defaultStyle[Continent] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
+    s_defaultStyle[Continent]->labelStyle()->setAlignment( GeoDataLabelStyle::Center );
 
     s_defaultStyle[Ocean]
         = new GeoDataStyle( QPixmap(), 
               QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, true ), QColor( "#2c72c7" ) );
     // Align area labels centered
-    s_defaultStyle[Ocean] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
+    s_defaultStyle[Ocean]->labelStyle()->setAlignment( GeoDataLabelStyle::Center );
 
     s_defaultStyle[OtherTerrain]
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/other.png" ) ), 
@@ -254,7 +254,7 @@ void GeoDataFeature::initializeDefaultStyles()
         = new GeoDataStyle( QPixmap(), 
               QFont( defaultFamily, (int)(defaultSize * 1.7 ), 50, false ), QColor( "#bf0303" ) );
     // Align area labels centered
-    s_defaultStyle[Mare] -> labelStyle() -> setAlignment( GeoDataLabelStyle::Center );
+    s_defaultStyle[Mare]->labelStyle()->setAlignment( GeoDataLabelStyle::Center );
 
     s_defaultStyle[GeographicPole]
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/pole_1.png" ) ), 
@@ -309,37 +309,37 @@ void GeoDataFeature::initializeDefaultStyles()
 
 #if QT_VERSION >= 0x040400
     // Fonts for areas ...
-    tmp = s_defaultStyle[Continent] -> labelStyle()-> font();
+    tmp = s_defaultStyle[Continent]->labelStyle()->font();
     tmp.setLetterSpacing( QFont::AbsoluteSpacing, 2 );
     tmp.setCapitalization( QFont::SmallCaps );
     tmp.setBold( true );
-    s_defaultStyle[Continent] -> labelStyle()-> setFont( tmp );
+    s_defaultStyle[Continent]->labelStyle()->setFont( tmp );
 
     // Fonts for areas ...
-    tmp = s_defaultStyle[Mare] -> labelStyle()-> font();
+    tmp = s_defaultStyle[Mare]->labelStyle()->font();
     tmp.setLetterSpacing( QFont::AbsoluteSpacing, 2 );
     tmp.setCapitalization( QFont::SmallCaps );
     tmp.setBold( true );
-    s_defaultStyle[Mare] -> labelStyle()-> setFont( tmp );
+    s_defaultStyle[Mare]->labelStyle()->setFont( tmp );
 #endif
 
     // Now we need to underline the capitals ...
 
-    tmp = s_defaultStyle[SmallNationCapital] -> labelStyle()-> font();
+    tmp = s_defaultStyle[SmallNationCapital]->labelStyle()->font();
     tmp.setUnderline( true );
-    s_defaultStyle[SmallNationCapital] -> labelStyle()-> setFont( tmp );
+    s_defaultStyle[SmallNationCapital]->labelStyle()->setFont( tmp );
 
-    tmp = s_defaultStyle[MediumNationCapital] -> labelStyle()-> font();
+    tmp = s_defaultStyle[MediumNationCapital]->labelStyle()->font();
     tmp.setUnderline( true );
-    s_defaultStyle[MediumNationCapital] -> labelStyle()-> setFont( tmp );
+    s_defaultStyle[MediumNationCapital]->labelStyle()->setFont( tmp );
 
-    tmp = s_defaultStyle[BigNationCapital] -> labelStyle()-> font();
+    tmp = s_defaultStyle[BigNationCapital]->labelStyle()->font();
     tmp.setUnderline( true );
-    s_defaultStyle[BigNationCapital] -> labelStyle()-> setFont( tmp );
+    s_defaultStyle[BigNationCapital]->labelStyle()->setFont( tmp );
 
-    tmp = s_defaultStyle[LargeNationCapital] -> labelStyle()-> font();
+    tmp = s_defaultStyle[LargeNationCapital]->labelStyle()->font();
     tmp.setUnderline( true );
-    s_defaultStyle[LargeNationCapital] -> labelStyle()-> setFont( tmp );
+    s_defaultStyle[LargeNationCapital]->labelStyle()->setFont( tmp );
 }
 
 QFont GeoDataFeature::defaultFont()

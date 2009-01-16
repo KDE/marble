@@ -156,7 +156,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         const int xLeft  = ( ( m_imageWidth / 2 - rx > 0 )
                              ? m_imageWidth / 2 - rx : 0 ); 
         const int xRight = ( ( m_imageWidth / 2 - rx > 0 )
-                             ? xLeft + rx + rx : canvasImage -> width() );
+                             ? xLeft + rx + rx : canvasImage->width() );
 
         m_scanLine = (QRgb*)( canvasImage->scanLine( y ) ) + xLeft;
 

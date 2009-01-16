@@ -194,7 +194,7 @@ int TileLoader::globalWidth( int level ) const
     GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
 
     return d->m_tileWidth * TileLoaderHelper::levelToColumn( 
-                                texture ->levelZeroColumns(), level );
+                                texture->levelZeroColumns(), level );
 }
 
 int TileLoader::globalHeight( int level ) const
@@ -361,7 +361,7 @@ void TileLoader::reloadTile( const QString &idStr )
 
         (d->m_tileHash[id])->loadDataset( texture, level, x, y, &( d->m_tileCache ) ); 
         m_parent->paintTile( d->m_tileHash[id], x, y, level, texture, true );
-//         (d->m_tileHash[id]) -> reloadTile( x, y, level, d->m_theme );
+//         (d->m_tileHash[id])->reloadTile( x, y, level, d->m_theme );
     } else {
       // Remove "false" tile from cache so it doesn't get loaded anymore
       d->m_tileCache.remove( id );

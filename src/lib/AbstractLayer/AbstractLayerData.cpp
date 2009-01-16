@@ -133,8 +133,8 @@ bool AbstractLayerData::getPixelPos( const QSize &screenSize,
     bool    tempBool;
 
     tempBool = getPixelPos( screenSize, viewParams, &tempPoint );
-    point -> setX( (int)tempPoint.x() );
-    point -> setY( (int)tempPoint.y() );
+    point->setX( (int)tempPoint.x() );
+    point->setY( (int)tempPoint.y() );
 
     return tempBool;
 }

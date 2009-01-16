@@ -222,8 +222,8 @@ void MarbleControlBox::updateButtons( int value )
 
 void MarbleControlBox::setupGpsOption()
 {
-    d->uiWidget.m_gpsDrawBox -> setEnabled( true );
-    d->uiWidget.m_gpsGoButton -> setEnabled( false );
+    d->uiWidget.m_gpsDrawBox->setEnabled( true );
+    d->uiWidget.m_gpsGoButton->setEnabled( false );
 
     d->uiWidget.m_latComboBox->setCurrentIndex( 0 );
     d->uiWidget.m_lonComboBox->setCurrentIndex( 0 );
@@ -443,8 +443,8 @@ void MarbleControlBox::enableFileViewActions()
 
 #ifndef KML_GSOC
     if ( tmp ) {
-        QModelIndex tmpIndex = d->uiWidget.m_fileView ->
-                selectionModel() -> currentIndex();
+        QModelIndex tmpIndex =
+            d->uiWidget.m_fileView->selectionModel()->currentIndex();
         d->m_widget->gpxFileModel()->setSelectedIndex( tmpIndex );
     }
 #else

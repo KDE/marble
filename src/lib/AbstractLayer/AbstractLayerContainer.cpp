@@ -25,7 +25,7 @@ AbstractLayerContainer::AbstractLayerContainer( int size )
     m_data = new QVector<AbstractLayerData*>( size );
     m_visible = new QBitArray( size );
     m_boundingBox = new BoundingBox();
-    
+
     m_name = 0;
 }
 
@@ -35,7 +35,7 @@ AbstractLayerContainer::AbstractLayerContainer(const QString &name,
     m_data = new QVector<AbstractLayerData*>( size );
     m_visible = new QBitArray( size );
     m_boundingBox = new BoundingBox();
-    
+
     m_name = new QString ( name );
 }
 
@@ -62,7 +62,7 @@ void AbstractLayerContainer::draw(ClipPainter *painter,
                                   ViewParams *viewParams )
 {
     const_iterator it;
-    
+
     for( it = constBegin() ; it < constEnd() ; ++it ) {
         (*it)->draw( painter, canvasSize, viewParams );
     }
@@ -89,14 +89,14 @@ QString AbstractLayerContainer::name() const
 
 void AbstractLayerContainer::processVisible()
 {
-    QVector<AbstractLayerData*>::const_iterator i = m_data -> constBegin();
+    QVector<AbstractLayerData*>::const_iterator i = m_data->constBegin();
     int temp;
-    
-    for ( ; i < m_data -> constEnd() ; ++i ) {
-        if ( (*i) -> visible() ) {
+
+    for ( ; i < m_data->constEnd() ; ++i ) {
+        if ( (*i)->visible() ) {
             //iterator safety
-            temp = m_data -> indexOf ( *i );
-            m_visible -> setBit ( temp, true );
+            temp = m_data->indexOf ( *i );
+            m_visible->setBit ( temp, true );
         }
     }
 }
@@ -104,7 +104,7 @@ void AbstractLayerContainer::processVisible()
 void AbstractLayerContainer::printToStream( QTextStream & out) const
 {
     const_iterator it;
-    
+
     for( it = constBegin(); it < constEnd(); ++it )
     {
         out << *(*it);
@@ -143,15 +143,11 @@ QVector<QPointF> AbstractLayerContainer::geoCoord()
 
 void AbstractLayerContainer::manageMemory()
 {
-    for ( int i = 0 ; i < m_visible -> size () ; ++i ) {
-        if ( m_visible -> testBit( i ) ) {
-            if ( ! ( this -> contains ( m_data -> at( i ) ) ) ) {
-                this -> append( m_data -> at( i ) );
+    for ( int i = 0 ; i < m_visible->size () ; ++i ) {
+        if ( m_visible->testBit( i ) ) {
+            if ( ! ( this->contains ( m_data->at( i ) ) ) ) {
+                this->append( m_data->at( i ) );
             }
         }
     }
 }
-
-
-
-

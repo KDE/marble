@@ -90,7 +90,7 @@ bool GpxSax::endElement( const QString &namespaceURI,
     
     if ( qName == "trkseg") {
         m_trackSeg->createBoundingBox();
-        m_track -> append( m_trackSeg );
+        m_track->append( m_trackSeg );
         m_trackSeg = 0;
     }
     else if ( qName == "trk") {

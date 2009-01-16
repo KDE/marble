@@ -78,7 +78,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     m_lmbMenu->clear();
 
     QPoint  curpos = QPoint( xpos, ypos ); 
-    m_featurelist = m_model-> whichFeatureAt( curpos );
+    m_featurelist = m_model->whichFeatureAt( curpos );
 
     int  actionidx = 1;
 
