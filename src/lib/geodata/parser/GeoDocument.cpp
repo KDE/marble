@@ -21,16 +21,8 @@
 
 #include "GeoDocument.h"
 
-#if DUMP_GEONODE_LEAKS > 0
-#include <cstdio>
-#endif
-
 namespace Marble
 {
-
-#if DUMP_GEONODE_LEAKS > 0
-unsigned long GeoDocument::s_leakProtector = 0;
-#endif
 
 GeoDocument::GeoDocument()
 {
@@ -38,12 +30,6 @@ GeoDocument::GeoDocument()
 
 GeoDocument::~GeoDocument()
 {
-#if DUMP_GEONODE_LEAKS > 0
-    if ( s_leakProtector != 0 ) {
-        std::fprintf( stderr, "Found %lu GeoNode object LEAKS!\n", s_leakProtector );
-        s_leakProtector = 0;
-    }
-#endif
 }
 
 bool GeoDocument::isGeoDataDocument() const
@@ -59,26 +45,10 @@ bool GeoDocument::isGeoSceneDocument() const
 
 GeoNode::GeoNode()
 {
-#if DUMP_GEONODE_LEAKS > 0
-    GeoDocument::s_leakProtector++;
-
-#if DUMP_GEONODE_LEAKS > 1
-    fprintf( stderr, "Constructed new GeoNode object, leak protection count: %lu\n",
-             GeoDocument::s_leakProtector );
-#endif
-#endif
 }
 
 GeoNode::~GeoNode()
 {
-#if DUMP_GEONODE_LEAKS > 0
-    --GeoDocument::s_leakProtector;
-
-#if DUMP_GEONODE_LEAKS > 1
-    fprintf( stderr, "Destructed GeoNode object, leak protection count: %lu\n",
-             GeoDocument::s_leakProtector );
-#endif
-#endif
 }
 
 }

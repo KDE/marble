@@ -23,12 +23,6 @@
 #ifndef GeoDocument_h
 #define GeoDocument_h
 
-
-// Set to a value greater than 0, to enable leak tracking of GeoNode objects
-// Set to a value greater than 1, to enable detailed tracking of construction/destruction of GeoNode objects
-#define DUMP_GEONODE_LEAKS 1
-
-
 #include "geodata_export.h"
 
 namespace Marble
@@ -42,10 +36,6 @@ protected:
     GeoDocument();
 
 public:
-#if DUMP_GEONODE_LEAKS > 0
-    static unsigned long s_leakProtector;
-#endif
-
     virtual ~GeoDocument();
 
     virtual bool isGeoDataDocument() const;
