@@ -90,7 +90,8 @@ int main(int argc, char *argv[])
         while ( !sourcestream.atEnd() ) {
 
             rawline = sourcestream.readLine();
-            if ( !rawline.startsWith("\"E\"|\"m\"|\"" ) ) {
+//            if ( !rawline.startsWith("\"E\"|\"m\"|\"" ) ) {
+            if ( !rawline.startsWith("\"M\"|\"M\"|\"" ) ) {
                 continue;
             }
             rawline = rawline.replace( "\"|", "|" );
@@ -123,6 +124,11 @@ int main(int argc, char *argv[])
 
             lon = lonString.toFloat();
 
+            if ( !rawline.startsWith("\"M\"|\"M\"|\"" ) ) {
+                if ( lon > 180.0 ) lon = lon - 360.0;
+                lon = -lon;
+            }
+
             lat = latString.toFloat();
 
             description = description.remove('"');
@@ -154,6 +160,6 @@ int main(int argc, char *argv[])
         return 0;
     }
 
-    qDebug(" asc2kml -o targetfile sourcefile");
+    qDebug(" iau2kml -o targetfile sourcefile");
     app.exit();
 }

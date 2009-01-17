@@ -213,16 +213,16 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 
     // Example: draw annotations
 
-    GeoDataCoordinates sotm(-8.6, 52.66, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates sotm(4.89, 52.37, 0.0, GeoDataCoordinates::Degree );
 
     painter->setPen( QColor( 198, 99, 99, 255 ) );
     brush.setColor( QColor( 255, 255, 255, 200 ) );
     brush.setStyle( Qt::SolidPattern );
     painter->setBrush( brush );
 
-    painter->drawAnnotation (  sotm, "State of the Map,\n  12-13 July 2008,\n OSM conference" );
+    painter->drawAnnotation (  sotm, "State of the Map,\n  10-12 July 2009,\n OSM conference", QSize(140,100), 10, 30, 15, 15 );
 
-    GeoDataCoordinates akademy2008(4.5, 51.068, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates akademy2009( -15.43, 28.1, 0.0, GeoDataCoordinates::Degree );
 
     painter->setPen( QColor( 99, 99, 0 ) );
 
@@ -235,7 +235,7 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
     QBrush gradientBrush( radialGrad );
     painter->setBrush( gradientBrush );
 
-    painter->drawAnnotation (  akademy2008, "Akademy 2008,\n  9-15 August 2008,\n KDE conference", QSize(130, 120), 10, 30, 15, 15 );
+    painter->drawAnnotation (  akademy2009, "Akademy 2009,\n  3-11 July 2009,\n KDE conference" );
 
     return true;
 }
