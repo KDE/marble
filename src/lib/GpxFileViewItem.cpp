@@ -65,7 +65,7 @@ QVariant GpxFileViewItem::data( int role ) const
     if( role == Qt::DisplayRole )
         return m_gpxFile->display();
     else if( role == AbstractFileViewItem::FilePointerRole )
-        return m_gpxFile;
+        return qVariantFromValue(m_gpxFile);
     else
         return QVariant();
 }
