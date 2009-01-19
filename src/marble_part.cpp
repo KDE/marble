@@ -229,13 +229,6 @@ void MarblePart::setShowAtmosphere( bool isChecked )
     m_showAtmosphereAction->setChecked( isChecked ); // Sync state with the GUI
 }
 
-void MarblePart::setShowCrosshairs( bool isChecked )
-{
-    m_controlView->marbleWidget()->setShowCrosshairs( isChecked );
-
-    m_showCrosshairsAction->setChecked( isChecked ); // Sync state with the GUI
-}
-
 void MarblePart::showFullScreen( bool isChecked )
 {
     if ( isChecked ) {
@@ -564,14 +557,15 @@ void MarblePart::setupActions()
     connect( m_showAtmosphereAction, SIGNAL( triggered( bool ) ),
 	     this,                   SLOT( setShowAtmosphere( bool ) ) );
 
-    // Action: Show Clouds option
-    m_showCrosshairsAction = new KAction( this );
-    actionCollection()->addAction( "show_crosshairs", m_showCrosshairsAction );
-    m_showCrosshairsAction->setCheckable( true );
-    m_showCrosshairsAction->setChecked( true );
-    m_showCrosshairsAction->setText( i18n( "Cross&hairs" ) );
-    connect( m_showCrosshairsAction, SIGNAL( triggered( bool ) ),
-         this,               SLOT( setShowCrosshairs( bool ) ) );
+    // Action: Show Crosshairs option
+    QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<MarbleRenderPlugin *>::const_iterator i;
+    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+        if ( (*i)->nameId() == "crosshairs" ) {
+            actionCollection()->addAction( "show_crosshairs", (*i)->action() );
+        }
+    }
+
 
     // Action: Show Clouds option
     m_showCloudsAction = new KAction( this );

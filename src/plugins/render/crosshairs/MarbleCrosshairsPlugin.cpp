@@ -31,7 +31,7 @@ QString MarbleCrosshairsPlugin::renderPolicy() const
 
 QStringList MarbleCrosshairsPlugin::renderPosition() const
 {
-    return QStringList( "FLOAT_ITEM" ); // although this is not a float item we choose the position of one
+    return QStringList( "ALWAYS_ON_TOP" ); // although this is not a float item we choose the position of one
 }
 
 QString MarbleCrosshairsPlugin::name() const
@@ -73,31 +73,32 @@ bool MarbleCrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewpo
 				const QString& renderPos,
 				GeoSceneLayer * layer )
 {
-    int  centerx  = viewport->width() / 2;
-    int  centery  = viewport->height() / 2;
-    int  boxwidth = 6;
-    int  boxheight = 2;
-    int  boxoffset = 4;
+    if ( renderPos == "ALWAYS_ON_TOP" ) {
+        int  centerx  = viewport->width() / 2;
+        int  centery  = viewport->height() / 2;
+        int  boxwidth = 6;
+        int  boxheight = 2;
+        int  boxoffset = 4;
 
-    painter->save();
+        painter->save();
 
-    painter->setRenderHint( QPainter::Antialiasing, false );
-    painter->setPen( QColor( Qt::black ) );
-    painter->setBrush( QColor( Qt::white ) );
-    painter->drawRect( centerx - boxoffset - boxwidth, centery - 1, boxwidth, boxheight );
-    painter->drawRect( centerx + boxoffset, centery - 1, boxwidth, boxheight );
+        painter->setRenderHint( QPainter::Antialiasing, false );
+        painter->setPen( QColor( Qt::black ) );
+        painter->setBrush( QColor( Qt::white ) );
+        painter->drawRect( centerx - boxoffset - boxwidth, centery - 1, boxwidth, boxheight );
+        painter->drawRect( centerx + boxoffset, centery - 1, boxwidth, boxheight );
 
-    painter->drawRect( centerx - 1, centery - boxoffset - boxwidth, boxheight, boxwidth );
-    painter->drawRect( centerx - 1, centery + boxoffset, boxheight, boxwidth );
-    
-/*
-    painter->drawLine( centerx - halfsize, centery,
-                        centerx + halfsize, centery );
-    painter->drawLine( centerx, centery - halfsize,
-                        centerx, centery + halfsize );
-*/
-    painter->restore();
-
+        painter->drawRect( centerx - 1, centery - boxoffset - boxwidth, boxheight, boxwidth );
+        painter->drawRect( centerx - 1, centery + boxoffset, boxheight, boxwidth );
+        
+    /*
+        painter->drawLine( centerx - halfsize, centery,
+                            centerx + halfsize, centery );
+        painter->drawLine( centerx, centery - halfsize,
+                            centerx, centery + halfsize );
+    */
+        painter->restore();
+    }
     return true;
 }
 

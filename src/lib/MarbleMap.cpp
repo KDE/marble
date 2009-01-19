@@ -58,6 +58,8 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
+#include "MarbleRenderPlugin.h"
+
 #include "gps/GpsLayer.h"
 
 using namespace Marble;
@@ -629,7 +631,17 @@ bool MarbleMap::showAtmosphere() const
 
 bool MarbleMap::showCrosshairs() const
 {
-    return propertyValue( "crosshairs" );
+    bool visible = false;
+
+    QList<MarbleRenderPlugin *> pluginList = renderPlugins();
+    QList<MarbleRenderPlugin *>::const_iterator i;
+    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+        if ( (*i)->nameId() == "crosshairs" ) {
+            visible = (*i)->visible();
+        }
+    }
+
+    return visible;
 }
 
 bool MarbleMap::showPlaces() const
@@ -1013,7 +1025,13 @@ void MarbleMap::setShowAtmosphere( bool visible )
 
 void MarbleMap::setShowCrosshairs( bool visible )
 {
-    setPropertyValue( "crosshairs", visible );
+    QList<MarbleRenderPlugin *> pluginList = renderPlugins();
+    QList<MarbleRenderPlugin *>::const_iterator i;
+    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+        if ( (*i)->nameId() == "crosshairs" ) {
+            (*i)->setVisible( visible );
+        }
+    }
 }
 
 void MarbleMap::setShowClouds( bool visible )

@@ -248,7 +248,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     tile = new TextureTile( tileId );
     d->m_tileHash[tileId] = tile;
 
-    d->m_datasetProvider->loadDatasets( tile );
+//    d->m_datasetProvider->loadDatasets( tile );
 
     if ( d->m_downloadManager != 0 ) {
         connect( tile, SIGNAL( downloadTile( QUrl, QString, QString ) ),
