@@ -918,7 +918,7 @@ void MarbleWidget::setShowAtmosphere( bool visible )
 
 void MarbleWidget::setShowCrosshairs( bool visible )
 {
-//    d->m_map->setShowCrosshairs( visible );
+    d->m_map->setShowCrosshairs( visible );
 
     repaint();
 }
