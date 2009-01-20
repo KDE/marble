@@ -30,14 +30,80 @@ class GeoDataPlacemarkPrivate
 	m_population( -1 )
     {
     }
+    
+    GeoDataPlacemarkPrivate( const GeoDataPlacemarkPrivate& other )
+     : m_coordinate( other.m_coordinate ),
+       m_countrycode( other.m_countrycode ),
+       m_area( other.m_area ),
+       m_population( other.m_population ),
+       m_geometry( 0 )
+    {
+        if( !other.m_geometry ) return;
+
+        switch( other.m_geometry->geometryId() ) {
+            case InvalidGeometryId:
+                break;
+            case GeoDataPointId:
+                m_geometry = new GeoDataPoint( *static_cast<GeoDataPoint*>( other.m_geometry ) );
+                break;
+            case GeoDataLineStringId:
+                m_geometry = new GeoDataLineString( *static_cast<GeoDataLineString*>( other.m_geometry ) );
+                break;
+            case GeoDataLinearRingId:
+                m_geometry = new GeoDataLinearRing( *static_cast<GeoDataLinearRing*>( other.m_geometry ) );
+                break;
+            case GeoDataPolygonId:
+                m_geometry = new GeoDataPolygon( *static_cast<GeoDataPolygon*>( other.m_geometry ) );
+                break;
+            case GeoDataMultiGeometryId:
+                m_geometry = new GeoDataMultiGeometry( *static_cast<GeoDataMultiGeometry*>( other.m_geometry ) );
+                break;
+            case GeoDataModelId:
+                break;
+            default: break;
+        };
+    }
+    
+    void operator=( const GeoDataPlacemarkPrivate& other )
+    {
+        m_coordinate = other.m_coordinate;
+        m_countrycode = other.m_countrycode;
+        m_area = other.m_area;
+        m_population = other.m_population;
+
+        delete m_geometry;
+        if( !other.m_geometry ) return;
+
+        switch( other.m_geometry->geometryId() ) {
+            case InvalidGeometryId:
+                break;
+            case GeoDataPointId:
+                m_geometry = new GeoDataPoint( *static_cast<GeoDataPoint*>( other.m_geometry ) );
+                break;
+            case GeoDataLineStringId:
+                m_geometry = new GeoDataLineString( *static_cast<GeoDataLineString*>( other.m_geometry ) );
+                break;
+            case GeoDataLinearRingId:
+                m_geometry = new GeoDataLinearRing( *static_cast<GeoDataLinearRing*>( other.m_geometry ) );
+                break;
+            case GeoDataPolygonId:
+                m_geometry = new GeoDataPolygon( *static_cast<GeoDataPolygon*>( other.m_geometry ) );
+                break;
+            case GeoDataMultiGeometryId:
+                m_geometry = new GeoDataMultiGeometry( *static_cast<GeoDataMultiGeometry*>( other.m_geometry ) );
+                break;
+            case GeoDataModelId:
+                break;
+            default: break;
+        };
+    }
 
     ~GeoDataPlacemarkPrivate()
     {
-        delete m_geometry;
     }
 
     // Data for a Placemark in addition to those in GeoDataFeature.
-    GeoDataGeometry*    m_geometry;     // any GeoDataGeometry entry like locations
+    GeoDataGeometry    *m_geometry;     // any GeoDataGeometry entry like locations
     GeoDataPoint        m_coordinate;     // The geographic position
     QString             m_countrycode;  // Country code.
     qreal               m_area;         // Area in square kilometer
@@ -48,6 +114,12 @@ class GeoDataPlacemarkPrivate
 GeoDataPlacemark::GeoDataPlacemark( GeoDataObject* parent )
     : GeoDataFeature( parent ),
       d( new GeoDataPlacemarkPrivate )
+{
+}
+
+GeoDataPlacemark::GeoDataPlacemark( const GeoDataPlacemark& other )
+: GeoDataFeature( other ),
+  d( new GeoDataPlacemarkPrivate( *other.d ) )
 {
 }
 
@@ -65,6 +137,11 @@ GeoDataPlacemark::~GeoDataPlacemark()
     delete d;
 }
 
+void GeoDataPlacemark::operator=( const GeoDataPlacemark& other )
+{
+    *d = *other.d;
+}
+
 GeoDataGeometry* GeoDataPlacemark::geometry()
 {
     if( d->m_geometry )
@@ -78,7 +155,7 @@ GeoDataCoordinates GeoDataPlacemark::coordinate() const
     return static_cast<GeoDataCoordinates>( d->m_coordinate );
 }
 
-void GeoDataPlacemark::coordinate( qreal& lon, qreal& lat, qreal& alt )
+void GeoDataPlacemark::coordinate( qreal& lon, qreal& lat, qreal& alt ) const
 {
     d->m_coordinate.geoCoordinates( lon, lat );
     alt = d->m_coordinate.altitude();
@@ -95,34 +172,34 @@ void GeoDataPlacemark::setCoordinate( const GeoDataPoint &point )
     d->m_coordinate.setParent( this );
 }
 
-void GeoDataPlacemark::setGeometry( GeoDataPoint *point )
+void GeoDataPlacemark::setGeometry( const GeoDataPoint& point )
 {
     delete d->m_geometry;
-    d->m_geometry = point;
+    d->m_geometry = new GeoDataPoint( point );
 }
 
-void GeoDataPlacemark::setGeometry( GeoDataLineString *point )
+void GeoDataPlacemark::setGeometry( const GeoDataLineString& point )
 {
     delete d->m_geometry;
-    d->m_geometry = point;
+    d->m_geometry = new GeoDataLineString( point );
 }
 
-void GeoDataPlacemark::setGeometry( GeoDataLinearRing *point )
+void GeoDataPlacemark::setGeometry( const GeoDataLinearRing& point )
 {
     delete d->m_geometry;
-    d->m_geometry = point;
+    d->m_geometry = new GeoDataLinearRing( point );
 }
 
-void GeoDataPlacemark::setGeometry( GeoDataPolygon *point )
+void GeoDataPlacemark::setGeometry( const GeoDataPolygon& point )
 {
     delete d->m_geometry;
-    d->m_geometry = point;
+    d->m_geometry = new GeoDataPolygon( point );
 }
 
-void GeoDataPlacemark::setGeometry( GeoDataMultiGeometry *point )
+void GeoDataPlacemark::setGeometry( const GeoDataMultiGeometry& point )
 {
     delete d->m_geometry;
-    d->m_geometry = point;
+    d->m_geometry = new GeoDataMultiGeometry( point );
 }
 
 qreal GeoDataPlacemark::area() const
@@ -184,7 +261,7 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
             break;
         case GeoDataPointId:
             {
-            GeoDataPoint* point = new GeoDataPoint();
+            GeoDataPoint* point = new GeoDataPoint( this );
             point->unpack( stream );
             delete d->m_geometry;
             d->m_geometry = point;

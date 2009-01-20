@@ -26,20 +26,19 @@ GeoDataMultiGeometry::GeoDataMultiGeometry( GeoDataObject *parent )
 
 GeoDataMultiGeometry::~GeoDataMultiGeometry()
 {
-    qDeleteAll( *this );
 }
 
 void GeoDataMultiGeometry::pack( QDataStream& stream ) const
 {
     GeoDataGeometry::pack( stream );
 
-    stream << QVector<GeoDataGeometry*>::size();
+    stream << QVector<GeoDataGeometry>::size();
     
-    for( QVector<GeoDataGeometry*>::const_iterator iterator 
+    for( QVector<GeoDataGeometry>::const_iterator iterator 
           = this->constBegin(); 
          iterator != this->constEnd();
          ++iterator ) {
-        const GeoDataGeometry& geometry = * ( *iterator );
+        const GeoDataGeometry& geometry = *iterator;
         stream << geometry.geometryId();
         geometry.pack( stream );
     }
@@ -61,36 +60,36 @@ void GeoDataMultiGeometry::unpack( QDataStream& stream )
                 break;
             case GeoDataPointId:
                 {
-                GeoDataPoint* point = new GeoDataPoint();
-                point->unpack( stream );
+                GeoDataPoint point;
+                point.unpack( stream );
                 this->append( point );
                 }
                 break;
             case GeoDataLineStringId:
                 {
-                GeoDataLineString* lineString = new GeoDataLineString( this );
-                lineString->unpack( stream );
+                GeoDataLineString lineString;
+                lineString.unpack( stream );
                 this->append( lineString );
                 }
                 break;
             case GeoDataLinearRingId:
                 {
-                GeoDataLinearRing* linearRing = new GeoDataLinearRing( this );
-                linearRing->unpack( stream );
+                GeoDataLinearRing linearRing;
+                linearRing.unpack( stream );
                 this->append( linearRing );
                 }
                 break;
             case GeoDataPolygonId:
                 {
-                GeoDataPolygon* polygon = new GeoDataPolygon( this );
-                polygon->unpack( stream );
+                GeoDataPolygon polygon;
+                polygon.unpack( stream );
                 this->append( polygon );
                 }
                 break;
             case GeoDataMultiGeometryId:
                 {
-                GeoDataMultiGeometry* multiGeometry = new GeoDataMultiGeometry( this );
-                multiGeometry->unpack( stream );
+                GeoDataMultiGeometry multiGeometry;
+                multiGeometry.unpack( stream );
                 this->append( multiGeometry );
                 }
                 break;

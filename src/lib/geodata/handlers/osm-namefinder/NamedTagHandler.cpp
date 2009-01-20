@@ -47,7 +47,7 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     qDebug() << "parentItem:" << parentItem.qualifiedName().first;
 
     // FIXME: better check tags before?
-    GeoDataPlacemark * named = new GeoDataPlacemark( parentItem.nodeAs<GeoDataObject>() );
+    GeoDataPlacemark named = GeoDataPlacemark( parentItem.nodeAs<GeoDataObject>() );
 
     // FIXME: attribute type
 //     const ItemType type = getItemType( parser.attribute( attr_type ).trimmed() );
@@ -58,7 +58,7 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     const QString idStr = parser.attribute( attr_id ).trimmed();
     if ( !idStr.isEmpty() )
         id = idStr.toInt();
-    named->setId( id );
+    named.setId( id );
 
     // attributes lat and lon
     qreal lat = 0.0;
@@ -70,11 +70,11 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     const QString lonStr = parser.attribute( attr_lon ).trimmed();
     if ( !lonStr.isEmpty() )
         lon = lonStr.toDouble();
-    named->setCoordinate( GeoDataPoint( lon, lat, 0.0, GeoDataPoint::Degree, 0, parentItem.nodeAs<GeoDataObject>() ));
+    named.setCoordinate( GeoDataPoint( lon, lat, 0.0, GeoDataPoint::Degree, 0, parentItem.nodeAs<GeoDataObject>() ));
 
     // attribute name
     const QString name = parser.attribute( attr_name ).trimmed();
-    named->setName( name );
+    named.setName( name );
 
     // attribute rank
     int rank = 0;
@@ -89,15 +89,15 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     const QString zoomStr = parser.attribute( attr_zoom ).trimmed();
     if ( !zoomStr.isEmpty() )
         suggestedZoomLevel = zoomStr.toInt();
-    named->setPopularityIndex( suggestedZoomLevel );
+    named.setPopularityIndex( suggestedZoomLevel );
 
-    qDebug() << "parsed named:" << named->name() << " lon:" << lon << " lat:" << lat;
+    qDebug() << "parsed named:" << named.name() << " lon:" << lon << " lat:" << lat;
 
     if ( parentItem.represents( tag_searchresults )) {
         qDebug() << "added via parent searchresults";
         GeoDataContainer * const parent = parentItem.nodeAs<GeoDataContainer>();
         Q_ASSERT( parent );
-        parent->addFeature( named );
+        parent->append( named );
 
     } else if ( parentItem.represents( tag_place )) {
         qDebug() << "added via parent place, not implemented";
@@ -113,7 +113,7 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
         GeoDataDocument * const dataDocument =
             dynamic_cast<GeoDataDocument * const>( document );
         Q_ASSERT( dataDocument );
-        dataDocument->addFeature( named );
+        dataDocument->append( named );
     }
 
     return 0;

@@ -431,7 +431,7 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
     }
 
     qreal lon, lat;
-    lineString.first()->geoCoordinates( lon, lat );
+    lineString.first().geoCoordinates( lon, lat );
     GeoDataCoordinates::normalizeLonLat( lon, lat );
 
     qreal north = lat;
@@ -466,13 +466,13 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
     int currentSign = ( lon < 0 ) ? -1 : +1;
     int previousSign = currentSign;
 
-    QVector<GeoDataCoordinates*>::ConstIterator it( lineString.begin() );
-    QVector<GeoDataCoordinates*>::ConstIterator itEnd( lineString.constEnd() );
+    QVector<GeoDataCoordinates>::ConstIterator it( lineString.begin() );
+    QVector<GeoDataCoordinates>::ConstIterator itEnd( lineString.constEnd() );
 
     for ( ; it != itEnd; ++it )
     {
         // Get coordinates and normalize them to the desired range.
-        (*it)->geoCoordinates( lon, lat );
+        (it)->geoCoordinates( lon, lat );
         GeoDataCoordinates::normalizeLonLat( lon, lat );
 
         // Determining the maximum and minimum latitude

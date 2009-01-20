@@ -41,7 +41,7 @@ GeoDataObject::GeoDataObject( GeoDataObject* parent )
 
 GeoDataObject::GeoDataObject( GeoDataObject const & other )
     : GeoNode( other ), Serializable( other ),
-      d( new GeoDataObjectPrivate( *other.d ))
+      d( new GeoDataObjectPrivate( *other.d ) )
 {
 }
 

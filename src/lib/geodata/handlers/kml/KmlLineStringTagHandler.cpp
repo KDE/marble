@@ -43,20 +43,21 @@ GeoNode* KmlLineStringTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    GeoDataLineString* lineString = 0;
-    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
-        lineString = new GeoDataLineString( parentItem.nodeAs<GeoDataPlacemark>() );
-        parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( lineString );
-    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
-        lineString = new GeoDataLineString( parentItem.nodeAs<GeoDataMultiGeometry>() );
-        parentItem.nodeAs<GeoDataMultiGeometry>()->append( lineString );
-    }
+    GeoDataLineString lineString;
 #ifdef DEBUG_TAGS
     qDebug() << "Parsed <" << kmlTag_LineString << ">"
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif
 
-    return lineString;
+    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
+        parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( lineString );
+        return parentItem.nodeAs<GeoDataPlacemark>()->geometry();
+    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
+        parentItem.nodeAs<GeoDataMultiGeometry>()->append( lineString );
+        return &parentItem.nodeAs<GeoDataMultiGeometry>()->last();
+    } else {
+        return 0;
+    }
 }
 
 }

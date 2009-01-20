@@ -50,7 +50,7 @@ QVariant KmlFileViewItem::data( int role ) const
             return QString("KML Document");
     }
     else if( role == AbstractFileViewItem::FilePointerRole ) {
-        return &m_document;
+        return qVariantFromValue(&m_document);
     }
     else
         return QVariant();

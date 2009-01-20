@@ -6,11 +6,13 @@
 // the source code.
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
+// Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
 
 // Own
 #include "GeoDataContainer.h"
+#include "GeoDataContainer_p.h"
 
 // Qt
 #include <QtGui/QImage>
@@ -23,113 +25,97 @@
 namespace Marble
 {
 
-class GeoDataContainerPrivate
-{
-  public:
-    GeoDataContainerPrivate()
-    {
-    }
-
-    ~GeoDataContainerPrivate()
-    {
-        qDeleteAll(m_features);
-    }
-
-    /// The vector holding all the features in the container.
-    QVector < GeoDataFeature* >  m_features;
-};
-
 GeoDataContainer::GeoDataContainer( GeoDataObject *parent )
-    : GeoDataFeature( parent ),
-    d( new GeoDataContainerPrivate() )
+    : GeoDataFeature( new GeoDataContainerPrivate )
+{
+}
+
+GeoDataContainer::GeoDataContainer( const GeoDataContainer& other )
+    : GeoDataFeature( other )
 {
 }
 
 GeoDataContainer::~GeoDataContainer()
 {
-    delete d;
 }
 
-
-QVector<GeoDataFolder*> GeoDataContainer::folders() const
+GeoDataContainerPrivate* GeoDataContainer::p() const
 {
-    QVector<GeoDataFolder*> results;
+    return static_cast<GeoDataContainerPrivate*>(d);
+}
 
-    QVector<GeoDataFeature*>::const_iterator it = d->m_features.constBegin();
-    QVector<GeoDataFeature*>::const_iterator end = d->m_features.constEnd();
+QVector<GeoDataFolder> GeoDataContainer::folders() const
+{
+    QVector<GeoDataFolder> results;
+
+    QVector<GeoDataFeature>::const_iterator it = p()->m_vector.constBegin();
+    QVector<GeoDataFeature>::const_iterator end = p()->m_vector.constEnd();
 
     for (; it != end; ++it) {
-        GeoDataFeature* feature = *it;
+        GeoDataFeature feature = *it;
 
-        if ( dynamic_cast<GeoDataFolder*>( feature ) )
-            results.append( static_cast<GeoDataFolder*>( feature ) );
+        if ( feature.featureId() == GeoDataFolderId )
+            results.append( *static_cast<const GeoDataFolder*>( it ) );
     }
 
     return results;
 }
 
-QVector<GeoDataPlacemark*> GeoDataContainer::placemarks() const
+QVector<GeoDataPlacemark> GeoDataContainer::placemarks() const
 {
-    QVector<GeoDataPlacemark*> results;
+    QVector<GeoDataPlacemark> results;
 
-    QVector<GeoDataFeature*>::const_iterator it = d->m_features.constBegin();
-    QVector<GeoDataFeature*>::const_iterator end = d->m_features.constEnd();
+    QVector<GeoDataFeature>::const_iterator it = p()->m_vector.constBegin();
+    QVector<GeoDataFeature>::const_iterator end = p()->m_vector.constEnd();
 
     for (; it != end; ++it) {
-        GeoDataFeature* feature = *it;
-        if ( dynamic_cast<GeoDataPlacemark*>( feature ) )
-            results.append( static_cast<GeoDataPlacemark*>( feature ) );
+        GeoDataFeature feature = *it;
+        if ( feature.featureId() == GeoDataPlacemarkId )
+            results.append( *static_cast<const GeoDataPlacemark*>( it ) );
     }
 
     return results;
 }
 
-QVector<GeoDataFeature*> GeoDataContainer::features() const
+QVector<GeoDataFeature> GeoDataContainer::features() const
 {
-    return d->m_features;
+    return p()->m_vector;
 }
 
-void GeoDataContainer::addFeature( GeoDataFeature* feature, bool setChild )
+void GeoDataContainer::append( const GeoDataFeature& other )
 {
-    if( setChild ) feature->setParent( this );
-    d->m_features.append( feature );
+    detach();
+    p()->m_vector.append( other );
 }
 
-void GeoDataContainer::removeFeature(GeoDataFeature* feature )
+int GeoDataContainer::size() const
 {
-    int pos = 0;
-    if( pos = d->m_features.indexOf( feature ) && pos >= 0 ) {
-        feature->setParent( 0 );
-        d->m_features.remove( pos );
-    }
+    return p()->m_vector.size();
 }
 
-GeoDataObject* GeoDataContainer::child( int pos )
+GeoDataFeature& GeoDataContainer::at( int pos )
 {
-    return d->m_features.value( pos );
+    detach();
+    return p()->m_vector[ pos ];
 }
 
-int GeoDataContainer::childPosition( GeoDataObject *child )
+GeoDataFeature& GeoDataContainer::last()
 {
-    return d->m_features.indexOf( static_cast<GeoDataFeature*>( child ) );
-}
-
-int GeoDataContainer::childCount()
-{
-    return d->m_features.count();
+    detach();
+    return p()->m_vector.last();
 }
 
 void GeoDataContainer::pack( QDataStream& stream ) const
 {
     GeoDataFeature::pack( stream );
 
-    stream << d->m_features.count();
+    stream << p()->m_vector.count();
 
-    for ( QVector <GeoDataFeature*>::const_iterator iterator = d->m_features.constBegin();
-          iterator != d->m_features.constEnd();
+    for ( QVector <GeoDataFeature>::const_iterator iterator = p()->m_vector.constBegin();
+          iterator != p()->m_vector.constEnd();
           ++iterator )
     {
-        const GeoDataFeature& feature = * ( *iterator );
+        const GeoDataFeature& feature = *iterator;
         stream << feature.featureId();
         feature.pack( stream );
     }
@@ -137,6 +123,7 @@ void GeoDataContainer::pack( QDataStream& stream ) const
 
 void GeoDataContainer::unpack( QDataStream& stream )
 {
+    detach();
     GeoDataFeature::unpack( stream );
 
     int count;
@@ -150,16 +137,16 @@ void GeoDataContainer::unpack( QDataStream& stream )
                 /* not usable!!!! */ break;
             case GeoDataFolderId:
                 {
-                GeoDataFolder* folder = new GeoDataFolder( this );
-                folder->unpack( stream );
-                d->m_features.append( folder );
+                GeoDataFolder folder;
+                folder.unpack( stream );
+                p()->m_vector.append( folder );
                 }
                 break;
             case GeoDataPlacemarkId:
                 {
-                GeoDataPlacemark* placemark = new GeoDataPlacemark( this );
-                placemark->unpack( stream );
-                d->m_features.append( placemark );
+                GeoDataPlacemark placemark;
+                placemark.unpack( stream );
+                p()->m_vector.append( placemark );
                 }
                 break;
             case GeoDataNetworkLinkId:
@@ -172,107 +159,5 @@ void GeoDataContainer::unpack( QDataStream& stream )
         };
     }
 }
-
-
-#if 0   // Shouldn't be here at all
-PlaceMarkContainer& GeoDataContainer::activePlaceMarkContainer( const ViewParams& viewParams )
-{
-    switch( viewParams.m_projection ) {
-        case Spherical:
-            return sphericalActivePlaceMarkContainer(viewParams);
-            break;
-        case Equirectangular:
-            return rectangularActivePlaceMarkContainer(viewParams);
-            break;
-    }
-    //
-    // Return at least something...
-    //
-    return sphericalActivePlaceMarkContainer(viewParams);
-}
-
-
-PlaceMarkContainer& GeoDataContainer::sphericalActivePlaceMarkContainer( const ViewParams& viewParams )
-{
-    m_activePlaceMarkContainer.clear ();
-
-    int x = 0;
-    int y = 0;
-
-    int imgwidth = viewParams.m_canvasImage->width();
-    int imgheight = viewParams.m_canvasImage->height();
-
-    Quaternion  invplanetAxis = viewParams.m_planetAxis.inverse();
-    Quaternion  qpos;
-
-    QVector < GeoDataPlacemark* >::const_iterator  it;
-    for ( it = m_placemarkVector.constBegin();
-          it != m_placemarkVector.constEnd();
-          it++ )
-    {
-        GeoDataPlacemark* placemark = *it;
-        qpos = placemark->coordinate().quaternion();
-
-        qpos.rotateAroundAxis(invplanetAxis);
-
-        if ( qpos.v[Q_Z] > 0 ) {
-
-            x = (int)(imgwidth  / 2 + viewParams.m_radius * qpos.v[Q_X]);
-            y = (int)(imgheight / 2 + viewParams.m_radius * qpos.v[Q_Y]);
-
-            // Don't process placemarks if they are outside the screen area
-            if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
-                m_activePlaceMarkContainer.append( placemark );
-            }
-        }
-    }
-
-    qDebug("GeoDataDocument::activePlaceMarkContainer (). PlaceMarks count: %d", m_activePlaceMarkContainer.count());
-    return m_activePlaceMarkContainer;
-}
-
-PlaceMarkContainer& GeoDataContainer::rectangularActivePlaceMarkContainer( const ViewParams& viewParams )
-{
-    m_activePlaceMarkContainer.clear ();
-
-    int x = 0;
-    int y = 0;
-
-    int imgwidth = viewParams.m_canvasImage->width();
-    int imgheight = viewParams.m_canvasImage->height();
-
-    Quaternion  invplanetAxis = viewParams.m_planetAxis.inverse();
-    Quaternion  qpos;
-
-    float const centerLat =  viewParams.m_planetAxis.pitch();
-    float const centerLon = -viewParams.m_planetAxis.yaw();
-
-    QVector < GeoDataPlacemark* >::const_iterator  it;
-    for ( it = m_placemarkVector.constBegin();
-          it != m_placemarkVector.constEnd();
-          it++ )
-    {
-        GeoDataPlacemark* placemark = *it;
-        qpos = placemark->coordinate().quaternion();
-
-        qreal xyFactor = (float)(2 * viewParams.m_radius) / M_PI;
-
-        qreal degX;
-        qreal degY;
-        qpos.getSpherical(degX,degY);
-
-        x = (int)(imgwidth  / 2 + xyFactor * (degX + centerLon));
-        y = (int)(imgheight / 2 + xyFactor * (degY + centerLat));
-
-        // Don't process placemarks if they are outside the screen area
-        if ( ( x >= 0 && x < imgwidth || x+4*viewParams.m_radius < imgwidth || x-4*viewParams.m_radius >= 0 )  && y >= 0 && y < imgheight ) {
-            m_activePlaceMarkContainer.append( placemark );
-        }
-    }
-
-    qDebug("GeoDataDocument::activePlaceMarkContainer (). PlaceMarks count: %d", m_activePlaceMarkContainer.count());
-    return m_activePlaceMarkContainer;
-}
-#endif
 
 }

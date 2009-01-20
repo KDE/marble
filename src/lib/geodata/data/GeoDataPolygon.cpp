@@ -29,17 +29,10 @@ class GeoDataPolygonPrivate
     
     ~GeoDataPolygonPrivate()
     {
-//        qDeleteAll( *outer );
-        delete outer;
-        
-        // LinearRings are equiv. to QVector<GeoDataCoordinates>
-        // thus the next line hopefully deletes all GeoDataCoordinates
-        // in this QVector
-        qDeleteAll(inner);
     }
     
-    GeoDataLinearRing*          outer;
-    QVector<GeoDataLinearRing*> inner;
+    GeoDataLinearRing           outer;
+    QVector<GeoDataLinearRing>  inner;
     bool         m_dirtyBox; // tells whether there have been changes to the
                              // GeoDataPoints since the LatLonAltBox has 
                              // been calculated. Saves performance. 
@@ -118,21 +111,20 @@ GeoDataLatLonAltBox GeoDataPolygon::latLonAltBox() const
 
 GeoDataLinearRing& GeoDataPolygon::outerBoundary() const
 {
-    return *(d->outer);
+    return (d->outer);
 }
 
-void GeoDataPolygon::setOuterBoundary( GeoDataLinearRing* boundary )
+void GeoDataPolygon::setOuterBoundary( const GeoDataLinearRing& boundary )
 {
-    delete d->outer;
     d->outer = boundary;
 }
 
-QVector<GeoDataLinearRing*> GeoDataPolygon::innerBoundaries() const
+QVector<GeoDataLinearRing> GeoDataPolygon::innerBoundaries() const
 {
     return d->inner;
 }
 
-void GeoDataPolygon::appendInnerBoundary( GeoDataLinearRing* boundary )
+void GeoDataPolygon::appendInnerBoundary( const GeoDataLinearRing& boundary )
 {
     d->inner.append( boundary );
 }
@@ -141,18 +133,18 @@ void GeoDataPolygon::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );
 
-    d->outer->pack( stream );
+    d->outer.pack( stream );
     
     stream << d->inner.size();
     stream << (qint32)(d->m_tessellationFlags);
    
-    for( QVector<GeoDataLinearRing*>::const_iterator iterator 
+    for( QVector<GeoDataLinearRing>::const_iterator iterator 
           = d->inner.constBegin(); 
          iterator != d->inner.constEnd();
          ++iterator ) {
         qDebug() << "innerRing: size" << d->inner.size();
-        GeoDataLinearRing* linearRing = ( *iterator );
-        linearRing->pack( stream );
+        GeoDataLinearRing linearRing = ( *iterator );
+        linearRing.pack( stream );
     }
 }
 
@@ -160,7 +152,7 @@ void GeoDataPolygon::unpack( QDataStream& stream )
 {
     GeoDataObject::unpack( stream );
 
-    d->outer->unpack( stream );
+    d->outer.unpack( stream );
 
     qint32 size;
     qint32 tessellationFlags;
@@ -171,8 +163,8 @@ void GeoDataPolygon::unpack( QDataStream& stream )
     d->m_tessellationFlags = (TessellationFlags)(tessellationFlags);
 
     for(qint32 i = 0; i < size; i++ ) {
-        GeoDataLinearRing* linearRing = new GeoDataLinearRing( this );
-        linearRing->unpack( stream );
+        GeoDataLinearRing linearRing;
+        linearRing.unpack( stream );
         d->inner.append( linearRing );
     }
 }

@@ -794,10 +794,10 @@ void MarbleModelPrivate::geoDataDocumentAdded( GeoDataDocument* document )
     AbstractFileViewItem* item = new KmlFileViewItem( *m_placemarkmanager,
                                                       *document );
 
-    foreach(GeoDataPlacemark* placemark, document->placemarks())
+    foreach(GeoDataPlacemark placemark, document->placemarks())
     {
-        QString styleUrl = placemark->styleUrl().remove('#');
-        placemark->setStyle( document->style( styleUrl ) );
+        QString styleUrl = placemark.styleUrl().remove('#');
+        placemark.setStyle( document->style( styleUrl ) );
     };
     m_fileviewmodel->append( item );
     

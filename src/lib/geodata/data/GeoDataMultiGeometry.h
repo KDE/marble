@@ -29,7 +29,7 @@ namespace Marble
  * of different objects to form one Placemark.
  */
 
-class GEODATA_EXPORT GeoDataMultiGeometry : public QVector<GeoDataGeometry*>,
+class GEODATA_EXPORT GeoDataMultiGeometry : public QVector<GeoDataGeometry>,
                                             public GeoDataGeometry {
  public:
     explicit GeoDataMultiGeometry( GeoDataObject *parent = 0 );
@@ -42,12 +42,6 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public QVector<GeoDataGeometry*>,
     virtual void unpack( QDataStream& stream );
 
     virtual EnumGeometryId geometryId() const { return GeoDataMultiGeometryId; };
- private:
-    /**
-    * Q_FOREACH containers are bad because they require a copy of the QVector
-    * Use iterators instead!!!
-    */
-    Q_DISABLE_COPY( GeoDataMultiGeometry )
 };
 
 }

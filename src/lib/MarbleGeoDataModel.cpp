@@ -63,6 +63,7 @@ QList<QPersistentModelIndex> MarbleGeoDataModel::persistentIndexList () const
     }
     return modelIndexList;
 }
+
 QVariant MarbleGeoDataModel::data( const QModelIndex &index, int role ) const
 {
     return QVariant();
@@ -91,8 +92,8 @@ unsigned long MarbleGeoDataModel::addGeoDataFile( QString filename )
     GeoDocument* document = parser.releaseDocument();
     Q_ASSERT_X( document, "geoRoot()", "document unparseable" );
     
-    foreach(GeoDataFeature* feature, static_cast<GeoDataDocument*>( document )->features() ) {
-        d->m_rootDocument->addFeature( feature );
+    foreach(GeoDataFeature feature, static_cast<GeoDataDocument*>( document )->features() ) {
+        d->m_rootDocument->append( feature );
     }
 
     // add this document as a new entry into the hash
@@ -116,8 +117,8 @@ bool MarbleGeoDataModel::removeGeoDataFile( unsigned long removeId )
 {
     if(d->m_documents.contains( removeId ) ) {
         GeoDataDocument *doc = d->m_documents[ removeId ];
-        foreach(GeoDataFeature* feature, doc->features() ) {
-            d->m_rootDocument->removeFeature( feature );
+        foreach(GeoDataFeature feature, doc->features() ) {
+//            d->m_rootDocument->removeFeature( feature );
         }
         // get the styles and the stylemaps
         foreach(GeoDataStyle* style, doc->styles() ) {

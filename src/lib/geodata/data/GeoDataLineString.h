@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
+// Copyright 2009 Patrick Spendrin <ps_ml@gmx.de>
 //
 
 
@@ -42,7 +43,7 @@ class GeoDataLineStringPrivate;
  * currently used for a very similar purpose.
  */
 
-class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates*>,
+class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates>,
                                          public GeoDataGeometry {
 
  public:
@@ -63,12 +64,13 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates*>,
 
     GeoDataLatLonAltBox latLonAltBox() const;
 
-    void append ( GeoDataCoordinates* value );
+    void append ( const GeoDataCoordinates& value );
+    GeoDataLineString& operator << ( const GeoDataCoordinates& value );
     void clear();
 
-    QVector<GeoDataCoordinates*>::Iterator erase ( QVector<GeoDataCoordinates*>::Iterator pos );
-    QVector<GeoDataCoordinates*>::Iterator erase ( QVector<GeoDataCoordinates*>::Iterator begin,
-                                                   QVector<GeoDataCoordinates*>::Iterator end );
+    QVector<GeoDataCoordinates>::Iterator erase ( QVector<GeoDataCoordinates>::Iterator pos );
+    QVector<GeoDataCoordinates>::Iterator erase ( QVector<GeoDataCoordinates>::Iterator begin,
+                                                  QVector<GeoDataCoordinates>::Iterator end );
 
     /**
      * @brief  Serialize the style to a stream.
@@ -83,7 +85,9 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates*>,
 
     virtual EnumGeometryId geometryId() const { return GeoDataLineStringId; };
  protected:
-    GeoDataLineStringPrivate  * const d;
+    GeoDataLineStringPrivate  * d;
+ private:
+    void detach();
 };
 
 }

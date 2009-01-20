@@ -197,7 +197,7 @@ GeoDataLatLonAltBox GeoDataLatLonAltBox::fromLineString(  const GeoDataLineStrin
 
     GeoDataLatLonAltBox temp ( GeoDataLatLonBox::fromLineString ( lineString ) );
 
-    qreal altitude = lineString.first()->altitude();
+    qreal altitude = lineString.first().altitude();
     qreal maxAltitude = altitude;
     qreal minAltitude = altitude;
 
@@ -208,13 +208,13 @@ GeoDataLatLonAltBox GeoDataLatLonAltBox::fromLineString(  const GeoDataLineStrin
         return temp;
     }
 
-    QVector<GeoDataCoordinates*>::ConstIterator it( lineString.begin() );
-    QVector<GeoDataCoordinates*>::ConstIterator itEnd( lineString.constEnd() );
+    QVector<GeoDataCoordinates>::ConstIterator it( lineString.begin() );
+    QVector<GeoDataCoordinates>::ConstIterator itEnd( lineString.constEnd() );
 
     for ( ; it != itEnd; ++it )
     {
         // Get coordinates and normalize them to the desired range.
-        altitude = (*it)->altitude();
+        altitude = (it)->altitude();
 
         // Determining the maximum and minimum latitude
         if ( altitude > maxAltitude ) maxAltitude = altitude;

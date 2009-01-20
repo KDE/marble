@@ -233,7 +233,7 @@ if(WIN32)
   # distinguish between debug and release plugin
   SET(CMAKE_DEBUG_POSTFIX "d")
 endif(WIN32)
-
+add_definitions("-DDEBUG_TAGS")
 ####################################################
 # add cmake macros
 include( MarbleMacros )

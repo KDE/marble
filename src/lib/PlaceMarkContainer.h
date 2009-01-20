@@ -28,7 +28,7 @@ namespace Marble
  *
  * The ownership of the place mark objects is <b>not</b> transfered to the container!
  */
-class PlaceMarkContainer : public QVector<Marble::GeoDataPlacemark*>
+class PlaceMarkContainer : public QVector<Marble::GeoDataPlacemark>
 {
  public:
     /// Create a new PlaceMarkContainer.
@@ -51,7 +51,7 @@ class PlaceMarkContainer : public QVector<Marble::GeoDataPlacemark*>
      * param  container a QVector of Placemarks
      * param  name the name of the container
      */
-    PlaceMarkContainer( const QVector<Marble::GeoDataPlacemark*>& container, const QString& name );
+    PlaceMarkContainer( const QVector<Marble::GeoDataPlacemark>& container, const QString& name );
 
     /// Return the name of the container
     QString name() const;

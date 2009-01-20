@@ -24,29 +24,29 @@ PlaceMarkContainer::PlaceMarkContainer( const QString& name )
 }
 
 PlaceMarkContainer::PlaceMarkContainer( const PlaceMarkContainer& container )
-    : QVector<GeoDataPlacemark*>( container ), m_name( container.name() )
+    : QVector<GeoDataPlacemark>( container ), m_name( container.name() )
 {
 }
 
-PlaceMarkContainer::PlaceMarkContainer( const QVector<GeoDataPlacemark*>& container, const QString& name )
-    : QVector<GeoDataPlacemark*>( container ), m_name( name )
+PlaceMarkContainer::PlaceMarkContainer( const QVector<GeoDataPlacemark>& container, const QString& name )
+    : QVector<GeoDataPlacemark>( container ), m_name( name )
 {
 }
 
 PlaceMarkContainer& PlaceMarkContainer::operator= ( const PlaceMarkContainer& container )
 {
-    QVector<GeoDataPlacemark*>::operator=( container );
+    QVector<GeoDataPlacemark>::operator=( container );
     return *this;
 }
 
-inline bool populationLessThan( GeoDataPlacemark* mark1, GeoDataPlacemark* mark2 )
+inline bool populationLessThan( const GeoDataPlacemark& mark1, const GeoDataPlacemark& mark2 )
 { 
     // If compared items do not differ in terms of being selected,
     // compare them based on population numbers.
-    if ( mark1->popularityIndex() != mark2->popularityIndex() )
-        return ( mark1->popularityIndex() > mark2->popularityIndex() );
+    if ( mark1.popularityIndex() != mark2.popularityIndex() )
+        return ( mark1.popularityIndex() > mark2.popularityIndex() );
     else
-        return ( mark1->popularity() > mark2->popularity() );
+        return ( mark1.popularity() > mark2.popularity() );
 }
 
 

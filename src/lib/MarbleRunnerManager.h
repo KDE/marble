@@ -51,7 +51,7 @@ signals:
     //tells runners to make it so
     void engage(QString text);
 private slots:
-    void slotRunnerFinished(QVector<GeoDataPlacemark*> result);
+    void slotRunnerFinished(QVector<GeoDataPlacemark> result);
     void slotRunnerStarted();
 private:
     int m_activeRunners;

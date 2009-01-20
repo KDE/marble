@@ -117,12 +117,11 @@ int main(int argc, char** argv)
 
     if (document->isGeoDataDocument()) {
         GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>(document);
-        QVector<GeoDataFeature*>::const_iterator it = dataDocument->features().constBegin();
-        QVector<GeoDataFeature*>::const_iterator end = dataDocument->features().constEnd();
+        QVector<GeoDataFeature>::const_iterator it = dataDocument->features().constBegin();
+        QVector<GeoDataFeature>::const_iterator end = dataDocument->features().constEnd();
         qDebug() << "---------------------------------------------------------";
         for (; it != end; ++it) {
-            GeoDataFeature* feature = *it;
-            qDebug() << "Name: " << feature->name();
+            qDebug() << "Name: " << it->name();
         }
         dumpGeoDataDocument(static_cast<GeoDataDocument*>(document));
     } else if (document->isGeoSceneDocument()) {
@@ -189,15 +188,15 @@ QString formatOutput(int depth)
     return result;
 }
 
-void dumpFoldersRecursively(const GeoDataContainer* container, int depth)
+void dumpFoldersRecursively(const GeoDataContainer& container, int depth)
 {
-    QVector<GeoDataFolder*> folders = container->folders();
+    QVector<GeoDataFolder> folders = container.folders();
     QString format = formatOutput(depth);
 
     fprintf(stderr, "%s", qPrintable(format + QString("Dumping container with %1 child folders!\n").arg(folders.size())));
 
-    QVector<GeoDataFolder*>::const_iterator it = folders.constBegin();
-    const QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
+    QVector<GeoDataFolder>::const_iterator it = folders.constBegin();
+    const QVector<GeoDataFolder>::const_iterator end = folders.constEnd();
 
     for (; it != end; ++it) {
         fprintf(stderr, "%s", qPrintable(format + QString("Dumping child %1\n").arg(it - folders.constBegin() + 1)));
@@ -207,7 +206,7 @@ void dumpFoldersRecursively(const GeoDataContainer* container, int depth)
 
 void dumpGeoDataDocument(GeoDataDocument* document)
 {
-    dumpFoldersRecursively(document, 0);
+    dumpFoldersRecursively(*document, 0);
     // TODO: Dump all features!
 } 
 

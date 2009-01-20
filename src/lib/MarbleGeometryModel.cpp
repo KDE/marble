@@ -47,13 +47,14 @@ class MarbleGeometryModel::Private {
         * This is needed to build up the parent Hash.
         */
         if( !geometry ) return;
-        QVector<GeoDataGeometry*>::const_iterator iterator;
-        GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>( geometry );
-        for( iterator = multiGeometry->constBegin(); 
-             iterator != multiGeometry->constEnd(); 
+        
+        QVector<GeoDataGeometry>::iterator iterator;
+        GeoDataMultiGeometry* multiGeometry = static_cast<GeoDataMultiGeometry*>( geometry );
+        for( iterator = multiGeometry->begin(); 
+             iterator != multiGeometry->end(); 
              ++iterator ) {
-            m_parent[ *iterator ] = geometry;
-            if( (*iterator)->geometryId() == GeoDataMultiGeometryId ) mapGeometry( *iterator );
+            m_parent[ iterator ] = geometry;
+            if( iterator->geometryId() == GeoDataMultiGeometryId ) mapGeometry( iterator );
         }
     };
     
@@ -61,9 +62,9 @@ class MarbleGeometryModel::Private {
         if( !feature ) return;
         
         if( feature->featureId() == GeoDataDocumentId || feature->featureId() == GeoDataFolderId ) {
-            Q_FOREACH( GeoDataFeature *childFeature, static_cast<GeoDataContainer*>( feature )->features() ) {
-                m_parent[ childFeature ] = feature;
-                mapFeature( childFeature );
+            Q_FOREACH( GeoDataFeature childFeature, static_cast<GeoDataContainer*>( feature )->features() ) {
+                m_parent[ &childFeature ] = feature;
+                mapFeature( &childFeature );
             }
         }
         if( feature->featureId() == GeoDataPlacemarkId ) {
@@ -229,9 +230,8 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
     if( dynamic_cast<GeoDataDocument*>( parentItem ) || 
         dynamic_cast<GeoDataFolder*>( parentItem ) )
     {
-        childItem = dynamic_cast<GeoDataObject*>( 
-                        dynamic_cast<GeoDataContainer*>( 
-                            parentItem )->features().at( row ) );
+        *childItem =     dynamic_cast<GeoDataContainer*>( 
+                            parentItem )->features().at( row );
     }
 
     if( dynamic_cast<GeoDataPlacemark*>( parentItem ) )
@@ -242,7 +242,7 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
     
     if( dynamic_cast<GeoDataMultiGeometry*>( parentItem ) )
     {
-        childItem = dynamic_cast<GeoDataMultiGeometry*>( parentItem )->at( row );
+        *childItem = dynamic_cast<GeoDataMultiGeometry*>( parentItem )->at( row );
     }
 
     if ( childItem )

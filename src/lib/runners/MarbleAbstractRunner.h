@@ -22,6 +22,7 @@
 #define MARBLEABSTRACTRUNNER_H
 
 #include "GeoDataFeature.h"
+#include "GeoDataPlacemark.h"
 
 #include <QThread>
 #include <QVector>
@@ -78,7 +79,7 @@ signals:
      * @param result the result of the parsing.
      * @see parse()
      */
-    void runnerFinished(QVector<GeoDataPlacemark*> result);
+    void runnerFinished(QVector<GeoDataPlacemark> result);
 };
 
 }

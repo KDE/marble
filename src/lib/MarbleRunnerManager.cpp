@@ -40,7 +40,7 @@ namespace Marble
 MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
             : QObject(parent)
 {
-    qRegisterMetaType<QVector<GeoDataPlacemark*> >("QVector<GeoDataPlacemark*>");
+    qRegisterMetaType<QVector<GeoDataPlacemark> >("QVector<GeoDataPlacemark>");
 
     m_model = new MarblePlacemarkModel(0);
     m_activeRunners = 0;
@@ -52,8 +52,8 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
     m_latlonRunner->moveToThread(m_latlonRunner);
     connect( m_latlonRunner, SIGNAL( runnerStarted() ),
              this,           SLOT( slotRunnerStarted() ));
-    connect( m_latlonRunner, SIGNAL( runnerFinished( QVector<GeoDataPlacemark*> ) ),
-             this,           SLOT( slotRunnerFinished( QVector<GeoDataPlacemark*> ) ));
+    connect( m_latlonRunner, SIGNAL( runnerFinished( QVector<GeoDataPlacemark> ) ),
+             this,           SLOT( slotRunnerFinished( QVector<GeoDataPlacemark> ) ));
     connect( this,           SIGNAL( engage(QString) ),
              m_latlonRunner, SLOT( parse(QString) ));
 
@@ -62,8 +62,8 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
     m_onfRunner->moveToThread(m_onfRunner);
     connect( m_onfRunner, SIGNAL( runnerStarted() ),
              this,        SLOT( slotRunnerStarted() ));
-    connect( m_onfRunner, SIGNAL( runnerFinished( QVector<GeoDataPlacemark*> ) ),
-             this,        SLOT( slotRunnerFinished( QVector<GeoDataPlacemark*> ) ));
+    connect( m_onfRunner, SIGNAL( runnerFinished( QVector<GeoDataPlacemark> ) ),
+             this,        SLOT( slotRunnerFinished( QVector<GeoDataPlacemark> ) ));
     connect( this,        SIGNAL( engage(QString) ),
              m_onfRunner, SLOT( parse(QString) ));
 }
@@ -93,7 +93,7 @@ void MarbleRunnerManager::newText(QString text)
     emit engage(text);
 }
 
-void MarbleRunnerManager::slotRunnerFinished( QVector<GeoDataPlacemark*> result )
+void MarbleRunnerManager::slotRunnerFinished( QVector<GeoDataPlacemark> result )
 {
     m_activeRunners--;
     qDebug() << "Runner finished, active runners: " << m_activeRunners;

@@ -59,10 +59,10 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
     GeoDataLatLonAltBox latLonAltBox() const;
 
     GeoDataLinearRing& outerBoundary() const;
-    void setOuterBoundary( GeoDataLinearRing* boundary );
+    void setOuterBoundary( const GeoDataLinearRing& boundary );
 
-    QVector<GeoDataLinearRing*> innerBoundaries() const;
-    void appendInnerBoundary( GeoDataLinearRing* boundary );
+    QVector<GeoDataLinearRing> innerBoundaries() const;
+    void appendInnerBoundary( const GeoDataLinearRing& boundary );
 
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;

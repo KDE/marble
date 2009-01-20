@@ -64,7 +64,7 @@ void OnfRunner::fail()
     //The manager needs to know when parsing starts and stops
     //in order to have a balanced count of active runners. So
     //we emit runnerFinished() to balance the previous failed runnerStarted()
-    QVector<GeoDataPlacemark*> empty;
+    QVector<GeoDataPlacemark> empty;
     emit runnerFinished( empty );
     return;
 }
@@ -118,10 +118,12 @@ void OnfRunner::slotRequestFinished( int id, bool error )
     GeoDataDocument *results = static_cast<GeoDataDocument*>( parser.releaseDocument() );
     Q_ASSERT( results );
 
-    QVector<GeoDataPlacemark*> placemarks = results->placemarks();
+    QVector<GeoDataPlacemark> placemarks = results->placemarks();
 
-    foreach( GeoDataPlacemark* placemark, placemarks ) {
-        placemark->setVisualCategory( category() );
+    QVector<GeoDataPlacemark>::iterator it = placemarks.begin();
+    QVector<GeoDataPlacemark>::iterator end = placemarks.end();
+    for(; it != end; ++it ) {
+        it->setVisualCategory( category() );
     }
     emit runnerFinished( placemarks );
     return;

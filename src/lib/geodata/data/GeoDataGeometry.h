@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2008      Torsten Rahn <rahn@kde.org>
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 // Copyright 2008      Inge Wallin <inge@lysator.liu.se>
 //
 
@@ -49,6 +49,9 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     void setAltitudeMode( const AltitudeMode altitudeMode );
 
     explicit GeoDataGeometry( GeoDataObject *parent = 0 );
+    GeoDataGeometry( const GeoDataGeometry& other );
+    virtual bool operator==( const GeoDataGeometry& other ) { return false; };
+    virtual GeoDataGeometry& operator=( const GeoDataGeometry& other );
     
     virtual ~GeoDataGeometry();
 
@@ -58,8 +61,6 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     virtual void unpack( QDataStream& stream );
 
  protected:
-    GeoDataGeometry( const GeoDataGeometry & other );
-    GeoDataGeometry& operator=( const GeoDataGeometry& other );
     GeoDataGeometryPrivate* const d;
 };
 

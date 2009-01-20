@@ -56,17 +56,17 @@ void LatLonRunner::parse(const QString &input)
     bool successful = false;
     GeoDataCoordinates coord = GeoDataCoordinates::fromString( input, successful );
     
-    GeoDataPlacemark *placemark = new GeoDataPlacemark();
-    placemark->setName( input );
+    GeoDataPlacemark placemark;
+    placemark.setName( input );
     qreal lon, lat;
     coord.geoCoordinates( lon, lat );
-    placemark->setCoordinate( lon, lat );
-    QVector<GeoDataPlacemark*> vector;
+    placemark.setCoordinate( lon, lat );
+    QVector<GeoDataPlacemark> vector;
     
     if( successful ) {
-        placemark->setVisualCategory( category() ); 
-        placemark->setPopularity( 1000000000 );
-        placemark->setPopularityIndex( 18 );
+        placemark.setVisualCategory( category() ); 
+        placemark.setPopularity( 1000000000 );
+        placemark.setPopularityIndex( 18 );
         vector.append( placemark );
     }
     

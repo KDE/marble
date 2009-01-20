@@ -214,15 +214,15 @@ void PlaceMarkLoader::saveFile( const QString& filename,
     PlaceMarkContainer::const_iterator const end = placeMarkContainer->constEnd();
     for (; it != end; ++it )
     {
-        out << (*it)->name();
-        (*it)->coordinate( lon, lat, alt );
+        out << (*it).name();
+        (it)->coordinate( lon, lat, alt );
 
         out << lon << lat << alt;
-        out << QString( (*it)->role() );
-        out << QString( (*it)->description() );
-        out << QString( (*it)->countryCode() );
-        out << (qreal)(*it)->area();
-        out << (qint64)(*it)->population();
+        out << QString( (*it).role() );
+        out << QString( (*it).description() );
+        out << QString( (*it).countryCode() );
+        out << (qreal)(*it).area();
+        out << (qint64)(*it).population();
 }
     }
 
@@ -268,25 +268,23 @@ bool PlaceMarkLoader::loadFile( const QString& filename,
 
     QString testo;
 
-    GeoDataPlacemark  *mark;
+    GeoDataPlacemark mark;
     while ( !in.atEnd() ) {
-        mark = new GeoDataPlacemark;
-
         in >> tmpstr;
-        mark->setName( tmpstr );
+        mark.setName( tmpstr );
         testo = tmpstr;
         in >> lon >> lat >> alt;
-        mark->setCoordinate( lon, lat, alt );
+        mark.setCoordinate( lon, lat, alt );
         in >> tmpstr;
-        mark->setRole( tmpstr.at(0) );
+        mark.setRole( tmpstr.at(0) );
         in >> tmpstr;
-        mark->setDescription( tmpstr );
+        mark.setDescription( tmpstr );
         in >> tmpstr;
-        mark->setCountryCode( tmpstr );
+        mark.setCountryCode( tmpstr );
         in >> area;
-        mark->setArea( area );
+        mark.setArea( area );
         in >> tmpint64;
-        mark->setPopulation( tmpint64 );
+        mark.setPopulation( tmpint64 );
 
         placeMarkContainer->append( mark );
     }

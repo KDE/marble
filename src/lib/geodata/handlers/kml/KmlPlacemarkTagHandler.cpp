@@ -25,6 +25,7 @@
 
 #include "KmlElementDictionary.h"
 #include "GeoDataContainer.h"
+#include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
@@ -39,18 +40,29 @@ GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Placemark ) );
 
-    GeoDataPlacemark* placemark = 0;
+    GeoDataPlacemark placemark;
 
     GeoStackItem parentItem = parser.parentElement();
-    if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
-        placemark = new GeoDataPlacemark( parentItem.nodeAs<GeoDataContainer>() );
-        parentItem.nodeAs<GeoDataContainer>()->addFeature( placemark );
-    }
 #ifdef DEBUG_TAGS
     qDebug() << "Parsed <" << kmlTag_Placemark << ">"
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif
-    return placemark;
+    if( parentItem.nodeAs<GeoDataFeature>() ) {
+        qDebug() << parentItem.nodeAs<GeoDataFeature>()->name();
+    }
+
+    qDebug() << (long)parentItem.nodeAs<GeoDataFeature>();
+
+    if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
+        qDebug() << "test0:";
+        static_cast<GeoDataFolder*>(parentItem.nodeAs<GeoDataFeature>())->append( placemark );
+        qDebug() << "test1:" << static_cast<GeoDataFolder*>(parentItem.nodeAs<GeoDataFeature>())->size();
+        qDebug() << "test1:" << &static_cast<GeoDataFolder*>(parentItem.nodeAs<GeoDataFeature>())->last();
+        return &static_cast<GeoDataFolder*>(parentItem.nodeAs<GeoDataFeature>())->last();
+    } else {
+        qDebug() << "test2";
+        return 0;
+    }
 }
 
 }

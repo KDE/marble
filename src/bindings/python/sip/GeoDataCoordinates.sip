@@ -69,6 +69,7 @@ public:
     QString                 toString ();
     QString                 toString (Marble::GeoDataCoordinates::Notation notation);
     bool                    operator == (const Marble::GeoDataCoordinates&) const;
+    int                     detach();
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
 };   // GeoDataCoordinates

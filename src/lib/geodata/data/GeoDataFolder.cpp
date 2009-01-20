@@ -30,6 +30,11 @@ GeoDataFolder::GeoDataFolder( GeoDataObject* parent)
 {
 }
 
+GeoDataFolder::GeoDataFolder( const GeoDataFolder& other )
+    : GeoDataContainer( other )
+{
+}
+
 GeoDataFolder::~GeoDataFolder()
 {
 }

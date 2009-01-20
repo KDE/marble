@@ -48,6 +48,9 @@ class GeoDataObjectPrivate;
 class GEODATA_EXPORT GeoDataObject : public GeoNode,
                       public Serializable {
 public:
+    explicit GeoDataObject( GeoDataObject *parent = 0 );
+    GeoDataObject( const GeoDataObject & );
+    GeoDataObject & operator=( const GeoDataObject & );
     virtual ~GeoDataObject();
 
     /**
@@ -106,9 +109,6 @@ public:
     virtual void unpack( QDataStream& steam );
 
  protected:
-    explicit GeoDataObject( GeoDataObject *parent = 0 );
-    GeoDataObject( const GeoDataObject & );
-    GeoDataObject & operator=( const GeoDataObject & );
 
     GeoDataObjectPrivate * d;
 };

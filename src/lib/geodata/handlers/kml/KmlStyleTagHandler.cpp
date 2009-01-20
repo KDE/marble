@@ -53,11 +53,11 @@ GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
 #endif // DEBUG_TAGS
     }
     else if ( parentItem.nodeAs<GeoDataFeature>() ) {
-        style = new GeoDataStyle;
+/*        style = new GeoDataStyle;
         style->setStyleId( parser.attribute( "id" ).trimmed() );
-        parentItem.nodeAs<GeoDataFeature>()->setStyle( style );
+        parentItem.nodeAs<GeoDataFeature>()->setStyle( style );*/
 #ifdef DEBUG_TAGS
-    qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << style << " parentItem: Feature "
+    qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << style << " parentItem: Feature (ignoring styles outside of document tag)"
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

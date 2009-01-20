@@ -211,9 +211,10 @@ class GEODATA_EXPORT GeoDataCoordinates
     virtual void unpack( QDataStream& stream );
 
  protected:
-    GeoDataCoordinatesPrivate* const d;
+    GeoDataCoordinatesPrivate* d;
 
  private:
+    void detach();
     static GeoDataCoordinates::Notation s_notation;
 };
 

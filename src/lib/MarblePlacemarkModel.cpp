@@ -125,12 +125,7 @@ GeoDataCoordinates MarblePlacemarkModel::coordinateData( const QModelIndex &inde
         qDebug() << "MarblePlacemarkModel: Error - index invalid";
         return GeoDataCoordinates();
     }
-    GeoDataPlacemark *placemark = d->m_placeMarkContainer.at( index.row() );
-    if ( placemark == 0 ) {
-        qDebug() << "MarblePlacemarkModel: Error - Placemark invalid";
-        return GeoDataCoordinates();
-    }
-    return placemark->coordinate();
+    return d->m_placeMarkContainer.at( index.row() ).coordinate();
 }
 
 GeoDataStyle* MarblePlacemarkModel::styleData( const QModelIndex &index ) const
@@ -138,8 +133,7 @@ GeoDataStyle* MarblePlacemarkModel::styleData( const QModelIndex &index ) const
     if ( !index.isValid() )
         return 0;
     else {
-        GeoDataFeature* feature = d->m_placeMarkContainer.at( index.row() );
-        return feature->style();
+        return d->m_placeMarkContainer.at( index.row() ).style();
     }
 }
 
@@ -152,31 +146,31 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
         return QVariant();
 
     if ( role == Qt::DisplayRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->name();
+        return d->m_placeMarkContainer.at( index.row() ).name();
     } else if ( role == Qt::DecorationRole ) {
-          return qVariantFromValue( d->m_placeMarkContainer.at( index.row() )->style()->iconStyle()->icon() );
+          return qVariantFromValue( d->m_placeMarkContainer.at( index.row() ).style()->iconStyle()->icon() );
     } else if ( role == PopularityIndexRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->popularityIndex();
+        return d->m_placeMarkContainer.at( index.row() ).popularityIndex();
     } else if ( role == VisualCategoryRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->visualCategory();
+        return d->m_placeMarkContainer.at( index.row() ).visualCategory();
     } else if ( role == AreaRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->area();
+        return d->m_placeMarkContainer.at( index.row() ).area();
     } else if ( role == PopulationRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->population();
+        return d->m_placeMarkContainer.at( index.row() ).population();
     } else if ( role == CountryCodeRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->countryCode();
+        return d->m_placeMarkContainer.at( index.row() ).countryCode();
     } else if ( role == PopularityRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->popularity();
+        return d->m_placeMarkContainer.at( index.row() ).popularity();
     } else if ( role == DescriptionRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->description();
+        return d->m_placeMarkContainer.at( index.row() ).description();
     } else if ( role == GeoTypeRole ) {
-        return d->m_placeMarkContainer.at( index.row() )->role();
+        return d->m_placeMarkContainer.at( index.row() ).role();
     } else if ( role == CoordinateRole ) {
-        return qVariantFromValue( d->m_placeMarkContainer.at( index.row() )->coordinate() );
+        return qVariantFromValue( d->m_placeMarkContainer.at( index.row() ).coordinate() );
     } else if ( role == StyleRole ) {
-        return qVariantFromValue( d->m_placeMarkContainer.at( index.row() )->style() );
-    } else if ( role == ObjectPointerRole ) {
-        return qVariantFromValue( dynamic_cast<GeoDataObject*>( d->m_placeMarkContainer.at( index.row() ) ) );
+        return qVariantFromValue( d->m_placeMarkContainer.at( index.row() ).style() );
+/*    } else if ( role == ObjectPointerRole ) {
+        return qVariantFromValue( dynamic_cast<GeoDataObject*>( d->m_placeMarkContainer.at( index.row() ) ) );*/
     } else
         return QVariant();
 }
@@ -223,7 +217,6 @@ void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks,
 {
   // For now we simply remove any previous placemarks
     if ( clearPrevious ) {
-        qDeleteAll( d->m_placeMarkContainer );
         d->m_placeMarkContainer.clear();
         d->m_containerMap.clear();
     }
@@ -246,13 +239,12 @@ void  MarblePlacemarkModel::removePlaceMarks( const QString &containerName,
                                               bool finalize )
 {
     if( d->m_containerMap.contains( containerName ) ) {
-        QVector<Marble::GeoDataPlacemark*>::const_iterator iter = d->m_containerMap[ containerName ]->constBegin();
-        QVector<Marble::GeoDataPlacemark*>::const_iterator end = d->m_containerMap[ containerName ]->constEnd();
-        GeoDataPlacemark* placemark;
+        QVector<Marble::GeoDataPlacemark>::const_iterator iter = d->m_containerMap[ containerName ]->constBegin();
+        QVector<Marble::GeoDataPlacemark>::const_iterator end = d->m_containerMap[ containerName ]->constEnd();
+        GeoDataPlacemark placemark;
         for(; iter != end;iter++) {
             placemark = *iter;
             d->m_placeMarkContainer.remove( d->m_placeMarkContainer.indexOf( placemark ) );
-            delete placemark;
         }
         delete d->m_containerMap[ containerName ];
         d->m_containerMap.remove( containerName );
@@ -271,7 +263,6 @@ QStringList MarblePlacemarkModel::containers() const
 
 void MarblePlacemarkModel::clearPlaceMarks()
 {
-    qDeleteAll( d->m_placeMarkContainer );
     d->m_placeMarkContainer.clear();
     d->m_containerMap.clear();
     reset();
@@ -281,9 +272,9 @@ void MarblePlacemarkModel::clearPlaceMarks()
 void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container )
 {
 
-    QVector<GeoDataPlacemark*>::Iterator i;
+    QVector<GeoDataPlacemark>::Iterator i;
     for ( i = container.begin(); i != container.end(); ++i ) {
-        GeoDataPlacemark* placemark = *i;
+        GeoDataPlacemark* placemark = i;
 
         bool hasPopularity = false;
 

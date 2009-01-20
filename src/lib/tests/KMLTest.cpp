@@ -83,14 +83,14 @@ void KMLTest::loadKMLFromData() {
     GeoDocument* document = parser.releaseDocument();
     QVERIFY( document );
     GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
-    GeoDataFeature *feature = dataDocument->features().at( 0 );
-    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark->geometry() );
-    qDebug() << placemark->name();
+    GeoDataFeature feature = dataDocument->features().at( 0 );
+    GeoDataPlacemark placemark = *static_cast<GeoDataPlacemark*>( &feature );
+    GeoDataPolygon polygon = *static_cast<GeoDataPolygon*>( placemark.geometry() );
+    qDebug() << placemark.name();
 
-    QVector<GeoDataCoordinates*>::iterator iterator = polygon->outerBoundary().begin();
-    for( ; iterator != polygon->outerBoundary().end(); ++iterator ) {
-        qDebug() << (*iterator)->toString();
+    QVector<GeoDataCoordinates>::iterator iterator = polygon.outerBoundary().begin();
+    for( ; iterator != polygon.outerBoundary().end(); ++iterator ) {
+        qDebug() << (*iterator).toString();
     }
     delete document;
 }
@@ -140,15 +140,15 @@ void KMLTest::loadKMLFromCache() {
     }
     QVERIFY( dataDocument );
 
-    GeoDataFeature *feature = dataDocument->features().at( 0 );
-    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( feature );
-    GeoDataPolygon *polygon = static_cast<GeoDataPolygon*>( placemark->geometry() );
+    GeoDataFeature feature = dataDocument->features().at( 0 );
+    GeoDataPlacemark placemark = *static_cast<GeoDataPlacemark*>( &feature );
+    GeoDataPolygon polygon = *static_cast<GeoDataPolygon*>(placemark.geometry());
     
-    qDebug() << placemark->name();
+    qDebug() << placemark.name();
     
-    QVector<GeoDataCoordinates*>::iterator iterator = polygon->outerBoundary().begin();
-    for( ; iterator != polygon->outerBoundary().end(); ++iterator ) {
-        qDebug() << (*iterator)->toString();
+    QVector<GeoDataCoordinates>::iterator iterator = polygon.outerBoundary().begin();
+    for( ; iterator != polygon.outerBoundary().end(); ++iterator ) {
+        qDebug() << (*iterator).toString();
     }
     delete dataDocument;
 }
@@ -198,7 +198,7 @@ void KMLTest::loadCitiesFromCache() {
 
     qDebug() << dataDocument->features().size();
     for( int i = 0; i < dataDocument->features().size(); i++ ) {
-        fprintf( stderr, "Debug: %s\n", dataDocument->features()[i]->name().toLocal8Bit().data() );
+        fprintf( stderr, "Debug: %s\n", dataDocument->features()[i].name().toLocal8Bit().data() );
     }
     delete dataDocument;
 }
