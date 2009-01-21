@@ -30,6 +30,8 @@ class CopyTest : public QObject {
         void initTestCase();
         void copyCoordinates();
         void copyLineString();
+        void copyLinearRing();
+        void copyPoint();
     private:
         QString content;
 };
@@ -84,6 +86,28 @@ void CopyTest::copyCoordinates() {
     QVERIFY(coord == other);
 }
 
+void CopyTest::copyPoint() {
+    GeoDataPoint point;
+    QString coordString(" 13° 42' 38\"E,  51° 01' 24\"N" );
+
+    point.set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
+    point.setDetail(2);
+
+    // make sure that the coordinate contains the right values
+    QCOMPARE(point.altitude(), 123.4);
+    QCOMPARE(point.detail(), 2);
+    QCOMPARE(point.toString(), coordString);
+
+    GeoDataPoint other = point;
+    
+    // make sure that the coordinate contains the right values
+    QCOMPARE(other.altitude(), 123.4);
+    QCOMPARE(other.detail(), 2);
+    QCOMPARE(other.toString(), coordString);
+    
+    QVERIFY(point == other);
+}
+
 void CopyTest::copyLineString() {
     GeoDataLineString lineString;
     GeoDataCoordinates coord;
@@ -121,7 +145,69 @@ void CopyTest::copyLineString() {
     QVERIFY(lineString.size() == 3);
 
     GeoDataLineString other = lineString;
+    QVERIFY(other.size() == 3);
+
+    QCOMPARE(lineString.at(0).altitude(), 123.4);
+    QCOMPARE(lineString.at(0).detail(), 2);
+    QCOMPARE(lineString.at(0).toString(), coordString1);
+    
+    QCOMPARE(other.at(2).altitude(), 143.4);
+    QCOMPARE(other.at(2).detail(), 4);
+    QCOMPARE(other.at(2).toString(), coordString3);
+    
+    QVERIFY(other.at(2) == coord);
 }
+
+void CopyTest::copyLinearRing() {
+    GeoDataLinearRing linearRing;
+    GeoDataCoordinates coord;
+    
+    QString coordString1(" 13° 42' 38\"E,  51° 01' 24\"N" );
+    QString coordString2(" 14° 42' 38\"E,  52° 01' 24\"N" );
+    QString coordString3(" 15° 42' 38\"E,  53° 01' 24\"N" );
+    
+    
+    linearRing.setTessellate(true);
+    
+
+    coord.set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
+    coord.setDetail(2);
+    QCOMPARE(coord.altitude(), 123.4);
+    QCOMPARE(coord.detail(), 2);
+    QCOMPARE(coord.toString(), coordString1);
+    linearRing.append(coord);
+    QVERIFY(linearRing.size() == 1);
+    
+    coord.set(14.7107,52.0235, 133.4, GeoDataCoordinates::Degree);
+    coord.setDetail(3);
+    QCOMPARE(coord.altitude(), 133.4);
+    QCOMPARE(coord.detail(), 3);
+    QCOMPARE(coord.toString(), coordString2);
+    linearRing.append(coord);
+    QVERIFY(linearRing.size() == 2);
+
+    coord.set(15.7107,53.0235, 143.4, GeoDataCoordinates::Degree);
+    coord.setDetail(4);
+    QCOMPARE(coord.altitude(), 143.4);
+    QCOMPARE(coord.detail(), 4);
+    QCOMPARE(coord.toString(), coordString3);
+    linearRing.append(coord);
+    QVERIFY(linearRing.size() == 3);
+
+    GeoDataLinearRing other = linearRing;
+    QVERIFY(other.size() == 3);
+
+    QCOMPARE(linearRing.at(0).altitude(), 123.4);
+    QCOMPARE(linearRing.at(0).detail(), 2);
+    QCOMPARE(linearRing.at(0).toString(), coordString1);
+    
+    QCOMPARE(other.at(2).altitude(), 143.4);
+    QCOMPARE(other.at(2).detail(), 4);
+    QCOMPARE(other.at(2).toString(), coordString3);
+    
+    QVERIFY(other.at(2) == coord);
+}
+
 }
 
 QTEST_MAIN( Marble::CopyTest )
