@@ -376,7 +376,7 @@ bool MarbleAbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewp
             return true;
         }
 
-        // Reinitialize cachePixmap if the float item changes its size
+            // Reinitialize cachePixmap if the float item changes its size
         // or other important common properties
         if ( ( d->s_pixmapCacheEnabled && d->m_newItemProperties ) || d->m_cachePixmap.isNull() ) {
             // Add extra space for the border
@@ -476,7 +476,7 @@ bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
     {
         QMouseEvent *event = static_cast<QMouseEvent*>(e);
         QRectF floatItemRect = QRectF(positivePosition(QRectF(0,0,widget->width(),
-                widget->height())), size());
+                widget->height())), size() + QSize(1,1));
 
         // Click and move above a float item triggers moving the float item
         if ( floatItemRect.contains(event->pos()) ) {
@@ -517,7 +517,7 @@ bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
                 }
 
                 setPosition(QPointF(newX,newY));
-                QRect newFloatItemRect = QRectF(positivePosition(QRect(0,0,widget->width(),widget->height())), size()).toRect();
+                QRect newFloatItemRect = QRectF(positivePosition(QRect(0,0,widget->width(),widget->height())), size() ).toRect();
                 d->m_floatItemMoveStartPos = event->pos();
                 QRegion dirtyRegion(floatItemRect.toRect());
                 dirtyRegion = dirtyRegion.united(newFloatItemRect);

@@ -161,11 +161,6 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     connect( d->uiWidget.moveDownButton,  SIGNAL( clicked() ),
              this,                        SIGNAL (moveDown() ) );
 
-    connect( d->uiWidget.searchLineEdit,  SIGNAL( textChanged( const QString& ) ),
-             this,                        SLOT( searchLineChanged( const QString& ) ) );
-    connect( d->uiWidget.searchLineEdit,  SIGNAL( returnPressed() ),
-             this,                        SLOT( searchReturnPressed() ) );
-
     connect( d->uiWidget.locationListView, SIGNAL( centerOn( const QModelIndex& ) ),
              this,                         SLOT( mapCenterOnSignal( const QModelIndex& ) ) );
 
@@ -187,6 +182,12 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     
     connect( d->m_runnerManager, SIGNAL( modelChanged(  MarblePlacemarkModel* ) ),
              this,               SLOT( setLocations( MarblePlacemarkModel* ) ) );    
+
+    connect( d->uiWidget.searchLineEdit,  SIGNAL( textChanged( const QString& ) ),
+             this,                        SLOT( searchLineChanged( const QString& ) ) );
+    connect( d->uiWidget.searchLineEdit,  SIGNAL( returnPressed() ),
+             this,                        SLOT( searchReturnPressed() ) );
+
 }
 
 MarbleControlBox::~MarbleControlBox()
