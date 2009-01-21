@@ -44,3 +44,5 @@ SET( geodata_SRCS
         ${geodata_handlers_dgml_SRCS}
         ${geodata_handlers_osmnamefinder_SRCS}
    )
+
+add_subdirectory(geodata/data/tests)
