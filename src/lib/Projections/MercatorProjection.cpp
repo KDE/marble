@@ -192,7 +192,152 @@ bool MercatorProjection::screenCoordinates( const GeoDataLineString &lineString,
                                     const ViewportParams *viewport,
                                     QVector<QPolygonF *> &polygons )
 {
-    return false;
+    // Compare bounding box size of the line string with the angularResolution
+    // Immediately return if the latLonAltBox is smaller.
+
+    if ( !viewport->resolves( lineString.latLonAltBox() ) ) {
+//      qDebug() << "Object too small to be resolved";
+        return false;
+    }
+
+    int x = 0;
+    int y = 0;
+    bool globeHidesPoint = false;
+    bool isVisible = false;
+
+    int previousX = -1; 
+    int previousY = -1;
+    bool previousGlobeHidesPoint = false;
+    bool previousIsVisible = false;
+
+    QPolygonF  *polygon = new QPolygonF;
+    
+    GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
+    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
+
+    GeoDataCoordinates previousCoords;
+    GeoDataCoordinates currentCoords;
+
+    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
+
+    bool processingLastNode = false;
+
+    // We use a while loop to be able to cover linestrings as well as linear rings:
+    // Linear rings require to tessellate the path from the last node to the first node
+    // which isn't really convenient to achieve with a for loop ...
+
+    const qreal precision = 20.0;
+    const bool isLong = lineString.size() > 50;
+
+    while ( itCoords != itEnd )
+    {
+        // Optimization for line strings with a big amount of nodes
+        bool skipNode = isLong && viewport->resolves( **itPreviousCoords, **itCoords); 
+
+        if ( !skipNode ) {
+
+            previousCoords = **itPreviousCoords;
+            currentCoords  = **itCoords;
+
+            isVisible = screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
+
+            // Initializing variables that store the values of the previous iteration
+            if ( !processingLastNode && itCoords == lineString.constBegin() ) {
+                previousGlobeHidesPoint = globeHidesPoint;
+                previousIsVisible = isVisible;
+                itPreviousCoords = itCoords;
+                previousX = x;
+                previousY = y;
+            }
+
+            // TODO: on flat maps we need to take the date line into account right here.
+
+            // This if-clause contains the section that tessellates the line 
+            // segments of a linestring. If you are about to learn how the code of 
+            // this class works you can safely ignore this section for a start.
+
+            if ( lineString.tessellate() && ( isVisible || previousIsVisible ) ) {
+                // let the line segment follow the spherical surface
+                // if the distance between the previous point and the current point 
+                // on screen is too big
+
+                // We take the manhattan length as a distance approximation
+                // that can be too big by a factor of sqrt(2)
+                qreal distance = fabs((qreal)(x - previousX)) + fabs((qreal)(y - previousY));
+
+                // FIXME: This is a work around: remove as soon as we handle horizon crossing
+                if ( globeHidesPoint || previousGlobeHidesPoint ) {
+                    distance = 350;
+                }
+
+                const qreal safeDistance = - 0.5 * distance;
+
+                // Interpolate additional nodes if the current or previous nodes are visible
+                // or if the line segment that connects them might cross the viewport.
+                // The latter can pretty safely be excluded for most projections if both points 
+                // are located on the same side relative to the viewport boundaries and if they are 
+                // located more than half the line segment distance away from the viewport.
+
+                if (   !( x < safeDistance && previousX < safeDistance )
+                    || !( y < safeDistance && previousY < safeDistance )
+                    || !( x + safeDistance > viewport->width() 
+                        && previousX + safeDistance > viewport->width() )
+                    || !( y + safeDistance > viewport->height()
+                        && previousY + safeDistance > viewport->height() )
+                ){
+                    int suggestedCount = (int)( distance / precision );
+
+                    if ( distance > precision ) {
+    //                    qDebug() << "Distance: " << distance;
+                        *polygon << tessellateLineSegment( previousCoords, currentCoords, 
+                                                        suggestedCount, viewport,
+                                                        lineString.tessellationFlags() );
+                    }
+                }
+            }
+
+            if ( !globeHidesPoint ) {
+                polygon->append( QPointF( x, y ) );
+            }
+            else {
+                if (   !previousGlobeHidesPoint 
+                    && !lineString.isClosed() // FIXME: this probably needs to take rotation 
+                                                //        into account for some cases
+                    ) {
+                    polygons.append( polygon );
+                    polygon = new QPolygonF;
+                }
+            }
+
+            previousGlobeHidesPoint = globeHidesPoint;
+            previousIsVisible = isVisible;
+            itPreviousCoords = itCoords;
+            previousX = x;
+            previousY = y;
+        }
+
+        // Here we modify the condition to be able to process the 
+        // first node after the last node in a LinearRing.
+
+        if ( processingLastNode ) {
+            break;
+        }
+        ++itCoords;
+
+        if ( itCoords == itEnd  && lineString.isClosed() ) {
+            itCoords = lineString.constBegin();
+            processingLastNode = true;
+        }        
+    }
+
+    if ( polygon->size() > 1 ){
+        polygons.append( polygon );
+    }
+    else {
+        delete polygon;
+    }
+
+    return polygons.isEmpty();
 }
 
 bool MercatorProjection::geoCoordinates( int x, int y,
