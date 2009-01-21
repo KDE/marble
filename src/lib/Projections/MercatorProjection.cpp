@@ -232,12 +232,12 @@ bool MercatorProjection::screenCoordinates( const GeoDataLineString &lineString,
     while ( itCoords != itEnd )
     {
         // Optimization for line strings with a big amount of nodes
-        bool skipNode = isLong && viewport->resolves( **itPreviousCoords, **itCoords); 
+        bool skipNode = isLong && viewport->resolves( *itPreviousCoords, *itCoords); 
 
         if ( !skipNode ) {
 
-            previousCoords = **itPreviousCoords;
-            currentCoords  = **itCoords;
+            previousCoords = *itPreviousCoords;
+            currentCoords  = *itCoords;
 
             isVisible = screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
 
