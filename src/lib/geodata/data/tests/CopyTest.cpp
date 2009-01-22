@@ -37,7 +37,6 @@ class CopyTest : public QObject {
         void copyPolygon();
         void copyMultiGeometry();
     private:
-        QString content;
         QStringList coordString;
         GeoDataCoordinates coord1;
         GeoDataCoordinates coord2;
@@ -47,29 +46,6 @@ class CopyTest : public QObject {
 void CopyTest::initTestCase() {
     MarbleDirs::setMarbleDataPath( DATA_PATH );
     MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
-
-    content = QString( 
-"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-"<kml xmlns=\"http://earth.google.com/kml/2.1\">\n"
-"  <Document>\n"
-"    <Placemark>\n"
-"      <name>LinearRingTest.kml</name>\n"
-"      <Polygon>\n"
-"        <outerBoundaryIs>\n"
-"          <LinearRing>\n"
-"            <coordinates>\n"
-"              -122.365662,37.826988,0\n"
-"              -122.365202,37.826302,0\n"
-"              -122.364581,37.82655,0\n"
-"              -122.365038,37.827237,0\n"
-"              -122.365662,37.826988,0\n"
-"            </coordinates>\n"
-"          </LinearRing>\n"
-"        </outerBoundaryIs>\n"
-"      </Polygon>\n"
-"    </Placemark>\n"
-"  </Document>\n"
-"</kml>" );
 
     coordString << QString(" 13° 42' 38\"E,  51° 01' 24\"N" );
     coordString << QString(" 14° 42' 38\"E,  52° 01' 24\"N" );
