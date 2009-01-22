@@ -20,6 +20,7 @@
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPolygon.h"
+#include "GeoDataMultiGeometry.h"
 #include "GeoDataCoordinates.h"
 
 namespace Marble
@@ -33,6 +34,8 @@ class CopyTest : public QObject {
         void copyLineString();
         void copyLinearRing();
         void copyPoint();
+        void copyPolygon();
+        void copyMultiGeometry();
     private:
         QString content;
         QStringList coordString;
@@ -146,6 +149,7 @@ void CopyTest::copyLineString() {
     QCOMPARE(other.at(2).toString(), coordString[2]);
     
     QVERIFY(other.at(2) == coord3);
+    QVERIFY(other.tessellate());
 }
 
 void CopyTest::copyLinearRing() {
@@ -171,6 +175,129 @@ void CopyTest::copyLinearRing() {
     QCOMPARE(other.at(2).toString(), coordString[2]);
     
     QVERIFY(other.at(2) == coord3);
+    QVERIFY(other.tessellate());
+}
+
+void CopyTest::copyPolygon() {
+    GeoDataLinearRing linearRing1;
+    GeoDataLinearRing linearRing2;
+    GeoDataLinearRing linearRing3;
+    GeoDataLinearRing linearRing4;
+    
+    linearRing1.append(coord1); linearRing1.append(coord2); linearRing1.append(coord3);
+    linearRing2.append(coord3); linearRing2.append(coord2); linearRing2.append(coord1);
+    linearRing3.append(coord1); linearRing3.append(coord2); linearRing3.append(coord3);
+    linearRing3.append(coord3); linearRing3.append(coord2); linearRing3.append(coord1);
+    linearRing4.append(coord3); linearRing4.append(coord2); linearRing4.append(coord1);
+    linearRing4.append(coord1); linearRing4.append(coord2); linearRing4.append(coord3);
+    
+    GeoDataPolygon polygon;
+    polygon.appendInnerBoundary(linearRing1);
+    polygon.appendInnerBoundary(linearRing2);
+    polygon.appendInnerBoundary(linearRing3);
+    polygon.setOuterBoundary(linearRing4);
+    polygon.setTessellate(true);
+    
+    QCOMPARE(polygon.innerBoundaries().size(), 3);
+    
+    GeoDataPolygon other = polygon;
+    QCOMPARE(other.innerBoundaries().size(), 3);
+    QVERIFY(other.innerBoundaries()[0][0] == coord1);
+    QVERIFY(other.innerBoundaries()[0][1] == coord2);
+    QVERIFY(other.innerBoundaries()[0][2] == coord3);
+    QVERIFY(other.innerBoundaries()[1][0] == coord3);
+    QVERIFY(other.innerBoundaries()[1][1] == coord2);
+    QVERIFY(other.innerBoundaries()[1][2] == coord1);
+    QVERIFY(other.innerBoundaries()[2][0] == coord1);
+    QVERIFY(other.innerBoundaries()[2][1] == coord2);
+    QVERIFY(other.innerBoundaries()[2][2] == coord3);
+    QVERIFY(other.innerBoundaries()[2][3] == coord3);
+    QVERIFY(other.innerBoundaries()[2][4] == coord2);
+    QVERIFY(other.innerBoundaries()[2][5] == coord1);
+    
+    QCOMPARE(other.outerBoundary().size(), 6);
+
+    QVERIFY(other.outerBoundary()[0] == coord3);
+    QVERIFY(other.outerBoundary()[1] == coord2);
+    QVERIFY(other.outerBoundary()[2] == coord1);
+    QVERIFY(other.outerBoundary()[3] == coord1);
+    QVERIFY(other.outerBoundary()[4] == coord2);
+    QVERIFY(other.outerBoundary()[5] == coord3);
+    
+    QVERIFY(other.tessellate());
+}
+
+void CopyTest::copyMultiGeometry() {
+    GeoDataMultiGeometry multiGeometry;
+    GeoDataLinearRing linearRing1;
+    GeoDataLinearRing linearRing2;
+    GeoDataLinearRing linearRing3;
+    GeoDataLinearRing linearRing4;
+    
+    linearRing1.append(coord1); linearRing1.append(coord2); linearRing1.append(coord3);
+    linearRing2.append(coord3); linearRing2.append(coord2); linearRing2.append(coord1);
+    linearRing3.append(coord1); linearRing3.append(coord2); linearRing3.append(coord3);
+    linearRing3.append(coord3); linearRing3.append(coord2); linearRing3.append(coord1);
+    linearRing4.append(coord3); linearRing4.append(coord2); linearRing4.append(coord1);
+    linearRing4.append(coord1); linearRing4.append(coord2); linearRing4.append(coord3);
+    
+    GeoDataPolygon polygon;
+    polygon.appendInnerBoundary(linearRing1);
+    polygon.appendInnerBoundary(linearRing2);
+    polygon.appendInnerBoundary(linearRing3);
+    polygon.setOuterBoundary(linearRing4);
+    polygon.setTessellate(true);
+    
+    multiGeometry.append(polygon);
+    multiGeometry.append(linearRing1);
+    multiGeometry.append(linearRing2);
+    multiGeometry.append(linearRing3);
+    multiGeometry.append(linearRing4);
+
+    GeoDataMultiGeometry other = multiGeometry;
+
+    QCOMPARE(other.size(), 5);
+/*    QCOMPARE(reinterpret_cast<GeoDataPolygon>(other[0]).innerBoundaries().size(), 3);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[0][0] == coord1);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[0][1] == coord2);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[0][2] == coord3);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[1][0] == coord3);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[1][1] == coord2);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[1][2] == coord1);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[2][0] == coord1);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[2][1] == coord2);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[2][2] == coord3);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[2][3] == coord3);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[2][4] == coord2);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[2][5] == coord1);
+    
+    QCOMPARE(static_cast<GeoDataPolygon>(other[0]).outerBoundary().size(), 6);
+
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).outerBoundary()[0] == coord3);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).outerBoundary()[1] == coord2);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).outerBoundary()[2] == coord1);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).outerBoundary()[3] == coord1);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).outerBoundary()[4] == coord2);
+    QVERIFY(static_cast<GeoDataPolygon>(other[0]).outerBoundary()[5] == coord3);
+    
+    QVERIFY(other[1][0] == coord1);
+    QVERIFY(other[1][1] == coord2);
+    QVERIFY(other[1][2] == coord3);
+    QVERIFY(other[2][0] == coord3);
+    QVERIFY(other[2][1] == coord2);
+    QVERIFY(other[2][2] == coord1);
+    QVERIFY(other[3][0] == coord1);
+    QVERIFY(other[3][1] == coord2);
+    QVERIFY(other[3][2] == coord3);
+    QVERIFY(other[3][3] == coord3);
+    QVERIFY(other[3][4] == coord2);
+    QVERIFY(other[3][5] == coord1);
+    QVERIFY(other[4][0] == coord3);
+    QVERIFY(other[4][1] == coord2);
+    QVERIFY(other[4][2] == coord1);
+    QVERIFY(other[4][3] == coord1);
+    QVERIFY(other[4][4] == coord2);
+    QVERIFY(other[4][5] == coord3);*/
 }
 
 }
