@@ -55,5 +55,5 @@ GenericName[zh_CN]=桌面地球仪
 GenericName[zh_TW]=桌面星象儀
 Icon=marble
 Terminal=false
-Categories=Qt;KDE;Education;Science;
+Categories=Qt;KDE;Education;Geography;
 X-DocPath=marble/index.html
