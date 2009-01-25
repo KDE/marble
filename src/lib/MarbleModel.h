@@ -249,6 +249,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void stopPolling();
 
     qreal                 planetRadius()   const;
+    QString               planetName()     const;
 
     ExtDateTime*          dateTime()       const;
     SunLocator*           sunLocator()     const;

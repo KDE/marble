@@ -69,7 +69,7 @@ class MarbleWidgetPopupMenu  : public QObject
 
     QMenu    *m_lmbMenu;
     QMenu    *m_rmbMenu;
-    QAction  *m_earthaction;	
+    QAction  *m_planetAction;	
 
     QAction  *m_copyCoordinateAction;
     QAction  *m_setHomePointAction; 
