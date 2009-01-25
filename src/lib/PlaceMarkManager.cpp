@@ -76,33 +76,11 @@ void PlaceMarkManager::clearPlaceMarks()
     m_model->clearPlaceMarks();
 }
 
-void PlaceMarkManager::loadStandardPlaceMarks(  const QString& target  )
+void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalized )
 {
-    if ( target != m_target )
-    {
-        clearPlaceMarks();
-
-        if ( target == "earth" ){
-            addPlaceMarkFile( "cityplacemarks" );
-            addPlaceMarkFile( "baseplacemarks" );
-            addPlaceMarkFile( "elevplacemarks" );
-            addPlaceMarkFile( "otherplacemarks" );
-            addPlaceMarkFile( "boundaryplacemarks" );
-        }
-        if ( target == "moon" ){
-            addPlaceMarkFile( "moonterrain" );
-            addPlaceMarkFile( "moonlandingsites" );
-        }
-
-        m_target = target;
-    }
-}
-
-void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalize )
-{
-    m_finalized = finalize;
+    m_finalized = finalized;
     if( !(m_model->containers().contains( filepath ) ) ) {
-        qDebug() << "adding container:" << filepath << finalize;
+        qDebug() << "adding container:" << filepath << finalized;
         PlaceMarkLoader* loader = new PlaceMarkLoader( this, filepath );
         connect (   loader, SIGNAL( placeMarksLoaded( PlaceMarkLoader*, PlaceMarkContainer * ) ), 
                     this, SLOT( loadPlaceMarkContainer( PlaceMarkLoader*, PlaceMarkContainer * ) ) );
@@ -112,6 +90,10 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalize 
                     this, SIGNAL( geoDataDocumentAdded( GeoDataDocument* ) ) );
         m_loaderList.append( loader );
         loader->start();
+    }
+    else {
+        if( finalized ) 
+            emit finalize();
     }
 }
 

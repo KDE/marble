@@ -18,7 +18,7 @@
 #define VISIBLEPLACEMARK_H
 
 #include <QtGui/QPixmap>
-#include <QtCore/QPersistentModelIndex>
+#include <QtCore/QModelIndex>
 #include <QtCore/QPoint>
 #include <QtCore/QRect>
 #include <QtCore/QString>
@@ -47,15 +47,15 @@ class VisiblePlaceMark
 
     /**
      * Returns the index of the place mark model which
-     * is associated with this visible plave mark.
+     * is associated with this visible place mark.
      */
-    const QPersistentModelIndex& modelIndex() const;
+    const QModelIndex& modelIndex() const;
 
     /**
      * Sets the @p index of the place mark model which
      * is associated with this visible plave mark.
      */
-    void setModelIndex( const QPersistentModelIndex &index );
+    void setModelIndex( const QModelIndex &index );
 
     /**
      * Returns the name of the place mark.
@@ -98,7 +98,7 @@ class VisiblePlaceMark
     void setLabelRect( const QRect& area );
 
  private:
-    QPersistentModelIndex m_modelIndex;
+    QModelIndex m_modelIndex;
 
     // View stuff
     QPoint      m_symbolPosition; // position of the placemark's symbol

@@ -82,7 +82,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 
     int  actionidx = 1;
 
-    QVector<QPersistentModelIndex>::const_iterator  it;
+    QVector<QModelIndex>::const_iterator  it;
     for ( it = m_featurelist.constBegin();
           it != m_featurelist.constEnd(); ++it ) 
     {
@@ -130,7 +130,7 @@ void MarbleWidgetPopupMenu::showFeatureInfo( QAction* action )
     int actionidx = action->data().toInt();
 
     if ( actionidx > 0 ) {
-        QPersistentModelIndex index = m_featurelist.at( actionidx -1 );
+        QModelIndex index = m_featurelist.at( actionidx -1 );
 
         PlaceMarkInfoDialog dialog( index, m_widget );
         dialog.exec();

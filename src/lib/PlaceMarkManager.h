@@ -78,13 +78,6 @@ class PlaceMarkManager : public QObject
     void clearPlaceMarks();
 
     /**
-     * This methods loads the standard place mark files.
-     *
-     * Note: Call this method after you have create a method!
-     */
-    void loadStandardPlaceMarks( const QString& target = QString() );
-
-    /**
      * Loads a new place mark file into the manager.
      */
     void addPlaceMarkFile( const QString &fileName, bool finalize = true );

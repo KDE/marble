@@ -119,13 +119,13 @@ void PlaceMarkLayout::styleReset()
     m_visiblePlaceMarks.clear();
 }
 
-QVector<QPersistentModelIndex> PlaceMarkLayout::whichPlaceMarkAt( const QPoint& curpos )
+QVector<QModelIndex> PlaceMarkLayout::whichPlaceMarkAt( const QPoint& curpos )
 {
     if ( m_styleResetRequested == true ) {
         styleReset();
     }
 
-    QVector<QPersistentModelIndex> ret;
+    QVector<QModelIndex> ret;
 
     QVector<VisiblePlaceMark*>::ConstIterator  it;
     QVector<VisiblePlaceMark*>::ConstIterator  itEnd = m_paintOrder.constEnd();
@@ -195,7 +195,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
         m_styleResetRequested = false;
         styleReset();
         qDebug() << "RESET started";
-        m_persistentIndexList = qobject_cast<const MarblePlacemarkModel*>( model )->persistentIndexList();
+//        m_indexList = qobject_cast<const MarblePlacemarkModel*>( model )->getPersistentIndexList();
         qDebug() << "RESET stopped";
         
         m_maxLabelHeight = maxLabelHeight( model, selectionModel );
@@ -293,7 +293,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
             // If there is no visible placemark yet for this index,
             // create a new one...
             mark = new VisiblePlaceMark;
-            mark->setModelIndex( QPersistentModelIndex( index ) );
+            mark->setModelIndex( QModelIndex( index ) );
 
             m_visiblePlaceMarks.insert( index, mark );
         }
@@ -328,12 +328,11 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
                            ? true : false;
     const QItemSelection selection = selectionModel->selection();
 
-    QList<QPersistentModelIndex>::ConstIterator it;
-    QList<QPersistentModelIndex>::ConstIterator itEnd = m_persistentIndexList.constEnd();
+    const int rowCount = model->rowCount();
 
-    for ( it = m_persistentIndexList.constBegin(); it != itEnd; ++it )
+    for ( int i = 0; i != rowCount; ++i )
     {
-        const QPersistentModelIndex& index = *it;
+        const QModelIndex& index = model->index( i, 0 );
         if( !index.isValid() ) {
             qDebug() << "invalid index!!!";
             continue;

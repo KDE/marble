@@ -19,7 +19,7 @@
 
 
 #include <QtCore/QObject>
-#include <QtCore/QPersistentModelIndex>
+#include <QtCore/QModelIndex>
 #include <QtCore/QVector>
 
 
@@ -65,7 +65,7 @@ class MarbleWidgetPopupMenu  : public QObject
     MarbleModel    *m_model;
     MarbleWidget   *m_widget;
 
-    QVector<QPersistentModelIndex>  m_featurelist;	
+    QVector<QModelIndex>  m_featurelist;	
 
     QMenu    *m_lmbMenu;
     QMenu    *m_rmbMenu;

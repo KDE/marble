@@ -30,7 +30,7 @@
 
 #include <QtCore/QList>
 #include <QtCore/QObject>
-#include <QtCore/QPersistentModelIndex>
+#include <QtCore/QModelIndex>
 #include <QtCore/QString>
 #include <QtCore/QVector>
 
@@ -204,7 +204,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void addPlaceMarkData( const QString& data, const QString& key = "data" );
     void removePlaceMarkKey( const QString& key );
 
-    QVector<QPersistentModelIndex> whichFeatureAt( const QPoint& ) const;
+    QVector<QModelIndex> whichFeatureAt( const QPoint& ) const;
 
     PlaceMarkLayout    *placeMarkLayout()   const;
     VectorComposer     *vectorComposer()     const;

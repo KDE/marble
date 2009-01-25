@@ -19,7 +19,7 @@
 
 
 #include <QtCore/QHash>
-#include <QtCore/QPersistentModelIndex>
+#include <QtCore/QModelIndex>
 #include <QtCore/QRect>
 #include <QtCore/QVector>
 
@@ -90,7 +90,7 @@ class PlaceMarkLayout : public QObject
     /**
      * Returns a list of model indexes that are at position @p pos.
      */
-    QVector<QPersistentModelIndex> whichPlaceMarkAt( const QPoint &pos );
+    QVector<QModelIndex> whichPlaceMarkAt( const QPoint &pos );
 
     PlaceMarkPainter* placeMarkPainter() const;
 
@@ -115,9 +115,9 @@ class PlaceMarkLayout : public QObject
 
     QVector<VisiblePlaceMark*> m_paintOrder;
     QVector<VisiblePlaceMark*> m_placeMarkPool;
-    QHash<QPersistentModelIndex, VisiblePlaceMark*> m_visiblePlaceMarks;
+    QHash<QModelIndex, VisiblePlaceMark*> m_visiblePlaceMarks;
 
-    QList<QPersistentModelIndex> m_persistentIndexList;
+    QModelIndexList m_indexList;
 
     QVector< int > m_weightfilter;
 

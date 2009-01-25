@@ -158,7 +158,7 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
 
 
 void AbstractScanlineTextureMapper::centerTiles( ViewParams *viewParams, 
-    const int tileLevel, qreal& tileCol, qreal& tileRow )
+    int tileLevel, qreal& tileCol, qreal& tileRow )
 {
     qreal centerLon, centerLat;
     viewParams->centerCoordinates( centerLon, centerLat );
@@ -207,8 +207,8 @@ void AbstractScanlineTextureMapper::resizeMap(int width, int height)
                       + m_imageHeight * m_imageHeight / 4 );
 }
 
-void AbstractScanlineTextureMapper::pixelValue(const qreal& lon,
-                                               const qreal& lat, 
+void AbstractScanlineTextureMapper::pixelValue(qreal lon,
+                                               qreal lat, 
                                                QRgb* scanLine,
                                                bool smooth )
 {
@@ -235,8 +235,7 @@ void AbstractScanlineTextureMapper::pixelValue(const qreal& lon,
             nextTile( m_posX, m_posY );
         }
         if (m_tile) {
-            QRgb topLeftValue = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
-            *scanLine = bilinearSmooth( topLeftValue );
+            *scanLine = m_tile->pixelF( m_posX, m_posY );;
         }
         else {
             *scanLine = 0;

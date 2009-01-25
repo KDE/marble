@@ -34,6 +34,7 @@ namespace Marble
 
 class MarbleModel;
 class MarbleWidget;
+class MarbleMap;
 
 class MarbleWidgetInputHandler  : public QObject
 {
@@ -76,6 +77,9 @@ class MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
 {
  public:
     MarbleWidgetDefaultInputHandler();
+
+    static void keyEvent( MarbleMap * map, QEvent* e );
+    static void mouseEvent( MarbleMap * map, QEvent* e ); 
 
  protected:
     bool eventFilter( QObject *, QEvent * );

@@ -771,7 +771,7 @@ void MarbleModel::removePlaceMarkKey( const QString& key )
     d->notifyModelChanged();
 }
 
-QVector<QPersistentModelIndex> MarbleModel::whichFeatureAt( const QPoint& curpos ) const
+QVector<QModelIndex> MarbleModel::whichFeatureAt( const QPoint& curpos ) const
 {
     return d->m_placeMarkLayout->whichPlaceMarkAt( curpos );
 }

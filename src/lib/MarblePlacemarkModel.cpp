@@ -44,9 +44,9 @@ class MarblePlacemarkModel::Private
     MarblePlacemarkModel  *m_parent;
     PlaceMarkManager      *m_manager;
     PlaceMarkContainer     m_placeMarkContainer;
-    
+    QList<QModelIndex>     m_indexList;
+
     QMap<QString, PlaceMarkContainer*>  m_containerMap;
-    QList<QPersistentModelIndex>        m_persistantIndexList;
 };
 
 
@@ -73,34 +73,19 @@ MarblePlacemarkModel::~MarblePlacemarkModel()
     delete d;
 }
 
-void MarblePlacemarkModel::indexUpdate()
+void MarblePlacemarkModel::sort( int column, Qt::SortOrder order )
 {
-    generateIndex();
-}
+    Q_UNUSED( column )
 
-void MarblePlacemarkModel::generateIndex()
-{
     QTime t;
     t.start();
-    qDebug() << "start generate indexes";
+    qDebug() << "start sorting";
 
-    d->m_persistantIndexList.clear();
+    emit layoutAboutToBeChanged();
+    d->m_placeMarkContainer.sort( order );
+    emit layoutChanged();
 
-    const int constRowCount = rowCount();
-
-
-    for ( int i = 0; i < constRowCount; ++i )
-    {
-        d->m_persistantIndexList << index( i, 0 );
-    }
-    qDebug() << "generated indexes";
-
-    qDebug() << "MarblePlacemarkModel (generateIndex): Time elapsed:" << t.elapsed() << "ms";
-}
-
-QList<QPersistentModelIndex> MarblePlacemarkModel::persistentIndexList () const
-{
-    return d->m_persistantIndexList;
+    qDebug() << "MarblePlacemarkModel (sort): Time elapsed:" << t.elapsed() << "ms";
 }
 
 int MarblePlacemarkModel::rowCount( const QModelIndex &parent ) const
@@ -221,12 +206,18 @@ void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks,
                                           bool clearPrevious,
                                           bool finalize )
 {
-  // For now we simply remove any previous placemarks
+    beginRemoveRows( QModelIndex(), 0, rowCount() );
+
+    // For now we simply remove any previous placemarks
     if ( clearPrevious ) {
         qDeleteAll( d->m_placeMarkContainer );
         d->m_placeMarkContainer.clear();
         d->m_containerMap.clear();
     }
+
+    endRemoveRows();
+
+    beginInsertRows( QModelIndex(), 0, d->m_placeMarkContainer.count() );
 
     if( !d->m_containerMap.contains( placeMarks.name() ) ) {
         createFilterProperties( placeMarks );
@@ -235,19 +226,26 @@ void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks,
 
         d->m_containerMap[ placeMarks.name() ] = new PlaceMarkContainer( placeMarks );
     }
+
+    endInsertRows();
+
+    emit dataChanged( index( 0, 0 ), index( rowCount() - 1, 0 ) );
+
     if ( finalize ) {
-        generateIndex();
-        d->m_placeMarkContainer.sort();
-        emit layoutChanged();
+        sort( Qt::DescendingOrder );
     }
 }
 
 void  MarblePlacemarkModel::removePlaceMarks( const QString &containerName,
                                               bool finalize )
 {
+    beginRemoveRows( QModelIndex(), 0, rowCount() );
+    endRemoveRows();
+
     if( d->m_containerMap.contains( containerName ) ) {
         QVector<Marble::GeoDataPlacemark*>::const_iterator iter = d->m_containerMap[ containerName ]->constBegin();
         QVector<Marble::GeoDataPlacemark*>::const_iterator end = d->m_containerMap[ containerName ]->constEnd();
+
         GeoDataPlacemark* placemark;
         for(; iter != end;iter++) {
             placemark = *iter;
@@ -257,10 +255,14 @@ void  MarblePlacemarkModel::removePlaceMarks( const QString &containerName,
         delete d->m_containerMap[ containerName ];
         d->m_containerMap.remove( containerName );
     }
+
+    beginInsertRows( QModelIndex(), 0, d->m_placeMarkContainer.count() );
+    endInsertRows();
+
+    emit dataChanged( index( 0, 0 ), index( rowCount() - 1, 0 ) );
+
     if ( finalize ) {
-        generateIndex();
-        d->m_placeMarkContainer.sort();
-        emit layoutChanged();
+        sort( Qt::DescendingOrder );
     }
 }
 
@@ -275,7 +277,6 @@ void MarblePlacemarkModel::clearPlaceMarks()
     d->m_placeMarkContainer.clear();
     d->m_containerMap.clear();
     reset();
-    d->m_persistantIndexList.clear();
 }
 
 void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container )

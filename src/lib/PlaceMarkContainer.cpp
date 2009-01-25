@@ -60,8 +60,10 @@ QString PlaceMarkContainer::name() const
     return m_name;
 }
 
-
-void PlaceMarkContainer::sort()
+void PlaceMarkContainer::sort( Qt::SortOrder order )
 {
+    // FIXME: use order
+    Q_UNUSED( order )
+
     qStableSort( begin(), end(), populationLessThan );
 }

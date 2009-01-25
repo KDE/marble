@@ -76,8 +76,6 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      * Destroys the place mark model.
      */
     ~MarblePlacemarkModel();
-
-    QList<QPersistentModelIndex> persistentIndexList () const;
 	
     /**
      * Return the number of Placemarks in the Model.
@@ -123,11 +121,6 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
     * This method returns a list of open Containers (== open kml files)
     */
     QStringList containers() const;
- public Q_SLOTS:
-    /**
-    * This slot should update the persistentIndex
-    */
-    void indexUpdate();
 
  Q_SIGNALS:
     /**
@@ -143,7 +136,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      */
     void clearPlaceMarks();
     
-    void generateIndex();
+    virtual void sort( int column, Qt::SortOrder order = Qt::AscendingOrder );
 
     void createFilterProperties( PlaceMarkContainer &container );
 
