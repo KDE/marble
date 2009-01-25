@@ -37,24 +37,38 @@ MergedLayerDecorator::MergedLayerDecorator(SunLocator* sunLocator)
  : m_sunLocator(sunLocator),
    m_cloudlayer(true),
    m_showTileId(false),
-   m_cityLightsTheme(MapThemeManager::loadMapTheme("earth/citylights/citylights.dgml")),
-   m_blueMarbleTheme(MapThemeManager::loadMapTheme("earth/bluemarble/bluemarble.dgml")),
+   m_cityLightsTheme(0),
+   m_blueMarbleTheme(0),
    m_cityLightsTextureLayer(0),
    m_cloudsTextureLayer(0)
 {
+}
+
+void MergedLayerDecorator::initClouds(){
     // look for the texture layers inside the themes
     // As long as we don't have an Layer Management Class we just lookup 
     // the name of the layer that has the same name as the theme ID
-    if (m_cityLightsTheme) {
-        QString cityLightsId = m_cityLightsTheme->head()->theme();
-        m_cityLightsTextureLayer = static_cast<GeoSceneTexture*>(
-            m_cityLightsTheme->map()->layer( cityLightsId )->datasets().first() );
-    }
+
     // the clouds texture layer is a layer in the bluemarble theme
+
+    m_blueMarbleTheme = MapThemeManager::loadMapTheme("earth/bluemarble/bluemarble.dgml");
     if (m_blueMarbleTheme) {
         QString blueMarbleId = m_blueMarbleTheme->head()->theme();
         m_cloudsTextureLayer = static_cast<GeoSceneTexture*>(
             m_blueMarbleTheme->map()->layer( blueMarbleId )->dataset( "clouds_data" ) );
+    }
+}
+
+void MergedLayerDecorator::initCityLights(){
+    // look for the texture layers inside the themes
+    // As long as we don't have an Layer Management Class we just lookup 
+    // the name of the layer that has the same name as the theme ID
+
+    m_cityLightsTheme = MapThemeManager::loadMapTheme("earth/citylights/citylights.dgml");
+    if (m_cityLightsTheme) {
+        QString cityLightsId = m_cityLightsTheme->head()->theme();
+        m_cityLightsTextureLayer = static_cast<GeoSceneTexture*>(
+            m_cityLightsTheme->map()->layer( cityLightsId )->datasets().first() );
     }
 }
 
@@ -66,15 +80,28 @@ MergedLayerDecorator::~MergedLayerDecorator()
 
 void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapTheme )
 {
+        if ( !m_blueMarbleTheme ) {
+            initClouds();
+        }
     if ( m_cloudlayer && m_tile->depth() == 32 && m_level < 2 ) {
         bool show;
         if ( mapTheme && mapTheme->settings()->propertyAvailable( "clouds", show ) ) {
+
+            // Initialize clouds if it hasn't happened already
+            if ( !m_blueMarbleTheme ) {
+                initClouds();
+            }
             paintClouds();
         }
     }
     if ( m_sunLocator->getShow() && mapTheme ) {
         if (   mapTheme->head()->target() == "earth" 
             || mapTheme->head()->target() == "moon" ) {
+
+            // Initialize citylights layer if it hasn't happened already
+            if ( !m_cityLightsTheme ) {
+                initCityLights();
+            }
             paintSunShading();
         }
     }

@@ -233,6 +233,7 @@ QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThe
         //       For now maxIconSize already equals what's expected by the listview.
         QSize maxIconSize( 136, 136 );
         if ( themeIconPixmap.size() != maxIconSize ) {
+            qDebug() << "Smooth scaling theme icon";
             themeIconPixmap = themeIconPixmap.scaled( maxIconSize, 
                                                     Qt::KeepAspectRatio,
                                                     Qt::SmoothTransformation );

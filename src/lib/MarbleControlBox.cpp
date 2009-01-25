@@ -241,7 +241,9 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     // Make us aware of all the PlaceMarks in the MarbleModel so that
     // we can search them.
     setLocations( static_cast<MarblePlacemarkModel*>(d->m_widget->placeMarkModel()) );
-    d->uiWidget.locationListView->setSelectionModel( d->m_widget->placeMarkSelectionModel() );
+
+//    FIXME: Why does this fail: "selection model works on a different model than the view..." ? 
+//    d->uiWidget.locationListView->setSelectionModel( d->m_widget->placeMarkSelectionModel() );
 
 #ifndef KML_GSOC
     //set up everything for the FileModel

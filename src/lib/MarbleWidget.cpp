@@ -208,8 +208,6 @@ void MarbleWidgetPrivate::construct()
 
     m_logZoom  = 0;
 
-    m_widget->goHome();
-
     m_widget->connect( m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
                        m_widget, SLOT( enableInput() ) );
 
