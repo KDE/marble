@@ -40,9 +40,9 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
 void MarbleWidgetPopupMenu::createActions()
 {
     //	Property actions (Left mouse button)
-    //	m_earthaction = new QAction(QIcon("icon.png"), tr("&Earth"), this);
-    m_earthaction = new QAction( tr( "&Earth" ), this );
-    m_earthaction->setData( 0 );
+    //	m_planetAction = new QAction(QIcon("icon.png"), tr("&Earth"), this);
+    m_planetAction = new QAction( tr( "&Earth" ), this );
+    m_planetAction->setData( 0 );
     m_copyCoordinateAction = new QAction( tr( "0 N 0 W" ), this );
 
     //	Tool actions (Right mouse button)
@@ -94,10 +94,19 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     }
 
     // Not implemented yet ;-)
-    m_earthaction->setEnabled( false );
+    m_planetAction->setEnabled( false );
 
-    m_lmbMenu->addAction( m_earthaction );
+    m_lmbMenu->addAction( m_planetAction );
     m_lmbMenu->addSeparator();
+
+    // Setting the proper planet name
+    QString targetString = m_model->planetName();
+    qDebug() << "targetString" << targetString;
+    // FIXME: this should be removed later on ...
+    if ( targetString == "Earth" ) 
+        targetString = tr( "&Earth" );
+
+    m_planetAction->setText( targetString );
 
     qreal  lat;
     qreal  lon;
