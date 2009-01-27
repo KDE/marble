@@ -204,7 +204,6 @@ void MergedLayerDecorator::paintSunShading()
 
     // First we determine the supporting point interval for the interpolation.
     const int n = maxDivisor( 30, tileWidth );
-    const qreal nInverse = 1.0 / (qreal)(n);
     const int ipRight = n * (int)( tileWidth / n );
 
     if ( m_sunLocator->getCitylights() ) {
@@ -215,48 +214,61 @@ void MergedLayerDecorator::paintSunShading()
             qreal lat = lat_scale * ( m_y * tileHeight + cur_y ) - 0.5*M_PI;
             QRgb* scanline  = (QRgb*)m_tile->scanLine( cur_y );
             QRgb* nscanline = (QRgb*)nighttile.scanLine( cur_y );
-            qreal lastShade = 0.0;
 
-            for ( int cur_x = 0; cur_x < tileWidth; ++cur_x) {
+            qreal shade = 0;
+            qreal lastShade = -10.0;
 
-                bool interpolate = ( cur_x != 0 && cur_x < ipRight );
+            int cur_x = 0;
 
-                if ( interpolate == true ) cur_x+= n - 1;
+            while ( cur_x < tileWidth ) {
 
-                qreal lon   = lon_scale * (m_x * tileWidth + cur_x);
-                qreal shade = m_sunLocator->shading( lon, lat );
+                bool interpolate = ( cur_x != 0 && cur_x < ipRight && cur_x + n < tileWidth );
 
                 if ( interpolate == true ) {
+                    int check = cur_x + n;
+                    qreal checklon   = lon_scale * ( m_x * tileWidth + check );
+                    shade = m_sunLocator->shading(checklon, lat);
 
                     // if the shading didn't change across the interpolation
                     // interval move on and don't change anything.
                     if ( shade == lastShade && shade == 1.0 ) {
                         scanline += n;
                         nscanline += n;
+                        cur_x += n;
                         continue;
                     }
-                    else {
-                        qreal interpolatedShade = lastShade;
-                        const qreal shadeDiff = ( shade - lastShade ) * nInverse;
-
-                        // Now we do linear interpolation across the tile width
-                        for ( int t = 1; t < n; ++t )
+                    if ( shade == lastShade && shade == 0.0 ) {
+                        for ( int t = 0; t < n; ++t )
                         {
-                            interpolatedShade += shadeDiff;
-                            m_sunLocator->shadePixelComposite( *scanline, *nscanline, interpolatedShade );
-                            scanline++;
-                            nscanline++;
+                            m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
+                            ++scanline;
+                            ++nscanline;
                         }
+                        cur_x += n; 
+                        continue;
+                    }
+                    for ( int t = 0; t < n ; ++t )
+                    {
+                        qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
+                        shade = m_sunLocator->shading(lon, lat);
+                        m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
+                        ++scanline;
+                        ++nscanline;
+                        ++cur_x;
                     }
                 }
 
-                // Make sure we don't exceed the image memory
-                if ( cur_x < tileWidth ) {
-                    m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
-                    scanline++;
-                    nscanline++;
+                else {
+                    // Make sure we don't exceed the image memory
+                    if ( cur_x < tileWidth ) {
+                        qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
+                        shade = m_sunLocator->shading(lon, lat);
+                        m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
+                        ++scanline;
+                        ++nscanline;
+                        ++cur_x;
+                    }
                 }
-
                 lastShade = shade;
             }
         }
@@ -265,45 +277,56 @@ void MergedLayerDecorator::paintSunShading()
             qreal lat = lat_scale * (m_y * tileHeight + cur_y) - 0.5*M_PI;
             QRgb* scanline = (QRgb*)m_tile->scanLine( cur_y );
 
-            qreal lastShade = 0.0;
+            qreal shade = 0;
+            qreal lastShade = -10.0;
 
-            for ( int cur_x = 0; cur_x <= tileWidth; ++cur_x ) {
+            int cur_x = 0;
 
-                bool interpolate = ( cur_x != 0 && cur_x < ipRight );
+            while ( cur_x < tileWidth ) {
 
-                if ( interpolate == true ) cur_x+= n - 1;
-
-                qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                qreal shade = m_sunLocator->shading(lon, lat);
+                bool interpolate = ( cur_x != 0 && cur_x < ipRight && cur_x + n < tileWidth );
 
                 if ( interpolate == true ) {
+                    int check = cur_x + n;
+                    qreal checklon   = lon_scale * ( m_x * tileWidth + check );
+                    shade = m_sunLocator->shading(checklon, lat);
 
                     // if the shading didn't change across the interpolation
                     // interval move on and don't change anything.
                     if ( shade == lastShade && shade == 1.0 ) {
                         scanline += n;
+                        cur_x += n;
                         continue;
                     }
-                    else {
-                        qreal interpolatedShade = lastShade;
-                        const qreal shadeDiff = ( shade - lastShade ) * nInverse;
-
-                        // Now we do linear interpolation across the tile width
-                        for ( int t = 1; t < n; ++t )
+                    if ( shade == lastShade && shade == 0.0 ) {
+                        for ( int t = 0; t < n; ++t )
                         {
-                            interpolatedShade += shadeDiff;
-                            m_sunLocator->shadePixel( *scanline, interpolatedShade );
-                            scanline++;
+                            m_sunLocator->shadePixel( *scanline, shade );
+                            ++scanline;
                         }
+                        cur_x += n; 
+                        continue;
+                    }
+                    for ( int t = 0; t < n ; ++t )
+                    {
+                        qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
+                        shade = m_sunLocator->shading(lon, lat);
+                        m_sunLocator->shadePixel( *scanline, shade );
+                        ++scanline;
+                        ++cur_x;
                     }
                 }
 
-                // Make sure we don't exceed the image memory
-                if ( cur_x < tileWidth ) {
-                    m_sunLocator->shadePixel( *scanline, shade );
-                    scanline++;
+                else {
+                    // Make sure we don't exceed the image memory
+                    if ( cur_x < tileWidth ) {
+                        qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
+                        shade = m_sunLocator->shading(lon, lat);
+                        m_sunLocator->shadePixel( *scanline, shade );
+                        ++scanline;
+                        ++cur_x;
+                    }
                 }
-
                 lastShade = shade;
             }
         }

@@ -17,7 +17,8 @@
 #include "SunLocator.h"
 #include "ExtDateTime.h"
 #include "PlanetaryConstants.h"
-
+#include "MarbleMath.h"
+ 
 #include <QtCore/QDebug>
 
 using namespace Marble;
@@ -113,11 +114,12 @@ void SunLocator::updatePosition()
 
 qreal SunLocator::shading(qreal lon, qreal lat)
 {
+
     // haversine formula
     qreal a = sin((lat-m_lat)/2.0);
     qreal b = sin((lon-m_lon)/2.0);
-    qreal h = (a*a)+cos(lat)*cos(m_lat)*(b*b);
-	
+    qreal h = (a*a)+cos(lat)*cos(m_lat)*(b*b); 
+
     /*
       h = 0.0 // directly beneath sun
       h = 0.5 // sunrise/sunset line
