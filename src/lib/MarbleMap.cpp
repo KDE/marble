@@ -21,14 +21,11 @@
 // Qt
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
-#include <QtCore/QLocale>
-#include <QtCore/QTranslator>
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QTime>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
-#include <QtGui/QStyleOptionGraphicsItem>
 
 //#include <QtDBus/QDBusConnection>
 
@@ -150,7 +147,7 @@ void  MarbleMapPrivate::paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect
                             ( m_parent->height() - logoPixmap.height() ) / 2 ); 
     painter.drawPixmap( logoPosition, logoPixmap );
 
-    QString message = ""; // "Please assign a map theme!";
+    QString message; // "Please assign a map theme!";
 
     painter.setPen( Qt::white );
 
@@ -358,11 +355,14 @@ MarbleMap::MarbleMap()
     : d( new MarbleMapPrivate( this ) )
 {
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
-
+    QTime t;
+    t.start();
+    
     d->m_model        = new MarbleModel( this );
     d->m_modelIsOwned = true;
 
     d->construct();
+    qDebug("Model: Time elapsed: %d ms", t.elapsed());
 }
 
 
@@ -797,11 +797,7 @@ void MarbleMap::centerOn(const QModelIndex& index)
         centerOn( lon * RAD2DEG, lat * RAD2DEG );
 
         selectionModel->select( index, QItemSelectionModel::SelectCurrent );
-//        Maybe add some similar functionality later on again:
-//        d->m_crosshair.setEnabled( true );
     }
-//    else
-//        d->m_crosshair.setEnabled( false );
 }
 
 

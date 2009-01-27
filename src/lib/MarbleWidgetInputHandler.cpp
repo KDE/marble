@@ -32,10 +32,10 @@ using namespace Marble;
 
 MarbleWidgetInputHandler::MarbleWidgetInputHandler()
     : m_widget( 0 ),
-      m_model( 0 )
+      m_model( 0 ),
+      m_positionSignalConnected( false ),
+      m_mouseWheelTimer( new QTimer(this) )
 {
-    m_positionSignalConnected = false;
-    m_mouseWheelTimer = new QTimer(this);
     connect( m_mouseWheelTimer, SIGNAL( timeout() ),
 	     this,              SLOT( restoreViewContext() ) );
 }
@@ -106,73 +106,22 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 {
     Q_UNUSED( o );
 
-    int polarity = m_widget->map()->viewParams()->viewport()->polarity();
-
-    //	if ( o == marbleWidget ){
-    if ( e->type() == QEvent::KeyPress ) {
-        QKeyEvent const * const k = dynamic_cast<QKeyEvent const * const>( e );
-        Q_ASSERT( k );
-
-        dirx = 0;
-        diry = 0;
-        switch ( k->key() ) {
-        case Qt::Key_Left:
-
-            // Depending on whether the planet is "upright" or
-            // "upside down" we need to choose the direction
-            //  of the rotation
-
-            if ( polarity < 0 )
-                dirx = -1;
-            else
-                dirx = 1;
-            break;
-        case Qt::Key_Up:
-            diry = 1;
-            break;
-        case Qt::Key_Right:
-
-            // Depending on whether the planet is "upright" or
-            // "upside down" we need to choose the direction
-            //  of the rotation
-
-            if ( polarity < 0 )
-                dirx = 1;
-            else
-                dirx = -1;
-            break;
-        case Qt::Key_Down:
-            diry = -1;
-            break;
-        case Qt::Key_Plus:
-            m_widget->zoomIn();
-            break;
-        case Qt::Key_Minus:
-            m_widget->zoomOut();
-            break;
-        case Qt::Key_Home:
-            m_widget->goHome();
-            break;
-        default:
-            break;
-        }
-
-        if ( dirx != 0 || diry != 0 ) {
-            m_widget->rotateBy( -m_widget->moveStep() * (qreal)(dirx),
-                                -m_widget->moveStep() * (qreal)(diry) );
-        }
-
+    if ( keyEvent( m_widget->map(), e ) ) {
+        m_widget->repaint();
         return true;
     }
-    else if ( e->type() == QEvent::MouseMove
+
+    int polarity = m_widget->map()->viewParams()->viewport()->polarity();
+
+    if ( e->type() == QEvent::MouseMove
               || e->type() == QEvent::MouseButtonPress
               || e->type() == QEvent::MouseButtonRelease ) {
 
         QMouseEvent  *event        = static_cast<QMouseEvent*>(e);
         QRegion       activeRegion = m_widget->activeRegion();
 
-        dirx = 0;
-        diry = 0;
+        m_dirX = 0;
+        m_dirY = 0;
 
         // Do not handle (and therefore eat) mouse press and release events 
         // that occur above visible float items. Mouse motion events are still 
@@ -370,33 +319,33 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
             if ( boundingRect.width() != 0 )
             {
-                dirx = (int)( 3 * ( event->x() - boundingRect.left() ) / boundingRect.width() ) - 1;
+                m_dirX = (int)( 3 * ( event->x() - boundingRect.left() ) / boundingRect.width() ) - 1;
             }
 
-            if ( dirx > 1 )
-                dirx = 1;
-            if ( dirx < -1 )
-                dirx = -1;
+            if ( m_dirX > 1 )
+                m_dirX = 1;
+            if ( m_dirX < -1 )
+                m_dirX = -1;
 
             if ( boundingRect.height() != 0 )
             {
-                diry = (int)( 3 * ( event->y() - boundingRect.top() ) / boundingRect.height() ) - 1;
+                m_dirY = (int)( 3 * ( event->y() - boundingRect.top() ) / boundingRect.height() ) - 1;
             }
 
-            if ( diry > 1 )
-                diry = 1;
-            if ( diry < -1 )
-                diry = -1;
+            if ( m_dirY > 1 )
+                m_dirY = 1;
+            if ( m_dirY < -1 )
+                m_dirY = -1;
 
             if ( event->button() == Qt::LeftButton
                  && e->type() == QEvent::MouseButtonPress ) {
 
                 if ( polarity < 0 )
-                    m_widget->rotateBy( -m_widget->moveStep() * (qreal)(+dirx),
-                                        m_widget->moveStep() * (qreal)(+diry) );
+                    m_widget->rotateBy( -m_widget->moveStep() * (qreal)(+m_dirX),
+                                        m_widget->moveStep() * (qreal)(+m_dirY) );
                 else
-                    m_widget->rotateBy( -m_widget->moveStep() * (qreal)(-dirx),
-                                        m_widget->moveStep() * (qreal)(+diry) );
+                    m_widget->rotateBy( -m_widget->moveStep() * (qreal)(-m_dirX),
+                                        m_widget->moveStep() * (qreal)(+m_dirY) );
             }
         }
 
@@ -415,7 +364,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 arrowcur [1][1] = QCursor(Qt::PointingHandCursor);
         }
 
-        m_widget->setCursor(arrowcur[dirx+1][diry+1]);
+        m_widget->setCursor(arrowcur[m_dirX+1][m_dirY+1]);
 
         return false; // let others, especially float items, still process the event
     }
@@ -432,6 +381,70 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         else
             return false;
     }
+}
+
+bool MarbleWidgetDefaultInputHandler::keyEvent( MarbleMap * map, QEvent* e )
+{
+    int polarity = map->viewParams()->viewport()->polarity();
+
+    //  if ( o == marbleWidget ){
+    if ( e->type() == QEvent::KeyPress ) {
+        QKeyEvent const * const k = dynamic_cast<QKeyEvent const * const>( e );
+        Q_ASSERT( k );
+
+        int dirx = 0;
+        int diry = 0;
+        switch ( k->key() ) {
+        case Qt::Key_Left:
+
+            // Depending on whether the planet is "upright" or
+            // "upside down" we need to choose the direction
+            //  of the rotation
+
+            if ( polarity < 0 )
+                dirx = -1;
+            else
+                dirx = 1;
+            break;
+        case Qt::Key_Up:
+            diry = 1;
+            break;
+        case Qt::Key_Right:
+
+            // Depending on whether the planet is "upright" or
+            // "upside down" we need to choose the direction
+            //  of the rotation
+
+            if ( polarity < 0 )
+                dirx = 1;
+            else
+                dirx = -1;
+            break;
+        case Qt::Key_Down:
+            diry = -1;
+            break;
+        case Qt::Key_Plus:
+            map->zoomIn();
+            break;
+        case Qt::Key_Minus:
+            map->zoomOut();
+            break;
+        case Qt::Key_Home:
+            map->goHome();
+            break;
+        default:
+            break;
+        }
+
+        if ( dirx != 0 || diry != 0 ) {
+            map->rotateBy( -map->moveStep() * (qreal)(dirx),
+                                -map->moveStep() * (qreal)(diry) );
+        }
+
+        return true;
+    }
+
+    return false;
 }
 
 

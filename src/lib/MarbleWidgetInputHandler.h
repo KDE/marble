@@ -78,8 +78,7 @@ class MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
  public:
     MarbleWidgetDefaultInputHandler();
 
-    static void keyEvent( MarbleMap * map, QEvent* e );
-    static void mouseEvent( MarbleMap * map, QEvent* e ); 
+    static bool keyEvent( MarbleMap * map, QEvent* e );
 
  protected:
     bool eventFilter( QObject *, QEvent * );
@@ -96,8 +95,8 @@ class MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
 
     QCursor  arrowcur[3][3];
 
-    int      dirx;
-    int      diry;
+    int      m_dirX;
+    int      m_dirY;
 
     bool     m_leftpressed;
     bool     m_midpressed;

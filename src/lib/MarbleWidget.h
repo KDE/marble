@@ -980,6 +980,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
  private:
     Q_DISABLE_COPY( MarbleWidget )
     MarbleWidgetPrivate  * const d;
+
+    Q_PRIVATE_SLOT( d, void _q_initGui() )
 };
 
 }

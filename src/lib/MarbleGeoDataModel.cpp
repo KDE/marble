@@ -52,17 +52,6 @@ int MarbleGeoDataModel::rowCount( const QModelIndex &parent ) const
         return 0;
 }
 
-QList<QPersistentModelIndex> MarbleGeoDataModel::persistentIndexList () const
-{
-    QList<QPersistentModelIndex> modelIndexList;
-    const int constRowCount = rowCount();
-
-    for ( int i = 0; i < constRowCount; ++i )
-    {
-        modelIndexList << index( i, 0 );
-    }
-    return modelIndexList;
-}
 QVariant MarbleGeoDataModel::data( const QModelIndex &index, int role ) const
 {
     return QVariant();

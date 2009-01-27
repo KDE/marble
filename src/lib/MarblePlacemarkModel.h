@@ -21,7 +21,6 @@
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QList>
 #include <QtCore/QModelIndex>
-#include <QtCore/QPersistentModelIndex>
 #include <QtCore/QVariant>
 
 #include "marble_export.h"

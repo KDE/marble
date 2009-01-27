@@ -47,8 +47,6 @@ class MARBLE_EXPORT MarbleGeoDataModel : public QAbstractListModel
      * Destroys the GeoDataModel.
      */
     ~MarbleGeoDataModel();
-
-    QList<QPersistentModelIndex> persistentIndexList () const;
 	
     /**
      * Return the number of Items in the Model.
