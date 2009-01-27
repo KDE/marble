@@ -95,15 +95,15 @@ void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapT
         }
     }
     if ( m_sunLocator->getShow() && mapTheme ) {
-        if (   mapTheme->head()->target() == "earth" 
-            || mapTheme->head()->target() == "moon" ) {
+//         if (   mapTheme->head()->target() == "earth" 
+//             || mapTheme->head()->target() == "moon" ) {
 
             // Initialize citylights layer if it hasn't happened already
             if ( !m_cityLightsTheme ) {
                 initCityLights();
             }
             paintSunShading();
-        }
+//         }
     }
     if ( m_showTileId )
       paintTileId( themeId );

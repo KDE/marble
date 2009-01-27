@@ -1,4 +1,4 @@
-// Copyright 2007-2008 David Roberts <dvdr18@gmail.com>
+// Copyright 2007-2009 David Roberts <dvdr18@gmail.com>
 // 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -16,6 +16,7 @@
 
 #include "SunLocator.h"
 #include "ExtDateTime.h"
+#include "PlanetaryConstants.h"
 
 #include <QtCore/QDebug>
 
@@ -25,6 +26,9 @@ using std::sin;
 using std::cos;
 using std::asin;
 using std::abs;
+
+qreal deg2rad(qreal x) { return x*M_PI/180.0; }
+qreal rad2deg(qreal x) { return x*180.0/M_PI; }
 
 const int J2000 = 2451545; // epoch J2000 = 1 January 2000, noon Terrestrial Time (11:58:55.816 UTC)
 
@@ -58,7 +62,6 @@ SunLocator::~SunLocator() {
 
 void SunLocator::updatePosition()
 {
-    // Find the orientation of the sun.
     if( m_body == "moon" ) {
         qreal d = (qreal)m_datetime->toJDN() + m_datetime->dayFraction() - MOON_EPOCH; // days since the first full moon of the 20th century
         d /= MOON_SYNODIC_PERIOD; // number of orbits the moon has made (relative to the sun as observed from earth)
@@ -69,21 +72,42 @@ void SunLocator::updatePosition()
         
         m_lon = (1-d) * 2*M_PI;
         m_lat = 0.0; // not necessarily accurate but close enough (only differs by about +-6 degrees of this value)
-    } else { // default to the earth
-        // Find current Julian day number relative to epoch J2000.
-        long d = m_datetime->toJDN() - J2000;
-    	
-        // Adapted from http://www.stargazing.net/kepler/sun.html
-        qreal       L = 4.89497 + 0.0172028 * d;                  // mean longitude
-        qreal       g = 6.24004 + 0.0172020 * d;                  // mean anomaly
-        qreal  lambda = L + 0.0334 * sin(g) + 3.49e-4 * sin(2*g); // ecliptic longitude
-        qreal epsilon = 0.40909 - 7e-9 * d;                       // obliquity of the ecliptic plane
-        qreal   delta = asin(sin(epsilon)*sin(lambda));           // declination
-    	
-        // Convert position of sun to coordinates.
-        m_lon = M_PI - m_datetime->dayFraction() * 2*M_PI;
-        m_lat = -delta;
+	
+	return;
     }
+    
+    PlanetaryConstants pc = PC_EARTH; // default to the earth
+    // planets
+         if ( m_body == "mercury" ) pc = PC_MERCURY;
+    else if ( m_body == "venus" )   pc = PC_VENUS;
+    else if ( m_body == "earth" )   pc = PC_EARTH;
+    else if ( m_body == "mars" )    pc = PC_MARS;
+    else if ( m_body == "jupiter" ) pc = PC_JUPITER;
+    else if ( m_body == "saturn" )  pc = PC_SATURN;
+    else if ( m_body == "uranus" )  pc = PC_URANUS;
+    else if ( m_body == "neptune" ) pc = PC_NEPTUNE;
+    // dwarf planets ... (everybody likes pluto)
+    else if ( m_body == "pluto" )   pc = PC_PLUTO;
+    
+    long d = m_datetime->toJDN() - J2000; // find current Julian day number relative to epoch J2000
+    
+    // from http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html
+    qreal M = pc.M_0 + pc.M_1*d; // mean anomaly
+    qreal C = pc.C_1*sin(M) + pc.C_2*sin(2*M) + pc.C_3*sin(3*M) + pc.C_4*sin(4*M) + pc.C_5*sin(5*M) + pc.C_6*sin(6*M); // equation of center
+    qreal nu = M + C; // true anomaly
+    qreal lambda_sun = nu + pc.Pi + M_PI; // ecliptic longitude of sun as seen from planet
+    qreal delta_sun = asin(sin(pc.epsilon)*sin(lambda_sun)); // declination of sun as seen from planet
+    qreal alpha_sun = atan2(cos(pc.epsilon)*sin(lambda_sun), cos(lambda_sun)); // right ascension of sun as seen from planet
+    
+    qreal theta = alpha_sun; // solar noon occurs when sidereal time is equal to alpha_sun
+    m_lon = M_PI - (pc.theta_0 + pc.theta_1 * (d+m_datetime->dayFraction()) - theta); // convert sidereal time to geographic longitude
+    while(m_lon < 0) m_lon += 2*M_PI;
+    m_lat = -delta_sun; // convert positive north to positive south
+    
+    qDebug() << "alpha_sun =" << rad2deg(alpha_sun);
+    qDebug() << "delta_sun =" << rad2deg(delta_sun);
+    qDebug() << "m_lon =" << rad2deg(m_lon);
+    qDebug() << "m_lat =" << rad2deg(m_lat);
 }
 
 
