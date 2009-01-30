@@ -92,12 +92,15 @@ void PluginManager::loadPlugins()
         qDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
         QPluginLoader loader( MarbleDirs::pluginPath( fileName ) );
 
-        QObject *obj = loader.instance();
-        MarbleRenderPlugin* layerPlugin = qobject_cast<MarbleRenderPlugin *>(obj);
-        MarbleRenderPlugin* instance = layerPlugin->instance();
+        QObject * obj = loader.instance();
 
-        if( layerPlugin && instance ) {
-            d->m_renderPlugins.append( instance );
+        MarbleRenderPlugin * layerPlugin;
+        if ( obj ) {
+            layerPlugin = qobject_cast<MarbleRenderPlugin *>(obj);
+        }
+
+        if( obj && layerPlugin ) {
+            d->m_renderPlugins.append( layerPlugin );
         }
         else {
             qDebug() << "Plugin Failure: " << fileName << " is not a valid Marble Plugin:";

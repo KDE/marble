@@ -179,7 +179,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->uiWidget.projectionComboBox->setEnabled( true );
     
     d->m_runnerManager = new MarbleRunnerManager( this );
-    
+
     connect( d->m_runnerManager, SIGNAL( modelChanged(  MarblePlacemarkModel* ) ),
              this,               SLOT( setLocations( MarblePlacemarkModel* ) ) );    
 
@@ -187,7 +187,6 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
              this,                        SLOT( searchLineChanged( const QString& ) ) );
     connect( d->uiWidget.searchLineEdit,  SIGNAL( returnPressed() ),
              this,                        SLOT( searchReturnPressed() ) );
-
 }
 
 MarbleControlBox::~MarbleControlBox()
