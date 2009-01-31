@@ -286,26 +286,31 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
 
     if ( fabs(stepLon) < M_PI ) {
         if ( smooth ) {
-            const qreal itStepLon = ( rad2PixelX( lon ) - rad2PixelX( m_prevLon ) ) * m_nInverse;
-            const qreal itStepLat = ( rad2PixelY( lat ) - rad2PixelY( m_prevLat ) ) * m_nInverse;
-    
+
             m_prevLon = rad2PixelX( m_prevLon );
             m_prevLat = rad2PixelY( m_prevLat );
-    
+
+            const qreal itStepLon = ( rad2PixelX( lon ) - m_prevLon ) * m_nInverse;
+            const qreal itStepLat = ( rad2PixelY( lat ) - m_prevLat ) * m_nInverse;
+        
             // To improve speed we unroll 
             // AbstractScanlineTextureMapper::pixelValue(...) here and 
             // calculate the performance critical issues via integers
     
             qreal itLon = m_prevLon + m_toTileCoordinatesLon;
             qreal itLat = m_prevLat + m_toTileCoordinatesLat;
-    
-            for ( int j=1; j < m_n; ++j ) {
+
+            const int tileWidth = m_tileLoader->tileWidth();
+            const int tileHeight = m_tileLoader->tileHeight();
+            const int jmax = m_n;
+
+            for ( int j=1; j < jmax; ++j ) {
                 m_posX = itLon + itStepLon * j;
                 m_posY = itLat + itStepLat * j;
     
-                if (  m_posX >= m_tileLoader->tileWidth() 
+                if (  m_posX >= tileWidth 
                 || m_posX < 0.0
-                || m_posY >= m_tileLoader->tileHeight()
+                || m_posY >= tileHeight
                 || m_posY < 0.0 )
                 {
                     nextTile( m_posX, m_posY );
@@ -315,38 +320,37 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
                     m_posY = itLat + itStepLat * j;
                 }
     
-                if ( !smooth ) {
-                    *scanLine  = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
-                }
-                else {
-                    QRgb topLeftValue = m_tile->pixel( (int)(m_posX), (int)(m_posY) );
-                    *scanLine = bilinearSmooth( topLeftValue );
-                }
+                *scanLine = m_tile->pixelF( m_posX, m_posY );;
     
                 ++scanLine;
             }
         }
         else {
-            const int itStepLon = (int)( ( rad2PixelX( lon ) - rad2PixelX( m_prevLon ) ) * m_nInverse * 128.0 );
-            const int itStepLat = (int)( ( rad2PixelY( lat ) - rad2PixelY( m_prevLat ) ) * m_nInverse * 128.0 );
-    
             m_prevLon = rad2PixelX( m_prevLon );
             m_prevLat = rad2PixelY( m_prevLat );
-    
+
+            const int itStepLon = (int)( ( rad2PixelX( lon ) - m_prevLon ) * m_nInverse * 128.0 );
+            const int itStepLat = (int)( ( rad2PixelY( lat ) - m_prevLat ) * m_nInverse * 128.0 );
+        
             // To improve speed we unroll 
             // AbstractScanlineTextureMapper::pixelValue(...) here and 
             // calculate the performance critical issues via integers
     
             int itLon = (int)( ( m_prevLon + m_toTileCoordinatesLon ) * 128.0 );
             int itLat = (int)( ( m_prevLat + m_toTileCoordinatesLat ) * 128.0 );
+
+            const int tileWidth = m_tileLoader->tileWidth();
+            const int tileHeight = m_tileLoader->tileHeight();
+            const int jmax = m_n;
+
     
-            for ( int j=1; j < m_n; ++j ) {
+            for ( int j=1; j < jmax; ++j ) {
                 m_iPosX = ( itLon + itStepLon * j ) >> 7;
                 m_iPosY = ( itLat + itStepLat * j ) >> 7;
     
-                if (  m_iPosX >= m_tileLoader->tileWidth() 
+                if (  m_iPosX >= tileWidth 
                 || m_iPosX < 0
-                || m_iPosY >= m_tileLoader->tileHeight()
+                || m_iPosY >= tileHeight
                 || m_iPosY < 0 )
                 {
                     nextTile( m_iPosX, m_iPosY );
@@ -355,7 +359,7 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
                     m_iPosX = ( itLon + itStepLon * j ) >> 7;
                     m_iPosY = ( itLat + itStepLat * j ) >> 7;
                 }
-    
+
                 *scanLine = m_tile->pixel( m_iPosX, m_iPosY ); 
     
                 ++scanLine;
@@ -375,7 +379,9 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
         // crossing the dateline from east to west ...
 
         if ( m_prevLon < lon ) {
-            for ( int j = 1; j < m_n; ++j ) {
+
+            const int jmax = m_n;
+            for ( int j = 1; j < jmax; ++j ) {
                 m_prevLat += stepLat;
                 m_prevLon -= stepLon;
                 if ( m_prevLon <= -M_PI ) 
@@ -390,7 +396,8 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
         else { 
             qreal curStepLon = lon - m_n * stepLon;
 
-            for ( int j = 1; j < m_n; ++j ) {
+            const int jmax = m_n;
+            for ( int j = 1; j < jmax; ++j ) {
                 m_prevLat += stepLat;
                 curStepLon += stepLon;
                 qreal  evalLon = curStepLon;

@@ -34,6 +34,7 @@ namespace Marble
 
 class MarbleModel;
 class MarbleWidget;
+class MarbleMap;
 
 class MarbleWidgetInputHandler  : public QObject
 {
@@ -77,6 +78,8 @@ class MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
  public:
     MarbleWidgetDefaultInputHandler();
 
+    static bool keyEvent( MarbleMap * map, QEvent* e );
+
  protected:
     bool eventFilter( QObject *, QEvent * );
 
@@ -92,8 +95,8 @@ class MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
 
     QCursor  arrowcur[3][3];
 
-    int      dirx;
-    int      diry;
+    int      m_dirX;
+    int      m_dirY;
 
     bool     m_leftpressed;
     bool     m_midpressed;

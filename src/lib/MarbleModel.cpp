@@ -771,7 +771,7 @@ void MarbleModel::removePlaceMarkKey( const QString& key )
     d->notifyModelChanged();
 }
 
-QVector<QPersistentModelIndex> MarbleModel::whichFeatureAt( const QPoint& curpos ) const
+QVector<QModelIndex> MarbleModel::whichFeatureAt( const QPoint& curpos ) const
 {
     return d->m_placeMarkLayout->whichPlaceMarkAt( curpos );
 }
@@ -809,6 +809,8 @@ void MarbleModel::update()
     qDebug() << "MarbleModel::update()";
     QTimer::singleShot( 0, d->m_tileLoader, SLOT( update() ) );
 }
+
+// FIXME: We'd like to have a targetBody ("planet") class which stores all attributes we need.
 
 qreal MarbleModel::planetRadius()   const
 {
@@ -852,6 +854,46 @@ qreal MarbleModel::planetRadius()   const
     // Fallback to assuming that we deal with the earth
     return 6378000.0;
 }
+
+QString MarbleModel::planetName()   const
+{
+    if ( d->m_mapTheme ) {
+        QString target = d->m_mapTheme->head()->target().toLower();
+
+        // planets
+               if ( target == "mercury" ) {
+            return  QString("Mercury");
+        } else if ( target == "venus" ) {
+            return  QString("Venus");
+        } else if ( target == "earth" ) {
+            return  QString("Earth");
+        } else if ( target == "mars" ) {
+            return  QString("Mars");
+        } else if ( target == "jupiter" ) {
+            return  QString("Jupiter");
+        } else if ( target == "saturn" ) {
+            return  QString("Saturn");
+        } else if ( target == "uranus" ) {
+            return  QString("Uranus");
+        } else if ( target == "neptune" ) {
+            return  QString("Neptune");
+
+        // dwarf planets ... (everybody likes pluto)
+        } else if ( target == "pluto" ) {
+            return  QString("Pluto");
+
+        // sun and moon
+        } else if ( target == "sun" ) {
+            return  QString("Sun");
+        } else if ( target == "moon" ) {
+            return  QString("Moon");
+        }
+    }
+
+    // Fallback to assuming that we deal with the earth
+    return QString("Earth");
+}
+
 
 ExtDateTime* MarbleModel::dateTime() const
 {

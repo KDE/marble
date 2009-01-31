@@ -49,7 +49,7 @@ public:
     bool interlaced() const;
     void setInterlaced( bool enabled );
 
-    void centerTiles( ViewParams *viewParams, const int tileLevel,
+    void centerTiles( ViewParams *viewParams, int tileLevel,
                       qreal& tileCol, qreal& tileRow );
 
  Q_SIGNALS:
@@ -59,7 +59,7 @@ public:
     void notifyMapChanged();
 
  protected:
-    void pixelValue( const qreal& lon, const qreal& lat, 
+    void pixelValue( qreal lon, qreal lat, 
                      QRgb* scanLine, bool smooth = false );
 
     // method for fast integer calculation
@@ -78,8 +78,6 @@ public:
     // ( with origin in center, measured in pixel) 
     qreal rad2PixelX( const qreal longitude ) const;
     qreal rad2PixelY( const qreal latitude ) const;
-
-    QRgb bilinearSmooth( const QRgb& topLeftValue ) const;
 
     // Coordinates on the tile for fast integer calculation
     int        m_iPosX;
@@ -164,12 +162,12 @@ inline int AbstractScanlineTextureMapper::globalHeight() const
     return m_globalHeight;
 }
 
-inline qreal AbstractScanlineTextureMapper::rad2PixelX( const qreal longitude ) const
+inline qreal AbstractScanlineTextureMapper::rad2PixelX( qreal longitude ) const
 {
     return longitude * m_normGlobalWidth;
 }
 
-inline qreal AbstractScanlineTextureMapper::rad2PixelY( const qreal lat ) const
+inline qreal AbstractScanlineTextureMapper::rad2PixelY( qreal lat ) const
 {
     switch ( m_tileProjection ) {
     case GeoSceneTexture::Equirectangular:
@@ -197,68 +195,6 @@ inline qreal AbstractScanlineTextureMapper::rad2PixelY( const qreal lat ) const
 
     // Dummy value to avoid a warning.
     return 0.0;
-}
-
-inline QRgb AbstractScanlineTextureMapper::bilinearSmooth( const QRgb& topLeftValue ) const
-{
-    qreal fY = m_posY - (int)(m_posY);
-
-    // Interpolation in y-direction
-    if ( ( m_posY + 1.0 ) < m_tileLoader->tileHeight() ) {
-
-        QRgb bottomLeftValue  =  m_tile->pixel( (int)(m_posX), (int)(m_posY + 1.0) );
-
-        // blending the color values of the top left and bottom left point
-        int ml_red   = (int)( ( 1.0 - fY ) * qRed  ( topLeftValue  ) + fY * qRed  ( bottomLeftValue  ) );
-        int ml_green = (int)( ( 1.0 - fY ) * qGreen( topLeftValue  ) + fY * qGreen( bottomLeftValue  ) );
-        int ml_blue  = (int)( ( 1.0 - fY ) * qBlue ( topLeftValue  ) + fY * qBlue ( bottomLeftValue  ) );
-
-        // Interpolation in x-direction
-        if ( ( m_posX + 1.0 ) < m_tileLoader->tileWidth() ) {
-
-            qreal fX = m_posX - (int)(m_posX);
-
-            QRgb topRightValue    =  m_tile->pixel( (int)(m_posX + 1.0), (int)(m_posY      ) );
-            QRgb bottomRightValue =  m_tile->pixel( (int)(m_posX + 1.0), (int)(m_posY + 1.0) );
-
-            // blending the color values of the top right and bottom right point
-            int mr_red   = (int)( ( 1.0 - fY ) * qRed  ( topRightValue ) + fY * qRed  ( bottomRightValue ) );
-            int mr_green = (int)( ( 1.0 - fY ) * qGreen( topRightValue ) + fY * qGreen( bottomRightValue ) );
-            int mr_blue  = (int)( ( 1.0 - fY ) * qBlue ( topRightValue ) + fY * qBlue ( bottomRightValue ) );
-    
-            // blending the color values of the resulting middle left 
-            // and middle right points
-            int mm_red   = (int)( ( 1.0 - fX ) * ml_red   + fX * mr_red   );
-            int mm_green = (int)( ( 1.0 - fX ) * ml_green + fX * mr_green );
-            int mm_blue  = (int)( ( 1.0 - fX ) * ml_blue  + fX * mr_blue  );
-    
-            return qRgb( mm_red, mm_green, mm_blue );
-        }
-        else {
-            return qRgb( ml_red, ml_green, ml_blue );
-        }
-    }
-    else {
-        // Interpolation in x-direction
-        if ( ( m_posX + 1.0 ) < m_tileLoader->tileWidth() ) {
-
-            qreal fX = m_posX - (int)(m_posX);
-
-            if ( fX == 0.0 ) 
-                return topLeftValue;
-
-            QRgb topRightValue    =  m_tile->pixel( (int)( m_posX + 1 ), (int)( m_posY     ) );
-
-            // blending the color values of the top left and top right point
-            int tm_red   = (int)( ( 1.0 - fX ) * qRed  ( topLeftValue ) + fX * qRed  ( topRightValue ) );
-            int tm_green = (int)( ( 1.0 - fX ) * qGreen( topLeftValue ) + fX * qGreen( topRightValue ) );
-            int tm_blue  = (int)( ( 1.0 - fX ) * qBlue ( topLeftValue ) + fX * qBlue ( topRightValue ) );
-
-            return qRgb( tm_red, tm_green, tm_blue );
-        }
-    }
-
-    return topLeftValue;
 }
 
 }

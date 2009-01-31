@@ -141,7 +141,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             {
 
                 // Cheap Emboss / Bumpmapping
-                const uchar&  grey = *readData; // qBlue(*data);
+                uchar&  grey = *readData; // qBlue(*data);
 
                 if ( showRelief ) {
                     emboss.gpuint.x4 = grey;
@@ -229,13 +229,12 @@ void TextureColorizer::colorize(ViewParams *viewParams)
             {
                 // Cheap Embosss / Bumpmapping
 
-                const uchar& grey = *readData; // qBlue(*data);
+                uchar& grey = *readData; // qBlue(*data);
 
                 if ( showRelief == true ) {
                     emboss.buffer = emboss.buffer >> 8;
                     emboss.gpuint.x4 = grey;    
                     bump = ( emboss.gpuint.x1 + 16 - grey ) >> 1;
-
                     if ( bump > 15 ) bump = 15;
                     if ( bump < 0 )  bump = 0;
                 }

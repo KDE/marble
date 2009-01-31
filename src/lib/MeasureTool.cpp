@@ -48,8 +48,6 @@ MeasureTool::MeasureTool( MarbleModel *model, QObject* parent )
     m_fontheight = QFontMetrics( m_font_regular ).height();
     m_fontascent = QFontMetrics( m_font_regular ).ascent();
 
-    m_useworkaround = testBug();
-
     m_pen.setColor( QColor( Qt::red ) );
     m_pen.setWidthF( 2.0 );
 }
@@ -406,37 +404,5 @@ void MeasureTool::removeMeasurePoints()
 {
     m_pMeasurePointList.clear();
 }
-
-
-bool MeasureTool::testBug()
-{
-    QString  testchar( "K" );
-    QFont    font( "Sans Serif", 10 );
-
-    int fontHeight = QFontMetrics( font ).height();
-    int fontwidth  = QFontMetrics( font ).width( testchar );
-    int fontascent = QFontMetrics( font ).ascent();
-
-    QPixmap  pixmap ( fontwidth, fontHeight );
-    pixmap.fill( Qt::transparent );
-
-    QPainter  textpainter;
-    textpainter.begin( &pixmap );
-    textpainter.setPen( QColor( 0, 0, 0, 255 ) );
-    textpainter.setFont( font );
-    textpainter.drawText( 0, fontascent, testchar );
-    textpainter.end();
-
-    QImage  image = pixmap.toImage();
-
-    for ( int x = 0; x < fontwidth; ++x )
-        for ( int y = 0; y < fontHeight; ++y ) {
-            if ( qAlpha( image.pixel( x, y ) ) > 0 )
-                return false;
-        }
-
-    return true;
-}
-
 
 #include "MeasureTool.moc"

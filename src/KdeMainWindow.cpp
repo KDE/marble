@@ -38,11 +38,11 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
 
     setCentralWidget( m_part->widget() );
 
+    insertChildClient( m_part );
+
     setXMLFile( "marbleui.rc" );
 
     setStandardToolBarMenuEnabled( true );
-
-    insertChildClient( m_part );
 
     createGUI( 0 );
 

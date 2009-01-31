@@ -15,8 +15,7 @@
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
-#include <QtCore/QLocale>
-#include <QtCore/QTranslator>
+#include <QtCore/QTimer>
 #include <QtCore/QAbstractItemModel>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QSizePolicy>
@@ -112,6 +111,8 @@ class MarbleWidgetPrivate
 
     QString          m_proxyHost;
     qint16           m_proxyPort;
+
+    void _q_initGui();
 };
 
 
@@ -123,6 +124,9 @@ MarbleWidget::MarbleWidget(QWidget *parent)
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
 
     d->construct();
+
+    // Delayed model initialization
+    QTimer::singleShot( 0, this, SLOT( _q_initGui() ) );
 }
 
 
@@ -133,6 +137,9 @@ MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
 //    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
 
     d->construct();
+
+    // Delayed model initialization
+    QTimer::singleShot( 0, this, SLOT( _q_initGui() ) );
 }
 
 MarbleWidget::~MarbleWidget()
@@ -183,21 +190,6 @@ void MarbleWidgetPrivate::construct()
     // displayed on the widget background.
     m_widget->setAutoFillBackground( true );
 
-    m_inputhandler = 0;
-    m_popupmenu    = new MarbleWidgetPopupMenu( m_widget, m_model );
-
-    // Handle mouse and keyboard input.
-    m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler );
-    m_widget->setMouseTracking( true );
-
-    // The interface to the measure tool consists of a RMB popup menu
-    // and some signals.
-    MeasureTool  *measureTool = m_map->measureTool();
-    m_widget->connect( m_popupmenu, SIGNAL( addMeasurePoint( qreal, qreal ) ),
-                       measureTool, SLOT( addMeasurePoint( qreal, qreal ) ) );
-    m_widget->connect( m_popupmenu, SIGNAL( removeMeasurePoints() ),
-                       measureTool, SLOT( removeMeasurePoints( ) ) );
-
     // Track the GPS current point at timely intervals.
     m_widget->connect( m_model, SIGNAL( timeout() ),
                        m_widget, SLOT( updateGps() ) );
@@ -208,8 +200,6 @@ void MarbleWidgetPrivate::construct()
 
     m_logZoom  = 0;
 
-    m_widget->goHome();
-
     m_widget->connect( m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
                        m_widget, SLOT( enableInput() ) );
 
@@ -218,6 +208,23 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->connect( m_physics, SIGNAL( valueChanged( qreal ) ),
                         m_widget, SLOT( updateAnimation( qreal ) ) );
+}
+
+void MarbleWidgetPrivate::_q_initGui() {
+    m_popupmenu    = new MarbleWidgetPopupMenu( m_widget, m_model );
+
+    // Handle mouse and keyboard input.
+    m_inputhandler = 0;
+    m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler );
+    m_widget->setMouseTracking( true );
+
+    // The interface to the measure tool consists of a RMB popup menu
+    // and some signals.
+    MeasureTool  *measureTool = m_map->measureTool();
+    m_widget->connect( m_popupmenu, SIGNAL( addMeasurePoint( qreal, qreal ) ),
+                       measureTool, SLOT( addMeasurePoint( qreal, qreal ) ) );
+    m_widget->connect( m_popupmenu, SIGNAL( removeMeasurePoints() ),
+                       measureTool, SLOT( removeMeasurePoints( ) ) );
 }
 
 // ----------------------------------------------------------------
@@ -714,11 +721,13 @@ void MarbleWidget::leaveEvent (QEvent*)
 
 void MarbleWidget::resizeEvent (QResizeEvent*)
 {
+    setUpdatesEnabled( false );
     d->m_map->setSize( width(), height() );
 
     setAttribute(Qt::WA_NoSystemBackground, d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
 
     repaint();
+    setUpdatesEnabled( true );
 }
 
 void MarbleWidget::connectNotify ( const char * signal )

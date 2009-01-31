@@ -40,9 +40,9 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
 void MarbleWidgetPopupMenu::createActions()
 {
     //	Property actions (Left mouse button)
-    //	m_earthaction = new QAction(QIcon("icon.png"), tr("&Earth"), this);
-    m_earthaction = new QAction( tr( "&Earth" ), this );
-    m_earthaction->setData( 0 );
+    //	m_planetAction = new QAction(QIcon("icon.png"), tr("&Earth"), this);
+    m_planetAction = new QAction( tr( "&Earth" ), this );
+    m_planetAction->setData( 0 );
     m_copyCoordinateAction = new QAction( tr( "0 N 0 W" ), this );
 
     //	Tool actions (Right mouse button)
@@ -82,7 +82,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 
     int  actionidx = 1;
 
-    QVector<QPersistentModelIndex>::const_iterator  it;
+    QVector<QModelIndex>::const_iterator  it;
     for ( it = m_featurelist.constBegin();
           it != m_featurelist.constEnd(); ++it ) 
     {
@@ -94,10 +94,19 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     }
 
     // Not implemented yet ;-)
-    m_earthaction->setEnabled( false );
+    m_planetAction->setEnabled( false );
 
-    m_lmbMenu->addAction( m_earthaction );
+    m_lmbMenu->addAction( m_planetAction );
     m_lmbMenu->addSeparator();
+
+    // Setting the proper planet name
+    QString targetString = m_model->planetName();
+    qDebug() << "targetString" << targetString;
+    // FIXME: this should be removed later on ...
+    if ( targetString == "Earth" ) 
+        targetString = tr( "&Earth" );
+
+    m_planetAction->setText( targetString );
 
     qreal  lat;
     qreal  lon;
@@ -130,7 +139,7 @@ void MarbleWidgetPopupMenu::showFeatureInfo( QAction* action )
     int actionidx = action->data().toInt();
 
     if ( actionidx > 0 ) {
-        QPersistentModelIndex index = m_featurelist.at( actionidx -1 );
+        QModelIndex index = m_featurelist.at( actionidx -1 );
 
         PlaceMarkInfoDialog dialog( index, m_widget );
         dialog.exec();

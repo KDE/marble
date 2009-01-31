@@ -57,8 +57,6 @@ class MeasureTool : public QObject
     void  drawTotalDistanceLabel( GeoPainter *painter,
                                   qreal totalDistance );
 
-    bool  testBug(); 
-
  private:
     Q_DISABLE_COPY( MeasureTool )
 
@@ -72,8 +70,6 @@ class MeasureTool : public QObject
     int     m_fontascent;
 
     QPen    m_pen;
-
-    bool    m_useworkaround;
 };
 
 }

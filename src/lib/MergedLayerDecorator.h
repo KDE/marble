@@ -60,6 +60,10 @@ class MergedLayerDecorator : public QObject
  private:
     QImage loadDataset( GeoSceneTexture *textureLayer );
     int maxDivisor( int maximum, int fullLength );
+
+    void initClouds();
+    void initCityLights();
+
     void paintSunShading();
     void paintClouds();
 	

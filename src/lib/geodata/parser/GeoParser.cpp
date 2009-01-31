@@ -155,7 +155,7 @@ void GeoParser::parseDocument()
             // DGMLNameTagHandler assumes that <name> only contains textual
             // children, and reads the joined value of all children using
             // readElementText(). This implicates that tags like <name>
-            // don't contain any children that would need to be procesed using
+            // don't contain any children that would need to be processed using
             // this parseDocument() function.
             if ( processChildren ) {
                 m_nodeStack.push( stackItem );

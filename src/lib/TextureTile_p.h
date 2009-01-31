@@ -41,7 +41,8 @@ class TextureTilePrivate : AbstractTilePrivate {
     TextureTilePrivate( const TileId& id );
     virtual ~TextureTilePrivate();
 
-    uint pixel( int x, int y ) const;
+    inline uint pixel( int x, int y ) const;
+    inline uint pixelF( qreal x, qreal y ) const;
 
     void scaleTileFrom( Marble::GeoSceneTexture *textureLayer, QImage &tile,
                         qreal sourceX, qreal sourceY, int sourceLevel,

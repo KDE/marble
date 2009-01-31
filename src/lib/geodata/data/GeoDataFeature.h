@@ -68,7 +68,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     virtual ~GeoDataFeature();
 
     GeoDataFeature& operator=( const GeoDataFeature& other );
-    bool operator==( const GeoDataFeature& other ) const { return false; };
+    bool operator==( const GeoDataFeature& ) const { return false; };
 
     virtual bool isFolder() const { return false; }
     virtual bool isPlacemark() const { return false; }

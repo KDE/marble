@@ -59,6 +59,13 @@ class TextureTile : public AbstractTile {
     // and color ( uint, 4 bytes ) images.
 
     uint pixel( int x, int y ) const;
+    
+    // Here we retrieve the color value of the requested subpixel on the tile.
+    // This needs to be done differently for grayscale ( uchar, 1 byte ).
+    // and color ( uint, 4 bytes ) images.
+    // Subpixel calculation is done via bilinear interpolation.
+
+    uint pixelF( qreal x, qreal y ) const;
 
  Q_SIGNALS:
     void tileUpdateDone();

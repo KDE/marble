@@ -12,7 +12,7 @@
 #include "PlaceMarkPainter.h"
 
 #include <QtCore/QDebug>
-#include <QtCore/QPersistentModelIndex>
+#include <QtCore/QModelIndex>
 #include <QtCore/QPoint>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QPainter>
@@ -150,7 +150,7 @@ inline void PlaceMarkPainter::drawLabelPixmap( VisiblePlaceMark *mark, bool isSe
 
     QPainter labelPainter;
     QPixmap labelPixmap;
-    const QPersistentModelIndex &index = mark->modelIndex();
+    QModelIndex index = mark->modelIndex();
     GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
 //    GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
 
@@ -236,8 +236,8 @@ bool PlaceMarkPainter::testXBug()
 
     QImage image = pixmap.toImage();
 
-    for ( int x = 0; x < fontwidth; x++ ) {
-        for ( int y = 0; y < fontheight; y++ ) {
+    for ( int x = 0; x < fontwidth; ++x ) {
+        for ( int y = 0; y < fontheight; ++y ) {
             if ( qAlpha( image.pixel( x, y ) ) > 0 )
                 return false;
         }

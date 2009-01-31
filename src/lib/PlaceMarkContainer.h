@@ -63,7 +63,7 @@ class PlaceMarkContainer : public QVector<Marble::GeoDataPlacemark>
     void setName( const QString& name );
 
     /// @brief Sort the placemarks in descending order by population.
-    void sort();
+    void sort( Qt::SortOrder order = Qt::AscendingOrder );
 
     /**
      * @brief  the assignment operator

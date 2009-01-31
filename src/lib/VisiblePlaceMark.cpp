@@ -26,12 +26,12 @@ VisiblePlaceMark::~VisiblePlaceMark()
 {
 }
 
-const QPersistentModelIndex& VisiblePlaceMark::modelIndex() const
+const QModelIndex& VisiblePlaceMark::modelIndex() const
 {
     return m_modelIndex;
 }
 
-void VisiblePlaceMark::setModelIndex( const QPersistentModelIndex &modelIndex )
+void VisiblePlaceMark::setModelIndex( const QModelIndex &modelIndex )
 {
     m_modelIndex = modelIndex;
 }

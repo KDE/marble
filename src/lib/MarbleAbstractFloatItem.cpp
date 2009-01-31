@@ -468,6 +468,10 @@ bool MarbleAbstractFloatItem::eventFilter( QObject *object, QEvent *e )
         return false;
     }
 
+	if ( e->type() == QEvent::MouseMove && !d->m_floatItemMoving ) {
+		return false;
+	}
+
     // Move float items
     bool cursorAboveFloatItem(false);
     if ( e->type() == QEvent::MouseMove

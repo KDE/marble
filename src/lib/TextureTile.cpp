@@ -77,13 +77,82 @@ TextureTilePrivate::~TextureTilePrivate()
 
 uint TextureTilePrivate::pixel( int x, int y ) const
 {
-    if ( m_depth == 1 || m_depth == 8 ) {
+    if ( m_depth == 8 || m_depth == 1 ) {
         if ( !m_isGrayscale )
             return m_rawtile.pixel( x, y );
         else
             return (jumpTable8)[y][x];
     }
     return (jumpTable32)[y][x];
+}
+
+uint TextureTilePrivate::pixelF( qreal x, qreal y ) const
+{
+    // Bilinear interpolation to determine the color of a subpixel 
+
+    int iX = (int)(x);
+    int iY = (int)(y);
+
+    QRgb topLeftValue  =  pixel( iX, iY );
+
+    qreal fY = y - iY;
+
+    // Interpolation in y-direction
+    if ( ( iY + 1 ) < m_rawtile.height() ) {
+
+        QRgb bottomLeftValue  =  pixel( iX, iY + 1 );
+
+        // blending the color values of the top left and bottom left point
+        qreal ml_red   = ( 1.0 - fY ) * qRed  ( topLeftValue  ) + fY * qRed  ( bottomLeftValue  );
+        qreal ml_green = ( 1.0 - fY ) * qGreen( topLeftValue  ) + fY * qGreen( bottomLeftValue  );
+        qreal ml_blue  = ( 1.0 - fY ) * qBlue ( topLeftValue  ) + fY * qBlue ( bottomLeftValue  );
+
+        // Interpolation in x-direction
+        if ( iX + 1 < m_rawtile.width() ) {
+
+            qreal fX = x - iX;
+
+            QRgb topRightValue    =  pixel( iX + 1, iY );
+            QRgb bottomRightValue =  pixel( iX + 1, iY + 1 );
+
+            // blending the color values of the top right and bottom right point
+            qreal mr_red   = ( 1.0 - fY ) * qRed  ( topRightValue ) + fY * qRed  ( bottomRightValue );
+            qreal mr_green = ( 1.0 - fY ) * qGreen( topRightValue ) + fY * qGreen( bottomRightValue );
+            qreal mr_blue  = ( 1.0 - fY ) * qBlue ( topRightValue ) + fY * qBlue ( bottomRightValue );
+    
+            // blending the color values of the resulting middle left 
+            // and middle right points
+            int mm_red   = (int)( ( 1.0 - fX ) * ml_red   + fX * mr_red   );
+            int mm_green = (int)( ( 1.0 - fX ) * ml_green + fX * mr_green );
+            int mm_blue  = (int)( ( 1.0 - fX ) * ml_blue  + fX * mr_blue  );
+    
+            return qRgb( mm_red, mm_green, mm_blue );
+        }
+        else {
+            return qRgb( ml_red, ml_green, ml_blue );
+        }
+    }
+    else {
+        // Interpolation in x-direction
+        if ( iX + 1 < m_rawtile.width() ) {
+
+            qreal fX = x - iX;
+
+            if ( fX == 0.0 ) 
+                return topLeftValue;
+
+            QRgb topRightValue    =  pixel( iX + 1, iY );
+
+            // blending the color values of the top left and top right point
+            int tm_red   = (int)( ( 1.0 - fX ) * qRed  ( topLeftValue ) + fX * qRed  ( topRightValue ) );
+            int tm_green = (int)( ( 1.0 - fX ) * qGreen( topLeftValue ) + fX * qGreen( topRightValue ) );
+            int tm_blue  = (int)( ( 1.0 - fX ) * qBlue ( topLeftValue ) + fX * qBlue ( topRightValue ) );
+
+            return qRgb( tm_red, tm_green, tm_blue );
+        }
+    }
+
+    return topLeftValue;
 }
 
 void TextureTilePrivate::scaleTileFrom( Marble::GeoSceneTexture *textureLayer, QImage &tile,
@@ -316,6 +385,13 @@ uint TextureTile::pixel( int x, int y ) const
     Q_D( const TextureTile );
 
     return d->pixel( x, y );
+}
+
+uint TextureTile::pixelF( qreal x, qreal y ) const
+{
+    Q_D( const TextureTile );
+
+    return d->pixelF( x, y );
 }
 
 int TextureTile::depth() const
