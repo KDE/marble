@@ -30,6 +30,8 @@ namespace Marble
 // forward define all features we can find.
 class GeoDataContainer;
 class GeoDataFolder;
+class GeoDataDocument;
+class GeoDataPlacemark;
 
 class GeoDataStyle;
 class GeoDataStyleSelector;
@@ -63,7 +65,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     
     // copy ctors for derived classes
     GeoDataFeature( const GeoDataContainer& other );
-//    GeoDataFeature( const GeoDataFolder& other );
+    GeoDataFeature( const GeoDataFolder& other );
+    GeoDataFeature( const GeoDataDocument& other );
+    GeoDataFeature( const GeoDataPlacemark& other );
     
     virtual ~GeoDataFeature();
 

@@ -16,6 +16,7 @@
 
 #include "MarbleDirs.h"
 #include "GeoDataParser.h"
+#include "GeoDataFolder.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
@@ -36,6 +37,9 @@ class CopyTest : public QObject {
         void copyPoint();
         void copyPolygon();
         void copyMultiGeometry();
+        void copyDocument();
+        void copyFolder();
+        void copyPlacemark();
     private:
         QStringList coordString;
         GeoDataCoordinates coord1;
@@ -274,6 +278,19 @@ void CopyTest::copyMultiGeometry() {
     QVERIFY(other[4][3] == coord1);
     QVERIFY(other[4][4] == coord2);
     QVERIFY(other[4][5] == coord3);*/
+    QFAIL("Test not implemented");
+}
+
+void CopyTest::copyDocument() {
+    QFAIL("Test not implemented");
+}
+
+void CopyTest::copyFolder() {
+    QFAIL("Test not implemented");
+}
+
+void CopyTest::copyPlacemark() {
+    QFAIL("Test not implemented");
 }
 
 }

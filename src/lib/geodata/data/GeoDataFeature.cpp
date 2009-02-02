@@ -11,7 +11,6 @@
 
 
 #include "GeoDataFeature.h"
-#include "GeoDataFeature_p.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QDataStream>
@@ -24,6 +23,11 @@
 #include "GeoDataStyleMap.h"
 
 #include "GeoDataContainer.h"
+#include "GeoDataDocument.h"
+#include "GeoDataFolder.h"
+#include "GeoDataPlacemark.h"
+
+#include "GeoDataFeature_p.h"
 
 namespace Marble {
 QFont GeoDataFeature::s_defaultFont = QFont("Sans Serif");
@@ -47,6 +51,27 @@ GeoDataFeature::GeoDataFeature( const GeoDataFeature& other )
 }
 
 GeoDataFeature::GeoDataFeature( const GeoDataContainer& other )
+    : GeoDataObject( other ),
+      d( other.GeoDataFeature::d )
+{
+    p()->ref.ref();
+}
+
+GeoDataFeature::GeoDataFeature( const GeoDataFolder& other )
+    : GeoDataObject( other ),
+      d( other.GeoDataFeature::d )
+{
+    p()->ref.ref();
+}
+
+GeoDataFeature::GeoDataFeature( const GeoDataDocument& other )
+    : GeoDataObject( other ),
+      d( other.GeoDataFeature::d )
+{
+    p()->ref.ref();
+}
+
+GeoDataFeature::GeoDataFeature( const GeoDataPlacemark& other )
     : GeoDataObject( other ),
       d( other.GeoDataFeature::d )
 {

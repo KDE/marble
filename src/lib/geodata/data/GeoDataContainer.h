@@ -123,7 +123,9 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      * @param  stream  the stream
      */
     virtual void unpack( QDataStream& stream );
-
+private:
+    friend class GeoDataDocument;
+    GeoDataContainer( GeoDataContainerPrivate *priv );
 };
 
 }

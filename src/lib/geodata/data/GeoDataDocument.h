@@ -53,6 +53,7 @@ class GEODATA_EXPORT GeoDataDocument : public GeoDocument,
                                        public GeoDataContainer {
 public:
     explicit GeoDataDocument( GeoDataObject *parent = 0 );
+    GeoDataDocument( const GeoDataDocument& other );
     ~GeoDataDocument();
 
     virtual EnumFeatureId featureId() const { return GeoDataDocumentId; };
@@ -125,8 +126,7 @@ public:
     virtual void unpack( QDataStream& stream );
 
 private:
-    Q_DISABLE_COPY( GeoDataDocument )
-    GeoDataDocumentPrivate * const d;
+    GeoDataDocumentPrivate *p() const;
 };
 
 }

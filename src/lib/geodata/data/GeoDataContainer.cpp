@@ -30,6 +30,11 @@ GeoDataContainer::GeoDataContainer( GeoDataObject *parent )
 {
 }
 
+GeoDataContainer::GeoDataContainer( GeoDataContainerPrivate *priv )
+    : GeoDataFeature( priv )
+{
+}
+
 GeoDataContainer::GeoDataContainer( const GeoDataContainer& other )
     : GeoDataFeature( other )
 {

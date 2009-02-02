@@ -67,11 +67,6 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     ~GeoDataPlacemark();
     
     /**
-    * Assignment operator
-    */
-    void operator=( const GeoDataPlacemark& other );
-    
-    /**
     * comparison operator is always wrong for now
     */
     bool operator==( const GeoDataPlacemark& other ) const { return false; };
@@ -157,7 +152,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     virtual EnumFeatureId featureId() const { return GeoDataPlacemarkId; };
 
  private:
-    GeoDataPlacemarkPrivate * const d;
+    GeoDataPlacemarkPrivate *p() const;
 };
 
 }
