@@ -112,7 +112,8 @@ bool PntMap::isInitialized() const
 }
 
 PntMap::~PntMap()
-{
+{   
+    m_loader->wait();
     qDeleteAll( begin(), end() );
 }
 

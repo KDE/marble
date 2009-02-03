@@ -99,6 +99,10 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalized
 
 void PlaceMarkManager::cleanupLoader( PlaceMarkLoader* loader )
 {
+    foreach( PlaceMarkLoader *loader, m_loaderList ) {
+        loader->wait();
+    }
+
     m_loaderList.removeAll( loader );
     if ( loader->isFinished() ) {
          delete loader;
