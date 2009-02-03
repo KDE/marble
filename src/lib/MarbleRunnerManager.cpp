@@ -54,8 +54,11 @@ MarbleRunnerManager::~MarbleRunnerManager()
     {
         runner->quit();
         runner->wait();
-        m_runners.removeOne(runner);
-        delete runner;
+        int index = indexOf(runner);
+        if (index != -1) {
+            removeAt(index);
+            delete runner;
+        }
     }
 }
 
