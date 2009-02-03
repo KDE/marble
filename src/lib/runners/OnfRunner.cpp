@@ -65,14 +65,13 @@ void OnfRunner::fail()
     //in order to have a balanced count of active runners. So
     //we emit runnerFinished() to balance the previous failed runnerStarted()
     QVector<GeoDataPlacemark*> empty;
-    emit runnerFinished( empty );
+    emit runnerFinished( this, empty );
     return;
 }
 
-void OnfRunner::parse(const QString &input)
+void OnfRunner::run()
 {
-    emit runnerStarted();
-    if( input.isEmpty() ) {
+    if( m_input.isEmpty() ) {
         fail();
     }
     //no point to keep downloading if we're doing a new one
@@ -88,8 +87,8 @@ void OnfRunner::parse(const QString &input)
         delete m_buffer;
     }
     m_buffer = new QBuffer;
-    qDebug() << "ONF search: GET /namefinder/search.xml?find=" << input;
-    m_http->get( "/namefinder/search.xml?find=" + input, m_buffer );
+    qDebug() << "ONF search: GET /namefinder/search.xml?find=" << m_input;
+    m_http->get( "/namefinder/search.xml?find=" + m_input, m_buffer );
 }
 
 void OnfRunner::slotRequestFinished( int id, bool error )
@@ -123,7 +122,7 @@ void OnfRunner::slotRequestFinished( int id, bool error )
     foreach( GeoDataPlacemark* placemark, placemarks ) {
         placemark->setVisualCategory( category() );
     }
-    emit runnerFinished( placemarks );
+    emit runnerFinished( this, placemarks );
     return;
 }
 

@@ -23,6 +23,8 @@
 
 #include "MarbleAbstractRunner.h"
 
+#include <QtCore/QString>
+
 namespace Marble
 {
 
@@ -33,9 +35,8 @@ public:
     LatLonRunner(QObject *parent = 0);
     ~LatLonRunner();
     GeoDataFeature::GeoDataVisualCategory category() const;
+    void run();
     
-public slots:
-    void parse(const QString &input);
 };
 
 }

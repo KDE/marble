@@ -49,15 +49,13 @@ LatLonRunner::~LatLonRunner()
 {
 }
 
-void LatLonRunner::parse(const QString &input)
+void LatLonRunner::run()
 {
-    emit runnerStarted();
-    
     bool successful = false;
-    GeoDataCoordinates coord = GeoDataCoordinates::fromString( input, successful );
+    GeoDataCoordinates coord = GeoDataCoordinates::fromString( m_input, successful );
     
     GeoDataPlacemark *placemark = new GeoDataPlacemark();
-    placemark->setName( input );
+    placemark->setName( m_input );
     qreal lon, lat;
     coord.geoCoordinates( lon, lat );
     placemark->setCoordinate( lon, lat );
@@ -70,7 +68,7 @@ void LatLonRunner::parse(const QString &input)
         vector.append( placemark );
     }
     
-    emit runnerFinished( vector );    
+    emit runnerFinished( this, vector );    
 }
 
 }
