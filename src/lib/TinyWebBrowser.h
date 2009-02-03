@@ -15,19 +15,21 @@
 // Author: Torsten Rahn
 //
 
+#include <qglobal.h>
 
 #ifndef TINYWEBBROWSER_H
 #define TINYWEBBROWSER_H
+
+// namespace Marble
+// {
+
+#if QT_VERSION < 0x040400
 
 #include <QtCore/QString>
 #include <QtCore/QVariant>
 #include <QtGui/QTextBrowser>
 
 class QUrl;
-
-namespace Marble
-{
-
 class HttpDownloadManager;
 class CacheStoragePolicy;
 
@@ -42,7 +44,6 @@ class TinyWebBrowser : public QTextBrowser
     public Q_SLOTS:
         void setSource ( const QString& urlString );
         void print();
-
 
     Q_SIGNALS:
         void backwardAvailable ( bool );
@@ -64,6 +65,34 @@ class TinyWebBrowser : public QTextBrowser
         QString         m_source;
 };
 
-}
+#else
+
+#include <QtWebKit/QWebView>
+#include <QtGui/QDesktopServices>
+
+class TinyWebBrowser : public QWebView
+{
+    Q_OBJECT
+
+ public:
+    TinyWebBrowser( QWidget* parent = 0 );
+    ~TinyWebBrowser();
+
+ public Q_SLOTS:
+    void setSource( const QString& relativeUrl );
+    void print();
+
+ Q_SIGNALS:
+    void statusMessage( QString );
+
+ private Q_SLOTS:
+    void openExternalLink( QUrl );
+
+ private:
+    QString         m_source;
+};
+#endif
+
+// }
 
 #endif // TINYWEBBROWSER_H
