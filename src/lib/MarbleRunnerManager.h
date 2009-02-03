@@ -31,8 +31,7 @@ namespace Marble
 class MarblePlacemarkModel;
 class GeoDataPlacemark;
 
-class LatLonRunner;
-class OnfRunner;
+class MarbleAbstractRunner;
 
 class MarbleRunnerManager : public QObject
 {
@@ -48,18 +47,16 @@ public slots:
 signals:
     void allDone();
     void modelChanged( MarblePlacemarkModel *model );
-    //tells runners to make it so
-    void engage(QString text);
+
 private slots:
-    void slotRunnerFinished(QVector<GeoDataPlacemark*> result);
-    void slotRunnerStarted();
+    void slotRunnerFinished( MarbleAbstractRunner* runner, QVector<GeoDataPlacemark*> result);
+
 private:
     int m_activeRunners;
     QString m_lastString;
     MarblePlacemarkModel *m_model;
+    QList<MarbleAbstractRunner*> m_runners;
     
-    LatLonRunner *m_latlonRunner;
-    OnfRunner *m_onfRunner;
 };
 
 }
