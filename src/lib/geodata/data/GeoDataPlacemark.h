@@ -7,7 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
 
