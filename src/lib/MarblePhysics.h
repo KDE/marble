@@ -24,7 +24,7 @@ class MarblePhysics : public QObject
  Q_OBJECT
 
  public:
-    MarblePhysics();
+    MarblePhysics( QObject * parent );
     ~MarblePhysics();
 
     void jumpTo( const GeoDataCoordinates &targetPoint );

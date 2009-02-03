@@ -73,7 +73,7 @@ class MarbleWidgetPrivate
           m_stillQuality( Marble::High ), m_animationQuality( Marble::Low ),
           m_animationsEnabled( false ),
           m_inputhandler( 0 ),
-          m_physics( new MarblePhysics() ),
+          m_physics( new MarblePhysics( parent ) ),
           m_proxyHost(),
           m_proxyPort( 0 )
     {
@@ -82,7 +82,6 @@ class MarbleWidgetPrivate
 
     ~MarbleWidgetPrivate()
     {
-        delete m_physics;
         delete m_map;
     }
 

@@ -16,8 +16,9 @@
 
 using namespace Marble;
 
-MarblePhysics::MarblePhysics()
-    : m_jumpDuration( 2000 )
+MarblePhysics::MarblePhysics( QObject * parent )
+    : QObject( parent ), 
+      m_jumpDuration( 2000 )
 {
     m_timeLine = new QTimeLine( m_jumpDuration );
     m_timeLine->setFrameRange( 0, 500 );
