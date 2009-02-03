@@ -43,14 +43,14 @@ class GeoDataLineStringPrivate;
  * currently used for a very similar purpose.
  */
 
-class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates>,
-                                         public GeoDataGeometry {
+class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
 
  public:
-
+    typedef QVector<GeoDataCoordinates>::Iterator Iterator;
+    typedef QVector<GeoDataCoordinates>::ConstIterator ConstIterator;
+    
     explicit GeoDataLineString( GeoDataObject *parent = 0, TessellationFlags f = NoTessellation);
-    GeoDataLineString( const GeoDataLineString & );
-    GeoDataLineString& operator=( const GeoDataLineString & );
+    GeoDataLineString( const GeoDataLineString &other );
 
     virtual ~GeoDataLineString();
 
@@ -64,8 +64,24 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates>,
 
     GeoDataLatLonAltBox latLonAltBox() const;
 
+    int size() const;
+    GeoDataCoordinates& at( int pos );
+    const GeoDataCoordinates& at( int pos ) const;
+    GeoDataCoordinates& operator[]( int pos );
+    const GeoDataCoordinates& operator[]( int pos ) const;
+
+    GeoDataCoordinates& first();
+    const GeoDataCoordinates& first() const;
+    GeoDataCoordinates& last();
+    const GeoDataCoordinates& last() const;
+
     void append ( const GeoDataCoordinates& value );
     GeoDataLineString& operator << ( const GeoDataCoordinates& value );
+    
+    QVector<GeoDataCoordinates>::Iterator begin();
+    QVector<GeoDataCoordinates>::Iterator end();
+    QVector<GeoDataCoordinates>::ConstIterator constBegin() const;
+    QVector<GeoDataCoordinates>::ConstIterator constEnd() const;
     void clear();
 
     QVector<GeoDataCoordinates>::Iterator erase ( QVector<GeoDataCoordinates>::Iterator pos );
@@ -85,9 +101,7 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates>,
 
     virtual EnumGeometryId geometryId() const { return GeoDataLineStringId; };
  protected:
-    GeoDataLineStringPrivate  * d;
- private:
-    void detach();
+    GeoDataLineStringPrivate  *p() const;
 };
 
 }
