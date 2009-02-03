@@ -25,6 +25,12 @@ namespace Marble
 
 class GeoDataGeometryPrivate;
 
+class GeoDataPoint;
+class GeoDataPolygon;
+class GeoDataLineString; // LinearRing is the same!
+class GeoDataMultiGeometry;
+class GeoDataModel; // not implemented yet
+
 /**
  * @short A base class for all geodata features
  *
@@ -38,7 +44,23 @@ class GeoDataGeometryPrivate;
 
 class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 {
+    friend class GeoDataPoint;
+    friend class GeoDataPolygon;
+    friend class GeoDataLineString;
+    friend class GeoDataMultiGeometry;
+    friend class GeoDataModel;
  public:
+    GeoDataGeometry( GeoDataObject *parent = 0 );
+    GeoDataGeometry( const GeoDataGeometry& other );
+    GeoDataGeometry( const GeoDataPolygon& other );
+    GeoDataGeometry( const GeoDataPoint& other );
+    GeoDataGeometry( const GeoDataLineString& other );
+    GeoDataGeometry( const GeoDataMultiGeometry& other );
+//    GeoDataGeometry( const GeoDataModel& other );
+    virtual bool operator==( const GeoDataGeometry& other ) { return false; };
+    
+    virtual ~GeoDataGeometry();
+
     virtual bool isFolder() const { return false; }
     virtual EnumGeometryId geometryId() const { return InvalidGeometryId; };
 
@@ -48,20 +70,15 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     AltitudeMode altitudeMode() const;
     void setAltitudeMode( const AltitudeMode altitudeMode );
 
-    explicit GeoDataGeometry( GeoDataObject *parent = 0 );
-    GeoDataGeometry( const GeoDataGeometry& other );
-    virtual bool operator==( const GeoDataGeometry& other ) { return false; };
-    virtual GeoDataGeometry& operator=( const GeoDataGeometry& other );
-    
-    virtual ~GeoDataGeometry();
-
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
     /// Unserialize the contents of the feature from @p stream.
     virtual void unpack( QDataStream& stream );
 
- protected:
-    GeoDataGeometryPrivate* const d;
+ private:
+    GeoDataGeometryPrivate* p() const;
+    void* d;
+    GeoDataGeometry( GeoDataGeometryPrivate* priv );
 };
 
 }
