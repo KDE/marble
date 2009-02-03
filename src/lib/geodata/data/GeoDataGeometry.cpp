@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2008      Torsten Rahn <rahn@kde.org>
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 // Copyright 2008      Inge Wallin <inge@lysator.liu.se>
 //
 
@@ -82,6 +82,17 @@ GeoDataGeometry::~GeoDataGeometry()
 GeoDataGeometryPrivate* GeoDataGeometry::p() const
 {
     return static_cast<GeoDataGeometryPrivate*>(d);
+}
+
+GeoDataGeometry& GeoDataGeometry::operator=( const GeoDataGeometry& other )
+{
+    if (!p()->ref.deref())
+        delete d;
+
+    d = other.d;
+    p()->ref.ref();
+    
+    return *this;
 }
 
 bool GeoDataGeometry::extrude() const
