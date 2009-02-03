@@ -173,9 +173,6 @@ QStringList MapThemeManager::findMapThemes( const QString& basePath )
         }
     }
 
-//     for (int i = 0; i < mapFiles.size(); ++i)
-//         qDebug() << basePath << "-Files: " << mapFiles.at(i);
-
     return mapFiles;
 }
 
@@ -194,9 +191,6 @@ QStringList MapThemeManager::findMapThemes()
             --i;
         }
     }
-
-    for (int i = 0; i < allMapFiles.size(); ++i)
-       qDebug() << "Files: " << allMapFiles.at(i);
 
     return allMapFiles;
 }
@@ -366,32 +360,5 @@ void MapThemeManager::addMapThemePaths( const QString& mapPathName, QStringList&
         }
     }
 }
-
-/*
-//  Should we put this into 
-//  static QString MapThemeManager::suggestTheme( QString themeSuggestedBySettings ); 
-//  ??
-
-    QStringList  mapthemedirs = findMapThemes( "maps/" );
-    QString      selectedmap;
-
-    // We need at least one maptheme to run Marble.
-    if ( mapthemedirs.count() == 0 ) {
-        qDebug() << "Could not find any maps! Exiting ...";
-        exit(-1);
-    }
-
-    // If any map directories were found, try to find the default map:
-    // srtm.  If we can find that, just grab the first one.
-    if ( mapthemedirs.count() >= 1 ) {
-        QStringList  tmp = mapthemedirs.filter( "srtm.dgml" );
-        if ( tmp.count() >= 1 )
-            selectedmap = tmp[0];
-        else
-            selectedmap = mapthemedirs[0];
-    }
-
-//    setMapTheme( selectedmap, parent, Spherical );
-*/
 
 #include "MapThemeManager.moc"

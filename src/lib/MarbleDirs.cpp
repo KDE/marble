@@ -90,9 +90,6 @@ QStringList MarbleDirs::entryList( const QString& relativePath, QDir::Filters fi
         }
     }
 
-    for (int i = 0; i < allFiles.size(); ++i)
-       qDebug() << "Files: " << allFiles.at(i);
-
     return allFiles;
 }
 
@@ -111,9 +108,6 @@ QStringList MarbleDirs::pluginEntryList( const QString& relativePath, QDir::Filt
             --i;
         }
     }
-
-    for (int i = 0; i < allFiles.size(); ++i)
-       qDebug() << "Files: " << allFiles.at(i);
 
     return allFiles;
 }
