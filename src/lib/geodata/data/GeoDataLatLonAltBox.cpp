@@ -191,7 +191,7 @@ bool GeoDataLatLonAltBox::intersects( const GeoDataLatLonAltBox &other ) const
 GeoDataLatLonAltBox GeoDataLatLonAltBox::fromLineString(  const GeoDataLineString& lineString  )
 {
     // If the line string is empty return a boundingbox that contains everything
-    if ( lineString.isEmpty() ) {
+    if ( lineString.size() == 0 ) {
         return GeoDataLatLonAltBox();
     }
 
@@ -208,7 +208,7 @@ GeoDataLatLonAltBox GeoDataLatLonAltBox::fromLineString(  const GeoDataLineStrin
         return temp;
     }
 
-    QVector<GeoDataCoordinates>::ConstIterator it( lineString.begin() );
+    QVector<GeoDataCoordinates>::ConstIterator it( lineString.constBegin() );
     QVector<GeoDataCoordinates>::ConstIterator itEnd( lineString.constEnd() );
 
     for ( ; it != itEnd; ++it )

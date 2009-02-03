@@ -426,7 +426,7 @@ void GeoDataLatLonBox::unpack( QDataStream& stream )
 GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lineString  )
 {
     // If the line string is empty return a boundingbox that contains everything
-    if ( lineString.isEmpty() ) {
+    if ( lineString.size() == 0 ) {
         return GeoDataLatLonBox();
     }
 
@@ -466,7 +466,7 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
     int currentSign = ( lon < 0 ) ? -1 : +1;
     int previousSign = currentSign;
 
-    QVector<GeoDataCoordinates>::ConstIterator it( lineString.begin() );
+    QVector<GeoDataCoordinates>::ConstIterator it( lineString.constBegin() );
     QVector<GeoDataCoordinates>::ConstIterator itEnd( lineString.constEnd() );
 
     for ( ; it != itEnd; ++it )
