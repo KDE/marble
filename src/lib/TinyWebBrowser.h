@@ -20,14 +20,14 @@
 #ifndef TINYWEBBROWSER_H
 #define TINYWEBBROWSER_H
 
-// namespace Marble
-// {
-
 #if QT_VERSION < 0x040400
 
 #include <QtCore/QString>
 #include <QtCore/QVariant>
 #include <QtGui/QTextBrowser>
+
+namespace Marble
+{
 
 class QUrl;
 class HttpDownloadManager;
@@ -65,10 +65,15 @@ class TinyWebBrowser : public QTextBrowser
         QString         m_source;
 };
 
+}
+
 #else
 
 #include <QtWebKit/QWebView>
 #include <QtGui/QDesktopServices>
+
+namespace Marble
+{
 
 class TinyWebBrowser : public QWebView
 {
@@ -91,8 +96,8 @@ class TinyWebBrowser : public QWebView
  private:
     QString         m_source;
 };
-#endif
 
-// }
+}
+#endif
 
 #endif // TINYWEBBROWSER_H
