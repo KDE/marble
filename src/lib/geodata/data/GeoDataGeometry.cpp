@@ -79,6 +79,19 @@ GeoDataGeometry::~GeoDataGeometry()
     delete d;
 }
 
+void  GeoDataGeometry::detach()
+{
+    if(p()->ref == 1)
+        return;
+
+     GeoDataGeometryPrivate* new_d = static_cast< GeoDataGeometryPrivate*>(p()->copy());
+
+    if (!p()->ref.deref())
+        delete d;
+
+    d = new_d;
+}
+
 GeoDataGeometryPrivate* GeoDataGeometry::p() const
 {
     return static_cast<GeoDataGeometryPrivate*>(d);

@@ -76,6 +76,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     /// Unserialize the contents of the feature from @p stream.
     virtual void unpack( QDataStream& stream );
 
+    void detach();
  private:
     GeoDataGeometryPrivate* p() const;
     void* d;
