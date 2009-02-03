@@ -56,6 +56,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 {
     friend class GeoDataContainer;
     friend class GeoDataFolder;
+    friend class GeoDataDocument;
+    friend class GeoDataPlacemark;
  public:
     GeoDataFeature( GeoDataObject *parent = 0 );
     /// Create a new GeoDataFeature with @p name as its name.
