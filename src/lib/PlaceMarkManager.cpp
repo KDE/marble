@@ -45,6 +45,12 @@ PlaceMarkManager::PlaceMarkManager( QObject *parent )
 
 PlaceMarkManager::~PlaceMarkManager()
 {
+    foreach( PlaceMarkLoader *loader, m_loaderList ) {
+        if ( loader ) {
+            loader->wait();
+        }
+    }
+
     delete m_model;
     /* do not delete the m_geomodel here
      * it is not this models property
@@ -99,16 +105,9 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalized
 
 void PlaceMarkManager::cleanupLoader( PlaceMarkLoader* loader )
 {
-    foreach( PlaceMarkLoader *loader, m_loaderList ) {
-        if ( loader ) {
-            loader->wait();
-        }
-    }
-
     m_loaderList.removeAll( loader );
     if ( loader->isFinished() ) {
-        delete loader;
-        loader = 0;
+         delete loader;
     }
 }
 
