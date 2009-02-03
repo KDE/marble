@@ -79,7 +79,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
     * Return a pointer to the current Geometry object
     */
-    GeoDataGeometry* geometry();
+    GeoDataGeometry* geometry() const;
 
     /**
      * Return the coordinate of the placemark as @p longitude

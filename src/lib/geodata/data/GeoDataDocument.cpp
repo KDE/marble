@@ -61,12 +61,14 @@ QString GeoDataDocument::fileName() const
 
 void GeoDataDocument::setFileName( const QString &value )
 {
+    detach();
     p()->m_filename = value;
 }
 
 void GeoDataDocument::addStyle( GeoDataStyle* style )
 {
     Q_ASSERT( style );
+    detach();
     qDebug( "GeoDataDocument: Add new style" );
     p()->m_styleHash.insert( style->styleId(), style );
 }
@@ -74,6 +76,7 @@ void GeoDataDocument::addStyle( GeoDataStyle* style )
 void GeoDataDocument::removeStyle( GeoDataStyle* style )
 {
     Q_ASSERT( style );
+    detach();
     qDebug( "GeoDataDocument: remove style" );
     p()->m_styleHash.remove( style->styleId() );
 }
@@ -95,6 +98,7 @@ QList<GeoDataStyle*> GeoDataDocument::styles() const
 void GeoDataDocument::addStyleMap( GeoDataStyleMap* map )
 {
     Q_ASSERT( map );
+    detach();
     qDebug( "GeoDataDocument: Add new styleMap" );
     p()->m_styleMapHash.insert( map->styleId(), map );
 }
@@ -102,6 +106,7 @@ void GeoDataDocument::addStyleMap( GeoDataStyleMap* map )
 void GeoDataDocument::removeStyleMap( GeoDataStyleMap* map )
 {
     Q_ASSERT( map );
+    detach();
     qDebug( "GeoDataDocument: remove styleMap" );
     p()->m_styleMapHash.remove( map->styleId() );
 }
@@ -134,6 +139,7 @@ void GeoDataDocument::pack( QDataStream& stream ) const
 
 void GeoDataDocument::unpack( QDataStream& stream )
 {
+    detach();
     GeoDataContainer::unpack( stream );
 
     int size = 0;

@@ -48,7 +48,7 @@ GeoDataPlacemarkPrivate* GeoDataPlacemark::p() const
     return static_cast<GeoDataPlacemarkPrivate*>(d);
 }
 
-GeoDataGeometry* GeoDataPlacemark::geometry()
+GeoDataGeometry* GeoDataPlacemark::geometry() const
 {
     if( p()->m_geometry )
         return p()->m_geometry;
@@ -69,41 +69,48 @@ void GeoDataPlacemark::coordinate( qreal& lon, qreal& lat, qreal& alt ) const
 
 void GeoDataPlacemark::setCoordinate( qreal lon, qreal lat, qreal alt )
 {
+    detach();
     p()->m_coordinate = GeoDataPoint( lon, lat, alt, this );
 }
 
 void GeoDataPlacemark::setCoordinate( const GeoDataPoint &point )
 {
+    detach();
     p()->m_coordinate = GeoDataPoint( point );
     p()->m_coordinate.setParent( this );
 }
 
 void GeoDataPlacemark::setGeometry( const GeoDataPoint& point )
 {
+    detach();
     delete p()->m_geometry;
     p()->m_geometry = new GeoDataPoint( point );
 }
 
 void GeoDataPlacemark::setGeometry( const GeoDataLineString& point )
 {
+    detach();
     delete p()->m_geometry;
     p()->m_geometry = new GeoDataLineString( point );
 }
 
 void GeoDataPlacemark::setGeometry( const GeoDataLinearRing& point )
 {
+    detach();
     delete p()->m_geometry;
     p()->m_geometry = new GeoDataLinearRing( point );
 }
 
 void GeoDataPlacemark::setGeometry( const GeoDataPolygon& point )
 {
+    detach();
     delete p()->m_geometry;
     p()->m_geometry = new GeoDataPolygon( point );
 }
 
 void GeoDataPlacemark::setGeometry( const GeoDataMultiGeometry& point )
 {
+    detach();
     delete p()->m_geometry;
     p()->m_geometry = new GeoDataMultiGeometry( point );
 }
@@ -115,6 +122,7 @@ qreal GeoDataPlacemark::area() const
 
 void GeoDataPlacemark::setArea( qreal area )
 {
+    detach();
     p()->m_area = area;
 }
 
@@ -125,6 +133,7 @@ qint64 GeoDataPlacemark::population() const
 
 void GeoDataPlacemark::setPopulation( qint64 population )
 {
+    detach();
     p()->m_population = population;
 }
 
@@ -135,6 +144,7 @@ const QString GeoDataPlacemark::countryCode() const
 
 void GeoDataPlacemark::setCountryCode( const QString &countrycode )
 {
+    detach();
     p()->m_countrycode = countrycode;
 }
 
@@ -154,6 +164,7 @@ void GeoDataPlacemark::pack( QDataStream& stream ) const
 
 void GeoDataPlacemark::unpack( QDataStream& stream )
 {
+    detach();
     GeoDataFeature::unpack( stream );
 
     stream >> p()->m_countrycode;

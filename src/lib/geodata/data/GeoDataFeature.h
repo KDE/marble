@@ -291,13 +291,13 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     static QFont defaultFont();
     static void setDefaultFont( const QFont& font );
 
+    void detach();
  private:
     static void initializeDefaultStyles();
 
  protected:
     // the d-pointer needs to be protected to be accessible from derived classes
     void* d;
-    void detach();
     GeoDataFeature( GeoDataFeaturePrivate* priv );
 
  private:
