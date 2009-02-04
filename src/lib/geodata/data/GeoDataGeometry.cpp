@@ -76,7 +76,8 @@ GeoDataGeometry::GeoDataGeometry( GeoDataGeometryPrivate* priv )
 
 GeoDataGeometry::~GeoDataGeometry()
 {
-    delete d;
+    if (!p()->ref.deref())
+        delete d;
 }
 
 void  GeoDataGeometry::detach()
