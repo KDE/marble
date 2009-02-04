@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 // Copyright 2008      Inge Wallin <inge@lysator.liu.se>
 //
 
@@ -43,8 +43,7 @@ class GeoDataPolygonPrivate;
 class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
  public:
     explicit GeoDataPolygon( GeoDataObject *parent = 0, TessellationFlags f = NoTessellation);
-    GeoDataPolygon( const GeoDataPolygon & );
-    GeoDataPolygon& operator=( const GeoDataPolygon & );
+    GeoDataPolygon( const GeoDataPolygon &other );
 
     virtual ~GeoDataPolygon();
 
@@ -71,7 +70,7 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
 
     virtual EnumGeometryId geometryId() const { return GeoDataPolygonId; };
  protected:
-    GeoDataPolygonPrivate * const d;
+    GeoDataPolygonPrivate *p() const;
 };
 
 class GEODATA_EXPORT GeoDataOuterBoundary : public GeoDataPolygon {};
