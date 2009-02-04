@@ -24,7 +24,6 @@
 #include "ViewportParams.h"
 
 // #define MARBLE_DEBUG
-// #define GEOPAINTER_DEBUG
 
 
 namespace Marble
@@ -386,13 +385,10 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString )
     QVector<QPolygonF*> polygons;
     d->createPolygonsFromLineString( lineString, polygons );
 
+    qDebug() << "Number of polygons:" << polygons.count();
+
     foreach( QPolygonF* itPolygon, polygons ) {
-        // Using QPainter instead of ClipPainter until some bugs are fixed.
-#ifdef GEOPAINTER_DEBUG
-        QPainter::drawPolyline( *itPolygon );
-#else
         ClipPainter::drawPolyline( *itPolygon );
-#endif
     }
 
     qDeleteAll( polygons );
@@ -412,12 +408,7 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRul
     d->createPolygonsFromLinearRing( linearRing, polygons );
 
     foreach( QPolygonF* itPolygon, polygons ) {
-        // Using QPainter instead of ClipPainter until some bugs are fixed.
-#ifdef GEOPAINTER_DEBUG
-        QPainter::drawPolygon( *itPolygon );
-#else
         ClipPainter::drawPolygon( *itPolygon );
-#endif
     }
 
     qDeleteAll( polygons );
@@ -456,12 +447,7 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fill
     }
 
     foreach( QPolygonF* itOuterPolygon, outerPolygons ) {
-        // Using QPainter instead of ClipPainter until some bugs are fixed.
-#ifdef GEOPAINTER_DEBUG
-        QPainter::drawPolygon( *itOuterPolygon );
-#else
         ClipPainter::drawPolygon( *itOuterPolygon );
-#endif
     }
 
     qDeleteAll( outerPolygons );    

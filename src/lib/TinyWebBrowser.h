@@ -26,12 +26,12 @@
 #include <QtCore/QVariant>
 #include <QtGui/QTextBrowser>
 
+class QUrl;
+
 namespace Marble
 {
-
-class QUrl;
-class HttpDownloadManager;
 class CacheStoragePolicy;
+class HttpDownloadManager;
 
 class TinyWebBrowser : public QTextBrowser
 {
@@ -62,6 +62,7 @@ class TinyWebBrowser : public QTextBrowser
         Q_DISABLE_COPY ( TinyWebBrowser )
         CacheStoragePolicy *m_storagePolicy;
         HttpDownloadManager *m_downloadManager;
+
         QString         m_source;
 };
 
