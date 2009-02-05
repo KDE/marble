@@ -93,7 +93,9 @@ bool twitterPlugin::render(GeoPainter *painter, ViewportParams *viewport,
 
     if (/*privateFlagForRenderingTwitts >= */1) {
         for (int counter = 0;counter < 4;counter++);
-            /*painter->drawAnnotation(twitsWithLocation[counter].location,
+painter->drawAnnotation(GeoDataCoordinates(0.0,0.0),"hiiiiiiiiii");            
+
+/*painter->drawAnnotation(twitsWithLocation[counter].location,
 				    parsedData[counter].user + " said \n"
 				    + parsedData[counter].text,
 				    QSize(140, 140) ;*/
@@ -133,8 +135,8 @@ void twitterPlugin::downloadtwitter(int rangeFrom , int rangeTo , qreal east , q
 
 void twitterPlugin::findLatLonOfStreetAddress(QString streetAddress)
 {
-    m_downloadManager->addJob("http://maps.google.com/maps/geo?q=" + streetAddress + "&output=json&key=ABQIAAAASD_v8YRzG0tBD18730KjmRTxoHoIpYL45xcSRJH0O7cH64DuXRT7rQeRcgCLAhjkteQ8vkWAATM_JQ", streetAddress, streetAddress);
-    qDebug() << "twitter added Geo Coding job for " << streetAddress;
+//    m_downloadManager->addJob("http://maps.google.com/maps/geo?q=" + streetAddress + "&output=json&key=ABQIAAAASD_v8YRzG0tBD18730KjmRTxoHoIpYL45xcSRJH0O7cH64DuXRT7rQeRcgCLAhjkteQ8vkWAATM_JQ", streetAddress, streetAddress);
+//    qDebug() << "twitter added Geo Coding job for " << streetAddress;
 }
 
 void twitterPlugin::slotGeoCodingReplyRecieved(QString relativeUrlString, QString id)
