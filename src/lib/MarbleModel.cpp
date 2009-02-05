@@ -167,6 +167,7 @@ MarbleModel::MarbleModel( QObject *parent )
     
     if( MarbleModelPrivate::refCounter == 1 ) {
         d->m_veccomposer = new VectorComposer();
+        d->m_texcolorizer = 0;
         /* d->m_texcolorizer is not initialized here since it takes a long time
            to create the palette and it might not even be used. Instead it's created
            in setMapTheme if the theme being loaded does need it. If the theme
