@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2008      Claudiu Covaci <claudiu.covaci@gmail.com>"
+// Copyright 2009      Torsten Rahn <tackat@kde.org>"
 //
 
 #ifndef MAPTHEMESORTFILTERPROXYMODEL_H
