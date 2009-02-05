@@ -120,7 +120,7 @@ MarbleWidget::MarbleWidget(QWidget *parent)
     : QWidget( parent ),
       d( new MarbleWidgetPrivate( new MarbleMap(), this ) )
 {
-    QDBusConnection::sessionBus().registerObject("/MarbleWidget", this, QDBusConnection::QDBusConnection::ExportAllSlots);
+    QDBusConnection::sessionBus().registerObject("/MarbleWidget", this, QDBusConnection::ExportAllSlots);
 
     d->construct();
 
