@@ -28,8 +28,6 @@
 #include <QtGui/QPixmap>
 #include <QtDesigner/QDesignerExportWidget>
 
-//#include <QtDBus/QtDBus>
-
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"       // In geodata/data/
 #include "MarbleWidgetInputHandler.h"
@@ -115,7 +113,7 @@ class GeoSceneDocument;
 class MARBLE_EXPORT MarbleWidget : public QWidget
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.marble")
+    Q_CLASSINFO("D-Bus Interface", "org.kde.MarbleWidget")
 
     Q_PROPERTY(int zoom          READ zoom            WRITE zoomView)
 
