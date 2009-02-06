@@ -49,8 +49,16 @@ PluginManager::PluginManager( QObject *parent )
 
 PluginManager::~PluginManager()
 {
-    qDeleteAll( d->m_renderPlugins );
+    qDebug() << "deleting all render Plugins!";
+    QList<MarbleRenderPlugin *>::const_iterator i;
+    for (i = d->m_renderPlugins.constBegin(); i != d->m_renderPlugins.constEnd(); ++i)
+    {
+        qDebug() << "rp:" << (long) (*i);
+    }
+    
+    QList<MarbleRenderPlugin*> plugs = d->m_renderPlugins;
     d->m_renderPlugins.clear();
+    qDeleteAll( plugs );
     delete d;
 }
 
@@ -96,9 +104,10 @@ void PluginManager::loadPlugins()
 
         MarbleRenderPlugin * layerPlugin;
         if ( obj ) {
-            layerPlugin = qobject_cast<MarbleRenderPlugin *>(obj);
+            layerPlugin = qobject_cast<MarbleRenderPlugin *>(obj)->pluginInstance();
         }
 
+        qDebug() << "loading: " << obj << layerPlugin;
         if( obj && layerPlugin ) {
             d->m_renderPlugins.append( layerPlugin );
         }
