@@ -96,7 +96,7 @@ void PluginManager::loadPlugins()
 
         MarbleRenderPlugin * layerPlugin;
         if ( obj ) {
-            layerPlugin = qobject_cast<MarbleRenderPlugin *>(obj);
+            layerPlugin = qobject_cast<MarbleRenderPlugin *>(obj)->pluginInstance();
         }
 
         if( obj && layerPlugin ) {

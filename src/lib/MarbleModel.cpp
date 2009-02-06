@@ -167,6 +167,7 @@ MarbleModel::MarbleModel( QObject *parent )
     
     if( MarbleModelPrivate::refCounter == 1 ) {
         d->m_veccomposer = new VectorComposer();
+        d->m_texcolorizer = 0;
         /* d->m_texcolorizer is not initialized here since it takes a long time
            to create the palette and it might not even be used. Instead it's created
            in setMapTheme if the theme being loaded does need it. If the theme
@@ -230,7 +231,6 @@ MarbleModel::~MarbleModel()
     if( MarbleModelPrivate::refCounter == 1 ) {
         delete d->m_veccomposer;
         delete d->m_texcolorizer;
-        MarbleModelPrivate::refCounter.deref();
     }
     delete d->m_gridmap;
     delete d->m_geometrymodel;
@@ -245,6 +245,7 @@ MarbleModel::~MarbleModel()
     delete d->m_sunLocator;
     delete d->m_dateTime;
     delete d;
+    MarbleModelPrivate::refCounter.deref();
     qDebug() << "Model deleted:" << this;
 }
 
