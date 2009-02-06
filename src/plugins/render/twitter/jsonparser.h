@@ -47,7 +47,7 @@ public:
 
     ~jsonParser();
 
- /*   twitterDataStructure parseObjectOnPosition(const QString &content, int requiredObjectPosition);   //for parsing single object
+   twitterDataStructure parseObjectOnPosition(const QString &content, int requiredObjectPosition);   //for parsing single object
 
     QList<twitterDataStructure> parseAllObjects(const QString &content, int numberOfObjects);   //for parsing a list objects
 
@@ -59,7 +59,7 @@ private:
     twitterDataStructure dataStorage;
 
     QScriptEngine myEngine;
-*/
+
 };
 
 

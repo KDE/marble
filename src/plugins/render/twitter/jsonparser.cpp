@@ -15,7 +15,7 @@ jsonParser::~jsonParser()
 {
 }
 
-/*twitterDataStructure jsonParser::parseObjectOnPosition(const QString &content , int requiredObjectPosition)
+twitterDataStructure jsonParser::parseObjectOnPosition(const QString &content , int requiredObjectPosition)
 {
 
     QString temp = "var myJSONObject =" + content;
@@ -53,7 +53,7 @@ QList <twitterDataStructure> jsonParser::parseAllObjects(const QString &content 
                                              + QString("].text;")).toString();
         parsedJsonOutput.insert(iterator , dataStorage);
 
-        //qDebug() << "in json parser" << myEngine.evaluate(QString("return myJSONObject.twitter[" + QString::number(iterator) + "].user.location")).toString() << dataStorage.location;
+      qDebug() << "in json parser" << myEngine.evaluate(QString("return myJSONObject.twitter[" + QString::number(iterator) + "].user.location")).toString() << dataStorage.location;
         ++iterator;
     }
 
@@ -62,7 +62,7 @@ QList <twitterDataStructure> jsonParser::parseAllObjects(const QString &content 
 
 googleMapDataStructure jsonParser::geoCodingAPIparseObject(QString content)
 {
-//     qDebug() << "in geoCodingAPIparseObject";
+     qDebug() << "in geoCodingAPIparseObject";
     QString temp = "var myJSONObject = " + content;
 
     googleMapDataStructure returnStructure;
@@ -70,8 +70,8 @@ googleMapDataStructure jsonParser::geoCodingAPIparseObject(QString content)
     myEngine.evaluate(temp);
     returnStructure.lat = myEngine.evaluate("return myJSONObject.Placemark[0].Point.coordinates[0]").toNumber();
     returnStructure.lon = myEngine.evaluate("return myJSONObject.Placemark[0].Point.coordinates[1]").toNumber();
-//     qDebug() << "twitter lan lon text=" << returnStructure.lat << returnStructure.lon;
+     qDebug() << "twitter lan lon text=" << returnStructure.lat << returnStructure.lon;
     return returnStructure;
 }
-*/
+
 

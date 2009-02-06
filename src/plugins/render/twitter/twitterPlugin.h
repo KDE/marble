@@ -35,7 +35,7 @@ namespace Marble
  *
  */
 struct twitterStructure {
-    QString twitter ;
+    QString twit ;
     GeoDataCoordinates location;
 };
 
@@ -70,21 +70,21 @@ public:
     bool render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0);
 
     ~twitterPlugin();
-/*
+
 public slots:
     void slotJsonDownloadComplete(QString , QString);   //completed download of json reply fom panoramio
     void slotGeoCodingReplyRecieved(QString , QString);   //completed download of image
-*/
+
 signals:
     void statusMessageForImageDownloadingProcess(QString);
 private:
     CacheStoragePolicy *m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
     jsonParser twitterJsonParser;
- //   void downloadtwitter(int, int, qreal, qreal, qreal, qreal);
+    void downloadtwitter(int, int, qreal, qreal, qreal, qreal);
     QList <twitterStructure > twitsWithLocation;//this list will hold pointers to TWITT we have downloaded successfully figured out :)
     QList <twitterDataStructure> parsedData;
- //   void findLatLonOfStreetAddress(QString streetAddress);
+   void findLatLonOfStreetAddress(QString streetAddress);
     int privateFlagForRenderingTwitts;//this flag is one when globe has an Image  (downloaded or already there in cache)
 
 };
