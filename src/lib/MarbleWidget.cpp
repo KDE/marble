@@ -24,7 +24,9 @@
 #include <QtGui/QStyleOptionGraphicsItem>
 #include <QtNetwork/QNetworkProxy>
 
+#ifdef MARBLE_DBUS
 #include <QtDBus/QDBusConnection>
+#endif
 
 #include "AbstractProjection.h"
 #include "MarbleDirs.h"
@@ -120,7 +122,9 @@ MarbleWidget::MarbleWidget(QWidget *parent)
     : QWidget( parent ),
       d( new MarbleWidgetPrivate( new MarbleMap(), this ) )
 {
+#ifdef MARBLE_DBUS
     QDBusConnection::sessionBus().registerObject("/MarbleWidget", this, QDBusConnection::ExportAllSlots);
+#endif
 
     d->construct();
 

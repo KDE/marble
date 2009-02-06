@@ -9,6 +9,11 @@ SET(CMAKE_COLOR_MAKEFILE ON)
 # if this option is set, srtm.jpg will not be installed but the generated tiles instead
 option(TILES_AT_COMPILETIME "generate the srtm tiles at compiletime" ON)
 
+####################################################
+# Build a D-Bus interface for marble
+# this can be disabled to save space on win32 builds
+option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" ON)
+
 ###################################################
 # Check if KDE4 is available
 if( NOT QTONLY AND NOT KDE4_FOUND )
@@ -233,7 +238,7 @@ if(WIN32)
   # distinguish between debug and release plugin
   SET(CMAKE_DEBUG_POSTFIX "d")
 endif(WIN32)
-
+add_definitions("-DDEBUG_TAGS")
 ####################################################
 # add cmake macros
 include( MarbleMacros )

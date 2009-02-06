@@ -4,6 +4,10 @@ if(MSVC)
   add_definitions(-D_USE_MATH_DEFINES=1)
 endif(MSVC)
 
+if(BUILD_WITH_DBUS)
+add_definitions(-DMARBLE_DBUS)
+endif(BUILD_WITH_DBUS)
+
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/lib

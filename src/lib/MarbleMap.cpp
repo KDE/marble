@@ -27,7 +27,9 @@
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
 
+#ifdef MARBLE_DBUS
 #include <QtDBus/QDBusConnection>
+#endif
 
 // Marble
 #include "AbstractProjection.h"
@@ -354,7 +356,9 @@ void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fp
 MarbleMap::MarbleMap()
     : d( new MarbleMapPrivate( this ) )
 {
+#ifdef MARBLE_DBUS
     QDBusConnection::sessionBus().registerObject("/MarbleMap", this, QDBusConnection::ExportAllSlots);
+#endif
     QTime t;
     t.start();
     

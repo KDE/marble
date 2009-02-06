@@ -113,7 +113,9 @@ class GeoSceneDocument;
 class MARBLE_EXPORT MarbleWidget : public QWidget
 {
     Q_OBJECT
+#ifdef MARBLE_DBUS
     Q_CLASSINFO("D-Bus Interface", "org.kde.MarbleWidget")
+#endif
 
     Q_PROPERTY(int zoom          READ zoom            WRITE zoomView)
 
