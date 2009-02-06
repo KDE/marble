@@ -231,7 +231,6 @@ MarbleModel::~MarbleModel()
     if( MarbleModelPrivate::refCounter == 1 ) {
         delete d->m_veccomposer;
         delete d->m_texcolorizer;
-        MarbleModelPrivate::refCounter.deref();
     }
     delete d->m_gridmap;
     delete d->m_geometrymodel;
@@ -246,6 +245,7 @@ MarbleModel::~MarbleModel()
     delete d->m_sunLocator;
     delete d->m_dateTime;
     delete d;
+    MarbleModelPrivate::refCounter.deref();
     qDebug() << "Model deleted:" << this;
 }
 
