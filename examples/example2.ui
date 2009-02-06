@@ -28,7 +28,7 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="MarbleNavigator" name="MarbleNavigator" >
+      <widget class="Marble::MarbleNavigator" name="MarbleNavigator" >
        <property name="toolTip" >
         <string>Navigation Control</string>
        </property>
@@ -38,7 +38,7 @@
       </widget>
      </item>
      <item>
-      <widget class="MarbleWidget" name="MarbleWidget" >
+      <widget class="Marble::MarbleWidget" name="MarbleWidget" >
        <property name="toolTip" >
         <string>The Earth</string>
        </property>
@@ -193,12 +193,12 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>MarbleNavigator</class>
+   <class>Marble::MarbleNavigator</class>
    <extends>QWidget</extends>
    <header>MarbleNavigator.h</header>
   </customwidget>
   <customwidget>
-   <class>MarbleWidget</class>
+   <class>Marble::MarbleWidget</class>
    <extends>QWidget</extends>
    <header>MarbleWidget.h</header>
   </customwidget>
