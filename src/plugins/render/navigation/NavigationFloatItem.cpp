@@ -13,6 +13,7 @@
 #include <QtCore/QRect>
 #include <QtGui/QPixmap>
 #include <QtGui/QSlider>
+#include <QWidget>
 
 #include "AbstractProjection.h"
 #include "MarbleDirs.h"
@@ -107,7 +108,11 @@ bool NavigationFloatItem::needsUpdate(ViewportParams *viewport)
 QPainterPath NavigationFloatItem::backgroundShape() const
 {
     QPainterPath path;
+#if QT_VERSION >= 0x040400
     path.addRoundedRect( QRectF( 0.0, 0.0, renderedRect().size().width() - 1, renderedRect().size().height() - 1 ), 6, 6 );
+#else
+    path.addRoundRect( QRectF( 0.0, 0.0, renderedRect().size().width() - 1, renderedRect().size().height() - 1 ), 6, 6 );
+#endif
     return path;
 }
 
@@ -118,8 +123,8 @@ bool NavigationFloatItem::renderFloatItem(GeoPainter *painter,
     Q_UNUSED(layer);
 
     // Paint widget without a background
-    m_navigationParent->render( painter, 
-          QPoint( padding(), padding() ), QRegion(),QWidget::RenderFlags(QWidget::DrawChildren));
+    m_navigationParent->render( painter->device(), 
+          QPoint( padding(), padding() ), QRegion(),QWidget::RenderFlag(QWidget::DrawChildren));
 
     return true;
 }

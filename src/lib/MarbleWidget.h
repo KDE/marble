@@ -299,9 +299,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space
      */
+    // FIXME: refactor the GPS/GPX code, so that this nonsense method can die.
     bool    globalQuaternion( int x, int y, Quaternion &q);
-    // FIXME: Make the names of globalQuaternion() and
-    //        geoCoordinates() follow a pattern.
 
     /**
      * @brief Return the longitude of the center point.

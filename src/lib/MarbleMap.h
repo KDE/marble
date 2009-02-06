@@ -94,9 +94,7 @@ class MarbleAbstractFloatItem;
 class MARBLE_EXPORT MarbleMap : public QObject
 {
     Q_OBJECT
-#ifdef MARBLE_DBUS
     Q_CLASSINFO("D-Bus Interface", "org.kde.MarbleMap")
-#endif
 
  public:
 

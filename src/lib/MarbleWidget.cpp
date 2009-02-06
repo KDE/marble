@@ -123,7 +123,8 @@ MarbleWidget::MarbleWidget(QWidget *parent)
       d( new MarbleWidgetPrivate( new MarbleMap(), this ) )
 {
 #ifdef MARBLE_DBUS
-    QDBusConnection::sessionBus().registerObject("/MarbleWidget", this, QDBusConnection::ExportAllSlots);
+    QDBusConnection::sessionBus().registerObject("/MarbleWidget", this, 
+                    QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals );
 #endif
 
     d->construct();
