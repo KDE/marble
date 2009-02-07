@@ -11,8 +11,12 @@ option(TILES_AT_COMPILETIME "generate the srtm tiles at compiletime" ON)
 
 ####################################################
 # Build a D-Bus interface for marble
-# this can be disabled to save space on win32 builds
-option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" ON)
+# This is disabled by default for all win32, apple and Qt-Only builds  
+if( QTONLY OR WIN32 OR APPLE)
+    option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" OFF)
+else( QTONLY OR WIN32 OR APPLE )
+    option(BUILD_WITH_DBUS "Build the D-Bus interface for the Marble widget" ON)
+endif( QTONLY OR WIN32 OR APPLE )
 
 ###################################################
 # Check if KDE4 is available
