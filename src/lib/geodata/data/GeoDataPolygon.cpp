@@ -98,7 +98,7 @@ void GeoDataPolygon::setOuterBoundary( const GeoDataLinearRing& boundary )
     p()->outer = boundary;
 }
 
-QVector<GeoDataLinearRing> GeoDataPolygon::innerBoundaries() const
+QVector<GeoDataLinearRing>& GeoDataPolygon::innerBoundaries() const
 {
     return p()->inner;
 }

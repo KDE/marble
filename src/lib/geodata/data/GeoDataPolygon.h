@@ -60,7 +60,7 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
     GeoDataLinearRing& outerBoundary() const;
     void setOuterBoundary( const GeoDataLinearRing& boundary );
 
-    QVector<GeoDataLinearRing> innerBoundaries() const;
+    QVector<GeoDataLinearRing>& innerBoundaries() const;
     void appendInnerBoundary( const GeoDataLinearRing& boundary );
 
     /// Serialize the contents of the feature to @p stream.
