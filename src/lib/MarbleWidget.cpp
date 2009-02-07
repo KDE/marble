@@ -1126,7 +1126,7 @@ void MarbleWidget::updateRegion( BoundingBox &box )
 {
     Q_UNUSED(box);
 
-    //really not sure if this is nessary as its designed for
+    //really not sure if this is nessary as it is designed for
     //placemark based layers
     setNeedsUpdate();
 
