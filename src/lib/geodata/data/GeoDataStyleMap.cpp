@@ -40,7 +40,7 @@ GeoDataStyleMap::~GeoDataStyleMap()
     delete d;
 }
 
-QString GeoDataStyleMap::lastKey()
+QString GeoDataStyleMap::lastKey() const
 {
     return d->lastKey;
 }

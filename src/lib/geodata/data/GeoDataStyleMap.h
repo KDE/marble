@@ -42,7 +42,7 @@ class GEODATA_EXPORT GeoDataStyleMap : public GeoDataStyleSelector,
     /**
     * @brief return the last key
     */
-    QString lastKey();
+    QString lastKey() const;
     /**
     * @brief Set the last key
     * this property is needed to set an entry in the kml parser
