@@ -68,7 +68,7 @@ GeoDataHotSpot& GeoDataHotSpot::operator=( const GeoDataHotSpot& other )
     return *this;
 }
 
-const QPointF& GeoDataHotSpot::hotSpot( Units xunits, Units yunits ) const
+const QPointF& GeoDataHotSpot::hotSpot( Units& xunits, Units& yunits ) const
 {
     xunits = d->m_xunits;
     yunits = d->m_yunits;
