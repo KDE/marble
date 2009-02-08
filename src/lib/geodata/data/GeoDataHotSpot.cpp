@@ -31,6 +31,13 @@ class GeoDataHotSpotPrivate
     {
     }
 
+    GeoDataHotSpotPrivate( const GeoDataHotSpot& other )
+        : m_hotSpot( other.hotSpot ),
+          m_xunits( other.xunits ),
+          m_yunits( other.yunits )
+    {
+    }
+
     ~GeoDataHotSpotPrivate()
     {
     }
@@ -45,9 +52,20 @@ GeoDataHotSpot::GeoDataHotSpot( const QPointF& hotSpot, Units xunits, Units yuni
 {
 }
 
+GeoDataHotSpot::GeoDataHotSpot( const GeoDataHotSpot& other )
+    : d( new GeoDataHotSpotPrivate( *other.d ) )
+{
+}
+
 GeoDataHotSpot::~GeoDataHotSpot()
 {
     delete d;
+}
+
+GeoDataHotSpot& GeoDataHotSpot::operator=( const GeoDataHotSpot& other )
+{
+    *d = *other.d;
+    return *this;
 }
 
 const QPointF& GeoDataHotSpot::hotSpot( Units &xunits, Units &yunits ) const

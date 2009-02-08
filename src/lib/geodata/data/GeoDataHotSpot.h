@@ -31,7 +31,10 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
 
     explicit GeoDataHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ),
                              Units xunits = Fraction, Units yunits = Fraction );
+    GeoDataHotSpot( const GeoDataHotSpot& other );
     ~GeoDataHotSpot();
+
+    GeoDataHotSpot& operator=( const GeoDataHotSpot& other );
 
     const QPointF& hotSpot( Units &xunits, Units &yunits ) const;
 
@@ -44,8 +47,7 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
     virtual void unpack( QDataStream& stream );
 
   private:
-    Q_DISABLE_COPY( GeoDataHotSpot )
-    GeoDataHotSpotPrivate * const d;
+    GeoDataHotSpotPrivate *const d;
 };
 
 }
