@@ -22,6 +22,11 @@ class GeoDataStyleMapPrivate
     {
     }
 
+    GeoDataStyleMapPrivate( const GeoDataStyleMapPrivate& other )
+    {
+        lastKey = other.lastKey;
+    }
+
     ~GeoDataStyleMapPrivate()
     {
     }
@@ -32,6 +37,11 @@ class GeoDataStyleMapPrivate
 
 GeoDataStyleMap::GeoDataStyleMap()
     : d( new GeoDataStyleMapPrivate )
+{
+}
+
+GeoDataStyleMap::GeoDataStyleMap( const GeoDataStyleMap& other )
+    : GeoDataObject( other ), d( new GeoDataStyleMapPrivate( *other.d ) )
 {
 }
 
