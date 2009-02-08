@@ -10,6 +10,7 @@
 
 #include <QtTest/QtTest>
 #include <QtCore/QCoreApplication>
+#include <QtCore/QPointF>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QDebug>
@@ -24,6 +25,8 @@
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataCoordinates.h"
 
+#include "GeoDataHotSpot.h"
+
 namespace Marble
 {
 
@@ -32,14 +35,18 @@ class CopyTest : public QObject {
     private slots:
         void initTestCase();
         void copyCoordinates();
+        // GeoDataGeometry:
         void copyLineString();
         void copyLinearRing();
         void copyPoint();
         void copyPolygon();
         void copyMultiGeometry();
+        // GeoDataFeature:
         void copyDocument();
         void copyFolder();
         void copyPlacemark();
+        
+        void copyHotSpot();
     private:
         QStringList coordString;
         GeoDataCoordinates coord1;
@@ -300,6 +307,21 @@ void CopyTest::copyFolder() {
 
 void CopyTest::copyPlacemark() {
     QSKIP("Test not implemented",SkipSingle);
+}
+
+void CopyTest::copyHotSpot() {
+    QPointF point(0.25, 0.75);
+
+    GeoDataHotSpot first(point);
+    GeoDataHotSpot second = first;
+
+    QVERIFY(first.hotSpot() == QPointF(0.25, 0.75));
+    QVERIFY(second.hotSpot() == QPointF(0.25, 0.75));
+
+    first.setHotSpot(QPointF(0.3333333, 0.666666));
+    
+    QVERIFY(first.hotSpot() == QPointF(0.3333333, 0.666666));
+    QVERIFY(second.hotSpot() == QPointF(0.25, 0.75));
 }
 
 }
