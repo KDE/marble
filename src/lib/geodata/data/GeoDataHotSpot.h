@@ -36,7 +36,7 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
 
     GeoDataHotSpot& operator=( const GeoDataHotSpot& other );
 
-    const QPointF& hotSpot( Units &xunits, Units &yunits ) const;
+    const QPointF& hotSpot( Units xunits, Units yunits ) const;
 
     void setHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ),
                      Units xunits = Fraction, Units yunits = Fraction );
