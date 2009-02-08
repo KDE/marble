@@ -291,7 +291,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     static QFont defaultFont();
     static void setDefaultFont( const QFont& font );
 
-    void detach();
+    virtual void detach();
  private:
     static void initializeDefaultStyles();
 
