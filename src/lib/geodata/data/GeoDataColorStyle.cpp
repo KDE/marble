@@ -22,6 +22,12 @@ class GeoDataColorStylePrivate
     {
     }
 
+    GeoDataColorStylePrivate( const GeoDataColorStylePrivate& other )
+      : m_color( other.m_color ),
+        m_colorMode( other.m_colorMode )
+    {
+    }
+
     ~GeoDataColorStylePrivate()
     {
     }
@@ -33,7 +39,12 @@ class GeoDataColorStylePrivate
 };
 
 GeoDataColorStyle::GeoDataColorStyle()
-      : d( new GeoDataColorStylePrivate() )
+      : d( new GeoDataColorStylePrivate )
+{
+}
+
+GeoDataColorStyle::GeoDataColorStyle( const GeoDataColorStyle& other )
+      : d( new GeoDataColorStylePrivate( *other.d ) )
 {
 }
 

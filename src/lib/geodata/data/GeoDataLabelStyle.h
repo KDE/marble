@@ -40,6 +40,7 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
 
     /// Construct a new GeoDataLabelStyle
     GeoDataLabelStyle();
+    GeoDataLabelStyle( const GeoDataLabelStyle& other );
     /**
      * @brief Construct a new GeoDataLabelStyle
      * @param  font   the font to use when showing the name
@@ -92,7 +93,6 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
     virtual void unpack( QDataStream& stream );
 
   private:
-    Q_DISABLE_COPY( GeoDataLabelStyle )
     GeoDataLabelStylePrivate * const d;
 };
 

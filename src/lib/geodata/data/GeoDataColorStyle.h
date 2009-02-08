@@ -92,12 +92,12 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
      */
     virtual void unpack( QDataStream& stream );
 
-  protected:
     GeoDataColorStyle();
+    GeoDataColorStyle( const GeoDataColorStyle& other );
+
     virtual ~GeoDataColorStyle();
 
   private:
-    Q_DISABLE_COPY( GeoDataColorStyle )
     GeoDataColorStylePrivate * const d;
 };
 

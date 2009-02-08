@@ -21,6 +21,11 @@ class GeoDataLineStylePrivate
     {
     }
 
+    GeoDataLineStylePrivate( const GeoDataLineStylePrivate& other )
+     : m_width( other.m_width )
+    {
+    }
+
     ~GeoDataLineStylePrivate()
     {
     }
@@ -31,6 +36,11 @@ class GeoDataLineStylePrivate
 
 GeoDataLineStyle::GeoDataLineStyle()
     : d (new GeoDataLineStylePrivate )
+{
+}
+
+GeoDataLineStyle::GeoDataLineStyle( const GeoDataLineStyle& other )
+    : GeoDataColorStyle( other ), d (new GeoDataLineStylePrivate( *other.d ) )
 {
 }
 

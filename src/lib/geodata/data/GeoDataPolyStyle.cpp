@@ -18,6 +18,12 @@ class GeoDataPolyStylePrivate
 {
   public:
     GeoDataPolyStylePrivate()
+     : m_fill( true ), m_outline( true )
+    {
+    }
+
+    GeoDataPolyStylePrivate( const GeoDataPolyStylePrivate& other )
+     : m_fill( other.m_fill ), m_outline( other.m_outline )
     {
     }
 
@@ -33,6 +39,11 @@ class GeoDataPolyStylePrivate
 
 GeoDataPolyStyle::GeoDataPolyStyle()
     : d (new GeoDataPolyStylePrivate )
+{
+}
+
+GeoDataPolyStyle::GeoDataPolyStyle( const GeoDataPolyStyle& other )
+    : d (new GeoDataPolyStylePrivate( *other.d ) )
 {
 }
 

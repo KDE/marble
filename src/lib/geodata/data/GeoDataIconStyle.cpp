@@ -19,10 +19,17 @@ namespace Marble
 class GeoDataIconStylePrivate
 {
   public:
-    GeoDataIconStylePrivate() 
+    GeoDataIconStylePrivate()
         : m_scale( 1.0 ),
-          m_icon( 0 ),
+          m_icon( new QPixmap ),
           m_hotSpot( new GeoDataHotSpot() )
+    {
+    }
+
+    GeoDataIconStylePrivate( const GeoDataIconStylePrivate& other )
+        : m_scale( other.m_scale ),
+          m_icon( new QPixmap( *other.m_icon ) ),
+          m_hotSpot( new GeoDataHotSpot( *other.m_hotSpot ) )
     {
     }
 
@@ -49,6 +56,11 @@ class GeoDataIconStylePrivate
 
 GeoDataIconStyle::GeoDataIconStyle() :
     d( new GeoDataIconStylePrivate() )
+{
+}
+
+GeoDataIconStyle::GeoDataIconStyle( const GeoDataIconStyle& other ) :
+    GeoDataColorStyle( other ), d( new GeoDataIconStylePrivate( *other.d ) )
 {
 }
 

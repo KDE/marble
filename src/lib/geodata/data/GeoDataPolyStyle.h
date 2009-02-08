@@ -36,6 +36,7 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
   public:
     /// Construct a new GeoDataPolyStyle
     GeoDataPolyStyle();
+    GeoDataPolyStyle( const GeoDataPolyStyle& other );
     /**
      * @brief Construct a new GeoDataPolyStyle
      * @param  color  the color to use when showing the name @see GeoDataColorStyle
@@ -78,7 +79,6 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
     virtual void unpack( QDataStream& stream );
 
   private:
-    Q_DISABLE_COPY( GeoDataPolyStyle )
     GeoDataPolyStylePrivate * const d;
 };
 
