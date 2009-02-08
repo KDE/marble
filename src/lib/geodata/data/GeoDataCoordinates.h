@@ -210,11 +210,11 @@ class GEODATA_EXPORT GeoDataCoordinates
     /** Unserialize the contents of the feature from @p stream. */
     virtual void unpack( QDataStream& stream );
 
+    virtual void detach();
  protected:
     GeoDataCoordinatesPrivate* d;
 
  private:
-    void detach();
     static GeoDataCoordinates::Notation s_notation;
 };
 
