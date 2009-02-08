@@ -17,15 +17,31 @@
 
 #include "MarbleDirs.h"
 #include "GeoDataParser.h"
+
+// Feature:
 #include "GeoDataFolder.h"
 #include "GeoDataDocument.h"
-#include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
+
+// Geometry:
 #include "GeoDataPolygon.h"
 #include "GeoDataMultiGeometry.h"
-#include "GeoDataCoordinates.h"
+#include "GeoDataLineString.h"
+#include "GeoDataLinearRing.h"
+#include "GeoDataPoint.h"
 
+// StyleSelector:
+#include "GeoDataColorStyle.h"
+#include "GeoDataIconStyle.h"
+#include "GeoDataLabelStyle.h"
+#include "GeoDataLineStyle.h"
+#include "GeoDataStyleMap.h"
+
+// misc:
 #include "GeoDataHotSpot.h"
+#include "GeoDataLatLonBox.h"
+#include "GeoDataLatLonAltBox.h"
+#include "GeoDataCoordinates.h"
 
 namespace Marble
 {
@@ -34,19 +50,30 @@ class CopyTest : public QObject {
     Q_OBJECT
     private slots:
         void initTestCase();
+        // misc.:
         void copyCoordinates();
+        void copyHotSpot();
+        void copyLatLonBox();
+        void copyLatLonAltBox();
+
         // GeoDataGeometry:
         void copyLineString();
         void copyLinearRing();
         void copyPoint();
         void copyPolygon();
         void copyMultiGeometry();
+
         // GeoDataFeature:
         void copyDocument();
         void copyFolder();
         void copyPlacemark();
-        
-        void copyHotSpot();
+
+        // StyleSelector:
+        void copyColorStyle();
+        void copyIconStyle();
+        void copyLabelStyle();
+        void copyLineStyle();
+        void copyStyleMap();
     private:
         QStringList coordString;
         GeoDataCoordinates coord1;
@@ -322,6 +349,34 @@ void CopyTest::copyHotSpot() {
     
     QVERIFY(first.hotSpot() == QPointF(0.3333333, 0.666666));
     QVERIFY(second.hotSpot() == QPointF(0.25, 0.75));
+}
+
+void CopyTest::copyLatLonBox() {
+    QSKIP("Test not implemented",SkipSingle);
+}
+
+void CopyTest::copyLatLonAltBox() {
+    QSKIP("Test not implemented",SkipSingle);
+}
+
+void CopyTest::copyColorStyle() {
+    QSKIP("Test not implemented",SkipSingle);
+}
+
+void CopyTest::copyIconStyle() {
+    QSKIP("Test not implemented",SkipSingle);
+}
+
+void CopyTest::copyLabelStyle() {
+    QSKIP("Test not implemented",SkipSingle);
+}
+
+void CopyTest::copyLineStyle() {
+    QSKIP("Test not implemented",SkipSingle);
+}
+
+void CopyTest::copyStyleMap() {
+    QSKIP("Test not implemented",SkipSingle);
 }
 
 }
