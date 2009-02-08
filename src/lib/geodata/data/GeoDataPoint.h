@@ -84,8 +84,6 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
     */
     virtual EnumGeometryId geometryId() const { return GeoDataPointId; };
 
-    GeoDataPoint& operator=( const GeoDataPoint &other );
-
     // Type definitions
     typedef QVector<GeoDataPoint> Vector;
 
@@ -93,6 +91,8 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
     virtual void pack( QDataStream& stream ) const;
     // Unserialize the Placemark from @p stream
     virtual void unpack( QDataStream& stream );
+    
+    virtual void detach();
 };
 
 }

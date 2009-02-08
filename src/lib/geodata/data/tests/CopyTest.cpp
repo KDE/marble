@@ -86,16 +86,17 @@ void CopyTest::copyCoordinates() {
 }
 
 void CopyTest::copyPoint() {
-    QSKIP("Test not implemented",SkipSingle);
-/*    GeoDataPoint point;
+    GeoDataPoint point;
 
     point.set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
     point.setDetail(2);
+    point.setExtrude( true );
 
     // make sure that the coordinate contains the right values
     QCOMPARE(point.altitude(), 123.4);
     QCOMPARE(point.detail(), 2);
     QCOMPARE(point.toString(), coordString[0]);
+    QCOMPARE(point.extrude(), true);
 
     GeoDataPoint other = point;
     
@@ -103,8 +104,16 @@ void CopyTest::copyPoint() {
     QCOMPARE(other.altitude(), 123.4);
     QCOMPARE(other.detail(), 2);
     QCOMPARE(other.toString(), coordString[0]);
+    QCOMPARE(other.extrude(), true);
     
-    QVERIFY(point == other);*/
+    QVERIFY(point == other);
+    
+    point.setDetail(17);
+    point.setExtrude(false);
+    QCOMPARE(other.detail(), 2);
+    QCOMPARE(point.detail(), 17);
+    QCOMPARE(other.extrude(), true);
+    QCOMPARE(point.extrude(), false);
 }
 
 void CopyTest::copyLineString() {
