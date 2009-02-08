@@ -338,17 +338,20 @@ void CopyTest::copyPlacemark() {
 
 void CopyTest::copyHotSpot() {
     QPointF point(0.25, 0.75);
+    
 
     GeoDataHotSpot first(point);
+    GeoDataHotSpot::Units xunits;
+    GeoDataHotSpot::Units yunits;
     GeoDataHotSpot second = first;
 
-    QVERIFY(first.hotSpot() == QPointF(0.25, 0.75));
-    QVERIFY(second.hotSpot() == QPointF(0.25, 0.75));
+    QVERIFY(first.hotSpot(xunits, yunits) == QPointF(0.25, 0.75));
+    QVERIFY(second.hotSpot(xunits, yunits) == QPointF(0.25, 0.75));
 
     first.setHotSpot(QPointF(0.3333333, 0.666666));
     
-    QVERIFY(first.hotSpot() == QPointF(0.3333333, 0.666666));
-    QVERIFY(second.hotSpot() == QPointF(0.25, 0.75));
+    QVERIFY(first.hotSpot(xunits, yunits) == QPointF(0.3333333, 0.666666));
+    QVERIFY(second.hotSpot(xunits, yunits) == QPointF(0.25, 0.75));
 }
 
 void CopyTest::copyLatLonBox() {
