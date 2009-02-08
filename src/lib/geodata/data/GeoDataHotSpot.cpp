@@ -31,10 +31,10 @@ class GeoDataHotSpotPrivate
     {
     }
 
-    GeoDataHotSpotPrivate( const GeoDataHotSpot& other )
-        : m_hotSpot( other.hotSpot ),
-          m_xunits( other.xunits ),
-          m_yunits( other.yunits )
+    GeoDataHotSpotPrivate( const GeoDataHotSpotPrivate& other )
+        : m_hotSpot( other.m_hotSpot ),
+          m_xunits( other.m_xunits ),
+          m_yunits( other.m_yunits )
     {
     }
 
