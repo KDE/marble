@@ -41,7 +41,7 @@ GeoDataStyleMap::GeoDataStyleMap()
 }
 
 GeoDataStyleMap::GeoDataStyleMap( const GeoDataStyleMap& other )
-    : GeoDataObject( other ), d( new GeoDataStyleMapPrivate( *other.d ) )
+    : GeoDataStyleSelector( other ), d( new GeoDataStyleMapPrivate( *other.d ) )
 {
 }
 
