@@ -22,6 +22,11 @@ class GeoDataStyleSelectorPrivate
     {
     }
 
+    GeoDataStyleSelectorPrivate( const GeoDataStyleSelectorPrivate& other )
+    {
+        m_styleId = other.m_styleId;
+    }
+
     ~GeoDataStyleSelectorPrivate()
     {
     }
@@ -33,6 +38,11 @@ class GeoDataStyleSelectorPrivate
 
 GeoDataStyleSelector::GeoDataStyleSelector()
     : d( new GeoDataStyleSelectorPrivate )
+{
+}
+
+GeoDataStyleSelector::GeoDataStyleSelector( const GeoDataStyleSelector& other )
+    : GeoDataObject( other ), d( new GeoDataStyleSelectorPrivate( *other.d ) )
 {
 }
 

@@ -62,12 +62,10 @@ class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
      */
     virtual void unpack( QDataStream& stream );
 
-  protected:
     GeoDataStyleSelector();
+    GeoDataStyleSelector( const GeoDataStyleSelector& other );
     ~GeoDataStyleSelector();
-
-  private:
-    Q_DISABLE_COPY( GeoDataStyleSelector )
+private:
     GeoDataStyleSelectorPrivate * const d;
 };
 
