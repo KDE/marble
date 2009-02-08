@@ -36,7 +36,13 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
 
     GeoDataHotSpot& operator=( const GeoDataHotSpot& other );
 
-    const QPointF& hotSpot( Units& xunits = Fraction, Units& yunits = Fraction ) const;
+    /**
+    * @brief this function returns the hotspot and the units the hotspot is measured in
+    * @param xunits after running hotspot, you'll receive the unit in which x is measured
+    * @param yunits the same for y
+    * @return the point of the hotspot
+    */
+    const QPointF& hotSpot( Units& xunits, Units& yunits ) const;
 
     void setHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ),
                      Units xunits = Fraction, Units yunits = Fraction );
