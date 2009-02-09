@@ -32,8 +32,8 @@
 
 		 <legalnotice>&FDLNotice;</legalnotice>
 
-		 <date>2008-08-24</date>
-		 <releaseinfo>0.6</releaseinfo>
+		 <date>2009-01-24</date>
+		 <releaseinfo>0.7</releaseinfo>
 
 		 <abstract>
 			<para>&marble; is a geographical atlas and a virtual desktop globe 
@@ -69,7 +69,7 @@
              &marble; allows you to freely move across its map and lookup places. 
              Furthermore &marble; allows you to zoom in and have many different views on the 
              surface of the Earth. In its default configuration &marble; offers 11 different 
-             views: <guilabel>Atlas</guilabel>, <guilabel>Open Street Map</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Historical Map 1689</guilabel>, <guilabel>Moon</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel> and <guilabel>Temperature (July)</guilabel>.
+             views: <guilabel>Atlas</guilabel>, <guilabel>OpenStreetMap</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Historical Map 1689</guilabel>, <guilabel>Moon</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel> and <guilabel>Temperature (July)</guilabel>.
          </para>
          <para>
              &marble; comes with a small database of more than 12,000 locations (cities, mountains, volcanoes) which can be searched for and which are partially integrated with 
@@ -96,7 +96,7 @@
 		 <para>
 			On the right you can see a topographical map of our beautiful home planet. To allow for 
             better orientation the map offers a scale bar in the lower left corner as well as a windrose on the top right. 
-            To navigate and to control the view you can use the toolbox on the left: Press the arrow buttons to rotate the globe. The <guilabel>Up</guilabel> and <guilabel>Down</guilabel> arrow buttons will tilt the earth axis back and forth. The <guilabel>Left</guilabel> and <guilabel>Right</guilabel> arrow buttons will make the earth spin around its physical axis.
+            To navigate and to control the view you can use the tools on the <guilabel>Navigation</guilabel> tab at the left: Press the arrow buttons to rotate the globe. The <guilabel>Up</guilabel> and <guilabel>Down</guilabel> arrow buttons will tilt the earth axis back and forth. The <guilabel>Left</guilabel> and <guilabel>Right</guilabel> arrow buttons will make the earth spin around its physical axis.
 		 </para>
          <para>
             You can accomplish the same behaviour by pressing the &LMB; somewhere on the globe and by moving the mouse while keeping the &LMB; pressed. Using this drag and drop style navigation will allow you to adjust the viewing angle much easier and more precisely. The cursor keys on your keyboard offer another alternative way to quickly change directions.
@@ -110,14 +110,14 @@
             Depending on the map's resolution zooming in will provide you with more detail. Smaller cities will appear and using the topographic map you might notice that coastlines are provided as vector graphics.
          </para>
          <para>
-            In case you should get lost you can always reset the viewing angle and zoom level back to the point where we started off: Just hit the <guilabel>Home</guilabel> button (or the <keycap>Home</keycap> button on your keyboard).
+            In case you should get lost you can always reset the viewing angle and zoom level back to the point where we started off: Just hit the <guilabel>Home</guilabel> button (or the <keycap>Home</keycap> button on your keyboard). To set a home location click with the &RMB; on a location in the maps and select <guimenuitem>Set Home Location</guimenuitem> in the context menu,
          </para>
 	 </chapter>
 
      <chapter id="map-views">
          <title>Choosing different map views for &marble;</title>
          <para>
-            &marble; comes with 11 different views: <guilabel>Atlas</guilabel>, <guilabel>Open Street Map</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Historical Map 1689</guilabel>, <guilabel>Moon</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel> and <guilabel>Temperature (July)</guilabel>. You can choose among these by pressing the <guilabel>Map View</guilabel> tab on the bottom of &marble;'s toolbox:
+            &marble; comes with 11 different views: <guilabel>Atlas</guilabel>, <guilabel>OpenStreetMap</guilabel>, <guilabel>Satellite View</guilabel>, <guilabel>Earth at Night</guilabel>, <guilabel>Historical Map 1689</guilabel>, <guilabel>Moon</guilabel>, <guilabel>Plain Map</guilabel>, <guilabel>Precipitation (December)</guilabel>, <guilabel>Precipitation (July)</guilabel>, <guilabel>Temperature (December)</guilabel> and <guilabel>Temperature (July)</guilabel>. You can choose among these by pressing the <guilabel>Map View</guilabel> tab on the bottom of &marble;'s toolbox:
          </para>
 
          <screenshot>
@@ -136,7 +136,7 @@
              </listitem>
               <listitem>
                 <para>
-                   <guilabel>Open Street Map</guilabel>: A global roadmap created by the OpenStreetMap (OSM) project. OSM is an open community which creates free editable maps. The OSM data was rendered using Mapnik.
+                   <guilabel>OpenStreetMap</guilabel>: A global roadmap created by the OpenStreetMap (OSM) project. OSM is an open community which creates free editable maps. The OSM data was rendered using Mapnik.
                 </para>
              </listitem>
              <listitem>
@@ -268,7 +268,7 @@
                                      <keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo>
                                  </shortcut>
                                  <guimenu>File</guimenu>
-                                 <guimenuitem>Download New Data...</guimenuitem>
+                                 <guimenuitem>Maps...</guimenuitem>
                          </menuchoice></term>
                          <listitem><para><action>Displays</action> the <guilabel>Get Hot New Stuff!</guilabel> dialog to download additional maps for &marble;.</para></listitem>
                      </varlistentry>
@@ -291,6 +291,13 @@
                                  <guimenuitem>Print...</guimenuitem>
                          </menuchoice></term>
                          <listitem><para><action>Prints</action> a screenshot of &marble;'s map.</para></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term><menuchoice>
+                                 <guimenu>File</guimenu>
+                                 <guimenuitem>Work Offline</guimenuitem>
+                         </menuchoice></term>
+                         <listitem><para>If this option is selected b&marble; will no longer download map data from the Internet</para></listitem>
                      </varlistentry>
 					 <varlistentry>
 						 <term><menuchoice>
@@ -338,26 +345,25 @@
 <varlistentry>
 <term><menuchoice>
 <guimenu>View</guimenu>
-<guimenuitem>Show Statusbar</guimenuitem>
+<guimenuitem>Current Location</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Toggle</action> the display of the status bar.</para></listitem>
-</varlistentry>
-
-<varlistentry>
-<term><menuchoice>
-<shortcut>
-<keycap>F9</keycap>
-</shortcut>
-<guimenu>View</guimenu>
-<guimenuitem>Show Navigation Panel</guimenuitem>
-</menuchoice></term>
-<listitem><para><action>Toggle</action> the display of the navigation panel.</para></listitem>
+<listitem><para><action>Toggle</action> the display of the location page in the left panel.
+If a GPS device is connected with your computer, &marble; displays longitude and latitude of your current location.
+</para></listitem>
 </varlistentry>
 
 <varlistentry>
 <term><menuchoice>
 <guimenu>View</guimenu>
-<guisubmenu>Infoboxes</guisubmenu>
+<guimenuitem>Crosshairs</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggle</action> the display of a simple crosshair in the center of the map.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guisubmenu>Info Boxes</guisubmenu>
 </menuchoice></term>
 <listitem><para>In this submenu you can to lock the position of the infoboxes and show or hide the plugins you have enabled in the <link linkend="configplugins">Plugins</link> page of &marble;s configuration dialog.</para></listitem>
 </varlistentry>
@@ -367,7 +373,7 @@
 <guimenu>View</guimenu>
 <guimenuitem>Clouds</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Show</action> real time cloud cover. A real time cloud map that gets updated every 3 hours. It uses GOES, METEOSAT, and GMS satellite imagery downloaded from the Geostationary Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet Project</para></listitem>
+<listitem><para><action>Show</action> real-time cloud cover. A real time cloud map that gets updated every 3 hours. It uses GOES, METEOSAT, and GMS satellite imagery downloaded from the Geostationary Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet Project</para></listitem>
 </varlistentry>
 
 <varlistentry>
@@ -476,7 +482,7 @@
 <varlistentry>
 <term><guilabel>Angle</guilabel></term>
 <listitem>
-<para>Specifies the notation of angles in coordinates: By default the Degree-Minute-Second notation (e.g. 54°30'00" ) gets used. As an alternative you can choose decimal degrees (e.g. 54.5°).</para>
+<para>Specifies the notation of angles in coordinates: By default the Degree-Minute-Second notation (&eg; 54°30'00" ) gets used. As an alternative you can choose decimal degrees (&eg; 54.5°).</para>
 </listitem>
 </varlistentry>
 
@@ -490,7 +496,7 @@
 <varlistentry>
 <term><guilabel>During animations</guilabel></term>
 <listitem>
-<para>Specifies the map quality that gets displayed during map animations (e.g. while dragging the globe). Especially on slow machines it is advisable to set this option to <guilabel>Low Quality</guilabel> as this will give better speed.</para>
+<para>Specifies the map quality that gets displayed during map animations (&eg; while dragging the globe). Especially on slow machines it is advisable to set this option to <guilabel>Low Quality</guilabel> as this will give better speed.</para>
 </listitem>
 </varlistentry>
 
@@ -529,7 +535,7 @@
 <varlistentry>
 <term><guilabel>Drag location</guilabel></term>
 <listitem>
-<para>While dragging the mouse there are two standard behaviours when dealing with a virtual globe: The location below mouse pointer will follow the cursor exactly: As a result e.g. the north pole will not stay at the top which can lead to confusion. By default Marble makes sure that north is always up which results in a dragging behaviour where the location below the mouse pointer slightly "detaches" from the cursor.</para>
+<para>While dragging the mouse there are two standard behaviours when dealing with a virtual globe: The location below mouse pointer will follow the cursor exactly: As a result &eg; the north pole will not stay at the top which can lead to confusion. By default Marble makes sure that north is always up which results in a dragging behaviour where the location below the mouse pointer slightly "detaches" from the cursor.</para>
 </listitem>
 </varlistentry>
 
@@ -568,7 +574,7 @@
 <varlistentry>
 <term><guilabel>Cache</guilabel></term>
 <listitem>
-<para>There are two caches being used for &marble;: The physical memory which is needed to keep map data in the computer's memory. Increasing the value will make the application more responsive. The hard disc memory cache is used by download contents from the Internet (e.g. Wikipedia data or map data). Decrease this value if you want to save space on the hard disc and if high usage of the Internet is not an issue.</para>
+<para>There are two caches being used for &marble;: The physical memory which is needed to keep map data in the computer's memory. Increasing the value will make the application more responsive. The hard disc memory cache is used by download contents from the Internet (&eg; Wikipedia data or map data). Decrease this value if you want to save space on the hard disc and if high usage of the Internet is not an issue.</para>
 </listitem>
 </varlistentry>
 
@@ -612,6 +618,20 @@
 </varlistentry>
 
 <varlistentry>
+<term><guilabel>Crosshairs</guilabel></term>
+<listitem>
+<para>Enable this to display a small crosshair in the center of the map.</para>
+</listitem>
+</varlistentry>
+<!-- enabled in released version?
+<varlistentry>
+<term><guilabel>Geodata Plugin</guilabel></term>
+<listitem>
+<para>This is a simple test plugin.</para>
+</listitem>
+</varlistentry>
+-->
+<varlistentry>
 <term><guilabel>Overview Map</guilabel></term>
 <listitem>
 <para>This is a float item that provides an overview map.</para>
@@ -624,14 +644,14 @@
 <para>A plugin that shows the Starry Sky.</para>
 </listitem>
 </varlistentry>
-<!-- Pre-07 svn in trunk, remove comment after backport to 4.1.2
+
 <varlistentry>
 <term><guilabel>Navigation</guilabel></term>
 <listitem>
-<para>A mouse control to zoom and move the map.</para>
+<para>Displays the mouse control to zoom and move as float item on the map.</para>
 </listitem>
 </varlistentry>
--->
+
 </variablelist>
 </sect1>
 
