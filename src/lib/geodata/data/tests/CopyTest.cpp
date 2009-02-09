@@ -35,6 +35,7 @@
 #include "GeoDataIconStyle.h"
 #include "GeoDataLabelStyle.h"
 #include "GeoDataLineStyle.h"
+#include "GeoDataPolyStyle.h"
 #include "GeoDataStyleMap.h"
 
 // misc:
@@ -69,10 +70,11 @@ class CopyTest : public QObject {
         void copyPlacemark();
 
         // StyleSelector:
-        void copyColorStyle();
+        void copyStyle();
         void copyIconStyle();
         void copyLabelStyle();
         void copyLineStyle();
+        void copyPolyStyle();
         void copyStyleMap();
     private:
         QStringList coordString;
@@ -355,31 +357,161 @@ void CopyTest::copyHotSpot() {
 }
 
 void CopyTest::copyLatLonBox() {
-    QSKIP("Test not implemented",SkipSingle);
+    // north south east west
+    GeoDataLatLonBox llbox(30.1, 12.2, 110.0, 44.9, GeoDataCoordinates::Degree);
+    QCOMPARE(llbox.north(GeoDataCoordinates::Degree), 30.1);
+    QCOMPARE(llbox.south(GeoDataCoordinates::Degree), 12.2);
+    QCOMPARE(llbox.east(GeoDataCoordinates::Degree), 110.0);
+    QCOMPARE(llbox.west(GeoDataCoordinates::Degree), 44.9);
+
+    GeoDataLatLonBox other = llbox;
+
+    QCOMPARE(other.north(GeoDataCoordinates::Degree), 30.1);
+    QCOMPARE(other.south(GeoDataCoordinates::Degree), 12.2);
+    QCOMPARE(other.east(GeoDataCoordinates::Degree), 110.0);
+    QCOMPARE(other.west(GeoDataCoordinates::Degree), 44.9);
+    
+    llbox.setNorth(0.1);
+    other.setSouth(1.4);
+    
+    QCOMPARE(llbox.north(), 0.1);
+    QCOMPARE(llbox.south(GeoDataCoordinates::Degree), 12.2);
+    QCOMPARE(other.north(GeoDataCoordinates::Degree), 30.1);
+    QCOMPARE(other.south(), 1.4);
 }
 
 void CopyTest::copyLatLonAltBox() {
-    QSKIP("Test not implemented",SkipSingle);
+    GeoDataLatLonAltBox llabox(GeoDataLatLonBox(30.1, 12.2, 110.0, 44.9, GeoDataCoordinates::Degree));
+    QCOMPARE(llabox.north(GeoDataCoordinates::Degree), 30.1);
+    QCOMPARE(llabox.south(GeoDataCoordinates::Degree), 12.2);
+    QCOMPARE(llabox.east(GeoDataCoordinates::Degree), 110.0);
+    QCOMPARE(llabox.west(GeoDataCoordinates::Degree), 44.9);
+
+    GeoDataLatLonAltBox other = llabox;
+
+    QCOMPARE(other.north(GeoDataCoordinates::Degree), 30.1);
+    QCOMPARE(other.south(GeoDataCoordinates::Degree), 12.2);
+    QCOMPARE(other.east(GeoDataCoordinates::Degree), 110.0);
+    QCOMPARE(other.west(GeoDataCoordinates::Degree), 44.9);
+    
+    llabox.setNorth(0.1);
+    other.setSouth(1.4);
+    
+    QCOMPARE(llabox.north(), 0.1);
+    QCOMPARE(llabox.south(GeoDataCoordinates::Degree), 12.2);
+    QCOMPARE(other.north(GeoDataCoordinates::Degree), 30.1);
+    QCOMPARE(other.south(), 1.4);
 }
 
-void CopyTest::copyColorStyle() {
+void CopyTest::copyStyle() {
     QSKIP("Test not implemented",SkipSingle);
 }
 
 void CopyTest::copyIconStyle() {
-    QSKIP("Test not implemented",SkipSingle);
+    // hotspot is not implemented as I am not sure how it should work
+    GeoDataIconStyle icon;
+    icon.setScale(2.0);
+
+    QCOMPARE(icon.scale(), (float)2.0);
+
+    GeoDataIconStyle other = icon;
+
+    QCOMPARE(other.scale(), (float)2.0);
+
+    icon.setScale(5.0);
+
+    QCOMPARE(icon.scale(), (float)5.0);
+    QCOMPARE(other.scale(), (float)2.0);
 }
 
 void CopyTest::copyLabelStyle() {
-    QSKIP("Test not implemented",SkipSingle);
+    QFont testFont(QFont("Sans Serif").family(), 12, 10, false);
+    GeoDataLabelStyle label(testFont, Qt::red);
+    label.setScale(2.0);
+
+    QCOMPARE(label.scale(), (float)2.0);
+    QVERIFY(label.color() == Qt::red);
+    QVERIFY(label.font() == testFont);
+
+    GeoDataLabelStyle other = label;
+
+    QCOMPARE(other.scale(), (float)2.0);
+    QVERIFY(other.color() == Qt::red);
+    QVERIFY(other.font() == testFont);
+
+    other.setColor(Qt::darkRed);
+    label.setScale(5.0);
+
+    QCOMPARE(label.scale(), (float)5.0);
+    QCOMPARE(other.scale(), (float)2.0);
+    QVERIFY(label.color() == Qt::red);
+    QVERIFY(other.color() == Qt::darkRed);
 }
 
 void CopyTest::copyLineStyle() {
-    QSKIP("Test not implemented",SkipSingle);
+    GeoDataLineStyle line(Qt::green);
+    line.setWidth(2.0);
+
+    QCOMPARE(line.width(), (float)2.0);
+    QVERIFY(line.color() == Qt::green);
+
+    GeoDataLineStyle other = line;
+
+    QCOMPARE(other.width(), (float)2.0);
+    QVERIFY(other.color() == Qt::green);
+
+    other.setColor(Qt::darkGreen);
+    line.setWidth(5.0);
+
+    QCOMPARE(line.width(), (float)5.0);
+    QCOMPARE(other.width(), (float)2.0);
+    QVERIFY(line.color() == Qt::green);
+    QVERIFY(other.color() == Qt::darkGreen);
+}
+
+void CopyTest::copyPolyStyle() {
+    GeoDataPolyStyle poly(Qt::blue);
+    poly.setFill(true);
+    poly.setOutline(false);
+
+    QCOMPARE(poly.fill(), true);
+    QCOMPARE(poly.outline(), false);
+    QVERIFY(poly.color() == Qt::blue);
+
+    GeoDataPolyStyle other = poly;
+
+    QCOMPARE(other.fill(), true);
+    QCOMPARE(other.outline(), false);
+    QVERIFY(other.color() == Qt::blue);
+
+    other.setOutline(true);
+    poly.setColor( Qt::cyan );
+
+    QCOMPARE(poly.outline(), false);
+    QCOMPARE(other.outline(), true);
+    QVERIFY(poly.color() == Qt::cyan);
+    QVERIFY(other.color() == Qt::blue);
 }
 
 void CopyTest::copyStyleMap() {
-    QSKIP("Test not implemented",SkipSingle);
+    GeoDataStyleMap styleMap;
+    QMap<QString,QString> testMap;
+    styleMap["germany"] = "gst1";
+    styleMap["germany"] = "gst2";
+    styleMap["germany"] = "gst3";
+    styleMap["poland"] = "pst1";
+    styleMap["poland"] = "pst2";
+    styleMap["poland"] = "pst3";
+    testMap["germany"] = "gst1";
+    testMap["germany"] = "gst2";
+    testMap["germany"] = "gst3";
+    testMap["poland"] = "pst1";
+    testMap["poland"] = "pst2";
+    testMap["poland"] = "pst3";
+    styleMap.setLastKey("poland");
+
+    QVERIFY(styleMap == testMap);
+    QVERIFY(styleMap.lastKey() == QString("poland"));
 }
 
 }
