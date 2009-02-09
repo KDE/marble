@@ -95,7 +95,7 @@ endif( WIN32 )
 
 macro( marble_add_test TEST_NAME )
     if( BUILD_MARBLE_TESTS )
-        set( ${TEST_NAME}_SRCS ${TEST_NAME}.cpp )
+        set( ${TEST_NAME}_SRCS ${TEST_NAME}.cpp ${ARGN})
         if( QTONLY )
             qt4_generate_moc( ${TEST_NAME}.cpp ${CMAKE_CURRENT_BINARY_DIR}/${TEST_NAME}.moc )
             include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
