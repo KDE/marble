@@ -43,7 +43,7 @@ GeoDataPolyStyle::GeoDataPolyStyle()
 }
 
 GeoDataPolyStyle::GeoDataPolyStyle( const GeoDataPolyStyle& other )
-    : d (new GeoDataPolyStylePrivate( *other.d ) )
+    : GeoDataColorStyle( other ), d (new GeoDataPolyStylePrivate( *other.d ) )
 {
 }
 
