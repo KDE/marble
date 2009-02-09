@@ -73,6 +73,7 @@ class MarbleWidgetPrivate
           m_stillQuality( Marble::High ), m_animationQuality( Marble::Low ),
           m_animationsEnabled( false ),
           m_inputhandler( 0 ),
+          m_popupmenu( 0 ),
           m_physics( new MarblePhysics() ),
           m_proxyHost(),
           m_proxyPort( 0 )
