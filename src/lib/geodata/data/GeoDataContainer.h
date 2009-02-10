@@ -107,11 +107,18 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     * @brief return the reference of the element at a specific position
     */
     GeoDataFeature& at( int pos );
+    const GeoDataFeature& at( int pos ) const;
 
     /**
     * @brief return the reference of the last element for convenience
     */
     GeoDataFeature& last();
+
+    QVector<GeoDataFeature>::Iterator begin();
+    QVector<GeoDataFeature>::Iterator end();
+    QVector<GeoDataFeature>::ConstIterator constBegin() const;
+    QVector<GeoDataFeature>::ConstIterator constEnd() const;
+    void clear();
 
     /**
      * @brief  Serialize the container to a stream.

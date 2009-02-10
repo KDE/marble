@@ -104,10 +104,43 @@ GeoDataFeature& GeoDataContainer::at( int pos )
     return p()->m_vector[ pos ];
 }
 
+const GeoDataFeature& GeoDataContainer::at( int pos ) const
+{
+    return p()->m_vector.at( pos );
+}
+
 GeoDataFeature& GeoDataContainer::last()
 {
     detach();
     return p()->m_vector.last();
+}
+
+void GeoDataContainer::clear()
+{
+    GeoDataContainer::detach();
+    p()->m_vector.clear();
+}
+
+QVector<GeoDataFeature>::Iterator GeoDataContainer::begin()
+{
+    GeoDataContainer::detach();
+    return p()->m_vector.begin();
+}
+
+QVector<GeoDataFeature>::Iterator GeoDataContainer::end()
+{
+    GeoDataContainer::detach();
+    return p()->m_vector.end();
+}
+
+QVector<GeoDataFeature>::ConstIterator GeoDataContainer::constBegin() const
+{
+    return p()->m_vector.constBegin();
+}
+
+QVector<GeoDataFeature>::ConstIterator GeoDataContainer::constEnd() const
+{
+    return p()->m_vector.constEnd();
 }
 
 void GeoDataContainer::pack( QDataStream& stream ) const
