@@ -1,6 +1,7 @@
 /*
     Copyright (C) 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>
     Copyright (C) 2007 Murad Tagirov <tmurad@gmail.com>
+    Copyright (C) 2009 Patrick Spendrin <ps_ml@gmx.de>
 
     This file is part of the KDE project
 
@@ -78,13 +79,13 @@ public:
      * @brief Add a style to the style storage
      * @param style  the new style
      */
-    void addStyle( GeoDataStyle* style );
+    void addStyle( const GeoDataStyle& style );
 
     /**
      * @brief Add a style to the style storage
      * @param style  the new style
      */
-    void removeStyle( GeoDataStyle* style );
+    void removeStyle( const QString& styleId );
 
     /**
      * @brief Return a style in the style storage
@@ -101,13 +102,13 @@ public:
     * @brief Add a stylemap to the stylemap storage
     * @param map  the new stylemap
     */
-    void addStyleMap( GeoDataStyleMap* map );
+    void addStyleMap( const GeoDataStyleMap& map );
     
     /**
     * @brief remove stylemap from storage
-    * @param map the styleMap to be removed
+    * @param mapId the styleId of the styleMap to be removed
     */
-    void removeStyleMap( GeoDataStyleMap* map );
+    void removeStyleMap( const QString& mapId );
     
     /**
      * @brief Return a style in the style storage

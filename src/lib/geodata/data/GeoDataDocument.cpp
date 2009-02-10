@@ -47,6 +47,10 @@ GeoDataDocument::GeoDataDocument( const GeoDataDocument& other )
 
 GeoDataDocument::~GeoDataDocument()
 {
+    qDeleteAll(p()->m_styleHash);
+    qDeleteAll(p()->m_styleMapHash);
+    p()->m_styleHash.clear();
+    p()->m_styleMapHash.clear();
 }
 
 GeoDataDocumentPrivate* GeoDataDocument::p() const
@@ -65,20 +69,18 @@ void GeoDataDocument::setFileName( const QString &value )
     p()->m_filename = value;
 }
 
-void GeoDataDocument::addStyle( GeoDataStyle* style )
+void GeoDataDocument::addStyle( const GeoDataStyle& style )
 {
-    Q_ASSERT( style );
     detach();
-    qDebug( "GeoDataDocument: Add new style" );
-    p()->m_styleHash.insert( style->styleId(), style );
+    p()->m_styleHash.insert( style.styleId(), new GeoDataStyle( style ) );
 }
 
-void GeoDataDocument::removeStyle( GeoDataStyle* style )
+void GeoDataDocument::removeStyle( const QString& styleId )
 {
-    Q_ASSERT( style );
     detach();
-    qDebug( "GeoDataDocument: remove style" );
-    p()->m_styleHash.remove( style->styleId() );
+    GeoDataStyle* style = p()->m_styleHash[ styleId ];
+    delete style;
+    p()->m_styleHash.remove( styleId );
 }
 
 GeoDataStyle* GeoDataDocument::style( const QString& styleId ) const
@@ -95,20 +97,19 @@ QList<GeoDataStyle*> GeoDataDocument::styles() const
     return p()->m_styleHash.values();
 }
 
-void GeoDataDocument::addStyleMap( GeoDataStyleMap* map )
+void GeoDataDocument::addStyleMap( const GeoDataStyleMap& map )
 {
-    Q_ASSERT( map );
     detach();
     qDebug( "GeoDataDocument: Add new styleMap" );
-    p()->m_styleMapHash.insert( map->styleId(), map );
+    p()->m_styleMapHash.insert( map.styleId(), new GeoDataStyleMap( map ) );
 }
 
-void GeoDataDocument::removeStyleMap( GeoDataStyleMap* map )
+void GeoDataDocument::removeStyleMap( const QString& mapId )
 {
-    Q_ASSERT( map );
     detach();
-    qDebug( "GeoDataDocument: remove styleMap" );
-    p()->m_styleMapHash.remove( map->styleId() );
+    GeoDataStyleMap* map = p()->m_styleMapHash[ mapId ];
+    delete map;
+    p()->m_styleMapHash.remove( mapId );
 }
 
 GeoDataStyleMap* GeoDataDocument::styleMap( const QString& styleId ) const
