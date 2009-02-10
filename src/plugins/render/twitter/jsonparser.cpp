@@ -53,10 +53,12 @@ QList <twitterDataStructure> jsonParser::parseAllObjects(const QString &content 
                                              + QString("].text;")).toString();
         parsedJsonOutput.insert(iterator , dataStorage);
 
-      qDebug() << "in json parser" << myEngine.evaluate(QString("return myJSONObject.twitter[" + QString::number(iterator) + "].user.location")).toString() << dataStorage.location;
+      //qDebug() << "in json parser" << myEngine.evaluate(QString("return myJSONObject.twitter[" + QString::number(iterator) + "].user.location")).toString() << dataStorage.location;
         ++iterator;
     }
+qDebug()<<"::::::::::::::::::::::"<<dataStorage.user;
 
+qDebug()<<":::::::::::::::::parsed Output"<<parsedJsonOutput[0].location;
     return parsedJsonOutput;
 }
 

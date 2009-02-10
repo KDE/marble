@@ -73,7 +73,7 @@ void twitterPlugin::initialize()
     privateFlagForRenderingTwitts = 0;
     m_storagePolicy = new CacheStoragePolicy(MarbleDirs::localPath() + "/cache/");
     m_downloadManager = new HttpDownloadManager(QUrl("http://twiter.com"), m_storagePolicy);
-   downloadtwitter(0, 0, 0.0, 0.0, 0.0, 0.0);
+    downloadtwitter(0, 0, 0.0, 0.0, 0.0, 0.0);
      qDebug() << "twitter plugin was started";
 }
 
@@ -111,7 +111,8 @@ void twitterPlugin::slotJsonDownloadComplete(QString relativeUrlString, QString 
 {
 static int counter=0;
 twitterStructure temp;
-temp.twit = parsedData[counter].text ;
+//qDebug()<<"::::"<<temp.;
+//temp.twit = parsedData[counter].text ;
  parsedData = twitterJsonParser.parseAllObjects(QString::fromUtf8(m_storagePolicy->data(id)), 20);
 
     disconnect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotJsonDownloadComplete(QString , QString)));
