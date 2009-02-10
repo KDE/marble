@@ -420,7 +420,7 @@ GeoDataStyle* GeoDataFeature::style() const
     else
     {
         if ( p()->m_style != 0 ) {
-            return static_cast<GeoDataStyle*>(p()->m_style);
+            return p()->m_style;
         } else
         {
             // This should not happen
@@ -456,7 +456,7 @@ void GeoDataFeature::setRole( const QChar &role )
     p()->m_role = role;
 }
 
-GeoDataStyleMap* GeoDataFeature::styleMap()
+GeoDataStyleMap* GeoDataFeature::styleMap() const
 {
     return p()->m_styleMap;
 }

@@ -254,7 +254,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     * normal style.
     * @see GeoDataStyleMap
     */
-    GeoDataStyleMap* styleMap();
+    GeoDataStyleMap* styleMap() const;
     /**
     * Sets the styleMap of the feature
     */
