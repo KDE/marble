@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2008 Patrick Spendrin <ps_ml@gmx.de>
+    Copyright (C) 2008-2009 Patrick Spendrin <ps_ml@gmx.de>
 
     This file is part of the KDE project
 
@@ -40,16 +40,15 @@ GeoNode* KmlLineStyleTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    GeoDataLineStyle* style = 0;
     qDebug() << "LineStyle";
     if ( parentItem.represents( kmlTag_Style ) ) {
-        style = new GeoDataLineStyle();
+        GeoDataLineStyle style;
         parentItem.nodeAs<GeoDataStyle>()->setLineStyle( style );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_LineStyle << "> containing: " << style
+        qDebug() << "Parsed <" << kmlTag_LineStyle << "> containing: " << &parentItem.nodeAs<GeoDataStyle>()->polyStyle()
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
-        return style;
+        return &parentItem.nodeAs<GeoDataStyle>()->polyStyle();
     }
     return 0;
 }

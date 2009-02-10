@@ -156,8 +156,8 @@ inline void PlaceMarkPainter::drawLabelPixmap( VisiblePlaceMark *mark, bool isSe
 
     QString labelName = mark->name();
     QRect  labelRect  = mark->labelRect();
-    QFont  labelFont  = style->labelStyle()->font();
-    QColor labelColor = style->labelStyle()->color();
+    QFont  labelFont  = style->labelStyle().font();
+    QColor labelColor = style->labelStyle().color();
 
     // FIXME: To be removed after MapTheme / KML refactoring
     if ( ( labelColor == Qt::black || labelColor == QColor( "#404040" ) )

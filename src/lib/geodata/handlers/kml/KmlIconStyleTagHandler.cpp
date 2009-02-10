@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2008 Patrick Spendrin <ps_ml@gmx.de>
+    Copyright (C) 2008-2009 Patrick Spendrin <ps_ml@gmx.de>
 
     This file is part of the KDE project
 
@@ -43,13 +43,13 @@ GeoNode* KmlIconStyleTagHandler::parse( GeoParser& parser ) const
     GeoDataIconStyle* style = 0;
     
     if ( parentItem.represents( kmlTag_Style ) ) {
-        style = new GeoDataIconStyle();
+        GeoDataIconStyle style;
         parentItem.nodeAs<GeoDataStyle>()->setIconStyle( style );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_IconStyle << "> containing: " << style
+        qDebug() << "Parsed <" << kmlTag_IconStyle << "> containing: " << &style
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
-        return style;
+        return &parentItem.nodeAs<GeoDataStyle>()->iconStyle();
     }
     return 0;
 }

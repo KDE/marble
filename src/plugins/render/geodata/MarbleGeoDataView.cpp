@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
+// Copyright 2008-2009      Patrick Spendrin  <ps_ml@gmx.de>
 //
 
 #include "MarbleGeoDataView.h"
@@ -121,12 +121,12 @@ void MarbleGeoDataView::setBrushStyle( QString mapped )
      * model. This might not be wanted. On the other hand - is a copy of the
      * style within every Placemark wanted and how should this be called here?
      */
-    if( m_root->style( mapped ) && m_root->style( mapped )->polyStyle() ) {
-        if( m_currentBrush.color() != m_root->style( mapped )->polyStyle()->color() ) {
+    if( m_root->style( mapped ) ) {
+        if( m_currentBrush.color() != m_root->style( mapped )->polyStyle().color() ) {
 /*            qDebug() << "BrushColor:" 
                      << m_root->style( mapped )->polyStyle()->color() 
                      << m_currentBrush.color();*/
-            m_currentBrush.setColor( m_root->style( mapped )->polyStyle()->color() );
+            m_currentBrush.setColor( m_root->style( mapped )->polyStyle().color() );
             m_painter->setBrush( m_currentBrush.color() );
         }
     }
@@ -137,17 +137,17 @@ void MarbleGeoDataView::setPenStyle( QString mapped )
     /*
      * see the note in the setBrushStyle function
      */
-    if( m_root->style( mapped ) && m_root->style( mapped )->lineStyle() ) {
-        if( m_currentPen.color() != m_root->style( mapped )->lineStyle()->color() || 
-            m_currentPen.widthF() != m_root->style( mapped )->lineStyle()->width() ) {
+    if( m_root->style( mapped ) ) {
+        if( m_currentPen.color() != m_root->style( mapped )->lineStyle().color() || 
+            m_currentPen.widthF() != m_root->style( mapped )->lineStyle().width() ) {
 /*            qDebug() << "PenColor:" 
                      << m_root->style( mapped )->lineStyle()->color() 
                      << m_currentPen.color();
             qDebug() << "PenWidth:" 
                      << m_root->style( mapped )->lineStyle()->width() 
                      << m_currentPen.widthF();*/
-            m_currentPen.setColor( m_root->style( mapped )->lineStyle()->color() );
-            m_currentPen.setWidthF( m_root->style( mapped )->lineStyle()->width() );
+            m_currentPen.setColor( m_root->style( mapped )->lineStyle().color() );
+            m_currentPen.setWidthF( m_root->style( mapped )->lineStyle().width() );
         }
         if ( m_painter->mapQuality() != Marble::High && m_painter->mapQuality() != Marble::Print )
         {

@@ -19,7 +19,7 @@ class GeoDataStylePrivate
   public:
     GeoDataStylePrivate()
         : m_iconStyle( 0 ),
-          m_labelStyle( new GeoDataLabelStyle() ),
+          m_labelStyle( new GeoDataLabelStyle ),
           m_lineStyle( 0 ),
           m_polyStyle( 0 )
     {
@@ -56,6 +56,11 @@ GeoDataStyle::GeoDataStyle()
 {
 }
 
+GeoDataStyle::GeoDataStyle( const GeoDataStyle& other )
+    : GeoDataStyleSelector( other ), d( new GeoDataStylePrivate( *other.d ) )
+{
+}
+
 GeoDataStyle::GeoDataStyle( const QPixmap& icon, 
                             const QFont &font, const QColor &color  )
     : d( new GeoDataStylePrivate(icon, font, color) )
@@ -67,53 +72,58 @@ GeoDataStyle::~GeoDataStyle()
     delete d;
 }
 
-void GeoDataStyle::setIconStyle( GeoDataIconStyle* style )
+void GeoDataStyle::setIconStyle( const GeoDataIconStyle& style )
 {
     delete d->m_iconStyle;
-    d->m_iconStyle = style;
+    d->m_iconStyle = new GeoDataIconStyle( style );
 }
 
-void GeoDataStyle::setLineStyle( GeoDataLineStyle* style )
+void GeoDataStyle::setLineStyle( const GeoDataLineStyle& style )
 {
     delete d->m_lineStyle;
-    d->m_lineStyle = style;
+    d->m_lineStyle = new GeoDataLineStyle( style );
 }
 
-void GeoDataStyle::setLabelStyle( GeoDataLabelStyle* style )
+void GeoDataStyle::setLabelStyle( const GeoDataLabelStyle& style )
 {
     delete d->m_labelStyle;
-    d->m_labelStyle = style;
+    d->m_labelStyle = new GeoDataLabelStyle( style );
 }
 
-void GeoDataStyle::setPolyStyle( GeoDataPolyStyle* style )
+void GeoDataStyle::setPolyStyle( const GeoDataPolyStyle& style )
 {
     delete d->m_polyStyle;
-    d->m_polyStyle = style;
+    d->m_polyStyle = new GeoDataPolyStyle( style );
 }
 
-GeoDataIconStyle* GeoDataStyle::iconStyle()
+GeoDataIconStyle& GeoDataStyle::iconStyle() const
 {
-    return d->m_iconStyle;
+    return *d->m_iconStyle;
 }
 
-GeoDataLineStyle* GeoDataStyle::lineStyle()
+GeoDataLineStyle& GeoDataStyle::lineStyle() const
 {
-    return d->m_lineStyle;
+    return *d->m_lineStyle;
 }
 
-GeoDataPolyStyle* GeoDataStyle::polyStyle()
+GeoDataPolyStyle& GeoDataStyle::polyStyle() const
 {
-    return d->m_polyStyle;
+    return *d->m_polyStyle;
 }
 
-GeoDataLabelStyle* GeoDataStyle::labelStyle()
+GeoDataLabelStyle& GeoDataStyle::labelStyle() const
 {
-    return d->m_labelStyle;
+    return *d->m_labelStyle;
 }
 
 void GeoDataStyle::pack( QDataStream& stream ) const
 {
     GeoDataStyleSelector::pack( stream );
+
+    if( !d->m_iconStyle ) d->m_iconStyle = new GeoDataIconStyle;
+    if( !d->m_labelStyle ) d->m_labelStyle = new GeoDataLabelStyle;
+    if( !d->m_lineStyle ) d->m_lineStyle = new GeoDataLineStyle;
+    if( !d->m_polyStyle ) d->m_polyStyle = new GeoDataPolyStyle;
 
     d->m_iconStyle->pack( stream );
     d->m_labelStyle->pack( stream );
@@ -124,6 +134,11 @@ void GeoDataStyle::pack( QDataStream& stream ) const
 void GeoDataStyle::unpack( QDataStream& stream )
 {
     GeoDataStyleSelector::unpack( stream );
+
+    if( !d->m_iconStyle ) d->m_iconStyle = new GeoDataIconStyle;
+    if( !d->m_labelStyle ) d->m_labelStyle = new GeoDataLabelStyle;
+    if( !d->m_lineStyle ) d->m_lineStyle = new GeoDataLineStyle;
+    if( !d->m_polyStyle ) d->m_polyStyle = new GeoDataPolyStyle;
 
     d->m_iconStyle->unpack( stream );
     d->m_labelStyle->unpack( stream );
