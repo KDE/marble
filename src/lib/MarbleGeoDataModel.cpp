@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
+// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>"
 //
 
 
@@ -22,6 +22,8 @@
 #include "GeoDataDocument.h"       // In geodata/data/
 #include "GeoDataContainer.h"
 #include "GeoDataParser.h"
+#include "GeoDataStyle.h"
+#include "GeoDataStyleMap.h"
 
 using namespace Marble;
 
@@ -90,11 +92,11 @@ unsigned long MarbleGeoDataModel::addGeoDataFile( QString filename )
     
     // get the styles and the stylemaps
     foreach(GeoDataStyle* style, static_cast<GeoDataDocument*>( document )->styles() ) {
-        d->m_rootDocument->addStyle( style );
+        d->m_rootDocument->addStyle( *style );
     }
 
     foreach(GeoDataStyleMap* map, static_cast<GeoDataDocument*>( document )->styleMaps() ) {
-        d->m_rootDocument->addStyleMap( map );
+        d->m_rootDocument->addStyleMap( *map );
     }
     
     emit( dataChanged() );
@@ -111,11 +113,11 @@ bool MarbleGeoDataModel::removeGeoDataFile( unsigned long removeId )
         }
         // get the styles and the stylemaps
         foreach(GeoDataStyle* style, doc->styles() ) {
-            d->m_rootDocument->removeStyle( style );
+            d->m_rootDocument->removeStyle( style->styleId() );
         }
 
         foreach(GeoDataStyleMap* map, doc->styleMaps() ) {
-            d->m_rootDocument->removeStyleMap( map );
+            d->m_rootDocument->removeStyleMap( map->styleId() );
         }
         delete doc;
         return true;
