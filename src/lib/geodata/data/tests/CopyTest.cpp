@@ -31,7 +31,7 @@
 #include "GeoDataPoint.h"
 
 // StyleSelector:
-#include "GeoDataColorStyle.h"
+#include "GeoDataStyle.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataLabelStyle.h"
 #include "GeoDataLineStyle.h"
@@ -49,6 +49,8 @@ namespace Marble
 
 class CopyTest : public QObject {
     Q_OBJECT
+    private:
+        void testCoordinate( GeoDataCoordinates* coord, qreal alt, int detail, QString coordtest );
     private slots:
         void initTestCase();
         // misc.:
@@ -81,7 +83,16 @@ class CopyTest : public QObject {
         GeoDataCoordinates coord1;
         GeoDataCoordinates coord2;
         GeoDataCoordinates coord3;
+        GeoDataPoint point1;
+        GeoDataPoint point2;
+        GeoDataPoint point3;
 };
+
+void CopyTest::testCoordinate( GeoDataCoordinates* coord, qreal alt, int detail, QString coordtest ) {
+    QCOMPARE(coord->altitude(), alt);
+    QCOMPARE(coord->detail(), detail);
+    QCOMPARE(coord->toString(), coordtest);
+}
 
 void CopyTest::initTestCase() {
     MarbleDirs::setMarbleDataPath( DATA_PATH );
@@ -93,30 +104,34 @@ void CopyTest::initTestCase() {
 
     coord1.set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
     coord1.setDetail(2);
-    QCOMPARE(coord1.altitude(), 123.4);
-    QCOMPARE(coord1.detail(), 2);
-    QCOMPARE(coord1.toString(), coordString[0]);
+    testCoordinate(&coord1, 123.4, 2, coordString[0]);
     
     coord2.set(14.7107,52.0235, 133.4, GeoDataCoordinates::Degree);
     coord2.setDetail(3);
-    QCOMPARE(coord2.altitude(), 133.4);
-    QCOMPARE(coord2.detail(), 3);
-    QCOMPARE(coord2.toString(), coordString[1]);
+    testCoordinate(&coord2, 133.4, 3, coordString[1]);
 
     coord3.set(15.7107,53.0235, 143.4, GeoDataCoordinates::Degree);
     coord3.setDetail(4);
-    QCOMPARE(coord3.altitude(), 143.4);
-    QCOMPARE(coord3.detail(), 4);
-    QCOMPARE(coord3.toString(), coordString[2]);
+    testCoordinate(&coord3, 143.4, 4, coordString[2]);
+    
+    point1.set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
+    point1.setDetail(2);
+    testCoordinate(&point1, 123.4, 2, coordString[0]);
+    
+    point2.set(14.7107,52.0235, 133.4, GeoDataCoordinates::Degree);
+    point2.setDetail(3);
+    testCoordinate(&point2, 133.4, 3, coordString[1]);
+
+    point3.set(15.7107,53.0235, 143.4, GeoDataCoordinates::Degree);
+    point3.setDetail(4);
+    testCoordinate(&point3, 143.4, 4, coordString[2]);
 }
 
 void CopyTest::copyCoordinates() {
     GeoDataCoordinates other = coord1;
     
     // make sure that the coordinate contains the right values
-    QCOMPARE(other.altitude(), 123.4);
-    QCOMPARE(other.detail(), 2);
-    QCOMPARE(other.toString(), coordString[0]);
+    testCoordinate(&other, 123.4, 2, coordString[0]);
     
     QVERIFY(coord1 == other);
 }
@@ -129,17 +144,13 @@ void CopyTest::copyPoint() {
     point.setExtrude( true );
 
     // make sure that the coordinate contains the right values
-    QCOMPARE(point.altitude(), 123.4);
-    QCOMPARE(point.detail(), 2);
-    QCOMPARE(point.toString(), coordString[0]);
+    testCoordinate(&point, 123.4, 2, coordString[0]);
     QCOMPARE(point.extrude(), true);
 
     GeoDataPoint other = point;
     
     // make sure that the coordinate contains the right values
-    QCOMPARE(other.altitude(), 123.4);
-    QCOMPARE(other.detail(), 2);
-    QCOMPARE(other.toString(), coordString[0]);
+    testCoordinate(&other, 123.4, 2, coordString[0]);
     QCOMPARE(other.extrude(), true);
     
     QVERIFY(point == other);
@@ -165,14 +176,9 @@ void CopyTest::copyLineString() {
     GeoDataLineString other = lineString;
     QVERIFY(other.size() == 3);
 
-    QCOMPARE(lineString.at(0).altitude(), 123.4);
-    QCOMPARE(lineString.at(0).detail(), 2);
-    QCOMPARE(lineString.at(0).toString(), coordString[0]);
-    
-    QCOMPARE(other.at(2).altitude(), 143.4);
-    QCOMPARE(other.at(2).detail(), 4);
-    QCOMPARE(other.at(2).toString(), coordString[2]);
-    
+    testCoordinate(&lineString.at(0), 123.4, 2, coordString[0]);
+    testCoordinate(&other.at(2), 143.4, 4, coordString[2]);
+
     QVERIFY(other.at(2) == coord3);
     QVERIFY(other.tessellate());
 }
@@ -191,14 +197,9 @@ void CopyTest::copyLinearRing() {
     GeoDataLinearRing other = linearRing;
     QVERIFY(other.size() == 3);
 
-    QCOMPARE(linearRing.at(0).altitude(), 123.4);
-    QCOMPARE(linearRing.at(0).detail(), 2);
-    QCOMPARE(linearRing.at(0).toString(), coordString[0]);
-    
-    QCOMPARE(other.at(2).altitude(), 143.4);
-    QCOMPARE(other.at(2).detail(), 4);
-    QCOMPARE(other.at(2).toString(), coordString[2]);
-    
+    testCoordinate(&linearRing.at(0), 123.4, 2, coordString[0]);
+    testCoordinate(&other.at(2), 143.4, 4, coordString[2]);
+
     QVERIFY(other.at(2) == coord3);
     QVERIFY(other.tessellate());
 }
@@ -282,60 +283,148 @@ void CopyTest::copyMultiGeometry() {
     GeoDataMultiGeometry other = multiGeometry;
 
     QCOMPARE(other.size(), 5);
-/*    QCOMPARE(reinterpret_cast<GeoDataPolygon>(other[0]).innerBoundaries().size(), 3);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[0][0] == coord1);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[0][1] == coord2);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[0][2] == coord3);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[1][0] == coord3);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[1][1] == coord2);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[1][2] == coord1);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[2][0] == coord1);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[2][1] == coord2);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[2][2] == coord3);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[2][3] == coord3);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[2][4] == coord2);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).innerBoundaries()[2][5] == coord1);
+    QCOMPARE(static_cast<GeoDataPolygon*>(&other[0])->innerBoundaries().size(), 3);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->innerBoundaries()[0][0] == coord1);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->innerBoundaries()[0][1] == coord2);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->innerBoundaries()[0][2] == coord3);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->innerBoundaries()[1][0] == coord3);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->innerBoundaries()[1][1] == coord2);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->innerBoundaries()[1][2] == coord1);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->innerBoundaries()[2][0] == coord1);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->innerBoundaries()[2][1] == coord2);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->innerBoundaries()[2][2] == coord3);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->innerBoundaries()[2][3] == coord3);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->innerBoundaries()[2][4] == coord2);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->innerBoundaries()[2][5] == coord1);
     
-    QCOMPARE(static_cast<GeoDataPolygon>(other[0]).outerBoundary().size(), 6);
+    QCOMPARE(static_cast<GeoDataPolygon*>(&other[0])->outerBoundary().size(), 6);
 
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).outerBoundary()[0] == coord3);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).outerBoundary()[1] == coord2);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).outerBoundary()[2] == coord1);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).outerBoundary()[3] == coord1);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).outerBoundary()[4] == coord2);
-    QVERIFY(static_cast<GeoDataPolygon>(other[0]).outerBoundary()[5] == coord3);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->outerBoundary()[0] == coord3);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->outerBoundary()[1] == coord2);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->outerBoundary()[2] == coord1);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->outerBoundary()[3] == coord1);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->outerBoundary()[4] == coord2);
+    QVERIFY(static_cast<GeoDataPolygon*>(&other[0])->outerBoundary()[5] == coord3);
     
-    QVERIFY(other[1][0] == coord1);
-    QVERIFY(other[1][1] == coord2);
-    QVERIFY(other[1][2] == coord3);
-    QVERIFY(other[2][0] == coord3);
-    QVERIFY(other[2][1] == coord2);
-    QVERIFY(other[2][2] == coord1);
-    QVERIFY(other[3][0] == coord1);
-    QVERIFY(other[3][1] == coord2);
-    QVERIFY(other[3][2] == coord3);
-    QVERIFY(other[3][3] == coord3);
-    QVERIFY(other[3][4] == coord2);
-    QVERIFY(other[3][5] == coord1);
-    QVERIFY(other[4][0] == coord3);
-    QVERIFY(other[4][1] == coord2);
-    QVERIFY(other[4][2] == coord1);
-    QVERIFY(other[4][3] == coord1);
-    QVERIFY(other[4][4] == coord2);
-    QVERIFY(other[4][5] == coord3);*/
-    QSKIP("Test not implemented",SkipSingle);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[1])->at(0) == coord1);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[1])->at(1) == coord2);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[1])->at(2) == coord3);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[2])->at(0) == coord3);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[2])->at(1) == coord2);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[2])->at(2) == coord1);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[3])->at(0) == coord1);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[3])->at(1) == coord2);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[3])->at(2) == coord3);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[3])->at(3) == coord3);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[3])->at(4) == coord2);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[3])->at(5) == coord1);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[4])->at(0) == coord3);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[4])->at(1) == coord2);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[4])->at(2) == coord1);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[4])->at(3) == coord1);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[4])->at(4) == coord2);
+    QVERIFY(static_cast<GeoDataLinearRing*>(&other[4])->at(5) == coord3);
 }
 
 void CopyTest::copyDocument() {
-    QSKIP("Test not implemented",SkipSingle);
+    QWARN("add more document specific data");
+    GeoDataPlacemark pl1, pl2, pl3;
+    pl1.setCoordinate(point1);
+    pl2.setCoordinate(point2);
+    pl3.setCoordinate(point3);
+
+    GeoDataFolder folder;
+    folder.append(pl1);
+    folder.append(pl2);
+    folder.append(pl3);
+
+    GeoDataDocument document;
+    document.append(pl3);
+    document.append(folder);
+    document.append(pl1);
+
+    GeoDataDocument other = document;
+
+    QCOMPARE(document.size(), 3);
+    QCOMPARE(other.size(), 3);
+
+    testCoordinate(&static_cast<GeoDataPlacemark*>(&other.at(0))->coordinate(), 143.4, 4, coordString[2]);
+    testCoordinate(&static_cast<GeoDataPlacemark*>(&other.at(2))->coordinate(), 123.4, 2, coordString[0]);
+
+    GeoDataFolder *otherFolder = static_cast<GeoDataFolder*>(&other.at(1));
+    testCoordinate(&static_cast<GeoDataPlacemark*>(&otherFolder->at(0))->coordinate(), 123.4, 2, coordString[0]);
+    testCoordinate(&static_cast<GeoDataPlacemark*>(&otherFolder->at(1))->coordinate(), 133.4, 3, coordString[1]);
+    testCoordinate(&static_cast<GeoDataPlacemark*>(&otherFolder->at(2))->coordinate(), 143.4, 4, coordString[2]);
+
+    other.append(pl1);
+
+    QCOMPARE(document.size(), 3);
+    QCOMPARE(other.size(), 4);
+    testCoordinate(&static_cast<GeoDataPlacemark*>(&other.at(3))->coordinate(), 123.4, 2, coordString[0]);
 }
 
 void CopyTest::copyFolder() {
-    QSKIP("Test not implemented",SkipSingle);
+    GeoDataPlacemark pl1, pl2, pl3;
+    pl1.setCoordinate(point1);
+    pl2.setCoordinate(point2);
+    pl3.setCoordinate(point3);
+
+    GeoDataFolder folder;
+    folder.append(pl1);
+    folder.append(pl2);
+    folder.append(pl3);
+
+    QCOMPARE(folder.size(), 3);
+
+    GeoDataFolder other = folder;
+    QCOMPARE(other.size(), 3);
+    testCoordinate(&static_cast<GeoDataPlacemark*>(&other.at(0))->coordinate(), 123.4, 2, coordString[0]);
+    testCoordinate(&static_cast<GeoDataPlacemark*>(&other.at(1))->coordinate(), 133.4, 3, coordString[1]);
+    testCoordinate(&static_cast<GeoDataPlacemark*>(&other.at(2))->coordinate(), 143.4, 4, coordString[2]);
+
+    other.append(pl1);
+
+    QCOMPARE(folder.size(), 3);
+    QCOMPARE(other.size(), 4);
+    testCoordinate(&static_cast<GeoDataPlacemark*>(&other.at(3))->coordinate(), 123.4, 2, coordString[0]);
 }
 
 void CopyTest::copyPlacemark() {
-    QSKIP("Test not implemented",SkipSingle);
+    GeoDataPoint point;
+
+    point.set(13.7107,51.0235, 123.4, GeoDataCoordinates::Degree);
+    point.setDetail(2);
+    point.setExtrude( true );
+
+    // make sure that the coordinate contains the right values
+    testCoordinate(&point, 123.4, 2, coordString[0]);
+    QCOMPARE(point.extrude(), true);
+
+    GeoDataPlacemark placemark;
+    placemark.setGeometry(point);
+    placemark.setCoordinate(point);
+    placemark.setArea(12345678.0);
+    placemark.setPopulation(123456789);
+
+    testCoordinate(&placemark.coordinate(), 123.4, 2, coordString[0]);
+    testCoordinate(static_cast<GeoDataPoint*>(placemark.geometry()), 123.4, 2, coordString[0]);
+    QCOMPARE(placemark.area(), 12345678.0);
+    QCOMPARE(placemark.population(), (qint64)123456789);
+
+    GeoDataPlacemark other = placemark;
+    
+    testCoordinate(&other.coordinate(), 123.4, 2, coordString[0]);
+    testCoordinate(static_cast<GeoDataPoint*>(other.geometry()), 123.4, 2, coordString[0]);
+    QCOMPARE(other.area(), 12345678.0);
+    QCOMPARE(other.population(), (qint64)123456789);
+
+    other.setPopulation(987654321);
+
+    testCoordinate(&other.coordinate(), 123.4, 2, coordString[0]);
+    testCoordinate(static_cast<GeoDataPoint*>(other.geometry()), 123.4, 2, coordString[0]);
+    QCOMPARE(other.area(), 12345678.0);
+    QCOMPARE(other.population(), (qint64)987654321);
+    QCOMPARE(placemark.population(), (qint64)123456789);
 }
 
 void CopyTest::copyHotSpot() {
@@ -404,11 +493,19 @@ void CopyTest::copyLatLonAltBox() {
 }
 
 void CopyTest::copyStyle() {
-    QSKIP("Test not implemented",SkipSingle);
+    GeoDataLineStyle line(Qt::green);
+    line.setWidth(2.0);
+
+    GeoDataStyle style;
+
+    style.setLineStyle( line );
+    
+    QCOMPARE(style.lineStyle().width(), (float)2.0);
+    QVERIFY(style.lineStyle().color() == Qt::green);
 }
 
 void CopyTest::copyIconStyle() {
-    // hotspot is not implemented as I am not sure how it should work
+    // hotspottesting is not implemented as I am not sure how it should work
     GeoDataIconStyle icon;
     icon.setScale(2.0);
 
