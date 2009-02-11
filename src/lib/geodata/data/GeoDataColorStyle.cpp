@@ -55,6 +55,7 @@ GeoDataColorStyle::~GeoDataColorStyle()
 
 GeoDataColorStyle& GeoDataColorStyle::operator=( const GeoDataColorStyle& other )
 {
+    GeoDataObject::operator=( other );
     *d = *other.d;
     return *this;
 }
