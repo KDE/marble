@@ -102,7 +102,7 @@ painter->drawAnnotation(twitsWithLocation[counter].location,
     } else {
         painter->drawAnnotation(GeoDataCoordinates(0.0, 0.0, 0.0,
 						   GeoDataCoordinates::Degree),
-				"Twitts are being Downlaoded @Twitter Plugin");
+				"Twitts are being Downlaoded @Twitter/Identi.CA Plugin");
     }
     return true;
 }
@@ -130,7 +130,9 @@ qDebug()<<"::::::::::::::::slot"<<parsedData[0].text;
 void twitterPlugin::downloadtwitter(int rangeFrom , int rangeTo , qreal east , qreal west , qreal north , qreal south)
 {
 qDebug()<<"::::::downloading"<<rangeFrom ;
-    m_downloadManager->addJob(QUrl("http://twitter.com/statuses/public_timeline.json"), "twitter", "twitter");
+/** to use identi.ca line also */
+//    m_downloadManager->addJob(QUrl("http://twitter.com/statuses/public_timeline.json"), "twitter", "twitter");
+    m_downloadManager->addJob(QUrl("http://identi.ca/api/statuses/public_timeline.json"), "identica", "identica");
 
     connect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotJsonDownloadComplete(QString , QString)));
 
