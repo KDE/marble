@@ -80,6 +80,12 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
     void setPolyStyle( const GeoDataPolyStyle& style );
     /// Return the label style of this style
     GeoDataPolyStyle& polyStyle() const;
+    
+    /**
+    * @brief assignment operator
+    * @param other the GeoDataStyle that gets duplicated
+    */
+    GeoDataStyle& operator=( const GeoDataStyle& other );
 
     /**
      * @brief Serialize the style to a stream

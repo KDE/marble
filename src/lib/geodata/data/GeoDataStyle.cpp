@@ -18,35 +18,26 @@ class GeoDataStylePrivate
 {
   public:
     GeoDataStylePrivate()
-        : m_iconStyle( 0 ),
-          m_labelStyle( new GeoDataLabelStyle ),
-          m_lineStyle( 0 ),
-          m_polyStyle( 0 )
     {
     }
 
     GeoDataStylePrivate(const QPixmap& icon, 
                         const QFont &font, const QColor &color )
-        : m_iconStyle( new GeoDataIconStyle( icon ) ),
-          m_labelStyle( new GeoDataLabelStyle( font, color ) ),
-          m_lineStyle( new GeoDataLineStyle( color ) ),
-          m_polyStyle( new GeoDataPolyStyle( color ) )
+        : m_iconStyle( icon ),
+          m_labelStyle( font, color ),
+          m_lineStyle( color ),
+          m_polyStyle( color )
     {
     }
-
 
     ~GeoDataStylePrivate()
     {
-        delete m_labelStyle;
-        delete m_iconStyle;
-        delete m_lineStyle;
-        delete m_polyStyle;
     }
 
-    GeoDataIconStyle   *m_iconStyle;
-    GeoDataLabelStyle  *m_labelStyle;
-    GeoDataLineStyle   *m_lineStyle;
-    GeoDataPolyStyle   *m_polyStyle;
+    GeoDataIconStyle   m_iconStyle;
+    GeoDataLabelStyle  m_labelStyle;
+    GeoDataLineStyle   m_lineStyle;
+    GeoDataPolyStyle   m_polyStyle;
     // BalloonStyle
     // ListStyle
 };
@@ -72,78 +63,70 @@ GeoDataStyle::~GeoDataStyle()
     delete d;
 }
 
+GeoDataStyle& GeoDataStyle::operator=( const GeoDataStyle& other )
+{
+    *d = *other.d;
+    return *this;
+}
+
 void GeoDataStyle::setIconStyle( const GeoDataIconStyle& style )
 {
-    delete d->m_iconStyle;
-    d->m_iconStyle = new GeoDataIconStyle( style );
+    d->m_iconStyle = style;
 }
 
 void GeoDataStyle::setLineStyle( const GeoDataLineStyle& style )
 {
-    delete d->m_lineStyle;
-    d->m_lineStyle = new GeoDataLineStyle( style );
+    d->m_lineStyle = style;
 }
 
 void GeoDataStyle::setLabelStyle( const GeoDataLabelStyle& style )
 {
-    delete d->m_labelStyle;
-    d->m_labelStyle = new GeoDataLabelStyle( style );
+    d->m_labelStyle = style;
 }
 
 void GeoDataStyle::setPolyStyle( const GeoDataPolyStyle& style )
 {
-    delete d->m_polyStyle;
-    d->m_polyStyle = new GeoDataPolyStyle( style );
+    d->m_polyStyle = style;
 }
 
 GeoDataIconStyle& GeoDataStyle::iconStyle() const
 {
-    return *d->m_iconStyle;
+    return d->m_iconStyle;
 }
 
 GeoDataLineStyle& GeoDataStyle::lineStyle() const
 {
-    return *d->m_lineStyle;
+    return d->m_lineStyle;
 }
 
 GeoDataPolyStyle& GeoDataStyle::polyStyle() const
 {
-    return *d->m_polyStyle;
+    return d->m_polyStyle;
 }
 
 GeoDataLabelStyle& GeoDataStyle::labelStyle() const
 {
-    return *d->m_labelStyle;
+    return d->m_labelStyle;
 }
 
 void GeoDataStyle::pack( QDataStream& stream ) const
 {
     GeoDataStyleSelector::pack( stream );
 
-    if( !d->m_iconStyle ) d->m_iconStyle = new GeoDataIconStyle;
-    if( !d->m_labelStyle ) d->m_labelStyle = new GeoDataLabelStyle;
-    if( !d->m_lineStyle ) d->m_lineStyle = new GeoDataLineStyle;
-    if( !d->m_polyStyle ) d->m_polyStyle = new GeoDataPolyStyle;
-
-    d->m_iconStyle->pack( stream );
-    d->m_labelStyle->pack( stream );
-    d->m_polyStyle->pack( stream );
-    d->m_lineStyle->pack( stream );
+    d->m_iconStyle.pack( stream );
+    d->m_labelStyle.pack( stream );
+    d->m_polyStyle.pack( stream );
+    d->m_lineStyle.pack( stream );
 }
 
 void GeoDataStyle::unpack( QDataStream& stream )
 {
     GeoDataStyleSelector::unpack( stream );
 
-    if( !d->m_iconStyle ) d->m_iconStyle = new GeoDataIconStyle;
-    if( !d->m_labelStyle ) d->m_labelStyle = new GeoDataLabelStyle;
-    if( !d->m_lineStyle ) d->m_lineStyle = new GeoDataLineStyle;
-    if( !d->m_polyStyle ) d->m_polyStyle = new GeoDataPolyStyle;
-
-    d->m_iconStyle->unpack( stream );
-    d->m_labelStyle->unpack( stream );
-    d->m_lineStyle->unpack( stream );
-    d->m_polyStyle->unpack( stream );
+    d->m_iconStyle.unpack( stream );
+    d->m_labelStyle.unpack( stream );
+    d->m_lineStyle.unpack( stream );
+    d->m_polyStyle.unpack( stream );
 }
 
 }
