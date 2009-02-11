@@ -72,6 +72,7 @@ GeoDataIconStyle::~GeoDataIconStyle()
 
 GeoDataIconStyle& GeoDataIconStyle::operator=( const GeoDataIconStyle& other )
 {
+    GeoDataColorStyle::operator=( other );
     *d = *other.d;
     return *this;
 }

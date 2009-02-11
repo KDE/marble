@@ -82,6 +82,7 @@ GeoDataLabelStyle::~GeoDataLabelStyle()
 
 GeoDataLabelStyle& GeoDataLabelStyle::operator=( const GeoDataLabelStyle& other )
 {
+    GeoDataColorStyle::operator=( other );
     *d = *other.d;
     return *this;
 }

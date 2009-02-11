@@ -60,6 +60,7 @@ GeoDataPolyStyle::~GeoDataPolyStyle()
 
 GeoDataPolyStyle& GeoDataPolyStyle::operator=( const GeoDataPolyStyle& other )
 {
+    GeoDataColorStyle::operator=( other );
     *d = *other.d;
     return *this;
 }

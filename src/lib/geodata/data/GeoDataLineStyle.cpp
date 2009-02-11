@@ -45,7 +45,7 @@ GeoDataLineStyle::GeoDataLineStyle( const GeoDataLineStyle& other )
 }
 
 GeoDataLineStyle::GeoDataLineStyle( const QColor &color )
-    : d (new GeoDataLineStylePrivate )
+    : d ( new GeoDataLineStylePrivate )
 {
     setColor( color );
 }
@@ -57,6 +57,7 @@ GeoDataLineStyle::~GeoDataLineStyle()
 
 GeoDataLineStyle& GeoDataLineStyle::operator=( const GeoDataLineStyle& other )
 {
+    GeoDataColorStyle::operator=( other );
     *d = *other.d;
     return *this;
 }
