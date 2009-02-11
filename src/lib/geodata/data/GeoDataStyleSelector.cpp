@@ -51,6 +51,13 @@ GeoDataStyleSelector::~GeoDataStyleSelector()
     delete d;
 }
 
+GeoDataStyleSelector& GeoDataStyleSelector::operator=( const GeoDataStyleSelector& other )
+{
+    GeoDataObject::operator=( other );
+    *d = *other.d;
+    return *this;
+}
+
 void GeoDataStyleSelector::setStyleId( const QString &value )
 {
     d->m_styleId = value;

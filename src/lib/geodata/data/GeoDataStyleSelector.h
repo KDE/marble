@@ -52,6 +52,11 @@ class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
     QString styleId() const;
 
     /**
+    * @brief assignment operator
+    */
+    GeoDataStyleSelector& operator=( const GeoDataStyleSelector& other );
+
+    /**
      * @brief Serialize the styleselector to a stream
      * @param  stream  the stream
      */
