@@ -47,20 +47,11 @@ GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
     qDebug() << "Parsed <" << kmlTag_Placemark << ">"
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif
-    if( parentItem.nodeAs<GeoDataFeature>() ) {
-        qDebug() << parentItem.nodeAs<GeoDataFeature>()->name();
-    }
-
-    qDebug() << (long)parentItem.nodeAs<GeoDataFeature>();
 
     if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
-        qDebug() << "test0:";
         static_cast<GeoDataFolder*>(parentItem.nodeAs<GeoDataFeature>())->append( placemark );
-        qDebug() << "test1:" << static_cast<GeoDataFolder*>(parentItem.nodeAs<GeoDataFeature>())->size();
-        qDebug() << "test1:" << &static_cast<GeoDataFolder*>(parentItem.nodeAs<GeoDataFeature>())->last();
         return &static_cast<GeoDataFolder*>(parentItem.nodeAs<GeoDataFeature>())->last();
     } else {
-        qDebug() << "test2";
         return 0;
     }
 }
