@@ -53,6 +53,12 @@ GeoDataColorStyle::~GeoDataColorStyle()
     delete d;
 }
 
+GeoDataColorStyle& GeoDataColorStyle::operator=( const GeoDataColorStyle& value )
+{
+    *d = *other.d;
+    return *this;
+}
+
 void GeoDataColorStyle::setColor( const QColor &value )
 {
     d->m_color = value;

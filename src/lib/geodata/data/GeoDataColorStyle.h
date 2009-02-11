@@ -82,6 +82,12 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
     ColorMode colorMode() const;
 
     /**
+    * assignment operator
+    * @param other the other colorstyle
+    */
+    GeoDataColorStyle& operator=( const GeoDataColorStyle& other );
+
+    /**
      * @brief Serialize the style to a stream
      * @param  stream  the stream
      */
