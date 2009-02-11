@@ -114,7 +114,7 @@ twitterStructure temp;
 //qDebug()<<"::::"<<temp.;
 //temp.twit = parsedData[counter].text ;
  parsedData = twitterJsonParser.parseAllObjects(QString::fromUtf8(m_storagePolicy->data(id)), 20);
-
+qDebug()<<"::::::::::::::::slot"<<parsedData[0].text;
     disconnect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotJsonDownloadComplete(QString , QString)));
 
     connect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotGeoCodingReplyRecieved(QString , QString)));

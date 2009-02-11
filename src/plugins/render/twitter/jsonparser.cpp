@@ -17,7 +17,7 @@ jsonParser::~jsonParser()
 
 twitterDataStructure jsonParser::parseObjectOnPosition(const QString &content , int requiredObjectPosition)
 {
-//TODO make this work as parseAllobjects is working ..will do it at some other time
+
  /*   QString temp = "var myJSONObject =" + content;
     myEngine.evaluate(temp);
 
@@ -44,7 +44,7 @@ if (temp != "Twitter is down for database maintenance. It will return in about 3
 {
 	myEngine.evaluate(QString("function userName(k){return myJSONObject.twitter[k].user.name};"));
 	myEngine.evaluate(QString("function userLocation(k){return myJSONObject.twitter[k].user.location};"));
-	myEngine.evaluate(QString("function userText(k){return myJSONObject.twitter[k].user.text};"));
+	myEngine.evaluate(QString("function userText(k){return myJSONObject.twitter[k].text};"));
 
     myEngine.evaluate(temp);
     while ((iterator) < numberOfObjects) {
