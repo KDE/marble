@@ -65,6 +65,7 @@ GeoDataStyle::~GeoDataStyle()
 
 GeoDataStyle& GeoDataStyle::operator=( const GeoDataStyle& other )
 {
+    GeoDataStyleSelector::operator=( other );
     *d = *other.d;
     return *this;
 }

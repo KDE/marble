@@ -402,9 +402,8 @@ QString GeoDataLatLonBox::toString( GeoDataCoordinates::Unit unit ) const
 
 GeoDataLatLonBox& GeoDataLatLonBox::operator=( const GeoDataLatLonBox &other )
 {
-    // FIXME: this check is not needed, remove or keep it?
-    if ( this == &other )
-        return *this;
+    GeoDataObject::operator=( other );
+    
     *d = *other.d;
     return *this;
 }

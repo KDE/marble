@@ -104,6 +104,7 @@ GeoDataFeaturePrivate* GeoDataFeature::p() const
 
 GeoDataFeature& GeoDataFeature::operator=( const GeoDataFeature& other )
 {
+    GeoDataObject::operator=( other );
     if (!p()->ref.deref())
         delete d;
 

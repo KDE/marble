@@ -100,6 +100,8 @@ GeoDataGeometryPrivate* GeoDataGeometry::p() const
 
 GeoDataGeometry& GeoDataGeometry::operator=( const GeoDataGeometry& other )
 {
+    GeoDataObject::operator=( other );
+
     if (!p()->ref.deref())
         delete d;
 

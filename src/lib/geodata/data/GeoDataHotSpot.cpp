@@ -64,6 +64,8 @@ GeoDataHotSpot::~GeoDataHotSpot()
 
 GeoDataHotSpot& GeoDataHotSpot::operator=( const GeoDataHotSpot& other )
 {
+    GeoDataObject::operator=( other );
+
     *d = *other.d;
     return *this;
 }

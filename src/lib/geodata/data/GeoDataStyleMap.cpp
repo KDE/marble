@@ -63,6 +63,7 @@ void GeoDataStyleMap::setLastKey( QString key )
 GeoDataStyleMap& GeoDataStyleMap::operator=( const GeoDataStyleMap& other )
 {
     QMap<QString, QString>::operator=( other );
+    GeoDataStyleSelector::operator=( other );
     *d = *other.d;
     return *this;
 }

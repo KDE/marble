@@ -49,16 +49,8 @@ bool operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs 
 
 GeoDataLatLonAltBox& GeoDataLatLonAltBox::operator=( const GeoDataLatLonAltBox &other )
 {
-    // FIXME: this check is not needed, remove or keep it?
-    if ( this == &other )
-        return *this;
-
-    setWest(  other.west() );
-    setEast(  other.east() );
-    setNorth( other.north() );
-    setSouth( other.south() );
-    setRotation( other.rotation() );
-
+    GeoDataLatLonBox::operator=( other );
+    
     *d = *other.d;
     return *this;
 }
