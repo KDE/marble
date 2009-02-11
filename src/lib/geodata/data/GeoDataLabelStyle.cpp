@@ -80,6 +80,12 @@ GeoDataLabelStyle::~GeoDataLabelStyle()
     delete d;
 }
 
+GeoDataLabelStyle& GeoDataLabelStyle::operator=( const GeoDataLabelStyle& other )
+{
+    *d = *other.d;
+    return *this;
+}
+
 void GeoDataLabelStyle::setAlignment( GeoDataLabelStyle::Alignment alignment )
 {
     d->m_alignment = alignment;

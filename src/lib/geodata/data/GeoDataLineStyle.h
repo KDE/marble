@@ -45,6 +45,11 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
     explicit GeoDataLineStyle( const QColor &color );
 
     ~GeoDataLineStyle();
+    
+    /**
+    * @brief assignment operator
+    */
+    GeoDataLineStyle& operator=( const GeoDataLineStyle& other );
 
     /**
      * @brief Set the width of the line

@@ -49,6 +49,11 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
     GeoDataLabelStyle( const QFont &font, const QColor &color );
 
     ~GeoDataLabelStyle();
+    
+    /**
+    * @brief assignment operator
+    */
+    GeoDataLabelStyle& operator=( const GeoDataLabelStyle& other );
 
     /**
      * @brief Set the scale of the label

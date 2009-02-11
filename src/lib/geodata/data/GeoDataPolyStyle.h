@@ -44,6 +44,11 @@ class GEODATA_EXPORT GeoDataPolyStyle : public GeoDataColorStyle
     explicit GeoDataPolyStyle( const QColor &color );
 
     ~GeoDataPolyStyle();
+    
+    /**
+    * @brief assignment operator
+    */
+    GeoDataPolyStyle& operator=( const GeoDataPolyStyle& other );
 
     /**
      * @brief Set whether to fill the polygon

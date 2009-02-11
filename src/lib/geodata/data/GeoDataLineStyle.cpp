@@ -55,6 +55,12 @@ GeoDataLineStyle::~GeoDataLineStyle()
     delete d;
 }
 
+GeoDataLineStyle& GeoDataLineStyle::operator=( const GeoDataLineStyle& other )
+{
+    *d = *other.d;
+    return *this;
+}
+
 void GeoDataLineStyle::setWidth( const float &width )
 {
     d->m_width = width;

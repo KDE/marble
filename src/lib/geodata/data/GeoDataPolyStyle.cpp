@@ -58,6 +58,12 @@ GeoDataPolyStyle::~GeoDataPolyStyle()
     delete d;
 }
 
+GeoDataPolyStyle& GeoDataPolyStyle::operator=( const GeoDataPolyStyle& other )
+{
+    *d = *other.d;
+    return *this;
+}
+
 void GeoDataPolyStyle::setFill( const bool &fill )
 {
     d->m_fill = fill;
