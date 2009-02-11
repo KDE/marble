@@ -17,8 +17,8 @@ jsonParser::~jsonParser()
 
 twitterDataStructure jsonParser::parseObjectOnPosition(const QString &content , int requiredObjectPosition)
 {
-
-    QString temp = "var myJSONObject =" + content;
+//TODO make this work as parseAllobjects is working ..will do it at some other time
+ /*   QString temp = "var myJSONObject =" + content;
     myEngine.evaluate(temp);
 
     dataStorage.user = myEngine.evaluate(QString("return myJSONObject.photos[")
@@ -31,7 +31,7 @@ twitterDataStructure jsonParser::parseObjectOnPosition(const QString &content , 
                                          + QString::number(requiredObjectPosition)
                                          + QString("].text;")).toString();
 
-
+*/
     return dataStorage;
 }
 
@@ -39,27 +39,38 @@ QList <twitterDataStructure> jsonParser::parseAllObjects(const QString &content 
 {
     QString temp = "var myJSONObject =  { \"twitter\":" + content + "}";
     int iterator = 0;//the count starts fom one
+//qDebug()<<"::::::::::::::::::::::::"<<temp;
+if (temp != "Twitter is down for database maintenance. It will return in about 30 minutes")
+{
+	myEngine.evaluate(QString("function userName(k){return myJSONObject.twitter[k].user.name};"));
+	myEngine.evaluate(QString("function userLocation(k){return myJSONObject.twitter[k].user.location};"));
+	myEngine.evaluate(QString("function userText(k){return myJSONObject.twitter[k].user.text};"));
 
     myEngine.evaluate(temp);
     while ((iterator) < numberOfObjects) {
-        dataStorage.user = myEngine.evaluate(QString("return myJSONObject.twitter[")
-                                             + QString::number(iterator)
-                                             + QString("].user.name;")).toString();
-        dataStorage.location = myEngine.evaluate(QString("return myJSONObject.twitter[")
-                               + QString::number(iterator)
-                               + QString("].user.location;")).toString();
-        dataStorage.text = myEngine.evaluate(QString("return myJSONObject.twitter[")
-                                             + QString::number(iterator)
-                                             + QString("].text;")).toString();
-        parsedJsonOutput.insert(iterator , dataStorage);
+	myEngine.evaluate(QString("var a ="+QString::number(iterator) )).toString();
+        dataStorage.user=myEngine.evaluate(QString("userName(a)")).toString();
+ 	dataStorage.location=myEngine.evaluate(QString("userLocation(a)")).toString();
+ 	dataStorage.text=myEngine.evaluate(QString("userText(a)")).toString();
+        
+	parsedJsonOutput.insert(iterator , dataStorage);
 
-      //qDebug() << "in json parser" << myEngine.evaluate(QString("return myJSONObject.twitter[" + QString::number(iterator) + "].user.location")).toString() << dataStorage.location;
         ++iterator;
     }
-qDebug()<<"::::::::::::::::::::::"<<dataStorage.user;
+//qDebug()<<"::::::::::::::::::::::"<<dataStorage.user;
 
-qDebug()<<":::::::::::::::::parsed Output"<<parsedJsonOutput[0].location;
-    return parsedJsonOutput;
+//qDebug()<<":::::::::::::::::parsed Output"<<parsedJsonOutput[0].location;
+}
+else 
+{
+//twitter is down :(
+dataStorage.user="@Twitter Plugin";
+dataStorage.location="Equator";
+dataStorage.text="Twitter is down , Please try in 30 minutes " ;
+parsedJsonOutput<<dataStorage;
+
+}
+   return parsedJsonOutput;
 }
 
 googleMapDataStructure jsonParser::geoCodingAPIparseObject(QString content)
@@ -68,10 +79,12 @@ googleMapDataStructure jsonParser::geoCodingAPIparseObject(QString content)
     QString temp = "var myJSONObject = " + content;
 
     googleMapDataStructure returnStructure;
-
+	myEngine.evaluate("function lat(){return myJSONObject.Placemark[0].Point.coordinates[0]}");
+	myEngine.evaluate("function lon(){return myJSONObject.Placemark[0].Point.coordinates[1]}");
     myEngine.evaluate(temp);
-    returnStructure.lat = myEngine.evaluate("return myJSONObject.Placemark[0].Point.coordinates[0]").toNumber();
-    returnStructure.lon = myEngine.evaluate("return myJSONObject.Placemark[0].Point.coordinates[1]").toNumber();
+
+    returnStructure.lon = myEngine.evaluate("lon()").toNumber();
+ returnStructure.lat = myEngine.evaluate("lat()").toNumber();
      qDebug() << "twitter lan lon text=" << returnStructure.lat << returnStructure.lon;
     return returnStructure;
 }

@@ -154,8 +154,8 @@ void twitterPlugin::slotGeoCodingReplyRecieved(QString relativeUrlString, QStrin
     twitterData.location = GeoDataCoordinates(geoCodedData.lat, geoCodedData.lon, 1.0, GeoDataCoordinates::Degree);
    twitsWithLocation.append(twitterData);
   localCountOfTwitts ++;
- //qDebug()<<"twitter count has value == " << count ;
-    if (localCountOfTwitts >= 5)
+qDebug()<<"::::::::::::::::::::twitter count has value == " << localCountOfTwitts;
+    if (localCountOfTwitts >= 1)
         privateFlagForRenderingTwitts = 1;//1 means unblock
 }
 
