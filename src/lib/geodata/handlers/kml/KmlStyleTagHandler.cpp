@@ -47,10 +47,10 @@ GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
         style.setStyleId( parser.attribute( "id" ).trimmed() );
         parentItem.nodeAs<GeoDataDocument>()->addStyle( style );
 #ifdef DEBUG_TAGS
-    qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << parentItem.nodeAs<GeoDataDocument>()->styles().last() << " parentItem: Document "
+    qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << &parentItem.nodeAs<GeoDataDocument>()->styles().last() << " parentItem: Document "
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
-        return parentItem.nodeAs<GeoDataDocument>()->styles().last();
+        return &parentItem.nodeAs<GeoDataDocument>()->styles().last();
     }
     else if ( parentItem.nodeAs<GeoDataFeature>() ) {
 /*        style = new GeoDataStyle;

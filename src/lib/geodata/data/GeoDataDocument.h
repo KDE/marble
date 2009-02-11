@@ -91,12 +91,12 @@ public:
      * @brief Return a style in the style storage
      * @param styleId  the id of the style
      */
-    GeoDataStyle* style( const QString& styleId ) const;
+    GeoDataStyle& style( const QString& styleId ) const;
     
     /**
     * @brief dump a Vector of all styles
     */
-    QList<GeoDataStyle*> styles() const;
+    QList<GeoDataStyle> styles() const;
 
     /**
     * @brief Add a stylemap to the stylemap storage
@@ -114,12 +114,12 @@ public:
      * @brief Return a style in the style storage
      * @param styleId  the id of the style
      */
-    GeoDataStyleMap* styleMap( const QString& styleId ) const;
+    GeoDataStyleMap& styleMap( const QString& styleId ) const;
     
     /**
     * @brief dump a Vector of all styles
     */
-    QList<GeoDataStyleMap*> styleMaps() const;
+    QList<GeoDataStyleMap> styleMaps() const;
     
     // Serialize the Placemark to @p stream
     virtual void pack( QDataStream& stream ) const;

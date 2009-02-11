@@ -91,12 +91,12 @@ unsigned long MarbleGeoDataModel::addGeoDataFile( QString filename )
     d->m_documents[++(d->m_latestId)] = static_cast<GeoDataDocument*>( document );
     
     // get the styles and the stylemaps
-    foreach(GeoDataStyle* style, static_cast<GeoDataDocument*>( document )->styles() ) {
-        d->m_rootDocument->addStyle( *style );
+    foreach(const GeoDataStyle& style, static_cast<GeoDataDocument*>( document )->styles() ) {
+        d->m_rootDocument->addStyle( style );
     }
 
-    foreach(GeoDataStyleMap* map, static_cast<GeoDataDocument*>( document )->styleMaps() ) {
-        d->m_rootDocument->addStyleMap( *map );
+    foreach(const GeoDataStyleMap& map, static_cast<GeoDataDocument*>( document )->styleMaps() ) {
+        d->m_rootDocument->addStyleMap( map );
     }
     
     emit( dataChanged() );
@@ -112,12 +112,12 @@ bool MarbleGeoDataModel::removeGeoDataFile( unsigned long removeId )
 //            d->m_rootDocument->removeFeature( feature );
         }
         // get the styles and the stylemaps
-        foreach(GeoDataStyle* style, doc->styles() ) {
-            d->m_rootDocument->removeStyle( style->styleId() );
+        foreach(const GeoDataStyle& style, doc->styles() ) {
+            d->m_rootDocument->removeStyle( style.styleId() );
         }
 
-        foreach(GeoDataStyleMap* map, doc->styleMaps() ) {
-            d->m_rootDocument->removeStyleMap( map->styleId() );
+        foreach(const GeoDataStyleMap& map, doc->styleMaps() ) {
+            d->m_rootDocument->removeStyleMap( map.styleId() );
         }
         delete doc;
         return true;

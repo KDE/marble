@@ -11,6 +11,8 @@
 #ifndef GEODATADOCUMENTPRIVATE_H
 #define GEODATADOCUMENTPRIVATE_H
 
+#include "GeoDataStyle.h"
+#include "GeoDataStyleMap.h"
 #include "GeoDataContainer_p.h"
 
 namespace Marble
@@ -28,10 +30,10 @@ class GeoDataDocumentPrivate : public Marble::GeoDataContainerPrivate
         GeoDataDocumentPrivate* copy = new GeoDataDocumentPrivate;
         *copy = *this;
         return copy;
-    };
+    }
 
-    QHash<QString, GeoDataStyle*> m_styleHash;
-    QHash<QString, GeoDataStyleMap*> m_styleMapHash;
+    QMap<QString, GeoDataStyle> m_styleHash;
+    QMap<QString, GeoDataStyleMap> m_styleMapHash;
     QString m_filename;
 };
 

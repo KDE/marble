@@ -47,8 +47,6 @@ GeoDataDocument::GeoDataDocument( const GeoDataDocument& other )
 
 GeoDataDocument::~GeoDataDocument()
 {
-    qDeleteAll(p()->m_styleHash);
-    qDeleteAll(p()->m_styleMapHash);
     p()->m_styleHash.clear();
     p()->m_styleMapHash.clear();
 }
@@ -72,27 +70,25 @@ void GeoDataDocument::setFileName( const QString &value )
 void GeoDataDocument::addStyle( const GeoDataStyle& style )
 {
     detach();
-    p()->m_styleHash.insert( style.styleId(), new GeoDataStyle( style ) );
+    p()->m_styleHash.insert( style.styleId(), style );
 }
 
 void GeoDataDocument::removeStyle( const QString& styleId )
 {
     detach();
-    GeoDataStyle* style = p()->m_styleHash[ styleId ];
-    delete style;
     p()->m_styleHash.remove( styleId );
 }
 
-GeoDataStyle* GeoDataDocument::style( const QString& styleId ) const
+GeoDataStyle& GeoDataDocument::style( const QString& styleId ) const
 {
     /*
      * FIXME: m_styleHash always should contain at least default
      *        GeoDataStyle element
      */
-    return p()->m_styleHash.value( styleId );
+    return p()->m_styleHash[ styleId ];
 }
 
-QList<GeoDataStyle*> GeoDataDocument::styles() const
+QList<GeoDataStyle> GeoDataDocument::styles() const
 {
     return p()->m_styleHash.values();
 }
@@ -101,23 +97,21 @@ void GeoDataDocument::addStyleMap( const GeoDataStyleMap& map )
 {
     detach();
     qDebug( "GeoDataDocument: Add new styleMap" );
-    p()->m_styleMapHash.insert( map.styleId(), new GeoDataStyleMap( map ) );
+    p()->m_styleMapHash.insert( map.styleId(), map );
 }
 
 void GeoDataDocument::removeStyleMap( const QString& mapId )
 {
     detach();
-    GeoDataStyleMap* map = p()->m_styleMapHash[ mapId ];
-    delete map;
     p()->m_styleMapHash.remove( mapId );
 }
 
-GeoDataStyleMap* GeoDataDocument::styleMap( const QString& styleId ) const
+GeoDataStyleMap& GeoDataDocument::styleMap( const QString& styleId ) const
 {
-    return p()->m_styleMapHash.value( styleId );
+    return p()->m_styleMapHash[ styleId ];
 }
 
-QList<GeoDataStyleMap*> GeoDataDocument::styleMaps() const
+QList<GeoDataStyleMap> GeoDataDocument::styleMaps() const
 {
     return p()->m_styleMapHash.values();
 }
@@ -129,11 +123,11 @@ void GeoDataDocument::pack( QDataStream& stream ) const
     stream << p()->m_styleHash.size();
     
     
-    for( QHash<QString, GeoDataStyle*>::const_iterator iterator 
+    for( QMap<QString, GeoDataStyle>::const_iterator iterator 
           = p()->m_styleHash.constBegin(); 
         iterator != p()->m_styleHash.constEnd(); 
         ++iterator ) {
-        iterator.value()->pack( stream );
+        iterator.value().pack( stream );
     }
 }
 
@@ -147,9 +141,9 @@ void GeoDataDocument::unpack( QDataStream& stream )
 
     stream >> size;
     for( int i = 0; i < size; i++ ) {
-        GeoDataStyle* style = new GeoDataStyle();
-        style->unpack( stream );
-        p()->m_styleHash.insert( style->styleId(), style );
+        GeoDataStyle style;
+        style.unpack( stream );
+        p()->m_styleHash.insert( style.styleId(), style );
     }
 }
 

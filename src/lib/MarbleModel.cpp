@@ -797,7 +797,7 @@ void MarbleModelPrivate::geoDataDocumentAdded( GeoDataDocument* document )
     foreach(GeoDataPlacemark placemark, document->placemarks())
     {
         QString styleUrl = placemark.styleUrl().remove('#');
-        placemark.setStyle( document->style( styleUrl ) );
+        placemark.setStyle( &document->style( styleUrl ) );
     };
     m_fileviewmodel->append( item );
     
