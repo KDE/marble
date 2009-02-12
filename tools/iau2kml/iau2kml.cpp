@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 
             rawline = sourcestream.readLine();
 //            if ( !rawline.startsWith("\"E\"|\"m\"|\"" ) ) {
-            if ( !rawline.startsWith("\"M\"|\"M\"|\"" ) ) {
+            if ( !rawline.startsWith("\"V\"|\"V\"|\"" ) ) {
                 continue;
             }
             rawline = rawline.replace( "\"|", "|" );
@@ -124,8 +124,9 @@ int main(int argc, char *argv[])
 
             lon = lonString.toFloat();
 
-            if ( !rawline.startsWith("\"M\"|\"M\"|\"" ) ) {
-                if ( lon > 180.0 ) lon = lon - 360.0;
+            if ( lon > 180.0 ) lon = lon - 360.0;
+
+            if ( rawline.startsWith("\"M\"|\"M\"|\"" ) || rawline.startsWith("\"V\"|\"V\"|\"" ) ) {
                 lon = -lon;
             }
 

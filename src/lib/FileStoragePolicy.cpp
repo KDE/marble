@@ -100,6 +100,11 @@ void FileStoragePolicy::clearCache()
             while (itTheme.hasNext()) {
                 itTheme.next();
                 QString tileDirectory = itTheme.filePath();
+
+                if ( itTheme.fileName().toInt() < 5 ) {
+                    continue;
+                }
+
                 QDirIterator itTile( tileDirectory, QDir::Files | QDir::NoSymLinks, QDirIterator::Subdirectories );
                 while (itTile.hasNext()) {
                     itTile.next();
