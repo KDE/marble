@@ -21,10 +21,10 @@ namespace Marble
 class GeoDataObjectPrivate
 {
   public:
-    GeoDataObjectPrivate(GeoDataObject* parent)
+    GeoDataObjectPrivate()
         : m_id(0),
           m_targetId(0),
-          m_parent( parent )
+          m_parent( 0 )
     {
     }
 
@@ -33,9 +33,9 @@ class GeoDataObjectPrivate
     GeoDataObject* m_parent;
 };
 
-GeoDataObject::GeoDataObject( GeoDataObject* parent )
+GeoDataObject::GeoDataObject()
     : GeoNode(), Serializable(),
-      d( new GeoDataObjectPrivate( parent ) )
+      d( new GeoDataObjectPrivate() )
 {
 }
 

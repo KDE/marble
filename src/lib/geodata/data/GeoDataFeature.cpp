@@ -36,9 +36,8 @@ bool GeoDataFeature::s_defaultStyleInitialized = false;
 GeoDataStyle* GeoDataFeature::s_defaultStyle[GeoDataFeature::LastIndex];
 
 
-GeoDataFeature::GeoDataFeature( GeoDataObject* parent )
-    : GeoDataObject( parent ),
-      d( new GeoDataFeaturePrivate() )
+GeoDataFeature::GeoDataFeature()
+    :d( new GeoDataFeaturePrivate() )
 {
     p()->ref.ref();
 }
@@ -78,9 +77,8 @@ GeoDataFeature::GeoDataFeature( const GeoDataPlacemark& other )
     p()->ref.ref();
 }
 
-GeoDataFeature::GeoDataFeature( const QString& name, GeoDataObject* parent )
-    : GeoDataObject( parent ),
-      d( new GeoDataFeaturePrivate() )
+GeoDataFeature::GeoDataFeature( const QString& name )
+    :d( new GeoDataFeaturePrivate() )
 {
     p()->ref.ref();
     p()->m_name = name;

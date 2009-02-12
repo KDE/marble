@@ -50,7 +50,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     friend class GeoDataMultiGeometry;
     friend class GeoDataModel;
  public:
-    GeoDataGeometry( GeoDataObject *parent = 0 );
+    GeoDataGeometry();
     GeoDataGeometry( const GeoDataGeometry& other );
     GeoDataGeometry( const GeoDataPolygon& other );
     GeoDataGeometry( const GeoDataPoint& other );

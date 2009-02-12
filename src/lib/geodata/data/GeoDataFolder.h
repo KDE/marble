@@ -46,7 +46,7 @@ namespace Marble
  */
 class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer {
  public:
-    explicit GeoDataFolder( GeoDataObject *parent = 0 );
+    GeoDataFolder();
     GeoDataFolder( const GeoDataFolder& other );
     ~GeoDataFolder();
 

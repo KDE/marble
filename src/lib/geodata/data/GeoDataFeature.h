@@ -59,9 +59,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     friend class GeoDataDocument;
     friend class GeoDataPlacemark;
  public:
-    GeoDataFeature( GeoDataObject *parent = 0 );
+    GeoDataFeature();
     /// Create a new GeoDataFeature with @p name as its name.
-    GeoDataFeature( const QString& name, GeoDataObject *parent = 0 );
+    GeoDataFeature( const QString& name );
 
     GeoDataFeature( const GeoDataFeature& other );
     

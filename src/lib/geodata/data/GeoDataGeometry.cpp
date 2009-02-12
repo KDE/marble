@@ -25,9 +25,8 @@
 namespace Marble
 {
 
-GeoDataGeometry::GeoDataGeometry( GeoDataObject *parent ) 
-    : GeoDataObject( parent ),
-      d( new GeoDataGeometryPrivate() )
+GeoDataGeometry::GeoDataGeometry()
+    : d( new GeoDataGeometryPrivate() )
 {
     p()->ref.ref();
 }

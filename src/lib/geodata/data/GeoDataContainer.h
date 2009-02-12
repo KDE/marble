@@ -47,7 +47,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
 {
  public:
     /// Default constructor
-    explicit GeoDataContainer( GeoDataObject *parent = 0 );
+    GeoDataContainer();
     GeoDataContainer( const GeoDataContainer& other );
     GeoDataContainerPrivate* p() const;
     /// Destruct the GeoDataContainer

@@ -25,7 +25,7 @@
 namespace Marble
 {
 
-GeoDataContainer::GeoDataContainer( GeoDataObject *parent )
+GeoDataContainer::GeoDataContainer()
     : GeoDataFeature( new GeoDataContainerPrivate )
 {
 }
