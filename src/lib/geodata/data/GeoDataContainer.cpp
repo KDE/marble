@@ -81,7 +81,7 @@ QVector<GeoDataPlacemark> GeoDataContainer::placemarks() const
     for (; it != end; ++it) {
         GeoDataFeature feature = *it;
         if ( feature.featureId() == GeoDataPlacemarkId )
-            results.append( *static_cast<const GeoDataPlacemark*>( it ) );
+            results.append( feature );
     }
 
     return results;
