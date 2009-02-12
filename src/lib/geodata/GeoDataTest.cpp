@@ -24,10 +24,10 @@
 #include <QtCore/QFile>
 #include <QtCore/QStringList>
 
-#include "GeoDataFolder.h"
-
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
+#include "GeoDataFolder.h"
+#include "GeoDataPlacemark.h"
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
@@ -188,9 +188,17 @@ QString formatOutput(int depth)
     return result;
 }
 
+void dumpGeoDataPlacemark(const GeoDataPlacemark& placemark)
+{
+    qDebug() << placemark.name() << placemark.population() << placemark.coordinate().toString();
+}
+
 void dumpFoldersRecursively(const GeoDataContainer& container, int depth)
 {
+    qDebug() << "dumping container with" << container.size() << "children...";
+
     QVector<GeoDataFolder> folders = container.folders();
+    QVector<GeoDataPlacemark> placemarks = container.placemarks();
     QString format = formatOutput(depth);
 
     fprintf(stderr, "%s", qPrintable(format + QString("Dumping container with %1 child folders!\n").arg(folders.size())));
@@ -201,6 +209,16 @@ void dumpFoldersRecursively(const GeoDataContainer& container, int depth)
     for (; it != end; ++it) {
         fprintf(stderr, "%s", qPrintable(format + QString("Dumping child %1\n").arg(it - folders.constBegin() + 1)));
         dumpFoldersRecursively(*it, ++depth);
+    }
+
+    fprintf(stderr, "%s", qPrintable(format + QString("Dumping container with %1 child placemarks!\n").arg(placemarks.size())));
+
+    QVector<GeoDataPlacemark>::const_iterator pit = placemarks.constBegin();
+    const QVector<GeoDataPlacemark>::const_iterator pend = placemarks.constEnd();
+
+    for (; pit != pend; ++pit) {
+        fprintf(stderr, "%s", qPrintable(format + QString("Dumping child %1\n").arg(pit - placemarks.constBegin() + 1)));
+        dumpGeoDataPlacemark(*pit);
     }
 }
 
