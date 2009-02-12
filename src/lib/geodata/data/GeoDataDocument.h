@@ -57,7 +57,6 @@ public:
     GeoDataDocument( const GeoDataDocument& other );
     ~GeoDataDocument();
 
-    virtual EnumFeatureId featureId() const { return GeoDataDocumentId; };
     virtual bool isGeoDataDocument() const { return true; }
 
     /**

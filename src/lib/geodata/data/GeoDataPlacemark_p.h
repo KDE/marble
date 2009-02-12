@@ -65,7 +65,12 @@ class GeoDataPlacemarkPrivate : public Marble::GeoDataFeaturePrivate
         GeoDataPlacemarkPrivate* copy = new GeoDataPlacemarkPrivate;
         *copy = *this;
         return copy;
-    };
+    }
+
+    virtual EnumFeatureId featureId() const
+    {
+        return GeoDataPlacemarkId;
+    }
 
     // Data for a Placemark in addition to those in GeoDataFeature.
     GeoDataGeometry    *m_geometry;     // any GeoDataGeometry entry like locations

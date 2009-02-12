@@ -32,6 +32,11 @@ class GeoDataDocumentPrivate : public Marble::GeoDataContainerPrivate
         return copy;
     }
 
+    virtual EnumFeatureId featureId() const
+    {
+        return GeoDataDocumentId;
+    }
+
     QMap<QString, GeoDataStyle> m_styleHash;
     QMap<QString, GeoDataStyleMap> m_styleMapHash;
     QString m_filename;

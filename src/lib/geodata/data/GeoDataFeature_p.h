@@ -71,6 +71,11 @@ class GeoDataFeaturePrivate
         return copy;
     };
 
+    virtual EnumFeatureId featureId() const
+    {
+        return InvalidFeatureId;
+    }
+
     ~GeoDataFeaturePrivate()
     {
     }

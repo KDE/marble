@@ -28,7 +28,12 @@ class GeoDataContainerPrivate : public Marble::GeoDataFeaturePrivate
         GeoDataContainerPrivate* copy = new GeoDataContainerPrivate;
         *copy = *this;
         return copy;
-    };
+    }
+
+    virtual EnumFeatureId featureId() const
+    {
+        return GeoDataFolderId;
+    }
 
     QVector<GeoDataFeature> m_vector;
 };

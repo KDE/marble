@@ -112,6 +112,11 @@ GeoDataFeature& GeoDataFeature::operator=( const GeoDataFeature& other )
     return *this;
 }
 
+EnumFeatureId GeoDataFeature::featureId() const
+{
+    return p()->featureId();
+}
+
 void GeoDataFeature::initializeDefaultStyles()
 {
     // We need to do this similar to the way KCmdLineOptions works in
