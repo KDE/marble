@@ -45,13 +45,14 @@ GeoNode* KmlStyleMapTagHandler::parse( GeoParser& parser ) const
     
     if( parentItem.represents( kmlTag_Document ) ) {
         GeoDataStyleMap styleMap;
-        styleMap.setStyleId( parser.attribute( "id" ).trimmed() );
+        QString styleId = parser.attribute( "id" ).trimmed();
+        styleMap.setStyleId( styleId );
         parentItem.nodeAs<GeoDataDocument>()->addStyleMap( styleMap );
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_StyleMap << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
-        return &parentItem.nodeAs<GeoDataDocument>()->styleMaps().last();
+        return &parentItem.nodeAs<GeoDataDocument>()->styleMap( styleId );
     } else if( parentItem.nodeAs<GeoDataFeature>() ) {
 /*        GeoDataStyleMap styleMap;
         styleMap.setStyleId( parser.attribute( "id" ).trimmed() );
