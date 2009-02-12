@@ -35,7 +35,7 @@ GeoDataPlacemark::GeoDataPlacemark( const GeoDataPlacemark& other )
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const QString& name, GeoDataObject *parent )
-    : GeoDataFeature( name, parent )
+    : GeoDataFeature( name )
 {
 }
 
