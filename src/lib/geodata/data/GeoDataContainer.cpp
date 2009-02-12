@@ -40,6 +40,11 @@ GeoDataContainer::GeoDataContainer( const GeoDataContainer& other )
 {
 }
 
+GeoDataContainer::GeoDataContainer( const GeoDataFeature& other )
+    : GeoDataFeature( other )
+{
+}
+
 GeoDataContainer::~GeoDataContainer()
 {
 }
@@ -60,7 +65,7 @@ QVector<GeoDataFolder> GeoDataContainer::folders() const
         GeoDataFeature feature = *it;
 
         if ( feature.featureId() == GeoDataFolderId )
-            results.append( *static_cast<const GeoDataFolder*>( it ) );
+            results.append( feature );
     }
 
     return results;

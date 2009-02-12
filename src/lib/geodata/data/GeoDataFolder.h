@@ -48,6 +48,7 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer {
  public:
     GeoDataFolder();
     GeoDataFolder( const GeoDataFolder& other );
+    GeoDataFolder( const GeoDataFeature& other );
     ~GeoDataFolder();
 
     virtual bool isFolder() const { return true; }
