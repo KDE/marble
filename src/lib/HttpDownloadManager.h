@@ -98,6 +98,11 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
  Q_SIGNALS:
     void downloadComplete( QString, QString );
     void statusMessage( QString );
+    /**
+     * Signal is emitted when a new job is added to the queue and the parameter
+     * contains the number of total jobs which are currently in the queue.
+     */
+    void jobAdded( int );
 
  private Q_SLOTS:
     void activateJobs();

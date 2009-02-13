@@ -368,6 +368,9 @@ MarbleMap::MarbleMap()
 
     d->construct();
     qDebug("Model: Time elapsed: %d ms", t.elapsed());
+
+    // FIXME: add method initDownloadManager
+    setDownloadUrl("");
 }
 
 
@@ -380,6 +383,9 @@ MarbleMap::MarbleMap(MarbleModel *model)
     d->m_modelIsOwned = false;
 
     d->construct();
+
+    // FIXME: add method initDownloadManager
+    setDownloadUrl("");
 }
 
 MarbleMap::~MarbleMap()

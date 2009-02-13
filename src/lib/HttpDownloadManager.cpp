@@ -145,6 +145,7 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
         }
     }
 
+    emit jobAdded( m_jobQueue.size() + m_activatedJobList.size() );
     return true;
 }
 
