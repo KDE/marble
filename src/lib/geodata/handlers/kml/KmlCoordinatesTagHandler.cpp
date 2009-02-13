@@ -46,11 +46,14 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.nodeAs<GeoDataGeometry>() || parentItem.nodeAs<GeoDataPlacemark>() ) {
+    if( parentItem.represents( kmlTag_Placemark )
+         || parentItem.represents( kmlTag_LineString )
+         || parentItem.represents( kmlTag_MultiGeometry )
+         || parentItem.represents( kmlTag_LinearRing ) ) {
         QStringList  coordinatesLines = parser.readElementText().trimmed().split( QRegExp("\\s"), QString::SkipEmptyParts );
         Q_FOREACH( const QString& line, coordinatesLines ) {
             QStringList coordinates = line.trimmed().split( ',' );
-            if ( parentItem.nodeAs<GeoDataPlacemark>() ) {
+            if ( parentItem.represents( kmlTag_Placemark ) ) {
                 GeoDataPoint coord;
                 if ( coordinates.size() == 2 ) {
                     coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
@@ -73,11 +76,11 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
 				coordinates.at( 2 ).toDouble() );
                 }
 
-                if ( parentItem.nodeAs<GeoDataLineString>() ) {
+                if ( parentItem.represents( kmlTag_LineString ) ) {
                     parentItem.nodeAs<GeoDataLineString>()->append( coord );
-                } else if ( parentItem.nodeAs<GeoDataLinearRing>() ) {
+                } else if ( parentItem.represents( kmlTag_LinearRing ) ) {
                     parentItem.nodeAs<GeoDataLinearRing>()->append( coord );
-                } else if ( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
+                } else if ( parentItem.represents( kmlTag_MultiGeometry ) ) {
                     GeoDataPoint point;
                     if ( coordinates.size() == 2 ) {
                         point.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 

@@ -49,12 +49,12 @@ GeoNode* KmlLineStringTagHandler::parse( GeoParser& parser ) const
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif
 
-    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
+    if( parentItem.represents( kmlTag_Placemark ) ) {
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( lineString );
         return parentItem.nodeAs<GeoDataPlacemark>()->geometry();
-    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
+    } else if(  parentItem.represents( kmlTag_MultiGeometry ) ) {
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( lineString );
-        return &parentItem.nodeAs<GeoDataMultiGeometry>()->last();
+        return static_cast<GeoDataMultiGeometry*>(&parentItem.nodeAs<GeoDataMultiGeometry>()->last());
     } else {
         return 0;
     }
