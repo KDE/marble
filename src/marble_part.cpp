@@ -130,7 +130,9 @@ ControlView* MarblePart::controlView() const
 
 KAboutData *MarblePart::createAboutData()
 {
-  	return new KAboutData( I18N_NOOP( "marble_part" ), 0, ki18n( "A Desktop Globe" ), MARBLE_VERSION_STRING.toLatin1() );
+    return new KAboutData( I18N_NOOP( "marble_part" ), 0,
+                           ki18n( "A Desktop Globe" ),
+                           MARBLE_VERSION_STRING.toLatin1() );
 }
 
 bool MarblePart::openUrl( const KUrl &url )
