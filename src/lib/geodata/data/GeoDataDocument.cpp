@@ -51,8 +51,6 @@ GeoDataDocument::GeoDataDocument( const GeoDataDocument& other )
 
 GeoDataDocument::~GeoDataDocument()
 {
-    p()->m_styleHash.clear();
-    p()->m_styleMapHash.clear();
 }
 
 GeoDataDocumentPrivate* GeoDataDocument::p() const
