@@ -22,15 +22,6 @@ class GeoDataPolyStylePrivate
     {
     }
 
-    GeoDataPolyStylePrivate( const GeoDataPolyStylePrivate& other )
-     : m_fill( other.m_fill ), m_outline( other.m_outline )
-    {
-    }
-
-    ~GeoDataPolyStylePrivate()
-    {
-    }
-
     /// whether to fill the polygon
     bool  m_fill;
     /// whether to draw the outline
@@ -43,7 +34,7 @@ GeoDataPolyStyle::GeoDataPolyStyle()
 }
 
 GeoDataPolyStyle::GeoDataPolyStyle( const GeoDataPolyStyle& other )
-    : GeoDataColorStyle( other ), d (new GeoDataPolyStylePrivate( *other.d ) )
+    : GeoDataColorStyle( other ), d( new GeoDataPolyStylePrivate( *other.d ) )
 {
 }
 
