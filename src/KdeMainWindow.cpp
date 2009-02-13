@@ -59,7 +59,7 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
 
     connect( marbleWidget(), SIGNAL( themeChanged( QString ) ), 
 	     this, SLOT( setMapTitle() ) );
-
+    initStatusBar();
 }
 
 MainWindow::~MainWindow()
