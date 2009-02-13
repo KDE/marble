@@ -34,9 +34,13 @@
 namespace Marble
 {
 
-GeoDataDocument::GeoDataDocument( GeoDataObject *parent )
-    : GeoDocument()
-    , GeoDataContainer( new GeoDataDocumentPrivate() )
+GeoDataDocument::GeoDataDocument()
+    : GeoDataContainer( new GeoDataDocumentPrivate )
+{
+}
+
+GeoDataDocument::GeoDataDocument( GeoDataFeature& other )
+    : GeoDataContainer( other )
 {
 }
 

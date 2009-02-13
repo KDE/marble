@@ -53,7 +53,8 @@ class GeoDataDocumentPrivate;
 class GEODATA_EXPORT GeoDataDocument : public GeoDocument,
                                        public GeoDataContainer {
 public:
-    explicit GeoDataDocument( GeoDataObject *parent = 0 );
+    GeoDataDocument();
+    GeoDataDocument( GeoDataFeature& other );
     GeoDataDocument( const GeoDataDocument& other );
     ~GeoDataDocument();
 
