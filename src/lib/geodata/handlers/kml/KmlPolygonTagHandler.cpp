@@ -48,10 +48,10 @@ GeoNode* KmlPolygonTagHandler::parse( GeoParser& parser ) const
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
 
-    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
+    if( parentItem.represents( kmlTag_Placemark ) ) {
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( polygon );
         return parentItem.nodeAs<GeoDataPlacemark>()->geometry();
-    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
+    } else if( parentItem.represents( kmlTag_MultiGeometry ) ) {
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( polygon );
     return &parentItem.nodeAs<GeoDataMultiGeometry>()->last();
     } else {
