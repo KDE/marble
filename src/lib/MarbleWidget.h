@@ -28,8 +28,6 @@
 #include <QtGui/QPixmap>
 #include <QtDesigner/QDesignerExportWidget>
 
-//#include <QtDBus/QtDBus>
-
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"       // In geodata/data/
 #include "MarbleWidgetInputHandler.h"
@@ -115,7 +113,9 @@ class GeoSceneDocument;
 class MARBLE_EXPORT MarbleWidget : public QWidget
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.marble")
+#ifdef MARBLE_DBUS
+    Q_CLASSINFO("D-Bus Interface", "org.kde.MarbleWidget")
+#endif
 
     Q_PROPERTY(int zoom          READ zoom            WRITE zoomView)
 
@@ -299,9 +299,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space
      */
+    // FIXME: refactor the GPS/GPX code, so that this nonsense method can die.
     bool    globalQuaternion( int x, int y, Quaternion &q);
-    // FIXME: Make the names of globalQuaternion() and
-    //        geoCoordinates() follow a pattern.
 
     /**
      * @brief Return the longitude of the center point.

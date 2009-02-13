@@ -39,8 +39,9 @@ GeoDataFeature::GeoDataVisualCategory MarbleAbstractRunner::category() const
     return GeoDataFeature::Default;
 }
 
-void MarbleAbstractRunner::parse(const QString& /*input*/)
+void MarbleAbstractRunner::parse(const QString &input)
 {
+    m_input = input;
 }
 
 void MarbleAbstractRunner::run() 

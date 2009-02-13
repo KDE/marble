@@ -45,6 +45,12 @@ PlaceMarkManager::PlaceMarkManager( QObject *parent )
 
 PlaceMarkManager::~PlaceMarkManager()
 {
+    foreach( PlaceMarkLoader *loader, m_loaderList ) {
+        if ( loader ) {
+            loader->wait();
+        }
+    }
+
     delete m_model;
     /* do not delete the m_geomodel here
      * it is not this models property

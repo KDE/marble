@@ -494,18 +494,18 @@ void MainWindow::readSettings()
      settings.endGroup();
 
      settings.beginGroup("MarbleWidget");
-         m_controlView->marbleWidget()->setHome( 
-            settings.value("homeLongitude", 9.4).toDouble(), 
-            settings.value("homeLatitude", 54.8).toDouble(),
-            settings.value("homeZoom", 1050 ).toInt()
-         );
-         m_controlView->marbleWidget()->goHome();
          QString mapThemeId = settings.value("mapTheme", "" ).toString();
          qDebug() << "ReadSettings: mapThemeId: " << mapThemeId;
          m_controlView->marbleWidget()->setMapThemeId( mapThemeId );
          m_controlView->marbleWidget()->setProjection(
             (Projection)(settings.value("projection", 0 ).toInt())
          );
+         m_controlView->marbleWidget()->setHome( 
+            settings.value("homeLongitude", 9.4).toDouble(), 
+            settings.value("homeLatitude", 54.8).toDouble(),
+            settings.value("homeZoom", 1050 ).toInt()
+         );
+         m_controlView->marbleWidget()->goHome();
      settings.endGroup();
 }
 

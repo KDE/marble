@@ -75,6 +75,7 @@ void SunControlWidget::showSunShadingClicked( int index )
         m_sunLocator->setCitylights( false );
     else if ( index == 1 )
         m_sunLocator->setCitylights( true );
+    m_sunLocator->update();
 }
 
 void SunControlWidget::centerSunClicked(bool checked)

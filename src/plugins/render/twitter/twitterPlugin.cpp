@@ -16,15 +16,15 @@
 #include <QSize>
 #include <QRegExp>
 
-namespace Marble
-{
+using namespace Marble;
+
 /**
 Right now this plugin displays public twit from Twitter , and gecocodes [i.e getting lat lon from a given street address] using Google Map API , i plan to extend it to use OSM GeoCoding in net few days :) [The API key has been taken for  my personal website , please don't misuse it :) ]
 */
 
 twitterPlugin::~twitterPlugin()
 {
-    delete m_storagePolicy;
+//    delete m_storagePolicy;
 }
 
 QStringList twitterPlugin::backendTypes() const
@@ -74,7 +74,7 @@ void twitterPlugin::initialize()
     m_storagePolicy = new CacheStoragePolicy(MarbleDirs::localPath() + "/cache/");
     m_downloadManager = new HttpDownloadManager(QUrl("http://twiter.com"), m_storagePolicy);
     downloadtwitter(0, 0, 0.0, 0.0, 0.0, 0.0);
-//     qDebug() << "twitter plugin was started";
+     qDebug() << "twitter plugin was started";
 }
 
 bool twitterPlugin::isInitialized() const
@@ -93,38 +93,46 @@ bool twitterPlugin::render(GeoPainter *painter, ViewportParams *viewport,
 
     if (privateFlagForRenderingTwitts >= 1) {
         for (int counter = 0;counter < 4;counter++)
-            painter->drawAnnotation(twitsWithLocation[counter].location,
+//painter->drawAnnotation(GeoDataCoordinates(0.0,0.0),"hiiiiiiiiii");            
+
+painter->drawAnnotation(twitsWithLocation[counter].location,
 				    parsedData[counter].user + " said \n"
 				    + parsedData[counter].text,
-				    QSize(140, 140));
+				    QSize(140, 140)) ;
     } else {
         painter->drawAnnotation(GeoDataCoordinates(0.0, 0.0, 0.0,
 						   GeoDataCoordinates::Degree),
-				"Twitts are being Downlaoded @Twitter Plugin");
+				"Twitts are being Downlaoded @Twitter/Identi.CA Plugin");
     }
     return true;
 }
 
 void twitterPlugin::slotJsonDownloadComplete(QString relativeUrlString, QString id)
 {
-// temp.twitter = parsedData[counter].text ;
-    parsedData = twitterJsonParser.parseAllObjects(QString::fromUtf8(m_storagePolicy->data(id)), 20);
-
+static int counter=0;
+twitterStructure temp;
+//qDebug()<<"::::"<<temp.;
+//temp.twit = parsedData[counter].text ;
+ parsedData = twitterJsonParser.parseAllObjects(QString::fromUtf8(m_storagePolicy->data(id)), 20);
+qDebug()<<"::::::::::::::::slot"<<parsedData[0].text;
     disconnect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotJsonDownloadComplete(QString , QString)));
 
     connect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotGeoCodingReplyRecieved(QString , QString)));
     for (int counter = 0;counter < 10;counter++) {
-        if (parsedData[counter].location != "null") {
-            parsedData[counter].location.replace(QRegExp("[?,:!/\\s]+"), "+");//remove whitespace and replace it with + for query api
+       if (parsedData[counter].location != "null") {
+           parsedData[counter].location.replace(QRegExp("[?,:!/\\s]+"), "+");//remove whitespace and replace it with + for query api
             findLatLonOfStreetAddress(parsedData [ counter ].location) ;   //this will set temp
-        }
+       }
     }
 }
 
 
 void twitterPlugin::downloadtwitter(int rangeFrom , int rangeTo , qreal east , qreal west , qreal north , qreal south)
 {
-    m_downloadManager->addJob(QUrl("http://twitter.com/statuses/public_timeline.json"), "twitter", "twitter");
+qDebug()<<"::::::downloading"<<rangeFrom ;
+/** to use identi.ca line also */
+//    m_downloadManager->addJob(QUrl("http://twitter.com/statuses/public_timeline.json"), "twitter", "twitter");
+    m_downloadManager->addJob(QUrl("http://identi.ca/api/statuses/public_timeline.json"), "identica", "identica");
 
     connect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotJsonDownloadComplete(QString , QString)));
 
@@ -143,18 +151,18 @@ void twitterPlugin::slotGeoCodingReplyRecieved(QString relativeUrlString, QStrin
     twitterStructure twitterData;
     googleMapDataStructure geoCodedData;
 
-    geoCodedData = twitterJsonParser.geoCodingAPIparseObject(QString::fromUtf8(m_storagePolicy->data(id))) ;
-//     twitterData.twit = "hi" ;
+   geoCodedData = twitterJsonParser.geoCodingAPIparseObject(QString::fromUtf8(m_storagePolicy->data(id))) ;
+     twitterData.twit = "hi" ;
     twitterData.location = GeoDataCoordinates(geoCodedData.lat, geoCodedData.lon, 1.0, GeoDataCoordinates::Degree);
-    twitsWithLocation.append(twitterData);
-    localCountOfTwitts ++;
-// qDebug()<<"twitter count has value == " << count ;
-    if (localCountOfTwitts >= 5)
+   twitsWithLocation.append(twitterData);
+  localCountOfTwitts ++;
+qDebug()<<"::::::::::::::::::::twitter count has value == " << localCountOfTwitts;
+    if (localCountOfTwitts >= 1)
         privateFlagForRenderingTwitts = 1;//1 means unblock
 }
 
-}
+
 
 Q_EXPORT_PLUGIN2(twitterPlugin, Marble::twitterPlugin)
 
-// #include "twitterPlugin.moc"
+ #include "twitterPlugin.moc"

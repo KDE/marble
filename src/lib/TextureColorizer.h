@@ -43,7 +43,7 @@ typedef union
 class TextureColorizer
 {
  public:
-    TextureColorizer(const QString&, const QString&);
+    explicit TextureColorizer(const QString&, const QString&);
     virtual ~TextureColorizer(){}
 
     void colorize(ViewParams *viewParams);

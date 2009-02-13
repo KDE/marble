@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2008      Simon Hausmann  <hausmann@kde.org>"
 //
 
 
@@ -54,6 +55,8 @@ static QString guessWikipediaDomain()
     return QString ( "http://%1.wikipedia.org/" ).arg ( code );
 }
 
+#if QT_VERSION < 0x040400
+
 TinyWebBrowser::TinyWebBrowser ( QWidget *parent )
         : QTextBrowser ( parent ),
         m_source ( guessWikipediaDomain() )
@@ -78,9 +81,9 @@ TinyWebBrowser::TinyWebBrowser ( QWidget *parent )
     << MarbleDirs::systemPath() + "/cache/";
     setSearchPaths ( searchPaths );
 
-#if QT_VERSION >= 0x040300
+// #if QT_VERSION >= 0x040300
     setOpenLinks ( false );
-#endif
+// #endif
     setOpenExternalLinks ( false );
 }
 
@@ -220,4 +223,45 @@ void TinyWebBrowser::setContentHtml ( const QString &content )
     format.setMargin ( 12 ) ;
     document()->rootFrame()->setFrameFormat ( format );
 }
+
+#else
+
+TinyWebBrowser::TinyWebBrowser( QWidget* parent )
+{
+    connect( this, SIGNAL( statusBarMessage( QString ) ),
+             this, SIGNAL( statusMessage( QString ) ) );
+
+    page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
+    connect( this, SIGNAL( linkClicked( QUrl ) ),
+             this, SLOT( openExternalLink( QUrl ) ) );
+}
+
+TinyWebBrowser::~TinyWebBrowser()
+{
+}
+
+void TinyWebBrowser::setSource( const QString& relativeUrl )
+{
+    QUrl url = relativeUrl;
+    if ( url.isRelative() )
+        url = QUrl( guessWikipediaDomain() ).resolved( url );
+    load( url );
+}
+
+void TinyWebBrowser::print()
+{
+  QPrinter printer;
+
+  QPrintDialog dlg( &printer, this );
+  if ( dlg.exec() )
+    QWebView::print( &printer );
+}
+
+void TinyWebBrowser::openExternalLink( QUrl url )
+{
+    QDesktopServices::openUrl( url );
+}
+
+#endif
+
 #include "TinyWebBrowser.moc"

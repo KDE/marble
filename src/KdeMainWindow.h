@@ -16,6 +16,8 @@
 
 #include <KXmlGuiWindow>
 
+class QProgressBar;
+
 namespace Marble
 {
 
@@ -32,14 +34,20 @@ class MainWindow : public KXmlGuiWindow
                          QWidget *parent = 0 );
     ~MainWindow();
 
+    QProgressBar* downloadProgressBar() const;
     ControlView* marbleControl() const;
     MarbleWidget* marbleWidget() const;
 
  public slots:
+    void downloadProgressJobAdded( int );
+    void downloadProgressJobCompleted( QString, QString );
     void setMapTitle();
 
  private:
+    void initStatusBar();
+    void initDownloadProgressBar();
     MarblePart *m_part;
+    QProgressBar *m_downloadProgressBar;
 };
 
 }

@@ -28,8 +28,6 @@
 #include <QtGui/QFont>
 #include <QtGui/QPixmap>
 
-//#include <QtDBus/QtDBus>
-
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"       // In geodata/data/
 #include "global.h"             // types needed in all of marble.
@@ -96,7 +94,7 @@ class MarbleAbstractFloatItem;
 class MARBLE_EXPORT MarbleMap : public QObject
 {
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "org.kde.marble")
+    Q_CLASSINFO("D-Bus Interface", "org.kde.MarbleMap")
 
  public:
 

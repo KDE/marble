@@ -73,6 +73,7 @@ void WorldClock::init()
 {
     KConfigGroup cg = config();
     m_map = new MarbleMap();
+
     if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Mercator)
         m_map->setProjection(Mercator);
     else

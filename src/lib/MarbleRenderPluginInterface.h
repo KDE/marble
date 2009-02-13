@@ -40,7 +40,7 @@ class MarbleRenderPluginInterface
     /**
     * @brief Returns a new object of the plugin
     */
-    virtual MarbleRenderPlugin* instance() = 0;
+    virtual MarbleRenderPlugin* pluginInstance() = 0;
 
     /**
      * @brief Returns the name(s) of the backend that the plugin can render

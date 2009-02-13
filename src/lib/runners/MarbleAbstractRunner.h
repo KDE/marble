@@ -67,7 +67,10 @@ public slots:
      * @p input the string to be parsed
      */
     virtual void parse(const QString &input);
-    
+
+protected:
+    QString m_input;
+
 signals:
     /**
      * This is emitted to indicate that the runner has started to work.
@@ -76,10 +79,11 @@ signals:
     void runnerStarted();
     /**
      * This is emitted to indicate that the runner has finished.
+     * @param the address of the runner itself
      * @param result the result of the parsing.
      * @see parse()
      */
-    void runnerFinished(QVector<GeoDataPlacemark> result);
+    void runnerFinished(MarbleAbstractRunner* runner, QVector<GeoDataPlacemark> result);
 };
 
 }

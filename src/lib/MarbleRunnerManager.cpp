@@ -46,37 +46,24 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
     m_activeRunners = 0;
     m_lastString = "";
     
-    //Runners
-    m_latlonRunner = new LatLonRunner(0);
-    m_latlonRunner->start();
-    m_latlonRunner->moveToThread(m_latlonRunner);
-    connect( m_latlonRunner, SIGNAL( runnerStarted() ),
-             this,           SLOT( slotRunnerStarted() ));
-    connect( m_latlonRunner, SIGNAL( runnerFinished( QVector<GeoDataPlacemark> ) ),
-             this,           SLOT( slotRunnerFinished( QVector<GeoDataPlacemark> ) ));
-    connect( this,           SIGNAL( engage(QString) ),
-             m_latlonRunner, SLOT( parse(QString) ));
-
-    m_onfRunner = new OnfRunner(0);
-    m_onfRunner->start();
-    m_onfRunner->moveToThread(m_onfRunner);
-    connect( m_onfRunner, SIGNAL( runnerStarted() ),
-             this,        SLOT( slotRunnerStarted() ));
-    connect( m_onfRunner, SIGNAL( runnerFinished( QVector<GeoDataPlacemark> ) ),
-             this,        SLOT( slotRunnerFinished( QVector<GeoDataPlacemark> ) ));
-    connect( this,        SIGNAL( engage(QString) ),
-             m_onfRunner, SLOT( parse(QString) ));
 }
 
 MarbleRunnerManager::~MarbleRunnerManager()
 {
-    m_latlonRunner->quit();
-    m_latlonRunner->wait();
-    delete m_latlonRunner;
-    
-    m_onfRunner->quit();
-    m_onfRunner->wait();
-    delete m_onfRunner;
+    foreach(MarbleAbstractRunner* runner, m_runners)
+    {
+        runner->quit();
+        runner->wait();
+#if QT_VERSION >= 0x040400
+        m_runners.removeOne(runner);
+#else
+        int index = m_runners.indexOf(runner);
+        if (index != -1) {
+          m_runners.removeAt(index);
+        }
+#endif
+        delete runner;
+    }
 }
 
 void MarbleRunnerManager::newText(QString text)
@@ -89,28 +76,42 @@ void MarbleRunnerManager::newText(QString text)
         delete m_model;
         m_model = model;
     }
-//     qDebug() << "Engage: " << text;
-    emit engage(text);
+
+    LatLonRunner* llrunner = new LatLonRunner;
+    m_runners << dynamic_cast<MarbleAbstractRunner*>(llrunner);
+    connect( llrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
+             this,     SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
+    llrunner->parse(text);
+    
+    OnfRunner* onfrunner = new OnfRunner;
+    m_runners << dynamic_cast<MarbleAbstractRunner*>(onfrunner);
+    connect( onfrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
+             this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
+    onfrunner->parse(text);
+
+    llrunner->start();
+    onfrunner->start();
 }
 
-void MarbleRunnerManager::slotRunnerFinished( QVector<GeoDataPlacemark> result )
+void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVector<GeoDataPlacemark> result )
 {
-    m_activeRunners--;
-    qDebug() << "Runner finished, active runners: " << m_activeRunners;
+#if QT_VERSION >= 0x040400
+    m_runners.removeOne(runner);
+#else
+    int index = m_runners.indexOf(runner);
+    if (index != -1) {
+      m_runners.removeAt(index);
+    }
+#endif
+    qDebug() << "Runner finished, active runners: " << m_runners.size();
     qDebug() << "Runner reports" << result.size() << "results";
     if( result.isEmpty() )
         return;
 
     PlaceMarkContainer cont( result, "Runner Results" );
     m_model->addPlaceMarks( cont, false );
-//     qDebug() << "emit modelchanged";
-    emit modelChanged( m_model );
-}
 
-void MarbleRunnerManager::slotRunnerStarted()
-{
-    m_activeRunners++;
-    qDebug() << "Runner starting, active runners: " << m_activeRunners;
+    emit modelChanged( m_model );
 }
 
 MarblePlacemarkModel* MarbleRunnerManager::model()

@@ -24,6 +24,7 @@
 #include "MarbleAbstractRunner.h"
 
 #include <QtCore/QString>
+
 class QHttp;
 class QBuffer;
 
@@ -37,9 +38,9 @@ public:
     OnfRunner(QObject *parent = 0);
     ~OnfRunner();
     GeoDataFeature::GeoDataVisualCategory category() const;
+    void run();
     
 public slots:
-    void parse(const QString &input);
     void slotRequestFinished( int id, bool error );
 private:
     void fail();

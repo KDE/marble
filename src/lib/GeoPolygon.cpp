@@ -112,7 +112,10 @@ bool PntMap::isInitialized() const
 }
 
 PntMap::~PntMap()
-{
+{   
+    if ( m_loader ) {
+        m_loader->wait();
+    }
     qDeleteAll( begin(), end() );
 }
 
@@ -126,8 +129,10 @@ void PntMap::load(const QString &filename)
 
 void PntMap::setInitialized( bool isInitialized )
 {
-    if ( m_loader->isFinished() )
+    if ( m_loader->isFinished() ) {
         delete m_loader;
+        m_loader = 0;
+    }
 
     m_isInitialized = isInitialized;
     emit initialized();

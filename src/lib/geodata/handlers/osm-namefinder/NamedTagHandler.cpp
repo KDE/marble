@@ -106,7 +106,7 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
         qDebug() << "added via parent nearestplaces, not implemented";
 
     } else if ( parentItem.first.first.isEmpty() && !parentItem.second ) {
-        // ok, its the parentItem would be searchresults, but we
+        // ok, it is the parentItem would be searchresults, but we
         // have here to work around the GeoParser bug
         GeoDocument * const document = parser.activeDocument();
         Q_ASSERT( document );

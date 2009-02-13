@@ -27,7 +27,9 @@
 #include <QtGui/QSizePolicy>
 #include <QtGui/QRegion>
 
-//#include <QtDBus/QDBusConnection>
+#ifdef MARBLE_DBUS
+#include <QtDBus/QDBusConnection>
+#endif
 
 // Marble
 #include "AbstractProjection.h"
@@ -354,7 +356,10 @@ void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fp
 MarbleMap::MarbleMap()
     : d( new MarbleMapPrivate( this ) )
 {
-//    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
+#ifdef MARBLE_DBUS
+    QDBusConnection::sessionBus().registerObject("/MarbleMap", this, 
+                    QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals );
+#endif
     QTime t;
     t.start();
     
@@ -363,6 +368,9 @@ MarbleMap::MarbleMap()
 
     d->construct();
     qDebug("Model: Time elapsed: %d ms", t.elapsed());
+
+    // FIXME: add method initDownloadManager
+    setDownloadUrl("");
 }
 
 
@@ -375,6 +383,9 @@ MarbleMap::MarbleMap(MarbleModel *model)
     d->m_modelIsOwned = false;
 
     d->construct();
+
+    // FIXME: add method initDownloadManager
+    setDownloadUrl("");
 }
 
 MarbleMap::~MarbleMap()
@@ -1202,7 +1213,7 @@ void MarbleMap::updateChangedMap()
 void MarbleMap::updateRegion( BoundingBox &box )
 {
     Q_UNUSED(box);
-    //really not sure if this is nessary as its designed for
+    //really not sure if this is nessary as it is designed for
     //placemark based layers
     setNeedsUpdate();
 

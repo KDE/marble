@@ -16,8 +16,9 @@
 
 using namespace Marble;
 
-MarblePhysics::MarblePhysics()
-    : m_jumpDuration( 2000 )
+MarblePhysics::MarblePhysics( QObject * parent )
+    : QObject( parent ), 
+      m_jumpDuration( 2000 )
 {
     m_timeLine = new QTimeLine( m_jumpDuration );
     m_timeLine->setFrameRange( 0, 500 );
@@ -55,7 +56,7 @@ GeoDataCoordinates MarblePhysics::suggestedPosition() const
 
     qreal x = (qreal)(m_jumpDuration ) * t;
 
-    qreal y = a * x * x + b * x + g;       // Parabolic function
+    qreal y = ( a * x + b ) * x + g;       // Parabolic function
 
     return GeoDataCoordinates( lon, lat, y );
 }

@@ -24,7 +24,9 @@
 #include <QtGui/QStyleOptionGraphicsItem>
 #include <QtNetwork/QNetworkProxy>
 
-//#include <QtDBus/QDBusConnection>
+#ifdef MARBLE_DBUS
+#include <QtDBus/QDBusConnection>
+#endif
 
 #include "AbstractProjection.h"
 #include "MarbleDirs.h"
@@ -73,7 +75,8 @@ class MarbleWidgetPrivate
           m_stillQuality( Marble::High ), m_animationQuality( Marble::Low ),
           m_animationsEnabled( false ),
           m_inputhandler( 0 ),
-          m_physics( new MarblePhysics() ),
+          m_popupmenu( 0 ),
+          m_physics( new MarblePhysics( parent ) ),
           m_proxyHost(),
           m_proxyPort( 0 )
     {
@@ -82,7 +85,6 @@ class MarbleWidgetPrivate
 
     ~MarbleWidgetPrivate()
     {
-        delete m_physics;
         delete m_map;
     }
 
@@ -121,7 +123,10 @@ MarbleWidget::MarbleWidget(QWidget *parent)
     : QWidget( parent ),
       d( new MarbleWidgetPrivate( new MarbleMap(), this ) )
 {
-//    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
+#ifdef MARBLE_DBUS
+    QDBusConnection::sessionBus().registerObject("/MarbleWidget", this, 
+                    QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals );
+#endif
 
     d->construct();
 
@@ -208,19 +213,31 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->connect( m_physics, SIGNAL( valueChanged( qreal ) ),
                         m_widget, SLOT( updateAnimation( qreal ) ) );
+
+    m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
+                        m_widget, SLOT( centerSun() ) );
 }
 
 void MarbleWidgetPrivate::_q_initGui() {
-    m_popupmenu    = new MarbleWidgetPopupMenu( m_widget, m_model );
-
     // Handle mouse and keyboard input.
-    m_inputhandler = 0;
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler );
     m_widget->setMouseTracking( true );
 
     // The interface to the measure tool consists of a RMB popup menu
     // and some signals.
     MeasureTool  *measureTool = m_map->measureTool();
+
+    // Connect the inputHandler and the measure tool to the popup menu
+    // FIXME: This needs REFACTORING, as a custom input handler is will likely want to have 
+    // a different popup menu.
+    if ( !m_popupmenu ) {
+        m_popupmenu    = new MarbleWidgetPopupMenu( m_widget, m_model );
+    }
+    m_widget->connect( m_inputhandler, SIGNAL( lmbRequest( int, int ) ),
+                       m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );
+    m_widget->connect( m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
+                       m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );
+
     m_widget->connect( m_popupmenu, SIGNAL( addMeasurePoint( qreal, qreal ) ),
                        measureTool, SLOT( addMeasurePoint( qreal, qreal ) ) );
     m_widget->connect( m_popupmenu, SIGNAL( removeMeasurePoints() ),
@@ -251,10 +268,7 @@ void MarbleWidget::setInputHandler(MarbleWidgetInputHandler *handler)
     if ( d->m_inputhandler ) {
         d->m_inputhandler->init( this );
         installEventFilter( d->m_inputhandler );
-        connect( d->m_inputhandler, SIGNAL( lmbRequest( int, int ) ),
-                 d->m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );
-        connect( d->m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
-                 d->m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );
+
         connect( d->m_inputhandler, SIGNAL( mouseClickScreenPosition( int, int) ),
                  this,              SLOT( notifyMouseClick( int, int ) ) );
 
@@ -1122,7 +1136,7 @@ void MarbleWidget::updateRegion( BoundingBox &box )
 {
     Q_UNUSED(box);
 
-    //really not sure if this is nessary as its designed for
+    //really not sure if this is nessary as it is designed for
     //placemark based layers
     setNeedsUpdate();
 
@@ -1270,7 +1284,6 @@ void MarbleWidget::centerSun()
     qreal  lat = sunLocator->getLat();
     centerOn( lon, lat );
 
-    qDebug() << "centering on Sun at" << lat << lon;
     disableInput();
 }
 
@@ -1281,14 +1294,18 @@ SunLocator* MarbleWidget::sunLocator()
 
 void MarbleWidget::enableInput()
 {
-    if ( !d->m_inputhandler ) 
+    if ( !d->m_inputhandler ) {
         setInputHandler( new MarbleWidgetDefaultInputHandler );
+    }
+    else {
+        installEventFilter( d->m_inputhandler );
+    }
 }
 
 void MarbleWidget::disableInput()
 {
     qDebug() << "MarbleWidget::disableInput";
-    setInputHandler( 0 );
+    removeEventFilter( d->m_inputhandler );
     setCursor( Qt::ArrowCursor );
 }
 
