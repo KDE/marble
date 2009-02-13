@@ -44,13 +44,14 @@ GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
     /// for documents several styles are allowed: document wide styles are saved different!!!!!
     if( parentItem.represents( kmlTag_Document ) ) {
         GeoDataStyle style;
-        style.setStyleId( parser.attribute( "id" ).trimmed() );
+        QString styleId = parser.attribute( "id" ).trimmed();
+        style.setStyleId( styleId );
         parentItem.nodeAs<GeoDataDocument>()->addStyle( style );
 #ifdef DEBUG_TAGS
-    qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << &parentItem.nodeAs<GeoDataDocument>()->styles().last() << " parentItem: Document "
+    qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << &parentItem.nodeAs<GeoDataDocument>()->style( styleId ) << " parentItem: Document "
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
-        return &parentItem.nodeAs<GeoDataDocument>()->styles().last();
+        return &parentItem.nodeAs<GeoDataDocument>()->style( styleId );
     }
     else if ( parentItem.nodeAs<GeoDataFeature>() ) {
 /*        style = new GeoDataStyle;
