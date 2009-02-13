@@ -43,7 +43,7 @@ class GeoDataStylePrivate
 };
 
 GeoDataStyle::GeoDataStyle()
-    : d( new GeoDataStylePrivate() )
+    : d( new GeoDataStylePrivate )
 {
 }
 
@@ -54,7 +54,7 @@ GeoDataStyle::GeoDataStyle( const GeoDataStyle& other )
 
 GeoDataStyle::GeoDataStyle( const QPixmap& icon, 
                             const QFont &font, const QColor &color  )
-    : d( new GeoDataStylePrivate(icon, font, color) )
+    : d( new GeoDataStylePrivate( icon, font, color ) )
 {
 }
 
