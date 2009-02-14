@@ -222,9 +222,9 @@ void FileViewFloatItem::contextMenu( const QPoint& pos )
     qDebug() << "custom Context menu requested!" << pos;
     QMenu *test = new QMenu( m_fileView );
     test->move( m_itemPosition );
-    connect( test->addAction( "Open new kml file..." ), SIGNAL( triggered() ),
+    connect( test->addAction( tr( "Open new kml file..." ) ), SIGNAL( triggered() ),
              this, SLOT( addFile() ) );
-    connect( test->addAction("close this kml file..." ), SIGNAL( triggered() ),
+    connect( test->addAction( tr( "close this kml file..." ) ), SIGNAL( triggered() ),
              this, SLOT( removeFile() ) );
     m_persIndex = new QPersistentModelIndex( m_fileView->indexAt( pos ) );
     test->exec();
