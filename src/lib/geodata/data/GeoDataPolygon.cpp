@@ -19,7 +19,7 @@
 namespace Marble
 {
 
-GeoDataPolygon::GeoDataPolygon( GeoDataObject *parent, TessellationFlags f )
+GeoDataPolygon::GeoDataPolygon( TessellationFlags f )
   : GeoDataGeometry( new GeoDataPolygonPrivate( f ) )
 {
 }

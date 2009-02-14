@@ -32,7 +32,7 @@ class GeoDataMultiGeometryPrivate;
 
 class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry {
  public:
-    explicit GeoDataMultiGeometry( GeoDataObject *parent = 0 );
+    GeoDataMultiGeometry();
 
     virtual ~GeoDataMultiGeometry();
 

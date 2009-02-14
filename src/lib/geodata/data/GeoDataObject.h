@@ -72,27 +72,17 @@ public:
      * @param value the new targetId value
      */
     void setTargetId( int value );
-    
-    /**
-     * @brief returns the parent in the document tree
-     */
-    GeoDataObject* parent();
-    
-    /**
-     * @brief sets the parent in the document tree
-     */
-     void setParent(GeoDataObject*);
-    
+
     /**
      * @brief returns the requested child item
      */
     virtual GeoDataObject* child( int );
-    
+
     /**
      * @brief returns this items position in the parents list
      */
     int row();
-    
+
     /**
      * @brief returns the position of an item in the list
      */

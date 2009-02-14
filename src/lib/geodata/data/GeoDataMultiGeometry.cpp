@@ -21,7 +21,7 @@
 namespace Marble
 {
 
-GeoDataMultiGeometry::GeoDataMultiGeometry( GeoDataObject *parent )
+GeoDataMultiGeometry::GeoDataMultiGeometry()
     : GeoDataGeometry( new GeoDataMultiGeometryPrivate )
 {
 }

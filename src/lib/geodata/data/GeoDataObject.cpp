@@ -30,7 +30,6 @@ class GeoDataObjectPrivate
 
     int  m_id;
     int  m_targetId;
-    GeoDataObject* m_parent;
 };
 
 GeoDataObject::GeoDataObject()
@@ -74,16 +73,6 @@ int GeoDataObject::targetId() const
 void GeoDataObject::setTargetId( int value )
 {
     d->m_targetId = value;
-}
-
-void GeoDataObject::setParent( GeoDataObject *parent )
-{
-    d->m_parent = parent;
-}
-
-GeoDataObject* GeoDataObject::parent()
-{
-    return d->m_parent;
 }
 
 GeoDataObject* GeoDataObject::child(int /* pos */ )
