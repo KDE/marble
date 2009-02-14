@@ -10,14 +10,14 @@
 
 
 #include "GeoDataLinearRing.h"
+#include "GeoDataLinearRing_p.h"
 
 
 namespace Marble
 {
 
-GeoDataLinearRing::GeoDataLinearRing( GeoDataObject *parent,
-                                      TessellationFlags f )
-    : GeoDataLineString( parent, f )
+GeoDataLinearRing::GeoDataLinearRing( TessellationFlags f )
+    : GeoDataLineString( new GeoDataLinearRingPrivate( f ) )
 {
 }
 

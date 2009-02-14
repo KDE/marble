@@ -49,7 +49,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
     typedef QVector<GeoDataCoordinates>::Iterator Iterator;
     typedef QVector<GeoDataCoordinates>::ConstIterator ConstIterator;
     
-    explicit GeoDataLineString( GeoDataObject *parent = 0, TessellationFlags f = NoTessellation);
+    GeoDataLineString( TessellationFlags f = NoTessellation );
     GeoDataLineString( const GeoDataLineString &other );
 
     virtual ~GeoDataLineString();
@@ -98,10 +98,9 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
      * @param  stream  the stream
      */
     virtual void unpack( QDataStream& stream );
-
-    virtual EnumGeometryId geometryId() const { return GeoDataLineStringId; };
  protected:
-    GeoDataLineStringPrivate  *p() const;
+    GeoDataLineStringPrivate *p() const;
+    GeoDataLineString(GeoDataLineStringPrivate* priv);
 };
 
 }

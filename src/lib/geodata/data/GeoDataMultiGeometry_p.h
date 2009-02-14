@@ -28,8 +28,12 @@ class  GeoDataMultiGeometryPrivate : public Marble::GeoDataGeometryPrivate
          GeoDataMultiGeometryPrivate* copy = new  GeoDataMultiGeometryPrivate;
         *copy = *this;
         return copy;
-    };
+    }
 
+    virtual EnumGeometryId geometryId() const
+    {
+        return GeoDataMultiGeometryId;
+    }
     QVector<GeoDataGeometry>  m_vector;
 };
 

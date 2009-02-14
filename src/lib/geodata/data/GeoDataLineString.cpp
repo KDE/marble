@@ -18,8 +18,13 @@
 
 namespace Marble
 {
-GeoDataLineString::GeoDataLineString( GeoDataObject *parent, TessellationFlags f )
+GeoDataLineString::GeoDataLineString( TessellationFlags f )
   : GeoDataGeometry( new GeoDataLineStringPrivate( f ) )
+{
+}
+
+GeoDataLineString::GeoDataLineString(GeoDataLineStringPrivate* priv)
+  : GeoDataGeometry( priv )
 {
 }
 

@@ -63,7 +63,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     virtual ~GeoDataGeometry();
 
     virtual bool isFolder() const { return false; }
-    virtual EnumGeometryId geometryId() const { return InvalidGeometryId; };
+    virtual EnumGeometryId geometryId() const;
 
     bool extrude() const;
     void setExtrude( bool extrude );

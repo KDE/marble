@@ -68,7 +68,6 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
     /// Unserialize the contents of the feature from @p stream.
     virtual void unpack( QDataStream& stream );
 
-    virtual EnumGeometryId geometryId() const { return GeoDataPolygonId; };
  protected:
     GeoDataPolygonPrivate *p() const;
 };

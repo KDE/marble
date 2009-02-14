@@ -30,7 +30,13 @@ class  GeoDataPointPrivate : public Marble::GeoDataGeometryPrivate,
          GeoDataPointPrivate* copy = new  GeoDataPointPrivate;
         *copy = *this;
         return copy;
-    };
+    }
+
+    virtual EnumGeometryId geometryId() const
+    {
+        return GeoDataPointId;
+    }
+
 };
 
 } // namespace Marble

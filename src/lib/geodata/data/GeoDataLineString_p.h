@@ -35,7 +35,12 @@ class GeoDataLineStringPrivate : public Marble::GeoDataGeometryPrivate
         GeoDataLineStringPrivate* copy = new GeoDataLineStringPrivate;
         *copy = *this;
         return copy;
-    };
+    }
+
+    virtual EnumGeometryId geometryId() const 
+    {
+        return GeoDataLineStringId;
+    }
 
     QVector<GeoDataCoordinates> m_vector;
     bool         m_dirtyBox; // tells whether there have been changes to the

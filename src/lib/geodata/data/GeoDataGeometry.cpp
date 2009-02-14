@@ -97,6 +97,11 @@ GeoDataGeometryPrivate* GeoDataGeometry::p() const
     return static_cast<GeoDataGeometryPrivate*>(d);
 }
 
+EnumGeometryId GeoDataGeometry::geometryId() const
+{
+    return p()->geometryId();
+}
+
 GeoDataGeometry& GeoDataGeometry::operator=( const GeoDataGeometry& other )
 {
     GeoDataObject::operator=( other );

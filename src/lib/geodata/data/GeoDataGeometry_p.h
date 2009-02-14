@@ -41,7 +41,12 @@ class GeoDataGeometryPrivate
         GeoDataGeometryPrivate* copy = new GeoDataGeometryPrivate;
         *copy = *this;
         return copy;
-    };
+    }
+
+    virtual EnumGeometryId geometryId() const
+    {
+        return InvalidGeometryId;
+    }
 
     bool         m_extrude;
     AltitudeMode m_altitudeMode;

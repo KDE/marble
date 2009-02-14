@@ -35,7 +35,12 @@ class  GeoDataPolygonPrivate : public Marble::GeoDataGeometryPrivate
          GeoDataPolygonPrivate* copy = new  GeoDataPolygonPrivate;
         *copy = *this;
         return copy;
-    };
+    }
+
+    virtual EnumGeometryId geometryId() const 
+    {
+        return GeoDataPolygonId;
+    }
 
     GeoDataLinearRing           outer;
     QVector<GeoDataLinearRing>  inner;

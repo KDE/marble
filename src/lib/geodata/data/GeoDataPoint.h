@@ -79,11 +79,6 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
 
     ~GeoDataPoint();
 
-    /**
-    * @brief always returns GeoDataPointId - this function is used to identify GeoDataPoints
-    */
-    virtual EnumGeometryId geometryId() const { return GeoDataPointId; };
-
     // Type definitions
     typedef QVector<GeoDataPoint> Vector;
 
