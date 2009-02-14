@@ -74,10 +74,10 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
     * comparison operator is always wrong for now
     */
-    bool operator==( const GeoDataPlacemark& other ) const { return false; };
+    bool operator==( const GeoDataPlacemark& other ) const { Q_UNUSED(other); return false; };
 
     /**
-     * Return the coordinate of the placemark as a GeoDataPoint
+     * Return the coordinate of the placemark as a GeoDataCoordinates
      */
     GeoDataCoordinates coordinate() const;
 
