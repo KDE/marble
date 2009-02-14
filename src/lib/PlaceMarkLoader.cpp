@@ -268,8 +268,8 @@ bool PlaceMarkLoader::loadFile( const QString& filename,
 
     QString testo;
 
-    GeoDataPlacemark mark;
     while ( !in.atEnd() ) {
+        GeoDataPlacemark mark;
         in >> tmpstr;
         mark.setName( tmpstr );
         testo = tmpstr;
