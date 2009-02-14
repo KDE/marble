@@ -49,7 +49,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
      * Create a new placemark.
      */
-    explicit GeoDataPlacemark( GeoDataObject* parent = 0 );
+    GeoDataPlacemark();
 
     /**
      * Create a new placemark from existing placemark @p placemark
@@ -64,7 +64,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
      * Create a new placemark with the given @p name.
      */
-    explicit GeoDataPlacemark( const QString &name, GeoDataObject *parent = 0 );
+    GeoDataPlacemark( const QString &name );
 
     /**
     * Delete the placemark

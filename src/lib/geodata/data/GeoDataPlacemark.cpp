@@ -24,7 +24,7 @@
 namespace Marble
 {
 
-GeoDataPlacemark::GeoDataPlacemark( GeoDataObject* parent )
+GeoDataPlacemark::GeoDataPlacemark()
     : GeoDataFeature( new GeoDataPlacemarkPrivate )
 {
 }
@@ -39,7 +39,7 @@ GeoDataPlacemark::GeoDataPlacemark( const GeoDataFeature& other )
 {
 }
 
-GeoDataPlacemark::GeoDataPlacemark( const QString& name, GeoDataObject *parent )
+GeoDataPlacemark::GeoDataPlacemark( const QString& name )
     : GeoDataFeature( name )
 {
 }
