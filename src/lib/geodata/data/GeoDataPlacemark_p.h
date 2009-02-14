@@ -28,6 +28,7 @@ class GeoDataPlacemarkPrivate : public Marble::GeoDataFeaturePrivate
     
     void operator=( const GeoDataPlacemarkPrivate& other )
     {
+        GeoDataFeaturePrivate::operator=( other );
         m_coordinate = other.m_coordinate;
         m_countrycode = other.m_countrycode;
         m_area = other.m_area;
