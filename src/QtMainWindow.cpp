@@ -482,17 +482,19 @@ void MainWindow::readSettings()
 #else
      QSettings settings("KDE", "Marble Desktop Globe");
 #endif
-
      settings.beginGroup("MainWindow");
          resize(settings.value("size", QSize(640, 480)).toSize());
          move(settings.value("pos", QPoint(200, 200)).toPoint());
          showFullScreen(settings.value("fullScreen", false ).toBool());
          showSideBar(settings.value("sideBar", true ).toBool());
          showStatusBar(settings.value("statusBar", false ).toBool());
+         show();
          showClouds(settings.value("showClouds", true ).toBool());
          workOffline(settings.value("workOffline", false ).toBool());
          showAtmosphere(settings.value("showAtmosphere", true ).toBool());
      settings.endGroup();
+
+     setUpdatesEnabled(false);
 
      settings.beginGroup("MarbleWidget");
          QString mapThemeId = settings.value("mapTheme", "" ).toString();
@@ -508,6 +510,8 @@ void MainWindow::readSettings()
          );
          m_controlView->marbleWidget()->goHome();
      settings.endGroup();
+
+     setUpdatesEnabled(true);
 }
 
 void MainWindow::writeSettings()
