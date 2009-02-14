@@ -413,7 +413,7 @@ void CopyTest::copyPlacemark() {
     QCOMPARE(placemark.area(), 12345678.0);
     QCOMPARE(placemark.population(), (qint64)123456789);
     QCOMPARE(placemark.id(), 281012);
-    QVERIFY(placemark.name() == "Patrick Spendrin");
+    QCOMPARE(placemark.name(), QString::fromLatin1("Patrick Spendrin"));
 
     GeoDataPlacemark other = placemark;
     
@@ -422,7 +422,7 @@ void CopyTest::copyPlacemark() {
     QCOMPARE(other.area(), 12345678.0);
     QCOMPARE(other.population(), (qint64)123456789);
     QCOMPARE(other.id(), 281012);
-    QVERIFY(other.name() == "Patrick Spendrin");
+    QCOMPARE(other.name(), QString::fromLatin1("Patrick Spendrin"));
 
     other.setPopulation(987654321);
 
@@ -431,8 +431,8 @@ void CopyTest::copyPlacemark() {
     QCOMPARE(other.area(), 12345678.0);
     QCOMPARE(other.population(), (qint64)987654321);
     QCOMPARE(placemark.population(), (qint64)123456789);
-    QVERIFY(placemark.name() == "Patrick Spendrin");
-    QVERIFY(other.name() == "Patrick Spendrin");
+    QCOMPARE(placemark.name(), QString::fromLatin1("Patrick Spendrin"));
+    QCOMPARE(other.name(), QString::fromLatin1("Patrick Spendrin"));
 }
 
 void CopyTest::copyHotSpot() {
