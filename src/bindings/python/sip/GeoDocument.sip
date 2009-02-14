@@ -28,7 +28,6 @@ protected:
                             GeoDocument ();
 
 public:
-    unsigned long s_leakProtector;
     virtual bool            isGeoDataDocument () const;
     virtual bool            isGeoSceneDocument () const;
 };   // GeoDocument
