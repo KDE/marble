@@ -26,16 +26,14 @@ namespace Marble
 {
 
 GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt,
-                            GeoDataPoint::Unit unit, int _detail,
-                            GeoDataObject *parent )
+                            GeoDataPoint::Unit unit, int _detail )
   : GeoDataGeometry( new GeoDataPointPrivate ),
     GeoDataCoordinates( _lon, _lat, _alt, 
                         static_cast<GeoDataCoordinates::Unit>( unit ), _detail )
 {
 }
 
-GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt,
-                            GeoDataObject *parent )
+GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt )
   : GeoDataGeometry( new GeoDataPointPrivate ),
     GeoDataCoordinates( _lon, _lat, _alt, 
                         GeoDataPoint::Radian, 0 )
