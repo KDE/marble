@@ -52,7 +52,7 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
     typedef GeoDataCoordinates::Unit Unit;
 
     GeoDataPoint( const GeoDataPoint& other );
-    explicit GeoDataPoint( GeoDataObject *parent = 0 );
+    GeoDataPoint();
 
     /**
      * @brief create a geopoint from longitude and latitude

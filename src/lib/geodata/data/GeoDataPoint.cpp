@@ -49,7 +49,7 @@ GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
 {
 }
 
-GeoDataPoint::GeoDataPoint( GeoDataObject *parent )
+GeoDataPoint::GeoDataPoint()
     : GeoDataGeometry( new GeoDataPointPrivate )
 {
 }
