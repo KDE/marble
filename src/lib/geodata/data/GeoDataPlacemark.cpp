@@ -75,14 +75,13 @@ void GeoDataPlacemark::coordinate( qreal& lon, qreal& lat, qreal& alt ) const
 void GeoDataPlacemark::setCoordinate( qreal lon, qreal lat, qreal alt )
 {
     detach();
-    p()->m_coordinate = GeoDataPoint( lon, lat, alt, this );
+    p()->m_coordinate = GeoDataPoint( lon, lat, alt );
 }
 
 void GeoDataPlacemark::setCoordinate( const GeoDataPoint &point )
 {
     detach();
     p()->m_coordinate = GeoDataPoint( point );
-    p()->m_coordinate.setParent( this );
 }
 
 void GeoDataPlacemark::setGeometry( const GeoDataPoint& point )

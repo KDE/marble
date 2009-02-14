@@ -23,8 +23,7 @@ class GeoDataObjectPrivate
   public:
     GeoDataObjectPrivate()
         : m_id(0),
-          m_targetId(0),
-          m_parent( 0 )
+          m_targetId(0)
     {
     }
 
@@ -82,9 +81,6 @@ GeoDataObject* GeoDataObject::child(int /* pos */ )
 
 int GeoDataObject::row()
 {
-    if ( d->m_parent )
-        return d->m_parent->childPosition( this );
-    
     return 0;
 }
 

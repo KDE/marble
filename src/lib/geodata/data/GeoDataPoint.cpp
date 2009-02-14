@@ -33,13 +33,6 @@ GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt,
 {
 }
 
-GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt )
-  : GeoDataGeometry( new GeoDataPointPrivate ),
-    GeoDataCoordinates( _lon, _lat, _alt, 
-                        GeoDataPoint::Radian, 0 )
-{
-}
-
 GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
   : GeoDataGeometry( other ),
     GeoDataCoordinates( other )
