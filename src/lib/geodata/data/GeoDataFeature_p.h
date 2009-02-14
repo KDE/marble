@@ -55,6 +55,11 @@ class GeoDataFeaturePrivate
 
     void operator=( const GeoDataFeaturePrivate& other )
     {
+        m_name = other.m_name;
+        m_description = other.m_description;
+        m_address = other.m_address;
+        m_phoneNumber = other.m_phoneNumber;
+        m_styleUrl = other.m_styleUrl;
         m_popularity = other.m_popularity;
         m_popularityIndex = other.m_popularityIndex;
         m_visible = other.m_visible;
