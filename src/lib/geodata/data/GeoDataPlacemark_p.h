@@ -21,11 +21,11 @@ class GeoDataPlacemarkPrivate : public Marble::GeoDataFeaturePrivate
   public:
     GeoDataPlacemarkPrivate()
       : m_geometry( 0 ),
-	m_area( -1.0 ),
-	m_population( -1 )
+        m_area( -1.0 ),
+        m_population( -1 )
     {
     }
-    
+
     void operator=( const GeoDataPlacemarkPrivate& other )
     {
         GeoDataFeaturePrivate::operator=( other );
