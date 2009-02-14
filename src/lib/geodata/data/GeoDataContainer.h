@@ -114,6 +114,12 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     * @brief return the reference of the last element for convenience
     */
     GeoDataFeature& last();
+    const GeoDataFeature& last() const;
+    /**
+    * @brief return the reference of the last element for convenience
+    */
+    GeoDataFeature& first();
+    const GeoDataFeature& first() const;
 
     QVector<GeoDataFeature>::Iterator begin();
     QVector<GeoDataFeature>::Iterator end();

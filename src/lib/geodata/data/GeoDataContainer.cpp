@@ -120,6 +120,22 @@ GeoDataFeature& GeoDataContainer::last()
     return p()->m_vector.last();
 }
 
+const GeoDataFeature& GeoDataContainer::last() const
+{
+    return p()->m_vector.last();
+}
+
+GeoDataFeature& GeoDataContainer::first()
+{
+    detach();
+    return p()->m_vector.first();
+}
+
+const GeoDataFeature& GeoDataContainer::first() const
+{
+    return p()->m_vector.first();
+}
+
 void GeoDataContainer::clear()
 {
     GeoDataContainer::detach();
