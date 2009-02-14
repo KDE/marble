@@ -401,6 +401,7 @@ void CopyTest::copyPlacemark() {
     QCOMPARE(point.extrude(), true);
 
     GeoDataPlacemark placemark;
+    placemark.setName("Patrick Spendrin");
     placemark.setGeometry(point);
     placemark.setCoordinate(point);
     placemark.setArea(12345678.0);
@@ -412,6 +413,7 @@ void CopyTest::copyPlacemark() {
     QCOMPARE(placemark.area(), 12345678.0);
     QCOMPARE(placemark.population(), (qint64)123456789);
     QCOMPARE(placemark.id(), 281012);
+    QVERIFY(placemark.name() == "Patrick Spendrin");
 
     GeoDataPlacemark other = placemark;
     
@@ -420,6 +422,7 @@ void CopyTest::copyPlacemark() {
     QCOMPARE(other.area(), 12345678.0);
     QCOMPARE(other.population(), (qint64)123456789);
     QCOMPARE(other.id(), 281012);
+    QVERIFY(other.name() == "Patrick Spendrin");
 
     other.setPopulation(987654321);
 
@@ -428,6 +431,8 @@ void CopyTest::copyPlacemark() {
     QCOMPARE(other.area(), 12345678.0);
     QCOMPARE(other.population(), (qint64)987654321);
     QCOMPARE(placemark.population(), (qint64)123456789);
+    QVERIFY(placemark.name() == "Patrick Spendrin");
+    QVERIFY(other.name() == "Patrick Spendrin");
 }
 
 void CopyTest::copyHotSpot() {
