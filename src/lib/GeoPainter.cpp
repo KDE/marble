@@ -497,7 +497,7 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates, qreal 
         GeoDataCoordinates topLeft( lonLeft, latTop,
                                     altitude, GeoDataCoordinates::Degree );
 
-        GeoDataLinearRing rectangle( 0, Tessellate | RespectLatitudeCircle );
+        GeoDataLinearRing rectangle( Tessellate | RespectLatitudeCircle );
 
         rectangle << bottomLeft << bottomRight << topRight << topLeft;
 
