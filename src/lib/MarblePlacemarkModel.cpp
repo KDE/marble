@@ -200,19 +200,18 @@ void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks,
                                           bool clearPrevious,
                                           bool finalize )
 {
-    beginRemoveRows( QModelIndex(), 0, rowCount() );
-
     // For now we simply remove any previous placemarks
     if ( clearPrevious ) {
+        beginRemoveRows( QModelIndex(), 0, rowCount() );
+
         d->m_placeMarkContainer.clear();
         d->m_containerMap.clear();
+
+        endRemoveRows();
     }
 
-    endRemoveRows();
-
-    beginInsertRows( QModelIndex(), 0, d->m_placeMarkContainer.count() );
-
-    placeMarks.sort( Qt::AscendingOrder );
+    
+    beginInsertRows( QModelIndex(), 0, placeMarks.count() - 1 );
 
     if( !d->m_containerMap.contains( placeMarks.name() ) ) {
         createFilterProperties( placeMarks );
@@ -224,11 +223,7 @@ void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks,
 
     endInsertRows();
 
-    emit dataChanged( index( 0, 0 ), index( rowCount() - 1, 0 ) );
-
-    if ( finalize ) {
-        sort( Qt::DescendingOrder );
-    }
+    emit dataChanged( index( 0, 0 ), index( placeMarks.count() - 1, 0 ) );
 }
 
 void  MarblePlacemarkModel::removePlaceMarks( const QString &containerName,
