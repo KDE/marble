@@ -23,7 +23,6 @@
 
 namespace Marble
 {
-
 GeoDataPlacemark::GeoDataPlacemark()
     : GeoDataFeature( new GeoDataPlacemarkPrivate )
 {
@@ -46,6 +45,11 @@ GeoDataPlacemark::GeoDataPlacemark( const QString& name )
 
 GeoDataPlacemark::~GeoDataPlacemark()
 {
+}
+
+bool GeoDataPlacemark::operator==( const GeoDataPlacemark& other ) const
+{ 
+    return p() == other.p();
 }
 
 GeoDataPlacemarkPrivate* GeoDataPlacemark::p() const

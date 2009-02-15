@@ -72,9 +72,10 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     ~GeoDataPlacemark();
     
     /**
-    * comparison operator is always wrong for now
+    * comparison operator is implemented slightly different than one would expect.
+    * Only Placemarks that are copies of each other are assumed to be equal.
     */
-    bool operator==( const GeoDataPlacemark& other ) const { Q_UNUSED(other); return false; };
+    bool operator==( const GeoDataPlacemark& other ) const;
 
     /**
      * Return the coordinate of the placemark as a GeoDataCoordinates
@@ -153,7 +154,6 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     virtual void unpack( QDataStream& stream );
 
     virtual bool isPlacemark() const { return true; }
-
  private:
     GeoDataPlacemarkPrivate *p() const;
 };

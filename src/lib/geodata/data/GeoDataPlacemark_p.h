@@ -79,6 +79,7 @@ class GeoDataPlacemarkPrivate : public Marble::GeoDataFeaturePrivate
     QString             m_countrycode;  // Country code.
     qreal               m_area;         // Area in square kilometer
     qint64              m_population;   // population in number of inhabitants
+
 };
 
 } // namespace Marble
