@@ -354,6 +354,7 @@ void MarbleControlBox::setLocations(MarblePlacemarkModel* locations)
     t.start();
     d->m_sortproxy->setSourceModel( locations );
     d->m_sortproxy->setSortLocaleAware( true );
+    d->m_sortproxy->setDynamicSortFilter( true );
     d->m_sortproxy->sort( 0 );
     qDebug("MarbleControlBox (sort): Time elapsed: %d ms", t.elapsed());
 }
