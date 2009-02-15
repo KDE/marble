@@ -212,6 +212,8 @@ void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks,
 
     beginInsertRows( QModelIndex(), 0, d->m_placeMarkContainer.count() );
 
+    placeMarks.sort( Qt::AscendingOrder );
+
     if( !d->m_containerMap.contains( placeMarks.name() ) ) {
         createFilterProperties( placeMarks );
 
@@ -235,20 +237,30 @@ void  MarblePlacemarkModel::removePlaceMarks( const QString &containerName,
     beginRemoveRows( QModelIndex(), 0, rowCount() );
     endRemoveRows();
 
+    QTime t;
+    t.start();
     if( d->m_containerMap.contains( containerName ) ) {
         QVector<Marble::GeoDataPlacemark>::const_iterator iter = d->m_containerMap[ containerName ]->constBegin();
         QVector<Marble::GeoDataPlacemark>::const_iterator end = d->m_containerMap[ containerName ]->constEnd();
         GeoDataPlacemark placemark;
         for(; iter != end;iter++) {
             placemark = *iter;
-            d->m_placeMarkContainer.remove( d->m_placeMarkContainer.indexOf( placemark ) );
+            int i = d->m_placeMarkContainer.indexOf( placemark );
+            if( d->m_placeMarkContainer.count() <= 14 )
+                qDebug() << "_" << i;
+            if( i >= 0 ) {
+                d->m_placeMarkContainer.remove( i );
+            } else {
+                qDebug() << "couldn't find this placemark!";
+            }
         }
         delete d->m_containerMap[ containerName ];
         d->m_containerMap.remove( containerName );
     }
+    qDebug() << "MarblePlacemarkModel (removePlacemarks): Time elapsed:" << t.elapsed() << "ms for" << d->m_placeMarkContainer.count() << "Placemarks.";
 
-    beginInsertRows( QModelIndex(), 0, d->m_placeMarkContainer.count() );
-    endInsertRows();
+/*    beginInsertRows( QModelIndex(), 0, d->m_placeMarkContainer.count() );
+    endInsertRows();*/
 
     emit dataChanged( index( 0, 0 ), index( rowCount() - 1, 0 ) );
 
