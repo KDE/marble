@@ -97,14 +97,14 @@ QProgressBar* MainWindow::downloadProgressBar() const
 
 void MainWindow::downloadProgressJobAdded( int totalJobs )
 {
-    if ( m_downloadProgressBar->value() < 0 ) {
+/*    if ( m_downloadProgressBar->value() < 0 ) {
         m_downloadProgressBar->setMaximum( 1 );
         m_downloadProgressBar->setValue( 0 );
     } else {
         m_downloadProgressBar->setMaximum( m_downloadProgressBar->maximum() + 1 );
     }
     qDebug() << "downloadProgressJobAdded: value/maximum: "
-             << m_downloadProgressBar->value() << '/' << m_downloadProgressBar->maximum();
+             << m_downloadProgressBar->value() << '/' << m_downloadProgressBar->maximum();*/
 }
 
 void MainWindow::downloadProgressJobCompleted( QString, QString )
