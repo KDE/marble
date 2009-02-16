@@ -9,6 +9,7 @@
 
 jsonParser::jsonParser()
 {
+  myEngine.setProcessEventsInterval(10);//this lets the gui remain responsive
 }
 
 jsonParser::~jsonParser()
