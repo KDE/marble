@@ -1,0 +1,91 @@
+<html>
+<head>
+    <title>GeoData API - Internal programming documentation</title>
+</head>
+<body>
+<h1>GeoData API - Internal programming documentation</h1>
+<a name="topics"><h2>Topics</h2></a>
+<ol>
+<a href="#topics"><li>Topics</li></a>
+<a href="#Introduction"><li>Introduction</li></a>
+<a href="#implicit sharing"><li>"implicit sharing"</li></a>
+<a href="#How implicit sharing and derivation can work together"><li>How "implicit sharing" and derivation can work together</li></a>
+<a href="#serialization and deserialization"><li>serialization and deserialization</li></a>
+</ol>
+<a name="Introduction"><h2>Introduction</h2></a>
+<p>The geodata-API should be used to contain easy and complex geographical data.
+It consists currently of three main types:
+<ul>
+<li>GeoDataFeature</li>
+<li>GeoDataGeometry</li>
+<li>GeoDataColorStyle</li>
+</ul>
+From each of those three multiple classes are derived. The first two are most 
+interesting because of a feature seldomly found in APIs. Each derived class can
+be stored in its base class and can later be transformed back again. This means
+that the following code is possible:
+<pre><code>
+GeoDataPlacemark placemark;
+GeoDataFeature placemarkAsFeature = placemark;
+GeoDataPlacemark other = placemarkAsFeature;
+
+return (placemark == other); // returns true
+</code></pre></p>
+<a name="implicit sharing"><h2>"implicit sharing"</h2></a>
+<p>The <code>GeoDataFeature</code> and <code>GeoDataGeometry</code> classes do use 
+implicit-sharing which means that after copying, only a shallow copy is done. Only 
+after a write access to the data of the object (calling a non-<code>const</code> function) a 
+copy of the whole data is done. This makes copying those data structures rather 
+cheap, even if they contain a lot of other <code>GeoDataObjects</code> (as without 
+writing there is not much more copying done than with a pointer.<p/>
+<p>As done already now, there is a private class which contains all the data members 
+and gets accessed from the main classes accessor functions. This way you can keep 
+binary compatibility over a long time without being restricted to the data members 
+you chose in the beginning. When copying a <code>d</code>-pointer'ed class, you must put a 
+new private class object on the stack though and copy the values from its origin.
+Implicit sharing now means, that in the moment of copying, you only copy the 
+address of the private d pointer but you increment the reference counter of that
+object. After that there are two objects with the same private class object. If 
+somebody tries to change something in one of those two objects, he must call 
+a non-const function which in return will call a function called 
+<code>void detach()</code>. This function copies the private object and decrements 
+the reference counter. If one of the base objects gets deleted, it decrements the 
+reference counter too as long as there are more objects connected to this private 
+object. If the counter reaches 0 again, the private object gets deleted too.
+This is mostly hidden by <code>QSharedData</code>/<code>QSharedDataPointer</code> 
+so that you don't have to worry about that.<p/>
+<p>The problems arise, when you try to derive from an implicitly shared 
+class. The <code>detach()</code> function will not call the function from the derived class if 
+changes occur in the members of the base class.</p>
+
+<a name="How implicit sharing and derivation can work together"><h2>How "implicit sharing" and derivation can work together</h2></a>
+<p>As described above, we can't use <code>QSharedData</code> directly if we want 
+to use implicit sharing and derivation. Instead we do this on our own.
+Our Private classes are all contained in a *_p.h header file. They are derived 
+from the private class of the base class (of the current class).
+Besides the data members, each private class contains a function <code>void *copy()
+</code> which returns a new copy of the private object. As needed an assignment 
+operator may occur. The private classes also do contain a function 
+<code>virtual EnumFeatureId featureId() const</code> / <code>virtual EnumGeometryId geometryId() const</code>
+but those are mostly a convenience solution to provide a way to check the type 
+of your data when it is contained in the base class.
+Each of the base classes contains a <code>void*</code> pointer which holds the address of the 
+private <code>d</code> pointer. Instead of having one <code>d</code> pointer per derivation step, we only 
+have one per object. With a function <code>p()</code> which is contained by each derived class
+a pointer casted to the Private class of the class is returned. All of the private 
+classes are derived from each other, in the same way as their connected classes.
+In the base class (in this case <code>GeoDataFeature</code> and <code>GeoDataGeometry</code>) a function 
+<code>void detach()</code> is implemented which calls the <code>void* copy()</code> function of the private class.
+This way a copy will always result in the same type as the original, even though 
+it might occur in a different wrapper (one of the type classes e.g.).
+Above mentioned reference counting is done in the detach function.
+</p>
+<a name="serialization and deserialization"><h2>serialization and deserialization</h2></a>
+<p>The idea of a full serialization of GeoData-API is to use that for saving and
+reloading binary representations of GeoData-objects. For this to happen you simply
+need to call the <code>pack()</code> or <code>unpack()</code> function for the base
+<code>GeoDataDocument</code> providing a <code>QDataStream</code>. As the saved
+amount in space, is very small, Marble itself still uses a lossy implementation
+for that.</p>
+</body>
+</html>
