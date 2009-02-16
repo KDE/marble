@@ -43,9 +43,8 @@ struct panoramioDataStructure {
     QString owner_url; // Url of the User Uplaoded
 };
 
-class jsonParser : public QObject
+class jsonParser 
 {
-    Q_OBJECT
 public:
     jsonParser();
 

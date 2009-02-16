@@ -107,7 +107,7 @@ bool PanoramioPlugin::render(GeoPainter *painter, ViewportParams *viewport, cons
 //             qDebug() <<"Shanky: Coordinates are lon-lat: " << parsedData[x].longitude << parsedData[x].latitude;
         }
     }
-    qDebug() << "deltas" << west - deltaWest << east - deltaEast << south - deltaSouth << north - deltaNorth;
+    //qDebug() << "deltas" << west - deltaWest << east - deltaEast << south - deltaSouth << north - deltaNorth;
 
     deltaWest = west;
     deltaEast = east ;
@@ -126,9 +126,9 @@ void PanoramioPlugin::slotJsonDownloadComplete(QString relativeUrlString, QStrin
         parsedData.append(temp);
         if (!m_storagePolicy->fileExists(temp.photo_title)) {
             m_downloadManager->addJob(QUrl(temp.photo_file_url), temp.photo_title, QString::number(x));
-            qDebug() << "skipping " << temp.photo_title;
+      //      qDebug() << "skipping " << temp.photo_title;
         }
-        qDebug() << ":::::::shanky1" << temp.photo_file_url;
+       // qDebug() << ":::::::shanky1" << temp.photo_file_url;
     }
 
 //         HttpJob *job = new HttpJob ( sourceUrl, destFileName, id );
@@ -141,7 +141,7 @@ void PanoramioPlugin::slotImageDownloadComplete(const QString relativeUrlString,
     //     temp.loadFromData ( m_storagePolicy->data ( id ) );
     tempImage.load(MarbleDirs::localPath() + "/cache/" + relativeUrlString);
     imagesWeHave.append(tempImage.scaled(QSize(50, 50),  Qt::IgnoreAspectRatio , Qt::SmoothTransformation));
-    qDebug() << "::::::::::::::shanky2" << id << "=" << tempImage.isNull() << MarbleDirs::localPath() + "/cache/" + relativeUrlString ;
+//    qDebug() << "::::::::::::::shanky2" << id << "=" << tempImage.isNull() << MarbleDirs::localPath() + "/cache/" + relativeUrlString ;
     flag = 1;
 }
 
@@ -155,7 +155,7 @@ void PanoramioPlugin::downloadPanoramio(int rangeFrom , int rangeTo , qreal east
                                    + "&maxx=" + QString::number(north * RADIANSTODEGREES)
                                    + "&maxy=" + QString::number(south * RADIANSTODEGREES) + "&size=medium"), "panoramio" + QString::number(east), "panoramio" + QString::number(east));
     connect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotJsonDownloadComplete(QString , QString)));
-    qDebug() << "::::::::::::::shanky0";
+//    qDebug() << "::::::::::::::shanky0";
 //         job = new HttpJob ( QUrl ( "http://www.panoramio.com/map/get_panoramas.php?from="
 //                                    + QString::number ( rangeFrom )
 //                                    + "&to=" + QString::number ( rangeTo )

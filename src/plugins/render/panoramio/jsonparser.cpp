@@ -9,6 +9,7 @@
 
 jsonParser::jsonParser()
 {
+   myEngine.setProcessEventsInterval(10);//this lets the gui remain responsive
 }
 
 jsonParser::~jsonParser()
@@ -19,10 +20,17 @@ panoramioDataStructure jsonParser::parseObjectOnPosition(const QString &content 
 {
     QString temp = "var myJSONObject =" + content;
     myEngine.evaluate(temp);
+    myEngine.evaluate(QString("function count(){ return myJSONObject.count };"));
+    myEngine.evaluate(QString("function height(x){return myJSONObject.photos[x].height};"));
+    myEngine.evaluate(QString("function latitude(x){return myJSONObject.photos[x].latitude};"));
+    myEngine.evaluate(QString("function longitue (x){return myJSONObject.photos[x].longitude};"));
+   myEngine.evaluate(QString("function owner_id(x){return myJSONObject.photos[x].owner_id};"));
+   myEngine.evaluate(QString("function photo_file_url(x){return myJSONObject.photos[x].photo_file_url};"));
 
-    dataStorage.count = myEngine.evaluate("return myJSONObject.count;").toInteger();
+	
+     dataStorage.count = myEngine.evaluate("count();").toInteger();
 
-    dataStorage.height = myEngine.evaluate(QString("return myJSONObject.photos[")
+/*    dataStorage.height = myEngine.evaluate(QString("return myJSONObject.photos[")
                                            + QString::number(requiredObjectPosition)
                                            + QString("].height;")) .toInteger();
     dataStorage.latitude = myEngine.evaluate(QString("return myJSONObject.photos[")
@@ -59,13 +67,18 @@ panoramioDataStructure jsonParser::parseObjectOnPosition(const QString &content 
                                            + QString::number(requiredObjectPosition)
                                            + QString("].width;")).toInteger();
 
-
+*/
+	myEngine.evaluate(QString("var x="+QString::number(requiredObjectPosition)));
+	dataStorage.longitude=myEngine.evaluate(QString("longitude(x)")).toNumber();
+	dataStorage.latitude=myEngine.evaluate(QString("latitude(x)")).toNumber();
+	dataStorage.photo_file_url=myEngine.evaluate(QString("photo_file_url(x)")).toString();
+qDebug()<<":::::::"<<myEngine.evaluate("count()").toString();
     return dataStorage;
 }
 
 QList <panoramioDataStructure> jsonParser::parseAllObjects(const QString &content , int numberOfObjects)
 {
-    QString temp = "var myJSONObject = " + content;
+    /*QString temp = "var myJSONObject = " + content;
     int iterator = 0;//the count starts fom one
 
     myEngine.evaluate(temp);
@@ -111,6 +124,6 @@ QList <panoramioDataStructure> jsonParser::parseAllObjects(const QString &conten
         parsedJsonOutput.insert(iterator , dataStorage);
         ++iterator;
     }
-
+*/
     return parsedJsonOutput;
 }
