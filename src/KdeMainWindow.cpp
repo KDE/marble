@@ -97,24 +97,31 @@ QProgressBar* MainWindow::downloadProgressBar() const
 
 void MainWindow::downloadProgressJobAdded( int totalJobs )
 {
+    m_downloadProgressBar->setUpdatesEnabled( false );
     if ( m_downloadProgressBar->value() < 0 ) {
         m_downloadProgressBar->setMaximum( 1 );
         m_downloadProgressBar->setValue( 0 );
     } else {
         m_downloadProgressBar->setMaximum( m_downloadProgressBar->maximum() + 1 );
     }
+
     qDebug() << "downloadProgressJobAdded: value/maximum: "
              << m_downloadProgressBar->value() << '/' << m_downloadProgressBar->maximum();
+
+    m_downloadProgressBar->setUpdatesEnabled( true );
 }
 
 void MainWindow::downloadProgressJobCompleted( QString, QString )
 {
+    m_downloadProgressBar->setUpdatesEnabled( false );
     m_downloadProgressBar->setValue( m_downloadProgressBar->value() + 1 );
     if ( m_downloadProgressBar->value() == m_downloadProgressBar->maximum() )
         m_downloadProgressBar->reset();
 
     qDebug() << "downloadProgressJobCompleted: value/maximum: "
              << m_downloadProgressBar->value() << '/' << m_downloadProgressBar->maximum();
+
+    m_downloadProgressBar->setUpdatesEnabled( true );
 }
 
 ControlView* MainWindow::marbleControl() const
