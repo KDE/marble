@@ -9,7 +9,10 @@
 // Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
 //
 
+// Qt
+#include <QShowEvent>
 
+// Own
 #include "SunControlWidget.h"
 
 using namespace Marble;
@@ -34,10 +37,10 @@ SunControlWidget::SunControlWidget(QWidget* parent, SunLocator* sunLocator)
              this,                        SLOT( timeChanged( const QTime& ) ) );
     connect( m_uiWidget.timeSlider,       SIGNAL( sliderMoved( int ) ),
              this,                        SLOT( hourChanged( int ) ) );
-	connect(m_uiWidget.speedSlider, SIGNAL(sliderMoved(int)), this, SLOT(speedChanged(int)));
-	
+    connect(m_uiWidget.speedSlider, SIGNAL(sliderMoved(int)), this, SLOT(speedChanged(int)));
+
     setModal( false );
-	
+
     updateDateTime();
     connect( m_sunLocator->datetime(), SIGNAL( timeChanged() ),
              this,                     SLOT( updateDateTime() ) );
@@ -147,6 +150,22 @@ void SunControlWidget::speedChanged(int speed)
 {
     m_sunLocator->datetime()->setSpeed( speed );
     m_uiWidget.speedLabel->setText( QString( "%1x" ).arg( speed ) );
+}
+
+void SunControlWidget::showEvent(QShowEvent* event)
+{
+    if( !event->spontaneous() )
+    {
+   // Loading all options
+   m_uiWidget.speedSlider->setValue( m_sunLocator->datetime()->getSpeed() );
+   updateDateTime();
+   if( m_sunLocator->getCitylights() )
+       m_uiWidget.sunShadingComboBox->setCurrentIndex(1);
+   else
+       m_uiWidget.sunShadingComboBox->setCurrentIndex(0);
+   m_uiWidget.centerToolButton->setChecked( m_sunLocator->getCentered() );
+   m_uiWidget.showToolButton->setChecked( m_sunLocator->getShow() );
+    }
 }
 
 #include "SunControlWidget.moc"

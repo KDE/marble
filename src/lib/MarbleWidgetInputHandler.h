@@ -35,6 +35,7 @@ namespace Marble
 class MarbleModel;
 class MarbleWidget;
 class MarbleMap;
+class MarbleWidgetPopupMenu;
 
 class MarbleWidgetInputHandler  : public QObject
 {
@@ -47,7 +48,7 @@ class MarbleWidgetInputHandler  : public QObject
     void setPositionSignalConnected( bool connected ){ m_positionSignalConnected = connected; }
     bool isPositionSignalConnected() const { return m_positionSignalConnected; }
 
-    void init(MarbleWidget*);
+    virtual void init(MarbleWidget*);
 
  Q_SIGNALS:
     // Mouse button menus
@@ -75,14 +76,33 @@ class MarbleWidgetInputHandler  : public QObject
 
 class MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
 {
+ Q_OBJECT
+
  public:
     MarbleWidgetDefaultInputHandler();
 
     static bool keyEvent( MarbleMap * map, QEvent* e );
+    
+    virtual void init(MarbleWidget*);
+    
+    /**
+     * @brief  Set whether a popup menu appears on a click (not drag) with the left mouse button
+     * @param  enabled True to enable the popup menu (default), false to disable it
+     */
+    void setLeftMouseButtonPopup(bool enabled);
+    
+    /**
+     * @brief  Return whether the left mouse button popup menu is active
+     * @return True iff a popup menu is shown on left mouse button clicks
+     */
+    bool leftMouseButtonPopup();
 
  protected:
     bool eventFilter( QObject *, QEvent * );
 
+ private Q_SLOTS:
+    void showLmbMenu( int, int );
+    
  private:
     QPixmap  curpmtl;
     QPixmap  curpmtc;
@@ -111,6 +131,10 @@ class MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
 
     QPoint       m_selectionOrigin;
     QRubberBand *m_selectionRubber;
+    
+    MarbleWidgetPopupMenu     *m_popupmenu;
+    
+    bool m_leftpopup;
 };
 
 }

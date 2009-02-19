@@ -41,7 +41,6 @@
 #include "MarblePhysics.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidgetInputHandler.h"
-#include "MarbleWidgetPopupMenu.h"
 #include "TileCreatorDialog.h"
 #include "HttpDownloadManager.h"
 #include "gps/GpsLayer.h"
@@ -50,8 +49,6 @@
 #include "MergedLayerDecorator.h"
 #include "AbstractProjectionHelper.h"
 #include "ViewportParams.h"
-
-#include "MeasureTool.h"
 
 #include "MarbleMap_p.h"
 
@@ -75,7 +72,6 @@ class MarbleWidgetPrivate
           m_stillQuality( Marble::High ), m_animationQuality( Marble::Low ),
           m_animationsEnabled( false ),
           m_inputhandler( 0 ),
-          m_popupmenu( 0 ),
           m_physics( new MarblePhysics( parent ) ),
           m_proxyHost(),
           m_proxyPort( 0 )
@@ -107,14 +103,11 @@ class MarbleWidgetPrivate
     int              m_logZoom;
 
     MarbleWidgetInputHandler  *m_inputhandler;
-    MarbleWidgetPopupMenu     *m_popupmenu;
 
     MarblePhysics    *m_physics;
 
     QString          m_proxyHost;
     qint16           m_proxyPort;
-
-    void _q_initGui();
 };
 
 
@@ -130,8 +123,8 @@ MarbleWidget::MarbleWidget(QWidget *parent)
 
     d->construct();
 
-    // Delayed model initialization
-    QTimer::singleShot( 0, this, SLOT( _q_initGui() ) );
+    setInputHandler( new MarbleWidgetDefaultInputHandler );
+    setMouseTracking( true );
 }
 
 
@@ -143,8 +136,8 @@ MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
 
     d->construct();
 
-    // Delayed model initialization
-    QTimer::singleShot( 0, this, SLOT( _q_initGui() ) );
+    setInputHandler( new MarbleWidgetDefaultInputHandler );
+    setMouseTracking( true );
 }
 
 MarbleWidget::~MarbleWidget()
@@ -217,33 +210,6 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
                        m_widget, SLOT( centerSun() ) );
-}
-
-void MarbleWidgetPrivate::_q_initGui()
-{
-    // Handle mouse and keyboard input.
-    m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler );
-    m_widget->setMouseTracking( true );
-
-    // The interface to the measure tool consists of a RMB popup menu
-    // and some signals.
-    MeasureTool  *measureTool = m_map->measureTool();
-
-    // Connect the inputHandler and the measure tool to the popup menu
-    // FIXME: This needs REFACTORING, as a custom input handler is will likely want to have
-    // a different popup menu.
-    if ( !m_popupmenu ) {
-        m_popupmenu = new MarbleWidgetPopupMenu( m_widget, m_model );
-    }
-    m_widget->connect( m_inputhandler, SIGNAL( lmbRequest( int, int ) ),
-                       m_popupmenu,    SLOT( showLmbMenu( int, int ) ) );
-    m_widget->connect( m_inputhandler, SIGNAL( rmbRequest( int, int ) ),
-                       m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );
-
-    m_widget->connect( m_popupmenu, SIGNAL( addMeasurePoint( qreal, qreal ) ),
-                       measureTool, SLOT( addMeasurePoint( qreal, qreal ) ) );
-    m_widget->connect( m_popupmenu, SIGNAL( removeMeasurePoints() ),
-                       measureTool, SLOT( removeMeasurePoints( ) ) );
 }
 
 // ----------------------------------------------------------------

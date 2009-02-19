@@ -367,6 +367,11 @@ void MarblePart::readSettings()
     m_showAtmosphereAction->setChecked( MarbleSettings::showAtmosphere() );
     m_lockFloatItemsAct->setChecked(MarbleSettings::lockFloatItemPositions());
     lockFloatItemPosition(MarbleSettings::lockFloatItemPositions());
+    
+    // Sun
+    m_controlView->sunLocator()->setShow( MarbleSettings::showSun() );
+    m_controlView->sunLocator()->setCitylights( MarbleSettings::showCitylights() );
+    m_controlView->sunLocator()->setCentered( MarbleSettings::centerOnSun() );
 
     // Plugins
     QHash<QString, int> pluginEnabled;
@@ -439,6 +444,11 @@ void MarblePart::writeSettings()
 
     MarbleSettings::setDistanceUnit( MarbleGlobal::getInstance()->locale()->distanceUnit() );
     MarbleSettings::setAngleUnit( m_controlView->marbleWidget()->defaultAngleUnit() );
+
+    // Sun
+    MarbleSettings::setShowSun( m_controlView->sunLocator()->getShow() );
+    MarbleSettings::setShowCitylights( m_controlView->sunLocator()->getCitylights() );
+    MarbleSettings::setCenterOnSun( m_controlView->sunLocator()->getCentered() );
 
     // Caches
     MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->volatileTileCacheLimit() / 1000 );
