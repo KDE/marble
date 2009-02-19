@@ -510,6 +510,12 @@ void MainWindow::readSettings()
          );
          m_controlView->marbleWidget()->goHome();
      settings.endGroup();
+     
+     settings.beginGroup( "Sun" );
+         m_controlView->sunLocator()->setShow( settings.value( "showSun", false ).toBool() );
+         m_controlView->sunLocator()->setCitylights( settings.value( "showCitylights", false ).toBool() );
+         m_controlView->sunLocator()->setCentered( settings.value( "centerOnSun", false ).toBool() );
+     settings.endGroup();
 
      setUpdatesEnabled(true);
 }
@@ -547,6 +553,12 @@ void MainWindow::writeSettings()
 
          settings.setValue( "mapTheme",   mapTheme ); 
          settings.setValue( "projection", projection ); 
+     settings.endGroup();
+     
+     settings.beginGroup( "Sun" );
+         settings.setValue( "showSun",        m_controlView->sunLocator()->getShow() );
+         settings.setValue( "showCitylights", m_controlView->sunLocator()->getCitylights() );
+         settings.setValue( "centerOnSun",    m_controlView->sunLocator()->getCentered() );
      settings.endGroup();
 }
 
