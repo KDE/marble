@@ -9,11 +9,11 @@
 // Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
 //
 
-// Qt
-#include <QShowEvent>
-
 // Own
 #include "SunControlWidget.h"
+
+// Qt
+#include <QShowEvent>
 
 using namespace Marble;
 
