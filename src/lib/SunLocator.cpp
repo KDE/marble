@@ -255,4 +255,39 @@ void SunLocator::setBody(QString body)
     }
 }
 
+void SunLocator::setCitylights(bool show)
+{
+    m_citylights = show;
+}
+
+bool SunLocator::getShow()
+{
+    return m_show;
+}
+
+bool SunLocator::getCitylights()
+{
+    return m_citylights;
+}
+
+bool SunLocator::getCentered()
+{
+    return m_centered;
+}
+
+qreal SunLocator::getLon()
+{
+    return m_lon * 180.0 / M_PI;
+}
+
+qreal SunLocator::getLat()
+{
+    return -m_lat * 180.0 / M_PI;
+}
+
+ExtDateTime* SunLocator::datetime()
+{
+    return m_datetime;
+}
+
 #include "SunLocator.moc"

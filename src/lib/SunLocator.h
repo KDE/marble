@@ -55,17 +55,17 @@ class MARBLE_EXPORT SunLocator : public QObject
     void    shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, qreal shade);
 	
     void  setShow(bool show);
-    void  setCitylights(bool show) {m_citylights = show;}
+    void  setCitylights(bool show);
     void  setCentered(bool show);
     void  setBody(QString body);
 	
-    bool getShow() {return m_show;}
-    bool getCitylights() {return m_citylights;}
-    bool getCentered() {return m_centered;}
-    qreal getLon() {return m_lon * 180.0 / M_PI;}
-    qreal getLat() {return -m_lat * 180.0 / M_PI;}
+    bool getShow();
+    bool getCitylights();
+    bool getCentered();
+    qreal getLon();
+    qreal getLat();
 	
-    ExtDateTime* datetime() {return m_datetime;}
+    ExtDateTime* datetime();
 	
  public Q_SLOTS:
     void update();
