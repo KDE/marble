@@ -112,7 +112,7 @@ void SunLocator::updatePosition()
 }
 
 
-qreal SunLocator::shading(qreal lon, qreal lat)
+qreal SunLocator::shading(qreal lon, qreal lat) const
 {
 
     // haversine formula
@@ -144,7 +144,7 @@ qreal SunLocator::shading(qreal lon, qreal lat)
     return brightness;
 }
 
-void SunLocator::shadePixel(QRgb& pixcol, qreal brightness)
+void SunLocator::shadePixel(QRgb& pixcol, qreal brightness) const
 {
     // daylight - no change
     if ( brightness > 0.99999 )
@@ -166,7 +166,7 @@ void SunLocator::shadePixel(QRgb& pixcol, qreal brightness)
 }
 
 void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol,
-                                     qreal brightness)
+                                     qreal brightness) const
 {
     // daylight - no change
     if ( brightness > 0.99999 )
@@ -260,32 +260,32 @@ void SunLocator::setCitylights(bool show)
     m_citylights = show;
 }
 
-bool SunLocator::getShow()
+bool SunLocator::getShow() const
 {
     return m_show;
 }
 
-bool SunLocator::getCitylights()
+bool SunLocator::getCitylights() const
 {
     return m_citylights;
 }
 
-bool SunLocator::getCentered()
+bool SunLocator::getCentered() const
 {
     return m_centered;
 }
 
-qreal SunLocator::getLon()
+qreal SunLocator::getLon() const
 {
     return m_lon * 180.0 / M_PI;
 }
 
-qreal SunLocator::getLat()
+qreal SunLocator::getLat() const
 {
     return -m_lat * 180.0 / M_PI;
 }
 
-ExtDateTime* SunLocator::datetime()
+ExtDateTime* SunLocator::datetime() const
 {
     return m_datetime;
 }

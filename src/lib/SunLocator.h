@@ -50,22 +50,22 @@ class MARBLE_EXPORT SunLocator : public QObject
     explicit SunLocator(ExtDateTime *dateTime);
     virtual ~SunLocator();
 
-    qreal  shading(qreal lon, qreal lat);
-    void    shadePixel(QRgb& pixcol, qreal shade);
-    void    shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, qreal shade);
+    qreal shading(qreal lon, qreal lat) const;
+    void  shadePixel(QRgb& pixcol, qreal shade) const;
+    void  shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, qreal shade) const;
 	
     void  setShow(bool show);
     void  setCitylights(bool show);
     void  setCentered(bool show);
     void  setBody(QString body);
 	
-    bool getShow();
-    bool getCitylights();
-    bool getCentered();
-    qreal getLon();
-    qreal getLat();
+    bool getShow() const;
+    bool getCitylights() const;
+    bool getCentered() const;
+    qreal getLon() const;
+    qreal getLat() const;
 	
-    ExtDateTime* datetime();
+    ExtDateTime* datetime() const;
 	
  public Q_SLOTS:
     void update();
