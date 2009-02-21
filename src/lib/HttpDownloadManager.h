@@ -22,6 +22,7 @@
 #include <QtCore/QUrl>
 #include <QtCore/QList>
 #include <QtCore/QStack>
+#include <QtCore/QQueue>
 
 #include "marble_export.h"
 
@@ -107,6 +108,7 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
  private Q_SLOTS:
     void activateJobs();
     void reportResult( Marble::HttpJob *job, int id );
+    void requeue();
 
  private:
     Q_DISABLE_COPY( HttpDownloadManager )
@@ -123,6 +125,7 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     bool              m_downloadEnabled;
 
     QStack<HttpJob*>  m_jobQueue;
+    QQueue<HttpJob*>  m_waitingQueue;
     QList<HttpJob*>   m_activatedJobList;
     QList<HttpJob*>   m_jobBlackList;
 
