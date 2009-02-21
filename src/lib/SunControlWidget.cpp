@@ -154,17 +154,16 @@ void SunControlWidget::speedChanged(int speed)
 
 void SunControlWidget::showEvent(QShowEvent* event)
 {
-    if( !event->spontaneous() )
-    {
-   // Loading all options
-   m_uiWidget.speedSlider->setValue( m_sunLocator->datetime()->getSpeed() );
-   updateDateTime();
-   if( m_sunLocator->getCitylights() )
-       m_uiWidget.sunShadingComboBox->setCurrentIndex(1);
-   else
-       m_uiWidget.sunShadingComboBox->setCurrentIndex(0);
-   m_uiWidget.centerToolButton->setChecked( m_sunLocator->getCentered() );
-   m_uiWidget.showToolButton->setChecked( m_sunLocator->getShow() );
+    if( !event->spontaneous() ) {
+        // Loading all options
+        m_uiWidget.speedSlider->setValue( m_sunLocator->datetime()->getSpeed() );
+        updateDateTime();
+        if( m_sunLocator->getCitylights() )
+            m_uiWidget.sunShadingComboBox->setCurrentIndex(1);
+        else
+            m_uiWidget.sunShadingComboBox->setCurrentIndex(0);
+        m_uiWidget.centerToolButton->setChecked( m_sunLocator->getCentered() );
+        m_uiWidget.showToolButton->setChecked( m_sunLocator->getShow() );
     }
 }
 
