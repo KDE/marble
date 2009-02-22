@@ -41,59 +41,76 @@ const int update_interval = 60000; // emit updateSun() every update_interval ms
 
 namespace Marble {
 
-class SunLocatorPrivate { };
+class SunLocatorPrivate
+{
+public:
+    explicit SunLocatorPrivate(ExtDateTime *dateTime)
+        : m_lon( 0.0 ),
+          m_lat( 0.0 ),
+          m_datetime( dateTime ),
+          m_show( false ),
+          m_citylights( false ),
+          m_centered( false ),
+          m_body( "" )
+    {
+    }
+
+    qreal m_lon;
+    qreal m_lat;
+
+    ExtDateTime* m_datetime;
+    bool m_show;
+    bool m_citylights;
+    bool m_centered;
+    QString m_body;
+};
 
 }
 
 SunLocator::SunLocator(ExtDateTime *dateTime)
   : QObject(),
-    d( new SunLocatorPrivate ),
-    m_datetime( dateTime ),
-    m_show( false ),
-    m_citylights( false ),
-    m_centered( false ),
-    m_body( "" )
+    d( new SunLocatorPrivate( dateTime ))
 {
 }
 
-SunLocator::~SunLocator() {
-//     delete m_datetime;
+SunLocator::~SunLocator()
+{
     delete d;
 }
 
 void SunLocator::updatePosition()
 {
-    if( m_body == "moon" ) {
-        qreal d = (qreal)m_datetime->toJDN() + m_datetime->dayFraction() - MOON_EPOCH; // days since the first full moon of the 20th century
-        d /= MOON_SYNODIC_PERIOD; // number of orbits the moon has made (relative to the sun as observed from earth)
-        d = d - (int)d; // take fractional part
-        if(d < 0.0) d += 1.0; // for dates before MOON_EPOCH
+    if( d->m_body == "moon" ) {
+        qreal days = (qreal)d->m_datetime->toJDN() + d->m_datetime->dayFraction() - MOON_EPOCH; // days since the first full moon of the 20th century
+        days /= MOON_SYNODIC_PERIOD; // number of orbits the moon has made (relative to the sun as observed from earth)
+        days = days - (int)days; // take fractional part
+        if(days < 0.0) days += 1.0; // for dates before MOON_EPOCH
         
-        qDebug() << "MOON:" << (int)(d*100) << "% of orbit completed and" << (int)(abs((d-0.5)*2) * 100) << "% illuminated";
+        qDebug() << "MOON:" << (int)(days*100) << "% of orbit completed and" << (int)(abs((days-0.5)*2) * 100) << "% illuminated";
         
-        m_lon = (1-d) * 2*M_PI;
-        m_lat = 0.0; // not necessarily accurate but close enough (only differs by about +-6 degrees of this value)
+        d->m_lon = (1-days) * 2*M_PI;
+        d->m_lat = 0.0; // not necessarily accurate but close enough (only differs by about +-6 degrees of this value)
 	
 	return;
     }
     
     PlanetaryConstants pc = PC_EARTH; // default to the earth
     // planets
-         if ( m_body == "mercury" ) pc = PC_MERCURY;
-    else if ( m_body == "venus" )   pc = PC_VENUS;
-    else if ( m_body == "earth" )   pc = PC_EARTH;
-    else if ( m_body == "mars" )    pc = PC_MARS;
-    else if ( m_body == "jupiter" ) pc = PC_JUPITER;
-    else if ( m_body == "saturn" )  pc = PC_SATURN;
-    else if ( m_body == "uranus" )  pc = PC_URANUS;
-    else if ( m_body == "neptune" ) pc = PC_NEPTUNE;
+         if ( d->m_body == "mercury" ) pc = PC_MERCURY;
+    else if ( d->m_body == "venus" )   pc = PC_VENUS;
+    else if ( d->m_body == "earth" )   pc = PC_EARTH;
+    else if ( d->m_body == "mars" )    pc = PC_MARS;
+    else if ( d->m_body == "jupiter" ) pc = PC_JUPITER;
+    else if ( d->m_body == "saturn" )  pc = PC_SATURN;
+    else if ( d->m_body == "uranus" )  pc = PC_URANUS;
+    else if ( d->m_body == "neptune" ) pc = PC_NEPTUNE;
     // dwarf planets ... (everybody likes pluto)
-    else if ( m_body == "pluto" )   pc = PC_PLUTO;
+    else if ( d->m_body == "pluto" )   pc = PC_PLUTO;
     
-    long d = m_datetime->toJDN() - J2000; // find current Julian day number relative to epoch J2000
+    long day = d->m_datetime->toJDN() - J2000; // find current Julian day number relative to epoch J2000
     
     // from http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html
-    qreal M = pc.M_0 + pc.M_1*d; // mean anomaly
+    qreal M = pc.M_0 + pc.M_1*day; // mean anomaly
     qreal C = pc.C_1*sin(M) + pc.C_2*sin(2*M) + pc.C_3*sin(3*M) + pc.C_4*sin(4*M) + pc.C_5*sin(5*M) + pc.C_6*sin(6*M); // equation of center
     qreal nu = M + C; // true anomaly
     qreal lambda_sun = nu + pc.Pi + M_PI; // ecliptic longitude of sun as seen from planet
@@ -101,14 +118,14 @@ void SunLocator::updatePosition()
     qreal alpha_sun = atan2(cos(pc.epsilon)*sin(lambda_sun), cos(lambda_sun)); // right ascension of sun as seen from planet
     
     qreal theta = alpha_sun; // solar noon occurs when sidereal time is equal to alpha_sun
-    m_lon = M_PI - (pc.theta_0 + pc.theta_1 * (d+m_datetime->dayFraction()) - theta); // convert sidereal time to geographic longitude
-    while(m_lon < 0) m_lon += 2*M_PI;
-    m_lat = -delta_sun; // convert positive north to positive south
+    d->m_lon = M_PI - (pc.theta_0 + pc.theta_1 * (day + d->m_datetime->dayFraction()) - theta); // convert sidereal time to geographic longitude
+    while(d->m_lon < 0) d->m_lon += 2*M_PI;
+    d->m_lat = -delta_sun; // convert positive north to positive south
     
     qDebug() << "alpha_sun =" << rad2deg(alpha_sun);
     qDebug() << "delta_sun =" << rad2deg(delta_sun);
-    qDebug() << "m_lon =" << rad2deg(m_lon);
-    qDebug() << "m_lat =" << rad2deg(m_lat);
+    qDebug() << "d->m_lon =" << rad2deg(d->m_lon);
+    qDebug() << "d->m_lat =" << rad2deg(d->m_lat);
 }
 
 
@@ -116,9 +133,9 @@ qreal SunLocator::shading(qreal lon, qreal lat) const
 {
 
     // haversine formula
-    qreal a = sin((lat-m_lat)/2.0);
-    qreal b = sin((lon-m_lon)/2.0);
-    qreal h = (a*a)+cos(lat)*cos(m_lat)*(b*b); 
+    qreal a = sin((lat-d->m_lat)/2.0);
+    qreal b = sin((lon-d->m_lon)/2.0);
+    qreal h = (a*a)+cos(lat)*cos(d->m_lat)*(b*b); 
 
     /*
       h = 0.0 // directly beneath sun
@@ -129,7 +146,7 @@ qreal SunLocator::shading(qreal lon, qreal lat) const
 
     qreal twilightZone = 0.0;
 
-    if ( m_body == "earth" || m_body == "venus" ) {
+    if ( d->m_body == "earth" || d->m_body == "venus" ) {
         twilightZone = 0.1; // this equals 18 deg astronomical twilight.
     }
 	
@@ -197,11 +214,11 @@ void SunLocator::update()
 {
     qDebug() << "void SunLocator::update()";
     updatePosition();
-    if ( m_show || m_centered )
+    if ( d->m_show || d->m_centered )
     {
-        if ( m_show )
+        if ( d->m_show )
             emit updateSun();
-        if ( m_centered )
+        if ( d->m_centered )
             emit centerSun();
         return;
     }
@@ -211,12 +228,12 @@ void SunLocator::update()
 
 void SunLocator::setShow(bool show)
 {
-    if ( show == m_show ) {
+    if ( show == d->m_show ) {
         return;
     }
     
     qDebug() << "void SunLocator::setShow( bool )";
-    m_show = show;
+    d->m_show = show;
     updatePosition();
 
     emit updateSun();
@@ -224,14 +241,14 @@ void SunLocator::setShow(bool show)
 
 void SunLocator::setCentered(bool centered)
 {
-    if ( centered == m_centered ) {
+    if ( centered == d->m_centered ) {
         return;
     }
 
     qDebug() << "SunLocator::setCentered";
     qDebug() << "sunLocator =" << this;
-    m_centered = centered;
-    if ( m_centered ) {
+    d->m_centered = centered;
+    if ( d->m_centered ) {
         updatePosition();
         emit centerSun();
     } else
@@ -240,14 +257,14 @@ void SunLocator::setCentered(bool centered)
 
 void SunLocator::setBody(QString body)
 {
-    if ( body == m_body ) {
+    if ( body == d->m_body ) {
         return;
     }
 
-    QString previousBody = m_body;
+    QString previousBody = d->m_body;
 
     qDebug() << "SunLocator::setBody( QString )";    
-    m_body = body;
+    d->m_body = body;
     updatePosition();
 
     if ( !previousBody.isEmpty() ) {
@@ -257,37 +274,37 @@ void SunLocator::setBody(QString body)
 
 void SunLocator::setCitylights(bool show)
 {
-    m_citylights = show;
+    d->m_citylights = show;
 }
 
 bool SunLocator::getShow() const
 {
-    return m_show;
+    return d->m_show;
 }
 
 bool SunLocator::getCitylights() const
 {
-    return m_citylights;
+    return d->m_citylights;
 }
 
 bool SunLocator::getCentered() const
 {
-    return m_centered;
+    return d->m_centered;
 }
 
 qreal SunLocator::getLon() const
 {
-    return m_lon * 180.0 / M_PI;
+    return d->m_lon * 180.0 / M_PI;
 }
 
 qreal SunLocator::getLat() const
 {
-    return -m_lat * 180.0 / M_PI;
+    return -d->m_lat * 180.0 / M_PI;
 }
 
 ExtDateTime* SunLocator::datetime() const
 {
-    return m_datetime;
+    return d->m_datetime;
 }
 
 #include "SunLocator.moc"

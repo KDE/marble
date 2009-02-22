@@ -26,7 +26,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtGui/QColor>
-//#include <QtCore/QTimer>
 
 #include "ExtDateTime.h"
 //FIXME: This class shouldn't be exposed but is needed by the worldclock plasmoid
@@ -83,15 +82,6 @@ class MARBLE_EXPORT SunLocator : public QObject
 
  protected:
     Q_DISABLE_COPY( SunLocator )
-    qreal m_lon;
-    qreal m_lat;
-
-    ExtDateTime* m_datetime;
-    bool m_show;
-    bool m_citylights;
-    bool m_centered;
-    QString m_body;
-//     QTimer* m_timer;
 };
 
 }
