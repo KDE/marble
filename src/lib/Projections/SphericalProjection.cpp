@@ -23,21 +23,17 @@ namespace Marble
 
 static SphericalProjectionHelper  theHelper;
 
+// Since SphericalProjection does not have members yet, the
+// private class for the members is empty.
+// For ABI reasons it is there however, but we do not yet need to
+// construct/destruct an object of this class
 class SphericalProjectionPrivate
 {
- public:
-    SphericalProjectionPrivate()
-    {
-    }
-
-    ~SphericalProjectionPrivate()
-    {
-    }
 };
 
 SphericalProjection::SphericalProjection()
     : AbstractProjection(), 
-      d( new SphericalProjectionPrivate() )
+      d( 0 )
 {
     m_maxLat  = 90.0 * DEG2RAD;
     m_minLat  = -90.0 * DEG2RAD;
@@ -47,15 +43,12 @@ SphericalProjection::SphericalProjection()
 
 SphericalProjection::~SphericalProjection()
 {
-    delete d;
 }
-
 
 AbstractProjectionHelper *SphericalProjection::helper()
 {
     return &theHelper;
 }
-
 
 bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
                                              const ViewportParams *viewport,
