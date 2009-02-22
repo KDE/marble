@@ -27,7 +27,7 @@
 #define M_PI 3.14159265358979323846264338327950288419717
 #endif
 
-using namespace Marble;
+namespace Marble {
 
 using std::sin;
 using std::cos;
@@ -44,8 +44,6 @@ const qreal MOON_EPOCH = 2415035.297; // value from http://home.hiwaay.net/~krco
 const qreal MOON_SYNODIC_PERIOD = 29.530588;
 
 const int update_interval = 60000; // emit updateSun() every update_interval ms
-
-namespace Marble {
 
 class SunLocatorPrivate
 {
@@ -71,7 +69,6 @@ public:
     QString m_body;
 };
 
-}
 
 SunLocator::SunLocator(ExtDateTime *dateTime)
   : QObject(),
@@ -311,6 +308,8 @@ qreal SunLocator::getLat() const
 ExtDateTime* SunLocator::datetime() const
 {
     return d->m_datetime;
+}
+
 }
 
 #include "SunLocator.moc"
