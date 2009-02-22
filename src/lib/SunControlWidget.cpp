@@ -15,6 +15,8 @@
 // Qt
 #include <QShowEvent>
 
+#include "ExtDateTime.h"
+
 using namespace Marble;
 
 SunControlWidget::SunControlWidget(QWidget* parent, SunLocator* sunLocator)

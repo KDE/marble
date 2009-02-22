@@ -27,13 +27,12 @@
 #include <QtCore/QString>
 #include <QtGui/QColor>
 
-#include "ExtDateTime.h"
 //FIXME: This class shouldn't be exposed but is needed by the worldclock plasmoid
 #include "marble_export.h"
 
 namespace Marble
 {
-
+class ExtDateTime;
 class SunLocatorPrivate;
 
 class MARBLE_EXPORT SunLocator : public QObject
@@ -80,7 +79,6 @@ class MARBLE_EXPORT SunLocator : public QObject
 
     SunLocatorPrivate * const d;
 
- protected:
     Q_DISABLE_COPY( SunLocator )
 };
 
