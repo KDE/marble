@@ -36,7 +36,7 @@ bool CacheStoragePolicy::fileExists( const QString &fileName ) const
 bool CacheStoragePolicy::updateFile( const QString &fileName, const QByteArray &data )
 {
     if ( !m_cache.insert( fileName, data ) ) {
-        m_errorMsg = "Unable to insert data into cache";
+        m_errorMsg = QObject::tr("Unable to insert data into cache");
         return false;
     }
 
