@@ -82,7 +82,7 @@ void MarblePlacemarkModel::sort( int column, Qt::SortOrder order )
     qDebug() << "start sorting";
 
     emit layoutAboutToBeChanged();
-    d->m_placeMarkContainer.sort( order );
+//    d->m_placeMarkContainer.sort( order );
     emit layoutChanged();
 
     qDebug() << "MarblePlacemarkModel (sort): Time elapsed:" << t.elapsed() << "ms";
@@ -200,6 +200,9 @@ void MarblePlacemarkModel::addPlaceMarks( PlaceMarkContainer &placeMarks,
                                           bool clearPrevious,
                                           bool finalize )
 {
+    if( placeMarks.count() <= 0 )
+        return;
+
     // For now we simply remove any previous placemarks
     if ( clearPrevious ) {
         beginRemoveRows( QModelIndex(), 0, rowCount() );
