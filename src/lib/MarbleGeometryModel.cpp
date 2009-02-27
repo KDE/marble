@@ -68,9 +68,10 @@ class MarbleGeometryModel::Private {
             }
         }
         if( feature->featureId() == GeoDataPlacemarkId ) {
-            if( dynamic_cast<GeoDataPlacemark*>( feature )->geometry() && dynamic_cast<GeoDataPlacemark*>( feature )->geometry()->geometryId() == GeoDataMultiGeometryId ) {
-                m_parent[ dynamic_cast<GeoDataPlacemark*>( feature )->geometry() ] = feature;
-                mapGeometry( dynamic_cast<GeoDataPlacemark*>( feature )->geometry() );
+            GeoDataPlacemark placemark = *feature;
+            if( placemark.geometry() && placemark.geometry()->geometryId() == GeoDataMultiGeometryId ) {
+                m_parent[ placemark.geometry() ] = feature;
+                mapGeometry( placemark.geometry() );
             }
         }
     };
