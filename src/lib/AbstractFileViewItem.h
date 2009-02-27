@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
+// Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
 
@@ -27,6 +28,7 @@ class AbstractFileViewItem
 
     virtual void saveFile() = 0;
     virtual void closeFile() = 0;
+    virtual int size() const { return 0; };
     virtual QVariant data( int role = Qt::DisplayRole ) const = 0;
     virtual bool isShown() const = 0;
     virtual void setShown( bool value ) = 0;
