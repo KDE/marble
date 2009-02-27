@@ -35,6 +35,7 @@ class KmlFileViewItem : public AbstractFileViewItem
     virtual QVariant data( int role = Qt::DisplayRole ) const;
     virtual bool isShown() const;
     virtual void setShown( bool value );
+    virtual int size() const;
 
   private:
     PlaceMarkManager&   m_placeMarkManager;

@@ -11,6 +11,7 @@
 
 #include "KmlFileViewItem.h"
 #include "GeoDataDocument.h"    // In geodata/data/
+#include "GeoDataPlacemark.h"
 #include "PlaceMarkManager.h"
 #include "MarblePlacemarkModel.h"
 #include <QtCore/QDebug>
@@ -52,8 +53,16 @@ QVariant KmlFileViewItem::data( int role ) const
     else if( role == AbstractFileViewItem::FilePointerRole ) {
         return qVariantFromValue(&m_document);
     }
+    else if( role == AbstractFileViewItem::FilePointerRole ) {
+        return qVariantFromValue(size());
+    }
     else
         return QVariant();
+}
+
+int KmlFileViewItem::size() const
+{
+    return m_document.placemarks().size();
 }
 
 bool KmlFileViewItem::isShown() const
