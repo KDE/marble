@@ -133,7 +133,6 @@ class MarbleModelPrivate
 
     QTimer                  *m_timer;
 
-    FileViewModel           *m_fileviewmodel;
 };
 
 VectorComposer      *MarbleModelPrivate::m_veccomposer = 0;
@@ -204,9 +203,7 @@ MarbleModel::MarbleModel( QObject *parent )
     /*
      * Create FileViewModel
      */
-    d->m_fileviewmodel = new FileViewModel( this );
-
-    connect( d->m_fileviewmodel, SIGNAL( updateRegion( BoundingBox& ) ),
+    connect( fileViewModel(), SIGNAL( updateRegion( BoundingBox& ) ),
              this,               SIGNAL( regionChanged( BoundingBox& ) ) );
 
     d->m_dateTime       = new ExtDateTime();
@@ -748,7 +745,7 @@ GpxFileModel *MarbleModel::gpxFileModel()   const
 
 FileViewModel *MarbleModel::fileViewModel() const
 {
-    return d->m_fileviewmodel;
+    return d->m_placemarkmanager->fileViewModel();
 }
 
 void MarbleModel::addPlaceMarkFile( const QString& filename )
@@ -760,23 +757,14 @@ void MarbleModel::addPlaceMarkFile( const QString& filename )
 
 void MarbleModel::addPlaceMarkData( const QString& data, const QString& key )
 {
-    QStringList loadedContainers = d->m_placemarkmanager->model()->containers();
-    if( loadedContainers.contains( key ) )
-    {
-        d->m_placemarkmanager->model()->removePlaceMarks( key, false );
-    }
-    d->m_placemarkmanager->loadKmlFromData( data, key, false );
+    d->m_placemarkmanager->addPlaceMarkData( data, key );
 
     d->notifyModelChanged();
 }
 
 void MarbleModel::removePlaceMarkKey( const QString& key )
 {
-    QStringList loadedContainers = d->m_placemarkmanager->model()->containers();
-    if( loadedContainers.contains( key ) )
-    {
-        d->m_placemarkmanager->model()->removePlaceMarks( key, false );
-    }
+    d->m_placemarkmanager->removePlaceMarkKey( key );
 
     d->notifyModelChanged();
 }
@@ -796,7 +784,7 @@ void MarbleModelPrivate::geoDataDocumentLoaded( GeoDataDocument& document )
     AbstractFileViewItem* item = new KmlFileViewItem( *m_placemarkmanager,
                                                       document );
 
-    m_fileviewmodel->append( item );
+//    m_fileViewModel->append( item );
 }
 
 void MarbleModelPrivate::geoDataDocumentAdded( GeoDataDocument* document )
@@ -809,7 +797,7 @@ void MarbleModelPrivate::geoDataDocumentAdded( GeoDataDocument* document )
         QString styleUrl = placemark.styleUrl().remove('#');
         placemark.setStyle( &document->style( styleUrl ) );
     };
-    m_fileviewmodel->append( item );
+//    m_fileviewmodel->append( item );
     
     m_geometrymodel->setGeoDataRoot( document );
 }

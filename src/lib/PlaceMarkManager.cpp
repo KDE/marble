@@ -21,6 +21,7 @@
 #include <QtXml/QXmlInputSource>
 #include <QtXml/QXmlSimpleReader>
 
+#include "KmlFileViewItem.h"
 #include "FileViewModel.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
@@ -125,6 +126,8 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalized
                     this, SLOT( cleanupLoader( PlaceMarkLoader* ) ) );
         connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
                     this, SIGNAL( geoDataDocumentAdded( GeoDataDocument* ) ) );
+        connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
+                    this, SLOT( addGeoDataDocument( GeoDataDocument* ) ) );
         d->m_loaderList.append( loader );
         loader->start();
     }
@@ -132,6 +135,39 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalized
         if( finalized ) 
             emit finalize();
     }
+}
+
+void PlaceMarkManager::addGeoDataDocument( GeoDataDocument* document )
+{
+    AbstractFileViewItem* item = new KmlFileViewItem( *this,
+                                                      *document );
+
+    d->m_fileViewModel->append( item );
+}
+
+void PlaceMarkManager::addPlaceMarkData( const QString& data, const QString& key )
+{
+    QStringList loadedContainers = d->m_model->containers();
+    if( loadedContainers.contains( key ) )
+    {
+        d->m_model->removePlaceMarks( key, false );
+    }
+    loadKmlFromData( data, key, false );
+}
+
+void PlaceMarkManager::removePlaceMarkKey( const QString& key )
+{
+    qDebug() << "_" << d->m_fileViewModel->rowCount();
+    for( int i = 0; i < d->m_fileViewModel->rowCount(); ++i )
+    {
+        qDebug() << d->m_fileViewModel->index(i, 0);
+    };
+    
+    /*QStringList loadedContainers = d->m_model->containers();
+    if( loadedContainers.contains( key ) )
+    {
+        d->m_model->removePlaceMarks( key, false );
+    }*/
 }
 
 void PlaceMarkManager::cleanupLoader( PlaceMarkLoader* loader )

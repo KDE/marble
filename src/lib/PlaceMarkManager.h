@@ -93,7 +93,17 @@ class PlaceMarkManager : public QObject
      * Loads a new KML data as string into the manager.
      */
     void loadKmlFromData( const QString& data, const QString& key = "data", bool finalize = true );
-    
+
+    /**
+    * removes an existing GeoDataDocument from the manager
+    */
+    void removePlaceMarkKey( const QString& key );
+
+    /**
+    * add Data containing KML code as string
+    */
+    void addPlaceMarkData( const QString& data, const QString& key );
+
     /**
     * return the Model which stores the opened kml/gpx files
     */
@@ -107,6 +117,7 @@ class PlaceMarkManager : public QObject
  private Q_SLOTS:
     void loadPlaceMarkContainer( PlaceMarkLoader* loader, PlaceMarkContainer * );
     void cleanupLoader( PlaceMarkLoader* loader );
+    void addGeoDataDocument( GeoDataDocument* );
 
  private:
     void setPlaceMarkModel( MarblePlacemarkModel *model );
