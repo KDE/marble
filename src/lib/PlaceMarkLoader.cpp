@@ -254,6 +254,9 @@ bool PlaceMarkLoader::loadFile( const QString& filename,
       return;
       }
     */
+    GeoDataDocument *document = new GeoDataDocument();
+
+    document->setFileName( m_filepath );
 
     in.setVersion( QDataStream::Qt_4_2 );
 
@@ -266,13 +269,10 @@ bool PlaceMarkLoader::loadFile( const QString& filename,
     QString  tmpstr;
     qint64   tmpint64;
 
-    QString testo;
-
     while ( !in.atEnd() ) {
         GeoDataPlacemark mark;
         in >> tmpstr;
         mark.setName( tmpstr );
-        testo = tmpstr;
         in >> lon >> lat >> alt;
         mark.setCoordinate( lon, lat, alt );
         in >> tmpstr;
@@ -287,7 +287,10 @@ bool PlaceMarkLoader::loadFile( const QString& filename,
         mark.setPopulation( tmpint64 );
 
         placeMarkContainer->append( mark );
+        document->append( mark );
     }
+
+    emit newGeoDataDocumentAdded( document );
 
     return true;
 }
