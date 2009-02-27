@@ -424,7 +424,7 @@ reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename() );
     // unload old standard Placemarks which are not part of the new map
     foreach(const QString& container, loadedContainers) {
         loadedContainers.pop_front();
-        d->m_placemarkmanager->model()->removePlaceMarks( container, loadedContainers.isEmpty() );
+        removePlaceMarkKey( container );
     }
     // load new standard Placemarks
     foreach(const QString& container, loadList) {

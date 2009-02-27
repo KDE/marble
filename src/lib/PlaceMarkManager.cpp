@@ -157,17 +157,12 @@ void PlaceMarkManager::addPlaceMarkData( const QString& data, const QString& key
 
 void PlaceMarkManager::removePlaceMarkKey( const QString& key )
 {
-    qDebug() << "_" << d->m_fileViewModel->rowCount();
+    QString nkey = key;
     for( int i = 0; i < d->m_fileViewModel->rowCount(); ++i )
     {
-        qDebug() << d->m_fileViewModel->index(i, 0);
+        if(nkey.remove(".kml").remove(".cache") == d->m_fileViewModel->data(d->m_fileViewModel->index(i, 0)).toString().remove(".kml").remove(".cache"))
+            d->m_fileViewModel->remove(d->m_fileViewModel->index(i, 0));
     };
-    
-    /*QStringList loadedContainers = d->m_model->containers();
-    if( loadedContainers.contains( key ) )
-    {
-        d->m_model->removePlaceMarks( key, false );
-    }*/
 }
 
 void PlaceMarkManager::cleanupLoader( PlaceMarkLoader* loader )
