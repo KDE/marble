@@ -33,7 +33,7 @@
         <string>Zoom Out</string>
        </property>
        <property name="whatsThis" >
-        <string>Zoom out by pressing this button to see less details.</string>
+        <string>Zoom out by pressing this button to see less detail.</string>
        </property>
        <property name="text" >
         <string>...</string>
@@ -147,7 +147,7 @@
         <string>Zoom In</string>
        </property>
        <property name="whatsThis" >
-        <string>Zoom in by pressing this button to see more details.</string>
+        <string>Zoom in by pressing this button to see more detail.</string>
        </property>
        <property name="text" >
         <string>...</string>
