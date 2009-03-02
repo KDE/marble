@@ -356,7 +356,7 @@ MarbleMap::MarbleMap()
 {
 #ifdef MARBLE_DBUS
     QDBusConnection::sessionBus().registerObject("/MarbleMap", this, 
-                    QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals );
+                    QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties);
 #endif
     QTime t;
     t.start();
