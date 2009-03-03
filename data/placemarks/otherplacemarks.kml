@@ -13,6 +13,375 @@
         <Point>
             <coordinates>-49.947,41.725,-3925.0</coordinates> 
         </Point> 
-    </Placemark> 
+    </Placemark>
+    <Placemark>
+        <name>Allegheny Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-80.0205555556,40.4833333333</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Amherst Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-72.3455555556,42.3847222222</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Arecibo Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-66.7541666667,18.3355555556</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Big Bear Solar Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-116.916666667,34.2505555556</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Cerro Tololo Int'l Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-70.8166666667,-30.1666666667</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Dearborn Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-87.6705555556,42.0516666667</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Dwingeloo Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>6.39555555556,52.8022222222</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Dyer Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-86.7916666667,36.0505555556</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Fred Lawrence Whipple Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-110.883888889,31.6886111111</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Fremont Peak Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-121.498611111,36.7602777778</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Green Bank Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-79.8416666667,38.4188888889</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Harvard Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-71.1205555556,42.3669444444</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Hat Creek Radio Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-121.475,40.8169444444</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Haystack Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-71.4875,42.6177777778</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Kitt Peak Nat'l. Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-111.595555556,31.7013888889</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>La Palma Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-17.8825,28.7602777778</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>La Silla Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-70.7291666667,-29.2511111111</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Las Campanas Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-70.7,-29.0013888889</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Lick Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-121.6375,37.335</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Lowell Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-111.6625,35.2002777778</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Mauna Kea Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-155.470555556,19.8186111111</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>McCormick Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-78.525,38.0333333333</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>McDonald Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-104.029166667,30.6675</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Meudon Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>2.23305555556,48.8008333333</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Mount Evans Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-105.641666667,39.5838888889</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Mount Graham Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-109.891388889,32.7016666667</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Mount Lemmon Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-110.791666667,32.4347222222</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Mount Palomar Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-116.8625,33.3511111111</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Mount Wilson Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-118.0625,34.2166666667</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Observatoire de Nançay</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>2.23305555556,47.3688888889</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Nassau Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-81.075,41.5847222222</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>North Liberty Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-91.575,41.7675</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Oak Ridge Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-71.5580555556,42.5008333333</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Observatorio Astronómico de Madrid</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-3.6875,40.4013888889</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Osservatorio di Milano</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>9.42916666667,45.7</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Observatoire de Haute Provence</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>5.7125,43.9191666667</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Owens Valley Radio Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-118.283055556,37.2191666667</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Perkins Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-83.0541666667,40.2502777778</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Observatoire du Pic du Midi</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>0.145555555556,42.9338888889</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Observatoire du Plateau de Bure</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>5.90805555556,44.6333333333</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Observatoire du Plateau de Calern</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>6.925,43.7358333333</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Princeton Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-74.65,40.3355555556</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>US Naval Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-77.0666666667,38.9175</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Wilcox Solar Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-122.166666667,37.4016666667</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Yale Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-72.8125,41.3166666667</coordinates>
+            </Point>
+    </Placemark>
+    <Placemark>
+        <name>Yerkes Observatory</name>
+        <role>A</role>
+        <pop>100000</pop>
+            <Point>
+                <coordinates>-88.5580555556,42.5672222222</coordinates>
+            </Point>
+    </Placemark>
+
 </Document>
 </kml> 

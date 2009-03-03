@@ -399,6 +399,7 @@ void MarblePlacemarkModel::createFilterProperties( PlaceMarkContainer &container
         else if ( placemark->role() == 'M' ) placemark->setVisualCategory( GeoDataPlacemark::MagneticPole );
         else if ( placemark->role() == 'W' ) placemark->setVisualCategory( GeoDataPlacemark::ShipWreck );
         else if ( placemark->role() == 'F' ) placemark->setVisualCategory( GeoDataPlacemark::AirPort );
+        else if ( placemark->role() == 'A' ) placemark->setVisualCategory( GeoDataPlacemark::Observatory );
         else if ( placemark->role() == 'K' ) placemark->setVisualCategory( GeoDataPlacemark::Continent );
         else if ( placemark->role() == 'O' ) placemark->setVisualCategory( GeoDataPlacemark::Ocean );
         else if ( placemark->role() == 'S' ) placemark->setVisualCategory( GeoDataPlacemark::Nation );

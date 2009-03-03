@@ -105,6 +105,9 @@ void PlaceMarkInfoDialog::showContent()
     case 'K':
         rolestring = tr("Continent");
         break;
+    case 'A':
+        rolestring = tr("Astronomical observatory");
+        break;
     default:
         rolestring = tr("Other Place");
     }

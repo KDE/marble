@@ -272,6 +272,10 @@ void GeoDataFeature::initializeDefaultStyles()
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/airport.png" ) ), 
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
 
+    s_defaultStyle[Observatory]
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/other.png" ) ), 
+              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
+
     s_defaultStyle[Wikipedia]
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/wikipedia.png" ) ), 
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
