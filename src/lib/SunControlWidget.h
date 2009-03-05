@@ -53,6 +53,7 @@ class MARBLE_EXPORT SunControlWidget : public QDialog
     void datetimeChanged(QDateTime datetime);
 	
  protected:
+    void showEvent(QShowEvent* event);
     Q_DISABLE_COPY( SunControlWidget )
 
     Ui::SunControlWidget  m_uiWidget;

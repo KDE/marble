@@ -27,6 +27,8 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "MarbleAbstractFloatItem.h"
+#include "MeasureTool.h"
+#include "MarbleWidgetPopupMenu.h"
 
 using namespace Marble;
 
@@ -58,7 +60,7 @@ void MarbleWidgetInputHandler::init(MarbleWidget *w)
 
 
 MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler()
-    : MarbleWidgetInputHandler()
+    : MarbleWidgetInputHandler(), m_popupmenu( 0 ), m_leftpopup(true)
 {
     curpmtl.load( MarbleDirs::path("bitmaps/cursor_tl.xpm") );
     curpmtc.load( MarbleDirs::path("bitmaps/cursor_tc.xpm") );
@@ -85,7 +87,7 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler()
     m_selectionRubber = new QRubberBand(QRubberBand::Rectangle, m_widget);
     m_selectionRubber->hide();
 
-    m_dragThreshold   = 3;
+    m_dragThreshold   = 3;    
 }
 
 void MarbleWidgetInputHandler::restoreViewContext()
@@ -100,6 +102,46 @@ void MarbleWidgetInputHandler::restoreViewContext()
     {
         m_widget->updateChangedMap();
     }
+}
+
+void MarbleWidgetDefaultInputHandler::init(MarbleWidget *w)
+{
+    MarbleWidgetInputHandler::init(w);
+  
+    // The interface to the measure tool consists of a RMB popup menu
+    // and some signals.
+    MeasureTool  *measureTool = m_widget->map()->measureTool();
+
+    // Connect the inputHandler and the measure tool to the popup menu
+    if ( !m_popupmenu ) {
+        m_popupmenu    = new MarbleWidgetPopupMenu( m_widget, m_model );
+    }
+    connect( this, SIGNAL( rmbRequest( int, int ) ),
+                       m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );
+    connect( m_popupmenu, SIGNAL( addMeasurePoint( qreal, qreal ) ),
+                       measureTool, SLOT( addMeasurePoint( qreal, qreal ) ) );
+    connect( m_popupmenu, SIGNAL( removeMeasurePoints() ),
+                       measureTool, SLOT( removeMeasurePoints( ) ) );  
+    connect( this, SIGNAL( lmbRequest( int, int ) ),
+                       this,    SLOT( showLmbMenu( int, int ) ) );		       
+}
+
+void MarbleWidgetDefaultInputHandler::showLmbMenu( int x, int y)
+{
+  if (m_leftpopup)
+  {
+    m_popupmenu->showLmbMenu(x,y);
+  }
+}
+
+void MarbleWidgetDefaultInputHandler::setLeftMouseButtonPopup(bool enabled)
+{
+  m_leftpopup = enabled;
+}
+    
+bool MarbleWidgetDefaultInputHandler::leftMouseButtonPopup()
+{
+  return m_leftpopup;
 }
 
 bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )

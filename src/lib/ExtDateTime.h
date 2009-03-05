@@ -61,6 +61,11 @@ class ExtDateTime : public QObject
     void setDateTime(QDateTime datetime);
 
     /**
+     * @brief Returns the speed of the timer
+     **/
+    int getSpeed() {return m_speed;};
+    
+    /**
      * @brief Sets the speed of the timer
      * @param speed The new speed (integer)
      **/

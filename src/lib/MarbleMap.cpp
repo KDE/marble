@@ -75,7 +75,6 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent )
           m_persistentTileCacheLimit( 1024*1024*300 ), // 300 MB
           m_volatileTileCacheLimit( 1024*1024*30 ) // 30 MB
 {
-    /* NOOP */
 }
 
 void MarbleMapPrivate::construct()
@@ -109,9 +108,9 @@ void MarbleMapPrivate::construct()
 
 
     m_parent->connect( m_model->sunLocator(), SIGNAL( updateSun() ),
-                        m_parent,              SLOT( updateSun() ) );
+                       m_parent,              SLOT( updateSun() ) );
     m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
-                        m_parent,              SLOT( centerSun() ) );
+                       m_parent,              SLOT( centerSun() ) );
 }
 
 // Used to be resizeEvent()
@@ -140,13 +139,15 @@ void  MarbleMapPrivate::paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect
 
     QPixmap logoPixmap( MarbleDirs::path( "svg/marble-logo-inverted-72dpi.png" ) );
 
-    if ( logoPixmap.width() > m_parent->width() * 0.7 || logoPixmap.height() > m_parent->height() * 0.7 )
+    if ( logoPixmap.width() > m_parent->width() * 0.7
+         || logoPixmap.height() > m_parent->height() * 0.7 )
     {
-        logoPixmap = logoPixmap.scaled( QSize( m_parent->width(), m_parent->height() ) * 0.7, Qt::KeepAspectRatio, Qt::SmoothTransformation );
+        logoPixmap = logoPixmap.scaled( QSize( m_parent->width(), m_parent->height() ) * 0.7,
+                                        Qt::KeepAspectRatio, Qt::SmoothTransformation );
     }
 
-    QPoint logoPosition( ( m_parent->width()  - logoPixmap.width() ) / 2 , 
-                            ( m_parent->height() - logoPixmap.height() ) / 2 ); 
+    QPoint logoPosition( ( m_parent->width()  - logoPixmap.width() ) / 2,
+                            ( m_parent->height() - logoPixmap.height() ) / 2 );
     painter.drawPixmap( logoPosition, logoPixmap );
 
     QString message; // "Please assign a map theme!";
@@ -273,8 +274,7 @@ void MarbleMapPrivate::setBoundingBox()
 
 void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
 {
-    if ( !m_viewParams.mapTheme() ) 
-    {
+    if ( !m_viewParams.mapTheme() ) {
         qDebug() << "No theme yet!";
         paintMarbleSplash( painter, dirtyRect );
         return;
@@ -286,28 +286,26 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
                    || m_viewParams.radius() > m_viewParams.canvasImage()->height() / 2 );
 
     m_model->paintGlobe( &painter,
-                            m_parent->width(), m_parent->height(), &m_viewParams,
-                            m_parent->needsUpdate()
-                            || m_viewParams.canvasImage()->isNull(),
-                            dirtyRect );
+                         m_parent->width(), m_parent->height(), &m_viewParams,
+                         m_parent->needsUpdate() || m_viewParams.canvasImage()->isNull(),
+                         dirtyRect );
     // FIXME: this is ugly, add method updatePlanetAxis() to ViewParams
     m_viewParams.setPlanetAxisUpdated( m_viewParams.planetAxis() );
     // FIXME: this is ugly, add method updateRadius() to ViewParams
     m_viewParams.setRadiusUpdated( m_viewParams.radius() );
-    m_justModified                   = false;
+    m_justModified = false;
 
     // FIXME: This is really slow. That's why we defer this to
     //        PrintQuality. Either cache on a pixmap - or maybe
     //        better: Add to GlobeScanlineTextureMapper.
 
     if ( m_viewParams.mapQuality() == Marble::Print )
-        drawFog(painter);
+        drawFog( painter );
 }
 
 void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect)
 {
-    if ( !m_viewParams.mapTheme() ) 
-    {
+    if ( !m_viewParams.mapTheme() ) {
         return;
     }
 
@@ -358,7 +356,7 @@ MarbleMap::MarbleMap()
 {
 #ifdef MARBLE_DBUS
     QDBusConnection::sessionBus().registerObject("/MarbleMap", this, 
-                    QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals );
+                    QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties);
 #endif
     QTime t;
     t.start();
@@ -799,7 +797,8 @@ void MarbleMap::centerOn(const QModelIndex& index)
     selectionModel->clear();
 
     if ( index.isValid() ) {
-        const GeoDataCoordinates point = index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
+        const GeoDataCoordinates point =
+            index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
   
         qreal  lon;
         qreal  lat;
@@ -948,17 +947,17 @@ bool MarbleMap::globalQuaternion( int x, int y, Quaternion &q)
 }
 
 // Used to be paintEvent()
-void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect) 
+void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
 {
     QTime t;
     t.start();
 
-    d->paintGround(painter, dirtyRect);
+    d->paintGround( painter, dirtyRect );
     customPaint( &painter );
-    d->paintOverlay(painter, dirtyRect);
+    d->paintOverlay( painter, dirtyRect );
 
     qreal fps = 1000.0 / (qreal)( t.elapsed() );
-    d->paintFps(painter, dirtyRect, fps);
+    d->paintFps( painter, dirtyRect, fps );
     emit framesPerSecond( fps );
 }
 
@@ -966,8 +965,7 @@ void MarbleMap::customPaint(GeoPainter *painter)
 {
     Q_UNUSED( painter );
 
-    if ( !viewParams()->mapTheme() ) 
-    {
+    if ( !viewParams()->mapTheme() ) {
         return;
     }
 }
@@ -1133,11 +1131,10 @@ void MarbleMap::changeCurrentPosition( qreal lon, qreal lat)
 
 void MarbleMap::notifyMouseClick( int x, int y)
 {
-    bool    valid = false;
     qreal  lon   = 0;
     qreal  lat   = 0;
 
-    valid = geoCoordinates( x, y, lon, lat, GeoDataCoordinates::Radian );
+    const bool valid = geoCoordinates( x, y, lon, lat, GeoDataCoordinates::Radian );
 
     if ( valid ) {
         emit mouseClickGeoPosition( lon, lat, GeoDataCoordinates::Radian);
@@ -1147,8 +1144,7 @@ void MarbleMap::notifyMouseClick( int x, int y)
 void MarbleMap::updateGps()
 {
     QRegion temp;
-    bool    draw;
-    draw = d->m_model->gpsLayer()->updateGps( size(),&d->m_viewParams, temp );
+    const bool draw = d->m_model->gpsLayer()->updateGps( size(),&d->m_viewParams, temp );
 #if 0  // FIXME: move to MarbleWidget?
     if ( draw ) {
         update(temp);
@@ -1232,8 +1228,8 @@ void MarbleMap::setDownloadUrl( const QUrl &url )
     if ( downloadManager != 0 )
         downloadManager->setServerUrl( url );
     else {
-        downloadManager = new HttpDownloadManager( url,
-                                                   new FileStoragePolicy( MarbleDirs::localPath() ) );
+        downloadManager =
+            new HttpDownloadManager( url, new FileStoragePolicy( MarbleDirs::localPath() ) );
         d->m_model->setDownloadManager( downloadManager );
     }
 }
@@ -1258,9 +1254,9 @@ QString MarbleMap::distanceString() const
 
     QString distanceUnitString;
 
-    Marble::DistanceUnit distanceUnit;
-    distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
+    const Marble::DistanceUnit distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
 
+    // FIXME: why is "km" translated and "mi" not?
     if ( distanceUnit == Marble::Metric ) {
         distanceUnitString = tr("km");
     }
@@ -1280,8 +1276,7 @@ bool MarbleMap::mapCoversViewport()
 
 Marble::AngleUnit MarbleMap::defaultAngleUnit() const
 {
-    if ( GeoDataCoordinates::defaultNotation() == GeoDataCoordinates::Decimal )
-    {
+    if ( GeoDataCoordinates::defaultNotation() == GeoDataCoordinates::Decimal ) {
         return Marble::DecimalDegree;
     }
 
@@ -1290,8 +1285,7 @@ Marble::AngleUnit MarbleMap::defaultAngleUnit() const
 
 void MarbleMap::setDefaultAngleUnit( Marble::AngleUnit angleUnit )
 {
-    if ( angleUnit == Marble::DecimalDegree )
-    {
+    if ( angleUnit == Marble::DecimalDegree ) {
         GeoDataCoordinates::setDefaultNotation( GeoDataCoordinates::Decimal );
         return;
     }

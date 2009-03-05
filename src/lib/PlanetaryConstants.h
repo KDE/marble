@@ -18,9 +18,11 @@
 #define PLANETARYCONSTANTS_H
 
 #include "global.h"
-using namespace Marble;
 
-struct PlanetaryConstants {
+namespace Marble {
+
+struct PlanetaryConstants
+{
     qreal M_0, M_1; // for calculating mean anomaly
     qreal C_1, C_2, C_3, C_4, C_5, C_6; // for calculating equation of center
     qreal Pi; // ecliptic longitude of the perihelion
@@ -102,5 +104,7 @@ PlanetaryConstants PC_PLUTO = {
     (57.46*DEG2RAD),
     (56.3183*DEG2RAD), (-56.3623195*DEG2RAD)
 };
+
+}
 
 #endif

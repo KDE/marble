@@ -13,6 +13,7 @@
 #include "HttpDownloadManager.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QTimer>
 
 #include "HttpJob.h"
 #include "MarbleDirs.h"
@@ -124,9 +125,19 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
             return false;
         }
     }
+    
+    QList<HttpJob*>::iterator i = m_waitingQueue.begin();
+    QList<HttpJob*>::iterator iEnd = m_waitingQueue.end();
+    for (; i != iEnd; ++i) {
+	if ( job->originalDestinationFileName() == (*i)->originalDestinationFileName() ) {
+	    qDebug() << "Download rejected: Will try to download again in some time.";
+	    (*i)->setInitiatorId( job->initiatorId() );
+	    return false;
+	}
+    }
 
-    QList<HttpJob*>::iterator i = m_activatedJobList.begin();
-    QList<HttpJob*>::iterator iEnd = m_activatedJobList.end();
+    i = m_activatedJobList.begin();
+    iEnd = m_activatedJobList.end();
     for (; i != iEnd; ++i ) {
         if ( job->originalDestinationFileName() == (*i)->originalDestinationFileName() ) {
             qDebug() << "Download rejected: It's being downloaded already.";
@@ -177,6 +188,11 @@ void HttpDownloadManager::activateJobs()
         job->setStoragePolicy( storagePolicy() );
         job->setStatus( Activated );
 
+	// No duplicate connections please
+        disconnect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
+                 this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
+        disconnect( job, SIGNAL( statusMessage( QString ) ),
+                 this, SIGNAL( statusMessage( QString ) ) );
         connect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
                  this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
         connect( job, SIGNAL( statusMessage( QString ) ),
@@ -193,11 +209,26 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
 
         if ( pos >= 0 ) {
             m_activatedJobList.removeAt( pos );
-            m_jobBlackList.push_back( job );
-
-            qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" )
-                .arg( job->destinationFileName() ).arg( m_jobBlackList.size() );
-        }
+	    
+	    // This should always return true
+	    if( !m_waitingQueue.contains( job ) ) {
+		if( job->tryAgain() )
+		{
+		    m_waitingQueue.enqueue( job );
+		    qDebug() << QString( "Download of %1 failed, but trying again in one minute" )
+			.arg( job->destinationFileName() );
+		    job->setStatus( NoStatus );
+		    QTimer::singleShot( 60000, this, SLOT( requeue() ) ); // 60000 ms = 1 min
+		}
+		else
+		{
+		    m_jobBlackList.push_back( job );
+		    
+		    qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" )
+			.arg( job->destinationFileName() ).arg( m_jobBlackList.size() );
+		}
+	    }
+	}
     }
     else {
 //         qDebug() << "HttpDownloadManager: Download Complete:"
@@ -205,7 +236,20 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
         emit downloadComplete( job->originalDestinationFileName(), job->initiatorId() );
         removeJob( job );
     }
+    
+    activateJobs();
+}
 
+void HttpDownloadManager::requeue()
+{
+    if( !m_waitingQueue.isEmpty() ) {
+	HttpJob* job = m_waitingQueue.dequeue();
+	qDebug() << QString( "Requeuing %1." ).arg( job->destinationFileName() );
+	addJob( job );
+    }
+    else {
+	qDebug() << QString( "Warning: For some reason we requeued more jobs as needed" );
+    }
 }
 
 HttpJob *HttpDownloadManager::createJob( const QUrl& sourceUrl, const QString& destFileName,

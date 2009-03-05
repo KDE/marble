@@ -104,6 +104,17 @@
    <default code="true">KGlobalSettings::generalFont()</default>
   </entry>
  </group>
+ <group name="Sun" >
+  <entry name="showSun" type="Bool" >
+   <default>false</default>
+  </entry>
+  <entry name="showCitylights" type="Bool" >
+   <default>false</default>
+  </entry>
+  <entry name="centerOnSun" type="Bool" >
+   <default>false</default>
+  </entry>
+ </group>
  <group name="Navigation" >
   <entry key="dragLocation" type="Enum" >
    <label>The behaviour of the planet's axis on mouse dragging.</label>

@@ -374,7 +374,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
         // Skip other places if we're not showing other places.
         if ( !showOtherPlaces
              && (    visualCategory >= (int)(GeoDataFeature::GeographicPole) ) 
-                  && visualCategory <= (int)(GeoDataFeature::AirPort) )
+                  && visualCategory <= (int)(GeoDataFeature::Observatory) )
             continue;
 
         // Skip landing sites if we're not showing landing sites.

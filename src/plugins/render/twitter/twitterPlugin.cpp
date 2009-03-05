@@ -131,8 +131,8 @@ void twitterPlugin::downloadtwitter(int rangeFrom , int rangeTo , qreal east , q
 {
 qDebug()<<"::::::downloading"<<rangeFrom ;
 /** to use identi.ca line also */
-//    m_downloadManager->addJob(QUrl("http://twitter.com/statuses/public_timeline.json"), "twitter", "twitter");
-    m_downloadManager->addJob(QUrl("http://identi.ca/api/statuses/public_timeline.json"), "identica", "identica");
+    m_downloadManager->addJob(QUrl("http://twitter.com/statuses/public_timeline.json"), "twitter", "twitter");
+//    m_downloadManager->addJob(QUrl("http://identi.ca/api/statuses/public_timeline.json"), "identica", "identica");
 
     connect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotJsonDownloadComplete(QString , QString)));
 

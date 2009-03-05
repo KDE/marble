@@ -126,6 +126,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         MagneticPole,
         ShipWreck,
         AirPort,
+        Observatory,
 
         // Runners
         Wikipedia,

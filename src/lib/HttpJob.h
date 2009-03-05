@@ -54,6 +54,8 @@ class HttpJob: public QObject
     void setStatus( const Status );
 
     void setStoragePolicy( StoragePolicy * );
+    
+    bool tryAgain();
 
  Q_SIGNALS:
     void jobDone( Marble::HttpJob *, int );

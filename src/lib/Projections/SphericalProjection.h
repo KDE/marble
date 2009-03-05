@@ -54,13 +54,13 @@ class SphericalProjection : public AbstractProjection
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    inline bool screenCoordinates( const qreal lon, const qreal lat,
+    bool screenCoordinates( const qreal lon, const qreal lat,
                             const ViewportParams *params,
                             int& x, int& y );
 
-    inline bool screenCoordinates( const GeoDataCoordinates &coordinates, 
-                                   const ViewportParams *params,
-                                   int &x, int &y, bool &globeHidesPoint );
+    bool screenCoordinates( const GeoDataCoordinates &coordinates, 
+                            const ViewportParams *params,
+                            int &x, int &y, bool &globeHidesPoint );
 
     bool screenCoordinates( const GeoDataCoordinates &coordinates,
                             const ViewportParams * viewport,
@@ -80,10 +80,10 @@ class SphericalProjection : public AbstractProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    inline bool geoCoordinates( int x, int y,
-                                const ViewportParams *params,
-                                qreal& lon, qreal& lat,
-                                GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree );
+    bool geoCoordinates( int x, int y,
+                         const ViewportParams *params,
+                         qreal& lon, qreal& lat,
+                         GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree );
 
     /**
      * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.
@@ -93,9 +93,9 @@ class SphericalProjection : public AbstractProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space
      */
-    inline bool geoCoordinates( int x, int y, 
-                                const ViewportParams *params,
-                                Quaternion &q );
+    bool geoCoordinates( int x, int y, 
+                         const ViewportParams *params,
+                         Quaternion &q );
 
     GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
                                       const ViewportParams *viewport );

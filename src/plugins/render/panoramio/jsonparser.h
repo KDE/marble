@@ -33,8 +33,8 @@ struct panoramioDataStructure {
     QString photo_title; // Title of each photograph
     QString photo_url; // Url of each photograph
     QString photo_file_url;
-    qreal longitude;
-    qreal latitude;
+    int longitude;
+    int latitude;
     int width;
     int height;
     QString upload_date;
@@ -43,9 +43,8 @@ struct panoramioDataStructure {
     QString owner_url; // Url of the User Uplaoded
 };
 
-class jsonParser : public QObject
+class jsonParser 
 {
-    Q_OBJECT
 public:
     jsonParser();
 
