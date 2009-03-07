@@ -104,7 +104,7 @@ bool PanoramioPlugin::render(GeoPainter *painter, ViewportParams *viewport, cons
             painter->setPen(Qt::Dense1Pattern);
             painter->setPen(Qt::white);
             painter->drawRect(GeoDataCoordinates(parsedData[x].longitude, parsedData[x].latitude, 0.0, GeoDataCoordinates::Degree),/*parsedData[x].height , parsedData[x].width*/50, 50);
-             qDebug() <<"Shanky: Coordinates are lon-lat: " << parsedData[x].longitude << parsedData[x].latitude;
+             qDebug() <<"__func__ " << parsedData[x].longitude << parsedData[x].latitude;
         }
     }
     //qDebug() << "deltas" << west - deltaWest << east - deltaEast << south - deltaSouth << north - deltaNorth;
@@ -118,18 +118,22 @@ bool PanoramioPlugin::render(GeoPainter *painter, ViewportParams *viewport, cons
 
 void PanoramioPlugin::slotJsonDownloadComplete(QString relativeUrlString, QString id)
 {
+
+	qDebug()<<"::::::::::::::::::::::::::::::::"<<__func__;
     disconnect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotJsonDownloadComplete(QString , QString)));
     connect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotImageDownloadComplete(QString , QString)));
 
     for (int x = 0; x < numberOfImagesToShow; ++x) {
         temp = panoramioJsonParser.parseObjectOnPosition(QString::fromUtf8(m_storagePolicy->data(id)), x);
+        if (!m_storagePolicy->fileExists(temp.photo_title) || temp.photo_file_url != "TypeError: not an object") {
+
         parsedData.append(temp);
-//	qDebug()<<temp.photo_file_url;
-        if (!m_storagePolicy->fileExists(temp.photo_title)) {
-            m_downloadManager->addJob(QUrl(temp.photo_file_url), temp.photo_title, QString::number(x));
-           qDebug() << "adding " << temp.photo_title;
+        qDebug()<<__func__<<"url"<<temp.photo_file_url;
+    
+	 m_downloadManager->addJob(QUrl(temp.photo_file_url), temp.photo_title, QString::number(x));
+           qDebug() << __func__ <<"adding " << temp.photo_title;
         }
-       // qDebug() << ":::::::shanky1" << temp.photo_file_url;
+        qDebug() <<__func__<< ":::::::shanky1" << temp.photo_file_url;
     }
 
 //         HttpJob *job = new HttpJob ( sourceUrl, destFileName, id );
