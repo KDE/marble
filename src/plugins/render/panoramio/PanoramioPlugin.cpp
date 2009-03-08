@@ -105,6 +105,7 @@ bool PanoramioPlugin::render(GeoPainter *painter, ViewportParams *viewport, cons
             painter->setPen(Qt::white);
             painter->drawRect(GeoDataCoordinates(parsedData[x].longitude, parsedData[x].latitude, 0.0, GeoDataCoordinates::Degree),/*parsedData[x].height , parsedData[x].width*/50, 50);
              qDebug() <<"Shanky: Coordinates are lon-lat: " << parsedData[x].longitude << parsedData[x].latitude;
+	  tempLabel.render(painter->device(),QPoint(),QRegion(),QWidget::RenderFlags(QWidget::DrawChildren));//,my attempt at drawing a widget
         }
     }
     //qDebug() << "deltas" << west - deltaWest << east - deltaEast << south - deltaSouth << north - deltaNorth;
@@ -139,10 +140,11 @@ void PanoramioPlugin::slotJsonDownloadComplete(QString relativeUrlString, QStrin
 
 void PanoramioPlugin::slotImageDownloadComplete(const QString relativeUrlString, const QString id)
 {
-
     //     temp.loadFromData ( m_storagePolicy->data ( id ) );
     tempImage.load(MarbleDirs::localPath() + "/cache/" + relativeUrlString);
     imagesWeHave.append(tempImage.scaled(QSize(50, 50),  Qt::IgnoreAspectRatio , Qt::FastTransformation));
+    tempLabel.setPixmap(tempImage);    
+   // images.append(label,Qt::IgnoreAspectRatio,Qt::FastTransformation);
     qDebug() << "::::::::::::::shanky2" << id << "=" << tempImage.isNull() << MarbleDirs::localPath() + "/cache/" + relativeUrlString ;
     flag = 1;
 }
