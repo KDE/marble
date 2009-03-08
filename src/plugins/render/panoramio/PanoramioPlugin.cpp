@@ -67,7 +67,7 @@ QIcon PanoramioPlugin::icon() const
 void PanoramioPlugin::initialize()
 {
     flag = 0;
-    numberOfImagesToShow = 5;
+    numberOfImagesToShow = 20;
     m_storagePolicy = new CacheStoragePolicy(MarbleDirs::localPath() + "/cache/");
     m_downloadManager = new HttpDownloadManager(QUrl("htttp://mw2.google.com/"), m_storagePolicy);
     downloadPanoramio(0, numberOfImagesToShow , -180.00 / RADIANSTODEGREES  , -90.00 / RADIANSTODEGREES , 180.00 / RADIANSTODEGREES , 90.00 / RADIANSTODEGREES);
@@ -85,7 +85,7 @@ bool PanoramioPlugin::render(GeoPainter *painter, ViewportParams *viewport, cons
     painter->autoMapQuality();
     GeoDataLatLonAltBox mylatLonAltBox = viewport->viewLatLonAltBox();
 
-    qreal west = mylatLonAltBox.west();
+   /* qreal west = mylatLonAltBox.west();
     qreal east = mylatLonAltBox.east();
     qreal south = mylatLonAltBox.south();
     qreal north = mylatLonAltBox.north();
@@ -96,7 +96,7 @@ bool PanoramioPlugin::render(GeoPainter *painter, ViewportParams *viewport, cons
         downloadPanoramio(0 , numberOfImagesToShow , west , east , north , south);
         disconnect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotImageDownloadComplete(QString , QString)));
     }
-
+*/
     if (flag == 1) {
         for (int x = 0; x < imagesWeHave.count(); ++x) {
             painter->drawPixmap(GeoDataCoordinates(parsedData[x].longitude, parsedData[x].latitude, 0.0, GeoDataCoordinates::Degree), imagesWeHave[x]);
@@ -104,36 +104,33 @@ bool PanoramioPlugin::render(GeoPainter *painter, ViewportParams *viewport, cons
             painter->setPen(Qt::Dense1Pattern);
             painter->setPen(Qt::white);
             painter->drawRect(GeoDataCoordinates(parsedData[x].longitude, parsedData[x].latitude, 0.0, GeoDataCoordinates::Degree),/*parsedData[x].height , parsedData[x].width*/50, 50);
-             qDebug() <<"__func__ " << parsedData[x].longitude << parsedData[x].latitude;
+             qDebug() <<"Shanky: Coordinates are lon-lat: " << parsedData[x].longitude << parsedData[x].latitude;
         }
     }
     //qDebug() << "deltas" << west - deltaWest << east - deltaEast << south - deltaSouth << north - deltaNorth;
-
+/*
     deltaWest = west;
     deltaEast = east ;
     deltaSouth = south ;
     deltaNorth = north;
-    return true;
+*/  
+  return true;
 }
 
 void PanoramioPlugin::slotJsonDownloadComplete(QString relativeUrlString, QString id)
 {
-
-	qDebug()<<"::::::::::::::::::::::::::::::::"<<__func__;
     disconnect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotJsonDownloadComplete(QString , QString)));
     connect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotImageDownloadComplete(QString , QString)));
 
     for (int x = 0; x < numberOfImagesToShow; ++x) {
         temp = panoramioJsonParser.parseObjectOnPosition(QString::fromUtf8(m_storagePolicy->data(id)), x);
-        if (!m_storagePolicy->fileExists(temp.photo_title) || temp.photo_file_url != "TypeError: not an object") {
-
         parsedData.append(temp);
-        qDebug()<<__func__<<"url"<<temp.photo_file_url;
-    
-	 m_downloadManager->addJob(QUrl(temp.photo_file_url), temp.photo_title, QString::number(x));
-           qDebug() << __func__ <<"adding " << temp.photo_title;
+//	qDebug()<<temp.photo_file_url;
+        if (!m_storagePolicy->fileExists(temp.photo_title)) {
+            m_downloadManager->addJob(QUrl(temp.photo_file_url), temp.photo_title, QString::number(x));
+           qDebug() << "adding " << temp.photo_title;
         }
-        qDebug() <<__func__<< ":::::::shanky1" << temp.photo_file_url;
+       // qDebug() << ":::::::shanky1" << temp.photo_file_url;
     }
 
 //         HttpJob *job = new HttpJob ( sourceUrl, destFileName, id );
