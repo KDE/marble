@@ -107,6 +107,7 @@ set(marblewidget_SRCS
     PlaceMarkLoader.cpp
     PlaceMarkPainter.cpp
     PlaceMarkInfoDialog.cpp
+    Planet.cpp
     Quaternion.cpp
     TextureColorizer.cpp
     AbstractScanlineTextureMapper.cpp
