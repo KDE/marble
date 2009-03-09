@@ -315,6 +315,7 @@ else (APPLE AND QTONLY)
     MarbleRenderPlugin.h
     MarbleRenderPluginInterface.h
     marble_export.h
+    Planet.h
 
     LatLonEdit.h
     BoundingBox.h
