@@ -19,14 +19,14 @@
  
 ;    3. This notice may not be removed or altered from any source distribution.
  
-!define setup "marble-setup-0.6.0.exe"
+!define setup "marble-setup-0.7.1.exe"
  
 ; change this to wherever the files to be packaged reside
 !define srcdir "C:\Programme\marble"
  
 !define company "KDE"
  
-!define prodname "Marble 0.6.0"
+!define prodname "Marble 0.7.1"
 !define exec "marble.exe"
  
 ; optional stuff
