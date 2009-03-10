@@ -25,7 +25,8 @@ public:
     //Constructor
     Planet( qreal M_0, qreal M_1, qreal C_1, qreal C_2, qreal C_3, qreal C_4,
             qreal C_5, qreal C_6, qreal Pi, qreal epsilon, qreal theta_0,
-            qreal theta_1, qreal radius );
+            qreal theta_1, qreal radius, const QString& name,
+            const QString& target );
 
     //Copy Constructor
     Planet( const Planet& other );
@@ -59,6 +60,11 @@ public:
     // the radius of the planet, in metres
     qreal radius() const;
 
+    /** The user visible name of the planet */
+    QString name() const;
+    /** The internal, nonlocalized name of the planet */
+    QString target() const;
+
     /* Setter functions */
     void setM_0( qreal M_0 );
     void setM_1( qreal M_1 );
@@ -78,6 +84,9 @@ public:
     void setTheta_1( qreal theta_1 );
 
     void setRadius( qreal radius );
+
+    QString setName( const QString& name );
+    QString setTarget( const QString& target );
 
     void operator=( const Planet& other );
 

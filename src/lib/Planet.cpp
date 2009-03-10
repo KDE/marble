@@ -20,13 +20,15 @@ public:
     qreal epsilon; // obliquity of the ecliptic plane
     qreal theta_0, theta_1; // for calculating sidereal time
     qreal radius; //in metres
+    QString name, target; //localized and nonlocalized names
 };
 
 
 //Constructor
 Planet::Planet(qreal M_0, qreal M_1, qreal C_1, qreal C_2, qreal C_3, qreal C_4,
                qreal C_5, qreal C_6, qreal Pi, qreal epsilon, qreal theta_0,
-               qreal theta_1, qreal radius )
+               qreal theta_1, qreal radius, const QString& name,
+               const QString& target )
 {
     d = new PlanetPrivate;
     d->M_0 = M_0;
@@ -42,6 +44,8 @@ Planet::Planet(qreal M_0, qreal M_1, qreal C_1, qreal C_2, qreal C_3, qreal C_4,
     d->theta_0 = theta_0;
     d->theta_1 = theta_1;
     d->radius = radius;
+    d->name = name;
+    d->target = target;
 }
 
 //Copy Constructor
@@ -61,6 +65,8 @@ Planet::Planet( const Planet& other )
     d->theta_0 = other.theta_0();
     d->theta_1 = other.theta_1();
     d->radius = other.radius();
+    d->name = other.name();
+    d->target = other.target();
 }
 //Destructor
 Planet::~Planet()
@@ -208,6 +214,8 @@ void Planet::operator=(const Planet& other)
     d->theta_0 = other.theta_0();
     d->theta_1 = other.theta_1();
     d->radius = other.radius();
+    d->name = other.name();
+    d->target = other.target();
 }
 
 
