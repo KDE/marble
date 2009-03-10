@@ -828,7 +828,7 @@ qreal MarbleModel::planetRadius()   const
 {
     if ( d->m_mapTheme ) {
         QString target = d->m_mapTheme->head()->target().toLower();
-        Planet *p = Slartibartfast::planetByName( target );
+        const Planet *p = Slartibartfast::planetByName( target );
         if( p )
             return p->radius();
     }

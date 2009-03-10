@@ -26,7 +26,31 @@ public:
 
 SlartibartfastPrivate *d = 0;
 
-Planet* Slartibartfast::planetByName( const QString& target )
+const Planet* Slartibartfast::addPlanet(Planet *planet, const QString& target,
+                                  bool overwrite)
+{
+    //Check if the d-pointer exists
+    if( !d )
+        d = new SlartibartfastPrivate;
+
+    bool exists = d->existingPlanets.contains( target );
+    if( exists && !overwrite )
+        return 0;
+
+    if( !exists ) {
+        Planet *newplanet = new Planet( *planet );
+        d->existingPlanets.insert( target, newplanet );
+        return newplanet;
+    } else {
+        //Doing it this was means everybody still using the 
+        Planet *oldplanet = d->existingPlanets.value( target );
+        *oldplanet = *planet;
+        return oldplanet;
+    }
+
+}
+
+const Planet* Slartibartfast::planetByName( const QString& target )
 {
     //qDebug() << "Slartibartfast making planet" << target;
     //Check if the d-pointer exists
