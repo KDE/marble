@@ -62,6 +62,8 @@
 #include "PlaceMarkManager.h"
 #include "PlaceMarkLayout.h"
 #include "PlaceMarkPainter.h"
+#include "Planet.h"
+#include "Slartibartfast.h"
 #include "StoragePolicy.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
@@ -826,39 +828,9 @@ qreal MarbleModel::planetRadius()   const
 {
     if ( d->m_mapTheme ) {
         QString target = d->m_mapTheme->head()->target().toLower();
-
-        // I'd like to be able to use strings in switch statements ... 
-
-        // Make sure to use the radius, not the diameter!
-
-        // planets
-               if ( target == "mercury" ) {
-            return  2440000.0;
-        } else if ( target == "venus" ) {
-            return  6051800.0;
-        } else if ( target == "earth" ) {
-            return  6378000.0;
-        } else if ( target == "mars" ) {
-            return  3397000.0;
-        } else if ( target == "jupiter" ) {
-            return  71492000.0;
-        } else if ( target == "saturn" ) {
-            return  60268000.0;
-        } else if ( target == "uranus" ) {
-            return  25559000.0;
-        } else if ( target == "neptune" ) {
-            return  24766000.0;
-
-        // dwarf planets ... (everybody likes pluto)
-        } else if ( target == "pluto" ) {
-            return  1151000.0;
-
-        // sun and moon
-        } else if ( target == "sun" ) {
-            return  695000000.0;
-        } else if ( target == "moon" ) {
-            return  1738000.0;
-        }
+        Planet *p = Slartibartfast::planetByName( target );
+        if( p )
+            return p->radius();
     }
 
     // Fallback to assuming that we deal with the earth

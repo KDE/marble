@@ -28,15 +28,18 @@ SlartibartfastPrivate *d = 0;
 
 Planet* Slartibartfast::planetByName( const QString& target )
 {
+    //qDebug() << "Slartibartfast making planet" << target;
     //Check if the d-pointer exists
     if( !d )
         d = new SlartibartfastPrivate;
 
     //If there's no existing planet, return a null pointer
     Planet *p = d->existingPlanets.value( target, 0 );
-    if( p )
+    if( p ) {
+        //qDebug() << "Planet already exists!";
         return p; //Success, we have this planet already made!
-    else {
+    } else {
+        //qDebug() << "Manufacturing custom planet";
         // constants taken from
         // http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html
         if ( target == "mercury" ) {
@@ -120,4 +123,4 @@ Planet* Slartibartfast::planetByName( const QString& target )
     }
 }
 
-}
+} //ns Marble

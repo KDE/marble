@@ -317,7 +317,7 @@ else (APPLE AND QTONLY)
     MarbleRenderPluginInterface.h
     marble_export.h
     Planet.h
-	#Slartibartfast.h
+	Slartibartfast.h
 
     LatLonEdit.h
     BoundingBox.h
