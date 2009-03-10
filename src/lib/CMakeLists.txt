@@ -108,6 +108,7 @@ set(marblewidget_SRCS
     PlaceMarkPainter.cpp
     PlaceMarkInfoDialog.cpp
     Planet.cpp
+	Slartibartfast.cpp
     Quaternion.cpp
     TextureColorizer.cpp
     AbstractScanlineTextureMapper.cpp
@@ -316,6 +317,7 @@ else (APPLE AND QTONLY)
     MarbleRenderPluginInterface.h
     marble_export.h
     Planet.h
+	#Slartibartfast.h
 
     LatLonEdit.h
     BoundingBox.h
