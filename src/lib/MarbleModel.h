@@ -67,6 +67,7 @@ class MarbleAbstractFloatItem;
 class GeoDataDocument;
 class GeoSceneDocument;
 class GeoSceneTexture;
+class Planet;
 
 /**
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -263,6 +264,14 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     QList<MarbleRenderPlugin *>      renderPlugins() const;
     QList<MarbleAbstractFloatItem *> floatItems() const;
+
+    /**
+     * @brief Returns a pointer to a planet object for the current map.
+     * @return a pointer to a planet object for the current map
+     * @note to alter the planet, use the Planet copy constructor, modify as
+     * desired, and then call Planet::addPlanet() with overwrite = true
+     */
+    const Planet* planet() const;
 
  public Q_SLOTS:
     void clearVolatileTileCache();

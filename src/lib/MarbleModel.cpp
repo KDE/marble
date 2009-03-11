@@ -954,6 +954,20 @@ QList<MarbleAbstractFloatItem *> MarbleModel::floatItems() const
     return d->m_layerManager->floatItems();
 }
 
+const Planet* MarbleModel::planet() const
+{
+    if ( d->m_mapTheme ) {
+        QString target = d->m_mapTheme->head()->target().toLower();
+        //Get the planet
+        const Planet *p = Planet::planetByName( target );
+        //If successful, return the new planet
+        if( p )
+            return p;
+    }
+    //fallback to earth
+    return Planet::planetByName( "earth" );
+}
+
 }
 
 #include "MarbleModel.moc"
