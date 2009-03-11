@@ -63,7 +63,6 @@
 #include "PlaceMarkLayout.h"
 #include "PlaceMarkPainter.h"
 #include "Planet.h"
-#include "Slartibartfast.h"
 #include "StoragePolicy.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
@@ -828,7 +827,7 @@ qreal MarbleModel::planetRadius()   const
 {
     if ( d->m_mapTheme ) {
         QString target = d->m_mapTheme->head()->target().toLower();
-        const Planet *p = Slartibartfast::planetByName( target );
+        const Planet *p = Planet::planetByName( target );
         if( p )
             return p->radius();
     }

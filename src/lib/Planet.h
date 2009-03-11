@@ -90,6 +90,33 @@ public:
 
     void operator=( const Planet& other );
 
+
+    /**
+    Returns a pointer to a shared Planet object.
+    Use this to create planets.
+    @param target the (nonlocalized) name of the planet
+    @return a pointer to a shared instance of the planet
+    @note if you wish to modify an existing planet, you may get a const Planet
+    object here and then use the Planet copy constructor. @see addPlanet()
+    */
+    static const Planet* planetByName(const QString& target);
+    /**
+    Adds a custom planet to the list.
+    @param planet a pointer to the new custom planet. Ownership of this pointer
+    is <b>not</b> transferred
+    @param target the nonlocalized name of the new planet
+    @param overwrite if false, addPlanet() will not overwrite an existing
+    planet of the same name
+    @return a pointer to the planet that was added. If adding the planet failed,
+    it returns a null pointer. Note that it will never equal @param planet
+    since if there is an existing planet and @p overwrite is true, it assigns
+    the exisiting planet the value of @p planet, so anyone already using that
+    planet gets the new value, and if there was no exisitng planet, it makes a
+    copy of @p planet
+    */
+    static const Planet* addPlanet( Planet *planet, const QString& target,
+                                    bool overwrite = false );
+
 private:
     PlanetPrivate * d;
 };
