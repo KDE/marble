@@ -21,6 +21,7 @@
 #include "global.h"
 #include "MarbleModel.h"
 #include "MarbleGeoDataModel.h"
+#include "Planet.h"
 
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
@@ -61,7 +62,7 @@ MarbleDataFacade::~MarbleDataFacade()
 
 qreal MarbleDataFacade::planetRadius() const
 {
-    return d->m_model->planetRadius();
+    return d->m_model->planet()->radius();
 }
 
 QDateTime MarbleDataFacade::dateTime() const

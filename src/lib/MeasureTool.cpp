@@ -28,6 +28,7 @@
 #include "MarbleLocale.h"
 #include "AbstractProjection.h"
 #include "GeoPainter.h"
+#include "Planet.h"
 #include "Quaternion.h"
 #include "ViewportParams.h"
 
@@ -84,7 +85,7 @@ void MeasureTool::paint( GeoPainter *painter,
         (*it)->geoCoordinates( lon, lat );
 
         if ( it!= m_pMeasurePointList.constBegin() ) {
-            totalDistance += m_model->planetRadius() * distanceSphere( prevLon, prevLat, lon, lat ); 
+            totalDistance += m_model->planet()->radius() * distanceSphere( prevLon, prevLat, lon, lat );
 
             drawDistancePath( painter, prevqpos, qpos, viewport );
         }
@@ -126,9 +127,9 @@ void MeasureTool::drawDistancePoints( GeoPainter *painter,
         qpos.getSpherical( lon, lat );
 
         if ( viewport->currentProjection()
-	     ->screenCoordinates( GeoDataCoordinates( lon, lat ), viewport,
-				  x, y ) )
-	{
+             ->screenCoordinates( GeoDataCoordinates( lon, lat ), viewport,
+                                  x, y ) )
+        {
             // Don't process markers if they are outside the screen area.
             // FIXME: Some part of it may be visible anyway.
             if ( 0 <= x && x < width 

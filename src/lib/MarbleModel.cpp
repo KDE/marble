@@ -821,8 +821,6 @@ void MarbleModel::update()
     QTimer::singleShot( 0, d->m_tileLoader, SLOT( update() ) );
 }
 
-// FIXME: We'd like to have a targetBody ("planet") class which stores all attributes we need.
-
 qreal MarbleModel::planetRadius()   const
 {
     if ( d->m_mapTheme ) {
@@ -849,7 +847,6 @@ QString MarbleModel::planetName()   const
     // Fallback to assuming that we deal with the earth
     return QString("Earth");
 }
-
 
 ExtDateTime* MarbleModel::dateTime() const
 {

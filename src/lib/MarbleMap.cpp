@@ -51,6 +51,7 @@
 #include "MarblePlacemarkModel.h"
 #include "MeasureTool.h"
 #include "MergedLayerDecorator.h"
+#include "Planet.h"
 #include "Quaternion.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
@@ -526,7 +527,7 @@ qreal MarbleMap::distance() const
 
     const qreal VIEW_ANGLE = 110.0;
 
-    return ( model()->planetRadius() * 0.4
+    return ( model()->planet()->radius() * 0.4
             / (qreal)( radius() )
             / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
 }
@@ -535,7 +536,7 @@ void MarbleMap::setDistance( qreal distance )
 {
     const qreal VIEW_ANGLE = 110.0;
 
-    setRadius( (int)( model()->planetRadius() * 0.4
+    setRadius( (int)( model()->planet()->radius() * 0.4
             / distance
             / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) ) );
 }
@@ -1248,7 +1249,7 @@ QString MarbleMap::distanceString() const
     // reality. Therefore we assume that the average window width
     // (about 800 pixels) equals the viewing angle of a human being.
     //
-    qreal distance = ( model()->planetRadius() * 0.4
+    qreal distance = ( model()->planet()->radius() * 0.4
 			/ (qreal)( radius() )
 			/ tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
 
