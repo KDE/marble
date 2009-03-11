@@ -16,7 +16,7 @@
 
 #include "SunLocator.h"
 #include "ExtDateTime.h"
-#include "PlanetaryConstants.h"
+#include "Planet.h"
 #include "MarbleMath.h"
  
 #include <QtCore/QDebug>
@@ -108,50 +108,42 @@ void SunLocator::updatePosition()
         // not necessarily accurate but close enough
         // (only differs by about +-6 degrees of this value)
         d->m_lat = 0.0;
-	return;
+        return;
     }
 
-    // default to the earth
-    PlanetaryConstants pc = PC_EARTH;
-    // planets
-    if ( d->m_body == "mercury" ) pc = PC_MERCURY;
-    else if ( d->m_body == "venus" )   pc = PC_VENUS;
-    else if ( d->m_body == "earth" )   pc = PC_EARTH;
-    else if ( d->m_body == "mars" )    pc = PC_MARS;
-    else if ( d->m_body == "jupiter" ) pc = PC_JUPITER;
-    else if ( d->m_body == "saturn" )  pc = PC_SATURN;
-    else if ( d->m_body == "uranus" )  pc = PC_URANUS;
-    else if ( d->m_body == "neptune" ) pc = PC_NEPTUNE;
-    else if ( d->m_body == "pluto" )   pc = PC_PLUTO;
+    const Planet *p = Planet::planetByName( d->m_body );
+    //Fall back to earth if planet isn't found
+    if( !p )
+        p = Planet::planetByName( "earth" );
 
     // find current Julian day number relative to epoch J2000
     long day = d->m_datetime->toJDN() - J2000;
 
     // from http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html
     // mean anomaly
-    qreal M = pc.M_0 + pc.M_1*day;
+    qreal M = p->M_0() + p->M_1()*day;
 
     // equation of center
-    qreal C = pc.C_1*sin(M) + pc.C_2*sin(2*M) + pc.C_3*sin(3*M) + pc.C_4*sin(4*M)
-        + pc.C_5*sin(5*M) + pc.C_6*sin(6*M);
+    qreal C = p->C_1()*sin(M) + p->C_2()*sin(2*M) + p->C_3()*sin(3*M) + p->C_4()*sin(4*M)
+        + p->C_5()*sin(5*M) + p->C_6()*sin(6*M);
 
     // true anomaly
     qreal nu = M + C;
 
     // ecliptic longitude of sun as seen from planet
-    qreal lambda_sun = nu + pc.Pi + M_PI;
+    qreal lambda_sun = nu + p->Pi() + M_PI;
 
     // declination of sun as seen from planet
-    qreal delta_sun = asin(sin(pc.epsilon)*sin(lambda_sun));
+    qreal delta_sun = asin(sin(p->epsilon())*sin(lambda_sun));
 
     // right ascension of sun as seen from planet
-    qreal alpha_sun = atan2(cos(pc.epsilon)*sin(lambda_sun), cos(lambda_sun));
+    qreal alpha_sun = atan2(cos(p->epsilon())*sin(lambda_sun), cos(lambda_sun));
 
     // solar noon occurs when sidereal time is equal to alpha_sun
     qreal theta = alpha_sun;
 
     // convert sidereal time to geographic longitude
-    d->m_lon = M_PI - (pc.theta_0 + pc.theta_1 * (day + d->m_datetime->dayFraction()) - theta);
+    d->m_lon = M_PI - (p->theta_0() + p->theta_1() * (day + d->m_datetime->dayFraction()) - theta);
 
     while(d->m_lon < 0)
         d->m_lon += 2*M_PI;
