@@ -840,35 +840,10 @@ QString MarbleModel::planetName()   const
 {
     if ( d->m_mapTheme ) {
         QString target = d->m_mapTheme->head()->target().toLower();
+        const Planet *p = Planet::planetByName( target );
+        if( p )
+            return p->name();
 
-        // planets
-               if ( target == "mercury" ) {
-            return  QString("Mercury");
-        } else if ( target == "venus" ) {
-            return  QString("Venus");
-        } else if ( target == "earth" ) {
-            return  QString("Earth");
-        } else if ( target == "mars" ) {
-            return  QString("Mars");
-        } else if ( target == "jupiter" ) {
-            return  QString("Jupiter");
-        } else if ( target == "saturn" ) {
-            return  QString("Saturn");
-        } else if ( target == "uranus" ) {
-            return  QString("Uranus");
-        } else if ( target == "neptune" ) {
-            return  QString("Neptune");
-
-        // dwarf planets ... (everybody likes pluto)
-        } else if ( target == "pluto" ) {
-            return  QString("Pluto");
-
-        // sun and moon
-        } else if ( target == "sun" ) {
-            return  QString("Sun");
-        } else if ( target == "moon" ) {
-            return  QString("Moon");
-        }
     }
 
     // Fallback to assuming that we deal with the earth
