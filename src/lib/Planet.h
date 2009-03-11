@@ -85,8 +85,8 @@ public:
 
     void setRadius( qreal radius );
 
-    QString setName( const QString& name );
-    QString setTarget( const QString& target );
+    void setName( const QString& name );
+    void setTarget( const QString& target );
 
     void operator=( const Planet& other );
 

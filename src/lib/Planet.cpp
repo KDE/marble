@@ -9,6 +9,8 @@
 //
 #include "Planet.h"
 
+#include <QtCore/QString>
+
 namespace Marble {
 
 class PlanetPrivate
@@ -140,6 +142,17 @@ qreal Planet::radius() const
     return d->radius;
 }
 
+QString Planet::name() const
+{
+    return d->name;
+}
+
+QString Planet::target() const
+{
+    return d->target;
+}
+
+
     /* Setter functions */
 void Planet::setM_0( qreal M_0 )
 {
@@ -198,6 +211,17 @@ void Planet::setRadius( qreal radius )
 {
     d->radius = radius;
 }
+
+void Planet::setName( const QString& name )
+{
+    d->name = name;
+}
+
+void Planet::setTarget( const QString& target )
+{
+    d->target = target;
+}
+
 
 void Planet::operator=(const Planet& other)
 {
