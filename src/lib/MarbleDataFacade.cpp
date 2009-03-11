@@ -65,6 +65,11 @@ qreal MarbleDataFacade::planetRadius() const
     return d->m_model->planet()->radius();
 }
 
+const Planet* MarbleDataFacade::planet() const
+{
+    return d->m_model->planet();
+}
+
 QDateTime MarbleDataFacade::dateTime() const
 {
     return d->m_model->dateTime()->datetime();
