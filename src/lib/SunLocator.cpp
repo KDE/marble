@@ -51,14 +51,14 @@ const int update_interval = 60000;
 class SunLocatorPrivate
 {
 public:
-    explicit SunLocatorPrivate(ExtDateTime *dateTime)
+    explicit SunLocatorPrivate(ExtDateTime *dateTime, Planet *planet)
         : m_lon( 0.0 ),
           m_lat( 0.0 ),
           m_datetime( dateTime ),
           m_show( false ),
           m_citylights( false ),
           m_centered( false ),
-          m_body( "" )
+          m_planet( planet )
     {
     }
 
@@ -69,13 +69,13 @@ public:
     bool m_show;
     bool m_citylights;
     bool m_centered;
-    QString m_body;
+    Planet* m_planet;
 };
 
 
-SunLocator::SunLocator(ExtDateTime *dateTime)
+SunLocator::SunLocator(ExtDateTime *dateTime, Planet *planet)
   : QObject(),
-    d( new SunLocatorPrivate( dateTime ))
+    d( new SunLocatorPrivate( dateTime, planet ))
 {
 }
 
@@ -86,7 +86,7 @@ SunLocator::~SunLocator()
 
 void SunLocator::updatePosition()
 {
-    if( d->m_body == "moon" ) {
+    if( d->m_planet->id() == "moon" ) {
         // days since the first full moon of the 20th century
         qreal days = (qreal)d->m_datetime->toJDN() + d->m_datetime->dayFraction() - MOON_EPOCH;
 
@@ -111,39 +111,36 @@ void SunLocator::updatePosition()
         return;
     }
 
-    const Planet *p = Planet::planetByName( d->m_body );
-    //Fall back to earth if planet isn't found
-    if( !p )
-        p = Planet::planetByName( "earth" );
-
     // find current Julian day number relative to epoch J2000
     long day = d->m_datetime->toJDN() - J2000;
 
     // from http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html
     // mean anomaly
-    qreal M = p->M_0() + p->M_1()*day;
+    qreal M = d->m_planet->M_0() + d->m_planet->M_1()*day;
 
     // equation of center
-    qreal C = p->C_1()*sin(M) + p->C_2()*sin(2*M) + p->C_3()*sin(3*M) + p->C_4()*sin(4*M)
-        + p->C_5()*sin(5*M) + p->C_6()*sin(6*M);
+    qreal C = d->m_planet->C_1()*sin(M) + d->m_planet->C_2()*sin(2*M)
+            + d->m_planet->C_3()*sin(3*M) + d->m_planet->C_4()*sin(4*M)
+            + d->m_planet->C_5()*sin(5*M) + d->m_planet->C_6()*sin(6*M);
 
     // true anomaly
     qreal nu = M + C;
 
     // ecliptic longitude of sun as seen from planet
-    qreal lambda_sun = nu + p->Pi() + M_PI;
+    qreal lambda_sun = nu + d->m_planet->Pi() + M_PI;
 
     // declination of sun as seen from planet
-    qreal delta_sun = asin(sin(p->epsilon())*sin(lambda_sun));
+    qreal delta_sun = asin(sin(d->m_planet->epsilon())*sin(lambda_sun));
 
     // right ascension of sun as seen from planet
-    qreal alpha_sun = atan2(cos(p->epsilon())*sin(lambda_sun), cos(lambda_sun));
+    qreal alpha_sun = atan2(cos(d->m_planet->epsilon())*sin(lambda_sun), cos(lambda_sun));
 
     // solar noon occurs when sidereal time is equal to alpha_sun
     qreal theta = alpha_sun;
 
     // convert sidereal time to geographic longitude
-    d->m_lon = M_PI - (p->theta_0() + p->theta_1() * (day + d->m_datetime->dayFraction()) - theta);
+    d->m_lon = M_PI - (d->m_planet->theta_0() + d->m_planet->theta_1()
+                       * (day + d->m_datetime->dayFraction()) - theta);
 
     while(d->m_lon < 0)
         d->m_lon += 2*M_PI;
@@ -151,10 +148,12 @@ void SunLocator::updatePosition()
     // convert positive north to positive south
     d->m_lat = -delta_sun;
 
+    /*
     qDebug() << "alpha_sun =" << rad2deg(alpha_sun);
     qDebug() << "delta_sun =" << rad2deg(delta_sun);
     qDebug() << "d->m_lon =" << rad2deg(d->m_lon);
     qDebug() << "d->m_lat =" << rad2deg(d->m_lat);
+    */
 }
 
 
@@ -174,7 +173,7 @@ qreal SunLocator::shading(qreal lon, qreal lat) const
 
     qreal twilightZone = 0.0;
 
-    if ( d->m_body == "earth" || d->m_body == "venus" ) {
+    if ( d->m_planet->id() == "earth" || d->m_planet->id() == "venus" ) {
         twilightZone = 0.1; // this equals 18 deg astronomical twilight.
     }
 
@@ -283,19 +282,20 @@ void SunLocator::setCentered(bool centered)
         emit reenableWidgetInput();
 }
 
-void SunLocator::setBody(QString body)
+void SunLocator::setPlanet(Planet *planet)
 {
-    if ( body == d->m_body ) {
+    if ( planet == d->m_planet ) {
         return;
     }
 
-    QString previousBody = d->m_body;
+    Planet* previousPlanet = d->m_planet;
 
-    qDebug() << "SunLocator::setBody( QString )";
-    d->m_body = body;
+    qDebug() << "SunLocator::setPlanet(Planet*)";
+    d->m_planet = planet;
     updatePosition();
 
-    if ( !previousBody.isEmpty() ) {
+    //Why does it look at the previous body instead of the new one?
+    if ( !previousPlanet->id().isEmpty() ) {
         emit updateSun();
     }
 }

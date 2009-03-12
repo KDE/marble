@@ -266,12 +266,10 @@ class MARBLE_EXPORT MarbleModel : public QObject
     QList<MarbleAbstractFloatItem *> floatItems() const;
 
     /**
-     * @brief Returns a pointer to a planet object for the current map.
-     * @return a pointer to a planet object for the current map
-     * @note to alter the planet, use the Planet copy constructor, modify as
-     * desired, and then call Planet::addPlanet() with overwrite = true
+     * @brief Returns the planet object for the current map.
+     * @return the planet object for the current map
      */
-    const Planet* planet() const;
+    Planet* planet() const;
 
  public Q_SLOTS:
     void clearVolatileTileCache();

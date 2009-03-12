@@ -135,6 +135,8 @@ class MarbleModelPrivate
     QTimer                  *m_timer;
 
     FileViewModel           *m_fileviewmodel;
+
+    Planet                  *m_planet;
 };
 
 VectorComposer      *MarbleModelPrivate::m_veccomposer = 0;
@@ -211,13 +213,16 @@ MarbleModel::MarbleModel( QObject *parent )
              this,               SIGNAL( regionChanged( BoundingBox& ) ) );
 
     d->m_dateTime       = new ExtDateTime();
-    d->m_sunLocator     = new SunLocator( d->m_dateTime );
+    /* Assume we are dealing with the earth */
+    d->m_planet = new Planet( "earth" );
+    d->m_sunLocator     = new SunLocator( d->m_dateTime, d->m_planet );
     d->m_layerDecorator = new MergedLayerDecorator( d->m_sunLocator );
 
     connect(d->m_dateTime,   SIGNAL( timeChanged() ),
             d->m_sunLocator, SLOT( update() ) );
     connect( d->m_layerDecorator, SIGNAL( repaintMap() ),
                                   SIGNAL( modelChanged() ) );
+
 }
 
 MarbleModel::~MarbleModel()
@@ -245,6 +250,7 @@ MarbleModel::~MarbleModel()
     delete d->m_layerDecorator;
     delete d->m_sunLocator;
     delete d->m_dateTime;
+    delete d->m_planet;
     delete d;
     MarbleModelPrivate::refCounter.deref();
     qDebug() << "Model deleted:" << this;
@@ -316,6 +322,9 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     else
         qDebug() << "Does not contain any vector layers! ";
 */
+    //Don't change the planet unless we have to...
+    if( d->m_mapTheme->head()->target().toLower() != d->m_planet->id() )
+        *(d->m_planet) = Planet( d->m_mapTheme->head()->target().toLower() );
 
     if ( d->m_mapTheme->map()->hasTextureLayers() ) {
         // If the tiles aren't already there, put up a progress dialog
@@ -472,7 +481,9 @@ reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename() );
     }
     qDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );
-    d->m_sunLocator->setBody(d->m_mapTheme->head()->target().toLower());
+    //this is unneccessary since we already changed the planet at the
+    //beginning of the function...
+    //d->m_sunLocator->setPlanet(d->m_planet);
 
     d->m_layerManager->syncViewParamsAndPlugins( mapTheme );
 
@@ -823,29 +834,12 @@ void MarbleModel::update()
 
 qreal MarbleModel::planetRadius()   const
 {
-    if ( d->m_mapTheme ) {
-        QString target = d->m_mapTheme->head()->target().toLower();
-        const Planet *p = Planet::planetByName( target );
-        if( p )
-            return p->radius();
-    }
-
-    // Fallback to assuming that we deal with the earth
-    return 6378000.0;
+    return d->m_planet->radius();
 }
 
 QString MarbleModel::planetName()   const
 {
-    if ( d->m_mapTheme ) {
-        QString target = d->m_mapTheme->head()->target().toLower();
-        const Planet *p = Planet::planetByName( target );
-        if( p )
-            return p->name();
-
-    }
-
-    // Fallback to assuming that we deal with the earth
-    return QString("Earth");
+    return d->m_planet->name();
 }
 
 ExtDateTime* MarbleModel::dateTime() const
@@ -951,18 +945,9 @@ QList<MarbleAbstractFloatItem *> MarbleModel::floatItems() const
     return d->m_layerManager->floatItems();
 }
 
-const Planet* MarbleModel::planet() const
+Planet* MarbleModel::planet() const
 {
-    if ( d->m_mapTheme ) {
-        QString target = d->m_mapTheme->head()->target().toLower();
-        //Get the planet
-        const Planet *p = Planet::planetByName( target );
-        //If successful, return the new planet
-        if( p )
-            return p;
-    }
-    //fallback to earth
-    return Planet::planetByName( "earth" );
+    return d->m_planet;
 }
 
 }
