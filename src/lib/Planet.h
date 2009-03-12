@@ -110,7 +110,7 @@ public:
     @return a pointer to the planet that was added. If adding the planet failed,
     it returns a null pointer. Note that it will never equal @param planet
     since if there is an existing planet and @p overwrite is true, it assigns
-    the exisiting planet the value of @p planet, so anyone already using that
+    the existing planet the value of @p planet, so anyone already using that
     planet gets the new value, and if there was no exisitng planet, it makes a
     copy of @p planet
     */
