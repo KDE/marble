@@ -41,7 +41,7 @@ FileViewFloatItem::FileViewFloatItem(const QPointF &point,
             m_fileView(0), m_persIndex(0)
 {
     // Plugin is not enabled by default
-    setEnabled(true);
+    setEnabled(false);
 }
 
 FileViewFloatItem::~FileViewFloatItem()
