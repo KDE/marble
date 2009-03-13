@@ -481,9 +481,15 @@ reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename() );
     }
     qDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );
-    //this is unneccessary since we already changed the planet at the
-    //beginning of the function...
-    //d->m_sunLocator->setPlanet(d->m_planet);
+
+    /* We don't need to change the sunLocator's planet since we already
+       changed the planet at the beginning of the function, but we should
+       disable the city lights if we are not an earth. */
+    if( d->m_sunLocator->getCitylights() && d->m_planet->id() != "earth" ) {
+        //Show shading but not city lights
+        d->m_sunLocator->setCitylights( false );
+        d->m_sunLocator->setShow( true );
+    }
 
     d->m_layerManager->syncViewParamsAndPlugins( mapTheme );
 
