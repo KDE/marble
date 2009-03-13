@@ -103,7 +103,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      *
      * FIXME: Once we make Marble more area-aware we need to 
      * move this into the GeoDataArea class which will get 
-     * inherited from GeoDataPlaceMark (or GeoDataFeature). 
+     * inherited from GeoDataPlacemark (or GeoDataFeature). 
      */
     qreal area() const;
 

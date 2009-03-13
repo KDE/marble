@@ -9,7 +9,7 @@
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "PlaceMarkLayout.h"
+#include "PlacemarkLayout.h"
 
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QDebug>
@@ -27,20 +27,20 @@
 #include "GeoDataStyle.h"
 
 #include "global.h"
-#include "PlaceMarkPainter.h"
+#include "PlacemarkPainter.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleDirs.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
-#include "VisiblePlaceMark.h"
+#include "VisiblePlacemark.h"
 #include "MathHelper.h"
 
 using namespace Marble;
 
-PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
+PlacemarkLayout::PlacemarkLayout( QObject* parent )
     : QObject( parent ),
-      m_placeMarkPainter( 0 ),
+      m_placemarkPainter( 0 ),
       m_maxLabelHeight( 0 ),
       m_styleResetRequested( true )
 {
@@ -98,28 +98,28 @@ PlaceMarkLayout::PlaceMarkLayout( QObject* parent )
 
         << 0;       // 20
 
-    m_placeMarkPainter =  new PlaceMarkPainter( this );
+    m_placemarkPainter =  new PlacemarkPainter( this );
 }
 
-PlaceMarkLayout::~PlaceMarkLayout()
+PlacemarkLayout::~PlacemarkLayout()
 {
     styleReset();
 }
 
-void PlaceMarkLayout::requestStyleReset()
+void PlacemarkLayout::requestStyleReset()
 {
     qDebug() << "Style reset requested.";
     m_styleResetRequested = true;
 }
 
-void PlaceMarkLayout::styleReset()
+void PlacemarkLayout::styleReset()
 {
     m_paintOrder.clear();
-    qDeleteAll( m_visiblePlaceMarks );
-    m_visiblePlaceMarks.clear();
+    qDeleteAll( m_visiblePlacemarks );
+    m_visiblePlacemarks.clear();
 }
 
-QVector<QModelIndex> PlaceMarkLayout::whichPlaceMarkAt( const QPoint& curpos )
+QVector<QModelIndex> PlacemarkLayout::whichPlacemarkAt( const QPoint& curpos )
 {
     if ( m_styleResetRequested == true ) {
         styleReset();
@@ -127,12 +127,12 @@ QVector<QModelIndex> PlaceMarkLayout::whichPlaceMarkAt( const QPoint& curpos )
 
     QVector<QModelIndex> ret;
 
-    QVector<VisiblePlaceMark*>::ConstIterator  it;
-    QVector<VisiblePlaceMark*>::ConstIterator  itEnd = m_paintOrder.constEnd();
+    QVector<VisiblePlacemark*>::ConstIterator  it;
+    QVector<VisiblePlacemark*>::ConstIterator  itEnd = m_paintOrder.constEnd();
     for ( it = m_paintOrder.constBegin();
           it != itEnd; ++it )
     {
-        const VisiblePlaceMark  *mark = *it; // no cast
+        const VisiblePlacemark  *mark = *it; // no cast
 
         if ( mark->labelRect().contains( curpos )
              || QRect( mark->symbolPosition(), mark->symbolPixmap().size() ).contains( curpos ) ) {
@@ -143,12 +143,12 @@ QVector<QModelIndex> PlaceMarkLayout::whichPlaceMarkAt( const QPoint& curpos )
     return ret;
 }
 
-PlaceMarkPainter* PlaceMarkLayout::placeMarkPainter() const
+PlacemarkPainter* PlacemarkLayout::placemarkPainter() const
 { 
-    return m_placeMarkPainter; 
+    return m_placemarkPainter; 
 }
 
-int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
+int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
                                      const QItemSelectionModel* selectionModel ) const
 {
     qDebug() << "Detecting maxLabelHeight ...";
@@ -180,7 +180,7 @@ int PlaceMarkLayout::maxLabelHeight( const QAbstractItemModel* model,
     return maxLabelHeight;
 }
 
-void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
+void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
                                         ViewParams *viewParams,
                                         const QAbstractItemModel  *model,
                                         const QItemSelectionModel *selectionModel,
@@ -204,9 +204,9 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
 
     //Quaternion  inversePlanetAxis = viewParams->m_planetAxis.inverse();
 
-    QVector< QVector< VisiblePlaceMark* > >  rowsection;
+    QVector< QVector< VisiblePlacemark* > >  rowsection;
     for ( int i = 0; i < secnumber; i++)
-        rowsection.append( QVector<VisiblePlaceMark*>( ) );
+        rowsection.append( QVector<VisiblePlacemark*>( ) );
 
     m_paintOrder.clear();
 
@@ -248,7 +248,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
         if ( !latLonAltBox.contains( geopoint ) ||
              ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
             {
-                delete m_visiblePlaceMarks.take( index );
+                delete m_visiblePlacemarks.take( index );
                 continue;
             }
 
@@ -257,7 +257,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
         int textWidth = 0;
 
         // Find the corresponding visible placemark
-        VisiblePlaceMark *mark = m_visiblePlaceMarks.value( index );
+        VisiblePlacemark *mark = m_visiblePlacemarks.value( index );
 
         GeoDataStyle* style = placemarkModel->styleData( index );
 
@@ -274,28 +274,28 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
         }
 
         // Choose Section
-        const QVector<VisiblePlaceMark*> currentsec = rowsection.at( y / m_maxLabelHeight );
+        const QVector<VisiblePlacemark*> currentsec = rowsection.at( y / m_maxLabelHeight );
 
         // Find out whether the area around the placemark is covered already.
-        // If there's not enough space free don't add a VisiblePlaceMark here.
+        // If there's not enough space free don't add a VisiblePlacemark here.
 
         QRect labelRect = roomForLabel( style, currentsec, x, y, textWidth );
         if ( labelRect.isNull() )
             continue;
 
         // Make sure not to draw more placemarks on the screen than 
-        // specified by placeMarksOnScreenLimit().
+        // specified by placemarksOnScreenLimit().
 
         ++labelnum;
-        if ( labelnum >= placeMarksOnScreenLimit() )
+        if ( labelnum >= placemarksOnScreenLimit() )
             break;
         if ( !mark ) {
             // If there is no visible placemark yet for this index,
             // create a new one...
-            mark = new VisiblePlaceMark;
+            mark = new VisiblePlacemark;
             mark->setModelIndex( QModelIndex( index ) );
 
-            m_visiblePlaceMarks.insert( index, mark );
+            m_visiblePlacemarks.insert( index, mark );
         }
 
         // Finally save the label position on the map.
@@ -354,7 +354,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
         if ( !latLonAltBox.contains( geopoint ) ||
              ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
             {
-                delete m_visiblePlaceMarks.take( index );
+                delete m_visiblePlacemarks.take( index );
                 continue;
             }
 
@@ -408,7 +408,7 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
         int textWidth = 0;
 
         // Find the corresponding visible placemark
-        VisiblePlaceMark *mark = m_visiblePlaceMarks.value( index );
+        VisiblePlacemark *mark = m_visiblePlacemarks.value( index );
         GeoDataStyle* style = placemarkModel->styleData( index );
 
         // Specify font properties
@@ -421,29 +421,29 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
         }
 
         // Choose Section
-        const QVector<VisiblePlaceMark*> currentsec = rowsection.at( y / m_maxLabelHeight );
+        const QVector<VisiblePlacemark*> currentsec = rowsection.at( y / m_maxLabelHeight );
 
          // Find out whether the area around the placemark is covered already.
-        // If there's not enough space free don't add a VisiblePlaceMark here.
+        // If there's not enough space free don't add a VisiblePlacemark here.
 
         QRect labelRect = roomForLabel( style, currentsec, x, y, textWidth );
         if ( labelRect.isNull() )
             continue;
 
         // Make sure not to draw more placemarks on the screen than 
-        // specified by placeMarksOnScreenLimit().
+        // specified by placemarksOnScreenLimit().
 
         ++labelnum;
-        if ( labelnum >= placeMarksOnScreenLimit() )
+        if ( labelnum >= placemarksOnScreenLimit() )
             break;
 
         if ( !mark ) {
             // If there is no visible placemark yet for this index,
             // create a new one...
-            mark = new VisiblePlaceMark;
+            mark = new VisiblePlacemark;
 
             mark->setModelIndex( index );
-            m_visiblePlaceMarks.insert( index, mark );
+            m_visiblePlacemarks.insert( index, mark );
         }
 
         // Finally save the label position on the map.
@@ -468,16 +468,16 @@ void PlaceMarkLayout::paintPlaceFolder( QPainter   *painter,
     {
         QColor labelColor = viewParams->mapTheme()->map()->labelColor();
 
-        m_placeMarkPainter->setDefaultLabelColor( labelColor );
+        m_placemarkPainter->setDefaultLabelColor( labelColor );
 
     }
 
-    m_placeMarkPainter->drawPlaceMarks( painter, m_paintOrder, selection, 
+    m_placemarkPainter->drawPlacemarks( painter, m_paintOrder, selection, 
                                         viewParams->viewport() );
 }
 
-QRect PlaceMarkLayout::roomForLabel( GeoDataStyle * style,
-                                      const QVector<VisiblePlaceMark*> &currentsec,
+QRect PlacemarkLayout::roomForLabel( GeoDataStyle * style,
+                                      const QVector<VisiblePlacemark*> &currentsec,
                                       const int x, const int y,
                                       const int textWidth )
 {
@@ -506,8 +506,8 @@ QRect PlaceMarkLayout::roomForLabel( GeoDataStyle * style,
                 labelRect.moveTo( xpos, ypos );
 
                 // Check if there is another label or symbol that overlaps.
-                QVector<VisiblePlaceMark*>::const_iterator beforeItEnd = currentsec.constEnd();
-                for ( QVector<VisiblePlaceMark*>::ConstIterator beforeIt = currentsec.constBegin();
+                QVector<VisiblePlacemark*>::const_iterator beforeItEnd = currentsec.constEnd();
+                for ( QVector<VisiblePlacemark*>::ConstIterator beforeIt = currentsec.constBegin();
                       beforeIt != beforeItEnd;
                       ++beforeIt )
                 {
@@ -534,8 +534,8 @@ QRect PlaceMarkLayout::roomForLabel( GeoDataStyle * style,
                           textWidth, textHeight );
 
         // Check if there is another label or symbol that overlaps.
-        QVector<VisiblePlaceMark*>::const_iterator beforeItEnd = currentsec.constEnd();
-        for ( QVector<VisiblePlaceMark*>::ConstIterator beforeIt = currentsec.constBegin();
+        QVector<VisiblePlacemark*>::const_iterator beforeItEnd = currentsec.constEnd();
+        for ( QVector<VisiblePlacemark*>::ConstIterator beforeIt = currentsec.constBegin();
               beforeIt != beforeItEnd; ++beforeIt )
         {
             if ( labelRect.intersects( (*beforeIt)->labelRect() ) ) {
@@ -554,7 +554,7 @@ QRect PlaceMarkLayout::roomForLabel( GeoDataStyle * style,
                     // for the rectangle anymore.
 }
 
-int PlaceMarkLayout::placeMarksOnScreenLimit() const
+int PlacemarkLayout::placemarksOnScreenLimit() const
 {
     // For now we just return 100.
     // Later on once we focus on decent high dpi print quality
@@ -564,4 +564,4 @@ int PlaceMarkLayout::placeMarksOnScreenLimit() const
 }
 
 
-#include "PlaceMarkLayout.moc"
+#include "PlacemarkLayout.moc"

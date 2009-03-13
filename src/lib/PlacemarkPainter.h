@@ -10,7 +10,7 @@
 //
 
 //
-// PlaceMarkPainter is responsible for drawing the PlaceMarks on the map
+// PlacemarkPainter is responsible for drawing the Placemarks on the map
 //
 
 
@@ -31,21 +31,21 @@ namespace Marble
 {
 
 class ViewportParams;
-class VisiblePlaceMark;
+class VisiblePlacemark;
 
 static const qreal s_labelOutlineWidth = 2.5;
 
 
-class PlaceMarkPainter : public QObject
+class PlacemarkPainter : public QObject
 {
     Q_OBJECT
 
  public:
-    explicit PlaceMarkPainter(QObject *parent = 0);
-    ~PlaceMarkPainter();
+    explicit PlacemarkPainter(QObject *parent = 0);
+    ~PlacemarkPainter();
 
-    void drawPlaceMarks( QPainter* painter, 
-                         QVector<VisiblePlaceMark*> visiblePlaceMarks,
+    void drawPlacemarks( QPainter* painter, 
+                         QVector<VisiblePlacemark*> visiblePlacemarks,
                          const QItemSelection &selection, 
                          ViewportParams *viewport );
 
@@ -55,7 +55,7 @@ class PlaceMarkPainter : public QObject
  private:
 
     void drawLabelText( QPainter& textpainter, const QString &name, const QFont &labelFont );
-    void drawLabelPixmap( VisiblePlaceMark *mark, bool isSelected );
+    void drawLabelPixmap( VisiblePlacemark *mark, bool isSelected );
 
     bool testXBug();
 

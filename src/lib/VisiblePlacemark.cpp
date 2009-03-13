@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "VisiblePlaceMark.h"
+#include "VisiblePlacemark.h"
 
 #include <QtCore/QDebug>
 
@@ -18,25 +18,25 @@
 
 using namespace Marble;
 
-VisiblePlaceMark::VisiblePlaceMark()
+VisiblePlacemark::VisiblePlacemark()
 {
 }
 
-VisiblePlaceMark::~VisiblePlaceMark()
+VisiblePlacemark::~VisiblePlacemark()
 {
 }
 
-const QModelIndex& VisiblePlaceMark::modelIndex() const
+const QModelIndex& VisiblePlacemark::modelIndex() const
 {
     return m_modelIndex;
 }
 
-void VisiblePlaceMark::setModelIndex( const QModelIndex &modelIndex )
+void VisiblePlacemark::setModelIndex( const QModelIndex &modelIndex )
 {
     m_modelIndex = modelIndex;
 }
 
-const QString VisiblePlaceMark::name() const
+const QString VisiblePlacemark::name() const
 {
     if ( m_name.isEmpty() )
         m_name = m_modelIndex.data( Qt::DisplayRole ).toString();
@@ -44,7 +44,7 @@ const QString VisiblePlaceMark::name() const
     return m_name;
 }
 
-const QPixmap& VisiblePlaceMark::symbolPixmap() const
+const QPixmap& VisiblePlacemark::symbolPixmap() const
 {
     GeoDataStyle* style = qobject_cast<const MarblePlacemarkModel*>( m_modelIndex.model() )
         ->styleData( m_modelIndex );
@@ -57,32 +57,32 @@ const QPixmap& VisiblePlaceMark::symbolPixmap() const
     return  m_symbolPixmap;
 }
 
-const QPoint& VisiblePlaceMark::symbolPosition() const
+const QPoint& VisiblePlacemark::symbolPosition() const
 {
     return m_symbolPosition;
 }
 
-void VisiblePlaceMark::setSymbolPosition( const QPoint& position )
+void VisiblePlacemark::setSymbolPosition( const QPoint& position )
 {
     m_symbolPosition = position;
 }
 
-const QPixmap& VisiblePlaceMark::labelPixmap() const
+const QPixmap& VisiblePlacemark::labelPixmap() const
 {
     return m_labelPixmap;
 }
 
-void VisiblePlaceMark::setLabelPixmap( const QPixmap& labelPixmap )
+void VisiblePlacemark::setLabelPixmap( const QPixmap& labelPixmap )
 {
     m_labelPixmap = labelPixmap;
 }
 
-const QRect& VisiblePlaceMark::labelRect() const
+const QRect& VisiblePlacemark::labelRect() const
 {
     return m_labelRect;
 }
 
-void VisiblePlaceMark::setLabelRect( const QRect& labelRect )
+void VisiblePlacemark::setLabelRect( const QRect& labelRect )
 {
     m_labelRect = labelRect;
 }

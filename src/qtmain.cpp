@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
         }
         else if ( QFile::exists( app.arguments().at( i ) ) 
                 && i != dataPathIndex )
-            ( window->marbleControl() )->addPlaceMarkFile( argv[i] );
+            ( window->marbleControl() )->addPlacemarkFile( argv[i] );
     }
 
     delete marbleTest;

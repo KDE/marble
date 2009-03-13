@@ -10,7 +10,7 @@
 //
 
 
-#include "PlaceMarkInfoDialog.h"
+#include "PlacemarkInfoDialog.h"
 
 #include <cmath>
 
@@ -28,7 +28,7 @@
 
 using namespace Marble;
 
-PlaceMarkInfoDialog::PlaceMarkInfoDialog(const QPersistentModelIndex &index, QWidget *parent)
+PlacemarkInfoDialog::PlacemarkInfoDialog(const QPersistentModelIndex &index, QWidget *parent)
     : QDialog(parent), m_index(index)
 {
     setupUi(this);
@@ -54,7 +54,7 @@ PlaceMarkInfoDialog::PlaceMarkInfoDialog(const QPersistentModelIndex &index, QWi
 }
 
 
-void PlaceMarkInfoDialog::showContent()
+void PlacemarkInfoDialog::showContent()
 {
     elevation_lbl->setVisible( true );
     elevation_val_lbl->setVisible( true );
@@ -200,7 +200,7 @@ void PlaceMarkInfoDialog::showContent()
 }
 
 
-void PlaceMarkInfoDialog::requestFlag( const QString& countrycode )
+void PlacemarkInfoDialog::requestFlag( const QString& countrycode )
 {
     QString filename = MarbleDirs::path( QString("flags/flag_%1.svg").arg( countrycode.toLower() ) );
     m_flagcreator->setFlag( filename, flag_val_lbl->size() );
@@ -213,9 +213,9 @@ void PlaceMarkInfoDialog::requestFlag( const QString& countrycode )
 } 
 
 
-void PlaceMarkInfoDialog::setFlagLabel()
+void PlacemarkInfoDialog::setFlagLabel()
 {
     flag_val_lbl->setPixmap( m_flagcreator->flag() );
 }
 
-#include "PlaceMarkInfoDialog.moc"
+#include "PlacemarkInfoDialog.moc"

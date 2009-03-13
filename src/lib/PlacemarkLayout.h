@@ -10,7 +10,7 @@
 //
 
 //
-// PlaceMarkLayout is responsible for drawing the PlaceMarks on the map
+// PlacemarkLayout is responsible for drawing the Placemarks on the map
 //
 
 
@@ -36,8 +36,8 @@ class QPoint;
 namespace Marble
 {
 
-class PlaceMarkPainter;
-class VisiblePlaceMark;
+class PlacemarkPainter;
+class VisiblePlacemark;
 class ViewParams;
 
 /**
@@ -46,7 +46,7 @@ class ViewParams;
 
 
 
-class PlaceMarkLayout : public QObject
+class PlacemarkLayout : public QObject
 {
     Q_OBJECT
 
@@ -54,25 +54,25 @@ class PlaceMarkLayout : public QObject
     /**
      * Creates a new place mark layout.
      */
-    explicit PlaceMarkLayout( QObject *parent = 0 );
+    explicit PlacemarkLayout( QObject *parent = 0 );
 
     /**
      * Destroys the place mark painter.
      */
-    ~PlaceMarkLayout();
+    ~PlacemarkLayout();
 
     /**
      * Layouts the place marks.
      *
      * @param painter The painter that is used for painting.
      * @param viewParams Parameters that influence the painting.
-     * @param placeMarkModel The PlaceMarkModel or a proxy model on top of it.
-     * @param selectionModel The selection model for the PlaceMarkModel.
+     * @param placemarkModel The PlacemarkModel or a proxy model on top of it.
+     * @param selectionModel The selection model for the PlacemarkModel.
      * @param planetAxis The position of the planet axis.
      * @param firstTime Whether the map is painted the first time.
      */
     void paintPlaceFolder( QPainter *painter, ViewParams *viewParams,
-                           const QAbstractItemModel  *placeMarkModel,
+                           const QAbstractItemModel  *placemarkModel,
                            const QItemSelectionModel *selectionModel,
                            bool firstTime = true );
 
@@ -90,9 +90,9 @@ class PlaceMarkLayout : public QObject
     /**
      * Returns a list of model indexes that are at position @p pos.
      */
-    QVector<QModelIndex> whichPlaceMarkAt( const QPoint &pos );
+    QVector<QModelIndex> whichPlacemarkAt( const QPoint &pos );
 
-    PlaceMarkPainter* placeMarkPainter() const;
+    PlacemarkPainter* placemarkPainter() const;
 
  public Q_SLOTS:
 
@@ -102,20 +102,20 @@ class PlaceMarkLayout : public QObject
     void styleReset();
 
     QRect  roomForLabel ( Marble::GeoDataStyle * style,
-                         const QVector<VisiblePlaceMark*> &currentsec,
+                         const QVector<VisiblePlacemark*> &currentsec,
                          const int x, const int y,
                          const int textWidth );
 
-    int    placeMarksOnScreenLimit() const;
+    int    placemarksOnScreenLimit() const;
 
  private:
-    Q_DISABLE_COPY( PlaceMarkLayout )
+    Q_DISABLE_COPY( PlacemarkLayout )
 
-    PlaceMarkPainter *m_placeMarkPainter;
+    PlacemarkPainter *m_placemarkPainter;
 
-    QVector<VisiblePlaceMark*> m_paintOrder;
-    QVector<VisiblePlaceMark*> m_placeMarkPool;
-    QHash<QModelIndex, VisiblePlaceMark*> m_visiblePlaceMarks;
+    QVector<VisiblePlacemark*> m_paintOrder;
+    QVector<VisiblePlacemark*> m_placemarkPool;
+    QHash<QModelIndex, VisiblePlacemark*> m_visiblePlacemarks;
 
     QModelIndexList m_indexList;
 

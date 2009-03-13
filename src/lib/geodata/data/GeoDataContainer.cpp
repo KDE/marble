@@ -175,26 +175,26 @@ void GeoDataContainer::unpack( QDataStream& stream )
 
 
 #if 0   // Shouldn't be here at all
-PlaceMarkContainer& GeoDataContainer::activePlaceMarkContainer( const ViewParams& viewParams )
+PlacemarkContainer& GeoDataContainer::activePlacemarkContainer( const ViewParams& viewParams )
 {
     switch( viewParams.m_projection ) {
         case Spherical:
-            return sphericalActivePlaceMarkContainer(viewParams);
+            return sphericalActivePlacemarkContainer(viewParams);
             break;
         case Equirectangular:
-            return rectangularActivePlaceMarkContainer(viewParams);
+            return rectangularActivePlacemarkContainer(viewParams);
             break;
     }
     //
     // Return at least something...
     //
-    return sphericalActivePlaceMarkContainer(viewParams);
+    return sphericalActivePlacemarkContainer(viewParams);
 }
 
 
-PlaceMarkContainer& GeoDataContainer::sphericalActivePlaceMarkContainer( const ViewParams& viewParams )
+PlacemarkContainer& GeoDataContainer::sphericalActivePlacemarkContainer( const ViewParams& viewParams )
 {
-    m_activePlaceMarkContainer.clear ();
+    m_activePlacemarkContainer.clear ();
 
     int x = 0;
     int y = 0;
@@ -222,18 +222,18 @@ PlaceMarkContainer& GeoDataContainer::sphericalActivePlaceMarkContainer( const V
 
             // Don't process placemarks if they are outside the screen area
             if ( x >= 0 && x < imgwidth && y >= 0 && y < imgheight ) {
-                m_activePlaceMarkContainer.append( placemark );
+                m_activePlacemarkContainer.append( placemark );
             }
         }
     }
 
-    qDebug("GeoDataDocument::activePlaceMarkContainer (). PlaceMarks count: %d", m_activePlaceMarkContainer.count());
-    return m_activePlaceMarkContainer;
+    qDebug("GeoDataDocument::activePlacemarkContainer (). Placemarks count: %d", m_activePlacemarkContainer.count());
+    return m_activePlacemarkContainer;
 }
 
-PlaceMarkContainer& GeoDataContainer::rectangularActivePlaceMarkContainer( const ViewParams& viewParams )
+PlacemarkContainer& GeoDataContainer::rectangularActivePlacemarkContainer( const ViewParams& viewParams )
 {
-    m_activePlaceMarkContainer.clear ();
+    m_activePlacemarkContainer.clear ();
 
     int x = 0;
     int y = 0;
@@ -266,12 +266,12 @@ PlaceMarkContainer& GeoDataContainer::rectangularActivePlaceMarkContainer( const
 
         // Don't process placemarks if they are outside the screen area
         if ( ( x >= 0 && x < imgwidth || x+4*viewParams.m_radius < imgwidth || x-4*viewParams.m_radius >= 0 )  && y >= 0 && y < imgheight ) {
-            m_activePlaceMarkContainer.append( placemark );
+            m_activePlacemarkContainer.append( placemark );
         }
     }
 
-    qDebug("GeoDataDocument::activePlaceMarkContainer (). PlaceMarks count: %d", m_activePlaceMarkContainer.count());
-    return m_activePlaceMarkContainer;
+    qDebug("GeoDataDocument::activePlacemarkContainer (). Placemarks count: %d", m_activePlacemarkContainer.count());
+    return m_activePlacemarkContainer;
 }
 #endif
 

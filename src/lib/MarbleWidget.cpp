@@ -287,14 +287,14 @@ void MarbleWidget::setNeedsUpdate()
 }
 
 
-QAbstractItemModel *MarbleWidget::placeMarkModel() const
+QAbstractItemModel *MarbleWidget::placemarkModel() const
 {
-    return d->m_map->placeMarkModel();
+    return d->m_map->placemarkModel();
 }
 
-QItemSelectionModel *MarbleWidget::placeMarkSelectionModel() const
+QItemSelectionModel *MarbleWidget::placemarkSelectionModel() const
 {
-    return d->m_map->placeMarkSelectionModel();
+    return d->m_map->placemarkSelectionModel();
 }
 
 qreal MarbleWidget::moveStep()
@@ -317,20 +317,20 @@ int  MarbleWidget::maximumZoom() const
     return d->m_map->maximumZoom();
 }
 
-void MarbleWidget::addPlaceMarkFile( const QString &filename )
+void MarbleWidget::addPlacemarkFile( const QString &filename )
 {
-    d->m_map->addPlaceMarkFile( filename );
-    //d->m_model->addPlaceMarkFile( filename );
+    d->m_map->addPlacemarkFile( filename );
+    //d->m_model->addPlacemarkFile( filename );
 }
 
-void MarbleWidget::addPlaceMarkData( const QString &data, const QString &key )
+void MarbleWidget::addPlacemarkData( const QString &data, const QString &key )
 {
-    d->m_map->addPlaceMarkData( data, key );
+    d->m_map->addPlacemarkData( data, key );
 }
 
-void MarbleWidget::removePlaceMarkKey( const QString &key )
+void MarbleWidget::removePlacemarkKey( const QString &key )
 {
-    d->m_map->removePlaceMarkKey( key );
+    d->m_map->removePlacemarkKey( key );
 }
 
 QPixmap MarbleWidget::mapScreenShot()
@@ -535,7 +535,7 @@ void MarbleWidget::centerOn( const qreal& lon, const qreal& lat, bool animated )
 void MarbleWidget::centerOn( const QModelIndex& index, bool animated )
 {
     if ( d->m_animationsEnabled && animated ) {
-        QItemSelectionModel *selectionModel = d->m_map->model()->placeMarkSelectionModel();
+        QItemSelectionModel *selectionModel = d->m_map->model()->placemarkSelectionModel();
         Q_ASSERT( selectionModel );
     
         selectionModel->clear();

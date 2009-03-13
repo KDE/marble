@@ -10,7 +10,7 @@
 //
 
 //
-// VisiblePlaceMarks are those PlaceMarks which become visible on the map
+// VisiblePlacemarks are those Placemarks which become visible on the map
 //
 
 
@@ -29,21 +29,21 @@ namespace Marble
 /**
  * @short A class which represents the visible place marks on a map.
  *
- * This class is used by PlaceMarkLayout to pass the visible place marks
- * to the PlaceMarkPainter.
+ * This class is used by PlacemarkLayout to pass the visible place marks
+ * to the PlacemarkPainter.
  */
-class VisiblePlaceMark
+class VisiblePlacemark
 {
  public:
     /**
      * Creates a new visible place mark.
      */
-    VisiblePlaceMark();
+    VisiblePlacemark();
 
     /**
      * Destroys the visible place mark.
      */
-    ~VisiblePlaceMark();
+    ~VisiblePlacemark();
 
     /**
      * Returns the index of the place mark model which

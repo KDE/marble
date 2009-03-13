@@ -100,13 +100,13 @@ set(marblewidget_SRCS
     Projections/MercatorProjectionHelper.cpp
     MeasureTool.cpp
     ImageLoadThread.cpp
-    VisiblePlaceMark.cpp
-    PlaceMarkContainer.cpp
-    PlaceMarkManager.cpp
-    PlaceMarkLayout.cpp
-    PlaceMarkLoader.cpp
-    PlaceMarkPainter.cpp
-    PlaceMarkInfoDialog.cpp
+    VisiblePlacemark.cpp
+    PlacemarkContainer.cpp
+    PlacemarkManager.cpp
+    PlacemarkLayout.cpp
+    PlacemarkLoader.cpp
+    PlacemarkPainter.cpp
+    PlacemarkInfoDialog.cpp
     Planet.cpp
     Quaternion.cpp
     TextureColorizer.cpp
@@ -180,7 +180,7 @@ set (marblewidget_UI
     MarbleCacheSettingsWidget.ui
     MarblePluginSettingsWidget.ui
     TileCreatorDialog.ui
-    PlaceMarkInfoDialog.ui
+    PlacemarkInfoDialog.ui
     MarbleAboutDialog.ui
     SunControlWidget.ui
     LatLonEdit.ui

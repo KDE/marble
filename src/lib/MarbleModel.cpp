@@ -59,9 +59,9 @@
 #include "MarblePlacemarkModel.h"
 #include "MarbleGeometryModel.h"
 #include "MergedLayerDecorator.h"
-#include "PlaceMarkManager.h"
-#include "PlaceMarkLayout.h"
-#include "PlaceMarkPainter.h"
+#include "PlacemarkManager.h"
+#include "PlacemarkLayout.h"
+#include "PlacemarkPainter.h"
 #include "Planet.h"
 #include "StoragePolicy.h"
 #include "SunLocator.h"
@@ -115,9 +115,9 @@ class MarbleModelPrivate
     GridMap                 *m_gridmap;
 
     // Places on the map
-    PlaceMarkManager        *m_placemarkmanager;
+    PlacemarkManager        *m_placemarkmanager;
     MarblePlacemarkModel    *m_placemarkmodel;
-    PlaceMarkLayout         *m_placeMarkLayout;
+    PlacemarkLayout         *m_placemarkLayout;
     MarbleGeometryModel     *m_geometrymodel;
 
     // Misc stuff.
@@ -177,7 +177,7 @@ MarbleModel::MarbleModel( QObject *parent )
            doesn't need it, it's left as is. */
     }
 
-    d->m_placemarkmanager   = new PlaceMarkManager();
+    d->m_placemarkmanager   = new PlacemarkManager();
 
     connect( d->m_placemarkmanager, SIGNAL( geoDataDocumentLoaded( GeoDataDocument& ) ),
              this,                  SLOT( geoDataDocumentLoaded( GeoDataDocument& ) ) );
@@ -189,14 +189,14 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_geometrymodel = new MarbleGeometryModel();
     d->m_placemarkmanager->setGeoModel( d->m_geometrymodel );
 
-    d->m_placeMarkLayout = new PlaceMarkLayout( this );
+    d->m_placemarkLayout = new PlacemarkLayout( this );
     connect( d->m_placemarkmanager,         SIGNAL( finalize() ),
-             d->m_placeMarkLayout,          SLOT( requestStyleReset() ) );
+             d->m_placemarkLayout,          SLOT( requestStyleReset() ) );
     connect( d->m_placemarkselectionmodel,  SIGNAL( selectionChanged( QItemSelection,
                                                                       QItemSelection) ),
-             d->m_placeMarkLayout,          SLOT( requestStyleReset() ) );
+             d->m_placemarkLayout,          SLOT( requestStyleReset() ) );
     connect( d->m_placemarkmodel,           SIGNAL( layoutChanged() ),
-             d->m_placeMarkLayout,          SLOT( requestStyleReset() ) );
+             d->m_placemarkLayout,          SLOT( requestStyleReset() ) );
 
     d->m_gpxFileModel = new GpxFileModel( this );
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
@@ -437,17 +437,17 @@ reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename() );
     // unload old standard Placemarks which are not part of the new map
     foreach(const QString& container, loadedContainers) {
         loadedContainers.pop_front();
-        d->m_placemarkmanager->model()->removePlaceMarks( container, loadedContainers.isEmpty() );
+        d->m_placemarkmanager->model()->removePlacemarks( container, loadedContainers.isEmpty() );
     }
     // load new standard Placemarks
     foreach(const QString& container, loadList) {
         loadList.pop_front();
-        d->m_placemarkmanager->addPlaceMarkFile( container, loadList.isEmpty() );
+        d->m_placemarkmanager->addPlacemarkFile( container, loadList.isEmpty() );
     }
     
 
     // FIXME: Still needs to get fixed for the DGML2 refactoring
-//    d->m_placeMarkLayout->placeMarkPainter()->setDefaultLabelColor( d->m_maptheme->labelColor() );
+//    d->m_placemarkLayout->placemarkPainter()->setDefaultLabelColor( d->m_maptheme->labelColor() );
 
     if( !d->m_mapTheme->map()->filters().isEmpty() ) {
         GeoSceneFilter *filter= d->m_mapTheme->map()->filters().first();
@@ -648,7 +648,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
         d->m_gridmap->paintGridMap( painter, antialiased );
     }
 
-    // Paint the GeoDataPlaceMark layer
+    // Paint the GeoDataPlacemark layer
 #ifndef KML_GSOC
     bool showPlaces, showCities, showTerrain, showOtherPlaces;
 
@@ -660,7 +660,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     if ( showPlaces && ( showCities || showTerrain || showOtherPlaces )
          && d->m_placemarkmodel->rowCount() > 0 )
     {
-        d->m_placeMarkLayout->paintPlaceFolder( painter, viewParams,
+        d->m_placemarkLayout->paintPlaceFolder( painter, viewParams,
                                                 d->m_placemarkmodel,
                                                 d->m_placemarkselectionmodel );
     }
@@ -670,7 +670,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
      * This folder list also will be displayed in MarbleControlBox
      * So user could enable/disable each folder
      */
-    if ( viewParams->m_showPlaceMarks ) {
+    if ( viewParams->m_showPlacemarks ) {
         QTime t;
         t.start ();
 
@@ -689,9 +689,9 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
              */
             if ( folder.isVisible() ) {
 
-                PlaceMarkContainer& container = folder.activePlaceMarkContainer( *viewParams );
+                PlacemarkContainer& container = folder.activePlacemarkContainer( *viewParams );
 
-                d->m_placeMarkLayout->paintPlaceFolder( painter, viewParams,
+                d->m_placemarkLayout->paintPlaceFolder( painter, viewParams,
                                                         &container, firstTime );
 
                 firstTime = false;
@@ -713,12 +713,12 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
 }
 
 
-QAbstractItemModel *MarbleModel::placeMarkModel() const
+QAbstractItemModel *MarbleModel::placemarkModel() const
 {
     return d->m_placemarkmodel;
 }
 
-QItemSelectionModel *MarbleModel::placeMarkSelectionModel() const
+QItemSelectionModel *MarbleModel::placemarkSelectionModel() const
 {
     return d->m_placemarkselectionmodel;
 }
@@ -743,9 +743,9 @@ AbstractScanlineTextureMapper    *MarbleModel::textureMapper()    const
     return d->m_texmapper;
 }
 
-PlaceMarkLayout *MarbleModel::placeMarkLayout() const
+PlacemarkLayout *MarbleModel::placemarkLayout() const
 {
-    return d->m_placeMarkLayout;
+    return d->m_placemarkLayout;
 }
 
 GpsLayer *MarbleModel::gpsLayer()         const
@@ -763,31 +763,31 @@ FileViewModel *MarbleModel::fileViewModel() const
     return d->m_fileviewmodel;
 }
 
-void MarbleModel::addPlaceMarkFile( const QString& filename )
+void MarbleModel::addPlacemarkFile( const QString& filename )
 {
     d->m_placemarkmanager->loadKml( filename, false );
 
     d->notifyModelChanged();
 }
 
-void MarbleModel::addPlaceMarkData( const QString& data, const QString& key )
+void MarbleModel::addPlacemarkData( const QString& data, const QString& key )
 {
     QStringList loadedContainers = d->m_placemarkmanager->model()->containers();
     if( loadedContainers.contains( key ) )
     {
-        d->m_placemarkmanager->model()->removePlaceMarks( key, false );
+        d->m_placemarkmanager->model()->removePlacemarks( key, false );
     }
     d->m_placemarkmanager->loadKmlFromData( data, key, false );
 
     d->notifyModelChanged();
 }
 
-void MarbleModel::removePlaceMarkKey( const QString& key )
+void MarbleModel::removePlacemarkKey( const QString& key )
 {
     QStringList loadedContainers = d->m_placemarkmanager->model()->containers();
     if( loadedContainers.contains( key ) )
     {
-        d->m_placemarkmanager->model()->removePlaceMarks( key, false );
+        d->m_placemarkmanager->model()->removePlacemarks( key, false );
     }
 
     d->notifyModelChanged();
@@ -795,7 +795,7 @@ void MarbleModel::removePlaceMarkKey( const QString& key )
 
 QVector<QModelIndex> MarbleModel::whichFeatureAt( const QPoint& curpos ) const
 {
-    return d->m_placeMarkLayout->whichPlaceMarkAt( curpos );
+    return d->m_placemarkLayout->whichPlacemarkAt( curpos );
 }
 
 void MarbleModelPrivate::notifyModelChanged()

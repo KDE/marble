@@ -45,7 +45,7 @@
 #include <MarbleDirs.h>
 #include <FileViewModel.h>
 #include "gps/GpxFileModel.h"
-#include "PlaceMarkContainer.h"
+#include "PlacemarkContainer.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleRunnerManager.h"
 #include "MathHelper.h"
@@ -237,12 +237,12 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 {
     d->m_widget = widget;
 
-    // Make us aware of all the PlaceMarks in the MarbleModel so that
+    // Make us aware of all the Placemarks in the MarbleModel so that
     // we can search them.
-    setLocations( static_cast<MarblePlacemarkModel*>(d->m_widget->placeMarkModel()) );
+    setLocations( static_cast<MarblePlacemarkModel*>(d->m_widget->placemarkModel()) );
 
 //    FIXME: Why does this fail: "selection model works on a different model than the view..." ? 
-//    d->uiWidget.locationListView->setSelectionModel( d->m_widget->placeMarkSelectionModel() );
+//    d->uiWidget.locationListView->setSelectionModel( d->m_widget->placemarkSelectionModel() );
 
 #ifndef KML_GSOC
     //set up everything for the FileModel
@@ -521,7 +521,7 @@ void MarbleControlBox::searchLineChanged(const QString &search)
     d->m_searchTerm = search;
     // if search line is empty, restore original geonames
     if ( d->m_searchTerm.isEmpty() )
-        setLocations( static_cast<MarblePlacemarkModel*>( d->m_widget->placeMarkModel() ) );
+        setLocations( static_cast<MarblePlacemarkModel*>( d->m_widget->placemarkModel() ) );
     if ( d->m_searchTriggered )
         return;
     d->m_searchTriggered = true;

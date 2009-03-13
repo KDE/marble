@@ -21,8 +21,8 @@
 #include "MarbleRunnerManager.h"
 
 #include "MarblePlacemarkModel.h"
-#include "PlaceMarkManager.h"
-#include "PlaceMarkContainer.h"
+#include "PlacemarkManager.h"
+#include "PlacemarkContainer.h"
 #include "GeoDataPlacemark.h"
 
 #include "LatLonRunner.h"
@@ -108,8 +108,8 @@ void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVec
     if( result.isEmpty() )
         return;
 
-    PlaceMarkContainer cont( result, "Runner Results" );
-    m_model->addPlaceMarks( cont, false );
+    PlacemarkContainer cont( result, "Runner Results" );
+    m_model->addPlacemarks( cont, false );
 
     emit modelChanged( m_model );
 }

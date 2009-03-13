@@ -55,12 +55,12 @@ public:
     bool                    globalQuaternion (int x, int y, Marble::Quaternion& q);
     qreal                   centerLongitude () const;
     qreal                   centerLatitude () const;
-    QAbstractItemModel*     placeMarkModel () const;
-    QItemSelectionModel*    placeMarkSelectionModel () const;
+    QAbstractItemModel*     placemarkModel () const;
+    QItemSelectionModel*    placemarkSelectionModel () const;
     qreal                   moveStep ();
-    void                    addPlaceMarkFile (const QString& filename);
-    void                    addPlaceMarkData (const QString& data, const QString& key = "data");
-    void                    removePlaceMarkKey( const QString& key );
+    void                    addPlacemarkFile (const QString& filename);
+    void                    addPlacemarkData (const QString& data, const QString& key = "data");
+    void                    removePlacemarkKey( const QString& key );
     Marble::Quaternion      planetAxis () const;
     QPixmap                 mapScreenShot ();
     bool                    showOverviewMap () const;

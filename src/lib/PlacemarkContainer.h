@@ -28,36 +28,36 @@ namespace Marble
  *
  * The ownership of the place mark objects is <b>not</b> transfered to the container!
  */
-class PlaceMarkContainer : public QVector<Marble::GeoDataPlacemark*>
+class PlacemarkContainer : public QVector<Marble::GeoDataPlacemark*>
 {
  public:
-    /// Create a new PlaceMarkContainer.
-    PlaceMarkContainer();
+    /// Create a new PlacemarkContainer.
+    PlacemarkContainer();
 
     /**
-     * @brief Create a new PlaceMarkContainer
+     * @brief Create a new PlacemarkContainer
      * param  name the name of the container
      */
-    explicit PlaceMarkContainer( const QString& name );
+    explicit PlacemarkContainer( const QString& name );
 
     /**
-     * @brief Create a new PlaceMarkContainer
-     * param  container the other PlaceMarkContainer
+     * @brief Create a new PlacemarkContainer
+     * param  container the other PlacemarkContainer
      */
-    PlaceMarkContainer( const PlaceMarkContainer& container );
+    PlacemarkContainer( const PlacemarkContainer& container );
 
     /**
-     * @brief Create a new PlaceMarkContainer
+     * @brief Create a new PlacemarkContainer
      * param  container a QVector of Placemarks
      * param  name the name of the container
      */
-    PlaceMarkContainer( const QVector<Marble::GeoDataPlacemark*>& container, const QString& name );
+    PlacemarkContainer( const QVector<Marble::GeoDataPlacemark*>& container, const QString& name );
 
     /// Return the name of the container
     QString name() const;
 
     /**
-     * @brief Set a new name for the PlaceMarkContainer
+     * @brief Set a new name for the PlacemarkContainer
      * param  name the new name of the container
      */
     void setName( const QString& name );
@@ -67,9 +67,9 @@ class PlaceMarkContainer : public QVector<Marble::GeoDataPlacemark*>
 
     /**
      * @brief  the assignment operator
-     * param  container the other PlaceMarkContainer
+     * param  container the other PlacemarkContainer
      */
-    PlaceMarkContainer& operator=( const PlaceMarkContainer& container );
+    PlacemarkContainer& operator=( const PlacemarkContainer& container );
 
  private:
     QString  m_name;
