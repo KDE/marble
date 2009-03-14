@@ -229,4 +229,9 @@ void SunLocator::setBody(QString body)
     }
 }
 
+QString SunLocator::body() const
+{
+	return m_body;
+}
+
 #include "SunLocator.moc"

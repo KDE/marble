@@ -66,6 +66,8 @@ class MARBLE_EXPORT SunLocator : public QObject
     qreal getLat() {return -m_lat * 180.0 / M_PI;}
 	
     ExtDateTime* datetime() {return m_datetime;}
+
+	QString body() const;
 	
  public Q_SLOTS:
     void update();

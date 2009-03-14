@@ -180,7 +180,7 @@ void MergedLayerDecorator::paintSunShading()
     const qreal nInverse = 1.0 / (qreal)(n);
     const int ipRight = n * (int)( tileWidth / n );
 
-    if ( m_sunLocator->getCitylights() ) {
+    if ( m_sunLocator->getCitylights() && m_sunLocator->body() == "earth") {
         QImage nighttile = loadDataset( m_cityLightsTextureLayer );
         if ( nighttile.isNull() )
             return;
