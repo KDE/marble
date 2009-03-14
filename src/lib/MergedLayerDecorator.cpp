@@ -30,6 +30,7 @@
 #include "MarbleDirs.h"
 #include "TextureTile.h"
 #include "TileLoaderHelper.h"
+#include "Planet.h"
 
 using namespace Marble;
 
@@ -206,7 +207,8 @@ void MergedLayerDecorator::paintSunShading()
     const int n = maxDivisor( 30, tileWidth );
     const int ipRight = n * (int)( tileWidth / n );
 
-    if ( m_sunLocator->getCitylights() ) {
+    //Don't use city lights on non-earth planets!
+    if ( m_sunLocator->getCitylights() && m_sunLocator->planet()->id() == "earth" ) {
         QImage nighttile = loadDataset( m_cityLightsTextureLayer );
         if ( nighttile.isNull() )
             return;

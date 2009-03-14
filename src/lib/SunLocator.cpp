@@ -335,6 +335,11 @@ ExtDateTime* SunLocator::datetime() const
     return d->m_datetime;
 }
 
+Planet* SunLocator::planet() const
+{
+    return d->m_planet;
+}
+
 }
 
 #include "SunLocator.moc"

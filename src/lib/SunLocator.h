@@ -61,6 +61,8 @@ class MARBLE_EXPORT SunLocator : public QObject
 
     ExtDateTime* datetime() const;
 
+    Planet* planet() const;
+
  public Q_SLOTS:
     void update();
 
