@@ -21,9 +21,12 @@ class GeoDataLineStringPrivate
  public:
     GeoDataLineStringPrivate( TessellationFlags f )
          : m_dirtyBox( true ),
-           m_tessellationFlags( f )
+           m_tessellationFlags( f ),
+           m_latLonAltBox()
     {
     }
+
+    GeoDataLatLonAltBox m_latLonAltBox;
 
     bool         m_dirtyBox; // tells whether there have been changes to the
                              // GeoDataPoints since the LatLonAltBox has 
@@ -101,11 +104,11 @@ void GeoDataLineString::setTessellationFlags( TessellationFlags f )
 GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
 {
     if (d->m_dirtyBox) {
-        return GeoDataLatLonAltBox::fromLineString( *this );
+        d->m_latLonAltBox = GeoDataLatLonAltBox::fromLineString( *this );
+        d->m_dirtyBox = false;
     }
-    d->m_dirtyBox = false;
 
-    return GeoDataLatLonAltBox();
+    return d->m_latLonAltBox;
 }
 
 
