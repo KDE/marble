@@ -92,7 +92,7 @@ public:
     void operator=( const Planet& other );
 
 private:
-    PlanetPrivate * d;
+    PlanetPrivate * const d;
 };
 
 

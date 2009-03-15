@@ -55,15 +55,15 @@ public:
 
 //Constructor
 Planet::Planet()
+    : d( new PlanetPrivate )
 {
-    d = new PlanetPrivate;
     d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             QObject::tr("Unknown Planet", "a planet without data"), QString("unknown") );
 }
 
 Planet::Planet( const QString& id )
+    : d( new PlanetPrivate )
 {
-    d = new PlanetPrivate;
     // constants taken from
     // http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html
     if ( id == "mercury" ) {
@@ -153,8 +153,8 @@ Planet::Planet( const QString& id )
 
 //Copy Constructor
 Planet::Planet( const Planet& other )
+    : d( new PlanetPrivate )
 {
-    d = new PlanetPrivate;
     d->M_0 = other.M_0();
     d->M_1 = other.M_1();
     d->C_1 = other.C_1();
