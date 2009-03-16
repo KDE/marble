@@ -23,7 +23,6 @@ namespace Marble
 {
 
 class AbstractFileViewItem;
-class BoundingBox;
 
 class MARBLE_EXPORT FileViewModel : public QAbstractListModel
 {
@@ -42,7 +41,7 @@ class MARBLE_EXPORT FileViewModel : public QAbstractListModel
     void append ( AbstractFileViewItem* item );
 
   Q_SIGNALS:
-    void updateRegion( BoundingBox& );
+    void modelChanged();
 
   public slots:
     void saveFile();

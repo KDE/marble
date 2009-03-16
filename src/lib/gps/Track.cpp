@@ -15,8 +15,6 @@
 // QT
 #include <QtCore/QDebug>
 
-// Marble
-#include "BoundingBox.h"
 
 using namespace Marble;
 
@@ -41,35 +39,6 @@ void Track::draw(ClipPainter *painter, const QSize &canvasSize,
 {
     const_iterator it;
     for ( it = this->constBegin(); it < this->constEnd(); ++it ) {
-        (*it)->draw( painter, canvasSize, viewParams );
-    }
-}
-
-void Track::draw(ClipPainter *painter, const QSize &canvasSize, 
-                 ViewParams *viewParams, const BoundingBox &box)
-{
-#if 0
-    qDebug()<<"test er";
-    if ( box.isValid() ) {
-        if ( box.intersects( *m_boundingBox ) ) {
-            qDebug() << "drawing";
-            draw( painter, canvasSize, radius, invRotAxis );
-        }
-        else {
-            qDebug() << "not Drawing Track";
-            qDebug() << box.string();
-            qDebug() << m_boundingBox->string();
-            return;
-        }
-    }
-    else {
-        qDebug()<<"implementing but not using";
-        //bouding box doesn't work so draw anyway
-        draw( painter, canvasSize, radius, invRotAxis );
-    }
-#endif
-    const_iterator it;
-    for( it = this->constBegin(); it < this->constEnd(); ++it ) {
         (*it)->draw( painter, canvasSize, viewParams );
     }
 }

@@ -47,7 +47,6 @@ namespace Marble
 class MarbleWidgetPrivate;
 
 // Marble
-class BoundingBox;
 class MarbleMap;
 class MarbleModel;
 class HttpDownloadManager;
@@ -880,11 +879,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Update the widget because the model changed.
      */
     void updateChangedMap();
-
-    /**
-     * @brief Update part of the map as defined in the BoundingBox
-     */
-    void updateRegion( BoundingBox& );
 
     /**
      * @brief Set the download url to load missing tiles

@@ -43,7 +43,7 @@ namespace TileLoaderHelper {
      *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
-    int levelToRow( const int levelZeroRows, int level );
+    int levelToRow( int levelZeroRows, int level );
 
     /**
      * @brief Get the maximum number of tile columns for a given tile level.
@@ -54,7 +54,7 @@ namespace TileLoaderHelper {
      *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
-    int levelToColumn( const int levelZeroColumns, int level );
+    int levelToColumn( int levelZeroColumns, int level );
 
     /**
      * @brief Get the tile level for the given maximum number of tile columns.
@@ -65,7 +65,7 @@ namespace TileLoaderHelper {
      *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
-    int rowToLevel( const int levelZeroRows, int row );
+    int rowToLevel( int levelZeroRows, int row );
 
     /**
      * @brief Get the tile level for the given maximum number of tile columns.
@@ -76,7 +76,7 @@ namespace TileLoaderHelper {
      *               returned so this case of wrong input data can get caught 
      *               by the code which makes use of it.
      */
-    int columnToLevel( const int levelZeroColumns, int column );
+    int columnToLevel( int levelZeroColumns, int column );
 
     /**
      * @brief Get the url for download of a tile.

@@ -128,7 +128,6 @@ set(marblewidget_SRCS
     #jsonparser.cpp
     VectorComposer.cpp
     VectorMap.cpp
-    BoundingBox.cpp
     FileViewModel.cpp
     GpxFileViewItem.cpp
     KmlFileViewItem.cpp
@@ -318,7 +317,6 @@ else (APPLE AND QTONLY)
     Planet.h
 
     LatLonEdit.h
-    BoundingBox.h
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
 endif (APPLE AND QTONLY)

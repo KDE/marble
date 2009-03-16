@@ -11,7 +11,6 @@
 #include "GpsLayer.h"
 #include "ClipPainter.h"
 #include "Waypoint.h"
-#include "BoundingBox.h"
 #include "GpxFile.h"
 #include "GpsTracking.h"
 #include "GpxFileModel.h"
@@ -57,8 +56,7 @@ bool GpsLayer::updateGps( const QSize &canvasSize, ViewParams *viewParams,
 }
 
 void GpsLayer::paintLayer( ClipPainter *painter, 
-                          const QSize &canvasSize, ViewParams *viewParams,
-                          const BoundingBox &box )
+                          const QSize &canvasSize, ViewParams *viewParams )
 {
     if ( visible() ) {
         m_currentPosition->draw( painter, canvasSize, 
@@ -71,7 +69,7 @@ void GpsLayer::paintLayer( ClipPainter *painter,
     QVector<GpxFile*>::const_iterator it;
     for( it = m_fileModel->allFiles()->constBegin(); 
          it < m_fileModel->allFiles()->constEnd(); ++it ){
-        (*it)->draw( painter, canvasSize, viewParams, box );
+        (*it)->draw( painter, canvasSize, viewParams );
     }
 }
 

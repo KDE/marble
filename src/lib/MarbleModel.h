@@ -46,7 +46,6 @@ namespace Marble
 {
 
 class AbstractScanlineTextureMapper;
-class BoundingBox;
 class GeoPainter;
 class FileViewModel;
 class GpsLayer;
@@ -312,14 +311,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Signal that the MarbleModel has changed in general
      */
     void modelChanged();
-    /**
-     * @brief Signal that a region of the earth has changed
-     * @param rect the region that changed.
-     *
-     * This is currently used only for gpx files, but will likely be
-     * used for more things in the future.
-     */
-    void regionChanged( BoundingBox &rect );
 
     /**
      * @brief Signal that a timer has gone off.

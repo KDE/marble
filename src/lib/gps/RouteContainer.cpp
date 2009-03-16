@@ -11,17 +11,13 @@
 #include "RouteContainer.h"
 
 #include "AbstractLayerData.h"
-#include "BoundingBox.h"
 
 using namespace Marble;
 
 void RouteContainer::draw( ClipPainter *painter, 
                            const QSize &canvasSize,
-                           ViewParams *viewParams,
-                           const BoundingBox &box )
+                           ViewParams *viewParams )
 {
-    Q_UNUSED( box );
-
     const_iterator it;
     for( it = constBegin() ; it < constEnd() ; ++it ) {
         (*it)->draw( painter, canvasSize, viewParams );

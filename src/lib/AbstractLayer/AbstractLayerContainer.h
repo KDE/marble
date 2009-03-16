@@ -26,7 +26,6 @@ namespace Marble
 
 class AbstractLayerData;
 class ClipPainter;
-class BoundingBox;
 
 
 /*!
@@ -96,23 +95,7 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
     virtual void draw(ClipPainter *painter, 
                       const QSize &canvasSize,
                       ViewParams *viewParams );
-    
-    /**
-     * @brief draw this Container after evaluating its bounding Box
-     * 
-     * this container will only get drawn if the bounding box of the
-     * view intersects with the bounding box of the container
-     * @param painter this will be used to draw the contianer
-     * @param canvasSize the size of the marble widget view
-     * @param radius measure of zoom level
-     * @param invRotAxis inversion of the rotation Quaternion that
-     *                   represents the rotation of the globe
-     * @param box the bounding box that holds the view
-     */
-    virtual void draw(ClipPainter *painter, 
-                      const QSize &canvasSize, ViewParams *viewParams,
-                      const BoundingBox &box);
-    
+        
     /**
      * @brief m_name getter
      */
@@ -139,19 +122,6 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      */
     qreal distance ( const QPointF &a, const QPointF &b );
     
-    /**
-     * @brief creates a bouding box from this Contianer
-     */
-    void createBoundingBox();
-    
-    /**
-     * @brief generate a QVector of QPointF representing the x and y
-     *        values of each AbstractLayerData's Quaternion
-     * 
-     * this method is used to collect the information nessary to 
-     * create the bounding box from this container. 
-     */
-    QVector<QPointF> geoCoord();
  protected:
     /** 
      * @brief Method to process what Data Objects need to be in
@@ -176,12 +146,7 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      * FIXME: make this work with a binary file
      */
     void manageMemory();
-    
-    /**
-     * @brief bounding box to quickly identify if this should be drawn
-     */
-    BoundingBox *m_boundingBox;
-    
+        
  private:
     Q_DISABLE_COPY( AbstractLayerContainer )
 

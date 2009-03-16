@@ -201,16 +201,16 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_gpxFileModel = new GpxFileModel( this );
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
 
-    connect( d->m_gpxFileModel, SIGNAL( updateRegion( BoundingBox& ) ),
-             this,              SIGNAL( regionChanged( BoundingBox& ) ) );
+    connect( d->m_gpxFileModel, SIGNAL( modelChanged() ),
+             this,              SIGNAL( modelChanged() ) );
 
     /*
      * Create FileViewModel
      */
     d->m_fileviewmodel = new FileViewModel( this );
 
-    connect( d->m_fileviewmodel, SIGNAL( updateRegion( BoundingBox& ) ),
-             this,               SIGNAL( regionChanged( BoundingBox& ) ) );
+    connect( d->m_fileviewmodel, SIGNAL( modelChanged() ),
+             this,               SIGNAL( modelChanged() ) );
 
     d->m_dateTime       = new ExtDateTime();
     /* Assume we are dealing with the earth */
@@ -704,8 +704,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     //FIXME:We might just send ViewParams instead of this bunch of parameters
     d->m_gpsLayer->paintLayer( painter,
                                viewParams->canvasImage()->size(),
-                               viewParams,
-                               viewParams->viewport()->boundingBox() );
+                               viewParams );
     d->m_layerManager->renderLayers( painter, viewParams );
 }
 

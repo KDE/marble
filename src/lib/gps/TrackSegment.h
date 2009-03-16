@@ -30,9 +30,6 @@ class TrackSegment : public AbstractLayerContainer,
  public:
     TrackSegment();
     virtual void draw(ClipPainter *painter, 
-                      const QSize &canvasSize, ViewParams *viewParams,
-                      const BoundingBox &box );
-    virtual void draw(ClipPainter *painter, 
                       const QSize &canvasSize,
                       ViewParams *viewParams );
     virtual void draw(ClipPainter*, const QPoint&);

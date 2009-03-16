@@ -22,7 +22,6 @@
 #include "WaypointContainer.h"
 #include "TrackContainer.h"
 #include "RouteContainer.h"
-#include "BoundingBox.h"
 #include "GpxSax.h"
 
 using namespace Marble;
@@ -89,20 +88,8 @@ void GpxFile::draw( ClipPainter *painter,
         return;
     }
     m_waypoints->draw( painter, canvasSize, viewParams );
-//     m_routes->draw( painter, canvasSize, radius, invRotAxis);
+    m_routes->draw( painter, canvasSize, viewParams );
     m_tracks->draw( painter, canvasSize, viewParams );
-}
-
-void GpxFile::draw( ClipPainter *painter, 
-                    const QSize &canvasSize, ViewParams *viewParams,
-                    const BoundingBox &box )
-{
-    if ( !m_visible ){
-        return;
-    }
-    m_waypoints->draw( painter, canvasSize, viewParams, box);
-    m_routes->draw( painter, canvasSize, viewParams, box);
-    m_tracks->draw( painter, canvasSize, viewParams, box);
 }
 
 void GpxFile::printToStream( QTextStream &out ) const

@@ -25,7 +25,6 @@ class QRegion;
 namespace Marble
 {
 
-class BoundingBox;
 class GpsTracking;
 class GpxFile;
 class GpxFileModel;
@@ -39,8 +38,7 @@ class GpsLayer : public AbstractLayer
     ~GpsLayer();
     virtual void paintLayer( ClipPainter *painter, 
                              const QSize &canvasSize,
-                             ViewParams *viewParams,
-                             const BoundingBox &box );
+                             ViewParams *viewParams );
     virtual void paintCurrentPosition( ClipPainter *painter, 
                                        const QSize &canvasSize, 
                                        ViewParams *viewParams );

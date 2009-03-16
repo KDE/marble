@@ -48,7 +48,6 @@ namespace Marble
 class MarbleMapPrivate;
 
 // Marble
-class BoundingBox;
 class MarbleModel;
 class ViewParams;
 class HttpDownloadManager;
@@ -772,11 +771,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief Update the map because the model changed.
      */
     void updateChangedMap();
-
-    /**
-     * @brief update part of the map as defined in the BoundingBox
-     */
-    void updateRegion( BoundingBox& );
 
     /**
      * @brief Set the download url to load missing tiles

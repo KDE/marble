@@ -34,7 +34,6 @@
 // Marble
 #include "AbstractProjection.h"
 #include "AbstractScanlineTextureMapper.h"
-#include "BoundingBox.h"
 #include "GeoPainter.h"
 #include "FileViewModel.h"
 #include "FileStoragePolicy.h"
@@ -87,9 +86,6 @@ void MarbleMapPrivate::construct()
                        m_parent, SIGNAL( themeChanged( QString ) ) );
     m_parent->connect( m_model, SIGNAL( modelChanged() ),
                        m_parent, SLOT( updateChangedMap() ) );
-
-    m_parent->connect( m_model, SIGNAL( regionChanged( BoundingBox& ) ) ,
-                       m_parent, SLOT( updateRegion( BoundingBox& ) ) );
 
     m_justModified = false;
 
@@ -243,36 +239,6 @@ void MarbleMapPrivate::drawFog( QPainter &painter )
     painter.restore();
 }
 
-void MarbleMapPrivate::setBoundingBox()
-{
-    QVector<QPointF>  points;
-    Quaternion        temp;
-
-    if ( m_parent->globalQuaternion( 0, 0, temp) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-    if ( m_parent->globalQuaternion( m_parent->width() / 2, 0, temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    if ( m_parent->globalQuaternion( m_parent->width(), 0, temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-    if ( m_parent->globalQuaternion( 0, m_parent->height(), temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    if ( m_parent->globalQuaternion( m_parent->width()/2, m_parent->height(), temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    if ( m_parent->globalQuaternion( m_parent->width(), m_parent->height(), temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    m_viewParams.viewport()->setBoundingBox( BoundingBox( points ) );
-}
-
 void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
 {
     if ( !m_viewParams.mapTheme() ) {
@@ -280,11 +246,6 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
         paintMarbleSplash( painter, dirtyRect );
         return;
     }
-
-    bool  doClip = false;
-    if ( m_viewParams.projection() == Spherical )
-        doClip = ( m_viewParams.radius() > m_viewParams.canvasImage()->width() / 2
-                   || m_viewParams.radius() > m_viewParams.canvasImage()->height() / 2 );
 
     m_model->paintGlobe( &painter,
                          m_parent->width(), m_parent->height(), &m_viewParams,
@@ -321,10 +282,6 @@ void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect)
     }
 
     m_measureTool->paint( &painter, m_viewParams.viewport(), antialiased );
-
-    // FIXME: Get rid of this:
-    // Set the Bounding Box 
-    setBoundingBox();
 }
 
 void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps)
@@ -1205,17 +1162,6 @@ void MarbleMap::updateChangedMap()
 {
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
-}
-
-void MarbleMap::updateRegion( BoundingBox &box )
-{
-    Q_UNUSED(box);
-    //really not sure if this is nessary as it is designed for
-    //placemark based layers
-    setNeedsUpdate();
-
-    /*TODO: write a method for BoundingBox to cacluate the screen
-     *region and pass that to update()*/
 }
 
 void MarbleMap::setDownloadUrl( const QString &url )

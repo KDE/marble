@@ -64,7 +64,8 @@ GeoSceneLayer::GeoSceneLayer( const QString& name )
     : m_filter( 0 ),
       m_name( name ),
       m_backend( "" ),
-      m_role( "" )
+      m_role( "" ),
+      m_tiled( true )
 {
     /* NOOP */
 }
@@ -77,9 +78,9 @@ GeoSceneLayer::~GeoSceneLayer()
 void GeoSceneLayer::addDataset( GeoSceneAbstractDataset* dataset )
 {
     // Remove any dataset that has the same name
-    QVector<GeoSceneAbstractDataset*>::iterator it = m_datasets.begin();
+    QVector<GeoSceneAbstractDataset *>::iterator it = m_datasets.begin();
     while (it != m_datasets.end()) {
-        GeoSceneAbstractDataset* currentAbstractDataset = *it;
+        GeoSceneAbstractDataset * currentAbstractDataset = *it;
         if ( currentAbstractDataset->name() == dataset->name() ) {
             delete currentAbstractDataset;
             it = m_datasets.erase(it);
@@ -115,7 +116,7 @@ GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name )
     return dataset;
 }
 
-GeoSceneAbstractDataset* GeoSceneLayer::groundDataset() const
+GeoSceneAbstractDataset * GeoSceneLayer::groundDataset() const
 {
     if ( m_datasets.isEmpty() )
         return 0;
@@ -123,7 +124,7 @@ GeoSceneAbstractDataset* GeoSceneLayer::groundDataset() const
     return m_datasets.first();
 }
 
-QVector<GeoSceneAbstractDataset*> GeoSceneLayer::datasets() const
+QVector<GeoSceneAbstractDataset *> GeoSceneLayer::datasets() const
 {
     return m_datasets;
 }
@@ -143,6 +144,16 @@ void GeoSceneLayer::setBackend( const QString& backend )
     m_backend = backend;
 }
 
+bool GeoSceneLayer::isTiled() const
+{
+    return m_tiled;
+}
+
+void GeoSceneLayer::setTiled( bool tiled )
+{
+    m_tiled = tiled;
+}
+
 QString GeoSceneLayer::role() const
 {
     return m_role;
@@ -158,12 +169,12 @@ GeoSceneFilter* GeoSceneLayer::filter()
     return m_filter;
 }
 
-void GeoSceneLayer::addFilter( GeoSceneFilter *filter )
+void GeoSceneLayer::addFilter( GeoSceneFilter * filter )
 {
     m_filter = filter;
 }
 
-void GeoSceneLayer::removeFilter( GeoSceneFilter *filter )
+void GeoSceneLayer::removeFilter( GeoSceneFilter * filter )
 {
     if( filter == m_filter ) { m_filter = 0; }
 }

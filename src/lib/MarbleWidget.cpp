@@ -44,7 +44,6 @@
 #include "TileCreatorDialog.h"
 #include "HttpDownloadManager.h"
 #include "gps/GpsLayer.h"
-#include "BoundingBox.h"
 #include "SunLocator.h"
 #include "MergedLayerDecorator.h"
 #include "AbstractProjectionHelper.h"
@@ -174,11 +173,6 @@ void MarbleWidgetPrivate::construct()
     // this in the view, i.e. here.
     m_widget->connect( m_map,    SIGNAL( zoomChanged( int ) ),
                        m_widget, SIGNAL( zoomChanged( int ) ) );
-
-
-    // Some part of the screen contents changed.
-    m_widget->connect( m_model, SIGNAL( regionChanged( BoundingBox& ) ),
-                       m_widget, SLOT( updateRegion( BoundingBox& ) ) );
 
     // Set background: black.
     m_widget->setPalette( QPalette ( Qt::black ) );
@@ -1105,19 +1099,6 @@ void MarbleWidget::updateChangedMap()
 {
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
-    update();
-}
-
-void MarbleWidget::updateRegion( BoundingBox &box )
-{
-    Q_UNUSED(box);
-
-    //really not sure if this is nessary as it is designed for
-    //placemark based layers
-    setNeedsUpdate();
-
-    /*TODO: write a method for BoundingBox to cacluate the screen
-     *region and pass that to update()*/
     update();
 }
 

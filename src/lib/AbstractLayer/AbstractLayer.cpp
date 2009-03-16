@@ -18,7 +18,6 @@
 #include <QtCore/QPoint>
 
 #include "AbstractLayerContainer.h"
-#include "BoundingBox.h"
 #include "ClipPainter.h"
 #include "GeoDataCoordinates.h"
 #include "Quaternion.h"
@@ -98,20 +97,6 @@ void AbstractLayer::paintLayer( ClipPainter* painter,
     for( it = m_containers->constBegin(); it < m_containers->constEnd(); ++it ){
         if ( (*it) != 0 ) {
             (*it)->draw( painter, screenSize, viewParams );
-        }
-    }
-}
-
-void AbstractLayer::paintLayer( ClipPainter* painter, 
-                                const QSize& screenSize,
-                                ViewParams *viewParams, 
-                                const BoundingBox &bounding )
-{
-    QVector<AbstractLayerContainer *>::const_iterator it;
-
-    for( it = m_containers->constBegin(); it < m_containers->constEnd(); ++it ){
-        if ( (*it) != 0 ) {
-            (*it)->draw( painter, screenSize, viewParams, bounding );
         }
     }
 }

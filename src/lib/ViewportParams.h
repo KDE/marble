@@ -25,7 +25,6 @@
 #include "GeoDataLatLonAltBox.h"
 
 #include "Quaternion.h"
-#include "BoundingBox.h"
 #include "global.h"
 #include "marble_export.h"
 
@@ -94,9 +93,6 @@ class MARBLE_EXPORT ViewportParams
     void setWidth(int newWidth);
     void setHeight(int newHeight);
     void setSize(QSize newSize);
-
-    BoundingBox boundingBox() const; // DEPRECATED: Use viewLatLonAltBox() instead!
-    void setBoundingBox( const BoundingBox & ); // DEPRECATED: Determined by the Projection
 
     // Other functions
     void centerCoordinates( qreal &centerLon, qreal &centerLat ) const;

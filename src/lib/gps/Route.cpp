@@ -10,7 +10,6 @@
 
 #include "Route.h"
 #include "ClipPainter.h"
-#include "BoundingBox.h"
 
 #include <QtCore/QPoint>
 
@@ -49,16 +48,6 @@ void Route::draw( ClipPainter *painter, const QSize &canvasSize,
             painter->drawLine( firstPos, secondPos );
         }
     }
-}
-
-void Route::draw( ClipPainter *painter, 
-                  const QSize &canvasSize, ViewParams *viewParams,
-                  const BoundingBox &box )
-{
-    Q_UNUSED( painter );
-    Q_UNUSED( canvasSize );
-    Q_UNUSED( viewParams );
-    Q_UNUSED( box );
 }
 
 void Route::draw( ClipPainter*, const QPoint& )

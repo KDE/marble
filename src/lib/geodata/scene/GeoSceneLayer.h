@@ -74,7 +74,7 @@ class GEODATA_EXPORT GeoSceneLayer : public GeoNode {
      */
     void addDataset( GeoSceneAbstractDataset* );
 
-    GeoSceneAbstractDataset* dataset( const QString& );
+    GeoSceneAbstractDataset * dataset( const QString& );
     GeoSceneAbstractDataset * groundDataset() const;
 
     QVector<GeoSceneAbstractDataset*> datasets() const;
@@ -84,24 +84,32 @@ class GEODATA_EXPORT GeoSceneLayer : public GeoNode {
     QString backend() const;
     void setBackend( const QString& plugin );
 
+    /**
+     * @brief  returns whether the data is organized in quad tiles.
+     */
+    bool isTiled() const;
+    void setTiled( bool );
+
     QString role() const;
     void setRole( const QString& type );
 
-	GeoSceneFilter* filter();
-	void addFilter( GeoSceneFilter *filter );
-	void removeFilter( GeoSceneFilter *filter );
+	GeoSceneFilter * filter();
+	void addFilter( GeoSceneFilter * filter );
+	void removeFilter( GeoSceneFilter * filter );
 
  protected:
     /// The vector holding all the data in the layer.
     /// (We want to preserve the order and don't care 
     /// much about speed here), so we don't use a hash
-    QVector<GeoSceneAbstractDataset*> m_datasets;
+    QVector<GeoSceneAbstractDataset *> m_datasets;
 
     GeoSceneFilter  *m_filter;
 
     QString          m_name;
     QString          m_backend;
     QString          m_role;
+
+    bool             m_tiled;
 
  private:
     Q_DISABLE_COPY( GeoSceneLayer )
