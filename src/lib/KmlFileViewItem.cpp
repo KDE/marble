@@ -34,10 +34,10 @@ void KmlFileViewItem::saveFile()
     //TODO
 }
 
-void KmlFileViewItem::closeFile()
+void KmlFileViewItem::closeFile( int start, bool finalize )
 {
     qDebug() << "closing file" << m_document.name() << m_document.fileName();
-    m_placeMarkManager.model()->removePlaceMarks( m_document.fileName(), true );
+    m_placeMarkManager.model()->removePlaceMarks( m_document.fileName(), start, size(), finalize );
 }
 
 QVariant KmlFileViewItem::data( int role ) const

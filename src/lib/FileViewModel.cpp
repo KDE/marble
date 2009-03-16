@@ -9,6 +9,8 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
+#include <QStringList>
+
 // Own
 #include "FileViewModel.h"
 
@@ -70,6 +72,17 @@ Qt::ItemFlags FileViewModel::flags( const QModelIndex & index ) const
                           Qt::ItemIsSelectable );
 }
 
+QStringList FileViewModel::containers() const
+{
+    QStringList retList;
+
+    for( int line = 0; line < m_itemList.count(); ++line ) {
+        retList << m_itemList.at( line )->data().toString();
+    }
+    
+    return retList;
+}
+
 bool FileViewModel::setData( const QModelIndex& index, const QVariant& value, int role )
 {
     if ( !index.isValid() ) {
@@ -119,12 +132,12 @@ void FileViewModel::remove( const QModelIndex& index )
     if ( index.isValid() ) {
 
         int row = index.row();
-
+        int start = indexStart( index );
         if ( row < m_itemList.count() ) {
             if ( index.column() == 0 ) {
 
                 AbstractFileViewItem *item = m_itemList.at( row );
-                item->closeFile();
+                item->closeFile( start );
 
                 delete item;
                 m_itemList.removeAt( row );
@@ -156,25 +169,18 @@ void FileViewModel::saveFile()
 
 void FileViewModel::closeFile()
 {
-    if ( m_selectedIndex.isValid() ) {
+    remove( m_selectedIndex );
+}
 
-        int row = m_selectedIndex.row();
-
-        if ( row < m_itemList.count() ) {
-            if ( m_selectedIndex.column() == 0 ) {
-
-                AbstractFileViewItem& item = *m_itemList.at( row );
-                item.closeFile();
-
-                delete &item;
-                m_itemList.removeAt( row );
-
-		BoundingBox  box;
-                emit layoutChanged();
-                emit updateRegion( box );
-            }
-        }
+int FileViewModel::indexStart( const QModelIndex& index )
+{
+    int start = 0;
+    if ( index.isValid() ) {
+        for( int i = 0; i < index.row(); i++ ) {
+            start += m_itemList.at( i )->size();
+        };
     }
+    return start;
 }
 
 #include "FileViewModel.moc"

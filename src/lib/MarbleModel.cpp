@@ -8,7 +8,7 @@
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
 #include "MarbleModel.h"
@@ -393,7 +393,8 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     }
 
     d->m_geometrymodel->setGeoDataRoot( 0 );
-    QStringList loadedContainers = d->m_placemarkmanager->model()->containers();
+    QStringList loadedContainers = d->m_placemarkmanager->fileViewModel()->containers();
+    qDebug() << loadedContainers;
     QStringList loadList;
     QVector<GeoSceneLayer*>::const_iterator it = d->m_mapTheme->map()->layers().constBegin();
     QVector<GeoSceneLayer*>::const_iterator end = d->m_mapTheme->map()->layers().constEnd();
@@ -424,14 +425,15 @@ reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename() );
     // unload old standard Placemarks which are not part of the new map
     foreach(const QString& container, loadedContainers) {
         loadedContainers.pop_front();
-        removePlaceMarkKey( container );
+        d->m_placemarkmanager->removePlaceMarkKey( container );
     }
     // load new standard Placemarks
     foreach(const QString& container, loadList) {
         loadList.pop_front();
         d->m_placemarkmanager->addPlaceMarkFile( container, loadList.isEmpty() );
     }
-    
+    d->notifyModelChanged();
+
 
     // FIXME: Still needs to get fixed for the DGML2 refactoring
 //    d->m_placeMarkLayout->placeMarkPainter()->setDefaultLabelColor( d->m_maptheme->labelColor() );
@@ -789,16 +791,12 @@ void MarbleModelPrivate::geoDataDocumentLoaded( GeoDataDocument& document )
 
 void MarbleModelPrivate::geoDataDocumentAdded( GeoDataDocument* document )
 {
-    AbstractFileViewItem* item = new KmlFileViewItem( *m_placemarkmanager,
-                                                      *document );
-
     foreach(GeoDataPlacemark placemark, document->placemarks())
     {
         QString styleUrl = placemark.styleUrl().remove('#');
         placemark.setStyle( &document->style( styleUrl ) );
     };
-//    m_fileviewmodel->append( item );
-    
+
     m_geometrymodel->setGeoDataRoot( document );
 }
 

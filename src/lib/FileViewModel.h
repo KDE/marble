@@ -42,6 +42,8 @@ class MARBLE_EXPORT FileViewModel : public QAbstractListModel
     void setSelectedIndex( const QModelIndex& index );
     void append( AbstractFileViewItem* item );
     void remove( const QModelIndex& index );
+    
+    QStringList containers() const;
 
   Q_SIGNALS:
     void updateRegion( BoundingBox& );
@@ -54,6 +56,8 @@ class MARBLE_EXPORT FileViewModel : public QAbstractListModel
     Q_DISABLE_COPY( FileViewModel )
     QModelIndex m_selectedIndex;
     QList < AbstractFileViewItem* > m_itemList;
+    
+    int indexStart( const QModelIndex& index );
 };
 
 }

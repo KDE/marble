@@ -28,16 +28,18 @@
 
 namespace Marble {
 
-PlaceMarkLoader::PlaceMarkLoader( QObject* parent, const QString& file )
+PlaceMarkLoader::PlaceMarkLoader( QObject* parent, const QString& file, bool finalize )
  : QThread( parent ), 
    m_filepath( file ),
-   m_contents( QString() )   {
+   m_contents( QString() ),
+   m_finalize( finalize ) {
 }
 
-PlaceMarkLoader::PlaceMarkLoader( QObject* parent, const QString& contents, const QString& file )
+PlaceMarkLoader::PlaceMarkLoader( QObject* parent, const QString& contents, const QString& file, bool finalize )
  : QThread( parent ), 
    m_filepath( file ), 
-   m_contents( contents ) {
+   m_contents( contents ),
+   m_finalize( finalize ) {
 }
 
 void PlaceMarkLoader::run() {
@@ -94,8 +96,10 @@ if( m_contents.isEmpty() ) {
 
         if ( cacheoutdated == false ) {
             loadok = loadFile( defaultcachename, container );
-            if ( loadok )
+            if ( loadok ) {
+                qDebug() << "placeMarksLoaded";
                 emit placeMarksLoaded( this, container );
+            }
         }
         qDebug() << "Loading ended" << loadok;
         if ( loadok == true )
@@ -112,6 +116,8 @@ if( m_contents.isEmpty() ) {
         qDebug() << "ContainerSize for" << m_filepath << ":" << container->size();
         // Save the contents in the efficient cache format.
         saveFile( defaulthomecache, container );
+
+        qDebug() << "placeMarksLoaded";
 
         // ...and finally add it to the PlaceMarkContainer
         emit placeMarksLoaded( this, container );
@@ -161,6 +167,8 @@ void PlaceMarkLoader::importKml( const QString& filename,
 
     file.close();
 
+    qDebug() << "newGeoDataDocumentAdded" << m_filepath;
+
     emit newGeoDataDocumentAdded( dataDocument );
 }
 
@@ -186,6 +194,8 @@ void PlaceMarkLoader::importKmlFromData( PlaceMarkContainer* placeMarkContainer 
 
     buffer.close();
 
+    qDebug() << "newGeoDataDocumentAdded" << m_filepath;
+    
     emit newGeoDataDocumentAdded( dataDocument );
 }
 
@@ -225,6 +235,11 @@ void PlaceMarkLoader::saveFile( const QString& filename,
         out << (qint64)(*it).population();
 }
     }
+
+bool PlaceMarkLoader::finalize()
+{
+    return m_finalize;
+}
 
 bool PlaceMarkLoader::loadFile( const QString& filename,
                                  PlaceMarkContainer* placeMarkContainer )
@@ -290,8 +305,8 @@ bool PlaceMarkLoader::loadFile( const QString& filename,
         document->append( mark );
     }
 
+    qDebug() << "newGeoDataDocumentAdded" << m_filepath;
     emit newGeoDataDocumentAdded( document );
-
     return true;
 }
 

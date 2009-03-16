@@ -116,10 +116,9 @@ void PlaceMarkManager::clearPlaceMarks()
 
 void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalized )
 {
-    d->m_finalized = finalized;
     if( !(d->m_model->containers().contains( filepath ) ) ) {
         qDebug() << "adding container:" << filepath << finalized;
-        PlaceMarkLoader* loader = new PlaceMarkLoader( this, filepath );
+        PlaceMarkLoader* loader = new PlaceMarkLoader( this, filepath, finalized );
         connect (   loader, SIGNAL( placeMarksLoaded( PlaceMarkLoader*, PlaceMarkContainer * ) ), 
                     this, SLOT( loadPlaceMarkContainer( PlaceMarkLoader*, PlaceMarkContainer * ) ) );
         connect (   loader, SIGNAL( placeMarkLoaderFailed( PlaceMarkLoader* ) ), 
@@ -130,10 +129,6 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalized
                     this, SLOT( addGeoDataDocument( GeoDataDocument* ) ) );
         d->m_loaderList.append( loader );
         loader->start();
-    }
-    else {
-        if( finalized ) 
-            emit finalize();
     }
 }
 
@@ -147,21 +142,18 @@ void PlaceMarkManager::addGeoDataDocument( GeoDataDocument* document )
 
 void PlaceMarkManager::addPlaceMarkData( const QString& data, const QString& key )
 {
-    QStringList loadedContainers = d->m_model->containers();
-    if( loadedContainers.contains( key ) )
-    {
-        d->m_model->removePlaceMarks( key, false );
-    }
     loadKmlFromData( data, key, false );
 }
 
 void PlaceMarkManager::removePlaceMarkKey( const QString& key )
 {
     QString nkey = key;
+    qDebug() << "trying to remove file:" << key;
     for( int i = 0; i < d->m_fileViewModel->rowCount(); ++i )
     {
-        if(nkey.remove(".kml").remove(".cache") == d->m_fileViewModel->data(d->m_fileViewModel->index(i, 0)).toString().remove(".kml").remove(".cache"))
+        if(nkey.remove(".kml").remove(".cache") == d->m_fileViewModel->data(d->m_fileViewModel->index(i, 0)).toString().remove(".kml").remove(".cache")) {
             d->m_fileViewModel->remove(d->m_fileViewModel->index(i, 0));
+        }
     };
 }
 
@@ -175,16 +167,17 @@ void PlaceMarkManager::cleanupLoader( PlaceMarkLoader* loader )
 
 void PlaceMarkManager::loadPlaceMarkContainer( PlaceMarkLoader* loader, PlaceMarkContainer * container )
 {
+    qDebug() << "Containername:" << container->name() << "to be finalized:" << loader->finalize() << d->m_loaderList.size();
     d->m_loaderList.removeAll( loader );
-    if ( loader->isFinished() ) {
-         delete loader;
-    }
-
     if ( container )
     { 
         d->m_model->addPlaceMarks( *container, false, d->m_finalized && d->m_loaderList.isEmpty() );
-        if( d->m_finalized ) 
-            emit finalize();
+    }
+
+    if( 0 == d->m_loaderList.size() ) 
+        emit finalize();
+    if ( loader->isFinished() ) {
+         delete loader;
     }
 }
 
@@ -208,6 +201,8 @@ void PlaceMarkManager::loadKmlFromData( const QString& data, const QString& key,
                 this, SLOT( cleanupLoader( PlaceMarkLoader* ) ) );
     connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
                 this, SIGNAL( geoDataDocumentAdded( GeoDataDocument* ) ) );
+    connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
+                this, SLOT( addGeoDataDocument( GeoDataDocument* ) ) );
     d->m_loaderList.append( loader );
     loader->start();
 }
