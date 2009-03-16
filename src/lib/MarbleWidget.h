@@ -204,7 +204,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     const QRegion  activeRegion();
 
     /**
-     * @brief Return the active region in which it's possible to drag the view using the mouse.
+     * @brief Return the projected region which describes the (shape of the) projected surface.
      */
     const QRegion  projectedRegion();
 
@@ -289,17 +289,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     bool geoCoordinates( int x, int y,
                          qreal& lon, qreal& lat,
                          GeoDataCoordinates::Unit = GeoDataCoordinates::Degree );
-
-    /**
-     * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the widget.
-     * @param x  the x coordinate of the pixel
-     * @param y  the y coordinate of the pixel
-     * @param q  the out parameter where the result is returned
-     * @return @c true  if the pixel (x, y) is within the globe
-     *         @c false if the pixel (x, y) is outside the globe, i.e. in space
-     */
-    // FIXME: refactor the GPS/GPX code, so that this nonsense method can die.
-    bool    globalQuaternion( int x, int y, Quaternion &q);
 
     /**
      * @brief Return the longitude of the center point.
@@ -516,17 +505,17 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Get the GeoSceneDocument object of the current map theme
      */
-    Marble::GeoSceneDocument *mapTheme() const;
+    Marble::GeoSceneDocument * mapTheme() const;
 
     /**
      * @brief Return a QAbstractItemModel containing GPX files.
      */
-    GpxFileModel  *gpxFileModel();
+    GpxFileModel * gpxFileModel();
 
     /**
      * @brief Return a QAbstractItemModel containing files.
      */
-    FileViewModel* fileViewModel() const;
+    FileViewModel * fileViewModel() const;
 
     /**
      * @brief Retrieve the map quality depending on the view context 

@@ -759,33 +759,6 @@ qreal MarbleWidget::centerLongitude() const
     return d->m_map->centerLongitude();
 }
 
-bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
-{
-    int  imageHalfWidth  = width() / 2;
-    int  imageHalfHeight = height() / 2;
-
-    const qreal  inverseRadius = 1.0 / (qreal)(radius());
-
-    if ( radius() > sqrt( (qreal)(( x - imageHalfWidth ) * ( x - imageHalfWidth )
-        + ( y - imageHalfHeight ) * ( y - imageHalfHeight )) ) )
-    {
-        qreal qx = inverseRadius * (qreal)( x - imageHalfWidth );
-        qreal qy = inverseRadius * (qreal)( y - imageHalfHeight );
-        qreal qr = 1.0 - qy * qy;
-
-        qreal qr2z = qr - qx * qx;
-        qreal qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
-
-        Quaternion  qpos( 0.0, qx, qy, qz );
-        qpos.rotateAroundAxis( planetAxis() );
-        q = qpos;
-
-        return true;
-    } else {
-        return false;
-    }
-}
-
 const QRegion MarbleWidget::activeRegion()
 {
     return d->m_map->viewParams()->currentProjection()->helper()->activeRegion();
