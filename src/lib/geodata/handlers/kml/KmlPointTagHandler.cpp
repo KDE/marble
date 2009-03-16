@@ -46,7 +46,7 @@ GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
         return parentItem.nodeAs<GeoDataPlacemark>();
-    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
+    } else if( parentItem.represents( kmlTag_MultiGeometry ) ) {
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_Point << "> returning: " << parentItem.nodeAs<GeoDataMultiGeometry>()
                  << " parent item name: " << parentItem.qualifiedName().first;

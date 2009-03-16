@@ -46,14 +46,14 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.represents( kmlTag_Placemark )
-         || parentItem.represents( kmlTag_LineString )
-         || parentItem.represents( kmlTag_MultiGeometry )
-         || parentItem.represents( kmlTag_LinearRing ) ) {
+    if( parentItem.represents( kmlTag_Point )
+     || parentItem.represents( kmlTag_LineString )
+     || parentItem.represents( kmlTag_MultiGeometry )
+     || parentItem.represents( kmlTag_LinearRing ) ) {
         QStringList  coordinatesLines = parser.readElementText().trimmed().split( QRegExp("\\s"), QString::SkipEmptyParts );
         Q_FOREACH( const QString& line, coordinatesLines ) {
             QStringList coordinates = line.trimmed().split( ',' );
-            if ( parentItem.represents( kmlTag_Placemark ) ) {
+            if ( parentItem.represents( kmlTag_Point ) ) {
                 GeoDataPoint coord;
                 if ( coordinates.size() == 2 ) {
                     coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
