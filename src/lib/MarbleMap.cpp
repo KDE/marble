@@ -552,11 +552,16 @@ void MarbleMap::removePlacemarkKey( const QString &key )
 
 QPixmap MarbleMap::mapScreenShot()
 {
-#if 0  //FIXME: reimplement without grabWidget
-    return QPixmap::grabWidget( this );
-#else
-    return QPixmap();
-#endif
+    QPixmap screenshotPixmap( size() );
+    screenshotPixmap.fill( Qt::transparent );
+
+    GeoPainter painter( &screenshotPixmap, viewParams()->viewport(), Marble::Print );
+    painter.begin( &screenshotPixmap );
+    QRect dirtyRect( QPoint(), size() );
+    paint( painter, dirtyRect );
+    painter.end();
+
+    return screenshotPixmap;
 }
 
 bool MarbleMap::propertyValue( const QString& name ) const
@@ -875,33 +880,6 @@ bool MarbleMap::geoCoordinates( int x, int y,
     return d->m_viewParams.currentProjection()
         ->geoCoordinates( x, y, d->m_viewParams.viewport(),
                           lon, lat, unit );
-}
-
-bool MarbleMap::globalQuaternion( int x, int y, Quaternion &q)
-{
-    int  imageHalfWidth  = width() / 2;
-    int  imageHalfHeight = height() / 2;
-
-    const qreal  inverseRadius = 1.0 / (qreal)(radius());
-
-    if ( radius() > sqrt( (qreal)(( x - imageHalfWidth ) * ( x - imageHalfWidth )
-        + ( y - imageHalfHeight ) * ( y - imageHalfHeight )) ) )
-    {
-        qreal qx = inverseRadius * (qreal)( x - imageHalfWidth );
-        qreal qy = inverseRadius * (qreal)( y - imageHalfHeight );
-        qreal qr = 1.0 - qy * qy;
-
-        qreal qr2z = qr - qx * qx;
-        qreal qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
-
-        Quaternion  qpos( 0.0, qx, qy, qz );
-        qpos.rotateAroundAxis( planetAxis() );
-        q = qpos;
-
-        return true;
-    } else {
-        return false;
-    }
 }
 
 // Used to be paintEvent()
