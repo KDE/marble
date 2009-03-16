@@ -744,7 +744,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void clearPersistentTileCache();
     /**
      * @brief  Set the limit of the persistent (on hard disc) tile cache.
-     * @param  bytes The limit in kilobytes.
+     * @param  bytes The limit in kilobytes, 0 means no limit.
      */
     void setPersistentTileCacheLimit( quint64 kiloBytes );
 

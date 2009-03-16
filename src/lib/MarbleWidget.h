@@ -833,7 +833,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void clearPersistentTileCache();
     /**
      * @brief  Set the limit of the persistent (on hard disc) tile cache.
-     * @param  kilobytes The limit in kilobytes.
+     * @param  kilobytes The limit in kilobytes, 0 means no limit.
      */
     void setPersistentTileCacheLimit( quint64 kiloBytes );
 

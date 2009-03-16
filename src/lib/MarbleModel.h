@@ -156,15 +156,14 @@ class MARBLE_EXPORT MarbleModel : public QObject
     /**
      * @brief Set a new map theme to use.
      * @param selectedMap  the identifier of the selected map theme
-     * @param parent       the parent widget
      * @param currentProjection  the current projection
      *
      * This function sets the map theme, i.e. combination of tile set
      * and color scheme to use.  If the map theme is not previously
      * used, some basic tiles are created and a progress dialog is
-     * shown.  This is what the parent parameter is used for.
+     * shown.
      *
-     * NOTE: Both the parent and currentProjection parameters will
+     * NOTE: The currentProjection parameters will
      *       disappear soon.
      *
      * The ID of the new maptheme. To ensure that a unique 
@@ -302,7 +301,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     /**
      * @brief Signal that the map theme has changed, and to which theme.
-     * @param name the identifier of the new map theme.
+     * @param mapTheme the identifier of the new map theme.
      * @see  mapTheme
      * @see  setMapTheme
      */

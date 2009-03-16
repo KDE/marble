@@ -153,6 +153,9 @@ const qreal RAD2INT = 21600.0 / M_PI;
 // Deprecated: Please use model()->planetRadius() instead.
 const qreal EARTH_RADIUS = 6378000.0;
 
+// Maximum level of base tiles
+const quint8 maxBaseTileLevel = 4;
+
 class MarbleGlobalPrivate;
 class MarbleLocale;
 

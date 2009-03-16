@@ -451,8 +451,8 @@ void MarblePart::writeSettings()
     MarbleSettings::setCenterOnSun( m_controlView->sunLocator()->getCentered() );
 
     // Caches
-    MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->volatileTileCacheLimit() / 1000 );
-    MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->persistentTileCacheLimit() / 1000 );
+    MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->volatileTileCacheLimit() / 1024 );
+    MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->persistentTileCacheLimit() / 1024 );
 
     // Proxy
     MarbleSettings::setProxyUrl( m_controlView->marbleWidget()->proxyHost() );
@@ -800,8 +800,9 @@ void MarblePart::slotUpdateSettings()
 
     m_controlView->marbleWidget()->setAnimationsEnabled( MarbleSettings::animateTargetVoyage() );
 
-    m_controlView->marbleWidget()->setPersistentTileCacheLimit( MarbleSettings::persistentTileCacheLimit() * 1000 );
-    m_controlView->marbleWidget()->setVolatileTileCacheLimit( MarbleSettings::volatileTileCacheLimit() * 1000 );
+    // Cache
+    m_controlView->marbleWidget()->setPersistentTileCacheLimit( MarbleSettings::persistentTileCacheLimit() * 1024 );
+    m_controlView->marbleWidget()->setVolatileTileCacheLimit( MarbleSettings::volatileTileCacheLimit() * 1024 );
 
     m_controlView->marbleWidget()->setProxy( MarbleSettings::proxyUrl(),
                                              MarbleSettings::proxyPort() );

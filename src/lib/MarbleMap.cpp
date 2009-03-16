@@ -36,7 +36,6 @@
 #include "AbstractScanlineTextureMapper.h"
 #include "GeoPainter.h"
 #include "FileViewModel.h"
-#include "FileStoragePolicy.h"
 #include "GeoDataFeature.h"
 #include "GeoDataCoordinates.h"
 #include "GeoSceneDocument.h"
@@ -72,7 +71,7 @@ using namespace Marble;
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent )
         : m_parent( parent ),
-          m_persistentTileCacheLimit( 1024*1024*300 ), // 300 MB
+          m_persistentTileCacheLimit( 0 ), // No limit
           m_volatileTileCacheLimit( 1024*1024*30 ) // 30 MB
 {
 }
@@ -108,6 +107,14 @@ void MarbleMapPrivate::construct()
                        m_parent,              SLOT( updateSun() ) );
     m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
                        m_parent,              SLOT( centerSun() ) );
+
+    // A new instance of FileStorageWatcher.
+    // The thread will be started at setting persistent tile cache size.
+    m_storageWatcher = new FileStorageWatcher( MarbleDirs::localPath(), m_parent );
+    m_parent->connect( m_parent, SIGNAL( themeChanged( QString ) ),
+		       m_storageWatcher, SLOT( updateTheme( QString ) ) );
+    // Setting the theme to the current theme.
+    m_storageWatcher->updateTheme( m_parent->mapThemeId() );
 }
 
 // Used to be resizeEvent()
@@ -351,6 +358,7 @@ MarbleMap::~MarbleMap()
     d->m_height = 0;
 
     setDownloadManager( 0 );
+    d->m_storageWatcher->quit();
 
     if ( d->m_modelIsOwned )
         delete d->m_model;
@@ -1121,6 +1129,17 @@ void MarbleMap::clearPersistentTileCache()
 void MarbleMap::setPersistentTileCacheLimit( quint64 kiloBytes )
 {
     d->m_persistentTileCacheLimit = kiloBytes;
+    d->m_storageWatcher->setCacheLimit( kiloBytes * 1024 );
+    
+    if( kiloBytes != 0 )
+    {
+	if( !d->m_storageWatcher->isRunning() )
+	    d->m_storageWatcher->start( QThread::IdlePriority );
+    }
+    else
+    {
+	d->m_storageWatcher->quit();
+    }
     // TODO: trigger update
 }
 
@@ -1153,8 +1172,16 @@ void MarbleMap::setDownloadUrl( const QUrl &url )
     if ( downloadManager != 0 )
         downloadManager->setServerUrl( url );
     else {
+        d->m_storagePolicy = new FileStoragePolicy( MarbleDirs::localPath(), this );
+	
+	// Connecting the new FileStoragePolicy to the FileStorageWatcher
+	connect( d->m_storagePolicy, SIGNAL( cleared() ),
+	         d->m_storageWatcher, SLOT( resetCurrentSize() ) );
+	connect( d->m_storagePolicy, SIGNAL( sizeChanged( qint64 ) ),
+		 d->m_storageWatcher, SLOT( addToCurrentSize( qint64 ) ) );
+
         downloadManager =
-            new HttpDownloadManager( url, new FileStoragePolicy( MarbleDirs::localPath() ) );
+            new HttpDownloadManager( url, d->m_storagePolicy );
         d->m_model->setDownloadManager( downloadManager );
     }
 }
