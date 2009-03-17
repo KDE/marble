@@ -39,8 +39,6 @@ FileStorageWatcherThread::FileStorageWatcherThread( const QString &dataDirectory
       m_dataDirectory( dataDirectory ),
       m_deleting( false )
 {
-    m_dataDirectory = dataDirectory;
-    
     m_currentCacheSize = getCurrentCacheSize();
     
     // For now setting cache limit to 0. This won't delete anything
