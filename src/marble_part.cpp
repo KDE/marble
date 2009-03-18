@@ -172,11 +172,11 @@ void MarblePart::exportMapScreenShot()
 
     if ( !fileName.isEmpty() ) {
         // Take the case into account where no file format is indicated
-        char * format = 0;
+        const char * format = 0;
         if ( !fileName.endsWith("png", Qt::CaseInsensitive)
            && !fileName.endsWith("jpg", Qt::CaseInsensitive) )
         {
-            format = (char*)"JPG";
+            format = "JPG";
         }
 
         QPixmap mapPixmap = m_controlView->mapScreenShot();
