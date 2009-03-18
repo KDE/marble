@@ -228,24 +228,18 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
     GeoDataObject *childItem = 0;
 
     /* go down into GeoDataContainers */
-    if( dynamic_cast<GeoDataDocument*>( parentItem ) || 
-        dynamic_cast<GeoDataFolder*>( parentItem ) )
-    {
-        *childItem =     dynamic_cast<GeoDataContainer*>( 
-                            parentItem )->features().at( row );
-    }
-
-    if( dynamic_cast<GeoDataPlacemark*>( parentItem ) )
-    {
+    if( dynamic_cast<GeoDataDocument*>( parentItem ) ) {
+        childItem = &(dynamic_cast<GeoDataDocument*>( parentItem )->features()[ row ]);
+    } else if ( dynamic_cast<GeoDataFolder*>( parentItem ) ) {
+        childItem = &(dynamic_cast<GeoDataFolder*>( parentItem )->features()[ row ]);
+    } else if( dynamic_cast<GeoDataPlacemark*>( parentItem ) ) {
         /* as said above - if you add styles, please check for the row over here */
         childItem = dynamic_cast<GeoDataPlacemark*>( parentItem )->geometry();
-    }
-    
-    if( dynamic_cast<GeoDataMultiGeometry*>( parentItem ) )
-    {
-        *childItem = dynamic_cast<GeoDataMultiGeometry*>( parentItem )->at( row );
+    } else if( dynamic_cast<GeoDataMultiGeometry*>( parentItem ) ) {
+        childItem = &(dynamic_cast<GeoDataMultiGeometry*>( parentItem )->at( row ));
     }
 
+    qDebug() << "childItem:" << childItem;
     if ( childItem )
         return createIndex( row, column, childItem );
     else
