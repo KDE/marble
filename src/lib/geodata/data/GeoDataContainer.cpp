@@ -87,7 +87,7 @@ QVector<GeoDataPlacemark> GeoDataContainer::placemarks() const
     return results;
 }
 
-QVector<GeoDataFeature> GeoDataContainer::features() const
+QVector<GeoDataFeature>& GeoDataContainer::features() const
 {
     return p()->m_vector;
 }

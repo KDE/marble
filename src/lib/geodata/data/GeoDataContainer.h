@@ -68,7 +68,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      *
      * @see GeoDataFeature
      */
-    QVector<GeoDataFeature> features() const;
+    QVector<GeoDataFeature>& features() const;
 
     /**
      * @brief A convenience function that returns all placemarks in this container.
