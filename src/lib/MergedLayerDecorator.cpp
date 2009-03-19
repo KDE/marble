@@ -1,4 +1,5 @@
 // Copyright 2008 David Roberts <dvdr18@gmail.com>
+// Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 // 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -35,7 +36,12 @@
 using namespace Marble;
 
 MergedLayerDecorator::MergedLayerDecorator(SunLocator* sunLocator)
-    : m_sunLocator(sunLocator),
+    : m_tile( 0 ),
+      m_x( -1 ),
+      m_y( -1 ),
+      m_level( - 1 ),
+      m_id(),
+      m_sunLocator(sunLocator),
       m_cloudlayer(true),
       m_showTileId(false),
       m_cityLightsTheme(0),
