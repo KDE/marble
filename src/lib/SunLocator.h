@@ -44,7 +44,7 @@ class MARBLE_EXPORT SunLocator : public QObject
     explicit SunLocator(ExtDateTime *dateTime, Planet *planet);
     virtual ~SunLocator();
 
-    qreal shading(qreal lon, qreal lat) const;
+    qreal shading(qreal lon, qreal a, qreal c) const;
     void  shadePixel(QRgb& pixcol, qreal shade) const;
     void  shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, qreal shade) const;
 

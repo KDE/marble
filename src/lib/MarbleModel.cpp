@@ -323,8 +323,11 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         qDebug() << "Does not contain any vector layers! ";
 */
     //Don't change the planet unless we have to...
-    if( d->m_mapTheme->head()->target().toLower() != d->m_planet->id() )
+    if( d->m_mapTheme->head()->target().toLower() != d->m_planet->id() ) {
+        qDebug() << "Changing Planet";
         *(d->m_planet) = Planet( d->m_mapTheme->head()->target().toLower() );
+        sunLocator()->setPlanet(d->m_planet);
+    }
 
     if ( d->m_mapTheme->map()->hasTextureLayers() ) {
         // If the tiles aren't already there, put up a progress dialog

@@ -81,6 +81,8 @@ MergedLayerDecorator::~MergedLayerDecorator()
 
 void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapTheme )
 {
+    QTime time;
+    time.start();
         if ( !m_blueMarbleTheme ) {
             initClouds();
         }
@@ -96,18 +98,18 @@ void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapT
         }
     }
     if ( m_sunLocator->getShow() && mapTheme ) {
-//         if (   mapTheme->head()->target() == "earth" 
-//             || mapTheme->head()->target() == "moon" ) {
 
             // Initialize citylights layer if it hasn't happened already
             if ( !m_cityLightsTheme ) {
                 initCityLights();
             }
+            QTime time2;
+            time2.start();
             paintSunShading();
-//         }
     }
-    if ( m_showTileId )
+    if ( m_showTileId ) {
       paintTileId( themeId );
+    }
 }
 
 void MergedLayerDecorator::setShowClouds( bool visible )
@@ -214,6 +216,9 @@ void MergedLayerDecorator::paintSunShading()
             return;
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
             qreal lat = lat_scale * ( m_y * tileHeight + cur_y ) - 0.5*M_PI;
+            qreal a = sin((lat-DEG2RAD * m_sunLocator->getLat())/2.0);
+            qreal c = cos(lat)*cos(DEG2RAD * m_sunLocator->getLat());
+
             QRgb* scanline  = (QRgb*)m_tile->scanLine( cur_y );
             QRgb* nscanline = (QRgb*)nighttile.scanLine( cur_y );
 
@@ -229,7 +234,7 @@ void MergedLayerDecorator::paintSunShading()
                 if ( interpolate == true ) {
                     int check = cur_x + n;
                     qreal checklon   = lon_scale * ( m_x * tileWidth + check );
-                    shade = m_sunLocator->shading(checklon, lat);
+                    shade = m_sunLocator->shading(checklon, a, c);
 
                     // if the shading didn't change across the interpolation
                     // interval move on and don't change anything.
@@ -252,7 +257,7 @@ void MergedLayerDecorator::paintSunShading()
                     for ( int t = 0; t < n ; ++t )
                     {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                        shade = m_sunLocator->shading(lon, lat);
+                        shade = m_sunLocator->shading(lon, a, c);
                         m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
                         ++scanline;
                         ++nscanline;
@@ -264,7 +269,7 @@ void MergedLayerDecorator::paintSunShading()
                     // Make sure we don't exceed the image memory
                     if ( cur_x < tileWidth ) {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                        shade = m_sunLocator->shading(lon, lat);
+                        shade = m_sunLocator->shading(lon, a, c);
                         m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
                         ++scanline;
                         ++nscanline;
@@ -277,6 +282,9 @@ void MergedLayerDecorator::paintSunShading()
     } else {
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
             qreal lat = lat_scale * (m_y * tileHeight + cur_y) - 0.5*M_PI;
+            qreal a = sin((lat-DEG2RAD * m_sunLocator->getLat())/2.0);
+            qreal c = cos(lat)*cos(DEG2RAD * m_sunLocator->getLat());
+
             QRgb* scanline = (QRgb*)m_tile->scanLine( cur_y );
 
             qreal shade = 0;
@@ -291,7 +299,7 @@ void MergedLayerDecorator::paintSunShading()
                 if ( interpolate == true ) {
                     int check = cur_x + n;
                     qreal checklon   = lon_scale * ( m_x * tileWidth + check );
-                    shade = m_sunLocator->shading(checklon, lat);
+                    shade = m_sunLocator->shading(checklon, a, c);
 
                     // if the shading didn't change across the interpolation
                     // interval move on and don't change anything.
@@ -312,7 +320,7 @@ void MergedLayerDecorator::paintSunShading()
                     for ( int t = 0; t < n ; ++t )
                     {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                        shade = m_sunLocator->shading(lon, lat);
+                        shade = m_sunLocator->shading(lon, a, c);
                         m_sunLocator->shadePixel( *scanline, shade );
                         ++scanline;
                         ++cur_x;
@@ -323,7 +331,7 @@ void MergedLayerDecorator::paintSunShading()
                     // Make sure we don't exceed the image memory
                     if ( cur_x < tileWidth ) {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                        shade = m_sunLocator->shading(lon, lat);
+                        shade = m_sunLocator->shading(lon, a, c);
                         m_sunLocator->shadePixel( *scanline, shade );
                         ++scanline;
                         ++cur_x;

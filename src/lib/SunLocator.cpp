@@ -14,6 +14,7 @@
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
 
+#include "global.h"
 #include "SunLocator.h"
 #include "ExtDateTime.h"
 #include "Planet.h"
@@ -34,8 +35,6 @@ using std::cos;
 using std::asin;
 using std::abs;
 
-qreal deg2rad(qreal x) { return x*M_PI/180.0; }
-qreal rad2deg(qreal x) { return x*180.0/M_PI; }
 
 // epoch J2000 = 1 January 2000, noon Terrestrial Time (11:58:55.816 UTC)
 const int J2000 = 2451545;
@@ -147,22 +146,16 @@ void SunLocator::updatePosition()
 
     // convert positive north to positive south
     d->m_lat = -delta_sun;
-
-    /*
-    qDebug() << "alpha_sun =" << rad2deg(alpha_sun);
-    qDebug() << "delta_sun =" << rad2deg(delta_sun);
-    qDebug() << "d->m_lon =" << rad2deg(d->m_lon);
-    qDebug() << "d->m_lat =" << rad2deg(d->m_lat);
-    */
 }
 
 
-qreal SunLocator::shading(qreal lon, qreal lat) const
+qreal SunLocator::shading(qreal lon, qreal a, qreal c) const
 {
     // haversine formula
-    qreal a = sin((lat-d->m_lat)/2.0);
     qreal b = sin((lon-d->m_lon)/2.0);
-    qreal h = (a*a)+cos(lat)*cos(d->m_lat)*(b*b); 
+//    qreal g = sin((lat-d->m_lat)/2.0);
+//    qreal h = (g*g)+cos(lat)*cos(d->m_lat)*(b*b); 
+    qreal h = (a*a) + c * (b*b); 
 
     /*
       h = 0.0 // directly beneath sun
@@ -284,9 +277,13 @@ void SunLocator::setCentered(bool centered)
 
 void SunLocator::setPlanet(Planet *planet)
 {
+    /*
+    // This won't work as expected if the same pointer 
+    // points to different planets
     if ( planet == d->m_planet ) {
         return;
     }
+    */
 
     Planet* previousPlanet = d->m_planet;
 
@@ -294,7 +291,9 @@ void SunLocator::setPlanet(Planet *planet)
     d->m_planet = planet;
     updatePosition();
 
-    //Why does it look at the previous body instead of the new one?
+    // Initially there might be no planet set.
+    // In that case we don't want an update.
+    // Update the shading in all other cases.
     if ( !previousPlanet->id().isEmpty() ) {
         emit updateSun();
     }
@@ -322,12 +321,12 @@ bool SunLocator::getCentered() const
 
 qreal SunLocator::getLon() const
 {
-    return d->m_lon * 180.0 / M_PI;
+    return d->m_lon * RAD2DEG;
 }
 
 qreal SunLocator::getLat() const
 {
-    return -d->m_lat * 180.0 / M_PI;
+    return d->m_lat * RAD2DEG;
 }
 
 ExtDateTime* SunLocator::datetime() const
