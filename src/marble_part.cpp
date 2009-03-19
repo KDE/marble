@@ -235,23 +235,11 @@ void MarblePart::showFullScreen( bool isChecked )
 {
     if ( isChecked ) {
         if ( KApplication::activeWindow() )
-//  TODO: Deprecate alternative once KDE 4.0 is outdated
-#if KDE_VERSION >= KDE_MAKE_VERSION(4, 0, 60)
             KToggleFullScreenAction::setFullScreen( KApplication::activeWindow(), true );
-#else
-	    KApplication::activeWindow()->setWindowState( KApplication::activeWindow()->windowState() | Qt::WindowFullScreen );
-#endif
-	;
     }
     else {
         if ( KApplication::activeWindow() )
-//  TODO: Deprecate alternative once KDE 4.0 is outdated
-#if KDE_VERSION >= KDE_MAKE_VERSION(4, 0, 60)
             KToggleFullScreenAction::setFullScreen( KApplication::activeWindow(), false );
-#else
-	    KApplication::activeWindow()->setWindowState( KApplication::activeWindow()->windowState() & ~Qt::WindowFullScreen );
-#endif
-	;
     }
 
     m_fullScreenAct->setChecked( isChecked ); // Sync state with the GUI
