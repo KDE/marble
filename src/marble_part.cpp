@@ -417,7 +417,8 @@ void MarblePart::writeSettings()
     MarbleSettings::setShowCurrentLocation( m_currentLocationAction->isChecked() );
 
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Marble::Still ) );
-    MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->mapQuality( Marble::Animation )  );
+    MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->
+                                         mapQuality( Marble::Animation ) );
 
     MarbleSettings::setDistanceUnit( MarbleGlobal::getInstance()->locale()->distanceUnit() );
     MarbleSettings::setAngleUnit( m_controlView->marbleWidget()->defaultAngleUnit() );
@@ -428,8 +429,10 @@ void MarblePart::writeSettings()
     MarbleSettings::setCenterOnSun( m_controlView->sunLocator()->getCentered() );
 
     // Caches
-    MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->volatileTileCacheLimit() / 1024 );
-    MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->persistentTileCacheLimit() / 1024 );
+    MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->
+                                               volatileTileCacheLimit() / 1024 );
+    MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->
+                                                 persistentTileCacheLimit() / 1024 );
 
     // Proxy
     MarbleSettings::setProxyUrl( m_controlView->marbleWidget()->proxyHost() );
@@ -463,7 +466,8 @@ void MarblePart::setupActions()
     KAction action5( i18n("Panoramio Photos"), this );
 
     // Action: Print Map
-    m_printMapAction = KStandardAction::print( this, SLOT( printMapScreenShot() ), actionCollection() );
+    m_printMapAction = KStandardAction::print( this, SLOT( printMapScreenShot() ),
+                                               actionCollection() );
 
     // Action: Export Map
     m_exportMapAction = new KAction( this );
@@ -516,7 +520,9 @@ void MarblePart::setupActions()
 			   actionCollection() );
 
     // Action: Get hot new stuff
-    m_newStuffAction = KNS::standardAction( i18n("Download Maps..."), this, SLOT(showNewStuffDialog()), actionCollection(), "new_stuff");
+    m_newStuffAction = KNS::standardAction( i18n("Download Maps..."), this,
+                                            SLOT( showNewStuffDialog() ),
+                                            actionCollection(), "new_stuff" );
     m_newStuffAction->setStatusTip(i18n("&Download new maps"));
     m_newStuffAction->setShortcut( Qt::CTRL + Qt::Key_N );
 
@@ -766,11 +772,17 @@ void MarblePart::slotUpdateSettings()
 
     m_controlView->marbleWidget()->setDefaultFont( MarbleSettings::mapFont() );
 
-    m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::stillQuality(), Marble::Still );
-    m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(), Marble::Animation );
+    m_controlView->marbleWidget()->
+        setMapQuality( (Marble::MapQuality) MarbleSettings::stillQuality(),
+                       Marble::Still );
+    m_controlView->marbleWidget()->
+        setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(),
+                       Marble::Animation );
 
-    m_controlView->marbleWidget()->setDefaultAngleUnit( (Marble::AngleUnit) MarbleSettings::angleUnit() );
-    MarbleGlobal::getInstance()->locale()->setDistanceUnit( (Marble::DistanceUnit) MarbleSettings::distanceUnit() );
+    m_controlView->marbleWidget()->
+        setDefaultAngleUnit( (Marble::AngleUnit) MarbleSettings::angleUnit() );
+    MarbleGlobal::getInstance()->locale()->
+        setDistanceUnit( (Marble::DistanceUnit) MarbleSettings::distanceUnit() );
 
     m_distance = m_controlView->marbleWidget()->distanceString();
     updateStatusBar();
@@ -778,8 +790,10 @@ void MarblePart::slotUpdateSettings()
     m_controlView->marbleWidget()->setAnimationsEnabled( MarbleSettings::animateTargetVoyage() );
 
     // Cache
-    m_controlView->marbleWidget()->setPersistentTileCacheLimit( MarbleSettings::persistentTileCacheLimit() * 1024 );
-    m_controlView->marbleWidget()->setVolatileTileCacheLimit( MarbleSettings::volatileTileCacheLimit() * 1024 );
+    m_controlView->marbleWidget()->
+        setPersistentTileCacheLimit( MarbleSettings::persistentTileCacheLimit() * 1024 );
+    m_controlView->marbleWidget()->
+        setVolatileTileCacheLimit( MarbleSettings::volatileTileCacheLimit() * 1024 );
 
     m_controlView->marbleWidget()->setProxy( MarbleSettings::proxyUrl(),
                                              MarbleSettings::proxyPort() );
