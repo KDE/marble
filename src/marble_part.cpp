@@ -315,19 +315,14 @@ void MarblePart::readSettings()
     if ( MarbleSettings::onStartup() == Marble::LastLocationVisited ) {
         m_controlView->marbleWidget()->centerOn(
             MarbleSettings::quitLongitude(),
-            MarbleSettings::quitLatitude()
-        );
-        m_controlView->marbleWidget()->zoomView(
-            MarbleSettings::quitZoom()
-        );
+            MarbleSettings::quitLatitude() );
+        m_controlView->marbleWidget()->zoomView( MarbleSettings::quitZoom() );
     }
 
     // Set home position
-    m_controlView->marbleWidget()->setHome(
-        MarbleSettings::homeLongitude(),
-        MarbleSettings::homeLatitude(),
-        MarbleSettings::homeZoom()
-    );
+    m_controlView->marbleWidget()->setHome( MarbleSettings::homeLongitude(),
+                                            MarbleSettings::homeLatitude(),
+                                            MarbleSettings::homeZoom() );
     if ( MarbleSettings::onStartup() == Marble::ShowHomeLocation ) {
         m_controlView->marbleWidget()->goHome();
     }
