@@ -40,6 +40,12 @@ GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
 {
 }
 
+GeoDataPoint::GeoDataPoint( const GeoDataGeometry& other )
+  : GeoDataGeometry( other )
+    
+{
+}
+
 GeoDataPoint::GeoDataPoint()
     : GeoDataGeometry( new GeoDataPointPrivate )
 {

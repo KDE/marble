@@ -28,7 +28,7 @@ GeoDataLineString::GeoDataLineString(GeoDataLineStringPrivate* priv)
 {
 }
 
-GeoDataLineString::GeoDataLineString( const GeoDataLineString & other )
+GeoDataLineString::GeoDataLineString( const GeoDataGeometry & other )
   : GeoDataGeometry( other )
 {
 }

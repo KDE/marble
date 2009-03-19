@@ -26,6 +26,11 @@ GeoDataMultiGeometry::GeoDataMultiGeometry()
 {
 }
 
+GeoDataMultiGeometry::GeoDataMultiGeometry( const GeoDataGeometry& other )
+    : GeoDataGeometry( other )
+{
+}
+
 GeoDataMultiGeometry::~GeoDataMultiGeometry()
 {
 }

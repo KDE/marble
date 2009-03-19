@@ -50,7 +50,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
     typedef QVector<GeoDataCoordinates>::ConstIterator ConstIterator;
     
     GeoDataLineString( TessellationFlags f = NoTessellation );
-    GeoDataLineString( const GeoDataLineString &other );
+    GeoDataLineString( const GeoDataGeometry &other );
 
     virtual ~GeoDataLineString();
 

@@ -24,7 +24,7 @@ GeoDataPolygon::GeoDataPolygon( TessellationFlags f )
 {
 }
 
-GeoDataPolygon::GeoDataPolygon( const GeoDataPolygon & other )
+GeoDataPolygon::GeoDataPolygon( const GeoDataGeometry & other )
   : GeoDataGeometry( other )
 {
 }

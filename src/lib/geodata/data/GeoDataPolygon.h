@@ -43,7 +43,7 @@ class GeoDataPolygonPrivate;
 class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
  public:
     explicit GeoDataPolygon( TessellationFlags f = NoTessellation );
-    GeoDataPolygon( const GeoDataPolygon &other );
+    GeoDataPolygon( const GeoDataGeometry &other );
 
     virtual ~GeoDataPolygon();
 
