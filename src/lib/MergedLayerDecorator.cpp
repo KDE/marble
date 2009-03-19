@@ -35,17 +35,17 @@
 using namespace Marble;
 
 MergedLayerDecorator::MergedLayerDecorator(SunLocator* sunLocator)
- : m_sunLocator(sunLocator),
-   m_cloudlayer(true),
-   m_showTileId(false),
-   m_cityLightsTheme(0),
-   m_blueMarbleTheme(0),
-   m_cityLightsTextureLayer(0),
-   m_cloudsTextureLayer(0)
+    : m_sunLocator(sunLocator),
+      m_cloudlayer(true),
+      m_showTileId(false),
+      m_cityLightsTheme(0),
+      m_blueMarbleTheme(0),
+      m_cityLightsTextureLayer(0),
+      m_cloudsTextureLayer(0)
 {
 }
 
-void MergedLayerDecorator::initClouds(){
+void MergedLayerDecorator::initClouds() {
     // look for the texture layers inside the themes
     // As long as we don't have an Layer Management Class we just lookup 
     // the name of the layer that has the same name as the theme ID
@@ -83,9 +83,9 @@ void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapT
 {
     QTime time;
     time.start();
-        if ( !m_blueMarbleTheme ) {
-            initClouds();
-        }
+    if ( !m_blueMarbleTheme ) {
+        initClouds();
+    }
     if ( m_cloudlayer && m_tile->depth() == 32 && m_level < 2 ) {
         bool show;
         if ( mapTheme && mapTheme->settings()->propertyAvailable( "clouds", show ) ) {
@@ -99,16 +99,16 @@ void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapT
     }
     if ( m_sunLocator->getShow() && mapTheme ) {
 
-            // Initialize citylights layer if it hasn't happened already
-            if ( !m_cityLightsTheme ) {
-                initCityLights();
-            }
-            QTime time2;
-            time2.start();
-            paintSunShading();
+        // Initialize citylights layer if it hasn't happened already
+        if ( !m_cityLightsTheme ) {
+            initCityLights();
+        }
+        QTime time2;
+        time2.start();
+        paintSunShading();
     }
     if ( m_showTileId ) {
-      paintTileId( themeId );
+        paintTileId( themeId );
     }
 }
 
@@ -195,11 +195,11 @@ void MergedLayerDecorator::paintSunShading()
     // TODO add support for 8-bit maps?
     // add sun shading
     const qreal  global_width  = m_tile->width()
-                                  * TileLoaderHelper::levelToColumn( m_cityLightsTextureLayer->levelZeroColumns(),
-                                                                     m_level );
+        * TileLoaderHelper::levelToColumn( m_cityLightsTextureLayer->levelZeroColumns(),
+                                           m_level );
     const qreal  global_height = m_tile->height()
-                                  * TileLoaderHelper::levelToRow( m_cityLightsTextureLayer->levelZeroRows(),
-                                                                  m_level );
+        * TileLoaderHelper::levelToRow( m_cityLightsTextureLayer->levelZeroRows(),
+                                        m_level );
     const qreal lon_scale = 2*M_PI / global_width;
     const qreal lat_scale = -M_PI / global_height;
     const int tileHeight = m_tile->height();
