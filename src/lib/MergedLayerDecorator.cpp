@@ -45,7 +45,8 @@ MergedLayerDecorator::MergedLayerDecorator(SunLocator* sunLocator)
 {
 }
 
-void MergedLayerDecorator::initClouds() {
+void MergedLayerDecorator::initClouds()
+{
     // look for the texture layers inside the themes
     // As long as we don't have an Layer Management Class we just lookup 
     // the name of the layer that has the same name as the theme ID
@@ -60,7 +61,8 @@ void MergedLayerDecorator::initClouds() {
     }
 }
 
-void MergedLayerDecorator::initCityLights(){
+void MergedLayerDecorator::initCityLights()
+{
     // look for the texture layers inside the themes
     // As long as we don't have an Layer Management Class we just lookup 
     // the name of the layer that has the same name as the theme ID
@@ -245,8 +247,7 @@ void MergedLayerDecorator::paintSunShading()
                         continue;
                     }
                     if ( shade == lastShade && shade == 0.0 ) {
-                        for ( int t = 0; t < n; ++t )
-                        {
+                        for ( int t = 0; t < n; ++t ) {
                             m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
                             ++scanline;
                             ++nscanline;
@@ -254,8 +255,7 @@ void MergedLayerDecorator::paintSunShading()
                         cur_x += n; 
                         continue;
                     }
-                    for ( int t = 0; t < n ; ++t )
-                    {
+                    for ( int t = 0; t < n ; ++t ) {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
                         shade = m_sunLocator->shading(lon, a, c);
                         m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
@@ -309,16 +309,14 @@ void MergedLayerDecorator::paintSunShading()
                         continue;
                     }
                     if ( shade == lastShade && shade == 0.0 ) {
-                        for ( int t = 0; t < n; ++t )
-                        {
+                        for ( int t = 0; t < n; ++t ) {
                             m_sunLocator->shadePixel( *scanline, shade );
                             ++scanline;
                         }
                         cur_x += n; 
                         continue;
                     }
-                    for ( int t = 0; t < n ; ++t )
-                    {
+                    for ( int t = 0; t < n ; ++t ) {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
                         shade = m_sunLocator->shading(lon, a, c);
                         m_sunLocator->shadePixel( *scanline, shade );
@@ -374,8 +372,7 @@ void MergedLayerDecorator::paintTileId(const QString& themeId)
     painter.setPen( testPen );
     painter.drawRect( strokeWidth / 2, strokeWidth / 2, 
                       m_tile->width()  - strokeWidth,
-                      m_tile->height() - strokeWidth
-    );
+                      m_tile->height() - strokeWidth );
     QFont testFont("Sans", 30, QFont::Bold);
     QFontMetrics testFm( testFont );
     painter.setFont( testFont );
