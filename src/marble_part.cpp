@@ -233,14 +233,8 @@ void MarblePart::setShowAtmosphere( bool isChecked )
 
 void MarblePart::showFullScreen( bool isChecked )
 {
-    if ( isChecked ) {
-        if ( KApplication::activeWindow() )
-            KToggleFullScreenAction::setFullScreen( KApplication::activeWindow(), true );
-    }
-    else {
-        if ( KApplication::activeWindow() )
-            KToggleFullScreenAction::setFullScreen( KApplication::activeWindow(), false );
-    }
+    if ( KApplication::activeWindow() )
+        KToggleFullScreenAction::setFullScreen( KApplication::activeWindow(), isChecked );
 
     m_fullScreenAct->setChecked( isChecked ); // Sync state with the GUI
 }
