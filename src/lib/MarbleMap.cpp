@@ -994,7 +994,13 @@ void MarbleMap::setShowClouds( bool visible )
         d->m_model->update();
     }
 }
+void MarbleMap::setShowTileId( bool visible )
+{
 
+    d->m_model->layerDecorator()->setShowTileId( visible );
+
+
+}
 void MarbleMap::setShowGrid( bool visible )
 {
     setPropertyValue( "coordinate-grid", visible );

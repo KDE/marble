@@ -115,6 +115,10 @@ int main(int argc, char *argv[])
         {
             window->marbleControl()->setFileViewTabShown(true);
         }
+        else if (strcmp( argv[ i ],"--tile-id" ) ==0 ) 
+        {
+	    window->marbleControl()->marbleWidget()->setShowTileId(true);
+        }
         else if ( QFile::exists( app.arguments().at( i ) ) 
                 && i != dataPathIndex )
             ( window->marbleControl() )->addPlacemarkFile( argv[i] );

@@ -620,6 +620,14 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void setShowClouds( bool visible );
 
     /**
+     * @brief Set whether the is tile is visible
+     * NOTE: This is part of the transitional debug API
+     *       and might be subject to changes until Marble 0.8
+     * @param visible visibility of the tile
+     */ 
+    void setShowTileId( bool visible );
+
+    /**
      * @brief  Set whether the atmospheric glow is visible
      * @param  visible  visibility of the atmospheric glow
      */

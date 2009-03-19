@@ -809,10 +809,19 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setShowFrameRate( bool visible );
 
     /**
+     * @brief Set whether the is tile is visible
+     * NOTE: This is part of the transitional debug API
+     *       and might be subject to changes until Marble 0.8
+     * @param visible visibility of the tile
+     */
+    void setShowTileId( bool visible);
+
+    /**
      * @brief Set the current Gps position
      * @param lat the new latitude value
      * @param lon the new longitude value
      */
+    
     void changeCurrentPosition( qreal lon, qreal lat );
 
      /**
