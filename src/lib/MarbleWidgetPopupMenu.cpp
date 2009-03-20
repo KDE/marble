@@ -83,9 +83,8 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 
     int  actionidx = 1;
 
-    QVector<QModelIndex>::const_iterator  it;
-    for ( it = m_featurelist.constBegin();
-          it != m_featurelist.constEnd(); ++it ) 
+    QVector<QModelIndex>::const_iterator it = m_featurelist.constBegin();
+    for (; it != m_featurelist.constEnd(); ++it )
     {
         QAction  *action = new QAction( (*it).data().toString(), m_lmbMenu );
         action->setData( actionidx );
