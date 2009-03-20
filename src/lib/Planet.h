@@ -28,7 +28,7 @@ public:
     Planet();
 
     ///Constructs a planet with @p id, filling orbital elements
-    Planet( const QString& id );
+    explicit Planet( const QString& id );
 
     ///Copy Constructor
     Planet( const Planet& other );
