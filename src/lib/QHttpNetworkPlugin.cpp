@@ -63,7 +63,7 @@ void QHttpHttpJob::execute()
     // if Url has query item like in panoramio API requests source.path()
     // chops it , this "if" gurantees its correct treatement
     QString cleanupPath;
-    if ( sourceUrl().hasQuery() == true ) {
+    if ( sourceUrl().hasQuery() ) {
         cleanupPath = QString( sourceUrl().toString( QUrl::RemoveAuthority | QUrl::RemoveScheme ) );
     }
     else {
