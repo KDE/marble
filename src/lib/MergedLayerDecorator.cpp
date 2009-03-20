@@ -17,7 +17,6 @@
 
 #include "MergedLayerDecorator.h"
 
-#include <QtCore/QFile>
 #include <QtCore/QDebug>
 #include <QtGui/QPainter>
 
