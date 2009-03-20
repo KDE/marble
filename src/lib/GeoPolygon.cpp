@@ -66,10 +66,13 @@ void GeoPolygon::setBoundary( qreal lonLeft, qreal latTop, qreal lonRight, qreal
         if ( xcenter < -M_PI )
             xcenter +=  2.0 * M_PI;
 
-        m_boundary.append( new GeoDataCoordinates( xcenter, 0.5 * (latTop + latBottom), 0.0, GeoDataCoordinates::Radian, 1 ) );
+        m_boundary.append( new GeoDataCoordinates( xcenter, 0.5 * (latTop + latBottom), 0.0,
+                                                   GeoDataCoordinates::Radian, 1 ) );
     }
     else
-        m_boundary.append( new GeoDataCoordinates( 0.5 * (lonLeft + lonRight), 0.5 * (latTop + latBottom), 0.0, GeoDataCoordinates::Radian, 1 ) );
+        m_boundary.append( new GeoDataCoordinates( 0.5 * (lonLeft + lonRight),
+                                                   0.5 * (latTop + latBottom), 0.0,
+                                                   GeoDataCoordinates::Radian, 1 ) );
 
     m_boundary.append( new GeoDataCoordinates( lonLeft,  latTop,    0.0, GeoDataCoordinates::Radian, 1 ));
     m_boundary.append( new GeoDataCoordinates( lonRight, latBottom, 0.0, GeoDataCoordinates::Radian, 1 ));
@@ -94,7 +97,8 @@ void GeoPolygon::displayBoundary()
     m_boundary.at(4)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
     qDebug() << "Boundary:" << lon << ", " << lat;
 
-//    qDebug() << "Points#: " << size() << " File: " << m_sourceFileName << " dateline " << getDateLine() << " Index: " << getIndex();
+//     qDebug() << "Points#: " << size() << " File: " << m_sourceFileName
+//              << " dateline " << getDateLine() << " Index: " << getIndex();
 }
 
 // ================================================================
@@ -164,7 +168,8 @@ void PntMapLoader::run()
 
     int  filelength = statbuf.st_size;
 	
-    if ((src = (unsigned char*) mmap (0, filelength, PROT_READ, MAP_SHARED, fd, 0)) == (unsigned char*) (caddr_t) -1)
+    if ((src = (unsigned char*) mmap (0, filelength, PROT_READ, MAP_SHARED, fd, 0))
+        == (unsigned char*) (caddr_t) -1)
         qDebug() << "mmap error for input";
 		
     short  header;
@@ -205,11 +210,15 @@ void PntMapLoader::run()
             else 
                 polyline->setClosed( true );
 
-            polyline->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, 5 ) );
+            polyline->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD,
+                                                  0.0, GeoDataCoordinates::Radian, 5 ) );
         }
         else {
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
-            m_parent->last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) ); 
+            m_parent->last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD,
+                                                          (qreal)(iLat) * INT2RAD, 0.0,
+                                                          GeoDataCoordinates::Radian,
+                                                          (int)(header) ) ); 
         }
         ++count;
     }
@@ -256,11 +265,15 @@ void PntMapLoader::run()
             else 
                 polyline->setClosed( true );
 
-            polyline->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, 5 ) );
+            polyline->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD,
+                                                  0.0, GeoDataCoordinates::Radian, 5 ) );
         }
         else {
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
-            m_parent->last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) );
+            m_parent->last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD,
+                                                          (qreal)(iLat) * INT2RAD, 0.0,
+                                                          GeoDataCoordinates::Radian,
+                                                          (int)(header) ) );
         }
         ++count;
     }
