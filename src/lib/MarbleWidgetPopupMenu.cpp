@@ -28,11 +28,10 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
                                          MarbleModel *model)
     : QObject(widget),
       m_model(model),
-      m_widget(widget) 
+      m_widget(widget),
+      m_lmbMenu( new QMenu( m_widget ) ),
+      m_rmbMenu( new QMenu( m_widget ) )
 {
-    m_lmbMenu = new QMenu( m_widget );
-    m_rmbMenu = new QMenu( m_widget );
-
     connect( m_lmbMenu, SIGNAL( triggered( QAction* ) ),
              this,      SLOT( showFeatureInfo( QAction* ) ) );
     createActions();

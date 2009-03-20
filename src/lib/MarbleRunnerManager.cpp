@@ -38,14 +38,12 @@ namespace Marble
 {
 
 MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
-            : QObject(parent)
+    : QObject(parent),
+      m_activeRunners(0),
+      m_lastString(""),
+      m_model(new MarblePlacemarkModel(0))
 {
     qRegisterMetaType<QVector<GeoDataPlacemark*> >("QVector<GeoDataPlacemark*>");
-
-    m_model = new MarblePlacemarkModel(0);
-    m_activeRunners = 0;
-    m_lastString = "";
-    
 }
 
 MarbleRunnerManager::~MarbleRunnerManager()

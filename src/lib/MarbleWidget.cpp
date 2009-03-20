@@ -67,6 +67,7 @@ class MarbleWidgetPrivate
     MarbleWidgetPrivate( MarbleMap *map, MarbleWidget *parent )
         : m_widget( parent ),
           m_map( map ),
+          m_model( map->model() ),
           m_viewContext( Marble::Still ),
           m_stillQuality( Marble::High ), m_animationQuality( Marble::Low ),
           m_animationsEnabled( false ),
@@ -75,7 +76,6 @@ class MarbleWidgetPrivate
           m_proxyHost(),
           m_proxyPort( 0 )
     {
-        m_model = m_map->model();
     }
 
     ~MarbleWidgetPrivate()
