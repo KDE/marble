@@ -295,10 +295,8 @@ int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
     QString str;
     bool ok = true;
 
-    QStringList::const_iterator constIterator;
-    for ( constIterator = leveldirs.constBegin();
-          constIterator != leveldirs.constEnd();
-         ++constIterator)
+    QStringList::const_iterator constIterator = leveldirs.constBegin();
+    for (; constIterator != leveldirs.constEnd(); ++constIterator )
     {
         int value = (*constIterator).toInt( &ok, 10 );
         if ( ok && value > maxtilelevel )
