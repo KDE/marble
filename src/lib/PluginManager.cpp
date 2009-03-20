@@ -29,10 +29,6 @@ namespace Marble
 class PluginManagerPrivate
 {
  public:
-    PluginManagerPrivate()
-    {
-    }
-
     QList<MarbleRenderPlugin *> m_renderPlugins;
 };
 
