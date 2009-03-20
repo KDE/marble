@@ -234,8 +234,8 @@ void MainWindow::createInfoBoxesMenu()
     m_infoBoxesMenu->clear();
     QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
 
-    QList<MarbleAbstractFloatItem *>::const_iterator i;
-    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i)
+    QList<MarbleAbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
+    for (; i != floatItemList.constEnd(); ++i)
     {
         m_infoBoxesMenu->addAction( (*i)->action() );
     }
