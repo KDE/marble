@@ -33,6 +33,11 @@ class MarbleGeoDataModel::Private {
     {
     }
 
+    ~Private()
+    {
+        delete m_rootDocument;
+    }
+
     GeoDataDocument* m_rootDocument;
     QHash<int, GeoDataDocument*> m_documents;
     unsigned long m_latestId;
@@ -45,7 +50,6 @@ MarbleGeoDataModel::MarbleGeoDataModel( QObject *parent )
 
 MarbleGeoDataModel::~MarbleGeoDataModel()
 {
-    delete d->m_rootDocument;
     delete d;
 }
 
