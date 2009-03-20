@@ -47,11 +47,9 @@ class MarbleGeometryModel::Private {
         * This is needed to build up the parent Hash.
         */
         if( !geometry ) return;
-        QVector<GeoDataGeometry*>::const_iterator iterator;
         GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>( geometry );
-        for( iterator = multiGeometry->constBegin(); 
-             iterator != multiGeometry->constEnd(); 
-             ++iterator ) {
+        QVector<GeoDataGeometry*>::const_iterator iterator = multiGeometry->constBegin();
+        for (; iterator != multiGeometry->constEnd(); ++iterator ) {
             m_parent[ *iterator ] = geometry;
             if( (*iterator)->geometryId() == GeoDataMultiGeometryId ) mapGeometry( *iterator );
         }
