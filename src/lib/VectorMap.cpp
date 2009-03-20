@@ -198,9 +198,17 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
         } while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even 
 		   && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
 		 || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even
-		      && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (qreal)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
-                || visibleArea.intersects( QRectF( QPointF( (qreal)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) ) 
-                );
+		      && ( visibleArea.intersects( QRectF( boundingPolygon.at(1),
+                                                           QPointF( (qreal)(m_imgwidth) / 2.0
+                                                                    - rad2Pixel * ( centerLon - M_PI )
+                                                                    + m_offset,
+                                                                    boundingPolygon.at(0).y() ) ) )
+                           || visibleArea.intersects( QRectF( QPointF( (qreal)(m_imgwidth) / 2.0
+                                                                       - rad2Pixel * ( centerLon
+                                                                                       + M_PI )
+                                                                       + m_offset,
+                                                                       boundingPolygon.at(1).y() ),
+                                                              boundingPolygon.at(0) ) ) ) ) );
         m_offset += 4 * radius;
         boundingPolygon.translate( 4 * radius, 0 );
 
@@ -277,7 +285,8 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
         for ( int i = 1; i < 3; ++i ) {
             boundary[i]->geoCoordinates(lon, lat);
             x = (qreal)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon);
-            y = (qreal)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) );
+            y = (qreal)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) )
+                                                           - atanh( sin( centerLat ) ) );
 
             boundingPolygon << QPointF( x, y );
         }
@@ -295,9 +304,18 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
         } while( ( (*itPolyLine)->getDateLine() != GeoPolygon::Even 
 		   && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
 		 || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even
-		      && ( visibleArea.intersects( QRectF( boundingPolygon.at(1), QPointF( (qreal)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon - M_PI ) + m_offset, boundingPolygon.at(0).y() ) ) ) 
-                || visibleArea.intersects( QRectF( QPointF( (qreal)(m_imgwidth)  / 2.0 - rad2Pixel * ( centerLon + M_PI )  + m_offset, boundingPolygon.at(1).y() ), boundingPolygon.at(0) ) ) ) ) 
-                );
+		      && ( visibleArea.intersects( QRectF( boundingPolygon.at(1),
+                                                           QPointF( (qreal)(m_imgwidth) / 2.0
+                                                                    - rad2Pixel * ( centerLon
+                                                                                    - M_PI )
+                                                                    + m_offset,
+                                                                    boundingPolygon.at(0).y() ) ) )
+                           || visibleArea.intersects( QRectF( QPointF( (qreal)(m_imgwidth) / 2.0
+                                                                       - rad2Pixel * ( centerLon
+                                                                                       + M_PI )
+                                                                       + m_offset,
+                                                                       boundingPolygon.at(1).y() ),
+                                                              boundingPolygon.at(0) ) ) ) ) );
         m_offset += 4 * radius;
         boundingPolygon.translate( 4 * radius, 0 );
 
@@ -480,10 +498,14 @@ void VectorMap::rectangularCreatePolyLine(
 
 	    // X coordinate on the screen for the points on the
 	    // dateline on both sides of the flat map.
-	    qreal lastXAtDateLine = (qreal)(m_imgwidth) / 2.0 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
-	    qreal xAtDateLine = (qreal)(m_imgwidth) / 2.0 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
-	    qreal lastYAtDateLine = (qreal)(m_imgheight) / 2.0 - ( m_lastLat - centerLat ) * rad2Pixel;
-	    qreal yAtSouthPole = (qreal)(m_imgheight) / 2.0 - ( -viewport->currentProjection()->maxLat() - centerLat ) * rad2Pixel;
+	    qreal lastXAtDateLine = (qreal)(m_imgwidth) / 2.0
+                + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
+	    qreal xAtDateLine = (qreal)(m_imgwidth) / 2.0
+                + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
+	    qreal lastYAtDateLine = (qreal)(m_imgheight) / 2.0
+                - ( m_lastLat - centerLat ) * rad2Pixel;
+	    qreal yAtSouthPole = (qreal)(m_imgheight) / 2.0
+                - ( -viewport->currentProjection()->maxLat() - centerLat ) * rad2Pixel;
 
 	    //If the "jump" occurs in the Anctartica's latitudes
 
@@ -539,10 +561,11 @@ void VectorMap::rectangularCreatePolyLine(
     }
 }
 
-void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
-					GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
-					const int detail,
-					ViewportParams *viewport )
+void VectorMap::mercatorCreatePolyLine(
+        GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
+        GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
+        const int detail,
+        ViewportParams *viewport )
 {
     Quaternion qpos;
 
@@ -582,7 +605,8 @@ void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterato
         continue;
 
 	qreal x = (qreal)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon) + m_offset;
-	qreal y = (qreal)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) );
+	qreal y = (qreal)(m_imgheight) / 2.0
+            - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) );
 	int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
 	if ( firstPoint ) {
 	    firstPoint = false;
@@ -598,10 +622,17 @@ void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterato
 	    // x coordinate on the screen for the points on the dateline on both
 	    // sides of the flat map.
 	    // FIXME: mercator projection here too.
-	    qreal lastXAtDateLine = (qreal)(m_imgwidth) / 2.0 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
-	    qreal xAtDateLine = (qreal)(m_imgwidth) / 2.0 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
-        qreal lastYAtDateLine = (qreal)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( m_lastLat ) ) - atanh( sin( centerLat ) ) ) );
-        qreal yAtSouthPole = (qreal)( viewport->height() / 2 - rad2Pixel * ( atanh( sin( -viewport->currentProjection()->maxLat() ) ) - atanh( sin( centerLat ) ) ) );
+	    qreal lastXAtDateLine = (qreal)(m_imgwidth) / 2.0
+                + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
+	    qreal xAtDateLine = (qreal)(m_imgwidth) / 2.0
+                + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
+        qreal lastYAtDateLine = (qreal)( viewport->height() / 2 - rad2Pixel
+                                         * ( atanh( sin( m_lastLat ) )
+                                             - atanh( sin( centerLat ) ) ) );
+        qreal yAtSouthPole = (qreal)( viewport->height() / 2
+                                      - rad2Pixel * ( atanh( sin( -viewport->currentProjection()->
+                                                                  maxLat() ) )
+                                                      - atanh( sin( centerLat ) ) ) );
 
 	    //If the "jump" occurs in the Anctartica's latitudes
 
