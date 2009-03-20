@@ -117,7 +117,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     matrix  planetAxisMatrix;
     viewParams->planetAxis().toMatrix( planetAxisMatrix );
 
-    int skip = ( m_interlaced == true ) ? 1 : 0;
+    int skip = m_interlaced ? 1 : 0;
 
     // Calculate the actual y-range of the map on the screen 
     const int yTop = ( ( m_imageHeight / 2 - radius < 0 )
@@ -191,7 +191,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                 int northPoleX = m_imageWidth / 2 + (int)( radius * northPole.v[Q_X] );
 
 //                qDebug() << QString("NorthPole X: %1, LeftInterval: %2").arg( northPoleX ).arg( leftInterval );
-                if ( crossingPoleArea == true
+                if ( crossingPoleArea
                      && northPoleX >= leftInterval + m_n
                      && northPoleX < leftInterval + 2 * m_n
                      && x < leftInterval + 3 * m_n )
@@ -247,7 +247,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         }
 
         // copy scanline to improve performance
-        if ( interlaced == true && y + 1 < yBottom ) { 
+        if ( interlaced && y + 1 < yBottom ) { 
 
             int pixelByteSize = canvasImage->bytesPerLine() / m_imageWidth;
 
