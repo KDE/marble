@@ -205,11 +205,11 @@ void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon )
     //	qDebug() << "ClipPainter enabled." ;
     m_clippedObject.clear();
 
-    QVector<QPointF>::const_iterator        itPoint;
     const QVector<QPointF>::const_iterator  itStartPoint = polygon.begin();
     const QVector<QPointF>::const_iterator  itEndPoint   = polygon.end();
+    QVector<QPointF>::const_iterator        itPoint      = itStartPoint;
 
-    for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
+    for (; itPoint != itEndPoint; ++itPoint ) {
 
         m_currentPoint = (*itPoint);
         // qDebug() << "m_currentPoint.x()" << m_currentPoint.x() << "m_currentPOint.y()" << m_currentPoint.y();
