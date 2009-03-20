@@ -238,7 +238,7 @@ void MergedLayerDecorator::paintSunShading()
 
                 bool interpolate = ( cur_x != 0 && cur_x < ipRight && cur_x + n < tileWidth );
 
-                if ( interpolate == true ) {
+                if ( interpolate ) {
                     int check = cur_x + n;
                     qreal checklon   = lon_scale * ( m_x * tileWidth + check );
                     shade = m_sunLocator->shading(checklon, a, c);
@@ -301,7 +301,7 @@ void MergedLayerDecorator::paintSunShading()
 
                 bool interpolate = ( cur_x != 0 && cur_x < ipRight && cur_x + n < tileWidth );
 
-                if ( interpolate == true ) {
+                if ( interpolate ) {
                     int check = cur_x + n;
                     qreal checklon   = lon_scale * ( m_x * tileWidth + check );
                     shade = m_sunLocator->shading(checklon, a, c);

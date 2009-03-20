@@ -153,7 +153,7 @@ void MarbleWidgetPopupMenu::slotSetHomePoint()
     qreal  lon;
 
     bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Degree );
-    if ( valid == true )
+    if ( valid )
     {
 //        qDebug() << "Setting Home Location: " << lon << ", " << lat;   
         m_widget->setHome( lon, lat, m_widget->zoom() );
@@ -168,7 +168,7 @@ void MarbleWidgetPopupMenu::slotCopyCoordinates()
     qreal  lat;
 
     bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
-    if ( valid == true )
+    if ( valid )
     {
         QString  positionString = GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Radian ).toString();
         QClipboard  *clipboard = QApplication::clipboard();

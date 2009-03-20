@@ -121,7 +121,7 @@ void PlacemarkLayout::styleReset()
 
 QVector<QModelIndex> PlacemarkLayout::whichPlacemarkAt( const QPoint& curpos )
 {
-    if ( m_styleResetRequested == true ) {
+    if ( m_styleResetRequested ) {
         styleReset();
     }
 
@@ -191,7 +191,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     // const int imgwidth  = viewParams->canvasImage()->width();
     const int imgheight = viewParams->canvasImage()->height();
 
-    if ( m_styleResetRequested == true ) {
+    if ( m_styleResetRequested ) {
         m_styleResetRequested = false;
         styleReset();
         qDebug() << "RESET started";

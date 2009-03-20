@@ -295,7 +295,7 @@ void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fp
 {
     Q_UNUSED(dirtyRect);
 
-    if ( m_showFrameRate == true ) {
+    if ( m_showFrameRate ) {
         QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
 
         QPoint fpsLabelPos( 10, 20 );

@@ -32,7 +32,7 @@ bool SVGXmlHandler::startElement(const QString& nspace,
         m_initialized = true;
     }
 
-    if ( qName == "path" && m_initialized == true ) {
+    if ( qName == "path" && m_initialized ) {
         QString  coordinates = atts.value( "d" );
 
         QStringList  stringlist;
@@ -63,7 +63,7 @@ bool SVGXmlHandler::startElement(const QString& nspace,
             short  lat;
             short  lng;	
 
-            if ( firstheader == true ) {
+            if ( firstheader ) {
                 header      = m_header;
                 firstheader = false;
             }

@@ -378,7 +378,7 @@ const int detail, ViewportParams *viewport )
 {
     int  radius = viewport->radius();
 
-    // Quaternion qpos = ( FastMath::haveSSE() == true ) ? QuaternionSSE() : Quaternion();
+    // Quaternion qpos = FastMath::haveSSE() ? QuaternionSSE() : Quaternion();
     Quaternion qpos;
     //	int step = 1;
     //	int remain = size();
@@ -757,7 +757,7 @@ void VectorMap::paintMap(GeoPainter * painter, bool antialiasing)
           itPolygon != itEndPolygon;
           ++itPolygon )
     {
-        if ( itPolygon->closed() == true )  
+        if ( itPolygon->closed() )
             painter->drawPolygon( *itPolygon );
         else
             painter->drawPolyline( *itPolygon );

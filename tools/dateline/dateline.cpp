@@ -138,7 +138,7 @@ int main(int argc, char *argv[])
         float  lon; 
 
         header = 5;
-        if ( firstheader == true ) {
+        if ( firstheader ) {
              header      = 19000;
              firstheader = false;
         }
