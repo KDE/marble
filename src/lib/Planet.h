@@ -89,7 +89,7 @@ public:
     void setName( const QString& name );
     void setId( const QString& id );
 
-    void operator=( const Planet& other );
+    Planet& operator=( const Planet& rhs );
 
 private:
     PlanetPrivate * const d;

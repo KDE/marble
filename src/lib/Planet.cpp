@@ -326,7 +326,7 @@ void Planet::setId( const QString& id )
 }
 
 
-void Planet::operator=(const Planet& other)
+Planet& Planet::operator=(const Planet& other)
 {
     d->M_0 = other.M_0();
     d->M_1 = other.M_1();
@@ -343,6 +343,7 @@ void Planet::operator=(const Planet& other)
     d->radius = other.radius();
     d->name = other.name();
     d->id = other.id();
+    return *this;
 }
 
 } //namespace Marble
