@@ -364,8 +364,8 @@ void MarblePart::readSettings()
     }
 
     QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
         if ( pluginEnabled.contains( (*i)->nameId() ) ) {
             (*i)->setEnabled( pluginEnabled[ (*i)->nameId() ] );
             (*i)->item()->setCheckState( pluginEnabled[ (*i)->nameId() ]  ?  Qt::Checked : Qt::Unchecked );
@@ -442,8 +442,8 @@ void MarblePart::writeSettings()
     QStringList  pluginNameId;
 
     QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
 	pluginEnabled << static_cast<int>( (*i)->enabled() );
 	pluginNameId  << (*i)->nameId();
     }
@@ -554,8 +554,8 @@ void MarblePart::setupActions()
 
     // Action: Show Crosshairs option
     QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
         if ( (*i)->nameId() == "crosshairs" ) {
             actionCollection()->addAction( "show_crosshairs", (*i)->action() );
         }
@@ -598,8 +598,8 @@ void MarblePart::createInfoBoxesMenu()
 
     QList<QAction*> actionList;
 
-    QList<MarbleAbstractFloatItem *>::const_iterator i;
-    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i) {
+    QList<MarbleAbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
+    for (; i != floatItemList.constEnd(); ++i) {
         actionList.append( (*i)->action() );
     }
 
@@ -718,8 +718,8 @@ void MarblePart::editSettings()
     QStandardItem  *parentItem = m_pluginModel->invisibleRootItem();
 
     QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
 	parentItem->appendRow( (*i)->item() );
     }
 
@@ -751,8 +751,8 @@ void MarblePart::slotEnableButtonApply()
 void MarblePart::slotApply()
 {
     QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator  i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
         (*i)->applyItemState();
     }
 }
@@ -760,8 +760,8 @@ void MarblePart::slotApply()
 void MarblePart::slotCancel()
 {
     QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator  i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
         (*i)->retrieveItemState();
     }
 }
@@ -806,8 +806,8 @@ void MarblePart::lockFloatItemPosition( bool enabled )
 {
     QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
 
-    QList<MarbleAbstractFloatItem *>::const_iterator i;
-    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i) {
+    QList<MarbleAbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
+    for (; i != floatItemList.constEnd(); ++i) {
         // Locking one would suffice as it affects all. 
 	// Nevertheless go through all.
         (*i)->setPositionLocked(enabled);
