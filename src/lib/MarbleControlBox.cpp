@@ -511,7 +511,7 @@ void MarbleControlBox::resizeEvent ( QResizeEvent * )
             setUpdatesEnabled(true);
         }
     } else {
-        if ( d->uiWidget.zoomSlider->isHidden() == true ) {
+        if ( d->uiWidget.zoomSlider->isHidden() ) {
             setUpdatesEnabled(false);
             d->uiWidget.zoomSlider->show();
             d->uiWidget.m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
