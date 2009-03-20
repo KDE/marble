@@ -124,24 +124,29 @@ int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
     else
         parentItem = static_cast<GeoDataObject*>( parent.internalPointer() );
 
-    if( dynamic_cast<GeoDataDocument*>( parentItem ) ||
-        dynamic_cast<GeoDataFolder*>( parentItem ) )
+    int size = 0;
+    if( dynamic_cast<GeoDataFeature*>( parentItem ) && 
+       (static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataDocumentId ||
+        static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataFolderId ) )
     {
-        return dynamic_cast<GeoDataContainer*>( parentItem )->features().size();
+        GeoDataFolder folder( *static_cast<GeoDataFeature*>( parentItem ) );
+        size = folder.features().size();
     }
     
-    if( dynamic_cast<GeoDataPlacemark*>( parentItem ) )
+    if( dynamic_cast<GeoDataFeature*>( parentItem ) && 
+       static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataPlacemarkId )
     {
         /* there is only one GeoDataGeometry Object per Placemark; if Styles 
         * are added later, add them here */
-        return 1;
+        size = 1;
     }
     
-    if( dynamic_cast<GeoDataMultiGeometry*>( parentItem ) )
+    if( dynamic_cast<GeoDataGeometry*>( parentItem ) && 
+        static_cast<GeoDataGeometry*>( parentItem )->geometryId() == GeoDataMultiGeometryId )
     {
-        return dynamic_cast<GeoDataMultiGeometry*>( parentItem )->size();
+        size = dynamic_cast<GeoDataMultiGeometry*>( parentItem )->size();
     }
-    return 0;
+    return size;
 }
 
 QVariant MarbleGeometryModel::data( const QModelIndex &index, int role ) const
@@ -228,18 +233,26 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
     GeoDataObject *childItem = 0;
 
     /* go down into GeoDataContainers */
-    if( dynamic_cast<GeoDataDocument*>( parentItem ) ) {
-        childItem = &(dynamic_cast<GeoDataDocument*>( parentItem )->features()[ row ]);
-    } else if ( dynamic_cast<GeoDataFolder*>( parentItem ) ) {
-        childItem = &(dynamic_cast<GeoDataFolder*>( parentItem )->features()[ row ]);
-    } else if( dynamic_cast<GeoDataPlacemark*>( parentItem ) ) {
-        /* as said above - if you add styles, please check for the row over here */
-        childItem = dynamic_cast<GeoDataPlacemark*>( parentItem )->geometry();
-    } else if( dynamic_cast<GeoDataMultiGeometry*>( parentItem ) ) {
-        childItem = &(dynamic_cast<GeoDataMultiGeometry*>( parentItem )->at( row ));
+    if( dynamic_cast<GeoDataFeature*>( parentItem ) ) {
+        switch( dynamic_cast<GeoDataFeature*>( parentItem )->featureId() ) {
+            case GeoDataDocumentId:
+            case GeoDataFolderId: {
+                GeoDataContainer container( *static_cast<GeoDataFeature*>( parentItem ) );
+                childItem = &container.features()[ row ];
+            }; break;
+            case GeoDataPlacemarkId: {
+                GeoDataPlacemark placemark( *static_cast<GeoDataPlacemark*>( parentItem ) );
+                childItem = placemark.geometry();
+            }; break;
+            default: break;
+        };
+    } else if( dynamic_cast<GeoDataGeometry*>( parentItem ) ) {
+        if( dynamic_cast<GeoDataGeometry*>( parentItem )->geometryId() == GeoDataMultiGeometryId ) {
+            GeoDataMultiGeometry geom = *static_cast<GeoDataGeometry*>( parentItem );
+            childItem = &geom.at( row );
+        }
     }
-
-    qDebug() << "childItem:" << childItem;
+    
     if ( childItem )
         return createIndex( row, column, childItem );
     else

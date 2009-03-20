@@ -15,6 +15,7 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFeature.h"
+#include "GeoDataFolder.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataObject.h"
 #include "GeoDataPlacemark.h"
@@ -91,18 +92,22 @@ void MarbleGeoDataView::renderIndex( QModelIndex &index )
         QString output = model()->data( childIndex ).toString();
         GeoDataObject* object = model()->data( childIndex, Qt::UserRole + 11 ).value<Marble::GeoDataObject*>();
 
-        if( dynamic_cast<GeoDataGeometry*>( object ) && 
-            dynamic_cast<GeoDataGeometry*>( object )->geometryId() != 
-            GeoDataMultiGeometryId )
-        {
-            renderGeoDataGeometry( static_cast<GeoDataGeometry*>( object ), styleUrl );
+        if( dynamic_cast<GeoDataGeometry*>( object ) ) {
+            if( static_cast<GeoDataGeometry*>( object )->geometryId() != GeoDataMultiGeometryId ) {
+                renderGeoDataGeometry( static_cast<GeoDataGeometry*>( object ), styleUrl );
+            } else {
+                if( childIndex.isValid() && model()->rowCount( childIndex ) > 0 ) {
+                    renderIndex( childIndex );
+                }
+            }
         }
-        else
-        {
-            if( dynamic_cast<GeoDataPlacemark*>( object ) ) 
-                styleUrl = dynamic_cast<GeoDataPlacemark*>( object )->styleUrl();
-            if( childIndex.isValid() && model()->rowCount( childIndex ) > 0 )
-            {
+        else if( dynamic_cast<GeoDataFeature*>( object ) ) {
+            if( dynamic_cast<GeoDataFeature*>( object )->featureId() == GeoDataPlacemarkId ) {
+                GeoDataPlacemark placemark( *static_cast<GeoDataFeature*>( object ) );
+                styleUrl = placemark.styleUrl();
+            }
+
+            if( childIndex.isValid() && model()->rowCount( childIndex ) > 0 ) {
                 renderIndex( childIndex );
             }
         }
@@ -163,7 +168,11 @@ bool MarbleGeoDataView::renderGeoDataGeometry( GeoDataGeometry *object, QString 
 
     m_root = dynamic_cast<GeoDataDocument*>( model()->data( rootIndex(), 
                  Qt::UserRole + 11 ).value<Marble::GeoDataObject*>() );
-    if( !m_root ) return false;
+
+    if( !m_root ) {
+        qWarning() << "root seems to be 0!!!";
+        return false;
+    }
 
     /// hard coded to use only the "normal" style
     QString mapped = styleUrl;
@@ -175,16 +184,16 @@ bool MarbleGeoDataView::renderGeoDataGeometry( GeoDataGeometry *object, QString 
     if( object->geometryId() == GeoDataPolygonId ) {
         setBrushStyle( mapped );
         setPenStyle( mapped );
-        m_painter->drawPolygon( *dynamic_cast<GeoDataPolygon*>( object ) );
+        m_painter->drawPolygon( *static_cast<GeoDataPolygon*>( object ) );
     }
     if( object->geometryId() == GeoDataLinearRingId ) {
         m_painter->setBrush( QColor( 0, 0, 0, 0 ) );
         setPenStyle( mapped );
-        m_painter->drawPolygon( *dynamic_cast<GeoDataLinearRing*>( object ) );
+        m_painter->drawPolygon( *static_cast<GeoDataLinearRing*>( object ) );
     }
     if( object->geometryId() == GeoDataLineStringId ) {
         setPenStyle( mapped );
-        m_painter->drawPolyline( *dynamic_cast<GeoDataLineString*>( object ) );
+        m_painter->drawPolyline( *static_cast<GeoDataLineString*>( object ) );
     }
     /* Note: GeoDataMultiGeometry is handled within the model */
     m_painter->restore();
