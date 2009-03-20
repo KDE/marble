@@ -29,108 +29,107 @@
 namespace Marble {
 
 PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& file )
- : QThread( parent ), 
-   m_filepath( file ),
-   m_contents( QString() )
+    : QThread( parent ),
+      m_filepath( file ),
+      m_contents( QString() )
 {
 }
 
 PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& contents, const QString& file )
- : QThread( parent ), 
-   m_filepath( file ), 
-   m_contents( contents )
+    : QThread( parent ),
+      m_filepath( file ),
+      m_contents( contents )
 {
 }
 
 void PlacemarkLoader::run()
 {
-if( m_contents.isEmpty() ) {
-    QString defaultcachename;
-    QString defaultsrcname;
-    QString defaulthomecache;
+    if( m_contents.isEmpty() ) {
+        QString defaultcachename;
+        QString defaultsrcname;
+        QString defaulthomecache;
 
-    PlacemarkContainer *container = new PlacemarkContainer( m_filepath );
+        PlacemarkContainer *container = new PlacemarkContainer( m_filepath );
     
-    if( m_filepath.endsWith(".kml") ) {
-        m_filepath.remove(QRegExp("\\.kml$"));
-    }
-    qDebug() << "starting parser for" << m_filepath;
+        if( m_filepath.endsWith(".kml") ) {
+            m_filepath.remove(QRegExp("\\.kml$"));
+        }
+        qDebug() << "starting parser for" << m_filepath;
 
-    QFileInfo fileinfo(m_filepath);
-    if ( fileinfo.isAbsolute() ) {
-        // We got an _absolute_ path now: e.g. "/patrick.kml"
-        defaultcachename = m_filepath + ".cache";
-        defaultsrcname   = m_filepath + ".kml";
-    }
-    else {
-        if ( m_filepath.contains( '/' ) ) {
-            // _relative_ path: "maps/mars/viking/patrick.kml" 
-            defaultcachename = MarbleDirs::path( m_filepath + ".cache" );
-            defaultsrcname   = MarbleDirs::path( m_filepath + ".kml");
-            defaulthomecache = MarbleDirs::localPath() + m_filepath + ".cache";
+        QFileInfo fileinfo(m_filepath);
+        if ( fileinfo.isAbsolute() ) {
+            // We got an _absolute_ path now: e.g. "/patrick.kml"
+            defaultcachename = m_filepath + ".cache";
+            defaultsrcname   = m_filepath + ".kml";
         }
         else {
-            // _standard_ shared placemarks: "placemarks/patrick.kml"
-            defaultcachename = MarbleDirs::path( "placemarks/" + m_filepath + ".cache" );
-            defaultsrcname   = MarbleDirs::path( "placemarks/" + m_filepath + ".kml");
-            defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + m_filepath + ".cache";
+            if ( m_filepath.contains( '/' ) ) {
+                // _relative_ path: "maps/mars/viking/patrick.kml" 
+                defaultcachename = MarbleDirs::path( m_filepath + ".cache" );
+                defaultsrcname   = MarbleDirs::path( m_filepath + ".kml");
+                defaulthomecache = MarbleDirs::localPath() + m_filepath + ".cache";
+            }
+            else {
+                // _standard_ shared placemarks: "placemarks/patrick.kml"
+                defaultcachename = MarbleDirs::path( "placemarks/" + m_filepath + ".cache" );
+                defaultsrcname   = MarbleDirs::path( "placemarks/" + m_filepath + ".kml");
+                defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + m_filepath + ".cache";
+            }
         }
-    }
 
-    if ( QFile::exists( defaultcachename ) ) {
-        qDebug() << "Loading Default Placemark Cache File:" + defaultcachename;
+        if ( QFile::exists( defaultcachename ) ) {
+            qDebug() << "Loading Default Placemark Cache File:" + defaultcachename;
 
-        bool      cacheoutdated = false;
-        QDateTime sourceLastModified;
-        QDateTime cacheLastModified;
+            bool      cacheoutdated = false;
+            QDateTime sourceLastModified;
+            QDateTime cacheLastModified;
+
+            if ( QFile::exists( defaultsrcname ) ) {
+                sourceLastModified = QFileInfo( defaultsrcname ).lastModified();
+                cacheLastModified  = QFileInfo( defaultcachename ).lastModified();
+
+                if ( cacheLastModified < sourceLastModified )
+                    cacheoutdated = true;
+            }
+
+            bool loadok = false;
+
+            if ( cacheoutdated == false ) {
+                loadok = loadFile( defaultcachename, container );
+                if ( loadok )
+                    emit placemarksLoaded( this, container );
+            }
+            qDebug() << "Loading ended" << loadok;
+            if ( loadok == true )
+                return;
+        }
+
+        qDebug() << "No recent Default Placemark Cache File available for " << m_filepath;
 
         if ( QFile::exists( defaultsrcname ) ) {
-            sourceLastModified = QFileInfo( defaultsrcname ).lastModified();
-            cacheLastModified  = QFileInfo( defaultcachename ).lastModified();
 
-            if ( cacheLastModified < sourceLastModified )
-                cacheoutdated = true;
+            // Read the KML file.
+            importKml( defaultsrcname, container );
+
+            qDebug() << "ContainerSize for" << m_filepath << ":" << container->size();
+            // Save the contents in the efficient cache format.
+            saveFile( defaulthomecache, container );
+
+            // ...and finally add it to the PlacemarkContainer
+            emit placemarksLoaded( this, container );
         }
-
-        bool loadok = false;
-
-        if ( cacheoutdated == false ) {
-            loadok = loadFile( defaultcachename, container );
-            if ( loadok )
-                emit placemarksLoaded( this, container );
+        else {
+            qDebug() << "No Default Placemark Source File for " << m_filepath;
+            emit placemarkLoaderFailed( this );
         }
-        qDebug() << "Loading ended" << loadok;
-        if ( loadok == true )
-            return;
-    }
+    } else {
+        PlacemarkContainer *container = new PlacemarkContainer( m_filepath );
 
-    qDebug() << "No recent Default Placemark Cache File available for " << m_filepath;
+        // Read the KML Data
+        importKmlFromData( container );
 
-    if ( QFile::exists( defaultsrcname ) ) {
-
-        // Read the KML file.
-        importKml( defaultsrcname, container );
-
-        qDebug() << "ContainerSize for" << m_filepath << ":" << container->size();
-        // Save the contents in the efficient cache format.
-        saveFile( defaulthomecache, container );
-
-        // ...and finally add it to the PlacemarkContainer
         emit placemarksLoaded( this, container );
     }
-    else {
-        qDebug() << "No Default Placemark Source File for " << m_filepath;
-        emit placemarkLoaderFailed( this );
-    }
-} else {
-    PlacemarkContainer *container = new PlacemarkContainer( m_filepath );
-
-    // Read the KML Data
-    importKmlFromData( container );
-
-    emit placemarksLoaded( this, container );
-}
-
 }
 
 const quint32 MarbleMagicNumber = 0x31415926;
@@ -225,8 +224,8 @@ void PlacemarkLoader::saveFile( const QString& filename,
         out << QString( (*it)->countryCode() );
         out << (qreal)(*it)->area();
         out << (qint64)(*it)->population();
-}
     }
+}
 
 bool PlacemarkLoader::loadFile( const QString& filename,
                                  PlacemarkContainer* placemarkContainer )
