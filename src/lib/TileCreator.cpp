@@ -226,7 +226,7 @@ void TileCreator::run()
 
         for ( int m = 0; m < mmax; ++m ) {
 
-            if ( d->m_cancelled == true ) 
+            if ( d->m_cancelled ) 
                 return;
 
             QImage  tile = row.copy( m * stdImageWidth / mmax, 0, tileSize, tileSize );
@@ -279,7 +279,7 @@ void TileCreator::run()
             int   mmaxit = TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, tileLevel );
             for ( int m = 0; m < mmaxit; ++m ) {
 
-                if ( d->m_cancelled == true )
+                if ( d->m_cancelled )
                     return;
 
                 tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
@@ -403,7 +403,7 @@ void TileCreator::run()
             int mmaxit =  TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, tileLevel );
             for ( int m = 0; m < mmaxit; ++m) { 
 
-                if ( d->m_cancelled == true )
+                if ( d->m_cancelled )
                     return;
 
                 savedTilesCount++;
