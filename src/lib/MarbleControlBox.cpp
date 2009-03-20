@@ -101,6 +101,10 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     d->uiWidget.setupUi( this );
 
+//  Hide the controls before their functionality is implemented:
+    d->uiWidget.celestialBodyLabel->setVisible( false );
+    d->uiWidget.celestialBodyComboBox->setVisible( false );
+
     setFocusPolicy( Qt::NoFocus );
 //    setFocusProxy( d->uiWidget.searchLineEdit );
 
