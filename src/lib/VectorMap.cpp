@@ -16,7 +16,6 @@
 #include <stdlib.h>
 
 #include <QtCore/QVector>
-#include <QtCore/QTime>
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
 
