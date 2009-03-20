@@ -32,7 +32,8 @@
 
 using namespace Marble;
 
-MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
+MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( TileLoader *tileLoader,
+                                                              QObject * parent )
     : AbstractScanlineTextureMapper( tileLoader, parent )
 {
     m_oldCenterLon   = 0.0;
