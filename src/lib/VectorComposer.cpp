@@ -28,7 +28,8 @@
 using namespace Marble;
 
 VectorComposer::VectorComposer()
-    : m_coastLines( new PntMap() ),
+    : m_vectorMap( new VectorMap() ),
+      m_coastLines( new PntMap() ),
       m_islands( new PntMap() ),
       m_lakeislands( new PntMap() ),
       m_lakes( new PntMap() ),
@@ -37,27 +38,20 @@ VectorComposer::VectorComposer()
       m_countries( new PntMap() ),
       m_usaStates( new PntMap() ),
       m_dateLine( new PntMap() ),
-      m_vectorMap( new VectorMap() )
+      m_oceanPen( QPen( Qt::NoPen ) ),
+      m_oceanBrush( QBrush( QColor( 153, 179, 204 ) ) ),
+      m_landPen( QPen( Qt::NoPen ) ),
+      m_landBrush( QBrush( QColor( 242, 239, 233 ) ) ),
+      m_textureLandPen( QPen( Qt::NoPen ) ),
+      m_textureLandBrush( QBrush( QColor( 255, 0, 0 ) ) ),
+      m_textureGlacierBrush( QBrush( QColor( 0, 255, 0 ) ) ),
+      m_textureLakeBrush( QBrush( QColor( 0, 0, 0 ) ) ),
+      m_dateLineBrush( QBrush( Qt::NoBrush ) )
 {
-    // Initialize the data
-
-    m_textureLandPen   = QPen( Qt::NoPen );
-    m_textureLandBrush = QBrush( QColor( 255, 0, 0 ) );
-
-    m_textureLakeBrush = QBrush( QColor( 0, 0, 0 ) );
-    m_textureGlacierBrush = QBrush( QColor( 0, 255, 0 ) );
     m_textureBorderPen.setStyle( Qt::SolidLine );
     m_textureBorderPen.setColor( QColor( 0, 255, 0 ) );
-
-    m_oceanPen   = QPen( Qt::NoPen );
-    m_oceanBrush = QBrush( QColor( 153, 179, 204 ) );
-
-    m_landPen   = QPen( Qt::NoPen );
-    m_landBrush = QBrush( QColor( 242, 239, 233 ) );
-
     m_dateLinePen.setStyle( Qt::DashLine );
     m_dateLinePen.setColor( QColor( 0, 0, 0 ) );
-    m_dateLineBrush = QBrush( Qt::NoBrush );
 
     loadCoastlines();
     loadOverlay();
