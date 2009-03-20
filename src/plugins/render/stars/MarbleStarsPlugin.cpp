@@ -147,9 +147,9 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         const qreal  skyRadius      = 0.6 * sqrt( (qreal)viewport->width() * viewport->width() + viewport->height() * viewport->height() );
         const qreal  earthRadius    = viewport->radius();
 
-        QVector<StarPoint>::const_iterator i;
+        QVector<StarPoint>::const_iterator i = m_stars.constBegin();
         QVector<StarPoint>::const_iterator itEnd = m_stars.constEnd();
-        for (i = m_stars.constBegin(); i != itEnd; ++i)
+        for (; i != itEnd; ++i)
         {
             Quaternion  qpos = (*i).quaternion();
 
