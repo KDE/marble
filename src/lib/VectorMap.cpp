@@ -32,29 +32,24 @@
 using namespace Marble;
 
 VectorMap::VectorMap()
+    : m_zlimit( 0.0 ),
+      m_plimit( 0.0 ),
+      m_zBoundingBoxLimit( 0.0 ),
+      m_zPointLimit( 0.0 ),
+      m_imgrx( 0 ),
+      m_imgry( 0 ),
+      m_imgwidth( 0 ),
+      m_imgheight( 0 ),
+      m_brush( QBrush( QColor( 0, 0, 0 ) ) ),
+      // Initialising booleans for horizoncrossing
+      m_firsthorizon( false ),
+      m_lastvisible( false ),
+      m_currentlyvisible( false ),
+      m_horizonpair( false ),
+
+      m_rlimit( 0 )
+      // m_debugNodeCount( 0 )
 {
-
-    m_zlimit = 0.0; 
-    m_plimit = 0.0;
-    m_zBoundingBoxLimit = 0.0; 
-    m_zPointLimit = 0.0;
-
-    m_imgrx = 0; 
-    m_imgry = 0; 
-    m_imgwidth  = 0; 
-    m_imgheight = 0;
-
-    // Initialising booleans for horizoncrossing
-    m_horizonpair = false;
-    m_lastvisible = false;
-    m_currentlyvisible = false;
-    m_firsthorizon = false;
-
-    m_rlimit = 0;
-
-    m_brush = QBrush( QColor( 0, 0, 0 ) );
-
-    //	m_debugNodeCount = 0;
 }
 
 VectorMap::~VectorMap()
