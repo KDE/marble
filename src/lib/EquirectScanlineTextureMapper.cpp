@@ -30,7 +30,8 @@
 
 using namespace Marble;
 
-EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
+EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( TileLoader *tileLoader,
+                                                              QObject * parent )
     : AbstractScanlineTextureMapper( tileLoader, parent )
 {
     m_oldCenterLon   = 0.0;
