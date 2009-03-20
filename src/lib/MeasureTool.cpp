@@ -75,10 +75,8 @@ void MeasureTool::paint( GeoPainter *painter,
     Quaternion  qpos;
     Quaternion  prevqpos;
 
-    QVector<GeoDataCoordinates*>::const_iterator  it;
-    for ( it = m_pMeasurePointList.constBegin();
-          it != m_pMeasurePointList.constEnd();
-          ++it )
+    QVector<GeoDataCoordinates*>::const_iterator it = m_pMeasurePointList.constBegin();
+    for (; it != m_pMeasurePointList.constEnd(); ++it )
     {
         qpos = (*it)->quaternion();
 
@@ -115,10 +113,8 @@ void MeasureTool::drawDistancePoints( GeoPainter *painter,
 
     // Paint the marks.
     Quaternion                              qpos;
-    QVector<GeoDataCoordinates*>::const_iterator  it;
-    for ( it = m_pMeasurePointList.constBegin();
-          it != m_pMeasurePointList.constEnd();
-          ++it )
+    QVector<GeoDataCoordinates*>::const_iterator it = m_pMeasurePointList.constBegin();
+    for (; it != m_pMeasurePointList.constEnd(); ++it )
     {
         qreal  lon;
         qreal  lat;
