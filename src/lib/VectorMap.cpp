@@ -339,8 +339,8 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
     }
 }
 
-void VectorMap::createPolyLine( GeoDataCoordinates::Vector::ConstIterator  itStartPoint, 
-                                GeoDataCoordinates::Vector::ConstIterator  itEndPoint,
+void VectorMap::createPolyLine( GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
+                                GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
                                 const int detail, ViewportParams *viewport )
 {
     switch( viewport->projection() ) {
@@ -360,8 +360,8 @@ void VectorMap::createPolyLine( GeoDataCoordinates::Vector::ConstIterator  itSta
 }
 
 void VectorMap::sphericalCreatePolyLine(
-GeoDataCoordinates::Vector::ConstIterator  itStartPoint,
-GeoDataCoordinates::Vector::ConstIterator  itEndPoint,
+GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
+GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
 const int detail, ViewportParams *viewport )
 {
     int  radius = viewport->radius();
@@ -439,8 +439,8 @@ const int detail, ViewportParams *viewport )
 }
 
 void VectorMap::rectangularCreatePolyLine(
-    GeoDataCoordinates::Vector::ConstIterator  itStartPoint, 
-    GeoDataCoordinates::Vector::ConstIterator  itEndPoint,
+    GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
+    GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
     const int detail, ViewportParams *viewport )
 {
     Quaternion qpos;
@@ -545,8 +545,8 @@ void VectorMap::rectangularCreatePolyLine(
     }
 }
 
-void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator  itStartPoint, 
-					GeoDataCoordinates::Vector::ConstIterator  itEndPoint,
+void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const & itStartPoint,
+					GeoDataCoordinates::Vector::ConstIterator const & itEndPoint,
 					const int detail,
 					ViewportParams *viewport )
 {
