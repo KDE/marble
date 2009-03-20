@@ -37,10 +37,9 @@ static const quint8 softLimitPercent = 5;
 FileStorageWatcherThread::FileStorageWatcherThread( const QString &dataDirectory, QObject *parent )
     : QObject( parent ),
       m_dataDirectory( dataDirectory ),
-      m_deleting( false )
+      m_deleting( false ),
+      m_willQuit( false )
 {
-    m_willQuit = false;
-    
     // For now setting cache limit to 0. This won't delete anything
     setCacheLimit( 0 );
     
