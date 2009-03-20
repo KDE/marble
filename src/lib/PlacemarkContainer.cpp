@@ -34,12 +34,6 @@ PlacemarkContainer::PlacemarkContainer( const QVector<GeoDataPlacemark*>& contai
 {
 }
 
-PlacemarkContainer& PlacemarkContainer::operator= ( const PlacemarkContainer& container )
-{
-    QVector<GeoDataPlacemark*>::operator=( container );
-    return *this;
-}
-
 inline bool populationLessThan( GeoDataPlacemark* mark1, GeoDataPlacemark* mark2 )
 { 
     // If compared items do not differ in terms of being selected,

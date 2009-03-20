@@ -65,12 +65,6 @@ class PlacemarkContainer : public QVector<Marble::GeoDataPlacemark*>
     /// @brief Sort the placemarks in descending order by population.
     void sort( Qt::SortOrder order = Qt::AscendingOrder );
 
-    /**
-     * @brief  the assignment operator
-     * param  container the other PlacemarkContainer
-     */
-    PlacemarkContainer& operator=( const PlacemarkContainer& container );
-
  private:
     QString  m_name;
 };
