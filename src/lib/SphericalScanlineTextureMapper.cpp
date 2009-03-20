@@ -35,15 +35,14 @@
 
 using namespace Marble;
 
-SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( TileLoader *tileLoader, QObject * parent  ) 
-    : AbstractScanlineTextureMapper( tileLoader, parent )
+SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( TileLoader *tileLoader,
+                                                                QObject * parent )
+    : AbstractScanlineTextureMapper( tileLoader, parent ),
+      m_interpolate( false ),
+      m_nBest( 0 ),
+      m_n( 0 ),
+      m_nInverse( 0.0 )
 {
-    m_interpolate  = false;
-    m_nBest = 0;
-
-    m_n = 0;
-    m_nInverse = 0.0;
-
     m_interlaced = false;
 }
 
