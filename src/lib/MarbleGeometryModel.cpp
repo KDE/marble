@@ -35,13 +35,15 @@ using namespace Marble;
 
 class MarbleGeometryModel::Private {
  public:
-    Private( GeoDataDocument* rootDocument ) : m_rootDocument( rootDocument ) {
+    Private( GeoDataDocument* rootDocument ) : m_rootDocument( rootDocument )
+    {
         mapFeature( m_rootDocument );
     };
     
     Private() : m_rootDocument( 0 ) {};
 
-    void mapGeometry( GeoDataGeometry* geometry ) {
+    void mapGeometry( GeoDataGeometry* geometry )
+    {
         /*
         * This function iterates over all geometry objects in a MultiGeometry.
         * This is needed to build up the parent Hash.
@@ -55,7 +57,8 @@ class MarbleGeometryModel::Private {
         }
     };
     
-    void mapFeature( GeoDataFeature* feature ) {
+    void mapFeature( GeoDataFeature* feature )
+    {
         if( !feature ) return;
         
         if( feature->featureId() == GeoDataDocumentId || feature->featureId() == GeoDataFolderId ) {
@@ -126,15 +129,13 @@ int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
         return dynamic_cast<GeoDataContainer*>( parentItem )->features().size();
     }
     
-    if( dynamic_cast<GeoDataPlacemark*>( parentItem ) )
-    {
+    if( dynamic_cast<GeoDataPlacemark*>( parentItem ) ) {
         /* there is only one GeoDataGeometry Object per Placemark; if Styles 
         * are added later, add them here */
         return 1;
     }
     
-    if( dynamic_cast<GeoDataMultiGeometry*>( parentItem ) )
-    {
+    if( dynamic_cast<GeoDataMultiGeometry*>( parentItem ) ) {
         return dynamic_cast<GeoDataMultiGeometry*>( parentItem )->size();
     }
     return 0;
@@ -143,8 +144,7 @@ int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
 QVariant MarbleGeometryModel::data( const QModelIndex &index, int role ) const
 {
     GeoDataObject *item;
-    if( index.isValid() )
-    {
+    if( index.isValid() ) {
         item = static_cast<GeoDataObject*>( index.internalPointer() );
     }
     else /* the rootIndex is invalid */
@@ -232,14 +232,12 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
                             parentItem )->features().at( row ) );
     }
 
-    if( dynamic_cast<GeoDataPlacemark*>( parentItem ) )
-    {
+    if( dynamic_cast<GeoDataPlacemark*>( parentItem ) ) {
         /* as said above - if you add styles, please check for the row over here */
         childItem = dynamic_cast<GeoDataPlacemark*>( parentItem )->geometry();
     }
     
-    if( dynamic_cast<GeoDataMultiGeometry*>( parentItem ) )
-    {
+    if( dynamic_cast<GeoDataMultiGeometry*>( parentItem ) ) {
         childItem = dynamic_cast<GeoDataMultiGeometry*>( parentItem )->at( row );
     }
 

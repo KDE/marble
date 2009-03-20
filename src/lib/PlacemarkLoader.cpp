@@ -31,17 +31,19 @@ namespace Marble {
 PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& file )
  : QThread( parent ), 
    m_filepath( file ),
-   m_contents( QString() )   {
+   m_contents( QString() )
+{
 }
 
 PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& contents, const QString& file )
  : QThread( parent ), 
    m_filepath( file ), 
-   m_contents( contents ) {
+   m_contents( contents )
+{
 }
 
-void PlacemarkLoader::run() {
-
+void PlacemarkLoader::run()
+{
 if( m_contents.isEmpty() ) {
     QString defaultcachename;
     QString defaultsrcname;

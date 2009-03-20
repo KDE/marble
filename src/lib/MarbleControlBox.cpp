@@ -198,7 +198,8 @@ MarbleControlBox::~MarbleControlBox()
     delete d;
 }
 
-void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel ) {
+void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel )
+{
     d->m_mapThemeModel = mapThemeModel;
     d->m_mapSortProxy->setSourceModel( d->m_mapThemeModel );
     d->m_mapSortProxy->sort( 0 );

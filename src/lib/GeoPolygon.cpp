@@ -79,7 +79,8 @@ void GeoPolygon::setBoundary( qreal lonLeft, qreal latTop, qreal lonRight, qreal
 
 }
 
-void GeoPolygon::displayBoundary(){
+void GeoPolygon::displayBoundary()
+{
     Quaternion  q;
     qreal      lon;
     qreal      lat;

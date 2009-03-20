@@ -94,7 +94,8 @@ void FileStorageWatcherThread::updateTheme( QString mapTheme )
     emit variableChanged();
 }
 
-void FileStorageWatcherThread::prepareQuit() {
+void FileStorageWatcherThread::prepareQuit()
+{
     m_willQuit = true;
 }
 
@@ -216,8 +217,7 @@ void FileStorageWatcherThread::ensureSizePerPlanet( QString planetDirectory, QSt
 	
 	// We have found the currently shown theme.
 	// Please delete here at last.
-	if( !currentTheme.isEmpty() && fileInfo.fileName() == currentTheme )
-	{
+	if( !currentTheme.isEmpty() && fileInfo.fileName() == currentTheme ) {
 	    qDebug() << "FileStorageWatcher: Skipping " << themeDirectory
 	             << " for now";
 	    lastTheme = themeDirectory;
@@ -291,7 +291,8 @@ void FileStorageWatcherThread::ensureSizePerTheme( QString themeDirectory )
     }
 }
 
-bool FileStorageWatcherThread::keepDeleting() const {
+bool FileStorageWatcherThread::keepDeleting() const
+{
     return ( ( m_currentCacheSize > m_cacheSoftLimit ) &&
 	     ( m_filesDeleted <= maxFilesDelete ) &&
               !m_willQuit );

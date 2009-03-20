@@ -39,7 +39,8 @@ PlacemarkPainter::~PlacemarkPainter()
 {
 }
 
-void PlacemarkPainter::setDefaultLabelColor( const QColor& color ){
+void PlacemarkPainter::setDefaultLabelColor( const QColor& color )
+{
     m_defaultLabelColor = color;
 }
 
