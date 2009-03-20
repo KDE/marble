@@ -192,14 +192,18 @@ void MainWindow::createMenus()
     m_fileMenu = menuBar()->addMenu(tr("&Edit"));
     m_fileMenu->addAction(m_copyMapAct);
     m_fileMenu->addAction(m_copyCoordinatesAct);
-    m_fileMenu->addAction(m_configDialogAct);
 
     m_fileMenu = menuBar()->addMenu(tr("&View"));
-    m_fileMenu->addAction(m_fullScreenAct);
-    m_fileMenu->addAction(m_sideBarAct);
-    m_fileMenu->addAction(m_statusBarAct);
-    m_fileMenu->addSeparator();
 
+    QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
+        if ( (*i)->nameId() == "crosshairs" ) {
+            m_fileMenu->addAction( (*i)->action() );
+        }
+    }
+
+    m_fileMenu->addSeparator();
     m_infoBoxesMenu = m_fileMenu->addMenu("&Info Boxes");
     createInfoBoxesMenu();
 
@@ -208,6 +212,13 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_showAtmosphereAct);
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_controlSunAct);
+
+    m_fileMenu = menuBar()->addMenu(tr("&Settings"));
+    m_fileMenu->addAction(m_statusBarAct);
+    m_fileMenu->addAction(m_sideBarAct);
+    m_fileMenu->addAction(m_fullScreenAct);
+    m_fileMenu->addSeparator();
+    m_fileMenu->addAction(m_configDialogAct);
 
     m_helpMenu = menuBar()->addMenu(tr("&Help"));
     m_helpMenu->addAction(m_whatsThisAct);

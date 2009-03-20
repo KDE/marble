@@ -86,21 +86,31 @@ class MainWindow : public QMainWindow
 
     QMenu *m_fileMenu;
     QMenu *m_helpMenu;
+    QMenu *m_settingsMenu;
     QMenu *m_infoBoxesMenu;
 
+    // File Menu
     QAction *m_exportMapAct;
     QAction *m_printAct;
+    QAction *m_workOfflineAct;
     QAction *m_quitAct;
+
+    // Edit Menu
     QAction *m_copyMapAct;
-    QAction *m_configDialogAct;
     QAction *m_copyCoordinatesAct;
+
+    // View Menu
+    QAction *m_showCloudsAct;
+    QAction *m_showAtmosphereAct;
+    QAction *m_controlSunAct;
+
+    // Settings Menu
     QAction *m_sideBarAct;
     QAction *m_fullScreenAct;
     QAction *m_statusBarAct;
-    QAction *m_showCloudsAct;
-    QAction *m_workOfflineAct;
-    QAction *m_showAtmosphereAct;
-    QAction *m_controlSunAct;
+    QAction *m_configDialogAct;
+
+    // Help Menu
     QAction *m_whatsThisAct;
     QAction *m_aboutMarbleAct;
     QAction *m_aboutQtAct;
