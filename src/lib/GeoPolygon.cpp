@@ -337,7 +337,7 @@ void PntMapLoader::run()
                 isCrossingDateLine = true;
             }
 
-            if ( isOriginalSide == true ) { 
+            if ( isOriginalSide ) {
                 if ( lon < lonLeft  ) lonLeft = lon;
                 if ( lon > lonRight ) lonRight = lon;
             } else {
@@ -359,7 +359,7 @@ void PntMapLoader::run()
 //            qDebug() << " lonLeft: " << lonLeft << " lonRight: " << lonRight << " otherLonLeft: " << otherLonLeft << " otherlonRight: " << otherLonRight;
         }
 
-        if ( isOriginalSide == true && isCrossingDateLine == true ) { 
+        if ( isOriginalSide && isCrossingDateLine ) {
             (*itPolyLine)->setDateLine( GeoPolygon::Even );
 //            qDebug() << "Even >> File: " << (*itPolyLine)->m_sourceFileName << " Size: " << (*itPolyLine)->size();
 
