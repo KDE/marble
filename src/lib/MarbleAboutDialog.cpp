@@ -81,7 +81,7 @@ void MarbleAboutDialog::loadPageContents( int idx )
 {
     QTextBrowser* browser = 0;
 
-    if ( idx == 1 && d->authorsLoaded == false )
+    if ( idx == 1 && !d->authorsLoaded )
     {
         d->authorsLoaded = true;
         browser = d->uiWidget.m_pMarbleAuthorsBrowser;
@@ -101,7 +101,7 @@ void MarbleAboutDialog::loadPageContents( int idx )
         browser->document()->rootFrame()->setFrameFormat( format );
     }
 
-    if ( idx == 2 && d->dataLoaded == false )
+    if ( idx == 2 && !d->dataLoaded )
     {
         d->dataLoaded = true;
         browser = d->uiWidget.m_pMarbleDataBrowser;
@@ -121,7 +121,7 @@ void MarbleAboutDialog::loadPageContents( int idx )
         browser->document()->rootFrame()->setFrameFormat( format );
     }
 
-    if ( idx == 3 && d->licenseLoaded == false )
+    if ( idx == 3 && !d->licenseLoaded )
     {
         d->licenseLoaded = true;
         browser = d->uiWidget.m_pMarbleLicenseBrowser;

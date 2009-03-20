@@ -236,7 +236,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 //          Uncomment the crossingPoleArea line to check precise 
 //          rendering around north pole:
 
-//            if ( crossingPoleArea == false )
+//            if ( !crossingPoleArea )
             if ( x < m_imageWidth ) 
                 pixelValue( lon, lat, m_scanLine, highQuality );
 

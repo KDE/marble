@@ -94,7 +94,7 @@ void PlacemarkLoader::run()
 
             bool loadok = false;
 
-            if ( cacheoutdated == false ) {
+            if ( !cacheoutdated ) {
                 loadok = loadFile( defaultcachename, container );
                 if ( loadok )
                     emit placemarksLoaded( this, container );
@@ -193,7 +193,7 @@ void PlacemarkLoader::importKmlFromData( PlacemarkContainer* placemarkContainer 
 void PlacemarkLoader::saveFile( const QString& filename,
                                  PlacemarkContainer* placemarkContainer )
 {
-    if ( QDir( MarbleDirs::localPath() + "/placemarks/" ).exists() == false )
+    if ( !QDir( MarbleDirs::localPath() + "/placemarks/" ).exists() )
         ( QDir::root() ).mkpath( MarbleDirs::localPath() + "/placemarks/" );
 
     QFile file( filename );

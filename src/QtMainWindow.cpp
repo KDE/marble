@@ -265,7 +265,7 @@ void MainWindow::exportMapScreenShot()
 
         QPixmap mapPixmap = m_controlView->mapScreenShot();
         bool success = mapPixmap.save( fileName, format );
-        if ( success == false )
+        if ( !success )
         {
             QMessageBox::warning(this, tr("Marble"), // krazy:exclude=qclasses
                    tr( "An error occurred while trying to save the file.\n" ),

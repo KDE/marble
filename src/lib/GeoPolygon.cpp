@@ -352,7 +352,7 @@ void PntMapLoader::run()
             lastLon  = lon;
         }
 
-        if ( isOriginalSide == false ) {
+        if ( !isOriginalSide ) {
             (*itPolyLine)->setDateLine( GeoPolygon::Odd );
 //            qDebug() << "Odd  >> File: " << (*itPolyLine)->m_sourceFileName;
             (*itPolyLine)->setBoundary( -M_PI, latTop, M_PI, -M_PI / 2.0 );
@@ -381,7 +381,7 @@ void PntMapLoader::run()
 //            qDebug() << "Crosses: lonLeft: " << rightLonLeft << " is right from: lonRight: " << leftLonRight;
 
         }
-        if ( isCrossingDateLine == false ) {
+        if ( !isCrossingDateLine ) {
             (*itPolyLine)->setDateLine( GeoPolygon::None );
             (*itPolyLine)->setBoundary( lonLeft, latTop, lonRight, latBottom );
         }

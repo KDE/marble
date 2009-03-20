@@ -163,7 +163,7 @@ void TileCreator::run()
         QString( "TileCreator::createTiles() The size of the final image will measure  %1 x %2 pixels").arg(stdImageWidth).arg(stdImageHeight);
     }
 
-    if ( QDir( d->m_targetDir ).exists() == false ) 
+    if ( !QDir( d->m_targetDir ).exists() )
         ( QDir::root() ).mkpath( d->m_targetDir );
 
     // Counting total amount of tiles to be generated for the progressbar

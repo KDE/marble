@@ -768,13 +768,13 @@ void VectorMap::paintMap(GeoPainter * painter, bool antialiasing)
 void VectorMap::manageCrossHorizon()
 {
     // qDebug("Crossing horizon line");
-    // if (currentlyvisible == false) qDebug("Leaving visible hemisphere");
+    // if (!currentlyvisible) qDebug("Leaving visible hemisphere");
     // else qDebug("Entering visible hemisphere");
 
-    if ( m_horizonpair == false ) {
+    if ( !m_horizonpair ) {
         // qDebug("Point A");
 
-        if ( m_currentlyvisible == false ) {
+        if ( !m_currentlyvisible ) {
             m_horizona    = horizonPoint();
             m_horizonpair = true;
         }

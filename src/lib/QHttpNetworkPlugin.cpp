@@ -91,7 +91,7 @@ void QHttpHttpJob::httpRequestFinished( int requestId, bool error )
 //    FIXME: Check whether this assumption is a safe on:
 //    ( Problem: Conditional jump later on depends on uninitialised value )
 //
-//    if ( responseHeader.isValid() == false )
+//    if ( !responseHeader.isValid() )
 //        return;
 
     if ( responseHeader.statusCode() == 301 )
