@@ -79,7 +79,8 @@ void MarbleTest::timeDemo()
 
 }
 
-void MarbleTest::gpsDemo(){
+void MarbleTest::gpsDemo()
+{
     //
     //set up for the test
     //
