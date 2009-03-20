@@ -34,15 +34,14 @@ const qreal ARCMINUTE = 10800; // distance of 180deg in arcminutes
 const qreal INT2RAD = M_PI / 10800.0;
 
 GeoPolygon::GeoPolygon()
+    : m_dateLineCrossing( false ),
+      m_closed( false ),
+      m_lonLeft( 0.0 ),
+      m_latTop( 0.0 ),
+      m_lonRight( 0.0 ),
+      m_latBottom( 0.0 ),
+      m_index( 0 )
 {
-    m_dateLineCrossing = false;
-    m_closed  = false;
-
-    m_index = 0;
-    m_lonLeft    = 0.0;
-    m_latTop     = 0.0;
-    m_lonRight   = 0.0;
-    m_latBottom  = 0.0;
 }
 
 GeoPolygon::~GeoPolygon()
