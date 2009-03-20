@@ -34,10 +34,9 @@ class GeoPainterPrivate
  public:
     GeoPainterPrivate( ViewportParams *viewport, MapQuality mapQuality )
         : m_viewport( viewport ),
-	  m_mapQuality( mapQuality )
-
+	  m_mapQuality( mapQuality ),
+          m_x( new int[100] )
     {
-        m_x = new int[100];
     }
 
     ~GeoPainterPrivate()

@@ -24,13 +24,13 @@ using namespace Marble;
 
 HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl,
                                           StoragePolicy *policy )
-    : m_activatedJobsLimit( 40 ),
+    : m_downloadEnabled( true ), //enabled for now
+      m_activatedJobsLimit( 40 ),
       m_jobQueueLimit( 1000 ),
       m_serverUrl( serverUrl ),
       m_storagePolicy( policy ),
       m_networkPlugin( 0 )
 {
-    m_downloadEnabled = true; //enabled for now
 }
 
 
