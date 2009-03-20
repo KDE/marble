@@ -307,7 +307,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             }
 
             // Regarding all kinds of mouse moves:
-            if ( m_leftpressed == true && !m_selectionRubber->isVisible() ) {
+            if ( m_leftpressed && !m_selectionRubber->isVisible() ) {
                 qreal  radius = (qreal)(m_widget->radius());
                 int     deltax = event->x() - m_leftpressedx;
                 int     deltay = event->y() - m_leftpressedy;
@@ -339,7 +339,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             }
 
 
-            if ( m_midpressed == true ) {
+            if ( m_midpressed ) {
                 int  eventy = event->y();
                 int  dy     = m_midpressedy - eventy;
                 m_midpressed = eventy;
