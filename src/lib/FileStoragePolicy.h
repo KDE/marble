@@ -58,6 +58,8 @@ class FileStoragePolicy : public StoragePolicy
         QString lastErrorMessage() const;
 
     private:
+	Q_DISABLE_COPY( FileStoragePolicy )
+	
         QString m_dataDirectory;
         QString m_errorMsg;
 };

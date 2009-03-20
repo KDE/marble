@@ -39,7 +39,7 @@ FileStorageWatcherThread::FileStorageWatcherThread( const QString &dataDirectory
       m_dataDirectory( dataDirectory ),
       m_deleting( false )
 {
-    m_currentCacheSize = getCurrentCacheSize();
+    m_willQuit = false;
     
     // For now setting cache limit to 0. This won't delete anything
     setCacheLimit( 0 );
@@ -73,7 +73,7 @@ void FileStorageWatcherThread::addToCurrentSize( qint64 bytes )
 //     qDebug() << "Current cache size changed by " << bytes;
     qint64 changedSize = bytes + m_currentCacheSize;
     if( changedSize >= 0 )
-	m_currentCacheSize += changedSize;
+	m_currentCacheSize = changedSize;
     else
 	m_currentCacheSize = 0;
     emit variableChanged();
@@ -94,19 +94,23 @@ void FileStorageWatcherThread::updateTheme( QString mapTheme )
     emit variableChanged();
 }
 
-quint64 FileStorageWatcherThread::getCurrentCacheSize() const
+void FileStorageWatcherThread::prepareQuit() {
+    m_willQuit = true;
+}
+
+void FileStorageWatcherThread::getCurrentCacheSize()
 {
     qDebug() << "FileStorageWatcher: Creating cache size";
     quint64 dataSize = 0;
     QDirIterator it( m_dataDirectory, QDir::Files, QDirIterator::Subdirectories );
     
-    while( it.hasNext() )
+    while( it.hasNext() && !m_willQuit )
     {
 	it.next();
 	QFileInfo file = it.fileInfo();
 	dataSize += file.size();
     }
-    return dataSize;
+    m_currentCacheSize = dataSize;
 }
 
 void FileStorageWatcherThread::ensureCacheSize()
@@ -120,7 +124,8 @@ void FileStorageWatcherThread::ensureCacheSize()
 	     || ( m_deleting && ( m_currentCacheSize > m_cacheSoftLimit ) ) )
 	&& ( m_cacheLimit != 0 )
 	&& ( m_cacheSoftLimit != 0 )
-	&& !( m_mapThemeId.isEmpty() ) )
+	&& !( m_mapThemeId.isEmpty() )
+	&& !m_willQuit )
     {
 	// The counter for deleted files
 	m_filesDeleted = 0;
@@ -152,8 +157,7 @@ void FileStorageWatcherThread::ensureCacheSize()
 			 QDir::NoDotAndDotDot | QDir::Dirs );
 
 	while ( it.hasNext() &&
-	        ( m_currentCacheSize > m_cacheSoftLimit ) &&
-	        ( m_filesDeleted <= maxFilesDelete ) ) {
+	        keepDeleting() ) {
 	    it.next();
 	    
 	    // Our current planet directory
@@ -170,8 +174,7 @@ void FileStorageWatcherThread::ensureCacheSize()
 	    ensureSizePerPlanet( planetDirectory );
 	}
 	
-	if( m_currentCacheSize > m_cacheSoftLimit &&
-	    ( m_filesDeleted <= maxFilesDelete ) ) {
+	if( keepDeleting() ) {
 	    ensureSizePerPlanet( lastPlanet, currentList.first() );
 	}
 	
@@ -206,8 +209,7 @@ void FileStorageWatcherThread::ensureSizePerPlanet( QString planetDirectory, QSt
     QDirIterator itPlanet( planetDirectory,
 	                   QDir::NoDotAndDotDot | QDir::Dirs );
     while( itPlanet.hasNext() &&
-	   ( m_currentCacheSize > m_cacheSoftLimit ) &&
-	   ( m_filesDeleted <= maxFilesDelete ) ) {
+	   keepDeleting() ) {
 	itPlanet.next();
 	QString themeDirectory = itPlanet.filePath();
 	QFileInfo fileInfo = itPlanet.fileInfo();
@@ -225,7 +227,7 @@ void FileStorageWatcherThread::ensureSizePerPlanet( QString planetDirectory, QSt
 	ensureSizePerTheme( themeDirectory );
     }
     
-    if( m_currentCacheSize > m_cacheSoftLimit ) {
+    if( keepDeleting() ) {
 	qDebug() << "Removing files of: "
 	         << lastTheme;
 	ensureSizePerTheme( lastTheme );
@@ -249,8 +251,7 @@ void FileStorageWatcherThread::ensureSizePerTheme( QString themeDirectory )
     
     QStringListIterator itTheme( folders );
     while ( itTheme.hasNext() &&
-	    ( m_currentCacheSize > m_cacheSoftLimit ) &&
-	    ( m_filesDeleted <= maxFilesDelete ) ) {
+	    keepDeleting() ) {
 	QString subDirectory = itTheme.next();
 
 	// Do not delete base tiles
@@ -264,8 +265,7 @@ void FileStorageWatcherThread::ensureSizePerTheme( QString themeDirectory )
 			     QDir::Files | QDir::NoSymLinks,
 			     QDirIterator::Subdirectories );
 	while ( itTile.hasNext() &&
-	        ( m_currentCacheSize > m_cacheSoftLimit ) &&
-		( m_filesDeleted <= maxFilesDelete ) ) {
+	        keepDeleting() ) {
 	    itTile.next();
 	    QString filePath = itTile.filePath();
 	    QString lowerCase = filePath.toLower();
@@ -290,6 +290,12 @@ void FileStorageWatcherThread::ensureSizePerTheme( QString themeDirectory )
 	}
     }
 }
+
+bool FileStorageWatcherThread::keepDeleting() const {
+    return ( ( m_currentCacheSize > m_cacheSoftLimit ) &&
+	     ( m_filesDeleted <= maxFilesDelete ) &&
+              !m_willQuit );
+}
 // End of methods of our Thread
 
 
@@ -306,10 +312,28 @@ FileStorageWatcher::FileStorageWatcher( const QString &dataDirectory, QObject * 
     
     m_started = false;
     m_themeLimitMutex = new QMutex();
+    
+    m_thread = 0;
+    m_quitting = false;
 }
 
 FileStorageWatcher::~FileStorageWatcher()
 {
+    qDebug() << "Deleting FileStorageWatcher";
+    
+    // Making sure that Thread is stopped.
+    m_quitting = true;
+    
+    if( m_thread )
+	m_thread->prepareQuit();
+    quit();
+    if( !wait( 5000 ) ) {
+	qDebug() << "Failed to stop FileStorageWatcher-Thread, terminating!";
+	terminate();
+    }
+    
+    delete m_thread;
+    
     delete m_themeLimitMutex;
 }
 
@@ -355,21 +379,30 @@ void FileStorageWatcher::updateTheme( QString mapTheme )
 void FileStorageWatcher::run()
 {
     m_thread = new FileStorageWatcherThread( m_dataDirectory );
+    if( !m_quitting ) {
+	m_themeLimitMutex->lock();
+	m_thread->setCacheLimit( m_limit );
+	m_thread->updateTheme( m_theme );
+	m_started = true;
+	qDebug() << m_started;
+	m_themeLimitMutex->unlock();
+	
+	m_thread->getCurrentCacheSize();
+	
+	connect( this, SIGNAL( sizeChanged( qint64 ) ),
+		 m_thread, SLOT( addToCurrentSize( qint64 ) ) );
+	connect( this, SIGNAL( cleared() ),
+		 m_thread, SLOT( resetCurrentSize() ) );
     
-    m_themeLimitMutex->lock();
-    m_thread->setCacheLimit( m_limit );
-    m_thread->updateTheme( m_theme );
-    m_started = true;
-    m_themeLimitMutex->unlock();
-    connect( this, SIGNAL( sizeChanged( qint64 ) ),
-	     m_thread, SLOT( addToCurrentSize( qint64 ) ) );
-    connect( this, SIGNAL( cleared() ),
-	     m_thread, SLOT( resetCurrentSize() ) );
+	// Make sure that we don't want to stop process.
+	// The thread wouldn't exit from event loop.
+	if( !m_quitting )
+	    exec();
     
-    exec();
-    
-    m_started = false;
+	m_started = false;
+    }
     delete m_thread;
+    m_thread = 0;
 }
 // End of all methods
 

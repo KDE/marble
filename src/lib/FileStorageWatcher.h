@@ -60,6 +60,16 @@ class FileStorageWatcherThread : public QObject
 	 * @param mapTheme The identifier of the new theme.
 	 */
 	void updateTheme( QString mapTheme );
+	
+	/**
+	 * Stop doing things that take a long time to quit.
+	 */
+	void prepareQuit();
+	
+	/**
+	 * Getting the current size of the data stored on the disc
+	 */
+	void getCurrentCacheSize();
 
     private Q_SLOTS:
 	/**
@@ -68,10 +78,7 @@ class FileStorageWatcherThread : public QObject
 	void ensureCacheSize();
     
     private:
-	/**
-	 * Getting the current size of the data stored on the disc
-	 */
-	quint64 getCurrentCacheSize() const;
+	Q_DISABLE_COPY( FileStorageWatcherThread )
 	
 	/**
 	 * Deletes files of a planet if needed
@@ -83,6 +90,11 @@ class FileStorageWatcherThread : public QObject
 	 */
 	void ensureSizePerTheme( QString themeDirectory );
 	
+	/**
+	 * Returns true if it is necessary to delete files.
+	 */
+	bool keepDeleting() const;
+	
 	QString m_dataDirectory;
 	
         quint64 m_cacheLimit;
@@ -93,6 +105,7 @@ class FileStorageWatcherThread : public QObject
 	QString m_mapThemeId;
 	QMutex	m_limitMutex;
 	QMutex	m_themeMutex;
+	bool	m_willQuit;
 };
 
 
@@ -155,12 +168,15 @@ class FileStorageWatcher : public QThread
 	void run();
 	
     private:
+	Q_DISABLE_COPY( FileStorageWatcher )
+	
 	QString m_dataDirectory;
 	FileStorageWatcherThread *m_thread;
 	QMutex *m_themeLimitMutex;
 	QString m_theme;
 	quint64 m_limit;
 	bool m_started;
+	bool m_quitting;
 };
 
 }

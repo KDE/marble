@@ -358,7 +358,6 @@ MarbleMap::~MarbleMap()
     d->m_height = 0;
 
     setDownloadManager( 0 );
-    d->m_storageWatcher->quit();
 
     if ( d->m_modelIsOwned )
         delete d->m_model;

@@ -42,6 +42,9 @@ class StoragePolicy : public QObject
     Q_SIGNALS:
 	void cleared();
 	void sizeChanged( qint64 );
+	
+    private:
+	Q_DISABLE_COPY( StoragePolicy )
 };
 
 }
