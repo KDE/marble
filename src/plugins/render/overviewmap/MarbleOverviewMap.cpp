@@ -270,8 +270,8 @@ bool MarbleOverviewMap::eventFilter( QObject *object, QEvent *e )
     return MarbleAbstractFloatItem::eventFilter(object,e);
 }
 
-void MarbleOverviewMap::changeBackground( const QString& target ) {
-
+void MarbleOverviewMap::changeBackground( const QString& target )
+{
     delete m_svgobj;
     m_svgobj = 0;
 
