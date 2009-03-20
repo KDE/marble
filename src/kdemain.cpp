@@ -237,7 +237,7 @@ int main (int argc, char *argv[])
 
         // FIXME: Use openUrl( args->url(i)) instead?
         if ( QFile::exists( args->arg( i ) ) && i != dataPathIndex )
-            window->marbleControl()->addPlaceMarkFile( args->arg( i ) );
+            window->marbleControl()->addPlacemarkFile( args->arg( i ) );
     }
 
     return app.exec();

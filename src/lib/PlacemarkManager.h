@@ -17,16 +17,16 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
-#include "PlaceMarkLoader.h"
+#include "PlacemarkLoader.h"
 
 namespace Marble
 {
 
 class GeoDataDocument;
-class PlaceMarkContainer;
+class PlacemarkContainer;
 class MarblePlacemarkModel;
 class MarbleGeometryModel;
-class PlaceMarkManagerPrivate;
+class PlacemarkManagerPrivate;
 class FileViewModel;
 
 /**
@@ -37,7 +37,7 @@ class FileViewModel;
  * The loaded data are accessable via the
  * MarblePlacemarkModel returned by model().
  */
-class PlaceMarkManager : public QObject
+class PlacemarkManager : public QObject
 {
     friend class MarblePlacemarkModel;
     Q_OBJECT
@@ -48,12 +48,12 @@ class PlaceMarkManager : public QObject
      *
      * @param parent The parent object.
      */
-    explicit PlaceMarkManager( QObject *parent = 0 );
+    explicit PlacemarkManager( QObject *parent = 0 );
 
     /**
      * Destroys the place mark manager.
      */
-    ~PlaceMarkManager();
+    ~PlacemarkManager();
 
     /**
      * Returns the model which represents the data of the
@@ -77,12 +77,12 @@ class PlaceMarkManager : public QObject
      */
     void setGeoModel( MarbleGeometryModel * model );
 
-    void clearPlaceMarks();
+    void clearPlacemarks();
 
     /**
      * Loads a new place mark file into the manager.
      */
-    void addPlaceMarkFile( const QString &fileName, bool finalize = true );
+    void addPlacemarkFile( const QString &fileName, bool finalize = true );
 
     /**
      * Loads a new KML file into the manager.
@@ -97,12 +97,12 @@ class PlaceMarkManager : public QObject
     /**
     * removes an existing GeoDataDocument from the manager
     */
-    void removePlaceMarkKey( const QString& key );
+    void removePlacemarkKey( const QString& key );
 
     /**
     * add Data containing KML code as string
     */
-    void addPlaceMarkData( const QString& data, const QString& key );
+    void addPlacemarkData( const QString& data, const QString& key );
 
     /**
     * return the Model which stores the opened kml/gpx files
@@ -115,16 +115,16 @@ class PlaceMarkManager : public QObject
     void finalize();
 
  private Q_SLOTS:
-    void loadPlaceMarkContainer( PlaceMarkLoader* loader, PlaceMarkContainer * );
-    void cleanupLoader( PlaceMarkLoader* loader );
+    void loadPlacemarkContainer( PlacemarkLoader* loader, PlacemarkContainer * );
+    void cleanupLoader( PlacemarkLoader* loader );
     void addGeoDataDocument( GeoDataDocument* );
 
  private:
-    void setPlaceMarkModel( MarblePlacemarkModel *model );
+    void setPlacemarkModel( MarblePlacemarkModel *model );
 
-    Q_DISABLE_COPY( PlaceMarkManager )
+    Q_DISABLE_COPY( PlacemarkManager )
 
-    PlaceMarkManagerPrivate *const d;
+    PlacemarkManagerPrivate *const d;
 };
 
 }

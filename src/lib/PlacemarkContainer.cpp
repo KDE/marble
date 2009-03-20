@@ -10,30 +10,30 @@
 //
 
 
-#include "PlaceMarkContainer.h"
+#include "PlacemarkContainer.h"
 
 using namespace Marble;
 
-PlaceMarkContainer::PlaceMarkContainer()
+PlacemarkContainer::PlacemarkContainer()
 {
 }
 
-PlaceMarkContainer::PlaceMarkContainer( const QString& name )
+PlacemarkContainer::PlacemarkContainer( const QString& name )
     : m_name( name )
 {
 }
 
-PlaceMarkContainer::PlaceMarkContainer( const PlaceMarkContainer& container )
+PlacemarkContainer::PlacemarkContainer( const PlacemarkContainer& container )
     : QVector<GeoDataPlacemark>( container ), m_name( container.name() )
 {
 }
 
-PlaceMarkContainer::PlaceMarkContainer( const QVector<GeoDataPlacemark>& container, const QString& name )
+PlacemarkContainer::PlacemarkContainer( const QVector<GeoDataPlacemark>& container, const QString& name )
     : QVector<GeoDataPlacemark>( container ), m_name( name )
 {
 }
 
-PlaceMarkContainer& PlaceMarkContainer::operator= ( const PlaceMarkContainer& container )
+PlacemarkContainer& PlacemarkContainer::operator= ( const PlacemarkContainer& container )
 {
     QVector<GeoDataPlacemark>::operator=( container );
     return *this;
@@ -50,17 +50,17 @@ inline bool populationLessThan( const GeoDataPlacemark& mark1, const GeoDataPlac
 }
 
 
-void PlaceMarkContainer::setName( const QString& name )
+void PlacemarkContainer::setName( const QString& name )
 {
     m_name = name;
 }
 
-QString PlaceMarkContainer::name() const
+QString PlacemarkContainer::name() const
 {
     return m_name;
 }
 
-void PlaceMarkContainer::sort( Qt::SortOrder order )
+void PlacemarkContainer::sort( Qt::SortOrder order )
 {
     // FIXME: use order
     Q_UNUSED( order )

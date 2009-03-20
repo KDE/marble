@@ -53,7 +53,7 @@ class GpsLayer;
 class GpxFileModel;
 class HttpDownloadManager;
 class MarbleModelPrivate;
-class PlaceMarkLayout;
+class PlacemarkLayout;
 class ExtDateTime;
 class SunLocator;
 class TextureColorizer;
@@ -132,11 +132,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
                      bool redrawBackground, const QRect& dirtyRect);
 
     /**
-     * @brief Return the list of PlaceMarks as a QAbstractItemModel *
-     * @return a list of all PlaceMarks in the MarbleModel.
+     * @brief Return the list of Placemarks as a QAbstractItemModel *
+     * @return a list of all Placemarks in the MarbleModel.
      */
-    QAbstractItemModel*  placeMarkModel() const;
-    QItemSelectionModel* placeMarkSelectionModel() const;
+    QAbstractItemModel*  placemarkModel() const;
+    QItemSelectionModel* placemarkSelectionModel() const;
     QAbstractItemModel*  geometryModel() const;
 
     /**
@@ -200,13 +200,13 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void setDownloadManager( HttpDownloadManager *downloadManager );
 
-    void addPlaceMarkFile( const QString& filename );
-    void addPlaceMarkData( const QString& data, const QString& key = "data" );
-    void removePlaceMarkKey( const QString& key );
+    void addPlacemarkFile( const QString& filename );
+    void addPlacemarkData( const QString& data, const QString& key = "data" );
+    void removePlacemarkKey( const QString& key );
 
     QVector<QModelIndex> whichFeatureAt( const QPoint& ) const;
 
-    PlaceMarkLayout    *placeMarkLayout()   const;
+    PlacemarkLayout    *placemarkLayout()   const;
     VectorComposer     *vectorComposer()     const;
     /**
      * @brief Returns the map's TextureColorizer

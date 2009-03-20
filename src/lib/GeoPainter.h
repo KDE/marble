@@ -98,8 +98,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     // GeoDataPolygons which could get painted on screen. Any patches appreciated ;-)
     void drawText ( const GeoDataCoordinates & position, const QString & text );
 
-//    void drawPlaceMark ( const GeoDataCoordinates & position, const QString& name );
-//    void drawPlaceMark ( const GeoDataPlaceMark & placemark );
+//    void drawPlacemark ( const GeoDataCoordinates & position, const QString& name );
+//    void drawPlacemark ( const GeoDataPlacemark & placemark );
 
     void drawEllipse ( const GeoDataCoordinates & centerPoint, qreal width, qreal height, bool isGeoProjected = false );
 

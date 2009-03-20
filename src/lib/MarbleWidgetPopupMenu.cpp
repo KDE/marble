@@ -19,7 +19,7 @@
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "GeoDataPlacemark.h"
-#include "PlaceMarkInfoDialog.h"
+#include "PlacemarkInfoDialog.h"
 
 using namespace Marble;
 
@@ -141,7 +141,7 @@ void MarbleWidgetPopupMenu::showFeatureInfo( QAction* action )
     if ( actionidx > 0 ) {
         QModelIndex index = m_featurelist.at( actionidx -1 );
 
-        PlaceMarkInfoDialog dialog( index, m_widget );
+        PlacemarkInfoDialog dialog( index, m_widget );
         dialog.exec();
     }
 }

@@ -156,7 +156,7 @@ bool MarblePart::openFile()
             m_controlView->marbleWidget()->openGpxFile( fileName );
         }
         else if ( extension.compare( "kml", Qt::CaseInsensitive ) == 0 ) {
-            m_controlView->marbleWidget()->addPlaceMarkFile( fileName );
+            m_controlView->marbleWidget()->addPlacemarkFile( fileName );
         }
     }
 

@@ -487,14 +487,14 @@ void MarbleMap::setNeedsUpdate()
 }
 
 
-QAbstractItemModel *MarbleMap::placeMarkModel() const
+QAbstractItemModel *MarbleMap::placemarkModel() const
 {
-    return d->m_model->placeMarkModel();
+    return d->m_model->placemarkModel();
 }
 
-QItemSelectionModel *MarbleMap::placeMarkSelectionModel() const
+QItemSelectionModel *MarbleMap::placemarkSelectionModel() const
 {
-    return d->m_model->placeMarkSelectionModel();
+    return d->m_model->placemarkSelectionModel();
 }
 
 qreal MarbleMap::moveStep()
@@ -576,19 +576,19 @@ int  MarbleMap::maximumZoom() const
     return 2100;
 }
 
-void MarbleMap::addPlaceMarkFile( const QString &filename )
+void MarbleMap::addPlacemarkFile( const QString &filename )
 {
-    d->m_model->addPlaceMarkFile( filename );
+    d->m_model->addPlacemarkFile( filename );
 }
 
-void MarbleMap::addPlaceMarkData( const QString &data, const QString &key )
+void MarbleMap::addPlacemarkData( const QString &data, const QString &key )
 {
-    d->m_model->addPlaceMarkData( data, key );
+    d->m_model->addPlacemarkData( data, key );
 }
 
-void MarbleMap::removePlaceMarkKey( const QString &key )
+void MarbleMap::removePlacemarkKey( const QString &key )
 {
-    d->m_model->removePlaceMarkKey( key );
+    d->m_model->removePlacemarkKey( key );
 }
 
 
@@ -791,7 +791,7 @@ void MarbleMap::centerOn(const qreal& lon, const qreal& lat)
 
 void MarbleMap::centerOn(const QModelIndex& index)
 {
-    QItemSelectionModel *selectionModel = d->m_model->placeMarkSelectionModel();
+    QItemSelectionModel *selectionModel = d->m_model->placemarkSelectionModel();
     Q_ASSERT( selectionModel );
 
     selectionModel->clear();

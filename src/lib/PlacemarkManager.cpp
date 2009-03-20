@@ -9,7 +9,7 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "PlaceMarkManager.h"
+#include "PlacemarkManager.h"
 
 #include <QtCore/QBuffer>
 #include <QtCore/QByteArray>
@@ -26,8 +26,8 @@
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleGeometryModel.h"
-#include "PlaceMarkContainer.h"
-#include "PlaceMarkLoader.h"
+#include "PlacemarkContainer.h"
+#include "PlacemarkLoader.h"
 
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
@@ -37,10 +37,10 @@
 using namespace Marble;
 
 namespace Marble {
-class PlaceMarkManagerPrivate
+class PlacemarkManagerPrivate
 {
     public:
-        PlaceMarkManagerPrivate( QObject* parent )
+        PlacemarkManagerPrivate( QObject* parent )
         : m_model( 0 )
         , m_geomodel( new MarbleGeometryModel() )
         , m_target( QString() )
@@ -51,26 +51,26 @@ class PlaceMarkManagerPrivate
 
         MarblePlacemarkModel* m_model;
         MarbleGeometryModel* m_geomodel;
-        QList<PlaceMarkLoader*> m_loaderList;
+        QList<PlacemarkLoader*> m_loaderList;
         FileViewModel* m_fileViewModel;
 
         bool m_finalized;
         QString m_target;
-        PlaceMarkManager* q_ptr;
+        PlacemarkManager* q_ptr;
 };
 }
 
-PlaceMarkManager::PlaceMarkManager( QObject *parent )
+PlacemarkManager::PlacemarkManager( QObject *parent )
     : QObject( parent )
-    , d(new PlaceMarkManagerPrivate( parent ) )
+    , d(new PlacemarkManagerPrivate( parent ) )
 {
     
 }
 
 
-PlaceMarkManager::~PlaceMarkManager()
+PlacemarkManager::~PlacemarkManager()
 {
-    foreach( PlaceMarkLoader *loader, d->m_loaderList ) {
+    foreach( PlacemarkLoader *loader, d->m_loaderList ) {
         if ( loader ) {
             loader->wait();
         }
@@ -84,45 +84,45 @@ PlaceMarkManager::~PlaceMarkManager()
      */
 }
 
-MarblePlacemarkModel* PlaceMarkManager::model() const
+MarblePlacemarkModel* PlacemarkManager::model() const
 {
     return d->m_model;
 }
 
-FileViewModel* PlaceMarkManager::fileViewModel() const
+FileViewModel* PlacemarkManager::fileViewModel() const
 {
     return d->m_fileViewModel;
 }
 
-MarbleGeometryModel* PlaceMarkManager::geomodel() const
+MarbleGeometryModel* PlacemarkManager::geomodel() const
 {
     return d->m_geomodel;
 }
 
-void PlaceMarkManager::setGeoModel( MarbleGeometryModel * model )
+void PlacemarkManager::setGeoModel( MarbleGeometryModel * model )
 {
     d->m_geomodel = model;
 }
 
-void PlaceMarkManager::setPlaceMarkModel( MarblePlacemarkModel *model )
+void PlacemarkManager::setPlacemarkModel( MarblePlacemarkModel *model )
 {
     d->m_model = model;
 }
 
-void PlaceMarkManager::clearPlaceMarks()
+void PlacemarkManager::clearPlacemarks()
 {
-    d->m_model->clearPlaceMarks();
+    d->m_model->clearPlacemarks();
 }
 
-void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalized )
+void PlacemarkManager::addPlacemarkFile( const QString& filepath, bool finalized )
 {
     if( !(d->m_model->containers().contains( filepath ) ) ) {
         qDebug() << "adding container:" << filepath << finalized;
-        PlaceMarkLoader* loader = new PlaceMarkLoader( this, filepath, finalized );
-        connect (   loader, SIGNAL( placeMarksLoaded( PlaceMarkLoader*, PlaceMarkContainer * ) ), 
-                    this, SLOT( loadPlaceMarkContainer( PlaceMarkLoader*, PlaceMarkContainer * ) ) );
-        connect (   loader, SIGNAL( placeMarkLoaderFailed( PlaceMarkLoader* ) ), 
-                    this, SLOT( cleanupLoader( PlaceMarkLoader* ) ) );
+        PlacemarkLoader* loader = new PlacemarkLoader( this, filepath, finalized );
+        connect (   loader, SIGNAL( placemarksLoaded( PlacemarkLoader*, PlacemarkContainer * ) ), 
+                    this, SLOT( loadPlacemarkContainer( PlacemarkLoader*, PlacemarkContainer * ) ) );
+        connect (   loader, SIGNAL( placemarkLoaderFailed( PlacemarkLoader* ) ), 
+                    this, SLOT( cleanupLoader( PlacemarkLoader* ) ) );
         connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
                     this, SIGNAL( geoDataDocumentAdded( GeoDataDocument* ) ) );
         connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
@@ -132,7 +132,7 @@ void PlaceMarkManager::addPlaceMarkFile( const QString& filepath, bool finalized
     }
 }
 
-void PlaceMarkManager::addGeoDataDocument( GeoDataDocument* document )
+void PlacemarkManager::addGeoDataDocument( GeoDataDocument* document )
 {
     AbstractFileViewItem* item = new KmlFileViewItem( *this,
                                                       *document );
@@ -140,12 +140,12 @@ void PlaceMarkManager::addGeoDataDocument( GeoDataDocument* document )
     d->m_fileViewModel->append( item );
 }
 
-void PlaceMarkManager::addPlaceMarkData( const QString& data, const QString& key )
+void PlacemarkManager::addPlacemarkData( const QString& data, const QString& key )
 {
     loadKmlFromData( data, key, false );
 }
 
-void PlaceMarkManager::removePlaceMarkKey( const QString& key )
+void PlacemarkManager::removePlacemarkKey( const QString& key )
 {
     QString nkey = key;
     qDebug() << "trying to remove file:" << key;
@@ -157,7 +157,7 @@ void PlaceMarkManager::removePlaceMarkKey( const QString& key )
     };
 }
 
-void PlaceMarkManager::cleanupLoader( PlaceMarkLoader* loader )
+void PlacemarkManager::cleanupLoader( PlacemarkLoader* loader )
 {
     d->m_loaderList.removeAll( loader );
     if ( loader->isFinished() ) {
@@ -165,13 +165,13 @@ void PlaceMarkManager::cleanupLoader( PlaceMarkLoader* loader )
     }
 }
 
-void PlaceMarkManager::loadPlaceMarkContainer( PlaceMarkLoader* loader, PlaceMarkContainer * container )
+void PlacemarkManager::loadPlacemarkContainer( PlacemarkLoader* loader, PlacemarkContainer * container )
 {
     qDebug() << "Containername:" << container->name() << "to be finalized:" << loader->finalize() << d->m_loaderList.size();
     d->m_loaderList.removeAll( loader );
     if ( container )
     { 
-        d->m_model->addPlaceMarks( *container, false, d->m_finalized && d->m_loaderList.isEmpty() );
+        d->m_model->addPlacemarks( *container, false, d->m_finalized && d->m_loaderList.isEmpty() );
     }
 
     if( 0 == d->m_loaderList.size() ) 
@@ -181,24 +181,24 @@ void PlaceMarkManager::loadPlaceMarkContainer( PlaceMarkLoader* loader, PlaceMar
     }
 }
 
-void PlaceMarkManager::loadKml( const QString& filename, bool clearPrevious )
+void PlacemarkManager::loadKml( const QString& filename, bool clearPrevious )
 {
-    addPlaceMarkFile( filename, true );
+    addPlacemarkFile( filename, true );
 }
 
-void PlaceMarkManager::loadKmlFromData( const QString& data, const QString& key, bool finalize )
+void PlacemarkManager::loadKmlFromData( const QString& data, const QString& key, bool finalize )
 {
     Q_ASSERT( d->m_model != 0 && "You have called loadKmlFromData before creating a model!" );
 
-    PlaceMarkContainer container;
+    PlacemarkContainer container;
 
     d->m_finalized = true;
     qDebug() << "adding container:" << key;
-    PlaceMarkLoader* loader = new PlaceMarkLoader( this, data, key );
-    connect (   loader, SIGNAL( placeMarksLoaded( PlaceMarkLoader*, PlaceMarkContainer * ) ), 
-                this, SLOT( loadPlaceMarkContainer( PlaceMarkLoader*, PlaceMarkContainer * ) ) );
-    connect (   loader, SIGNAL( placeMarkLoaderFailed( PlaceMarkLoader* ) ), 
-                this, SLOT( cleanupLoader( PlaceMarkLoader* ) ) );
+    PlacemarkLoader* loader = new PlacemarkLoader( this, data, key );
+    connect (   loader, SIGNAL( placemarksLoaded( PlacemarkLoader*, PlacemarkContainer * ) ), 
+                this, SLOT( loadPlacemarkContainer( PlacemarkLoader*, PlacemarkContainer * ) ) );
+    connect (   loader, SIGNAL( placemarkLoaderFailed( PlacemarkLoader* ) ), 
+                this, SLOT( cleanupLoader( PlacemarkLoader* ) ) );
     connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
                 this, SIGNAL( geoDataDocumentAdded( GeoDataDocument* ) ) );
     connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
@@ -207,4 +207,4 @@ void PlaceMarkManager::loadKmlFromData( const QString& data, const QString& key,
     loader->start();
 }
 
-#include "PlaceMarkManager.moc"
+#include "PlacemarkManager.moc"

@@ -27,8 +27,8 @@ class MarbleModel : QObject
 public:
     explicit                MarbleModel (QObject* parent /TransferThis/);
     void                    paintGlobe (Marble::GeoPainter* painter, int width, int height, Marble::ViewParams* viewParams, bool redrawBackground, const QRect& dirtyRect);
-    QAbstractItemModel*     placeMarkModel () const;
-    QItemSelectionModel*    placeMarkSelectionModel () const;
+    QAbstractItemModel*     placemarkModel () const;
+    QItemSelectionModel*    placemarkSelectionModel () const;
     QAbstractItemModel*     geometryModel () const;
     QString                 mapThemeId () const;
 
@@ -56,13 +56,13 @@ public:
 //mt     void               setDownloadManager (HttpDownloadManager* downloadManager);
 
 
-    void                    addPlaceMarkFile (const QString& filename);
-    void                    addPlaceMarkData (const QString& data, const QString& key = "data");
-    void                    removePlaceMarkKey( const QString& key );
+    void                    addPlacemarkFile (const QString& filename);
+    void                    addPlacemarkData (const QString& data, const QString& key = "data");
+    void                    removePlacemarkKey( const QString& key );
     QVector<QPersistentModelIndex>  whichFeatureAt (const QPoint&) const;
 
-//mt undefined symbol: PlaceMarkLayout* None -- need mapped type?
-//mt     PlaceMarkLayout*   placeMarkLayout () const;
+//mt undefined symbol: PlacemarkLayout* None -- need mapped type?
+//mt     PlacemarkLayout*   placemarkLayout () const;
 
 //mt undefined symbol: VectorComposer* None -- need mapped type?
 //mt     VectorComposer*    vectorComposer () const;

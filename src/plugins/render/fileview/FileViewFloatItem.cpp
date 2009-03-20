@@ -245,7 +245,7 @@ void FileViewFloatItem::addFile()
         }
         else */
         if ( extension.compare( "kml", Qt::CaseInsensitive ) == 0 ) {
-            m_marbleWidget->addPlaceMarkFile( fileName );
+            m_marbleWidget->addPlacemarkFile( fileName );
         }
     }
 }

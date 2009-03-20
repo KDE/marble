@@ -9,7 +9,7 @@
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>"
 //
 
-#include "PlaceMarkPainter.h"
+#include "PlacemarkPainter.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QModelIndex>
@@ -22,11 +22,11 @@
 #include "GeoDataStyle.h"
 #include "MarblePlacemarkModel.h"
 #include "ViewportParams.h"
-#include "VisiblePlaceMark.h"
+#include "VisiblePlacemark.h"
 
 using namespace Marble;
 
-PlaceMarkPainter::PlaceMarkPainter( QObject* parent )
+PlacemarkPainter::PlacemarkPainter( QObject* parent )
     : QObject( parent )
 {
     m_useXWorkaround = testXBug();
@@ -35,23 +35,23 @@ PlaceMarkPainter::PlaceMarkPainter( QObject* parent )
     m_defaultLabelColor = Qt::black;
 }
 
-PlaceMarkPainter::~PlaceMarkPainter()
+PlacemarkPainter::~PlacemarkPainter()
 {
 }
 
-void PlaceMarkPainter::setDefaultLabelColor( const QColor& color ){
+void PlacemarkPainter::setDefaultLabelColor( const QColor& color ){
     m_defaultLabelColor = color;
 }
 
-void PlaceMarkPainter::drawPlaceMarks( QPainter* painter, 
-                                       QVector<VisiblePlaceMark*> visiblePlaceMarks,
+void PlacemarkPainter::drawPlacemarks( QPainter* painter, 
+                                       QVector<VisiblePlacemark*> visiblePlacemarks,
                                        const QItemSelection &selection, 
                                        ViewportParams *viewport )
 {
-    QVector<VisiblePlaceMark*>::const_iterator visit = visiblePlaceMarks.constEnd();
-    QVector<VisiblePlaceMark*>::const_iterator itEnd = visiblePlaceMarks.constBegin();
+    QVector<VisiblePlacemark*>::const_iterator visit = visiblePlacemarks.constEnd();
+    QVector<VisiblePlacemark*>::const_iterator itEnd = visiblePlacemarks.constBegin();
 
-    VisiblePlaceMark *mark = 0;
+    VisiblePlacemark *mark = 0;
     int imageWidth = viewport->width();
 
     while ( visit != itEnd ) {
@@ -67,7 +67,7 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
 	painter->drawPixmap( mark->labelRect(), mark->labelPixmap() );
     }
 
-    visit = visiblePlaceMarks.constEnd();
+    visit = visiblePlacemarks.constEnd();
 
     while ( visit != itEnd ) {
 	--visit;
@@ -121,7 +121,7 @@ void PlaceMarkPainter::drawPlaceMarks( QPainter* painter,
     }
 }
 
-inline void PlaceMarkPainter::drawLabelText(QPainter& labelPainter,
+inline void PlacemarkPainter::drawLabelText(QPainter& labelPainter,
                                             const QString &name, const QFont &labelFont )
 {
     QFont font = labelFont;
@@ -145,7 +145,7 @@ inline void PlaceMarkPainter::drawLabelText(QPainter& labelPainter,
     labelPainter.setRenderHint( QPainter::Antialiasing, false );
 }
 
-inline void PlaceMarkPainter::drawLabelPixmap( VisiblePlaceMark *mark, bool isSelected )
+inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSelected )
 {
 
     QPainter labelPainter;
@@ -215,7 +215,7 @@ inline void PlaceMarkPainter::drawLabelPixmap( VisiblePlaceMark *mark, bool isSe
 // QPixmaps that were initialized by filling them 
 // with Qt::transparent
 
-bool PlaceMarkPainter::testXBug()
+bool PlacemarkPainter::testXBug()
 {
     QString  testchar( "K" );
     QFont    font( "Sans Serif", 10 );
@@ -246,5 +246,5 @@ bool PlaceMarkPainter::testXBug()
     return true;
 }
 
-#include "PlaceMarkPainter.moc"
+#include "PlacemarkPainter.moc"
 

@@ -16,27 +16,27 @@
 namespace Marble
 {
 class MarblePlacemarkModel;
-class PlaceMarkContainer;
+class PlacemarkContainer;
 class GeoDataDocument;
 
-class PlaceMarkLoader : public QThread {
+class PlacemarkLoader : public QThread {
     Q_OBJECT
     public:
-        PlaceMarkLoader( QObject* parent, const QString& file, bool finalize = true );
-        PlaceMarkLoader( QObject* parent, const QString& contents, const QString& name, bool finalize = true );
+        PlacemarkLoader( QObject* parent, const QString& file, bool finalize = true );
+        PlacemarkLoader( QObject* parent, const QString& contents, const QString& name, bool finalize = true );
 
         bool finalize();
         void run();
         
     Q_SIGNALS:
-        void placeMarksLoaded( PlaceMarkLoader*, PlaceMarkContainer * );
-        void placeMarkLoaderFailed( PlaceMarkLoader* );
+        void placemarksLoaded( PlacemarkLoader*, PlacemarkContainer * );
+        void placemarkLoaderFailed( PlacemarkLoader* );
         void newGeoDataDocumentAdded( GeoDataDocument* );
     private:
-        bool loadFile( const QString& filename, PlaceMarkContainer* placeMarkContainer );
-        void saveFile( const QString& filename, PlaceMarkContainer* placeMarkContainer );
-        void importKml( const QString& filename, PlaceMarkContainer* placeMarkContainer );
-        void importKmlFromData( PlaceMarkContainer* placeMarkContainer );
+        bool loadFile( const QString& filename, PlacemarkContainer* placemarkContainer );
+        void saveFile( const QString& filename, PlacemarkContainer* placemarkContainer );
+        void importKml( const QString& filename, PlacemarkContainer* placemarkContainer );
+        void importKmlFromData( PlacemarkContainer* placemarkContainer );
 
         QString m_filepath;
         QString m_contents;

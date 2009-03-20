@@ -51,7 +51,7 @@ class ControlView : public QWidget
 
     bool sideBarShown() const { return m_control->isVisible(); }
 
-    void addPlaceMarkFile( QString filename ){ m_marbleWidget->addPlaceMarkFile( filename ); }
+    void addPlacemarkFile( QString filename ){ m_marbleWidget->addPlacemarkFile( filename ); }
 
     QPixmap mapScreenShot(){ return m_marbleWidget->mapScreenShot(); }
     

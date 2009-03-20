@@ -120,7 +120,7 @@ EnumFeatureId GeoDataFeature::featureId() const
 void GeoDataFeature::initializeDefaultStyles()
 {
     // We need to do this similar to the way KCmdLineOptions works in
-    // the future: Having a PlaceMarkStyleProperty properties[] would
+    // the future: Having a PlacemarkStyleProperty properties[] would
     // help here greatly.
 
     QString defaultFamily = s_defaultFont.family();

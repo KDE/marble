@@ -30,16 +30,16 @@ namespace Marble
 
 class GeoDataCoordinates;
 class GeoDataStyle;
-class PlaceMarkContainer;
-class PlaceMarkManager;
+class PlacemarkContainer;
+class PlacemarkManager;
 
 /**
  * This class represents a model of all place marks which
- * are currently available through a given PlaceMarkManager.
+ * are currently available through a given PlacemarkManager.
  */
 class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
 {
-    friend class PlaceMarkManager;
+    friend class PlacemarkManager;
 
     Q_OBJECT
 
@@ -68,7 +68,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      * @param manager The place mark manager on which the model shall work.
      * @param parent The parent object.
      */
-    explicit MarblePlacemarkModel( PlaceMarkManager *manager, 
+    explicit MarblePlacemarkModel( PlacemarkManager *manager, 
                                    QObject *parent = 0 );
 
     /**
@@ -98,22 +98,22 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
                                    Qt::MatchFlags flags = Qt::MatchFlags( Qt::MatchStartsWith | Qt::MatchWrap ) ) const;
 
     /**
-     * This method is used by the PlaceMarkManager to add new
+     * This method is used by the PlacemarkManager to add new
      * place marks to the model.
      *
      * Note: The model takes ownership of the place marks!
      */
-    void addPlaceMarks( PlaceMarkContainer &placeMarks, 
+    void addPlacemarks( PlacemarkContainer &placemarks, 
                         bool clearPrevious = false,
                         bool finalize = true );
 
     /**
-     * This method is used by the PlaceMarkManager to remove
+     * This method is used by the PlacemarkManager to remove
      * place marks from the model.
      *
      * Note: The model takes ownership of the place marks!
      */
-    void removePlaceMarks( const QString &containerName,
+    void removePlacemarks( const QString &containerName,
                            int start,
                            int length,
                            bool finalize = true );
@@ -132,14 +132,14 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
  private:
 
     /**
-     * This method is used by the PlaceMarkManager to clear
+     * This method is used by the PlacemarkManager to clear
      * the model.
      */
-    void clearPlaceMarks();
+    void clearPlacemarks();
     
     virtual void sort( int column, Qt::SortOrder order = Qt::AscendingOrder );
 
-    void createFilterProperties( PlaceMarkContainer &container );
+    void createFilterProperties( PlacemarkContainer &container );
 
     Q_DISABLE_COPY( MarblePlacemarkModel )
     class Private;

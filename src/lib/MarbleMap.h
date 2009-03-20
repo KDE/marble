@@ -254,12 +254,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
     /**
      * @brief returns the model for all the placemarks on the globe.
      */
-    QAbstractItemModel *placeMarkModel() const;
+    QAbstractItemModel *placemarkModel() const;
 
     /**
      * @brief returns the selection model for all the placemarks on the globe.
      */
-    QItemSelectionModel *placeMarkSelectionModel() const;
+    QItemSelectionModel *placemarkSelectionModel() const;
 
     /**
      * @brief  Return how much the map will move if one of the move slots are called.
@@ -269,22 +269,22 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     /**
      * @brief  Add a GeoDataPlacemark file to the model.
-     * @param  filename  the filename of the file containing the PlaceMarks.
+     * @param  filename  the filename of the file containing the Placemarks.
      */
-    void addPlaceMarkFile( const QString &filename );
+    void addPlacemarkFile( const QString &filename );
 
     /**
      * @brief  Add GeoDataPlacemark data as string to the model.
-     * @param  data  the string containing the PlaceMarks.
+     * @param  data  the string containing the Placemarks.
      * @param key  the string needed to identify the data
      */
-    void addPlaceMarkData( const QString& data, const QString& key = "data" );
+    void addPlacemarkData( const QString& data, const QString& key = "data" );
     
     /**
      * @brief  remove data or files from the model.
-     * @param key  either the filename or the string used to identify the data in addPlaceMarkFile and addPlaceMarkData
+     * @param key  either the filename or the string used to identify the data in addPlacemarkFile and addPlacemarkData
      */
-    void removePlaceMarkKey( const QString& key );
+    void removePlacemarkKey( const QString& key );
 
     /**
      * @brief  Return the quaternion that specifies the rotation of the globe.
