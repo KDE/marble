@@ -38,7 +38,7 @@ PlacemarkManager::PlacemarkManager( QObject *parent )
     : QObject( parent ),
       m_model( 0 ),
       m_geomodel( new MarbleGeometryModel() ),
-      m_target(QString())
+      m_target()
 {
 }
 
