@@ -42,12 +42,6 @@ class PlacemarkContainer : public QVector<Marble::GeoDataPlacemark*>
 
     /**
      * @brief Create a new PlacemarkContainer
-     * param  container the other PlacemarkContainer
-     */
-    PlacemarkContainer( const PlacemarkContainer& container );
-
-    /**
-     * @brief Create a new PlacemarkContainer
      * param  container a QVector of Placemarks
      * param  name the name of the container
      */

@@ -23,11 +23,6 @@ PlacemarkContainer::PlacemarkContainer( const QString& name )
 {
 }
 
-PlacemarkContainer::PlacemarkContainer( const PlacemarkContainer& container )
-    : QVector<GeoDataPlacemark*>( container ), m_name( container.name() )
-{
-}
-
 PlacemarkContainer::PlacemarkContainer( const QVector<GeoDataPlacemark*>& container,
                                         const QString& name )
     : QVector<GeoDataPlacemark*>( container ), m_name( name )
