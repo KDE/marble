@@ -18,14 +18,6 @@
 
 using namespace Marble;
 
-VisiblePlacemark::VisiblePlacemark()
-{
-}
-
-VisiblePlacemark::~VisiblePlacemark()
-{
-}
-
 const QModelIndex& VisiblePlacemark::modelIndex() const
 {
     return m_modelIndex;

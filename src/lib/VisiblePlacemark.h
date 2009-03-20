@@ -36,16 +36,6 @@ class VisiblePlacemark
 {
  public:
     /**
-     * Creates a new visible place mark.
-     */
-    VisiblePlacemark();
-
-    /**
-     * Destroys the visible place mark.
-     */
-    ~VisiblePlacemark();
-
-    /**
      * Returns the index of the place mark model which
      * is associated with this visible place mark.
      */
