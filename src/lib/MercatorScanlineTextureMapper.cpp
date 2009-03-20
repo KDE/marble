@@ -34,10 +34,10 @@ using namespace Marble;
 
 MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( TileLoader *tileLoader,
                                                               QObject * parent )
-    : AbstractScanlineTextureMapper( tileLoader, parent )
+    : AbstractScanlineTextureMapper( tileLoader, parent ),
+      m_oldCenterLon( 0.0 ),
+      m_oldYPaintedTop( 0 )
 {
-    m_oldCenterLon   = 0.0;
-    m_oldYPaintedTop = 0;
 }
 
 
