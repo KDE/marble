@@ -100,7 +100,7 @@ void PlacemarkLoader::run()
                     emit placemarksLoaded( this, container );
             }
             qDebug() << "Loading ended" << loadok;
-            if ( loadok == true )
+            if ( loadok )
                 return;
         }
 
