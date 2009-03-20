@@ -58,7 +58,5 @@ QString PlacemarkContainer::name() const
 void PlacemarkContainer::sort( Qt::SortOrder order )
 {
     // FIXME: use order
-    Q_UNUSED( order )
-
     qStableSort( begin(), end(), populationLessThan );
 }
