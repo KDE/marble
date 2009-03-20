@@ -231,7 +231,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 
                 uchar& grey = *readData; // qBlue(*data);
 
-                if ( showRelief == true ) {
+                if ( showRelief ) {
                     emboss.buffer = emboss.buffer >> 8;
                     emboss.gpuint.x4 = grey;    
                     bump = ( emboss.gpuint.x1 + 16 - grey ) >> 1;
