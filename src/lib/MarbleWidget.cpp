@@ -115,15 +115,7 @@ MarbleWidget::MarbleWidget(QWidget *parent)
     : QWidget( parent ),
       d( new MarbleWidgetPrivate( new MarbleMap(), this ) )
 {
-#ifdef MARBLE_DBUS
-    QDBusConnection::sessionBus().registerObject("/MarbleWidget", this, 
-                    QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties);
-#endif
-
     d->construct();
-
-    setInputHandler( new MarbleWidgetDefaultInputHandler );
-    setMouseTracking( true );
 }
 
 
@@ -131,17 +123,13 @@ MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
     : QWidget( parent ),
       d( new MarbleWidgetPrivate( map, this ) )
 {
-//    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
-
     d->construct();
-
-    setInputHandler( new MarbleWidgetDefaultInputHandler );
-    setMouseTracking( true );
 }
 
 MarbleWidget::~MarbleWidget()
 {
     // Remove and delete an existing InputHandler
+    // initiazized in d->construct()
     setInputHandler( 0 );
     setDownloadManager( 0 );
 
@@ -150,6 +138,11 @@ MarbleWidget::~MarbleWidget()
 
 void MarbleWidgetPrivate::construct()
 {
+#ifdef MARBLE_DBUS
+    QDBusConnection::sessionBus().registerObject("/MarbleWidget", m_widget, 
+                    QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties);
+#endif
+
     // Widget settings
     m_widget->setMinimumSize( 200, 300 );
     m_widget->setFocusPolicy( Qt::WheelFocus );
@@ -204,6 +197,9 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
                        m_widget, SLOT( centerSun() ) );
+
+    m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler );
+    m_widget->setMouseTracking( m_widget );
 }
 
 // ----------------------------------------------------------------
