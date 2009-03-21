@@ -14,7 +14,7 @@
 #include "AbstractProjectionHelper_p.h"
 
 // Qt
-#include "QtCore/QDebug"
+#include <QtCore/QDebug>
 
 // Marble
 #include "GeoPainter.h"
