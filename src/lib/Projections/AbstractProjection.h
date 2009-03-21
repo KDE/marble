@@ -47,7 +47,7 @@ class AbstractProjection
     /**
      * @brief Construct a new AbstractProjection.
      */
-    explicit AbstractProjection();
+    AbstractProjection();
 
     virtual ~AbstractProjection();
 

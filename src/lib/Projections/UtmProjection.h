@@ -28,7 +28,7 @@ class UtmProjection : public AbstractProjection
     /**
      * @brief Construct a new UtmProjection.
      */
-    explicit UtmProjection();
+    UtmProjection();
 
     virtual ~UtmProjection();
 

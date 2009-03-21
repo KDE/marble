@@ -39,7 +39,7 @@ class SphericalProjection : public AbstractProjection
     /**
      * @brief Construct a new SphericalProjection.
      */
-    explicit SphericalProjection();
+    SphericalProjection();
 
     virtual ~SphericalProjection();
 

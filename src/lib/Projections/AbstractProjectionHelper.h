@@ -43,7 +43,7 @@ class AbstractProjectionHelper
     /**
      * @brief Construct a new AbstractProjectionHelper.
      */
-    explicit AbstractProjectionHelper();
+    AbstractProjectionHelper();
 
     virtual ~AbstractProjectionHelper();
 

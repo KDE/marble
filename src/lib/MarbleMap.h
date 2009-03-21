@@ -106,7 +106,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * MarbleMap.  The widget will create its own MarbleModel when
      * created.
      */
-    explicit MarbleMap();
+    MarbleMap();
 
     /**
      * @brief Construct a new MarbleMap.

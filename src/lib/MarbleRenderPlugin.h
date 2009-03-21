@@ -41,7 +41,7 @@ class MARBLE_EXPORT MarbleRenderPlugin : public QObject, public MarbleRenderPlug
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
 
  public:
-    explicit MarbleRenderPlugin();
+    MarbleRenderPlugin();
     virtual ~MarbleRenderPlugin();
 
     MarbleDataFacade* dataFacade() const;
