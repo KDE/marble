@@ -134,7 +134,7 @@ void Quaternion::display() const
     qDebug() << quatdisplay;
 }
 
-void Quaternion::operator*=(const Quaternion &q)
+Quaternion& Quaternion::operator*=(const Quaternion &q)
 {
     qreal x, y, z, w;
 
@@ -144,6 +144,7 @@ void Quaternion::operator*=(const Quaternion &q)
     z = v[Q_W] * q.v[Q_Z] + v[Q_X] * q.v[Q_Y] - v[Q_Y] * q.v[Q_X] + v[Q_Z] * q.v[Q_W];
 
     set( w, x, y, z );
+    return *this;
 }
 
 bool Quaternion::operator==(const Quaternion &q) const
