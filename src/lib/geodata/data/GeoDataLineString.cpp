@@ -20,9 +20,9 @@ class GeoDataLineStringPrivate
 {
  public:
     GeoDataLineStringPrivate( TessellationFlags f )
-         : m_dirtyBox( true ),
-           m_tessellationFlags( f ),
-           m_latLonAltBox()
+         : m_latLonAltBox(),
+           m_dirtyBox( true ),
+           m_tessellationFlags( f )
     {
     }
 

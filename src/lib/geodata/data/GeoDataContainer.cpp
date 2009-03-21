@@ -97,8 +97,8 @@ void GeoDataContainer::addFeature( GeoDataFeature* feature, bool setChild )
 
 void GeoDataContainer::removeFeature(GeoDataFeature* feature )
 {
-    int pos = 0;
-    if( pos = d->m_features.indexOf( feature ) && pos >= 0 ) {
+    int pos = d->m_features.indexOf( feature );
+    if( pos && pos >= 0 ) {
         feature->setParent( 0 );
         d->m_features.remove( pos );
     }

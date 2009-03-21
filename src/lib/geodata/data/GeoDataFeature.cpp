@@ -36,10 +36,10 @@ class GeoDataFeaturePrivate
         m_popularity( 0 ),
         m_popularityIndex( 19 ),
         m_visible( true ),
+        m_visualCategory( GeoDataFeature::Unknown ),
         m_role(' '),
         m_style( 0 ),
-        m_styleMap( 0 ),
-        m_visualCategory( GeoDataFeature::Unknown )
+        m_styleMap( 0 )
     {
     }
 
@@ -47,10 +47,10 @@ class GeoDataFeaturePrivate
         m_popularity( other.m_popularity ),
         m_popularityIndex( other.m_popularityIndex ),
         m_visible( other.m_visible ),
+        m_visualCategory( other.m_visualCategory ),
         m_role( other.m_role ),
         m_style( other.m_style ),               //FIXME: both style and stylemap need to be reworked internally!!!!
-        m_styleMap( other.m_styleMap ),
-        m_visualCategory( other.m_visualCategory )
+        m_styleMap( other.m_styleMap )
     {
     }
 
