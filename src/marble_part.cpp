@@ -681,25 +681,13 @@ void MarblePart::setupStatusBar()
 {
     QFontMetrics statusBarFontMetrics( m_statusBarExtension->statusBar()->fontMetrics() );
 
-    m_positionLabel = new QLabel( m_statusBarExtension->statusBar() );
-    m_positionLabel->setIndent( 5 );
     QString templatePositionString =
         QString( "%1 000\xb0 00\' 00\"_, 000\xb0 00\' 00\"_" ).arg(POSITION_STRING);
-    int maxPositionWidth = statusBarFontMetrics.boundingRect(templatePositionString).width()
-	+ 2 * m_positionLabel->margin()
-	+ 2 * m_positionLabel->indent();
-    m_positionLabel->setFixedWidth( maxPositionWidth );
-    m_statusBarExtension->addStatusBarItem( m_positionLabel, -1, false );
+    m_positionLabel = setupStatusBarLabel( templatePositionString );
 
-    m_distanceLabel = new QLabel( m_statusBarExtension->statusBar() );
-    m_distanceLabel->setIndent( 5 );
     QString templateDistanceString =
         QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING);
-    int maxDistanceWidth = statusBarFontMetrics.boundingRect(templateDistanceString).width()
-	+ 2 * m_distanceLabel->margin()
-	+ 2 * m_distanceLabel->indent();
-    m_distanceLabel->setFixedWidth( maxDistanceWidth );
-    m_statusBarExtension->addStatusBarItem( m_distanceLabel, -1, false );
+    m_distanceLabel = setupStatusBarLabel( templateDistanceString );
 
     connect( m_controlView->marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
              this,                          SLOT( showPosition( QString ) ) );
@@ -710,6 +698,19 @@ void MarblePart::setupStatusBar()
 
     setupStatusBarActions();
     updateStatusBar();
+}
+
+QLabel * MarblePart::setupStatusBarLabel( const QString& templateString )
+{
+    QFontMetrics statusBarFontMetrics( m_statusBarExtension->statusBar()->fontMetrics() );
+
+    QLabel * const label = new QLabel( m_statusBarExtension->statusBar() );
+    label->setIndent( 5 );
+    int maxWidth = statusBarFontMetrics.boundingRect( templateString ).width()
+	+ 2 * label->margin() + 2 * label->indent();
+    label->setFixedWidth( maxWidth );
+    m_statusBarExtension->addStatusBarItem( label, -1, false );
+    return label;
 }
 
 void MarblePart::setupDownloadProgressBar()

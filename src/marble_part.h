@@ -113,6 +113,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  setupActions();
     void  setupDownloadProgressBar();
     void  setupStatusBarActions();
+    QLabel * setupStatusBarLabel( const QString& templateString );
 
     void  readSettings();
     void  readStatusBarSettings();
