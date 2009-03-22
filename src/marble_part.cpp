@@ -23,6 +23,7 @@
 #include <QtGui/QFontMetrics>
 #include <QtGui/QPrinter>
 #include <QtGui/QPrintDialog>
+#include <QtGui/QProgressBar>
 #include <QtGui/QPainter>
 #include <QtGui/QStandardItemModel>
 
@@ -62,6 +63,9 @@
 #include "settings.h"
 
 #include "MarbleAbstractFloatItem.h"
+#include "HttpDownloadManager.h"
+#include "MarbleMap.h"
+#include "MarbleModel.h"
 
 using namespace Marble;
 
@@ -246,7 +250,7 @@ void MarblePart::showAltitudeLabel( bool isChecked )
 
 void MarblePart::showDownloadProgressBar( bool isChecked )
 {
-    // m_downloadProgressBar->setVisible( isChecked );
+    m_downloadProgressBar->setVisible( isChecked );
 }
 
 void MarblePart::showFullScreen( bool isChecked )
@@ -406,8 +410,9 @@ void MarblePart::readStatusBarSettings()
     m_showAltitudeAction->setChecked( showAlt );
     showAltitudeLabel( showAlt );
 
-    m_showDownloadProgressAction->setChecked( MarbleSettings::showDownloadProgressBar() );
-    // FIXME: to be done
+    const bool showProgress = MarbleSettings::showDownloadProgressBar();
+    m_showDownloadProgressAction->setChecked( showProgress );
+    showDownloadProgressBar( showProgress );
 }
 
 void MarblePart::writeSettings()
@@ -701,8 +706,29 @@ void MarblePart::setupStatusBar()
     connect( m_controlView->marbleWidget(), SIGNAL( distanceChanged( QString ) ),
              this,                          SLOT( showDistance( QString ) ) );
 
+    setupDownloadProgressBar();
+
     setupStatusBarActions();
     updateStatusBar();
+}
+
+void MarblePart::setupDownloadProgressBar()
+{
+    // get status bar and add progress widget
+    KStatusBar * const statusBar = m_statusBarExtension->statusBar();
+    Q_ASSERT( statusBar );
+
+    m_downloadProgressBar = new QProgressBar;
+    statusBar->addPermanentWidget( m_downloadProgressBar );
+
+    HttpDownloadManager * const downloadManager =
+        m_controlView->marbleWidget()->map()->model()->downloadManager();
+    kDebug() << "got download manager:" << downloadManager;
+
+    connect( downloadManager, SIGNAL( jobAdded( int )),
+             this, SLOT( downloadProgressJobAdded( int )));
+    connect( downloadManager, SIGNAL( downloadComplete( QString, QString )),
+             this, SLOT( downloadProgressJobCompleted( QString, QString )));
 }
 
 void MarblePart::setupStatusBarActions()
@@ -747,7 +773,6 @@ void MarblePart::showNewStuffDialog()
 
 void MarblePart::showStatusBarContextMenu( const QPoint& pos )
 {
-    kDebug() << "ping";
     KStatusBar * const statusBar = m_statusBarExtension->statusBar();
     Q_ASSERT( statusBar );
 
@@ -893,6 +918,35 @@ void MarblePart::lockFloatItemPosition( bool enabled )
 	// Nevertheless go through all.
         (*i)->setPositionLocked(enabled);
     }
+}
+
+void MarblePart::downloadProgressJobAdded( int totalJobs )
+{
+    m_downloadProgressBar->setUpdatesEnabled( false );
+    if ( m_downloadProgressBar->value() < 0 ) {
+        m_downloadProgressBar->setMaximum( 1 );
+        m_downloadProgressBar->setValue( 0 );
+    } else {
+        m_downloadProgressBar->setMaximum( m_downloadProgressBar->maximum() + 1 );
+    }
+
+    qDebug() << "downloadProgressJobAdded: value/maximum: "
+             << m_downloadProgressBar->value() << '/' << m_downloadProgressBar->maximum();
+
+    m_downloadProgressBar->setUpdatesEnabled( true );
+}
+
+void MarblePart::downloadProgressJobCompleted( QString, QString )
+{
+    m_downloadProgressBar->setUpdatesEnabled( false );
+    m_downloadProgressBar->setValue( m_downloadProgressBar->value() + 1 );
+    if ( m_downloadProgressBar->value() == m_downloadProgressBar->maximum() )
+        m_downloadProgressBar->reset();
+
+    qDebug() << "downloadProgressJobCompleted: value/maximum: "
+             << m_downloadProgressBar->value() << '/' << m_downloadProgressBar->maximum();
+
+    m_downloadProgressBar->setUpdatesEnabled( true );
 }
 
 }

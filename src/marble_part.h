@@ -21,6 +21,7 @@ class KAction;
 class KConfigDialog;
 
 class QLabel;
+class QProgressBar;
 class QStandardItemModel;
 
 namespace KParts
@@ -88,6 +89,9 @@ class MarblePart: public KParts::ReadOnlyPart
      */
     void showDownloadProgressBar( bool isChecked );
 
+    void  downloadProgressJobAdded( int );
+    void  downloadProgressJobCompleted( QString, QString );
+
     void  lockFloatItemPosition( bool );
     void  controlSun();
     void  showSun( bool );
@@ -107,6 +111,7 @@ class MarblePart: public KParts::ReadOnlyPart
 
   private:
     void  setupActions();
+    void  setupDownloadProgressBar();
     void  setupStatusBarActions();
 
     void  readSettings();
@@ -149,9 +154,10 @@ class MarblePart: public KParts::ReadOnlyPart
     QString m_position;
     QString m_distance;
 
-    // Zoom label for the statusbar.
+    // Items for the statusbar.
     QLabel       *m_positionLabel;
     QLabel       *m_distanceLabel;
+    QProgressBar *m_downloadProgressBar;
 
     void updateStatusBar();
 
