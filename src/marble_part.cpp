@@ -7,6 +7,7 @@
 //
 // Copyright 2007      Tobias Koenig  <tokoe@kde.org>
 // Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
+// Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
@@ -33,11 +34,13 @@
 #include <kconfigdialog.h>
 #include <kdeversion.h>
 #include <kfiledialog.h>
+#include <kmenu.h>
 #include <kmessagebox.h>
 #include <kparts/genericfactory.h>
 #include <kparts/statusbarextension.h>
 #include <kstandardaction.h>
 #include <kstatusbar.h>
+#include <ktoggleaction.h>
 #include <ktogglefullscreenaction.h>
 #include <knewstuff2/ui/knewstuffaction.h>
 #include <knewstuff2/engine.h>
@@ -231,6 +234,21 @@ void MarblePart::setShowAtmosphere( bool isChecked )
     m_showAtmosphereAction->setChecked( isChecked ); // Sync state with the GUI
 }
 
+void MarblePart::showPositionLabel( bool isChecked )
+{
+    m_positionLabel->setVisible( isChecked );
+}
+
+void MarblePart::showAltitudeLabel( bool isChecked )
+{
+    m_distanceLabel->setVisible( isChecked );
+}
+
+void MarblePart::showDownloadProgressBar( bool isChecked )
+{
+    // m_downloadProgressBar->setVisible( isChecked );
+}
+
 void MarblePart::showFullScreen( bool isChecked )
 {
     if ( KApplication::activeWindow() )
@@ -372,8 +390,24 @@ void MarblePart::readSettings()
         }
     }
 
+    readStatusBarSettings();
+
     slotUpdateSettings();
     qDebug() << "Stop: MarblePart::readSettings()";
+}
+
+void MarblePart::readStatusBarSettings()
+{
+    const bool showPos = MarbleSettings::showPositionLabel();
+    m_showPositionAction->setChecked( showPos );
+    showPositionLabel( showPos );
+
+    const bool showAlt = MarbleSettings::showAltitudeLabel();
+    m_showAltitudeAction->setChecked( showAlt );
+    showAltitudeLabel( showAlt );
+
+    m_showDownloadProgressAction->setChecked( MarbleSettings::showDownloadProgressBar() );
+    // FIXME: to be done
 }
 
 void MarblePart::writeSettings()
@@ -452,7 +486,16 @@ void MarblePart::writeSettings()
 
     MarbleSettings::setLockFloatItemPositions( m_lockFloatItemsAct->isChecked() );
 
+    writeStatusBarSettings();
+
     MarbleSettings::self()->writeConfig();
+}
+
+void MarblePart::writeStatusBarSettings()
+{
+    MarbleSettings::setShowPositionLabel( m_showPositionAction->isChecked() );
+    MarbleSettings::setShowAltitudeLabel( m_showAltitudeAction->isChecked() );
+    MarbleSettings::setShowDownloadProgressBar( m_showDownloadProgressAction->isChecked() );
 }
 
 void MarblePart::setupActions()
@@ -658,7 +701,31 @@ void MarblePart::setupStatusBar()
     connect( m_controlView->marbleWidget(), SIGNAL( distanceChanged( QString ) ),
              this,                          SLOT( showDistance( QString ) ) );
 
+    setupStatusBarActions();
     updateStatusBar();
+}
+
+void MarblePart::setupStatusBarActions()
+{
+    KStatusBar * const statusBar = m_statusBarExtension->statusBar();
+    Q_ASSERT( statusBar );
+
+    statusBar->setContextMenuPolicy( Qt::CustomContextMenu );
+
+    connect( statusBar, SIGNAL( customContextMenuRequested( QPoint )),
+             this, SLOT( showStatusBarContextMenu( QPoint )));
+
+    m_showPositionAction = new KToggleAction( i18n( "Show Position" ), this );
+    m_showAltitudeAction = new KToggleAction( i18n( "Show Altitude" ), this );
+    m_showDownloadProgressAction =
+        new KToggleAction( i18n( "Show Download Progress Bar" ), this );
+
+    connect( m_showPositionAction, SIGNAL( triggered( bool ) ),
+             this, SLOT( showPositionLabel( bool ) ) );
+    connect( m_showAltitudeAction, SIGNAL( triggered( bool ) ),
+             this, SLOT( showAltitudeLabel( bool ) ) );
+    connect( m_showDownloadProgressAction, SIGNAL( triggered( bool ) ),
+             this, SLOT( showDownloadProgressBar( bool ) ) );
 }
 
 void MarblePart::showNewStuffDialog()
@@ -676,6 +743,20 @@ void MarblePart::showNewStuffDialog()
     // Update the map theme widget by updating the model.
     // Shouldn't be needed anymore ...
     //m_controlView->marbleControl()->updateMapThemes();
+}
+
+void MarblePart::showStatusBarContextMenu( const QPoint& pos )
+{
+    kDebug() << "ping";
+    KStatusBar * const statusBar = m_statusBarExtension->statusBar();
+    Q_ASSERT( statusBar );
+
+    KMenu statusBarContextMenu( m_controlView->marbleWidget() );
+    statusBarContextMenu.addAction( m_showPositionAction );
+    statusBarContextMenu.addAction( m_showAltitudeAction );
+    statusBarContextMenu.addAction( m_showDownloadProgressAction );
+
+    statusBarContextMenu.exec( statusBar->mapToGlobal( pos ));
 }
 
 void MarblePart::editSettings()

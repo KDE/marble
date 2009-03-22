@@ -169,4 +169,15 @@
    <label>List of toggles for enabling plugins.</label>
   </entry>
  </group>
+ <group name="StatusBar">
+  <entry key="showPositionLabel" type="Bool" >
+   <default>true</default>
+  </entry>
+  <entry key="showAltitudeLabel" type="Bool" >
+   <default>true</default>
+  </entry>
+  <entry key="showDownloadProgressBar" type="Bool" >
+   <default>true</default>
+  </entry>
+ </group>
 </kcfg>
