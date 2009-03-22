@@ -173,18 +173,17 @@ inline qreal AbstractScanlineTextureMapper::rad2PixelY( qreal lat ) const
     case GeoSceneTexture::Equirectangular:
         return -lat * m_normGlobalHeight;
     case GeoSceneTexture::Mercator:
-        if ( fabs( lat ) < 1.4835 )
-    {
-        // We develop the inverse Gudermannian into a MacLaurin Series:
-        // Inspite of the many elements needed to get decent 
-        // accuracy this is still faster by far than calculating the 
-        // trigonometric expression:
-        // return - asinh( tan( lat ) ) * 0.5 * m_normGlobalHeight;
+        if ( fabs( lat ) < 1.4835 ) {
+            // We develop the inverse Gudermannian into a MacLaurin Series:
+            // Inspite of the many elements needed to get decent 
+            // accuracy this is still faster by far than calculating the 
+            // trigonometric expression:
+            // return - asinh( tan( lat ) ) * 0.5 * m_normGlobalHeight;
 
-        // We are using the Horner Scheme as a polynom representation
+            // We are using the Horner Scheme as a polynom representation
 
             return - gdInv( lat ) * 0.5 * m_normGlobalHeight;
-    }
+        }
         if ( lat >= +1.4835 )
             // asinh( tan (1.4835)) => 3.1309587
             return - 3.1309587 * 0.5 * m_normGlobalHeight; 
