@@ -47,11 +47,6 @@ SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( TileLoader *tile
 }
 
 
-SphericalScanlineTextureMapper::~SphericalScanlineTextureMapper()
-{
-}
-
-
 void SphericalScanlineTextureMapper::resizeMap(int width, int height)
 {
     AbstractScanlineTextureMapper::resizeMap( width, height );
