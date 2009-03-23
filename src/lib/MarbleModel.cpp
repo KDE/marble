@@ -949,6 +949,14 @@ Planet* MarbleModel::planet() const
     return d->m_planet;
 }
 
+int MarbleModel::tileZoomLevel() const
+{
+    if (!d->m_texmapper)
+        return -1;
+
+    return d->m_texmapper->tileZoomLevel();
+}
+
 }
 
 #include "MarbleModel.moc"

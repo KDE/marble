@@ -79,6 +79,7 @@ namespace
 {
     const char* POSITION_STRING = I18N_NOOP( "Position: %1" );
     const char* DISTANCE_STRING = I18N_NOOP( "Altitude: %1" );
+    const char* TILEZOOMLEVEL_STRING = I18N_NOOP( "Tile Zoom Level: %1" );
 }
 
 typedef KParts::GenericFactory< MarblePart > MarblePartFactory;
@@ -110,6 +111,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
 
     m_position = NOT_AVAILABLE;
     m_distance = m_controlView->marbleWidget()->distanceString();
+    m_tileZoomLevel = NOT_AVAILABLE;
 
     QTimer::singleShot( 0, this, SLOT( initObject() ) );
 }
@@ -246,6 +248,11 @@ void MarblePart::showPositionLabel( bool isChecked )
 void MarblePart::showAltitudeLabel( bool isChecked )
 {
     m_distanceLabel->setVisible( isChecked );
+}
+
+void MarblePart::showTileZoomLevelLabel( bool isChecked )
+{
+    m_tileZoomLevelLabel->setVisible( isChecked );
 }
 
 void MarblePart::showDownloadProgressBar( bool isChecked )
@@ -410,6 +417,10 @@ void MarblePart::readStatusBarSettings()
     m_showAltitudeAction->setChecked( showAlt );
     showAltitudeLabel( showAlt );
 
+    const bool showTileZoom = MarbleSettings::showTileZoomLevelLabel();
+    m_showTileZoomLevelAction->setChecked( showTileZoom );
+    showTileZoomLevelLabel( showTileZoom );
+
     const bool showProgress = MarbleSettings::showDownloadProgressBar();
     m_showDownloadProgressAction->setChecked( showProgress );
     showDownloadProgressBar( showProgress );
@@ -500,6 +511,7 @@ void MarblePart::writeStatusBarSettings()
 {
     MarbleSettings::setShowPositionLabel( m_showPositionAction->isChecked() );
     MarbleSettings::setShowAltitudeLabel( m_showAltitudeAction->isChecked() );
+    MarbleSettings::setShowTileZoomLevelLabel( m_showTileZoomLevelAction->isChecked() );
     MarbleSettings::setShowDownloadProgressBar( m_showDownloadProgressAction->isChecked() );
 }
 
@@ -668,6 +680,33 @@ void MarblePart::showDistance( const QString& distance )
     updateStatusBar();
 }
 
+void MarblePart::showZoomLevel( int zoomLevel )
+{
+    Q_UNUSED( zoomLevel );
+    updateTileZoomLevel();
+    updateStatusBar();
+}
+
+void MarblePart::mapThemeChanged( const QString& newMapTheme )
+{
+    Q_UNUSED( newMapTheme );
+    updateTileZoomLevel();
+    updateStatusBar();
+}
+
+void MarblePart::updateTileZoomLevel()
+{
+    const int tileZoomLevel =
+        m_controlView->marbleWidget()->map()->model()->tileZoomLevel();
+    if ( tileZoomLevel == -1 )
+        m_tileZoomLevel = NOT_AVAILABLE;
+    else {
+        QString s;
+        s.setNum( tileZoomLevel );
+        m_tileZoomLevel = s;
+    }
+}
+
 void MarblePart::updateStatusBar()
 {
     if ( m_positionLabel )
@@ -675,6 +714,10 @@ void MarblePart::updateStatusBar()
 
     if ( m_distanceLabel )
         m_distanceLabel->setText( i18n( DISTANCE_STRING, m_distance ) );
+
+    if ( m_tileZoomLevelLabel )
+        m_tileZoomLevelLabel->setText( i18n( TILEZOOMLEVEL_STRING,
+                                             m_tileZoomLevel ) );
 }
 
 void MarblePart::setupStatusBar()
@@ -689,10 +732,18 @@ void MarblePart::setupStatusBar()
         QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING);
     m_distanceLabel = setupStatusBarLabel( templateDistanceString );
 
+    const QString templateTileZoomLevelString =
+        QString( "%1" ).arg( TILEZOOMLEVEL_STRING );
+    m_tileZoomLevelLabel = setupStatusBarLabel( templateTileZoomLevelString );
+
     connect( m_controlView->marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
              this,                          SLOT( showPosition( QString ) ) );
     connect( m_controlView->marbleWidget(), SIGNAL( distanceChanged( QString ) ),
              this,                          SLOT( showDistance( QString ) ) );
+    connect( m_controlView->marbleWidget(), SIGNAL( zoomChanged( int ) ),
+             this,                          SLOT( showZoomLevel( int ) ) );
+    connect( m_controlView->marbleWidget()->model(), SIGNAL( themeChanged( QString )),
+             this, SLOT( mapThemeChanged( QString )), Qt::QueuedConnection );
 
     setupDownloadProgressBar();
 
@@ -744,6 +795,8 @@ void MarblePart::setupStatusBarActions()
 
     m_showPositionAction = new KToggleAction( i18n( "Show Position" ), this );
     m_showAltitudeAction = new KToggleAction( i18n( "Show Altitude" ), this );
+    m_showTileZoomLevelAction =
+        new KToggleAction( i18n( "Show Tile Zoom Level" ), this );
     m_showDownloadProgressAction =
         new KToggleAction( i18n( "Show Download Progress Bar" ), this );
 
@@ -751,6 +804,8 @@ void MarblePart::setupStatusBarActions()
              this, SLOT( showPositionLabel( bool ) ) );
     connect( m_showAltitudeAction, SIGNAL( triggered( bool ) ),
              this, SLOT( showAltitudeLabel( bool ) ) );
+    connect( m_showTileZoomLevelAction, SIGNAL( triggered( bool ) ),
+             this, SLOT( showTileZoomLevelLabel( bool ) ) );
     connect( m_showDownloadProgressAction, SIGNAL( triggered( bool ) ),
              this, SLOT( showDownloadProgressBar( bool ) ) );
 }
@@ -780,6 +835,7 @@ void MarblePart::showStatusBarContextMenu( const QPoint& pos )
     KMenu statusBarContextMenu( m_controlView->marbleWidget() );
     statusBarContextMenu.addAction( m_showPositionAction );
     statusBarContextMenu.addAction( m_showAltitudeAction );
+    statusBarContextMenu.addAction( m_showTileZoomLevelAction );
     statusBarContextMenu.addAction( m_showDownloadProgressAction );
 
     statusBarContextMenu.exec( statusBar->mapToGlobal( pos ));

@@ -51,6 +51,7 @@ public:
 
     void centerTiles( ViewParams *viewParams, int tileLevel,
                       qreal& tileCol, qreal& tileRow );
+    int tileZoomLevel() const;
 
  Q_SIGNALS:
     void mapChanged();
@@ -194,6 +195,11 @@ inline qreal AbstractScanlineTextureMapper::rad2PixelY( qreal lat ) const
 
     // Dummy value to avoid a warning.
     return 0.0;
+}
+
+inline int AbstractScanlineTextureMapper::tileZoomLevel() const
+{
+    return m_tileLevel;
 }
 
 }

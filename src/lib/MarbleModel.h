@@ -269,6 +269,12 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     Planet* planet() const;
 
+    /**
+     * @brief Return the current tile zoom level. For example for OpenStreetMap
+     *        possible values are 1..18, for BlueMarble 0..6.
+     */
+    int tileZoomLevel() const;
+
  public Q_SLOTS:
     void clearVolatileTileCache();
     /**
