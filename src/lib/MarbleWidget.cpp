@@ -1008,13 +1008,9 @@ void MarbleWidget::updateGps()
                                                          d->m_map->viewParams(),
                                                          temp );
     if ( draw ) {
+        qDebug() << "Updating viewport for GPS";
         update( temp );
     }
-    /*
-    d->m_model->gpsLayer()->updateGps(
-                         size(), radius(),
-                              planetAxis() );
-    update();*/
 }
 
 void MarbleWidget::openGpxFile(QString &filename)

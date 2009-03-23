@@ -1099,11 +1099,6 @@ void MarbleMap::updateGps()
         update(temp);
     }
 #endif
-
-#if 0
-    d->m_model->gpsLayer()->updateGps( size(), radius(), planetAxis() );
-    update();
-#endif
 }
 
 void MarbleMap::openGpxFile(QString &filename)
