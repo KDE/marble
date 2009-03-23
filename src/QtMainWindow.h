@@ -29,7 +29,6 @@ namespace Marble
 class MarbleWidget;
 class SunControlWidget;
 class MarbleAbstractFloatItem;
-class QtMarbleConfigDialog;
 
 class MainWindow : public QMainWindow
 {
@@ -60,8 +59,6 @@ class MainWindow : public QMainWindow
 
  private Q_SLOTS:
     void  initObject();
-    void  editSettings();
-    void  updateSettings();
     void  exportMapScreenShot();
     void  printMapScreenShot();
     void  copyMap();
@@ -78,7 +75,8 @@ class MainWindow : public QMainWindow
     void  aboutMarble();
     void  openFile();
     void  setupStatusBar();
-    void  createInfoBoxesMenu();
+
+    void createInfoBoxesMenu();
 
  private:
     ControlView *m_controlView;
@@ -92,7 +90,6 @@ class MainWindow : public QMainWindow
     QAction *m_printAct;
     QAction *m_quitAct;
     QAction *m_copyMapAct;
-    QAction *m_configDialogAct;
     QAction *m_copyCoordinatesAct;
     QAction *m_sideBarAct;
     QAction *m_fullScreenAct;
@@ -112,8 +109,6 @@ class MainWindow : public QMainWindow
     // Zoom label for the statusbar.
     QLabel       *m_positionLabel;
     QLabel       *m_distanceLabel;
-    
-    QtMarbleConfigDialog *m_configDialog;
 
     void updateStatusBar();
 };
