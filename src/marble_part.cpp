@@ -394,20 +394,20 @@ void MarblePart::readSettings()
 
 void MarblePart::writeSettings()
 {
+    // Get the 'quit' values from the widget and store them in the settings.
     qreal  quitLon = m_controlView->marbleWidget()->centerLongitude();
     qreal  quitLat = m_controlView->marbleWidget()->centerLatitude();
     int     quitZoom = m_controlView->marbleWidget()->zoom();
 
-    // Get the 'home' values from the widget and store them in the settings.
     MarbleSettings::setQuitLongitude( quitLon );
     MarbleSettings::setQuitLatitude( quitLat );
     MarbleSettings::setQuitZoom( quitZoom );
 
+    // Get the 'home' values from the widget and store them in the settings.
     qreal  homeLon = 0;
     qreal  homeLat = 0;
     int     homeZoom = 0;
 
-    // Get the 'home' values from the widget and store them in the settings.
     m_controlView->marbleWidget()->home( homeLon, homeLat, homeZoom );
     MarbleSettings::setHomeLongitude( homeLon );
     MarbleSettings::setHomeLatitude( homeLat );
@@ -775,6 +775,7 @@ void MarblePart::slotUpdateSettings()
 {
     qDebug() << "Updating Settings ...";
 
+    // FIXME: Font doesn't get updated instantly.
     m_controlView->marbleWidget()->setDefaultFont( MarbleSettings::mapFont() );
 
     m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::stillQuality(), Marble::Still );

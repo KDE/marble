@@ -34,7 +34,7 @@ namespace Marble
  *
  */
 
-class MARBLE_EXPORT MarbleCacheSettingsWidget : public QWidget, private Ui::MarbleCacheSettingsWidget
+class MARBLE_EXPORT MarbleCacheSettingsWidget : public QWidget, public Ui::MarbleCacheSettingsWidget
 {
     Q_OBJECT
 
