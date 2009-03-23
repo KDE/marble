@@ -76,6 +76,7 @@ class MainWindow : public QMainWindow
     void  showSun( bool );
     void  enterWhatsThis();
     void  aboutMarble();
+    void  handbook();
     void  openFile();
     void  setupStatusBar();
     void  createInfoBoxesMenu();
@@ -115,6 +116,7 @@ class MainWindow : public QMainWindow
     QAction *m_aboutMarbleAct;
     QAction *m_aboutQtAct;
     QAction *m_openAct;
+    QAction *m_handbook;
 
     QString m_position;
     QString m_distance;

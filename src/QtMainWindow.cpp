@@ -14,6 +14,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QList>
 #include <QtCore/QSettings>
+#include <QtCore/QUrl>
 #include <QtGui/QCloseEvent>
 
 #include <QtGui/QAction>
@@ -23,7 +24,7 @@
 #include <QtGui/QIcon>
 #include <QtGui/QMenuBar>
 #include <QtGui/QStatusBar>
-
+#include <QtGui/QDesktopServices>
 #include <QtGui/QFileDialog>
 #include <QtGui/QMessageBox>
 
@@ -164,6 +165,11 @@ void MainWindow::createActions()
      m_controlSunAct->setStatusTip(tr("Configure Sun Control"));
      connect(m_controlSunAct, SIGNAL(triggered()), this, SLOT( controlSun()));
 
+     m_handbook = new QAction( QIcon(":/icons/help-contents.png"), tr("Marble Desktop Globe &Handbook"), this);
+     m_handbook->setShortcut(tr("F1"));
+     m_handbook->setStatusTip(tr("Show the Handbook for Marble Desktop Globe"));
+     connect(m_handbook, SIGNAL(triggered()), this, SLOT(handbook()));
+
      m_whatsThisAct = new QAction( QIcon(":/icons/help-whatsthis.png"), tr("What's &This"), this);
      m_whatsThisAct->setShortcut(tr("Shift+F1"));
      m_whatsThisAct->setStatusTip(tr("Show a detailed explanation of the action."));
@@ -221,10 +227,13 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_configDialogAct);
 
     m_helpMenu = menuBar()->addMenu(tr("&Help"));
+    m_helpMenu->addAction(m_handbook);
+    m_helpMenu->addSeparator();
     m_helpMenu->addAction(m_whatsThisAct);
     m_helpMenu->addSeparator();
     m_helpMenu->addAction(m_aboutMarbleAct);
     m_helpMenu->addAction(m_aboutQtAct);
+    
 
     connect( m_infoBoxesMenu, SIGNAL( aboutToShow() ), this, SLOT( createInfoBoxesMenu() ) ); 
 }
@@ -405,6 +414,12 @@ void MainWindow::aboutMarble()
 {
     MarbleAboutDialog dlg(this);
     dlg.exec();
+}
+
+void MainWindow::handbook()
+{
+    if( !QDesktopServices::openUrl( QUrl( "http://docs.kde.org/stable/en/kdeedu/marble/index.html" ) ) ) 
+    qDebug() << "URL not opened";
 }
 
 void MainWindow::showPosition( const QString& position )
