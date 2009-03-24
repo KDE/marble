@@ -10,3 +10,4 @@ INCLUDE(${QT_USE_FILE})
 set( twitter_SRCS twitterPlugin.cpp jsonparser.cpp )
 
 marble_add_plugin( twitter ${twitter_SRCS} )
+target_link_libraries( Panoramio ${QT_QTSCRIPT_LIBRARY} )
