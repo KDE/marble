@@ -24,6 +24,7 @@
 #include "MarbleRenderPlugin.h"
 #include <QWidget>
 #include <QLabel>
+#include <QPushButton>
 namespace Marble
 {
 
@@ -63,8 +64,8 @@ public:
     bool render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0);
 
 public slots:
-    void slotJsonDownloadComplete(QString , QString);   //completed download of json reply fom panoramio
-    void slotImageDownloadComplete(QString , QString);   //completed download of image
+    void slotDownloadImage(QString , QString);   //completed download of json reply fom panoramio
+    void slotAppendImageToList(QString , QString);   //completed download of image
 signals:
     void statusMessageForImageDownloadingProcess(QString);
 private:
@@ -77,7 +78,7 @@ private:
     QList <panoramioDataStructure> parsedData;
     panoramioDataStructure temp;
     QPixmap tempImage;
-    QLabel tempLabel;
+    QPushButton tempLabel;
     int flag;//this flag is one when globe has an Image  (downloaded or already there in cache)
 //         HttpJob *job;
     int numberOfImagesToShow;//this factor stires how many are to be downloaded and shown on the globe
