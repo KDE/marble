@@ -21,6 +21,7 @@
 #include "../lib/CacheStoragePolicy.h"
 // #include "../lib/HttpJob.h"
 #include "jsonparser.h"
+#include "imagewidget.h"
 #include "MarbleRenderPlugin.h"
 #include <QWidget>
 #include <QLabel>
@@ -74,16 +75,12 @@ private:
     jsonParser panoramioJsonParser;
     int decimalToSexagecimal();//convert decimal to DMS system
     void downloadPanoramio(int, int, qreal, qreal, qreal, qreal);
-    QList <QPixmap > imagesWeHave;//this list will hold pointers to pixmaps we have downloaded
     QList <panoramioDataStructure> parsedData;
     panoramioDataStructure temp;
     QPixmap tempImage;
-    QPushButton tempLabel;
     int flag;//this flag is one when globe has an Image  (downloaded or already there in cache)
-//         HttpJob *job;
     int numberOfImagesToShow;//this factor stires how many are to be downloaded and shown on the globe
-    QWidget *parent;
-    QList<QLabel>images;//these widgets are supposed to show draw images and take click events 
+    QList<imageWidget*>images;//these widgets are supposed to show draw images and take click events 
 };
 
 }

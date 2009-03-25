@@ -78,26 +78,33 @@ bool PanoramioPlugin::isInitialized() const
 {
     return true;
 }
-
+/**
+*This function render whatever images it has in list
+*/
 bool PanoramioPlugin::render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer)
 {
     static qreal deltaWest = 0 , deltaEast = 0 , deltaSouth = 0 , deltaNorth = 0;
     painter->autoMapQuality();
     GeoDataLatLonAltBox mylatLonAltBox = viewport->viewLatLonAltBox();
     if (flag == 1) {
-        for (int x = 0; x < imagesWeHave.count(); ++x) {
-            painter->drawPixmap(GeoDataCoordinates(parsedData[x].longitude, parsedData[x].latitude, 0.0, GeoDataCoordinates::Degree), imagesWeHave[x]);
+        for (int x = 0; x < images.size(); ++x) {
+            painter->drawPixmap(GeoDataCoordinates(parsedData[x].longitude, parsedData[x].latitude, 0.0, GeoDataCoordinates::Degree), *((images.at(x))->returnPointerToImage()));
+// 	  (images.at(x)).render(painter->device(),QPoint(),QRegion(),QWidget::RenderFlags(QWidget::DrawChildren));//,my attempt at drawing a widget
             painter->setBrush(QBrush(Qt::NoBrush));
             painter->setPen(Qt::Dense1Pattern);
             painter->setPen(Qt::white);
             painter->drawRect(GeoDataCoordinates(parsedData[x].longitude, parsedData[x].latitude, 0.0, GeoDataCoordinates::Degree),/*parsedData[x].height , parsedData[x].width*/50, 50);
-             qDebug() <<"Shanky: Coordinates are lon-lat: " << parsedData[x].longitude << parsedData[x].latitude;
-	  tempLabel.render(painter->device(),QPoint(),QRegion(),QWidget::RenderFlags(QWidget::DrawChildren));//,my attempt at drawing a widget
+//              qDebug() <<"Shanky: Coordinates are lon-lat: " << parsedData[x].longitude << parsedData[x].latitude;
+
         }
     }
   return true;
 }
-
+/**
+*this slot is called after the json has been downlaod 
+*[1]this flost calls the json parser 
+*[2]add jobs in  http Download manager for each parsed entry in parsed json
+*/
 void PanoramioPlugin::slotDownloadImage(QString relativeUrlString, QString id)
 {
     disconnect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotDownloadImage(QString , QString)));
@@ -114,15 +121,22 @@ void PanoramioPlugin::slotDownloadImage(QString relativeUrlString, QString id)
     }
 
 }
-
+/**
+*this slot is called once a image has been downloaded by HTTPdownloader
+[1]It appends the image to a imageWidget
+*/
 void PanoramioPlugin::slotAppendImageToList(const QString relativeUrlString, const QString id)
 {
     tempImage.load(MarbleDirs::localPath() + "/cache/" + relativeUrlString);
-    imagesWeHave.append(tempImage.scaled(QSize(50, 50),  Qt::IgnoreAspectRatio , Qt::FastTransformation));
+//     imagesWeHave.append(tempImage.scaled(QSize(50, 50),  Qt::IgnoreAspectRatio , Qt::FastTransformation));
+    images.append(new imageWidget);
+    (images.at((images.size())-1))->addImage(tempImage.scaled(QSize(50, 50),  Qt::IgnoreAspectRatio , Qt::FastTransformation));
     qDebug() <<__func__ << id << "=" << tempImage.isNull() << MarbleDirs::localPath() + "/cache/" + relativeUrlString ;
     flag = 1;
 }
-
+/**
+*This function add jobs to downlaod manager to fetch json file from panoramio sevrers
+*/
 void PanoramioPlugin::downloadPanoramio(int rangeFrom , int rangeTo , qreal east , qreal west , qreal north , qreal south)
 {
     m_downloadManager->addJob(QUrl("http://www.panoramio.com/map/get_panoramas.php?from="
