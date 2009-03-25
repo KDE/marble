@@ -35,8 +35,7 @@ QStringList MarbleCrosshairsPlugin::renderPosition() const
 
 QString MarbleCrosshairsPlugin::name() const
 {
-    // FIXME (once we are out of string freeze):
-    return tr( "Cross&hairs" ).remove( QChar( '&' ) ); // return tr( "Crosshairs" );
+    return tr( "Crosshairs" );
 }
 
 QString MarbleCrosshairsPlugin::guiString() const
