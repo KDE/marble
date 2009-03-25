@@ -314,7 +314,7 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
                     m_posY = itLat + itStepLat * j;
                 }
     
-                *scanLine = m_tile->pixelF( m_posX, m_posY );;
+                *scanLine = m_tile->pixelF( m_posX, m_posY );
     
                 ++scanLine;
             }

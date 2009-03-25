@@ -40,10 +40,10 @@ class MarbleAbstractFloatItemPrivate
 
     void calculateLayout()
     {
-        qreal marginTop = ( s_marginTop == 0.0 ) ? s_margin : s_marginTop;;
-        qreal marginBottom = ( s_marginBottom == 0.0 ) ? s_margin : s_marginBottom;;
+        qreal marginTop = ( s_marginTop == 0.0 ) ? s_margin : s_marginTop;
+        qreal marginBottom = ( s_marginBottom == 0.0 ) ? s_margin : s_marginBottom;
         qreal marginLeft = ( s_marginLeft == 0.0 ) ? s_margin : s_marginLeft;
-        qreal marginRight = ( s_marginRight == 0.0 ) ? s_margin : s_marginRight;;
+        qreal marginRight = ( s_marginRight == 0.0 ) ? s_margin : s_marginRight;
 
         m_renderedRect = QRectF( m_position.x() + marginLeft, m_position.y() + marginTop, m_size.width() - ( marginLeft + marginRight ), m_size.height() - ( marginTop + marginBottom ) );
 

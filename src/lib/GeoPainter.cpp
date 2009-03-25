@@ -490,7 +490,7 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates, qreal 
         if ( latBottom < -90.0 ) latBottom = -90.0;
 
         GeoDataCoordinates bottomLeft( lonLeft, latBottom,
-                                    altitude, GeoDataCoordinates::Degree );;
+                                    altitude, GeoDataCoordinates::Degree );
         GeoDataCoordinates bottomRight( lonRight, latBottom,
                                     altitude, GeoDataCoordinates::Degree );
         GeoDataCoordinates topRight( lonRight, latTop,
