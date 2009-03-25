@@ -34,8 +34,8 @@ using namespace Marble;
 FileViewFloatItem::FileViewFloatItem(const QPointF &point,
         const QSizeF &size) :
     MarbleAbstractFloatItem(point, size), m_marbleWidget(0),
-            m_fileViewParent(0), m_repaintScheduled(true),
-            m_fileView(0), m_persIndex(0)
+            m_fileView(0), m_fileViewParent(0),
+            m_repaintScheduled(true), m_persIndex(0)
 {
     // Plugin is not enabled by default
     setEnabled(false);
