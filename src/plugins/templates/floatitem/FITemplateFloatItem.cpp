@@ -25,6 +25,8 @@
 #include "GeoDataCoordinates.h"
 #include "ViewportParams.h"
 
+namespace Marble
+{
 
 FITemplateFloatItem::FITemplateFloatItem ( const QPointF &point,
 					    const QSizeF &size )
@@ -101,7 +103,8 @@ bool FITemplateFloatItem::renderFloatItem( GeoPainter     *painter,
     // Here you should render your float item 
 }
 
+}
 
-Q_EXPORT_PLUGIN2(FITemplateFloatItem, FITemplateFloatItem )
+Q_EXPORT_PLUGIN2(FITemplateFloatItem, Marble::FITemplateFloatItem )
 
 #include "FITemplateFloatItem.moc"

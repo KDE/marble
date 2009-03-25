@@ -24,9 +24,10 @@
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleAbstractFloatItem.h"
 
-
 class QSvgRenderer;
 
+namespace Marble
+{
 
 /**
  * @short The class that creates a ... Float Item
@@ -36,7 +37,7 @@ class QSvgRenderer;
 class FITemplateFloatItem  : public MarbleAbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleRenderPluginInterface )
+    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
     MARBLE_PLUGIN(FITemplateFloatItem)
 
  public:
@@ -98,5 +99,7 @@ class FITemplateFloatItem  : public MarbleAbstractFloatItem
     /// allowed values: -1, 0, 1; default here: 0. FIXME: Declare enum
     int            m_polarity;
 };
+
+}
 
 #endif
