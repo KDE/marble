@@ -75,7 +75,7 @@ set(marblewidget_SRCS
     GridMap.cpp
     HttpDownloadManager.cpp
     HttpJob.cpp
-    MarbleNetworkPlugin.cpp
+    NetworkPlugin.cpp
     QHttpNetworkPlugin.cpp
     LayerManager.cpp
     PluginManager.cpp
@@ -154,7 +154,7 @@ set(marblewidget_SRCS
     AbstractLayer/AbstractLayerData.cpp
 
     PluginInterface.cpp
-    MarbleNetworkPluginInterface.cpp
+    NetworkPluginInterface.cpp
     MarbleRenderPlugin.cpp
     MarbleRenderPluginInterface.cpp
     MarblePluginSettingsWidget.cpp

@@ -7,12 +7,12 @@
 //
 // Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 //
-#include "MarbleNetworkPluginInterface.h"
+#include "NetworkPluginInterface.h"
 
 namespace Marble
 {
 
-MarbleNetworkPluginInterface::~MarbleNetworkPluginInterface()
+NetworkPluginInterface::~NetworkPluginInterface()
 {
 }
 
