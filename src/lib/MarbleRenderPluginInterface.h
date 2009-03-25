@@ -131,7 +131,8 @@ class MarbleRenderPluginInterface
      * @brief Renders the content provided by the plugin on the viewport.
      * @return @c true  Returns whether the rendering has been successful
      */
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 ) = 0;
+    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
+                         const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 ) = 0;
 };
 
 }
