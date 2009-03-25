@@ -18,10 +18,8 @@
 
 
 // Qt
-#include <QtCore/QObject>
 
 // Marble
-#include "GeoDataLatLonAltBox.h"
 #include "MarbleAbstractFloatItem.h"
 
 class QSvgRenderer;
