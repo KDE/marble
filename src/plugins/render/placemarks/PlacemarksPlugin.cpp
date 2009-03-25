@@ -9,7 +9,7 @@
 //  Copyright 2008 Simon Schmeisser <mail_to_wrt@gmx.de>
 //
 
-#include "MarblePlacemarksPlugin.h"
+#include "PlacemarksPlugin.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
@@ -38,60 +38,60 @@
 namespace Marble
 {
 
-QStringList MarblePlacemarksPlugin::backendTypes() const
+QStringList PlacemarksPlugin::backendTypes() const
 {
     return QStringList( "geodata" );
 }
 
-QString MarblePlacemarksPlugin::renderPolicy() const
+QString PlacemarksPlugin::renderPolicy() const
 {
     return QString( "ALWAYS" );
 }
 
-QStringList MarblePlacemarksPlugin::renderPosition() const
+QStringList PlacemarksPlugin::renderPosition() const
 {
     return QStringList( "ALWAYS_ON_TOP" );
 }
 
-QString MarblePlacemarksPlugin::name() const
+QString PlacemarksPlugin::name() const
 {
     return tr( "Placemarks Plugin" );
 }
 
-QString MarblePlacemarksPlugin::guiString() const
+QString PlacemarksPlugin::guiString() const
 {
     return tr( "&Placemarks Plugin" );
 }
 
-QString MarblePlacemarksPlugin::nameId() const
+QString PlacemarksPlugin::nameId() const
 {
     return QString( "Placemarks-plugin" );
 }
 
-QString MarblePlacemarksPlugin::description() const
+QString PlacemarksPlugin::description() const
 {
     return tr( "A plugin that displays placemarks." );
 }
 
-QIcon MarblePlacemarksPlugin::icon () const
+QIcon PlacemarksPlugin::icon () const
 {
     return QIcon();
 }
 
 
-void MarblePlacemarksPlugin::initialize ()
+void PlacemarksPlugin::initialize ()
 {
     dataFacade()->geoDataModel()->addGeoDataFile( PLACEMARKS_DATA_PATH "/jakobsweg.kml" );
     m_currentBrush = QColor( 0xff, 0x0, 0x0 );
     m_currentPen = QColor( 0xff, 0x0, 0x0 );
 }
 
-bool MarblePlacemarksPlugin::isInitialized () const
+bool PlacemarksPlugin::isInitialized () const
 {
     return true;
 }
 
-void MarblePlacemarksPlugin::setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString mapped )
+void PlacemarksPlugin::setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString mapped )
 {
     if( root->style( mapped ) && root->style( mapped )->polyStyle() ) {
         if( m_currentBrush.color() != root->style( mapped )->polyStyle()->color() ) {
@@ -102,7 +102,7 @@ void MarblePlacemarksPlugin::setBrushStyle( GeoPainter *painter, GeoDataDocument
     }
 }
 
-void MarblePlacemarksPlugin::setPenStyle( GeoPainter *painter, GeoDataDocument* root, QString mapped )
+void PlacemarksPlugin::setPenStyle( GeoPainter *painter, GeoDataDocument* root, QString mapped )
 {
     if( root->style( mapped ) && root->style( mapped )->lineStyle() ) {
         if( m_currentPen.color() != root->style( mapped )->lineStyle()->color() || 
@@ -116,7 +116,7 @@ void MarblePlacemarksPlugin::setPenStyle( GeoPainter *painter, GeoDataDocument* 
     }
 }
 
-bool MarblePlacemarksPlugin::renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *object, QString styleUrl )
+bool PlacemarksPlugin::renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *object, QString styleUrl )
 {
     painter->save();
     painter->autoMapQuality();
@@ -139,7 +139,7 @@ bool MarblePlacemarksPlugin::renderGeoDataGeometry( GeoPainter *painter, GeoData
     return true;
 }
 
-bool MarblePlacemarksPlugin::renderGeoDataFeature( GeoPainter *painter, GeoDataFeature *feature )
+bool PlacemarksPlugin::renderGeoDataFeature( GeoPainter *painter, GeoDataFeature *feature )
 {
     if( !feature ) return false;
     
@@ -154,7 +154,7 @@ bool MarblePlacemarksPlugin::renderGeoDataFeature( GeoPainter *painter, GeoDataF
     return true;
 }
 
-bool MarblePlacemarksPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
+bool PlacemarksPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
     GeoDataDocument* rootDoc = dataFacade()->geoDataModel()->geoDataRoot();
     renderGeoDataFeature( painter, dynamic_cast<GeoDataFeature*>( rootDoc ) );
@@ -163,6 +163,6 @@ bool MarblePlacemarksPlugin::render( GeoPainter *painter, ViewportParams *viewpo
 
 }
 
-Q_EXPORT_PLUGIN2(MarblePlacemarksPlugin, Marble::MarblePlacemarksPlugin)
+Q_EXPORT_PLUGIN2( PlacemarksPlugin, Marble::PlacemarksPlugin )
 
-#include "MarblePlacemarksPlugin.moc"
+#include "PlacemarksPlugin.moc"

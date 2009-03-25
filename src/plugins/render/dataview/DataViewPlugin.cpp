@@ -9,7 +9,7 @@
 // Copyright 2008 Simon Schmeisser <mail_to_wrt@gmx.de>
 //
 
-#include "MarbleDataViewPlugin.h"
+#include "DataViewPlugin.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
@@ -36,18 +36,18 @@
 #include "GeoDataLineStyle.h"
 #include "GeoDataParser.h"
 
-#include "MarbleGeoDataDebugModel.h"
-#include "modeltest.h"
+#include "GeoDataDebugModel.h"
+//#include "modeltest.h"
 
 namespace Marble
 {
 
-MarbleDataViewPlugin::MarbleDataViewPlugin()
+DataViewPlugin::DataViewPlugin()
 : m_dataView(NULL), m_debugModel(NULL)
 {
 }
 
-MarbleDataViewPlugin::~MarbleDataViewPlugin()
+DataViewPlugin::~DataViewPlugin()
 {
     if( m_dataView )
         delete m_dataView;
@@ -55,51 +55,51 @@ MarbleDataViewPlugin::~MarbleDataViewPlugin()
         delete m_debugModel;
 }
 
-QStringList MarbleDataViewPlugin::backendTypes() const
+QStringList DataViewPlugin::backendTypes() const
 {
     return QStringList( "debug" );
 }
 
-QString MarbleDataViewPlugin::renderPolicy() const
+QString DataViewPlugin::renderPolicy() const
 {
     return QString( "ALWAYS" );
 }
 
-QStringList MarbleDataViewPlugin::renderPosition() const
+QStringList DataViewPlugin::renderPosition() const
 {
     return QStringList( "ALWAYS_ON_TOP" );
 }
 
-QString MarbleDataViewPlugin::name() const
+QString DataViewPlugin::name() const
 {
     return tr( "DataView Plugin" );
 }
 
-QString MarbleDataViewPlugin::guiString() const
+QString DataViewPlugin::guiString() const
 {
     return tr( "&DataView Plugin" );
 }
 
-QString MarbleDataViewPlugin::nameId() const
+QString DataViewPlugin::nameId() const
 {
     return QString( "DataView-plugin" );
 }
 
-QString MarbleDataViewPlugin::description() const
+QString DataViewPlugin::description() const
 {
     return tr( "A plugin that displays all the loaded data in a separate window." );
 }
 
-QIcon MarbleDataViewPlugin::icon () const
+QIcon DataViewPlugin::icon () const
 {
     return QIcon();
 }
 
 
-void MarbleDataViewPlugin::initialize ()
+void DataViewPlugin::initialize ()
 {
     m_dataView = new QTreeView;
-    m_debugModel = new MarbleGeoDataDebugModel( dataFacade()->geoDataModel()->geoDataRoot() );
+    m_debugModel = new GeoDataDebugModel( dataFacade()->geoDataModel()->geoDataRoot() );
     
     m_dataView->setModel( m_debugModel );
     m_dataView->show();
@@ -108,18 +108,18 @@ void MarbleDataViewPlugin::initialize ()
    // new ModelTest( m_debugModel );
 }
 
-bool MarbleDataViewPlugin::isInitialized () const
+bool DataViewPlugin::isInitialized () const
 {
     return true;
 }
 
-bool MarbleDataViewPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
+bool DataViewPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
     return true;
 }
 
 }
 
-Q_EXPORT_PLUGIN2(MarbleDataViewPlugin, Marble::MarbleDataViewPlugin)
+Q_EXPORT_PLUGIN2( DataViewPlugin, Marble::DataViewPlugin )
 
-#include "MarbleDataViewPlugin.moc"
+#include "DataViewPlugin.moc"

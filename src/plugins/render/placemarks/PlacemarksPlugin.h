@@ -33,14 +33,14 @@ class GeoDataDocument;
 /**
  * @short The class that specifies the Marble layer interface of the plugin.
  *
- * MarblePlacemarksPlugin is the beginning of a plugin, that displays placemarks
+ * PlacemarksPlugin is the beginning of a plugin, that displays placemarks
  */
 
-class MarblePlacemarksPlugin : public MarbleRenderPlugin
+class PlacemarksPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-    MARBLE_PLUGIN( MarblePlacemarksPlugin )
+    MARBLE_PLUGIN( PlacemarksPlugin )
 
     void setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
     void setPenStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );

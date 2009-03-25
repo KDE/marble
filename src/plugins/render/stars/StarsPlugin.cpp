@@ -8,7 +8,7 @@
 // Copyright 2008 Torsten Rahn <tackat@kde.org>"
 //
 
-#include "MarbleStarsPlugin.h"
+#include "StarsPlugin.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QRectF>
@@ -22,48 +22,48 @@
 namespace Marble
 {
 
-QStringList MarbleStarsPlugin::backendTypes() const
+QStringList StarsPlugin::backendTypes() const
 {
     return QStringList( "stars" );
 }
 
-QString MarbleStarsPlugin::renderPolicy() const
+QString StarsPlugin::renderPolicy() const
 {
     return QString( "STARS" );
 }
 
-QStringList MarbleStarsPlugin::renderPosition() const
+QStringList StarsPlugin::renderPosition() const
 {
     return QStringList( "SPECIFIED_ALWAYS" );
 }
 
-QString MarbleStarsPlugin::name() const
+QString StarsPlugin::name() const
 {
     return tr( "Stars Plugin" );
 }
 
-QString MarbleStarsPlugin::guiString() const
+QString StarsPlugin::guiString() const
 {
     return tr( "&Stars" );
 }
 
-QString MarbleStarsPlugin::nameId() const
+QString StarsPlugin::nameId() const
 {
     return QString( "stars" );
 }
 
-QString MarbleStarsPlugin::description() const
+QString StarsPlugin::description() const
 {
     return tr( "A plugin that shows the Starry Sky." );
 }
 
-QIcon MarbleStarsPlugin::icon () const
+QIcon StarsPlugin::icon () const
 {
     return QIcon();
 }
 
 
-void MarbleStarsPlugin::initialize ()
+void StarsPlugin::initialize ()
 {
     // Load star data
     m_stars.clear();
@@ -99,14 +99,13 @@ void MarbleStarsPlugin::initialize ()
     }
 }
 
-bool MarbleStarsPlugin::isInitialized () const
+bool StarsPlugin::isInitialized () const
 {
     return true;
 }
 
-bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
-				const QString& renderPos,
-				GeoSceneLayer * layer )
+bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
+                          const QString& renderPos, GeoSceneLayer * layer )
 {
     QString target = dataFacade()->target();
 
@@ -192,7 +191,7 @@ bool MarbleStarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
-qreal MarbleStarsPlugin::siderealTime( const QDateTime& localDateTime )
+qreal StarsPlugin::siderealTime( const QDateTime& localDateTime )
 {
     QDateTime utcDateTime = localDateTime.toTimeSpec ( Qt::UTC );
     qreal mjdUtc = (qreal)( utcDateTime.date().toJulianDay() );
@@ -212,6 +211,6 @@ qreal MarbleStarsPlugin::siderealTime( const QDateTime& localDateTime )
 
 }
 
-Q_EXPORT_PLUGIN2(MarbleStarsPlugin, Marble::MarbleStarsPlugin)
+Q_EXPORT_PLUGIN2( StarsPlugin, Marble::StarsPlugin )
 
-#include "MarbleStarsPlugin.moc"
+#include "StarsPlugin.moc"

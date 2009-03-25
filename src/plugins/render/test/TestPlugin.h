@@ -27,11 +27,11 @@ namespace Marble
  *
  */
 
-class MarbleTestPlugin : public MarbleRenderPlugin
+class TestPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-    MARBLE_PLUGIN( MarbleTestPlugin )
+    MARBLE_PLUGIN( TestPlugin )
 
  public:
     QStringList backendTypes() const;

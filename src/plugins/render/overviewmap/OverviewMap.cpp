@@ -8,7 +8,7 @@
 // Copyright 2008 Torsten Rahn <tackat@kde.org>"
 //
 
-#include "MarbleOverviewMap.h"
+#include "OverviewMap.h"
 
 #include <QtCore/QRect>
 #include <QtGui/QPixmap>
@@ -27,59 +27,59 @@
 namespace Marble
 {
 
-MarbleOverviewMap::MarbleOverviewMap( const QPointF &point, const QSizeF &size )
+OverviewMap::OverviewMap( const QPointF &point, const QSizeF &size )
     : MarbleAbstractFloatItem( point, size ),
       m_target(QString()),
       m_svgobj(0)
 {
 }
 
-MarbleOverviewMap::~MarbleOverviewMap()
+OverviewMap::~OverviewMap()
 {
     delete m_svgobj;
 }
 
-QStringList MarbleOverviewMap::backendTypes() const
+QStringList OverviewMap::backendTypes() const
 {
     return QStringList( "overviewmap" );
 }
 
-QString MarbleOverviewMap::name() const
+QString OverviewMap::name() const
 {
     return tr("Overview Map");
 }
 
-QString MarbleOverviewMap::guiString() const
+QString OverviewMap::guiString() const
 {
     return tr("&Overview Map");
 }
 
-QString MarbleOverviewMap::nameId() const
+QString OverviewMap::nameId() const
 {
     return QString( "overviewmap" );
 }
 
-QString MarbleOverviewMap::description() const
+QString OverviewMap::description() const
 {
     return tr("This is a float item that provides an overview map.");
 }
 
-QIcon MarbleOverviewMap::icon () const
+QIcon OverviewMap::icon () const
 {
     return QIcon();
 }
 
 
-void MarbleOverviewMap::initialize ()
+void OverviewMap::initialize ()
 {
 }
 
-bool MarbleOverviewMap::isInitialized () const
+bool OverviewMap::isInitialized () const
 {
     return true;
 }
 
-bool MarbleOverviewMap::needsUpdate( ViewportParams *viewport )
+bool OverviewMap::needsUpdate( ViewportParams *viewport )
 {
     GeoDataLatLonAltBox latLonAltBox = viewport->currentProjection()->latLonAltBox( QRect( QPoint( 0, 0 ), viewport->size() ), viewport );
     qreal centerLon, centerLat;
@@ -99,7 +99,7 @@ bool MarbleOverviewMap::needsUpdate( ViewportParams *viewport )
     return true;
 }
 
-bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
+bool OverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
 {
     Q_UNUSED(layer);
     painter->save();
@@ -223,7 +223,7 @@ bool MarbleOverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *vi
     return true;
 }
 
-bool MarbleOverviewMap::eventFilter( QObject *object, QEvent *e )
+bool OverviewMap::eventFilter( QObject *object, QEvent *e )
 {
     if ( !enabled() || !visible() ) {
         return false;
@@ -269,7 +269,7 @@ bool MarbleOverviewMap::eventFilter( QObject *object, QEvent *e )
     return MarbleAbstractFloatItem::eventFilter(object,e);
 }
 
-void MarbleOverviewMap::changeBackground( const QString& target )
+void OverviewMap::changeBackground( const QString& target )
 {
     delete m_svgobj;
     m_svgobj = 0;
@@ -288,6 +288,6 @@ void MarbleOverviewMap::changeBackground( const QString& target )
 
 }
 
-Q_EXPORT_PLUGIN2(MarbleOverviewMap, Marble::MarbleOverviewMap)
+Q_EXPORT_PLUGIN2( OverviewMap, Marble::OverviewMap )
 
-#include "MarbleOverviewMap.moc"
+#include "OverviewMap.moc"

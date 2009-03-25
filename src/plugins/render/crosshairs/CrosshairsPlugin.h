@@ -29,11 +29,11 @@ namespace Marble
  *
  */
 
-class MarbleCrosshairsPlugin : public MarbleRenderPlugin
+class CrosshairsPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-    MARBLE_PLUGIN(MarbleCrosshairsPlugin)
+    MARBLE_PLUGIN(CrosshairsPlugin)
 
  public:
     QStringList backendTypes() const;

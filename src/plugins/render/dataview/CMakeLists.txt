@@ -1,4 +1,4 @@
-PROJECT(MarbleDataViewPlugin)
+PROJECT( DataViewPlugin )
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/dataview
@@ -7,6 +7,6 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( marbledataview_SRCS MarbleDataViewPlugin.cpp MarbleGeoDataDebugModel.cpp)
+set( dataview_SRCS DataViewPlugin.cpp GeoDataDebugModel.cpp)
 #add_definitions( -DPLACEMARKS_DATA_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}\\\"" )
-marble_add_plugin( MarbleDataViewPlugin ${marbledataview_SRCS} )
+marble_add_plugin( DataViewPlugin ${dataview_SRCS} )

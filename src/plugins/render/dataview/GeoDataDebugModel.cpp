@@ -11,7 +11,7 @@
 
 
 // Own
-#include "MarbleGeoDataDebugModel.h"
+#include "GeoDataDebugModel.h"
 
 // Qt
 #include <QtCore/QDebug>
@@ -27,25 +27,25 @@
 
 using namespace Marble;
 
-class MarbleGeoDataDebugModel::Private {
+class GeoDataDebugModel::Private {
  public:
     Private(GeoDataDocument* rootDocument) : m_rootDocument( rootDocument ) {};
     GeoDataDocument* m_rootDocument;
     //QVector<GeoDataDocument*> m_documents;
 };
 
-MarbleGeoDataDebugModel::MarbleGeoDataDebugModel( GeoDataDocument *rootDocument, QObject *parent )
+GeoDataDebugModel::GeoDataDebugModel( GeoDataDocument *rootDocument, QObject *parent )
     : QAbstractItemModel(), d( new Private( rootDocument ) )
 {
 }
 
-MarbleGeoDataDebugModel::~MarbleGeoDataDebugModel()
+GeoDataDebugModel::~GeoDataDebugModel()
 {
     //delete d->m_rootDocument;
     delete d;
 }
 
-int MarbleGeoDataDebugModel::rowCount( const QModelIndex &parent ) const
+int GeoDataDebugModel::rowCount( const QModelIndex &parent ) const
 {
     GeoDataObject *parentItem;
     if (parent.column() > 0)
@@ -60,7 +60,7 @@ int MarbleGeoDataDebugModel::rowCount( const QModelIndex &parent ) const
 }
 
 
-QVariant MarbleGeoDataDebugModel::data( const QModelIndex &index, int role ) const
+QVariant GeoDataDebugModel::data( const QModelIndex &index, int role ) const
 {
     if (!index.isValid())
         return QVariant();
@@ -97,7 +97,7 @@ QVariant MarbleGeoDataDebugModel::data( const QModelIndex &index, int role ) con
 
 }
 
-QModelIndex MarbleGeoDataDebugModel::index(int row, int column, const QModelIndex &parent)             const
+QModelIndex GeoDataDebugModel::index(int row, int column, const QModelIndex &parent)             const
 {
     if (!hasIndex(row, column, parent))
         return QModelIndex();
@@ -116,7 +116,7 @@ QModelIndex MarbleGeoDataDebugModel::index(int row, int column, const QModelInde
         return QModelIndex();
 }
 
-QModelIndex MarbleGeoDataDebugModel::parent(const QModelIndex &index) const
+QModelIndex GeoDataDebugModel::parent(const QModelIndex &index) const
 {
     if (!index.isValid())
         return QModelIndex();
@@ -135,7 +135,7 @@ QModelIndex MarbleGeoDataDebugModel::parent(const QModelIndex &index) const
     return createIndex(parentItem->row(), 0, parentItem);
 }
 
-int MarbleGeoDataDebugModel::columnCount(const QModelIndex &node) const
+int GeoDataDebugModel::columnCount(const QModelIndex &node) const
 {
     if (node.isValid())
         return 1;
@@ -150,14 +150,14 @@ int MarbleGeoDataDebugModel::columnCount(const QModelIndex &node) const
         //rootItem->columnCount();
 }
 
-GeoDataDocument* MarbleGeoDataDebugModel::geoDataRoot()
+GeoDataDocument* GeoDataDebugModel::geoDataRoot()
 {
     return d->m_rootDocument;
 }
 
-void MarbleGeoDataDebugModel::update()
+void GeoDataDebugModel::update()
 {
     QAbstractItemModel::reset();
 }
 
-#include "MarbleGeoDataDebugModel.moc"
+#include "GeoDataDebugModel.moc"

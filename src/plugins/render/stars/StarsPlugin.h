@@ -62,11 +62,11 @@ class StarPoint {
  *
  */
 
-class MarbleStarsPlugin : public MarbleRenderPlugin
+class StarsPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-    MARBLE_PLUGIN( MarbleStarsPlugin )
+    MARBLE_PLUGIN( StarsPlugin )
  public:
     QStringList backendTypes() const;
 

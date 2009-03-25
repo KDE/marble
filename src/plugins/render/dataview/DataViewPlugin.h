@@ -33,24 +33,24 @@ class GeoDataDocument;
 namespace Marble
 {
 
-class MarbleGeoDataDebugModel;
+class GeoDataDebugModel;
 
 /**
  * @short The class that specifies the Marble layer interface of the plugin.
  *
- * MarbleDataViewPlugin is the beginning of a plugin, that displays the geodata as it is stored internally
+ * DataViewPlugin is the beginning of a plugin, that displays the geodata as it is stored internally
  */
 
-class MarbleDataViewPlugin : public MarbleRenderPlugin
+class DataViewPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-    MARBLE_PLUGIN(MarbleDataViewPlugin)
+    MARBLE_PLUGIN(DataViewPlugin)
 
     public:
 
-    MarbleDataViewPlugin();
-    ~MarbleDataViewPlugin();
+    DataViewPlugin();
+    ~DataViewPlugin();
 
     QStringList backendTypes() const;
 
@@ -78,7 +78,7 @@ class MarbleDataViewPlugin : public MarbleRenderPlugin
     
     private:
     QTreeView *m_dataView;
-    MarbleGeoDataDebugModel *m_debugModel;
+    GeoDataDebugModel *m_debugModel;
 };
 
 }
