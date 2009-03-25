@@ -29,7 +29,7 @@ class HttpJob;
 class MarbleNetworkPluginInterface
 {
  public:
-    virtual ~MarbleNetworkPluginInterface() {}
+    virtual ~MarbleNetworkPluginInterface();
 
     /**
      * @brief Returns the name ID of the backend.
