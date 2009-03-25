@@ -64,36 +64,36 @@ MARBLE_PLUGIN( NavigationFloatItem )
     bool eventFilter( QObject *object, QEvent *e );
 
  private Q_SLOTS:
-	 /** Adjust slider value to zoom level provided */
-	 void zoomChanged(int level);
-	 
-	 /** Map theme was changed, adjust controls */
-	 void selectTheme( QString theme );
-	 
-	 /** Decrease quality during zooming */
-	 void adjustForAnimation();
-	 
-	 /** Normal quality when not zooming */
-	 void adjustForStill();
-	 
-	 /** Enable/disable zoom in/out buttons */
-	 void updateButtons( int value );
-	 
+    /** Adjust slider value to zoom level provided */
+    void zoomChanged(int level);
+
+    /** Map theme was changed, adjust controls */
+    void selectTheme( QString theme );
+
+    /** Decrease quality during zooming */
+    void adjustForAnimation();
+
+    /** Normal quality when not zooming */
+    void adjustForStill();
+
+    /** Enable/disable zoom in/out buttons */
+    void updateButtons( int value );
+
  private:
-	 /** MarbleWidget this float item is installed as event filter for */
-	 MarbleWidget *m_marbleWidget;
+    /** MarbleWidget this float item is installed as event filter for */
+    MarbleWidget *m_marbleWidget;
 
-	 /** Navigation controls */
-	 Ui::Navigation m_navigationWidget;
+    /** Navigation controls */
+    Ui::Navigation m_navigationWidget;
 
-	 /** Navigation controls embedding widget */
-	 QWidget *m_navigationParent;
+    /** Navigation controls embedding widget */
+    QWidget *m_navigationParent;
 
-	 /** Radius of the viewport last time */
-	 int m_oldViewportRadius;
-	 
-	 /** Repaint needed */
-	 bool m_repaintScheduled;
+    /** Radius of the viewport last time */
+    int m_oldViewportRadius;
+
+    /** Repaint needed */
+    bool m_repaintScheduled;
 };
 
 }
