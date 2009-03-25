@@ -22,6 +22,7 @@
 #include "GeoDataPolyStyle.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "GeoPainter.h"
 
 // Qt
 #include <QtCore/QDebug>

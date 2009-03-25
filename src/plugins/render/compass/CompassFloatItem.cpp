@@ -18,7 +18,6 @@
 
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
-#include "GeoDataCoordinates.h"
 #include "ViewportParams.h"
 
 namespace Marble

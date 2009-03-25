@@ -11,28 +11,11 @@
 #include "MarbleGeoDataPlugin.h"
 
 #include <QtCore/QDebug>
-#include <QtGui/QColor>
-#include <QtGui/QBrush>
-#include <QtGui/QPen>
-#include <QtGui/QPixmap>
-#include <QtGui/QRadialGradient>
 
-#include "MarbleDirs.h"
 #include "MarbleDataFacade.h"
 #include "MarbleGeoDataModel.h"
+#include "MarbleGeoDataView.h"
 #include "GeoPainter.h"
-
-#include "GeoDataCoordinates.h"
-#include "GeoDataPolygon.h"
-#include "GeoDataPlacemark.h"
-#include "GeoDataFeature.h"
-#include "GeoDataContainer.h"
-#include "GeoDataDocument.h"
-#include "GeoDataStyle.h"
-#include "GeoDataStyleMap.h"
-#include "GeoDataPolyStyle.h"
-#include "GeoDataLineStyle.h"
-#include "GeoDataParser.h"
 
 
 namespace Marble

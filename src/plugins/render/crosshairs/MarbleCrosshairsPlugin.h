@@ -16,7 +16,6 @@
 #define MARBLECROSSHAIRSPLUGIN_H
 
 #include <QtCore/QObject>
-#include <QtCore/QVector>
 
 #include "MarbleRenderPlugin.h"
 

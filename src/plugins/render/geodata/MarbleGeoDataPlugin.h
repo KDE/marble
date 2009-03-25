@@ -16,12 +16,9 @@
 #define MARBLEGEODATAPLUGIN_H
 
 #include <QtCore/QObject>
-#include <QtGui/QBrush>
-#include <QtGui/QPen>
 
 #include "MarbleRenderPlugin.h"
 
-#include "MarbleGeoDataView.h"
 
 namespace Marble
 {
@@ -29,6 +26,7 @@ namespace Marble
 class GeoDataGeometry;
 class GeoDataFeature;
 class GeoDataDocument;
+class MarbleGeoDataView;
 
 /**
  * @short The class that specifies the Marble layer interface of the plugin.

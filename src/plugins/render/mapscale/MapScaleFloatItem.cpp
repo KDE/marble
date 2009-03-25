@@ -14,10 +14,8 @@
 #include <QtCore/QRect>
 #include <QtGui/QPixmap>
 
-#include "AbstractProjection.h"
 #include "global.h"
 #include "MarbleLocale.h"
-#include "MarbleDirs.h"
 #include "MarbleDataFacade.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"

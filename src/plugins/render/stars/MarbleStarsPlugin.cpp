@@ -13,13 +13,10 @@
 #include <QtCore/QDebug>
 #include <QtCore/QRectF>
 #include <QtCore/QDateTime>
-#include <QtGui/QColor>
-#include <QtGui/QPixmap>
 #include "MarbleDirs.h"
 #include "MarbleDataFacade.h"
 #include "GeoPainter.h"
 
-#include "Quaternion.h"
 #include "ViewportParams.h"
 
 namespace Marble

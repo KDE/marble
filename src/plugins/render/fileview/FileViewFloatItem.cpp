@@ -23,13 +23,10 @@
 
 #include "FileViewModel.h"
 #include "AbstractFileViewItem.h"
-#include "AbstractProjection.h"
-#include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "MarbleWidget.h"
 #include "MarbleDataFacade.h"
-#include "MarbleMap.h"
 
 
 using namespace Marble;

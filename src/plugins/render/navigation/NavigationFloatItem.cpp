@@ -13,10 +13,8 @@
 #include <QtCore/QRect>
 #include <QtGui/QPixmap>
 #include <QtGui/QSlider>
-#include <QWidget>
+#include <QtGui/QWidget>
 
-#include "AbstractProjection.h"
-#include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "MarbleWidget.h"

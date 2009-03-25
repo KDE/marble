@@ -12,7 +12,6 @@
 
 #include <QtCore/QDebug>
 #include "GeoPainter.h"
-#include "MarbleDirs.h"
 
 #include "ViewportParams.h"
 

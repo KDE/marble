@@ -14,9 +14,7 @@
 #include <QtCore/QObject>
 
 // forward declarations
-class QAction;
 class QListView;
-class QModelIndex;
 class QPersistentModelIndex;
 
 #include "MarbleAbstractFloatItem.h"

@@ -12,7 +12,6 @@
 #define MARBLE_GEODATAVIEW_H
 
 // Marble
-#include "GeoPainter.h"
 
 // Qt
 #include <QtCore/QModelIndex>
@@ -20,13 +19,17 @@
 #include <QtGui/QRegion>
 #include <QtGui/QAbstractItemView>
 #include <QtGui/QItemSelectionModel>
-#include <QtGui/QItemSelection>
+#include <QtGui/QPen>
+
+
+class QItemSelection;
 
 namespace Marble
 {
 class GeoDataDocument;
 class GeoDataFeature;
 class GeoDataGeometry;
+class GeoPainter;
 
 class MarbleGeoDataView : public QAbstractItemView {
  public:

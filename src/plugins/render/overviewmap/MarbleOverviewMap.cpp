@@ -23,7 +23,6 @@
 #include "GeoDataPoint.h"
 #include "ViewportParams.h"
 #include "MarbleWidget.h"
-#include "MarbleMap.h"
 
 namespace Marble
 {
