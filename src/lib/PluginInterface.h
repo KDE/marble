@@ -48,7 +48,7 @@ class PluginInterface
     /**
      * @brief Returns the name ID of the backend.
      *.
-     * Example: "starrysky"
+     * Examples: "starrysky", "QNetworkAccessManager"
      */
     virtual QString nameId() const = 0;
 

@@ -15,6 +15,8 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
+#include "PluginInterface.h"
+
 class QUrl;
 
 namespace Marble
@@ -26,17 +28,10 @@ class HttpJob;
  * @short The interface for network operation plugins.
  *
  */
-class MarbleNetworkPluginInterface
+class MarbleNetworkPluginInterface: public PluginInterface
 {
  public:
     virtual ~MarbleNetworkPluginInterface();
-
-    /**
-     * @brief Returns the name ID of the backend.
-     *.
-     * Example: "QNetworkAccessManager"
-     */
-    virtual QString nameId() const = 0;
 
     /**
      * @brief Creates a new HTTP download job.

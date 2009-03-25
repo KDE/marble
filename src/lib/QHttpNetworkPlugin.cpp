@@ -143,9 +143,38 @@ QHttpNetworkPlugin::~QHttpNetworkPlugin()
 {
 }
 
+QString QHttpNetworkPlugin::name() const
+{
+    return tr( "QHttp based Network Plugin" );
+}
+
 QString QHttpNetworkPlugin::nameId() const
 {
     return QString::fromLatin1( "QHttp" );
+}
+
+QString QHttpNetworkPlugin::guiString() const
+{
+    return tr( "QHttp based network plugin" );
+}
+
+QString QHttpNetworkPlugin::description() const
+{
+    return tr( "This is a network plugin which is based on the now deprecated QHttp class." );
+}
+
+QIcon QHttpNetworkPlugin::icon() const
+{
+    return QIcon();
+}
+
+void QHttpNetworkPlugin::initialize()
+{
+}
+
+bool QHttpNetworkPlugin::isInitialized() const
+{
+    return true;
 }
 
 HttpJob *QHttpNetworkPlugin::createJob( const QUrl &source, const QString &destination,

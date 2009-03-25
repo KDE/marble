@@ -70,7 +70,14 @@ class QHttpNetworkPlugin: public MarbleNetworkPlugin
     QHttpNetworkPlugin();
     virtual ~QHttpNetworkPlugin();
 
+    virtual QString name() const;
     virtual QString nameId() const;
+    virtual QString guiString() const;
+    virtual QString description() const;
+    virtual QIcon icon() const;
+    virtual void initialize();
+    virtual bool isInitialized() const;
+
     virtual HttpJob *createJob( const QUrl &source, const QString &destination, const QString &id );
 };
 
