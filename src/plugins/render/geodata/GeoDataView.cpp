@@ -8,7 +8,7 @@
 // Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
 //
 
-#include "MarbleGeoDataView.h"
+#include "GeoDataView.h"
 
 // Marble
 #include "GeoDataContainer.h"
@@ -30,12 +30,12 @@
 
 using namespace Marble;
 
-MarbleGeoDataView::MarbleGeoDataView( QWidget * parent ) 
+GeoDataView::GeoDataView( QWidget * parent ) 
   : QAbstractItemView( parent )
 {
 }
 
-void MarbleGeoDataView::setGeoPainter( GeoPainter* painter )
+void GeoDataView::setGeoPainter( GeoPainter* painter )
 {
     m_painter = painter;
     /* the paintEvent function has to called by hand as the view is not 
@@ -43,42 +43,42 @@ void MarbleGeoDataView::setGeoPainter( GeoPainter* painter )
     if( model() ) paintEvent( 0 );
 }
 
-QRect MarbleGeoDataView::visualRect( const QModelIndex &index ) const
+QRect GeoDataView::visualRect( const QModelIndex &index ) const
 {
     return QRect();
 }
 
-void MarbleGeoDataView::scrollTo( const QModelIndex &index, ScrollHint hint )
+void GeoDataView::scrollTo( const QModelIndex &index, ScrollHint hint )
 {
 }
 
-QModelIndex MarbleGeoDataView::indexAt( const QPoint &point ) const
+QModelIndex GeoDataView::indexAt( const QPoint &point ) const
 {
     return QModelIndex();
 }
 
-QModelIndex MarbleGeoDataView::moveCursor( QAbstractItemView::CursorAction cursorAction,
+QModelIndex GeoDataView::moveCursor( QAbstractItemView::CursorAction cursorAction,
                     Qt::KeyboardModifiers modifiers )
 {
     return QModelIndex();
 }
 
-bool MarbleGeoDataView::isIndexHidden( const QModelIndex &index ) const
+bool GeoDataView::isIndexHidden( const QModelIndex &index ) const
 {
     return false;
 }
 
-void MarbleGeoDataView::setSelection( const QRect&, QItemSelectionModel::SelectionFlags command )
+void GeoDataView::setSelection( const QRect&, QItemSelectionModel::SelectionFlags command )
 {
 }
 
-void MarbleGeoDataView::paintEvent( QPaintEvent *event )
+void GeoDataView::paintEvent( QPaintEvent *event )
 {
     QModelIndex index = rootIndex();
     renderIndex( index );
 }
 
-void MarbleGeoDataView::renderIndex( QModelIndex &index )
+void GeoDataView::renderIndex( QModelIndex &index )
 {
     /*
      * "render" a specific index - this means going through all children and if
@@ -110,12 +110,12 @@ void MarbleGeoDataView::renderIndex( QModelIndex &index )
     }
 }
 
-QRegion MarbleGeoDataView::visualRegionForSelection( const QItemSelection &selection ) const
+QRegion GeoDataView::visualRegionForSelection( const QItemSelection &selection ) const
 {
     return QRegion();
 }
 
-void MarbleGeoDataView::setBrushStyle( QString mapped )
+void GeoDataView::setBrushStyle( QString mapped )
 {
     /* this part has to be reworked:
      * Currently the style has to be accessible from the root object of the 
@@ -133,7 +133,7 @@ void MarbleGeoDataView::setBrushStyle( QString mapped )
     }
 }
 
-void MarbleGeoDataView::setPenStyle( QString mapped )
+void GeoDataView::setPenStyle( QString mapped )
 {
     /*
      * see the note in the setBrushStyle function
@@ -161,7 +161,7 @@ void MarbleGeoDataView::setPenStyle( QString mapped )
     }
 }
 
-bool MarbleGeoDataView::renderGeoDataGeometry( GeoDataGeometry *object, QString styleUrl )
+bool GeoDataView::renderGeoDataGeometry( GeoDataGeometry *object, QString styleUrl )
 {
     m_painter->save();
     m_painter->autoMapQuality();

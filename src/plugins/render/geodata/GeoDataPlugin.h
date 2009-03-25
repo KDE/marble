@@ -26,24 +26,24 @@ namespace Marble
 class GeoDataGeometry;
 class GeoDataFeature;
 class GeoDataDocument;
-class MarbleGeoDataView;
+class GeoDataView;
 
 /**
  * @short The class that specifies the Marble layer interface of the plugin.
  *
- * MarbleGeoDataPlugin is the beginning of a Render plugin for vectorized data.
+ * GeoDataPlugin is the beginning of a Render plugin for vectorized data.
  * This includes data which is generated at runtime as well as data that
  */
 
-class MarbleGeoDataPlugin : public MarbleRenderPlugin
+class GeoDataPlugin : public MarbleRenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-    MARBLE_PLUGIN(MarbleGeoDataPlugin)
+    MARBLE_PLUGIN(GeoDataPlugin)
 
-    MarbleGeoDataView* m_view;
+    GeoDataView* m_view;
  public:
-    ~MarbleGeoDataPlugin();
+    ~GeoDataPlugin();
 
     QStringList backendTypes() const;
 

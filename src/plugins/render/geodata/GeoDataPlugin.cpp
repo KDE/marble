@@ -8,76 +8,76 @@
 // Copyright 2008 Torsten Rahn <tackat@kde.org>"
 //
 
-#include "MarbleGeoDataPlugin.h"
+#include "GeoDataPlugin.h"
 
 #include <QtCore/QDebug>
 
 #include "MarbleDataFacade.h"
 #include "MarbleGeoDataModel.h"
-#include "MarbleGeoDataView.h"
+#include "GeoDataView.h"
 #include "GeoPainter.h"
 
 
 namespace Marble
 {
 
-MarbleGeoDataPlugin::~MarbleGeoDataPlugin()
+GeoDataPlugin::~GeoDataPlugin()
 {
     delete( m_view );
 }
 
-QStringList MarbleGeoDataPlugin::backendTypes() const
+QStringList GeoDataPlugin::backendTypes() const
 {
     return QStringList( "geodata" );
 }
 
-QString MarbleGeoDataPlugin::renderPolicy() const
+QString GeoDataPlugin::renderPolicy() const
 {
     return QString( "ALWAYS" );
 }
 
-QStringList MarbleGeoDataPlugin::renderPosition() const
+QStringList GeoDataPlugin::renderPosition() const
 {
     return QStringList( "ALWAYS_ON_TOP" );
 }
 
-QString MarbleGeoDataPlugin::name() const
+QString GeoDataPlugin::name() const
 {
     return tr( "GeoData Plugin" );
 }
 
-QString MarbleGeoDataPlugin::guiString() const
+QString GeoDataPlugin::guiString() const
 {
     return tr( "&GeoData Plugin" );
 }
 
-QString MarbleGeoDataPlugin::nameId() const
+QString GeoDataPlugin::nameId() const
 {
     return QString( "GeoData-plugin" );
 }
 
-QString MarbleGeoDataPlugin::description() const
+QString GeoDataPlugin::description() const
 {
     return tr( "This is a simple test plugin." );
 }
 
-QIcon MarbleGeoDataPlugin::icon () const
+QIcon GeoDataPlugin::icon () const
 {
     return QIcon();
 }
 
 
-void MarbleGeoDataPlugin::initialize ()
+void GeoDataPlugin::initialize ()
 {
-    m_view = new MarbleGeoDataView();
+    m_view = new GeoDataView();
 }
 
-bool MarbleGeoDataPlugin::isInitialized () const
+bool GeoDataPlugin::isInitialized () const
 {
     return true;
 }
 
-bool MarbleGeoDataPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
+bool GeoDataPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
     if( !dataFacade() || !dataFacade()->renderModel() )
         return false;
@@ -89,6 +89,6 @@ bool MarbleGeoDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
 }
 
-Q_EXPORT_PLUGIN2( MarbleGeoDataPlugin, Marble::MarbleGeoDataPlugin )
+Q_EXPORT_PLUGIN2( GeoDataPlugin, Marble::GeoDataPlugin )
 
-#include "MarbleGeoDataPlugin.moc"
+#include "GeoDataPlugin.moc"

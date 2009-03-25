@@ -31,9 +31,9 @@ class GeoDataFeature;
 class GeoDataGeometry;
 class GeoPainter;
 
-class MarbleGeoDataView : public QAbstractItemView {
+class GeoDataView : public QAbstractItemView {
  public:
-    MarbleGeoDataView( QWidget * parent = 0 );
+    GeoDataView( QWidget * parent = 0 );
     
     QRect visualRect( const QModelIndex &index ) const;
     void scrollTo( const QModelIndex &index, ScrollHint hint = EnsureVisible );
