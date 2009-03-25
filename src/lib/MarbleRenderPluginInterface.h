@@ -34,7 +34,7 @@ class MarbleRenderPlugin;
 class MarbleRenderPluginInterface
 {
  public:
-    virtual ~MarbleRenderPluginInterface(){}
+    virtual ~MarbleRenderPluginInterface();
     
     /**
     * @brief Returns a new object of the plugin

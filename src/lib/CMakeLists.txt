@@ -154,6 +154,7 @@ set(marblewidget_SRCS
     AbstractLayer/AbstractLayerData.cpp
 
     MarbleRenderPlugin.cpp
+    MarbleRenderPluginInterface.cpp
     MarblePluginSettingsWidget.cpp
 
     SunLocator.cpp
