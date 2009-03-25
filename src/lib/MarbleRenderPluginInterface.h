@@ -16,7 +16,8 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QtPlugin>
-#include <QtGui/QIcon>
+
+#include "PluginInterface.h"
 
 namespace Marble
 {
@@ -31,7 +32,7 @@ class MarbleRenderPlugin;
  *
  */
 
-class MarbleRenderPluginInterface
+class MarbleRenderPluginInterface: public PluginInterface
 {
  public:
     virtual ~MarbleRenderPluginInterface();
@@ -87,45 +88,6 @@ class MarbleRenderPluginInterface
      * "FLOAT_ITEM"
      */
     virtual QStringList renderPosition() const = 0;
-
-    /**
-     * @brief Returns the "real name" of the backend.
-     *.
-     * Example: "Starry Sky Plugin"
-     */
-    virtual QString name() const = 0;
-
-    /**
-     * @brief Returns the string that should appear in the UI / in the menu.
-     *.
-     * Using a "&" you can suggest key shortcuts
-     *
-     * Example: "&Stars"
-     */
-    virtual QString guiString() const = 0;
-
-    /**
-     * @brief Returns the name ID of the backend.
-     *.
-     * Example: "starrysky"
-     */
-    virtual QString nameId() const = 0;
-
-    /**
-     * @brief Returns a user description of the plugin.
-     */
-    virtual QString description() const = 0;
-
-    /**
-     * @brief Returns an icon for the plugin.
-     */
-    virtual QIcon icon () const = 0;
-
-
-    virtual void initialize () = 0;
-
-    virtual bool isInitialized () const = 0;
-
 
     /**
      * @brief Renders the content provided by the plugin on the viewport.

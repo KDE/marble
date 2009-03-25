@@ -153,6 +153,7 @@ set(marblewidget_SRCS
     AbstractLayer/AbstractLayerContainer.cpp
     AbstractLayer/AbstractLayerData.cpp
 
+    PluginInterface.cpp
     MarbleRenderPlugin.cpp
     MarbleRenderPluginInterface.cpp
     MarblePluginSettingsWidget.cpp
