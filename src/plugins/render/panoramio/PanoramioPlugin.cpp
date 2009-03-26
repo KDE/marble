@@ -20,52 +20,44 @@
 #include "GeoDataLatLonAltBox.h"
 #include "ViewportParams.h"
 
-namespace Marble
-{
 
-QStringList PanoramioPlugin::backendTypes() const
-{
+
+namespace Marble {
+
+QStringList PanoramioPlugin::backendTypes() const {
     return QStringList("panoramio");
 }
 
-QString PanoramioPlugin::renderPolicy() const
-{
+QString PanoramioPlugin::renderPolicy() const {
     return QString("ALWAYS");
 }
 
-QStringList PanoramioPlugin::renderPosition() const
-{
+QStringList PanoramioPlugin::renderPosition() const {
     return QStringList("ALWAYS_ON_TOP");
 }
 
-QString PanoramioPlugin::name() const
-{
+QString PanoramioPlugin::name() const {
     return tr("Panoramio Photos");
 }
 
-QString PanoramioPlugin::guiString() const
-{
+QString PanoramioPlugin::guiString() const {
     return tr("&Panoramio");
 }
 
-QString PanoramioPlugin::nameId() const
-{
+QString PanoramioPlugin::nameId() const {
     return QString("panoramio");
 }
 
-QString PanoramioPlugin::description() const
-{
+QString PanoramioPlugin::description() const {
     return tr("Automatically downloads images from around the world in preference to their popularity");
 }
 
-QIcon PanoramioPlugin::icon() const
-{
+QIcon PanoramioPlugin::icon() const {
     return QIcon();
 }
 
 
-void PanoramioPlugin::initialize()
-{
+void PanoramioPlugin::initialize() {
     flag = 0;
     numberOfImagesToShow = 20;
     m_storagePolicy = new CacheStoragePolicy(MarbleDirs::localPath() + "/cache/");
@@ -74,15 +66,13 @@ void PanoramioPlugin::initialize()
 
 }
 
-bool PanoramioPlugin::isInitialized() const
-{
+bool PanoramioPlugin::isInitialized() const {
     return true;
 }
 /**
 *This function render whatever images it has in list
 */
-bool PanoramioPlugin::render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer)
-{
+bool PanoramioPlugin::render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer) {
     static qreal deltaWest = 0 , deltaEast = 0 , deltaSouth = 0 , deltaNorth = 0;
     painter->autoMapQuality();
     GeoDataLatLonAltBox mylatLonAltBox = viewport->viewLatLonAltBox();
@@ -98,15 +88,14 @@ bool PanoramioPlugin::render(GeoPainter *painter, ViewportParams *viewport, cons
 
         }
     }
-  return true;
+    return true;
 }
 /**
-*this slot is called after the json has been downlaod 
-*[1]this flost calls the json parser 
+*this slot is called after the json has been downlaod
+*[1]this flost calls the json parser
 *[2]add jobs in  http Download manager for each parsed entry in parsed json
 */
-void PanoramioPlugin::slotDownloadImage(QString relativeUrlString, QString id)
-{
+void PanoramioPlugin::slotDownloadImage(QString relativeUrlString, QString id) {
     disconnect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotDownloadImage(QString , QString)));
     connect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotAppendImageToList(QString , QString)));
 
@@ -116,7 +105,7 @@ void PanoramioPlugin::slotDownloadImage(QString relativeUrlString, QString id)
 //	qDebug()<<temp.photo_file_url;
         if (!m_storagePolicy->fileExists(temp.photo_title)) {
             m_downloadManager->addJob(QUrl(temp.photo_file_url), temp.photo_title, QString::number(x));
-           qDebug() << "adding " << temp.photo_title;
+            qDebug() << "adding " << temp.photo_title;
         }
     }
 
@@ -125,8 +114,7 @@ void PanoramioPlugin::slotDownloadImage(QString relativeUrlString, QString id)
 *this slot is called once a image has been downloaded by HTTPdownloader
 [1]It appends the image to a imageWidget
 */
-void PanoramioPlugin::slotAppendImageToList(const QString relativeUrlString, const QString id)
-{
+void PanoramioPlugin::slotAppendImageToList(const QString relativeUrlString, const QString id) {
     tempImage.load(MarbleDirs::localPath() + "/cache/" + relativeUrlString);
 //     imagesWeHave.append(tempImage.scaled(QSize(50, 50),  Qt::IgnoreAspectRatio , Qt::FastTransformation));
     images.append(new imageWidget);
@@ -137,8 +125,7 @@ void PanoramioPlugin::slotAppendImageToList(const QString relativeUrlString, con
 /**
 *This function add jobs to downlaod manager to fetch json file from panoramio sevrers
 */
-void PanoramioPlugin::downloadPanoramio(int rangeFrom , int rangeTo , qreal east , qreal west , qreal north , qreal south)
-{
+void PanoramioPlugin::downloadPanoramio(int rangeFrom , int rangeTo , qreal east , qreal west , qreal north , qreal south) {
     m_downloadManager->addJob(QUrl("http://www.panoramio.com/map/get_panoramas.php?from="
                                    + QString::number(rangeFrom)
                                    + "&to=" + QString::number(rangeTo)
@@ -149,8 +136,24 @@ void PanoramioPlugin::downloadPanoramio(int rangeFrom , int rangeTo , qreal east
     connect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotDownloadImage(QString , QString)));
 }
 
+
+/**
+*trying to install a event filter on marble widget to fliter events for our little image widgets
+*/
+bool PanoramioPlugin::eventFilter(QObject *object, QEvent *e) {
+    MarbleWidget *widget = dynamic_cast<MarbleWidget*> (object);
+    if ( !widget ) {
+        return RenderPlugin::eventFilter(object, e);
+    }
+    QMouseEvent *event = static_cast<QMouseEvent*> (e);
+    if ( e->type() == QEvent::MouseButtonPress ) {
+        qDebug()<<__func__;
+    }
 }
 
+
+
+}
 Q_EXPORT_PLUGIN2(PanoramioPlugin, Marble::PanoramioPlugin)
 
 #include "PanoramioPlugin.moc"

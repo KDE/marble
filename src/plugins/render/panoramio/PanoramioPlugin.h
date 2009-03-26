@@ -23,19 +23,21 @@
 #include "jsonparser.h"
 #include "imagewidget.h"
 #include "RenderPlugin.h"
+#include "MarbleWidget.h"
 #include <QWidget>
 #include <QLabel>
 #include <QPushButton>
-namespace Marble
-{
+#include <QMouseEvent>
+#include <QRectF>
+namespace Marble {
 
 /**
  * @short The class that specifies the a simple panormaio plugin
  *
  */
+class MarbleWidget;
 
-class PanoramioPlugin : public RenderPlugin
-{
+class PanoramioPlugin : public RenderPlugin {
     Q_OBJECT
     Q_INTERFACES(Marble::RenderPluginInterface)
     MARBLE_PLUGIN(PanoramioPlugin)
@@ -63,6 +65,8 @@ public:
     bool isInitialized() const;
 
     bool render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0);
+protected:
+    bool eventFilter( QObject *object, QEvent *e );
 
 public slots:
     void slotDownloadImage(QString , QString);   //completed download of json reply fom panoramio
@@ -80,7 +84,7 @@ private:
     QPixmap tempImage;
     int flag;//this flag is one when globe has an Image  (downloaded or already there in cache)
     int numberOfImagesToShow;//this factor stires how many are to be downloaded and shown on the globe
-    QList<imageWidget*>images;//these widgets are supposed to show draw images and take click events 
+    QList<imageWidget*>images;//these widgets are supposed to show draw images and take click events
 };
 
 }
