@@ -5,23 +5,23 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Patrick Spendrin      <ps_ml@gmx.de>"
+// Copyright 2008 Patrick Spendrin      <ps_ml@gmx.de>
+// Copyright 2008 Simon Schmeisser      <mail_to_wrt@gmx.de>
 //
 
 //
-// This class is the geodata layer plugin.
+// This class is the placemark layer plugin.
 //
 
-#ifndef MARBLEGEODATAPLUGIN_H
-#define MARBLEGEODATAPLUGIN_H
+#ifndef MARBLEPLACEMARKSPLUGIN_H
+#define MARBLEPLACEMARKSPLUGIN_H
 
 #include <QtCore/QObject>
 #include <QtGui/QBrush>
 #include <QtGui/QPen>
 
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
 
-#include "MarbleGeoDataView.h"
 
 namespace Marble
 {
@@ -33,20 +33,24 @@ class GeoDataDocument;
 /**
  * @short The class that specifies the Marble layer interface of the plugin.
  *
- * MarbleGeoDataPlugin is the beginning of a Render plugin for vectorized data.
- * This includes data which is generated at runtime as well as data that
+ * PlacemarksPlugin is the beginning of a plugin, that displays placemarks
  */
 
-class MarbleGeoDataPlugin : public MarbleRenderPlugin
+class PlacemarksPlugin : public RenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-    MARBLE_PLUGIN(MarbleGeoDataPlugin)
+    Q_INTERFACES( Marble::RenderPluginInterface )
+    MARBLE_PLUGIN( PlacemarksPlugin )
 
-    MarbleGeoDataView* m_view;
+    void setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
+    void setPenStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
+    bool renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *geometry, QString styleUrl );
+    bool renderGeoDataFeature( GeoPainter *painter, GeoDataFeature *feature );
+
+    QBrush m_currentBrush;
+    QPen m_currentPen;
+    
  public:
-    ~MarbleGeoDataPlugin();
-
     QStringList backendTypes() const;
 
     QString renderPolicy() const;
@@ -67,6 +71,7 @@ class MarbleGeoDataPlugin : public MarbleRenderPlugin
     void initialize ();
 
     bool isInitialized () const;
+
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 };

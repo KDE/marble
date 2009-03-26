@@ -1,4 +1,4 @@
-PROJECT(MarbleTestPlugin)
+PROJECT( TestPlugin )
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/test
@@ -7,6 +7,6 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( marbletest_SRCS MarbleTestPlugin.cpp )
+set( test_SRCS TestPlugin.cpp )
 
-marble_add_plugin( MarbleTestPlugin ${marbletest_SRCS} )
+marble_add_plugin( TestPlugin ${test_SRCS} )

@@ -14,12 +14,10 @@
 #include <QtCore/QObject>
 
 // forward declarations
-class QAction;
 class QListView;
-class QModelIndex;
 class QPersistentModelIndex;
 
-#include "MarbleAbstractFloatItem.h"
+#include "AbstractFloatItem.h"
 
 namespace Marble
 {
@@ -30,7 +28,7 @@ class MarbleWidget;
  * @short Provides a float item with a list of opened files
  *
  */
-class FileViewFloatItem: public MarbleAbstractFloatItem
+class FileViewFloatItem: public AbstractFloatItem
 {
     Q_OBJECT
     MARBLE_PLUGIN(FileViewFloatItem)
@@ -66,39 +64,39 @@ class FileViewFloatItem: public MarbleAbstractFloatItem
     bool eventFilter( QObject *object, QEvent *e );
 
  private Q_SLOTS:
-	/** Map theme was changed, adjust controls */
-	void selectTheme( QString theme );
-	 
-	/** Enable/disable zoom in/out buttons */
-	void updateFileView();
-     
+    /** Map theme was changed, adjust controls */
+    void selectTheme( QString theme );
+
+    /** Enable/disable zoom in/out buttons */
+    void updateFileView();
+
     void contextMenu(const QPoint& pos);
-    
+
     void addFile();
-    
+
     void removeFile();
-	 
+
  private:
-	 /** MarbleWidget this float item is installed as event filter for */
-	 MarbleWidget *m_marbleWidget;
+    /** MarbleWidget this float item is installed as event filter for */
+    MarbleWidget *m_marbleWidget;
 
-	 /** FileView controls */
-	 QListView *m_fileView;
+    /** FileView controls */
+    QListView *m_fileView;
 
-	 /** FileView embedding widget */
-	 QWidget *m_fileViewParent;
-     
-     /** current position */
-     QPoint m_itemPosition;
+    /** FileView embedding widget */
+    QWidget *m_fileViewParent;
 
-	 /** Radius of the viewport last time */
-	 int m_oldViewportRadius;
-	 
-	 /** Repaint needed */
-	 bool m_repaintScheduled;
-     
-     /** the last clicked ModelIndex */
-     QPersistentModelIndex* m_persIndex;
+    /** current position */
+    QPoint m_itemPosition;
+
+    /** Radius of the viewport last time */
+    int m_oldViewportRadius;
+
+    /** Repaint needed */
+    bool m_repaintScheduled;
+
+    /** the last clicked ModelIndex */
+    QPersistentModelIndex* m_persIndex;
 };
 
 }

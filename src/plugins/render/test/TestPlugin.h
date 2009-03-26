@@ -5,11 +5,15 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Claudiu Covaci <claudiu.covaci@gmail.com>
+// Copyright 2008 Torsten Rahn <tackat@kde.org>"
 //
 
-#ifndef SATELLITESPLUGIN_H
-#define SATELLITESPLUGIN_H
+//
+// This class is a test plugin.
+//
+
+#ifndef MARBLETESTPLUGIN_H
+#define MARBLETESTPLUGIN_H
 
 #include <QtCore/QObject>
 
@@ -19,32 +23,42 @@ namespace Marble
 {
 
 /**
- * \brief This class displays a layer of satellites (which satellites TBD).
+ * @short The class that specifies the Marble layer interface of a plugin.
  *
  */
-class SatellitesPlugin : public RenderPlugin
+
+class TestPlugin : public RenderPlugin
 {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
-    MARBLE_PLUGIN( SatellitesPlugin )
+    MARBLE_PLUGIN( TestPlugin )
 
  public:
     QStringList backendTypes() const;
+
     QString renderPolicy() const;
+
     QStringList renderPosition() const;
+
     QString name() const;
+
     QString guiString() const;
+
     QString nameId() const;
+
     QString description() const;
+
     QIcon icon () const;
 
-    void initialize ();
-    bool isInitialized () const;
-    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
-//    QTimer* m_timer; /**< Timer to set the update interval */
+    void initialize ();
+
+    bool isInitialized () const;
+
+
+    bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 };
 
 }
 
-#endif
+#endif // MARBLETESTPLUGIN_H

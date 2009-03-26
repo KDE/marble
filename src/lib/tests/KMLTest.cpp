@@ -40,7 +40,8 @@ class KMLTest : public QObject {
         QString content;
 };
 
-void KMLTest::initTestCase() {
+void KMLTest::initTestCase()
+{
     MarbleDirs::setMarbleDataPath( DATA_PATH );
     MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
 
@@ -68,7 +69,8 @@ void KMLTest::initTestCase() {
 "</kml>" );
 }
 
-void KMLTest::loadKMLFromData() {
+void KMLTest::loadKMLFromData()
+{
     GeoDataParser parser( GeoData_KML );
     
     QByteArray array( content.toUtf8() );
@@ -95,7 +97,8 @@ void KMLTest::loadKMLFromData() {
     delete document;
 }
 
-void KMLTest::saveKMLToCache() {
+void KMLTest::saveKMLToCache()
+{
     GeoDataParser parser( GeoData_KML );
     
     QByteArray array( content.toUtf8() );
@@ -124,8 +127,8 @@ void KMLTest::saveKMLToCache() {
     delete document;
 }
 
-void KMLTest::loadKMLFromCache() {
-
+void KMLTest::loadKMLFromCache()
+{
     GeoDataDocument *dataDocument = new GeoDataDocument();
     QString path = QString( "%1/%2.cache" );
     path = path.arg( QCoreApplication::applicationDirPath() );
@@ -153,7 +156,8 @@ void KMLTest::loadKMLFromCache() {
     delete dataDocument;
 }
 
-void KMLTest::saveCitiesToCache() {
+void KMLTest::saveCitiesToCache()
+{
     GeoDataParser parser( GeoData_KML );
     
     QFile citiesFile( CITIES_PATH );
@@ -180,8 +184,8 @@ void KMLTest::saveCitiesToCache() {
     delete document;
 }
 
-void KMLTest::loadCitiesFromCache() {
-
+void KMLTest::loadCitiesFromCache()
+{
     GeoDataDocument *dataDocument = new GeoDataDocument();
     QString path = QString( "%1/%2.cache" );
     path = path.arg( QCoreApplication::applicationDirPath() );

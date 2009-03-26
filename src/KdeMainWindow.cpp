@@ -18,7 +18,6 @@
 // KDE
 #include <kaction.h>
 #include <kactioncollection.h>
-#include <kstatusbar.h>
 #include <kparts/part.h>
 #include <kparts/componentfactory.h>
 
@@ -30,9 +29,6 @@
 
 // Local dir
 #include "ControlView.h"
-#include "HttpDownloadManager.h"
-#include "MarbleMap.h"
-#include "MarbleModel.h"
 #include "marble_part.h"
 
 namespace Marble
@@ -59,69 +55,11 @@ MainWindow::MainWindow( const QString& marbleDataPath, QWidget *parent )
 
     connect( marbleWidget(), SIGNAL( themeChanged( QString ) ), 
 	     this, SLOT( setMapTitle() ) );
-    initStatusBar();
 }
 
 MainWindow::~MainWindow()
 {
     delete m_part;
-}
-
-void MainWindow::initStatusBar()
-{
-    initDownloadProgressBar();
-}
-
-void MainWindow::initDownloadProgressBar()
-{
-    // get status bar and add progress widget
-    KStatusBar * const status_bar = statusBar();
-    qDebug() << "got status bar:" << status_bar;
-    m_downloadProgressBar = new QProgressBar;
-    status_bar->addPermanentWidget( m_downloadProgressBar );
-
-    HttpDownloadManager * const downloadManager =
-        m_part->controlView()->marbleWidget()->map()->model()->downloadManager();
-    qDebug() << "got download manager:" << downloadManager;
-
-    connect( downloadManager, SIGNAL( jobAdded( int )),
-             this, SLOT( downloadProgressJobAdded( int )));
-    connect( downloadManager, SIGNAL( downloadComplete( QString, QString )),
-             this, SLOT( downloadProgressJobCompleted( QString, QString )));
-}
-
-QProgressBar* MainWindow::downloadProgressBar() const
-{
-    return m_downloadProgressBar;
-}
-
-void MainWindow::downloadProgressJobAdded( int totalJobs )
-{
-    m_downloadProgressBar->setUpdatesEnabled( false );
-    if ( m_downloadProgressBar->value() < 0 ) {
-        m_downloadProgressBar->setMaximum( 1 );
-        m_downloadProgressBar->setValue( 0 );
-    } else {
-        m_downloadProgressBar->setMaximum( m_downloadProgressBar->maximum() + 1 );
-    }
-
-    qDebug() << "downloadProgressJobAdded: value/maximum: "
-             << m_downloadProgressBar->value() << '/' << m_downloadProgressBar->maximum();
-
-    m_downloadProgressBar->setUpdatesEnabled( true );
-}
-
-void MainWindow::downloadProgressJobCompleted( QString, QString )
-{
-    m_downloadProgressBar->setUpdatesEnabled( false );
-    m_downloadProgressBar->setValue( m_downloadProgressBar->value() + 1 );
-    if ( m_downloadProgressBar->value() == m_downloadProgressBar->maximum() )
-        m_downloadProgressBar->reset();
-
-    qDebug() << "downloadProgressJobCompleted: value/maximum: "
-             << m_downloadProgressBar->value() << '/' << m_downloadProgressBar->maximum();
-
-    m_downloadProgressBar->setUpdatesEnabled( true );
 }
 
 ControlView* MainWindow::marbleControl() const

@@ -1,4 +1,4 @@
-PROJECT(MarbleCrosshairsPlugin)
+PROJECT( CrosshairsPlugin )
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/crosshairs
@@ -7,6 +7,6 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( marblecrosshairs_SRCS MarbleCrosshairsPlugin.cpp )
+set( crosshairs_SRCS CrosshairsPlugin.cpp )
 
-marble_add_plugin( MarbleCrosshairsPlugin ${marblecrosshairs_SRCS} )
+marble_add_plugin( CrosshairsPlugin ${crosshairs_SRCS} )

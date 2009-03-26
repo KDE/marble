@@ -20,8 +20,9 @@
 namespace Marble
 {
 
-class MarbleRenderPlugin;
-class MarbleAbstractFloatItem;
+class RenderPlugin;
+class NetworkPlugin;
+class AbstractFloatItem;
 class PluginManagerPrivate;
 
 /**
@@ -37,8 +38,9 @@ class MARBLE_EXPORT PluginManager : public QObject
     explicit PluginManager( QObject *parent = 0 );
     ~PluginManager();
 
-    QList<MarbleAbstractFloatItem *> floatItems()    const;
-    QList<MarbleRenderPlugin *>      renderPlugins() const;
+    QList<AbstractFloatItem *> floatItems()    const;
+    QList<RenderPlugin *>      renderPlugins() const;
+    QList<NetworkPlugin *>     networkPlugins() const;
 
  public Q_SLOTS:
     /**

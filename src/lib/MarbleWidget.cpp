@@ -67,6 +67,7 @@ class MarbleWidgetPrivate
     MarbleWidgetPrivate( MarbleMap *map, MarbleWidget *parent )
         : m_widget( parent ),
           m_map( map ),
+          m_model( map->model() ),
           m_viewContext( Marble::Still ),
           m_stillQuality( Marble::High ), m_animationQuality( Marble::Low ),
           m_animationsEnabled( false ),
@@ -75,7 +76,6 @@ class MarbleWidgetPrivate
           m_proxyHost(),
           m_proxyPort( 0 )
     {
-        m_model = m_map->model();
     }
 
     ~MarbleWidgetPrivate()
@@ -115,15 +115,7 @@ MarbleWidget::MarbleWidget(QWidget *parent)
     : QWidget( parent ),
       d( new MarbleWidgetPrivate( new MarbleMap(), this ) )
 {
-#ifdef MARBLE_DBUS
-    QDBusConnection::sessionBus().registerObject("/MarbleWidget", this, 
-                    QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties);
-#endif
-
     d->construct();
-
-    setInputHandler( new MarbleWidgetDefaultInputHandler );
-    setMouseTracking( true );
 }
 
 
@@ -131,17 +123,13 @@ MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
     : QWidget( parent ),
       d( new MarbleWidgetPrivate( map, this ) )
 {
-//    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
-
     d->construct();
-
-    setInputHandler( new MarbleWidgetDefaultInputHandler );
-    setMouseTracking( true );
 }
 
 MarbleWidget::~MarbleWidget()
 {
     // Remove and delete an existing InputHandler
+    // initiazized in d->construct()
     setInputHandler( 0 );
     setDownloadManager( 0 );
 
@@ -150,6 +138,11 @@ MarbleWidget::~MarbleWidget()
 
 void MarbleWidgetPrivate::construct()
 {
+#ifdef MARBLE_DBUS
+    QDBusConnection::sessionBus().registerObject("/MarbleWidget", m_widget, 
+                    QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties);
+#endif
+
     // Widget settings
     m_widget->setMinimumSize( 200, 300 );
     m_widget->setFocusPolicy( Qt::WheelFocus );
@@ -204,6 +197,9 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
                        m_widget, SLOT( centerSun() ) );
+
+    m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler );
+    m_widget->setMouseTracking( m_widget );
 }
 
 // ----------------------------------------------------------------
@@ -1012,13 +1008,9 @@ void MarbleWidget::updateGps()
                                                          d->m_map->viewParams(),
                                                          temp );
     if ( draw ) {
+        qDebug() << "Updating viewport for GPS";
         update( temp );
     }
-    /*
-    d->m_model->gpsLayer()->updateGps(
-                         size(), radius(),
-                              planetAxis() );
-    update();*/
 }
 
 void MarbleWidget::openGpxFile(QString &filename)
@@ -1270,12 +1262,12 @@ quint16 MarbleWidget::proxyPort() const
     return d->m_proxyPort;
 }
 
-QList<MarbleRenderPlugin *> MarbleWidget::renderPlugins() const
+QList<RenderPlugin *> MarbleWidget::renderPlugins() const
 {
     return d->m_model->renderPlugins();
 }
 
-QList<MarbleAbstractFloatItem *> MarbleWidget::floatItems() const
+QList<AbstractFloatItem *> MarbleWidget::floatItems() const
 {
     return d->m_model->floatItems();
 }

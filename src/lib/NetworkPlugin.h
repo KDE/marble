@@ -12,7 +12,7 @@
 #ifndef MARBLE_NETWORK_PLUGIN_H
 #define MARBLE_NETWORK_PLUGIN_H
 
-#include "MarbleNetworkPluginInterface.h"
+#include "NetworkPluginInterface.h"
 #include "marble_export.h"
 
 #include <QtCore/QtPlugin>
@@ -20,25 +20,25 @@
 namespace Marble
 {
 
-class MarbleNetworkPluginPrivate;
+class NetworkPluginPrivate;
 
 /**
  * @short The abstract class that handles network operations.
  *
  */
-class MARBLE_EXPORT MarbleNetworkPlugin : public QObject, public MarbleNetworkPluginInterface
+class MARBLE_EXPORT NetworkPlugin : public QObject, public NetworkPluginInterface
 {
     Q_OBJECT
 
  public:
-    virtual ~MarbleNetworkPlugin();
+    virtual ~NetworkPlugin();
 
  protected:
-    MarbleNetworkPlugin();
+    NetworkPlugin();
 
  private:
-    Q_DISABLE_COPY( MarbleNetworkPlugin )
-    MarbleNetworkPluginPrivate  * const d;
+    Q_DISABLE_COPY( NetworkPlugin )
+    NetworkPluginPrivate  * const d;
 };
 
 }

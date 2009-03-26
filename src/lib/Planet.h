@@ -28,7 +28,7 @@ public:
     Planet();
 
     ///Constructs a planet with @p id, filling orbital elements
-    Planet( const QString& id );
+    explicit Planet( const QString& id );
 
     ///Copy Constructor
     Planet( const Planet& other );
@@ -89,7 +89,7 @@ public:
     void setName( const QString& name );
     void setId( const QString& id );
 
-    void operator=( const Planet& other );
+    Planet& operator=( const Planet& rhs );
 
 private:
     PlanetPrivate * const d;

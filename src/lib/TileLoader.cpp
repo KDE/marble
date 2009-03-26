@@ -151,7 +151,7 @@ void TileLoader::cleanupTilehash()
     QHashIterator<TileId, TextureTile*> it( d->m_tileHash );
     while ( it.hasNext() ) {
         it.next();
-        if ( it.value()->used() == false ) {
+        if ( !it.value()->used() ) {
             // If inCache == false then the cache is too small to store the tile 
             // but the item will get deleted nevertheless and the pointer we have 
             // doesn't get set to zero (so don't delete it in this case or it will crash!)
@@ -295,10 +295,8 @@ int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
     QString str;
     bool ok = true;
 
-    QStringList::const_iterator constIterator;
-    for ( constIterator = leveldirs.constBegin();
-          constIterator != leveldirs.constEnd();
-         ++constIterator)
+    QStringList::const_iterator constIterator = leveldirs.constBegin();
+    for (; constIterator != leveldirs.constEnd(); ++constIterator )
     {
         int value = (*constIterator).toInt( &ok, 10 );
         if ( ok && value > maxtilelevel )

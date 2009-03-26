@@ -63,7 +63,7 @@ void QHttpHttpJob::execute()
     // if Url has query item like in panoramio API requests source.path()
     // chops it , this "if" gurantees its correct treatement
     QString cleanupPath;
-    if ( sourceUrl().hasQuery() == true ) {
+    if ( sourceUrl().hasQuery() ) {
         cleanupPath = QString( sourceUrl().toString( QUrl::RemoveAuthority | QUrl::RemoveScheme ) );
     }
     else {
@@ -91,7 +91,7 @@ void QHttpHttpJob::httpRequestFinished( int requestId, bool error )
 //    FIXME: Check whether this assumption is a safe on:
 //    ( Problem: Conditional jump later on depends on uninitialised value )
 //
-//    if ( responseHeader.isValid() == false )
+//    if ( !responseHeader.isValid() )
 //        return;
 
     if ( responseHeader.statusCode() == 301 )
@@ -143,9 +143,38 @@ QHttpNetworkPlugin::~QHttpNetworkPlugin()
 {
 }
 
+QString QHttpNetworkPlugin::name() const
+{
+    return tr( "QHttp based Network Plugin" );
+}
+
 QString QHttpNetworkPlugin::nameId() const
 {
     return QString::fromLatin1( "QHttp" );
+}
+
+QString QHttpNetworkPlugin::guiString() const
+{
+    return tr( "QHttp based network plugin" );
+}
+
+QString QHttpNetworkPlugin::description() const
+{
+    return tr( "This is a network plugin which is based on the now deprecated QHttp class." );
+}
+
+QIcon QHttpNetworkPlugin::icon() const
+{
+    return QIcon();
+}
+
+void QHttpNetworkPlugin::initialize()
+{
+}
+
+bool QHttpNetworkPlugin::isInitialized() const
+{
+    return true;
 }
 
 HttpJob *QHttpNetworkPlugin::createJob( const QUrl &source, const QString &destination,

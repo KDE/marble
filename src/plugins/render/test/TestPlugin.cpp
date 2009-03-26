@@ -8,7 +8,7 @@
 // Copyright 2008 Torsten Rahn <tackat@kde.org>"
 //
 
-#include "MarbleTestPlugin.h"
+#include "TestPlugin.h"
 
 #include <QtGui/QColor>
 #include <QtGui/QPixmap>
@@ -22,57 +22,57 @@
 namespace Marble
 {
 
-QStringList MarbleTestPlugin::backendTypes() const
+QStringList TestPlugin::backendTypes() const
 {
     return QStringList( "test" );
 }
 
-QString MarbleTestPlugin::renderPolicy() const
+QString TestPlugin::renderPolicy() const
 {
     return QString( "ALWAYS" );
 }
 
-QStringList MarbleTestPlugin::renderPosition() const
+QStringList TestPlugin::renderPosition() const
 {
     return QStringList( "ALWAYS_ON_TOP" );
 }
 
-QString MarbleTestPlugin::name() const
+QString TestPlugin::name() const
 {
     return tr( "Test Plugin" );
 }
 
-QString MarbleTestPlugin::guiString() const
+QString TestPlugin::guiString() const
 {
     return tr( "&Test Plugin" );
 }
 
-QString MarbleTestPlugin::nameId() const
+QString TestPlugin::nameId() const
 {
     return QString( "test-plugin" );
 }
 
-QString MarbleTestPlugin::description() const
+QString TestPlugin::description() const
 {
     return tr( "This is a simple test plugin." );
 }
 
-QIcon MarbleTestPlugin::icon () const
+QIcon TestPlugin::icon () const
 {
     return QIcon();
 }
 
 
-void MarbleTestPlugin::initialize ()
+void TestPlugin::initialize ()
 {
 }
 
-bool MarbleTestPlugin::isInitialized () const
+bool TestPlugin::isInitialized () const
 {
     return true;
 }
 
-bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
+bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
     painter->autoMapQuality();
 
@@ -242,6 +242,6 @@ bool MarbleTestPlugin::render( GeoPainter *painter, ViewportParams *viewport, co
 
 }
 
-Q_EXPORT_PLUGIN2(MarbleTestPlugin, Marble::MarbleTestPlugin)
+Q_EXPORT_PLUGIN2( TestPlugin, Marble::TestPlugin )
 
-#include "MarbleTestPlugin.moc"
+#include "TestPlugin.moc"

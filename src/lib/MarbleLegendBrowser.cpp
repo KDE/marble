@@ -103,7 +103,7 @@ void MarbleLegendBrowser::initTheme()
 
         QVector<GeoSceneProperty*>::const_iterator it = allProperties.constBegin();
         for (; it != allProperties.constEnd(); ++it) {
-            if ( (*it)->available() == true ) {
+            if ( (*it)->available() ) {
                 d->m_checkBoxMap[ (*it)->name() ] = (*it)->value();
             }
         }
@@ -215,7 +215,7 @@ QString MarbleLegendBrowser::generateSectionsHtml()
     for (int section = 0; section < sections.size(); ++section) {
         QString checkBoxString; 
 
-        if ( sections.at(section)->checkable() == true ) {
+        if ( sections.at(section)->checkable() ) {
             checkBoxString = "<a href=\"checkbox:" + sections.at(section)->connectTo() + "\"><span style=\"text-decoration: none\"><img src=\"checkbox:" + sections.at(section)->name() + "\">&nbsp;</span></a> ";
         }
 

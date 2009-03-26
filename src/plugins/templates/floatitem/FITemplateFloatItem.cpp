@@ -25,10 +25,12 @@
 #include "GeoDataCoordinates.h"
 #include "ViewportParams.h"
 
+namespace Marble
+{
 
 FITemplateFloatItem::FITemplateFloatItem ( const QPointF &point,
 					    const QSizeF &size )
-    : MarbleAbstractFloatItem( point, size ),
+    : AbstractFloatItem( point, size ),
       m_compass(),
       m_polarity( 0 )
 {
@@ -101,7 +103,8 @@ bool FITemplateFloatItem::renderFloatItem( GeoPainter     *painter,
     // Here you should render your float item 
 }
 
+}
 
-Q_EXPORT_PLUGIN2(FITemplateFloatItem, FITemplateFloatItem )
+Q_EXPORT_PLUGIN2(FITemplateFloatItem, Marble::FITemplateFloatItem )
 
 #include "FITemplateFloatItem.moc"

@@ -1,4 +1,4 @@
-PROJECT(MarblePlacemarksPlugin)
+PROJECT( PlacemarksPlugin )
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/placemarks
@@ -7,6 +7,6 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( marbleplacemarks_SRCS MarblePlacemarksPlugin.cpp )
+set( placemarks_SRCS PlacemarksPlugin.cpp )
 add_definitions( -DPLACEMARKS_DATA_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}\\\"" )
-marble_add_plugin( MarblePlacemarksPlugin ${marbleplacemarks_SRCS} )
+marble_add_plugin( PlacemarksPlugin ${placemarks_SRCS} )

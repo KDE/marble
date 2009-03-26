@@ -9,8 +9,8 @@
 // Copyright 2008      Simon Schmeisser <mail_to_wrt@gmx.de>
 //
 
-#ifndef MarbleGeoDataDebugModel_H
-#define MarbleGeoDataDebugModel_H
+#ifndef Marble_GeoDataDebugModel_H
+#define Marble_GeoDataDebugModel_H
 
 
 #include <QtCore/QAbstractItemModel>
@@ -23,7 +23,7 @@ class GeoDataDocument;
  * @short The representation of GeoData in a model
  * This class represents all available data given by kml-data files.
  */
-class MarbleGeoDataDebugModel : public QAbstractItemModel
+class GeoDataDebugModel : public QAbstractItemModel
 {
     Q_OBJECT
 
@@ -34,12 +34,12 @@ class MarbleGeoDataDebugModel : public QAbstractItemModel
      *
      * @param parent The parent object.
      */
-    explicit MarbleGeoDataDebugModel( GeoDataDocument*, QObject *parent = 0 );
+    explicit GeoDataDebugModel( GeoDataDocument*, QObject *parent = 0 );
 
     /**
      * Destroys the GeoDataModel.
      */
-    ~MarbleGeoDataDebugModel();
+    ~GeoDataDebugModel();
 
     /**
      * Return the number of Items in the Model.
@@ -70,11 +70,11 @@ class MarbleGeoDataDebugModel : public QAbstractItemModel
     void update();
     
  private:
-    Q_DISABLE_COPY( MarbleGeoDataDebugModel )
+    Q_DISABLE_COPY( GeoDataDebugModel )
     class Private;
     Private* const d;
 };
 
 }
 
-#endif // MarbleGeoDataDebugModel_H
+#endif // Marble_GeoDataDebugModel_H

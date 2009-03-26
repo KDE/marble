@@ -51,6 +51,7 @@ public:
 
     void centerTiles( ViewParams *viewParams, int tileLevel,
                       qreal& tileCol, qreal& tileRow );
+    int tileZoomLevel() const;
 
  Q_SIGNALS:
     void mapChanged();
@@ -173,18 +174,17 @@ inline qreal AbstractScanlineTextureMapper::rad2PixelY( qreal lat ) const
     case GeoSceneTexture::Equirectangular:
         return -lat * m_normGlobalHeight;
     case GeoSceneTexture::Mercator:
-        if ( fabs( lat ) < 1.4835 )
-    {
-        // We develop the inverse Gudermannian into a MacLaurin Series:
-        // Inspite of the many elements needed to get decent 
-        // accuracy this is still faster by far than calculating the 
-        // trigonometric expression:
-        // return - asinh( tan( lat ) ) * 0.5 * m_normGlobalHeight;
+        if ( fabs( lat ) < 1.4835 ) {
+            // We develop the inverse Gudermannian into a MacLaurin Series:
+            // Inspite of the many elements needed to get decent 
+            // accuracy this is still faster by far than calculating the 
+            // trigonometric expression:
+            // return - asinh( tan( lat ) ) * 0.5 * m_normGlobalHeight;
 
-        // We are using the Horner Scheme as a polynom representation
+            // We are using the Horner Scheme as a polynom representation
 
             return - gdInv( lat ) * 0.5 * m_normGlobalHeight;
-    }
+        }
         if ( lat >= +1.4835 )
             // asinh( tan (1.4835)) => 3.1309587
             return - 3.1309587 * 0.5 * m_normGlobalHeight; 
@@ -195,6 +195,11 @@ inline qreal AbstractScanlineTextureMapper::rad2PixelY( qreal lat ) const
 
     // Dummy value to avoid a warning.
     return 0.0;
+}
+
+inline int AbstractScanlineTextureMapper::tileZoomLevel() const
+{
+    return m_tileLevel;
 }
 
 }

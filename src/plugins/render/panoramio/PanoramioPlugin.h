@@ -21,21 +21,25 @@
 #include "../lib/CacheStoragePolicy.h"
 // #include "../lib/HttpJob.h"
 #include "jsonparser.h"
-#include "MarbleRenderPlugin.h"
+#include "imagewidget.h"
+#include "RenderPlugin.h"
+#include "MarbleWidget.h"
 #include <QWidget>
 #include <QLabel>
-namespace Marble
-{
+#include <QPushButton>
+#include <QMouseEvent>
+#include <QRectF>
+namespace Marble {
 
 /**
  * @short The class that specifies the a simple panormaio plugin
  *
  */
+class MarbleWidget;
 
-class PanoramioPlugin : public MarbleRenderPlugin
-{
+class PanoramioPlugin : public RenderPlugin {
     Q_OBJECT
-    Q_INTERFACES(Marble::MarbleRenderPluginInterface)
+    Q_INTERFACES(Marble::RenderPluginInterface)
     MARBLE_PLUGIN(PanoramioPlugin)
 
 public:
@@ -61,10 +65,12 @@ public:
     bool isInitialized() const;
 
     bool render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0);
+protected:
+    bool eventFilter( QObject *object, QEvent *e );
 
 public slots:
-    void slotJsonDownloadComplete(QString , QString);   //completed download of json reply fom panoramio
-    void slotImageDownloadComplete(QString , QString);   //completed download of image
+    void slotDownloadImage(QString , QString);   //completed download of json reply fom panoramio
+    void slotAppendImageToList(QString , QString);   //completed download of image
 signals:
     void statusMessageForImageDownloadingProcess(QString);
 private:
@@ -73,16 +79,12 @@ private:
     jsonParser panoramioJsonParser;
     int decimalToSexagecimal();//convert decimal to DMS system
     void downloadPanoramio(int, int, qreal, qreal, qreal, qreal);
-    QList <QPixmap > imagesWeHave;//this list will hold pointers to pixmaps we have downloaded
     QList <panoramioDataStructure> parsedData;
     panoramioDataStructure temp;
     QPixmap tempImage;
-    QLabel tempLabel;
     int flag;//this flag is one when globe has an Image  (downloaded or already there in cache)
-//         HttpJob *job;
     int numberOfImagesToShow;//this factor stires how many are to be downloaded and shown on the globe
-    QWidget *parent;
-    QList<QLabel>images;//these widgets are supposed to show draw images and take click events 
+    QList<imageWidget*>images;//these widgets are supposed to show draw images and take click events
 };
 
 }

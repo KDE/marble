@@ -29,7 +29,17 @@ using namespace Marble;
 
 class MarbleGeoDataModel::Private {
  public:
-    Private() : m_rootDocument( new GeoDataDocument() ), m_latestId( 0 ) {};
+    Private()
+        : m_rootDocument( new GeoDataDocument() ),
+          m_latestId( 0 )
+    {
+    }
+
+    ~Private()
+    {
+        delete m_rootDocument;
+    }
+
     GeoDataDocument* m_rootDocument;
     QHash<int, GeoDataDocument*> m_documents;
     unsigned long m_latestId;
@@ -42,7 +52,6 @@ MarbleGeoDataModel::MarbleGeoDataModel( QObject *parent )
 
 MarbleGeoDataModel::~MarbleGeoDataModel()
 {
-    delete d->m_rootDocument;
     delete d;
 }
 

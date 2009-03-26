@@ -13,44 +13,45 @@
 // This class is the placemark layer plugin.
 //
 
-#ifndef MARBLEPLACEMARKSPLUGIN_H
-#define MARBLEPLACEMARKSPLUGIN_H
+#ifndef MARBLEDATAVIEWPLUGIN_H
+#define MARBLEDATAVIEWPLUGIN_H
 
 #include <QtCore/QObject>
 #include <QtGui/QBrush>
 #include <QtGui/QPen>
 
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
 
-
-namespace Marble
-{
+class QTreeView;
 
 class GeoDataGeometry;
 class GeoDataFeature;
 class GeoDataDocument;
 
+
+
+namespace Marble
+{
+
+class GeoDataDebugModel;
+
 /**
  * @short The class that specifies the Marble layer interface of the plugin.
  *
- * MarblePlacemarksPlugin is the beginning of a plugin, that displays placemarks
+ * DataViewPlugin is the beginning of a plugin, that displays the geodata as it is stored internally
  */
 
-class MarblePlacemarksPlugin : public MarbleRenderPlugin
+class DataViewPlugin : public RenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-    MARBLE_PLUGIN( MarblePlacemarksPlugin )
+    Q_INTERFACES( Marble::RenderPluginInterface )
+    MARBLE_PLUGIN(DataViewPlugin)
 
-    void setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
-    void setPenStyle( GeoPainter *painter, GeoDataDocument* root, QString styleId );
-    bool renderGeoDataGeometry( GeoPainter *painter, GeoDataGeometry *geometry, QString styleUrl );
-    bool renderGeoDataFeature( GeoPainter *painter, GeoDataFeature *feature );
+    public:
 
-    QBrush m_currentBrush;
-    QPen m_currentPen;
-    
- public:
+    DataViewPlugin();
+    ~DataViewPlugin();
+
     QStringList backendTypes() const;
 
     QString renderPolicy() const;
@@ -74,8 +75,11 @@ class MarblePlacemarksPlugin : public MarbleRenderPlugin
 
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+    
+    private:
+    QTreeView *m_dataView;
+    GeoDataDebugModel *m_debugModel;
 };
 
 }
-
 #endif

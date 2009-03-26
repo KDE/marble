@@ -15,7 +15,7 @@
 #ifndef QHTTPNETWORKPLUGIN_H
 #define QHTTPNETWORKPLUGIN_H
 
-#include "MarbleNetworkPlugin.h"
+#include "NetworkPlugin.h"
 #include "HttpJob.h"
 
 #include <QtCore/QByteArray>
@@ -62,7 +62,7 @@ inline QByteArray & QHttpHttpJob::data()
 }
 
 
-class QHttpNetworkPlugin: public MarbleNetworkPlugin
+class QHttpNetworkPlugin: public NetworkPlugin
 {
     Q_OBJECT
 
@@ -70,7 +70,14 @@ class QHttpNetworkPlugin: public MarbleNetworkPlugin
     QHttpNetworkPlugin();
     virtual ~QHttpNetworkPlugin();
 
+    virtual QString name() const;
     virtual QString nameId() const;
+    virtual QString guiString() const;
+    virtual QString description() const;
+    virtual QIcon icon() const;
+    virtual void initialize();
+    virtual bool isInitialized() const;
+
     virtual HttpJob *createJob( const QUrl &source, const QString &destination, const QString &id );
 };
 

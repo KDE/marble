@@ -34,10 +34,9 @@ class GeoPainterPrivate
  public:
     GeoPainterPrivate( ViewportParams *viewport, MapQuality mapQuality )
         : m_viewport( viewport ),
-	  m_mapQuality( mapQuality )
-
+	  m_mapQuality( mapQuality ),
+          m_x( new int[100] )
     {
-        m_x = new int[100];
     }
 
     ~GeoPainterPrivate()
@@ -256,7 +255,7 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal wid
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    if ( isGeoProjected == false ) {
+    if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the ellipse geometry into account
         bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
 
@@ -324,7 +323,7 @@ void GeoPainter::drawImage ( const GeoDataCoordinates & centerPoint, const QImag
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    if ( isGeoProjected == false ) {
+    if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
         bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
 
@@ -344,7 +343,7 @@ void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPoint, const QPix
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    if ( isGeoProjected == false ) {
+    if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
         bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
 
@@ -458,7 +457,7 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates, qreal 
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    if ( isGeoProjected == false ) {
+    if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
         bool visible = projection->screenCoordinates( centerCoordinates, 
                        d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
@@ -489,7 +488,7 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates, qreal 
         if ( latBottom < -90.0 ) latBottom = -90.0;
 
         GeoDataCoordinates bottomLeft( lonLeft, latBottom,
-                                    altitude, GeoDataCoordinates::Degree );;
+                                    altitude, GeoDataCoordinates::Degree );
         GeoDataCoordinates bottomRight( lonRight, latBottom,
                                     altitude, GeoDataCoordinates::Degree );
         GeoDataCoordinates topRight( lonRight, latTop,
@@ -512,7 +511,7 @@ void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPoint, int widt
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    if ( isGeoProjected == false ) {
+    if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
         bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
 

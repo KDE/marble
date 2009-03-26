@@ -17,12 +17,12 @@ namespace Marble
 {
 
 TileId::TileId( int zoomLevel, int tileX, int tileY )
-  : m_zoomLevel( zoomLevel ), m_tileX( tileX ), m_tileY( tileY )
+    : m_zoomLevel( zoomLevel ), m_tileX( tileX ), m_tileY( tileY )
 {
 }
 
 TileId::TileId()
-  : m_zoomLevel( 0 ), m_tileX( 0 ), m_tileY( 0 )
+    : m_zoomLevel( 0 ), m_tileX( 0 ), m_tileY( 0 )
 {
 }
 

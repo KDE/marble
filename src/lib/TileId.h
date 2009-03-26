@@ -18,24 +18,24 @@ namespace Marble
 
 class TileId
 {
-  friend bool operator==( TileId const& lhs, TileId const& rhs );
-  friend uint qHash( TileId const& );
+    friend bool operator==( TileId const& lhs, TileId const& rhs );
+    friend uint qHash( TileId const& );
 
  public:
-  TileId( int zoomLevel, int tileX, int tileY );
-  TileId();
+    TileId( int zoomLevel, int tileX, int tileY );
+    TileId();
 
-  int zoomLevel() const;
-  int x() const;
-  int y() const;
+    int zoomLevel() const;
+    int x() const;
+    int y() const;
 
-  QString toString() const;
-  static TileId fromString( QString const& );
+    QString toString() const;
+    static TileId fromString( QString const& );
 
  private:
-  int m_zoomLevel;
-  int m_tileX;
-  int m_tileY;
+    int m_zoomLevel;
+    int m_tileX;
+    int m_tileY;
 };
 
 

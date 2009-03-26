@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
     {
         rawline = sourcestream.readLine();
 
-        if ( rawline.contains( QChar(' ') ) == false )
+        if ( !rawline.contains( QChar(' ') ) )
         {
             qDebug() << "Line " << line << " does not contain a space separator.";
             continue;
@@ -138,7 +138,7 @@ int main(int argc, char *argv[])
         float  lon; 
 
         header = 5;
-        if ( firstheader == true ) {
+        if ( firstheader ) {
              header      = 19000;
              firstheader = false;
         }

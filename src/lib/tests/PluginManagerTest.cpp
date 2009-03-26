@@ -22,7 +22,8 @@ class PluginManagerTest : public QObject {
         void loadPlugins();
 };
 
-void PluginManagerTest::loadPlugins() {
+void PluginManagerTest::loadPlugins()
+{
     MarbleDirs::setMarbleDataPath( DATA_PATH );
     MarbleDirs::setMarblePluginPath( PLUGIN_PATH );
 

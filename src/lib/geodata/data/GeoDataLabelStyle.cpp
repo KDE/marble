@@ -26,9 +26,9 @@ class GeoDataLabelStylePrivate
 {
   public:
     GeoDataLabelStylePrivate() 
-        : m_font( QFont("Sans Serif").family(), defaultSize, 50, false ),
+        : m_scale( 1.0 ),
           m_alignment( GeoDataLabelStyle::Corner ),
-          m_scale( 1.0 )
+          m_font( QFont("Sans Serif").family(), defaultSize, 50, false )
     {
     }
 

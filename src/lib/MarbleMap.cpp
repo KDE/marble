@@ -56,7 +56,7 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
 
 #include "gps/GpsLayer.h"
 
@@ -295,7 +295,7 @@ void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fp
 {
     Q_UNUSED(dirtyRect);
 
-    if ( m_showFrameRate == true ) {
+    if ( m_showFrameRate ) {
         QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
 
         QPoint fpsLabelPos( 10, 20 );
@@ -612,8 +612,8 @@ bool MarbleMap::showCrosshairs() const
 {
     bool visible = false;
 
-    QList<MarbleRenderPlugin *> pluginList = renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *> pluginList = renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         if ( (*i)->nameId() == "crosshairs" ) {
             visible = (*i)->visible();
@@ -973,8 +973,8 @@ void MarbleMap::setShowAtmosphere( bool visible )
 
 void MarbleMap::setShowCrosshairs( bool visible )
 {
-    QList<MarbleRenderPlugin *> pluginList = renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *> pluginList = renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         if ( (*i)->nameId() == "crosshairs" ) {
             (*i)->setVisible( visible );
@@ -1098,11 +1098,6 @@ void MarbleMap::updateGps()
     if ( draw ) {
         update(temp);
     }
-#endif
-
-#if 0
-    d->m_model->gpsLayer()->updateGps( size(), radius(), planetAxis() );
-    update();
 #endif
 }
 
@@ -1287,12 +1282,12 @@ SunLocator* MarbleMap::sunLocator()
     return d->m_model->sunLocator();
 }
 
-QList<MarbleRenderPlugin *> MarbleMap::renderPlugins() const
+QList<RenderPlugin *> MarbleMap::renderPlugins() const
 {
     return d->m_model->renderPlugins();
 }
 
-QList<MarbleAbstractFloatItem *> MarbleMap::floatItems() const
+QList<AbstractFloatItem *> MarbleMap::floatItems() const
 {
     return d->m_model->floatItems();
 }

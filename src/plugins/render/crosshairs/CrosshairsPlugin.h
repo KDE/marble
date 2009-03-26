@@ -9,29 +9,31 @@
 //
 
 //
-// This class is a test plugin.
+// This class is a crosshairs plugin.
 //
 
-#ifndef MARBLETESTPLUGIN_H
-#define MARBLETESTPLUGIN_H
+#ifndef MARBLECROSSHAIRSPLUGIN_H
+#define MARBLECROSSHAIRSPLUGIN_H
 
 #include <QtCore/QObject>
 
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
+
 
 namespace Marble
 {
+
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
  *
  */
 
-class MarbleTestPlugin : public MarbleRenderPlugin
+class CrosshairsPlugin : public RenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-    MARBLE_PLUGIN( MarbleTestPlugin )
+    Q_INTERFACES( Marble::RenderPluginInterface )
+    MARBLE_PLUGIN(CrosshairsPlugin)
 
  public:
     QStringList backendTypes() const;
@@ -61,4 +63,4 @@ class MarbleTestPlugin : public MarbleRenderPlugin
 
 }
 
-#endif // MARBLETESTPLUGIN_H
+#endif // MARBLECROSSHAIRSPLUGIN_H

@@ -163,7 +163,7 @@ void TileCreator::run()
         QString( "TileCreator::createTiles() The size of the final image will measure  %1 x %2 pixels").arg(stdImageWidth).arg(stdImageHeight);
     }
 
-    if ( QDir( d->m_targetDir ).exists() == false ) 
+    if ( !QDir( d->m_targetDir ).exists() )
         ( QDir::root() ).mkpath( d->m_targetDir );
 
     // Counting total amount of tiles to be generated for the progressbar
@@ -226,7 +226,7 @@ void TileCreator::run()
 
         for ( int m = 0; m < mmax; ++m ) {
 
-            if ( d->m_cancelled == true ) 
+            if ( d->m_cancelled ) 
                 return;
 
             QImage  tile = row.copy( m * stdImageWidth / mmax, 0, tileSize, tileSize );
@@ -279,7 +279,7 @@ void TileCreator::run()
             int   mmaxit = TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, tileLevel );
             for ( int m = 0; m < mmaxit; ++m ) {
 
-                if ( d->m_cancelled == true )
+                if ( d->m_cancelled )
                     return;
 
                 tileName = d->m_targetDir + ( QString("%1/%2/%2_%3.jpg")
@@ -403,7 +403,7 @@ void TileCreator::run()
             int mmaxit =  TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, tileLevel );
             for ( int m = 0; m < mmaxit; ++m) { 
 
-                if ( d->m_cancelled == true )
+                if ( d->m_cancelled )
                     return;
 
                 savedTilesCount++;

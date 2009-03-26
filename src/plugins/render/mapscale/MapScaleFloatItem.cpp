@@ -14,10 +14,8 @@
 #include <QtCore/QRect>
 #include <QtGui/QPixmap>
 
-#include "AbstractProjection.h"
 #include "global.h"
 #include "MarbleLocale.h"
-#include "MarbleDirs.h"
 #include "MarbleDataFacade.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
@@ -26,10 +24,10 @@ namespace Marble
 {
 
 MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
-    : MarbleAbstractFloatItem( point, size ),
+    : AbstractFloatItem( point, size ),
       m_radius(0),
-      m_target(QString()),
       m_invScale(0.0),
+      m_target(QString()),
       m_leftBarMargin(0),
       m_rightBarMargin(0),
       m_scaleBarWidth(0),

@@ -155,21 +155,9 @@ Planet::Planet( const QString& id )
 Planet::Planet( const Planet& other )
     : d( new PlanetPrivate )
 {
-    d->M_0 = other.M_0();
-    d->M_1 = other.M_1();
-    d->C_1 = other.C_1();
-    d->C_2 = other.C_2();
-    d->C_3 = other.C_3();
-    d->C_4 = other.C_4();
-    d->C_5 = other.C_5();
-    d->C_6 = other.C_6();
-    d->Pi = other.Pi();
-    d->epsilon = other.epsilon();
-    d->theta_0 = other.theta_0();
-    d->theta_1 = other.theta_1();
-    d->radius = other.radius();
-    d->name = other.name();
-    d->id = other.id();
+    // PlanetPrivate does not have pointer members, so we can just
+    // use its (compiler generated) assignment operator.
+    *d = *other.d;
 }
 
 //Destructor
@@ -326,23 +314,12 @@ void Planet::setId( const QString& id )
 }
 
 
-void Planet::operator=(const Planet& other)
+Planet& Planet::operator=(const Planet& rhs)
 {
-    d->M_0 = other.M_0();
-    d->M_1 = other.M_1();
-    d->C_1 = other.C_1();
-    d->C_2 = other.C_2();
-    d->C_3 = other.C_3();
-    d->C_4 = other.C_4();
-    d->C_5 = other.C_5();
-    d->C_6 = other.C_6();
-    d->Pi = other.Pi();
-    d->epsilon = other.epsilon();
-    d->theta_0 = other.theta_0();
-    d->theta_1 = other.theta_1();
-    d->radius = other.radius();
-    d->name = other.name();
-    d->id = other.id();
+    // PlanetPrivate does not have pointer members, so we can just
+    // use its (compiler generated) assignment operator.
+    *d = *rhs.d;
+    return *this;
 }
 
 } //namespace Marble

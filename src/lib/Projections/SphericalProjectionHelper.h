@@ -37,7 +37,7 @@ class SphericalProjectionHelper : public AbstractProjectionHelper
     /**
      * @brief Construct a new SphericalProjection.
      */
-    explicit SphericalProjectionHelper();
+    SphericalProjectionHelper();
 
     virtual ~SphericalProjectionHelper();
 

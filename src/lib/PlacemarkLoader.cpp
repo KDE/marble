@@ -29,112 +29,113 @@
 namespace Marble {
 
 PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& file, bool finalize )
- : QThread( parent ), 
-   m_filepath( file ),
-   m_contents( QString() ),
-   m_finalize( finalize ) {
+    : QThread( parent ), 
+      m_filepath( file ),
+      m_contents( QString() ),
+      m_finalize( finalize ) 
+{
 }
 
 PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& contents, const QString& file, bool finalize )
- : QThread( parent ), 
-   m_filepath( file ), 
-   m_contents( contents ),
-   m_finalize( finalize ) {
+    : QThread( parent ), 
+      m_filepath( file ), 
+      m_contents( contents ),
+      m_finalize( finalize )
+{
 }
 
-void PlacemarkLoader::run() {
+void PlacemarkLoader::run()
+{
+    if( m_contents.isEmpty() ) {
+        QString defaultcachename;
+        QString defaultsrcname;
+        QString defaulthomecache;
 
-if( m_contents.isEmpty() ) {
-    QString defaultcachename;
-    QString defaultsrcname;
-    QString defaulthomecache;
-
-    PlacemarkContainer *container = new PlacemarkContainer( m_filepath );
+        PlacemarkContainer *container = new PlacemarkContainer( m_filepath );
     
-    if( m_filepath.endsWith(".kml") ) {
-        m_filepath.remove(QRegExp("\\.kml$"));
-    }
-    qDebug() << "starting parser for" << m_filepath;
+        if( m_filepath.endsWith(".kml") ) {
+            m_filepath.remove(QRegExp("\\.kml$"));
+        }
+        qDebug() << "starting parser for" << m_filepath;
 
-    QFileInfo fileinfo(m_filepath);
-    if ( fileinfo.isAbsolute() ) {
-        // We got an _absolute_ path now: e.g. "/patrick.kml"
-        defaultcachename = m_filepath + ".cache";
-        defaultsrcname   = m_filepath + ".kml";
-    }
-    else {
-        if ( m_filepath.contains( '/' ) ) {
-            // _relative_ path: "maps/mars/viking/patrick.kml" 
-            defaultcachename = MarbleDirs::path( m_filepath + ".cache" );
-            defaultsrcname   = MarbleDirs::path( m_filepath + ".kml");
-            defaulthomecache = MarbleDirs::localPath() + m_filepath + ".cache";
+        QFileInfo fileinfo(m_filepath);
+        if ( fileinfo.isAbsolute() ) {
+            // We got an _absolute_ path now: e.g. "/patrick.kml"
+            defaultcachename = m_filepath + ".cache";
+            defaultsrcname   = m_filepath + ".kml";
         }
         else {
-            // _standard_ shared placemarks: "placemarks/patrick.kml"
-            defaultcachename = MarbleDirs::path( "placemarks/" + m_filepath + ".cache" );
-            defaultsrcname   = MarbleDirs::path( "placemarks/" + m_filepath + ".kml");
-            defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + m_filepath + ".cache";
-        }
-    }
-
-    if ( QFile::exists( defaultcachename ) ) {
-        qDebug() << "Loading Default Placemark Cache File:" + defaultcachename;
-
-        bool      cacheoutdated = false;
-        QDateTime sourceLastModified;
-        QDateTime cacheLastModified;
-
-        if ( QFile::exists( defaultsrcname ) ) {
-            sourceLastModified = QFileInfo( defaultsrcname ).lastModified();
-            cacheLastModified  = QFileInfo( defaultcachename ).lastModified();
-
-            if ( cacheLastModified < sourceLastModified )
-                cacheoutdated = true;
-        }
-
-        bool loadok = false;
-
-        if ( cacheoutdated == false ) {
-            loadok = loadFile( defaultcachename, container );
-            if ( loadok ) {
-                qDebug() << "placemarksLoaded";
-                emit placemarksLoaded( this, container );
+            if ( m_filepath.contains( '/' ) ) {
+                // _relative_ path: "maps/mars/viking/patrick.kml" 
+                defaultcachename = MarbleDirs::path( m_filepath + ".cache" );
+                defaultsrcname   = MarbleDirs::path( m_filepath + ".kml");
+                defaulthomecache = MarbleDirs::localPath() + m_filepath + ".cache";
+            }
+            else {
+                // _standard_ shared placemarks: "placemarks/patrick.kml"
+                defaultcachename = MarbleDirs::path( "placemarks/" + m_filepath + ".cache" );
+                defaultsrcname   = MarbleDirs::path( "placemarks/" + m_filepath + ".kml");
+                defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + m_filepath + ".cache";
             }
         }
-        qDebug() << "Loading ended" << loadok;
-        if ( loadok == true )
-            return;
-    }
 
-    qDebug() << "No recent Default Placemark Cache File available for " << m_filepath;
+        if ( QFile::exists( defaultcachename ) ) {
+            qDebug() << "Loading Default Placemark Cache File:" + defaultcachename;
 
-    if ( QFile::exists( defaultsrcname ) ) {
+            bool      cacheoutdated = false;
+            QDateTime sourceLastModified;
+            QDateTime cacheLastModified;
 
-        // Read the KML file.
-        importKml( defaultsrcname, container );
+            if ( QFile::exists( defaultsrcname ) ) {
+                sourceLastModified = QFileInfo( defaultsrcname ).lastModified();
+                cacheLastModified  = QFileInfo( defaultcachename ).lastModified();
 
-        qDebug() << "ContainerSize for" << m_filepath << ":" << container->size();
-        // Save the contents in the efficient cache format.
-        saveFile( defaulthomecache, container );
+                if ( cacheLastModified < sourceLastModified )
+                    cacheoutdated = true;
+            }
 
-        qDebug() << "placemarksLoaded";
+            bool loadok = false;
 
-        // ...and finally add it to the PlacemarkContainer
+            if ( !cacheoutdated ) {
+                loadok = loadFile( defaultcachename, container );
+                if ( loadok )
+                    emit placemarksLoaded( this, container );
+            }
+            qDebug() << "Loading ended" << loadok;
+            if ( loadok ) {
+                qDebug() << "placemarksLoaded";
+                return;
+            }
+        }
+
+        qDebug() << "No recent Default Placemark Cache File available for " << m_filepath;
+
+        if ( QFile::exists( defaultsrcname ) ) {
+
+            // Read the KML file.
+            importKml( defaultsrcname, container );
+
+            qDebug() << "ContainerSize for" << m_filepath << ":" << container->size();
+            // Save the contents in the efficient cache format.
+            saveFile( defaulthomecache, container );
+
+            qDebug() << "placemarksLoaded";
+
+            // ...and finally add it to the PlacemarkContainer
+            emit placemarksLoaded( this, container );
+        }
+        else {
+            qDebug() << "No Default Placemark Source File for " << m_filepath;
+            emit placemarkLoaderFailed( this );
+        }
+    } else {
+        PlacemarkContainer *container = new PlacemarkContainer( m_filepath );
+
+        // Read the KML Data
+        importKmlFromData( container );
+
         emit placemarksLoaded( this, container );
     }
-    else {
-        qDebug() << "No Default Placemark Source File for " << m_filepath;
-        emit placemarkLoaderFailed( this );
-    }
-} else {
-    PlacemarkContainer *container = new PlacemarkContainer( m_filepath );
-
-    // Read the KML Data
-    importKmlFromData( container );
-
-    emit placemarksLoaded( this, container );
-}
-
 }
 
 const quint32 MarbleMagicNumber = 0x31415926;
@@ -202,7 +203,7 @@ void PlacemarkLoader::importKmlFromData( PlacemarkContainer* placemarkContainer 
 void PlacemarkLoader::saveFile( const QString& filename,
                                  PlacemarkContainer* placemarkContainer )
 {
-    if ( QDir( MarbleDirs::localPath() + "/placemarks/" ).exists() == false )
+    if ( !QDir( MarbleDirs::localPath() + "/placemarks/" ).exists() )
         ( QDir::root() ).mkpath( MarbleDirs::localPath() + "/placemarks/" );
 
     QFile file( filename );
@@ -233,8 +234,8 @@ void PlacemarkLoader::saveFile( const QString& filename,
         out << QString( (*it).countryCode() );
         out << (qreal)(*it).area();
         out << (qint64)(*it).population();
-}
     }
+}
 
 bool PlacemarkLoader::finalize()
 {

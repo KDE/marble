@@ -17,7 +17,7 @@
 #include <QtCore/QString>
 #include <QtCore/Qt>
 
-#include "MarbleRenderPluginInterface.h"
+#include "RenderPluginInterface.h"
 #include "marble_export.h"
 
 
@@ -27,7 +27,7 @@ class QStandardItem;
 namespace Marble
 {
 
-class MarbleRenderPluginPrivate;
+class RenderPluginPrivate;
 class MarbleDataFacade;
 
 /**
@@ -35,14 +35,14 @@ class MarbleDataFacade;
  *
  */
 
-class MARBLE_EXPORT MarbleRenderPlugin : public QObject, public MarbleRenderPluginInterface
+class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
+    Q_INTERFACES( Marble::RenderPluginInterface )
 
  public:
-    explicit MarbleRenderPlugin();
-    virtual ~MarbleRenderPlugin();
+    RenderPlugin();
+    virtual ~RenderPlugin();
 
     MarbleDataFacade* dataFacade() const;
     void  setDataFacade( MarbleDataFacade* );
@@ -64,12 +64,12 @@ class MARBLE_EXPORT MarbleRenderPlugin : public QObject, public MarbleRenderPlug
     void    valueChanged( QString nameId, bool visible );
 
  private:
-    Q_DISABLE_COPY( MarbleRenderPlugin )
-    MarbleRenderPluginPrivate  * const d;
+    Q_DISABLE_COPY( RenderPlugin )
+    RenderPluginPrivate * const d;
 };
 
 #define MARBLE_PLUGIN(T) public:\
-    virtual MarbleRenderPlugin* pluginInstance() { return new T(); };
+    virtual RenderPlugin* pluginInstance() { return new T(); };
 }
 
 #endif // MARBLE_RENDER_PLUGIN_H

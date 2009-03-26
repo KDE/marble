@@ -26,7 +26,7 @@
 #include "MarbleModel.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
-#include "MarbleAbstractFloatItem.h"
+#include "AbstractFloatItem.h"
 #include "MeasureTool.h"
 #include "MarbleWidgetPopupMenu.h"
 
@@ -52,7 +52,7 @@ void MarbleWidgetInputHandler::init(MarbleWidget *w)
     m_widget = w;
     m_model = w->model();
 
-    foreach(MarbleAbstractFloatItem *floatItem, m_widget->floatItems())
+    foreach(AbstractFloatItem *floatItem, m_widget->floatItems())
     {
         m_widget->installEventFilter(floatItem);
     }
@@ -168,7 +168,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         // Do not handle (and therefore eat) mouse press and release events 
         // that occur above visible float items. Mouse motion events are still 
         // handled, however.
-        foreach( MarbleAbstractFloatItem *floatItem, m_widget->floatItems() ) {
+        foreach( AbstractFloatItem *floatItem, m_widget->floatItems() ) {
             QRectF widgetRect(0,0,m_widget->width(),m_widget->height());
             QRectF floatItemRect = QRectF(floatItem->positivePosition(widgetRect), 
                     floatItem->size());
@@ -307,7 +307,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             }
 
             // Regarding all kinds of mouse moves:
-            if ( m_leftpressed == true && !m_selectionRubber->isVisible() ) {
+            if ( m_leftpressed && !m_selectionRubber->isVisible() ) {
                 qreal  radius = (qreal)(m_widget->radius());
                 int     deltax = event->x() - m_leftpressedx;
                 int     deltay = event->y() - m_leftpressedy;
@@ -339,7 +339,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             }
 
 
-            if ( m_midpressed == true ) {
+            if ( m_midpressed ) {
                 int  eventy = event->y();
                 int  dy     = m_midpressedy - eventy;
                 m_midpressed = eventy;
@@ -396,13 +396,13 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         if ( ( m_widget->model()->whichFeatureAt( QPoint( event->x(),
                                                           event->y() ) ) ).size() == 0 )
         {
-            if ( m_leftpressed == false )
+            if ( !m_leftpressed )
                 arrowcur [1][1] = QCursor(Qt::OpenHandCursor);
             else
                 arrowcur [1][1] = QCursor(Qt::ClosedHandCursor);
         }
         else {
-            if ( m_leftpressed == false )
+            if ( !m_leftpressed )
                 arrowcur [1][1] = QCursor(Qt::PointingHandCursor);
         }
 

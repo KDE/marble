@@ -23,22 +23,19 @@
 
 #include "FileViewModel.h"
 #include "AbstractFileViewItem.h"
-#include "AbstractProjection.h"
-#include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "MarbleWidget.h"
 #include "MarbleDataFacade.h"
-#include "MarbleMap.h"
 
 
 using namespace Marble;
 
 FileViewFloatItem::FileViewFloatItem(const QPointF &point,
         const QSizeF &size) :
-    MarbleAbstractFloatItem(point, size), m_marbleWidget(0),
-            m_fileViewParent(0), m_repaintScheduled(true),
-            m_fileView(0), m_persIndex(0)
+    AbstractFloatItem(point, size), m_marbleWidget(0),
+            m_fileView(0), m_fileViewParent(0),
+            m_repaintScheduled(true), m_persIndex(0)
 {
     // Plugin is not enabled by default
     setEnabled(false);
@@ -140,7 +137,7 @@ bool FileViewFloatItem::eventFilter(QObject *object, QEvent *e)
 
     MarbleWidget *widget = dynamic_cast<MarbleWidget*> (object);
     if ( !widget ) {
-        return MarbleAbstractFloatItem::eventFilter(object, e);
+        return AbstractFloatItem::eventFilter(object, e);
     }
 
     if ( m_marbleWidget != widget ) {
@@ -189,7 +186,7 @@ bool FileViewFloatItem::eventFilter(QObject *object, QEvent *e)
         }
     }
 
-    return MarbleAbstractFloatItem::eventFilter(object, e);
+    return AbstractFloatItem::eventFilter(object, e);
 }
 
 void FileViewFloatItem::selectTheme(QString theme)

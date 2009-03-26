@@ -35,30 +35,31 @@ using namespace Marble;
 
 class MarbleGeometryModel::Private {
  public:
-    Private( GeoDataDocument* rootDocument ) : m_rootDocument( rootDocument ) {
+    Private( GeoDataDocument* rootDocument ) : m_rootDocument( rootDocument )
+    {
         mapFeature( m_rootDocument );
     };
     
     Private() : m_rootDocument( 0 ) {};
 
-    void mapGeometry( GeoDataGeometry* geometry ) {
+    void mapGeometry( GeoDataGeometry* geometry )
+    {
         /*
         * This function iterates over all geometry objects in a MultiGeometry.
         * This is needed to build up the parent Hash.
         */
         if( !geometry ) return;
         
-        QVector<GeoDataGeometry>::iterator iterator;
         GeoDataMultiGeometry* multiGeometry = static_cast<GeoDataMultiGeometry*>( geometry );
-        for( iterator = multiGeometry->begin(); 
-             iterator != multiGeometry->end(); 
-             ++iterator ) {
+        QVector<GeoDataGeometry>::iterator iterator = multiGeometry->begin();
+        for(; iterator != multiGeometry->end(); ++iterator ) {
             m_parent[ iterator ] = geometry;
             if( iterator->geometryId() == GeoDataMultiGeometryId ) mapGeometry( iterator );
         }
     };
     
-    void mapFeature( GeoDataFeature* feature ) {
+    void mapFeature( GeoDataFeature* feature )
+    {
         if( !feature ) return;
         
         if( feature->featureId() == GeoDataDocumentId || feature->featureId() == GeoDataFolderId ) {
@@ -152,8 +153,7 @@ int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
 QVariant MarbleGeometryModel::data( const QModelIndex &index, int role ) const
 {
     GeoDataObject *item;
-    if( index.isValid() )
-    {
+    if( index.isValid() ) {
         item = static_cast<GeoDataObject*>( index.internalPointer() );
     }
     else /* the rootIndex is invalid */
@@ -256,7 +256,7 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
     } else {
         childItem = 0;
     }
-    
+
     if ( childItem )
         return createIndex( row, column, childItem );
     else

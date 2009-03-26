@@ -243,7 +243,7 @@ void GridMap::sphericalCreateCircle( qreal angle, SphereDim dim,
 
                 m_polygon.clear();
 
-                if ( m_lastVisible == true )
+                if ( m_lastVisible )
                     break;
             }
 
@@ -351,7 +351,7 @@ void GridMap::paintGridMap(GeoPainter * painter, bool antialiasing)
     if ( size() == 0 )
         return;
 
-    if ( antialiasing == true )
+    if ( antialiasing )
         painter->setRenderHint(QPainter::Antialiasing, true);
 
     painter->setPen(m_pen);

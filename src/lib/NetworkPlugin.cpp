@@ -10,36 +10,36 @@
 //
 
 
-#include "MarbleNetworkPlugin.h"
+#include "NetworkPlugin.h"
 
 namespace Marble
 {
 
-class MarbleNetworkPluginPrivate
+class NetworkPluginPrivate
 {
   public:
-    MarbleNetworkPluginPrivate()
+    NetworkPluginPrivate()
     {
     }
 
-    ~MarbleNetworkPluginPrivate()
+    ~NetworkPluginPrivate()
     {
     }
 
 };
 
-// Do not create the MarbleNetworkPluginPrivate, because it holds
+// Do not create the NetworkPluginPrivate, because it holds
 // no data at the moment (may change in the future).
-MarbleNetworkPlugin::MarbleNetworkPlugin()
+NetworkPlugin::NetworkPlugin()
     : d( 0 )
 {
 }
 
-MarbleNetworkPlugin::~MarbleNetworkPlugin()
+NetworkPlugin::~NetworkPlugin()
 {
     //delete d; //for the future :)
 }
 
 }
 
-#include "MarbleNetworkPlugin.moc"
+#include "NetworkPlugin.moc"

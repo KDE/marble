@@ -101,6 +101,10 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     d->uiWidget.setupUi( this );
 
+//  Hide the controls before their functionality is implemented:
+    d->uiWidget.celestialBodyLabel->setVisible( false );
+    d->uiWidget.celestialBodyComboBox->setVisible( false );
+
     setFocusPolicy( Qt::NoFocus );
 //    setFocusProxy( d->uiWidget.searchLineEdit );
 
@@ -194,7 +198,8 @@ MarbleControlBox::~MarbleControlBox()
     delete d;
 }
 
-void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel ) {
+void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel )
+{
     d->m_mapThemeModel = mapThemeModel;
     d->m_mapSortProxy->setSourceModel( d->m_mapThemeModel );
     d->m_mapSortProxy->sort( 0 );
@@ -507,7 +512,7 @@ void MarbleControlBox::resizeEvent ( QResizeEvent * )
             setUpdatesEnabled(true);
         }
     } else {
-        if ( d->uiWidget.zoomSlider->isHidden() == true ) {
+        if ( d->uiWidget.zoomSlider->isHidden() ) {
             setUpdatesEnabled(false);
             d->uiWidget.zoomSlider->show();
             d->uiWidget.m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,

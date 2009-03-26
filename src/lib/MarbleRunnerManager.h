@@ -37,7 +37,7 @@ class MarbleRunnerManager : public QObject
 {
     Q_OBJECT
 public:
-    MarbleRunnerManager( QObject *parent = 0 );
+    explicit MarbleRunnerManager( QObject *parent = 0 );
     ~MarbleRunnerManager();
     
     void setModel(MarblePlacemarkModel *model);

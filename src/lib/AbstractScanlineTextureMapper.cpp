@@ -235,7 +235,7 @@ void AbstractScanlineTextureMapper::pixelValue(qreal lon,
             nextTile( m_posX, m_posY );
         }
         if (m_tile) {
-            *scanLine = m_tile->pixelF( m_posX, m_posY );;
+            *scanLine = m_tile->pixelF( m_posX, m_posY );
         }
         else {
             *scanLine = 0;

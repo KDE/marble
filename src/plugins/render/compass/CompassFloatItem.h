@@ -17,8 +17,7 @@
 
 #include <QtCore/QObject>
 
-#include "GeoDataLatLonAltBox.h"
-#include "MarbleAbstractFloatItem.h"
+#include "AbstractFloatItem.h"
 
 class QSvgRenderer;
 
@@ -30,10 +29,10 @@ namespace Marble
  *
  */
 
-class CompassFloatItem  : public MarbleAbstractFloatItem
+class CompassFloatItem  : public AbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
+    Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( CompassFloatItem )
  public:
     explicit CompassFloatItem ( const QPointF &point = QPointF( -1.0, 10.0 ),

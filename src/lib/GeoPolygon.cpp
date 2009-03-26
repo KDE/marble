@@ -34,15 +34,14 @@ const qreal ARCMINUTE = 10800; // distance of 180deg in arcminutes
 const qreal INT2RAD = M_PI / 10800.0;
 
 GeoPolygon::GeoPolygon()
+    : m_dateLineCrossing( false ),
+      m_closed( false ),
+      m_lonLeft( 0.0 ),
+      m_latTop( 0.0 ),
+      m_lonRight( 0.0 ),
+      m_latBottom( 0.0 ),
+      m_index( 0 )
 {
-    m_dateLineCrossing = false;
-    m_closed  = false;
-
-    m_index = 0;
-    m_lonLeft    = 0.0;
-    m_latTop     = 0.0;
-    m_lonRight   = 0.0;
-    m_latBottom  = 0.0;
 }
 
 GeoPolygon::~GeoPolygon()
@@ -67,10 +66,13 @@ void GeoPolygon::setBoundary( qreal lonLeft, qreal latTop, qreal lonRight, qreal
         if ( xcenter < -M_PI )
             xcenter +=  2.0 * M_PI;
 
-        m_boundary.append( new GeoDataCoordinates( xcenter, 0.5 * (latTop + latBottom), 0.0, GeoDataCoordinates::Radian, 1 ) );
+        m_boundary.append( new GeoDataCoordinates( xcenter, 0.5 * (latTop + latBottom), 0.0,
+                                                   GeoDataCoordinates::Radian, 1 ) );
     }
     else
-        m_boundary.append( new GeoDataCoordinates( 0.5 * (lonLeft + lonRight), 0.5 * (latTop + latBottom), 0.0, GeoDataCoordinates::Radian, 1 ) );
+        m_boundary.append( new GeoDataCoordinates( 0.5 * (lonLeft + lonRight),
+                                                   0.5 * (latTop + latBottom), 0.0,
+                                                   GeoDataCoordinates::Radian, 1 ) );
 
     m_boundary.append( new GeoDataCoordinates( lonLeft,  latTop,    0.0, GeoDataCoordinates::Radian, 1 ));
     m_boundary.append( new GeoDataCoordinates( lonRight, latBottom, 0.0, GeoDataCoordinates::Radian, 1 ));
@@ -79,7 +81,8 @@ void GeoPolygon::setBoundary( qreal lonLeft, qreal latTop, qreal lonRight, qreal
 
 }
 
-void GeoPolygon::displayBoundary(){
+void GeoPolygon::displayBoundary()
+{
     Quaternion  q;
     qreal      lon;
     qreal      lat;
@@ -94,7 +97,8 @@ void GeoPolygon::displayBoundary(){
     m_boundary.at(4)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
     qDebug() << "Boundary:" << lon << ", " << lat;
 
-//    qDebug() << "Points#: " << size() << " File: " << m_sourceFileName << " dateline " << getDateLine() << " Index: " << getIndex();
+//     qDebug() << "Points#: " << size() << " File: " << m_sourceFileName
+//              << " dateline " << getDateLine() << " Index: " << getIndex();
 }
 
 // ================================================================
@@ -164,7 +168,8 @@ void PntMapLoader::run()
 
     int  filelength = statbuf.st_size;
 	
-    if ((src = (unsigned char*) mmap (0, filelength, PROT_READ, MAP_SHARED, fd, 0)) == (unsigned char*) (caddr_t) -1)
+    if ((src = (unsigned char*) mmap (0, filelength, PROT_READ, MAP_SHARED, fd, 0))
+        == (unsigned char*) (caddr_t) -1)
         qDebug() << "mmap error for input";
 		
     short  header;
@@ -205,11 +210,15 @@ void PntMapLoader::run()
             else 
                 polyline->setClosed( true );
 
-            polyline->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, 5 ) );
+            polyline->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD,
+                                                  0.0, GeoDataCoordinates::Radian, 5 ) );
         }
         else {
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
-            m_parent->last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) ); 
+            m_parent->last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD,
+                                                          (qreal)(iLat) * INT2RAD, 0.0,
+                                                          GeoDataCoordinates::Radian,
+                                                          (int)(header) ) ); 
         }
         ++count;
     }
@@ -256,11 +265,15 @@ void PntMapLoader::run()
             else 
                 polyline->setClosed( true );
 
-            polyline->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, 5 ) );
+            polyline->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD,
+                                                  0.0, GeoDataCoordinates::Radian, 5 ) );
         }
         else {
             // qDebug(QString("header: %1 iLat: %2 iLon: %3").arg(header).arg(iLat).arg(iLon).toLatin1());
-            m_parent->last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD, (qreal)(iLat) * INT2RAD, 0.0, GeoDataCoordinates::Radian, (int)(header) ) );
+            m_parent->last()->append( GeoDataCoordinates( (qreal)(iLon) * INT2RAD,
+                                                          (qreal)(iLat) * INT2RAD, 0.0,
+                                                          GeoDataCoordinates::Radian,
+                                                          (int)(header) ) );
         }
         ++count;
     }
@@ -324,7 +337,7 @@ void PntMapLoader::run()
                 isCrossingDateLine = true;
             }
 
-            if ( isOriginalSide == true ) { 
+            if ( isOriginalSide ) {
                 if ( lon < lonLeft  ) lonLeft = lon;
                 if ( lon > lonRight ) lonRight = lon;
             } else {
@@ -339,14 +352,14 @@ void PntMapLoader::run()
             lastLon  = lon;
         }
 
-        if ( isOriginalSide == false ) {
+        if ( !isOriginalSide ) {
             (*itPolyLine)->setDateLine( GeoPolygon::Odd );
 //            qDebug() << "Odd  >> File: " << (*itPolyLine)->m_sourceFileName;
             (*itPolyLine)->setBoundary( -M_PI, latTop, M_PI, -M_PI / 2.0 );
 //            qDebug() << " lonLeft: " << lonLeft << " lonRight: " << lonRight << " otherLonLeft: " << otherLonLeft << " otherlonRight: " << otherLonRight;
         }
 
-        if ( isOriginalSide == true && isCrossingDateLine == true ) { 
+        if ( isOriginalSide && isCrossingDateLine ) {
             (*itPolyLine)->setDateLine( GeoPolygon::Even );
 //            qDebug() << "Even >> File: " << (*itPolyLine)->m_sourceFileName << " Size: " << (*itPolyLine)->size();
 
@@ -368,7 +381,7 @@ void PntMapLoader::run()
 //            qDebug() << "Crosses: lonLeft: " << rightLonLeft << " is right from: lonRight: " << leftLonRight;
 
         }
-        if ( isCrossingDateLine == false ) {
+        if ( !isCrossingDateLine ) {
             (*itPolyLine)->setDateLine( GeoPolygon::None );
             (*itPolyLine)->setBoundary( lonLeft, latTop, lonRight, latBottom );
         }

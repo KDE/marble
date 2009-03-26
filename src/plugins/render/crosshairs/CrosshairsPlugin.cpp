@@ -8,70 +8,68 @@
 // Copyright 2008 Torsten Rahn <tackat@kde.org>"
 //
 
-#include "MarbleCrosshairsPlugin.h"
+#include "CrosshairsPlugin.h"
 
 #include <QtCore/QDebug>
 #include "GeoPainter.h"
-#include "MarbleDirs.h"
 
 #include "ViewportParams.h"
 
 namespace Marble
 {
 
-QStringList MarbleCrosshairsPlugin::backendTypes() const
+QStringList CrosshairsPlugin::backendTypes() const
 {
     return QStringList( "crosshairs" );
 }
 
-QString MarbleCrosshairsPlugin::renderPolicy() const
+QString CrosshairsPlugin::renderPolicy() const
 {
     return QString( "ALWAYS" );
 }
 
-QStringList MarbleCrosshairsPlugin::renderPosition() const
+QStringList CrosshairsPlugin::renderPosition() const
 {
     return QStringList( "ALWAYS_ON_TOP" ); // although this is not a float item we choose the position of one
 }
 
-QString MarbleCrosshairsPlugin::name() const
+QString CrosshairsPlugin::name() const
 {
-    // FIXME (once we are out of string freeze):
-    return tr( "Cross&hairs" ).remove( QChar( '&' ) ); // return tr( "Crosshairs" );
+    return tr( "Crosshairs" );
 }
 
-QString MarbleCrosshairsPlugin::guiString() const
+QString CrosshairsPlugin::guiString() const
 {
     return tr( "Cross&hairs" );
 }
 
-QString MarbleCrosshairsPlugin::nameId() const
+QString CrosshairsPlugin::nameId() const
 {
     return QString( "crosshairs" );
 }
 
-QString MarbleCrosshairsPlugin::description() const
+QString CrosshairsPlugin::description() const
 {
     return QString( "" ); // tr( "A plugin that shows crosshairs." );
 }
 
-QIcon MarbleCrosshairsPlugin::icon () const
+QIcon CrosshairsPlugin::icon () const
 {
     return QIcon();
 }
 
-void MarbleCrosshairsPlugin::initialize ()
+void CrosshairsPlugin::initialize ()
 {
 }
 
-bool MarbleCrosshairsPlugin::isInitialized () const
+bool CrosshairsPlugin::isInitialized () const
 {
     return true;
 }
 
-bool MarbleCrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
-				const QString& renderPos,
-				GeoSceneLayer * layer )
+bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
+                               const QString& renderPos,
+                               GeoSceneLayer * layer )
 {
     if ( renderPos == "ALWAYS_ON_TOP" ) {
         int  centerx  = viewport->width() / 2;
@@ -104,6 +102,6 @@ bool MarbleCrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewpo
 
 }
 
-Q_EXPORT_PLUGIN2(MarbleCrosshairsPlugin, Marble::MarbleCrosshairsPlugin)
+Q_EXPORT_PLUGIN2( CrosshairsPlugin, Marble::CrosshairsPlugin )
 
-#include "MarbleCrosshairsPlugin.moc"
+#include "CrosshairsPlugin.moc"

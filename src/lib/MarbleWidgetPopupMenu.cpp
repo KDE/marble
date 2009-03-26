@@ -28,11 +28,10 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
                                          MarbleModel *model)
     : QObject(widget),
       m_model(model),
-      m_widget(widget) 
+      m_widget(widget),
+      m_lmbMenu( new QMenu( m_widget ) ),
+      m_rmbMenu( new QMenu( m_widget ) )
 {
-    m_lmbMenu = new QMenu( m_widget );
-    m_rmbMenu = new QMenu( m_widget );
-
     connect( m_lmbMenu, SIGNAL( triggered( QAction* ) ),
              this,      SLOT( showFeatureInfo( QAction* ) ) );
     createActions();
@@ -83,9 +82,8 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 
     int  actionidx = 1;
 
-    QVector<QModelIndex>::const_iterator  it;
-    for ( it = m_featurelist.constBegin();
-          it != m_featurelist.constEnd(); ++it ) 
+    QVector<QModelIndex>::const_iterator it = m_featurelist.constBegin();
+    for (; it != m_featurelist.constEnd(); ++it )
     {
         QAction  *action = new QAction( (*it).data().toString(), m_lmbMenu );
         action->setData( actionidx );
@@ -155,7 +153,7 @@ void MarbleWidgetPopupMenu::slotSetHomePoint()
     qreal  lon;
 
     bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Degree );
-    if ( valid == true )
+    if ( valid )
     {
 //        qDebug() << "Setting Home Location: " << lon << ", " << lat;   
         m_widget->setHome( lon, lat, m_widget->zoom() );
@@ -170,7 +168,7 @@ void MarbleWidgetPopupMenu::slotCopyCoordinates()
     qreal  lat;
 
     bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
-    if ( valid == true )
+    if ( valid )
     {
         QString  positionString = GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Radian ).toString();
         QClipboard  *clipboard = QApplication::clipboard();

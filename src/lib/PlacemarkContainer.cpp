@@ -23,20 +23,9 @@ PlacemarkContainer::PlacemarkContainer( const QString& name )
 {
 }
 
-PlacemarkContainer::PlacemarkContainer( const PlacemarkContainer& container )
-    : QVector<GeoDataPlacemark>( container ), m_name( container.name() )
-{
-}
-
 PlacemarkContainer::PlacemarkContainer( const QVector<GeoDataPlacemark>& container, const QString& name )
     : QVector<GeoDataPlacemark>( container ), m_name( name )
 {
-}
-
-PlacemarkContainer& PlacemarkContainer::operator= ( const PlacemarkContainer& container )
-{
-    QVector<GeoDataPlacemark>::operator=( container );
-    return *this;
 }
 
 inline bool populationLessThan( const GeoDataPlacemark& mark1, const GeoDataPlacemark& mark2 )
@@ -63,7 +52,5 @@ QString PlacemarkContainer::name() const
 void PlacemarkContainer::sort( Qt::SortOrder order )
 {
     // FIXME: use order
-    Q_UNUSED( order )
-
     qStableSort( begin(), end(), populationLessThan );
 }

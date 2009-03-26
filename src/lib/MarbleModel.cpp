@@ -920,12 +920,12 @@ void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level,
     tile->loadTile(requestTileUpdate);
 }
 
-QList<MarbleRenderPlugin *> MarbleModel::renderPlugins() const
+QList<RenderPlugin *> MarbleModel::renderPlugins() const
 {
     return d->m_layerManager->renderPlugins();
 }
 
-QList<MarbleAbstractFloatItem *> MarbleModel::floatItems() const
+QList<AbstractFloatItem *> MarbleModel::floatItems() const
 {
     return d->m_layerManager->floatItems();
 }
@@ -933,6 +933,14 @@ QList<MarbleAbstractFloatItem *> MarbleModel::floatItems() const
 Planet* MarbleModel::planet() const
 {
     return d->m_planet;
+}
+
+int MarbleModel::tileZoomLevel() const
+{
+    if (!d->m_texmapper)
+        return -1;
+
+    return d->m_texmapper->tileZoomLevel();
 }
 
 }

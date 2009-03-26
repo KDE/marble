@@ -5,38 +5,46 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Torsten Rahn <tackat@kde.org>"
+// Copyright 2008 Patrick Spendrin      <ps_ml@gmx.de>"
 //
 
 //
-// This class is a crosshairs plugin.
+// This class is the geodata layer plugin.
 //
 
-#ifndef MARBLECROSSHAIRSPLUGIN_H
-#define MARBLECROSSHAIRSPLUGIN_H
+#ifndef MARBLEGEODATAPLUGIN_H
+#define MARBLEGEODATAPLUGIN_H
 
 #include <QtCore/QObject>
-#include <QtCore/QVector>
 
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
 
 
 namespace Marble
 {
 
+class GeoDataGeometry;
+class GeoDataFeature;
+class GeoDataDocument;
+class GeoDataView;
 
 /**
- * @short The class that specifies the Marble layer interface of a plugin.
+ * @short The class that specifies the Marble layer interface of the plugin.
  *
+ * GeoDataPlugin is the beginning of a Render plugin for vectorized data.
+ * This includes data which is generated at runtime as well as data that
  */
 
-class MarbleCrosshairsPlugin : public MarbleRenderPlugin
+class GeoDataPlugin : public RenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-    MARBLE_PLUGIN(MarbleCrosshairsPlugin)
+    Q_INTERFACES( Marble::RenderPluginInterface )
+    MARBLE_PLUGIN(GeoDataPlugin)
 
+    GeoDataView* m_view;
  public:
+    ~GeoDataPlugin();
+
     QStringList backendTypes() const;
 
     QString renderPolicy() const;
@@ -58,10 +66,9 @@ class MarbleCrosshairsPlugin : public MarbleRenderPlugin
 
     bool isInitialized () const;
 
-
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 };
 
 }
 
-#endif // MARBLECROSSHAIRSPLUGIN_H
+#endif

@@ -141,7 +141,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
     // Make sure that the requested point is within the visible y range:
     if ( 0 <= y && y < height ) {
         // First we deal with the case where the repetition doesn't happen
-        if ( m_repeatX == false ) {
+        if ( !m_repeatX ) {
             *x = itX;
             if ( 0 < itX && itX < width ) {
                 return true;

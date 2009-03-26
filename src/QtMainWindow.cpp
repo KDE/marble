@@ -14,6 +14,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QList>
 #include <QtCore/QSettings>
+#include <QtCore/QUrl>
 #include <QtGui/QCloseEvent>
 
 #include <QtGui/QAction>
@@ -23,7 +24,7 @@
 #include <QtGui/QIcon>
 #include <QtGui/QMenuBar>
 #include <QtGui/QStatusBar>
-
+#include <QtGui/QDesktopServices>
 #include <QtGui/QFileDialog>
 #include <QtGui/QMessageBox>
 
@@ -38,7 +39,7 @@
 #include "lib/SunControlWidget.h"
 #include "lib/MarbleLocale.h"
 
-#include "MarbleAbstractFloatItem.h"
+#include "AbstractFloatItem.h"
 
 #include "QtMarbleConfigDialog.h"
 
@@ -164,6 +165,11 @@ void MainWindow::createActions()
      m_controlSunAct->setStatusTip(tr("Configure Sun Control"));
      connect(m_controlSunAct, SIGNAL(triggered()), this, SLOT( controlSun()));
 
+     m_handbook = new QAction( QIcon(":/icons/help-contents.png"), tr("Marble Desktop Globe &Handbook"), this);
+     m_handbook->setShortcut(tr("F1"));
+     m_handbook->setStatusTip(tr("Show the Handbook for Marble Desktop Globe"));
+     connect(m_handbook, SIGNAL(triggered()), this, SLOT(handbook()));
+
      m_whatsThisAct = new QAction( QIcon(":/icons/help-whatsthis.png"), tr("What's &This"), this);
      m_whatsThisAct->setShortcut(tr("Shift+F1"));
      m_whatsThisAct->setStatusTip(tr("Show a detailed explanation of the action."));
@@ -195,8 +201,8 @@ void MainWindow::createMenus()
 
     m_fileMenu = menuBar()->addMenu(tr("&View"));
 
-    QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         if ( (*i)->nameId() == "crosshairs" ) {
             m_fileMenu->addAction( (*i)->action() );
@@ -221,10 +227,13 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_configDialogAct);
 
     m_helpMenu = menuBar()->addMenu(tr("&Help"));
+    m_helpMenu->addAction(m_handbook);
+    m_helpMenu->addSeparator();
     m_helpMenu->addAction(m_whatsThisAct);
     m_helpMenu->addSeparator();
     m_helpMenu->addAction(m_aboutMarbleAct);
     m_helpMenu->addAction(m_aboutQtAct);
+    
 
     connect( m_infoBoxesMenu, SIGNAL( aboutToShow() ), this, SLOT( createInfoBoxesMenu() ) ); 
 }
@@ -232,10 +241,10 @@ void MainWindow::createMenus()
 void MainWindow::createInfoBoxesMenu()
 {
     m_infoBoxesMenu->clear();
-    QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
+    QList<AbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
 
-    QList<MarbleAbstractFloatItem *>::const_iterator i;
-    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i)
+    QList<AbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
+    for (; i != floatItemList.constEnd(); ++i)
     {
         m_infoBoxesMenu->addAction( (*i)->action() );
     }
@@ -265,7 +274,7 @@ void MainWindow::exportMapScreenShot()
 
         QPixmap mapPixmap = m_controlView->mapScreenShot();
         bool success = mapPixmap.save( fileName, format );
-        if ( success == false )
+        if ( !success )
         {
             QMessageBox::warning(this, tr("Marble"), // krazy:exclude=qclasses
                    tr( "An error occurred while trying to save the file.\n" ),
@@ -405,6 +414,12 @@ void MainWindow::aboutMarble()
 {
     MarbleAboutDialog dlg(this);
     dlg.exec();
+}
+
+void MainWindow::handbook()
+{
+    if( !QDesktopServices::openUrl( QUrl( "http://docs.kde.org/stable/en/kdeedu/marble/index.html" ) ) ) 
+    qDebug() << "URL not opened";
 }
 
 void MainWindow::showPosition( const QString& position )

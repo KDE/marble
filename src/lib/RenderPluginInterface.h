@@ -13,11 +13,11 @@
 #ifndef MARBLERENDERPLUGININTERFACEH
 #define MARBLERENDERPLUGININTERFACEH
 
-#include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QtPlugin>
-#include <QtGui/QIcon>
+
+#include "PluginInterface.h"
 
 namespace Marble
 {
@@ -25,22 +25,22 @@ namespace Marble
 class GeoPainter;
 class GeoSceneLayer;
 class ViewportParams;
-class MarbleRenderPlugin;
+class RenderPlugin;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
  *
  */
 
-class MarbleRenderPluginInterface
+class RenderPluginInterface: public PluginInterface
 {
  public:
-    virtual ~MarbleRenderPluginInterface(){}
+    virtual ~RenderPluginInterface();
     
     /**
     * @brief Returns a new object of the plugin
     */
-    virtual MarbleRenderPlugin* pluginInstance() = 0;
+    virtual RenderPlugin* pluginInstance() = 0;
 
     /**
      * @brief Returns the name(s) of the backend that the plugin can render
@@ -90,53 +90,15 @@ class MarbleRenderPluginInterface
     virtual QStringList renderPosition() const = 0;
 
     /**
-     * @brief Returns the "real name" of the backend.
-     *.
-     * Example: "Starry Sky Plugin"
-     */
-    virtual QString name() const = 0;
-
-    /**
-     * @brief Returns the string that should appear in the UI / in the menu.
-     *.
-     * Using a "&" you can suggest key shortcuts
-     *
-     * Example: "&Stars"
-     */
-    virtual QString guiString() const = 0;
-
-    /**
-     * @brief Returns the name ID of the backend.
-     *.
-     * Example: "starrysky"
-     */
-    virtual QString nameId() const = 0;
-
-    /**
-     * @brief Returns a user description of the plugin.
-     */
-    virtual QString description() const = 0;
-
-    /**
-     * @brief Returns an icon for the plugin.
-     */
-    virtual QIcon icon () const = 0;
-
-
-    virtual void initialize () = 0;
-
-    virtual bool isInitialized () const = 0;
-
-
-    /**
      * @brief Renders the content provided by the plugin on the viewport.
      * @return @c true  Returns whether the rendering has been successful
      */
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 ) = 0;
+    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
+                         const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 ) = 0;
 };
 
 }
 
-Q_DECLARE_INTERFACE( Marble::MarbleRenderPluginInterface, "org.kde.Marble.MarbleRenderPluginInterface/1.03" )
+Q_DECLARE_INTERFACE( Marble::RenderPluginInterface, "org.kde.Marble.RenderPluginInterface/1.03" )
 
 #endif // MARBLERENDERPLUGININTERFACEH

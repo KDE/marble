@@ -38,17 +38,15 @@ using namespace Marble;
 
 MeasureTool::MeasureTool( MarbleModel *model, QObject* parent )
     : QObject( parent ),
-      m_model( model )
-{
+      m_model( model ),
 #ifdef Q_OS_MACX
-    m_font_regular = QFont( "Sans Serif", 10, 50, false );
+      m_font_regular( QFont( "Sans Serif", 10, 50, false ) ),
 #else
-    m_font_regular = QFont( "Sans Serif",  8, 50, false );
+      m_font_regular( QFont( "Sans Serif",  8, 50, false ) ),
 #endif
-
-    m_fontheight = QFontMetrics( m_font_regular ).height();
-    m_fontascent = QFontMetrics( m_font_regular ).ascent();
-
+      m_fontheight( QFontMetrics( m_font_regular ).height() ),
+      m_fontascent( QFontMetrics( m_font_regular ).ascent() )
+{
     m_pen.setColor( QColor( Qt::red ) );
     m_pen.setWidthF( 2.0 );
 }

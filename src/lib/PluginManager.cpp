@@ -20,8 +20,9 @@
 
 // Local dir
 #include "MarbleDirs.h"
-#include "MarbleRenderPlugin.h"
-#include "MarbleAbstractFloatItem.h"
+#include "RenderPlugin.h"
+#include "NetworkPlugin.h"
+#include "AbstractFloatItem.h"
 
 namespace Marble
 {
@@ -29,11 +30,8 @@ namespace Marble
 class PluginManagerPrivate
 {
  public:
-    PluginManagerPrivate()
-    {
-    }
-
-    QList<MarbleRenderPlugin *> m_renderPlugins;
+    QList<RenderPlugin *> m_renderPlugins;
+    QList<NetworkPlugin *> m_networkPlugins;
 };
 
 PluginManager::PluginManager( QObject *parent )
@@ -54,16 +52,14 @@ PluginManager::~PluginManager()
     delete d;
 }
 
-QList<MarbleAbstractFloatItem *> PluginManager::floatItems() const
+QList<AbstractFloatItem *> PluginManager::floatItems() const
 {
-    QList<MarbleAbstractFloatItem *> floatItemList;
+    QList<AbstractFloatItem *> floatItemList;
 
-    QList<MarbleRenderPlugin *>::const_iterator i;
-    for (i = d->m_renderPlugins.constBegin(); i != d->m_renderPlugins.constEnd(); ++i)
-    {
-        MarbleAbstractFloatItem *floatItem = qobject_cast<MarbleAbstractFloatItem *>(*i);
-        if ( floatItem )
-        {
+    QList<RenderPlugin *>::const_iterator i = d->m_renderPlugins.constBegin();
+    for (; i != d->m_renderPlugins.constEnd(); ++i) {
+        AbstractFloatItem *floatItem = qobject_cast<AbstractFloatItem *>(*i);
+        if ( floatItem ) {
             floatItemList.append( floatItem );
         }
     }
@@ -71,9 +67,14 @@ QList<MarbleAbstractFloatItem *> PluginManager::floatItems() const
     return floatItemList;
 }
 
-QList<MarbleRenderPlugin *> PluginManager::renderPlugins() const
+QList<RenderPlugin *> PluginManager::renderPlugins() const
 {
     return d->m_renderPlugins;
+}
+
+QList<NetworkPlugin *> PluginManager::networkPlugins() const
+{
+    return d->m_networkPlugins;
 }
 
 void PluginManager::loadPlugins()
@@ -88,19 +89,27 @@ void PluginManager::loadPlugins()
     qDeleteAll( d->m_renderPlugins );
     d->m_renderPlugins.clear();
 
+    qDeleteAll( d->m_networkPlugins );
+    d->m_networkPlugins.clear();
+
     foreach( const QString &fileName, pluginFileNameList ) {
         qDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
         QPluginLoader loader( MarbleDirs::pluginPath( fileName ) );
 
         QObject * obj = loader.instance();
 
-        MarbleRenderPlugin * layerPlugin;
+        RenderPlugin * renderPlugin;
+        NetworkPlugin * networkPlugin = 0;
         if ( obj ) {
-            layerPlugin = qobject_cast<MarbleRenderPlugin *>(obj)->pluginInstance();
+            renderPlugin = qobject_cast<RenderPlugin *>(obj)->pluginInstance();
+            networkPlugin = qobject_cast<NetworkPlugin *>( obj );
         }
 
-        if( obj && layerPlugin ) {
-            d->m_renderPlugins.append( layerPlugin );
+        if( obj && renderPlugin ) {
+            d->m_renderPlugins.append( renderPlugin );
+        }
+        else if ( obj && networkPlugin ) {
+            d->m_networkPlugins.append( networkPlugin );
         }
         else {
             qDebug() << "Plugin Failure: " << fileName << " is not a valid Marble Plugin:";

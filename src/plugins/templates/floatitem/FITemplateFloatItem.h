@@ -18,25 +18,24 @@
 
 
 // Qt
-#include <QtCore/QObject>
 
 // Marble
-#include "GeoDataLatLonAltBox.h"
-#include "MarbleAbstractFloatItem.h"
-
+#include "AbstractFloatItem.h"
 
 class QSvgRenderer;
 
+namespace Marble
+{
 
 /**
  * @short The class that creates a ... Float Item
  *
  */
 
-class FITemplateFloatItem  : public MarbleAbstractFloatItem
+class FITemplateFloatItem  : public AbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( MarbleRenderPluginInterface )
+    Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN(FITemplateFloatItem)
 
  public:
@@ -44,10 +43,10 @@ class FITemplateFloatItem  : public MarbleAbstractFloatItem
 				  const QSizeF &size = QSizeF( 75.0, 75.0 ) );
 
     // ----------------------------------------------------------------
-    // The following functions are defined in MarbleRenderPluginInterface.h
+    // The following functions are defined in RenderPluginInterface.h
     // and MUST be part of the plugin.  See that file for documentation.
     //
-    // Note that the class MarbleAbstractFloatItem provides default 
+    // Note that the class AbstractFloatItem provides default 
     // implementations for many of them.
     //
 
@@ -55,7 +54,7 @@ class FITemplateFloatItem  : public MarbleAbstractFloatItem
 
     QStringList backendTypes() const;
 
-    // Provided by MarbleAbstractFloatItem and should not be implemented.
+    // Provided by AbstractFloatItem and should not be implemented.
     //
     // QString renderPolicy() const;
     // QStringList renderPosition() const;
@@ -74,14 +73,14 @@ class FITemplateFloatItem  : public MarbleAbstractFloatItem
 
     bool isInitialized() const;
 
-    // Provided by MarbleAbstractFloatItem and should not be implemented.
+    // Provided by AbstractFloatItem and should not be implemented.
     //
     // bool render( GeoPainter *painter, ViewportParams *viewport,
     //              const QString &renderPos, GeoSceneLayer *layer);
 
     QPainterPath backgroundShape() const;
 
-    // End of MarbleRenderPluginInterface functions.
+    // End of RenderPluginInterface functions.
     // ----------------------------------------------------------------
 
     bool needsUpdate( ViewportParams *viewport );
@@ -98,5 +97,7 @@ class FITemplateFloatItem  : public MarbleAbstractFloatItem
     /// allowed values: -1, 0, 1; default here: 0. FIXME: Declare enum
     int            m_polarity;
 };
+
+}
 
 #endif

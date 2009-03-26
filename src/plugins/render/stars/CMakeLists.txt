@@ -1,4 +1,4 @@
-PROJECT(MarbleStarsPlugin)
+PROJECT( StarsPlugin )
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/stars
@@ -7,6 +7,6 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( marblestars_SRCS MarbleStarsPlugin.cpp )
+set( stars_SRCS StarsPlugin.cpp )
 
-marble_add_plugin( MarbleStarsPlugin ${marblestars_SRCS} )
+marble_add_plugin( StarsPlugin ${stars_SRCS} )

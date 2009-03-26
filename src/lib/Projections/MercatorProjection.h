@@ -37,7 +37,7 @@ class MercatorProjection : public AbstractProjection
     /**
      * @brief Construct a new MercatorProjection.
      */
-    explicit MercatorProjection();
+    MercatorProjection();
 
     virtual ~MercatorProjection();
 

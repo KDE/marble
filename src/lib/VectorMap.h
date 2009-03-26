@@ -64,17 +64,17 @@ class VectorMap : public ScreenPolygon::Vector
     void rectangularCreateFromPntMap( const PntMap*, ViewportParams *viewport );
     void mercatorCreateFromPntMap( const PntMap*, ViewportParams *viewport );
 
-    void createPolyLine( GeoDataCoordinates::Vector::ConstIterator, 
-                         GeoDataCoordinates::Vector::ConstIterator, const int, 
+    void createPolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
+                         GeoDataCoordinates::Vector::ConstIterator const &, const int,
 			 ViewportParams *viewport );
-    void sphericalCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator, 
-				  GeoDataCoordinates::Vector::ConstIterator, 
+    void sphericalCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
+				  GeoDataCoordinates::Vector::ConstIterator const &,
 				  const int detail, ViewportParams *viewport );
-    void rectangularCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator, 
-				    GeoDataCoordinates::Vector::ConstIterator, 
+    void rectangularCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
+				    GeoDataCoordinates::Vector::ConstIterator const &,
 				    const int detail, ViewportParams *viewport );
-    void mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator, 
-				 GeoDataCoordinates::Vector::ConstIterator, 
+    void mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterator const &,
+				 GeoDataCoordinates::Vector::ConstIterator const &,
 				 const int detail, ViewportParams *viewport );
 
     void           manageCrossHorizon();

@@ -7,6 +7,7 @@
 //
 // Copyright 2007      Tobias Koenig  <tokoe@kde.org>
 // Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
+// Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 #ifndef MARBLE_PART_H
@@ -20,6 +21,7 @@ class KAction;
 class KConfigDialog;
 
 class QLabel;
+class QProgressBar;
 class QStandardItemModel;
 
 namespace KParts
@@ -51,6 +53,8 @@ class MarblePart: public KParts::ReadOnlyPart
     bool  openFile();
     void  showPosition( const QString& position);
     void  showDistance( const QString& position);
+    void  showZoomLevel( int zoomLevel );
+    void  mapThemeChanged( const QString& newMapTheme );
 
   private Q_SLOTS:
     void  initObject();
@@ -65,6 +69,38 @@ class MarblePart: public KParts::ReadOnlyPart
     void  showFullScreen( bool );
     void  showSideBar( bool );
     void  showStatusBar( bool );
+
+    /**
+     * @brief Show the position label in the status bar.
+     *        This slot is connected with the "triggered" signal of
+     *        m_showPositionAction.
+     */
+    void showPositionLabel( bool isChecked );
+
+    /**
+     * @brief Show the altitude label in the status bar.
+     *        This slot is connected with the "triggered" signal of
+     *        m_showAltitudeAction.
+     */
+    void showAltitudeLabel( bool isChecked );
+
+    /**
+     * @brief Show the tile zoom level label in the status bar.
+     *        This slot is connected with the "triggered" signal of
+     *        m_showTileZoomLevelAction.
+     */
+    void showTileZoomLevelLabel( bool isChecked );
+
+    /**
+     * @brief Show the download progress bar in the status bar.
+     *        This slot is connected with the "triggered" signal of
+     *        m_showDownloadProgressAction.
+     */
+    void showDownloadProgressBar( bool isChecked );
+
+    void  downloadProgressJobAdded( int );
+    void  downloadProgressJobCompleted( QString, QString );
+
     void  lockFloatItemPosition( bool );
     void  controlSun();
     void  showSun( bool );
@@ -72,6 +108,7 @@ class MarblePart: public KParts::ReadOnlyPart
 
     void  setupStatusBar();
     void  showNewStuffDialog();
+    void  showStatusBarContextMenu( const QPoint& pos );
 
     void  editSettings();
 
@@ -83,9 +120,18 @@ class MarblePart: public KParts::ReadOnlyPart
 
   private:
     void  setupActions();
+    void  setupDownloadProgressBar();
+    void  setupStatusBarActions();
+    QLabel * setupStatusBarLabel( const QString& templateString );
 
     void  readSettings();
+    void  readStatusBarSettings();
     void  writeSettings();
+    void  writeStatusBarSettings();
+
+    /** Only updates member variable m_tileZoomLevel, does not trigger screen
+        update. */
+    void  updateTileZoomLevel();
 
   private:
     // All the functionality is provided by this widget.
@@ -108,6 +154,12 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_controlSunAction;
     KAction      *m_lockFloatItemsAct;
 
+    // Actions for the status bar
+    KAction      *m_showPositionAction;
+    KAction      *m_showAltitudeAction;
+    KAction      *m_showTileZoomLevelAction;
+    KAction      *m_showDownloadProgressAction;
+
     QStandardItemModel* m_pluginModel;
 
     KConfigDialog *m_configDialog;
@@ -116,10 +168,13 @@ class MarblePart: public KParts::ReadOnlyPart
 
     QString m_position;
     QString m_distance;
+    QString m_tileZoomLevel;
 
-    // Zoom label for the statusbar.
+    // Items for the statusbar.
     QLabel       *m_positionLabel;
     QLabel       *m_distanceLabel;
+    QLabel       *m_tileZoomLevelLabel;
+    QProgressBar *m_downloadProgressBar;
 
     void updateStatusBar();
 

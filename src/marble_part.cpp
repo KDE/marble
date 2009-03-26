@@ -7,6 +7,7 @@
 //
 // Copyright 2007      Tobias Koenig  <tokoe@kde.org>
 // Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
+// Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
@@ -22,6 +23,7 @@
 #include <QtGui/QFontMetrics>
 #include <QtGui/QPrinter>
 #include <QtGui/QPrintDialog>
+#include <QtGui/QProgressBar>
 #include <QtGui/QPainter>
 #include <QtGui/QStandardItemModel>
 
@@ -33,11 +35,13 @@
 #include <kconfigdialog.h>
 #include <kdeversion.h>
 #include <kfiledialog.h>
+#include <kmenu.h>
 #include <kmessagebox.h>
 #include <kparts/genericfactory.h>
 #include <kparts/statusbarextension.h>
 #include <kstandardaction.h>
 #include <kstatusbar.h>
+#include <ktoggleaction.h>
 #include <ktogglefullscreenaction.h>
 #include <knewstuff2/ui/knewstuffaction.h>
 #include <knewstuff2/engine.h>
@@ -58,7 +62,10 @@
 #include "MarbleLocale.h"
 #include "settings.h"
 
-#include "MarbleAbstractFloatItem.h"
+#include "AbstractFloatItem.h"
+#include "HttpDownloadManager.h"
+#include "MarbleMap.h"
+#include "MarbleModel.h"
 
 using namespace Marble;
 
@@ -72,6 +79,7 @@ namespace
 {
     const char* POSITION_STRING = I18N_NOOP( "Position: %1" );
     const char* DISTANCE_STRING = I18N_NOOP( "Altitude: %1" );
+    const char* TILEZOOMLEVEL_STRING = I18N_NOOP( "Tile Zoom Level: %1" );
 }
 
 typedef KParts::GenericFactory< MarblePart > MarblePartFactory;
@@ -103,6 +111,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
 
     m_position = NOT_AVAILABLE;
     m_distance = m_controlView->marbleWidget()->distanceString();
+    m_tileZoomLevel = NOT_AVAILABLE;
 
     QTimer::singleShot( 0, this, SLOT( initObject() ) );
 }
@@ -229,6 +238,26 @@ void MarblePart::setShowAtmosphere( bool isChecked )
     m_controlView->marbleWidget()->setShowAtmosphere( isChecked );
 
     m_showAtmosphereAction->setChecked( isChecked ); // Sync state with the GUI
+}
+
+void MarblePart::showPositionLabel( bool isChecked )
+{
+    m_positionLabel->setVisible( isChecked );
+}
+
+void MarblePart::showAltitudeLabel( bool isChecked )
+{
+    m_distanceLabel->setVisible( isChecked );
+}
+
+void MarblePart::showTileZoomLevelLabel( bool isChecked )
+{
+    m_tileZoomLevelLabel->setVisible( isChecked );
+}
+
+void MarblePart::showDownloadProgressBar( bool isChecked )
+{
+    m_downloadProgressBar->setVisible( isChecked );
 }
 
 void MarblePart::showFullScreen( bool isChecked )
@@ -363,8 +392,8 @@ void MarblePart::readSettings()
         }
     }
 
-    QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         if ( pluginEnabled.contains( (*i)->nameId() ) ) {
             (*i)->setEnabled( pluginEnabled[ (*i)->nameId() ] );
@@ -372,8 +401,29 @@ void MarblePart::readSettings()
         }
     }
 
+    readStatusBarSettings();
+
     slotUpdateSettings();
     qDebug() << "Stop: MarblePart::readSettings()";
+}
+
+void MarblePart::readStatusBarSettings()
+{
+    const bool showPos = MarbleSettings::showPositionLabel();
+    m_showPositionAction->setChecked( showPos );
+    showPositionLabel( showPos );
+
+    const bool showAlt = MarbleSettings::showAltitudeLabel();
+    m_showAltitudeAction->setChecked( showAlt );
+    showAltitudeLabel( showAlt );
+
+    const bool showTileZoom = MarbleSettings::showTileZoomLevelLabel();
+    m_showTileZoomLevelAction->setChecked( showTileZoom );
+    showTileZoomLevelLabel( showTileZoom );
+
+    const bool showProgress = MarbleSettings::showDownloadProgressBar();
+    m_showDownloadProgressAction->setChecked( showProgress );
+    showDownloadProgressBar( showProgress );
 }
 
 void MarblePart::writeSettings()
@@ -441,8 +491,8 @@ void MarblePart::writeSettings()
     QList<int>   pluginEnabled;
     QStringList  pluginNameId;
 
-    QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
 	pluginEnabled << static_cast<int>( (*i)->enabled() );
 	pluginNameId  << (*i)->nameId();
@@ -452,7 +502,17 @@ void MarblePart::writeSettings()
 
     MarbleSettings::setLockFloatItemPositions( m_lockFloatItemsAct->isChecked() );
 
+    writeStatusBarSettings();
+
     MarbleSettings::self()->writeConfig();
+}
+
+void MarblePart::writeStatusBarSettings()
+{
+    MarbleSettings::setShowPositionLabel( m_showPositionAction->isChecked() );
+    MarbleSettings::setShowAltitudeLabel( m_showAltitudeAction->isChecked() );
+    MarbleSettings::setShowTileZoomLevelLabel( m_showTileZoomLevelAction->isChecked() );
+    MarbleSettings::setShowDownloadProgressBar( m_showDownloadProgressAction->isChecked() );
 }
 
 void MarblePart::setupActions()
@@ -553,8 +613,8 @@ void MarblePart::setupActions()
 	     this,                   SLOT( setShowAtmosphere( bool ) ) );
 
     // Action: Show Crosshairs option
-    QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         if ( (*i)->nameId() == "crosshairs" ) {
             actionCollection()->addAction( "show_crosshairs", (*i)->action() );
@@ -594,11 +654,11 @@ void MarblePart::setupActions()
 
 void MarblePart::createInfoBoxesMenu()
 {
-    QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
+    QList<AbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
 
     QList<QAction*> actionList;
 
-    QList<MarbleAbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
+    QList<AbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
     for (; i != floatItemList.constEnd(); ++i) {
         actionList.append( (*i)->action() );
     }
@@ -620,6 +680,33 @@ void MarblePart::showDistance( const QString& distance )
     updateStatusBar();
 }
 
+void MarblePart::showZoomLevel( int zoomLevel )
+{
+    Q_UNUSED( zoomLevel );
+    updateTileZoomLevel();
+    updateStatusBar();
+}
+
+void MarblePart::mapThemeChanged( const QString& newMapTheme )
+{
+    Q_UNUSED( newMapTheme );
+    updateTileZoomLevel();
+    updateStatusBar();
+}
+
+void MarblePart::updateTileZoomLevel()
+{
+    const int tileZoomLevel =
+        m_controlView->marbleWidget()->map()->model()->tileZoomLevel();
+    if ( tileZoomLevel == -1 )
+        m_tileZoomLevel = NOT_AVAILABLE;
+    else {
+        QString s;
+        s.setNum( tileZoomLevel );
+        m_tileZoomLevel = s;
+    }
+}
+
 void MarblePart::updateStatusBar()
 {
     if ( m_positionLabel )
@@ -627,38 +714,100 @@ void MarblePart::updateStatusBar()
 
     if ( m_distanceLabel )
         m_distanceLabel->setText( i18n( DISTANCE_STRING, m_distance ) );
+
+    if ( m_tileZoomLevelLabel )
+        m_tileZoomLevelLabel->setText( i18n( TILEZOOMLEVEL_STRING,
+                                             m_tileZoomLevel ) );
 }
 
 void MarblePart::setupStatusBar()
 {
     QFontMetrics statusBarFontMetrics( m_statusBarExtension->statusBar()->fontMetrics() );
 
-    m_positionLabel = new QLabel( m_statusBarExtension->statusBar() );
-    m_positionLabel->setIndent( 5 );
     QString templatePositionString =
         QString( "%1 000\xb0 00\' 00\"_, 000\xb0 00\' 00\"_" ).arg(POSITION_STRING);
-    int maxPositionWidth = statusBarFontMetrics.boundingRect(templatePositionString).width()
-	+ 2 * m_positionLabel->margin()
-	+ 2 * m_positionLabel->indent();
-    m_positionLabel->setFixedWidth( maxPositionWidth );
-    m_statusBarExtension->addStatusBarItem( m_positionLabel, -1, false );
+    m_positionLabel = setupStatusBarLabel( templatePositionString );
 
-    m_distanceLabel = new QLabel( m_statusBarExtension->statusBar() );
-    m_distanceLabel->setIndent( 5 );
     QString templateDistanceString =
         QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING);
-    int maxDistanceWidth = statusBarFontMetrics.boundingRect(templateDistanceString).width()
-	+ 2 * m_distanceLabel->margin()
-	+ 2 * m_distanceLabel->indent();
-    m_distanceLabel->setFixedWidth( maxDistanceWidth );
-    m_statusBarExtension->addStatusBarItem( m_distanceLabel, -1, false );
+    m_distanceLabel = setupStatusBarLabel( templateDistanceString );
+
+    const QString templateTileZoomLevelString =
+        QString( "%1" ).arg( TILEZOOMLEVEL_STRING );
+    m_tileZoomLevelLabel = setupStatusBarLabel( templateTileZoomLevelString );
 
     connect( m_controlView->marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
              this,                          SLOT( showPosition( QString ) ) );
     connect( m_controlView->marbleWidget(), SIGNAL( distanceChanged( QString ) ),
              this,                          SLOT( showDistance( QString ) ) );
+    connect( m_controlView->marbleWidget(), SIGNAL( zoomChanged( int ) ),
+             this,                          SLOT( showZoomLevel( int ) ) );
+    connect( m_controlView->marbleWidget()->model(), SIGNAL( themeChanged( QString )),
+             this, SLOT( mapThemeChanged( QString )), Qt::QueuedConnection );
 
+    setupDownloadProgressBar();
+
+    setupStatusBarActions();
     updateStatusBar();
+}
+
+QLabel * MarblePart::setupStatusBarLabel( const QString& templateString )
+{
+    QFontMetrics statusBarFontMetrics( m_statusBarExtension->statusBar()->fontMetrics() );
+
+    QLabel * const label = new QLabel( m_statusBarExtension->statusBar() );
+    label->setIndent( 5 );
+    int maxWidth = statusBarFontMetrics.boundingRect( templateString ).width()
+	+ 2 * label->margin() + 2 * label->indent();
+    label->setFixedWidth( maxWidth );
+    m_statusBarExtension->addStatusBarItem( label, -1, false );
+    return label;
+}
+
+void MarblePart::setupDownloadProgressBar()
+{
+    // get status bar and add progress widget
+    KStatusBar * const statusBar = m_statusBarExtension->statusBar();
+    Q_ASSERT( statusBar );
+
+    m_downloadProgressBar = new QProgressBar;
+    statusBar->addPermanentWidget( m_downloadProgressBar );
+
+    HttpDownloadManager * const downloadManager =
+        m_controlView->marbleWidget()->map()->model()->downloadManager();
+    kDebug() << "got download manager:" << downloadManager;
+
+    connect( downloadManager, SIGNAL( jobAdded( int )),
+             this, SLOT( downloadProgressJobAdded( int )));
+    connect( downloadManager, SIGNAL( downloadComplete( QString, QString )),
+             this, SLOT( downloadProgressJobCompleted( QString, QString )));
+}
+
+void MarblePart::setupStatusBarActions()
+{
+    KStatusBar * const statusBar = m_statusBarExtension->statusBar();
+    Q_ASSERT( statusBar );
+
+    statusBar->setContextMenuPolicy( Qt::CustomContextMenu );
+
+    connect( statusBar, SIGNAL( customContextMenuRequested( QPoint )),
+             this, SLOT( showStatusBarContextMenu( QPoint )));
+
+    m_showPositionAction = new KToggleAction( i18n( "Show Position" ), this );
+    m_showAltitudeAction = new KToggleAction( i18n( "Show Altitude" ), this );
+    m_showTileZoomLevelAction =
+        new KToggleAction( i18n( "Show Tile Zoom Level" ), this );
+    m_showDownloadProgressAction =
+        new KToggleAction( i18n( "Show Download Progress Bar" ), this );
+
+    connect( m_showPositionAction, SIGNAL( triggered( bool ) ),
+             this, SLOT( showPositionLabel( bool ) ) );
+    connect( m_showAltitudeAction, SIGNAL( triggered( bool ) ),
+             this, SLOT( showAltitudeLabel( bool ) ) );
+    connect( m_showTileZoomLevelAction, SIGNAL( triggered( bool ) ),
+             this, SLOT( showTileZoomLevelLabel( bool ) ) );
+    connect( m_showDownloadProgressAction, SIGNAL( triggered( bool ) ),
+             this, SLOT( showDownloadProgressBar( bool ) ) );
 }
 
 void MarblePart::showNewStuffDialog()
@@ -676,6 +825,20 @@ void MarblePart::showNewStuffDialog()
     // Update the map theme widget by updating the model.
     // Shouldn't be needed anymore ...
     //m_controlView->marbleControl()->updateMapThemes();
+}
+
+void MarblePart::showStatusBarContextMenu( const QPoint& pos )
+{
+    KStatusBar * const statusBar = m_statusBarExtension->statusBar();
+    Q_ASSERT( statusBar );
+
+    KMenu statusBarContextMenu( m_controlView->marbleWidget() );
+    statusBarContextMenu.addAction( m_showPositionAction );
+    statusBarContextMenu.addAction( m_showAltitudeAction );
+    statusBarContextMenu.addAction( m_showTileZoomLevelAction );
+    statusBarContextMenu.addAction( m_showDownloadProgressAction );
+
+    statusBarContextMenu.exec( statusBar->mapToGlobal( pos ));
 }
 
 void MarblePart::editSettings()
@@ -717,8 +880,8 @@ void MarblePart::editSettings()
     m_pluginModel = new QStandardItemModel( this );
     QStandardItem  *parentItem = m_pluginModel->invisibleRootItem();
 
-    QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
 	parentItem->appendRow( (*i)->item() );
     }
@@ -750,8 +913,8 @@ void MarblePart::slotEnableButtonApply()
 
 void MarblePart::slotApply()
 {
-    QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         (*i)->applyItemState();
     }
@@ -759,8 +922,8 @@ void MarblePart::slotApply()
 
 void MarblePart::slotCancel()
 {
-    QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         (*i)->retrieveItemState();
     }
@@ -804,14 +967,43 @@ void MarblePart::slotUpdateSettings()
 
 void MarblePart::lockFloatItemPosition( bool enabled )
 {
-    QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
+    QList<AbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
 
-    QList<MarbleAbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
+    QList<AbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
     for (; i != floatItemList.constEnd(); ++i) {
         // Locking one would suffice as it affects all. 
 	// Nevertheless go through all.
         (*i)->setPositionLocked(enabled);
     }
+}
+
+void MarblePart::downloadProgressJobAdded( int totalJobs )
+{
+    m_downloadProgressBar->setUpdatesEnabled( false );
+    if ( m_downloadProgressBar->value() < 0 ) {
+        m_downloadProgressBar->setMaximum( 1 );
+        m_downloadProgressBar->setValue( 0 );
+    } else {
+        m_downloadProgressBar->setMaximum( m_downloadProgressBar->maximum() + 1 );
+    }
+
+    qDebug() << "downloadProgressJobAdded: value/maximum: "
+             << m_downloadProgressBar->value() << '/' << m_downloadProgressBar->maximum();
+
+    m_downloadProgressBar->setUpdatesEnabled( true );
+}
+
+void MarblePart::downloadProgressJobCompleted( QString, QString )
+{
+    m_downloadProgressBar->setUpdatesEnabled( false );
+    m_downloadProgressBar->setValue( m_downloadProgressBar->value() + 1 );
+    if ( m_downloadProgressBar->value() == m_downloadProgressBar->maximum() )
+        m_downloadProgressBar->reset();
+
+    qDebug() << "downloadProgressJobCompleted: value/maximum: "
+             << m_downloadProgressBar->value() << '/' << m_downloadProgressBar->maximum();
+
+    m_downloadProgressBar->setUpdatesEnabled( true );
 }
 
 }

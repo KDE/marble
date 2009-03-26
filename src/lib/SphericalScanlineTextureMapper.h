@@ -37,7 +37,6 @@ class SphericalScanlineTextureMapper : public AbstractScanlineTextureMapper
 {
  public:
     explicit SphericalScanlineTextureMapper( TileLoader *tileLoader, QObject * parent =0 );
-    virtual ~SphericalScanlineTextureMapper();
 
     void resizeMap(int width, int height);
     void mapTexture( ViewParams *viewParams );

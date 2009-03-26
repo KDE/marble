@@ -37,7 +37,7 @@ class EquirectProjectionHelper : public AbstractProjectionHelper
     /**
      * @brief Construct a new EquirectProjection.
      */
-    explicit EquirectProjectionHelper();
+    EquirectProjectionHelper();
 
     virtual ~EquirectProjectionHelper();
 

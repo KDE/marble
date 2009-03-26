@@ -18,7 +18,7 @@
 #include <QtCore/QObject>
 
 #include "GeoDataLatLonAltBox.h"
-#include "MarbleAbstractFloatItem.h"
+#include "AbstractFloatItem.h"
 
 class QSvgRenderer;
 
@@ -30,16 +30,16 @@ namespace Marble
  *
  */
 
-class MarbleOverviewMap : public MarbleAbstractFloatItem
+class OverviewMap : public AbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
-    MARBLE_PLUGIN( MarbleOverviewMap )
+    Q_INTERFACES( Marble::RenderPluginInterface )
+    MARBLE_PLUGIN( OverviewMap )
     
  public:
-    explicit MarbleOverviewMap( const QPointF &point = QPointF( 10.5, 10.5 ),
-                                const QSizeF &size = QSizeF( 166.0, 86.0 ) );
-    ~MarbleOverviewMap();
+    explicit OverviewMap( const QPointF &point = QPointF( 10.5, 10.5 ),
+                          const QSizeF &size = QSizeF( 166.0, 86.0 ) );
+    ~OverviewMap();
 
     QStringList backendTypes() const;
 

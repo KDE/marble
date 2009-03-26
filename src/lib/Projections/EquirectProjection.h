@@ -38,7 +38,7 @@ class EquirectProjection : public AbstractProjection
     /**
      * @brief Construct a new EquirectProjection.
      */
-    explicit EquirectProjection();
+    EquirectProjection();
 
     virtual ~EquirectProjection();
 

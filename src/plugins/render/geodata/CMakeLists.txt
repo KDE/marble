@@ -1,4 +1,4 @@
-PROJECT(MarbleGeoDataPlugin)
+PROJECT(GeoDataPlugin)
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/geodata
@@ -7,7 +7,7 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( marblegeodata_SRCS MarbleGeoDataPlugin.cpp 
-                        MarbleGeoDataView.cpp )
+set( marblegeodata_SRCS GeoDataPlugin.cpp 
+                        GeoDataView.cpp )
 add_definitions( -DGEODATA_DATA_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}\\\"" )
-marble_add_plugin( MarbleGeoDataPlugin ${marblegeodata_SRCS} )
+marble_add_plugin( GeoDataPlugin ${marblegeodata_SRCS} )

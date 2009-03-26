@@ -13,10 +13,8 @@
 #include <QtCore/QRect>
 #include <QtGui/QPixmap>
 #include <QtGui/QSlider>
-#include <QWidget>
+#include <QtGui/QWidget>
 
-#include "AbstractProjection.h"
-#include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "MarbleWidget.h"
@@ -26,7 +24,7 @@ using namespace Marble;
 
 NavigationFloatItem::NavigationFloatItem(const QPointF &point,
         const QSizeF &size) :
-    MarbleAbstractFloatItem(point, size), m_marbleWidget(0),
+    AbstractFloatItem(point, size), m_marbleWidget(0),
             m_navigationParent(0), m_repaintScheduled(true)
 {
     // Plugin is not enabled by default
@@ -142,7 +140,7 @@ bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
 
     MarbleWidget *widget = dynamic_cast<MarbleWidget*> (object);
     if ( !widget ) {
-        return MarbleAbstractFloatItem::eventFilter(object, e);
+        return AbstractFloatItem::eventFilter(object, e);
     }
 
     if ( m_marbleWidget != widget ) {
@@ -195,7 +193,7 @@ bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
         }
     }
 
-    return MarbleAbstractFloatItem::eventFilter(object, e);
+    return AbstractFloatItem::eventFilter(object, e);
 }
 
 void NavigationFloatItem::zoomChanged(int level)

@@ -62,7 +62,7 @@ class PlacemarkManagerPrivate
 
 PlacemarkManager::PlacemarkManager( QObject *parent )
     : QObject( parent )
-    , d(new PlacemarkManagerPrivate( parent ) )
+    , d( new PlacemarkManagerPrivate( parent ) )
 {
     
 }

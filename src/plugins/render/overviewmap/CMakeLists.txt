@@ -1,4 +1,4 @@
-PROJECT(MarbleOverviewMap)
+PROJECT( OverviewMap )
 
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/overviewmap
@@ -7,6 +7,6 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( marbleoverviewmap_SRCS MarbleOverviewMap.cpp )
+set( overviewmap_SRCS OverviewMap.cpp )
 
-marble_add_plugin( MarbleOverviewMap ${marbleoverviewmap_SRCS} )
+marble_add_plugin( OverviewMap ${overviewmap_SRCS} )

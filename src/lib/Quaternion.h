@@ -53,7 +53,7 @@ class MARBLE_EXPORT Quaternion {
     // Operators
     Quaternion  operator*(const Quaternion &q) const;
     bool        operator==(const Quaternion &q) const;
-    void        operator*=(const Quaternion &q);
+    Quaternion& operator*=(const Quaternion &q);
 
     void        set(qreal w, qreal x, qreal y, qreal z) {
 	v[Q_W] = w; v[Q_X] = x; v[Q_Y] = y; v[Q_Z] = z;

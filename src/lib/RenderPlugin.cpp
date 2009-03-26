@@ -10,7 +10,7 @@
 //
 
 
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
 #include "MarbleDataFacade.h"
 
 #include <QtGui/QAction>
@@ -21,10 +21,10 @@
 namespace Marble
 {
 
-class MarbleRenderPluginPrivate
+class RenderPluginPrivate
 {
   public:
-    MarbleRenderPluginPrivate()
+    RenderPluginPrivate()
         : m_dataFacade(0),
           m_action(0),
           m_item(0),
@@ -33,7 +33,7 @@ class MarbleRenderPluginPrivate
     {
     }
 
-    ~MarbleRenderPluginPrivate()
+    ~RenderPluginPrivate()
     {
     }
 
@@ -46,8 +46,8 @@ class MarbleRenderPluginPrivate
 };
 
 
-MarbleRenderPlugin::MarbleRenderPlugin()
-    : d( new MarbleRenderPluginPrivate() )
+RenderPlugin::RenderPlugin()
+    : d( new RenderPluginPrivate() )
 {
     d->m_action = new QAction( this );
     connect( d->m_action, SIGNAL( toggled( bool ) ),
@@ -56,22 +56,22 @@ MarbleRenderPlugin::MarbleRenderPlugin()
     d->m_item = new QStandardItem();
 }
 
-MarbleRenderPlugin::~MarbleRenderPlugin()
+RenderPlugin::~RenderPlugin()
 {
     delete d;
 }
 
-MarbleDataFacade*  MarbleRenderPlugin::dataFacade() const
+MarbleDataFacade* RenderPlugin::dataFacade() const
 {
     return d->m_dataFacade;
 }
 
-void  MarbleRenderPlugin::setDataFacade( MarbleDataFacade* dataFacade )
+void RenderPlugin::setDataFacade( MarbleDataFacade* dataFacade )
 {
     d->m_dataFacade = dataFacade;
 }
 
-QAction* MarbleRenderPlugin::action() const
+QAction* RenderPlugin::action() const
 {
     d->m_action->setCheckable( true );
     d->m_action->setChecked( visible() );
@@ -81,7 +81,7 @@ QAction* MarbleRenderPlugin::action() const
     return d->m_action;
 }
 
-QStandardItem* MarbleRenderPlugin::item() const
+QStandardItem* RenderPlugin::item() const
 {
     d->m_item->setIcon( icon() );
     d->m_item->setText( name() );
@@ -95,19 +95,19 @@ QStandardItem* MarbleRenderPlugin::item() const
     return d->m_item;
 }
 
-void MarbleRenderPlugin::applyItemState()
+void RenderPlugin::applyItemState()
 {
     d->m_enabled = ( d->m_item->checkState() == Qt::Checked );
 
     d->m_action->setEnabled( d->m_enabled );
 }
 
-void MarbleRenderPlugin::retrieveItemState()
+void RenderPlugin::retrieveItemState()
 {
     d->m_item->setCheckState( enabled() ?  Qt::Checked : Qt::Unchecked  );
 }
 
-void MarbleRenderPlugin::setEnabled( bool enabled )
+void RenderPlugin::setEnabled( bool enabled )
 {
     if ( enabled == d->m_enabled )
         return;
@@ -118,7 +118,7 @@ void MarbleRenderPlugin::setEnabled( bool enabled )
     d->m_item->setCheckState( enabled ?  Qt::Checked : Qt::Unchecked  );
 }
 
-void MarbleRenderPlugin::setVisible( bool visible )
+void RenderPlugin::setVisible( bool visible )
 {
     if ( visible == d->m_visible )
         return;
@@ -129,17 +129,16 @@ void MarbleRenderPlugin::setVisible( bool visible )
     emit valueChanged( nameId(), visible );
 }
 
-bool MarbleRenderPlugin::enabled() const
+bool RenderPlugin::enabled() const
 {
     return d->m_enabled;
 }
 
-bool MarbleRenderPlugin::visible() const
+bool RenderPlugin::visible() const
 {
     return d->m_visible;
 }
 
 }
 
-#include "MarbleRenderPlugin.moc"
-
+#include "RenderPlugin.moc"

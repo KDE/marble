@@ -6,15 +6,18 @@
 #
 
 FIND_PATH(libgps_INCLUDES libgpsmm.h)
-
+FIND_PATH(libgpsconf_INCLUDES gpsd_config.h)
 
 FIND_LIBRARY(libgps_LIBRARIES gps)
 
-IF (libgps_LIBRARIES AND libgps_INCLUDES)
+IF (libgps_LIBRARIES AND libgps_INCLUDES AND libgpsconf_INCLUDES)
    SET(libgps_FOUND TRUE)
-ELSE(libgps_LIBRARIES AND libgps_INCLUDES)
+ELSE (libgps_LIBRARIES AND libgps_INCLUDES AND libgpsconf_INCLUDES)
     MESSAGE(STATUS "Not building with Gpsd Support")
-ENDIF (libgps_LIBRARIES AND libgps_INCLUDES)
+    IF (libgps_INCLUDES AND NOT libgpsconf_INCLUDES)
+        MESSAGE(STATUS "Installed gpsd does not provide gpsd_config.h - see http://lists.berlios.de/pipermail/gpsd-users/2007-August/002819.html for details on how to fix this.")
+    ENDIF(libgps_INCLUDES AND NOT libgpsconf_INCLUDES)
+ENDIF (libgps_LIBRARIES AND libgps_INCLUDES AND libgpsconf_INCLUDES)
 
 IF (libgps_FOUND)
    IF (NOT libgps_FIND_QUIETLY)
