@@ -17,12 +17,13 @@
 #include <QtGui/QAction>
 
 // Local dir
+#include "AbstractFloatItem.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneSettings.h"
-#include "RenderPlugin.h"
-#include "AbstractFloatItem.h"
 #include "MarbleDataFacade.h"
+#include "PluginManager.h"
+#include "RenderPlugin.h"
 #include "ViewParams.h"
 
 namespace Marble

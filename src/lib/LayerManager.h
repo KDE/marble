@@ -18,7 +18,7 @@
 #include <QtCore/QString>
 
 // Local dir
-#include "PluginManager.h"
+#include "marble_export.h"
 
 namespace Marble
 {
