@@ -34,7 +34,6 @@
 #include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QTextFrame>
-#include <QtNetwork/QHttp>
 
 #include <global.h>
 
