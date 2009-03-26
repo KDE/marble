@@ -40,7 +40,6 @@ class LayerManagerPrivate
 
     GeoSceneDocument *m_mapTheme;
 
-    MarbleModel      *m_model;
     MarbleDataFacade *m_dataFacade;
     PluginManager    *m_pluginManager;
 };
