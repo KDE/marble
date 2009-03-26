@@ -13,7 +13,7 @@
 
 #include <QtCore/QObject>
 
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
 
 namespace Marble
 {
@@ -22,10 +22,10 @@ namespace Marble
  * \brief This class displays a layer of satellites (which satellites TBD).
  *
  */
-class SatellitesPlugin : public MarbleRenderPlugin
+class SatellitesPlugin : public RenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
+    Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( SatellitesPlugin )
 
  public:

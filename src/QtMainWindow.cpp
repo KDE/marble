@@ -39,7 +39,7 @@
 #include "lib/SunControlWidget.h"
 #include "lib/MarbleLocale.h"
 
-#include "MarbleAbstractFloatItem.h"
+#include "AbstractFloatItem.h"
 
 #include "QtMarbleConfigDialog.h"
 
@@ -201,8 +201,8 @@ void MainWindow::createMenus()
 
     m_fileMenu = menuBar()->addMenu(tr("&View"));
 
-    QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         if ( (*i)->nameId() == "crosshairs" ) {
             m_fileMenu->addAction( (*i)->action() );
@@ -241,9 +241,9 @@ void MainWindow::createMenus()
 void MainWindow::createInfoBoxesMenu()
 {
     m_infoBoxesMenu->clear();
-    QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
+    QList<AbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
 
-    QList<MarbleAbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
+    QList<AbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
     for (; i != floatItemList.constEnd(); ++i)
     {
         m_infoBoxesMenu->addAction( (*i)->action() );

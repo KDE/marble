@@ -46,7 +46,7 @@
 #include "global.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
-#include "MarbleAbstractFloatItem.h"
+#include "AbstractFloatItem.h"
 #include "SunLocator.h"
 #include "ViewParams.h"
 #include "GeoPainter.h"
@@ -90,7 +90,7 @@ void WorldClock::init()
     m_map->setShowCities     ( false );
     m_map->setShowOtherPlaces( false );
 
-    foreach( MarbleRenderPlugin* item, m_map->model()->renderPlugins() )
+    foreach( RenderPlugin* item, m_map->model()->renderPlugins() )
         item->setVisible( false );
 
     //Set up the Sun to draw night/day shadow

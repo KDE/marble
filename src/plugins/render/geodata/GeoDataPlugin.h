@@ -17,7 +17,7 @@
 
 #include <QtCore/QObject>
 
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
 
 
 namespace Marble
@@ -35,10 +35,10 @@ class GeoDataView;
  * This includes data which is generated at runtime as well as data that
  */
 
-class GeoDataPlugin : public MarbleRenderPlugin
+class GeoDataPlugin : public RenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
+    Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN(GeoDataPlugin)
 
     GeoDataView* m_view;

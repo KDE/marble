@@ -22,7 +22,7 @@
 #include "../lib/HttpDownloadManager.h"
 #include "../lib/CacheStoragePolicy.h"
 #include "jsonparser.h"
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "GeoDataCoordinates.h"
@@ -39,10 +39,10 @@ struct twitterStructure {
     GeoDataCoordinates location;
 };
 
-class twitterPlugin : public MarbleRenderPlugin
+class twitterPlugin : public RenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES(Marble::MarbleRenderPluginInterface)
+    Q_INTERFACES(Marble::RenderPluginInterface)
     MARBLE_PLUGIN(twitterPlugin)
 
 public:

@@ -56,8 +56,8 @@ class SunLocator;
 class GpxFileModel;
 class FileViewModel;
 class GeoPainter;
-class MarbleRenderPlugin;
-class MarbleAbstractFloatItem;
+class RenderPlugin;
+class AbstractFloatItem;
 
 /**
  * @short A class that can paint a view of the earth.
@@ -422,8 +422,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     SunLocator* sunLocator();
 
-    QList<MarbleRenderPlugin *> renderPlugins() const;
-    QList<MarbleAbstractFloatItem *> floatItems() const;
+    QList<RenderPlugin *> renderPlugins() const;
+    QList<AbstractFloatItem *> floatItems() const;
 
  public Q_SLOTS:
 

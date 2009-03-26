@@ -23,7 +23,7 @@
 #include <QtGui/QPainterPath>
 #include <QtGui/QFont>
 
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
 #include "marble_export.h"
 
 class QAction;
@@ -32,7 +32,7 @@ class QPainter;
 namespace Marble
 {
 
-class MarbleAbstractFloatItemPrivate;
+class AbstractFloatItemPrivate;
 
 
 /**
@@ -40,14 +40,14 @@ class MarbleAbstractFloatItemPrivate;
  *
  */
 
-class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleRenderPlugin
+class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin
 {
     Q_OBJECT
 
  public:
-    explicit MarbleAbstractFloatItem( const QPointF &point = QPointF( 10.0, 10.0 ),
-                                      const QSizeF &size = QSizeF( 150.0, 50.0 ) );
-    virtual ~MarbleAbstractFloatItem();
+    explicit AbstractFloatItem( const QPointF &point = QPointF( 10.0, 10.0 ),
+                                const QSizeF &size = QSizeF( 150.0, 50.0 ) );
+    virtual ~AbstractFloatItem();
 
     /**
      * @brief Set the position of the float item
@@ -150,8 +150,8 @@ class MARBLE_EXPORT MarbleAbstractFloatItem : public MarbleRenderPlugin
     bool eventFilter( QObject *, QEvent * );
 
  private:
-    Q_DISABLE_COPY( MarbleAbstractFloatItem )
-    MarbleAbstractFloatItemPrivate  * const d;
+    Q_DISABLE_COPY( AbstractFloatItem )
+    AbstractFloatItemPrivate * const d;
 };
 
 }

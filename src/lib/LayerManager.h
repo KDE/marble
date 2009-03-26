@@ -27,8 +27,8 @@ class LayerManagerPrivate;
 class GeoPainter;
 class GeoSceneDocument;
 class ViewParams;
-class MarbleRenderPlugin;
-class MarbleAbstractFloatItem;
+class RenderPlugin;
+class AbstractFloatItem;
 class MarbleDataFacade;
 
 /**
@@ -46,8 +46,8 @@ class MARBLE_EXPORT LayerManager : public QObject
 
     void renderLayers( GeoPainter *painter, ViewParams *viewParams );
 
-    QList<MarbleRenderPlugin *>      renderPlugins() const;
-    QList<MarbleAbstractFloatItem *> floatItems()    const;
+    QList<RenderPlugin *>      renderPlugins() const;
+    QList<AbstractFloatItem *> floatItems()    const;
 
  Q_SIGNALS:
     /**

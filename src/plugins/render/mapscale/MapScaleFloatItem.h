@@ -13,7 +13,7 @@
 
 #include <QtCore/QObject>
 
-#include "MarbleAbstractFloatItem.h"
+#include "AbstractFloatItem.h"
 
 namespace Marble
 {
@@ -23,10 +23,10 @@ namespace Marble
  *
  */
 
-class MapScaleFloatItem : public MarbleAbstractFloatItem
+class MapScaleFloatItem : public AbstractFloatItem
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
+    Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( MapScaleFloatItem )
  public:
     explicit MapScaleFloatItem( const QPointF &point = QPointF( 10.5, -10.5 ),

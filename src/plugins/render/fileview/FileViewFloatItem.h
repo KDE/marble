@@ -17,7 +17,7 @@
 class QListView;
 class QPersistentModelIndex;
 
-#include "MarbleAbstractFloatItem.h"
+#include "AbstractFloatItem.h"
 
 namespace Marble
 {
@@ -28,7 +28,7 @@ class MarbleWidget;
  * @short Provides a float item with a list of opened files
  *
  */
-class FileViewFloatItem: public MarbleAbstractFloatItem
+class FileViewFloatItem: public AbstractFloatItem
 {
     Q_OBJECT
     MARBLE_PLUGIN(FileViewFloatItem)

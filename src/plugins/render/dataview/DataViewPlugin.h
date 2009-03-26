@@ -20,7 +20,7 @@
 #include <QtGui/QBrush>
 #include <QtGui/QPen>
 
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
 
 class QTreeView;
 
@@ -41,10 +41,10 @@ class GeoDataDebugModel;
  * DataViewPlugin is the beginning of a plugin, that displays the geodata as it is stored internally
  */
 
-class DataViewPlugin : public MarbleRenderPlugin
+class DataViewPlugin : public RenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
+    Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN(DataViewPlugin)
 
     public:

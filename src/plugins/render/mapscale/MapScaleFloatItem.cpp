@@ -24,7 +24,7 @@ namespace Marble
 {
 
 MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
-    : MarbleAbstractFloatItem( point, size ),
+    : AbstractFloatItem( point, size ),
       m_radius(0),
       m_invScale(0.0),
       m_target(QString()),

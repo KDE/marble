@@ -25,22 +25,22 @@ namespace Marble
 class GeoPainter;
 class GeoSceneLayer;
 class ViewportParams;
-class MarbleRenderPlugin;
+class RenderPlugin;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
  *
  */
 
-class MarbleRenderPluginInterface: public PluginInterface
+class RenderPluginInterface: public PluginInterface
 {
  public:
-    virtual ~MarbleRenderPluginInterface();
+    virtual ~RenderPluginInterface();
     
     /**
     * @brief Returns a new object of the plugin
     */
-    virtual MarbleRenderPlugin* pluginInstance() = 0;
+    virtual RenderPlugin* pluginInstance() = 0;
 
     /**
      * @brief Returns the name(s) of the backend that the plugin can render
@@ -99,6 +99,6 @@ class MarbleRenderPluginInterface: public PluginInterface
 
 }
 
-Q_DECLARE_INTERFACE( Marble::MarbleRenderPluginInterface, "org.kde.Marble.MarbleRenderPluginInterface/1.03" )
+Q_DECLARE_INTERFACE( Marble::RenderPluginInterface, "org.kde.Marble.RenderPluginInterface/1.03" )
 
 #endif // MARBLERENDERPLUGININTERFACEH

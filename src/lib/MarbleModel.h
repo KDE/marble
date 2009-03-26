@@ -61,8 +61,8 @@ class VectorComposer;
 class ViewParams;
 class TextureTile;
 class MergedLayerDecorator;
-class MarbleRenderPlugin;
-class MarbleAbstractFloatItem;
+class RenderPlugin;
+class AbstractFloatItem;
 class GeoDataDocument;
 class GeoSceneDocument;
 class GeoSceneTexture;
@@ -260,8 +260,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     quint64 volatileTileCacheLimit() const;
 
-    QList<MarbleRenderPlugin *>      renderPlugins() const;
-    QList<MarbleAbstractFloatItem *> floatItems() const;
+    QList<RenderPlugin *>      renderPlugins() const;
+    QList<AbstractFloatItem *> floatItems() const;
 
     /**
      * @brief Returns the planet object for the current map.

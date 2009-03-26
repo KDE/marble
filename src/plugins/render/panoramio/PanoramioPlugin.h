@@ -22,7 +22,7 @@
 // #include "../lib/HttpJob.h"
 #include "jsonparser.h"
 #include "imagewidget.h"
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
 #include <QWidget>
 #include <QLabel>
 #include <QPushButton>
@@ -34,10 +34,10 @@ namespace Marble
  *
  */
 
-class PanoramioPlugin : public MarbleRenderPlugin
+class PanoramioPlugin : public RenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES(Marble::MarbleRenderPluginInterface)
+    Q_INTERFACES(Marble::RenderPluginInterface)
     MARBLE_PLUGIN(PanoramioPlugin)
 
 public:

@@ -20,8 +20,8 @@
 
 // Local dir
 #include "MarbleDirs.h"
-#include "MarbleRenderPlugin.h"
-#include "MarbleAbstractFloatItem.h"
+#include "RenderPlugin.h"
+#include "AbstractFloatItem.h"
 
 namespace Marble
 {
@@ -29,7 +29,7 @@ namespace Marble
 class PluginManagerPrivate
 {
  public:
-    QList<MarbleRenderPlugin *> m_renderPlugins;
+    QList<RenderPlugin *> m_renderPlugins;
 };
 
 PluginManager::PluginManager( QObject *parent )
@@ -50,13 +50,13 @@ PluginManager::~PluginManager()
     delete d;
 }
 
-QList<MarbleAbstractFloatItem *> PluginManager::floatItems() const
+QList<AbstractFloatItem *> PluginManager::floatItems() const
 {
-    QList<MarbleAbstractFloatItem *> floatItemList;
+    QList<AbstractFloatItem *> floatItemList;
 
-    QList<MarbleRenderPlugin *>::const_iterator i = d->m_renderPlugins.constBegin();
+    QList<RenderPlugin *>::const_iterator i = d->m_renderPlugins.constBegin();
     for (; i != d->m_renderPlugins.constEnd(); ++i) {
-        MarbleAbstractFloatItem *floatItem = qobject_cast<MarbleAbstractFloatItem *>(*i);
+        AbstractFloatItem *floatItem = qobject_cast<AbstractFloatItem *>(*i);
         if ( floatItem ) {
             floatItemList.append( floatItem );
         }
@@ -65,7 +65,7 @@ QList<MarbleAbstractFloatItem *> PluginManager::floatItems() const
     return floatItemList;
 }
 
-QList<MarbleRenderPlugin *> PluginManager::renderPlugins() const
+QList<RenderPlugin *> PluginManager::renderPlugins() const
 {
     return d->m_renderPlugins;
 }
@@ -88,9 +88,9 @@ void PluginManager::loadPlugins()
 
         QObject * obj = loader.instance();
 
-        MarbleRenderPlugin * layerPlugin;
+        RenderPlugin * layerPlugin;
         if ( obj ) {
-            layerPlugin = qobject_cast<MarbleRenderPlugin *>(obj)->pluginInstance();
+            layerPlugin = qobject_cast<RenderPlugin *>(obj)->pluginInstance();
         }
 
         if( obj && layerPlugin ) {

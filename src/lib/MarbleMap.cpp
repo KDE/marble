@@ -56,7 +56,7 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
 
 #include "gps/GpsLayer.h"
 
@@ -612,8 +612,8 @@ bool MarbleMap::showCrosshairs() const
 {
     bool visible = false;
 
-    QList<MarbleRenderPlugin *> pluginList = renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *> pluginList = renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         if ( (*i)->nameId() == "crosshairs" ) {
             visible = (*i)->visible();
@@ -973,8 +973,8 @@ void MarbleMap::setShowAtmosphere( bool visible )
 
 void MarbleMap::setShowCrosshairs( bool visible )
 {
-    QList<MarbleRenderPlugin *> pluginList = renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *> pluginList = renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         if ( (*i)->nameId() == "crosshairs" ) {
             (*i)->setVisible( visible );
@@ -1282,12 +1282,12 @@ SunLocator* MarbleMap::sunLocator()
     return d->m_model->sunLocator();
 }
 
-QList<MarbleRenderPlugin *> MarbleMap::renderPlugins() const
+QList<RenderPlugin *> MarbleMap::renderPlugins() const
 {
     return d->m_model->renderPlugins();
 }
 
-QList<MarbleAbstractFloatItem *> MarbleMap::floatItems() const
+QList<AbstractFloatItem *> MarbleMap::floatItems() const
 {
     return d->m_model->floatItems();
 }

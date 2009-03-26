@@ -8,12 +8,12 @@
 // Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-#include "MarbleRenderPluginInterface.h"
+#include "RenderPluginInterface.h"
 
 namespace Marble
 {
 
-MarbleRenderPluginInterface::~MarbleRenderPluginInterface()
+RenderPluginInterface::~RenderPluginInterface()
 {
 }
 

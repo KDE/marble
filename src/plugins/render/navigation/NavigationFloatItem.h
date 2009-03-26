@@ -16,7 +16,7 @@
 // forward declarations
 class QSlider;
 
-#include "MarbleAbstractFloatItem.h"
+#include "AbstractFloatItem.h"
 
 #include "ui_navigation.h"
 
@@ -29,7 +29,7 @@ class MarbleWidget;
  * @short Provides a float item with zoom and move controls
  *
  */
-class NavigationFloatItem: public MarbleAbstractFloatItem {
+class NavigationFloatItem: public AbstractFloatItem {
 Q_OBJECT
 //Q_INTERFACES( MarbleLayerInterface )
 MARBLE_PLUGIN( NavigationFloatItem )

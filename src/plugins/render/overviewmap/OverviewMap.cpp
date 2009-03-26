@@ -28,7 +28,7 @@ namespace Marble
 {
 
 OverviewMap::OverviewMap( const QPointF &point, const QSizeF &size )
-    : MarbleAbstractFloatItem( point, size ),
+    : AbstractFloatItem( point, size ),
       m_target(QString()),
       m_svgobj(0)
 {
@@ -231,7 +231,7 @@ bool OverviewMap::eventFilter( QObject *object, QEvent *e )
 
     MarbleWidget *widget = dynamic_cast<MarbleWidget*>(object);
     if ( !widget ) {
-        return MarbleAbstractFloatItem::eventFilter(object,e);
+        return AbstractFloatItem::eventFilter(object,e);
     }
 
     bool cursorAboveFloatItem(false);
@@ -266,7 +266,7 @@ bool OverviewMap::eventFilter( QObject *object, QEvent *e )
         }
     }
 
-    return MarbleAbstractFloatItem::eventFilter(object,e);
+    return AbstractFloatItem::eventFilter(object,e);
 }
 
 void OverviewMap::changeBackground( const QString& target )

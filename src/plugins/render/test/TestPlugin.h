@@ -17,7 +17,7 @@
 
 #include <QtCore/QObject>
 
-#include "MarbleRenderPlugin.h"
+#include "RenderPlugin.h"
 
 namespace Marble
 {
@@ -27,10 +27,10 @@ namespace Marble
  *
  */
 
-class TestPlugin : public MarbleRenderPlugin
+class TestPlugin : public RenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::MarbleRenderPluginInterface )
+    Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( TestPlugin )
 
  public:

@@ -62,7 +62,7 @@
 #include "MarbleLocale.h"
 #include "settings.h"
 
-#include "MarbleAbstractFloatItem.h"
+#include "AbstractFloatItem.h"
 #include "HttpDownloadManager.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
@@ -392,8 +392,8 @@ void MarblePart::readSettings()
         }
     }
 
-    QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         if ( pluginEnabled.contains( (*i)->nameId() ) ) {
             (*i)->setEnabled( pluginEnabled[ (*i)->nameId() ] );
@@ -491,8 +491,8 @@ void MarblePart::writeSettings()
     QList<int>   pluginEnabled;
     QStringList  pluginNameId;
 
-    QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
 	pluginEnabled << static_cast<int>( (*i)->enabled() );
 	pluginNameId  << (*i)->nameId();
@@ -613,8 +613,8 @@ void MarblePart::setupActions()
 	     this,                   SLOT( setShowAtmosphere( bool ) ) );
 
     // Action: Show Crosshairs option
-    QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         if ( (*i)->nameId() == "crosshairs" ) {
             actionCollection()->addAction( "show_crosshairs", (*i)->action() );
@@ -654,11 +654,11 @@ void MarblePart::setupActions()
 
 void MarblePart::createInfoBoxesMenu()
 {
-    QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
+    QList<AbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
 
     QList<QAction*> actionList;
 
-    QList<MarbleAbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
+    QList<AbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
     for (; i != floatItemList.constEnd(); ++i) {
         actionList.append( (*i)->action() );
     }
@@ -880,8 +880,8 @@ void MarblePart::editSettings()
     m_pluginModel = new QStandardItemModel( this );
     QStandardItem  *parentItem = m_pluginModel->invisibleRootItem();
 
-    QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
 	parentItem->appendRow( (*i)->item() );
     }
@@ -913,8 +913,8 @@ void MarblePart::slotEnableButtonApply()
 
 void MarblePart::slotApply()
 {
-    QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         (*i)->applyItemState();
     }
@@ -922,8 +922,8 @@ void MarblePart::slotApply()
 
 void MarblePart::slotCancel()
 {
-    QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
         (*i)->retrieveItemState();
     }
@@ -967,9 +967,9 @@ void MarblePart::slotUpdateSettings()
 
 void MarblePart::lockFloatItemPosition( bool enabled )
 {
-    QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
+    QList<AbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
 
-    QList<MarbleAbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
+    QList<AbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
     for (; i != floatItemList.constEnd(); ++i) {
         // Locking one would suffice as it affects all. 
 	// Nevertheless go through all.

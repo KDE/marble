@@ -1262,12 +1262,12 @@ quint16 MarbleWidget::proxyPort() const
     return d->m_proxyPort;
 }
 
-QList<MarbleRenderPlugin *> MarbleWidget::renderPlugins() const
+QList<RenderPlugin *> MarbleWidget::renderPlugins() const
 {
     return d->m_model->renderPlugins();
 }
 
-QList<MarbleAbstractFloatItem *> MarbleWidget::floatItems() const
+QList<AbstractFloatItem *> MarbleWidget::floatItems() const
 {
     return d->m_model->floatItems();
 }

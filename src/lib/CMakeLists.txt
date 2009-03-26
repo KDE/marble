@@ -80,7 +80,7 @@ set(marblewidget_SRCS
     LayerManager.cpp
     PluginManager.cpp
     MarbleCacheSettingsWidget.cpp
-    MarbleAbstractFloatItem.cpp
+    AbstractFloatItem.cpp
     global.cpp
     MarbleDirs.cpp
     MarbleLocale.cpp
@@ -155,8 +155,8 @@ set(marblewidget_SRCS
 
     PluginInterface.cpp
     NetworkPluginInterface.cpp
-    MarbleRenderPlugin.cpp
-    MarbleRenderPluginInterface.cpp
+    RenderPlugin.cpp
+    RenderPluginInterface.cpp
     MarblePluginSettingsWidget.cpp
 
     SunLocator.cpp
@@ -286,7 +286,7 @@ else (APPLE AND QTONLY)
     MarbleControlBox.h
     MarbleNavigator.h
     MarbleDataFacade.h
-    MarbleAbstractFloatItem.h
+    AbstractFloatItem.h
     AbstractLayer/AbstractLayerInterface.h
     MapThemeManager.h
     MarbleAboutDialog.h
@@ -316,8 +316,8 @@ else (APPLE AND QTONLY)
     geodata/parser/GeoDocument.h
     ExtDateTime.h
     TileCreator.h
-    MarbleRenderPlugin.h
-    MarbleRenderPluginInterface.h
+    RenderPlugin.h
+    RenderPluginInterface.h
     marble_export.h
     Planet.h
 
