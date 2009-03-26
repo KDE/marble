@@ -28,7 +28,6 @@ namespace Marble
 
 class MarbleWidget;
 class SunControlWidget;
-class MarbleAbstractFloatItem;
 class QtMarbleConfigDialog;
 
 class MainWindow : public QMainWindow
