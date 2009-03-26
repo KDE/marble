@@ -49,10 +49,8 @@ DataViewPlugin::DataViewPlugin()
 
 DataViewPlugin::~DataViewPlugin()
 {
-    if( m_dataView )
-        delete m_dataView;
-    if( m_debugModel )
-        delete m_debugModel;
+    delete m_dataView;
+    delete m_debugModel;
 }
 
 QStringList DataViewPlugin::backendTypes() const
