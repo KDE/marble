@@ -23,7 +23,7 @@
 namespace Marble
 {
 
-CompassFloatItem ::CompassFloatItem ( const QPointF &point, const QSizeF &size )
+CompassFloatItem::CompassFloatItem ( const QPointF &point, const QSizeF &size )
     : AbstractFloatItem( point, size ),
       m_compass(),
       m_polarity( 0 )
@@ -32,52 +32,52 @@ CompassFloatItem ::CompassFloatItem ( const QPointF &point, const QSizeF &size )
                                  this );
 }
 
-CompassFloatItem ::~CompassFloatItem ()
+CompassFloatItem::~CompassFloatItem ()
 {
     delete m_svgobj;
 }
 
-QStringList CompassFloatItem ::backendTypes() const
+QStringList CompassFloatItem::backendTypes() const
 {
     return QStringList( "compass" );
 }
 
-QString CompassFloatItem ::name() const
+QString CompassFloatItem::name() const
 {
     return tr( "Compass" );
 }
 
-QString CompassFloatItem ::guiString() const
+QString CompassFloatItem::guiString() const
 {
     return tr( "&Compass" );
 }
 
-QString CompassFloatItem ::nameId() const
+QString CompassFloatItem::nameId() const
 {
     return QString( "compass" );
 }
 
-QString CompassFloatItem ::description() const
+QString CompassFloatItem::description() const
 {
     return tr( "This is a float item that provides a compass." );
 }
 
-QIcon CompassFloatItem ::icon () const
+QIcon CompassFloatItem::icon() const
 {
     return QIcon();
 }
 
 
-void CompassFloatItem ::initialize ()
+void CompassFloatItem::initialize()
 {
 }
 
-bool CompassFloatItem ::isInitialized () const
+bool CompassFloatItem::isInitialized() const
 {
     return true;
 }
 
-QPainterPath CompassFloatItem ::backgroundShape() const
+QPainterPath CompassFloatItem::backgroundShape() const
 {
     QPainterPath path;
     int fontheight = QFontMetrics( font() ).ascent();
@@ -87,7 +87,7 @@ QPainterPath CompassFloatItem ::backgroundShape() const
     return path;
 }
 
-bool CompassFloatItem ::needsUpdate( ViewportParams *viewport )
+bool CompassFloatItem::needsUpdate( ViewportParams *viewport )
 {
 // figure out the polarity ...
     if ( m_polarity == viewport->polarity() ) {
@@ -99,9 +99,9 @@ bool CompassFloatItem ::needsUpdate( ViewportParams *viewport )
     return true;
 }
 
-bool CompassFloatItem ::renderFloatItem( GeoPainter *painter,
-					 ViewportParams *viewport,
-					 GeoSceneLayer * layer )
+bool CompassFloatItem::renderFloatItem( GeoPainter *painter,
+                                        ViewportParams *viewport,
+                                        GeoSceneLayer * layer )
 {
     painter->save();
 
