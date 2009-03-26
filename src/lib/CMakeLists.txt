@@ -107,6 +107,7 @@ set(marblewidget_SRCS
     PlacemarkLoader.cpp
     PlacemarkPainter.cpp
     PlacemarkInfoDialog.cpp
+    Planet.cpp
     Quaternion.cpp
     TextureColorizer.cpp
     AbstractScanlineTextureMapper.cpp
@@ -114,8 +115,10 @@ set(marblewidget_SRCS
     EquirectScanlineTextureMapper.cpp
     MercatorScanlineTextureMapper.cpp
     DiscCache.cpp
+    StoragePolicy.cpp
     CacheStoragePolicy.cpp
     FileStoragePolicy.cpp
+    FileStorageWatcher.cpp
     DatasetProvider.cpp
     AbstractTile.cpp
     TextureTile.cpp
@@ -127,7 +130,6 @@ set(marblewidget_SRCS
     #jsonparser.cpp
     VectorComposer.cpp
     VectorMap.cpp
-    BoundingBox.cpp
     FileViewModel.cpp
     GpxFileViewItem.cpp
     KmlFileViewItem.cpp
@@ -314,9 +316,9 @@ else (APPLE AND QTONLY)
     MarbleRenderPlugin.h
     MarbleRenderPluginInterface.h
     marble_export.h
+    Planet.h
 
     LatLonEdit.h
-    BoundingBox.h
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
 endif (APPLE AND QTONLY)

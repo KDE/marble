@@ -48,7 +48,6 @@ namespace Marble
 class MarbleMapPrivate;
 
 // Marble
-class BoundingBox;
 class MarbleModel;
 class ViewParams;
 class HttpDownloadManager;
@@ -228,18 +227,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     bool geoCoordinates( int x, int y,
                          qreal& lon, qreal& lat,
                          GeoDataCoordinates::Unit = GeoDataCoordinates::Degree );
-
-    /**
-     * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.
-     * @param x  the x coordinate of the pixel
-     * @param y  the y coordinate of the pixel
-     * @param q  the out parameter where the result is returned
-     * @return @c true  if the pixel (x, y) is within the globe
-     *         @c false if the pixel (x, y) is outside the globe, i.e. in space
-     */
-    bool    globalQuaternion( int x, int y, Quaternion &q);
-    // FIXME: Make the names of globalQuaternion() and
-    //        geoCoordinates() follow a pattern.
 
     /**
      * @brief Return the longitude of the center point.
@@ -633,6 +620,14 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void setShowClouds( bool visible );
 
     /**
+     * @brief Set whether the is tile is visible
+     * NOTE: This is part of the transitional debug API
+     *       and might be subject to changes until Marble 0.8
+     * @param visible visibility of the tile
+     */ 
+    void setShowTileId( bool visible );
+
+    /**
      * @brief  Set whether the atmospheric glow is visible
      * @param  visible  visibility of the atmospheric glow
      */
@@ -757,7 +752,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void clearPersistentTileCache();
     /**
      * @brief  Set the limit of the persistent (on hard disc) tile cache.
-     * @param  bytes The limit in kilobytes.
+     * @param  bytes The limit in kilobytes, 0 means no limit.
      */
     void setPersistentTileCacheLimit( quint64 kiloBytes );
 
@@ -772,11 +767,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief Update the map because the model changed.
      */
     void updateChangedMap();
-
-    /**
-     * @brief update part of the map as defined in the BoundingBox
-     */
-    void updateRegion( BoundingBox& );
 
     /**
      * @brief Set the download url to load missing tiles

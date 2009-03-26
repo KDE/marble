@@ -62,6 +62,7 @@
 #include "PlacemarkManager.h"
 #include "PlacemarkLayout.h"
 #include "PlacemarkPainter.h"
+#include "Planet.h"
 #include "StoragePolicy.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
@@ -133,6 +134,8 @@ class MarbleModelPrivate
 
     QTimer                  *m_timer;
 
+
+    Planet                  *m_planet;
 };
 
 VectorComposer      *MarbleModelPrivate::m_veccomposer = 0;
@@ -197,23 +200,26 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_gpxFileModel = new GpxFileModel( this );
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
 
-    connect( d->m_gpxFileModel, SIGNAL( updateRegion( BoundingBox& ) ),
-             this,              SIGNAL( regionChanged( BoundingBox& ) ) );
+    connect( d->m_gpxFileModel, SIGNAL( modelChanged() ),
+             this,              SIGNAL( modelChanged() ) );
 
     /*
      * Create FileViewModel
      */
-    connect( fileViewModel(), SIGNAL( updateRegion( BoundingBox& ) ),
-             this,               SIGNAL( regionChanged( BoundingBox& ) ) );
+    connect( fileViewModel(), SIGNAL( modelChanged() ),
+             this,            SIGNAL( modelChanged() ) );
 
     d->m_dateTime       = new ExtDateTime();
-    d->m_sunLocator     = new SunLocator( d->m_dateTime );
+    /* Assume we are dealing with the earth */
+    d->m_planet = new Planet( "earth" );
+    d->m_sunLocator     = new SunLocator( d->m_dateTime, d->m_planet );
     d->m_layerDecorator = new MergedLayerDecorator( d->m_sunLocator );
 
     connect(d->m_dateTime,   SIGNAL( timeChanged() ),
             d->m_sunLocator, SLOT( update() ) );
     connect( d->m_layerDecorator, SIGNAL( repaintMap() ),
                                   SIGNAL( modelChanged() ) );
+
 }
 
 MarbleModel::~MarbleModel()
@@ -241,6 +247,7 @@ MarbleModel::~MarbleModel()
     delete d->m_layerDecorator;
     delete d->m_sunLocator;
     delete d->m_dateTime;
+    delete d->m_planet;
     delete d;
     MarbleModelPrivate::refCounter.deref();
     qDebug() << "Model deleted:" << this;
@@ -312,6 +319,12 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     else
         qDebug() << "Does not contain any vector layers! ";
 */
+    //Don't change the planet unless we have to...
+    if( d->m_mapTheme->head()->target().toLower() != d->m_planet->id() ) {
+        qDebug() << "Changing Planet";
+        *(d->m_planet) = Planet( d->m_mapTheme->head()->target().toLower() );
+        sunLocator()->setPlanet(d->m_planet);
+    }
 
     if ( d->m_mapTheme->map()->hasTextureLayers() ) {
         // If the tiles aren't already there, put up a progress dialog
@@ -470,7 +483,6 @@ reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename() );
     }
     qDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );
-    d->m_sunLocator->setBody(d->m_mapTheme->head()->target().toLower());
 
     d->m_layerManager->syncViewParamsAndPlugins( mapTheme );
 
@@ -694,8 +706,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     //FIXME:We might just send ViewParams instead of this bunch of parameters
     d->m_gpsLayer->paintLayer( painter,
                                viewParams->canvasImage()->size(),
-                               viewParams,
-                               viewParams->viewport()->boundingBox() );
+                               viewParams );
     d->m_layerManager->renderLayers( painter, viewParams );
 }
 
@@ -806,90 +817,15 @@ void MarbleModel::update()
     QTimer::singleShot( 0, d->m_tileLoader, SLOT( update() ) );
 }
 
-// FIXME: We'd like to have a targetBody ("planet") class which stores all attributes we need.
-
 qreal MarbleModel::planetRadius()   const
 {
-    if ( d->m_mapTheme ) {
-        QString target = d->m_mapTheme->head()->target().toLower();
-
-        // I'd like to be able to use strings in switch statements ... 
-
-        // Make sure to use the radius, not the diameter!
-
-        // planets
-               if ( target == "mercury" ) {
-            return  2440000.0;
-        } else if ( target == "venus" ) {
-            return  6051800.0;
-        } else if ( target == "earth" ) {
-            return  6378000.0;
-        } else if ( target == "mars" ) {
-            return  3397000.0;
-        } else if ( target == "jupiter" ) {
-            return  71492000.0;
-        } else if ( target == "saturn" ) {
-            return  60268000.0;
-        } else if ( target == "uranus" ) {
-            return  25559000.0;
-        } else if ( target == "neptune" ) {
-            return  24766000.0;
-
-        // dwarf planets ... (everybody likes pluto)
-        } else if ( target == "pluto" ) {
-            return  1151000.0;
-
-        // sun and moon
-        } else if ( target == "sun" ) {
-            return  695000000.0;
-        } else if ( target == "moon" ) {
-            return  1738000.0;
-        }
-    }
-
-    // Fallback to assuming that we deal with the earth
-    return 6378000.0;
+    return d->m_planet->radius();
 }
 
 QString MarbleModel::planetName()   const
 {
-    if ( d->m_mapTheme ) {
-        QString target = d->m_mapTheme->head()->target().toLower();
-
-        // planets
-               if ( target == "mercury" ) {
-            return  QString("Mercury");
-        } else if ( target == "venus" ) {
-            return  QString("Venus");
-        } else if ( target == "earth" ) {
-            return  QString("Earth");
-        } else if ( target == "mars" ) {
-            return  QString("Mars");
-        } else if ( target == "jupiter" ) {
-            return  QString("Jupiter");
-        } else if ( target == "saturn" ) {
-            return  QString("Saturn");
-        } else if ( target == "uranus" ) {
-            return  QString("Uranus");
-        } else if ( target == "neptune" ) {
-            return  QString("Neptune");
-
-        // dwarf planets ... (everybody likes pluto)
-        } else if ( target == "pluto" ) {
-            return  QString("Pluto");
-
-        // sun and moon
-        } else if ( target == "sun" ) {
-            return  QString("Sun");
-        } else if ( target == "moon" ) {
-            return  QString("Moon");
-        }
-    }
-
-    // Fallback to assuming that we deal with the earth
-    return QString("Earth");
+    return d->m_planet->name();
 }
-
 
 ExtDateTime* MarbleModel::dateTime() const
 {
@@ -992,6 +928,11 @@ QList<MarbleRenderPlugin *> MarbleModel::renderPlugins() const
 QList<MarbleAbstractFloatItem *> MarbleModel::floatItems() const
 {
     return d->m_layerManager->floatItems();
+}
+
+Planet* MarbleModel::planet() const
+{
+    return d->m_planet;
 }
 
 }

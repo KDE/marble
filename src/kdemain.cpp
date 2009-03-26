@@ -186,6 +186,7 @@ int main (int argc, char *argv[])
     options.add( "enableCurrentLocation", ki18n( "Enable tab to show the current location" ) );
     options.add( "enableFileView",
                  ki18n( "Enable tab to see gpxFileView") );
+    options.add( "tile-id", ki18n( "Show tile id's" ) );
     KCmdLineArgs::addCmdLineOptions( options );
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
@@ -230,6 +231,10 @@ int main (int argc, char *argv[])
     
     if ( args->isSet( "enableFileView" ) ) {
         window->marbleControl()->setFileViewTabShown(true);
+    }
+
+    if (args->isSet( "tile-id" ) ) {
+	window->marbleControl()->marbleWidget()->setShowTileId(true);
     }
 
     // Read the files that are given on the command line.

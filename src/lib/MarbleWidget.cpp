@@ -44,7 +44,6 @@
 #include "TileCreatorDialog.h"
 #include "HttpDownloadManager.h"
 #include "gps/GpsLayer.h"
-#include "BoundingBox.h"
 #include "SunLocator.h"
 #include "MergedLayerDecorator.h"
 #include "AbstractProjectionHelper.h"
@@ -174,11 +173,6 @@ void MarbleWidgetPrivate::construct()
     // this in the view, i.e. here.
     m_widget->connect( m_map,    SIGNAL( zoomChanged( int ) ),
                        m_widget, SIGNAL( zoomChanged( int ) ) );
-
-
-    // Some part of the screen contents changed.
-    m_widget->connect( m_model, SIGNAL( regionChanged( BoundingBox& ) ),
-                       m_widget, SLOT( updateRegion( BoundingBox& ) ) );
 
     // Set background: black.
     m_widget->setPalette( QPalette ( Qt::black ) );
@@ -765,33 +759,6 @@ qreal MarbleWidget::centerLongitude() const
     return d->m_map->centerLongitude();
 }
 
-bool MarbleWidget::globalQuaternion( int x, int y, Quaternion &q)
-{
-    int  imageHalfWidth  = width() / 2;
-    int  imageHalfHeight = height() / 2;
-
-    const qreal  inverseRadius = 1.0 / (qreal)(radius());
-
-    if ( radius() > sqrt( (qreal)(( x - imageHalfWidth ) * ( x - imageHalfWidth )
-        + ( y - imageHalfHeight ) * ( y - imageHalfHeight )) ) )
-    {
-        qreal qx = inverseRadius * (qreal)( x - imageHalfWidth );
-        qreal qy = inverseRadius * (qreal)( y - imageHalfHeight );
-        qreal qr = 1.0 - qy * qy;
-
-        qreal qr2z = qr - qx * qx;
-        qreal qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
-
-        Quaternion  qpos( 0.0, qx, qy, qz );
-        qpos.rotateAroundAxis( planetAxis() );
-        q = qpos;
-
-        return true;
-    } else {
-        return false;
-    }
-}
-
 const QRegion MarbleWidget::activeRegion()
 {
     return d->m_map->viewParams()->currentProjection()->helper()->activeRegion();
@@ -1015,6 +982,11 @@ void MarbleWidget::setShowGps( bool visible )
     repaint();
 }
 
+void MarbleWidget::setShowTileId( bool visible )
+{
+    d->m_model->layerDecorator()->setShowTileId( visible );
+}
+
 void MarbleWidget::changeCurrentPosition( qreal lon, qreal lat)
 {
     d->m_model->gpsLayer()->changeCurrentPosition( lat, lon );
@@ -1105,19 +1077,6 @@ void MarbleWidget::updateChangedMap()
 {
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
-    update();
-}
-
-void MarbleWidget::updateRegion( BoundingBox &box )
-{
-    Q_UNUSED(box);
-
-    //really not sure if this is nessary as it is designed for
-    //placemark based layers
-    setNeedsUpdate();
-
-    /*TODO: write a method for BoundingBox to cacluate the screen
-     *region and pass that to update()*/
     update();
 }
 

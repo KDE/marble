@@ -26,7 +26,7 @@ classes.  Here we will present the exported classes of the library:
 These classes comprise the main interface to the Marble library.
 
 
- - PlaceMarkModel
+ - PlacemarkModel
  - KAtlasThemeSelectView
  - LegendBrowser
  - SearchListView
@@ -86,16 +86,16 @@ viewed as separate layers:
    which contain the actual vectors, but also a bounding box
    that specifies which area is being covered by each polygon.
 
- - Points of interest, represented by the PlaceMark class.  Right now
+ - Points of interest, represented by the Placemark class.  Right now
    these are mostly cities, but also some mountains and sea deeps.
 
-   The PlaceMark has a somewhat arbitrary selection of properties
+   The Placemark has a somewhat arbitrary selection of properties
    which comes from the Google Earth KML format.  This will be
    restructured in future versions.  Another important class is the
-   PlaceMarkContainer which collects a number of PlaceMarks into a
+   PlacemarkContainer which collects a number of Placemarks into a
    container, just like the name suggests.  A third level is provided
-   by the PlaceMarkManager class which manages several
-   PlaceMarkContainers (currently just one) and also imports and
+   by the PlacemarkManager class which manages several
+   PlacemarkContainers (currently just one) and also imports and
    exports it to/from files in various file formats.
 
 
@@ -108,7 +108,7 @@ default view!)  provides a special map in terms of composition:
    recolorized bumpmapped layer via the TextureColorizer class.
 
 All map views and their use of layers get specified in a *.dgml XML
-file.  The source format for the PlaceMark layer is Google Earth's KML
+file.  The source format for the Placemark layer is Google Earth's KML
 file format which gets parsed and cached into a temporary binary file
 (.cache) for faster follow-up reading.
 
@@ -137,7 +137,7 @@ FIXME: Explain the differences between the GeoPolygon and the
 
 FIXME: To be written...
 
-FIXME: Explain how PlaceMark labels are placed so they don't cover each
+FIXME: Explain how Placemark labels are placed so they don't cover each
 other.
 
 
@@ -190,7 +190,7 @@ GridMap         The grid of lat-lon lines on the map.
                 Another Vector of ScreenPolygons. Perhaps it should
                 inherit or contain a VectorMap.
 
-PlaceMark       A point on the earth with some additional data. Can be
+Placemark       A point on the earth with some additional data. Can be
                 selected and manipulated. Has a name. Today mostly
                 used for cities of different size.
                 At this point somewhat arbitrary in its choice of
@@ -202,7 +202,7 @@ PlaceMark       A point on the earth with some additional data. Can be
                  - Countrycode (QString)
                  - View stuff (selected, labelstring, boundingbox, etc)
 
-PlaceContainer  A list of PlaceMarks ( QVector<Placemark *> )
+PlaceContainer  A list of Placemarks ( QVector<Placemark *> )
 
 
 Model / View
@@ -212,8 +212,8 @@ MarbleModel     The main model.  Contains (among others):
                  - MapTheme
                  - GridMap
                  - VectorComposer
-                 - PlaceMarkManager
-                 - PlaceMarkModel
+                 - PlacemarkManager
+                 - PlacemarkModel
 
 VectorComposer  Manages the different vector sub-layers which consist
                 of coastlines, islands, lakes, glaciers, rivers
@@ -249,11 +249,11 @@ class KAtlasWindRose : public QObject {
 class KAtlasXmlHandler : public QXmlDefaultHandler {
 class MapTheme : public QObject
 class MeasureTool;
-class PlaceFolder : public QVector<PlaceMark*> {
-class PlaceMarkInfoDialog: public Ui_PlaceMarkInfoDialog {};
-class PlaceMarkManager;
-class PlaceMarkModel : public QAbstractListModel {
-class PlaceMarkPainter : public QObject {
+class PlaceFolder : public QVector<Placemark*> {
+class PlacemarkInfoDialog: public Ui_PlacemarkInfoDialog {};
+class PlacemarkManager;
+class PlacemarkModel : public QAbstractListModel {
+class PlacemarkPainter : public QObject {
 class QAbstractItemModel;
 class QMenu;
 class QStandardItemModel;

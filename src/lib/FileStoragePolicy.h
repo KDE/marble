@@ -22,13 +22,15 @@ namespace Marble
 
 class FileStoragePolicy : public StoragePolicy
 {
+    Q_OBJECT
+    
     public:
         /**
          * Creates a new file storage policy.
          *
          * @param dataDirectory The directory where the data should go to.
          */
-        explicit FileStoragePolicy( const QString &dataDirectory = QString() );
+        explicit FileStoragePolicy( const QString &dataDirectory = QString(), QObject *parent = 0 );
 
         /**
          * Destroys the cache storage policy.
@@ -56,6 +58,8 @@ class FileStoragePolicy : public StoragePolicy
         QString lastErrorMessage() const;
 
     private:
+	Q_DISABLE_COPY( FileStoragePolicy )
+	
         QString m_dataDirectory;
         QString m_errorMsg;
 };

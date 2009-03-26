@@ -11,7 +11,6 @@
 
 #include "GpxFileModel.h"
 
-#include "BoundingBox.h"
 #include "GpxFile.h"
 
 #include <QtCore/Qt>
@@ -82,11 +81,9 @@ void    GpxFileModel::closeFile()
     if ( !file->active() ) {
         int index = m_data->indexOf( file );
         if ( index > -1 ) {
-	    BoundingBox  box;
-
             m_data->remove( index );
             emit( layoutChanged() );
-            emit( updateRegion( box ) );
+            emit( modelChanged() );
         }
     }
 }
@@ -119,12 +116,10 @@ bool GpxFileModel::setData ( const QModelIndex &index,
                              int role )
 {
     if ( role == Qt::CheckStateRole ) {
-	BoundingBox  box;
 
         ( static_cast<GpxFile*>( index.internalPointer() ) ) 
                 ->setCheckState( value.toBool() );
         emit ( dataChanged( index, index ) );
-        emit ( updateRegion( box ) );
 
         return true;
     }
@@ -167,11 +162,9 @@ int GpxFileModel::columnCount ( const QModelIndex & parent ) const
 
 void GpxFileModel::addFile( GpxFile *file )
 {
-    BoundingBox  box;
-
     m_data->append( file );
     emit( layoutChanged() );
-    emit( updateRegion( box ) );
+    emit( modelChanged() );
 }
 
 void    GpxFileModel::setSelectedIndex( const QModelIndex &index )

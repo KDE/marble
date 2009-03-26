@@ -28,7 +28,6 @@ namespace Marble
 {
 
 class AbstractLayerContainer;
-class BoundingBox;
 class ClipPainter;
 class ViewParams;
 class GeoDataCoordinates;
@@ -65,25 +64,6 @@ class AbstractLayer: public QObject
     virtual void paintLayer( ClipPainter* painter, 
 			     const QSize& screenSize,
 			     ViewParams *viewParams );
-
-    /**
-     * @brief method to paint the whole Layer
-     * 
-     * This overloaded method is intended to add the functionality of
-     * having a bounding box implementation. 
-     * @param painter pointer to the painter that will paint this
-     *                layer
-     * @param screenSize used to calculate the pixel position
-     * @param radius globe radius, used as a measure of zoom level
-     * @param rotAxis quaternion that represents the current rotation
-     *                of the globe
-     * @param bounding BoundingBox object that represents the smallest
-     *                 area that contains all of the view
-     */
-    virtual void paintLayer( ClipPainter* painter, 
-			     const QSize& screenSize,
-			     ViewParams *viewParams, 
-			     const BoundingBox &bounding );
 
  public:
     /**

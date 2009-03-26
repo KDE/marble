@@ -172,11 +172,11 @@ void MarblePart::exportMapScreenShot()
 
     if ( !fileName.isEmpty() ) {
         // Take the case into account where no file format is indicated
-        char * format = 0;
+        const char * format = 0;
         if ( !fileName.endsWith("png", Qt::CaseInsensitive)
            && !fileName.endsWith("jpg", Qt::CaseInsensitive) )
         {
-            format = (char*)"JPG";
+            format = "JPG";
         }
 
         QPixmap mapPixmap = m_controlView->mapScreenShot();
@@ -233,26 +233,8 @@ void MarblePart::setShowAtmosphere( bool isChecked )
 
 void MarblePart::showFullScreen( bool isChecked )
 {
-    if ( isChecked ) {
-        if ( KApplication::activeWindow() )
-//  TODO: Deprecate alternative once KDE 4.0 is outdated
-#if KDE_VERSION >= KDE_MAKE_VERSION(4, 0, 60)
-            KToggleFullScreenAction::setFullScreen( KApplication::activeWindow(), true );
-#else
-	    KApplication::activeWindow()->setWindowState( KApplication::activeWindow()->windowState() | Qt::WindowFullScreen );
-#endif
-	;
-    }
-    else {
-        if ( KApplication::activeWindow() )
-//  TODO: Deprecate alternative once KDE 4.0 is outdated
-#if KDE_VERSION >= KDE_MAKE_VERSION(4, 0, 60)
-            KToggleFullScreenAction::setFullScreen( KApplication::activeWindow(), false );
-#else
-	    KApplication::activeWindow()->setWindowState( KApplication::activeWindow()->windowState() & ~Qt::WindowFullScreen );
-#endif
-	;
-    }
+    if ( KApplication::activeWindow() )
+        KToggleFullScreenAction::setFullScreen( KApplication::activeWindow(), isChecked );
 
     m_fullScreenAct->setChecked( isChecked ); // Sync state with the GUI
 }
@@ -333,19 +315,14 @@ void MarblePart::readSettings()
     if ( MarbleSettings::onStartup() == Marble::LastLocationVisited ) {
         m_controlView->marbleWidget()->centerOn(
             MarbleSettings::quitLongitude(),
-            MarbleSettings::quitLatitude()
-        );
-        m_controlView->marbleWidget()->zoomView(
-            MarbleSettings::quitZoom()
-        );
+            MarbleSettings::quitLatitude() );
+        m_controlView->marbleWidget()->zoomView( MarbleSettings::quitZoom() );
     }
 
     // Set home position
-    m_controlView->marbleWidget()->setHome(
-        MarbleSettings::homeLongitude(),
-        MarbleSettings::homeLatitude(),
-        MarbleSettings::homeZoom()
-    );
+    m_controlView->marbleWidget()->setHome( MarbleSettings::homeLongitude(),
+                                            MarbleSettings::homeLatitude(),
+                                            MarbleSettings::homeZoom() );
     if ( MarbleSettings::onStartup() == Marble::ShowHomeLocation ) {
         m_controlView->marbleWidget()->goHome();
     }
@@ -387,8 +364,8 @@ void MarblePart::readSettings()
     }
 
     QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
         if ( pluginEnabled.contains( (*i)->nameId() ) ) {
             (*i)->setEnabled( pluginEnabled[ (*i)->nameId() ] );
             (*i)->item()->setCheckState( pluginEnabled[ (*i)->nameId() ]  ?  Qt::Checked : Qt::Unchecked );
@@ -401,20 +378,20 @@ void MarblePart::readSettings()
 
 void MarblePart::writeSettings()
 {
+    // Get the 'quit' values from the widget and store them in the settings.
     qreal  quitLon = m_controlView->marbleWidget()->centerLongitude();
     qreal  quitLat = m_controlView->marbleWidget()->centerLatitude();
     int     quitZoom = m_controlView->marbleWidget()->zoom();
 
-    // Get the 'home' values from the widget and store them in the settings.
     MarbleSettings::setQuitLongitude( quitLon );
     MarbleSettings::setQuitLatitude( quitLat );
     MarbleSettings::setQuitZoom( quitZoom );
 
+    // Get the 'home' values from the widget and store them in the settings.
     qreal  homeLon = 0;
     qreal  homeLat = 0;
     int     homeZoom = 0;
 
-    // Get the 'home' values from the widget and store them in the settings.
     m_controlView->marbleWidget()->home( homeLon, homeLat, homeZoom );
     MarbleSettings::setHomeLongitude( homeLon );
     MarbleSettings::setHomeLatitude( homeLat );
@@ -440,7 +417,8 @@ void MarblePart::writeSettings()
     MarbleSettings::setShowCurrentLocation( m_currentLocationAction->isChecked() );
 
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Marble::Still ) );
-    MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->mapQuality( Marble::Animation )  );
+    MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->
+                                         mapQuality( Marble::Animation ) );
 
     MarbleSettings::setDistanceUnit( MarbleGlobal::getInstance()->locale()->distanceUnit() );
     MarbleSettings::setAngleUnit( m_controlView->marbleWidget()->defaultAngleUnit() );
@@ -451,8 +429,10 @@ void MarblePart::writeSettings()
     MarbleSettings::setCenterOnSun( m_controlView->sunLocator()->getCentered() );
 
     // Caches
-    MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->volatileTileCacheLimit() / 1000 );
-    MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->persistentTileCacheLimit() / 1000 );
+    MarbleSettings::setVolatileTileCacheLimit( m_controlView->marbleWidget()->
+                                               volatileTileCacheLimit() / 1024 );
+    MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->
+                                                 persistentTileCacheLimit() / 1024 );
 
     // Proxy
     MarbleSettings::setProxyUrl( m_controlView->marbleWidget()->proxyHost() );
@@ -462,8 +442,8 @@ void MarblePart::writeSettings()
     QStringList  pluginNameId;
 
     QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
 	pluginEnabled << static_cast<int>( (*i)->enabled() );
 	pluginNameId  << (*i)->nameId();
     }
@@ -486,7 +466,8 @@ void MarblePart::setupActions()
     KAction action5( i18n("Panoramio Photos"), this );
 
     // Action: Print Map
-    m_printMapAction = KStandardAction::print( this, SLOT( printMapScreenShot() ), actionCollection() );
+    m_printMapAction = KStandardAction::print( this, SLOT( printMapScreenShot() ),
+                                               actionCollection() );
 
     // Action: Export Map
     m_exportMapAction = new KAction( this );
@@ -539,7 +520,9 @@ void MarblePart::setupActions()
 			   actionCollection() );
 
     // Action: Get hot new stuff
-    m_newStuffAction = KNS::standardAction( i18n("Download Maps..."), this, SLOT(showNewStuffDialog()), actionCollection(), "new_stuff");
+    m_newStuffAction = KNS::standardAction( i18n("Download Maps..."), this,
+                                            SLOT( showNewStuffDialog() ),
+                                            actionCollection(), "new_stuff" );
     m_newStuffAction->setStatusTip(i18n("&Download new maps"));
     m_newStuffAction->setShortcut( Qt::CTRL + Qt::Key_N );
 
@@ -571,8 +554,8 @@ void MarblePart::setupActions()
 
     // Action: Show Crosshairs option
     QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
         if ( (*i)->nameId() == "crosshairs" ) {
             actionCollection()->addAction( "show_crosshairs", (*i)->action() );
         }
@@ -615,8 +598,8 @@ void MarblePart::createInfoBoxesMenu()
 
     QList<QAction*> actionList;
 
-    QList<MarbleAbstractFloatItem *>::const_iterator i;
-    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i) {
+    QList<MarbleAbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
+    for (; i != floatItemList.constEnd(); ++i) {
         actionList.append( (*i)->action() );
     }
 
@@ -735,8 +718,8 @@ void MarblePart::editSettings()
     QStandardItem  *parentItem = m_pluginModel->invisibleRootItem();
 
     QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
 	parentItem->appendRow( (*i)->item() );
     }
 
@@ -768,8 +751,8 @@ void MarblePart::slotEnableButtonApply()
 void MarblePart::slotApply()
 {
     QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator  i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
         (*i)->applyItemState();
     }
 }
@@ -777,8 +760,8 @@ void MarblePart::slotApply()
 void MarblePart::slotCancel()
 {
     QList<MarbleRenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator  i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
         (*i)->retrieveItemState();
     }
 }
@@ -787,21 +770,31 @@ void MarblePart::slotUpdateSettings()
 {
     qDebug() << "Updating Settings ...";
 
+    // FIXME: Font doesn't get updated instantly.
     m_controlView->marbleWidget()->setDefaultFont( MarbleSettings::mapFont() );
 
-    m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::stillQuality(), Marble::Still );
-    m_controlView->marbleWidget()->setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(), Marble::Animation );
+    m_controlView->marbleWidget()->
+        setMapQuality( (Marble::MapQuality) MarbleSettings::stillQuality(),
+                       Marble::Still );
+    m_controlView->marbleWidget()->
+        setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(),
+                       Marble::Animation );
 
-    m_controlView->marbleWidget()->setDefaultAngleUnit( (Marble::AngleUnit) MarbleSettings::angleUnit() );
-    MarbleGlobal::getInstance()->locale()->setDistanceUnit( (Marble::DistanceUnit) MarbleSettings::distanceUnit() );
+    m_controlView->marbleWidget()->
+        setDefaultAngleUnit( (Marble::AngleUnit) MarbleSettings::angleUnit() );
+    MarbleGlobal::getInstance()->locale()->
+        setDistanceUnit( (Marble::DistanceUnit) MarbleSettings::distanceUnit() );
 
     m_distance = m_controlView->marbleWidget()->distanceString();
     updateStatusBar();
 
     m_controlView->marbleWidget()->setAnimationsEnabled( MarbleSettings::animateTargetVoyage() );
 
-    m_controlView->marbleWidget()->setPersistentTileCacheLimit( MarbleSettings::persistentTileCacheLimit() * 1000 );
-    m_controlView->marbleWidget()->setVolatileTileCacheLimit( MarbleSettings::volatileTileCacheLimit() * 1000 );
+    // Cache
+    m_controlView->marbleWidget()->
+        setPersistentTileCacheLimit( MarbleSettings::persistentTileCacheLimit() * 1024 );
+    m_controlView->marbleWidget()->
+        setVolatileTileCacheLimit( MarbleSettings::volatileTileCacheLimit() * 1024 );
 
     m_controlView->marbleWidget()->setProxy( MarbleSettings::proxyUrl(),
                                              MarbleSettings::proxyPort() );
@@ -813,8 +806,8 @@ void MarblePart::lockFloatItemPosition( bool enabled )
 {
     QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
 
-    QList<MarbleAbstractFloatItem *>::const_iterator i;
-    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i) {
+    QList<MarbleAbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
+    for (; i != floatItemList.constEnd(); ++i) {
         // Locking one would suffice as it affects all. 
 	// Nevertheless go through all.
         (*i)->setPositionLocked(enabled);

@@ -20,6 +20,7 @@
 #include "MarbleModel.h"
 #include "GeoDataPlacemark.h"
 #include "PlacemarkInfoDialog.h"
+#include "Planet.h"
 
 using namespace Marble;
 
@@ -100,7 +101,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     m_lmbMenu->addSeparator();
 
     // Setting the proper planet name
-    QString targetString = m_model->planetName();
+    QString targetString = m_model->planet()->name();
     qDebug() << "targetString" << targetString;
     // FIXME: this should be removed later on ...
     if ( targetString == "Earth" ) 

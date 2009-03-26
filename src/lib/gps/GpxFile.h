@@ -24,7 +24,6 @@ namespace Marble
 {
 
 class ClipPainter;
-class BoundingBox;
 class Waypoint;
 class Track;
 class Route;
@@ -45,9 +44,6 @@ class GpxFile : public AbstractLayerInterface
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize,
                        ViewParams *viewParams );
-    virtual void draw( ClipPainter *painter, 
-                       const QSize &canvasSize, ViewParams *viewParams,
-                       const BoundingBox &box );
     virtual void printToStream( QTextStream & ) const;
 
     void addWaypoint( Waypoint *waypoint );

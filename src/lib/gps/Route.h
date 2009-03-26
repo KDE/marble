@@ -40,9 +40,6 @@ class Route : public AbstractLayerContainer, public GpsElement,
                        const QSize &canvasSize, 
                        ViewParams *viewParams );
 
-    virtual void draw( ClipPainter *painter, 
-		       const QSize &canvasSize, ViewParams *viewParams ,
-		       const BoundingBox &box );
     virtual void draw( ClipPainter*, const QPoint& );
 
     virtual void printToStream( QTextStream & ) const;

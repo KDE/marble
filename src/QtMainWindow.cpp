@@ -12,6 +12,7 @@
 #include "QtMainWindow.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QList>
 #include <QtCore/QSettings>
 #include <QtGui/QCloseEvent>
 
@@ -35,8 +36,11 @@
 #include <MarbleDirs.h>
 #include "lib/MarbleAboutDialog.h"
 #include "lib/SunControlWidget.h"
+#include "lib/MarbleLocale.h"
 
 #include "MarbleAbstractFloatItem.h"
+
+#include "QtMarbleConfigDialog.h"
 
 namespace
 {
@@ -59,6 +63,15 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWi
     setWindowTitle( tr("Marble - Desktop Globe") );
     setWindowIcon( QIcon(":/icons/marble.png") );
     setCentralWidget( m_controlView );
+    
+    // Initializing config dialog
+    m_configDialog = new QtMarbleConfigDialog( this );
+    connect( m_configDialog, SIGNAL( settingsChanged() ),
+	     this, SLOT( updateSettings() ) );
+    connect( m_configDialog, SIGNAL( clearVolatileCacheClicked() ),
+	     m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
+    connect( m_configDialog, SIGNAL( clearPersistentCacheClicked() ),
+	     m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
 
     createActions();
     createMenus();
@@ -106,6 +119,10 @@ void MainWindow::createActions()
      m_copyMapAct->setShortcut(tr("Ctrl+C"));
      m_copyMapAct->setStatusTip(tr("Copy a screenshot of the map"));
      connect(m_copyMapAct, SIGNAL(triggered()), this, SLOT(copyMap()));
+     
+     m_configDialogAct = new QAction( tr("&Settings"), this);
+     m_configDialogAct->setStatusTip(tr("Show the configuration dialog"));
+     connect(m_configDialogAct, SIGNAL(triggered()), this, SLOT(editSettings()));
 
      m_copyCoordinatesAct = new QAction( QIcon(":/icons/edit-copy.png"), tr("C&opy Coordinates"), this);
      m_copyCoordinatesAct->setStatusTip(tr("Copy the center coordinates as text"));
@@ -177,11 +194,16 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_copyCoordinatesAct);
 
     m_fileMenu = menuBar()->addMenu(tr("&View"));
-    m_fileMenu->addAction(m_fullScreenAct);
-    m_fileMenu->addAction(m_sideBarAct);
-    m_fileMenu->addAction(m_statusBarAct);
-    m_fileMenu->addSeparator();
 
+    QList<MarbleRenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
+        if ( (*i)->nameId() == "crosshairs" ) {
+            m_fileMenu->addAction( (*i)->action() );
+        }
+    }
+
+    m_fileMenu->addSeparator();
     m_infoBoxesMenu = m_fileMenu->addMenu("&Info Boxes");
     createInfoBoxesMenu();
 
@@ -190,6 +212,13 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_showAtmosphereAct);
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_controlSunAct);
+
+    m_fileMenu = menuBar()->addMenu(tr("&Settings"));
+    m_fileMenu->addAction(m_statusBarAct);
+    m_fileMenu->addAction(m_sideBarAct);
+    m_fileMenu->addAction(m_fullScreenAct);
+    m_fileMenu->addSeparator();
+    m_fileMenu->addAction(m_configDialogAct);
 
     m_helpMenu = menuBar()->addMenu(tr("&Help"));
     m_helpMenu->addAction(m_whatsThisAct);
@@ -502,12 +531,24 @@ void MainWindow::readSettings()
          m_controlView->marbleWidget()->setProjection(
             (Projection)(settings.value("projection", 0 ).toInt())
          );
+     
+         // Last location on quit
+	 if ( m_configDialog->onStartup() == Marble::LastLocationVisited ) {
+	    m_controlView->marbleWidget()->centerOn(
+		settings.value("quitLongitude", 0.0).toDouble(),
+		settings.value("quitLatitude", 0.0).toDouble() );
+	    m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
+	 }
+
+	 // Set home position
          m_controlView->marbleWidget()->setHome( 
             settings.value("homeLongitude", 9.4).toDouble(), 
             settings.value("homeLatitude", 54.8).toDouble(),
             settings.value("homeZoom", 1050 ).toInt()
          );
-         m_controlView->marbleWidget()->goHome();
+	 if ( m_configDialog->onStartup() == Marble::ShowHomeLocation ) {
+	    m_controlView->marbleWidget()->goHome();
+	 }
      settings.endGroup();
      
      settings.beginGroup( "Sun" );
@@ -517,6 +558,9 @@ void MainWindow::readSettings()
      settings.endGroup();
 
      setUpdatesEnabled(true);
+     
+     // The config dialog has to read settings.
+     m_configDialog->readSettings();
 }
 
 void MainWindow::writeSettings()
@@ -539,6 +583,7 @@ void MainWindow::writeSettings()
      settings.endGroup();
 
      settings.beginGroup( "MarbleWidget" );
+         // Get the 'home' values from the widget and store them in the settings.
          qreal homeLon = 0;
          qreal homeLat = 0;
          int homeZoom = 0;
@@ -552,6 +597,15 @@ void MainWindow::writeSettings()
 
          settings.setValue( "mapTheme",   mapTheme ); 
          settings.setValue( "projection", projection ); 
+	 
+         // Get the 'quit' values from the widget and store them in the settings.
+         qreal  quitLon = m_controlView->marbleWidget()->centerLongitude();
+         qreal  quitLat = m_controlView->marbleWidget()->centerLatitude();
+         int    quitZoom = m_controlView->marbleWidget()->zoom();
+
+         settings.setValue( "quitLongitude", quitLon );
+         settings.setValue( "quitLatitude", quitLat );
+         settings.setValue( "quitZoom", quitZoom );
      settings.endGroup();
      
      settings.beginGroup( "Sun" );
@@ -559,6 +613,42 @@ void MainWindow::writeSettings()
          settings.setValue( "showCitylights", m_controlView->sunLocator()->getCitylights() );
          settings.setValue( "centerOnSun",    m_controlView->sunLocator()->getCentered() );
      settings.endGroup();
+}
+
+void MainWindow::editSettings()
+{
+    // Show the settings dialog.
+    m_configDialog->show();
+    m_configDialog->raise();
+    m_configDialog->activateWindow();
+}
+
+void MainWindow::updateSettings()
+{
+    qDebug() << "Updating Settings ...";
+
+    // FIXME: Font doesn't get updated instantly.
+    m_controlView->marbleWidget()->setDefaultFont( m_configDialog->mapFont() );
+
+    m_controlView->marbleWidget()->setMapQuality( m_configDialog->stillQuality(), Marble::Still );
+    m_controlView->marbleWidget()->setMapQuality( m_configDialog->animationQuality(), Marble::Animation );
+
+    m_controlView->marbleWidget()->setDefaultAngleUnit( m_configDialog->angleUnit() );
+    MarbleGlobal::getInstance()->locale()->setDistanceUnit( m_configDialog->distanceUnit() );
+
+    m_distance = m_controlView->marbleWidget()->distanceString();
+    updateStatusBar();
+
+    m_controlView->marbleWidget()->setAnimationsEnabled( m_configDialog->animateTargetVoyage() );
+
+    // Cache
+    m_controlView->marbleWidget()->setPersistentTileCacheLimit( m_configDialog->persistentTileCacheLimit() * 1024 );
+    m_controlView->marbleWidget()->setVolatileTileCacheLimit( m_configDialog->volatileTileCacheLimit() * 1024 );
+
+    m_controlView->marbleWidget()->setProxy( m_configDialog->proxyUrl(),
+                                             m_configDialog->proxyPort() );
+
+    m_controlView->marbleWidget()->updateChangedMap();
 }
 
 #include "QtMainWindow.moc"

@@ -42,13 +42,13 @@ class MarbleGeoDataModel;
 class MarbleDataFacadePrivate;
 class GeoDataDocument;
 class FileViewModel;
-
+class Planet;
 
 /**
  * @short A read-only interface to internal Marble data.
  *
  * This class provides a read-only interface to some internal data in
- * Marble.  It's intended use is for plugins that should be able to
+ * Marble.  Its intended use is for plugins that should be able to
  * access the data in question, but not change it.
 
  * @see MarbleModel
@@ -65,6 +65,11 @@ class MARBLE_EXPORT MarbleDataFacade
     ~MarbleDataFacade();
 
     qreal planetRadius() const;
+
+    /**
+     * @return a pointer to the current planet
+     */
+    const Planet* planet() const;
 
     QDateTime dateTime() const;
 

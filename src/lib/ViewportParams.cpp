@@ -41,9 +41,9 @@ public:
 
     QSize                m_size;         // width, height
 
-    // FIXME: The usage of the class BoundingBox as a whole is DEPRECATED
-    //        Please use the class GeoDataLatLon(Alt)Box instead! 
-    BoundingBox m_boundingBox;  // What the view currently can see
+
+    bool                 m_dirtyBox;
+    GeoDataLatLonAltBox  m_viewLatLonAltBox;
 
     static SphericalProjection  s_sphericalProjection;
     static EquirectProjection   s_equirectProjection;
@@ -57,7 +57,8 @@ ViewportParamsPrivate::ViewportParamsPrivate()
       m_planetAxisMatrix(),
       m_radius( 2000 ),
       m_size( 100, 100 ),
-      m_boundingBox()
+      m_dirtyBox( true ),
+      m_viewLatLonAltBox()
 {
 } 
 
@@ -97,6 +98,8 @@ AbstractProjection *ViewportParams::currentProjection() const
 
 void ViewportParams::setProjection(Projection newProjection)
 {
+    d->m_dirtyBox = true;
+
     d->m_projection = newProjection;
 
     // Set the pointer to the current projection class.
@@ -174,6 +177,8 @@ int ViewportParams::radius() const
 
 void ViewportParams::setRadius(int newRadius)
 {
+    d->m_dirtyBox = true;
+
     d->m_radius = newRadius;
 
     // Adjust the active Region
@@ -204,6 +209,8 @@ Quaternion ViewportParams::planetAxis() const
 
 bool ViewportParams::setPlanetAxis(const Quaternion &newAxis)
 {
+    d->m_dirtyBox = true;
+
     bool valid = true;
 
     qreal maxLat = currentProjection()->maxLat();
@@ -269,6 +276,8 @@ QSize ViewportParams::size() const
 
 void ViewportParams::setWidth(int newWidth)
 {
+    d->m_dirtyBox = true;
+
     d->m_size.setWidth( newWidth );
 
     // Adjust the active Region
@@ -278,6 +287,8 @@ void ViewportParams::setWidth(int newWidth)
 
 void ViewportParams::setHeight(int newHeight)
 {
+    d->m_dirtyBox = true;
+
     d->m_size.setHeight( newHeight );
 
     // Adjust the active Region
@@ -287,21 +298,13 @@ void ViewportParams::setHeight(int newHeight)
 
 void ViewportParams::setSize(QSize newSize)
 {
+    d->m_dirtyBox = true;
+
     d->m_size = newSize;
 
     // Adjust the active Region
     currentProjection()->helper()->createActiveRegion( this );
     currentProjection()->helper()->createProjectedRegion( this );
-}
-
-BoundingBox ViewportParams::boundingBox() const
-{
-    return d->m_boundingBox;
-}
-
-void ViewportParams::setBoundingBox( const BoundingBox & boundingBox )
-{
-    d->m_boundingBox = boundingBox;
 }
 
 // ================================================================
@@ -322,9 +325,14 @@ void ViewportParams::centerCoordinates( qreal &centerLon, qreal &centerLat ) con
 
 GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
 {
-    return d->m_currentProjection->latLonAltBox( QRect( QPoint( 0, 0 ), 
+    if (d->m_dirtyBox) {
+        d->m_viewLatLonAltBox = d->m_currentProjection->latLonAltBox( QRect( QPoint( 0, 0 ), 
                         d->m_size ),
                         this );
+        d->m_dirtyBox = false;
+    }
+
+    return d->m_viewLatLonAltBox;
 }
 
 qreal ViewportParams::angularResolution() const

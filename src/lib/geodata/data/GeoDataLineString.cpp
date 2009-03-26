@@ -21,16 +21,19 @@ namespace Marble
 GeoDataLineString::GeoDataLineString( TessellationFlags f )
   : GeoDataGeometry( new GeoDataLineStringPrivate( f ) )
 {
+    qDebug() << "1) GeoDataLineString created:" << p();
 }
 
-GeoDataLineString::GeoDataLineString(GeoDataLineStringPrivate* priv)
+GeoDataLineString::GeoDataLineString( GeoDataLineStringPrivate* priv )
   : GeoDataGeometry( priv )
 {
+    qDebug() << "2) GeoDataLineString created:" << p();
 }
 
 GeoDataLineString::GeoDataLineString( const GeoDataGeometry & other )
   : GeoDataGeometry( other )
 {
+    qDebug() << "3) GeoDataLineString created:" << p();
 }
 
 GeoDataLineString::~GeoDataLineString()
@@ -179,12 +182,7 @@ void GeoDataLineString::setTessellationFlags( TessellationFlags f )
 
 GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
 {
-    if (p()->m_dirtyBox) {
-        return GeoDataLatLonAltBox::fromLineString( *this );
-    }
-    p()->m_dirtyBox = false;
-
-    return GeoDataLatLonAltBox();
+    return GeoDataLatLonAltBox::fromLineString( *this );
 }
 
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator pos )

@@ -12,7 +12,6 @@
 #include "WaypointContainer.h"
 
 #include "AbstractLayerData.h"
-#include "BoundingBox.h"
 #include "ClipPainter.h"
 
 using namespace Marble;
@@ -33,16 +32,6 @@ WaypointContainer::~WaypointContainer()
 
 void WaypointContainer::processVisable()
 {
-}
-
-void WaypointContainer::draw( ClipPainter *painter, 
-                           const QSize &canvasSize, ViewParams *viewParams,
-                           const BoundingBox &box )
-{
-    Q_UNUSED( box );
-
-    // FIXME: Use the bounding box.
-    draw( painter, canvasSize, viewParams );
 }
 
 void WaypointContainer::draw( ClipPainter *painter, 

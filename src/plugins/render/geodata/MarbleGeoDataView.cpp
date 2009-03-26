@@ -94,7 +94,7 @@ void MarbleGeoDataView::renderIndex( QModelIndex &index )
 
         if( dynamic_cast<GeoDataGeometry*>( object ) ) {
             if( static_cast<GeoDataGeometry*>( object )->geometryId() != GeoDataMultiGeometryId ) {
-                renderGeoDataGeometry( static_cast<GeoDataGeometry*>( object ), styleUrl );
+                renderGeoDataGeometry( reinterpret_cast<GeoDataGeometry*>( object ), styleUrl );
             } else {
                 if( childIndex.isValid() && model()->rowCount( childIndex ) > 0 ) {
                     renderIndex( childIndex );

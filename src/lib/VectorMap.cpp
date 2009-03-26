@@ -112,15 +112,13 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
     Quaternion  qbound;
 
     viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
-    GeoPolygon::PtrVector::ConstIterator  itPolyLine;
+    GeoPolygon::PtrVector::ConstIterator  itPolyLine = pntmap->constBegin();
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
     //	const int detail = 0;
     const int  detail = getDetailLevel( viewport->radius() );
 
-    for ( itPolyLine = pntmap->constBegin();
-          itPolyLine != itEndPolyLine;
-          ++itPolyLine )
+    for (; itPolyLine != itEndPolyLine; ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
         GeoDataCoordinates::PtrVector boundary = (*itPolyLine)->getBoundary();
@@ -165,16 +163,14 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
     qreal x, y;
 
     viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
-    GeoPolygon::PtrVector::ConstIterator  itPolyLine;
+    GeoPolygon::PtrVector::ConstIterator  itPolyLine = pntmap->constBegin();
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
     ScreenPolygon  boundingPolygon;
     QRectF         visibleArea ( 0, 0, m_imgwidth, m_imgheight );
     const int      detail = getDetailLevel( radius );
 
-    for ( itPolyLine = pntmap->constBegin();
-          itPolyLine != itEndPolyLine;
-          ++itPolyLine )
+    for (; itPolyLine != itEndPolyLine; ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
         m_offset = 0;
@@ -263,16 +259,14 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
     qreal x, y;
 
     viewport->planetAxis().inverse().toMatrix( m_rotMatrix );
-    GeoPolygon::PtrVector::ConstIterator  itPolyLine;
+    GeoPolygon::PtrVector::ConstIterator  itPolyLine = pntmap->constBegin();
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
     ScreenPolygon  boundingPolygon;
     QRectF         visibleArea ( 0, 0, m_imgwidth, m_imgheight );
     const int      detail = getDetailLevel( radius );
 
-    for ( itPolyLine = pntmap->constBegin();
-          itPolyLine != itEndPolyLine;
-          ++itPolyLine )
+    for (; itPolyLine != itEndPolyLine; ++itPolyLine )
     {
         // This sorts out polygons by bounding box which aren't visible at all.
         m_offset = 0;
@@ -370,15 +364,15 @@ GeoDataCoordinates::Vector::ConstIterator  itStartPoint,
 GeoDataCoordinates::Vector::ConstIterator  itEndPoint,
 const int detail, ViewportParams *viewport )
 {
-    GeoDataCoordinates::Vector::const_iterator  itPoint;
-
     int  radius = viewport->radius();
 
     // Quaternion qpos = ( FastMath::haveSSE() == true ) ? QuaternionSSE() : Quaternion();
     Quaternion qpos;
     //	int step = 1;
     //	int remain = size();
-    for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
+
+    GeoDataCoordinates::Vector::const_iterator itPoint = itStartPoint;
+    for (; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
         if ( itPoint->detail() < detail )
             continue;
@@ -449,8 +443,6 @@ void VectorMap::rectangularCreatePolyLine(
     GeoDataCoordinates::Vector::ConstIterator  itEndPoint,
     const int detail, ViewportParams *viewport )
 {
-    GeoDataCoordinates::Vector::const_iterator  itPoint;
-
     Quaternion qpos;
 
     // Calculate translation of center point
@@ -467,7 +459,8 @@ void VectorMap::rectangularCreatePolyLine(
     bool firstPoint = true;
     qreal lon, lat;
 
-    for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
+    GeoDataCoordinates::Vector::const_iterator itPoint = itStartPoint;
+    for (; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
         if ( itPoint->detail() < detail )
 	    continue;
@@ -557,8 +550,6 @@ void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterato
 					const int detail,
 					ViewportParams *viewport )
 {
-    GeoDataCoordinates::Vector::const_iterator  itPoint;
-
     Quaternion qpos;
 
     // Calculate translation of center point
@@ -577,7 +568,8 @@ void VectorMap::mercatorCreatePolyLine( GeoDataCoordinates::Vector::ConstIterato
     qreal  lon;
     qreal  lat;
 
-    for ( itPoint = itStartPoint; itPoint != itEndPoint; ++itPoint ) {
+    GeoDataCoordinates::Vector::const_iterator itPoint = itStartPoint;
+    for (; itPoint != itEndPoint; ++itPoint ) {
         // remain -= step;
         if ( itPoint->detail() < detail )
 	    continue;

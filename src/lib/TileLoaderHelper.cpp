@@ -34,7 +34,7 @@
 namespace Marble
 {
 
-int TileLoaderHelper::levelToRow( const int levelZeroRows, int level )
+int TileLoaderHelper::levelToRow( int levelZeroRows, int level )
 {
     if ( level < 0 ) {
         qDebug() << QString( "TileLoaderHelper::levelToRow(): Invalid level: %1" )
@@ -44,7 +44,7 @@ int TileLoaderHelper::levelToRow( const int levelZeroRows, int level )
     return levelZeroRows << level;
 }
 
-int TileLoaderHelper::levelToColumn( const int levelZeroColumns, int level )
+int TileLoaderHelper::levelToColumn( int levelZeroColumns, int level )
 {
     if ( level < 0 ) {
         qDebug() << QString( "TileLoaderHelper::levelToColumn(): Invalid level: %1" )
@@ -54,7 +54,7 @@ int TileLoaderHelper::levelToColumn( const int levelZeroColumns, int level )
     return levelZeroColumns << level;
 }
 
-int TileLoaderHelper::rowToLevel( const int levelZeroRows, int row )
+int TileLoaderHelper::rowToLevel( int levelZeroRows, int row )
 {
     if ( row < levelZeroRows ) {
         qDebug() << QString( "TileLoaderHelper::rowToLevel(): Invalid number of rows: %1" )
@@ -64,7 +64,7 @@ int TileLoaderHelper::rowToLevel( const int levelZeroRows, int row )
     return (int)( std::log( (qreal)(row / levelZeroRows) ) / std::log( (qreal)2.0 ) );
 }
 
-int TileLoaderHelper::columnToLevel( const int levelZeroColumns, int column )
+int TileLoaderHelper::columnToLevel( int levelZeroColumns, int column )
 {
     if ( column < levelZeroColumns ) {
         qDebug() << QString( "TileLoaderHelper::columnToLevel(): Invalid number of columns: %1" )

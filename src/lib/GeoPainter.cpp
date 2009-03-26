@@ -257,7 +257,7 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal wid
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( isGeoProjected == false ) {
-        // FIXME: Better visibility detection that takes the circle geometry into account
+        // FIXME: Better visibility detection that takes the ellipse geometry into account
         bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
 
         if ( visible ) {

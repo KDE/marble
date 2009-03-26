@@ -16,6 +16,8 @@
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
 
+#include <QtCore/QDebug>
+
 #include "GeoDataMultiGeometry_p.h"
 
 namespace Marble
@@ -45,8 +47,14 @@ int GeoDataMultiGeometry::size() const
     return p()->m_vector.size();
 }
 
+QVector<GeoDataGeometry>& GeoDataMultiGeometry::vector() const
+{
+    return p()->m_vector;
+}
+
 GeoDataGeometry& GeoDataMultiGeometry::at( int pos )
 {
+    qDebug() << "detaching!";
     GeoDataGeometry::detach();
     return p()->m_vector[ pos ];
 }

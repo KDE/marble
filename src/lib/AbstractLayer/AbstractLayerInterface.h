@@ -18,7 +18,6 @@ class QSize;
 namespace Marble
 {
 
-class BoundingBox;
 class ClipPainter;
 class ViewParams;
 
@@ -34,11 +33,7 @@ class AbstractLayerInterface
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize, 
                        ViewParams *viewParams )=0;
-    
-    virtual void draw( ClipPainter *painter, 
-                       const QSize &canvasSize, ViewParams *viewParams,
-                       const BoundingBox &box )=0;
-    
+        
     virtual void printToStream( QTextStream& ) const;
     
     bool visible() const;

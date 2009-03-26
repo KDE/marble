@@ -34,10 +34,8 @@
 // Marble
 #include "AbstractProjection.h"
 #include "AbstractScanlineTextureMapper.h"
-#include "BoundingBox.h"
 #include "GeoPainter.h"
 #include "FileViewModel.h"
-#include "FileStoragePolicy.h"
 #include "GeoDataFeature.h"
 #include "GeoDataCoordinates.h"
 #include "GeoSceneDocument.h"
@@ -51,6 +49,7 @@
 #include "MarblePlacemarkModel.h"
 #include "MeasureTool.h"
 #include "MergedLayerDecorator.h"
+#include "Planet.h"
 #include "Quaternion.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
@@ -72,7 +71,7 @@ using namespace Marble;
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent )
         : m_parent( parent ),
-          m_persistentTileCacheLimit( 1024*1024*300 ), // 300 MB
+          m_persistentTileCacheLimit( 0 ), // No limit
           m_volatileTileCacheLimit( 1024*1024*30 ) // 30 MB
 {
 }
@@ -86,9 +85,6 @@ void MarbleMapPrivate::construct()
                        m_parent, SIGNAL( themeChanged( QString ) ) );
     m_parent->connect( m_model, SIGNAL( modelChanged() ),
                        m_parent, SLOT( updateChangedMap() ) );
-
-    m_parent->connect( m_model, SIGNAL( regionChanged( BoundingBox& ) ) ,
-                       m_parent, SLOT( updateRegion( BoundingBox& ) ) );
 
     m_justModified = false;
 
@@ -111,6 +107,14 @@ void MarbleMapPrivate::construct()
                        m_parent,              SLOT( updateSun() ) );
     m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
                        m_parent,              SLOT( centerSun() ) );
+
+    // A new instance of FileStorageWatcher.
+    // The thread will be started at setting persistent tile cache size.
+    m_storageWatcher = new FileStorageWatcher( MarbleDirs::localPath(), m_parent );
+    m_parent->connect( m_parent, SIGNAL( themeChanged( QString ) ),
+		       m_storageWatcher, SLOT( updateTheme( QString ) ) );
+    // Setting the theme to the current theme.
+    m_storageWatcher->updateTheme( m_parent->mapThemeId() );
 }
 
 // Used to be resizeEvent()
@@ -242,36 +246,6 @@ void MarbleMapPrivate::drawFog( QPainter &painter )
     painter.restore();
 }
 
-void MarbleMapPrivate::setBoundingBox()
-{
-    QVector<QPointF>  points;
-    Quaternion        temp;
-
-    if ( m_parent->globalQuaternion( 0, 0, temp) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-    if ( m_parent->globalQuaternion( m_parent->width() / 2, 0, temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    if ( m_parent->globalQuaternion( m_parent->width(), 0, temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-    if ( m_parent->globalQuaternion( 0, m_parent->height(), temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    if ( m_parent->globalQuaternion( m_parent->width()/2, m_parent->height(), temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    if ( m_parent->globalQuaternion( m_parent->width(), m_parent->height(), temp ) ) {
-        points.append( QPointF( temp.v[Q_X], temp.v[Q_Y]) );
-    }
-
-    m_viewParams.viewport()->setBoundingBox( BoundingBox( points ) );
-}
-
 void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
 {
     if ( !m_viewParams.mapTheme() ) {
@@ -279,11 +253,6 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
         paintMarbleSplash( painter, dirtyRect );
         return;
     }
-
-    bool  doClip = false;
-    if ( m_viewParams.projection() == Spherical )
-        doClip = ( m_viewParams.radius() > m_viewParams.canvasImage()->width() / 2
-                   || m_viewParams.radius() > m_viewParams.canvasImage()->height() / 2 );
 
     m_model->paintGlobe( &painter,
                          m_parent->width(), m_parent->height(), &m_viewParams,
@@ -320,10 +289,6 @@ void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect)
     }
 
     m_measureTool->paint( &painter, m_viewParams.viewport(), antialiased );
-
-    // FIXME: Get rid of this:
-    // Set the Bounding Box 
-    setBoundingBox();
 }
 
 void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps)
@@ -526,7 +491,7 @@ qreal MarbleMap::distance() const
 
     const qreal VIEW_ANGLE = 110.0;
 
-    return ( model()->planetRadius() * 0.4
+    return ( model()->planet()->radius() * 0.4
             / (qreal)( radius() )
             / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
 }
@@ -535,7 +500,7 @@ void MarbleMap::setDistance( qreal distance )
 {
     const qreal VIEW_ANGLE = 110.0;
 
-    setRadius( (int)( model()->planetRadius() * 0.4
+    setRadius( (int)( model()->planet()->radius() * 0.4
             / distance
             / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) ) );
 }
@@ -594,11 +559,16 @@ void MarbleMap::removePlacemarkKey( const QString &key )
 
 QPixmap MarbleMap::mapScreenShot()
 {
-#if 0  //FIXME: reimplement without grabWidget
-    return QPixmap::grabWidget( this );
-#else
-    return QPixmap();
-#endif
+    QPixmap screenshotPixmap( size() );
+    screenshotPixmap.fill( Qt::transparent );
+
+    GeoPainter painter( &screenshotPixmap, viewParams()->viewport(), Marble::Print );
+    painter.begin( &screenshotPixmap );
+    QRect dirtyRect( QPoint(), size() );
+    paint( painter, dirtyRect );
+    painter.end();
+
+    return screenshotPixmap;
 }
 
 bool MarbleMap::propertyValue( const QString& name ) const
@@ -643,8 +613,8 @@ bool MarbleMap::showCrosshairs() const
     bool visible = false;
 
     QList<MarbleRenderPlugin *> pluginList = renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
         if ( (*i)->nameId() == "crosshairs" ) {
             visible = (*i)->visible();
         }
@@ -919,33 +889,6 @@ bool MarbleMap::geoCoordinates( int x, int y,
                           lon, lat, unit );
 }
 
-bool MarbleMap::globalQuaternion( int x, int y, Quaternion &q)
-{
-    int  imageHalfWidth  = width() / 2;
-    int  imageHalfHeight = height() / 2;
-
-    const qreal  inverseRadius = 1.0 / (qreal)(radius());
-
-    if ( radius() > sqrt( (qreal)(( x - imageHalfWidth ) * ( x - imageHalfWidth )
-        + ( y - imageHalfHeight ) * ( y - imageHalfHeight )) ) )
-    {
-        qreal qx = inverseRadius * (qreal)( x - imageHalfWidth );
-        qreal qy = inverseRadius * (qreal)( y - imageHalfHeight );
-        qreal qr = 1.0 - qy * qy;
-
-        qreal qr2z = qr - qx * qx;
-        qreal qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
-
-        Quaternion  qpos( 0.0, qx, qy, qz );
-        qpos.rotateAroundAxis( planetAxis() );
-        q = qpos;
-
-        return true;
-    } else {
-        return false;
-    }
-}
-
 // Used to be paintEvent()
 void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
 {
@@ -1031,8 +974,8 @@ void MarbleMap::setShowAtmosphere( bool visible )
 void MarbleMap::setShowCrosshairs( bool visible )
 {
     QList<MarbleRenderPlugin *> pluginList = renderPlugins();
-    QList<MarbleRenderPlugin *>::const_iterator i;
-    for (i = pluginList.constBegin(); i != pluginList.constEnd(); ++i) {
+    QList<MarbleRenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
         if ( (*i)->nameId() == "crosshairs" ) {
             (*i)->setVisible( visible );
         }
@@ -1050,7 +993,13 @@ void MarbleMap::setShowClouds( bool visible )
         d->m_model->update();
     }
 }
+void MarbleMap::setShowTileId( bool visible )
+{
 
+    d->m_model->layerDecorator()->setShowTileId( visible );
+
+
+}
 void MarbleMap::setShowGrid( bool visible )
 {
     setPropertyValue( "coordinate-grid", visible );
@@ -1185,6 +1134,17 @@ void MarbleMap::clearPersistentTileCache()
 void MarbleMap::setPersistentTileCacheLimit( quint64 kiloBytes )
 {
     d->m_persistentTileCacheLimit = kiloBytes;
+    d->m_storageWatcher->setCacheLimit( kiloBytes * 1024 );
+    
+    if( kiloBytes != 0 )
+    {
+	if( !d->m_storageWatcher->isRunning() )
+	    d->m_storageWatcher->start( QThread::IdlePriority );
+    }
+    else
+    {
+	d->m_storageWatcher->quit();
+    }
     // TODO: trigger update
 }
 
@@ -1206,17 +1166,6 @@ void MarbleMap::updateChangedMap()
     setNeedsUpdate();
 }
 
-void MarbleMap::updateRegion( BoundingBox &box )
-{
-    Q_UNUSED(box);
-    //really not sure if this is nessary as it is designed for
-    //placemark based layers
-    setNeedsUpdate();
-
-    /*TODO: write a method for BoundingBox to cacluate the screen
-     *region and pass that to update()*/
-}
-
 void MarbleMap::setDownloadUrl( const QString &url )
 {
     setDownloadUrl( QUrl( url ) );
@@ -1228,8 +1177,16 @@ void MarbleMap::setDownloadUrl( const QUrl &url )
     if ( downloadManager != 0 )
         downloadManager->setServerUrl( url );
     else {
+        d->m_storagePolicy = new FileStoragePolicy( MarbleDirs::localPath(), this );
+	
+	// Connecting the new FileStoragePolicy to the FileStorageWatcher
+	connect( d->m_storagePolicy, SIGNAL( cleared() ),
+	         d->m_storageWatcher, SLOT( resetCurrentSize() ) );
+	connect( d->m_storagePolicy, SIGNAL( sizeChanged( qint64 ) ),
+		 d->m_storageWatcher, SLOT( addToCurrentSize( qint64 ) ) );
+
         downloadManager =
-            new HttpDownloadManager( url, new FileStoragePolicy( MarbleDirs::localPath() ) );
+            new HttpDownloadManager( url, d->m_storagePolicy );
         d->m_model->setDownloadManager( downloadManager );
     }
 }
@@ -1248,7 +1205,7 @@ QString MarbleMap::distanceString() const
     // reality. Therefore we assume that the average window width
     // (about 800 pixels) equals the viewing angle of a human being.
     //
-    qreal distance = ( model()->planetRadius() * 0.4
+    qreal distance = ( model()->planet()->radius() * 0.4
 			/ (qreal)( radius() )
 			/ tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
 

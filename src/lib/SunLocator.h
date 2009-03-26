@@ -29,6 +29,7 @@ namespace Marble
 {
 class ExtDateTime;
 class SunLocatorPrivate;
+class Planet;
 
 class MARBLE_EXPORT SunLocator : public QObject
 {
@@ -38,19 +39,19 @@ class MARBLE_EXPORT SunLocator : public QObject
     /** At the moment Sunlocator does not take ownership of dateTime.
 	However in the destructor there is a delete commented out.
 	So strictly Q_DISABLE_COPY is not necessary in this class.
-	FIXME: clearify this issue.
+	FIXME: clarify this issue.
     */
-    explicit SunLocator(ExtDateTime *dateTime);
+    explicit SunLocator(ExtDateTime *dateTime, Planet *planet);
     virtual ~SunLocator();
 
-    qreal shading(qreal lon, qreal lat) const;
+    qreal shading(qreal lon, qreal a, qreal c) const;
     void  shadePixel(QRgb& pixcol, qreal shade) const;
     void  shadePixelComposite(QRgb& pixcol, QRgb& dpixcol, qreal shade) const;
 
     void  setShow(bool show);
     void  setCitylights(bool show);
     void  setCentered(bool show);
-    void  setBody(QString body);
+    void  setPlanet(Planet *planet);
 
     bool getShow() const;
     bool getCitylights() const;
@@ -59,6 +60,8 @@ class MARBLE_EXPORT SunLocator : public QObject
     qreal getLat() const;
 
     ExtDateTime* datetime() const;
+
+    Planet* planet() const;
 
  public Q_SLOTS:
     void update();

@@ -11,7 +11,6 @@
 #include "AbstractLayerContainer.h"
 
 #include "AbstractLayerData.h"
-#include "BoundingBox.h"
 #include "ClipPainter.h"
 
 #include <QtCore/QBitArray>
@@ -24,8 +23,6 @@ AbstractLayerContainer::AbstractLayerContainer( int size )
 {
     m_data = new QVector<AbstractLayerData*>( size );
     m_visible = new QBitArray( size );
-    m_boundingBox = new BoundingBox();
-
     m_name = 0;
 }
 
@@ -34,7 +31,6 @@ AbstractLayerContainer::AbstractLayerContainer(const QString &name,
 {
     m_data = new QVector<AbstractLayerData*>( size );
     m_visible = new QBitArray( size );
-    m_boundingBox = new BoundingBox();
 
     m_name = new QString ( name );
 }
@@ -44,7 +40,6 @@ AbstractLayerContainer::~AbstractLayerContainer()
     delete m_visible;
     delete m_data;
     delete m_name;
-    delete m_boundingBox;
 }
 
 void AbstractLayerContainer::draw ( ClipPainter *painter, 
@@ -61,24 +56,21 @@ void AbstractLayerContainer::draw(ClipPainter *painter,
                                   const QSize &canvasSize, 
                                   ViewParams *viewParams )
 {
-    const_iterator it;
-
-    for( it = constBegin() ; it < constEnd() ; ++it ) {
-        (*it)->draw( painter, canvasSize, viewParams );
-    }
-}
-
-void AbstractLayerContainer::draw(ClipPainter *painter,
-                                  const QSize &canvasSize,
-                                  ViewParams *viewParams,
-                                  const BoundingBox &box )
-{
+    // FIXME: Readd this:
+    /*
     if ( box.isValid() ) {
         if ( m_boundingBox->intersects( box ) ) {
             draw( painter, canvasSize, viewParams );
         }
     } else { 
         draw( painter, canvasSize, viewParams );
+    }
+    */
+
+    const_iterator it;
+
+    for( it = constBegin() ; it < constEnd() ; ++it ) {
+        (*it)->draw( painter, canvasSize, viewParams );
     }
 }
 
@@ -123,22 +115,6 @@ qreal AbstractLayerContainer::distance ( const QPointF &a,
 {
     return (  ( ( a.x() - b.x() ) * ( a.x() - b.x() ) )
             + ( ( a.y() - b.y() ) * ( a.y() - b.y() ) ) );
-}
-
-void AbstractLayerContainer::createBoundingBox()
-{
-    m_boundingBox = new BoundingBox( geoCoord() );
-}
-
-QVector<QPointF> AbstractLayerContainer::geoCoord()
-{
-    QVector<QPointF> temp;
-    
-    for ( const_iterator it = constBegin() ; it < constEnd(); ++it ) {
-        temp.append( QPointF( (*it)->position().quaternion().v[Q_X],
-                              (*it)->position().quaternion().v[Q_Y]));
-    }
-    return temp;
 }
 
 void AbstractLayerContainer::manageMemory()

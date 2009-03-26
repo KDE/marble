@@ -46,7 +46,6 @@ namespace Marble
 {
 
 class AbstractScanlineTextureMapper;
-class BoundingBox;
 class GeoPainter;
 class FileViewModel;
 class GpsLayer;
@@ -67,6 +66,7 @@ class MarbleAbstractFloatItem;
 class GeoDataDocument;
 class GeoSceneDocument;
 class GeoSceneTexture;
+class Planet;
 
 /**
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -156,15 +156,14 @@ class MARBLE_EXPORT MarbleModel : public QObject
     /**
      * @brief Set a new map theme to use.
      * @param selectedMap  the identifier of the selected map theme
-     * @param parent       the parent widget
      * @param currentProjection  the current projection
      *
      * This function sets the map theme, i.e. combination of tile set
      * and color scheme to use.  If the map theme is not previously
      * used, some basic tiles are created and a progress dialog is
-     * shown.  This is what the parent parameter is used for.
+     * shown.
      *
-     * NOTE: Both the parent and currentProjection parameters will
+     * NOTE: The currentProjection parameters will
      *       disappear soon.
      *
      * The ID of the new maptheme. To ensure that a unique 
@@ -264,6 +263,12 @@ class MARBLE_EXPORT MarbleModel : public QObject
     QList<MarbleRenderPlugin *>      renderPlugins() const;
     QList<MarbleAbstractFloatItem *> floatItems() const;
 
+    /**
+     * @brief Returns the planet object for the current map.
+     * @return the planet object for the current map
+     */
+    Planet* planet() const;
+
  public Q_SLOTS:
     void clearVolatileTileCache();
     /**
@@ -296,7 +301,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     /**
      * @brief Signal that the map theme has changed, and to which theme.
-     * @param name the identifier of the new map theme.
+     * @param mapTheme the identifier of the new map theme.
      * @see  mapTheme
      * @see  setMapTheme
      */
@@ -305,14 +310,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Signal that the MarbleModel has changed in general
      */
     void modelChanged();
-    /**
-     * @brief Signal that a region of the earth has changed
-     * @param rect the region that changed.
-     *
-     * This is currently used only for gpx files, but will likely be
-     * used for more things in the future.
-     */
-    void regionChanged( BoundingBox &rect );
 
     /**
      * @brief Signal that a timer has gone off.

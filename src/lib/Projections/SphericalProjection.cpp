@@ -169,12 +169,13 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
 
 
 bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString, 
-                                    const ViewportParams *viewport,
-                                    QVector<QPolygonF *> &polygons )
+                                                  const ViewportParams *viewport,
+                                                  QVector<QPolygonF *> &polygons )
 {
     // Compare bounding box size of the line string with the angularResolution
     // Immediately return if the latLonAltBox is smaller.
 
+    qDebug() << lineString.geometryId();
     if ( !viewport->resolves( lineString.latLonAltBox() ) ) {
 //      qDebug() << "Object too small to be resolved";
         return false;
@@ -298,8 +299,8 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                     if ( distance > precision ) {
     //                    qDebug() << "Distance: " << distance;
                         *polygon << tessellateLineSegment( previousCoords, currentCoords, 
-                                                        suggestedCount, viewport,
-                                                        lineString.tessellationFlags() );
+                                                           suggestedCount, viewport,
+                                                           lineString.tessellationFlags() );
                     }
                 }
             }

@@ -56,6 +56,7 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry {
     QVector<GeoDataGeometry>::ConstIterator constBegin() const;
     QVector<GeoDataGeometry>::ConstIterator constEnd() const;
     void clear();
+    QVector<GeoDataGeometry>& vector() const;
 
     QVector<GeoDataGeometry>::Iterator erase ( QVector<GeoDataGeometry>::Iterator pos );
     QVector<GeoDataGeometry>::Iterator erase ( QVector<GeoDataGeometry>::Iterator begin,

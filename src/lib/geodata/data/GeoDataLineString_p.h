@@ -43,12 +43,12 @@ class GeoDataLineStringPrivate : public Marble::GeoDataGeometryPrivate
     }
 
     QVector<GeoDataCoordinates> m_vector;
-    bool         m_dirtyBox; // tells whether there have been changes to the
-                             // GeoDataPoints since the LatLonAltBox has 
-                             // been calculated. Saves performance. 
-    TessellationFlags m_tessellationFlags;
+    bool                        m_dirtyBox; // tells whether there have been changes to the
+                                            // GeoDataPoints since the LatLonAltBox has 
+                                            // been calculated. Saves performance. 
+    TessellationFlags           m_tessellationFlags;
 };
 
 } // namespace Marble
 
-#endif //GeoDataLineStringPRIVATE_H
+#endif //GEODATALINESTRINGPRIVATE_H

@@ -9,7 +9,7 @@
 
 jsonParser::jsonParser()
 {
-   myEngine.setProcessEventsInterval(10);//this lets the gui remain responsive
+//   myEngine.setProcessEventsInterval(10);//this lets the gui remain responsive
 }
 
 jsonParser::~jsonParser()
@@ -24,11 +24,12 @@ panoramioDataStructure jsonParser::parseObjectOnPosition(const QString &content 
     myEngine.evaluate(QString("function height(x){return myJSONObject.photos[x].height};"));
     myEngine.evaluate(QString("function latitude(x){return myJSONObject.photos[x].latitude};"));
     myEngine.evaluate(QString("function longitude (x){return myJSONObject.photos[x].longitude};"));
-   myEngine.evaluate(QString("function owner_id(x){return myJSONObject.photos[x].owner_id};"));
-   myEngine.evaluate(QString("function photo_file_url(x){return myJSONObject.photos[x].photo_file_url};"));
+    myEngine.evaluate(QString("function owner_id(x){return myJSONObject.photos[x].owner_id};"));
+    myEngine.evaluate(QString("function photo_file_url(x){return myJSONObject.photos[x].photo_file_url};"));
+    myEngine.evaluate(QString("function photo_title(x){return myJSONObject.photos[x].photo_title};"));
 
 	
-     dataStorage.count = myEngine.evaluate("count();").toInteger();
+    dataStorage.count = myEngine.evaluate("count();").toInteger();
 
 /*    dataStorage.height = myEngine.evaluate(QString("return myJSONObject.photos[")
                                            + QString::number(requiredObjectPosition)
@@ -72,7 +73,9 @@ panoramioDataStructure jsonParser::parseObjectOnPosition(const QString &content 
 	dataStorage.longitude=myEngine.evaluate(QString("longitude(x)")).toNumber();
 	dataStorage.latitude=myEngine.evaluate(QString("latitude(x)")).toNumber();
 	dataStorage.photo_file_url=myEngine.evaluate(QString("photo_file_url(x)")).toString();
-//qDebug()<<":::::::"<<myEngine.evaluate("longitude(x)").toNumber();
+	dataStorage.photo_title=myEngine.evaluate(QString("photo_title(x)")).toString();
+
+qDebug()<<":::::::"<<__func__<<myEngine.evaluate("longitude(x)").toNumber();
     return dataStorage;
 }
 

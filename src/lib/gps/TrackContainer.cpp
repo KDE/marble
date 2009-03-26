@@ -13,7 +13,6 @@
 #include <QtCore/QDebug>
 
 #include "AbstractLayerData.h"
-#include "BoundingBox.h"
 
 using namespace Marble;
 
@@ -21,17 +20,6 @@ using namespace Marble;
 TrackContainer::TrackContainer() : AbstractLayerContainer()
 {
 }*/
-
-void TrackContainer::draw( ClipPainter *painter, 
-                           const QSize &canvasSize, ViewParams *viewParams,
-                           const BoundingBox &box )
-{
-    const_iterator it;
-
-    for( it = constBegin() ; it < constEnd() ; ++it ) {
-        (*it)->draw( painter, canvasSize, viewParams, box);
-    }
-}
 
 void TrackContainer::draw( ClipPainter *painter, 
                            const QSize &canvasSize,

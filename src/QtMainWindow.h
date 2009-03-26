@@ -29,6 +29,7 @@ namespace Marble
 class MarbleWidget;
 class SunControlWidget;
 class MarbleAbstractFloatItem;
+class QtMarbleConfigDialog;
 
 class MainWindow : public QMainWindow
 {
@@ -59,6 +60,8 @@ class MainWindow : public QMainWindow
 
  private Q_SLOTS:
     void  initObject();
+    void  editSettings();
+    void  updateSettings();
     void  exportMapScreenShot();
     void  printMapScreenShot();
     void  copyMap();
@@ -75,8 +78,7 @@ class MainWindow : public QMainWindow
     void  aboutMarble();
     void  openFile();
     void  setupStatusBar();
-
-    void createInfoBoxesMenu();
+    void  createInfoBoxesMenu();
 
  private:
     ControlView *m_controlView;
@@ -84,20 +86,31 @@ class MainWindow : public QMainWindow
 
     QMenu *m_fileMenu;
     QMenu *m_helpMenu;
+    QMenu *m_settingsMenu;
     QMenu *m_infoBoxesMenu;
 
+    // File Menu
     QAction *m_exportMapAct;
     QAction *m_printAct;
+    QAction *m_workOfflineAct;
     QAction *m_quitAct;
+
+    // Edit Menu
     QAction *m_copyMapAct;
     QAction *m_copyCoordinatesAct;
+
+    // View Menu
+    QAction *m_showCloudsAct;
+    QAction *m_showAtmosphereAct;
+    QAction *m_controlSunAct;
+
+    // Settings Menu
     QAction *m_sideBarAct;
     QAction *m_fullScreenAct;
     QAction *m_statusBarAct;
-    QAction *m_showCloudsAct;
-    QAction *m_workOfflineAct;
-    QAction *m_showAtmosphereAct;
-    QAction *m_controlSunAct;
+    QAction *m_configDialogAct;
+
+    // Help Menu
     QAction *m_whatsThisAct;
     QAction *m_aboutMarbleAct;
     QAction *m_aboutQtAct;
@@ -109,6 +122,8 @@ class MainWindow : public QMainWindow
     // Zoom label for the statusbar.
     QLabel       *m_positionLabel;
     QLabel       *m_distanceLabel;
+    
+    QtMarbleConfigDialog *m_configDialog;
 
     void updateStatusBar();
 };

@@ -16,6 +16,8 @@
 
 #include "ViewParams.h"
 #include "TextureColorizer.h"
+#include "FileStoragePolicy.h"
+#include "FileStorageWatcher.h"
 
 class QPainter;
 class QRect;
@@ -79,6 +81,8 @@ class MarbleMapPrivate
     MeasureTool     *m_measureTool;
 
     // Cache related
+    FileStoragePolicy   *m_storagePolicy; 
+    FileStorageWatcher  *m_storageWatcher;
     quint64          m_persistentTileCacheLimit;
     quint64          m_volatileTileCacheLimit;
 };

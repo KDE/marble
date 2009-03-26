@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>PlaceMarkInfoDialog</class>
- <widget class="QDialog" name="PlaceMarkInfoDialog" >
+ <class>PlacemarkInfoDialog</class>
+ <widget class="QDialog" name="PlacemarkInfoDialog" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -513,7 +513,7 @@ p, li { white-space: pre-wrap; }
   <connection>
    <sender>m_pButtonBox</sender>
    <signal>accepted()</signal>
-   <receiver>PlaceMarkInfoDialog</receiver>
+   <receiver>PlacemarkInfoDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -529,7 +529,7 @@ p, li { white-space: pre-wrap; }
   <connection>
    <sender>m_pButtonBox</sender>
    <signal>rejected()</signal>
-   <receiver>PlaceMarkInfoDialog</receiver>
+   <receiver>PlacemarkInfoDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >

@@ -6,12 +6,14 @@
 // the source code.
 //
 // Copyright 2007      Tobias Koenig <tokoe@kde.org>"
+// Copyright 2009      Bastian Holst <bastianholst@gmx.de
 //
 
 #ifndef STORAGEPOLICY_H
 #define STORAGEPOLICY_H
 
 
+#include <QtCore/QObject>
 #include <QtCore/QString>
 
 
@@ -20,9 +22,13 @@ class QByteArray;
 namespace Marble
 {
 
-class StoragePolicy
+class StoragePolicy : public QObject
 {
+    Q_OBJECT
+    
     public:
+	StoragePolicy( QObject *parent = 0 );
+	
         virtual ~StoragePolicy() {}
 
         virtual bool fileExists( const QString &fileName ) const = 0;
@@ -32,6 +38,13 @@ class StoragePolicy
 	virtual void clearCache() = 0;
 
         virtual QString lastErrorMessage() const = 0;
+	
+    Q_SIGNALS:
+	void cleared();
+	void sizeChanged( qint64 );
+	
+    private:
+	Q_DISABLE_COPY( StoragePolicy )
 };
 
 }

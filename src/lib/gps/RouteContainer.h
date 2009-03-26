@@ -24,18 +24,10 @@ namespace Marble
 class RouteContainer : public virtual AbstractLayerContainer
 {
  public:
-     /*
-     virtual void draw ( ClipPainter *painter, const QPoint &point);
-     */
-    /*
-     virtual void draw( ClipPainter *painter, 
-                        const QSize &canvasSize, qreal radius,
-                        Quaternion invRotAxis );*/
     
      virtual void draw( ClipPainter *painter, 
                         const QSize &canvasSize,
-                        ViewParams *viewParams,
-                        const BoundingBox &box );
+                        ViewParams *viewParams );
 };
 
 }

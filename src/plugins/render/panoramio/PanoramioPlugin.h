@@ -22,7 +22,8 @@
 // #include "../lib/HttpJob.h"
 #include "jsonparser.h"
 #include "MarbleRenderPlugin.h"
-
+#include <QWidget>
+#include <QLabel>
 namespace Marble
 {
 
@@ -76,9 +77,12 @@ private:
     QList <panoramioDataStructure> parsedData;
     panoramioDataStructure temp;
     QPixmap tempImage;
+    QLabel tempLabel;
     int flag;//this flag is one when globe has an Image  (downloaded or already there in cache)
 //         HttpJob *job;
     int numberOfImagesToShow;//this factor stires how many are to be downloaded and shown on the globe
+    QWidget *parent;
+    QList<QLabel>images;//these widgets are supposed to show draw images and take click events 
 };
 
 }

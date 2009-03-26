@@ -230,7 +230,7 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
     else
         parentItem = static_cast<GeoDataObject*>( parent.internalPointer() );
 
-    GeoDataObject *childItem = 0;
+    GeoDataObject *childItem;
 
     /* go down into GeoDataContainers */
     if( dynamic_cast<GeoDataFeature*>( parentItem ) ) {
@@ -248,9 +248,13 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
         };
     } else if( dynamic_cast<GeoDataGeometry*>( parentItem ) ) {
         if( dynamic_cast<GeoDataGeometry*>( parentItem )->geometryId() == GeoDataMultiGeometryId ) {
+            qDebug() << "making new MulitGeometry object:";
             GeoDataMultiGeometry geom = *static_cast<GeoDataGeometry*>( parentItem );
-            childItem = &geom.at( row );
+            childItem = &geom.vector()[ row ];
+            qDebug() << "casting geometryObject:" << childItem;
         }
+    } else {
+        childItem = 0;
     }
     
     if ( childItem )

@@ -51,7 +51,7 @@ class MarblePlacemarkModel::Private
 
 
 MarblePlacemarkModel::MarblePlacemarkModel( PlacemarkManager *manager, 
-					    QObject *parent )
+                                            QObject *parent )
     : QAbstractListModel( parent ),
       d( new Private( manager, this ) )
 {
@@ -158,8 +158,8 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
 }
 
 QModelIndexList MarblePlacemarkModel::approxMatch( const QModelIndex & start, int role, 
-					     const QVariant & value, int hits,
-					     Qt::MatchFlags flags ) const
+                                             const QVariant & value, int hits,
+                                             Qt::MatchFlags flags ) const
 {
     QList<QModelIndex> results;
 
@@ -209,9 +209,7 @@ void MarblePlacemarkModel::addPlacemarks( PlacemarkContainer &placemarks,
     }
 
     beginInsertRows( QModelIndex(), 0, placemarks.count() - 1 );
-
     createFilterProperties( placemarks );
-
     d->m_placemarkContainer << placemarks;
 
     endInsertRows();

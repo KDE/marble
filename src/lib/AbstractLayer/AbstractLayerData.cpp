@@ -15,7 +15,6 @@
 #include <QtCore/QDebug>
 
 #include "ClipPainter.h"
-#include "BoundingBox.h"
 #include "ViewParams.h"
 
 using namespace Marble;
@@ -59,20 +58,6 @@ void AbstractLayerData::draw(ClipPainter *painter,
     Q_UNUSED( viewParams );
 
     //qDebug() <<"in AbstractLayerData::draw() without bounding box";
-}
-
-void AbstractLayerData::draw( ClipPainter *painter, 
-                              const QSize &canvasSize,
-                              ViewParams *viewParams,
-                              const BoundingBox &box )
-{
-    // Does not apply to abstractLayerData
-    Q_UNUSED( painter );
-    Q_UNUSED( canvasSize );
-    Q_UNUSED( viewParams );
-    Q_UNUSED( box );
-
-    //qDebug() <<"in AbstractLayerData::draw() with bounding box";
 }
 
 bool AbstractLayerData::visible() const

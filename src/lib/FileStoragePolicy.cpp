@@ -20,12 +20,14 @@
 #include <QtCore/QFileInfo>
 
 // Marble
+#include "global.h"
 #include "MarbleDirs.h"
 
 using namespace Marble;
 
-FileStoragePolicy::FileStoragePolicy( const QString &dataDirectory )
-    : m_dataDirectory( dataDirectory )
+FileStoragePolicy::FileStoragePolicy( const QString &dataDirectory, QObject *parent )
+    : StoragePolicy( parent ),
+      m_dataDirectory( dataDirectory )
 {
     if ( m_dataDirectory.isEmpty() )
         m_dataDirectory = MarbleDirs::localPath() + "/cache/";
@@ -65,13 +67,17 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
         // qDebug() << "file.open" << m_errorMsg;
         return false;
     }
+    
+    quint64 oldSize = file.size();
 
     if ( !file.write( data ) ) {
         m_errorMsg = QString( "%1: %2" ).arg( fullName ).arg( file.errorString() );
         // qDebug() << "file.write" << m_errorMsg;
+	emit sizeChanged( file.size() - oldSize );
         return false;
     }
-
+    
+    emit sizeChanged( file.size() - oldSize );
     file.close();
 
     return true;
@@ -101,7 +107,7 @@ void FileStoragePolicy::clearCache()
                 itTheme.next();
                 QString tileDirectory = itTheme.filePath();
 
-                if ( itTheme.fileName().toInt() < 5 ) {
+                if ( itTheme.fileName().toInt() <= maxBaseTileLevel ) {
                     continue;
                 }
 
@@ -109,15 +115,19 @@ void FileStoragePolicy::clearCache()
                 while (itTile.hasNext()) {
                     itTile.next();
                     QString filePath = itTile.filePath();
+		    QString lowerCase = filePath.toLower();
 
                     // We try to be very careful and just delete images
-                    if ( filePath.toLower().endsWith( ".jpg" ) 
-                      || filePath.toLower().endsWith( ".png" )
-                      || filePath.toLower().endsWith( ".gif" )
-                      || filePath.toLower().endsWith( ".svg" )
+                    if ( lowerCase.endsWith( ".jpg" ) 
+                      || lowerCase.endsWith( ".png" )
+                      || lowerCase.endsWith( ".gif" )
+                      || lowerCase.endsWith( ".svg" )
                     )
                     {
-                        QFile::remove( filePath );
+			// We cannot emit clear, because we don't make a full clear
+			QFile file( filePath );
+			emit sizeChanged( -file.size() );
+                        file.remove();
                     }
                 }
             }
@@ -129,3 +139,5 @@ QString FileStoragePolicy::lastErrorMessage() const
 {
     return m_errorMsg;
 }
+
+#include "FileStoragePolicy.moc"

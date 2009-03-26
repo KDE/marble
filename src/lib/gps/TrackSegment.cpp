@@ -12,7 +12,6 @@
 #include "AbstractLayer/AbstractLayer.h"
 #include "ClipPainter.h"
 #include "MarbleDirs.h"
-#include "BoundingBox.h"
 
 #include <QtCore/QPoint>
 #include <QtGui/QBrush>
@@ -68,27 +67,6 @@ void TrackSegment::draw( ClipPainter *painter,
     }
 
     delete previous;
-}
-
-void TrackSegment::draw(ClipPainter *painter, 
-                        const QSize &canvasSize, ViewParams *viewParams,
-                        const BoundingBox &box)
-{
-    
-    if ( box.isValid() && m_boundingBox->isValid() ) {
-        if ( box.intersects( *m_boundingBox ) ) {
-            draw( painter, canvasSize, viewParams );
-        }
-        else {
-            
-            return;
-        }
-    }
-    else {
-        //bouding box doesn't work so draw anyway
-        draw( painter, canvasSize, viewParams );
-    }
-   
 }
 
 void TrackSegment::draw( ClipPainter*, const QPoint& )

@@ -16,7 +16,6 @@
 
 // Other
 #include "AbstractFileViewItem.h"
-#include "BoundingBox.h"
 
 using namespace Marble;
 
@@ -99,11 +98,10 @@ bool FileViewModel::setData( const QModelIndex& index, const QVariant& value, in
                 bool newValue = value.toBool ();
 
                 if ( item.isShown() != newValue ) {
-                    BoundingBox  box;
 
                     item.setShown( newValue );
                     emit dataChanged( index, index );
-                    emit updateRegion( box );
+                    emit modelChanged();
                     return true;
                 }
             }
@@ -120,11 +118,9 @@ void FileViewModel::setSelectedIndex( const QModelIndex& index )
 
 void FileViewModel::append( AbstractFileViewItem* item )
 {
-    BoundingBox  box;
-
     m_itemList.append( item );
     emit layoutChanged();
-    emit updateRegion( box );
+    emit modelChanged();
 }
 
 void FileViewModel::remove( const QModelIndex& index )
@@ -142,9 +138,8 @@ void FileViewModel::remove( const QModelIndex& index )
                 delete item;
                 m_itemList.removeAt( row );
 
-                BoundingBox box;
                 emit layoutChanged();
-                emit updateRegion( box );
+                emit modelChanged();
             }
         }
     }
@@ -162,6 +157,11 @@ void FileViewModel::saveFile()
                 AbstractFileViewItem& item = *m_itemList.at( row );
                 item.saveFile();
 
+/*                delete &item;
+                m_itemList.removeAt( row );
+
+                emit layoutChanged();
+                emit modelChanged();*/
             }
         }
     }

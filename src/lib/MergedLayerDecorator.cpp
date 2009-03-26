@@ -1,4 +1,5 @@
 // Copyright 2008 David Roberts <dvdr18@gmail.com>
+// Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 // 
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -16,7 +17,6 @@
 
 #include "MergedLayerDecorator.h"
 
-#include <QtCore/QFile>
 #include <QtCore/QDebug>
 #include <QtGui/QPainter>
 
@@ -30,21 +30,28 @@
 #include "MarbleDirs.h"
 #include "TextureTile.h"
 #include "TileLoaderHelper.h"
+#include "Planet.h"
 
 using namespace Marble;
 
 MergedLayerDecorator::MergedLayerDecorator(SunLocator* sunLocator)
- : m_sunLocator(sunLocator),
-   m_cloudlayer(true),
-   m_showTileId(false),
-   m_cityLightsTheme(0),
-   m_blueMarbleTheme(0),
-   m_cityLightsTextureLayer(0),
-   m_cloudsTextureLayer(0)
+    : m_tile( 0 ),
+      m_x( -1 ),
+      m_y( -1 ),
+      m_level( - 1 ),
+      m_id(),
+      m_sunLocator(sunLocator),
+      m_cloudlayer(true),
+      m_showTileId(false),
+      m_cityLightsTheme(0),
+      m_blueMarbleTheme(0),
+      m_cityLightsTextureLayer(0),
+      m_cloudsTextureLayer(0)
 {
 }
 
-void MergedLayerDecorator::initClouds(){
+void MergedLayerDecorator::initClouds()
+{
     // look for the texture layers inside the themes
     // As long as we don't have an Layer Management Class we just lookup 
     // the name of the layer that has the same name as the theme ID
@@ -59,7 +66,8 @@ void MergedLayerDecorator::initClouds(){
     }
 }
 
-void MergedLayerDecorator::initCityLights(){
+void MergedLayerDecorator::initCityLights()
+{
     // look for the texture layers inside the themes
     // As long as we don't have an Layer Management Class we just lookup 
     // the name of the layer that has the same name as the theme ID
@@ -80,9 +88,11 @@ MergedLayerDecorator::~MergedLayerDecorator()
 
 void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapTheme )
 {
-        if ( !m_blueMarbleTheme ) {
-            initClouds();
-        }
+    QTime time;
+    time.start();
+    if ( !m_blueMarbleTheme ) {
+        initClouds();
+    }
     if ( m_cloudlayer && m_tile->depth() == 32 && m_level < 2 ) {
         bool show;
         if ( mapTheme && mapTheme->settings()->propertyAvailable( "clouds", show ) ) {
@@ -95,18 +105,18 @@ void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapT
         }
     }
     if ( m_sunLocator->getShow() && mapTheme ) {
-//         if (   mapTheme->head()->target() == "earth" 
-//             || mapTheme->head()->target() == "moon" ) {
 
-            // Initialize citylights layer if it hasn't happened already
-            if ( !m_cityLightsTheme ) {
-                initCityLights();
-            }
-            paintSunShading();
-//         }
+        // Initialize citylights layer if it hasn't happened already
+        if ( !m_cityLightsTheme ) {
+            initCityLights();
+        }
+        QTime time2;
+        time2.start();
+        paintSunShading();
     }
-    if ( m_showTileId )
-      paintTileId( themeId );
+    if ( m_showTileId ) {
+        paintTileId( themeId );
+    }
 }
 
 void MergedLayerDecorator::setShowClouds( bool visible )
@@ -192,11 +202,11 @@ void MergedLayerDecorator::paintSunShading()
     // TODO add support for 8-bit maps?
     // add sun shading
     const qreal  global_width  = m_tile->width()
-                                  * TileLoaderHelper::levelToColumn( m_cityLightsTextureLayer->levelZeroColumns(),
-                                                                     m_level );
+        * TileLoaderHelper::levelToColumn( m_cityLightsTextureLayer->levelZeroColumns(),
+                                           m_level );
     const qreal  global_height = m_tile->height()
-                                  * TileLoaderHelper::levelToRow( m_cityLightsTextureLayer->levelZeroRows(),
-                                                                  m_level );
+        * TileLoaderHelper::levelToRow( m_cityLightsTextureLayer->levelZeroRows(),
+                                        m_level );
     const qreal lon_scale = 2*M_PI / global_width;
     const qreal lat_scale = -M_PI / global_height;
     const int tileHeight = m_tile->height();
@@ -206,12 +216,16 @@ void MergedLayerDecorator::paintSunShading()
     const int n = maxDivisor( 30, tileWidth );
     const int ipRight = n * (int)( tileWidth / n );
 
-    if ( m_sunLocator->getCitylights() ) {
+    //Don't use city lights on non-earth planets!
+    if ( m_sunLocator->getCitylights() && m_sunLocator->planet()->id() == "earth" ) {
         QImage nighttile = loadDataset( m_cityLightsTextureLayer );
         if ( nighttile.isNull() )
             return;
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
             qreal lat = lat_scale * ( m_y * tileHeight + cur_y ) - 0.5*M_PI;
+            qreal a = sin((lat-DEG2RAD * m_sunLocator->getLat())/2.0);
+            qreal c = cos(lat)*cos(DEG2RAD * m_sunLocator->getLat());
+
             QRgb* scanline  = (QRgb*)m_tile->scanLine( cur_y );
             QRgb* nscanline = (QRgb*)nighttile.scanLine( cur_y );
 
@@ -227,7 +241,7 @@ void MergedLayerDecorator::paintSunShading()
                 if ( interpolate == true ) {
                     int check = cur_x + n;
                     qreal checklon   = lon_scale * ( m_x * tileWidth + check );
-                    shade = m_sunLocator->shading(checklon, lat);
+                    shade = m_sunLocator->shading(checklon, a, c);
 
                     // if the shading didn't change across the interpolation
                     // interval move on and don't change anything.
@@ -238,8 +252,7 @@ void MergedLayerDecorator::paintSunShading()
                         continue;
                     }
                     if ( shade == lastShade && shade == 0.0 ) {
-                        for ( int t = 0; t < n; ++t )
-                        {
+                        for ( int t = 0; t < n; ++t ) {
                             m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
                             ++scanline;
                             ++nscanline;
@@ -247,10 +260,9 @@ void MergedLayerDecorator::paintSunShading()
                         cur_x += n; 
                         continue;
                     }
-                    for ( int t = 0; t < n ; ++t )
-                    {
+                    for ( int t = 0; t < n ; ++t ) {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                        shade = m_sunLocator->shading(lon, lat);
+                        shade = m_sunLocator->shading(lon, a, c);
                         m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
                         ++scanline;
                         ++nscanline;
@@ -262,7 +274,7 @@ void MergedLayerDecorator::paintSunShading()
                     // Make sure we don't exceed the image memory
                     if ( cur_x < tileWidth ) {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                        shade = m_sunLocator->shading(lon, lat);
+                        shade = m_sunLocator->shading(lon, a, c);
                         m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
                         ++scanline;
                         ++nscanline;
@@ -275,6 +287,9 @@ void MergedLayerDecorator::paintSunShading()
     } else {
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
             qreal lat = lat_scale * (m_y * tileHeight + cur_y) - 0.5*M_PI;
+            qreal a = sin((lat-DEG2RAD * m_sunLocator->getLat())/2.0);
+            qreal c = cos(lat)*cos(DEG2RAD * m_sunLocator->getLat());
+
             QRgb* scanline = (QRgb*)m_tile->scanLine( cur_y );
 
             qreal shade = 0;
@@ -289,7 +304,7 @@ void MergedLayerDecorator::paintSunShading()
                 if ( interpolate == true ) {
                     int check = cur_x + n;
                     qreal checklon   = lon_scale * ( m_x * tileWidth + check );
-                    shade = m_sunLocator->shading(checklon, lat);
+                    shade = m_sunLocator->shading(checklon, a, c);
 
                     // if the shading didn't change across the interpolation
                     // interval move on and don't change anything.
@@ -299,18 +314,16 @@ void MergedLayerDecorator::paintSunShading()
                         continue;
                     }
                     if ( shade == lastShade && shade == 0.0 ) {
-                        for ( int t = 0; t < n; ++t )
-                        {
+                        for ( int t = 0; t < n; ++t ) {
                             m_sunLocator->shadePixel( *scanline, shade );
                             ++scanline;
                         }
                         cur_x += n; 
                         continue;
                     }
-                    for ( int t = 0; t < n ; ++t )
-                    {
+                    for ( int t = 0; t < n ; ++t ) {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                        shade = m_sunLocator->shading(lon, lat);
+                        shade = m_sunLocator->shading(lon, a, c);
                         m_sunLocator->shadePixel( *scanline, shade );
                         ++scanline;
                         ++cur_x;
@@ -321,7 +334,7 @@ void MergedLayerDecorator::paintSunShading()
                     // Make sure we don't exceed the image memory
                     if ( cur_x < tileWidth ) {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                        shade = m_sunLocator->shading(lon, lat);
+                        shade = m_sunLocator->shading(lon, a, c);
                         m_sunLocator->shadePixel( *scanline, shade );
                         ++scanline;
                         ++cur_x;
@@ -364,8 +377,7 @@ void MergedLayerDecorator::paintTileId(const QString& themeId)
     painter.setPen( testPen );
     painter.drawRect( strokeWidth / 2, strokeWidth / 2, 
                       m_tile->width()  - strokeWidth,
-                      m_tile->height() - strokeWidth
-    );
+                      m_tile->height() - strokeWidth );
     QFont testFont("Sans", 30, QFont::Bold);
     QFontMetrics testFm( testFont );
     painter.setFont( testFont );
