@@ -177,6 +177,11 @@ bool QHttpNetworkPlugin::isInitialized() const
     return true;
 }
 
+NetworkPlugin * QHttpNetworkPlugin::create() const
+{
+    return new QHttpNetworkPlugin;
+}
+
 HttpJob *QHttpNetworkPlugin::createJob( const QUrl &source, const QString &destination,
                                         const QString &id )
 {

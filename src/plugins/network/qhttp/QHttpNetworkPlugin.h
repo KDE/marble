@@ -78,6 +78,7 @@ class QHttpNetworkPlugin: public NetworkPlugin
     virtual void initialize();
     virtual bool isInitialized() const;
 
+    virtual NetworkPlugin * create() const;
     virtual HttpJob *createJob( const QUrl &source, const QString &destination, const QString &id );
 };
 
