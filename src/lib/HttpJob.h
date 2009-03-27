@@ -19,7 +19,7 @@
 #include <QtCore/QString>
 #include <QtCore/QUrl>
 
-class QHttp;
+#include "marble_export.h"
 
 namespace Marble
 {
@@ -30,7 +30,7 @@ enum  Status   { NoStatus, Pending, Activated, Finished, Expired, Aborted };
 class StoragePolicy;
 class HttpJobPrivate;
 
-class HttpJob: public QObject
+class MARBLE_EXPORT HttpJob: public QObject
 {
     Q_OBJECT
 

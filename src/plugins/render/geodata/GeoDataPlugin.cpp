@@ -39,6 +39,11 @@
 namespace Marble
 {
 
+GeoDataPlugin::GeoDataPlugin()
+    : m_view( 0 )
+{
+}
+
 GeoDataPlugin::~GeoDataPlugin()
 {
     delete( m_view );

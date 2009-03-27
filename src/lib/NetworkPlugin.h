@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2008 Pino Toscano <pino@kde.org>
+// Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
@@ -32,6 +33,12 @@ class MARBLE_EXPORT NetworkPlugin : public QObject, public NetworkPluginInterfac
 
  public:
     virtual ~NetworkPlugin();
+
+    /**
+     * Create a new Network Plugin and return it.
+     * Has to be defined in concrete network plugin classes.
+     */
+    virtual NetworkPlugin * create() const = 0;
 
  protected:
     NetworkPlugin();

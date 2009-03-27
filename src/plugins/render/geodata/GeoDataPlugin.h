@@ -43,6 +43,7 @@ class GeoDataPlugin : public RenderPlugin
 
     GeoDataView* m_view;
  public:
+    GeoDataPlugin();
     ~GeoDataPlugin();
 
     QStringList backendTypes() const;

@@ -7,7 +7,7 @@
 //
 // Copyright 2007      Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
-// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2008,2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 // Copyright 2008      Pino Toscano <pino@kde.org>
 //
 
@@ -78,6 +78,7 @@ class QHttpNetworkPlugin: public NetworkPlugin
     virtual void initialize();
     virtual bool isInitialized() const;
 
+    virtual NetworkPlugin * create() const;
     virtual HttpJob *createJob( const QUrl &source, const QString &destination, const QString &id );
 };
 

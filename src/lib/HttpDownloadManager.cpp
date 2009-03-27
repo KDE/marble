@@ -7,7 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
-// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2008,2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 #include "HttpDownloadManager.h"
@@ -16,9 +16,9 @@
 #include <QtCore/QTimer>
 
 #include "HttpJob.h"
-#include "MarbleDirs.h"
 #include "StoragePolicy.h"
-#include "QHttpNetworkPlugin.h"
+#include "NetworkPlugin.h"
+#include "PluginManager.h"
 
 using namespace Marble;
 
@@ -54,6 +54,7 @@ HttpDownloadManager::~HttpDownloadManager()
     m_jobBlackList.clear();
 
     delete m_storagePolicy;
+    delete m_networkPlugin;
 }
 
 void HttpDownloadManager::setServerUrl( const QUrl& serverUrl )
@@ -256,10 +257,17 @@ HttpJob *HttpDownloadManager::createJob( const QUrl& sourceUrl, const QString& d
                                          const QString &id )
 {
     if ( !m_networkPlugin ) {
-        // ### TODO use the network plugins
-        m_networkPlugin = new QHttpNetworkPlugin();
-        m_networkPlugin->setParent( this );
+        PluginManager pluginManager;
+        QList<NetworkPlugin *> networkPlugins = pluginManager.createNetworkPlugins();
+        if ( !networkPlugins.isEmpty() ) {
+            // FIXME: not just take the first plugin, but use some configuration setting
+            // take the first plugin and delete the rest
+            m_networkPlugin = networkPlugins.takeFirst();
+            qDeleteAll( networkPlugins );
+            m_networkPlugin->setParent( this );
+        }
     }
+    Q_ASSERT( m_networkPlugin );
     return m_networkPlugin->createJob( sourceUrl, destFileName, id );
 }
 
