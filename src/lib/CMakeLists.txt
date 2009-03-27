@@ -76,7 +76,6 @@ set(marblewidget_SRCS
     HttpDownloadManager.cpp
     HttpJob.cpp
     NetworkPlugin.cpp
-    QHttpNetworkPlugin.cpp
     LayerManager.cpp
     PluginManager.cpp
     MarbleCacheSettingsWidget.cpp

@@ -98,20 +98,22 @@ void PluginManager::loadPlugins()
 
         QObject * obj = loader.instance();
 
-        RenderPlugin * renderPlugin;
+        RenderPlugin * renderPlugin = 0;
         NetworkPlugin * networkPlugin = 0;
         if ( obj ) {
-            renderPlugin = qobject_cast<RenderPlugin *>(obj)->pluginInstance();
-            networkPlugin = qobject_cast<NetworkPlugin *>( obj );
+            if ( obj->inherits( "Marble::RenderPlugin" ) ) {
+                qDebug() << "render plugin found" << MarbleDirs::pluginPath( fileName );
+                renderPlugin = qobject_cast<RenderPlugin *>( obj )->pluginInstance();
+                d->m_renderPlugins.append( renderPlugin );
+            }
+            else if ( obj->inherits( "Marble::NetworkPlugin" ) ) {
+                qDebug() << "network plugin found" << MarbleDirs::pluginPath( fileName );
+                networkPlugin = qobject_cast<NetworkPlugin *>( obj );
+                d->m_networkPlugins.append( networkPlugin );
+            }
         }
 
-        if( obj && renderPlugin ) {
-            d->m_renderPlugins.append( renderPlugin );
-        }
-        else if ( obj && networkPlugin ) {
-            d->m_networkPlugins.append( networkPlugin );
-        }
-        else {
+        if( !renderPlugin && !networkPlugin ) {
             qDebug() << "Plugin Failure: " << fileName << " is not a valid Marble Plugin:";
             qDebug() << loader.errorString();
         }
