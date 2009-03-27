@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Torsten Rahn <tackat@kde.org>"
+// Copyright 2008 Torsten Rahn <tackat@kde.org>
+// Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
@@ -30,7 +31,7 @@ namespace Marble
 class PluginManagerPrivate
 {
  public:
-    QList<RenderPlugin *> m_renderPlugins;
+    QList<RenderPlugin *> m_renderPluginTemplates;
     QList<NetworkPlugin *> m_networkPlugins;
 };
 
@@ -47,29 +48,37 @@ PluginManager::PluginManager( QObject *parent )
 
 PluginManager::~PluginManager()
 {
-    qDeleteAll( d->m_renderPlugins );
-    d->m_renderPlugins.clear();
+    // do not delete network plugins here, since they might be in use
+    // FIXME
+    qDeleteAll( d->m_renderPluginTemplates );
     delete d;
 }
 
-QList<AbstractFloatItem *> PluginManager::floatItems() const
+QList<AbstractFloatItem *> PluginManager::createFloatItems() const
 {
     QList<AbstractFloatItem *> floatItemList;
 
-    QList<RenderPlugin *>::const_iterator i = d->m_renderPlugins.constBegin();
-    for (; i != d->m_renderPlugins.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator i = d->m_renderPluginTemplates.constBegin();
+    for (; i != d->m_renderPluginTemplates.constEnd(); ++i) {
         AbstractFloatItem *floatItem = qobject_cast<AbstractFloatItem *>(*i);
         if ( floatItem ) {
-            floatItemList.append( floatItem );
+            floatItemList.append( qobject_cast<AbstractFloatItem *>( floatItem->
+                                                                     pluginInstance() ));
         }
     }
 
     return floatItemList;
 }
 
-QList<RenderPlugin *> PluginManager::renderPlugins() const
+QList<RenderPlugin *> PluginManager::createRenderPlugins() const
 {
-    return d->m_renderPlugins;
+    QList<RenderPlugin *> result;
+    QList<RenderPlugin *>::const_iterator i = d->m_renderPluginTemplates.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = d->m_renderPluginTemplates.constEnd();
+    for (; i != end; ++i) {
+        result.append( (*i)->pluginInstance() );
+    }
+    return result;
 }
 
 QList<NetworkPlugin *> PluginManager::networkPlugins() const
@@ -86,10 +95,11 @@ void PluginManager::loadPlugins()
 
     MarbleDirs::debug();
 
-    qDeleteAll( d->m_renderPlugins );
-    d->m_renderPlugins.clear();
+    qDeleteAll( d->m_renderPluginTemplates );
+    d->m_renderPluginTemplates.clear();
 
-    qDeleteAll( d->m_networkPlugins );
+    // FIXME: find a solution here
+    // do not delete network plugins here, since they might be in use
     d->m_networkPlugins.clear();
 
     foreach( const QString &fileName, pluginFileNameList ) {
@@ -103,8 +113,8 @@ void PluginManager::loadPlugins()
         if ( obj ) {
             if ( obj->inherits( "Marble::RenderPlugin" ) ) {
                 qDebug() << "render plugin found" << MarbleDirs::pluginPath( fileName );
-                renderPlugin = qobject_cast<RenderPlugin *>( obj )->pluginInstance();
-                d->m_renderPlugins.append( renderPlugin );
+                renderPlugin = qobject_cast<RenderPlugin *>( obj );
+                d->m_renderPluginTemplates.append( renderPlugin );
             }
             else if ( obj->inherits( "Marble::NetworkPlugin" ) ) {
                 qDebug() << "network plugin found" << MarbleDirs::pluginPath( fileName );

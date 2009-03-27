@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Torsten Rahn <tackat@kde.org>"
+// Copyright 2008 Torsten Rahn <tackat@kde.org>
+// Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
@@ -41,7 +42,8 @@ class LayerManagerPrivate
     GeoSceneDocument *m_mapTheme;
 
     MarbleDataFacade *m_dataFacade;
-    PluginManager    *m_pluginManager;
+    QList<RenderPlugin *> m_renderPlugins;
+    QList<AbstractFloatItem *> m_floatItems;
 };
 
 
@@ -49,10 +51,19 @@ LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
     : QObject( parent ),
       d( new LayerManagerPrivate( dataFacade) )
 {
-    d->m_pluginManager = new PluginManager( this );
+    PluginManager pm;
+    d->m_renderPlugins = pm.createRenderPlugins();
+
+    // get float items
+    foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
+        AbstractFloatItem * const floatItem =
+            qobject_cast<AbstractFloatItem *>( renderPlugin );
+        if ( floatItem )
+            d->m_floatItems.append( floatItem );
+    }
 
     // Just for initial testing
-    foreach( RenderPlugin * renderPlugin,  d->m_pluginManager->renderPlugins() ) {
+    foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
         renderPlugin->setDataFacade( d->m_dataFacade );
         renderPlugin->initialize();
     }
@@ -60,20 +71,20 @@ LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
 
 LayerManager::~LayerManager()
 {
-    foreach( RenderPlugin * renderPlugin,  d->m_pluginManager->renderPlugins() )
+    foreach( RenderPlugin * renderPlugin, d->m_renderPlugins )
         renderPlugin->setDataFacade( 0 );
-    delete d->m_pluginManager;
+    qDeleteAll( d->m_renderPlugins );
     delete d;
 }
 
 QList<RenderPlugin *> LayerManager::renderPlugins() const
 {
-    return d->m_pluginManager->renderPlugins();
+    return d->m_renderPlugins;
 }
 
 QList<AbstractFloatItem *> LayerManager::floatItems() const
 {
-    return d->m_pluginManager->floatItems();
+    return d->m_floatItems;
 }
 
 void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
@@ -83,12 +94,9 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
         return;
     }
 
-    if( !d->m_pluginManager )
-        return;
-
     ViewportParams* viewport = viewParams->viewport();
 
-    foreach( RenderPlugin *renderPlugin,  d->m_pluginManager->renderPlugins() ) {
+    foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
         if ( renderPlugin ){
             if ( renderPlugin->enabled() && renderPlugin->visible() ) {
                 renderPlugin->render( painter, viewport, "ALWAYS_ON_TOP" );
@@ -98,13 +106,11 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
 
     // Looping a second time through is a quick and dirty way to get 
     // the float items displayed on top:
-    foreach( RenderPlugin * renderPlugin,  d->m_pluginManager->renderPlugins() ) {
+    // FIXME: use d->m_floatItems here?
+    foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
         if ( renderPlugin->renderPosition().contains("FLOAT_ITEM") ) {
-            AbstractFloatItem *floatItem = dynamic_cast<AbstractFloatItem *>(renderPlugin);
-            if ( floatItem
-		 && floatItem->enabled() 
-		 && renderPlugin->visible() )
-            {
+            AbstractFloatItem *floatItem = qobject_cast<AbstractFloatItem *>(renderPlugin);
+            if ( floatItem->enabled() && floatItem->visible() ) {
                 floatItem->render( painter, viewport, "FLOAT_ITEM" );
             }
         }
@@ -119,7 +125,7 @@ void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
 {
     d->m_mapTheme = mapTheme;
 
-    foreach( RenderPlugin * renderPlugin,  d->m_pluginManager->renderPlugins() ) {
+    foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
         bool propertyAvailable = false;
         mapTheme->settings()->propertyAvailable( renderPlugin->nameId(), 
 						 propertyAvailable );
@@ -145,7 +151,7 @@ void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
 
 void LayerManager::syncActionWithProperty( QString nameId, bool checked )
 {
-    foreach( RenderPlugin * renderPlugin,  d->m_pluginManager->renderPlugins() ) {
+    foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
         if ( nameId == renderPlugin->nameId() ) {
             if ( renderPlugin->visible() == checked )
                 return;

@@ -29,7 +29,7 @@ void PluginManagerTest::loadPlugins()
 
     int             pluginNumber = MarbleDirs::pluginEntryList( "", QDir::Files ).size();
     PluginManager  *pm = new PluginManager( 0 );
-    QCOMPARE( pm->renderPlugins().size(), pluginNumber );
+    QCOMPARE( pm->createRenderPlugins().size(), pluginNumber );
 }
 
 }

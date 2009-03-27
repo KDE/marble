@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2008 Torsten Rahn <tackat@kde.org>"
+// Copyright 2006-2008 Torsten Rahn <tackat@kde.org>
+// Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
@@ -28,6 +29,13 @@ class PluginManagerPrivate;
 /**
  * @short The class that handles Marble's plugins.
  *
+ * Ownership policy for render plugins:
+ *
+ * On every invocation of createRenderPlugins the PluginManager creates new
+ * objects and transfers ownership to the calling site. In order to create
+ * the objects, the PluginManager internally has a list of the render plugins
+ * which are owned by the PluginManager and destroyed by it.
+ *
  */
 
 class MARBLE_EXPORT PluginManager : public QObject
@@ -38,21 +46,40 @@ class MARBLE_EXPORT PluginManager : public QObject
     explicit PluginManager( QObject *parent = 0 );
     ~PluginManager();
 
-    QList<AbstractFloatItem *> floatItems()    const;
-    QList<RenderPlugin *>      renderPlugins() const;
-    QList<NetworkPlugin *>     networkPlugins() const;
-
- public Q_SLOTS:
     /**
-     * @brief Browses the plugin directories and installs plugins. 
-     *
-     * This method browses all plugin directories and installs all  
-     * plugins found in there.
+     * This methods creates a new set of plugins and transfers ownership
+     * of them to the client.
      */
-    void loadPlugins();
+    QList<AbstractFloatItem *> createFloatItems() const;
+
+    /**
+     * This methods creates a new set of plugins and transfers ownership
+     * of them to the client.
+     */
+    QList<RenderPlugin *> createRenderPlugins() const;
+
+    /**
+     * FIXME: this is a quick hack and will be reworked soon,
+     * only client atm is HttpDownloadManager
+     * which knows about this problem.
+     */
+    QList<NetworkPlugin *> networkPlugins() const;
 
  private:
     Q_DISABLE_COPY( PluginManager )
+
+    /**
+     * @brief Browses the plugin directories and loads plugins.
+     *
+     * This method deletes all previously loaded render plugin templates and is only
+     * for internal use of PluginManager.
+     *
+     * loadPlugins browses all plugin directories and loads
+     * all plugins found in there.
+     *
+     * FIXME: this can be public once the network plugins issue is resolved.
+     */
+    void loadPlugins();
 
     PluginManagerPrivate  * const d;
 };
