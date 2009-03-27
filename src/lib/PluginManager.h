@@ -65,21 +65,17 @@ class MARBLE_EXPORT PluginManager : public QObject
      */
     QList<NetworkPlugin *> createNetworkPlugins() const;
 
- private:
-    Q_DISABLE_COPY( PluginManager )
-
+ public Q_SLOTS:
     /**
      * @brief Browses the plugin directories and loads plugins.
      *
-     * This method deletes all previously loaded render plugin templates and is only
-     * for internal use of PluginManager.
-     *
-     * loadPlugins browses all plugin directories and loads
+     * This method browses all plugin directories and loads
      * all plugins found in there.
-     *
-     * FIXME: this can be public once the network plugins issue is resolved.
      */
     void loadPlugins();
+
+ private:
+    Q_DISABLE_COPY( PluginManager )
 
     PluginManagerPrivate  * const d;
 };
