@@ -54,6 +54,7 @@ HttpDownloadManager::~HttpDownloadManager()
     m_jobBlackList.clear();
 
     delete m_storagePolicy;
+    delete m_networkPlugin;
 }
 
 void HttpDownloadManager::setServerUrl( const QUrl& serverUrl )
@@ -257,10 +258,12 @@ HttpJob *HttpDownloadManager::createJob( const QUrl& sourceUrl, const QString& d
 {
     if ( !m_networkPlugin ) {
         PluginManager pluginManager;
-        QList<NetworkPlugin *> networkPlugins = pluginManager.networkPlugins();
+        QList<NetworkPlugin *> networkPlugins = pluginManager.createNetworkPlugins();
         if ( !networkPlugins.isEmpty() ) {
             // FIXME: not just take the first plugin, but use some configuration setting
-            m_networkPlugin = networkPlugins.first();
+            // take the first plugin and delete the rest
+            m_networkPlugin = networkPlugins.takeFirst();
+            qDeleteAll( networkPlugins );
             m_networkPlugin->setParent( this );
         }
     }

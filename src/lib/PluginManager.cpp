@@ -32,7 +32,7 @@ class PluginManagerPrivate
 {
  public:
     QList<RenderPlugin *> m_renderPluginTemplates;
-    QList<NetworkPlugin *> m_networkPlugins;
+    QList<NetworkPlugin *> m_networkPluginTemplates;
 };
 
 PluginManager::PluginManager( QObject *parent )
@@ -48,9 +48,8 @@ PluginManager::PluginManager( QObject *parent )
 
 PluginManager::~PluginManager()
 {
-    // do not delete network plugins here, since they might be in use
-    // FIXME
     qDeleteAll( d->m_renderPluginTemplates );
+    qDeleteAll( d->m_networkPluginTemplates );
     delete d;
 }
 
@@ -81,9 +80,15 @@ QList<RenderPlugin *> PluginManager::createRenderPlugins() const
     return result;
 }
 
-QList<NetworkPlugin *> PluginManager::networkPlugins() const
+QList<NetworkPlugin *> PluginManager::createNetworkPlugins() const
 {
-    return d->m_networkPlugins;
+    QList<NetworkPlugin *> result;
+    QList<NetworkPlugin *>::const_iterator pos = d->m_networkPluginTemplates.constBegin();
+    QList<NetworkPlugin *>::const_iterator const end = d->m_networkPluginTemplates.constEnd();
+    for (; pos != end; ++pos ) {
+        result.append( (*pos)->create() );
+    }
+    return result;
 }
 
 void PluginManager::loadPlugins()
@@ -98,9 +103,8 @@ void PluginManager::loadPlugins()
     qDeleteAll( d->m_renderPluginTemplates );
     d->m_renderPluginTemplates.clear();
 
-    // FIXME: find a solution here
-    // do not delete network plugins here, since they might be in use
-    d->m_networkPlugins.clear();
+    qDeleteAll( d->m_networkPluginTemplates );
+    d->m_networkPluginTemplates.clear();
 
     foreach( const QString &fileName, pluginFileNameList ) {
         qDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
@@ -119,7 +123,7 @@ void PluginManager::loadPlugins()
             else if ( obj->inherits( "Marble::NetworkPlugin" ) ) {
                 qDebug() << "network plugin found" << MarbleDirs::pluginPath( fileName );
                 networkPlugin = qobject_cast<NetworkPlugin *>( obj );
-                d->m_networkPlugins.append( networkPlugin );
+                d->m_networkPluginTemplates.append( networkPlugin );
             }
         }
 

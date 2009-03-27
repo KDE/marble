@@ -29,11 +29,12 @@ class PluginManagerPrivate;
 /**
  * @short The class that handles Marble's plugins.
  *
- * Ownership policy for render plugins:
+ * Ownership policy for plugins:
  *
- * On every invocation of createRenderPlugins the PluginManager creates new
- * objects and transfers ownership to the calling site. In order to create
- * the objects, the PluginManager internally has a list of the render plugins
+ * On every invocation of createRenderPlugins, createNetworkPlugins and
+ * createFloatItems the PluginManager creates new objects and transfers
+ * ownership to the calling site. In order to create
+ * the objects, the PluginManager internally has a list of the plugins
  * which are owned by the PluginManager and destroyed by it.
  *
  */
@@ -59,11 +60,10 @@ class MARBLE_EXPORT PluginManager : public QObject
     QList<RenderPlugin *> createRenderPlugins() const;
 
     /**
-     * FIXME: this is a quick hack and will be reworked soon,
-     * only client atm is HttpDownloadManager
-     * which knows about this problem.
+     * This methods creates a new set of plugins and transfers ownership
+     * of them to the client.
      */
-    QList<NetworkPlugin *> networkPlugins() const;
+    QList<NetworkPlugin *> createNetworkPlugins() const;
 
  private:
     Q_DISABLE_COPY( PluginManager )
