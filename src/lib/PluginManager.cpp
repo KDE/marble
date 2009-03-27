@@ -58,8 +58,9 @@ QList<AbstractFloatItem *> PluginManager::createFloatItems() const
     QList<AbstractFloatItem *> floatItemList;
 
     QList<RenderPlugin *>::const_iterator i = d->m_renderPluginTemplates.constBegin();
-    for (; i != d->m_renderPluginTemplates.constEnd(); ++i) {
-        AbstractFloatItem *floatItem = qobject_cast<AbstractFloatItem *>(*i);
+    QList<RenderPlugin *>::const_iterator const end = d->m_renderPluginTemplates.constEnd();
+    for (; i != end; ++i) {
+        AbstractFloatItem * const floatItem = qobject_cast<AbstractFloatItem *>(*i);
         if ( floatItem ) {
             floatItemList.append( qobject_cast<AbstractFloatItem *>( floatItem->
                                                                      pluginInstance() ));
@@ -94,9 +95,8 @@ QList<NetworkPlugin *> PluginManager::createNetworkPlugins() const
 void PluginManager::loadPlugins()
 {
     qDebug() << "Starting to load Plugins.";
-    QStringList pluginFileNameList;
 
-    pluginFileNameList = MarbleDirs::pluginEntryList( "", QDir::Files );
+    QStringList pluginFileNameList = MarbleDirs::pluginEntryList( "", QDir::Files );
 
     MarbleDirs::debug();
 
@@ -107,7 +107,7 @@ void PluginManager::loadPlugins()
     d->m_networkPluginTemplates.clear();
 
     foreach( const QString &fileName, pluginFileNameList ) {
-        qDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
+        // qDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
         QPluginLoader loader( MarbleDirs::pluginPath( fileName ) );
 
         QObject * obj = loader.instance();
