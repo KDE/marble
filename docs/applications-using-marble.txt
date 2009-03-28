@@ -6,7 +6,7 @@ work after API changes:
 
 - extragear/graphics/digikam
 - playground/base/plasma/wallpapers/marble
-
+- playground/base/plasma/applets/contacts
 
 There is this link http://techbase.kde.org/Projects/Marble/MarbleUsedBy
 listing also applications not hosted in KDE svn.
