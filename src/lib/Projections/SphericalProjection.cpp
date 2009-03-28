@@ -243,7 +243,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                     // Assign the first or last horizon point to the current or
                     // previous point, so that we still get correct results for 
                     // the case where we need to geoproject the line segment.
-
+/*
                     if ( globeHidesPoint ) {
                         currentCoords  = createHorizonCoordinates( previousCoords, 
                                                                    currentCoords,
@@ -253,6 +253,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                                                                    currentCoords,
                                                                    viewport, lineString.tessellationFlags() );
                     }
+*/
                 }
                 else {
                     // Both nodes are located on the planet's hemisphere that is
@@ -264,7 +265,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
             // segments of a linestring. If you are about to learn how the code of 
             // this class works you can safely ignore this section for a start.
 
-            if ( lineString.tessellate() && ( isVisible || previousIsVisible ) ) {
+            if ( lineString.tessellate() /* && ( isVisible || previousIsVisible ) */ ) {
                 // let the line segment follow the spherical surface
                 // if the distance between the previous point and the current point 
                 // on screen is too big
@@ -285,14 +286,15 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                 // The latter can pretty safely be excluded for most projections if both points 
                 // are located on the same side relative to the viewport boundaries and if they are 
                 // located more than half the line segment distance away from the viewport.
-
+                /*
                 if (   !( x < safeDistance && previousX < safeDistance )
                     || !( y < safeDistance && previousY < safeDistance )
                     || !( x + safeDistance > viewport->width() 
                         && previousX + safeDistance > viewport->width() )
                     || !( y + safeDistance > viewport->height()
                         && previousY + safeDistance > viewport->height() )
-                ){
+                ) */
+                {
                     int suggestedCount = (int)( distance / precision );
 
                     if ( distance > precision ) {
