@@ -18,7 +18,7 @@ using namespace Marble;
 class Marble::HttpJobPrivate
 {
  public:
-    HttpJobPrivate();
+    HttpJobPrivate( const QUrl & sourceUrl, const QString & destFileName, const QString &id );
 
     QUrl           m_sourceUrl;
     QString        m_destinationFileName;
@@ -32,22 +32,23 @@ class Marble::HttpJobPrivate
     int            m_trialsLeft;
 };
 
-HttpJobPrivate::HttpJobPrivate()
-    : m_status( NoStatus ),
-    m_priority( NoPriority ),
-    m_storagePolicy( 0 )
+HttpJobPrivate::HttpJobPrivate( const QUrl & sourceUrl, const QString & destFileName,
+                                const QString &id )
+    : m_sourceUrl( sourceUrl ),
+      m_destinationFileName( destFileName ),
+      m_originalDestinationFileName( destFileName ),
+      m_initiatorId( id ),
+      m_status( NoStatus ),
+      m_priority( NoPriority ),
+      m_storagePolicy( 0 ),
+      m_trialsLeft( 3 )
 {
 }
 
 
 HttpJob::HttpJob( const QUrl & sourceUrl, const QString & destFileName, const QString &id )
-    : d( new HttpJobPrivate )
+    : d( new HttpJobPrivate( sourceUrl, destFileName, id ))
 {
-    d->m_sourceUrl = sourceUrl;
-    d->m_destinationFileName = destFileName;
-    d->m_originalDestinationFileName = destFileName;
-    d->m_initiatorId = id;
-    d->m_trialsLeft = 3;
 }
 
 HttpJob::~HttpJob()
