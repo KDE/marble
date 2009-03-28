@@ -9,6 +9,7 @@ work after API changes:
 - extragear/graphics/kphotoalbum
 - playground/base/plasma/applets/contacts
 - playground/base/plasma/wallpapers/marble
+- playground/office/geoshape
 
 There is this link http://techbase.kde.org/Projects/Marble/MarbleUsedBy
 listing also applications not hosted in KDE svn.
