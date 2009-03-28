@@ -110,7 +110,7 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
     foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
         if ( renderPlugin->renderPosition().contains("FLOAT_ITEM") ) {
             AbstractFloatItem *floatItem = qobject_cast<AbstractFloatItem *>(renderPlugin);
-            if ( floatItem->enabled() && floatItem->visible() ) {
+            if ( floatItem && floatItem->enabled() && floatItem->visible() ) {
                 floatItem->render( painter, viewport, "FLOAT_ITEM" );
             }
         }
