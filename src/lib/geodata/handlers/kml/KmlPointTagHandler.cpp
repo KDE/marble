@@ -40,13 +40,13 @@ GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
     // FIXME: there needs to be a check that a coordinates subtag is contained
 
     GeoStackItem parentItem = parser.parentElement();
-    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
+    if( parentItem.represents( kmlTag_Placemark ) ) {
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_Point << "> returning: " << parentItem.nodeAs<GeoDataPlacemark>()
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
         return parentItem.nodeAs<GeoDataPlacemark>();
-    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
+    } else if( parentItem.represents( kmlTag_MultiGeometry ) ) {
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_Point << "> returning: " << parentItem.nodeAs<GeoDataMultiGeometry>()
                  << " parent item name: " << parentItem.qualifiedName().first;

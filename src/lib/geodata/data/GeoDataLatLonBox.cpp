@@ -84,10 +84,10 @@ void GeoDataLatLonBox::setNorth( const qreal north, GeoDataCoordinates::Unit uni
 {
     switch( unit ){
     case GeoDataCoordinates::Radian:
-        d->m_north = GeoDataPoint::normalizeLat( north );
+        d->m_north = GeoDataCoordinates::normalizeLat( north );
         break;
     case GeoDataCoordinates::Degree:
-        d->m_north = GeoDataPoint::normalizeLat( north * DEG2RAD );
+        d->m_north = GeoDataCoordinates::normalizeLat( north * DEG2RAD );
         break;
     }
 }
@@ -104,10 +104,10 @@ void GeoDataLatLonBox::setSouth( const qreal south, GeoDataCoordinates::Unit uni
 {
     switch( unit ){
     case GeoDataCoordinates::Radian:
-        d->m_south = GeoDataPoint::normalizeLat( south );
+        d->m_south = GeoDataCoordinates::normalizeLat( south );
         break;
     case GeoDataCoordinates::Degree:
-        d->m_south = GeoDataPoint::normalizeLat( south * DEG2RAD );
+        d->m_south = GeoDataCoordinates::normalizeLat( south * DEG2RAD );
         break;
     }
 }
@@ -124,10 +124,10 @@ void GeoDataLatLonBox::setEast( const qreal east, GeoDataCoordinates::Unit unit 
 {
     switch( unit ){
     case GeoDataCoordinates::Radian:
-        d->m_east = GeoDataPoint::normalizeLon( east );
+        d->m_east = GeoDataCoordinates::normalizeLon( east );
         break;
     case GeoDataCoordinates::Degree:
-        d->m_east = GeoDataPoint::normalizeLon( east * DEG2RAD );
+        d->m_east = GeoDataCoordinates::normalizeLon( east * DEG2RAD );
         break;
     }
 }
@@ -144,10 +144,10 @@ void GeoDataLatLonBox::setWest( const qreal west, GeoDataCoordinates::Unit unit 
 {
     switch( unit ){
     case GeoDataCoordinates::Radian:
-        d->m_west = GeoDataPoint::normalizeLon( west );
+        d->m_west = GeoDataCoordinates::normalizeLon( west );
         break;
     case GeoDataCoordinates::Degree:
-        d->m_west = GeoDataPoint::normalizeLon( west * DEG2RAD );
+        d->m_west = GeoDataCoordinates::normalizeLon( west * DEG2RAD );
         break;
     }
 }
@@ -194,16 +194,16 @@ void GeoDataLatLonBox::setBoundaries( qreal north, qreal south, qreal east, qrea
 {
     switch( unit ){
     case GeoDataCoordinates::Radian:
-        d->m_north = GeoDataPoint::normalizeLat( north );
-        d->m_south = GeoDataPoint::normalizeLat( south );
-        d->m_east =  GeoDataPoint::normalizeLon( east );
-        d->m_west =  GeoDataPoint::normalizeLon( west );
+        d->m_north = GeoDataCoordinates::normalizeLat( north );
+        d->m_south = GeoDataCoordinates::normalizeLat( south );
+        d->m_east =  GeoDataCoordinates::normalizeLon( east );
+        d->m_west =  GeoDataCoordinates::normalizeLon( west );
         break;
     case GeoDataCoordinates::Degree:
-        d->m_north = GeoDataPoint::normalizeLat( north * DEG2RAD );
-        d->m_south = GeoDataPoint::normalizeLat( south * DEG2RAD );
-        d->m_east =  GeoDataPoint::normalizeLon( east * DEG2RAD );
-        d->m_west =  GeoDataPoint::normalizeLon( west * DEG2RAD );
+        d->m_north = GeoDataCoordinates::normalizeLat( north * DEG2RAD );
+        d->m_south = GeoDataCoordinates::normalizeLat( south * DEG2RAD );
+        d->m_east =  GeoDataCoordinates::normalizeLon( east * DEG2RAD );
+        d->m_west =  GeoDataCoordinates::normalizeLon( west * DEG2RAD );
         break;
     }
 }
@@ -402,9 +402,8 @@ QString GeoDataLatLonBox::toString( GeoDataCoordinates::Unit unit ) const
 
 GeoDataLatLonBox& GeoDataLatLonBox::operator=( const GeoDataLatLonBox &other )
 {
-    // FIXME: this check is not needed, remove or keep it?
-    if ( this == &other )
-        return *this;
+    GeoDataObject::operator=( other );
+    
     *d = *other.d;
     return *this;
 }
@@ -426,12 +425,12 @@ void GeoDataLatLonBox::unpack( QDataStream& stream )
 GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lineString  )
 {
     // If the line string is empty return a boundingbox that contains everything
-    if ( lineString.isEmpty() ) {
+    if ( lineString.size() == 0 ) {
         return GeoDataLatLonBox();
     }
 
     qreal lon, lat;
-    lineString.first()->geoCoordinates( lon, lat );
+    lineString.first().geoCoordinates( lon, lat );
     GeoDataCoordinates::normalizeLonLat( lon, lat );
 
     qreal north = lat;
@@ -466,13 +465,13 @@ GeoDataLatLonBox GeoDataLatLonBox::fromLineString(  const GeoDataLineString& lin
     int currentSign = ( lon < 0 ) ? -1 : +1;
     int previousSign = currentSign;
 
-    QVector<GeoDataCoordinates*>::ConstIterator it( lineString.begin() );
-    QVector<GeoDataCoordinates*>::ConstIterator itEnd( lineString.constEnd() );
+    QVector<GeoDataCoordinates>::ConstIterator it( lineString.constBegin() );
+    QVector<GeoDataCoordinates>::ConstIterator itEnd( lineString.constEnd() );
 
     for ( ; it != itEnd; ++it )
     {
         // Get coordinates and normalize them to the desired range.
-        (*it)->geoCoordinates( lon, lat );
+        (it)->geoCoordinates( lon, lat );
         GeoDataCoordinates::normalizeLonLat( lon, lat );
 
         // Determining the maximum and minimum latitude

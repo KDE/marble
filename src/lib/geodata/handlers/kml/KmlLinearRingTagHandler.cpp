@@ -42,23 +42,23 @@ GeoNode* KmlLinearRingTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    GeoDataLinearRing* linearRing = 0;
-    if( parentItem.represents( kmlTag_outerBoundaryIs ) ) {
-        linearRing = new GeoDataLinearRing( parentItem.nodeAs<GeoDataPolygon>() );
-        parentItem.nodeAs<GeoDataPolygon>()->setOuterBoundary( linearRing );
-    } else if( parentItem.represents( kmlTag_innerBoundaryIs ) ) {
-        linearRing = new GeoDataLinearRing( parentItem.nodeAs<GeoDataPolygon>() );
-        parentItem.nodeAs<GeoDataPolygon>()->appendInnerBoundary( linearRing );
-    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
-        linearRing = new GeoDataLinearRing( parentItem.nodeAs<GeoDataMultiGeometry>() );
-        parentItem.nodeAs<GeoDataMultiGeometry>()->append( linearRing );
-    }
+    GeoDataLinearRing linearRing;
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_LinearRing << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
 
-    return linearRing;
+    if( parentItem.represents( kmlTag_outerBoundaryIs ) ) {
+        parentItem.nodeAs<GeoDataPolygon>()->setOuterBoundary( linearRing );
+        return &parentItem.nodeAs<GeoDataPolygon>()->outerBoundary();
+    } else if( parentItem.represents( kmlTag_innerBoundaryIs ) ) {
+        parentItem.nodeAs<GeoDataPolygon>()->appendInnerBoundary( linearRing );
+        return &parentItem.nodeAs<GeoDataPolygon>()->innerBoundaries().last();
+    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
+        parentItem.nodeAs<GeoDataMultiGeometry>()->append( linearRing );
+        return &parentItem.nodeAs<GeoDataMultiGeometry>()->last();
+    } else
+        return 0;
 }
 
 }

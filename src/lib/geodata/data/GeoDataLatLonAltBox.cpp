@@ -49,16 +49,8 @@ bool operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAltBox const& rhs 
 
 GeoDataLatLonAltBox& GeoDataLatLonAltBox::operator=( const GeoDataLatLonAltBox &other )
 {
-    // FIXME: this check is not needed, remove or keep it?
-    if ( this == &other )
-        return *this;
-
-    setWest(  other.west() );
-    setEast(  other.east() );
-    setNorth( other.north() );
-    setSouth( other.south() );
-    setRotation( other.rotation() );
-
+    GeoDataLatLonBox::operator=( other );
+    
     *d = *other.d;
     return *this;
 }
@@ -191,13 +183,13 @@ bool GeoDataLatLonAltBox::intersects( const GeoDataLatLonAltBox &other ) const
 GeoDataLatLonAltBox GeoDataLatLonAltBox::fromLineString(  const GeoDataLineString& lineString  )
 {
     // If the line string is empty return a boundingbox that contains everything
-    if ( lineString.isEmpty() ) {
+    if ( lineString.size() == 0 ) {
         return GeoDataLatLonAltBox();
     }
 
     GeoDataLatLonAltBox temp ( GeoDataLatLonBox::fromLineString ( lineString ) );
 
-    qreal altitude = lineString.first()->altitude();
+    qreal altitude = lineString.first().altitude();
     qreal maxAltitude = altitude;
     qreal minAltitude = altitude;
 
@@ -208,13 +200,13 @@ GeoDataLatLonAltBox GeoDataLatLonAltBox::fromLineString(  const GeoDataLineStrin
         return temp;
     }
 
-    QVector<GeoDataCoordinates*>::ConstIterator it( lineString.begin() );
-    QVector<GeoDataCoordinates*>::ConstIterator itEnd( lineString.constEnd() );
+    QVector<GeoDataCoordinates>::ConstIterator it( lineString.constBegin() );
+    QVector<GeoDataCoordinates>::ConstIterator itEnd( lineString.constEnd() );
 
     for ( ; it != itEnd; ++it )
     {
         // Get coordinates and normalize them to the desired range.
-        altitude = (*it)->altitude();
+        altitude = (it)->altitude();
 
         // Determining the maximum and minimum latitude
         if ( altitude > maxAltitude ) maxAltitude = altitude;

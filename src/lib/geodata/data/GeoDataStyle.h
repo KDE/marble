@@ -53,6 +53,7 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
   public:
     /// Construct a default style
     GeoDataStyle();
+    GeoDataStyle( const GeoDataStyle& other );
     /**
      * @brief Construct a new style
      * @param  icon   used to construct the icon style
@@ -64,21 +65,27 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
     ~GeoDataStyle();
 
     /// set the icon style
-    void setIconStyle( GeoDataIconStyle * style );
+    void setIconStyle( const GeoDataIconStyle& style );
     /// Return the icon style of this style
-    GeoDataIconStyle*  iconStyle();
+    GeoDataIconStyle& iconStyle() const;
     /// set the label style
-    void setLabelStyle( GeoDataLabelStyle * style );
+    void setLabelStyle( const GeoDataLabelStyle& style );
     /// Return the label style of this style
-    GeoDataLabelStyle* labelStyle();
+    GeoDataLabelStyle& labelStyle() const;
     /// set the line style
-    void setLineStyle( GeoDataLineStyle * style );
+    void setLineStyle( const GeoDataLineStyle& style );
     /// Return the label style of this style
-    GeoDataLineStyle* lineStyle();
+    GeoDataLineStyle& lineStyle() const;
     /// set the poly style
-    void setPolyStyle( GeoDataPolyStyle * style );
+    void setPolyStyle( const GeoDataPolyStyle& style );
     /// Return the label style of this style
-    GeoDataPolyStyle* polyStyle();
+    GeoDataPolyStyle& polyStyle() const;
+    
+    /**
+    * @brief assignment operator
+    * @param other the GeoDataStyle that gets duplicated
+    */
+    GeoDataStyle& operator=( const GeoDataStyle& other );
 
     /**
      * @brief Serialize the style to a stream
@@ -92,7 +99,6 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
     virtual void unpack( QDataStream& stream );
 
   private:
-    Q_DISABLE_COPY( GeoDataStyle )
     GeoDataStylePrivate * const d;
 };
 

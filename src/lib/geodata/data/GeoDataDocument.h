@@ -1,6 +1,7 @@
 /*
     Copyright (C) 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>
     Copyright (C) 2007 Murad Tagirov <tmurad@gmail.com>
+    Copyright (C) 2009 Patrick Spendrin <ps_ml@gmx.de>
 
     This file is part of the KDE project
 
@@ -52,10 +53,11 @@ class GeoDataDocumentPrivate;
 class GEODATA_EXPORT GeoDataDocument : public GeoDocument,
                                        public GeoDataContainer {
 public:
-    explicit GeoDataDocument( GeoDataObject *parent = 0 );
+    GeoDataDocument();
+    GeoDataDocument( GeoDataFeature& other );
+    GeoDataDocument( const GeoDataDocument& other );
     ~GeoDataDocument();
 
-    virtual EnumFeatureId featureId() const { return GeoDataDocumentId; };
     virtual bool isGeoDataDocument() const { return true; }
 
     /**
@@ -77,47 +79,47 @@ public:
      * @brief Add a style to the style storage
      * @param style  the new style
      */
-    void addStyle( GeoDataStyle* style );
+    void addStyle( const GeoDataStyle& style );
 
     /**
      * @brief Add a style to the style storage
      * @param style  the new style
      */
-    void removeStyle( GeoDataStyle* style );
+    void removeStyle( const QString& styleId );
 
     /**
      * @brief Return a style in the style storage
      * @param styleId  the id of the style
      */
-    GeoDataStyle* style( const QString& styleId ) const;
+    GeoDataStyle& style( const QString& styleId ) const;
     
     /**
     * @brief dump a Vector of all styles
     */
-    QList<GeoDataStyle*> styles() const;
+    QList<GeoDataStyle> styles() const;
 
     /**
     * @brief Add a stylemap to the stylemap storage
     * @param map  the new stylemap
     */
-    void addStyleMap( GeoDataStyleMap* map );
+    void addStyleMap( const GeoDataStyleMap& map );
     
     /**
     * @brief remove stylemap from storage
-    * @param map the styleMap to be removed
+    * @param mapId the styleId of the styleMap to be removed
     */
-    void removeStyleMap( GeoDataStyleMap* map );
+    void removeStyleMap( const QString& mapId );
     
     /**
      * @brief Return a style in the style storage
      * @param styleId  the id of the style
      */
-    GeoDataStyleMap* styleMap( const QString& styleId ) const;
+    GeoDataStyleMap& styleMap( const QString& styleId ) const;
     
     /**
     * @brief dump a Vector of all styles
     */
-    QList<GeoDataStyleMap*> styleMaps() const;
+    QList<GeoDataStyleMap> styleMaps() const;
     
     // Serialize the Placemark to @p stream
     virtual void pack( QDataStream& stream ) const;
@@ -125,8 +127,7 @@ public:
     virtual void unpack( QDataStream& stream );
 
 private:
-    Q_DISABLE_COPY( GeoDataDocument )
-    GeoDataDocumentPrivate * const d;
+    GeoDataDocumentPrivate *p() const;
 };
 
 }

@@ -41,8 +41,8 @@ const QPixmap& VisiblePlacemark::symbolPixmap() const
     GeoDataStyle* style = qobject_cast<const MarblePlacemarkModel*>( m_modelIndex.model() )
         ->styleData( m_modelIndex );
 //    GeoDataStyle* style = m_modelIndex.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
-    if ( style && style->iconStyle() ) {
-        m_symbolPixmap = style->iconStyle()->icon(); 
+    if ( style ) {
+        m_symbolPixmap = style->iconStyle().icon(); 
     } else {
         qDebug() << "Style pointer null";
     }

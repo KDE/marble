@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2008      Torsten Rahn   <rahn@kde.org>
+// Copyright 2009 Patrick Spendrin <ps_ml@gmx.de>
 //
 
 
@@ -13,46 +14,26 @@
 
 #include <QtCore/QDebug>
 
+#include "GeoDataLineString_p.h"
+
 namespace Marble
 {
-
-class GeoDataLineStringPrivate
+GeoDataLineString::GeoDataLineString( TessellationFlags f )
+  : GeoDataGeometry( new GeoDataLineStringPrivate( f ) )
 {
- public:
-    GeoDataLineStringPrivate( TessellationFlags f )
-         : m_latLonAltBox(),
-           m_dirtyBox( true ),
-           m_tessellationFlags( f )
-    {
-    }
-
-    GeoDataLatLonAltBox m_latLonAltBox;
-
-    bool         m_dirtyBox; // tells whether there have been changes to the
-                             // GeoDataPoints since the LatLonAltBox has 
-                             // been calculated. Saves performance. 
-    TessellationFlags m_tessellationFlags;
-};
-
-GeoDataLineString::GeoDataLineString( GeoDataObject *parent, TessellationFlags f )
-  : QVector<GeoDataCoordinates*>(),
-    GeoDataGeometry( parent ), 
-    d( new GeoDataLineStringPrivate( f ) )
-{
+    qDebug() << "1) GeoDataLineString created:" << p();
 }
 
-GeoDataLineString::GeoDataLineString( const GeoDataLineString & other )
-  : QVector<GeoDataCoordinates*>( other ), GeoDataGeometry( other ),
-    d( new GeoDataLineStringPrivate( *other.d ) )
+GeoDataLineString::GeoDataLineString( GeoDataLineStringPrivate* priv )
+  : GeoDataGeometry( priv )
 {
+    qDebug() << "2) GeoDataLineString created:" << p();
 }
 
-GeoDataLineString& GeoDataLineString::operator=( const GeoDataLineString & rhs )
+GeoDataLineString::GeoDataLineString( const GeoDataGeometry & other )
+  : GeoDataGeometry( other )
 {
-    // FIXME: check for self assignment is not needed imho, discuss if we
-    // check nevertheless.
-    *d = *rhs.d;
-    return *this;
+    qDebug() << "3) GeoDataLineString created:" << p();
 }
 
 GeoDataLineString::~GeoDataLineString()
@@ -60,9 +41,105 @@ GeoDataLineString::~GeoDataLineString()
 #ifdef DEBUG_GEODATA
     qDebug() << "delete Linestring";
 #endif
-    delete d;
-//    FIXME: Ownership
-//    qDeleteAll(*this);
+}
+
+GeoDataLineStringPrivate* GeoDataLineString::p() const
+{
+    return static_cast<GeoDataLineStringPrivate*>(d);
+}
+
+int GeoDataLineString::size() const
+{
+    return p()->m_vector.size();
+}
+
+GeoDataCoordinates& GeoDataLineString::at( int pos )
+{
+    GeoDataGeometry::detach();
+    return p()->m_vector[ pos ];
+}
+
+const GeoDataCoordinates& GeoDataLineString::at( int pos ) const
+{
+    return p()->m_vector.at( pos );
+}
+
+GeoDataCoordinates& GeoDataLineString::operator[]( int pos )
+{
+    GeoDataGeometry::detach();
+    return p()->m_vector[ pos ];
+}
+
+const GeoDataCoordinates& GeoDataLineString::operator[]( int pos ) const
+{
+    return p()->m_vector[ pos ];
+}
+
+GeoDataCoordinates& GeoDataLineString::last()
+{
+    GeoDataGeometry::detach();
+    return p()->m_vector.last();
+}
+
+GeoDataCoordinates& GeoDataLineString::first()
+{
+    GeoDataGeometry::detach();
+    return p()->m_vector.first();
+}
+
+const GeoDataCoordinates& GeoDataLineString::last() const
+{
+    return p()->m_vector.last();
+}
+
+const GeoDataCoordinates& GeoDataLineString::first() const
+{
+    return p()->m_vector.first();
+}
+
+QVector<GeoDataCoordinates>::Iterator GeoDataLineString::begin()
+{
+    GeoDataGeometry::detach();
+    return p()->m_vector.begin();
+}
+
+QVector<GeoDataCoordinates>::Iterator GeoDataLineString::end()
+{
+    GeoDataGeometry::detach();
+    return p()->m_vector.end();
+}
+
+QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constBegin() const
+{
+    return p()->m_vector.constBegin();
+}
+
+QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constEnd() const
+{
+    return p()->m_vector.constEnd();
+}
+
+void GeoDataLineString::append ( const GeoDataCoordinates& value )
+{
+    GeoDataGeometry::detach();
+    p()->m_dirtyBox = true;
+    p()->m_vector.append( value );
+}
+
+GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& value )
+{
+    GeoDataGeometry::detach();
+    p()->m_dirtyBox = true;
+    p()->m_vector.append( value );
+    return *this;
+}
+
+void GeoDataLineString::clear()
+{
+    GeoDataGeometry::detach();
+    p()->m_dirtyBox = true;
+
+    p()->m_vector.clear();
 }
 
 bool GeoDataLineString::isClosed() const
@@ -72,70 +149,55 @@ bool GeoDataLineString::isClosed() const
 
 bool GeoDataLineString::tessellate() const
 {
-    return d->m_tessellationFlags.testFlag(Tessellate);
+    return p()->m_tessellationFlags.testFlag(Tessellate);
 }
 
 void GeoDataLineString::setTessellate( bool tessellate )
 {
+    GeoDataGeometry::detach();
     // According to the KML reference the tesselation of line strings in Google Earth 
     // is generally done along great circles. However for subsequent points that share 
     // the same latitude the latitude circles are followed. Our Tesselate and RespectLatitude
     // Flags provide this behaviour. For true polygons the latitude circles don't get considered. 
 
     if ( tessellate ) {
-        d->m_tessellationFlags |= Tessellate; 
-        d->m_tessellationFlags |= RespectLatitudeCircle; 
+        p()->m_tessellationFlags |= Tessellate; 
+        p()->m_tessellationFlags |= RespectLatitudeCircle; 
     } else {
-        d->m_tessellationFlags ^= Tessellate; 
-        d->m_tessellationFlags ^= RespectLatitudeCircle; 
+        p()->m_tessellationFlags ^= Tessellate; 
+        p()->m_tessellationFlags ^= RespectLatitudeCircle; 
     }
 }
 
 TessellationFlags GeoDataLineString::tessellationFlags() const
 {
-    return d->m_tessellationFlags;
+    return p()->m_tessellationFlags;
 }
 
 void GeoDataLineString::setTessellationFlags( TessellationFlags f )
 {
-    d->m_tessellationFlags = f;
+    GeoDataGeometry::detach();
+    p()->m_tessellationFlags = f;
 }
 
 GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
 {
-    if (d->m_dirtyBox) {
-        d->m_latLonAltBox = GeoDataLatLonAltBox::fromLineString( *this );
-        d->m_dirtyBox = false;
-    }
-
-    return d->m_latLonAltBox;
+    return GeoDataLatLonAltBox::fromLineString( *this );
 }
 
-
-void GeoDataLineString::append ( GeoDataCoordinates* value )
+QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator pos )
 {
-    d->m_dirtyBox = true;
-    QVector<GeoDataCoordinates*>::append( value );
+    GeoDataGeometry::detach();
+    p()->m_dirtyBox = true;
+    return p()->m_vector.erase( pos );
 }
 
-void GeoDataLineString::clear()
+QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator begin, 
+                                                                 QVector<GeoDataCoordinates>::Iterator end )
 {
-    d->m_dirtyBox = true;
-// possible leakage
-    QVector<GeoDataCoordinates*>::clear();
-}
-
-QVector<GeoDataCoordinates*>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates*>::Iterator pos )
-{
-    d->m_dirtyBox = true;
-    return QVector<GeoDataCoordinates*>::erase( pos );
-}
-
-QVector<GeoDataCoordinates*>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates*>::Iterator begin, 
-                                                                 QVector<GeoDataCoordinates*>::Iterator end )
-{
-    d->m_dirtyBox = true;
-    return QVector<GeoDataCoordinates*>::erase( begin, end );
+    GeoDataGeometry::detach();
+    p()->m_dirtyBox = true;
+    return p()->m_vector.erase( begin, end );
 }
 
 void GeoDataLineString::pack( QDataStream& stream ) const
@@ -143,21 +205,22 @@ void GeoDataLineString::pack( QDataStream& stream ) const
     GeoDataGeometry::pack( stream );
 
     stream << size();
-    stream << (qint32)(d->m_tessellationFlags);
+    stream << (qint32)(p()->m_tessellationFlags);
     
-    for( QVector<GeoDataCoordinates*>::const_iterator iterator 
-          = constBegin(); 
-         iterator != constEnd();
+    for( QVector<GeoDataCoordinates>::const_iterator iterator 
+          = p()->m_vector.constBegin(); 
+         iterator != p()->m_vector.constEnd();
          ++iterator ) {
-        qDebug() << "innerRing: size" << size();
-        GeoDataCoordinates* coord = ( *iterator );
-        coord->pack( stream );
+        qDebug() << "innerRing: size" << p()->m_vector.size();
+        GeoDataCoordinates coord = ( *iterator );
+        coord.pack( stream );
     }
     
 }
 
 void GeoDataLineString::unpack( QDataStream& stream )
 {
+    GeoDataGeometry::detach();
     GeoDataGeometry::unpack( stream );
     qint32 size;
     qint32 tessellationFlags;
@@ -165,12 +228,12 @@ void GeoDataLineString::unpack( QDataStream& stream )
     stream >> size;
     stream >> tessellationFlags;
 
-    d->m_tessellationFlags = (TessellationFlags)(tessellationFlags);
+    p()->m_tessellationFlags = (TessellationFlags)(tessellationFlags);
 
     for(qint32 i = 0; i < size; i++ ) {
-        GeoDataCoordinates* coord = new GeoDataCoordinates();
-        coord->unpack( stream );
-        append( coord );
+        GeoDataCoordinates coord;
+        coord.unpack( stream );
+        p()->m_vector.append( coord );
     }
 }
 

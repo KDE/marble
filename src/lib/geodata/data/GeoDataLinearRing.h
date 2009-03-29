@@ -34,16 +34,15 @@ namespace Marble
  * currently used for a very similar purpose.
  */
 
+class GeoDataLinearRingPrivate;
+
 class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString {
  public:
-    explicit GeoDataLinearRing( GeoDataObject *parent = 0,          
-                                TessellationFlags f = NoTessellation);
+    explicit GeoDataLinearRing( TessellationFlags f = NoTessellation);
 
     virtual ~GeoDataLinearRing();
 
     virtual bool isClosed() const;
-
-    virtual EnumGeometryId geometryId() const { return GeoDataLinearRingId; };
 };
 
 }

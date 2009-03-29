@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2008 Patrick Spendrin <ps_ml@gmx.de>
+    Copyright (C) 2008-2009 Patrick Spendrin <ps_ml@gmx.de>
 
     This file is part of the KDE project
 
@@ -39,30 +39,31 @@ GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Style ) );
 
-    GeoDataStyle* style = 0;
 
     GeoStackItem parentItem = parser.parentElement();
     /// for documents several styles are allowed: document wide styles are saved different!!!!!
     if( parentItem.represents( kmlTag_Document ) ) {
-        style = new GeoDataStyle;
-        style->setStyleId( parser.attribute( "id" ).trimmed() );
+        GeoDataStyle style;
+        QString styleId = parser.attribute( "id" ).trimmed();
+        style.setStyleId( styleId );
         parentItem.nodeAs<GeoDataDocument>()->addStyle( style );
 #ifdef DEBUG_TAGS
-    qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << style << " parentItem: Document "
+    qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << &parentItem.nodeAs<GeoDataDocument>()->style( styleId ) << " parentItem: Document "
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
+        return &parentItem.nodeAs<GeoDataDocument>()->style( styleId );
     }
     else if ( parentItem.nodeAs<GeoDataFeature>() ) {
-        style = new GeoDataStyle;
+/*        style = new GeoDataStyle;
         style->setStyleId( parser.attribute( "id" ).trimmed() );
-        parentItem.nodeAs<GeoDataFeature>()->setStyle( style );
+        parentItem.nodeAs<GeoDataFeature>()->setStyle( style );*/
 #ifdef DEBUG_TAGS
-    qDebug() << "Parsed <" << kmlTag_Style << "> containing: " << style << " parentItem: Feature "
+    qDebug() << "Parsed <" << kmlTag_Style << ">" << " parentItem: Feature (ignoring styles outside of document tag)"
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }
     // FIXME: KMLStyle can be contained in MultiGeometry as well
-    return style;
+    return 0;
 }
 
 }

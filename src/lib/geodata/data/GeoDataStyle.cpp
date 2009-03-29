@@ -18,47 +18,43 @@ class GeoDataStylePrivate
 {
   public:
     GeoDataStylePrivate()
-        : m_iconStyle( 0 ),
-          m_labelStyle( new GeoDataLabelStyle() ),
-          m_lineStyle( 0 ),
-          m_polyStyle( 0 )
     {
     }
 
     GeoDataStylePrivate(const QPixmap& icon, 
                         const QFont &font, const QColor &color )
-        : m_iconStyle( new GeoDataIconStyle( icon ) ),
-          m_labelStyle( new GeoDataLabelStyle( font, color ) ),
-          m_lineStyle( new GeoDataLineStyle( color ) ),
-          m_polyStyle( new GeoDataPolyStyle( color ) )
+        : m_iconStyle( icon ),
+          m_labelStyle( font, color ),
+          m_lineStyle( color ),
+          m_polyStyle( color )
     {
     }
-
 
     ~GeoDataStylePrivate()
     {
-        delete m_labelStyle;
-        delete m_iconStyle;
-        delete m_lineStyle;
-        delete m_polyStyle;
     }
 
-    GeoDataIconStyle   *m_iconStyle;
-    GeoDataLabelStyle  *m_labelStyle;
-    GeoDataLineStyle   *m_lineStyle;
-    GeoDataPolyStyle   *m_polyStyle;
+    GeoDataIconStyle   m_iconStyle;
+    GeoDataLabelStyle  m_labelStyle;
+    GeoDataLineStyle   m_lineStyle;
+    GeoDataPolyStyle   m_polyStyle;
     // BalloonStyle
     // ListStyle
 };
 
 GeoDataStyle::GeoDataStyle()
-    : d( new GeoDataStylePrivate() )
+    : d( new GeoDataStylePrivate )
+{
+}
+
+GeoDataStyle::GeoDataStyle( const GeoDataStyle& other )
+    : GeoDataStyleSelector( other ), d( new GeoDataStylePrivate( *other.d ) )
 {
 }
 
 GeoDataStyle::GeoDataStyle( const QPixmap& icon, 
                             const QFont &font, const QColor &color  )
-    : d( new GeoDataStylePrivate(icon, font, color) )
+    : d( new GeoDataStylePrivate( icon, font, color ) )
 {
 }
 
@@ -67,46 +63,49 @@ GeoDataStyle::~GeoDataStyle()
     delete d;
 }
 
-void GeoDataStyle::setIconStyle( GeoDataIconStyle* style )
+GeoDataStyle& GeoDataStyle::operator=( const GeoDataStyle& other )
 {
-    delete d->m_iconStyle;
+    GeoDataStyleSelector::operator=( other );
+    *d = *other.d;
+    return *this;
+}
+
+void GeoDataStyle::setIconStyle( const GeoDataIconStyle& style )
+{
     d->m_iconStyle = style;
 }
 
-void GeoDataStyle::setLineStyle( GeoDataLineStyle* style )
+void GeoDataStyle::setLineStyle( const GeoDataLineStyle& style )
 {
-    delete d->m_lineStyle;
     d->m_lineStyle = style;
 }
 
-void GeoDataStyle::setLabelStyle( GeoDataLabelStyle* style )
+void GeoDataStyle::setLabelStyle( const GeoDataLabelStyle& style )
 {
-    delete d->m_labelStyle;
     d->m_labelStyle = style;
 }
 
-void GeoDataStyle::setPolyStyle( GeoDataPolyStyle* style )
+void GeoDataStyle::setPolyStyle( const GeoDataPolyStyle& style )
 {
-    delete d->m_polyStyle;
     d->m_polyStyle = style;
 }
 
-GeoDataIconStyle* GeoDataStyle::iconStyle()
+GeoDataIconStyle& GeoDataStyle::iconStyle() const
 {
     return d->m_iconStyle;
 }
 
-GeoDataLineStyle* GeoDataStyle::lineStyle()
+GeoDataLineStyle& GeoDataStyle::lineStyle() const
 {
     return d->m_lineStyle;
 }
 
-GeoDataPolyStyle* GeoDataStyle::polyStyle()
+GeoDataPolyStyle& GeoDataStyle::polyStyle() const
 {
     return d->m_polyStyle;
 }
 
-GeoDataLabelStyle* GeoDataStyle::labelStyle()
+GeoDataLabelStyle& GeoDataStyle::labelStyle() const
 {
     return d->m_labelStyle;
 }
@@ -115,20 +114,20 @@ void GeoDataStyle::pack( QDataStream& stream ) const
 {
     GeoDataStyleSelector::pack( stream );
 
-    d->m_iconStyle->pack( stream );
-    d->m_labelStyle->pack( stream );
-    d->m_polyStyle->pack( stream );
-    d->m_lineStyle->pack( stream );
+    d->m_iconStyle.pack( stream );
+    d->m_labelStyle.pack( stream );
+    d->m_polyStyle.pack( stream );
+    d->m_lineStyle.pack( stream );
 }
 
 void GeoDataStyle::unpack( QDataStream& stream )
 {
     GeoDataStyleSelector::unpack( stream );
 
-    d->m_iconStyle->unpack( stream );
-    d->m_labelStyle->unpack( stream );
-    d->m_lineStyle->unpack( stream );
-    d->m_polyStyle->unpack( stream );
+    d->m_iconStyle.unpack( stream );
+    d->m_labelStyle.unpack( stream );
+    d->m_lineStyle.unpack( stream );
+    d->m_polyStyle.unpack( stream );
 }
 
 }

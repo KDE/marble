@@ -29,129 +29,123 @@
 
 #include <QtCore/QDebug>
 
+#include "GeoDataDocument_p.h"
+
 namespace Marble
 {
 
-class GeoDataDocumentPrivate
+GeoDataDocument::GeoDataDocument()
+    : GeoDataContainer( new GeoDataDocumentPrivate )
 {
-  public:
-    GeoDataDocumentPrivate()
-    {
-    }
+}
 
-    ~GeoDataDocumentPrivate()
-    {
-    }
+GeoDataDocument::GeoDataDocument( GeoDataFeature& other )
+    : GeoDataContainer( other )
+{
+}
 
-    QHash<QString, GeoDataStyle*> m_styleHash;
-    QHash<QString, GeoDataStyleMap*> m_styleMapHash;
-    QString m_filename;
-};
-
-GeoDataDocument::GeoDataDocument( GeoDataObject *parent )
-    : GeoDocument()
-    , GeoDataContainer( parent )
-    , d( new GeoDataDocumentPrivate() )
+GeoDataDocument::GeoDataDocument( const GeoDataDocument& other )
+: GeoDataContainer( other )
 {
 }
 
 GeoDataDocument::~GeoDataDocument()
 {
-#ifdef DEBUG_GEODATA
-    qDebug() << "delete Document";
-#endif
-    delete d;
+}
+
+GeoDataDocumentPrivate* GeoDataDocument::p() const
+{
+    return static_cast<GeoDataDocumentPrivate*>(d);
 }
 
 QString GeoDataDocument::fileName() const
 {
-    return d->m_filename;
+    return p()->m_filename;
 }
 
 void GeoDataDocument::setFileName( const QString &value )
 {
-    d->m_filename = value;
+    detach();
+    p()->m_filename = value;
 }
 
-void GeoDataDocument::addStyle( GeoDataStyle* style )
+void GeoDataDocument::addStyle( const GeoDataStyle& style )
 {
-    Q_ASSERT( style );
-    qDebug( "GeoDataDocument: Add new style" );
-    d->m_styleHash.insert( style->styleId(), style );
+    detach();
+    p()->m_styleHash.insert( style.styleId(), style );
 }
 
-void GeoDataDocument::removeStyle( GeoDataStyle* style )
+void GeoDataDocument::removeStyle( const QString& styleId )
 {
-    Q_ASSERT( style );
-    qDebug( "GeoDataDocument: remove style" );
-    d->m_styleHash.remove( style->styleId() );
+    detach();
+    p()->m_styleHash.remove( styleId );
 }
 
-GeoDataStyle* GeoDataDocument::style( const QString& styleId ) const
+GeoDataStyle& GeoDataDocument::style( const QString& styleId ) const
 {
     /*
      * FIXME: m_styleHash always should contain at least default
      *        GeoDataStyle element
      */
-    return d->m_styleHash.value( styleId );
+    return p()->m_styleHash[ styleId ];
 }
 
-QList<GeoDataStyle*> GeoDataDocument::styles() const
+QList<GeoDataStyle> GeoDataDocument::styles() const
 {
-    return d->m_styleHash.values();
+    return p()->m_styleHash.values();
 }
 
-void GeoDataDocument::addStyleMap( GeoDataStyleMap* map )
+void GeoDataDocument::addStyleMap( const GeoDataStyleMap& map )
 {
-    Q_ASSERT( map );
+    detach();
     qDebug( "GeoDataDocument: Add new styleMap" );
-    d->m_styleMapHash.insert( map->styleId(), map );
+    p()->m_styleMapHash.insert( map.styleId(), map );
 }
 
-void GeoDataDocument::removeStyleMap( GeoDataStyleMap* map )
+void GeoDataDocument::removeStyleMap( const QString& mapId )
 {
-    Q_ASSERT( map );
-    qDebug( "GeoDataDocument: remove styleMap" );
-    d->m_styleMapHash.remove( map->styleId() );
+    detach();
+    p()->m_styleMapHash.remove( mapId );
 }
 
-GeoDataStyleMap* GeoDataDocument::styleMap( const QString& styleId ) const
+GeoDataStyleMap& GeoDataDocument::styleMap( const QString& styleId ) const
 {
-    return d->m_styleMapHash.value( styleId );
+    return p()->m_styleMapHash[ styleId ];
 }
 
-QList<GeoDataStyleMap*> GeoDataDocument::styleMaps() const
+QList<GeoDataStyleMap> GeoDataDocument::styleMaps() const
 {
-    return d->m_styleMapHash.values();
+    return p()->m_styleMapHash.values();
 }
 
 void GeoDataDocument::pack( QDataStream& stream ) const
 {
     GeoDataContainer::pack( stream );
 
-    stream << d->m_styleHash.size();
+    stream << p()->m_styleHash.size();
     
     
-    for( QHash<QString, GeoDataStyle*>::const_iterator iterator 
-          = d->m_styleHash.constBegin(); 
-        iterator != d->m_styleHash.constEnd(); 
+    for( QMap<QString, GeoDataStyle>::const_iterator iterator 
+          = p()->m_styleHash.constBegin(); 
+        iterator != p()->m_styleHash.constEnd(); 
         ++iterator ) {
-        iterator.value()->pack( stream );
+        iterator.value().pack( stream );
     }
 }
 
 
 void GeoDataDocument::unpack( QDataStream& stream )
 {
+    detach();
     GeoDataContainer::unpack( stream );
 
     int size = 0;
 
     stream >> size;
     for( int i = 0; i < size; i++ ) {
-        GeoDataStyle* style = new GeoDataStyle();
-        style->unpack( stream );
-        d->m_styleHash.insert( style->styleId(), style );
+        GeoDataStyle style;
+        style.unpack( stream );
+        p()->m_styleHash.insert( style.styleId(), style );
     }
 }
 

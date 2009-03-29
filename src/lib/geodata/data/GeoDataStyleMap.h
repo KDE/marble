@@ -42,7 +42,7 @@ class GEODATA_EXPORT GeoDataStyleMap : public GeoDataStyleSelector,
     /**
     * @brief return the last key
     */
-    QString lastKey();
+    QString lastKey() const;
     /**
     * @brief Set the last key
     * this property is needed to set an entry in the kml parser
@@ -51,6 +51,13 @@ class GEODATA_EXPORT GeoDataStyleMap : public GeoDataStyleSelector,
     * @param key the last key
     */
     void setLastKey( QString key );
+    
+    /**
+    * @brief assignment operator
+    * @param other the styleMap which gets duplicated.
+    */
+    GeoDataStyleMap& operator=( const GeoDataStyleMap& other );
+
     /**
      * @brief Serialize the stylemap to a stream
      * @param  stream  the stream
@@ -62,12 +69,11 @@ class GEODATA_EXPORT GeoDataStyleMap : public GeoDataStyleSelector,
      */
     virtual void unpack( QDataStream& stream );
 
-//  protected:
     GeoDataStyleMap();
+    GeoDataStyleMap( const GeoDataStyleMap& other );
     ~GeoDataStyleMap();
 
   private:
-    Q_DISABLE_COPY( GeoDataStyleMap )
     GeoDataStyleMapPrivate * const d;
 };
 

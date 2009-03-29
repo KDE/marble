@@ -7,6 +7,7 @@
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
 // Copyright 2007      Inge Wallin   <inge@lysator.liu.se>
+// Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
 
@@ -45,61 +46,87 @@ class GeoDataPlacemark;
 class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
 {
  public:
+    /// Default constructor
+    GeoDataContainer();
+    GeoDataContainer( const GeoDataContainer& other );
+    GeoDataContainer( const GeoDataFeature& other );
+    GeoDataContainerPrivate* p() const;
     /// Destruct the GeoDataContainer
     virtual ~GeoDataContainer();
 
     /**
      * @brief A convenience function that returns all folders in this container.
-     * @return A QVector of GeoDataFolder*
+     * @return A QVector of GeoDataFolder
      *
      * @see GeoDataFolder
      */
-    QVector<GeoDataFolder*> folders() const;
+    QVector<GeoDataFolder> folders() const;
 
     /**
      * @brief A convenience function that returns all features in this container.
-     * @return A QVector of GeoDataFeature*
+     * @return A QVector of GeoDataFeature
      *
      * @see GeoDataFeature
      */
-    QVector<GeoDataFeature*> features() const;
+    QVector<GeoDataFeature>& features() const;
 
     /**
      * @brief A convenience function that returns all placemarks in this container.
-     * @return A QVector of GeoDataPlacemark*
+     * @return A QVector of GeoDataPlacemark
      *
      * @see GeoDataPlacemark
      * @see PlacemarkContainer
      */
-    QVector<GeoDataPlacemark*> placemarks() const;
+    QVector<GeoDataPlacemark> placemarks() const;
     
-    /**
-     * @brief  Add a feature to the container
-     * @param  feature  the new feature
-     */
-    void addFeature( GeoDataFeature* feature, bool setChild = true );
-    
-    /**
-    * @brief Remove a feature given by its pointer
-    * @param feature the feature which needs to be removed
-    */
-    void removeFeature( GeoDataFeature* feature );
-
     /**
      * @brief  returns the requested child item
      */
-    virtual GeoDataObject* child( int );
+//    virtual GeoDataObject* child( int );
     
     /**
      * @brief returns the position of an item in the list
      */
-    virtual int childPosition( GeoDataObject* );
+//    virtual int childPosition( GeoDataObject* );
     
     /**
      * @brief returns the number of items in the list
      */
-    virtual int childCount();
-    
+//    virtual int childCount();
+
+    /**
+    * @brief add an element
+    */
+    void append( const GeoDataFeature& other );
+
+    /**
+    * @brief size of the container
+    */
+    int size() const;
+
+    /**
+    * @brief return the reference of the element at a specific position
+    */
+    GeoDataFeature& at( int pos );
+    const GeoDataFeature& at( int pos ) const;
+
+    /**
+    * @brief return the reference of the last element for convenience
+    */
+    GeoDataFeature& last();
+    const GeoDataFeature& last() const;
+    /**
+    * @brief return the reference of the last element for convenience
+    */
+    GeoDataFeature& first();
+    const GeoDataFeature& first() const;
+
+    QVector<GeoDataFeature>::Iterator begin();
+    QVector<GeoDataFeature>::Iterator end();
+    QVector<GeoDataFeature>::ConstIterator constBegin() const;
+    QVector<GeoDataFeature>::ConstIterator constEnd() const;
+    void clear();
+
     /**
      * @brief  Serialize the container to a stream.
      * @param  stream  the stream
@@ -110,14 +137,9 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      * @param  stream  the stream
      */
     virtual void unpack( QDataStream& stream );
-
- protected:
-    /// Default constructor
-    explicit GeoDataContainer( GeoDataObject *parent = 0 );
-
- private:
-    Q_DISABLE_COPY( GeoDataContainer )
-    GeoDataContainerPrivate * const d;
+private:
+    friend class GeoDataDocument;
+    GeoDataContainer( GeoDataContainerPrivate *priv );
 };
 
 }

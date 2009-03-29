@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 // Copyright 2008      Inge Wallin <inge@lysator.liu.se>
 //
 
@@ -42,9 +42,8 @@ class GeoDataPolygonPrivate;
 
 class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
  public:
-    explicit GeoDataPolygon( GeoDataObject *parent = 0, TessellationFlags f = NoTessellation);
-    GeoDataPolygon( const GeoDataPolygon & );
-    GeoDataPolygon& operator=( const GeoDataPolygon & );
+    explicit GeoDataPolygon( TessellationFlags f = NoTessellation );
+    GeoDataPolygon( const GeoDataGeometry &other );
 
     virtual ~GeoDataPolygon();
 
@@ -59,19 +58,18 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
     GeoDataLatLonAltBox latLonAltBox() const;
 
     GeoDataLinearRing& outerBoundary() const;
-    void setOuterBoundary( GeoDataLinearRing* boundary );
+    void setOuterBoundary( const GeoDataLinearRing& boundary );
 
-    QVector<GeoDataLinearRing*> innerBoundaries() const;
-    void appendInnerBoundary( GeoDataLinearRing* boundary );
+    QVector<GeoDataLinearRing>& innerBoundaries() const;
+    void appendInnerBoundary( const GeoDataLinearRing& boundary );
 
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
     /// Unserialize the contents of the feature from @p stream.
     virtual void unpack( QDataStream& stream );
 
-    virtual EnumGeometryId geometryId() const { return GeoDataPolygonId; };
  protected:
-    GeoDataPolygonPrivate * const d;
+    GeoDataPolygonPrivate *p() const;
 };
 
 class GEODATA_EXPORT GeoDataOuterBoundary : public GeoDataPolygon {};

@@ -49,11 +49,12 @@ class MarbleGeometryModel::Private {
         * This is needed to build up the parent Hash.
         */
         if( !geometry ) return;
-        GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>( geometry );
-        QVector<GeoDataGeometry*>::const_iterator iterator = multiGeometry->constBegin();
-        for (; iterator != multiGeometry->constEnd(); ++iterator ) {
-            m_parent[ *iterator ] = geometry;
-            if( (*iterator)->geometryId() == GeoDataMultiGeometryId ) mapGeometry( *iterator );
+        
+        GeoDataMultiGeometry* multiGeometry = static_cast<GeoDataMultiGeometry*>( geometry );
+        QVector<GeoDataGeometry>::iterator iterator = multiGeometry->begin();
+        for(; iterator != multiGeometry->end(); ++iterator ) {
+            m_parent[ iterator ] = geometry;
+            if( iterator->geometryId() == GeoDataMultiGeometryId ) mapGeometry( iterator );
         }
     };
     
@@ -62,15 +63,16 @@ class MarbleGeometryModel::Private {
         if( !feature ) return;
         
         if( feature->featureId() == GeoDataDocumentId || feature->featureId() == GeoDataFolderId ) {
-            Q_FOREACH( GeoDataFeature *childFeature, static_cast<GeoDataContainer*>( feature )->features() ) {
-                m_parent[ childFeature ] = feature;
-                mapFeature( childFeature );
+            Q_FOREACH( GeoDataFeature childFeature, static_cast<GeoDataContainer*>( feature )->features() ) {
+                m_parent[ &childFeature ] = feature;
+                mapFeature( &childFeature );
             }
         }
         if( feature->featureId() == GeoDataPlacemarkId ) {
-            if( dynamic_cast<GeoDataPlacemark*>( feature )->geometry() && dynamic_cast<GeoDataPlacemark*>( feature )->geometry()->geometryId() == GeoDataMultiGeometryId ) {
-                m_parent[ dynamic_cast<GeoDataPlacemark*>( feature )->geometry() ] = feature;
-                mapGeometry( dynamic_cast<GeoDataPlacemark*>( feature )->geometry() );
+            GeoDataPlacemark placemark = *feature;
+            if( placemark.geometry() && placemark.geometry()->geometryId() == GeoDataMultiGeometryId ) {
+                m_parent[ placemark.geometry() ] = feature;
+                mapGeometry( placemark.geometry() );
             }
         }
     };
@@ -123,22 +125,29 @@ int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
     else
         parentItem = static_cast<GeoDataObject*>( parent.internalPointer() );
 
-    if( dynamic_cast<GeoDataDocument*>( parentItem ) ||
-        dynamic_cast<GeoDataFolder*>( parentItem ) )
+    int size = 0;
+    if( dynamic_cast<GeoDataFeature*>( parentItem ) && 
+       (static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataDocumentId ||
+        static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataFolderId ) )
     {
-        return dynamic_cast<GeoDataContainer*>( parentItem )->features().size();
+        GeoDataFolder folder( *static_cast<GeoDataFeature*>( parentItem ) );
+        size = folder.features().size();
     }
     
-    if( dynamic_cast<GeoDataPlacemark*>( parentItem ) ) {
+    if( dynamic_cast<GeoDataFeature*>( parentItem ) && 
+       static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataPlacemarkId )
+    {
         /* there is only one GeoDataGeometry Object per Placemark; if Styles 
         * are added later, add them here */
-        return 1;
+        size = 1;
     }
     
-    if( dynamic_cast<GeoDataMultiGeometry*>( parentItem ) ) {
-        return dynamic_cast<GeoDataMultiGeometry*>( parentItem )->size();
+    if( dynamic_cast<GeoDataGeometry*>( parentItem ) && 
+        static_cast<GeoDataGeometry*>( parentItem )->geometryId() == GeoDataMultiGeometryId )
+    {
+        size = dynamic_cast<GeoDataMultiGeometry*>( parentItem )->size();
     }
-    return 0;
+    return size;
 }
 
 QVariant MarbleGeometryModel::data( const QModelIndex &index, int role ) const
@@ -221,24 +230,31 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
     else
         parentItem = static_cast<GeoDataObject*>( parent.internalPointer() );
 
-    GeoDataObject *childItem = 0;
+    GeoDataObject *childItem;
 
     /* go down into GeoDataContainers */
-    if( dynamic_cast<GeoDataDocument*>( parentItem ) || 
-        dynamic_cast<GeoDataFolder*>( parentItem ) )
-    {
-        childItem = dynamic_cast<GeoDataObject*>( 
-                        dynamic_cast<GeoDataContainer*>( 
-                            parentItem )->features().at( row ) );
-    }
-
-    if( dynamic_cast<GeoDataPlacemark*>( parentItem ) ) {
-        /* as said above - if you add styles, please check for the row over here */
-        childItem = dynamic_cast<GeoDataPlacemark*>( parentItem )->geometry();
-    }
-    
-    if( dynamic_cast<GeoDataMultiGeometry*>( parentItem ) ) {
-        childItem = dynamic_cast<GeoDataMultiGeometry*>( parentItem )->at( row );
+    if( dynamic_cast<GeoDataFeature*>( parentItem ) ) {
+        switch( dynamic_cast<GeoDataFeature*>( parentItem )->featureId() ) {
+            case GeoDataDocumentId:
+            case GeoDataFolderId: {
+                GeoDataContainer container( *static_cast<GeoDataFeature*>( parentItem ) );
+                childItem = &container.features()[ row ];
+            }; break;
+            case GeoDataPlacemarkId: {
+                GeoDataPlacemark placemark( *static_cast<GeoDataPlacemark*>( parentItem ) );
+                childItem = placemark.geometry();
+            }; break;
+            default: break;
+        };
+    } else if( dynamic_cast<GeoDataGeometry*>( parentItem ) ) {
+        if( dynamic_cast<GeoDataGeometry*>( parentItem )->geometryId() == GeoDataMultiGeometryId ) {
+            qDebug() << "making new MulitGeometry object:";
+            GeoDataMultiGeometry geom = *static_cast<GeoDataGeometry*>( parentItem );
+            childItem = &geom.vector()[ row ];
+            qDebug() << "casting geometryObject:" << childItem;
+        }
+    } else {
+        childItem = 0;
     }
 
     if ( childItem )

@@ -22,10 +22,21 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QCoreApplication>
+#if QT_VERSION < 0x040400
+# include <qatomic.h>
+#else
+# include <QtCore/QAtomicInt>
+#endif
+
 #include "global.h"
+
+#include "Quaternion.h"
 
 namespace Marble
 {
+#if QT_VERSION < 0x040400
+    typedef QAtomic QAtomicInt;
+#endif
 
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 
@@ -48,26 +59,63 @@ GeoDataCoordinates::GeoDataCoordinates( qreal _lon, qreal _lat, qreal _alt, GeoD
     }
 }
 
+/* simply copy the d pointer
+* it will be replaced in the detach function instead
+*/
 GeoDataCoordinates::GeoDataCoordinates( const GeoDataCoordinates& other )
-  : d( new GeoDataCoordinatesPrivate( *other.d ) )
+  : d( other.d )
 {
+    d->ref.ref();
 }
 
+/*
+ * standard ctor;
+ * create a new private pointer which initializes the atomic reference counter
+ */
 GeoDataCoordinates::GeoDataCoordinates()
   : d( new GeoDataCoordinatesPrivate() )
 {
 }
 
+/*
+ * only delete the private d pointer if the number of references is 0
+ * remember that all copies share the same d pointer!
+ */
 GeoDataCoordinates::~GeoDataCoordinates()
 {
-    delete d;
+    if (!d->ref.deref())
+        delete d;
 #ifdef DEBUG_GEODATA
 //    qDebug() << "delete coordinates";
 #endif
 }
 
+/*
+ * if only one copy exists, return
+ * else make a new private d pointer object and assign the values of the current
+ * one to it
+ * at the end, if the number of references thus reaches 0 delete it
+ * this state shouldn't happen, but if it does, we have to clean up behind us.
+ */
+void GeoDataCoordinates::detach()
+{
+    if(d->ref == 1)
+        return;
+
+    GeoDataCoordinatesPrivate *new_d = new GeoDataCoordinatesPrivate( *d );
+
+    if (!d->ref.deref())
+        delete d;
+
+    d = new_d;
+}
+
+/*
+ * call detach() at the start of all non-static, non-const functions
+ */
 void GeoDataCoordinates::set( qreal _lon, qreal _lat, qreal _alt, GeoDataCoordinates::Unit unit )
 {
+    detach();
     d->m_altitude = _alt;
     switch( unit ){
     case Radian:
@@ -99,16 +147,19 @@ void GeoDataCoordinates::geoCoordinates( qreal& lon, qreal& lat,
     }
 }
 
+//static
 GeoDataCoordinates::Notation GeoDataCoordinates::defaultNotation()
 {
     return s_notation;
 }
 
+//static
 void GeoDataCoordinates::setDefaultNotation( GeoDataCoordinates::Notation notation )
 {
     s_notation = notation;
 }
 
+//static
 qreal GeoDataCoordinates::normalizeLon( qreal lon )
 {
     if ( lon > +M_PI ) {
@@ -123,6 +174,7 @@ qreal GeoDataCoordinates::normalizeLon( qreal lon )
     return lon;
 }
 
+//static
 qreal GeoDataCoordinates::normalizeLat( qreal lat )
 {
     if ( lat > ( +M_PI / 2.0 ) ) {
@@ -160,6 +212,7 @@ qreal GeoDataCoordinates::normalizeLat( qreal lat )
     return lat;
 }
 
+//static
 void GeoDataCoordinates::normalizeLonLat( qreal &lon, qreal &lat )
 {
     if ( lon > +M_PI ) {
@@ -216,6 +269,7 @@ void GeoDataCoordinates::normalizeLonLat( qreal &lon, qreal &lat )
     return;
 }
 
+//static
 GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& successful )
 {
     QString input = string.toLower().trimmed();
@@ -494,6 +548,7 @@ bool GeoDataCoordinates::operator==( const GeoDataCoordinates &test ) const
 
 void GeoDataCoordinates::setAltitude( const qreal altitude )
 {
+    detach();
     d->m_altitude = altitude;
 }
 
@@ -509,6 +564,7 @@ int GeoDataCoordinates::detail() const
 
 void GeoDataCoordinates::setDetail( const int det )
 {
+    detach();
     d->m_detail = det;
 }
 
@@ -519,7 +575,7 @@ const Quaternion& GeoDataCoordinates::quaternion() const
 
 GeoDataCoordinates& GeoDataCoordinates::operator=( const GeoDataCoordinates &other )
 {
-    *d = *other.d;
+    qAtomicAssign(d, other.d);
     return *this;
 }
 
@@ -532,6 +588,8 @@ void GeoDataCoordinates::pack( QDataStream& stream ) const
 
 void GeoDataCoordinates::unpack( QDataStream& stream )
 {
+    // call detach even though it shouldn't be needed - one never knows
+    detach();
     stream >> d->m_lon;
     stream >> d->m_lat;
     stream >> d->m_altitude;

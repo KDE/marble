@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
+// Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
 
@@ -25,6 +26,12 @@
 
 namespace Marble
 {
+
+// forward define all features we can find.
+class GeoDataContainer;
+class GeoDataFolder;
+class GeoDataDocument;
+class GeoDataPlacemark;
 
 class GeoDataStyle;
 class GeoDataStyleSelector;
@@ -47,12 +54,22 @@ class GeoDataFeaturePrivate;
 
 class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 {
+    friend class GeoDataContainer;
+    friend class GeoDataFolder;
+    friend class GeoDataDocument;
+    friend class GeoDataPlacemark;
  public:
-    explicit GeoDataFeature( GeoDataObject *parent = 0 );
+    GeoDataFeature();
     /// Create a new GeoDataFeature with @p name as its name.
-    explicit GeoDataFeature( const QString& name, GeoDataObject *parent = 0 );
+    GeoDataFeature( const QString& name );
 
     GeoDataFeature( const GeoDataFeature& other );
+    
+    // copy ctors for derived classes
+    GeoDataFeature( const GeoDataContainer& other );
+    GeoDataFeature( const GeoDataFolder& other );
+    GeoDataFeature( const GeoDataDocument& other );
+    GeoDataFeature( const GeoDataPlacemark& other );
     
     virtual ~GeoDataFeature();
 
@@ -62,7 +79,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     virtual bool isFolder() const { return false; }
     virtual bool isPlacemark() const { return false; }
 
-    virtual EnumFeatureId featureId() const { return InvalidFeatureId; };
+    EnumFeatureId featureId() const;
     /**
      * @brief  A categorization of a placemark as defined by ...FIXME.
      */
@@ -238,7 +255,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     * normal style.
     * @see GeoDataStyleMap
     */
-    GeoDataStyleMap* styleMap();
+    GeoDataStyleMap* styleMap() const;
     /**
     * Sets the styleMap of the feature
     */
@@ -275,12 +292,18 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     static QFont defaultFont();
     static void setDefaultFont( const QFont& font );
 
+    virtual void detach();
  private:
     static void initializeDefaultStyles();
 
+ protected:
+    // the d-pointer needs to be protected to be accessible from derived classes
+    void* d;
+    GeoDataFeature( GeoDataFeaturePrivate* priv );
 
  private:
-    GeoDataFeaturePrivate * const d;
+    // the private d pointer accessor - use it instead of the d pointer directly
+    GeoDataFeaturePrivate* p() const;
     // Static members
     static QFont         s_defaultFont;
 

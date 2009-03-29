@@ -29,11 +29,20 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
   public:
     enum Units{Fraction, Pixels, InsetPixels};
 
-    explicit GeoDataHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ),
-                             Units xunits = Fraction, Units yunits = Fraction );
+    GeoDataHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ),
+                    Units xunits = Fraction, Units yunits = Fraction );
+    GeoDataHotSpot( const GeoDataHotSpot& other );
     ~GeoDataHotSpot();
 
-    const QPointF& hotSpot( Units &xunits, Units &yunits ) const;
+    GeoDataHotSpot& operator=( const GeoDataHotSpot& other );
+
+    /**
+    * @brief this function returns the hotspot and the units the hotspot is measured in
+    * @param xunits after running hotspot, you'll receive the unit in which x is measured
+    * @param yunits the same for y
+    * @return the point of the hotspot
+    */
+    const QPointF& hotSpot( Units& xunits, Units& yunits ) const;
 
     void setHotSpot( const QPointF& hotSpot = QPointF( 0.5, 0.5 ),
                      Units xunits = Fraction, Units yunits = Fraction );
@@ -44,8 +53,7 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
     virtual void unpack( QDataStream& stream );
 
   private:
-    Q_DISABLE_COPY( GeoDataHotSpot )
-    GeoDataHotSpotPrivate * const d;
+    GeoDataHotSpotPrivate *const d;
 };
 
 }

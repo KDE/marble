@@ -48,6 +48,9 @@ class GeoDataObjectPrivate;
 class GEODATA_EXPORT GeoDataObject : public GeoNode,
                       public Serializable {
 public:
+    GeoDataObject();
+    GeoDataObject( const GeoDataObject & );
+    GeoDataObject & operator=( const GeoDataObject & );
     virtual ~GeoDataObject();
 
     /**
@@ -69,46 +72,33 @@ public:
      * @param value the new targetId value
      */
     void setTargetId( int value );
-    
-    /**
-     * @brief returns the parent in the document tree
-     */
-    GeoDataObject* parent();
-    
-    /**
-     * @brief sets the parent in the document tree
-     */
-     void setParent(GeoDataObject*);
-    
+
     /**
      * @brief returns the requested child item
      */
     virtual GeoDataObject* child( int );
-    
+
     /**
      * @brief returns this items position in the parents list
      */
     int row();
-    
+
     /**
      * @brief returns the position of an item in the list
      */
     virtual int childPosition( GeoDataObject* );
-    
+
     /**
      * @brief returns the number of items in the list
      */
     virtual int childCount();
-    
+
     /// Reimplemented from Serializable
     virtual void pack( QDataStream& stream ) const;
     /// Reimplemented from Serializable
     virtual void unpack( QDataStream& steam );
 
  protected:
-    explicit GeoDataObject( GeoDataObject *parent = 0 );
-    GeoDataObject( const GeoDataObject & );
-    GeoDataObject & operator=( const GeoDataObject & );
 
     GeoDataObjectPrivate * d;
 };

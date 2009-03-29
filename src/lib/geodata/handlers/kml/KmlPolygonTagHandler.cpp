@@ -42,22 +42,21 @@ GeoNode* KmlPolygonTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    GeoDataPolygon* polygon = 0;
-    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
-        polygon = new GeoDataPolygon( parentItem.nodeAs<GeoDataPlacemark>() );
-
-        parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( polygon );
-    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
-        polygon = new GeoDataPolygon( parentItem.nodeAs<GeoDataMultiGeometry>() );
-
-        parentItem.nodeAs<GeoDataMultiGeometry>()->append( polygon );
-    }
+    GeoDataPolygon polygon;
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_Polygon << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
 
-    return polygon;
+    if( parentItem.represents( kmlTag_Placemark ) ) {
+        parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( polygon );
+        return parentItem.nodeAs<GeoDataPlacemark>()->geometry();
+    } else if( parentItem.represents( kmlTag_MultiGeometry ) ) {
+        parentItem.nodeAs<GeoDataMultiGeometry>()->append( polygon );
+    return &parentItem.nodeAs<GeoDataMultiGeometry>()->last();
+    } else {
+        return 0;
+    }
 }
 
 }

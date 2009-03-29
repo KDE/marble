@@ -23,20 +23,19 @@ PlacemarkContainer::PlacemarkContainer( const QString& name )
 {
 }
 
-PlacemarkContainer::PlacemarkContainer( const QVector<GeoDataPlacemark*>& container,
-                                        const QString& name )
-    : QVector<GeoDataPlacemark*>( container ), m_name( name )
+PlacemarkContainer::PlacemarkContainer( const QVector<GeoDataPlacemark>& container, const QString& name )
+    : QVector<GeoDataPlacemark>( container ), m_name( name )
 {
 }
 
-inline bool populationLessThan( GeoDataPlacemark* mark1, GeoDataPlacemark* mark2 )
+inline bool populationLessThan( const GeoDataPlacemark& mark1, const GeoDataPlacemark& mark2 )
 { 
     // If compared items do not differ in terms of being selected,
     // compare them based on population numbers.
-    if ( mark1->popularityIndex() != mark2->popularityIndex() )
-        return ( mark1->popularityIndex() > mark2->popularityIndex() );
+    if ( mark1.popularityIndex() != mark2.popularityIndex() )
+        return ( mark1.popularityIndex() > mark2.popularityIndex() );
     else
-        return ( mark1->popularity() > mark2->popularity() );
+        return ( mark1.popularity() > mark2.popularity() );
 }
 
 

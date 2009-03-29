@@ -26,6 +26,8 @@ class GeoDataDocument;
 class PlacemarkContainer;
 class MarblePlacemarkModel;
 class MarbleGeometryModel;
+class PlacemarkManagerPrivate;
+class FileViewModel;
 
 /**
  * This class is responsible for loading the
@@ -92,6 +94,21 @@ class PlacemarkManager : public QObject
      */
     void loadKmlFromData( const QString& data, const QString& key = "data", bool finalize = true );
 
+    /**
+    * removes an existing GeoDataDocument from the manager
+    */
+    void removePlacemarkKey( const QString& key );
+
+    /**
+    * add Data containing KML code as string
+    */
+    void addPlacemarkData( const QString& data, const QString& key );
+
+    /**
+    * return the Model which stores the opened kml/gpx files
+    */
+    FileViewModel* fileViewModel() const;
+
  Q_SIGNALS:
     void geoDataDocumentAdded( GeoDataDocument* );
     void geoDataDocumentLoaded( GeoDataDocument& );
@@ -100,18 +117,14 @@ class PlacemarkManager : public QObject
  private Q_SLOTS:
     void loadPlacemarkContainer( PlacemarkLoader* loader, PlacemarkContainer * );
     void cleanupLoader( PlacemarkLoader* loader );
+    void addGeoDataDocument( GeoDataDocument* );
 
  private:
     void setPlacemarkModel( MarblePlacemarkModel *model );
 
     Q_DISABLE_COPY( PlacemarkManager )
 
-    MarblePlacemarkModel* m_model;
-    MarbleGeometryModel* m_geomodel;
-    QList<PlacemarkLoader*> m_loaderList;
-
-    bool m_finalized;
-    QString m_target;
+    PlacemarkManagerPrivate *const d;
 };
 
 }

@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2008      Torsten Rahn <rahn@kde.org>
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 // Copyright 2008      Inge Wallin <inge@lysator.liu.se>
 //
 
@@ -25,6 +25,12 @@ namespace Marble
 
 class GeoDataGeometryPrivate;
 
+class GeoDataPoint;
+class GeoDataPolygon;
+class GeoDataLineString; // LinearRing is the same!
+class GeoDataMultiGeometry;
+class GeoDataModel; // not implemented yet
+
 /**
  * @short A base class for all geodata features
  *
@@ -38,9 +44,26 @@ class GeoDataGeometryPrivate;
 
 class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 {
+    friend class GeoDataPoint;
+    friend class GeoDataPolygon;
+    friend class GeoDataLineString;
+    friend class GeoDataMultiGeometry;
+    friend class GeoDataModel;
  public:
+    GeoDataGeometry();
+    GeoDataGeometry( const GeoDataGeometry& other );
+    GeoDataGeometry( const GeoDataPolygon& other );
+    GeoDataGeometry( const GeoDataPoint& other );
+    GeoDataGeometry( const GeoDataLineString& other );
+    GeoDataGeometry( const GeoDataMultiGeometry& other );
+//    GeoDataGeometry( const GeoDataModel& other );
+    virtual bool operator==( const GeoDataGeometry& other ) { Q_UNUSED(other); return false; };
+    GeoDataGeometry& operator=( const GeoDataGeometry& other );
+    
+    virtual ~GeoDataGeometry();
+
     virtual bool isFolder() const { return false; }
-    virtual EnumGeometryId geometryId() const { return InvalidGeometryId; };
+    virtual EnumGeometryId geometryId() const;
 
     bool extrude() const;
     void setExtrude( bool extrude );
@@ -48,19 +71,16 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     AltitudeMode altitudeMode() const;
     void setAltitudeMode( const AltitudeMode altitudeMode );
 
-    explicit GeoDataGeometry( GeoDataObject *parent = 0 );
-    
-    virtual ~GeoDataGeometry();
-
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
     /// Unserialize the contents of the feature from @p stream.
     virtual void unpack( QDataStream& stream );
 
- protected:
-    GeoDataGeometry( const GeoDataGeometry & other );
-    GeoDataGeometry& operator=( const GeoDataGeometry& other );
-    GeoDataGeometryPrivate* const d;
+    void detach();
+ private:
+    GeoDataGeometryPrivate* p() const;
+    void* d;
+    GeoDataGeometry( GeoDataGeometryPrivate* priv );
 };
 
 }

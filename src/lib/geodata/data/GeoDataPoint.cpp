@@ -20,35 +20,34 @@
 #include <QtCore/QCoreApplication>
 #include "global.h"
 
+#include "GeoDataPoint_p.h"
+
 namespace Marble
 {
 
 GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt,
-                            GeoDataPoint::Unit unit, int _detail,
-                            GeoDataObject *parent )
-  : GeoDataCoordinates( _lon, _lat, _alt, 
-                        static_cast<GeoDataCoordinates::Unit>( unit ), _detail ),
-    GeoDataGeometry( parent )
-{
-}
-
-GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt,
-                            GeoDataObject *parent )
-  : GeoDataCoordinates( _lon, _lat, _alt, 
-                        GeoDataPoint::Radian, 0 ),
-    GeoDataGeometry( parent )
+                            GeoDataPoint::Unit unit, int _detail )
+  : GeoDataGeometry( new GeoDataPointPrivate ),
+    GeoDataCoordinates( _lon, _lat, _alt, 
+                        static_cast<GeoDataCoordinates::Unit>( unit ), _detail )
 {
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
-  : GeoDataCoordinates( other ),
-    GeoDataGeometry( other )
+  : GeoDataGeometry( other ),
+    GeoDataCoordinates( other )
     
 {
 }
 
-GeoDataPoint::GeoDataPoint( GeoDataObject *parent )
-    : GeoDataGeometry( parent )
+GeoDataPoint::GeoDataPoint( const GeoDataGeometry& other )
+  : GeoDataGeometry( other )
+    
+{
+}
+
+GeoDataPoint::GeoDataPoint()
+    : GeoDataGeometry( new GeoDataPointPrivate )
 {
 }
 
@@ -56,10 +55,10 @@ GeoDataPoint::~GeoDataPoint()
 {
 }
 
-GeoDataPoint& GeoDataPoint::operator=( const GeoDataPoint &other )
+void GeoDataPoint::detach()
 {
-    GeoDataCoordinates::operator=( other );
-    return *this;
+    GeoDataCoordinates::detach();
+    GeoDataGeometry::detach();
 }
 
 void GeoDataPoint::pack( QDataStream& stream ) const

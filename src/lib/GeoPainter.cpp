@@ -300,20 +300,18 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal wid
             qreal t = 1.0 - 2.0 * (qreal)(i) / (qreal)(precision);
             lat = centerLat + 0.5 * height * sqrt( 1.0 - t * t );
             lon = centerLon + 0.5 * width * t;
-            ellipse << new GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
+            ellipse << GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
         }
         // Calculate the shape of the lower half of the ellipse:
         for ( int i = 0; i <= precision; ++i ) {
             qreal t = 2.0 * (qreal)(i) / (qreal)(precision) -  1.0;
             lat = centerLat - 0.5 * height * sqrt( 1.0 - t * t );
             lon = centerLon + 0.5 * width * t;
-            ellipse << new GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
+            ellipse << GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
         }
 
         drawPolygon( ellipse );
 
-        // FIXME: Remove this once GeoDataCoordinates gets implicitely shared ...
-        qDeleteAll( ellipse );
     }
 
 }
@@ -366,7 +364,7 @@ void GeoPainter::drawLine (  const GeoDataCoordinates & p1,  const GeoDataCoordi
     GeoDataCoordinates c1 ( p1 );
     GeoDataCoordinates c2 ( p2 );
 
-    line << &c1 << &c2;
+    line << c1 << c2;
 
     drawPolyline( line ); 
 }
@@ -432,10 +430,10 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fill
     // In QPathClipper We Trust ...
     // ... and in the speed of a threesome of nested foreachs!
 
-    QVector<GeoDataLinearRing *> innerBoundaries = polygon.innerBoundaries(); 
-    foreach( GeoDataLinearRing *itInnerBoundary, innerBoundaries ) {
+    QVector<GeoDataLinearRing> innerBoundaries = polygon.innerBoundaries(); 
+    foreach( const GeoDataLinearRing& itInnerBoundary, innerBoundaries ) {
         QVector<QPolygonF*> innerPolygons;
-        d->createPolygonsFromLinearRing( *itInnerBoundary, innerPolygons );
+        d->createPolygonsFromLinearRing( itInnerBoundary, innerPolygons );
         
         foreach( QPolygonF* itOuterPolygon, outerPolygons ) {
             foreach( QPolygonF* itInnerPolygon, innerPolygons ) {
@@ -498,9 +496,9 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates, qreal 
         GeoDataCoordinates topLeft( lonLeft, latTop,
                                     altitude, GeoDataCoordinates::Degree );
 
-        GeoDataLinearRing rectangle( 0, Tessellate | RespectLatitudeCircle );
+        GeoDataLinearRing rectangle( Tessellate | RespectLatitudeCircle );
 
-        rectangle << &bottomLeft << &bottomRight << &topRight << &topLeft;
+        rectangle << bottomLeft << bottomRight << topRight << topLeft;
 
         drawPolygon( rectangle, Qt::OddEvenFill ); 
     }

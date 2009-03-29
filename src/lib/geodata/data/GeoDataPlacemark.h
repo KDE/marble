@@ -7,7 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
 
@@ -49,33 +49,49 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
      * Create a new placemark.
      */
-    explicit GeoDataPlacemark( GeoDataObject* parent = 0 );
+    GeoDataPlacemark();
+
+    /**
+     * Create a new placemark from existing placemark @p placemark
+     */
+    GeoDataPlacemark( const GeoDataPlacemark& placemark );
+
+    /**
+     * Create a new placemark from existing feature @p feature
+     */
+    GeoDataPlacemark( const GeoDataFeature& feature );
 
     /**
      * Create a new placemark with the given @p name.
      */
-    explicit GeoDataPlacemark( const QString &name, GeoDataObject *parent = 0 );
+    GeoDataPlacemark( const QString &name );
 
     /**
     * Delete the placemark
     */
     ~GeoDataPlacemark();
+    
+    /**
+    * comparison operator is implemented slightly different than one would expect.
+    * Only Placemarks that are copies of each other are assumed to be equal.
+    */
+    bool operator==( const GeoDataPlacemark& other ) const;
 
     /**
-     * Return the coordinate of the placemark as a GeoDataPoint
+     * Return the coordinate of the placemark as a GeoDataCoordinates
      */
     GeoDataCoordinates coordinate() const;
 
     /**
     * Return a pointer to the current Geometry object
     */
-    GeoDataGeometry* geometry();
+    GeoDataGeometry* geometry() const;
 
     /**
      * Return the coordinate of the placemark as @p longitude
      * and @p latitude.
      */
-    void coordinate( qreal &longitude, qreal &latitude, qreal &altitude );
+    void coordinate( qreal &longitude, qreal &latitude, qreal &altitude ) const;
 
     /**
      * Set the coordinate of the placemark in @p longitude and
@@ -92,11 +108,11 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     * Set any kind of @p GeoDataGeometry like @p GeoDataPoint , 
     * @p GeoDataLineString , @p GeoDataLinearRing , @p GeoDataMultiGeometry
     */
-    void setGeometry( GeoDataPoint* entry );
-    void setGeometry( GeoDataLineString* entry );
-    void setGeometry( GeoDataLinearRing* entry );
-    void setGeometry( GeoDataMultiGeometry* entry );
-    void setGeometry( GeoDataPolygon* entry );
+    void setGeometry( const GeoDataPoint& entry );
+    void setGeometry( const GeoDataLineString& entry );
+    void setGeometry( const GeoDataLinearRing& entry );
+    void setGeometry( const GeoDataMultiGeometry& entry );
+    void setGeometry( const GeoDataPolygon& entry );
 
     /**
      * Return the area size of the feature in square km.
@@ -138,12 +154,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     virtual void unpack( QDataStream& stream );
 
     virtual bool isPlacemark() const { return true; }
-
-    virtual EnumFeatureId featureId() const { return GeoDataPlacemarkId; };
-
  private:
-    Q_DISABLE_COPY( GeoDataPlacemark )
-    GeoDataPlacemarkPrivate * const d;
+    GeoDataPlacemarkPrivate *p() const;
 };
 
 }

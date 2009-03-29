@@ -52,7 +52,8 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
     typedef GeoDataCoordinates::Unit Unit;
 
     GeoDataPoint( const GeoDataPoint& other );
-    explicit GeoDataPoint( GeoDataObject *parent = 0 );
+    GeoDataPoint( const GeoDataGeometry& other );
+    GeoDataPoint();
 
     /**
      * @brief create a geopoint from longitude and latitude
@@ -63,36 +64,24 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
      * (default for Radian: north pole at pi/2, southpole at -pi/2)
      */
     GeoDataPoint( qreal _lon, qreal _lat, qreal alt = 0,
-                  GeoDataPoint::Unit _unit = GeoDataPoint::Radian, int _detail = 0,
-                  GeoDataObject *parent = 0 );
-
-    /**
-     * @brief create a geopoint from longitude and latitude
-     * @param _lon longitude
-     * @param _lat latitude
-     * @param alt altitude (default: 0)
-     * @param _unit units that lon and lat get measured in
-     * (default for Radian: north pole at pi/2, southpole at -pi/2)
-     */
-    GeoDataPoint( qreal _lon, qreal _lat, qreal alt = 0,
-                  GeoDataObject *parent = 0 );
+                  GeoDataPoint::Unit _unit = GeoDataPoint::Radian, int _detail = 0 );
 
     ~GeoDataPoint();
 
-    /**
-    * @brief always returns GeoDataPointId - this function is used to identify GeoDataPoints
-    */
-    virtual EnumGeometryId geometryId() const { return GeoDataPointId; };
-
-    GeoDataPoint& operator=( const GeoDataPoint &other );
-
     // Type definitions
     typedef QVector<GeoDataPoint> Vector;
+
+    /**
+    * comparison operator is always wrong for now
+    */
+    bool operator==( const GeoDataPoint& other ) const { Q_UNUSED(other); return false; };
 
     // Serialize the Placemark to @p stream
     virtual void pack( QDataStream& stream ) const;
     // Unserialize the Placemark from @p stream
     virtual void unpack( QDataStream& stream );
+    
+    virtual void detach();
 };
 
 }

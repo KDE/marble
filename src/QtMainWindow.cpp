@@ -483,8 +483,7 @@ void MainWindow::openFile()
         else if ( extension.compare( "kml", Qt::CaseInsensitive ) 
                   == 0 ) 
         {
-            m_controlView->marbleWidget()->addPlacemarkFile( 
-                                                            fileName);
+            m_controlView->marbleWidget()->addPlacemarkFile( fileName );
         }
     }
 }

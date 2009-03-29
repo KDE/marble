@@ -32,6 +32,13 @@ class GeoDataLabelStylePrivate
     {
     }
 
+    GeoDataLabelStylePrivate( const GeoDataLabelStylePrivate& other )
+        : m_font( other.m_font ),
+          m_alignment( other.m_alignment ),
+          m_scale( other.m_scale )
+    {
+    }
+
     GeoDataLabelStylePrivate( const QFont &font )
         : m_scale( 1.0 ),
           m_alignment( GeoDataLabelStyle::Corner ),
@@ -57,6 +64,11 @@ GeoDataLabelStyle::GeoDataLabelStyle()
     setColor( QColor( Qt::black ) );
 }
 
+GeoDataLabelStyle::GeoDataLabelStyle( const GeoDataLabelStyle& other )
+    : GeoDataColorStyle( other ), d (new GeoDataLabelStylePrivate( *other.d ) )
+{
+}
+
 GeoDataLabelStyle::GeoDataLabelStyle( const QFont &font, const QColor &color )
     : d (new GeoDataLabelStylePrivate( font ) )
 {
@@ -66,6 +78,13 @@ GeoDataLabelStyle::GeoDataLabelStyle( const QFont &font, const QColor &color )
 GeoDataLabelStyle::~GeoDataLabelStyle()
 {
     delete d;
+}
+
+GeoDataLabelStyle& GeoDataLabelStyle::operator=( const GeoDataLabelStyle& other )
+{
+    GeoDataColorStyle::operator=( other );
+    *d = *other.d;
+    return *this;
 }
 
 void GeoDataLabelStyle::setAlignment( GeoDataLabelStyle::Alignment alignment )

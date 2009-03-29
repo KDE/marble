@@ -52,6 +52,11 @@ class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
     QString styleId() const;
 
     /**
+    * @brief assignment operator
+    */
+    GeoDataStyleSelector& operator=( const GeoDataStyleSelector& other );
+
+    /**
      * @brief Serialize the styleselector to a stream
      * @param  stream  the stream
      */
@@ -62,12 +67,10 @@ class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
      */
     virtual void unpack( QDataStream& stream );
 
-  protected:
     GeoDataStyleSelector();
+    GeoDataStyleSelector( const GeoDataStyleSelector& other );
     ~GeoDataStyleSelector();
-
-  private:
-    Q_DISABLE_COPY( GeoDataStyleSelector )
+private:
     GeoDataStyleSelectorPrivate * const d;
 };
 

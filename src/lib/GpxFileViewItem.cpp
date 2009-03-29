@@ -55,8 +55,10 @@ void GpxFileViewItem::saveFile()
     stream << ( *m_gpxFile );
 }
 
-void GpxFileViewItem::closeFile()
+void GpxFileViewItem::closeFile( int start, bool finalize )
 {
+    Q_UNUSED( start );
+    Q_UNUSED( finalize );
     //TODO
 }
 

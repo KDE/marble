@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2008 Patrick Spendrin <ps_ml@gmx.de>
+    Copyright (C) 2008-2009 Patrick Spendrin <ps_ml@gmx.de>
 
     This file is part of the KDE project
 
@@ -43,26 +43,27 @@ GeoNode* KmlStyleMapTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    GeoDataStyleMap* styleMap = 0;
     if( parentItem.represents( kmlTag_Document ) ) {
-        styleMap = new GeoDataStyleMap();
-        styleMap->setStyleId( parser.attribute( "id" ).trimmed() );
+        GeoDataStyleMap styleMap;
+        QString styleId = parser.attribute( "id" ).trimmed();
+        styleMap.setStyleId( styleId );
         parentItem.nodeAs<GeoDataDocument>()->addStyleMap( styleMap );
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_StyleMap << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
+        return &parentItem.nodeAs<GeoDataDocument>()->styleMap( styleId );
     } else if( parentItem.nodeAs<GeoDataFeature>() ) {
-        styleMap = new GeoDataStyleMap();
-        styleMap->setStyleId( parser.attribute( "id" ).trimmed() );
-        parentItem.nodeAs<GeoDataFeature>()->setStyleMap( styleMap );
+/*        GeoDataStyleMap styleMap;
+        styleMap.setStyleId( parser.attribute( "id" ).trimmed() );
+        parentItem.nodeAs<GeoDataFeature>()->setStyleMap( styleMap );*/
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_StyleMap << ">"
+        qDebug() << "Parsed <" << kmlTag_StyleMap << "> Feature (ignoring styles outside of document tag)"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
     }
 
-    return styleMap;
+    return 0;
 }
 
 }

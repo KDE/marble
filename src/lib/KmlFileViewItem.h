@@ -31,10 +31,11 @@ class KmlFileViewItem : public AbstractFileViewItem
      * AbstractFileViewItem methods
      */
     virtual void saveFile();
-    virtual void closeFile();
+    virtual void closeFile( int start, bool finalize = true );
     virtual QVariant data( int role = Qt::DisplayRole ) const;
     virtual bool isShown() const;
     virtual void setShown( bool value );
+    virtual int size() const;
 
   private:
     PlacemarkManager&   m_placemarkManager;

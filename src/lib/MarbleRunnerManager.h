@@ -49,7 +49,7 @@ signals:
     void modelChanged( MarblePlacemarkModel *model );
 
 private slots:
-    void slotRunnerFinished( MarbleAbstractRunner* runner, QVector<GeoDataPlacemark*> result);
+    void slotRunnerFinished(MarbleAbstractRunner* runner, QVector<GeoDataPlacemark> result);
 
 private:
     int m_activeRunners;

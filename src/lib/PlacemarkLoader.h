@@ -22,10 +22,12 @@ class GeoDataDocument;
 class PlacemarkLoader : public QThread {
     Q_OBJECT
     public:
-        PlacemarkLoader( QObject* parent, const QString& file );
-        PlacemarkLoader( QObject* parent, const QString& contents, const QString& name );
+        PlacemarkLoader( QObject* parent, const QString& file, bool finalize = true );
+        PlacemarkLoader( QObject* parent, const QString& contents, const QString& name, bool finalize = true );
 
+        bool finalize();
         void run();
+        
     Q_SIGNALS:
         void placemarksLoaded( PlacemarkLoader*, PlacemarkContainer * );
         void placemarkLoaderFailed( PlacemarkLoader* );
@@ -38,6 +40,7 @@ class PlacemarkLoader : public QThread {
 
         QString m_filepath;
         QString m_contents;
+        bool m_finalize;
 };
 
 } // namespace Marble

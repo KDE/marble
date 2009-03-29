@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
+// Copyright 2009 Patrick Spendrin <ps_ml@gmx.de>
 //
 
 
@@ -42,14 +43,14 @@ class GeoDataLineStringPrivate;
  * currently used for a very similar purpose.
  */
 
-class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates*>,
-                                         public GeoDataGeometry {
+class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
 
  public:
-
-    explicit GeoDataLineString( GeoDataObject *parent = 0, TessellationFlags f = NoTessellation);
-    GeoDataLineString( const GeoDataLineString & );
-    GeoDataLineString& operator=( const GeoDataLineString & );
+    typedef QVector<GeoDataCoordinates>::Iterator Iterator;
+    typedef QVector<GeoDataCoordinates>::ConstIterator ConstIterator;
+    
+    GeoDataLineString( TessellationFlags f = NoTessellation );
+    GeoDataLineString( const GeoDataGeometry &other );
 
     virtual ~GeoDataLineString();
 
@@ -63,12 +64,29 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates*>,
 
     GeoDataLatLonAltBox latLonAltBox() const;
 
-    void append ( GeoDataCoordinates* value );
+    int size() const;
+    GeoDataCoordinates& at( int pos );
+    const GeoDataCoordinates& at( int pos ) const;
+    GeoDataCoordinates& operator[]( int pos );
+    const GeoDataCoordinates& operator[]( int pos ) const;
+
+    GeoDataCoordinates& first();
+    const GeoDataCoordinates& first() const;
+    GeoDataCoordinates& last();
+    const GeoDataCoordinates& last() const;
+
+    void append ( const GeoDataCoordinates& value );
+    GeoDataLineString& operator << ( const GeoDataCoordinates& value );
+    
+    QVector<GeoDataCoordinates>::Iterator begin();
+    QVector<GeoDataCoordinates>::Iterator end();
+    QVector<GeoDataCoordinates>::ConstIterator constBegin() const;
+    QVector<GeoDataCoordinates>::ConstIterator constEnd() const;
     void clear();
 
-    QVector<GeoDataCoordinates*>::Iterator erase ( QVector<GeoDataCoordinates*>::Iterator pos );
-    QVector<GeoDataCoordinates*>::Iterator erase ( QVector<GeoDataCoordinates*>::Iterator begin,
-                                                   QVector<GeoDataCoordinates*>::Iterator end );
+    QVector<GeoDataCoordinates>::Iterator erase ( QVector<GeoDataCoordinates>::Iterator pos );
+    QVector<GeoDataCoordinates>::Iterator erase ( QVector<GeoDataCoordinates>::Iterator begin,
+                                                  QVector<GeoDataCoordinates>::Iterator end );
 
     /**
      * @brief  Serialize the style to a stream.
@@ -80,10 +98,9 @@ class GEODATA_EXPORT GeoDataLineString : public QVector<GeoDataCoordinates*>,
      * @param  stream  the stream
      */
     virtual void unpack( QDataStream& stream );
-
-    virtual EnumGeometryId geometryId() const { return GeoDataLineStringId; };
  protected:
-    GeoDataLineStringPrivate  * const d;
+    GeoDataLineStringPrivate *p() const;
+    GeoDataLineString(GeoDataLineStringPrivate* priv);
 };
 
 }

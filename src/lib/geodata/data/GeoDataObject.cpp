@@ -21,27 +21,25 @@ namespace Marble
 class GeoDataObjectPrivate
 {
   public:
-    GeoDataObjectPrivate(GeoDataObject* parent)
+    GeoDataObjectPrivate()
         : m_id(0),
-          m_targetId(0),
-          m_parent( parent )
+          m_targetId(0)
     {
     }
 
     int  m_id;
     int  m_targetId;
-    GeoDataObject* m_parent;
 };
 
-GeoDataObject::GeoDataObject( GeoDataObject* parent )
+GeoDataObject::GeoDataObject()
     : GeoNode(), Serializable(),
-      d( new GeoDataObjectPrivate( parent ) )
+      d( new GeoDataObjectPrivate() )
 {
 }
 
 GeoDataObject::GeoDataObject( GeoDataObject const & other )
     : GeoNode( other ), Serializable( other ),
-      d( new GeoDataObjectPrivate( *other.d ))
+      d( new GeoDataObjectPrivate( *other.d ) )
 {
 }
 
@@ -76,16 +74,6 @@ void GeoDataObject::setTargetId( int value )
     d->m_targetId = value;
 }
 
-void GeoDataObject::setParent( GeoDataObject *parent )
-{
-    d->m_parent = parent;
-}
-
-GeoDataObject* GeoDataObject::parent()
-{
-    return d->m_parent;
-}
-
 GeoDataObject* GeoDataObject::child(int /* pos */ )
 {
     return 0;
@@ -93,9 +81,6 @@ GeoDataObject* GeoDataObject::child(int /* pos */ )
 
 int GeoDataObject::row()
 {
-    if ( d->m_parent )
-        return d->m_parent->childPosition( this );
-    
     return 0;
 }
 

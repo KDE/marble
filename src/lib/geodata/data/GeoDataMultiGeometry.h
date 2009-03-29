@@ -28,26 +28,46 @@ namespace Marble
  * As one can add GeoDataMultiGeometry to itself, you can make up a collection
  * of different objects to form one Placemark.
  */
+class GeoDataMultiGeometryPrivate;
 
-class GEODATA_EXPORT GeoDataMultiGeometry : public QVector<GeoDataGeometry*>,
-                                            public GeoDataGeometry {
+class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry {
  public:
-    explicit GeoDataMultiGeometry( GeoDataObject *parent = 0 );
+    GeoDataMultiGeometry();
+    GeoDataMultiGeometry( const GeoDataGeometry& other );
 
     virtual ~GeoDataMultiGeometry();
+
+    int size() const;
+    GeoDataGeometry& at( int pos );
+    const GeoDataGeometry& at( int pos ) const;
+    GeoDataGeometry& operator[]( int pos );
+    const GeoDataGeometry& operator[]( int pos ) const;
+
+    GeoDataGeometry& first();
+    const GeoDataGeometry& first() const;
+    GeoDataGeometry& last();
+    const GeoDataGeometry& last() const;
+
+    void append ( const GeoDataGeometry& value );
+    GeoDataMultiGeometry& operator << ( const GeoDataGeometry& value );
+    
+    QVector<GeoDataGeometry>::Iterator begin();
+    QVector<GeoDataGeometry>::Iterator end();
+    QVector<GeoDataGeometry>::ConstIterator constBegin() const;
+    QVector<GeoDataGeometry>::ConstIterator constEnd() const;
+    void clear();
+    QVector<GeoDataGeometry>& vector() const;
+
+    QVector<GeoDataGeometry>::Iterator erase ( QVector<GeoDataGeometry>::Iterator pos );
+    QVector<GeoDataGeometry>::Iterator erase ( QVector<GeoDataGeometry>::Iterator begin,
+                                                  QVector<GeoDataGeometry>::Iterator end );
 
     // Serialize the Placemark to @p stream
     virtual void pack( QDataStream& stream ) const;
     // Unserialize the Placemark from @p stream
     virtual void unpack( QDataStream& stream );
-
-    virtual EnumGeometryId geometryId() const { return GeoDataMultiGeometryId; };
  private:
-    /**
-    * Q_FOREACH containers are bad because they require a copy of the QVector
-    * Use iterators instead!!!
-    */
-    Q_DISABLE_COPY( GeoDataMultiGeometry )
+    GeoDataMultiGeometryPrivate *p() const;
 };
 
 }

@@ -28,17 +28,19 @@
 
 namespace Marble {
 
-PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& file )
-    : QThread( parent ),
+PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& file, bool finalize )
+    : QThread( parent ), 
       m_filepath( file ),
-      m_contents( QString() )
+      m_contents( QString() ),
+      m_finalize( finalize ) 
 {
 }
 
-PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& contents, const QString& file )
-    : QThread( parent ),
-      m_filepath( file ),
-      m_contents( contents )
+PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& contents, const QString& file, bool finalize )
+    : QThread( parent ), 
+      m_filepath( file ), 
+      m_contents( contents ),
+      m_finalize( finalize )
 {
 }
 
@@ -100,8 +102,10 @@ void PlacemarkLoader::run()
                     emit placemarksLoaded( this, container );
             }
             qDebug() << "Loading ended" << loadok;
-            if ( loadok )
+            if ( loadok ) {
+                qDebug() << "placemarksLoaded";
                 return;
+            }
         }
 
         qDebug() << "No recent Default Placemark Cache File available for " << m_filepath;
@@ -114,6 +118,8 @@ void PlacemarkLoader::run()
             qDebug() << "ContainerSize for" << m_filepath << ":" << container->size();
             // Save the contents in the efficient cache format.
             saveFile( defaulthomecache, container );
+
+            qDebug() << "placemarksLoaded";
 
             // ...and finally add it to the PlacemarkContainer
             emit placemarksLoaded( this, container );
@@ -162,6 +168,8 @@ void PlacemarkLoader::importKml( const QString& filename,
 
     file.close();
 
+    qDebug() << "newGeoDataDocumentAdded" << m_filepath;
+
     emit newGeoDataDocumentAdded( dataDocument );
 }
 
@@ -187,6 +195,8 @@ void PlacemarkLoader::importKmlFromData( PlacemarkContainer* placemarkContainer 
 
     buffer.close();
 
+    qDebug() << "newGeoDataDocumentAdded" << m_filepath;
+    
     emit newGeoDataDocumentAdded( dataDocument );
 }
 
@@ -215,16 +225,21 @@ void PlacemarkLoader::saveFile( const QString& filename,
     PlacemarkContainer::const_iterator const end = placemarkContainer->constEnd();
     for (; it != end; ++it )
     {
-        out << (*it)->name();
-        (*it)->coordinate( lon, lat, alt );
+        out << (*it).name();
+        (it)->coordinate( lon, lat, alt );
 
         out << lon << lat << alt;
-        out << QString( (*it)->role() );
-        out << QString( (*it)->description() );
-        out << QString( (*it)->countryCode() );
-        out << (qreal)(*it)->area();
-        out << (qint64)(*it)->population();
+        out << QString( (*it).role() );
+        out << QString( (*it).description() );
+        out << QString( (*it).countryCode() );
+        out << (qreal)(*it).area();
+        out << (qint64)(*it).population();
     }
+}
+
+bool PlacemarkLoader::finalize()
+{
+    return m_finalize;
 }
 
 bool PlacemarkLoader::loadFile( const QString& filename,
@@ -255,6 +270,9 @@ bool PlacemarkLoader::loadFile( const QString& filename,
       return;
       }
     */
+    GeoDataDocument *document = new GeoDataDocument();
+
+    document->setFileName( m_filepath );
 
     in.setVersion( QDataStream::Qt_4_2 );
 
@@ -267,31 +285,29 @@ bool PlacemarkLoader::loadFile( const QString& filename,
     QString  tmpstr;
     qint64   tmpint64;
 
-    QString testo;
-
-    GeoDataPlacemark  *mark;
     while ( !in.atEnd() ) {
-        mark = new GeoDataPlacemark;
-
+        GeoDataPlacemark mark;
         in >> tmpstr;
-        mark->setName( tmpstr );
-        testo = tmpstr;
+        mark.setName( tmpstr );
         in >> lon >> lat >> alt;
-        mark->setCoordinate( lon, lat, alt );
+        mark.setCoordinate( lon, lat, alt );
         in >> tmpstr;
-        mark->setRole( tmpstr.at(0) );
+        mark.setRole( tmpstr.at(0) );
         in >> tmpstr;
-        mark->setDescription( tmpstr );
+        mark.setDescription( tmpstr );
         in >> tmpstr;
-        mark->setCountryCode( tmpstr );
+        mark.setCountryCode( tmpstr );
         in >> area;
-        mark->setArea( area );
+        mark.setArea( area );
         in >> tmpint64;
-        mark->setPopulation( tmpint64 );
+        mark.setPopulation( tmpint64 );
 
         placemarkContainer->append( mark );
+        document->append( mark );
     }
 
+    qDebug() << "newGeoDataDocumentAdded" << m_filepath;
+    emit newGeoDataDocumentAdded( document );
     return true;
 }
 

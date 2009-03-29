@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
+// Copyright 2008-2009      Patrick Spendrin  <ps_ml@gmx.de>
 //
 
 #include "GeoDataView.h"
@@ -15,6 +15,7 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
 #include "GeoDataFeature.h"
+#include "GeoDataFolder.h"
 #include "GeoDataLineStyle.h"
 #include "GeoDataObject.h"
 #include "GeoDataPlacemark.h"
@@ -22,6 +23,7 @@
 #include "GeoDataPolyStyle.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+
 #include "GeoPainter.h"
 
 // Qt
@@ -92,18 +94,22 @@ void GeoDataView::renderIndex( QModelIndex &index )
         QString output = model()->data( childIndex ).toString();
         GeoDataObject* object = model()->data( childIndex, Qt::UserRole + 11 ).value<Marble::GeoDataObject*>();
 
-        if( dynamic_cast<GeoDataGeometry*>( object ) && 
-            dynamic_cast<GeoDataGeometry*>( object )->geometryId() != 
-            GeoDataMultiGeometryId )
-        {
-            renderGeoDataGeometry( static_cast<GeoDataGeometry*>( object ), styleUrl );
+        if( dynamic_cast<GeoDataGeometry*>( object ) ) {
+            if( static_cast<GeoDataGeometry*>( object )->geometryId() != GeoDataMultiGeometryId ) {
+                renderGeoDataGeometry( reinterpret_cast<GeoDataGeometry*>( object ), styleUrl );
+            } else {
+                if( childIndex.isValid() && model()->rowCount( childIndex ) > 0 ) {
+                    renderIndex( childIndex );
+                }
+            }
         }
-        else
-        {
-            if( dynamic_cast<GeoDataPlacemark*>( object ) ) 
-                styleUrl = dynamic_cast<GeoDataPlacemark*>( object )->styleUrl();
-            if( childIndex.isValid() && model()->rowCount( childIndex ) > 0 )
-            {
+        else if( dynamic_cast<GeoDataFeature*>( object ) ) {
+            if( dynamic_cast<GeoDataFeature*>( object )->featureId() == GeoDataPlacemarkId ) {
+                GeoDataPlacemark placemark( *static_cast<GeoDataFeature*>( object ) );
+                styleUrl = placemark.styleUrl();
+            }
+
+            if( childIndex.isValid() && model()->rowCount( childIndex ) > 0 ) {
                 renderIndex( childIndex );
             }
         }
@@ -122,14 +128,12 @@ void GeoDataView::setBrushStyle( QString mapped )
      * model. This might not be wanted. On the other hand - is a copy of the
      * style within every Placemark wanted and how should this be called here?
      */
-    if( m_root->style( mapped ) && m_root->style( mapped )->polyStyle() ) {
-        if( m_currentBrush.color() != m_root->style( mapped )->polyStyle()->color() ) {
+    if( m_currentBrush.color() != m_root->style( mapped ).polyStyle().color() ) {
 /*            qDebug() << "BrushColor:" 
-                     << m_root->style( mapped )->polyStyle()->color() 
-                     << m_currentBrush.color();*/
-            m_currentBrush.setColor( m_root->style( mapped )->polyStyle()->color() );
-            m_painter->setBrush( m_currentBrush.color() );
-        }
+                 << m_root->style( mapped ).polyStyle()->color() 
+                 << m_currentBrush.color();*/
+        m_currentBrush.setColor( m_root->style( mapped ).polyStyle().color() );
+        m_painter->setBrush( m_currentBrush.color() );
     }
 }
 
@@ -138,27 +142,25 @@ void GeoDataView::setPenStyle( QString mapped )
     /*
      * see the note in the setBrushStyle function
      */
-    if( m_root->style( mapped ) && m_root->style( mapped )->lineStyle() ) {
-        if( m_currentPen.color() != m_root->style( mapped )->lineStyle()->color() || 
-            m_currentPen.widthF() != m_root->style( mapped )->lineStyle()->width() ) {
+    if( m_currentPen.color() != m_root->style( mapped ).lineStyle().color() || 
+        m_currentPen.widthF() != m_root->style( mapped ).lineStyle().width() ) {
 /*            qDebug() << "PenColor:" 
-                     << m_root->style( mapped )->lineStyle()->color() 
-                     << m_currentPen.color();
-            qDebug() << "PenWidth:" 
-                     << m_root->style( mapped )->lineStyle()->width() 
-                     << m_currentPen.widthF();*/
-            m_currentPen.setColor( m_root->style( mapped )->lineStyle()->color() );
-            m_currentPen.setWidthF( m_root->style( mapped )->lineStyle()->width() );
-        }
-        if ( m_painter->mapQuality() != Marble::High && m_painter->mapQuality() != Marble::Print )
-        {
-//            m_currentPen.setWidth( 0 );
-            QColor penColor = m_currentPen.color();
-            penColor.setAlpha( 255 );
-            m_currentPen.setColor( penColor );
-        }
-        m_painter->setPen( m_currentPen );
+                 << m_root->style( mapped ).lineStyle().color() 
+                 << m_currentPen.color();
+        qDebug() << "PenWidth:" 
+                 << m_root->style( mapped ).lineStyle().width() 
+                 << m_currentPen.widthF();*/
+        m_currentPen.setColor( m_root->style( mapped ).lineStyle().color() );
+        m_currentPen.setWidthF( m_root->style( mapped ).lineStyle().width() );
     }
+    if ( m_painter->mapQuality() != Marble::High && m_painter->mapQuality() != Marble::Print )
+    {
+//            m_currentPen.setWidth( 0 );
+        QColor penColor = m_currentPen.color();
+        penColor.setAlpha( 255 );
+        m_currentPen.setColor( penColor );
+    }
+    m_painter->setPen( m_currentPen );
 }
 
 bool GeoDataView::renderGeoDataGeometry( GeoDataGeometry *object, QString styleUrl )
@@ -168,28 +170,32 @@ bool GeoDataView::renderGeoDataGeometry( GeoDataGeometry *object, QString styleU
 
     m_root = dynamic_cast<GeoDataDocument*>( model()->data( rootIndex(), 
                  Qt::UserRole + 11 ).value<Marble::GeoDataObject*>() );
-    if( !m_root ) return false;
+
+    if( !m_root ) {
+        qWarning() << "root seems to be 0!!!";
+        return false;
+    }
 
     /// hard coded to use only the "normal" style
     QString mapped = styleUrl;
-    GeoDataStyleMap* styleMap = m_root->styleMap( styleUrl.remove( '#' ) );
+    const GeoDataStyleMap& styleMap = m_root->styleMap( styleUrl.remove( '#' ) );
 
-    if( styleMap ) mapped = styleMap->value( QString( "normal" ) );
+    mapped = styleMap.value( QString( "normal" ) );
     mapped.remove( '#' );
 
     if( object->geometryId() == GeoDataPolygonId ) {
         setBrushStyle( mapped );
         setPenStyle( mapped );
-        m_painter->drawPolygon( *dynamic_cast<GeoDataPolygon*>( object ) );
+        m_painter->drawPolygon( *static_cast<GeoDataPolygon*>( object ) );
     }
     if( object->geometryId() == GeoDataLinearRingId ) {
         m_painter->setBrush( QColor( 0, 0, 0, 0 ) );
         setPenStyle( mapped );
-        m_painter->drawPolygon( *dynamic_cast<GeoDataLinearRing*>( object ) );
+        m_painter->drawPolygon( *static_cast<GeoDataLinearRing*>( object ) );
     }
     if( object->geometryId() == GeoDataLineStringId ) {
         setPenStyle( mapped );
-        m_painter->drawPolyline( *dynamic_cast<GeoDataLineString*>( object ) );
+        m_painter->drawPolyline( *static_cast<GeoDataLineString*>( object ) );
     }
     /* Note: GeoDataMultiGeometry is handled within the model */
     m_painter->restore();

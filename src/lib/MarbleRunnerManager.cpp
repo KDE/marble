@@ -43,7 +43,7 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
       m_lastString(""),
       m_model(new MarblePlacemarkModel(0))
 {
-    qRegisterMetaType<QVector<GeoDataPlacemark*> >("QVector<GeoDataPlacemark*>");
+    qRegisterMetaType<QVector<GeoDataPlacemark> >("QVector<GeoDataPlacemark>");
 }
 
 MarbleRunnerManager::~MarbleRunnerManager()
@@ -77,21 +77,21 @@ void MarbleRunnerManager::newText(QString text)
 
     LatLonRunner* llrunner = new LatLonRunner;
     m_runners << dynamic_cast<MarbleAbstractRunner*>(llrunner);
-    connect( llrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ),
-             this,     SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ));
+    connect( llrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
+             this,     SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
     llrunner->parse(text);
     
     OnfRunner* onfrunner = new OnfRunner;
     m_runners << dynamic_cast<MarbleAbstractRunner*>(onfrunner);
-    connect( onfrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ),
-             this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ));
+    connect( onfrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
+             this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
     onfrunner->parse(text);
 
     llrunner->start();
     onfrunner->start();
 }
 
-void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVector<GeoDataPlacemark*> result )
+void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVector<GeoDataPlacemark> result )
 {
 #if QT_VERSION >= 0x040400
     m_runners.removeOne(runner);

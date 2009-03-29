@@ -82,6 +82,12 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
     ColorMode colorMode() const;
 
     /**
+    * assignment operator
+    * @param other the other colorstyle
+    */
+    GeoDataColorStyle& operator=( const GeoDataColorStyle& other );
+
+    /**
      * @brief Serialize the style to a stream
      * @param  stream  the stream
      */
@@ -92,12 +98,12 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
      */
     virtual void unpack( QDataStream& stream );
 
-  protected:
     GeoDataColorStyle();
+    GeoDataColorStyle( const GeoDataColorStyle& other );
+
     virtual ~GeoDataColorStyle();
 
   private:
-    Q_DISABLE_COPY( GeoDataColorStyle )
     GeoDataColorStylePrivate * const d;
 };
 

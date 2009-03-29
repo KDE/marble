@@ -160,7 +160,7 @@ int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
         GeoDataStyle *style = qobject_cast<const MarblePlacemarkModel*>( index.model() )->styleData( index );
-        QFont labelFont = style->labelStyle()->font();
+        QFont labelFont = style->labelStyle().font();
         int textHeight = QFontMetrics( labelFont ).height();
         if ( textHeight > maxLabelHeight )
             maxLabelHeight = textHeight; 
@@ -170,7 +170,7 @@ int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
         QModelIndex index = model->index( i, 0 );
 
         GeoDataStyle *style = qobject_cast<const MarblePlacemarkModel*>( index.model() )->styleData( index );
-        QFont labelFont = style->labelStyle()->font();
+        QFont labelFont = style->labelStyle().font();
         int textHeight = QFontMetrics( labelFont ).height();
         if ( textHeight > maxLabelHeight ) 
             maxLabelHeight = textHeight; 
@@ -266,7 +266,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
             textWidth = mark->labelRect().width();
         }
         else {
-            QFont labelFont = style->labelStyle()->font();
+            QFont labelFont = style->labelStyle().font();
             labelFont.setWeight( 75 ); // Needed to calculate the correct pixmap size; 
 
             textWidth = ( QFontMetrics( labelFont ).width( index.data( Qt::DisplayRole ).toString() )
@@ -299,7 +299,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         }
 
         // Finally save the label position on the map.
-        QPointF hotSpot = style->iconStyle()->hotSpot();
+        QPointF hotSpot = style->iconStyle().hotSpot();
 
         mark->setSymbolPosition( QPoint( x - (int)( hotSpot.x() ),
                                          y - (int)( hotSpot.y() ) ) );
@@ -416,7 +416,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
             textWidth = mark->labelRect().width();
         }
         else {
-            QFont labelFont = style->labelStyle()->font();
+            QFont labelFont = style->labelStyle().font();
             textWidth = ( QFontMetrics( labelFont ).width( index.data( Qt::DisplayRole ).toString() ) );
         }
 
@@ -447,7 +447,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         }
 
         // Finally save the label position on the map.
-        QPointF hotSpot = style->iconStyle()->hotSpot();
+        QPointF hotSpot = style->iconStyle().hotSpot();
 
         mark->setSymbolPosition( QPoint( x - (int)( hotSpot.x() ),
                                          y - (int)( hotSpot.y() ) ) );
@@ -483,13 +483,13 @@ QRect PlacemarkLayout::roomForLabel( GeoDataStyle * style,
 {
     bool  isRoom      = false;
 
-    int symbolwidth = style->iconStyle()->icon().width();
+    int symbolwidth = style->iconStyle().icon().width();
 
-    QFont labelFont = style->labelStyle()->font();
+    QFont labelFont = style->labelStyle().font();
     int textHeight = QFontMetrics( labelFont ).height();
 //    qDebug() << textHeight;
 
-    if ( style->labelStyle()->alignment() == GeoDataLabelStyle::Corner ) {
+    if ( style->labelStyle().alignment() == GeoDataLabelStyle::Corner ) {
         int  xpos = symbolwidth / 2 + x + 1;
         int  ypos = 0;
 
@@ -528,7 +528,7 @@ QRect PlacemarkLayout::roomForLabel( GeoDataStyle * style,
             xpos -= ( symbolwidth + textWidth + 2 );
         }
     }
-    else if ( style->labelStyle()->alignment() == GeoDataLabelStyle::Center ) {
+    else if ( style->labelStyle().alignment() == GeoDataLabelStyle::Center ) {
         isRoom = true;
         QRect  labelRect( x - textWidth / 2, y - textHeight / 2, 
                           textWidth, textHeight );

@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
+// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>"
 //
 
 
@@ -22,6 +22,8 @@
 #include "GeoDataDocument.h"       // In geodata/data/
 #include "GeoDataContainer.h"
 #include "GeoDataParser.h"
+#include "GeoDataStyle.h"
+#include "GeoDataStyleMap.h"
 
 using namespace Marble;
 
@@ -61,6 +63,7 @@ int MarbleGeoDataModel::rowCount( const QModelIndex &parent ) const
         return 0;
 }
 
+
 QVariant MarbleGeoDataModel::data( const QModelIndex &index, int role ) const
 {
     return QVariant();
@@ -89,19 +92,19 @@ unsigned long MarbleGeoDataModel::addGeoDataFile( QString filename )
     GeoDocument* document = parser.releaseDocument();
     Q_ASSERT_X( document, "geoRoot()", "document unparseable" );
     
-    foreach(GeoDataFeature* feature, static_cast<GeoDataDocument*>( document )->features() ) {
-        d->m_rootDocument->addFeature( feature );
+    foreach(GeoDataFeature feature, static_cast<GeoDataDocument*>( document )->features() ) {
+        d->m_rootDocument->append( feature );
     }
 
     // add this document as a new entry into the hash
     d->m_documents[++(d->m_latestId)] = static_cast<GeoDataDocument*>( document );
     
     // get the styles and the stylemaps
-    foreach(GeoDataStyle* style, static_cast<GeoDataDocument*>( document )->styles() ) {
+    foreach(const GeoDataStyle& style, static_cast<GeoDataDocument*>( document )->styles() ) {
         d->m_rootDocument->addStyle( style );
     }
 
-    foreach(GeoDataStyleMap* map, static_cast<GeoDataDocument*>( document )->styleMaps() ) {
+    foreach(const GeoDataStyleMap& map, static_cast<GeoDataDocument*>( document )->styleMaps() ) {
         d->m_rootDocument->addStyleMap( map );
     }
     
@@ -114,16 +117,16 @@ bool MarbleGeoDataModel::removeGeoDataFile( unsigned long removeId )
 {
     if(d->m_documents.contains( removeId ) ) {
         GeoDataDocument *doc = d->m_documents[ removeId ];
-        foreach(GeoDataFeature* feature, doc->features() ) {
-            d->m_rootDocument->removeFeature( feature );
+        foreach(GeoDataFeature feature, doc->features() ) {
+//            d->m_rootDocument->removeFeature( feature );
         }
         // get the styles and the stylemaps
-        foreach(GeoDataStyle* style, doc->styles() ) {
-            d->m_rootDocument->removeStyle( style );
+        foreach(const GeoDataStyle& style, doc->styles() ) {
+            d->m_rootDocument->removeStyle( style.styleId() );
         }
 
-        foreach(GeoDataStyleMap* map, doc->styleMaps() ) {
-            d->m_rootDocument->removeStyleMap( map );
+        foreach(const GeoDataStyleMap& map, doc->styleMaps() ) {
+            d->m_rootDocument->removeStyleMap( map.styleId() );
         }
         delete doc;
         return true;

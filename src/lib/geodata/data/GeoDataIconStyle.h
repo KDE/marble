@@ -30,9 +30,12 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
 {
   public:
     GeoDataIconStyle();
+    GeoDataIconStyle( const GeoDataIconStyle& other );
     explicit GeoDataIconStyle( const QPixmap& icon, 
                                const QPointF &hotSpot = QPointF( 0.5, 0.5 ) );
     ~GeoDataIconStyle();
+
+    GeoDataIconStyle& operator=( const GeoDataIconStyle& other );
 
     void setIcon( const QPixmap& icon );
     QPixmap icon() const;
@@ -52,7 +55,6 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
     virtual void unpack( QDataStream& stream );
 
   private:
-    Q_DISABLE_COPY( GeoDataIconStyle )
     GeoDataIconStylePrivate * const d;
 };
 

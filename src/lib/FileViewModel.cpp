@@ -6,7 +6,10 @@
 // the source code.
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
+// Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
+
+#include <QStringList>
 
 // Own
 #include "FileViewModel.h"
@@ -47,14 +50,11 @@ QVariant FileViewModel::data( const QModelIndex & index, int role ) const
         if ( index.column() == 0 ) {
             const AbstractFileViewItem& item = *m_itemList.at( row );
 
-            if ( role == Qt::DisplayRole ) {
-                return item.data ();
-            }
-            else if ( role == Qt::CheckStateRole ) {
+            if ( role == Qt::CheckStateRole ) {
                 return item.isShown () ? Qt::Checked : Qt::Unchecked;
             }
-            else if ( role == AbstractFileViewItem::FilePointerRole ) {
-                return item.data( AbstractFileViewItem::FilePointerRole );
+            else {
+                return item.data( role );
             }
         }
     }
@@ -71,7 +71,18 @@ Qt::ItemFlags FileViewModel::flags( const QModelIndex & index ) const
                           Qt::ItemIsSelectable );
 }
 
-bool FileViewModel::setData (const QModelIndex& index, const QVariant& value, int role )
+QStringList FileViewModel::containers() const
+{
+    QStringList retList;
+
+    for( int line = 0; line < m_itemList.count(); ++line ) {
+        retList << m_itemList.at( line )->data().toString();
+    }
+    
+    return retList;
+}
+
+bool FileViewModel::setData( const QModelIndex& index, const QVariant& value, int role )
 {
     if ( !index.isValid() ) {
         return false;
@@ -105,11 +116,33 @@ void FileViewModel::setSelectedIndex( const QModelIndex& index )
     m_selectedIndex = index;
 }
 
-void FileViewModel::append ( AbstractFileViewItem* item )
+void FileViewModel::append( AbstractFileViewItem* item )
 {
     m_itemList.append( item );
     emit layoutChanged();
     emit modelChanged();
+}
+
+void FileViewModel::remove( const QModelIndex& index )
+{
+    if ( index.isValid() ) {
+
+        int row = index.row();
+        int start = indexStart( index );
+        if ( row < m_itemList.count() ) {
+            if ( index.column() == 0 ) {
+
+                AbstractFileViewItem *item = m_itemList.at( row );
+                item->closeFile( start );
+
+                delete item;
+                m_itemList.removeAt( row );
+
+                emit layoutChanged();
+                emit modelChanged();
+            }
+        }
+    }
 }
 
 void FileViewModel::saveFile()
@@ -124,6 +157,11 @@ void FileViewModel::saveFile()
                 AbstractFileViewItem& item = *m_itemList.at( row );
                 item.saveFile();
 
+/*                delete &item;
+                m_itemList.removeAt( row );
+
+                emit layoutChanged();
+                emit modelChanged();*/
             }
         }
     }
@@ -131,24 +169,18 @@ void FileViewModel::saveFile()
 
 void FileViewModel::closeFile()
 {
-    if ( m_selectedIndex.isValid() ) {
+    remove( m_selectedIndex );
+}
 
-        int row = m_selectedIndex.row();
-
-        if ( row < m_itemList.count() ) {
-            if ( m_selectedIndex.column() == 0 ) {
-
-                AbstractFileViewItem& item = *m_itemList.at( row );
-                item.closeFile();
-
-                delete &item;
-                m_itemList.removeAt( row );
-
-                emit layoutChanged();
-                emit modelChanged();
-            }
-        }
+int FileViewModel::indexStart( const QModelIndex& index )
+{
+    int start = 0;
+    if ( index.isValid() ) {
+        for( int i = 0; i < index.row(); i++ ) {
+            start += m_itemList.at( i )->size();
+        };
     }
+    return start;
 }
 
 #include "FileViewModel.moc"

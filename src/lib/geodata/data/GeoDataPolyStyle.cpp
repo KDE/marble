@@ -18,10 +18,7 @@ class GeoDataPolyStylePrivate
 {
   public:
     GeoDataPolyStylePrivate()
-    {
-    }
-
-    ~GeoDataPolyStylePrivate()
+     : m_fill( true ), m_outline( true )
     {
     }
 
@@ -36,6 +33,11 @@ GeoDataPolyStyle::GeoDataPolyStyle()
 {
 }
 
+GeoDataPolyStyle::GeoDataPolyStyle( const GeoDataPolyStyle& other )
+    : GeoDataColorStyle( other ), d( new GeoDataPolyStylePrivate( *other.d ) )
+{
+}
+
 GeoDataPolyStyle::GeoDataPolyStyle( const QColor &color )
     : d (new GeoDataPolyStylePrivate )
 {
@@ -45,6 +47,13 @@ GeoDataPolyStyle::GeoDataPolyStyle( const QColor &color )
 GeoDataPolyStyle::~GeoDataPolyStyle()
 {
     delete d;
+}
+
+GeoDataPolyStyle& GeoDataPolyStyle::operator=( const GeoDataPolyStyle& other )
+{
+    GeoDataColorStyle::operator=( other );
+    *d = *other.d;
+    return *this;
 }
 
 void GeoDataPolyStyle::setFill( const bool &fill )

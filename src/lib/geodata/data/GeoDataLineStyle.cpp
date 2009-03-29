@@ -21,6 +21,11 @@ class GeoDataLineStylePrivate
     {
     }
 
+    GeoDataLineStylePrivate( const GeoDataLineStylePrivate& other )
+     : m_width( other.m_width )
+    {
+    }
+
     ~GeoDataLineStylePrivate()
     {
     }
@@ -34,8 +39,13 @@ GeoDataLineStyle::GeoDataLineStyle()
 {
 }
 
+GeoDataLineStyle::GeoDataLineStyle( const GeoDataLineStyle& other )
+    : GeoDataColorStyle( other ), d (new GeoDataLineStylePrivate( *other.d ) )
+{
+}
+
 GeoDataLineStyle::GeoDataLineStyle( const QColor &color )
-    : d (new GeoDataLineStylePrivate )
+    : d ( new GeoDataLineStylePrivate )
 {
     setColor( color );
 }
@@ -43,6 +53,13 @@ GeoDataLineStyle::GeoDataLineStyle( const QColor &color )
 GeoDataLineStyle::~GeoDataLineStyle()
 {
     delete d;
+}
+
+GeoDataLineStyle& GeoDataLineStyle::operator=( const GeoDataLineStyle& other )
+{
+    GeoDataColorStyle::operator=( other );
+    *d = *other.d;
+    return *this;
 }
 
 void GeoDataLineStyle::setWidth( const float &width )

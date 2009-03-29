@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
+// Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
 
@@ -35,10 +36,13 @@ class MARBLE_EXPORT FileViewModel : public QAbstractListModel
     virtual int rowCount( const QModelIndex& parent = QModelIndex() ) const;
     virtual QVariant data( const QModelIndex& index, int role = Qt::DisplayRole ) const;
     virtual Qt::ItemFlags flags( const QModelIndex& index ) const;
-    virtual bool setData (const QModelIndex& index, const QVariant& value, int role = Qt::EditRole );
+    virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole );
 
     void setSelectedIndex( const QModelIndex& index );
-    void append ( AbstractFileViewItem* item );
+    void append( AbstractFileViewItem* item );
+    void remove( const QModelIndex& index );
+    
+    QStringList containers() const;
 
   Q_SIGNALS:
     void modelChanged();
@@ -51,6 +55,8 @@ class MARBLE_EXPORT FileViewModel : public QAbstractListModel
     Q_DISABLE_COPY( FileViewModel )
     QModelIndex m_selectedIndex;
     QList < AbstractFileViewItem* > m_itemList;
+    
+    int indexStart( const QModelIndex& index );
 };
 
 }

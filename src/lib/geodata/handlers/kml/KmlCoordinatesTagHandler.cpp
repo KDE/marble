@@ -46,44 +46,47 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.nodeAs<GeoDataGeometry>() || parentItem.nodeAs<GeoDataPlacemark>() ) {
+    if( parentItem.represents( kmlTag_Point )
+     || parentItem.represents( kmlTag_LineString )
+     || parentItem.represents( kmlTag_MultiGeometry )
+     || parentItem.represents( kmlTag_LinearRing ) ) {
         QStringList  coordinatesLines = parser.readElementText().trimmed().split( QRegExp("\\s"), QString::SkipEmptyParts );
         Q_FOREACH( const QString& line, coordinatesLines ) {
             QStringList coordinates = line.trimmed().split( ',' );
-            if ( parentItem.nodeAs<GeoDataPlacemark>() ) {
-                GeoDataPoint* coord = new GeoDataPoint();
+            if ( parentItem.represents( kmlTag_Point ) ) {
+                GeoDataPoint coord;
                 if ( coordinates.size() == 2 ) {
-                    coord->set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                    coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
                                 DEG2RAD * coordinates.at( 1 ).toDouble() );
                 } else if( coordinates.size() == 3 ) {
-                    coord->set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                    coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
                                 DEG2RAD * coordinates.at( 1 ).toDouble(),
                                 coordinates.at( 2 ).toDouble() );
                 }
-                parentItem.nodeAs<GeoDataPlacemark>()->setCoordinate( *coord );
+                parentItem.nodeAs<GeoDataPlacemark>()->setCoordinate( coord );
                 parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( coord );
             } else {
-                GeoDataCoordinates* coord = new GeoDataCoordinates();
+                GeoDataCoordinates coord;
                 if ( coordinates.size() == 2 ) {
-                    coord->set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                    coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
 				DEG2RAD * coordinates.at( 1 ).toDouble() );
                 } else if( coordinates.size() == 3 ) {
-                    coord->set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                    coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
 				DEG2RAD * coordinates.at( 1 ).toDouble(),
 				coordinates.at( 2 ).toDouble() );
                 }
 
-                if ( parentItem.nodeAs<GeoDataLineString>() ) {
+                if ( parentItem.represents( kmlTag_LineString ) ) {
                     parentItem.nodeAs<GeoDataLineString>()->append( coord );
-                } else if ( parentItem.nodeAs<GeoDataLinearRing>() ) {
+                } else if ( parentItem.represents( kmlTag_LinearRing ) ) {
                     parentItem.nodeAs<GeoDataLinearRing>()->append( coord );
-                } else if ( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
-                    GeoDataPoint* point = new GeoDataPoint();
+                } else if ( parentItem.represents( kmlTag_MultiGeometry ) ) {
+                    GeoDataPoint point;
                     if ( coordinates.size() == 2 ) {
-                        point->set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                        point.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
 				    DEG2RAD * coordinates.at( 1 ).toDouble() );
                     } else if ( coordinates.size() == 3 ) {
-                        point->set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                        point.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
 				    DEG2RAD * coordinates.at( 1 ).toDouble(),
 				    coordinates.at( 2 ).toDouble() );
                     }

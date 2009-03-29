@@ -22,6 +22,11 @@ class GeoDataStyleMapPrivate
     {
     }
 
+    GeoDataStyleMapPrivate( const GeoDataStyleMapPrivate& other )
+    {
+        lastKey = other.lastKey;
+    }
+
     ~GeoDataStyleMapPrivate()
     {
     }
@@ -35,12 +40,17 @@ GeoDataStyleMap::GeoDataStyleMap()
 {
 }
 
+GeoDataStyleMap::GeoDataStyleMap( const GeoDataStyleMap& other )
+    : GeoDataStyleSelector( other ), d( new GeoDataStyleMapPrivate( *other.d ) )
+{
+}
+
 GeoDataStyleMap::~GeoDataStyleMap()
 {
     delete d;
 }
 
-QString GeoDataStyleMap::lastKey()
+QString GeoDataStyleMap::lastKey() const
 {
     return d->lastKey;
 }
@@ -48,6 +58,14 @@ QString GeoDataStyleMap::lastKey()
 void GeoDataStyleMap::setLastKey( QString key )
 {
     d->lastKey = key;
+}
+
+GeoDataStyleMap& GeoDataStyleMap::operator=( const GeoDataStyleMap& other )
+{
+    QMap<QString, QString>::operator=( other );
+    GeoDataStyleSelector::operator=( other );
+    *d = *other.d;
+    return *this;
 }
 
 void GeoDataStyleMap::pack( QDataStream& stream ) const
