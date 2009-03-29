@@ -582,11 +582,16 @@ void MarbleMap::removePlaceMarkKey( const QString &key )
 
 QPixmap MarbleMap::mapScreenShot()
 {
-#if 0  //FIXME: reimplement without grabWidget
-    return QPixmap::grabWidget( this );
-#else
-    return QPixmap();
-#endif
+    QPixmap screenshotPixmap( size() );
+    screenshotPixmap.fill( Qt::transparent );
+
+    GeoPainter painter( &screenshotPixmap, viewParams()->viewport(), Marble::Print );
+    painter.begin( &screenshotPixmap );
+    QRect dirtyRect( QPoint(), size() );
+    paint( painter, dirtyRect );
+    painter.end();
+
+    return screenshotPixmap;
 }
 
 bool MarbleMap::propertyValue( const QString& name ) const

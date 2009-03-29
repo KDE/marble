@@ -129,6 +129,12 @@ void MainWindow::createActions()
      m_statusBarAct->setStatusTip(tr("Show Status Bar"));
      connect(m_statusBarAct, SIGNAL(triggered( bool )), this, SLOT( showStatusBar( bool )));
 
+
+     m_lockFloatItemsAct = new QAction( tr("Lock Position"),this);
+     m_lockFloatItemsAct->setCheckable( true );
+     m_lockFloatItemsAct->setStatusTip(tr("Lock Position of Floating Items"));
+     connect(m_lockFloatItemsAct, SIGNAL(triggered( bool )), this, SLOT( lockPosition( bool )));
+
      m_showCloudsAct = new QAction( tr("&Clouds"), this);
      m_showCloudsAct->setCheckable( true );
      m_showCloudsAct->setStatusTip(tr("Show Real Time Cloud Cover"));
@@ -203,6 +209,8 @@ void MainWindow::createMenus()
 void MainWindow::createInfoBoxesMenu()
 {
     m_infoBoxesMenu->clear();
+    m_infoBoxesMenu->addAction(m_lockFloatItemsAct);
+    m_infoBoxesMenu->addSeparator();
     QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
 
     QList<MarbleAbstractFloatItem *>::const_iterator i;
@@ -347,6 +355,19 @@ void MainWindow::showAtmosphere( bool isChecked )
     m_controlView->marbleWidget()->setShowAtmosphere( isChecked );
 
     m_showAtmosphereAct->setChecked( isChecked ); // Sync state with the GUI
+}
+
+void MainWindow::lockPosition( bool isChecked )
+{
+    QList<MarbleAbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
+
+    QList<MarbleAbstractFloatItem *>::const_iterator i;
+    for (i = floatItemList.constBegin(); i != floatItemList.constEnd(); ++i) 
+    {
+        // Locking one would suffice as it affects all. 
+	// Nevertheless go through all.
+        (*i)->setPositionLocked(isChecked);
+    }
 }
 
 void MainWindow::controlSun()
