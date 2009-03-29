@@ -78,6 +78,7 @@ class MainWindow : public QMainWindow
     void  handbook();
     void  openFile();
     void  setupStatusBar();
+    void  lockPosition( bool );
     void  createInfoBoxesMenu();
 
  private:
@@ -115,6 +116,7 @@ class MainWindow : public QMainWindow
     QAction *m_aboutMarbleAct;
     QAction *m_aboutQtAct;
     QAction *m_openAct;
+    QAction *m_lockFloatItemsAct;
     QAction *m_handbook;
 
     QString m_position;
