@@ -315,6 +315,7 @@ else (APPLE AND QTONLY)
     geodata/parser/GeoDocument.h
     ExtDateTime.h
     TileCreator.h
+    PluginInterface.h
     RenderPlugin.h
     RenderPluginInterface.h
     marble_export.h

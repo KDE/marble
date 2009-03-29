@@ -1,0 +1,14 @@
+There are some applications/applets/plasmoids using Marble. They might be
+affected by changes of the Marble API.
+
+So it is good practice to check if the following applications compile and
+work after API changes:
+
+- extragear/graphics/digikam
+- extragear/graphics/kphotoalbum
+- playground/base/plasma/applets/contacts
+- playground/base/plasma/wallpapers/marble
+- playground/office/geoshape
+
+There is this link http://techbase.kde.org/Projects/Marble/MarbleUsedBy
+listing also applications not hosted in KDE svn.

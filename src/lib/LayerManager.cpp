@@ -97,6 +97,14 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
     ViewportParams* viewport = viewParams->viewport();
 
     foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
+        if ( renderPlugin && renderPlugin->renderPosition().contains("SURFACE")  ){
+            if ( renderPlugin->enabled() && renderPlugin->visible() ) {
+                renderPlugin->render( painter, viewport, "SURFACE" );
+            }
+        }
+    }
+
+    foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
         if ( renderPlugin ){
             if ( renderPlugin->enabled() && renderPlugin->visible() ) {
                 renderPlugin->render( painter, viewport, "ALWAYS_ON_TOP" );
@@ -108,9 +116,9 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
     // the float items displayed on top:
     // FIXME: use d->m_floatItems here?
     foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
-        if ( renderPlugin->renderPosition().contains("FLOAT_ITEM") ) {
+        if ( renderPlugin && renderPlugin->renderPosition().contains("FLOAT_ITEM") ) {
             AbstractFloatItem *floatItem = qobject_cast<AbstractFloatItem *>(renderPlugin);
-            if ( floatItem->enabled() && floatItem->visible() ) {
+            if ( floatItem && floatItem->enabled() && floatItem->visible() ) {
                 floatItem->render( painter, viewport, "FLOAT_ITEM" );
             }
         }

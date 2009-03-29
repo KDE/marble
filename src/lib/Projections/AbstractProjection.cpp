@@ -194,13 +194,19 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
             lonDiff = currentLongitude - previousLongitude;
             if ( fabs( lonDiff ) == 360.0 ) return path; 
         }
+        else {
+//            qDebug() << "Don't FollowLatitudeCircle";
+        }
+    }
+    else {
+//        qDebug() << "Don't RespectLatitudeCircle";
     }
     
     qreal altDiff = currentCoords.altitude() - previousAltitude;
 
     // Take the clampToGround property into account
-    int startNode = clampToGround ? 0 : 1;
-    const int endNode = clampToGround ? count + 2 : count + 1;
+    int startNode = clampToGround ? 0 : 0;
+    const int endNode = clampToGround ? count + 0 : count + 0;
 
     qreal  lon = 0.0;
     qreal  lat = 0.0;
@@ -210,9 +216,14 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
     Quaternion  itpos;
 
     bool globeHidesPoint = false;
+    bool previousGlobeHidesPoint = false;
+    bool previousVisible = false;
 
-    for ( int i = startNode; i < endNode; ++i ) {
-        qreal  t = (qreal)(i) / (qreal)( count + 1 ) ;
+    QPointF point;
+    QPointF previousPoint;
+
+    for ( int i = startNode; i <= endNode; ++i ) {
+        qreal  t = (qreal)(i) / (qreal)( count ) ;
 
         // interpolate the altitude, too
         qreal altitude = clampToGround ? 0 : altDiff * t + previousAltitude;
@@ -232,9 +243,27 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
         }
 
         bool visible = screenCoordinates( GeoDataCoordinates( lon, lat, altitude ), viewport, x, y, globeHidesPoint );
-        if ( visible ) {
-            path << QPointF( x, y );
+
+        point = QPointF( x, y );
+
+        // Initialize previous values with current values for the first node.
+        if ( i == startNode ) {
+            previousPoint = point;
+            previousVisible = visible;
+            previousGlobeHidesPoint = globeHidesPoint;
         }
+
+        if ( visible && !previousVisible && !previousGlobeHidesPoint ) {
+            path << previousPoint;
+        }
+        // No "else" here, as this would not add the current point that is required.
+        if ( ( visible || (!visible && previousVisible ) ) && !globeHidesPoint ) {
+            path << point;
+        }
+
+        previousPoint = point;
+        previousVisible = visible;
+        previousGlobeHidesPoint = globeHidesPoint;
     }
     return path; 
 }

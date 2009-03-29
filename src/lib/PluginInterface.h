@@ -17,6 +17,8 @@
 #include <QtCore/QtPlugin>
 #include <QtGui/QIcon>
 
+#include "marble_export.h"
+
 namespace Marble
 {
 
@@ -24,7 +26,7 @@ namespace Marble
  * @short This class specifies interface of a Marble plugin.
  */
 
-class PluginInterface
+class MARBLE_EXPORT PluginInterface
 {
  public:
     virtual ~PluginInterface();
