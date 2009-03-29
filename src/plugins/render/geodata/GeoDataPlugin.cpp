@@ -43,7 +43,7 @@ QString GeoDataPlugin::renderPolicy() const
 
 QStringList GeoDataPlugin::renderPosition() const
 {
-    return QStringList( "ALWAYS_ON_TOP" );
+    return QStringList( "SURFACE" );
 }
 
 QString GeoDataPlugin::name() const
@@ -84,6 +84,10 @@ bool GeoDataPlugin::isInitialized () const
 
 bool GeoDataPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
+    if ( renderPos != "SURFACE" ) {
+        return true;
+    }
+
     if( !dataFacade() || !dataFacade()->renderModel() )
         return false;
 
