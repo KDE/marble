@@ -36,6 +36,10 @@ class GeoDataGeometryPrivate
     {
     }
 
+    virtual ~GeoDataGeometryPrivate()
+    {
+    }
+
     virtual void* copy() 
     { 
         GeoDataGeometryPrivate* copy = new GeoDataGeometryPrivate;
