@@ -202,6 +202,9 @@ bool GpsTracking::update(const QSize &canvasSize, ViewParams *viewParams,
             m_gpsTracking->setPosition( m_gpsdData->fix.latitude,
                                         m_gpsdData->fix.longitude );
 
+            qDebug() << "Position from gpsd: " << m_gpsdData->fix.latitude
+                << m_gpsdData->fix.longitude;
+
             if (m_gpsTrackSeg == 0 ){
                 m_gpsTrackSeg = new TrackSegment();
                 m_gpsTrack->append( m_gpsTrackSeg );
