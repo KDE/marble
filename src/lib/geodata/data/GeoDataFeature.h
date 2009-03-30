@@ -298,7 +298,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
  protected:
     // the d-pointer needs to be protected to be accessible from derived classes
-    void* d;
+    GeoDataFeaturePrivate* d;
     GeoDataFeature( GeoDataFeaturePrivate* priv );
 
  private:

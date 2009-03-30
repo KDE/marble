@@ -79,7 +79,7 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     void detach();
  private:
     GeoDataGeometryPrivate* p() const;
-    void* d;
+    GeoDataGeometryPrivate* d;
     GeoDataGeometry( GeoDataGeometryPrivate* priv );
 };
 
