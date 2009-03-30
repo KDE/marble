@@ -125,9 +125,9 @@ void GraticulePlugin::renderLatitudeCircle( GeoPainter *painter, qreal latitude 
     GeoDataCoordinates n4(+90.0, latitude, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates n5(+180.0, latitude, 0.0, GeoDataCoordinates::Degree );
 
-    GeoDataLineString circle( 0, Tessellate | RespectLatitudeCircle ) ;
+    GeoDataLineString circle( Tessellate | RespectLatitudeCircle ) ;
 
-    circle << &n1 << &n2 << &n3 << &n4 << &n5;
+    circle << n1 << n2 << n3 << n4 << n5;
 
     painter->drawPolyline( circle );     
 }
@@ -140,9 +140,9 @@ void GraticulePlugin::renderLongitudeCircle( GeoPainter *painter, qreal longitud
     GeoDataCoordinates n4(longitude + 180.0, 0.0, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates n5(longitude, 90.0, 0.0, GeoDataCoordinates::Degree );
 
-    GeoDataLineString circle( 0, Tessellate ) ;
+    GeoDataLineString circle( Tessellate ) ;
 
-    circle << &n1 << &n2 << &n3 << &n4 << &n5;
+    circle << n1 << n2 << n3 << n4 << n5;
 
     painter->drawPolyline( circle );     
 }
