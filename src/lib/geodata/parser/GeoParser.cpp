@@ -94,7 +94,7 @@ bool GeoParser::read( QIODevice* device )
 
                 if ( !m_nodeStack.isEmpty() )
                     raiseError(
-                        QObject::tr("Parsing failed. Still %1 unclosed tags after document end.")
+                        QObject::tr("Parsing failed. Still %1 unclosed tag(s) after document end.")
                         .arg( m_nodeStack.size() ));
             } else
                 raiseDocumentElementError();
