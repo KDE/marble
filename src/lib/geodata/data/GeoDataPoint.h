@@ -71,10 +71,6 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
     // Type definitions
     typedef QVector<GeoDataPoint> Vector;
 
-    /**
-    * comparison operator is always wrong for now
-    */
-    bool operator==( const GeoDataPoint& other ) const { Q_UNUSED(other); return false; };
 
     // Serialize the Placemark to @p stream
     virtual void pack( QDataStream& stream ) const;
