@@ -81,7 +81,6 @@ GeoDataGeometry::~GeoDataGeometry()
 
 void  GeoDataGeometry::detach()
 {
-    qDebug() << "GeoDataGeometry::detach!!!";
     if(p()->ref == 1)
         return;
 
