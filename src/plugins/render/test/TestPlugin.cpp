@@ -99,7 +99,7 @@ bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
     painter->setPen( QColor( 200, 200, 200, 255 ) );
 
     GeoDataLineString lineString;
-    lineString << &madrid << &flensburg << &linkoeping << &istanbul << &moscow;
+    lineString << madrid << flensburg << linkoeping << istanbul << moscow;
 
     painter->drawPolyline( lineString ); 
 
@@ -157,9 +157,9 @@ bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
     GeoDataCoordinates m4(+90.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates m5(+180.0, 0.0, 3000000.0, GeoDataCoordinates::Degree );
 
-    GeoDataLineString ring( 0, Tessellate );
+    GeoDataLineString ring( Tessellate );
 
-    ring << &m1 << &m2 << &m3 << &m4 << &m5;
+    ring << m1 << m2 << m3 << m4 << m5;
 
     painter->drawPolyline( ring ); 
 
@@ -174,21 +174,21 @@ bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
     GeoDataCoordinates t2(-12.5, 45.0, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates t3(-77.5, 45.0, 0.0, GeoDataCoordinates::Degree );
 
-    GeoDataLinearRing triangle( 0, Tessellate | RespectLatitudeCircle );
+    GeoDataLinearRing triangle( Tessellate | RespectLatitudeCircle );
 
-    triangle << &t1 << &t2 << &t3;
+    triangle << t1 << t2 << t3;
 
     painter->drawPolygon( triangle, Qt::OddEvenFill ); 
 
     // Example: draw a triangle with lines that follow the great circles
 
-    GeoDataLinearRing triangle2( 0, Tessellate );
+    GeoDataLinearRing triangle2( Tessellate );
 
     GeoDataCoordinates t4(0.0, 90.0, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates t5(-102.5, 45.0, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates t6(-167.5, 45.0, 0.0, GeoDataCoordinates::Degree );
 
-    triangle2 << &t4 << &t5 << &t6;
+    triangle2 << t4 << t5 << t6;
 
     painter->drawPolygon( triangle2, Qt::OddEvenFill ); 
 
@@ -200,7 +200,7 @@ bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
     GeoDataCoordinates t8(102.5, 45.0, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates t9(167.5, 45.0, 0.0, GeoDataCoordinates::Degree );
 
-    triangle3 << &t7 << &t8 << &t9;
+    triangle3 << t7 << t8 << t9;
 
     painter->drawPolygon( triangle3, Qt::OddEvenFill ); 
 

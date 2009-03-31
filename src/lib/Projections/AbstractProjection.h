@@ -107,9 +107,8 @@ class AbstractProjection
     /**
      * @brief Get the coordinates of screen points for geographical coordinates in the map.
      *
-     * @param geopoint the point on earth, including altitude, that we want the coordinates for.
+     * @param coordinates the point on earth, including altitude, that we want the coordinates for.
      * @param viewport the viewport parameters
-     * @param planetAxisMatrix The matrix describing the current rotation of the globe
      * @param x      the x coordinates of the pixels are returned through this parameter
      * @param y      the y coordinate of the pixel is returned through this parameter
      * @param pointRepeatNum      the amount of times that a single geographical

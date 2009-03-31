@@ -17,6 +17,9 @@
 #include "SphericalProjectionHelper.h"
 #include "ViewportParams.h"
 #include "GeoDataPoint.h"
+#include "global.h"
+
+#define SAFE_DISTANCE
 
 namespace Marble
 {
@@ -172,10 +175,12 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                                                   const ViewportParams *viewport,
                                                   QVector<QPolygonF *> &polygons )
 {
+//    qDebug() << "LineString GeometryId:" << lineString.geometryId();
+
+    const TessellationFlags tessellationFlags = lineString.tessellationFlags();
+
     // Compare bounding box size of the line string with the angularResolution
     // Immediately return if the latLonAltBox is smaller.
-
-    qDebug() << lineString.geometryId();
     if ( !viewport->resolves( lineString.latLonAltBox() ) ) {
 //      qDebug() << "Object too small to be resolved";
         return false;
@@ -287,30 +292,35 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                 // The latter can pretty safely be excluded for most projections if both points 
                 // are located on the same side relative to the viewport boundaries and if they are 
                 // located more than half the line segment distance away from the viewport.
-                /*
+#ifdef SAFE_DISTANCE                 
                 if (   !( x < safeDistance && previousX < safeDistance )
                     || !( y < safeDistance && previousY < safeDistance )
                     || !( x + safeDistance > viewport->width() 
                         && previousX + safeDistance > viewport->width() )
                     || !( y + safeDistance > viewport->height()
                         && previousY + safeDistance > viewport->height() )
-                ) */
+                )
                 {
-                    int suggestedCount = (int)( distance / precision );
+#endif                    
+                    int tessellatedNodes = (int)( distance / precision );
 
                     if ( distance > precision ) {
-    //                    qDebug() << "Distance: " << distance;
+//                      qDebug() << "Distance: " << distance;
                         *polygon << tessellateLineSegment( previousCoords, currentCoords, 
-                                                           suggestedCount, viewport,
-                                                           lineString.tessellationFlags() );
+                                                           tessellatedNodes, viewport,
+                                                           tessellationFlags );
                     }
+#ifdef SAFE_DISTANCE                 
+                }
+#endif
+            }
+            else {
+                if ( !globeHidesPoint ) {
+                    polygon->append( QPointF( x, y ) );
                 }
             }
 
-            if ( !globeHidesPoint ) {
-                polygon->append( QPointF( x, y ) );
-            }
-            else {
+            if ( globeHidesPoint ) {
                 if (   !previousGlobeHidesPoint 
                     && !lineString.isClosed() // FIXME: this probably needs to take rotation 
                                                 //        into account for some cases

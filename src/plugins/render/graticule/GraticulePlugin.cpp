@@ -86,7 +86,7 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->setPen( QColor( Qt::white ) );
 
-    for ( int i = 0; i < 180.0 ; i+=10 ){
+    for ( int i = 0; i < 180.0 ; i+=2 ){
         renderLongitudeCircle( painter, i );                
         renderLatitudeCircle( painter, i - 90.0 );
     }

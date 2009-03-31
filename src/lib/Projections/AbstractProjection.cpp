@@ -18,6 +18,9 @@
 
 using namespace Marble;
 
+// Maximum amount of nodes that are created automatically between actual nodes.
+static const int maxTessellationNodes = 50;
+
 AbstractProjection::AbstractProjection()
 {
     m_repeatX = false;
@@ -160,24 +163,23 @@ GeoDataLinearRing AbstractProjection::rectOutline( const QRect& screenRect,
 
 QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &previousCoords, 
                                                     const GeoDataCoordinates &currentCoords,
-                                                    int count,
+                                                    int tessellatedNodes,
                                                     const ViewportParams *viewport,
                                                     TessellationFlags f )
 {
     QPolygonF   path;
 
-    bool clampToGround = f.testFlag( FollowGround );
+    const bool clampToGround = f.testFlag( FollowGround );
     bool followLatitudeCircle = false;     
 
-    if ( count > 50 ) {
-//        qDebug() << "Count of" << count << "exceeded maximum count.";
-        count = 50;
-    }
+    // Maximum amount of tesselation nodes.
+    if ( tessellatedNodes > maxTessellationNodes ) tessellatedNodes = maxTessellationNodes;
 
-//    qDebug() << "Creating tesselation nodes:" << count;
+//    qDebug() << "Creating tesselation nodes:" << tessellatedNodes;
 
     qreal previousAltitude = previousCoords.altitude();
 
+    // Calculate steps for tessellation: lonDiff and altDiff 
     qreal lonDiff = 0.0;
     qreal previousLongitude = 0.0;
     qreal previousLatitude = 0.0;
@@ -192,7 +194,9 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
         if ( previousLatitude == currentLatitude ) {
             followLatitudeCircle = true;
             lonDiff = currentLongitude - previousLongitude;
-            if ( fabs( lonDiff ) == 360.0 ) return path; 
+            if ( fabs( lonDiff ) == 2 * M_PI ) {
+                return path;
+            }
         }
         else {
 //            qDebug() << "Don't FollowLatitudeCircle";
@@ -205,25 +209,30 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
     qreal altDiff = currentCoords.altitude() - previousAltitude;
 
     // Take the clampToGround property into account
-    int startNode = clampToGround ? 0 : 0;
-    const int endNode = clampToGround ? count + 0 : count + 0;
+    int startNode = 0;
+    const int endNode = tessellatedNodes;
 
     qreal  lon = 0.0;
     qreal  lat = 0.0;
     int     x = 0;
     int     y = 0;
-
     Quaternion  itpos;
 
-    bool globeHidesPoint = false;
-    bool previousGlobeHidesPoint = false;
-    bool previousVisible = false;
-
+    // Declare current values.
     QPointF point;
-    QPointF previousPoint;
+    bool globeHidesPoint = false;
 
+    // For the clampToGround case add the "previous" coordinate before adding any other node. 
+    if ( clampToGround && previousAltitude != 0.0 ) {
+          bool visible = screenCoordinates( previousCoords, viewport, x, y, globeHidesPoint );
+          if ( visible ) {
+            path << QPointF( x, y );
+          }
+    }
+
+    // Create the tessellation nodes.
     for ( int i = startNode; i <= endNode; ++i ) {
-        qreal  t = (qreal)(i) / (qreal)( count ) ;
+        qreal  t = (qreal)(i) / (qreal)( tessellatedNodes ) ;
 
         // interpolate the altitude, too
         qreal altitude = clampToGround ? 0 : altDiff * t + previousAltitude;
@@ -238,32 +247,25 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
             // To tesselate along great circles use the 
             // normalized linear interpolation ("NLERP") for latitude and longitude.
             itpos.nlerp( previousCoords.quaternion(), currentCoords.quaternion(), t );
-
-            itpos.getSpherical( lon, lat );
+            itpos. getSpherical( lon, lat );
         }
 
         bool visible = screenCoordinates( GeoDataCoordinates( lon, lat, altitude ), viewport, x, y, globeHidesPoint );
-
         point = QPointF( x, y );
 
-        // Initialize previous values with current values for the first node.
-        if ( i == startNode ) {
-            previousPoint = point;
-            previousVisible = visible;
-            previousGlobeHidesPoint = globeHidesPoint;
-        }
-
-        if ( visible && !previousVisible && !previousGlobeHidesPoint ) {
-            path << previousPoint;
-        }
         // No "else" here, as this would not add the current point that is required.
-        if ( ( visible || (!visible && previousVisible ) ) && !globeHidesPoint ) {
+        if ( !globeHidesPoint ) {
             path << point;
         }
-
-        previousPoint = point;
-        previousVisible = visible;
-        previousGlobeHidesPoint = globeHidesPoint;
     }
+
+    // For the clampToGround case add the "current" coordinate after adding all other nodes. 
+    if ( clampToGround && currentCoords.altitude() != 0.0 ) {
+          bool visible = screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
+          if ( visible ) {
+            path << QPointF( x, y );
+          }
+    }
+
     return path; 
 }

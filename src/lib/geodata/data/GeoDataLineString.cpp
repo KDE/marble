@@ -21,19 +21,19 @@ namespace Marble
 GeoDataLineString::GeoDataLineString( TessellationFlags f )
   : GeoDataGeometry( new GeoDataLineStringPrivate( f ) )
 {
-    qDebug() << "1) GeoDataLineString created:" << p();
+//    qDebug() << "1) GeoDataLineString created:" << p();
 }
 
 GeoDataLineString::GeoDataLineString( GeoDataLineStringPrivate* priv )
   : GeoDataGeometry( priv )
 {
-    qDebug() << "2) GeoDataLineString created:" << p();
+//    qDebug() << "2) GeoDataLineString created:" << p();
 }
 
 GeoDataLineString::GeoDataLineString( const GeoDataGeometry & other )
   : GeoDataGeometry( other )
 {
-    qDebug() << "3) GeoDataLineString created:" << p();
+//    qDebug() << "3) GeoDataLineString created:" << p();
 }
 
 GeoDataLineString::~GeoDataLineString()

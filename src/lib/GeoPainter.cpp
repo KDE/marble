@@ -382,7 +382,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString )
     QVector<QPolygonF*> polygons;
     d->createPolygonsFromLineString( lineString, polygons );
 
-    qDebug() << "Number of polygons:" << polygons.count();
+//    qDebug() << "Number of polygons:" << polygons.count();
 
     foreach( QPolygonF* itPolygon, polygons ) {
         ClipPainter::drawPolyline( *itPolygon );

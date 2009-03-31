@@ -38,6 +38,7 @@ public:
     Quaternion           m_planetAxis;   // Position, coded in a quaternion
     mutable matrix       m_planetAxisMatrix;
     int                  m_radius;       // Zoom level (pixels / globe radius)
+    qreal                m_angularResolution;
 
     QSize                m_size;         // width, height
 
@@ -180,6 +181,7 @@ void ViewportParams::setRadius(int newRadius)
     d->m_dirtyBox = true;
 
     d->m_radius = newRadius;
+    d->m_angularResolution = 0.25 * M_PI / fabs( (qreal)(d->m_radius) );
 
     // Adjust the active Region
     currentProjection()->helper()->createActiveRegion( this );
@@ -339,7 +341,8 @@ qreal ViewportParams::angularResolution() const
 {
     // We essentially divide the diameter by 180 deg and
     // take half of the result as a guess for the angle per pixel resolution. 
-    return 0.25 * M_PI / fabs( (qreal)(d->m_radius) );
+    // d->m_angularResolution = 0.25 * M_PI / fabs( (qreal)(d->m_radius);
+    return d->m_angularResolution;
 }
 
 bool ViewportParams::resolves ( const GeoDataLatLonBox &latLonBox ) const
