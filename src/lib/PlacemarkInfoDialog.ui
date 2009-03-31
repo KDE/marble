@@ -16,16 +16,7 @@
    <property name="spacing" >
     <number>6</number>
    </property>
-   <property name="leftMargin" >
-    <number>9</number>
-   </property>
-   <property name="topMargin" >
-    <number>9</number>
-   </property>
-   <property name="rightMargin" >
-    <number>9</number>
-   </property>
-   <property name="bottomMargin" >
+   <property name="margin" >
     <number>9</number>
    </property>
    <item>
@@ -40,22 +31,10 @@
       <layout class="QVBoxLayout" >
        <item>
         <layout class="QGridLayout" >
-         <property name="leftMargin" >
+         <property name="margin" >
           <number>0</number>
          </property>
-         <property name="topMargin" >
-          <number>0</number>
-         </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
-          <number>0</number>
-         </property>
-         <property name="horizontalSpacing" >
-          <number>6</number>
-         </property>
-         <property name="verticalSpacing" >
+         <property name="spacing" >
           <number>6</number>
          </property>
          <item row="0" column="0" >
@@ -82,7 +61,7 @@ p, li { white-space: pre-wrap; }
            <property name="orientation" >
             <enum>Qt::Vertical</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>20</width>
              <height>16</height>
@@ -168,7 +147,8 @@ p, li { white-space: pre-wrap; }
           <string>Description field</string>
          </property>
          <property name="html" >
-          <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+          <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }
 &lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;">No description available.&lt;/p>
@@ -185,7 +165,7 @@ p, li { white-space: pre-wrap; }
          <property name="sizeType" >
           <enum>QSizePolicy::Fixed</enum>
          </property>
-         <property name="sizeHint" >
+         <property name="sizeHint" stdset="0" >
           <size>
            <width>330</width>
            <height>16</height>
@@ -240,7 +220,7 @@ p, li { white-space: pre-wrap; }
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
             </property>
-            <property name="sizeHint" >
+            <property name="sizeHint" stdset="0" >
              <size>
               <width>40</width>
               <height>20</height>
@@ -352,6 +332,29 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
+          <item row="5" column="0" >
+           <widget class="QLabel" name="diameter_lbl" >
+            <property name="text" >
+             <string>Diameter:</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="textInteractionFlags" >
+             <set>Qt::TextSelectableByMouse</set>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1" >
+           <widget class="QLabel" name="diameter_val_lbl" >
+            <property name="text" >
+             <string>TextLabel</string>
+            </property>
+            <property name="alignment" >
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -362,22 +365,14 @@ p, li { white-space: pre-wrap; }
        <string>Wikipedia</string>
       </attribute>
       <attribute name="icon" >
-       <iconset resource="../marble.qrc" >:/icons/wikipedia.png</iconset>
+       <iconset resource="../marble.qrc" >
+        <normaloff>:/icons/wikipedia.png</normaloff>:/icons/wikipedia.png</iconset>
       </attribute>
       <layout class="QVBoxLayout" >
        <property name="spacing" >
         <number>6</number>
        </property>
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
+       <property name="margin" >
         <number>9</number>
        </property>
        <item>
@@ -385,16 +380,7 @@ p, li { white-space: pre-wrap; }
          <property name="spacing" >
           <number>6</number>
          </property>
-         <property name="leftMargin" >
-          <number>0</number>
-         </property>
-         <property name="topMargin" >
-          <number>0</number>
-         </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
+         <property name="margin" >
           <number>0</number>
          </property>
          <item>
@@ -412,7 +398,8 @@ p, li { white-space: pre-wrap; }
             <string>Back</string>
            </property>
            <property name="icon" >
-            <iconset>../../../../../../../../.designer/backup</iconset>
+            <iconset>
+             <normaloff>../../../../../../../../.designer/backup</normaloff>../../../../../../../../.designer/backup</iconset>
            </property>
            <property name="toolButtonStyle" >
             <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -434,7 +421,8 @@ p, li { white-space: pre-wrap; }
             <string>...</string>
            </property>
            <property name="icon" >
-            <iconset>../../../../../../../../.designer/backup</iconset>
+            <iconset>
+             <normaloff>../../../../../../../../.designer/backup</normaloff>../../../../../../../../.designer/backup</iconset>
            </property>
           </widget>
          </item>
@@ -444,7 +432,8 @@ p, li { white-space: pre-wrap; }
             <string>Print Page</string>
            </property>
            <property name="icon" >
-            <iconset resource="../marble.qrc" >:/icons/document-print.png</iconset>
+            <iconset resource="../marble.qrc" >
+             <normaloff>:/icons/document-print.png</normaloff>:/icons/document-print.png</iconset>
            </property>
            <property name="toolButtonStyle" >
             <enum>Qt::ToolButtonTextBesideIcon</enum>
@@ -456,7 +445,7 @@ p, li { white-space: pre-wrap; }
            <property name="orientation" >
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" >
+           <property name="sizeHint" stdset="0" >
             <size>
              <width>281</width>
              <height>31</height>

@@ -50,7 +50,6 @@ PlacemarkInfoDialog::PlacemarkInfoDialog(const QPersistentModelIndex &index, QWi
         QTextFrameFormat format = description_val_browser->document()->rootFrame()->frameFormat();
         format.setMargin( 12) ;
         description_val_browser->document()->rootFrame()->setFrameFormat( format );
-
 }
 
 
@@ -63,7 +62,6 @@ void PlacemarkInfoDialog::showContent()
 
     name_val_lbl->setText( "<H1><b>" + m_index.data().toString() + "</b></H1>" );
     altername_val_lbl->setText( "" );
-
     QString  rolestring;
     switch ( m_index.data( MarblePlacemarkModel::GeoTypeRole ).toChar().toLatin1() ) {
     case 'C':
@@ -108,6 +106,18 @@ void PlacemarkInfoDialog::showContent()
     case 'A':
         rolestring = tr("Astronomical observatory");
         break;
+    case 'a':
+        rolestring = tr("Maria");
+        break;
+    case 'c':
+        rolestring = tr("Crater");
+        break;
+    case 'h':
+    case 'r':
+    case 'u':
+    case 'i':
+        rolestring = tr("Landing Site");
+        break;
     default:
         rolestring = tr("Other Place");
     }
@@ -116,6 +126,7 @@ void PlacemarkInfoDialog::showContent()
 
     m_flagcreator = new DeferredFlag( this );
     requestFlag( m_index.data( MarblePlacemarkModel::CountryCodeRole ).toString() );
+
 
     const QString description = m_index.data( MarblePlacemarkModel::DescriptionRole ).toString();
 
@@ -132,7 +143,6 @@ void PlacemarkInfoDialog::showContent()
     const qreal area = m_index.data( MarblePlacemarkModel::AreaRole ).toDouble();
     const qreal altitude = m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>().altitude();
 
-
     area_lbl->setText( tr("Area:") );
     if ( area < 10000000 )
         area_val_lbl->setText( tr("%1 sq km").arg( QLocale::system().toString( area ) ) );
@@ -147,6 +157,7 @@ void PlacemarkInfoDialog::showContent()
             .arg( QLocale::system().toString( population / 1000000.0, 'g', 4 ) ) );
 
     elevation_val_lbl->setText( tr("%1 m").arg( QLocale::system().toString( altitude ) ) );
+    diameter_val_lbl->setText( tr("%1 km").arg( QLocale::system().toString( population / 1000.0, 'g', 4 ) ) );
 
     const QChar role = m_index.data( MarblePlacemarkModel::GeoTypeRole ).toChar();
 
@@ -158,11 +169,13 @@ void PlacemarkInfoDialog::showContent()
     area_val_lbl->setVisible( true );
     population_lbl->setVisible( true );
     population_val_lbl->setVisible( true );
+    diameter_lbl->setVisible( false );
+    diameter_val_lbl->setVisible( false );
 
     if ( altitude <= 0 )
         elevation_val_lbl->setText( tr("-") );
 
-    if ( role == 'O' ) {
+    if ( role == 'O' ||  role == 'o' || role == 'v' || role == 'h' || role == 'u' || role == 'i' || role == 'r' || role == 'a' || role == 'c' || role == 'm') {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
         country_lbl->setVisible( false );
@@ -172,6 +185,10 @@ void PlacemarkInfoDialog::showContent()
     {
         country_lbl->setVisible( false );
         country_val_lbl->setVisible( false );
+    }
+    if ( (role == 'a' || role == 'c' || role == 'm') && m_index.data( MarblePlacemarkModel::PopularityRole ).toInt() > 0) {
+        diameter_lbl->setVisible( true );
+        diameter_val_lbl->setVisible( true );
     }
 
     if ( role == 'H' || role == 'V' || role == 'W') {
