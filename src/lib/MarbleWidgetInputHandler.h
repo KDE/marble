@@ -80,6 +80,7 @@ class MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
 
  public:
     MarbleWidgetDefaultInputHandler();
+    ~MarbleWidgetDefaultInputHandler();
 
     static bool keyEvent( MarbleMap * map, QEvent* e );
     

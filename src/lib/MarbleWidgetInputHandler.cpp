@@ -90,6 +90,11 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler()
     m_dragThreshold   = 3;    
 }
 
+MarbleWidgetDefaultInputHandler::~MarbleWidgetDefaultInputHandler()
+{
+    delete m_selectionRubber;
+}
+
 void MarbleWidgetInputHandler::restoreViewContext()
 {
     // Needs to stop the timer since it repeats otherwise.
