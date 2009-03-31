@@ -43,6 +43,7 @@ FileViewFloatItem::FileViewFloatItem(const QPointF &point,
 
 FileViewFloatItem::~FileViewFloatItem()
 {
+    delete m_fileViewParent;
 }
 
 QStringList FileViewFloatItem::backendTypes() const

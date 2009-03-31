@@ -33,6 +33,7 @@ NavigationFloatItem::NavigationFloatItem(const QPointF &point,
 
 NavigationFloatItem::~NavigationFloatItem()
 {
+    delete m_navigationParent;
 }
 
 QStringList NavigationFloatItem::backendTypes() const
