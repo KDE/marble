@@ -41,7 +41,7 @@ class QNamNetworkPlugin: public NetworkPlugin
                                  const QString &id );
 
     // NetworkPlugin abstract methods
-    virtual NetworkPlugin * createNetworkPlugin() const;
+    virtual NetworkPlugin * create() const;
 
  private:
     QNetworkAccessManager * findOrCreateNetworkAccessManager( const QString & hostname );
