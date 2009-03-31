@@ -8,8 +8,8 @@
 // Copyright 2008 Torsten Rahn <tackat@kde.org>"
 //
 
-#include "GeoDataPlugin.h"
-#include "GeoDataView.h"
+#include "GeoRendererPlugin.h"
+#include "GeoRendererView.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QColor>
@@ -39,68 +39,69 @@
 namespace Marble
 {
 
-GeoDataPlugin::GeoDataPlugin()
+GeoRendererPlugin::GeoRendererPlugin()
     : m_view( 0 )
 {
 }
 
-GeoDataPlugin::~GeoDataPlugin()
+GeoRendererPlugin::~GeoRendererPlugin()
 {
     delete( m_view );
 }
 
-QStringList GeoDataPlugin::backendTypes() const
+QStringList GeoRendererPlugin::backendTypes() const
 {
     return QStringList( "geodata" );
 }
 
-QString GeoDataPlugin::renderPolicy() const
+QString GeoRendererPlugin::renderPolicy() const
 {
     return QString( "ALWAYS" );
 }
 
-QStringList GeoDataPlugin::renderPosition() const
+QStringList GeoRendererPlugin::renderPosition() const
 {
     return QStringList( "SURFACE" );
 }
 
-QString GeoDataPlugin::name() const
+QString GeoRendererPlugin::name() const
 {
-    return tr( "GeoData Plugin" );
+    return tr( "GeoRenderer Plugin" );
 }
 
-QString GeoDataPlugin::guiString() const
+QString GeoRendererPlugin::guiString() const
 {
-    return tr( "&GeoData Plugin" );
+    return tr( "&GeoRenderer Plugin" );
 }
 
-QString GeoDataPlugin::nameId() const
+QString GeoRendererPlugin::nameId() const
 {
-    return QString( "GeoData-plugin" );
+    return QString( "GeoRenderer-plugin" );
 }
 
-QString GeoDataPlugin::description() const
+QString GeoRendererPlugin::description() const
 {
     return tr( "This is a simple test plugin." );
 }
 
-QIcon GeoDataPlugin::icon () const
+QIcon GeoRendererPlugin::icon () const
 {
     return QIcon();
 }
 
 
-void GeoDataPlugin::initialize ()
+void GeoRendererPlugin::initialize ()
 {
-    m_view = new GeoDataView();
+    m_view = new GeoRendererView();
 }
 
-bool GeoDataPlugin::isInitialized () const
+bool GeoRendererPlugin::isInitialized () const
 {
     return true;
 }
 
-bool GeoDataPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
+bool GeoRendererPlugin::render( GeoPainter *painter, ViewportParams *viewport,
+                                const QString& renderPos, GeoSceneLayer * layer )
 {
     if ( renderPos != "SURFACE" ) {
         return true;
@@ -116,6 +117,6 @@ bool GeoDataPlugin::render( GeoPainter *painter, ViewportParams *viewport, const
 
 }
 
-Q_EXPORT_PLUGIN2( GeoDataPlugin, Marble::GeoDataPlugin )
+Q_EXPORT_PLUGIN2( GeoRendererPlugin, Marble::GeoRendererPlugin )
 
-#include "GeoDataPlugin.moc"
+#include "GeoRendererPlugin.moc"
