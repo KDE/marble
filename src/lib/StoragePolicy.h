@@ -33,6 +33,9 @@ class StoragePolicy : public QObject
 
         virtual bool fileExists( const QString &fileName ) const = 0;
 
+        /**
+         * Return true if file was written successfully.
+         */
         virtual bool updateFile( const QString &fileName, const QByteArray &data ) = 0;
 
 	virtual void clearCache() = 0;

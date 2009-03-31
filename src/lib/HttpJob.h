@@ -58,7 +58,10 @@ class MARBLE_EXPORT HttpJob: public QObject
     bool tryAgain();
 
  Q_SIGNALS:
-    void jobDone( Marble::HttpJob *, int );
+    /**
+     * errorCode contains 0, if there was no error and 1 otherwise
+     */
+    void jobDone( Marble::HttpJob *, int errorCode );
     void statusMessage( QString );
 
  public Q_SLOTS:
