@@ -87,7 +87,7 @@ QList<NetworkPlugin *> PluginManager::createNetworkPlugins() const
     QList<NetworkPlugin *>::const_iterator pos = d->m_networkPluginTemplates.constBegin();
     QList<NetworkPlugin *>::const_iterator const end = d->m_networkPluginTemplates.constEnd();
     for (; pos != end; ++pos ) {
-        result.append( (*pos)->create() );
+        result.append( (*pos)->newInstance() );
     }
     return result;
 }

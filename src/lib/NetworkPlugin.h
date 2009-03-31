@@ -38,7 +38,7 @@ class MARBLE_EXPORT NetworkPlugin : public QObject, public NetworkPluginInterfac
      * Create a new Network Plugin and return it.
      * Has to be defined in concrete network plugin classes.
      */
-    virtual NetworkPlugin * create() const = 0;
+    virtual NetworkPlugin * newInstance() const = 0;
 
  protected:
     NetworkPlugin();

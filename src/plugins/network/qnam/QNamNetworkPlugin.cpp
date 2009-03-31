@@ -67,7 +67,7 @@ HttpJob * QNamNetworkPlugin::createJob( const QUrl & sourceUrl,
     return new QNamDownloadJob( sourceUrl, destination, id, qnam );
 }
 
-NetworkPlugin * QNamNetworkPlugin::create() const
+NetworkPlugin * QNamNetworkPlugin::newInstance() const
 {
     return new QNamNetworkPlugin;
 }

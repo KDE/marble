@@ -177,7 +177,7 @@ bool QHttpNetworkPlugin::isInitialized() const
     return true;
 }
 
-NetworkPlugin * QHttpNetworkPlugin::create() const
+NetworkPlugin * QHttpNetworkPlugin::newInstance() const
 {
     return new QHttpNetworkPlugin;
 }
