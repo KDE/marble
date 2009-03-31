@@ -19,9 +19,14 @@
 namespace Marble
 {
 
+QNamNetworkPlugin::QNamNetworkPlugin()
+    : m_networkAccessManager( new QNetworkAccessManager )
+{
+}
+
 QNamNetworkPlugin::~QNamNetworkPlugin()
 {
-    qDeleteAll( m_networkAccessManagers );
+    delete m_networkAccessManager;
 }
 
 QString QNamNetworkPlugin::name() const
@@ -63,32 +68,13 @@ HttpJob * QNamNetworkPlugin::createJob( const QUrl & sourceUrl,
                                         const QString & destination,
                                         const QString & id )
 {
-    QNetworkAccessManager * qnam = findOrCreateNetworkAccessManager( sourceUrl.host() );
-    return new QNamDownloadJob( sourceUrl, destination, id, qnam );
+    return new QNamDownloadJob( sourceUrl, destination, id, m_networkAccessManager );
 }
 
 NetworkPlugin * QNamNetworkPlugin::newInstance() const
 {
     return new QNamNetworkPlugin;
 }
-
-QNetworkAccessManager *
-QNamNetworkPlugin::findOrCreateNetworkAccessManager( const QString & hostname )
-{
-    QNetworkAccessManager * result = 0;
-    QMap<QString, QNetworkAccessManager *>::const_iterator const pos =
-        m_networkAccessManagers.find( hostname );
-    if ( pos != m_networkAccessManagers.constEnd() ) {
-        qDebug() << "returning existing QNAM for" << hostname;
-        result = pos.value();
-    } else {
-        qDebug() << "creating QNAM for" << hostname;
-        result = new QNetworkAccessManager;
-        m_networkAccessManagers.insert( hostname, result );
-    }
-    return result;
-}
-
 
 } // namespace Marble
 

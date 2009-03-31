@@ -12,9 +12,6 @@
 
 class QNetworkAccessManager;
 
-#include <QtCore/QMap>
-#include <QtCore/QString>
-
 #include "NetworkPlugin.h"
 
 namespace Marble
@@ -25,6 +22,7 @@ class QNamNetworkPlugin: public NetworkPlugin
     Q_OBJECT
 
  public:
+    QNamNetworkPlugin();
     virtual ~QNamNetworkPlugin();
 
     // PluginInterface abstract methods
@@ -44,9 +42,7 @@ class QNamNetworkPlugin: public NetworkPlugin
     virtual NetworkPlugin * newInstance() const;
 
  private:
-    QNetworkAccessManager * findOrCreateNetworkAccessManager( const QString & hostname );
-
-    QMap<QString, QNetworkAccessManager *> m_networkAccessManagers;
+    QNetworkAccessManager * const m_networkAccessManager;
 };
 
 }
