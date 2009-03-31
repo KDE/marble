@@ -50,7 +50,7 @@ const int update_interval = 60000;
 class SunLocatorPrivate
 {
 public:
-    explicit SunLocatorPrivate(ExtDateTime *dateTime, Planet *planet)
+    SunLocatorPrivate(ExtDateTime *dateTime, Planet *planet)
         : m_lon( 0.0 ),
           m_lat( 0.0 ),
           m_datetime( dateTime ),
