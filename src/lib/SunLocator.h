@@ -41,7 +41,7 @@ class MARBLE_EXPORT SunLocator : public QObject
 	So strictly Q_DISABLE_COPY is not necessary in this class.
 	FIXME: clarify this issue.
     */
-    explicit SunLocator(ExtDateTime *dateTime, Planet *planet);
+    SunLocator(ExtDateTime *dateTime, Planet *planet);
     virtual ~SunLocator();
 
     qreal shading(qreal lon, qreal a, qreal c) const;

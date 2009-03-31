@@ -63,7 +63,7 @@ class TileLoader : public QObject
          *                        the tiles from a remote resource.
          * @param sunLocator The sun locator that shall be used to 'sunnify' the tiles.
          */
-        explicit TileLoader( HttpDownloadManager *downloadManager, MarbleModel* parent);
+        TileLoader( HttpDownloadManager *downloadManager, MarbleModel* parent);
 
         /**
          * Destroys the tile loader.
