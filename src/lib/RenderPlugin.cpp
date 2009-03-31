@@ -58,6 +58,7 @@ RenderPlugin::RenderPlugin()
 
 RenderPlugin::~RenderPlugin()
 {
+    delete d->m_item;
     delete d;
 }
 
