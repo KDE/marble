@@ -573,7 +573,7 @@ void MarblePart::setupActions()
     // Action: Open a Gpx or a Kml File
     m_openAct = KStandardAction::open( this, SLOT( openFile() ),
 				       actionCollection() );
-    m_openAct->setText( i18n( "&Open Map..." ) );
+    m_openAct->setText( i18n( "&Open..." ) );
 
     // Standard actions.  So far only Quit.
     KStandardAction::quit( kapp, SLOT( closeAllWindows() ),
