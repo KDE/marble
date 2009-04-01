@@ -9,13 +9,13 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-#include <QStringList>
-
 // Own
 #include "FileViewModel.h"
 
 // Other
 #include "AbstractFileViewItem.h"
+
+#include <QStringList>
 
 using namespace Marble;
 

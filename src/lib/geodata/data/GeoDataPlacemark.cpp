@@ -14,12 +14,12 @@
 // Own
 #include "GeoDataPlacemark.h"
 
+// Private
+#include "GeoDataPlacemark_p.h"
+
 // Qt
 #include <QtCore/QDataStream>
 #include <QtCore/QDebug>
-
-// Private
-#include "GeoDataPlacemark_p.h"
 
 namespace Marble
 {

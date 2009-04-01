@@ -13,8 +13,8 @@
 //
 
 
-#ifndef __MARBLE__IMAGELOADTHREAD_H
-#define __MARBLE__IMAGELOADTHREAD_H
+#ifndef MARBLE_IMAGELOADTHREAD_H
+#define MARBLE_IMAGELOADTHREAD_H
 
 #include <QtCore/QThread>
 #include <QtGui/QImage>
@@ -38,4 +38,4 @@ class ImageLoadThread : public QThread {
 
 }
 
-#endif // __MARBLE__IMAGELOADTHREAD_H
+#endif // MARBLE_IMAGELOADTHREAD_H

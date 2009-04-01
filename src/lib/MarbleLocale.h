@@ -10,8 +10,8 @@
 //
 
 
-#ifndef __MARBLE__LOCALE_H
-#define __MARBLE__LOCALE_H
+#ifndef MARBLE_LOCALE_H
+#define MARBLE_LOCALE_H
 
 #include "marble_export.h"
 #include "global.h"
@@ -44,4 +44,4 @@ class MARBLE_EXPORT MarbleLocale
 
 }
 
-#endif // __MARBLE__LOCALE_H
+#endif // MARBLE_LOCALE_H

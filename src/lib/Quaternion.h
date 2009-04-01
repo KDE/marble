@@ -14,8 +14,8 @@
 
 // krazy:excludeall=dpointer,inline
 
-#ifndef __MARBLE__QUATERNION_H
-#define __MARBLE__QUATERNION_H
+#ifndef MARBLE_QUATERNION_H
+#define MARBLE_QUATERNION_H
 
 #include "marble_export.h"
 #include <cmath>
@@ -96,4 +96,4 @@ class MARBLE_EXPORT Quaternion {
 
 }
 
-#endif // __MARBLE__QUATERNION_H
+#endif // MARBLE_QUATERNION_H

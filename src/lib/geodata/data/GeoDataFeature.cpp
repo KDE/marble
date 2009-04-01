@@ -11,6 +11,7 @@
 
 
 #include "GeoDataFeature.h"
+#include "GeoDataFeature_p.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QDataStream>
@@ -27,7 +28,6 @@
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 
-#include "GeoDataFeature_p.h"
 
 namespace Marble {
 QFont GeoDataFeature::s_defaultFont = QFont("Sans Serif");

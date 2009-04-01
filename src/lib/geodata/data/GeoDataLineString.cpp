@@ -11,10 +11,10 @@
 
 
 #include "GeoDataLineString.h"
+#include "GeoDataLineString_p.h"
 
 #include <QtCore/QDebug>
 
-#include "GeoDataLineString_p.h"
 
 namespace Marble
 {

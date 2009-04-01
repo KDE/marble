@@ -20,8 +20,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef __MARBLE__TILELOADER_H
-#define __MARBLE__TILELOADER_H
+#ifndef MARBLE_TILELOADER_H
+#define MARBLE_TILELOADER_H
 
 #include <QtCore/QObject>
 
@@ -201,4 +201,4 @@ class TileLoader : public QObject
 
 }
 
-#endif // __MARBLE__TILELOADER_H
+#endif // MARBLE_TILELOADER_H

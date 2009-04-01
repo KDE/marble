@@ -11,10 +11,10 @@
 
 
 #include "GeoDataPolygon.h"
+#include "GeoDataPolygon_p.h"
 
 #include <QtCore/QDebug>
 
-#include "GeoDataPolygon_p.h"
 
 namespace Marble
 {

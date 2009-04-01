@@ -13,8 +13,8 @@
 //
 
 
-#ifndef __MARBLE__GLOBAL_P_H
-#define __MARBLE__GLOBAL_P_H
+#ifndef MARBLE_GLOBAL_P_H
+#define MARBLE_GLOBAL_P_H
 
 #include "MarbleLocale.h"
 
@@ -33,4 +33,4 @@ class MarbleGlobalPrivate {
 
 }
 
-#endif // __MARBLE__GLOBAL_P_H
+#endif // MARBLE_GLOBAL_P_H

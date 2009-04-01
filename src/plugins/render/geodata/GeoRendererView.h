@@ -8,8 +8,8 @@
 // Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
 //
 
-#ifndef MARBLE_GEODATAVIEW_H
-#define MARBLE_GEODATAVIEW_H
+#ifndef MARBLE_GEORENDERERVIEW_H
+#define MARBLE_GEORENDERERVIEW_H
 
 // Marble
 
@@ -72,4 +72,4 @@ class GeoRendererView : public QAbstractItemView {
 };
 
 } // namespace Marble
-#endif // MARBLE_GEODATAVIEW_H
+#endif // MARBLE_GEORENDERERVIEW_H

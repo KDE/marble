@@ -13,8 +13,8 @@
 //
 
 
-#ifndef __MARBLE__ABSTRACTTILE_P_H
-#define __MARBLE__ABSTRACTTILE_P_H
+#ifndef MARBLE_ABSTRACTTILE_P_H
+#define MARBLE_ABSTRACTTILE_P_H
 
 #include "TileId.h"
 
@@ -39,4 +39,4 @@ class AbstractTilePrivate {
 
 }
 
-#endif // __MARBLE__ABSTRACTTILE_P_H
+#endif // MARBLE_ABSTRACTTILE_P_H

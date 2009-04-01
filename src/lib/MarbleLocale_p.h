@@ -13,8 +13,8 @@
 //
 
 
-#ifndef __MARBLE__LOCALE_P_H
-#define __MARBLE__LOCALE_P_H
+#ifndef MARBLE_LOCALE_P_H
+#define MARBLE_LOCALE_P_H
 
 
 namespace Marble
@@ -31,4 +31,4 @@ class MarbleLocalePrivate {
 
 }
 
-#endif // __MARBLE__LOCALE_P_H
+#endif // MARBLE_LOCALE_P_H

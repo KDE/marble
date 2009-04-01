@@ -15,8 +15,8 @@
 //
 
 
-#ifndef __MARBLE__TEXTURETILE_P_H
-#define __MARBLE__TEXTURETILE_P_H
+#ifndef MARBLE_TEXTURETILE_P_H
+#define MARBLE_TEXTURETILE_P_H
 
 #include "AbstractTile_p.h"
 
@@ -51,4 +51,4 @@ class TextureTilePrivate : AbstractTilePrivate {
 
 }
 
-#endif // __MARBLE__TEXTURETILE_P_H
+#endif // MARBLE_TEXTURETILE_P_H

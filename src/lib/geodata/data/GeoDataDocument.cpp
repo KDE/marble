@@ -21,6 +21,7 @@
 */
 
 #include "GeoDataDocument.h"
+#include "GeoDataDocument_p.h"
 
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
@@ -29,7 +30,6 @@
 
 #include <QtCore/QDebug>
 
-#include "GeoDataDocument_p.h"
 
 namespace Marble
 {

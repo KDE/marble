@@ -19,8 +19,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef __MARBLE__MARBLEVIEWADAPTOR_H
-#define __MARBLE__MARBLEVIEWADAPTOR_H
+#ifndef MARBLE_MARBLEVIEWADAPTOR_H
+#define MARBLE_MARBLEVIEWADAPTOR_H
 
 #include <QtDBus/QDBusAbstractAdaptor>
 
@@ -61,5 +61,5 @@ public slots:
 
 };
 
-#endif // __MARBLE__MARBLEVIEWADAPTOR_H
+#endif // MARBLE_MARBLEVIEWADAPTOR_H
 

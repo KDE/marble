@@ -22,8 +22,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef __MARBLE__TILELOADERHELPER_H
-#define __MARBLE__TILELOADERHELPER_H
+#ifndef MARBLE_TILELOADERHELPER_H
+#define MARBLE_TILELOADERHELPER_H
 
 #include <QtCore/QString>
 #include <QtCore/QUrl>
@@ -99,4 +99,4 @@ namespace TileLoaderHelper {
 
 }
 
-#endif // __MARBLE__TILELOADERHELPER_H
+#endif // MARBLE_TILELOADERHELPER_H

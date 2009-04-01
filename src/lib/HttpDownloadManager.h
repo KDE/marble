@@ -14,8 +14,8 @@
 //
 
 
-#ifndef __MARBLE__HTTPDOWNLOADMANAGER_H
-#define __MARBLE__HTTPDOWNLOADMANAGER_H
+#ifndef MARBLE_HTTPDOWNLOADMANAGER_H
+#define MARBLE_HTTPDOWNLOADMANAGER_H
 
 
 #include <QtCore/QString>
@@ -140,4 +140,4 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
 
 }
 
-#endif // __MARBLE__HTTPDOWNLOADMANAGER_H
+#endif // MARBLE_HTTPDOWNLOADMANAGER_H

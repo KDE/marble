@@ -10,6 +10,7 @@
 
 
 #include "GeoDataMultiGeometry.h"
+#include "GeoDataMultiGeometry_p.h"
 
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
@@ -18,7 +19,6 @@
 
 #include <QtCore/QDebug>
 
-#include "GeoDataMultiGeometry_p.h"
 
 namespace Marble
 {

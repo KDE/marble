@@ -12,6 +12,7 @@
 
 
 #include "GeoDataGeometry.h"
+#include "GeoDataGeometry_p.h"
 
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
@@ -20,7 +21,6 @@
 
 #include <QtCore/QDebug>
 
-#include "GeoDataGeometry_p.h"
 
 namespace Marble
 {

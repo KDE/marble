@@ -15,8 +15,8 @@
 //
 
 
-#ifndef __MARBLE__TEXTURETILE_H
-#define __MARBLE__TEXTURETILE_H
+#ifndef MARBLE_TEXTURETILE_H
+#define MARBLE_TEXTURETILE_H
 
 
 #include <QtCore/QCache>
@@ -85,4 +85,4 @@ class TextureTile : public AbstractTile {
 
 }
 
-#endif // __MARBLE__TEXTURETILE_H
+#endif // MARBLE_TEXTURETILE_H

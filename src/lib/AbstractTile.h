@@ -13,8 +13,8 @@
 //
 
 
-#ifndef __MARBLE__ABSTRACTTILE_H
-#define __MARBLE__ABSTRACTTILE_H
+#ifndef MARBLE_ABSTRACTTILE_H
+#define MARBLE_ABSTRACTTILE_H
 
 #include <QtCore/QObject>
 #include <QtCore/QDateTime>
@@ -72,4 +72,4 @@ private:
 
 }
 
-#endif // __MARBLE__ABSTRACTTILE_H
+#endif // MARBLE_ABSTRACTTILE_H
