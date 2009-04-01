@@ -5,6 +5,8 @@
 TEMPLATE = app
 INCLUDEPATH += .
 
+DEFINES += _USE_MATH_DEFINES=1
+
 # Input
 SOURCES += stars.cpp
 DESTDIR = ../../bin

@@ -290,7 +290,7 @@ QVariant MarbleLegendBrowser::loadResource ( int type, const QUrl & name )
         else
             newName = MarbleDirs::path( "bitmaps/checkbox_empty.png" );
 
-        return QTextBrowser::loadResource( type, QUrl( newName ) );
+        return QTextBrowser::loadResource( type, QUrl::fromLocalFile( newName ) );
     }
 
     if ( type == QTextDocument::ImageResource
