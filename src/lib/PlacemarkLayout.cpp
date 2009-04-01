@@ -42,6 +42,8 @@ PlacemarkLayout::PlacemarkLayout( QObject* parent )
     : QObject( parent ),
       m_placemarkPainter( 0 ),
       m_maxLabelHeight( 0 ),
+      m_placemarkModel( 0 ),
+      m_selectionModel( 0 ),
       m_styleResetRequested( true )
 {
 //  Old weightfilter array. Still here 
@@ -182,12 +184,24 @@ int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
 
 void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
                                         ViewParams *viewParams,
+                                        bool firstTime )
+{
+    paintPlaceFolder( painter, viewParams, model(), selectionModel(), firstTime );
+}
+
+void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
+                                        ViewParams *viewParams,
                                         const QAbstractItemModel  *model,
                                         const QItemSelectionModel *selectionModel,
                                         bool firstTime )
 {
     Q_UNUSED( firstTime );
 
+    if( 0 == selectionModel )
+        return;
+    if( 0 == model )
+        return;
+        
     // const int imgwidth  = viewParams->canvasImage()->width();
     const int imgheight = viewParams->canvasImage()->height();
 
@@ -567,5 +581,24 @@ int PlacemarkLayout::placemarksOnScreenLimit() const
     return 100;
 }
 
+void PlacemarkLayout::setModel( QAbstractItemModel *model )
+{
+    m_placemarkModel = model;
+}
+
+QAbstractItemModel * PlacemarkLayout::model() const
+{
+    return m_placemarkModel;
+}
+
+void PlacemarkLayout::setSelectionModel( QItemSelectionModel * selectionModel )
+{
+    m_selectionModel = selectionModel;
+}
+
+QItemSelectionModel * PlacemarkLayout::selectionModel() const
+{
+    return m_selectionModel;
+}
 
 #include "PlacemarkLayout.moc"

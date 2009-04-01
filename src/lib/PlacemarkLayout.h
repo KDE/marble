@@ -62,6 +62,34 @@ class PlacemarkLayout : public QObject
     ~PlacemarkLayout();
 
     /**
+     * sets the model which is painted
+     *
+     * @param model PlacemarkModel or a proxy model on top of it
+     */
+    virtual void setModel( QAbstractItemModel *model );
+
+    QAbstractItemModel * model() const;
+
+    /**
+     * sets the selectionModel which contains the placemarks that get are selected
+     *
+     * @param selectionModel The selection model for the PlacemarkModel.
+     */
+    virtual void setSelectionModel( QItemSelectionModel * selectionModel );
+    
+    QItemSelectionModel * selectionModel() const;
+
+    /**
+     * Layouts the place marks. This is an overloaded function which takes the current values of the placemarkModel and the selectionModel.
+     *
+     * @param painter The painter that is used for painting.
+     * @param viewParams Parameters that influence the painting.
+     * @param planetAxis The position of the planet axis.
+     * @param firstTime Whether the map is painted the first time.
+     */
+    void paintPlaceFolder( QPainter *painter, ViewParams *viewParams, bool firstTime = true );
+
+    /**
      * Layouts the place marks.
      *
      * @param painter The painter that is used for painting.
@@ -116,6 +144,9 @@ class PlacemarkLayout : public QObject
     QVector<VisiblePlacemark*> m_paintOrder;
     QVector<VisiblePlacemark*> m_placemarkPool;
     QHash<QModelIndex, VisiblePlacemark*> m_visiblePlacemarks;
+    
+    QAbstractItemModel *m_placemarkModel;
+    QItemSelectionModel *m_selectionModel;
 
     QModelIndexList m_indexList;
 
