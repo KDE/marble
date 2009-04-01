@@ -131,6 +131,42 @@ void GeoDataCoordinates::set( qreal _lon, qreal _lat, qreal _alt, GeoDataCoordin
     }
 }
 
+/*
+ * call detach() at the start of all non-static, non-const functions
+ */
+void GeoDataCoordinates::setLongitude( qreal _lon, GeoDataCoordinates::Unit unit )
+{
+    detach();
+    switch( unit ){
+    case Radian:
+        d->m_q = Quaternion( _lon, d->m_lat );
+        d->m_lon = _lon;
+        break;
+    case Degree:
+        d->m_q = Quaternion( _lon * DEG2RAD , d->m_lat  );
+        d->m_lon = _lon * DEG2RAD;
+        break;
+    }
+}
+
+/*
+ * call detach() at the start of all non-static, non-const functions
+ */
+void GeoDataCoordinates::setLatitude( qreal _lat, GeoDataCoordinates::Unit unit )
+{
+    detach();
+    switch( unit ){
+    case Radian:
+        d->m_q = Quaternion( d->m_lon, _lat );
+        d->m_lat = _lat;
+        break;
+    case Degree:
+        d->m_q = Quaternion( d->m_lon, _lat * DEG2RAD   );
+        d->m_lat = _lat * DEG2RAD;
+        break;
+    }
+}
+
 void GeoDataCoordinates::geoCoordinates( qreal& lon, qreal& lat, 
                                GeoDataCoordinates::Unit unit ) const
 {

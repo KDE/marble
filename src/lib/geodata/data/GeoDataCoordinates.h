@@ -124,7 +124,7 @@ class GEODATA_EXPORT GeoDataCoordinates
     void setDetail( const int det );
 
     /**
-    * @brief (re)set the coordinates in a GeoDataCoordinates
+    * @brief (re)set the coordinates in a GeoDataCoordinates object
     * @param _lon longitude
     * @param _lat latitude
     * @param alt altitude (default: 0)
@@ -132,6 +132,24 @@ class GEODATA_EXPORT GeoDataCoordinates
     * (default for Radian: north pole at pi/2, southpole at -pi/2)
     */
     void set( qreal lon, qreal lat, qreal alt = 0,
+              GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+
+    /**
+    * @brief set the longitude in a GeoDataCoordinates object
+    * @param _lon longitude
+    * @param _unit units that lon and lat get measured in
+    * (default for Radian: north pole at pi/2, southpole at -pi/2)
+    */
+    void setLongitude( qreal lon,
+              GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+
+    /**
+    * @brief set the longitude in a GeoDataCoordinates object
+    * @param _lat longitude
+    * @param _unit units that lon and lat get measured in
+    * (default for Radian: north pole at pi/2, southpole at -pi/2)
+    */
+    void setLatitude( qreal lat,
               GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
