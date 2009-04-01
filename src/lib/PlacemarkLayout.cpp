@@ -343,6 +343,10 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
 
         int popularityIndex = index.data( MarblePlacemarkModel::PopularityIndexRole ).toInt();
 
+        if ( popularityIndex <= 1 ) {
+            break;
+        }
+
         // Skip the places that are too small.
         if ( !noFilter ) {
             if ( m_weightfilter.at( popularityIndex ) > viewParams->radius() )

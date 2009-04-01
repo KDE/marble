@@ -145,6 +145,8 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
         return d->m_placemarkContainer.at( index.row() ).popularity();
     } else if ( role == DescriptionRole ) {
         return d->m_placemarkContainer.at( index.row() ).description();
+    } else if ( role == Qt::ToolTipRole ) {
+        return d->m_placemarkContainer.at( index.row() ).description();
     } else if ( role == GeoTypeRole ) {
         return d->m_placemarkContainer.at( index.row() ).role();
     } else if ( role == CoordinateRole ) {
@@ -384,9 +386,10 @@ void MarblePlacemarkModel::createFilterProperties( PlacemarkContainer &container
             ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallNationCapital )
                 + ( placemark->popularityIndex() -1 ) / 4 * 4 ) ) );
 
-        else if ( placemark->role() == ' ' && !hasPopularity && placemark->visualCategory() == GeoDataPlacemark::Unknown )
-            placemark->setVisualCategory( GeoDataPlacemark::Default ); // default location
-
+        else if ( placemark->role() == ' ' && !hasPopularity && placemark->visualCategory() == GeoDataPlacemark::Unknown ) {
+            placemark->setVisualCategory( GeoDataPlacemark::Unknown ); // default location
+            placemark->setPopularityIndex(0);
+        }
         else if ( placemark->role() == 'h' ) placemark->setVisualCategory( GeoDataPlacemark::MannedLandingSite );
         else if ( placemark->role() == 'r' ) placemark->setVisualCategory( GeoDataPlacemark::RoboticRover );
         else if ( placemark->role() == 'u' ) placemark->setVisualCategory( GeoDataPlacemark::UnmannedSoftLandingSite );
@@ -397,7 +400,13 @@ void MarblePlacemarkModel::createFilterProperties( PlacemarkContainer &container
         if ( placemark->role() == 'O' )
             placemark->setPopularityIndex( 16 );
         if ( placemark->role() == 'K' )
-            placemark->setPopularityIndex( 19 ); 
+            placemark->setPopularityIndex( 19 );
+        if ( !placemark->isVisible() ) {
+            placemark->setPopulation(-1);
+        }
+        if ( placemark->population() < 0 ) {
+            placemark->setPopularityIndex( -1 );
+        }
     }
 
 }
