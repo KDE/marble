@@ -532,7 +532,7 @@ void MarblePart::setupActions()
     // Action: Export Map
     m_exportMapAction = new KAction( this );
     actionCollection()->addAction( "exportMap", m_exportMapAction );
-    m_exportMapAction->setText( i18n( "&Export Map..." ) );
+    m_exportMapAction->setText( i18nc( "Action for saving the map to a file", "&Export Map..." ) );
     m_exportMapAction->setIcon( KIcon( "document-save-as" ) );
     m_exportMapAction->setShortcut( Qt::CTRL + Qt::Key_S );
     connect( m_exportMapAction, SIGNAL(triggered( bool ) ),
@@ -541,7 +541,7 @@ void MarblePart::setupActions()
     // Action: Work Offline
     m_workOfflineAction = new KAction( this );
     actionCollection()->addAction( "workOffline", m_workOfflineAction );
-    m_workOfflineAction->setText( i18n( "&Work Offline" ) );
+    m_workOfflineAction->setText( i18nc( "Action for toggling offline mode", "&Work Offline" ) );
     m_workOfflineAction->setIcon( KIcon( "user-offline" ) );
     m_workOfflineAction->setCheckable( true );
     m_workOfflineAction->setChecked( false );
@@ -551,7 +551,8 @@ void MarblePart::setupActions()
     // Action: Current Location
     m_currentLocationAction = new KAction( this );
     actionCollection()->addAction( "show_currentlocation", m_currentLocationAction );
-    m_currentLocationAction->setText( i18n( "Current Location" ) );
+    m_currentLocationAction->setText( i18nc( "Action for toggling the 'current location' box",
+                                             "Current Location" ) );
     m_currentLocationAction->setCheckable( true );
     m_currentLocationAction->setChecked( false );
     connect( m_currentLocationAction, SIGNAL( triggered( bool ) ),
@@ -560,41 +561,45 @@ void MarblePart::setupActions()
     // Action: Copy Map to the Clipboard
     m_copyMapAction = KStandardAction::copy( this, SLOT( copyMap() ),
 					     actionCollection() );
-    m_copyMapAction->setText( i18n( "&Copy Map" ) );
+    m_copyMapAction->setText( i18nc( "Action for copying the map to the clipboard", "&Copy Map" ) );
 
     // Action: Copy Coordinates string
     m_copyCoordinatesAction = new KAction( this );
     actionCollection()->addAction( "edit_copy_coordinates",
 				   m_copyCoordinatesAction );
-    m_copyCoordinatesAction->setText( i18n( "C&opy Coordinates" ) );
+    m_copyCoordinatesAction->setText( i18nc( "Action for copying the coordinates to the clipboard",
+                                             "C&opy Coordinates" ) );
     connect( m_copyCoordinatesAction, SIGNAL( triggered( bool ) ),
 	     this,                    SLOT( copyCoordinates() ) );
 
     // Action: Open a Gpx or a Kml File
     m_openAct = KStandardAction::open( this, SLOT( openFile() ),
 				       actionCollection() );
-    m_openAct->setText( i18n( "&Open..." ) );
+    m_openAct->setText( i18nc( "Action for opening a file", "&Open..." ) );
 
     // Standard actions.  So far only Quit.
     KStandardAction::quit( kapp, SLOT( closeAllWindows() ),
 			   actionCollection() );
 
     // Action: Get hot new stuff
-    m_newStuffAction = KNS::standardAction( i18n("Download Maps..."), this,
+    m_newStuffAction = KNS::standardAction( i18nc( "Action for downloading maps (GHNS)",
+                                                   "Download Maps..."),
+                                            this,
                                             SLOT( showNewStuffDialog() ),
                                             actionCollection(), "new_stuff" );
-    m_newStuffAction->setStatusTip(i18n("&Download new maps"));
+    m_newStuffAction->setStatusTip( i18nc( "Status tip", "&Download new maps"));
     m_newStuffAction->setShortcut( Qt::CTRL + Qt::Key_N );
 
     KStandardAction::showStatusbar( this, SLOT( showStatusBar( bool ) ),
 				    actionCollection() );
 
-    m_sideBarAct = new KAction( i18n("Show &Navigation Panel"), this );
+    m_sideBarAct = new KAction( i18nc( "Action for toggling the navigation panel",
+                                       "Show &Navigation Panel"), this );
     actionCollection()->addAction( "options_show_sidebar", m_sideBarAct );
     m_sideBarAct->setShortcut( Qt::Key_F9 );
     m_sideBarAct->setCheckable( true );
     m_sideBarAct->setChecked( true );
-    m_sideBarAct->setStatusTip( i18n( "Show Navigation Panel" ) );
+    m_sideBarAct->setStatusTip( i18nc( "Status tip", "Show Navigation Panel" ) );
     connect( m_sideBarAct, SIGNAL( triggered( bool ) ),
 	     this,         SLOT( showSideBar( bool ) ) );
 
@@ -608,7 +613,7 @@ void MarblePart::setupActions()
     actionCollection()->addAction( "show_atmosphere", m_showAtmosphereAction );
     m_showAtmosphereAction->setCheckable( true );
     m_showAtmosphereAction->setChecked( true );
-    m_showAtmosphereAction->setText( i18n( "&Atmosphere" ) );
+    m_showAtmosphereAction->setText( i18nc( "Action for toggling the atmosphere", "&Atmosphere" ) );
     connect( m_showAtmosphereAction, SIGNAL( triggered( bool ) ),
 	     this,                   SLOT( setShowAtmosphere( bool ) ) );
 
@@ -627,14 +632,14 @@ void MarblePart::setupActions()
     actionCollection()->addAction( "show_clouds", m_showCloudsAction );
     m_showCloudsAction->setCheckable( true );
     m_showCloudsAction->setChecked( true );
-    m_showCloudsAction->setText( i18n( "&Clouds" ) );
+    m_showCloudsAction->setText( i18nc( "Action for toggling clouds", "&Clouds" ) );
     connect( m_showCloudsAction, SIGNAL( triggered( bool ) ),
 	     this,               SLOT( setShowClouds( bool ) ) );
 
     // Action: Show Sunshade options
     m_controlSunAction = new KAction( this );
     actionCollection()->addAction( "control_sun", m_controlSunAction );
-    m_controlSunAction->setText( i18n( "S&un Control..." ) );
+    m_controlSunAction->setText( i18nc( "Action for sun control dialog", "S&un Control..." ) );
     connect( m_controlSunAction, SIGNAL( triggered( bool ) ),
 	     this,               SLOT( controlSun() ) );
 
@@ -642,7 +647,8 @@ void MarblePart::setupActions()
     m_lockFloatItemsAct = new KAction ( this );
     actionCollection()->addAction( "options_lock_floatitems",
 				   m_lockFloatItemsAct );
-    m_lockFloatItemsAct->setText( i18n( "Lock Position" ) );
+    m_lockFloatItemsAct->setText( i18nc( "Action for locking float items on the map",
+                                         "Lock Position" ) );
     m_lockFloatItemsAct->setCheckable( true );
     m_lockFloatItemsAct->setChecked( false );
     connect( m_lockFloatItemsAct, SIGNAL( triggered( bool ) ),
@@ -793,12 +799,14 @@ void MarblePart::setupStatusBarActions()
     connect( statusBar, SIGNAL( customContextMenuRequested( QPoint )),
              this, SLOT( showStatusBarContextMenu( QPoint )));
 
-    m_showPositionAction = new KToggleAction( i18n( "Show Position" ), this );
-    m_showAltitudeAction = new KToggleAction( i18n( "Show Altitude" ), this );
-    m_showTileZoomLevelAction =
-        new KToggleAction( i18n( "Show Tile Zoom Level" ), this );
-    m_showDownloadProgressAction =
-        new KToggleAction( i18n( "Show Download Progress Bar" ), this );
+    m_showPositionAction = new KToggleAction( i18nc( "Action for toggling", "Show Position" ),
+                                              this );
+    m_showAltitudeAction = new KToggleAction( i18nc( "Action for toggling", "Show Altitude" ),
+                                              this );
+    m_showTileZoomLevelAction = new KToggleAction( i18nc( "Action for toggling",
+                                                          "Show Tile Zoom Level" ), this );
+    m_showDownloadProgressAction = new KToggleAction( i18nc( "Action for toggling",
+                                                             "Show Download Progress Bar" ), this );
 
     connect( m_showPositionAction, SIGNAL( triggered( bool ) ),
              this, SLOT( showPositionLabel( bool ) ) );
