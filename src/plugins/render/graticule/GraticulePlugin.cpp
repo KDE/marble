@@ -86,9 +86,12 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->setPen( QColor( Qt::white ) );
 
-    for ( int i = 0; i < 180.0 ; i+=2 ){
-        renderLongitudeCircle( painter, i );                
-        renderLatitudeCircle( painter, i - 90.0 );
+    for ( int i = -90; i < 90 ; i+=3 ){
+        renderLatitudeCircle( painter, i );
+    }
+
+    for ( int i = -180; i < 180.0 ; i+=3 ){
+        renderLongitudeHalfCircle( painter, i );                
     }
 
     painter->setPen( QColor( Qt::yellow ) );
@@ -145,6 +148,19 @@ void GraticulePlugin::renderLongitudeCircle( GeoPainter *painter, qreal longitud
     circle << n1 << n2 << n3 << n4 << n5;
 
     painter->drawPolyline( circle );     
+}
+
+void GraticulePlugin::renderLongitudeHalfCircle( GeoPainter *painter, qreal longitude ) {
+
+    GeoDataCoordinates n1(longitude, 90.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates n2(longitude, 0.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates n3(longitude, -90.0, 0.0, GeoDataCoordinates::Degree );
+
+    GeoDataLineString halfCircle( Tessellate ) ;
+
+    halfCircle << n1 << n2 << n3;
+
+    painter->drawPolyline( halfCircle );     
 }
 
 }

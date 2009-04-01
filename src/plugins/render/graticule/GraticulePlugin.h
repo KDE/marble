@@ -63,7 +63,9 @@ class GraticulePlugin : public RenderPlugin
 
  private:
     void renderLatitudeCircle( GeoPainter *painter, qreal latitude );
+
     void renderLongitudeCircle( GeoPainter *painter, qreal longitude );
+    void renderLongitudeHalfCircle( GeoPainter *painter, qreal longitude );
 
 };
 
