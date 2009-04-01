@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2007        Inge Wallin   <ingwa@kde.org>
+// Copyright 2007-2009   Torsten Rahn  <rahn@kde.org>
 //
 
 // Local
@@ -159,6 +160,12 @@ GeoDataLinearRing AbstractProjection::rectOutline( const QRect& screenRect,
                                  const ViewportParams *viewport )
 {
     return GeoDataLinearRing();
+}
+
+bool AbstractProjection::exceedsLatitudeRange( const GeoDataCoordinates &coords ) const
+{
+    // TBD
+    return true;
 }
 
 QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &previousCoords, 

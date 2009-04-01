@@ -118,6 +118,12 @@ enum AltitudeMode {
     Absolute            ///< Altitude is given relative to the sealevel
 };
 
+enum Pole {
+    AnyPole,             ///< Any pole
+    NorthPole,           ///< Only North Pole
+    SouthPole            ///< Only South Pole
+};
+
 const int defaultLevelZeroColumns = 2;
 const int defaultLevelZeroRows = 1;
 

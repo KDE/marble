@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
+// Copyright 2007        Inge Wallin   <ingwa@kde.org>
+// Copyright 2007-2009   Torsten Rahn  <rahn@kde.org>
 //
 
 // Local
@@ -212,7 +213,6 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
     // Linear rings require to tessellate the path from the last node to the first node
     // which isn't really convenient to achieve with a for loop ...
 
-    const qreal precision = 20.0;
     const bool isLong = lineString.size() > 50;
 
     while ( itCoords != itEnd )
@@ -302,9 +302,9 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
                 )
                 {
 #endif                    
-                    int tessellatedNodes = (int)( distance / precision );
+                    int tessellatedNodes = (int)( distance / tessellationPrecision );
 
-                    if ( distance > precision ) {
+                    if ( distance > tessellationPrecision ) {
 //                      qDebug() << "Distance: " << distance;
                         *polygon << tessellateLineSegment( previousCoords, currentCoords, 
                                                            tessellatedNodes, viewport,

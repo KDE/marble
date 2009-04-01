@@ -21,6 +21,7 @@
 #include <cmath>
 
 #include "geodata_export.h"
+#include "global.h"
 #include "Quaternion.h"
 
 /* M_PI is a #define that may or may not be handled in <cmath> */
@@ -104,26 +105,6 @@ class GEODATA_EXPORT GeoDataCoordinates
     virtual ~GeoDataCoordinates();
 
     /**
-        * @brief return the altitude of the Point
-        */
-    qreal altitude() const;
-    /**
-    * @brief set the altitude of the Point
-    * @param altitude altitude
-    */
-    void setAltitude( const qreal altitude );
-
-    /**
-    * @brief return the detail flag
-    */
-    int detail() const;
-    /**
-    * @brief set the detail flag
-    * @param det detail
-    */
-    void setDetail( const int det );
-
-    /**
     * @brief (re)set the coordinates in a GeoDataCoordinates object
     * @param _lon longitude
     * @param _lat latitude
@@ -165,9 +146,43 @@ class GEODATA_EXPORT GeoDataCoordinates
                                                                 const;
 
     /**
+        * @brief return the altitude of the Point
+        */
+    qreal altitude() const;
+    /**
+    * @brief set the altitude of the Point
+    * @param altitude altitude
+    */
+    void setAltitude( const qreal altitude );
+
+    /**
+    * @brief return the detail flag
+    */
+    int detail() const;
+
+    /**
+    * @brief set the detail flag
+    * @param det detail
+    */
+    void setDetail( const int det );
+
+    /**
     * @brief return a Quaternion with the used coordinates
     */
     const Quaternion &quaternion() const;
+
+    /**
+    * @brief return whether our coordinates are located at one of the poles
+    * This method can be used to check whether the coordinate equals one of 
+    * the poles. 
+    * NOTE: As the poles might not be visible in the projection at all 
+    *       you should check whether 
+    * 
+    * bool AbstractProjection::exceedsLatitudeRange() const
+    *
+    * isn't what you're looking for ... .
+    */
+    bool isAtPole( Marble::Pole ) const;
 
     /**
     * @brief return Notation of string representation
@@ -203,8 +218,7 @@ class GEODATA_EXPORT GeoDataCoordinates
      * @brief try to parse the string into a coordinate pair
      * @param successful becomes true if the conversion succeeds
      * @return the geodatacoordinates
-     */
-     
+     */     
     static GeoDataCoordinates fromString( const QString &string, bool& successful );
      
     /**

@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
+// Copyright 2007-2009 Torsten Rahn  <rahn@kde.org>
 //
 
 
@@ -17,6 +18,7 @@
  * This file contains the headers for AbstractProjection.
  *
  * @author Inge Wallin  <inge@lysator.liu.se>
+ * @author Torsten Rahn <rahn@kde.org>
  */
 
 #include <QtCore/QRect>
@@ -30,6 +32,9 @@
 
 namespace Marble
 {
+
+// The manhattan distance in pixels at which extra nodes get created for tessellation.
+static const int tessellationPrecision = 10;
 
 class ViewportParams;
 class AbstractProjectionHelper;
@@ -153,6 +158,7 @@ class AbstractProjection
 
     virtual bool mapCoversViewport( const ViewportParams *viewport ) const = 0;
 
+    bool exceedsLatitudeRange( const GeoDataCoordinates& coords ) const;
 
  protected:
     //AbstractProjectionPrivate  * const d;  Not exported so no need.

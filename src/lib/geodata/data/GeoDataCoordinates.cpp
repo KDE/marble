@@ -333,7 +333,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     // #1: Just two numbers, no directions, eg 74.2245 -32.2434 etc
     //firstletters is used for *negative* matching to ensure that this is not case #2
     QString firstletters;
-    for(int i = 0; i < 4; i++) { firstletters.append( c[i].at(0) ); }
+    for(int i = 0; i < 4; ++i) { firstletters.append( c[i].at(0) ); }
     // <frac> = fractional part; <sp> = whitespace
     //            <first coord ><decimal  ><frac><sp/symbol but NOT a direction>
     regexstr = "^(-?\\+?\\d{1,3}" + dec + "?\\d*)(?:\\s|[^\\d" + firstletters + dec + "]|"
@@ -607,6 +607,62 @@ void GeoDataCoordinates::setDetail( const int det )
 const Quaternion& GeoDataCoordinates::quaternion() const
 {
     return d->m_q;
+}
+
+bool GeoDataCoordinates::isAtPole( Marble::Pole pole ) const
+{
+    // Evaluate the most likely case first:
+    // The case where we haven't hit the pole and where our latitude is normalized
+    // to the range of 90 deg S ... 90 deg N
+    if ( fabs( 2 * d->m_lat < M_PI ) ) {
+        return false;
+    }
+    else {
+        if ( fabs( 2 * d->m_lat == M_PI ) ) {
+            // Ok, we have hit a pole. Now let's check whether it's the one we've asked for:
+            if ( pole == Marble::AnyPole ){
+                return true;
+            }
+            else {
+                if ( pole == Marble::NorthPole && 2 * d->m_lat == +M_PI ) {
+                    return true;
+                }
+                if ( pole == Marble::SouthPole && 2 * d->m_lat == -M_PI ) {
+                    return true;
+                }
+                return false;
+            }
+        }
+        // 
+        else {
+            // FIXME: Should we just normalize latitude and longitude and be done?
+            //        While this might work well for persistent data it would create some 
+            //        possible overhead for temporary data, so this needs careful thinking.
+            qDebug() << "Data not normalized!";
+
+            // Only as a last resort we cover the unlikely case where
+            // the latitude is not normalized to the range of 
+            // 90 deg S ... 90 deg N
+            if ( fabs( 2 * normalizeLat( d->m_lat ) ) < M_PI  ) {
+                return false;
+            }
+            else {
+                // Ok, we have hit a pole. Now let's check whether it's the one we've asked for:
+                if ( pole == Marble::AnyPole ){
+                    return true;
+                }
+                else {
+                    if ( pole == Marble::NorthPole && 2 * d->m_lat == +M_PI ) {
+                        return true;
+                    }
+                    if ( pole == Marble::SouthPole && 2 * d->m_lat == -M_PI ) {
+                        return true;
+                    }
+                    return false;
+                }
+            }            
+        }
+    }
 }
 
 GeoDataCoordinates& GeoDataCoordinates::operator=( const GeoDataCoordinates &other )

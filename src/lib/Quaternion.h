@@ -73,9 +73,9 @@ class MARBLE_EXPORT Quaternion {
     Quaternion  inverse() const;
 
     void        createFromEuler(qreal pitch, qreal yaw, qreal roll);
-    qreal      pitch() const;
-    qreal      yaw() const;
-    qreal      roll() const;
+    qreal       pitch() const;
+    qreal       yaw() const;
+    qreal       roll() const;
 
 
     void        display() const;

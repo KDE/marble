@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2007-2009 Torsten Rahn  <rahn@kde.org>
 //
 
 
@@ -17,6 +18,7 @@
  * This file contains the headers for SphericalProjection.
  *
  * @author Inge Wallin  <inge@lysator.liu.se>
+ * @author Torsten Rahn <rahn@kde.org>
  */
 
 
