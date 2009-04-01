@@ -536,8 +536,8 @@ QString GeoDataCoordinates::toString( GeoDataCoordinates::Notation notation ) co
     QString westring = ( d->m_lon < 0 ) ? QCoreApplication::tr("W") : QCoreApplication::tr("E");  
 
     qreal lat, lon;
-    lon = fabs( d->m_lon * RAD2DEG );
-    lat = fabs( d->m_lat * RAD2DEG );
+    lon = fabs( (qreal)d->m_lon * RAD2DEG );
+    lat = fabs( (qreal)d->m_lat * RAD2DEG );
 
     if ( notation == GeoDataCoordinates::DMS )
     {
@@ -614,11 +614,11 @@ bool GeoDataCoordinates::isAtPole( Marble::Pole pole ) const
     // Evaluate the most likely case first:
     // The case where we haven't hit the pole and where our latitude is normalized
     // to the range of 90 deg S ... 90 deg N
-    if ( fabs( 2 * d->m_lat < M_PI ) ) {
+    if ( fabs( (qreal) 2 * d->m_lat ) < M_PI ) {
         return false;
     }
     else {
-        if ( fabs( 2 * d->m_lat == M_PI ) ) {
+        if ( fabs( (qreal) 2 * d->m_lat ) == M_PI ) {
             // Ok, we have hit a pole. Now let's check whether it's the one we've asked for:
             if ( pole == Marble::AnyPole ){
                 return true;
@@ -643,7 +643,7 @@ bool GeoDataCoordinates::isAtPole( Marble::Pole pole ) const
             // Only as a last resort we cover the unlikely case where
             // the latitude is not normalized to the range of 
             // 90 deg S ... 90 deg N
-            if ( fabs( 2 * normalizeLat( d->m_lat ) ) < M_PI  ) {
+            if ( fabs( (qreal) 2 * normalizeLat( d->m_lat ) ) < M_PI  ) {
                 return false;
             }
             else {
