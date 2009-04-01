@@ -587,7 +587,7 @@ void MarblePart::setupActions()
                                             this,
                                             SLOT( showNewStuffDialog() ),
                                             actionCollection(), "new_stuff" );
-    m_newStuffAction->setStatusTip( i18nc( "Status tip", "&Download new maps"));
+    m_newStuffAction->setStatusTip( i18nc( "Status tip", "Download new maps"));
     m_newStuffAction->setShortcut( Qt::CTRL + Qt::Key_N );
 
     KStandardAction::showStatusbar( this, SLOT( showStatusBar( bool ) ),
