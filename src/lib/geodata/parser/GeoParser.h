@@ -105,9 +105,9 @@ class GeoStackItem : public QPair<GeoTagHandler::QualifiedName, GeoNode*>
     }
     
     template<class T>
-    T* checkNodeIs()
+    bool is() const
     {
-        return dynamic_cast<T*>(second);
+        return 0 != dynamic_cast<T*>(second);
     }
 
     GeoTagHandler::QualifiedName qualifiedName() const { return first; }

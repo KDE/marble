@@ -49,9 +49,8 @@ GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
 #endif
 
     if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
-        GeoDataContainer *parentPtr = parentItem.nodeAs<GeoDataContainer>();
-        parentPtr->append( placemark );
-        return static_cast<GeoDataPlacemark*>(&parentPtr->last());
+        parentItem.nodeAs<GeoDataContainer>()->append( placemark );
+        return static_cast<GeoDataPlacemark*>(&parentItem.nodeAs<GeoDataContainer>()->last());
     } else {
         return 0;
     }
