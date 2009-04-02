@@ -40,7 +40,6 @@ GeoNode* KmlLineStyleTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    qDebug() << "LineStyle";
     if ( parentItem.represents( kmlTag_Style ) ) {
         GeoDataLineStyle style;
         parentItem.nodeAs<GeoDataStyle>()->setLineStyle( style );
