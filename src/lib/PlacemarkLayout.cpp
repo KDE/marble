@@ -257,7 +257,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
             qobject_cast<const MarblePlacemarkModel*>( index.model() );
         Q_ASSERT( placemarkModel );
 
-        GeoDataCoordinates geopoint = placemarkModel->coordinateData( index );
+        GeoDataCoordinates geopoint = qvariant_cast<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
 
         if ( !latLonAltBox.contains( geopoint ) ||
              ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
@@ -273,9 +273,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         // Find the corresponding visible placemark
         VisiblePlacemark *mark = m_visiblePlacemarks.value( index );
 
-        // FIXME: this depends on the QAbstractItemModel being a MarblePlacemarkModel
-        // this has to be either translated via mapping or we have to find a different approach for that...
-        GeoDataStyle* style = placemarkModel->styleData( index );
+        GeoDataStyle* style = qvariant_cast<GeoDataStyle*>( index.data( MarblePlacemarkModel::StyleRole ) );
 
         // Specify font properties
         if ( mark ) {
@@ -346,7 +344,6 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
 
     const int rowCount = model->rowCount();
 
-    qDebug() << "handling all other placemarks";
     for ( int i = 0; i != rowCount; ++i )
     {
         const QModelIndex& index = model->index( i, 0 );
@@ -360,8 +357,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
 
         int popularityIndex = index.data( MarblePlacemarkModel::PopularityIndexRole ).toInt();
 
-        if ( popularityIndex <= 1 ) {
-            qDebug() << "popularityIndex too small!" << popularityIndex;
+        if ( popularityIndex < 1 ) {
             continue;
         }
 
@@ -370,7 +366,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
                 continue;
         }
 
-        GeoDataCoordinates geopoint = placemarkModel->coordinateData( index );
+        GeoDataCoordinates geopoint = qvariant_cast<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
 
         if ( !latLonAltBox.contains( geopoint ) ||
              ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
@@ -430,7 +426,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
 
         // Find the corresponding visible placemark
         VisiblePlacemark *mark = m_visiblePlacemarks.value( index );
-        GeoDataStyle* style = placemarkModel->styleData( index );
+        GeoDataStyle* style = qvariant_cast<GeoDataStyle*>( index.data( MarblePlacemarkModel::StyleRole ) );
 
         // Specify font properties
         if ( mark ) {
