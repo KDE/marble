@@ -91,35 +91,30 @@ void GeoDataPlacemark::setCoordinate( const GeoDataPoint &point )
 void GeoDataPlacemark::setGeometry( const GeoDataPoint& point )
 {
     detach();
-    delete p()->m_geometry;
     p()->m_geometry = new GeoDataPoint( point );
 }
 
 void GeoDataPlacemark::setGeometry( const GeoDataLineString& point )
 {
     detach();
-    delete p()->m_geometry;
     p()->m_geometry = new GeoDataLineString( point );
 }
 
 void GeoDataPlacemark::setGeometry( const GeoDataLinearRing& point )
 {
     detach();
-    delete p()->m_geometry;
     p()->m_geometry = new GeoDataLinearRing( point );
 }
 
 void GeoDataPlacemark::setGeometry( const GeoDataPolygon& point )
 {
     detach();
-    delete p()->m_geometry;
     p()->m_geometry = new GeoDataPolygon( point );
 }
 
 void GeoDataPlacemark::setGeometry( const GeoDataMultiGeometry& point )
 {
     detach();
-    delete p()->m_geometry;
     p()->m_geometry = new GeoDataMultiGeometry( point );
 }
 
