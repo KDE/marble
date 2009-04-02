@@ -25,6 +25,7 @@
 
 #include "KmlElementDictionary.h"
 #include "GeoDataDocument.h"
+#include "GeoDataFolder.h"
 #include "GeoDataParser.h"
 
 namespace Marble
@@ -37,11 +38,29 @@ GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Document));
 
-    GeoDataDocument* doc = geoDataDoc( parser );
+    GeoStackItem parentItem = parser.parentElement();
+    if( !(parentItem.first.first.isNull() && parentItem.first.second.isNull()) ) {
+        // this happens if there is a parent element to the Document tag. We can work around that and simply expect that
+        // the new Document tag works like a Folder
+        if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
+            GeoDataDocument document;
+            parentItem.nodeAs<GeoDataContainer>()->append( document );
+
 #ifdef DEBUG_TAGS
-    qDebug() << "Parsed <" << kmlTag_Document << "> document: " << doc;
+            qDebug() << "Parsed <" << kmlTag_Document << "> containing: " << &parentItem.nodeAs<GeoDataContainer>()->last()
+                     << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
+            return static_cast<GeoDataDocument*>(&parentItem.nodeAs<GeoDataContainer>()->last());
+        } else {
+            return 0;
+        }
+    } else {
+        GeoDataDocument* doc = geoDataDoc( parser );
+#ifdef DEBUG_TAGS
+        qDebug() << "Parsed <" << kmlTag_Document << "> document: " << doc;
 #endif
-    return doc;
+        return doc;
+    }
 }
 
 }
