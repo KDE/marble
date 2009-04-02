@@ -53,7 +53,7 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
         QStringList  coordinatesLines = parser.readElementText().trimmed().split( QRegExp("\\s"), QString::SkipEmptyParts );
         Q_FOREACH( const QString& line, coordinatesLines ) {
             QStringList coordinates = line.trimmed().split( ',' );
-            if ( parentItem.represents( kmlTag_Point ) ) {
+            if ( parentItem.represents( kmlTag_Point ) && parentItem.checkNodeIs<GeoDataPlacemark>() ) {
                 GeoDataPoint coord;
                 if ( coordinates.size() == 2 ) {
                     coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
@@ -91,6 +91,11 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
 				    coordinates.at( 2 ).toDouble() );
                     }
                     parentItem.nodeAs<GeoDataMultiGeometry>()->append( point );
+                } else if ( parentItem.represents( kmlTag_Point ) ) {
+/*                    qDebug() << "found a free Point!";
+                    qreal lon, lat;
+                    coord.geoCoordinates(lon, lat);
+                    parentItem.nodeAs<GeoDataPoint>()->set(lon, lat, coord.altitude());*/
                 } else {
                     // raise warning as coordinates out of valid parents found
                 }
