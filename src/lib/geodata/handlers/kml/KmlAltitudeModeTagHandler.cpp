@@ -46,10 +46,10 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
     GeoDataGeometry* geometry;
     bool validParents = false;
 
-    if( parentItem.nodeAs<GeoDataPlacemark>() && parentItem.represents( kmlTag_Point ) ) {
+    if( parentItem.checkNodeIs<GeoDataPlacemark>() && parentItem.represents( kmlTag_Point ) ) {
         geometry = parentItem.nodeAs<GeoDataPlacemark>()->geometry();
         validParents = true;
-    } else if( parentItem.nodeAs<GeoDataPoint>() ) {
+    } else if( parentItem.checkNodeIs<GeoDataGeometry>() && parentItem.nodeAs<GeoDataPoint>()->geometryId() == GeoDataPointId ) {
         geometry = parentItem.nodeAs<GeoDataPoint>();
         validParents = true;
     }
