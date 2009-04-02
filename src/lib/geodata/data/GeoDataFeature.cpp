@@ -363,6 +363,7 @@ QString GeoDataFeature::name() const
 
 void GeoDataFeature::setName( const QString &value )
 {
+    detach();
     p()->m_name = value;
 }
 
@@ -373,6 +374,7 @@ QString GeoDataFeature::address() const
 
 void GeoDataFeature::setAddress( const QString &value)
 {
+    detach();
     p()->m_address = value;
 }
 
@@ -383,6 +385,7 @@ QString GeoDataFeature::phoneNumber() const
 
 void GeoDataFeature::setPhoneNumber( const QString &value)
 {
+    detach();
     p()->m_phoneNumber = value;
 }
 
@@ -393,6 +396,7 @@ QString GeoDataFeature::description() const
 
 void GeoDataFeature::setDescription( const QString &value)
 {
+    detach();
     p()->m_description = value;
 }
 
@@ -403,6 +407,7 @@ QString GeoDataFeature::styleUrl() const
 
 void GeoDataFeature::setStyleUrl( const QString &value)
 {
+    detach();
     p()->m_styleUrl = value;
 }
 
@@ -413,6 +418,7 @@ bool GeoDataFeature::isVisible() const
 
 void GeoDataFeature::setVisible( bool value )
 {
+    detach();
     p()->m_visible = value;
 }
 
@@ -441,6 +447,7 @@ GeoDataStyle* GeoDataFeature::style() const
 
 void GeoDataFeature::setStyle( GeoDataStyle* style )
 {
+    detach();
     p()->m_style = style;
 }
 
@@ -451,6 +458,7 @@ GeoDataFeature::GeoDataVisualCategory GeoDataFeature::visualCategory() const
 
 void GeoDataFeature::setVisualCategory( GeoDataFeature::GeoDataVisualCategory index )
 {
+    detach();
     p()->m_visualCategory = index;
 }
 
@@ -461,6 +469,7 @@ const QChar GeoDataFeature::role() const
 
 void GeoDataFeature::setRole( const QChar &role )
 {
+    detach();
     p()->m_role = role;
 }
 
@@ -481,6 +490,7 @@ int GeoDataFeature::popularityIndex() const
 
 void GeoDataFeature::setPopularityIndex( int popularityIndex )
 {
+    detach();
     p()->m_popularityIndex = popularityIndex;
 }
 
@@ -491,6 +501,7 @@ qint64 GeoDataFeature::popularity() const
 
 void GeoDataFeature::setPopularity( qint64 popularity )
 {
+    detach();
     p()->m_popularity = popularity;
 }
 
@@ -545,6 +556,7 @@ void GeoDataFeature::pack( QDataStream& stream ) const
 
 void GeoDataFeature::unpack( QDataStream& stream )
 {
+    detach();
     GeoDataObject::unpack( stream );
 
     stream >> p()->m_name;

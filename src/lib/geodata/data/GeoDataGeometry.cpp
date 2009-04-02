@@ -122,6 +122,7 @@ bool GeoDataGeometry::extrude() const
 
 void GeoDataGeometry::setExtrude( bool extrude )
 {
+    detach();
     p()->m_extrude = extrude;
 }
 
@@ -132,6 +133,7 @@ AltitudeMode GeoDataGeometry::altitudeMode() const
 
 void GeoDataGeometry::setAltitudeMode( const AltitudeMode altitudeMode )
 {
+    detach();
     p()->m_altitudeMode = altitudeMode;
 }
 
@@ -145,6 +147,7 @@ void GeoDataGeometry::pack( QDataStream& stream ) const
 
 void GeoDataGeometry::unpack( QDataStream& stream )
 {
+    detach();
     GeoDataObject::unpack( stream );
 
     int am;
