@@ -103,6 +103,12 @@ class GeoStackItem : public QPair<GeoTagHandler::QualifiedName, GeoNode*>
     {
         return static_cast<T*>(second);
     }
+    
+    template<class T>
+    T* checkNodeIs()
+    {
+        return dynamic_cast<T*>(second);
+    }
 
     GeoTagHandler::QualifiedName qualifiedName() const { return first; }
     GeoNode* associatedNode() const { return second; }
