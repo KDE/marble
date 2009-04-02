@@ -40,7 +40,7 @@ class GeoDataGeometryPrivate
     {
     }
 
-    virtual void* copy() 
+    virtual GeoDataGeometryPrivate* copy()
     { 
         GeoDataGeometryPrivate* copy = new GeoDataGeometryPrivate;
         *copy = *this;

@@ -28,7 +28,7 @@ class GeoDataLinearRingPrivate : public Marble::GeoDataLineStringPrivate
     {
     }
 
-    virtual void* copy() 
+    virtual GeoDataGeometryPrivate* copy()
     { 
         GeoDataLinearRingPrivate* copy = new GeoDataLinearRingPrivate;
         *copy = *this;

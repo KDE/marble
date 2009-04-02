@@ -30,7 +30,7 @@ class  GeoDataPolygonPrivate : public Marble::GeoDataGeometryPrivate
     {
     }
 
-    virtual void* copy() 
+    virtual GeoDataGeometryPrivate* copy()
     { 
          GeoDataPolygonPrivate* copy = new  GeoDataPolygonPrivate;
         *copy = *this;

@@ -28,65 +28,65 @@ namespace Marble
 GeoDataGeometry::GeoDataGeometry()
     : d( new GeoDataGeometryPrivate() )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
 
 GeoDataGeometry::GeoDataGeometry( const GeoDataGeometry& other )
     : GeoDataObject(),
       d( other.d )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
 
 GeoDataGeometry::GeoDataGeometry( const GeoDataPoint& other )
     : GeoDataObject(),
       d( other.GeoDataGeometry::d )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
 
 GeoDataGeometry::GeoDataGeometry( const GeoDataPolygon& other )
     : GeoDataObject(),
       d( other.GeoDataGeometry::d )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
 
 GeoDataGeometry::GeoDataGeometry( const GeoDataLineString& other )
     : GeoDataObject(),
       d( other.GeoDataGeometry::d )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
 
 GeoDataGeometry::GeoDataGeometry( const GeoDataMultiGeometry& other )
     : GeoDataObject(),
       d( other.GeoDataGeometry::d )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
 
 GeoDataGeometry::GeoDataGeometry( GeoDataGeometryPrivate* priv )
     : GeoDataObject(),
       d( priv )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
 
 GeoDataGeometry::~GeoDataGeometry()
 {
-    if (!p()->ref.deref())
+    if (!d->ref.deref())
         delete d;
 }
 
 void  GeoDataGeometry::detach()
 {
-    if(p()->ref == 1)
+    if(d->ref == 1)
         return;
 
-     GeoDataGeometryPrivate* new_d = static_cast< GeoDataGeometryPrivate*>(p()->copy());
+     GeoDataGeometryPrivate* new_d = d->copy();
 
-    if (!p()->ref.deref())
+    if (!d->ref.deref())
         delete d;
 
     d = new_d;
@@ -99,50 +99,50 @@ GeoDataGeometryPrivate* GeoDataGeometry::p() const
 
 EnumGeometryId GeoDataGeometry::geometryId() const
 {
-    return p()->geometryId();
+    return d->geometryId();
 }
 
 GeoDataGeometry& GeoDataGeometry::operator=( const GeoDataGeometry& other )
 {
     GeoDataObject::operator=( other );
 
-    if (!p()->ref.deref())
+    if (!d->ref.deref())
         delete d;
 
     d = other.d;
-    p()->ref.ref();
+    d->ref.ref();
     
     return *this;
 }
 
 bool GeoDataGeometry::extrude() const
 {
-    return p()->m_extrude;
+    return d->m_extrude;
 }
 
 void GeoDataGeometry::setExtrude( bool extrude )
 {
     detach();
-    p()->m_extrude = extrude;
+    d->m_extrude = extrude;
 }
 
 AltitudeMode GeoDataGeometry::altitudeMode() const
 {
-    return p()->m_altitudeMode;
+    return d->m_altitudeMode;
 }
 
 void GeoDataGeometry::setAltitudeMode( const AltitudeMode altitudeMode )
 {
     detach();
-    p()->m_altitudeMode = altitudeMode;
+    d->m_altitudeMode = altitudeMode;
 }
 
 void GeoDataGeometry::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );
 
-    stream << p()->m_extrude;
-    stream << p()->m_altitudeMode;
+    stream << d->m_extrude;
+    stream << d->m_altitudeMode;
 }
 
 void GeoDataGeometry::unpack( QDataStream& stream )
@@ -151,9 +151,9 @@ void GeoDataGeometry::unpack( QDataStream& stream )
     GeoDataObject::unpack( stream );
 
     int am;
-    stream >> p()->m_extrude;
+    stream >> d->m_extrude;
     stream >> am;
-    p()->m_altitudeMode = (AltitudeMode) am;
+    d->m_altitudeMode = (AltitudeMode) am;
 }
 
 }

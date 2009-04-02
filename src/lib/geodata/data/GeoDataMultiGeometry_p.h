@@ -23,9 +23,9 @@ class  GeoDataMultiGeometryPrivate : public Marble::GeoDataGeometryPrivate
     {
     }
 
-    virtual void* copy() 
+    virtual GeoDataGeometryPrivate* copy()
     { 
-         GeoDataMultiGeometryPrivate* copy = new  GeoDataMultiGeometryPrivate;
+         GeoDataMultiGeometryPrivate* copy = new GeoDataMultiGeometryPrivate;
         *copy = *this;
         return copy;
     }
