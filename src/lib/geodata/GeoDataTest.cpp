@@ -19,10 +19,10 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QStringList>
+#include <QtGui/QApplication>
 
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
@@ -72,7 +72,7 @@ int main(int argc, char** argv)
 #ifdef Q_OS_WIN
     qInstallMsgHandler(myMessageOutput);
 #endif
-    QCoreApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     // Expect document as first command line argument
     if (app.arguments().size() <= 1) {
@@ -201,23 +201,23 @@ void dumpFoldersRecursively(const GeoDataContainer& container, int depth)
     QVector<GeoDataPlacemark> placemarks = container.placemarks();
     QString format = formatOutput(depth);
 
-    fprintf(stderr, "%s", qPrintable(format + QString("Dumping container with %1 child folders!\n").arg(folders.size())));
+    qDebug() << qPrintable(format + QString("Dumping container with %1 child folders!\n").arg(folders.size()));
 
     QVector<GeoDataFolder>::const_iterator it = folders.constBegin();
     const QVector<GeoDataFolder>::const_iterator end = folders.constEnd();
 
     for (; it != end; ++it) {
-        fprintf(stderr, "%s", qPrintable(format + QString("Dumping child %1\n").arg(it - folders.constBegin() + 1)));
+        qDebug() << qPrintable(format + QString("Dumping child %1\n").arg(it - folders.constBegin() + 1));
         dumpFoldersRecursively(*it, ++depth);
     }
 
-    fprintf(stderr, "%s", qPrintable(format + QString("Dumping container with %1 child placemarks!\n").arg(placemarks.size())));
+    qDebug() << qPrintable(format + QString("Dumping container with %1 child placemarks!\n").arg(placemarks.size()));
 
     QVector<GeoDataPlacemark>::const_iterator pit = placemarks.constBegin();
     const QVector<GeoDataPlacemark>::const_iterator pend = placemarks.constEnd();
 
     for (; pit != pend; ++pit) {
-        fprintf(stderr, "%s", qPrintable(format + QString("Dumping child %1\n").arg(pit - placemarks.constBegin() + 1)));
+        qDebug() << qPrintable(format + QString("Dumping child %1\n").arg(pit - placemarks.constBegin() + 1));
         dumpGeoDataPlacemark(*pit);
     }
 }
