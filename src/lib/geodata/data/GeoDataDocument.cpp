@@ -98,7 +98,6 @@ QList<GeoDataStyle> GeoDataDocument::styles() const
 void GeoDataDocument::addStyleMap( const GeoDataStyleMap& map )
 {
     detach();
-    qDebug( "GeoDataDocument: Add new styleMap" );
     p()->m_styleMapHash.insert( map.styleId(), map );
 }
 
