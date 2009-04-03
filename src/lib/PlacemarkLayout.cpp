@@ -161,7 +161,7 @@ int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
-        GeoDataStyle *style = qobject_cast<const MarblePlacemarkModel*>( index.model() )->styleData( index );
+        GeoDataStyle* style = qvariant_cast<GeoDataStyle*>( index.data( MarblePlacemarkModel::StyleRole ) );
         QFont labelFont = style->labelStyle().font();
         int textHeight = QFontMetrics( labelFont ).height();
         if ( textHeight > maxLabelHeight )
@@ -171,7 +171,7 @@ int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
     for ( int i = 0; i < model->rowCount(); ++i ) {
         QModelIndex index = model->index( i, 0 );
 
-        GeoDataStyle *style = qobject_cast<const MarblePlacemarkModel*>( index.model() )->styleData( index );
+        GeoDataStyle* style = qvariant_cast<GeoDataStyle*>( index.data( MarblePlacemarkModel::StyleRole ) );
         QFont labelFont = style->labelStyle().font();
         int textHeight = QFontMetrics( labelFont ).height();
         if ( textHeight > maxLabelHeight ) 
@@ -253,9 +253,6 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
-        const MarblePlacemarkModel *placemarkModel =
-            qobject_cast<const MarblePlacemarkModel*>( index.model() );
-        Q_ASSERT( placemarkModel );
 
         GeoDataCoordinates geopoint = qvariant_cast<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
 
@@ -351,9 +348,6 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
             qDebug() << "invalid index!!!";
             continue;
         }
-        const MarblePlacemarkModel *placemarkModel =
-            qobject_cast<const MarblePlacemarkModel*>( index.model() );
-        Q_ASSERT( placemarkModel );
 
         int popularityIndex = index.data( MarblePlacemarkModel::PopularityIndexRole ).toInt();
 
