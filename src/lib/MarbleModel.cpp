@@ -119,6 +119,7 @@ class MarbleModelPrivate
     MarblePlacemarkModel    *m_placemarkmodel;
     PlacemarkLayout         *m_placemarkLayout;
     MarbleGeometryModel     *m_geometrymodel;
+    QSortFilterProxyModel   *m_popSortModel;
 
     // Misc stuff.
     ExtDateTime             *m_dateTime;
@@ -184,7 +185,16 @@ MarbleModel::MarbleModel( QObject *parent )
              this,                  SLOT( geoDataDocumentAdded( GeoDataDocument* ) ) );
 
     d->m_placemarkmodel = new MarblePlacemarkModel( d->m_placemarkmanager, this );
-    d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_placemarkmodel );
+    d->m_popSortModel = new QSortFilterProxyModel( this );
+
+    d->m_popSortModel->setSourceModel( d->m_placemarkmodel );
+    d->m_popSortModel->setSortLocaleAware( true );
+    d->m_popSortModel->setDynamicSortFilter( true );
+    d->m_popSortModel->setSortRole( MarblePlacemarkModel::PopularityIndexRole );
+    d->m_popSortModel->sort( 0, Qt::DescendingOrder );
+    
+    d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_popSortModel );
+
     d->m_geometrymodel = new MarbleGeometryModel();
     d->m_placemarkmanager->setGeoModel( d->m_geometrymodel );
 
@@ -238,6 +248,7 @@ MarbleModel::~MarbleModel()
     delete d->m_gridmap;
     delete d->m_geometrymodel;
     delete d->m_placemarkmodel;
+    delete d->m_popSortModel;
     delete d->m_placemarkmanager;
     delete d->m_gpsLayer;
     delete d->m_mapTheme;
@@ -657,10 +668,10 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     viewParams->propertyValue( "otherplaces", showOtherPlaces );
 
     if ( showPlaces && ( showCities || showTerrain || showOtherPlaces )
-         && d->m_placemarkmodel->rowCount() > 0 )
+         && d->m_popSortModel->rowCount() > 0 )
     {
         d->m_placemarkLayout->paintPlaceFolder( painter, viewParams,
-                                                d->m_placemarkmodel,
+                                                d->m_popSortModel,
                                                 d->m_placemarkselectionmodel );
     }
 #else
