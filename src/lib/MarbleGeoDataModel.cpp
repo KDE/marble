@@ -92,7 +92,7 @@ unsigned long MarbleGeoDataModel::addGeoDataFile( QString filename )
     GeoDocument* document = parser.releaseDocument();
     Q_ASSERT_X( document, "geoRoot()", "document unparseable" );
     
-    foreach(GeoDataFeature feature, static_cast<GeoDataDocument*>( document )->features() ) {
+    foreach(const GeoDataFeature& feature, static_cast<GeoDataDocument*>( document )->features() ) {
         d->m_rootDocument->append( feature );
     }
 
@@ -117,9 +117,11 @@ bool MarbleGeoDataModel::removeGeoDataFile( unsigned long removeId )
 {
     if(d->m_documents.contains( removeId ) ) {
         GeoDataDocument *doc = d->m_documents[ removeId ];
-        foreach(GeoDataFeature feature, doc->features() ) {
-//            d->m_rootDocument->removeFeature( feature );
-        }
+        
+        // FIXME: here all features should be removed from the geodata model; this should probably work in the same way it does for the MarblePlacemarkModel
+/*        foreach( const GeoDataFeature& feature, doc->features() ) {
+            d->m_rootDocument->removeFeature( feature );
+        }*/
         // get the styles and the stylemaps
         foreach(const GeoDataStyle& style, doc->styles() ) {
             d->m_rootDocument->removeStyle( style.styleId() );
