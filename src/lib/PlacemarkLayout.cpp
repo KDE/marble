@@ -352,12 +352,12 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         int popularityIndex = index.data( MarblePlacemarkModel::PopularityIndexRole ).toInt();
 
         if ( popularityIndex < 1 ) {
-            continue;
+            break;
         }
 
         // Skip the places that are too small.
         if ( !noFilter && m_weightfilter.at( popularityIndex ) > viewParams->radius() ) {
-                continue;
+            break;
         }
 
         GeoDataCoordinates geopoint = qvariant_cast<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
