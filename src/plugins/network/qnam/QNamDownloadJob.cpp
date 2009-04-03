@@ -44,8 +44,8 @@ void QNamDownloadJob::execute()
 
 void QNamDownloadJob::downloadProgress( qint64 bytesReceived, qint64 bytesTotal )
 {
-    qDebug() << "downloadProgress" << destinationFileName()
-             << bytesReceived << '/' << bytesTotal;
+//     qDebug() << "downloadProgress" << destinationFileName()
+//              << bytesReceived << '/' << bytesTotal;
 }
 
 void QNamDownloadJob::error( QNetworkReply::NetworkError code )
@@ -56,8 +56,8 @@ void QNamDownloadJob::error( QNetworkReply::NetworkError code )
 void QNamDownloadJob::finished()
 {
     QNetworkReply::NetworkError const error = m_networkReply->error();
-    qDebug() << "finished" << destinationFileName()
-             << "error" << error;
+//     qDebug() << "finished" << destinationFileName()
+//              << "error" << error;
 
     switch ( error ) {
     case QNetworkReply::NoError: {
