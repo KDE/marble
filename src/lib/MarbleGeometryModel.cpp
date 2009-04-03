@@ -63,11 +63,14 @@ class MarbleGeometryModel::Private {
         if( !feature ) return;
         
         if( feature->featureId() == GeoDataDocumentId || feature->featureId() == GeoDataFolderId ) {
-            Q_FOREACH( GeoDataFeature childFeature, static_cast<GeoDataContainer*>( feature )->features() ) {
-                m_parent[ &childFeature ] = feature;
-                mapFeature( &childFeature );
+            QVector<GeoDataFeature> featureList = static_cast<const GeoDataContainer*>( feature )->features();
+            QVector<GeoDataFeature>::iterator iterator = featureList.begin();
+            for(; iterator != featureList.end(); ++iterator ) {
+                m_parent[ iterator ] = feature;
+                mapFeature( iterator );
             }
         }
+
         if( feature->featureId() == GeoDataPlacemarkId ) {
             GeoDataPlacemark placemark = *feature;
             if( placemark.geometry() && placemark.geometry()->geometryId() == GeoDataMultiGeometryId ) {
