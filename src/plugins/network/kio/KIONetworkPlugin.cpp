@@ -63,7 +63,7 @@ void KIOHttpJob::slotFinished( KJob *job )
     }
 
     if ( storagePolicy() &&
-         !storagePolicy()->updateFile( originalDestinationFileName(),
+         !storagePolicy()->updateFile( destinationFileName(),
                                        qobject_cast< KIO::StoredTransferJob * >( job )->data() ) )
     {
         emit statusMessage( i18n( "Download failed: %1.", storagePolicy()->lastErrorMessage() ) );

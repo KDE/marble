@@ -120,7 +120,7 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     QStack<HttpJob*>::iterator j = m_jobQueue.begin();
     QStack<HttpJob*>::iterator const jEnd = m_jobQueue.end();
     for (; j != jEnd; ++j ) {
-        if ( job->originalDestinationFileName() == (*j)->originalDestinationFileName() ) {
+        if ( job->destinationFileName() == (*j)->destinationFileName() ) {
             qDebug() << "Download rejected: It's in the queue already.";
             (*j)->setInitiatorId( job->initiatorId() );
             return false;
@@ -130,7 +130,7 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     QList<HttpJob*>::iterator i = m_waitingQueue.begin();
     QList<HttpJob*>::iterator iEnd = m_waitingQueue.end();
     for (; i != iEnd; ++i) {
-	if ( job->originalDestinationFileName() == (*i)->originalDestinationFileName() ) {
+	if ( job->destinationFileName() == (*i)->destinationFileName() ) {
 	    qDebug() << "Download rejected: Will try to download again in some time.";
 	    (*i)->setInitiatorId( job->initiatorId() );
 	    return false;
@@ -140,7 +140,7 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     i = m_activatedJobList.begin();
     iEnd = m_activatedJobList.end();
     for (; i != iEnd; ++i ) {
-        if ( job->originalDestinationFileName() == (*i)->originalDestinationFileName() ) {
+        if ( job->destinationFileName() == (*i)->destinationFileName() ) {
             qDebug() << "Download rejected: It's being downloaded already.";
             (*i)->setInitiatorId( job->initiatorId() );
             return false;
@@ -150,7 +150,7 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     i = m_jobBlackList.begin();
     iEnd = m_jobBlackList.end();
     for (; i != iEnd; ++i ) {
-        if ( job->originalDestinationFileName() == (*i)->originalDestinationFileName() ) {
+        if ( job->destinationFileName() == (*i)->destinationFileName() ) {
             qDebug() << "Download rejected: Blacklisted.";
             (*i)->setInitiatorId( job->initiatorId() );
             return false;
@@ -174,6 +174,28 @@ void HttpDownloadManager::removeJob( HttpJob* job )
     activateJobs();
 }
 
+void HttpDownloadManager::activateJob( HttpJob * const job )
+{
+    // qDebug() << "On activatedJobList: " << job->sourceUrl().toString()
+    //          << job->destinationFileName();
+    m_activatedJobList.push_back( job );
+    job->setStoragePolicy( storagePolicy() );
+    job->setStatus( Activated );
+
+    // No duplicate connections please
+    disconnect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
+                this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
+    disconnect( job, SIGNAL( statusMessage( QString ) ),
+                this, SIGNAL( statusMessage( QString ) ) );
+    connect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
+             this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
+    connect( job, SIGNAL( statusMessage( QString ) ),
+             this, SIGNAL( statusMessage( QString ) ) );
+    connect( job, SIGNAL( redirected( HttpJob *, QUrl ) ),
+             SLOT( jobRedirected( HttpJob *, QUrl ) ) );
+
+    job->execute();
+}
 
 void HttpDownloadManager::activateJobs()
 {
@@ -181,25 +203,7 @@ void HttpDownloadManager::activateJobs()
             && m_activatedJobList.count() < m_activatedJobsLimit )
     {
         HttpJob *job = m_jobQueue.pop();
-
-//         qDebug() << "On activatedJobList: " << job->sourceUrl().toString()
-//                  << job->destinationFileName();
-        m_activatedJobList.push_back( job );
-        job->prepareExecution();
-        job->setStoragePolicy( storagePolicy() );
-        job->setStatus( Activated );
-
-	// No duplicate connections please
-        disconnect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
-                 this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
-        disconnect( job, SIGNAL( statusMessage( QString ) ),
-                 this, SIGNAL( statusMessage( QString ) ) );
-        connect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
-                 this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
-        connect( job, SIGNAL( statusMessage( QString ) ),
-                 this, SIGNAL( statusMessage( QString ) ) );
-
-        job->execute();
+        activateJob( job );
     }
 }
 
@@ -233,8 +237,8 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
     }
     else {
 //         qDebug() << "HttpDownloadManager: Download Complete:"
-//                  << job->originalDestinationFileName() << job->initiatorId();
-        emit downloadComplete( job->originalDestinationFileName(), job->initiatorId() );
+//                  << job->destinationFileName() << job->initiatorId();
+        emit downloadComplete( job->destinationFileName(), job->initiatorId() );
         removeJob( job );
     }
     
@@ -269,6 +273,15 @@ HttpJob *HttpDownloadManager::createJob( const QUrl& sourceUrl, const QString& d
     }
     Q_ASSERT( m_networkPlugin );
     return m_networkPlugin->createJob( sourceUrl, destFileName, id );
+}
+
+void HttpDownloadManager::jobRedirected( HttpJob *job, QUrl newLocation )
+{
+    qDebug() << "jobRedirected" << job->sourceUrl() << " -> " << newLocation;
+    HttpJob * const newJob = m_networkPlugin->createJob( newLocation, job->destinationFileName(),
+                                                         job->initiatorId() );
+    removeJob( job );
+    activateJob( newJob );
 }
 
 #include "HttpDownloadManager.moc"

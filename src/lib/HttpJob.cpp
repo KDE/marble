@@ -7,7 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
-// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2008,2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 // Copyright 2008      Pino Toscano <pino@kde.org>
 //
 
@@ -22,9 +22,6 @@ class Marble::HttpJobPrivate
 
     QUrl           m_sourceUrl;
     QString        m_destinationFileName;
-    // if there is a redirection, we have to know the original file name
-    // for proper blacklisting etc.
-    QString        m_originalDestinationFileName;
     QString        m_initiatorId;
     Status         m_status;
     Priority       m_priority;
@@ -36,7 +33,6 @@ HttpJobPrivate::HttpJobPrivate( const QUrl & sourceUrl, const QString & destFile
                                 const QString &id )
     : m_sourceUrl( sourceUrl ),
       m_destinationFileName( destFileName ),
-      m_originalDestinationFileName( destFileName ),
       m_initiatorId( id ),
       m_status( NoStatus ),
       m_priority( NoPriority ),
@@ -54,10 +50,6 @@ HttpJob::HttpJob( const QUrl & sourceUrl, const QString & destFileName, const QS
 HttpJob::~HttpJob()
 {
     delete d;
-}
-
-void HttpJob::prepareExecution()
-{
 }
 
 QUrl HttpJob::sourceUrl() const
@@ -88,11 +80,6 @@ QString HttpJob::destinationFileName() const
 void HttpJob::setDestinationFileName( const QString &fileName )
 {
     d->m_destinationFileName = fileName;
-}
-
-QString HttpJob::originalDestinationFileName() const
-{
-    return d->m_originalDestinationFileName;
 }
 
 void HttpJob::setStatus( const Status status )

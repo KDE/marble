@@ -38,8 +38,6 @@ class MARBLE_EXPORT HttpJob: public QObject
     HttpJob( const QUrl & sourceUrl, const QString & destFileName, const QString &id );
     ~HttpJob();
 
-    virtual void prepareExecution();
-
     QUrl sourceUrl() const;
     void setSourceUrl( const QUrl & );
 
@@ -48,8 +46,6 @@ class MARBLE_EXPORT HttpJob: public QObject
 
     QString destinationFileName() const;
     void setDestinationFileName( const QString & );
-
-    QString originalDestinationFileName() const;
 
     void setStatus( const Status );
 
@@ -63,6 +59,7 @@ class MARBLE_EXPORT HttpJob: public QObject
      */
     void jobDone( Marble::HttpJob *, int errorCode );
     void statusMessage( QString );
+    void redirected( HttpJob * job, QUrl redirectionTarget );
 
  public Q_SLOTS:
     virtual void execute() = 0;

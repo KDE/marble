@@ -14,7 +14,6 @@
 #include "QHttpNetworkPlugin.h"
 
 #include <QtCore/QBuffer>
-#include <QtCore/QMetaObject>
 #include <QtNetwork/QHttp>
 #include <QtNetwork/QHttpResponseHeader>
 
@@ -38,10 +37,9 @@ QHttpHttpJob::~QHttpHttpJob()
     delete m_buffer;
 }
 
-void QHttpHttpJob::prepareExecution()
+void QHttpHttpJob::execute()
 {
-    // job can be executed more than once because of redirection
-    // perhaps better to make a new job than (FIXME)
+    // moved here from prepareExecution()
     if ( !m_http ) {
         m_http = new QHttp;
         m_buffer = new QBuffer( &m_data );
@@ -50,10 +48,7 @@ void QHttpHttpJob::prepareExecution()
         connect( m_http, SIGNAL( requestFinished( int, bool ) ),
                  this, SLOT( httpRequestFinished( int, bool ) ) );
     }
-}
 
-void QHttpHttpJob::execute()
-{
     emit statusMessage( tr( "Downloading data..." ) );
 
     m_http->setHost( sourceUrl().host(),
@@ -97,12 +92,7 @@ void QHttpHttpJob::httpRequestFinished( int requestId, bool error )
     if ( responseHeader.statusCode() == 301 )
     {
         QUrl newLocation( responseHeader.value( "Location" ) );
-        setSourceUrl( newLocation );
-        setDestinationFileName( newLocation.path() );
-        m_currentRequest = -1;
-
-        // Let's try again
-        QMetaObject::invokeMethod( this, "execute", Qt::QueuedConnection );
+        emit redirected( this, newLocation );
         return;
     }
 
@@ -122,7 +112,7 @@ void QHttpHttpJob::httpRequestFinished( int requestId, bool error )
         return;
     }
 
-    if ( storagePolicy() && !storagePolicy()->updateFile( originalDestinationFileName(), data() ) )
+    if ( storagePolicy() && !storagePolicy()->updateFile( destinationFileName(), data() ) )
     {
         emit statusMessage( tr( "Download failed: %1." )
                             .arg( storagePolicy()->lastErrorMessage() ) );

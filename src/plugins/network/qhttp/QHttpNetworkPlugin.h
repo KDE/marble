@@ -36,11 +36,6 @@ class QHttpHttpJob: public HttpJob
     QHttpHttpJob( const QUrl & sourceUrl, const QString & destFileName, const QString & id );
     ~QHttpHttpJob();
 
-    // allocates QHttp and QBuffer member, has to be done before
-    // execute() because of signal connections.
-    // see FIXME in .cpp
-    virtual void prepareExecution();
-
     QByteArray & data();
 
  public Q_SLOTS:

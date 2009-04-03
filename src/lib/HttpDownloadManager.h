@@ -7,6 +7,7 @@
 //
 // Copyright 2007      Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 //
@@ -109,6 +110,7 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     void activateJobs();
     void reportResult( Marble::HttpJob *job, int id );
     void requeue();
+    void jobRedirected( HttpJob *job, QUrl newLocation );
 
  private:
     Q_DISABLE_COPY( HttpDownloadManager )
@@ -116,6 +118,12 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     bool              acceptJob( HttpJob *job );
     HttpJob          *createJob( const QUrl& sourceUrl, const QString& destFileName,
                                  const QString &id );
+
+    /**
+     * Helper method for activateJobs(), also used in handling of redirections,
+     * where the new job should be activated imediately.
+     */
+    void activateJob( HttpJob * const job );
 
     /**
      * Helper method for the public addJob methods which contains shared code.

@@ -55,22 +55,38 @@ void QNamDownloadJob::error( QNetworkReply::NetworkError code )
 
 void QNamDownloadJob::finished()
 {
-    qDebug() << "finished" << destinationFileName();
-
     QNetworkReply::NetworkError const error = m_networkReply->error();
+    qDebug() << "finished" << destinationFileName()
+             << "error" << error;
+
     switch ( error ) {
-    case QNetworkReply::NoError:
-        if ( storagePolicy() ) {
+    case QNetworkReply::NoError: {
+        // check if we are redirected
+        const QVariant redirectionAttribute =
+            m_networkReply->attribute( QNetworkRequest::RedirectionTargetAttribute );
+        if ( !redirectionAttribute.isNull() ) {
+            emit redirected( this, redirectionAttribute.toUrl() );
+        }
+        else {
+            // no redirection occured
             const QByteArray data = m_networkReply->readAll();
-            if ( storagePolicy()->updateFile( originalDestinationFileName(), data ) ) {
-                emit statusMessage( tr( "Download finished." ));
-                emit jobDone( this, 0 );
-            } else {
-                emit statusMessage( tr( "Download failed: %1." )
-                                    .arg( storagePolicy()->lastErrorMessage() ) );
-                emit jobDone( this, error );
+            if ( storagePolicy() ) {
+                if ( storagePolicy()->updateFile( destinationFileName(), data ) ) {
+                    emit statusMessage( tr( "Download finished." ));
+                    emit jobDone( this, 0 );
+                }
+                else {
+                    emit statusMessage( tr( "Download failed: %1." )
+                                        .arg( storagePolicy()->lastErrorMessage() ) );
+                    emit jobDone( this, 1 );
+                }
+            }
+            else {
+                emit statusMessage( tr( "Download finished, but not possible to save." ) );
+                emit jobDone( this, 1 );
             }
         }
+    }
         break;
 
     default:
