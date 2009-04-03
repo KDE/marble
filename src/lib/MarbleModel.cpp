@@ -659,7 +659,6 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     }
 
     // Paint the GeoDataPlacemark layer
-#ifndef KML_GSOC
     bool showPlaces, showCities, showTerrain, showOtherPlaces;
 
     viewParams->propertyValue( "places", showPlaces );
@@ -674,43 +673,6 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
                                                 d->m_popSortModel,
                                                 d->m_placemarkselectionmodel );
     }
-#else
-    /*
-     * Iterate over our KMLFolders and show placemarks from each folderList
-     * This folder list also will be displayed in MarbleControlBox
-     * So user could enable/disable each folder
-     */
-    if ( viewParams->m_showPlacemarks ) {
-        QTime t;
-        t.start ();
-
-        const QList < GeoDataFolder* >& folderList = d->m_placemarkmanager->getFolderList();
-
-        bool firstTime = true;
-
-        for ( QList<GeoDataFolder*>::const_iterator iterator = folderList.constBegin();
-            iterator != folderList.constEnd();
-            ++iterator )
-        {
-            GeoDataFolder& folder = *( *iterator );
-
-            /*
-             * Show only placemarks which are visible
-             */
-            if ( folder.isVisible() ) {
-
-                PlacemarkContainer& container = folder.activePlacemarkContainer( *viewParams );
-
-                d->m_placemarkLayout->paintPlaceFolder( painter, viewParams,
-                                                        &container, firstTime );
-
-                firstTime = false;
-            }
-        }
-
-        qDebug("Paint kml folder list. Elapsed: %d", t.elapsed());
-    }
-#endif
 
     // Paint the Gps Layer
     d->m_gpsLayer->setVisible( viewParams->showGps() );
