@@ -15,7 +15,6 @@
 
 namespace Marble
 {
-class MarblePlacemarkModel;
 class PlacemarkContainer;
 class GeoDataDocument;
 
