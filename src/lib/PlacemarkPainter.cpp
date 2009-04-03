@@ -152,8 +152,8 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
     QPainter labelPainter;
     QPixmap labelPixmap;
     QModelIndex index = mark->modelIndex();
-    GeoDataStyle* style = ( ( MarblePlacemarkModel* )index.model() )->styleData( index );
-//    GeoDataStyle* style = index.data( MarblePlacemarkModel::StyleRole ).value<GeoDataStyle*>();
+
+    GeoDataStyle* style = qvariant_cast<GeoDataStyle*>( index.data( MarblePlacemarkModel::StyleRole ) );
 
     QString labelName = mark->name();
     QRect  labelRect  = mark->labelRect();
