@@ -775,11 +775,13 @@ void MarbleModelPrivate::geoDataDocumentLoaded( GeoDataDocument& document )
 
 void MarbleModelPrivate::geoDataDocumentAdded( GeoDataDocument* document )
 {
-    foreach(GeoDataPlacemark placemark, document->placemarks())
-    {
-        QString styleUrl = placemark.styleUrl().remove('#');
-        placemark.setStyle( &document->style( styleUrl ) );
-    };
+    QVector<GeoDataFeature>::Iterator end = document->end();
+    QVector<GeoDataFeature>::Iterator itr = document->begin();
+    for ( ; itr != end; ++itr ) {
+        // use *itr (or itr.value()) here
+        QString styleUrl = itr->styleUrl().remove('#');
+        itr->setStyle( &document->style( styleUrl ) );
+    }
 
     m_geometrymodel->setGeoDataRoot( document );
 }
