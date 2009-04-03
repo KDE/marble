@@ -27,6 +27,8 @@
 
 #include "marble_export.h"
 
+class QTimer;
+
 namespace Marble
 {
 
@@ -132,6 +134,7 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
 
     bool              m_downloadEnabled;
 
+    QTimer           *m_requeueTimer;
     QStack<HttpJob*>  m_jobQueue;
     QQueue<HttpJob*>  m_waitingQueue;
     QList<HttpJob*>   m_activatedJobList;

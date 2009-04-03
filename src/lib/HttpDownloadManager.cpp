@@ -22,6 +22,9 @@
 
 using namespace Marble;
 
+// Time before a failed download job is requeued in ms
+const quint32 requeueTime = 60000;
+
 HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl,
                                           StoragePolicy *policy )
     : m_downloadEnabled( true ), //enabled for now
@@ -31,6 +34,9 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl,
       m_storagePolicy( policy ),
       m_networkPlugin( 0 )
 {
+      m_requeueTimer = new QTimer( this );
+      m_requeueTimer->setInterval( requeueTime );
+      connect( m_requeueTimer, SIGNAL( timeout() ), this, SLOT( requeue() ) );
 }
 
 
@@ -52,6 +58,9 @@ HttpDownloadManager::~HttpDownloadManager()
 
     qDeleteAll( m_jobBlackList );
     m_jobBlackList.clear();
+
+    qDeleteAll( m_waitingQueue );
+    m_waitingQueue.clear();
 
     delete m_storagePolicy;
     delete m_networkPlugin;
@@ -79,12 +88,14 @@ StoragePolicy* HttpDownloadManager::storagePolicy() const
 
 void HttpDownloadManager::addJob( HttpJob * job )
 {
-    if ( acceptJob( job ) ) {
+    if ( acceptJob( job ) )
+    {
         m_jobQueue.push( job );
         job->setStatus( Pending );
         activateJobs();
     }
-    else {
+    else
+    {
         job->deleteLater();
     }
 }
@@ -119,8 +130,10 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
 
     QStack<HttpJob*>::iterator j = m_jobQueue.begin();
     QStack<HttpJob*>::iterator const jEnd = m_jobQueue.end();
-    for (; j != jEnd; ++j ) {
-        if ( job->destinationFileName() == (*j)->destinationFileName() ) {
+    for (; j != jEnd; ++j )
+    {
+        if ( job->destinationFileName() == (*j)->destinationFileName() )
+	{
             qDebug() << "Download rejected: It's in the queue already.";
             (*j)->setInitiatorId( job->initiatorId() );
             return false;
@@ -129,8 +142,10 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     
     QList<HttpJob*>::iterator i = m_waitingQueue.begin();
     QList<HttpJob*>::iterator iEnd = m_waitingQueue.end();
-    for (; i != iEnd; ++i) {
-	if ( job->destinationFileName() == (*i)->destinationFileName() ) {
+    for (; i != iEnd; ++i)
+    {
+	if ( job->destinationFileName() == (*i)->destinationFileName() )
+	{
 	    qDebug() << "Download rejected: Will try to download again in some time.";
 	    (*i)->setInitiatorId( job->initiatorId() );
 	    return false;
@@ -139,8 +154,10 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
 
     i = m_activatedJobList.begin();
     iEnd = m_activatedJobList.end();
-    for (; i != iEnd; ++i ) {
-        if ( job->destinationFileName() == (*i)->destinationFileName() ) {
+    for (; i != iEnd; ++i )
+    {
+        if ( job->destinationFileName() == (*i)->destinationFileName() )
+	{
             qDebug() << "Download rejected: It's being downloaded already.";
             (*i)->setInitiatorId( job->initiatorId() );
             return false;
@@ -149,8 +166,10 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
 
     i = m_jobBlackList.begin();
     iEnd = m_jobBlackList.end();
-    for (; i != iEnd; ++i ) {
-        if ( job->destinationFileName() == (*i)->destinationFileName() ) {
+    for (; i != iEnd; ++i )
+    {
+        if ( job->destinationFileName() == (*i)->destinationFileName() )
+	{
             qDebug() << "Download rejected: Blacklisted.";
             (*i)->setInitiatorId( job->initiatorId() );
             return false;
@@ -165,7 +184,8 @@ void HttpDownloadManager::removeJob( HttpJob* job )
 {
     int pos = m_activatedJobList.indexOf( job );
 
-    if ( pos > 0 ) {
+    if ( pos > 0 )
+    {
         m_activatedJobList.removeAt( pos );
 //        qDebug() << "Removing: " << job->initiatorId();
         job->deleteLater();
@@ -209,21 +229,25 @@ void HttpDownloadManager::activateJobs()
 
 void HttpDownloadManager::reportResult( HttpJob* job, int err )
 {
-    if ( err != 0 ) {
+    if ( err != 0 )
+    {
         int pos = m_activatedJobList.indexOf( job );
 
-        if ( pos >= 0 ) {
+        if ( pos >= 0 )
+        {
             m_activatedJobList.removeAt( pos );
 	    
 	    // This should always return true
-	    if( !m_waitingQueue.contains( job ) ) {
+	    if( !m_waitingQueue.contains( job ) )
+            {
 		if( job->tryAgain() )
 		{
 		    m_waitingQueue.enqueue( job );
-		    qDebug() << QString( "Download of %1 failed, but trying again in one minute" )
+		    qDebug() << QString( "Download of %1 failed, but trying again soon" )
 			.arg( job->destinationFileName() );
 		    job->setStatus( NoStatus );
-		    QTimer::singleShot( 60000, this, SLOT( requeue() ) ); // 60000 ms = 1 min
+                    if( !m_requeueTimer->isActive() )
+                        m_requeueTimer->start();
 		}
 		else
 		{
@@ -235,7 +259,8 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
 	    }
 	}
     }
-    else {
+    else
+    {
 //         qDebug() << "HttpDownloadManager: Download Complete:"
 //                  << job->destinationFileName() << job->initiatorId();
         emit downloadComplete( job->destinationFileName(), job->initiatorId() );
@@ -247,23 +272,24 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
 
 void HttpDownloadManager::requeue()
 {
-    if( !m_waitingQueue.isEmpty() ) {
+    m_requeueTimer->stop();
+    while( !m_waitingQueue.isEmpty() )
+    {
 	HttpJob* job = m_waitingQueue.dequeue();
 	qDebug() << QString( "Requeuing %1." ).arg( job->destinationFileName() );
 	addJob( job );
-    }
-    else {
-	qDebug() << QString( "Warning: For some reason we requeued more jobs as needed" );
     }
 }
 
 HttpJob *HttpDownloadManager::createJob( const QUrl& sourceUrl, const QString& destFileName,
                                          const QString &id )
 {
-    if ( !m_networkPlugin ) {
+    if ( !m_networkPlugin )
+    {
         PluginManager pluginManager;
         QList<NetworkPlugin *> networkPlugins = pluginManager.createNetworkPlugins();
-        if ( !networkPlugins.isEmpty() ) {
+        if ( !networkPlugins.isEmpty() )
+        {
             // FIXME: not just take the first plugin, but use some configuration setting
             // take the first plugin and delete the rest
             m_networkPlugin = networkPlugins.takeFirst();
