@@ -183,6 +183,32 @@ void GeoDataCoordinates::geoCoordinates( qreal& lon, qreal& lat,
     }
 }
 
+qreal GeoDataCoordinates::longitude( GeoDataCoordinates::Unit unit ) const
+{
+    switch ( unit ) 
+    {
+    case Radian:
+            return d->m_lon;
+        break;
+    case Degree:
+            return d->m_lon * RAD2DEG;
+        break;
+    }
+}
+
+qreal GeoDataCoordinates::latitude( GeoDataCoordinates::Unit unit ) const
+{
+    switch ( unit ) 
+    {
+    case Radian:
+            return d->m_lat;
+        break;
+    case Degree:
+            return d->m_lat * RAD2DEG;
+        break;
+    }
+}
+
 //static
 GeoDataCoordinates::Notation GeoDataCoordinates::defaultNotation()
 {
@@ -614,20 +640,20 @@ bool GeoDataCoordinates::isAtPole( Marble::Pole pole ) const
     // Evaluate the most likely case first:
     // The case where we haven't hit the pole and where our latitude is normalized
     // to the range of 90 deg S ... 90 deg N
-    if ( fabs( (qreal) 2 * d->m_lat ) < M_PI ) {
+    if ( fabs( (qreal) 2.0 * d->m_lat ) < M_PI ) {
         return false;
     }
     else {
-        if ( fabs( (qreal) 2 * d->m_lat ) == M_PI ) {
+        if ( fabs( (qreal) 2.0 * d->m_lat ) == M_PI ) {
             // Ok, we have hit a pole. Now let's check whether it's the one we've asked for:
             if ( pole == Marble::AnyPole ){
                 return true;
             }
             else {
-                if ( pole == Marble::NorthPole && 2 * d->m_lat == +M_PI ) {
+                if ( pole == Marble::NorthPole && 2.0 * d->m_lat == +M_PI ) {
                     return true;
                 }
-                if ( pole == Marble::SouthPole && 2 * d->m_lat == -M_PI ) {
+                if ( pole == Marble::SouthPole && 2.0 * d->m_lat == -M_PI ) {
                     return true;
                 }
                 return false;
@@ -638,12 +664,12 @@ bool GeoDataCoordinates::isAtPole( Marble::Pole pole ) const
             // FIXME: Should we just normalize latitude and longitude and be done?
             //        While this might work well for persistent data it would create some 
             //        possible overhead for temporary data, so this needs careful thinking.
-            qDebug() << "Data not normalized!";
+            qDebug() << "GeoDataCoordinates not normalized!";
 
             // Only as a last resort we cover the unlikely case where
             // the latitude is not normalized to the range of 
             // 90 deg S ... 90 deg N
-            if ( fabs( (qreal) 2 * normalizeLat( d->m_lat ) ) < M_PI  ) {
+            if ( fabs( (qreal) 2.0 * normalizeLat( d->m_lat ) ) < M_PI  ) {
                 return false;
             }
             else {
@@ -652,10 +678,10 @@ bool GeoDataCoordinates::isAtPole( Marble::Pole pole ) const
                     return true;
                 }
                 else {
-                    if ( pole == Marble::NorthPole && 2 * d->m_lat == +M_PI ) {
+                    if ( pole == Marble::NorthPole && 2.0 * d->m_lat == +M_PI ) {
                         return true;
                     }
-                    if ( pole == Marble::SouthPole && 2 * d->m_lat == -M_PI ) {
+                    if ( pole == Marble::SouthPole && 2.0 * d->m_lat == -M_PI ) {
                         return true;
                     }
                     return false;

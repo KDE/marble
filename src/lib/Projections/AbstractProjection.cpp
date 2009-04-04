@@ -164,7 +164,30 @@ GeoDataLinearRing AbstractProjection::rectOutline( const QRect& screenRect,
 
 bool AbstractProjection::exceedsLatitudeRange( const GeoDataCoordinates &coords ) const
 {
-    // TBD
+    qreal lat = coords.latitude();
+    // Evaluate the most likely case first:
+    // The case where we are within the range and where our latitude is normalized
+    // to the range of 90 deg S ... 90 deg N
+    if ( lat < m_maxLat && lat > m_minLat ) {
+        return false;
+    }
+    else {
+        // If we are not within the range then normalize the latitude and check again.
+        qreal normalizedLat = GeoDataCoordinates::normalizeLat( lat );
+        if ( normalizedLat == lat ) {
+            return true;
+        }
+
+        if ( normalizedLat < m_maxLat && normalizedLat > m_minLat ) {
+            // FIXME: Should we just normalize latitude and longitude and be done?
+            //        While this might work well for persistent data it would create some 
+            //        possible overhead for temporary data, so this needs careful thinking.
+            qDebug() << "GeoDataCoordinates not normalized!";
+            return false;
+        }
+    }
+
+    // We have exceeded the range.
     return true;
 }
 

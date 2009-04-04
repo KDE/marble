@@ -116,24 +116,6 @@ class GEODATA_EXPORT GeoDataCoordinates
               GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
-    * @brief set the longitude in a GeoDataCoordinates object
-    * @param _lon longitude
-    * @param _unit units that lon and lat get measured in
-    * (default for Radian: north pole at pi/2, southpole at -pi/2)
-    */
-    void setLongitude( qreal lon,
-              GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
-
-    /**
-    * @brief set the longitude in a GeoDataCoordinates object
-    * @param _lat longitude
-    * @param _unit units that lon and lat get measured in
-    * (default for Radian: north pole at pi/2, southpole at -pi/2)
-    */
-    void setLatitude( qreal lat,
-              GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
-
-    /**
     * @brief use this function to get the longitude and latitude with one
     * call - use the unit parameter to switch between Radian and DMS
     * @param lon longitude
@@ -144,6 +126,44 @@ class GEODATA_EXPORT GeoDataCoordinates
     void geoCoordinates( qreal& lon, qreal& lat,
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian )
                                                                 const;
+
+    /**
+    * @brief set the longitude in a GeoDataCoordinates object
+    * @param _lon longitude
+    * @param _unit units that lon and lat get measured in
+    * (default for Radian: north pole at pi/2, southpole at -pi/2)
+    */
+    void setLongitude( qreal lon,
+              GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
+
+    /**
+    * @brief retrieves the longitude of the GeoDataCoordinates object
+    * use the unit parameter to switch between Radian and DMS
+    * @param unit units that lon and lat get measured in
+    * (default for Radian: north pole at pi/2, southpole at -pi/2)
+    * @return longitude
+    */
+    qreal longitude( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian )
+                                                                const;
+
+    /**
+    * @brief retrieves the latitude of the GeoDataCoordinates object
+    * use the unit parameter to switch between Radian and DMS
+    * @param unit units that lon and lat get measured in
+    * (default for Radian: north pole at pi/2, southpole at -pi/2)
+    * @return latitude
+    */
+    qreal latitude( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian )
+                                                                const;
+
+    /**
+    * @brief set the longitude in a GeoDataCoordinates object
+    * @param _lat longitude
+    * @param _unit units that lon and lat get measured in
+    * (default for Radian: north pole at pi/2, southpole at -pi/2)
+    */
+    void setLatitude( qreal lat,
+              GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian );
 
     /**
         * @brief return the altitude of the Point
