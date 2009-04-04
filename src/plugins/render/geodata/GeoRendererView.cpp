@@ -77,7 +77,7 @@ void GeoRendererView::setSelection( const QRect&, QItemSelectionModel::Selection
 void GeoRendererView::paintEvent( QPaintEvent *event )
 {
     QModelIndex index = rootIndex();
-    renderIndex( index );
+//    renderIndex( index );
 }
 
 void GeoRendererView::renderIndex( QModelIndex &index )
