@@ -56,7 +56,6 @@ class PlacemarkManagerPrivate
 
         bool m_finalized;
         QString m_target;
-        PlacemarkManager* q_ptr;
 };
 }
 
