@@ -160,6 +160,12 @@
    <min>0</min>
    <max>9999</max>
   </entry>
+  <entry name="user" type="String">
+   <label>Username for authorization.</label>
+  </entry>
+  <entry name="password" type="String">
+   <label>Password for authorization.</label>
+  </entry>
  </group>
  <group name="Plugins">
   <entry name="pluginNameId" type="StringList">

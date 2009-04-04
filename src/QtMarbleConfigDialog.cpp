@@ -131,6 +131,8 @@ void QtMarbleConfigDialog::readSettings()
     w_cacheSettings->kcfg_persistentTileCacheLimit->setValue( persistentTileCacheLimit() );
     w_cacheSettings->kcfg_proxyUrl->setText( proxyUrl() );
     w_cacheSettings->kcfg_proxyPort->setValue( proxyPort() );
+    w_cacheSettings->kcfg_user->setText( user() );
+    w_cacheSettings->kcfg_password->setText( password() );
     
     emit settingsChanged();
 }
@@ -162,6 +164,8 @@ void QtMarbleConfigDialog::writeSettings()
 	settings->setValue( "persistentTileCacheLimit", w_cacheSettings->kcfg_persistentTileCacheLimit->value() );
 	settings->setValue( "proxyUrl", w_cacheSettings->kcfg_proxyUrl->text() );
 	settings->setValue( "proxyPort", w_cacheSettings->kcfg_proxyPort->value() );
+        settings->setValue( "user", w_cacheSettings->kcfg_user->text() );
+	settings->setValue( "password", w_cacheSettings->kcfg_password->text() );
     settings->endGroup();
 	
     emit settingsChanged();
@@ -230,6 +234,16 @@ QString QtMarbleConfigDialog::proxyUrl()
 int QtMarbleConfigDialog::proxyPort()
 {
     return settings->value( "Cache/proxyPort", 8080 ).toInt();
+}
+
+QString QtMarbleConfigDialog::user()
+{
+    return settings->value( "Cache/user", "" ).toString();
+}
+
+QString QtMarbleConfigDialog::password()
+{
+    return settings->value( "Cache/password", "" ).toString();
 }
 
 #include "QtMarbleConfigDialog.moc"

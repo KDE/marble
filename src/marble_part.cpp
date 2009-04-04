@@ -487,6 +487,8 @@ void MarblePart::writeSettings()
     // Proxy
     MarbleSettings::setProxyUrl( m_controlView->marbleWidget()->proxyHost() );
     MarbleSettings::setProxyPort( m_controlView->marbleWidget()->proxyPort() );
+    MarbleSettings::setUser( m_controlView->marbleWidget()->user() );
+    MarbleSettings::setPassword( m_controlView->marbleWidget()->password() );
 
     QList<int>   pluginEnabled;
     QStringList  pluginNameId;
@@ -968,7 +970,7 @@ void MarblePart::slotUpdateSettings()
         setVolatileTileCacheLimit( MarbleSettings::volatileTileCacheLimit() * 1024 );
 
     m_controlView->marbleWidget()->setProxy( MarbleSettings::proxyUrl(),
-                                             MarbleSettings::proxyPort() );
+                                             MarbleSettings::proxyPort(), MarbleSettings::user(), MarbleSettings::password() );
 
     m_controlView->marbleWidget()->updateChangedMap();
 }

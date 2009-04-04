@@ -682,8 +682,7 @@ void MainWindow::updateSettings()
     m_controlView->marbleWidget()->setPersistentTileCacheLimit( m_configDialog->persistentTileCacheLimit() * 1024 );
     m_controlView->marbleWidget()->setVolatileTileCacheLimit( m_configDialog->volatileTileCacheLimit() * 1024 );
 
-    m_controlView->marbleWidget()->setProxy( m_configDialog->proxyUrl(),
-                                             m_configDialog->proxyPort() );
+    m_controlView->marbleWidget()->setProxy( m_configDialog->proxyUrl(), m_configDialog->proxyPort(), m_configDialog->user(), m_configDialog->password() );
 
     m_controlView->marbleWidget()->updateChangedMap();
 }

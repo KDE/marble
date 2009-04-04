@@ -51,6 +51,8 @@ class QtMarbleConfigDialog : public QDialog
 	int persistentTileCacheLimit();
 	QString proxyUrl();
 	int proxyPort();
+	QString user();
+	QString password();
 	
     Q_SIGNALS:
 	/**

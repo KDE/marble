@@ -474,9 +474,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     SunLocator* sunLocator();
 
-    void setProxy( const QString& proxyHost, const quint16 proxyPort );
+    void setProxy( const QString& proxyHost, const quint16 proxyPort, const QString& user, const QString& password );
     QString proxyHost() const;
     quint16 proxyPort() const;
+    QString user() const;
+    QString password() const;
 
     QList<RenderPlugin *>      renderPlugins() const;
     QList<AbstractFloatItem *> floatItems()    const;
