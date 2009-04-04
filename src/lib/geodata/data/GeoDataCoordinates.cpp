@@ -187,12 +187,11 @@ qreal GeoDataCoordinates::longitude( GeoDataCoordinates::Unit unit ) const
 {
     switch ( unit ) 
     {
-    case Radian:
-            return d->m_lon;
-        break;
     case Degree:
-            return d->m_lon * RAD2DEG;
-        break;
+        return d->m_lon * RAD2DEG;
+    case Radian:
+    default:
+        return d->m_lon;
     }
 }
 
@@ -200,12 +199,11 @@ qreal GeoDataCoordinates::latitude( GeoDataCoordinates::Unit unit ) const
 {
     switch ( unit ) 
     {
-    case Radian:
-            return d->m_lat;
-        break;
     case Degree:
-            return d->m_lat * RAD2DEG;
-        break;
+        return d->m_lat * RAD2DEG;
+    case Radian:
+    default:
+        return d->m_lat;
     }
 }
 
