@@ -26,6 +26,7 @@
 #include <QtGui/QProgressBar>
 #include <QtGui/QPainter>
 #include <QtGui/QStandardItemModel>
+#include <QtNetwork/QNetworkProxy>
 
 // KDE
 #include <kaction.h>
@@ -485,11 +486,14 @@ void MarblePart::writeSettings()
                                                  persistentTileCacheLimit() / 1024 );
 
     // Proxy
-    MarbleSettings::setProxyUrl( m_controlView->marbleWidget()->proxyHost() );
-    MarbleSettings::setProxyPort( m_controlView->marbleWidget()->proxyPort() );
-    MarbleSettings::setUser( m_controlView->marbleWidget()->user() );
-    MarbleSettings::setPassword( m_controlView->marbleWidget()->password() );
-
+    MarbleSettings::setProxyUrl( m_proxyHost );
+    MarbleSettings::setProxyPort( m_proxyPort );
+    MarbleSettings::setProxyUser( m_proxyUser );
+    MarbleSettings::setProxyPass( m_proxyPass );
+    MarbleSettings::setProxyAuth( m_proxyAuth );
+    MarbleSettings::setProxyHttp( m_proxyHttp );
+    MarbleSettings::setProxySocks5( m_proxySocks5 );
+    
     QList<int>   pluginEnabled;
     QStringList  pluginNameId;
 
@@ -968,9 +972,40 @@ void MarblePart::slotUpdateSettings()
         setPersistentTileCacheLimit( MarbleSettings::persistentTileCacheLimit() * 1024 );
     m_controlView->marbleWidget()->
         setVolatileTileCacheLimit( MarbleSettings::volatileTileCacheLimit() * 1024 );
-
+/*
     m_controlView->marbleWidget()->setProxy( MarbleSettings::proxyUrl(),
                                              MarbleSettings::proxyPort(), MarbleSettings::user(), MarbleSettings::password() );
+*/
+    //Create and export the proxy
+    QNetworkProxy proxy;
+    
+    // Make sure that no proxy is used for an empty string or the default value: 
+    if ( MarbleSettings::proxyUrl().isEmpty() || MarbleSettings::proxyUrl() == "http://" ) {
+        proxy.setType( QNetworkProxy::NoProxy );
+    } else if ( MarbleSettings::proxyHttp() ) {
+        proxy.setType( QNetworkProxy::HttpProxy );
+    } else if ( MarbleSettings::proxySocks5 ) {
+        proxy.setType( QNetworkProxy::Socks5Proxy );
+    }
+    
+    proxy.setHostName( MarbleSettings::proxyUrl() );
+    proxy.setPort( MarbleSettings::proxyPort() );
+    
+    if ( MarbleSettings::proxyAuth() ) {
+        proxy.setUser( MarbleSettings::proxyUser() );
+        proxy.setPassword( MarbleSettings::proxyPass() );
+    }
+    
+    QNetworkProxy::setApplicationProxy(proxy);
+    
+    //Save Proxy Details
+    m_proxyHost = MarbleSettings::proxyUrl();
+    m_proxyPort = MarbleSettings::proxyPort();
+    m_proxyUser = MarbleSettings::proxyUser();
+    m_proxyPass = MarbleSettings::proxyPass();
+    m_proxyAuth = MarbleSettings::proxyAuth();
+    m_proxyHttp = MarbleSettings::proxyHttp();
+    m_proxySocks5 = MarbleSettings::proxySocks5();
 
     m_controlView->marbleWidget()->updateChangedMap();
 }

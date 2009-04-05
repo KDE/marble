@@ -15,6 +15,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QList>
 #include <QtCore/QSettings>
+#include <QtNetwork/QNetworkProxy>
 #include <QtGui/QApplication>
 #include <QtGui/QDialogButtonBox>
 #include <QtGui/QStandardItem>
@@ -103,6 +104,28 @@ void QtMarbleConfigDialog::initSettings()
 void QtMarbleConfigDialog::syncSettings()
 {
     settings->sync();
+    
+    QNetworkProxy proxy;
+    
+    // Make sure that no proxy is used for an empty string or the default value: 
+    if ( proxyUrl().isEmpty() || proxyUrl() == "http://" ) {
+        proxy.setType( QNetworkProxy::NoProxy );
+    } else if ( proxyHttp() ) {
+        proxy.setType( QNetworkProxy::HttpProxy );
+    } else if ( proxySocks5() ) {
+        proxy.setType( QNetworkProxy::Socks5Proxy );
+    }
+    
+    proxy.setHostName( proxyUrl() );
+    proxy.setPort( proxyPort() );
+    
+    if ( proxyAuth() ) {
+        proxy.setUser( proxyUser() );
+        proxy.setPassword( proxyPass() );
+    }
+    
+    QNetworkProxy::setApplicationProxy(proxy);
+    
 }
 
 void QtMarbleConfigDialog::readSettings()
@@ -131,8 +154,15 @@ void QtMarbleConfigDialog::readSettings()
     w_cacheSettings->kcfg_persistentTileCacheLimit->setValue( persistentTileCacheLimit() );
     w_cacheSettings->kcfg_proxyUrl->setText( proxyUrl() );
     w_cacheSettings->kcfg_proxyPort->setValue( proxyPort() );
-    w_cacheSettings->kcfg_user->setText( user() );
-    w_cacheSettings->kcfg_password->setText( password() );
+    w_cacheSettings->kcfg_proxyUser->setText( proxyUser() );
+    w_cacheSettings->kcfg_proxyPass->setText( proxyPass() );
+    w_cacheSettings->kcfg_proxyHttp->setChecked( proxyHttp() );
+    w_cacheSettings->kcfg_proxySocks5->setChecked( proxySocks5() );
+    if ( proxyAuth() ) {
+        w_cacheSettings->kcfg_proxyAuth->setCheckState( Qt::Checked );
+    } else {
+        w_cacheSettings->kcfg_proxyAuth->setCheckState( Qt::Unchecked );
+    }
     
     emit settingsChanged();
 }
@@ -164,8 +194,16 @@ void QtMarbleConfigDialog::writeSettings()
 	settings->setValue( "persistentTileCacheLimit", w_cacheSettings->kcfg_persistentTileCacheLimit->value() );
 	settings->setValue( "proxyUrl", w_cacheSettings->kcfg_proxyUrl->text() );
 	settings->setValue( "proxyPort", w_cacheSettings->kcfg_proxyPort->value() );
-        settings->setValue( "user", w_cacheSettings->kcfg_user->text() );
-	settings->setValue( "password", w_cacheSettings->kcfg_password->text() );
+	settings->setValue( "proxyHttp", w_cacheSettings->kcfg_proxyHttp->isChecked() );
+	settings->setValue( "proxySocks5", w_cacheSettings->kcfg_proxySocks5->isChecked() );
+	if ( w_cacheSettings->kcfg_proxyAuth->isChecked() ) {
+	    settings->setValue( "proxyAuth", true );
+	    settings->setValue( "proxyUser", w_cacheSettings->kcfg_proxyUser->text() );
+	    settings->setValue( "proxyPass", w_cacheSettings->kcfg_proxyPass->text() );
+	} else {
+	    settings->setValue( "proxyAuth", false );
+	}
+
     settings->endGroup();
 	
     emit settingsChanged();
@@ -236,14 +274,29 @@ int QtMarbleConfigDialog::proxyPort()
     return settings->value( "Cache/proxyPort", 8080 ).toInt();
 }
 
-QString QtMarbleConfigDialog::user()
+QString QtMarbleConfigDialog::proxyUser()
 {
-    return settings->value( "Cache/user", "" ).toString();
+    return settings->value( "Cache/proxyUser", "" ).toString();
 }
 
-QString QtMarbleConfigDialog::password()
+QString QtMarbleConfigDialog::proxyPass()
 {
-    return settings->value( "Cache/password", "" ).toString();
+    return settings->value( "Cache/proxyPass", "" ).toString();
+}
+
+bool QtMarbleConfigDialog::proxyHttp()
+{
+    return settings->value( "Cache/proxyHttp", "" ).toBool();
+}
+
+bool QtMarbleConfigDialog::proxySocks5()
+{
+    return settings->value( "Cache/proxySocks5", "" ).toBool();
+}
+
+bool QtMarbleConfigDialog::proxyAuth()
+{
+    return settings->value( "Cache/proxyAuth", false ).toBool();
 }
 
 #include "QtMarbleConfigDialog.moc"

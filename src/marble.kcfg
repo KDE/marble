@@ -160,11 +160,23 @@
    <min>0</min>
    <max>9999</max>
   </entry>
-  <entry name="user" type="String">
+  <entry name="proxyUser" type="String">
    <label>Username for authorization.</label>
   </entry>
-  <entry name="password" type="String">
+  <entry name="proxyPass" type="String">
    <label>Password for authorization.</label>
+  </entry>
+  <entry name="proxyHttp" type="Bool">
+   <label>Proxy type is Http</label>
+   <default>true</default>
+  </entry>
+  <entry name="proxySocks5" type="Bool">
+   <label>Proxy type is Socks5</label>
+   <default>false</default>
+  </entry>
+  <entry name="proxyAuth" type="Bool">
+   <label>Proxy requires Authentication</label>
+   <default>false</default>
   </entry>
  </group>
  <group name="Plugins">

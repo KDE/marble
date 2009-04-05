@@ -179,7 +179,15 @@ class MarblePart: public KParts::ReadOnlyPart
     void updateStatusBar();
 
     KParts::StatusBarExtension *m_statusBarExtension;
-
+    
+    // Information about the Proxy
+    QString m_proxyHost;
+    int m_proxyPort;
+    QString m_proxyUser;
+    QString m_proxyPass;
+    bool m_proxyAuth;
+    bool m_proxyHttp;
+    bool m_proxySocks5;
 };
 
 }
