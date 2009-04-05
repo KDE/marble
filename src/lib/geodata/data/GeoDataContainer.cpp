@@ -15,6 +15,7 @@
 #include "GeoDataContainer_p.h"
 
 // Qt
+#include <QtCore/QDebug>
 #include <QtGui/QImage>
 
 // Marble
@@ -78,10 +79,16 @@ QVector<GeoDataPlacemark> GeoDataContainer::placemarks() const
     QVector<GeoDataFeature>::const_iterator it = p()->m_vector.constBegin();
     QVector<GeoDataFeature>::const_iterator end = p()->m_vector.constEnd();
 
+    int i = 0, j = 0;
     for (; it != end; ++it) {
+        ++j;
         GeoDataFeature feature = *it;
-        if ( feature.featureId() == GeoDataPlacemarkId )
-            results.append( feature );
+        feature.featureId();
+        if ( it->isPlacemark() ) {
+            ++i;
+            GeoDataPlacemark placemark = *it;
+            results.append( placemark );
+        }
     }
 
     return results;
