@@ -329,9 +329,12 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
         }
 
         if ( download ) {
-            QUrl sourceUrl = TileLoaderHelper::downloadUrl( textureLayer, level, x, y );
-            QString destFileName = TileLoaderHelper::relativeTileFileName( textureLayer,
-                                                                           level, x, y );
+            QUrl sourceUrl =
+                TileLoaderHelper::downloadUrl( textureLayer, currentLevel,
+                                               currentX, currentY );
+            QString destFileName =
+                TileLoaderHelper::relativeTileFileName( textureLayer, currentLevel,
+                                                        currentX, currentY );
 //            qDebug() << "emit downloadTile(" << sourceUrl << destFileName << ");";
             emit downloadTile( sourceUrl, destFileName, d->m_id.toString() );
         }
