@@ -23,10 +23,6 @@
 
 namespace Marble
 {
-
-enum  Priority { NoPriority, Low, Medium, High };
-enum  Status   { NoStatus, Pending, Activated, Finished, Expired, Aborted };
-
 class StoragePolicy;
 class HttpJobPrivate;
 
@@ -46,8 +42,6 @@ class MARBLE_EXPORT HttpJob: public QObject
 
     QString destinationFileName() const;
     void setDestinationFileName( const QString & );
-
-    void setStatus( const Status );
 
     void setStoragePolicy( StoragePolicy * );
     

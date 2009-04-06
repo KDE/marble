@@ -91,7 +91,6 @@ void HttpDownloadManager::addJob( HttpJob * job )
     if ( acceptJob( job ) ) {
         m_jobQueue.push( job );
         emit jobAdded();
-        job->setStatus( Pending );
         activateJobs();
     }
     else {
@@ -190,7 +189,6 @@ void HttpDownloadManager::activateJob( HttpJob * const job )
     //          << job->destinationFileName();
     m_activatedJobList.push_back( job );
     job->setStoragePolicy( storagePolicy() );
-    job->setStatus( Activated );
 
     // No duplicate connections please
     disconnect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
@@ -232,7 +230,6 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
 		    m_waitingQueue.enqueue( job );
 		    qDebug() << QString( "Download of %1 failed, but trying again soon" )
 			.arg( job->destinationFileName() );
-		    job->setStatus( NoStatus );
                     if( !m_requeueTimer->isActive() )
                         m_requeueTimer->start();
 		}
