@@ -88,8 +88,8 @@ MergedLayerDecorator::~MergedLayerDecorator()
 
 void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapTheme )
 {
-    QTime time;
-    time.start();
+//     QTime time;
+//     time.start();
     
     if ( m_cloudlayer && m_tile->depth() == 32 && m_level < 2 ) {
         bool show;
@@ -108,8 +108,8 @@ void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapT
         if ( !m_cityLightsTheme ) {
             initCityLights();
         }
-        QTime time2;
-        time2.start();
+//         QTime time2;
+//         time2.start();
         paintSunShading();
     }
     if ( m_showTileId ) {
