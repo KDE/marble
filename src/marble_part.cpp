@@ -789,10 +789,8 @@ void MarblePart::setupDownloadProgressBar()
         m_controlView->marbleWidget()->map()->model()->downloadManager();
     kDebug() << "got download manager:" << downloadManager;
 
-    connect( downloadManager, SIGNAL( jobAdded( int )),
-             this, SLOT( downloadProgressJobAdded( int )));
-    connect( downloadManager, SIGNAL( downloadComplete( QString, QString )),
-             this, SLOT( downloadProgressJobCompleted( QString, QString )));
+    connect( downloadManager, SIGNAL( jobAdded() ), SLOT( downloadJobAdded() ) );
+    connect( downloadManager, SIGNAL( jobRemoved() ), SLOT( downloadJobRemoved() ) );
 }
 
 void MarblePart::setupStatusBarActions()
@@ -1022,7 +1020,7 @@ void MarblePart::lockFloatItemPosition( bool enabled )
     }
 }
 
-void MarblePart::downloadProgressJobAdded( int totalJobs )
+void MarblePart::downloadJobAdded()
 {
     m_downloadProgressBar->setUpdatesEnabled( false );
     if ( m_downloadProgressBar->value() < 0 ) {
@@ -1038,7 +1036,7 @@ void MarblePart::downloadProgressJobAdded( int totalJobs )
     m_downloadProgressBar->setUpdatesEnabled( true );
 }
 
-void MarblePart::downloadProgressJobCompleted( QString, QString )
+void MarblePart::downloadJobRemoved()
 {
     m_downloadProgressBar->setUpdatesEnabled( false );
     m_downloadProgressBar->setValue( m_downloadProgressBar->value() + 1 );

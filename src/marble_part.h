@@ -98,8 +98,8 @@ class MarblePart: public KParts::ReadOnlyPart
      */
     void showDownloadProgressBar( bool isChecked );
 
-    void  downloadProgressJobAdded( int );
-    void  downloadProgressJobCompleted( QString, QString );
+    void  downloadJobAdded();
+    void  downloadJobRemoved();
 
     void  lockFloatItemPosition( bool );
     void  controlSun();

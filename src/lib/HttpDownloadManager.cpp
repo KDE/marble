@@ -90,6 +90,7 @@ void HttpDownloadManager::addJob( HttpJob * job )
 {
     if ( acceptJob( job ) ) {
         m_jobQueue.push( job );
+        emit jobAdded();
         job->setStatus( Pending );
         activateJobs();
     }
@@ -166,7 +167,6 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
         }
     }
 
-    emit jobAdded( m_jobQueue.size() + m_activatedJobList.size() );
     return true;
 }
 
@@ -179,6 +179,7 @@ void HttpDownloadManager::removeJob( HttpJob* job )
 //        qDebug() << "Removing: " << job->initiatorId();
         job->deleteLater();
     }
+    emit jobRemoved();
 
     activateJobs();
 }
@@ -223,7 +224,8 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
 
         if ( pos >= 0 ) {
             m_activatedJobList.removeAt( pos );
-	    
+	    emit jobRemoved();
+
 	    // This should always return true
 	    if( !m_waitingQueue.contains( job ) ) {
 		if( job->tryAgain() ) {
