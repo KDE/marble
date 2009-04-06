@@ -40,13 +40,13 @@ MergedLayerDecorator::MergedLayerDecorator(SunLocator* sunLocator)
       m_y( -1 ),
       m_level( - 1 ),
       m_id(),
-      m_sunLocator(sunLocator),
-      m_cloudlayer(false),
-      m_showTileId(false),
-      m_cityLightsTheme(0),
-      m_blueMarbleTheme(0),
-      m_cityLightsTextureLayer(0),
-      m_cloudsTextureLayer(0)
+      m_sunLocator( sunLocator ),
+      m_cloudlayer( false ),
+      m_showTileId( false ),
+      m_cityLightsTheme( 0 ),
+      m_blueMarbleTheme( 0 ),
+      m_cityLightsTextureLayer( 0 ),
+      m_cloudsTextureLayer( 0 )
 {
 }
 
@@ -58,8 +58,8 @@ void MergedLayerDecorator::initClouds()
 
     // the clouds texture layer is a layer in the bluemarble theme
 
-    m_blueMarbleTheme = MapThemeManager::loadMapTheme("earth/bluemarble/bluemarble.dgml");
-    if (m_blueMarbleTheme) {
+    m_blueMarbleTheme = MapThemeManager::loadMapTheme( "earth/bluemarble/bluemarble.dgml" );
+    if ( m_blueMarbleTheme ) {
         QString blueMarbleId = m_blueMarbleTheme->head()->theme();
         m_cloudsTextureLayer = static_cast<GeoSceneTexture*>(
             m_blueMarbleTheme->map()->layer( blueMarbleId )->dataset( "clouds_data" ) );
@@ -72,7 +72,7 @@ void MergedLayerDecorator::initCityLights()
     // As long as we don't have an Layer Management Class we just lookup 
     // the name of the layer that has the same name as the theme ID
 
-    m_cityLightsTheme = MapThemeManager::loadMapTheme("earth/citylights/citylights.dgml");
+    m_cityLightsTheme = MapThemeManager::loadMapTheme( "earth/citylights/citylights.dgml" );
     if (m_cityLightsTheme) {
         QString cityLightsId = m_cityLightsTheme->head()->theme();
         m_cityLightsTextureLayer = static_cast<GeoSceneTexture*>(
@@ -140,13 +140,13 @@ bool MergedLayerDecorator::showTileId() const
 QImage MergedLayerDecorator::loadDataset( GeoSceneTexture *textureLayer )
 {
     // TODO use a TileLoader rather than directly accessing TextureTile?
-    TextureTile tile(m_id);
+    TextureTile tile( m_id );
     
     connect( &tile, SIGNAL( downloadTile( const QUrl&, const QString&, const QString& ) ),
              this, SIGNAL( downloadTile( const QUrl&, const QString&, const QString& ) ) );
 
     tile.loadDataset( textureLayer, m_level, m_x, m_y );
-    return *(tile.tile());
+    return *( tile.tile() );
 }
 
 void MergedLayerDecorator::paintClouds()
@@ -184,7 +184,7 @@ void MergedLayerDecorator::paintClouds()
                               (int)( g + (255-g)*c ),
                               (int)( b + (255-b)*c ) );
             if ( cloudtile.depth() == 32)
-                cscanline += sizeof(QRgb);
+                cscanline += sizeof( QRgb );
             else
                 cscanline++;
             scanline++;
@@ -221,8 +221,8 @@ void MergedLayerDecorator::paintSunShading()
             return;
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
             qreal lat = lat_scale * ( m_y * tileHeight + cur_y ) - 0.5*M_PI;
-            qreal a = sin((lat-DEG2RAD * m_sunLocator->getLat())/2.0);
-            qreal c = cos(lat)*cos(DEG2RAD * m_sunLocator->getLat());
+            qreal a = sin( ( lat-DEG2RAD * m_sunLocator->getLat() )/2.0 );
+            qreal c = cos(lat)*cos( DEG2RAD * m_sunLocator->getLat() );
 
             QRgb* scanline  = (QRgb*)m_tile->scanLine( cur_y );
             QRgb* nscanline = (QRgb*)nighttile.scanLine( cur_y );
@@ -239,7 +239,7 @@ void MergedLayerDecorator::paintSunShading()
                 if ( interpolate ) {
                     int check = cur_x + n;
                     qreal checklon   = lon_scale * ( m_x * tileWidth + check );
-                    shade = m_sunLocator->shading(checklon, a, c);
+                    shade = m_sunLocator->shading( checklon, a, c );
 
                     // if the shading didn't change across the interpolation
                     // interval move on and don't change anything.
@@ -260,7 +260,7 @@ void MergedLayerDecorator::paintSunShading()
                     }
                     for ( int t = 0; t < n ; ++t ) {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                        shade = m_sunLocator->shading(lon, a, c);
+                        shade = m_sunLocator->shading( lon, a, c );
                         m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
                         ++scanline;
                         ++nscanline;
@@ -272,7 +272,7 @@ void MergedLayerDecorator::paintSunShading()
                     // Make sure we don't exceed the image memory
                     if ( cur_x < tileWidth ) {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                        shade = m_sunLocator->shading(lon, a, c);
+                        shade = m_sunLocator->shading( lon, a, c );
                         m_sunLocator->shadePixelComposite( *scanline, *nscanline, shade );
                         ++scanline;
                         ++nscanline;
@@ -284,9 +284,9 @@ void MergedLayerDecorator::paintSunShading()
         }
     } else {
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
-            qreal lat = lat_scale * (m_y * tileHeight + cur_y) - 0.5*M_PI;
-            qreal a = sin((lat-DEG2RAD * m_sunLocator->getLat())/2.0);
-            qreal c = cos(lat)*cos(DEG2RAD * m_sunLocator->getLat());
+            qreal lat = lat_scale * ( m_y * tileHeight + cur_y ) - 0.5*M_PI;
+            qreal a = sin( (lat-DEG2RAD * m_sunLocator->getLat() )/2.0 );
+            qreal c = cos(lat)*cos( DEG2RAD * m_sunLocator->getLat() );
 
             QRgb* scanline = (QRgb*)m_tile->scanLine( cur_y );
 
@@ -302,7 +302,7 @@ void MergedLayerDecorator::paintSunShading()
                 if ( interpolate ) {
                     int check = cur_x + n;
                     qreal checklon   = lon_scale * ( m_x * tileWidth + check );
-                    shade = m_sunLocator->shading(checklon, a, c);
+                    shade = m_sunLocator->shading( checklon, a, c );
 
                     // if the shading didn't change across the interpolation
                     // interval move on and don't change anything.
@@ -321,7 +321,7 @@ void MergedLayerDecorator::paintSunShading()
                     }
                     for ( int t = 0; t < n ; ++t ) {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                        shade = m_sunLocator->shading(lon, a, c);
+                        shade = m_sunLocator->shading( lon, a, c );
                         m_sunLocator->shadePixel( *scanline, shade );
                         ++scanline;
                         ++cur_x;
@@ -332,7 +332,7 @@ void MergedLayerDecorator::paintSunShading()
                     // Make sure we don't exceed the image memory
                     if ( cur_x < tileWidth ) {
                         qreal lon   = lon_scale * ( m_x * tileWidth + cur_x );
-                        shade = m_sunLocator->shading(lon, a, c);
+                        shade = m_sunLocator->shading( lon, a, c );
                         m_sunLocator->shadePixel( *scanline, shade );
                         ++scanline;
                         ++cur_x;
@@ -344,13 +344,13 @@ void MergedLayerDecorator::paintSunShading()
     }
 }
 
-void MergedLayerDecorator::paintTileId(const QString& themeId)
+void MergedLayerDecorator::paintTileId( const QString& themeId )
 {
-    QString filename = QString("%1_%2.jpg")
+    QString filename = QString( "%1_%2.jpg" )
         .arg( m_x, tileDigits, 10, QChar('0') )
         .arg( m_y, tileDigits, 10, QChar('0') );
 
-    QPainter painter(m_tile);
+    QPainter painter( m_tile );
 
     QColor foreground;
     QColor background;
@@ -359,24 +359,24 @@ void MergedLayerDecorator::paintTileId(const QString& themeId)
          || ( (qreal)(m_x)/2 != m_x/2 && (qreal)(m_y)/2 != m_y/2 ) 
        )
     {
-        foreground.setNamedColor("#FFFFFF");
-        background.setNamedColor("#000000");
+        foreground.setNamedColor( "#FFFFFF" );
+        background.setNamedColor( "#000000" );
     }
     else {
-        foreground.setNamedColor("#000000");
-        background.setNamedColor("#FFFFFF");
+        foreground.setNamedColor( "#000000" );
+        background.setNamedColor( "#FFFFFF" );
     }
 
     int   strokeWidth = 10;
     QPen  testPen( foreground );
     testPen.setWidth( strokeWidth );
-    testPen.setJoinStyle(Qt::MiterJoin);
+    testPen.setJoinStyle( Qt::MiterJoin );
 
     painter.setPen( testPen );
     painter.drawRect( strokeWidth / 2, strokeWidth / 2, 
                       m_tile->width()  - strokeWidth,
                       m_tile->height() - strokeWidth );
-    QFont testFont("Sans", 30, QFont::Bold);
+    QFont testFont( "Sans", 30, QFont::Bold );
     QFontMetrics testFm( testFont );
     painter.setFont( testFont );
 
@@ -406,12 +406,12 @@ void MergedLayerDecorator::paintTileId(const QString& themeId)
     painter.drawPath( outlinepath );
 }
 
-void MergedLayerDecorator::setTile(QImage* tile)
+void MergedLayerDecorator::setTile( QImage* tile )
 {
     m_tile = tile;
 }
 
-void MergedLayerDecorator::setInfo(int x, int y, int level, TileId const& id)
+void MergedLayerDecorator::setInfo( int x, int y, int level, TileId const& id )
 {
     m_x = x;
     m_y = y;
