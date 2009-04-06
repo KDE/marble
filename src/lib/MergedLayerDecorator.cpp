@@ -90,9 +90,7 @@ void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapT
 {
     QTime time;
     time.start();
-    if ( !m_blueMarbleTheme ) {
-        initClouds();
-    }
+    
     if ( m_cloudlayer && m_tile->depth() == 32 && m_level < 2 ) {
         bool show;
         if ( mapTheme && mapTheme->settings()->propertyAvailable( "clouds", show ) ) {
