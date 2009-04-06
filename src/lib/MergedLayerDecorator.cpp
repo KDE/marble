@@ -41,7 +41,7 @@ MergedLayerDecorator::MergedLayerDecorator(SunLocator* sunLocator)
       m_level( - 1 ),
       m_id(),
       m_sunLocator(sunLocator),
-      m_cloudlayer(true),
+      m_cloudlayer(false),
       m_showTileId(false),
       m_cityLightsTheme(0),
       m_blueMarbleTheme(0),
