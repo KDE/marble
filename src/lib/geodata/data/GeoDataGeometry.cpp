@@ -90,6 +90,7 @@ void  GeoDataGeometry::detach()
         delete d;
 
     d = new_d;
+    d->ref.ref();
 }
 
 GeoDataGeometryPrivate* GeoDataGeometry::p() const

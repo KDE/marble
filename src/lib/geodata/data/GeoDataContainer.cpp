@@ -80,7 +80,7 @@ QVector<GeoDataPlacemark> GeoDataContainer::placemarks() const
     QVector<GeoDataFeature>::const_iterator end = p()->m_vector.constEnd();
 
     for (; it != end; ++it) {
-        if ( it->isPlacemark() ) {
+        if ( GeoDataPlacemarkId == it->featureId() ) {
             GeoDataPlacemark placemark = *it;
             results.append( placemark );
         }

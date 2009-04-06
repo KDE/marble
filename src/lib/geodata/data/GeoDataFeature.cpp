@@ -39,60 +39,61 @@ GeoDataStyle* GeoDataFeature::s_defaultStyle[GeoDataFeature::LastIndex];
 GeoDataFeature::GeoDataFeature()
     :d( new GeoDataFeaturePrivate() )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
 
 GeoDataFeature::GeoDataFeature( const GeoDataFeature& other )
     : GeoDataObject( other ),
       d( other.d )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
 
 GeoDataFeature::GeoDataFeature( const GeoDataContainer& other )
     : GeoDataObject( other ),
       d( other.GeoDataFeature::d )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
 
 GeoDataFeature::GeoDataFeature( const GeoDataFolder& other )
     : GeoDataObject( other ),
       d( other.GeoDataFeature::d )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
 
 GeoDataFeature::GeoDataFeature( const GeoDataDocument& other )
     : GeoDataObject( other ),
       d( other.GeoDataFeature::d )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
 
 GeoDataFeature::GeoDataFeature( const GeoDataPlacemark& other )
     : GeoDataObject( other ),
       d( other.GeoDataFeature::d )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
 
 GeoDataFeature::GeoDataFeature( const QString& name )
     :d( new GeoDataFeaturePrivate() )
 {
-    p()->ref.ref();
-    p()->m_name = name;
+    d->ref.ref();
+    d->m_name = name;
 }
 
 GeoDataFeature::GeoDataFeature( GeoDataFeaturePrivate *priv ) : d( priv )
 {
-    p()->ref.ref();
+    d->ref.ref();
 }
     
 GeoDataFeature::~GeoDataFeature()
 {
-    if (!p()->ref.deref())
+    if (!d->ref.deref()) {
         delete d;
+    }
 }
 
 GeoDataFeaturePrivate* GeoDataFeature::p() const
@@ -103,18 +104,20 @@ GeoDataFeaturePrivate* GeoDataFeature::p() const
 GeoDataFeature& GeoDataFeature::operator=( const GeoDataFeature& other )
 {
     GeoDataObject::operator=( other );
-    if (!p()->ref.deref())
+    
+    if (!d->ref.deref()) {
         delete d;
+    }
 
     d = other.d;
-    p()->ref.ref();
+    d->ref.ref();
     
     return *this;
 }
 
 EnumFeatureId GeoDataFeature::featureId() const
 {
-    return p()->featureId();
+    return d->featureId();
 }
 
 void GeoDataFeature::initializeDefaultStyles()
@@ -358,68 +361,68 @@ void GeoDataFeature::setDefaultFont( const QFont& font )
 
 QString GeoDataFeature::name() const
 {
-    return p()->m_name;
+    return d->m_name;
 }
 
 void GeoDataFeature::setName( const QString &value )
 {
     detach();
-    p()->m_name = value;
+    d->m_name = value;
 }
 
 QString GeoDataFeature::address() const
 {
-    return p()->m_address;
+    return d->m_address;
 }
 
 void GeoDataFeature::setAddress( const QString &value)
 {
     detach();
-    p()->m_address = value;
+    d->m_address = value;
 }
 
 QString GeoDataFeature::phoneNumber() const
 {
-    return p()->m_phoneNumber;
+    return d->m_phoneNumber;
 }
 
 void GeoDataFeature::setPhoneNumber( const QString &value)
 {
     detach();
-    p()->m_phoneNumber = value;
+    d->m_phoneNumber = value;
 }
 
 QString GeoDataFeature::description() const
 {
-    return p()->m_description;
+    return d->m_description;
 }
 
 void GeoDataFeature::setDescription( const QString &value)
 {
     detach();
-    p()->m_description = value;
+    d->m_description = value;
 }
 
 QString GeoDataFeature::styleUrl() const
 {
-    return p()->m_styleUrl;
+    return d->m_styleUrl;
 }
 
 void GeoDataFeature::setStyleUrl( const QString &value)
 {
     detach();
-    p()->m_styleUrl = value;
+    d->m_styleUrl = value;
 }
 
 bool GeoDataFeature::isVisible() const
 {
-    return p()->m_visible;
+    return d->m_visible;
 }
 
 void GeoDataFeature::setVisible( bool value )
 {
     detach();
-    p()->m_visible = value;
+    d->m_visible = value;
 }
 
 GeoDataStyle* GeoDataFeature::style() const
@@ -427,14 +430,14 @@ GeoDataStyle* GeoDataFeature::style() const
     if ( s_defaultStyleInitialized == false )
         initializeDefaultStyles();
 
-    if ( p()->m_visualCategory != None )
+    if ( d->m_visualCategory != None )
     {
-        return s_defaultStyle[ p()->m_visualCategory ];
+        return s_defaultStyle[ d->m_visualCategory ];
     }
     else
     {
-        if ( p()->m_style != 0 ) {
-            return p()->m_style;
+        if ( d->m_style != 0 ) {
+            return d->m_style;
         } else
         {
             // This should not happen
@@ -448,61 +451,61 @@ GeoDataStyle* GeoDataFeature::style() const
 void GeoDataFeature::setStyle( GeoDataStyle* style )
 {
     detach();
-    p()->m_style = style;
+    d->m_style = style;
 }
 
 GeoDataFeature::GeoDataVisualCategory GeoDataFeature::visualCategory() const
 {
-    return p()->m_visualCategory;
+    return d->m_visualCategory;
 }
 
 void GeoDataFeature::setVisualCategory( GeoDataFeature::GeoDataVisualCategory index )
 {
     detach();
-    p()->m_visualCategory = index;
+    d->m_visualCategory = index;
 }
 
 const QChar GeoDataFeature::role() const
 {
-    return p()->m_role;
+    return d->m_role;
 }
 
 void GeoDataFeature::setRole( const QChar &role )
 {
     detach();
-    p()->m_role = role;
+    d->m_role = role;
 }
 
 GeoDataStyleMap* GeoDataFeature::styleMap() const
 {
-    return p()->m_styleMap;
+    return d->m_styleMap;
 }
 
 void GeoDataFeature::setStyleMap( GeoDataStyleMap* styleMap )
 {
-    p()->m_styleMap = styleMap;
+    d->m_styleMap = styleMap;
 }
 
 int GeoDataFeature::popularityIndex() const
 {
-    return p()->m_popularityIndex;
+    return d->m_popularityIndex;
 }
 
 void GeoDataFeature::setPopularityIndex( int popularityIndex )
 {
     detach();
-    p()->m_popularityIndex = popularityIndex;
+    d->m_popularityIndex = popularityIndex;
 }
 
 qint64 GeoDataFeature::popularity() const
 {
-    return p()->m_popularity;
+    return d->m_popularity;
 }
 
 void GeoDataFeature::setPopularity( qint64 popularity )
 {
     detach();
-    p()->m_popularity = popularity;
+    d->m_popularity = popularity;
 }
 
 const QSize GeoDataFeature::symbolSize() const
@@ -528,30 +531,32 @@ void GeoDataFeature::resetDefaultStyles()
 
 void GeoDataFeature::detach()
 {
-    if(p()->ref == 1)
+    if(d->ref == 1)
         return;
 
-    GeoDataFeaturePrivate* new_d = static_cast<GeoDataFeaturePrivate*>(p()->copy());
+    GeoDataFeaturePrivate* new_d = static_cast<GeoDataFeaturePrivate*>(d->copy());
 
-    if (!p()->ref.deref())
+    if (!d->ref.deref())
         delete d;
 
     d = new_d;
+    
+    d->ref.ref();
 }
 
 void GeoDataFeature::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );
 
-    stream << p()->m_name;
-    stream << p()->m_address;
-    stream << p()->m_phoneNumber;
-    stream << p()->m_description;
-    stream << p()->m_visible;
-//    stream << p()->m_visualCategory;
-    stream << p()->m_role;
-    stream << p()->m_popularity;
-    stream << p()->m_popularityIndex;
+    stream << d->m_name;
+    stream << d->m_address;
+    stream << d->m_phoneNumber;
+    stream << d->m_description;
+    stream << d->m_visible;
+//    stream << d->m_visualCategory;
+    stream << d->m_role;
+    stream << d->m_popularity;
+    stream << d->m_popularityIndex;
 }
 
 void GeoDataFeature::unpack( QDataStream& stream )
@@ -559,15 +564,15 @@ void GeoDataFeature::unpack( QDataStream& stream )
     detach();
     GeoDataObject::unpack( stream );
 
-    stream >> p()->m_name;
-    stream >> p()->m_address;
-    stream >> p()->m_phoneNumber;
-    stream >> p()->m_description;
-    stream >> p()->m_visible;
-//    stream >> (int)p()->m_visualCategory;
-    stream >> p()->m_role;
-    stream >> p()->m_popularity;
-    stream >> p()->m_popularityIndex;
+    stream >> d->m_name;
+    stream >> d->m_address;
+    stream >> d->m_phoneNumber;
+    stream >> d->m_description;
+    stream >> d->m_visible;
+//    stream >> (int)d->m_visualCategory;
+    stream >> d->m_role;
+    stream >> d->m_popularity;
+    stream >> d->m_popularityIndex;
 }
 
 }

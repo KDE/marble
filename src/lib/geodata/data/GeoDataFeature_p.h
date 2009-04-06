@@ -49,7 +49,7 @@ class GeoDataFeaturePrivate
         m_style( other.m_style ),               //FIXME: both style and stylemap need to be reworked internally!!!!
         m_styleMap( other.m_styleMap ),
         m_visualCategory( other.m_visualCategory ),
-        ref( 0 )
+        ref( 1 )
     {
     }
 
