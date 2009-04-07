@@ -56,9 +56,6 @@ HttpDownloadManager::~HttpDownloadManager()
     }
     m_activatedJobList.clear();
 
-    qDeleteAll( m_jobBlackList );
-    m_jobBlackList.clear();
-
     qDeleteAll( m_waitingQueue );
     m_waitingQueue.clear();
 
@@ -156,14 +153,10 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
         }
     }
 
-    i = m_jobBlackList.begin();
-    iEnd = m_jobBlackList.end();
-    for (; i != iEnd; ++i ) {
-        if ( job->destinationFileName() == (*i)->destinationFileName() ) {
-            qDebug() << "Download rejected: Blacklisted.";
-            (*i)->setInitiatorId( job->initiatorId() );
-            return false;
-        }
+    QSet<QString>::const_iterator const pos = m_jobBlackList.find( job->sourceUrl().toString() );
+    if ( pos != m_jobBlackList.end() ) {
+        qDebug() << "Download rejected: Blacklisted.";
+        return false;
     }
 
     return true;
@@ -234,10 +227,12 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
                         m_requeueTimer->start();
 		}
 		else {
-		    m_jobBlackList.push_back( job );
-		    
+		    m_jobBlackList.insert( job->sourceUrl().toString() );
+
 		    qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" )
 			.arg( job->destinationFileName() ).arg( m_jobBlackList.size() );
+
+                    job->deleteLater();
 		}
 	    }
 	}

@@ -22,6 +22,7 @@
 #include <QtCore/QString>
 #include <QtCore/QUrl>
 #include <QtCore/QList>
+#include <QtCore/QSet>
 #include <QtCore/QStack>
 #include <QtCore/QQueue>
 
@@ -145,7 +146,9 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     QStack<HttpJob*>  m_jobQueue;
     QQueue<HttpJob*>  m_waitingQueue;
     QList<HttpJob*>   m_activatedJobList;
-    QList<HttpJob*>   m_jobBlackList;
+
+    /// Contains the blacklisted source urls
+    QSet<QString>     m_jobBlackList;
 
     int               m_activatedJobsLimit;
     int               m_jobQueueLimit;
