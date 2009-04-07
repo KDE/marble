@@ -162,9 +162,11 @@ void TextureTilePrivate::scaleTileFrom( Marble::GeoSceneTexture *textureLayer, Q
     const int levelZeroColumns = textureLayer->levelZeroColumns();
     const int levelZeroRows = textureLayer->levelZeroRows();
     const int rowsRequestedLevel = TileLoaderHelper::levelToRow( levelZeroRows, targetLevel );
-    const int columnsRequestedLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, targetLevel );
+    const int columnsRequestedLevel = TileLoaderHelper::levelToColumn( levelZeroColumns,
+                                                                       targetLevel );
     const int rowsCurrentLevel = TileLoaderHelper::levelToRow( levelZeroRows, sourceLevel );
-    const int columnsCurrentLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, sourceLevel );
+    const int columnsCurrentLevel = TileLoaderHelper::levelToColumn( levelZeroColumns,
+                                                                     sourceLevel );
 
     // qDebug() << "About to start cropping an existing image.";
 
@@ -213,7 +215,8 @@ TextureTile::~TextureTile()
 {
 }
 
-void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, int y, QCache<TileId, TextureTile> *tileCache )
+void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, int y,
+                               QCache<TileId, TextureTile> *tileCache )
 {
     Q_D( TextureTile );
 
@@ -275,8 +278,9 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
         // in the cache but has expired load from DISK:
 
         if ( !currentTile ) {
-            QString relfilename = TileLoaderHelper::relativeTileFileName( textureLayer, 
-                                                                        currentLevel, (int)(currentX), (int)(currentY) );
+            QString relfilename =
+                TileLoaderHelper::relativeTileFileName( textureLayer, currentLevel,
+                                                        (int)(currentX), (int)(currentY) );
             absfilename = MarbleDirs::path( relfilename );
             const QFileInfo fileInfo( absfilename );
             lastModified = fileInfo.lastModified();
@@ -316,7 +320,8 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
 
                 // Don't scale if the current tile isn't a fallback
                 if ( level != currentLevel ) { 
-                    d->scaleTileFrom( textureLayer, temptile, currentX, currentY, currentLevel, x, y, level );
+                    d->scaleTileFrom( textureLayer, temptile, currentX, currentY, currentLevel,
+                                      x, y, level );
                 }
                 else {
                     d->m_state = TileComplete;
@@ -371,7 +376,8 @@ void TextureTile::loadTile( bool requestTileUpdate )
             d->jumpTable8 = jumpTableFromQImage8( d->m_rawtile );
             break;
         default:
-            qDebug() << QString("Color m_depth %1 of tile could not be retrieved. Exiting.").arg(d->m_depth);
+            qDebug() << QString("Color m_depth %1 of tile could not be retrieved. Exiting.").
+                arg( d->m_depth );
             exit( -1 );
     }
 
