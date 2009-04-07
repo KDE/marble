@@ -52,7 +52,6 @@ class MARBLE_EXPORT HttpJob: public QObject
      * errorCode contains 0, if there was no error and 1 otherwise
      */
     void jobDone( Marble::HttpJob *, int errorCode );
-    void statusMessage( QString );
     void redirected( HttpJob * job, QUrl redirectionTarget );
 
  public Q_SLOTS:

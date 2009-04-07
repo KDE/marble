@@ -72,17 +72,13 @@ void QNamDownloadJob::finished()
             const QByteArray data = m_networkReply->readAll();
             if ( storagePolicy() ) {
                 if ( storagePolicy()->updateFile( destinationFileName(), data ) ) {
-                    emit statusMessage( tr( "Download finished." ));
                     emit jobDone( this, 0 );
                 }
                 else {
-                    emit statusMessage( tr( "Download failed: %1." )
-                                        .arg( storagePolicy()->lastErrorMessage() ) );
                     emit jobDone( this, 1 );
                 }
             }
             else {
-                emit statusMessage( tr( "Download finished, but not possible to save." ) );
                 emit jobDone( this, 1 );
             }
         }
@@ -90,7 +86,6 @@ void QNamDownloadJob::finished()
         break;
 
     default:
-        emit statusMessage( tr( "Download failed." ) );
         emit jobDone( this, 1 );
     }
 

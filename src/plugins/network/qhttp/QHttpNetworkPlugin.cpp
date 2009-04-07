@@ -49,8 +49,6 @@ void QHttpHttpJob::execute()
                  this, SLOT( httpRequestFinished( int, bool ) ) );
     }
 
-    emit statusMessage( tr( "Downloading data..." ) );
-
     m_http->setHost( sourceUrl().host(),
                      sourceUrl().port() != -1 ? sourceUrl().port() : 80 );
     if ( !sourceUrl().userName().isEmpty() )
@@ -98,29 +96,22 @@ void QHttpHttpJob::httpRequestFinished( int requestId, bool error )
 
     if ( responseHeader.statusCode() != 200 )
     {
-        emit statusMessage( tr( "Download failed: %1." )
-                            .arg( responseHeader.reasonPhrase() ) );
         emit jobDone( this, 1 );
         return;
     }
 
     if ( error != 0 )
     {
-        emit statusMessage( tr( "Download failed: %1." )
-                            .arg( m_http->errorString() ) );
         emit jobDone( this, error );
         return;
     }
 
     if ( storagePolicy() && !storagePolicy()->updateFile( destinationFileName(), data() ) )
     {
-        emit statusMessage( tr( "Download failed: %1." )
-                            .arg( storagePolicy()->lastErrorMessage() ) );
         emit jobDone( this, error );
         return;
     }
 
-    emit statusMessage( tr( "Download finished." ));
     emit jobDone( this, 0 );
 }
 

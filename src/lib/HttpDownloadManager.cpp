@@ -186,12 +186,8 @@ void HttpDownloadManager::activateJob( HttpJob * const job )
     // No duplicate connections please
     disconnect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
                 this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
-    disconnect( job, SIGNAL( statusMessage( QString ) ),
-                this, SIGNAL( statusMessage( QString ) ) );
     connect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
              this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
-    connect( job, SIGNAL( statusMessage( QString ) ),
-             this, SIGNAL( statusMessage( QString ) ) );
     connect( job, SIGNAL( redirected( HttpJob *, QUrl ) ),
              SLOT( jobRedirected( HttpJob *, QUrl ) ) );
 

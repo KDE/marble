@@ -56,7 +56,6 @@ void KIOHttpJob::slotFinished( KJob *job )
 
     if ( job->error() != 0 )
     {
-        emit statusMessage( i18n( "Download failed: %1.", job->errorString() ) );
         emit jobDone( this, job->error() );
 
         return;
@@ -66,13 +65,11 @@ void KIOHttpJob::slotFinished( KJob *job )
          !storagePolicy()->updateFile( destinationFileName(),
                                        qobject_cast< KIO::StoredTransferJob * >( job )->data() ) )
     {
-        emit statusMessage( i18n( "Download failed: %1.", storagePolicy()->lastErrorMessage() ) );
         emit jobDone( this, 1 );
 
         return;
     }
 
-    emit statusMessage( i18n( "Download finished." ) );
     emit jobDone( this, 0 );
 }
 
@@ -82,7 +79,6 @@ void KIOHttpJob::slotInfoMessage( KJob *job, const QString &plainText, const QSt
         return;
 
     Q_UNUSED( richText );
-    emit statusMessage( plainText );
 }
 
 void KIOHttpJob::slotWarning( KJob *job, const QString &plainText, const QString &richText )
@@ -91,7 +87,6 @@ void KIOHttpJob::slotWarning( KJob *job, const QString &plainText, const QString
         return;
 
     Q_UNUSED( richText );
-    emit statusMessage( plainText );
 }
 
 
