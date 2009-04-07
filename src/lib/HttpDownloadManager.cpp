@@ -184,8 +184,12 @@ void HttpDownloadManager::activateJob( HttpJob * const job )
     job->setStoragePolicy( storagePolicy() );
 
     // No duplicate connections please
+    // FIXME: move calls to disconnect to the right place, here it just
+    // unconditionally disconnects even if there was no connection before
     disconnect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
                 this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
+    disconnect( job, SIGNAL( redirected( HttpJob *, QUrl ) ),
+                this, SLOT( jobRedirected( HttpJob *, QUrl ) ) );
     connect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
              this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
     connect( job, SIGNAL( redirected( HttpJob *, QUrl ) ),
