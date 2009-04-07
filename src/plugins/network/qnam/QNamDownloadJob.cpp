@@ -14,8 +14,6 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 
-#include "StoragePolicy.h"
-
 namespace Marble
 {
 
@@ -70,17 +68,7 @@ void QNamDownloadJob::finished()
         else {
             // no redirection occured
             const QByteArray data = m_networkReply->readAll();
-            if ( storagePolicy() ) {
-                if ( storagePolicy()->updateFile( destinationFileName(), data ) ) {
-                    emit jobDone( this, 0 );
-                }
-                else {
-                    emit jobDone( this, 1 );
-                }
-            }
-            else {
-                emit jobDone( this, 1 );
-            }
+            emit dataReceived( this, data );
         }
     }
         break;

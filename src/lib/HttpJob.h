@@ -7,7 +7,7 @@
 //
 // Copyright 2007      Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
-// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2008,2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 // Copyright 2008      Pino Toscano <pino@kde.org>
 //
 
@@ -23,7 +23,6 @@
 
 namespace Marble
 {
-class StoragePolicy;
 class HttpJobPrivate;
 
 class MARBLE_EXPORT HttpJob: public QObject
@@ -43,8 +42,6 @@ class MARBLE_EXPORT HttpJob: public QObject
     QString destinationFileName() const;
     void setDestinationFileName( const QString & );
 
-    void setStoragePolicy( StoragePolicy * );
-    
     bool tryAgain();
 
  Q_SIGNALS:
@@ -54,11 +51,14 @@ class MARBLE_EXPORT HttpJob: public QObject
     void jobDone( Marble::HttpJob *, int errorCode );
     void redirected( HttpJob * job, QUrl redirectionTarget );
 
+    /**
+     * This signal is emitted if the data was successfully received and
+     * the argument data contains completely the downloaded content.
+     */
+    void dataReceived( HttpJob * job, QByteArray data );
+
  public Q_SLOTS:
     virtual void execute() = 0;
-
- protected:
-    StoragePolicy *storagePolicy() const;
 
  private:
     Q_DISABLE_COPY( HttpJob )

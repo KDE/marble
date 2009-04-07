@@ -181,7 +181,6 @@ void HttpDownloadManager::activateJob( HttpJob * const job )
     // qDebug() << "On activatedJobList: " << job->sourceUrl().toString()
     //          << job->destinationFileName();
     m_activatedJobList.push_back( job );
-    job->setStoragePolicy( storagePolicy() );
 
     // No duplicate connections please
     // FIXME: move calls to disconnect to the right place, here it just
@@ -190,10 +189,14 @@ void HttpDownloadManager::activateJob( HttpJob * const job )
                 this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
     disconnect( job, SIGNAL( redirected( HttpJob *, QUrl ) ),
                 this, SLOT( jobRedirected( HttpJob *, QUrl ) ) );
+    disconnect( job, SIGNAL( dataReceived( HttpJob *, QByteArray ) ),
+                this, SLOT( jobDataReceived( HttpJob *, QByteArray ) ) );
     connect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
              this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
     connect( job, SIGNAL( redirected( HttpJob *, QUrl ) ),
              SLOT( jobRedirected( HttpJob *, QUrl ) ) );
+    connect( job, SIGNAL( dataReceived( HttpJob *, QByteArray ) ),
+             SLOT( jobDataReceived( HttpJob *, QByteArray ) ) );
 
     job->execute();
 }
@@ -282,6 +285,13 @@ void HttpDownloadManager::jobRedirected( HttpJob *job, QUrl newLocation )
                                                          job->initiatorId() );
     removeJob( job );
     activateJob( newJob );
+}
+
+void HttpDownloadManager::jobDataReceived( HttpJob *job, QByteArray data )
+{
+    const bool error = storagePolicy()
+        && !storagePolicy()->updateFile( job->destinationFileName(), data );
+    reportResult( job, error );
 }
 
 #include "HttpDownloadManager.moc"

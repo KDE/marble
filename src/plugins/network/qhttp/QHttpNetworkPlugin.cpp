@@ -17,8 +17,6 @@
 #include <QtNetwork/QHttp>
 #include <QtNetwork/QHttpResponseHeader>
 
-#include "StoragePolicy.h"
-
 using namespace Marble;
 
 QHttpHttpJob::QHttpHttpJob( const QUrl & sourceUrl, const QString & destFileName,
@@ -106,13 +104,7 @@ void QHttpHttpJob::httpRequestFinished( int requestId, bool error )
         return;
     }
 
-    if ( storagePolicy() && !storagePolicy()->updateFile( destinationFileName(), data() ) )
-    {
-        emit jobDone( this, error );
-        return;
-    }
-
-    emit jobDone( this, 0 );
+    emit dataReceived( this, data() );
 }
 
 

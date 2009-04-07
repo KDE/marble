@@ -23,7 +23,6 @@ class Marble::HttpJobPrivate
     QUrl           m_sourceUrl;
     QString        m_destinationFileName;
     QString        m_initiatorId;
-    StoragePolicy *m_storagePolicy;
     int            m_trialsLeft;
 };
 
@@ -32,7 +31,6 @@ HttpJobPrivate::HttpJobPrivate( const QUrl & sourceUrl, const QString & destFile
     : m_sourceUrl( sourceUrl ),
       m_destinationFileName( destFileName ),
       m_initiatorId( id ),
-      m_storagePolicy( 0 ),
       m_trialsLeft( 3 )
 {
 }
@@ -76,16 +74,6 @@ QString HttpJob::destinationFileName() const
 void HttpJob::setDestinationFileName( const QString &fileName )
 {
     d->m_destinationFileName = fileName;
-}
-
-void HttpJob::setStoragePolicy( StoragePolicy *policy )
-{
-    d->m_storagePolicy = policy;
-}
-
-StoragePolicy *HttpJob::storagePolicy() const
-{
-    return d->m_storagePolicy;
 }
 
 bool HttpJob::tryAgain()

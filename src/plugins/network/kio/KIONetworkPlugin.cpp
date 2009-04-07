@@ -10,8 +10,6 @@
 
 #include "KIONetworkPlugin.h"
 
-#include "StoragePolicy.h"
-
 #include <QtCore/QDebug>
 
 #include <klocale.h>
@@ -61,16 +59,7 @@ void KIOHttpJob::slotFinished( KJob *job )
         return;
     }
 
-    if ( storagePolicy() &&
-         !storagePolicy()->updateFile( destinationFileName(),
-                                       qobject_cast< KIO::StoredTransferJob * >( job )->data() ) )
-    {
-        emit jobDone( this, 1 );
-
-        return;
-    }
-
-    emit jobDone( this, 0 );
+    emit dataReceived( this, qobject_cast< KIO::StoredTransferJob * >( job )->data() );
 }
 
 void KIOHttpJob::slotInfoMessage( KJob *job, const QString &plainText, const QString &richText )

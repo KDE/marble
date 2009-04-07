@@ -120,6 +120,7 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     void reportResult( Marble::HttpJob *job, int id );
     void requeue();
     void jobRedirected( HttpJob *job, QUrl newLocation );
+    void jobDataReceived( HttpJob *job, QByteArray data );
 
  private:
     Q_DISABLE_COPY( HttpDownloadManager )
