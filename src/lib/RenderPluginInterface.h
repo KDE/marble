@@ -40,7 +40,7 @@ class RenderPluginInterface: public PluginInterface
     /**
     * @brief Returns a new object of the plugin
     */
-    virtual RenderPlugin* pluginInstance() = 0;
+    virtual RenderPlugin * pluginInstance() = 0;
 
     /**
      * @brief Returns the name(s) of the backend that the plugin can render
