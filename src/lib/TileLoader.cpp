@@ -258,7 +258,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
              this, SIGNAL( tileUpdateAvailable() ) );
 
     tile->loadDataset( texture, tileLevel, tilx, tily, &( d->m_tileCache ) );
-    tile->loadTile( false );
+    tile->initJumpTables( false );
 
     // TODO should emit signal rather than directly calling paintTile
     // emit paintTile( tile, tilx, tily, tileLevel, d->m_theme, false );

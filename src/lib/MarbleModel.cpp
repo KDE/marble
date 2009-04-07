@@ -892,7 +892,7 @@ void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level,
     d->m_layerDecorator->setTile(tile->tile());
         
     d->m_layerDecorator->paint("maps/" + textureLayer->sourceDir(), mapTheme() );
-    tile->loadTile(requestTileUpdate);
+    tile->initJumpTables(requestTileUpdate);
 }
 
 QList<RenderPlugin *> MarbleModel::renderPlugins() const

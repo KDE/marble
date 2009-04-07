@@ -73,7 +73,7 @@ class TextureTile : public AbstractTile {
                       const QString& id);
 
  public Q_SLOTS:
-    void   loadTile( bool requestTileUpdate = true );
+    void initJumpTables( bool requestTileUpdate = true );
 
  protected:
     TextureTile( TextureTilePrivate &dd, QObject *parent );

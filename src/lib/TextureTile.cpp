@@ -352,10 +352,10 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
 //    qDebug() << "m_depth =" << m_depth;
 }
 
-void TextureTile::loadTile( bool requestTileUpdate )
+void TextureTile::initJumpTables( bool requestTileUpdate )
 {
     Q_D( TextureTile );
-    //    qDebug() << "Entered loadTile( int, int, int) of Tile" << m_id;
+    //    qDebug() << "Entered initJumpTables( bool ) of Tile" << d->m_id;
 
     if ( d->m_rawtile.isNull() ) {
         qDebug() << "An essential tile is missing. Please rerun the application.";
