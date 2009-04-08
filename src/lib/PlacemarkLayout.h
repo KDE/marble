@@ -23,8 +23,6 @@
 #include <QtCore/QRect>
 #include <QtCore/QVector>
 
-#include "Quaternion.h"
-
 #include "GeoDataPlacemark.h"   // In geodata/data/
 
 class QAbstractItemModel;

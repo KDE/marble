@@ -14,6 +14,8 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTimeLine>
 
+#include "Quaternion.h"
+
 using namespace Marble;
 
 MarblePhysics::MarblePhysics( QObject * parent )

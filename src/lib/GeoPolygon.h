@@ -19,7 +19,6 @@
 #include <QtCore/QVector>
 #include "marble_export.h"
 
-#include "Quaternion.h"
 #include "GeoDataCoordinates.h"
 
 namespace Marble

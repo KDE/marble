@@ -22,7 +22,6 @@
 
 #include "geodata_export.h"
 #include "global.h"
-#include "Quaternion.h"
 
 /* M_PI is a #define that may or may not be handled in <cmath> */
 #ifndef M_PI
@@ -38,6 +37,7 @@ namespace Marble
 const qreal TWOPI = 2 * M_PI;
 
 class GeoDataCoordinatesPrivate;
+class Quaternion;
 
 /** 
  * @short A 3d point representation

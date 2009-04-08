@@ -28,6 +28,8 @@ using std::fabs;
 # include <sys/mman.h> /* mmap() is defined in this header */
 #endif
 
+#include "Quaternion.h"
+
 using namespace Marble;
 
 const qreal ARCMINUTE = 10800; // distance of 180deg in arcminutes

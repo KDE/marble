@@ -22,7 +22,6 @@
 #include "geodata_export.h"
 #include "GeoDataGeometry.h"
 #include "GeoDataCoordinates.h"
-#include "Quaternion.h"
 
 namespace Marble
 {
