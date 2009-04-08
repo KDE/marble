@@ -127,7 +127,7 @@ MarbleWidget::MarbleWidget(QWidget *parent)
     d->construct();
 
     // Delayed model initialization
-    QTimer::singleShot( 0, this, SLOT( _q_initGui() ) );
+    d->_q_initGui();
 }
 
 
@@ -140,7 +140,7 @@ MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
     d->construct();
 
     // Delayed model initialization
-    QTimer::singleShot( 0, this, SLOT( _q_initGui() ) );
+    d->_q_initGui();
 }
 
 MarbleWidget::~MarbleWidget()
