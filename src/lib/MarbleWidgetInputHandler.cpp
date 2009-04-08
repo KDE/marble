@@ -19,7 +19,6 @@
 
 #include "global.h"
 #include "GeoDataCoordinates.h"
-#include "Quaternion.h"
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
 #include "MarbleMap.h"
