@@ -30,6 +30,7 @@
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"       // In geodata/data/
+#include "Quaternion.h"
 #include "global.h"             // types needed in all of marble.
 
 // Qt
