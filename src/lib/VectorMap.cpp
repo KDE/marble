@@ -378,7 +378,6 @@ const int detail, ViewportParams *viewport )
 {
     int  radius = viewport->radius();
 
-    // Quaternion qpos = FastMath::haveSSE() ? QuaternionSSE() : Quaternion();
     Quaternion qpos;
     //	int step = 1;
     //	int remain = size();
