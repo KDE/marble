@@ -95,13 +95,11 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     // Paint the map.
     for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {
       
+        lon = leftLon;
         lat = M_PI/2 - (y - yTop )* pixel2Rad;
 
-        m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
-        lon = leftLon;
-
-        QRgb * scanLineBegin = m_scanLine;
-        const QRgb * scanLineEnd   = m_scanLine + m_imageWidth;
+        QRgb * const scanLineBegin = (QRgb*)( canvasImage->scanLine( y ) );
+        QRgb * const scanLineEnd = scanLineBegin + m_imageWidth;
 
         for ( QRgb * scanLine = scanLineBegin;
               scanLine < scanLineEnd;
@@ -119,9 +117,9 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     const int clearStop  = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? m_imageHeight  : yTop;
 
     for ( int y = clearStart; y < clearStop; ++y ) {
-        m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
+        QRgb * const scanLine = (QRgb*)( canvasImage->scanLine( y ) );
         for ( int x = 0; x < m_imageWidth; ++x ) {
-            *(m_scanLine + x) = 0;
+            *(scanLine + x) = 0;
         }
     }
     m_oldYPaintedTop = yPaintedTop;

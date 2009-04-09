@@ -43,7 +43,6 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
       m_toTileCoordinatesLat( 0.0 ),
       m_interlaced( false ),
       m_tileLoader( tileLoader ),
-      m_scanLine( 0 ),
       m_tile( 0 ),
       m_tileLevel( 0 ),
       m_maxTileLevel( 0 ),

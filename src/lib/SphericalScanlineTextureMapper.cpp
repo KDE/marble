@@ -152,7 +152,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         const int xRight = ( ( m_imageWidth / 2 - rx > 0 )
                              ? xLeft + rx + rx : canvasImage->width() );
 
-        m_scanLine = (QRgb*)( canvasImage->scanLine( y ) ) + xLeft;
+        QRgb * scanLine = (QRgb*)( canvasImage->scanLine( y ) ) + xLeft;
 
         int  xIpLeft  = 1;
         int  xIpRight = m_n * (int)( xRight / m_n - 1) + 1; 
@@ -220,9 +220,9 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
             // xIpLeft to xIpRight
 
             if ( m_interpolate ) {
-                pixelValueApprox( lon, lat, m_scanLine, highQuality );
+                pixelValueApprox( lon, lat, scanLine, highQuality );
 
-                m_scanLine += ( m_n - 1 );
+                scanLine += ( m_n - 1 );
             }
 
 //          Comment out the pixelValue line and run Marble if you want
@@ -233,12 +233,12 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
 //            if ( !crossingPoleArea )
             if ( x < m_imageWidth ) 
-                pixelValue( lon, lat, m_scanLine, highQuality );
+                pixelValue( lon, lat, scanLine, highQuality );
 
             m_prevLon = lon;
             m_prevLat = lat; // preparing for interpolation
 
-            ++m_scanLine;
+            ++scanLine;
         }
 
         // copy scanline to improve performance

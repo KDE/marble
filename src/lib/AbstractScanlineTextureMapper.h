@@ -107,8 +107,6 @@ public:
     // Tile stuff
     TileLoader  *m_tileLoader;
     GeoSceneTexture::Projection m_tileProjection;
-    QRgb        *m_scanLine;
-
 
     TextureTile *m_tile;
 

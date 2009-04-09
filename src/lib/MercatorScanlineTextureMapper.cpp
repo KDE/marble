@@ -98,11 +98,10 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {        
         lat = atan( sinh( ( (m_imageHeight / 2 + yCenterOffset) - y )
                     * pixel2Rad ) );
-        m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
         lon = leftLon;
-    
-        QRgb * scanLineBegin = m_scanLine;
-        const QRgb * scanLineEnd   = m_scanLine + m_imageWidth;
+
+        QRgb * const scanLineBegin = (QRgb*)( canvasImage->scanLine( y ) );
+        QRgb * const scanLineEnd   = scanLineBegin + m_imageWidth;
     
         for ( QRgb * scanLine = scanLineBegin;
                     scanLine < scanLineEnd;
@@ -120,9 +119,9 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     const int clearStop  = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? m_imageHeight  : yTop;
 
     for ( int y = clearStart; y < clearStop; ++y ) {
-        m_scanLine = (QRgb*)( canvasImage->scanLine( y ) );
+        QRgb * scanLine = (QRgb*)( canvasImage->scanLine( y ) );
         for ( int x = 0; x < m_imageWidth; ++x ) {
-            *(m_scanLine + x) = 0;
+            *(scanLine + x) = 0;
         }
     }
     m_oldYPaintedTop = yPaintedTop;
