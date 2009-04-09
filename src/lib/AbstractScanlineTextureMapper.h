@@ -80,10 +80,6 @@ public:
     qreal rad2PixelX( const qreal longitude ) const;
     qreal rad2PixelY( const qreal latitude ) const;
 
-    // Coordinates on the tile for precise interpolation
-    qreal     m_posX;
-    qreal     m_posY;
-
     // maximum values for global texture coordinates
     // ( with origin in upper left corner, measured in pixel) 
     int     m_maxGlobalX;

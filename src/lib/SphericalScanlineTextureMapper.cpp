@@ -299,22 +299,22 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
             const int jmax = m_n;
 
             for ( int j=1; j < jmax; ++j ) {
-                m_posX = itLon + itStepLon * j;
-                m_posY = itLat + itStepLat * j;
+                qreal posX = itLon + itStepLon * j;
+                qreal posY = itLat + itStepLat * j;
     
-                if (  m_posX >= tileWidth 
-                || m_posX < 0.0
-                || m_posY >= tileHeight
-                || m_posY < 0.0 )
+                if ( posX >= tileWidth 
+                     || posX < 0.0
+                     || posY >= tileHeight
+                     || posY < 0.0 )
                 {
-                    nextTile( m_posX, m_posY );
+                    nextTile( posX, posY );
                     itLon = m_prevLon + m_toTileCoordinatesLon;
                     itLat = m_prevLat + m_toTileCoordinatesLat;
-                    m_posX = itLon + itStepLon * j;
-                    m_posY = itLat + itStepLat * j;
+                    posX = itLon + itStepLon * j;
+                    posY = itLat + itStepLat * j;
                 }
     
-                *scanLine = m_tile->pixelF( m_posX, m_posY );
+                *scanLine = m_tile->pixelF( posX, posY );
     
                 ++scanLine;
             }
