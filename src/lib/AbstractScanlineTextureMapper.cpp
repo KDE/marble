@@ -32,8 +32,6 @@ using namespace Marble;
 
 AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
     : QObject( parent ),
-      m_iPosX( 0 ),
-      m_iPosY( 0 ),
       m_posX( 0.0 ),
       m_posY( 0.0 ),
       m_maxGlobalX( 0 ),
@@ -246,23 +244,23 @@ void AbstractScanlineTextureMapper::pixelValue(qreal lon,
         // measured in radian to the pixel position of the requested 
         // coordinate on the current tile.
 
-        m_iPosX = (int)( m_toTileCoordinatesLon + rad2PixelX( lon ) );
-        m_iPosY = (int)( m_toTileCoordinatesLat + rad2PixelY( lat ) );
+        int iPosX = (int)( m_toTileCoordinatesLon + rad2PixelX( lon ) );
+        int iPosY = (int)( m_toTileCoordinatesLat + rad2PixelY( lat ) );
 
         // Most of the time while moving along the scanLine we'll stay on the 
         // same tile. However at the tile border we might "fall off". If that 
         // happens we need to find out the next tile that needs to be loaded.
     
-        if ( m_iPosX  >= m_tileLoader->tileWidth() 
-            || m_iPosX < 0
-            || m_iPosY >= m_tileLoader->tileHeight()
-            || m_iPosY < 0 )
+        if ( iPosX  >= m_tileLoader->tileWidth() 
+            || iPosX < 0
+            || iPosY >= m_tileLoader->tileHeight()
+            || iPosY < 0 )
         {
-            nextTile( m_iPosX, m_iPosY );
+            nextTile( iPosX, iPosY );
         }
 
         if ( m_tile ) {
-            *scanLine = m_tile->pixel( m_iPosX, m_iPosY );
+            *scanLine = m_tile->pixel( iPosX, iPosY );
         }
         else {
             *scanLine = 0;

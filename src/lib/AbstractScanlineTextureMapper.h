@@ -80,9 +80,6 @@ public:
     qreal rad2PixelX( const qreal longitude ) const;
     qreal rad2PixelY( const qreal latitude ) const;
 
-    // Coordinates on the tile for fast integer calculation
-    int        m_iPosX;
-    int        m_iPosY;
     // Coordinates on the tile for precise interpolation
     qreal     m_posX;
     qreal     m_posY;
