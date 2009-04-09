@@ -52,7 +52,8 @@ class MarbleGeometryModel::Private {
         
         GeoDataMultiGeometry* multiGeometry = static_cast<GeoDataMultiGeometry*>( geometry );
         QVector<GeoDataGeometry>::iterator iterator = multiGeometry->begin();
-        for(; iterator != multiGeometry->end(); ++iterator ) {
+        QVector<GeoDataGeometry>::iterator end = multiGeometry->end();
+        for(; iterator != end; ++iterator ) {
             m_parent[ iterator ] = geometry;
             if( iterator->geometryId() == GeoDataMultiGeometryId ) mapGeometry( iterator );
         }
@@ -65,7 +66,8 @@ class MarbleGeometryModel::Private {
         if( feature->featureId() == GeoDataDocumentId || feature->featureId() == GeoDataFolderId ) {
             QVector<GeoDataFeature> featureList = static_cast<const GeoDataContainer*>( feature )->features();
             QVector<GeoDataFeature>::iterator iterator = featureList.begin();
-            for(; iterator != featureList.end(); ++iterator ) {
+            QVector<GeoDataFeature>::iterator end = featureList.end();
+            for(; iterator != end; ++iterator ) {
                 m_parent[ iterator ] = feature;
                 mapFeature( iterator );
             }
