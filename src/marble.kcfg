@@ -145,13 +145,13 @@
    <max>999999</max>
   </entry>
   <entry key="persistentTileCacheLimit" type="Int" >
-   <label>Maximum space on the harddisc that can be used to store tiles.</label>
+   <label>Maximum space on the hard disk that can be used to store tiles.</label>
    <default>300</default>
    <min>0</min>
    <max>999999</max>
   </entry>
   <entry name="proxyUrl" type="String">
-   <label>Url for the proxy server.</label>
+   <label>URL for the proxy server.</label>
    <default>http://</default>
   </entry>
   <entry key="proxyPort" type="Int" >
@@ -167,7 +167,7 @@
    <label>Password for authorization.</label>
   </entry>
   <entry name="proxyHttp" type="Bool">
-   <label>Proxy type is Http</label>
+   <label>Proxy type is HTTP</label>
    <default>true</default>
   </entry>
   <entry name="proxySocks5" type="Bool">
