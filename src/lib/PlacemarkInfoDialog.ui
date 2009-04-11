@@ -348,7 +348,7 @@ p, li { white-space: pre-wrap; }
           <item row="5" column="1" >
            <widget class="QLabel" name="diameter_val_lbl" >
             <property name="text" >
-             <string>TextLabel</string>
+             <string comment="KDE::DoNotExtract" >TextLabel</string>
             </property>
             <property name="alignment" >
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
