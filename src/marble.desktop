@@ -10,6 +10,7 @@ Name[ml]=മാര്‍ബിള്‍
 Name[ne]=मार्बल
 Name[pa]=ਮਾਰਬਲ
 Name[x-test]=xxMarblexx
+MimeType=application/vnd.google-earth.kml+xml;application/gpx+xml;
 GenericName=Desktop Globe
 GenericName[bg]=Планетариум за работния плот
 GenericName[ca]=Planetari per a l'escriptori
