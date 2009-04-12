@@ -38,7 +38,7 @@ class TextureTilePrivate : AbstractTilePrivate {
     int       m_depth;
     bool      m_isGrayscale;
 
-    TextureTilePrivate( const TileId& id );
+    explicit TextureTilePrivate( const TileId& id );
     virtual ~TextureTilePrivate();
 
     inline uint pixel( int x, int y ) const;
