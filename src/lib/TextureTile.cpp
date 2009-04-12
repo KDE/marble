@@ -365,14 +365,12 @@ void TextureTile::initJumpTables( bool requestTileUpdate )
     switch ( d->m_depth ) {
         case 48:
         case 32:
-            if ( d->jumpTable32 )
-                delete [] d->jumpTable32;
+            delete [] d->jumpTable32;
             d->jumpTable32 = jumpTableFromQImage32( d->m_rawtile );
             break;
         case 8:
         case 1:
-            if ( d->jumpTable8 )
-                delete [] d->jumpTable8;
+            delete [] d->jumpTable8;
             d->jumpTable8 = jumpTableFromQImage8( d->m_rawtile );
             break;
         default:
