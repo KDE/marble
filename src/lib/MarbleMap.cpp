@@ -49,6 +49,7 @@
 #include "MarblePlacemarkModel.h"
 #include "MeasureTool.h"
 #include "MergedLayerDecorator.h"
+#include "PlacemarkLayout.h"
 #include "Planet.h"
 #include "Quaternion.h"
 #include "SunLocator.h"
@@ -1253,6 +1254,7 @@ QFont MarbleMap::defaultFont() const
 void MarbleMap::setDefaultFont( const QFont& font )
 {
     GeoDataFeature::setDefaultFont( font );
+    d->m_model->placemarkLayout()->requestStyleReset();
 }
 
 void MarbleMap::updateSun()
