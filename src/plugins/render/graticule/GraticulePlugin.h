@@ -15,6 +15,7 @@
 #ifndef MARBLEGRATICULEPLUGIN_H
 #define MARBLEGRATICULEPLUGIN_H
 
+#include <QtCore/QMap>
 #include <QtCore/QObject>
 #include <QtCore/QVector>
 
@@ -24,6 +25,7 @@
 namespace Marble
 {
 
+class GeoDataLatLonAltBox;
 
 /**
  * @short A plugin that creates a coordinate grid on top of the map.
@@ -65,8 +67,19 @@ class GraticulePlugin : public RenderPlugin
     void renderLatitudeCircle( GeoPainter *painter, qreal latitude );
 
     void renderLongitudeCircle( GeoPainter *painter, qreal longitude );
-    void renderLongitudeHalfCircle( GeoPainter *painter, qreal longitude );
+    void renderLongitudeHalfCircle( GeoPainter *painter, qreal longitude, qreal cutOff = 0.0  );
 
+    void renderLatitudeLines( GeoPainter *painter, 
+                              const GeoDataLatLonAltBox& viewLatLonAltBox, qreal step );
+    void renderLongitudeLines( GeoPainter *painter, 
+                              const GeoDataLatLonAltBox& viewLatLonAltBox, qreal step );
+
+    void initLineMaps();
+
+    // Maps the zoom factor to the amount of lines per 360 deg
+    QMap<qreal,qreal> m_boldLineMap;
+    QMap<qreal,qreal> m_normalLineMap;
+    QMap<qreal,qreal> m_thinLineMap;
 };
 
 }

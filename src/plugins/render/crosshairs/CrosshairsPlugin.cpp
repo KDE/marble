@@ -50,7 +50,7 @@ QString CrosshairsPlugin::nameId() const
 
 QString CrosshairsPlugin::description() const
 {
-    return QString( "" ); // tr( "A plugin that shows crosshairs." );
+    return tr( "A plugin that shows crosshairs." );
 }
 
 QIcon CrosshairsPlugin::icon () const

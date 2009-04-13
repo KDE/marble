@@ -188,8 +188,8 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_popSortModel = new QSortFilterProxyModel( this );
 
     d->m_popSortModel->setSourceModel( d->m_placemarkmodel );
-    d->m_popSortModel->setSortLocaleAware( true );
-    d->m_popSortModel->setDynamicSortFilter( true );
+//    d->m_popSortModel->setSortLocaleAware( true );
+//    d->m_popSortModel->setDynamicSortFilter( true );
     d->m_popSortModel->setSortRole( MarblePlacemarkModel::PopularityIndexRole );
     d->m_popSortModel->sort( 0, Qt::DescendingOrder );
     
