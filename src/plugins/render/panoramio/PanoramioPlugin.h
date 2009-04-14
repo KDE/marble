@@ -67,17 +67,18 @@ public:
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString& renderPos, GeoSceneLayer * layer = 0 );
 protected:
-    bool eventFilter( QObject *object, QEvent *e );
+//    bool eventFilter( QObject *object, QEvent *e );
 
 public slots:
+    void processFinishedJob( QString relativeUrlString, QString id );
     /**
      * Download images from the json-file
      */
-    void downloadImages( QString , QString );
+    void downloadImages( QString relativeUrlString, QString id );
     /**
      * Append images that are have been downloaded
      */
-    void appendImageToList( QString , QString );
+    void appendImageToList( QString relativeUrlString, QString id );
 signals:
     void statusMessageForImageDownloadingProcess(QString);
 private:

@@ -64,9 +64,8 @@ void PanoramioPlugin::initialize() {
                                               + "/cache/" );
     m_downloadManager = new HttpDownloadManager( QUrl("htttp://mw2.google.com/"),
                                                  m_storagePolicy );
-    downloadPanoramio( 0, numberOfImagesToShow,
-                       -180.00 / RADIANSTODEGREES, -90.00 / RADIANSTODEGREES, 
-                        180.00 / RADIANSTODEGREES,  90.00 / RADIANSTODEGREES );
+    connect( m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
+             this,              SLOT( processFinishedJob( QString , QString ) ) );
 }
 
 bool PanoramioPlugin::isInitialized() const {
@@ -79,7 +78,14 @@ bool PanoramioPlugin::isInitialized() const {
 bool PanoramioPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                               const QString& renderPos, GeoSceneLayer * layer )
 {
-    static qreal deltaWest = 0 , deltaEast = 0 , deltaSouth = 0 , deltaNorth = 0;
+    static bool firstTime = true;
+    if( firstTime ) {
+        // GeoDataLatLonAltBox latLonAltBox = viewport->viewLatLonAltBox();
+        downloadPanoramio( 0, numberOfImagesToShow,
+                           180 / RADIANSTODEGREES, -180 / RADIANSTODEGREES, 
+                            90 / RADIANSTODEGREES, - 90 / RADIANSTODEGREES );
+         firstTime = false;
+    }
     painter->autoMapQuality();
     GeoDataLatLonAltBox mylatLonAltBox = viewport->viewLatLonAltBox();
     if ( flag == 1 ) {
@@ -101,17 +107,21 @@ bool PanoramioPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
+void PanoramioPlugin::processFinishedJob( QString relativeUrlString, QString id ) {
+    if( id.startsWith( "panoramio_json_" ) )
+        downloadImages( relativeUrlString, id );
+    else
+        appendImageToList( relativeUrlString, id );
+}
+    
+    
+
 /**
  *this slot is called after the json has been downlaod
  *[1]this flost calls the json parser
  *[2]add jobs in  http Download manager for each parsed entry in parsed json
  */
 void PanoramioPlugin::downloadImages( QString relativeUrlString, QString id ) {
-    disconnect( m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
-                this, SLOT( downloadImages( QString , QString ) ) );
-    connect( m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
-             this, SLOT( appendImageToList( QString , QString ) ) );
-
     for ( int x = 0; x < numberOfImagesToShow; ++x ) {
         temp = panoramioJsonParser.parseObjectOnPosition( QString::fromUtf8( m_storagePolicy->data( id ) ), x );
         parsedData.append( temp );
@@ -121,7 +131,6 @@ void PanoramioPlugin::downloadImages( QString relativeUrlString, QString id ) {
             qDebug() << "adding " << temp.photo_title;
         }
     }
-
 }
 
 /**
@@ -153,18 +162,23 @@ void PanoramioPlugin::downloadPanoramio( int rangeFrom, int rangeTo,
                   + "&miny=" + QString::number( west  * RADIANSTODEGREES )
                   + "&maxx=" + QString::number( north * RADIANSTODEGREES )
                   + "&maxy=" + QString::number( south * RADIANSTODEGREES )
-                  + "&size=medium");
+                  + "&size=small");
+    qDebug() << QString( "Downloading:\n" )
+                + "East: " + QString::number( east ) + '\n'
+                + "West: " + QString::number( west ) + '\n'
+                + "North: " + QString::number( north ) + '\n'
+                + "South: " + QString::number( south ) + '\n'
+                + "From: " + jsonUrl.toString();
     m_downloadManager->addJob( jsonUrl,
-                               "panoramio" + QString::number( east ),
-                               "panoramio" + QString::number( east ) );
-    connect( m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
-             this,              SLOT( downloadImages( QString , QString ) ) );
+                               "panoramio_json_" + QString::number( east ),
+                               "panoramio_json_" + QString::number( east ) );
 }
 
 
 /**
  * trying to install a event filter on marble widget to filter events for our little image widgets
  */
+/*
 bool PanoramioPlugin::eventFilter(QObject *object, QEvent *e) {
     MarbleWidget *widget = dynamic_cast<MarbleWidget*> (object);
     if ( !widget ) {
@@ -175,6 +189,7 @@ bool PanoramioPlugin::eventFilter(QObject *object, QEvent *e) {
         qDebug()<<__func__;
     }
 }
+*/
 
 
 
