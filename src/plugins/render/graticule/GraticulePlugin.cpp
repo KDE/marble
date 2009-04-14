@@ -105,51 +105,72 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
         initLineMaps( notation );
     }
 
-    qreal degreeStep = 360.0 / m_normalLineMap.lowerBound(viewport->radius()).value();
-
-//    qDebug() << "STEP" << degreeStep;
-
     GeoDataLatLonAltBox viewLatLonAltBox = viewport->viewLatLonAltBox();
+
+    // Render the normal grid
+
+    qreal degreeStep = 360.0 / m_normalLineMap.lowerBound(viewport->radius()).value();
 
     renderLongitudeLines( painter, viewLatLonAltBox, degreeStep, degreeStep );  
     renderLatitudeLines(  painter, viewLatLonAltBox, degreeStep );  
     
     painter->setPen( QColor( Qt::yellow ) );
 
-    // Equator
-    renderLatitudeLine( painter, 0.0 );
-    // Meridian
+
+    // Render the equator
+    renderLatitudeLine( painter, 0.0, viewLatLonAltBox.west(), viewLatLonAltBox.east() );
+
+    // Render the Meridian and Antimeridian
     renderLongitudeLines( painter, viewLatLonAltBox, 90.0 );  
 
-    qreal axialTilt = RAD2DEG * dataFacade()->planet()->epsilon();
 
-    // Setting the pen
+    // Render the tropics
     QPen graticulePen = painter->pen();
     graticulePen.setStyle( Qt::DotLine );        
     painter->setPen( graticulePen );
 
-    renderLatitudeLine( painter, +axialTilt );        
-    renderLatitudeLine( painter, -axialTilt );        
+    qreal axialTilt = RAD2DEG * dataFacade()->planet()->epsilon();
 
-    renderLatitudeLine( painter, +90.0 - axialTilt );        
-    renderLatitudeLine( painter, -90.0 + axialTilt );        
+    renderLatitudeLine( painter, +axialTilt, viewLatLonAltBox.west(), viewLatLonAltBox.east() );        
+    renderLatitudeLine( painter, -axialTilt, viewLatLonAltBox.west(), viewLatLonAltBox.east() );        
+
+    renderLatitudeLine( painter, +90.0 - axialTilt, viewLatLonAltBox.west(), viewLatLonAltBox.east() );        
+    renderLatitudeLine( painter, -90.0 + axialTilt, viewLatLonAltBox.west(), viewLatLonAltBox.east() );        
 
     painter->restore();
 
     return true;
 }
 
-void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude )
+void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude,
+                                                qreal fromWestLon,
+                                                qreal toEastLon )
 {
-    GeoDataCoordinates n1(-180.0, latitude, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates n2(-90.0, latitude, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates n3(0.0, latitude, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates n4(+90.0, latitude, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates n5(+180.0, latitude, 0.0, GeoDataCoordinates::Degree );
-
     GeoDataLineString circle( Tessellate | RespectLatitudeCircle ) ;
 
-    circle << n1 << n2 << n3 << n4 << n5;
+    if ( fromWestLon < toEastLon ) {
+        qreal step = ( toEastLon - fromWestLon ) / 4.0;
+
+        for ( int i = 0; i < 5; ++i ) {
+            GeoDataCoordinates n( fromWestLon + i * step, latitude, 0.0, GeoDataCoordinates::Degree );
+            circle << n;        
+        }
+    }
+    else {
+        qreal step = ( +180.0 - toEastLon ) / 4.0;
+
+        for ( int i = 0; i < 5; ++i ) {
+            GeoDataCoordinates n( toEastLon + i * step, latitude, 0.0, GeoDataCoordinates::Degree );
+            circle << n;        
+        }
+
+        step = ( +180 + fromWestLon ) / 4.0;
+
+        for ( int i = 0; i < 5; ++i ) {
+            GeoDataCoordinates n( -180 + i * step, latitude, 0.0, GeoDataCoordinates::Degree );
+            circle << n;        
+        }
+    }
 
     painter->drawPolyline( circle );     
 }
@@ -205,7 +226,7 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
     qreal itStep = southLineLat;
 
     while ( itStep < northLineLat ) {
-        renderLatitudeLine( painter, itStep );
+        renderLatitudeLine( painter, itStep, westLon, eastLon );
 //        qDebug() << "Painted LatLine:" << itStep;
         itStep += step;
 //        qDebug() << "Next LatLine:" << itStep;

@@ -65,7 +65,9 @@ class GraticulePlugin : public RenderPlugin
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
  private:
-    void renderLatitudeLine( GeoPainter *painter, qreal latitude );
+    void renderLatitudeLine( GeoPainter *painter, qreal latitude,
+                                    qreal fromWestLon = -180.0,
+                                    qreal toEastLon = 180.0 );
 
     void renderLongitudeLine( GeoPainter *painter, qreal longitude, 
                                     qreal cutOff = 0.0,
