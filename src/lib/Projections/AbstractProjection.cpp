@@ -20,7 +20,7 @@
 using namespace Marble;
 
 // Maximum amount of nodes that are created automatically between actual nodes.
-static const int maxTessellationNodes = 50;
+static const int maxTessellationNodes = 200;
 
 AbstractProjection::AbstractProjection()
 {

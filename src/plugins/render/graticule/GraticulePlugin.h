@@ -21,6 +21,7 @@
 
 #include "RenderPlugin.h"
 
+#include "GeoDataCoordinates.h"
 
 namespace Marble
 {
@@ -64,17 +65,23 @@ class GraticulePlugin : public RenderPlugin
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
  private:
-    void renderLatitudeCircle( GeoPainter *painter, qreal latitude );
+    void renderLatitudeLine( GeoPainter *painter, qreal latitude );
 
-    void renderLongitudeCircle( GeoPainter *painter, qreal longitude );
-    void renderLongitudeHalfCircle( GeoPainter *painter, qreal longitude, qreal cutOff = 0.0  );
+    void renderLongitudeLine( GeoPainter *painter, qreal longitude, 
+                                    qreal cutOff = 0.0,
+                                    qreal fromSouthLat = -90.0,
+                                    qreal toNorthLat = +90.0 );
 
     void renderLatitudeLines( GeoPainter *painter, 
-                              const GeoDataLatLonAltBox& viewLatLonAltBox, qreal step );
+                              const GeoDataLatLonAltBox& viewLatLonAltBox,
+                              qreal step );
     void renderLongitudeLines( GeoPainter *painter, 
-                              const GeoDataLatLonAltBox& viewLatLonAltBox, qreal step );
+                              const GeoDataLatLonAltBox& viewLatLonAltBox, 
+                              qreal step, 
+                              qreal cutOff = 0.0 );
 
-    void initLineMaps();
+    void initLineMaps(GeoDataCoordinates::Notation);
+    GeoDataCoordinates::Notation m_currentNotation;
 
     // Maps the zoom factor to the amount of lines per 360 deg
     QMap<qreal,qreal> m_boldLineMap;
