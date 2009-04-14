@@ -39,8 +39,8 @@ class MarbleWidget;
 
 class PanoramioPlugin : public RenderPlugin {
     Q_OBJECT
-    Q_INTERFACES(Marble::RenderPluginInterface)
-    MARBLE_PLUGIN(PanoramioPlugin)
+    Q_INTERFACES( Marble::RenderPluginInterface )
+    MARBLE_PLUGIN( PanoramioPlugin )
 
 public:
     QStringList backendTypes() const;
@@ -64,13 +64,20 @@ public:
 
     bool isInitialized() const;
 
-    bool render(GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0);
+    bool render( GeoPainter *painter, ViewportParams *viewport,
+                 const QString& renderPos, GeoSceneLayer * layer = 0 );
 protected:
     bool eventFilter( QObject *object, QEvent *e );
 
 public slots:
-    void slotDownloadImage(QString , QString);   //completed download of json reply fom panoramio
-    void slotAppendImageToList(QString , QString);   //completed download of image
+    /**
+     * Download images from the json-file
+     */
+    void downloadImages( QString , QString );
+    /**
+     * Append images that are have been downloaded
+     */
+    void appendImageToList( QString , QString );
 signals:
     void statusMessageForImageDownloadingProcess(QString);
 private:
@@ -78,7 +85,9 @@ private:
     HttpDownloadManager *m_downloadManager;
     jsonParser panoramioJsonParser;
     int decimalToSexagecimal();//convert decimal to DMS system
-    void downloadPanoramio(int, int, qreal, qreal, qreal, qreal);
+    void downloadPanoramio( int rangeFrom, int rangeTo,
+                            qreal east,    qreal west,
+                            qreal north,   qreal south );
     QList <panoramioDataStructure> parsedData;
     panoramioDataStructure temp;
     QPixmap tempImage;
