@@ -11,6 +11,7 @@
 #include "GraticulePlugin.h"
 
 #include <QtCore/QDebug>
+#include <QtGui/QBrush>
 #include "GeoPainter.h"
 #include "GeoDataLineString.h"
 #include "Planet.h"
@@ -109,13 +110,22 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     // Render the normal grid
 
-    qreal degreeStep = 360.0 / m_normalLineMap.lowerBound(viewport->radius()).value();
+    qreal normalDegreeStep = 360.0 / m_normalLineMap.lowerBound(viewport->radius()).value();
 
-    renderLongitudeLines( painter, viewLatLonAltBox, degreeStep, degreeStep );  
-    renderLatitudeLines(  painter, viewLatLonAltBox, degreeStep );  
+    renderLongitudeLines( painter, viewLatLonAltBox, normalDegreeStep, normalDegreeStep );  
+    renderLatitudeLines(  painter, viewLatLonAltBox, normalDegreeStep );  
+
+    // Render the bold grid
+
+    painter->setPen( QPen( QBrush( Qt::white ), 1.5 ) );
+
+    qreal boldDegreeStep = 360.0 / m_boldLineMap.lowerBound(viewport->radius()).value();
+
+    renderLongitudeLines( painter, viewLatLonAltBox, boldDegreeStep, normalDegreeStep );  
+    renderLatitudeLines(  painter, viewLatLonAltBox, boldDegreeStep );  
+
     
     painter->setPen( QColor( Qt::yellow ) );
-
 
     // Render the equator
     renderLatitudeLine( painter, 0.0, viewLatLonAltBox );
@@ -229,6 +239,10 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
                                            const GeoDataLatLonAltBox& viewLatLonAltBox,
                                            qreal step )
 {
+    if ( step == 0 ) {
+        return;
+    }
+
     // Latitude
     qreal southLat = viewLatLonAltBox.south( GeoDataCoordinates::Degree );
     qreal northLat = viewLatLonAltBox.north( GeoDataCoordinates::Degree );
@@ -248,6 +262,10 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                                             const GeoDataLatLonAltBox& viewLatLonAltBox, 
                                             qreal step, qreal cutOff )
 {
+    if ( step == 0 ) {
+        return;
+    }
+
     // Longitude
     qreal westLon = viewLatLonAltBox.west( GeoDataCoordinates::Degree );
     qreal eastLon = viewLatLonAltBox.east( GeoDataCoordinates::Degree );
@@ -283,12 +301,15 @@ void GraticulePlugin::initLineMaps( GeoDataCoordinates::Notation notation)
 {
     /* Define Upper Bound keys and associated values: */
     m_normalLineMap[90]     = 4;          // 90 deg
-    m_normalLineMap[400]    = 12;          // 90 deg
-    m_normalLineMap[650]   = 36;         // 30 deg
-    m_normalLineMap[8000]   = 72;         // 10 deg
-    m_normalLineMap[16000]  = 360;         //  5 deg
-    m_normalLineMap[32000] = 720;        //  1 deg
-    m_normalLineMap[64000] = 720;        //  0.5 deg = 30'
+    m_normalLineMap[400]    = 12;          // 30 deg
+    m_normalLineMap[650]   = 36;         // 10 deg
+    m_normalLineMap[8000]   = 72;         // 5 deg
+    m_normalLineMap[16000]  = 360;         //  1 deg
+    m_normalLineMap[32000] = 720;        //  0.5 deg
+
+    m_boldLineMap[650]     = 0;         //  1 deg
+    m_boldLineMap[8000]    = 12;         //  1 deg
+    m_boldLineMap[16000]   = 36;         //  1 deg
 
     switch ( notation )
     {
@@ -300,6 +321,15 @@ void GraticulePlugin::initLineMaps( GeoDataCoordinates::Notation notation)
             m_normalLineMap[16384000] = 360 * 1000;    //  0.001 deg
             m_normalLineMap[65536000] = 360 * 2000;    //  0.0005 deg
             m_normalLineMap[262144000] = 360 * 10000;  //  0.00001 deg
+
+            m_boldLineMap[64000]     = 360;          // 0.1 deg
+            m_boldLineMap[256000]    = 720;          // 0.05 deg
+            m_boldLineMap[1024000]   = 360 * 10;     // 0.01 deg
+            m_boldLineMap[4096000]   = 360 * 20;     // 0.005 deg
+            m_boldLineMap[16384000]  = 360 * 100;    // 0.001 deg
+            m_boldLineMap[65535000]  = 360 * 200;    // 0.0005 deg
+            m_boldLineMap[262144000] = 360 * 1000;   // 0.00001 deg
+
         break;
         default:
         case GeoDataCoordinates::DMS :
@@ -310,9 +340,19 @@ void GraticulePlugin::initLineMaps( GeoDataCoordinates::Notation notation)
             m_normalLineMap[16384000] = 360 * 60 * 6;   //  10"
             m_normalLineMap[65536000] = 360 * 60 * 12;  //  5"
             m_normalLineMap[262144000] = 360 * 60 * 60; //  1"
+
+            m_boldLineMap[64000]     = 360;          // 10'
+            m_boldLineMap[256000]    = 720;          // 5'
+            m_boldLineMap[1024000]   = 360 * 6;      // 1'
+            m_boldLineMap[4096000]   = 360 * 12;     // 30"
+            m_boldLineMap[16384000]  = 360 * 60;     // 10"
+            m_boldLineMap[65535000]  = 360 * 60 * 2; // 5"
+            m_boldLineMap[262144000] = 360 * 60 * 6; // 1"
+
         break;
     }
     m_normalLineMap[999999999] = m_normalLineMap.value(262144000);     //  last
+    m_boldLineMap[999999999]   = m_boldLineMap.value(262144000);     //  last
 
     m_currentNotation = notation;
 }
