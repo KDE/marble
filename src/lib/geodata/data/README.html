@@ -29,8 +29,27 @@ GeoDataPlacemark placemark;
 GeoDataFeature placemarkAsFeature = placemark;
 GeoDataPlacemark other = placemarkAsFeature;
 
-return (placemark == other); // returns true
-</code></pre></p>
+return (placemark == other); // should return true
+</code></pre>
+This feature is useful so that you can easily store classes which inherit GeoDataFeature in a QVector&lt;GeoDataFeature&gt;
+which would only be possible with Vectors normally. This is roughly the same as storing a QString in a QVariant (there are no 
+GeoDataFeatures though that can be added at runtime). As an example:
+<pre><code>
+GeoDataPlacemark placemark;
+QVector&lt;GeoDataFeature&gt; m_vector;
+
+m_vector.append( placemark );
+GeoDataFeature placeMarkAsFeature = m_vector.last();
+GeoDataPlacemark other = placemarkAsFeature;
+
+return (placemark == other); // should return true
+</code></pre>
+This feature is the base for the GeoDataContainer classes and for the GeoDataMultiGeometry class.
+<pre>Note: QVector is also implicitly shared. It is not possible to inherit it for the containers 
+as the detach function of QVector is not virtual and thus the detach function of GeoDataContainer or 
+GeoDataMultiGeometry would never be called if you access the data through functions from the Qt base
+class.</pre>
+</p>
 <a name="implicit sharing"><h2>"implicit sharing"</h2></a>
 <p>The <code>GeoDataFeature</code> and <code>GeoDataGeometry</code> classes do use 
 implicit-sharing which means that after copying, only a shallow copy is done. Only 
