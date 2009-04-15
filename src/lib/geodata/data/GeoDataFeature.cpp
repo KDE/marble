@@ -78,13 +78,14 @@ GeoDataFeature::GeoDataFeature( const GeoDataPlacemark& other )
 }
 
 GeoDataFeature::GeoDataFeature( const QString& name )
-    :d( new GeoDataFeaturePrivate() )
+    : d( new GeoDataFeaturePrivate() )
 {
     d->ref.ref();
     d->m_name = name;
 }
 
-GeoDataFeature::GeoDataFeature( GeoDataFeaturePrivate *priv ) : d( priv )
+GeoDataFeature::GeoDataFeature( GeoDataFeaturePrivate *priv ) 
+    : d( priv )
 {
     d->ref.ref();
 }
@@ -536,8 +537,9 @@ void GeoDataFeature::detach()
 
     GeoDataFeaturePrivate* new_d = static_cast<GeoDataFeaturePrivate*>(d->copy());
 
-    if (!d->ref.deref())
+    if (!d->ref.deref()) {
         delete d;
+    }
 
     d = new_d;
     
