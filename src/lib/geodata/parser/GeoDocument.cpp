@@ -39,6 +39,8 @@ GeoDocument::~GeoDocument()
     if (s_leakProtector != 0) {
         fprintf(stderr, "Found %li GeoNode object LEAKS!\n", s_leakProtector);
         s_leakProtector = 0;
+    } else {
+        fprintf(stderr, "No GeoNode object leak!\n");
     }
 #endif
 }
@@ -56,10 +58,16 @@ bool GeoDocument::isGeoSceneDocument() const
 
 GeoNode::GeoNode()
 {
+#if DUMP_GEONODE_LEAKS > 0
+    GeoDocument::s_leakProtector++;
+#endif
 }
 
 GeoNode::~GeoNode()
 {
+#if DUMP_GEONODE_LEAKS > 0
+    --GeoDocument::s_leakProtector;
+#endif
 }
 
 }
