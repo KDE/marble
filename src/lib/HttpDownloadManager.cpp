@@ -289,6 +289,7 @@ void HttpDownloadManager::jobRedirected( HttpJob *job, QUrl newLocation )
 
 void HttpDownloadManager::jobDataReceived( HttpJob *job, QByteArray data )
 {
+    emit downloadComplete( data, job->initiatorId() );
     const bool error = storagePolicy()
         && !storagePolicy()->updateFile( job->destinationFileName(), data );
     reportResult( job, error );

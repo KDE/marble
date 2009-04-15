@@ -104,6 +104,14 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     void downloadComplete( QString, QString );
 
     /**
+     * This signal is emitted if a file is downloaded and the data argument
+     * contains the files content. The HttpDownloadManager takes care to save
+     * it using the given storage policy.
+     * This is experimental and needs more testing.
+     */
+    void downloadComplete( QByteArray data, QString initiatorId );
+
+    /**
      * Signal is emitted when a new job is added to the queue.
      */
     void jobAdded();
