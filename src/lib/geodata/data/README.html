@@ -45,10 +45,6 @@ GeoDataPlacemark other = placemarkAsFeature;
 return (placemark == other); // should return true
 </code></pre>
 This feature is the base for the GeoDataContainer classes and for the GeoDataMultiGeometry class.
-<pre>Note: QVector is also implicitly shared. It is not possible to inherit it for the containers 
-as the detach function of QVector is not virtual and thus the detach function of GeoDataContainer or 
-GeoDataMultiGeometry would never be called if you access the data through functions from the Qt base
-class.</pre>
 </p>
 <a name="implicit sharing"><h2>"implicit sharing"</h2></a>
 <p>The <code>GeoDataFeature</code> and <code>GeoDataGeometry</code> classes do use 
@@ -74,8 +70,10 @@ object. If the counter reaches 0 again, the private object gets deleted too.
 This is mostly hidden by <code>QSharedData</code>/<code>QSharedDataPointer</code> 
 so that you don't have to worry about that.<p/>
 <p>The problems arise, when you try to derive from an implicitly shared 
-class. The <code>detach()</code> function will not call the function from the derived class if 
-changes occur in the members of the base class.</p>
+class. The <code>detach()</code> function is not virtual in the current implementation of 
+QVector and thus will not call the function from the derived class if 
+changes occur through the interface of the base class. This leads to both GeoDataContainer
+and GeoDataMultiGeometry not inheriting QVector but rather rebuilding the interface.</p>
 
 <a name="How implicit sharing and derivation can work together"><h2>How "implicit sharing" and derivation can work together</h2></a>
 <p>As described above, we can't use <code>QSharedData</code> directly if we want 
