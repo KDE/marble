@@ -25,7 +25,10 @@
 
 #include "geodata_export.h"
 
+#ifdef _WIN32
 #define DUMP_GEONODE_LEAKS 1
+#endif
+
 namespace Marble
 {
 
@@ -41,7 +44,9 @@ public:
 
     virtual bool isGeoDataDocument() const;
     virtual bool isGeoSceneDocument() const;
+#ifdef DUMP_GEONODE_LEAKS > 0
     static unsigned long s_leakProtector;
+#endif
 };
 
 /**
