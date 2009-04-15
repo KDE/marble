@@ -44,7 +44,7 @@ public:
 
     virtual bool isGeoDataDocument() const;
     virtual bool isGeoSceneDocument() const;
-#ifdef DUMP_GEONODE_LEAKS > 0
+#if DUMP_GEONODE_LEAKS > 0
     static unsigned long s_leakProtector;
 #endif
 };
