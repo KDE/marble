@@ -25,6 +25,11 @@ class GeoDataPlacemarkPrivate : public Marble::GeoDataFeaturePrivate
         m_population( -1 )
     {
     }
+    
+    virtual ~GeoDataPlacemarkPrivate()
+    {
+        delete m_geometry;
+    }
 
     void operator=( const GeoDataPlacemarkPrivate& other )
     {
