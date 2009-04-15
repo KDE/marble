@@ -14,7 +14,6 @@
 
 #ifndef MARBLEPANORAMIOPLUGIN_H
 #define MARBLEPANORAMIOPLUGIN_H
-#define RADIANSTODEGREES 57.2957795
 
 #include <QtCore/QObject>
 #include "../lib/HttpDownloadManager.h"

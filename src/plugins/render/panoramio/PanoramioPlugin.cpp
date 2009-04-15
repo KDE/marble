@@ -19,6 +19,7 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
 #include "ViewportParams.h"
+#include "global.h"
 
 
 
@@ -82,8 +83,8 @@ bool PanoramioPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     if( firstTime ) {
         // GeoDataLatLonAltBox latLonAltBox = viewport->viewLatLonAltBox();
         downloadPanoramio( 0, numberOfImagesToShow,
-                           180 / RADIANSTODEGREES, -180 / RADIANSTODEGREES, 
-                            90 / RADIANSTODEGREES, - 90 / RADIANSTODEGREES );
+                           180 * DEG2RAD, -180 * DEG2RAD,
+                            90 * DEG2RAD, - 90 * DEG2RAD );
          firstTime = false;
     }
     painter->autoMapQuality();
@@ -158,10 +159,10 @@ void PanoramioPlugin::downloadPanoramio( int rangeFrom, int rangeTo,
     QUrl jsonUrl( "http://www.panoramio.com/map/get_panoramas.php?from="
                   + QString::number( rangeFrom )
                   + "&to=" + QString::number( rangeTo )
-                  + "&minx=" + QString::number( east  * RADIANSTODEGREES )
-                  + "&miny=" + QString::number( west  * RADIANSTODEGREES )
-                  + "&maxx=" + QString::number( north * RADIANSTODEGREES )
-                  + "&maxy=" + QString::number( south * RADIANSTODEGREES )
+                  + "&minx=" + QString::number( east  * RAD2DEG )
+                  + "&miny=" + QString::number( west  * RAD2DEG )
+                  + "&maxx=" + QString::number( north * RAD2DEG )
+                  + "&maxy=" + QString::number( south * RAD2DEG )
                   + "&size=small");
     qDebug() << QString( "Downloading:\n" )
                 + "East: " + QString::number( east ) + '\n'
