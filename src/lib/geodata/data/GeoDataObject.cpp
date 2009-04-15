@@ -38,7 +38,7 @@ GeoDataObject::GeoDataObject()
 }
 
 GeoDataObject::GeoDataObject( GeoDataObject const & other )
-    : GeoNode( other ), Serializable( other ),
+    : Serializable( other ),
       d( new GeoDataObjectPrivate( *other.d ) )
 {
 }
