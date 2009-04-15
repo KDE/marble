@@ -15,13 +15,7 @@
 // Qt
 #include <QtCore/QtGlobal>
 #include <QtCore/QFile>
-
-#if QT_VERSION >= 0x040300
 #include <QtCore/QDirIterator>
-#else
-#include <QtCore/QDir>
-#include <QtCore/QFileInfoListIterator>
-#endif
 
 using namespace Marble;
 
@@ -77,7 +71,6 @@ quint64 DiscCache::cacheLimit() const
 
 void DiscCache::clear()
 {
-#if QT_VERSION >= 0x040300
     QDirIterator it( m_CacheDirectory );
 
     // Remove all files from cache directory
@@ -89,22 +82,6 @@ void DiscCache::clear()
 
         QFile::remove( it.fileName() );
     }
-#else
-    const QDir cacheDir( m_CacheDirectory );
-	const QFileInfoList cachedFiles = cacheDir.entryInfoList();
-
-	QListIterator<QFileInfo> it( cachedFiles );
-    QFileInfo fileinfo;
-
-    while ( it.hasNext() ) {
-        fileinfo = it.next();
-
-        if ( fileinfo.fileName() == indexFileName( m_CacheDirectory ) ) // skip index file
-            continue;
-
-        QFile::remove( fileinfo.fileName() );
-    }
-#endif
 
     // Delete entries
     m_Entries.clear();

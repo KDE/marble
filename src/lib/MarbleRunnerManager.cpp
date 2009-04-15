@@ -52,14 +52,7 @@ MarbleRunnerManager::~MarbleRunnerManager()
     {
         runner->quit();
         runner->wait();
-#if QT_VERSION >= 0x040400
         m_runners.removeOne(runner);
-#else
-        int index = m_runners.indexOf(runner);
-        if (index != -1) {
-          m_runners.removeAt(index);
-        }
-#endif
         delete runner;
     }
 }
@@ -93,14 +86,7 @@ void MarbleRunnerManager::newText(QString text)
 
 void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVector<GeoDataPlacemark> result )
 {
-#if QT_VERSION >= 0x040400
     m_runners.removeOne(runner);
-#else
-    int index = m_runners.indexOf(runner);
-    if (index != -1) {
-      m_runners.removeAt(index);
-    }
-#endif
     qDebug() << "Runner finished, active runners: " << m_runners.size();
     qDebug() << "Runner reports" << result.size() << "results";
     if( result.isEmpty() )

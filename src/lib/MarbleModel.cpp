@@ -15,11 +15,7 @@
 
 #include <cmath>
 
-#if QT_VERSION < 0x040400
-# include <qatomic.h>
-#else
-# include <QtCore/QAtomicInt>
-#endif
+#include <QtCore/QAtomicInt>
 #include <QtCore/QDebug>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
@@ -76,10 +72,6 @@
 
 namespace Marble
 {
-
-#if QT_VERSION < 0x040400
-    typedef QAtomic QAtomicInt;
-#endif
 
 class MarbleModelPrivate
 {
@@ -431,16 +423,8 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             for (; itds != endds; ++itds) {
                 GeoSceneAbstractDataset* dataset = *itds;
                 if( dataset->fileFormat() == "KML" ) {
-#if QT_VERSION >= 0x040400
                     loadedContainers.removeOne(
 reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename() );
-#else
-                    int index = loadedContainers.indexOf(
-reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename() );
-                    if (index != -1) {
-                        loadedContainers.removeAt(index);
-                    }
-#endif
                     loadList << reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename();          
                 }
             }

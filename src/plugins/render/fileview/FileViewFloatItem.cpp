@@ -102,11 +102,7 @@ bool FileViewFloatItem::needsUpdate(ViewportParams *viewport)
 QPainterPath FileViewFloatItem::backgroundShape() const
 {
     QPainterPath path;
-#if QT_VERSION >= 0x040400
     path.addRoundedRect( QRectF( 0.0, 0.0, renderedRect().size().width() - 1, renderedRect().size().height() - 1 ), 6, 6 );
-#else
-    path.addRoundRect( QRectF( 0.0, 0.0, renderedRect().size().width() - 1, renderedRect().size().height() - 1 ), 6, 6 );
-#endif
     return path;
 }
 
