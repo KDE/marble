@@ -108,6 +108,8 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     int minimumZoom() const;
 
     void setMapThemeModel( QStandardItemModel *mapThemeModel );
+  
+    void updateCelestialModel();
 
  Q_SIGNALS:
     /**
@@ -158,6 +160,8 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
 
     void selectMapTheme( const QString& );
 
+   
+
     void projectionSelected( Projection );
     
     void gpsInputDisabled( bool );
@@ -167,6 +171,8 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
  public Q_SLOTS:
 
     void selectTheme( const QString & );
+
+    void celestialBodySelected( const QString& ); 
 
     void selectProjection( Projection projection );
 
@@ -226,12 +232,12 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      */
     void setFileViewTabShown( bool show );
 
+    /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
+    void updateMapThemeView();
+
     void projectionSelected( int projectionIndex );
 
  private Q_SLOTS:
-
-    /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
-    void updateMapThemeView();
 
     /// called whenever the user types something new in the search box
     void searchLineChanged(const QString &search);

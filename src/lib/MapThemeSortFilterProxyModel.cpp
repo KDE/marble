@@ -35,4 +35,13 @@ bool MapThemeSortFilterProxyModel::lessThan ( const QModelIndex & left, const QM
         return QSortFilterProxyModel::lessThan( left, right);
 }
 
+bool MapThemeSortFilterProxyModel::filterAcceptsRow(int sourceRow,
+         const QModelIndex &sourceParent) const
+ {
+     QModelIndex index = sourceModel()->index(sourceRow, 1, sourceParent);
+
+     return (sourceModel()->data(index).toString().contains(filterRegExp()));
+            
+ }
+
 #include "MapThemeSortFilterProxyModel.moc"

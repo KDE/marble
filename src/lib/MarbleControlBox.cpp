@@ -32,6 +32,7 @@
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
 #include <QtGui/QSortFilterProxyModel>
+#include <QtGui/QStringListModel>
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QTextFrame>
 
@@ -49,6 +50,10 @@
 #include "MarbleRunnerManager.h"
 #include "MathHelper.h"
 #include "MapThemeSortFilterProxyModel.h"
+#include "MapThemeManager.h"
+#include "GeoSceneDocument.h"
+#include "GeoSceneHead.h"
+#include "Planet.h"
 
 #include "GeoOnfParser.h"
 #include "GeoDataDocument.h"
@@ -67,6 +72,7 @@ class MarbleControlBoxPrivate
     MarbleWidget  *m_widget;
     QString        m_searchTerm;
     bool           m_searchTriggered;
+    QStringListModel *m_celestialList;
 
     Ui::MarbleControlBox  uiWidget;
     QWidget              *m_navigationWidget;
@@ -81,6 +87,8 @@ class MarbleControlBoxPrivate
     MapThemeSortFilterProxyModel *m_mapSortProxy;
     
     MarbleRunnerManager  *m_runnerManager;
+    GeoSceneDocument      *mapTheme;
+    QStringList  celestialList;
 };
 
 MarbleControlBoxPrivate::MarbleControlBoxPrivate()
@@ -97,12 +105,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->m_widget = 0;
     d->m_searchTerm.clear();
     d->m_searchTriggered = false;
-
-    d->uiWidget.setupUi( this );
-
-//  Hide the controls before their functionality is implemented:
-    d->uiWidget.celestialBodyLabel->setVisible( false );
-    d->uiWidget.celestialBodyComboBox->setVisible( false );
+    d->uiWidget.setupUi( this );    
 
     setFocusPolicy( Qt::NoFocus );
 //    setFocusProxy( d->uiWidget.searchLineEdit );
@@ -169,10 +172,15 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     d->m_mapThemeModel = 0;
 
+    d->m_celestialList = new QStringListModel();
+    d->uiWidget.celestialBodyComboBox->setModel( d->m_celestialList );
+
     connect( d->uiWidget.marbleThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
              this,                              SIGNAL( selectMapTheme( const QString& ) ) );
     connect( d->uiWidget.projectionComboBox,    SIGNAL( currentIndexChanged( int ) ),
              this,                              SLOT( projectionSelected( int ) ) );
+    connect( d->uiWidget.celestialBodyComboBox, SIGNAL( currentIndexChanged( const QString& ) ),
+             this,                              SLOT( celestialBodySelected( const QString& ) ) );
 
     connect( d->uiWidget.zoomSlider,  SIGNAL( sliderPressed() ),
              this,                      SLOT( adjustForAnimation() ) );
@@ -201,13 +209,27 @@ void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel )
 {
     d->m_mapThemeModel = mapThemeModel;
     d->m_mapSortProxy->setSourceModel( d->m_mapThemeModel );
+    d->m_mapSortProxy->setFilterRegExp(QRegExp( d->uiWidget.celestialBodyComboBox->currentText(), Qt::CaseInsensitive,QRegExp::FixedString));
     d->m_mapSortProxy->sort( 0 );
     d->uiWidget.marbleThemeSelectView->setModel( d->m_mapSortProxy );
     connect( d->m_mapThemeModel,       SIGNAL( rowsInserted( QModelIndex, int, int ) ),
              this,                     SLOT( updateMapThemeView() ) );
-    updateMapThemeView();
 }
 
+void MarbleControlBox::updateCelestialModel()
+{
+    int row = d->m_mapThemeModel->rowCount();
+
+    for ( int i = 0; i < row; ++i )
+    {
+        QString newCelestialBody = ( d->m_mapThemeModel->data( d->m_mapThemeModel->index( i, 1 ) ).toString() ).section( '/', 0, 0 );
+        if ( !d->celestialList.contains( newCelestialBody ) )
+        {
+            d->celestialList.append( newCelestialBody );
+            d->m_celestialList->setStringList( d->celestialList );
+        }
+    }   
+}
 
 void MarbleControlBox::updateButtons( int value )
 {
@@ -296,6 +318,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( d->m_widget, SIGNAL( themeChanged( QString ) ),
              this,        SLOT( selectTheme( QString ) ) );
 
+
     connect( d->m_widget, SIGNAL( projectionChanged( Projection ) ),
              this,        SLOT( selectProjection( Projection ) ) );
     selectProjection( d->m_widget->projection() );
@@ -370,6 +393,7 @@ int MarbleControlBox::minimumZoom() const
 
 void MarbleControlBox::updateMapThemeView()
 {
+    updateCelestialModel();
     if (d->m_widget)
         selectTheme( d->m_widget->mapThemeId() );
 }
@@ -558,7 +582,6 @@ void MarbleControlBox::selectTheme( const QString &theme )
 {
     if ( !d->m_mapSortProxy || !d->m_widget )
         return;
-
     // Check if the new selected theme is different from the current one
     QModelIndex currentIndex = d->uiWidget.marbleThemeSelectView->currentIndex();
     QString indexTheme = d->m_mapSortProxy->data( d->m_mapSortProxy->index( 
@@ -579,12 +602,19 @@ void MarbleControlBox::selectTheme( const QString &theme )
             if( items.size() >= 1 ) {
                 QModelIndex iterIndex = items.at( 0 )->index();
                 QModelIndex iterIndexName = d->m_mapSortProxy->mapFromSource( iterIndex.sibling( iterIndex.row(), 0 ) );
-
+		
                 d->uiWidget.marbleThemeSelectView->setCurrentIndex( iterIndexName );
+
                 d->uiWidget.marbleThemeSelectView->scrollTo( iterIndexName );
+
+
             }
         }
+        const  int index = d->uiWidget.celestialBodyComboBox->findText(theme.section('/',0,0), Qt::MatchExactly);
+	d->uiWidget.celestialBodyComboBox->setCurrentIndex(index);
     }
+	
+
 }
 
 void MarbleControlBox::selectProjection( Projection projection )
@@ -593,12 +623,18 @@ void MarbleControlBox::selectProjection( Projection projection )
         d->uiWidget.projectionComboBox->setCurrentIndex( (int) projection );
 }
 
+void MarbleControlBox:: celestialBodySelected( const QString& celestialBodyId )
+{
+    setMapThemeModel( d->m_mapThemeModel );
+    QModelIndex index = d->m_mapSortProxy->index(0,1);
+    d->m_widget->setMapThemeId( d->m_mapSortProxy->data(index).toString());
+    updateMapThemeView();
+}
 // Relay a signal and convert the parameter from an int to a Projection.
 void MarbleControlBox::projectionSelected( int projectionIndex )
 {
     emit projectionSelected( (Projection) projectionIndex );
 }
-
 
 void MarbleControlBox::mapCenterOnSignal( const QModelIndex &index )
 {

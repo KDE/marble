@@ -40,7 +40,6 @@
 #include "lib/MarbleAboutDialog.h"
 #include "lib/SunControlWidget.h"
 #include "lib/MarbleLocale.h"
-
 #include "AbstractFloatItem.h"
 
 #include "QtMarbleConfigDialog.h"

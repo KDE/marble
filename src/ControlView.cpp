@@ -53,6 +53,7 @@ ControlView::ControlView( QWidget *parent )
     m_mapThemeManager = new MapThemeManager;
 
     m_control->setMapThemeModel( m_mapThemeManager->mapThemeModel() );
+    m_control->updateMapThemeView();
 }
 
 ControlView::~ControlView()
