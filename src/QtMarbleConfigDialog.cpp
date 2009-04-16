@@ -37,18 +37,18 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( QWidget *parent )
 {
     QTabWidget *tabWidget = new QTabWidget( this );
     QDialogButtonBox *buttons = 
-	new QDialogButtonBox(   QDialogButtonBox::Ok
-	                      | QDialogButtonBox::Apply
-			      | QDialogButtonBox::Cancel,
-			      Qt::Horizontal,
-			      this );
-			      
+    new QDialogButtonBox( QDialogButtonBox::Ok
+                        | QDialogButtonBox::Apply
+                        | QDialogButtonBox::Cancel,
+                          Qt::Horizontal,
+                          this );
+                  
     // Connect the signals of the ButtonBox
     // to the corresponding slots of the dialog.
     connect( buttons, SIGNAL( accepted() ), this, SLOT( accept() ) ); // Ok
     connect( buttons, SIGNAL( rejected() ), this, SLOT( reject() ) ); // Cancel
     connect( buttons->button( QDialogButtonBox::Apply ),SIGNAL( clicked() ),
-	     this, SLOT( writeSettings() ) );                         // Apply
+             this, SLOT( writeSettings() ) );                         // Apply
     // If the dialog is accepted. Save the settings.
     connect( this, SIGNAL( accepted() ), this, SLOT( writeSettings() ) );
 
@@ -71,9 +71,9 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( QWidget *parent )
     tabWidget->addTab( w_cacheSettings, tr( "Cache and Proxy" ) );
     // Forwarding clear button signals
      connect( w_cacheSettings,               SIGNAL( clearVolatileCache() ),
- 	      this, SIGNAL( clearVolatileCacheClicked() ) );
+           this, SIGNAL( clearVolatileCacheClicked() ) );
      connect( w_cacheSettings,               SIGNAL( clearPersistentCache() ),
- 	      this, SIGNAL( clearPersistentCacheClicked() ) );
+           this, SIGNAL( clearPersistentCacheClicked() ) );
     
     QVBoxLayout *layout = new QVBoxLayout;
     layout->addWidget( tabWidget );
@@ -145,9 +145,9 @@ void QtMarbleConfigDialog::readSettings()
     ui_navigationSettings->kcfg_dragLocation->setCurrentIndex( dragLocation() );
     ui_navigationSettings->kcfg_onStartup->setCurrentIndex( onStartup() );
     if( animateTargetVoyage() )
-	ui_navigationSettings->kcfg_animateTargetVoyage->setCheckState( Qt::Checked );
+    ui_navigationSettings->kcfg_animateTargetVoyage->setCheckState( Qt::Checked );
     else
-	ui_navigationSettings->kcfg_animateTargetVoyage->setCheckState( Qt::Unchecked );
+    ui_navigationSettings->kcfg_animateTargetVoyage->setCheckState( Qt::Unchecked );
     
     // Cache
     w_cacheSettings->kcfg_volatileTileCacheLimit->setValue( volatileTileCacheLimit() );
@@ -172,40 +172,40 @@ void QtMarbleConfigDialog::writeSettings()
     syncSettings();
     
     settings->beginGroup( "View" );
-	settings->setValue( "distanceUnit", ui_viewSettings->kcfg_distanceUnit->currentIndex() );
-	settings->setValue( "angleUnit", ui_viewSettings->kcfg_angleUnit->currentIndex() );
-	settings->setValue( "stillQuality", ui_viewSettings->kcfg_stillQuality->currentIndex() );
-	settings->setValue( "animationQuality", ui_viewSettings->kcfg_animationQuality->currentIndex() );
-	settings->setValue( "labelLocalization", ui_viewSettings->kcfg_labelLocalization->currentIndex() );
-	settings->setValue( "mapFont", ui_viewSettings->kcfg_mapFont->currentFont() );
+    settings->setValue( "distanceUnit", ui_viewSettings->kcfg_distanceUnit->currentIndex() );
+    settings->setValue( "angleUnit", ui_viewSettings->kcfg_angleUnit->currentIndex() );
+    settings->setValue( "stillQuality", ui_viewSettings->kcfg_stillQuality->currentIndex() );
+    settings->setValue( "animationQuality", ui_viewSettings->kcfg_animationQuality->currentIndex() );
+    settings->setValue( "labelLocalization", ui_viewSettings->kcfg_labelLocalization->currentIndex() );
+    settings->setValue( "mapFont", ui_viewSettings->kcfg_mapFont->currentFont() );
     settings->endGroup();
     
     settings->beginGroup( "Navigation" );
-	settings->setValue( "dragLocation", ui_navigationSettings->kcfg_dragLocation->currentIndex() );
-	settings->setValue( "onStartup", ui_navigationSettings->kcfg_onStartup->currentIndex() );
-	if( ui_navigationSettings->kcfg_animateTargetVoyage->checkState() == Qt::Checked )
-	    settings->setValue( "animateTargetVoyage", true );
-	else
-	    settings->setValue( "animateTargetVoyage", false );
+    settings->setValue( "dragLocation", ui_navigationSettings->kcfg_dragLocation->currentIndex() );
+    settings->setValue( "onStartup", ui_navigationSettings->kcfg_onStartup->currentIndex() );
+    if( ui_navigationSettings->kcfg_animateTargetVoyage->checkState() == Qt::Checked )
+        settings->setValue( "animateTargetVoyage", true );
+    else
+        settings->setValue( "animateTargetVoyage", false );
     settings->endGroup();
     
     settings->beginGroup( "Cache" );
-	settings->setValue( "volatileTileCacheLimit", w_cacheSettings->kcfg_volatileTileCacheLimit->value() );
-	settings->setValue( "persistentTileCacheLimit", w_cacheSettings->kcfg_persistentTileCacheLimit->value() );
-	settings->setValue( "proxyUrl", w_cacheSettings->kcfg_proxyUrl->text() );
-	settings->setValue( "proxyPort", w_cacheSettings->kcfg_proxyPort->value() );
-	settings->setValue( "proxyHttp", w_cacheSettings->kcfg_proxyHttp->isChecked() );
-	settings->setValue( "proxySocks5", w_cacheSettings->kcfg_proxySocks5->isChecked() );
-	if ( w_cacheSettings->kcfg_proxyAuth->isChecked() ) {
-	    settings->setValue( "proxyAuth", true );
-	    settings->setValue( "proxyUser", w_cacheSettings->kcfg_proxyUser->text() );
-	    settings->setValue( "proxyPass", w_cacheSettings->kcfg_proxyPass->text() );
-	} else {
-	    settings->setValue( "proxyAuth", false );
-	}
+    settings->setValue( "volatileTileCacheLimit", w_cacheSettings->kcfg_volatileTileCacheLimit->value() );
+    settings->setValue( "persistentTileCacheLimit", w_cacheSettings->kcfg_persistentTileCacheLimit->value() );
+    settings->setValue( "proxyUrl", w_cacheSettings->kcfg_proxyUrl->text() );
+    settings->setValue( "proxyPort", w_cacheSettings->kcfg_proxyPort->value() );
+    settings->setValue( "proxyHttp", w_cacheSettings->kcfg_proxyHttp->isChecked() );
+    settings->setValue( "proxySocks5", w_cacheSettings->kcfg_proxySocks5->isChecked() );
+    if ( w_cacheSettings->kcfg_proxyAuth->isChecked() ) {
+        settings->setValue( "proxyAuth", true );
+        settings->setValue( "proxyUser", w_cacheSettings->kcfg_proxyUser->text() );
+        settings->setValue( "proxyPass", w_cacheSettings->kcfg_proxyPass->text() );
+    } else {
+        settings->setValue( "proxyAuth", false );
+    }
 
     settings->endGroup();
-	
+    
     emit settingsChanged();
 }
 
