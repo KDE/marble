@@ -16,6 +16,8 @@
 
 #include <QtCore/QDebug>
 
+// #define DEBUG_DRAW_NODES
+
 namespace Marble
 {
 
@@ -60,6 +62,10 @@ class ClipPainterPrivate
     inline void clipOnce();
 
     inline qreal _m( const QPointF & start, const QPointF & end ) const;
+
+#ifdef DEBUG_DRAW_NODES
+    void debugDrawNodes( const QPolygonF & ); 
+#endif
 };
 
 }
@@ -136,6 +142,10 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
     else {
         QPainter::drawPolyline( polygon );
     }
+
+#ifdef DEBUG_DRAW_NODES
+    d->debugDrawNodes( polygon );
+#endif
 }
 
 ClipPainterPrivate::ClipPainterPrivate( ClipPainter * parent )
@@ -836,3 +846,44 @@ void ClipPainterPrivate::clipOnce()
     }
 
 }
+
+#ifdef DEBUG_DRAW_NODES
+
+void ClipPainterPrivate::debugDrawNodes( const QPolygonF & polygon ) {
+
+    q->save();
+    q->setRenderHint( QPainter::Antialiasing, false );
+
+    q->setPen( Qt::red );
+    q->setBrush( Qt::transparent );
+
+    const QVector<QPointF>::const_iterator  itStartPoint = polygon.begin();
+    const QVector<QPointF>::const_iterator  itEndPoint   = polygon.end();
+    QVector<QPointF>::const_iterator        itPoint      = itStartPoint;
+
+    for (; itPoint != itEndPoint; ++itPoint ) {
+        
+        if ( itPoint == itStartPoint || itPoint == itStartPoint + 1 ) {
+            q->setPen( Qt::darkGreen );
+            if ( itPoint == itStartPoint ) {
+                q->drawRect( itPoint->x() - 2.5, itPoint->y() - 2.5 , 5.0, 5.0 );
+            }
+            else {
+                q->drawRect( itPoint->x() - 1.5, itPoint->y() - 1.5 , 3.0, 3.0 );
+            }
+            q->setPen( Qt::red );
+        }
+        else if ( itPoint == itEndPoint - 1 || itPoint == itEndPoint -1 ) {
+            q->setPen( Qt::blue );
+            q->drawRect( itPoint->x() - 1.5, itPoint->y() - 1.5 , 3.0, 3.0 );
+            q->setPen( Qt::red );
+        }
+        else {
+            q->drawRect( itPoint->x() - 1.5, itPoint->y() - 1.5 , 3.0, 3.0 );
+        }
+
+    }
+    q->restore();
+}
+
+#endif

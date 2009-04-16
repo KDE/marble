@@ -36,7 +36,7 @@ QString GraticulePlugin::renderPolicy() const
 
 QStringList GraticulePlugin::renderPosition() const
 {
-    return QStringList( "SURFACE" ); // although this is not a float item we choose the position of one
+    return QStringList( "SURFACE" );
 }
 
 QString GraticulePlugin::name() const
@@ -87,11 +87,7 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->autoMapQuality();
 
-    painter->setPen( QColor( Qt::white ) );
-
-
-    GeoDataCoordinates::Notation notation = GeoDataCoordinates::defaultNotation();
-    if ( notation != m_currentNotation ) {
+    if ( m_currentNotation != GeoDataCoordinates::defaultNotation() ) {
         initLineMaps( notation );
     }
 
@@ -110,6 +106,9 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     // Render the normal grid
 
+    painter->setPen( QColor( Qt::white ) );
+
+    // calculate the angular distance between coordinate lines of the normal grid
     qreal normalDegreeStep = 360.0 / m_normalLineMap.lowerBound(viewport->radius()).value();
 
     renderLongitudeLines( painter, viewLatLonAltBox, normalDegreeStep, normalDegreeStep );  
@@ -119,6 +118,7 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     painter->setPen( QPen( QBrush( Qt::white ), 1.5 ) );
 
+    // calculate the angular distance between coordinate lines of the bold grid
     qreal boldDegreeStep = 360.0 / m_boldLineMap.lowerBound(viewport->radius()).value();
 
     renderLongitudeLines( painter, viewLatLonAltBox, boldDegreeStep, normalDegreeStep );  
@@ -138,6 +138,7 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     graticulePen.setStyle( Qt::DotLine );        
     painter->setPen( graticulePen );
 
+    // Determine the planet's axial tilt
     qreal axialTilt = RAD2DEG * dataFacade()->planet()->epsilon();
 
     // Render the tropics
@@ -171,20 +172,20 @@ void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude,
     qreal toEastLon   = viewLatLonAltBox.east( GeoDataCoordinates::Degree );
 
     if ( fromWestLon < toEastLon ) {
-        qreal step = ( toEastLon - fromWestLon ) / 4.0;
+        qreal step = ( toEastLon - fromWestLon ) * 0.25;
 
         for ( int i = 0; i < 5; ++i ) {
             line << GeoDataCoordinates( fromWestLon + i * step, latitude, 0.0, GeoDataCoordinates::Degree );
         }
     }
     else {
-        qreal step = ( +180.0 - toEastLon ) / 4.0;
+        qreal step = ( +180.0 - toEastLon ) * 0.25;
 
         for ( int i = 0; i < 5; ++i ) {
             line << GeoDataCoordinates( toEastLon + i * step, latitude, 0.0, GeoDataCoordinates::Degree );
         }
 
-        step = ( +180 + fromWestLon ) / 4.0;
+        step = ( +180 + fromWestLon ) * 0.25;
 
         for ( int i = 0; i < 5; ++i ) {
             line << GeoDataCoordinates( -180 + i * step, latitude, 0.0, GeoDataCoordinates::Degree );
@@ -239,7 +240,7 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
                                            const GeoDataLatLonAltBox& viewLatLonAltBox,
                                            qreal step )
 {
-    if ( step == 0 ) {
+    if ( step <= 0 ) {
         return;
     }
 
@@ -262,7 +263,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                                             const GeoDataLatLonAltBox& viewLatLonAltBox, 
                                             qreal step, qreal cutOff )
 {
-    if ( step == 0 ) {
+    if ( step <= 0 ) {
         return;
     }
 

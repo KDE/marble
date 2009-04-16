@@ -122,7 +122,6 @@ class GraticulePlugin : public RenderPlugin
     // Maps the zoom factor to the amount of lines per 360 deg
     QMap<qreal,qreal> m_boldLineMap;
     QMap<qreal,qreal> m_normalLineMap;
-    QMap<qreal,qreal> m_thinLineMap;
 };
 
 }
