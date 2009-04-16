@@ -66,9 +66,10 @@ void GpsLayer::paintLayer( ClipPainter *painter,
         paintCurrentPosition( painter, canvasSize, viewParams );
     }
 
+    const QVector<GpxFile*> * const allFiles = m_fileModel->allFiles();
     QVector<GpxFile*>::const_iterator it;
-    for( it = m_fileModel->allFiles()->constBegin(); 
-         it < m_fileModel->allFiles()->constEnd(); ++it ){
+    for( it = allFiles->constBegin();
+         it != allFiles->constEnd(); ++it ) {
         (*it)->draw( painter, canvasSize, viewParams );
     }
 }
