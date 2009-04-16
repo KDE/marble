@@ -411,14 +411,16 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     QStringList loadedContainers = d->m_placemarkmanager->fileViewModel()->containers();
     qDebug() << loadedContainers;
     QStringList loadList;
-    QVector<GeoSceneLayer*>::const_iterator it = d->m_mapTheme->map()->layers().constBegin();
-    QVector<GeoSceneLayer*>::const_iterator end = d->m_mapTheme->map()->layers().constEnd();
+    const QVector<GeoSceneLayer*> & layers = d->m_mapTheme->map()->layers();
+    QVector<GeoSceneLayer*>::const_iterator it = layers.constBegin();
+    QVector<GeoSceneLayer*>::const_iterator end = layers.constEnd();
     for (; it != end; ++it) {
         GeoSceneLayer* layer = *it;
         if ( layer->backend() == dgml::dgmlValue_geodata && layer->datasets().count() > 0 ) {
             // look for documents
-            QVector<GeoSceneAbstractDataset*>::const_iterator itds = layer->datasets().constBegin();
-            QVector<GeoSceneAbstractDataset*>::const_iterator endds = layer->datasets().constEnd();
+            const QVector<GeoSceneAbstractDataset*> & datasets = layer->datasets();
+            QVector<GeoSceneAbstractDataset*>::const_iterator itds = datasets.constBegin();
+            QVector<GeoSceneAbstractDataset*>::const_iterator endds = datasets.constEnd();
             for (; itds != endds; ++itds) {
                 GeoSceneAbstractDataset* dataset = *itds;
                 if( dataset->fileFormat() == "KML" ) {
