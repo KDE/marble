@@ -84,9 +84,9 @@ class MarbleModelPrivate
     {
     }
 
-    void  resize( int width, int height );
-    void  notifyModelChanged();
-    void  geoDataDocumentLoaded( GeoDataDocument& document );
+    void resize( int width, int height );
+    void notifyModelChanged();
+    void geoDataDocumentLoaded( GeoDataDocument& document );
     void geoDataDocumentAdded( GeoDataDocument* document );
 
     static QAtomicInt       refCounter;
@@ -158,7 +158,7 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
 
     d->m_texmapper = 0;
-    d->m_gridmap      = new GridMap( this );
+    d->m_gridmap = new GridMap( this );
     
     if( MarbleModelPrivate::refCounter == 1 ) {
         d->m_veccomposer = new VectorComposer();
@@ -169,7 +169,7 @@ MarbleModel::MarbleModel( QObject *parent )
            doesn't need it, it's left as is. */
     }
 
-    d->m_placemarkmanager   = new PlacemarkManager();
+    d->m_placemarkmanager = new PlacemarkManager();
 
     connect( d->m_placemarkmanager, SIGNAL( geoDataDocumentLoaded( GeoDataDocument& ) ),
              this,                  SLOT( geoDataDocumentLoaded( GeoDataDocument& ) ) );
@@ -221,7 +221,6 @@ MarbleModel::MarbleModel( QObject *parent )
             d->m_sunLocator, SLOT( update() ) );
     connect( d->m_layerDecorator, SIGNAL( repaintMap() ),
                                   SIGNAL( modelChanged() ) );
-
 }
 
 MarbleModel::~MarbleModel()
@@ -423,8 +422,8 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             for (; itds != endds; ++itds) {
                 GeoSceneAbstractDataset* dataset = *itds;
                 if( dataset->fileFormat() == "KML" ) {
-                    loadedContainers.removeOne(
-reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename() );
+                    loadedContainers.removeOne( reinterpret_cast<GeoSceneXmlDataSource*>(dataset)
+                                                ->filename() );
                     loadList << reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename();          
                 }
             }
@@ -683,17 +682,17 @@ QAbstractItemModel *MarbleModel::geometryModel() const
     return d->m_geometrymodel;
 }
 
-VectorComposer    *MarbleModel::vectorComposer()   const
+VectorComposer *MarbleModel::vectorComposer() const
 {
     return d->m_veccomposer;
 }
 
-TextureColorizer  *MarbleModel::textureColorizer() const
+TextureColorizer *MarbleModel::textureColorizer() const
 {
     return d->m_texcolorizer;
 }
 
-AbstractScanlineTextureMapper    *MarbleModel::textureMapper()    const
+AbstractScanlineTextureMapper *MarbleModel::textureMapper() const
 {
     return d->m_texmapper;
 }
@@ -703,12 +702,12 @@ PlacemarkLayout *MarbleModel::placemarkLayout() const
     return d->m_placemarkLayout;
 }
 
-GpsLayer *MarbleModel::gpsLayer()         const
+GpsLayer *MarbleModel::gpsLayer() const
 {
     return d->m_gpsLayer;
 }
 
-GpxFileModel *MarbleModel::gpxFileModel()   const
+GpxFileModel *MarbleModel::gpxFileModel() const
 {
     return d->m_gpxFileModel;
 }
@@ -862,21 +861,22 @@ void MarbleModel::clearPersistentTileCache()
     }
 }
 
-void MarbleModel::paintTile(TextureTile* tile, int x, int y, int level,
-                            GeoSceneTexture *textureLayer, bool requestTileUpdate)
+void MarbleModel::paintTile( TextureTile* tile, int x, int y, int level,
+                             GeoSceneTexture *textureLayer, bool requestTileUpdate )
 {
-//    qDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level << "requestTileUpdate" << requestTileUpdate;
+//    qDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level
+//             << "requestTileUpdate" << requestTileUpdate;
     
     if ( d->m_downloadManager != 0 ) {
         connect( d->m_layerDecorator, SIGNAL( downloadTile( QUrl, QString, QString ) ),
                  d->m_downloadManager, SLOT( addJob( QUrl, QString, QString ) ) );
     }
 
-    d->m_layerDecorator->setInfo(x, y, level, tile->id());
-    d->m_layerDecorator->setTile(tile->tile());
-        
-    d->m_layerDecorator->paint("maps/" + textureLayer->sourceDir(), mapTheme() );
-    tile->initJumpTables(requestTileUpdate);
+    d->m_layerDecorator->setInfo( x, y, level, tile->id() );
+    d->m_layerDecorator->setTile( tile->tile() );
+
+    d->m_layerDecorator->paint( "maps/" + textureLayer->sourceDir(), mapTheme() );
+    tile->initJumpTables( requestTileUpdate );
 }
 
 QList<RenderPlugin *> MarbleModel::renderPlugins() const
