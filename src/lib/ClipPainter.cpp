@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
+// Copyright 2006-2009 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
@@ -137,15 +137,19 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
             // qDebug() << "Size: " << m_clippedObject.size();
             QPainter::drawPolyline ( d->m_clippedObject );
             // qDebug() << "done";
+
+            #ifdef DEBUG_DRAW_NODES
+                d->debugDrawNodes( d->m_clippedObject );
+            #endif
         }
     }
     else {
         QPainter::drawPolyline( polygon );
-    }
 
-#ifdef DEBUG_DRAW_NODES
-    d->debugDrawNodes( polygon );
-#endif
+        #ifdef DEBUG_DRAW_NODES
+            d->debugDrawNodes( polygon );
+        #endif
+    }
 }
 
 ClipPainterPrivate::ClipPainterPrivate( ClipPainter * parent )
@@ -283,9 +287,6 @@ void ClipPainterPrivate::clipMultiple()
 {
     // Take care of adding nodes in the image corners if the iterator 
     // traverses offscreen sections.
-
-    // FIXME:	- bugs related to vertical and horizontal lines in corners  
-    //		- borderpoint order
 
     qreal  m = _m( m_previousPoint, m_currentPoint );
 
@@ -863,19 +864,30 @@ void ClipPainterPrivate::debugDrawNodes( const QPolygonF & polygon ) {
 
     for (; itPoint != itEndPoint; ++itPoint ) {
         
-        if ( itPoint == itStartPoint || itPoint == itStartPoint + 1 ) {
+        if ( itPoint == itStartPoint || itPoint == itStartPoint + 1 || itPoint == itStartPoint + 2 ) {
             q->setPen( Qt::darkGreen );
             if ( itPoint == itStartPoint ) {
-                q->drawRect( itPoint->x() - 2.5, itPoint->y() - 2.5 , 5.0, 5.0 );
+                q->drawRect( itPoint->x() - 3.0, itPoint->y() - 3.0 , 6.0, 6.0 );
+            }
+            else if ( itPoint == itStartPoint + 1 ) {
+                q->drawRect( itPoint->x() - 2.0, itPoint->y() - 2.0 , 4.0, 4.0 );
             }
             else {
-                q->drawRect( itPoint->x() - 1.5, itPoint->y() - 1.5 , 3.0, 3.0 );
+                q->drawRect( itPoint->x() - 1.0, itPoint->y() - 1.0 , 2.0, 2.0 );
             }
             q->setPen( Qt::red );
         }
-        else if ( itPoint == itEndPoint - 1 || itPoint == itEndPoint -1 ) {
+        else if ( itPoint == itEndPoint - 1 || itPoint == itEndPoint - 2 || itPoint == itEndPoint - 3 ) {
             q->setPen( Qt::blue );
-            q->drawRect( itPoint->x() - 1.5, itPoint->y() - 1.5 , 3.0, 3.0 );
+            if ( itPoint == itEndPoint - 3 ) {
+                q->drawRect( itPoint->x() - 3.0, itPoint->y() - 3.0 , 6.0, 6.0 );
+            }
+            else if ( itPoint == itEndPoint - 2 ) {
+                q->drawRect( itPoint->x() - 2.0, itPoint->y() - 2.0 , 4.0, 4.0 );
+            }
+            else {
+                q->drawRect( itPoint->x() - 1.0, itPoint->y() - 1.0 , 2.0, 2.0 );
+            }
             q->setPen( Qt::red );
         }
         else {

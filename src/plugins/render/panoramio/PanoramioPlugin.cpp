@@ -63,7 +63,7 @@ void PanoramioPlugin::initialize() {
     numberOfImagesToShow = 20;
     m_storagePolicy = new CacheStoragePolicy( MarbleDirs::localPath()
                                               + "/cache/" );
-    m_downloadManager = new HttpDownloadManager( QUrl("htttp://mw2.google.com/"),
+    m_downloadManager = new HttpDownloadManager( QUrl("http://mw2.google.com/"),
                                                  m_storagePolicy );
     connect( m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
              this,              SLOT( processFinishedJob( QString , QString ) ) );
@@ -79,6 +79,8 @@ bool PanoramioPlugin::isInitialized() const {
 bool PanoramioPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                               const QString& renderPos, GeoSceneLayer * layer )
 {
+    painter->save();
+
     static bool firstTime = true;
     if( firstTime ) {
         // GeoDataLatLonAltBox latLonAltBox = viewport->viewLatLonAltBox();
@@ -87,7 +89,10 @@ bool PanoramioPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                             90 * DEG2RAD, - 90 * DEG2RAD );
          firstTime = false;
     }
-    painter->autoMapQuality();
+
+    // Ensure sharp pictures and a sharp white border.
+    painter->setRenderHint( QPainter::Antialiasing, false );
+
     GeoDataLatLonAltBox mylatLonAltBox = viewport->viewLatLonAltBox();
     if ( flag == 1 ) {
         for ( int x = 0; x < images.size(); ++x ) {
@@ -105,6 +110,9 @@ bool PanoramioPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
         }
     }
+
+    painter->restore();
+
     return true;
 }
 
