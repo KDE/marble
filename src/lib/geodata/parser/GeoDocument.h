@@ -27,6 +27,8 @@
 
 #ifdef _WIN32
 #define DUMP_GEONODE_LEAKS 1
+#else
+#define DUMP_GEONODE_LEAKS 0
 #endif
 
 namespace Marble
