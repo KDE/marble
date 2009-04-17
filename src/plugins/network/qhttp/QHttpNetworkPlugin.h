@@ -62,9 +62,6 @@ class QHttpNetworkPlugin: public NetworkPlugin
     Q_OBJECT
 
  public:
-    QHttpNetworkPlugin();
-    virtual ~QHttpNetworkPlugin();
-
     virtual QString name() const;
     virtual QString nameId() const;
     virtual QString guiString() const;

@@ -105,14 +105,6 @@ void QHttpHttpJob::httpRequestFinished( int requestId, bool error )
 }
 
 
-QHttpNetworkPlugin::QHttpNetworkPlugin()
-{
-}
-
-QHttpNetworkPlugin::~QHttpNetworkPlugin()
-{
-}
-
 QString QHttpNetworkPlugin::name() const
 {
     return tr( "QHttp based Network Plugin" );
