@@ -21,11 +21,11 @@ using namespace Marble;
 
 QHttpHttpJob::QHttpHttpJob( const QUrl & sourceUrl, const QString & destFileName,
                             const QString &id )
-        : HttpJob( sourceUrl, destFileName, id ),
-        m_data(),
-        m_buffer( 0 ),
-        m_http( 0 ),
-        m_currentRequest( -1 )
+    : HttpJob( sourceUrl, destFileName, id ),
+      m_data(),
+      m_buffer( 0 ),
+      m_http( 0 ),
+      m_currentRequest( -1 )
 {
 }
 
@@ -85,21 +85,18 @@ void QHttpHttpJob::httpRequestFinished( int requestId, bool error )
 //    if ( !responseHeader.isValid() )
 //        return;
 
-    if ( responseHeader.statusCode() == 301 )
-    {
+    if ( responseHeader.statusCode() == 301 ) {
         QUrl newLocation( responseHeader.value( "Location" ) );
         emit redirected( this, newLocation );
         return;
     }
 
-    if ( responseHeader.statusCode() != 200 )
-    {
+    if ( responseHeader.statusCode() != 200 ) {
         emit jobDone( this, 1 );
         return;
     }
 
-    if ( error != 0 )
-    {
+    if ( error != 0 ) {
         emit jobDone( this, error );
         return;
     }
