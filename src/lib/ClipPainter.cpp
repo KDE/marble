@@ -165,6 +165,17 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QPointF * labelNodes,
             #ifdef DEBUG_DRAW_NODES
                 d->debugDrawNodes( d->m_clippedObject );
             #endif
+
+            // Now let's start returning the label coordinates
+            if ( labelNodes == 0 ) 
+                return;
+
+            // The Label at the center of the polyline:
+            int labelPosition = static_cast<int>( d->m_clippedObject.size() / 2.0 );
+
+            *labelNodes = (d->m_clippedObject).at( labelPosition );
+            labelNodeNum = 1; // For now we only allow one single label;
+
         }
     }
     else {
@@ -173,17 +184,18 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QPointF * labelNodes,
         #ifdef DEBUG_DRAW_NODES
             d->debugDrawNodes( polygon );
         #endif
+
+        // Now let's start returning the label coordinates
+        if ( labelNodes == 0 ) 
+            return;
+
+        // The Label at the center of the polyline:
+        int labelPosition = static_cast<int>( polygon.size() / 2.0 );
+
+        *labelNodes = (polygon).at( labelPosition );
+        labelNodeNum = 1; // For now we only allow one single label;
+
     }
-
-    // Now let's start returning the label coordinates
-    if ( labelNodes == 0 ) 
-        return;
-
-    // The Label at the center of the polyline:
-    int labelPosition = static_cast<int>( d->m_clippedObject.size() / 2.0 );
-
-    *labelNodes = (d->m_clippedObject).at( labelPosition );
-    labelNodeNum = 1; // For now we only allow one single label;
 }
 
 ClipPainterPrivate::ClipPainterPrivate( ClipPainter * parent )

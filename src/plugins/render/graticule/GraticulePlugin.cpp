@@ -128,6 +128,10 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     renderLongitudeLines( painter, viewLatLonAltBox, normalDegreeStep, normalDegreeStep );  
     renderLatitudeLines(  painter, viewLatLonAltBox, normalDegreeStep );  
 
+    // Render some non-cut off longitude lines ..
+    renderLongitudeLine( painter, 90.0, viewLatLonAltBox );
+    renderLongitudeLine( painter, -90.0, viewLatLonAltBox );
+
     // Render the bold grid
 
     painter->setPen( QPen( QBrush( Qt::white ), 1.5 ) );
@@ -270,9 +274,15 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
     qreal itStep = southLineLat;
 
     while ( itStep < northLineLat ) {
+        // Create a matching label
         QString label = GeoDataCoordinates::latToString( itStep, 
                             GeoDataCoordinates::DMS, GeoDataCoordinates::Degree, 
                             -1, 'f' );
+
+        // No additional labels for the equator
+        if ( itStep == 0.0 ) {
+            label = QString();
+        }
         renderLatitudeLine( painter, itStep, viewLatLonAltBox, label );
         itStep += step;
     }
@@ -297,9 +307,15 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
         qreal itStep = westLineLon;
 
         while ( itStep < eastLineLon ) {
+            // Create a matching label
             QString label = GeoDataCoordinates::lonToString( itStep, 
                                 GeoDataCoordinates::DMS, GeoDataCoordinates::Degree, 
                                 -1, 'f' );
+
+            // No additional labels for the prime meridian and the antimeridian
+            if ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) {
+                label = QString();
+            }
             renderLongitudeLine( painter, itStep, viewLatLonAltBox, cutOff, label );                
             itStep += step;
         }
