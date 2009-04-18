@@ -216,7 +216,7 @@ void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude,
 
 void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
                                            const GeoDataLatLonAltBox& viewLatLonAltBox, 
-                                           qreal polarCap,
+                                           qreal polarGap,
                                            const QString& lineLabel )
 {
     qreal fromWestLon = viewLatLonAltBox.west( GeoDataCoordinates::Degree );
@@ -236,8 +236,8 @@ void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
     qreal fromSouthLat = viewLatLonAltBox.south( GeoDataCoordinates::Degree );
     qreal toNorthLat   = viewLatLonAltBox.north( GeoDataCoordinates::Degree );
     
-    qreal southLat = ( fromSouthLat < -90.0 + polarCap ) ? -90.0 + polarCap : fromSouthLat;
-    qreal northLat = ( toNorthLat   > +90.0 - polarCap ) ? +90.0 - polarCap : toNorthLat;
+    qreal southLat = ( fromSouthLat < -90.0 + polarGap ) ? -90.0 + polarGap : fromSouthLat;
+    qreal northLat = ( toNorthLat   > +90.0 - polarGap ) ? +90.0 - polarGap : toNorthLat;
 
     GeoDataCoordinates n1( longitude, southLat, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates n3( longitude, northLat, 0.0, GeoDataCoordinates::Degree );
@@ -281,7 +281,7 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
 
         // No additional labels for the equator
         if ( itStep == 0.0 ) {
-            label = QString();
+            label.clear();
         }
         renderLatitudeLine( painter, itStep, viewLatLonAltBox, label );
         itStep += step;
@@ -290,7 +290,7 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
 
 void GraticulePlugin::renderLongitudeLines( GeoPainter *painter, 
                                             const GeoDataLatLonAltBox& viewLatLonAltBox, 
-                                            qreal step, qreal polarCap )
+                                            qreal step, qreal polarGap )
 {
     if ( step <= 0 ) {
         return;
@@ -314,9 +314,9 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
             // No additional labels for the prime meridian and the antimeridian
             if ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) {
-                label = QString();
+                label.clear();
             }
-            renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarCap, label );                
+            renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap, label );                
             itStep += step;
         }
     }
@@ -324,13 +324,13 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
         qreal itStep = eastLineLon;
 
         while ( itStep < 180.0 ) {
-            renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarCap );                
+            renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap );                
             itStep += step;
         }
 
         itStep = -180.0;
         while ( itStep < westLineLon ) {
-            renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarCap );                
+            renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap );                
             itStep += step;
         }
     }
