@@ -24,16 +24,15 @@
 #include <QtGui/QWidget>
 
 // Marble
-#include "lib/MarbleCacheSettingsWidget.h"
 #include "lib/global.h"
 
 using namespace Marble;
 
-#include "lib/ui_MarbleViewSettingsWidget.h"
-#include "lib/ui_MarbleNavigationSettingsWidget.h"
-
 QtMarbleConfigDialog::QtMarbleConfigDialog( QWidget *parent )
-    : QDialog( parent )
+    : QDialog( parent ),
+      ui_viewSettings(),
+      ui_navigationSettings()
+      
 {
     QTabWidget *tabWidget = new QTabWidget( this );
     QDialogButtonBox *buttons = 
@@ -53,29 +52,27 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( QWidget *parent )
     connect( this, SIGNAL( accepted() ), this, SLOT( writeSettings() ) );
 
     // view page
-    ui_viewSettings = new Ui::MarbleViewSettingsWidget;
-    QWidget *w_viewSettings = new QWidget( 0 );
+    QWidget *w_viewSettings = new QWidget( this );
 
-    ui_viewSettings->setupUi( w_viewSettings );
+    ui_viewSettings.setupUi( w_viewSettings );
     tabWidget->addTab( w_viewSettings, tr( "View" ) );
 
     // navigation page
-    ui_navigationSettings = new Ui::MarbleNavigationSettingsWidget;
-    QWidget *w_navigationSettings = new QWidget( 0 );
+    QWidget *w_navigationSettings = new QWidget( this );
 
-    ui_navigationSettings->setupUi( w_navigationSettings );
+    ui_navigationSettings.setupUi( w_navigationSettings );
     tabWidget->addTab( w_navigationSettings, tr( "Navigation" ) );
 
     // cache page
-    w_cacheSettings = new MarbleCacheSettingsWidget();
+    w_cacheSettings = new MarbleCacheSettingsWidget( this );
     tabWidget->addTab( w_cacheSettings, tr( "Cache and Proxy" ) );
     // Forwarding clear button signals
-     connect( w_cacheSettings,               SIGNAL( clearVolatileCache() ),
-           this, SIGNAL( clearVolatileCacheClicked() ) );
-     connect( w_cacheSettings,               SIGNAL( clearPersistentCache() ),
-           this, SIGNAL( clearPersistentCacheClicked() ) );
+    connect( w_cacheSettings,               SIGNAL( clearVolatileCache() ),
+             this, SIGNAL( clearVolatileCacheClicked() ) );
+    connect( w_cacheSettings,               SIGNAL( clearPersistentCache() ),
+             this, SIGNAL( clearPersistentCacheClicked() ) );
     
-    QVBoxLayout *layout = new QVBoxLayout;
+    QVBoxLayout *layout = new QVBoxLayout( this );
     layout->addWidget( tabWidget );
     layout->addWidget( buttons );
     
@@ -134,20 +131,20 @@ void QtMarbleConfigDialog::readSettings()
     syncSettings();
     
     // View
-    ui_viewSettings->kcfg_distanceUnit->setCurrentIndex( distanceUnit() );
-    ui_viewSettings->kcfg_angleUnit->setCurrentIndex( angleUnit() );
-    ui_viewSettings->kcfg_stillQuality->setCurrentIndex( stillQuality() );
-    ui_viewSettings->kcfg_animationQuality->setCurrentIndex( animationQuality() );
-    ui_viewSettings->kcfg_labelLocalization->setCurrentIndex( labelLocalization() );
-    ui_viewSettings->kcfg_mapFont->setCurrentFont( mapFont() );
+    ui_viewSettings.kcfg_distanceUnit->setCurrentIndex( distanceUnit() );
+    ui_viewSettings.kcfg_angleUnit->setCurrentIndex( angleUnit() );
+    ui_viewSettings.kcfg_stillQuality->setCurrentIndex( stillQuality() );
+    ui_viewSettings.kcfg_animationQuality->setCurrentIndex( animationQuality() );
+    ui_viewSettings.kcfg_labelLocalization->setCurrentIndex( labelLocalization() );
+    ui_viewSettings.kcfg_mapFont->setCurrentFont( mapFont() );
     
     // Navigation
-    ui_navigationSettings->kcfg_dragLocation->setCurrentIndex( dragLocation() );
-    ui_navigationSettings->kcfg_onStartup->setCurrentIndex( onStartup() );
+    ui_navigationSettings.kcfg_dragLocation->setCurrentIndex( dragLocation() );
+    ui_navigationSettings.kcfg_onStartup->setCurrentIndex( onStartup() );
     if( animateTargetVoyage() )
-    ui_navigationSettings->kcfg_animateTargetVoyage->setCheckState( Qt::Checked );
+    ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Checked );
     else
-    ui_navigationSettings->kcfg_animateTargetVoyage->setCheckState( Qt::Unchecked );
+    ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Unchecked );
     
     // Cache
     w_cacheSettings->kcfg_volatileTileCacheLimit->setValue( volatileTileCacheLimit() );
@@ -172,18 +169,18 @@ void QtMarbleConfigDialog::writeSettings()
     syncSettings();
     
     settings->beginGroup( "View" );
-    settings->setValue( "distanceUnit", ui_viewSettings->kcfg_distanceUnit->currentIndex() );
-    settings->setValue( "angleUnit", ui_viewSettings->kcfg_angleUnit->currentIndex() );
-    settings->setValue( "stillQuality", ui_viewSettings->kcfg_stillQuality->currentIndex() );
-    settings->setValue( "animationQuality", ui_viewSettings->kcfg_animationQuality->currentIndex() );
-    settings->setValue( "labelLocalization", ui_viewSettings->kcfg_labelLocalization->currentIndex() );
-    settings->setValue( "mapFont", ui_viewSettings->kcfg_mapFont->currentFont() );
+    settings->setValue( "distanceUnit", ui_viewSettings.kcfg_distanceUnit->currentIndex() );
+    settings->setValue( "angleUnit", ui_viewSettings.kcfg_angleUnit->currentIndex() );
+    settings->setValue( "stillQuality", ui_viewSettings.kcfg_stillQuality->currentIndex() );
+    settings->setValue( "animationQuality", ui_viewSettings.kcfg_animationQuality->currentIndex() );
+    settings->setValue( "labelLocalization", ui_viewSettings.kcfg_labelLocalization->currentIndex() );
+    settings->setValue( "mapFont", ui_viewSettings.kcfg_mapFont->currentFont() );
     settings->endGroup();
     
     settings->beginGroup( "Navigation" );
-    settings->setValue( "dragLocation", ui_navigationSettings->kcfg_dragLocation->currentIndex() );
-    settings->setValue( "onStartup", ui_navigationSettings->kcfg_onStartup->currentIndex() );
-    if( ui_navigationSettings->kcfg_animateTargetVoyage->checkState() == Qt::Checked )
+    settings->setValue( "dragLocation", ui_navigationSettings.kcfg_dragLocation->currentIndex() );
+    settings->setValue( "onStartup", ui_navigationSettings.kcfg_onStartup->currentIndex() );
+    if( ui_navigationSettings.kcfg_animateTargetVoyage->checkState() == Qt::Checked )
         settings->setValue( "animateTargetVoyage", true );
     else
         settings->setValue( "animateTargetVoyage", false );

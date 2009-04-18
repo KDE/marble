@@ -14,10 +14,10 @@
 #include <QtGui/QDialog>
 #include <lib/global.h>
 
-namespace Ui {
-class MarbleViewSettingsWidget;
-class MarbleNavigationSettingsWidget;
-}
+#include "lib/ui_MarbleViewSettingsWidget.h"
+#include "lib/ui_MarbleNavigationSettingsWidget.h"
+
+#include "lib/MarbleCacheSettingsWidget.h"
 
 class QSettings;
 
@@ -97,8 +97,8 @@ class QtMarbleConfigDialog : public QDialog
 
     void initSettings();
 
-    Ui::MarbleViewSettingsWidget       *ui_viewSettings;
-    Ui::MarbleNavigationSettingsWidget *ui_navigationSettings;
+    Ui::MarbleViewSettingsWidget       ui_viewSettings;
+    Ui::MarbleNavigationSettingsWidget ui_navigationSettings;
     MarbleCacheSettingsWidget          *w_cacheSettings;
 
     QSettings *settings;
