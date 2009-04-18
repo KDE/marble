@@ -83,10 +83,15 @@ class GraticulePlugin : public RenderPlugin
      * @param painter the painter used to draw the latitude line
      * @param longitude the longitude of the coordinate line measured in degree .
      * @param viewLatLonAltBox the latitude longitude bounding box that is covered by the view.
+     * @param polarGap the area around the poles in which most longitude lines are not drawn
+     *        for reasons of aesthetics and clarity of the map. The polarGap avoids narrow
+     *        concurring lines around the poles which obstruct the view onto the surface.
+     *        The radius of the polarGap area is measured in degrees. 
+     * @param lineLabel draws a label using the font and color properties set for the painter.
      */
     void renderLongitudeLine( GeoPainter *painter, qreal longitude,                         
                               const GeoDataLatLonAltBox& viewLatLonAltBox = GeoDataLatLonAltBox(),
-                              qreal cutOff = 0.0,
+                              qreal polarGap = 0.0,
                               const QString& lineLabel = QString() );
 
     /**
@@ -104,14 +109,15 @@ class GraticulePlugin : public RenderPlugin
      * @param painter the painter used to draw the latitude lines
      * @param viewLatLonAltBox the latitude longitude bounding box that is covered by the view.
      * @param step the angular distance between the lines measured in degrees .
-     * @param cutOff the area around the poles in which the longitude lines don't get drawn
-     *        for reasons of aesthetics and clarity of the map (avoids concurring lines at the poles)
-     *        The radius of the cutOff area is measured in degrees. 
+     * @param polarGap the area around the poles in which most longitude lines are not drawn
+     *        for reasons of aesthetics and clarity of the map. The polarGap avoids narrow
+     *        concurring lines around the poles which obstruct the view onto the surface.
+     *        The radius of the polarGap area is measured in degrees. 
      */
     void renderLongitudeLines( GeoPainter *painter, 
                               const GeoDataLatLonAltBox& viewLatLonAltBox, 
                               qreal step, 
-                              qreal cutOff = 0.0 );
+                              qreal polarGap = 0.0 );
 
     /**
      * @brief Maps the number of coordinate lines per 360 deg against the globe radius on the screen.
