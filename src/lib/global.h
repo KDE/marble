@@ -20,6 +20,8 @@
 
 #include "marble_export.h"
 
+// #define QT_STRICT_ITERATORS
+
 namespace Marble
 {
 
@@ -57,6 +59,8 @@ enum Dimension {
     Latitude,             ///< Latitude
     Longitude            ///< Longitude
 };
+
+Q_DECLARE_FLAGS(Dimensions, Dimension)
 
 /**
  * @brief This enum is used to choose the unit chosen to measure angles.

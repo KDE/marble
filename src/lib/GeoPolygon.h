@@ -32,7 +32,7 @@ class MARBLE_EXPORT GeoPolygon : public GeoDataCoordinates::Vector
 {
  public:
     GeoPolygon();
-    ~GeoPolygon();
+    virtual ~GeoPolygon();
 
     /**
      * @brief enum used to specify how a polyline crosses the IDL

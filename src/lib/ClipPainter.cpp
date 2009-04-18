@@ -126,7 +126,6 @@ void ClipPainter::drawPolygon ( const QPolygonF & polygon,
     }
 }
 
-
 void ClipPainter::drawPolyline( const QPolygonF & polygon )
 {
     d->initClipRect();
@@ -150,6 +149,41 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
             d->debugDrawNodes( polygon );
         #endif
     }
+}
+
+void ClipPainter::drawPolyline( const QPolygonF & polygon, QPointF * labelNodes, int & labelNodeNum )
+{
+    d->initClipRect();
+
+    if ( d->m_doClip ) {    
+        d->clipPolyObject( polygon );
+        if ( d->m_clippedObject.size() > 1 ) {
+            // qDebug() << "Size: " << m_clippedObject.size();
+            QPainter::drawPolyline ( d->m_clippedObject );
+            // qDebug() << "done";
+
+            #ifdef DEBUG_DRAW_NODES
+                d->debugDrawNodes( d->m_clippedObject );
+            #endif
+        }
+    }
+    else {
+        QPainter::drawPolyline( polygon );
+
+        #ifdef DEBUG_DRAW_NODES
+            d->debugDrawNodes( polygon );
+        #endif
+    }
+
+    // Now let's start returning the label coordinates
+    if ( labelNodes == 0 ) 
+        return;
+
+    // The Label at the center of the polyline:
+    int labelPosition = static_cast<int>( d->m_clippedObject.size() / 2.0 );
+
+    *labelNodes = (d->m_clippedObject).at( labelPosition );
+    labelNodeNum = 1; // For now we only allow one single label;
 }
 
 ClipPainterPrivate::ClipPainterPrivate( ClipPainter * parent )
@@ -219,8 +253,8 @@ void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon )
     //	qDebug() << "ClipPainter enabled." ;
     m_clippedObject.clear();
 
-    const QVector<QPointF>::const_iterator  itStartPoint = polygon.begin();
-    const QVector<QPointF>::const_iterator  itEndPoint   = polygon.end();
+    const QVector<QPointF>::const_iterator  itStartPoint = polygon.constBegin();
+    const QVector<QPointF>::const_iterator  itEndPoint   = polygon.constEnd();
     QVector<QPointF>::const_iterator        itPoint      = itStartPoint;
 
     for (; itPoint != itEndPoint; ++itPoint ) {
@@ -858,8 +892,8 @@ void ClipPainterPrivate::debugDrawNodes( const QPolygonF & polygon ) {
     q->setPen( Qt::red );
     q->setBrush( Qt::transparent );
 
-    const QVector<QPointF>::const_iterator  itStartPoint = polygon.begin();
-    const QVector<QPointF>::const_iterator  itEndPoint   = polygon.end();
+    const QVector<QPointF>::const_iterator  itStartPoint = polygon.constBegin();
+    const QVector<QPointF>::const_iterator  itEndPoint   = polygon.constEnd();
     QVector<QPointF>::const_iterator        itPoint      = itStartPoint;
 
     for (; itPoint != itEndPoint; ++itPoint ) {

@@ -75,7 +75,8 @@ class GraticulePlugin : public RenderPlugin
      * @param viewLatLonAltBox the latitude longitude bounding box that is covered by the view.
      */
     void renderLatitudeLine(  GeoPainter *painter, qreal latitude,
-                              const GeoDataLatLonAltBox& viewLatLonAltBox = GeoDataLatLonAltBox() );
+                              const GeoDataLatLonAltBox& viewLatLonAltBox = GeoDataLatLonAltBox(),
+                              const QString& lineLabel = QString() );
 
     /**
      * @brief Renders a longitude line within the defined view bounding box.
@@ -85,7 +86,8 @@ class GraticulePlugin : public RenderPlugin
      */
     void renderLongitudeLine( GeoPainter *painter, qreal longitude,                         
                               const GeoDataLatLonAltBox& viewLatLonAltBox = GeoDataLatLonAltBox(),
-                              qreal cutOff = 0.0 );
+                              qreal cutOff = 0.0,
+                              const QString& lineLabel = QString() );
 
     /**
      * @brief Renders the latitude lines that are visible within the defined view bounding box.

@@ -83,6 +83,7 @@ qreal GeoDataLatLonBox::north( GeoDataCoordinates::Unit unit ) const
 void GeoDataLatLonBox::setNorth( const qreal north, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
+    default:
     case GeoDataCoordinates::Radian:
         d->m_north = GeoDataCoordinates::normalizeLat( north );
         break;
@@ -103,6 +104,7 @@ qreal GeoDataLatLonBox::south( GeoDataCoordinates::Unit unit ) const
 void GeoDataLatLonBox::setSouth( const qreal south, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
+    default:
     case GeoDataCoordinates::Radian:
         d->m_south = GeoDataCoordinates::normalizeLat( south );
         break;
@@ -123,6 +125,7 @@ qreal GeoDataLatLonBox::east( GeoDataCoordinates::Unit unit ) const
 void GeoDataLatLonBox::setEast( const qreal east, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
+    default:
     case GeoDataCoordinates::Radian:
         d->m_east = GeoDataCoordinates::normalizeLon( east );
         break;
@@ -143,6 +146,7 @@ qreal GeoDataLatLonBox::west( GeoDataCoordinates::Unit unit ) const
 void GeoDataLatLonBox::setWest( const qreal west, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
+    default:
     case GeoDataCoordinates::Radian:
         d->m_west = GeoDataCoordinates::normalizeLon( west );
         break;
@@ -155,6 +159,7 @@ void GeoDataLatLonBox::setWest( const qreal west, GeoDataCoordinates::Unit unit 
 void GeoDataLatLonBox::setRotation( const qreal rotation, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
+    default:
     case GeoDataCoordinates::Radian:
         d->m_rotation = rotation;
         break;
@@ -175,6 +180,7 @@ qreal GeoDataLatLonBox::rotation( GeoDataCoordinates::Unit unit ) const
 void GeoDataLatLonBox::boundaries( qreal &north, qreal &south, qreal &east, qreal &west, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
+    default:
     case GeoDataCoordinates::Radian:
         north = d->m_north;
         south = d->m_south;
@@ -193,6 +199,7 @@ void GeoDataLatLonBox::boundaries( qreal &north, qreal &south, qreal &east, qrea
 void GeoDataLatLonBox::setBoundaries( qreal north, qreal south, qreal east, qreal west, GeoDataCoordinates::Unit unit )
 {
     switch( unit ){
+    default:
     case GeoDataCoordinates::Radian:
         d->m_north = GeoDataCoordinates::normalizeLat( north );
         d->m_south = GeoDataCoordinates::normalizeLat( south );
@@ -386,6 +393,7 @@ bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other ) const
 QString GeoDataLatLonBox::toString( GeoDataCoordinates::Unit unit ) const
 {
     switch( unit ){
+    default:
     case GeoDataCoordinates::Radian:
         return QString( "North: %1; West: %2 \n South: %3; East: %4 " )
             .arg( d->m_north * RAD2DEG ).arg( d->m_west * RAD2DEG ).arg( d->m_south * RAD2DEG ).arg( d->m_east * RAD2DEG ); 

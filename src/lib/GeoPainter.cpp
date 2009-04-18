@@ -369,7 +369,7 @@ void GeoPainter::drawLine (  const GeoDataCoordinates & p1,  const GeoDataCoordi
     drawPolyline( line ); 
 }
 
-void GeoPainter::drawPolyline ( const GeoDataLineString & lineString )
+void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QString& labelText )
 {
     // If the object is not visible in the viewport return 
     if ( ! d->m_viewport->viewLatLonAltBox().intersects( lineString.latLonAltBox() ) )
@@ -384,10 +384,20 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString )
 
 //    qDebug() << "Number of polygons:" << polygons.count();
 
-    foreach( QPolygonF* itPolygon, polygons ) {
-        ClipPainter::drawPolyline( *itPolygon );
+    if ( labelText.isEmpty() ) {
+        foreach( QPolygonF* itPolygon, polygons ) {
+            ClipPainter::drawPolyline( *itPolygon );
+        }
     }
-
+    else {
+        foreach( QPolygonF* itPolygon, polygons ) {
+            int labelNodeNum;
+            QPointF * labelNode = new QPointF;
+            ClipPainter::drawPolyline( *itPolygon, labelNode, labelNodeNum );
+            drawText( *labelNode, labelText );
+            delete labelNode;
+        }
+    }
     qDeleteAll( polygons );
 }
 
@@ -600,6 +610,11 @@ void GeoPainter::drawRect ( const QRect &rectangle )
 void GeoPainter::drawRect ( int x, int y, int width, int height )
 {
     QPainter::drawRect( x, y, width, height);
+}
+
+void GeoPainter::drawText ( const QPointF & position, const QString & text )
+{
+    QPainter::drawText( position, text );
 }
 
 void GeoPainter::drawText ( const QPoint & position, const QString & text )

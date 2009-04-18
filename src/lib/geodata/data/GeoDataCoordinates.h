@@ -249,10 +249,27 @@ class GEODATA_EXPORT GeoDataCoordinates
 
     /**
     * @brief return a string with the notation given by notation
+    *
     * @param notation set a notation different from the default one
+    * @param precision set the number of digits below degrees.
+    * The precision depends on the current notation: 
+    * For Decimal representation the precision is the number of 
+    * digits after the decimal point.
+    * In DMS a precision of 1 or 2 shows the arc minutes; a precision
+    * of 3 or 4 will show arc seconds. A precision beyond that will 
+    * increase the number of digits after the arc second decimal point. 
     */
-    QString toString( GeoDataCoordinates::Notation notation ) const;
+    QString toString( GeoDataCoordinates::Notation notation, int precision = -1 ) const;
     
+    static QString lonToString( qreal lon, GeoDataCoordinates::Notation notation,   
+                                           GeoDataCoordinates::Unit unit = Radian, 
+                                           int precision = -1, 
+                                           char format = 'f' );
+
+    static QString latToString( qreal lat, GeoDataCoordinates::Notation notation,
+                                           GeoDataCoordinates::Unit unit = Radian,
+                                           int precision = -1,
+                                           char format = 'f' );
     
     bool operator==( const GeoDataCoordinates& ) const;
     GeoDataCoordinates& operator=( const GeoDataCoordinates &other );

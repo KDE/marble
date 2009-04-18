@@ -611,10 +611,8 @@ void MarbleControlBox::selectTheme( const QString &theme )
             }
         }
         const  int index = d->uiWidget.celestialBodyComboBox->findText(theme.section('/',0,0), Qt::MatchExactly);
-	d->uiWidget.celestialBodyComboBox->setCurrentIndex(index);
+        d->uiWidget.celestialBodyComboBox->setCurrentIndex(index);
     }
-	
-
 }
 
 void MarbleControlBox::selectProjection( Projection projection )

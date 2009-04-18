@@ -88,7 +88,7 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     painter->autoMapQuality();
 
     if ( m_currentNotation != GeoDataCoordinates::defaultNotation() ) {
-        initLineMaps( notation );
+        initLineMaps( GeoDataCoordinates::defaultNotation() );
     }
 
     GeoDataLatLonAltBox viewLatLonAltBox = viewport->viewLatLonAltBox();
@@ -103,6 +103,20 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
         renderLongitudeHalfCircle( painter, i, viewLatLonAltBox );                
     }
 */
+
+    // Setting the label font for the coordinate lines.
+#ifdef Q_OS_MACX
+    int defaultFontSize = 10;
+#else
+    int defaultFontSize = 8;
+#endif
+
+    QFont gridFont("Sans Serif");
+    gridFont.setPointSize( defaultFontSize );    
+
+    QFont prominentLineFont = gridFont;
+    prominentLineFont.setBold( true );
+    painter->setFont( prominentLineFont );
 
     // Render the normal grid
 
@@ -128,11 +142,11 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     painter->setPen( QColor( Qt::yellow ) );
 
     // Render the equator
-    renderLatitudeLine( painter, 0.0, viewLatLonAltBox );
+    renderLatitudeLine( painter, 0.0, viewLatLonAltBox, tr( "Equator" ) );
 
     // Render the Meridian and Antimeridian
-    renderLongitudeLines( painter, viewLatLonAltBox, 90.0 );  
-
+    renderLongitudeLine( painter, 0.0, viewLatLonAltBox, 0.0, tr( "Prime Meridian" ) );
+    renderLongitudeLine( painter, 180.0, viewLatLonAltBox, 0.0, tr( "Antimeridian" ) );
 
     QPen graticulePen = painter->pen();
     graticulePen.setStyle( Qt::DotLine );        
@@ -142,12 +156,12 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     qreal axialTilt = RAD2DEG * dataFacade()->planet()->epsilon();
 
     // Render the tropics
-    renderLatitudeLine( painter, +axialTilt, viewLatLonAltBox );        
-    renderLatitudeLine( painter, -axialTilt, viewLatLonAltBox );        
+    renderLatitudeLine( painter, +axialTilt, viewLatLonAltBox, tr( "Tropic of Cancer" )  );        
+    renderLatitudeLine( painter, -axialTilt, viewLatLonAltBox, tr( "Tropic of Capricorn" ) );        
 
     // Render the arctics
-    renderLatitudeLine( painter, +90.0 - axialTilt, viewLatLonAltBox );        
-    renderLatitudeLine( painter, -90.0 + axialTilt, viewLatLonAltBox );        
+    renderLatitudeLine( painter, +90.0 - axialTilt, viewLatLonAltBox, tr( "Antarctic Circle" ) );        
+    renderLatitudeLine( painter, -90.0 + axialTilt, viewLatLonAltBox, tr( "Arctic Circle" ) );        
 
     painter->restore();
 
@@ -155,7 +169,8 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 }
 
 void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude,
-                                          const GeoDataLatLonAltBox& viewLatLonAltBox )
+                                          const GeoDataLatLonAltBox& viewLatLonAltBox,
+                                          const QString& lineLabel )
 {
     qreal fromSouthLat = viewLatLonAltBox.south( GeoDataCoordinates::Degree );
     qreal toNorthLat   = viewLatLonAltBox.north( GeoDataCoordinates::Degree );
@@ -192,12 +207,13 @@ void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude,
         }
     }
 
-    painter->drawPolyline( line );     
+    painter->drawPolyline( line, lineLabel );     
 }
 
 void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
                                            const GeoDataLatLonAltBox& viewLatLonAltBox, 
-                                           qreal cutOff )
+                                           qreal cutOff,
+                                           const QString& lineLabel )
 {
     qreal fromWestLon = viewLatLonAltBox.west( GeoDataCoordinates::Degree );
     qreal toEastLon   = viewLatLonAltBox.east( GeoDataCoordinates::Degree );
@@ -233,7 +249,7 @@ void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
         line << n1 << n3;
     }
 
-    painter->drawPolyline( line );     
+    painter->drawPolyline( line, lineLabel );     
 }
 
 void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
@@ -254,7 +270,10 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
     qreal itStep = southLineLat;
 
     while ( itStep < northLineLat ) {
-        renderLatitudeLine( painter, itStep, viewLatLonAltBox );
+        QString label = GeoDataCoordinates::latToString( itStep, 
+                            GeoDataCoordinates::DMS, GeoDataCoordinates::Degree, 
+                            -1, 'f' );
+        renderLatitudeLine( painter, itStep, viewLatLonAltBox, label );
         itStep += step;
     }
 }
@@ -278,7 +297,10 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
         qreal itStep = westLineLon;
 
         while ( itStep < eastLineLon ) {
-            renderLongitudeLine( painter, itStep, viewLatLonAltBox, cutOff );                
+            QString label = GeoDataCoordinates::lonToString( itStep, 
+                                GeoDataCoordinates::DMS, GeoDataCoordinates::Degree, 
+                                -1, 'f' );
+            renderLongitudeLine( painter, itStep, viewLatLonAltBox, cutOff, label );                
             itStep += step;
         }
     }
