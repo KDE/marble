@@ -7324,7 +7324,7 @@ Dearborn Heights	Michigan	us	N	58	42.33°N	83.27°W
 Annandale	Virginia	us	N	58	38.83°N	77.21°W
 Mannârakkât	Kerala	in	N	58	10.98°N	76.47°E
 Hattingen	Nordrhein-Westfalen	de	N	58	51.41°N	7.18°E
-Newtonabbey	Northern Ireland	gb	N	58	54.66°N	5.93°W
+Newtownabbey	Northern Ireland	gb	N	58	54.66°N	5.93°W
 La Línea	Cádiz	es	N	58	36.17°N	5.36°W
 Bolvadin	Afyon	tr	N	58	38.73°N	31.04°E
 Sakaide	Kagawa	jp	N	58	34.31°N	133.85°E
