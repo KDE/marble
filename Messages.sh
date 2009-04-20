@@ -29,4 +29,4 @@ mv rc.cpp.1 rc.cpp
 
 $EXTRACTRC `find . -name '*.ui' -o -name '*.rc'` >> rc.cpp
 $XGETTEXT src/kdemain.cpp src/marble_part.cpp rc.cpp -o $podir/marble.pot
-$XGETTEXT_QT src/QtMainWindow.cpp src/qtmain.cpp `find src/plugins -name '*.cpp'` `find src/lib -name '*.cpp'` -o $podir/marble_qt.pot
+$XGETTEXT_QT src/QtMainWindow.cpp src/qtmain.cpp `find src/plugins -name '*.cpp'` `find src/lib -name '*.cpp'` src/lib/global.h -o $podir/marble_qt.pot
