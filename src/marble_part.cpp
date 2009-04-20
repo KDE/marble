@@ -258,7 +258,9 @@ void MarblePart::showTileZoomLevelLabel( bool isChecked )
 
 void MarblePart::showDownloadProgressBar( bool isChecked )
 {
-    m_downloadProgressBar->setVisible( isChecked );
+    MarbleSettings::setShowDownloadProgressBar( isChecked );
+    // Change visibility only if there is a download happening
+    m_downloadProgressBar->setVisible( isChecked && m_downloadProgressBar->value() >= 0 );
 }
 
 void MarblePart::showFullScreen( bool isChecked )
@@ -783,6 +785,7 @@ void MarblePart::setupDownloadProgressBar()
     Q_ASSERT( statusBar );
 
     m_downloadProgressBar = new QProgressBar;
+    m_downloadProgressBar->setVisible( MarbleSettings::showDownloadProgressBar() );
     statusBar->addPermanentWidget( m_downloadProgressBar );
 
     HttpDownloadManager * const downloadManager =
@@ -1026,6 +1029,7 @@ void MarblePart::downloadJobAdded()
     if ( m_downloadProgressBar->value() < 0 ) {
         m_downloadProgressBar->setMaximum( 1 );
         m_downloadProgressBar->setValue( 0 );
+        m_downloadProgressBar->setVisible( MarbleSettings::showDownloadProgressBar() );
     } else {
         m_downloadProgressBar->setMaximum( m_downloadProgressBar->maximum() + 1 );
     }
@@ -1040,8 +1044,10 @@ void MarblePart::downloadJobRemoved()
 {
     m_downloadProgressBar->setUpdatesEnabled( false );
     m_downloadProgressBar->setValue( m_downloadProgressBar->value() + 1 );
-    if ( m_downloadProgressBar->value() == m_downloadProgressBar->maximum() )
+    if ( m_downloadProgressBar->value() == m_downloadProgressBar->maximum() ) {
         m_downloadProgressBar->reset();
+        m_downloadProgressBar->setVisible( false );
+    }
 
 //     qDebug() << "downloadProgressJobCompleted: value/maximum: "
 //              << m_downloadProgressBar->value() << '/' << m_downloadProgressBar->maximum();
