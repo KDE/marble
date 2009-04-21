@@ -55,16 +55,8 @@ class MARBLE_EXPORT Quaternion {
     bool        operator==(const Quaternion &q) const;
     Quaternion& operator*=(const Quaternion &q);
 
-    void        set(qreal w, qreal x, qreal y, qreal z) {
-	v[Q_W] = w; v[Q_X] = x; v[Q_Y] = y; v[Q_Z] = z;
-    }
-    void        set(qreal lon, qreal lat) {
-        v[Q_W] = 0.0;
-        const qreal  cosLat = cos(lat);
-        v[Q_X] = cosLat * sin(lon);
-        v[Q_Y] = sin(lat);
-        v[Q_Z] = cosLat * cos(lon);
-    }
+    void        set(qreal w, qreal x, qreal y, qreal z);
+    void        set(qreal lon, qreal lat);
 
     void        getSpherical(qreal &lon, qreal &lat) const;
 
@@ -93,6 +85,23 @@ class MARBLE_EXPORT Quaternion {
     // TODO: Better add accessors...
     xmmfloat    v;
 };
+
+inline void Quaternion::set( qreal w, qreal x, qreal y, qreal z )
+{
+    v[Q_W] = w;
+    v[Q_X] = x;
+    v[Q_Y] = y;
+    v[Q_Z] = z;
+}
+
+inline void Quaternion::set( qreal lon, qreal lat )
+{
+    v[Q_W] = 0.0;
+    const qreal cosLat = cos( lat );
+    v[Q_X] = cosLat * sin( lon );
+    v[Q_Y] = sin( lat );
+    v[Q_Z] = cosLat * cos( lon );
+}
 
 }
 
