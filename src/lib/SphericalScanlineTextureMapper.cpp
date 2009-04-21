@@ -298,6 +298,13 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
             const int tileHeight = m_tileLoader->tileHeight();
             const int jmax = m_n;
 
+/*
+            int oldR = 0;
+            int oldG = 0;
+            int oldB = 0;
+*/
+            QRgb oldRgb = qRgb( 0,0,0 );
+
             for ( int j=1; j < jmax; ++j ) {
                 qreal posX = itLon + itStepLon * j;
                 qreal posY = itLat + itStepLat * j;
@@ -314,8 +321,20 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
                     posY = itLat + itStepLat * j;
                 }
     
-                *scanLine = m_tile->pixelF( posX, posY );
-    
+                *scanLine = m_tile->pixel( posX, posY ); 
+
+                // Just perform bilinear interpolation if there's a color change compared to the 
+                // last pixel that was evaluated. This speeds up things greatly for maps like OSM
+                if ( *scanLine != oldRgb ) {
+                    *scanLine = m_tile->pixelF( posX, posY, *scanLine );
+                    oldRgb = *scanLine;
+                }
+                
+/*
+                if ( needsFilter( *scanLine, oldR, oldB, oldG  ) ) {
+                    *scanLine = m_tile->pixelF( posX, posY );
+                }
+*/
                 ++scanLine;
             }
         }
@@ -402,4 +421,23 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
             }
         }
     }
+}
+
+bool SphericalScanlineTextureMapper::needsFilter( const QRgb& rgb, int& oldR, int& oldB, int &oldG  )
+{
+    int red = qRed( rgb );
+    int green = qGreen( rgb );
+    int blue = qBlue( rgb );
+
+    bool differs = false;
+
+    if ( abs( red - oldR ) > 0 || abs( blue - oldB ) > 0 || abs( green - oldG ) > 0 ) {
+        differs = true;
+    }
+
+    oldR = red;
+    oldG = green;
+    oldB = blue;
+
+    return differs;
 }

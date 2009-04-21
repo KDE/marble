@@ -46,9 +46,6 @@ class ClipPainterPrivate
     QPointF    m_currentPoint;
     QPointF    m_previousPoint; 
 
-    // The resulting object from the clipping operation
-    QPolygonF  m_clippedObject;
-
     inline QPointF clipTop( qreal m, const QPointF & point ) const;
     inline QPointF clipLeft( qreal m, const QPointF & point ) const;
     inline QPointF clipBottom( qreal m, const QPointF & point ) const;
@@ -56,10 +53,26 @@ class ClipPainterPrivate
 
     inline void initClipRect();
 
-    inline void clipPolyObject ( const QPolygonF & );
+    inline void clipPolyObject ( const QPolygonF & sourcePolygon, 
+                                 QVector<QPolygonF> & clippedPolyObjects,
+                                 bool isClosed );
 
-    inline void clipMultiple();
-    inline void clipOnce();
+    inline void clipMultiple( QPolygonF & clippedPolyObject,
+                              QVector<QPolygonF> & clippedPolyObjects,
+                              bool isClosed );
+    inline void clipOnce( QPolygonF & clippedPolyObject,
+                              QVector<QPolygonF> & clippedPolyObjects,
+                              bool isClosed );
+    inline void clipOnceCorner( QPolygonF & clippedPolyObject,
+                                QVector<QPolygonF> & clippedPolyObjects,
+                                const QPointF& corner,
+                                const QPointF& point,
+                                bool isClosed );
+    inline void clipOnceEdge(   QPolygonF & clippedPolyObject,
+                                QVector<QPolygonF> & clippedPolyObjects,
+                                const QPointF& point,
+                                bool isClosed );
+
 
     inline qreal _m( const QPointF & start, const QPointF & end ) const;
 
@@ -114,11 +127,16 @@ void ClipPainter::drawPolygon ( const QPolygonF & polygon,
     d->initClipRect();
 
     if ( d->m_doClip ) {	
-        d->clipPolyObject( polygon );
-        if ( d->m_clippedObject.size() > 2 ) {
-            // qDebug() << "Size: " << m_clippedObject.size();
-            QPainter::drawPolygon ( d->m_clippedObject, fillRule );
-            // qDebug() << "done";
+        QVector<QPolygonF> clippedPolyObjects;
+
+        d->clipPolyObject( polygon, clippedPolyObjects, true );
+
+        foreach( const QPolygonF & clippedPolyObject, clippedPolyObjects ) { 
+            if ( clippedPolyObject.size() > 2 ) {
+                // qDebug() << "Size: " << clippedPolyObject.size();
+                QPainter::drawPolygon ( clippedPolyObject, fillRule );
+                // qDebug() << "done";
+            }
         }
     }
     else {
@@ -131,15 +149,20 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
     d->initClipRect();
 
     if ( d->m_doClip ) {	
-        d->clipPolyObject( polygon );
-        if ( d->m_clippedObject.size() > 1 ) {
-            // qDebug() << "Size: " << m_clippedObject.size();
-            QPainter::drawPolyline ( d->m_clippedObject );
-            // qDebug() << "done";
+        QVector<QPolygonF> clippedPolyObjects;
 
-            #ifdef DEBUG_DRAW_NODES
-                d->debugDrawNodes( d->m_clippedObject );
-            #endif
+        d->clipPolyObject( polygon, clippedPolyObjects, false );
+
+        foreach( const QPolygonF & clippedPolyObject, clippedPolyObjects ) { 
+            if ( clippedPolyObject.size() > 1 ) {
+                // qDebug() << "Size: " << clippedPolyObject.size();
+                QPainter::drawPolyline ( clippedPolyObject );
+                // qDebug() << "done";
+
+                #ifdef DEBUG_DRAW_NODES
+                    d->debugDrawNodes( clippedPolyObject );
+                #endif
+            }
         }
     }
     else {
@@ -151,31 +174,39 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
     }
 }
 
-void ClipPainter::drawPolyline( const QPolygonF & polygon, QPointF * labelNodes, int & labelNodeNum )
+void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& labelNodes )
 {
     d->initClipRect();
 
     if ( d->m_doClip ) {    
-        d->clipPolyObject( polygon );
-        if ( d->m_clippedObject.size() > 1 ) {
-            // qDebug() << "Size: " << m_clippedObject.size();
-            QPainter::drawPolyline ( d->m_clippedObject );
-            // qDebug() << "done";
+ 
+        QVector<QPolygonF> clippedPolyObjects;
 
-            #ifdef DEBUG_DRAW_NODES
-                d->debugDrawNodes( d->m_clippedObject );
-            #endif
+        d->clipPolyObject( polygon, clippedPolyObjects, false );
 
-            // Now let's start returning the label coordinates
-            if ( labelNodes == 0 ) 
-                return;
+        foreach( const QPolygonF & clippedPolyObject, clippedPolyObjects ) { 
+            if ( clippedPolyObject.size() > 1 ) {
+                // qDebug() << "Size: " << clippedPolyObject.size();
+                QPainter::drawPolyline ( clippedPolyObject );
+                // qDebug() << "done";
 
-            // The Label at the center of the polyline:
-            int labelPosition = static_cast<int>( d->m_clippedObject.size() / 2.0 );
-
-            *labelNodes = (d->m_clippedObject).at( labelPosition );
-            labelNodeNum = 1; // For now we only allow one single label;
-
+                #ifdef DEBUG_DRAW_NODES
+                    d->debugDrawNodes( clippedPolyObject );
+                #endif
+/*
+                // Now let's start returning the label coordinates
+                if ( labelNodes == 0 ) 
+                    return;
+*/
+                // The Label at the center of the polyline:
+                int labelPosition = static_cast<int>( clippedPolyObject.size() / 2.0 );
+                if ( clippedPolyObject.size() > 0 ) {
+                    if ( labelPosition >= clippedPolyObject.size() ) {
+                        labelPosition = clippedPolyObject.size() - 1;
+                    }
+                    labelNodes << clippedPolyObject.at( labelPosition );
+                }
+            }
         }
     }
     else {
@@ -185,16 +216,14 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QPointF * labelNodes,
             d->debugDrawNodes( polygon );
         #endif
 
-        // Now let's start returning the label coordinates
-        if ( labelNodes == 0 ) 
-            return;
-
         // The Label at the center of the polyline:
         int labelPosition = static_cast<int>( polygon.size() / 2.0 );
-
-        *labelNodes = (polygon).at( labelPosition );
-        labelNodeNum = 1; // For now we only allow one single label;
-
+        if ( polygon.size() > 0 ) {
+            if ( labelPosition >= polygon.size() ) {
+                labelPosition = polygon.size() - 1;
+            }
+            labelNodes << (polygon).at( labelPosition );
+        }
     }
 }
 
@@ -248,9 +277,10 @@ QPointF ClipPainterPrivate::clipRight( qreal m, const QPointF & point ) const
 }
 
 
-void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon )
+void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon, 
+                                          QVector<QPolygonF> & clippedPolyObjects,
+                                          bool isClosed )
 {
-
     // If we think of the image borders as (infinitly long) parallel
     // lines then the plane is divided into 9 sectors.  Each of these
     // sections is identified by a unique keynumber (currentSector):
@@ -263,7 +293,11 @@ void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon )
     //
 
     //	qDebug() << "ClipPainter enabled." ;
-    m_clippedObject.clear();
+    // clippedPolyObjects.clear();
+
+    // Only create a new polyObject as soon as we know for sure that 
+    // the current point is on the screen. 
+    QPolygonF clippedPolyObject = QPolygonF();
 
     const QVector<QPointF>::const_iterator  itStartPoint = polygon.constBegin();
     const QVector<QPointF>::const_iterator  itEndPoint   = polygon.constEnd();
@@ -275,21 +309,21 @@ void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon )
         // qDebug() << "m_currentPoint.x()" << m_currentPoint.x() << "m_currentPOint.y()" << m_currentPoint.y();
 
         // Figure out the section of the current point.
-        int m_currentXSector = 1;
+        int currentXSector = 1;
         if ( m_currentPoint.x() < m_left )
-            m_currentXSector = 0;
+            currentXSector = 0;
         else if ( m_currentPoint.x() > m_right ) 
-            m_currentXSector = 2;
+            currentXSector = 2;
 							
-        int m_currentYSector = 3;
+        int currentYSector = 3;
         if ( m_currentPoint.y() < m_top ) 
-            m_currentYSector = 0;
+            currentYSector = 0;
         else if ( m_currentPoint.y() > m_bottom ) 
-            m_currentYSector = 6;
+            currentYSector = 6;
 
         // By adding m_currentXSector and m_currentYSector we get a 
         // sector number of the values shown in the ASCII-art graph above.
-        m_currentSector = m_currentYSector + m_currentXSector;
+        m_currentSector = currentYSector + currentXSector;
 
         // Initialize a few remaining variables.
         if ( itPoint == itStartPoint ) {
@@ -303,14 +337,25 @@ void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon )
                 // previous point is visible on the screen but not both. 
                 // Hence we only need to clip once and require only one interpolation 
                 // for both cases.
-                clipOnce();
+
+                clipOnce( clippedPolyObject, clippedPolyObjects, isClosed );
             }
             else {
                 // This case mostly deals with lines that reach from one
                 // sector that is located offscreen to another one that
                 // is located offscreen. In this situation the line 
                 // can get clipped once, twice, or not at all.
-                clipMultiple();		
+/*
+                if ( !isClosed ) {
+                    clippedPolyObject = QPolygonF(); 
+                }
+*/
+                clipMultiple( clippedPolyObject, clippedPolyObjects, isClosed );
+/*
+                if ( !isClosed && !clippedPolyObject.isEmpty() ) {
+                    clippedPolyObjects << clippedPolyObject;
+                }
+*/
             }
 
             m_previousSector = m_currentSector;
@@ -318,7 +363,8 @@ void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon )
 
         // If the current point is onscreen, just add it to our final polygon.
         if ( m_currentSector == 4 ) {
-            m_clippedObject << m_currentPoint;
+
+            clippedPolyObject << m_currentPoint;
 #ifdef MARBLE_DEBUG
             ++(m_debugNodeCount);
 #endif
@@ -326,10 +372,17 @@ void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon )
 
         m_previousPoint = m_currentPoint;
     }
+
+    // Only add the pointer if there's node data available.
+    if ( !clippedPolyObject.isEmpty() ) {
+        clippedPolyObjects << clippedPolyObject;
+    }
 }
 
 
-void ClipPainterPrivate::clipMultiple()
+void ClipPainterPrivate::clipMultiple( QPolygonF & clippedPolyObject,
+                                       QVector<QPolygonF> & clippedPolyObjects,
+                                       bool isClosed )
 {
     // Take care of adding nodes in the image corners if the iterator 
     // traverses offscreen sections.
@@ -344,14 +397,14 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointLeft = clipLeft( m, m_currentPoint );
 
             if ( pointRight.y() > m_top ) {
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             } else {
-                m_clippedObject << QPointF( m_right, m_top );
+                clippedPolyObject << QPointF( m_right, m_top );
             }
             if ( pointTop.x() >= m_left && pointTop.x() < m_right )
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             if ( pointLeft.y() > m_top ) 
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
         }
         else if ( m_previousSector == 7 ) {
             QPointF pointBottom = clipBottom( m, m_previousPoint );
@@ -359,14 +412,14 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointLeft = clipLeft( m, m_currentPoint );
 
             if ( pointBottom.x() > m_left ) {
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             } else {
-                m_clippedObject << QPointF( m_left, m_bottom );
+                clippedPolyObject << QPointF( m_left, m_bottom );
             }
             if ( pointLeft.y() >= m_top && pointLeft.y() < m_bottom ) 
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             if ( pointTop.x() > m_left )
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
         }
         else if ( m_previousSector == 8 ) {
             QPointF pointBottom = clipBottom( m, m_previousPoint );
@@ -375,21 +428,21 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointLeft = clipLeft( m, m_currentPoint );
 
             if ( pointBottom.x() > m_left && pointBottom.x() < m_right )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             if ( pointRight.y() > m_top && pointRight.y() < m_bottom ) 
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             if ( pointTop.x() > m_left && pointTop.x() < m_right ) 
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             if ( pointLeft.y() > m_top && pointLeft.y() < m_bottom ) 
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
    
             if ( pointBottom.x() <= m_left && pointLeft.y() >= m_bottom )
-                m_clippedObject << QPointF( m_left, m_bottom );
+                clippedPolyObject << QPointF( m_left, m_bottom );
             if ( pointTop.x() >= m_right && pointRight.y() <= m_top )
-                m_clippedObject << QPointF( m_right, m_top );
+                clippedPolyObject << QPointF( m_right, m_top );
         }
 
-        m_clippedObject << QPointF( m_left, m_top );
+        clippedPolyObject << QPointF( m_left, m_top );
         break;
 
     case 1:
@@ -398,24 +451,24 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointTop = clipTop( m, m_currentPoint );
 
             if ( pointLeft.y() > m_top ) {
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             } else {
-                m_clippedObject << QPointF( m_left, m_top );
+                clippedPolyObject << QPointF( m_left, m_top );
             }
             if ( pointTop.x() > m_left )
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
         }
         else if ( m_previousSector == 5 ) {
             QPointF pointRight = clipRight( m, m_previousPoint );
             QPointF pointTop = clipTop( m, m_currentPoint );
 
             if ( pointRight.y() > m_top ) {
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             } else {
-                m_clippedObject << QPointF( m_right, m_top );
+                clippedPolyObject << QPointF( m_right, m_top );
             }
             if ( pointTop.x() < m_right )
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
         }
         else if ( m_previousSector == 6 ) {
             QPointF pointBottom = clipBottom( m, m_previousPoint );
@@ -423,18 +476,18 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointTop = clipTop( m, m_currentPoint );
 
             if ( pointBottom.x() > m_left )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             if ( pointLeft.y() > m_top && pointLeft.y() <= m_bottom ) 
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             if ( pointTop.x() > m_left ) {
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             } else {
-                m_clippedObject << QPointF( m_left, m_top );
+                clippedPolyObject << QPointF( m_left, m_top );
             }
         }
         else if ( m_previousSector == 7 ) {
-            m_clippedObject << clipBottom( m, m_previousPoint );
-            m_clippedObject << clipTop( m, m_currentPoint );
+            clippedPolyObject << clipBottom( m, m_previousPoint );
+            clippedPolyObject << clipTop( m, m_currentPoint );
         }
         else if ( m_previousSector == 8 ) {
             QPointF pointBottom = clipBottom( m, m_previousPoint );
@@ -442,13 +495,13 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointTop = clipTop( m, m_currentPoint );
 
             if ( pointBottom.x() < m_right )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             if ( pointRight.y() > m_top && pointRight.y() <= m_bottom ) 
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             if ( pointTop.x() < m_right ) {
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             } else {
-                m_clippedObject << QPointF( m_right, m_top );
+                clippedPolyObject << QPointF( m_right, m_top );
             }
         }
         break;
@@ -460,14 +513,14 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointRight = clipRight( m, m_currentPoint );
 
             if ( pointLeft.y() > m_top ) {
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             } else {
-                m_clippedObject << QPointF( m_left, m_top );
+                clippedPolyObject << QPointF( m_left, m_top );
             }
             if ( pointTop.x() > m_left && pointTop.x() <= m_right )
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             if ( pointRight.y() > m_top ) 
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
         }
         else if ( m_previousSector == 7 ) {
             QPointF pointBottom = clipBottom( m, m_previousPoint );
@@ -475,14 +528,14 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointRight = clipRight( m, m_currentPoint );
 
             if ( pointBottom.x() < m_right ) {
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             } else {
-                m_clippedObject << QPointF( m_right, m_bottom );
+                clippedPolyObject << QPointF( m_right, m_bottom );
             }
             if ( pointRight.y() >= m_top && pointRight.y() < m_bottom ) 
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             if ( pointTop.x() < m_right )
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
         }
         else if ( m_previousSector == 6 ) {
             QPointF pointBottom = clipBottom( m, m_previousPoint );
@@ -491,21 +544,21 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointRight = clipRight( m, m_previousPoint );
 
             if ( pointBottom.x() > m_left && pointBottom.x() < m_right )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             if ( pointLeft.y() > m_top && pointLeft.y() < m_bottom ) 
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             if ( pointTop.x() > m_left && pointTop.x() < m_right ) 
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             if ( pointRight.y() > m_top && pointRight.y() < m_bottom ) 
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
    
             if ( pointBottom.x() >= m_right && pointRight.y() >= m_bottom )
-                m_clippedObject << QPointF( m_right, m_bottom );
+                clippedPolyObject << QPointF( m_right, m_bottom );
             if ( pointTop.x() <= m_left && pointLeft.y() <= m_top )
-                m_clippedObject << QPointF( m_left, m_top );
+                clippedPolyObject << QPointF( m_left, m_top );
         }
 
-        m_clippedObject << QPointF( m_right, m_top );
+        clippedPolyObject << QPointF( m_right, m_top );
         break;
 
     case 3:
@@ -514,11 +567,11 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointLeft = clipLeft( m, m_currentPoint );
 
             if ( pointBottom.x() > m_left )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             if ( pointLeft.y() < m_bottom ) {
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             } else {
-                m_clippedObject << QPointF( m_left, m_bottom );
+                clippedPolyObject << QPointF( m_left, m_bottom );
             }
         }
         else if ( m_previousSector == 1 ) {
@@ -526,11 +579,11 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointLeft = clipLeft( m, m_currentPoint );
 
             if ( pointTop.x() > m_left )
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             if ( pointLeft.y() > m_top ) {
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             } else {
-                m_clippedObject << QPointF( m_left, m_top );
+                clippedPolyObject << QPointF( m_left, m_top );
             }
         }
         else if ( m_previousSector == 8 ) {
@@ -539,18 +592,18 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointLeft = clipLeft( m, m_currentPoint );
 
             if ( pointRight.y() < m_bottom ) 
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             if ( pointBottom.x() > m_left && pointBottom.x() <= m_right )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             if ( pointLeft.y() < m_bottom ) {
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             } else {
-                m_clippedObject << QPointF( m_left, m_bottom );
+                clippedPolyObject << QPointF( m_left, m_bottom );
             }
         }
         else if ( m_previousSector == 5 ) {
-            m_clippedObject << clipRight( m, m_previousPoint );
-            m_clippedObject << clipLeft( m, m_currentPoint );
+            clippedPolyObject << clipRight( m, m_previousPoint );
+            clippedPolyObject << clipLeft( m, m_currentPoint );
         }
         else if ( m_previousSector == 2 ) {
             QPointF pointRight = clipRight( m, m_previousPoint );
@@ -558,13 +611,13 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointLeft = clipLeft( m, m_currentPoint );
 
             if ( pointRight.y() > m_top ) 
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             if ( pointTop.x() > m_left && pointTop.x() <= m_right )
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             if ( pointLeft.y() > m_top ) {
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             } else {
-                m_clippedObject << QPointF( m_left, m_top );
+                clippedPolyObject << QPointF( m_left, m_top );
             }
         }
         break;
@@ -575,11 +628,11 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointRight = clipRight( m, m_currentPoint );
 
             if ( pointBottom.x() < m_right )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             if ( pointRight.y() < m_bottom ) {
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             } else {
-                m_clippedObject << QPointF( m_right, m_bottom );
+                clippedPolyObject << QPointF( m_right, m_bottom );
             }
         }
         else if ( m_previousSector == 1 ) {
@@ -587,11 +640,11 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointRight = clipRight( m, m_currentPoint );
 
             if ( pointTop.x() < m_right )
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             if ( pointRight.y() > m_top ) {
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             } else {
-                m_clippedObject << QPointF( m_right, m_top );
+                clippedPolyObject << QPointF( m_right, m_top );
             }
         }
         else if ( m_previousSector == 6 ) {
@@ -600,18 +653,18 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointRight = clipRight( m, m_currentPoint );
 
             if ( pointLeft.y() < m_bottom ) 
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             if ( pointBottom.x() >= m_left && pointBottom.x() < m_right )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             if ( pointRight.y() < m_bottom ) {
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             } else {
-                m_clippedObject << QPointF( m_right, m_bottom );
+                clippedPolyObject << QPointF( m_right, m_bottom );
             }
         }
         else if ( m_previousSector == 3 ) {
-            m_clippedObject << clipLeft( m, m_previousPoint );
-            m_clippedObject << clipRight( m, m_currentPoint );
+            clippedPolyObject << clipLeft( m, m_previousPoint );
+            clippedPolyObject << clipRight( m, m_currentPoint );
         }
         else if ( m_previousSector == 0 ) {
             QPointF pointLeft = clipLeft( m, m_previousPoint );
@@ -619,13 +672,13 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointRight = clipRight( m, m_currentPoint );
 
             if ( pointLeft.y() > m_top ) 
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             if ( pointTop.x() >= m_left && pointTop.x() < m_right )
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             if ( pointRight.y() > m_top ) {
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             } else {
-                m_clippedObject << QPointF( m_right, m_top );
+                clippedPolyObject << QPointF( m_right, m_top );
             }
         }
         break;
@@ -637,14 +690,14 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointLeft = clipLeft( m, m_currentPoint );
 
             if ( pointRight.y() < m_bottom ) {
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             } else {
-                m_clippedObject << QPointF( m_right, m_bottom );
+                clippedPolyObject << QPointF( m_right, m_bottom );
             }
             if ( pointBottom.x() >= m_left && pointBottom.x() < m_right )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             if ( pointLeft.y() < m_bottom ) 
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
         }
         else if ( m_previousSector == 1 ) {
             QPointF pointTop = clipTop( m, m_previousPoint );
@@ -652,14 +705,14 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointBottom = clipBottom( m, m_currentPoint );
 
             if ( pointTop.x() > m_left ) {
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             } else {
-                m_clippedObject << QPointF( m_left, m_top );
+                clippedPolyObject << QPointF( m_left, m_top );
             }
             if ( pointLeft.y() > m_top && pointLeft.y() <= m_bottom ) 
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             if ( pointBottom.x() > m_left )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
         }
         else if ( m_previousSector == 2 ) {
             QPointF pointTop = clipTop( m, m_currentPoint );
@@ -668,21 +721,21 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointLeft = clipLeft( m, m_currentPoint );
 
             if ( pointTop.x() > m_left && pointTop.x() < m_right ) 
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             if ( pointRight.y() > m_top && pointRight.y() < m_bottom ) 
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             if ( pointBottom.x() > m_left && pointBottom.x() < m_right )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             if ( pointLeft.y() > m_top && pointLeft.y() < m_bottom ) 
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
    
             if ( pointBottom.x() >= m_right && pointRight.y() >= m_bottom )
-                m_clippedObject << QPointF( m_right, m_bottom );
+                clippedPolyObject << QPointF( m_right, m_bottom );
             if ( pointTop.x() <= m_left && pointLeft.y() <= m_top )
-                m_clippedObject << QPointF( m_left, m_top );
+                clippedPolyObject << QPointF( m_left, m_top );
         }
 
-        m_clippedObject << QPointF( m_left, m_bottom );
+        clippedPolyObject << QPointF( m_left, m_bottom );
         break;
 
     case 7:
@@ -691,24 +744,24 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointBottom = clipBottom( m, m_currentPoint );
 
             if ( pointLeft.y() < m_bottom ) {
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             } else {
-                m_clippedObject << QPointF( m_left, m_bottom );
+                clippedPolyObject << QPointF( m_left, m_bottom );
             }
             if ( pointBottom.x() > m_left )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
         }
         else if ( m_previousSector == 5 ) {
             QPointF pointRight = clipRight( m, m_previousPoint );
             QPointF pointBottom = clipBottom( m, m_currentPoint );
 
             if ( pointRight.y() < m_bottom ) {
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             } else {
-                m_clippedObject << QPointF( m_right, m_bottom );
+                clippedPolyObject << QPointF( m_right, m_bottom );
             }
             if ( pointBottom.x() < m_right )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
         }
         else if ( m_previousSector == 0 ) {
             QPointF pointTop = clipTop( m, m_previousPoint );
@@ -716,18 +769,18 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointBottom = clipBottom( m, m_currentPoint );
 
             if ( pointTop.x() > m_left )
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             if ( pointLeft.y() >= m_top && pointLeft.y() < m_bottom ) 
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             if ( pointBottom.x() > m_left ) {
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             } else {
-                m_clippedObject << QPointF( m_left, m_bottom );
+                clippedPolyObject << QPointF( m_left, m_bottom );
             }
         }
         else if ( m_previousSector == 1 ) {
-            m_clippedObject << clipTop( m, m_previousPoint );
-            m_clippedObject << clipBottom( m, m_currentPoint );
+            clippedPolyObject << clipTop( m, m_previousPoint );
+            clippedPolyObject << clipBottom( m, m_currentPoint );
         }
         else if ( m_previousSector == 2 ) {
             QPointF pointTop = clipTop( m, m_previousPoint );
@@ -735,13 +788,13 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointBottom = clipBottom( m, m_currentPoint );
 
             if ( pointTop.x() < m_right )
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             if ( pointRight.y() >= m_top && pointRight.y() < m_bottom ) 
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             if ( pointBottom.x() < m_right ) {
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             } else {
-                m_clippedObject << QPointF( m_right, m_bottom );
+                clippedPolyObject << QPointF( m_right, m_bottom );
             }
         }
         break;
@@ -753,14 +806,14 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointRight = clipRight( m, m_currentPoint );
 
             if ( pointLeft.y() < m_bottom ) {
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             } else {
-                m_clippedObject << QPointF( m_left, m_bottom );
+                clippedPolyObject << QPointF( m_left, m_bottom );
             }
             if ( pointBottom.x() > m_left && pointBottom.x() <= m_right )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             if ( pointRight.y() < m_bottom ) 
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
         }
         else if ( m_previousSector == 1 ) {
             QPointF pointTop = clipTop( m, m_previousPoint );
@@ -768,14 +821,14 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointBottom = clipBottom( m, m_currentPoint );
 
             if ( pointTop.x() < m_right ) {
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             } else {
-                m_clippedObject << QPointF( m_right, m_top );
+                clippedPolyObject << QPointF( m_right, m_top );
             }
             if ( pointRight.y() > m_top && pointRight.y() <= m_bottom ) 
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
             if ( pointBottom.x() < m_right )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
         }
         else if ( m_previousSector == 0 ) {
             QPointF pointTop = clipTop( m, m_currentPoint );
@@ -784,21 +837,21 @@ void ClipPainterPrivate::clipMultiple()
             QPointF pointRight = clipRight( m, m_previousPoint );
 
             if ( pointTop.x() > m_left && pointTop.x() < m_right ) 
-                m_clippedObject << pointTop;
+                clippedPolyObject << pointTop;
             if ( pointLeft.y() > m_top && pointLeft.y() < m_bottom ) 
-                m_clippedObject << pointLeft;
+                clippedPolyObject << pointLeft;
             if ( pointBottom.x() > m_left && pointBottom.x() < m_right )
-                m_clippedObject << pointBottom;
+                clippedPolyObject << pointBottom;
             if ( pointRight.y() > m_top && pointRight.y() < m_bottom ) 
-                m_clippedObject << pointRight;
+                clippedPolyObject << pointRight;
    
             if ( pointBottom.x() <= m_left && pointLeft.y() >= m_bottom )
-                m_clippedObject << QPointF( m_left, m_bottom );
+                clippedPolyObject << QPointF( m_left, m_bottom );
             if ( pointTop.x() >= m_right && pointRight.y() <= m_top )
-                m_clippedObject << QPointF( m_right, m_top );
+                clippedPolyObject << QPointF( m_right, m_top );
         }
 
-        m_clippedObject << QPointF( m_right, m_bottom );
+        clippedPolyObject << QPointF( m_right, m_bottom );
         break;
 
     default:
@@ -806,8 +859,57 @@ void ClipPainterPrivate::clipMultiple()
     }
 }
 
+void ClipPainterPrivate::clipOnceCorner( QPolygonF & clippedPolyObject,
+                                         QVector<QPolygonF> & clippedPolyObjects,
+                                         const QPointF& corner,
+                                         const QPointF& point, 
+                                         bool isClosed )
+{
+    if ( m_currentSector == 4) {
+        // Appearing
+        if ( isClosed ) {
+            clippedPolyObject << corner;
+        }
+        else {
+            clippedPolyObject = QPolygonF(); 
+        }
+        clippedPolyObject << point;
+    } else {
+        // Disappearing
+        clippedPolyObject << point;
+        if ( isClosed ) {
+            clippedPolyObject << corner;
+        }
+        else {
+            clippedPolyObjects << clippedPolyObject;
+        }
+    }
+}
 
-void ClipPainterPrivate::clipOnce()
+void ClipPainterPrivate::clipOnceEdge( QPolygonF & clippedPolyObject,
+                                       QVector<QPolygonF> & clippedPolyObjects,
+                                       const QPointF& point,
+                                       bool isClosed )
+{
+    if ( m_currentSector == 4) {
+        // Appearing
+        if ( !isClosed ) {
+            clippedPolyObject = QPolygonF();
+        }
+        clippedPolyObject << point;
+    }
+    else {
+        // Disappearing
+        clippedPolyObject << point;
+        if ( !isClosed ) {
+            clippedPolyObjects << clippedPolyObject;           
+        }
+    }
+}
+
+void ClipPainterPrivate::clipOnce( QPolygonF & clippedPolyObject,
+                                   QVector<QPolygonF> & clippedPolyObjects,
+                                   bool isClosed )
 {
     //	Interpolate border points (linear interpolation)
     QPointF point;
@@ -825,68 +927,44 @@ void ClipPainterPrivate::clipOnce()
         if ( point.x() < m_left ) {
             point = clipLeft( m, point );
         }
-        if ( m_currentSector == 4) {
-            m_clippedObject << QPoint( m_left, m_top );
-            m_clippedObject << point;
-        } else {
-            m_clippedObject << point;
-            m_clippedObject << QPoint( m_left, m_top );
-        }
+        clipOnceCorner( clippedPolyObject, clippedPolyObjects, QPointF( m_left, m_top ), point, isClosed );
         break;
     case 1: // top
         point = clipTop( m, m_previousPoint );
-        m_clippedObject << point;
+        clipOnceEdge( clippedPolyObject, clippedPolyObjects, point, isClosed );
         break;
     case 2: // topright
         point = clipTop( m, m_previousPoint );
         if ( point.x() > m_right ) {
             point = clipRight( m, point );
         }
-        if ( m_currentSector == 4) {
-            m_clippedObject << QPoint( m_right, m_top );
-            m_clippedObject << point;
-        } else {
-            m_clippedObject << point;
-            m_clippedObject << QPoint( m_right, m_top );
-        }
+        clipOnceCorner( clippedPolyObject, clippedPolyObjects, QPointF( m_right, m_top ), point, isClosed );
         break;
     case 3: // left
         point = clipLeft( m, m_previousPoint );
-        m_clippedObject << point;
+        clipOnceEdge( clippedPolyObject, clippedPolyObjects, point, isClosed );
         break;
     case 5: // right
         point = clipRight( m, m_previousPoint );
-        m_clippedObject << point;
+        clipOnceEdge( clippedPolyObject, clippedPolyObjects, point, isClosed );
         break;
     case 6: // bottomleft
         point = clipBottom( m, m_previousPoint );
         if ( point.x() < m_left ) {
             point = clipLeft( m, point );
         }
-        if ( m_currentSector == 4) {
-            m_clippedObject << QPoint( m_left, m_bottom );
-            m_clippedObject << point;
-        } else {
-            m_clippedObject << point;
-            m_clippedObject << QPoint( m_left, m_bottom );
-        }
+        clipOnceCorner( clippedPolyObject, clippedPolyObjects, QPointF( m_left, m_bottom ), point, isClosed );
         break;
     case 7: // bottom
         point = clipBottom( m, m_previousPoint );
-        m_clippedObject << point;
+        clipOnceEdge( clippedPolyObject, clippedPolyObjects, point, isClosed );
         break;
     case 8: // bottomright
         point = clipBottom( m, m_previousPoint );
         if ( point.x() > m_right ) {
             point = clipRight( m, point );
         }
-        if ( m_currentSector == 4) {
-            m_clippedObject << QPoint( m_right, m_bottom );
-            m_clippedObject << point;
-        } else {
-            m_clippedObject << point;
-            m_clippedObject << QPoint( m_right, m_bottom );
-        }
+        clipOnceCorner( clippedPolyObject, clippedPolyObjects, QPointF( m_right, m_bottom ), point, isClosed );
         break;
     default:
         break;			

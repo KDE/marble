@@ -45,6 +45,10 @@ class SphericalScanlineTextureMapper : public AbstractScanlineTextureMapper
     void pixelValueApprox(const qreal& lon, const qreal& lat,
                           QRgb *scanLine, bool smooth );
 
+    inline void memfill( QRgb* source, QRgb* target );
+
+    inline bool needsFilter( const QRgb& rgb, int& oldR, int& oldB, int &oldG  );
+
     bool         m_interpolate;
     int          m_nBest;
 

@@ -86,14 +86,12 @@ uint TextureTilePrivate::pixel( int x, int y ) const
     return (jumpTable32)[y][x];
 }
 
-uint TextureTilePrivate::pixelF( qreal x, qreal y ) const
+uint TextureTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
 {
     // Bilinear interpolation to determine the color of a subpixel 
 
     int iX = (int)(x);
     int iY = (int)(y);
-
-    QRgb topLeftValue  =  pixel( iX, iY );
 
     qreal fY = y - iY;
 
@@ -398,7 +396,19 @@ uint TextureTile::pixelF( qreal x, qreal y ) const
 {
     Q_D( const TextureTile );
 
-    return d->pixelF( x, y );
+    int iX = (int)(x);
+    int iY = (int)(y);
+
+    QRgb topLeftValue  =  pixel( iX, iY );
+
+    return d->pixelF( x, y, topLeftValue );
+}
+
+uint TextureTile::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
+{
+    Q_D( const TextureTile );
+
+    return d->pixelF( x, y, topLeftValue );
 }
 
 int TextureTile::depth() const

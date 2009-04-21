@@ -164,8 +164,8 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     renderLatitudeLine( painter, -axialTilt, viewLatLonAltBox, tr( "Tropic of Capricorn" ) );        
 
     // Render the arctics
-    renderLatitudeLine( painter, +90.0 - axialTilt, viewLatLonAltBox, tr( "Antarctic Circle" ) );        
-    renderLatitudeLine( painter, -90.0 + axialTilt, viewLatLonAltBox, tr( "Arctic Circle" ) );        
+    renderLatitudeLine( painter, +90.0 - axialTilt, viewLatLonAltBox, tr( "Arctic Circle" ) );        
+    renderLatitudeLine( painter, -90.0 + axialTilt, viewLatLonAltBox, tr( "Antarctic Circle" ) );        
 
     painter->restore();
 

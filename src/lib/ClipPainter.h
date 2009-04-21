@@ -63,7 +63,7 @@ class MARBLE_EXPORT ClipPainter : public QPainter
                       Qt::FillRule fillRule = Qt::OddEvenFill );
 
     void drawPolyline( const QPolygonF & );
-    void drawPolyline( const QPolygonF &, QPointF * labelNodes, int & labelNodeNum );
+    void drawPolyline( const QPolygonF &, QVector<QPointF>& labelNodes );
 
     //	void clearNodeCount(){ m_debugNodeCount = 0; }
     //	int nodeCount(){ return m_debugNodeCount; }

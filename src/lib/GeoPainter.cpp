@@ -390,12 +390,15 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QStr
         }
     }
     else {
+        QVector<QPointF> labelNodes;
         foreach( QPolygonF* itPolygon, polygons ) {
-            int labelNodeNum;
-            QPointF * labelNode = new QPointF;
-            ClipPainter::drawPolyline( *itPolygon, labelNode, labelNodeNum );
-            drawText( *labelNode, labelText );
-            delete labelNode;
+            labelNodes.clear();
+            ClipPainter::drawPolyline( *itPolygon, labelNodes );
+            if ( !labelNodes.isEmpty() ) {
+                foreach ( const QPointF& labelNode, labelNodes ) {
+                    drawText( labelNode, labelText );
+                }
+            }
         }
     }
     qDeleteAll( polygons );

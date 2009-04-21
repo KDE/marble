@@ -21,6 +21,7 @@
 
 #include <QtCore/QCache>
 #include <QtCore/QObject>
+#include <QtGui/QColor>
 
 #include "AbstractTile.h"
 
@@ -66,6 +67,7 @@ class TextureTile : public AbstractTile {
     // Subpixel calculation is done via bilinear interpolation.
 
     uint pixelF( qreal x, qreal y ) const;
+    uint pixelF( qreal x, qreal y, const QRgb& pixel ) const;
 
  Q_SIGNALS:
     void tileUpdateDone();
