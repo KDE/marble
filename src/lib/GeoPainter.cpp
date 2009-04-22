@@ -378,7 +378,6 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QStr
 //        qDebug() << "LineString doesn't get displayed on the viewport";
         return;
     }
-//    qDebug() << "Drawing LineString";
 
     QVector<QPolygonF*> polygons;
     d->createPolygonsFromLineString( lineString, polygons );
@@ -391,13 +390,26 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QStr
         }
     }
     else {
+        int labelWidth = fontMetrics().width( labelText );
+        int labelAscent = fontMetrics().ascent();
+
         QVector<QPointF> labelNodes;
         foreach( QPolygonF* itPolygon, polygons ) {
             labelNodes.clear();
             ClipPainter::drawPolyline( *itPolygon, labelNodes, labelPositionPolicy );
             if ( !labelNodes.isEmpty() ) {
                 foreach ( const QPointF& labelNode, labelNodes ) {
-                    drawText( labelNode, labelText );
+                    QPointF labelPosition = labelNode + QPointF( 3.0, -2.0 );
+
+                    // FIXME: This is a Q&D fix.
+                    qreal xmax = viewport().width() - 10.0 - labelWidth;
+                    if ( labelPosition.x() > xmax ) labelPosition.setX( xmax ); 
+                    qreal ymin = 10.0 + labelAscent;
+                    if ( labelPosition.y() < ymin ) labelPosition.setY( ymin );
+                    qreal ymax = viewport().height() - 10.0 - labelAscent;
+                    if ( labelPosition.y() > ymax ) labelPosition.setY( ymax );
+ 
+                    drawText( labelPosition, labelText );
                 }
             }
         }
