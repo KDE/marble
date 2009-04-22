@@ -13,11 +13,8 @@
 #ifndef MARBLEMAP_P_H
 #define MARBLEMAP_P_H
 
-
 #include "ViewParams.h"
-#include "TextureColorizer.h"
-#include "FileStoragePolicy.h"
-#include "FileStorageWatcher.h"
+
 
 class QPainter;
 class QRect;
@@ -25,8 +22,11 @@ class QRect;
 namespace Marble
 {
 
+class FileStoragePolicy;
+class FileStorageWatcher;
 class MarbleMap;
 class MarbleModel;
+class TextureColorizer;
 
 
 class MarbleMapPrivate

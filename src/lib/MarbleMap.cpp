@@ -35,6 +35,8 @@
 #include "AbstractProjection.h"
 #include "AbstractScanlineTextureMapper.h"
 #include "GeoPainter.h"
+#include "FileStoragePolicy.h"
+#include "FileStorageWatcher.h"
 #include "FileViewModel.h"
 #include "GeoDataFeature.h"
 #include "GeoDataCoordinates.h"
