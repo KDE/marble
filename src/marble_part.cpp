@@ -525,14 +525,6 @@ void MarblePart::writeStatusBarSettings()
 
 void MarblePart::setupActions()
 {
-    // Adding some actions for translation
-
-    KAction action1( i18n("Open Map &Data..."), this );
-    KAction action2( i18n("&Import Map Data..."), this );
-
-    KAction action4( i18n("&Add Place"), this );
-    KAction action5( i18n("Panoramio Photos"), this );
-
     // Action: Print Map
     m_printMapAction = KStandardAction::print( this, SLOT( printMapScreenShot() ),
                                                actionCollection() );
