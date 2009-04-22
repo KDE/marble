@@ -323,8 +323,10 @@ MarbleMap::MarbleMap()
     : d( new MarbleMapPrivate( this ) )
 {
 #ifdef MARBLE_DBUS
-    QDBusConnection::sessionBus().registerObject("/MarbleMap", this, 
-                    QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties);
+    QDBusConnection::sessionBus().registerObject( "/MarbleMap", this, 
+                                                  QDBusConnection::ExportAllSlots
+                                                  | QDBusConnection::ExportAllSignals
+                                                  | QDBusConnection::ExportAllProperties );
 #endif
     QTime t;
     t.start();
@@ -343,7 +345,8 @@ MarbleMap::MarbleMap()
 MarbleMap::MarbleMap(MarbleModel *model)
     : d( new MarbleMapPrivate( this ) )
 {
-//    QDBusConnection::sessionBus().registerObject("/marble", this, QDBusConnection::QDBusConnection::ExportAllSlots);
+//     QDBusConnection::sessionBus().registerObject( "/marble", this,
+//                                                   QDBusConnection::ExportAllSlots );
 
     d->m_model        = model;
     d->m_modelIsOwned = false;
