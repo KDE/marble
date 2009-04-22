@@ -93,6 +93,16 @@ enum MapQuality {
 /**
  * @brief This enum is used to choose the localization of the labels.
  */
+enum LabelPositionPolicy {
+    NoLabel,
+    LineStart,
+    LineCenter,
+    LineEnd        
+};
+
+/**
+ * @brief This enum is used to choose the localization of the labels.
+ */
 enum LabelLocalization {
     CustomAndNative,    ///< Custom and native labels
     Custom,             ///< Shows the name in the user's language

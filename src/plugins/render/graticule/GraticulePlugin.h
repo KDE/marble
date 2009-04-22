@@ -76,7 +76,8 @@ class GraticulePlugin : public RenderPlugin
      */
     void renderLatitudeLine(  GeoPainter *painter, qreal latitude,
                               const GeoDataLatLonAltBox& viewLatLonAltBox = GeoDataLatLonAltBox(),
-                              const QString& lineLabel = QString() );
+                              const QString& lineLabel = QString(), 
+                              LabelPositionPolicy labelPositionPolicy = LineCenter );
 
     /**
      * @brief Renders a longitude line within the defined view bounding box.
@@ -92,7 +93,8 @@ class GraticulePlugin : public RenderPlugin
     void renderLongitudeLine( GeoPainter *painter, qreal longitude,                         
                               const GeoDataLatLonAltBox& viewLatLonAltBox = GeoDataLatLonAltBox(),
                               qreal polarGap = 0.0,
-                              const QString& lineLabel = QString() );
+                              const QString& lineLabel = QString(),
+                              LabelPositionPolicy labelPositionPolicy = LineCenter );
 
     /**
      * @brief Renders the latitude lines that are visible within the defined view bounding box.
@@ -102,7 +104,9 @@ class GraticulePlugin : public RenderPlugin
      */
     void renderLatitudeLines( GeoPainter *painter, 
                               const GeoDataLatLonAltBox& viewLatLonAltBox,
-                              qreal step );
+                              qreal step,
+                              LabelPositionPolicy labelPositionPolicy = LineCenter
+                            );
 
     /**
      * @brief Renders the latitude lines that are visible within the defined view bounding box.
@@ -117,7 +121,9 @@ class GraticulePlugin : public RenderPlugin
     void renderLongitudeLines( GeoPainter *painter, 
                               const GeoDataLatLonAltBox& viewLatLonAltBox, 
                               qreal step, 
-                              qreal polarGap = 0.0 );
+                              qreal polarGap = 0.0,
+                              LabelPositionPolicy labelPositionPolicy = LineCenter
+                             );
 
     /**
      * @brief Maps the number of coordinate lines per 360 deg against the globe radius on the screen.

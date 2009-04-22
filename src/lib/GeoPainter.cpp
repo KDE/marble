@@ -369,7 +369,8 @@ void GeoPainter::drawLine (  const GeoDataCoordinates & p1,  const GeoDataCoordi
     drawPolyline( line ); 
 }
 
-void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QString& labelText )
+void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QString& labelText,
+                                LabelPositionPolicy labelPositionPolicy )
 {
     // If the object is not visible in the viewport return 
     if ( ! d->m_viewport->viewLatLonAltBox().intersects( lineString.latLonAltBox() ) )
@@ -393,7 +394,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QStr
         QVector<QPointF> labelNodes;
         foreach( QPolygonF* itPolygon, polygons ) {
             labelNodes.clear();
-            ClipPainter::drawPolyline( *itPolygon, labelNodes );
+            ClipPainter::drawPolyline( *itPolygon, labelNodes, labelPositionPolicy );
             if ( !labelNodes.isEmpty() ) {
                 foreach ( const QPointF& labelNode, labelNodes ) {
                     drawText( labelNode, labelText );

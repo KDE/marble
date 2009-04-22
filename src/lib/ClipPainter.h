@@ -17,6 +17,7 @@
 #include <QtCore/QPointF>
 #include <QtGui/QPainter>
 #include "marble_export.h"
+#include "global.h"
 
 class QPaintDevice;
 class QPolygonF;
@@ -63,7 +64,8 @@ class MARBLE_EXPORT ClipPainter : public QPainter
                       Qt::FillRule fillRule = Qt::OddEvenFill );
 
     void drawPolyline( const QPolygonF & );
-    void drawPolyline( const QPolygonF &, QVector<QPointF>& labelNodes );
+    void drawPolyline( const QPolygonF &, QVector<QPointF>& labelNodes, 
+                       LabelPositionPolicy labelPositionPolicy = LineCenter );
 
     //	void clearNodeCount(){ m_debugNodeCount = 0; }
     //	int nodeCount(){ return m_debugNodeCount; }
