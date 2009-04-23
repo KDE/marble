@@ -232,9 +232,9 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 //          rendering around north pole:
 
 //            if ( !crossingPoleArea )
-            if ( x < m_imageWidth ) 
-                pixelValue( lon, lat, scanLine, highQuality );
-
+            if ( x < m_imageWidth ) {
+                    pixelValue( lon, lat, scanLine, highQuality );
+            }
             m_prevLon = lon;
             m_prevLat = lat; // preparing for interpolation
 
@@ -303,7 +303,10 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
             int oldG = 0;
             int oldB = 0;
 */
-            QRgb oldRgb = qRgb( 0,0,0 );
+            QRgb oldRgb = qRgb( 255, 0, 0 );
+
+            qreal oldPosX = -1;
+            qreal oldPosY = 0;
 
             for ( int j=1; j < jmax; ++j ) {
                 qreal posX = itLon + itStepLon * j;
@@ -319,6 +322,7 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
                     itLat = m_prevLat + m_toTileCoordinatesLat;
                     posX = itLon + itStepLon * j;
                     posY = itLat + itStepLat * j;
+                    oldPosX = -1;
                 }
     
                 *scanLine = m_tile->pixel( posX, posY ); 
@@ -326,8 +330,16 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
                 // Just perform bilinear interpolation if there's a color change compared to the 
                 // last pixel that was evaluated. This speeds up things greatly for maps like OSM
                 if ( *scanLine != oldRgb ) {
-                    *scanLine = m_tile->pixelF( posX, posY, *scanLine );
-                    oldRgb = *scanLine;
+                    if ( oldPosX != -1 ) {
+                        *(scanLine - 1) = m_tile->pixelF( oldPosX, oldPosY, *(scanLine - 1) );
+                        oldPosX = -1;
+                    }
+                    oldRgb = m_tile->pixelF( posX, posY, *scanLine );
+                    *scanLine = oldRgb;
+                }
+                else {
+                    oldPosX = posX;
+                    oldPosY = posY;
                 }
                 
 /*
@@ -356,7 +368,6 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
             const int tileHeight = m_tileLoader->tileHeight();
             const int jmax = m_n;
 
-    
             for ( int j=1; j < jmax; ++j ) {
                 int iPosX = ( itLon + itStepLon * j ) >> 7;
                 int iPosY = ( itLat + itStepLat * j ) >> 7;
