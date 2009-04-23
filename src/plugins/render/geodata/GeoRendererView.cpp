@@ -88,7 +88,9 @@ void GeoRendererView::renderIndex( QModelIndex &index )
      * then call the real render function. For the rest iterate through the
      * children and recurse.
      */
-    for ( int row = 0; row < model()->rowCount( index ); ++row )
+    int rowCount = model()->rowCount( index );
+
+    for ( int row = 0; row < rowCount; ++row )
     {
         QModelIndex childIndex = model()->index( row, 0, index );
         QString output = model()->data( childIndex ).toString();
