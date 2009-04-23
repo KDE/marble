@@ -44,7 +44,6 @@
 #include "GeoSceneHead.h"
 #include "GeoSceneZoom.h"
 #include "GpxFileViewItem.h"
-#include "HttpDownloadManager.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
@@ -336,9 +335,6 @@ MarbleMap::MarbleMap()
 
     d->construct();
     qDebug("Model: Time elapsed: %d ms", t.elapsed());
-
-    // FIXME: add method initDownloadManager
-    setDownloadUrl("");
 }
 
 
@@ -352,9 +348,6 @@ MarbleMap::MarbleMap(MarbleModel *model)
     d->m_modelIsOwned = false;
 
     d->construct();
-
-    // FIXME: add method initDownloadManager
-    setDownloadUrl("");
 }
 
 MarbleMap::~MarbleMap()
@@ -362,8 +355,6 @@ MarbleMap::~MarbleMap()
     // Some basic initializations.
     d->m_width  = 0;
     d->m_height = 0;
-
-    setDownloadManager( 0 );
 
     if ( d->m_modelIsOwned )
         delete d->m_model;
@@ -416,13 +407,6 @@ int  MarbleMap::height() const
 {
     return d->m_height;
 }
-
-
-void MarbleMap::setDownloadManager(HttpDownloadManager *downloadManager)
-{
-    d->m_model->setDownloadManager( downloadManager );
-}
-
 
 Quaternion MarbleMap::planetAxis() const
 {
@@ -1165,31 +1149,6 @@ void MarbleMap::updateChangedMap()
 {
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
-}
-
-void MarbleMap::setDownloadUrl( const QString &url )
-{
-    setDownloadUrl( QUrl( url ) );
-}
-
-void MarbleMap::setDownloadUrl( const QUrl &url )
-{
-    HttpDownloadManager *downloadManager = d->m_model->downloadManager();
-    if ( downloadManager != 0 )
-        downloadManager->setServerUrl( url );
-    else {
-        d->m_storagePolicy = new FileStoragePolicy( MarbleDirs::localPath(), this );
-	
-	// Connecting the new FileStoragePolicy to the FileStorageWatcher
-	connect( d->m_storagePolicy, SIGNAL( cleared() ),
-	         d->m_storageWatcher, SLOT( resetCurrentSize() ) );
-	connect( d->m_storagePolicy, SIGNAL( sizeChanged( qint64 ) ),
-		 d->m_storageWatcher, SLOT( addToCurrentSize( qint64 ) ) );
-
-        downloadManager =
-            new HttpDownloadManager( url, d->m_storagePolicy );
-        d->m_model->setDownloadManager( downloadManager );
-    }
 }
 
 QString MarbleMap::distanceString() const

@@ -78,6 +78,11 @@ void HttpDownloadManager::setActivatedJobsLimit( int activatedJobsLimit )
     m_activatedJobsLimit = activatedJobsLimit;
 }
 
+void HttpDownloadManager::setDownloadEnabled( const bool enable )
+{
+    m_downloadEnabled = enable;
+}
+
 StoragePolicy* HttpDownloadManager::storagePolicy() const
 {
     return m_storagePolicy;

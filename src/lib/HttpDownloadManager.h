@@ -81,6 +81,11 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
      */
     void setActivatedJobsLimit( int activatedJobsLimit );
 
+    /**
+     * Switches loading on/off, useful for offline mode.
+     */
+    void setDownloadEnabled( const bool enable );
+
     StoragePolicy* storagePolicy() const;
 
  public Q_SLOTS:

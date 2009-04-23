@@ -39,6 +39,7 @@
 
 #include "DgmlAuxillaryDictionary.h"
 
+#include "FileStoragePolicy.h"
 #include "GeoPainter.h"
 #include "FileViewModel.h"
 #include "SphericalScanlineTextureMapper.h"
@@ -80,8 +81,15 @@ class MarbleModelPrivate
         : m_parent( parent ),
           m_dataFacade( 0 ),
           m_mapTheme( 0 ),
-          m_layerManager( 0 )
+          m_layerManager( 0 ),
+          m_downloadManager( new HttpDownloadManager( QUrl(), new FileStoragePolicy(
+                                                                   MarbleDirs::localPath() )))
     {
+    }
+
+    ~MarbleModelPrivate()
+    {
+        delete m_downloadManager;
     }
 
     void resize( int width, int height );
@@ -152,8 +160,6 @@ MarbleModel::MarbleModel( QObject *parent )
 
     connect( d->m_timer, SIGNAL( timeout() ),
              this,       SIGNAL( timeout() ) );
-
-    d->m_downloadManager = 0;
 
     d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
 
@@ -230,7 +236,6 @@ MarbleModel::~MarbleModel()
     delete d->m_texmapper;
 
     delete d->m_tileLoader; // disconnects from downloadManager in dtor
-    delete d->m_downloadManager;
 
     if( MarbleModelPrivate::refCounter == 1 ) {
         delete d->m_veccomposer;

@@ -50,7 +50,6 @@ class MarbleWidgetPrivate;
 // Marble
 class MarbleMap;
 class MarbleModel;
-class HttpDownloadManager;
 class TileCreator;
 class SunLocator;
 class GpxFileModel;
@@ -189,15 +188,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Set the input handler
      */
     void setInputHandler(MarbleWidgetInputHandler *handler);
-
-    /**
-     * @brief Set the download manager to load missing tiles
-     * @param manager the manager instance
-     *
-     * The instance will be destructed by MarbleWidget when not
-     * used any longer.
-     */
-    void setDownloadManager( HttpDownloadManager *downloadManager );
 
     /**
      * @brief Return the active region in which it's possible to drag the view using the mouse.
@@ -880,18 +870,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Update the widget because the model changed.
      */
     void updateChangedMap();
-
-    /**
-     * @brief Set the download url to load missing tiles
-     * @param url the url string
-     */
-    void setDownloadUrl( const QString &url );
-
-    /**
-     * @brief Set the download url to load missing tiles
-     * @param url the url objects
-     */
-    void setDownloadUrl( const QUrl &url );
 
     /**
      * @brief Set the map quality depending on the view context 

@@ -307,12 +307,9 @@ void MarblePart::showSun( bool active )
 
 void MarblePart::workOffline( bool offline )
 {
-    if ( offline ) {
-        m_controlView->marbleWidget()->setDownloadManager( 0 );
-    }
-    else {
-        m_controlView->marbleWidget()->setDownloadUrl( "http://download.kde.org/apps/marble/" );
-    }
+    HttpDownloadManager * const downloadManager =
+        m_controlView->marbleWidget()->map()->model()->downloadManager();
+    downloadManager->setDownloadEnabled( !offline );
 }
 
 void MarblePart::copyMap()

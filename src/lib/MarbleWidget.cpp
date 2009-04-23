@@ -42,7 +42,6 @@
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidgetInputHandler.h"
 #include "TileCreatorDialog.h"
-#include "HttpDownloadManager.h"
 #include "gps/GpsLayer.h"
 #include "SunLocator.h"
 #include "MergedLayerDecorator.h"
@@ -135,7 +134,6 @@ MarbleWidget::~MarbleWidget()
     // Remove and delete an existing InputHandler
     // initiazized in d->construct()
     setInputHandler( 0 );
-    setDownloadManager( 0 );
 
     delete d;
 }
@@ -235,12 +233,6 @@ void MarbleWidget::setInputHandler(MarbleWidgetInputHandler *handler)
         connect( d->m_inputhandler, SIGNAL( mouseMoveGeoPosition( QString ) ),
                  this,              SIGNAL( mouseMoveGeoPosition( QString ) ) );
     }
-}
-
-
-void MarbleWidget::setDownloadManager(HttpDownloadManager *downloadManager)
-{
-    d->m_map->setDownloadManager( downloadManager );
 }
 
 
@@ -1074,16 +1066,6 @@ void MarbleWidget::updateChangedMap()
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
     update();
-}
-
-void MarbleWidget::setDownloadUrl( const QString &url )
-{
-    setDownloadUrl( QUrl( url ) );
-}
-
-void MarbleWidget::setDownloadUrl( const QUrl &url )
-{
-    d->m_map->setDownloadUrl( url );
 }
 
 MapQuality MarbleWidget::mapQuality( ViewContext viewContext )

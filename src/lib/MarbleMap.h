@@ -51,7 +51,6 @@ class MarbleMapPrivate;
 // Marble
 class MarbleModel;
 class ViewParams;
-class HttpDownloadManager;
 class MeasureTool;
 class SunLocator;
 class GpxFileModel;
@@ -135,16 +134,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     QSize size()   const;
     int   width()  const;
     int   height() const;
-
-    /**
-     * @brief Set the download manager to load missing tiles
-     * @param manager the manager instance
-     *
-     * The instance will be destructed by MarbleMap when not
-     * used any longer.
-     */
-    void setDownloadManager( HttpDownloadManager *downloadManager );
-
 
     /**
      * @brief  Return the radius of the globe in pixels.
@@ -768,18 +757,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief Update the map because the model changed.
      */
     void updateChangedMap();
-
-    /**
-     * @brief Set the download url to load missing tiles
-     * @param url the url string
-     */
-    void setDownloadUrl( const QString &url );
-
-    /**
-     * @brief Set the download url to load missing tiles
-     * @param url the url objects
-     */
-    void setDownloadUrl( const QUrl &url );
 
     bool mapCoversViewport();
 
