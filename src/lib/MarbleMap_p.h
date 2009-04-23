@@ -22,7 +22,6 @@ class QRect;
 namespace Marble
 {
 
-class FileStoragePolicy;
 class FileStorageWatcher;
 class MarbleMap;
 class MarbleModel;
@@ -81,7 +80,6 @@ class MarbleMapPrivate
     MeasureTool     *m_measureTool;
 
     // Cache related
-    FileStoragePolicy   *m_storagePolicy; 
     FileStorageWatcher  *m_storageWatcher;
     quint64          m_persistentTileCacheLimit;
     quint64          m_volatileTileCacheLimit;

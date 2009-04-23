@@ -35,7 +35,6 @@
 #include "AbstractProjection.h"
 #include "AbstractScanlineTextureMapper.h"
 #include "GeoPainter.h"
-#include "FileStoragePolicy.h"
 #include "FileStorageWatcher.h"
 #include "FileViewModel.h"
 #include "GeoDataFeature.h"
@@ -44,6 +43,7 @@
 #include "GeoSceneHead.h"
 #include "GeoSceneZoom.h"
 #include "GpxFileViewItem.h"
+#include "HttpDownloadManager.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
@@ -53,6 +53,7 @@
 #include "PlacemarkLayout.h"
 #include "Planet.h"
 #include "Quaternion.h"
+#include "StoragePolicy.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
 #include "ViewParams.h"
@@ -117,6 +118,12 @@ void MarbleMapPrivate::construct()
 		       m_storageWatcher, SLOT( updateTheme( QString ) ) );
     // Setting the theme to the current theme.
     m_storageWatcher->updateTheme( m_parent->mapThemeId() );
+    // connect the StoragePolicy used by the download manager to the FileStorageWatcher
+    StoragePolicy * const storagePolicy = m_model->downloadManager()->storagePolicy();
+    QObject::connect( storagePolicy, SIGNAL( cleared() ),
+                      m_storageWatcher, SLOT( resetCurrentSize() ) );
+    QObject::connect( storagePolicy, SIGNAL( sizeChanged( qint64 ) ),
+                      m_storageWatcher, SLOT( addToCurrentSize( qint64 ) ) );
 }
 
 // Used to be resizeEvent()
