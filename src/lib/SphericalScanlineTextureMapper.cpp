@@ -303,7 +303,7 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
             int oldG = 0;
             int oldB = 0;
 */
-            QRgb oldRgb = qRgb( 255, 0, 0 );
+            QRgb oldRgb = qRgb( 0, 0, 0 );
 
             qreal oldPosX = -1;
             qreal oldPosY = 0;
