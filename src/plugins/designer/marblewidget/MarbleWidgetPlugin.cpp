@@ -43,7 +43,6 @@ QWidget *MarbleWidgetPlugin::createWidget(QWidget *parent)
 {
     Marble::MarbleWidget* marbleWidget = new Marble::MarbleWidget( parent );
     marbleWidget->setMapThemeId("earth/srtm/srtm.dgml");
-    marbleWidget->setDownloadUrl( "http://download.kde.org/apps/marble/" );
 
     return marbleWidget;
 }
