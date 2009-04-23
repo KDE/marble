@@ -23,6 +23,7 @@ class PlacemarkLoader : public QThread {
     public:
         PlacemarkLoader( QObject* parent, const QString& file, bool finalize = true );
         PlacemarkLoader( QObject* parent, const QString& contents, const QString& name, bool finalize = true );
+        virtual ~PlacemarkLoader();
 
         bool finalize();
         void run();
@@ -40,6 +41,7 @@ class PlacemarkLoader : public QThread {
         QString m_filepath;
         QString m_contents;
         bool m_finalize;
+        GeoDataDocument *m_document;
 };
 
 } // namespace Marble

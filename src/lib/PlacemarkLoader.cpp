@@ -32,7 +32,8 @@ PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& file, bool fin
     : QThread( parent ), 
       m_filepath( file ),
       m_contents( QString() ),
-      m_finalize( finalize ) 
+      m_finalize( finalize ),
+      m_document( 0 )
 {
 }
 
@@ -40,8 +41,14 @@ PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& contents, cons
     : QThread( parent ), 
       m_filepath( file ), 
       m_contents( contents ),
-      m_finalize( finalize )
+      m_finalize( finalize ),
+      m_document( 0 )
 {
+}
+
+PlacemarkLoader::~PlacemarkLoader()
+{
+    delete m_document;
 }
 
 void PlacemarkLoader::run()
@@ -161,16 +168,16 @@ void PlacemarkLoader::importKml( const QString& filename,
     GeoDocument* document = parser.releaseDocument();
     Q_ASSERT( document );
 
-    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
-    dataDocument->setFileName( m_filepath );
-    *placemarkContainer = PlacemarkContainer( dataDocument->placemarks(), 
+    m_document = static_cast<GeoDataDocument*>( document );
+    m_document->setFileName( m_filepath );
+    *placemarkContainer = PlacemarkContainer( m_document->placemarks(), 
                                               m_filepath );
 
     file.close();
 
     qDebug() << "newGeoDataDocumentAdded" << m_filepath;
 
-    emit newGeoDataDocumentAdded( dataDocument );
+    emit newGeoDataDocumentAdded( m_document );
 }
 
 void PlacemarkLoader::importKmlFromData( PlacemarkContainer* placemarkContainer )
@@ -188,16 +195,16 @@ void PlacemarkLoader::importKmlFromData( PlacemarkContainer* placemarkContainer 
     GeoDocument* document = parser.releaseDocument();
     Q_ASSERT( document );
 
-    GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>( document );
-    dataDocument->setFileName( m_filepath );
-    *placemarkContainer = PlacemarkContainer( dataDocument->placemarks(), 
+    m_document = static_cast<GeoDataDocument*>( document );
+    m_document->setFileName( m_filepath );
+    *placemarkContainer = PlacemarkContainer( m_document->placemarks(), 
                                               m_filepath );
 
     buffer.close();
 
     qDebug() << "newGeoDataDocumentAdded" << m_filepath;
     
-    emit newGeoDataDocumentAdded( dataDocument );
+    emit newGeoDataDocumentAdded( m_document );
 }
 
 void PlacemarkLoader::saveFile( const QString& filename,
@@ -270,9 +277,9 @@ bool PlacemarkLoader::loadFile( const QString& filename,
       return;
       }
     */
-    GeoDataDocument *document = new GeoDataDocument();
+    m_document = new GeoDataDocument();
 
-    document->setFileName( m_filepath );
+    m_document->setFileName( m_filepath );
 
     in.setVersion( QDataStream::Qt_4_2 );
 
@@ -303,11 +310,11 @@ bool PlacemarkLoader::loadFile( const QString& filename,
         mark.setPopulation( tmpint64 );
 
         placemarkContainer->append( mark );
-        document->append( mark );
+        m_document->append( mark );
     }
 
     qDebug() << "newGeoDataDocumentAdded" << m_filepath;
-    emit newGeoDataDocumentAdded( document );
+    emit newGeoDataDocumentAdded( m_document );
     return true;
 }
 
