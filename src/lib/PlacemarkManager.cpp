@@ -166,15 +166,17 @@ void PlacemarkManager::cleanupLoader( PlacemarkLoader* loader )
 
 void PlacemarkManager::loadPlacemarkContainer( PlacemarkLoader* loader, PlacemarkContainer * container )
 {
-    qDebug() << "Containername:" << container->name() << "to be finalized:" << loader->finalize() << d->m_loaderList.size();
+    qDebug() << "Containername:" << container->name() << "to be finalized:" << (d->m_loaderList.size() == 1) << d->m_loaderList.size();
     d->m_loaderList.removeAll( loader );
     if ( container )
     { 
         d->m_model->addPlacemarks( *container, false, d->m_finalized && d->m_loaderList.isEmpty() );
     }
 
-    if( 0 == d->m_loaderList.size() ) 
+    if( d->m_loaderList.isEmpty() ) {
         emit finalize();
+    }
+
     if ( loader->isFinished() ) {
          delete loader;
     }
