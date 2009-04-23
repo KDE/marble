@@ -14,6 +14,7 @@
 #include "GeoDataPlacemark.h"
 #include "PlacemarkManager.h"
 #include "MarblePlacemarkModel.h"
+
 #include <QtCore/QDebug>
 
 using namespace Marble;
@@ -49,12 +50,6 @@ QVariant KmlFileViewItem::data( int role ) const
             return m_document.fileName();
         else
             return QString("KML Document");
-    }
-    else if( role == AbstractFileViewItem::FilePointerRole ) {
-        return qVariantFromValue(&m_document);
-    }
-    else if( role == AbstractFileViewItem::FilePointerRole ) {
-        return qVariantFromValue(size());
     }
     else
         return QVariant();
