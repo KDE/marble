@@ -72,7 +72,6 @@ set(marblewidget_SRCS
     ClipPainter.cpp
     GeoPainter.cpp
     GeoPolygon.cpp
-    GridMap.cpp
     HttpDownloadManager.cpp
     HttpJob.cpp
     NetworkPlugin.cpp

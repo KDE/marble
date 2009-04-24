@@ -47,7 +47,6 @@
 #include "MercatorScanlineTextureMapper.h"
 #include "GeoPolygon.h"
 #include "gps/GpxFileModel.h"
-#include "GridMap.h"
 #include "HttpDownloadManager.h"
 #include "KmlFileViewItem.h"
 #include "LayerManager.h"
@@ -112,7 +111,6 @@ class MarbleModelPrivate
     AbstractScanlineTextureMapper   *m_texmapper;
 
     static VectorComposer   *m_veccomposer; // FIXME: Make not a pointer.
-    GridMap                 *m_gridmap;
 
     // Places on the map
     PlacemarkManager        *m_placemarkmanager;
@@ -164,7 +162,6 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
 
     d->m_texmapper = 0;
-    d->m_gridmap = new GridMap( this );
     
     if( MarbleModelPrivate::refCounter == 1 ) {
         d->m_veccomposer = new VectorComposer();
@@ -241,7 +238,6 @@ MarbleModel::~MarbleModel()
         delete d->m_veccomposer;
         delete d->m_texcolorizer;
     }
-    delete d->m_gridmap;
     delete d->m_geometrymodel;
     delete d->m_placemarkmodel;
     delete d->m_popSortModel;
@@ -605,47 +601,6 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
         }
         // Add further Vectors
         d->m_veccomposer->paintVectorMap( painter, viewParams );
-    }
-
-    // Paint the lon/lat grid around the earth.
-    bool showGrid;
-
-    viewParams->propertyValue( "coordinate-grid", showGrid );
-
-    if ( showGrid ) {
-        QPen  gridpen( QColor( 231, 231, 231, 255 ) );
-
-        // FIXME: Why would the createFoo() functions be exposed in
-        //        the class GridMap?  Shouldn't just a call to
-        //        paintGrid() or paintEquator be enough?  The internal
-        //        create...() functions should be private and not
-        //        exposed to the outside.
-
-        // Create and paint a grid
-        d->m_gridmap->createGrid( viewParams->viewport() );
-        d->m_gridmap->setPen( gridpen );
-
-        bool antialiased = false;
-
-        if (   viewParams->mapQuality() == Marble::High
-            || viewParams->mapQuality() == Marble::Print ) {
-                antialiased = true;
-        }
-
-        d->m_gridmap->paintGridMap( painter, antialiased );
-
-        // Create and paint the tropics and polar circles
-        d->m_gridmap->createTropics( viewParams->viewport() );
-        gridpen.setStyle( Qt::DotLine );
-        // gridpen.setWidthF( 1.5f );
-        d->m_gridmap->setPen( gridpen );
-        d->m_gridmap->paintGridMap( painter, antialiased );
-
-        // Create and paint Equator
-        d->m_gridmap->createEquator( viewParams->viewport() );
-        // gridpen.setWidthF( 2.0f );
-        d->m_gridmap->setPen( gridpen );
-        d->m_gridmap->paintGridMap( painter, antialiased );
     }
 
     // Paint the GeoDataPlacemark layer

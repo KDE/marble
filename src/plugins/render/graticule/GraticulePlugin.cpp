@@ -51,7 +51,7 @@ QString GraticulePlugin::guiString() const
 
 QString GraticulePlugin::nameId() const
 {
-    return QString( "graticule" );
+    return QString( "coordinate-grid" );
 }
 
 QString GraticulePlugin::description() const
