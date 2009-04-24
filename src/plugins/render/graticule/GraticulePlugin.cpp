@@ -284,11 +284,13 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
 
     qreal itStep = southLineLat;
 
+    GeoDataCoordinates::Notation notation = GeoDataCoordinates::defaultNotation();
+
     while ( itStep < northLineLat ) {
         // Create a matching label
         QString label = GeoDataCoordinates::latToString( itStep, 
-                            GeoDataCoordinates::DMS, GeoDataCoordinates::Degree, 
-                            -1, 'f' );
+                            notation, GeoDataCoordinates::Degree, 
+                            -1, 'g' );
 
         // No additional labels for the equator
         if ( labelPositionPolicy == Marble::LineCenter && itStep == 0.0 ) {
@@ -317,14 +319,16 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
     qreal westLineLon = step * static_cast<int>( westLon / step );
     qreal eastLineLon = step * ( static_cast<int>( eastLon / step ) + 1 ); 
 
+    GeoDataCoordinates::Notation notation = GeoDataCoordinates::defaultNotation();
+
     if ( !viewLatLonAltBox.crossesDateLine() ) {
         qreal itStep = westLineLon;
 
         while ( itStep < eastLineLon ) {
             // Create a matching label
             QString label = GeoDataCoordinates::lonToString( itStep, 
-                                GeoDataCoordinates::DMS, GeoDataCoordinates::Degree, 
-                                -1, 'f' );
+                                notation, GeoDataCoordinates::Degree, 
+                                -1, 'g' );
 
             // No additional labels for the prime meridian and the antimeridian
 
@@ -342,13 +346,39 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
         qreal itStep = eastLineLon;
 
         while ( itStep < 180.0 ) {
-            renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap );                
+            // Create a matching label
+            QString label = GeoDataCoordinates::lonToString( itStep, 
+                                notation, GeoDataCoordinates::Degree, 
+                                -1, 'g' );
+
+            // No additional labels for the prime meridian and the antimeridian
+
+            if ( labelPositionPolicy == Marble::LineCenter && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
+            {
+                label.clear();
+            }
+
+            renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap, 
+                                 label, labelPositionPolicy );                
             itStep += step;
         }
 
         itStep = -180.0;
         while ( itStep < westLineLon ) {
-            renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap );                
+            // Create a matching label
+            QString label = GeoDataCoordinates::lonToString( itStep, 
+                                notation, GeoDataCoordinates::Degree, 
+                                -1, 'g' );
+
+            // No additional labels for the prime meridian and the antimeridian
+
+            if ( labelPositionPolicy == Marble::LineCenter && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
+            {
+                label.clear();
+            }
+
+            renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap,                
+                                 label, labelPositionPolicy );                
             itStep += step;
         }
     }
