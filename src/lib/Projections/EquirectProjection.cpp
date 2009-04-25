@@ -43,12 +43,12 @@ AbstractProjectionHelper *EquirectProjection::helper()
 
 bool EquirectProjection::screenCoordinates( const qreal lon, const qreal lat,
                                             const ViewportParams *viewport,
-                                            int& x, int& y )
+                                            qreal& x, qreal& y )
 {
     // Convenience variables
     int  radius = viewport->radius();
-    int  width  = viewport->width();
-    int  height = viewport->height();
+    qreal  width  = (qreal)(viewport->width());
+    qreal  height = (qreal)(viewport->height());
 
     // Calculate translation of center point
     qreal  centerLon;
@@ -58,8 +58,8 @@ bool EquirectProjection::screenCoordinates( const qreal lon, const qreal lat,
     qreal  rad2Pixel = 2.0 * viewport->radius() / M_PI;
  
     // Let (x, y) be the position on the screen of the point.
-    x = (int)( width  / 2.0 + ( lon - centerLon ) * rad2Pixel );
-    y = (int)( height / 2.0 - ( lat - centerLat ) * rad2Pixel );
+    x = ( width  / 2.0 + ( lon - centerLon ) * rad2Pixel );
+    y = ( height / 2.0 - ( lat - centerLat ) * rad2Pixel );
 
     // Return true if the calculated point is inside the screen area,
     // otherwise return false.
@@ -71,7 +71,7 @@ bool EquirectProjection::screenCoordinates( const qreal lon, const qreal lat,
 
 bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
                                             const ViewportParams *viewport,
-                                            int &x, int &y, bool &globeHidesPoint )
+                                            qreal &x, qreal &y, bool &globeHidesPoint )
 {
     globeHidesPoint = false;
 
@@ -91,8 +91,8 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     geopoint.geoCoordinates( lon, lat );
 
     // Let (x, y) be the position on the screen of the geopoint.
-    x = (int)(viewport->width()  / 2.0 + rad2Pixel * (lon - centerLon));
-    y = (int)(viewport->height() / 2.0 - rad2Pixel * (lat - centerLat));
+    x = ((qreal)(viewport->width())  / 2.0 + rad2Pixel * (lon - centerLon));
+    y = ((qreal)(viewport->height()) / 2.0 - rad2Pixel * (lat - centerLat));
 
     // Return true if the calculated point is inside the screen area,
     // otherwise return false.
@@ -104,7 +104,7 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
 bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
                                             const ViewportParams *viewport,
-                                            int *x, int &y,
+                                            qreal *x, qreal &y,
                                             int &pointRepeatNum,
                                             bool &globeHidesPoint )
 {
@@ -114,8 +114,8 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
     // Convenience variables
     int  radius = viewport->radius();
-    int  width  = viewport->width();
-    int  height = viewport->height();
+    qreal  width  = (qreal)(viewport->width());
+    qreal  height = (qreal)(viewport->height());
 
     qreal  lon;
     qreal  lat;
@@ -128,8 +128,8 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     geopoint.geoCoordinates( lon, lat );
 
     // Let (itX, y) be the first guess for one possible position on screen.
-    int itX = (int)( width  / 2.0 + rad2Pixel * ( lon - centerLon ) );
-    y = (int)( height / 2.0 - rad2Pixel * ( lat - centerLat ) );
+    qreal itX = ( width  / 2.0 + rad2Pixel * ( lon - centerLon ) );
+    y = ( height / 2.0 - rad2Pixel * ( lat - centerLat ) );
 
     // Make sure that the requested point is within the visible y range:
     if ( 0 <= y && y < height ) {
@@ -152,7 +152,8 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
         // Finding the leftmost positive x value
         if ( itX > xRepeatDistance ) {
-            itX %= xRepeatDistance;
+            int repeatNum = (int)( itX / xRepeatDistance );  
+            itX = itX - repeatNum * xRepeatDistance;
         }
         if ( itX < 0 ) {
             itX += xRepeatDistance;
@@ -194,13 +195,13 @@ bool EquirectProjection::screenCoordinates( const GeoDataLineString &lineString,
         return false;
     }
 
-    int x = 0;
-    int y = 0;
+    qreal x = 0.0;
+    qreal y = 0.0;
     bool globeHidesPoint = false;
     bool isVisible = false;
 
-    int previousX = -1; 
-    int previousY = -1;
+    qreal previousX = -1.0; 
+    qreal previousY = -1.0;
     bool previousGlobeHidesPoint = false;
     bool previousIsVisible = false;
 
@@ -410,7 +411,7 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
         GeoDataCoordinates maxLonPoint( +M_PI, averageLatitude, GeoDataCoordinates::Radian );
         GeoDataCoordinates minLonPoint( -M_PI, averageLatitude, GeoDataCoordinates::Radian );
     
-        int dummyX, dummyY; // not needed
+        qreal dummyX, dummyY; // not needed
         bool dummyVal;
     
         if ( screenCoordinates( maxLonPoint, viewport, dummyX, dummyY, dummyVal ) ) {
@@ -430,7 +431,7 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
     GeoDataCoordinates maxLatPoint( averageLongitude, m_maxLat, 0.0, GeoDataCoordinates::Radian );
     GeoDataCoordinates minLatPoint( averageLongitude, m_minLat, 0.0, GeoDataCoordinates::Radian );
 
-    int dummyX, dummyY; // not needed
+    qreal dummyX, dummyY; // not needed
     bool dummyVal;
 
     if ( screenCoordinates( maxLatPoint, viewport, dummyX, dummyY, dummyVal ) ) {

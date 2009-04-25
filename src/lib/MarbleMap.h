@@ -197,7 +197,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      *         @c false if the geographical coordinates are not visible on the screen
      */
     bool screenCoordinates( qreal lon, qreal lat,
-                            int& x, int& y );
+                            qreal& x, qreal& y );
 
     /**
      * @brief Get the Y coordinate of the North Pole.

@@ -121,6 +121,7 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     // Render the normal grid
 
     painter->setPen( QColor( Qt::white ) );
+//    painter->setPen( QPen( QBrush( Qt::white ), 0.75 ) );
 
     // calculate the angular distance between coordinate lines of the normal grid
     qreal normalDegreeStep = 360.0 / m_normalLineMap.lowerBound(viewport->radius()).value();
@@ -137,7 +138,7 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     // Render the bold grid
 
-    painter->setPen( QPen( QBrush( Qt::white ), 1.5 ) );
+//    painter->setPen( QPen( QBrush( Qt::white ), 2.0 ) );
 
     // calculate the angular distance between coordinate lines of the bold grid
     qreal boldDegreeStep = 360.0 / m_boldLineMap.lowerBound(viewport->radius()).value();
@@ -149,7 +150,7 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     renderLatitudeLines(  painter, viewLatLonAltBox, boldDegreeStep,                                    
                           Marble::NoLabel );  
 
-    
+//    painter->setPen( QPen( QBrush( Qt::yellow ), 1.5 ) );    
     painter->setPen( QColor( Qt::yellow ) );
 
     // Render the equator
@@ -297,7 +298,11 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
             label.clear();
         }
 
-        renderLatitudeLine( painter, itStep, viewLatLonAltBox, label, labelPositionPolicy );
+        // Paint all latitude coordinate lines except for the equator
+        if ( itStep != 0.0 ) {
+            renderLatitudeLine( painter, itStep, viewLatLonAltBox, label, labelPositionPolicy );
+        }
+
         itStep += step;
     }
 }
@@ -337,8 +342,12 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                 label.clear();
             }
 
-            renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap, 
-                                 label, labelPositionPolicy );                
+            // Paint all longitude coordinate lines except for the meridians
+            if ( itStep != 0.0 || itStep != 180.0 || itStep != -180.0 ) {
+                renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap, 
+                                    label, labelPositionPolicy );           
+            }
+
             itStep += step;
         }
     }

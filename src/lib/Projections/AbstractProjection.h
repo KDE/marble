@@ -84,7 +84,7 @@ class AbstractProjection
      */
     virtual bool screenCoordinates( const qreal lon, const qreal lat,
                                     const ViewportParams *viewport,
-                                    int& x, int& y ) = 0;
+                                    qreal& x, qreal& y ) = 0;
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
@@ -102,12 +102,12 @@ class AbstractProjection
      */
     virtual bool screenCoordinates( const Marble::GeoDataCoordinates &geopoint, 
                                     const ViewportParams *viewport,
-                                    int &x, int &y, bool &globeHidesPoint ) = 0;
+                                    qreal &x, qreal &y, bool &globeHidesPoint ) = 0;
 
     // Will just call the virtual version with a dummy globeHidesPoint.
     bool screenCoordinates( const Marble::GeoDataCoordinates &geopoint, 
                             const ViewportParams *viewport,
-                            int &x, int &y );
+                            qreal &x, qreal &y );
 
     /**
      * @brief Get the coordinates of screen points for geographical coordinates in the map.
@@ -127,7 +127,7 @@ class AbstractProjection
      */
     virtual bool screenCoordinates( const Marble::GeoDataCoordinates &coordinates,
                                     const ViewportParams *viewport,
-                                    int *x, int &y, int &pointRepeatNum,
+                                    qreal *x, qreal &y, int &pointRepeatNum,
                                     bool &globeHidesPoint ) = 0;
 
     virtual bool screenCoordinates( const GeoDataLineString &lineString, 
@@ -153,12 +153,21 @@ class AbstractProjection
     virtual Marble::GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
                                                       const ViewportParams *viewport );
 
-    virtual Marble::GeoDataLinearRing rectOutline( const QRect& screenRect,
-                                                   const ViewportParams *viewport );
-
     virtual bool mapCoversViewport( const ViewportParams *viewport ) const = 0;
 
     bool exceedsLatitudeRange( const GeoDataCoordinates& coords ) const;
+
+    // The usage of the following methods is deprecated!
+
+    /* DEPRECATED */
+    bool screenCoordinates( const qreal lon, const qreal lat,
+                                    const ViewportParams *viewport,
+                                    int& x, int& y );
+
+    /* DEPRECATED */
+    bool screenCoordinates( const Marble::GeoDataCoordinates &geopoint, 
+                                    const ViewportParams *viewport,
+                                    int &x, int &y, bool &globeHidesPoint );
 
  protected:
     //AbstractProjectionPrivate  * const d;  Not exported so no need.

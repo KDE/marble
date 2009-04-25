@@ -102,8 +102,8 @@ void MeasureTool::paint( GeoPainter *painter,
 void MeasureTool::drawDistancePoints( GeoPainter *painter, 
                                       ViewportParams *viewport )
 {
-    int  x = 0;
-    int  y = 0;
+    qreal  x = 0.0;
+    qreal  y = 0.0;
 
     // Convenience variables
     int  width  = viewport->width();
@@ -195,8 +195,8 @@ void MeasureTool::drawDistancePath( GeoPainter* painter,
         qreal  t = (qreal)(i) / 20.0;
         qreal  lon = 0.0;
         qreal  lat = 0.0;
-        int     x = 0;
-        int     y = 0;
+        qreal     x = 0.0;
+        qreal     y = 0.0;
 
         // Let itpos be a quaternion that is between prevqpos and qpos.
         itpos.nlerp( prevqpos, qpos, t );

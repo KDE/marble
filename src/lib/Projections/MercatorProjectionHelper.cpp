@@ -46,9 +46,9 @@ void MercatorProjectionHelper::paintBase( GeoPainter     *painter,
     painter->setPen( pen );
     painter->setBrush( brush );
 
-    int  yTop;
-    int  yBottom;
-    int  xDummy;
+    qreal  yTop;
+    qreal  yBottom;
+    qreal  xDummy;
     AbstractProjection *proj = viewport->currentProjection();
 
     // Get the top and bottom y coordinates of the projected map.
@@ -77,9 +77,9 @@ void MercatorProjectionHelper::createActiveRegion( ViewportParams *viewport )
     qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    int  yTop;
-    int  yBottom;
-    int  xDummy;
+    qreal  yTop;
+    qreal  yBottom;
+    qreal  xDummy;
     AbstractProjection *proj = viewport->currentProjection();
 
     // Get the top and bottom y coordinates of the projected map.
@@ -115,9 +115,9 @@ void MercatorProjectionHelper::createProjectedRegion( ViewportParams *viewport )
     qreal  centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
 
-    int  yTop;
-    int  yBottom;
-    int  xDummy;
+    qreal  yTop;
+    qreal  yBottom;
+    qreal  xDummy;
     AbstractProjection *proj = viewport->currentProjection();
 
     // Get the top and bottom y coordinates of the projected map.

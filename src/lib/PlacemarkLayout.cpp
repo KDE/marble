@@ -225,8 +225,8 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     m_paintOrder.clear();
 
     int labelnum = 0;
-    int x = 0;
-    int y = 0;
+    qreal x = 0;
+    qreal y = 0;
 
     // earth
     bool showPlaces, showCities, showTerrain, showOtherPlaces;

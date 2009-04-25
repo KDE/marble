@@ -134,8 +134,8 @@ int ViewportParams::polarity() const
     GeoDataCoordinates southPole( 0.0, -currentProjection()->maxLat() );
 
     bool globeHidesN, globeHidesS;
-    int x;
-    int yN, yS;
+    qreal x;
+    qreal yN, yS;
 
     currentProjection()->screenCoordinates( northPole, this,
                                           x, yN, globeHidesN );

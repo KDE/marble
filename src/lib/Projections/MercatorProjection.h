@@ -54,15 +54,15 @@ class MercatorProjection : public AbstractProjection
      */
     bool screenCoordinates( const qreal lon, const qreal lat,
                             const ViewportParams *params,
-                            int& x, int& y );
+                            qreal& x, qreal& y );
 
     bool screenCoordinates( const GeoDataCoordinates &coordinates, 
                             const ViewportParams *params,
-                            int &x, int &y, bool &globeHidesPoint );
+                            qreal &x, qreal &y, bool &globeHidesPoint );
 
     bool screenCoordinates( const GeoDataCoordinates &coordinates,
                             const ViewportParams * viewport,
-                            int *x, int &y, int &pointRepeatNum,
+                            qreal *x, qreal &y, int &pointRepeatNum,
                             bool &globeHidesPoint );
 
     bool screenCoordinates( const GeoDataLineString &lineString, 

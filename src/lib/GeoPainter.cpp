@@ -35,7 +35,7 @@ class GeoPainterPrivate
     GeoPainterPrivate( ViewportParams *viewport, MapQuality mapQuality )
         : m_viewport( viewport ),
 	  m_mapQuality( mapQuality ),
-          m_x( new int[100] )
+          m_x( new qreal[100] )
     {
     }
 
@@ -139,7 +139,7 @@ class GeoPainterPrivate
     ViewportParams  *m_viewport;
     MapQuality       m_mapQuality;
 
-    int             *m_x;
+    qreal             *m_x;
 };
 
 GeoPainter::GeoPainter( QPaintDevice* pd, ViewportParams *viewport,
@@ -174,7 +174,7 @@ MapQuality GeoPainter::mapQuality() const
 void GeoPainter::drawAnnotation (  const GeoDataCoordinates & position, const QString & text, QSize bubbleSize, int bubbleOffsetX, int bubbleOffsetY, int xRnd, int yRnd )
 {
     int pointRepeatNum;
-    int y;
+    qreal y;
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
@@ -195,7 +195,7 @@ void GeoPainter::drawAnnotation (  const GeoDataCoordinates & position, const QS
 void GeoPainter::drawPoint (  const GeoDataCoordinates & position )
 {
     int pointRepeatNum;
-    int y;
+    qreal y;
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
@@ -212,7 +212,7 @@ void GeoPainter::drawPoint (  const GeoDataCoordinates & position )
 void GeoPainter::drawPoints (  const GeoDataCoordinates * points, int pointCount )
 {
     int pointRepeatNum;
-    int y;
+    qreal y;
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
@@ -234,7 +234,7 @@ void GeoPainter::drawPoints (  const GeoDataCoordinates * points, int pointCount
 void GeoPainter::drawText ( const GeoDataCoordinates & position, const QString & text )
 {
     int pointRepeatNum;
-    int y;
+    qreal y;
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
@@ -251,7 +251,7 @@ void GeoPainter::drawText ( const GeoDataCoordinates & position, const QString &
 void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal width, qreal height, bool isGeoProjected )
 {
     int pointRepeatNum;
-    int y;
+    qreal y;
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
@@ -319,7 +319,7 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal wid
 void GeoPainter::drawImage ( const GeoDataCoordinates & centerPoint, const QImage & image, bool isGeoProjected )
 {
     int pointRepeatNum;
-    int y;
+    qreal y;
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
@@ -339,7 +339,7 @@ void GeoPainter::drawImage ( const GeoDataCoordinates & centerPoint, const QImag
 void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPoint, const QPixmap & pixmap, bool isGeoProjected )
 {
     int pointRepeatNum;
-    int y;
+    qreal y;
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
@@ -431,7 +431,7 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRul
     d->createPolygonsFromLinearRing( linearRing, polygons );
 
     foreach( QPolygonF* itPolygon, polygons ) {
-        ClipPainter::drawPolygon( *itPolygon );
+        ClipPainter::drawPolygon( *itPolygon, fillRule );
     }
 
     qDeleteAll( polygons );
@@ -470,7 +470,7 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fill
     }
 
     foreach( QPolygonF* itOuterPolygon, outerPolygons ) {
-        ClipPainter::drawPolygon( *itOuterPolygon );
+        ClipPainter::drawPolygon( *itOuterPolygon, fillRule );
     }
 
     qDeleteAll( outerPolygons );    
@@ -479,7 +479,7 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fill
 void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates, qreal width, qreal height, bool isGeoProjected )
 {
     int pointRepeatNum;
-    int y;
+    qreal y;
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
@@ -533,7 +533,7 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates, qreal 
 void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPoint, int width, int height, int xRnd, int yRnd, bool isGeoProjected )
 {
     int pointRepeatNum;
-    int y;
+    qreal y;
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 

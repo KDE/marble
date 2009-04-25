@@ -56,13 +56,13 @@ AbstractProjectionHelper *SphericalProjection::helper()
 
 bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
                                              const ViewportParams *viewport,
-                                             int& x, int& y )
+                                             qreal& x, qreal& y )
 {
     Quaternion  p( lon, lat );
     p.rotateAroundAxis( viewport->planetAxis().inverse() );
  
-    x = (int)( viewport->width()  / 2 + (qreal)( viewport->radius() ) * p.v[Q_X] );
-    y = (int)( viewport->height() / 2 - (qreal)( viewport->radius() ) * p.v[Q_Y] );
+    x = ( viewport->width()  / 2 + (qreal)( viewport->radius() ) * p.v[Q_X] );
+    y = ( viewport->height() / 2 - (qreal)( viewport->radius() ) * p.v[Q_Y] );
  
     return (    ( 0 <= y && y < viewport->height() )
              && ( 0 <= x && x < viewport->width() ) 
@@ -71,7 +71,7 @@ bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
 
 bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinates, 
                                              const ViewportParams *viewport,
-                                             int &x, int &y, bool &globeHidesPoint )
+                                             qreal &x, qreal &y, bool &globeHidesPoint )
 {
     qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = coordinates.quaternion();
@@ -103,8 +103,8 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
     }
 
     // Let (x, y) be the position on the screen of the placemark..
-    x = (int)(viewport->width()  / 2 + pixelAltitude * qpos.v[Q_X]);
-    y = (int)(viewport->height() / 2 - pixelAltitude * qpos.v[Q_Y]);
+    x = ((qreal)(viewport->width())  / 2 + pixelAltitude * qpos.v[Q_X]);
+    y = ((qreal)(viewport->height()) / 2 - pixelAltitude * qpos.v[Q_Y]);
 
     // Skip placemarks that are outside the screen area
     if ( x < 0 || x >= viewport->width() || y < 0 || y >= viewport->height() ) {
@@ -118,7 +118,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
 
 bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
                                              const ViewportParams *viewport,
-                                             int *x, int &y,
+                                             qreal *x, qreal &y,
                                              int &pointRepeatNum,
                                              bool &globeHidesPoint )
 {
@@ -153,8 +153,8 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
     }
 
     // Let (x, y) be the position on the screen of the placemark..
-    *x = (int)(viewport->width()  / 2 + pixelAltitude * qpos.v[Q_X]);
-    y = (int)(viewport->height() / 2 - pixelAltitude * qpos.v[Q_Y]);
+    *x = ((qreal)(viewport->width())  / 2 + pixelAltitude * qpos.v[Q_X]);
+    y = ((qreal)(viewport->height()) / 2 - pixelAltitude * qpos.v[Q_Y]);
 
     // Skip placemarks that are outside the screen area
     if ( *x < 0 || *x >= viewport->width() 
@@ -187,13 +187,13 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
         return false;
     }
 
-    int x = 0;
-    int y = 0;
+    qreal x = 0;
+    qreal y = 0;
     bool globeHidesPoint = false;
     bool isVisible = false;
 
-    int previousX = -1; 
-    int previousY = -1;
+    qreal previousX = -1.0; 
+    qreal previousY = -1.0;
     bool previousGlobeHidesPoint = false;
     bool previousIsVisible = false;
 
@@ -278,7 +278,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
 
                 // We take the manhattan length as a distance approximation
                 // that can be too big by a factor of sqrt(2)
-                qreal distance = fabs((qreal)(x - previousX)) + fabs((qreal)(y - previousY));
+                qreal distance = fabs((x - previousX)) + fabs((y - previousY));
 
                 // FIXME: This is a work around: remove as soon as we handle horizon crossing
                 if ( globeHidesPoint || previousGlobeHidesPoint ) {
@@ -446,7 +446,7 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
     GeoDataCoordinates maxLatPoint( averageLongitude, m_maxLat, 0.0, GeoDataCoordinates::Radian );
     GeoDataCoordinates minLatPoint( averageLongitude, m_minLat, 0.0, GeoDataCoordinates::Radian );
 
-    int dummyX, dummyY; // not needed
+    qreal dummyX, dummyY; // not needed
     bool dummyVal;
 
     if ( screenCoordinates( maxLatPoint, viewport, dummyX, dummyY, dummyVal ) ) {
@@ -491,7 +491,7 @@ GeoDataCoordinates SphericalProjection::createHorizonCoordinates(
 {
     bool globeHidesPoint;
 
-    int x, y;
+    qreal x, y;
 
     screenCoordinates( previousCoords, viewport, x, y, globeHidesPoint );
 

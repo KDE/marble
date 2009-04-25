@@ -368,7 +368,7 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
             const int tileHeight = m_tileLoader->tileHeight();
             const int jmax = m_n;
 
-            for ( int j=1; j < jmax; ++j ) {
+            for ( int j = 1; j < jmax; ++j ) {
                 int iPosX = ( itLon + itStepLon * j ) >> 7;
                 int iPosY = ( itLat + itStepLat * j ) >> 7;
     
@@ -385,7 +385,6 @@ void SphericalScanlineTextureMapper::pixelValueApprox(const qreal& lon,
                 }
 
                 *scanLine = m_tile->pixel( iPosX, iPosY ); 
-    
                 ++scanLine;
             }
         }

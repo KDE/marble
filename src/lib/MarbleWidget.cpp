@@ -729,7 +729,7 @@ int MarbleWidget::northPoleY()
 }
 
 bool MarbleWidget::screenCoordinates( qreal lon, qreal lat,
-                                      int& x, int& y )
+                                      qreal& x, qreal& y )
 {
     return d->m_map->screenCoordinates( lon, lat, x, y );
 }

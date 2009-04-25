@@ -281,7 +281,7 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
         drawFog( painter );
 }
 
-void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect)
+void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect )
 {
     if ( !m_viewParams.mapTheme() ) {
         return;
@@ -869,7 +869,7 @@ int MarbleMap::northPoleY()
 }
 
 bool MarbleMap::screenCoordinates( qreal lon, qreal lat,
-                                   int& x, int& y )
+                                   qreal& x, qreal& y )
 {
     return d->m_viewParams.currentProjection()
         ->screenCoordinates( lon * DEG2RAD, lat * DEG2RAD,

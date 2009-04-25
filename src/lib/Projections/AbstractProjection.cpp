@@ -31,16 +31,14 @@ AbstractProjection::~AbstractProjection()
 {
 }
 
-
 bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
                                             const ViewportParams *viewport,
-                                            int &x, int &y )
+                                            qreal &x, qreal &y )
 {
     bool globeHidesPoint;
 
     return screenCoordinates( geopoint, viewport, x, y, globeHidesPoint );
 }
-
 
 GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
                                                       const ViewportParams *viewport )
@@ -124,7 +122,7 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
     GeoDataCoordinates maxLatPoint( averageLongitude, m_maxLat, 0.0, GeoDataCoordinates::Radian );
     GeoDataCoordinates minLatPoint( averageLongitude, m_minLat, 0.0, GeoDataCoordinates::Radian );
 
-    int dummyX, dummyY; // not needed
+    qreal dummyX, dummyY; // not needed
 
     if ( screenCoordinates( maxLatPoint, viewport, dummyX, dummyY ) ) {
         northLat = m_maxLat;
@@ -154,12 +152,6 @@ void AbstractProjection::coordinateExtremes( qreal lon, qreal lat,
     if ( lon > otherEastLon && lon < 0.0 ) otherEastLon = lon;
     if ( lat > northLat ) northLat = lat;
     if ( lat < southLat ) southLat = lat;
-}
-
-GeoDataLinearRing AbstractProjection::rectOutline( const QRect& screenRect,
-                                 const ViewportParams *viewport )
-{
-    return GeoDataLinearRing();
 }
 
 bool AbstractProjection::exceedsLatitudeRange( const GeoDataCoordinates &coords ) const
@@ -244,8 +236,8 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
 
     qreal  lon = 0.0;
     qreal  lat = 0.0;
-    int     x = 0;
-    int     y = 0;
+    qreal     x = 0;
+    qreal     y = 0;
     Quaternion  itpos;
 
     // Declare current values.
@@ -298,4 +290,32 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
     }
 
     return path; 
+}
+
+/* DEPRECATED */
+bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
+                                            const ViewportParams *viewport,
+                                            int &x, int &y, bool &globeHidesPoint )
+{
+    qreal rx = 0.0;
+    qreal ry = 0.0;    
+
+    bool isVisible = screenCoordinates( geopoint, viewport, rx, ry, globeHidesPoint );
+
+    x = (int)(rx); y = (int)(ry);
+
+    return isVisible;
+}
+
+/* DEPRECATED */
+bool AbstractProjection::screenCoordinates( const qreal lon, const qreal lat, 
+                                    const ViewportParams *viewport,
+                                    int &x, int &y )
+{
+    GeoDataCoordinates geopoint( lon, lat );
+
+    bool globeHidesPoint;
+    bool isVisible = screenCoordinates( geopoint, viewport, x, y, globeHidesPoint );
+
+    return isVisible;
 }
