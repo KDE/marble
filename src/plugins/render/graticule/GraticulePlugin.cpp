@@ -367,8 +367,11 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                 label.clear();
             }
 
-            renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap, 
-                                 label, labelPositionPolicy );                
+            // Paint all longitude coordinate lines except for the meridians
+            if ( itStep != 0.0 || itStep != 180.0 || itStep != -180.0 ) {
+                renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap, 
+                                    label, labelPositionPolicy );           
+            }
             itStep += step;
         }
 
@@ -386,8 +389,11 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                 label.clear();
             }
 
-            renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap,                
-                                 label, labelPositionPolicy );                
+            // Paint all longitude coordinate lines except for the meridians
+            if ( itStep != 0.0 || itStep != 180.0 || itStep != -180.0 ) {
+                renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap, 
+                                    label, labelPositionPolicy );           
+            }
             itStep += step;
         }
     }

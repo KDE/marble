@@ -41,23 +41,8 @@ namespace Marble
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 
 GeoDataCoordinates::GeoDataCoordinates( qreal _lon, qreal _lat, qreal _alt, GeoDataCoordinates::Unit unit, int _detail )
-  : d( new GeoDataCoordinatesPrivate() )
+  : d( new GeoDataCoordinatesPrivate( _lon, _lat, _alt, unit, _detail ) )
 {
-    d->m_altitude = _alt;
-    d->m_detail = _detail;
-    switch( unit ){
-    default:
-    case Radian:
-        d->m_q = Quaternion( _lon, _lat );
-        d->m_lon = _lon;
-        d->m_lat = _lat;
-        break;
-    case Degree:
-        d->m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
-        d->m_lon = _lon * DEG2RAD;
-        d->m_lat = _lat * DEG2RAD;
-        break;
-    }
 }
 
 /* simply copy the d pointer

@@ -44,6 +44,35 @@ class GeoDataCoordinatesPrivate
     }
 
     /*
+    * if this ctor is called there exists exactly one GeoDataCoordinates object
+    * with this data.
+    * changes will be made in the GeoDataCoordinates class
+    * ref must be called ref as qAtomicAssign used in GeoDataCoordinates::operator=
+    * needs this name. Maybe we can rename it to our scheme later on.
+    */
+    GeoDataCoordinatesPrivate( qreal _lon, qreal _lat, qreal _alt,
+                        GeoDataCoordinates::Unit unit,
+                        int _detail )
+        : m_altitude( _alt ),
+          m_detail( _detail ),
+          ref( 1 )
+    {
+        switch( unit ){
+        default:
+        case GeoDataCoordinates::Radian:
+            m_q = Quaternion( _lon, _lat );
+            m_lon = _lon;
+            m_lat = _lat;
+            break;
+        case GeoDataCoordinates::Degree:
+            m_q = Quaternion( _lon * DEG2RAD , _lat * DEG2RAD  );
+            m_lon = _lon * DEG2RAD;
+            m_lat = _lat * DEG2RAD;
+            break;
+        }
+    }
+
+    /*
     * this constructor is needed as Quaternion doesn't define a copy ctor
     * initialize the reference with the value of the other
     */
