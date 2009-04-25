@@ -705,6 +705,8 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
 
 bool GeoDataCoordinates::operator==( const GeoDataCoordinates &rhs ) const
 {
+    // do not compare the m_detail member as it does not really belong to
+    // GeoDataCoordinates and should be removed
     return d->m_lon == rhs.d->m_lon
         && d->m_lat == rhs.d->m_lat
         && d->m_altitude == rhs.d->m_altitude;
