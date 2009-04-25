@@ -5,8 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-//
-// Author:  <Shashank Singh>, (C) 2008
+// Copyright 2008      Shashan Singh <shashank.personal@gmail.com>
 //
 
 #ifndef JSONPARSER_H
@@ -33,11 +32,11 @@ struct panoramioDataStructure {
     QString photo_title; // Title of each photograph
     QString photo_url; // Url of each photograph
     QString photo_file_url;
-    int longitude;
-    int latitude;
+    qreal longitude;
+    qreal latitude;
     int width;
     int height;
-    QString upload_date;
+    QDate upload_date;
     long int owner_id;
     QString owner_name;
     QString owner_url; // Url of the User Uplaoded
@@ -52,7 +51,7 @@ public:
 
     panoramioDataStructure parseObjectOnPosition(const QString &content, int requiredObjectPosition);   //for parsing single object
 
-    QList<panoramioDataStructure> parseAllObjects(const QString &content, int numberOfObjects);   //for parsing a list objects
+    QList<panoramioDataStructure> parseAllObjects(const QString &content, int number);   //for parsing a list objects
 
 private:
     QList <panoramioDataStructure> parsedJsonOutput;

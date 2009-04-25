@@ -5,97 +5,39 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Shashan Singh <shashank.personal@gmail.com>"
+// Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-//
-// This class is a test plugin.
-//
+#ifndef PANORAMIOPLUGIN_H
+#define PANORAMIOPLUGIN_H
 
-#ifndef MARBLEPANORAMIOPLUGIN_H
-#define MARBLEPANORAMIOPLUGIN_H
-
-#include <QtCore/QObject>
-#include "../lib/HttpDownloadManager.h"
-#include "../lib/CacheStoragePolicy.h"
-// #include "../lib/HttpJob.h"
-#include "jsonparser.h"
-#include "imagewidget.h"
+#include "AbstractDataPlugin.h"
 #include "RenderPlugin.h"
-#include "MarbleWidget.h"
-#include <QWidget>
-#include <QLabel>
-#include <QPushButton>
-#include <QMouseEvent>
-#include <QRectF>
+#include "RenderPluginInterface.h"
+
+#include <QtGui/QIcon>
+
 namespace Marble {
 
-/**
- * @short The class that specifies the a simple panormaio plugin
- *
- */
-class MarbleWidget;
-
-class PanoramioPlugin : public RenderPlugin {
+class PanoramioPlugin : public AbstractDataPlugin {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( PanoramioPlugin )
-
-public:
-    QStringList backendTypes() const;
-
-    QString renderPolicy() const;
-
-    QStringList renderPosition() const;
-
-    QString name() const;
-
-    QString guiString() const;
-
-    QString nameId() const;
-
-    QString description() const;
-
-    QIcon icon() const;
-
-
+    
+ public:
+    PanoramioPlugin();
+     
     void initialize();
-
-    bool isInitialized() const;
-
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString& renderPos, GeoSceneLayer * layer = 0 );
-protected:
-//    bool eventFilter( QObject *object, QEvent *e );
-
-public slots:
-    void processFinishedJob( QString relativeUrlString, QString id );
-    /**
-     * Download images from the json-file
-     */
-    void downloadImages( QString relativeUrlString, QString id );
-    /**
-     * Append images that are have been downloaded
-     */
-    void appendImageToList( QString relativeUrlString, QString id );
-signals:
-    void statusMessageForImageDownloadingProcess(QString);
-private:
-    CacheStoragePolicy *m_storagePolicy;
-    HttpDownloadManager *m_downloadManager;
-    jsonParser panoramioJsonParser;
-    int decimalToSexagecimal();//convert decimal to DMS system
-    void downloadPanoramio( int rangeFrom, int rangeTo,
-                            qreal east,    qreal west,
-                            qreal north,   qreal south );
-    QList <panoramioDataStructure> parsedData;
-    panoramioDataStructure temp;
-    QPixmap tempImage;
-    int flag;//this flag is one when globe has an Image  (downloaded or already there in cache)
-    int numberOfImagesToShow;//this factor stires how many are to be downloaded and shown on the globe
-    QList<imageWidget*>images;//these widgets are supposed to show draw images and take click events
+    
+    QString name() const;
+    
+    QString guiString() const;
+    
+    QString description() const;
+    
+    QIcon icon() const;
 };
 
 }
 
-#endif
+#endif // PANORAMIOPLUGIN_H
