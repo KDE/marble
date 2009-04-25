@@ -347,8 +347,8 @@ void WorldClock::paintInterface(QPainter *p,
     }
 
     //Show the location on the map
-    int tzx = 0;
-    int tzy = 0;
+    qreal tzx = 0;
+    qreal tzy = 0;
     qreal lon = m_locations.value(m_locationkey).longitude() * DEG2RAD;
     qreal lat = m_locations.value(m_locationkey).latitude() * DEG2RAD;
     bool ok = m_map->viewParams()->viewport()->currentProjection()
