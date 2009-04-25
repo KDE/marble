@@ -102,7 +102,8 @@ class AbstractProjection
      */
     virtual bool screenCoordinates( const Marble::GeoDataCoordinates &geopoint, 
                                     const ViewportParams *viewport,
-                                    qreal &x, qreal &y, bool &globeHidesPoint ) = 0;
+                                    qreal &x, qreal &y, 
+                                    bool &globeHidesPoint ) = 0;
 
     // Will just call the virtual version with a dummy globeHidesPoint.
     bool screenCoordinates( const Marble::GeoDataCoordinates &geopoint, 
@@ -125,10 +126,17 @@ class AbstractProjection
      *
      * @see ViewportParams
      */
+    bool screenCoordinates( const Marble::GeoDataCoordinates &coordinates,
+                                    const ViewportParams *viewport,
+                                    qreal *x, qreal &y, int &pointRepeatNum,
+                                    bool &globeHidesPoint );
+
     virtual bool screenCoordinates( const Marble::GeoDataCoordinates &coordinates,
                                     const ViewportParams *viewport,
                                     qreal *x, qreal &y, int &pointRepeatNum,
+                                    const QSizeF& size,
                                     bool &globeHidesPoint ) = 0;
+
 
     virtual bool screenCoordinates( const GeoDataLineString &lineString, 
                                     const ViewportParams *viewport,

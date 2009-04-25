@@ -120,6 +120,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
                                              const ViewportParams *viewport,
                                              qreal *x, qreal &y,
                                              int &pointRepeatNum,
+                                             const QSizeF& size,
                                              bool &globeHidesPoint )
 {
     qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
@@ -129,9 +130,9 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
 
     qreal      pixelAltitude = ( ( viewport->radius() ) 
                                   / EARTH_RADIUS * absoluteAltitude );
-    if ( coordinates.altitude() < 10000 ) {
+    if ( coordinates.altitude() < 10000.0 ) {
         // Skip placemarks at the other side of the earth.
-        if ( qpos.v[Q_Z] < 0 ) {
+        if ( qpos.v[Q_Z] < 0.0 ) {
             globeHidesPoint = true;
             return false;
         }
@@ -143,7 +144,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
 
         // Don't draw high placemarks (e.g. satellites) that aren't visible, 
         // because they are "behind" the earth
-        if ( qpos.v[Q_Z] < 0
+        if ( qpos.v[Q_Z] < 0.0
              && ( ( earthCenteredX * earthCenteredX
                     + earthCenteredY * earthCenteredY )
                   < radius * radius ) ) {
@@ -153,12 +154,12 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
     }
 
     // Let (x, y) be the position on the screen of the placemark..
-    *x = ((qreal)(viewport->width())  / 2 + pixelAltitude * qpos.v[Q_X]);
-    y = ((qreal)(viewport->height()) / 2 - pixelAltitude * qpos.v[Q_Y]);
+    *x = ((qreal)(viewport->width())  / 2.0 + pixelAltitude * qpos.v[Q_X]);
+    y = ((qreal)(viewport->height()) / 2.0 - pixelAltitude * qpos.v[Q_Y]);
 
     // Skip placemarks that are outside the screen area
-    if ( *x < 0 || *x >= viewport->width() 
-         || y < 0 || y >= viewport->height() )
+    if ( *x + size.width() / 2.0 < 0.0 || *x >= viewport->width() + size.width() / 2.0 
+         || y + size.height() / 2.0 < 0.0 || y >= viewport->height() + size.height() / 2.0 )
     {
         globeHidesPoint = false;
         return false;

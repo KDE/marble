@@ -78,16 +78,16 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 {
  public:
     GeoPainter( QPaintDevice*pd, ViewportParams *params,
-		MapQuality mapQuality, bool clip = true );
+                MapQuality mapQuality, bool clip = true );
 
     ~GeoPainter();
     void autoMapQuality();
     MapQuality mapQuality() const;
 
 
-//  We don't go for the percentual approach that Qt takes for rounded corners for
-//  reasons of bad aesthetics here.
-    void drawAnnotation (  const GeoDataCoordinates & position, const QString & text, QSize bubbleSize = QSize( 130, 100 ), int bubbleOffsetX = -10, int bubbleOffsetY = -30, int xRnd = 5, int yRnd = 5 );
+    //  We don't go for the percentual approach that Qt takes for rounded corners for
+    //  reasons of bad aesthetics here.
+    void drawAnnotation (  const GeoDataCoordinates & position, const QString & text, QSizeF bubbleSize = QSizeF( 130, 100 ), qreal bubbleOffsetX = -10, qreal bubbleOffsetY = -30, qreal xRnd = 5, qreal yRnd = 5 );
 
     void drawPoint (  const GeoDataCoordinates & position );
     void drawPoints (  const GeoDataCoordinates * points, int pointCount );

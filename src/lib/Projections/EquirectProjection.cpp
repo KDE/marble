@@ -106,6 +106,7 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
                                             const ViewportParams *viewport,
                                             qreal *x, qreal &y,
                                             int &pointRepeatNum,
+                                            const QSizeF& size,
                                             bool &globeHidesPoint )
 {
     // On flat projections the observer's view onto the point won't be 
@@ -132,11 +133,11 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     y = ( height / 2.0 - rad2Pixel * ( lat - centerLat ) );
 
     // Make sure that the requested point is within the visible y range:
-    if ( 0 <= y && y < height ) {
+    if ( 0 <= y + size.height() / 2.0 && y < height + size.height() / 2.0 ) {
         // First we deal with the case where the repetition doesn't happen
         if ( !m_repeatX ) {
             *x = itX;
-            if ( 0 < itX && itX < width ) {
+            if ( 0 < itX + size.width() / 2.0  && itX < width + size.width() / 2.0 ) {
                 return true;
             }
             else {
@@ -144,7 +145,6 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
                 return false;
             }
         }
-
         // For the repetition case the same geopoint gets displayed on 
         // the map many times.across the longitude.
 
@@ -155,18 +155,18 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
             int repeatNum = (int)( itX / xRepeatDistance );  
             itX = itX - repeatNum * xRepeatDistance;
         }
-        if ( itX < 0 ) {
+        if ( itX + size.width() / 2.0 < 0 ) {
             itX += xRepeatDistance;
         }
         // The requested point is out of the visible x range:
-        if ( itX > width ) {
+        if ( itX > width + size.width() / 2.0 ) {
             return false;
         }
 
         // Now iterate through all visible x screen coordinates for the point 
         // from left to right.
         int itNum = 0;
-        while ( itX < width ) {
+        while ( itX - size.width() / 2.0 < width ) {
             *x = itX;
             ++x;
             ++itNum;

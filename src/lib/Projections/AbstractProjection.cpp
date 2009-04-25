@@ -40,6 +40,15 @@ bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     return screenCoordinates( geopoint, viewport, x, y, globeHidesPoint );
 }
 
+bool AbstractProjection::screenCoordinates( const Marble::GeoDataCoordinates &coordinates,
+                                    const ViewportParams *viewport,
+                                    qreal *x, qreal &y, int &pointRepeatNum,                                    bool &globeHidesPoint )
+{
+    return screenCoordinates( coordinates, viewport, x, y, pointRepeatNum, 
+           QSizeF( 0.0, 0.0 ), globeHidesPoint );
+}
+
+
 GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
                                                       const ViewportParams *viewport )
 {

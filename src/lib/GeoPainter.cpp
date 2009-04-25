@@ -62,33 +62,33 @@ class GeoPainterPrivate
     }
 
 
-    void createAnnotationLayout (  int x, int y, QSize bubbleSize, int bubbleOffsetX, int bubbleOffsetY, int xRnd, int yRnd, QPainterPath& path, QRectF& rect )
+    void createAnnotationLayout (  qreal x, qreal y, QSizeF bubbleSize, qreal bubbleOffsetX, qreal bubbleOffsetY, qreal xRnd, qreal yRnd, QPainterPath& path, QRectF& rect )
     {
         // TODO: MOVE this into an own Annotation class
         qreal arrowPosition = 0.3;
         qreal arrowWidth = 12.0;
 
-        qreal width =  (qreal)( bubbleSize.width() );
-        qreal height = (qreal)( bubbleSize.height() );
+        qreal width =  bubbleSize.width();
+        qreal height = bubbleSize.height();
 
-        qreal dx = ( bubbleOffsetX > 0 ) ? 1.0 : -1.0; // x-Mirror
-        qreal dy = ( bubbleOffsetY < 0 ) ? 1.0 : -1.0; // y-Mirror
+        qreal dx =  ( bubbleOffsetX > 0 ) ? 1.0 : -1.0; // x-Mirror
+        qreal dy =  ( bubbleOffsetY < 0 ) ? 1.0 : -1.0; // y-Mirror
 
-        qreal x0 = (qreal) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) - xRnd *dx;
-        qreal x1 = (qreal) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd );
-        qreal x2 = (qreal) ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) + xRnd * dx;
-        qreal x3 = (qreal) ( x + bubbleOffsetX ) - dx * arrowWidth / 2.0;
-        qreal x4 = (qreal) ( x + bubbleOffsetX ) + dx * arrowWidth / 2.0;
-        qreal x5 = (qreal) ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd )- xRnd * dx;
-        qreal x6 = (qreal) ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd );
-        qreal x7 = (qreal) ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd ) + xRnd * dx;
+        qreal x0 =  ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) - xRnd *dx;
+        qreal x1 =  ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd );
+        qreal x2 =  ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) + xRnd * dx;
+        qreal x3 =  ( x + bubbleOffsetX ) - dx * arrowWidth / 2.0;
+        qreal x4 =  ( x + bubbleOffsetX ) + dx * arrowWidth / 2.0;
+        qreal x5 =  ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd )- xRnd * dx;
+        qreal x6 =  ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd );
+        qreal x7 =  ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd ) + xRnd * dx;
 
-        qreal y0 = (qreal) ( y + bubbleOffsetY );
-        qreal y1 = (qreal) ( y + bubbleOffsetY ) - dy * yRnd;
-        qreal y2 = (qreal) ( y + bubbleOffsetY ) - dy * 2 * yRnd;
-        qreal y5 = (qreal) ( y + bubbleOffsetY ) - dy * ( height - 2 * yRnd );
-        qreal y6 = (qreal) ( y + bubbleOffsetY ) - dy * ( height - yRnd );
-        qreal y7 = (qreal) ( y + bubbleOffsetY ) - dy * height;
+        qreal y0 =  ( y + bubbleOffsetY );
+        qreal y1 =  ( y + bubbleOffsetY ) - dy * yRnd;
+        qreal y2 =  ( y + bubbleOffsetY ) - dy * 2 * yRnd;
+        qreal y5 =  ( y + bubbleOffsetY ) - dy * ( height - 2 * yRnd );
+        qreal y6 =  ( y + bubbleOffsetY ) - dy * ( height - yRnd );
+        qreal y7 =  ( y + bubbleOffsetY ) - dy * height;
 
         QPointF p1 ( x, y ); // pointing point
         QPointF p2 ( x4, y0 );
@@ -171,7 +171,7 @@ MapQuality GeoPainter::mapQuality() const
     return d->m_mapQuality;
 }
 
-void GeoPainter::drawAnnotation (  const GeoDataCoordinates & position, const QString & text, QSize bubbleSize, int bubbleOffsetX, int bubbleOffsetY, int xRnd, int yRnd )
+void GeoPainter::drawAnnotation (  const GeoDataCoordinates & position, const QString & text, QSizeF bubbleSize, qreal bubbleOffsetX, qreal bubbleOffsetY, qreal xRnd, qreal yRnd )
 {
     int pointRepeatNum;
     qreal y;
@@ -238,7 +238,9 @@ void GeoPainter::drawText ( const GeoDataCoordinates & position, const QString &
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    bool visible = projection->screenCoordinates( position, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+    QSizeF textSize( fontMetrics().width( text ), fontMetrics().height() );  
+
+    bool visible = projection->screenCoordinates( position, d->m_viewport, d->m_x, y, pointRepeatNum, textSize, globeHidesPoint );
 
     if ( visible ) {
         // Draw all the x-repeat-instances of the point on the screen
@@ -257,7 +259,7 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal wid
 
     if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the ellipse geometry into account
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -324,8 +326,7 @@ void GeoPainter::drawImage ( const GeoDataCoordinates & centerPoint, const QImag
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( !isGeoProjected ) {
-        // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, image.size(), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -345,7 +346,7 @@ void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPoint, const QPix
 
     if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, pixmap.size(), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -486,7 +487,7 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates, qreal 
     if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
         bool visible = projection->screenCoordinates( centerCoordinates, 
-                       d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+                       d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -539,7 +540,7 @@ void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPoint, int widt
 
     if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
