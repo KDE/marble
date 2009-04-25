@@ -100,6 +100,8 @@ class GeoDataCoordinatesPrivate
         return *this;
     }
 
+    bool operator==( const GeoDataCoordinatesPrivate &rhs ) const;
+
     Quaternion m_q;
     qreal      m_lon;
     qreal      m_lat;
@@ -108,7 +110,13 @@ class GeoDataCoordinatesPrivate
     QAtomicInt ref;
 };
 
+inline bool GeoDataCoordinatesPrivate::operator==( const GeoDataCoordinatesPrivate &rhs ) const
+{
+    // do not compare the m_detail member as it does not really belong to
+    // GeoDataCoordinates and should be removed
+    return m_lon == rhs.m_lon && m_lat == rhs.m_lat && m_altitude == rhs.m_altitude;
+}
+
 }
 
 #endif
-
