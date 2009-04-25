@@ -231,10 +231,10 @@ class GEODATA_EXPORT GeoDataCoordinates
      * @brief normalize both longitude and latitude at the same time
      * This method normalizes both latitude and longitude, so that the 
      * latitude and the longitude stay within the "usual" range.
-     * NOTE: If the latitude exceeds M_PI or -M_PI then this will 
-     * be interpreted as a pole traversion where the point will  
-     * end up on the opposite side of the globe. Therefore the 
-     * longitude will change by M_PI (180 deg).
+     * NOTE: If the latitude exceeds M_PI/2 (+90.0 deg) or -M_PI/2 (-90.0 deg)
+     * then this will be interpreted as a pole traversion where the point will  
+     * end up on the opposite side of the globe. Therefore the longitude will 
+     * change by M_PI (180 deg).
      * If you don't want this behaviour use both normalizeLat() and
      * normalizeLon() instead.  
      * @param lon the longitude value
