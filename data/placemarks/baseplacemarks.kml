@@ -1,44 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <kml xmlns="http://earth.google.com/kml/2.0"> 
 <Document>
-    <Schema name="MarblePlacemark" parent="Placemark"> 
-       <SimpleField name="pop" type="int"></SimpleField> 
-       <SimpleField name="CountryNameCode" type="string"></SimpleField> 
-       <SimpleField name="role" type="string"></SimpleField> 
-    </Schema> 
-    <MarblePlacemark> 
+    <Placemark> 
         <name>North Pole</name> 
         <description><![CDATA[Geographic North Pole]]></description> 
         <role>P</role> 
+        <pop>1</pop>
         <Point>
             <coordinates>0.0,90.00</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>South Pole</name> 
         <description><![CDATA[Geographic South Pole]]></description> 
         <CountryNameCode>AQ</CountryNameCode>
         <role>P</role> 
+        <pop>1</pop>
         <Point>
             <coordinates>0.0,-90.00</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>North Magnetic Pole</name> 
         <description><![CDATA[The physical magnetic south pole in 2005]]></description> 
         <role>M</role> 
+        <pop>1</pop>
         <Point>
             <coordinates>-118.32,83.21</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>South Magnetic Pole</name> 
         <description><![CDATA[The physical magnetic north pole in 2005]]></description> 
         <CountryNameCode>AQ</CountryNameCode>
         <role>M</role> 
+        <pop>1</pop>
         <Point>
             <coordinates>137.86,-64.53</coordinates> 
         </Point> 
-    </MarblePlacemark> 
+    </Placemark> 
 </Document>
 </kml> 

@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <kml xmlns="http://earth.google.com/kml/2.0"> 
 <Document>
-    <Schema name="MarblePlacemark" parent="Placemark"> 
-       <SimpleField name="pop" type="int"></SimpleField> 
-       <SimpleField name="CountryNameCode" type="string"></SimpleField> 
-       <SimpleField name="role" type="string"></SimpleField> 
-    </Schema> 
     <Placemark> 
         <name>RMS Titanic</name> 
         <description><![CDATA[British ocean liner that collided with an iceberg in 1912. At that time the RMS Titanic was on her maiden voyage from Southampton to New York. Of the 2,228 passengers and crew on board, only 705 survived.]]></description> 

@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <kml xmlns="http://earth.google.com/kml/2.0"> 
 <Document>
-    <Schema name="MarblePlacemark" parent="Placemark"> 
-       <SimpleField name="pop" type="int"></SimpleField> 
-       <SimpleField name="CountryNameCode" type="string"></SimpleField> 
-       <SimpleField name="role" type="string"></SimpleField> 
-    </Schema> 
-    <MarblePlacemark> 
+    <Placemark> 
         <name>Aconcagua</name> 
         <description><![CDATA[Highest peak in the Americas]]></description> 
         <CountryNameCode>AR</CountryNameCode>
@@ -14,8 +9,8 @@
         <Point>
             <coordinates>-70.0,-32.65,6960.0</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>Mount Elbrus</name> 
         <description><![CDATA[Highest peak in Europe]]></description> 
         <CountryNameCode>RU</CountryNameCode>
@@ -23,8 +18,8 @@
         <Point>
             <coordinates>42.4364,43.3519,5642.0</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>Kilimanjaro</name> 
         <description><![CDATA[Highest peak in Africa]]></description> 
         <CountryNameCode>KE</CountryNameCode>
@@ -32,8 +27,8 @@
         <Point>
             <coordinates>37.35,-3.08,5895.0</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>Mont Blanc</name> 
         <description><![CDATA[Highest Mountain in Western Europe]]></description> 
         <CountryNameCode>FR</CountryNameCode>
@@ -41,8 +36,8 @@
         <Point>
             <coordinates>6.8643,45.8325,4807.0</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>Mount Everest</name> 
         <description><![CDATA[Highest point on earth]]></description> 
         <CountryNameCode>NP</CountryNameCode>
@@ -50,8 +45,8 @@
         <Point>
             <coordinates>86.9333,27.9833,8850.0</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>Mount Kosciuszko</name> 
         <description><![CDATA[Highest mountain in mainland Australia]]></description> 
         <CountryNameCode>AU</CountryNameCode>
@@ -59,8 +54,8 @@
         <Point>
             <coordinates>148.2667,-36.45,2229.0</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>Mount McKinley</name> 
         <description><![CDATA[Highest mountain in North America]]></description> 
         <CountryNameCode>US</CountryNameCode>
@@ -68,8 +63,8 @@
         <Point>
             <coordinates>-151.0074,63.0695,6194.0</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>Puncak Jaya</name> 
         <description><![CDATA[Highest mountain on the greater Australian continent]]></description> 
         <CountryNameCode>ID</CountryNameCode>
@@ -77,8 +72,8 @@
         <Point>
             <coordinates>137.1833,-4.0833,5030.0</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>Vinson Massif</name> 
         <description><![CDATA[Highest mountain of Antarctica]]></description> 
         <CountryNameCode>AQ</CountryNameCode>
@@ -86,8 +81,8 @@
         <Point>
             <coordinates>-85.6333,-78.5333,4897.0</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>Mauna Kea</name> 
         <description><![CDATA[Largest volcano on Earth]]></description> 
         <CountryNameCode>US</CountryNameCode>
@@ -95,8 +90,8 @@
         <Point>
             <coordinates>-155.47,19.82,4205.0</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>Mauna Loa</name> 
         <description><![CDATA[Largest active volcano on Earth]]></description> 
         <CountryNameCode>US</CountryNameCode>
@@ -104,8 +99,8 @@
         <Point>
             <coordinates>-155.608,19.475,4170.0</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>Mount Etna</name> 
         <description><![CDATA[Largest and most active volcano in Europe]]></description> 
         <CountryNameCode>IT</CountryNameCode>
@@ -113,8 +108,8 @@
         <Point>
             <coordinates>15.0,37.75,3323.0</coordinates> 
         </Point> 
-    </MarblePlacemark> 
-    <MarblePlacemark> 
+    </Placemark> 
+    <Placemark> 
         <name>Challenger Deep</name> 
         <description><![CDATA[The ocean floor's deepest spot which is located at the southern end of the Marianas Trench off the Mariana Islands. Some sources list Witjas Deep instead with a depth of -11.034 m.]]></description> 
         <CountryNameCode>MP</CountryNameCode>
@@ -122,6 +117,6 @@
         <Point>
             <coordinates>142.200,11.333,-10920.0</coordinates> 
         </Point> 
-    </MarblePlacemark> 
+    </Placemark> 
 </Document>
 </kml> 
