@@ -703,22 +703,11 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
     return latString + nsString;
 }
 
-bool GeoDataCoordinates::operator==( const GeoDataCoordinates &test ) const
+bool GeoDataCoordinates::operator==( const GeoDataCoordinates &rhs ) const
 {
-    // Comparing 2 ints is faster than comparing 4 ints
-    // Therefore we compare the Lon-Lat coordinates instead 
-    // of the Position-Quaternion.
-
-    qreal lonTest;
-    qreal latTest;
-    qreal lonThis;
-    qreal latThis;
-    
-    geoCoordinates( lonThis, latThis );
-    test.geoCoordinates( lonTest, latTest );
-    
-    return ( lonThis == lonTest 
-             && latTest == latThis );
+    return d->m_lon == rhs.d->m_lon
+        && d->m_lat == rhs.d->m_lat
+        && d->m_altitude == rhs.d->m_altitude;
 }
 
 void GeoDataCoordinates::setAltitude( const qreal altitude )
