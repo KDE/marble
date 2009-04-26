@@ -74,12 +74,12 @@
             </property>
             <group name="Places">
                 <property name="places">
-                    <value>true</value>
-                    <available>true</available>
+                    <value>false</value>
+                    <available>false</available>
                 </property>
                 <property name="otherplaces">
-                    <value>true</value>
-                    <available>true</available>
+                    <value>false</value>
+                    <available>false</available>
                 </property>
             </group>
         </settings>
