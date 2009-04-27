@@ -242,13 +242,14 @@ void AbstractDataPluginModel::processFinishedJob( QString relativeUrlString, QSt
             
             (*i)->addDownloadedFile( generateFilepath( widgetId, fileType ), 
                                      fileType );
-            d->m_downloadingWidgets.erase( i );
             
             // If the file is ready for displaying, it can be added to the list of
             // initialized widgets
             if( (*i)->initialized() ) {
                 addWidgetToList( *i );
             }
+
+            d->m_downloadingWidgets.erase( i );
         }
     }
 }
