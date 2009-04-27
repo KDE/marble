@@ -36,7 +36,14 @@ bool PanoramioWidget::initialized() {
     
 void PanoramioWidget::addDownloadedFile( QString url, QString type ) {
     if( standardImageSize == type ) {
-        smallImage.load( url );
+        // Loading original image
+        QImage largeImage;
+        largeImage.load( url );
+        
+        // Scaling the image to the half of the original size
+        smallImage = largeImage.scaled( largeImage.size() / 2,
+                                        Qt::IgnoreAspectRatio,
+                                        Qt::SmoothTransformation );
     }
     else {
         qDebug() << "PanoramioWidget: addDownloadFile can't handle type " << type;
@@ -63,7 +70,7 @@ bool PanoramioWidget::operator<( const AbstractDataPluginWidget *other ) const {
 bool PanoramioWidget::render( GeoPainter *painter, ViewportParams *viewport,
                               const QString& renderPos, GeoSceneLayer * layer )
 {
-    painter->drawPixmap( coordinates(), smallImage );
+    painter->drawImage( coordinates(), smallImage );
     return true;
 }
 

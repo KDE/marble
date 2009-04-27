@@ -18,7 +18,7 @@
 
 namespace Marble {
     
-const QString standardImageSize = "square";
+const QString standardImageSize = "mini_square";
  
 class PanoramioWidget : public AbstractDataPluginWidget {
  public:
@@ -39,7 +39,7 @@ class PanoramioWidget : public AbstractDataPluginWidget {
                  
     bool operator<( const AbstractDataPluginWidget *other ) const;
  private:
-    QPixmap smallImage;
+    QImage smallImage;
     QDate m_uploadDate;
 };
     

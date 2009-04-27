@@ -32,6 +32,9 @@ const QString descriptionPrefix( "description_" );
 
 // Time between to new description file downloads in ms
 const int timeBetweenDownloads = 250;
+
+// Seperator to seperate the id of the widget from the file type
+const char fileIdSeperator = '_';
     
 class AbstractDataPluginModelPrivate {
  public:
@@ -170,7 +173,7 @@ void AbstractDataPluginModel::setName( QString name ) {
 QString AbstractDataPluginModel::generateFilename( QString id, QString type ) const {
     QString name;
     name += id;
-    name += '_';
+    name += fileIdSeperator;
     name += type;
     
     return name;
@@ -217,25 +220,32 @@ void AbstractDataPluginModel::processFinishedJob( QString relativeUrlString, QSt
     }
     else {
         // The downloaded file contains widget data.
-        QStringList fileInformation = id.split( '_' );
         
+        // Splitting the id in widgetId and fileType
+        QStringList fileInformation = id.split( fileIdSeperator );
+        
+        if( fileInformation.size() < 2) {
+            qDebug() << "Strange file information " << id;
+            return;
+        }
+        QString widgetId = fileInformation.at( 0 );
+        fileInformation.removeAt( 0 );
+        QString fileType = fileInformation.join( QString( fileIdSeperator ) );
+        
+        // Searching for the right widget in m_downloadingWidgets
         QHash<QString, AbstractDataPluginWidget *>::iterator i = d->m_downloadingWidgets.find( id );
         if( i != d->m_downloadingWidgets.end() ) {
-            if( fileInformation.size() != 2 ) {
-                qDebug() << "Strange file information " << id;
-                return;
-            }
-            
-            if( fileInformation.at( 0 ) != (*i)->id() ) {
+            if( widgetId != (*i)->id() ) {
                 qDebug() << "Different id";
                 return;
             }
             
-            (*i)->addDownloadedFile( generateFilepath( fileInformation.at( 0 ),
-                                                       fileInformation.at( 1 ) ), 
-                                     fileInformation.at( 1 ) );
+            (*i)->addDownloadedFile( generateFilepath( widgetId, fileType ), 
+                                     fileType );
             d->m_downloadingWidgets.erase( i );
             
+            // If the file is ready for displaying, it can be added to the list of
+            // initialized widgets
             if( (*i)->initialized() ) {
                 addWidgetToList( *i );
             }
