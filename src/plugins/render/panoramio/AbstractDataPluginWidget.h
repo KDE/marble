@@ -38,6 +38,13 @@ class AbstractDataPluginWidget : public QObject {
     QString id();
     void setId( QString id );
     
+    /**
+      * Returnung the angular resolution of the viewport when the widget was added to it the last
+      * time.
+      */
+    qreal addedAngularResolution();
+    void setAddedAngularResolution( qreal resolution );
+    
     virtual QString widgetType() const = 0;
      
     virtual bool initialized() = 0;

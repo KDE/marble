@@ -65,6 +65,7 @@ class AbstractDataPluginModelPrivate {
     qint32 m_downloadedNumber;
     QList<AbstractDataPluginWidget*> m_widgetSet;
     QHash<QString, AbstractDataPluginWidget*> m_downloadingWidgets;
+    QList<AbstractDataPluginWidget*> m_displayedWidgets;
     QTimer *m_downloadTimer;
     
     CacheStoragePolicy *m_storagePolicy;
@@ -102,6 +103,33 @@ QList<AbstractDataPluginWidget*> AbstractDataPluginModel::widgets( ViewportParam
     
     QList<AbstractDataPluginWidget*>::iterator i;
     
+    // Widgets that are already shown have the highest priority
+    for ( i = d->m_displayedWidgets.begin();
+          i != d->m_displayedWidgets.end() && list.size() < number;
+          ++i )
+    {
+        // Don't try to access an object that doesn't exist
+        if( *i == 0 ) {
+            continue;
+        }
+    
+        // Only show widgets that are initialized
+        if( !(*i)->initialized() ) {
+            continue;
+        }
+        
+        if( !currentBox->contains( (*i)->coordinates() ) ) {
+            continue;
+        }
+        
+        // If the widget was added initially at a nearer position, they don't have priority,
+        // because we zoomed out since then.
+        if( (*i)->addedAngularResolution() >= viewport->angularResolution() ) {
+            list.append( *i );
+        }
+    }
+        
+    
     for ( i = d->m_widgetSet.begin(); i != d->m_widgetSet.end() && list.size() < number; ++i ) {
         // Don't try to access an object that doesn't exist
         if( *i == 0 ) {
@@ -114,8 +142,16 @@ QList<AbstractDataPluginWidget*> AbstractDataPluginModel::widgets( ViewportParam
         }
         
         // If the widget is on the viewport, we want to return it
-        if( currentBox->contains( (*i)->coordinates() ) ) {
+        if( currentBox->contains( (*i)->coordinates() )
+            && !list.contains( *i ) )
+        {
             list.append( *i );
+            
+            // We want to save the angular resolution of the first time the widget got added.
+            // If it is in the list of displayedWidgets, it was added before
+            if( !d->m_displayedWidgets.contains( *i ) ) {
+                (*i)->setAddedAngularResolution( viewport->angularResolution() );
+            }
         }
         // FIXME: We have to do something if the widget that is not on the viewport.
     }
@@ -126,6 +162,7 @@ QList<AbstractDataPluginWidget*> AbstractDataPluginModel::widgets( ViewportParam
         d->m_lastNumber = number;
     }
     
+    d->m_displayedWidgets = list;
     return list;
 }
 

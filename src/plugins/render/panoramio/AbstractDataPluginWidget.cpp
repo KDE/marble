@@ -15,8 +15,14 @@ namespace Marble {
 
 class AbstractDataPluginWidgetPrivate {
  public:
+    AbstractDataPluginWidgetPrivate()
+        : m_addedAngularResolution( 0 )
+    {
+    };
+    
     QString m_id;
     GeoDataCoordinates m_coordinates;
+    qreal m_addedAngularResolution;
 };
 
 AbstractDataPluginWidget::AbstractDataPluginWidget( QObject *parent )
@@ -42,6 +48,14 @@ QString AbstractDataPluginWidget::id() {
 
 void AbstractDataPluginWidget::setId( QString id ) {
     d->m_id = id;
+}
+
+qreal AbstractDataPluginWidget::addedAngularResolution() {
+    return d->m_addedAngularResolution;
+}
+
+void AbstractDataPluginWidget::setAddedAngularResolution( qreal resolution ) {
+    d->m_addedAngularResolution = resolution;
 }
 
 } // Marble namespace

@@ -63,7 +63,7 @@ bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     painter->save();
     
     // Paint the most important widget at last
-    for( int i = widgets.size() - 1; i >= 0; i-- ) {
+    for( int i = widgets.size() - 1; i >= 0; --i ) {
         widgets.at( i )->render( painter, viewport, renderPos, layer );
     }
     
