@@ -14,7 +14,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
-#include "GeoDataCoordinates.h"
+#include "marble_export.h"
 
 namespace Marble {
     
@@ -25,7 +25,7 @@ class GeoSceneLayer;
 class CacheStoragePolicy;
 class ViewportParams;
 
-class AbstractDataPluginWidget : public QObject {
+class MARBLE_EXPORT AbstractDataPluginWidget : public QObject {
     Q_OBJECT
     
  public:

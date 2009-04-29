@@ -12,6 +12,7 @@
 #define ABSTRACTDATAPLUGIN_H
 
 // Marble
+#include "marble_export.h"
 #include "RenderPlugin.h"
 
 namespace Marble {
@@ -22,7 +23,7 @@ class GeoSceneLayer;
 class AbstractDataPluginModel;
 class AbstractDataPluginPrivate;
 
-class AbstractDataPlugin : public RenderPlugin {
+class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
     

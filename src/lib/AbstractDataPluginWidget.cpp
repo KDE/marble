@@ -11,6 +11,9 @@
 // self
 #include "AbstractDataPluginWidget.h"
 
+// Marble
+#include "GeoDataCoordinates.h"
+
 namespace Marble {
 
 class AbstractDataPluginWidgetPrivate {

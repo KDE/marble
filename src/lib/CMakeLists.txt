@@ -150,6 +150,10 @@ set(marblewidget_SRCS
     AbstractLayer/AbstractLayer.cpp
     AbstractLayer/AbstractLayerContainer.cpp
     AbstractLayer/AbstractLayerData.cpp
+    
+    AbstractDataPlugin.cpp
+    AbstractDataPluginModel.cpp
+    AbstractDataPluginWidget.cpp
 
     PluginInterface.cpp
     NetworkPluginInterface.cpp
@@ -319,6 +323,10 @@ else (APPLE AND QTONLY)
     RenderPluginInterface.h
     marble_export.h
     Planet.h
+    
+    AbstractDataPlugin.h
+    AbstractDataPluginModel.h
+    AbstractDataPluginWidget.h
 
     LatLonEdit.h
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble

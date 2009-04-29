@@ -16,6 +16,8 @@
 #include <QtCore/QHash>
 #include <QtCore/QString>
 
+#include "marble_export.h"
+
 class QTimer;
 class QUrl;
 
@@ -28,7 +30,7 @@ class HttpDownloadManager;
 class GeoDataLatLonAltBox;
 class ViewportParams;
 
-class AbstractDataPluginModel : public QObject
+class MARBLE_EXPORT AbstractDataPluginModel : public QObject
 {
     Q_OBJECT
  
