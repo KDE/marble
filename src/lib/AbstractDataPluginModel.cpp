@@ -228,6 +228,32 @@ bool AbstractDataPluginModel::fileExists( QString id, QString type ) {
     return fileExists( generateFilename( id, type ) );
 }
 
+bool AbstractDataPluginModel::widgetExists( QString id ) {
+    QList<AbstractDataPluginWidget*>::iterator listIt;
+    
+    for( listIt = d->m_widgetSet.begin();
+         listIt != d->m_widgetSet.end();
+         ++listIt )
+    {
+        if( (*listIt)->id() == id ) {
+            return true;
+        }
+    }
+    
+    QHash<QString,AbstractDataPluginWidget*>::iterator hashIt;
+    
+    for( hashIt = d->m_downloadingWidgets.begin();
+         hashIt != d->m_downloadingWidgets.end();
+         ++hashIt )
+    {
+        if( (*hashIt)->id() == id ) {
+            return true;
+        }
+    }
+    
+    return false;
+}
+
 void AbstractDataPluginModel::downloadDescriptionFile() {
     if( ( !( *d->m_downloadedBox == *d->m_lastBox )
           || d->m_downloadedNumber != d->m_lastNumber )

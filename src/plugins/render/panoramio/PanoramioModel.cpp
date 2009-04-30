@@ -55,6 +55,11 @@ void PanoramioModel::parseFile( QByteArray file ) {
                                         (*it).latitude,
                                         0,
                                         GeoDataCoordinates::Degree );
+                                        
+        if( widgetExists( QString::number( (*it).photo_id ) ) ) {
+            continue;
+        }
+        
         PanoramioWidget *widget = new PanoramioWidget( this );
         widget->setCoordinates( coordinates );
         widget->setId( QString::number( (*it).photo_id ) );
