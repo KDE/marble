@@ -38,22 +38,10 @@ class SphericalScanlineTextureMapper : public AbstractScanlineTextureMapper
  public:
     explicit SphericalScanlineTextureMapper( TileLoader *tileLoader, QObject * parent =0 );
 
-    void resizeMap(int width, int height);
     void mapTexture( ViewParams *viewParams );
 
  protected:
-    void pixelValueApprox(const qreal& lon, const qreal& lat,
-                          QRgb *scanLine, bool smooth );
-
-    inline void memfill( QRgb* source, QRgb* target );
-
     inline bool needsFilter( const QRgb& rgb, int& oldR, int& oldB, int &oldG  );
-
-    bool         m_interpolate;
-    int          m_nBest;
-
-    int     m_n;
-    qreal  m_nInverse;
 };
 
 }

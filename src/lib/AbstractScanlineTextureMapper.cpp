@@ -20,6 +20,7 @@
 #include "TileLoader.h"
 #include "TileLoaderHelper.h"
 #include "ViewParams.h"
+#include "ViewportParams.h"
 
 using namespace Marble;
 
@@ -32,6 +33,7 @@ using namespace Marble;
 
 AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
     : QObject( parent ),
+      m_interpolate( false ),
       m_maxGlobalX( 0 ),
       m_maxGlobalY( 0 ),
       m_imageHeight( 0 ),
@@ -46,14 +48,13 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
       m_tile( 0 ),
       m_tileLevel( 0 ),
       m_maxTileLevel( 0 ),
-      m_preloadTileLevel( -1 ),
-      m_previousRadius( 0 ),
       m_tilePosX( 0 ),
       m_tilePosY( 0 ),
       m_globalWidth( 0 ),
       m_globalHeight( 0 ),
       m_normGlobalWidth( 0.0 ),
-      m_normGlobalHeight( 0.0 )
+      m_normGlobalHeight( 0.0 ),
+      m_nBest( 0 )
 {
     GeoSceneTexture * texture = 0;
 
@@ -89,9 +90,6 @@ void AbstractScanlineTextureMapper::setLayer( GeoSceneLayer * layer )
     m_tileProjection = texture->projection();
     m_tileLevel = -1;
     detectMaxTileLevel();
-
-    m_preloadTileLevel = -1;
-    m_previousRadius = 0;
 }
 
 
@@ -117,31 +115,6 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
     qreal tileCol = 0.0; 
     qreal tileRow = 0.0;
 
-    if (    tileLevelF > tileLevel + 0.3 
-         && m_preloadTileLevel != tileLevel + 1
-         && m_previousRadius < radius 
-         && tileLevel > 0 && tileLevel < m_maxTileLevel ) {
-
-        m_preloadTileLevel = tileLevel + 1;
-
-        centerTiles( viewParams, m_preloadTileLevel, tileCol, tileRow );
-//        qDebug() << "Preload tileLevel: " << m_preloadTileLevel
-//        << " tileCol: " << tileCol << " tileRow: " << tileRow;
-    }
-    if (    tileLevelF < tileLevel + 0.7 
-         && m_preloadTileLevel != tileLevel - 1
-         && m_previousRadius > radius 
-         && tileLevel > 1 && tileLevel < m_maxTileLevel + 1 ) {
-
-        m_preloadTileLevel = tileLevel - 1;
-
-        centerTiles( viewParams, m_preloadTileLevel, tileCol, tileRow );
-//        qDebug() << "Preload tileLevel: " << m_preloadTileLevel
-//        << " tileCol: " << tileCol << " tileRow: " << tileRow;
-    }
-    if ( m_previousRadius == radius ) m_preloadTileLevel = -1;
-    else m_previousRadius = radius;
-
     if ( tileLevel > m_maxTileLevel )
         tileLevel = m_maxTileLevel;
 
@@ -149,24 +122,6 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
         m_tileLoader->flush();
         tileLevelInit( tileLevel );
     }
-}
-
-
-void AbstractScanlineTextureMapper::centerTiles( ViewParams *viewParams, 
-    int tileLevel, qreal& tileCol, qreal& tileRow )
-{
-    qreal centerLon, centerLat;
-    viewParams->centerCoordinates( centerLon, centerLat );
-
-    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( m_tileLoader->layer()->groundDataset() );
-
-    tileCol = TileLoaderHelper::levelToColumn( 
-                                texture->levelZeroColumns(), 
-                                tileLevel ) * ( 1.0 + centerLon / M_PI ) / 2.0;
-
-    tileRow = TileLoaderHelper::levelToRow( 
-                                texture->levelZeroRows(),
-                                tileLevel ) * ( 0.5 - centerLat / M_PI );
 }
 
 
@@ -200,6 +155,19 @@ void AbstractScanlineTextureMapper::resizeMap(int width, int height)
 
     m_imageRadius = ( m_imageWidth * m_imageWidth / 4
                       + m_imageHeight * m_imageHeight / 4 );
+
+    // Find the optimal interpolation interval m_nBest for the 
+    // current image canvas width
+    m_nBest = 2;
+
+    int  nEvalMin = m_imageWidth - 1;
+    for ( int it = 1; it < 48; ++it ) {
+        int nEval = ( m_imageWidth - 1 ) / it + ( m_imageWidth - 1 ) % it;
+        if ( nEval < nEvalMin ) {
+            nEvalMin = nEval;
+            m_nBest = it; 
+        }
+    }
 }
 
 void AbstractScanlineTextureMapper::pixelValue(qreal lon,
@@ -264,6 +232,196 @@ void AbstractScanlineTextureMapper::pixelValue(qreal lon,
         }
     }
 }
+
+// This method interpolates color values for skipped pixels in a scanline.
+// 
+// While moving along the scanline we don't move from pixel to pixel but
+// leave out n pixels each time and calculate the exact position and 
+// color value for the new pixel. The pixel values in between get 
+// approximated through linear interpolation across the direct connecting 
+// line on the original tiles directly.
+// This method will do by far most of the calculations for the 
+// texturemapping, so we move towards integer math to improve speed.
+
+void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
+                              const qreal& lat, QRgb *scanLine,
+                              int n,
+                              bool smooth )
+{
+    // stepLon/Lat: Distance between two subsequent approximated positions
+
+    qreal stepLat = lat - m_prevLat;
+    qreal stepLon = lon - m_prevLon;
+
+    // As long as the distance is smaller than 180 deg we can assume that 
+    // we didn't cross the dateline.
+
+    const qreal nInverse = 1.0 / (qreal)(n);
+
+    if ( fabs(stepLon) < M_PI ) {
+        if ( smooth ) {
+
+            m_prevLon = rad2PixelX( m_prevLon );
+            m_prevLat = rad2PixelY( m_prevLat );
+
+            const qreal itStepLon = ( rad2PixelX( lon ) - m_prevLon ) * nInverse;
+            const qreal itStepLat = ( rad2PixelY( lat ) - m_prevLat ) * nInverse;
+        
+            // To improve speed we unroll 
+            // AbstractScanlineTextureMapper::pixelValue(...) here and 
+            // calculate the performance critical issues via integers
+    
+            qreal itLon = m_prevLon + m_toTileCoordinatesLon;
+            qreal itLat = m_prevLat + m_toTileCoordinatesLat;
+
+            const int tileWidth = m_tileLoader->tileWidth();
+            const int tileHeight = m_tileLoader->tileHeight();
+
+/*
+            int oldR = 0;
+            int oldG = 0;
+            int oldB = 0;
+*/
+            QRgb oldRgb = qRgb( 0, 0, 0 );
+
+            qreal oldPosX = -1;
+            qreal oldPosY = 0;
+
+            for ( int j=1; j < n; ++j ) {
+                qreal posX = itLon + itStepLon * j;
+                qreal posY = itLat + itStepLat * j;
+    
+                if ( posX >= tileWidth 
+                     || posX < 0.0
+                     || posY >= tileHeight
+                     || posY < 0.0 )
+                {
+                    nextTile( posX, posY );
+                    itLon = m_prevLon + m_toTileCoordinatesLon;
+                    itLat = m_prevLat + m_toTileCoordinatesLat;
+                    posX = itLon + itStepLon * j;
+                    posY = itLat + itStepLat * j;
+                    oldPosX = -1;
+                }
+    
+                *scanLine = m_tile->pixel( posX, posY ); 
+
+                // Just perform bilinear interpolation if there's a color change compared to the 
+                // last pixel that was evaluated. This speeds up things greatly for maps like OSM
+                if ( *scanLine != oldRgb ) {
+                    if ( oldPosX != -1 ) {
+                        *(scanLine - 1) = m_tile->pixelF( oldPosX, oldPosY, *(scanLine - 1) );
+                        oldPosX = -1;
+                    }
+                    oldRgb = m_tile->pixelF( posX, posY, *scanLine );
+                    *scanLine = oldRgb;
+                }
+                else {
+                    oldPosX = posX;
+                    oldPosY = posY;
+                }
+                
+/*
+                if ( needsFilter( *scanLine, oldR, oldB, oldG  ) ) {
+                    *scanLine = m_tile->pixelF( posX, posY );
+                }
+*/
+                ++scanLine;
+            }
+        }
+        else {
+            m_prevLon = rad2PixelX( m_prevLon );
+            m_prevLat = rad2PixelY( m_prevLat );
+
+            const int itStepLon = (int)( ( rad2PixelX( lon ) - m_prevLon ) * nInverse * 128.0 );
+            const int itStepLat = (int)( ( rad2PixelY( lat ) - m_prevLat ) * nInverse * 128.0 );
+        
+            // To improve speed we unroll 
+            // AbstractScanlineTextureMapper::pixelValue(...) here and 
+            // calculate the performance critical issues via integers
+    
+            int itLon = (int)( ( m_prevLon + m_toTileCoordinatesLon ) * 128.0 );
+            int itLat = (int)( ( m_prevLat + m_toTileCoordinatesLat ) * 128.0 );
+
+            const int tileWidth = m_tileLoader->tileWidth();
+            const int tileHeight = m_tileLoader->tileHeight();
+
+            for ( int j = 1; j < n; ++j ) {
+                int iPosX = ( itLon + itStepLon * j ) >> 7;
+                int iPosY = ( itLat + itStepLat * j ) >> 7;
+    
+                if ( iPosX >= tileWidth 
+                     || iPosX < 0
+                     || iPosY >= tileHeight
+                     || iPosY < 0 )
+                {
+                    nextTile( iPosX, iPosY );
+                    itLon = (int)( ( m_prevLon + m_toTileCoordinatesLon ) * 128.0 );
+                    itLat = (int)( ( m_prevLat + m_toTileCoordinatesLat ) * 128.0 );
+                    iPosX = ( itLon + itStepLon * j ) >> 7;
+                    iPosY = ( itLat + itStepLat * j ) >> 7;
+                }
+
+                *scanLine = m_tile->pixel( iPosX, iPosY ); 
+                ++scanLine;
+            }
+        }
+    }
+
+    // For the case where we cross the dateline between (lon, lat) and 
+    // (prevlon, prevlat) we need a more sophisticated calculation.
+    // However as this will happen rather rarely, we use 
+    // pixelValue(...) directly to make the code more readable.
+
+    else {
+        stepLon = ( TWOPI - fabs(stepLon) ) * nInverse;
+        stepLat = stepLat * nInverse;
+        // We need to distinguish two cases:  
+        // crossing the dateline from east to west ...
+
+        if ( m_prevLon < lon ) {
+
+            for ( int j = 1; j < n; ++j ) {
+                m_prevLat += stepLat;
+                m_prevLon -= stepLon;
+                if ( m_prevLon <= -M_PI ) 
+                    m_prevLon += TWOPI;
+                pixelValue( m_prevLon, m_prevLat, scanLine, smooth );
+                ++scanLine;
+            }
+        }
+
+        // ... and vice versa: from west to east.
+
+        else { 
+            qreal curStepLon = lon - n * stepLon;
+
+            for ( int j = 1; j < n; ++j ) {
+                m_prevLat += stepLat;
+                curStepLon += stepLon;
+                qreal  evalLon = curStepLon;
+                if ( curStepLon <= -M_PI )
+                    evalLon += TWOPI;
+                pixelValue( evalLon, m_prevLat, scanLine, smooth );
+                ++scanLine;
+            }
+        }
+    }
+}
+
+int AbstractScanlineTextureMapper::interpolationStep( ViewParams *viewParams ) const
+{
+    if ( viewParams->mapQuality() == Marble::Print ) {
+        return 1;    // Don't interpolate for print quality.
+    }
+
+    if ( ! viewParams->viewport()->globeCoversViewport() ) {
+        return 8;
+    }
+
+    return m_nBest;
+}
+
 
 void AbstractScanlineTextureMapper::nextTile( int &posX, int &posY )
 {

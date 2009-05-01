@@ -41,12 +41,14 @@ EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( TileLoader *tileLo
 
 void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 {
-    QImage    *canvasImage = viewParams->canvasImage();
-    const int  radius      = viewParams->radius();
+    QImage       *canvasImage = viewParams->canvasImage();
+    const qint64  radius      = viewParams->radius();
 
-    const bool highQuality = ( viewParams->mapQuality() == Marble::High
-			       || viewParams->mapQuality() == Marble::Print );
-    //const bool printQuality = ( viewParams->mapQuality() == Marble::Print );
+    const bool highQuality  = ( viewParams->mapQuality() == Marble::High
+                || viewParams->mapQuality() == Marble::Print );
+    const bool printQuality = ( viewParams->mapQuality() == Marble::Print );
+
+    // Scanline based algorithm to do texture mapping
 
     // Initialize needed variables:
     qreal  lon = 0.0;
@@ -54,20 +56,24 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     m_tilePosX = 65535;
     m_tilePosY = 65535;
-
     m_toTileCoordinatesLon = (qreal)(globalWidth() / 2 - m_tilePosX);
     m_toTileCoordinatesLat = (qreal)(globalHeight() / 2 - m_tilePosY);
 
     // Calculate how many degrees are being represented per pixel.
     const float rad2Pixel = (float)( 2 * radius ) / M_PI;
 
-    int yTop;
-    int yPaintedTop;
-    int yPaintedBottom;
-
     // Reset backend
     m_tileLoader->resetTilehash();
     selectTileLevel( viewParams );
+
+    // Evaluate the degree of interpolation
+    const int n = interpolationStep( viewParams );
+
+    bool interlaced = ( m_interlaced 
+            || viewParams->mapQuality() == Marble::Low );
+
+    int skip = interlaced ? 1 : 0;
+
 
     // Calculate translation of center point
     qreal centerLon, centerLat;
@@ -76,39 +82,93 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     int yCenterOffset = (int)( centerLat * rad2Pixel );
 
+    int yTop;
+    int yBottom;
+    int yPaintedTop;
+    int yPaintedBottom;
+
     // Calculate y-range the represented by the center point, yTop and
     // yBottom and what actually can be painted
     yPaintedTop    = yTop = m_imageHeight / 2 - radius + yCenterOffset;
-    yPaintedBottom        = m_imageHeight / 2 + radius + yCenterOffset;
+    yPaintedBottom = m_imageHeight / 2 + radius + yCenterOffset;
  
     if (yPaintedTop < 0)                yPaintedTop = 0;
     if (yPaintedTop > m_imageHeight)    yPaintedTop = m_imageHeight;
     if (yPaintedBottom < 0)             yPaintedBottom = 0;
     if (yPaintedBottom > m_imageHeight) yPaintedBottom = m_imageHeight;
 
-    float leftLon = + centerLon - ( m_imageWidth / 2 / rad2Pixel );
+    const qreal pixel2Rad = 1.0/rad2Pixel;
+
+    qreal leftLon = + centerLon - ( m_imageWidth / 2 * pixel2Rad );
     while ( leftLon < -M_PI ) leftLon += 2 * M_PI;
     while ( leftLon >  M_PI ) leftLon -= 2 * M_PI;
 
-    const qreal pixel2Rad = 1.0/rad2Pixel;
-
     // Paint the map.
-    for ( int y = yPaintedTop ;y < yPaintedBottom; ++y ) {
-      
+    for ( int y = yPaintedTop; y < yPaintedBottom; ++y ) {
+
+        // Calculate the actual x-range of the map within the current scanline.
+        // 
+        // If the circular border of the earth disk is still visible then xLeft
+        // equals the scanline position of the most left pixel that gets covered
+        // by the earth disk. In terms of math this equals the half image width minus 
+        // the radius component on the current scanline in x direction ("rx").
+        //
+        // If the zoom factor is high enough then the whole screen gets covered
+        // by the earth and the border of the earth disk isn't visible anymore.
+        // In that situation xLeft equals zero.
+        // For xRight the situation is similar.
+
+        const int xLeft  = 0; 
+        const int xRight = canvasImage->width();
+
+        QRgb * scanLine = (QRgb*)( canvasImage->scanLine( y ) ) + xLeft;
+
+        int  xIpLeft  = 1;
+        int  xIpRight = n * (int)( xRight / n - 1 ) + 1; 
+
         lon = leftLon;
         lat = M_PI/2 - (y - yTop )* pixel2Rad;
 
-        QRgb * const scanLineBegin = (QRgb*)( canvasImage->scanLine( y ) );
-        QRgb * const scanLineEnd = scanLineBegin + m_imageWidth;
+        for ( int x = xLeft; x < xRight; ++x ) {
 
-        for ( QRgb * scanLine = scanLineBegin;
-              scanLine < scanLineEnd;
-              ++scanLine )
-        {
-            lon += pixel2Rad;
+            // Prepare for interpolation
+            if ( x >= xIpLeft && x <= xIpRight ) {
+                x += n - 1;
+                lon += (n - 1) * pixel2Rad;
+                m_interpolate = !printQuality;
+            }
+            else {
+                m_interpolate = false;
+            }
+
             if ( lon < -M_PI ) lon += 2 * M_PI;
             if ( lon >  M_PI ) lon -= 2 * M_PI;
-            pixelValue( lon, lat, scanLine, highQuality );
+
+            if ( m_interpolate ) {
+                pixelValueApprox( lon, lat, scanLine, n, highQuality );
+
+                scanLine += ( n - 1 );
+            }
+
+            if ( x < m_imageWidth ) {
+                pixelValue( lon, lat, scanLine, highQuality );
+            }
+            m_prevLon = lon;
+            m_prevLat = lat; // preparing for interpolation
+
+            ++scanLine;
+            lon += pixel2Rad;
+        }
+
+        // copy scanline to improve performance
+        if ( interlaced && y + 1 < yPaintedBottom ) { 
+
+            int pixelByteSize = canvasImage->bytesPerLine() / m_imageWidth;
+
+            memcpy( canvasImage->scanLine( y + 1 ) + xLeft * pixelByteSize, 
+                    canvasImage->scanLine( y ) + xLeft * pixelByteSize, 
+                    ( xRight - xLeft ) * pixelByteSize );
+            ++y;
         }
     }
 
@@ -116,12 +176,15 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     const int clearStart = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? yPaintedBottom : 0;
     const int clearStop  = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? m_imageHeight  : yTop;
 
-    for ( int y = clearStart; y < clearStop; ++y ) {
-        QRgb * const scanLine = (QRgb*)( canvasImage->scanLine( y ) );
-        for ( int x = 0; x < m_imageWidth; ++x ) {
-            *(scanLine + x) = 0;
-        }
+    QRgb * const clearBegin = (QRgb*)( canvasImage->scanLine( clearStart ) );
+    QRgb * const clearEnd = (QRgb*)( canvasImage->scanLine( clearStop ) );
+
+    QRgb * it = clearBegin;
+
+    for ( ; it < clearEnd; ++it ) {
+        *(it) = 0;
     }
+
     m_oldYPaintedTop = yPaintedTop;
 
     m_tileLoader->cleanupTilehash();

@@ -48,9 +48,6 @@ public:
     void selectTileLevel( ViewParams* viewParams );
     bool interlaced() const;
     void setInterlaced( bool enabled );
-
-    void centerTiles( ViewParams *viewParams, int tileLevel,
-                      qreal& tileCol, qreal& tileRow );
     int tileZoomLevel() const;
 
  Q_SIGNALS:
@@ -62,6 +59,12 @@ public:
  protected:
     void pixelValue( qreal lon, qreal lat, 
                      QRgb* scanLine, bool smooth = false );
+
+    void pixelValueApprox(const qreal& lon, const qreal& lat,
+                          QRgb *scanLine, int n, bool smooth = false );
+
+    int interpolationStep( ViewParams *viewParams ) const;
+    bool    m_interpolate;
 
     // method for fast integer calculation
     void nextTile( int& posx, int& posy );
@@ -113,7 +116,6 @@ public:
     int          m_tileLevel;
     int          m_maxTileLevel;
 
-    int          m_preloadTileLevel;
     int          m_previousRadius;
 
     // Position of the tile in global Texture Coordinates
@@ -121,10 +123,14 @@ public:
     int          m_tilePosX;
     int          m_tilePosY;
 
+    int          m_n;
+    qreal        m_nInverse;
+    int          m_nBest;
+
  private:
     Q_DISABLE_COPY( AbstractScanlineTextureMapper )
-    int          m_globalWidth;
-    int          m_globalHeight;
+    int         m_globalWidth;
+    int         m_globalHeight;
     qreal       m_normGlobalWidth;
     qreal       m_normGlobalHeight;
 };
