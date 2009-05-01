@@ -82,6 +82,7 @@ class RenderPluginInterface: public PluginInterface
      * "STARS"
      * "BEHIND_TARGET"
      * "SURFACE"
+     * "HOVERS_ABOVE_SURFACE"
      * "ATMOSPHERE"
      * "ORBIT"
      * "ALWAYS_ON_TOP"

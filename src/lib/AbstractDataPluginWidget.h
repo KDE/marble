@@ -39,7 +39,7 @@ class MARBLE_EXPORT AbstractDataPluginWidget : public QObject {
     void setId( QString id );
     
     /**
-      * Returnung the angular resolution of the viewport when the widget was added to it the last
+      * Returning the angular resolution of the viewport when the widget was added to it the last
       * time.
       */
     qreal addedAngularResolution();

@@ -48,7 +48,7 @@ QString AbstractDataPlugin::renderPolicy() const {
 }
 
 QStringList AbstractDataPlugin::renderPosition() const {
-    return QStringList( "ALWAYS_ON_TOP" );
+    return QStringList( "HOVERS_ABOVE_SURFACE" );
 }
 
 bool AbstractDataPlugin::isInitialized() const {
@@ -58,6 +58,10 @@ bool AbstractDataPlugin::isInitialized() const {
 bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
              const QString& renderPos, GeoSceneLayer * layer)
 {
+    if ( renderPos != "HOVERS_ABOVE_SURFACE" ) {
+        return true;
+    }
+
     QList<AbstractDataPluginWidget*> widgets = d->m_model->widgets( viewport,
                                                                  numberOfWidgets() );
     painter->save();

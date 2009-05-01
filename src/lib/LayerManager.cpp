@@ -105,6 +105,14 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
     }
 
     foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
+        if ( renderPlugin && renderPlugin->renderPosition().contains("HOVERS_ABOVE_SURFACE")  ){
+            if ( renderPlugin->enabled() && renderPlugin->visible() ) {
+                renderPlugin->render( painter, viewport, "HOVERS_ABOVE_SURFACE" );
+            }
+        }
+    }
+
+    foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
         if ( renderPlugin ){
             if ( renderPlugin->enabled() && renderPlugin->visible() ) {
                 renderPlugin->render( painter, viewport, "ALWAYS_ON_TOP" );
