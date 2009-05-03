@@ -53,7 +53,7 @@
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="NavigationTab">
       <property name="geometry">
@@ -427,8 +427,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>94</width>
-        <height>70</height>
+        <width>275</width>
+        <height>440</height>
        </rect>
       </property>
       <attribute name="label">
@@ -455,8 +455,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>118</width>
-        <height>215</height>
+        <width>275</width>
+        <height>440</height>
        </rect>
       </property>
       <attribute name="label">
@@ -586,8 +586,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>134</width>
-        <height>269</height>
+        <width>275</width>
+        <height>440</height>
        </rect>
       </property>
       <attribute name="label">
@@ -937,8 +937,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>155</width>
-        <height>105</height>
+        <width>275</width>
+        <height>440</height>
        </rect>
       </property>
       <attribute name="label">
@@ -1017,6 +1017,9 @@
          <property name="toolTip">
           <string>Centers onto your current position</string>
          </property>
+         <property name="whatsThis">
+          <string>In navigation mode the view will center onto your current position and will try to emulate the behaviour of a navigation system</string>
+         </property>
          <property name="text">
           <string>Navigation mode</string>
          </property>
@@ -1026,6 +1029,9 @@
         <widget class="QGroupBox" name="speedGroupBox">
          <property name="toolTip">
           <string>Your current speed</string>
+         </property>
+         <property name="whatsThis">
+          <string>Your current speed (measured e.g. via a GPS device)</string>
          </property>
          <property name="title">
           <string>Speed</string>
@@ -1041,6 +1047,9 @@
             </property>
             <property name="toolTip">
              <string>Your current speed</string>
+            </property>
+            <property name="whatsThis">
+             <string/>
             </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
@@ -1076,6 +1085,9 @@ p, li { white-space: pre-wrap; }
          </property>
          <property name="toolTip">
           <string>Your current position</string>
+         </property>
+         <property name="whatsThis">
+          <string>Your current position (measured e.g. via a GPS device)</string>
          </property>
          <property name="title">
           <string>Position</string>
