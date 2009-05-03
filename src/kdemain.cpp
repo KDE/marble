@@ -47,24 +47,33 @@ int main (int argc, char *argv[])
     aboutData.addAuthor( ki18n( "Patrick Spendrin" ),
                          ki18n( "Core Developer: KML and Windows support" ),
                          "pspendrin@gmail.com" );
+    aboutData.addAuthor( ki18n( "Jens-Michael Hoffmann" ),
+                         ki18n( "OpenStreetMap Integration, OSM Namefinder, Download Management" ),
+                         "jensmh@gmx.de" );
     aboutData.addAuthor( ki18n( "Henry de Valence" ),
                          ki18n( "Core Developer: Marble Runners, World-Clock Plasmoid" ),
                          "hdevalence@gmail.com" );
+    aboutData.addAuthor( ki18n( "Bastian Holst" ),
+                         ki18n( "Online Services support" ),
+                         "bastianholst@gmx.de" );
     aboutData.addAuthor( ki18n( "Pino Toscano" ),
                          ki18n( "Network plugins" ),
                          "pino@kde.org" );
+    aboutData.addAuthor( ki18n( "Harshit Jain" ),
+                         ki18n( "Planet filter" ),
+                         "sonu.itbhu@googlemail.com" );
     aboutData.addAuthor( ki18n( "Simon Edwards" ),
                          ki18n( "Marble Python Bindings" ),
                          "simon@simonzone.com" );
     aboutData.addAuthor( ki18n( "Dennis Nienhüser" ),
                          ki18n( "Navigator Float Item" ),
                          "earthwings@gentoo.org" );
-    aboutData.addAuthor( ki18n( "Jens-Michael Hoffmann" ),
-                         ki18n( "OpenStreetMap Integration, OSM Namefinder" ),
-                         "jensmh@gmx.de" );
     aboutData.addAuthor( ki18n( "Magnus Valle" ),
                          ki18n( "Historical Maps" ),
                          "" );
+    aboutData.addAuthor( ki18n( "Médéric Boquien" ),
+                         ki18n( "Astronomical Observatories" ),
+                         "mboquien@free.fr" );
     aboutData.addAuthor( ki18n( "Eckhart Wörner" ),
                          ki18n( "Bugfixes" ),
                          "kde@ewsoftware.de" );
@@ -151,6 +160,8 @@ int main (int argc, char *argv[])
                          ki18n( "Artwork" ));
 
     // Credits
+    aboutData.addCredit( ki18n( "Luis Silva" ),
+                         ki18n( "Various Suggestions & Testing" ));
     aboutData.addCredit( ki18n( "Stefan Jordan" ),
                          ki18n( "Various Suggestions & Testing" ));
     aboutData.addCredit( ki18n( "Robert Scott" ),
@@ -164,8 +175,6 @@ int main (int argc, char *argv[])
     aboutData.addCredit( ki18n( "Matthias Welwarsky" ),
                          ki18n( "Various Suggestions & Testing" ));
     aboutData.addCredit( ki18n( "Rainer Endres" ),
-                         ki18n( "Various Suggestions & Testing" ));
-    aboutData.addCredit( ki18n( "Luis Silva" ),
                          ki18n( "Various Suggestions & Testing" ));
     aboutData.addCredit( ki18n( "Ralf Gesellensetter" ),
                          ki18n( "Various Suggestions & Testing" ));
