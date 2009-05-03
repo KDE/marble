@@ -16,8 +16,11 @@
 using namespace Marble;
 
 WikipediaPlugin::WikipediaPlugin()
-{  
+{
     setNameId( "wikipedia" );
+    
+    // Plugin is not enabled by default
+    setEnabled( false );
 }
      
 void WikipediaPlugin::initialize() {
