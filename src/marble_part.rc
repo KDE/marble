@@ -26,6 +26,9 @@
     <Separator/>
     <ActionList name="infobox_actionlist" />
     </Menu>
+    <Menu name="onlineservices" noMerge="1"><text>&amp;Online Services</text>
+    <ActionList name="onlineservices_actionlist" />
+    </Menu>
     <Separator/>
     <Action name="show_clouds"/>
     <Action name="show_atmosphere"/>
