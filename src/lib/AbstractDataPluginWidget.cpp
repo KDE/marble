@@ -45,7 +45,7 @@ void AbstractDataPluginWidget::setCoordinates( GeoDataCoordinates coordinates ) 
     d->m_coordinates = coordinates;
 }
 
-QString AbstractDataPluginWidget::id() {
+QString AbstractDataPluginWidget::id() const {
     return d->m_id;
 }
 
@@ -53,7 +53,7 @@ void AbstractDataPluginWidget::setId( QString id ) {
     d->m_id = id;
 }
 
-qreal AbstractDataPluginWidget::addedAngularResolution() {
+qreal AbstractDataPluginWidget::addedAngularResolution() const {
     return d->m_addedAngularResolution;
 }
 

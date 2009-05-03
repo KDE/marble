@@ -33,8 +33,8 @@ const QString descriptionPrefix( "description_" );
 // Time between to new description file downloads in ms
 const int timeBetweenDownloads = 250;
 
-// Seperator to seperate the id of the widget from the file type
-const char fileIdSeperator = '_';
+// Separator to separate the id of the widget from the file type
+const char fileIdSeparator = '_';
     
 class AbstractDataPluginModelPrivate {
  public:
@@ -210,7 +210,7 @@ void AbstractDataPluginModel::setName( QString name ) {
 QString AbstractDataPluginModel::generateFilename( QString id, QString type ) const {
     QString name;
     name += id;
-    name += fileIdSeperator;
+    name += fileIdSeparator;
     name += type;
     
     return name;
@@ -285,7 +285,7 @@ void AbstractDataPluginModel::processFinishedJob( QString relativeUrlString, QSt
         // The downloaded file contains widget data.
         
         // Splitting the id in widgetId and fileType
-        QStringList fileInformation = id.split( fileIdSeperator );
+        QStringList fileInformation = id.split( fileIdSeparator );
         
         if( fileInformation.size() < 2) {
             qDebug() << "Strange file information " << id;
@@ -293,7 +293,7 @@ void AbstractDataPluginModel::processFinishedJob( QString relativeUrlString, QSt
         }
         QString widgetId = fileInformation.at( 0 );
         fileInformation.removeAt( 0 );
-        QString fileType = fileInformation.join( QString( fileIdSeperator ) );
+        QString fileType = fileInformation.join( QString( fileIdSeparator ) );
         
         // Searching for the right widget in m_downloadingWidgets
         QHash<QString, AbstractDataPluginWidget *>::iterator i = d->m_downloadingWidgets.find( id );

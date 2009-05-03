@@ -35,14 +35,14 @@ class MARBLE_EXPORT AbstractDataPluginWidget : public QObject {
     GeoDataCoordinates coordinates();
     void setCoordinates( GeoDataCoordinates coordinates );
      
-    QString id();
+    QString id() const;
     void setId( QString id );
     
     /**
       * Returning the angular resolution of the viewport when the widget was added to it the last
       * time.
       */
-    qreal addedAngularResolution();
+    qreal addedAngularResolution() const;
     void setAddedAngularResolution( qreal resolution );
     
     virtual QString widgetType() const = 0;
