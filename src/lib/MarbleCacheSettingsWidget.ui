@@ -1,82 +1,83 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>MarbleCacheSettingsWidget</class>
- <widget class="QWidget" name="MarbleCacheSettingsWidget" >
-  <property name="geometry" >
+ <widget class="QWidget" name="MarbleCacheSettingsWidget">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>459</width>
+    <height>398</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QGroupBox" name="groupBox_cache" >
-     <property name="toolTip" >
-      <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+    <widget class="QGroupBox" name="groupBox_cache">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">There are two caches being used for Marble: The physical memory which is needed to keep map data in the computer's memory. Increasing the value will make the application more responsive. The hard disc memory cache is used by download contents from the Internet (e.g. Wikipedia data or map data). Decrease this value if you want to save space on the hard disc and if high usage of the Internet is not an issue. &lt;/p>&lt;/body>&lt;/html></string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;There are two caches being used for Marble: The physical memory which is needed to keep map data in the computer's memory. Increasing the value will make the application more responsive. The hard disc memory cache is used by download contents from the Internet (e.g. Wikipedia data or map data). Decrease this value if you want to save space on the hard disc and if high usage of the Internet is not an issue. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
-     <property name="title" >
+     <property name="title">
       <string>C&amp;ache</string>
      </property>
-     <layout class="QGridLayout" >
-      <item row="0" column="0" >
-       <widget class="QLabel" name="label_volatileCache" >
-        <property name="minimumSize" >
+     <layout class="QGridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_volatileCache">
+        <property name="minimumSize">
          <size>
           <width>118</width>
           <height>0</height>
          </size>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>&amp;Physical memory:</string>
         </property>
-        <property name="buddy" >
+        <property name="buddy">
          <cstring>kcfg_volatileTileCacheLimit</cstring>
         </property>
        </widget>
       </item>
-      <item row="0" column="1" >
-       <widget class="QSpinBox" name="kcfg_volatileTileCacheLimit" >
-        <property name="alignment" >
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="kcfg_volatileTileCacheLimit">
+        <property name="alignment">
          <set>Qt::AlignRight</set>
         </property>
-        <property name="maximum" >
+        <property name="maximum">
          <number>999999</number>
         </property>
-        <property name="value" >
+        <property name="value">
          <number>30</number>
         </property>
        </widget>
       </item>
-      <item row="0" column="2" >
-       <widget class="QLabel" name="label_MBVolatileCache" >
-        <property name="text" >
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_MBVolatileCache">
+        <property name="text">
          <string>MB</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="3" >
-       <widget class="QPushButton" name="button_clearVolatileCache" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+      <item row="0" column="3">
+       <widget class="QPushButton" name="button_clearVolatileCache">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>C&amp;lear</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="4" colspan="2" >
+      <item row="0" column="4" colspan="2">
        <spacer>
-        <property name="orientation" >
+        <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" stdset="0" >
+        <property name="sizeHint" stdset="0">
          <size>
           <width>151</width>
           <height>20</height>
@@ -84,70 +85,70 @@ p, li { white-space: pre-wrap; }
         </property>
        </spacer>
       </item>
-      <item row="1" column="0" >
-       <widget class="QLabel" name="label_persistentCache" >
-        <property name="minimumSize" >
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_persistentCache">
+        <property name="minimumSize">
          <size>
           <width>118</width>
           <height>0</height>
          </size>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>&amp;Hard disc:</string>
         </property>
-        <property name="buddy" >
+        <property name="buddy">
          <cstring>kcfg_persistentTileCacheLimit</cstring>
         </property>
        </widget>
       </item>
-      <item row="1" column="1" >
-       <widget class="QSpinBox" name="kcfg_persistentTileCacheLimit" >
-        <property name="minimumSize" >
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="kcfg_persistentTileCacheLimit">
+        <property name="minimumSize">
          <size>
           <width>100</width>
           <height>0</height>
          </size>
         </property>
-        <property name="alignment" >
+        <property name="alignment">
          <set>Qt::AlignRight</set>
         </property>
-        <property name="specialValueText" >
+        <property name="specialValueText">
          <string>Unlimited</string>
         </property>
-        <property name="maximum" >
+        <property name="maximum">
          <number>999999</number>
         </property>
-        <property name="value" >
+        <property name="value">
          <number>999999</number>
         </property>
        </widget>
       </item>
-      <item row="1" column="2" >
-       <widget class="QLabel" name="label_MBPersistentCache" >
-        <property name="text" >
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_MBPersistentCache">
+        <property name="text">
          <string>MB</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="3" colspan="2" >
-       <widget class="QPushButton" name="button_clearPersistentCache" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+      <item row="1" column="3" colspan="2">
+       <widget class="QPushButton" name="button_clearPersistentCache">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>Cl&amp;ear</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="5" >
+      <item row="1" column="5">
        <spacer>
-        <property name="orientation" >
+        <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeHint" stdset="0" >
+        <property name="sizeHint" stdset="0">
          <size>
           <width>141</width>
           <height>20</height>
@@ -159,52 +160,52 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox_proxy" >
-     <property name="toolTip" >
-      <string>&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+    <widget class="QGroupBox" name="groupBox_proxy">
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Proxy settings for your local intranet. Please leave empty if there is no proxy.&lt;/p>&lt;/body>&lt;/html></string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Proxy settings for your local intranet. Please leave empty if there is no proxy.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
-     <property name="title" >
+     <property name="title">
       <string>&amp;Proxy</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout" >
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout" >
+       <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLabel" name="label_proxyUrl" >
-          <property name="text" >
+         <widget class="QLabel" name="label_proxyUrl">
+          <property name="text">
            <string>&amp;Url:</string>
           </property>
-          <property name="buddy" >
+          <property name="buddy">
            <cstring>kcfg_proxyUrl</cstring>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="kcfg_proxyUrl" >
-          <property name="text" >
+         <widget class="QLineEdit" name="kcfg_proxyUrl">
+          <property name="text">
            <string>http://</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_proxyPort" >
-          <property name="text" >
+         <widget class="QLabel" name="label_proxyPort">
+          <property name="text">
            <string>P&amp;ort:</string>
           </property>
-          <property name="buddy" >
+          <property name="buddy">
            <cstring>kcfg_proxyPort</cstring>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="kcfg_proxyPort" >
-          <property name="maximum" >
+         <widget class="QSpinBox" name="kcfg_proxyPort">
+          <property name="maximum">
            <number>9999</number>
           </property>
-          <property name="value" >
+          <property name="value">
            <number>8080</number>
           </property>
          </widget>
@@ -212,40 +213,56 @@ p, li { white-space: pre-wrap; }
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2" >
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>10</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLabel" name="label_proxyType" >
-          <property name="text" >
+         <widget class="QLabel" name="label_proxyType">
+          <property name="text">
            <string>Proxy Type:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="kcfg_proxyHttp" >
-          <property name="text" >
+         <widget class="QRadioButton" name="kcfg_proxyHttp">
+          <property name="text">
            <string>Http</string>
           </property>
-          <property name="checked" >
+          <property name="checked">
            <bool>true</bool>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="kcfg_proxySocks5" >
-          <property name="text" >
+         <widget class="QRadioButton" name="kcfg_proxySocks5">
+          <property name="text">
            <string>Socks5</string>
           </property>
-          <property name="checked" >
+          <property name="checked">
            <bool>false</bool>
           </property>
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer" >
-          <property name="orientation" >
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="sizeHint" stdset="0" >
+          <property name="sizeHint" stdset="0">
            <size>
             <width>40</width>
             <height>20</height>
@@ -256,38 +273,92 @@ p, li { white-space: pre-wrap; }
        </layout>
       </item>
       <item>
-       <widget class="QCheckBox" name="kcfg_proxyAuth" >
-        <property name="text" >
-         <string>Authenticated</string>
+       <spacer name="verticalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>10</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="kcfg_proxyAuth">
+        <property name="text">
+         <string>Requires authentication</string>
         </property>
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3" >
-        <item>
-         <widget class="QLabel" name="label_username" >
-          <property name="text" >
-           <string>Username</string>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_username">
+          <property name="text">
+           <string>U&amp;sername</string>
+          </property>
+          <property name="buddy">
+           <cstring>kcfg_proxyUser</cstring>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QLineEdit" name="kcfg_proxyUser" >
-          <property name="enabled" >
+        <item row="0" column="2">
+         <widget class="QLineEdit" name="kcfg_proxyUser">
+          <property name="enabled">
            <bool>false</bool>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QLabel" name="label_password" >
-          <property name="text" >
-           <string>Password</string>
+        <item row="1" column="0">
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="label_password">
+          <property name="text">
+           <string>&amp;Password</string>
+          </property>
+          <property name="buddy">
+           <cstring>kcfg_proxyPass</cstring>
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QLineEdit" name="kcfg_proxyPass" >
-          <property name="enabled" >
+        <item row="1" column="2">
+         <widget class="QLineEdit" name="kcfg_proxyPass">
+          <property name="enabled">
            <bool>false</bool>
           </property>
          </widget>
@@ -298,11 +369,11 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
    <item>
-    <spacer name="verticalSpacer" >
-     <property name="orientation" >
+    <spacer name="verticalSpacer">
+     <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <property name="sizeHint" stdset="0" >
+     <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
        <height>40</height>
