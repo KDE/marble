@@ -223,6 +223,9 @@ void MainWindow::createMenus()
     m_infoBoxesMenu = m_fileMenu->addMenu("&Info Boxes");
     createInfoBoxesMenu();
 
+    m_onlineServicesMenu = m_fileMenu->addMenu("&Online Services");
+    createOnlineServicesMenu();
+
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_showCloudsAct);
     m_fileMenu->addAction(m_showAtmosphereAct);
@@ -246,6 +249,7 @@ void MainWindow::createMenus()
     
 
     connect( m_infoBoxesMenu, SIGNAL( aboutToShow() ), this, SLOT( createInfoBoxesMenu() ) ); 
+    connect( m_onlineServicesMenu, SIGNAL( aboutToShow() ), this, SLOT( createOnlineServiesMenu() ) ); 
 }
 
 void MainWindow::createInfoBoxesMenu()
@@ -261,6 +265,10 @@ void MainWindow::createInfoBoxesMenu()
     {
         m_infoBoxesMenu->addAction( (*i)->action() );
     }
+}
+
+void MainWindow::createOnlineServicesMenu()
+{
 }
 
 void MainWindow::createStatusBar()

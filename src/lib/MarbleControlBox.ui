@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>MarbleControlBox</class>
- <widget class="QWidget" name="MarbleControlBox" >
-  <property name="geometry" >
+ <widget class="QWidget" name="MarbleControlBox">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,162 +10,162 @@
     <height>630</height>
    </rect>
   </property>
-  <property name="sizePolicy" >
-   <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="minimumSize" >
+  <property name="minimumSize">
    <size>
     <width>185</width>
     <height>0</height>
    </size>
   </property>
-  <property name="maximumSize" >
+  <property name="maximumSize">
    <size>
     <width>16777215</width>
     <height>16777215</height>
    </size>
   </property>
-  <property name="layoutDirection" >
+  <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_4" >
-   <property name="spacing" >
+  <layout class="QVBoxLayout" name="verticalLayout_4">
+   <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin" >
+   <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <widget class="QToolBox" name="toolBox" >
-     <property name="enabled" >
+    <widget class="QToolBox" name="toolBox">
+     <property name="enabled">
       <bool>true</bool>
      </property>
-     <property name="minimumSize" >
+     <property name="minimumSize">
       <size>
        <width>150</width>
        <height>410</height>
       </size>
      </property>
-     <property name="whatsThis" >
+     <property name="whatsThis">
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
-     <property name="currentIndex" >
-      <number>0</number>
+     <property name="currentIndex">
+      <number>5</number>
      </property>
-     <widget class="QWidget" name="NavigationTab" >
-      <property name="geometry" >
+     <widget class="QWidget" name="NavigationTab">
+      <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>275</width>
-        <height>434</height>
+        <height>440</height>
        </rect>
       </property>
-      <attribute name="label" >
+      <attribute name="label">
        <string>Navigation</string>
       </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="spacing" >
+      <layout class="QVBoxLayout">
+       <property name="spacing">
         <number>6</number>
        </property>
-       <property name="margin" >
+       <property name="margin">
         <number>5</number>
        </property>
        <item>
-        <layout class="QGridLayout" >
-         <property name="margin" >
+        <layout class="QGridLayout">
+         <property name="margin">
           <number>0</number>
          </property>
-         <property name="spacing" >
+         <property name="spacing">
           <number>6</number>
          </property>
-         <item row="5" column="0" >
-          <widget class="Line" name="line_2_2" >
-           <property name="orientation" >
+         <item row="5" column="0">
+          <widget class="Line" name="line_2_2">
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
-         <item row="0" column="0" >
-          <widget class="QLabel" name="label_2_2" >
-           <property name="text" >
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_2_2">
+           <property name="text">
             <string>&amp;Search</string>
            </property>
-           <property name="buddy" >
+           <property name="buddy">
             <cstring>searchLineEdit</cstring>
            </property>
           </widget>
          </item>
-         <item row="2" column="0" >
-          <widget class="QLineEdit" name="searchLineEdit" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+         <item row="2" column="0">
+          <widget class="QLineEdit" name="searchLineEdit">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="toolTip" >
+           <property name="toolTip">
             <string>Search line</string>
            </property>
-           <property name="whatsThis" >
+           <property name="whatsThis">
             <string>Here you can enter the name of the location you are searching for.</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0" >
-          <widget class="MarbleSearchListView" name="locationListView" >
-           <property name="sizePolicy" >
-            <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+         <item row="3" column="0">
+          <widget class="MarbleSearchListView" name="locationListView">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <property name="minimumSize" >
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>75</height>
             </size>
            </property>
-           <property name="maximumSize" >
+           <property name="maximumSize">
             <size>
              <width>16777215</width>
              <height>100</height>
             </size>
            </property>
-           <property name="focusPolicy" >
+           <property name="focusPolicy">
             <enum>Qt::WheelFocus</enum>
            </property>
-           <property name="toolTip" >
+           <property name="toolTip">
             <string>Location Browser</string>
            </property>
-           <property name="whatsThis" >
+           <property name="whatsThis">
             <string>Double click an entry of this list to get it displayed on the map.</string>
            </property>
-           <property name="horizontalScrollBarPolicy" >
+           <property name="horizontalScrollBarPolicy">
             <enum>Qt::ScrollBarAlwaysOff</enum>
            </property>
-           <property name="editTriggers" >
+           <property name="editTriggers">
             <set>QAbstractItemView::NoEditTriggers</set>
            </property>
-           <property name="alternatingRowColors" >
+           <property name="alternatingRowColors">
             <bool>false</bool>
            </property>
-           <property name="iconSize" >
+           <property name="iconSize">
             <size>
              <width>16</width>
              <height>16</height>
             </size>
            </property>
-           <property name="layoutMode" >
+           <property name="layoutMode">
             <enum>QListView::Batched</enum>
            </property>
-           <property name="viewMode" >
+           <property name="viewMode">
             <enum>QListView::ListMode</enum>
            </property>
-           <property name="uniformItemSizes" >
+           <property name="uniformItemSizes">
             <bool>true</bool>
            </property>
           </widget>
@@ -172,22 +173,22 @@
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" >
-         <property name="spacing" >
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
-         <property name="margin" >
+         <property name="margin">
           <number>0</number>
          </property>
          <item>
           <spacer>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeType" >
+           <property name="sizeType">
             <enum>QSizePolicy::MinimumExpanding</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>0</width>
              <height>10</height>
@@ -196,177 +197,177 @@
           </spacer>
          </item>
          <item>
-          <layout class="QGridLayout" >
-           <property name="margin" >
+          <layout class="QGridLayout">
+           <property name="margin">
             <number>0</number>
            </property>
-           <property name="spacing" >
+           <property name="spacing">
             <number>6</number>
            </property>
-           <item row="5" column="1" >
-            <widget class="QToolButton" name="zoomOutButton" >
-             <property name="toolTip" >
+           <item row="5" column="1">
+            <widget class="QToolButton" name="zoomOutButton">
+             <property name="toolTip">
               <string>Zoom Out</string>
              </property>
-             <property name="whatsThis" >
+             <property name="whatsThis">
               <string>Zoom out by pressing this button to see less detail.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>...</string>
              </property>
-             <property name="icon" >
-              <iconset resource="../../../../marble/src/marble.qrc" >
+             <property name="icon">
+              <iconset>
                <normaloff>:/icons/zoom-out.png</normaloff>:/icons/zoom-out.png</iconset>
              </property>
-             <property name="shortcut" >
+             <property name="shortcut">
               <string>-</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1" >
-            <widget class="QToolButton" name="goHomeButton" >
-             <property name="toolTip" >
+           <item row="1" column="1">
+            <widget class="QToolButton" name="goHomeButton">
+             <property name="toolTip">
               <string>Navigate to your 'Home Location'</string>
              </property>
-             <property name="whatsThis" >
+             <property name="whatsThis">
               <string>Click this button to restore the original zoom level and view angle.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>...</string>
              </property>
-             <property name="icon" >
-              <iconset resource="../../../../marble/src/marble.qrc" >
+             <property name="icon">
+              <iconset>
                <normaloff>:/icons/go-home.png</normaloff>:/icons/go-home.png</iconset>
              </property>
-             <property name="shortcut" >
+             <property name="shortcut">
               <string>Home</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="2" >
-            <widget class="QToolButton" name="moveRightButton" >
-             <property name="toolTip" >
+           <item row="1" column="2">
+            <widget class="QToolButton" name="moveRightButton">
+             <property name="toolTip">
               <string>Right</string>
              </property>
-             <property name="whatsThis" >
+             <property name="whatsThis">
               <string>Rotates the earth clockwise around its axis.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>...</string>
              </property>
-             <property name="icon" >
-              <iconset resource="../../../../marble/src/marble.qrc" >
+             <property name="icon">
+              <iconset>
                <normaloff>:/icons/arrow-right.png</normaloff>:/icons/arrow-right.png</iconset>
              </property>
             </widget>
            </item>
-           <item row="0" column="1" >
-            <widget class="QToolButton" name="moveUpButton" >
-             <property name="toolTip" >
+           <item row="0" column="1">
+            <widget class="QToolButton" name="moveUpButton">
+             <property name="toolTip">
               <string>Up</string>
              </property>
-             <property name="whatsThis" >
+             <property name="whatsThis">
               <string>Tilts the earth's axis towards the user.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>...</string>
              </property>
-             <property name="icon" >
-              <iconset resource="../../../../marble/src/marble.qrc" >
+             <property name="icon">
+              <iconset>
                <normaloff>:/icons/arrow-up.png</normaloff>:/icons/arrow-up.png</iconset>
              </property>
             </widget>
            </item>
-           <item row="4" column="1" >
-            <widget class="QSlider" name="zoomSlider" >
-             <property name="sizePolicy" >
-              <sizepolicy vsizetype="MinimumExpanding" hsizetype="Fixed" >
+           <item row="4" column="1">
+            <widget class="QSlider" name="zoomSlider">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
-             <property name="toolTip" >
+             <property name="toolTip">
               <string>Zoom Slider</string>
              </property>
-             <property name="whatsThis" >
+             <property name="whatsThis">
               <string>Use this slider to adjust the zoom level of the map.</string>
              </property>
-             <property name="minimum" >
+             <property name="minimum">
               <number>900</number>
              </property>
-             <property name="maximum" >
+             <property name="maximum">
               <number>2400</number>
              </property>
-             <property name="value" >
+             <property name="value">
               <number>1050</number>
              </property>
-             <property name="sliderPosition" >
+             <property name="sliderPosition">
               <number>1050</number>
              </property>
-             <property name="tracking" >
+             <property name="tracking">
               <bool>true</bool>
              </property>
-             <property name="orientation" >
+             <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
-             <property name="tickPosition" >
+             <property name="tickPosition">
               <enum>QSlider::TicksAbove</enum>
              </property>
-             <property name="tickInterval" >
+             <property name="tickInterval">
               <number>100</number>
              </property>
             </widget>
            </item>
-           <item row="3" column="1" >
-            <widget class="QToolButton" name="zoomInButton" >
-             <property name="toolTip" >
+           <item row="3" column="1">
+            <widget class="QToolButton" name="zoomInButton">
+             <property name="toolTip">
               <string>Zoom In</string>
              </property>
-             <property name="whatsThis" >
+             <property name="whatsThis">
               <string>Zoom in by pressing this button to see more detail.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>...</string>
              </property>
-             <property name="icon" >
-              <iconset resource="../../../../marble/src/marble.qrc" >
+             <property name="icon">
+              <iconset>
                <normaloff>:/icons/zoom-in.png</normaloff>:/icons/zoom-in.png</iconset>
              </property>
-             <property name="shortcut" >
+             <property name="shortcut">
               <string>+</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1" >
-            <widget class="QToolButton" name="moveDownButton" >
-             <property name="toolTip" >
+           <item row="2" column="1">
+            <widget class="QToolButton" name="moveDownButton">
+             <property name="toolTip">
               <string>Down</string>
              </property>
-             <property name="whatsThis" >
+             <property name="whatsThis">
               <string>Tilts the earth's axis away from the user.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>...</string>
              </property>
-             <property name="icon" >
-              <iconset resource="../../../../marble/src/marble.qrc" >
+             <property name="icon">
+              <iconset>
                <normaloff>:/icons/arrow-down.png</normaloff>:/icons/arrow-down.png</iconset>
              </property>
             </widget>
            </item>
-           <item row="1" column="0" >
-            <widget class="QToolButton" name="moveLeftButton" >
-             <property name="toolTip" >
+           <item row="1" column="0">
+            <widget class="QToolButton" name="moveLeftButton">
+             <property name="toolTip">
               <string>Left</string>
              </property>
-             <property name="whatsThis" >
+             <property name="whatsThis">
               <string>Rotates the earth counterclockwise around its axis.</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>...</string>
              </property>
-             <property name="icon" >
-              <iconset resource="../../../../marble/src/marble.qrc" >
+             <property name="icon">
+              <iconset>
                <normaloff>:/icons/arrow-left.png</normaloff>:/icons/arrow-left.png</iconset>
              </property>
             </widget>
@@ -375,13 +376,13 @@
          </item>
          <item>
           <spacer>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeType" >
+           <property name="sizeType">
             <enum>QSizePolicy::MinimumExpanding</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>0</width>
              <height>10</height>
@@ -392,156 +393,156 @@
         </layout>
        </item>
        <item>
-        <widget class="QFrame" name="m_pSpacerFrame" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+        <widget class="QFrame" name="m_pSpacerFrame">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="minimumSize" >
+         <property name="minimumSize">
           <size>
            <width>16</width>
            <height>0</height>
           </size>
          </property>
-         <property name="maximumSize" >
+         <property name="maximumSize">
           <size>
            <width>16</width>
            <height>16777215</height>
           </size>
          </property>
-         <property name="frameShape" >
+         <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
-         <property name="frameShadow" >
+         <property name="frameShadow">
           <enum>QFrame::Plain</enum>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="LegendTab" >
-      <property name="geometry" >
+     <widget class="QWidget" name="LegendTab">
+      <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>275</width>
-        <height>434</height>
+        <width>94</width>
+        <height>70</height>
        </rect>
       </property>
-      <attribute name="label" >
+      <attribute name="label">
        <string>Legend</string>
       </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="spacing" >
+      <layout class="QVBoxLayout">
+       <property name="spacing">
         <number>6</number>
        </property>
-       <property name="margin" >
+       <property name="margin">
         <number>5</number>
        </property>
        <item>
-        <widget class="MarbleLegendBrowser" name="marbleLegendBrowser" >
-         <property name="horizontalScrollBarPolicy" >
+        <widget class="MarbleLegendBrowser" name="marbleLegendBrowser">
+         <property name="horizontalScrollBarPolicy">
           <enum>Qt::ScrollBarAlwaysOff</enum>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="MapViewTab" >
-      <property name="geometry" >
+     <widget class="QWidget" name="MapViewTab">
+      <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>275</width>
-        <height>434</height>
+        <width>118</width>
+        <height>215</height>
        </rect>
       </property>
-      <attribute name="label" >
+      <attribute name="label">
        <string>Map View</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_5" >
+      <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <widget class="QLabel" name="projectionLabel_2" >
-         <property name="text" >
+        <widget class="QLabel" name="projectionLabel_2">
+         <property name="text">
           <string>&amp;Projection</string>
          </property>
-         <property name="buddy" >
+         <property name="buddy">
           <cstring>projectionComboBox</cstring>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="projectionComboBox" >
-         <property name="enabled" >
+        <widget class="QComboBox" name="projectionComboBox">
+         <property name="enabled">
           <bool>false</bool>
          </property>
          <item>
-          <property name="text" >
+          <property name="text">
            <string>Globe</string>
           </property>
-          <property name="icon" >
-           <iconset resource="../../../../marble/src/marble.qrc" >
+          <property name="icon">
+           <iconset>
             <normaloff>:/icons/map-globe.png</normaloff>:/icons/map-globe.png</iconset>
           </property>
          </item>
          <item>
-          <property name="text" >
+          <property name="text">
            <string>Flat Map</string>
           </property>
-          <property name="icon" >
-           <iconset resource="../../../../marble/src/marble.qrc" >
+          <property name="icon">
+           <iconset>
             <normaloff>:/icons/map-flat.png</normaloff>:/icons/map-flat.png</iconset>
           </property>
          </item>
          <item>
-          <property name="text" >
+          <property name="text">
            <string>Mercator</string>
           </property>
-          <property name="icon" >
-           <iconset resource="../../../../marble/src/marble.qrc" >
+          <property name="icon">
+           <iconset>
             <normaloff>:/icons/map-mercator.png</normaloff>:/icons/map-mercator.png</iconset>
           </property>
          </item>
         </widget>
        </item>
        <item>
-        <widget class="Line" name="line" >
-         <property name="orientation" >
+        <widget class="Line" name="line">
+         <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="celestialBodyLabel" >
-         <property name="enabled" >
+        <widget class="QLabel" name="celestialBodyLabel">
+         <property name="enabled">
           <bool>true</bool>
          </property>
-         <property name="text" >
+         <property name="text">
           <string>&amp;Celestial Body</string>
          </property>
-         <property name="buddy" >
+         <property name="buddy">
           <cstring>projectionComboBox</cstring>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="celestialBodyComboBox" >
-         <property name="enabled" >
+        <widget class="QComboBox" name="celestialBodyComboBox">
+         <property name="enabled">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
         <spacer>
-         <property name="orientation" >
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeType" >
+         <property name="sizeType">
           <enum>QSizePolicy::Fixed</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>10</height>
@@ -550,131 +551,131 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="mapThemeLabel" >
-         <property name="text" >
+        <widget class="QLabel" name="mapThemeLabel">
+         <property name="text">
           <string>&amp;Theme</string>
          </property>
-         <property name="buddy" >
+         <property name="buddy">
           <cstring>marbleThemeSelectView</cstring>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="MarbleThemeSelectView" name="marbleThemeSelectView" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+        <widget class="MarbleThemeSelectView" name="marbleThemeSelectView">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="whatsThis" >
+         <property name="whatsThis">
           <string>Here you can choose the preferred map view from different topics.</string>
          </property>
-         <property name="autoFillBackground" >
+         <property name="autoFillBackground">
           <bool>true</bool>
          </property>
-         <property name="verticalScrollMode" >
+         <property name="verticalScrollMode">
           <enum>QAbstractItemView::ScrollPerPixel</enum>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="CurrentLocationTab" >
-      <property name="geometry" >
+     <widget class="QWidget" name="CurrentLocationTab">
+      <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>275</width>
-        <height>434</height>
+        <width>134</width>
+        <height>269</height>
        </rect>
       </property>
-      <attribute name="label" >
+      <attribute name="label">
        <string>Current Location</string>
       </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="spacing" >
+      <layout class="QVBoxLayout">
+       <property name="spacing">
         <number>6</number>
        </property>
-       <property name="margin" >
+       <property name="margin">
         <number>5</number>
        </property>
        <item>
-        <widget class="QFrame" name="currentLocationFrame" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="MinimumExpanding" hsizetype="Preferred" >
+        <widget class="QFrame" name="currentLocationFrame">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="frameShape" >
+         <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
          </property>
-         <property name="frameShadow" >
+         <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" >
-          <property name="spacing" >
+         <layout class="QVBoxLayout">
+          <property name="spacing">
            <number>6</number>
           </property>
-          <property name="margin" >
+          <property name="margin">
            <number>0</number>
           </property>
           <item>
-           <widget class="QLabel" name="m_latLabel" >
-            <property name="text" >
+           <widget class="QLabel" name="m_latLabel">
+            <property name="text">
              <string>&amp;Latitude</string>
             </property>
-            <property name="buddy" >
+            <property name="buddy">
              <cstring>m_latSpinBox</cstring>
             </property>
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
-            <property name="spacing" >
+           <layout class="QHBoxLayout">
+            <property name="spacing">
              <number>0</number>
             </property>
-            <property name="margin" >
+            <property name="margin">
              <number>0</number>
             </property>
             <item>
-             <widget class="QDoubleSpinBox" name="m_latSpinBox" >
-              <property name="minimumSize" >
+             <widget class="QDoubleSpinBox" name="m_latSpinBox">
+              <property name="minimumSize">
                <size>
                 <width>82</width>
                 <height>0</height>
                </size>
               </property>
-              <property name="decimals" >
+              <property name="decimals">
                <number>4</number>
               </property>
-              <property name="maximum" >
+              <property name="maximum">
                <double>90.000000000000000</double>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="m_latComboBox" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+             <widget class="QComboBox" name="m_latComboBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="sizeAdjustPolicy" >
+              <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToMinimumContentsLength</enum>
               </property>
-              <property name="minimumContentsLength" >
+              <property name="minimumContentsLength">
                <number>1</number>
               </property>
               <item>
-               <property name="text" >
+               <property name="text">
                 <string>N</string>
                </property>
               </item>
               <item>
-               <property name="text" >
+               <property name="text">
                 <string>S</string>
                </property>
               </item>
@@ -682,10 +683,10 @@
             </item>
             <item>
              <spacer>
-              <property name="orientation" >
+              <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" stdset="0" >
+              <property name="sizeHint" stdset="0">
                <size>
                 <width>0</width>
                 <height>20</height>
@@ -696,60 +697,60 @@
            </layout>
           </item>
           <item>
-           <widget class="QLabel" name="m_lonLabel" >
-            <property name="text" >
+           <widget class="QLabel" name="m_lonLabel">
+            <property name="text">
              <string>L&amp;ongitude</string>
             </property>
-            <property name="buddy" >
+            <property name="buddy">
              <cstring>m_lonSpinBox</cstring>
             </property>
            </widget>
           </item>
           <item>
-           <layout class="QHBoxLayout" >
-            <property name="spacing" >
+           <layout class="QHBoxLayout">
+            <property name="spacing">
              <number>0</number>
             </property>
-            <property name="margin" >
+            <property name="margin">
              <number>0</number>
             </property>
             <item>
-             <widget class="QDoubleSpinBox" name="m_lonSpinBox" >
-              <property name="minimumSize" >
+             <widget class="QDoubleSpinBox" name="m_lonSpinBox">
+              <property name="minimumSize">
                <size>
                 <width>82</width>
                 <height>0</height>
                </size>
               </property>
-              <property name="decimals" >
+              <property name="decimals">
                <number>4</number>
               </property>
-              <property name="maximum" >
+              <property name="maximum">
                <double>180.000000000000000</double>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="m_lonComboBox" >
-              <property name="sizePolicy" >
-               <sizepolicy vsizetype="Preferred" hsizetype="Fixed" >
+             <widget class="QComboBox" name="m_lonComboBox">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="sizeAdjustPolicy" >
+              <property name="sizeAdjustPolicy">
                <enum>QComboBox::AdjustToMinimumContentsLength</enum>
               </property>
-              <property name="minimumContentsLength" >
+              <property name="minimumContentsLength">
                <number>1</number>
               </property>
               <item>
-               <property name="text" >
+               <property name="text">
                 <string>E</string>
                </property>
               </item>
               <item>
-               <property name="text" >
+               <property name="text">
                 <string>W</string>
                </property>
               </item>
@@ -757,10 +758,10 @@
             </item>
             <item>
              <spacer>
-              <property name="orientation" >
+              <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" stdset="0" >
+              <property name="sizeHint" stdset="0">
                <size>
                 <width>0</width>
                 <height>20</height>
@@ -771,34 +772,34 @@
            </layout>
           </item>
           <item>
-           <widget class="Line" name="line_2" >
-            <property name="orientation" >
+           <widget class="Line" name="line_2">
+            <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
            </widget>
           </item>
           <item>
-           <layout class="QVBoxLayout" >
-            <property name="spacing" >
+           <layout class="QVBoxLayout">
+            <property name="spacing">
              <number>6</number>
             </property>
-            <property name="margin" >
+            <property name="margin">
              <number>0</number>
             </property>
             <item>
-             <layout class="QHBoxLayout" >
-              <property name="spacing" >
+             <layout class="QHBoxLayout">
+              <property name="spacing">
                <number>6</number>
               </property>
-              <property name="margin" >
+              <property name="margin">
                <number>0</number>
               </property>
               <item>
                <spacer>
-                <property name="orientation" >
+                <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="sizeHint" stdset="0" >
+                <property name="sizeHint" stdset="0">
                  <size>
                   <width>40</width>
                   <height>20</height>
@@ -807,8 +808,8 @@
                </spacer>
               </item>
               <item>
-               <widget class="QCheckBox" name="m_trackGps" >
-                <property name="text" >
+               <widget class="QCheckBox" name="m_trackGps">
+                <property name="text">
                  <string>Track Gps</string>
                 </property>
                </widget>
@@ -816,19 +817,19 @@
              </layout>
             </item>
             <item>
-             <layout class="QHBoxLayout" >
-              <property name="spacing" >
+             <layout class="QHBoxLayout">
+              <property name="spacing">
                <number>6</number>
               </property>
-              <property name="margin" >
+              <property name="margin">
                <number>0</number>
               </property>
               <item>
                <spacer>
-                <property name="orientation" >
+                <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="sizeHint" stdset="0" >
+                <property name="sizeHint" stdset="0">
                  <size>
                   <width>40</width>
                   <height>20</height>
@@ -837,8 +838,8 @@
                </spacer>
               </item>
               <item>
-               <widget class="QCheckBox" name="m_catchGps" >
-                <property name="text" >
+               <widget class="QCheckBox" name="m_catchGps">
+                <property name="text">
                  <string>Catch Gps</string>
                 </property>
                </widget>
@@ -846,19 +847,19 @@
              </layout>
             </item>
             <item>
-             <layout class="QHBoxLayout" >
-              <property name="spacing" >
+             <layout class="QHBoxLayout">
+              <property name="spacing">
                <number>6</number>
               </property>
-              <property name="margin" >
+              <property name="margin">
                <number>0</number>
               </property>
               <item>
                <spacer>
-                <property name="orientation" >
+                <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="sizeHint" stdset="0" >
+                <property name="sizeHint" stdset="0">
                  <size>
                   <width>40</width>
                   <height>20</height>
@@ -867,11 +868,11 @@
                </spacer>
               </item>
               <item>
-               <widget class="QCheckBox" name="m_gpsDrawBox" >
-                <property name="enabled" >
+               <widget class="QCheckBox" name="m_gpsDrawBox">
+                <property name="enabled">
                  <bool>true</bool>
                 </property>
-                <property name="text" >
+                <property name="text">
                  <string>Draw</string>
                 </property>
                </widget>
@@ -879,19 +880,19 @@
              </layout>
             </item>
             <item>
-             <layout class="QHBoxLayout" >
-              <property name="spacing" >
+             <layout class="QHBoxLayout">
+              <property name="spacing">
                <number>6</number>
               </property>
-              <property name="margin" >
+              <property name="margin">
                <number>0</number>
               </property>
               <item>
                <spacer>
-                <property name="orientation" >
+                <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
-                <property name="sizeHint" stdset="0" >
+                <property name="sizeHint" stdset="0">
                  <size>
                   <width>40</width>
                   <height>20</height>
@@ -900,11 +901,11 @@
                </spacer>
               </item>
               <item>
-               <widget class="QPushButton" name="m_gpsGoButton" >
-                <property name="enabled" >
+               <widget class="QPushButton" name="m_gpsGoButton">
+                <property name="enabled">
                  <bool>true</bool>
                 </property>
-                <property name="text" >
+                <property name="text">
                  <string>Go To</string>
                 </property>
                </widget>
@@ -915,10 +916,10 @@
           </item>
           <item>
            <spacer>
-            <property name="orientation" >
+            <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
-            <property name="sizeHint" stdset="0" >
+            <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
               <height>0</height>
@@ -931,42 +932,42 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="m_fileViewTab" >
-      <property name="geometry" >
+     <widget class="QWidget" name="m_fileViewTab">
+      <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>275</width>
-        <height>434</height>
+        <width>155</width>
+        <height>105</height>
        </rect>
       </property>
-      <attribute name="label" >
+      <attribute name="label">
        <string>File View</string>
       </attribute>
-      <layout class="QVBoxLayout" >
-       <property name="spacing" >
+      <layout class="QVBoxLayout">
+       <property name="spacing">
         <number>6</number>
        </property>
-       <property name="margin" >
+       <property name="margin">
         <number>5</number>
        </property>
        <item>
-        <widget class="QListView" name="m_fileView" />
+        <widget class="QListView" name="m_fileView"/>
        </item>
        <item>
-        <layout class="QHBoxLayout" >
-         <property name="spacing" >
+        <layout class="QHBoxLayout">
+         <property name="spacing">
           <number>6</number>
          </property>
-         <property name="margin" >
+         <property name="margin">
           <number>0</number>
          </property>
          <item>
           <spacer>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -975,21 +976,21 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="m_saveButton" >
-           <property name="enabled" >
+          <widget class="QPushButton" name="m_saveButton">
+           <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>&amp;Save</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="m_closeButton" >
-           <property name="enabled" >
+          <widget class="QPushButton" name="m_closeButton">
+           <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>&amp;Close</string>
            </property>
           </widget>
@@ -998,57 +999,66 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite" >
-      <property name="geometry" >
+     <widget class="QWidget" name="Seite">
+      <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>275</width>
-        <height>434</height>
+        <height>440</height>
        </rect>
       </property>
-      <attribute name="label" >
+      <attribute name="label">
        <string>Current Location</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_3" >
+      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QCheckBox" name="navigationCheckBox" >
-         <property name="text" >
+        <widget class="QCheckBox" name="navigationCheckBox">
+         <property name="toolTip">
+          <string>Centers onto your current position</string>
+         </property>
+         <property name="text">
           <string>Navigation mode</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="speedGroupBox" >
-         <property name="title" >
+        <widget class="QGroupBox" name="speedGroupBox">
+         <property name="toolTip">
+          <string>Your current speed</string>
+         </property>
+         <property name="title">
           <string>Speed</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout" >
+         <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QLabel" name="speedLabel" >
-            <property name="minimumSize" >
+           <widget class="QLabel" name="speedLabel">
+            <property name="minimumSize">
              <size>
               <width>0</width>
               <height>0</height>
              </size>
             </property>
-            <property name="frameShape" >
+            <property name="toolTip">
+             <string>Your current speed</string>
+            </property>
+            <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
-            <property name="frameShadow" >
+            <property name="frameShadow">
              <enum>QFrame::Sunken</enum>
             </property>
-            <property name="text" >
-             <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
-&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+            <property name="text">
+             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style>&lt;/head>&lt;body style=" font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;">
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-weight:600;">000,0 km/h&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000,0 km/h&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
-            <property name="wordWrap" >
+            <property name="wordWrap">
              <bool>true</bool>
             </property>
-            <property name="margin" >
+            <property name="margin">
              <number>7</number>
             </property>
            </widget>
@@ -1057,83 +1067,107 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="positionGroupBox" >
-         <property name="sizePolicy" >
-          <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+        <widget class="QGroupBox" name="positionGroupBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
-         <property name="title" >
+         <property name="toolTip">
+          <string>Your current position</string>
+         </property>
+         <property name="title">
           <string>Position</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2" >
+         <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QLabel" name="positionLabel" >
-            <property name="minimumSize" >
+           <widget class="QLabel" name="positionLabel">
+            <property name="minimumSize">
              <size>
               <width>0</width>
               <height>50</height>
              </size>
             </property>
-            <property name="frameShape" >
+            <property name="toolTip">
+             <string>Fuzzy description of your position</string>
+            </property>
+            <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
-            <property name="frameShadow" >
+            <property name="frameShadow">
              <enum>QFrame::Sunken</enum>
             </property>
-            <property name="text" >
-             <string>&lt;b>Unidentified Position&lt;/b></string>
+            <property name="text">
+             <string>&lt;b&gt;Unidentified Position&lt;/b&gt;</string>
             </property>
-            <property name="alignment" >
+            <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
             </property>
-            <property name="wordWrap" >
+            <property name="wordWrap">
              <bool>true</bool>
             </property>
-            <property name="margin" >
+            <property name="margin">
              <number>7</number>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="longitudeLabel" >
-            <property name="text" >
+           <widget class="QLabel" name="longitudeLabel">
+            <property name="toolTip">
+             <string>Longitude of your current position</string>
+            </property>
+            <property name="text">
              <string>Longitude</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="longitudeValue" >
-            <property name="text" >
-             <string>+00°00'00" E</string>
+           <widget class="QLabel" name="longitudeValue">
+            <property name="toolTip">
+             <string>Longitude of your current position</string>
+            </property>
+            <property name="text">
+             <string>+00°00'00&quot; E</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="latitudeLabel" >
-            <property name="text" >
+           <widget class="QLabel" name="latitudeLabel">
+            <property name="toolTip">
+             <string>Latitude of your current position</string>
+            </property>
+            <property name="text">
              <string>Latitude</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="latitudeValue" >
-            <property name="text" >
-             <string>+00°00'00" N</string>
+           <widget class="QLabel" name="latitudeValue">
+            <property name="toolTip">
+             <string>Latitude of your current position</string>
+            </property>
+            <property name="text">
+             <string>+00°00'00&quot; N</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="altitudeLabel" >
-            <property name="text" >
+           <widget class="QLabel" name="altitudeLabel">
+            <property name="toolTip">
+             <string>Altitude of your current position</string>
+            </property>
+            <property name="text">
              <string>Altitude</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="altitudeValue" >
-            <property name="text" >
+           <widget class="QLabel" name="altitudeValue">
+            <property name="toolTip">
+             <string>Altitude of your current position</string>
+            </property>
+            <property name="text">
              <string>000 m</string>
             </property>
            </widget>
@@ -1142,11 +1176,11 @@ p, li { white-space: pre-wrap; }
         </widget>
        </item>
        <item>
-        <spacer name="verticalSpacer" >
-         <property name="orientation" >
+        <spacer name="verticalSpacer">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>0</height>
@@ -1178,8 +1212,8 @@ p, li { white-space: pre-wrap; }
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../../marble/src/marble.qrc" />
-  <include location="../../../../marble/src/lib/libmarble.qrc" />
+  <include location="../../../../marble/src/marble.qrc"/>
+  <include location="../../../../marble/src/lib/libmarble.qrc"/>
  </resources>
  <connections/>
 </ui>

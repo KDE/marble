@@ -80,6 +80,7 @@ class MainWindow : public QMainWindow
     void  setupStatusBar();
     void  lockPosition( bool );
     void  createInfoBoxesMenu();
+    void  createOnlineServicesMenu();
 
  private:
     ControlView *m_controlView;
@@ -89,6 +90,7 @@ class MainWindow : public QMainWindow
     QMenu *m_helpMenu;
     QMenu *m_settingsMenu;
     QMenu *m_infoBoxesMenu;
+    QMenu *m_onlineServicesMenu;
 
     // File Menu
     QAction *m_exportMapAct;
