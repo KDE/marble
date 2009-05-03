@@ -81,7 +81,7 @@ QUrl PhotoPluginWidget::photoUrl() const {
 
 QUrl PhotoPluginWidget::infoUrl( QString apiKey ) const {
     QString url = "http://www.flickr.com/services/rest/?method=flickr.photos.geo.getLocation";
-    url +=        "&id=";
+    url +=        "&photo_id=";
     url +=        id();
     url +=        "&api_key=" + apiKey;
     

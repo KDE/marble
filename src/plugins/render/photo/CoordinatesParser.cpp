@@ -96,8 +96,8 @@ void CoordinatesParser::readLocation() {
     Q_ASSERT( isStartElement()
               && name() == "location" );
  
-    m_coordinates->setLatitude( attributes().value( "latitude" ).string()->toDouble() * DEG2RAD );
-    m_coordinates->setLongitude( attributes().value( "longitude" ).string()->toDouble() * DEG2RAD );
+    m_coordinates->setLatitude( attributes().value( "latitude" ).toString().toDouble() * DEG2RAD );
+    m_coordinates->setLongitude( attributes().value( "longitude" ).toString().toDouble() * DEG2RAD );
     
     while( !atEnd() ) {
         readNext();
