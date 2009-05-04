@@ -43,6 +43,8 @@ GpsTracking::GpsTracking( GpxFile *currentGpx, TrackingMethod method,
     //for ip address evaluation
     connect( &host, SIGNAL( done(  bool ) ),
              this,  SLOT( getData( bool ) ) ) ;
+    connect( this, SIGNAL(gpsLocation(GeoDataCoordinates)),
+             this, SLOT(notifyPosition(GeoDataCoordinates)) );
     m_downloadFinished = false;
 
 #ifdef HAVE_LIBGPS
@@ -139,6 +141,11 @@ void GpsTracking::getData( bool error )
     }
 }
 
+void GpsTracking::notifyPosition( GeoDataCoordinates pos )
+{
+    qDebug() << "Position from gpsd: " << pos.toString();
+}
+
 void GpsTracking::updateIp( )
 {
 //         QTextStream out(&gmlFile);
@@ -202,9 +209,6 @@ bool GpsTracking::update(const QSize &canvasSize, ViewParams *viewParams,
             m_gpsTracking->setPosition( m_gpsdData->fix.latitude,
                                         m_gpsdData->fix.longitude );
 
-            qDebug() << "Position from gpsd: " << m_gpsdData->fix.latitude
-                << m_gpsdData->fix.longitude;
-
             if (m_gpsTrackSeg == 0 ){
                 m_gpsTrackSeg = new TrackSegment();
                 m_gpsTrack->append( m_gpsTrackSeg );
@@ -216,6 +220,7 @@ bool GpsTracking::update(const QSize &canvasSize, ViewParams *viewParams,
                 m_gpsPreviousPosition = m_gpsCurrentPosition;
                 m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking);
                 reg = genRegion( canvasSize, viewParams );
+                emit gpsLocation( m_gpsTracking->position() );
                 return true;
             } else {
                 return false;

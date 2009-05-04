@@ -17,6 +17,7 @@
 #include <QtCore/QTemporaryFile>
 #include <QtNetwork/QHttp>
 
+
 #include "config-libgps.h" // krazy:exclude=includes
 
 
@@ -34,6 +35,7 @@ class TrackPoint;
 class TrackSegment;
 class ViewParams;
 class Waypoint;
+class GeoDataCoordinates;
 
 /**
 	@author Andrew Manson <g.real.ate@gmail.com>
@@ -94,6 +96,10 @@ public:
  public slots:
     void  updateIp( );
     void  getData( bool error );
+    void  notifyPosition( GeoDataCoordinates );
+
+Q_SIGNALS:
+    void  gpsLocation( GeoDataCoordinates );
 
  private:
     //used to draw the arrow in gps tracking
