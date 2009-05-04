@@ -203,10 +203,10 @@ p, li { white-space: pre-wrap; }
         <item>
          <widget class="QSpinBox" name="kcfg_proxyPort">
           <property name="maximum">
-           <number>9999</number>
+           <number>65535</number>
           </property>
           <property name="value">
-           <number>8080</number>
+           <number>8081</number>
           </property>
          </widget>
         </item>

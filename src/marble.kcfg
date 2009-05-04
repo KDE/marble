@@ -158,7 +158,7 @@
    <label>Port for the proxy server.</label>
    <default>8080</default>
    <min>0</min>
-   <max>9999</max>
+   <max>65535</max>
   </entry>
   <entry name="proxyUser" type="String">
    <label>Username for authorization.</label>
