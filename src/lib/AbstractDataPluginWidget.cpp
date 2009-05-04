@@ -14,6 +14,9 @@
 // Marble
 #include "GeoDataCoordinates.h"
 
+// Qt
+#include <QtCore/QDebug>
+
 namespace Marble {
 
 class AbstractDataPluginWidgetPrivate {

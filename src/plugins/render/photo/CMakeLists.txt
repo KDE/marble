@@ -14,4 +14,4 @@ set( photo_SRCS PhotoPlugin.cpp
                 CoordinatesParser.cpp )
 
 marble_add_plugin( Photo ${photo_SRCS} )
-target_link_libraries( Photo ${QT_QTSCRIPT_LIBRARY} )
+target_link_libraries( Photo ${QT_QTGUI_LIBRARY} ${QT_QTWEBKIT_LIBRARY} )

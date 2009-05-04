@@ -166,6 +166,10 @@ QList<AbstractDataPluginWidget*> AbstractDataPluginModel::widgets( ViewportParam
     return list;
 }
 
+QList<AbstractDataPluginWidget*> AbstractDataPluginModel::displayedWidgets() {
+    return d->m_displayedWidgets;
+}
+
 void AbstractDataPluginModel::downloadWidgetData( QUrl url,
                                                   QString type,
                                                   AbstractDataPluginWidget *widget )

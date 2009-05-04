@@ -62,6 +62,9 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 
  Q_SIGNALS:
     void    valueChanged( QString nameId, bool visible );
+    
+ protected:
+    bool eventFilter( QObject *, QEvent * );
 
  private:
     Q_DISABLE_COPY( RenderPlugin )

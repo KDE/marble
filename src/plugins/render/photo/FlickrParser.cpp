@@ -110,6 +110,7 @@ void FlickrParser::readPhoto() {
         widget->setServer( attributes().value( "server" ).toString() );
         widget->setFarm( attributes().value( "farm" ).toString() );
         widget->setSecret( attributes().value( "secret" ).toString() );
+        widget->setOwner( attributes().value( "owner" ).toString() );
         m_list->append( widget );
     }
     

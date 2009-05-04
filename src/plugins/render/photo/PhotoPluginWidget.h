@@ -16,6 +16,7 @@
 #include <QtGui/QImage>
 
 class QUrl;
+class QWebView;
 
 namespace Marble {
  
@@ -23,6 +24,7 @@ class PhotoPluginWidget : public AbstractDataPluginWidget {
     Q_OBJECT
  public:
     explicit PhotoPluginWidget( QObject *parent );
+    ~PhotoPluginWidget();
     
     QString widgetType() const;
     
@@ -50,13 +52,22 @@ class PhotoPluginWidget : public AbstractDataPluginWidget {
     QString secret() const;
     
     void setSecret( QString secret );
+    
+    QString owner() const;
+    
+    void setOwner( QString owner );
+    
+    bool eventFilter( QObject *, QMouseEvent * );
  private:
     bool m_hasCoordinates;
     QImage m_smallImage;
+    QRect m_paintPosition;
+    QWebView *m_browser;
     
     QString m_server;
     QString m_farm;
     QString m_secret;
+    QString m_owner;
 };
     
 }

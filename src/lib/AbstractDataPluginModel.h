@@ -42,8 +42,14 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * Returns the currently downloaded images in the @p viewport.
      * The maximum number of images can be specified with @p number,
      * 0 means no limit.
+     * @return The list of widgets with most important widget first.
      */
     QList<AbstractDataPluginWidget*> widgets( ViewportParams *viewport, qint32 number = 10 );
+    
+    /**
+     * Returns all widgets which were returned by widgets() again.
+     */
+    QList<AbstractDataPluginWidget*> displayedWidgets();
        
  protected:
     /**

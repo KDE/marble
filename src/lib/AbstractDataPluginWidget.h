@@ -16,6 +16,8 @@
 
 #include "marble_export.h"
 
+class QMouseEvent;
+
 namespace Marble {
     
 class AbstractDataPluginWidgetPrivate;
@@ -44,6 +46,8 @@ class MARBLE_EXPORT AbstractDataPluginWidget : public QObject {
       */
     qreal addedAngularResolution() const;
     void setAddedAngularResolution( qreal resolution );
+    
+    virtual bool eventFilter( QObject *, QMouseEvent * ) = 0;
     
     virtual QString widgetType() const = 0;
      

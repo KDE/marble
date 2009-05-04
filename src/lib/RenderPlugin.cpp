@@ -140,6 +140,10 @@ bool RenderPlugin::visible() const
     return d->m_visible;
 }
 
+bool RenderPlugin::eventFilter( QObject *, QEvent * ) {
+    return false;
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
 }
 
 #include "RenderPlugin.moc"

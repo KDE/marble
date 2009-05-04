@@ -18,6 +18,11 @@
 #include "GeoSceneLayer.h"
 #include "ViewportParams.h"
 
+// Qt
+#include <QtCore/QDebug>
+#include <QtCore/QEvent>
+#include <QtGui/QMouseEvent>
+
 namespace Marble {
 
 class AbstractDataPluginPrivate
@@ -99,6 +104,29 @@ quint32 AbstractDataPlugin::numberOfWidgets() const {
     
 void AbstractDataPlugin::setNumberOfWidgets( quint32 number ) {
     d->m_numberOfWidgets = number;
+}
+
+bool AbstractDataPlugin::eventFilter( QObject *object, QEvent *event ) {
+    if( event->type() != QEvent::MouseButtonRelease ) {
+        return false;
+    }
+    
+    QMouseEvent *mouseEvent = static_cast<QMouseEvent*>( event );
+        
+    if( !mouseEvent )
+        return false;
+    
+    if( mouseEvent->button() != Qt::LeftButton )
+        return false;
+        
+    QList<AbstractDataPluginWidget *> displayedWidgets = d->m_model->displayedWidgets();
+    
+    foreach( AbstractDataPluginWidget* widget, displayedWidgets ) {
+        if( widget->eventFilter( object, mouseEvent ) )
+            return true;
+    }
+    
+    return false;
 }
 
 } // namespace Marble

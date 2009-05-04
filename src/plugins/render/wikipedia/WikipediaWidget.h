@@ -47,6 +47,8 @@ class WikipediaWidget : public AbstractDataPluginWidget {
     QUrl thumbnailImageUrl();
     
     void setThumbnailImageUrl( QUrl thumbnailImageUrl );
+    
+    bool eventFilter( QObject *, QMouseEvent * );
  private:
     qreal m_longitude;
     qreal m_latitude;

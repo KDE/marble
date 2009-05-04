@@ -80,3 +80,7 @@ QUrl WikipediaWidget::thumbnailImageUrl() {
 void WikipediaWidget::setThumbnailImageUrl( QUrl thumbnailImageUrl ) {
     m_thumbnailImageUrl = thumbnailImageUrl;
 }
+
+bool WikipediaWidget::eventFilter( QObject *, QMouseEvent * ) {
+    return false;
+}

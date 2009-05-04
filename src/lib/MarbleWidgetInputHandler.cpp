@@ -51,9 +51,9 @@ void MarbleWidgetInputHandler::init(MarbleWidget *w)
     m_widget = w;
     m_model = w->model();
 
-    foreach(AbstractFloatItem *floatItem, m_widget->floatItems())
+    foreach(RenderPlugin *renderPlugin, m_widget->renderPlugins())
     {
-        m_widget->installEventFilter(floatItem);
+        m_widget->installEventFilter(renderPlugin);
     }
 }
 

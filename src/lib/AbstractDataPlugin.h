@@ -15,6 +15,8 @@
 #include "marble_export.h"
 #include "RenderPlugin.h"
 
+class QEvent;
+
 namespace Marble {
     
 class Geopainter;
@@ -67,6 +69,9 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin {
     quint32 numberOfWidgets() const;
     
     void setNumberOfWidgets( quint32 number );
+    
+ protected:
+    bool eventFilter( QObject *, QEvent * );
     
  private:
     AbstractDataPluginPrivate * const d;
