@@ -65,7 +65,7 @@ class MARBLE_EXPORT ClipPainter : public QPainter
 
     void drawPolyline( const QPolygonF & );
     void drawPolyline( const QPolygonF &, QVector<QPointF>& labelNodes, 
-                       LabelPositionPolicy labelPositionPolicy = LineCenter );
+                       LabelPositionFlags labelPositionFlag = LineCenter );
 
     //	void clearNodeCount(){ m_debugNodeCount = 0; }
     //	int nodeCount(){ return m_debugNodeCount; }

@@ -91,6 +91,8 @@ public:
 
     Planet& operator=( const Planet& rhs );
 
+    static QString name( const QString& id );
+
 private:
     PlanetPrivate * const d;
 };

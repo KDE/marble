@@ -258,7 +258,6 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal wid
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( !isGeoProjected ) {
-        // FIXME: Better visibility detection that takes the ellipse geometry into account
         bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         if ( visible ) {
@@ -371,7 +370,7 @@ void GeoPainter::drawLine (  const GeoDataCoordinates & p1,  const GeoDataCoordi
 }
 
 void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QString& labelText,
-                                LabelPositionPolicy labelPositionPolicy )
+                                LabelPositionFlags labelPositionFlags )
 {
     // If the object is not visible in the viewport return 
     if ( ! d->m_viewport->viewLatLonAltBox().intersects( lineString.latLonAltBox() ) )
@@ -397,7 +396,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QStr
         QVector<QPointF> labelNodes;
         foreach( QPolygonF* itPolygon, polygons ) {
             labelNodes.clear();
-            ClipPainter::drawPolyline( *itPolygon, labelNodes, labelPositionPolicy );
+            ClipPainter::drawPolyline( *itPolygon, labelNodes, labelPositionFlags );
             if ( !labelNodes.isEmpty() ) {
                 foreach ( const QPointF& labelNode, labelNodes ) {
                     QPointF labelPosition = labelNode + QPointF( 3.0, -2.0 );

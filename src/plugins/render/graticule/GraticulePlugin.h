@@ -77,7 +77,7 @@ class GraticulePlugin : public RenderPlugin
     void renderLatitudeLine(  GeoPainter *painter, qreal latitude,
                               const GeoDataLatLonAltBox& viewLatLonAltBox = GeoDataLatLonAltBox(),
                               const QString& lineLabel = QString(), 
-                              LabelPositionPolicy labelPositionPolicy = LineCenter );
+                              LabelPositionFlags labelPositionFlags = LineCenter );
 
     /**
      * @brief Renders a longitude line within the defined view bounding box.
@@ -94,7 +94,7 @@ class GraticulePlugin : public RenderPlugin
                               const GeoDataLatLonAltBox& viewLatLonAltBox = GeoDataLatLonAltBox(),
                               qreal polarGap = 0.0,
                               const QString& lineLabel = QString(),
-                              LabelPositionPolicy labelPositionPolicy = LineCenter );
+                              LabelPositionFlags labelPositionFlags = LineCenter );
 
     /**
      * @brief Renders the latitude lines that are visible within the defined view bounding box.
@@ -105,7 +105,7 @@ class GraticulePlugin : public RenderPlugin
     void renderLatitudeLines( GeoPainter *painter, 
                               const GeoDataLatLonAltBox& viewLatLonAltBox,
                               qreal step,
-                              LabelPositionPolicy labelPositionPolicy = LineCenter
+                              LabelPositionFlags labelPositionFlags = LineCenter
                             );
 
     /**
@@ -122,7 +122,7 @@ class GraticulePlugin : public RenderPlugin
                               const GeoDataLatLonAltBox& viewLatLonAltBox, 
                               qreal step, 
                               qreal polarGap = 0.0,
-                              LabelPositionPolicy labelPositionPolicy = LineCenter
+                              LabelPositionFlags labelPositionFlags = LineCenter
                              );
 
     /**

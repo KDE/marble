@@ -128,9 +128,9 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     renderLongitudeLines( painter, viewLatLonAltBox, 
                           normalDegreeStep, normalDegreeStep, 
-                          Marble::LineStart );  
+                          Marble::LineStart | Marble::IgnoreXMargin );  
     renderLatitudeLines(  painter, viewLatLonAltBox, normalDegreeStep,
-                          Marble::LineStart );  
+                          Marble::LineStart | Marble::IgnoreYMargin );  
 
     // Render some non-cut off longitude lines ..
     renderLongitudeLine( painter, 90.0, viewLatLonAltBox );
@@ -183,7 +183,7 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude,
                                           const GeoDataLatLonAltBox& viewLatLonAltBox,
                                           const QString& lineLabel,
-                                          LabelPositionPolicy labelPositionPolicy )
+                                          LabelPositionFlags labelPositionFlags )
 {
     qreal fromSouthLat = viewLatLonAltBox.south( GeoDataCoordinates::Degree );
     qreal toNorthLat   = viewLatLonAltBox.north( GeoDataCoordinates::Degree );
@@ -220,14 +220,14 @@ void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude,
         }
     }
 
-    painter->drawPolyline( line, lineLabel, labelPositionPolicy );     
+    painter->drawPolyline( line, lineLabel, labelPositionFlags );     
 }
 
 void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
                                            const GeoDataLatLonAltBox& viewLatLonAltBox, 
                                            qreal polarGap,
                                            const QString& lineLabel,
-                                           LabelPositionPolicy labelPositionPolicy )
+                                           LabelPositionFlags labelPositionFlags )
 {
     qreal fromWestLon = viewLatLonAltBox.west( GeoDataCoordinates::Degree );
     qreal toEastLon   = viewLatLonAltBox.east( GeoDataCoordinates::Degree );
@@ -263,13 +263,13 @@ void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
         line << n1 << n3;
     }
 
-    painter->drawPolyline( line, lineLabel, labelPositionPolicy );     
+    painter->drawPolyline( line, lineLabel, labelPositionFlags );     
 }
 
 void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
                                            const GeoDataLatLonAltBox& viewLatLonAltBox,
                                            qreal step,
-                                           LabelPositionPolicy labelPositionPolicy
+                                           LabelPositionFlags labelPositionFlags
                                          )
 {
     if ( step <= 0 ) {
@@ -294,13 +294,13 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
                             -1, 'g' );
 
         // No additional labels for the equator
-        if ( labelPositionPolicy == Marble::LineCenter && itStep == 0.0 ) {
+        if ( labelPositionFlags.testFlag( Marble::LineCenter ) && itStep == 0.0 ) {
             label.clear();
         }
 
         // Paint all latitude coordinate lines except for the equator
         if ( itStep != 0.0 ) {
-            renderLatitudeLine( painter, itStep, viewLatLonAltBox, label, labelPositionPolicy );
+            renderLatitudeLine( painter, itStep, viewLatLonAltBox, label, labelPositionFlags );
         }
 
         itStep += step;
@@ -310,7 +310,7 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
 void GraticulePlugin::renderLongitudeLines( GeoPainter *painter, 
                                             const GeoDataLatLonAltBox& viewLatLonAltBox, 
                                             qreal step, qreal polarGap,
-                                            LabelPositionPolicy labelPositionPolicy
+                                            LabelPositionFlags labelPositionFlags
                                            )
 {
     if ( step <= 0 ) {
@@ -337,7 +337,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
             // No additional labels for the prime meridian and the antimeridian
 
-            if ( labelPositionPolicy == Marble::LineCenter && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
+            if ( labelPositionFlags.testFlag( Marble::LineCenter ) && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
             {
                 label.clear();
             }
@@ -345,7 +345,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             // Paint all longitude coordinate lines except for the meridians
             if ( itStep != 0.0 || itStep != 180.0 || itStep != -180.0 ) {
                 renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap, 
-                                    label, labelPositionPolicy );           
+                                    label, labelPositionFlags );           
             }
 
             itStep += step;
@@ -362,7 +362,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
             // No additional labels for the prime meridian and the antimeridian
 
-            if ( labelPositionPolicy == Marble::LineCenter && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
+            if ( labelPositionFlags.testFlag( Marble::LineCenter ) && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
             {
                 label.clear();
             }
@@ -370,7 +370,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             // Paint all longitude coordinate lines except for the meridians
             if ( itStep != 0.0 || itStep != 180.0 || itStep != -180.0 ) {
                 renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap, 
-                                    label, labelPositionPolicy );           
+                                    label, labelPositionFlags );           
             }
             itStep += step;
         }
@@ -384,7 +384,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
             // No additional labels for the prime meridian and the antimeridian
 
-            if ( labelPositionPolicy == Marble::LineCenter && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
+            if ( labelPositionFlags.testFlag( Marble::LineCenter ) && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
             {
                 label.clear();
             }
@@ -392,7 +392,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
             // Paint all longitude coordinate lines except for the meridians
             if ( itStep != 0.0 || itStep != 180.0 || itStep != -180.0 ) {
                 renderLongitudeLine( painter, itStep, viewLatLonAltBox, polarGap, 
-                                    label, labelPositionPolicy );           
+                                    label, labelPositionFlags );           
             }
             itStep += step;
         }

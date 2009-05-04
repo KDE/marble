@@ -75,11 +75,12 @@ class ClipPainterPrivate
 
 
     void labelPosition( const QPolygonF & polygon, QVector<QPointF>& labelNodes, 
-                                LabelPositionPolicy labelPositionPolicy);
+                                LabelPositionFlags labelPositionFlags);
 
     bool pointAllowsLabel( const QPointF& point );
     QPointF interpolateLabelPoint( const QPointF& previousPoint, 
-                                   const QPointF& currentPoint );
+                                   const QPointF& currentPoint,
+                                   LabelPositionFlags labelPositionFlags );
 
     inline qreal _m( const QPointF & start, const QPointF & end ) const;
 
@@ -184,7 +185,7 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
 }
 
 void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& labelNodes,
-                                LabelPositionPolicy positionPolicy)
+                                LabelPositionFlags positionFlags)
 {
     d->initClipRect();
 
@@ -204,7 +205,7 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& lab
                     d->debugDrawNodes( clippedPolyObject );
                 #endif
 
-                d->labelPosition( clippedPolyObject, labelNodes, positionPolicy );
+                d->labelPosition( clippedPolyObject, labelNodes, positionFlags );
             }
         }
     }
@@ -215,23 +216,19 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& lab
             d->debugDrawNodes( polygon );
         #endif
 
-        d->labelPosition( polygon, labelNodes, positionPolicy );
+        d->labelPosition( polygon, labelNodes, positionFlags );
     }
 }
 
 void ClipPainterPrivate::labelPosition( const QPolygonF & polygon, QVector<QPointF>& labelNodes, 
-                                        LabelPositionPolicy labelPositionPolicy)
+                                        LabelPositionFlags labelPositionFlags)
 {
     int labelPosition = 0;
 
     bool currentAllowsLabel = false;
     bool previousAllowsLabel = false;
 
-    switch ( labelPositionPolicy ) {
-
-    default:
-    case LineCenter:
-
+    if ( labelPositionFlags.testFlag( LineCenter ) ) {
         // The Label at the center of the polyline:
         labelPosition = static_cast<int>( polygon.size() / 2.0 );
         if ( polygon.size() > 0 ) {
@@ -240,18 +237,12 @@ void ClipPainterPrivate::labelPosition( const QPolygonF & polygon, QVector<QPoin
             }
             labelNodes << polygon.at( labelPosition );
         }
-        break;
+    }
 
-    case NoLabel:
-            // Do nothing;
-        break;
-
-    case LineStart:
-
+    if ( labelPositionFlags.testFlag( LineStart ) ) {
         if ( polygon.size() > 0 ) {
             if ( pointAllowsLabel( polygon.at(0) ) ) {
                 labelNodes << polygon.at( 0 );
-                break;
             }
         }
 
@@ -260,19 +251,21 @@ void ClipPainterPrivate::labelPosition( const QPolygonF & polygon, QVector<QPoin
             currentAllowsLabel = pointAllowsLabel( polygon.at( it ) );
 
             if ( currentAllowsLabel ) {
-                labelNodes << interpolateLabelPoint( polygon.at( it -1 ), polygon.at( it ) );
+                QPointF node = interpolateLabelPoint( polygon.at( it -1 ), polygon.at( it ),
+                                                    labelPositionFlags );
+                if ( node != QPointF( -1.0, -1.0 ) ) {
+                    labelNodes << node;
+                }
                 break;
             }
             previousAllowsLabel = currentAllowsLabel;
         }
-        break;
+    }
 
-    case LineEnd:
-
+    if ( labelPositionFlags.testFlag( LineEnd ) ) {
         if ( polygon.size() > 0 ) {
             if ( pointAllowsLabel( polygon.at( polygon.size() - 1 ) ) ) {
                 labelNodes << polygon.at( polygon.size() - 1 );
-                break;
             }
         }
 
@@ -281,12 +274,15 @@ void ClipPainterPrivate::labelPosition( const QPolygonF & polygon, QVector<QPoin
             currentAllowsLabel = pointAllowsLabel( polygon.at( it ) );
 
             if ( currentAllowsLabel ) {
-                labelNodes << interpolateLabelPoint( polygon.at( it + 1 ), polygon.at( it ) );
+                QPointF node = interpolateLabelPoint( polygon.at( it + 1 ), polygon.at( it ),
+                                                    labelPositionFlags );
+                if ( node != QPointF( -1.0, -1.0 ) ) {
+                    labelNodes << node;
+                }
                 break;
             }
             previousAllowsLabel = currentAllowsLabel;
         }
-        break;
     }
 }
 
@@ -300,25 +296,36 @@ bool ClipPainterPrivate::pointAllowsLabel( const QPointF& point ){
 }
 
 QPointF ClipPainterPrivate::interpolateLabelPoint( const QPointF& previousPoint, 
-                                                   const QPointF& currentPoint ) {
+                                                   const QPointF& currentPoint,
+                                                   LabelPositionFlags labelPositionFlags ) {
     qreal m = _m( previousPoint, currentPoint );
-
     if ( previousPoint.x() <= m_labelAreaMargin ) {
+        if ( labelPositionFlags.testFlag( IgnoreXMargin ) ) {
+            return QPointF( -1.0, -1.0 );
+        }
         return QPointF( m_labelAreaMargin, 
                         previousPoint.y() + ( m_labelAreaMargin - previousPoint.x() ) * m );
     }
     else if ( previousPoint.x() >= q->viewport().width() - m_labelAreaMargin  ) {
+        if ( labelPositionFlags.testFlag( IgnoreXMargin ) ) {
+            return QPointF( -1.0, -1.0 );
+        }
         return QPointF( q->viewport().width() - m_labelAreaMargin,
                         previousPoint.y() - 
                         ( previousPoint.x() - q->viewport().width() + m_labelAreaMargin ) * m );        
-
     }
 
     if ( previousPoint.y() <= m_labelAreaMargin ) {
+        if ( labelPositionFlags.testFlag( IgnoreYMargin ) ) {
+            return QPointF( -1.0, -1.0 );
+        }
         return QPointF( previousPoint.x() + ( m_labelAreaMargin - previousPoint.y() ) / m, 
                         m_labelAreaMargin );
     } 
     else if ( previousPoint.y() >= q->viewport().height() - m_labelAreaMargin  ) {
+        if ( labelPositionFlags.testFlag( IgnoreYMargin ) ) {
+            return QPointF( -1.0, -1.0 );
+        }
         return QPointF(   previousPoint.x() - 
                         ( previousPoint.y() - q->viewport().height() + m_labelAreaMargin ) / m,
                           q->viewport().height() - m_labelAreaMargin );        
@@ -457,17 +464,7 @@ void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon,
                 // sector that is located offscreen to another one that
                 // is located offscreen. In this situation the line 
                 // can get clipped once, twice, or not at all.
-/*
-                if ( !isClosed ) {
-                    clippedPolyObject = QPolygonF(); 
-                }
-*/
                 clipMultiple( clippedPolyObject, clippedPolyObjects, isClosed );
-/*
-                if ( !isClosed && !clippedPolyObject.isEmpty() ) {
-                    clippedPolyObjects << clippedPolyObject;
-                }
-*/
             }
 
             m_previousSector = m_currentSector;
@@ -979,22 +976,12 @@ void ClipPainterPrivate::clipOnceCorner( QPolygonF & clippedPolyObject,
 {
     if ( m_currentSector == 4) {
         // Appearing
-        if ( isClosed ) {
-            clippedPolyObject << corner;
-        }
-        else {
-            clippedPolyObject = QPolygonF(); 
-        }
+        clippedPolyObject << corner;
         clippedPolyObject << point;
     } else {
         // Disappearing
         clippedPolyObject << point;
-        if ( isClosed ) {
-            clippedPolyObject << corner;
-        }
-        else {
-            clippedPolyObjects << clippedPolyObject;
-        }
+        clippedPolyObject << corner;
     }
 }
 

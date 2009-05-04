@@ -93,12 +93,16 @@ enum MapQuality {
 /**
  * @brief This enum is used to choose the localization of the labels.
  */
-enum LabelPositionPolicy {
-    NoLabel,
-    LineStart,
-    LineCenter,
-    LineEnd        
+enum LabelPositionFlag {
+    NoLabel = 0x0,
+    LineStart = 0x1,
+    LineCenter = 0x2,
+    LineEnd = 0x4,
+    IgnoreXMargin = 0x8,
+    IgnoreYMargin = 0x10
 };
+
+Q_DECLARE_FLAGS(LabelPositionFlags, LabelPositionFlag)
 
 /**
  * @brief This enum is used to choose the localization of the labels.
@@ -196,5 +200,6 @@ class  MARBLE_EXPORT MarbleGlobal {
 }
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::TessellationFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::LabelPositionFlags)
 
 #endif

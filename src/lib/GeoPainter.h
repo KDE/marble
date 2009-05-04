@@ -116,7 +116,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     // For these classes use setTesselate( true ) or the TesselationOptions on the line string / linear ring
     // to project the line segments onto the geographical coordinate system ("isGeoProjected").
     void drawPolyline ( const GeoDataLineString & lineString, const QString& labelText = QString(),
-                        LabelPositionPolicy labelPositionPolicy = LineCenter );
+                        LabelPositionFlags labelPositionFlags = LineCenter );
 
     void drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRule fillRule = Qt::OddEvenFill );
     void drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fillRule = Qt::OddEvenFill );
