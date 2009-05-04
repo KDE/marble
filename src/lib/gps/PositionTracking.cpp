@@ -52,6 +52,9 @@ PositionTracking::PositionTracking( GpxFile *currentGpx,
         qDeleteAll( plugins );
         m_positionProvider->setParent( this );
         m_positionProvider->initialize();
+    } else {
+        // usefull under Windows, where there is no plugin available yet.
+        m_positionProvider = 0;
     }
 }
 
