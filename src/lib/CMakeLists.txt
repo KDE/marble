@@ -131,7 +131,7 @@ set(marblewidget_SRCS
     FileViewModel.cpp
     GpxFileViewItem.cpp
     KmlFileViewItem.cpp
-    gps/GpsTracking.cpp
+    gps/PositionTracking.cpp
     gps/GpsElement.cpp
     gps/Waypoint.cpp
     gps/TrackPoint.cpp
@@ -159,6 +159,8 @@ set(marblewidget_SRCS
     NetworkPluginInterface.cpp
     RenderPlugin.cpp
     RenderPluginInterface.cpp
+    PositionProviderPlugin.cpp
+    PositionProviderPluginInterface.cpp
     MarblePluginSettingsWidget.cpp
 
     SunLocator.cpp

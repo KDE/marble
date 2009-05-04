@@ -12,7 +12,7 @@
 #include "ClipPainter.h"
 #include "Waypoint.h"
 #include "GpxFile.h"
-#include "GpsTracking.h"
+#include "PositionTracking.h"
 #include "GpxFileModel.h"
 
 #include <QtCore/QString>
@@ -37,7 +37,7 @@ GpsLayer::GpsLayer( GpxFileModel *fileModel, QObject *parent )
 //     m_gpsTrack = new Track();
     m_currentGpx = new GpxFile();
     m_fileModel->addFile( m_currentGpx );
-    m_tracking = new GpsTracking( m_currentGpx ); 
+    m_tracking = new PositionTracking( m_currentGpx ); 
 
 }
 

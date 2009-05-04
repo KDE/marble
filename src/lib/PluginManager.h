@@ -23,6 +23,7 @@ namespace Marble
 
 class RenderPlugin;
 class NetworkPlugin;
+class PositionProviderPlugin;
 class AbstractFloatItem;
 class PluginManagerPrivate;
 
@@ -64,6 +65,12 @@ class MARBLE_EXPORT PluginManager : public QObject
      * of them to the client.
      */
     QList<NetworkPlugin *> createNetworkPlugins() const;
+
+    /**
+     * This methods creates a new set of plugins and transfers ownership
+     * of them to the client.
+     */
+    QList<PositionProviderPlugin *> createPositionProviderPlugins() const;
 
  public Q_SLOTS:
     /**

@@ -25,7 +25,7 @@ class QRegion;
 namespace Marble
 {
 
-class GpsTracking;
+class PositionTracking;
 class GpxFile;
 class GpxFileModel;
 class Track;
@@ -57,7 +57,7 @@ class GpsLayer : public AbstractLayer
 //     QVector<GpxFile*>   *m_files;
 
     GpxFile             *m_currentGpx;
-    GpsTracking         *m_tracking;
+    PositionTracking         *m_tracking;
 };
 
 }
