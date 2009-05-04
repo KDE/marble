@@ -260,8 +260,16 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     quint64 volatileTileCacheLimit() const;
 
+    /**
+     * @brief Returns a list of all RenderPlugins in the model, this includes float items
+     * @return the list of RenderPlugins
+     */
     QList<RenderPlugin *>      renderPlugins() const;
-    QList<AbstractFloatItem *> floatItems() const;
+    /**
+     * @brief Returns a list of all FloatItems in the model
+     * @return the list of the floatItems
+     */
+    QList<AbstractFloatItem *> floatItems()    const;
 
     /**
      * @brief Returns the planet object for the current map.

@@ -46,7 +46,15 @@ class MARBLE_EXPORT LayerManager : public QObject
 
     void renderLayers( GeoPainter *painter, ViewParams *viewParams );
 
+    /**
+     * @brief Returns a list of all RenderPlugins on the layer, this includes float items
+     * @return the list of RenderPlugins
+     */
     QList<RenderPlugin *>      renderPlugins() const;
+    /**
+     * @brief Returns a list of all FloatItems on the layer
+     * @return the list of the floatItems
+     */
     QList<AbstractFloatItem *> floatItems()    const;
 
  Q_SIGNALS:

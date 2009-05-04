@@ -471,7 +471,15 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     QString user() const;
     QString password() const;
 
+    /**
+     * @brief Returns a list of all RenderPlugins on the widget, this includes float items
+     * @return the list of RenderPlugins
+     */
     QList<RenderPlugin *>      renderPlugins() const;
+    /**
+     * @brief Returns a list of all FloatItems on the widget
+     * @return the list of the floatItems
+     */
     QList<AbstractFloatItem *> floatItems()    const;
 
 
