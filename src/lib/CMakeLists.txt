@@ -232,7 +232,7 @@ else(WIN32)
      set(HAVE_LIBGPS 1)
      message( STATUS "building with gpsd support")
 
-     INCLUDE_DIRECTORIES(${libgps_INCLUDES})
+     INCLUDE_DIRECTORIES(${libgps_INCLUDE_DIRS})
      TARGET_LINK_LIBRARIES(marblewidget ${libgps_LIBRARIES})
   else(libgps_FOUND)
      message( STATUS "not building with gpsd support")
