@@ -85,12 +85,11 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     int yCenterOffset = (int)( asinh( tan( centerLat ) ) * rad2Pixel  );
 
     int yTop;
-    int yBottom;
     int yPaintedTop;
     int yPaintedBottom;
 
     // Calculate y-range the represented by the center point, yTop and
-    // yBottom and what actually can be painted
+    // what actually can be painted
     yPaintedTop    = yTop = m_imageHeight / 2 - 2 * radius + yCenterOffset;
     yPaintedBottom        = m_imageHeight / 2 + 2 * radius + yCenterOffset;
  
