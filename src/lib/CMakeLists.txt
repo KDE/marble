@@ -223,27 +223,10 @@ if (CMAKE_SYSTEM_NAME MATCHES "SunOS")
   TARGET_LINK_LIBRARIES(marblewidget m)
 endif (CMAKE_SYSTEM_NAME MATCHES "SunOS")
 
-set(HAVE_LIBGPS 0)
-
 if(WIN32)
   TARGET_LINK_LIBRARIES(marblewidget ws2_32 imm32 winmm)
-else(WIN32)
-  FIND_PACKAGE(libgps)
-
-  if(libgps_FOUND)
-     set(HAVE_LIBGPS 1)
-     message( STATUS "building with gpsd support")
-
-     INCLUDE_DIRECTORIES(${libgps_INCLUDE_DIRS})
-     TARGET_LINK_LIBRARIES(marblewidget ${libgps_LIBRARIES})
-  else(libgps_FOUND)
-     message( STATUS "not building with gpsd support")
-  endif(libgps_FOUND)
 endif(WIN32)
 
-
-configure_file(config-libgps.h.cmake
-${CMAKE_CURRENT_BINARY_DIR}/config-libgps.h)
 
 set_target_properties(marblewidget  PROPERTIES
                                     VERSION ${GENERIC_LIB_VERSION}
