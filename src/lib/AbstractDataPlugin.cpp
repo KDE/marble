@@ -107,6 +107,9 @@ void AbstractDataPlugin::setNumberOfWidgets( quint32 number ) {
 }
 
 bool AbstractDataPlugin::eventFilter( QObject *object, QEvent *event ) {
+    if( !( enabled() && visible() ) )
+        return false;
+    
     if( event->type() != QEvent::MouseButtonRelease ) {
         return false;
     }
