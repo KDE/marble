@@ -52,25 +52,28 @@ void GpsdPositionProviderPlugin::initialize()
 }
 
 void GpsdPositionProviderPlugin::update() {
-    m_gpsdData = m_gpsd->query( "o" );
-    PositionProviderStatus oldStatus = m_status;
-    GeoDataCoordinates oldPosition = m_position;
-    if (m_gpsdData->status == STATUS_NO_FIX)
-        m_status = PositionProviderStatusUnavailable;
-    else {
-        m_status = PositionProviderStatusAvailable;
-        m_position.set( m_gpsdData->fix.longitude, m_gpsdData->fix.latitude,
-        m_gpsdData->fix.altitude, GeoDataCoordinates::Degree );
-        m_accuracy.level = GeoDataAccuracy::Detailed;
-        // FIXME: Add real values here
-        m_accuracy.horizontal = 5;
-        m_accuracy.vertical = 5;
+    //Check that m_gpsd->open() has successfully completed
+    if ( m_gpsdData != 0 ) {
+        m_gpsdData = m_gpsd->query( "o" );
+        PositionProviderStatus oldStatus = m_status;
+        GeoDataCoordinates oldPosition = m_position;
+        if (m_gpsdData->status == STATUS_NO_FIX)
+            m_status = PositionProviderStatusUnavailable;
+        else {
+            m_status = PositionProviderStatusAvailable;
+            m_position.set( m_gpsdData->fix.longitude, m_gpsdData->fix.latitude,
+            m_gpsdData->fix.altitude, GeoDataCoordinates::Degree );
+            m_accuracy.level = GeoDataAccuracy::Detailed;
+            // FIXME: Add real values here
+            m_accuracy.horizontal = 5;
+            m_accuracy.vertical = 5;
+        }
+        if (m_status != oldStatus)
+            emit statusChanged( m_status );
+        // FIXME: Check whether position has changed first
+        if (m_status == PositionProviderStatusAvailable)
+            emit positionChanged( m_position, m_accuracy );
     }
-    if (m_status != oldStatus)
-        emit statusChanged( m_status );
-    // FIXME: Check whether position has changed first
-    if (m_status == PositionProviderStatusAvailable)
-        emit positionChanged( m_position, m_accuracy );
 }
 
 bool GpsdPositionProviderPlugin::isInitialized() const
