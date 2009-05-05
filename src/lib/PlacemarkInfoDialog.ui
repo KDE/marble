@@ -129,7 +129,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <widget class="QLabel" name="description_lbl">
          <property name="text">
-          <string>Short Description:</string>
+          <string>Short description:</string>
          </property>
          <property name="buddy">
           <cstring>description_val_browser</cstring>

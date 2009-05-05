@@ -276,17 +276,17 @@ p, li { white-space: pre-wrap; }
           </property>
           <item>
            <property name="text" >
-            <string>Custom and native language</string>
+            <string>Custom &amp; Native Language</string>
            </property>
           </item>
           <item>
            <property name="text" >
-            <string>Custom language</string>
+            <string>Custom Language</string>
            </property>
           </item>
           <item>
            <property name="text" >
-            <string>Native language</string>
+            <string>Native Language</string>
            </property>
           </item>
          </widget>
@@ -310,7 +310,7 @@ p, li { white-space: pre-wrap; }
            </size>
           </property>
           <property name="text" >
-           <string>Default Map &amp;Font:</string>
+           <string>Default map &amp;font:</string>
           </property>
           <property name="buddy" >
            <cstring>kcfg_mapFont</cstring>

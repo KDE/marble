@@ -59,7 +59,7 @@
           </sizepolicy>
          </property>
          <property name="text" >
-          <string>Projection</string>
+          <string>Projection:</string>
          </property>
         </widget>
        </item>
@@ -94,7 +94,7 @@
           </sizepolicy>
          </property>
          <property name="text" >
-          <string>Center map on longitude</string>
+          <string>Center map on longitude:</string>
          </property>
          <property name="checked" >
           <bool>true</bool>

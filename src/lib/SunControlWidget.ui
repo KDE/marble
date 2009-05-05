@@ -133,7 +133,7 @@ p, li { white-space: pre-wrap; }
         <item>
          <widget class="QLabel" name="label" >
           <property name="text" >
-           <string>Sun Sh&amp;ading:</string>
+           <string>Sun sh&amp;ading:</string>
           </property>
           <property name="buddy" >
            <cstring>sunShadingComboBox</cstring>
@@ -149,7 +149,7 @@ p, li { white-space: pre-wrap; }
           </item>
           <item>
            <property name="text" >
-            <string>Night map</string>
+            <string>Night Map</string>
            </property>
           </item>
          </widget>

@@ -233,7 +233,7 @@ p, li { white-space: pre-wrap; }
         <item>
          <widget class="QLabel" name="label_proxyType">
           <property name="text">
-           <string>Proxy Type:</string>
+           <string>Proxy type:</string>
           </property>
          </widget>
         </item>
@@ -316,7 +316,7 @@ p, li { white-space: pre-wrap; }
         <item row="0" column="1">
          <widget class="QLabel" name="label_username">
           <property name="text">
-           <string>U&amp;sername</string>
+           <string>U&amp;sername:</string>
           </property>
           <property name="buddy">
            <cstring>kcfg_proxyUser</cstring>
@@ -349,7 +349,7 @@ p, li { white-space: pre-wrap; }
         <item row="1" column="1">
          <widget class="QLabel" name="label_password">
           <property name="text">
-           <string>&amp;Password</string>
+           <string>&amp;Password:</string>
           </property>
           <property name="buddy">
            <cstring>kcfg_proxyPass</cstring>

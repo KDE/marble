@@ -51,12 +51,12 @@ p, li { white-space: pre-wrap; }
        </property>
        <item>
         <property name="text" >
-         <string>Keep planet axis vertically</string>
+         <string>Keep Planet Axis Vertically</string>
         </property>
        </item>
        <item>
         <property name="text" >
-         <string>Follow mouse pointer</string>
+         <string>Follow Mouse Pointer</string>
         </property>
        </item>
       </widget>
@@ -76,7 +76,7 @@ p, li { white-space: pre-wrap; }
         </size>
        </property>
        <property name="text" >
-        <string>&amp;On Startup:</string>
+        <string>&amp;On startup:</string>
        </property>
        <property name="buddy" >
         <cstring>kcfg_onStartup</cstring>
@@ -98,7 +98,7 @@ p, li { white-space: pre-wrap; }
        </item>
        <item>
         <property name="text" >
-         <string>Return to last location visited</string>
+         <string>Return to Last Location Visited</string>
         </property>
        </item>
       </widget>
