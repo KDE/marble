@@ -273,11 +273,21 @@ class GEODATA_EXPORT GeoDataCoordinates
                                            GeoDataCoordinates::Unit unit = Radian, 
                                            int precision = -1, 
                                            char format = 'f' );
+    /**
+     * @brief return a string representation of longitude of the coordinate
+     * convenience function that uses the default notation
+     */
+    QString lonToString() const;
 
     static QString latToString( qreal lat, GeoDataCoordinates::Notation notation,
                                            GeoDataCoordinates::Unit unit = Radian,
                                            int precision = -1,
                                            char format = 'f' );
+    /**
+     * @brief return a string representation of latitude of the coordinate
+     * convenience function that uses the default notation
+     */
+    QString latToString() const;
     
     bool operator==( const GeoDataCoordinates& ) const;
     GeoDataCoordinates& operator=( const GeoDataCoordinates &other );

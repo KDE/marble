@@ -619,6 +619,11 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
     return lonString + weString;
 }
 
+QString GeoDataCoordinates::lonToString() const
+{
+    return GeoDataCoordinates::lonToString( d->m_lon , s_notation );
+}
+
 QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation notation,
                                                     GeoDataCoordinates::Unit unit,
                                                     int precision,
@@ -686,6 +691,11 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
     }
 
     return latString + nsString;
+}
+
+QString GeoDataCoordinates::latToString() const
+{
+    return GeoDataCoordinates::latToString( d->m_lat, s_notation );
 }
 
 bool GeoDataCoordinates::operator==( const GeoDataCoordinates &rhs ) const

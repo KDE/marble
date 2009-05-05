@@ -47,7 +47,7 @@ void GpsdPositionProviderPlugin::initialize()
     m_gpsdData = m_gpsd->open();
     m_timer = new QTimer;
     connect( m_timer, SIGNAL( timeout() ), this, SLOT( update() ) );
-    m_timer->start( 5000 );
+    m_timer->start( 1000 );
     m_initialized = true;
 }
 
