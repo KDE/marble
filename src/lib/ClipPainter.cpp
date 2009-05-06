@@ -331,9 +331,9 @@ QPointF ClipPainterPrivate::interpolateLabelPoint( const QPointF& previousPoint,
                           q->viewport().height() - m_labelAreaMargin );        
     }
 
-    qDebug() << Q_FUNC_INFO << "Previous and current node position are allowed!";
+//    qDebug() << Q_FUNC_INFO << "Previous and current node position are allowed!";
 
-    return QPointF();
+    return QPointF( -1.0, -1.0 );
 }
 
 ClipPainterPrivate::ClipPainterPrivate( ClipPainter * parent )
