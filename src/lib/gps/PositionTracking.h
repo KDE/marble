@@ -18,8 +18,6 @@
 #include <QtCore/QTemporaryFile>
 #include <QtNetwork/QHttp>
 
-#include "config-libgps.h" // krazy:exclude=includes
-
 
 
 namespace Marble

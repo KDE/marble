@@ -14,12 +14,6 @@
 
 #include "AbstractLayer.h"
 
-#include "config-libgps.h" // krazy:exclude=includes
-
-#ifdef HAVE_LIBGPS
-#include <libgpsmm.h>
-#endif
-
 class QRegion;
 
 namespace Marble
