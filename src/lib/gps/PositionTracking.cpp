@@ -20,6 +20,7 @@
 #include "TrackSegment.h"
 #include "PluginManager.h"
 #include "PositionProviderPlugin.h"
+#include "MarbleMath.h"
 
 #include <QtXml/QXmlInputSource>
 #include <QtXml/QXmlSimpleReader>
@@ -139,6 +140,17 @@ void PositionTracking::notifyPosition( GeoDataCoordinates pos )
     qDebug() << "Position from gpsd: " << pos.toString();
 }
 
+void PositionTracking::updateSpeed( TrackPoint* previous, TrackPoint* next )
+{
+    //This function makes the asumption that the update stage happens once
+    //every second.
+    qreal distance = distanceSphere( previous->position().longitude(),
+                                     previous->position().latitude(),
+                                     next->position().longitude(),
+                                     next->position().latitude() );
+    m_speed = distance * 60 * 60;
+}
+
 bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
                          QRegion &reg) 
 {
@@ -156,10 +168,11 @@ bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
         {
             notifyPosition( m_gpsTracking->position() );
             m_gpsTrackSeg->append( m_gpsPreviousPosition );
+            updateSpeed( m_gpsPreviousPosition, m_gpsTracking );
             m_gpsPreviousPosition = m_gpsCurrentPosition;
             m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking );
             reg = genRegion( canvasSize, viewParams );
-            emit gpsLocation( m_gpsTracking->position() );
+            emit gpsLocation( m_gpsTracking->position(), m_speed );
             return true;
         } else {
             return false;

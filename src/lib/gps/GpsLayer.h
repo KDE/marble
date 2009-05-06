@@ -51,6 +51,7 @@ class GpsLayer : public AbstractLayer
                    QRegion &reg);
 
     GpxFileModel        *m_fileModel;
+    PositionTracking*   getPositionTracking();
  private:
     Waypoint            *m_currentPosition;
 

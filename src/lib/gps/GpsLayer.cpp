@@ -55,6 +55,11 @@ bool GpsLayer::updateGps( const QSize &canvasSize, ViewParams *viewParams,
 //     return QRegion();
 }
 
+PositionTracking* GpsLayer::getPositionTracking()
+{
+    return m_tracking;
+}
+
 void GpsLayer::paintLayer( ClipPainter *painter, 
                           const QSize &canvasSize, ViewParams *viewParams )
 {
@@ -64,13 +69,16 @@ void GpsLayer::paintLayer( ClipPainter *painter,
         QRegion temp; // useless variable
         updateGps( canvasSize, viewParams, temp);
         paintCurrentPosition( painter, canvasSize, viewParams );
+        m_currentGpx->draw( painter, canvasSize, viewParams );
     }
 
     const QVector<GpxFile*> * const allFiles = m_fileModel->allFiles();
     QVector<GpxFile*>::const_iterator it;
     for( it = allFiles->constBegin();
          it != allFiles->constEnd(); ++it ) {
-        (*it)->draw( painter, canvasSize, viewParams );
+             if( (*it) != m_currentGpx ) {
+                 (*it)->draw( painter, canvasSize, viewParams );
+             }
     }
 }
 

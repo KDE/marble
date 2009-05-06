@@ -199,6 +199,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void changeZoom(int zoom);
     void disableGpsInput( bool );
     void receiveGpsCoordinates( qreal, qreal, GeoDataCoordinates::Unit );
+    void receiveGpsCoordinates( GeoDataCoordinates in, qreal speed  );
     void enableFileViewActions();
     
     /**

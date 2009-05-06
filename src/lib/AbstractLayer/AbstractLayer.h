@@ -65,6 +65,12 @@ class AbstractLayer: public QObject
 			     const QSize& screenSize,
 			     ViewParams *viewParams );
 
+    /**
+     * @brief  Set whether the Layer is visible
+     * @param  visible  visibility of the Layer
+     */
+    void setVisible( bool visible );
+
  public:
     /**
      * @brief Construct this layer with a parent
@@ -127,12 +133,6 @@ class AbstractLayer: public QObject
      * @return The Layer visibility.
      */
     bool  visible() const;
-
-    /**
-     * @brief  Set whether the Layer is visible
-     * @param  visible  visibility of the Layer
-     */
-    void setVisible( bool visible );
 
     /**
      * @brief convenience method to find the distance between 2 points

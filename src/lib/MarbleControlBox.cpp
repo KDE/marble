@@ -45,6 +45,8 @@
 #include <MarbleDirs.h>
 #include <FileViewModel.h>
 #include "gps/GpxFileModel.h"
+#include "gps/GpsLayer.h"
+#include "gps/PositionTracking.h"
 #include "PlacemarkContainer.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleRunnerManager.h"
@@ -141,7 +143,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     //default
     setCurrentLocationTabShown( false );
-    setCurrentLocation2TabShown( false );
+    setCurrentLocation2TabShown( true );
     setFileViewTabShown( false );
 
     setupGpsOption();
@@ -340,10 +342,14 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              d->m_widget, SLOT( setShowGps( bool ) ) );
     connect( this, SIGNAL( gpsPositionChanged( qreal, qreal ) ),
              d->m_widget, SLOT( changeCurrentPosition( qreal, qreal ) ) );
-    connect( d->m_widget, SIGNAL( mouseClickGeoPosition( qreal, qreal,
-                                            GeoDataCoordinates::Unit ) ),
-             this, SLOT( receiveGpsCoordinates ( qreal, qreal,
-                                                 GeoDataCoordinates::Unit) ) );
+//    connect( d->m_widget, SIGNAL( mouseClickGeoPosition( qreal, qreal,
+//                                            GeoDataCoordinates::Unit ) ),
+//             this, SLOT( receiveGpsCoordinates ( qreal, qreal,
+//                                                 GeoDataCoordinates::Unit) ) );
+    connect ( d->m_widget->model()->gpsLayer()->getPositionTracking(), SIGNAL(gpsLocation( GeoDataCoordinates, qreal )),
+              this, SLOT(receiveGpsCoordinates(GeoDataCoordinates, qreal)) );
+    connect ( d->uiWidget.navigationCheckBox, SIGNAL(clicked(bool) ),
+              d->m_widget->model()->gpsLayer(), SLOT(setVisible(bool)) );
 
     connect( d->m_widget, SIGNAL( timeout() ),
              this,        SIGNAL( updateGps() ) );
@@ -462,6 +468,17 @@ void MarbleControlBox::receiveGpsCoordinates( qreal x, qreal y,
 
             emit gpsPositionChanged( t_lon, t_lat );
         }
+    }
+}
+
+void MarbleControlBox::receiveGpsCoordinates( GeoDataCoordinates in, qreal speed )
+{
+    //update the ui here
+//    qDebug() << "Speed is : " << speed;
+    if ( d->uiWidget.navigationCheckBox->isChecked() ) {
+        d->uiWidget.longitudeValue->setText( in.lonToString() );
+        d->uiWidget.latitudeValue->setText( in.latToString() );
+        d->uiWidget.altitudeValue->setText( QString::number( in.altitude() ) );
     }
 }
 

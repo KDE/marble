@@ -16,6 +16,7 @@
 #include <QtCore/QSize>
 #include <QtCore/QObject>
 #include <QtCore/QPoint>
+#include <QtCore/QDebug>
 
 #include "AbstractLayerContainer.h"
 #include "ClipPainter.h"
@@ -86,6 +87,7 @@ bool AbstractLayer::visible() const
 void AbstractLayer::setVisible( bool visible ) 
 {
     m_visible = visible;
+    qDebug() << "Abstract layer has been set to: " << visible;
 }
 
 void AbstractLayer::paintLayer( ClipPainter* painter, 

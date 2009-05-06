@@ -89,9 +89,12 @@ public:
     void  notifyPosition( GeoDataCoordinates );
 
 Q_SIGNALS:
-    void  gpsLocation( GeoDataCoordinates );
+    void  gpsLocation( GeoDataCoordinates, qreal );
 
  private:
+    void updateSpeed( TrackPoint* previous, TrackPoint* next );
+
+    qreal               m_speed;
     //used to draw the arrow in gps tracking
     GpxFile             *m_currentGpx;
     QPolygonF           m_currentDraw;

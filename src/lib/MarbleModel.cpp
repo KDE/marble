@@ -620,7 +620,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     }
 
     // Paint the Gps Layer
-    d->m_gpsLayer->setVisible( viewParams->showGps() );
+//    d->m_gpsLayer->setVisible( viewParams->showGps() );
     //FIXME:We might just send ViewParams instead of this bunch of parameters
     d->m_gpsLayer->paintLayer( painter,
                                viewParams->canvasImage()->size(),
