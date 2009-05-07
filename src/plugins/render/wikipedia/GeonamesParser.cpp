@@ -12,6 +12,7 @@
 #include "GeonamesParser.h"
 
 // Marble
+#include "global.h"
 #include "WikipediaWidget.h"
 
 // Qt
@@ -110,34 +111,79 @@ void GeonamesParser::readEntry() {
 void GeonamesParser::readTitle( WikipediaWidget *widget ) {
     Q_ASSERT( isStartElement()
               && name() == "title" );
-    
-    widget->setId( text().toString() );
+              
+    while( !atEnd() ) {
+        readNext();
+        
+        if( isEndElement() )
+            break;
+        
+        if( isCharacters() ) {
+            widget->setId( text().toString() );
+        }
+    }
 }
 
 void GeonamesParser::readLongitude( WikipediaWidget *widget ) {
     Q_ASSERT( isStartElement()
               && name() == "lng" );
               
-    widget->setLongitude( text().toString().toDouble() );
+    while( !atEnd() ) {
+        readNext();
+        
+        if( isEndElement() )
+            break;
+        
+        if( isCharacters() ) {
+            widget->setLongitude( text().toString().toDouble() * DEG2RAD );
+        }
+    }
 }
 
 void GeonamesParser::readLatitude( WikipediaWidget *widget ) {
     Q_ASSERT( isStartElement()
               && name() == "lat" );
               
-    widget->setLatitude( text().toString().toDouble() );
+    while( !atEnd() ) {
+        readNext();
+        
+        if( isEndElement() )
+            break;
+        
+        if( isCharacters() ) {
+            widget->setLatitude( text().toString().toDouble() * DEG2RAD );
+        }
+    }
 }
 
 void GeonamesParser::readUrl( WikipediaWidget *widget ) {
     Q_ASSERT( isStartElement()
               && name() == "wikipediaUrl" );
               
-    widget->setUrl( QUrl( text().toString() ) );
+    while( !atEnd() ) {
+        readNext();
+        
+        if( isEndElement() )
+            break;
+        
+        if( isCharacters() ) {
+            widget->setUrl( QUrl( text().toString() ) );
+        }
+    }
 }
 
 void GeonamesParser::readThumbnailImage( WikipediaWidget *widget ) {
     Q_ASSERT( isStartElement()
               && name() == "thumbnailImg" );
              
-    widget->setThumbnailImageUrl( QUrl( text().toString() ) );
+    while( !atEnd() ) {
+        readNext();
+        
+        if( isEndElement() )
+            break;
+        
+        if( isCharacters() ) {
+            widget->setThumbnailImageUrl( QUrl( text().toString() ) );
+        }
+    }
 }

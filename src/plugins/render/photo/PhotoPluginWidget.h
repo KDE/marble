@@ -61,7 +61,6 @@ class PhotoPluginWidget : public AbstractDataPluginWidget {
  private:
     bool m_hasCoordinates;
     QImage m_smallImage;
-    QRect m_paintPosition;
     QWebView *m_browser;
     
     QString m_server;

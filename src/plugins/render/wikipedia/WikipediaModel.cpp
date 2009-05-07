@@ -17,17 +17,35 @@
 // Marble
 #include "GeoDataLatLonAltBox.h"
 #include "global.h"
+#include "MarbleDirs.h"
 #include "WikipediaWidget.h"
 
 // Qt
 #include <QtCore/QUrl>
 #include <QtCore/QString>
+#include <QtGui/QImage>
+#include <QtGui/QPainter>
+#include <QtSvg/QSvgRenderer>
 
 using namespace Marble;
+
+// The Wikipedia icon is not a square
+const int wikipediaIconWidth = 47;
+const int wikipediaIconHeight = 40;
 
 WikipediaModel::WikipediaModel( QObject *parent )
     : AbstractDataPluginModel( "wikipedia", parent ) 
 {
+    // Rendering of the wikipedia icon from svg
+    QSvgRenderer svgObj( MarbleDirs::path( "svg/wikipedia.svg" ), this );
+    m_wikipediaImage = new QImage( wikipediaIconWidth, wikipediaIconHeight, QImage::Format_ARGB32 );
+    m_wikipediaImage->fill( QColor( 0, 0, 0, 0 ).rgba() );
+    QPainter painter( m_wikipediaImage );
+    svgObj.render( &painter );
+}
+
+WikipediaModel::~WikipediaModel() {
+    delete m_wikipediaImage;
 }
 
 QUrl WikipediaModel::descriptionFileUrl( GeoDataLatLonAltBox *box, qint32 number ) {
@@ -61,6 +79,7 @@ void WikipediaModel::parseFile( QByteArray file ) {
             continue;
         }
         
+        (*it)->setIcon( m_wikipediaImage );
         addWidgetToList( (*it) );
     }
 }

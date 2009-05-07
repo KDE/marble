@@ -17,7 +17,6 @@
 
 // Marble
 #include "AbstractDataPluginWidget.h"
-#include "AbstractProjection.h"
 #include "GeoDataCoordinates.h"
 #include "GeoPainter.h"
 #include "TinyWebBrowser.h"
@@ -74,38 +73,10 @@ void PhotoPluginWidget::addDownloadedFile( QString url, QString type ) {
 bool PhotoPluginWidget::render( GeoPainter *painter, ViewportParams *viewport,
                                 const QString& renderPos, GeoSceneLayer * layer )
 {
-    GeoDataCoordinates coords = coordinates();
-    painter->drawImage( coords, m_smallImage );
-    qreal x[100], y;
-    int pointRepeatNumber;
-    bool globeHidesPoint;
-    if( viewport->currentProjection()->screenCoordinates( coords,
-                                                          viewport,
-                                                          x, y,
-                                                          pointRepeatNumber,
-                                                          m_smallImage.size(),
-                                                          globeHidesPoint ) )
-    {
-        // FIXME: We need to handle multiple coords here
-        qint32 width = m_smallImage.width();
-        qint32 height = m_smallImage.height();
-        qint32 leftX = x[0] - ( m_smallImage.width()/2 );
-        qint32 topY = y    - ( m_smallImage.height()/2 );
-        
-        if( leftX < 0 ) {
-            width += leftX;
-            leftX = 0;
-        }
-        if( topY < 0 ) {
-            height += topY;
-            topY = 0;
-        }
-            
-        m_paintPosition.setRect( leftX, topY, width, height );
-    }
-    else {
-        m_paintPosition = QRect();
-    }
+    painter->drawImage( coordinates(), m_smallImage );
+    
+    updatePaintPosition( viewport, m_smallImage.size() );
+    
     return true;
 }
              
@@ -161,7 +132,7 @@ void PhotoPluginWidget::setOwner( QString owner ) {
 }
 
 bool PhotoPluginWidget::eventFilter( QObject *object, QMouseEvent *event ) {
-    if( m_paintPosition.contains( event->pos() ) ) {
+    if( paintPosition().contains( event->pos() ) ) {
         if( m_browser ) {
             delete m_browser;
         }

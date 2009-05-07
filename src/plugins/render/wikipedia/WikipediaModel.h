@@ -13,6 +13,8 @@
 
 #include "AbstractDataPluginModel.h"
 
+class QImage;
+
 namespace Marble {
 
 const quint32 numberOfArticlesPerFetch = 7;
@@ -23,6 +25,7 @@ class WikipediaModel : public AbstractDataPluginModel
     
  public:
     WikipediaModel( QObject *parent = 0 );
+    ~WikipediaModel();
  
  protected:
     /**
@@ -37,6 +40,9 @@ class WikipediaModel : public AbstractDataPluginModel
      * depending on if they have to download information to be shown.
      **/
     void parseFile( QByteArray file );
+    
+ private:
+    QImage *m_wikipediaImage;
 };
 
 }

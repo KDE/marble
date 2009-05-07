@@ -15,11 +15,16 @@
 
 #include <QtCore/QUrl>
 
+class QImage;
+class QWebView;
+
 namespace Marble {
  
 class WikipediaWidget : public AbstractDataPluginWidget {
  public:
     WikipediaWidget( QObject *parent );
+    
+    ~WikipediaWidget();
     
     QString widgetType() const;
      
@@ -49,11 +54,14 @@ class WikipediaWidget : public AbstractDataPluginWidget {
     void setThumbnailImageUrl( QUrl thumbnailImageUrl );
     
     bool eventFilter( QObject *, QMouseEvent * );
+    
+    void setIcon( QImage *icon );
  private:
-    qreal m_longitude;
-    qreal m_latitude;
     QUrl m_url;
     QUrl m_thumbnailImageUrl;
+    QWebView *m_browser;
+    
+    QImage *m_icon;
 };
     
 }

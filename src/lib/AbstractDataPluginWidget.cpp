@@ -12,10 +12,14 @@
 #include "AbstractDataPluginWidget.h"
 
 // Marble
+#include "AbstractProjection.h"
 #include "GeoDataCoordinates.h"
+#include "ViewportParams.h"
 
 // Qt
 #include <QtCore/QDebug>
+#include <QtCore/QRect>
+#include <QtCore/QSize>
 
 namespace Marble {
 
@@ -28,6 +32,7 @@ class AbstractDataPluginWidgetPrivate {
     
     QString m_id;
     GeoDataCoordinates m_coordinates;
+    QRect m_paintPosition;
     qreal m_addedAngularResolution;
 };
 
@@ -62,6 +67,46 @@ qreal AbstractDataPluginWidget::addedAngularResolution() const {
 
 void AbstractDataPluginWidget::setAddedAngularResolution( qreal resolution ) {
     d->m_addedAngularResolution = resolution;
+}
+
+void AbstractDataPluginWidget::updatePaintPosition( ViewportParams *viewport,
+                                                    QSize size ) {
+    GeoDataCoordinates coords = coordinates();
+    
+    qreal x[100], y;
+    int pointRepeatNumber;
+    bool globeHidesPoint;
+    if( viewport->currentProjection()->screenCoordinates( coords,
+                                                          viewport,
+                                                          x, y,
+                                                          pointRepeatNumber,
+                                                          size,
+                                                          globeHidesPoint ) )
+    {
+        // FIXME: We need to handle multiple coords here
+        qint32 width = size.width();
+        qint32 height = size.height();
+        qint32 leftX = x[0] - ( size.width()/2 );
+        qint32 topY = y    - ( size.height()/2 );
+        
+        if( leftX < 0 ) {
+            width += leftX;
+            leftX = 0;
+        }
+        if( topY < 0 ) {
+            height += topY;
+            topY = 0;
+        }
+            
+        d->m_paintPosition.setRect( leftX, topY, width, height );
+    }
+    else {
+        d->m_paintPosition = QRect();
+    }
+}
+
+QRect AbstractDataPluginWidget::paintPosition() {
+    return d->m_paintPosition;
 }
 
 } // Marble namespace

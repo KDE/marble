@@ -31,7 +31,7 @@ namespace Marble {
 const QString descriptionPrefix( "description_" );
 
 // Time between to new description file downloads in ms
-const int timeBetweenDownloads = 250;
+const int timeBetweenDownloads = 500;
 
 // Separator to separate the id of the widget from the file type
 const char fileIdSeparator = '_';

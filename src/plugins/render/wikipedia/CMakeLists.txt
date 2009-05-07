@@ -13,4 +13,7 @@ set( wikipedia_SRCS WikipediaPlugin.cpp
                     GeonamesParser.cpp )
 
 marble_add_plugin( Wikipedia ${wikipedia_SRCS} )
-target_link_libraries( Wikipedia ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTWEBKIT_LIBRARY} )
+target_link_libraries( Wikipedia ${QT_QTCORE_LIBRARY}
+                                 ${QT_QTGUI_LIBRARY} 
+                                 ${QT_QTWEBKIT_LIBRARY}
+                                 ${QT_QTSVG_LIBRARY} )

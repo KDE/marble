@@ -17,6 +17,8 @@
 #include "marble_export.h"
 
 class QMouseEvent;
+class QRect;
+class QSize;
 
 namespace Marble {
     
@@ -59,6 +61,18 @@ class MARBLE_EXPORT AbstractDataPluginWidget : public QObject {
                          const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
                          
     virtual bool operator<( const AbstractDataPluginWidget *other ) const = 0;
+    
+    /**
+     * If you want that the widget stores the paint position (e.g. to handle mouse clicks),
+     * you should do this on every rendering.
+     */
+    void updatePaintPosition( ViewportParams *viewport, QSize size );
+                
+    /**
+     * Returns the last paint position
+     */
+    QRect paintPosition();
+                    
  private:
     AbstractDataPluginWidgetPrivate * const d;
 };
