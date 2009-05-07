@@ -228,9 +228,9 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
 	    // This should always return true
 	    if( !m_waitingQueue.contains( job ) ) {
 		if( job->tryAgain() ) {
-		    m_waitingQueue.enqueue( job );
 		    qDebug() << QString( "Download of %1 failed, but trying again soon" )
 			.arg( job->destinationFileName() );
+		    m_waitingQueue.enqueue( job );
                     if( !m_requeueTimer->isActive() )
                         m_requeueTimer->start();
 		}
