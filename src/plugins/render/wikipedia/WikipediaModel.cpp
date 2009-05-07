@@ -16,6 +16,7 @@
 
 // Marble
 #include "GeoDataLatLonAltBox.h"
+#include "global.h"
 #include "WikipediaWidget.h"
 
 // Qt
@@ -30,18 +31,16 @@ WikipediaModel::WikipediaModel( QObject *parent )
 }
 
 QUrl WikipediaModel::descriptionFileUrl( GeoDataLatLonAltBox *box, qint32 number ) {
-    // FIXME: Download a list of constant number, because the parser doesn't support
-    // loading a file of an unknown length.
     // http://ws.geonames.org/wikipediaBoundingBox?north=44.1&south=-9.9&east=-22.4&west=55.2
     QString geonamesUrl( "http://ws.geonames.org/wikipediaBoundingBox" );
     geonamesUrl += "?north=";
-    geonamesUrl += QString::number( box->north() );
+    geonamesUrl += QString::number( box->north() * RAD2DEG );
     geonamesUrl += "&south=";
-    geonamesUrl += QString::number( box->south() );
+    geonamesUrl += QString::number( box->south() * RAD2DEG );
     geonamesUrl += "&east=";
-    geonamesUrl += QString::number( box->east() );
+    geonamesUrl += QString::number( box->east() * RAD2DEG );
     geonamesUrl += "&west=";
-    geonamesUrl += QString::number( box->east() );
+    geonamesUrl += QString::number( box->west() * RAD2DEG );
     geonamesUrl += "&maxRows=";
     geonamesUrl += QString::number( number );
     
