@@ -41,9 +41,9 @@ using namespace Marble;
 PlacemarkLayout::PlacemarkLayout( QObject* parent )
     : QObject( parent ),
       m_placemarkPainter( 0 ),
-      m_maxLabelHeight( 0 ),
       m_placemarkModel( 0 ),
       m_selectionModel( 0 ),
+      m_maxLabelHeight( 0 ),
       m_styleResetRequested( true )
 {
 //  Old weightfilter array. Still here 

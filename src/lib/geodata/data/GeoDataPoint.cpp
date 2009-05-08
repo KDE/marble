@@ -27,15 +27,15 @@ namespace Marble
 
 GeoDataPoint::GeoDataPoint( qreal _lon, qreal _lat, qreal _alt,
                             GeoDataPoint::Unit unit, int _detail )
-  : GeoDataGeometry( new GeoDataPointPrivate ),
-    GeoDataCoordinates( _lon, _lat, _alt, 
-                        static_cast<GeoDataCoordinates::Unit>( unit ), _detail )
+  : GeoDataCoordinates( _lon, _lat, _alt, 
+                        static_cast<GeoDataCoordinates::Unit>( unit ), _detail ),
+    GeoDataGeometry( new GeoDataPointPrivate )
 {
 }
 
 GeoDataPoint::GeoDataPoint( const GeoDataPoint& other )
-  : GeoDataGeometry( other ),
-    GeoDataCoordinates( other )
+  : GeoDataCoordinates( other ),
+    GeoDataGeometry( other )
     
 {
 }

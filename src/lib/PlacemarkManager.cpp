@@ -43,9 +43,9 @@ class PlacemarkManagerPrivate
         PlacemarkManagerPrivate( QObject* parent )
         : m_model( 0 )
         , m_geomodel( new MarbleGeometryModel() )
-        , m_target( QString() )
-        , m_finalized( true )
         , m_fileViewModel( new FileViewModel(parent ) )
+        , m_finalized( true )
+        , m_target( QString() )
         {
         };
 

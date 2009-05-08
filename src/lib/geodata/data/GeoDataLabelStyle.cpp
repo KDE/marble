@@ -33,9 +33,9 @@ class GeoDataLabelStylePrivate
     }
 
     GeoDataLabelStylePrivate( const GeoDataLabelStylePrivate& other )
-        : m_font( other.m_font ),
+        : m_scale( other.m_scale ),
           m_alignment( other.m_alignment ),
-          m_scale( other.m_scale )
+          m_font( other.m_font )
     {
     }
 

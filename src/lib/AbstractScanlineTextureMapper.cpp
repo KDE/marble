@@ -50,11 +50,11 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
       m_maxTileLevel( 0 ),
       m_tilePosX( 0 ),
       m_tilePosY( 0 ),
+      m_nBest( 0 ),
       m_globalWidth( 0 ),
       m_globalHeight( 0 ),
       m_normGlobalWidth( 0.0 ),
-      m_normGlobalHeight( 0.0 ),
-      m_nBest( 0 )
+      m_normGlobalHeight( 0.0 )
 {
     GeoSceneTexture * texture = 0;
 
