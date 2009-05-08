@@ -40,8 +40,6 @@ GeoNode* KmlIconStyleTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    GeoDataIconStyle* style = 0;
-    
     if ( parentItem.represents( kmlTag_Style ) ) {
         GeoDataIconStyle style;
         parentItem.nodeAs<GeoDataStyle>()->setIconStyle( style );

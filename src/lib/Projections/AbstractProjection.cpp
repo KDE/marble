@@ -281,7 +281,7 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
             itpos. getSpherical( lon, lat );
         }
 
-        bool visible = screenCoordinates( GeoDataCoordinates( lon, lat, altitude ), viewport, x, y, globeHidesPoint );
+        screenCoordinates( GeoDataCoordinates( lon, lat, altitude ), viewport, x, y, globeHidesPoint );
         point = QPointF( x, y );
 
         // No "else" here, as this would not add the current point that is required.

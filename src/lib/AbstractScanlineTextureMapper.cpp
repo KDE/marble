@@ -112,9 +112,6 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
 
 //    qDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
 
-    qreal tileCol = 0.0; 
-    qreal tileRow = 0.0;
-
     if ( tileLevel > m_maxTileLevel )
         tileLevel = m_maxTileLevel;
 
