@@ -13,7 +13,7 @@
 
 // Qt
 #include <QtCore/QDebug>
-#include <QtGui/QImage>
+#include <QtGui/QPixmap>
 #include <QtGui/QMouseEvent>
 #include <QtWebKit/QWebView>
 
@@ -53,7 +53,7 @@ bool WikipediaWidget::operator<( const AbstractDataPluginWidget *other ) const {
 bool WikipediaWidget::render( GeoPainter *painter, ViewportParams *viewport,
                               const QString& renderPos, GeoSceneLayer * layer )
 {
-    painter->drawImage( coordinates(), *m_icon );
+    painter->drawPixmap( coordinates(), *m_icon );
     
     updatePaintPosition( viewport, m_icon->size() );
     
@@ -112,6 +112,6 @@ bool WikipediaWidget::eventFilter( QObject *object, QMouseEvent *event ) {
     return false;
 }
 
-void WikipediaWidget::setIcon( QImage *icon ) {
+void WikipediaWidget::setIcon( QPixmap *icon ) {
     m_icon = icon;
 }

@@ -15,7 +15,7 @@
 
 #include <QtCore/QUrl>
 
-class QImage;
+class QPixmap;
 class QWebView;
 
 namespace Marble {
@@ -55,13 +55,13 @@ class WikipediaWidget : public AbstractDataPluginWidget {
     
     bool eventFilter( QObject *, QMouseEvent * );
     
-    void setIcon( QImage *icon );
+    void setIcon( QPixmap *icon );
  private:
     QUrl m_url;
     QUrl m_thumbnailImageUrl;
     QWebView *m_browser;
     
-    QImage *m_icon;
+    QPixmap *m_icon;
 };
     
 }

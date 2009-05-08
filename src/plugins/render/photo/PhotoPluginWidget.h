@@ -13,7 +13,7 @@
 
 #include "AbstractDataPluginWidget.h"
 
-#include <QtGui/QImage>
+#include <QtGui/QPixmap>
 
 class QUrl;
 class QWebView;
@@ -60,7 +60,7 @@ class PhotoPluginWidget : public AbstractDataPluginWidget {
     bool eventFilter( QObject *, QMouseEvent * );
  private:
     bool m_hasCoordinates;
-    QImage m_smallImage;
+    QPixmap m_smallImage;
     QWebView *m_browser;
     
     QString m_server;

@@ -21,10 +21,12 @@
 #include "WikipediaWidget.h"
 
 // Qt
+#include <QtCore/QDebug>
 #include <QtCore/QUrl>
 #include <QtCore/QString>
 #include <QtGui/QImage>
 #include <QtGui/QPainter>
+#include <QtGui/QPixmap>
 #include <QtSvg/QSvgRenderer>
 
 using namespace Marble;
@@ -38,14 +40,15 @@ WikipediaModel::WikipediaModel( QObject *parent )
 {
     // Rendering of the wikipedia icon from svg
     QSvgRenderer svgObj( MarbleDirs::path( "svg/wikipedia.svg" ), this );
-    m_wikipediaImage = new QImage( wikipediaIconWidth, wikipediaIconHeight, QImage::Format_ARGB32 );
-    m_wikipediaImage->fill( QColor( 0, 0, 0, 0 ).rgba() );
-    QPainter painter( m_wikipediaImage );
+    QImage wikipediaImage( wikipediaIconWidth, wikipediaIconHeight, QImage::Format_ARGB32 );
+    wikipediaImage.fill( QColor( 0, 0, 0, 0 ).rgba() );
+    QPainter painter( &wikipediaImage );
     svgObj.render( &painter );
+    m_wikipediaPixmap = new QPixmap( QPixmap::fromImage( wikipediaImage ) );
 }
 
 WikipediaModel::~WikipediaModel() {
-    delete m_wikipediaImage;
+    delete m_wikipediaPixmap;
 }
 
 QUrl WikipediaModel::descriptionFileUrl( GeoDataLatLonAltBox *box, qint32 number ) {
@@ -79,7 +82,7 @@ void WikipediaModel::parseFile( QByteArray file ) {
             continue;
         }
         
-        (*it)->setIcon( m_wikipediaImage );
+        (*it)->setIcon( m_wikipediaPixmap );
         addWidgetToList( (*it) );
     }
 }

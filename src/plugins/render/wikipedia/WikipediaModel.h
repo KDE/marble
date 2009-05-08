@@ -13,7 +13,7 @@
 
 #include "AbstractDataPluginModel.h"
 
-class QImage;
+class QPixmap;
 
 namespace Marble {
 
@@ -42,7 +42,7 @@ class WikipediaModel : public AbstractDataPluginModel
     void parseFile( QByteArray file );
     
  private:
-    QImage *m_wikipediaImage;
+    QPixmap *m_wikipediaPixmap;
 };
 
 }
