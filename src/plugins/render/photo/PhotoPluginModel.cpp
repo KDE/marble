@@ -18,6 +18,7 @@
 // Marble
 #include "AbstractDataPluginWidget.h"
 #include "GeoDataLatLonAltBox.h"
+#include "MarbleDataFacade.h"
 
 // Qt
 #include <QtCore/QDebug>
@@ -31,7 +32,15 @@ PhotoPluginModel::PhotoPluginModel( QObject *parent )
 {
 }
 
-QUrl PhotoPluginModel::descriptionFileUrl( GeoDataLatLonAltBox *box, qint32 number ) {
+QUrl PhotoPluginModel::descriptionFileUrl( GeoDataLatLonAltBox *box,
+                                           MarbleDataFacade *facade,
+                                           qint32 number )
+{
+    // Flickr only supports images for earth
+    if( facade->target() != "earth" ) {
+        return QUrl();
+    }
+    
     QString flickrUrl( "http://www.flickr.com/services/rest/" );
     flickrUrl += "?method=flickr.photos.search";
     flickrUrl += "&format=rest";
@@ -59,6 +68,8 @@ void PhotoPluginModel::parseFile( QByteArray file ) {
             continue;
         }
         
+        // Currently all Flickr images with geotags are on earth
+        (*it)->setTarget( "earth" );
         downloadWidgetData( ((PhotoPluginWidget*) (*it))->photoUrl(), "thumbnail", (*it) );
         downloadWidgetData( ((PhotoPluginWidget*) (*it))->infoUrl( "620131a1b82b000c9582b94effcdc636" ),
                             "info",

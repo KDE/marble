@@ -68,7 +68,8 @@ bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     }
 
     QList<AbstractDataPluginWidget*> widgets = d->m_model->widgets( viewport,
-                                                                 numberOfWidgets() );
+                                                                    dataFacade(),
+                                                                    numberOfWidgets() );
     painter->save();
     
     // Paint the most important widget at last

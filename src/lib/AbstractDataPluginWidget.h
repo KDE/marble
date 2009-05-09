@@ -39,6 +39,9 @@ class MARBLE_EXPORT AbstractDataPluginWidget : public QObject {
     
     GeoDataCoordinates coordinates();
     void setCoordinates( GeoDataCoordinates coordinates );
+    
+    QString target();
+    void setTarget( QString target );
      
     QString id() const;
     void setId( QString id );

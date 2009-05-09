@@ -33,6 +33,7 @@ class AbstractDataPluginWidgetPrivate {
     
     QString m_id;
     GeoDataCoordinates m_coordinates;
+    QString m_target;
     QRect m_paintPosition;
     qreal m_addedAngularResolution;
 };
@@ -52,6 +53,14 @@ GeoDataCoordinates AbstractDataPluginWidget::coordinates() {
 
 void AbstractDataPluginWidget::setCoordinates( GeoDataCoordinates coordinates ) {
     d->m_coordinates = coordinates;
+}
+
+QString AbstractDataPluginWidget::target() {
+    return d->m_target;
+}
+
+void AbstractDataPluginWidget::setTarget( QString target ) {
+    d->m_target = target;
 }
 
 QString AbstractDataPluginWidget::id() const {

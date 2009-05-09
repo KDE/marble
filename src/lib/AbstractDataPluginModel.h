@@ -29,6 +29,7 @@ class AbstractDataPluginWidget;
 class CacheStoragePolicy;
 class HttpDownloadManager;
 class GeoDataLatLonAltBox;
+class MarbleDataFacade;
 class ViewportParams;
 
 class MARBLE_EXPORT AbstractDataPluginModel : public QObject
@@ -45,7 +46,9 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * 0 means no limit.
      * @return The list of widgets with most important widget first.
      */
-    QList<AbstractDataPluginWidget*> widgets( ViewportParams *viewport, qint32 number = 10 );
+    QList<AbstractDataPluginWidget*> widgets( ViewportParams *viewport,
+                                              MarbleDataFacade *facade,
+                                              qint32 number = 10 );
     
     /**
      * Returns all widgets which were returned by widgets() again.
@@ -59,7 +62,9 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * Generates the download url for the description file from the web service depending on
      * the @p box surrounding the view and the @p number of files to show.
      **/
-    virtual QUrl descriptionFileUrl( GeoDataLatLonAltBox *box, qint32 number = 10 ) = 0;
+    virtual QUrl descriptionFileUrl( GeoDataLatLonAltBox *box,
+                                     MarbleDataFacade *facade,
+                                     qint32 number = 10 ) = 0;
        
     /**
      * The reimplementation has to parse the @p file and should generate widgets. This widgets

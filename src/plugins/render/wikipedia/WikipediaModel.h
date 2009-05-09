@@ -18,6 +18,8 @@ class QPixmap;
 
 namespace Marble {
 
+class MarbleDataFacade;
+
 const quint32 numberOfArticlesPerFetch = 7;
   
 class WikipediaModel : public AbstractDataPluginModel
@@ -33,7 +35,9 @@ class WikipediaModel : public AbstractDataPluginModel
      * Generates the download url for the description file from the web service depending on
      * the @p box surrounding the view and the @p number of files to show.
      **/
-    QUrl descriptionFileUrl( GeoDataLatLonAltBox *box, qint32 number = 10 );
+    QUrl descriptionFileUrl( GeoDataLatLonAltBox *box,
+                             MarbleDataFacade *facade,
+                             qint32 number = 10 );
        
     /**
      * The reimplementation has to parse the @p file and should generate widgets. This widgets

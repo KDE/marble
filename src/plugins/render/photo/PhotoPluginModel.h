@@ -15,6 +15,8 @@
 
 namespace Marble {
 
+class MarbleDataFacade;
+
 const quint32 numberOfImagesPerFetch = 15;
   
 class PhotoPluginModel : public AbstractDataPluginModel
@@ -29,7 +31,9 @@ class PhotoPluginModel : public AbstractDataPluginModel
      * Generates the download url for the description file from the web service depending on
      * the @p box surrounding the view and the @p number of files to show.
      **/
-    QUrl descriptionFileUrl( GeoDataLatLonAltBox *box, qint32 number = 10 );
+    QUrl descriptionFileUrl( GeoDataLatLonAltBox *box,
+                             MarbleDataFacade *facade,
+                             qint32 number = 10 );
        
     /**
      * The reimplementation has to parse the @p file and should generate widgets. This widgets

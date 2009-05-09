@@ -17,6 +17,7 @@
 // Marble
 #include "GeoDataLatLonAltBox.h"
 #include "global.h"
+#include "MarbleDataFacade.h"
 #include "MarbleDirs.h"
 #include "WikipediaWidget.h"
 
@@ -63,8 +64,15 @@ WikipediaModel::~WikipediaModel() {
     delete m_wikipediaPixmap;
 }
 
-QUrl WikipediaModel::descriptionFileUrl( GeoDataLatLonAltBox *box, qint32 number ) {
-    // http://ws.geonames.org/wikipediaBoundingBox?north=44.1&south=-9.9&east=-22.4&west=55.2
+QUrl WikipediaModel::descriptionFileUrl( GeoDataLatLonAltBox *box,
+                                         MarbleDataFacade *facade,
+                                         qint32 number )
+{
+    // Geonames only supports wikipedia articles for earth
+    if( facade->target() != "earth" ) {
+        return QUrl();
+    }
+        
     QString geonamesUrl( "http://ws.geonames.org/wikipediaBoundingBox" );
     geonamesUrl += "?north=";
     geonamesUrl += QString::number( box->north() * RAD2DEG );
@@ -96,6 +104,8 @@ void WikipediaModel::parseFile( QByteArray file ) {
         
         (*it)->setPixmap( m_wikipediaPixmap );
         (*it)->setIcon( m_wikipediaIcon );
+        // Currently all wikipedia articles with geotags are on earth
+        (*it)->setTarget( "earth" );
         addWidgetToList( (*it) );
     }
 }

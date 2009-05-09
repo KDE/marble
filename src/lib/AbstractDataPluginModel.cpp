@@ -23,6 +23,7 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
 #include "HttpDownloadManager.h"
+#include "MarbleDataFacade.h"
 #include "MarbleDirs.h"
 #include "ViewportParams.h"
 
@@ -45,11 +46,22 @@ class AbstractDataPluginModelPrivate {
           m_downloadedBox( new GeoDataLatLonAltBox() ),
           m_lastNumber( 0 ),
           m_downloadedNumber( 0 ),
+          m_lastDataFacade( 0 ),
           m_downloadTimer( new QTimer( m_parent ) )
     {
     }
     
-    ~AbstractDataPluginModelPrivate() {  
+    ~AbstractDataPluginModelPrivate() {
+        m_widgetSet.removeAll( 0 );
+        QHash<QString, AbstractDataPluginWidget*>::iterator it = m_downloadingWidgets.begin();
+        while( it != m_downloadingWidgets.end() ) {
+            if( !(*it) ) {
+                it = m_downloadingWidgets.erase( it );
+            }
+            else {
+                ++it;
+            }
+        }
         qDeleteAll( m_widgetSet );
         qDeleteAll( m_downloadingWidgets );
         delete m_storagePolicy;
@@ -63,6 +75,8 @@ class AbstractDataPluginModelPrivate {
     GeoDataLatLonAltBox *m_downloadedBox;
     qint32 m_lastNumber;
     qint32 m_downloadedNumber;
+    MarbleDataFacade *m_lastDataFacade;
+    QString m_downloadedTarget;
     QList<AbstractDataPluginWidget*> m_widgetSet;
     QHash<QString, AbstractDataPluginWidget*> m_downloadingWidgets;
     QList<AbstractDataPluginWidget*> m_displayedWidgets;
@@ -96,12 +110,16 @@ AbstractDataPluginModel::~AbstractDataPluginModel() {
 }
 
 QList<AbstractDataPluginWidget*> AbstractDataPluginModel::widgets( ViewportParams *viewport,
+                                                                   MarbleDataFacade *facade,
                                                                    qint32 number )
 {
     GeoDataLatLonAltBox *currentBox = new GeoDataLatLonAltBox( viewport->viewLatLonAltBox() );
+    QString target = facade->target();
     QList<AbstractDataPluginWidget*> list;
     
     QList<AbstractDataPluginWidget*>::iterator i;
+    
+    d->m_displayedWidgets.removeAll( 0 );
     
     // Widgets that are already shown have the highest priority
     for ( i = d->m_displayedWidgets.begin();
@@ -109,12 +127,17 @@ QList<AbstractDataPluginWidget*> AbstractDataPluginModel::widgets( ViewportParam
           ++i )
     {
         // Don't try to access an object that doesn't exist
-        if( *i == 0 ) {
+        if( !*i ) {
             continue;
         }
     
         // Only show widgets that are initialized
         if( !(*i)->initialized() ) {
+            continue;
+        }
+        
+        // Only show widgets that are on the current planet
+        if( (*i)->target() != target ) {
             continue;
         }
         
@@ -129,15 +152,22 @@ QList<AbstractDataPluginWidget*> AbstractDataPluginModel::widgets( ViewportParam
         }
     }
         
+    d->m_widgetSet.removeAll( 0 );
     
     for ( i = d->m_widgetSet.begin(); i != d->m_widgetSet.end() && list.size() < number; ++i ) {
         // Don't try to access an object that doesn't exist
-        if( *i == 0 ) {
+        if( !*i ) {
+            qDebug() << "Warning: Null pointer in m_widgetSet";
             continue;
         }
         
         // Only show widgets that are initialized
         if( !(*i)->initialized() ) {
+            continue;
+        }
+        
+        // Only show widgets that are on the current planet
+        if( (*i)->target() != target ) {
             continue;
         }
         
@@ -156,10 +186,15 @@ QList<AbstractDataPluginWidget*> AbstractDataPluginModel::widgets( ViewportParam
         // FIXME: We have to do something if the widget that is not on the viewport.
     }
     
-    if( (!((*currentBox) == (*d->m_lastBox)) || number != d->m_lastNumber) ) {
+    d->m_lastDataFacade = facade;
+    
+    if( (!((*currentBox) == (*d->m_lastBox))
+          || number != d->m_lastNumber ) )
+    {
         delete d->m_lastBox;
         d->m_lastBox = currentBox;
         d->m_lastNumber = number;
+        d->m_lastDataFacade = facade;
     }
     
     d->m_displayedWidgets = list;
@@ -185,6 +220,9 @@ void AbstractDataPluginModel::downloadWidgetData( QUrl url,
                                                   QString type,
                                                   AbstractDataPluginWidget *widget )
 {
+    if( !widget ) {
+        return;
+    }
     QString id = generateFilename( widget->id(), type );
     
     d->m_downloadManager->addJob( url, id, id );
@@ -204,6 +242,10 @@ static bool lessThanByPointer( const AbstractDataPluginWidget *widget1,
 
 void AbstractDataPluginModel::addWidgetToList( AbstractDataPluginWidget *widget ) {
     qDebug() << "New widget " << widget->id();
+    
+    if( !widget ) {
+        return;
+    }
     
     // This find the right position in the sorted to insert the new widget 
     QList<AbstractDataPluginWidget*>::iterator i = qLowerBound( d->m_widgetSet.begin(),
@@ -270,8 +312,13 @@ bool AbstractDataPluginModel::widgetExists( QString id ) {
 }
 
 void AbstractDataPluginModel::downloadDescriptionFile() {
+    if( !d->m_lastDataFacade ) {
+        return;
+    }
+    
     if( ( !( *d->m_downloadedBox == *d->m_lastBox )
-          || d->m_downloadedNumber != d->m_lastNumber )
+          || d->m_downloadedNumber != d->m_lastNumber
+          || d->m_downloadedTarget != d->m_lastDataFacade->target() )
         && d->m_lastNumber != 0 )
     {
         // Save the box we want to download.
@@ -279,14 +326,19 @@ void AbstractDataPluginModel::downloadDescriptionFile() {
         delete d->m_downloadedBox;
         d->m_downloadedBox = new GeoDataLatLonAltBox( *d->m_lastBox );
         d->m_downloadedNumber = d->m_lastNumber;
+        d->m_downloadedTarget = d->m_lastDataFacade->target();
         
         QString name( descriptionPrefix );
         name += QString::number( d->m_lastBox->east() );
         name += QString::number( d->m_lastBox->west() );
         name += QString::number( d->m_lastBox->north() );
         name += QString::number( d->m_lastBox->south() );
-        d->m_downloadManager->addJob( descriptionFileUrl( d->m_lastBox, d->m_lastNumber ),
-                                   name, name );
+        
+        QUrl url = descriptionFileUrl( d->m_lastBox, d->m_lastDataFacade, d->m_lastNumber );
+        
+        if( !url.isEmpty() ) {
+            d->m_downloadManager->addJob( url, name, name );
+        }
     }
 }
 
