@@ -15,16 +15,22 @@
 
 #include <QtCore/QUrl>
 
+class QAction;
+class QIcon;
 class QPixmap;
 class QWebView;
 
 namespace Marble {
  
 class WikipediaWidget : public AbstractDataPluginWidget {
+    Q_OBJECT
+    
  public:
     WikipediaWidget( QObject *parent );
     
     ~WikipediaWidget();
+    
+    QString name() const;
     
     QString widgetType() const;
      
@@ -53,15 +59,22 @@ class WikipediaWidget : public AbstractDataPluginWidget {
     
     void setThumbnailImageUrl( QUrl thumbnailImageUrl );
     
-    bool eventFilter( QObject *, QMouseEvent * );
+    QAction *action();
     
-    void setIcon( QPixmap *icon );
+    void setPixmap( QPixmap *pixmap );
+    
+    void setIcon( QIcon *icon );
+    
+ public Q_SLOTS:
+    void openBrowser();
+    
  private:
     QUrl m_url;
     QUrl m_thumbnailImageUrl;
     QWebView *m_browser;
+    QAction *m_action;
     
-    QPixmap *m_icon;
+    QPixmap *m_pixmap;
 };
     
 }

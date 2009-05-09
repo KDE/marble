@@ -15,6 +15,7 @@
 
 #include <QtGui/QPixmap>
 
+class QAction;
 class QUrl;
 class QWebView;
 
@@ -25,6 +26,8 @@ class PhotoPluginWidget : public AbstractDataPluginWidget {
  public:
     explicit PhotoPluginWidget( QObject *parent );
     ~PhotoPluginWidget();
+    
+    QString name() const;
     
     QString widgetType() const;
     
@@ -57,16 +60,26 @@ class PhotoPluginWidget : public AbstractDataPluginWidget {
     
     void setOwner( QString owner );
     
-    bool eventFilter( QObject *, QMouseEvent * );
+    QString title() const;
+    
+    void setTitle( QString title );
+    
+    QAction *action();
+    
+ public Q_SLOTS:
+    void openBrowser();
+    
  private:
     bool m_hasCoordinates;
     QPixmap m_smallImage;
     QWebView *m_browser;
+    QAction *m_action;
     
     QString m_server;
     QString m_farm;
     QString m_secret;
     QString m_owner;
+    QString m_title;
 };
     
 }

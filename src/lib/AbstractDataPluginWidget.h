@@ -16,9 +16,10 @@
 
 #include "marble_export.h"
 
-class QMouseEvent;
+class QAction;
 class QRect;
 class QSize;
+class QPoint;
 
 namespace Marble {
     
@@ -49,7 +50,11 @@ class MARBLE_EXPORT AbstractDataPluginWidget : public QObject {
     qreal addedAngularResolution() const;
     void setAddedAngularResolution( qreal resolution );
     
-    virtual bool eventFilter( QObject *, QMouseEvent * ) = 0;
+    bool isWidgetAt( const QPoint& curpos ) const;
+    
+    virtual QAction *action() = 0;
+    
+    virtual QString name() const = 0;
     
     virtual QString widgetType() const = 0;
      

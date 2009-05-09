@@ -9,18 +9,23 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
+// Self
 #include "MarbleWidgetPopupMenu.h"
 
-#include <QtGui/QClipboard>
-#include <QtCore/QDebug>
-#include <QtGui/QMenu>
-
+// Marble
+#include "AbstractDataPluginWidget.h"
 #include "MarbleAboutDialog.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "GeoDataPlacemark.h"
 #include "PlacemarkInfoDialog.h"
 #include "Planet.h"
+
+// Qt
+#include <QtGui/QAction>
+#include <QtGui/QClipboard>
+#include <QtCore/QDebug>
+#include <QtGui/QMenu>
 
 using namespace Marble;
 
@@ -85,11 +90,18 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     QVector<QModelIndex>::const_iterator it = m_featurelist.constBegin();
     for (; it != m_featurelist.constEnd(); ++it )
     {
-        QAction  *action = new QAction( (*it).data().toString(), m_lmbMenu );
+        QAction *action = new QAction( (*it).data().toString(), m_lmbMenu );
         action->setData( actionidx );
         action->setIcon( (*it).data( Qt::DecorationRole ).value<QPixmap>() );
         m_lmbMenu->addAction( action );
         actionidx++;
+    }
+    
+    m_widgetList = m_model->whichWidgetAt( curpos );
+    QList<AbstractDataPluginWidget *>::const_iterator itW;
+    for( itW = m_widgetList.constBegin(); itW != m_widgetList.constEnd(); ++itW )
+    {
+        m_lmbMenu->addAction( (*itW)->action() );
     }
 
     // Not implemented yet ;-)

@@ -106,30 +106,8 @@ void AbstractDataPlugin::setNumberOfWidgets( quint32 number ) {
     d->m_numberOfWidgets = number;
 }
 
-bool AbstractDataPlugin::eventFilter( QObject *object, QEvent *event ) {
-    if( !( enabled() && visible() ) )
-        return false;
-    
-    if( event->type() != QEvent::MouseButtonRelease ) {
-        return false;
-    }
-    
-    QMouseEvent *mouseEvent = static_cast<QMouseEvent*>( event );
-        
-    if( !mouseEvent )
-        return false;
-    
-    if( mouseEvent->button() != Qt::LeftButton )
-        return false;
-        
-    QList<AbstractDataPluginWidget *> displayedWidgets = d->m_model->displayedWidgets();
-    
-    foreach( AbstractDataPluginWidget* widget, displayedWidgets ) {
-        if( widget->eventFilter( object, mouseEvent ) )
-            return true;
-    }
-    
-    return false;
+QList<AbstractDataPluginWidget *> AbstractDataPlugin::whichWidgetAt( const QPoint& curpos ) {
+    return d->m_model->whichWidgetAt( curpos );
 }
 
 } // namespace Marble

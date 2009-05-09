@@ -170,6 +170,17 @@ QList<AbstractDataPluginWidget*> AbstractDataPluginModel::displayedWidgets() {
     return d->m_displayedWidgets;
 }
 
+QList<AbstractDataPluginWidget *> AbstractDataPluginModel::whichWidgetAt( const QPoint& curpos ) {
+    QList<AbstractDataPluginWidget *> widgetsAt;
+    
+    foreach( AbstractDataPluginWidget* widget, d->m_displayedWidgets ) {
+        if( widget && widget->isWidgetAt( curpos ) )
+            widgetsAt.append( widget );
+    }
+    
+    return widgetsAt;
+}
+
 void AbstractDataPluginModel::downloadWidgetData( QUrl url,
                                                   QString type,
                                                   AbstractDataPluginWidget *widget )

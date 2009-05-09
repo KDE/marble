@@ -20,15 +20,20 @@
 // Local dir
 #include "marble_export.h"
 
+class QPoint;
+
 namespace Marble
 {
 
+class AbstractDataPlugin;
+class AbstractDataPluginWidget;
 class LayerManagerPrivate;
 class GeoPainter;
 class GeoSceneDocument;
 class ViewParams;
 class RenderPlugin;
 class AbstractFloatItem;
+class AbstractDataPlugin;
 class MarbleDataFacade;
 
 /**
@@ -56,6 +61,16 @@ class MARBLE_EXPORT LayerManager : public QObject
      * @return the list of the floatItems
      */
     QList<AbstractFloatItem *> floatItems()    const;
+    /**
+     * @brief Returns a list of all DataPlugins on the layer
+     * @return the list of DataPlugins
+     */
+    QList<AbstractDataPlugin *> dataPlugins()  const;
+    
+    /**
+     * @brief Returns all widgets of dataPlugins on the position curpos 
+     */
+    QList<AbstractDataPluginWidget *> whichWidgetAt( const QPoint& curpos ) const;
 
  Q_SIGNALS:
     /**

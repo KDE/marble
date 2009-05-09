@@ -24,6 +24,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QUrl>
 #include <QtCore/QString>
+#include <QtGui/QIcon>
 #include <QtGui/QImage>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
@@ -34,17 +35,28 @@ using namespace Marble;
 // The Wikipedia icon is not a square
 const int wikipediaIconWidth = 47;
 const int wikipediaIconHeight = 40;
+const int wikipediaSmallIconSize = 16;
 
 WikipediaModel::WikipediaModel( QObject *parent )
     : AbstractDataPluginModel( "wikipedia", parent ) 
 {
     // Rendering of the wikipedia icon from svg
     QSvgRenderer svgObj( MarbleDirs::path( "svg/wikipedia.svg" ), this );
-    QImage wikipediaImage( wikipediaIconWidth, wikipediaIconHeight, QImage::Format_ARGB32 );
+    QImage wikipediaImage( wikipediaIconWidth,
+                           wikipediaIconHeight,
+                           QImage::Format_ARGB32 );
     wikipediaImage.fill( QColor( 0, 0, 0, 0 ).rgba() );
     QPainter painter( &wikipediaImage );
     svgObj.render( &painter );
     m_wikipediaPixmap = new QPixmap( QPixmap::fromImage( wikipediaImage ) );
+    
+    QImage wikipediaSmallImage( wikipediaSmallIconSize,
+                                wikipediaSmallIconSize,
+                                QImage::Format_ARGB32 );
+    wikipediaSmallImage.fill( QColor( 0, 0, 0, 0 ).rgba() );
+    QPainter smallPainter( &wikipediaSmallImage );
+    svgObj.render( &smallPainter );
+    m_wikipediaIcon = new QIcon( QPixmap::fromImage( wikipediaSmallImage ) );
 }
 
 WikipediaModel::~WikipediaModel() {
@@ -82,7 +94,8 @@ void WikipediaModel::parseFile( QByteArray file ) {
             continue;
         }
         
-        (*it)->setIcon( m_wikipediaPixmap );
+        (*it)->setPixmap( m_wikipediaPixmap );
+        (*it)->setIcon( m_wikipediaIcon );
         addWidgetToList( (*it) );
     }
 }

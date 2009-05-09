@@ -17,6 +17,7 @@
 #include "ViewportParams.h"
 
 // Qt
+#include <QtGui/QAction>
 #include <QtCore/QDebug>
 #include <QtCore/QRect>
 #include <QtCore/QSize>
@@ -67,6 +68,13 @@ qreal AbstractDataPluginWidget::addedAngularResolution() const {
 
 void AbstractDataPluginWidget::setAddedAngularResolution( qreal resolution ) {
     d->m_addedAngularResolution = resolution;
+}
+
+bool AbstractDataPluginWidget::isWidgetAt( const QPoint& curpos ) const {
+    if( d->m_paintPosition.contains( curpos ) ) {
+        return true;
+    }
+    return false;
 }
 
 void AbstractDataPluginWidget::updatePaintPosition( ViewportParams *viewport,

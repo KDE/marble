@@ -851,6 +851,16 @@ QList<AbstractFloatItem *> MarbleModel::floatItems() const
     return d->m_layerManager->floatItems();
 }
 
+QList<AbstractDataPlugin *> MarbleModel::dataPlugins()  const
+{
+    return d->m_layerManager->dataPlugins();
+}
+
+QList<AbstractDataPluginWidget *> MarbleModel::whichWidgetAt( const QPoint& curpos ) const
+{
+    return d->m_layerManager->whichWidgetAt( curpos );
+}
+
 Planet* MarbleModel::planet() const
 {
     return d->m_planet;

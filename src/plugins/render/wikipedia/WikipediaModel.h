@@ -13,6 +13,7 @@
 
 #include "AbstractDataPluginModel.h"
 
+class QIcon;
 class QPixmap;
 
 namespace Marble {
@@ -43,6 +44,7 @@ class WikipediaModel : public AbstractDataPluginModel
     
  private:
     QPixmap *m_wikipediaPixmap;
+    QIcon *m_wikipediaIcon;
 };
 
 }

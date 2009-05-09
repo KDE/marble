@@ -45,6 +45,8 @@ class QRect;
 namespace Marble
 {
 
+class AbstractDataPlugin;
+class AbstractDataPluginWidget;
 class AbstractScanlineTextureMapper;
 class GeoPainter;
 class FileViewModel;
@@ -270,6 +272,16 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @return the list of the floatItems
      */
     QList<AbstractFloatItem *> floatItems()    const;
+    /**
+     * @brief Returns a list of all DataPlugins on the layer
+     * @return the list of DataPlugins
+     */
+    QList<AbstractDataPlugin *> dataPlugins()  const;
+    
+    /**
+     * @brief Returns all widgets of dataPlugins on the position curpos 
+     */
+    QList<AbstractDataPluginWidget *> whichWidgetAt( const QPoint& curpos ) const;
 
     /**
      * @brief Returns the planet object for the current map.

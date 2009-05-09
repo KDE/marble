@@ -18,6 +18,8 @@
 #include <QtGui/QAction>
 
 // Local dir
+#include "AbstractDataPlugin.h"
+#include "AbstractDataPluginWidget.h"
 #include "AbstractFloatItem.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
@@ -44,6 +46,7 @@ class LayerManagerPrivate
     MarbleDataFacade *m_dataFacade;
     QList<RenderPlugin *> m_renderPlugins;
     QList<AbstractFloatItem *> m_floatItems;
+    QList<AbstractDataPlugin *> m_dataPlugins;
 };
 
 
@@ -54,12 +57,17 @@ LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
     PluginManager pm;
     d->m_renderPlugins = pm.createRenderPlugins();
 
-    // get float items
+    // get float items and data plugins
     foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
         AbstractFloatItem * const floatItem =
             qobject_cast<AbstractFloatItem *>( renderPlugin );
         if ( floatItem )
             d->m_floatItems.append( floatItem );
+        
+        AbstractDataPlugin * const dataPlugin = 
+            qobject_cast<AbstractDataPlugin *>( renderPlugin );
+        if( dataPlugin )
+            d->m_dataPlugins.append( dataPlugin );
     }
 
     // Just for initial testing
@@ -85,6 +93,20 @@ QList<RenderPlugin *> LayerManager::renderPlugins() const
 QList<AbstractFloatItem *> LayerManager::floatItems() const
 {
     return d->m_floatItems;
+}
+
+QList<AbstractDataPlugin *> LayerManager::dataPlugins() const
+{
+    return d->m_dataPlugins;
+}
+
+QList<AbstractDataPluginWidget *> LayerManager::whichWidgetAt( const QPoint& curpos ) const {
+    QList<AbstractDataPluginWidget *> widgetList;
+    
+    foreach( AbstractDataPlugin *plugin, d->m_dataPlugins ) {
+        widgetList.append( plugin->whichWidgetAt( curpos ) );
+    }
+    return widgetList;
 }
 
 void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )

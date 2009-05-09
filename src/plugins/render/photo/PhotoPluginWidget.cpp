@@ -23,6 +23,7 @@
 #include "ViewportParams.h"
 
 // Qt
+#include <QtGui/QAction>
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QUrl>
@@ -36,10 +37,16 @@ PhotoPluginWidget::PhotoPluginWidget( QObject *parent )
       m_hasCoordinates( false ),
       m_browser( 0 )
 {
+    m_action = new QAction( this );
+    connect( m_action, SIGNAL( triggered() ), this, SLOT( openBrowser() ) );
 }
 
 PhotoPluginWidget::~PhotoPluginWidget() {
     delete m_browser;
+}
+
+QString PhotoPluginWidget::name() const {
+    return title();
 }
 
 QString PhotoPluginWidget::widgetType() const {
@@ -131,21 +138,29 @@ void PhotoPluginWidget::setOwner( QString owner ) {
     m_owner = owner;
 }
 
-bool PhotoPluginWidget::eventFilter( QObject *object, QMouseEvent *event ) {
-    if( paintPosition().contains( event->pos() ) ) {
-        if( m_browser ) {
-            delete m_browser;
-        }
-        m_browser = new QWebView();
-        QString url = "http://www.flickr.com/photos/%1/%2/";
-        m_browser->load( QUrl( url.arg( owner() ).arg( id() ) ) );
-        m_browser->show();
-        connect( m_browser, SIGNAL( titleChanged(QString) ),
-                 m_browser, SLOT( setWindowTitle(QString) ) );
-        return true;
+QString PhotoPluginWidget::title() const {
+    return m_title;
+}
+
+void PhotoPluginWidget::setTitle( QString title ) {
+    m_title = title;
+    m_action->setText( title );
+}
+
+QAction *PhotoPluginWidget::action() {
+    return m_action;
+}
+
+void PhotoPluginWidget::openBrowser( ) {
+    if( m_browser ) {
+        delete m_browser;
     }
-    
-    return false;
+    m_browser = new QWebView();
+    QString url = "http://www.flickr.com/photos/%1/%2/";
+    m_browser->load( QUrl( url.arg( owner() ).arg( id() ) ) );
+    m_browser->show();
+    connect( m_browser, SIGNAL( titleChanged(QString) ),
+             m_browser, SLOT( setWindowTitle(QString) ) );
 }
 
 #include "PhotoPluginWidget.moc"

@@ -12,7 +12,9 @@
 #include "WikipediaWidget.h"
 
 // Qt
+#include <QtGui/QAction>
 #include <QtCore/QDebug>
+#include <QtGui/QIcon>
 #include <QtGui/QPixmap>
 #include <QtGui/QMouseEvent>
 #include <QtWebKit/QWebView>
@@ -28,10 +30,16 @@ WikipediaWidget::WikipediaWidget( QObject *parent )
     : AbstractDataPluginWidget( parent ),
       m_browser( 0 )
 {
+    m_action = new QAction( this );
+    connect( m_action, SIGNAL( triggered() ), this, SLOT( openBrowser() ) );
 }
 
 WikipediaWidget::~WikipediaWidget() {
     delete m_browser;
+}
+
+QString WikipediaWidget::name() const {
+    return id();
 }
 
 QString WikipediaWidget::widgetType() const {
@@ -53,9 +61,9 @@ bool WikipediaWidget::operator<( const AbstractDataPluginWidget *other ) const {
 bool WikipediaWidget::render( GeoPainter *painter, ViewportParams *viewport,
                               const QString& renderPos, GeoSceneLayer * layer )
 {
-    painter->drawPixmap( coordinates(), *m_icon );
+    painter->drawPixmap( coordinates(), *m_pixmap );
     
-    updatePaintPosition( viewport, m_icon->size() );
+    updatePaintPosition( viewport, m_pixmap->size() );
     
     return true;
 }
@@ -96,22 +104,26 @@ void WikipediaWidget::setThumbnailImageUrl( QUrl thumbnailImageUrl ) {
     m_thumbnailImageUrl = thumbnailImageUrl;
 }
 
-bool WikipediaWidget::eventFilter( QObject *object, QMouseEvent *event ) {
-    if( paintPosition().contains( event->pos() ) ) {
-        if( m_browser ) {
-            delete m_browser;
-        }
-        m_browser = new QWebView();
-        m_browser->load( url() );
-        m_browser->show();
-        connect( m_browser, SIGNAL( titleChanged(QString) ),
-                 m_browser, SLOT( setWindowTitle(QString) ) );
-        return true;
-    }
-    
-    return false;
+QAction *WikipediaWidget::action() {
+    m_action->setText( id() );
+    return m_action;
 }
 
-void WikipediaWidget::setIcon( QPixmap *icon ) {
-    m_icon = icon;
+void WikipediaWidget::openBrowser( ) {
+    if( m_browser ) {
+        delete m_browser;
+    }
+    m_browser = new QWebView();
+    m_browser->load( url() );
+    m_browser->show();
+    connect( m_browser, SIGNAL( titleChanged(QString) ),
+             m_browser, SLOT( setWindowTitle(QString) ) );
+}
+
+void WikipediaWidget::setPixmap( QPixmap *pixmap ) {
+    m_pixmap = pixmap;
+}
+    
+void WikipediaWidget::setIcon( QIcon *icon ) {
+    m_action->setIcon( *icon );
 }

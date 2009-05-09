@@ -18,6 +18,7 @@
 
 #include "marble_export.h"
 
+class QPoint;
 class QTimer;
 class QUrl;
 
@@ -50,6 +51,8 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * Returns all widgets which were returned by widgets() again.
      */
     QList<AbstractDataPluginWidget*> displayedWidgets();
+    
+    QList<AbstractDataPluginWidget *> whichWidgetAt( const QPoint& curpos );
        
  protected:
     /**
