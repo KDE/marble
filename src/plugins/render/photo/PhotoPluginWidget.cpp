@@ -14,6 +14,7 @@
 
 // Plugin
 #include "CoordinatesParser.h"
+#include "PhotoPluginModel.h"
 
 // Marble
 #include "AbstractDataPluginWidget.h"
@@ -26,6 +27,7 @@
 #include <QtGui/QAction>
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
+#include <QtCore/QHash>
 #include <QtCore/QUrl>
 #include <QtGui/QMouseEvent>
 #include <QtWebKit/QWebView>
@@ -97,13 +99,12 @@ QUrl PhotoPluginWidget::photoUrl() const {
     return QUrl( url.arg( farm() ).arg( server() ).arg( id() ).arg( secret() ) );
 }
 
-QUrl PhotoPluginWidget::infoUrl( QString apiKey ) const {
-    QString url = "http://www.flickr.com/services/rest/?method=flickr.photos.geo.getLocation";
-    url +=        "&photo_id=";
-    url +=        id();
-    url +=        "&api_key=" + apiKey;
+QUrl PhotoPluginWidget::infoUrl() const {
+    QHash<QString,QString> options;
     
-    return QUrl( url );
+    options.insert( "photo_id", id() );
+    
+    return PhotoPluginModel::generateUrl( "flickr", "flickr.photos.geo.getLocation", options );
 }
 
 QString PhotoPluginWidget::server() const {

@@ -22,14 +22,45 @@
 
 // Qt
 #include <QtCore/QDebug>
+#include <QtCore/QHash>
 #include <QtCore/QString>
 #include <QtCore/QUrl>
 
 using namespace Marble;
 
+const QString flickrApiKey( "620131a1b82b000c9582b94effcdc636" );
+
 PhotoPluginModel::PhotoPluginModel( QObject *parent )
     : AbstractDataPluginModel( "photo", parent ) 
 {
+}
+
+QUrl PhotoPluginModel::generateUrl( QString service,
+                                    QString method,
+                                    QHash<QString,QString> options )
+{
+    QString url( "" );
+    
+    if( service == "flickr" )
+        url += "http://www.flickr.com/services/rest/";
+    else
+        return QUrl();
+    
+    url += "?method=";
+    url += method;
+    url += "&format=rest";
+    url += "&api_key=";
+    url += flickrApiKey;
+    
+    QHash<QString,QString>::iterator it;
+    for( it = options.begin(); it != options.end(); ++it ) {
+        url += '&';
+        url += it.key();
+        url += '=';
+        url += it.value();
+    }
+    
+    return QUrl( url );
 }
 
 QUrl PhotoPluginModel::descriptionFileUrl( GeoDataLatLonAltBox *box,
@@ -41,17 +72,17 @@ QUrl PhotoPluginModel::descriptionFileUrl( GeoDataLatLonAltBox *box,
         return QUrl();
     }
     
-    QString flickrUrl( "http://www.flickr.com/services/rest/" );
-    flickrUrl += "?method=flickr.photos.search";
-    flickrUrl += "&format=rest";
-    flickrUrl += "&api_key=620131a1b82b000c9582b94effcdc636";
-    flickrUrl += "&per_page=" + QString::number( number );
-    flickrUrl += "&bbox=" + QString::number( box->west()  * RAD2DEG ) + ',';
-    flickrUrl += QString::number( box->south()  * RAD2DEG ) + ',';
-    flickrUrl += QString::number( box->east() * RAD2DEG ) + ',';
-    flickrUrl += QString::number( box->north() * RAD2DEG );
+    QString bbox( "" );
+    bbox += QString::number( box->west()  * RAD2DEG ) + ',';
+    bbox += QString::number( box->south()  * RAD2DEG ) + ',';
+    bbox += QString::number( box->east() * RAD2DEG ) + ',';
+    bbox += QString::number( box->north() * RAD2DEG );
     
-    return QUrl( flickrUrl );
+    QHash<QString,QString> options;
+    options.insert( "per_page", QString::number( number ) );
+    options.insert( "bbox",     bbox );
+    
+    return generateUrl( "flickr", "flickr.photos.search", options );
 }
 
 void PhotoPluginModel::parseFile( QByteArray file ) {
@@ -71,9 +102,7 @@ void PhotoPluginModel::parseFile( QByteArray file ) {
         // Currently all Flickr images with geotags are on earth
         (*it)->setTarget( "earth" );
         downloadWidgetData( ((PhotoPluginWidget*) (*it))->photoUrl(), "thumbnail", (*it) );
-        downloadWidgetData( ((PhotoPluginWidget*) (*it))->infoUrl( "620131a1b82b000c9582b94effcdc636" ),
-                            "info",
-                            (*it) );
+        downloadWidgetData( ((PhotoPluginWidget*) (*it))->infoUrl(),  "info",      (*it) );
     }
 }
 

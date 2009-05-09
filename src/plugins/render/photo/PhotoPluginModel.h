@@ -25,6 +25,8 @@ class PhotoPluginModel : public AbstractDataPluginModel
     
  public:
     PhotoPluginModel( QObject *parent = 0 );
+    
+    static QUrl generateUrl( QString service, QString method, QHash<QString,QString> options );
  
  protected:
     /**

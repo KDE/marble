@@ -42,7 +42,7 @@ class PhotoPluginWidget : public AbstractDataPluginWidget {
     
     QUrl photoUrl() const;
     
-    QUrl infoUrl( QString apiKey ) const;
+    QUrl infoUrl() const;
     
     QString server() const;
     
