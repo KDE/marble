@@ -47,6 +47,7 @@ class MarblePart: public KParts::ReadOnlyPart
 
     static KAboutData* createAboutData();
     void  createInfoBoxesMenu();
+    void createOnlineServicesMenu();
 
   public Q_SLOTS:
     bool  openUrl( const KUrl &url );

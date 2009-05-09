@@ -64,6 +64,7 @@
 #include "settings.h"
 
 #include "AbstractFloatItem.h"
+#include "AbstractDataPlugin.h"
 #include "HttpDownloadManager.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
@@ -668,6 +669,26 @@ void MarblePart::createInfoBoxesMenu()
 
     unplugActionList( "infobox_actionlist" );
     plugActionList( "infobox_actionlist", actionList );
+}
+
+void MarblePart::createOnlineServicesMenu() {
+    QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
+    
+    QList<QAction*> actionList;
+    
+    QList<RenderPlugin *>::const_iterator i;
+    
+    for( i = renderPluginList.constBegin(); i != renderPluginList.constEnd(); ++i ) {
+        // FIXME: This will go into the layer manager when AbstractDataPlugin is an interface
+        AbstractDataPlugin *dataPlugin = qobject_cast<AbstractDataPlugin *>(*i);
+        
+        if( dataPlugin ) {
+            actionList.append( (*i)->action() );
+        }
+    }
+    
+    unplugActionList( "onlineservices_actionlist" );
+    plugActionList( "onlineservices_actionlist", actionList );
 }
 
 
