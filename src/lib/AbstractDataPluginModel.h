@@ -115,7 +115,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     bool fileExists( QString id, QString type );
     
     /**
-     * Testing the existance of the widget @p id in the list
+     * Testing the existence of the widget @p id in the list
      */
     bool widgetExists( QString id );
     

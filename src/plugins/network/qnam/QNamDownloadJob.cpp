@@ -66,7 +66,7 @@ void QNamDownloadJob::finished()
             emit redirected( this, redirectionAttribute.toUrl() );
         }
         else {
-            // no redirection occured
+            // no redirection occurred
             const QByteArray data = m_networkReply->readAll();
             emit dataReceived( this, data );
         }
