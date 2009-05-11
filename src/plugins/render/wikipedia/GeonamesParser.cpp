@@ -167,7 +167,7 @@ void GeonamesParser::readUrl( WikipediaWidget *widget ) {
             break;
         
         if( isCharacters() ) {
-            widget->setUrl( QUrl( text().toString() ) );
+            widget->setUrl( QUrl::fromEncoded( text().toString().toUtf8() ) );
         }
     }
 }
