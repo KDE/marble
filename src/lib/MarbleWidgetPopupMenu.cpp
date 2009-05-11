@@ -13,7 +13,7 @@
 #include "MarbleWidgetPopupMenu.h"
 
 // Marble
-#include "AbstractDataPluginWidget.h"
+#include "AbstractDataPluginItem.h"
 #include "MarbleAboutDialog.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
@@ -97,9 +97,9 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
         actionidx++;
     }
     
-    m_widgetList = m_model->whichWidgetAt( curpos );
-    QList<AbstractDataPluginWidget *>::const_iterator itW;
-    for( itW = m_widgetList.constBegin(); itW != m_widgetList.constEnd(); ++itW )
+    m_itemList = m_model->whichItemAt( curpos );
+    QList<AbstractDataPluginItem *>::const_iterator itW;
+    for( itW = m_itemList.constBegin(); itW != m_itemList.constEnd(); ++itW )
     {
         m_lmbMenu->addAction( (*itW)->action() );
     }

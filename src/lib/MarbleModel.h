@@ -46,7 +46,7 @@ namespace Marble
 {
 
 class AbstractDataPlugin;
-class AbstractDataPluginWidget;
+class AbstractDataPluginItem;
 class AbstractScanlineTextureMapper;
 class GeoPainter;
 class FileViewModel;
@@ -281,7 +281,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     /**
      * @brief Returns all widgets of dataPlugins on the position curpos 
      */
-    QList<AbstractDataPluginWidget *> whichWidgetAt( const QPoint& curpos ) const;
+    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
 
     /**
      * @brief Returns the planet object for the current map.

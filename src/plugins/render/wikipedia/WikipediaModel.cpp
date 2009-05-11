@@ -19,7 +19,7 @@
 #include "global.h"
 #include "MarbleDataFacade.h"
 #include "MarbleDirs.h"
-#include "WikipediaWidget.h"
+#include "WikipediaItem.h"
 
 // Qt
 #include <QtCore/QDebug>
@@ -89,15 +89,15 @@ QUrl WikipediaModel::descriptionFileUrl( GeoDataLatLonAltBox *box,
 }
 
 void WikipediaModel::parseFile( QByteArray file ) {
-    QList<WikipediaWidget*> list;
+    QList<WikipediaItem*> list;
     GeonamesParser parser( &list, this );
     
     parser.read( file );
     
-    QList<WikipediaWidget*>::iterator it;
+    QList<WikipediaItem*>::iterator it;
     
     for( it = list.begin(); it != list.end(); ++it ) {
-        if( widgetExists( (*it)->id() ) ) {
+        if( itemExists( (*it)->id() ) ) {
             delete (*it);
             continue;
         }
@@ -106,7 +106,7 @@ void WikipediaModel::parseFile( QByteArray file ) {
         (*it)->setIcon( m_wikipediaIcon );
         // Currently all wikipedia articles with geotags are on earth
         (*it)->setTarget( "earth" );
-        addWidgetToList( (*it) );
+        addItemToList( (*it) );
     }
 }
 

@@ -9,7 +9,7 @@ INCLUDE(${QT_USE_FILE})
 
 set( photo_SRCS PhotoPlugin.cpp
                 PhotoPluginModel.cpp
-                PhotoPluginWidget.cpp
+                PhotoPluginItem.cpp
                 FlickrParser.cpp
                 CoordinatesParser.cpp )
 

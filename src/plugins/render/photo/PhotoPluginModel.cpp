@@ -13,10 +13,10 @@
 
 // Photo Plugin
 #include "FlickrParser.h"
-#include "PhotoPluginWidget.h"
+#include "PhotoPluginItem.h"
 
 // Marble
-#include "AbstractDataPluginWidget.h"
+#include "AbstractDataPluginItem.h"
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleDataFacade.h"
 
@@ -86,23 +86,23 @@ QUrl PhotoPluginModel::descriptionFileUrl( GeoDataLatLonAltBox *box,
 }
 
 void PhotoPluginModel::parseFile( QByteArray file ) {
-    QList<AbstractDataPluginWidget*> list;
+    QList<AbstractDataPluginItem*> list;
     FlickrParser parser( &list, this );
     
     parser.read( file );
     
-    QList<AbstractDataPluginWidget*>::iterator it;
+    QList<AbstractDataPluginItem*>::iterator it;
     
     for( it = list.begin(); it != list.end(); ++it ) {
-        if( widgetExists( (*it)->id() ) ) {
+        if( itemExists( (*it)->id() ) ) {
             delete (*it);
             continue;
         }
         
         // Currently all Flickr images with geotags are on earth
         (*it)->setTarget( "earth" );
-        downloadWidgetData( ((PhotoPluginWidget*) (*it))->photoUrl(), "thumbnail", (*it) );
-        downloadWidgetData( ((PhotoPluginWidget*) (*it))->infoUrl(),  "info",      (*it) );
+        downloadItemData( ((PhotoPluginItem*) (*it))->photoUrl(), "thumbnail", (*it) );
+        downloadItemData( ((PhotoPluginItem*) (*it))->infoUrl(),  "info",      (*it) );
     }
 }
 

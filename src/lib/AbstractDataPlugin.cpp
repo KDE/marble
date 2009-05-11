@@ -13,7 +13,7 @@
 
 // Marble
 #include "AbstractDataPluginModel.h"
-#include "AbstractDataPluginWidget.h"
+#include "AbstractDataPluginItem.h"
 #include "GeoPainter.h"
 #include "GeoSceneLayer.h"
 #include "ViewportParams.h"
@@ -29,13 +29,13 @@ class AbstractDataPluginPrivate
 {
  public:
     AbstractDataPluginPrivate()
-        : m_numberOfWidgets( 10 )
+        : m_numberOfItems( 10 )
     {
     }
     
     AbstractDataPluginModel *m_model;
     QString m_name;
-    quint32 m_numberOfWidgets;
+    quint32 m_numberOfItems;
 };
 
 AbstractDataPlugin::AbstractDataPlugin()
@@ -67,14 +67,14 @@ bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         return true;
     }
 
-    QList<AbstractDataPluginWidget*> widgets = d->m_model->widgets( viewport,
+    QList<AbstractDataPluginItem*> items = d->m_model->items( viewport,
                                                                     dataFacade(),
-                                                                    numberOfWidgets() );
+                                                                    numberOfItems() );
     painter->save();
     
-    // Paint the most important widget at last
-    for( int i = widgets.size() - 1; i >= 0; --i ) {
-        widgets.at( i )->render( painter, viewport, renderPos, layer );
+    // Paint the most important item at last
+    for( int i = items.size() - 1; i >= 0; --i ) {
+        items.at( i )->paint( painter, viewport, renderPos, layer );
     }
     
     painter->restore();
@@ -99,16 +99,16 @@ void AbstractDataPlugin::setNameId( QString name ) {
 }
 
 
-quint32 AbstractDataPlugin::numberOfWidgets() const {
-    return d->m_numberOfWidgets;
+quint32 AbstractDataPlugin::numberOfItems() const {
+    return d->m_numberOfItems;
 }
     
-void AbstractDataPlugin::setNumberOfWidgets( quint32 number ) {
-    d->m_numberOfWidgets = number;
+void AbstractDataPlugin::setNumberOfItems( quint32 number ) {
+    d->m_numberOfItems = number;
 }
 
-QList<AbstractDataPluginWidget *> AbstractDataPlugin::whichWidgetAt( const QPoint& curpos ) {
-    return d->m_model->whichWidgetAt( curpos );
+QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt( const QPoint& curpos ) {
+    return d->m_model->whichItemAt( curpos );
 }
 
 } // namespace Marble

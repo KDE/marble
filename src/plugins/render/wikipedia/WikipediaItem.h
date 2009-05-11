@@ -8,10 +8,10 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef WIKIPEDIAWIDGET_H
-#define WIKIPEDIAWIDGET_H
+#ifndef WIKIPEDIAITEM_H
+#define WIKIPEDIAITEM_H
 
-#include "AbstractDataPluginWidget.h"
+#include "AbstractDataPluginItem.h"
 
 #include <QtCore/QUrl>
 
@@ -22,26 +22,26 @@ class QWebView;
 
 namespace Marble {
  
-class WikipediaWidget : public AbstractDataPluginWidget {
+class WikipediaItem : public AbstractDataPluginItem {
     Q_OBJECT
     
  public:
-    WikipediaWidget( QObject *parent );
+    WikipediaItem( QObject *parent );
     
-    ~WikipediaWidget();
+    ~WikipediaItem();
     
     QString name() const;
     
-    QString widgetType() const;
+    QString itemType() const;
      
     bool initialized();
     
     void addDownloadedFile( QString url, QString type );
     
-    bool render( GeoPainter *painter, ViewportParams *viewport,
+    bool paint( GeoPainter *painter, ViewportParams *viewport,
                  const QString& renderPos, GeoSceneLayer * layer = 0 );
                  
-    bool operator<( const AbstractDataPluginWidget *other ) const;
+    bool operator<( const AbstractDataPluginItem *other ) const;
     
     qreal longitude();
     
@@ -79,4 +79,4 @@ class WikipediaWidget : public AbstractDataPluginWidget {
     
 }
 
-#endif // WIKIPEDIAWIDGET_H
+#endif // WIKIPEDIAITEM_H

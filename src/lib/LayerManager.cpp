@@ -19,7 +19,7 @@
 
 // Local dir
 #include "AbstractDataPlugin.h"
-#include "AbstractDataPluginWidget.h"
+#include "AbstractDataPluginItem.h"
 #include "AbstractFloatItem.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
@@ -100,13 +100,13 @@ QList<AbstractDataPlugin *> LayerManager::dataPlugins() const
     return d->m_dataPlugins;
 }
 
-QList<AbstractDataPluginWidget *> LayerManager::whichWidgetAt( const QPoint& curpos ) const {
-    QList<AbstractDataPluginWidget *> widgetList;
+QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos ) const {
+    QList<AbstractDataPluginItem *> itemList;
     
     foreach( AbstractDataPlugin *plugin, d->m_dataPlugins ) {
-        widgetList.append( plugin->whichWidgetAt( curpos ) );
+        itemList.append( plugin->whichItemAt( curpos ) );
     }
-    return widgetList;
+    return itemList;
 }
 
 void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )

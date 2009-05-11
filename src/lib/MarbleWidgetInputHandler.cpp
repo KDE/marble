@@ -399,7 +399,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
         QPoint mousePosition( event->x(), event->y() );
         if ( ( m_widget->model()->whichFeatureAt( mousePosition ).size() == 0 )
-             && ( m_widget->model()->whichWidgetAt( mousePosition ).size() == 0 ) )
+             && ( m_widget->model()->whichItemAt( mousePosition ).size() == 0 ) )
         {
             if ( !m_leftpressed )
                 arrowcur [1][1] = QCursor(Qt::OpenHandCursor);

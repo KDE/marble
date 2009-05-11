@@ -22,7 +22,7 @@ namespace Marble {
 class Geopainter;
 class ViewportParams;
 class GeoSceneLayer;
-class AbstractDataPluginWidget;
+class AbstractDataPluginItem;
 class AbstractDataPluginModel;
 class AbstractDataPluginPrivate;
 
@@ -67,11 +67,11 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin {
     
     QString nameId() const;
     
-    quint32 numberOfWidgets() const;
+    quint32 numberOfItems() const;
     
-    void setNumberOfWidgets( quint32 number );
+    void setNumberOfItems( quint32 number );
     
-    QList<AbstractDataPluginWidget *> whichWidgetAt( const QPoint& curpos );
+    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos );
     
  private:
     AbstractDataPluginPrivate * const d;

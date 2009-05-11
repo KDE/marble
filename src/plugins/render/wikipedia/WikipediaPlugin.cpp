@@ -25,7 +25,7 @@ WikipediaPlugin::WikipediaPlugin()
      
 void WikipediaPlugin::initialize() {
     setModel( new WikipediaModel( this ) );
-    setNumberOfWidgets( numberOfArticlesPerFetch );
+    setNumberOfItems( numberOfArticlesPerFetch );
 }
 
 QString WikipediaPlugin::name() const {

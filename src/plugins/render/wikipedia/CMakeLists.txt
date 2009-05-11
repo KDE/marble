@@ -9,7 +9,7 @@ INCLUDE(${QT_USE_FILE})
 
 set( wikipedia_SRCS WikipediaPlugin.cpp
                     WikipediaModel.cpp
-                    WikipediaWidget.cpp
+                    WikipediaItem.cpp
                     GeonamesParser.cpp )
 
 marble_add_plugin( Wikipedia ${wikipedia_SRCS} )

@@ -13,7 +13,7 @@
 
 // Marble
 #include "global.h"
-#include "WikipediaWidget.h"
+#include "WikipediaItem.h"
 
 // Qt
 #include <QtCore/QByteArray>
@@ -21,7 +21,7 @@
 
 using namespace Marble;
 
-GeonamesParser::GeonamesParser( QList<WikipediaWidget *> *list,
+GeonamesParser::GeonamesParser( QList<WikipediaItem *> *list,
                                 QObject *parent )
     : m_list( list ),
       m_parent( parent )
@@ -82,8 +82,8 @@ void GeonamesParser::readEntry() {
     Q_ASSERT( isStartElement()
               && name() == "entry" );
               
-    WikipediaWidget *widget = new WikipediaWidget( m_parent );
-    m_list->append( widget );
+    WikipediaItem *item = new WikipediaItem( m_parent );
+    m_list->append( item );
     
     while( !atEnd() ) {
         readNext();
@@ -93,22 +93,22 @@ void GeonamesParser::readEntry() {
             
         if( isStartElement() ) {
             if( name() == "title" )
-                readTitle( widget );
+                readTitle( item );
             else if( name() == "lng" )
-                readLongitude( widget );
+                readLongitude( item );
             else if( name() == "lat" )
-                readLatitude( widget );
+                readLatitude( item );
             else if( name() == "wikipediaUrl" )
-                readUrl( widget );
+                readUrl( item );
             else if( name() == "thumbnailImg" )
-                readThumbnailImage( widget );
+                readThumbnailImage( item );
             else
                 readUnknownElement();
         }
     }
 }
 
-void GeonamesParser::readTitle( WikipediaWidget *widget ) {
+void GeonamesParser::readTitle( WikipediaItem *item ) {
     Q_ASSERT( isStartElement()
               && name() == "title" );
               
@@ -119,12 +119,12 @@ void GeonamesParser::readTitle( WikipediaWidget *widget ) {
             break;
         
         if( isCharacters() ) {
-            widget->setId( text().toString() );
+            item->setId( text().toString() );
         }
     }
 }
 
-void GeonamesParser::readLongitude( WikipediaWidget *widget ) {
+void GeonamesParser::readLongitude( WikipediaItem *item ) {
     Q_ASSERT( isStartElement()
               && name() == "lng" );
               
@@ -135,12 +135,12 @@ void GeonamesParser::readLongitude( WikipediaWidget *widget ) {
             break;
         
         if( isCharacters() ) {
-            widget->setLongitude( text().toString().toDouble() * DEG2RAD );
+            item->setLongitude( text().toString().toDouble() * DEG2RAD );
         }
     }
 }
 
-void GeonamesParser::readLatitude( WikipediaWidget *widget ) {
+void GeonamesParser::readLatitude( WikipediaItem *item ) {
     Q_ASSERT( isStartElement()
               && name() == "lat" );
               
@@ -151,12 +151,12 @@ void GeonamesParser::readLatitude( WikipediaWidget *widget ) {
             break;
         
         if( isCharacters() ) {
-            widget->setLatitude( text().toString().toDouble() * DEG2RAD );
+            item->setLatitude( text().toString().toDouble() * DEG2RAD );
         }
     }
 }
 
-void GeonamesParser::readUrl( WikipediaWidget *widget ) {
+void GeonamesParser::readUrl( WikipediaItem *item ) {
     Q_ASSERT( isStartElement()
               && name() == "wikipediaUrl" );
               
@@ -167,12 +167,12 @@ void GeonamesParser::readUrl( WikipediaWidget *widget ) {
             break;
         
         if( isCharacters() ) {
-            widget->setUrl( QUrl::fromEncoded( text().toString().toUtf8() ) );
+            item->setUrl( QUrl::fromEncoded( text().toString().toUtf8() ) );
         }
     }
 }
 
-void GeonamesParser::readThumbnailImage( WikipediaWidget *widget ) {
+void GeonamesParser::readThumbnailImage( WikipediaItem *item ) {
     Q_ASSERT( isStartElement()
               && name() == "thumbnailImg" );
              
@@ -183,7 +183,7 @@ void GeonamesParser::readThumbnailImage( WikipediaWidget *widget ) {
             break;
         
         if( isCharacters() ) {
-            widget->setThumbnailImageUrl( QUrl( text().toString() ) );
+            item->setThumbnailImageUrl( QUrl( text().toString() ) );
         }
     }
 }

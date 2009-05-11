@@ -25,7 +25,7 @@ class QUrl;
 namespace Marble {
     
 class AbstractDataPluginModelPrivate;
-class AbstractDataPluginWidget;
+class AbstractDataPluginItem;
 class CacheStoragePolicy;
 class HttpDownloadManager;
 class GeoDataLatLonAltBox;
@@ -44,18 +44,18 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * Returns the currently downloaded images in the @p viewport.
      * The maximum number of images can be specified with @p number,
      * 0 means no limit.
-     * @return The list of widgets with most important widget first.
+     * @return The list of item with most important item first.
      */
-    QList<AbstractDataPluginWidget*> widgets( ViewportParams *viewport,
-                                              MarbleDataFacade *facade,
-                                              qint32 number = 10 );
+    QList<AbstractDataPluginItem*> items( ViewportParams *viewport,
+                                          MarbleDataFacade *facade,
+                                          qint32 number = 10 );
     
     /**
-     * Returns all widgets which were returned by widgets() again.
+     * Returns all items which were returned by items() again.
      */
-    QList<AbstractDataPluginWidget*> displayedWidgets();
+    QList<AbstractDataPluginItem*> displayedItems();
     
-    QList<AbstractDataPluginWidget *> whichWidgetAt( const QPoint& curpos );
+    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos );
        
  protected:
     /**
@@ -67,22 +67,22 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
                                      qint32 number = 10 ) = 0;
        
     /**
-     * The reimplementation has to parse the @p file and should generate widgets. This widgets
-     * have to be scheduled to downloadWidgetData or could be directly added to the list,
+     * The reimplementation has to parse the @p file and should generate items. This items
+     * have to be scheduled to downloadItemData or could be directly added to the list,
      * depending on if they have to download information to be shown.
      **/
     virtual void parseFile( QByteArray file ) = 0;
         
     /**
-     * Downloads the file from @p url and calls @p widget -> addDownloadedFile() when the
+     * Downloads the file from @p url and calls @p item -> addDownloadedFile() when the
      * download is finished.
      **/
-    void downloadWidgetData( QUrl url, QString type, AbstractDataPluginWidget *widget );
+    void downloadItemData( QUrl url, QString type, AbstractDataPluginItem *item );
     
     /**
-     * Adds the @p widget to the list of already initialized widgets.
+     * Adds the @p item to the list of already initialized items.
      */
-    void addWidgetToList( AbstractDataPluginWidget *widget );
+    void addItemToList( AbstractDataPluginItem *item );
     
     /**
      * Returns the name of the plugin
@@ -115,9 +115,9 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     bool fileExists( QString id, QString type );
     
     /**
-     * Testing the existence of the widget @p id in the list
+     * Testing the existence of the item @p id in the list
      */
-    bool widgetExists( QString id );
+    bool itemExists( QString id );
     
  private Q_SLOTS:
     /**

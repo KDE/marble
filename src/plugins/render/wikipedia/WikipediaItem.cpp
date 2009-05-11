@@ -9,7 +9,7 @@
 //
 
 // Self
-#include "WikipediaWidget.h"
+#include "WikipediaItem.h"
 
 // Qt
 #include <QtGui/QAction>
@@ -26,39 +26,39 @@
 
 using namespace Marble;
 
-WikipediaWidget::WikipediaWidget( QObject *parent )
-    : AbstractDataPluginWidget( parent ),
+WikipediaItem::WikipediaItem( QObject *parent )
+    : AbstractDataPluginItem( parent ),
       m_browser( 0 )
 {
     m_action = new QAction( this );
     connect( m_action, SIGNAL( triggered() ), this, SLOT( openBrowser() ) );
 }
 
-WikipediaWidget::~WikipediaWidget() {
+WikipediaItem::~WikipediaItem() {
     delete m_browser;
 }
 
-QString WikipediaWidget::name() const {
+QString WikipediaItem::name() const {
     return id();
 }
 
-QString WikipediaWidget::widgetType() const {
-    return "wikipediaWidget";
+QString WikipediaItem::itemType() const {
+    return "wikipediaItem";
 }
      
-bool WikipediaWidget::initialized() {
+bool WikipediaItem::initialized() {
     return true;
 }
     
-void WikipediaWidget::addDownloadedFile( QString url, QString type ) {
-    // There shouldn't be downloaded files for this widget
+void WikipediaItem::addDownloadedFile( QString url, QString type ) {
+    // There shouldn't be downloaded files for this item
 }
 
-bool WikipediaWidget::operator<( const AbstractDataPluginWidget *other ) const {
+bool WikipediaItem::operator<( const AbstractDataPluginItem *other ) const {
     return this->id() < other->id();
 }
    
-bool WikipediaWidget::render( GeoPainter *painter, ViewportParams *viewport,
+bool WikipediaItem::paint( GeoPainter *painter, ViewportParams *viewport,
                               const QString& renderPos, GeoSceneLayer * layer )
 {
     painter->drawPixmap( coordinates(), *m_pixmap );
@@ -68,48 +68,48 @@ bool WikipediaWidget::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
-qreal WikipediaWidget::longitude() {
+qreal WikipediaItem::longitude() {
     return coordinates().longitude();
 }
     
-void WikipediaWidget::setLongitude( qreal longitude ) {
+void WikipediaItem::setLongitude( qreal longitude ) {
     GeoDataCoordinates updatedCoordinates = coordinates();
     updatedCoordinates.setLongitude( longitude );
     setCoordinates( updatedCoordinates );
 }
     
-qreal WikipediaWidget::latitude() {
+qreal WikipediaItem::latitude() {
     return coordinates().latitude();
 }
 
-void WikipediaWidget::setLatitude( qreal latitude ) {
+void WikipediaItem::setLatitude( qreal latitude ) {
     GeoDataCoordinates updatedCoordinates = coordinates();
     updatedCoordinates.setLatitude( latitude );
     setCoordinates( updatedCoordinates );
 }
 
-QUrl WikipediaWidget::url() {
+QUrl WikipediaItem::url() {
     return m_url;
 }
 
-void WikipediaWidget::setUrl( QUrl url ) {
+void WikipediaItem::setUrl( QUrl url ) {
     m_url = url;
 }
 
-QUrl WikipediaWidget::thumbnailImageUrl() {
+QUrl WikipediaItem::thumbnailImageUrl() {
     return m_thumbnailImageUrl;
 }
 
-void WikipediaWidget::setThumbnailImageUrl( QUrl thumbnailImageUrl ) {
+void WikipediaItem::setThumbnailImageUrl( QUrl thumbnailImageUrl ) {
     m_thumbnailImageUrl = thumbnailImageUrl;
 }
 
-QAction *WikipediaWidget::action() {
+QAction *WikipediaItem::action() {
     m_action->setText( id() );
     return m_action;
 }
 
-void WikipediaWidget::openBrowser( ) {
+void WikipediaItem::openBrowser( ) {
     if( m_browser ) {
         delete m_browser;
     }
@@ -120,10 +120,10 @@ void WikipediaWidget::openBrowser( ) {
              m_browser, SLOT( setWindowTitle(QString) ) );
 }
 
-void WikipediaWidget::setPixmap( QPixmap *pixmap ) {
+void WikipediaItem::setPixmap( QPixmap *pixmap ) {
     m_pixmap = pixmap;
 }
     
-void WikipediaWidget::setIcon( QIcon *icon ) {
+void WikipediaItem::setIcon( QIcon *icon ) {
     m_action->setIcon( *icon );
 }

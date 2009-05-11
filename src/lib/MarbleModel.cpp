@@ -856,9 +856,9 @@ QList<AbstractDataPlugin *> MarbleModel::dataPlugins()  const
     return d->m_layerManager->dataPlugins();
 }
 
-QList<AbstractDataPluginWidget *> MarbleModel::whichWidgetAt( const QPoint& curpos ) const
+QList<AbstractDataPluginItem *> MarbleModel::whichItemAt( const QPoint& curpos ) const
 {
-    return d->m_layerManager->whichWidgetAt( curpos );
+    return d->m_layerManager->whichItemAt( curpos );
 }
 
 Planet* MarbleModel::planet() const

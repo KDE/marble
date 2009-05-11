@@ -8,10 +8,10 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef PHOTOPLUGINWIDGET_H
-#define PHOTOPLUGINWIDGET_H
+#ifndef PHOTOPLUGINITEM_H
+#define PHOTOPLUGINITEM_H
 
-#include "AbstractDataPluginWidget.h"
+#include "AbstractDataPluginItem.h"
 
 #include <QtGui/QPixmap>
 
@@ -21,24 +21,24 @@ class QWebView;
 
 namespace Marble {
  
-class PhotoPluginWidget : public AbstractDataPluginWidget {
+class PhotoPluginItem : public AbstractDataPluginItem {
     Q_OBJECT
  public:
-    explicit PhotoPluginWidget( QObject *parent );
-    ~PhotoPluginWidget();
+    explicit PhotoPluginItem( QObject *parent );
+    ~PhotoPluginItem();
     
     QString name() const;
     
-    QString widgetType() const;
+    QString itemType() const;
     
     bool initialized();
     
     void addDownloadedFile( QString url, QString type );
     
-    bool render( GeoPainter *painter, ViewportParams *viewport,
-                 const QString& renderPos, GeoSceneLayer * layer = 0 );
+    bool paint( GeoPainter *painter, ViewportParams *viewport,
+                const QString& renderPos, GeoSceneLayer * layer = 0 );
                  
-    bool operator<( const AbstractDataPluginWidget *other ) const;
+    bool operator<( const AbstractDataPluginItem *other ) const;
     
     QUrl photoUrl() const;
     
@@ -84,4 +84,4 @@ class PhotoPluginWidget : public AbstractDataPluginWidget {
     
 }
 
-#endif //PHOTOPLUGINWIDGET_H
+#endif //PHOTOPLUGINITEM_H

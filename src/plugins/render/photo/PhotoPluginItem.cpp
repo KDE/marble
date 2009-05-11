@@ -10,14 +10,14 @@
 
 
 // Self
-#include "PhotoPluginWidget.h"
+#include "PhotoPluginItem.h"
 
 // Plugin
 #include "CoordinatesParser.h"
 #include "PhotoPluginModel.h"
 
 // Marble
-#include "AbstractDataPluginWidget.h"
+#include "AbstractDataPluginItem.h"
 #include "GeoDataCoordinates.h"
 #include "GeoPainter.h"
 #include "TinyWebBrowser.h"
@@ -34,8 +34,8 @@
 
 using namespace Marble;
 
-PhotoPluginWidget::PhotoPluginWidget( QObject *parent )
-    : AbstractDataPluginWidget( parent ),
+PhotoPluginItem::PhotoPluginItem( QObject *parent )
+    : AbstractDataPluginItem( parent ),
       m_hasCoordinates( false ),
       m_browser( 0 )
 {
@@ -43,23 +43,23 @@ PhotoPluginWidget::PhotoPluginWidget( QObject *parent )
     connect( m_action, SIGNAL( triggered() ), this, SLOT( openBrowser() ) );
 }
 
-PhotoPluginWidget::~PhotoPluginWidget() {
+PhotoPluginItem::~PhotoPluginItem() {
     delete m_browser;
 }
 
-QString PhotoPluginWidget::name() const {
+QString PhotoPluginItem::name() const {
     return title();
 }
 
-QString PhotoPluginWidget::widgetType() const {
-    return QString( "photoWidget" );
+QString PhotoPluginItem::itemType() const {
+    return QString( "photoItem" );
 }
  
-bool PhotoPluginWidget::initialized() {
+bool PhotoPluginItem::initialized() {
     return !m_smallImage.isNull() && m_hasCoordinates;
 }
 
-void PhotoPluginWidget::addDownloadedFile( QString url, QString type ) {
+void PhotoPluginItem::addDownloadedFile( QString url, QString type ) {
     if( type == "thumbnail" ) {
         m_smallImage.load( url );
     }
@@ -79,7 +79,7 @@ void PhotoPluginWidget::addDownloadedFile( QString url, QString type ) {
     }
 }
 
-bool PhotoPluginWidget::render( GeoPainter *painter, ViewportParams *viewport,
+bool PhotoPluginItem::paint( GeoPainter *painter, ViewportParams *viewport,
                                 const QString& renderPos, GeoSceneLayer * layer )
 {
     painter->drawPixmap( coordinates(), m_smallImage );
@@ -89,17 +89,17 @@ bool PhotoPluginWidget::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
              
-bool PhotoPluginWidget::operator<( const AbstractDataPluginWidget *other ) const {
+bool PhotoPluginItem::operator<( const AbstractDataPluginItem *other ) const {
     return this->id() < other->id();
 }
 
-QUrl PhotoPluginWidget::photoUrl() const {
+QUrl PhotoPluginItem::photoUrl() const {
     QString url = "http://farm%1.static.flickr.com/%2/%3_%4_t.jpg";
     
     return QUrl( url.arg( farm() ).arg( server() ).arg( id() ).arg( secret() ) );
 }
 
-QUrl PhotoPluginWidget::infoUrl() const {
+QUrl PhotoPluginItem::infoUrl() const {
     QHash<QString,QString> options;
     
     options.insert( "photo_id", id() );
@@ -107,52 +107,52 @@ QUrl PhotoPluginWidget::infoUrl() const {
     return PhotoPluginModel::generateUrl( "flickr", "flickr.photos.geo.getLocation", options );
 }
 
-QString PhotoPluginWidget::server() const {
+QString PhotoPluginItem::server() const {
     return m_server;
 }
 
-void PhotoPluginWidget::setServer( QString server ) {
+void PhotoPluginItem::setServer( QString server ) {
     m_server = server;
 }
 
-QString PhotoPluginWidget::farm() const {
+QString PhotoPluginItem::farm() const {
     return m_farm;
 }
 
-void PhotoPluginWidget::setFarm( QString farm ) {
+void PhotoPluginItem::setFarm( QString farm ) {
     m_farm = farm;
 }
 
-QString PhotoPluginWidget::secret() const {
+QString PhotoPluginItem::secret() const {
     return m_secret;
 }
 
-void PhotoPluginWidget::setSecret( QString secret ) {
+void PhotoPluginItem::setSecret( QString secret ) {
     m_secret = secret;
 }
 
-QString PhotoPluginWidget::owner() const {
+QString PhotoPluginItem::owner() const {
     return m_owner;
 }
     
-void PhotoPluginWidget::setOwner( QString owner ) {
+void PhotoPluginItem::setOwner( QString owner ) {
     m_owner = owner;
 }
 
-QString PhotoPluginWidget::title() const {
+QString PhotoPluginItem::title() const {
     return m_title;
 }
 
-void PhotoPluginWidget::setTitle( QString title ) {
+void PhotoPluginItem::setTitle( QString title ) {
     m_title = title;
     m_action->setText( title );
 }
 
-QAction *PhotoPluginWidget::action() {
+QAction *PhotoPluginItem::action() {
     return m_action;
 }
 
-void PhotoPluginWidget::openBrowser( ) {
+void PhotoPluginItem::openBrowser( ) {
     if( m_browser ) {
         delete m_browser;
     }
@@ -164,4 +164,4 @@ void PhotoPluginWidget::openBrowser( ) {
              m_browser, SLOT( setWindowTitle(QString) ) );
 }
 
-#include "PhotoPluginWidget.moc"
+#include "PhotoPluginItem.moc"

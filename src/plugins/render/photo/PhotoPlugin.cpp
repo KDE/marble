@@ -29,7 +29,7 @@ PhotoPlugin::PhotoPlugin()
 void PhotoPlugin::initialize() {
     qDebug() << "PhotoPlugin: Initialize";
     setModel( new PhotoPluginModel( this ) );
-    setNumberOfWidgets( numberOfImagesPerFetch );
+    setNumberOfItems( numberOfImagesPerFetch );
 }
 
 QString PhotoPlugin::name() const {

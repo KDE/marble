@@ -9,7 +9,7 @@
 //
 
 // self
-#include "AbstractDataPluginWidget.h"
+#include "AbstractDataPluginItem.h"
 
 // Marble
 #include "AbstractProjection.h"
@@ -24,9 +24,9 @@
 
 namespace Marble {
 
-class AbstractDataPluginWidgetPrivate {
+class AbstractDataPluginItemPrivate {
  public:
-    AbstractDataPluginWidgetPrivate()
+    AbstractDataPluginItemPrivate()
         : m_addedAngularResolution( 0 )
     {
     };
@@ -38,55 +38,55 @@ class AbstractDataPluginWidgetPrivate {
     qreal m_addedAngularResolution;
 };
 
-AbstractDataPluginWidget::AbstractDataPluginWidget( QObject *parent )
+AbstractDataPluginItem::AbstractDataPluginItem( QObject *parent )
     : QObject( parent ),
-      d( new AbstractDataPluginWidgetPrivate )
+      d( new AbstractDataPluginItemPrivate )
 {
 }
 
-AbstractDataPluginWidget::~AbstractDataPluginWidget() {
+AbstractDataPluginItem::~AbstractDataPluginItem() {
 }
 
-GeoDataCoordinates AbstractDataPluginWidget::coordinates() {
+GeoDataCoordinates AbstractDataPluginItem::coordinates() {
     return d->m_coordinates;
 }
 
-void AbstractDataPluginWidget::setCoordinates( GeoDataCoordinates coordinates ) {
+void AbstractDataPluginItem::setCoordinates( GeoDataCoordinates coordinates ) {
     d->m_coordinates = coordinates;
 }
 
-QString AbstractDataPluginWidget::target() {
+QString AbstractDataPluginItem::target() {
     return d->m_target;
 }
 
-void AbstractDataPluginWidget::setTarget( QString target ) {
+void AbstractDataPluginItem::setTarget( QString target ) {
     d->m_target = target;
 }
 
-QString AbstractDataPluginWidget::id() const {
+QString AbstractDataPluginItem::id() const {
     return d->m_id;
 }
 
-void AbstractDataPluginWidget::setId( QString id ) {
+void AbstractDataPluginItem::setId( QString id ) {
     d->m_id = id;
 }
 
-qreal AbstractDataPluginWidget::addedAngularResolution() const {
+qreal AbstractDataPluginItem::addedAngularResolution() const {
     return d->m_addedAngularResolution;
 }
 
-void AbstractDataPluginWidget::setAddedAngularResolution( qreal resolution ) {
+void AbstractDataPluginItem::setAddedAngularResolution( qreal resolution ) {
     d->m_addedAngularResolution = resolution;
 }
 
-bool AbstractDataPluginWidget::isWidgetAt( const QPoint& curpos ) const {
+bool AbstractDataPluginItem::isItemAt( const QPoint& curpos ) const {
     if( d->m_paintPosition.contains( curpos ) ) {
         return true;
     }
     return false;
 }
 
-void AbstractDataPluginWidget::updatePaintPosition( ViewportParams *viewport,
+void AbstractDataPluginItem::updatePaintPosition( ViewportParams *viewport,
                                                     QSize size ) {
     GeoDataCoordinates coords = coordinates();
     
@@ -122,10 +122,10 @@ void AbstractDataPluginWidget::updatePaintPosition( ViewportParams *viewport,
     }
 }
 
-QRect AbstractDataPluginWidget::paintPosition() {
+QRect AbstractDataPluginItem::paintPosition() {
     return d->m_paintPosition;
 }
 
 } // Marble namespace
 
-#include "AbstractDataPluginWidget.moc"
+#include "AbstractDataPluginItem.moc"

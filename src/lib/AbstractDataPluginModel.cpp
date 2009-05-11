@@ -18,7 +18,7 @@
 #include <QtCore/QtAlgorithms>
 
 // Marble
-#include "AbstractDataPluginWidget.h"
+#include "AbstractDataPluginItem.h"
 #include "CacheStoragePolicy.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
@@ -34,7 +34,7 @@ const QString descriptionPrefix( "description_" );
 // Time between to new description file downloads in ms
 const int timeBetweenDownloads = 500;
 
-// Separator to separate the id of the widget from the file type
+// Separator to separate the id of the item from the file type
 const char fileIdSeparator = '_';
     
 class AbstractDataPluginModelPrivate {
@@ -52,18 +52,18 @@ class AbstractDataPluginModelPrivate {
     }
     
     ~AbstractDataPluginModelPrivate() {
-        m_widgetSet.removeAll( 0 );
-        QHash<QString, AbstractDataPluginWidget*>::iterator it = m_downloadingWidgets.begin();
-        while( it != m_downloadingWidgets.end() ) {
+        m_itemSet.removeAll( 0 );
+        QHash<QString, AbstractDataPluginItem*>::iterator it = m_downloadingItems.begin();
+        while( it != m_downloadingItems.end() ) {
             if( !(*it) ) {
-                it = m_downloadingWidgets.erase( it );
+                it = m_downloadingItems.erase( it );
             }
             else {
                 ++it;
             }
         }
-        qDeleteAll( m_widgetSet );
-        qDeleteAll( m_downloadingWidgets );
+        qDeleteAll( m_itemSet );
+        qDeleteAll( m_downloadingItems );
         delete m_storagePolicy;
         delete m_lastBox;
         delete m_downloadedBox;
@@ -77,9 +77,9 @@ class AbstractDataPluginModelPrivate {
     qint32 m_downloadedNumber;
     MarbleDataFacade *m_lastDataFacade;
     QString m_downloadedTarget;
-    QList<AbstractDataPluginWidget*> m_widgetSet;
-    QHash<QString, AbstractDataPluginWidget*> m_downloadingWidgets;
-    QList<AbstractDataPluginWidget*> m_displayedWidgets;
+    QList<AbstractDataPluginItem*> m_itemSet;
+    QHash<QString, AbstractDataPluginItem*> m_downloadingItems;
+    QList<AbstractDataPluginItem*> m_displayedItems;
     QTimer *m_downloadTimer;
     
     CacheStoragePolicy *m_storagePolicy;
@@ -109,21 +109,21 @@ AbstractDataPluginModel::~AbstractDataPluginModel() {
     delete d;
 }
 
-QList<AbstractDataPluginWidget*> AbstractDataPluginModel::widgets( ViewportParams *viewport,
+QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *viewport,
                                                                    MarbleDataFacade *facade,
                                                                    qint32 number )
 {
     GeoDataLatLonAltBox *currentBox = new GeoDataLatLonAltBox( viewport->viewLatLonAltBox() );
     QString target = facade->target();
-    QList<AbstractDataPluginWidget*> list;
+    QList<AbstractDataPluginItem*> list;
     
-    QList<AbstractDataPluginWidget*>::iterator i;
+    QList<AbstractDataPluginItem*>::iterator i;
     
-    d->m_displayedWidgets.removeAll( 0 );
+    d->m_displayedItems.removeAll( 0 );
     
-    // Widgets that are already shown have the highest priority
-    for ( i = d->m_displayedWidgets.begin();
-          i != d->m_displayedWidgets.end() && list.size() < number;
+    // Items that are already shown have the highest priority
+    for ( i = d->m_displayedItems.begin();
+          i != d->m_displayedItems.end() && list.size() < number;
           ++i )
     {
         // Don't try to access an object that doesn't exist
@@ -131,12 +131,12 @@ QList<AbstractDataPluginWidget*> AbstractDataPluginModel::widgets( ViewportParam
             continue;
         }
     
-        // Only show widgets that are initialized
+        // Only show items that are initialized
         if( !(*i)->initialized() ) {
             continue;
         }
         
-        // Only show widgets that are on the current planet
+        // Only show items that are on the current planet
         if( (*i)->target() != target ) {
             continue;
         }
@@ -145,45 +145,45 @@ QList<AbstractDataPluginWidget*> AbstractDataPluginModel::widgets( ViewportParam
             continue;
         }
         
-        // If the widget was added initially at a nearer position, they don't have priority,
+        // If the item was added initially at a nearer position, they don't have priority,
         // because we zoomed out since then.
         if( (*i)->addedAngularResolution() >= viewport->angularResolution() ) {
             list.append( *i );
         }
     }
         
-    d->m_widgetSet.removeAll( 0 );
+    d->m_itemSet.removeAll( 0 );
     
-    for ( i = d->m_widgetSet.begin(); i != d->m_widgetSet.end() && list.size() < number; ++i ) {
+    for ( i = d->m_itemSet.begin(); i != d->m_itemSet.end() && list.size() < number; ++i ) {
         // Don't try to access an object that doesn't exist
         if( !*i ) {
-            qDebug() << "Warning: Null pointer in m_widgetSet";
+            qDebug() << "Warning: Null pointer in m_itemSet";
             continue;
         }
         
-        // Only show widgets that are initialized
+        // Only show items that are initialized
         if( !(*i)->initialized() ) {
             continue;
         }
         
-        // Only show widgets that are on the current planet
+        // Only show items that are on the current planet
         if( (*i)->target() != target ) {
             continue;
         }
         
-        // If the widget is on the viewport, we want to return it
+        // If the item is on the viewport, we want to return it
         if( currentBox->contains( (*i)->coordinates() )
             && !list.contains( *i ) )
         {
             list.append( *i );
             
-            // We want to save the angular resolution of the first time the widget got added.
-            // If it is in the list of displayedWidgets, it was added before
-            if( !d->m_displayedWidgets.contains( *i ) ) {
+            // We want to save the angular resolution of the first time the item got added.
+            // If it is in the list of displayedItems, it was added before
+            if( !d->m_displayedItems.contains( *i ) ) {
                 (*i)->setAddedAngularResolution( viewport->angularResolution() );
             }
         }
-        // FIXME: We have to do something if the widget that is not on the viewport.
+        // FIXME: We have to do something if the item that is not on the viewport.
     }
     
     d->m_lastDataFacade = facade;
@@ -197,63 +197,63 @@ QList<AbstractDataPluginWidget*> AbstractDataPluginModel::widgets( ViewportParam
         d->m_lastDataFacade = facade;
     }
     
-    d->m_displayedWidgets = list;
+    d->m_displayedItems = list;
     return list;
 }
 
-QList<AbstractDataPluginWidget*> AbstractDataPluginModel::displayedWidgets() {
-    return d->m_displayedWidgets;
+QList<AbstractDataPluginItem*> AbstractDataPluginModel::displayedItems() {
+    return d->m_displayedItems;
 }
 
-QList<AbstractDataPluginWidget *> AbstractDataPluginModel::whichWidgetAt( const QPoint& curpos ) {
-    QList<AbstractDataPluginWidget *> widgetsAt;
+QList<AbstractDataPluginItem *> AbstractDataPluginModel::whichItemAt( const QPoint& curpos ) {
+    QList<AbstractDataPluginItem *> itemsAt;
     
-    foreach( AbstractDataPluginWidget* widget, d->m_displayedWidgets ) {
-        if( widget && widget->isWidgetAt( curpos ) )
-            widgetsAt.append( widget );
+    foreach( AbstractDataPluginItem* item, d->m_displayedItems ) {
+        if( item && item->isItemAt( curpos ) )
+            itemsAt.append( item );
     }
     
-    return widgetsAt;
+    return itemsAt;
 }
 
-void AbstractDataPluginModel::downloadWidgetData( QUrl url,
+void AbstractDataPluginModel::downloadItemData( QUrl url,
                                                   QString type,
-                                                  AbstractDataPluginWidget *widget )
+                                                  AbstractDataPluginItem *item )
 {
-    if( !widget ) {
+    if( !item ) {
         return;
     }
-    QString id = generateFilename( widget->id(), type );
+    QString id = generateFilename( item->id(), type );
     
     d->m_downloadManager->addJob( url, id, id );
-    d->m_downloadingWidgets.insert( id, widget );
+    d->m_downloadingItems.insert( id, item );
 }
 
-static bool lessThanByPointer( const AbstractDataPluginWidget *widget1,
-                               const AbstractDataPluginWidget *widget2 )
+static bool lessThanByPointer( const AbstractDataPluginItem *item1,
+                               const AbstractDataPluginItem *item2 )
 {
-    if( widget1 != 0 && widget2 != 0 ) {
-        return widget1->operator<( widget2 );
+    if( item1 != 0 && item2 != 0 ) {
+        return item1->operator<( item2 );
     }
     else {
         return false;
     }
 }
 
-void AbstractDataPluginModel::addWidgetToList( AbstractDataPluginWidget *widget ) {
-    qDebug() << "New widget " << widget->id();
+void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item ) {
+    qDebug() << "New item " << item->id();
     
-    if( !widget ) {
+    if( !item ) {
         return;
     }
     
-    // This find the right position in the sorted to insert the new widget 
-    QList<AbstractDataPluginWidget*>::iterator i = qLowerBound( d->m_widgetSet.begin(),
-                                                                d->m_widgetSet.end(),
-                                                                widget,
+    // This find the right position in the sorted to insert the new item 
+    QList<AbstractDataPluginItem*>::iterator i = qLowerBound( d->m_itemSet.begin(),
+                                                                d->m_itemSet.end(),
+                                                                item,
                                                                 lessThanByPointer );
-    // Insert the widget on the right position in the list
-    d->m_widgetSet.insert( i, widget );
+    // Insert the item on the right position in the list
+    d->m_itemSet.insert( i, item );
 }
 
 QString AbstractDataPluginModel::name() const {
@@ -285,11 +285,11 @@ bool AbstractDataPluginModel::fileExists( QString id, QString type ) {
     return fileExists( generateFilename( id, type ) );
 }
 
-bool AbstractDataPluginModel::widgetExists( QString id ) {
-    QList<AbstractDataPluginWidget*>::iterator listIt;
+bool AbstractDataPluginModel::itemExists( QString id ) {
+    QList<AbstractDataPluginItem*>::iterator listIt;
     
-    for( listIt = d->m_widgetSet.begin();
-         listIt != d->m_widgetSet.end();
+    for( listIt = d->m_itemSet.begin();
+         listIt != d->m_itemSet.end();
          ++listIt )
     {
         if( (*listIt)->id() == id ) {
@@ -297,10 +297,10 @@ bool AbstractDataPluginModel::widgetExists( QString id ) {
         }
     }
     
-    QHash<QString,AbstractDataPluginWidget*>::iterator hashIt;
+    QHash<QString,AbstractDataPluginItem*>::iterator hashIt;
     
-    for( hashIt = d->m_downloadingWidgets.begin();
-         hashIt != d->m_downloadingWidgets.end();
+    for( hashIt = d->m_downloadingItems.begin();
+         hashIt != d->m_downloadingItems.end();
          ++hashIt )
     {
         if( (*hashIt)->id() == id ) {
@@ -349,37 +349,37 @@ void AbstractDataPluginModel::processFinishedJob( QString relativeUrlString, QSt
         parseFile( d->m_storagePolicy->data( id ) );
     }
     else {
-        // The downloaded file contains widget data.
+        // The downloaded file contains item data.
         
-        // Splitting the id in widgetId and fileType
+        // Splitting the id in itemId and fileType
         QStringList fileInformation = id.split( fileIdSeparator );
         
         if( fileInformation.size() < 2) {
             qDebug() << "Strange file information " << id;
             return;
         }
-        QString widgetId = fileInformation.at( 0 );
+        QString itemId = fileInformation.at( 0 );
         fileInformation.removeAt( 0 );
         QString fileType = fileInformation.join( QString( fileIdSeparator ) );
         
-        // Searching for the right widget in m_downloadingWidgets
-        QHash<QString, AbstractDataPluginWidget *>::iterator i = d->m_downloadingWidgets.find( id );
-        if( i != d->m_downloadingWidgets.end() ) {
-            if( widgetId != (*i)->id() ) {
+        // Searching for the right item in m_downloadingItems
+        QHash<QString, AbstractDataPluginItem *>::iterator i = d->m_downloadingItems.find( id );
+        if( i != d->m_downloadingItems.end() ) {
+            if( itemId != (*i)->id() ) {
                 qDebug() << "Different id";
                 return;
             }
             
-            (*i)->addDownloadedFile( generateFilepath( widgetId, fileType ), 
+            (*i)->addDownloadedFile( generateFilepath( itemId, fileType ), 
                                      fileType );
             
             // If the file is ready for displaying, it can be added to the list of
-            // initialized widgets
+            // initialized items
             if( (*i)->initialized() ) {
-                addWidgetToList( *i );
+                addItemToList( *i );
             }
 
-            d->m_downloadingWidgets.erase( i );
+            d->m_downloadingItems.erase( i );
         }
     }
 }

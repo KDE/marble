@@ -29,7 +29,7 @@ class QMenu;
 namespace Marble
 {
 
-class AbstractDataPluginWidget;
+class AbstractDataPluginItem;
 class MarbleWidget;
 class MarbleModel;
 
@@ -67,7 +67,7 @@ class MarbleWidgetPopupMenu  : public QObject
     MarbleWidget   *m_widget;
 
     QVector<QModelIndex>  m_featurelist;
-    QList<AbstractDataPluginWidget *> m_widgetList;
+    QList<AbstractDataPluginItem *> m_itemList;
 
     QMenu    *m_lmbMenu;
     QMenu    *m_rmbMenu;

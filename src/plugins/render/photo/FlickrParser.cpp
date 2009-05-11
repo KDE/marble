@@ -12,8 +12,8 @@
 #include "FlickrParser.h"
 
 // Marble
-#include "AbstractDataPluginWidget.h"
-#include "PhotoPluginWidget.h"
+#include "AbstractDataPluginItem.h"
+#include "PhotoPluginItem.h"
 
 // Qt
 #include <QtCore/QByteArray>
@@ -21,7 +21,7 @@
 
 using namespace Marble;
 
-FlickrParser::FlickrParser( QList<AbstractDataPluginWidget *> *list,
+FlickrParser::FlickrParser( QList<AbstractDataPluginItem *> *list,
                             QObject *parent )
     : m_list( list ),
       m_parent( parent )
@@ -105,14 +105,14 @@ void FlickrParser::readPhoto() {
               && name() == "photo" );
               
     if( attributes().hasAttribute( "id" ) ) {
-        PhotoPluginWidget *widget = new PhotoPluginWidget( m_parent );
-        widget->setId( attributes().value( "id" ).toString() );
-        widget->setServer( attributes().value( "server" ).toString() );
-        widget->setFarm( attributes().value( "farm" ).toString() );
-        widget->setSecret( attributes().value( "secret" ).toString() );
-        widget->setOwner( attributes().value( "owner" ).toString() );
-        widget->setTitle( attributes().value( "title" ).toString() );
-        m_list->append( widget );
+        PhotoPluginItem *item = new PhotoPluginItem( m_parent );
+        item->setId( attributes().value( "id" ).toString() );
+        item->setServer( attributes().value( "server" ).toString() );
+        item->setFarm( attributes().value( "farm" ).toString() );
+        item->setSecret( attributes().value( "secret" ).toString() );
+        item->setOwner( attributes().value( "owner" ).toString() );
+        item->setTitle( attributes().value( "title" ).toString() );
+        m_list->append( item );
     }
     
     while( !atEnd() ) {

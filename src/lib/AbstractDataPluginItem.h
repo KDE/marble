@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef ABSTRACTDATAPLUGINWIDGET_H
-#define ABSTRACTDATAPLUGINWIDGET_H
+#ifndef ABSTRACTDATAPLUGINITEM_H
+#define ABSTRACTDATAPLUGINITEM_H
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -23,19 +23,19 @@ class QPoint;
 
 namespace Marble {
     
-class AbstractDataPluginWidgetPrivate;
+class AbstractDataPluginItemPrivate;
 class GeoDataCoordinates;
 class GeoPainter;
 class GeoSceneLayer;
 class CacheStoragePolicy;
 class ViewportParams;
 
-class MARBLE_EXPORT AbstractDataPluginWidget : public QObject {
+class MARBLE_EXPORT AbstractDataPluginItem : public QObject {
     Q_OBJECT
     
  public:
-    AbstractDataPluginWidget( QObject *parent = 0 );
-    ~AbstractDataPluginWidget();
+    AbstractDataPluginItem( QObject *parent = 0 );
+    ~AbstractDataPluginItem();
     
     GeoDataCoordinates coordinates();
     void setCoordinates( GeoDataCoordinates coordinates );
@@ -47,31 +47,31 @@ class MARBLE_EXPORT AbstractDataPluginWidget : public QObject {
     void setId( QString id );
     
     /**
-      * Returning the angular resolution of the viewport when the widget was added to it the last
+      * Returning the angular resolution of the viewport when the item was added to it the last
       * time.
       */
     qreal addedAngularResolution() const;
     void setAddedAngularResolution( qreal resolution );
     
-    bool isWidgetAt( const QPoint& curpos ) const;
+    bool isItemAt( const QPoint& curpos ) const;
     
     virtual QAction *action() = 0;
     
     virtual QString name() const = 0;
     
-    virtual QString widgetType() const = 0;
+    virtual QString itemType() const = 0;
      
     virtual bool initialized() = 0;
     
     virtual void addDownloadedFile( QString url, QString type ) = 0;
     
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
+    virtual bool paint( GeoPainter *painter, ViewportParams *viewport,
+                        const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
                          
-    virtual bool operator<( const AbstractDataPluginWidget *other ) const = 0;
+    virtual bool operator<( const AbstractDataPluginItem *other ) const = 0;
     
     /**
-     * If you want that the widget stores the paint position (e.g. to handle mouse clicks),
+     * If you want that the item stores the paint position (e.g. to handle mouse clicks),
      * you should do this on every rendering.
      */
     void updatePaintPosition( ViewportParams *viewport, QSize size );
@@ -82,9 +82,9 @@ class MARBLE_EXPORT AbstractDataPluginWidget : public QObject {
     QRect paintPosition();
                     
  private:
-    AbstractDataPluginWidgetPrivate * const d;
+    AbstractDataPluginItemPrivate * const d;
 };
 
 } // Marble namespace
 
-#endif // ABSTRACTDATAPLUGINWIDGET_H
+#endif // ABSTRACTDATAPLUGINITEM_H

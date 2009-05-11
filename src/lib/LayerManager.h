@@ -26,7 +26,7 @@ namespace Marble
 {
 
 class AbstractDataPlugin;
-class AbstractDataPluginWidget;
+class AbstractDataPluginItem;
 class LayerManagerPrivate;
 class GeoPainter;
 class GeoSceneDocument;
@@ -68,9 +68,9 @@ class MARBLE_EXPORT LayerManager : public QObject
     QList<AbstractDataPlugin *> dataPlugins()  const;
     
     /**
-     * @brief Returns all widgets of dataPlugins on the position curpos 
+     * @brief Returns all items of dataPlugins on the position curpos 
      */
-    QList<AbstractDataPluginWidget *> whichWidgetAt( const QPoint& curpos ) const;
+    QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
 
  Q_SIGNALS:
     /**
