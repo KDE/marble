@@ -34,6 +34,7 @@ class TrackContainer : public AbstractLayerContainer
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize,
                        ViewParams *viewParams );
+    using AbstractLayerContainer::draw;
     
 };
 

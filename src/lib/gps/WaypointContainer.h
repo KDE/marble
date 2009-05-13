@@ -31,6 +31,7 @@ class WaypointContainer : public virtual AbstractLayerContainer
     virtual void draw( ClipPainter *painter, 
                        const QSize &canvasSize,
                        ViewParams *viewParams );
+    using AbstractLayerContainer::draw;
     
  protected:
     virtual void processVisable();
