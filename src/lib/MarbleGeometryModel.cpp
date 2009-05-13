@@ -202,6 +202,8 @@ QVariant MarbleGeometryModel::data( const QModelIndex &index, int role ) const
                     return QVariant( "GeoDataPolygon" );
                 case GeoDataPointId:
                     return QVariant( "GeoDataPoint" );
+                case GeoDataModelId:
+                    return QVariant( "GeoDataModelId" );
             }
         }
     }
@@ -235,7 +237,7 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
     else
         parentItem = static_cast<GeoDataObject*>( parent.internalPointer() );
 
-    GeoDataObject *childItem;
+    GeoDataObject *childItem = 0; 
 
     /* go down into GeoDataContainers */
     if( dynamic_cast<GeoDataFeature*>( parentItem ) ) {
@@ -258,9 +260,7 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
             childItem = &geom.vector()[ row ];
             qDebug() << "casting geometryObject:" << childItem;
         }
-    } else {
-        childItem = 0;
-    }
+    } 
 
     if ( childItem )
         return createIndex( row, column, childItem );
