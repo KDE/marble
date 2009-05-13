@@ -44,7 +44,8 @@ GeoDataColorStyle::GeoDataColorStyle()
 }
 
 GeoDataColorStyle::GeoDataColorStyle( const GeoDataColorStyle& other )
-      : d( new GeoDataColorStylePrivate( *other.d ) )
+      : GeoDataObject( other ),
+        d( new GeoDataColorStylePrivate( *other.d ) )
 {
 }
 

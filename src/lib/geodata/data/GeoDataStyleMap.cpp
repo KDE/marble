@@ -41,7 +41,8 @@ GeoDataStyleMap::GeoDataStyleMap()
 }
 
 GeoDataStyleMap::GeoDataStyleMap( const GeoDataStyleMap& other )
-    : GeoDataStyleSelector( other ), d( new GeoDataStyleMapPrivate( *other.d ) )
+    : GeoDataStyleSelector( other ) , QMap<QString,QString>(other), d( new GeoDataStyleMapPrivate( *other.d ) )
+
 {
 }
 
