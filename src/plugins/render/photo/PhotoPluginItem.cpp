@@ -82,6 +82,9 @@ void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type
 bool PhotoPluginItem::paint( GeoPainter *painter, ViewportParams *viewport,
                              const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
     painter->drawPixmap( coordinates(), m_smallImage );
     
     updatePaintPosition( viewport, m_smallImage.size() );

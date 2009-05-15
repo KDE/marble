@@ -493,6 +493,9 @@ void ClipPainterPrivate::clipMultiple( QPolygonF & clippedPolyObject,
                                        QVector<QPolygonF> & clippedPolyObjects,
                                        bool isClosed )
 {
+    Q_UNUSED( clippedPolyObjects )
+    Q_UNUSED( isClosed )
+
     // Take care of adding nodes in the image corners if the iterator 
     // traverses offscreen sections.
 
@@ -974,6 +977,9 @@ void ClipPainterPrivate::clipOnceCorner( QPolygonF & clippedPolyObject,
                                          const QPointF& point, 
                                          bool isClosed )
 {
+    Q_UNUSED( clippedPolyObjects )
+    Q_UNUSED( isClosed )
+
     if ( m_currentSector == 4) {
         // Appearing
         clippedPolyObject << corner;

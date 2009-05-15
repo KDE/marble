@@ -107,6 +107,9 @@ bool StarsPlugin::isInitialized () const
 bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                           const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
     QString target = dataFacade()->target();
 
     // So far this starry sky plugin only supports displaying stars on earth.

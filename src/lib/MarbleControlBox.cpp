@@ -473,6 +473,8 @@ void MarbleControlBox::receiveGpsCoordinates( qreal x, qreal y,
 
 void MarbleControlBox::receiveGpsCoordinates( GeoDataCoordinates in, qreal speed )
 {
+    Q_UNUSED( speed )
+
     //update the ui here
 //    qDebug() << "Speed is : " << speed;
     if ( d->uiWidget.navigationCheckBox->isChecked() ) {
@@ -640,6 +642,8 @@ void MarbleControlBox::selectProjection( Projection projection )
 
 void MarbleControlBox:: celestialBodySelected( const QString& celestialBodyId )
 {
+    Q_UNUSED( celestialBodyId )
+
     setMapThemeModel( d->m_mapThemeModel );
     QModelIndex index = d->m_mapSortProxy->index(0,1);
     d->m_widget->setMapThemeId( d->m_mapSortProxy->data(index).toString());

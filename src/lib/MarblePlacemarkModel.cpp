@@ -73,6 +73,7 @@ MarblePlacemarkModel::~MarblePlacemarkModel()
 void MarblePlacemarkModel::sort( int column, Qt::SortOrder order )
 {
     Q_UNUSED( column )
+    Q_UNUSED( order )
 
     QTime t;
     t.start();
@@ -199,6 +200,8 @@ void MarblePlacemarkModel::addPlacemarks( PlacemarkContainer &placemarks,
                                           bool clearPrevious,
                                           bool finalize )
 {
+    Q_UNUSED( finalize )
+
     if( placemarks.count() <= 0 )
         return;
 
@@ -224,6 +227,8 @@ void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
                                               int length,
                                               bool finalize )
 {
+    Q_UNUSED( finalize )
+
     QTime t;
     t.start();
 

@@ -71,6 +71,8 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                                const QString& renderPos,
                                GeoSceneLayer * layer )
 {
+    Q_UNUSED( layer )
+
     if ( renderPos == "ALWAYS_ON_TOP" ) {
         int  centerx  = viewport->width() / 2;
         int  centery  = viewport->height() / 2;

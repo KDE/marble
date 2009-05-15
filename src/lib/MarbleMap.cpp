@@ -148,6 +148,8 @@ void MarbleMapPrivate::doResize()
 
 void  MarbleMapPrivate::paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect )
 {
+    Q_UNUSED( dirtyRect )
+
     painter.save();
 
     QPixmap logoPixmap( MarbleDirs::path( "svg/marble-logo-inverted-72dpi.png" ) );
@@ -283,6 +285,8 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
 
 void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect )
 {
+    Q_UNUSED( dirtyRect )
+
     if ( !m_viewParams.mapTheme() ) {
         return;
     }
