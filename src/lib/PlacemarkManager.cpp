@@ -184,11 +184,15 @@ void PlacemarkManager::loadPlacemarkContainer( PlacemarkLoader* loader, Placemar
 
 void PlacemarkManager::loadKml( const QString& filename, bool clearPrevious )
 {
+    Q_UNUSED( clearPrevious )
+
     addPlacemarkFile( filename, true );
 }
 
 void PlacemarkManager::loadKmlFromData( const QString& data, const QString& key, bool finalize )
 {
+    Q_UNUSED( finalize )
+
     Q_ASSERT( d->m_model != 0 && "You have called loadKmlFromData before creating a model!" );
 
     PlacemarkContainer container;

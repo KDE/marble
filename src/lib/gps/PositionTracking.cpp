@@ -190,6 +190,9 @@ void PositionTracking::draw( ClipPainter *painter,
                         const QSize &canvasSize, 
                         ViewParams *viewParams )
 {
+    Q_UNUSED( canvasSize )
+    Q_UNUSED( viewParams )
+
     QPoint temp;
     painter->setPen( Qt::black );
     painter->setBrush( Qt::white );

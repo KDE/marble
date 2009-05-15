@@ -72,6 +72,9 @@ GpxFile::~GpxFile()
 
 void GpxFile::draw( ClipPainter *painter, const QPoint &point )
 {
+    Q_UNUSED( painter )
+    Q_UNUSED( point )
+
     if ( !m_visible ){ 
         return;
     }
