@@ -398,7 +398,7 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
 
     // If the whole globe is visible we can easily calculate
     // analytically the lon-/lat- range.
-    qreal pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
+    // qreal pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
 
     if ( m_repeatX ) {
         int xRepeatDistance = 4 * viewport->radius();

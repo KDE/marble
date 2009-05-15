@@ -74,9 +74,6 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     bool interlaced = ( m_interlaced 
             || viewParams->mapQuality() == Marble::Low );
 
-    int skip = interlaced ? 1 : 0;
-
-
     // Calculate translation of center point
     qreal centerLon, centerLat;
 

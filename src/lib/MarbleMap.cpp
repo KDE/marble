@@ -1090,7 +1090,8 @@ void MarbleMap::notifyMouseClick( int x, int y)
 void MarbleMap::updateGps()
 {
     QRegion temp;
-    const bool draw = d->m_model->gpsLayer()->updateGps( size(),&d->m_viewParams, temp );
+//    const bool draw = 
+    d->m_model->gpsLayer()->updateGps( size(),&d->m_viewParams, temp );
 #if 0  // FIXME: move to MarbleWidget?
     if ( draw ) {
         update(temp);

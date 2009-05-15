@@ -383,7 +383,6 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
     // Convenience variables
     int  radius = viewport->radius();
     int  width  = viewport->width();
-    int  height = viewport->height();
 
     // For the case where the whole viewport gets covered there is a 
     // pretty dirty and generic detection algorithm:

@@ -712,10 +712,7 @@ void MarbleModelPrivate::notifyModelChanged()
 
 void MarbleModelPrivate::geoDataDocumentLoaded( GeoDataDocument& document )
 {
-    AbstractFileViewItem* item = new KmlFileViewItem( *m_placemarkmanager,
-                                                      document );
-
-//    m_fileViewModel->append( item );
+    new KmlFileViewItem( *m_placemarkmanager, document );
 }
 
 void MarbleModelPrivate::geoDataDocumentAdded( GeoDataDocument* document )
