@@ -33,7 +33,7 @@ class PhotoPluginItem : public AbstractDataPluginItem {
     
     bool initialized();
     
-    void addDownloadedFile( QString url, QString type );
+    void addDownloadedFile( const QString& url, const QString& type );
     
     bool paint( GeoPainter *painter, ViewportParams *viewport,
                 const QString& renderPos, GeoSceneLayer * layer = 0 );
@@ -46,23 +46,23 @@ class PhotoPluginItem : public AbstractDataPluginItem {
     
     QString server() const;
     
-    void setServer( QString server );
+    void setServer( const QString& server );
     
     QString farm() const;
     
-    void setFarm( QString farm );
+    void setFarm( const QString& farm );
     
     QString secret() const;
     
-    void setSecret( QString secret );
+    void setSecret( const QString& secret );
     
     QString owner() const;
     
-    void setOwner( QString owner );
+    void setOwner( const QString& owner );
     
     QString title() const;
     
-    void setTitle( QString title );
+    void setTitle( const QString& title );
     
     QAction *action();
     

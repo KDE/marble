@@ -51,7 +51,7 @@ GeoDataCoordinates AbstractDataPluginItem::coordinates() {
     return d->m_coordinates;
 }
 
-void AbstractDataPluginItem::setCoordinates( GeoDataCoordinates coordinates ) {
+void AbstractDataPluginItem::setCoordinates( const GeoDataCoordinates& coordinates ) {
     d->m_coordinates = coordinates;
 }
 
@@ -59,7 +59,7 @@ QString AbstractDataPluginItem::target() {
     return d->m_target;
 }
 
-void AbstractDataPluginItem::setTarget( QString target ) {
+void AbstractDataPluginItem::setTarget( const QString& target ) {
     d->m_target = target;
 }
 
@@ -67,7 +67,7 @@ QString AbstractDataPluginItem::id() const {
     return d->m_id;
 }
 
-void AbstractDataPluginItem::setId( QString id ) {
+void AbstractDataPluginItem::setId( const QString& id ) {
     d->m_id = id;
 }
 
@@ -87,7 +87,7 @@ bool AbstractDataPluginItem::isItemAt( const QPoint& curpos ) const {
 }
 
 void AbstractDataPluginItem::updatePaintPosition( ViewportParams *viewport,
-                                                    QSize size ) {
+                                                  const QSize& size ) {
     GeoDataCoordinates coords = coordinates();
     
     qreal x[100], y;

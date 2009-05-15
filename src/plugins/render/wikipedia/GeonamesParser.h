@@ -27,7 +27,7 @@ public:
     GeonamesParser( QList<WikipediaItem *> *list,
                     QObject *parent );
 
-    bool read( QByteArray data );
+    bool read( const QByteArray& data );
 
 private:
     void readUnknownElement();

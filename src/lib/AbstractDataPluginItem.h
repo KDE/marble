@@ -38,13 +38,13 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject {
     ~AbstractDataPluginItem();
     
     GeoDataCoordinates coordinates();
-    void setCoordinates( GeoDataCoordinates coordinates );
+    void setCoordinates( const GeoDataCoordinates& coordinates );
     
     QString target();
-    void setTarget( QString target );
+    void setTarget( const QString& target );
      
     QString id() const;
-    void setId( QString id );
+    void setId( const QString& id );
     
     /**
       * Returning the angular resolution of the viewport when the item was added to it the last
@@ -63,7 +63,7 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject {
      
     virtual bool initialized() = 0;
     
-    virtual void addDownloadedFile( QString url, QString type ) = 0;
+    virtual void addDownloadedFile( const QString& url, const QString& type ) = 0;
     
     virtual bool paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
@@ -74,7 +74,7 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject {
      * If you want that the item stores the paint position (e.g. to handle mouse clicks),
      * you should do this on every rendering.
      */
-    void updatePaintPosition( ViewportParams *viewport, QSize size );
+    void updatePaintPosition( ViewportParams *viewport, const QSize& size );
                 
     /**
      * Returns the last paint position

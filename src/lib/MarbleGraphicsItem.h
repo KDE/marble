@@ -35,7 +35,7 @@ class MarbleGraphicsItem {
     /**
      * Set the position of the item
      */
-    void setPos( QPointF position );
+    void setPos( const QPointF& position );
     
     /**
      * Returns the bounding rect of the item in view coordinates

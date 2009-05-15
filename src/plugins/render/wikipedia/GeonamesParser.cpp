@@ -28,7 +28,7 @@ GeonamesParser::GeonamesParser( QList<WikipediaItem *> *list,
 {
 }
 
-bool GeonamesParser::read( QByteArray data ) {
+bool GeonamesParser::read( const QByteArray& data ) {
     addData( data );
 
     while (!atEnd()) {

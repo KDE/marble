@@ -49,7 +49,7 @@ WikipediaModel::WikipediaModel( QObject *parent )
     wikipediaImage.fill( QColor( 0, 0, 0, 0 ).rgba() );
     QPainter painter( &wikipediaImage );
     svgObj.render( &painter );
-    m_wikipediaPixmap = new QPixmap( QPixmap::fromImage( wikipediaImage ) );
+    m_wikipediaPixmap = QPixmap::fromImage( wikipediaImage );
     
     QImage wikipediaSmallImage( wikipediaSmallIconSize,
                                 wikipediaSmallIconSize,
@@ -57,11 +57,10 @@ WikipediaModel::WikipediaModel( QObject *parent )
     wikipediaSmallImage.fill( QColor( 0, 0, 0, 0 ).rgba() );
     QPainter smallPainter( &wikipediaSmallImage );
     svgObj.render( &smallPainter );
-    m_wikipediaIcon = new QIcon( QPixmap::fromImage( wikipediaSmallImage ) );
+    m_wikipediaIcon = QPixmap::fromImage( wikipediaSmallImage );
 }
 
 WikipediaModel::~WikipediaModel() {
-    delete m_wikipediaPixmap;
 }
 
 QUrl WikipediaModel::descriptionFileUrl( GeoDataLatLonAltBox *box,
@@ -88,7 +87,7 @@ QUrl WikipediaModel::descriptionFileUrl( GeoDataLatLonAltBox *box,
     return QUrl( geonamesUrl );
 }
 
-void WikipediaModel::parseFile( QByteArray file ) {
+void WikipediaModel::parseFile( const QByteArray& file ) {
     QList<WikipediaItem*> list;
     GeonamesParser parser( &list, this );
     

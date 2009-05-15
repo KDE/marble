@@ -14,10 +14,10 @@
 #include "AbstractDataPluginItem.h"
 
 #include <QtCore/QUrl>
+#include <QtGui/QPixmap>
 
 class QAction;
 class QIcon;
-class QPixmap;
 class QWebView;
 
 namespace Marble {
@@ -36,10 +36,10 @@ class WikipediaItem : public AbstractDataPluginItem {
      
     bool initialized();
     
-    void addDownloadedFile( QString url, QString type );
+    void addDownloadedFile( const QString& url, const QString& type );
     
     bool paint( GeoPainter *painter, ViewportParams *viewport,
-                 const QString& renderPos, GeoSceneLayer * layer = 0 );
+                const QString& renderPos, GeoSceneLayer * layer = 0 );
                  
     bool operator<( const AbstractDataPluginItem *other ) const;
     
@@ -53,17 +53,17 @@ class WikipediaItem : public AbstractDataPluginItem {
     
     QUrl url();
     
-    void setUrl( QUrl url );
+    void setUrl( const QUrl& url );
     
     QUrl thumbnailImageUrl();
     
-    void setThumbnailImageUrl( QUrl thumbnailImageUrl );
+    void setThumbnailImageUrl( const QUrl& thumbnailImageUrl );
     
     QAction *action();
     
-    void setPixmap( QPixmap *pixmap );
+    void setPixmap( const QPixmap& pixmap );
     
-    void setIcon( QIcon *icon );
+    void setIcon( const QIcon& icon );
     
  public Q_SLOTS:
     void openBrowser();
@@ -74,7 +74,7 @@ class WikipediaItem : public AbstractDataPluginItem {
     QWebView *m_browser;
     QAction *m_action;
     
-    QPixmap *m_pixmap;
+    QPixmap m_pixmap;
 };
     
 }

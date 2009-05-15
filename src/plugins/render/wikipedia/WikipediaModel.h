@@ -13,8 +13,8 @@
 
 #include "AbstractDataPluginModel.h"
 
-class QIcon;
-class QPixmap;
+#include <QtGui/QIcon>
+#include <QtGui/QPixmap>
 
 namespace Marble {
 
@@ -44,11 +44,11 @@ class WikipediaModel : public AbstractDataPluginModel
      * have to be scheduled to downloadItemData or could be directly added to the list,
      * depending on if they have to download information to be shown.
      **/
-    void parseFile( QByteArray file );
+    void parseFile( const QByteArray& file );
     
  private:
-    QPixmap *m_wikipediaPixmap;
-    QIcon *m_wikipediaIcon;
+    QPixmap m_wikipediaPixmap;
+    QIcon m_wikipediaIcon;
 };
 
 }

@@ -52,7 +52,7 @@ class GeoGraphicsItem : public MarbleGraphicsItem {
     /**
      * Set the target of the item with @p target.
      */
-    void setTarget( QString target );
+    void setTarget( const QString& target );
 
  private:
     GeoGraphicsItemPrivate *d;

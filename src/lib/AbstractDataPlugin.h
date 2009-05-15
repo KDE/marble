@@ -63,7 +63,7 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin {
     
     void setModel( AbstractDataPluginModel* model );
     
-    void setNameId( QString name );
+    void setNameId( const QString& name );
     
     QString nameId() const;
     

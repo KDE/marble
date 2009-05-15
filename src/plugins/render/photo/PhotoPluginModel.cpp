@@ -35,9 +35,9 @@ PhotoPluginModel::PhotoPluginModel( QObject *parent )
 {
 }
 
-QUrl PhotoPluginModel::generateUrl( QString service,
-                                    QString method,
-                                    QHash<QString,QString> options )
+QUrl PhotoPluginModel::generateUrl( const QString& service,
+                                    const QString& method,
+                                    const QHash<QString,QString>& options )
 {
     QString url( "" );
     
@@ -52,8 +52,8 @@ QUrl PhotoPluginModel::generateUrl( QString service,
     url += "&api_key=";
     url += flickrApiKey;
     
-    QHash<QString,QString>::iterator it;
-    for( it = options.begin(); it != options.end(); ++it ) {
+    QHash<QString,QString>::const_iterator it;
+    for( it = options.constBegin(); it != options.constEnd(); ++it ) {
         url += '&';
         url += it.key();
         url += '=';
@@ -85,7 +85,7 @@ QUrl PhotoPluginModel::descriptionFileUrl( GeoDataLatLonAltBox *box,
     return generateUrl( "flickr", "flickr.photos.search", options );
 }
 
-void PhotoPluginModel::parseFile( QByteArray file ) {
+void PhotoPluginModel::parseFile( const QByteArray& file ) {
     QList<AbstractDataPluginItem*> list;
     FlickrParser parser( &list, this );
     

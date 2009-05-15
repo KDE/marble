@@ -39,7 +39,7 @@ const char fileIdSeparator = '_';
     
 class AbstractDataPluginModelPrivate {
  public:
-    AbstractDataPluginModelPrivate( QString name, AbstractDataPluginModel * parent )
+    AbstractDataPluginModelPrivate( const QString& name, AbstractDataPluginModel * parent )
         : m_parent( parent ),
           m_name( name ),
           m_lastBox( new GeoDataLatLonAltBox() ),
@@ -86,7 +86,7 @@ class AbstractDataPluginModelPrivate {
     HttpDownloadManager *m_downloadManager;
 };
 
-AbstractDataPluginModel::AbstractDataPluginModel( QString name, QObject *parent )
+AbstractDataPluginModel::AbstractDataPluginModel( const QString& name, QObject *parent )
     : QObject(  parent ),
       d( new AbstractDataPluginModelPrivate( name, this ) )
 {
@@ -110,8 +110,8 @@ AbstractDataPluginModel::~AbstractDataPluginModel() {
 }
 
 QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *viewport,
-                                                                   MarbleDataFacade *facade,
-                                                                   qint32 number )
+                                                               MarbleDataFacade *facade,
+                                                               qint32 number )
 {
     GeoDataLatLonAltBox *currentBox = new GeoDataLatLonAltBox( viewport->viewLatLonAltBox() );
     QString target = facade->target();
@@ -216,9 +216,9 @@ QList<AbstractDataPluginItem *> AbstractDataPluginModel::whichItemAt( const QPoi
     return itemsAt;
 }
 
-void AbstractDataPluginModel::downloadItemData( QUrl url,
-                                                  QString type,
-                                                  AbstractDataPluginItem *item )
+void AbstractDataPluginModel::downloadItemData( const QUrl& url,
+                                                const QString& type,
+                                                AbstractDataPluginItem *item )
 {
     if( !item ) {
         return;
@@ -260,11 +260,11 @@ QString AbstractDataPluginModel::name() const {
     return d->m_name;
 }
 
-void AbstractDataPluginModel::setName( QString name ) {
+void AbstractDataPluginModel::setName( const QString& name ) {
     d->m_name = name;
 }
 
-QString AbstractDataPluginModel::generateFilename( QString id, QString type ) const {
+QString AbstractDataPluginModel::generateFilename( const QString& id, const QString& type ) const {
     QString name;
     name += id;
     name += fileIdSeparator;
@@ -273,19 +273,19 @@ QString AbstractDataPluginModel::generateFilename( QString id, QString type ) co
     return name;
 }
 
-QString AbstractDataPluginModel::generateFilepath( QString id, QString type ) const {
+QString AbstractDataPluginModel::generateFilepath( const QString& id, const QString& type ) const {
     return MarbleDirs::localPath() + "/cache/" + d->m_name + '/' + generateFilename( id, type );
 }
     
-bool AbstractDataPluginModel::fileExists( QString fileName ) {
+bool AbstractDataPluginModel::fileExists( const QString& fileName ) const {
     return d->m_storagePolicy->fileExists( fileName );
 }
 
-bool AbstractDataPluginModel::fileExists( QString id, QString type ) {
+bool AbstractDataPluginModel::fileExists( const QString& id, const QString& type ) const {
     return fileExists( generateFilename( id, type ) );
 }
 
-bool AbstractDataPluginModel::itemExists( QString id ) {
+bool AbstractDataPluginModel::itemExists( const QString& id ) {
     QList<AbstractDataPluginItem*>::iterator listIt;
     
     for( listIt = d->m_itemSet.begin();

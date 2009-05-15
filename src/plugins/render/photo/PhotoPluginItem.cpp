@@ -59,7 +59,7 @@ bool PhotoPluginItem::initialized() {
     return !m_smallImage.isNull() && m_hasCoordinates;
 }
 
-void PhotoPluginItem::addDownloadedFile( QString url, QString type ) {
+void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type ) {
     if( type == "thumbnail" ) {
         m_smallImage.load( url );
     }
@@ -80,7 +80,7 @@ void PhotoPluginItem::addDownloadedFile( QString url, QString type ) {
 }
 
 bool PhotoPluginItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                                const QString& renderPos, GeoSceneLayer * layer )
+                             const QString& renderPos, GeoSceneLayer * layer )
 {
     painter->drawPixmap( coordinates(), m_smallImage );
     
@@ -111,7 +111,7 @@ QString PhotoPluginItem::server() const {
     return m_server;
 }
 
-void PhotoPluginItem::setServer( QString server ) {
+void PhotoPluginItem::setServer( const QString& server ) {
     m_server = server;
 }
 
@@ -119,7 +119,7 @@ QString PhotoPluginItem::farm() const {
     return m_farm;
 }
 
-void PhotoPluginItem::setFarm( QString farm ) {
+void PhotoPluginItem::setFarm( const QString& farm ) {
     m_farm = farm;
 }
 
@@ -127,7 +127,7 @@ QString PhotoPluginItem::secret() const {
     return m_secret;
 }
 
-void PhotoPluginItem::setSecret( QString secret ) {
+void PhotoPluginItem::setSecret( const QString& secret ) {
     m_secret = secret;
 }
 
@@ -135,7 +135,7 @@ QString PhotoPluginItem::owner() const {
     return m_owner;
 }
     
-void PhotoPluginItem::setOwner( QString owner ) {
+void PhotoPluginItem::setOwner( const QString& owner ) {
     m_owner = owner;
 }
 
@@ -143,7 +143,7 @@ QString PhotoPluginItem::title() const {
     return m_title;
 }
 
-void PhotoPluginItem::setTitle( QString title ) {
+void PhotoPluginItem::setTitle( const QString& title ) {
     m_title = title;
     m_action->setText( title );
 }

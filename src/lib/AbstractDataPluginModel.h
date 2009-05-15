@@ -37,7 +37,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     Q_OBJECT
  
  public:
-    explicit AbstractDataPluginModel( QString name, QObject *parent = 0 );
+    explicit AbstractDataPluginModel( const QString& name, QObject *parent = 0 );
     ~AbstractDataPluginModel();
         
     /**
@@ -71,13 +71,13 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * have to be scheduled to downloadItemData or could be directly added to the list,
      * depending on if they have to download information to be shown.
      **/
-    virtual void parseFile( QByteArray file ) = 0;
+    virtual void parseFile( const QByteArray& file ) = 0;
         
     /**
      * Downloads the file from @p url and calls @p item -> addDownloadedFile() when the
      * download is finished.
      **/
-    void downloadItemData( QUrl url, QString type, AbstractDataPluginItem *item );
+    void downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
     
     /**
      * Adds the @p item to the list of already initialized items.
@@ -92,32 +92,32 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     /**
      * Change the name of the plugin
      */
-    void setName( QString name );
+    void setName( const QString& name );
     
     /**
      * Generates the filename relatively to the download path from @p id and @p type
      */
-    QString generateFilename( QString id, QString type ) const;
+    QString generateFilename( const QString& id, const QString& type ) const;
     
     /**
      * Generates the absolute filepath of the from @p id and @p type
      */
-    QString generateFilepath( QString id, QString type ) const;
+    QString generateFilepath( const QString& id, const QString& type ) const;
     
     /**
      * Testing the existence of the file @p fileName
      */
-    bool fileExists( QString fileName );
+    bool fileExists( const QString& fileName ) const;
     
     /**
      * Testing the existence of a file with @p id and @p type
      */
-    bool fileExists( QString id, QString type );
+    bool fileExists( const QString& id, const QString& type ) const;
     
     /**
      * Testing the existence of the item @p id in the list
      */
-    bool itemExists( QString id );
+    bool itemExists( const QString& id );
     
  private Q_SLOTS:
     /**

@@ -26,7 +26,9 @@ class PhotoPluginModel : public AbstractDataPluginModel
  public:
     PhotoPluginModel( QObject *parent = 0 );
     
-    static QUrl generateUrl( QString service, QString method, QHash<QString,QString> options );
+    static QUrl generateUrl( const QString& service,
+                             const QString& method,
+                             const QHash<QString,QString>& options );
  
  protected:
     /**
@@ -42,7 +44,7 @@ class PhotoPluginModel : public AbstractDataPluginModel
      * have to be scheduled to downloadItemData or could be directly added to the list,
      * depending on if they have to download information to be shown.
      **/
-    void parseFile( QByteArray file );
+    void parseFile( const QByteArray& file );
 };
 
 }

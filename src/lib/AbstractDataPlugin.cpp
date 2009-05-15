@@ -94,7 +94,7 @@ QString AbstractDataPlugin::nameId() const {
     return d->m_name;
 }
     
-void AbstractDataPlugin::setNameId( QString name ) {
+void AbstractDataPlugin::setNameId( const QString& name ) {
     d->m_name = name;
 }
 

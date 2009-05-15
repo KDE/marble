@@ -50,7 +50,7 @@ bool WikipediaItem::initialized() {
     return true;
 }
     
-void WikipediaItem::addDownloadedFile( QString url, QString type ) {
+void WikipediaItem::addDownloadedFile( const QString& url, const QString& type ) {
     // There shouldn't be downloaded files for this item
 }
 
@@ -59,11 +59,11 @@ bool WikipediaItem::operator<( const AbstractDataPluginItem *other ) const {
 }
    
 bool WikipediaItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                              const QString& renderPos, GeoSceneLayer * layer )
+                           const QString& renderPos, GeoSceneLayer * layer )
 {
-    painter->drawPixmap( coordinates(), *m_pixmap );
+    painter->drawPixmap( coordinates(), m_pixmap );
     
-    updatePaintPosition( viewport, m_pixmap->size() );
+    updatePaintPosition( viewport, m_pixmap.size() );
     
     return true;
 }
@@ -92,7 +92,7 @@ QUrl WikipediaItem::url() {
     return m_url;
 }
 
-void WikipediaItem::setUrl( QUrl url ) {
+void WikipediaItem::setUrl( const QUrl& url ) {
     m_url = url;
 }
 
@@ -100,7 +100,7 @@ QUrl WikipediaItem::thumbnailImageUrl() {
     return m_thumbnailImageUrl;
 }
 
-void WikipediaItem::setThumbnailImageUrl( QUrl thumbnailImageUrl ) {
+void WikipediaItem::setThumbnailImageUrl( const QUrl& thumbnailImageUrl ) {
     m_thumbnailImageUrl = thumbnailImageUrl;
 }
 
@@ -120,10 +120,10 @@ void WikipediaItem::openBrowser( ) {
              m_browser, SLOT( setWindowTitle(QString) ) );
 }
 
-void WikipediaItem::setPixmap( QPixmap *pixmap ) {
+void WikipediaItem::setPixmap( const QPixmap& pixmap ) {
     m_pixmap = pixmap;
 }
     
-void WikipediaItem::setIcon( QIcon *icon ) {
-    m_action->setIcon( *icon );
+void WikipediaItem::setIcon( const QIcon& icon ) {
+    m_action->setIcon( icon );
 }
