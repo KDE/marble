@@ -56,6 +56,7 @@ static QString guessWikipediaDomain()
 }
 
 TinyWebBrowser::TinyWebBrowser( QWidget* parent )
+    : QWebView( parent )
 {
     connect( this, SIGNAL( statusBarMessage( QString ) ),
              this, SIGNAL( statusMessage( QString ) ) );
