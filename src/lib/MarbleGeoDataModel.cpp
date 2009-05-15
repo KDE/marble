@@ -46,7 +46,7 @@ class MarbleGeoDataModel::Private {
 };
 
 MarbleGeoDataModel::MarbleGeoDataModel( QObject *parent )
-    : QAbstractListModel(), d( new Private() )
+    : QAbstractListModel( parent ), d( new Private() )
 {
 }
 

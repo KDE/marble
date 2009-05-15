@@ -87,12 +87,12 @@ class MarbleGeometryModel::Private {
 };
 
 MarbleGeometryModel::MarbleGeometryModel( QObject *parent )
-    : QAbstractItemModel(), d( new Private() )
+    : QAbstractItemModel( parent ), d( new Private() )
 {
 }
 
 MarbleGeometryModel::MarbleGeometryModel( GeoDataDocument *rootDocument, QObject *parent )
-    : QAbstractItemModel(), d( new Private( rootDocument ) )
+    : QAbstractItemModel( parent ), d( new Private( rootDocument ) )
 {
 }
 
