@@ -20,56 +20,6 @@
 #ifndef TINYWEBBROWSER_H
 #define TINYWEBBROWSER_H
 
-#if QT_VERSION < 0x040400
-
-#include <QtCore/QString>
-#include <QtCore/QVariant>
-#include <QtGui/QTextBrowser>
-
-class QUrl;
-
-namespace Marble
-{
-class CacheStoragePolicy;
-class HttpDownloadManager;
-
-class TinyWebBrowser : public QTextBrowser
-{
-        Q_OBJECT
-
-    public:
-        explicit TinyWebBrowser ( QWidget* parent = 0 );
-        ~TinyWebBrowser();
-
-    public Q_SLOTS:
-        void setSource ( const QString& urlString );
-        void print();
-
-    Q_SIGNALS:
-        void backwardAvailable ( bool );
-        void statusMessage ( QString );
-
-    protected:
-        virtual QVariant loadResource ( int type, const QUrl & name );
-
-    private Q_SLOTS:
-        void slotDownloadFinished ( const QString&, const QString& );
-
-        void linkClicked ( const QUrl &url );
-
-    private:
-        void setContentHtml ( const QString& );
-        Q_DISABLE_COPY ( TinyWebBrowser )
-        CacheStoragePolicy *m_storagePolicy;
-        HttpDownloadManager *m_downloadManager;
-
-        QString         m_source;
-};
-
-}
-
-#else
-
 #include <QtWebKit/QWebView>
 #include <QtGui/QDesktopServices>
 
@@ -99,6 +49,5 @@ class TinyWebBrowser : public QWebView
 };
 
 }
-#endif
 
 #endif // TINYWEBBROWSER_H
