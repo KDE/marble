@@ -51,6 +51,9 @@ bool WikipediaItem::initialized() {
 }
     
 void WikipediaItem::addDownloadedFile( const QString& url, const QString& type ) {
+    Q_UNUSED( url )
+    Q_UNUSED( type )
+
     // There shouldn't be downloaded files for this item
 }
 
@@ -61,6 +64,9 @@ bool WikipediaItem::operator<( const AbstractDataPluginItem *other ) const {
 bool WikipediaItem::paint( GeoPainter *painter, ViewportParams *viewport,
                            const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
     painter->drawPixmap( coordinates(), m_pixmap );
     
     updatePaintPosition( viewport, m_pixmap.size() );

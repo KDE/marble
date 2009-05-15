@@ -96,6 +96,8 @@ bool FileViewFloatItem::isInitialized() const
 
 bool FileViewFloatItem::needsUpdate(ViewportParams *viewport)
 {
+    Q_UNUSED( viewport )
+
     return true;
 }
 

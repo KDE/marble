@@ -230,5 +230,7 @@ void dumpGeoDataDocument(GeoDataDocument* document)
 
 void dumpGeoSceneDocument(GeoSceneDocument* document)
 {
+    Q_UNUSED( document )
+
     // TODO: Maybe dump parsed datastructures here!
 }

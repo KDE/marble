@@ -115,6 +115,8 @@ bool MapScaleFloatItem::renderFloatItem( GeoPainter *painter,
 					 ViewportParams *viewport,
 					 GeoSceneLayer * layer )
 {
+    Q_UNUSED( layer )
+
     painter->save();
 
     painter->setRenderHint( QPainter::Antialiasing, true );

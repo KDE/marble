@@ -47,35 +47,49 @@ void GeoRendererView::setGeoPainter( GeoPainter* painter )
 
 QRect GeoRendererView::visualRect( const QModelIndex &index ) const
 {
+    Q_UNUSED( index )
+
     return QRect();
 }
 
 void GeoRendererView::scrollTo( const QModelIndex &index, ScrollHint hint )
 {
+    Q_UNUSED( index )
+    Q_UNUSED( hint )
 }
 
 QModelIndex GeoRendererView::indexAt( const QPoint &point ) const
 {
+    Q_UNUSED( point )
+
     return QModelIndex();
 }
 
 QModelIndex GeoRendererView::moveCursor( QAbstractItemView::CursorAction cursorAction,
                     Qt::KeyboardModifiers modifiers )
 {
+    Q_UNUSED( cursorAction )
+    Q_UNUSED( modifiers )
+
     return QModelIndex();
 }
 
 bool GeoRendererView::isIndexHidden( const QModelIndex &index ) const
 {
+    Q_UNUSED( index )
+
     return false;
 }
 
 void GeoRendererView::setSelection( const QRect&, QItemSelectionModel::SelectionFlags command )
 {
+    Q_UNUSED( command )
 }
 
 void GeoRendererView::paintEvent( QPaintEvent *event )
 {
+    Q_UNUSED( event )
+
     QModelIndex index = rootIndex();
 //    renderIndex( index );
 }
@@ -120,6 +134,8 @@ void GeoRendererView::renderIndex( QModelIndex &index )
 
 QRegion GeoRendererView::visualRegionForSelection( const QItemSelection &selection ) const
 {
+    Q_UNUSED( selection )
+
     return QRegion();
 }
 

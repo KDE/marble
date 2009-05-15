@@ -103,6 +103,10 @@ bool GeoRendererPlugin::isInitialized () const
 bool GeoRendererPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                                 const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED( viewport )
+    Q_UNUSED( renderPos )
+    Q_UNUSED( layer )
+
     if ( renderPos != "SURFACE" ) {
         return true;
     }
