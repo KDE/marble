@@ -314,7 +314,6 @@ void GeoDataFeature::initializeDefaultStyles()
     QFont tmp;
 
 
-#if QT_VERSION >= 0x040400
     // Fonts for areas ...
     tmp = s_defaultStyle[Continent]->labelStyle().font();
     tmp.setLetterSpacing( QFont::AbsoluteSpacing, 2 );
@@ -328,7 +327,6 @@ void GeoDataFeature::initializeDefaultStyles()
     tmp.setCapitalization( QFont::SmallCaps );
     tmp.setBold( true );
     s_defaultStyle[Mare]->labelStyle().setFont( tmp );
-#endif
 
     // Now we need to underline the capitals ...
 

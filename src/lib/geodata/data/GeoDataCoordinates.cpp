@@ -22,11 +22,7 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QCoreApplication>
-#if QT_VERSION < 0x040400
-# include <qatomic.h>
-#else
-# include <QtCore/QAtomicInt>
-#endif
+#include <QtCore/QAtomicInt>
 
 #include "global.h"
 
@@ -34,9 +30,6 @@
 
 namespace Marble
 {
-#if QT_VERSION < 0x040400
-    typedef QAtomic QAtomicInt;
-#endif
 
 GeoDataCoordinates::Notation GeoDataCoordinates::s_notation = GeoDataCoordinates::DMS;
 

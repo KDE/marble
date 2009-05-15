@@ -12,17 +12,10 @@
 #define GEODATACOORDINATES_P_H
 
 #include "Quaternion.h"
-#if QT_VERSION < 0x040400
-# include <qatomic.h>
-#else
-# include <QtCore/QAtomicInt>
-#endif
+#include <QtCore/QAtomicInt>
 
 namespace Marble
 {
-#if QT_VERSION < 0x040400
-    typedef QAtomic QAtomicInt;
-#endif
 
 class GeoDataCoordinatesPrivate
 {
