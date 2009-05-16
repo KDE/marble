@@ -47,6 +47,8 @@ SphericalProjection::SphericalProjection()
 
 SphericalProjection::~SphericalProjection()
 {
+   //For the future
+   //delete d;
 }
 
 AbstractProjectionHelper *SphericalProjection::helper()

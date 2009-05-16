@@ -45,6 +45,7 @@ AbstractDataPluginItem::AbstractDataPluginItem( QObject *parent )
 }
 
 AbstractDataPluginItem::~AbstractDataPluginItem() {
+    delete d;
 }
 
 GeoDataCoordinates AbstractDataPluginItem::coordinates() {

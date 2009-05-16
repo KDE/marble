@@ -32,7 +32,8 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin {
     
  public:    
     AbstractDataPlugin();
-     
+
+    ~AbstractDataPlugin();    
     /**
      * @brief Returns the name(s) of the backend that the plugin can render
      */
