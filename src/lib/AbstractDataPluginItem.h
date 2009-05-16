@@ -35,7 +35,7 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject {
     
  public:
     AbstractDataPluginItem( QObject *parent = 0 );
-    ~AbstractDataPluginItem();
+    virtual ~AbstractDataPluginItem();
     
     GeoDataCoordinates coordinates();
     void setCoordinates( const GeoDataCoordinates& coordinates );

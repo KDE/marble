@@ -38,7 +38,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
  
  public:
     explicit AbstractDataPluginModel( const QString& name, QObject *parent = 0 );
-    ~AbstractDataPluginModel();
+    virtual ~AbstractDataPluginModel();
         
     /**
      * Returns the currently downloaded images in the @p viewport.

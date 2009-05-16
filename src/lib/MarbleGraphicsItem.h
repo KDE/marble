@@ -11,10 +11,21 @@
 #ifndef MARBLEGRAPHICSITEM_H
 #define MARBLEGRAPHICSITEM_H
 
+class QPoint;
+class QString;
+
+namespace Marble {
+    
+class GeoPainter;
+class GeoSceneLayer;
+class ViewportParams;
+
+class MarbleGraphicsItemPrivate;
+
 class MarbleGraphicsItem {
  public:
     MarbleGraphicsItem();
-    ~MarbleGraphicsItem();
+    virtual ~MarbleGraphicsItem();
     
     /**
      * Paints the item
@@ -28,30 +39,58 @@ class MarbleGraphicsItem {
     bool contains( const QPoint& point ) const;
     
     /**
-     * Returns the coordinates of the item in view coordinates
+     * Returns all coordinates of the item in view coordinates
      */
-    QPointF pos() const;
+    QList<QPoint> positions() const;
+    
+    /**
+     * Returns the first coordinate of the item in view coordinates
+     */
+    QPoint position() const;
+    
+    /**
+     * Returns all bounding rects of the item in view coordinates
+     */
+    QList<QRect> boundingRects() const;
+    
+    /**
+     * Returns the first bounding rect of the item in view coordinates.
+     * Keep in mind boundingRects which will probably be the best choice.
+     */
+    QRect boundingRect() const;
+    
+    /**
+     * Returns the size of the item
+     */
+    virtual QSize size() const;
+    
+ protected:
+    /**
+     * Set the position of the item
+     */
+    void setPosition( const QPoint& position );
     
     /**
      * Set the position of the item
      */
-    void setPos( const QPointF& position );
+    void setPositions( const QList<QPoint>& positions );
     
-    /**
-     * Returns the bounding rect of the item in view coordinates
-     */
-    QRectF boundingRect() const;
-    
- protected:
     /**
      * Set the bounding rect of the item
      */
-    void setBoundingRect() const; // Should this be protected? I don't think the outer world would want to change the size. All this could be implemented in the child if somebody would like to do this.
-     
-    bool eventFilter( QObject *object, QEvent *e );
+    void setBoundingRect( const QRect& boundingRect );
+    
+    /**
+     * Set the bounding rect of the item
+     */
+    void setBoundingRects( const QList<QRect>& boundingRects );
+    
+    virtual bool eventFilter( QObject *object, QEvent *e );
     
  private:
     MarbleGraphicsItemPrivate *d;
 };
+
+} // Namespace Marble
 
 #endif // MARBLEGRAPHICSITEM_H
