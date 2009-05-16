@@ -62,7 +62,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * Generates the download url for the description file from the web service depending on
      * the @p box surrounding the view and the @p number of files to show.
      **/
-    virtual QUrl descriptionFileUrl( GeoDataLatLonAltBox *box,
+    virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
                                      MarbleDataFacade *facade,
                                      qint32 number = 10 ) = 0;
        
@@ -78,6 +78,11 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * download is finished.
      **/
     void downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
+    
+    /**
+     * Download description file
+     */
+    void downloadDescriptionFile( const QUrl& url );
     
     /**
      * Adds the @p item to the list of already initialized items.
@@ -123,12 +128,12 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     /**
      * Download a new description file
      */
-    void downloadDescriptionFile();
+    void handleChangedViewport();
     
     /**
      * Processing a finished download job
      */
-    void processFinishedJob( QString relativeUrlString, QString id );
+    void processFinishedJob( const QString& relativeUrlString, const QString& id );
     
  private:
     AbstractDataPluginModelPrivate * const d;

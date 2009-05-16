@@ -63,28 +63,28 @@ WikipediaModel::WikipediaModel( QObject *parent )
 WikipediaModel::~WikipediaModel() {
 }
 
-QUrl WikipediaModel::descriptionFileUrl( GeoDataLatLonAltBox *box,
+void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                          MarbleDataFacade *facade,
                                          qint32 number )
 {
     // Geonames only supports wikipedia articles for earth
     if( facade->target() != "earth" ) {
-        return QUrl();
+        return;
     }
         
     QString geonamesUrl( "http://ws.geonames.org/wikipediaBoundingBox" );
     geonamesUrl += "?north=";
-    geonamesUrl += QString::number( box->north() * RAD2DEG );
+    geonamesUrl += QString::number( box.north() * RAD2DEG );
     geonamesUrl += "&south=";
-    geonamesUrl += QString::number( box->south() * RAD2DEG );
+    geonamesUrl += QString::number( box.south() * RAD2DEG );
     geonamesUrl += "&east=";
-    geonamesUrl += QString::number( box->east() * RAD2DEG );
+    geonamesUrl += QString::number( box.east() * RAD2DEG );
     geonamesUrl += "&west=";
-    geonamesUrl += QString::number( box->west() * RAD2DEG );
+    geonamesUrl += QString::number( box.west() * RAD2DEG );
     geonamesUrl += "&maxRows=";
     geonamesUrl += QString::number( number );
     
-    return QUrl( geonamesUrl );
+    downloadDescriptionFile( QUrl( geonamesUrl ) );
 }
 
 void WikipediaModel::parseFile( const QByteArray& file ) {

@@ -35,7 +35,7 @@ class WikipediaModel : public AbstractDataPluginModel
      * Generates the download url for the description file from the web service depending on
      * the @p box surrounding the view and the @p number of files to show.
      **/
-    QUrl descriptionFileUrl( GeoDataLatLonAltBox *box,
+    void getAdditionalItems( const GeoDataLatLonAltBox& box,
                              MarbleDataFacade *facade,
                              qint32 number = 10 );
        

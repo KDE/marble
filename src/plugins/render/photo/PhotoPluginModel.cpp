@@ -63,26 +63,55 @@ QUrl PhotoPluginModel::generateUrl( const QString& service,
     return QUrl( url );
 }
 
-QUrl PhotoPluginModel::descriptionFileUrl( GeoDataLatLonAltBox *box,
+void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                            MarbleDataFacade *facade,
                                            qint32 number )
 {
     // Flickr only supports images for earth
     if( facade->target() != "earth" ) {
-        return QUrl();
+        return;
     }
     
-    QString bbox( "" );
-    bbox += QString::number( box->west()  * RAD2DEG ) + ',';
-    bbox += QString::number( box->south()  * RAD2DEG ) + ',';
-    bbox += QString::number( box->east() * RAD2DEG ) + ',';
-    bbox += QString::number( box->north() * RAD2DEG );
+    if( box.west() <= box.east() ) {
+        QString bbox( "" );
+        bbox += QString::number( box.west()  * RAD2DEG ) + ',';
+        bbox += QString::number( box.south()  * RAD2DEG ) + ',';
+        bbox += QString::number( box.east() * RAD2DEG ) + ',';
+        bbox += QString::number( box.north() * RAD2DEG );
     
-    QHash<QString,QString> options;
-    options.insert( "per_page", QString::number( number ) );
-    options.insert( "bbox",     bbox );
+        QHash<QString,QString> options;
+        options.insert( "per_page", QString::number( number ) );
+        options.insert( "bbox",     bbox );
     
-    return generateUrl( "flickr", "flickr.photos.search", options );
+        downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", options ) );
+    }
+    else {
+        // Flickr api doesn't support bboxes with west > east so we have to split in two boxes
+        QString bboxWest( "" );
+        bboxWest += QString::number( box.west() * RAD2DEG ) + ',';
+        bboxWest += QString::number( box.south()  * RAD2DEG ) + ',';
+        bboxWest += QString::number( 180 ) + ',';
+        bboxWest += QString::number( box.north() * RAD2DEG );
+        
+        QHash<QString,QString> optionsWest;
+        optionsWest.insert( "per_page", QString::number( number/2 ) );
+        optionsWest.insert( "bbox",     bboxWest );
+        
+        downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", optionsWest ) );
+        
+        
+        QString bboxEast( "" );
+        bboxEast += QString::number( -180 ) + ',';
+        bboxEast += QString::number( box.south()  * RAD2DEG ) + ',';
+        bboxEast += QString::number( box.east() * RAD2DEG ) + ',';
+        bboxEast += QString::number( box.north() * RAD2DEG );
+        
+        QHash<QString,QString> optionsEast;
+        optionsWest.insert( "per_page", QString::number( number/2 ) );
+        optionsWest.insert( "bbox",     bboxEast );
+        
+        downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", optionsEast ) );
+    }
 }
 
 void PhotoPluginModel::parseFile( const QByteArray& file ) {

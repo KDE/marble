@@ -42,12 +42,13 @@ class AbstractDataPluginModelPrivate {
     AbstractDataPluginModelPrivate( const QString& name, AbstractDataPluginModel * parent )
         : m_parent( parent ),
           m_name( name ),
-          m_lastBox( new GeoDataLatLonAltBox() ),
-          m_downloadedBox( new GeoDataLatLonAltBox() ),
+          m_lastBox(),
+          m_downloadedBox(),
           m_lastNumber( 0 ),
           m_downloadedNumber( 0 ),
           m_lastDataFacade( 0 ),
-          m_downloadTimer( new QTimer( m_parent ) )
+          m_downloadTimer( new QTimer( m_parent ) ),
+          m_descriptionFileNumber( 0 )
     {
     }
     
@@ -64,15 +65,14 @@ class AbstractDataPluginModelPrivate {
         }
         qDeleteAll( m_itemSet );
         qDeleteAll( m_downloadingItems );
+        m_storagePolicy->clearCache();
         delete m_storagePolicy;
-        delete m_lastBox;
-        delete m_downloadedBox;
     }
     
     AbstractDataPluginModel *m_parent;
     QString m_name;
-    GeoDataLatLonAltBox *m_lastBox;
-    GeoDataLatLonAltBox *m_downloadedBox;
+    GeoDataLatLonAltBox m_lastBox;
+    GeoDataLatLonAltBox m_downloadedBox;
     qint32 m_lastNumber;
     qint32 m_downloadedNumber;
     MarbleDataFacade *m_lastDataFacade;
@@ -81,6 +81,7 @@ class AbstractDataPluginModelPrivate {
     QHash<QString, AbstractDataPluginItem*> m_downloadingItems;
     QList<AbstractDataPluginItem*> m_displayedItems;
     QTimer *m_downloadTimer;
+    quint32 m_descriptionFileNumber;
     
     CacheStoragePolicy *m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
@@ -100,7 +101,7 @@ AbstractDataPluginModel::AbstractDataPluginModel( const QString& name, QObject *
     
     // We want to download a new description file every timeBetweenDownloads ms
     connect( d->m_downloadTimer, SIGNAL( timeout() ),
-             this,               SLOT( downloadDescriptionFile() ),
+             this,               SLOT( handleChangedViewport() ),
              Qt::QueuedConnection );
     d->m_downloadTimer->start( timeBetweenDownloads );
 }
@@ -113,7 +114,7 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
                                                                MarbleDataFacade *facade,
                                                                qint32 number )
 {
-    GeoDataLatLonAltBox *currentBox = new GeoDataLatLonAltBox( viewport->viewLatLonAltBox() );
+    GeoDataLatLonAltBox currentBox = viewport->viewLatLonAltBox();
     QString target = facade->target();
     QList<AbstractDataPluginItem*> list;
     
@@ -141,7 +142,7 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
             continue;
         }
         
-        if( !currentBox->contains( (*i)->coordinates() ) ) {
+        if( !currentBox.contains( (*i)->coordinates() ) ) {
             continue;
         }
         
@@ -172,7 +173,7 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
         }
         
         // If the item is on the viewport, we want to return it
-        if( currentBox->contains( (*i)->coordinates() )
+        if( currentBox.contains( (*i)->coordinates() )
             && !list.contains( *i ) )
         {
             list.append( *i );
@@ -188,10 +189,9 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
     
     d->m_lastDataFacade = facade;
     
-    if( (!((*currentBox) == (*d->m_lastBox))
+    if( (!(currentBox == d->m_lastBox)
           || number != d->m_lastNumber ) )
     {
-        delete d->m_lastBox;
         d->m_lastBox = currentBox;
         d->m_lastNumber = number;
         d->m_lastDataFacade = facade;
@@ -227,6 +227,16 @@ void AbstractDataPluginModel::downloadItemData( const QUrl& url,
     
     d->m_downloadManager->addJob( url, id, id );
     d->m_downloadingItems.insert( id, item );
+}
+
+void AbstractDataPluginModel::downloadDescriptionFile( const QUrl& url ) {    
+    if( !url.isEmpty() ) {  
+        QString name( descriptionPrefix );
+        name += QString::number( d->m_descriptionFileNumber );
+        
+        d->m_downloadManager->addJob( url, name, name );
+        d->m_descriptionFileNumber++;
+    }
 }
 
 static bool lessThanByPointer( const AbstractDataPluginItem *item1,
@@ -311,38 +321,28 @@ bool AbstractDataPluginModel::itemExists( const QString& id ) {
     return false;
 }
 
-void AbstractDataPluginModel::downloadDescriptionFile() {
+void AbstractDataPluginModel::handleChangedViewport() {
     if( !d->m_lastDataFacade ) {
         return;
     }
     
-    if( ( !( *d->m_downloadedBox == *d->m_lastBox )
+    if( ( !( d->m_downloadedBox == d->m_lastBox )
           || d->m_downloadedNumber != d->m_lastNumber
           || d->m_downloadedTarget != d->m_lastDataFacade->target() )
         && d->m_lastNumber != 0 )
     {
         // Save the box we want to download.
         // We don't want to download too often.
-        delete d->m_downloadedBox;
-        d->m_downloadedBox = new GeoDataLatLonAltBox( *d->m_lastBox );
+        d->m_downloadedBox = d->m_lastBox;
         d->m_downloadedNumber = d->m_lastNumber;
         d->m_downloadedTarget = d->m_lastDataFacade->target();
         
-        QString name( descriptionPrefix );
-        name += QString::number( d->m_lastBox->east() );
-        name += QString::number( d->m_lastBox->west() );
-        name += QString::number( d->m_lastBox->north() );
-        name += QString::number( d->m_lastBox->south() );
-        
-        QUrl url = descriptionFileUrl( d->m_lastBox, d->m_lastDataFacade, d->m_lastNumber );
-        
-        if( !url.isEmpty() ) {
-            d->m_downloadManager->addJob( url, name, name );
-        }
+        getAdditionalItems( d->m_lastBox, d->m_lastDataFacade, d->m_lastNumber );
     }
 }
 
-void AbstractDataPluginModel::processFinishedJob( QString relativeUrlString, QString id ) {
+void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlString,
+                                                  const QString& id ) {
     Q_UNUSED( relativeUrlString );
     
     if( id.startsWith( descriptionPrefix ) ) {
