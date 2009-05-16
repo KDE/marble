@@ -146,9 +146,9 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
     Private* const d;
 
  protected:
-    int cityPopIdx( qint64 population );
-    int spacePopIdx( qint64 diameter );
-    int areaPopIdx( qreal area );
+    int cityPopIdx( qint64 population ) const;
+    int spacePopIdx( qint64 diameter ) const;
+    int areaPopIdx( qreal area ) const;
 };
 
 }

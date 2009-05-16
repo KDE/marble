@@ -416,7 +416,7 @@ void MarblePlacemarkModel::createFilterProperties( PlacemarkContainer &container
 
 }
 
-int MarblePlacemarkModel::cityPopIdx( qint64 population )
+int MarblePlacemarkModel::cityPopIdx( qint64 population ) const
 {
     int popidx = 15;
 
@@ -438,7 +438,7 @@ int MarblePlacemarkModel::cityPopIdx( qint64 population )
     return popidx;
 }
 
-int MarblePlacemarkModel::spacePopIdx( qint64 population )
+int MarblePlacemarkModel::spacePopIdx( qint64 population ) const
 {
     int popidx = 18;
 
@@ -461,9 +461,8 @@ int MarblePlacemarkModel::spacePopIdx( qint64 population )
     return popidx;
 }
 
-int MarblePlacemarkModel::areaPopIdx( qreal area )
+int MarblePlacemarkModel::areaPopIdx( qreal area ) const
 {
-    Q_UNUSED( area );
     int popidx = 17;
     if      ( area <  200000  )      popidx=11;
     else if ( area <  400000  )      popidx=12;
