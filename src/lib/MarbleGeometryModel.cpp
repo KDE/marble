@@ -39,7 +39,7 @@ class MarbleGeometryModel::Private {
     {
         mapFeature( m_rootDocument );
     };
-    
+
     Private() : m_rootDocument( 0 ) {};
 
     void mapGeometry( GeoDataGeometry* geometry )
@@ -49,27 +49,27 @@ class MarbleGeometryModel::Private {
         * This is needed to build up the parent Hash.
         */
         if( !geometry ) return;
-        
+
         GeoDataMultiGeometry* multiGeometry = static_cast<GeoDataMultiGeometry*>( geometry );
         QVector<GeoDataGeometry>::iterator iterator = multiGeometry->begin();
         QVector<GeoDataGeometry>::iterator end = multiGeometry->end();
         for(; iterator != end; ++iterator ) {
-            m_parent[ iterator ] = geometry;
-            if( iterator->geometryId() == GeoDataMultiGeometryId ) mapGeometry( iterator );
+            m_parent.insert( &( *iterator ), geometry );
+            if( iterator->geometryId() == GeoDataMultiGeometryId ) mapGeometry( &( *iterator ) );
         }
     };
-    
+
     void mapFeature( GeoDataFeature* feature )
     {
         if( !feature ) return;
-        
+
         if( feature->featureId() == GeoDataDocumentId || feature->featureId() == GeoDataFolderId ) {
             QVector<GeoDataFeature> featureList = static_cast<const GeoDataContainer*>( feature )->features();
             QVector<GeoDataFeature>::iterator iterator = featureList.begin();
             QVector<GeoDataFeature>::iterator end = featureList.end();
             for(; iterator != end; ++iterator ) {
-                m_parent[ iterator ] = feature;
-                mapFeature( iterator );
+                m_parent.insert( &( *iterator ), feature );
+                mapFeature( &( *iterator ) );
             }
         }
 
@@ -81,7 +81,7 @@ class MarbleGeometryModel::Private {
             }
         }
     };
-    
+
     GeoDataDocument* m_rootDocument;
     QHash<GeoDataObject*,GeoDataObject*> m_parent;
 };
@@ -131,23 +131,23 @@ int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
         parentItem = static_cast<GeoDataObject*>( parent.internalPointer() );
 
     int size = 0;
-    if( dynamic_cast<GeoDataFeature*>( parentItem ) && 
+    if( dynamic_cast<GeoDataFeature*>( parentItem ) &&
        (static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataDocumentId ||
         static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataFolderId ) )
     {
         GeoDataFolder folder( *static_cast<GeoDataFeature*>( parentItem ) );
         size = folder.features().size();
     }
-    
-    if( dynamic_cast<GeoDataFeature*>( parentItem ) && 
+
+    if( dynamic_cast<GeoDataFeature*>( parentItem ) &&
        static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataPlacemarkId )
     {
-        /* there is only one GeoDataGeometry Object per Placemark; if Styles 
+        /* there is only one GeoDataGeometry Object per Placemark; if Styles
         * are added later, add them here */
         size = 1;
     }
-    
-    if( dynamic_cast<GeoDataGeometry*>( parentItem ) && 
+
+    if( dynamic_cast<GeoDataGeometry*>( parentItem ) &&
         static_cast<GeoDataGeometry*>( parentItem )->geometryId() == GeoDataMultiGeometryId )
     {
         size = dynamic_cast<GeoDataMultiGeometry*>( parentItem )->size();
@@ -166,8 +166,8 @@ QVariant MarbleGeometryModel::data( const QModelIndex &index, int role ) const
         item = static_cast<GeoDataObject*>( d->m_rootDocument );
     }
 
-    /* for now simply give back the type of the GeoDataObject 
-    * there might be a need to extend this, but usually we want 
+    /* for now simply give back the type of the GeoDataObject
+    * there might be a need to extend this, but usually we want
     */
     if( role == Qt::DisplayRole ) {
         if( dynamic_cast<GeoDataFeature*>( item ) ) {
@@ -217,7 +217,7 @@ QVariant MarbleGeometryModel::data( const QModelIndex &index, int role ) const
         return v;
     }
 
-    return QVariant( "GeoDataObject" ); 
+    return QVariant( "GeoDataObject" );
     /* TODO the data is hardcoded and very limited right now,
      * the logic what data is returned might be moved to the items
      * themselves later. Use the following code then:
@@ -229,15 +229,15 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
 {
     if ( !hasIndex( row, column, parent ) )
         return QModelIndex();
-    
+
     GeoDataObject *parentItem;
-    
+
     if ( !parent.isValid() )
         parentItem = d->m_rootDocument;
     else
         parentItem = static_cast<GeoDataObject*>( parent.internalPointer() );
 
-    GeoDataObject *childItem = 0; 
+    GeoDataObject *childItem = 0;
 
     /* go down into GeoDataContainers */
     if( dynamic_cast<GeoDataFeature*>( parentItem ) ) {
@@ -260,7 +260,7 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
             childItem = &geom.vector()[ row ];
             qDebug() << "casting geometryObject:" << childItem;
         }
-    } 
+    }
 
     if ( childItem )
         return createIndex( row, column, childItem );
@@ -284,7 +284,7 @@ QModelIndex MarbleGeometryModel::parent( const QModelIndex &index ) const
         return QModelIndex();
     }
 
-    /* for now leave that as 0, 0 -> this needs some more thoughts as 
+    /* for now leave that as 0, 0 -> this needs some more thoughts as
      * it is simply wrong */
     return createIndex( 0, 0, parentItem );
 }
