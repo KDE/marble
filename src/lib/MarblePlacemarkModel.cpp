@@ -262,7 +262,7 @@ void MarblePlacemarkModel::createFilterProperties( PlacemarkContainer &container
 
     QVector<GeoDataPlacemark>::Iterator i;
     for ( i = container.begin(); i != container.end(); ++i ) {
-        GeoDataPlacemark placemark = *i;
+        GeoDataPlacemark& placemark = *i;
 
         bool hasPopularity = false;
 
