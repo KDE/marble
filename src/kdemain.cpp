@@ -14,8 +14,12 @@
 #include <KLocale>
 #include <KAboutData>
 #include <KCmdLineArgs>
+#include <KConfig>
+#include <KConfigGroup>
+#include <KGlobal>
 
 #include <QtCore/QFile>
+#include <QtCore/QDebug>
  
 #include "ControlView.h"
 #include "KdeMainWindow.h"
@@ -29,6 +33,29 @@
 #endif
 
 using namespace Marble;
+
+// The GraphicsSystem needs to be set before the instantiation of the 
+// QApplication. Therefore we need to parse the current setting 
+// in this unusual place :-/
+
+QString readGraphicsSystem( int argc, char *argv[], const KAboutData& aboutData )
+{    
+    QCoreApplication app( argc, argv );
+    KComponentData componentData( aboutData, KComponentData::SkipMainComponentRegistration );
+
+    KConfigGroup viewGroup(componentData.config(), "View");
+    QString graphicsSystem = viewGroup.readEntry( "graphicsSystem", "NativeGraphics" );
+
+    QString graphicsString( "native" );
+    if ( graphicsSystem == QString( "RasterGraphics" ) ) {
+        graphicsString = QString( "raster" );
+    }
+    if ( graphicsSystem == QString( "OpenGLGraphics" ) ) {
+        graphicsString = QString( "opengl" );
+    }
+
+    return graphicsString;
+}
 
 int main (int argc, char *argv[])
 {
@@ -184,6 +211,8 @@ int main (int argc, char *argv[])
                          ki18n( "Special thanks for providing an"
                                 " important source of inspiration by creating"
                                 " Marble's predecessor \"Kartographer\"." ));
+
+    QApplication::setGraphicsSystem( readGraphicsSystem(argc, argv, aboutData ) );
 
     KCmdLineArgs::init( argc, argv, &aboutData );
 

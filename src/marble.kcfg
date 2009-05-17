@@ -90,6 +90,15 @@
    </choices>
    <default>Marble::Low</default>
   </entry>
+  <entry key="graphicsSystem" type="Enum" >
+   <label>The graphics system that is used by Qt to render the graphics.</label>
+   <choices name="Marble::GraphicsSystem">
+    <choice name="NativeGraphics"/>
+    <choice name="RasterGraphics"/>
+    <choice name="OpenGLGraphics"/>
+   </choices>
+   <default>Marble::NativeGraphics</default>
+  </entry>
   <entry key="labelLocalization" type="Enum" >
    <label>The localization of the labels.</label>
     <choices name="Marble::LabelLocalization">

@@ -18,6 +18,7 @@
 #include <QtNetwork/QNetworkProxy>
 #include <QtGui/QApplication>
 #include <QtGui/QDialogButtonBox>
+#include <QtGui/QMessageBox>
 #include <QtGui/QStandardItem>
 #include <QtGui/QTabWidget>
 #include <QtGui/QVBoxLayout>
@@ -57,6 +58,21 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( QWidget *parent )
     ui_viewSettings.setupUi( w_viewSettings );
     tabWidget->addTab( w_viewSettings, tr( "View" ) );
 
+    // It's experimental -- so we remove it for now.
+    // FIXME: Delete the following  line once OpenGL support is officially supported.
+    ui_viewSettings.kcfg_graphicsSystem->removeItem( Marble::OpenGLGraphics );
+
+    QString nativeString ( tr("Native") );
+
+    #ifdef Q_WS_X11
+    nativeString = tr( "Native (X11)" );
+    #endif
+    #ifdef Q_WS_MAC
+    nativeString = tr( "Native (Mac OS X Core Graphics)" );
+    #endif
+
+    ui_viewSettings.kcfg_graphicsSystem->setItemText( Marble::NativeGraphics, nativeString );
+
     // navigation page
     QWidget *w_navigationSettings = new QWidget( this );
 
@@ -91,11 +107,7 @@ QtMarbleConfigDialog::~QtMarbleConfigDialog()
 
 void QtMarbleConfigDialog::initSettings() 
 {
-#ifdef Q_WS_MAC
-    settings = new QSettings("KDE.org", "Marble Desktop Globe");
-#else
-    settings = new QSettings("KDE.org", "Marble Desktop Globe");
-#endif
+    settings = new QSettings("kde.org", "Marble Desktop Globe");
 }
 
 void QtMarbleConfigDialog::syncSettings()
@@ -122,11 +134,13 @@ void QtMarbleConfigDialog::syncSettings()
     }
     
     QNetworkProxy::setApplicationProxy(proxy);
-    
 }
 
 void QtMarbleConfigDialog::readSettings()
 {
+    m_initialGraphicsSystem = graphicsSystem();
+    m_previousGraphicsSystem = m_initialGraphicsSystem;
+
     // Sync settings to make sure that we read the current settings.
     syncSettings();
     
@@ -137,6 +151,7 @@ void QtMarbleConfigDialog::readSettings()
     ui_viewSettings.kcfg_animationQuality->setCurrentIndex( animationQuality() );
     ui_viewSettings.kcfg_labelLocalization->setCurrentIndex( labelLocalization() );
     ui_viewSettings.kcfg_mapFont->setCurrentFont( mapFont() );
+    ui_viewSettings.kcfg_graphicsSystem->setCurrentIndex( graphicsSystem() );
     
     // Navigation
     ui_navigationSettings.kcfg_dragLocation->setCurrentIndex( dragLocation() );
@@ -160,13 +175,30 @@ void QtMarbleConfigDialog::readSettings()
     } else {
         w_cacheSettings->kcfg_proxyAuth->setCheckState( Qt::Unchecked );
     }
-    
+
+    // FIXME: Why should the settings have changed? Is this a copy/paste bug?
     emit settingsChanged();
 }
 
 void QtMarbleConfigDialog::writeSettings()
 {
     syncSettings();
+
+    // Determining the graphicsSystemString
+    QString graphicsSystemString;
+    switch ( ui_viewSettings.kcfg_graphicsSystem->currentIndex() )
+    {
+        case Marble::RasterGraphics :
+            graphicsSystemString = "raster";
+            break;
+        case Marble::OpenGLGraphics :
+            graphicsSystemString = "opengl";
+            break;
+        default:
+        case Marble::NativeGraphics :
+            graphicsSystemString = "native";
+            break;
+    }
     
     settings->beginGroup( "View" );
     settings->setValue( "distanceUnit", ui_viewSettings.kcfg_distanceUnit->currentIndex() );
@@ -175,6 +207,7 @@ void QtMarbleConfigDialog::writeSettings()
     settings->setValue( "animationQuality", ui_viewSettings.kcfg_animationQuality->currentIndex() );
     settings->setValue( "labelLocalization", ui_viewSettings.kcfg_labelLocalization->currentIndex() );
     settings->setValue( "mapFont", ui_viewSettings.kcfg_mapFont->currentFont() );
+    settings->setValue( "graphicsSystem", graphicsSystemString );
     settings->endGroup();
     
     settings->beginGroup( "Navigation" );
@@ -200,98 +233,117 @@ void QtMarbleConfigDialog::writeSettings()
     } else {
         settings->setValue( "proxyAuth", false );
     }
-
     settings->endGroup();
     
     emit settingsChanged();
+
+    if (    m_initialGraphicsSystem != graphicsSystem() 
+         && m_previousGraphicsSystem != graphicsSystem() ) {
+        QMessageBox::information (this, tr("Graphics System Change"),
+                                tr("You have decided to run Marble with a different graphics system.\n"
+                                   "For this change to become effective, Marble has to be restarted.\n"
+                                   "Please close the application and start Marble again.") );
+    }    
+    m_previousGraphicsSystem = graphicsSystem();
 }
 
-Marble::DistanceUnit QtMarbleConfigDialog::distanceUnit()
+Marble::DistanceUnit QtMarbleConfigDialog::distanceUnit() const
 {
     return (Marble::DistanceUnit) settings->value( "View/distanceUnit", Marble::Metric ).toInt();
 }
 
-Marble::AngleUnit QtMarbleConfigDialog::angleUnit()
+Marble::AngleUnit QtMarbleConfigDialog::angleUnit() const
 {
     return (Marble::AngleUnit) settings->value( "View/angleUnit", Marble::DMSDegree ).toInt();
 }
 
-Marble::MapQuality QtMarbleConfigDialog::stillQuality()
+Marble::MapQuality QtMarbleConfigDialog::stillQuality() const
 {
     return (Marble::MapQuality) settings->value( "View/stillQuality", Marble::High ).toInt();
 }
 
-Marble::MapQuality QtMarbleConfigDialog::animationQuality()
+Marble::MapQuality QtMarbleConfigDialog::animationQuality() const
 {
     return (Marble::MapQuality) settings->value( "View/animationQuality", Marble::Low ).toInt();
 }
 
-int QtMarbleConfigDialog::labelLocalization()
+int QtMarbleConfigDialog::labelLocalization() const
 {
     return settings->value( "View/labelLocalization" , Marble::Native ).toInt();
 }
 
-QFont QtMarbleConfigDialog::mapFont()
+QFont QtMarbleConfigDialog::mapFont() const
 {
     return settings->value( "View/mapFont", QApplication::font() ).value<QFont>();
 }
 
-int QtMarbleConfigDialog::dragLocation()
+Marble::GraphicsSystem QtMarbleConfigDialog::graphicsSystem() const
+{
+    QString graphicsSystemString = settings->value( "View/graphicsSystem", "native" ).toString();
+
+    if ( graphicsSystemString == "raster" ) return Marble::RasterGraphics;
+    if ( graphicsSystemString == "opengl" ) return Marble::OpenGLGraphics;
+
+    // default case:  graphicsSystemString == "native"
+    return Marble::NativeGraphics;
+}
+
+int QtMarbleConfigDialog::dragLocation() const
 {
     return settings->value( "Navigation/dragLocation", Marble::KeepAxisVertically ).toInt();
 }
 
-int QtMarbleConfigDialog::onStartup()
+int QtMarbleConfigDialog::onStartup() const
 {
     return settings->value( "Navigation/onStartup", Marble::ShowHomeLocation ).toInt();
 }
 
-bool QtMarbleConfigDialog::animateTargetVoyage()
+bool QtMarbleConfigDialog::animateTargetVoyage() const
 {
     return settings->value( "Navigation/animateTargetVoyage", false ).toBool();
 }
 
-int QtMarbleConfigDialog::volatileTileCacheLimit()
+int QtMarbleConfigDialog::volatileTileCacheLimit() const
 {
     return settings->value( "Cache/volatileTileCacheLimit", 30 ).toInt();
 }
 
-int QtMarbleConfigDialog::persistentTileCacheLimit()
+int QtMarbleConfigDialog::persistentTileCacheLimit() const
 {
     return settings->value( "Cache/persistentTileCacheLimit", 300 ).toInt();
 }
 
-QString QtMarbleConfigDialog::proxyUrl()
+QString QtMarbleConfigDialog::proxyUrl() const
 {
     return settings->value( "Cache/proxyUrl", "http://" ).toString();
 }
 
-int QtMarbleConfigDialog::proxyPort()
+int QtMarbleConfigDialog::proxyPort() const
 {
     return settings->value( "Cache/proxyPort", 8080 ).toInt();
 }
 
-QString QtMarbleConfigDialog::proxyUser()
+QString QtMarbleConfigDialog::proxyUser() const
 {
     return settings->value( "Cache/proxyUser", "" ).toString();
 }
 
-QString QtMarbleConfigDialog::proxyPass()
+QString QtMarbleConfigDialog::proxyPass() const
 {
     return settings->value( "Cache/proxyPass", "" ).toString();
 }
 
-bool QtMarbleConfigDialog::proxyHttp()
+bool QtMarbleConfigDialog::proxyHttp() const
 {
     return settings->value( "Cache/proxyHttp", "" ).toBool();
 }
 
-bool QtMarbleConfigDialog::proxySocks5()
+bool QtMarbleConfigDialog::proxySocks5() const
 {
     return settings->value( "Cache/proxySocks5", "" ).toBool();
 }
 
-bool QtMarbleConfigDialog::proxyAuth()
+bool QtMarbleConfigDialog::proxyAuth() const
 {
     return settings->value( "Cache/proxyAuth", false ).toBool();
 }

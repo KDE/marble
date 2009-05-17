@@ -15,6 +15,7 @@
 
 #include <kparts/part.h>
 #include <QtCore/QHash>
+#include "global.h"
 
 class KAboutData;
 class KAction;
@@ -182,6 +183,8 @@ class MarblePart: public KParts::ReadOnlyPart
     KParts::StatusBarExtension *m_statusBarExtension;
     
     // Information about the Proxy
+    // FIXME: We can easily retrieve this information in a much more 
+    // safe way from applicationProxy(), so why do we need this?
     QString m_proxyHost;
     int m_proxyPort;
     QString m_proxyUser;
@@ -189,6 +192,10 @@ class MarblePart: public KParts::ReadOnlyPart
     bool m_proxyAuth;
     bool m_proxyHttp;
     bool m_proxySocks5;
+
+    // Information about the graphics system
+    Marble::GraphicsSystem m_initialGraphicsSystem;
+    Marble::GraphicsSystem m_previousGraphicsSystem;
 };
 
 }

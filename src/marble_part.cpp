@@ -59,7 +59,6 @@
 
 #include <MarbleDirs.h>
 #include <ControlView.h>
-#include "global.h"
 #include "MarbleLocale.h"
 #include "settings.h"
 
@@ -380,6 +379,10 @@ void MarblePart::readSettings()
     m_controlView->sunLocator()->setCitylights( MarbleSettings::showCitylights() );
     m_controlView->sunLocator()->setCentered( MarbleSettings::centerOnSun() );
 
+    // View
+    m_initialGraphicsSystem = (Marble::GraphicsSystem) MarbleSettings::graphicsSystem();
+    m_previousGraphicsSystem = m_initialGraphicsSystem;
+
     // Plugins
     QHash<QString, int> pluginEnabled;
 
@@ -470,6 +473,11 @@ void MarblePart::writeSettings()
     MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Marble::Still ) );
     MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->
                                          mapQuality( Marble::Animation ) );
+
+    // FIXME: Hopefully Qt will have a getter for this one in the future ...
+    Marble::GraphicsSystem graphicsSystem = (Marble::GraphicsSystem) MarbleSettings::graphicsSystem();
+    MarbleSettings::setGraphicsSystem( graphicsSystem );
+
 
     MarbleSettings::setDistanceUnit( MarbleGlobal::getInstance()->locale()->distanceUnit() );
     MarbleSettings::setAngleUnit( m_controlView->marbleWidget()->defaultAngleUnit() );
@@ -882,6 +890,21 @@ void MarblePart::editSettings()
     ui_viewSettings.setupUi( w_viewSettings );
     m_configDialog->addPage( w_viewSettings, i18n( "View" ), "configure" );
 
+    // It's experimental -- so we remove it for now.
+    // FIXME: Delete the following  line once OpenGL support is officially supported.
+    ui_viewSettings.kcfg_graphicsSystem->removeItem( Marble::OpenGLGraphics );
+
+    QString nativeString ( tr("Native") );
+
+    #ifdef Q_WS_X11
+    nativeString = tr( "Native (X11)" );
+    #endif
+    #ifdef Q_WS_MAC
+    nativeString = tr( "Native (Mac OS X Core Graphics)" );
+    #endif
+
+    ui_viewSettings.kcfg_graphicsSystem->setItemText( Marble::NativeGraphics, nativeString );
+
     // navigation page
     Ui_MarbleNavigationSettingsWidget  ui_navigationSettings;
     QWidget                           *w_navigationSettings = new QWidget( 0 );
@@ -968,6 +991,8 @@ void MarblePart::slotUpdateSettings()
         setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(),
                        Marble::Animation );
 
+    Marble::GraphicsSystem graphicsSystem = (Marble::GraphicsSystem) MarbleSettings::graphicsSystem();
+
     m_controlView->marbleWidget()->
         setDefaultAngleUnit( (Marble::AngleUnit) MarbleSettings::angleUnit() );
     MarbleGlobal::getInstance()->locale()->
@@ -1019,6 +1044,17 @@ void MarblePart::slotUpdateSettings()
     m_proxySocks5 = MarbleSettings::proxySocks5();
 
     m_controlView->marbleWidget()->updateChangedMap();
+
+    // Show message box
+    if (    m_initialGraphicsSystem != graphicsSystem 
+         && m_previousGraphicsSystem != graphicsSystem ) {
+        KMessageBox::information (m_controlView->marbleWidget(),
+                                tr("You have decided to run Marble with a different graphics system.\n"
+                                   "For this change to become effective, Marble has to be restarted.\n"
+                                   "Please close the application and start Marble again."),
+                                tr("Graphics System Change") );
+    }    
+    m_previousGraphicsSystem = graphicsSystem;
 }
 
 void MarblePart::lockFloatItemPosition( bool enabled )

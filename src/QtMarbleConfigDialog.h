@@ -34,29 +34,34 @@ class QtMarbleConfigDialog : public QDialog
     ~QtMarbleConfigDialog();
 
     // View Settings
-    Marble::DistanceUnit distanceUnit();
-    Marble::AngleUnit angleUnit();
-    Marble::MapQuality stillQuality();
-    Marble::MapQuality animationQuality();
-    int labelLocalization();
-    QFont mapFont();
+    
+    Marble::DistanceUnit distanceUnit() const;
+    Marble::AngleUnit angleUnit() const;
+    Marble::MapQuality stillQuality() const;
+    Marble::MapQuality animationQuality() const;
+    int labelLocalization() const;
+    QFont mapFont() const;
+
+    // View
+    Marble::GraphicsSystem graphicsSystem() const;
+
 
     // Navigation Settings
-    int dragLocation();
-    int onStartup();
-    bool animateTargetVoyage();
+    int dragLocation() const;
+    int onStartup() const;
+    bool animateTargetVoyage() const;
 
     // Cache Settings
-    int volatileTileCacheLimit();
-    int persistentTileCacheLimit();
-    QString proxyUrl();
-    int proxyPort();
+    int volatileTileCacheLimit() const;
+    int persistentTileCacheLimit() const;
+    QString proxyUrl() const;
+    int proxyPort() const;
 
-    QString proxyUser();
-    QString proxyPass();
-    bool proxyHttp();
-    bool proxySocks5();
-    bool proxyAuth();
+    QString proxyUser() const;
+    QString proxyPass() const;
+    bool proxyHttp() const;
+    bool proxySocks5() const;
+    bool proxyAuth() const;
 
     Q_SIGNALS:
     /**
@@ -102,6 +107,10 @@ class QtMarbleConfigDialog : public QDialog
     MarbleCacheSettingsWidget          *w_cacheSettings;
 
     QSettings *settings;
+
+    // Information about the graphics system
+    Marble::GraphicsSystem m_initialGraphicsSystem;
+    Marble::GraphicsSystem m_previousGraphicsSystem;
 };
 
 } // Marble namespace

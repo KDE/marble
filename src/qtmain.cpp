@@ -10,10 +10,11 @@
 //
 
 #include <QtGui/QApplication>
-#include <QtCore/QLocale>
-#include <QtCore/QTranslator>
 #include <QtCore/QFile>
 #include <QtCore/QDir>
+#include <QtCore/QLocale>
+#include <QtCore/QSettings>
+#include <QtCore/QTranslator>
 
 #include "QtMainWindow.h"
 
@@ -35,6 +36,14 @@ using namespace Marble;
  
 int main(int argc, char *argv[])
 {
+    // The GraphicsSystem needs to be set before the instantiation of the 
+    // QApplication. Therefore we need to parse the current setting 
+    // in this unusual place :-/
+    QSettings * graphicsSettings = new QSettings("kde.org", "Marble Desktop Globe");
+    QString graphicsString = graphicsSettings->value("View/graphicsSystem", "native").toString();
+    delete graphicsSettings;
+    QApplication::setGraphicsSystem( graphicsString );
+
     QApplication app(argc, argv);
     // Widget translation
 

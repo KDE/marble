@@ -249,7 +249,7 @@ void MainWindow::createMenus()
     
 
     connect( m_infoBoxesMenu, SIGNAL( aboutToShow() ), this, SLOT( createInfoBoxesMenu() ) ); 
-    connect( m_onlineServicesMenu, SIGNAL( aboutToShow() ), this, SLOT( createOnlineServiesMenu() ) ); 
+    connect( m_onlineServicesMenu, SIGNAL( aboutToShow() ), this, SLOT( createOnlineServicesMenu() ) ); 
 }
 
 void MainWindow::createInfoBoxesMenu()
@@ -535,11 +535,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 QString MainWindow::readMarbleDataPath()
 {
-#ifdef Q_WS_MAC
-     QSettings settings("KDE.org", "Marble Desktop Globe");
-#else
-     QSettings settings("KDE", "Marble Desktop Globe");
-#endif
+     QSettings settings("kde.org", "Marble Desktop Globe");
 
      settings.beginGroup("MarbleWidget");
          QString marbleDataPath;
@@ -551,11 +547,8 @@ QString MainWindow::readMarbleDataPath()
 
 void MainWindow::readSettings()
 {
-#ifdef Q_WS_MAC
-     QSettings settings("KDE.org", "Marble Desktop Globe");
-#else
-     QSettings settings("KDE", "Marble Desktop Globe");
-#endif
+     QSettings settings("kde.org", "Marble Desktop Globe");
+
      settings.beginGroup("MainWindow");
          resize(settings.value("size", QSize(640, 480)).toSize());
          move(settings.value("pos", QPoint(200, 200)).toPoint());
@@ -611,11 +604,7 @@ void MainWindow::readSettings()
 
 void MainWindow::writeSettings()
 {
-#ifdef Q_WS_MAC
-     QSettings settings("KDE.org", "Marble Desktop Globe");
-#else
-     QSettings settings("KDE", "Marble Desktop Globe");
-#endif
+     QSettings settings("kde.org", "Marble Desktop Globe");
 
      settings.beginGroup( "MainWindow" );
          settings.setValue( "size", size() );
