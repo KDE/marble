@@ -81,3 +81,4 @@ class GeoGraphicsItem : public MarbleGraphicsItem {
 } // Namespace Marble
 
 #endif // GEOGRAPHICSITEM_H
+

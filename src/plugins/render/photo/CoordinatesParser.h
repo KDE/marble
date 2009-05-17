@@ -40,5 +40,5 @@ private:
 
 } // Marble namespace
 
- #endif // COORDINATESPARSER_H
- 
+#endif // COORDINATESPARSER_H
+
