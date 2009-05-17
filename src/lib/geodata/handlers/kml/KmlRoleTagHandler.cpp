@@ -45,7 +45,7 @@ GeoNode* KmlroleTagHandler::parse( GeoParser& parser ) const
     if( parentItem.nodeAs<GeoDataPlacemark>() ) {
         QString role = parser.readElementText().trimmed();
         if ( role.isEmpty() ) {
-            role = " ";
+            role = ' ';
         }        
         parentItem.nodeAs<GeoDataPlacemark>()->setRole( role.at( 0 ) );
 #ifdef DEBUG_TAGS
