@@ -154,6 +154,9 @@ set(marblewidget_SRCS
     AbstractDataPlugin.cpp
     AbstractDataPluginModel.cpp
     AbstractDataPluginItem.cpp
+    MarbleGraphicsItem.cpp
+    GeoGraphicsItem.cpp
+    ScreenGraphicsItem.cpp
 
     PluginInterface.cpp
     NetworkPluginInterface.cpp
@@ -312,6 +315,9 @@ else (APPLE AND QTONLY)
     AbstractDataPlugin.h
     AbstractDataPluginModel.h
     AbstractDataPluginItem.h
+    MarbleGraphicsItem.h
+    GeoGraphicsItem.h
+    ScreenGraphicsItem.h
 
     LatLonEdit.h
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble

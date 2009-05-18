@@ -11,7 +11,14 @@
 #ifndef MARBLEGRAPHICSITEM_H
 #define MARBLEGRAPHICSITEM_H
 
+#include "marble_export.h"
+
+#include <QtCore/QList>
+#include <QtCore/QSize>
+
+class QEvent;
 class QPoint;
+class QObject;
 class QString;
 
 namespace Marble {
@@ -22,73 +29,64 @@ class ViewportParams;
 
 class MarbleGraphicsItemPrivate;
 
-class MarbleGraphicsItem {
+class MARBLE_EXPORT MarbleGraphicsItem {
  public:
+    enum CacheMode {
+        NoCache,
+        ItemCoordinateCache,
+        DeviceCoordinateCache
+    };
+     
     MarbleGraphicsItem();
+    MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
+    
     virtual ~MarbleGraphicsItem();
     
     /**
-     * Paints the item
+     * Paints the item on the screen in view coordinates.
      */
-    virtual bool paint( GeoPainter *painter, ViewportParams *viewport,
-                        const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
-    
+    bool paintEvent( GeoPainter *painter, ViewportParams *viewport, 
+                     const QString& renderPos, GeoSceneLayer *layer = 0 );
+                        
     /**
      * Returns true if the Item contains @p point in view coordinates.
      */
     bool contains( const QPoint& point ) const;
     
     /**
-     * Returns all coordinates of the item in view coordinates
-     */
-    QList<QPoint> positions() const;
-    
-    /**
-     * Returns the first coordinate of the item in view coordinates
-     */
-    QPoint position() const;
-    
-    /**
-     * Returns all bounding rects of the item in view coordinates
-     */
-    QList<QRect> boundingRects() const;
-    
-    /**
-     * Returns the first bounding rect of the item in view coordinates.
-     * Keep in mind boundingRects which will probably be the best choice.
-     */
-    QRect boundingRect() const;
-    
-    /**
      * Returns the size of the item
      */
-    virtual QSize size() const;
+    QSize size() const;
+    
+    /**
+     * Returns the cache mode of the item
+     */
+    CacheMode cacheMode() const;
+    
+    /**
+     * Set the cache mode of the item
+     */
+    void setCacheMode( CacheMode mode, const QSize & logicalCacheSize = QSize() );
     
  protected:
     /**
-     * Set the position of the item
+     * Paints the item in item coordinates. This has to be reimplemented by the subclass
+     * This function will be called by paintEvent().
      */
-    void setPosition( const QPoint& position );
+    virtual bool paint( GeoPainter *painter, ViewportParams *viewport,
+                        const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
+     
+    virtual bool eventFilter( QObject *object, QEvent *e ) = 0;
     
     /**
-     * Set the position of the item
+     * Set the size of the item
      */
-    void setPositions( const QList<QPoint>& positions );
+    void setSize( const QSize& size );
     
-    /**
-     * Set the bounding rect of the item
-     */
-    void setBoundingRect( const QRect& boundingRect );
-    
-    /**
-     * Set the bounding rect of the item
-     */
-    void setBoundingRects( const QList<QRect>& boundingRects );
-    
-    virtual bool eventFilter( QObject *object, QEvent *e );
+    MarbleGraphicsItemPrivate * const d;
     
  private:
-    MarbleGraphicsItemPrivate *d;
+    MarbleGraphicsItemPrivate* p() const;
 };
 
 } // Namespace Marble

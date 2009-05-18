@@ -11,19 +11,32 @@
 #ifndef GEOGRAPHICSITEM_H
 #define GEOGRAPHICSITEM_H
 
-namespace Marble {
+// Marble
+#include "MarbleGraphicsItem.h"
+#include "marble_export.h"
 
-class GeoGraphicsItem : public MarbleGraphicsItem {
+// Qt
+#include <QtCore/QList>
+
+class QPoint;
+class QRect;
+class QString;
+
+namespace Marble {
+    
+class GeoDataCoordinates;
+class GeoDataPoint;
+class GeoPainter;
+class GeoSceneLayer;
+class ViewportParams;
+
+class GeoGraphicsItemPrivate;
+
+class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
  public:
     GeoGraphicsItem();
+    GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr );
     virtual ~GeoGraphicsItem();
-    
-    /**
-     * Paints all instances of the item.
-     * Remember: One position can be shown multiple times on a flat map
-     */
-    bool paint( GeoPainter *painter, ViewportParams *viewport,
-                const QString& renderPos, GeoSceneLayer * layer = 0 );
     
     /**
      * Return the coordinate of the item as a GeoDataCoordinates
@@ -60,25 +73,19 @@ class GeoGraphicsItem : public MarbleGraphicsItem {
     /**
      * Returns all coordinates of the item in view coordinates according to the given projection.
      */
-    QList<QPoint> positions( AbstractProjection* projection );
+    QList<QPoint> positions();
 
  protected:
     /**
-     * Paints one instance of the item to the position @p paintRect.
+     * Paints the item in item coordinates
      */
-    virtual bool paint( GeoPainter *painter, const QRect& paintRect ) = 0;
+    virtual bool paint( GeoPainter *painter, ViewportParams *viewport,
+                        const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
     
- private:
-    void setBoundingRects( const QList<QRectF>& boundingRect );
-    void setPositions( const QList<QPointF>& position );
-    
-    void setBoundingRect( const QRectF& boundingRect );
-    void setPosition( const QPointF& position );
-     
-    GeoGraphicsItemPrivate *d;
+ private:     
+    GeoGraphicsItemPrivate *p() const;
 };
 
 } // Namespace Marble
 
 #endif // GEOGRAPHICSITEM_H
-
