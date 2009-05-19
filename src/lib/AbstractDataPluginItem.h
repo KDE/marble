@@ -14,6 +14,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
+#include "GeoGraphicsItem.h"
 #include "marble_export.h"
 
 class QAction;
@@ -30,15 +31,12 @@ class GeoSceneLayer;
 class CacheStoragePolicy;
 class ViewportParams;
 
-class MARBLE_EXPORT AbstractDataPluginItem : public QObject {
+class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsItem {
     Q_OBJECT
     
  public:
     AbstractDataPluginItem( QObject *parent = 0 );
     virtual ~AbstractDataPluginItem();
-    
-    GeoDataCoordinates coordinates();
-    void setCoordinates( const GeoDataCoordinates& coordinates );
     
     QString target();
     void setTarget( const QString& target );
@@ -52,8 +50,6 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject {
       */
     qreal addedAngularResolution() const;
     void setAddedAngularResolution( qreal resolution );
-    
-    bool isItemAt( const QPoint& curpos ) const;
     
     virtual QAction *action() = 0;
     
@@ -69,18 +65,12 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject {
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
                          
     virtual bool operator<( const AbstractDataPluginItem *other ) const = 0;
-    
-    /**
-     * If you want that the item stores the paint position (e.g. to handle mouse clicks),
-     * you should do this on every rendering.
-     */
-    void updatePaintPosition( ViewportParams *viewport, const QSize& size );
                 
     /**
      * Returns the last paint position
      */
     QRect paintPosition();
-                    
+    
  private:
     AbstractDataPluginItemPrivate * const d;
 };

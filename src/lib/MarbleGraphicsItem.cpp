@@ -16,6 +16,9 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 
+// Qt
+#include <QtCore/QDebug>
+
 using namespace Marble;
 
 MarbleGraphicsItem::MarbleGraphicsItem()
@@ -51,7 +54,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
     return successful;
 }
 
-bool MarbleGraphicsItem::contains( const QPoint& point ) const {    
+bool MarbleGraphicsItem::contains( const QPoint& point ) const {
     foreach( QRect rect, d->boundingRects() ) {
         if( rect.contains( point ) )
             return true;
@@ -74,6 +77,10 @@ void MarbleGraphicsItem::setCacheMode( CacheMode mode, const QSize & logicalCach
 
 void MarbleGraphicsItem::setSize( const QSize& size ) {
     p()->m_size = size;
+}
+
+bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e ) {
+    return false;
 }
 
 MarbleGraphicsItemPrivate *MarbleGraphicsItem::p() const {

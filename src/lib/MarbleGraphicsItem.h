@@ -76,7 +76,7 @@ class MARBLE_EXPORT MarbleGraphicsItem {
     virtual bool paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
      
-    virtual bool eventFilter( QObject *object, QEvent *e ) = 0;
+    virtual bool eventFilter( QObject *object, QEvent *e );
     
     /**
      * Set the size of the item

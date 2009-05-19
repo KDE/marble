@@ -25,6 +25,7 @@
 
 // Qt
 #include <QtGui/QAction>
+#include <QtGui/QIcon>
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QHash>
@@ -62,6 +63,7 @@ bool PhotoPluginItem::initialized() {
 void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type ) {
     if( type == "thumbnail" ) {
         m_smallImage.load( url );
+        setSize( m_smallImage.size() );
     }
     else if ( type == "info" ) {        
         QFile file( url );
@@ -73,7 +75,7 @@ void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type
         CoordinatesParser parser( &coordinates );
         
         if( parser.read( &file ) ) {
-            setCoordinates( coordinates );
+            setCoordinate( coordinates );
             m_hasCoordinates = true;
         }
     }
@@ -85,9 +87,7 @@ bool PhotoPluginItem::paint( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    painter->drawPixmap( coordinates(), m_smallImage );
-    
-    updatePaintPosition( viewport, m_smallImage.size() );
+    painter->drawPixmap( 0, 0, m_smallImage );
     
     return true;
 }
@@ -152,6 +152,9 @@ void PhotoPluginItem::setTitle( const QString& title ) {
 }
 
 QAction *PhotoPluginItem::action() {
+    if( m_action->icon().isNull() ) {
+        m_action->setIcon( QIcon( m_smallImage ) );
+    }
     return m_action;
 }
 

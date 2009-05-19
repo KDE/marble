@@ -67,31 +67,29 @@ bool WikipediaItem::paint( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    painter->drawPixmap( coordinates(), m_pixmap );
-    
-    updatePaintPosition( viewport, m_pixmap.size() );
+    painter->drawPixmap( 0, 0, m_pixmap );
     
     return true;
 }
 
 qreal WikipediaItem::longitude() {
-    return coordinates().longitude();
+    return coordinate().longitude();
 }
     
 void WikipediaItem::setLongitude( qreal longitude ) {
-    GeoDataCoordinates updatedCoordinates = coordinates();
+    GeoDataCoordinates updatedCoordinates = coordinate();
     updatedCoordinates.setLongitude( longitude );
-    setCoordinates( updatedCoordinates );
+    setCoordinate( updatedCoordinates );
 }
     
 qreal WikipediaItem::latitude() {
-    return coordinates().latitude();
+    return coordinate().latitude();
 }
 
 void WikipediaItem::setLatitude( qreal latitude ) {
-    GeoDataCoordinates updatedCoordinates = coordinates();
+    GeoDataCoordinates updatedCoordinates = coordinate();
     updatedCoordinates.setLatitude( latitude );
-    setCoordinates( updatedCoordinates );
+    setCoordinate( updatedCoordinates );
 }
 
 QUrl WikipediaItem::url() {
@@ -128,6 +126,7 @@ void WikipediaItem::openBrowser( ) {
 
 void WikipediaItem::setPixmap( const QPixmap& pixmap ) {
     m_pixmap = pixmap;
+    setSize( m_pixmap.size() );
 }
     
 void WikipediaItem::setIcon( const QIcon& icon ) {

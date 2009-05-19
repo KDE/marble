@@ -46,7 +46,7 @@ void GeoGraphicsItem::setCoordinate( qreal longitude, qreal latitude, qreal alti
     p()->m_coordinate.setAltitude( altitude );
 }
 
-void GeoGraphicsItem::setCoordinate( const GeoDataPoint &point ) {
+void GeoGraphicsItem::setCoordinate( const GeoDataCoordinates &point ) {
     p()->m_coordinate = point;
 }
 

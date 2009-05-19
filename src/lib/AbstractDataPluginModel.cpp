@@ -142,7 +142,7 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
             continue;
         }
         
-        if( !currentBox.contains( (*i)->coordinates() ) ) {
+        if( !currentBox.contains( (*i)->coordinate() ) ) {
             continue;
         }
         
@@ -173,7 +173,7 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
         }
         
         // If the item is on the viewport, we want to return it
-        if( currentBox.contains( (*i)->coordinates() )
+        if( currentBox.contains( (*i)->coordinate() )
             && !list.contains( *i ) )
         {
             list.append( *i );
@@ -209,7 +209,7 @@ QList<AbstractDataPluginItem *> AbstractDataPluginModel::whichItemAt( const QPoi
     QList<AbstractDataPluginItem *> itemsAt;
     
     foreach( AbstractDataPluginItem* item, d->m_displayedItems ) {
-        if( item && item->isItemAt( curpos ) )
+        if( item && item->contains( curpos ) )
             itemsAt.append( item );
     }
     

@@ -51,13 +51,7 @@ WikipediaModel::WikipediaModel( QObject *parent )
     svgObj.render( &painter );
     m_wikipediaPixmap = QPixmap::fromImage( wikipediaImage );
     
-    QImage wikipediaSmallImage( wikipediaSmallIconSize,
-                                wikipediaSmallIconSize,
-                                QImage::Format_ARGB32 );
-    wikipediaSmallImage.fill( QColor( 0, 0, 0, 0 ).rgba() );
-    QPainter smallPainter( &wikipediaSmallImage );
-    svgObj.render( &smallPainter );
-    m_wikipediaIcon = QPixmap::fromImage( wikipediaSmallImage );
+    m_wikipediaIcon.addFile( MarbleDirs::path( "svg/wikipedia.svg" ) );
 }
 
 WikipediaModel::~WikipediaModel() {

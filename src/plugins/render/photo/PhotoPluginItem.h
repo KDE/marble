@@ -72,6 +72,7 @@ class PhotoPluginItem : public AbstractDataPluginItem {
  private:
     bool m_hasCoordinates;
     QPixmap m_smallImage;
+    QPixmap m_microImage;
     QWebView *m_browser;
     QAction *m_action;
     

@@ -25,7 +25,6 @@ class QString;
 namespace Marble {
     
 class GeoDataCoordinates;
-class GeoDataPoint;
 class GeoPainter;
 class GeoSceneLayer;
 class ViewportParams;
@@ -58,7 +57,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
     /**
      * Set the coordinate of the item with an @p GeoDataPoint.
      */
-    void setCoordinate( const GeoDataPoint &point );
+    void setCoordinate( const GeoDataCoordinates &point );
     
     /**
      * Get the target of the item. The target is the current planet string.s

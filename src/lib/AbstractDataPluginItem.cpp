@@ -40,20 +40,13 @@ class AbstractDataPluginItemPrivate {
 
 AbstractDataPluginItem::AbstractDataPluginItem( QObject *parent )
     : QObject( parent ),
+      GeoGraphicsItem(),
       d( new AbstractDataPluginItemPrivate )
 {
 }
 
 AbstractDataPluginItem::~AbstractDataPluginItem() {
     delete d;
-}
-
-GeoDataCoordinates AbstractDataPluginItem::coordinates() {
-    return d->m_coordinates;
-}
-
-void AbstractDataPluginItem::setCoordinates( const GeoDataCoordinates& coordinates ) {
-    d->m_coordinates = coordinates;
 }
 
 QString AbstractDataPluginItem::target() {
@@ -78,49 +71,6 @@ qreal AbstractDataPluginItem::addedAngularResolution() const {
 
 void AbstractDataPluginItem::setAddedAngularResolution( qreal resolution ) {
     d->m_addedAngularResolution = resolution;
-}
-
-bool AbstractDataPluginItem::isItemAt( const QPoint& curpos ) const {
-    if( d->m_paintPosition.contains( curpos ) ) {
-        return true;
-    }
-    return false;
-}
-
-void AbstractDataPluginItem::updatePaintPosition( ViewportParams *viewport,
-                                                  const QSize& size ) {
-    GeoDataCoordinates coords = coordinates();
-    
-    qreal x[100], y;
-    int pointRepeatNumber;
-    bool globeHidesPoint;
-    if( viewport->currentProjection()->screenCoordinates( coords,
-                                                          viewport,
-                                                          x, y,
-                                                          pointRepeatNumber,
-                                                          size,
-                                                          globeHidesPoint ) )
-    {
-        // FIXME: We need to handle multiple coords here
-        qint32 width = size.width();
-        qint32 height = size.height();
-        qint32 leftX = x[0] - ( size.width()/2 );
-        qint32 topY = y    - ( size.height()/2 );
-        
-        if( leftX < 0 ) {
-            width += leftX;
-            leftX = 0;
-        }
-        if( topY < 0 ) {
-            height += topY;
-            topY = 0;
-        }
-            
-        d->m_paintPosition.setRect( leftX, topY, width, height );
-    }
-    else {
-        d->m_paintPosition = QRect();
-    }
 }
 
 QRect AbstractDataPluginItem::paintPosition() {
