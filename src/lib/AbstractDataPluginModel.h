@@ -32,6 +32,16 @@ class GeoDataLatLonAltBox;
 class MarbleDataFacade;
 class ViewportParams;
 
+/**
+ * @short: An abstract data model (not based on QAbstractModel) for a AbstractDataPlugin.
+ *
+ * This class is an abstract model for a AbstractDataPlugin. 
+ * It provides the storage and selection of added <b>items</b> and it is also responsible for
+ * downloading item data.
+ *
+ * The functions <b>getAdditionalItems()</b> and <b>parseFile()</b> have to be reimplemented in
+ * a subclass.
+ **/
 class MARBLE_EXPORT AbstractDataPluginModel : public QObject
 {
     Q_OBJECT
@@ -41,6 +51,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     virtual ~AbstractDataPluginModel();
         
     /**
+     * @brief Get the items on the viewport
      * Returns the currently downloaded images in the @p viewport.
      * The maximum number of images can be specified with @p number,
      * 0 means no limit.
@@ -51,41 +62,43 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
                                           qint32 number = 10 );
     
     /**
-     * Returns all items which were returned by items() again.
+     * @brief Get all items that contain the given point
+     * Returns a list of all items that contain the point @p curpos
      */
-    QList<AbstractDataPluginItem*> displayedItems();
-    
     QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos );
        
  protected:
     /**
-     * Generates the download url for the description file from the web service depending on
-     * the @p box surrounding the view and the @p number of files to show.
+     * Managing to get @p number additional items in @p box. This includes generating a url and
+     * downloading the corresponding file.
+     * This method has to be implemented in a subclass.
      **/
     virtual void getAdditionalItems( const GeoDataLatLonAltBox& box,
                                      MarbleDataFacade *facade,
                                      qint32 number = 10 ) = 0;
        
     /**
-     * The reimplementation has to parse the @p file and should generate items. This items
-     * have to be scheduled to downloadItemData or could be directly added to the list,
-     * depending on if they have to download information to be shown.
+     * Parse the @p file and generate items. The items will be added to the list or the method
+     * starts additionally needed downloads.
+     * This method has to be implemented in a subclass.
      **/
     virtual void parseFile( const QByteArray& file ) = 0;
         
     /**
-     * Downloads the file from @p url and calls @p item -> addDownloadedFile() when the
-     * download is finished.
+     * Downloads the file from @p url. @p item -> addDownloadedFile() will be called when the
+     * download is finished. Additionally initialized() items will be added to the item list
+     * after the download.
+     * @param: The type of the download (to be specified by the subclasser)
      **/
     void downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
     
     /**
-     * Download description file
+     * Download the description file from the @p url.
      */
     void downloadDescriptionFile( const QUrl& url );
     
     /**
-     * Adds the @p item to the list of already initialized items.
+     * Adds the @p item to the list of initialized items.
      */
     void addItemToList( AbstractDataPluginItem *item );
     
@@ -100,7 +113,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     void setName( const QString& name );
     
     /**
-     * Generates the filename relatively to the download path from @p id and @p type
+     * Generates the filename relative to the download path from @p id and @p type
      */
     QString generateFilename( const QString& id, const QString& type ) const;
     
@@ -126,12 +139,15 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     
  private Q_SLOTS:
     /**
-     * Download a new description file
+     * @brief Get new items with getAdditionalItems if it is reasonable.
      */
     void handleChangedViewport();
     
     /**
-     * Processing a finished download job
+     * @brief This method will assign downloaded files to the corresponding items
+     * @param relativeUrlString The string containing the relative (to the downloader path)
+     *                          url of the downloaded file.
+     * @param id The id of the downloaded file
      */
     void processFinishedJob( const QString& relativeUrlString, const QString& id );
     

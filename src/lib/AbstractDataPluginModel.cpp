@@ -27,12 +27,20 @@
 #include "MarbleDirs.h"
 #include "ViewportParams.h"
 
+#include <cmath>
+
 namespace Marble {
 
 const QString descriptionPrefix( "description_" );
 
-// Time between to new description file downloads in ms
-const int timeBetweenDownloads = 500;
+// Time between two tried description file downloads (we decided not to download anything) in ms
+const int timeBetweenTriedDownloads = 500;
+// Time between two real description file downloads in ms
+const int timeBetweenDownloads = 1500;
+
+// The factor describing how much the box has to be changed to download a new description file.
+// A higher factor means more downloads.
+const qreal boxComparisonFactor = 16.0;
 
 // Separator to separate the id of the item from the file type
 const char fileIdSeparator = '_';
@@ -196,13 +204,11 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
         d->m_lastNumber = number;
         d->m_lastDataFacade = facade;
     }
+    else {
+    }
     
     d->m_displayedItems = list;
     return list;
-}
-
-QList<AbstractDataPluginItem*> AbstractDataPluginModel::displayedItems() {
-    return d->m_displayedItems;
 }
 
 QList<AbstractDataPluginItem *> AbstractDataPluginModel::whichItemAt( const QPoint& curpos ) {
@@ -326,18 +332,38 @@ void AbstractDataPluginModel::handleChangedViewport() {
         return;
     }
     
-    if( ( !( d->m_downloadedBox == d->m_lastBox )
-          || d->m_downloadedNumber != d->m_lastNumber
-          || d->m_downloadedTarget != d->m_lastDataFacade->target() )
-        && d->m_lastNumber != 0 )
+    // All this is to prevent to often downloads
+    if( d->m_lastNumber != 0
+        // We don't need to download if nothing changed
+        && ( !( d->m_downloadedBox == d->m_lastBox )
+             || d->m_downloadedNumber != d->m_lastNumber
+             || d->m_downloadedTarget != d->m_lastDataFacade->target() )
+        // We try to filter little changes of the bounding box
+        && ( fabs( d->m_downloadedBox.east() - d->m_lastBox.east() ) * boxComparisonFactor
+                                > d->m_lastBox.width()
+             || fabs( d->m_downloadedBox.south() - d->m_lastBox.south() ) * boxComparisonFactor
+                                > d->m_lastBox.height()
+             || fabs( d->m_downloadedBox.north() - d->m_lastBox.north() ) * boxComparisonFactor
+                                > d->m_lastBox.height()
+             || fabs( d->m_downloadedBox.west() - d->m_lastBox.west() ) * boxComparisonFactor
+                                > d->m_lastBox.width() ) )
     {
-        // Save the box we want to download.
-        // We don't want to download too often.
+        // We will wait a littlebit longer to start the the
+        // next download as we will really download something now.
+        d->m_downloadTimer->setInterval( timeBetweenDownloads );
+        
+        // Save the download parameter
         d->m_downloadedBox = d->m_lastBox;
         d->m_downloadedNumber = d->m_lastNumber;
         d->m_downloadedTarget = d->m_lastDataFacade->target();
         
+        // Get items
         getAdditionalItems( d->m_lastBox, d->m_lastDataFacade, d->m_lastNumber );
+    }
+    else {
+        // Don't wait to long to start the next download as we decided not to download anything.
+        // This will enhance response.
+        d->m_downloadTimer->setInterval( timeBetweenTriedDownloads );
     }
 }
 
