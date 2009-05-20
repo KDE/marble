@@ -82,6 +82,7 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         QHash<QString,QString> options;
         options.insert( "per_page", QString::number( number ) );
         options.insert( "bbox",     bbox );
+        options.insert( "sort",     "interestingness-desc" );
     
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", options ) );
     }
@@ -96,6 +97,7 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         QHash<QString,QString> optionsWest;
         optionsWest.insert( "per_page", QString::number( number/2 ) );
         optionsWest.insert( "bbox",     bboxWest );
+        optionsWest.insert( "sort",     "interestingness-desc" );
         
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", optionsWest ) );
         
@@ -107,8 +109,9 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
         bboxEast += QString::number( box.north() * RAD2DEG );
         
         QHash<QString,QString> optionsEast;
-        optionsWest.insert( "per_page", QString::number( number/2 ) );
-        optionsWest.insert( "bbox",     bboxEast );
+        optionsEast.insert( "per_page", QString::number( number/2 ) );
+        optionsEast.insert( "bbox",     bboxEast );
+        optionsEast.insert( "sort",     "interestingness-desc" );
         
         downloadDescriptionFile( generateUrl( "flickr", "flickr.photos.search", optionsEast ) );
     }
