@@ -43,8 +43,7 @@ QIcon GpsdPositionProviderPlugin::icon() const
 
 void GpsdPositionProviderPlugin::initialize()
 {
-    m_gpsd = new gpsmm;
-    m_gpsdData = m_gpsd->open();
+    m_gpsdData = m_gpsd.open();
     m_timer = new QTimer;
     connect( m_timer, SIGNAL( timeout() ), this, SLOT( update() ) );
     m_timer->start( 1000 );
@@ -54,7 +53,7 @@ void GpsdPositionProviderPlugin::initialize()
 void GpsdPositionProviderPlugin::update() {
     //Check that m_gpsd->open() has successfully completed
     if ( m_gpsdData != 0 ) {
-        m_gpsdData = m_gpsd->query( "o" );
+        m_gpsdData = m_gpsd.query( "o" );
         PositionProviderStatus oldStatus = m_status;
         GeoDataCoordinates oldPosition = m_position;
         if (m_gpsdData->status == STATUS_NO_FIX)
@@ -104,7 +103,6 @@ GpsdPositionProviderPlugin::~GpsdPositionProviderPlugin()
 {
     if (m_initialized) {
         delete m_timer;
-        delete m_gpsd;
     }
 }
 

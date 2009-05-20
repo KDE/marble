@@ -46,7 +46,7 @@ class GpsdPositionProviderPlugin: public PositionProviderPlugin
     
  private:
     bool m_initialized;
-    gpsmm* m_gpsd;
+    gpsmm m_gpsd;
     gps_data_t* m_gpsdData;
     QTimer* m_timer;
     PositionProviderStatus m_status;
