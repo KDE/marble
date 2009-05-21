@@ -32,6 +32,7 @@ MarbleGraphicsItem::MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr )
 }
     
 MarbleGraphicsItem::~MarbleGraphicsItem() {
+    delete d;
 }
 
 bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewport, 

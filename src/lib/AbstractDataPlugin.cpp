@@ -33,6 +33,9 @@ class AbstractDataPluginPrivate
     {
     }
     
+    ~AbstractDataPluginPrivate() {
+    }
+    
     AbstractDataPluginModel *m_model;
     QString m_name;
     quint32 m_numberOfItems;

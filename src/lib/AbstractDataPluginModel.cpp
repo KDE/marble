@@ -61,18 +61,16 @@ class AbstractDataPluginModelPrivate {
     }
     
     ~AbstractDataPluginModelPrivate() {
-        m_itemSet.removeAll( 0 );
-        QHash<QString, AbstractDataPluginItem*>::iterator it = m_downloadingItems.begin();
-        while( it != m_downloadingItems.end() ) {
-            if( !(*it) ) {
-                it = m_downloadingItems.erase( it );
-            }
-            else {
-                ++it;
-            }
+        QList<AbstractDataPluginItem*>::iterator lIt;
+        for( lIt = m_itemSet.begin(); lIt != m_itemSet.end(); ++lIt ) {
+            (*lIt)->deleteLater();
         }
-        qDeleteAll( m_itemSet );
-        qDeleteAll( m_downloadingItems );
+        
+        QHash<QString,AbstractDataPluginItem*>::iterator hIt;
+        for( hIt = m_downloadingItems.begin(); hIt != m_downloadingItems.end(); ++hIt ) {
+            (*hIt)->deleteLater();
+        }
+        
         m_storagePolicy->clearCache();
         delete m_storagePolicy;
     }
@@ -257,11 +255,11 @@ static bool lessThanByPointer( const AbstractDataPluginItem *item1,
 }
 
 void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item ) {
-    qDebug() << "New item " << item->id();
-    
     if( !item ) {
         return;
     }
+    
+    qDebug() << "New item " << item->id();
     
     // This find the right position in the sorted to insert the new item 
     QList<AbstractDataPluginItem*>::iterator i = qLowerBound( d->m_itemSet.begin(),

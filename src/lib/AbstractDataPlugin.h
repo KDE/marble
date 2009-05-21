@@ -62,6 +62,9 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin {
     
     AbstractDataPluginModel *model() const;
     
+    /**
+     * Set the model of the plugin.
+     */
     void setModel( AbstractDataPluginModel* model );
     
     void setNameId( const QString& name );
