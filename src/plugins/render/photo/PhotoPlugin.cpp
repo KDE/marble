@@ -21,8 +21,10 @@ using namespace Marble;
 PhotoPlugin::PhotoPlugin() {  
     setNameId( "photo" );
     
-    // Plugin is not enabled by default
-    setEnabled( false );
+    // Plugin is enabled by default
+    setEnabled( true );
+    // Plugin is not visible by default
+    setVisible( false );
 }
      
 void PhotoPlugin::initialize() {

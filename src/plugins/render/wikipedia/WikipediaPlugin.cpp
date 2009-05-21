@@ -19,8 +19,10 @@ WikipediaPlugin::WikipediaPlugin()
 {
     setNameId( "wikipedia" );
     
-    // Plugin is not enabled by default
-    setEnabled( false );
+    // Plugin is enabled by default
+    setEnabled( true );
+    // Plugin is not visible by default
+    setVisible( false );
 }
      
 void WikipediaPlugin::initialize() {

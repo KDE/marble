@@ -27,8 +27,10 @@ NavigationFloatItem::NavigationFloatItem(const QPointF &point,
     AbstractFloatItem(point, size), m_marbleWidget(0),
             m_navigationParent(0), m_repaintScheduled(true)
 {
-    // Plugin is not enabled by default
-    setEnabled(false);
+    // Plugin is enabled by default
+    setEnabled( true );
+    // Plugin is not visible by default
+    setVisible( false );
 }
 
 NavigationFloatItem::~NavigationFloatItem()

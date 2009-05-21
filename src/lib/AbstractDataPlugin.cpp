@@ -116,7 +116,12 @@ void AbstractDataPlugin::setNumberOfItems( quint32 number ) {
 }
 
 QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt( const QPoint& curpos ) {
-    return d->m_model->whichItemAt( curpos );
+    if ( enabled() && visible() ) {
+        return d->m_model->whichItemAt( curpos );
+    }
+    else {
+        return QList<AbstractDataPluginItem *>();
+    }
 }
 
 } // namespace Marble

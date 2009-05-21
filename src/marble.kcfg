@@ -195,6 +195,9 @@
   <entry name="pluginEnabled" type="IntList">
    <label>List of toggles for enabling plugins.</label>
   </entry>
+  <entry name="pluginVisible" type="IntList">
+   <label>List of toggles for making plugins visible.</label>
+  </entry>
  </group>
  <group name="StatusBar">
   <entry key="showPositionLabel" type="Bool" >
