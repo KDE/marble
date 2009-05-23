@@ -24,53 +24,37 @@ class GeoDataLatLonBox : Marble::GeoDataObject
 #include <GeoDataLatLonBox.h>
 %End
 
+
 public:
                             GeoDataLatLonBox ();
-
                             GeoDataLatLonBox (qreal north, qreal south, qreal east, qreal west, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
-
                             GeoDataLatLonBox (const Marble::GeoDataLatLonBox&);
     virtual bool            isFolder () const;
     qreal                   north (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
     void                    setNorth (const qreal north, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
-
     qreal                   south (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
-
     void                    setSouth (const qreal south, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
-
     qreal                   east (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
-
     void                    setEast (const qreal east, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
-
     qreal                   west (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
-
-     void                   setWest (const qreal west, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
-
-     qreal                  rotation (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
-
-     void                   setRotation (const qreal rotation, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
-
-     void                   boundaries (qreal& north /out/, qreal& south /out/, qreal& east /out/, qreal& west /out/, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
-
-     void                   setBoundaries (qreal north, qreal south, qreal east, qreal west, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
-     qreal                  width (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
-     qreal                  height (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
-     
+    void                    setWest (const qreal west, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
+    qreal                   rotation (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
+    void                    setRotation (const qreal rotation, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
+    void                    boundaries (qreal& north /out/, qreal& south /out/, qreal& east /out/, qreal& west /out/, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
+    void                    setBoundaries (qreal north, qreal south, qreal east, qreal west, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
+    qreal                   width (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
+    qreal                   height (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
     bool                    crossesDateLine () const;
-    virtual bool            contains (const Marble::GeoDataPoint&);
-    virtual bool            contains (const Marble::GeoDataCoordinates&);
-    bool                    contains (const Marble::GeoDataLatLonBox&);
-    virtual bool            intersects (const Marble::GeoDataLatLonBox&);
-
+    virtual bool            contains (const Marble::GeoDataPoint&) const;
+    virtual bool            contains (const Marble::GeoDataCoordinates&) const;
+    bool                    contains (const Marble::GeoDataLatLonBox&) const;
+    virtual bool            intersects (const Marble::GeoDataLatLonBox&) const;
 
 //mt undefined symbol: QVector<Marble::GeoDataCoordinates*>& coordinates -- need mapped type?
 //mt     static Marble::GeoDataLatLonBox  fromCoordinates (const QVector<Marble::GeoDataCoordinates*>& coordinates);
 
-
-//FIXME    static Marble::GeoDataLatLonBox  fromLineString (const Marble::GeoDataLineString& lineString);
-
+    static Marble::GeoDataLatLonBox  fromLineString (const Marble::GeoDataLineString& lineString);
     virtual QString         toString (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
-
     virtual bool            isNull () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);

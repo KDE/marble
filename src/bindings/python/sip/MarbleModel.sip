@@ -59,7 +59,8 @@ public:
     void                    addPlacemarkFile (const QString& filename);
     void                    addPlacemarkData (const QString& data, const QString& key = "data");
     void                    removePlacemarkKey( const QString& key );
-    QVector<QPersistentModelIndex>  whichFeatureAt (const QPoint&) const;
+    QVector<QModelIndex>    whichFeatureAt (const QPoint&) const;
+
 
 //mt undefined symbol: PlacemarkLayout* None -- need mapped type?
 //mt     PlacemarkLayout*   placemarkLayout () const;
@@ -79,39 +80,44 @@ public:
 //mt undefined symbol: GpxFileModel* None -- need mapped type?
 //mt     GpxFileModel*      gpxFileModel () const;
 
-//ig     FileViewModel*     fileViewModel () const;
 
+//ig     FileViewModel*     fileViewModel () const;
     bool                    showGps () const;
     void                    setShowGps (bool visible);
     void                    startPolling (int time = 1000);
     void                    stopPolling ();
     qreal                   planetRadius () const;
-//    Marble::ExtDateTime*    dateTime () const;
+    QString                 planetName () const;
+//ig    Marble::ExtDateTime*    dateTime () const;
     Marble::SunLocator*     sunLocator () const;
+
 
 //mt undefined symbol: MergedLayerDecorator* None -- need mapped type?
 //mt     MergedLayerDecorator*  layerDecorator () const;
 
+
     quint64                 volatileTileCacheLimit () const;
-    QList<Marble::MarbleRenderPlugin*>  renderPlugins () const;
-    QList<Marble::MarbleAbstractFloatItem*>  floatItems () const;
+    QList<Marble::RenderPlugin*>  renderPlugins () const;
+    QList<Marble::AbstractFloatItem*>  floatItems () const;
+    QList<Marble::AbstractDataPlugin*>  dataPlugins () const;
+    QList<Marble::AbstractDataPluginItem*>  whichItemAt (const QPoint& curpos) const;
+    Marble::Planet*         planet () const;
+    int                     tileZoomLevel () const;
     void                    clearVolatileTileCache ();
     void                    setVolatileTileCacheLimit (quint64 kiloBytes);
     void                    clearPersistentTileCache ();
-
 //ig     void               paintTile (TextureTile* tile, int x, int y, int level, Marble::GeoSceneTexture* textureLayer, bool requestTileUpdate);
-
     void                    update ();
 
 signals:
     void                    creatingTilesStart (Marble::TileCreator*, const QString& name, const QString& description);
     void                    themeChanged (QString mapTheme);
     void                    modelChanged ();
-//    void                    regionChanged (Marble::BoundingBox& rect);
     void                    timeout ();
 
 private:
                             MarbleModel (const Marble::MarbleModel&);
+
 };   // MarbleModel
 
 };   // Marble

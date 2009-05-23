@@ -24,21 +24,34 @@ class SunLocator : QObject /Abstract/
 #include <SunLocator.h>
 %End
 
+
 public:
-//FIXME    explicit                SunLocator (Marble::ExtDateTime* dateTime);
-    qreal                   shading (qreal lon, qreal lat);
-    void                    shadePixel (QRgb& pixcol /in,out/, qreal shade);
-    void                    shadePixelComposite (QRgb& pixcol /in,out/, QRgb& dpixcol /in/, qreal shade);
+//ig                            SunLocator (Marble::ExtDateTime* dateTime, Marble::Planet* planet);
+    qreal                   shading (qreal lon, qreal a, qreal c) const;
+
+
+//io ambiguous symbol: QRgb& pixcol -- specify In, Out or both
+//io     void               shadePixel (QRgb& pixcol, qreal shade) const;
+
+
+
+
+//io ambiguous symbol: QRgb& pixcol -- specify In, Out or both
+//io ambiguous symbol: QRgb& dpixcol -- specify In, Out or both
+//io     void               shadePixelComposite (QRgb& pixcol, QRgb& dpixcol, qreal shade) const;
+
+
     void                    setShow (bool show);
     void                    setCitylights (bool show);
     void                    setCentered (bool show);
-    void                    setBody (QString body);
-    bool                    getShow ();
-    bool                    getCitylights ();
-    bool                    getCentered ();
-    qreal                   getLon ();
-    qreal                   getLat ();
-//FIXME    Marble::ExtDateTime*    datetime ();
+    void                    setPlanet (Marble::Planet* planet);
+    bool                    getShow () const;
+    bool                    getCitylights () const;
+    bool                    getCentered () const;
+    qreal                   getLon () const;
+    qreal                   getLat () const;
+//ig    Marble::ExtDateTime*    datetime () const;
+    Marble::Planet*         planet () const;
     void                    update ();
 
 signals:
@@ -47,7 +60,7 @@ signals:
     void                    centerSun ();
     void                    reenableWidgetInput ();
 
-protected:
+private:
                             SunLocator (const Marble::SunLocator&);
 };   // SunLocator
 

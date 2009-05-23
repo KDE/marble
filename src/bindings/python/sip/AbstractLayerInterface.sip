@@ -27,7 +27,6 @@ class AbstractLayerInterface
 public:
     virtual void            draw (Marble::ClipPainter* painter, const QPoint& point) = 0;
     virtual void            draw (Marble::ClipPainter* painter, const QSize& canvasSize, Marble::ViewParams* viewParams) = 0;
-    virtual void            draw (Marble::ClipPainter* painter, const QSize& canvasSize, Marble::ViewParams* viewParams, const Marble::BoundingBox& box) = 0;
     virtual void            printToStream (QTextStream&) const;
     bool                    visible () const;
     void                    setVisible (bool visible);

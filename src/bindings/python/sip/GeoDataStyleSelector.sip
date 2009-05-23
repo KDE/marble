@@ -29,13 +29,9 @@ public:
     QString                 styleId () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-
-protected:
                             GeoDataStyleSelector ();
+                            GeoDataStyleSelector (const Marble::GeoDataStyleSelector& other);
                             ~GeoDataStyleSelector ();
-
-private:
-                            GeoDataStyleSelector (const Marble::GeoDataStyleSelector&);
 };   // GeoDataStyleSelector
 
 };   // Marble

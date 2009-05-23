@@ -25,7 +25,7 @@ class MarbleMap : QObject
 %End
 
 public:
-    explicit                MarbleMap ();
+                            MarbleMap ();
     explicit                MarbleMap (Marble::MarbleModel* model);
     Marble::MarbleModel*    model () const;
     Marble::ViewParams*     viewParams ();
@@ -40,12 +40,6 @@ public:
     QSize                   size () const;
     int                     width () const;
     int                     height () const;
-
-
-//mt undefined symbol: HttpDownloadManager* downloadManager -- need mapped type?
-//mt     void               setDownloadManager (HttpDownloadManager* downloadManager);
-
-
     int                     radius () const;
     void                    setRadius (int radius);
     int                     zoom () const;
@@ -56,10 +50,8 @@ public:
     int                     maximumZoom () const;
     bool                    needsUpdate () const;
     void                    setNeedsUpdate ();
-    bool                    screenCoordinates (qreal lon, qreal lat, int& x /out/, int& y /out/);
     int                     northPoleY ();
     bool                    geoCoordinates (int x, int y, qreal& lon /out/, qreal& lat /out/, Marble::GeoDataCoordinates::Unit = Marble::GeoDataCoordinates::Degree);
-    bool                    globalQuaternion (int x, int y, Marble::Quaternion& q);
     qreal                   centerLongitude () const;
     qreal                   centerLatitude () const;
     QAbstractItemModel*     placemarkModel () const;
@@ -67,7 +59,7 @@ public:
     qreal                   moveStep ();
     void                    addPlacemarkFile (const QString& filename);
     void                    addPlacemarkData (const QString& data, const QString& key = "data");
-    void                    removePlacemarkKey( const QString& key );
+    void                    removePlacemarkKey (const QString& key);
     Marble::Quaternion      planetAxis () const;
     QPixmap                 mapScreenShot ();
     bool                    propertyValue (const QString& name) const;
@@ -93,8 +85,8 @@ public:
     quint64                 persistentTileCacheLimit () const;
     quint64                 volatileTileCacheLimit () const;
     Marble::SunLocator*     sunLocator ();
-    QList<Marble::MarbleRenderPlugin*>  renderPlugins () const;
-    QList<Marble::MarbleAbstractFloatItem*>  floatItems () const;
+    QList<Marble::RenderPlugin*>  renderPlugins () const;
+    QList<Marble::AbstractFloatItem*>  floatItems () const;
     void                    updateSun ();
     void                    centerSun ();
     void                    paint (Marble::GeoPainter& painter, QRect& dirtyRect);
@@ -125,6 +117,7 @@ public:
     void                    setShowScaleBar (bool visible);
     void                    setShowCompass (bool visible);
     void                    setShowClouds (bool visible);
+    void                    setShowTileId (bool visible);
     void                    setShowAtmosphere (bool visible);
     void                    setShowCrosshairs (bool visible);
     void                    setShowGrid (bool visible);
@@ -145,19 +138,17 @@ public:
     void                    updateGps ();
     void                    openGpxFile (QString& filename);
 
+
 //mt undefined symbol: GpxFileModel* None -- need mapped type?
 //mt     GpxFileModel*      gpxFileModel ();
 
-//ig     FileViewModel*     fileViewModel () const;
 
+//ig     FileViewModel*     fileViewModel () const;
     void                    clearPersistentTileCache ();
     void                    setPersistentTileCacheLimit (quint64 kiloBytes);
     void                    clearVolatileTileCache ();
     void                    setVolatileTileCacheLimit (quint64 kiloBytes);
     void                    updateChangedMap ();
-//    void                    updateRegion (Marble::BoundingBox&);
-    void                    setDownloadUrl (const QString& url);
-    void                    setDownloadUrl (const QUrl& url);
     bool                    mapCoversViewport ();
     Marble::AngleUnit       defaultAngleUnit () const;
     void                    setDefaultAngleUnit (Marble::AngleUnit angleUnit);

@@ -24,8 +24,11 @@ class GeoDataFolder : Marble::GeoDataContainer
 #include <GeoDataFolder.h>
 %End
 
+
 public:
-    explicit                GeoDataFolder (Marble::GeoDataObject* parent = 0);
+                            GeoDataFolder ();
+                            GeoDataFolder (const Marble::GeoDataFolder& other);
+                            GeoDataFolder (const Marble::GeoDataFeature& other);
     virtual bool            isFolder () const;
     virtual EnumFeatureId   featureId () const;
 };   // GeoDataFolder

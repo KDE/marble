@@ -24,22 +24,23 @@ class GeoDataStyle : Marble::GeoDataStyleSelector
 #include <GeoDataStyle.h>
 %End
 
+
 public:
                             GeoDataStyle ();
+                            GeoDataStyle (const Marble::GeoDataStyle& other);
                             GeoDataStyle (const QPixmap& icon, const QFont& font, const QColor& color);
-    void                    setIconStyle (Marble::GeoDataIconStyle* style);
-    Marble::GeoDataIconStyle*  iconStyle ();
-    void                    setLabelStyle (Marble::GeoDataLabelStyle* style);
-    Marble::GeoDataLabelStyle*  labelStyle ();
-    void                    setLineStyle (Marble::GeoDataLineStyle* style);
-    Marble::GeoDataLineStyle*  lineStyle ();
-    void                    setPolyStyle (Marble::GeoDataPolyStyle* style);
-    Marble::GeoDataPolyStyle*  polyStyle ();
+                            ~GeoDataStyle ();
+
+    void                    setIconStyle (const Marble::GeoDataIconStyle& style);
+    Marble::GeoDataIconStyle&  iconStyle () const;
+    void                    setLabelStyle (const Marble::GeoDataLabelStyle& style);
+    Marble::GeoDataLabelStyle&  labelStyle () const;
+    void                    setLineStyle (const Marble::GeoDataLineStyle& style);
+    Marble::GeoDataLineStyle&  lineStyle () const;
+    void                    setPolyStyle (const Marble::GeoDataPolyStyle& style);
+    Marble::GeoDataPolyStyle&  polyStyle () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-
-private:
-                            GeoDataStyle (const Marble::GeoDataStyle&);
 };   // GeoDataStyle
 
 };   // Marble

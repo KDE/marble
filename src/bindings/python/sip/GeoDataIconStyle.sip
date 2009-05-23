@@ -24,8 +24,10 @@ class GeoDataIconStyle : Marble::GeoDataColorStyle
 #include <GeoDataIconStyle.h>
 %End
 
+
 public:
                             GeoDataIconStyle ();
+                            GeoDataIconStyle (const Marble::GeoDataIconStyle& other);
     explicit                GeoDataIconStyle (const QPixmap& icon, const QPointF& hotSpot = QPointF(0.5,0.5));
     void                    setIcon (const QPixmap& icon);
     QPixmap                 icon () const;
@@ -36,9 +38,6 @@ public:
     float                   scale () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-
-private:
-                            GeoDataIconStyle (const Marble::GeoDataIconStyle&);
 };   // GeoDataIconStyle
 
 };   // Marble

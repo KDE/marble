@@ -26,6 +26,7 @@ class GeoDataPolyStyle : Marble::GeoDataColorStyle
 
 public:
                             GeoDataPolyStyle ();
+                            GeoDataPolyStyle (const Marble::GeoDataPolyStyle& other);
     explicit                GeoDataPolyStyle (const QColor& color);
 
     void                    setFill (const bool& fill /in/);
@@ -34,9 +35,6 @@ public:
     bool                    outline () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-
-private:
-                            GeoDataPolyStyle (const Marble::GeoDataPolyStyle&);
 };   // GeoDataPolyStyle
 
 };   // Marble

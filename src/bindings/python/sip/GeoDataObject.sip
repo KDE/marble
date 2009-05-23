@@ -25,22 +25,18 @@ class GeoDataObject : Marble::GeoNode, Serializable
 %End
 
 public:
+                            GeoDataObject ();
+                            GeoDataObject (const Marble::GeoDataObject&);
     int                     id () const;
     void                    setId (int value);
     int                     targetId () const;
     void                    setTargetId (int value);
-    Marble::GeoDataObject*  parent ();
-    void                    setParent (Marble::GeoDataObject*);
     virtual Marble::GeoDataObject*  child (int);
     int                     row ();
     virtual int             childPosition (Marble::GeoDataObject*);
     virtual int             childCount ();
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& steam);
-
-protected:
-    explicit                GeoDataObject (Marble::GeoDataObject* parent = 0);
-                            GeoDataObject (const Marble::GeoDataObject&);
 };   // GeoDataObject
 
 };   // Marble

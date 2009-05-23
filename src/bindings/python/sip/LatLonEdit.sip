@@ -24,11 +24,10 @@ class LatLonEdit : QWidget
 #include <LatLonEdit.h>
 %End
 
+
 public:
     explicit                LatLonEdit (QWidget* parent /TransferThis/ = 0, Marble::Dimension dimension = Marble::Longitude);
-    qreal                   value ();
-// In .h but not in .cpp.
-//FIXME    Marble::Dimension       dimension ();
+    qreal                   value () const;
     void                    setValue (qreal newvalue);
     void                    setDimension (Marble::Dimension dimension);
 

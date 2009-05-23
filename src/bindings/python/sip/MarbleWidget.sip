@@ -49,10 +49,8 @@ public:
     int                     maximumZoom () const;
     bool                    needsUpdate () const;
     void                    setNeedsUpdate ();
-    bool                    screenCoordinates (qreal lon, qreal lat, int& x /out/, int& y /out/);
     int                     northPoleY ();
     bool                    geoCoordinates (int x, int y, qreal& lon /out/, qreal& lat /out/, Marble::GeoDataCoordinates::Unit = Marble::GeoDataCoordinates::Degree);
-    bool                    globalQuaternion (int x, int y, Marble::Quaternion& q);
     qreal                   centerLongitude () const;
     qreal                   centerLatitude () const;
     QAbstractItemModel*     placemarkModel () const;
@@ -60,7 +58,7 @@ public:
     qreal                   moveStep ();
     void                    addPlacemarkFile (const QString& filename);
     void                    addPlacemarkData (const QString& data, const QString& key = "data");
-    void                    removePlacemarkKey( const QString& key );
+    void                    removePlacemarkKey (const QString& key);
     Marble::Quaternion      planetAxis () const;
     QPixmap                 mapScreenShot ();
     bool                    showOverviewMap () const;
@@ -85,22 +83,28 @@ public:
     quint64                 persistentTileCacheLimit () const;
     quint64                 volatileTileCacheLimit () const;
     Marble::SunLocator*     sunLocator ();
-    void                    setProxy (const QString& proxyHost, const quint16 proxyPort);
+    void                    setProxy (const QString& proxyHost, const quint16 proxyPort, const QString& user, const QString& password);
     QString                 proxyHost () const;
     quint16                 proxyPort () const;
-    QList<Marble::MarbleRenderPlugin*>  renderPlugins () const;
-    QList<Marble::MarbleAbstractFloatItem*>  floatItems () const;
+    QString                 user () const;
+    QString                 password () const;
+    QList<Marble::RenderPlugin*>  renderPlugins () const;
+    QList<Marble::AbstractFloatItem*>  floatItems () const;
     Marble::Projection      projection () const;
     QString                 mapThemeId () const;
+
 
 //mt undefined symbol: GeoSceneDocument* None -- need mapped type?
 //mt     Marble::GeoSceneDocument*  mapTheme () const;
 
+
+
+
 //mt undefined symbol: GpxFileModel* None -- need mapped type?
 //mt     GpxFileModel*      gpxFileModel ();
 
-//ig   FileViewModel*     fileViewModel () const;
 
+//ig     FileViewModel*     fileViewModel () const;
     Marble::MapQuality      mapQuality (Marble::ViewContext = Marble::Still);
     Marble::ViewContext     viewContext () const;
     bool                    animationsEnabled () const;
@@ -154,6 +158,7 @@ public:
     void                    setShowLakes (bool visible);
     void                    setShowGps (bool visible);
     void                    setShowFrameRate (bool visible);
+    void                    setShowTileId (bool visible);
     void                    changeCurrentPosition (qreal lon, qreal lat);
     void                    notifyMouseClick (int x, int y);
     void                    updateGps ();
@@ -164,10 +169,6 @@ public:
     void                    setVolatileTileCacheLimit (quint64 kiloBytes);
     void                    creatingTilesStart (Marble::TileCreator* creator, const QString& name, const QString& description);
     void                    updateChangedMap ();
-
-//    void                    updateRegion (Marble::BoundingBox&);
-    void                    setDownloadUrl (const QString& url);
-    void                    setDownloadUrl (const QUrl& url);
     void                    setMapQuality (Marble::MapQuality, Marble::ViewContext = Marble::Still);
     void                    setViewContext (Marble::ViewContext viewContext);
     void                    setAnimationsEnabled (bool enabled);
@@ -183,8 +184,11 @@ signals:
     void                    timeout ();
     void                    framesPerSecond (qreal fps);
 
+
 //mt undefined symbol: QList<double>& None -- need mapped type?
 //mt     void               regionSelected (const QList<double>&);
+
+
 
 protected:
     void                    leaveEvent (QEvent* event);

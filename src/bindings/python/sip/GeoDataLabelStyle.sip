@@ -33,8 +33,8 @@ public:
     };
 
                             GeoDataLabelStyle ();
+                            GeoDataLabelStyle (const Marble::GeoDataLabelStyle& other);
                             GeoDataLabelStyle (const QFont& font, const QColor& color);
-
     void                    setScale (const float& scale /in/);
     float                   scale () const;
     void                    setAlignment (Marble::GeoDataLabelStyle::Alignment alignment);
@@ -43,9 +43,6 @@ public:
     QFont                   font () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-
-private:
-                            GeoDataLabelStyle (const Marble::GeoDataLabelStyle&);
 };   // GeoDataLabelStyle
 
 };   // Marble

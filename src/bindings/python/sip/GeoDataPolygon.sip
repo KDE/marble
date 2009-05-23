@@ -24,27 +24,22 @@ class GeoDataPolygon : Marble::GeoDataGeometry
 #include <GeoDataPolygon.h>
 %End
 
+
 public:
-    explicit                GeoDataPolygon (Marble::GeoDataObject* parent = 0, Marble::TessellationFlags f = Marble::NoTessellation);
-                            GeoDataPolygon (const Marble::GeoDataPolygon&);
+    explicit                GeoDataPolygon (Marble::TessellationFlags f = Marble::NoTessellation);
+                            GeoDataPolygon (const Marble::GeoDataGeometry& other);
     virtual bool            isClosed () const;
     bool                    tessellate () const;
     void                    setTessellate (bool tessellate);
     Marble::TessellationFlags  tessellationFlags () const;
     void                    setTessellationFlags (Marble::TessellationFlags f);
-//FIXME    Marble::GeoDataLatLonAltBox  latLonAltBox () const;
+    Marble::GeoDataLatLonAltBox  latLonAltBox () const;
     Marble::GeoDataLinearRing&  outerBoundary () const;
-    void                    setOuterBoundary (Marble::GeoDataLinearRing* boundary);
-
-
-//mt undefined symbol: QVector<Marble::GeoDataLinearRing*> None -- need mapped type?
-//mt     QVector<Marble::GeoDataLinearRing*>  innerBoundaries () const;
-
-
-    void                    appendInnerBoundary (Marble::GeoDataLinearRing* boundary);
+    void                    setOuterBoundary (const Marble::GeoDataLinearRing& boundary);
+    QVector<Marble::GeoDataLinearRing>&  innerBoundaries () const;
+    void                    appendInnerBoundary (const Marble::GeoDataLinearRing& boundary);
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-    virtual EnumGeometryId  geometryId () const;
 };   // GeoDataPolygon
 
 
@@ -53,6 +48,7 @@ class GeoDataOuterBoundary : Marble::GeoDataPolygon
 %TypeHeaderCode
 #include <GeoDataPolygon.h>
 %End
+
 };   // GeoDataOuterBoundary
 
 
@@ -61,6 +57,7 @@ class GeoDataInnerBoundary : Marble::GeoDataPolygon
 %TypeHeaderCode
 #include <GeoDataPolygon.h>
 %End
+
 };   // GeoDataInnerBoundary
 
 };   // Marble

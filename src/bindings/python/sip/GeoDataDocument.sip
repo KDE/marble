@@ -24,23 +24,25 @@ class GeoDataDocument : Marble::GeoDocument, Marble::GeoDataContainer
 #include <GeoDataDocument.h>
 %End
 
+
 public:
-    explicit                GeoDataDocument (Marble::GeoDataObject* parent = 0);
-    virtual EnumFeatureId   featureId () const;
+                            GeoDataDocument ();
+                            GeoDataDocument (Marble::GeoDataFeature& other);
+                            GeoDataDocument (const Marble::GeoDataDocument& other);
     virtual bool            isGeoDataDocument () const;
-    void                    addStyle (Marble::GeoDataStyle* style);
-    void                    removeStyle (Marble::GeoDataStyle* style);
-    Marble::GeoDataStyle*   style (const QString& styleId);
-    QList<Marble::GeoDataStyle*>  styles () const;
-//FIXME    void                    addStyleMap (Marble::GeoDataStyleMap* map);
-//FIXME    void                    removeStyleMap (Marble::GeoDataStyleMap* map);
-//FIXME    Marble::GeoDataStyleMap*  styleMap (const QString& styleId);
-//FIXME    QList<Marble::GeoDataStyleMap*>  styleMaps () const;
+    QString                 fileName () const;
+    void                    setFileName (const QString& value);
+    void                    addStyle (const Marble::GeoDataStyle& style);
+    void                    removeStyle (const QString& styleId);
+    Marble::GeoDataStyle&   style (const QString& styleId) const;
+    QList<Marble::GeoDataStyle>  styles () const;
+    void                    addStyleMap (const Marble::GeoDataStyleMap& map);
+    void                    removeStyleMap (const QString& mapId);
+    Marble::GeoDataStyleMap&  styleMap (const QString& styleId) const;
+    QList<Marble::GeoDataStyleMap>  styleMaps () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-
-private:
-                            GeoDataDocument (const Marble::GeoDataDocument&);
+    virtual EnumFeatureId   featureId () const;
 };   // GeoDataDocument
 
 };   // Marble

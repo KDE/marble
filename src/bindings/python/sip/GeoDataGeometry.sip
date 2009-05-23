@@ -24,19 +24,25 @@ class GeoDataGeometry : Marble::GeoDataObject
 #include <GeoDataGeometry.h>
 %End
 
+
 public:
+                            GeoDataGeometry ();
+                            GeoDataGeometry (const Marble::GeoDataGeometry& other);
+//                            GeoDataGeometry (const Marble::GeoDataPolygon& other);
+                            GeoDataGeometry (const Marble::GeoDataPoint& other);
+/*                            GeoDataGeometry (const Marble::GeoDataLineString& other);
+                            GeoDataGeometry (const Marble::GeoDataMultiGeometry& other);*/
+    bool                    operator == (const Marble::GeoDataGeometry& other) const;
     virtual bool            isFolder () const;
     virtual EnumGeometryId  geometryId () const;
     bool                    extrude () const;
     void                    setExtrude (bool extrude);
     Marble::AltitudeMode    altitudeMode () const;
     void                    setAltitudeMode (const Marble::AltitudeMode altitudeMode);
-    explicit                GeoDataGeometry (Marble::GeoDataObject* parent = 0);
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
+    void                    detach ();
 
-protected:
-                            GeoDataGeometry (const Marble::GeoDataGeometry& other);
 };   // GeoDataGeometry
 
 };   // Marble

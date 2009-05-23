@@ -33,14 +33,12 @@ public:
         InsetPixels
     };
 
-    explicit                GeoDataHotSpot (const QPointF& hotSpot = QPointF(0.5,0.5), Marble::GeoDataHotSpot::Units xunits = Marble::GeoDataHotSpot::Fraction, Marble::GeoDataHotSpot::Units yunits = Marble::GeoDataHotSpot::Fraction);
+                            GeoDataHotSpot (const QPointF& hotSpot = QPointF(0.5,0.5), Marble::GeoDataHotSpot::Units xunits = Marble::GeoDataHotSpot::Fraction, Marble::GeoDataHotSpot::Units yunits = Marble::GeoDataHotSpot::Fraction);
+                            GeoDataHotSpot (const Marble::GeoDataHotSpot& other);
     const QPointF&          hotSpot (Marble::GeoDataHotSpot::Units& xunits, Marble::GeoDataHotSpot::Units& yunits) const;
     void                    setHotSpot (const QPointF& hotSpot = QPointF(0.5,0.5), Marble::GeoDataHotSpot::Units xunits = Marble::GeoDataHotSpot::Fraction, Marble::GeoDataHotSpot::Units yunits = Marble::GeoDataHotSpot::Fraction);
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-
-private:
-                            GeoDataHotSpot (const Marble::GeoDataHotSpot&);
 };   // GeoDataHotSpot
 
 };   // Marble

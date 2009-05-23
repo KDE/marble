@@ -21,7 +21,7 @@ namespace Marble
 class AbstractProjectionHelper
 {
 %TypeHeaderCode
-#include <marble/AbstractProjectionHelper.h>
+#include <AbstractProjectionHelper.h>
 %End
 
 public:

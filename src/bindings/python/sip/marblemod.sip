@@ -34,36 +34,32 @@
 
 %Include Quaternion.sip
 %Include GeoDataCoordinates.sip
-//%Include AbstractLayerInterface.sip
+%Include AbstractDataPluginModel.sip
+%Include AbstractDataPluginItem.sip
+%Include AbstractDataPlugin.sip
 %Include ClipPainter.sip
-
+%Include RenderPlugin.sip
+%Include RenderPluginInterface.sip
+%Include PluginInterface.sip
+%Include AbstractFloatItem.sip
 %Include GeoPainter.sip
 %Include LatLonEdit.sip
 %Include MapThemeManager.sip
-%Include MarbleAbstractFloatItem.sip
 %Include MarbleControlBox.sip
 %Include MarbleDataFacade.sip
 %Include MarbleDirs.sip
 %Include MarbleMap.sip
 %Include MarbleModel.sip
 %Include MarbleNavigator.sip
-%Include MarbleRenderPlugin.sip
-%Include MarbleRenderPluginInterface.sip
 %Include MarbleWidget.sip
-
 %Include AbstractProjection.sip
-//%Include AbstractProjectionHelper.sip
-//%Include EquirectProjection.sip
-//%Include EquirectProjectionHelper.sip
-//%Include MercatorProjection.sip
-//%Include MercatorProjectionHelper.sip
-//%Include SphericalProjection.sip
-//%Include SphericalProjectionHelper.sip
+%Include Planet.sip
 %Include SunLocator.sip
 %Include TileCreator.sip
 %Include TileCreatorDialog.sip
 %Include ViewParams.sip
 %Include ViewportParams.sip
+%Include GeoDataAccuracy.sip
 %Include GeoDataColorStyle.sip
 %Include GeoDataContainer.sip
 %Include GeoDataDocument.sip
@@ -73,8 +69,8 @@
 %Include GeoDataHotSpot.sip
 %Include GeoDataIconStyle.sip
 %Include GeoDataLabelStyle.sip
-%Include GeoDataLatLonAltBox.sip
 %Include GeoDataLatLonBox.sip
+%Include GeoDataLatLonAltBox.sip
 %Include GeoDataLineString.sip
 %Include GeoDataLineStyle.sip
 %Include GeoDataLinearRing.sip
@@ -87,6 +83,8 @@
 %Include GeoDataStyle.sip
 %Include GeoDataStyleMap.sip
 %Include GeoDataStyleSelector.sip
+%Include MarbleGraphicsItem.sip
+%Include GeoGraphicsItem.sip
 %Include Serializable.sip
 %Include GeoDocument.sip
 %Include global.sip
@@ -96,7 +94,12 @@
 //%Include MapThemeSortFilterProxyModel.sip
 //%Include ExtDateTime.sip
 //%Include MarbleWidgetInputHandler.sip
-
-// ---- Not exported, and is deprecated
-//%Include BoundingBox.sip
+//%Include AbstractProjectionHelper.sip
+//%Include AbstractLayerInterface.sip
+//%Include EquirectProjection.sip
+//%Include EquirectProjectionHelper.sip
+//%Include MercatorProjection.sip
+//%Include MercatorProjectionHelper.sip
+//%Include SphericalProjection.sip
+//%Include SphericalProjectionHelper.sip
 

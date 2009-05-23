@@ -26,14 +26,12 @@ class GeoDataLineStyle : Marble::GeoDataColorStyle
 
 public:
                             GeoDataLineStyle ();
+                            GeoDataLineStyle (const Marble::GeoDataLineStyle& other);
     explicit                GeoDataLineStyle (const QColor& color);
-    void               setWidth (const float& width /in/);
+    void                    setWidth (const float& width /in/);
     float                   width () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-
-private:
-                            GeoDataLineStyle (const Marble::GeoDataLineStyle&);
 };   // GeoDataLineStyle
 
 };   // Marble

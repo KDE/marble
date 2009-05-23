@@ -37,8 +37,6 @@ public:
 //ig    virtual bool            screenCoordinates (const Marble::GeoDataCoordinates& geopoint, const Marble::ViewportParams* viewport, int& x /out/, int& y /out/, bool& globeHidesPoint /out/) = 0;
 //ig    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, const Marble::ViewportParams* viewport, int& x /out/, int& y /out/);
 
-    virtual bool            screenCoordinates (const Marble::GeoDataCoordinates& coordinates, const Marble::ViewportParams* viewport, int* x /out/, int& y /out/, int& pointRepeatNum /out/, bool& globeHidesPoint /out/) = 0;
-
 //mt undefined symbol: QVector<QPolygonF*>& polygons -- need mapped type?
 //mt    virtual bool       screenCoordinates (const Marble::GeoDataLineString& lineString, const Marble::ViewportParams* viewport, QVector<QPolygonF*>& polygons) = 0;
 

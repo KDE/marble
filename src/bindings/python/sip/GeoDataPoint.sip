@@ -24,22 +24,21 @@ class GeoDataPoint : Marble::GeoDataCoordinates, Marble::GeoDataGeometry
 #include <GeoDataPoint.h>
 %End
 
+
 public:
     typedef Marble::GeoDataCoordinates::Notation Notation;
-
     typedef Marble::GeoDataCoordinates::Unit Unit;
 
                             GeoDataPoint (const Marble::GeoDataPoint& other);
-    explicit                GeoDataPoint (Marble::GeoDataObject* parent = 0);
-
-                            GeoDataPoint (qreal _lon, qreal _lat, qreal alt = 0, Marble::GeoDataPoint::Unit _unit = Marble::GeoDataPoint::Radian, int _detail = 0, Marble::GeoDataObject* parent = 0);
-
-//ig                            GeoDataPoint (qreal _lon, qreal _lat, qreal alt = 0, Marble::GeoDataObject* parent = 0);
-    virtual EnumGeometryId  geometryId () const;
+                            GeoDataPoint (const Marble::GeoDataGeometry& other);
+                            GeoDataPoint ();
+                            GeoDataPoint (qreal _lon, qreal _lat, qreal alt = 0, Marble::GeoDataPoint::Unit _unit = Marble::GeoDataPoint::Radian, int _detail = 0);
     typedef QVector<Marble::GeoDataPoint> Vector;
 
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
+    virtual void            detach ();
+
 };   // GeoDataPoint
 
 };   // Marble

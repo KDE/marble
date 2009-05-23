@@ -24,38 +24,38 @@ class GeoDataContainer : Marble::GeoDataFeature
 #include <GeoDataContainer.h>
 %End
 
+
 public:
-
-
-//mt undefined symbol: QVector<Marble::GeoDataFolder*> None -- need mapped type?
-//mt     QVector<Marble::GeoDataFolder*>  folders () const;
-
-
-
-
-//mt undefined symbol: QVector<Marble::GeoDataFeature*> None -- need mapped type?
-//mt     QVector<Marble::GeoDataFeature*>  features () const;
-
-
-
-
-//mt undefined symbol: QVector<Marble::GeoDataPlacemark*> None -- need mapped type?
-//mt     QVector<Marble::GeoDataPlacemark*>  placemarks () const;
-
-
-    void                    addFeature (Marble::GeoDataFeature* feature, bool setChild = 1);
-    void                    removeFeature (Marble::GeoDataFeature* feature);
-    virtual Marble::GeoDataObject*  child (int);
-    virtual int             childPosition (Marble::GeoDataObject*);
-    virtual int             childCount ();
+                            GeoDataContainer ();
+                            GeoDataContainer (const Marble::GeoDataContainer& other);
+                            GeoDataContainer (const Marble::GeoDataFeature& other);
+//ig    Marble::GeoDataContainerPrivate*  p () const;
+//    QVector<Marble::GeoDataFolder>  folders () const;
+    QVector<Marble::GeoDataFeature>&  features () const;
+//    QVector<Marble::GeoDataPlacemark>  placemarks () const;
+    void                    append (const Marble::GeoDataFeature& other);
+    int                     size () const;
+//ig    Marble::GeoDataFeature&  at (int pos);
+    const Marble::GeoDataFeature&  at (int pos) const;
+//ig    Marble::GeoDataFeature&  last ();
+    const Marble::GeoDataFeature&  last () const;
+//ig    Marble::GeoDataFeature&  first ();
+    const Marble::GeoDataFeature&  first () const;
+//ig    QVector<Marble::GeoDataFeature>::Iterator  begin ();
+//ig    QVector<Marble::GeoDataFeature>::Iterator  end ();
+//ig    QVector<Marble::GeoDataFeature>::ConstIterator  constBegin () const;
+//ig    QVector<Marble::GeoDataFeature>::ConstIterator  constEnd () const;
+    void                    clear ();
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
 
-protected:
-    explicit                GeoDataContainer (Marble::GeoDataObject* parent = 0);
-
 private:
-                            GeoDataContainer (const Marble::GeoDataContainer&);
+//ig                            GeoDataContainer (Marble::GeoDataContainerPrivate* priv);
+
+public:
+    virtual Marble::GeoDataObject*  child (int);
+    virtual int             childPosition (Marble::GeoDataObject*);
+    virtual int             childCount ();
 };   // GeoDataContainer
 
 };   // Marble

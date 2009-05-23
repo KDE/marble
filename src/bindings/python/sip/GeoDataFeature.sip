@@ -25,15 +25,17 @@ class GeoDataFeature : Marble::GeoDataObject
 %End
 
 public:
-    explicit                GeoDataFeature (Marble::GeoDataObject* parent = 0);
-    explicit                GeoDataFeature (const QString& name, Marble::GeoDataObject* parent = 0);
-    GeoDataFeature ( const GeoDataFeature& other );
-    GeoDataFeature& operator=( const GeoDataFeature& other );
-    bool operator==( const GeoDataFeature& other ) const;
-
+                            GeoDataFeature ();
+                            GeoDataFeature (const QString& name);
+                            GeoDataFeature (const Marble::GeoDataFeature& other);
+                            GeoDataFeature (const Marble::GeoDataContainer& other);
+                            GeoDataFeature (const Marble::GeoDataFolder& other);
+                            GeoDataFeature (const Marble::GeoDataDocument& other);
+                            GeoDataFeature (const Marble::GeoDataPlacemark& other);
+    bool                    operator == (const Marble::GeoDataFeature&) const;
     virtual bool            isFolder () const;
     virtual bool            isPlacemark () const;
-    virtual EnumFeatureId   featureId () const;
+    EnumFeatureId           featureId () const;
 
     enum GeoDataVisualCategory
     {
@@ -70,6 +72,7 @@ public:
         MagneticPole,
         ShipWreck,
         AirPort,
+        Observatory,
         Wikipedia,
         OsmSite,
         Coordinate,
@@ -102,7 +105,7 @@ public:
     void                    setPopularityIndex (int index);
     qint64                  popularity () const;
     void                    setPopularity (qint64 popularity);
-//FIXME    Marble::GeoDataStyleMap*  styleMap ();
+//FIXME    Marble::GeoDataStyleMap*  styleMap () const;
 //FIXME    void                    setStyleMap (Marble::GeoDataStyleMap* map);
     const QSize             symbolSize () const;
     const QPixmap           symbolPixmap () const;

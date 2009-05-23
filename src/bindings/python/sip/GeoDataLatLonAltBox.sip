@@ -24,6 +24,7 @@ class GeoDataLatLonAltBox : Marble::GeoDataLatLonBox
 #include <GeoDataLatLonAltBox.h>
 %End
 
+
 public:
                             GeoDataLatLonAltBox ();
                             GeoDataLatLonAltBox (const Marble::GeoDataLatLonAltBox&);
@@ -35,14 +36,12 @@ public:
     void                    setMaxAltitude (const qreal maxAltitude);
     Marble::AltitudeMode    altitudeMode () const;
     void                    setAltitudeMode (const Marble::AltitudeMode altitudeMode);
-    virtual bool            contains (const Marble::GeoDataPoint&);
-    virtual bool            contains (const Marble::GeoDataCoordinates&);
-    bool                    contains (const Marble::GeoDataLatLonAltBox&);
-    virtual bool            intersects (const Marble::GeoDataLatLonAltBox&);
+    virtual bool            contains (const Marble::GeoDataPoint&) const;
+    virtual bool            contains (const Marble::GeoDataCoordinates&) const;
+    bool                    contains (const Marble::GeoDataLatLonAltBox&) const;
+    virtual bool            intersects (const Marble::GeoDataLatLonAltBox&) const;
     static Marble::GeoDataLatLonAltBox  fromLineString (const Marble::GeoDataLineString& lineString);
-
-    virtual QString    toString (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
-
+    virtual QString         toString (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
     bool                    isNull () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);

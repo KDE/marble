@@ -38,13 +38,9 @@ public:
     Marble::GeoDataColorStyle::ColorMode  colorMode () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-
-protected:
                             GeoDataColorStyle ();
+                            GeoDataColorStyle (const Marble::GeoDataColorStyle& other);
     virtual                 ~GeoDataColorStyle ();
-
-private:
-                            GeoDataColorStyle (const Marble::GeoDataColorStyle&);
 };   // GeoDataColorStyle
 
 };   // Marble

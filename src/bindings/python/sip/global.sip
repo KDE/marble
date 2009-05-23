@@ -15,6 +15,11 @@
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+%ModuleHeaderCode
+#include <global.h>
+%End
+
+
 namespace Marble
 {
 
@@ -51,6 +56,8 @@ enum Dimension
     Longitude
 };
 
+typedef QFlags<Marble::Dimension> Dimensions;
+
 
 enum AngleUnit
 {
@@ -75,6 +82,27 @@ enum MapQuality
     High,
     Print
 };
+
+
+enum GraphicsSystem
+{
+    NativeGraphics,
+    RasterGraphics,
+    OpenGLGraphics
+};
+
+
+enum LabelPositionFlag
+{
+    NoLabel,
+    LineStart,
+    LineCenter,
+    LineEnd,
+    IgnoreXMargin,
+    IgnoreYMargin
+};
+
+typedef QFlags<Marble::LabelPositionFlag> LabelPositionFlags;
 
 
 enum LabelLocalization
@@ -105,6 +133,35 @@ enum AltitudeMode
     RelativeToGround,
     Absolute
 };
+
+
+enum Pole
+{
+    AnyPole,
+    NorthPole,
+    SouthPole
+};
+
+
+class MarbleGlobal
+{
+%TypeHeaderCode
+#include <marble/global.h>
+%End
+
+public:
+    static Marble::MarbleGlobal*  getInstance ();
+
+
+//mt undefined symbol: MarbleLocale* None -- need mapped type?
+//mt     MarbleLocale*      locale () const;
+
+
+
+private:
+                            MarbleGlobal ();
+                            MarbleGlobal (const Marble::MarbleGlobal&);
+};   // MarbleGlobal
 
 };   // Marble
 

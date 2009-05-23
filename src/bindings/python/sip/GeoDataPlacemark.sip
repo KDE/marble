@@ -25,19 +25,21 @@ class GeoDataPlacemark : Marble::GeoDataFeature
 %End
 
 public:
-    explicit                GeoDataPlacemark (Marble::GeoDataObject* parent = 0);
-    explicit                GeoDataPlacemark (const QString& name, Marble::GeoDataObject* parent = 0);
+                            GeoDataPlacemark ();
+                            GeoDataPlacemark (const Marble::GeoDataPlacemark& placemark);
+                            GeoDataPlacemark (const Marble::GeoDataFeature& feature);
+                            GeoDataPlacemark (const QString& name);
+    bool                    operator == (const Marble::GeoDataPlacemark& other) const;
     Marble::GeoDataCoordinates  coordinate () const;
-    Marble::GeoDataGeometry*  geometry ();
+    Marble::GeoDataGeometry*  geometry () const;
 
-//ig    void                    coordinate (qreal& longitude /out/, qreal& latitude /out/, qreal& altitude /out/);
     void                    setCoordinate (qreal longitude, qreal latitude, qreal altitude = 0);
     void                    setCoordinate (const Marble::GeoDataPoint& point);
-    void                    setGeometry (Marble::GeoDataPoint* entry);
-    void                    setGeometry (Marble::GeoDataLineString* entry);
-    void                    setGeometry (Marble::GeoDataLinearRing* entry);
-    void                    setGeometry (Marble::GeoDataMultiGeometry* entry);
-    void                    setGeometry (Marble::GeoDataPolygon* entry);
+    void                    setGeometry (const Marble::GeoDataPoint& entry);
+    void                    setGeometry (const Marble::GeoDataLineString& entry);
+    void                    setGeometry (const Marble::GeoDataLinearRing& entry);
+    void                    setGeometry (const Marble::GeoDataMultiGeometry& entry);
+    void                    setGeometry (const Marble::GeoDataPolygon& entry);
     qreal                   area () const;
     void                    setArea (qreal area);
     qint64                  population () const;
@@ -47,10 +49,8 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
     virtual bool            isPlacemark () const;
-    virtual EnumFeatureId   featureId () const;
+//ig     void               coordinate (qreal& longitude /out/, qreal& latitude /out/, qreal& altitude /out/);
 
-private:
-                            GeoDataPlacemark (const Marble::GeoDataPlacemark&);
 };   // GeoDataPlacemark
 
 };   // Marble

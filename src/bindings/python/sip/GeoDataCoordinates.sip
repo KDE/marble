@@ -24,6 +24,7 @@ class GeoDataCoordinates
 #include <GeoDataCoordinates.h>
 %End
 
+
 public:
 
     enum Unit
@@ -44,34 +45,35 @@ public:
 
                             GeoDataCoordinates (const Marble::GeoDataCoordinates& other);
                             GeoDataCoordinates ();
-
                             GeoDataCoordinates (qreal lon, qreal lat, qreal alt = 0, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian, int detail = 0);
-
+    void                    set (qreal lon, qreal lat, qreal alt = 0, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
+    void                    geoCoordinates (qreal& lon /out/, qreal& lat /out/, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
+    void                    setLongitude (qreal lon, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
+    qreal                   longitude (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
+    qreal                   latitude (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
+    void                    setLatitude (qreal lat, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
     qreal                   altitude () const;
     void                    setAltitude (const qreal altitude);
     int                     detail () const;
     void                    setDetail (const int det);
-
-    void                    set (qreal lon, qreal lat, qreal alt = 0, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
-
-    void                    geoCoordinates (qreal& lon /out/, qreal& lat /out/, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
-
     const Marble::Quaternion&  quaternion () const;
+    bool                    isAtPole (Marble::Pole) const;
     static Marble::GeoDataCoordinates::Notation  defaultNotation ();
     static void             setDefaultNotation (Marble::GeoDataCoordinates::Notation notation);
     static qreal            normalizeLon (qreal lon);
     static qreal            normalizeLat (qreal lat);
-
-    static void             normalizeLonLat (qreal& lon /in,out/, qreal& lat /in,out/);
-
+    static void             normalizeLonLat (qreal& lon /in, out/, qreal& lat /in, out/);
     static Marble::GeoDataCoordinates  fromString (const QString& string, bool& successful /out/);
-
-    QString                 toString ();
-    QString                 toString (Marble::GeoDataCoordinates::Notation notation);
+    QString                 toString () const;
+    QString                 toString (Marble::GeoDataCoordinates::Notation notation, int precision = -1) const;
+    static QString          lonToString (qreal lon, Marble::GeoDataCoordinates::Notation notation, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian, int precision = -1, char format = 'f');
+    QString                 lonToString () const;
+    static QString          latToString (qreal lat, Marble::GeoDataCoordinates::Notation notation, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian, int precision = -1, char format = 'f');
+    QString                 latToString () const;
     bool                    operator == (const Marble::GeoDataCoordinates&) const;
-    int                     detach();
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
+    virtual void            detach ();
 };   // GeoDataCoordinates
 
 };   // Marble
