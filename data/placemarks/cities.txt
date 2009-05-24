@@ -8435,7 +8435,7 @@ Biguaçu	Santa Catarina	br	N	49,7	27.50°S	48.66°W
 Bitlis	Bitlis	tr	R	49,7	38.43°N	42.14°E
 Livny	Orjol	ru	N	49,7	52.41°N	37.58°E
 Jarcevo	Smolensk	ru	N	49,7	55.07°N	32.68°E
-Kirkcaldy	Scotland	gb	N	49,7	57.14°N	3.16°W
+Kirkcaldy	Scotland	gb	N	49,7	56.14°N	3.16°W
 Kjustendil	Kjustendil	bg	R	49,7	42.30°N	22.69°E
 Cupertino	California	us	N	49,7	37.31°N	122.05°W
 Yuba City	California	us	N	49,7	39.14°N	121.62°W
