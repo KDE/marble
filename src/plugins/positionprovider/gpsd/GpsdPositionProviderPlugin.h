@@ -13,14 +13,14 @@
 
 #include "PositionProviderPlugin.h"
 
-#include <QtCore/QTimer>
-
 #include <libgpsmm.h>
 
 
 
 namespace Marble
 {
+
+class GpsdThread;
 
 class GpsdPositionProviderPlugin: public PositionProviderPlugin
 {
@@ -45,16 +45,13 @@ class GpsdPositionProviderPlugin: public PositionProviderPlugin
     virtual GeoDataAccuracy accuracy() const;
     
  private:
-    bool m_initialized;
-    gpsmm m_gpsd;
-    gps_data_t* m_gpsdData;
-    QTimer* m_timer;
+    GpsdThread* m_thread;
     PositionProviderStatus m_status;
     GeoDataCoordinates m_position;
     GeoDataAccuracy m_accuracy;
     
  private slots:
-    void update();
+    void update(gps_data_t data);
 };
 
 }

@@ -10,7 +10,7 @@
 
 #include "GpsdPositionProviderPlugin.h"
 
-#include <QtCore/QDebug>
+#include "GpsdThread.h"
 
 
 
@@ -43,41 +43,36 @@ QIcon GpsdPositionProviderPlugin::icon() const
 
 void GpsdPositionProviderPlugin::initialize()
 {
-    m_gpsdData = m_gpsd.open();
-    m_timer = new QTimer;
-    connect( m_timer, SIGNAL( timeout() ), this, SLOT( update() ) );
-    m_timer->start( 1000 );
-    m_initialized = true;
+    m_thread = new GpsdThread;
+    connect( m_thread, SIGNAL( gpsdInfo( gps_data_t ) ),
+             this, SLOT( update( gps_data_t ) ) );
+    m_thread->start();
 }
 
-void GpsdPositionProviderPlugin::update() {
-    //Check that m_gpsd->open() has successfully completed
-    if ( m_gpsdData != 0 ) {
-        m_gpsdData = m_gpsd.query( "o" );
-        PositionProviderStatus oldStatus = m_status;
-        GeoDataCoordinates oldPosition = m_position;
-        if (m_gpsdData->status == STATUS_NO_FIX)
-            m_status = PositionProviderStatusUnavailable;
-        else {
-            m_status = PositionProviderStatusAvailable;
-            m_position.set( m_gpsdData->fix.longitude, m_gpsdData->fix.latitude,
-            m_gpsdData->fix.altitude, GeoDataCoordinates::Degree );
-            m_accuracy.level = GeoDataAccuracy::Detailed;
-            // FIXME: Add real values here
-            m_accuracy.horizontal = 5;
-            m_accuracy.vertical = 5;
-        }
-        if (m_status != oldStatus)
-            emit statusChanged( m_status );
-        // FIXME: Check whether position has changed first
-        if (m_status == PositionProviderStatusAvailable)
-            emit positionChanged( m_position, m_accuracy );
+void GpsdPositionProviderPlugin::update(gps_data_t data) {
+    PositionProviderStatus oldStatus = m_status;
+    GeoDataCoordinates oldPosition = m_position;
+    if (data.status == STATUS_NO_FIX)
+        m_status = PositionProviderStatusUnavailable;
+    else {
+        m_status = PositionProviderStatusAvailable;
+        m_position.set( data.fix.longitude, data.fix.latitude,
+        data.fix.altitude, GeoDataCoordinates::Degree );
+        m_accuracy.level = GeoDataAccuracy::Detailed;
+        // FIXME: Add real values here
+        m_accuracy.horizontal = 5;
+        m_accuracy.vertical = 5;
     }
+    if (m_status != oldStatus)
+        emit statusChanged( m_status );
+    // FIXME: Check whether position has changed first
+    if (m_status == PositionProviderStatusAvailable)
+        emit positionChanged( m_position, m_accuracy );
 }
 
 bool GpsdPositionProviderPlugin::isInitialized() const
 {
-    return m_initialized;
+    return m_thread;
 }
 
 PositionProviderPlugin* GpsdPositionProviderPlugin::newInstance() const
@@ -97,12 +92,14 @@ GeoDataAccuracy GpsdPositionProviderPlugin::accuracy() const {
     return m_accuracy;
 }
 
-GpsdPositionProviderPlugin::GpsdPositionProviderPlugin() : m_initialized(false) {}
+GpsdPositionProviderPlugin::GpsdPositionProviderPlugin() : m_thread( 0 ) {}
 
 GpsdPositionProviderPlugin::~GpsdPositionProviderPlugin()
 {
-    if (m_initialized) {
-        delete m_timer;
+    if (m_thread) {
+        m_thread->exit();
+        m_thread->wait();
+        delete m_thread;
     }
 }
 

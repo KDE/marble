@@ -9,7 +9,11 @@ INCLUDE_DIRECTORIES(
 
 include(${QT_USE_FILE})
 
-set( gpsd_SRCS GpsdPositionProviderPlugin.cpp )
+set( gpsd_SRCS
+ GpsdConnection.cpp
+ GpsdPositionProviderPlugin.cpp
+ GpsdThread.cpp
+)
 
 set( GpsdPositionProviderPlugin_LIBS ${libgps_LIBRARIES} )
 
