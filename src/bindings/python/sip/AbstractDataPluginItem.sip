@@ -49,15 +49,12 @@ class AbstractDataPluginItem : QObject /Abstract/
 
 public:
                             AbstractDataPluginItem (QObject* parent /TransferThis/ = 0);
-    Marble::GeoDataCoordinates  coordinates ();
-    void                    setCoordinates (const Marble::GeoDataCoordinates& coordinates);
     QString                 target ();
     void                    setTarget (const QString& target);
     QString                 id () const;
     void                    setId (const QString& id);
     qreal                   addedAngularResolution () const;
     void                    setAddedAngularResolution (qreal resolution);
-    bool                    isItemAt (const QPoint& curpos) const;
     virtual QAction*        action () = 0;
     virtual QString         name () const = 0;
     virtual QString         itemType () const = 0;
@@ -65,7 +62,6 @@ public:
     virtual void            addDownloadedFile (const QString& url, const QString& type) = 0;
     virtual bool            paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0) = 0;
 //    virtual bool            operator< (const Marble::AbstractDataPluginItem* other) const = 0;
-    void                    updatePaintPosition (Marble::ViewportParams* viewport, const QSize& size);
     QRect                   paintPosition ();
 
 public:
