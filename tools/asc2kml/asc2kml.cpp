@@ -68,14 +68,6 @@ int main(int argc, char *argv[])
                      << "<kml xmlns=\"http://earth.google.com/kml/2.1\"> \n"
                      << "<Document> \n";
 
-        targetstream << "    <Schema name=\"MarblePlacemark\" parent=\"Placemark\"> \n";
-        targetstream << "       <SimpleField name=\"pop\" type=\"int\"></SimpleField> \n";
-        targetstream << "       <SimpleField name=\"CountryNameCode\" type=\"string\"></SimpleField> \n";
-        targetstream << "       <SimpleField name=\"role\" type=\"string\"></SimpleField> \n";
-        targetstream << "    </Schema> \n";
-
-        targetstream << "\n";
-
         QString  rawline;
         QString  name;
         QString  state;
@@ -113,7 +105,7 @@ int main(int argc, char *argv[])
             if ( latstring.contains( "S" ) )
                 lat=-lat;
 
-            targetstream << "    <MarblePlacemark> \n";
+            targetstream << "    <Placemark> \n";
             targetstream << "        <name>" << escapeXml( name ) << "</name> \n";
             targetstream << "        <state>" << escapeXml( state ) << "</state> \n";
             targetstream << "        <CountryNameCode>" << escapeXml( country.toUpper() ) << "</CountryNameCode>\n";
@@ -127,7 +119,7 @@ int main(int argc, char *argv[])
                          << escapeXml( QString::number( lat ) )
                          << "</coordinates> \n"
                          << "        </Point> \n";
-            targetstream << "    </MarblePlacemark> \n";
+            targetstream << "    </Placemark> \n";
         }
 
         targetstream << "</Document> \n"
