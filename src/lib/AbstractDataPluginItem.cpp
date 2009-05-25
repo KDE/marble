@@ -34,7 +34,6 @@ class AbstractDataPluginItemPrivate {
     QString m_id;
     GeoDataCoordinates m_coordinates;
     QString m_target;
-    QRect m_paintPosition;
     qreal m_addedAngularResolution;
 };
 
@@ -71,10 +70,6 @@ qreal AbstractDataPluginItem::addedAngularResolution() const {
 
 void AbstractDataPluginItem::setAddedAngularResolution( qreal resolution ) {
     d->m_addedAngularResolution = resolution;
-}
-
-QRect AbstractDataPluginItem::paintPosition() {
-    return d->m_paintPosition;
 }
 
 } // Marble namespace

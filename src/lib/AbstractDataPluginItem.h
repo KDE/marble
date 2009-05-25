@@ -53,8 +53,6 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
     
     virtual QAction *action() = 0;
     
-    virtual QString name() const = 0;
-    
     virtual QString itemType() const = 0;
      
     virtual bool initialized() = 0;
@@ -65,11 +63,6 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
                          
     virtual bool operator<( const AbstractDataPluginItem *other ) const = 0;
-                
-    /**
-     * Returns the last paint position
-     */
-    QRect paintPosition();
     
  private:
     AbstractDataPluginItemPrivate * const d;
