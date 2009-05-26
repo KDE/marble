@@ -69,7 +69,6 @@ public:
 //  Subclasses of QObject
 
 %ConvertToSubClassCode
-/* FIXME
     sipClass = NULL;
 
     if (dynamic_cast<Marble::AbstractDataPluginItem*>(sipCpp))
@@ -104,7 +103,7 @@ public:
         sipClass = sipClass_Marble_SunLocator;
     else if (dynamic_cast<Marble::TileCreator*>(sipCpp))
         sipClass = sipClass_Marble_TileCreator;
-*/
+
 %End
 
 };   // AbstractDataPluginItem
