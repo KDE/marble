@@ -47,10 +47,6 @@ public:
     void                    setWidth (int newWidth);
     void                    setHeight (int newHeight);
     void                    setSize (QSize newSize);
-//    Marble::BoundingBox     boundingBox () const;
-//    void                    setBoundingBox (const Marble::BoundingBox&);
-
-
     void                    centerCoordinates (qreal& centerLon /out/, qreal& centerLat /out/) const;
     bool                    mapCoversViewport () const;
 

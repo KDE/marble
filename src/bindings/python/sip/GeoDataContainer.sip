@@ -30,9 +30,9 @@ public:
                             GeoDataContainer (const Marble::GeoDataContainer& other);
                             GeoDataContainer (const Marble::GeoDataFeature& other);
 //ig    Marble::GeoDataContainerPrivate*  p () const;
-//    QVector<Marble::GeoDataFolder>  folders () const;
+    QVector<Marble::GeoDataFolder>  folders () const;
     QVector<Marble::GeoDataFeature>&  features () const;
-//    QVector<Marble::GeoDataPlacemark>  placemarks () const;
+    QVector<Marble::GeoDataPlacemark>  placemarks () const;
     void                    append (const Marble::GeoDataFeature& other);
     int                     size () const;
 //ig    Marble::GeoDataFeature&  at (int pos);

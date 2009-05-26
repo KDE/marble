@@ -28,6 +28,9 @@ class LatLonEdit : QWidget
 public:
     explicit                LatLonEdit (QWidget* parent /TransferThis/ = 0, Marble::Dimension dimension = Marble::Longitude);
     qreal                   value () const;
+
+//FIXME implementation is missing.
+//    Marble::Dimension       dimension () const;
     void                    setValue (qreal newvalue);
     void                    setDimension (Marble::Dimension dimension);
 

@@ -43,7 +43,7 @@ public:
                             Quaternion (qreal lon, qreal lat);
     Marble::Quaternion      operator * (const Marble::Quaternion& q) const;
     bool                    operator == (const Marble::Quaternion& q) const;
-    void                    operator *= (const Marble::Quaternion& q);
+    Marble::Quaternion&     operator *= (const Marble::Quaternion& q);
     void                    set (qreal w, qreal x, qreal y, qreal z);
     void                    set (qreal lon, qreal lat);
 

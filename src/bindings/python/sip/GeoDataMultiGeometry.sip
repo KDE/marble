@@ -26,6 +26,26 @@ class GeoDataMultiGeometry : Marble::GeoDataGeometry
 public:
                             GeoDataMultiGeometry ();
                             GeoDataMultiGeometry (const Marble::GeoDataGeometry& other);
+    int                     size () const;
+//FIXME Add any needed Python list methods.
+//ig    Marble::GeoDataGeometry&  at (int pos);
+    const Marble::GeoDataGeometry&  at (int pos) const;
+//ig    Marble::GeoDataGeometry&  operator [] (int pos);
+    const Marble::GeoDataGeometry&  operator [] (int pos) const;
+//ig    Marble::GeoDataGeometry&  first ();
+    const Marble::GeoDataGeometry&  first () const;
+//ig    Marble::GeoDataGeometry&  last ();
+    const Marble::GeoDataGeometry&  last () const;
+    void                    append (const Marble::GeoDataGeometry& value);
+    Marble::GeoDataMultiGeometry&  operator << (const Marble::GeoDataGeometry& value);
+//ig    QVector<Marble::GeoDataGeometry>::Iterator  begin ();
+//ig    QVector<Marble::GeoDataGeometry>::Iterator  end ();
+//ig    QVector<Marble::GeoDataGeometry>::ConstIterator  constBegin () const;
+//ig    QVector<Marble::GeoDataGeometry>::ConstIterator  constEnd () const;
+    void                    clear ();
+    QVector<Marble::GeoDataGeometry>&  vector () const;
+//ig    QVector<Marble::GeoDataGeometry>::Iterator  erase (QVector<Marble::GeoDataGeometry>::Iterator pos);
+//ig    QVector<Marble::GeoDataGeometry>::Iterator  erase (QVector<Marble::GeoDataGeometry>::Iterator begin, QVector<Marble::GeoDataGeometry>::Iterator end);
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
 };   // GeoDataMultiGeometry

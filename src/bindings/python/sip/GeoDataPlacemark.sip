@@ -32,7 +32,7 @@ public:
     bool                    operator == (const Marble::GeoDataPlacemark& other) const;
     Marble::GeoDataCoordinates  coordinate () const;
     Marble::GeoDataGeometry*  geometry () const;
-
+//ig    void                    coordinate (qreal& longitude, qreal& latitude, qreal& altitude) const;
     void                    setCoordinate (qreal longitude, qreal latitude, qreal altitude = 0);
     void                    setCoordinate (const Marble::GeoDataPoint& point);
     void                    setGeometry (const Marble::GeoDataPoint& entry);

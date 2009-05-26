@@ -29,13 +29,11 @@ public:
     Marble::ViewportParams*  viewport ();
     void                    setMapThemeId (const QString&);
 
-// Defined but not implemented.
+//FIXME implementation is missing.
 //    QString                 mapThemeId ();
-
 
 //mt undefined symbol: GeoSceneDocument* None -- need mapped type?
 //mt     Marble::GeoSceneDocument*  mapTheme ();
-
 
     Marble::Projection      projection () const;
     Marble::AbstractProjection*  currentProjection () const;

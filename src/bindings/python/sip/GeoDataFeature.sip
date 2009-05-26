@@ -105,8 +105,8 @@ public:
     void                    setPopularityIndex (int index);
     qint64                  popularity () const;
     void                    setPopularity (qint64 popularity);
-//FIXME    Marble::GeoDataStyleMap*  styleMap () const;
-//FIXME    void                    setStyleMap (Marble::GeoDataStyleMap* map);
+    Marble::GeoDataStyleMap*  styleMap () const;
+    void                    setStyleMap (Marble::GeoDataStyleMap* map);
     const QSize             symbolSize () const;
     const QPixmap           symbolPixmap () const;
     static void             resetDefaultStyles ();
@@ -114,6 +114,8 @@ public:
     virtual void            unpack (QDataStream& stream);
     static QFont            defaultFont ();
     static void             setDefaultFont (const QFont& font);
+    virtual void            detach ();
+
 };   // GeoDataFeature
 
 };   // Marble

@@ -27,10 +27,10 @@ class MarbleDataFacade /Abstract/
 public:
 
 
-//mt undefined symbol: MarbleModel* model -- need mapped type?
-//mt     explicit           MarbleDataFacade (MarbleModel* model);
+public:
+    explicit                MarbleDataFacade (Marble::MarbleModel* model);
     qreal                   planetRadius () const;
-
+    const Marble::Planet*   planet () const;
     QDateTime               dateTime () const;
     QString                 target () const;
 
@@ -41,9 +41,14 @@ public:
 
     QAbstractItemModel*     renderModel ();
 
-private:
-    MarbleDataFacade(const Marble::MarbleDataFacade&);
 
+//mt undefined symbol: FileViewModel* None -- need mapped type?
+//mt     FileViewModel*     fileViewModel () const;
+
+
+
+private:
+                            MarbleDataFacade (const Marble::MarbleDataFacade&);
 };   // MarbleDataFacade
 
 };   // Marble

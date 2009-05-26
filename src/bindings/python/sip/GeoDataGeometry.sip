@@ -28,10 +28,10 @@ class GeoDataGeometry : Marble::GeoDataObject
 public:
                             GeoDataGeometry ();
                             GeoDataGeometry (const Marble::GeoDataGeometry& other);
-//                            GeoDataGeometry (const Marble::GeoDataPolygon& other);
+                            GeoDataGeometry (const Marble::GeoDataPolygon& other);
                             GeoDataGeometry (const Marble::GeoDataPoint& other);
-/*                            GeoDataGeometry (const Marble::GeoDataLineString& other);
-                            GeoDataGeometry (const Marble::GeoDataMultiGeometry& other);*/
+                            GeoDataGeometry (const Marble::GeoDataLineString& other);
+                            GeoDataGeometry (const Marble::GeoDataMultiGeometry& other);
     bool                    operator == (const Marble::GeoDataGeometry& other) const;
     virtual bool            isFolder () const;
     virtual EnumGeometryId  geometryId () const;

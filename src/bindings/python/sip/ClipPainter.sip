@@ -31,6 +31,7 @@ public:
     bool                    isClipping () const;
     void                    drawPolygon (const QPolygonF&, Qt::FillRule fillRule = Qt::OddEvenFill);
     void                    drawPolyline (const QPolygonF&);
+    void                    drawPolyline (const QPolygonF&, QVector<QPointF>& labelNodes, Marble::LabelPositionFlags labelPositionFlag = Marble::LineCenter);
 };   // ClipPainter
 
 };   // Marble

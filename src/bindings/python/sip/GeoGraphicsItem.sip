@@ -20,7 +20,7 @@
 
 namespace Marble
 {
-
+ 
 class GeoGraphicsItem : Marble::MarbleGraphicsItem
 {
 %TypeHeaderCode
@@ -33,7 +33,7 @@ public:
     Marble::GeoDataCoordinates  coordinate () const;
 //ig    void                    coordinate (qreal& longitude /Out/, qreal& latitude /Out/, qreal& altitude /Out/) const;
     void                    setCoordinate (qreal longitude, qreal latitude, qreal altitude = 0);
-    void                    setCoordinate (const Marble::GeoDataPoint& point);
+    void                    setCoordinate (const Marble::GeoDataCoordinates& point);
     QString                 target ();
     void                    setTarget (const QString& target);
     QList<QPoint>           positions ();
@@ -41,6 +41,8 @@ public:
 protected:
     virtual bool            paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0) = 0;
 
+public:
+    void                    setCoordinate (const Marble::GeoDataPoint& point);
 };   // GeoGraphicsItem
 
 };   // Marble

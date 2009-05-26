@@ -17,25 +17,55 @@
 
 namespace Marble
 {
-class GeoDataLineString : /* QVector<Marble::GeoDataCoordinates*>, */ Marble::GeoDataGeometry
+
+class GeoDataLineString : Marble::GeoDataGeometry
 {
 %TypeHeaderCode
 #include <GeoDataLineString.h>
 %End
 
 public:
-                            GeoDataLineString (const Marble::GeoDataLineString&);
+//ig    typedef QVector<GeoDataCoordinates>::Iterator Iterator;
+
+//ig    typedef QVector<GeoDataCoordinates>::ConstIterator ConstIterator;
+
+                            GeoDataLineString (Marble::TessellationFlags f = Marble::NoTessellation);
+                            GeoDataLineString (const Marble::GeoDataGeometry& other);
     virtual bool            isClosed () const;
     bool                    tessellate () const;
     void                    setTessellate (bool tessellate);
     Marble::TessellationFlags  tessellationFlags () const;
     void                    setTessellationFlags (Marble::TessellationFlags f);
+    Marble::GeoDataLatLonAltBox  latLonAltBox () const;
+    int                     size () const;
+//FIXME Add the needed Python list methods.
+//ig    Marble::GeoDataCoordinates&  at (int pos);
+    const Marble::GeoDataCoordinates&  at (int pos) const;
+//ig    Marble::GeoDataCoordinates&  operator [] (int pos);
+    const Marble::GeoDataCoordinates&  operator [] (int pos) const;
+//ig    Marble::GeoDataCoordinates&  first ();
+    const Marble::GeoDataCoordinates&  first () const;
+//ig    Marble::GeoDataCoordinates&  last ();
+    const Marble::GeoDataCoordinates&  last () const;
+    void                    append (const Marble::GeoDataCoordinates& value);
+    Marble::GeoDataLineString&  operator << (const Marble::GeoDataCoordinates& value);
+//ig    QVector<Marble::GeoDataCoordinates>::Iterator  begin ();
+//ig    QVector<Marble::GeoDataCoordinates>::Iterator  end ();
+//ig    QVector<Marble::GeoDataCoordinates>::ConstIterator  constBegin () const;
+//ig    QVector<Marble::GeoDataCoordinates>::ConstIterator  constEnd () const;
     void                    clear ();
-
+//ig    QVector<Marble::GeoDataCoordinates>::Iterator  erase (QVector<Marble::GeoDataCoordinates>::Iterator pos);
+//ig    QVector<Marble::GeoDataCoordinates>::Iterator  erase (QVector<Marble::GeoDataCoordinates>::Iterator begin, QVector<Marble::GeoDataCoordinates>::Iterator end);
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-    virtual EnumGeometryId  geometryId () const;
 
+protected:
+//ig    Marble::GeoDataLineStringPrivate*  p () const;
+//ig                                       GeoDataLineString (Marble::GeoDataLineStringPrivate* priv);
+
+public:
+                            GeoDataLineString (const Marble::GeoDataLineString&);
+    virtual EnumGeometryId  geometryId () const;
 };   // GeoDataLineString
 
 };   // Marble

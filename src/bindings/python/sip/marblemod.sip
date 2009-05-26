@@ -89,6 +89,7 @@
 %Include GeoDocument.sip
 %Include global.sip
 %Include MarbleAboutDialog.sip
+%Include ScreenGraphicsItem.sip
 
 // ---- API isn't exported.
 //%Include MapThemeSortFilterProxyModel.sip
