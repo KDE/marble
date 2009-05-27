@@ -51,6 +51,11 @@ PlacemarkLoader::~PlacemarkLoader()
     delete m_document;
 }
 
+QString PlacemarkLoader::path() const
+{
+    return m_filepath;
+}
+
 void PlacemarkLoader::run()
 {
     if( m_contents.isEmpty() ) {

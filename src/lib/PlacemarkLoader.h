@@ -27,6 +27,7 @@ class PlacemarkLoader : public QThread {
 
         bool finalize();
         void run();
+        QString path() const;
         
     Q_SIGNALS:
         void placemarksLoaded( PlacemarkLoader*, PlacemarkContainer * );

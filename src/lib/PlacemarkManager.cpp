@@ -53,6 +53,7 @@ class PlacemarkManagerPrivate
         MarbleGeometryModel* m_geomodel;
         QList<PlacemarkLoader*> m_loaderList;
         FileViewModel* m_fileViewModel;
+        QStringList m_pathList;
 
         bool m_finalized;
         QString m_target;
@@ -113,10 +114,20 @@ void PlacemarkManager::clearPlacemarks()
     d->m_model->clearPlacemarks();
 }
 
+QStringList PlacemarkManager::containers() const
+{
+    return fileViewModel()->containers() + d->m_pathList;
+}
+
+QString PlacemarkManager::toRegularName( QString name )
+{
+    return name.remove(".kml").remove(".cache");
+}
+
 void PlacemarkManager::addPlacemarkFile( const QString& filepath, bool finalized )
 {
-    if( !(d->m_model->containers().contains( filepath ) ) ) {
-        qDebug() << "adding container:" << filepath << finalized;
+    if( ! containers().contains( toRegularName( filepath ) ) ) {
+        qDebug() << "adding container:" << toRegularName( filepath ) << finalized;
         PlacemarkLoader* loader = new PlacemarkLoader( this, filepath, finalized );
         connect (   loader, SIGNAL( placemarksLoaded( PlacemarkLoader*, PlacemarkContainer * ) ), 
                     this, SLOT( loadPlacemarkContainer( PlacemarkLoader*, PlacemarkContainer * ) ) );
@@ -127,6 +138,7 @@ void PlacemarkManager::addPlacemarkFile( const QString& filepath, bool finalized
         connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
                     this, SLOT( addGeoDataDocument( GeoDataDocument* ) ) );
         d->m_loaderList.append( loader );
+        d->m_pathList.append( toRegularName( filepath ) );
         loader->start();
     }
 }
@@ -137,6 +149,7 @@ void PlacemarkManager::addGeoDataDocument( GeoDataDocument* document )
                                                       *document );
 
     d->m_fileViewModel->append( item );
+//    d->m_geomodel->setGeoDataRoot( document );
 }
 
 void PlacemarkManager::addPlacemarkData( const QString& data, const QString& key )
@@ -150,7 +163,7 @@ void PlacemarkManager::removePlacemarkKey( const QString& key )
     qDebug() << "trying to remove file:" << key;
     for( int i = 0; i < d->m_fileViewModel->rowCount(); ++i )
     {
-        if(nkey.remove(".kml").remove(".cache") == d->m_fileViewModel->data(d->m_fileViewModel->index(i, 0)).toString().remove(".kml").remove(".cache")) {
+        if( toRegularName( nkey ) == toRegularName( d->m_fileViewModel->data(d->m_fileViewModel->index(i, 0)).toString() ) ) {
             d->m_fileViewModel->remove(d->m_fileViewModel->index(i, 0));
         }
     };
@@ -160,6 +173,7 @@ void PlacemarkManager::cleanupLoader( PlacemarkLoader* loader )
 {
     d->m_loaderList.removeAll( loader );
     if ( loader->isFinished() ) {
+         d->m_pathList.removeAll( loader->path() );
          delete loader;
     }
 }
@@ -178,6 +192,7 @@ void PlacemarkManager::loadPlacemarkContainer( PlacemarkLoader* loader, Placemar
     }
 
     if ( loader->isFinished() ) {
+         d->m_pathList.removeAll( loader->path() );
          delete loader;
     }
 }

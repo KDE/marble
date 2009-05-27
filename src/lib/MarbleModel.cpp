@@ -409,8 +409,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     }
 
     d->m_geometrymodel->setGeoDataRoot( 0 );
-    QStringList loadedContainers = d->m_placemarkmanager->fileViewModel()->containers();
-    qDebug() << loadedContainers;
+    QStringList loadedContainers = d->m_placemarkmanager->containers();
     QStringList loadList;
     const QVector<GeoSceneLayer*> & layers = d->m_mapTheme->map()->layers();
     QVector<GeoSceneLayer*>::const_iterator it = layers.constBegin();

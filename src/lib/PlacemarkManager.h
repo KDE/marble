@@ -77,6 +77,12 @@ class PlacemarkManager : public QObject
      */
     void setGeoModel( MarbleGeometryModel * model );
 
+    /**
+     * return a list containing all containers that have been queued for loading or that are
+     * loaded already
+     */
+    QStringList containers() const;
+
     void clearPlacemarks();
 
     /**
@@ -121,6 +127,11 @@ class PlacemarkManager : public QObject
 
  private:
     void setPlacemarkModel( MarblePlacemarkModel *model );
+
+    /**
+     * internal helper function which returns the regular name of a kml or cache file
+     */
+    static QString toRegularName( QString name );
 
     Q_DISABLE_COPY( PlacemarkManager )
 
