@@ -132,3 +132,5 @@ void WikipediaItem::setPixmap( const QPixmap& pixmap ) {
 void WikipediaItem::setIcon( const QIcon& icon ) {
     m_action->setIcon( icon );
 }
+
+#include "WikipediaItem.moc"
