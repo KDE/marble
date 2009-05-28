@@ -29,7 +29,8 @@ class AbstractDataPluginPrivate
 {
  public:
     AbstractDataPluginPrivate()
-        : m_numberOfItems( 10 )
+        : m_model( 0 ),
+          m_numberOfItems( 10 )
     {
     }
     
@@ -71,13 +72,17 @@ bool AbstractDataPlugin::isInitialized() const {
 bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
              const QString& renderPos, GeoSceneLayer * layer)
 {
+    if ( ( 0 == d->m_model ) || !isInitialized() ) {
+        return true;
+    }
+    
     if ( renderPos != "HOVERS_ABOVE_SURFACE" ) {
         return true;
     }
 
     QList<AbstractDataPluginItem*> items = d->m_model->items( viewport,
-                                                                    dataFacade(),
-                                                                    numberOfItems() );
+                                                              dataFacade(),
+                                                              numberOfItems() );
     painter->save();
     
     // Paint the most important item at last

@@ -26,6 +26,17 @@ class AbstractDataPluginItem;
 class AbstractDataPluginModel;
 class AbstractDataPluginPrivate;
 
+/**
+ * @short: An abstract class for plugins that show data that has a geo coordinate
+ *
+ * This is the abstract class for plugins that show data on Marble map.
+ * It takes care of painting all items it gets from the corresponding AbstractDataPluginModel
+ * that has to be set on initialisation.
+ *
+ * The user has to set the nameId as well as the number of items to fetch.
+ * Additionally it should be useful to set standard values via setEnabled (often true)
+ * and setVisible (often false) in the constructor of a subclass.
+ **/
 class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
@@ -56,10 +67,16 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin {
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
 
+    /**
+     * @brief Initialized the plugin and make it ready to be painted.
+     */
     virtual void initialize() = 0;
 
-    bool isInitialized() const;
+    virtual bool isInitialized() const;
     
+    /**
+     * @return The model associated with the plugin.
+     */
     AbstractDataPluginModel *model() const;
     
     /**
@@ -67,14 +84,32 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin {
      */
     void setModel( AbstractDataPluginModel* model );
     
+    /**
+     * Set the name id of the plugin
+     */
     void setNameId( const QString& name );
     
+    /**
+     * @return Returns the nameId of the item
+     */
     QString nameId() const;
     
-    quint32 numberOfItems() const;
-    
+    /**
+     * Set the number of items to be shown at the same time.
+     */
     void setNumberOfItems( quint32 number );
     
+    /**
+     * @return The number of items to be shown at the same time.
+     */
+    quint32 numberOfItems() const;
+    
+    /**
+     * This function returns all items at the position @p curpos. Depending on where they have
+     * been painted the last time.
+     *
+     * @return The items at the given position.
+     */
     QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos );
     
  private:
