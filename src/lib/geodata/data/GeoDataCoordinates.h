@@ -202,7 +202,7 @@ class GEODATA_EXPORT GeoDataCoordinates
     *
     * isn't what you're looking for ... .
     */
-    bool isAtPole( Marble::Pole ) const;
+    bool isPole( Marble::Pole = Marble::AnyPole ) const;
 
     /**
     * @brief return Notation of string representation

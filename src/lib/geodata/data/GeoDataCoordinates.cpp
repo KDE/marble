@@ -723,7 +723,7 @@ const Quaternion& GeoDataCoordinates::quaternion() const
     return d->m_q;
 }
 
-bool GeoDataCoordinates::isAtPole( Marble::Pole pole ) const
+bool GeoDataCoordinates::isPole( Marble::Pole pole ) const
 {
     // Evaluate the most likely case first:
     // The case where we haven't hit the pole and where our latitude is normalized

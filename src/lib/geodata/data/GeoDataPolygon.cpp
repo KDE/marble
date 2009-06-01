@@ -80,7 +80,7 @@ void GeoDataPolygon::setTessellationFlags( TessellationFlags f )
 GeoDataLatLonAltBox GeoDataPolygon::latLonAltBox() const
 {
     if (p()->m_dirtyBox) {
-    // calulate LatLonAltBox
+        // calculate LatLonAltBox
     }
     p()->m_dirtyBox = false;
 

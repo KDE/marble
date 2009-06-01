@@ -56,7 +56,7 @@ class SphericalProjection : public AbstractProjection
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    bool screenCoordinates( const qreal lon, const qreal lat,
+    bool screenCoordinates( qreal lon, qreal lat,
                             const ViewportParams *params,
                             qreal& x, qreal& y );
 

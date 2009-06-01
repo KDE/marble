@@ -169,13 +169,15 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     // Determine the planet's axial tilt
     qreal axialTilt = RAD2DEG * dataFacade()->planet()->epsilon();
 
-    // Render the tropics
-    renderLatitudeLine( painter, +axialTilt, viewLatLonAltBox, tr( "Tropic of Cancer" )  );        
-    renderLatitudeLine( painter, -axialTilt, viewLatLonAltBox, tr( "Tropic of Capricorn" ) );        
+    if ( axialTilt > 0 ) {
+        // Render the tropics
+        renderLatitudeLine( painter, +axialTilt, viewLatLonAltBox, tr( "Tropic of Cancer" )  );        
+        renderLatitudeLine( painter, -axialTilt, viewLatLonAltBox, tr( "Tropic of Capricorn" ) );        
 
-    // Render the arctics
-    renderLatitudeLine( painter, +90.0 - axialTilt, viewLatLonAltBox, tr( "Arctic Circle" ) );        
-    renderLatitudeLine( painter, -90.0 + axialTilt, viewLatLonAltBox, tr( "Antarctic Circle" ) );        
+        // Render the arctics
+        renderLatitudeLine( painter, +90.0 - axialTilt, viewLatLonAltBox, tr( "Arctic Circle" ) );        
+        renderLatitudeLine( painter, -90.0 + axialTilt, viewLatLonAltBox, tr( "Antarctic Circle" ) );        
+    }
 
     painter->restore();
 

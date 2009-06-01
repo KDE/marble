@@ -158,7 +158,7 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
 {
     d->initClipRect();
 
-    if ( d->m_doClip ) {	
+    if ( d->m_doClip ) {
         QVector<QPolygonF> clippedPolyObjects;
 
         d->clipPolyObject( polygon, clippedPolyObjects, false );
@@ -189,7 +189,7 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& lab
 {
     d->initClipRect();
 
-    if ( d->m_doClip ) {    
+    if ( d->m_doClip ) {
  
         QVector<QPolygonF> clippedPolyObjects;
 

@@ -176,13 +176,93 @@ TessellationFlags GeoDataLineString::tessellationFlags() const
 
 void GeoDataLineString::setTessellationFlags( TessellationFlags f )
 {
-    GeoDataGeometry::detach();
     p()->m_tessellationFlags = f;
+}
+
+GeoDataLineString GeoDataLineString::toPoleCorrected() const
+{
+    if ( p()->m_poleCorrected ) {
+        return *(p()->m_poleCorrected);
+    }
+    
+    p()->m_poleCorrected = new GeoDataLineString( p()->m_tessellationFlags );
+
+    GeoDataCoordinates previousCoords;
+    GeoDataCoordinates currentCoords;
+
+    if ( isClosed() ) {
+        if ( !( p()->m_vector.first().isPole() ) &&
+              ( p()->m_vector.last().isPole() ) ) {
+                qreal firstLongitude = ( p()->m_vector.first() ).longitude();
+                GeoDataCoordinates modifiedCoords( p()->m_vector.last() );
+                modifiedCoords.setLongitude( firstLongitude );
+                *(p()->m_poleCorrected) << modifiedCoords;
+        }
+    }
+
+    for( QVector<GeoDataCoordinates>::const_iterator itCoords
+          = p()->m_vector.constBegin();
+         itCoords != p()->m_vector.constEnd();
+         ++itCoords ) {
+
+        currentCoords  = *itCoords;
+
+        if ( itCoords == p()->m_vector.constBegin() ) {
+            previousCoords = currentCoords;
+        }
+
+        if ( currentCoords.isPole() ) {
+            if ( previousCoords.isPole() ) {
+                continue;
+            }
+            else {
+                qreal previousLongitude = previousCoords.longitude();
+                GeoDataCoordinates currentModifiedCoords( currentCoords );
+                currentModifiedCoords.setLongitude( previousLongitude );
+                *(p()->m_poleCorrected) << currentModifiedCoords;
+            }
+        }
+        else {
+            if ( previousCoords.isPole() ) {
+                qreal currentLongitude = currentCoords.longitude();
+                GeoDataCoordinates previousModifiedCoords( previousCoords );
+                previousModifiedCoords.setLongitude( currentLongitude );
+                *(p()->m_poleCorrected) << previousModifiedCoords;
+                *(p()->m_poleCorrected) << currentCoords;
+            }
+            else {
+                // No poles at all. Nothing to handle
+                *(p()->m_poleCorrected) << currentCoords;
+            }
+        }
+        previousCoords = currentCoords;
+    }
+
+    if ( isClosed() ) {
+        if (  ( p()->m_vector.first().isPole() ) &&
+             !( p()->m_vector.last().isPole() ) ) {
+                qreal lastLongitude = ( p()->m_vector.last() ).longitude();
+                GeoDataCoordinates modifiedCoords( p()->m_vector.first() );
+                modifiedCoords.setLongitude( lastLongitude );
+                *(p()->m_poleCorrected) << modifiedCoords;                
+        }
+    }
+    
+    return *(p()->m_poleCorrected);
 }
 
 GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
 {
-    return GeoDataLatLonAltBox::fromLineString( *this );
+    // GeoDataLatLonAltBox::fromLineString is very expensive
+    // that's why we recreate it only if the m_dirtyBox
+    // is TRUE.
+    // DO NOT REMOVE THIS CONSTRUCT OR MARBLE WILL BE SLOW.
+    if ( p()->m_dirtyBox ) {
+        p()->m_latLonAltBox = GeoDataLatLonAltBox::fromLineString( *this );
+    }
+    p()->m_dirtyBox = false;
+
+    return p()->m_latLonAltBox;
 }
 
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator pos )

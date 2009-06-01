@@ -85,14 +85,6 @@ The bugs
   the Wikipedia feature more visible.
 
 
-0007 ENHANCEMENT
-
-  What is "Download Finished"?
-
-  tackat: I'll turn this into "Wikipedia data download
-  finished". Better :-) ?
-
-
 0008 ENHANCEMENT
 
   "Data sheet" sounds pretty technical. How about "information"?
@@ -156,27 +148,6 @@ The bugs
   anybody come up with a really good solution (And no, I neither want
   outlines used everywhere nor changing font colors, nor opaque
   labels).
-
-
-0016 ENHANCEMENT
-
-  Country borders are aliased.
-
-  tackat: I hardly can change that for the rendering while moving the
-  map (It would be _really_ slow due to the node count. But I'll
-  probably add a feature any day now that will make the final
-  rendering (once the map doesn't move anymore) high quality with all
-  possible kinds of Antialiasing enabled. That will require some code
-  though.
-
-
-0017 ENHANCEMENT
-
-  The places where land touches sea/snow have a "vector boundary" -
-  this is aliased as well.
-
-  tackat: Yes, and would be really really slow if we wanted
-  antialiasing here as well.
 
 
 0018 ENHANCEMENT

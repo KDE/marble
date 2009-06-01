@@ -163,6 +163,15 @@ void AbstractProjection::coordinateExtremes( qreal lon, qreal lat,
     if ( lat < southLat ) southLat = lat;
 }
 
+bool AbstractProjection::exceedsLatitudeRange( const GeoDataLineString &lineString ) const
+{
+    GeoDataLatLonAltBox latLonAltBox = lineString.latLonAltBox();
+
+    return (    latLonAltBox.north() >= m_maxLat
+             || latLonAltBox.south() <= m_minLat );
+}
+
+
 bool AbstractProjection::exceedsLatitudeRange( const GeoDataCoordinates &coords ) const
 {
     qreal lat = coords.latitude();
@@ -240,8 +249,8 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
     qreal altDiff = currentCoords.altitude() - previousAltitude;
 
     // Take the clampToGround property into account
-    int startNode = 0;
-    const int endNode = tessellatedNodes;
+    int startNode = 1;
+    const int endNode = tessellatedNodes - 2;
 
     qreal  lon = 0.0;
     qreal  lat = 0.0;
@@ -256,9 +265,18 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
     // For the clampToGround case add the "previous" coordinate before adding any other node. 
     if ( clampToGround && previousAltitude != 0.0 ) {
           bool visible = screenCoordinates( previousCoords, viewport, x, y, globeHidesPoint );
-          if ( visible ) {
+          if ( !globeHidesPoint ) {
             path << QPointF( x, y );
           }
+    }
+
+    GeoDataCoordinates previousModifiedCoords( previousCoords );
+    if ( clampToGround ) {
+        previousModifiedCoords.setAltitude( 0.0 );
+    }
+    bool previousVisible = screenCoordinates( previousModifiedCoords, viewport, x, y, globeHidesPoint );
+    if ( !globeHidesPoint ) {
+        path << QPointF( x, y );
     }
 
     // Create the tessellation nodes.
@@ -290,10 +308,20 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
         }
     }
 
+
+    GeoDataCoordinates currentModifiedCoords( currentCoords );
+    if ( clampToGround ) {
+        currentModifiedCoords.setAltitude( 0.0 );
+    }
+    bool currentVisible = screenCoordinates( currentModifiedCoords, viewport, x, y, globeHidesPoint );
+    if ( !globeHidesPoint ) {
+        path << QPointF( x, y );
+    }
+
     // For the clampToGround case add the "current" coordinate after adding all other nodes. 
     if ( clampToGround && currentCoords.altitude() != 0.0 ) {
           bool visible = screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
-          if ( visible ) {
+          if ( !globeHidesPoint ) {
             path << QPointF( x, y );
           }
     }
@@ -317,7 +345,7 @@ bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 }
 
 /* DEPRECATED */
-bool AbstractProjection::screenCoordinates( const qreal lon, const qreal lat, 
+bool AbstractProjection::screenCoordinates( qreal lon, qreal lat,
                                     const ViewportParams *viewport,
                                     int &x, int &y )
 {

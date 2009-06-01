@@ -248,6 +248,26 @@ bool GeoDataLatLonBox::crossesDateLine() const
     return false;
 }
 
+bool GeoDataLatLonBox::containsPole( Marble::Pole pole ) const
+{
+    switch ( pole ) {
+      case Marble::NorthPole :
+        return ( 2 * north() == +M_PI );
+        break;
+      case Marble::SouthPole :
+        return ( 2 * south() == -M_PI );
+        break;
+      default:
+      case Marble::AnyPole :
+        return (    2 * north() == +M_PI
+                 || 2 * south() == -M_PI );
+        break;
+    }
+
+    qDebug() << Q_FUNC_INFO << "Invalid pole";
+    return false;
+}
+
 bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point ) const
 {
     qreal lon, lat;

@@ -20,13 +20,15 @@ class GeoDataLineStringPrivate : public Marble::GeoDataGeometryPrivate
 {
   public:
     GeoDataLineStringPrivate( TessellationFlags f )
-         : m_dirtyBox( true ),
+         : m_poleCorrected( 0 ),
+           m_dirtyBox( true ),
            m_tessellationFlags( f )
     {
     }
 
     GeoDataLineStringPrivate()
-         : m_dirtyBox( true )
+         : m_poleCorrected( 0 ),
+           m_dirtyBox( true )
     {
     }
 
@@ -41,6 +43,9 @@ class GeoDataLineStringPrivate : public Marble::GeoDataGeometryPrivate
     {
         return GeoDataLineStringId;
     }
+
+    GeoDataLineString *         m_poleCorrected;
+    GeoDataLatLonAltBox         m_latLonAltBox;
 
     QVector<GeoDataCoordinates> m_vector;
     bool                        m_dirtyBox; // tells whether there have been changes to the

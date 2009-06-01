@@ -15,6 +15,7 @@
 // Marble
 #include "MercatorProjectionHelper.h"
 #include "ViewportParams.h"
+
 #include "MathHelper.h"
 #include "GeoDataPoint.h"
 
@@ -44,12 +45,20 @@ AbstractProjectionHelper *MercatorProjection::helper()
 }
 
 
-bool MercatorProjection::screenCoordinates( const qreal lon, const qreal lat,
+bool MercatorProjection::screenCoordinates( qreal lon, qreal lat,
                                             const ViewportParams *viewport,
                                             qreal& x, qreal& y )
 {
-    if ( fabs( lat ) > m_maxLat )
-        return false;
+    bool retval = true;
+
+    if ( lat > maxLat() ) {
+        lat = maxLat();
+        retval = false;
+    }
+    if ( lat < minLat() ) {
+        lat = minLat();
+        retval = false;
+    }
 
     // Convenience variables
     int  radius = viewport->radius();
@@ -67,7 +76,10 @@ bool MercatorProjection::screenCoordinates( const qreal lon, const qreal lat,
     x = ( width  / 2 + rad2Pixel * ( lon - centerLon ) );
     y = ( height / 2 - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) ) );
 
-    return true;
+    return retval && ( ( 0 <= y && y < height )
+                  && ( ( 0 <= x && x < width )
+                  || ( 0 <= x - 4 * radius && x - 4 * radius < width )
+                  || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
 }
 
 bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
@@ -80,8 +92,21 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
     geopoint.geoCoordinates( lon, lat );
 
-    if ( fabs( lat ) >  m_maxLat )
-        return false;
+    bool retval = true;
+
+    if ( lat > maxLat() ) {
+        GeoDataCoordinates approxCoords( geopoint );
+        approxCoords.setLatitude( maxLat() );
+        approxCoords.geoCoordinates( lon, lat );
+        retval = false;
+    }
+
+    if ( lat < minLat() ) {
+        GeoDataCoordinates approxCoords( geopoint );
+        approxCoords.setLatitude( minLat() );
+        approxCoords.geoCoordinates( lon, lat );
+        retval = false;
+    }
 
     // Convenience variables
     int  radius = viewport->radius();
@@ -100,8 +125,8 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
     // Return true if the calculated point is inside the screen area,
     // otherwise return false.
-    return ( ( 0 <= y && y < height )
-             && ( ( 0 <= x && x < width )
+    return retval && ( ( 0 <= y && y < height )
+                  && ( ( 0 <= x && x < width )
                   || ( 0 <= x - 4 * radius && x - 4 * radius < width )
                   || ( 0 <= x + 4 * radius && x + 4 * radius < width ) ) );
 }
@@ -121,8 +146,21 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 
     coordinates.geoCoordinates( lon, lat );
 
-    if ( fabs( lat ) > maxLat() )
-        return false;
+    bool retval = true;
+
+    if ( lat > maxLat() ) {
+        GeoDataCoordinates approxCoords( coordinates );
+        approxCoords.setLatitude( maxLat() );
+        approxCoords.geoCoordinates( lon, lat );
+        retval = false;
+    }
+
+    if ( lat < minLat() ) {
+        GeoDataCoordinates approxCoords( coordinates );
+        approxCoords.setLatitude( minLat() );
+        approxCoords.geoCoordinates( lon, lat );
+        retval = false;
+    }
 
     // Convenience variables
     int  radius = viewport->radius();
@@ -145,7 +183,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
         if ( !m_repeatX ) {
             *x = itX;
             if ( 0 < itX + size.width() / 2.0  && itX < width + size.width() / 2.0 ) {
-                return true;
+                return retval && true;
             }
             else {
                 // the requested point is out of the visible x range:
@@ -182,37 +220,47 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 
         pointRepeatNum = itNum;
 
-        return true;
+        return retval && true;
     }
 
     // the requested point is out of the visible y range:
     return false;
 }
 
-bool MercatorProjection::screenCoordinates( const GeoDataLineString &lineString, 
+bool MercatorProjection::screenCoordinates( const GeoDataLineString &_lineString, 
                                     const ViewportParams *viewport,
                                     QVector<QPolygonF *> &polygons )
 {
+//    qDebug() << "LineString GeometryId:" << lineString.geometryId();
+
+    const TessellationFlags tessellationFlags = _lineString.tessellationFlags();
+
     // Compare bounding box size of the line string with the angularResolution
     // Immediately return if the latLonAltBox is smaller.
-
-    if ( !viewport->resolves( lineString.latLonAltBox() ) ) {
+    if ( !viewport->resolves( _lineString.latLonAltBox() ) ) {
 //      qDebug() << "Object too small to be resolved";
         return false;
     }
 
-    qreal x = 0.0;
-    qreal y = 0.0;
+    qreal x = 0;
+    qreal y = 0;
     bool globeHidesPoint = false;
-    bool isVisible = false;
 
-    qreal previousX = -1.0; 
+    qreal previousX = -1.0;
     qreal previousY = -1.0;
     bool previousGlobeHidesPoint = false;
-    bool previousIsVisible = false;
 
     QPolygonF  *polygon = new QPolygonF;
-    
+
+    GeoDataLineString lineString;
+
+    if ( lineString.latLonAltBox().containsPole( Marble::AnyPole ) ) {
+        lineString = _lineString.toPoleCorrected();
+    }
+    else {
+        lineString = _lineString;
+    }
+
     GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
     GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
 
@@ -227,25 +275,23 @@ bool MercatorProjection::screenCoordinates( const GeoDataLineString &lineString,
     // Linear rings require to tessellate the path from the last node to the first node
     // which isn't really convenient to achieve with a for loop ...
 
-    const qreal precision = 20.0;
     const bool isLong = lineString.size() > 50;
 
     while ( itCoords != itEnd )
     {
         // Optimization for line strings with a big amount of nodes
-        bool skipNode = isLong && viewport->resolves( *itPreviousCoords, *itCoords); 
+        bool skipNode = isLong && viewport->resolves( *itPreviousCoords, *itCoords);
 
         if ( !skipNode ) {
 
             previousCoords = *itPreviousCoords;
             currentCoords  = *itCoords;
 
-            isVisible = screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
+            screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
 
             // Initializing variables that store the values of the previous iteration
             if ( !processingLastNode && itCoords == lineString.constBegin() ) {
                 previousGlobeHidesPoint = globeHidesPoint;
-                previousIsVisible = isVisible;
                 itPreviousCoords = itCoords;
                 previousX = x;
                 previousY = y;
@@ -253,18 +299,49 @@ bool MercatorProjection::screenCoordinates( const GeoDataLineString &lineString,
 
             // TODO: on flat maps we need to take the date line into account right here.
 
-            // This if-clause contains the section that tessellates the line 
-            // segments of a linestring. If you are about to learn how the code of 
+            // <SPHERICAL>
+            // Adding interpolated nodes if the current or previous point is visible
+            if ( globeHidesPoint || previousGlobeHidesPoint ) {
+                if ( globeHidesPoint !=  previousGlobeHidesPoint ) {
+                    // the line string disappears behind the visible horizon or
+                    // it reappears at the horizon.
+
+                    // Add interpolated "horizon" nodes
+
+                    // Assign the first or last horizon point to the current or
+                    // previous point, so that we still get correct results for
+                    // the case where we need to geoproject the line segment.
+/*
+                    if ( globeHidesPoint ) {
+                        currentCoords  = createHorizonCoordinates( previousCoords,
+                                                                   currentCoords,
+                                                                   viewport, lineString.tessellationFlags() );
+                    } else {
+                        previousCoords = createHorizonCoordinates( previousCoords,
+                                                                   currentCoords,
+                                                                   viewport, lineString.tessellationFlags() );
+                    }
+*/
+                }
+                else {
+                    // Both nodes are located on the planet's hemisphere that is
+                    // not visible to the user.
+                }
+            }
+            // </SPHERICAL>
+
+            // This if-clause contains the section that tessellates the line
+            // segments of a linestring. If you are about to learn how the code of
             // this class works you can safely ignore this section for a start.
 
-            if ( lineString.tessellate() && ( isVisible || previousIsVisible ) ) {
+            if ( lineString.tessellate() /* && ( isVisible || previousIsVisible ) */ ) {
                 // let the line segment follow the spherical surface
-                // if the distance between the previous point and the current point 
+                // if the distance between the previous point and the current point
                 // on screen is too big
 
                 // We take the manhattan length as a distance approximation
                 // that can be too big by a factor of sqrt(2)
-                qreal distance = fabs((qreal)(x - previousX)) + fabs((qreal)(y - previousY));
+                qreal distance = fabs((x - previousX)) + fabs((y - previousY));
 
                 // FIXME: This is a work around: remove as soon as we handle horizon crossing
                 if ( globeHidesPoint || previousGlobeHidesPoint ) {
@@ -275,34 +352,40 @@ bool MercatorProjection::screenCoordinates( const GeoDataLineString &lineString,
 
                 // Interpolate additional nodes if the current or previous nodes are visible
                 // or if the line segment that connects them might cross the viewport.
-                // The latter can pretty safely be excluded for most projections if both points 
-                // are located on the same side relative to the viewport boundaries and if they are 
+                // The latter can pretty safely be excluded for most projections if both points
+                // are located on the same side relative to the viewport boundaries and if they are
                 // located more than half the line segment distance away from the viewport.
-
+#ifdef SAFE_DISTANCE
                 if (   !( x < safeDistance && previousX < safeDistance )
                     || !( y < safeDistance && previousY < safeDistance )
-                    || !( x + safeDistance > viewport->width() 
+                    || !( x + safeDistance > viewport->width()
                         && previousX + safeDistance > viewport->width() )
                     || !( y + safeDistance > viewport->height()
                         && previousY + safeDistance > viewport->height() )
-                ){
-                    int suggestedCount = (int)( distance / precision );
+                )
+                {
+#endif
+                    int tessellatedNodes = (int)( distance / tessellationPrecision );
 
-                    if ( distance > precision ) {
-    //                    qDebug() << "Distance: " << distance;
-                        *polygon << tessellateLineSegment( previousCoords, currentCoords, 
-                                                        suggestedCount, viewport,
-                                                        lineString.tessellationFlags() );
+                    if ( distance > tessellationPrecision ) {
+//                      qDebug() << "Distance: " << distance;
+                        *polygon << tessellateLineSegment( previousCoords, currentCoords,
+                                                        tessellatedNodes, viewport,
+                                                        tessellationFlags );
                     }
+#ifdef SAFE_DISTANCE
+                }
+#endif
+            }
+            else {
+                if ( !globeHidesPoint ) {
+                    polygon->append( QPointF( x, y ) );
                 }
             }
 
-            if ( !globeHidesPoint ) {
-                polygon->append( QPointF( x, y ) );
-            }
-            else {
-                if (   !previousGlobeHidesPoint 
-                    && !lineString.isClosed() // FIXME: this probably needs to take rotation 
+            if ( globeHidesPoint ) {
+                if (   !previousGlobeHidesPoint
+                    && !lineString.isClosed() // FIXME: this probably needs to take rotation
                                                 //        into account for some cases
                     ) {
                     polygons.append( polygon );
@@ -311,13 +394,12 @@ bool MercatorProjection::screenCoordinates( const GeoDataLineString &lineString,
             }
 
             previousGlobeHidesPoint = globeHidesPoint;
-            previousIsVisible = isVisible;
             itPreviousCoords = itCoords;
             previousX = x;
             previousY = y;
         }
 
-        // Here we modify the condition to be able to process the 
+        // Here we modify the condition to be able to process the
         // first node after the last node in a LinearRing.
 
         if ( processingLastNode ) {
@@ -328,7 +410,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataLineString &lineString,
         if ( itCoords == itEnd  && lineString.isClosed() ) {
             itCoords = lineString.constBegin();
             processingLastNode = true;
-        }        
+        }
     }
 
     if ( polygon->size() > 1 ){

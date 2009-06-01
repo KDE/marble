@@ -64,6 +64,8 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
 
     GeoDataLatLonAltBox latLonAltBox() const;
 
+    GeoDataLineString toPoleCorrected() const;
+
     int size() const;
     GeoDataCoordinates& at( int pos );
     const GeoDataCoordinates& at( int pos ) const;

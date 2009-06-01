@@ -118,6 +118,7 @@ MarbleWidget::MarbleWidget(QWidget *parent)
     : QWidget( parent ),
       d( new MarbleWidgetPrivate( new MarbleMap(), this ) )
 {
+//    setAttribute( Qt::WA_PaintOnScreen, true );
     d->construct();
 }
 
@@ -126,6 +127,7 @@ MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
     : QWidget( parent ),
       d( new MarbleWidgetPrivate( map, this ) )
 {
+//    setAttribute( Qt::WA_PaintOnScreen, true );
     d->construct();
 }
 

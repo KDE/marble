@@ -197,7 +197,7 @@ bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
     GeoDataLinearRing triangle3;
 
     GeoDataCoordinates t7(0.0, 90.0, 0.0, GeoDataCoordinates::Degree );
-    GeoDataCoordinates t8(102.5, 45.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t8(102.5, 35.0, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates t9(167.5, 45.0, 0.0, GeoDataCoordinates::Degree );
 
     triangle3 << t7 << t8 << t9;

@@ -165,10 +165,12 @@ class AbstractProjection
 
     bool exceedsLatitudeRange( const GeoDataCoordinates& coords ) const;
 
+    bool exceedsLatitudeRange( const GeoDataLineString& lineString ) const;
+
     // The usage of the following methods is deprecated!
 
     /* DEPRECATED */
-    bool screenCoordinates( const qreal lon, const qreal lat,
+    bool screenCoordinates( qreal lon, qreal lat,
                                     const ViewportParams *viewport,
                                     int& x, int& y );
 
