@@ -137,7 +137,7 @@ QRegion PositionTracking::genRegion( const QSize &canvasSize,
 
 void PositionTracking::notifyPosition( GeoDataCoordinates pos )
 {
-    qDebug() << "Position from gpsd: " << pos.toString();
+    //qDebug() << "Position from gpsd: " << pos.toString();
 }
 
 void PositionTracking::updateSpeed( TrackPoint* previous, TrackPoint* next )
