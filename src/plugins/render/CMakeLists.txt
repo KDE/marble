@@ -12,6 +12,7 @@ add_subdirectory( stars )
 add_subdirectory( photo )
 # add_subdirectory ( twitter )
 add_subdirectory( wikipedia )
+add_subdirectory( weather )
 
 add_subdirectory( navigation )
 # add_subdirectory ( FITemplate )
