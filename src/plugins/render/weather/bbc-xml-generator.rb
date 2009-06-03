@@ -14,7 +14,11 @@ class Station
     
     def parse()
 	xmlData = Net::HTTP.get_response(URI.parse(@url)).body
-        data = XmlSimple.xml_in(xmlData, { 'KeyAttr' => 'name' })
+        begin
+            data = XmlSimple.xml_in(xmlData, { 'KeyAttr' => 'name' })
+        rescue REXML::ParseException
+            return false
+        end
         
         channel = (data["channel"])[0]
         
@@ -26,6 +30,11 @@ class Station
         item = channel["item"][0]
         @lat = item['lat'].to_s
         @long = item['long'].to_s
+        if @lat == "N/A" or @long == "N/A"
+            return false
+        end
+        
+        return true
     end
 	
     def to_s()
@@ -48,20 +57,26 @@ class Station
     end
     
     def to_xml()
-        string = "<Station>\n"
+        string = "<Placemark>\n"
         string += "    <name>" + @station + "</name>\n"
         string += "    <Country>" + @country + "</Country>\n"
         string += "    <id>" + @id.to_s + "</id>\n"
         string += "    <Point>\n"
         string += "        <coordinates>" + @long + "," + @lat + "</coordinates>\n"
         string += "    </Point>\n"
-        string += "</Station>\n"
+        string += "</Placemark>\n"
         return string
     end
 end
     
-1.upto( 100 ) do |i|
+puts "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+puts "<kml xmlns=\"http://earth.google.com/kml/2.1\">"
+puts "<Document>"
+1.upto( 100 ) do |i| # Should be about 8000
     station = Station.new( i )
-    station.parse
-    puts station.to_xml
+    if station.parse
+        puts station.to_xml
+    end
 end
+puts "<Document>"
+puts "</kml>"
