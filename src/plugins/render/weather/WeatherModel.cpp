@@ -15,6 +15,7 @@
 #include "BBCWeatherService.h"
 #include "FakeWeatherService.h"
 #include "AbstractDataPluginItem.h"
+#include "WeatherItem.h"
 
 // Qt
 #include <QtCore/QDebug>
@@ -22,7 +23,7 @@
 using namespace Marble;
 
 WeatherModel::WeatherModel( QObject *parent )
-    : AbstractDataPluginModel( "Weather", parent )
+    : AbstractDataPluginModel( "weather", parent )
 {
 //     addService( new FakeWeatherService( this ) );
      addService( new BBCWeatherService( this ) );
@@ -32,18 +33,22 @@ WeatherModel::~WeatherModel() {
 }
 
 void WeatherModel::downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item ) {
-    if ( !itemExists( item->id() ) ) {
+    WeatherItem *existingItem = ( WeatherItem * ) findItem( item->id() );
+    if ( !existingItem ) {
         AbstractDataPluginModel::downloadItemData( url, type, item );
     } else {
-        item->deleteLater();
+        if ( existingItem != item )
+            item->deleteLater();
     }
 }
 
 void WeatherModel::addItemToList( AbstractDataPluginItem *item ) {
-    if ( !itemExists( item->id() ) ) {
+    WeatherItem *existingItem = ( WeatherItem * ) findItem( item->id() );
+    if ( !existingItem ) {
         AbstractDataPluginModel::addItemToList( item );
     } else {
-        item->deleteLater();
+        if ( existingItem != item )
+            item->deleteLater();
     }
 }
 

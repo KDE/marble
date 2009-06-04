@@ -14,12 +14,18 @@
 // Marble
 #include "BBCWeatherItem.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLatLonAltBox.h"
+#include "MarbleDirs.h"
+#include "StationListParser.h"
 #include "WeatherData.h"
 #include "WeatherModel.h"
 #include "global.h"
 
 // Qt
 #include <QtCore/QDebug>
+#include <QtCore/QFile>
+#include <QtCore/QList>
+#include <QtCore/QTime>
 #include <QtCore/QUrl>
 
 using namespace Marble;
@@ -27,6 +33,17 @@ using namespace Marble;
 BBCWeatherService::BBCWeatherService( QObject *parent ) 
     : AbstractWeatherService( parent )
 {
+    QTime time;
+    QFile file( MarbleDirs::path( "weather/bbc-stations.xml" ) );
+    qDebug() << "Filepath: " << file.fileName();
+    
+    if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
+        return;
+    }
+    
+    StationListParser parser;
+    m_items = parser.read( &file );
+    qDebug() << "Parsed station list in " << time.elapsed() << " ms and found " << m_items.size() << "items";
 }
 
 BBCWeatherService::~BBCWeatherService() {
@@ -36,18 +53,19 @@ void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                             MarbleDataFacade *facade,
                                             qint32 number )
 {
-    Q_UNUSED( box );
-    Q_UNUSED( number );
     Q_UNUSED( facade );
     
-    BBCWeatherItem *item = new BBCWeatherItem();
-    item->setStationName( "Belfast" );
-    item->setPriority( 0 );
-    item->setCoordinate( GeoDataCoordinates( -6.217, 54.65, 0, GeoDataCoordinates::Degree ) );
-    item->setTarget( "earth" );
-    item->setBbcId( 1 );
+    qint32 fetched = 0;
+    QList<BBCWeatherItem *>::iterator it = m_items.begin();
     
-    emit requestedDownload( item->observationUrl(), "bbcobservation", item );
+    while ( fetched < number && it != m_items.end() ) {
+        if ( box.contains( (*it)->coordinate() ) ) {
+            (*it)->setTarget( "earth" );
+            emit requestedDownload( (*it)->observationUrl(), "bbcobservation", (*it) );
+            fetched++;
+        }
+        ++it;
+    }
 }
 
 #include "BBCWeatherService.moc"

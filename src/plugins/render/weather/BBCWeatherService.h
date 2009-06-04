@@ -14,6 +14,8 @@
 #include "AbstractWeatherService.h"
 
 namespace Marble {
+    
+class BBCWeatherItem;
 
 class BBCWeatherService : public AbstractWeatherService {
     Q_OBJECT
@@ -26,6 +28,9 @@ class BBCWeatherService : public AbstractWeatherService {
     void getAdditionalItems( const GeoDataLatLonAltBox& box,
                              MarbleDataFacade *facade,
                              qint32 number = 10 );
+ 
+ private:
+    QList<BBCWeatherItem*> m_items;
 };
 
 } // namespace Marble

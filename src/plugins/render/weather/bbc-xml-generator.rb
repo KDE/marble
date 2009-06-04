@@ -57,26 +57,24 @@ class Station
     end
     
     def to_xml()
-        string = "<Placemark>\n"
+        string = "<Station>\n"
         string += "    <name>" + @station + "</name>\n"
         string += "    <Country>" + @country + "</Country>\n"
         string += "    <id>" + @id.to_s + "</id>\n"
         string += "    <Point>\n"
         string += "        <coordinates>" + @long + "," + @lat + "</coordinates>\n"
         string += "    </Point>\n"
-        string += "</Placemark>\n"
+        string += "</Station>\n"
         return string
     end
 end
     
 puts "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
-puts "<kml xmlns=\"http://earth.google.com/kml/2.1\">"
-puts "<Document>"
-1.upto( 100 ) do |i| # Should be about 8000
+puts "<StationList>"
+1.upto( 8000 ) do |i| # Should be about 8000
     station = Station.new( i )
     if station.parse
         puts station.to_xml
     end
 end
-puts "<Document>"
-puts "</kml>"
+puts "</StationList>"

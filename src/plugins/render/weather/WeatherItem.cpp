@@ -25,7 +25,7 @@
 namespace Marble {
     
 const QSize borderSpacing( 2, 2 );
-const qint32 lineHeight = 22;
+const qint32 lineHeight = 28;
 const QSize imageSize( lineHeight, lineHeight );
 const qint32 horizontalSpacing = 2;
 
@@ -122,7 +122,7 @@ bool WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
                               d->m_temperatureSize.width(),
                               lineHeight ),
                        Qt::AlignVCenter,
-                       QString::number( d->m_currentWeather.temperature() ) + " K" );
+                       d->m_currentWeather.temperatureString() );
     painter->restore();
     return true;
 }
@@ -153,7 +153,7 @@ void WeatherItem::setCurrentWeather( const WeatherData &weather ) {
     d->m_currentWeather = weather;
     QFontMetrics metrics( d->s_font );
     d->m_temperatureSize
-        = metrics.boundingRect( QString::number( weather.temperature() ) + " K" ).size()
+        = metrics.boundingRect( weather.temperatureString() ).size()
           + QSize( 4, 0 );
     d->updateSize();
 }

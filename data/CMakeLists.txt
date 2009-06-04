@@ -166,6 +166,7 @@ maps/moon/clementine/clementine.dgml
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/moon/clementine)
 
 install (FILES
+weather/bbc-stations.xml
 weather/weather-clear-night.svgz
 weather/weather-clear.svgz
 weather/weather-clouds-night.svgz

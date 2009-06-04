@@ -25,10 +25,13 @@
 namespace Marble {
     
 // Factors
+// m/s to knots
 const qreal MPS2KN = 1.9437;
 const qreal KN2MPS = 1 / MPS2KN;
+// m/s to kilometer per hour
 const qreal MPS2KPH = 3.6;
 const qreal KPH2MPS = 1 / MPS2KPH;
+// m/s to miles per hour
 const qreal MPS2MPH = MPS2KPH * KM2MI;
 const qreal MPH2MPS = 1 / MPS2MPH;
 // HectoPascal to KiloPascal
@@ -42,6 +45,7 @@ const qreal HG2HPA = 133;
 const qreal HPA2HG = 1/HG2HPA;
 
 // Summands
+// Kelvin to degree Celsius
 const qreal KEL2CEL = -273.15;
 const qreal CEL2KEL = -KEL2CEL;
 
@@ -80,62 +84,60 @@ class WeatherDataPrivate {
     }
     
     void initializeIcons() {
-        if( !m_iconsInitialized ) {
-            m_iconsInitialized = true;
-            
+        if( s_iconPath.size() == 0 ) {
             // Clouds
-            m_icons.insert( WeatherData::ConditionNotAvailable,
-                            QIcon( MarbleDirs::path( "weather/weather-none-available.svgz" ) ) );
-            m_icons.insert( WeatherData::ClearDay,
-                            QIcon( MarbleDirs::path( "weather/weather-clear.svgz" ) ) );
-            m_icons.insert( WeatherData::ClearNight,
-                            QIcon( MarbleDirs::path( "weather/weather-clear-night.svgz" ) ) );
-            m_icons.insert( WeatherData::FewCloudsDay,
-                            QIcon( MarbleDirs::path( "weather/weather-few-clouds.svgz" ) ) );
-            m_icons.insert( WeatherData::FewCloudsNight,
-                            QIcon( MarbleDirs::path( "weather/weather-few-clouds-night.svgz" ) ) );
-            m_icons.insert( WeatherData::PartlyCloudyDay,
-                            QIcon( MarbleDirs::path( "weather/weather-clouds.svgz" ) ) );
-            m_icons.insert( WeatherData::PartlyCloudyNight,
-                            QIcon( MarbleDirs::path( "weather/weather-clouds-night.svgz" ) ) );
-            m_icons.insert( WeatherData::Overcast,
-                            QIcon( MarbleDirs::path( "weather/weather-many-clouds.svg" ) ) );
+            s_iconPath.insert( WeatherData::ConditionNotAvailable,
+                            MarbleDirs::path( "weather/weather-none-available.svgz" ) );
+            s_iconPath.insert( WeatherData::ClearDay,
+                            MarbleDirs::path( "weather/weather-clear.svgz" ) );
+            s_iconPath.insert( WeatherData::ClearNight,
+                            MarbleDirs::path( "weather/weather-clear-night.svgz" ) );
+            s_iconPath.insert( WeatherData::FewCloudsDay,
+                            MarbleDirs::path( "weather/weather-few-clouds.svgz" ) );
+            s_iconPath.insert( WeatherData::FewCloudsNight,
+                            MarbleDirs::path( "weather/weather-few-clouds-night.svgz" ) );
+            s_iconPath.insert( WeatherData::PartlyCloudyDay,
+                            MarbleDirs::path( "weather/weather-clouds.svgz" ) );
+            s_iconPath.insert( WeatherData::PartlyCloudyNight,
+                            MarbleDirs::path( "weather/weather-clouds-night.svgz" ) );
+            s_iconPath.insert( WeatherData::Overcast,
+                            MarbleDirs::path( "weather/weather-many-clouds.svg" ) );
 
             // Rain
-            m_icons.insert( WeatherData::LightShowersDay,
-                            QIcon( MarbleDirs::path( "weather/weather-showers-scattered-day.svg" ) ) );
-            m_icons.insert( WeatherData::LightShowersNight,
-                            QIcon( MarbleDirs::path( "weather/weather-showers-scattered-night.svg" ) ) );
-            m_icons.insert( WeatherData::ShowersDay,
-                            QIcon( MarbleDirs::path( "weather/weather-showers-day.svg" ) ) );
-            m_icons.insert( WeatherData::ShowersNight,
-                            QIcon( MarbleDirs::path( "weather/weather-showers-night.svg" ) ) );
-            m_icons.insert( WeatherData::LightRain,
-                            QIcon( MarbleDirs::path( "weather/weather-showers-scattered.svg" ) ) );
-            m_icons.insert( WeatherData::Rain,
-                            QIcon( MarbleDirs::path( "weather/weather-showers.svg" ) ) );
+            s_iconPath.insert( WeatherData::LightShowersDay,
+                            MarbleDirs::path( "weather/weather-showers-scattered-day.svgz" ) );
+            s_iconPath.insert( WeatherData::LightShowersNight,
+                            MarbleDirs::path( "weather/weather-showers-scattered-night.svgz" ) );
+            s_iconPath.insert( WeatherData::ShowersDay,
+                            MarbleDirs::path( "weather/weather-showers-day.svgz" ) );
+            s_iconPath.insert( WeatherData::ShowersNight,
+                            MarbleDirs::path( "weather/weather-showers-night.svgz" ) );
+            s_iconPath.insert( WeatherData::LightRain,
+                            MarbleDirs::path( "weather/weather-showers-scattered.svgz" ) );
+            s_iconPath.insert( WeatherData::Rain,
+                            MarbleDirs::path( "weather/weather-showers.svgz" ) );
 
             // Special
-            m_icons.insert( WeatherData::ChanceThunderstormDay,
-                            QIcon( MarbleDirs::path( "weather/weather-storm-day.svgz" ) ) );
-            m_icons.insert( WeatherData::ChanceThunderstormNight,
-                            QIcon( MarbleDirs::path( "weather/weather-storm-night.svgz" ) ) );
-            m_icons.insert( WeatherData::Thunderstorm,
-                            QIcon( MarbleDirs::path( "weather/weather-storm.svgz" ) ) );
-            m_icons.insert( WeatherData::Hail,
-                            QIcon( MarbleDirs::path( "weather/weather-hail.svgz" ) ) );
-            m_icons.insert( WeatherData::ChanceSnowDay,
-                            QIcon( MarbleDirs::path( "weather/weather-snow-scattered-day.svgz" ) ) );
-            m_icons.insert( WeatherData::ChanceSnowNight,
-                            QIcon( MarbleDirs::path( "weather/weather-snow-scattered-night.svgz" ) ) );
-            m_icons.insert( WeatherData::LightSnow,
-                            QIcon( MarbleDirs::path( "weather/weather-snow-scattered.svgz" ) ) );
-            m_icons.insert( WeatherData::Snow,
-                            QIcon( MarbleDirs::path( "weather/weather-snow.svgz" ) ) );
-            m_icons.insert( WeatherData::RainSnow,
-                            QIcon( MarbleDirs::path( "weather/weather-snow-rain.svgz" ) ) );
-            m_icons.insert( WeatherData::Mist,
-                            QIcon( MarbleDirs::path( "weather/weather-mist.svgz" ) ) );
+            s_iconPath.insert( WeatherData::ChanceThunderstormDay,
+                            MarbleDirs::path( "weather/weather-storm-day.svgz" ) );
+            s_iconPath.insert( WeatherData::ChanceThunderstormNight,
+                            MarbleDirs::path( "weather/weather-storm-night.svgz" ) );
+            s_iconPath.insert( WeatherData::Thunderstorm,
+                            MarbleDirs::path( "weather/weather-storm.svgz" ) );
+            s_iconPath.insert( WeatherData::Hail,
+                            MarbleDirs::path( "weather/weather-hail.svgz" ) );
+            s_iconPath.insert( WeatherData::ChanceSnowDay,
+                            MarbleDirs::path( "weather/weather-snow-scattered-day.svgz" ) );
+            s_iconPath.insert( WeatherData::ChanceSnowNight,
+                            MarbleDirs::path( "weather/weather-snow-scattered-night.svgz" ) );
+            s_iconPath.insert( WeatherData::LightSnow,
+                            MarbleDirs::path( "weather/weather-snow-scattered.svgz" ) );
+            s_iconPath.insert( WeatherData::Snow,
+                            MarbleDirs::path( "weather/weather-snow.svgz" ) );
+            s_iconPath.insert( WeatherData::RainSnow,
+                            MarbleDirs::path( "weather/weather-snow-rain.svgz" ) );
+            s_iconPath.insert( WeatherData::Mist,
+                            MarbleDirs::path( "weather/weather-mist.svgz" ) );
         }
     }
     
@@ -170,6 +172,23 @@ class WeatherDataPrivate {
             return 0;
         }
     }
+    
+    QString generateTemperatureString( qreal temp, WeatherData::TemperatureFormat format ) const {
+        QString string = QString::number( fromKelvin( temp, format ) );
+        switch ( format ) {
+            case WeatherData::Kelvin:
+                string += " K";
+                break;
+            case WeatherData::Celsius:
+                string += " \xb0 C";
+                break;
+            case WeatherData::Fahrenheit:
+                string += " \xb0 F";
+                break;
+        }
+        return string;
+    }
+            
     
     WeatherDataPrivate& operator=( const WeatherDataPrivate &other )
     {
@@ -210,12 +229,14 @@ class WeatherDataPrivate {
     
     QAtomicInt ref;
     
-    static bool m_iconsInitialized;
-    static QHash<WeatherData::WeatherCondition, QIcon> m_icons;
+    static QHash<WeatherData::WeatherCondition, QIcon> s_icons;
+    static QHash<WeatherData::WeatherCondition, QString> s_iconPath;
+    static WeatherData::TemperatureFormat s_standardTemperatureFormat;
 };
 
-QHash<WeatherData::WeatherCondition, QIcon> WeatherDataPrivate::m_icons = QHash<WeatherData::WeatherCondition, QIcon>();
-bool WeatherDataPrivate::m_iconsInitialized = false;
+QHash<WeatherData::WeatherCondition, QIcon> WeatherDataPrivate::s_icons = QHash<WeatherData::WeatherCondition, QIcon>();
+QHash<WeatherData::WeatherCondition, QString> WeatherDataPrivate::s_iconPath = QHash<WeatherData::WeatherCondition, QString>();
+WeatherData::TemperatureFormat WeatherDataPrivate::s_standardTemperatureFormat = WeatherData::Celsius;
 
 WeatherData::WeatherData()
     : d( new WeatherDataPrivate() )
@@ -252,7 +273,18 @@ void WeatherData::setCondition( WeatherData::WeatherCondition condition ) {
 }
 
 QIcon WeatherData::icon() const {
-    return WeatherDataPrivate::m_icons.value( condition() );
+    QIcon icon = WeatherDataPrivate::s_icons.value( condition() );
+    
+    // If the icon is in the hash, simply return it.
+    if ( !icon.isNull() ) {
+        return icon;
+    }
+    // If it isn't in the hash, the icon will be created (from the value stored in s_iconPath).
+    else {
+        icon.addFile( WeatherDataPrivate::s_iconPath.value( condition() ) );
+        WeatherDataPrivate::s_icons.insert( condition(), icon );
+        return icon;
+    }
 }
 
 WeatherData::WindDirection WeatherData::windDirection() const {
@@ -368,6 +400,11 @@ void WeatherData::setTemperature( qreal temp, WeatherData::TemperatureFormat for
     d->m_temperature = d->toKelvin( temp, format );
 }
 
+QString WeatherData::temperatureString() const {
+    return d->generateTemperatureString( d->m_temperature,
+                                         WeatherDataPrivate::s_standardTemperatureFormat );
+}
+
 qreal WeatherData::maxTemperature( WeatherData::TemperatureFormat format ) const {
     return d->fromKelvin( d->m_maxTemperature, format );
 }
@@ -377,8 +414,18 @@ void WeatherData::setMaxTemperature( qreal temp, WeatherData::TemperatureFormat 
     d->m_maxTemperature = d->toKelvin( temp, format );
 }
 
+QString WeatherData::maxTemperatureString() const {
+    return d->generateTemperatureString( d->m_maxTemperature,
+                                         WeatherDataPrivate::s_standardTemperatureFormat );
+}
+
 qreal WeatherData::minTemperature( WeatherData::TemperatureFormat format ) const {
     return d->fromKelvin( d->m_minTemperature, format );
+}
+
+QString WeatherData::minTemperatureString() const {
+    return d->generateTemperatureString( d->m_minTemperature,
+                                         WeatherDataPrivate::s_standardTemperatureFormat );
 }
 
 void WeatherData::setMinTemperature( qreal temp, WeatherData::TemperatureFormat format ) {

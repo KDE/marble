@@ -133,9 +133,15 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     bool fileExists( const QString& id, const QString& type ) const;
     
     /**
+     * Finds the item with @p id in the list.
+     * @return The pointer to the item or (if no item has been found) 0
+     */
+    AbstractDataPluginItem *findItem( const QString& id ) const;
+    
+    /**
      * Testing the existence of the item @p id in the list
      */
-    bool itemExists( const QString& id );
+    bool itemExists( const QString& id ) const;
     
  private Q_SLOTS:
     /**

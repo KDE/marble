@@ -114,6 +114,9 @@ class WeatherData {
     WeatherData::WeatherCondition condition() const;
     void setCondition( WeatherData::WeatherCondition condition );
     
+    /**
+     * Get the icon showing the current condition.
+     */
     QIcon icon() const;
     
     WeatherData::WindDirection windDirection() const;
@@ -125,14 +128,17 @@ class WeatherData {
     qreal temperature( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
     void setTemperature( qreal temp,
                          WeatherData::TemperatureFormat format = WeatherData::Kelvin );
+    QString temperatureString() const;
     
     qreal maxTemperature( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
     void setMaxTemperature( qreal temp,
                             WeatherData::TemperatureFormat format = WeatherData::Kelvin );
+    QString maxTemperatureString() const;
     
     qreal minTemperature( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
     void setMinTemperature( qreal temp,
                             WeatherData::TemperatureFormat format = WeatherData::Kelvin );
+    QString minTemperatureString() const;
     
     WeatherData::Visibility visibility() const;
     void setVisibilty( WeatherData::Visibility visibility );

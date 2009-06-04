@@ -197,9 +197,11 @@ void BBCParser::setupWeatherConditions() {
     
     dayConditions["sunny"] = WeatherData::ClearDay;
     dayConditions["clear"] = WeatherData::ClearDay;
+    dayConditions["clear sky"] = WeatherData::ClearDay;
     dayConditions["sunny intervals"] = WeatherData::FewCloudsDay;
     dayConditions["partly cloudy"] = WeatherData::PartlyCloudyDay;
     dayConditions["white cloud"] = WeatherData::Overcast;
+    dayConditions["grey cloud"] = WeatherData::Overcast;
     dayConditions["cloudy"] = WeatherData::Overcast;
     dayConditions["drizzle"] = WeatherData::LightRain;
     dayConditions["misty"] = WeatherData::Mist;
@@ -234,12 +236,15 @@ void BBCParser::setupWeatherConditions() {
     dayConditions["heavy snow showers"] = WeatherData::Snow;
     dayConditions["cloudy with heavy snow"] = WeatherData::Snow;
     dayConditions["na"] = WeatherData::ConditionNotAvailable;
+    dayConditions["N/A"] = WeatherData::ConditionNotAvailable;
     
     nightConditions["sunny"] = WeatherData::ClearNight;
     nightConditions["clear"] = WeatherData::ClearNight;
+    nightConditions["clear sky"] = WeatherData::ClearNight;
     nightConditions["sunny intervals"] = WeatherData::FewCloudsNight;
     nightConditions["partly cloudy"] = WeatherData::PartlyCloudyNight;
     nightConditions["white cloud"] = WeatherData::Overcast;
+    nightConditions["grey cloud"] = WeatherData::Overcast;
     nightConditions["cloudy"] = WeatherData::Overcast;
     nightConditions["drizzle"] = WeatherData::LightRain;
     nightConditions["misty"] = WeatherData::Mist;
@@ -274,4 +279,5 @@ void BBCParser::setupWeatherConditions() {
     nightConditions["heavy snow showers"] = WeatherData::Snow;
     nightConditions["cloudy with heavy snow"] = WeatherData::Snow;
     nightConditions["na"] = WeatherData::ConditionNotAvailable;
+    nightConditions["N/A"] = WeatherData::ConditionNotAvailable;
 }

@@ -299,7 +299,7 @@ bool AbstractDataPluginModel::fileExists( const QString& id, const QString& type
     return fileExists( generateFilename( id, type ) );
 }
 
-bool AbstractDataPluginModel::itemExists( const QString& id ) {
+AbstractDataPluginItem *AbstractDataPluginModel::findItem( const QString& id ) const {
     QList<AbstractDataPluginItem*>::iterator listIt;
     
     for( listIt = d->m_itemSet.begin();
@@ -307,7 +307,7 @@ bool AbstractDataPluginModel::itemExists( const QString& id ) {
          ++listIt )
     {
         if( (*listIt)->id() == id ) {
-            return true;
+            return (*listIt);
         }
     }
     
@@ -318,11 +318,20 @@ bool AbstractDataPluginModel::itemExists( const QString& id ) {
          ++hashIt )
     {
         if( (*hashIt)->id() == id ) {
-            return true;
+            return (*hashIt);
         }
     }
     
-    return false;
+    return 0;
+}
+
+bool AbstractDataPluginModel::itemExists( const QString& id ) const {
+    if ( findItem( id ) ) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 void AbstractDataPluginModel::handleChangedViewport() {

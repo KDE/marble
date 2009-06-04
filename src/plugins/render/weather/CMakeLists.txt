@@ -16,7 +16,8 @@ set( weather_SRCS WeatherData.cpp
                   BBCWeatherService.cpp
                   BBCWeatherItem.cpp
                   FakeWeatherService.cpp 
-                  FakeWeatherItem.cpp )
+                  FakeWeatherItem.cpp
+                  StationListParser.cpp )
 
 marble_add_plugin( Weather ${weather_SRCS} )
 target_link_libraries( Weather ${QT_QTGUI_LIBRARY} )
