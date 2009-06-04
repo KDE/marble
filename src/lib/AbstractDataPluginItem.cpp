@@ -27,10 +27,7 @@ namespace Marble {
 class AbstractDataPluginItemPrivate {
  public:
     AbstractDataPluginItemPrivate()
-        : m_id( "" ),
-          m_coordinates(),
-          m_target( "" ),
-          m_addedAngularResolution( 0 )
+        : m_addedAngularResolution( 0 )
     {
     };
     
