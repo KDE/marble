@@ -135,7 +135,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     /**
      * Testing the existence of the item @p id in the list
      */
-    bool itemExists( const QString& id );
+    bool itemExists( const QString& id ) const;
     
  private Q_SLOTS:
     /**

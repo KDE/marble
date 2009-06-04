@@ -299,7 +299,7 @@ bool AbstractDataPluginModel::fileExists( const QString& id, const QString& type
     return fileExists( generateFilename( id, type ) );
 }
 
-bool AbstractDataPluginModel::itemExists( const QString& id ) {
+bool AbstractDataPluginModel::itemExists( const QString& id ) const {
     QList<AbstractDataPluginItem*>::iterator listIt;
     
     for( listIt = d->m_itemSet.begin();
