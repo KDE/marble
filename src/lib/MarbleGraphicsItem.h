@@ -68,6 +68,13 @@ class MARBLE_EXPORT MarbleGraphicsItem {
      */
     void setCacheMode( CacheMode mode, const QSize & logicalCacheSize = QSize() );
     
+    /**
+     * Schedules an painting update for the Item. As long it is not added to an GraphicsScene 
+     * (which doesn't exist yet) it will be repainted at the next paint event instead of using
+     * the cache.
+     */
+    void update();
+    
  protected:
     /**
      * Paints the item in item coordinates. This has to be reimplemented by the subclass
@@ -77,6 +84,12 @@ class MARBLE_EXPORT MarbleGraphicsItem {
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
      
     virtual bool eventFilter( QObject *object, QEvent *e );
+    
+    /**
+     * Test if an update of the cache is needed.
+     * @return true if the item need an update, false otherwise.
+     */
+    bool needsUpdate();
     
     /**
      * Set the size of the item

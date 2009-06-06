@@ -73,7 +73,8 @@ WeatherItem::WeatherItem( QObject *parent )
     : AbstractDataPluginItem( parent ),
     d( new WeatherItemPrivate( this ) )
 {
-    setSize( QSize( 80, 24 ) );
+    setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
+    d->updateSize();
 }
 
 WeatherItem::~WeatherItem() {
@@ -143,6 +144,7 @@ QString WeatherItem::stationName() const {
 void WeatherItem::setStationName( const QString& name ) {
     d->m_action->setText( name );
     setId( name );
+    update();
 }
 
 WeatherData WeatherItem::currentWeather() const {
@@ -156,6 +158,7 @@ void WeatherItem::setCurrentWeather( const WeatherData &weather ) {
         = metrics.boundingRect( weather.temperatureString() ).size()
           + QSize( 4, 0 );
     d->updateSize();
+    update();
 }
 
 quint8 WeatherItem::priority() const {
