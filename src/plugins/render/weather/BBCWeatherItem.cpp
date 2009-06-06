@@ -55,6 +55,7 @@ quint32 BBCWeatherItem::bbcId() const {
 
 void BBCWeatherItem::setBbcId( quint32 id ) {
     m_bbcId = id;
+    setId( QString( "bbc" ) + QString::number( id ) );
 }
 
 QUrl BBCWeatherItem::observationUrl() const {

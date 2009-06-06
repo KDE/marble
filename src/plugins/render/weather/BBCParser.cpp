@@ -219,6 +219,7 @@ void BBCParser::setupWeatherConditions() {
     dayConditions["heavy shower"] = WeatherData::Rain;
     dayConditions["thundery shower"] = WeatherData::Thunderstorm;
     dayConditions["thunderstorm"] = WeatherData::Thunderstorm;
+    dayConditions["thunder storm"] = WeatherData::Thunderstorm;
     dayConditions["cloudy with sleet"] = WeatherData::RainSnow;
     dayConditions["sleet shower"] = WeatherData::RainSnow;
     dayConditions["sleet showers"] = WeatherData::RainSnow;
@@ -262,6 +263,7 @@ void BBCParser::setupWeatherConditions() {
     nightConditions["heavy shower"] = WeatherData::Rain;
     nightConditions["thundery shower"] = WeatherData::Thunderstorm;
     nightConditions["thunderstorm"] = WeatherData::Thunderstorm;
+    nightConditions["thunder storm"] = WeatherData::Thunderstorm;
     nightConditions["cloudy with sleet"] = WeatherData::RainSnow;
     nightConditions["sleet shower"] = WeatherData::RainSnow;
     nightConditions["sleet showers"] = WeatherData::RainSnow;

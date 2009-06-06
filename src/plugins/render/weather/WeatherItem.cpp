@@ -58,6 +58,7 @@ class WeatherItemPrivate {
     QAction *m_action;
     WeatherItem *m_parent;
     QSize m_temperatureSize;
+    QString m_stationName;
     
     static QFont s_font;
 };
@@ -138,12 +139,12 @@ bool WeatherItem::operator<( const AbstractDataPluginItem *other ) const {
 }
 
 QString WeatherItem::stationName() const {
-    return id();
+    return d->m_stationName;
 }
 
 void WeatherItem::setStationName( const QString& name ) {
     d->m_action->setText( name );
-    setId( name );
+    d->m_stationName = name;
     update();
 }
 
@@ -167,10 +168,6 @@ quint8 WeatherItem::priority() const {
 
 void WeatherItem::setPriority( quint8 priority ) {
     d->m_priority = priority;
-}
-
-void WeatherItem::setId( const QString& id ) {
-    AbstractDataPluginItem::setId( id );
 }
 
 } // namespace Marble

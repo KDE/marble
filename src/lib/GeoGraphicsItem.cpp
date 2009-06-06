@@ -15,6 +15,9 @@
 //Marble
 #include "GeoDataCoordinates.h"
 
+// Qt
+#include <QtCore/QDebug>
+
 using namespace Marble;
 
 GeoGraphicsItem::GeoGraphicsItem()

@@ -231,6 +231,8 @@ void AbstractDataPluginModel::downloadItemData( const QUrl& url,
     
     d->m_downloadManager->addJob( url, id, id );
     d->m_downloadingItems.insert( id, item );
+    
+    connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
 }
 
 void AbstractDataPluginModel::downloadDescriptionFile( const QUrl& url ) {    
@@ -268,6 +270,8 @@ void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item ) {
                                                                 lessThanByPointer );
     // Insert the item on the right position in the list
     d->m_itemSet.insert( i, item );
+    
+    connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
 }
 
 QString AbstractDataPluginModel::name() const {
@@ -416,6 +420,17 @@ void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlStri
         }
     }
 }
+
+void AbstractDataPluginModel::removeItem( QObject *item ) {
+    d->m_itemSet.removeAll( (AbstractDataPluginItem *) item );
+    QHash<QString, AbstractDataPluginItem *>::iterator i;
+    for( i = d->m_downloadingItems.begin(); i != d->m_downloadingItems.end(); ++i ) {
+        if( (*i) == (AbstractDataPluginItem *) item ) {
+            d->m_downloadingItems.erase( i );
+        }
+    }
+}
+    
 
 } // namespace Marble
 

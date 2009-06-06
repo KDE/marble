@@ -26,7 +26,7 @@ class BBCWeatherItem;
 class StationListParser : public QXmlStreamReader
 {
 public:
-    StationListParser();
+    StationListParser( QObject *parent );
 
     QList<BBCWeatherItem *> read( QIODevice *device );
 
@@ -38,6 +38,7 @@ private:
     void readPoint( BBCWeatherItem *item );
 
     QList<BBCWeatherItem *> m_list;
+    QObject *m_parent;
 };
 
 } // Marble namespace

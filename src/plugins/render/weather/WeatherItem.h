@@ -65,7 +65,6 @@ class WeatherItem : public AbstractDataPluginItem {
     
     // Forecasts to appear later
  private:
-    void setId( const QString& );
     WeatherItemPrivate * const d;
     friend class WeatherItemPrivate;
 };

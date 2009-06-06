@@ -22,7 +22,8 @@
 
 using namespace Marble;
 
-StationListParser::StationListParser()
+StationListParser::StationListParser( QObject *parent )
+    : m_parent( parent )
 {
 }
 
@@ -81,7 +82,7 @@ void StationListParser::readStation() {
     Q_ASSERT( isStartElement()
               && name() == "Station" );
     
-    BBCWeatherItem *item = new BBCWeatherItem();
+    BBCWeatherItem *item = new BBCWeatherItem( m_parent );
     
     while ( !atEnd() ) {
         readNext();
