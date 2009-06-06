@@ -14,6 +14,7 @@
 // Marble
 #include "FakeWeatherItem.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLatLonAltBox.h"
 #include "WeatherData.h"
 #include "WeatherModel.h"
 
