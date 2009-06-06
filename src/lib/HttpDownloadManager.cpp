@@ -235,8 +235,8 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
                         m_requeueTimer->start();
 		}
 		else {
+            qDebug() << "JOB-address: " << job << "Blacklist-size:" << m_jobBlackList.size() << "err:" << err;
 		    m_jobBlackList.insert( job->sourceUrl().toString() );
-
 		    qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" )
 			.arg( job->destinationFileName() ).arg( m_jobBlackList.size() );
 

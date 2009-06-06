@@ -14,6 +14,7 @@
 #ifndef GEODATACOORDINATES_H
 #define GEODATACOORDINATES_H
 
+#include <QtCore/QCoreApplication>
 #include <QtCore/QMetaType>
 #include <QtCore/QVector>
 #include <QtCore/QString>
@@ -53,6 +54,7 @@ class Quaternion;
 
 class GEODATA_EXPORT GeoDataCoordinates
 {
+ Q_DECLARE_TR_FUNCTIONS(GeoDataCoordinates)
 
  public:
     /**

@@ -25,6 +25,9 @@ namespace Marble
 {
 
 /*
+    NOTE: USAGE OF THIS CLASS IS DEPRECATED
+          Use GeoDataLineString, GeoDataLinearRing OR GeoDataPolygon instead!
+
 	GeoDataPoint defines the nodes in a polyLine 
 */
 

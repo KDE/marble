@@ -224,7 +224,7 @@ bool ViewportParams::setPlanetAxis(const Quaternion &newAxis)
     // This is should not be done for projections where the
     // maximum latitude is traversable (e.g. for a sphere).
 
-    if ( !currentProjection()->traversableMaxLat() && fabs( newAxis.pitch() ) > maxLat ) {
+    if ( !currentProjection()->traversablePoles() && fabs( newAxis.pitch() ) > maxLat ) {
 
         qreal centerLon, centerLat;
         centerCoordinates( centerLon, centerLat );

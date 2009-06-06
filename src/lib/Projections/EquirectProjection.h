@@ -5,7 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2007       Inge Wallin  <ingwa@kde.org>
+// Copyright 2007-2009  Torsten Rahn  <rahn@kde.org>
 //
 
 
@@ -17,6 +18,7 @@
  * This file contains the headers for EquirectProjection.
  *
  * @author Inge Wallin  <inge@lysator.liu.se>
+ * @author Torsten Rahn <rahn@kde.org>
  */
 
 
@@ -42,6 +44,10 @@ class EquirectProjection : public AbstractProjection
 
     virtual ~EquirectProjection();
 
+    virtual SurfaceType surfaceType() const { return Cylindrical; }
+
+    virtual PreservationType preservationType() const { return NoPreservation; }
+
     AbstractProjectionHelper *helper();
 
     /**
@@ -66,10 +72,6 @@ class EquirectProjection : public AbstractProjection
                             qreal *x, qreal &y, int &pointRepeatNum,
                             const QSizeF& size,
                             bool &globeHidesPoint );
-
-    bool screenCoordinates( const GeoDataLineString &lineString, 
-                            const ViewportParams *viewport,
-                            QVector<QPolygonF *> &polygons );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.

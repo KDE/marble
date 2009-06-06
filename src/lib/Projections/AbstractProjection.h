@@ -27,17 +27,18 @@
 
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataCoordinates.h"
-#include "GeoDataLineString.h"
-#include "GeoDataLinearRing.h"
 
 namespace Marble
 {
 
 // The manhattan distance in pixels at which extra nodes get created for tessellation.
 static const int tessellationPrecision = 10;
+static const int latLonAltBoxSamplingRate = 4;
 
-class ViewportParams;
 class AbstractProjectionHelper;
+class GeoDataLineString;
+class GeoDataLinearRing;
+class ViewportParams;
 
 
 /**
@@ -48,6 +49,20 @@ class AbstractProjection
 {
     // Not a QObject so far because we don't need to send signals.
  public:
+    enum SurfaceType {
+        Cylindrical,
+        Pseudocylindrical,
+        Hybrid,
+        Conical,
+        Pseudoconical,
+        Azimuthal
+    };
+
+    enum PreservationType {
+        NoPreservation,
+        Conformal,
+        EqualArea
+    };
 
     /**
      * @brief Construct a new AbstractProjection.
@@ -58,12 +73,23 @@ class AbstractProjection
 
     virtual qreal  maxLat()  const        { return m_maxLat; }
     virtual qreal  minLat()  const        { return m_minLat; }
-    virtual bool    traversableMaxLat()  const        { return m_traversableMaxLat; }
+    virtual bool   traversablePoles()  const        { return m_traversablePoles; }
 
-    virtual bool    repeatX() const        { return m_repeatX; }
-    virtual void    setRepeatX( bool val ) { m_repeatX = val;  }
+    virtual bool   repeatX() const        { return m_repeatX; }
+    virtual void   setRepeatX( bool val ) { m_repeatX = val;  }
 
     virtual AbstractProjectionHelper *helper() { return 0; }
+
+    virtual SurfaceType surfaceType() const = 0; 
+
+    virtual PreservationType preservationType() const { return NoPreservation; }
+
+    // The projection surface can have different orientations:
+    // - normal: the surface's axis of symmetry matches the Earth's axis
+    // - transverse: orthogonally oriented compared to the Earth's axis
+    // - oblique: somewhere in between
+
+    virtual bool   isOrientedNormal() const        { return true; }
 
 /*
     TODO: To be considered ...
@@ -140,7 +166,7 @@ class AbstractProjection
 
     virtual bool screenCoordinates( const GeoDataLineString &lineString, 
                                     const ViewportParams *viewport,
-                                    QVector<QPolygonF*> &polygons ) = 0;
+                                    QVector<QPolygonF*> &polygons );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -184,13 +210,8 @@ class AbstractProjection
 
     qreal  m_maxLat;               // The max latitude.  Not always 90 degrees.
     qreal  m_minLat;               // The min latitude. Not always the same as maxLat.
-    qreal  m_traversableMaxLat;    // Whether it's possible to center beyond maxLat.
+    qreal  m_traversablePoles;    // Whether it's possible to center beyond maxLat.
     bool   m_repeatX;              // Map repeated in X direction.
-
-    void coordinateExtremes( qreal lon, qreal lat, 
-                             qreal &westLon, qreal &eastLon,
-                             qreal &otherWestLon, qreal &otherEastLon,
-                             qreal &northLat, qreal &southLat );
 
     // This method tesselates a line segment in a way that the line segment
     // follows great circles. The count parameter specifies the 
