@@ -13,8 +13,12 @@
 #include "AbstractProjection.h"
 
 #include <QtCore/QDebug>
+#include <QtGui/QRegion>
 
 // Marble
+#include "AbstractProjectionHelper.h"
+#include "GeoDataLineString.h"
+#include "GeoDataLinearRing.h"
 #include "ViewportParams.h"
 
 using namespace Marble;
@@ -48,6 +52,201 @@ bool AbstractProjection::screenCoordinates( const Marble::GeoDataCoordinates &co
            QSizeF( 0.0, 0.0 ), globeHidesPoint );
 }
 
+bool AbstractProjection::screenCoordinates( const GeoDataLineString &_lineString,
+                                                  const ViewportParams *viewport,
+                                                  QVector<QPolygonF *> &polygons )
+{
+//    qDebug() << "LineString GeometryId:" << lineString.geometryId();
+
+    const TessellationFlags tessellationFlags = _lineString.tessellationFlags();
+
+    // Compare bounding box size of the line string with the angularResolution
+    // Immediately return if the latLonAltBox is smaller.
+    if ( !viewport->resolves( _lineString.latLonAltBox() ) ) {
+//      qDebug() << "Object too small to be resolved";
+        return false;
+    }
+
+    qreal x = 0;
+    qreal y = 0;
+    bool globeHidesPoint = false;
+
+    qreal previousX = -1.0;
+    qreal previousY = -1.0;
+    bool previousGlobeHidesPoint = false;
+
+    QPolygonF  *polygon = new QPolygonF;
+
+    GeoDataLineString lineString;
+
+    if ( lineString.latLonAltBox().containsPole( Marble::AnyPole ) ) {
+        lineString = _lineString.toPoleCorrected();
+    }
+    else {
+        lineString = _lineString;
+    }
+
+    GeoDataLineString::ConstIterator itCoords = lineString.constBegin();
+    GeoDataLineString::ConstIterator itPreviousCoords = lineString.constBegin();
+
+    GeoDataCoordinates previousCoords;
+    GeoDataCoordinates currentCoords;
+
+    GeoDataLineString::ConstIterator itEnd = lineString.constEnd();
+
+    bool processingLastNode = false;
+
+    // We use a while loop to be able to cover linestrings as well as linear rings:
+    // Linear rings require to tessellate the path from the last node to the first node
+    // which isn't really convenient to achieve with a for loop ...
+
+    const bool isLong = lineString.size() > 50;
+
+    while ( itCoords != itEnd )
+    {
+        // Optimization for line strings with a big amount of nodes
+        bool skipNode = isLong && viewport->resolves( *itPreviousCoords, *itCoords);
+
+        if ( !skipNode ) {
+
+            previousCoords = *itPreviousCoords;
+            currentCoords  = *itCoords;
+
+            screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
+
+            // Initializing variables that store the values of the previous iteration
+            if ( !processingLastNode && itCoords == lineString.constBegin() ) {
+                previousGlobeHidesPoint = globeHidesPoint;
+                itPreviousCoords = itCoords;
+                previousX = x;
+                previousY = y;
+            }
+
+            // TODO: on flat maps we need to take the date line into account right here.
+
+            // <SPHERICAL>
+            // Adding interpolated nodes if the current or previous point is visible
+            if ( globeHidesPoint || previousGlobeHidesPoint ) {
+                if ( globeHidesPoint !=  previousGlobeHidesPoint ) {
+                    // the line string disappears behind the visible horizon or
+                    // it reappears at the horizon.
+
+                    // Add interpolated "horizon" nodes
+
+                    // Assign the first or last horizon point to the current or
+                    // previous point, so that we still get correct results for
+                    // the case where we need to geoproject the line segment.
+/*
+                    if ( globeHidesPoint ) {
+                        currentCoords  = createHorizonCoordinates( previousCoords,
+                                                                   currentCoords,
+                                                                   viewport, lineString.tessellationFlags() );
+                    } else {
+                        previousCoords = createHorizonCoordinates( previousCoords,
+                                                                   currentCoords,
+                                                                   viewport, lineString.tessellationFlags() );
+                    }
+*/
+                }
+                else {
+                    // Both nodes are located on the planet's hemisphere that is
+                    // not visible to the user.
+                }
+            }
+            // </SPHERICAL>
+
+            // This if-clause contains the section that tessellates the line
+            // segments of a linestring. If you are about to learn how the code of
+            // this class works you can safely ignore this section for a start.
+
+            if ( lineString.tessellate() /* && ( isVisible || previousIsVisible ) */ ) {
+                // let the line segment follow the spherical surface
+                // if the distance between the previous point and the current point
+                // on screen is too big
+
+                // We take the manhattan length as a distance approximation
+                // that can be too big by a factor of sqrt(2)
+                qreal distance = fabs((x - previousX)) + fabs((y - previousY));
+
+                // FIXME: This is a work around: remove as soon as we handle horizon crossing
+                if ( globeHidesPoint || previousGlobeHidesPoint ) {
+                    distance = 350;
+                }
+
+                const qreal safeDistance = - 0.5 * distance;
+
+                // Interpolate additional nodes if the current or previous nodes are visible
+                // or if the line segment that connects them might cross the viewport.
+                // The latter can pretty safely be excluded for most projections if both points
+                // are located on the same side relative to the viewport boundaries and if they are
+                // located more than half the line segment distance away from the viewport.
+#ifdef SAFE_DISTANCE
+                if (   !( x < safeDistance && previousX < safeDistance )
+                    || !( y < safeDistance && previousY < safeDistance )
+                    || !( x + safeDistance > viewport->width()
+                        && previousX + safeDistance > viewport->width() )
+                    || !( y + safeDistance > viewport->height()
+                        && previousY + safeDistance > viewport->height() )
+                )
+                {
+#endif
+                    int tessellatedNodes = (int)( distance / tessellationPrecision );
+
+                    if ( distance > tessellationPrecision ) {
+//                      qDebug() << "Distance: " << distance;
+                        *polygon << tessellateLineSegment( previousCoords, currentCoords,
+                                                        tessellatedNodes, viewport,
+                                                        tessellationFlags );
+                    }
+#ifdef SAFE_DISTANCE
+                }
+#endif
+            }
+            else {
+                if ( !globeHidesPoint ) {
+                    polygon->append( QPointF( x, y ) );
+                }
+            }
+
+            if ( globeHidesPoint ) {
+                if (   !previousGlobeHidesPoint
+                    && !lineString.isClosed() // FIXME: this probably needs to take rotation
+                                                //        into account for some cases
+                    ) {
+                    polygons.append( polygon );
+                    polygon = new QPolygonF;
+                }
+            }
+
+            previousGlobeHidesPoint = globeHidesPoint;
+            itPreviousCoords = itCoords;
+            previousX = x;
+            previousY = y;
+        }
+
+        // Here we modify the condition to be able to process the
+        // first node after the last node in a LinearRing.
+
+        if ( processingLastNode ) {
+            break;
+        }
+        ++itCoords;
+
+        if ( itCoords == itEnd  && lineString.isClosed() ) {
+            itCoords = lineString.constBegin();
+            processingLastNode = true;
+        }
+    }
+
+    if ( polygon->size() > 1 ){
+        polygons.append( polygon );
+    }
+    else {
+        delete polygon;
+    }
+
+    return polygons.isEmpty();
+}
 
 GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
                                                       const ViewportParams *viewport )
@@ -55,94 +254,72 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
     // For the case where the whole viewport gets covered there is a 
     // pretty dirty and generic detection algorithm:
 
-    int xStep = 4;
-    int yStep = 4;
+    // Move along the screenborder and save the highest and lowest lon-lat values.
+    QRect projectedRect = helper()->projectedRegion().boundingRect();
+    QRect mapRect = screenRect.intersected( projectedRect );
+
+    GeoDataLineString boundingLineString;
 
     qreal lon, lat;
-    qreal eastLon  = -M_PI; 
-    qreal otherEastLon  = -M_PI; 
-    qreal westLon  = +M_PI; 
-    qreal otherWestLon  = +M_PI; 
-    qreal northLat = m_minLat;
-    qreal southLat = m_maxLat; 
 
-    // Move along the screenborder and save the highest and lowest lon-lat values.
-
-    for ( int x = screenRect.left(); x < screenRect.right(); x+=xStep ) {
-        if ( geoCoordinates( x, screenRect.bottom(), viewport, lon, lat,
+    for ( int x = mapRect.left(); x < mapRect.right(); x += latLonAltBoxSamplingRate ) {
+        if ( geoCoordinates( x, mapRect.bottom(), viewport, lon, lat,
                              GeoDataCoordinates::Radian ) ) {
-            coordinateExtremes( lon, lat, westLon, eastLon,
-                                otherWestLon, otherEastLon,
-                                northLat, southLat );
+            boundingLineString << GeoDataCoordinates( lon, lat );
         }
 
-        if ( geoCoordinates( x, screenRect.top(),
+        if ( geoCoordinates( x, mapRect.top(),
                              viewport, lon, lat, GeoDataCoordinates::Radian ) ) {
-            coordinateExtremes( lon, lat, westLon, eastLon,
-                                otherWestLon, otherEastLon,
-                                northLat, southLat );
+            boundingLineString << GeoDataCoordinates( lon, lat );
         }
     }
 
-    if ( geoCoordinates( screenRect.right(), screenRect.top(), viewport, lon, lat,
+    if ( geoCoordinates( mapRect.right(), mapRect.top(), viewport, lon, lat,
                          GeoDataCoordinates::Radian ) ) {
-        coordinateExtremes( lon, lat, westLon, eastLon,
-                            otherWestLon, otherEastLon, northLat, southLat );
+        boundingLineString << GeoDataCoordinates( lon, lat );
     }
 
-    if ( geoCoordinates( screenRect.right(), screenRect.bottom(),
+    if ( geoCoordinates( mapRect.right(), mapRect.bottom(),
                          viewport, lon, lat, GeoDataCoordinates::Radian ) ) {
-        coordinateExtremes( lon, lat, westLon, eastLon,
-                            otherWestLon, otherEastLon, northLat, southLat );
+        boundingLineString << GeoDataCoordinates( lon, lat );
     }
 
-    for ( int y = screenRect.bottom(); y < screenRect.top(); y+=yStep ) {
-        if ( geoCoordinates( screenRect.left(), y, viewport, lon, lat, 
+    for ( int y = mapRect.bottom(); y < mapRect.top(); y += latLonAltBoxSamplingRate ) {
+        if ( geoCoordinates( mapRect.left(), y, viewport, lon, lat,
                              GeoDataCoordinates::Radian ) ) {
-            coordinateExtremes( lon, lat, westLon, eastLon,
-                                otherWestLon, otherEastLon,
-                                northLat, southLat );
+            boundingLineString << GeoDataCoordinates( lon, lat );
         }
 
-        if ( geoCoordinates( screenRect.right(), y,
+        if ( geoCoordinates( mapRect.right(), y,
                              viewport, lon, lat, GeoDataCoordinates::Radian ) ) {
-            coordinateExtremes( lon, lat, westLon, eastLon,
-                                otherWestLon, otherEastLon,
-                                northLat, southLat );
+            boundingLineString << GeoDataCoordinates( lon, lat );
         }
     }
 
-    // DateLine check:
-    if ( ( M_PI - eastLon ) < 0.05
-         && ( westLon + M_PI ) < 0.05
-         && fabs( otherEastLon ) > 0.05
-         && fabs( otherWestLon ) > 0.05 )
-    {
-        westLon = otherWestLon;
-        eastLon = otherEastLon;
-    }
-
+    GeoDataLatLonAltBox latLonAltBox = boundingLineString.latLonAltBox();
+    
     // Now we need to check whether maxLat (e.g. the north pole) gets displayed
     // inside the viewport.
 
     // We need a point on the screen at maxLat that definetely gets displayed:
-    qreal averageLongitude = ( westLon + eastLon ) / 2.0;
+
+    // FIXME: Some of the following code can be safely removed as soon as we properly handle
+    //        GeoDataLinearRing::latLonAltBox().
+    qreal averageLongitude = ( latLonAltBox.west() + latLonAltBox.east() ) / 2.0;
 
     GeoDataCoordinates maxLatPoint( averageLongitude, m_maxLat, 0.0, GeoDataCoordinates::Radian );
     GeoDataCoordinates minLatPoint( averageLongitude, m_minLat, 0.0, GeoDataCoordinates::Radian );
 
     qreal dummyX, dummyY; // not needed
 
-    if ( screenCoordinates( maxLatPoint, viewport, dummyX, dummyY ) ) {
-        northLat = m_maxLat;
+    if ( latLonAltBox.north() > m_maxLat ||
+         screenCoordinates( maxLatPoint, viewport, dummyX, dummyY ) ) {
+        latLonAltBox.setNorth( m_maxLat );
     }
-    if ( screenCoordinates( minLatPoint, viewport, dummyX, dummyY ) ) {
-        southLat = m_minLat;
+    if ( latLonAltBox.north() < m_minLat ||
+         screenCoordinates( minLatPoint, viewport, dummyX, dummyY ) ) {
+        latLonAltBox.setSouth( m_minLat );
     }
-
-    GeoDataLatLonAltBox latLonAltBox;
-    latLonAltBox.setBoundaries( northLat, southLat, eastLon, westLon, 
-                                GeoDataCoordinates::Radian  );
 
     latLonAltBox.setMinAltitude(      -100000000.0 );
     latLonAltBox.setMaxAltitude( 100000000000000.0 );
@@ -150,18 +327,6 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
     return latLonAltBox;
 }
 
-void AbstractProjection::coordinateExtremes( qreal lon, qreal lat,
-                                             qreal &westLon, qreal &eastLon,
-                                             qreal &otherWestLon, qreal &otherEastLon,
-                                             qreal &northLat, qreal &southLat )
-{
-    if ( lon < westLon ) westLon = lon;
-    if ( lon < otherWestLon && lon > 0.0 ) otherWestLon = lon;
-    if ( lon > eastLon ) eastLon = lon;
-    if ( lon > otherEastLon && lon < 0.0 ) otherEastLon = lon;
-    if ( lat > northLat ) northLat = lat;
-    if ( lat < southLat ) southLat = lat;
-}
 
 bool AbstractProjection::exceedsLatitudeRange( const GeoDataLineString &lineString ) const
 {
@@ -246,22 +411,14 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
 //        qDebug() << "Don't RespectLatitudeCircle";
     }
     
-    qreal altDiff = currentCoords.altitude() - previousAltitude;
 
-    // Take the clampToGround property into account
-    int startNode = 1;
-    const int endNode = tessellatedNodes - 2;
-
-    qreal  lon = 0.0;
-    qreal  lat = 0.0;
     qreal     x = 0;
     qreal     y = 0;
-    Quaternion  itpos;
 
     // Declare current values.
-    QPointF point;
     bool globeHidesPoint = false;
 
+    // Take the clampToGround property into account
     // For the clampToGround case add the "previous" coordinate before adding any other node. 
     if ( clampToGround && previousAltitude != 0.0 ) {
           bool visible = screenCoordinates( previousCoords, viewport, x, y, globeHidesPoint );
@@ -278,6 +435,15 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
     if ( !globeHidesPoint ) {
         path << QPointF( x, y );
     }
+
+    qreal  lon = 0.0;
+    qreal  lat = 0.0;
+    Quaternion  itpos;
+
+    qreal altDiff = currentCoords.altitude() - previousAltitude;
+
+    int startNode = 1;
+    const int endNode = tessellatedNodes - 2;
 
     // Create the tessellation nodes.
     for ( int i = startNode; i <= endNode; ++i ) {
@@ -300,11 +466,10 @@ QPolygonF AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &p
         }
 
         screenCoordinates( GeoDataCoordinates( lon, lat, altitude ), viewport, x, y, globeHidesPoint );
-        point = QPointF( x, y );
 
         // No "else" here, as this would not add the current point that is required.
         if ( !globeHidesPoint ) {
-            path << point;
+            path << QPointF( x, y );
         }
     }
 

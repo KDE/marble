@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2007-2009 Torsten Rahn  <rahn@kde.org>
 //
 
 
@@ -17,6 +18,7 @@
  * This file contains the headers for MercatorProjection.
  *
  * @author Inge Wallin  <inge@lysator.liu.se>
+ * @author Torsten Rahn <rahn@kde.org>
  */
 
 
@@ -40,6 +42,10 @@ class MercatorProjection : public AbstractProjection
     MercatorProjection();
 
     virtual ~MercatorProjection();
+
+    virtual SurfaceType surfaceType() const { return Cylindrical; }
+
+    virtual PreservationType preservationType() const { return Conformal; }
 
     AbstractProjectionHelper *helper();
 
@@ -65,10 +71,6 @@ class MercatorProjection : public AbstractProjection
                             qreal *x, qreal &y, int &pointRepeatNum,
                             const QSizeF& size,
                             bool &globeHidesPoint );
-
-    bool screenCoordinates( const GeoDataLineString &lineString, 
-                            const ViewportParams *viewport,
-                            QVector<QPolygonF *> &polygons );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.

@@ -45,6 +45,10 @@ class SphericalProjection : public AbstractProjection
 
     virtual ~SphericalProjection();
 
+    virtual SurfaceType surfaceType() const { return Azimuthal; }
+
+    virtual PreservationType preservationType() const { return NoPreservation; }
+
     AbstractProjectionHelper *helper();
 
     /**
@@ -69,10 +73,6 @@ class SphericalProjection : public AbstractProjection
                             qreal *x, qreal &y, int &pointRepeatNum,
                             const QSizeF& size,
                             bool &globeHidesPoint );
-
-    bool screenCoordinates( const GeoDataLineString &lineString, 
-                            const ViewportParams *viewport,
-                            QVector<QPolygonF *> &polygons );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.

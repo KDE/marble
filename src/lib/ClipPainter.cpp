@@ -46,6 +46,8 @@ class ClipPainterPrivate
     QPointF    m_currentPoint;
     QPointF    m_previousPoint; 
 
+    inline int sector( const QPointF & point ) const;
+
     inline QPointF clipTop( qreal m, const QPointF & point ) const;
     inline QPointF clipLeft( qreal m, const QPointF & point ) const;
     inline QPointF clipBottom( qreal m, const QPointF & point ) const;
@@ -146,11 +148,18 @@ void ClipPainter::drawPolygon ( const QPolygonF & polygon,
                 // qDebug() << "Size: " << clippedPolyObject.size();
                 QPainter::drawPolygon ( clippedPolyObject, fillRule );
                 // qDebug() << "done";
+                #ifdef DEBUG_DRAW_NODES
+                    d->debugDrawNodes( clippedPolyObject );
+                #endif
             }
         }
     }
     else {
         QPainter::drawPolygon ( polygon, fillRule );
+
+        #ifdef DEBUG_DRAW_NODES
+            d->debugDrawNodes( polygon );
+        #endif
     }
 }
 
@@ -395,24 +404,43 @@ QPointF ClipPainterPrivate::clipRight( qreal m, const QPointF & point ) const
     return QPointF( m_right, ( m_right - point.x() ) * m + point.y() );
 }
 
-
-void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon, 
-                                          QVector<QPolygonF> & clippedPolyObjects,
-                                          bool isClosed )
+int ClipPainterPrivate::sector( const QPointF & point ) const
 {
     // If we think of the image borders as (infinitly long) parallel
     // lines then the plane is divided into 9 sectors.  Each of these
     // sections is identified by a unique keynumber (currentSector):
     //
-    //	0 | 1 | 2
+    //  0 | 1 | 2
     //  --+---+--
-    //	3 | 4 | 5 <- sector number "4" represents the onscreen sector / viewport
+    //  3 | 4 | 5 <- sector number "4" represents the onscreen sector / viewport
     //  --+---+--
-    //	6 | 7 | 8
+    //  6 | 7 | 8
     //
 
+    // Figure out the section of the current point.
+    int xSector = 1;
+    if ( point.x() < m_left )
+        xSector = 0;
+    else if ( point.x() > m_right )
+        xSector = 2;
+
+    int ySector = 3;
+    if ( point.y() < m_top )
+        ySector = 0;
+    else if ( point.y() > m_bottom )
+        ySector = 6;
+
+    // By adding xSector and ySector we get a
+    // sector number of the values shown in the ASCII-art graph above.
+    return ySector + xSector;
+
+}
+
+void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon, 
+                                          QVector<QPolygonF> & clippedPolyObjects,
+                                          bool isClosed )
+{
     //	qDebug() << "ClipPainter enabled." ;
-    // clippedPolyObjects.clear();
 
     // Only create a new polyObject as soon as we know for sure that 
     // the current point is on the screen. 
@@ -422,40 +450,38 @@ void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon,
     const QVector<QPointF>::const_iterator  itEndPoint   = polygon.constEnd();
     QVector<QPointF>::const_iterator        itPoint      = itStartPoint;
 
-    for (; itPoint != itEndPoint; ++itPoint ) {
+    // We use a while loop to be able to cover linestrings as well as linear rings:
+    // Linear rings require to tessellate the path from the last node to the first node
+    // which isn't really convenient to achieve with a for loop ...
 
+    bool processingLastNode = false;
+
+    while ( itPoint != itEndPoint ) {
         m_currentPoint = (*itPoint);
         // qDebug() << "m_currentPoint.x()" << m_currentPoint.x() << "m_currentPOint.y()" << m_currentPoint.y();
 
-        // Figure out the section of the current point.
-        int currentXSector = 1;
-        if ( m_currentPoint.x() < m_left )
-            currentXSector = 0;
-        else if ( m_currentPoint.x() > m_right ) 
-            currentXSector = 2;
-							
-        int currentYSector = 3;
-        if ( m_currentPoint.y() < m_top ) 
-            currentYSector = 0;
-        else if ( m_currentPoint.y() > m_bottom ) 
-            currentYSector = 6;
+        // Figure out the sector of the current point.
+        m_currentSector = sector( m_currentPoint );
 
-        // By adding m_currentXSector and m_currentYSector we get a 
-        // sector number of the values shown in the ASCII-art graph above.
-        m_currentSector = currentYSector + currentXSector;
+        // Initialize the variables related to the previous point.
+        if ( itPoint == itStartPoint && processingLastNode == false ) {
+            if ( isClosed ) {
+                m_previousPoint = polygon.last();
 
-        // Initialize a few remaining variables.
-        if ( itPoint == itStartPoint ) {
-            m_previousSector = m_currentSector;
+                // Figure out the sector of the previous point.
+                m_previousSector = sector( m_previousPoint );
+            }
+            else {
+                m_previousSector = m_currentSector;
+            }
         }
 
         // If the current point reaches a new sector, take care of clipping.
         if ( m_currentSector != m_previousSector ) {
             if ( m_currentSector == 4 || m_previousSector == 4 ) {
-                // This is just the case where either the current or the 
-                // previous point is visible on the screen but not both. 
-                // Hence we only need to clip once and require only one interpolation 
-                // for both cases.
+                // In this case the current or the previous point is visible on the
+                // screen but not both. Hence we only need to clip once and require
+                // only one interpolation for both cases.
 
                 clipOnce( clippedPolyObject, clippedPolyObjects, isClosed );
             }
@@ -480,6 +506,19 @@ void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon,
         }
 
         m_previousPoint = m_currentPoint;
+
+        // Now let's handle the case where we have a (closed) polygon and where the
+        // last point of the polyline is outside the viewport and the start point
+        // is inside the viewport. This needs special treatment
+        if ( processingLastNode ) {
+            break;
+        }
+        ++itPoint;
+
+        if ( itPoint == itEndPoint  && isClosed ) {
+            itPoint = itStartPoint;
+            processingLastNode = true;
+        }
     }
 
     // Only add the pointer if there's node data available.

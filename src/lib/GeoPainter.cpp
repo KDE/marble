@@ -484,7 +484,6 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates, qreal 
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( !isGeoProjected ) {
-        // FIXME: Better visibility detection that takes the circle geometry into account
         bool visible = projection->screenCoordinates( centerCoordinates, 
                        d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 

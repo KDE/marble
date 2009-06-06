@@ -321,14 +321,10 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     
     // c is for cardinal directions and is short which saves space in regexps
     QStringList c; 
-    c << QCoreApplication::translate( "GeoDataCoordinates", //can't use QObject::tr()
-                        "North", "The compass direction" ).toLower();
-    c << QCoreApplication::translate( "GeoDataCoordinates", 
-                        "East",  "The compass direction" ).toLower();
-    c << QCoreApplication::translate( "GeoDataCoordinates", 
-                        "South", "The compass direction" ).toLower();
-    c << QCoreApplication::translate( "GeoDataCoordinates", 
-                        "West",  "The compass direction" ).toLower();
+    c << tr( "North", "The compass direction" ).toLower();
+    c << tr( "East",  "The compass direction" ).toLower();
+    c << tr( "South", "The compass direction" ).toLower();
+    c << tr( "West",  "The compass direction" ).toLower();
     QRegExp regex; //the main regex we use
     QString regexstr; // temp. string for constructing the regex
     QString dec( QLocale::system().decimalPoint() ); //for regex construction
@@ -548,7 +544,7 @@ QString GeoDataCoordinates::lonToString( qreal lon, GeoDataCoordinates::Notation
                                                     int precision,
                                                     char format )
 {
-    QString weString = ( lon < 0 ) ? QCoreApplication::tr("W") : QCoreApplication::tr("E");  
+    QString weString = ( lon < 0 ) ? tr("W") : tr("E");
 
     QString lonString;
 
@@ -622,7 +618,7 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
                                                     int precision,
                                                     char format )
 {
-    QString nsString = ( lat > 0 ) ? QCoreApplication::tr("N") : QCoreApplication::tr("S");  
+    QString nsString = ( lat > 0 ) ? tr("N") : tr("S");
 
     QString latString;
 
