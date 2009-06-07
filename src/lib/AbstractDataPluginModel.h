@@ -151,6 +151,11 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      */
     void processFinishedJob( const QString& relativeUrlString, const QString& id );
     
+    /**
+     * @brief Removes the item from the list.
+     */
+    void removeItem( QObject *item );
+    
  private:
     AbstractDataPluginModelPrivate * const d;
 };

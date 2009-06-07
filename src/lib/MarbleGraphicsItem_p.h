@@ -18,12 +18,16 @@
 #include<QtCore/QList>
 #include<QtCore/QSize>
 #include<QtCore/QRect>
+#include<QtGui/QPixmap>
 
 namespace Marble {
 
 class MarbleGraphicsItemPrivate {
  public:
-    MarbleGraphicsItemPrivate() {
+    MarbleGraphicsItemPrivate()
+        : m_needsUpdate( true ),
+          m_cacheMode( MarbleGraphicsItem::NoCache )
+    {
     }
     
     virtual ~MarbleGraphicsItemPrivate() {
@@ -54,11 +58,14 @@ class MarbleGraphicsItemPrivate {
         Q_UNUSED( viewport );
     };
     
+    bool m_needsUpdate;
+    
     QSize m_size;
+    QSize m_logicalCacheSize;
     
     MarbleGraphicsItem::CacheMode m_cacheMode;
     
-    QSize m_logicalCacheSize;
+    QPixmap m_cachePixmap;
 };
 
 }
