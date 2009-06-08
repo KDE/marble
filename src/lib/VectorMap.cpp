@@ -24,7 +24,6 @@
 #include "GeoPainter.h"
 #include "GeoPolygon.h"
 #include "ViewportParams.h"
-#include "AbstractProjectionHelper.h"
 #include "MathHelper.h"
 
 // #define VECMAP_DEBUG 
@@ -692,17 +691,15 @@ void VectorMap::mercatorCreatePolyLine(
 //
 // FIXME: This is a strange thing to have in the vector code. 
 //        Move it somewhere better.
-// FIXME: Btw, we shouldn't assume that the globe to paint is the earth.
 //
 void VectorMap::paintBase( GeoPainter * painter, ViewportParams* viewport,
 			   bool antialiasing )
 {
-    // The paintBase function is projection dependent, and it's not
-    // just a mathematical conversion, so it's located in the
-    // projection helper.
-    viewport->currentProjection()->helper()->paintBase( painter, viewport,
-							m_pen, m_brush,
-							antialiasing );
+    painter->setRenderHint( QPainter::Antialiasing, antialiasing );
+    painter->setPen( m_pen );
+    painter->setBrush( m_brush );
+
+    painter->drawPath( viewport->currentProjection()->mapShape( viewport ) );
 }
 
 

@@ -197,7 +197,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Return the projected region which describes the (shape of the) projected surface.
      */
-    const QRegion  projectedRegion();
+    const QRegion  mapRegion();
 
     /**
      * @brief  Return the radius of the globe in pixels.

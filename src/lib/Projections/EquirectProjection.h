@@ -44,11 +44,12 @@ class EquirectProjection : public AbstractProjection
 
     virtual ~EquirectProjection();
 
+    virtual bool traversablePoles()  const { return false; }
+    virtual bool traversableDateLine()  const { return false; }
+
     virtual SurfaceType surfaceType() const { return Cylindrical; }
 
     virtual PreservationType preservationType() const { return NoPreservation; }
-
-    AbstractProjectionHelper *helper();
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
@@ -91,6 +92,8 @@ class EquirectProjection : public AbstractProjection
                                       const ViewportParams *viewport );
 
     bool mapCoversViewport( const ViewportParams *viewport ) const;
+
+    virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
 
  private:
     //EquirectProjectionPrivate  * const d;

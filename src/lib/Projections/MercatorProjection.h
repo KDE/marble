@@ -43,11 +43,12 @@ class MercatorProjection : public AbstractProjection
 
     virtual ~MercatorProjection();
 
+    virtual bool traversablePoles() const { return false; }
+    virtual bool traversableDateLine() const { return false; }
+
     virtual SurfaceType surfaceType() const { return Cylindrical; }
 
     virtual PreservationType preservationType() const { return Conformal; }
-
-    AbstractProjectionHelper *helper();
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
@@ -90,6 +91,8 @@ class MercatorProjection : public AbstractProjection
                                       const ViewportParams *viewport );
 
     bool  mapCoversViewport( const ViewportParams *viewport ) const;
+
+    virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
 
  private:
     //MercatorProjectionPrivate  * const d;

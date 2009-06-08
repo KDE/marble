@@ -13,14 +13,11 @@
 #include "EquirectProjection.h"
 
 // Marble
-#include "EquirectProjectionHelper.h"
 #include "ViewportParams.h"
 
 #include <QtCore/QDebug>
 
 using namespace Marble;
-
-static EquirectProjectionHelper  theHelper;
 
 
 EquirectProjection::EquirectProjection()
@@ -28,17 +25,11 @@ EquirectProjection::EquirectProjection()
 {
     m_maxLat  = +90.0 * DEG2RAD;
     m_minLat  = -90.0 * DEG2RAD;
-    m_traversablePoles = false;
     m_repeatX = true;
 }
 
 EquirectProjection::~EquirectProjection()
 {
-}
-
-AbstractProjectionHelper *EquirectProjection::helper()
-{
-    return &theHelper;
 }
 
 bool EquirectProjection::screenCoordinates( qreal lon, qreal lat,
@@ -317,3 +308,34 @@ bool EquirectProjection::mapCoversViewport( const ViewportParams *viewport ) con
     return true;
 }
 
+QPainterPath EquirectProjection::mapShape( const ViewportParams *viewport ) const
+{
+    // Convenience variables
+    int  radius = viewport->radius();
+    int  width  = viewport->width();
+    int  height = viewport->height();
+
+    // Calculate translation of center point
+    qreal  centerLon;
+    qreal  centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
+
+    int yCenterOffset = (int)( centerLat * (qreal)( 2 * radius ) / M_PI );
+    int yTop          = height / 2 - radius + yCenterOffset;
+    int yBottom       = yTop + 2 * radius;
+
+    // Don't let the map area be outside the image
+    if ( yTop < 0 )
+        yTop = 0;
+    if ( yBottom > height )
+        yBottom =  height;
+
+    QPainterPath mapShape;
+    mapShape.addRect(
+                    0,
+                    yTop,
+                    width,
+                    yBottom - yTop );
+
+    return mapShape;
+}
