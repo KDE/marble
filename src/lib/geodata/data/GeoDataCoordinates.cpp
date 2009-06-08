@@ -678,7 +678,6 @@ QString GeoDataCoordinates::latToString( qreal lat, GeoDataCoordinates::Notation
     {
         latString = QString("%L1\xb0").arg(latDegF, 4 + precision, format, precision, QChar(' ') );
     }
-
     return latString + nsString;
 }
 

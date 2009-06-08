@@ -99,6 +99,8 @@ class MARBLE_EXPORT ViewportParams
 
     bool  mapCoversViewport() const;
 
+    QRegion activeRegion() const;
+
  private:
     Q_DISABLE_COPY( ViewportParams )
     ViewportParamsPrivate * const d;

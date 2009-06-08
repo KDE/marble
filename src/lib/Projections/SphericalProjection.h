@@ -45,11 +45,12 @@ class SphericalProjection : public AbstractProjection
 
     virtual ~SphericalProjection();
 
+    virtual bool traversablePoles()  const { return true; }
+    virtual bool traversableDateLine()  const { return true; }
+
     virtual SurfaceType surfaceType() const { return Azimuthal; }
 
     virtual PreservationType preservationType() const { return NoPreservation; }
-
-    AbstractProjectionHelper *helper();
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
@@ -104,6 +105,8 @@ class SphericalProjection : public AbstractProjection
                                       const ViewportParams *viewport );
 
     bool  mapCoversViewport( const ViewportParams *viewport ) const;
+
+    virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
 
     GeoDataCoordinates  createHorizonCoordinates( const GeoDataCoordinates &previousCoords, 
                                                   const GeoDataCoordinates &currentCoords, 

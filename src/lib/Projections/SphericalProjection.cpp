@@ -15,7 +15,6 @@
 #include <QtCore/QDebug>
 
 // Marble
-#include "SphericalProjectionHelper.h"
 #include "ViewportParams.h"
 #include "GeoDataPoint.h"
 #include "global.h"
@@ -24,8 +23,6 @@
 
 namespace Marble
 {
-
-static SphericalProjectionHelper  theHelper;
 
 // Since SphericalProjection does not have members yet, the
 // private class for the members is empty.
@@ -41,7 +38,6 @@ SphericalProjection::SphericalProjection()
 {
     m_maxLat  = 90.0 * DEG2RAD;
     m_minLat  = -90.0 * DEG2RAD;
-    m_traversablePoles = true;
     m_repeatX = false;
 }
 
@@ -49,11 +45,6 @@ SphericalProjection::~SphericalProjection()
 {
    //For the future
    //delete d;
-}
-
-AbstractProjectionHelper *SphericalProjection::helper()
-{
-    return &theHelper;
 }
 
 bool SphericalProjection::screenCoordinates( qreal lon, qreal lat,
@@ -295,6 +286,33 @@ bool SphericalProjection::mapCoversViewport( const ViewportParams *viewport ) co
 
     return false;
 }
+
+QPainterPath SphericalProjection::mapShape( const ViewportParams *viewport ) const
+{
+    int  radius    = viewport->radius();
+    int  imgWidth  = viewport->width();
+    int  imgHeight = viewport->height();
+
+    QPainterPath fullRect;
+    fullRect.addRect(  0 , 0 , imgWidth, imgHeight );
+
+    // If the globe covers the whole image, then the projected region represents
+    // all of the image.
+    // Otherwise the active region has got the shape of the visible globe.
+
+    if ( !viewport->mapCoversViewport() ) {
+        QPainterPath mapShape;
+        mapShape.addEllipse(
+            imgWidth  / 2 - radius,
+            imgHeight / 2 - radius,
+            2 * radius,
+            2 * radius );
+        return mapShape.intersected( fullRect );
+    }
+
+    return fullRect;
+}    
+
 
 GeoDataCoordinates SphericalProjection::createHorizonCoordinates( 
                                             const GeoDataCoordinates &previousCoords, 

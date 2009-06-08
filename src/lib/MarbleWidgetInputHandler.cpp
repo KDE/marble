@@ -361,7 +361,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         else {
             m_leftpressed = false;
 
-            QRect boundingRect = m_widget->projectedRegion().boundingRect();
+            QRect boundingRect = m_widget->mapRegion().boundingRect();
 
             if ( boundingRect.width() != 0 )
             {

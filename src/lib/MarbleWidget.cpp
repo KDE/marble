@@ -45,7 +45,6 @@
 #include "gps/GpsLayer.h"
 #include "SunLocator.h"
 #include "MergedLayerDecorator.h"
-#include "AbstractProjectionHelper.h"
 #include "ViewportParams.h"
 
 #include "MarbleMap_p.h"
@@ -755,12 +754,12 @@ qreal MarbleWidget::centerLongitude() const
 
 const QRegion MarbleWidget::activeRegion()
 {
-    return d->m_map->viewParams()->currentProjection()->helper()->activeRegion();
+    return d->m_map->viewParams()->viewport()->activeRegion();
 }
 
-const QRegion MarbleWidget::projectedRegion()
+const QRegion MarbleWidget::mapRegion()
 {
-    return d->m_map->viewParams()->currentProjection()->helper()->projectedRegion();
+    return d->m_map->viewParams()->currentProjection()->mapRegion( d->m_map->viewParams()->viewport() );
 }
 
 void MarbleWidget::paintEvent(QPaintEvent *evt)

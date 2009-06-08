@@ -23,6 +23,7 @@
 
 #include <QtCore/QRect>
 #include <QtCore/QVector>
+#include <QtGui/QPainterPath>
 #include <QtGui/QPolygonF>
 
 #include "GeoDataLatLonAltBox.h"
@@ -73,12 +74,12 @@ class AbstractProjection
 
     virtual qreal  maxLat()  const        { return m_maxLat; }
     virtual qreal  minLat()  const        { return m_minLat; }
-    virtual bool   traversablePoles()  const        { return m_traversablePoles; }
 
     virtual bool   repeatX() const        { return m_repeatX; }
     virtual void   setRepeatX( bool val ) { m_repeatX = val;  }
 
-    virtual AbstractProjectionHelper *helper() { return 0; }
+    virtual bool   traversablePoles()  const        { return false; }
+    virtual bool   traversableDateLine()  const     { return false; }
 
     virtual SurfaceType surfaceType() const = 0; 
 
@@ -90,11 +91,6 @@ class AbstractProjection
     // - oblique: somewhere in between
 
     virtual bool   isOrientedNormal() const        { return true; }
-
-/*
-    TODO: To be considered ...
-    virtual int     xRepeatDistance() const { return 4 * viewport->radius(); }
-*/
 
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
@@ -184,16 +180,22 @@ class AbstractProjection
                                  qreal& lon, qreal& lat,
                                  Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Degree ) = 0;
 
+
     virtual Marble::GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
                                                       const ViewportParams *viewport );
-
-    virtual bool mapCoversViewport( const ViewportParams *viewport ) const = 0;
 
     bool exceedsLatitudeRange( const GeoDataCoordinates& coords ) const;
 
     bool exceedsLatitudeRange( const GeoDataLineString& lineString ) const;
 
-    // The usage of the following methods is deprecated!
+
+    virtual bool mapCoversViewport( const ViewportParams *viewport ) const = 0;
+
+    virtual QPainterPath mapShape( const ViewportParams *viewport ) const = 0;
+
+    QRegion mapRegion( const ViewportParams *viewport ) const;
+
+    // The usage of the following methods is DEPRECATED!
 
     /* DEPRECATED */
     bool screenCoordinates( qreal lon, qreal lat,
@@ -209,9 +211,16 @@ class AbstractProjection
     //AbstractProjectionPrivate  * const d;  Not exported so no need.
 
     qreal  m_maxLat;               // The max latitude.  Not always 90 degrees.
-    qreal  m_minLat;               // The min latitude. Not always the same as maxLat.
-    qreal  m_traversablePoles;    // Whether it's possible to center beyond maxLat.
+    qreal  m_minLat;               // The min latitude.  Not always the same as maxLat.
     bool   m_repeatX;              // Map repeated in X direction.
+
+    virtual void tessellateHorizon( const GeoDataCoordinates &previousCoords,
+                                    const GeoDataCoordinates &currentCoords,
+                                    const ViewportParams *viewport );
+
+    bool lineStringToPolygon( const GeoDataLineString &lineString,
+                                    const ViewportParams *viewport,
+                                    QVector<QPolygonF*> &polygons );
 
     // This method tesselates a line segment in a way that the line segment
     // follows great circles. The count parameter specifies the 

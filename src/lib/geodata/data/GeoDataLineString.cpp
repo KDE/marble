@@ -122,6 +122,7 @@ QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constEnd() const
 void GeoDataLineString::append ( const GeoDataCoordinates& value )
 {
     GeoDataGeometry::detach();
+    p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
     p()->m_vector.append( value );
 }
@@ -129,6 +130,7 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
 GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& value )
 {
     GeoDataGeometry::detach();
+    p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
     p()->m_vector.append( value );
     return *this;
@@ -137,6 +139,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& va
 void GeoDataLineString::clear()
 {
     GeoDataGeometry::detach();
+    p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
 
     p()->m_vector.clear();
@@ -181,11 +184,14 @@ void GeoDataLineString::setTessellationFlags( TessellationFlags f )
 
 GeoDataLineString GeoDataLineString::toPoleCorrected() const
 {
+/*
     if ( p()->m_poleCorrected ) {
         return *(p()->m_poleCorrected);
     }
     
     p()->m_poleCorrected = new GeoDataLineString( p()->m_tessellationFlags );
+*/
+    GeoDataLineString poleCorrected;
 
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
@@ -196,7 +202,8 @@ GeoDataLineString GeoDataLineString::toPoleCorrected() const
                 qreal firstLongitude = ( p()->m_vector.first() ).longitude();
                 GeoDataCoordinates modifiedCoords( p()->m_vector.last() );
                 modifiedCoords.setLongitude( firstLongitude );
-                *(p()->m_poleCorrected) << modifiedCoords;
+                poleCorrected << modifiedCoords;
+//                *(p()->m_poleCorrected) << modifiedCoords;
         }
     }
 
@@ -219,7 +226,8 @@ GeoDataLineString GeoDataLineString::toPoleCorrected() const
                 qreal previousLongitude = previousCoords.longitude();
                 GeoDataCoordinates currentModifiedCoords( currentCoords );
                 currentModifiedCoords.setLongitude( previousLongitude );
-                *(p()->m_poleCorrected) << currentModifiedCoords;
+                poleCorrected << currentModifiedCoords;
+//                *(p()->m_poleCorrected) << currentModifiedCoords;
             }
         }
         else {
@@ -227,12 +235,15 @@ GeoDataLineString GeoDataLineString::toPoleCorrected() const
                 qreal currentLongitude = currentCoords.longitude();
                 GeoDataCoordinates previousModifiedCoords( previousCoords );
                 previousModifiedCoords.setLongitude( currentLongitude );
-                *(p()->m_poleCorrected) << previousModifiedCoords;
-                *(p()->m_poleCorrected) << currentCoords;
+                poleCorrected << previousModifiedCoords;
+                poleCorrected << currentCoords;
+//                *(p()->m_poleCorrected) << previousModifiedCoords;
+//                *(p()->m_poleCorrected) << currentCoords;
             }
             else {
-                // No poles at all. Nothing to handle
-                *(p()->m_poleCorrected) << currentCoords;
+                // No poles at all. Nothing special to handle
+                poleCorrected << currentCoords;
+//                *(p()->m_poleCorrected) << currentCoords;
             }
         }
         previousCoords = currentCoords;
@@ -244,11 +255,87 @@ GeoDataLineString GeoDataLineString::toPoleCorrected() const
                 qreal lastLongitude = ( p()->m_vector.last() ).longitude();
                 GeoDataCoordinates modifiedCoords( p()->m_vector.first() );
                 modifiedCoords.setLongitude( lastLongitude );
-                *(p()->m_poleCorrected) << modifiedCoords;                
+                poleCorrected << modifiedCoords;
+//                *(p()->m_poleCorrected) << modifiedCoords;
         }
     }
     
-    return *(p()->m_poleCorrected);
+    return poleCorrected;
+//    return *(p()->m_poleCorrected);
+}
+
+QVector<GeoDataLineString> GeoDataLineString::toRangeCorrected() const
+{
+    if ( p()->m_dirtyRange ) {
+
+        p()->m_rangeCorrected.clear();
+
+        // Normalization
+        // TODO
+
+        // PoleCorrection
+        GeoDataLineString poleCorrectedLineString;
+        poleCorrectedLineString = toPoleCorrected();
+
+        // DateLine Correction
+        p()->m_rangeCorrected = poleCorrectedLineString.toDateLineCorrected();
+    }
+
+    return p()->m_rangeCorrected;
+}
+
+
+QVector<GeoDataLineString> GeoDataLineString::toDateLineCorrected() const
+{
+//    qDebug() << Q_FUNC_INFO;
+    QVector<GeoDataLineString> lineStrings;
+
+    const QVector<GeoDataCoordinates>::const_iterator itStartPoint = constBegin();
+    const QVector<GeoDataCoordinates>::const_iterator itEndPoint = constEnd();
+    QVector<GeoDataCoordinates>::const_iterator itPoint = itStartPoint;
+    QVector<GeoDataCoordinates>::const_iterator itPreviousPoint = itPoint;
+
+    GeoDataLineString dateLineCorrected;
+
+    qreal currentLon = 0.0;
+    qreal previousLon = 0.0;
+    int previousSign = 1;
+
+    for (; itPoint != itEndPoint; ++itPoint ) {
+        currentLon = itPoint->longitude();
+
+        int currentSign = ( currentLon > 0.0 ) ? 1 : -1 ;
+
+        if( itPoint == constBegin() ) {
+            previousSign = currentSign;
+            previousLon  = currentLon;
+        }
+
+        if ( previousSign != currentSign && fabs(previousLon) + fabs(currentLon) > M_PI ) {
+            qDebug() << "DateLineCorrected";
+            // FIXME: Interpolate temporary points
+            GeoDataCoordinates previousTemp( *itPreviousPoint );
+            previousTemp.setLongitude( previousSign * M_PI );
+            dateLineCorrected << previousTemp;
+            lineStrings << dateLineCorrected;
+            dateLineCorrected.clear();
+            GeoDataCoordinates currentTemp( *itPoint );
+            currentTemp.setLongitude( currentSign * M_PI );
+            dateLineCorrected << currentTemp;
+            dateLineCorrected << *itPoint;
+            
+        }
+        else {
+            dateLineCorrected << *itPoint;
+        }
+
+        previousSign = currentSign;
+        previousLon  = currentLon;
+        itPreviousPoint = itPoint;
+    }
+
+    lineStrings << dateLineCorrected;
+    return lineStrings;
 }
 
 GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
@@ -268,6 +355,7 @@ GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator pos )
 {
     GeoDataGeometry::detach();
+    p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
     return p()->m_vector.erase( pos );
 }
@@ -276,6 +364,7 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
                                                                  QVector<GeoDataCoordinates>::Iterator end )
 {
     GeoDataGeometry::detach();
+    p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
     return p()->m_vector.erase( begin, end );
 }

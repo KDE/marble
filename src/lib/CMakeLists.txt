@@ -92,10 +92,6 @@ set(marblewidget_SRCS
     Projections/SphericalProjection.cpp
     Projections/EquirectProjection.cpp
     Projections/MercatorProjection.cpp
-    Projections/AbstractProjectionHelper.cpp
-    Projections/SphericalProjectionHelper.cpp
-    Projections/EquirectProjectionHelper.cpp
-    Projections/MercatorProjectionHelper.cpp
     MeasureTool.cpp
     ImageLoadThread.cpp
     VisiblePlacemark.cpp
@@ -294,10 +290,6 @@ else (APPLE AND QTONLY)
     Projections/SphericalProjection.h
     Projections/EquirectProjection.h
     Projections/MercatorProjection.h
-    Projections/AbstractProjectionHelper.h
-    Projections/SphericalProjectionHelper.h
-    Projections/EquirectProjectionHelper.h
-    Projections/MercatorProjectionHelper.h
     Quaternion.h
     SunLocator.h
     ClipPainter.h

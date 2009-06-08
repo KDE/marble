@@ -13,7 +13,6 @@
 #include "MercatorProjection.h"
 
 // Marble
-#include "MercatorProjectionHelper.h"
 #include "ViewportParams.h"
 
 #include "MathHelper.h"
@@ -21,29 +20,18 @@
 
 using namespace Marble;
 
-static MercatorProjectionHelper  theHelper;
-
-
 MercatorProjection::MercatorProjection()
     : AbstractProjection()
 {
     // This is the max value where atanh( sin( lat ) ) is defined.
     m_maxLat  = 85.05113 * DEG2RAD;
     m_minLat  = -85.05113 * DEG2RAD;
-    m_traversablePoles = false;
     m_repeatX = true;
 }
 
 MercatorProjection::~MercatorProjection()
 {
 }
-
-
-AbstractProjectionHelper *MercatorProjection::helper()
-{
-    return &theHelper;
-}
-
 
 bool MercatorProjection::screenCoordinates( qreal lon, qreal lat,
                                             const ViewportParams *viewport,
@@ -340,4 +328,42 @@ bool MercatorProjection::mapCoversViewport( const ViewportParams *viewport ) con
         return false;
 
     return true;
+}
+
+QPainterPath MercatorProjection::mapShape( const ViewportParams *viewport ) const
+{
+    // Convenience variables
+    //int  radius = viewport->radius();
+    int  width  = viewport->width();
+    int  height = viewport->height();
+
+    // Calculate translation of center point
+    qreal  centerLon;
+    qreal  centerLat;
+    viewport->centerCoordinates( centerLon, centerLat );
+
+    qreal  yTop;
+    qreal  yBottom;
+    qreal  xDummy;
+    AbstractProjection *proj = viewport->currentProjection();
+
+    // Get the top and bottom y coordinates of the projected map.
+    proj->screenCoordinates( 0.0, proj->maxLat(), viewport,
+                 xDummy, yTop );
+    proj->screenCoordinates( 0.0, proj->minLat(), viewport,
+                 xDummy, yBottom );
+
+    if ( yTop < 0 )
+        yTop = 0;
+    if ( yBottom > height )
+        yBottom =  height;
+
+    QPainterPath mapShape;
+    mapShape.addRect(
+                    0,
+                    yTop,
+                    width,
+                    yBottom - yTop );
+
+    return mapShape;
 }
