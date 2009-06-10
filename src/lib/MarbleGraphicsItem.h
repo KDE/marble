@@ -80,7 +80,7 @@ class MARBLE_EXPORT MarbleGraphicsItem {
      * Paints the item in item coordinates. This has to be reimplemented by the subclass
      * This function will be called by paintEvent().
      */
-    virtual bool paint( GeoPainter *painter, ViewportParams *viewport,
+    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
      
     virtual bool eventFilter( QObject *object, QEvent *e );

@@ -69,7 +69,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
             pixmapPainter.setRenderHint( QPainter::Antialiasing, true );
             // The cache image will get a 0.5 pixel bounding to save antialiasing effects.
             pixmapPainter.translate( 0.5, 0.5 );
-            successful = paint( &pixmapPainter, viewport, renderPos, layer );
+            paint( &pixmapPainter, viewport, renderPos, layer );
         }
         
         foreach( QPoint position, p()->positions() ) {
@@ -85,7 +85,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
             painter->save();
         
             painter->translate( position );
-            successful = paint( painter, viewport, renderPos, layer );
+            paint( painter, viewport, renderPos, layer );
         
             painter->restore();
         }

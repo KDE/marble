@@ -61,15 +61,13 @@ bool WikipediaItem::operator<( const AbstractDataPluginItem *other ) const {
     return this->id() < other->id();
 }
    
-bool WikipediaItem::paint( GeoPainter *painter, ViewportParams *viewport,
+void WikipediaItem::paint( GeoPainter *painter, ViewportParams *viewport,
                            const QString& renderPos, GeoSceneLayer * layer )
 {
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
     painter->drawPixmap( 0, 0, m_pixmap );
-    
-    return true;
 }
 
 qreal WikipediaItem::longitude() {

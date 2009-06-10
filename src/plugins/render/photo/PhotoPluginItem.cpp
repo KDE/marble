@@ -81,15 +81,13 @@ void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type
     }
 }
 
-bool PhotoPluginItem::paint( GeoPainter *painter, ViewportParams *viewport,
+void PhotoPluginItem::paint( GeoPainter *painter, ViewportParams *viewport,
                              const QString& renderPos, GeoSceneLayer * layer )
 {
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
     painter->drawPixmap( 0, 0, m_smallImage );
-    
-    return true;
 }
              
 bool PhotoPluginItem::operator<( const AbstractDataPluginItem *other ) const {
