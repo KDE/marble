@@ -392,12 +392,23 @@ void MeasureTool::drawTotalDistanceLabel( GeoPainter *painter,
 void MeasureTool::addMeasurePoint( qreal lon, qreal lat )
 {
     m_pMeasurePointList << new GeoDataCoordinates( lon, lat );
+
+    emit numberOfMeasurePointsChanged( m_pMeasurePointList.size() );
 }
 
+void MeasureTool::removeLastMeasurePoint()
+{
+    if (!m_pMeasurePointList.isEmpty())
+	m_pMeasurePointList.remove( m_pMeasurePointList.size() - 1 );
+
+    emit numberOfMeasurePointsChanged( m_pMeasurePointList.size() );
+}
 
 void MeasureTool::removeMeasurePoints()
 {
     m_pMeasurePointList.clear();
+
+    emit numberOfMeasurePointsChanged( m_pMeasurePointList.size() );
 }
 
 #include "MeasureTool.moc"

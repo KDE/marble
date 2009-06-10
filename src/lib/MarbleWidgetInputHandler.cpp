@@ -124,8 +124,12 @@ void MarbleWidgetDefaultInputHandler::init(MarbleWidget *w)
                        m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );
     connect( m_popupmenu, SIGNAL( addMeasurePoint( qreal, qreal ) ),
                        measureTool, SLOT( addMeasurePoint( qreal, qreal ) ) );
+    connect( m_popupmenu, SIGNAL( removeLastMeasurePoint() ),
+		       measureTool, SLOT( removeLastMeasurePoint() ) );
     connect( m_popupmenu, SIGNAL( removeMeasurePoints() ),
                        measureTool, SLOT( removeMeasurePoints( ) ) );  
+    connect( measureTool, SIGNAL( numberOfMeasurePointsChanged( int ) ),
+		       m_popupmenu, SLOT( slotNumberOfMeasurePointsChanged( int ) ) );
     connect( this, SIGNAL( lmbRequest( int, int ) ),
                        this,    SLOT( showLmbMenu( int, int ) ) );		       
 }
