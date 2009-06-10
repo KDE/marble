@@ -71,7 +71,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWi
     setCentralWidget( m_controlView );
     
     // Initializing config dialog
-    m_configDialog = new QtMarbleConfigDialog( this );
+    m_configDialog = new QtMarbleConfigDialog( m_controlView, this );
     connect( m_configDialog, SIGNAL( settingsChanged() ),
 	     this, SLOT( updateSettings() ) );
     connect( m_configDialog, SIGNAL( clearVolatileCacheClicked() ),
@@ -156,7 +156,7 @@ void MainWindow::createActions()
      m_lockFloatItemsAct = new QAction( tr("Lock Position"),this);
      m_lockFloatItemsAct->setCheckable( true );
      m_lockFloatItemsAct->setStatusTip(tr("Lock Position of Floating Items"));
-     connect(m_lockFloatItemsAct, SIGNAL(triggered( bool )), this, SLOT( lockPosition( bool )));
+     connect(m_lockFloatItemsAct, SIGNAL(toggled( bool )), this, SLOT( lockPosition( bool )));
 
      m_showCloudsAct = new QAction( tr("&Clouds"), this);
      m_showCloudsAct->setCheckable( true );
@@ -602,6 +602,8 @@ void MainWindow::readSettings()
 	 if ( m_configDialog->onStartup() == Marble::ShowHomeLocation ) {
 	    m_controlView->marbleWidget()->goHome();
 	 }
+         
+         m_lockFloatItemsAct->setChecked( settings.value( "lockFloatItemPositions", false ).toBool() );
      settings.endGroup();
      
      settings.beginGroup( "Sun" );
@@ -655,6 +657,8 @@ void MainWindow::writeSettings()
          settings.setValue( "quitLongitude", quitLon );
          settings.setValue( "quitLatitude", quitLat );
          settings.setValue( "quitZoom", quitZoom );
+         
+         settings.setValue( "lockFloatItemPositions", m_lockFloatItemsAct->isChecked() );
      settings.endGroup();
      
      settings.beginGroup( "Sun" );

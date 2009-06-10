@@ -515,6 +515,7 @@ void MarblePart::writeSettings()
     MarbleSettings::setProxyHttp( m_proxyHttp );
     MarbleSettings::setProxySocks5( m_proxySocks5 );
     
+    // Plugins
     QList<int>   pluginEnabled;
     QList<int>   pluginVisible;
     QStringList  pluginNameId;
@@ -961,11 +962,11 @@ void MarblePart::editSettings()
     connect( m_configDialog,   SIGNAL( settingsChanged( const QString &) ),
 	                       SLOT( slotUpdateSettings() ) );
     connect( m_configDialog,   SIGNAL( applyClicked() ),
-	                       SLOT( slotApply() ) );
+	                       SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( okClicked() ),
-	                       SLOT( slotApply() ) );
+	                       SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( cancelClicked() ),
-	                       SLOT( slotCancel() ) );
+	                       SLOT( retrievePluginState() ) );
 
     m_configDialog->show();
 }
@@ -975,7 +976,7 @@ void MarblePart::slotEnableButtonApply()
         m_configDialog->enableButtonApply( true );
 }
 
-void MarblePart::slotApply()
+void MarblePart::applyPluginState()
 {
     QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
@@ -984,7 +985,7 @@ void MarblePart::slotApply()
     }
 }
 
-void MarblePart::slotCancel()
+void MarblePart::retrievePluginState()
 {
     QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();

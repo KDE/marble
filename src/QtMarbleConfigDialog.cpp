@@ -26,14 +26,19 @@
 
 // Marble
 #include "lib/global.h"
+#include "ControlView.h"
+#include "lib/MarbleCacheSettingsWidget.h"
+#include "lib/MarblePluginSettingsWidget.h"
+#include "lib/MarbleWidget.h"
+#include "lib/RenderPlugin.h"
 
 using namespace Marble;
 
-QtMarbleConfigDialog::QtMarbleConfigDialog( QWidget *parent )
+QtMarbleConfigDialog::QtMarbleConfigDialog( ControlView *controlView, QWidget *parent )
     : QDialog( parent ),
       ui_viewSettings(),
-      ui_navigationSettings()
-      
+      ui_navigationSettings(),
+      m_controlView( controlView )
 {
     QTabWidget *tabWidget = new QTabWidget( this );
     QDialogButtonBox *buttons = 
@@ -88,6 +93,27 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( QWidget *parent )
     connect( w_cacheSettings,               SIGNAL( clearPersistentCache() ),
              this, SIGNAL( clearPersistentCacheClicked() ) );
     
+    // plugin page
+    m_pluginModel = new QStandardItemModel( this );
+    QStandardItem  *parentItem = m_pluginModel->invisibleRootItem();
+
+    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
+        parentItem->appendRow( (*i)->item() );
+    }
+
+    MarblePluginSettingsWidget *w_pluginSettings = new MarblePluginSettingsWidget( this );
+    w_pluginSettings->setModel( m_pluginModel );
+    w_pluginSettings->setObjectName( "plugin_page" );
+    tabWidget->addTab( w_pluginSettings, tr( "Plugins" ) );
+
+    connect( w_pluginSettings, SIGNAL( pluginListViewClicked() ),
+                               SLOT( slotEnableButtonApply() ) );
+    connect( this, SIGNAL( rejected() ), this, SLOT( retrievePluginState() ) );
+    connect( this, SIGNAL( accepted() ), this, SLOT( applyPluginState() ) );
+    
+    // Layout
     QVBoxLayout *layout = new QVBoxLayout( this );
     layout->addWidget( tabWidget );
     layout->addWidget( buttons );
@@ -175,8 +201,51 @@ void QtMarbleConfigDialog::readSettings()
     } else {
         w_cacheSettings->kcfg_proxyAuth->setCheckState( Qt::Unchecked );
     }
+    
+    // Plugins
+    QList<QVariant> pluginNameIdList;
+    QList<QVariant> pluginEnabledList;
+    QList<QVariant> pluginVisibleList;
+    
+    settings->beginGroup( "Plugins" );
+        pluginNameIdList = settings->value( "pluginNameId" ).toList();
+        pluginEnabledList = settings->value( "pluginEnabled" ).toList();
+        pluginVisibleList = settings->value( "pluginVisible" ).toList();
+    settings->endGroup();
+        
+    QHash<QString, int> pluginEnabled;
+    QHash<QString, int> pluginVisible;
+    
+    int nameIdSize = pluginNameIdList.size();
+    int enabledSize = pluginEnabledList.size();
+    int visibleSize = pluginVisibleList.size();
 
-    // FIXME: Why should the settings have changed? Is this a copy/paste bug?
+    if ( nameIdSize == enabledSize ) {
+        for ( int i = 0; i < enabledSize; ++i ) {
+            pluginEnabled[ pluginNameIdList[i].toString() ]
+                = pluginEnabledList[i].toInt();
+        }
+    }
+    
+    if ( nameIdSize == visibleSize ) {
+        for ( int i = 0; i < visibleSize; ++i ) {
+            pluginVisible[ pluginNameIdList[i].toString() ]
+                = pluginVisibleList[i].toInt();
+        }
+    }
+
+    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
+        if ( pluginEnabled.contains( (*i)->nameId() ) ) {
+            (*i)->setEnabled( pluginEnabled[ (*i)->nameId() ] );
+        }
+        if ( pluginVisible.contains( (*i)->nameId() ) ) {
+            (*i)->setVisible( pluginVisible[ (*i)->nameId() ] );
+        }
+    }
+    
+    // The settings loaded in the config dialog have been changed.
     emit settingsChanged();
 }
 
@@ -235,6 +304,25 @@ void QtMarbleConfigDialog::writeSettings()
     }
     settings->endGroup();
     
+    // Plugins
+    QList<QVariant>   pluginEnabled;
+    QList<QVariant>   pluginVisible;
+    QStringList  pluginNameId;
+ 
+    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
+        pluginEnabled << static_cast<int>( (*i)->enabled() );
+        pluginVisible << static_cast<int>( (*i)->visible() );
+        pluginNameId  << (*i)->nameId();
+    }
+    
+    settings->beginGroup( "Plugins" );
+        settings->setValue( "pluginNameId", pluginNameId );
+        settings->setValue( "pluginEnabled", pluginEnabled );
+        settings->setValue( "pluginVisible", pluginVisible );
+    settings->endGroup();
+    
     emit settingsChanged();
 
     if (    m_initialGraphicsSystem != graphicsSystem() 
@@ -245,6 +333,22 @@ void QtMarbleConfigDialog::writeSettings()
                                    "Please close the application and start Marble again.") );
     }    
     m_previousGraphicsSystem = graphicsSystem();
+}
+
+void QtMarbleConfigDialog::retrievePluginState() {
+    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
+        (*i)->retrieveItemState();
+    }
+}
+
+void QtMarbleConfigDialog::applyPluginState() {
+    QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
+        (*i)->applyItemState();
+    }
 }
 
 Marble::DistanceUnit QtMarbleConfigDialog::distanceUnit() const

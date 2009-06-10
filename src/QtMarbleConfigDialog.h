@@ -17,20 +17,21 @@
 #include "lib/ui_MarbleViewSettingsWidget.h"
 #include "lib/ui_MarbleNavigationSettingsWidget.h"
 
-#include "lib/MarbleCacheSettingsWidget.h"
-
 class QSettings;
+class QStandardItemModel;
 
 namespace Marble {
-    
+
+class ControlView;
 class MarbleCacheSettingsWidget;
+class MarblePluginSettingsWidget;
 
 class QtMarbleConfigDialog : public QDialog
 {
     Q_OBJECT
     
     public:
-    QtMarbleConfigDialog( QWidget *parent = 0 );
+    QtMarbleConfigDialog( ControlView *controlView = 0, QWidget *parent = 0 );
     ~QtMarbleConfigDialog();
 
     // View Settings
@@ -65,8 +66,8 @@ class QtMarbleConfigDialog : public QDialog
 
     Q_SIGNALS:
     /**
-     * This signal is emitted when the user changed settings and
-     * chose to Apply.
+     * This signal is emitted when when the loaded settings were changed.
+     * Either by the user or by loading them initially from disk.
      */
     void settingsChanged();
 
@@ -88,6 +89,16 @@ class QtMarbleConfigDialog : public QDialog
 
     private Q_SLOTS:
     /**
+     * Retrieve the current plugin state for the user interface.
+     */
+    void retrievePluginState();
+    
+    /**
+     * Apply the plugin state from the user interface.
+     */
+    void applyPluginState();
+    
+    /**
      * Write settings to disk.
      */
     void writeSettings();
@@ -105,8 +116,13 @@ class QtMarbleConfigDialog : public QDialog
     Ui::MarbleViewSettingsWidget       ui_viewSettings;
     Ui::MarbleNavigationSettingsWidget ui_navigationSettings;
     MarbleCacheSettingsWidget          *w_cacheSettings;
+    MarblePluginSettingsWidget         *w_pluginSettings;
 
     QSettings *settings;
+    
+    ControlView *m_controlView;
+    
+    QStandardItemModel* m_pluginModel;
 
     // Information about the graphics system
     Marble::GraphicsSystem m_initialGraphicsSystem;

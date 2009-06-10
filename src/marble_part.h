@@ -115,8 +115,8 @@ class MarblePart: public KParts::ReadOnlyPart
     void  editSettings();
 
     void  slotEnableButtonApply();
-    void  slotApply();
-    void  slotCancel();
+    void  applyPluginState();
+    void  retrievePluginState();
 
     void  slotUpdateSettings();
 
