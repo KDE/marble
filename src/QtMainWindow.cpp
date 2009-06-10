@@ -40,6 +40,7 @@
 #include "lib/MarbleAboutDialog.h"
 #include "lib/SunControlWidget.h"
 #include "lib/MarbleLocale.h"
+#include "AbstractDataPlugin.h"
 #include "AbstractFloatItem.h"
 #include "HttpDownloadManager.h"
 #include "MarbleMap.h"
@@ -269,6 +270,19 @@ void MainWindow::createInfoBoxesMenu()
 
 void MainWindow::createOnlineServicesMenu()
 {
+    m_onlineServicesMenu->clear();
+    
+    QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
+    
+    QList<RenderPlugin *>::const_iterator i;
+    for( i = renderPluginList.constBegin(); i != renderPluginList.constEnd(); ++i ) {
+        // FIXME: This will go into the layer manager when AbstractDataPlugin is an interface
+        AbstractDataPlugin *dataPlugin = qobject_cast<AbstractDataPlugin *>(*i);
+        
+        if( dataPlugin ) {
+            m_onlineServicesMenu->addAction( (*i)->action() );
+        }
+    }
 }
 
 void MainWindow::createStatusBar()
