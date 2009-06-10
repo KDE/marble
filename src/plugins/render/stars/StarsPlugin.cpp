@@ -85,15 +85,15 @@ void StarsPlugin::initialize ()
         qDebug() << "stars.dat: file too new.";
         return;
     }
-    qreal ra;
-    qreal de;
-    qreal mag;
+    double ra;
+    double de;
+    double mag;
 
     while ( !in.atEnd() ) {
         in >> ra;
         in >> de;
         in >> mag;
-        StarPoint star( ra, de, mag ); 
+        StarPoint star( (qreal)(ra), (qreal)(de), (qreal)(mag) );
         m_stars << star;
 //        qDebug() << "RA:" << ra << "DE:" << de << "MAG:" << mag;
     }

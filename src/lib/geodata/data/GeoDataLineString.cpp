@@ -193,6 +193,8 @@ GeoDataLineString GeoDataLineString::toPoleCorrected() const
 */
     GeoDataLineString poleCorrected;
 
+    poleCorrected.setTessellationFlags( tessellationFlags() );
+
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
 
@@ -296,6 +298,7 @@ QVector<GeoDataLineString> GeoDataLineString::toDateLineCorrected() const
     QVector<GeoDataCoordinates>::const_iterator itPreviousPoint = itPoint;
 
     GeoDataLineString dateLineCorrected;
+    dateLineCorrected.setTessellationFlags( tessellationFlags() );
 
     qreal currentLon = 0.0;
     qreal previousLon = 0.0;
