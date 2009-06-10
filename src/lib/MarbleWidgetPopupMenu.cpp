@@ -182,10 +182,49 @@ void MarbleWidgetPopupMenu::slotCopyCoordinates()
     bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
     if ( valid )
     {
-        QString  positionString = GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Radian ).toString();
-        QClipboard  *clipboard = QApplication::clipboard();
+	const GeoDataCoordinates coordinates = GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Radian );
+	const qreal longitude_degrees = coordinates.longitude(GeoDataCoordinates::Degree);
+	const qreal latitude_degrees = coordinates.latitude(GeoDataCoordinates::Degree);
 
-        clipboard->setText( positionString );
+	// importing this representation into Marble does not show anything,
+	// but Merkaartor shows the point
+	const QString kmlRepresentation = QString::fromLatin1(
+	  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+	  "<kml xmlns=\"http://www.opengis.net/kml/2.2\">\n"
+	  "<Document>\n"
+	  " <Placemark>\n"
+// 	  "   <name></name>\n"
+	  "   <Point>\n"
+	  "     <coordinates>%1,%2</coordinates>\n"
+	  "   </Point>\n"
+	  " </Placemark>\n"
+	  "</Document>\n"
+	  "</kml>\n"
+	  ).arg(longitude_degrees, 0, 'f', 10).arg(latitude_degrees, 0, 'f', 10);
+
+	  // importing this data into Marble and Merkaartor works
+	  const QString gpxRepresentation = QString::fromLatin1(
+	    "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n"
+	    "<gpx xmlns=\"http://www.topografix.com/GPX/1/1\" creator=\"trippy\" version=\"0.1\"\n"
+	    " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n"
+	    " xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\">\n"
+	    "  <wpt lat=\"%1\" lon=\"%2\">\n"
+// 	    "   <ele>%3</ele>\n"
+//      "   <time></time>\n"
+// 	    "   <name>%4</name>\n"
+	    "  </wpt>\n"
+	    "</gpx>\n"
+	    ).arg(latitude_degrees, 0, 'f', 10).arg(longitude_degrees, 0, 'f', 10);
+
+	    QString  positionString = coordinates.toString();
+
+	    QMimeData * const myMimeData = new QMimeData();
+	    myMimeData->setText(positionString);
+	    myMimeData->setData(QLatin1String("application/vnd.google-earth.kml+xml"), kmlRepresentation.toUtf8());
+	    myMimeData->setData(QLatin1String("application/gpx+xml"), gpxRepresentation.toUtf8());
+
+	    QClipboard * const clipboard = QApplication::clipboard();
+	    clipboard->setMimeData(myMimeData);
     }
 }
 
