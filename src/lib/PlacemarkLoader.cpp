@@ -229,9 +229,10 @@ void PlacemarkLoader::saveFile( const QString& filename,
 
     out.setVersion( QDataStream::Qt_4_2 );
 
-    qreal lon;
-    qreal lat;
-    qreal alt;
+    // Use double to provide a single cache file format across architectures
+    double lon;
+    double lat;
+    double alt;
 
     PlacemarkContainer::const_iterator it = placemarkContainer->constBegin();
     PlacemarkContainer::const_iterator const end = placemarkContainer->constEnd();
@@ -244,7 +245,7 @@ void PlacemarkLoader::saveFile( const QString& filename,
         out << QString( (*it).role() );
         out << QString( (*it).description() );
         out << QString( (*it).countryCode() );
-        out << (qreal)(*it).area();
+        out << (double)(*it).area();
         out << (qint64)(*it).population();
     }
 }
@@ -289,10 +290,11 @@ bool PlacemarkLoader::loadFile( const QString& filename,
     in.setVersion( QDataStream::Qt_4_2 );
 
     // Read the data itself
-    qreal   lon;
-    qreal   lat;
-    qreal   alt;
-    qreal   area;
+    // Use double to provide a single cache file format across architectures
+    double   lon;
+    double   lat;
+    double   alt;
+    double   area;
 
     QString  tmpstr;
     qint64   tmpint64;
@@ -302,7 +304,7 @@ bool PlacemarkLoader::loadFile( const QString& filename,
         in >> tmpstr;
         mark.setName( tmpstr );
         in >> lon >> lat >> alt;
-        mark.setCoordinate( lon, lat, alt );
+        mark.setCoordinate( (qreal)(lon), (qreal)(lat), (qreal)(alt) );
         in >> tmpstr;
         mark.setRole( tmpstr.at(0) );
         in >> tmpstr;
@@ -310,7 +312,7 @@ bool PlacemarkLoader::loadFile( const QString& filename,
         in >> tmpstr;
         mark.setCountryCode( tmpstr );
         in >> area;
-        mark.setArea( area );
+        mark.setArea( (qreal)(area) );
         in >> tmpint64;
         mark.setPopulation( tmpint64 );
 
