@@ -104,8 +104,8 @@ MarbleGeometryModel::~MarbleGeometryModel()
 void MarbleGeometryModel::setGeoDataRoot( GeoDataDocument* root )
 {
     if( d->m_rootDocument != root ) {
-        reset();
         qDebug() << "resetting the base of the Geometry model" << root;
+        reset();
         d->m_rootDocument = root;
         d->mapFeature( d->m_rootDocument );
     }

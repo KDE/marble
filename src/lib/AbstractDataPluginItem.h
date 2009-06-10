@@ -59,7 +59,7 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
     
     virtual void addDownloadedFile( const QString& url, const QString& type ) = 0;
     
-    virtual bool paint( GeoPainter *painter, ViewportParams *viewport,
+    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
                          
     virtual bool operator<( const AbstractDataPluginItem *other ) const = 0;

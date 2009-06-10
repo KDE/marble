@@ -35,7 +35,7 @@ class PhotoPluginItem : public AbstractDataPluginItem {
     
     void addDownloadedFile( const QString& url, const QString& type );
     
-    bool paint( GeoPainter *painter, ViewportParams *viewport,
+    void paint( GeoPainter *painter, ViewportParams *viewport,
                 const QString& renderPos, GeoSceneLayer * layer = 0 );
                  
     bool operator<( const AbstractDataPluginItem *other ) const;

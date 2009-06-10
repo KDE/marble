@@ -21,6 +21,7 @@
 #include <QtGui/QColor>
 
 #include "GeoDataObject.h"
+#include "GeoGraphicsItem.h"
 
 #include "geodata_export.h"
 
@@ -37,6 +38,11 @@ class GeoDataStyle;
 class GeoDataStyleSelector;
 class GeoDataStyleMap;
 
+class GeoPainter; 
+class ViewportParams;
+class GeoSceneLayer;
+
+
 class GeoDataFeaturePrivate;
 
 /**
@@ -52,7 +58,8 @@ class GeoDataFeaturePrivate;
 
 // FIXME: Later also add NetworkLink and Overlay
 
-class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
+class GEODATA_EXPORT GeoDataFeature : public GeoDataObject, 
+                                      public GeoGraphicsItem
 {
     friend class GeoDataContainer;
     friend class GeoDataFolder;
@@ -283,6 +290,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      */
     static void resetDefaultStyles();
 
+    void paint( GeoPainter *painter, ViewportParams *viewport,
+                const QString& renderPos, GeoSceneLayer * layer = 0 );
 
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;

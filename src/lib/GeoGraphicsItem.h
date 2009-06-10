@@ -78,7 +78,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
     /**
      * Paints the item in item coordinates
      */
-    virtual bool paint( GeoPainter *painter, ViewportParams *viewport,
+    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
     
  private:     
