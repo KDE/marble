@@ -23,6 +23,7 @@ class QSettings;
 
 namespace Marble {
     
+class ControlView;
 class MarbleCacheSettingsWidget;
 
 class QtMarbleConfigDialog : public QDialog
@@ -30,7 +31,7 @@ class QtMarbleConfigDialog : public QDialog
     Q_OBJECT
     
     public:
-    QtMarbleConfigDialog( QWidget *parent = 0 );
+    QtMarbleConfigDialog( ControlView *controlView = 0, QWidget *parent = 0 );
     ~QtMarbleConfigDialog();
 
     // View Settings
@@ -86,12 +87,12 @@ class QtMarbleConfigDialog : public QDialog
      */
     void readSettings();
 
-    private Q_SLOTS:
     /**
      * Write settings to disk.
      */
     void writeSettings();
-
+    
+    private Q_SLOTS:
     /**
      * Synchronize the loaded settings with the file on hard disk.
      */
@@ -107,6 +108,8 @@ class QtMarbleConfigDialog : public QDialog
     MarbleCacheSettingsWidget          *w_cacheSettings;
 
     QSettings *settings;
+    
+    ControlView *m_controlView;
 
     // Information about the graphics system
     Marble::GraphicsSystem m_initialGraphicsSystem;

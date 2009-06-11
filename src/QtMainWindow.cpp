@@ -71,7 +71,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWi
     setCentralWidget( m_controlView );
     
     // Initializing config dialog
-    m_configDialog = new QtMarbleConfigDialog( this );
+    m_configDialog = new QtMarbleConfigDialog( m_controlView, this );
     connect( m_configDialog, SIGNAL( settingsChanged() ),
 	     this, SLOT( updateSettings() ) );
     connect( m_configDialog, SIGNAL( clearVolatileCacheClicked() ),
@@ -666,6 +666,9 @@ void MainWindow::writeSettings()
          settings.setValue( "showCitylights", m_controlView->sunLocator()->getCitylights() );
          settings.setValue( "centerOnSun",    m_controlView->sunLocator()->getCentered() );
      settings.endGroup();
+     
+     // The config dialog has to write settings.
+     m_configDialog->writeSettings();
 }
 
 void MainWindow::editSettings()

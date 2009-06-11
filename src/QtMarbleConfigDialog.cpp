@@ -25,14 +25,17 @@
 #include <QtGui/QWidget>
 
 // Marble
+#include "ControlView.h"
 #include "lib/global.h"
+#include "lib/RenderPlugin.h"
 
 using namespace Marble;
 
-QtMarbleConfigDialog::QtMarbleConfigDialog( QWidget *parent )
+QtMarbleConfigDialog::QtMarbleConfigDialog( ControlView *controlView, QWidget *parent )
     : QDialog( parent ),
       ui_viewSettings(),
-      ui_navigationSettings()
+      ui_navigationSettings(),
+      m_controlView( controlView )
       
 {
     QTabWidget *tabWidget = new QTabWidget( this );
@@ -175,8 +178,38 @@ void QtMarbleConfigDialog::readSettings()
     } else {
         w_cacheSettings->kcfg_proxyAuth->setCheckState( Qt::Unchecked );
     }
+    
+    // Plugins
+    // Reading visibility settings only, enabling/disabling isn't implemented in qt-only version.
+    QList<QVariant> pluginNameIdList;
+    QList<QVariant> pluginVisibleList;
+    
+    settings->beginGroup( "Plugins" );
+        pluginNameIdList = settings->value( "pluginNameId" ).toList();
+        pluginVisibleList = settings->value( "pluginVisible" ).toList();
+    settings->endGroup();
+    
+    QHash<QString, int> pluginVisible;
+    
+    int nameIdSize = pluginNameIdList.size();
+    int visibleSize = pluginVisibleList.size();
+    
+    if ( nameIdSize == visibleSize ) {
+        for ( int i = 0; i < visibleSize; ++i ) {
+            pluginVisible[ pluginNameIdList[i].toString() ]
+                = pluginVisibleList[i].toInt();
+        }
+    }
 
-    // FIXME: Why should the settings have changed? Is this a copy/paste bug?
+    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
+        if ( pluginVisible.contains( (*i)->nameId() ) ) {
+            (*i)->setVisible( pluginVisible[ (*i)->nameId() ] );
+        }
+    }
+    
+    // The settings loaded in the config dialog have been changed.
     emit settingsChanged();
 }
 
@@ -233,6 +266,23 @@ void QtMarbleConfigDialog::writeSettings()
     } else {
         settings->setValue( "proxyAuth", false );
     }
+    settings->endGroup();
+    
+    // Plugins
+    // Writing visibility settings only, enabling/disabling isn't implemented in qt-only version.
+    QList<QVariant>   pluginVisible;
+    QStringList  pluginNameId;
+ 
+    QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
+    for (; i != pluginList.constEnd(); ++i) {
+        pluginVisible << static_cast<int>( (*i)->visible() );
+        pluginNameId  << (*i)->nameId();
+    }
+    
+    settings->beginGroup( "Plugins" );
+        settings->setValue( "pluginNameId", pluginNameId );
+        settings->setValue( "pluginVisible", pluginVisible );
     settings->endGroup();
     
     emit settingsChanged();
