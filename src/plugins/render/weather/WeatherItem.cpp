@@ -95,7 +95,7 @@ bool WeatherItem::initialized() {
     return true;
 }
 
-bool WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
+void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
                          const QString& renderPos, GeoSceneLayer * layer )
 {
     Q_UNUSED( viewport );
@@ -126,7 +126,6 @@ bool WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
                        Qt::AlignVCenter,
                        d->m_currentWeather.temperatureString() );
     painter->restore();
-    return true;
 }
 
 bool WeatherItem::operator<( const AbstractDataPluginItem *other ) const {

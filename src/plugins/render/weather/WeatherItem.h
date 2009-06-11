@@ -49,7 +49,7 @@ class WeatherItem : public AbstractDataPluginItem {
     
     virtual void addDownloadedFile( const QString& url, const QString& type ) = 0;
     
-    bool paint( GeoPainter *painter, ViewportParams *viewport,
+    void paint( GeoPainter *painter, ViewportParams *viewport,
                 const QString& renderPos, GeoSceneLayer * layer = 0 );
                          
     bool operator<( const AbstractDataPluginItem *other ) const;
