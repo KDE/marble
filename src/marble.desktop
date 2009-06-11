@@ -2,6 +2,7 @@
 Type=Application
 Exec=marble
 Name=Marble
+Name[eu]=Marmola
 Name[gu]=માર્બલ
 Name[hi]=संगमरमर
 Name[hne]=संगमरमर
@@ -22,6 +23,7 @@ GenericName[el]=Υδρόγειος επιφάνειας εργασίας
 GenericName[eo]=Tabula globo
 GenericName[es]=Globo terráqueo para el escritorio
 GenericName[et]=Töölaua gloobus
+GenericName[eu]=Mahaigain planetarioa
 GenericName[fa]=کره رومیزی
 GenericName[fi]=Maapallo työpöydällä
 GenericName[fr]=Globe terrestre
