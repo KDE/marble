@@ -666,6 +666,9 @@ void MainWindow::writeSettings()
          settings.setValue( "showCitylights", m_controlView->sunLocator()->getCitylights() );
          settings.setValue( "centerOnSun",    m_controlView->sunLocator()->getCentered() );
      settings.endGroup();
+     
+     // The config dialog has to write settings.
+     m_configDialog->writeSettings();
 }
 
 void MainWindow::editSettings()

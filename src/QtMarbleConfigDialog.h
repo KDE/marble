@@ -87,6 +87,11 @@ class QtMarbleConfigDialog : public QDialog
      */
     void readSettings();
 
+    /**
+     * Write settings to disk.
+     */
+    void writeSettings();
+    
     private Q_SLOTS:
     /**
      * Retrieve the current plugin state for the user interface.
@@ -98,11 +103,6 @@ class QtMarbleConfigDialog : public QDialog
      */
     void applyPluginState();
     
-    /**
-     * Write settings to disk.
-     */
-    void writeSettings();
-
     /**
      * Synchronize the loaded settings with the file on hard disk.
      */
