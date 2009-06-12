@@ -43,8 +43,7 @@ class GeoDataModel; // not implemented yet
  * @see GeoDataPolygon
  */
 
-class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject,
-                                       public GeoGraphicsItem
+class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 {
     friend class GeoDataPoint;
     friend class GeoDataPolygon;
@@ -72,9 +71,6 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject,
 
     AltitudeMode altitudeMode() const;
     void setAltitudeMode( const AltitudeMode altitudeMode );
-
-    void paint( GeoPainter *painter, ViewportParams *viewport,
-                const QString& renderPos, GeoSceneLayer * layer = 0 );
 
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
