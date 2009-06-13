@@ -21,6 +21,7 @@
 #include "PluginManager.h"
 #include "PositionProviderPlugin.h"
 #include "MarbleMath.h"
+#include "ViewParams.h"
 
 #include <QtXml/QXmlInputSource>
 #include <QtXml/QXmlSimpleReader>
@@ -163,12 +164,18 @@ bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
             m_gpsTrackSeg = new TrackSegment();
             m_gpsTrack->append( m_gpsTrackSeg );
         }
+
+        //updateSpeed updates the speed to radians and needs
+        //to be multiplied by the radius
+        updateSpeed( m_gpsPreviousPosition, m_gpsTracking );
+        m_speed *= viewParams->radius();
+
+        //if the position has not moved then update the current position
         if (!( m_gpsPreviousPosition->position() ==
             m_gpsTracking->position() ) )
         {
             notifyPosition( m_gpsTracking->position() );
             m_gpsTrackSeg->append( m_gpsPreviousPosition );
-            updateSpeed( m_gpsPreviousPosition, m_gpsTracking );
             m_gpsPreviousPosition = m_gpsCurrentPosition;
             m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking );
             reg = genRegion( canvasSize, viewParams );
