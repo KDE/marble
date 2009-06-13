@@ -29,7 +29,7 @@ class GeoDataPolyStylePrivate
 };
 
 GeoDataPolyStyle::GeoDataPolyStyle()
-    : d (new GeoDataPolyStylePrivate )
+    : d( new GeoDataPolyStylePrivate )
 {
 }
 
@@ -39,7 +39,7 @@ GeoDataPolyStyle::GeoDataPolyStyle( const GeoDataPolyStyle& other )
 }
 
 GeoDataPolyStyle::GeoDataPolyStyle( const QColor &color )
-    : d (new GeoDataPolyStylePrivate )
+    : d( new GeoDataPolyStylePrivate )
 {
     setColor( color );
 }
