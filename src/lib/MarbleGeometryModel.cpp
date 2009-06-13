@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
+// Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 // Copyright 2008      Simon Schmeisser <mail_to_wrt@gmx.de>
 //
 
@@ -105,7 +105,6 @@ void MarbleGeometryModel::setGeoDataRoot( GeoDataDocument* root )
 {
     if( d->m_rootDocument != root ) {
         reset();
-        qDebug() << "resetting the base of the Geometry model" << root;
         d->m_rootDocument = root;
         d->mapFeature( d->m_rootDocument );
     }
@@ -125,13 +124,14 @@ int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
     if( parent.column() > 0 )
         return 0;
 
-    if( !parent.isValid() )
+    if( !parent.isValid() ) {
         parentItem = d->m_rootDocument;
-    else
+    } else {
         parentItem = static_cast<GeoDataObject*>( parent.internalPointer() );
+    }
 
     int size = 0;
-    if( dynamic_cast<GeoDataFeature*>( parentItem ) &&
+    if( reinterpret_cast<GeoDataFeature*>( parentItem ) &&
        (static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataDocumentId ||
         static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataFolderId ) )
     {
@@ -139,7 +139,7 @@ int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
         size = folder.features().size();
     }
 
-    if( dynamic_cast<GeoDataFeature*>( parentItem ) &&
+    if( reinterpret_cast<GeoDataFeature*>( parentItem ) &&
        static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataPlacemarkId )
     {
         /* there is only one GeoDataGeometry Object per Placemark; if Styles
@@ -147,10 +147,10 @@ int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
         size = 1;
     }
 
-    if( dynamic_cast<GeoDataGeometry*>( parentItem ) &&
+    if( reinterpret_cast<GeoDataGeometry*>( parentItem ) &&
         static_cast<GeoDataGeometry*>( parentItem )->geometryId() == GeoDataMultiGeometryId )
     {
-        size = dynamic_cast<GeoDataMultiGeometry*>( parentItem )->size();
+        size = static_cast<GeoDataMultiGeometry*>( parentItem )->size();
     }
     return size;
 }
@@ -255,10 +255,8 @@ QModelIndex MarbleGeometryModel::index( int row, int column, const QModelIndex &
         };
     } else if( dynamic_cast<GeoDataGeometry*>( parentItem ) ) {
         if( dynamic_cast<GeoDataGeometry*>( parentItem )->geometryId() == GeoDataMultiGeometryId ) {
-            qDebug() << "making new MulitGeometry object:";
             GeoDataMultiGeometry geom = *static_cast<GeoDataGeometry*>( parentItem );
             childItem = &geom.vector()[ row ];
-            qDebug() << "casting geometryObject:" << childItem;
         }
     }
 

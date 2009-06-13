@@ -91,7 +91,7 @@ void GeoRendererView::paintEvent( QPaintEvent *event )
     Q_UNUSED( event )
 
     QModelIndex index = rootIndex();
-//    renderIndex( index );
+    renderIndex( index );
 }
 
 void GeoRendererView::renderIndex( QModelIndex &index )
@@ -104,6 +104,7 @@ void GeoRendererView::renderIndex( QModelIndex &index )
      */
     int rowCount = model()->rowCount( index );
 
+    if(rowCount > 5000) rowCount = 5000;
     for ( int row = 0; row < rowCount; ++row )
     {
         QModelIndex childIndex = model()->index( row, 0, index );
