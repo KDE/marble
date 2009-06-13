@@ -47,7 +47,7 @@ GeoNode* KmlLineStyleTagHandler::parse( GeoParser& parser ) const
         qDebug() << "Parsed <" << kmlTag_LineStyle << "> containing: " << &parentItem.nodeAs<GeoDataStyle>()->lineStyle()
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
-        return &parentItem.nodeAs<GeoDataStyle>()->polyStyle();
+        return &parentItem.nodeAs<GeoDataStyle>()->lineStyle();
     }
     return 0;
 }
