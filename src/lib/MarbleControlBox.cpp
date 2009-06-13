@@ -48,6 +48,7 @@
 #include "gps/GpsLayer.h"
 #include "gps/PositionTracking.h"
 #include "PlacemarkContainer.h"
+#include "MarbleLocale.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleRunnerManager.h"
 #include "MathHelper.h"
@@ -91,6 +92,8 @@ class MarbleControlBoxPrivate
     MarbleRunnerManager  *m_runnerManager;
     GeoSceneDocument      *mapTheme;
     QStringList  celestialList;
+
+    MarbleLocale* m_locale;
 };
 
 MarbleControlBoxPrivate::MarbleControlBoxPrivate()
@@ -140,6 +143,8 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
                                     //by default
  //   toolBox->removeItem( 3 );
     d->uiWidget.toolBox->setCurrentIndex(0);
+
+    d->m_locale = MarbleGlobal::getInstance()->locale();
 
     //default
     setCurrentLocationTabShown( false );
@@ -473,11 +478,27 @@ void MarbleControlBox::receiveGpsCoordinates( qreal x, qreal y,
 
 void MarbleControlBox::receiveGpsCoordinates( GeoDataCoordinates in, qreal speed )
 {
-    Q_UNUSED( speed )
-
-    //update the ui here
-//    qDebug() << "Speed is : " << speed;
+    Q_UNUSED( speed );
     if ( d->uiWidget.navigationCheckBox->isChecked() ) {
+        QString unitString;
+        QString speedString;
+
+        switch ( d->m_locale->distanceUnit() ) {
+            case Marble::Metric:
+            //kilometers per hour
+            unitString = tr("km/h");
+            break;
+
+            case Marble::Imperial:
+            //miles per hour
+            unitString = tr("m/h");
+            break;
+        }
+        // TODO read this value from the incoming signal
+        speedString = "0.0";
+
+        d->uiWidget.speedLabel->setText( speedString.rightJustified(5) + " " + unitString );
+
         d->uiWidget.longitudeValue->setText( in.lonToString() );
         d->uiWidget.latitudeValue->setText( in.latToString() );
         d->uiWidget.altitudeValue->setText( QString::number( in.altitude() ) );
