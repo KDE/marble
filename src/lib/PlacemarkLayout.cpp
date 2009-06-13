@@ -208,9 +208,6 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     if ( m_styleResetRequested ) {
         m_styleResetRequested = false;
         styleReset();
-        qDebug() << "RESET started";
-//        m_indexList = qobject_cast<const MarblePlacemarkModel*>( model )->getPersistentIndexList();
-        qDebug() << "RESET stopped";
         
         m_maxLabelHeight = maxLabelHeight( model, selectionModel );
     }
