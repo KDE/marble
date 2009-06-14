@@ -18,7 +18,7 @@
 #include<QtCore/QList>
 #include<QtCore/QSize>
 #include<QtCore/QRect>
-#include<QtGui/QPixmap>
+#include<QtGui/QPixmapCache>
 
 namespace Marble {
 
@@ -28,6 +28,9 @@ class MarbleGraphicsItemPrivate {
         : m_needsUpdate( true ),
           m_cacheMode( MarbleGraphicsItem::NoCache )
     {
+        static unsigned int key = 0;
+        m_cacheKey = QString( "MarbleGraphicsItem:" ) + QString::number( key );
+        key++;
     }
     
     virtual ~MarbleGraphicsItemPrivate() {
@@ -65,7 +68,7 @@ class MarbleGraphicsItemPrivate {
     
     MarbleGraphicsItem::CacheMode m_cacheMode;
     
-    QPixmap m_cachePixmap;
+    QString m_cacheKey;
 };
 
 }

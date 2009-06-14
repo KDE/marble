@@ -18,6 +18,8 @@
 
 // Qt
 #include <QtCore/QDebug>
+#include <QtGui/QPixmap>
+#include <QtGui/QPixmapCache>
 
 using namespace Marble;
 
@@ -50,32 +52,36 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
     if ( ItemCoordinateCache == cacheMode()
          || DeviceCoordinateCache == cacheMode() )
     {
-        if ( needsUpdate() ) {
+        QPixmap cachePixmap;
+        bool pixmapAvailable = QPixmapCache::find( p()->m_cacheKey, cachePixmap );
+        if ( needsUpdate() || !pixmapAvailable ) {
             p()->m_needsUpdate = false;
             QSize neededPixmapSize = size() + QSize( 1, 1 ); // adding a pixel for rounding errors
         
-            if ( p()->m_cachePixmap.size() != neededPixmapSize ) {
+            if ( cachePixmap.size() != neededPixmapSize ) {
                 if ( size().isValid() && !size().isNull() ) {
-                    p()->m_cachePixmap = QPixmap( neededPixmapSize ).copy();
+                    cachePixmap = QPixmap( neededPixmapSize ).copy();
                 }
                 else {
                     qDebug() << "Warning: Invalid pixmap size suggested: " << d->m_size;
                 }
             }
         
-            p()->m_cachePixmap.fill( Qt::transparent );
-            GeoPainter pixmapPainter( &( p()->m_cachePixmap ), viewport, Normal );
+            cachePixmap.fill( Qt::transparent );
+            GeoPainter pixmapPainter( &( cachePixmap ), viewport, Normal );
             // We paint in best quality here, as we only have to paint once.
             pixmapPainter.setRenderHint( QPainter::Antialiasing, true );
             // The cache image will get a 0.5 pixel bounding to save antialiasing effects.
             pixmapPainter.translate( 0.5, 0.5 );
             paint( &pixmapPainter, viewport, renderPos, layer );
+            // Update the pixmap in cache
+            QPixmapCache::insert( p()->m_cacheKey, cachePixmap );
         }
         
         foreach( QPoint position, p()->positions() ) {
             painter->save();
             
-            painter->drawPixmap( position, d->m_cachePixmap );
+            painter->drawPixmap( position, cachePixmap );
             
             painter->restore();
         }
@@ -113,6 +119,9 @@ MarbleGraphicsItem::CacheMode MarbleGraphicsItem::cacheMode() const {
 void MarbleGraphicsItem::setCacheMode( CacheMode mode, const QSize & logicalCacheSize ) {
     p()->m_cacheMode = mode;
     p()->m_logicalCacheSize = logicalCacheSize;
+    if ( p()->m_cacheMode == NoCache ) {
+        QPixmapCache::remove( p()->m_cacheKey );
+    }
 }
 
 void MarbleGraphicsItem::update() {
