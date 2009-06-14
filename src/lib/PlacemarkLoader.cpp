@@ -321,6 +321,7 @@ bool PlacemarkLoader::loadFile( const QString& filename,
     }
 
     qDebug() << "newGeoDataDocumentAdded" << m_filepath;
+	m_document->setVisible( false );
     emit newGeoDataDocumentAdded( m_document );
     return true;
 }

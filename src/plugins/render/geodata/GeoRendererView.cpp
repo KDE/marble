@@ -102,9 +102,11 @@ void GeoRendererView::renderIndex( QModelIndex &index )
      * then call the real render function. For the rest iterate through the
      * children and recurse.
      */
+	GeoDataObject* indexObject = model()->data( rootIndex(), Qt::UserRole + 11 ).value<Marble::GeoDataObject*>();
+	if( !( dynamic_cast<GeoDataFeature*>( indexObject ) && dynamic_cast<GeoDataFeature*>( indexObject )->isVisible() ) ) return;
+	
     int rowCount = model()->rowCount( index );
 
-    if(rowCount > 5000) rowCount = 5000;
     for ( int row = 0; row < rowCount; ++row )
     {
         QModelIndex childIndex = model()->index( row, 0, index );
