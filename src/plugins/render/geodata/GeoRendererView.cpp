@@ -102,9 +102,9 @@ void GeoRendererView::renderIndex( QModelIndex &index )
      * then call the real render function. For the rest iterate through the
      * children and recurse.
      */
-	GeoDataObject* indexObject = model()->data( rootIndex(), Qt::UserRole + 11 ).value<Marble::GeoDataObject*>();
-	if( !( dynamic_cast<GeoDataFeature*>( indexObject ) && dynamic_cast<GeoDataFeature*>( indexObject )->isVisible() ) ) return;
-	
+    GeoDataObject* indexObject = model()->data( rootIndex(), Qt::UserRole + 11 ).value<Marble::GeoDataObject*>();
+    if( !( dynamic_cast<GeoDataFeature*>( indexObject ) && dynamic_cast<GeoDataFeature*>( indexObject )->isVisible() ) ) return;
+
     int rowCount = model()->rowCount( index );
 
     for ( int row = 0; row < rowCount; ++row )
@@ -149,11 +149,10 @@ void GeoRendererView::setBrushStyle( QString mapped )
      * model. This might not be wanted. On the other hand - is a copy of the
      * style within every Placemark wanted and how should this be called here?
      */
-    if( m_currentBrush.color() != m_root->style( mapped ).polyStyle().color() ) {
-/*            qDebug() << "BrushColor:" 
-                 << m_root->style( mapped ).polyStyle()->color() 
-                 << m_currentBrush.color();*/
-        m_currentBrush.setColor( m_root->style( mapped ).polyStyle().color() );
+    if( m_painter->brush().color() != m_root->style( mapped ).polyStyle().color() ) {
+/*        qDebug() << "BrushColor:" 
+                 << m_root->style( mapped ).polyStyle().color() 
+                 <<  m_painter->brush().color();*/
         m_painter->setBrush( m_currentBrush.color() );
     }
 }
