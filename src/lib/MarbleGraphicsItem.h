@@ -44,6 +44,7 @@ class MARBLE_EXPORT MarbleGraphicsItem {
     
     /**
      * Paints the item on the screen in view coordinates.
+     * It is now save to call this function from a thread other than the gui thread.
      */
     bool paintEvent( GeoPainter *painter, ViewportParams *viewport, 
                      const QString& renderPos, GeoSceneLayer *layer = 0 );
