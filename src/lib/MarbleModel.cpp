@@ -724,7 +724,7 @@ void MarbleModelPrivate::geoDataDocumentAdded( GeoDataDocument* document )
         itr->setStyle( &document->style( styleUrl ) );
     }
 
-//    m_geometrymodel->setGeoDataRoot( document );
+    m_geometrymodel->setGeoDataRoot( document );
 }
 
 void MarbleModel::update()

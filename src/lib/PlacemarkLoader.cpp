@@ -48,7 +48,6 @@ PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& contents, cons
 
 PlacemarkLoader::~PlacemarkLoader()
 {
-    delete m_document;
 }
 
 QString PlacemarkLoader::path() const
@@ -320,6 +319,7 @@ bool PlacemarkLoader::loadFile( const QString& filename,
         m_document->append( mark );
     }
 
+    m_document->setVisible( false );
     qDebug() << "newGeoDataDocumentAdded" << m_filepath;
     emit newGeoDataDocumentAdded( m_document );
     return true;
