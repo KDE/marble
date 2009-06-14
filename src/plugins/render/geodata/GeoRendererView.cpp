@@ -149,11 +149,10 @@ void GeoRendererView::setBrushStyle( QString mapped )
      * model. This might not be wanted. On the other hand - is a copy of the
      * style within every Placemark wanted and how should this be called here?
      */
-    if( m_currentBrush.color() != m_root->style( mapped ).polyStyle().color() ) {
+    if( m_painter->brush().color() != m_root->style( mapped ).polyStyle().color() ) {
 /*            qDebug() << "BrushColor:" 
                  << m_root->style( mapped ).polyStyle()->color() 
-                 << m_currentBrush.color();*/
-        m_currentBrush.setColor( m_root->style( mapped ).polyStyle().color() );
+                 << m_painter->brush().color();*/
         m_painter->setBrush( m_currentBrush.color() );
     }
 }
