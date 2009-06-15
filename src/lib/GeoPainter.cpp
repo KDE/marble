@@ -419,7 +419,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QStr
 
 void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRule fillRule )
 {
-    // If the object is not visible in the viewport return 
+    // If the object is not visible in the viewport return
     if ( ! d->m_viewport->viewLatLonAltBox().intersects( linearRing.latLonAltBox() ) )
     {
 //        qDebug() << "Polygon doesn't get displayed on the viewport";
@@ -427,14 +427,44 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRul
     }
 //    qDebug() << "Drawing Polygon";
 
-    QVector<QPolygonF*> polygons;
-    d->createPolygonsFromLinearRing( linearRing, polygons );
 
-    foreach( QPolygonF* itPolygon, polygons ) {
-        ClipPainter::drawPolygon( *itPolygon, fillRule );
+    if ( !linearRing.latLonAltBox().crossesDateLine() ) {
+        QVector<QPolygonF*> polygons;
+        d->createPolygonsFromLinearRing( linearRing, polygons );
+
+        foreach( QPolygonF* itPolygon, polygons ) {
+            ClipPainter::drawPolygon( *itPolygon, fillRule );
+        }
+
+        qDeleteAll( polygons );
     }
+    else {
+        QPen polygonPen = pen();
+        setPen( Qt::NoPen );
 
-    qDeleteAll( polygons );
+        QVector<QPolygonF*> polygons;
+        d->createPolygonsFromLinearRing( linearRing, polygons );
+
+        foreach( QPolygonF* itPolygon, polygons ) {
+            ClipPainter::drawPolygon( *itPolygon, fillRule );
+        }
+
+        qDeleteAll( polygons );
+
+        setPen( polygonPen );
+        GeoDataLineString lineString( linearRing );
+
+        lineString << lineString.first();
+
+        QVector<QPolygonF*> polylines;
+        d->createPolygonsFromLineString( lineString, polylines );
+
+        foreach( QPolygonF* itPolygon, polylines ) {
+            ClipPainter::drawPolyline( *itPolygon );
+        }
+
+        qDeleteAll( polylines );        
+    }
 }
 
 void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fillRule )

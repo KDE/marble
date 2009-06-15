@@ -66,9 +66,11 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
 
     QVector<GeoDataLineString> toRangeCorrected() const;
 
+    GeoDataLineString toNormalized() const;
+
     GeoDataLineString toPoleCorrected() const;
 
-    QVector<GeoDataLineString> toDateLineCorrected() const;
+    QVector<GeoDataLineString> toDateLineCorrected( bool isClosed ) const;
 
     int size() const;
     GeoDataCoordinates& at( int pos );

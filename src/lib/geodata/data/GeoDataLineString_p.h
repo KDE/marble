@@ -44,6 +44,16 @@ class GeoDataLineStringPrivate : public Marble::GeoDataGeometryPrivate
         return GeoDataLineStringId;
     }
 
+    void interpolateDateLine( const GeoDataCoordinates & previousCoords,
+                              const GeoDataCoordinates & currentCoords,
+                              GeoDataCoordinates & previousAtDateline,
+                              GeoDataCoordinates & currentAtDateline,
+                              TessellationFlags f );
+
+    GeoDataCoordinates findDateLine( const GeoDataCoordinates & previousCoords,
+                       const GeoDataCoordinates & currentCoords,
+                       int recursionCounter );
+
     QVector<GeoDataCoordinates> m_vector;
 
     QVector<GeoDataLineString>  m_rangeCorrected;

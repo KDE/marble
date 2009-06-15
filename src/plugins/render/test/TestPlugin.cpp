@@ -95,6 +95,7 @@ bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
     GeoDataCoordinates brasilia( -47.9, -15.75, 0.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates orbit( 105.6, 0.0, 3000000.0, GeoDataCoordinates::Degree );
     GeoDataCoordinates easteregg( 10.0, 70.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates easteregg2( 179.0, -40.0, 0.0, GeoDataCoordinates::Degree );
 
     painter->setPen( QColor( 200, 200, 200, 255 ) );
 
@@ -120,6 +121,8 @@ bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
     painter->drawEllipse( easteregg, 20, 10, true ); 
 
     painter->drawText( easteregg, "Easter Egg" );
+
+    painter->drawEllipse( easteregg2, 20, 20, true );
 
 
     painter->setPen( QColor( 99, 99, 198, 255 ) );
@@ -204,6 +207,23 @@ bool TestPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
 
     painter->drawPolygon( triangle3, Qt::OddEvenFill ); 
 
+
+    // Example: draw a polygon across the dateline
+
+    GeoDataLinearRing dateLinePolygon( Tessellate | RespectLatitudeCircle );
+
+    GeoDataCoordinates t10(+170.0, 40.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t11(-170.0, 40.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t12(-170.0, 35.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t13(+175.0, 35.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t14(+175.0, 25.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t15(-170.0, 25.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t16(-170.0, 15.0, 0.0, GeoDataCoordinates::Degree );
+    GeoDataCoordinates t17(+170.0, 20.0, 0.0, GeoDataCoordinates::Degree );
+
+    dateLinePolygon << t10 << t11 << t12 << t13 << t14 << t15 << t16 << t17;
+
+    painter->drawPolygon( dateLinePolygon, Qt::OddEvenFill );
 
     // Example: draw a rectangle with lines that follow the coordinate grid
 

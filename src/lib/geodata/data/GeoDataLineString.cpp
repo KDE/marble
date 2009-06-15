@@ -13,6 +13,8 @@
 #include "GeoDataLineString.h"
 #include "GeoDataLineString_p.h"
 
+#include "Quaternion.h"
+
 #include <QtCore/QDebug>
 
 
@@ -47,6 +49,83 @@ GeoDataLineStringPrivate* GeoDataLineString::p() const
 {
     return static_cast<GeoDataLineStringPrivate*>(d);
 }
+
+void GeoDataLineStringPrivate::interpolateDateLine( const GeoDataCoordinates & previousCoords,
+                                                    const GeoDataCoordinates & currentCoords,
+                                                    GeoDataCoordinates & previousAtDateLine,
+                                                    GeoDataCoordinates & currentAtDateLine,
+                                                    TessellationFlags f )
+{
+    GeoDataCoordinates dateLineCoords;
+
+    int recursionCounter = 0;
+
+    qDebug() << Q_FUNC_INFO;
+
+    if ( f.testFlag( RespectLatitudeCircle ) && previousCoords.latitude() == currentCoords.latitude() ) {
+        dateLineCoords = currentCoords;
+    }
+    else {
+        dateLineCoords = findDateLine( previousCoords, currentCoords, recursionCounter );
+    }
+
+    previousAtDateLine = dateLineCoords;
+    currentAtDateLine = dateLineCoords;
+
+    if ( previousCoords.longitude() < 0 ) {
+        previousAtDateLine.setLongitude( -M_PI );
+        currentAtDateLine.setLongitude( +M_PI );
+    }
+    else {
+        previousAtDateLine.setLongitude( +M_PI );
+        currentAtDateLine.setLongitude( -M_PI );
+    }
+}
+
+GeoDataCoordinates GeoDataLineStringPrivate::findDateLine( const GeoDataCoordinates & previousCoords,
+                                             const GeoDataCoordinates & currentCoords,
+                                             int recursionCounter )
+{
+    int currentSign = ( currentCoords.longitude() < 0.0 ) ? -1 : +1 ;
+    int previousSign = ( previousCoords.longitude() < 0.0 ) ? -1 : +1 ;
+
+    qreal longitudeDiff =   fabs( previousSign * M_PI  - previousCoords.longitude() )
+                          + fabs( currentSign * M_PI - currentCoords.longitude() );
+
+    if ( longitudeDiff < 0.001 || recursionCounter == 100 ) {
+//        qDebug() << "stopped at recursion" << recursionCounter << " and longitude difference " << longitudeDiff; 
+        return currentCoords;
+    }
+    ++recursionCounter;
+
+    qreal  lon = 0.0;
+    qreal  lat = 0.0;
+    Quaternion  itpos;
+
+    qreal altDiff = currentCoords.altitude() - previousCoords.altitude();
+
+    itpos.nlerp( previousCoords.quaternion(), currentCoords.quaternion(), 0.5 );
+    itpos.getSpherical( lon, lat );
+
+    qreal altitude = previousCoords.altitude() + 0.5 * altDiff;
+
+    GeoDataCoordinates interpolatedCoords( lon, lat, altitude );
+
+    int interpolatedSign = ( interpolatedCoords.longitude() < 0.0 ) ? -1 : +1 ;
+
+/*
+    qDebug() << "SRC" << previousCoords.toString();
+    qDebug() << "TAR" << currentCoords.toString();
+    qDebug() << "IPC" << interpolatedCoords.toString();
+*/
+
+    if ( interpolatedSign != currentSign ) {
+        return findDateLine( interpolatedCoords, currentCoords, recursionCounter );
+    }
+
+    return findDateLine( previousCoords, interpolatedCoords, recursionCounter );
+}
+
 
 int GeoDataLineString::size() const
 {
@@ -182,15 +261,33 @@ void GeoDataLineString::setTessellationFlags( TessellationFlags f )
     p()->m_tessellationFlags = f;
 }
 
+GeoDataLineString GeoDataLineString::toNormalized() const
+{
+    GeoDataLineString normalizedLineString;
+
+    normalizedLineString.setTessellationFlags( tessellationFlags() );
+
+    qreal lon;
+    qreal lat;
+
+    for( QVector<GeoDataCoordinates>::const_iterator itCoords
+          = p()->m_vector.constBegin();
+         itCoords != p()->m_vector.constEnd();
+         ++itCoords ) {
+
+        itCoords->geoCoordinates( lon, lat );
+        GeoDataCoordinates::normalizeLonLat( lon, lat );
+
+        GeoDataCoordinates normalizedCoords( *itCoords );
+        normalizedCoords.set( lon, lat );
+        normalizedLineString << normalizedCoords;        
+    }
+
+    return normalizedLineString;
+}
+
 GeoDataLineString GeoDataLineString::toPoleCorrected() const
 {
-/*
-    if ( p()->m_poleCorrected ) {
-        return *(p()->m_poleCorrected);
-    }
-    
-    p()->m_poleCorrected = new GeoDataLineString( p()->m_tessellationFlags );
-*/
     GeoDataLineString poleCorrected;
 
     poleCorrected.setTessellationFlags( tessellationFlags() );
@@ -205,7 +302,6 @@ GeoDataLineString GeoDataLineString::toPoleCorrected() const
                 GeoDataCoordinates modifiedCoords( p()->m_vector.last() );
                 modifiedCoords.setLongitude( firstLongitude );
                 poleCorrected << modifiedCoords;
-//                *(p()->m_poleCorrected) << modifiedCoords;
         }
     }
 
@@ -229,7 +325,6 @@ GeoDataLineString GeoDataLineString::toPoleCorrected() const
                 GeoDataCoordinates currentModifiedCoords( currentCoords );
                 currentModifiedCoords.setLongitude( previousLongitude );
                 poleCorrected << currentModifiedCoords;
-//                *(p()->m_poleCorrected) << currentModifiedCoords;
             }
         }
         else {
@@ -239,13 +334,10 @@ GeoDataLineString GeoDataLineString::toPoleCorrected() const
                 previousModifiedCoords.setLongitude( currentLongitude );
                 poleCorrected << previousModifiedCoords;
                 poleCorrected << currentCoords;
-//                *(p()->m_poleCorrected) << previousModifiedCoords;
-//                *(p()->m_poleCorrected) << currentCoords;
             }
             else {
                 // No poles at all. Nothing special to handle
                 poleCorrected << currentCoords;
-//                *(p()->m_poleCorrected) << currentCoords;
             }
         }
         previousCoords = currentCoords;
@@ -258,12 +350,10 @@ GeoDataLineString GeoDataLineString::toPoleCorrected() const
                 GeoDataCoordinates modifiedCoords( p()->m_vector.first() );
                 modifiedCoords.setLongitude( lastLongitude );
                 poleCorrected << modifiedCoords;
-//                *(p()->m_poleCorrected) << modifiedCoords;
         }
     }
     
     return poleCorrected;
-//    return *(p()->m_poleCorrected);
 }
 
 QVector<GeoDataLineString> GeoDataLineString::toRangeCorrected() const
@@ -271,23 +361,26 @@ QVector<GeoDataLineString> GeoDataLineString::toRangeCorrected() const
     if ( p()->m_dirtyRange ) {
 
         p()->m_rangeCorrected.clear();
-
+/*
         // Normalization
-        // TODO
-
+        GeoDataLineString normalizedLineString;
+        normalizedLineString = toNormalized();
+*/
         // PoleCorrection
         GeoDataLineString poleCorrectedLineString;
-        poleCorrectedLineString = toPoleCorrected();
+        poleCorrectedLineString = /* normalizedLineString. */ toPoleCorrected();
 
         // DateLine Correction
-        p()->m_rangeCorrected = poleCorrectedLineString.toDateLineCorrected();
+        p()->m_rangeCorrected = poleCorrectedLineString.toDateLineCorrected( isClosed() );
     }
 
     return p()->m_rangeCorrected;
 }
 
 
-QVector<GeoDataLineString> GeoDataLineString::toDateLineCorrected() const
+
+
+QVector<GeoDataLineString> GeoDataLineString::toDateLineCorrected( bool isClosed ) const
 {
 //    qDebug() << Q_FUNC_INFO;
     QVector<GeoDataLineString> lineStrings;
@@ -304,10 +397,14 @@ QVector<GeoDataLineString> GeoDataLineString::toDateLineCorrected() const
     qreal previousLon = 0.0;
     int previousSign = 1;
 
+    bool unfinished = false;
+    GeoDataLineString unfinishedLineString;
+    unfinishedLineString.setTessellationFlags( tessellationFlags() );
+
     for (; itPoint != itEndPoint; ++itPoint ) {
         currentLon = itPoint->longitude();
 
-        int currentSign = ( currentLon > 0.0 ) ? 1 : -1 ;
+        int currentSign = ( currentLon < 0.0 ) ? -1 : +1 ;
 
         if( itPoint == constBegin() ) {
             previousSign = currentSign;
@@ -315,15 +412,29 @@ QVector<GeoDataLineString> GeoDataLineString::toDateLineCorrected() const
         }
 
         if ( previousSign != currentSign && fabs(previousLon) + fabs(currentLon) > M_PI ) {
-            qDebug() << "DateLineCorrected";
-            // FIXME: Interpolate temporary points
-            GeoDataCoordinates previousTemp( *itPreviousPoint );
-            previousTemp.setLongitude( previousSign * M_PI );
+
+            unfinished = !unfinished;
+
+            GeoDataCoordinates previousTemp;
+            GeoDataCoordinates currentTemp;
+
+            p()->interpolateDateLine( *itPreviousPoint, *itPoint,
+                                      previousTemp, currentTemp, tessellationFlags() );
+
             dateLineCorrected << previousTemp;
-            lineStrings << dateLineCorrected;
-            dateLineCorrected.clear();
-            GeoDataCoordinates currentTemp( *itPoint );
-            currentTemp.setLongitude( currentSign * M_PI );
+
+            if ( isClosed && unfinished ) {
+                unfinishedLineString.clear();
+                unfinishedLineString = dateLineCorrected;
+                dateLineCorrected.clear();
+            }
+            else {
+                lineStrings << dateLineCorrected;
+                dateLineCorrected.clear();
+                dateLineCorrected = unfinishedLineString;
+                unfinishedLineString.clear();
+            }
+
             dateLineCorrected << currentTemp;
             dateLineCorrected << *itPoint;
             
