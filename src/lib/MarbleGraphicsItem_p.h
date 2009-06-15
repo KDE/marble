@@ -25,12 +25,12 @@ namespace Marble {
 class MarbleGraphicsItemPrivate {
  public:
     MarbleGraphicsItemPrivate()
-        : m_cacheMode( MarbleGraphicsItem::NoCache )
+        : m_removeCachedPixmap( false ),
+          m_cacheMode( MarbleGraphicsItem::NoCache )
     {
     }
     
     virtual ~MarbleGraphicsItemPrivate() {
-        QPixmapCache::remove( m_cacheKey );
     }
      
     virtual QList<QPoint> positions() {
@@ -68,6 +68,8 @@ class MarbleGraphicsItemPrivate {
     
     QSize m_size;
     QSize m_logicalCacheSize;
+    
+    bool m_removeCachedPixmap;
     
     MarbleGraphicsItem::CacheMode m_cacheMode;
     

@@ -41,6 +41,14 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
                  const QString& renderPos, GeoSceneLayer *layer )
 {
     p()->setProjection( viewport->currentProjection(), viewport );
+    
+    // Remove the pixmap if it has been requested. This prevents QPixmapCache from being used
+    // outside the ui thread.
+    if ( p()->m_removeCachedPixmap ) {
+        p()->m_removeCachedPixmap = false;
+        QPixmapCache::remove( p()->m_cacheKey );
+    }
+    
     if ( p()->positions().size() == 0 ) {
         return true;
     }
@@ -120,12 +128,12 @@ void MarbleGraphicsItem::setCacheMode( CacheMode mode, const QSize & logicalCach
     p()->m_cacheMode = mode;
     p()->m_logicalCacheSize = logicalCacheSize;
     if ( p()->m_cacheMode == NoCache ) {
-        QPixmapCache::remove( p()->m_cacheKey );
+        p()->m_removeCachedPixmap = true;
     }
 }
 
 void MarbleGraphicsItem::update() {
-    QPixmapCache::remove( p()->m_cacheKey );
+    p()->m_removeCachedPixmap = true;
 }
 
 void MarbleGraphicsItem::setSize( const QSize& size ) {
