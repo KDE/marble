@@ -66,10 +66,12 @@ bool AbstractProjection::screenCoordinates( const GeoDataLineString &lineString,
 
     if (
          ( !traversablePoles() && lineString.latLonAltBox().containsPole( Marble::AnyPole ) ) ||
-         ( !traversableDateLine() && lineString.latLonAltBox().crossesDateLine() )
+         ( lineString.latLonAltBox().crossesDateLine() )
        ) {
         // We correct for Poles and DateLines:
+
         lineStrings = lineString.toRangeCorrected();
+
     }
     else {
         lineStrings << lineString;

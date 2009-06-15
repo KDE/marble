@@ -228,10 +228,9 @@ void PlacemarkLoader::saveFile( const QString& filename,
 
     out.setVersion( QDataStream::Qt_4_2 );
 
-    // Use double to provide a single cache file format across architectures
-    double lon;
-    double lat;
-    double alt;
+    qreal lon;
+    qreal lat;
+    qreal alt;
 
     PlacemarkContainer::const_iterator it = placemarkContainer->constBegin();
     PlacemarkContainer::const_iterator const end = placemarkContainer->constEnd();
@@ -240,7 +239,8 @@ void PlacemarkLoader::saveFile( const QString& filename,
         out << (*it).name();
         (it)->coordinate( lon, lat, alt );
 
-        out << lon << lat << alt;
+        // Use double to provide a single cache file format across architectures
+        out << (double)(lon) << (double)(lat) << (double)(alt);
         out << QString( (*it).role() );
         out << QString( (*it).description() );
         out << QString( (*it).countryCode() );
