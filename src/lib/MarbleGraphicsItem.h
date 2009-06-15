@@ -87,12 +87,6 @@ class MARBLE_EXPORT MarbleGraphicsItem {
     virtual bool eventFilter( QObject *object, QEvent *e );
     
     /**
-     * Test if an update of the cache is needed.
-     * @return true if the item need an update, false otherwise.
-     */
-    bool needsUpdate();
-    
-    /**
      * Set the size of the item
      */
     void setSize( const QSize& size );

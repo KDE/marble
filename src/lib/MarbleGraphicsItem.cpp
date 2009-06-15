@@ -52,10 +52,10 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
     if ( ItemCoordinateCache == cacheMode()
          || DeviceCoordinateCache == cacheMode() )
     {
+        p()->ensureValidCacheKey();
         QPixmap cachePixmap;
         bool pixmapAvailable = QPixmapCache::find( p()->m_cacheKey, cachePixmap );
-        if ( needsUpdate() || !pixmapAvailable ) {
-            p()->m_needsUpdate = false;
+        if ( !pixmapAvailable ) {
             QSize neededPixmapSize = size() + QSize( 1, 1 ); // adding a pixel for rounding errors
         
             if ( cachePixmap.size() != neededPixmapSize ) {
@@ -125,11 +125,7 @@ void MarbleGraphicsItem::setCacheMode( CacheMode mode, const QSize & logicalCach
 }
 
 void MarbleGraphicsItem::update() {
-    p()->m_needsUpdate = true;
-}
-
-bool MarbleGraphicsItem::needsUpdate() {
-    return p()->m_needsUpdate;
+    QPixmapCache::remove( p()->m_cacheKey );
 }
 
 void MarbleGraphicsItem::setSize( const QSize& size ) {
@@ -138,6 +134,8 @@ void MarbleGraphicsItem::setSize( const QSize& size ) {
 }
 
 bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e ) {
+    Q_UNUSED( object );
+    Q_UNUSED( e );
     return false;
 }
 

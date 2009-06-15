@@ -25,19 +25,24 @@ namespace Marble {
 class MarbleGraphicsItemPrivate {
  public:
     MarbleGraphicsItemPrivate()
-        : m_needsUpdate( true ),
-          m_cacheMode( MarbleGraphicsItem::NoCache )
+        : m_cacheMode( MarbleGraphicsItem::NoCache )
     {
-        static unsigned int key = 0;
-        m_cacheKey = QString( "MarbleGraphicsItem:" ) + QString::number( key );
-        key++;
     }
     
     virtual ~MarbleGraphicsItemPrivate() {
+        QPixmapCache::remove( m_cacheKey );
     }
      
     virtual QList<QPoint> positions() {
         return QList<QPoint>();
+    }
+    
+    void ensureValidCacheKey() {
+        if( m_cacheKey.isNull() ) {
+            static unsigned int key = 0;
+            m_cacheKey = QString( "MarbleGraphicsItem:" ) + QString::number( key );
+            key++;
+        }
     }
     
     QList<QRect> boundingRects() {
@@ -61,13 +66,12 @@ class MarbleGraphicsItemPrivate {
         Q_UNUSED( viewport );
     };
     
-    bool m_needsUpdate;
-    
     QSize m_size;
     QSize m_logicalCacheSize;
     
     MarbleGraphicsItem::CacheMode m_cacheMode;
     
+    // TODO: Substitute this by QPixmapCache::Key once it is available.
     QString m_cacheKey;
 };
 
