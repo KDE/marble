@@ -12,12 +12,18 @@
 #include "GeoDataLinearRing.h"
 #include "GeoDataLinearRing_p.h"
 
+#include <QtCore/QDebug>
 
 namespace Marble
 {
 
 GeoDataLinearRing::GeoDataLinearRing( TessellationFlags f )
     : GeoDataLineString( new GeoDataLinearRingPrivate( f ) )
+{
+}
+
+GeoDataLinearRing::GeoDataLinearRing( const GeoDataGeometry & other )
+  : GeoDataLineString( other )
 {
 }
 
@@ -28,6 +34,20 @@ GeoDataLinearRing::~GeoDataLinearRing()
 bool GeoDataLinearRing::isClosed() const
 {
     return true;
+}
+
+QVector<GeoDataLineString*> GeoDataLinearRing::toRangeCorrected() const
+{
+    if ( p()->m_dirtyRange ) {
+
+        qDeleteAll( p()->m_rangeCorrected );
+
+        GeoDataLinearRing poleCorrected = toPoleCorrected();
+
+        p()->m_rangeCorrected = poleCorrected.toDateLineCorrected();
+    }
+
+    return p()->m_rangeCorrected;
 }
 
 }

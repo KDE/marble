@@ -13,6 +13,7 @@
 #include "GeoDataLineString.h"
 #include "GeoDataLineString_p.h"
 
+#include "GeoDataLinearRing.h"
 #include "Quaternion.h"
 
 #include <QtCore/QDebug>
@@ -60,7 +61,7 @@ void GeoDataLineStringPrivate::interpolateDateLine( const GeoDataCoordinates & p
 
     int recursionCounter = 0;
 
-    qDebug() << Q_FUNC_INFO;
+//    qDebug() << Q_FUNC_INFO;
 
     if ( f.testFlag( RespectLatitudeCircle ) && previousCoords.latitude() == currentCoords.latitude() ) {
         dateLineCoords = currentCoords;
@@ -286,33 +287,61 @@ GeoDataLineString GeoDataLineString::toNormalized() const
     return normalizedLineString;
 }
 
+QVector<GeoDataLineString*> GeoDataLineString::toRangeCorrected() const
+{
+    if ( p()->m_dirtyRange ) {
+
+        qDeleteAll( p()->m_rangeCorrected );
+
+        GeoDataLineString poleCorrected = toPoleCorrected();
+
+        p()->m_rangeCorrected = poleCorrected.toDateLineCorrected();
+    }
+
+    return p()->m_rangeCorrected;
+}
+
+QVector<GeoDataLineString*> GeoDataLineString::toDateLineCorrected() const
+{
+    QVector<GeoDataLineString*> lineStrings;
+
+    p()->toDateLineCorrected( *this, lineStrings );
+
+    return lineStrings;
+}
+
 GeoDataLineString GeoDataLineString::toPoleCorrected() const
 {
     GeoDataLineString poleCorrected;
+    p()->toPoleCorrected( *this, poleCorrected );
+    return poleCorrected;
+}
 
-    poleCorrected.setTessellationFlags( tessellationFlags() );
+void GeoDataLineStringPrivate::toPoleCorrected( const GeoDataLineString& q, GeoDataLineString& poleCorrected )
+{
+    poleCorrected.setTessellationFlags( q.tessellationFlags() );
 
     GeoDataCoordinates previousCoords;
     GeoDataCoordinates currentCoords;
 
-    if ( isClosed() ) {
-        if ( !( p()->m_vector.first().isPole() ) &&
-              ( p()->m_vector.last().isPole() ) ) {
-                qreal firstLongitude = ( p()->m_vector.first() ).longitude();
-                GeoDataCoordinates modifiedCoords( p()->m_vector.last() );
+    if ( q.isClosed() ) {
+        if ( !( m_vector.first().isPole() ) &&
+              ( m_vector.last().isPole() ) ) {
+                qreal firstLongitude = ( m_vector.first() ).longitude();
+                GeoDataCoordinates modifiedCoords( m_vector.last() );
                 modifiedCoords.setLongitude( firstLongitude );
                 poleCorrected << modifiedCoords;
         }
     }
 
     for( QVector<GeoDataCoordinates>::const_iterator itCoords
-          = p()->m_vector.constBegin();
-         itCoords != p()->m_vector.constEnd();
+          = m_vector.constBegin();
+         itCoords != m_vector.constEnd();
          ++itCoords ) {
 
         currentCoords  = *itCoords;
 
-        if ( itCoords == p()->m_vector.constBegin() ) {
+        if ( itCoords == m_vector.constBegin() ) {
             previousCoords = currentCoords;
         }
 
@@ -343,70 +372,48 @@ GeoDataLineString GeoDataLineString::toPoleCorrected() const
         previousCoords = currentCoords;
     }
 
-    if ( isClosed() ) {
-        if (  ( p()->m_vector.first().isPole() ) &&
-             !( p()->m_vector.last().isPole() ) ) {
-                qreal lastLongitude = ( p()->m_vector.last() ).longitude();
-                GeoDataCoordinates modifiedCoords( p()->m_vector.first() );
+    if ( q.isClosed() ) {
+        if (  ( m_vector.first().isPole() ) &&
+             !( m_vector.last().isPole() ) ) {
+                qreal lastLongitude = ( m_vector.last() ).longitude();
+                GeoDataCoordinates modifiedCoords( m_vector.first() );
                 modifiedCoords.setLongitude( lastLongitude );
                 poleCorrected << modifiedCoords;
         }
     }
-    
-    return poleCorrected;
 }
 
-QVector<GeoDataLineString> GeoDataLineString::toRangeCorrected() const
+void GeoDataLineStringPrivate::toDateLineCorrected(
+                           const GeoDataLineString & q,
+                           QVector<GeoDataLineString*> & lineStrings
+                           )
 {
-    if ( p()->m_dirtyRange ) {
+    const bool isClosed = q.isClosed();
 
-        p()->m_rangeCorrected.clear();
-/*
-        // Normalization
-        GeoDataLineString normalizedLineString;
-        normalizedLineString = toNormalized();
-*/
-        // PoleCorrection
-        GeoDataLineString poleCorrectedLineString;
-        poleCorrectedLineString = /* normalizedLineString. */ toPoleCorrected();
-
-        // DateLine Correction
-        p()->m_rangeCorrected = poleCorrectedLineString.toDateLineCorrected( isClosed() );
-    }
-
-    return p()->m_rangeCorrected;
-}
-
-
-
-
-QVector<GeoDataLineString> GeoDataLineString::toDateLineCorrected( bool isClosed ) const
-{
-//    qDebug() << Q_FUNC_INFO;
-    QVector<GeoDataLineString> lineStrings;
-
-    const QVector<GeoDataCoordinates>::const_iterator itStartPoint = constBegin();
-    const QVector<GeoDataCoordinates>::const_iterator itEndPoint = constEnd();
+    const QVector<GeoDataCoordinates>::const_iterator itStartPoint = q.constBegin();
+    const QVector<GeoDataCoordinates>::const_iterator itEndPoint = q.constEnd();
     QVector<GeoDataCoordinates>::const_iterator itPoint = itStartPoint;
     QVector<GeoDataCoordinates>::const_iterator itPreviousPoint = itPoint;
 
-    GeoDataLineString dateLineCorrected;
-    dateLineCorrected.setTessellationFlags( tessellationFlags() );
+    TessellationFlags f = q.tessellationFlags();   
+
+    GeoDataLineString * unfinishedLineString = 0;
+
+    GeoDataLineString * dateLineCorrected = q.isClosed() ? new GeoDataLinearRing( f )
+                                                       : new GeoDataLineString( f );
 
     qreal currentLon = 0.0;
     qreal previousLon = 0.0;
     int previousSign = 1;
 
     bool unfinished = false;
-    GeoDataLineString unfinishedLineString;
-    unfinishedLineString.setTessellationFlags( tessellationFlags() );
 
     for (; itPoint != itEndPoint; ++itPoint ) {
         currentLon = itPoint->longitude();
 
         int currentSign = ( currentLon < 0.0 ) ? -1 : +1 ;
 
-        if( itPoint == constBegin() ) {
+        if( itPoint == q.constBegin() ) {
             previousSign = currentSign;
             previousLon  = currentLon;
         }
@@ -418,29 +425,33 @@ QVector<GeoDataLineString> GeoDataLineString::toDateLineCorrected( bool isClosed
             GeoDataCoordinates previousTemp;
             GeoDataCoordinates currentTemp;
 
-            p()->interpolateDateLine( *itPreviousPoint, *itPoint,
-                                      previousTemp, currentTemp, tessellationFlags() );
+            interpolateDateLine( *itPreviousPoint, *itPoint,
+                                 previousTemp, currentTemp, q.tessellationFlags() );
 
-            dateLineCorrected << previousTemp;
+            *dateLineCorrected << previousTemp;
 
             if ( isClosed && unfinished ) {
-                unfinishedLineString.clear();
                 unfinishedLineString = dateLineCorrected;
-                dateLineCorrected.clear();
+                dateLineCorrected = isClosed ? new GeoDataLinearRing( f )
+                                             : new GeoDataLineString( f );
             }
             else {
                 lineStrings << dateLineCorrected;
-                dateLineCorrected.clear();
-                dateLineCorrected = unfinishedLineString;
-                unfinishedLineString.clear();
+
+                if ( isClosed && !unfinished ) {
+                    dateLineCorrected = unfinishedLineString;
+                }
+                else {
+                    dateLineCorrected = new GeoDataLineString( f );
+                }
             }
 
-            dateLineCorrected << currentTemp;
-            dateLineCorrected << *itPoint;
+            *dateLineCorrected << currentTemp;
+            *dateLineCorrected << *itPoint;
             
         }
         else {
-            dateLineCorrected << *itPoint;
+            *dateLineCorrected << *itPoint;
         }
 
         previousSign = currentSign;
@@ -449,7 +460,6 @@ QVector<GeoDataLineString> GeoDataLineString::toDateLineCorrected( bool isClosed
     }
 
     lineStrings << dateLineCorrected;
-    return lineStrings;
 }
 
 GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const

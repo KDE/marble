@@ -64,13 +64,13 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
 
     GeoDataLatLonAltBox latLonAltBox() const;
 
-    QVector<GeoDataLineString> toRangeCorrected() const;
+    virtual QVector<GeoDataLineString*> toRangeCorrected() const;
 
-    GeoDataLineString toNormalized() const;
+    virtual GeoDataLineString toNormalized() const;
 
-    GeoDataLineString toPoleCorrected() const;
+    virtual GeoDataLineString toPoleCorrected() const;
 
-    QVector<GeoDataLineString> toDateLineCorrected( bool isClosed ) const;
+    virtual QVector<GeoDataLineString*> toDateLineCorrected() const;
 
     int size() const;
     GeoDataCoordinates& at( int pos );

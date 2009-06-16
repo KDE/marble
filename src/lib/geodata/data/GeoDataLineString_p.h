@@ -44,6 +44,11 @@ class GeoDataLineStringPrivate : public Marble::GeoDataGeometryPrivate
         return GeoDataLineStringId;
     }
 
+    void toPoleCorrected( const GeoDataLineString & q, GeoDataLineString & poleCorrected );
+
+    void toDateLineCorrected( const GeoDataLineString & q,
+                              QVector<GeoDataLineString*> & lineStrings );
+
     void interpolateDateLine( const GeoDataCoordinates & previousCoords,
                               const GeoDataCoordinates & currentCoords,
                               GeoDataCoordinates & previousAtDateline,
@@ -56,7 +61,7 @@ class GeoDataLineStringPrivate : public Marble::GeoDataGeometryPrivate
 
     QVector<GeoDataCoordinates> m_vector;
 
-    QVector<GeoDataLineString>  m_rangeCorrected;
+    QVector<GeoDataLineString*>  m_rangeCorrected;
     bool                        m_dirtyRange;
 
     GeoDataLatLonAltBox         m_latLonAltBox;

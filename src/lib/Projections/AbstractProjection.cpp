@@ -62,7 +62,7 @@ bool AbstractProjection::screenCoordinates( const GeoDataLineString &lineString,
         return false;
     }
 
-    QVector<GeoDataLineString> lineStrings;
+    QVector<GeoDataLineString*> lineStrings;
 
     if (
          ( !traversablePoles() && lineString.latLonAltBox().containsPole( Marble::AnyPole ) ) ||
@@ -72,15 +72,15 @@ bool AbstractProjection::screenCoordinates( const GeoDataLineString &lineString,
 
         lineStrings = lineString.toRangeCorrected();
 
+        foreach ( GeoDataLineString * itLineString, lineStrings ) {
+            QVector<QPolygonF *> subPolygons;
+
+            lineStringToPolygon( *itLineString, viewport, subPolygons );
+            polygons << subPolygons;
+        }
     }
     else {
-        lineStrings << lineString;
-    }
-
-    foreach ( const GeoDataLineString & itLineString, lineStrings ) {
-        QVector<QPolygonF *> subPolygons;
-        lineStringToPolygon( itLineString, viewport, subPolygons );
-        polygons << subPolygons;
+        lineStringToPolygon( lineString, viewport, polygons );
     }
 
     return polygons.isEmpty();
@@ -122,7 +122,8 @@ bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineStrin
     while ( itCoords != itEnd )
     {
         // Optimization for line strings with a big amount of nodes
-        bool skipNode = isLong && viewport->resolves( *itPreviousCoords, *itCoords);
+        bool skipNode = isLong && !processingLastNode &&
+                        viewport->resolves( *itPreviousCoords, *itCoords);
 
         if ( !skipNode ) {
 

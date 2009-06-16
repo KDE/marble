@@ -39,10 +39,13 @@ class GeoDataLinearRingPrivate;
 class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString {
  public:
     explicit GeoDataLinearRing( TessellationFlags f = NoTessellation);
+    GeoDataLinearRing( const GeoDataGeometry &other );
 
     virtual ~GeoDataLinearRing();
 
     virtual bool isClosed() const;
+
+    virtual QVector<GeoDataLineString*> toRangeCorrected() const;
 };
 
 }
