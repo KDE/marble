@@ -38,7 +38,7 @@ public:
 
 
     const QRegion           activeRegion ();
-    const QRegion           projectedRegion ();
+    const QRegion           mapRegion ();
     int                     radius () const;
     void                    setRadius (int radius);
     int                     zoom () const;
@@ -49,6 +49,7 @@ public:
     int                     maximumZoom () const;
     bool                    needsUpdate () const;
     void                    setNeedsUpdate ();
+    bool                    screenCoordinates (qreal lon, qreal lat, qreal& x /Out/, qreal& y /Out/);
     int                     northPoleY ();
     bool                    geoCoordinates (int x, int y, qreal& lon /out/, qreal& lat /out/, Marble::GeoDataCoordinates::Unit = Marble::GeoDataCoordinates::Degree);
     qreal                   centerLongitude () const;

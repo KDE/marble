@@ -25,33 +25,81 @@ class AbstractProjection /Abstract/
 %End
 
 public:
-    explicit                AbstractProjection ();
+
+    enum SurfaceType
+    {
+        Cylindrical,
+        Pseudocylindrical,
+        Hybrid,
+        Conical,
+        Pseudoconical,
+        Azimuthal
+    };
+
+
+    enum PreservationType
+    {
+        NoPreservation,
+        Conformal,
+        EqualArea
+    };
+
+                            AbstractProjection ();
     virtual qreal           maxLat () const;
     virtual qreal           minLat () const;
-    virtual bool            traversableMaxLat () const;
     virtual bool            repeatX () const;
     virtual void            setRepeatX (bool val);
-//ig    virtual Marble::AbstractProjectionHelper*  helper ();
+    virtual bool            traversablePoles () const;
+    virtual bool            traversableDateLine () const;
+    virtual Marble::AbstractProjection::SurfaceType  surfaceType () const = 0;
+    virtual Marble::AbstractProjection::PreservationType  preservationType () const;
+    virtual bool            isOrientedNormal () const;
 
-//ig    virtual bool            screenCoordinates (const qreal lon, const qreal lat, const Marble::ViewportParams* viewport, int& x /out/, int& y /out/) = 0;
-//ig    virtual bool            screenCoordinates (const Marble::GeoDataCoordinates& geopoint, const Marble::ViewportParams* viewport, int& x /out/, int& y /out/, bool& globeHidesPoint /out/) = 0;
-//ig    bool                    screenCoordinates (const Marble::GeoDataCoordinates& geopoint, const Marble::ViewportParams* viewport, int& x /out/, int& y /out/);
+//ig    virtual bool            screenCoordinates (const qreal lon, const qreal lat, const Marble::ViewportParams* viewport, qreal& x /out/, qreal& y /out/) = 0;
+//ig    virtual bool            screenCoordinates (const Marble::GeoDataCoordinates& geopoint, const Marble::ViewportParams* viewport, qreal& x /out/, qreal& y /out/, bool& globeHidesPoint /out/) = 0;
+//ig    bool            screenCoordinates (const Marble::GeoDataCoordinates& geopoint, const Marble::ViewportParams* viewport, qreal& x /out/, qreal& y /out/);
+
+//io ambiguous symbol: qreal* x -- specify In, Out or both
+//io ambiguous symbol: qreal& y -- specify In, Out or both
+//io ambiguous symbol: int& pointRepeatNum -- specify In, Out or both
+//io ambiguous symbol: bool& globeHidesPoint -- specify In, Out or both
+//io     bool               screenCoordinates (const Marble::GeoDataCoordinates& coordinates, const Marble::ViewportParams* viewport, qreal* x, qreal& y, int& pointRepeatNum, bool& globeHidesPoint);
+
+//io ambiguous symbol: qreal* x -- specify In, Out or both
+//io ambiguous symbol: qreal& y -- specify In, Out or both
+//io ambiguous symbol: int& pointRepeatNum -- specify In, Out or both
+//io ambiguous symbol: bool& globeHidesPoint -- specify In, Out or both
+//io     virtual bool       screenCoordinates (const Marble::GeoDataCoordinates& coordinates, const Marble::ViewportParams* viewport, qreal* x, qreal& y, int& pointRepeatNum, const QSizeF& size, bool& globeHidesPoint) = 0;
+
+
+
+//io ambiguous symbol: int& x -- specify In, Out or both
+//io ambiguous symbol: int& y -- specify In, Out or both
+//io     bool               screenCoordinates (qreal lon, qreal lat, const Marble::ViewportParams* viewport, int& x, int& y);
 
 //mt undefined symbol: QVector<QPolygonF*>& polygons -- need mapped type?
 //mt    virtual bool       screenCoordinates (const Marble::GeoDataLineString& lineString, const Marble::ViewportParams* viewport, QVector<QPolygonF*>& polygons) = 0;
 
     virtual bool    geoCoordinates (int x, int y, const Marble::ViewportParams* viewport, qreal& lon /out/, qreal& lat /out/, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Degree) = 0;
 
-//FIXME export needed.
-//    virtual Marble::GeoDataLatLonAltBox  latLonAltBox (const QRect& screenRect, const Marble::ViewportParams* viewport);
+// FIXME missing implementation?
+//ig    virtual Marble::GeoDataLatLonAltBox  latLonAltBox (const QRect& screenRect, const Marble::ViewportParams* viewport);
+//ig    bool                    exceedsLatitudeRange (const Marble::GeoDataCoordinates& coords) const;
+//ig    bool                    exceedsLatitudeRange (const Marble::GeoDataLineString& lineString) const;
 
-//FIXME    virtual Marble::GeoDataLinearRing  rectOutline (const QRect& screenRect, const Marble::ViewportParams* viewport);
     virtual bool            mapCoversViewport (const Marble::ViewportParams* viewport) const = 0;
+    virtual QPainterPath    mapShape (const Marble::ViewportParams* viewport) const = 0;
+
+// FIXME missing implementation?
+//ig    QRegion                 mapRegion (const Marble::ViewportParams* viewport) const;
 
 protected:
-    void                    coordinateExtremes (qreal lon, qreal lat, qreal& westLon /out/, qreal& eastLon /out/, qreal& otherWestLon /out/, qreal& otherEastLon /out/, qreal& northLat /out/, qreal& southLat /out/);
+    virtual void            tessellateHorizon (const Marble::GeoDataCoordinates& previousCoords, const Marble::GeoDataCoordinates& currentCoords, const Marble::ViewportParams* viewport);
 
-//FIXME    QPolygonF               tessellateLineSegment (const Marble::GeoDataCoordinates& previousCoords, const Marble::GeoDataCoordinates& currentCoords, int count, const Marble::ViewportParams* viewport, Marble::TessellationFlags f = 0);
+//mt undefined symbol: QVector<QPolygonF*>& polygons -- need mapped type?
+//mt     bool               lineStringToPolygon (const Marble::GeoDataLineString& lineString, const Marble::ViewportParams* viewport, QVector<QPolygonF*>& polygons);
+
+    QPolygonF               tessellateLineSegment (const Marble::GeoDataCoordinates& previousCoords, const Marble::GeoDataCoordinates& currentCoords, int count, const Marble::ViewportParams* viewport, Marble::TessellationFlags f = 0);
 };   // AbstractProjection
 
 };   // Marble

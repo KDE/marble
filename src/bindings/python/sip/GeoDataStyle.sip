@@ -29,8 +29,6 @@ public:
                             GeoDataStyle ();
                             GeoDataStyle (const Marble::GeoDataStyle& other);
                             GeoDataStyle (const QPixmap& icon, const QFont& font, const QColor& color);
-                            ~GeoDataStyle ();
-
     void                    setIconStyle (const Marble::GeoDataIconStyle& style);
     Marble::GeoDataIconStyle&  iconStyle () const;
     void                    setLabelStyle (const Marble::GeoDataLabelStyle& style);

@@ -26,7 +26,6 @@ class GeoDataLinearRing : Marble::GeoDataLineString
 
 public:
     explicit                GeoDataLinearRing (Marble::TessellationFlags f = Marble::NoTessellation);
-    virtual                 ~GeoDataLinearRing();
     virtual bool            isClosed () const;
 };   // GeoDataLinearRing
 

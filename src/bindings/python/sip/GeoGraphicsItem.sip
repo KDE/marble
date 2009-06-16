@@ -39,7 +39,7 @@ public:
     QList<QPoint>           positions ();
 
 protected:
-    virtual bool            paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0) = 0;
+    virtual void            paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0) = 0;
 
 public:
     void                    setCoordinate (const Marble::GeoDataPoint& point);

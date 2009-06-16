@@ -40,7 +40,6 @@ public:
     virtual void            unpack (QDataStream& stream);
                             GeoDataColorStyle ();
                             GeoDataColorStyle (const Marble::GeoDataColorStyle& other);
-    virtual                 ~GeoDataColorStyle ();
 };   // GeoDataColorStyle
 
 };   // Marble

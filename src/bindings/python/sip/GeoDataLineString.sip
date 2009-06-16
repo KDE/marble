@@ -37,6 +37,9 @@ public:
     Marble::TessellationFlags  tessellationFlags () const;
     void                    setTessellationFlags (Marble::TessellationFlags f);
     Marble::GeoDataLatLonAltBox  latLonAltBox () const;
+    QVector<Marble::GeoDataLineString>  toRangeCorrected () const;
+    Marble::GeoDataLineString  toPoleCorrected () const;
+    QVector<Marble::GeoDataLineString>  toDateLineCorrected () const;
     int                     size () const;
 //FIXME Add the needed Python list methods.
 //ig    Marble::GeoDataCoordinates&  at (int pos);

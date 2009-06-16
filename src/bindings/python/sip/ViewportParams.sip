@@ -49,6 +49,7 @@ public:
     void                    setSize (QSize newSize);
     void                    centerCoordinates (qreal& centerLon /out/, qreal& centerLat /out/) const;
     bool                    mapCoversViewport () const;
+    QRegion                 activeRegion () const;
 
 private:
                             ViewportParams (const Marble::ViewportParams&);

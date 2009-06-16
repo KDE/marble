@@ -57,7 +57,7 @@ public:
     int                     detail () const;
     void                    setDetail (const int det);
     const Marble::Quaternion&  quaternion () const;
-    bool                    isAtPole (Marble::Pole) const;
+    bool                    isPole (Marble::Pole=Marble::AnyPole) const;
     static Marble::GeoDataCoordinates::Notation  defaultNotation ();
     static void             setDefaultNotation (Marble::GeoDataCoordinates::Notation notation);
     static qreal            normalizeLon (qreal lon);

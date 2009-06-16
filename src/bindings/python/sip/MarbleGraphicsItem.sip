@@ -47,17 +47,18 @@ public:
     QSize                   size () const;
     Marble::MarbleGraphicsItem::CacheMode  cacheMode () const;
     void                    setCacheMode (Marble::MarbleGraphicsItem::CacheMode mode, const QSize& logicalCacheSize = QSize());
+    void                    update ();
 
 protected:
 
 
 //mt undefined symbol: GeoSceneLayer* layer -- need mapped type?
-//mt     virtual bool       paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer = 0) = 0;
+//mt     virtual void       paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer = 0) = 0;
 
 
     virtual bool            eventFilter (QObject* object, QEvent* e);
+    bool                    needsUpdate ();
     void                    setSize (const QSize& size);
-
 };   // MarbleGraphicsItem
 
 };   // Marble

@@ -44,7 +44,7 @@ protected:
     QString                 generateFilepath (const QString& id, const QString& type) const;
     bool                    fileExists (const QString& fileName) const;
     bool                    fileExists (const QString& id, const QString& type) const;
-    bool                    itemExists (const QString& id);
+    bool                    itemExists (const QString& id) const;
 };   // AbstractDataPluginModel
 
 };   // Marble

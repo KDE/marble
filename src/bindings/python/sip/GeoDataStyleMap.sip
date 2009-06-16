@@ -24,7 +24,7 @@ class GeoDataStyleMap : Marble::GeoDataStyleSelector /*, QMap<QString,QString> *
 %End
 
 public:
-    QString                 lastKey ();
+    QString                 lastKey () const;
     void                    setLastKey (QString key);
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
