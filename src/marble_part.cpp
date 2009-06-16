@@ -505,15 +505,6 @@ void MarblePart::writeSettings()
                                                volatileTileCacheLimit() / 1024 );
     MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->
                                                  persistentTileCacheLimit() / 1024 );
-
-    // Proxy
-    MarbleSettings::setProxyUrl( m_proxyHost );
-    MarbleSettings::setProxyPort( m_proxyPort );
-    MarbleSettings::setProxyUser( m_proxyUser );
-    MarbleSettings::setProxyPass( m_proxyPass );
-    MarbleSettings::setProxyAuth( m_proxyAuth );
-    MarbleSettings::setProxyHttp( m_proxyHttp );
-    MarbleSettings::setProxySocks5( m_proxySocks5 );
     
     // Plugins
     QList<int>   pluginEnabled;
@@ -1051,15 +1042,6 @@ void MarblePart::slotUpdateSettings()
     
     QNetworkProxy::setApplicationProxy(proxy);
     
-    //Save Proxy Details
-    m_proxyHost = MarbleSettings::proxyUrl();
-    m_proxyPort = MarbleSettings::proxyPort();
-    m_proxyUser = MarbleSettings::proxyUser();
-    m_proxyPass = MarbleSettings::proxyPass();
-    m_proxyAuth = MarbleSettings::proxyAuth();
-    m_proxyHttp = MarbleSettings::proxyHttp();
-    m_proxySocks5 = MarbleSettings::proxySocks5();
-
     m_controlView->marbleWidget()->updateChangedMap();
 
     // Show message box
