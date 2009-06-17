@@ -166,4 +166,9 @@ void GeoDataGeometry::unpack( QDataStream& stream )
     d->m_altitudeMode = (AltitudeMode) am;
 }
 
+bool GeoDataGeometry::isGeoProjected()
+{
+    return true;
+}
+
 }

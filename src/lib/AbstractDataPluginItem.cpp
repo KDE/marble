@@ -72,6 +72,11 @@ void AbstractDataPluginItem::setAddedAngularResolution( qreal resolution ) {
     d->m_addedAngularResolution = resolution;
 }
 
+bool AbstractDataPluginItem::isGeoProjected()
+{
+    return false;
+}
+
 } // Marble namespace
 
 #include "AbstractDataPluginItem.moc"

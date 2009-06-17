@@ -61,6 +61,8 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
     
     virtual void paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
+
+    virtual bool isGeoProjected();
                          
     virtual bool operator<( const AbstractDataPluginItem *other ) const = 0;
     

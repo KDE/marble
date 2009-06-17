@@ -293,6 +293,8 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject,
     void paint( GeoPainter *painter, ViewportParams *viewport,
                 const QString& renderPos, GeoSceneLayer * layer = 0 );
 
+    bool isGeoProjected();
+
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
     /// Unserialize the contents of the feature from @p stream.

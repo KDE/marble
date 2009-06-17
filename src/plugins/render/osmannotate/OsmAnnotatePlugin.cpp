@@ -14,6 +14,7 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QRadialGradient>
 #include <QtGui/QPushButton>
+#include <QtGui/QPainterPath>
 
 //#include <Phonon/MediaObject>
 //#include <Phonon/VideoWidget>
@@ -27,6 +28,7 @@
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "TextAnnotation.h"
+#include "MarbleWidget.h"
 
 namespace Marble
 {
@@ -156,21 +158,27 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     //FIXME why is the QEvent::MousePress not working? caught somewhere else?
     //does this mean we need to centralise the event handeling?
     if ( event->type() == QEvent::MouseMove ) {
+        qreal lon, lat;
+        bool valid = ((MarbleWidget*)watched)->geoCoordinates(((QMouseEvent*)event)->pos().x(),
+                                                              ((QMouseEvent*)event)->pos().y(),
+                                                              lon, lat, GeoDataCoordinates::Radian);
         //if the event is in an item change cursor
         // FIXME make this more effecient by using the bsptree
         QListIterator<TmpGraphicsItem*> i(model);
         while(i.hasNext()) {
-            //FIXME this point is impossible because we don't have access to a view.
-            //------------------------------------
-            //you either need to cache the painted screen positions
-            //or
-            //invent a GeoEvent that contains geo points.
-            //-------------------------------------
-            i.next();
+            TmpGraphicsItem* item = i.next();
+            if(valid) {
+                //FIXME check against all regions!
+                if ( item->m_regions.at(0).contains( QPointF(lon, lat) ) ) {
+                    qDebug() << "Event in OsmAnnotate Plugin" << event;
+                    qDebug() << sizeof(item->m_regions.at(0)) ;
+                }
+            }
+
         }
 
 
-        qDebug() << "Event in OsmAnnotate Plugin" << event;
+
     }
     return false;
 }

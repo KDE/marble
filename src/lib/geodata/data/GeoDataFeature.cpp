@@ -537,6 +537,11 @@ void GeoDataFeature::paint( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED(layer);
 }
 
+bool GeoDataFeature::isGeoProjected()
+{
+    return false;
+}
+
 void GeoDataFeature::detach()
 {
     if(d->ref == 1)

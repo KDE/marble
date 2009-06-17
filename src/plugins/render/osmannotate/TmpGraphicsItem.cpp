@@ -21,12 +21,5 @@ TmpGraphicsItem::~TmpGraphicsItem()
 
 }
 
-GeoDataLatLonBox TmpGraphicsItem::geoBounding()
-{
-    return m_geoBoundCache;
 }
-
-}
-
-
 

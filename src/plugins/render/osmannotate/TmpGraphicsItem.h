@@ -13,6 +13,7 @@
 
 #include <QtCore/QRect>
 #include <QtCore/QObject>
+#include <QtGui/QPainterPath>
 
 #include "GeoGraphicsItem.h"
 #include "GeoDataLatLonAltBox.h"
@@ -28,18 +29,15 @@ public:
 
 
     virtual QRect screenBounding() = 0 ;
-    virtual GeoDataLatLonBox geoBounding(qreal angularResolution) = 0;
-    //for this to work we MUST set the m_geoBoundCache after constructing it
-    virtual GeoDataLatLonBox geoBounding();
+    virtual void geoBounding(qreal angularResolution) = 0;
+
     virtual void paint(GeoPainter * painter, ViewportParams * viewport, const QString &renderPos, GeoSceneLayer *layer) =0 ;
 
+    //this is just so that i can test the implementation
+    QList<QPainterPath>  m_regions;
 
-private:
-    //so that its only made once?
-    QRect m_screenBoundCache;
-protected:
-    //possibly cache the calculation of the geobound
-    GeoDataLatLonBox m_geoBoundCache;
+
+
 
 };
 

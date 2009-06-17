@@ -26,9 +26,13 @@ QRect TextAnnotation::screenBounding()
     return QRect(-5,-5,20,20);
 }
 
-GeoDataLatLonBox TextAnnotation::geoBounding(qreal angularResolution)
+void TextAnnotation::geoBounding(qreal angularResolution)
 {
-    //TALK possible for the geoBounding to be automatic?
+    //FIXME
+    // Remove this method when the QRegion is actually done by the painter
+    // it will be preduced in the GeoGraphicsItemPrivate during a paint event
+
+
     qreal lat, lon, alt, width, height;
     coordinate(lon, lat, alt);
 
@@ -36,12 +40,14 @@ GeoDataLatLonBox TextAnnotation::geoBounding(qreal angularResolution)
     //Dependant. This does not lend well to a good consistant model.
     width = screenBounding().width() * angularResolution;
     height = screenBounding().height() * angularResolution;
-    m_geoBoundCache =  GeoDataLatLonBox(coordinate().latitude() - (height/2),
-                            coordinate().latitude() + (height/2),
-                            coordinate().longitude() + (width/2),
-                            coordinate().longitude() - (width/2));
+    QRectF bound( coordinate().longitude() - (width/2),
+                 coordinate().latitude() - (height/2),
+                 width, height) ;
+    m_regions.clear();
+    QPainterPath path;
+    path.addRect(bound);
+    m_regions.append(path);
 
-    return m_geoBoundCache;
 }
 
 void TextAnnotation::paint( GeoPainter *painter,
@@ -51,18 +57,31 @@ void TextAnnotation::paint( GeoPainter *painter,
 {
     qreal degPix = viewport->angularResolution() * RAD2DEG;
 
-    painter->drawEllipse(coordinate(), screenBounding().width(),
-                         screenBounding().height(), false);
+    painter->drawEllipse(coordinate(), screenBounding().width(), screenBounding().height(), isGeoProjected());
     //Would it not be usefull to have a draw latlongbox?
 //    painter->drawRect(geoBounding());
     qreal north, south, east, west;
-    geoBounding(viewport->angularResolution()).boundaries(north, south, east, west);
-    painter->drawRect(GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ),
-                      geoBounding(viewport->angularResolution()).width(GeoDataCoordinates::Degree),
-                      geoBounding(viewport->angularResolution()).height(GeoDataCoordinates::Degree),true);
-    painter->drawPoint( GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ) );
-    qDebug() << geoBounding(viewport->angularResolution()).width();
 
+    //don't need this if its done by the painter soon
+    geoBounding(viewport->angularResolution());
+    north = m_regions.at(0).boundingRect().top();
+    south = m_regions.at(0).boundingRect().bottom();
+    east = m_regions.at(0).boundingRect().right();
+    west = m_regions.at(0).boundingRect().left();
+
+    //would like a method to draw a QRegion ;)
+    painter->drawRect(GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ),
+                      m_regions.at(0).boundingRect().width() * RAD2DEG,
+                      m_regions.at(0).boundingRect().height() * RAD2DEG,true);
+
+    painter->drawPoint( GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ) );
+
+
+}
+
+bool TextAnnotation::isGeoProjected()
+{
+    return false;
 }
 
 }
