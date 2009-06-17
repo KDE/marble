@@ -15,7 +15,10 @@ static QString createClientPath() {
     SimpleDBusInterface masterInterface(serviceName, masterPathName,
         masterInterfaceName);
     QDBusReply<QDBusObjectPath> reply = masterInterface.call("Create");
-    return reply.value().path();
+    if (reply.isValid())
+        return reply.value().path();
+    else
+	return QString();
 }
 
 MasterClient::Private::Private()
@@ -36,8 +39,11 @@ void MasterClient::setRequirements(AccuracyLevel accuracy, int min_time,
 }
 
 PositionProvider* MasterClient::positionProvider() {
-    d->interface.call("PositionStart");
-    return new PositionProvider(d->interface.service(), d->interface.path());
+    if (!d->interface.path().isEmpty()) {
+        d->interface.call("PositionStart");
+        return new PositionProvider(d->interface.service(), d->interface.path());
+    } else
+        return 0;
 }
 
 

@@ -44,10 +44,12 @@ QIcon GeoCluePositionProviderPlugin::icon() const
 void GeoCluePositionProviderPlugin::initialize()
 {
     m_positionProvider = GeoCute::PositionProvider::detailed();
-    connect( m_positionProvider, SIGNAL( positionChanged(GeoCute::Position) ),
-             SLOT( updatePosition(GeoCute::Position) ) );
-    connect( m_positionProvider, SIGNAL( statusChanged(GeoCute::Status) ),
-             SLOT( updateStatus(GeoCute::Status) ) );
+    if (m_positionProvider) {
+        connect( m_positionProvider, SIGNAL( positionChanged(GeoCute::Position) ),
+                 SLOT( updatePosition(GeoCute::Position) ) );
+        connect( m_positionProvider, SIGNAL( statusChanged(GeoCute::Status) ),
+                 SLOT( updateStatus(GeoCute::Status) ) );
+    }
 }
 
 bool GeoCluePositionProviderPlugin::isInitialized() const
