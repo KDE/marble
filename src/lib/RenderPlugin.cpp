@@ -9,13 +9,16 @@
 // Copyright 2008      Inge Wallin    <inge@lysator.liu.se>"
 //
 
-
+// Self
 #include "RenderPlugin.h"
+
+// Marble
 #include "MarbleDataFacade.h"
 
+// Qt
 #include <QtGui/QAction>
-#include <QtCore/QDebug>
 #include <QtGui/QStandardItem>
+#include <QtCore/QDebug>
 
 
 namespace Marble
@@ -60,6 +63,7 @@ RenderPlugin::~RenderPlugin()
 {
     delete d->m_item;
     delete d;
+
 }
 
 MarbleDataFacade* RenderPlugin::dataFacade() const
@@ -82,16 +86,19 @@ QAction* RenderPlugin::action() const
     return d->m_action;
 }
 
-QStandardItem* RenderPlugin::item() const
-{
+QStandardItem* RenderPlugin::item() const {
     d->m_item->setIcon( icon() );
     d->m_item->setText( name() );
     d->m_item->setEditable( false );
     d->m_item->setCheckable( true );
     d->m_item->setCheckState( enabled() ?  Qt::Checked : Qt::Unchecked  );
-
     d->m_item->setToolTip( description() );
- 
+
+    // Custom data
+    d->m_item->setData( nameId(), RenderPlugin::NameId );
+    d->m_item->setData( (bool) aboutDialog(), RenderPlugin::AboutDialogAvailable );
+    d->m_item->setData( (bool) configDialog(), RenderPlugin::ConfigurationDialogAvailable );
+    d->m_item->setData( backendTypes(), RenderPlugin::BackendTypes );
 
     return d->m_item;
 }
@@ -140,10 +147,18 @@ bool RenderPlugin::visible() const
     return d->m_visible;
 }
 
+QDialog *RenderPlugin::aboutDialog() const {
+    return 0;
+}
+
+QDialog *RenderPlugin::configDialog() const {
+    return 0;
+}
+
 bool RenderPlugin::eventFilter( QObject *, QEvent * ) {
     return false;
 }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
 
-}
+} // namespace Marble
 
 #include "RenderPlugin.moc"

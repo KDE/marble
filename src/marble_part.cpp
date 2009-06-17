@@ -949,7 +949,7 @@ void MarblePart::editSettings()
 			     "preferences-plugin" );
 
     connect( w_pluginSettings, SIGNAL( pluginListViewClicked() ),
-	                       SLOT( slotEnableButtonApply() ) );
+                               SLOT( slotEnableButtonApply() ) );
     connect( m_configDialog,   SIGNAL( settingsChanged( const QString &) ),
 	                       SLOT( slotUpdateSettings() ) );
     connect( m_configDialog,   SIGNAL( applyClicked() ),

@@ -161,6 +161,7 @@ set(marblewidget_SRCS
     PositionProviderPlugin.cpp
     PositionProviderPluginInterface.cpp
     MarblePluginSettingsWidget.cpp
+    PluginItemDelegate.cpp
 
     SunLocator.cpp
     ExtDateTime.cpp

@@ -16,6 +16,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/Qt>
+#include <QtGui/QStandardItem>
 
 #include "RenderPluginInterface.h"
 #include "marble_export.h"
@@ -41,6 +42,16 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     Q_INTERFACES( Marble::RenderPluginInterface )
 
  public:
+    /**
+     * This enum contains the data roles for the QStandardItem that is returned by item().
+     */
+    enum ItemDataRole {
+        NameId = Qt::UserRole + 2,       // a QString
+        AboutDialogAvailable,            // a bool
+        ConfigurationDialogAvailable,    // a bool
+        BackendTypes                     // a QStringList
+    };
+
     RenderPlugin();
     virtual ~RenderPlugin();
 
@@ -55,6 +66,19 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 
     bool    enabled() const;
     bool    visible() const;
+    
+    /**
+     * Function for getting a pointer to the about dialog of the plugin.
+     *
+     * @return: The about dialog or, if no about dialog exists, 0.
+     */
+    virtual QDialog *aboutDialog() const;
+    /**
+     * Function for getting a pointer to the configuration dialog of the plugin.
+     *
+     * @return: The configuration dialog or, if no configuration dialog exists, 0.
+     */
+    virtual QDialog *configDialog() const;
 
  public Q_SLOTS:
     void    setEnabled( bool enabled );
