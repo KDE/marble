@@ -13,7 +13,6 @@
 
 // Marble
 #include "RenderPlugin.h"
-#include "PluginModelItem.h"
 
 // Qt
 #include <QtCore/QDebug>
