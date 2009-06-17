@@ -7,6 +7,6 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( osmannotate_SRCS OsmAnnotatePlugin.cpp )
+set( osmannotate_SRCS OsmAnnotatePlugin.cpp TmpGraphicsItem.cpp TextAnnotation.cpp)
 
 marble_add_plugin( OsmAnnotatePlugin ${osmannotate_SRCS} )

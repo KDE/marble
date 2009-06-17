@@ -18,6 +18,7 @@
 #include <QtCore/QObject>
 
 #include "RenderPlugin.h"
+#include "TmpGraphicsItem.h"
 
 namespace Marble
 {
@@ -27,9 +28,9 @@ namespace Marble
  *
  */
 
-class OsmAnnotatePlugin : public RenderPlugin
+class OsmAnnotatePlugin :  public RenderPlugin
 {
-    Q_OBJECT
+
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( OsmAnnotatePlugin )
 
@@ -56,15 +57,18 @@ class OsmAnnotatePlugin : public RenderPlugin
     bool isInitialized () const;
 
 
+
+
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
-    //Intended to be replaced by an actual model system provided similar to
-    // the regular data plugins
-//    QList<QWidget*> widgetModel;
+    //Intended to be replaced by an actual model system
+    QList<TmpGraphicsItem*> model;
 
     //Only examples as a preview
     QWidget*    vid;
     QWidget*    but;
+ protected:
+    bool eventFilter(QObject* watched, QEvent* event);
 };
 
 }

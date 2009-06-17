@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
 #ifndef GEOGRAPHICSITEM_H
@@ -36,6 +37,14 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
     GeoGraphicsItem();
     GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr );
     virtual ~GeoGraphicsItem();
+
+    enum GeoGraphicsItemFlag{
+        NoOptions = 0x0,
+        ItemIsMovable = 0x1,
+        ItemIsSelectable = 0x2
+    };
+
+    Q_DECLARE_FLAGS( GeoGraphicsItemFlags, GeoGraphicsItemFlag )
     
     /**
      * Return the coordinate of the item as a GeoDataCoordinates
@@ -84,6 +93,11 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
  private:     
     GeoGraphicsItemPrivate *p() const;
 };
+
+//Declares the operator|() for flags but breaks other enum comparisons related to 
+//GeoGraphicsItem
+//FIXME ... is this nessesary?
+//Q_DECLARE_OPERATORS_FOR_FLAGS(GeoGraphicsItem::GeoGraphicsItemFlags)
 
 } // Namespace Marble
 
