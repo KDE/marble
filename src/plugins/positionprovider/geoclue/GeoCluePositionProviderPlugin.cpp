@@ -33,7 +33,7 @@ QString GeoCluePositionProviderPlugin::guiString() const
 
 QString GeoCluePositionProviderPlugin::description() const
 {
-    return tr( "Reports the the position using the GeoClue framework." );
+    return tr( "Reports the the position via the GeoClue Location Framework." );
 }
 
 QIcon GeoCluePositionProviderPlugin::icon() const
