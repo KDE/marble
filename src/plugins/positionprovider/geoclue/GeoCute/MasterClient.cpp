@@ -34,8 +34,10 @@ MasterClient::~MasterClient() {
 void MasterClient::setRequirements(AccuracyLevel accuracy, int min_time,
     SignallingFlags signalling, ResourceFlags resources)
 {
-    d->interface.call("SetRequirements", accuracy, min_time,
+    if (!d->interface.path().isEmpty()) {
+        d->interface.call("SetRequirements", accuracy, min_time,
         signalling == SignallingRequired, resources);
+    }
 }
 
 PositionProvider* MasterClient::positionProvider() {
