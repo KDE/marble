@@ -10,7 +10,7 @@
 
 #include "GeoCluePositionProviderPlugin.h"
 
-#include <GeoCute/PositionProvider.h>
+#include "GeoCute/PositionProvider.h"
 
 
 

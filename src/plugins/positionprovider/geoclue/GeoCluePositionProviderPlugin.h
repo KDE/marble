@@ -11,8 +11,8 @@
 #ifndef GEOCLUEPOSITIONPROVIDERPLUGIN_H
 #define GEOCLUEPOSITIONPROVIDERPLUGIN_H
 
-#include <GeoCute/Position.h>
-#include <GeoCute/Status.h>
+#include "GeoCute/Position.h"
+#include "GeoCute/Status.h"
 
 #include "PositionProviderPlugin.h"
 
