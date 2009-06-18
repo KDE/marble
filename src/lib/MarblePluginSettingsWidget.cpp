@@ -22,8 +22,8 @@ using namespace Marble;
 MarblePluginSettingsWidget::MarblePluginSettingsWidget( QWidget *parent ) : QWidget( parent )
 {
     setupUi( this );
-    
-    PluginItemDelegate *itemDelegate = new PluginItemDelegate( m_pluginListView, this );
+
+    PluginItemDelegate *itemDelegate = new PluginItemDelegate( this );
     m_pluginListView->setItemDelegate( itemDelegate );
     connect( m_pluginListView, SIGNAL( clicked( QModelIndex ) ),
          this, SIGNAL( pluginListViewClicked() ) );

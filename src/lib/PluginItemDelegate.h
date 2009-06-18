@@ -14,18 +14,19 @@
 #include <QtGui/QStyledItemDelegate>
 
 class QPainter;
-class QStyleOptionViewItem;
 class QModelIndex;
-class QAbstractViewItem;
+class QRect;
+class QStyleOptionButton;
+class QStyleOptionViewItem;
 
 namespace Marble {
 
-class PluginItemDelegate : public QStyledItemDelegate
+class PluginItemDelegate : public QAbstractItemDelegate
 {
     Q_OBJECT
 
  public:
-    PluginItemDelegate( QAbstractItemView *itemView, QObject * parent = 0 );
+    PluginItemDelegate( QObject * parent = 0 );
     ~PluginItemDelegate();
     
     void paint( QPainter *painter,
@@ -46,11 +47,18 @@ class PluginItemDelegate : public QStyledItemDelegate
      */
     void configPluginClicked( QString nameId );
 
- private Q_SLOTS:
-    void handleClickEvent( const QModelIndex& );
+ protected:
+    bool editorEvent( QEvent *event,
+                      QAbstractItemModel *model,
+                      const QStyleOptionViewItem &option,
+                      const QModelIndex &index );
 
  private:
-    const QAbstractItemView *m_itemView;
+    QStyleOptionButton checkboxOption( const QStyleOptionViewItem& option,
+                                       const QModelIndex& index ) const;
+    QStyleOptionButton buttonOption(   const QStyleOptionViewItem& option,
+                                       const QModelIndex& index ) const;
+    QSize nameSize( const QModelIndex& index ) const;
 };
 
 }

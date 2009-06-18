@@ -93,6 +93,7 @@ QStandardItem* RenderPlugin::item() const {
     d->m_item->setCheckable( true );
     d->m_item->setCheckState( enabled() ?  Qt::Checked : Qt::Unchecked  );
     d->m_item->setToolTip( description() );
+    d->m_item->setFlags( d->m_item->flags() & ~Qt::ItemIsSelectable );
 
     // Custom data
     d->m_item->setData( nameId(), RenderPlugin::NameId );
