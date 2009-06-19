@@ -54,10 +54,16 @@ class PluginItemDelegate : public QAbstractItemDelegate
                       const QModelIndex &index );
 
  private:
+    enum ButtonType {
+        About,
+        Configure
+    };
+
     QStyleOptionButton checkboxOption( const QStyleOptionViewItem& option,
                                        const QModelIndex& index ) const;
     QStyleOptionButton buttonOption(   const QStyleOptionViewItem& option,
-                                       const QModelIndex& index ) const;
+                                       const QModelIndex& index,
+                                       PluginItemDelegate::ButtonType type ) const;
     QSize nameSize( const QModelIndex& index ) const;
 };
 

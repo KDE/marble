@@ -52,33 +52,41 @@ void PluginItemDelegate::paint( QPainter *painter,
 
     painter->translate( rect.topLeft() );
 
+    // rect is now represented in item coordinates
+    rect.moveTopLeft( QPoint( 0, 0 ) );
+    // The point at the top left of the available drawing area.
+    QPoint topLeft( 0, 0 );
+    // The point at the top right of the available drawing area.
+    QPoint topRight( rect.topRight() );
+
     // Painting the checkbox
     QStyleOptionButton checkBox = checkboxOption( option, index );
     painter->save();
     QApplication::style()->drawControl( QStyle::CE_CheckBox, &checkBox, painter );
     painter->restore();
-    painter->translate( checkBox.rect.width(), 0 );
-
+    topLeft += QPoint( checkBox.rect.width(), 0 );
 
     // Painting the Name string
     QString name = index.data( Qt::DisplayRole ).toString();
     QRect nameRect( QPoint( 0, 0 ), nameSize( index ) );
     nameRect.setHeight( rect.height() );
+    nameRect.moveTopLeft( topLeft );
     QApplication::style()->drawItemText( painter,
                                          nameRect,
                                          Qt::AlignLeft | Qt::AlignVCenter,
                                          option.palette,
                                          false,
                                          name );
-    painter->translate( nameRect.width(), 0 );
+    topLeft += QPoint( nameRect.width(), 0 );
     
     // Painting the About Button
     if ( /*index.data( RenderPlugin::AboutDialogAvailable ).toBool()*/ true ) {
-        QStyleOptionButton button = buttonOption( option, index );
+        QStyleOptionButton button = buttonOption( option, index, PluginItemDelegate::About );
         button.rect.setHeight( rect.height() );
 
+        button.rect.moveTopRight( topRight );
         QApplication::style()->drawControl( QStyle::CE_PushButton, &button, painter );
-        painter->translate( button.rect.width(), 0 );
+        topRight -= QPoint( button.rect.width(), 0 );
     }
     painter->restore();
 }
@@ -90,11 +98,10 @@ QSize PluginItemDelegate::sizeHint( const QStyleOptionViewItem& option,
 
     QStyleOptionViewItem opt = option;
     opt.rect = QRect( 0, 0, 0, 0 );
-    qDebug() << opt.rect;
     QList<QSize> elementSize;
     QStyleOptionButton checkBox = checkboxOption( opt, index );
     elementSize.append( checkBox.rect.size() );
-    QStyleOptionButton aboutButton = buttonOption( opt, index );
+    QStyleOptionButton aboutButton = buttonOption( opt, index, PluginItemDelegate::About );
     elementSize.append( aboutButton.rect.size() );
     elementSize.append( nameSize( index ) );
 
@@ -136,12 +143,27 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
                 return false;
 
             // eat the double click events inside the check rect
-            if (event->type() == QEvent::MouseButtonDblClick)
+            if ( event->type() == QEvent::MouseButtonDblClick )
                 return true;
 
             Qt::CheckState state = ( static_cast<Qt::CheckState>( checkValue.toInt() ) == Qt::Checked
                                      ? Qt::Unchecked : Qt::Checked );
             return model->setData(index, state, Qt::CheckStateRole);
+        }
+
+        // Handle aboutButton
+        QRect aboutRect = buttonOption( option, index, PluginItemDelegate::About ).rect;
+        aboutRect.moveTopRight( option.rect.topRight() );
+        if ( aboutRect.contains( me->pos() ) ) {
+            // make sure we have a about button
+            if ( /*!index.data( RenderPlugin::AboutDialogAvailable ).toBool()*/ false )
+                return false;
+
+            if ( event->type() == QEvent::MouseButtonDblClick )
+                return true;
+
+            qDebug() << "About clicked";
+            emit aboutPluginClicked( index.data( RenderPlugin::NameId ).toString() );
         }
     }
 
@@ -166,7 +188,8 @@ QStyleOptionButton PluginItemDelegate::checkboxOption( const QStyleOptionViewIte
 }
 
 QStyleOptionButton PluginItemDelegate::buttonOption( const QStyleOptionViewItem& option,
-                                                     const QModelIndex& index ) const
+                                                     const QModelIndex& index,
+                                                     PluginItemDelegate::ButtonType type ) const
 {
     QStyleOptionButton buttonOption;
     buttonOption.state = option.state;
@@ -175,7 +198,10 @@ QStyleOptionButton PluginItemDelegate::buttonOption( const QStyleOptionViewItem&
     buttonOption.rect.setTopLeft( QPoint( 0, 0 ) );
     buttonOption.palette = option.palette;
     buttonOption.features = QStyleOptionButton::None;
-    buttonOption.text = tr( "About" );
+    if ( type == PluginItemDelegate::About )
+        buttonOption.text = tr( "About" );
+    else if ( type == PluginItemDelegate::Configure )
+        buttonOption.text = tr( "Configure" );
     buttonOption.state = option.state;
 
     QSize textSize = buttonOption.fontMetrics.size( 0, buttonOption.text ) + QSize( 4, 4 );
