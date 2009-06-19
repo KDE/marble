@@ -465,11 +465,24 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     SunLocator* sunLocator();
 
+    //These methods should all be removed
+    // what does this do to binary compatibility?
     void setProxy( const QString& proxyHost, const quint16 proxyPort, const QString& user, const QString& password );
     QString proxyHost() const;
     quint16 proxyPort() const;
     QString user() const;
     QString password() const;
+
+    /**
+     * Regestering an action with the marble Widget activates it and places it in
+     * the main toolbar.
+     */
+    void registerAction( QAction* action );
+
+    /**
+     * Disables an action and removes it from the main toolbar.
+     */
+    void removeAction( QAction* action );
 
     /**
      * @brief Returns a list of all RenderPlugins on the widget, this includes float items
@@ -543,6 +556,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void updateSun();
     void centerSun();
+    void disableInput(bool);
     void enableInput();
     void disableInput();
 //    void repaintMap();

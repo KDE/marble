@@ -22,6 +22,9 @@
 #include <QtGui/QPaintEvent>
 #include <QtGui/QRegion>
 #include <QtGui/QStyleOptionGraphicsItem>
+#include <QtGui/QToolBar>
+#include <QtGui/QMainWindow>
+#include <QtGui/QAction>
 #include <QtNetwork/QNetworkProxy>
 
 #ifdef MARBLE_DBUS
@@ -74,7 +77,8 @@ class MarbleWidgetPrivate
           m_proxyHost(),
           m_proxyPort( 0 ),
           m_user(),
-          m_password()
+          m_password(), 
+          m_mainToolbar()
     {
     }
 
@@ -104,7 +108,11 @@ class MarbleWidgetPrivate
     MarbleWidgetInputHandler  *m_inputhandler;
 
     MarblePhysics    *m_physics;
+    
+    QToolBar        *m_mainToolbar;
+    QAction         *m_disableInputAction;
 
+    //This stuff is NEVER used. Needs to be deleted
     QString          m_proxyHost;
     qint16           m_proxyPort;
     QString          m_user;
@@ -119,6 +127,12 @@ MarbleWidget::MarbleWidget(QWidget *parent)
 {
 //    setAttribute( Qt::WA_PaintOnScreen, true );
     d->construct();
+
+    if( parent->parent()->inherits( "QMainWindow" ) ) {
+        ((QMainWindow*) parent->parent())->addToolBar(d->m_mainToolbar);
+    }
+
+    registerAction( d->m_disableInputAction );
 }
 
 
@@ -203,6 +217,15 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler );
     m_widget->setMouseTracking( m_widget );
+
+    m_mainToolbar = new QToolBar(0);
+
+    m_disableInputAction = new QAction(m_mainToolbar);
+    m_disableInputAction->setText("Disable Marble Input");
+    m_disableInputAction->setCheckable(true);
+
+    m_widget->connect( m_disableInputAction, SIGNAL(toggled(bool)),
+                       m_widget, SLOT(disableInput(bool)) );
 }
 
 // ----------------------------------------------------------------
@@ -1206,6 +1229,15 @@ SunLocator* MarbleWidget::sunLocator()
     return d->m_model->sunLocator();
 }
 
+void MarbleWidget::disableInput( bool in )
+{
+    if( in ) {
+        disableInput();
+    } else {
+        enableInput();
+    }
+}
+
 void MarbleWidget::enableInput()
 {
     if ( !d->m_inputhandler ) {
@@ -1259,6 +1291,16 @@ QString MarbleWidget::user() const
 QString MarbleWidget::password() const
 {
     return d->m_password;
+}
+
+void MarbleWidget::registerAction( QAction *action )
+{
+    d->m_mainToolbar->addAction( action );
+}
+
+void MarbleWidget::removeAction( QAction *action )
+{
+    d->m_mainToolbar->removeAction( action );
 }
 
 QList<RenderPlugin *> MarbleWidget::renderPlugins() const

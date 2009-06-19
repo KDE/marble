@@ -27,8 +27,10 @@ public:
     TmpGraphicsItem();
     ~TmpGraphicsItem();
 
-
+    //method will be removed when we decide how to do the general case of
+    //a hit test. Waiting for tackat to do "The Maths"
     virtual QRect screenBounding() = 0 ;
+    // same as above
     virtual void geoBounding(qreal angularResolution) = 0;
 
     virtual void paint(GeoPainter * painter, ViewportParams * viewport, const QString &renderPos, GeoSceneLayer *layer) =0 ;

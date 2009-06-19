@@ -11,8 +11,10 @@
 #include "TextAnnotation.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
+#include "MarbleDirs.h"
 
 #include <QtCore/QDebug>
+#include <QtGui/QPixmap>
 
 namespace Marble{
 
@@ -75,6 +77,8 @@ void TextAnnotation::paint( GeoPainter *painter,
                       m_regions.at(0).boundingRect().height() * RAD2DEG,true);
 
     painter->drawPoint( GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ) );
+
+    painter->drawPixmap( coordinate(), QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) )  );
 
 
 }

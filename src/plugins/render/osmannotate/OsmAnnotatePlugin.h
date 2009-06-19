@@ -16,12 +16,16 @@
 #define MARBLEOSMANNOTATEPLUGIN_H
 
 #include <QtCore/QObject>
+#include <QtGui/QToolBar>
+#include <QtGui/QGroupBox>
 
 #include "RenderPlugin.h"
 #include "TmpGraphicsItem.h"
 
 namespace Marble
 {
+
+    class MarbleWidget;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
@@ -30,7 +34,7 @@ namespace Marble
 
 class OsmAnnotatePlugin :  public RenderPlugin
 {
-
+    Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( OsmAnnotatePlugin )
 
@@ -67,8 +71,24 @@ class OsmAnnotatePlugin :  public RenderPlugin
     //Only examples as a preview
     QWidget*    vid;
     QWidget*    but;
+
+    bool    widgetInitalised;
+
+    QAction*    m_addPlacemark;
+    QAction*    m_drawPolygon;
+    QAction*    m_drawLine;
+    QAction*    m_beginSeperator;
+    QAction*    m_endSeperator;
+signals:
+    void redraw();
+public slots:
+    void drawPolygon(bool);
  protected:
     bool eventFilter(QObject* watched, QEvent* event);
+private:
+    void setupActions(MarbleWidget* m);
+
+    GeoDataLineString* tmp_lineString;
 };
 
 }

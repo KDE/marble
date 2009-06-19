@@ -20,6 +20,7 @@
 //#include <Phonon/VideoWidget>
 
 #include <QtCore/QDebug>
+#include <QtGui/QAction>
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
 #include "MarbleDirs.h"
@@ -28,6 +29,7 @@
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "TextAnnotation.h"
+#include "AreaAnnotation.h"
 #include "MarbleWidget.h"
 
 namespace Marble
@@ -78,6 +80,7 @@ void OsmAnnotatePlugin::initialize ()
 {
     //initialise the first test widget
     QPushButton * button;
+
     button = new QPushButton(0);
     but = button;
 
@@ -102,7 +105,8 @@ void OsmAnnotatePlugin::initialize ()
 //
 //    m.setCurrentSource(fileName);
 
-
+    widgetInitalised= false;
+    tmp_lineString = 0;
 }
 
 bool OsmAnnotatePlugin::isInitialized () const
@@ -112,6 +116,15 @@ bool OsmAnnotatePlugin::isInitialized () const
 
 bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
+    if( !widgetInitalised ) {
+        MarbleWidget* marbleWidget = (MarbleWidget*) painter->device();
+        setupActions( marbleWidget );
+
+        connect(this, SIGNAL(redraw()),
+                marbleWidget, SLOT(repaint()) );
+
+        widgetInitalised = true;
+    }
     painter->autoMapQuality();
 
     //Set the parents if they have not already been set
@@ -122,8 +135,7 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
 //    }
 
     if ( but->parent() == 0 ) {
-        but->setParent( (QWidget*)painter->device() );
-         but->setVisible(false);
+
     }
 
     int x, y;
@@ -138,27 +150,110 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
         tmp->paint(painter, viewport, renderPos, layer);
     }
 
+    if ( tmp_lineString != 0 ) {
+        painter->drawPolyline( *tmp_lineString );
+    }
+
 
 
 
     viewport->currentProjection()->screenCoordinates( madrid, viewport, x, y, hidden );
 
-    if( !hidden ) {
-        but->move(QPoint(x, y));
-        but->setVisible(false);
-    } else {
-        but->setVisible(false);
-    }
+//    if( !hidden ) {
+//        but->move(QPoint(x, y));
+//        but->setVisible(false);
+//    } else {
+//        but->setVisible(false);
+//    }
 
     return true;
 }
 
+void OsmAnnotatePlugin::drawPolygon(bool b)
+{
+    if( !b ) {
+        //stopped drawing the polygon
+        if ( tmp_lineString != 0 ) {
+            AreaAnnotation* area = new AreaAnnotation();
+            GeoDataPolygon poly;
+            poly.setOuterBoundary( GeoDataLinearRing(*tmp_lineString) );
+            delete tmp_lineString;
+            tmp_lineString = 0;
+
+            area->setGeometry( poly );
+
+            model.append(area);
+
+            //FIXME only redraw the new polygon
+            emit(redraw());
+        }
+    }
+}
+
 bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 {
+    MarbleWidget* marbleWidget = (MarbleWidget*) watched;
     //FIXME why is the QEvent::MousePress not working? caught somewhere else?
     //does this mean we need to centralise the event handeling?
-    if ( event->type() == QEvent::MouseMove ) {
+
+    // Catch the mouse button press
+    if ( event->type() == QEvent::MouseButtonPress ) {
+        QMouseEvent* mouseEvent = (QMouseEvent*) event;
+
+        // deal with adding a placemark
+        if ( mouseEvent->button() == Qt::LeftButton
+             && m_addPlacemark->isChecked() )
+        {
+            //Add a placemark on the screen
+            qreal lon, lat;
+
+            bool valid = ((MarbleWidget*)watched)->geoCoordinates(((QMouseEvent*)event)->pos().x(),
+                                                                  ((QMouseEvent*)event)->pos().y(),
+                                                                  lon, lat, GeoDataCoordinates::Radian);
+            if ( valid ) {
+                GeoDataCoordinates point( lon, lat );
+                TextAnnotation* t = new TextAnnotation();
+                t->setCoordinate(point);
+                model.append(t);
+
+                //FIXME only repaint the new placemark
+                ( ( MarbleWidget* ) watched)->repaint();
+                m_addPlacemark->setChecked( false );
+                return true;
+            }
+
+
+        }
+
+        // deal with drawing a polygon
+        if ( mouseEvent->button() == Qt::LeftButton
+             && m_drawPolygon->isChecked() )
+        {
+            qreal lon, lat;
+
+            bool valid = ((MarbleWidget*)watched)->geoCoordinates( mouseEvent->pos().x(),
+                                                                   mouseEvent->pos().y(),
+                                                                   lon, lat, GeoDataCoordinates::Radian);
+            if ( valid ) {
+                if ( tmp_lineString == 0 ) {
+                    tmp_lineString = new GeoDataLineString();
+                }
+
+                tmp_lineString->append(GeoDataCoordinates(lon, lat));
+
+                //FIXME only repaint the line string so far
+                marbleWidget->repaint();
+
+            }
+        }
+    }
+
+    // this stuff below is for hit tests. Just a sample mouse over for all bounding boxes
+    if ( event->type() == QEvent::MouseMove ||
+         event->type() == QEvent::MouseButtonPress ||
+         event->type() == QEvent::MouseButtonRelease ) {
         qreal lon, lat;
+
         bool valid = ((MarbleWidget*)watched)->geoCoordinates(((QMouseEvent*)event)->pos().x(),
                                                               ((QMouseEvent*)event)->pos().y(),
                                                               lon, lat, GeoDataCoordinates::Radian);
@@ -169,9 +264,15 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
             TmpGraphicsItem* item = i.next();
             if(valid) {
                 //FIXME check against all regions!
-                if ( item->m_regions.at(0).contains( QPointF(lon, lat) ) ) {
-                    qDebug() << "Event in OsmAnnotate Plugin" << event;
-                    qDebug() << sizeof(item->m_regions.at(0)) ;
+                QListIterator<QPainterPath> it ( item->m_regions );
+
+                while ( it.hasNext() ) {
+                    QPainterPath p = it.next();
+                    if( p.contains( QPoint( lon, lat ) ) ) {
+                        qDebug() << "Event in OsmAnnotate Plugin" << event;
+                        qDebug() << sizeof(item->m_regions.at(0)) ;
+                        return true;
+                    }
                 }
             }
 
@@ -181,6 +282,30 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 
     }
     return false;
+}
+
+void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
+{
+    m_addPlacemark = new QAction(this);
+    m_addPlacemark->setText( "Add Placemark" );
+    m_addPlacemark->setCheckable( true );
+
+    m_drawPolygon = new QAction( this );
+    m_drawPolygon->setText( "Draw Polygon" );
+    m_drawPolygon->setCheckable( true );
+    connect( m_drawPolygon, SIGNAL(toggled(bool)),
+             this, SLOT(drawPolygon(bool)) );
+
+    m_beginSeperator = new QAction( this );
+    m_beginSeperator->setSeparator( true );
+    m_endSeperator = new QAction ( this );
+    m_endSeperator->setSeparator( true );
+
+    widget->registerAction( m_beginSeperator );
+    widget->registerAction( m_addPlacemark );
+    widget->registerAction( m_drawPolygon );
+    widget->registerAction( m_endSeperator );
+
 }
 
 }
