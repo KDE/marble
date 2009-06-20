@@ -161,6 +161,7 @@ set(marblewidget_SRCS
     PositionProviderPlugin.cpp
     PositionProviderPluginInterface.cpp
     MarblePluginSettingsWidget.cpp
+    PluginAboutDialog.cpp
     PluginItemDelegate.cpp
 
     SunLocator.cpp
@@ -302,6 +303,7 @@ else (APPLE AND QTONLY)
     PluginInterface.h
     RenderPlugin.h
     RenderPluginInterface.h
+    PluginAboutDialog.h
     marble_export.h
     Planet.h
     

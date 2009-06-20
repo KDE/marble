@@ -19,6 +19,8 @@
 
 namespace Marble {
 
+class PluginAboutDialog;
+
 class WikipediaPlugin : public AbstractDataPlugin {
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
@@ -26,6 +28,7 @@ class WikipediaPlugin : public AbstractDataPlugin {
     
  public:
     WikipediaPlugin();
+    ~WikipediaPlugin();
      
     void initialize();
     
@@ -36,6 +39,12 @@ class WikipediaPlugin : public AbstractDataPlugin {
     QString description() const;
     
     QIcon icon() const;
+
+    QDialog *aboutDialog() const;
+
+ private:
+    QIcon m_icon;
+    PluginAboutDialog *m_aboutDialog;
 };
 
 }

@@ -193,6 +193,10 @@ weather/weather-storm-night.svgz
 weather/weather-storm.svgz
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/weather)
 
+install (FILES
+licenses/lgpl2.txt
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/licenses)
+
 FILE (GLOB PNT_FILES mwdbii/*.PNT)
 install (FILES
   ${PNT_FILES}

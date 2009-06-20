@@ -13,7 +13,11 @@
 
 #include "AbstractDataPlugin.h"
 
+class QIcon;
+
 namespace Marble {
+
+class PluginAboutDialog;
 
 class WeatherPlugin : public AbstractDataPlugin {
     Q_OBJECT
@@ -34,6 +38,12 @@ class WeatherPlugin : public AbstractDataPlugin {
     QString description() const;
     
     QIcon icon() const;
+
+    QDialog *aboutDialog() const;
+
+ private:
+    QIcon m_icon;
+    PluginAboutDialog *m_aboutDialog;
 };
 
 }

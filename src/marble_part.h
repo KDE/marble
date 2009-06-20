@@ -120,6 +120,8 @@ class MarblePart: public KParts::ReadOnlyPart
 
     void  slotUpdateSettings();
 
+    void  showPluginAboutDialog( QString nameId );
+
   private:
     void  setupActions();
     void  setupDownloadProgressBar();

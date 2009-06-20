@@ -958,6 +958,8 @@ void MarblePart::editSettings()
 	                       SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( cancelClicked() ),
 	                       SLOT( retrievePluginState() ) );
+    connect( w_pluginSettings, SIGNAL( aboutPluginClicked( QString ) ),
+                               SLOT( showPluginAboutDialog( QString ) ) );
 
     m_configDialog->show();
 }
@@ -1054,6 +1056,19 @@ void MarblePart::slotUpdateSettings()
                                 tr("Graphics System Change") );
     }    
     m_previousGraphicsSystem = graphicsSystem;
+}
+
+void MarblePart::showPluginAboutDialog( QString nameId ) {
+    QList<RenderPlugin *> renderItemList = m_controlView->marbleWidget()->renderPlugins();
+
+    foreach ( RenderPlugin *renderItem, renderItemList ) {
+        if( renderItem->nameId() == nameId ) {
+            QDialog *aboutDialog = renderItem->aboutDialog();
+            if ( aboutDialog ) {
+                aboutDialog->show();
+            }
+        }
+    }
 }
 
 void MarblePart::lockFloatItemPosition( bool enabled )

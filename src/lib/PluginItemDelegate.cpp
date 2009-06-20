@@ -80,7 +80,7 @@ void PluginItemDelegate::paint( QPainter *painter,
     topLeft += QPoint( nameRect.width(), 0 );
     
     // Painting the About Button
-    if ( /*index.data( RenderPlugin::AboutDialogAvailable ).toBool()*/ true ) {
+    if ( index.data( RenderPlugin::AboutDialogAvailable ).toBool() ) {
         QStyleOptionButton button = buttonOption( option, index, PluginItemDelegate::About );
         button.rect.setHeight( rect.height() );
 
@@ -156,13 +156,12 @@ bool PluginItemDelegate::editorEvent( QEvent *event,
         aboutRect.moveTopRight( option.rect.topRight() );
         if ( aboutRect.contains( me->pos() ) ) {
             // make sure we have a about button
-            if ( /*!index.data( RenderPlugin::AboutDialogAvailable ).toBool()*/ false )
+            if ( !index.data( RenderPlugin::AboutDialogAvailable ).toBool() )
                 return false;
 
             if ( event->type() == QEvent::MouseButtonDblClick )
                 return true;
 
-            qDebug() << "About clicked";
             emit aboutPluginClicked( index.data( RenderPlugin::NameId ).toString() );
         }
     }

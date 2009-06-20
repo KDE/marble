@@ -108,6 +108,8 @@ class QtMarbleConfigDialog : public QDialog
      */
     void syncSettings();
 
+    void showPluginAboutDialog( QString nameId );
+
     private:
     Q_DISABLE_COPY( QtMarbleConfigDialog )
 

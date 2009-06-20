@@ -1,0 +1,111 @@
+//
+// This file is part of the Marble Desktop Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+//
+
+#ifndef PLUGINABOUTDIALOG_H
+#define PLUGINABOUTDIALOG_H
+
+#include <QtGui/QDialog>
+#include <QtCore/QList>
+
+// Marble
+#include "marble_export.h"
+
+namespace Marble {
+
+class PluginAboutDialogPrivate;
+
+struct Author {
+    QString name;
+    QString task;
+    QString email;
+};
+
+class MARBLE_EXPORT PluginAboutDialog : public QDialog
+{
+    Q_OBJECT
+
+ public:
+    enum LicenseKey {
+//        License_Unknown = 0,
+//        License_GPL = 1,
+//        License_GPL_V2 = 1,
+//        License_LGPL = 2,
+        License_LGPL_V2 = 2,
+//        License_BSD = 3,
+//        License_Artistic = 4,
+//        License_QPL = 5,
+//        License_QPL_V1_0 = 5,
+//        License_GPL_V3 = 6,
+//        License_LGPL_V3 = 7
+    };
+
+    explicit PluginAboutDialog( QWidget *parent = 0 );
+    virtual ~PluginAboutDialog();
+
+    /**
+     * Sets the name of the plugin.
+     */
+    void setName( const QString& name );
+
+    /**
+     * Sets the version of the plugin;
+     */
+    void setVersion( const QString& version );
+
+    /**
+     * Sets the pixmap to be displayed at the top of the dialog.
+     */
+    void setPixmap( const QPixmap& pixmap );
+
+    /**
+     * Sets the text displayed in the "About" tab of the dialog.
+     */
+    void setAboutText( const QString& about );
+
+    /**
+     * Sets the authors working on this plugin.
+     */
+    void setAuthors( const QList<Author>& authors );
+
+    /**
+     * Sets the text displayed in the "Authors" tab of the dialog.
+     * @warning You would want to use setAuthors instead.
+     */
+    void setAuthorsText( const QString& authors );
+
+    /**
+     * Sets the text displayed in the "Data" tab of the dialog.
+     * An null QString will result into no "Data" tab at all.
+     */
+    void setDataText( const QString& data );
+
+    /**
+     * Sets the license for the "License Agreement" tab of the dialog.
+     */
+    void setLicense( PluginAboutDialog::LicenseKey license );
+
+    /**
+     * Sets the text displayed in the "License Agreement" tab of the dialog.
+     * A null QString will result into the default LGPLv2 license agreement.
+     * If your plugin is not part of the official Marble distribution, please set it
+     * manually to the license agreement you prefer (even if it is LGPLv2).
+     * @warning You would want to use setLicense instead.
+     */
+    void setLicenseAgreementText( const QString& license );
+
+ private:
+    Q_DISABLE_COPY( PluginAboutDialog );
+
+    PluginAboutDialogPrivate *d;
+};
+
+} // namespace Marble
+
+#endif // PLUGINABOUTDIALOG_H
