@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 // Self
@@ -71,9 +72,6 @@ class AbstractDataPluginModelPrivate {
         for( hIt = m_downloadingItems.begin(); hIt != m_downloadingItems.end(); ++hIt ) {
             (*hIt)->deleteLater();
         }
-        
-        m_storagePolicy->clearCache();
-        delete m_storagePolicy;
     }
     
     AbstractDataPluginModel *m_parent;
@@ -115,6 +113,7 @@ AbstractDataPluginModel::AbstractDataPluginModel( const QString& name, QObject *
 
 AbstractDataPluginModel::~AbstractDataPluginModel()
 {
+    delete d->m_downloadManager;
     delete d;
 }
 
