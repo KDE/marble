@@ -171,6 +171,8 @@ void PlacemarkInfoDialog::showContent()
     population_val_lbl->setVisible( true );
     diameter_lbl->setVisible( false );
     diameter_val_lbl->setVisible( false );
+    timezone_lbl->setVisible( false );
+    timezone_val_lbl->setVisible( false );
 
     if ( altitude <= 0 )
         elevation_val_lbl->setText( tr("-") );
