@@ -24,7 +24,8 @@
 
 namespace Marble {
 
-class AbstractDataPluginItemPrivate {
+class AbstractDataPluginItemPrivate
+{
  public:
     AbstractDataPluginItemPrivate()
         : m_addedAngularResolution( 0 )
@@ -44,31 +45,38 @@ AbstractDataPluginItem::AbstractDataPluginItem( QObject *parent )
 {
 }
 
-AbstractDataPluginItem::~AbstractDataPluginItem() {
+AbstractDataPluginItem::~AbstractDataPluginItem()
+{
     delete d;
 }
 
-QString AbstractDataPluginItem::target() {
+QString AbstractDataPluginItem::target()
+{
     return d->m_target;
 }
 
-void AbstractDataPluginItem::setTarget( const QString& target ) {
+void AbstractDataPluginItem::setTarget( const QString& target )
+{
     d->m_target = target;
 }
 
-QString AbstractDataPluginItem::id() const {
+QString AbstractDataPluginItem::id() const
+{
     return d->m_id;
 }
 
-void AbstractDataPluginItem::setId( const QString& id ) {
+void AbstractDataPluginItem::setId( const QString& id )
+{
     d->m_id = id;
 }
 
-qreal AbstractDataPluginItem::addedAngularResolution() const {
+qreal AbstractDataPluginItem::addedAngularResolution() const
+{
     return d->m_addedAngularResolution;
 }
 
-void AbstractDataPluginItem::setAddedAngularResolution( qreal resolution ) {
+void AbstractDataPluginItem::setAddedAngularResolution( qreal resolution )
+{
     d->m_addedAngularResolution = resolution;
 }
 
