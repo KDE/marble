@@ -32,7 +32,7 @@ class PlacemarkLoader : public QThread {
     Q_SIGNALS:
         void placemarksLoaded( PlacemarkLoader*, PlacemarkContainer * );
         void placemarkLoaderFailed( PlacemarkLoader* );
-        void newGeoDataDocumentAdded( GeoDataDocument* );
+        void newGeoDataDocumentAdded( const GeoDataDocument& );
     private:
         bool loadFile( const QString& filename, PlacemarkContainer* placemarkContainer );
         void saveFile( const QString& filename, PlacemarkContainer* placemarkContainer );

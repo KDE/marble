@@ -48,7 +48,7 @@ PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& contents, cons
 
 PlacemarkLoader::~PlacemarkLoader()
 {
-//    delete m_document;
+    delete m_document;
 }
 
 QString PlacemarkLoader::path() const
@@ -173,6 +173,7 @@ void PlacemarkLoader::importKml( const QString& filename,
     GeoDocument* document = parser.releaseDocument();
     Q_ASSERT( document );
 
+    delete m_document;
     m_document = static_cast<GeoDataDocument*>( document );
     m_document->setFileName( m_filepath );
     *placemarkContainer = PlacemarkContainer( m_document->placemarks(), 
@@ -182,7 +183,7 @@ void PlacemarkLoader::importKml( const QString& filename,
 
     qDebug() << "newGeoDataDocumentAdded" << m_filepath;
 
-    emit newGeoDataDocumentAdded( m_document );
+    emit newGeoDataDocumentAdded( *m_document );
 }
 
 void PlacemarkLoader::importKmlFromData( PlacemarkContainer* placemarkContainer )
@@ -200,6 +201,7 @@ void PlacemarkLoader::importKmlFromData( PlacemarkContainer* placemarkContainer 
     GeoDocument* document = parser.releaseDocument();
     Q_ASSERT( document );
 
+    delete m_document;
     m_document = static_cast<GeoDataDocument*>( document );
     m_document->setFileName( m_filepath );
     *placemarkContainer = PlacemarkContainer( m_document->placemarks(), 
@@ -209,7 +211,7 @@ void PlacemarkLoader::importKmlFromData( PlacemarkContainer* placemarkContainer 
 
     qDebug() << "newGeoDataDocumentAdded" << m_filepath;
     
-    emit newGeoDataDocumentAdded( m_document );
+    emit newGeoDataDocumentAdded( *m_document );
 }
 
 void PlacemarkLoader::saveFile( const QString& filename,
@@ -283,6 +285,7 @@ bool PlacemarkLoader::loadFile( const QString& filename,
       return;
       }
     */
+    delete m_document;
     m_document = new GeoDataDocument();
 
     m_document->setFileName( m_filepath );
@@ -322,7 +325,7 @@ bool PlacemarkLoader::loadFile( const QString& filename,
 
     qDebug() << "newGeoDataDocumentAdded" << m_filepath;
 	m_document->setVisible( false );
-    emit newGeoDataDocumentAdded( m_document );
+    emit newGeoDataDocumentAdded( *m_document );
     return true;
 }
 
