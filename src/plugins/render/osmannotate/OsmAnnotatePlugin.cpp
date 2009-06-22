@@ -175,7 +175,7 @@ void OsmAnnotatePlugin::drawPolygon(bool b)
         //stopped drawing the polygon
         if ( tmp_lineString != 0 ) {
             AreaAnnotation* area = new AreaAnnotation();
-            GeoDataPolygon poly;
+            GeoDataPolygon poly( Tessellate );
             poly.setOuterBoundary( GeoDataLinearRing(*tmp_lineString) );
             delete tmp_lineString;
             tmp_lineString = 0;
@@ -236,7 +236,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
                                                                    lon, lat, GeoDataCoordinates::Radian);
             if ( valid ) {
                 if ( tmp_lineString == 0 ) {
-                    tmp_lineString = new GeoDataLineString();
+                    tmp_lineString = new GeoDataLineString( Tessellate );
                 }
 
                 tmp_lineString->append(GeoDataCoordinates(lon, lat));
