@@ -276,7 +276,7 @@ void GeoDataFeature::initializeDefaultStyles()
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
 
     s_defaultStyle[Observatory]
-        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/other.png" ) ), 
+        = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/observatory.png" ) ),
               QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
 
     s_defaultStyle[Wikipedia]
