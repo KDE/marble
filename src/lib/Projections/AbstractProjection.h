@@ -214,21 +214,47 @@ class AbstractProjection
     qreal  m_minLat;               // The min latitude.  Not always the same as maxLat.
     bool   m_repeatX;              // Map repeated in X direction.
 
-    virtual void tessellateHorizon( const GeoDataCoordinates &previousCoords,
-                                    const GeoDataCoordinates &currentCoords,
-                                    const ViewportParams *viewport );
-
     bool lineStringToPolygon( const GeoDataLineString &lineString,
                                     const ViewportParams *viewport,
                                     QVector<QPolygonF*> &polygons );
 
-    // This method tesselates a line segment in a way that the line segment
+    GeoDataCoordinates findHorizon( const GeoDataCoordinates & previousCoords,
+                                    const GeoDataCoordinates & currentCoords,
+                                    const ViewportParams *viewport,
+                                    TessellationFlags f = 0,
+                                    int recursionCounter = 0 );
+
+    bool globeHidesPoint( const GeoDataCoordinates &coordinates,
+                          const ViewportParams *viewport );
+
+    void manageHorizonCrossing( bool globeHidesPoint,
+                                const GeoDataCoordinates& horizonCoords,
+                                bool& horizonPair,
+                                GeoDataCoordinates& horizonDisappearCoords,
+                                bool& horizonOrphan,
+                                GeoDataCoordinates& horizonOrphanCoords );
+
+    void horizonToPolygon( const ViewportParams *viewport,
+                           const GeoDataCoordinates & disappearCoords,
+                           const GeoDataCoordinates & reappearCoords,
+                           QPolygonF* );
+
+    // This method tessellates a line segment in a way that the line segment
     // follows great circles. The count parameter specifies the 
     // number of nodes generated for the polygon. If the 
     // clampToGround flag is added the polygon contains count + 2
     // nodes as the clamped down start and end node get added.
 
-    QPolygonF tessellateLineSegment( const GeoDataCoordinates &previousCoords, 
+    void tessellateLineSegment(     const GeoDataCoordinates &aCoords,
+                                    qreal ax, qreal ay,                                    
+                                    const GeoDataCoordinates &bCoords,
+                                    qreal bx, qreal by,
+                                    QPolygonF * polygon,
+                                    const ViewportParams *viewport,
+                                    TessellationFlags f = 0 );
+
+
+    QPolygonF processTessellation(  const GeoDataCoordinates &previousCoords,
                                     const GeoDataCoordinates &currentCoords, 
                                     int count, const ViewportParams *viewport,
                                     TessellationFlags f = 0 ); 

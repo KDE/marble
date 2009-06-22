@@ -157,7 +157,7 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
 
 
 
-    viewport->currentProjection()->screenCoordinates( madrid, viewport, x, y, hidden );
+//    viewport->currentProjection()->screenCoordinates( madrid, viewport, x, y, hidden );
 
 //    if( !hidden ) {
 //        but->move(QPoint(x, y));

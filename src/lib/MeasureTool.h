@@ -18,9 +18,10 @@
 #define MEASURETOOL_H
 
 
-#include <QtCore/QVector>
 #include <QtGui/QFont>
 #include <QtGui/QPen>
+
+#include <GeoDataLineString.h>
 
 #include "global.h"
 
@@ -30,7 +31,6 @@ namespace Marble
 class MarbleModel;
 class GeoDataCoordinates;
 class GeoPainter;
-class Quaternion;
 class ViewportParams;
 
 class MeasureTool : public QObject
@@ -52,25 +52,20 @@ class MeasureTool : public QObject
     void  removeMeasurePoints();
 
  private:
-    void  drawDistancePoints( GeoPainter *painter, ViewportParams *viewport );
-    void  drawMark( GeoPainter* painter, ViewportParams *viewport,
-                    int x, int y );
-    void  drawDistancePath( GeoPainter* painter,
-                            const Quaternion&, const Quaternion&,
-                            ViewportParams *viewport );
+    void  drawMeasurePoints( GeoPainter *painter, ViewportParams *viewport );
+    void  drawMark( GeoPainter* painter, int x, int y );
     void  drawTotalDistanceLabel( GeoPainter *painter,
                                   qreal totalDistance );
 
  private:
     Q_DISABLE_COPY( MeasureTool )
 
-    // The list of points in the distance path.
-    QVector<GeoDataCoordinates*>  m_pMeasurePointList;
+    // The line strings in the distance path.
+    GeoDataLineString m_measureLineString;
 
     MarbleModel *m_model;
 
     QFont   m_font_regular;
-    int     m_fontheight;
     int     m_fontascent;
 
     QPen    m_pen;

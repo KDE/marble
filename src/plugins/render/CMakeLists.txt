@@ -13,7 +13,7 @@ add_subdirectory( photo )
 # add_subdirectory ( twitter )
 add_subdirectory( wikipedia )
 add_subdirectory( weather )
-#add_subdirectory( osmannotate )
+add_subdirectory( osmannotate )
 
 add_subdirectory( navigation )
 # add_subdirectory ( FITemplate )

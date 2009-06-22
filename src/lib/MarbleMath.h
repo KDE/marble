@@ -15,6 +15,7 @@
 
 #include <QtCore/QtGlobal>
 
+#include <GeoDataCoordinates.h>
 #include <math.h>
 
 
@@ -45,11 +46,31 @@ namespace Marble
  * @brief See: http://en.wikipedia.org/wiki/Great-circle_distance
  */
 inline qreal distanceSphere( qreal lon1, qreal lat1, qreal lon2, qreal lat2 ) {
+
     qreal h1 = sin( 0.5 * ( lat2 - lat1 ) );
     qreal h2 = sin( 0.5 * ( lon2 - lon1 ) );
     qreal d = h1 * h1 + cos( lat1 ) * cos( lat2 ) * h2 * h2;
+
     return 2.0 * atan2( sqrt( d ), sqrt( 1.0 - d ) );
 }
+
+
+/**
+ * @brief This method calculates the shortest distance between two points on a sphere.
+ * @brief See: http://en.wikipedia.org/wiki/Great-circle_distance
+ */
+inline qreal distanceSphere( const GeoDataCoordinates& coords1, const GeoDataCoordinates& coords2 ) {
+
+    qreal lon1, lat1;
+    coords1.geoCoordinates( lon1, lat1 );
+    qreal lon2, lat2;
+    coords2.geoCoordinates( lon2, lat2 );
+
+    // FIXME: Take the altitude into account!
+
+    return distanceSphere( lon1, lat1, lon2, lat2 );
+}
+
 
 /**
  * @brief This method roughly calculates the shortest distance between two points on a sphere.
@@ -61,13 +82,13 @@ inline qreal distanceSphereApprox( qreal lon1, qreal lat1, qreal lon2, qreal lat
     return acos( sin( lat1 ) * sin( lat2 ) + cos( lat1 ) * cos( lat2 ) * cos( lon1 - lon2 ) );
 }
 
+
 /**
  * @brief This method is a fast Mac Laurin power series approximation of the 
  * @brief inverse Gudermannian. The inverse Gudermannian gives the vertical 
  * @brief position y in the Mercator projection in terms of the latitude.
  * @brief See: http://en.wikipedia.org/wiki/Mercator_projection
  */
-
 inline qreal gdInv( qreal x ) {
         const qreal x2 = x * x;
         return x 
