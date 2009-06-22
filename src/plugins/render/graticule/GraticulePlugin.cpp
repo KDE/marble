@@ -152,13 +152,12 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     renderLatitudeLines(  painter, viewLatLonAltBox, boldDegreeStep,                                    
                           Marble::NoLabel );  
 
-//    painter->setPen( QPen( QBrush( Qt::yellow ), 1.5 ) );    
     painter->setPen( QColor( Qt::yellow ) );
 
     // Render the equator
     renderLatitudeLine( painter, 0.0, viewLatLonAltBox, tr( "Equator" ) );
 
-    // Render the Meridian and Antimeridian
+    // Render the Prime Meridian and Antimeridian
     renderLongitudeLine( painter, 0.0, viewLatLonAltBox, 0.0, tr( "Prime Meridian" ) );
     renderLongitudeLine( painter, 180.0, viewLatLonAltBox, 0.0, tr( "Antimeridian" ) );
 
@@ -359,6 +358,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
         qreal itStep = eastLineLon;
 
         while ( itStep < 180.0 ) {
+
             // Create a matching label
             QString label = GeoDataCoordinates::lonToString( itStep, 
                                 notation, GeoDataCoordinates::Degree, 
@@ -381,13 +381,13 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
         itStep = -180.0;
         while ( itStep < westLineLon ) {
+
             // Create a matching label
             QString label = GeoDataCoordinates::lonToString( itStep, 
                                 notation, GeoDataCoordinates::Degree, 
                                 -1, 'g' );
 
             // No additional labels for the prime meridian and the antimeridian
-
             if ( labelPositionFlags.testFlag( Marble::LineCenter ) && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
             {
                 label.clear();

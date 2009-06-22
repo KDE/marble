@@ -14,6 +14,7 @@
 #include "GeoDataLineString_p.h"
 
 #include "GeoDataLinearRing.h"
+#include "MarbleMath.h"
 #include "Quaternion.h"
 
 #include <QtCore/QDebug>
@@ -127,6 +128,10 @@ GeoDataCoordinates GeoDataLineStringPrivate::findDateLine( const GeoDataCoordina
     return findDateLine( previousCoords, interpolatedCoords, recursionCounter );
 }
 
+bool GeoDataLineString::isEmpty() const
+{
+    return p()->m_vector.isEmpty();
+}
 
 int GeoDataLineString::size() const
 {
@@ -400,7 +405,7 @@ void GeoDataLineStringPrivate::toDateLineCorrected(
     GeoDataLineString * unfinishedLineString = 0;
 
     GeoDataLineString * dateLineCorrected = q.isClosed() ? new GeoDataLinearRing( f )
-                                                       : new GeoDataLineString( f );
+                                                         : new GeoDataLineString( f );
 
     qreal currentLon = 0.0;
     qreal previousLon = 0.0;
@@ -418,6 +423,7 @@ void GeoDataLineStringPrivate::toDateLineCorrected(
             previousLon  = currentLon;
         }
 
+        // If we are crossing the date line ...
         if ( previousSign != currentSign && fabs(previousLon) + fabs(currentLon) > M_PI ) {
 
             unfinished = !unfinished;
@@ -431,17 +437,29 @@ void GeoDataLineStringPrivate::toDateLineCorrected(
             *dateLineCorrected << previousTemp;
 
             if ( isClosed && unfinished ) {
+                // If it's a linear ring and if it crossed the IDL only once then
+                // store the current string inside the unfinishedLineString for later use ...
                 unfinishedLineString = dateLineCorrected;
-                dateLineCorrected = isClosed ? new GeoDataLinearRing( f )
-                                             : new GeoDataLineString( f );
+                // ... and start a new linear ring for now.
+                dateLineCorrected = new GeoDataLinearRing( f );
             }
             else {
-                lineStrings << dateLineCorrected;
+                // Now it can only be a (finished) line string or a finished linear ring.
+                // Store it in the vector  if the size is not zero.
+                if ( dateLineCorrected->size() > 0 ) {
+                    lineStrings << dateLineCorrected;
+                }
+                else {
+                    // Or delete it.
+                    delete dateLineCorrected;
+                }
 
-                if ( isClosed && !unfinished ) {
+                // If it's a finished linear ring restore the "remembered" unfinished String 
+                if ( isClosed && !unfinished && unfinishedLineString ) {
                     dateLineCorrected = unfinishedLineString;
                 }
                 else {
+                    // if it's a line string just create a new line string.
                     dateLineCorrected = new GeoDataLineString( f );
                 }
             }
@@ -474,6 +492,28 @@ GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
     p()->m_dirtyBox = false;
 
     return p()->m_latLonAltBox;
+}
+
+qreal GeoDataLineString::length( qreal planetRadius ) const
+{
+    GeoDataCoordinates previousCoords;
+    qreal  length = 0.0;
+
+    GeoDataLineString::ConstIterator itBegin = constBegin();
+    GeoDataLineString::ConstIterator itEnd = constEnd();
+
+    GeoDataLineString::ConstIterator it = itBegin;
+
+    for (; it != itEnd; ++it )
+    {
+        if ( it != itBegin ) {
+            length += distanceSphere( previousCoords, *it );
+        }
+
+        previousCoords = *it;
+    }
+
+    return planetRadius * length;
 }
 
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator pos )

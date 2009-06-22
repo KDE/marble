@@ -248,18 +248,17 @@ void ClipPainterPrivate::labelPosition( const QPolygonF & polygon, QVector<QPoin
         }
     }
 
-    if ( labelPositionFlags.testFlag( LineStart ) ) {
-        if ( polygon.size() > 0 ) {
-            if ( pointAllowsLabel( polygon.at(0) ) ) {
-                labelNodes << polygon.at( 0 );
-            }
+    if ( polygon.size() > 0 && labelPositionFlags.testFlag( LineStart ) ) {
+        if ( pointAllowsLabel( polygon.first() ) ) {
+            labelNodes << polygon.first();
         }
 
         // The Label at the start of the polyline:
-        for ( int it = 1; it != polygon.size(); ++it ) {
+        for ( int it = 1; it < polygon.size(); ++it ) {
             currentAllowsLabel = pointAllowsLabel( polygon.at( it ) );
 
             if ( currentAllowsLabel ) {
+                // As polygon.size() > 0 it's ensured that it-1 exists.
                 QPointF node = interpolateLabelPoint( polygon.at( it -1 ), polygon.at( it ),
                                                     labelPositionFlags );
                 if ( node != QPointF( -1.0, -1.0 ) ) {
@@ -271,15 +270,13 @@ void ClipPainterPrivate::labelPosition( const QPolygonF & polygon, QVector<QPoin
         }
     }
 
-    if ( labelPositionFlags.testFlag( LineEnd ) ) {
-        if ( polygon.size() > 0 ) {
-            if ( pointAllowsLabel( polygon.at( polygon.size() - 1 ) ) ) {
-                labelNodes << polygon.at( polygon.size() - 1 );
-            }
+    if ( polygon.size() > 1 && labelPositionFlags.testFlag( LineEnd ) ) {
+        if ( pointAllowsLabel( polygon.at( polygon.size() - 1 ) ) ) {
+            labelNodes << polygon.at( polygon.size() - 1 );
         }
 
         // The Label at the start of the polyline:
-        for ( int it = polygon.size() - 1; it != 1; --it ) {
+        for ( int it = polygon.size() - 1; it > 1; --it ) {
             currentAllowsLabel = pointAllowsLabel( polygon.at( it ) );
 
             if ( currentAllowsLabel ) {

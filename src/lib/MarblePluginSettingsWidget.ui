@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>MarblePluginSettingsWidget</class>
- <widget class="QWidget" name="MarblePluginSettingsWidget" >
-  <property name="geometry" >
+ <widget class="QWidget" name="MarblePluginSettingsWidget">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,15 +10,15 @@
     <height>302</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" >
+  <layout class="QVBoxLayout">
    <item>
     <widget class="QGroupBox" name="groupBox_plugins" >
-     <property name="title" >
+     <property name="title">
       <string>P&amp;lugins</string>
      </property>
-     <layout class="QVBoxLayout" >
+     <layout class="QVBoxLayout">
       <item>
-       <widget class="QListView" name="m_pluginListView" />
+       <widget class="QListView" name="m_pluginListView"/>
       </item>
      </layout>
     </widget>

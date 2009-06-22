@@ -12,6 +12,8 @@
 #include "GeoDataLinearRing.h"
 #include "GeoDataLinearRing_p.h"
 
+#include "MarbleMath.h"
+
 #include <QtCore/QDebug>
 
 namespace Marble
@@ -34,6 +36,13 @@ GeoDataLinearRing::~GeoDataLinearRing()
 bool GeoDataLinearRing::isClosed() const
 {
     return true;
+}
+
+qreal GeoDataLinearRing::length( qreal planetRadius ) const
+{
+    qreal  length = GeoDataLineString::length( planetRadius );
+
+    return length + planetRadius * distanceSphere( last(), first() );
 }
 
 QVector<GeoDataLineString*> GeoDataLinearRing::toRangeCorrected() const

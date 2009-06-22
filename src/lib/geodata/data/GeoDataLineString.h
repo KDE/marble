@@ -39,7 +39,7 @@ class GeoDataLineStringPrivate;
  * For convenience and performance we've added special methods 
  * to calculate the smallest GeoDataLatLonAltBox that contains the
  * GeoDataLineString.
- * This class will at some point replace GeoPolygon which is
+ * This class will at some point entirely replace GeoPolygon which is
  * currently used for a very similar purpose.
  */
 
@@ -48,6 +48,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
  public:
     typedef QVector<GeoDataCoordinates>::Iterator Iterator;
     typedef QVector<GeoDataCoordinates>::ConstIterator ConstIterator;
+    typedef QVector<GeoDataCoordinates>::const_iterator const_iterator;
     
     GeoDataLineString( TessellationFlags f = NoTessellation );
     GeoDataLineString( const GeoDataGeometry &other );
@@ -64,6 +65,13 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
 
     GeoDataLatLonAltBox latLonAltBox() const;
 
+    // Returns the length of the linestring on a sphere.
+    // As a parameter the planet's radius needs to be passed.
+    // The return value is the length of the line string.
+    // The unit used for the length matches the unit of the
+    // planet radius.
+    virtual qreal length( qreal planetRadius ) const;
+
     virtual QVector<GeoDataLineString*> toRangeCorrected() const;
 
     virtual GeoDataLineString toNormalized() const;
@@ -72,6 +80,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
 
     virtual QVector<GeoDataLineString*> toDateLineCorrected() const;
 
+    bool isEmpty() const;
     int size() const;
     GeoDataCoordinates& at( int pos );
     const GeoDataCoordinates& at( int pos ) const;
