@@ -73,6 +73,8 @@ void WorldClock::init()
 {
     KConfigGroup cg = config();
     m_map = new MarbleMap();
+    //Use max. 8MB RAM
+    m_map->setVolatileTileCacheLimit( 8192 );
 
     if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Mercator)
         m_map->setProjection(Mercator);
@@ -199,6 +201,8 @@ void WorldClock::dataUpdated(const QString &source,
     m_sun->update();
     m_map->updateSun();
     m_map->setNeedsUpdate();
+    //Text changes so we may need to recalculate the font size
+    recalculateFonts();
     update();
 }
 
@@ -272,6 +276,7 @@ void WorldClock::recalculatePoints()
 
 }
 
+//TODO: optimize
 void WorldClock::recalculateFonts( )
 {
     QString timestr;
