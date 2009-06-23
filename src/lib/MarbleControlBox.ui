@@ -53,7 +53,7 @@
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="NavigationTab">
       <property name="geometry">
@@ -61,7 +61,7 @@
         <x>0</x>
         <y>0</y>
         <width>275</width>
-        <height>440</height>
+        <height>480</height>
        </rect>
       </property>
       <attribute name="label">
@@ -428,7 +428,7 @@
         <x>0</x>
         <y>0</y>
         <width>275</width>
-        <height>440</height>
+        <height>480</height>
        </rect>
       </property>
       <attribute name="label">
@@ -456,7 +456,7 @@
         <x>0</x>
         <y>0</y>
         <width>275</width>
-        <height>440</height>
+        <height>480</height>
        </rect>
       </property>
       <attribute name="label">
@@ -581,364 +581,13 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="CurrentLocationTab">
+     <widget class="QWidget" name="FileViewTab">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>275</width>
-        <height>440</height>
-       </rect>
-      </property>
-      <attribute name="label">
-       <string>Current Location</string>
-      </attribute>
-      <layout class="QVBoxLayout">
-       <property name="spacing">
-        <number>6</number>
-       </property>
-       <property name="margin">
-        <number>5</number>
-       </property>
-       <item>
-        <widget class="QFrame" name="currentLocationFrame">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Raised</enum>
-         </property>
-         <layout class="QVBoxLayout">
-          <property name="spacing">
-           <number>6</number>
-          </property>
-          <property name="margin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="m_latLabel">
-            <property name="text">
-             <string>&amp;Latitude</string>
-            </property>
-            <property name="buddy">
-             <cstring>m_latSpinBox</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout">
-            <property name="spacing">
-             <number>0</number>
-            </property>
-            <property name="margin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QDoubleSpinBox" name="m_latSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>82</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="decimals">
-               <number>4</number>
-              </property>
-              <property name="maximum">
-               <double>90.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="m_latComboBox">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="sizeAdjustPolicy">
-               <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-              </property>
-              <property name="minimumContentsLength">
-               <number>1</number>
-              </property>
-              <item>
-               <property name="text">
-                <string>N</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>S</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <spacer>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>0</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QLabel" name="m_lonLabel">
-            <property name="text">
-             <string>L&amp;ongitude</string>
-            </property>
-            <property name="buddy">
-             <cstring>m_lonSpinBox</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QHBoxLayout">
-            <property name="spacing">
-             <number>0</number>
-            </property>
-            <property name="margin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QDoubleSpinBox" name="m_lonSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>82</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="decimals">
-               <number>4</number>
-              </property>
-              <property name="maximum">
-               <double>180.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="m_lonComboBox">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="sizeAdjustPolicy">
-               <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-              </property>
-              <property name="minimumContentsLength">
-               <number>1</number>
-              </property>
-              <item>
-               <property name="text">
-                <string>E</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>W</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <spacer>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>0</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="Line" name="line_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QVBoxLayout">
-            <property name="spacing">
-             <number>6</number>
-            </property>
-            <property name="margin">
-             <number>0</number>
-            </property>
-            <item>
-             <layout class="QHBoxLayout">
-              <property name="spacing">
-               <number>6</number>
-              </property>
-              <property name="margin">
-               <number>0</number>
-              </property>
-              <item>
-               <spacer>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QCheckBox" name="m_trackGps">
-                <property name="text">
-                 <string>Track Gps</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout">
-              <property name="spacing">
-               <number>6</number>
-              </property>
-              <property name="margin">
-               <number>0</number>
-              </property>
-              <item>
-               <spacer>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QCheckBox" name="m_catchGps">
-                <property name="text">
-                 <string>Catch Gps</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout">
-              <property name="spacing">
-               <number>6</number>
-              </property>
-              <property name="margin">
-               <number>0</number>
-              </property>
-              <item>
-               <spacer>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QCheckBox" name="m_gpsDrawBox">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="text">
-                 <string>Draw</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QHBoxLayout">
-              <property name="spacing">
-               <number>6</number>
-              </property>
-              <property name="margin">
-               <number>0</number>
-              </property>
-              <item>
-               <spacer>
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QPushButton" name="m_gpsGoButton">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="text">
-                 <string>Go To</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <spacer>
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>0</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="m_fileViewTab">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>275</width>
-        <height>440</height>
+        <height>480</height>
        </rect>
       </property>
       <attribute name="label">
@@ -999,13 +648,13 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite">
+     <widget class="QWidget" name="CurrentLocationTab">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>275</width>
-        <height>440</height>
+        <height>480</height>
        </rect>
       </property>
       <attribute name="label">
@@ -1224,7 +873,6 @@ p, li { white-space: pre-wrap; }
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../../marble/src/marble.qrc"/>
   <include location="../../../../marble/src/lib/libmarble.qrc"/>
  </resources>
  <connections/>
