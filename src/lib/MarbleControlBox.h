@@ -172,7 +172,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
 
     void selectTheme( const QString & );
 
-    void celestialBodySelected( const QString& ); 
+    void selectCurrentMapTheme( const QString& ); 
 
     void selectProjection( Projection projection );
 
@@ -197,8 +197,6 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      * doesn't emit the zoomChanged signal.
      */
     void changeZoom(int zoom);
-    void disableGpsInput( bool );
-    void receiveGpsCoordinates( qreal, qreal, GeoDataCoordinates::Unit );
     void receiveGpsCoordinates( GeoDataCoordinates in, qreal speed  );
     void enableFileViewActions();
     
@@ -222,11 +220,6 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      * @param show  boolean that controls if the Current Location tab is shown.
      */
     void setCurrentLocationTabShown( bool show );
-    /**
-     * @brief Control whether the Current Location tab is shown.
-     * @param show  boolean that controls if the Current Location tab is shown.
-     */
-    void setCurrentLocation2TabShown( bool show );
     /**
      * @brief Control whether the File View tab is shown.
      * @param show  boolean that controls if the File View tab is shown.
@@ -256,7 +249,6 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void adjustForStill();
 
  private:
-    void setupGpsOption();
     void setWidgetTabShown( QWidget * widget, int insertIndex, 
                             bool show, QString &text );
 

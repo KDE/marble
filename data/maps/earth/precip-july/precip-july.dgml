@@ -222,6 +222,7 @@
                     <text>Shipwreck</text>
                 </item>
                 <item name="observatory">
+                    <icon pixmap="bitmaps/observatory.png"/>
                     <text>Astronomical Observatory</text>
                 </item>
             </section>

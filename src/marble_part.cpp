@@ -333,8 +333,7 @@ void MarblePart::copyCoordinates()
 
 void MarblePart::setShowCurrentLocation( bool show )
 {
-//    m_controlView->setCurrentLocationTabShown( show );
-    m_controlView->setCurrentLocation2TabShown( show );
+    m_controlView->setCurrentLocationTabShown( show );
 }
 
 void MarblePart::readSettings()

@@ -32,7 +32,7 @@
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
 #include <QtGui/QSortFilterProxyModel>
-#include <QtGui/QStringListModel>
+#include <QtGui/QStandardItemModel>
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QTextFrame>
 
@@ -75,13 +75,12 @@ class MarbleControlBoxPrivate
     MarbleWidget  *m_widget;
     QString        m_searchTerm;
     bool           m_searchTriggered;
-    QStringListModel *m_celestialList;
+    QStandardItemModel *m_celestialList;
 
     Ui::MarbleControlBox  uiWidget;
     QWidget              *m_navigationWidget;
     QWidget              *m_legendWidget;
     QWidget              *m_mapViewWidget;
-    QWidget              *m_currentLocationWidget;
     QWidget              *m_currentLocation2Widget;
     QWidget              *m_fileViewWidget;
 
@@ -91,7 +90,6 @@ class MarbleControlBoxPrivate
     
     MarbleRunnerManager  *m_runnerManager;
     GeoSceneDocument      *mapTheme;
-    QStringList  celestialList;
 
     MarbleLocale* m_locale;
 };
@@ -126,12 +124,9 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->m_mapViewWidget = d->uiWidget.toolBox->currentWidget();
 
     d->uiWidget.toolBox->setCurrentIndex( 3 );
-    d->m_currentLocationWidget = d->uiWidget.toolBox->currentWidget();
-
-    d->uiWidget.toolBox->setCurrentIndex( 4 );
     d->m_fileViewWidget = d->uiWidget.toolBox->currentWidget();
 
-    d->uiWidget.toolBox->setCurrentIndex( 5 );
+    d->uiWidget.toolBox->setCurrentIndex( 4 );
     d->m_currentLocation2Widget = d->uiWidget.toolBox->currentWidget();
 
     d->m_sortproxy = new QSortFilterProxyModel( d->uiWidget.locationListView );
@@ -139,19 +134,13 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     d->m_mapSortProxy = new MapThemeSortFilterProxyModel( this );
 
-//  d->m_currentLocationWidget->hide(); // Current location tab is hidden
-                                    //by default
- //   toolBox->removeItem( 3 );
     d->uiWidget.toolBox->setCurrentIndex(0);
 
     d->m_locale = MarbleGlobal::getInstance()->locale();
 
     //default
-    setCurrentLocationTabShown( false );
-    setCurrentLocation2TabShown( true );
+    setCurrentLocationTabShown( true );
     setFileViewTabShown( false );
-
-    setupGpsOption();
 
     connect( d->uiWidget.goHomeButton,  SIGNAL( clicked() ),
              this,                      SIGNAL( goHome() ) );
@@ -179,16 +168,10 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     d->m_mapThemeModel = 0;
 
-    d->m_celestialList = new QStringListModel();
-    d->uiWidget.celestialBodyComboBox->setModel( d->m_celestialList );
-
     connect( d->uiWidget.marbleThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
              this,                              SIGNAL( selectMapTheme( const QString& ) ) );
-    connect( d->uiWidget.projectionComboBox,    SIGNAL( currentIndexChanged( int ) ),
+    connect( d->uiWidget.projectionComboBox,    SIGNAL( activated( int ) ),
              this,                              SLOT( projectionSelected( int ) ) );
-    connect( d->uiWidget.celestialBodyComboBox, SIGNAL( currentIndexChanged( const QString& ) ),
-             this,                              SLOT( celestialBodySelected( const QString& ) ) );
-
     connect( d->uiWidget.zoomSlider,  SIGNAL( sliderPressed() ),
              this,                      SLOT( adjustForAnimation() ) );
     connect( d->uiWidget.zoomSlider,  SIGNAL( sliderReleased() ),
@@ -205,6 +188,12 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
              this,                        SLOT( searchLineChanged( const QString& ) ) );
     connect( d->uiWidget.searchLineEdit,  SIGNAL( returnPressed() ),
              this,                        SLOT( searchReturnPressed() ) );
+
+    // Setting up the celestial combobox
+    d->m_celestialList = new QStandardItemModel();
+    d->uiWidget.celestialBodyComboBox->setModel( d->m_celestialList );
+    connect( d->uiWidget.celestialBodyComboBox, SIGNAL( activated( const QString& ) ),
+             this,                              SLOT( selectCurrentMapTheme( const QString& ) ) );
 }
 
 MarbleControlBox::~MarbleControlBox()
@@ -214,13 +203,25 @@ MarbleControlBox::~MarbleControlBox()
 
 void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel )
 {
+    if ( mapThemeModel != d->m_mapThemeModel ) {
+        delete d->m_mapThemeModel;
+    }
+
     d->m_mapThemeModel = mapThemeModel;
     d->m_mapSortProxy->setSourceModel( d->m_mapThemeModel );
-    d->m_mapSortProxy->setFilterRegExp(QRegExp( d->uiWidget.celestialBodyComboBox->currentText(), Qt::CaseInsensitive,QRegExp::FixedString));
+    int currentIndex = d->uiWidget.celestialBodyComboBox->currentIndex();
+    QStandardItem * selectedItem = d->m_celestialList->item( currentIndex, 1 );
+
+    if ( selectedItem ) {
+        QString selectedId;
+        selectedId = selectedItem->text();
+        d->m_mapSortProxy->setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
+    }
+
     d->m_mapSortProxy->sort( 0 );
     d->uiWidget.marbleThemeSelectView->setModel( d->m_mapSortProxy );
     connect( d->m_mapThemeModel,       SIGNAL( rowsInserted( QModelIndex, int, int ) ),
-             this,                     SLOT( updateMapThemeView() ) );
+            this,                     SLOT( updateMapThemeView() ) );
 }
 
 void MarbleControlBox::updateCelestialModel()
@@ -229,11 +230,14 @@ void MarbleControlBox::updateCelestialModel()
 
     for ( int i = 0; i < row; ++i )
     {
-        QString newCelestialBody = ( d->m_mapThemeModel->data( d->m_mapThemeModel->index( i, 1 ) ).toString() ).section( '/', 0, 0 );
-        if ( !d->celestialList.contains( newCelestialBody ) )
-        {
-            d->celestialList.append( newCelestialBody );
-            d->m_celestialList->setStringList( d->celestialList );
+        QString celestialBodyId = ( d->m_mapThemeModel->data( d->m_mapThemeModel->index( i, 1 ) ).toString() ).section( '/', 0, 0 );
+        QString celestialBodyName = Planet::name( celestialBodyId );
+
+        QList<QStandardItem*> matchingItems = d->m_celestialList->findItems ( celestialBodyId, Qt::MatchExactly, 1 );
+        if ( matchingItems.isEmpty() ) {
+            d->m_celestialList->appendRow( QList<QStandardItem*>()
+                                << new QStandardItem( celestialBodyName )
+                                << new QStandardItem( celestialBodyId ) );
         }
     }   
 }
@@ -253,19 +257,6 @@ void MarbleControlBox::updateButtons( int value )
 }
 
 
-void MarbleControlBox::setupGpsOption()
-{
-    d->uiWidget.m_gpsDrawBox->setEnabled( true );
-    d->uiWidget.m_gpsGoButton->setEnabled( false );
-
-    d->uiWidget.m_latComboBox->setCurrentIndex( 0 );
-    d->uiWidget.m_lonComboBox->setCurrentIndex( 0 );
-
-    connect( d->uiWidget.m_gpsDrawBox, SIGNAL( clicked( bool ) ),
-             this,                     SLOT( disableGpsInput( bool ) ) );
-}
-
-
 void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 {
     d->m_widget = widget;
@@ -277,7 +268,6 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 //    FIXME: Why does this fail: "selection model works on a different model than the view..." ? 
 //    d->uiWidget.locationListView->setSelectionModel( d->m_widget->placemarkSelectionModel() );
 
-#ifndef KML_GSOC
     //set up everything for the FileModel
     d->uiWidget.m_fileView->setModel( widget->fileViewModel() );
 
@@ -289,21 +279,6 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              widget->fileViewModel(),    SLOT( saveFile() ) );
     connect( d->uiWidget.m_closeButton, SIGNAL( clicked() ) ,
              widget->fileViewModel(),    SLOT( closeFile() ) );
-#else
-    FileViewModel* model = widget->fileViewModel();
-    d->uiWidget.m_fileView->setModel( model );
-
-    connect( d->uiWidget.m_fileView->selectionModel(),
-             SIGNAL( selectionChanged( const QItemSelection&, const QItemSelection& )),
-             this,
-             SLOT( enableFileViewActions() ) );
-
-    connect( d->uiWidget.m_saveButton,  SIGNAL( clicked() ),
-             model,                     SLOT( saveFile() ) );
-
-    connect( d->uiWidget.m_closeButton, SIGNAL( clicked () ),
-             model,                     SLOT( closeFile() ) );
-#endif
 
     // Initialize the MarbleLegendBrowser
     d->uiWidget.marbleLegendBrowser->setMarbleWidget( d->m_widget );
@@ -347,10 +322,6 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              d->m_widget, SLOT( setShowGps( bool ) ) );
     connect( this, SIGNAL( gpsPositionChanged( qreal, qreal ) ),
              d->m_widget, SLOT( changeCurrentPosition( qreal, qreal ) ) );
-//    connect( d->m_widget, SIGNAL( mouseClickGeoPosition( qreal, qreal,
-//                                            GeoDataCoordinates::Unit ) ),
-//             this, SLOT( receiveGpsCoordinates ( qreal, qreal,
-//                                                 GeoDataCoordinates::Unit) ) );
     connect ( d->m_widget->model()->gpsLayer()->getPositionTracking(), SIGNAL(gpsLocation( GeoDataCoordinates, qreal )),
               this, SLOT(receiveGpsCoordinates(GeoDataCoordinates, qreal)) );
     connect ( d->uiWidget.navigationCheckBox, SIGNAL(clicked(bool) ),
@@ -405,8 +376,12 @@ int MarbleControlBox::minimumZoom() const
 void MarbleControlBox::updateMapThemeView()
 {
     updateCelestialModel();
-    if (d->m_widget)
-        selectTheme( d->m_widget->mapThemeId() );
+    
+    if ( d->m_widget ) {
+        QString mapThemeId = d->m_widget->mapThemeId();
+        if ( !mapThemeId.isEmpty() ) 
+            selectTheme( mapThemeId );
+    }
 }
 
 void MarbleControlBox::changeZoom(int zoom)
@@ -417,64 +392,6 @@ void MarbleControlBox::changeZoom(int zoom)
     d->uiWidget.zoomSlider->setMinimum( minimumZoom() );
 }
 
-void MarbleControlBox::disableGpsInput( bool in )
-{
-    d->uiWidget.m_latSpinBox->setEnabled( !in );
-    d->uiWidget.m_lonSpinBox->setEnabled( !in );
-
-    d->uiWidget.m_latComboBox->setEnabled( !in );
-    d->uiWidget.m_lonComboBox->setEnabled( !in );
-
-    qreal t_lat = d->uiWidget.m_latSpinBox->value();
-    qreal t_lon = d->uiWidget.m_lonSpinBox->value();
-
-    if( d->uiWidget.m_lonComboBox->currentIndex() == 1 ){
-        t_lon *= -1;
-    }
-
-    if( d->uiWidget.m_latComboBox->currentIndex() == 1 ){
-        t_lat *= -1;
-    }
-
-    emit gpsPositionChanged( t_lon, t_lat );
-    emit gpsInputDisabled( in );
-}
-
-void MarbleControlBox::receiveGpsCoordinates( qreal x, qreal y,
-                                              GeoDataCoordinates::Unit unit)
-{
-    if ( d->uiWidget.m_catchGps->isChecked() ) {
-        switch(unit){
-        case GeoDataCoordinates::Degree:
-            d->uiWidget.m_lonSpinBox->setValue( y );
-            d->uiWidget.m_latSpinBox->setValue( x );
-            emit gpsPositionChanged( y, x );
-            break;
-        case GeoDataCoordinates::Radian:
-            qreal t_lat=0,t_lon=0;
-            t_lat = y * -RAD2DEG;
-            t_lon = x * +RAD2DEG;
-
-            if( t_lat < 0 ){
-                d->uiWidget.m_latSpinBox->setValue( -t_lat );
-                d->uiWidget.m_latComboBox->setCurrentIndex( 1 );
-            } else {
-                d->uiWidget.m_latSpinBox->setValue( t_lat );
-                d->uiWidget.m_latComboBox->setCurrentIndex( 0 );
-            }
-
-            if( t_lon < 0 ){
-                d->uiWidget.m_lonSpinBox->setValue( -t_lon );
-                d->uiWidget.m_lonComboBox->setCurrentIndex( 1 );
-            } else {
-                d->uiWidget.m_lonSpinBox->setValue( t_lon );
-                d->uiWidget.m_lonComboBox->setCurrentIndex( 0 );
-            }
-
-            emit gpsPositionChanged( t_lon, t_lat );
-        }
-    }
-}
 
 void MarbleControlBox::receiveGpsCoordinates( GeoDataCoordinates in, qreal speed )
 {
@@ -482,7 +399,7 @@ void MarbleControlBox::receiveGpsCoordinates( GeoDataCoordinates in, qreal speed
     if ( d->uiWidget.navigationCheckBox->isChecked() ) {
         QString unitString;
         QString speedString;
-        qreal unitSpeed;
+        qreal unitSpeed = 0.0;
 
         switch ( d->m_locale->distanceUnit() ) {
             case Marble::Metric:
@@ -507,6 +424,7 @@ void MarbleControlBox::receiveGpsCoordinates( GeoDataCoordinates in, qreal speed
         d->uiWidget.altitudeValue->setText( QString::number( in.altitude() ) );
     }
 }
+
 
 void MarbleControlBox::enableFileViewActions()
 {
@@ -547,22 +465,16 @@ void MarbleControlBox::setMapViewTabShown( bool show )
     setWidgetTabShown( d->m_mapViewWidget, 2, show, title );
 }
 
-void MarbleControlBox::setCurrentLocationTabShown( bool show )
-{
-    QString  title = tr( "Current Location" );
-    setWidgetTabShown( d->m_currentLocationWidget, 3, show, title );
-}
-
 void MarbleControlBox::setFileViewTabShown( bool show )
 {
     QString  title = tr( "File View" );
-    setWidgetTabShown( d->m_fileViewWidget, 4, show, title );
+    setWidgetTabShown( d->m_fileViewWidget, 3, show, title );
 }
 
-void MarbleControlBox::setCurrentLocation2TabShown( bool show )
+void MarbleControlBox::setCurrentLocationTabShown( bool show )
 {
     QString  title = tr( "Current Location" );
-    setWidgetTabShown( d->m_currentLocation2Widget, 5, show, title );
+    setWidgetTabShown( d->m_currentLocation2Widget, 4, show, title );
 }
 
 
@@ -633,6 +545,7 @@ void MarbleControlBox::selectTheme( const QString &theme )
 
     d->uiWidget.zoomSlider->setMaximum( d->m_widget->map()->maximumZoom() );
     updateButtons( d->uiWidget.zoomSlider->value() );
+
     if ( theme != indexTheme ) {
         /* indexTheme would be empty if the chosen map has not been set yet. As 
         this needs to be done after the mapThemeId has been set, check if that is 
@@ -643,18 +556,27 @@ void MarbleControlBox::selectTheme( const QString &theme )
         if( indexTheme.isEmpty() && !d->m_widget->mapThemeId().isEmpty() ) {
             QList<QStandardItem*> items = d->m_mapThemeModel->findItems( theme, Qt::MatchExactly, 1 );
             if( items.size() >= 1 ) {
-                QModelIndex iterIndex = items.at( 0 )->index();
+                QModelIndex iterIndex = items.first()->index();
                 QModelIndex iterIndexName = d->m_mapSortProxy->mapFromSource( iterIndex.sibling( iterIndex.row(), 0 ) );
 		
                 d->uiWidget.marbleThemeSelectView->setCurrentIndex( iterIndexName );
 
                 d->uiWidget.marbleThemeSelectView->scrollTo( iterIndexName );
-
-
             }
         }
-        const  int index = d->uiWidget.celestialBodyComboBox->findText(theme.section('/',0,0), Qt::MatchExactly);
-        d->uiWidget.celestialBodyComboBox->setCurrentIndex(index);
+
+        QString selectedId = d->m_widget->mapTheme()->head()->target();
+        
+        QList<QStandardItem*> itemList = d->m_celestialList->findItems( selectedId, Qt::MatchExactly, 1 );
+        QStandardItem * selectedItem = itemList.first();
+
+        if ( selectedItem ) {
+            int selectedIndex = selectedItem->row();
+            d->uiWidget.celestialBodyComboBox->setCurrentIndex( selectedIndex );
+            d->m_mapSortProxy->setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
+        }
+
+        d->m_mapSortProxy->sort( 0 );
     }
 }
 
@@ -664,13 +586,33 @@ void MarbleControlBox::selectProjection( Projection projection )
         d->uiWidget.projectionComboBox->setCurrentIndex( (int) projection );
 }
 
-void MarbleControlBox:: celestialBodySelected( const QString& celestialBodyId )
+void MarbleControlBox::selectCurrentMapTheme( const QString& celestialBodyId )
 {
     Q_UNUSED( celestialBodyId )
 
     setMapThemeModel( d->m_mapThemeModel );
-    QModelIndex index = d->m_mapSortProxy->index(0,1);
-    d->m_widget->setMapThemeId( d->m_mapSortProxy->data(index).toString());
+
+    bool foundMapTheme = false;
+
+    QString currentMapThemeId = d->m_widget->mapThemeId();
+    
+    int row = d->m_mapSortProxy->rowCount();
+
+    for ( int i = 0; i < row; ++i )
+    {
+        QModelIndex index = d->m_mapSortProxy->index(i,1);
+        QString itMapThemeId = d->m_mapSortProxy->data(index).toString();
+        if ( currentMapThemeId == itMapThemeId )
+        {
+            foundMapTheme = true;
+            break;
+        }
+    }
+    if ( !foundMapTheme ) {
+        QModelIndex index = d->m_mapSortProxy->index(0,1);
+        d->m_widget->setMapThemeId( d->m_mapSortProxy->data(index).toString());
+    }
+
     updateMapThemeView();
 }
 // Relay a signal and convert the parameter from an int to a Projection.
