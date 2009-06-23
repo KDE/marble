@@ -71,8 +71,8 @@ ViewParamsPrivate::ViewParamsPrivate()
       // Other layers
       m_showGps( false ),
       // Just to have something.  These will be resized anyway.
-      m_canvasImage( new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied )),
-      m_coastImage( new QImage( 10, 10, QImage::Format_ARGB32_Premultiplied ))
+      m_canvasImage( new QImage( 10, 10, QImage::Format_RGB32 )),
+      m_coastImage( new QImage( 10, 10, QImage::Format_RGB32 ))
 {
 }
 

@@ -133,7 +133,7 @@ void MarbleMapPrivate::doResize()
     m_viewParams.viewport()->setSize( size );
     // Recreate the canvas image with the new size.
     m_viewParams.setCanvasImage( new QImage( m_parent->width(), m_parent->height(),
-                                             QImage::Format_ARGB32_Premultiplied ));
+                                             QImage::Format_RGB32 ));
 
     if ( m_viewParams.showAtmosphere() ) {
         drawAtmosphere();
@@ -141,7 +141,7 @@ void MarbleMapPrivate::doResize()
 
     // Recreate the 
     m_viewParams.setCoastImage( new QImage( m_parent->width(), m_parent->height(),
-                                            QImage::Format_ARGB32_Premultiplied ));
+                                            QImage::Format_RGB32 ));
 
     m_justModified = true;
 }
