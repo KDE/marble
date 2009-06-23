@@ -187,7 +187,7 @@ inline void PlacemarkPainter::drawLabelPixmap( VisiblePlacemark *mark, bool isSe
     } else {
 
         QImage image( labelRect.size(),
-                      QImage::Format_ARGB32_Premultiplied );
+                      QImage::Format_RGB32 );
         image.fill( 0 );
 
         labelPainter.begin( &image );
