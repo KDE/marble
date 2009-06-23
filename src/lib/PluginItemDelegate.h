@@ -26,7 +26,7 @@ class PluginItemDelegate : public QAbstractItemDelegate
     Q_OBJECT
 
  public:
-    PluginItemDelegate( QObject * parent = 0 );
+    PluginItemDelegate( QAbstractItemView *view, QObject * parent = 0 );
     ~PluginItemDelegate();
     
     void paint( QPainter *painter,
@@ -60,11 +60,20 @@ class PluginItemDelegate : public QAbstractItemDelegate
     };
 
     QStyleOptionButton checkboxOption( const QStyleOptionViewItem& option,
-                                       const QModelIndex& index ) const;
+                                       const QModelIndex& index,
+                                       int position = 0,
+                                       Qt::AlignmentFlag alignment = Qt::AlignLeft ) const;
     QStyleOptionButton buttonOption(   const QStyleOptionViewItem& option,
                                        const QModelIndex& index,
-                                       PluginItemDelegate::ButtonType type ) const;
+                                       PluginItemDelegate::ButtonType type,
+                                       int position = 0,
+                                       Qt::AlignmentFlag alignment = Qt::AlignLeft ) const;
     QSize nameSize( const QModelIndex& index ) const;
+    
+    QRect alignRect( QRect object, QRect frame, int position, Qt::AlignmentFlag alignment ) const;
+
+    QString m_configPressedPluginId;
+    QString m_aboutPressedPluginId;
 };
 
 }

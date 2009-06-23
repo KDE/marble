@@ -960,6 +960,8 @@ void MarblePart::editSettings()
 	                       SLOT( retrievePluginState() ) );
     connect( w_pluginSettings, SIGNAL( aboutPluginClicked( QString ) ),
                                SLOT( showPluginAboutDialog( QString ) ) );
+    connect( w_pluginSettings, SIGNAL( configPluginClicked( QString ) ),
+                               SLOT( showPluginConfigDialog( QString ) ) );
 
     m_configDialog->show();
 }
@@ -1066,6 +1068,19 @@ void MarblePart::showPluginAboutDialog( QString nameId ) {
             QDialog *aboutDialog = renderItem->aboutDialog();
             if ( aboutDialog ) {
                 aboutDialog->show();
+            }
+        }
+    }
+}
+
+void MarblePart::showPluginConfigDialog( QString nameId ) {
+    QList<RenderPlugin *> renderItemList = m_controlView->marbleWidget()->renderPlugins();
+
+    foreach ( RenderPlugin *renderItem, renderItemList ) {
+        if( renderItem->nameId() == nameId ) {
+            QDialog *configDialog = renderItem->configDialog();
+            if ( configDialog ) {
+                configDialog->show();
             }
         }
     }

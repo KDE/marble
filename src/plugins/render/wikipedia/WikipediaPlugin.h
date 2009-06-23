@@ -42,9 +42,12 @@ class WikipediaPlugin : public AbstractDataPlugin {
 
     QDialog *aboutDialog() const;
 
+    QDialog *configDialog() const;
+
  private:
     QIcon m_icon;
     PluginAboutDialog *m_aboutDialog;
+    QDialog *m_configDialog;
 };
 
 }

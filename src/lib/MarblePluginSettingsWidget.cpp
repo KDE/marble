@@ -23,7 +23,7 @@ MarblePluginSettingsWidget::MarblePluginSettingsWidget( QWidget *parent ) : QWid
 {
     setupUi( this );
 
-    PluginItemDelegate *itemDelegate = new PluginItemDelegate( this );
+    PluginItemDelegate *itemDelegate = new PluginItemDelegate( m_pluginListView, this );
     m_pluginListView->setItemDelegate( itemDelegate );
     connect( m_pluginListView, SIGNAL( clicked( QModelIndex ) ),
          this, SIGNAL( pluginListViewClicked() ) );

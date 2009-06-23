@@ -120,7 +120,15 @@ class MarblePart: public KParts::ReadOnlyPart
 
     void  slotUpdateSettings();
 
+    /**
+     * Shows the about dialog for the plugin with the corresponding @p nameId.
+     */
     void  showPluginAboutDialog( QString nameId );
+
+    /**
+     * Shows the configuration dialog for the plugin with the corresponding @p nameId.
+     */
+    void  showPluginConfigDialog( QString nameId );
 
   private:
     void  setupActions();

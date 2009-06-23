@@ -112,6 +112,8 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( ControlView *controlView, QWidget *p
                                SLOT( slotEnableButtonApply() ) );
     connect( w_pluginSettings, SIGNAL( aboutPluginClicked( QString ) ),
                                SLOT( showPluginAboutDialog( QString ) ) );
+    connect( w_pluginSettings, SIGNAL( configPluginClicked( QString ) ),
+                               SLOT( showPluginConfigDialog( QString ) ) );
     connect( this, SIGNAL( rejected() ), this, SLOT( retrievePluginState() ) );
     connect( this, SIGNAL( accepted() ), this, SLOT( applyPluginState() ) );
     
@@ -176,6 +178,20 @@ void QtMarbleConfigDialog::showPluginAboutDialog( QString nameId ) {
         }
     }
 }
+
+void QtMarbleConfigDialog::showPluginConfigDialog( QString nameId ) {
+    QList<RenderPlugin *> renderItemList = m_controlView->marbleWidget()->renderPlugins();
+
+    foreach ( RenderPlugin *renderItem, renderItemList ) {
+        if( renderItem->nameId() == nameId ) {
+            QDialog *configDialog = renderItem->configDialog();
+            if ( configDialog ) {
+                configDialog->show();
+            }
+        }
+    }
+}
+
 
 void QtMarbleConfigDialog::readSettings()
 {

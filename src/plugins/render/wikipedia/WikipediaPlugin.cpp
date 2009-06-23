@@ -16,6 +16,9 @@
 #include "PluginAboutDialog.h"
 #include "MarbleDirs.h"
 
+// Qt
+#include <QtGui/QLabel>
+
 using namespace Marble;
 
 WikipediaPlugin::WikipediaPlugin()
@@ -28,6 +31,7 @@ WikipediaPlugin::WikipediaPlugin()
     // Plugin is not visible by default
     setVisible( false );
 
+    // Initializing about dialog
     m_aboutDialog = new PluginAboutDialog();
     m_aboutDialog->setName( "Wikipedia Plugin" );
     m_aboutDialog->setVersion( "0.1" );
@@ -43,9 +47,15 @@ WikipediaPlugin::WikipediaPlugin()
     m_aboutDialog->setDataText( tr( "Geo positions by geonames.org\nTexts by wikipedia.org" ) );
     m_icon.addFile( MarbleDirs::path( "svg/wikipedia.svg" ) );
     m_aboutDialog->setPixmap( m_icon.pixmap( 62, 53 ) );
+
+    // Initializing configuration dialog
+    m_configDialog = new QDialog();
+    QLabel *label = new QLabel( "Hello World", m_configDialog );
 }
 
 WikipediaPlugin::~WikipediaPlugin() {
+    delete m_aboutDialog;
+    delete m_configDialog;
 }
      
 void WikipediaPlugin::initialize() {
@@ -71,6 +81,10 @@ QIcon WikipediaPlugin::icon() const {
 
 QDialog *WikipediaPlugin::aboutDialog() const {
     return m_aboutDialog;
+}
+
+QDialog *WikipediaPlugin::configDialog() const {
+    return m_configDialog;
 }
 
 Q_EXPORT_PLUGIN2(WikipediaPlugin, Marble::WikipediaPlugin)
