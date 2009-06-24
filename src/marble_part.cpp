@@ -36,6 +36,7 @@
 #include <kconfigdialog.h>
 #include <kdeversion.h>
 #include <kfiledialog.h>
+#include <kicon.h>
 #include <kmenu.h>
 #include <kmessagebox.h>
 #include <kparts/genericfactory.h>
@@ -946,6 +947,9 @@ void MarblePart::editSettings()
     w_pluginSettings->setObjectName( "plugin_page" );
     m_configDialog->addPage( w_pluginSettings, i18n( "Plugins" ),
 			     "preferences-plugin" );
+    // Setting the icons of the pluginSettings page.
+    w_pluginSettings->setConfigIcon( KIcon( "configure" ) );
+    w_pluginSettings->setAboutIcon( KIcon( "help-about" ) );
 
     connect( w_pluginSettings, SIGNAL( pluginListViewClicked() ),
                                SLOT( slotEnableButtonApply() ) );

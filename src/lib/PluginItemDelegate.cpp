@@ -28,6 +28,8 @@
 
 using namespace Marble;
 
+const QSize iconSize( 16, 16 );
+
 PluginItemDelegate::PluginItemDelegate( QAbstractItemView *view, QObject * parent )
     : QAbstractItemDelegate( parent )
 {
@@ -94,8 +96,6 @@ void PluginItemDelegate::paint( QPainter *painter,
     if ( index.data( RenderPlugin::ConfigurationDialogAvailable ).toBool() ) {
         QStyleOptionButton button = buttonOption( option, index, PluginItemDelegate::Configure,
                                                   topRight.x(), Qt::AlignRight );
-
-        button.rect.moveTopRight( topRight );
         style->drawControl( QStyle::CE_PushButton, &button, painter );
         topRight -= QPoint( button.rect.width(), 0 );
     }
@@ -126,6 +126,14 @@ QSize PluginItemDelegate::sizeHint( const QStyleOptionViewItem& option,
     }
 
     return size;
+}
+
+void PluginItemDelegate::setAboutIcon( const QIcon& icon ) {
+    m_aboutIcon = icon;
+}
+
+void PluginItemDelegate::setConfigIcon( const QIcon& icon ) {
+    m_configIcon = icon;
 }
 
 bool PluginItemDelegate::editorEvent( QEvent *event,
@@ -306,6 +314,7 @@ QStyleOptionButton PluginItemDelegate::checkboxOption( const QStyleOptionViewIte
         checkboxOption.state = option.state | QStyle::State_Off;
     QSize size = QApplication::style()->sizeFromContents( QStyle::CT_CheckBox, &option, QSize() );
     if ( size.isEmpty() ) {
+        // A checkbox has definately a size != 0
         checkboxOption.rect.setSize( QSize( 22, 22 ) );
     }
     else {
@@ -328,23 +337,41 @@ QStyleOptionButton PluginItemDelegate::buttonOption( const QStyleOptionViewItem&
     buttonOption.rect.setTopLeft( QPoint( 0, 0 ) );
     buttonOption.palette = option.palette;
     buttonOption.features = QStyleOptionButton::None;
+
+    QSize contentSize;
     if ( type == PluginItemDelegate::About ) {
-        buttonOption.text = tr( "About" );
+        if ( m_aboutIcon.isNull() ) {
+            buttonOption.text = tr( "About" );
+            contentSize = buttonOption.fontMetrics.size( 0, buttonOption.text ) + QSize( 4, 4 );
+        }
+        else {
+            buttonOption.icon = m_aboutIcon;
+            buttonOption.iconSize = iconSize;
+            contentSize = iconSize;
+        }
+
         if ( m_aboutPressedPluginId == index.data( RenderPlugin::NameId ).toString() ) {
             buttonOption.state |= QStyle::State_Sunken;
         }
     }
     else if ( type == PluginItemDelegate::Configure ) {
-        buttonOption.text = tr( "Configure" );
+        if ( m_configIcon.isNull() ) {
+            buttonOption.text = tr( "Configure" );
+            contentSize = buttonOption.fontMetrics.size( 0, buttonOption.text ) + QSize( 4, 4 );
+        }
+        else {
+            buttonOption.icon = m_configIcon;
+            buttonOption.iconSize = iconSize;
+            contentSize = iconSize;
+        }
         if ( m_configPressedPluginId == index.data( RenderPlugin::NameId ).toString() ) {
             buttonOption.state |= QStyle::State_Sunken;
         }
     }
 
-    QSize textSize = buttonOption.fontMetrics.size( 0, buttonOption.text ) + QSize( 4, 4 );
     QSize buttonSize = QApplication::style()->sizeFromContents( QStyle::CT_PushButton,
                                                                 &buttonOption,
-                                                                textSize );
+                                                                contentSize );
     buttonOption.rect.setSize( buttonSize );
     buttonOption.rect = alignRect( buttonOption.rect, option.rect, position, alignment );
     return buttonOption;
@@ -368,6 +395,7 @@ QRect PluginItemDelegate::alignRect( QRect object,
     if ( rect.height() < frame.height() ) {
         rect.moveTop( ( frame.height() - rect.height() ) / 2 );
     }
+
     if ( alignment & Qt::AlignLeft ) {
         rect.moveLeft( position );
     }

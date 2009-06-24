@@ -13,6 +13,7 @@
 
 #include <QtGui/QStyledItemDelegate>
 
+class QIcon;
 class QPainter;
 class QModelIndex;
 class QRect;
@@ -33,6 +34,9 @@ class PluginItemDelegate : public QAbstractItemDelegate
                 const QStyleOptionViewItem& option,
                 const QModelIndex& index ) const;
     QSize sizeHint( const QStyleOptionViewItem& option, const QModelIndex & index ) const;
+
+    void setAboutIcon( const QIcon& icon );
+    void setConfigIcon( const QIcon& icon );
     
  Q_SIGNALS:
     /**
@@ -74,6 +78,9 @@ class PluginItemDelegate : public QAbstractItemDelegate
 
     QString m_configPressedPluginId;
     QString m_aboutPressedPluginId;
+
+    QIcon m_aboutIcon;
+    QIcon m_configIcon;
 };
 
 }

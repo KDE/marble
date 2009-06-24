@@ -37,6 +37,7 @@ namespace Marble
 {
 
 class RenderPlugin;
+class MarblePluginSettingsWidgetPrivate;
 
 class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget, private Ui::MarblePluginSettingsWidget
 {
@@ -46,11 +47,17 @@ class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget, private Ui::Mar
     MarblePluginSettingsWidget( QWidget *parent = 0 );
 
     void setModel( QStandardItemModel* );
+    
+    void setAboutIcon( const QIcon& icon );
+    void setConfigIcon( const QIcon& icon );
 
  Q_SIGNALS:
     void pluginListViewClicked();
     void aboutPluginClicked( QString nameId );
     void configPluginClicked( QString nameId );
+
+ private:
+    MarblePluginSettingsWidgetPrivate *d;
 };
 
 }
