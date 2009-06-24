@@ -54,7 +54,10 @@ void WikipediaItem::addDownloadedFile( const QString& url, const QString& type )
     Q_UNUSED( url )
     Q_UNUSED( type )
 
-    // There shouldn't be downloaded files for this item
+    if ( type == "thumbnail" ) {
+        m_thumbnail.load( url );
+        setSize( m_thumbnail.size() );
+    }
 }
 
 bool WikipediaItem::operator<( const AbstractDataPluginItem *other ) const {
@@ -67,7 +70,12 @@ void WikipediaItem::paint( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    painter->drawPixmap( 0, 0, m_pixmap );
+    if ( m_thumbnail.isNull() ) {
+        painter->drawPixmap( 0, 0, m_pixmap );
+    }
+    else {
+        painter->drawPixmap( 0, 0, m_thumbnail );
+    }
 }
 
 qreal WikipediaItem::longitude() {

@@ -227,12 +227,26 @@ void AbstractDataPluginModel::downloadItemData( const QUrl& url,
     if( !item ) {
         return;
     }
+
+    // If the item is already in our list, don't add it.
+    if( AbstractDataPluginItem *oldItem = findItem( item->id() ) ) {
+        if ( oldItem == item ) {
+            return;
+        }
+        else {
+            item->deleteLater();
+            return;
+        }
+    }
+
     QString id = generateFilename( item->id(), type );
     
     d->m_downloadManager->addJob( url, id, id );
     d->m_downloadingItems.insert( id, item );
     
     connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
+
+    addItemToList( item );
 }
 
 void AbstractDataPluginModel::downloadDescriptionFile( const QUrl& url ) {    
@@ -259,6 +273,17 @@ static bool lessThanByPointer( const AbstractDataPluginItem *item1,
 void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item ) {
     if( !item ) {
         return;
+    }
+
+    // If the item is already in our list, don't add it.
+    if( AbstractDataPluginItem *oldItem = findItem( item->id() ) ) {
+        if ( oldItem == item ) {
+            return;
+        }
+        else {
+            item->deleteLater();
+            return;
+        }
     }
     
     qDebug() << "New item " << item->id();
@@ -312,17 +337,6 @@ AbstractDataPluginItem *AbstractDataPluginModel::findItem( const QString& id ) c
     {
         if( (*listIt)->id() == id ) {
             return (*listIt);
-        }
-    }
-    
-    QHash<QString,AbstractDataPluginItem*>::iterator hashIt;
-    
-    for( hashIt = d->m_downloadingItems.begin();
-         hashIt != d->m_downloadingItems.end();
-         ++hashIt )
-    {
-        if( (*hashIt)->id() == id ) {
-            return (*hashIt);
         }
     }
     
@@ -409,12 +423,6 @@ void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlStri
             
             (*i)->addDownloadedFile( generateFilepath( itemId, fileType ), 
                                      fileType );
-            
-            // If the file is ready for displaying, it can be added to the list of
-            // initialized items
-            if( (*i)->initialized() ) {
-                addItemToList( *i );
-            }
 
             d->m_downloadingItems.erase( i );
         }

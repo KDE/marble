@@ -65,7 +65,6 @@ void PluginItemDelegate::paint( QPainter *painter,
     // Painting the checkbox
     QStyleOptionButton checkBox = checkboxOption( option, index, topLeft.x(), Qt::AlignLeft );
     painter->save();
-    qDebug() << checkBox.rect;
     style->drawControl( QStyle::CE_CheckBox, &checkBox, painter );
     painter->restore();
     topLeft += QPoint( checkBox.rect.width(), 0 );

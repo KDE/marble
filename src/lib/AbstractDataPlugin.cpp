@@ -117,7 +117,11 @@ quint32 AbstractDataPlugin::numberOfItems() const {
 }
     
 void AbstractDataPlugin::setNumberOfItems( quint32 number ) {
+    bool changed = ( number != d->m_numberOfItems );
     d->m_numberOfItems = number;
+
+    if ( changed )
+        emit changedNumberOfItems( number );
 }
 
 QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt( const QPoint& curpos ) {

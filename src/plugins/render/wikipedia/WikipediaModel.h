@@ -29,6 +29,8 @@ class WikipediaModel : public AbstractDataPluginModel
  public:
     WikipediaModel( QObject *parent = 0 );
     ~WikipediaModel();
+
+    void setShowThumbnail( bool show );
  
  protected:
     /**
@@ -49,6 +51,8 @@ class WikipediaModel : public AbstractDataPluginModel
  private:
     QPixmap m_wikipediaPixmap;
     QIcon m_wikipediaIcon;
+
+    bool m_showThumbnail;
 };
 
 }

@@ -75,6 +75,7 @@ class WikipediaItem : public AbstractDataPluginItem {
     QAction *m_action;
     
     QPixmap m_pixmap;
+    QPixmap m_thumbnail;
 };
     
 }

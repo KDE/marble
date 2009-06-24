@@ -17,9 +17,13 @@
 #include "MarbleDirs.h"
 
 // Qt
+#include <QtCore/QDebug>
+#include <QtGui/QPushButton>
 #include <QtGui/QLabel>
 
 using namespace Marble;
+
+const quint32 maximumNumberOfItems = 99;
 
 WikipediaPlugin::WikipediaPlugin()
     : m_icon()
@@ -50,7 +54,19 @@ WikipediaPlugin::WikipediaPlugin()
 
     // Initializing configuration dialog
     m_configDialog = new QDialog();
-    QLabel *label = new QLabel( "Hello World", m_configDialog );
+    ui_configWidget.setupUi( m_configDialog );
+    ui_configWidget.m_itemNumberSpinBox->setRange( 0, maximumNumberOfItems );
+    connect( ui_configWidget.m_buttonBox, SIGNAL( accepted() ),
+                                          SLOT( writeSettings() ) );
+    connect( ui_configWidget.m_buttonBox, SIGNAL( rejected() ),
+                                          SLOT( readSettings() ) );
+    QPushButton *applyButton = ui_configWidget.m_buttonBox->button( QDialogButtonBox::Apply );
+    connect( applyButton, SIGNAL( clicked() ),
+             this,        SLOT( writeSettings() ) );
+    connect( this, SIGNAL( changedNumberOfItems( quint32 ) ),
+             this, SLOT( setDialogNumberOfItems( quint32 ) ) );
+
+    readSettings();
 }
 
 WikipediaPlugin::~WikipediaPlugin() {
@@ -60,7 +76,6 @@ WikipediaPlugin::~WikipediaPlugin() {
      
 void WikipediaPlugin::initialize() {
     setModel( new WikipediaModel( this ) );
-    setNumberOfItems( numberOfArticlesPerFetch );
 }
 
 QString WikipediaPlugin::name() const {
@@ -86,6 +101,48 @@ QDialog *WikipediaPlugin::aboutDialog() const {
 QDialog *WikipediaPlugin::configDialog() const {
     return m_configDialog;
 }
+
+void WikipediaPlugin::setShowThumbnails( bool shown ) {
+    if ( shown ) {
+        ui_configWidget.m_showThumbnailCheckBox->setCheckState( Qt::Checked );
+    }
+    else {
+        ui_configWidget.m_showThumbnailCheckBox->setCheckState( Qt::Unchecked );
+    }
+
+    WikipediaModel *wikipediaModel = qobject_cast<WikipediaModel*>( model() );
+
+    if ( wikipediaModel ) {
+        wikipediaModel->setShowThumbnail( shown );
+    }
+}
+
+void WikipediaPlugin::readSettings() {
+    setNumberOfItems( 15 );
+    setDialogNumberOfItems( 15 );
+    setShowThumbnails( true );
+}
+
+void WikipediaPlugin::writeSettings() {
+    setNumberOfItems( ui_configWidget.m_itemNumberSpinBox->value() );
+    if ( ui_configWidget.m_showThumbnailCheckBox->checkState() ) {
+        setShowThumbnails( true );
+    }
+    else {
+        setShowThumbnails( false );
+    }
+}
+
+void WikipediaPlugin::setDialogNumberOfItems( quint32 number ) {
+    if ( number <= maximumNumberOfItems ) {
+        ui_configWidget.m_itemNumberSpinBox->setValue( (int) number );
+    }
+    else {
+        // Force a the number of items being lower or equal maximumNumberOfItems
+        setNumberOfItems( maximumNumberOfItems );
+    }
+}
+
 
 Q_EXPORT_PLUGIN2(WikipediaPlugin, Marble::WikipediaPlugin)
 

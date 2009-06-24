@@ -111,6 +111,9 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin {
      * @return The items at the given position.
      */
     QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos );
+
+ Q_SIGNALS:
+    void changedNumberOfItems( quint32 number );
     
  private:
     AbstractDataPluginPrivate * const d;

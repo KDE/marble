@@ -14,6 +14,7 @@
 #include "AbstractDataPlugin.h"
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
+#include "ui_WikipediaConfigWidget.h"
 
 #include <QtGui/QIcon>
 
@@ -44,9 +45,18 @@ class WikipediaPlugin : public AbstractDataPlugin {
 
     QDialog *configDialog() const;
 
+    void setShowThumbnails( bool shown );
+
+ private Q_SLOTS:
+    void readSettings();
+    void writeSettings();
+
+    void setDialogNumberOfItems( quint32 number );
+
  private:
     QIcon m_icon;
     PluginAboutDialog *m_aboutDialog;
+    Ui::WikipediaConfigWidget ui_configWidget;
     QDialog *m_configDialog;
 };
 

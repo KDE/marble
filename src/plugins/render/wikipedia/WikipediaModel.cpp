@@ -39,7 +39,8 @@ const int wikipediaIconHeight = 40;
 const int wikipediaSmallIconSize = 16;
 
 WikipediaModel::WikipediaModel( QObject *parent )
-    : AbstractDataPluginModel( "wikipedia", parent ) 
+    : AbstractDataPluginModel( "wikipedia", parent ),
+      m_showThumbnail( true )
 {
     // Rendering of the wikipedia icon from svg
     QSvgRenderer svgObj( MarbleDirs::path( "svg/wikipedia.svg" ), this );
@@ -55,6 +56,10 @@ WikipediaModel::WikipediaModel( QObject *parent )
 }
 
 WikipediaModel::~WikipediaModel() {
+}
+
+void WikipediaModel::setShowThumbnail( bool show ) {
+    m_showThumbnail = show;
 }
 
 void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
@@ -99,7 +104,12 @@ void WikipediaModel::parseFile( const QByteArray& file ) {
         (*it)->setIcon( m_wikipediaIcon );
         // Currently all wikipedia articles with geotags are on earth
         (*it)->setTarget( "earth" );
-        addItemToList( (*it) );
+        if ( m_showThumbnail ) {
+            downloadItemData( (*it)->thumbnailImageUrl(), "thumbnail", (*it) );
+        }
+        else {
+            addItemToList( *it );
+        }
     }
 }
 

@@ -35,7 +35,8 @@ class WeatherItemPrivate {
         : m_priority( 0 ),
           m_action( new QAction( "Weather", parent ) ),
           m_parent( parent ),
-          m_temperatureSize()
+          m_temperatureSize(),
+          m_initialized( false )
     {
     }
     
@@ -59,6 +60,7 @@ class WeatherItemPrivate {
     WeatherItem *m_parent;
     QSize m_temperatureSize;
     QString m_stationName;
+    bool m_initialized;
     
     static QFont s_font;
 };
@@ -92,7 +94,7 @@ QString WeatherItem::itemType() const {
  
 bool WeatherItem::initialized() {
     // FIXME: This is not the correct behavior
-    return true;
+    return d->m_initialized;
 }
 
 void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
@@ -158,6 +160,7 @@ void WeatherItem::setCurrentWeather( const WeatherData &weather ) {
         = metrics.boundingRect( weather.temperatureString() ).size()
           + QSize( 4, 0 );
     d->updateSize();
+    d->m_initialized = true;
     update();
 }
 
