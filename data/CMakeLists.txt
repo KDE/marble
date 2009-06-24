@@ -34,6 +34,8 @@ svg/worldmap.svg
 svg/lunarmap.svg
 svg/coordinate.svg
 svg/wikipedia.svg
+svg/help-about.svgz
+svg/configure.svgz
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/svg)
 
 FILE (GLOB SVG_FILES flags/*.svg)

@@ -27,6 +27,7 @@
 // Marble
 #include "lib/global.h"
 #include "ControlView.h"
+#include "lib/MarbleDirs.h"
 #include "lib/MarbleCacheSettingsWidget.h"
 #include "lib/MarblePluginSettingsWidget.h"
 #include "lib/MarbleWidget.h"
@@ -107,6 +108,10 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( ControlView *controlView, QWidget *p
     w_pluginSettings->setModel( m_pluginModel );
     w_pluginSettings->setObjectName( "plugin_page" );
     tabWidget->addTab( w_pluginSettings, tr( "Plugins" ) );
+
+    // Setting the icons for the plugin dialog.
+    w_pluginSettings->setAboutIcon( QIcon( MarbleDirs::path( "svg/help-about.svgz" ) ) );
+    w_pluginSettings->setConfigIcon( QIcon( MarbleDirs::path( "svg/configure.svgz" ) ) );
 
     connect( w_pluginSettings, SIGNAL( pluginListViewClicked() ),
                                SLOT( slotEnableButtonApply() ) );
