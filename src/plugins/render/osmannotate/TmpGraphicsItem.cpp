@@ -10,15 +10,51 @@
 
 #include "TmpGraphicsItem.h"
 
+#include <QtCore/QVariant>
+
 namespace Marble{
 
 TmpGraphicsItem::TmpGraphicsItem()
 {
+    parent = 0;
+
+    //sensible default?
+    geoOffset = false;
 }
 
 TmpGraphicsItem::~TmpGraphicsItem()
 {
 
+}
+
+QVariant TmpGraphicsItem::itemChange(GeoGraphicsItemChange change, QVariant v )
+{
+    return QVariant();
+}
+
+QList<TmpGraphicsItem*> TmpGraphicsItem::getChildren()
+{
+    return QList<TmpGraphicsItem*>(children);
+}
+
+void TmpGraphicsItem::addChild(TmpGraphicsItem* c)
+{
+    children.append(c);
+}
+
+TmpGraphicsItem* TmpGraphicsItem::getParent()
+{
+    return parent;
+}
+
+void TmpGraphicsItem::setParent( TmpGraphicsItem* p )
+{
+    parent = p;
+}
+
+void TmpGraphicsItem::setGeoOffset( bool g )
+{
+    geoOffset = g;
 }
 
 }

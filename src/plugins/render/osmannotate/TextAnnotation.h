@@ -15,7 +15,7 @@
 #include "TmpGraphicsItem.h"
 namespace Marble{
 
-
+class GeoWidgetBubble;
 
 class TextAnnotation : public TmpGraphicsItem
 {
@@ -27,6 +27,10 @@ public:
     virtual void paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 );
     virtual bool isGeoProjected();
+    virtual QVariant itemChange(GeoGraphicsItemChange c, QVariant v);
+
+private:
+    GeoWidgetBubble* bubble;
 };
 
 }

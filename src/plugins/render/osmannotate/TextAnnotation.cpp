@@ -12,14 +12,31 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "MarbleDirs.h"
+#include "GeoWidgetBubble.h"
+#include "TextEditor.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QPixmap>
+#include <QtGui/QTextEdit>
+#include <QtGui/QPushButton>
+#include <QtCore/QVariant>
 
 namespace Marble{
 
 TextAnnotation::TextAnnotation()
 {
+   bubble = new GeoWidgetBubble( this );
+//   QTextEdit* t = new QTextEdit(0);
+//   t->setMaximumSize( 100, 100 );
+//   t->setText( " BOB lskjdflskdjflksdjfl sldfkldskfj sdlfkj sldfkjsld fs\n sldkjfsldkjfsdl " );
+//   t->setReadOnly( true );
+
+   //FIXME decide who actually owns this widget and setup destruction
+   //accordingly
+   TextEditor* t = new TextEditor();
+   bubble->setWidget( t );
+
+   addChild( bubble );
 }
 
 QRect TextAnnotation::screenBounding()
@@ -80,12 +97,44 @@ void TextAnnotation::paint( GeoPainter *painter,
 
     painter->drawPixmap( coordinate(), QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) )  );
 
+    //FIXME This shouldn't really be a part of this method at all as each item should
+    //be a part of the scene regardless if it has a parent or not!
+    //Parent - Child relationship should only be used in the paint function to decide
+    //if the coordinate of the object should be an offset of the parent or an actual
+    //coordinate.
+    QListIterator<TmpGraphicsItem*> it(getChildren());
+
+    if( it.hasNext() ) {
+        TmpGraphicsItem* p = it.next();
+        p->paint(painter, viewport, renderPos, layer );
+    }
+
+
+
 
 }
 
 bool TextAnnotation::isGeoProjected()
 {
     return false;
+}
+
+QVariant TextAnnotation::itemChange(GeoGraphicsItemChange change, QVariant v )
+{
+    switch ( change ) {
+        case TmpGraphicsItem::ItemSelectChange :
+        if ( v.toBool() ) {
+            //make the bubble visable
+        } else {
+            //hide the bubble
+        }
+        break;
+
+        default:
+        //do nothing
+        break;
+    }
+    return TmpGraphicsItem::itemChange( change, v );
 }
 
 }
