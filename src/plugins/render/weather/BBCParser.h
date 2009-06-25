@@ -39,12 +39,15 @@ private:
     void readDescription( WeatherData *data );
     void readTitle( WeatherData *data );
     
-    void setupWeatherConditions();
+    void setupHashes();
 
     QList<WeatherData> m_list;
     
     static QHash<QString, WeatherData::WeatherCondition> dayConditions;
     static QHash<QString, WeatherData::WeatherCondition> nightConditions;
+    static QHash<QString, WeatherData::WindDirection> windDirections;
+    static QHash<QString, WeatherData::PressureDevelopment> pressureDevelopments;
+    static QHash<QString, WeatherData::Visibility> visibilityStates;
 };
 
 } // Marble namespace

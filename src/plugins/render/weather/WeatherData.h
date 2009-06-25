@@ -73,6 +73,13 @@ class WeatherData {
         WSW,
         DirectionNotAvailable
     };
+
+    enum PressureDevelopment {
+        Rising,
+        NoChange,
+        Falling,
+        PressureDevelopmentNotAvailable
+    };
     
     enum Visibility {
         VeryGood,
@@ -146,6 +153,9 @@ class WeatherData {
     qreal pressure( WeatherData::PressureFormat format = WeatherData::HectoPascal ) const;
     void setPressure( qreal pressure,
                       WeatherData::PressureFormat format = WeatherData::HectoPascal );
+
+    WeatherData::PressureDevelopment pressureDevelopment() const;
+    void setPressureDevelopment( WeatherData::PressureDevelopment );
     
     qreal humidity() const;
     void setHumidity( qreal humidity );

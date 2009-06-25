@@ -22,12 +22,20 @@
 
 using namespace Marble;
 
-QHash<QString, WeatherData::WeatherCondition> BBCParser::dayConditions = QHash<QString, WeatherData::WeatherCondition>();
-QHash<QString, WeatherData::WeatherCondition> BBCParser::nightConditions = QHash<QString, WeatherData::WeatherCondition>();
+QHash<QString, WeatherData::WeatherCondition> BBCParser::dayConditions
+        = QHash<QString, WeatherData::WeatherCondition>();
+QHash<QString, WeatherData::WeatherCondition> BBCParser::nightConditions
+        = QHash<QString, WeatherData::WeatherCondition>();
+QHash<QString, WeatherData::WindDirection> BBCParser::windDirections
+        = QHash<QString, WeatherData::WindDirection>();
+QHash<QString, WeatherData::PressureDevelopment> BBCParser::pressureDevelopments
+        = QHash<QString, WeatherData::PressureDevelopment>();
+QHash<QString, WeatherData::Visibility> BBCParser::visibilityStates
+        = QHash<QString, WeatherData::Visibility>();
 
 BBCParser::BBCParser()
 {
-    BBCParser::setupWeatherConditions();
+    BBCParser::setupHashes();
 }
 
 QList<WeatherData> BBCParser::read( QIODevice *device ) {
@@ -150,6 +158,71 @@ void BBCParser::readDescription( WeatherData *data ) {
                 QString value = regExp.cap( 2 );
                 data->setTemperature( value.toDouble(), WeatherData::Celsius );
             }
+
+            // Wind direction
+            regExp.setPattern( "(Wind Direction:\\s*)([NESW]+)(,)" );
+            pos = regExp.indexIn( description );
+            if ( pos > -1 ) {
+                QString wind = regExp.cap( 2 );
+
+                if ( windDirections.contains( wind ) ) {
+                    data->setWindDirection( windDirections.value( wind ) );
+                }
+                else {
+                    qDebug() << "UNHANDLED WIND DIRECTION, PLEASE REPORT: " << wind;
+                }
+            }
+
+            // Wind speed
+            regExp.setPattern( "(Wind Speed:\\s*)(\\d+)(mph)" );
+            pos = regExp.indexIn( description );
+            if ( pos > -1 ) {
+                QString speed = regExp.cap( 2 );
+                data->setWindSpeed( speed.toFloat(), WeatherData::mph );
+            }
+
+            // Relative Humidity
+            regExp.setPattern( "(Relative Humidity:\\s*)(\\d+)(.,)" );
+            pos = regExp.indexIn( description );
+            if ( pos > -1 ) {
+                QString humidity = regExp.cap( 2 );
+                data->setHumidity( humidity.toFloat() );
+            }
+
+            // Pressure
+            regExp.setPattern( "(Pressure:\\s*)(\\d+mB|N/A)(, )([a-z ]+|N/A)(,)" );
+            pos = regExp.indexIn( description );
+            if ( pos > -1 ) {
+                QString pressure = regExp.cap( 2 );
+                if ( pressure != "N/A" ) {
+                    pressure.chop( 2 );
+                    data->setPressure( pressure.toFloat()/1000, WeatherData::Bar );
+                }
+
+                QString pressureDevelopment = regExp.cap( 4 );
+
+                if ( pressureDevelopments.contains( pressureDevelopment ) ) {
+                    data->setPressureDevelopment( pressureDevelopments.value( pressureDevelopment ) );
+                }
+                else {
+                    qDebug() << "UNHANDLED PRESSURE DEVELOPMENT, PLEASE REPORT: "
+                             << pressureDevelopment;
+                }
+            }
+
+            // Visibility
+            regExp.setPattern( "(Visibility:\\s*)([^,]+)" );
+            pos = regExp.indexIn( description );
+            if ( pos > -1 ) {
+                QString visibility = regExp.cap( 2 );
+
+                if ( visibilityStates.contains( visibility ) ) {
+                    data->setVisibilty( visibilityStates.value( visibility ) );
+                }
+                else {
+                    qDebug() << "UNHANDLED VISIBILITY, PLEASE REPORT: " << visibility;
+                }
+            }
         }
     }
 }
@@ -190,8 +263,13 @@ void BBCParser::readTitle( WeatherData *data ) {
     }
 }
 
-void BBCParser::setupWeatherConditions() {
-    if( !( ( dayConditions.size() == 0 ) || ( nightConditions.size() == 0 ) ) ) {
+void BBCParser::setupHashes() {
+    if( !( ( dayConditions.isEmpty() )
+           || ( nightConditions.isEmpty() )
+           || ( windDirections.isEmpty() )
+           || ( pressureDevelopments.isEmpty() )
+           || ( visibilityStates.isEmpty() ) ) )
+    {
         return;
     }
     
@@ -282,4 +360,35 @@ void BBCParser::setupWeatherConditions() {
     nightConditions["cloudy with heavy snow"] = WeatherData::Snow;
     nightConditions["na"] = WeatherData::ConditionNotAvailable;
     nightConditions["N/A"] = WeatherData::ConditionNotAvailable;
+
+    windDirections["N"] = WeatherData::N;
+    windDirections["NE"] = WeatherData::NE;
+    windDirections["ENE"] = WeatherData::ENE;
+    windDirections["E"] = WeatherData::E;
+    windDirections["SSE"] = WeatherData::SSE;
+    windDirections["SE"] = WeatherData::SE;
+    windDirections["ESE"] = WeatherData::ESE;
+    windDirections["S"] = WeatherData::S;
+    windDirections["NNW"] = WeatherData::NNW;
+    windDirections["NW"] = WeatherData::NW;
+    windDirections["WNW"] = WeatherData::WNW;
+    windDirections["W"] = WeatherData::W;
+    windDirections["SSW"] = WeatherData::SSW;
+    windDirections["SW"] = WeatherData::SW;
+    windDirections["WSW"] = WeatherData::WSW;
+    windDirections["N/A"] = WeatherData::DirectionNotAvailable;
+
+    pressureDevelopments["falling"] = WeatherData::Falling;
+    pressureDevelopments["no change"] = WeatherData::NoChange;
+    pressureDevelopments["steady"] = WeatherData::NoChange;
+    pressureDevelopments["rising"] = WeatherData::Rising;
+    pressureDevelopments["N/A"] = WeatherData::PressureDevelopmentNotAvailable;
+
+    visibilityStates["Excellent"] = WeatherData::VeryGood;
+    visibilityStates["Very good"] = WeatherData::VeryGood;
+    visibilityStates["Good"] = WeatherData::Good;
+    visibilityStates["Moderate"] = WeatherData::Normal;
+    visibilityStates["Poor"] = WeatherData::Poor;
+    visibilityStates["Very Poor"] = WeatherData::VeryPoor;
+    visibilityStates["N/A"] = WeatherData::VisibilityNotAvailable;
 }

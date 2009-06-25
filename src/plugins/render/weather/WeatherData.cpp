@@ -61,6 +61,7 @@ class WeatherDataPrivate {
           m_minTemperature( 0 ),
           m_visibility( WeatherData::VisibilityNotAvailable ),
           m_pressure( 0 ),
+          m_pressureDevelopment( WeatherData::PressureDevelopmentNotAvailable ),
           m_humidity( 0 ),
           ref( 1 )
     {
@@ -77,6 +78,7 @@ class WeatherDataPrivate {
           m_minTemperature( other.m_minTemperature ),
           m_visibility( other.m_visibility ),
           m_pressure( other.m_pressure ),
+          m_pressureDevelopment( other.m_pressureDevelopment ),
           m_humidity( other.m_humidity ),
           ref( other.ref )
     {
@@ -201,6 +203,7 @@ class WeatherDataPrivate {
         m_minTemperature = other.m_minTemperature;
         m_visibility = other.m_visibility;
         m_pressure = other.m_pressure;
+        m_pressureDevelopment = other.m_pressureDevelopment;
         m_humidity = other.m_humidity;
         
         ref = other.ref;
@@ -223,6 +226,8 @@ class WeatherDataPrivate {
     
     // Pressure stored in hecto pascal
     qreal m_pressure;
+
+    WeatherData::PressureDevelopment m_pressureDevelopment;
     
     // Relative humidity
     qreal m_humidity;
@@ -478,6 +483,15 @@ void WeatherData::setPressure( qreal pressure, WeatherData::PressureFormat forma
     else {
         qDebug() << "Wrong pressure format";
     }
+}
+
+WeatherData::PressureDevelopment WeatherData::pressureDevelopment() const {
+    return d->m_pressureDevelopment;
+}
+
+void WeatherData::setPressureDevelopment( WeatherData::PressureDevelopment pressureDevelopment ) {
+    detach();
+    d->m_pressureDevelopment = pressureDevelopment;
 }
 
 qreal WeatherData::humidity() const {

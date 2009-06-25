@@ -16,6 +16,7 @@
 #include "RenderPluginInterface.h"
 #include "ui_WikipediaConfigWidget.h"
 
+#include <QtCore/QSettings>
 #include <QtGui/QIcon>
 
 namespace Marble {
@@ -58,6 +59,8 @@ class WikipediaPlugin : public AbstractDataPlugin {
     PluginAboutDialog *m_aboutDialog;
     Ui::WikipediaConfigWidget ui_configWidget;
     QDialog *m_configDialog;
+    QSettings m_settings;
+    bool m_showThumbnails;
 };
 
 }

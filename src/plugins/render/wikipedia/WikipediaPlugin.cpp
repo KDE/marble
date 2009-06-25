@@ -18,6 +18,7 @@
 
 // Qt
 #include <QtCore/QDebug>
+#include <QtCore/QSettings>
 #include <QtGui/QPushButton>
 #include <QtGui/QLabel>
 
@@ -26,7 +27,8 @@ using namespace Marble;
 const quint32 maximumNumberOfItems = 99;
 
 WikipediaPlugin::WikipediaPlugin()
-    : m_icon()
+    : m_icon(),
+      m_settings("kde.org", "Marble Desktop Globe")
 {
     setNameId( "wikipedia" );
     
@@ -66,6 +68,7 @@ WikipediaPlugin::WikipediaPlugin()
     connect( this, SIGNAL( changedNumberOfItems( quint32 ) ),
              this, SLOT( setDialogNumberOfItems( quint32 ) ) );
 
+    m_settings.beginGroup( "wikipediaPlugin" );
     readSettings();
 }
 
@@ -75,7 +78,10 @@ WikipediaPlugin::~WikipediaPlugin() {
 }
      
 void WikipediaPlugin::initialize() {
-    setModel( new WikipediaModel( this ) );
+    WikipediaModel *model = new WikipediaModel( this );
+    model->setShowThumbnail( m_showThumbnails );
+    setModel( model );
+
 }
 
 QString WikipediaPlugin::name() const {
@@ -112,24 +118,28 @@ void WikipediaPlugin::setShowThumbnails( bool shown ) {
 
     WikipediaModel *wikipediaModel = qobject_cast<WikipediaModel*>( model() );
 
+    m_showThumbnails = shown;
     if ( wikipediaModel ) {
         wikipediaModel->setShowThumbnail( shown );
     }
 }
 
 void WikipediaPlugin::readSettings() {
-    setNumberOfItems( 15 );
-    setDialogNumberOfItems( 15 );
-    setShowThumbnails( true );
+    setNumberOfItems( m_settings.value( "numberOfItems", 15 ).toUInt() );
+    setDialogNumberOfItems( numberOfItems() );
+    setShowThumbnails( m_settings.value( "showThumbnails", true ).toBool() );
 }
 
 void WikipediaPlugin::writeSettings() {
     setNumberOfItems( ui_configWidget.m_itemNumberSpinBox->value() );
-    if ( ui_configWidget.m_showThumbnailCheckBox->checkState() ) {
+    m_settings.setValue( "numberOfItems", ui_configWidget.m_itemNumberSpinBox->value() );
+    if ( ui_configWidget.m_showThumbnailCheckBox->checkState() == Qt::Checked ) {
         setShowThumbnails( true );
+        m_settings.setValue( "showThumbnails", true );
     }
     else {
         setShowThumbnails( false );
+        m_settings.setValue( "showThumbnails", false );
     }
 }
 

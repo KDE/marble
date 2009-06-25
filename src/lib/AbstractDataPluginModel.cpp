@@ -228,17 +228,6 @@ void AbstractDataPluginModel::downloadItemData( const QUrl& url,
         return;
     }
 
-    // If the item is already in our list, don't add it.
-    if( AbstractDataPluginItem *oldItem = findItem( item->id() ) ) {
-        if ( oldItem == item ) {
-            return;
-        }
-        else {
-            item->deleteLater();
-            return;
-        }
-    }
-
     QString id = generateFilename( item->id(), type );
     
     d->m_downloadManager->addJob( url, id, id );
