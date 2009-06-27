@@ -173,10 +173,16 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         m_dirX = 0;
         m_dirY = 0;
     
+        // To prevent error from lost MouseButtonRelease events
         if ( event->type() == QEvent::MouseMove
              && !( event->buttons() & Qt::LeftButton ) )
         {
             m_leftpressed = false;
+        }
+        if ( event->type() == QEvent::MouseMove
+             && !( event->buttons() & Qt::MidButton ) )
+        {
+            m_midpressed = false;
         }
 
         // Do not handle (and therefore eat) mouse press and release events 
