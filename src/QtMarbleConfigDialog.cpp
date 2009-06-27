@@ -113,8 +113,6 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( ControlView *controlView, QWidget *p
     w_pluginSettings->setAboutIcon( QIcon( MarbleDirs::path( "svg/help-about.svgz" ) ) );
     w_pluginSettings->setConfigIcon( QIcon( MarbleDirs::path( "svg/configure.svgz" ) ) );
 
-    connect( w_pluginSettings, SIGNAL( pluginListViewClicked() ),
-                               SLOT( slotEnableButtonApply() ) );
     connect( w_pluginSettings, SIGNAL( aboutPluginClicked( QString ) ),
                                SLOT( showPluginAboutDialog( QString ) ) );
     connect( w_pluginSettings, SIGNAL( configPluginClicked( QString ) ),
@@ -131,6 +129,9 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( ControlView *controlView, QWidget *p
     
     // When the settings have been changed, write to disk.
     connect( this, SIGNAL( settingsChanged() ), this, SLOT( syncSettings() ) );
+
+    connect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
+             this,                          SLOT( writePluginSettings() ) );
     
     initSettings();
 }
@@ -197,6 +198,9 @@ void QtMarbleConfigDialog::showPluginConfigDialog( QString nameId ) {
     }
 }
 
+void QtMarbleConfigDialog::writePluginSettings() {
+    m_controlView->marbleWidget()->writePluginSettings( *settings );
+}
 
 void QtMarbleConfigDialog::readSettings()
 {
@@ -280,6 +284,9 @@ void QtMarbleConfigDialog::readSettings()
             (*i)->setVisible( pluginVisible[ (*i)->nameId() ] );
         }
     }
+
+    // Read the settings of the plugins
+    m_controlView->marbleWidget()->readPluginSettings( *settings );
     
     // The settings loaded in the config dialog have been changed.
     emit settingsChanged();

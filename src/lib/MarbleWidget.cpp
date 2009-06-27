@@ -15,6 +15,8 @@
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
+#include <QtCore/QHash>
+#include <QtCore/QSettings>
 #include <QtCore/QTimer>
 #include <QtCore/QAbstractItemModel>
 #include <QtGui/QItemSelectionModel>
@@ -46,6 +48,7 @@
 #include "MarbleWidgetInputHandler.h"
 #include "TileCreatorDialog.h"
 #include "gps/GpsLayer.h"
+#include "RenderPlugin.h"
 #include "SunLocator.h"
 #include "MergedLayerDecorator.h"
 #include "ViewportParams.h"
@@ -226,6 +229,9 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->connect( m_disableInputAction, SIGNAL(toggled(bool)),
                        m_widget, SLOT(disableInput(bool)) );
+
+    m_widget->connect( m_model, SIGNAL( pluginSettingsChanged() ),
+                       m_widget, SIGNAL( pluginSettingsChanged() ) );
 }
 
 // ----------------------------------------------------------------
@@ -1306,6 +1312,38 @@ void MarbleWidget::removeAction( QAction *action )
 QList<RenderPlugin *> MarbleWidget::renderPlugins() const
 {
     return d->m_model->renderPlugins();
+}
+
+void MarbleWidget::readPluginSettings( QSettings& settings ) {
+    foreach( RenderPlugin *plugin, renderPlugins() ) {
+        settings.beginGroup( QString( "plugin_" ) + plugin->nameId() );
+
+        QHash<QString,QVariant> hash = plugin->settings();
+
+        foreach ( QString key, settings.childKeys() ) {
+            hash.insert( key, settings.value( key ) );
+        }
+
+        plugin->setSettings( hash );
+
+        settings.endGroup();
+    }
+}
+
+void MarbleWidget::writePluginSettings( QSettings& settings ) const {
+    foreach( RenderPlugin *plugin, renderPlugins() ) {
+        settings.beginGroup( QString( "plugin_" ) + plugin->nameId() );
+
+        QHash<QString,QVariant> hash = plugin->settings();
+
+        QHash<QString,QVariant>::iterator it = hash.begin();
+        while( it != hash.end() ) {
+            settings.setValue( it.key(), it.value() );
+            ++it;
+        }
+
+        settings.endGroup();
+    }
 }
 
 QList<AbstractFloatItem *> MarbleWidget::floatItems() const

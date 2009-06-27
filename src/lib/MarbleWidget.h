@@ -38,6 +38,7 @@
 class QAbstractItemModel;
 class QModelIndex;
 class QItemSelectionModel;
+class QSettings;
 class QStyleOptionGraphicsItem;
 
 namespace Marble
@@ -495,6 +496,21 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     QList<AbstractFloatItem *> floatItems()    const;
 
+    /**
+     * Reads the plugin settings from the passed QSettings.
+     * You shouldn't use this in a KDE application as these use KConfig. Here you could
+     * use MarblePart which is handling this automatically.
+     * @param settings The QSettings object to be used.
+     */
+    void readPluginSettings( QSettings& settings );
+
+    /**
+     * Writes the plugin settings in the passed QSettings.
+     * You shouldn't use this in a KDE application as these use KConfig. Here you could
+     * use MarblePart which is handling this automatically.
+     * @param settings The QSettings object to be used.
+     */
+    void writePluginSettings( QSettings& settings ) const;
 
     /**
      * @brief  Get the Projection used for the map
@@ -944,6 +960,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *  lon1, lat1, lon2, lat2 (or West, North, East, South) as left/top, right/bottom rectangle.
      */
     void  regionSelected(const QList<double>&);
+
+    /**
+     * This signal is emit when the settings of a plugin changed.
+     */
+    void pluginSettingsChanged();
 
  protected:
     /**

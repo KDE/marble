@@ -118,6 +118,11 @@ class QtMarbleConfigDialog : public QDialog
      */
     void showPluginConfigDialog( QString nameId );
 
+    /**
+     * Saves the settings of all plugins.
+     */
+    void writePluginSettings();
+
     private:
     Q_DISABLE_COPY( QtMarbleConfigDialog )
 

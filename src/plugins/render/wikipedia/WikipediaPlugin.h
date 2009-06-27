@@ -16,7 +16,7 @@
 #include "RenderPluginInterface.h"
 #include "ui_WikipediaConfigWidget.h"
 
-#include <QtCore/QSettings>
+#include <QtCore/QHash>
 #include <QtGui/QIcon>
 
 namespace Marble {
@@ -48,6 +48,16 @@ class WikipediaPlugin : public AbstractDataPlugin {
 
     void setShowThumbnails( bool shown );
 
+    /**
+     * @return: The settings of the item.
+     */
+    virtual QHash<QString,QVariant> settings() const;
+
+    /**
+     * Set the settings of the item.
+     */
+    virtual void setSettings( QHash<QString,QVariant> settings );
+
  private Q_SLOTS:
     void readSettings();
     void writeSettings();
@@ -59,8 +69,7 @@ class WikipediaPlugin : public AbstractDataPlugin {
     PluginAboutDialog *m_aboutDialog;
     Ui::WikipediaConfigWidget ui_configWidget;
     QDialog *m_configDialog;
-    QSettings m_settings;
-    bool m_showThumbnails;
+    QHash<QString,QVariant> m_settings;
 };
 
 }

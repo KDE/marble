@@ -153,6 +153,9 @@ MarbleModel::MarbleModel( QObject *parent )
     connect ( d->m_layerManager,      SIGNAL( floatItemsChanged() ),
               this,                   SIGNAL( modelChanged() ) );
 
+    connect ( d->m_layerManager, SIGNAL( pluginSettingsChanged() ),
+              this,              SIGNAL( pluginSettingsChanged() ) );
+
     d->m_timer = new QTimer( this );
     d->m_timer->start( 200 );
 

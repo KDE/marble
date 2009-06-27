@@ -18,7 +18,6 @@
 
 // Qt
 #include <QtCore/QDebug>
-#include <QtCore/QSettings>
 #include <QtGui/QPushButton>
 #include <QtGui/QLabel>
 
@@ -28,7 +27,7 @@ const quint32 maximumNumberOfItems = 99;
 
 WikipediaPlugin::WikipediaPlugin()
     : m_icon(),
-      m_settings("kde.org", "Marble Desktop Globe")
+      m_settings()
 {
     setNameId( "wikipedia" );
     
@@ -67,9 +66,6 @@ WikipediaPlugin::WikipediaPlugin()
              this,        SLOT( writeSettings() ) );
     connect( this, SIGNAL( changedNumberOfItems( quint32 ) ),
              this, SLOT( setDialogNumberOfItems( quint32 ) ) );
-
-    m_settings.beginGroup( "wikipediaPlugin" );
-    readSettings();
 }
 
 WikipediaPlugin::~WikipediaPlugin() {
@@ -79,9 +75,9 @@ WikipediaPlugin::~WikipediaPlugin() {
      
 void WikipediaPlugin::initialize() {
     WikipediaModel *model = new WikipediaModel( this );
-    model->setShowThumbnail( m_showThumbnails );
+    // Ensure that all settings get forwarded to the model.
+    readSettings();
     setModel( model );
-
 }
 
 QString WikipediaPlugin::name() const {
@@ -108,6 +104,15 @@ QDialog *WikipediaPlugin::configDialog() const {
     return m_configDialog;
 }
 
+QHash<QString,QVariant> WikipediaPlugin::settings() const {
+    return m_settings;
+}
+
+void WikipediaPlugin::setSettings( QHash<QString,QVariant> settings ) {
+    m_settings = settings;
+    readSettings();
+}
+
 void WikipediaPlugin::setShowThumbnails( bool shown ) {
     if ( shown ) {
         ui_configWidget.m_showThumbnailCheckBox->setCheckState( Qt::Checked );
@@ -118,7 +123,7 @@ void WikipediaPlugin::setShowThumbnails( bool shown ) {
 
     WikipediaModel *wikipediaModel = qobject_cast<WikipediaModel*>( model() );
 
-    m_showThumbnails = shown;
+    m_settings.insert( "showThumbnails", shown );
     if ( wikipediaModel ) {
         wikipediaModel->setShowThumbnail( shown );
     }
@@ -132,15 +137,17 @@ void WikipediaPlugin::readSettings() {
 
 void WikipediaPlugin::writeSettings() {
     setNumberOfItems( ui_configWidget.m_itemNumberSpinBox->value() );
-    m_settings.setValue( "numberOfItems", ui_configWidget.m_itemNumberSpinBox->value() );
+    m_settings.insert( "numberOfItems", ui_configWidget.m_itemNumberSpinBox->value() );
     if ( ui_configWidget.m_showThumbnailCheckBox->checkState() == Qt::Checked ) {
         setShowThumbnails( true );
-        m_settings.setValue( "showThumbnails", true );
+        m_settings.insert( "showThumbnails", true );
     }
     else {
         setShowThumbnails( false );
-        m_settings.setValue( "showThumbnails", false );
+        m_settings.insert( "showThumbnails", false );
     }
+
+    emit settingsChanged( nameId() );
 }
 
 void WikipediaPlugin::setDialogNumberOfItems( quint32 number ) {

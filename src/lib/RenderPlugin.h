@@ -80,13 +80,31 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      */
     virtual QDialog *configDialog() const;
 
+    /**
+     * @return: The settings of the item.
+     */
+    virtual QHash<QString,QVariant> settings() const;
+
+    /**
+     * Set the settings of the item.
+     */
+    virtual void setSettings( QHash<QString,QVariant> settings );
+
  public Q_SLOTS:
     void    setEnabled( bool enabled );
     void    setVisible( bool visible );
 
  Q_SIGNALS:
-    void    valueChanged( QString nameId, bool visible );
+    /**
+     * This signal is emitted if the visibility is changed with setVisible.
+     */
+    void visibilityChanged( QString nameId, bool visible );
     
+    /**
+     * This signal is emitted if the settings of the RenderPlugin changed.
+     */
+    void settingsChanged( QString nameId );
+
  protected:
     bool eventFilter( QObject *, QEvent * );
 

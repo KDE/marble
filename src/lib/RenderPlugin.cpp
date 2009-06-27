@@ -135,7 +135,7 @@ void RenderPlugin::setVisible( bool visible )
     d->m_visible = visible;
     d->m_action->setChecked( visible );
 
-    emit valueChanged( nameId(), visible );
+    emit visibilityChanged( nameId(), visible );
 }
 
 bool RenderPlugin::enabled() const
@@ -154,6 +154,13 @@ QDialog *RenderPlugin::aboutDialog() const {
 
 QDialog *RenderPlugin::configDialog() const {
     return 0;
+}
+
+QHash<QString,QVariant> RenderPlugin::settings() const {
+    return QHash<QString,QVariant>();
+}
+
+void RenderPlugin::setSettings( QHash<QString,QVariant> settings ) {
 }
 
 bool RenderPlugin::eventFilter( QObject *, QEvent * ) {

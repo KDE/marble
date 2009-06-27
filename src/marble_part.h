@@ -130,6 +130,16 @@ class MarblePart: public KParts::ReadOnlyPart
      */
     void  showPluginConfigDialog( QString nameId );
 
+    /**
+     * Saves the settings of all plugins.
+     */
+    void writePluginSettings();
+
+    /**
+     * Reads the settings of all plugins.
+     */
+    void readPluginSettings();
+
   private:
     void  setupActions();
     void  setupDownloadProgressBar();

@@ -421,7 +421,11 @@ void MarblePart::readSettings()
     readStatusBarSettings();
 
     slotUpdateSettings();
-    qDebug() << "Stop: MarblePart::readSettings()";
+    readPluginSettings();
+    disconnect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
+                this,                          SLOT( writePluginSettings() ) );
+    connect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
+             this,                          SLOT( writePluginSettings() ) );
 }
 
 void MarblePart::readStatusBarSettings()
@@ -1086,6 +1090,39 @@ void MarblePart::showPluginConfigDialog( QString nameId ) {
                 configDialog->show();
             }
         }
+    }
+}
+
+void MarblePart::writePluginSettings() {
+    KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
+
+    foreach( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
+        KConfigGroup group = sharedConfig->group( QString( "plugin_" ) + plugin->nameId() );
+
+        QHash<QString,QVariant> hash = plugin->settings();
+
+        QHash<QString,QVariant>::iterator it = hash.begin();
+        while( it != hash.end() ) {
+            group.writeEntry( it.key(), it.value() );
+            ++it;
+        }
+        group.sync();
+    }
+}
+
+void MarblePart::readPluginSettings() {
+    KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
+
+    foreach( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
+        KConfigGroup group = sharedConfig->group( QString( "plugin_" ) + plugin->nameId() );
+
+        QHash<QString,QVariant> hash = plugin->settings();
+
+        foreach ( QString key, group.keyList() ) {
+            hash.insert( key, group.readEntry( key ) );
+        }
+
+        plugin->setSettings( hash );
     }
 }
 
