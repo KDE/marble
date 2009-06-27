@@ -172,6 +172,12 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
         m_dirX = 0;
         m_dirY = 0;
+    
+        if ( event->type() == QEvent::MouseMove
+             && !( event->buttons() & Qt::LeftButton ) )
+        {
+            m_leftpressed = false;
+        }
 
         // Do not handle (and therefore eat) mouse press and release events 
         // that occur above visible float items. Mouse motion events are still 
