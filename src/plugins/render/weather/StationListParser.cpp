@@ -22,6 +22,17 @@
 
 using namespace Marble;
 
+static bool lessThanByPointer( const BBCWeatherItem *item1,
+                               const BBCWeatherItem *item2 )
+{
+    if( item1 != 0 && item2 != 0 ) {
+        return item1->operator<( item2 );
+    }
+    else {
+        return false;
+    }
+}
+
 StationListParser::StationListParser( QObject *parent )
     : m_parent( parent )
 {
@@ -95,14 +106,22 @@ void StationListParser::readStation() {
                 item->setStationName( readCharacters() );
             else if ( name() == "id" )
                 item->setBbcId( readCharacters().toLong() );
+            else if ( name() == "priority" )
+                item->setPriority( readCharacters().toInt() );
             else if ( name() == "Point" )
                 readPoint( item );
             else
                 readUnknownElement();
         }
     }
-    
-    m_list.append( item );
+
+    // This find the right position in the sorted to insert the new item
+    QList<BBCWeatherItem*>::iterator i = qLowerBound( m_list.begin(),
+                                                      m_list.end(),
+                                                      item,
+                                                      lessThanByPointer );
+    // Insert the item on the right position in the list
+    m_list.insert( i, item );
 }
 
 QString StationListParser::readCharacters() {

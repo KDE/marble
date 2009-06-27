@@ -21,7 +21,7 @@
 
 using namespace Marble;
 
-const quint32 numberOfStationsPerFetch = 10;
+const quint32 numberOfStationsPerFetch = 20;
 
 WeatherPlugin::WeatherPlugin()
     : m_icon()

@@ -55,7 +55,7 @@ class WeatherItemPrivate {
     }
     
     WeatherData m_currentWeather;
-    quint8 m_priority;
+    int m_priority;
     QAction *m_action;
     WeatherItem *m_parent;
     QSize m_temperatureSize;
