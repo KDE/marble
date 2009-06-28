@@ -114,12 +114,16 @@ class WeatherData {
     WeatherData();
     WeatherData( const WeatherData &other );
     ~WeatherData();
+
+    bool isValid() const;
     
     QDateTime dateTime() const;
     void setDateTime( const QDateTime& dateTime );
+    bool hasValidDateTime() const;
     
     WeatherData::WeatherCondition condition() const;
     void setCondition( WeatherData::WeatherCondition condition );
+    bool hasValidCondition() const;
     
     /**
      * Get the icon showing the current condition.
@@ -128,37 +132,46 @@ class WeatherData {
     
     WeatherData::WindDirection windDirection() const;
     void setWindDirection( WeatherData::WindDirection direction );
+    bool hasValidWindDirection() const;
     
     qreal windSpeed( WeatherData::SpeedFormat format = WeatherData::mps ) const;
     void setWindSpeed( qreal speed, WeatherData::SpeedFormat format = WeatherData::mps );
+    bool hasValidWindSpeed() const;
     
     qreal temperature( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
     void setTemperature( qreal temp,
                          WeatherData::TemperatureFormat format = WeatherData::Kelvin );
+    bool hasValidTemperature() const;
     QString temperatureString() const;
     
     qreal maxTemperature( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
     void setMaxTemperature( qreal temp,
                             WeatherData::TemperatureFormat format = WeatherData::Kelvin );
+    bool hasValidMaxTemperature() const;
     QString maxTemperatureString() const;
     
     qreal minTemperature( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
     void setMinTemperature( qreal temp,
                             WeatherData::TemperatureFormat format = WeatherData::Kelvin );
+    bool hasValidMinTemperature() const;
     QString minTemperatureString() const;
     
     WeatherData::Visibility visibility() const;
     void setVisibilty( WeatherData::Visibility visibility );
+    bool hasValidVisibility() const;
     
     qreal pressure( WeatherData::PressureFormat format = WeatherData::HectoPascal ) const;
     void setPressure( qreal pressure,
                       WeatherData::PressureFormat format = WeatherData::HectoPascal );
+    bool hasValidPressure() const;
 
     WeatherData::PressureDevelopment pressureDevelopment() const;
     void setPressureDevelopment( WeatherData::PressureDevelopment );
+    bool hasValidPressureDevelopment() const;
     
     qreal humidity() const;
     void setHumidity( qreal humidity );
+    bool hasValidHumidity() const;
     
     WeatherData& operator=( const WeatherData &other );
     

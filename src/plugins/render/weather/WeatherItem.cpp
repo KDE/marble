@@ -45,11 +45,17 @@ class WeatherItemPrivate {
         // Border
         size += borderSpacing*2;
         // Image size
-        size += QSize( imageSize.width(), 0 );
-        // Spacing
-        size += QSize( horizontalSpacing, 0 );
-        // TextSize
-        size += QSize( m_temperatureSize.width(), 0 );
+        if ( m_currentWeather.hasValidCondition() ) {
+            size += QSize( imageSize.width(), 0 );
+        }
+        if ( m_currentWeather.hasValidTemperature() ) {
+            // Spacing
+            size += QSize( horizontalSpacing, 0 );
+            // TextSize
+            size += QSize( m_temperatureSize.width(), 0 );
+            // Spacing
+            size += QSize( horizontalSpacing, 0 );
+        }
         
         m_parent->setSize( size );
     }
@@ -93,8 +99,9 @@ QString WeatherItem::itemType() const {
 }
  
 bool WeatherItem::initialized() {
-    // FIXME: This is not the correct behavior
-    return d->m_initialized;
+    WeatherData current = currentWeather();
+    return current.hasValidCondition()
+           || current.hasValidTemperature();
 }
 
 void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
@@ -115,18 +122,25 @@ void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
     painter->setFont( d->s_font );
     painter->drawRoundedRect( QRect( QPoint( 0, 0 ), size() ), 4, 4 );
     
-    painter->drawPixmap( horizontalPaintPosition,
-                         borderSpacing.height(),
-                         d->m_currentWeather.icon().pixmap( imageSize ) );
-    horizontalPaintPosition += imageSize.width();
-    horizontalPaintPosition += horizontalSpacing;
-    
-    painter->drawText( QRect( horizontalPaintPosition,
-                              borderSpacing.height(),
-                              d->m_temperatureSize.width(),
-                              lineHeight ),
-                       Qt::AlignVCenter,
-                       d->m_currentWeather.temperatureString() );
+    // Condition
+    if ( d->m_currentWeather.hasValidCondition() ) {
+        painter->drawPixmap( horizontalPaintPosition,
+                             borderSpacing.height(),
+                             d->m_currentWeather.icon().pixmap( imageSize ) );
+        horizontalPaintPosition += imageSize.width();
+    }
+
+    // Temperature
+    if ( d->m_currentWeather.hasValidTemperature() ) {
+        horizontalPaintPosition += horizontalSpacing;
+        painter->drawText( QRect( horizontalPaintPosition,
+                                  borderSpacing.height(),
+                                  d->m_temperatureSize.width(),
+                                  lineHeight ),
+                           Qt::AlignVCenter,
+                           d->m_currentWeather.temperatureString() );
+        horizontalPaintPosition += horizontalSpacing;
+    }
     painter->restore();
 }
 
