@@ -16,6 +16,7 @@
 namespace Marble{
 
 class GeoWidgetBubble;
+class TextEditor;
 
 class TextAnnotation : public TmpGraphicsItem
 {
@@ -31,6 +32,7 @@ public:
 
 private:
     GeoWidgetBubble* bubble;
+    TextEditor* m_textEditor;
 };
 
 }

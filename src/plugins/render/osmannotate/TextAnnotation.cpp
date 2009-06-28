@@ -14,6 +14,7 @@
 #include "MarbleDirs.h"
 #include "GeoWidgetBubble.h"
 #include "TextEditor.h"
+#include "AbstractProjection.h"
 
 #include <QtCore/QDebug>
 #include <QtGui/QPixmap>
@@ -25,18 +26,14 @@ namespace Marble{
 
 TextAnnotation::TextAnnotation()
 {
-   bubble = new GeoWidgetBubble( this );
-//   QTextEdit* t = new QTextEdit(0);
-//   t->setMaximumSize( 100, 100 );
-//   t->setText( " BOB lskjdflskdjflksdjfl sldfkldskfj sdlfkj sldfkjsld fs\n sldkjfsldkjfsdl " );
-//   t->setReadOnly( true );
+   bubble = new GeoWidgetBubble();
 
    //FIXME decide who actually owns this widget and setup destruction
    //accordingly
-   TextEditor* t = new TextEditor();
-   bubble->setWidget( t );
+   m_textEditor = new TextEditor();
+   bubble->setGeoWidget( m_textEditor );
 
-   addChild( bubble );
+
 }
 
 QRect TextAnnotation::screenBounding()
@@ -96,6 +93,17 @@ void TextAnnotation::paint( GeoPainter *painter,
     painter->drawPoint( GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ) );
 
     painter->drawPixmap( coordinate(), QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) )  );
+
+    qreal x, y;
+    bool hidden;
+    bool visable = viewport->currentProjection()->screenCoordinates( coordinate(), viewport, x, y, hidden );
+
+    if( visable && !hidden ) {
+        bubble->moveTo( QPoint( x, y ) );
+        bubble->paint( painter, viewport, renderPos, layer );
+    } else {
+        bubble->hide();
+    }
 
     //FIXME This shouldn't really be a part of this method at all as each item should
     //be a part of the scene regardless if it has a parent or not!

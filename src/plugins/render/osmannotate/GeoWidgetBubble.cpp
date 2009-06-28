@@ -1,8 +1,6 @@
 #include "GeoWidgetBubble.h"
 
-#include "ViewportParams.h"
 #include "GeoPainter.h"
-#include "AbstractProjection.h"
 
 #include <QtGui/QWidget>
 
@@ -10,18 +8,9 @@ namespace Marble{
 
 GeoWidgetBubble::GeoWidgetBubble()
 {
-    setGeoOffset(true);
-    widget =0;
-    initalised = false;
-}
-
-GeoWidgetBubble::GeoWidgetBubble( TmpGraphicsItem* parent )
-{
-    setParent( parent );
-    setGeoOffset(true);
-    setCoordinate( GeoDataCoordinates( 50, 50 ) );
-    widget =0;
-    initalised = false;
+    m_widget=0;
+    marbleWidgetInitalised = false;
+    m_offset = QPoint( 10, 10 );
 }
 
 void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* view,
@@ -30,78 +19,65 @@ void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* view,
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
-    if( !initalised && ( widget !=0)  ) {
-        initWidget( (QWidget* ) painter->device() );
+    if( !marbleWidgetInitalised && ( m_widget!=0)  ) {
+        initaliseMarbleWidget( (QWidget* ) painter->device() );
     }
 
+    if ( marbleWidgetInitalised && ( m_widget!= 0 ) ) {
 
-
-    if ( initalised && ( widget != 0 ) ) {
-
-    qreal x, y;
-    bool behind, valid;
-
-    valid = view->currentProjection()->screenCoordinates( getParent()->coordinate(), view,
-                                                          x, y, behind );
-
-
-    if( !behind && valid ) {
-        widget->setVisible( true );
-        painter->save();
-        QSize widgetSize = widget->size();
-
+        m_widget->setVisible( true );
+        QSize widgetSize = m_widget->size();
         //how wide and high the border is
         //sum of both sides of the border
         QSize borderSize( 40, 40 );
-
         QPoint borderOffset( -20, -20 );
 
-        //offset from the placemark
-        QPoint offset( coordinate().longitude(), coordinate().latitude() );
         //position of the bubble
-        QPoint position = QPoint(x, y) + offset;
-        widget->move( position ) ;
+        QPoint position =  m_screenPosition + m_offset;
+        m_widget->move( position ) ;
 
-        painter->drawText(position, "HELLO!!!!");
+        painter->save();
 
         //draw the border
         painter->setBrush( QBrush( Qt::blue, Qt::SolidPattern ));
         painter->drawRoundedRect( QRect( position + borderOffset, widgetSize + borderSize ),
                                   50, 50 , Qt::RelativeSize );
 
-        //draw the "Widget"
-//        painter->setBrush( QBrush( Qt::yellow, Qt::SolidPattern ) );
-//        painter->drawRect( QRect( position, widgetSize ) );
         painter->restore();
-        } else {
-            widget->setVisible( false );
         }
-
-    }
-
 }
 
-void GeoWidgetBubble::setWidget( QWidget* w )
+void GeoWidgetBubble::setGeoWidget( QWidget* w )
 {
-    widget = w;
-    widget->setVisible(false);
+    m_widget= w;
+    m_widget->setVisible(false);
 }
 
-QWidget* GeoWidgetBubble::getWidget()
+QWidget* GeoWidgetBubble::getGeoWidget()
 {
-    return widget;
+    return m_widget;
 }
 
-void GeoWidgetBubble::initWidget( QWidget* parent )
+void GeoWidgetBubble::initaliseMarbleWidget( QWidget* parent )
 {
-    widget->setParent( parent );
-    widget->setVisible( true );
-    initalised = true;
+    m_widget->setParent( parent );
+    m_widget->setVisible( true );
+    marbleWidgetInitalised = true;
 }
 
-bool GeoWidgetBubble::isInitalised()
+bool GeoWidgetBubble::marbleWidgetIsInitalised()
 {
-    return initalised;
+    return marbleWidgetInitalised;
+}
+
+void GeoWidgetBubble::moveTo( QPoint pos )
+{
+     m_screenPosition = pos;
+}
+
+void GeoWidgetBubble::hide()
+{
+    m_widget->hide();
 }
 
 }

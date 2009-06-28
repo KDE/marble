@@ -1,30 +1,38 @@
 #ifndef GEOWIDGETBUBBLE_H
 #define GEOWIDGETBUBBLE_H
 
-#include "TmpGraphicsItem.h"
+#include <QtCore/QString>
+#include <QtGui/QWidget>
 
 namespace Marble {
 
+class GeoPainter;
+class ViewportParams;
+class GeoSceneLayer;
 
-class GeoWidgetBubble : public TmpGraphicsItem
+
+class GeoWidgetBubble
 {
 public:
     GeoWidgetBubble();
-    GeoWidgetBubble( TmpGraphicsItem* parent );
 
-    virtual void paint(GeoPainter* p, ViewportParams* v,
-                       const QString& renderPos, GeoSceneLayer* l);
+    void paint(GeoPainter* p, ViewportParams* v, const QString& renderPos,
+               GeoSceneLayer* l);
 
-    void setWidget( QWidget* w );
-    QWidget* getWidget();
+    void setGeoWidget( QWidget* w );
+    QWidget* getGeoWidget();
 
-    void initWidget( QWidget* parent );
+    void initaliseMarbleWidget( QWidget* parent );
+    bool marbleWidgetIsInitalised();
 
-    bool isInitalised();
+    void moveTo( QPoint screenPos );
+    void hide();
 
 private:
-    QWidget* widget;
-    bool initalised;
+    QWidget* m_widget;
+    bool marbleWidgetInitalised;
+    QPoint m_offset;
+    QPoint m_screenPosition;
 
 
 };
