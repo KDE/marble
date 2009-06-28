@@ -26,12 +26,19 @@
 
 using namespace Marble;
 
+// The Wikipedia icon is not a square
+const QRect wikiIconRect( 0, 0, 47, 40 );
+const QSize miniWikiIconSize( 22, 19 );
+const int miniWikiIconBorder = 3;
+
 WikipediaItem::WikipediaItem( QObject *parent )
     : AbstractDataPluginItem( parent ),
-      m_browser( 0 )
+      m_browser( 0 ),
+      m_wikiIcon()
 {
     m_action = new QAction( this );
     connect( m_action, SIGNAL( triggered() ), this, SLOT( openBrowser() ) );
+    setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
 }
 
 WikipediaItem::~WikipediaItem() {
@@ -71,10 +78,22 @@ void WikipediaItem::paint( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( layer )
 
     if ( m_thumbnail.isNull() ) {
-        painter->drawPixmap( 0, 0, m_pixmap );
+        m_wikiIcon.paint( painter, wikiIconRect );
     }
     else {
         painter->drawPixmap( 0, 0, m_thumbnail );
+        QSize minSize = miniWikiIconSize;
+        minSize *= 2;
+        QSize thumbnailSize = m_thumbnail.size();
+
+        if ( thumbnailSize.width() >= minSize.width()
+             && thumbnailSize.height() >= minSize.height() )
+        {
+            QRect wikiRect( QPoint( 0, 0 ), miniWikiIconSize );
+            wikiRect.moveBottomRight( QPoint( m_thumbnail.width() - miniWikiIconBorder,
+                                              m_thumbnail.height() - miniWikiIconBorder ) );
+            m_wikiIcon.paint( painter, wikiRect );
+        }
     }
 }
 
@@ -129,14 +148,13 @@ void WikipediaItem::openBrowser( ) {
     connect( m_browser, SIGNAL( titleChanged(QString) ),
              m_browser, SLOT( setWindowTitle(QString) ) );
 }
-
-void WikipediaItem::setPixmap( const QPixmap& pixmap ) {
-    m_pixmap = pixmap;
-    setSize( m_pixmap.size() );
-}
     
 void WikipediaItem::setIcon( const QIcon& icon ) {
     m_action->setIcon( icon );
+    m_wikiIcon = icon;
+    if ( m_thumbnail.isNull() ) {
+        setSize( wikiIconRect.size() );
+    }
 }
 
 #include "WikipediaItem.moc"

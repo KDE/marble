@@ -49,7 +49,6 @@ class WikipediaModel : public AbstractDataPluginModel
     void parseFile( const QByteArray& file );
     
  private:
-    QPixmap m_wikipediaPixmap;
     QIcon m_wikipediaIcon;
 
     bool m_showThumbnail;

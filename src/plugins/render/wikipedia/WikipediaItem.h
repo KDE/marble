@@ -15,9 +15,9 @@
 
 #include <QtCore/QUrl>
 #include <QtGui/QPixmap>
+#include <QtGui/QIcon>
 
 class QAction;
-class QIcon;
 class QWebView;
 
 namespace Marble {
@@ -61,8 +61,6 @@ class WikipediaItem : public AbstractDataPluginItem {
     
     QAction *action();
     
-    void setPixmap( const QPixmap& pixmap );
-    
     void setIcon( const QIcon& icon );
     
  public Q_SLOTS:
@@ -73,9 +71,9 @@ class WikipediaItem : public AbstractDataPluginItem {
     QUrl m_thumbnailImageUrl;
     QWebView *m_browser;
     QAction *m_action;
-    
-    QPixmap m_pixmap;
+
     QPixmap m_thumbnail;
+    QIcon m_wikiIcon;
 };
     
 }

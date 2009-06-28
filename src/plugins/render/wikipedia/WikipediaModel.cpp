@@ -33,25 +33,10 @@
 
 using namespace Marble;
 
-// The Wikipedia icon is not a square
-const int wikipediaIconWidth = 47;
-const int wikipediaIconHeight = 40;
-const int wikipediaSmallIconSize = 16;
-
 WikipediaModel::WikipediaModel( QObject *parent )
     : AbstractDataPluginModel( "wikipedia", parent ),
       m_showThumbnail( true )
 {
-    // Rendering of the wikipedia icon from svg
-    QSvgRenderer svgObj( MarbleDirs::path( "svg/wikipedia.svg" ), this );
-    QImage wikipediaImage( wikipediaIconWidth,
-                           wikipediaIconHeight,
-                           QImage::Format_ARGB32 );
-    wikipediaImage.fill( QColor( 0, 0, 0, 0 ).rgba() );
-    QPainter painter( &wikipediaImage );
-    svgObj.render( &painter );
-    m_wikipediaPixmap = QPixmap::fromImage( wikipediaImage );
-    
     m_wikipediaIcon.addFile( MarbleDirs::path( "svg/wikipedia.svg" ) );
 }
 
@@ -99,13 +84,13 @@ void WikipediaModel::parseFile( const QByteArray& file ) {
             delete (*it);
             continue;
         }
-        
-        (*it)->setPixmap( m_wikipediaPixmap );
+
         (*it)->setIcon( m_wikipediaIcon );
         // Currently all wikipedia articles with geotags are on earth
         (*it)->setTarget( "earth" );
-        if ( m_showThumbnail ) {
-            downloadItemData( (*it)->thumbnailImageUrl(), "thumbnail", (*it) );
+        QUrl thumbnailImageUrl = (*it)->thumbnailImageUrl();
+        if ( m_showThumbnail && !thumbnailImageUrl.isEmpty() ) {
+            downloadItemData( thumbnailImageUrl, "thumbnail", (*it) );
         }
         else {
             addItemToList( *it );

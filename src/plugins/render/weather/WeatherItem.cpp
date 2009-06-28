@@ -35,8 +35,7 @@ class WeatherItemPrivate {
         : m_priority( 0 ),
           m_action( new QAction( "Weather", parent ) ),
           m_parent( parent ),
-          m_temperatureSize(),
-          m_initialized( false )
+          m_temperatureSize()
     {
     }
     
@@ -66,7 +65,6 @@ class WeatherItemPrivate {
     WeatherItem *m_parent;
     QSize m_temperatureSize;
     QString m_stationName;
-    bool m_initialized;
     
     static QFont s_font;
 };
@@ -174,7 +172,6 @@ void WeatherItem::setCurrentWeather( const WeatherData &weather ) {
         = metrics.boundingRect( weather.temperatureString() ).size()
           + QSize( 4, 0 );
     d->updateSize();
-    d->m_initialized = true;
     update();
 }
 
