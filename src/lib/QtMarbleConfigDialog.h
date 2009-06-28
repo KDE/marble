@@ -12,26 +12,30 @@
 #define QTMARBLECONFIGDIALOG_H
 
 #include <QtGui/QDialog>
-#include <lib/global.h>
 
-#include "lib/ui_MarbleViewSettingsWidget.h"
-#include "lib/ui_MarbleNavigationSettingsWidget.h"
+#include "marble_export.h"
+#include <global.h>
+
+#include "ui_MarbleViewSettingsWidget.h"
+#include "ui_MarbleNavigationSettingsWidget.h"
 
 class QSettings;
 class QStandardItemModel;
 
 namespace Marble {
 
-class ControlView;
 class MarbleCacheSettingsWidget;
 class MarblePluginSettingsWidget;
+class MarbleWidget;
 
-class QtMarbleConfigDialog : public QDialog
+class QtMarbleConfigDialogPrivate;
+
+class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
 {
     Q_OBJECT
     
     public:
-    QtMarbleConfigDialog( ControlView *controlView = 0, QWidget *parent = 0 );
+    QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget *parent = 0 );
     ~QtMarbleConfigDialog();
 
     // View Settings
@@ -126,22 +130,7 @@ class QtMarbleConfigDialog : public QDialog
     private:
     Q_DISABLE_COPY( QtMarbleConfigDialog )
 
-    void initSettings();
-
-    Ui::MarbleViewSettingsWidget       ui_viewSettings;
-    Ui::MarbleNavigationSettingsWidget ui_navigationSettings;
-    MarbleCacheSettingsWidget          *w_cacheSettings;
-    MarblePluginSettingsWidget         *w_pluginSettings;
-
-    QSettings *settings;
-    
-    ControlView *m_controlView;
-    
-    QStandardItemModel* m_pluginModel;
-
-    // Information about the graphics system
-    Marble::GraphicsSystem m_initialGraphicsSystem;
-    Marble::GraphicsSystem m_previousGraphicsSystem;
+    QtMarbleConfigDialogPrivate *d;
 };
 
 } // Marble namespace

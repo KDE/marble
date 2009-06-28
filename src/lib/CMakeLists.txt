@@ -69,6 +69,7 @@ set(marblewidget_SRCS
     MarbleGeometryModel.cpp
     MarbleDataFacade.cpp
 
+    QtMarbleConfigDialog.cpp
     ClipPainter.cpp
     GeoPainter.cpp
     GeoPolygon.cpp
@@ -281,7 +282,8 @@ else (APPLE AND QTONLY)
     MarbleWidgetInputHandler.h
 
     MapThemeSortFilterProxyModel.h
-
+    
+    QtMarbleConfigDialog.h
     global.h
     MarbleDirs.h
     GeoPainter.h

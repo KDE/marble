@@ -12,6 +12,7 @@
 #include "MarblePluginSettingsWidget.h"
 
 // Qt
+#include <QtCore/QDebug>
 #include <QtGui/QStandardItemModel>
 
 // Marble
