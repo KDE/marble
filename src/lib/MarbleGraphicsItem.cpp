@@ -33,7 +33,8 @@ MarbleGraphicsItem::MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr )
 {
 }
     
-MarbleGraphicsItem::~MarbleGraphicsItem() {
+MarbleGraphicsItem::~MarbleGraphicsItem()
+{
     delete d;
 }
 
@@ -108,7 +109,8 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
     return successful;
 }
 
-bool MarbleGraphicsItem::contains( const QPoint& point ) const {
+bool MarbleGraphicsItem::contains( const QPoint& point ) const
+{
     foreach( QRect rect, d->boundingRects() ) {
         if( rect.contains( point ) )
             return true;
@@ -116,15 +118,18 @@ bool MarbleGraphicsItem::contains( const QPoint& point ) const {
     return false;
 }
 
-QSize MarbleGraphicsItem::size() const {
+QSize MarbleGraphicsItem::size() const
+{
     return p()->m_size;
 }
 
-MarbleGraphicsItem::CacheMode MarbleGraphicsItem::cacheMode() const {
+MarbleGraphicsItem::CacheMode MarbleGraphicsItem::cacheMode() const
+{
     return p()->m_cacheMode;
 }
 
-void MarbleGraphicsItem::setCacheMode( CacheMode mode, const QSize & logicalCacheSize ) {
+void MarbleGraphicsItem::setCacheMode( CacheMode mode, const QSize & logicalCacheSize )
+{
     p()->m_cacheMode = mode;
     p()->m_logicalCacheSize = logicalCacheSize;
     if ( p()->m_cacheMode == NoCache ) {
@@ -132,21 +137,25 @@ void MarbleGraphicsItem::setCacheMode( CacheMode mode, const QSize & logicalCach
     }
 }
 
-void MarbleGraphicsItem::update() {
+void MarbleGraphicsItem::update()
+{
     p()->m_removeCachedPixmap = true;
 }
 
-void MarbleGraphicsItem::setSize( const QSize& size ) {
+void MarbleGraphicsItem::setSize( const QSize& size )
+{
     p()->m_size = size;
     update();
 }
 
-bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e ) {
+bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
+{
     Q_UNUSED( object );
     Q_UNUSED( e );
     return false;
 }
 
-MarbleGraphicsItemPrivate *MarbleGraphicsItem::p() const {
+MarbleGraphicsItemPrivate *MarbleGraphicsItem::p() const
+{
     return d;
 }
