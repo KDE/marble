@@ -16,6 +16,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
 #include <QtCore/QtAlgorithms>
+#include <QtCore/QVariant>
 
 // Marble
 #include "AbstractDataPluginItem.h"
@@ -56,7 +57,8 @@ class AbstractDataPluginModelPrivate {
           m_downloadedNumber( 0 ),
           m_lastDataFacade( 0 ),
           m_downloadTimer( new QTimer( m_parent ) ),
-          m_descriptionFileNumber( 0 )
+          m_descriptionFileNumber( 0 ),
+          m_itemSettings()
     {
     }
     
@@ -88,6 +90,7 @@ class AbstractDataPluginModelPrivate {
     QList<AbstractDataPluginItem*> m_displayedItems;
     QTimer *m_downloadTimer;
     quint32 m_descriptionFileNumber;
+    QHash<QString, QVariant> m_itemSettings;
     
     CacheStoragePolicy *m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
@@ -156,6 +159,7 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
         // because we zoomed out since then.
         if( (*i)->addedAngularResolution() >= viewport->angularResolution() ) {
             list.append( *i );
+            (*i)->setSettings( d->m_itemSettings );
         }
     }
         
@@ -183,6 +187,7 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
             && !list.contains( *i ) )
         {
             list.append( *i );
+            (*i)->setSettings( d->m_itemSettings );
             
             // We want to save the angular resolution of the first time the item got added.
             // If it is in the list of displayedItems, it was added before
@@ -341,6 +346,10 @@ bool AbstractDataPluginModel::itemExists( const QString& id ) const {
     }
 }
 
+void AbstractDataPluginModel::setItemSettings( QHash<QString,QVariant> itemSettings ) {
+    d->m_itemSettings = itemSettings;
+}
+
 void AbstractDataPluginModel::handleChangedViewport() {
     if( !d->m_lastDataFacade ) {
         return;
@@ -406,7 +415,6 @@ void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlStri
         QHash<QString, AbstractDataPluginItem *>::iterator i = d->m_downloadingItems.find( id );
         if( i != d->m_downloadingItems.end() ) {
             if( itemId != (*i)->id() ) {
-                qDebug() << "Different id";
                 return;
             }
             

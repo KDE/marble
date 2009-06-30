@@ -13,6 +13,8 @@
 
 #include "AbstractDataPluginModel.h"
 
+#include "WeatherData.h"
+
 class QByteArray;
 
 namespace Marble {

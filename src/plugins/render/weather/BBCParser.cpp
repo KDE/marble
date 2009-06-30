@@ -390,5 +390,6 @@ void BBCParser::setupHashes() {
     visibilityStates["Moderate"] = WeatherData::Normal;
     visibilityStates["Poor"] = WeatherData::Poor;
     visibilityStates["Very Poor"] = WeatherData::VeryPoor;
+    visibilityStates["Fog"] = WeatherData::VeryPoor;
     visibilityStates["N/A"] = WeatherData::VisibilityNotAvailable;
 }

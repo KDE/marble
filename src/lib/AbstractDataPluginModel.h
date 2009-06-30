@@ -66,6 +66,13 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * Returns a list of all items that contain the point @p curpos
      */
     QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos );
+
+    /**
+     * @brief Sets the settings for all items.
+     * Sets the settings for all items before painting. This ensures that all items react on
+     * changed settings.
+     */
+    void setItemSettings( QHash<QString,QVariant> itemSettings );
        
  protected:
     /**

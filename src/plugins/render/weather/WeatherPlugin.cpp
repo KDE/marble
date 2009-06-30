@@ -12,19 +12,27 @@
 #include "WeatherPlugin.h"
 
 // Marble
+#include "WeatherData.h"
 #include "WeatherModel.h"
 #include "PluginAboutDialog.h"
 #include "MarbleDirs.h"
 
 // Qt
+#include <QtCore/QDebug>
+#include <QtGui/QComboBox>
+#include <QtGui/QDialog>
 #include <QtGui/QIcon>
+#include <QtGui/QPushButton>
 
 using namespace Marble;
 
 const quint32 numberOfStationsPerFetch = 20;
 
 WeatherPlugin::WeatherPlugin()
-    : m_icon()
+    : m_icon(),
+      m_aboutDialog( 0 ),
+      m_configDialog( 0 ),
+      m_settings()
 {
     setNameId( "weather" );
         
@@ -48,6 +56,18 @@ WeatherPlugin::WeatherPlugin()
     m_aboutDialog->setDataText( tr( "Supported by backstage.bbc.co.uk.\nWeather data from UK MET Office" ) );
     m_icon.addFile( MarbleDirs::path( "weather/weather-clear.svgz" ) );
     m_aboutDialog->setPixmap( m_icon.pixmap( 62, 62 ) );
+
+    // Initializing configuration dialog
+    m_configDialog = new QDialog();
+    ui_configWidget.setupUi( m_configDialog );
+    connect( ui_configWidget.m_buttonBox, SIGNAL( accepted() ),
+                                          SLOT( writeSettings() ) );
+    connect( ui_configWidget.m_buttonBox, SIGNAL( rejected() ),
+                                          SLOT( readSettings() ) );
+    QPushButton *applyButton = ui_configWidget.m_buttonBox->button( QDialogButtonBox::Apply );
+    connect( applyButton, SIGNAL( clicked() ),
+             this,        SLOT( writeSettings() ) );
+    readSettings();
 }
 
 WeatherPlugin::~WeatherPlugin() {
@@ -55,7 +75,9 @@ WeatherPlugin::~WeatherPlugin() {
 }
 
 void WeatherPlugin::initialize() {
-    setModel( new WeatherModel( this ) );
+    WeatherModel *model = new WeatherModel( this );
+    setModel( model );
+    model->setItemSettings( m_settings );
     setNumberOfItems( numberOfStationsPerFetch );
 }
 
@@ -77,6 +99,72 @@ QIcon WeatherPlugin::icon() const {
 
 QDialog *WeatherPlugin::aboutDialog() const {
     return m_aboutDialog;
+}
+
+QDialog *WeatherPlugin::configDialog() const {
+    return m_configDialog;
+}
+
+QHash<QString,QVariant> WeatherPlugin::settings() const {
+    return m_settings;
+}
+
+void WeatherPlugin::setSettings( QHash<QString,QVariant> settings ) {
+    m_settings = settings;
+    readSettings();
+}
+
+void WeatherPlugin::readSettings() {
+    int temperatureUnit;
+    if ( m_settings.contains( "temperatureUnit" ) ) {
+        temperatureUnit = m_settings.value( "temperatureUnit" ).toInt();
+        qDebug() << "Found unit" << temperatureUnit;
+    }
+    else {
+        temperatureUnit = WeatherData::Kelvin;
+        m_settings.insert( "temperatureUnit", temperatureUnit );
+        qDebug() << "Didn't find unit" << temperatureUnit;
+    }
+    ui_configWidget.m_temperatureComboBox->setCurrentIndex( temperatureUnit );
+    qDebug() << "Set unit " << temperatureUnit;
+
+    int windSpeedUnit;
+    if ( m_settings.contains( "windSpeedUnit" ) ) {
+        windSpeedUnit = m_settings.value( "windSpeedUnit" ).toInt();
+    }
+    else {
+        windSpeedUnit = WeatherData::kph;
+        m_settings.insert( "windSpeedUnit", temperatureUnit );
+    }
+    ui_configWidget.m_windSpeedComboBox->setCurrentIndex( windSpeedUnit );
+
+    int pressureUnit;
+    if ( m_settings.contains( "pressureUnit" ) ) {
+        pressureUnit = m_settings.value( "pressureUnit" ).toInt();
+    }
+    else {
+        pressureUnit = WeatherData::KiloPascal;
+        m_settings.insert( "pressureUnit", temperatureUnit );
+    }
+    ui_configWidget.m_pressureComboBox->setCurrentIndex( pressureUnit );
+
+    AbstractDataPluginModel *abstractModel = model();
+    if( abstractModel ) {
+        abstractModel->setItemSettings( m_settings );
+    }
+}
+
+void WeatherPlugin::writeSettings() {
+    m_settings.insert( "temperatureUnit", ui_configWidget.m_temperatureComboBox->currentIndex() );
+    m_settings.insert( "windSpeedUnit", ui_configWidget.m_windSpeedComboBox->currentIndex() );
+    m_settings.insert( "pressureUnit", ui_configWidget.m_pressureComboBox->currentIndex() );
+
+    emit settingsChanged( nameId() );
+
+    AbstractDataPluginModel *abstractModel = model();
+    if( abstractModel ) {
+        abstractModel->setItemSettings( m_settings );
+    }
 }
 
 Q_EXPORT_PLUGIN2(WeatherPlugin, Marble::WeatherPlugin)

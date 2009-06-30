@@ -17,6 +17,7 @@
 
 // Qt
 #include <QtCore/QDebug>
+#include <QtCore/QHash>
 #include <QtCore/QString>
 #include <QtGui/QAction>
 #include <QtGui/QBrush>
@@ -65,6 +66,7 @@ class WeatherItemPrivate {
     WeatherItem *m_parent;
     QSize m_temperatureSize;
     QString m_stationName;
+    QHash<QString,QVariant> m_settings;
     
     static QFont s_font;
 };
@@ -130,20 +132,25 @@ void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
 
     // Temperature
     if ( d->m_currentWeather.hasValidTemperature() ) {
+        WeatherData::TemperatureFormat temperatureFormat
+                = (WeatherData::TemperatureFormat) d->m_settings.value( "temperatureUnit",
+                                                                        WeatherData::Celsius ).toInt();
+
         horizontalPaintPosition += horizontalSpacing;
         painter->drawText( QRect( horizontalPaintPosition,
                                   borderSpacing.height(),
                                   d->m_temperatureSize.width(),
                                   lineHeight ),
                            Qt::AlignVCenter,
-                           d->m_currentWeather.temperatureString() );
+                           d->m_currentWeather.temperatureString( temperatureFormat ) );
         horizontalPaintPosition += horizontalSpacing;
     }
     painter->restore();
 }
 
 bool WeatherItem::operator<( const AbstractDataPluginItem *other ) const {
-    if( other->itemType() == "weatherItem" ) {
+    const WeatherItem *weatherItem = qobject_cast<const WeatherItem *>(other);
+    if( weatherItem ) {
         return ( priority() > ( (WeatherItem *) other )->priority() );
     }
     else {
@@ -181,6 +188,16 @@ quint8 WeatherItem::priority() const {
 
 void WeatherItem::setPriority( quint8 priority ) {
     d->m_priority = priority;
+}
+
+void WeatherItem::setSettings( QHash<QString, QVariant> settings ) {
+    if ( d->m_settings == settings ) {
+        return;
+    }
+    d->m_settings = settings;
+
+    d->updateSize();
+    update();
 }
 
 } // namespace Marble

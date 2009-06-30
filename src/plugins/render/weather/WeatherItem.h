@@ -62,6 +62,8 @@ class WeatherItem : public AbstractDataPluginItem {
     
     quint8 priority() const;
     void setPriority( quint8 priority );
+
+    void setSettings( QHash<QString, QVariant> settings );
     
     // Forecasts to appear later
  private:

@@ -142,19 +142,19 @@ class WeatherData {
     void setTemperature( qreal temp,
                          WeatherData::TemperatureFormat format = WeatherData::Kelvin );
     bool hasValidTemperature() const;
-    QString temperatureString() const;
+    QString temperatureString( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
     
     qreal maxTemperature( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
     void setMaxTemperature( qreal temp,
                             WeatherData::TemperatureFormat format = WeatherData::Kelvin );
     bool hasValidMaxTemperature() const;
-    QString maxTemperatureString() const;
+    QString maxTemperatureString( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
     
     qreal minTemperature( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
     void setMinTemperature( qreal temp,
                             WeatherData::TemperatureFormat format = WeatherData::Kelvin );
     bool hasValidMinTemperature() const;
-    QString minTemperatureString() const;
+    QString minTemperatureString( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
     
     WeatherData::Visibility visibility() const;
     void setVisibilty( WeatherData::Visibility visibility );

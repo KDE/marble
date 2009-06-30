@@ -20,7 +20,10 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QDebug>
 #include <QtCore/QHash>
+#include <QtCore/QLocale>
 #include <QtGui/QIcon>
+
+#include <cmath>
 
 namespace Marble {
     
@@ -151,7 +154,7 @@ class WeatherDataPrivate {
             return temp + KEL2CEL;
         }
         else if ( WeatherData::Fahrenheit == format ) {
-            return ( temp + 459.67 ) * 5 / 9;
+            return ( temp * 1.8 ) - 459.67;
         }
         else {
             qDebug() << "Wrong temperature format";
@@ -167,7 +170,7 @@ class WeatherDataPrivate {
             return temp + CEL2KEL;
         }
         else if ( WeatherData::Fahrenheit == format ) {
-            return ( temp * 1.8 ) - 459.67;
+            return ( temp + 459.67 ) / 1.8;
         }
         else {
             qDebug() << "Wrong temperature format";
@@ -184,7 +187,9 @@ class WeatherDataPrivate {
     }
     
     QString generateTemperatureString( qreal temp, WeatherData::TemperatureFormat format ) const {
-        QString string = QString::number( fromKelvin( temp, format ) );
+        QLocale locale = QLocale::system();
+        // We round to integer.
+        QString string = locale.toString( floor( fromKelvin( temp, format ) + 0.5 ) );
         switch ( format ) {
             case WeatherData::Kelvin:
                 string += " K";
@@ -447,9 +452,9 @@ bool WeatherData::hasValidTemperature() const {
     return d->isPositiveValue( d->m_temperature );
 }
 
-QString WeatherData::temperatureString() const {
+QString WeatherData::temperatureString( WeatherData::TemperatureFormat format ) const {
     return d->generateTemperatureString( d->m_temperature,
-                                         WeatherDataPrivate::s_standardTemperatureFormat );
+                                         format );
 }
 
 qreal WeatherData::maxTemperature( WeatherData::TemperatureFormat format ) const {
@@ -461,9 +466,9 @@ void WeatherData::setMaxTemperature( qreal temp, WeatherData::TemperatureFormat 
     d->m_maxTemperature = d->toKelvin( temp, format );
 }
 
-QString WeatherData::maxTemperatureString() const {
+QString WeatherData::maxTemperatureString( WeatherData::TemperatureFormat format ) const {
     return d->generateTemperatureString( d->m_maxTemperature,
-                                         WeatherDataPrivate::s_standardTemperatureFormat );
+                                         format );
 }
 
 bool WeatherData::hasValidMaxTemperature() const {
@@ -474,9 +479,9 @@ qreal WeatherData::minTemperature( WeatherData::TemperatureFormat format ) const
     return d->fromKelvin( d->m_minTemperature, format );
 }
 
-QString WeatherData::minTemperatureString() const {
+QString WeatherData::minTemperatureString( WeatherData::TemperatureFormat format ) const {
     return d->generateTemperatureString( d->m_minTemperature,
-                                         WeatherDataPrivate::s_standardTemperatureFormat );
+                                         format );
 }
 
 void WeatherData::setMinTemperature( qreal temp, WeatherData::TemperatureFormat format ) {

@@ -18,6 +18,9 @@ set( weather_SRCS WeatherData.cpp
                   FakeWeatherService.cpp 
                   FakeWeatherItem.cpp
                   StationListParser.cpp )
+set( weather_UI WeatherConfigWidget.ui )
+
+qt4_wrap_ui( weather_SRCS ${weather_UI} )
 
 marble_add_plugin( Weather ${weather_SRCS} )
 target_link_libraries( Weather ${QT_QTGUI_LIBRARY} )

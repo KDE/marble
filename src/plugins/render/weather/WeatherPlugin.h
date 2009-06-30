@@ -12,6 +12,10 @@
 #define WEATHERPLUGIN_H
 
 #include "AbstractDataPlugin.h"
+#include "ui_WeatherConfigWidget.h"
+
+// Qt
+#include <QtCore/QHash>
 
 class QIcon;
 
@@ -41,9 +45,22 @@ class WeatherPlugin : public AbstractDataPlugin {
 
     QDialog *aboutDialog() const;
 
+    QDialog *configDialog() const;
+
+    QHash<QString,QVariant> settings() const;
+
+    void setSettings( QHash<QString,QVariant> settings );
+
+ private Q_SLOTS:
+    void readSettings();
+    void writeSettings();
+
  private:
     QIcon m_icon;
     PluginAboutDialog *m_aboutDialog;
+    QDialog *m_configDialog;
+    Ui::WeatherConfigWidget ui_configWidget;
+    QHash<QString,QVariant> m_settings;
 };
 
 }

@@ -33,7 +33,7 @@ WeatherModel::~WeatherModel() {
 }
 
 void WeatherModel::downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item ) {
-    WeatherItem *existingItem = ( WeatherItem * ) findItem( item->id() );
+    AbstractDataPluginItem *existingItem = findItem( item->id() );
     if ( !existingItem ) {
         AbstractDataPluginModel::downloadItemData( url, type, item );
     } else {
@@ -43,7 +43,7 @@ void WeatherModel::downloadItemData( const QUrl& url, const QString& type, Abstr
 }
 
 void WeatherModel::addItemToList( AbstractDataPluginItem *item ) {
-    WeatherItem *existingItem = ( WeatherItem * ) findItem( item->id() );
+    AbstractDataPluginItem *existingItem = findItem( item->id() );
     if ( !existingItem ) {
         AbstractDataPluginModel::addItemToList( item );
     } else {

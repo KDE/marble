@@ -35,6 +35,7 @@ class AbstractDataPluginItemPrivate {
     GeoDataCoordinates m_coordinates;
     QString m_target;
     qreal m_addedAngularResolution;
+    QHash<QString, QVariant> m_settings;
 };
 
 AbstractDataPluginItem::AbstractDataPluginItem( QObject *parent )
@@ -70,6 +71,10 @@ qreal AbstractDataPluginItem::addedAngularResolution() const {
 
 void AbstractDataPluginItem::setAddedAngularResolution( qreal resolution ) {
     d->m_addedAngularResolution = resolution;
+}
+
+void AbstractDataPluginItem::setSettings( QHash<QString, QVariant> settings ) {
+    d->m_settings = settings;
 }
 
 bool AbstractDataPluginItem::isGeoProjected()

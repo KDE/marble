@@ -15,7 +15,6 @@ set( wikipedia_SRCS WikipediaPlugin.cpp
 set( wikipedia_UI WikipediaConfigWidget.ui )
 
 qt4_wrap_ui(wikipedia_SRCS ${wikipedia_UI})
-qt4_automoc(${wikipedia_SRCS})
 
 marble_add_plugin( Wikipedia ${wikipedia_SRCS} )
 target_link_libraries( Wikipedia ${QT_QTWEBKIT_LIBRARY})
