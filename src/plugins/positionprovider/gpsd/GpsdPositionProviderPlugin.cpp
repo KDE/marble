@@ -33,7 +33,7 @@ QString GpsdPositionProviderPlugin::guiString() const
 
 QString GpsdPositionProviderPlugin::description() const
 {
-    return tr( "Reports the the position of a GPS device." );
+    return tr( "Reports the position of a GPS device." );
 }
 
 QIcon GpsdPositionProviderPlugin::icon() const
