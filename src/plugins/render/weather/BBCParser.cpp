@@ -17,6 +17,7 @@
 
 // Qt
 #include <QtCore/QByteArray>
+#include <QtCore/QDateTime>
 #include <QtCore/QDebug>
 #include <QtCore/QRegExp>
 
@@ -32,6 +33,8 @@ QHash<QString, WeatherData::PressureDevelopment> BBCParser::pressureDevelopments
         = QHash<QString, WeatherData::PressureDevelopment>();
 QHash<QString, WeatherData::Visibility> BBCParser::visibilityStates
         = QHash<QString, WeatherData::Visibility>();
+QHash<QString, int> BBCParser::monthNames
+        = QHash<QString, int>();
 
 BBCParser::BBCParser()
 {
@@ -125,6 +128,8 @@ void BBCParser::readItem() {
                 readDescription( &item );
             else if( name() == "title" )
                 readTitle( &item );
+            else if( name() == "pubDate" )
+                readPubDate( &item );
             else
                 readUnknownElement();
         }
@@ -263,12 +268,65 @@ void BBCParser::readTitle( WeatherData *data ) {
     }
 }
 
+void BBCParser::readPubDate( WeatherData *data ) {
+    Q_ASSERT( isStartElement()
+              && name() == "pubDate" );
+
+    while( !atEnd() ) {
+        readNext();
+
+        if( isEndElement() )
+            break;
+
+        if( isStartElement() ) {
+            readUnknownElement();
+        }
+
+        if( isCharacters() ) {
+            QString pubDate = text().toString();
+            QRegExp regExp;
+
+            regExp.setPattern( "([A-Za-z]+,\\s+)(\\d+)(\\s+)([A-Za-z]+)(\\s+)(\\d{4,4})(\\s+)(\\d+)(:)(\\d+)(:)(\\d+)(\\s+)([+-])(\\d{2,2})(\\d{2,2})" );
+            int pos = regExp.indexIn( pubDate );
+            if ( pos > -1 ) {
+                QDateTime dateTime;
+                QDate date;
+                QTime time;
+
+                dateTime.setTimeSpec( Qt::UTC );
+                date.setYMD( regExp.cap( 6 ).toInt(),
+                             monthNames.value( regExp.cap( 4 ) ),
+                             regExp.cap( 2 ).toInt() );
+                time.setHMS( regExp.cap( 8 ).toInt(),
+                             regExp.cap( 10 ).toInt(),
+                             regExp.cap( 12 ).toInt() );
+
+                dateTime.setDate( date );
+                dateTime.setTime( time );
+
+                // Timezone
+                if( regExp.cap( 14 ) == "-" ) {
+                    dateTime = dateTime.addSecs( 60*60*regExp.cap( 15 ).toInt() );
+                    dateTime = dateTime.addSecs( 60   *regExp.cap( 16 ).toInt() );
+                }
+                else {
+                    dateTime = dateTime.addSecs( -60*60*regExp.cap( 15 ).toInt() );
+                    dateTime = dateTime.addSecs( -60   *regExp.cap( 16 ).toInt() );
+                }
+
+                data->setDateTime( dateTime );
+            }
+        }
+    }
+}
+
 void BBCParser::setupHashes() {
     if( !( ( dayConditions.isEmpty() )
            || ( nightConditions.isEmpty() )
            || ( windDirections.isEmpty() )
            || ( pressureDevelopments.isEmpty() )
-           || ( visibilityStates.isEmpty() ) ) )
+           || ( visibilityStates.isEmpty() )
+           || ( monthNames.isEmpty() ) ) )
     {
         return;
     }
@@ -392,4 +450,17 @@ void BBCParser::setupHashes() {
     visibilityStates["Very Poor"] = WeatherData::VeryPoor;
     visibilityStates["Fog"] = WeatherData::VeryPoor;
     visibilityStates["N/A"] = WeatherData::VisibilityNotAvailable;
+
+    monthNames["Jan"] = 1;
+    monthNames["Feb"] = 2;
+    monthNames["Mar"] = 3;
+    monthNames["Apr"] = 4;
+    monthNames["May"] = 5;
+    monthNames["Jun"] = 6;
+    monthNames["Jul"] = 7;
+    monthNames["Aug"] = 8;
+    monthNames["Sep"] = 9;
+    monthNames["Oct"] = 10;
+    monthNames["Nov"] = 11;
+    monthNames["Dec"] = 12;
 }

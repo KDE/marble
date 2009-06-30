@@ -118,15 +118,12 @@ void WeatherPlugin::readSettings() {
     int temperatureUnit;
     if ( m_settings.contains( "temperatureUnit" ) ) {
         temperatureUnit = m_settings.value( "temperatureUnit" ).toInt();
-        qDebug() << "Found unit" << temperatureUnit;
     }
     else {
         temperatureUnit = WeatherData::Kelvin;
         m_settings.insert( "temperatureUnit", temperatureUnit );
-        qDebug() << "Didn't find unit" << temperatureUnit;
     }
     ui_configWidget.m_temperatureComboBox->setCurrentIndex( temperatureUnit );
-    qDebug() << "Set unit " << temperatureUnit;
 
     int windSpeedUnit;
     if ( m_settings.contains( "windSpeedUnit" ) ) {

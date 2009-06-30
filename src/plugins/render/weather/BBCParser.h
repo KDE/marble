@@ -38,6 +38,7 @@ private:
     void readItem();
     void readDescription( WeatherData *data );
     void readTitle( WeatherData *data );
+    void readPubDate( WeatherData *data );
     
     void setupHashes();
 
@@ -48,6 +49,7 @@ private:
     static QHash<QString, WeatherData::WindDirection> windDirections;
     static QHash<QString, WeatherData::PressureDevelopment> pressureDevelopments;
     static QHash<QString, WeatherData::Visibility> visibilityStates;
+    static QHash<QString, int> monthNames;
 };
 
 } // Marble namespace

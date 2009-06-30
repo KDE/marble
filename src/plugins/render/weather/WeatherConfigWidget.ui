@@ -41,11 +41,6 @@
             <string>Fahrenheit</string>
            </property>
           </item>
-          <item>
-           <property name="text">
-            <string>Kelvin</string>
-           </property>
-          </item>
          </widget>
         </item>
        </layout>

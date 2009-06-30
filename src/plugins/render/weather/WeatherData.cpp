@@ -292,7 +292,7 @@ QDateTime WeatherData::dateTime() const {
 
 void WeatherData::setDateTime( const QDateTime& dateTime ) {
     detach();
-    d->m_dateTime = dateTime;
+    d->m_dateTime = dateTime.toUTC();
 }
 
 bool WeatherData::hasValidDateTime() const {
