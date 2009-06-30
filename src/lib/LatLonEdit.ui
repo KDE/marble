@@ -17,7 +17,7 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout" >
    <item>
-    <widget class="KIntSpinBox" name="m_deg" >
+    <widget class="QSpinBox" name="m_deg" >
      <property name="alignment" >
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
@@ -27,7 +27,7 @@
     </widget>
    </item>
    <item>
-    <widget class="KIntSpinBox" name="m_min" >
+    <widget class="QSpinBox" name="m_min" >
      <property name="alignment" >
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
@@ -43,7 +43,7 @@
     </widget>
    </item>
    <item>
-    <widget class="KIntSpinBox" name="m_sec" >
+    <widget class="QSpinBox" name="m_sec" >
      <property name="alignment" >
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
@@ -73,13 +73,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KIntSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>knuminput.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
