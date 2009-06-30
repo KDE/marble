@@ -81,7 +81,7 @@ QString GeoRendererPlugin::nameId() const
 
 QString GeoRendererPlugin::description() const
 {
-    return tr( "This is a simple test plugin." );
+    return tr( "This plugin draws the map content (e.g. provided via a KML file)." );
 }
 
 QIcon GeoRendererPlugin::icon () const
