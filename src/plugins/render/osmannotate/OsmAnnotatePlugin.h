@@ -26,6 +26,7 @@ namespace Marble
 {
 
     class MarbleWidget;
+    class GeoDataDocument;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
@@ -79,16 +80,20 @@ class OsmAnnotatePlugin :  public RenderPlugin
     QAction*    m_drawLine;
     QAction*    m_beginSeperator;
     QAction*    m_endSeperator;
+    QAction*    m_loadOsmFile;
+
 signals:
     void redraw();
 public slots:
     void drawPolygon(bool);
+    void loadOsmFile();
  protected:
     bool eventFilter(QObject* watched, QEvent* event);
 private:
     void setupActions(MarbleWidget* m);
 
     GeoDataLineString* tmp_lineString;
+    GeoDataDocument* m_document;
 };
 
 }

@@ -32,8 +32,6 @@ TextAnnotation::TextAnnotation()
    //accordingly
    m_textEditor = new TextEditor();
    bubble->setGeoWidget( m_textEditor );
-
-
 }
 
 QRect TextAnnotation::screenBounding()
@@ -74,7 +72,7 @@ void TextAnnotation::paint( GeoPainter *painter,
     qreal degPix = viewport->angularResolution() * RAD2DEG;
 
     painter->drawEllipse(coordinate(), screenBounding().width(), screenBounding().height(), isGeoProjected());
-    //Would it not be usefull to have a draw latlongbox?
+    //Would it not be useful to have a draw latlongbox?
 //    painter->drawRect(geoBounding());
     qreal north, south, east, west;
 

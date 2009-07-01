@@ -15,6 +15,7 @@
 #include <QtGui/QRadialGradient>
 #include <QtGui/QPushButton>
 #include <QtGui/QPainterPath>
+#include <QtGui/QFileDialog>
 
 //#include <Phonon/MediaObject>
 //#include <Phonon/VideoWidget>
@@ -25,10 +26,13 @@
 #include "AbstractProjection.h"
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
+#include "GeoDataDocument.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
+#include "GeoDataPlacemark.h"
 #include "TextAnnotation.h"
+#include "GeoDataParser.h"
 #include "AreaAnnotation.h"
 #include "MarbleWidget.h"
 
@@ -90,7 +94,7 @@ void OsmAnnotatePlugin::initialize ()
 
     annon->setCoordinate(madrid);
     
-    //FIXME memory leak withouth a model to do memory managment
+    //FIXME memory leak withouth a model to do memory management
     model.append(annon);
 
     //Attempted to add a video widget as a tech preview but this needs to
@@ -107,6 +111,7 @@ void OsmAnnotatePlugin::initialize ()
 
     widgetInitalised= false;
     tmp_lineString = 0;
+    m_document = 0;
 }
 
 bool OsmAnnotatePlugin::isInitialized () const
@@ -166,6 +171,16 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
 //        but->setVisible(false);
 //    }
 
+    //Figure out how to add the data parsed to a scene for rendering
+    //FIXME: this is a terrible hack intended just to test!
+    if( m_document ) {
+        GeoDataPlacemark p(m_document->at(0));
+        GeoDataLinearRing ring(* p.geometry() );
+
+        painter->drawPolygon( ring );
+
+    }
+
     return true;
 }
 
@@ -190,11 +205,47 @@ void OsmAnnotatePlugin::drawPolygon(bool b)
     }
 }
 
+void OsmAnnotatePlugin::loadOsmFile()
+{
+    QString filename;
+    filename = QFileDialog::getOpenFileName(0, tr("Open File"),
+                            QString(),
+                            tr("All Supported Files (*.osm);;Open Street Map Data (*.osm)"));
+
+    if ( ! filename.isNull() ) {
+
+        GeoDataParser parser( GeoData_OSM );
+
+        QFile file( filename );
+        if ( !file.exists() ) {
+            qWarning( "File does not exist!" );
+            return;
+        }
+
+        // Open file in right mode
+        file.open( QIODevice::ReadOnly );
+
+        if ( !parser.read( &file ) ) {
+            qWarning( "Could not parse file!" );
+            //do not quit on a failed read!
+            //return
+        }
+        GeoDocument* document = parser.releaseDocument();
+        Q_ASSERT( document );
+
+        m_document = static_cast<GeoDataDocument*>( document );
+
+        file.close();
+
+        qDebug() << "size of container is " << m_document->size();
+    }
+}
+
 bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 {
     MarbleWidget* marbleWidget = (MarbleWidget*) watched;
     //FIXME why is the QEvent::MousePress not working? caught somewhere else?
-    //does this mean we need to centralise the event handeling?
+    //does this mean we need to centralise the event handling?
 
     // Catch the mouse button press
     if ( event->type() == QEvent::MouseButtonPress ) {
@@ -296,6 +347,11 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     connect( m_drawPolygon, SIGNAL(toggled(bool)),
              this, SLOT(drawPolygon(bool)) );
 
+    m_loadOsmFile = new QAction( this );
+    m_loadOsmFile->setText( "Load Osm File" );
+    connect( m_loadOsmFile, SIGNAL(triggered()),
+             this, SLOT(loadOsmFile()) );
+
     m_beginSeperator = new QAction( this );
     m_beginSeperator->setSeparator( true );
     m_endSeperator = new QAction ( this );
@@ -304,6 +360,7 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     widget->registerAction( m_beginSeperator );
     widget->registerAction( m_addPlacemark );
     widget->registerAction( m_drawPolygon );
+    widget->registerAction( m_loadOsmFile );
     widget->registerAction( m_endSeperator );
 
 }
