@@ -528,6 +528,20 @@ void GeoDataFeature::resetDefaultStyles()
     s_defaultStyleInitialized = false;
 }
 
+void GeoDataFeature::paint( GeoPainter *painter, ViewportParams *viewport,
+                            const QString& renderPos, GeoSceneLayer * layer )
+{
+    Q_UNUSED(painter);
+    Q_UNUSED(viewport);
+    Q_UNUSED(renderPos);
+    Q_UNUSED(layer);
+}
+
+bool GeoDataFeature::isGeoProjected()
+{
+    return false;
+}
+
 void GeoDataFeature::detach()
 {
     if(d->ref == 1)

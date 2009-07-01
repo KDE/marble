@@ -24,7 +24,7 @@ class PlacemarkManager;
 class KmlFileViewItem : public AbstractFileViewItem
 {
   public:
-    KmlFileViewItem( PlacemarkManager& manager, GeoDataDocument const& document );
+    KmlFileViewItem( PlacemarkManager& manager, GeoDataDocument& document );
     ~KmlFileViewItem();
 
     /*

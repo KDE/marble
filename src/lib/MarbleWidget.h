@@ -38,6 +38,7 @@
 class QAbstractItemModel;
 class QModelIndex;
 class QItemSelectionModel;
+class QSettings;
 class QStyleOptionGraphicsItem;
 
 namespace Marble
@@ -465,11 +466,24 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     SunLocator* sunLocator();
 
+    //These methods should all be removed
+    // what does this do to binary compatibility?
     void setProxy( const QString& proxyHost, const quint16 proxyPort, const QString& user, const QString& password );
     QString proxyHost() const;
     quint16 proxyPort() const;
     QString user() const;
     QString password() const;
+
+    /**
+     * Regestering an action with the marble Widget activates it and places it in
+     * the main toolbar.
+     */
+    void registerAction( QAction* action );
+
+    /**
+     * Disables an action and removes it from the main toolbar.
+     */
+    void removeAction( QAction* action );
 
     /**
      * @brief Returns a list of all RenderPlugins on the widget, this includes float items
@@ -482,6 +496,21 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     QList<AbstractFloatItem *> floatItems()    const;
 
+    /**
+     * Reads the plugin settings from the passed QSettings.
+     * You shouldn't use this in a KDE application as these use KConfig. Here you could
+     * use MarblePart which is handling this automatically.
+     * @param settings The QSettings object to be used.
+     */
+    void readPluginSettings( QSettings& settings );
+
+    /**
+     * Writes the plugin settings in the passed QSettings.
+     * You shouldn't use this in a KDE application as these use KConfig. Here you could
+     * use MarblePart which is handling this automatically.
+     * @param settings The QSettings object to be used.
+     */
+    void writePluginSettings( QSettings& settings ) const;
 
     /**
      * @brief  Get the Projection used for the map
@@ -543,6 +572,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void updateSun();
     void centerSun();
+    void disableInput(bool);
     void enableInput();
     void disableInput();
 //    void repaintMap();
@@ -930,6 +960,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *  lon1, lat1, lon2, lat2 (or West, North, East, South) as left/top, right/bottom rectangle.
      */
     void  regionSelected(const QList<double>&);
+
+    /**
+     * This signal is emit when the settings of a plugin changed.
+     */
+    void pluginSettingsChanged();
 
  protected:
     /**

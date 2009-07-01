@@ -146,7 +146,7 @@ enum Pole
 class MarbleGlobal
 {
 %TypeHeaderCode
-#include <global.h>
+#include <marble/global.h>
 %End
 
 public:

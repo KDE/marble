@@ -34,8 +34,7 @@ class AbstractDataPluginPrivate
     {
     }
     
-    ~AbstractDataPluginPrivate()
-    {
+    ~AbstractDataPluginPrivate() {
     }
     
     AbstractDataPluginModel *m_model;
@@ -54,23 +53,19 @@ AbstractDataPlugin::~AbstractDataPlugin()
     delete d;
 }
 
-QStringList AbstractDataPlugin::backendTypes() const
-{
+QStringList AbstractDataPlugin::backendTypes() const {
     return QStringList( name() );
 }
 
-QString AbstractDataPlugin::renderPolicy() const
-{
+QString AbstractDataPlugin::renderPolicy() const {
     return QString( "ALWAYS" );
 }
 
-QStringList AbstractDataPlugin::renderPosition() const
-{
+QStringList AbstractDataPlugin::renderPosition() const {
     return QStringList( "HOVERS_ABOVE_SURFACE" );
 }
 
-bool AbstractDataPlugin::isInitialized() const
-{
+bool AbstractDataPlugin::isInitialized() const {
     return true;
 }
 
@@ -100,39 +95,36 @@ bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     return true;
 }
 
-AbstractDataPluginModel *AbstractDataPlugin::model() const
-{
+AbstractDataPluginModel *AbstractDataPlugin::model() const {
     return d->m_model;
 }
 
-void AbstractDataPlugin::setModel( AbstractDataPluginModel* model )
-{
+void AbstractDataPlugin::setModel( AbstractDataPluginModel* model ) {
     d->m_model = model;
 }
 
-QString AbstractDataPlugin::nameId() const
-{
+QString AbstractDataPlugin::nameId() const {
     return d->m_name;
 }
     
-void AbstractDataPlugin::setNameId( const QString& name )
-{
+void AbstractDataPlugin::setNameId( const QString& name ) {
     d->m_name = name;
 }
 
 
-quint32 AbstractDataPlugin::numberOfItems() const
-{
+quint32 AbstractDataPlugin::numberOfItems() const {
     return d->m_numberOfItems;
 }
     
-void AbstractDataPlugin::setNumberOfItems( quint32 number )
-{
+void AbstractDataPlugin::setNumberOfItems( quint32 number ) {
+    bool changed = ( number != d->m_numberOfItems );
     d->m_numberOfItems = number;
+
+    if ( changed )
+        emit changedNumberOfItems( number );
 }
 
-QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt( const QPoint& curpos )
-{
+QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt( const QPoint& curpos ) {
     if ( enabled() && visible() ) {
         return d->m_model->whichItemAt( curpos );
     }

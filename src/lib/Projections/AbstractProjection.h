@@ -36,7 +36,6 @@ namespace Marble
 static const int tessellationPrecision = 10;
 static const int latLonAltBoxSamplingRate = 4;
 
-class AbstractProjectionHelper;
 class GeoDataLineString;
 class GeoDataLinearRing;
 class ViewportParams;

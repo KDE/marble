@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.3 PyKDE API Reference
+        KDE 4.2 PyKDE API Reference for Marble
       </div>
     </div>
   </div>
@@ -48,50 +48,26 @@
 <h1>GeoDataMultiGeometry Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: <a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> &#x2192; <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
+Inherits: QVector<GeoDataGeometry*>,<a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> &#x2192; <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> &#x2192; <a href="../marble/Marble.GeoNode.html">Marble.GeoNode</a><br />
 
 Namespace: Marble<br />
 <h2>Detailed Description</h2>
 
-
+<p>A class that can contain other GeoDataGeometry objects
+</p>
+<p>
+GeoDataMultiGeometry is a collection of other GeoDataGeometry objects.
+As one can add GeoDataMultiGeometry to itself, you can make up a collection
+of different objects to form one Placemark.
+</p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj168942252">__init__</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj183377484">__init__</a> (self, <a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> other)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170593580">append</a> (self, <a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> value)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171330220">at</a> (self, int pos)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171330476">at</a> (self, int pos)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<Marble::GeoDataGeometry>::Iterator&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170602892">begin</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170605740">clear</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<Marble::GeoDataGeometry>::ConstIterator&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170603212">constBegin</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<Marble::GeoDataGeometry>::ConstIterator&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170603596">constEnd</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<Marble::GeoDataGeometry>::Iterator&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170604012">end</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<Marble::GeoDataGeometry>::Iterator&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170604876">erase</a> (self, QVector<Marble::GeoDataGeometry>::Iterator pos)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<Marble::GeoDataGeometry>::Iterator&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170616140">erase</a> (self, QVector<Marble::GeoDataGeometry>::Iterator begin, QVector<Marble::GeoDataGeometry>::Iterator end)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170590572">first</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170591692">first</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170593004">last</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170592940">last</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataMultiGeometry.html">Marble.GeoDataMultiGeometry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170593772">operator <<</a> (self, <a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> value)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171330124">operator []</a> (self, int pos)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj171331116">operator []</a> (self, int pos)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170617068">pack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj168802028">size</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170615340">unpack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">QVector<Marble::GeoDataGeometry>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170605612">vector</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj190518316">__init__</a> (self, <a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj190545420">__init__</a> (self, <a href="../marble/Marble.GeoDataMultiGeometry.html">Marble.GeoDataMultiGeometry</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">EnumGeometryId&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj190544940">geometryId</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj190543628">pack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj190544428">unpack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="obj168942252"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">__init__</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj183377484"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj190518316"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -102,8 +78,8 @@ Namespace: Marble<br />
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td>
-<td class="paramname"><em>other</em></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataObject.html">Marble.GeoDataObject</a>&nbsp;</td>
+<td class="paramname"><em>parent=0</em></td>
 </tr>
 <tr>
 <td></td>
@@ -113,19 +89,19 @@ Namespace: Marble<br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170593580"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj190545420"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> append</td>
+<td class="memname">__init__</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td>
-<td class="paramname"><em>value</em></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataMultiGeometry.html">Marble.GeoDataMultiGeometry</a>&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
 </tr>
 <tr>
 <td></td>
@@ -135,55 +111,13 @@ Namespace: Marble<br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj171330220"></a>
+<div class="memdoc"><p>Q_FOREACH containers are bad because they require a copy of the QVector
+Use iterators instead!!!
+</p></div></div><a class="anchor" name="obj190544940"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> at</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>pos</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj171330476"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> at</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>pos</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170602892"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QVector<Marble::GeoDataGeometry>::Iterator begin</td>
+<td class="memname">EnumGeometryId geometryId</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -191,219 +125,7 @@ Namespace: Marble<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170605740"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> clear</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170603212"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QVector<Marble::GeoDataGeometry>::ConstIterator constBegin</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170603596"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QVector<Marble::GeoDataGeometry>::ConstIterator constEnd</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170604012"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QVector<Marble::GeoDataGeometry>::Iterator end</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170604876"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QVector<Marble::GeoDataGeometry>::Iterator erase</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QVector<Marble::GeoDataGeometry>::Iterator&nbsp;</td>
-<td class="paramname"><em>pos</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170616140"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QVector<Marble::GeoDataGeometry>::Iterator erase</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QVector<Marble::GeoDataGeometry>::Iterator&nbsp;</td>
-<td class="paramname"><em>begin</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QVector<Marble::GeoDataGeometry>::Iterator&nbsp;</td>
-<td class="paramname"><em>end</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170590572"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> first</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170591692"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> first</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170593004"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> last</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170592940"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> last</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170593772"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataMultiGeometry.html">Marble.GeoDataMultiGeometry</a> operator <<</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a>&nbsp;</td>
-<td class="paramname"><em>value</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj171330124"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> operator []</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>pos</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj171331116"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.GeoDataGeometry.html">Marble.GeoDataGeometry</a> operator []</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>pos</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170617068"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj190543628"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -425,19 +147,7 @@ Namespace: Marble<br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj168802028"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">int size</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170615340"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj190544428"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -459,18 +169,6 @@ Namespace: Marble<br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170605612"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">QVector<Marble::GeoDataGeometry> vector</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
 <div class="memdoc"></div></div>
 </div>
 </div>
@@ -489,21 +187,5 @@ Namespace: Marble<br />
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
-</ul></div></div>
-
-</div>
-
-</div>
-  <div class="clearer"/>
-</div>
-
-<div id="end_body"></div>
-</div>
-<div id="footer"><div id="footer_text">
-This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
-        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
-        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
-    </div></div>
-</body>
-</html>
+<ul>
+<li><a href="../marble/index.html">marble</a></li>

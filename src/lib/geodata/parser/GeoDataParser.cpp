@@ -61,6 +61,9 @@ bool GeoDataParser::isValidDocumentElement() const
         return isValidElement(gpx::gpxTag_gpx);
     case GeoData_KML:
         return isValidElement(kml::kmlTag_kml);
+    case GeoData_OSM:
+        //does not have a namespace
+        return true;
     default:
         Q_ASSERT(false);
         return false;
@@ -96,6 +99,9 @@ bool GeoDataParser::isValidElement(const QString& tagName) const
         return (namespaceUri() == kml::kmlTag_nameSpace20 || 
                 namespaceUri() == kml::kmlTag_nameSpace21 || 
                 namespaceUri() == kml::kmlTag_nameSpace22);
+    case GeoData_OSM:
+        //always "valid" because there is no namespace
+        return true;
     default:
         break;
     }

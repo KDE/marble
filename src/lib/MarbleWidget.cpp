@@ -15,6 +15,8 @@
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
+#include <QtCore/QHash>
+#include <QtCore/QSettings>
 #include <QtCore/QTimer>
 #include <QtCore/QAbstractItemModel>
 #include <QtGui/QItemSelectionModel>
@@ -22,6 +24,9 @@
 #include <QtGui/QPaintEvent>
 #include <QtGui/QRegion>
 #include <QtGui/QStyleOptionGraphicsItem>
+#include <QtGui/QToolBar>
+#include <QtGui/QMainWindow>
+#include <QtGui/QAction>
 #include <QtNetwork/QNetworkProxy>
 
 #ifdef MARBLE_DBUS
@@ -43,6 +48,7 @@
 #include "MarbleWidgetInputHandler.h"
 #include "TileCreatorDialog.h"
 #include "gps/GpsLayer.h"
+#include "RenderPlugin.h"
 #include "SunLocator.h"
 #include "MergedLayerDecorator.h"
 #include "ViewportParams.h"
@@ -74,7 +80,8 @@ class MarbleWidgetPrivate
           m_proxyHost(),
           m_proxyPort( 0 ),
           m_user(),
-          m_password()
+          m_password(), 
+          m_mainToolbar()
     {
     }
 
@@ -104,7 +111,11 @@ class MarbleWidgetPrivate
     MarbleWidgetInputHandler  *m_inputhandler;
 
     MarblePhysics    *m_physics;
+    
+    QToolBar        *m_mainToolbar;
+    QAction         *m_disableInputAction;
 
+    //This stuff is NEVER used. Needs to be deleted
     QString          m_proxyHost;
     qint16           m_proxyPort;
     QString          m_user;
@@ -119,6 +130,12 @@ MarbleWidget::MarbleWidget(QWidget *parent)
 {
 //    setAttribute( Qt::WA_PaintOnScreen, true );
     d->construct();
+
+    if( parent->parent()->inherits( "QMainWindow" ) ) {
+        ((QMainWindow*) parent->parent())->addToolBar(d->m_mainToolbar);
+    }
+
+    registerAction( d->m_disableInputAction );
 }
 
 
@@ -203,6 +220,18 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler );
     m_widget->setMouseTracking( m_widget );
+
+    m_mainToolbar = new QToolBar(0);
+
+    m_disableInputAction = new QAction(m_mainToolbar);
+    m_disableInputAction->setText("Disable Marble Input");
+    m_disableInputAction->setCheckable(true);
+
+    m_widget->connect( m_disableInputAction, SIGNAL(toggled(bool)),
+                       m_widget, SLOT(disableInput(bool)) );
+
+    m_widget->connect( m_model, SIGNAL( pluginSettingsChanged() ),
+                       m_widget, SIGNAL( pluginSettingsChanged() ) );
 }
 
 // ----------------------------------------------------------------
@@ -1206,6 +1235,15 @@ SunLocator* MarbleWidget::sunLocator()
     return d->m_model->sunLocator();
 }
 
+void MarbleWidget::disableInput( bool in )
+{
+    if( in ) {
+        disableInput();
+    } else {
+        enableInput();
+    }
+}
+
 void MarbleWidget::enableInput()
 {
     if ( !d->m_inputhandler ) {
@@ -1261,9 +1299,51 @@ QString MarbleWidget::password() const
     return d->m_password;
 }
 
+void MarbleWidget::registerAction( QAction *action )
+{
+    d->m_mainToolbar->addAction( action );
+}
+
+void MarbleWidget::removeAction( QAction *action )
+{
+    d->m_mainToolbar->removeAction( action );
+}
+
 QList<RenderPlugin *> MarbleWidget::renderPlugins() const
 {
     return d->m_model->renderPlugins();
+}
+
+void MarbleWidget::readPluginSettings( QSettings& settings ) {
+    foreach( RenderPlugin *plugin, renderPlugins() ) {
+        settings.beginGroup( QString( "plugin_" ) + plugin->nameId() );
+
+        QHash<QString,QVariant> hash = plugin->settings();
+
+        foreach ( QString key, settings.childKeys() ) {
+            hash.insert( key, settings.value( key ) );
+        }
+
+        plugin->setSettings( hash );
+
+        settings.endGroup();
+    }
+}
+
+void MarbleWidget::writePluginSettings( QSettings& settings ) const {
+    foreach( RenderPlugin *plugin, renderPlugins() ) {
+        settings.beginGroup( QString( "plugin_" ) + plugin->nameId() );
+
+        QHash<QString,QVariant> hash = plugin->settings();
+
+        QHash<QString,QVariant>::iterator it = hash.begin();
+        while( it != hash.end() ) {
+            settings.setValue( it.key(), it.value() );
+            ++it;
+        }
+
+        settings.endGroup();
+    }
 }
 
 QList<AbstractFloatItem *> MarbleWidget::floatItems() const

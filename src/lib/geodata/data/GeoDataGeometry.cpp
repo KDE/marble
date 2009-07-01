@@ -138,6 +138,15 @@ void GeoDataGeometry::setAltitudeMode( const AltitudeMode altitudeMode )
     d->m_altitudeMode = altitudeMode;
 }
 
+void GeoDataGeometry::paint( GeoPainter *painter, ViewportParams *viewport,
+                             const QString& renderPos, GeoSceneLayer * layer )
+{
+    Q_UNUSED(painter);
+    Q_UNUSED(viewport);
+    Q_UNUSED(renderPos);
+    Q_UNUSED(layer);
+}
+
 void GeoDataGeometry::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );
@@ -155,6 +164,11 @@ void GeoDataGeometry::unpack( QDataStream& stream )
     stream >> d->m_extrude;
     stream >> am;
     d->m_altitudeMode = (AltitudeMode) am;
+}
+
+bool GeoDataGeometry::isGeoProjected()
+{
+    return true;
 }
 
 }

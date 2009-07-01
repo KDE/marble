@@ -131,5 +131,5 @@ private:
 };
 
 }
-Q_DECLARE_METATYPE(Marble::GeoDataDocument)
+Q_DECLARE_METATYPE(Marble::GeoDataDocument*)
 #endif // GeoDataDocument_h

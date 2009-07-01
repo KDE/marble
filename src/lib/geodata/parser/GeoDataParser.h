@@ -34,7 +34,8 @@ class GeoDataDocument;
 enum GeoDataSourceType {
     GeoData_GPX    = 0,
     GeoData_KML    = 1,
-    GeoData_GeoRSS = 2
+    GeoData_GeoRSS = 2,
+    GeoData_OSM    = 3
 };
 
 class GEODATA_EXPORT GeoDataParser : public GeoParser {

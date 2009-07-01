@@ -115,10 +115,30 @@ class MarblePart: public KParts::ReadOnlyPart
     void  editSettings();
 
     void  slotEnableButtonApply();
-    void  slotApply();
-    void  slotCancel();
+    void  applyPluginState();
+    void  retrievePluginState();
 
     void  slotUpdateSettings();
+
+    /**
+     * Shows the about dialog for the plugin with the corresponding @p nameId.
+     */
+    void  showPluginAboutDialog( QString nameId );
+
+    /**
+     * Shows the configuration dialog for the plugin with the corresponding @p nameId.
+     */
+    void  showPluginConfigDialog( QString nameId );
+
+    /**
+     * Saves the settings of all plugins.
+     */
+    void writePluginSettings();
+
+    /**
+     * Reads the settings of all plugins.
+     */
+    void readPluginSettings();
 
   private:
     void  setupActions();
@@ -181,7 +201,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void updateStatusBar();
 
     KParts::StatusBarExtension *m_statusBarExtension;
-    
+
     // Information about the graphics system
     Marble::GraphicsSystem m_initialGraphicsSystem;
     Marble::GraphicsSystem m_previousGraphicsSystem;

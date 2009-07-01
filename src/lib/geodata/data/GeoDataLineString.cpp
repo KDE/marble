@@ -533,6 +533,14 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
     return p()->m_vector.erase( begin, end );
 }
 
+void GeoDataLineString::remove ( int i )
+{
+    GeoDataGeometry::detach();
+    p()->m_dirtyRange = true;
+    p()->m_dirtyBox = true;
+    p()->m_vector.remove( i );
+}
+
 void GeoDataLineString::pack( QDataStream& stream ) const
 {
     GeoDataGeometry::pack( stream );

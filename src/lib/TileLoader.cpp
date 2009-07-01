@@ -167,8 +167,8 @@ void TileLoader::flush()
     QHashIterator<TileId, TextureTile*> it( d->m_tileHash );
     while ( it.hasNext() ) {
         it.next();
-        // If insert call result is false then the cache is too small to store the tile
-        // but the item will get deleted nevertheless and the pointer we have
+        // If insert call result is false then the cache is too small to store the tile 
+        // but the item will get deleted nevertheless and the pointer we have 
         // doesn't get set to zero (so don't delete it in this case or it will crash!)
         d->m_tileCache.insert( it.key(), it.value(), it.value()->numBytes() );
         d->m_tileHash.remove( it.key() );

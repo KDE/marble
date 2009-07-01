@@ -59,6 +59,9 @@ LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
 
     // get float items and data plugins
     foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
+        connect( renderPlugin, SIGNAL( settingsChanged( QString ) ),
+                 this, SIGNAL( pluginSettingsChanged() ) );
+
         AbstractFloatItem * const floatItem =
             qobject_cast<AbstractFloatItem *>( renderPlugin );
         if ( floatItem )
@@ -175,11 +178,15 @@ void LayerManager::syncViewParamsAndPlugins( GeoSceneDocument *mapTheme )
             renderPlugin->setVisible( propertyValue );
         }
 
-        renderPlugin->disconnect();
+        disconnect( renderPlugin->action(), SIGNAL( changed() ),
+                 this,                   SIGNAL( floatItemsChanged() ) );
+        disconnect( renderPlugin, SIGNAL( visibilityChanged( QString, bool ) ),
+                 this,         SLOT( syncPropertyWithAction( QString, bool ) ) );
         connect( renderPlugin->action(), SIGNAL( changed() ), 
                  this,                   SIGNAL( floatItemsChanged() ) );
-        connect( renderPlugin, SIGNAL( valueChanged( QString, bool ) ),
+        connect( renderPlugin, SIGNAL( visibilityChanged( QString, bool ) ),
                  this,         SLOT( syncPropertyWithAction( QString, bool ) ) );
+
     }
 
     disconnect( mapTheme->settings(), 0, this, 0 );

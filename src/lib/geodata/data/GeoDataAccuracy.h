@@ -21,7 +21,7 @@ namespace Marble
 class GeoDataAccuracy
 {
  public:
-    enum {
+    enum Level {
         none = 0,
         Country,
         Region,

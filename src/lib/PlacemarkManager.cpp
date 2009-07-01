@@ -18,7 +18,6 @@
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
-#include <QtCore/QMetaType>
 #include <QtXml/QXmlInputSource>
 #include <QtXml/QXmlSimpleReader>
 
@@ -65,7 +64,7 @@ PlacemarkManager::PlacemarkManager( QObject *parent )
     : QObject( parent )
     , d( new PlacemarkManagerPrivate( parent ) )
 {
-    qRegisterMetaType<Marble::GeoDataDocument>("GeoDataDocument");
+    
 }
 
 
@@ -134,20 +133,20 @@ void PlacemarkManager::addPlacemarkFile( const QString& filepath, bool finalized
                     this, SLOT( loadPlacemarkContainer( PlacemarkLoader*, PlacemarkContainer * ) ) );
         connect (   loader, SIGNAL( placemarkLoaderFailed( PlacemarkLoader* ) ), 
                     this, SLOT( cleanupLoader( PlacemarkLoader* ) ) );
-        connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument ) ), 
-                    this, SIGNAL( geoDataDocumentAdded( GeoDataDocument ) ) );
-        connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument ) ), 
-                    this, SLOT( addGeoDataDocument( GeoDataDocument ) ) );
+        connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
+                    this, SIGNAL( geoDataDocumentAdded( GeoDataDocument* ) ) );
+        connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
+                    this, SLOT( addGeoDataDocument( GeoDataDocument* ) ) );
         d->m_loaderList.append( loader );
         d->m_pathList.append( toRegularName( filepath ) );
         loader->start();
     }
 }
 
-void PlacemarkManager::addGeoDataDocument( GeoDataDocument const & document )
+void PlacemarkManager::addGeoDataDocument( GeoDataDocument* document )
 {
     AbstractFileViewItem* item = new KmlFileViewItem( *this,
-                                                      document );
+                                                      *document );
 
     d->m_fileViewModel->append( item );
 //    d->m_geomodel->setGeoDataRoot( document );

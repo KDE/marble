@@ -12,21 +12,48 @@
 #include "MarblePluginSettingsWidget.h"
 
 // Qt
+#include <QtCore/QDebug>
 #include <QtGui/QStandardItemModel>
 
-using namespace Marble;
+// Marble
+#include "PluginItemDelegate.h"
 
-MarblePluginSettingsWidget::MarblePluginSettingsWidget( QWidget *parent ) : QWidget( parent )
+namespace Marble {
+
+class MarblePluginSettingsWidgetPrivate {
+ public:
+    PluginItemDelegate *m_itemDelegate;
+};
+
+MarblePluginSettingsWidget::MarblePluginSettingsWidget( QWidget *parent )
+    : QWidget( parent ),
+      d( new MarblePluginSettingsWidgetPrivate )
 {
     setupUi( this );
 
+    d->m_itemDelegate = new PluginItemDelegate( m_pluginListView, this );
+    m_pluginListView->setItemDelegate( d->m_itemDelegate );
     connect( m_pluginListView, SIGNAL( clicked( QModelIndex ) ),
          this, SIGNAL( pluginListViewClicked() ) );
+    connect( d->m_itemDelegate, SIGNAL( aboutPluginClicked( QString ) ),
+             this, SIGNAL( aboutPluginClicked( QString ) ) );
+    connect( d->m_itemDelegate, SIGNAL( configPluginClicked( QString ) ),
+             this, SIGNAL( configPluginClicked( QString ) ) );
+}
+
+void MarblePluginSettingsWidget::setAboutIcon( const QIcon& icon ) {
+    d->m_itemDelegate->setAboutIcon( icon );
+}
+
+void MarblePluginSettingsWidget::setConfigIcon( const QIcon& icon ) {
+    d->m_itemDelegate->setConfigIcon( icon );
 }
 
 void MarblePluginSettingsWidget::setModel( QStandardItemModel* pluginModel )
 {
     m_pluginListView->setModel ( pluginModel );
 }
+
+} // namespace Marble
 
 #include "MarblePluginSettingsWidget.moc"

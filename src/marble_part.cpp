@@ -36,6 +36,7 @@
 #include <kconfigdialog.h>
 #include <kdeversion.h>
 #include <kfiledialog.h>
+#include <kicon.h>
 #include <kmenu.h>
 #include <kmessagebox.h>
 #include <kparts/genericfactory.h>
@@ -420,7 +421,11 @@ void MarblePart::readSettings()
     readStatusBarSettings();
 
     slotUpdateSettings();
-    qDebug() << "Stop: MarblePart::readSettings()";
+    readPluginSettings();
+    disconnect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
+                this,                          SLOT( writePluginSettings() ) );
+    connect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
+             this,                          SLOT( writePluginSettings() ) );
 }
 
 void MarblePart::readStatusBarSettings()
@@ -504,7 +509,8 @@ void MarblePart::writeSettings()
                                                volatileTileCacheLimit() / 1024 );
     MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->
                                                  persistentTileCacheLimit() / 1024 );
-
+    
+    // Plugins
     QList<int>   pluginEnabled;
     QList<int>   pluginVisible;
     QStringList  pluginNameId;
@@ -945,17 +951,24 @@ void MarblePart::editSettings()
     w_pluginSettings->setObjectName( "plugin_page" );
     m_configDialog->addPage( w_pluginSettings, i18n( "Plugins" ),
 			     "preferences-plugin" );
+    // Setting the icons of the pluginSettings page.
+    w_pluginSettings->setConfigIcon( KIcon( "configure" ) );
+    w_pluginSettings->setAboutIcon( KIcon( "help-about" ) );
 
     connect( w_pluginSettings, SIGNAL( pluginListViewClicked() ),
-	                       SLOT( slotEnableButtonApply() ) );
+                               SLOT( slotEnableButtonApply() ) );
     connect( m_configDialog,   SIGNAL( settingsChanged( const QString &) ),
 	                       SLOT( slotUpdateSettings() ) );
     connect( m_configDialog,   SIGNAL( applyClicked() ),
-	                       SLOT( slotApply() ) );
+	                       SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( okClicked() ),
-	                       SLOT( slotApply() ) );
+	                       SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( cancelClicked() ),
-	                       SLOT( slotCancel() ) );
+	                       SLOT( retrievePluginState() ) );
+    connect( w_pluginSettings, SIGNAL( aboutPluginClicked( QString ) ),
+                               SLOT( showPluginAboutDialog( QString ) ) );
+    connect( w_pluginSettings, SIGNAL( configPluginClicked( QString ) ),
+                               SLOT( showPluginConfigDialog( QString ) ) );
 
     m_configDialog->show();
 }
@@ -965,7 +978,7 @@ void MarblePart::slotEnableButtonApply()
         m_configDialog->enableButtonApply( true );
 }
 
-void MarblePart::slotApply()
+void MarblePart::applyPluginState()
 {
     QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
@@ -974,7 +987,7 @@ void MarblePart::slotApply()
     }
 }
 
-void MarblePart::slotCancel()
+void MarblePart::retrievePluginState()
 {
     QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
@@ -1052,6 +1065,65 @@ void MarblePart::slotUpdateSettings()
                                 tr("Graphics System Change") );
     }    
     m_previousGraphicsSystem = graphicsSystem;
+}
+
+void MarblePart::showPluginAboutDialog( QString nameId ) {
+    QList<RenderPlugin *> renderItemList = m_controlView->marbleWidget()->renderPlugins();
+
+    foreach ( RenderPlugin *renderItem, renderItemList ) {
+        if( renderItem->nameId() == nameId ) {
+            QDialog *aboutDialog = renderItem->aboutDialog();
+            if ( aboutDialog ) {
+                aboutDialog->show();
+            }
+        }
+    }
+}
+
+void MarblePart::showPluginConfigDialog( QString nameId ) {
+    QList<RenderPlugin *> renderItemList = m_controlView->marbleWidget()->renderPlugins();
+
+    foreach ( RenderPlugin *renderItem, renderItemList ) {
+        if( renderItem->nameId() == nameId ) {
+            QDialog *configDialog = renderItem->configDialog();
+            if ( configDialog ) {
+                configDialog->show();
+            }
+        }
+    }
+}
+
+void MarblePart::writePluginSettings() {
+    KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
+
+    foreach( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
+        KConfigGroup group = sharedConfig->group( QString( "plugin_" ) + plugin->nameId() );
+
+        QHash<QString,QVariant> hash = plugin->settings();
+
+        QHash<QString,QVariant>::iterator it = hash.begin();
+        while( it != hash.end() ) {
+            group.writeEntry( it.key(), it.value() );
+            ++it;
+        }
+        group.sync();
+    }
+}
+
+void MarblePart::readPluginSettings() {
+    KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
+
+    foreach( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
+        KConfigGroup group = sharedConfig->group( QString( "plugin_" ) + plugin->nameId() );
+
+        QHash<QString,QVariant> hash = plugin->settings();
+
+        foreach ( QString key, group.keyList() ) {
+            hash.insert( key, group.readEntry( key ) );
+        }
+
+        plugin->setSettings( hash );
+    }
 }
 
 void MarblePart::lockFloatItemPosition( bool enabled )

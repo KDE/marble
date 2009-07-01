@@ -53,9 +53,11 @@ PositionTracking::PositionTracking( GpxFile *currentGpx,
         m_positionProvider = plugins.takeFirst();
         qDeleteAll( plugins );
         m_positionProvider->setParent( this );
+        qDebug() << "Initializing position provider:" << m_positionProvider->name();
         m_positionProvider->initialize();
     } else {
         // useful when there is no plugin available.
+        qDebug() << "No position provider available";
         m_positionProvider = 0;
     }
 }

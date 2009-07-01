@@ -53,6 +53,10 @@ void MarbleWidgetPopupMenu::createActions()
     //	Tool actions (Right mouse button)
     m_addMeasurePointAction = new QAction( tr( "Add &Measure Point" ), this);
     m_rmbMenu->addAction( m_addMeasurePointAction );
+    m_removeLastMeasurePointAction = new QAction( tr( "Remove &Last Measure Point" ),
+                                                  this);
+    m_removeLastMeasurePointAction->setEnabled(false);
+    m_rmbMenu->addAction( m_removeLastMeasurePointAction );
     m_removeMeasurePointsAction = new QAction( tr( "&Remove Measure Points" ),
                                                 this);
     m_removeMeasurePointsAction->setEnabled(false);
@@ -69,6 +73,8 @@ void MarbleWidgetPopupMenu::createActions()
                                        SLOT( slotSetHomePoint() ) );
     connect( m_addMeasurePointAction, SIGNAL( triggered() ),
                                        SLOT( slotAddMeasurePoint() ) );
+    connect( m_removeLastMeasurePointAction, SIGNAL(triggered() ),
+				       SLOT( slotRemoveLastMeasurePoint() ) );
     connect( m_removeMeasurePointsAction, SIGNAL( triggered() ),
                                            SLOT( slotRemoveMeasurePoints() ) );
     connect( m_aboutDialogAction, SIGNAL( triggered() ), 
@@ -237,15 +243,11 @@ void MarbleWidgetPopupMenu::slotAddMeasurePoint()
 
     m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
 
-    m_removeMeasurePointsAction->setEnabled(true);
-
     emit addMeasurePoint( lon, lat );
 }
 
 void MarbleWidgetPopupMenu::slotRemoveMeasurePoints()
 {
-    m_removeMeasurePointsAction->setEnabled(false);
-
     emit removeMeasurePoints();
 }
 
@@ -255,6 +257,17 @@ void MarbleWidgetPopupMenu::slotAboutDialog()
     dlg.exec();
 }
 
+void MarbleWidgetPopupMenu::slotRemoveLastMeasurePoint()
+{
+    emit removeLastMeasurePoint();
+}
+
+void MarbleWidgetPopupMenu::slotNumberOfMeasurePointsChanged( int newNumber )
+{
+    const bool enableMeasureActions = ( newNumber > 0 );
+    m_removeMeasurePointsAction->setEnabled(enableMeasureActions);
+    m_removeLastMeasurePointAction->setEnabled(enableMeasureActions);
+}
 
 #include "MarbleWidgetPopupMenu.moc"
 

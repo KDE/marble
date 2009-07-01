@@ -34,7 +34,7 @@ public:
     void                    setPosition (const QPoint& position);
 
 protected:
-     virtual void           paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0) = 0;
+     virtual bool       paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0) = 0;
 
 };   // ScreenGraphicsItem
 

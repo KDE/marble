@@ -78,6 +78,11 @@ class MARBLE_EXPORT LayerManager : public QObject
      */
     void floatItemsChanged();
 
+    /**
+     * This signal is emit when the settings of a plugin changed.
+     */
+    void pluginSettingsChanged();
+
  public Q_SLOTS:
     void loadLayers();
 

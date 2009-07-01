@@ -69,6 +69,7 @@ set(marblewidget_SRCS
     MarbleGeometryModel.cpp
     MarbleDataFacade.cpp
 
+    QtMarbleConfigDialog.cpp
     ClipPainter.cpp
     GeoPainter.cpp
     GeoPolygon.cpp
@@ -161,6 +162,8 @@ set(marblewidget_SRCS
     PositionProviderPlugin.cpp
     PositionProviderPluginInterface.cpp
     MarblePluginSettingsWidget.cpp
+    PluginAboutDialog.cpp
+    PluginItemDelegate.cpp
 
     SunLocator.cpp
     ExtDateTime.cpp
@@ -279,7 +282,8 @@ else (APPLE AND QTONLY)
     MarbleWidgetInputHandler.h
 
     MapThemeSortFilterProxyModel.h
-
+    
+    QtMarbleConfigDialog.h
     global.h
     MarbleDirs.h
     GeoPainter.h
@@ -301,6 +305,7 @@ else (APPLE AND QTONLY)
     PluginInterface.h
     RenderPlugin.h
     RenderPluginInterface.h
+    PluginAboutDialog.h
     marble_export.h
     Planet.h
     

@@ -345,6 +345,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void timeout();
 
+    /**
+     * This signal is emit when the settings of a plugin changed.
+     */
+    void pluginSettingsChanged();
+
  private:
     Q_DISABLE_COPY( MarbleModel )
     MarbleModelPrivate  * const d;

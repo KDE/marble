@@ -104,6 +104,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
     QVector<GeoDataCoordinates>::Iterator erase ( QVector<GeoDataCoordinates>::Iterator pos );
     QVector<GeoDataCoordinates>::Iterator erase ( QVector<GeoDataCoordinates>::Iterator begin,
                                                   QVector<GeoDataCoordinates>::Iterator end );
+    void remove ( int i );
 
     /**
      * @brief  Serialize the style to a stream.

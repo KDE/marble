@@ -43,8 +43,12 @@ class MeasureTool : public QObject
     void  paint( GeoPainter *painter, ViewportParams *viewport,
                  bool antialiasing );
 
+ Q_SIGNALS:
+    void  numberOfMeasurePointsChanged( int newNumber );
+
  public Q_SLOTS:
     void  addMeasurePoint( qreal lon, qreal lat );
+    void  removeLastMeasurePoint();
     void  removeMeasurePoints();
 
  private:

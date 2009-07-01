@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.3 PyKDE API Reference
+        KDE 4.2 PyKDE API Reference for Marble
       </div>
     </div>
   </div>
@@ -66,43 +66,33 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 </dd></dl>
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj191791756">Notation</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Decimal, DMS&nbsp;}</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj192525324">Unit</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Radian, Degree&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj189264844">Notation</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Decimal, DMS&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj189264268">Unit</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Radian, Degree&nbsp;}</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192463436">__init__</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> other)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191761804">__init__</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191767116">__init__</a> (self, float lon, float lat, float alt=0, Marble.GeoDataCoordinates.Unit unit=GeoDataCoordinates.Radian, int detail=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193390092">altitude</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj186856332">detach</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193391468">detail</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193382604">geoCoordinates</a> (self, float lon, float lat, Marble.GeoDataCoordinates.Unit unit=GeoDataCoordinates.Radian)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193396972">isPole</a> (self, Marble.Pole a0=Marble.AnyPole)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj190939116">latToString</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193388972">latitude</a> (self, Marble.GeoDataCoordinates.Unit unit=GeoDataCoordinates.Radian)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj170518124">lonToString</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193384236">longitude</a> (self, Marble.GeoDataCoordinates.Unit unit=GeoDataCoordinates.Radian)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj190938124">operator ==</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> a0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191657548">pack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193392236">quaternion</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193381516">set</a> (self, float lon, float lat, float alt=0, Marble.GeoDataCoordinates.Unit unit=GeoDataCoordinates.Radian)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193390796">setAltitude</a> (self, float altitude)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193391852">setDetail</a> (self, int det)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193383308">setLatitude</a> (self, float lat, Marble.GeoDataCoordinates.Unit unit=GeoDataCoordinates.Radian)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193383564">setLongitude</a> (self, float lon, Marble.GeoDataCoordinates.Unit unit=GeoDataCoordinates.Radian)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191761676">toString</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193346668">toString</a> (self, Marble.GeoDataCoordinates.Notation notation, int precision=-1)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191656108">unpack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189265964">__init__</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> other)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189266476">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189266860">__init__</a> (self, float lon, float lat, float alt=0, Marble.GeoDataCoordinates.Unit unit=GeoDataCoordinates.Radian, int detail=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189276396">altitude</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189277804">detail</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189279916">geoCoordinates</a> (self, float lon, float lat, Marble.GeoDataCoordinates.Unit unit=GeoDataCoordinates.Radian)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189611756">operator ==</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189618828">pack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.Quaternion.html">Marble.Quaternion</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189608556">quaternion</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189278860">set</a> (self, float lon, float lat, float alt=0, Marble.GeoDataCoordinates.Unit unit=GeoDataCoordinates.Radian)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189265484">setAltitude</a> (self, float altitude)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189278188">setDetail</a> (self, int det)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189616556">toString</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189617196">toString</a> (self, Marble.GeoDataCoordinates.Notation notation)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189619468">unpack</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qdatastream.html">QDataStream</a> stream)</td></tr>
 <tr><td colspan="2"><br><h2>Static Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">Marble.GeoDataCoordinates.Notation&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193392332">defaultNotation</a> ()</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191769804">fromString</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> string, bool successful)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj190937484">latToString</a> (float lat, Marble.GeoDataCoordinates.Notation notation, Marble.GeoDataCoordinates.Unit unit=Marble.GeoDataCoordinates.Radian, int precision=-1, char format='f')</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193345644">lonToString</a> (float lon, Marble.GeoDataCoordinates.Notation notation, Marble.GeoDataCoordinates.Unit unit=Marble.GeoDataCoordinates.Radian, int precision=-1, char format='f')</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192528364">normalizeLat</a> (float lat)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193398028">normalizeLon</a> (float lon)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192540812">normalizeLonLat</a> (float lon, float lat)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193391756">setDefaultNotation</a> (Marble.GeoDataCoordinates.Notation notation)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">Marble.GeoDataCoordinates.Notation&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189279244">defaultNotation</a> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189611308">fromString</a> (<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> string, bool successful)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189610380">normalizeLat</a> (float lat)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189609324">normalizeLon</a> (float lon)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189609772">normalizeLonLat</a> (float lon, float lat)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj189278092">setDefaultNotation</a> (Marble.GeoDataCoordinates.Notation notation)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="obj192463436"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj189265964"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -124,7 +114,7 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj191761804"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj189266476"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -136,7 +126,7 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj191767116"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj189266860"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -198,7 +188,7 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193390092"></a>
+</p></div></div><a class="anchor" name="obj189276396"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -211,7 +201,7 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 </table>
 </div>
 <div class="memdoc"><p>return the altitude of the Point
-</p></div></div><a class="anchor" name="obj193392332"></a>
+</p></div></div><a class="anchor" name="obj189279244"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -224,19 +214,7 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 </table>
 </div>
 <div class="memdoc"><p>return Notation of string representation
-</p></div></div><a class="anchor" name="obj186856332"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> detach</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj193391468"></a>
+</p></div></div><a class="anchor" name="obj189277804"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -249,7 +227,7 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 </table>
 </div>
 <div class="memdoc"><p>return the detail flag
-</p></div></div><a class="anchor" name="obj191769804"></a>
+</p></div></div><a class="anchor" name="obj189611308"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -279,7 +257,7 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 </td></tr> </table></dl>
 <p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> the geodatacoordinates
 </dd></dl>
-</p></div></div><a class="anchor" name="obj193382604"></a>
+</p></div></div><a class="anchor" name="obj189279916"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -326,212 +304,7 @@ call - use the unit parameter to switch between Radian and DMS
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193396972"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool isPole</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">Marble.Pole&nbsp;</td>
-<td class="paramname"><em>a0=Marble.AnyPole</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>return whether our coordinates are located at one of the poles
-This method can be used to check whether the coordinate equals one of
-the poles.
-NOTE: As the poles might not be visible in the projection at all
-you should check whether
-</p>
-<p>
-bool AbstractProjection.exceedsLatitudeRange() const
-</p>
-<p>
-isn't what you're looking for ... .
-</p></div></div><a class="anchor" name="obj190937484"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> latToString</td>
-<td>(</td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>lat</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">Marble.GeoDataCoordinates.Notation&nbsp;</td>
-<td class="paramname"><em>notation</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">Marble.GeoDataCoordinates.Unit&nbsp;</td>
-<td class="paramname"><em>unit=Marble.GeoDataCoordinates.Radian</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>precision=-1</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">char&nbsp;</td>
-<td class="paramname"><em>format='f'</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj190939116"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> latToString</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>return a string representation of latitude of the coordinate
-convenience function that uses the default notation
-</p></div></div><a class="anchor" name="obj193388972"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">float latitude</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">Marble.GeoDataCoordinates.Unit&nbsp;</td>
-<td class="paramname"><em>unit=GeoDataCoordinates.Radian</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>retrieves the latitude of the GeoDataCoordinates object
-use the unit parameter to switch between Radian and DMS
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>unit</em>&nbsp;</td><td> units that lon and lat get measured in
-(default for Radian: north pole at pi/2, southpole at -pi/2)
-</td></tr> </table></dl>
-<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> latitude
-</dd></dl>
-</p></div></div><a class="anchor" name="obj193345644"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> lonToString</td>
-<td>(</td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>lon</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">Marble.GeoDataCoordinates.Notation&nbsp;</td>
-<td class="paramname"><em>notation</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">Marble.GeoDataCoordinates.Unit&nbsp;</td>
-<td class="paramname"><em>unit=Marble.GeoDataCoordinates.Radian</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>precision=-1</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">char&nbsp;</td>
-<td class="paramname"><em>format='f'</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj170518124"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> lonToString</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><p>return a string representation of longitude of the coordinate
-convenience function that uses the default notation
-</p></div></div><a class="anchor" name="obj193384236"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">float longitude</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">Marble.GeoDataCoordinates.Unit&nbsp;</td>
-<td class="paramname"><em>unit=GeoDataCoordinates.Radian</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>retrieves the longitude of the GeoDataCoordinates object
-use the unit parameter to switch between Radian and DMS
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>unit</em>&nbsp;</td><td> units that lon and lat get measured in
-(default for Radian: north pole at pi/2, southpole at -pi/2)
-</td></tr> </table></dl>
-<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> longitude
-</dd></dl>
-</p></div></div><a class="anchor" name="obj192528364"></a>
+</p></div></div><a class="anchor" name="obj189610380"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -555,7 +328,7 @@ use the unit parameter to switch between Radian and DMS
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193398028"></a>
+</p></div></div><a class="anchor" name="obj189609324"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -579,7 +352,7 @@ use the unit parameter to switch between Radian and DMS
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj192540812"></a>
+</p></div></div><a class="anchor" name="obj189609772"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -603,14 +376,6 @@ use the unit parameter to switch between Radian and DMS
 </tr></table>
 </div>
 <div class="memdoc"><p>normalize both longitude and latitude at the same time
-This method normalizes both latitude and longitude, so that the
-latitude and the longitude stay within the "usual" range.
-NOTE: If the latitude exceeds 3.14159265358979323846264338327950288419717/2 (+90.0 deg) or -3.14159265358979323846264338327950288419717/2 (-90.0 deg)
-then this will be interpreted as a pole traversion where the point will
-end up on the opposite side of the globe. Therefore the longitude will
-change by 3.14159265358979323846264338327950288419717 (180 deg).
-If you don't want this behaviour use both normalizeLat() and
-normalizeLon() instead.
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>lon</em>&nbsp;</td><td> the longitude value
@@ -619,7 +384,7 @@ normalizeLon() instead.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj190938124"></a>
+</p></div></div><a class="anchor" name="obj189611756"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -641,7 +406,7 @@ normalizeLon() instead.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj191657548"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj189618828"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -664,7 +429,7 @@ normalizeLon() instead.
 </tr></table>
 </div>
 <div class="memdoc"><p>Serialize the contents of the feature to <b>stream.</b>
-</p></div></div><a class="anchor" name="obj193392236"></a>
+</p></div></div><a class="anchor" name="obj189608556"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -677,7 +442,7 @@ normalizeLon() instead.
 </table>
 </div>
 <div class="memdoc"><p>return a Quaternion with the used coordinates
-</p></div></div><a class="anchor" name="obj193381516"></a>
+</p></div></div><a class="anchor" name="obj189278860"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -717,7 +482,7 @@ normalizeLon() instead.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>(re)set the coordinates in a GeoDataCoordinates object
+<div class="memdoc"><p>(re)set the coordinates in a GeoDataCoordinates
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>_lon</em>&nbsp;</td><td> longitude
@@ -731,7 +496,7 @@ normalizeLon() instead.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193390796"></a>
+</p></div></div><a class="anchor" name="obj189265484"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -760,7 +525,7 @@ normalizeLon() instead.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193391756"></a>
+</p></div></div><a class="anchor" name="obj189278092"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -784,7 +549,7 @@ normalizeLon() instead.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193391852"></a>
+</p></div></div><a class="anchor" name="obj189278188"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -813,83 +578,7 @@ normalizeLon() instead.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj193383308"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setLatitude</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>lat</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">Marble.GeoDataCoordinates.Unit&nbsp;</td>
-<td class="paramname"><em>unit=GeoDataCoordinates.Radian</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>set the longitude in a GeoDataCoordinates object
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>_lat</em>&nbsp;</td><td> longitude
-
-<tr><td></td><td valign="top"><em>_unit</em>&nbsp;</td><td> units that lon and lat get measured in
-(default for Radian: north pole at pi/2, southpole at -pi/2)
-</td></tr>
-</table></dl>
-<p>
-</p></div></div><a class="anchor" name="obj193383564"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setLongitude</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>lon</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">Marble.GeoDataCoordinates.Unit&nbsp;</td>
-<td class="paramname"><em>unit=GeoDataCoordinates.Radian</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><p>set the longitude in a GeoDataCoordinates object
-</p><dl compact><dt><b>Parameters:</b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>_lon</em>&nbsp;</td><td> longitude
-
-<tr><td></td><td valign="top"><em>_unit</em>&nbsp;</td><td> units that lon and lat get measured in
-(default for Radian: north pole at pi/2, southpole at -pi/2)
-</td></tr>
-</table></dl>
-<p>
-</p></div></div><a class="anchor" name="obj191761676"></a>
+</p></div></div><a class="anchor" name="obj189616556"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -903,7 +592,7 @@ normalizeLon() instead.
 </div>
 <div class="memdoc"><p>return a string representation of the coordinate
 this is a convenience function which uses the default notation
-</p></div></div><a class="anchor" name="obj193346668"></a>
+</p></div></div><a class="anchor" name="obj189617196"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -915,13 +604,7 @@ this is a convenience function which uses the default notation
 <td class="memname"></td>
 <td></td>
 <td class="paramtype">Marble.GeoDataCoordinates.Notation&nbsp;</td>
-<td class="paramname"><em>notation</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>precision=-1</em></td>
+<td class="paramname"><em>notation</em></td>
 </tr>
 <tr>
 <td></td>
@@ -932,23 +615,13 @@ this is a convenience function which uses the default notation
 </tr></table>
 </div>
 <div class="memdoc"><p>return a string with the notation given by notation
-</p>
-<p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
 <tr><td></td><td valign="top"><em>notation</em>&nbsp;</td><td> set a notation different from the default one
-
-<tr><td></td><td valign="top"><em>precision</em>&nbsp;</td><td> set the number of digits below degrees.
-The precision depends on the current notation:
-For Decimal representation the precision is the number of
-digits after the decimal point.
-In DMS a precision of 1 or 2 shows the arc minutes; a precision
-of 3 or 4 will show arc seconds. A precision beyond that will
-increase the number of digits after the arc second decimal point.
 </td></tr>
 </table></dl>
 <p>
-</p></div></div><a class="anchor" name="obj191656108"></a>
+</p></div></div><a class="anchor" name="obj189619468"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -971,7 +644,7 @@ increase the number of digits after the arc second decimal point.
 </tr></table>
 </div>
 <div class="memdoc"><p>Unserialize the contents of the feature from <b>stream.</b>
-</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj191791756"></a>
+</p></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj189264844"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -991,7 +664,7 @@ Degrees-(Arc)Minutes-(Arc)Seconds to describe parts of a degree.
 </p><dl compact><dt><b>Enumerator: </b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Decimal</em>&nbsp;</td><td><tr><td valign="top"><em>DMS</em>&nbsp;</td><td></table>
 </dl>
-</div></div><p><a class="anchor" name="obj192525324"></a>
+</div></div><p><a class="anchor" name="obj189264268"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname">
@@ -1026,21 +699,5 @@ to degrees.
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
-</ul></div></div>
-
-</div>
-
-</div>
-  <div class="clearer"/>
-</div>
-
-<div id="end_body"></div>
-</div>
-<div id="footer"><div id="footer_text">
-This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
-        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
-        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
-    </div></div>
-</body>
-</html>
+<ul>
+<li><a href="../marble/index.html">marble</a></li>

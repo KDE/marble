@@ -66,6 +66,13 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * Returns a list of all items that contain the point @p curpos
      */
     QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos );
+
+    /**
+     * @brief Sets the settings for all items.
+     * Sets the settings for all items before painting. This ensures that all items react on
+     * changed settings.
+     */
+    void setItemSettings( QHash<QString,QVariant> itemSettings );
        
  protected:
     /**
@@ -87,7 +94,8 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     /**
      * Downloads the file from @p url. @p item -> addDownloadedFile() will be called when the
      * download is finished. Additionally initialized() items will be added to the item list
-     * after the download.
+     * after the download. It checks if a item with the same id is already in the list and
+     * ignores and deletes the item in this case.
      * @param: The type of the download (to be specified by the subclasser)
      **/
     void downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item );
@@ -98,7 +106,8 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     void downloadDescriptionFile( const QUrl& url );
     
     /**
-     * Adds the @p item to the list of initialized items.
+     * Adds the @p item to the list of initialized items. It checks if a item with the same id is
+     * already in the list and ignores and deletes the item in this case.
      */
     void addItemToList( AbstractDataPluginItem *item );
     
@@ -131,6 +140,12 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * Testing the existence of a file with @p id and @p type
      */
     bool fileExists( const QString& id, const QString& type ) const;
+    
+    /**
+     * Finds the item with @p id in the list.
+     * @return The pointer to the item or (if no item has been found) 0
+     */
+    AbstractDataPluginItem *findItem( const QString& id ) const;
     
     /**
      * Testing the existence of the item @p id in the list

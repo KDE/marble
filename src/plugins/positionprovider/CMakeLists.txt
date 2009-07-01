@@ -10,3 +10,5 @@ else(libgps_FOUND)
      message( STATUS "Not building with gpsd position provider")
 
 endif(libgps_FOUND)
+
+add_subdirectory( geoclue )

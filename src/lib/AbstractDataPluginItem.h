@@ -13,6 +13,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
+#include <QtCore/QHash>
 
 #include "GeoGraphicsItem.h"
 #include "marble_export.h"
@@ -50,17 +51,32 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
       */
     qreal addedAngularResolution() const;
     void setAddedAngularResolution( qreal resolution );
+
+    /**
+     * @brief Set the settings of the item.
+     * This is usually called automatically before painting. If you reimplement this it would be
+     * useful to check for changes before copying.
+     */
+    virtual void setSettings( QHash<QString, QVariant> settings );
     
+    /**
+     * Returns the action of this specific item.
+     */
     virtual QAction *action() = 0;
     
+    /**
+     * Returns the type of this specific item.
+     */
     virtual QString itemType() const = 0;
-     
+
     virtual bool initialized() = 0;
     
     virtual void addDownloadedFile( const QString& url, const QString& type ) = 0;
     
     virtual void paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
+
+    virtual bool isGeoProjected();
                          
     virtual bool operator<( const AbstractDataPluginItem *other ) const = 0;
     

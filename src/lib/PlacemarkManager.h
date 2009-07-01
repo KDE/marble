@@ -116,14 +116,14 @@ class PlacemarkManager : public QObject
     FileViewModel* fileViewModel() const;
 
  Q_SIGNALS:
-    void geoDataDocumentAdded( const GeoDataDocument& );
-    void geoDataDocumentLoaded( const GeoDataDocument& );
+    void geoDataDocumentAdded( GeoDataDocument* );
+    void geoDataDocumentLoaded( GeoDataDocument& );
     void finalize();
 
  private Q_SLOTS:
     void loadPlacemarkContainer( PlacemarkLoader* loader, PlacemarkContainer * );
     void cleanupLoader( PlacemarkLoader* loader );
-    void addGeoDataDocument( const GeoDataDocument& );
+    void addGeoDataDocument( GeoDataDocument* );
 
  private:
     void setPlacemarkModel( MarblePlacemarkModel *model );

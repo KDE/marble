@@ -38,6 +38,7 @@
 
 #include <MarbleDirs.h>
 #include "lib/MarbleAboutDialog.h"
+#include "lib/QtMarbleConfigDialog.h"
 #include "lib/SunControlWidget.h"
 #include "lib/MarbleLocale.h"
 #include "AbstractDataPlugin.h"
@@ -46,7 +47,6 @@
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 
-#include "QtMarbleConfigDialog.h"
 
 namespace
 {
@@ -71,7 +71,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWi
     setCentralWidget( m_controlView );
     
     // Initializing config dialog
-    m_configDialog = new QtMarbleConfigDialog( m_controlView, this );
+    m_configDialog = new QtMarbleConfigDialog( m_controlView->marbleWidget(), this );
     connect( m_configDialog, SIGNAL( settingsChanged() ),
 	     this, SLOT( updateSettings() ) );
     connect( m_configDialog, SIGNAL( clearVolatileCacheClicked() ),

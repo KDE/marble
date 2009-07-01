@@ -106,7 +106,7 @@ void GeoRendererView::renderIndex( QModelIndex &index )
     if( !( dynamic_cast<GeoDataFeature*>( indexObject ) && dynamic_cast<GeoDataFeature*>( indexObject )->isVisible() ) ) return;
 
     int rowCount = model()->rowCount( index );
-
+   
     for ( int row = 0; row < rowCount; ++row )
     {
         QModelIndex childIndex = model()->index( row, 0, index );
@@ -150,9 +150,9 @@ void GeoRendererView::setBrushStyle( QString mapped )
      * style within every Placemark wanted and how should this be called here?
      */
     if( m_painter->brush().color() != m_root->style( mapped ).polyStyle().color() ) {
-/*        qDebug() << "BrushColor:" 
-                 << m_root->style( mapped ).polyStyle().color() 
-                 <<  m_painter->brush().color();*/
+/*            qDebug() << "BrushColor:" 
+                 << m_root->style( mapped ).polyStyle()->color() 
+                 << m_painter->brush().color();*/
         m_painter->setBrush( m_currentBrush.color() );
     }
 }

@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.3 PyKDE API Reference
+        KDE 4.2 PyKDE API Reference for Marble
       </div>
     </div>
   </div>
@@ -56,40 +56,27 @@ Namespace: Marble<br />
 <dd>This class can be used as a base class for new classes, but can not be instantiated directly.</dd></dl>
 <p>A base class for all projections in Marble.
 </p>
-<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj191782956">PreservationType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoPreservation, Conformal, EqualArea&nbsp;}</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#obj191770124">SurfaceType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Cylindrical, Pseudocylindrical, Hybrid, Conical, Pseudoconical, Azimuthal&nbsp;}</td></tr>
-<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191793356">__init__</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192445740">exceedsLatitudeRange</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coords)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192446252">exceedsLatitudeRange</a> (self, <a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a> lineString)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192443084">geoCoordinates</a> (self, int x, int y, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, float lon, float lat, Marble.GeoDataCoordinates.Unit unit=Marble.GeoDataCoordinates.Degree)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191804108">isOrientedNormal</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192432972">latLonAltBox</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qrect.html">QRect</a> screenRect, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192464716">lineStringToPolygon</a> (self, <a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a> lineString, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, QVector<QPolygonF polygons)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192445580">mapCoversViewport</a> (self, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregion.html">QRegion</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192452204">mapRegion</a> (self, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpainterpath.html">QPainterPath</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192451532">mapShape</a> (self, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191793900">maxLat</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191794412">minLat</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">Marble.AbstractProjection.PreservationType&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191805420">preservationType</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191794796">repeatX</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191805900">screenCoordinates</a> (self, float lon, float lat, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, float x, float y)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191806380">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> geopoint, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, float x, float y, bool globeHidesPoint)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192431372">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> geopoint, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, float x, float y)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192432140">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinates, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, float x, float y, int pointRepeatNum, bool globeHidesPoint)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192432780">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinates, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, float x, float y, int pointRepeatNum, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsizef.html">QSizeF</a> size, bool globeHidesPoint)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192433324">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a> lineString, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, QVector<QPolygonF polygons)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192452652">screenCoordinates</a> (self, float lon, float lat, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, int x, int y)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192453772">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> geopoint, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, int x, int y, bool globeHidesPoint)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191794924">setRepeatX</a> (self, bool val)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">Marble.AbstractProjection.SurfaceType&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191805004">surfaceType</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192450700">tessellateHorizon</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> previousCoords, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> currentCoords, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpolygonf.html">QPolygonF</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192465548">tessellateLineSegment</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> previousCoords, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> currentCoords, int count, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, Marble.TessellationFlags f=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191804556">traversableDateLine</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj191794956">traversablePoles</a> (self)</td></tr>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187147436">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187870668">coordinateExtremes</a> (self, float lon, float lat, float westLon, float eastLon, float otherWestLon, float otherEastLon, float northLat, float southLat)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187842252">geoCoordinates</a> (self, int x, int y, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, float lon, float lat, Marble.GeoDataCoordinates.Unit unit=Marble.GeoDataCoordinates.Degree)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">AbstractProjectionHelper&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187148332">helper</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187842316">latLonAltBox</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qrect.html">QRect</a> screenRect, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187868812">mapCoversViewport</a> (self, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187148492">maxLat</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187147692">minLat</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLinearRing.html">Marble.GeoDataLinearRing</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187842380">rectOutline</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qrect.html">QRect</a> screenRect, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187149676">repeatX</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187149868">screenCoordinates</a> (self, float lon, float lat, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, int x, int y)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187170572">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> geopoint, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, int x, int y, bool globeHidesPoint)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187155916">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> geopoint, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, int x, int y)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187156332">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coordinates, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, int x, int y, int pointRepeatNum, bool globeHidesPoint)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187841420">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a> lineString, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, QVector<QPolygonF polygons)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187149484">setRepeatX</a> (self, bool val)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpolygonf.html">QPolygonF</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187881004">tessellateLineSegment</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> previousCoords, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> currentCoords, int count, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, Marble.TessellationFlags f=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj187147212">traversableMaxLat</a> (self)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="obj191793356"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj187147436"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -102,19 +89,61 @@ Namespace: Marble<br />
 </table>
 </div>
 <div class="memdoc"><p>Construct a new AbstractProjection.
-</p></div></div><a class="anchor" name="obj192445740"></a>
+</p></div></div><a class="anchor" name="obj187870668"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">bool exceedsLatitudeRange</td>
+<td class="memname"> coordinateExtremes</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
-<td class="paramname"><em>coords</em></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>westLon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>eastLon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>otherWestLon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>otherEastLon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>northLat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>southLat</em></td>
 </tr>
 <tr>
 <td></td>
@@ -124,29 +153,7 @@ Namespace: Marble<br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192446252"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool exceedsLatitudeRange</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a>&nbsp;</td>
-<td class="paramname"><em>lineString</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192443084"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj187842252"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -215,11 +222,11 @@ Namespace: Marble<br />
 </td></tr> </table></dl>
 <p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the pixel (x, y) is within the globe
 </dd></dl> false if the pixel (x, y) is outside the globe, i.e. in space.
-</p></div></div><a class="anchor" name="obj191804108"></a>
+</p></div></div><a class="anchor" name="obj187148332"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">bool isOrientedNormal</td>
+<td class="memname">AbstractProjectionHelper helper</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -227,7 +234,7 @@ Namespace: Marble<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192432972"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj187842316"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -255,41 +262,7 @@ Namespace: Marble<br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192464716"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool lineStringToPolygon</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a>&nbsp;</td>
-<td class="paramname"><em>lineString</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
-<td class="paramname"><em>viewport</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">QVector<QPolygonF&nbsp;</td>
-<td class="paramname"><em>polygons</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192445580"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj187868812"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -311,51 +284,7 @@ Namespace: Marble<br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="obj192452204"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregion.html">QRegion</a> mapRegion</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
-<td class="paramname"><em>viewport</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192451532"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpainterpath.html">QPainterPath</a> mapShape</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
-<td class="paramname"><em>viewport</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="obj191793900"></a>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="obj187148492"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -367,7 +296,7 @@ Namespace: Marble<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj191794412"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj187147692"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -379,19 +308,35 @@ Namespace: Marble<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj191805420"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj187842380"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">Marble.AbstractProjection.PreservationType preservationType</td>
+<td class="memname"><a href="../marble/Marble.GeoDataLinearRing.html">Marble.GeoDataLinearRing</a> rectOutline</td>
 <td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qrect.html">QRect</a>&nbsp;</td>
+<td class="paramname"><em>screenRect</em>, </td>
 </tr>
-</table>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
+<td class="paramname"><em>viewport</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj191794796"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj187149676"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -403,7 +348,7 @@ Namespace: Marble<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj191805900"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj187149868"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -432,13 +377,13 @@ Namespace: Marble<br />
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">float&nbsp;</td>
+<td class="paramtype">int&nbsp;</td>
 <td class="paramname"><em>x</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">float&nbsp;</td>
+<td class="paramtype">int&nbsp;</td>
 <td class="paramname"><em>y</em></td>
 </tr>
 <tr>
@@ -468,7 +413,7 @@ Namespace: Marble<br />
 <p>
 <dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
 </dd></dl>
-</p></div></div><a class="anchor" name="obj191806380"></a>
+</p></div></div><a class="anchor" name="obj187170572"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -491,13 +436,13 @@ Namespace: Marble<br />
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">float&nbsp;</td>
+<td class="paramtype">int&nbsp;</td>
 <td class="paramname"><em>x</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">float&nbsp;</td>
+<td class="paramtype">int&nbsp;</td>
 <td class="paramname"><em>y</em>, </td>
 </tr>
 <tr>
@@ -536,7 +481,7 @@ Namespace: Marble<br />
 <p>
 <dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
 </dd></dl>
-</p></div></div><a class="anchor" name="obj192431372"></a>
+</p></div></div><a class="anchor" name="obj187155916"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -559,13 +504,13 @@ Namespace: Marble<br />
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">float&nbsp;</td>
+<td class="paramtype">int&nbsp;</td>
 <td class="paramname"><em>x</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">float&nbsp;</td>
+<td class="paramtype">int&nbsp;</td>
 <td class="paramname"><em>y</em></td>
 </tr>
 <tr>
@@ -576,7 +521,7 @@ Namespace: Marble<br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192432140"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj187156332"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -599,13 +544,13 @@ Namespace: Marble<br />
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">float&nbsp;</td>
+<td class="paramtype">int&nbsp;</td>
 <td class="paramname"><em>x</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">float&nbsp;</td>
+<td class="paramtype">int&nbsp;</td>
 <td class="paramname"><em>y</em>, </td>
 </tr>
 <tr>
@@ -628,14 +573,16 @@ Namespace: Marble<br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><p>Get the coordinates of screen points for geographical coordinates in the map.
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the coordinates of screen points for geographical coordinates in the map.
 </p>
 <p>
 </p><dl compact><dt><b>Parameters:</b></dt><dd>
 <table border="0" cellspacing="2" cellpadding="0">
-<tr><td></td><td valign="top"><em>coordinates</em>&nbsp;</td><td> the point on earth, including altitude, that we want the coordinates for.
+<tr><td></td><td valign="top"><em>geopoint</em>&nbsp;</td><td> the point on earth, including altitude, that we want the coordinates for.
 
 <tr><td></td><td valign="top"><em>viewport</em>&nbsp;</td><td> the viewport parameters
+
+<tr><td></td><td valign="top"><em>planetAxisMatrix</em>&nbsp;</td><td> The matrix describing the current rotation of the globe
 
 <tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinates of the pixels are returned through this parameter
 
@@ -653,65 +600,7 @@ point gets represented on the map
 <p>
 <dl class="see" compact><dt><b>See also:</b></dt><dd> ViewportParams
 </dd></dl>
-</p></div></div><a class="anchor" name="obj192432780"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool screenCoordinates</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
-<td class="paramname"><em>coordinates</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
-<td class="paramname"><em>viewport</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>x</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>y</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>pointRepeatNum</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsizef.html">QSizeF</a>&nbsp;</td>
-<td class="paramname"><em>size</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">bool&nbsp;</td>
-<td class="paramname"><em>globeHidesPoint</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="obj192433324"></a>
+</p></div></div><a class="anchor" name="obj187841420"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -745,99 +634,7 @@ point gets represented on the map
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192452652"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool screenCoordinates</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>lon</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>lat</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
-<td class="paramname"><em>viewport</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>x</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>y</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192453772"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool screenCoordinates</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
-<td class="paramname"><em>geopoint</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
-<td class="paramname"><em>viewport</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>x</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">int&nbsp;</td>
-<td class="paramname"><em>y</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">bool&nbsp;</td>
-<td class="paramname"><em>globeHidesPoint</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj191794924"></a>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="obj187149484"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -859,53 +656,7 @@ point gets represented on the map
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj191805004"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">Marble.AbstractProjection.SurfaceType surfaceType</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="obj192450700"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> tessellateHorizon</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
-<td class="paramname"><em>previousCoords</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
-<td class="paramname"><em>currentCoords</em>, </td>
-</tr>
-<tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
-<td class="paramname"><em>viewport</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="obj192465548"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj187881004"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -951,11 +702,11 @@ point gets represented on the map
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj191804556"></a>
+<div class="memdoc"></div></div><a class="anchor" name="obj187147212"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">bool traversableDateLine</td>
+<td class="memname">bool traversableMaxLat</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -963,41 +714,7 @@ point gets represented on the map
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="obj191794956"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">bool traversablePoles</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="obj191782956"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname">
-<tr><td class="memname">PreservationType</td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NoPreservation</em>&nbsp;</td><td><tr><td valign="top"><em>Conformal</em>&nbsp;</td><td><tr><td valign="top"><em>EqualArea</em>&nbsp;</td><td></table>
-</dl>
-</div></div><p><a class="anchor" name="obj191770124"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname">
-<tr><td class="memname">SurfaceType</td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Cylindrical</em>&nbsp;</td><td><tr><td valign="top"><em>Pseudocylindrical</em>&nbsp;</td><td><tr><td valign="top"><em>Hybrid</em>&nbsp;</td><td><tr><td valign="top"><em>Conical</em>&nbsp;</td><td><tr><td valign="top"><em>Pseudoconical</em>&nbsp;</td><td><tr><td valign="top"><em>Azimuthal</em>&nbsp;</td><td></table>
-</dl>
-</div></div><p>
+<div class="memdoc"></div></div>
 </div>
 </div>
 </div>
@@ -1015,21 +732,5 @@ point gets represented on the map
   <h2 id="cp-menu-project">Modules</h2>
 </div></div>
 <div class="nav_list">
-<ul><li><a href="../marble/index.html">marble</a></li>
-</ul></div></div>
-
-</div>
-
-</div>
-  <div class="clearer"/>
-</div>
-
-<div id="end_body"></div>
-</div>
-<div id="footer"><div id="footer_text">
-This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
-        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
-        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
-    </div></div>
-</body>
-</html>
+<ul>
+<li><a href="../marble/index.html">marble</a></li>
