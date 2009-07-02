@@ -62,6 +62,7 @@ WorldClock::WorldClock(QObject *parent, const QVariantList &args)
     m_sun(0)
 {
     KGlobal::locale()->insertCatalog("marble");
+    KGlobal::locale()->insertCatalog("marble_qt");
     setHasConfigurationInterface(true);
     setAcceptHoverEvents(true);
     //The applet needs a 2:1 ratio
