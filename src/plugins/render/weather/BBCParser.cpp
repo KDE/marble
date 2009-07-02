@@ -447,8 +447,8 @@ void BBCParser::setupHashes() {
     visibilityStates["Good"] = WeatherData::Good;
     visibilityStates["Moderate"] = WeatherData::Normal;
     visibilityStates["Poor"] = WeatherData::Poor;
-    visibilityStates["Very Poor"] = WeatherData::VeryPoor;
-    visibilityStates["Fog"] = WeatherData::VeryPoor;
+    visibilityStates["Very poor"] = WeatherData::VeryPoor;
+    visibilityStates["Fog"] = WeatherData::Fog;
     visibilityStates["N/A"] = WeatherData::VisibilityNotAvailable;
 
     monthNames["Jan"] = 1;

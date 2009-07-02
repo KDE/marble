@@ -128,7 +128,7 @@ void MeasureTool::drawTotalDistanceLabel( GeoPainter *painter,
     Marble::DistanceUnit distanceUnit;
     distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
 
-    if ( distanceUnit == Marble::Metric ) {
+    if ( distanceUnit == Marble::Meter ) {
         if ( totalDistance >= 1000.0 ) {
             distanceString = tr("Total Distance: %1 km").arg( totalDistance/1000.0 );
         }

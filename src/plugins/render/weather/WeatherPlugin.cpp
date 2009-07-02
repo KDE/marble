@@ -16,6 +16,8 @@
 #include "WeatherModel.h"
 #include "PluginAboutDialog.h"
 #include "MarbleDirs.h"
+#include "MarbleLocale.h"
+#include "global.h"
 
 // Qt
 #include <QtCore/QDebug>
@@ -67,6 +69,8 @@ WeatherPlugin::WeatherPlugin()
     QPushButton *applyButton = ui_configWidget.m_buttonBox->button( QDialogButtonBox::Apply );
     connect( applyButton, SIGNAL( clicked() ),
              this,        SLOT( writeSettings() ) );
+    connect( this, SIGNAL( settingsChanged() ),
+             this, SLOT( updateItemSettings() ) );
     readSettings();
 }
 
@@ -77,7 +81,7 @@ WeatherPlugin::~WeatherPlugin() {
 void WeatherPlugin::initialize() {
     WeatherModel *model = new WeatherModel( this );
     setModel( model );
-    model->setItemSettings( m_settings );
+    updateItemSettings();
     setNumberOfItems( numberOfStationsPerFetch );
 }
 
@@ -116,11 +120,17 @@ void WeatherPlugin::setSettings( QHash<QString,QVariant> settings ) {
 
 void WeatherPlugin::readSettings() {
     int temperatureUnit;
+    MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
     if ( m_settings.contains( "temperatureUnit" ) ) {
         temperatureUnit = m_settings.value( "temperatureUnit" ).toInt();
     }
     else {
-        temperatureUnit = WeatherData::Kelvin;
+        if ( locale->measureSystem() == Marble::Metric ) {
+            temperatureUnit = WeatherData::Celsius;
+        }
+        else {
+            temperatureUnit = WeatherData::Fahrenheit;
+        }
         m_settings.insert( "temperatureUnit", temperatureUnit );
     }
     ui_configWidget.m_temperatureComboBox->setCurrentIndex( temperatureUnit );
@@ -130,7 +140,12 @@ void WeatherPlugin::readSettings() {
         windSpeedUnit = m_settings.value( "windSpeedUnit" ).toInt();
     }
     else {
-        windSpeedUnit = WeatherData::kph;
+        if ( locale->measureSystem() == Marble::Metric ) {
+            windSpeedUnit = WeatherData::kph;
+        }
+        else {
+            windSpeedUnit = WeatherData::mph;
+        }
         m_settings.insert( "windSpeedUnit", temperatureUnit );
     }
     ui_configWidget.m_windSpeedComboBox->setCurrentIndex( windSpeedUnit );
@@ -140,15 +155,19 @@ void WeatherPlugin::readSettings() {
         pressureUnit = m_settings.value( "pressureUnit" ).toInt();
     }
     else {
-        pressureUnit = WeatherData::KiloPascal;
-        m_settings.insert( "pressureUnit", temperatureUnit );
+        if ( locale->measureSystem() == Marble::Metric ) {
+            qDebug() << "hectopascal";
+            pressureUnit = WeatherData::HectoPascal;
+        }
+        else {
+            qDebug() << "inchHg";
+            pressureUnit = WeatherData::inchHg;
+        }
+        m_settings.insert( "pressureUnit", pressureUnit );
     }
     ui_configWidget.m_pressureComboBox->setCurrentIndex( pressureUnit );
 
-    AbstractDataPluginModel *abstractModel = model();
-    if( abstractModel ) {
-        abstractModel->setItemSettings( m_settings );
-    }
+    updateItemSettings();
 }
 
 void WeatherPlugin::writeSettings() {
@@ -157,9 +176,11 @@ void WeatherPlugin::writeSettings() {
     m_settings.insert( "pressureUnit", ui_configWidget.m_pressureComboBox->currentIndex() );
 
     emit settingsChanged( nameId() );
+}
 
+void WeatherPlugin::updateItemSettings() {
     AbstractDataPluginModel *abstractModel = model();
-    if( abstractModel ) {
+    if( abstractModel != 0 ) {
         abstractModel->setItemSettings( m_settings );
     }
 }

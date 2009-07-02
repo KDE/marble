@@ -116,6 +116,11 @@
             <string>Millimeter of Mercury</string>
            </property>
           </item>
+          <item>
+           <property name="text">
+            <string>Inch of Mercury</string>
+           </property>
+          </item>
          </widget>
         </item>
        </layout>

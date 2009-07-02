@@ -37,6 +37,9 @@ class MARBLE_EXPORT MarbleLocale
     void setDistanceUnit( Marble::DistanceUnit distanceUnit );
     Marble::DistanceUnit distanceUnit() const;
 
+    void setMeasureSystem( Marble::MeasureSystem measureSystem );
+    Marble::MeasureSystem measureSystem() const;
+
  private:
     Q_DISABLE_COPY( MarbleLocale )
     MarbleLocalePrivate  * const d;

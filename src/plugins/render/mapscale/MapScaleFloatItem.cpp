@@ -131,7 +131,7 @@ bool MapScaleFloatItem::renderFloatItem( GeoPainter *painter,
     Marble::DistanceUnit distanceUnit;
     distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
 
-    if ( distanceUnit == Marble::Imperial ) {
+    if ( distanceUnit == Marble::MilesFeet ) {
         m_scaleBarDistance *= KM2MI;
     }
 
@@ -163,7 +163,7 @@ bool MapScaleFloatItem::renderFloatItem( GeoPainter *painter,
             Marble::DistanceUnit distanceUnit;
             distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
 
-            if ( distanceUnit == Marble::Metric ) {
+            if ( distanceUnit == Marble::Meter ) {
                 if ( m_bestDivisor * m_valueInterval > 10000 ) {
                     m_unit = tr("km");
                     intervalStr.setNum( j * m_valueInterval / 1000 );

@@ -401,7 +401,7 @@ void MarbleControlBox::receiveGpsCoordinates( GeoDataCoordinates in, qreal speed
         QString speedString;
         qreal unitSpeed = 0.0;
 
-        switch ( d->m_locale->distanceUnit() ) {
+        switch ( d->m_locale->measureSystem() ) {
             case Marble::Metric:
             //kilometers per hour
             unitString = tr("km/h");

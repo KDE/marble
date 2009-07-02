@@ -29,6 +29,7 @@
 #include "MarbleDirs.h"
 #include "MarbleCacheSettingsWidget.h"
 #include "MarblePluginSettingsWidget.h"
+#include "MarbleLocale.h"
 #include "MarbleWidget.h"
 #include "RenderPlugin.h"
 
@@ -421,7 +422,19 @@ void QtMarbleConfigDialog::applyPluginState() {
 
 Marble::DistanceUnit QtMarbleConfigDialog::distanceUnit() const
 {
-    return (Marble::DistanceUnit) d->m_settings->value( "View/distanceUnit", Marble::Metric ).toInt();
+    if( d->m_settings->contains( "View/distanceUnit" ) ) {
+        return (Marble::DistanceUnit) d->m_settings->value( "View/distanceUnit" ).toInt();
+    }
+    else {
+        MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
+        
+        if ( locale->measureSystem() == Marble::Metric ) {
+            return Marble::Meter;
+        }
+        else {
+            return Marble::MilesFeet;
+        }
+    }
 }
 
 Marble::AngleUnit QtMarbleConfigDialog::angleUnit() const

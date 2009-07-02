@@ -161,6 +161,7 @@ QHash<QString,QVariant> RenderPlugin::settings() const {
 }
 
 void RenderPlugin::setSettings( QHash<QString,QVariant> settings ) {
+    Q_UNUSED( settings );
 }
 
 bool RenderPlugin::eventFilter( QObject *, QEvent * ) {

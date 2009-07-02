@@ -132,9 +132,9 @@ void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
 
     // Temperature
     if ( d->m_currentWeather.hasValidTemperature() ) {
-        WeatherData::TemperatureFormat temperatureFormat
-                = (WeatherData::TemperatureFormat) d->m_settings.value( "temperatureUnit",
-                                                                        WeatherData::Celsius ).toInt();
+        WeatherData::TemperatureUnit temperatureFormat
+                = (WeatherData::TemperatureUnit) d->m_settings.value( "temperatureUnit",
+                                                                      WeatherData::Celsius ).toInt();
 
         horizontalPaintPosition += horizontalSpacing;
         painter->drawText( QRect( horizontalPaintPosition,

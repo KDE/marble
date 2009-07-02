@@ -89,7 +89,6 @@ K_EXPORT_COMPONENT_FACTORY( libmarble_part, MarblePartFactory )
 
 MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringList &arguments )
   : KParts::ReadOnlyPart( parent ),
-    m_controlView( new ControlView( parentWidget ) ),
     m_sunControlDialog( 0 ),
     m_pluginModel( 0 ),
     m_configDialog( 0 ),
@@ -99,6 +98,20 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     // only set marble data path when a path was given
     if ( arguments.count() != 0 && !arguments.first().isEmpty() )
         MarbleDirs::setMarbleDataPath( arguments.first() );
+    
+    // Setting measure system to provide nice standards for all unit questions.
+    // This has to happen before any initialization so plugins (for example) can
+    // use it during initialization.
+    MarbleLocale *marbleLocale = MarbleGlobal::getInstance()->locale();
+    KLocale *kLocale = KGlobal::locale();
+    if ( kLocale->measureSystem() == KLocale::Metric ) {
+        marbleLocale->setMeasureSystem( Marble::Metric );
+    }
+    else {
+        marbleLocale->setMeasureSystem( Marble::Imperial );
+    }
+    
+    m_controlView = new ControlView( parentWidget );
 
     setComponentData( MarblePartFactory::componentData() );
 

@@ -15,7 +15,8 @@
 namespace Marble {
 
 MarbleLocalePrivate::MarbleLocalePrivate()
-    : m_distanceUnit( Marble::Metric )
+    : m_distanceUnit( Marble::NoDistanceUnit ),
+      m_measureSystem( Marble::Metric )
 {
 }
 
@@ -35,12 +36,30 @@ MarbleLocale::~MarbleLocale()
 
 Marble::DistanceUnit MarbleLocale::distanceUnit() const
 {
-    return d->m_distanceUnit;
+    if( d->m_distanceUnit == Marble::NoDistanceUnit ) {
+        if ( d->m_measureSystem == Marble::Metric ) {
+            return Marble::Meter;
+        }
+        else {
+            return Marble::MilesFeet;
+        }
+    }
+    else {
+        return d->m_distanceUnit;
+    }
 }
 
 void MarbleLocale::setDistanceUnit( Marble::DistanceUnit distanceUnit )
 {
     d->m_distanceUnit = distanceUnit;
+}
+
+void MarbleLocale::setMeasureSystem( Marble::MeasureSystem measureSystem ) {
+    d->m_measureSystem = measureSystem;
+}
+
+Marble::MeasureSystem MarbleLocale::measureSystem() const {
+    return d->m_measureSystem;
 }
 
 }

@@ -54,6 +54,10 @@ class WeatherPlugin : public AbstractDataPlugin {
  private Q_SLOTS:
     void readSettings();
     void writeSettings();
+    void updateItemSettings();
+    
+ Q_SIGNALS:
+    void changedSettings();
 
  private:
     QIcon m_icon;

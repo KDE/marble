@@ -87,10 +87,11 @@ class WeatherData {
         Normal,
         Poor,
         VeryPoor,
+        Fog,
         VisibilityNotAvailable
     };
     
-    enum SpeedFormat {
+    enum SpeedUnit {
         kph,
         mph,
         mps,
@@ -98,17 +99,18 @@ class WeatherData {
         beaufort
     };
     
-    enum TemperatureFormat {
+    enum TemperatureUnit {
         Celsius,
         Fahrenheit,
         Kelvin
     };
     
-    enum PressureFormat {
+    enum PressureUnit {
         HectoPascal,
         KiloPascal,
         Bar,
-        mmHg
+        mmHg,
+        inchHg
     };
     
     WeatherData();
@@ -134,35 +136,35 @@ class WeatherData {
     void setWindDirection( WeatherData::WindDirection direction );
     bool hasValidWindDirection() const;
     
-    qreal windSpeed( WeatherData::SpeedFormat format = WeatherData::mps ) const;
-    void setWindSpeed( qreal speed, WeatherData::SpeedFormat format = WeatherData::mps );
+    qreal windSpeed( WeatherData::SpeedUnit format = WeatherData::mps ) const;
+    void setWindSpeed( qreal speed, WeatherData::SpeedUnit format = WeatherData::mps );
     bool hasValidWindSpeed() const;
     
-    qreal temperature( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
+    qreal temperature( WeatherData::TemperatureUnit format = WeatherData::Kelvin ) const;
     void setTemperature( qreal temp,
-                         WeatherData::TemperatureFormat format = WeatherData::Kelvin );
+                         WeatherData::TemperatureUnit format = WeatherData::Kelvin );
     bool hasValidTemperature() const;
-    QString temperatureString( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
+    QString temperatureString( WeatherData::TemperatureUnit format = WeatherData::Kelvin ) const;
     
-    qreal maxTemperature( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
+    qreal maxTemperature( WeatherData::TemperatureUnit format = WeatherData::Kelvin ) const;
     void setMaxTemperature( qreal temp,
-                            WeatherData::TemperatureFormat format = WeatherData::Kelvin );
+                            WeatherData::TemperatureUnit format = WeatherData::Kelvin );
     bool hasValidMaxTemperature() const;
-    QString maxTemperatureString( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
+    QString maxTemperatureString( WeatherData::TemperatureUnit format = WeatherData::Kelvin ) const;
     
-    qreal minTemperature( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
+    qreal minTemperature( WeatherData::TemperatureUnit format = WeatherData::Kelvin ) const;
     void setMinTemperature( qreal temp,
-                            WeatherData::TemperatureFormat format = WeatherData::Kelvin );
+                            WeatherData::TemperatureUnit format = WeatherData::Kelvin );
     bool hasValidMinTemperature() const;
-    QString minTemperatureString( WeatherData::TemperatureFormat format = WeatherData::Kelvin ) const;
+    QString minTemperatureString( WeatherData::TemperatureUnit format = WeatherData::Kelvin ) const;
     
     WeatherData::Visibility visibility() const;
     void setVisibilty( WeatherData::Visibility visibility );
     bool hasValidVisibility() const;
     
-    qreal pressure( WeatherData::PressureFormat format = WeatherData::HectoPascal ) const;
+    qreal pressure( WeatherData::PressureUnit format = WeatherData::HectoPascal ) const;
     void setPressure( qreal pressure,
-                      WeatherData::PressureFormat format = WeatherData::HectoPascal );
+                      WeatherData::PressureUnit format = WeatherData::HectoPascal );
     bool hasValidPressure() const;
 
     WeatherData::PressureDevelopment pressureDevelopment() const;

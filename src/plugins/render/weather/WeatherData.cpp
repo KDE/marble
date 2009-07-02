@@ -46,6 +46,9 @@ const qreal HPA2BAR = 1/BAR2HPA;
 // mmHg to HectoPascal
 const qreal HG2HPA = 133;
 const qreal HPA2HG = 1/HG2HPA;
+// inchHg to HectoPascal
+const qreal IHG2HPA = HG2HPA / 25.4;
+const qreal HPA2IHG = HPA2HG * 25.4;
 
 // Summands
 // Kelvin to degree Celsius
@@ -146,7 +149,7 @@ class WeatherDataPrivate {
         }
     }
     
-    qreal fromKelvin( qreal temp, WeatherData::TemperatureFormat format ) const {
+    qreal fromKelvin( qreal temp, WeatherData::TemperatureUnit format ) const {
         if( WeatherData::Kelvin == format ) {
             return temp;
         }
@@ -162,7 +165,7 @@ class WeatherDataPrivate {
         }
     }
     
-    qreal toKelvin( qreal temp, WeatherData::TemperatureFormat format ) const {
+    qreal toKelvin( qreal temp, WeatherData::TemperatureUnit format ) const {
         if( WeatherData::Kelvin == format ) {
             return temp;
         }
@@ -186,7 +189,7 @@ class WeatherDataPrivate {
         return false;
     }
     
-    QString generateTemperatureString( qreal temp, WeatherData::TemperatureFormat format ) const {
+    QString generateTemperatureString( qreal temp, WeatherData::TemperatureUnit format ) const {
         QLocale locale = QLocale::system();
         // We round to integer.
         QString string = locale.toString( floor( fromKelvin( temp, format ) + 0.5 ) );
@@ -249,12 +252,12 @@ class WeatherDataPrivate {
     
     static QHash<WeatherData::WeatherCondition, QIcon> s_icons;
     static QHash<WeatherData::WeatherCondition, QString> s_iconPath;
-    static WeatherData::TemperatureFormat s_standardTemperatureFormat;
+    static WeatherData::TemperatureUnit s_standardTemperatureUnit;
 };
 
 QHash<WeatherData::WeatherCondition, QIcon> WeatherDataPrivate::s_icons = QHash<WeatherData::WeatherCondition, QIcon>();
 QHash<WeatherData::WeatherCondition, QString> WeatherDataPrivate::s_iconPath = QHash<WeatherData::WeatherCondition, QString>();
-WeatherData::TemperatureFormat WeatherDataPrivate::s_standardTemperatureFormat = WeatherData::Celsius;
+WeatherData::TemperatureUnit WeatherDataPrivate::s_standardTemperatureUnit = WeatherData::Celsius;
 
 WeatherData::WeatherData()
     : d( new WeatherDataPrivate() )
@@ -340,7 +343,7 @@ bool WeatherData::hasValidWindDirection() const {
     return d->m_windDirection != WeatherData::DirectionNotAvailable;
 }
 
-qreal WeatherData::windSpeed( WeatherData::SpeedFormat format ) const {
+qreal WeatherData::windSpeed( WeatherData::SpeedUnit format ) const {
     if ( WeatherData::mps == format ) {
         return d->m_windSpeed;
     }
@@ -387,7 +390,7 @@ qreal WeatherData::windSpeed( WeatherData::SpeedFormat format ) const {
     }
 }
 
-void WeatherData::setWindSpeed( qreal speed, WeatherData::SpeedFormat format ) {
+void WeatherData::setWindSpeed( qreal speed, WeatherData::SpeedUnit format ) {
     detach();
     if ( WeatherData::mps == format ) {
         d->m_windSpeed = speed;
@@ -439,11 +442,11 @@ bool WeatherData::hasValidWindSpeed() const {
     return d->isPositiveValue( d->m_windSpeed );
 }
 
-qreal WeatherData::temperature( WeatherData::TemperatureFormat format ) const {
+qreal WeatherData::temperature( WeatherData::TemperatureUnit format ) const {
     return d->fromKelvin( d->m_temperature, format );
 }
 
-void WeatherData::setTemperature( qreal temp, WeatherData::TemperatureFormat format ) {
+void WeatherData::setTemperature( qreal temp, WeatherData::TemperatureUnit format ) {
     detach();
     d->m_temperature = d->toKelvin( temp, format );
 }
@@ -452,21 +455,21 @@ bool WeatherData::hasValidTemperature() const {
     return d->isPositiveValue( d->m_temperature );
 }
 
-QString WeatherData::temperatureString( WeatherData::TemperatureFormat format ) const {
+QString WeatherData::temperatureString( WeatherData::TemperatureUnit format ) const {
     return d->generateTemperatureString( d->m_temperature,
                                          format );
 }
 
-qreal WeatherData::maxTemperature( WeatherData::TemperatureFormat format ) const {
+qreal WeatherData::maxTemperature( WeatherData::TemperatureUnit format ) const {
     return d->fromKelvin( d->m_maxTemperature, format );
 }
 
-void WeatherData::setMaxTemperature( qreal temp, WeatherData::TemperatureFormat format ) {
+void WeatherData::setMaxTemperature( qreal temp, WeatherData::TemperatureUnit format ) {
     detach();
     d->m_maxTemperature = d->toKelvin( temp, format );
 }
 
-QString WeatherData::maxTemperatureString( WeatherData::TemperatureFormat format ) const {
+QString WeatherData::maxTemperatureString( WeatherData::TemperatureUnit format ) const {
     return d->generateTemperatureString( d->m_maxTemperature,
                                          format );
 }
@@ -475,16 +478,16 @@ bool WeatherData::hasValidMaxTemperature() const {
     return d->isPositiveValue( d->m_maxTemperature );
 }
 
-qreal WeatherData::minTemperature( WeatherData::TemperatureFormat format ) const {
+qreal WeatherData::minTemperature( WeatherData::TemperatureUnit format ) const {
     return d->fromKelvin( d->m_minTemperature, format );
 }
 
-QString WeatherData::minTemperatureString( WeatherData::TemperatureFormat format ) const {
+QString WeatherData::minTemperatureString( WeatherData::TemperatureUnit format ) const {
     return d->generateTemperatureString( d->m_minTemperature,
                                          format );
 }
 
-void WeatherData::setMinTemperature( qreal temp, WeatherData::TemperatureFormat format ) {
+void WeatherData::setMinTemperature( qreal temp, WeatherData::TemperatureUnit format ) {
     detach();
     d->m_minTemperature = d->toKelvin( temp, format );
 }
@@ -506,7 +509,7 @@ bool WeatherData::hasValidVisibility() const {
     return d->m_visibility != WeatherData::VisibilityNotAvailable;
 }
 
-qreal WeatherData::pressure( WeatherData::PressureFormat format ) const {
+qreal WeatherData::pressure( WeatherData::PressureUnit format ) const {
     if ( WeatherData::HectoPascal == format ) {
         return d->m_pressure;
     }
@@ -519,25 +522,31 @@ qreal WeatherData::pressure( WeatherData::PressureFormat format ) const {
     else if ( WeatherData::mmHg == format ) {
         return d->m_pressure * HPA2HG;
     }
+    else if ( WeatherData::inchHg == format ) {
+        return d->m_pressure * HPA2IHG;
+    }
     else {
         qDebug() << "Wrong pressure format";
         return 0;
     }
 }
 
-void WeatherData::setPressure( qreal pressure, WeatherData::PressureFormat format ) {
+void WeatherData::setPressure( qreal pressure, WeatherData::PressureUnit format ) {
     detach();
     if ( WeatherData::HectoPascal == format ) {
         d->m_pressure = pressure;
     }
     else if ( WeatherData::KiloPascal == format ) {
-        d->m_pressure = KPA2HPA;
+        d->m_pressure = pressure * KPA2HPA;
     }
     else if ( WeatherData::Bar == format ) {
-        d->m_pressure = BAR2HPA;
+        d->m_pressure = pressure * BAR2HPA;
     }
     else if ( WeatherData::mmHg == format ) {
-        d->m_pressure = HG2HPA;
+        d->m_pressure = pressure * HG2HPA;
+    }
+    else if ( WeatherData::inchHg == format ) {
+        d->m_pressure = pressure * IHG2HPA;
     }
     else {
         qDebug() << "Wrong pressure format";
