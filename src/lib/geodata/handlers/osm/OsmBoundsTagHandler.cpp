@@ -56,7 +56,7 @@ GeoNode* OsmBoundsTagHandler::parse( GeoParser& parser ) const
 
     doc->append( place );
 
-
+    return 0;
 
 }
 
