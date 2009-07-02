@@ -69,7 +69,7 @@ WeatherPlugin::WeatherPlugin()
     QPushButton *applyButton = ui_configWidget.m_buttonBox->button( QDialogButtonBox::Apply );
     connect( applyButton, SIGNAL( clicked() ),
              this,        SLOT( writeSettings() ) );
-    connect( this, SIGNAL( settingsChanged() ),
+    connect( this, SIGNAL( settingsChanged( QString ) ),
              this, SLOT( updateItemSettings() ) );
     readSettings();
 }
