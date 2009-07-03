@@ -63,6 +63,7 @@ WorldClock::WorldClock(QObject *parent, const QVariantList &args)
 {
     KGlobal::locale()->insertCatalog("marble");
     KGlobal::locale()->insertCatalog("marble_qt");
+    KGlobal::locale()->insertCatalog("timezones4");
     setHasConfigurationInterface(true);
     setAcceptHoverEvents(true);
     //The applet needs a 2:1 ratio
@@ -133,6 +134,8 @@ void WorldClock::init()
     m_points = QHash<QString, QPoint>();
     m_lastRect = QRect(0,0,0,0);
     m_showDate = cg.readEntry("showdate", false);
+
+    setTz( getZone() );
 
     Plasma::DataEngine *m_timeEngine = dataEngine("time");
     m_timeEngine->connectSource( "Local", this, 6000, Plasma::AlignToMinute);
@@ -231,9 +234,11 @@ QString WorldClock::getZone()
     bool ok = m_map->viewParams()->viewport()->currentProjection()->geoCoordinates(
                 m_hover.x(), m_hover.y(), m_map->viewParams()->viewport(), lon, lat );
 
-    if( !ok )
-        return KSystemTimeZones::local().name();
-
+    QString timezone;
+    if( !ok ) {
+        timezone = KSystemTimeZones::local().name();
+        return i18n( timezone.toUtf8().data() );
+        }
     QList<QString> zones = m_locations.keys();
 
     QString closest;
@@ -247,7 +252,8 @@ QString WorldClock::getZone()
             closest = zones.at( i );
         }
     }
-    return m_locations.value( closest ).name();
+    timezone = m_locations.value( closest ).name();
+    return i18n( timezone.toUtf8().data() );
 }
 
 void WorldClock::setTz( QString newtz )
