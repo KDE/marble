@@ -25,7 +25,7 @@ class VelocityProvider : public Provider {
     private:
         class Private;
         Private* const d;
-        Q_PRIVATE_SLOT(d, void velocityChangedCall(QDBusMessage message));
+        Q_PRIVATE_SLOT(d, void velocityChangedCall(QDBusMessage message))
 };
 
 }

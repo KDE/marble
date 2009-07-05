@@ -29,7 +29,7 @@ class PositionProvider : public Provider {
     private:
         class Private;
         Private* const d;
-        Q_PRIVATE_SLOT(d, void positionChangedCall(QDBusMessage message));
+        Q_PRIVATE_SLOT(d, void positionChangedCall(QDBusMessage message))
 };
 
 }

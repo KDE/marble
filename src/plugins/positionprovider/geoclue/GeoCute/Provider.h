@@ -25,7 +25,7 @@ class Provider : public QObject {
     private:
         class Private;
         Private* const d;
-        Q_PRIVATE_SLOT(d, void statusChangedCall(int status));
+        Q_PRIVATE_SLOT(d, void statusChangedCall(int status))
 };
 
 }
