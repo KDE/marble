@@ -52,7 +52,7 @@ void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* view,
         painter->save();
 
         //draw the border
-        painter->setBrush( QBrush( Qt::blue, Qt::SolidPattern ));
+        painter->setBrush( QBrush( Qt::lightGray, Qt::SolidPattern ));
         painter->drawRoundedRect( QRect( position + borderOffset, widgetSize + borderSize ),
                                   50, 50 , Qt::RelativeSize );
 
@@ -67,8 +67,11 @@ void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* view,
 
 void GeoWidgetBubble::setGeoWidget( QWidget* w )
 {
+    QPalette p( QColor(Qt::lightGray ), QColor( Qt::lightGray) );
+
     m_widget= w;
     m_widget->setVisible(false);
+    m_widget->setPalette( p );
 }
 
 QWidget* GeoWidgetBubble::getGeoWidget()
