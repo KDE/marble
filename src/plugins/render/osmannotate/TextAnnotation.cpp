@@ -54,13 +54,15 @@ void TextAnnotation::geoBounding(qreal angularResolution)
     //Dependant. This does not lend well to a good consistant model.
     width = screenBounding().width() * angularResolution;
     height = screenBounding().height() * angularResolution;
-    QRectF bound( coordinate().longitude() - (width/2),
+    QRect bound( coordinate().longitude() - (width/2),
                  coordinate().latitude() - (height/2),
                  width, height) ;
-    m_regions.clear();
-    QPainterPath path;
-    path.addRect(bound);
-    m_regions.append(path);
+
+    QRegion path;
+    path = path.united( bound);
+    QList<QRegion> list;
+    list.append ( path );
+    setRegions( list );
 
 }
 
@@ -77,16 +79,17 @@ void TextAnnotation::paint( GeoPainter *painter,
     qreal north, south, east, west;
 
     //don't need this if its done by the painter soon
-    geoBounding(viewport->angularResolution());
-    north = m_regions.at(0).boundingRect().top();
-    south = m_regions.at(0).boundingRect().bottom();
-    east = m_regions.at(0).boundingRect().right();
-    west = m_regions.at(0).boundingRect().left();
+//    geoBounding(viewport->angularResolution());
+//    north = m_regions.at(0).boundingRect().top();
+//    south = m_regions.at(0).boundingRect().bottom();
+//    east = m_regions.at(0).boundingRect().right();
+//    west = m_regions.at(0).boundingRect().left();
 
     //would like a method to draw a QRegion ;)
-    painter->drawRect(GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ),
-                      m_regions.at(0).boundingRect().width() * RAD2DEG,
-                      m_regions.at(0).boundingRect().height() * RAD2DEG,true);
+//    painter->drawRect(GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ),
+//                      m_regions.at(0).boundingRect().width() * RAD2DEG,
+//                      m_regions.at(0).boundingRect().height() * RAD2DEG,true);
+
 
     painter->drawPoint( GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ) );
 
@@ -97,6 +100,10 @@ void TextAnnotation::paint( GeoPainter *painter,
     bool visable = viewport->currentProjection()->screenCoordinates( coordinate(), viewport, x, y, hidden );
 
     if( visable && !hidden ) {
+        QList<QRegion> list;
+        list.append( QRegion( x -10 , y-10 , 20 , 20 ) );
+        setRegions( list );
+        painter->drawRect( regions().at(0).boundingRect() );
         bubble->moveTo( QPoint( x, y ) );
         bubble->paint( painter, viewport, renderPos, layer );
     } else {
@@ -141,6 +148,16 @@ QVariant TextAnnotation::itemChange(GeoGraphicsItemChange change, QVariant v )
         break;
     }
     return TmpGraphicsItem::itemChange( change, v );
+}
+
+bool TextAnnotation::mousePressEvent( QMouseEvent* event )
+{
+    if( bubble->isHidden() ) {
+        bubble->setHidden( false );
+    } else {
+        bubble->setHidden( true );
+    }
+    return true;
 }
 
 }

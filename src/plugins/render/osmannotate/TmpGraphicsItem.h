@@ -14,6 +14,7 @@
 #include <QtCore/QRect>
 #include <QtCore/QObject>
 #include <QtGui/QPainterPath>
+#include <QtGui/QMouseEvent>
 
 #include "GeoGraphicsItem.h"
 #include "GeoDataLatLonAltBox.h"
@@ -44,8 +45,9 @@ enum GeoGraphicsItemChange {
 
     //Designed to recreated the QGraphicsItem::itemChange()
     virtual QVariant itemChange( GeoGraphicsItemChange change, QVariant Value );
-    //this is just so that i can test the implementation
-    QList<QPainterPath>  m_regions;
+
+    QList<QRegion> regions();
+
 
     QList<TmpGraphicsItem*> getChildren();
     void addChild(TmpGraphicsItem* c);
@@ -60,13 +62,24 @@ enum GeoGraphicsItemChange {
     //FIXME remove this? is this needed at all?
     bool isGeoOffset();
 
+    //Start dealing with the event stuff
+    //is this the best thing to call the event distributer?
+    bool sceneEvent( QEvent* event );
+
 protected:
     //FIXME remove this? is this needed at all?
     void setGeoOffset( bool g );
 
+    void setRegions( const QList<QRegion>& regions );
+
+
+    virtual bool mousePressEvent( QMouseEvent* event );
+
  private:
     //intended to go in the private class
     QList<TmpGraphicsItem*> children;
+
+    QList<QRegion> m_regions;
 
     //Allows for the implementation of local coordinate systems
     //for children objects

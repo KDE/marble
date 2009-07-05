@@ -30,6 +30,9 @@ public:
     virtual bool isGeoProjected();
     virtual QVariant itemChange(GeoGraphicsItemChange c, QVariant v);
 
+protected:
+    virtual bool mousePressEvent( QMouseEvent *event );
+
 private:
     GeoWidgetBubble* bubble;
     TextEditor* m_textEditor;

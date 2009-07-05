@@ -37,9 +37,12 @@ public:
 
     void moveTo( QPoint screenPos );
     void hide();
+    void setHidden( bool hide );
+    bool isHidden();
 
 private:
     QWidget* m_widget;
+    bool m_hidden;
     bool marbleWidgetInitalised;
     QPoint m_offset;
     QPoint m_screenPosition;

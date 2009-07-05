@@ -21,6 +21,7 @@ GeoWidgetBubble::GeoWidgetBubble()
     m_widget=0;
     marbleWidgetInitalised = false;
     m_offset = QPoint( 10, 10 );
+    m_hidden = true;
 }
 
 void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* view,
@@ -28,6 +29,8 @@ void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* view,
 {
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
+
+    if( !m_hidden ) {
 
     if( !marbleWidgetInitalised && ( m_widget!=0)  ) {
         initaliseMarbleWidget( (QWidget* ) painter->device() );
@@ -55,6 +58,11 @@ void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* view,
 
         painter->restore();
         }
+    }
+    else {
+        m_widget->hide();
+    }
+
 }
 
 void GeoWidgetBubble::setGeoWidget( QWidget* w )
@@ -87,7 +95,27 @@ void GeoWidgetBubble::moveTo( QPoint pos )
 
 void GeoWidgetBubble::hide()
 {
-    m_widget->hide();
+    setHidden(true);
+}
+
+void GeoWidgetBubble::setHidden( bool hide )
+{
+    //if its not hidden and we want to hide
+    if( hide && !m_hidden ) {
+        m_hidden = true ;
+    }
+    else if (  !hide && m_hidden ) {
+        m_hidden = false;
+    }
+
+    if ( marbleWidgetInitalised ) {
+        m_widget->parentWidget()->repaint();
+    }
+}
+
+bool GeoWidgetBubble::isHidden()
+{
+    return m_hidden;
 }
 
 }

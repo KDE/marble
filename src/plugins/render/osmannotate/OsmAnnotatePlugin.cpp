@@ -296,14 +296,12 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
                 marbleWidget->repaint();
 
             }
+            return true;
         }
-    }
 
-    // this stuff below is for hit tests. Just a sample mouse over for all bounding boxes
-    if ( event->type() == QEvent::MouseMove ||
-         event->type() == QEvent::MouseButtonPress ||
-         event->type() == QEvent::MouseButtonRelease ) {
-        qreal lon, lat;
+        //deal with clicking
+        if ( mouseEvent->button() == Qt::LeftButton ) {
+            qreal lon, lat;
 
         bool valid = ((MarbleWidget*)watched)->geoCoordinates(((QMouseEvent*)event)->pos().x(),
                                                               ((QMouseEvent*)event)->pos().y(),
@@ -315,23 +313,31 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
             TmpGraphicsItem* item = i.next();
             if(valid) {
                 //FIXME check against all regions!
-                QListIterator<QPainterPath> it ( item->m_regions );
+                QListIterator<QRegion> it ( item->regions() );
 
                 while ( it.hasNext() ) {
-                    QPainterPath p = it.next();
-                    if( p.contains( QPoint( lon, lat ) ) ) {
-                        qDebug() << "Event in OsmAnnotate Plugin" << event;
-                        qDebug() << sizeof(item->m_regions.at(0)) ;
-                        return true;
+                    QRegion p = it.next();
+                    if( p.contains( mouseEvent->pos() ) ) {
+                        return item->sceneEvent( event );
                     }
                 }
             }
 
         }
 
-
-
+        }
     }
+
+//    // this stuff below is for hit tests. Just a sample mouse over for all bounding boxes
+//    if ( event->type() == QEvent::MouseMove ||
+//         event->type() == QEvent::MouseButtonPress ||
+//         event->type() == QEvent::MouseButtonRelease ) {
+//        QMouseEvent* mouseEvent = (QMouseEvent*) event;
+//
+//
+//
+//
+//    }
     return false;
 }
 

@@ -32,6 +32,11 @@ QVariant TmpGraphicsItem::itemChange(GeoGraphicsItemChange change, QVariant v )
     return QVariant();
 }
 
+QList<QRegion> TmpGraphicsItem::regions()
+{
+    return QList<QRegion>( m_regions );
+}
+
 QList<TmpGraphicsItem*> TmpGraphicsItem::getChildren()
 {
     return QList<TmpGraphicsItem*>(children);
@@ -52,9 +57,31 @@ void TmpGraphicsItem::setParent( TmpGraphicsItem* p )
     parent = p;
 }
 
+bool TmpGraphicsItem::sceneEvent( QEvent* event )
+{
+    if( event->type() == QEvent::MouseButtonPress ) {
+        return mousePressEvent( (QMouseEvent*) event );
+    }
+
+    return false;
+}
+
+bool TmpGraphicsItem::mousePressEvent( QMouseEvent* event )
+{
+    //FIXME re-implement the whole ItemIsSelectable and call an
+    //Item Change
+    return false;
+}
+
 void TmpGraphicsItem::setGeoOffset( bool g )
 {
     geoOffset = g;
+}
+
+void TmpGraphicsItem::setRegions( const QList<QRegion>& regions )
+{
+    m_regions.clear();
+    m_regions = QList<QRegion>( regions );
 }
 
 }
