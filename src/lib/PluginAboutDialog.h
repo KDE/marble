@@ -101,7 +101,7 @@ class MARBLE_EXPORT PluginAboutDialog : public QDialog
     void setLicenseAgreementText( const QString& license );
 
  private:
-    Q_DISABLE_COPY( PluginAboutDialog );
+    Q_DISABLE_COPY( PluginAboutDialog )
 
     PluginAboutDialogPrivate *d;
 };
