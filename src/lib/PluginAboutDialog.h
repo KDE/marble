@@ -37,7 +37,7 @@ class MARBLE_EXPORT PluginAboutDialog : public QDialog
 //        License_GPL = 1,
 //        License_GPL_V2 = 1,
 //        License_LGPL = 2,
-        License_LGPL_V2 = 2,
+        License_LGPL_V2 = 2
 //        License_BSD = 3,
 //        License_Artistic = 4,
 //        License_QPL = 5,
