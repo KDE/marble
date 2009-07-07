@@ -113,7 +113,7 @@ class MarbleWidgetPrivate
     MarblePhysics    *m_physics;
     
     QToolBar        *m_mainToolbar;
-    QAction         *m_disableInputAction;
+    QAction         *m_enableInputAction;
 
     //This stuff is NEVER used. Needs to be deleted
     QString          m_proxyHost;
@@ -135,7 +135,7 @@ MarbleWidget::MarbleWidget(QWidget *parent)
         ((QMainWindow*) parent->parent())->addToolBar(d->m_mainToolbar);
     }
 
-    registerAction( d->m_disableInputAction );
+    registerAction( d->m_enableInputAction );
 }
 
 
@@ -223,12 +223,15 @@ void MarbleWidgetPrivate::construct()
 
     m_mainToolbar = new QToolBar(0);
 
-    m_disableInputAction = new QAction(m_mainToolbar);
-    m_disableInputAction->setText("Disable Marble Input");
-    m_disableInputAction->setCheckable(true);
+    m_enableInputAction = new QAction(m_mainToolbar);
+//    m_enableInputAction->setText("Enable Marble Input");
+    m_enableInputAction->setCheckable(true);
+    m_enableInputAction->setChecked( true );
+    m_enableInputAction->setIcon( QIcon( MarbleDirs::path("bitmaps/hand.png") ) );
+//    m_enableInputAction->set
 
-    m_widget->connect( m_disableInputAction, SIGNAL(toggled(bool)),
-                       m_widget, SLOT(disableInput(bool)) );
+    m_widget->connect( m_enableInputAction, SIGNAL(toggled(bool)),
+                       m_widget, SLOT(enableInput(bool)) );
 
     m_widget->connect( m_model, SIGNAL( pluginSettingsChanged() ),
                        m_widget, SIGNAL( pluginSettingsChanged() ) );
@@ -1242,6 +1245,11 @@ void MarbleWidget::disableInput( bool in )
     } else {
         enableInput();
     }
+}
+
+void MarbleWidget::enableInput( bool in )
+{
+    disableInput( !in );
 }
 
 void MarbleWidget::enableInput()

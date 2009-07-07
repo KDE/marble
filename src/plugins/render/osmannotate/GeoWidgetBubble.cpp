@@ -30,11 +30,11 @@ void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* view,
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
 
-    if( !m_hidden ) {
-
     if( !marbleWidgetInitalised && ( m_widget!=0)  ) {
         initaliseMarbleWidget( (QWidget* ) painter->device() );
     }
+
+    if( !m_hidden ) {
 
     if ( marbleWidgetInitalised && ( m_widget!= 0 ) ) {
 
@@ -54,7 +54,7 @@ void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* view,
         //draw the border
         painter->setBrush( QBrush( Qt::lightGray, Qt::SolidPattern ));
         painter->drawRoundedRect( QRect( position + borderOffset, widgetSize + borderSize ),
-                                  50, 50 , Qt::RelativeSize );
+                                  30, 30  );
 
         painter->restore();
         }
