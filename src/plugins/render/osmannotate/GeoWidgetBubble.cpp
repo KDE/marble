@@ -112,7 +112,7 @@ void GeoWidgetBubble::setHidden( bool hide )
     }
 
     if ( marbleWidgetInitalised ) {
-        m_widget->parentWidget()->repaint();
+        m_widget->parentWidget()->update();
     }
 }
 
