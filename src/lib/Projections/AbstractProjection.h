@@ -39,6 +39,7 @@ static const int latLonAltBoxSamplingRate = 4;
 class GeoDataLineString;
 class GeoDataLinearRing;
 class ViewportParams;
+class AbstractProjectionPrivate;
 
 
 /**
@@ -71,11 +72,20 @@ class AbstractProjection
 
     virtual ~AbstractProjection();
 
-    virtual qreal  maxLat()  const        { return m_maxLat; }
-    virtual qreal  minLat()  const        { return m_minLat; }
+    virtual qreal  maxValidLat() const;
 
-    virtual bool   repeatX() const        { return m_repeatX; }
-    virtual void   setRepeatX( bool val ) { m_repeatX = val;  }
+    qreal  maxLat()  const;
+    void setMaxLat( qreal maxLat );
+
+    virtual qreal  minValidLat() const;
+
+    qreal  minLat()  const;
+    void setMinLat( qreal minLat );
+
+    virtual bool repeatableX() const;
+
+    bool   repeatX() const;
+    void   setRepeatX( bool repeatX );
 
     virtual bool   traversablePoles()  const        { return false; }
     virtual bool   traversableDateLine()  const     { return false; }
@@ -207,56 +217,32 @@ class AbstractProjection
                                     int &x, int &y, bool &globeHidesPoint );
 
  protected:
-    //AbstractProjectionPrivate  * const d;  Not exported so no need.
-
-    qreal  m_maxLat;               // The max latitude.  Not always 90 degrees.
-    qreal  m_minLat;               // The min latitude.  Not always the same as maxLat.
-    bool   m_repeatX;              // Map repeated in X direction.
-
     bool lineStringToPolygon( const GeoDataLineString &lineString,
                                     const ViewportParams *viewport,
                                     QVector<QPolygonF*> &polygons );
 
-    GeoDataCoordinates findHorizon( const GeoDataCoordinates & previousCoords,
-                                    const GeoDataCoordinates & currentCoords,
-                                    const ViewportParams *viewport,
-                                    TessellationFlags f = 0,
-                                    int recursionCounter = 0 );
-
-    bool globeHidesPoint( const GeoDataCoordinates &coordinates,
-                          const ViewportParams *viewport );
-
-    void manageHorizonCrossing( bool globeHidesPoint,
-                                const GeoDataCoordinates& horizonCoords,
-                                bool& horizonPair,
-                                GeoDataCoordinates& horizonDisappearCoords,
-                                bool& horizonOrphan,
-                                GeoDataCoordinates& horizonOrphanCoords );
-
-    void horizonToPolygon( const ViewportParams *viewport,
+    virtual void horizonToPolygon( const ViewportParams *viewport,
                            const GeoDataCoordinates & disappearCoords,
                            const GeoDataCoordinates & reappearCoords,
                            QPolygonF* );
 
     // This method tessellates a line segment in a way that the line segment
-    // follows great circles. The count parameter specifies the 
-    // number of nodes generated for the polygon. If the 
+    // follows great circles. The count parameter specifies the
+    // number of nodes generated for the polygon. If the
     // clampToGround flag is added the polygon contains count + 2
     // nodes as the clamped down start and end node get added.
 
     void tessellateLineSegment(     const GeoDataCoordinates &aCoords,
-                                    qreal ax, qreal ay,                                    
+                                    qreal ax, qreal ay,
                                     const GeoDataCoordinates &bCoords,
                                     qreal bx, qreal by,
                                     QPolygonF * polygon,
                                     const ViewportParams *viewport,
                                     TessellationFlags f = 0 );
 
-
-    QPolygonF processTessellation(  const GeoDataCoordinates &previousCoords,
-                                    const GeoDataCoordinates &currentCoords, 
-                                    int count, const ViewportParams *viewport,
-                                    TessellationFlags f = 0 ); 
+ private:
+    Q_DISABLE_COPY( AbstractProjection )
+    AbstractProjectionPrivate * d;
 };
 
 }

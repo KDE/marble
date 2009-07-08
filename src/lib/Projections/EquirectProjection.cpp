@@ -21,15 +21,28 @@ using namespace Marble;
 
 
 EquirectProjection::EquirectProjection()
-    : AbstractProjection()
+    : AbstractProjection(),
+      d( 0 )
 {
-    m_maxLat  = +90.0 * DEG2RAD;
-    m_minLat  = -90.0 * DEG2RAD;
-    m_repeatX = true;
 }
 
 EquirectProjection::~EquirectProjection()
 {
+}
+
+bool EquirectProjection::repeatableX() const
+{
+    return true;
+}
+
+qreal EquirectProjection::maxValidLat() const
+{
+    return +90.0 * DEG2RAD;
+}
+
+qreal EquirectProjection::minValidLat() const
+{
+    return -90.0 * DEG2RAD;
 }
 
 bool EquirectProjection::screenCoordinates( qreal lon, qreal lat,
@@ -126,7 +139,7 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     // Make sure that the requested point is within the visible y range:
     if ( 0 <= y + size.height() / 2.0 && y < height + size.height() / 2.0 ) {
         // First we deal with the case where the repetition doesn't happen
-        if ( !m_repeatX ) {
+        if ( !repeatX() ) {
             *x = itX;
             if ( 0 < itX + size.width() / 2.0  && itX < width + size.width() / 2.0 ) {
                 return true;
@@ -229,7 +242,7 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
     // The remaining algorithm should be pretty generic for all kinds of 
     // flat projections:
 
-    if ( m_repeatX ) {
+    if ( repeatX() ) {
         int xRepeatDistance = 4 * radius;
         if ( width >= xRepeatDistance ) {
             latLonAltBox.setWest( -M_PI );
@@ -260,8 +273,8 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
     // We need a point on the screen at maxLat that definetely gets displayed:
     qreal averageLongitude = latLonAltBox.east();
 
-    GeoDataCoordinates maxLatPoint( averageLongitude, m_maxLat, 0.0, GeoDataCoordinates::Radian );
-    GeoDataCoordinates minLatPoint( averageLongitude, m_minLat, 0.0, GeoDataCoordinates::Radian );
+    GeoDataCoordinates maxLatPoint( averageLongitude, maxLat(), 0.0, GeoDataCoordinates::Radian );
+    GeoDataCoordinates minLatPoint( averageLongitude, minLat(), 0.0, GeoDataCoordinates::Radian );
 
     qreal dummyX, dummyY; // not needed
     bool dummyVal;

@@ -30,7 +30,8 @@ enum TessellationFlag {
     Tessellate = 0x1, 
     RespectLatitudeCircle = 0x2,
     FollowGround = 0x4,
-    RotationIndicatesFill = 0x8
+    RotationIndicatesFill = 0x8,
+    SkipLatLonNormalization = 0x10
 };
 
 Q_DECLARE_FLAGS(TessellationFlags, TessellationFlag)

@@ -45,6 +45,10 @@ class SphericalProjection : public AbstractProjection
 
     virtual ~SphericalProjection();
 
+    virtual bool repeatableX() const;
+    virtual qreal  maxValidLat() const;
+    virtual qreal  minValidLat() const;
+
     virtual bool traversablePoles()  const { return true; }
     virtual bool traversableDateLine()  const { return true; }
 
@@ -108,14 +112,9 @@ class SphericalProjection : public AbstractProjection
 
     virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
 
-    GeoDataCoordinates  createHorizonCoordinates( const GeoDataCoordinates &previousCoords, 
-                                                  const GeoDataCoordinates &currentCoords, 
-                                                  const ViewportParams *viewport,
-                                                  TessellationFlags f = 0 );
-
  private:
     Q_DISABLE_COPY( SphericalProjection )
-    SphericalProjectionPrivate  * const d;
+    SphericalProjectionPrivate  * d;
 };
 
 }

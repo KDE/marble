@@ -56,8 +56,6 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
 
     virtual ~GeoDataLatLonAltBox();
 
-    virtual bool isFolder() const { return false; }
-
     GeoDataLatLonAltBox& operator=( const GeoDataLatLonAltBox& other );
 
     /**

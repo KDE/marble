@@ -27,6 +27,8 @@
 namespace Marble
 {
 
+class MercatorProjectionPrivate;
+
 /**
  * @short A class to implement the Mercator projection.
  */
@@ -42,6 +44,10 @@ class MercatorProjection : public AbstractProjection
     MercatorProjection();
 
     virtual ~MercatorProjection();
+
+    virtual bool repeatableX() const;
+    virtual qreal  maxValidLat() const;
+    virtual qreal  minValidLat() const;
 
     virtual bool traversablePoles() const { return false; }
     virtual bool traversableDateLine() const { return false; }
@@ -95,7 +101,8 @@ class MercatorProjection : public AbstractProjection
     virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
 
  private:
-    //MercatorProjectionPrivate  * const d;
+    Q_DISABLE_COPY( MercatorProjection )
+    MercatorProjectionPrivate  * d;
 };
 
 }

@@ -221,6 +221,12 @@ qreal GeoDataLatLonBox::width( GeoDataCoordinates::Unit unit ) const
                                      ? 2 * M_PI - d->m_west + d->m_east
                                      : d->m_east - d->m_west ) );
 
+    // This also covers the case where this bounding box covers the whole
+    // longitude range ( -180 <= lon <= + 180 ).
+    if ( width > 2 * M_PI ) {
+        width = 2 * M_PI;
+    }
+
     if ( unit == GeoDataCoordinates::Degree ) {
         return width * RAD2DEG;
     }
@@ -241,7 +247,8 @@ qreal GeoDataLatLonBox::height( GeoDataCoordinates::Unit unit ) const
 
 bool GeoDataLatLonBox::crossesDateLine() const
 {
-    if ( d->m_east < d->m_west ) {
+    if ( d->m_east < d->m_west ||
+         ( d->m_east == M_PI && d->m_west == -M_PI ) ) {
         return true;
     }
 
@@ -277,7 +284,7 @@ bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point ) const
     // We need to take care of the normal case ...
     if ( ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) ||
     // ... and the case where the bounding box crosses the date line:
-       ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) )
+         ( ( lon > d->m_west || lon < d->m_east ) && ( d->m_west > d->m_east ) ) )
         return false;
     
     if ( lat < d->m_south || lat > d->m_north )
@@ -295,7 +302,7 @@ bool GeoDataLatLonBox::contains( const GeoDataPoint &point ) const
     // We need to take care of the normal case ...
     if ( ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) ||
     // ... and the case where the bounding box crosses the date line:
-       ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) )
+         ( ( lon > d->m_west || lon < d->m_east ) && ( d->m_west > d->m_east ) ) )
         return false;
     
     if ( lat < d->m_south || lat > d->m_north )
@@ -348,7 +355,14 @@ bool GeoDataLatLonBox::contains( const GeoDataLatLonBox &other ) const
                   || ( d->m_east >= other.east() && other.west() >= -M_PI ) ) {
                     return true;
                 }
+
+                // if this bounding box covers the whole longitude range  ( -180 <= lon <= + 180 )
+                // then of course the "inner" bounding box is "inside"
+                if ( d->m_west == -M_PI && d->m_east == +M_PI ) {
+                    return true;
+                }
             }
+
         }
     }
 
@@ -399,7 +413,9 @@ bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other ) const
             else {
                 // "This" bounding box crosses the date line, the other one does not.
                 // So the date line splits "this" bounding box in two parts.
-
+                // 
+                // This also covers the case where this bounding box covers the whole
+                // longitude range ( -180 <= lon <= + 180 ).
                 if ( other.west() <= d->m_east || other.east() >= d->m_west ) {
                         return true;
                 }                

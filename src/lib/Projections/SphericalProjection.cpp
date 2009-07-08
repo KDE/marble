@@ -36,15 +36,27 @@ SphericalProjection::SphericalProjection()
     : AbstractProjection(), 
       d( 0 )
 {
-    m_maxLat  = 90.0 * DEG2RAD;
-    m_minLat  = -90.0 * DEG2RAD;
-    m_repeatX = false;
 }
 
 SphericalProjection::~SphericalProjection()
 {
    //For the future
    //delete d;
+}
+
+bool SphericalProjection::repeatableX() const
+{
+    return false;
+}
+
+qreal SphericalProjection::maxValidLat() const
+{
+    return +90.0 * DEG2RAD;
+}
+
+qreal SphericalProjection::minValidLat() const
+{
+    return -90.0 * DEG2RAD;
 }
 
 bool SphericalProjection::screenCoordinates( qreal lon, qreal lat,
@@ -247,8 +259,8 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
     // We need a point on the screen at maxLat that definetely gets displayed:
     qreal averageLongitude = ( latLonAltBox.west() + latLonAltBox.east() ) / 2.0;
 
-    GeoDataCoordinates maxLatPoint( averageLongitude, m_maxLat, 0.0, GeoDataCoordinates::Radian );
-    GeoDataCoordinates minLatPoint( averageLongitude, m_minLat, 0.0, GeoDataCoordinates::Radian );
+    GeoDataCoordinates maxLatPoint( averageLongitude, maxLat(), 0.0, GeoDataCoordinates::Radian );
+    GeoDataCoordinates minLatPoint( averageLongitude, minLat(), 0.0, GeoDataCoordinates::Radian );
 
     qreal dummyX, dummyY; // not needed
     bool dummyVal;
@@ -312,52 +324,5 @@ QPainterPath SphericalProjection::mapShape( const ViewportParams *viewport ) con
 
     return fullRect;
 }    
-
-
-GeoDataCoordinates SphericalProjection::createHorizonCoordinates( 
-                                            const GeoDataCoordinates &previousCoords, 
-                                            const GeoDataCoordinates &currentCoords, 
-                                            const ViewportParams *viewport,
-                                            TessellationFlags f )
-{
-    bool globeHidesPoint;
-
-    qreal x, y;
-
-    screenCoordinates( previousCoords, viewport, x, y, globeHidesPoint );
-
-    GeoDataCoordinates invisibleCoords = globeHidesPoint ? previousCoords : currentCoords;
-    GeoDataCoordinates visibleCoords   = globeHidesPoint ? currentCoords  : previousCoords;
-
-    const int accuracy = 10;
-
-    for ( int i = 0; i < accuracy; ++i ) {
-        
-        // Calculate the altitude of the horizon point
-        bool clampToGround = false;
-        f.testFlag( FollowGround );
-        qreal altDiff = visibleCoords.altitude() - invisibleCoords.altitude();
-        qreal altitude = clampToGround ? 0 : altDiff * 0.5 + previousCoords.altitude();
-
-        // Interpolate the horizon point
-        Quaternion  itpos;
-        itpos.nlerp( visibleCoords.quaternion(), invisibleCoords.quaternion(), 0.5 );    
-
-        qreal  lon = 0.0;
-        qreal  lat = 0.0;
-        itpos.getSpherical( lon, lat );
-
-        screenCoordinates( GeoDataCoordinates ( lon, lat, altitude ), viewport, x, y, globeHidesPoint );
-
-        if ( globeHidesPoint ) {
-            invisibleCoords.set( lon, lat, altitude );
-        }
-        else {
-            visibleCoords.set( lon, lat, altitude );
-        }
-    }
-
-    return visibleCoords;
-}
 
 }

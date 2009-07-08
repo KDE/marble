@@ -12,6 +12,8 @@
 // Local
 #include "MercatorProjection.h"
 
+#include <QtCore/QDebug>
+
 // Marble
 #include "ViewportParams.h"
 
@@ -21,16 +23,30 @@
 using namespace Marble;
 
 MercatorProjection::MercatorProjection()
-    : AbstractProjection()
+    : AbstractProjection(),
+      d( 0 )
 {
-    // This is the max value where atanh( sin( lat ) ) is defined.
-    m_maxLat  = 85.05113 * DEG2RAD;
-    m_minLat  = -85.05113 * DEG2RAD;
-    m_repeatX = true;
 }
 
 MercatorProjection::~MercatorProjection()
 {
+}
+
+bool MercatorProjection::repeatableX() const
+{
+    return true;
+}
+
+qreal MercatorProjection::maxValidLat() const
+{
+    // This is the max value where atanh( sin( lat ) ) is defined.
+    return +85.05113 * DEG2RAD;
+}
+
+qreal MercatorProjection::minValidLat() const
+{
+    // This is the min value where atanh( sin( lat ) ) is defined.
+    return -85.05113 * DEG2RAD;
 }
 
 bool MercatorProjection::screenCoordinates( qreal lon, qreal lat,
@@ -168,7 +184,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
     // Make sure that the requested point is within the visible y range:
     if ( 0 <= y + size.height() / 2.0 && y < height + size.height() / 2.0 ) {
         // First we deal with the case where the repetition doesn't happen
-        if ( !m_repeatX ) {
+        if ( !repeatX() ) {
             *x = itX;
             if ( 0 < itX + size.width() / 2.0  && itX < width + size.width() / 2.0 ) {
                 return retval && true;
@@ -275,7 +291,7 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
     // analytically the lon-/lat- range.
     // qreal pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
 
-    if ( m_repeatX ) {
+    if ( repeatX() ) {
         int xRepeatDistance = 4 * viewport->radius();
         if ( viewport->width() >= xRepeatDistance ) {
             latLonAltBox.setWest( -M_PI );
