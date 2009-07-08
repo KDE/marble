@@ -211,7 +211,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void        setRadius(int radius);
 
     /**
-     * @brief Return the current zoom level.
+     * @brief Return the current zoom amount.
      */
     int         zoom() const;
 

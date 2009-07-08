@@ -12,6 +12,8 @@
 // Local
 #include "AbstractProjection.h"
 
+#include "AbstractProjection_p.h"
+
 #include <QtCore/QDebug>
 #include <QtGui/QRegion>
 
@@ -26,12 +28,79 @@ using namespace Marble;
 static const int maxTessellationNodes = 200;
 
 AbstractProjection::AbstractProjection()
+    : d( new AbstractProjectionPrivate( this ) )
 {
-    m_repeatX = false;
 }
 
 AbstractProjection::~AbstractProjection()
 {
+    delete d;
+}
+
+AbstractProjectionPrivate::AbstractProjectionPrivate( AbstractProjection * _q )
+    : q( _q )
+{
+    m_repeatX = q->repeatableX();
+    m_maxLat = q->maxValidLat();
+    m_minLat = q->minValidLat();
+}
+
+qreal AbstractProjection::maxValidLat() const
+{
+    return +90.0 * DEG2RAD;
+}
+
+qreal AbstractProjection::maxLat() const
+{
+    return d->m_maxLat;
+}
+
+void AbstractProjection::setMaxLat( qreal maxLat )
+{
+    if ( maxLat < maxValidLat() ) {
+        qDebug() << Q_FUNC_INFO << "Trying to set maxLat to a value that is out of the valid range.";
+        return;
+    }
+    d->m_maxLat = maxLat;
+}
+
+qreal AbstractProjection::minValidLat() const
+{
+    return -90.0 * DEG2RAD;
+}
+
+qreal AbstractProjection::minLat() const
+{
+    return d->m_minLat;
+}
+
+void AbstractProjection::setMinLat( qreal minLat )
+{
+    if ( minLat < minValidLat() ) {
+        qDebug() << Q_FUNC_INFO << "Trying to set minLat to a value that is out of the valid range.";
+        return;
+    }
+    d->m_minLat = minLat;
+}
+
+bool AbstractProjection::repeatableX() const
+{
+    return true;
+}
+
+bool AbstractProjection::repeatX() const
+{
+    return d->m_repeatX;
+}
+
+void AbstractProjection::setRepeatX( bool repeatX )
+{
+    if ( repeatX && !repeatableX() ) {
+        qDebug() << Q_FUNC_INFO << "Trying to repeat a projection that is not repeatable";
+        return;
+    }
+
+    d->m_repeatX = repeatX;
 }
 
 bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint, 
@@ -88,8 +157,8 @@ bool AbstractProjection::screenCoordinates( const GeoDataLineString &lineString,
 }
 
 bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineString,
-                                                  const ViewportParams *viewport,
-                                                  QVector<QPolygonF *> &polygons )
+                                              const ViewportParams *viewport,
+                                              QVector<QPolygonF *> &polygons )
 {
     const TessellationFlags f = lineString.tessellationFlags();
 
@@ -175,7 +244,7 @@ bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineStrin
      
             if ( isAtHorizon ) {
                 // Handle the "horizon case"
-                horizonCoords = findHorizon( previousCoords, currentCoords, viewport, f );
+                horizonCoords = d->findHorizon( previousCoords, currentCoords, viewport, f );
 
                 if ( lineString.isClosed() ) {
                     if ( horizonPair ) {
@@ -183,9 +252,9 @@ bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineStrin
                         horizonPair = false;
                     }
                     else {
-                        manageHorizonCrossing( globeHidesPoint, horizonCoords,
-                                               horizonPair, horizonDisappearCoords,
-                                               horizonOrphan, horizonOrphanCoords );
+                        d->manageHorizonCrossing( globeHidesPoint, horizonCoords,
+                                                  horizonPair, horizonDisappearCoords,
+                                                  horizonOrphan, horizonOrphanCoords );
                     }
                 }
 
@@ -285,7 +354,7 @@ bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineStrin
     return polygons.isEmpty();
 }
 
-void AbstractProjection::manageHorizonCrossing( bool globeHidesPoint,
+void AbstractProjectionPrivate::manageHorizonCrossing( bool globeHidesPoint,
                                                 const GeoDataCoordinates& horizonCoords,
                                                 bool& horizonPair,
                                                 GeoDataCoordinates& horizonDisappearCoords,
@@ -398,18 +467,18 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
     //        GeoDataLinearRing::latLonAltBox().
     qreal averageLongitude = ( latLonAltBox.west() + latLonAltBox.east() ) / 2.0;
 
-    GeoDataCoordinates maxLatPoint( averageLongitude, m_maxLat, 0.0, GeoDataCoordinates::Radian );
-    GeoDataCoordinates minLatPoint( averageLongitude, m_minLat, 0.0, GeoDataCoordinates::Radian );
+    GeoDataCoordinates maxLatPoint( averageLongitude, maxLat(), 0.0, GeoDataCoordinates::Radian );
+    GeoDataCoordinates minLatPoint( averageLongitude, minLat(), 0.0, GeoDataCoordinates::Radian );
 
     qreal dummyX, dummyY; // not needed
 
-    if ( latLonAltBox.north() > m_maxLat ||
+    if ( latLonAltBox.north() > maxLat() ||
          screenCoordinates( maxLatPoint, viewport, dummyX, dummyY ) ) {
-        latLonAltBox.setNorth( m_maxLat );
+        latLonAltBox.setNorth( maxLat() );
     }
-    if ( latLonAltBox.north() < m_minLat ||
+    if ( latLonAltBox.north() < minLat() ||
          screenCoordinates( minLatPoint, viewport, dummyX, dummyY ) ) {
-        latLonAltBox.setSouth( m_minLat );
+        latLonAltBox.setSouth( minLat() );
     }
 
     latLonAltBox.setMinAltitude(      -100000000.0 );
@@ -423,8 +492,8 @@ bool AbstractProjection::exceedsLatitudeRange( const GeoDataLineString &lineStri
 {
     GeoDataLatLonAltBox latLonAltBox = lineString.latLonAltBox();
 
-    return (    latLonAltBox.north() >= m_maxLat
-             || latLonAltBox.south() <= m_minLat );
+    return (    latLonAltBox.north() >= maxLat()
+             || latLonAltBox.south() <= minLat() );
 }
 
 
@@ -434,7 +503,7 @@ bool AbstractProjection::exceedsLatitudeRange( const GeoDataCoordinates &coords 
     // Evaluate the most likely case first:
     // The case where we are within the range and where our latitude is normalized
     // to the range of 90 deg S ... 90 deg N
-    if ( lat < m_maxLat && lat > m_minLat ) {
+    if ( lat < maxLat() && lat > minLat() ) {
         return false;
     }
     else {
@@ -444,7 +513,7 @@ bool AbstractProjection::exceedsLatitudeRange( const GeoDataCoordinates &coords 
             return true;
         }
 
-        if ( normalizedLat < m_maxLat && normalizedLat > m_minLat ) {
+        if ( normalizedLat < maxLat() && normalizedLat > minLat() ) {
             // FIXME: Should we just normalize latitude and longitude and be done?
             //        While this might work well for persistent data it would create some 
             //        possible overhead for temporary data, so this needs careful thinking.
@@ -465,12 +534,12 @@ QRegion AbstractProjection::mapRegion( const ViewportParams *viewport ) const
 
 
 void AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &aCoords,
-                                                    qreal ax, qreal ay,
-                                                    const GeoDataCoordinates &bCoords,
-                                                    qreal bx, qreal by,
-                                                    QPolygonF * polygon,
-                                                    const ViewportParams *viewport,
-                                                    TessellationFlags f )
+                                                qreal ax, qreal ay,
+                                                const GeoDataCoordinates &bCoords,
+                                                qreal bx, qreal by,
+                                                QPolygonF * polygon,
+                                                const ViewportParams *viewport,
+                                                TessellationFlags f )
 {
     // We take the manhattan length as a distance approximation
     // that can be too big by a factor of sqrt(2)
@@ -499,7 +568,7 @@ void AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &aCoord
         // on screen is too big
         if ( distance > tessellationPrecision ) {
 
-            *polygon << processTessellation( aCoords, bCoords,
+            *polygon << d->processTessellation( aCoords, bCoords,
                                         tessellatedNodes, viewport,
                                         f );
         }
@@ -509,7 +578,7 @@ void AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &aCoord
 }
 
 
-QPolygonF AbstractProjection::processTessellation(  const GeoDataCoordinates &previousCoords,
+QPolygonF AbstractProjectionPrivate::processTessellation(  const GeoDataCoordinates &previousCoords,
                                                     const GeoDataCoordinates &currentCoords,
                                                     int tessellatedNodes,
                                                     const ViewportParams *viewport,
@@ -565,7 +634,7 @@ QPolygonF AbstractProjection::processTessellation(  const GeoDataCoordinates &pr
     // Take the clampToGround property into account
     // For the clampToGround case add the "previous" coordinate before adding any other node. 
     if ( clampToGround && previousAltitude != 0.0 ) {
-          screenCoordinates( previousCoords, viewport, x, y, globeHidesPoint );
+          q->screenCoordinates( previousCoords, viewport, x, y, globeHidesPoint );
           if ( !globeHidesPoint ) {
             path << QPointF( x, y );
           }
@@ -575,7 +644,7 @@ QPolygonF AbstractProjection::processTessellation(  const GeoDataCoordinates &pr
     if ( clampToGround ) {
         previousModifiedCoords.setAltitude( 0.0 );
     }
-    screenCoordinates( previousModifiedCoords, viewport, x, y, globeHidesPoint );
+    q->screenCoordinates( previousModifiedCoords, viewport, x, y, globeHidesPoint );
     if ( !globeHidesPoint ) {
         path << QPointF( x, y );
     }
@@ -609,7 +678,7 @@ QPolygonF AbstractProjection::processTessellation(  const GeoDataCoordinates &pr
             itpos. getSpherical( lon, lat );
         }
 
-        screenCoordinates( GeoDataCoordinates( lon, lat, altitude ), viewport, x, y, globeHidesPoint );
+        q->screenCoordinates( GeoDataCoordinates( lon, lat, altitude ), viewport, x, y, globeHidesPoint );
 
         // No "else" here, as this would not add the current point that is required.
         if ( !globeHidesPoint ) {
@@ -622,14 +691,14 @@ QPolygonF AbstractProjection::processTessellation(  const GeoDataCoordinates &pr
     if ( clampToGround ) {
         currentModifiedCoords.setAltitude( 0.0 );
     }
-    screenCoordinates( currentModifiedCoords, viewport, x, y, globeHidesPoint );
+    q->screenCoordinates( currentModifiedCoords, viewport, x, y, globeHidesPoint );
     if ( !globeHidesPoint ) {
         path << QPointF( x, y );
     }
 
     // For the clampToGround case add the "current" coordinate after adding all other nodes. 
     if ( clampToGround && currentCoords.altitude() != 0.0 ) {
-          screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
+          q->screenCoordinates( currentCoords, viewport, x, y, globeHidesPoint );
           if ( !globeHidesPoint ) {
             path << QPointF( x, y );
           }
@@ -639,7 +708,7 @@ QPolygonF AbstractProjection::processTessellation(  const GeoDataCoordinates &pr
 }
 
 
-GeoDataCoordinates AbstractProjection::findHorizon( const GeoDataCoordinates & previousCoords,
+GeoDataCoordinates AbstractProjectionPrivate::findHorizon( const GeoDataCoordinates & previousCoords,
                                                     const GeoDataCoordinates & currentCoords,
                                                     const ViewportParams *viewport,
                                                     TessellationFlags f,
@@ -708,7 +777,7 @@ GeoDataCoordinates AbstractProjection::findHorizon( const GeoDataCoordinates & p
 }
 
 
-bool AbstractProjection::globeHidesPoint( const GeoDataCoordinates &coordinates,
+bool AbstractProjectionPrivate::globeHidesPoint( const GeoDataCoordinates &coordinates,
                                           const ViewportParams *viewport )
 {
     qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;

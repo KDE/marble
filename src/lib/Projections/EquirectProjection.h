@@ -28,6 +28,8 @@
 namespace Marble
 {
 
+class EquirectProjectionPrivate;
+
 /**
  * @short A class to implement the Equirectangular projection used by the "Flat Map" view.
  */
@@ -43,6 +45,10 @@ class EquirectProjection : public AbstractProjection
     EquirectProjection();
 
     virtual ~EquirectProjection();
+
+    virtual bool repeatableX() const;
+    virtual qreal  maxValidLat() const;
+    virtual qreal  minValidLat() const;
 
     virtual bool traversablePoles()  const { return false; }
     virtual bool traversableDateLine()  const { return false; }
@@ -96,7 +102,8 @@ class EquirectProjection : public AbstractProjection
     virtual QPainterPath mapShape( const ViewportParams *viewport ) const;
 
  private:
-    //EquirectProjectionPrivate  * const d;
+    Q_DISABLE_COPY( EquirectProjection )
+    EquirectProjectionPrivate  * d;
 };
 
 }
