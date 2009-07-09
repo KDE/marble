@@ -130,6 +130,10 @@ void GeoParser::parseDocument()
         readNext();
         GeoTagHandler::QualifiedName qName( name().toString(),
                                             namespaceUri().toString() );
+
+        if( tokenType() == QXmlStreamReader::Invalid ) 
+            raiseWarning( QString( "%1: %2" ).arg( error() ).arg( errorString() ) );
+
         if ( isEndElement() ) {
             if ( !isValidDocumentElement() )
                 m_nodeStack.pop();
