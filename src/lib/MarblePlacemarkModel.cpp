@@ -213,13 +213,14 @@ void MarblePlacemarkModel::addPlacemarks( PlacemarkContainer &placemarks,
         endRemoveRows();
     }
 
-    beginInsertRows( QModelIndex(), 0, placemarks.count() - 1 );
+    const int length = d->m_placemarkContainer.count();
+    beginInsertRows( QModelIndex(), length, length + placemarks.count() - 1 );
     createFilterProperties( placemarks );
     d->m_placemarkContainer << placemarks;
 
     endInsertRows();
 
-    emit dataChanged( index( 0, 0 ), index( placemarks.count() - 1, 0 ) );
+    emit dataChanged( index( length, 0 ), index( length + placemarks.count() - 1, 0 ) );
 }
 
 void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
