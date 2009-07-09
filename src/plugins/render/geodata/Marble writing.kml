@@ -49,6 +49,7 @@
 		</LineStyle>
 	</Style>
 	<Style id="sn_ylw-pushpin">
+        <!-- Letter B -->
 		<IconStyle>
 			<scale>1.1</scale>
 			<Icon>
@@ -111,6 +112,7 @@
 		</LineStyle>
 	</Style>
 	<Style id="sh_ylw-pushpin2">
+        <!-- Letter A background -->
 		<IconStyle>
 			<scale>1.3</scale>
 			<Icon>
@@ -205,6 +207,7 @@
 		</LineStyle>
 	</Style>
 	<StyleMap id="msn_ylw-pushpin4">
+        <!-- Letter A -->
 		<Pair>
 			<key>normal</key>
 			<styleUrl>#sn_ylw-pushpin6</styleUrl>
@@ -287,6 +290,7 @@
 		</LineStyle>
 	</Style>
 	<Style id="sn_ylw-pushpin6">
+        <!-- Letter A foreground -->
 		<IconStyle>
 			<scale>1.1</scale>
 			<Icon>
