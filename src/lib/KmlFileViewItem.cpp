@@ -19,7 +19,7 @@
 
 using namespace Marble;
 
-KmlFileViewItem::KmlFileViewItem( PlacemarkManager& manager, GeoDataDocument& document ) :
+KmlFileViewItem::KmlFileViewItem( PlacemarkManager& manager, const GeoDataDocument& document ) :
     m_placemarkManager( manager ),
     m_document( document )
 {
@@ -35,10 +35,15 @@ void KmlFileViewItem::saveFile()
     //TODO
 }
 
+GeoDataDocument* KmlFileViewItem::document()
+{
+    return &m_document;
+}
+
 void KmlFileViewItem::closeFile( int start, bool finalize )
 {
     qDebug() << "closing file" << m_document.name() << m_document.fileName();
-    m_placemarkManager.model()->removePlacemarks( m_document.fileName(), start, size(), finalize );
+//    m_placemarkManager.model()->removePlacemarks( m_document.fileName(), start, size(), finalize );
 }
 
 QVariant KmlFileViewItem::data( int role ) const
