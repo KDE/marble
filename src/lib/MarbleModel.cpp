@@ -424,9 +424,10 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             for (; itds != endds; ++itds) {
                 GeoSceneAbstractDataset* dataset = *itds;
                 if( dataset->fileFormat() == "KML" ) {
-                    loadedContainers.removeOne( reinterpret_cast<GeoSceneXmlDataSource*>(dataset)
-                                                ->filename() );
-                    loadList << reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename();          
+                    QString containername = reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename();
+                    if( containername.endsWith(".kml") ) containername.remove(".kml");
+                    loadedContainers.removeOne( containername );
+                    loadList << containername;
                 }
             }
         }
