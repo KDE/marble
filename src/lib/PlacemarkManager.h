@@ -116,8 +116,7 @@ class PlacemarkManager : public QObject
     FileViewModel* fileViewModel() const;
 
  Q_SIGNALS:
-    void geoDataDocumentAdded( GeoDataDocument* );
-    void geoDataDocumentLoaded( GeoDataDocument& );
+    void geoDataDocumentAdded( const GeoDataDocument& );
     void finalize();
 
  private Q_SLOTS:

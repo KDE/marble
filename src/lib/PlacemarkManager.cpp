@@ -134,8 +134,6 @@ void PlacemarkManager::addPlacemarkFile( const QString& filepath, bool finalized
         connect (   loader, SIGNAL( placemarkLoaderFailed( PlacemarkLoader* ) ), 
                     this, SLOT( cleanupLoader( PlacemarkLoader* ) ) );
         connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
-                    this, SIGNAL( geoDataDocumentAdded( GeoDataDocument* ) ) );
-        connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
                     this, SLOT( addGeoDataDocument( GeoDataDocument* ) ) );
         d->m_loaderList.append( loader );
         d->m_pathList.append( toRegularName( filepath ) );
@@ -145,11 +143,25 @@ void PlacemarkManager::addPlacemarkFile( const QString& filepath, bool finalized
 
 void PlacemarkManager::addGeoDataDocument( GeoDataDocument* document )
 {
-    AbstractFileViewItem* item = new KmlFileViewItem( *this,
-                                                      *document );
+    AbstractFileViewItem* item = new KmlFileViewItem( *this, *document );
 
     d->m_fileViewModel->append( item );
-//    d->m_geomodel->setGeoDataRoot( document );
+
+    // now get the document that will be preserved throughout the life time
+    GeoDataDocument* doc = dynamic_cast<KmlFileViewItem*>(item)->document();
+    // remove the hashes in front of the styles.
+    QVector<GeoDataFeature>::Iterator end = doc->end();
+    QVector<GeoDataFeature>::Iterator itr = doc->begin();
+    for ( ; itr != end; ++itr ) {
+        // use *itr (or itr.value()) here
+        QString styleUrl = itr->styleUrl().remove('#');
+        itr->setStyle( &doc->style( styleUrl ) );
+    }
+
+    // do not set this file if it only contains points
+    if( doc->isVisible() )
+        d->m_geomodel->setGeoDataRoot( doc );
+    emit geoDataDocumentAdded( *doc );
 }
 
 void PlacemarkManager::addPlacemarkData( const QString& data, const QString& key )
@@ -219,10 +231,10 @@ void PlacemarkManager::loadKmlFromData( const QString& data, const QString& key,
                 this, SLOT( loadPlacemarkContainer( PlacemarkLoader*, PlacemarkContainer * ) ) );
     connect (   loader, SIGNAL( placemarkLoaderFailed( PlacemarkLoader* ) ), 
                 this, SLOT( cleanupLoader( PlacemarkLoader* ) ) );
-    connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
-                this, SIGNAL( geoDataDocumentAdded( GeoDataDocument* ) ) );
-    connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
-                this, SLOT( addGeoDataDocument( GeoDataDocument* ) ) );
+    connect (   loader, SIGNAL( newGeoDataDocumentAdded( const GeoDataDocument& ) ), 
+                this, SIGNAL( geoDataDocumentAdded( const GeoDataDocument& ) ) );
+    connect (   loader, SIGNAL( newGeoDataDocumentAdded( const GeoDataDocument& ) ), 
+                this, SLOT( addGeoDataDocument( const GeoDataDocument& ) ) );
     d->m_loaderList.append( loader );
     loader->start();
 }
