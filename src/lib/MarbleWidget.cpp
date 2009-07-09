@@ -131,7 +131,7 @@ MarbleWidget::MarbleWidget(QWidget *parent)
 //    setAttribute( Qt::WA_PaintOnScreen, true );
     d->construct();
 
-    if( parent->parent()->inherits( "QMainWindow" ) ) {
+    if( parent && parent->parent() && parent->parent()->inherits( "QMainWindow" ) ) {
         ((QMainWindow*) parent->parent())->addToolBar(d->m_mainToolbar);
     }
 
