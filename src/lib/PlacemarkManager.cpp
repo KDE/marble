@@ -231,10 +231,8 @@ void PlacemarkManager::loadKmlFromData( const QString& data, const QString& key,
                 this, SLOT( loadPlacemarkContainer( PlacemarkLoader*, PlacemarkContainer * ) ) );
     connect (   loader, SIGNAL( placemarkLoaderFailed( PlacemarkLoader* ) ), 
                 this, SLOT( cleanupLoader( PlacemarkLoader* ) ) );
-    connect (   loader, SIGNAL( newGeoDataDocumentAdded( const GeoDataDocument& ) ), 
-                this, SIGNAL( geoDataDocumentAdded( const GeoDataDocument& ) ) );
-    connect (   loader, SIGNAL( newGeoDataDocumentAdded( const GeoDataDocument& ) ), 
-                this, SLOT( addGeoDataDocument( const GeoDataDocument& ) ) );
+    connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
+                this, SLOT( addGeoDataDocument( GeoDataDocument* ) ) );
     d->m_loaderList.append( loader );
     loader->start();
 }
