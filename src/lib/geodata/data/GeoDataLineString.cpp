@@ -317,9 +317,15 @@ QVector<GeoDataLineString*> GeoDataLineString::toDateLineCorrected() const
 
 GeoDataLineString GeoDataLineString::toPoleCorrected() const
 {
-    GeoDataLineString poleCorrected;
-    p()->toPoleCorrected( *this, poleCorrected );
-    return poleCorrected;
+    if( isClosed() ) {
+        GeoDataLinearRing poleCorrected;
+        p()->toPoleCorrected( *this, poleCorrected );
+        return poleCorrected;
+    } else {
+        GeoDataLineString poleCorrected;
+        p()->toPoleCorrected( *this, poleCorrected );
+        return poleCorrected;
+    }
 }
 
 void GeoDataLineStringPrivate::toPoleCorrected( const GeoDataLineString& q, GeoDataLineString& poleCorrected )
