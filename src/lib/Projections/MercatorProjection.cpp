@@ -26,6 +26,9 @@ MercatorProjection::MercatorProjection()
     : AbstractProjection(),
       d( 0 )
 {
+    setRepeatX( repeatableX() );
+    setMinLat( minValidLat() );
+    setMaxLat( maxValidLat() );
 }
 
 MercatorProjection::~MercatorProjection()

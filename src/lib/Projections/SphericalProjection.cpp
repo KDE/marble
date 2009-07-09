@@ -36,6 +36,9 @@ SphericalProjection::SphericalProjection()
     : AbstractProjection(), 
       d( 0 )
 {
+    setRepeatX( repeatableX() );
+    setMinLat( minValidLat() );
+    setMaxLat( maxValidLat() );
 }
 
 SphericalProjection::~SphericalProjection()
