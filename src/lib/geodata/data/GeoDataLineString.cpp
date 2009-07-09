@@ -232,7 +232,7 @@ void GeoDataLineString::clear()
 
 bool GeoDataLineString::isClosed() const
 {
-    return false;
+    return p()->isClosed();
 }
 
 bool GeoDataLineString::tessellate() const

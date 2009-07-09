@@ -33,11 +33,6 @@ GeoDataLinearRing::~GeoDataLinearRing()
 {
 }
 
-bool GeoDataLinearRing::isClosed() const
-{
-    return true;
-}
-
 qreal GeoDataLinearRing::length( qreal planetRadius ) const
 {
     qreal  length = GeoDataLineString::length( planetRadius );

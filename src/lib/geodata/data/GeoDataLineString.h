@@ -55,7 +55,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
 
     virtual ~GeoDataLineString();
 
-    virtual bool isClosed() const;
+    bool isClosed() const;
 
     bool tessellate() const;
     void setTessellate( bool tessellate );
