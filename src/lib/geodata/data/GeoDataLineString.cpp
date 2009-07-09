@@ -404,8 +404,8 @@ void GeoDataLineStringPrivate::toDateLineCorrected(
 
     GeoDataLineString * unfinishedLineString = 0;
 
-    GeoDataLineString * dateLineCorrected = q.isClosed() ? new GeoDataLinearRing( f )
-                                                         : new GeoDataLineString( f );
+    GeoDataLineString * dateLineCorrected = isClosed ? new GeoDataLinearRing( f )
+                                                     : new GeoDataLineString( f );
 
     qreal currentLon = 0.0;
     qreal previousLon = 0.0;
