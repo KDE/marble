@@ -35,10 +35,10 @@ class GeoSceneHeadPrivate
     GeoSceneHeadPrivate()
         : m_zoom(new GeoSceneZoom),
           m_icon(new GeoSceneIcon),
-          m_name( "" ),
-          m_target( "" ),
-          m_theme( "" ),
-          m_description( "" ),
+          m_name(),
+          m_target(),
+          m_theme(),
+          m_description(),
           m_visible( true )
     {
     }
