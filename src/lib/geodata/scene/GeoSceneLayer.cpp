@@ -30,7 +30,7 @@ namespace Marble
 
 GeoSceneAbstractDataset::GeoSceneAbstractDataset( const QString& name )
     : m_name( name ),
-      m_fileFormat( "" ),
+      m_fileFormat(),
       m_expire( std::numeric_limits<int>::max() )
 {
 }
@@ -63,11 +63,10 @@ void GeoSceneAbstractDataset::setExpire( int expire )
 GeoSceneLayer::GeoSceneLayer( const QString& name )
     : m_filter( 0 ),
       m_name( name ),
-      m_backend( "" ),
-      m_role( "" ),
+      m_backend(),
+      m_role(),
       m_tiled( true )
 {
-    /* NOOP */
 }
 
 GeoSceneLayer::~GeoSceneLayer()
