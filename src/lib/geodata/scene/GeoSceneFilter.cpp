@@ -25,9 +25,9 @@ namespace Marble
 {
 
 GeoSceneFilter::GeoSceneFilter( const QString& name )
+    : m_name( name ),
+      m_type( "none" )
 {
-    m_name = name;
-    m_type = "none";
 }
 
 GeoSceneFilter::~GeoSceneFilter()
