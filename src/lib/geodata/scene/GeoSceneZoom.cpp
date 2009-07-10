@@ -33,10 +33,6 @@ GeoSceneZoom::GeoSceneZoom()
 {
 }
 
-GeoSceneZoom::~GeoSceneZoom()
-{
-}
-
 int GeoSceneZoom::minimum() const
 {
     return m_minimum;

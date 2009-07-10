@@ -35,7 +35,6 @@ class GEODATA_EXPORT GeoSceneZoom : public GeoNode
 {
  public:
     GeoSceneZoom();
-    ~GeoSceneZoom();
 
     int minimum() const;
     void setMinimum( int name );
