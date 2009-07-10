@@ -93,9 +93,9 @@ class GEODATA_EXPORT GeoSceneLayer : public GeoNode {
     QString role() const;
     void setRole( const QString& type );
 
-	GeoSceneFilter * filter();
-	void addFilter( GeoSceneFilter * filter );
-	void removeFilter( GeoSceneFilter * filter );
+    GeoSceneFilter * filter();
+    void addFilter( GeoSceneFilter * filter );
+    void removeFilter( GeoSceneFilter * filter );
 
  protected:
     /// The vector holding all the data in the layer.
