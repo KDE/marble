@@ -26,10 +26,10 @@ namespace Marble
 
 GeoSceneVector::GeoSceneVector( const QString& name )
     : GeoSceneAbstractDataset( name ),
-      m_sourceFile( "" ),
-      m_feature( "" ),
-      m_pen( QPen() ),
-      m_brush( QBrush() )
+      m_sourceFile(),
+      m_feature(),
+      m_pen(),
+      m_brush()
 {
 }
 
