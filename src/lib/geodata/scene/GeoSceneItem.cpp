@@ -29,8 +29,8 @@ namespace Marble
 GeoSceneItem::GeoSceneItem( const QString& name )
     : m_icon(new GeoSceneIcon),
       m_name( name ),
-      m_text( "" ),
-      m_connectTo( "" ),
+      m_text(),
+      m_connectTo(),
       m_checkable( false ),
       m_spacing( 12 )
 {
