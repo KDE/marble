@@ -152,8 +152,8 @@ void GeoRendererView::setBrushStyle( QString mapped )
     if( m_painter->brush().color() != m_root->style( mapped ).polyStyle().color() ) {
 /*        qDebug() << "BrushColor:" 
                  << m_root->style( mapped ).polyStyle().color() 
-                 <<  m_painter->brush().color();*/
-        m_painter->setBrush( m_currentBrush.color() );
+                 << m_painter->brush().color();*/
+        m_painter->setBrush( m_root->style( mapped ).polyStyle().color() );
     }
 }
 
