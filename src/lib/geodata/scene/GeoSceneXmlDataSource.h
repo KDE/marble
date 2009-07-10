@@ -40,7 +40,6 @@ class GEODATA_EXPORT GeoSceneXmlDataSource : public GeoSceneAbstractDataset
 {
  public:
     explicit GeoSceneXmlDataSource( const QString& name );
-    ~GeoSceneXmlDataSource();
 
     QString filename() const;
     void setFilename( const QString& fileName );

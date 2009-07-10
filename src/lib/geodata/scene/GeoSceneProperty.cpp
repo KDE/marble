@@ -34,10 +34,6 @@ GeoSceneProperty::GeoSceneProperty( const QString& name )
 {
 }
 
-GeoSceneProperty::~GeoSceneProperty()
-{
-}
-
 QString GeoSceneProperty::name() const
 {
     return m_name;

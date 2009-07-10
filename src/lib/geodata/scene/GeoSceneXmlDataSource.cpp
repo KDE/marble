@@ -31,10 +31,6 @@ GeoSceneXmlDataSource::GeoSceneXmlDataSource( const QString& name )
 {
 }
 
-GeoSceneXmlDataSource::~GeoSceneXmlDataSource()
-{
-}
-
 QString GeoSceneXmlDataSource::filename() const
 {
     return m_filename;

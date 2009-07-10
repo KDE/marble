@@ -42,7 +42,6 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     enum Projection { Equirectangular, Mercator };
 
     explicit GeoSceneTexture( const QString& name );
-    ~GeoSceneTexture();
 
     QString sourceDir() const;
     void setSourceDir( const QString& sourceDir );

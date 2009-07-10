@@ -41,10 +41,6 @@ GeoSceneTexture::GeoSceneTexture( const QString& name )
 {
 }
 
-GeoSceneTexture::~GeoSceneTexture()
-{
-}
-
 QString GeoSceneTexture::sourceDir() const
 {
     return m_sourceDir;

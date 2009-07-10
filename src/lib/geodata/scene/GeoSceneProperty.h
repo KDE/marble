@@ -43,7 +43,6 @@ class GEODATA_EXPORT GeoSceneProperty : public QObject,
 
  public:
     explicit GeoSceneProperty( const QString& name );
-    ~GeoSceneProperty();
 
     QString name() const;
     bool available() const;

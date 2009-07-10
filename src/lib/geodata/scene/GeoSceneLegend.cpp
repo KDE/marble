@@ -29,10 +29,6 @@ namespace Marble
 class GeoSceneLegendPrivate
 {
   public:
-    GeoSceneLegendPrivate()
-    {
-    }
-
     ~GeoSceneLegendPrivate()
     {
         qDeleteAll( m_sections );

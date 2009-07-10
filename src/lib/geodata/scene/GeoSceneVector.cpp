@@ -33,10 +33,6 @@ GeoSceneVector::GeoSceneVector( const QString& name )
 {
 }
 
-GeoSceneVector::~GeoSceneVector()
-{
-}
-
 QString GeoSceneVector::sourceFile() const
 {
     return m_sourceFile;

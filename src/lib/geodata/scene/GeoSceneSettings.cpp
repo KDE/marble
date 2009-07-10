@@ -32,10 +32,6 @@ namespace Marble
 class GeoSceneSettingsPrivate
 {
   public:
-    GeoSceneSettingsPrivate()
-    {
-    }
-
     ~GeoSceneSettingsPrivate()
     {
         qDeleteAll(m_properties);
