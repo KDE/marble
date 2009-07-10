@@ -120,11 +120,6 @@ GeoSceneProperty* GeoSceneGroup::property( const QString& name )
             property = *it;
     }
 
-    if ( property ) {
-        Q_ASSERT(property->name() == name);
-        return property;
-    }
-
     return property;
 }
 
