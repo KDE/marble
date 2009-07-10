@@ -25,10 +25,10 @@ namespace Marble
 {
 
 GeoScenePalette::GeoScenePalette( const QString& type,
-                                const QString& file )
+                                  const QString& file )
+    : m_type( type ),
+      m_file( file )
 {
-    m_type = type;
-    m_file = file;
 }
 
 GeoScenePalette::~GeoScenePalette()
