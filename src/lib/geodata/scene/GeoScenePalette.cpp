@@ -31,10 +31,6 @@ GeoScenePalette::GeoScenePalette( const QString& type,
 {
 }
 
-GeoScenePalette::~GeoScenePalette()
-{
-}
-
 QString GeoScenePalette::type() const
 {
     return m_type;

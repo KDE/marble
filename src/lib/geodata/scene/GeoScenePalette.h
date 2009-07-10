@@ -36,8 +36,7 @@ namespace Marble
 class GeoScenePalette : public GeoNode
 {
  public:
-    explicit GeoScenePalette( const QString& type, const QString& file );
-    ~GeoScenePalette();
+    GeoScenePalette( const QString& type, const QString& file );
 
     QString type() const;
     void    setType( const QString& type );
