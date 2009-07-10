@@ -41,7 +41,8 @@ GeoSceneGroup::~GeoSceneGroup()
 bool GeoSceneGroup::propertyAvailable( const QString& name, bool& available )
 {
     QVector<GeoSceneProperty*>::const_iterator it = m_properties.constBegin();
-    for (it = m_properties.constBegin(); it != m_properties.constEnd(); ++it) {
+    QVector<GeoSceneProperty*>::const_iterator end = m_properties.constEnd();
+    for (; it != end; ++it) {
         if ( (*it)->name() == name ) {
             available = (*it)->available();
             return true;
@@ -56,7 +57,8 @@ bool GeoSceneGroup::propertyAvailable( const QString& name, bool& available )
 bool GeoSceneGroup::setPropertyValue( const QString& name, bool value )
 {
     QVector<GeoSceneProperty*>::const_iterator it = m_properties.constBegin();
-    for (it = m_properties.constBegin(); it != m_properties.constEnd(); ++it) {
+    QVector<GeoSceneProperty*>::const_iterator end = m_properties.constEnd();
+    for (; it != end; ++it) {
         if ( (*it)->name() == name ) {
             (*it)->setValue( value );
             return true;
@@ -69,7 +71,8 @@ bool GeoSceneGroup::setPropertyValue( const QString& name, bool value )
 bool GeoSceneGroup::propertyValue( const QString& name, bool& value )
 {
     QVector<GeoSceneProperty*>::const_iterator it = m_properties.constBegin();
-    for (it = m_properties.constBegin(); it != m_properties.constEnd(); ++it) {
+    QVector<GeoSceneProperty*>::const_iterator end = m_properties.constEnd();
+    for (; it != end; ++it) {
         if ( (*it)->name() == name ) {
             value = (*it)->value();
             return true;
@@ -94,7 +97,7 @@ void GeoSceneGroup::addProperty( GeoSceneProperty* property )
         else {
             ++it;
         }
-     }
+    }
 
     if ( property ) {
         m_properties.append( property );
@@ -111,7 +114,8 @@ GeoSceneProperty* GeoSceneGroup::property( const QString& name )
     GeoSceneProperty* property = 0;
 
     QVector<GeoSceneProperty*>::const_iterator it = m_properties.constBegin();
-    for (it = m_properties.constBegin(); it != m_properties.constEnd(); ++it) {
+    QVector<GeoSceneProperty*>::const_iterator end = m_properties.constEnd();
+    for (; it != end; ++it) {
         if ( (*it)->name() == name )
             property = *it;
     }
