@@ -102,11 +102,7 @@ GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name )
     for (; it != m_datasets.constEnd(); ++it) {
         if ( (*it)->name() == name )
             dataset = *it;
-    }
-
-    if ( dataset ) {
-        Q_ASSERT(dataset->name() == name);
-        return dataset;
+            break;
     }
 
 //    dataset = new GeoSceneAbstractDataset( name );
@@ -175,7 +171,9 @@ void GeoSceneLayer::addFilter( GeoSceneFilter * filter )
 
 void GeoSceneLayer::removeFilter( GeoSceneFilter * filter )
 {
-    if( filter == m_filter ) { m_filter = 0; }
+    if ( filter == m_filter ) {
+        m_filter = 0;
+    }
 }
 
 }
