@@ -118,6 +118,7 @@ GeoSceneProperty* GeoSceneGroup::property( const QString& name )
     for (; it != end; ++it) {
         if ( (*it)->name() == name )
             property = *it;
+            break;
     }
 
     return property;
