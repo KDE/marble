@@ -177,6 +177,7 @@ void PlacemarkManager::removePlacemarkKey( const QString& key )
     {
         if( toRegularName( nkey ) == toRegularName( d->m_fileViewModel->data(d->m_fileViewModel->index(i, 0)).toString() ) ) {
             d->m_fileViewModel->remove(d->m_fileViewModel->index(i, 0));
+            break;
         }
     };
 }
