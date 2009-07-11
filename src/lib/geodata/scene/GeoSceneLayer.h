@@ -28,10 +28,11 @@
 #include <geodata_export.h>
 
 #include "GeoDocument.h"
-#include "GeoSceneFilter.h"
 
 namespace Marble
 {
+
+class GeoSceneFilter;
 
 /**
  * @short Contents used inside a layer.

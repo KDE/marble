@@ -22,6 +22,7 @@
 #include "GeoSceneLayer.h"
 
 #include <limits>
+#include "GeoSceneFilter.h"
 
 namespace Marble
 {

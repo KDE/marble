@@ -21,6 +21,8 @@
 
 #include "GeoSceneFilter.h"
 
+#include "GeoScenePalette.h"
+
 namespace Marble
 {
 

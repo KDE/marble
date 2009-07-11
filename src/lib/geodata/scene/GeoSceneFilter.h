@@ -26,10 +26,11 @@
 #include <QtCore/QList>
 
 #include "GeoDocument.h"
-#include "GeoScenePalette.h"
 
 namespace Marble
 {
+
+class GeoScenePalette;
 
 /**
  * @short Filter of a GeoScene document.
