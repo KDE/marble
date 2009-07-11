@@ -71,10 +71,10 @@ GeoSceneItem* GeoSceneSection::item( const QString& name )
     for (; it != end; ++it) {
         if ( (*it)->name() == name )
             item = *it;
-            break;
     }
 
     if ( item ) {
+        Q_ASSERT(item->name() == name);
         return item;
     }
 
