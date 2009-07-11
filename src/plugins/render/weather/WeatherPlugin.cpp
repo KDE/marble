@@ -18,6 +18,7 @@
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 #include "global.h"
+#include "weatherGlobal.h"
 
 // Qt
 #include <QtCore/QDebug>
@@ -119,6 +120,29 @@ void WeatherPlugin::setSettings( QHash<QString,QVariant> settings ) {
 }
 
 void WeatherPlugin::readSettings() {
+    // Information
+    if ( m_settings.value( "showCondition", showConditionDefault ).toBool() )
+        ui_configWidget.m_weatherConditionBox->setCheckState( Qt::Checked );
+    else
+        ui_configWidget.m_weatherConditionBox->setCheckState( Qt::Unchecked );
+
+    if ( m_settings.value( "showTemperature", showTemperatureDefault ).toBool() )
+        ui_configWidget.m_temperatureBox->setCheckState( Qt::Checked );
+    else
+        ui_configWidget.m_temperatureBox->setCheckState( Qt::Unchecked );
+
+    if ( m_settings.value( "showWindDirection", showWindDirectionDefault ).toBool() )
+        ui_configWidget.m_windDirectionBox->setCheckState( Qt::Checked );
+    else
+        ui_configWidget.m_windDirectionBox->setCheckState( Qt::Unchecked );
+
+    if ( m_settings.value( "showWindSpeed", showWindSpeedDefault ).toBool() )
+        ui_configWidget.m_windSpeedBox->setCheckState( Qt::Checked );
+    else
+        ui_configWidget.m_windSpeedBox->setCheckState( Qt::Unchecked );
+
+    // Units
+    // The default units depend on the global measure system.
     int temperatureUnit;
     MarbleLocale *locale = MarbleGlobal::getInstance()->locale();
     if ( m_settings.contains( "temperatureUnit" ) ) {
@@ -169,6 +193,17 @@ void WeatherPlugin::readSettings() {
 }
 
 void WeatherPlugin::writeSettings() {
+    // Information
+    m_settings.insert( "showCondition",
+                       ui_configWidget.m_weatherConditionBox->checkState() == Qt::Checked );
+    m_settings.insert( "showTemperature",
+                       ui_configWidget.m_temperatureBox->checkState() == Qt::Checked );
+    m_settings.insert( "showWindDirection",
+                       ui_configWidget.m_windDirectionBox->checkState() == Qt::Checked );
+    m_settings.insert( "showWindSpeed",
+                       ui_configWidget.m_windSpeedBox->checkState() == Qt::Checked );
+
+    // Units
     m_settings.insert( "temperatureUnit", ui_configWidget.m_temperatureComboBox->currentIndex() );
     m_settings.insert( "windSpeedUnit", ui_configWidget.m_windSpeedComboBox->currentIndex() );
     m_settings.insert( "pressureUnit", ui_configWidget.m_pressureComboBox->currentIndex() );

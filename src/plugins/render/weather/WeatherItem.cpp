@@ -15,6 +15,7 @@
 #include "GeoPainter.h"
 #include "MarbleDirs.h"
 #include "WeatherData.h"
+#include "weatherGlobal.h"
 
 // Qt
 #include <QtCore/QDebug>
@@ -160,22 +161,22 @@ class WeatherItemPrivate {
     
     bool isConditionShown() {
         return m_currentWeather.hasValidCondition()
-               && m_settings.value( "showCondition", true ).toBool();
+               && m_settings.value( "showCondition", showConditionDefault ).toBool();
     }
     
     bool isTemperatureShown() {
         return m_currentWeather.hasValidTemperature()
-               && m_settings.value( "showTemperature", true ).toBool();
+               && m_settings.value( "showTemperature", showTemperatureDefault ).toBool();
     }
     
     bool isWindDirectionShown() {
         return m_currentWeather.hasValidWindDirection()
-               && m_settings.value( "showWindDirection", false ).toBool();
+               && m_settings.value( "showWindDirection", showWindDirectionDefault ).toBool();
     }
     
     bool isWindSpeedShown() {
         return m_currentWeather.hasValidWindSpeed()
-               && m_settings.value( "showWindSpeed", false ).toBool();
+               && m_settings.value( "showWindSpeed", showWindSpeedDefault ).toBool();
     }
 
     QString temperatureString() {
@@ -244,8 +245,10 @@ QString WeatherItem::itemType() const {
  
 bool WeatherItem::initialized() {
     WeatherData current = currentWeather();
-    return current.hasValidCondition()
-           || current.hasValidTemperature();
+    return d->isConditionShown()
+           || d->isTemperatureShown()
+           || d->isWindDirectionShown()
+           || d->isWindSpeedShown();
 }
 
 void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
@@ -284,7 +287,7 @@ void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
         temperatureRect.setHeight( topRow.height() );
         // If we have a two line layout or condition and temperature is alone in line 1,
         // align temperature right.
-        if ( d->isWindSpeedShown()  || d->isWindDirectionShown() ) {
+        if ( d->isWindSpeedShown() || !d->isWindDirectionShown() ) {
             temperatureRect.moveTopRight( topRow.topRight() );
             alignment = Qt::AlignVCenter | Qt::AlignRight;
             topRow.setRight( topRow.right() - d->m_temperatureSize.width() );

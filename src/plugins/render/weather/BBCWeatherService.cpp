@@ -33,17 +33,6 @@ using namespace Marble;
 BBCWeatherService::BBCWeatherService( QObject *parent ) 
     : AbstractWeatherService( parent )
 {
-    QTime time;
-    QFile file( MarbleDirs::path( "weather/bbc-stations.xml" ) );
-    qDebug() << "Filepath: " << file.fileName();
-    
-    if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
-        return;
-    }
-    
-    StationListParser parser( this );
-    m_items = parser.read( &file );
-    qDebug() << "Parsed station list in " << time.elapsed() << " ms and found " << m_items.size() << "items";
 }
 
 BBCWeatherService::~BBCWeatherService() {
@@ -54,6 +43,10 @@ void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                             qint32 number )
 {
     Q_UNUSED( facade );
+
+    if ( m_items.isEmpty() ) {
+        setupList();
+    }
     
     qint32 fetched = 0;
     QList<BBCWeatherItem *>::iterator it = m_items.begin();
@@ -66,6 +59,19 @@ void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
         }
         ++it;
     }
+}
+
+void BBCWeatherService::setupList() {
+    QTime time;
+    QFile file( MarbleDirs::path( "weather/bbc-stations.xml" ) );
+
+    if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
+        return;
+    }
+
+    StationListParser parser( this );
+    m_items = parser.read( &file );
+    qDebug() << "Parsed station list in " << time.elapsed() << " ms and found " << m_items.size() << "items";
 }
 
 #include "BBCWeatherService.moc"

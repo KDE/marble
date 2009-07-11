@@ -353,6 +353,7 @@ void BBCParser::setupHashes() {
     dayConditions["heavy rain"] = WeatherData::Rain;
     dayConditions["heavy showers"] = WeatherData::Rain;
     dayConditions["heavy shower"] = WeatherData::Rain;
+    dayConditions["heavy rain shower"] = WeatherData::Rain;
     dayConditions["thundery shower"] = WeatherData::Thunderstorm;
     dayConditions["thunderstorm"] = WeatherData::Thunderstorm;
     dayConditions["thunder storm"] = WeatherData::Thunderstorm;
@@ -397,6 +398,7 @@ void BBCParser::setupHashes() {
     nightConditions["heavy rain"] = WeatherData::Rain;
     nightConditions["heavy showers"] = WeatherData::Rain;
     nightConditions["heavy shower"] = WeatherData::Rain;
+    nightConditions["heavy rain shower"] = WeatherData::Rain;
     nightConditions["thundery shower"] = WeatherData::Thunderstorm;
     nightConditions["thunderstorm"] = WeatherData::Thunderstorm;
     nightConditions["thunder storm"] = WeatherData::Thunderstorm;

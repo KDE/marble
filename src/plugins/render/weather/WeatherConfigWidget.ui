@@ -6,14 +6,51 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>364</width>
+    <height>414</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Configure Weather Plugin</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="QGroupBox" name="m_informationGroupBox">
+     <property name="title">
+      <string>Information</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QCheckBox" name="m_weatherConditionBox">
+        <property name="text">
+         <string>Weather condition</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_temperatureBox">
+        <property name="text">
+         <string>Temperature</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_windDirectionBox">
+        <property name="text">
+         <string>Wind direction</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="m_windSpeedBox">
+        <property name="text">
+         <string>Wind speed</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item>
     <widget class="QGroupBox" name="m_unitsGroupBox">
      <property name="title">
@@ -136,7 +173,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>118</height>
+       <height>80</height>
       </size>
      </property>
     </spacer>

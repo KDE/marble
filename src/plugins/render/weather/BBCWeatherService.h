@@ -30,6 +30,8 @@ class BBCWeatherService : public AbstractWeatherService {
                              qint32 number = 10 );
  
  private:
+    void setupList();
+
     QList<BBCWeatherItem*> m_items;
 };
 
