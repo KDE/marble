@@ -72,7 +72,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
 
     virtual QString type();
 
- protected:
+ private:
     QString m_sourceDir;
     QString m_installMap;
     StorageLayoutMode m_storageLayoutMode;

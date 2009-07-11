@@ -54,6 +54,7 @@ class GEODATA_EXPORT GeoSceneAbstractDataset : public GeoNode
  protected:
     explicit GeoSceneAbstractDataset( const QString& name );
 
+ private:
     QString m_name;
     QString m_fileFormat;
     int     m_expire;
@@ -97,7 +98,9 @@ class GEODATA_EXPORT GeoSceneLayer : public GeoNode {
     void addFilter( GeoSceneFilter * filter );
     void removeFilter( GeoSceneFilter * filter );
 
- protected:
+ private:
+    Q_DISABLE_COPY( GeoSceneLayer )
+
     /// The vector holding all the data in the layer.
     /// (We want to preserve the order and don't care 
     /// much about speed here), so we don't use a hash
@@ -110,9 +113,6 @@ class GEODATA_EXPORT GeoSceneLayer : public GeoNode {
     QString          m_role;
 
     bool             m_tiled;
-
- private:
-    Q_DISABLE_COPY( GeoSceneLayer )
 };
 
 }

@@ -55,14 +55,13 @@ class GEODATA_EXPORT GeoSceneProperty : public QObject,
  Q_SIGNALS:
     void valueChanged( QString, bool );
 
- protected:
+ private:
+    // FIXME: d-pointerfy
+
     QString  m_name;
     bool     m_available;
     bool     m_defaultValue;
     bool     m_value;
-
- private:
-    // FIXME: d-pointerfy
 };
 
 }

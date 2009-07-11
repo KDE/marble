@@ -43,13 +43,12 @@ class GEODATA_EXPORT GeoSceneZoom : public GeoNode
     bool discrete() const;
     void setDiscrete( bool theme );
 
- protected:
+ private:
+    // FIXME: d-pointerfy
+
     int  m_minimum;
     int  m_maximum;
     bool m_discrete;
-
- private:
-    // FIXME: d-pointerfy
 };
 
 }

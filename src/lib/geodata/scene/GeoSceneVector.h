@@ -54,7 +54,7 @@ class GeoSceneVector : public GeoSceneAbstractDataset
 
     virtual QString type();
 
- protected:
+ private:
     QString m_sourceFile;
     QString m_feature;
 

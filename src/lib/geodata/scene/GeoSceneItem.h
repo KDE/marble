@@ -57,7 +57,9 @@ class GeoSceneItem : public GeoNode
 
     GeoSceneIcon* icon() const;
 
- protected:
+ private:
+    Q_DISABLE_COPY( GeoSceneItem )
+
     GeoSceneIcon* m_icon;
 
     QString m_name;
@@ -66,9 +68,6 @@ class GeoSceneItem : public GeoNode
 
     bool    m_checkable;
     int     m_spacing;
-
- private:
-    Q_DISABLE_COPY( GeoSceneItem )
 };
 
 }

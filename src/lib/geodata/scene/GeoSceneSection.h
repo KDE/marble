@@ -64,7 +64,9 @@ class GeoSceneSection : public GeoNode
     int  spacing() const;
     void setSpacing( int spacing );
 
- protected:
+ private:
+    Q_DISABLE_COPY( GeoSceneSection )
+
     /// The vector holding all the items in the legend section.
     /// (We want to preserve the order and don't care 
     /// much about speed here), so we don't use a hash
@@ -76,9 +78,6 @@ class GeoSceneSection : public GeoNode
 
     bool    m_checkable;
     int     m_spacing;
-
- private:
-    Q_DISABLE_COPY( GeoSceneSection )
 };
 
 }

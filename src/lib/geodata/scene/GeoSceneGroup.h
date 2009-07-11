@@ -86,14 +86,13 @@ class GeoSceneGroup : public QObject,
  Q_SIGNALS:
     void valueChanged( QString, bool );
 
- protected:
+ private:
+    Q_DISABLE_COPY( GeoSceneGroup )
+
     /// The vector holding all the properties in this settings group.
     QVector<GeoSceneProperty*> m_properties;
 
     QString m_name;
-
- private:
-    Q_DISABLE_COPY( GeoSceneGroup )
 };
 
 }

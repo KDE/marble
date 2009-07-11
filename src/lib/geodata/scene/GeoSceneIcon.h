@@ -47,11 +47,11 @@ class GEODATA_EXPORT GeoSceneIcon : public GeoNode
     QColor color() const;
     void setColor(const QColor&);
 
- protected:
+ private:
+    // FIXME: d-pointerfy
+
     QString m_pixmap;
     QColor  m_color;
-
-    // FIXME: d-pointerfy
 };
 
 }
