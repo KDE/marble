@@ -32,7 +32,7 @@ class RenderPluginPrivate;
 class MarbleDataFacade;
 
 /**
- * @short The abstract class that creates an "empty" float item.
+ * @short The abstract class that creates a renderable Item.
  *
  */
 
@@ -44,6 +44,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
  public:
     /**
      * This enum contains the data roles for the QStandardItem that is returned by item().
+     * TODO: This should get moved into PluginInterface.h
      */
     enum ItemDataRole {
         NameId = Qt::UserRole + 2,       // a QString

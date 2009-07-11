@@ -49,8 +49,11 @@ class MARBLE_EXPORT LayerManager : public QObject
     explicit LayerManager( MarbleDataFacade*, QObject *parent = 0);
     ~LayerManager();
 
-    void renderLayers( GeoPainter *painter, ViewParams *viewParams );
+    void renderLayers( GeoPainter *painter, ViewParams *viewParams, const QStringList& renderPositions );
 
+    void renderLayer( GeoPainter *painter, ViewParams *viewParams, const QString& renderPosition  );
+
+    
     /**
      * @brief Returns a list of all RenderPlugins on the layer, this includes float items
      * @return the list of RenderPlugins

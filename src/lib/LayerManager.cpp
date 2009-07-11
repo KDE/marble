@@ -112,7 +112,16 @@ QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos 
     return itemList;
 }
 
-void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
+void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams,
+                                 const QStringList& renderPositions )
+{    
+    foreach( const QString& renderPosition, renderPositions ) {
+        renderLayer( painter, viewParams, renderPosition );
+    }
+}
+
+void LayerManager::renderLayer( GeoPainter *painter, ViewParams *viewParams,
+                                const QString& renderPosition )
 {
     if ( !viewParams || !viewParams->viewport() ) {
         qDebug() << "LayerManager: No valid viewParams set!";
@@ -122,37 +131,9 @@ void LayerManager::renderLayers( GeoPainter *painter, ViewParams *viewParams )
     ViewportParams* viewport = viewParams->viewport();
 
     foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
-        if ( renderPlugin && renderPlugin->renderPosition().contains("SURFACE")  ){
+        if ( renderPlugin && renderPlugin->renderPosition().contains( renderPosition )  ){
             if ( renderPlugin->enabled() && renderPlugin->visible() ) {
-                renderPlugin->render( painter, viewport, "SURFACE" );
-            }
-        }
-    }
-
-    foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
-        if ( renderPlugin && renderPlugin->renderPosition().contains("HOVERS_ABOVE_SURFACE")  ){
-            if ( renderPlugin->enabled() && renderPlugin->visible() ) {
-                renderPlugin->render( painter, viewport, "HOVERS_ABOVE_SURFACE" );
-            }
-        }
-    }
-
-    foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
-        if ( renderPlugin ){
-            if ( renderPlugin->enabled() && renderPlugin->visible() ) {
-                renderPlugin->render( painter, viewport, "ALWAYS_ON_TOP" );
-            }
-        }
-    }
-
-    // Looping a second time through is a quick and dirty way to get 
-    // the float items displayed on top:
-    // FIXME: use d->m_floatItems here?
-    foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
-        if ( renderPlugin && renderPlugin->renderPosition().contains("FLOAT_ITEM") ) {
-            AbstractFloatItem *floatItem = qobject_cast<AbstractFloatItem *>(renderPlugin);
-            if ( floatItem && floatItem->enabled() && floatItem->visible() ) {
-                floatItem->render( painter, viewport, "FLOAT_ITEM" );
+                renderPlugin->render( painter, viewport, renderPosition );
             }
         }
     }

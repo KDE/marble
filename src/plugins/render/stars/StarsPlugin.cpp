@@ -29,12 +29,12 @@ QStringList StarsPlugin::backendTypes() const
 
 QString StarsPlugin::renderPolicy() const
 {
-    return QString( "STARS" );
+    return QString( "SPECIFIED_ALWAYS" );
 }
 
 QStringList StarsPlugin::renderPosition() const
 {
-    return QStringList( "SPECIFIED_ALWAYS" );
+    return QStringList( "STARS" );
 }
 
 QString StarsPlugin::name() const
@@ -107,8 +107,11 @@ bool StarsPlugin::isInitialized () const
 bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                           const QString& renderPos, GeoSceneLayer * layer )
 {
-    Q_UNUSED( renderPos )
     Q_UNUSED( layer )
+
+    if ( renderPos != "STARS" ) {
+        return true;
+    }
 
     QString target = dataFacade()->target();
 
@@ -116,6 +119,8 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     if ( target != "earth" ) {
         return true;
     }
+
+    painter->save();
 
     painter->autoMapQuality();
 
@@ -190,6 +195,8 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             painter->drawEllipse( QRectF( x, y, size, size ) );
         }
     }
+
+    painter->restore();
 
     return true;
 }
