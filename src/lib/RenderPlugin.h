@@ -31,7 +31,7 @@ class RenderPluginPrivate;
 class MarbleDataFacade;
 
 /**
- * @short The abstract class that creates an "empty" float item.
+ * @short The abstract class that creates a renderable Item.
  *
  */
 

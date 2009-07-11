@@ -549,6 +549,10 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     GeoSceneLayer *layer = 
         static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
 
+    QStringList renderPositions;
+    renderPositions << "STARS" << "BEHIND_TARGET";
+    d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
+        
     if ( redrawBackground ) {
         if ( d->m_mapTheme->map()->hasTextureLayers() ) {
 
@@ -592,6 +596,10 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
 
 //    qDebug( "Painted in %ims", t.elapsed() );
 
+    renderPositions.clear();
+    renderPositions << "SURFACE";
+    d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
+
     // Paint the vector layer.
     if ( d->m_mapTheme->map()->hasVectorLayers() ) {
 
@@ -624,7 +632,12 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     d->m_gpsLayer->paintLayer( painter,
                                viewParams->canvasImage()->size(),
                                viewParams );
-    d->m_layerManager->renderLayers( painter, viewParams );
+
+    renderPositions.clear();
+    renderPositions << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
+                    << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM";
+                               
+    d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
 }
 
 
