@@ -43,6 +43,8 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString {
 
     virtual ~GeoDataLinearRing();
 
+    virtual bool isClosed() const;
+
     virtual qreal length( qreal planetRadius ) const;
 
     virtual QVector<GeoDataLineString*> toRangeCorrected() const;

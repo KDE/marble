@@ -39,11 +39,6 @@ class GeoDataLinearRingPrivate : public Marble::GeoDataLineStringPrivate
     {
         return GeoDataLinearRingId;
     }
-
-    virtual bool isClosed() const
-    {
-        return true;
-    }
 };
 
 } // namespace Marble

@@ -44,11 +44,6 @@ class GeoDataLineStringPrivate : public Marble::GeoDataGeometryPrivate
         return GeoDataLineStringId;
     }
 
-    virtual bool isClosed() const
-    {
-        return false;
-    }
-
     void toPoleCorrected( const GeoDataLineString & q, GeoDataLineString & poleCorrected );
 
     void toDateLineCorrected( const GeoDataLineString & q,
