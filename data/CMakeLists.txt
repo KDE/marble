@@ -193,6 +193,7 @@ weather/weather-snow.svgz
 weather/weather-storm-day.svgz
 weather/weather-storm-night.svgz
 weather/weather-storm.svgz
+weather/wind-arrows.svgz
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/weather)
 
 install (FILES

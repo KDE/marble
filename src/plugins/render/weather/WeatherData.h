@@ -139,6 +139,7 @@ class WeatherData {
     qreal windSpeed( WeatherData::SpeedUnit format = WeatherData::mps ) const;
     void setWindSpeed( qreal speed, WeatherData::SpeedUnit format = WeatherData::mps );
     bool hasValidWindSpeed() const;
+    QString windSpeedString( WeatherData::SpeedUnit unit = WeatherData::kph ) const;
     
     qreal temperature( WeatherData::TemperatureUnit format = WeatherData::Kelvin ) const;
     void setTemperature( qreal temp,

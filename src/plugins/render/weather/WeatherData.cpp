@@ -442,6 +442,31 @@ bool WeatherData::hasValidWindSpeed() const {
     return d->isPositiveValue( d->m_windSpeed );
 }
 
+QString WeatherData::windSpeedString( WeatherData::SpeedUnit unit ) const {
+    QLocale locale = QLocale::system();
+    // We round to integer.
+    QString string = locale.toString( floor( windSpeed( unit ) + 0.5 ) );
+    string += " ";
+    switch ( unit ) {
+        case WeatherData::kph:
+            string += QObject::tr("km/h");
+            break;
+        case WeatherData::mph:
+            string += QObject::tr("mph");
+            break;
+        case WeatherData::mps:
+            string += QObject::tr( "m/s" );
+            break;
+        case WeatherData::knots:
+            string += QObject::tr( "knots" );
+            break;
+        case WeatherData::beaufort:
+            string += QObject::tr( "Beaufort" );
+            break;
+    }
+    return string;
+}
+
 qreal WeatherData::temperature( WeatherData::TemperatureUnit format ) const {
     return d->fromKelvin( d->m_temperature, format );
 }

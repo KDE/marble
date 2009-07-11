@@ -156,11 +156,9 @@ void WeatherPlugin::readSettings() {
     }
     else {
         if ( locale->measureSystem() == Marble::Metric ) {
-            qDebug() << "hectopascal";
             pressureUnit = WeatherData::HectoPascal;
         }
         else {
-            qDebug() << "inchHg";
             pressureUnit = WeatherData::inchHg;
         }
         m_settings.insert( "pressureUnit", pressureUnit );
