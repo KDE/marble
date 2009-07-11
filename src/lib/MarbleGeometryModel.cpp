@@ -51,11 +51,12 @@ class MarbleGeometryModel::Private {
         if( !geometry ) return;
 
         GeoDataMultiGeometry* multiGeometry = static_cast<GeoDataMultiGeometry*>( geometry );
-        QVector<GeoDataGeometry>::iterator iterator = multiGeometry->begin();
-        QVector<GeoDataGeometry>::iterator end = multiGeometry->end();
-        for(; iterator != end; ++iterator ) {
-            m_parent.insert( &( *iterator ), geometry );
-            if( iterator->geometryId() == GeoDataMultiGeometryId ) mapGeometry( &( *iterator ) );
+        QVector<GeoDataGeometry>::iterator iterator = multiGeometry->vector().begin();
+        QVector<GeoDataGeometry>::iterator end = multiGeometry->vector().end();
+
+        for(; iterator != end; iterator++ ) {
+            m_parent.insert( iterator, geometry );
+            if( iterator->geometryId() == GeoDataMultiGeometryId ) mapGeometry( iterator );
         }
     };
 
