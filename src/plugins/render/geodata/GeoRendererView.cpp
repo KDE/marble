@@ -206,16 +206,20 @@ bool GeoRendererView::renderGeoDataGeometry( GeoDataGeometry *object, QString st
     if( object->geometryId() == GeoDataPolygonId ) {
         setBrushStyle( mapped );
         setPenStyle( mapped );
-        m_painter->drawPolygon( *static_cast<GeoDataPolygon*>( object ) );
+        // geometries are implicitly shared, this shouldn't hurt
+        GeoDataPolygon polygon( *static_cast<GeoDataPolygon*>( object ) );
+        m_painter->drawPolygon( polygon );
     }
     if( object->geometryId() == GeoDataLinearRingId ) {
         m_painter->setBrush( QColor( 0, 0, 0, 0 ) );
         setPenStyle( mapped );
-        m_painter->drawPolygon( *static_cast<GeoDataLinearRing*>( object ) );
+        GeoDataLinearRing linearRing( *static_cast<GeoDataLinearRing*>( object ) );
+        m_painter->drawPolygon( linearRing );
     }
     if( object->geometryId() == GeoDataLineStringId ) {
         setPenStyle( mapped );
-        m_painter->drawPolyline( *static_cast<GeoDataLineString*>( object ) );
+        GeoDataLineString lineString( *static_cast<GeoDataLineString*>( object ) );
+        m_painter->drawPolyline( lineString );
     }
     /* Note: GeoDataMultiGeometry is handled within the model */
     m_painter->restore();
