@@ -443,6 +443,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         d->m_placemarkmanager->addPlacemarkFile( container, loadList.isEmpty() );
     }
     d->notifyModelChanged();
+    d->m_placemarkLayout->requestStyleReset();
 
 
     // FIXME: Still needs to get fixed for the DGML2 refactoring
