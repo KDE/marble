@@ -43,7 +43,7 @@ GeoDataDocument* KmlFileViewItem::document()
 void KmlFileViewItem::closeFile( int start, bool finalize )
 {
     qDebug() << "closing file" << m_document.name() << m_document.fileName();
-//    m_placemarkManager.model()->removePlacemarks( m_document.fileName(), start, size(), finalize );
+    m_placemarkManager.model()->removePlacemarks( m_document.fileName(), start, size(), finalize );
 }
 
 QVariant KmlFileViewItem::data( int role ) const
