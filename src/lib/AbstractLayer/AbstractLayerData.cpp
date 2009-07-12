@@ -16,6 +16,7 @@
 
 #include "ClipPainter.h"
 #include "ViewParams.h"
+#include "AbstractProjection.h"
 
 using namespace Marble;
 
@@ -128,49 +129,20 @@ bool AbstractLayerData::getPixelPos( const QSize &screenSize,
                                      ViewParams *viewParams,
                                      QPointF *point )
 {
-    int         radius = viewParams->radius();
-    Quaternion  qpos   = m_position->quaternion(); 
-    switch ( viewParams->projection() ) {
-        case Spherical:
-            qpos.rotateAroundAxis( viewParams->planetAxis().inverse() );
+    Q_UNUSED( screenSize );
+    bool hidden;
+    qreal x, y;
 
-            if ( qpos.v[Q_Z] > 0 ){
-                point->setX( ( ( screenSize.width() / 2 )
-                        + ( radius * qpos.v[Q_X] ) ) );
-                point->setY( ( ( screenSize.height() / 2 )
-                        - ( radius * qpos.v[Q_Y] ) ) );
-
-                return true;
-            } else {
-                return false;
-            }
-        break;
-        case Equirectangular:
-            qreal lon;
-            qreal lat;
-            qreal xyFactor = 2 * viewParams->radius() / M_PI;
-
-            qreal centerLon;
-            qreal centerLat;
-
-            // Let (x, y) be the position on the screen of the placemark..
-            qpos.getSpherical( lon, lat );
-            viewParams->centerCoordinates( centerLon, centerLat );
-
-            int x = (int)( screenSize.width()/ 2 - xyFactor * (centerLon - lon));
-            int y = (int)(screenSize.height()/ 2 + xyFactor * (centerLat - lat));
-
-            point->setX( x );
-            point->setY( y );
-
-            if ( x < 0 || x >= screenSize.width() ||
-                 y < screenSize.height() / 2 - 2*viewParams->radius() || 
-                 y >= screenSize.height()/ 2 + 2*viewParams->radius() )
-            {
-                return false;
-            }
+    bool visable = viewParams->currentProjection()->screenCoordinates( *m_position,
+                                                                       viewParams->viewport(),
+                                                                       x, y, hidden );
+    if ( ! hidden  && visable ) {
+        point->setX( x );
+        point->setY( y );
+        return true;
     }
-    return true;
+
+    return false;
 }
 
 void AbstractLayerData::printToStream( QTextStream &out ) const
