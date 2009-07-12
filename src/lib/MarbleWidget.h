@@ -572,10 +572,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void updateSun();
     void centerSun();
-    void disableInput(bool);
-    void enableInput( bool );
-    void enableInput();
-    void disableInput();
+    void setInputEnabled( bool );
 //    void repaintMap();
     
     /**

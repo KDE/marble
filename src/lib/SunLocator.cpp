@@ -272,7 +272,7 @@ void SunLocator::setCentered(bool centered)
         updatePosition();
         emit centerSun();
     } else
-        emit reenableWidgetInput();
+        emit enableWidgetInput( true );
 }
 
 void SunLocator::setPlanet(Planet *planet)

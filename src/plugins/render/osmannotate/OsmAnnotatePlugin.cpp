@@ -112,6 +112,8 @@ void OsmAnnotatePlugin::initialize ()
     widgetInitalised= false;
     tmp_lineString = 0;
     m_document = 0;
+    m_addPlacemark =0;
+    m_drawPolygon = 0;
 }
 
 bool OsmAnnotatePlugin::isInitialized () const
@@ -253,6 +255,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 
         // deal with adding a placemark
         if ( mouseEvent->button() == Qt::LeftButton
+             && m_addPlacemark
              && m_addPlacemark->isChecked() )
         {
             //Add a placemark on the screen
@@ -278,6 +281,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 
         // deal with drawing a polygon
         if ( mouseEvent->button() == Qt::LeftButton
+             && m_drawPolygon
              && m_drawPolygon->isChecked() )
         {
             qreal lon, lat;

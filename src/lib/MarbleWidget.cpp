@@ -207,7 +207,7 @@ void MarbleWidgetPrivate::construct()
     m_logZoom  = 0;
 
     m_widget->connect( m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
-                       m_widget, SLOT( enableInput() ) );
+                       m_widget, SLOT( setInputEnabled( bool ) ) );
 
     m_widget->connect( m_model->sunLocator(), SIGNAL( updateStars() ),
                        m_widget, SLOT( update() ) );
@@ -231,7 +231,7 @@ void MarbleWidgetPrivate::construct()
 //    m_enableInputAction->set
 
     m_widget->connect( m_enableInputAction, SIGNAL(toggled(bool)),
-                       m_widget, SLOT(enableInput(bool)) );
+                       m_widget, SLOT( setInputEnabled(bool)) );
 
     m_widget->connect( m_model, SIGNAL( pluginSettingsChanged() ),
                        m_widget, SIGNAL( pluginSettingsChanged() ) );
@@ -1230,7 +1230,7 @@ void MarbleWidget::centerSun()
     qreal  lat = sunLocator->getLat();
     centerOn( lon, lat );
 
-    disableInput();
+    setInputEnabled( false );
 }
 
 SunLocator* MarbleWidget::sunLocator()
@@ -1238,35 +1238,25 @@ SunLocator* MarbleWidget::sunLocator()
     return d->m_model->sunLocator();
 }
 
-void MarbleWidget::disableInput( bool in )
+void MarbleWidget::setInputEnabled( bool enabled )
 {
-    if( in ) {
-        disableInput();
-    } else {
-        enableInput();
+    //if input is set as enabled
+    if ( enabled )
+    {
+        if ( !d->m_inputhandler ) {
+            setInputHandler( new MarbleWidgetDefaultInputHandler );
+        }
+        else {
+            installEventFilter( d->m_inputhandler );
+        }
     }
-}
 
-void MarbleWidget::enableInput( bool in )
-{
-    disableInput( !in );
-}
-
-void MarbleWidget::enableInput()
-{
-    if ( !d->m_inputhandler ) {
-        setInputHandler( new MarbleWidgetDefaultInputHandler );
+    else // input is disabled
+    {
+        qDebug() << "MarbleWidget::disableInput";
+        removeEventFilter( d->m_inputhandler );
+        setCursor( Qt::ArrowCursor );
     }
-    else {
-        installEventFilter( d->m_inputhandler );
-    }
-}
-
-void MarbleWidget::disableInput()
-{
-    qDebug() << "MarbleWidget::disableInput";
-    removeEventFilter( d->m_inputhandler );
-    setCursor( Qt::ArrowCursor );
 }
 
 void MarbleWidget::setProxy( const QString& proxyHost, const quint16 proxyPort, const QString& user, const QString& password  )
