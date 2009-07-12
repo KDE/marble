@@ -196,11 +196,14 @@ bool GeoRendererView::renderGeoDataGeometry( GeoDataGeometry *object, QString st
         return false;
     }
 
-    /// hard coded to use only the "normal" style
     QString mapped = styleUrl;
     const GeoDataStyleMap& styleMap = m_root->styleMap( styleUrl.remove( '#' ) );
 
-    mapped = styleMap.value( QString( "normal" ) );
+    /// hard coded to use only the "normal" style
+    if( !styleMap.value( QString( "normal" ) ).isEmpty() ) {
+        mapped = styleMap.value( QString( "normal" ) );
+    }
+
     mapped.remove( '#' );
 
     if( object->geometryId() == GeoDataPolygonId ) {
