@@ -64,8 +64,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
 
     QString proxyUser() const;
     QString proxyPass() const;
-    bool proxyHttp() const;
-    bool proxySocks5() const;
+    bool proxyType() const;
     bool proxyAuth() const;
 
     Q_SIGNALS:

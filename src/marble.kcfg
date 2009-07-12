@@ -127,7 +127,7 @@
  <group name="Navigation" >
   <entry key="dragLocation" type="Enum" >
    <label>The behaviour of the planet's axis on mouse dragging.</label>
-   <choices name="Marble::DragLocation">
+    <choices name="Marble::DragLocation">
     <choice name="DragLocation::KeepAxisVertically"/>
     <choice name="DragLocation::FollowMousePointer"/>
    </choices>
@@ -178,6 +178,13 @@
   <entry name="proxyHttp" type="Bool">
    <label>Proxy type is HTTP</label>
    <default>true</default>
+  </entry>
+  <entry name="proxyType" type="Enum">
+   <choices name="Marble::ProxyType">
+    <choice name="HttpProxy"/>
+    <choice name="Socks5Proxy"/>
+   </choices>
+   <default>Marble::HttpProxy</default>
   </entry>
   <entry name="proxySocks5" type="Bool">
    <label>Proxy type is Socks5</label>

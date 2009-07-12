@@ -181,10 +181,17 @@ void QtMarbleConfigDialog::syncSettings()
     // Make sure that no proxy is used for an empty string or the default value: 
     if ( proxyUrl().isEmpty() || proxyUrl() == "http://" ) {
         proxy.setType( QNetworkProxy::NoProxy );
-    } else if ( proxyHttp() ) {
-        proxy.setType( QNetworkProxy::HttpProxy );
-    } else if ( proxySocks5() ) {
-        proxy.setType( QNetworkProxy::Socks5Proxy );
+    } else {
+        if ( proxyType() == Marble::Socks5Proxy ) {
+            proxy.setType( QNetworkProxy::Socks5Proxy );
+        }
+        else if ( proxyType() == Marble::HttpProxy ) {
+            proxy.setType( QNetworkProxy::HttpProxy );
+        }
+        else {
+            qDebug() << "Unknown proxy type! Using Http Proxy instead.";
+            proxy.setType( QNetworkProxy::HttpProxy );
+        }
     }
     
     proxy.setHostName( proxyUrl() );
@@ -260,8 +267,7 @@ void QtMarbleConfigDialog::readSettings()
     d->w_cacheSettings->kcfg_proxyPort->setValue( proxyPort() );
     d->w_cacheSettings->kcfg_proxyUser->setText( proxyUser() );
     d->w_cacheSettings->kcfg_proxyPass->setText( proxyPass() );
-    d->w_cacheSettings->kcfg_proxyHttp->setChecked( proxyHttp() );
-    d->w_cacheSettings->kcfg_proxySocks5->setChecked( proxySocks5() );
+    d->w_cacheSettings->kcfg_proxyType->setCurrentIndex( proxyType() );
     if ( proxyAuth() ) {
         d->w_cacheSettings->kcfg_proxyAuth->setCheckState( Qt::Checked );
     } else {
@@ -362,8 +368,7 @@ void QtMarbleConfigDialog::writeSettings()
     d->m_settings->setValue( "persistentTileCacheLimit", d->w_cacheSettings->kcfg_persistentTileCacheLimit->value() );
     d->m_settings->setValue( "proxyUrl", d->w_cacheSettings->kcfg_proxyUrl->text() );
     d->m_settings->setValue( "proxyPort", d->w_cacheSettings->kcfg_proxyPort->value() );
-    d->m_settings->setValue( "proxyHttp", d->w_cacheSettings->kcfg_proxyHttp->isChecked() );
-    d->m_settings->setValue( "proxySocks5", d->w_cacheSettings->kcfg_proxySocks5->isChecked() );
+    d->m_settings->setValue( "proxyType", d->w_cacheSettings->kcfg_proxyType->currentIndex() );
     if ( d->w_cacheSettings->kcfg_proxyAuth->isChecked() ) {
         d->m_settings->setValue( "proxyAuth", true );
         d->m_settings->setValue( "proxyUser", d->w_cacheSettings->kcfg_proxyUser->text() );
@@ -518,14 +523,9 @@ QString QtMarbleConfigDialog::proxyPass() const
     return d->m_settings->value( "Cache/proxyPass", "" ).toString();
 }
 
-bool QtMarbleConfigDialog::proxyHttp() const
+bool QtMarbleConfigDialog::proxyType() const
 {
-    return d->m_settings->value( "Cache/proxyHttp", "" ).toBool();
-}
-
-bool QtMarbleConfigDialog::proxySocks5() const
-{
-    return d->m_settings->value( "Cache/proxySocks5", "" ).toBool();
+    return d->m_settings->value( "Cache/proxyType", Marble::HttpProxy ).toInt();
 }
 
 bool QtMarbleConfigDialog::proxyAuth() const
