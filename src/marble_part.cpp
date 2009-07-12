@@ -1024,10 +1024,17 @@ void MarblePart::slotUpdateSettings()
     // Make sure that no proxy is used for an empty string or the default value: 
     if ( MarbleSettings::proxyUrl().isEmpty() || MarbleSettings::proxyUrl() == "http://" ) {
         proxy.setType( QNetworkProxy::NoProxy );
-    } else if ( MarbleSettings::proxyHttp() ) {
-        proxy.setType( QNetworkProxy::HttpProxy );
-    } else if ( MarbleSettings::proxySocks5 ) {
-        proxy.setType( QNetworkProxy::Socks5Proxy );
+    } else {
+        if ( MarbleSettings::proxyType() == Marble::Socks5Proxy ) {
+            proxy.setType( QNetworkProxy::Socks5Proxy );
+        }
+        else if ( MarbleSettings::proxyType() == Marble::HttpProxy ) {
+            proxy.setType( QNetworkProxy::HttpProxy );
+        }
+        else {
+            qDebug() << "Unknown proxy type! Using Http Proxy instead.";
+            proxy.setType( QNetworkProxy::HttpProxy );
+        }
     }
     
     proxy.setHostName( MarbleSettings::proxyUrl() );

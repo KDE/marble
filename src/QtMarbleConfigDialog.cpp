@@ -122,10 +122,17 @@ void QtMarbleConfigDialog::syncSettings()
     // Make sure that no proxy is used for an empty string or the default value: 
     if ( proxyUrl().isEmpty() || proxyUrl() == "http://" ) {
         proxy.setType( QNetworkProxy::NoProxy );
-    } else if ( proxyHttp() ) {
-        proxy.setType( QNetworkProxy::HttpProxy );
-    } else if ( proxySocks5() ) {
-        proxy.setType( QNetworkProxy::Socks5Proxy );
+    } else {
+        if ( proxyType() == Marble::Socks5Proxy ) {
+            proxy.setType( QNetworkProxy::Socks5Proxy );
+        }
+        else if ( proxyType() == Marble::HttpProxy ) {
+            proxy.setType( QNetworkProxy::HttpProxy );
+        }
+        else {
+            qDebug() << "Unknown proxy type! Using Http Proxy instead.";
+            proxy.setType( QNetworkProxy::HttpProxy );
+        }
     }
     
     proxy.setHostName( proxyUrl() );

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>459</width>
-    <height>398</height>
+    <height>380</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -250,23 +250,17 @@ p, li { white-space: pre-wrap; }
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="kcfg_proxyHttp">
-          <property name="text">
-           <string>Http</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="kcfg_proxySocks5">
-          <property name="text">
-           <string>Socks5</string>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
+         <widget class="QComboBox" name="kcfg_proxyType">
+          <item>
+           <property name="text">
+            <string>Http</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Socks5</string>
+           </property>
+          </item>
          </widget>
         </item>
         <item>
