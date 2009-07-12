@@ -40,7 +40,7 @@ WikipediaModel::WikipediaModel( QObject *parent )
 {
     m_wikipediaIcon.addFile( MarbleDirs::path( "svg/wikipedia.svg" ) );
 
-    m_languageCode = MarbleLocale::simpleLanguageCode();
+    m_languageCode = MarbleLocale::languageCode();
 }
 
 WikipediaModel::~WikipediaModel() {

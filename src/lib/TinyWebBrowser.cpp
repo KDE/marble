@@ -33,7 +33,7 @@ using namespace Marble;
 
 static QString guessWikipediaDomain()
 {
-    const QString code = MarbleLocale::simpleLanguageCode();
+    const QString code = MarbleLocale::languageCode();
 
     return QString ( "http://%1.wikipedia.org/" ).arg ( code );
 }

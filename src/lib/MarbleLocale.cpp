@@ -11,6 +11,9 @@
 #include "MarbleLocale.h"
 #include "MarbleLocale_p.h"
 
+// Qt
+#include <QtCore/QLocale>
+
 
 namespace Marble {
 
@@ -63,18 +66,7 @@ Marble::MeasureSystem MarbleLocale::measureSystem() const {
 }
 
 QString MarbleLocale::languageCode() {
-    const QString lang = qgetenv( "LANG" );
-    QString code;
-
-    if ( lang.isEmpty() || lang == "POSIX" || lang == "C" )
-        code = "en";
-    else
-        code = lang;
-    return code;
-}
-
-QString MarbleLocale::simpleLanguageCode() {
-    const QString lang = languageCode();
+    const QString lang = QLocale::system().name();
     QString code;
 
     int index = lang.indexOf ( '_' );
