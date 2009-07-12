@@ -93,8 +93,7 @@ class MarbleModelPrivate
 
     void resize( int width, int height );
     void notifyModelChanged();
-    void geoDataDocumentLoaded( GeoDataDocument& document );
-    void geoDataDocumentAdded( GeoDataDocument* document );
+    void geoDataDocumentAdded( const GeoDataDocument& document );
 
     static QAtomicInt       refCounter;
     MarbleModel             *m_parent;
@@ -174,10 +173,8 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_placemarkmanager = new PlacemarkManager();
 
-    connect( d->m_placemarkmanager, SIGNAL( geoDataDocumentLoaded( GeoDataDocument& ) ),
-             this,                  SLOT( geoDataDocumentLoaded( GeoDataDocument& ) ) );
-    connect( d->m_placemarkmanager, SIGNAL( geoDataDocumentAdded( GeoDataDocument* ) ),
-             this,                  SLOT( geoDataDocumentAdded( GeoDataDocument* ) ) );
+    connect( d->m_placemarkmanager, SIGNAL( geoDataDocumentAdded( const GeoDataDocument& ) ),
+             this,                  SLOT( geoDataDocumentAdded( const GeoDataDocument& ) ) );
 
     d->m_placemarkmodel = new MarblePlacemarkModel( d->m_placemarkmanager, this );
     d->m_popSortModel = new QSortFilterProxyModel( this );
@@ -425,6 +422,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
                 GeoSceneAbstractDataset* dataset = *itds;
                 if( dataset->fileFormat() == "KML" ) {
                     QString containername = reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename();
+                    if( containername.endsWith(".kml") ) containername.remove(".kml");
                     loadedContainers.removeOne( containername );
                     loadList << containername;          
                 }
@@ -483,6 +481,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     d->m_layerManager->syncViewParamsAndPlugins( mapTheme );
 
     d->notifyModelChanged();
+    d->m_placemarkLayout->requestStyleReset();
 }
 
 void MarbleModel::setupTextureMapper( Projection projection )
@@ -722,14 +721,9 @@ void MarbleModelPrivate::notifyModelChanged()
     emit m_parent->modelChanged();
 }
 
-void MarbleModelPrivate::geoDataDocumentLoaded( GeoDataDocument& document )
+void MarbleModelPrivate::geoDataDocumentAdded( const GeoDataDocument& document )
 {
-    new KmlFileViewItem( *m_placemarkmanager, document );
-}
-
-void MarbleModelPrivate::geoDataDocumentAdded( GeoDataDocument* document )
-{
-    QVector<GeoDataFeature>::Iterator end = document->end();
+/*    QVector<GeoDataFeature>::Iterator end = document->end();
     QVector<GeoDataFeature>::Iterator itr = document->begin();
     for ( ; itr != end; ++itr ) {
         // use *itr (or itr.value()) here
@@ -737,7 +731,7 @@ void MarbleModelPrivate::geoDataDocumentAdded( GeoDataDocument* document )
         itr->setStyle( &document->style( styleUrl ) );
     }
 
-    m_geometrymodel->setGeoDataRoot( document );
+    m_geometrymodel->setGeoDataRoot( document );*/
 }
 
 void MarbleModel::update()

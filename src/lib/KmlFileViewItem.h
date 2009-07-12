@@ -24,7 +24,7 @@ class PlacemarkManager;
 class KmlFileViewItem : public AbstractFileViewItem
 {
   public:
-    KmlFileViewItem( PlacemarkManager& manager, GeoDataDocument const& document );
+    KmlFileViewItem( PlacemarkManager& manager, const GeoDataDocument& document );
     ~KmlFileViewItem();
 
     /*
@@ -37,6 +37,7 @@ class KmlFileViewItem : public AbstractFileViewItem
     virtual void setShown( bool value );
     virtual int size() const;
 
+    GeoDataDocument* document();
   private:
     PlacemarkManager&   m_placemarkManager;
     GeoDataDocument    m_document;

@@ -183,7 +183,7 @@ void PlacemarkLoader::importKml( const QString& filename,
 
     qDebug() << "newGeoDataDocumentAdded" << m_filepath;
 
-    emit newGeoDataDocumentAdded( *m_document );
+    emit newGeoDataDocumentAdded( m_document );
 }
 
 void PlacemarkLoader::importKmlFromData( PlacemarkContainer* placemarkContainer )
@@ -211,7 +211,7 @@ void PlacemarkLoader::importKmlFromData( PlacemarkContainer* placemarkContainer 
 
     qDebug() << "newGeoDataDocumentAdded" << m_filepath;
     
-    emit newGeoDataDocumentAdded( *m_document );
+    emit newGeoDataDocumentAdded( m_document );
 }
 
 void PlacemarkLoader::saveFile( const QString& filename,
@@ -325,7 +325,7 @@ bool PlacemarkLoader::loadFile( const QString& filename,
 
     qDebug() << "newGeoDataDocumentAdded" << m_filepath;
 	m_document->setVisible( false );
-    emit newGeoDataDocumentAdded( *m_document );
+    emit newGeoDataDocumentAdded( m_document );
     return true;
 }
 

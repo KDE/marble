@@ -19,7 +19,7 @@
 
 using namespace Marble;
 
-KmlFileViewItem::KmlFileViewItem( PlacemarkManager& manager, GeoDataDocument const& document ) :
+KmlFileViewItem::KmlFileViewItem( PlacemarkManager& manager, const GeoDataDocument& document ) :
     m_placemarkManager( manager ),
     m_document( document )
 {
@@ -28,6 +28,11 @@ KmlFileViewItem::KmlFileViewItem( PlacemarkManager& manager, GeoDataDocument con
 KmlFileViewItem::~KmlFileViewItem()
 {
     //TODO
+}
+
+GeoDataDocument* KmlFileViewItem::document()
+{
+    return &m_document;
 }
 
 void KmlFileViewItem::saveFile()
