@@ -13,6 +13,7 @@
 
 #include "AbstractDataPluginItem.h"
 
+#include <QtCore/QHash>
 #include <QtCore/QUrl>
 #include <QtGui/QPixmap>
 #include <QtGui/QIcon>
@@ -62,11 +63,16 @@ class WikipediaItem : public AbstractDataPluginItem {
     QAction *action();
     
     void setIcon( const QIcon& icon );
+
+    void setSettings( QHash<QString, QVariant> settings );
     
  public Q_SLOTS:
     void openBrowser();
     
  private:
+    void updateSize();
+    bool showThumbnail();
+
     QUrl m_url;
     QUrl m_thumbnailImageUrl;
     QWebView *m_browser;
@@ -74,6 +80,7 @@ class WikipediaItem : public AbstractDataPluginItem {
 
     QPixmap m_thumbnail;
     QIcon m_wikiIcon;
+    QHash<QString, QVariant> m_settings;
 };
     
 }

@@ -10,9 +10,10 @@
 // Copyright 2008      Simon Hausmann  <hausmann@kde.org>"
 //
 
-
+// Self
 #include "TinyWebBrowser.h"
 
+// Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QUrl>
 #include <QtCore/QDebug>
@@ -21,36 +22,18 @@
 #include <QtGui/QPrintDialog>
 #include <QtGui/QPrinter>
 #include <QtGui/QTextFrame>
+
+// Marble
 #include "HttpDownloadManager.h"
 #include "CacheStoragePolicy.h"
 #include "MarbleDirs.h"
+#include "MarbleLocale.h"
 
 using namespace Marble;
 
 static QString guessWikipediaDomain()
 {
-    const QString lang = qgetenv ( "LANG" );
-    QString code;
-
-    if ( lang.isEmpty() || lang == "POSIX" || lang == "C" )
-        code = "en";
-    else
-    {
-
-        int index = lang.indexOf ( '_' );
-        if ( index != -1 )
-        {
-            code = lang.left ( index );
-        }
-        else
-        {
-            index = lang.indexOf ( '@' );
-            if ( index != -1 )
-                code = lang.left ( index );
-            else
-                code = lang;
-        }
-    }
+    const QString code = MarbleLocale::simpleLanguageCode();
 
     return QString ( "http://%1.wikipedia.org/" ).arg ( code );
 }

@@ -66,6 +66,8 @@ WikipediaPlugin::WikipediaPlugin()
              this,        SLOT( writeSettings() ) );
     connect( this, SIGNAL( changedNumberOfItems( quint32 ) ),
              this, SLOT( setDialogNumberOfItems( quint32 ) ) );
+    connect( this, SIGNAL( settingsChanged( QString ) ),
+             this, SLOT( updateItemSettings() ) );
 }
 
 WikipediaPlugin::~WikipediaPlugin() {
@@ -78,6 +80,7 @@ void WikipediaPlugin::initialize() {
     // Ensure that all settings get forwarded to the model.
     readSettings();
     setModel( model );
+    updateItemSettings();
 }
 
 QString WikipediaPlugin::name() const {
@@ -132,7 +135,11 @@ void WikipediaPlugin::setShowThumbnails( bool shown ) {
 void WikipediaPlugin::readSettings() {
     setNumberOfItems( m_settings.value( "numberOfItems", 15 ).toUInt() );
     setDialogNumberOfItems( numberOfItems() );
-    setShowThumbnails( m_settings.value( "showThumbnails", true ).toBool() );
+    if ( !m_settings.contains( "showThumbnails" ) ) {
+        m_settings.insert( "showThumbnails", true );
+    }
+
+    setShowThumbnails( m_settings.value( "showThumbnails" ).toBool() );
 }
 
 void WikipediaPlugin::writeSettings() {
@@ -157,6 +164,13 @@ void WikipediaPlugin::setDialogNumberOfItems( quint32 number ) {
     else {
         // Force a the number of items being lower or equal maximumNumberOfItems
         setNumberOfItems( maximumNumberOfItems );
+    }
+}
+
+void WikipediaPlugin::updateItemSettings() {
+    AbstractDataPluginModel *abstractModel = model();
+    if( abstractModel != 0 ) {
+        abstractModel->setItemSettings( m_settings );
     }
 }
 

@@ -62,4 +62,34 @@ Marble::MeasureSystem MarbleLocale::measureSystem() const {
     return d->m_measureSystem;
 }
 
+QString MarbleLocale::languageCode() {
+    const QString lang = qgetenv( "LANG" );
+    QString code;
+
+    if ( lang.isEmpty() || lang == "POSIX" || lang == "C" )
+        code = "en";
+    else
+        code = lang;
+    return code;
+}
+
+QString MarbleLocale::simpleLanguageCode() {
+    const QString lang = languageCode();
+    QString code;
+
+    int index = lang.indexOf ( '_' );
+    if ( index != -1 ) {
+        code = lang.left ( index );
+    }
+    else {
+        index = lang.indexOf ( '@' );
+        if ( index != -1 )
+            code = lang.left ( index );
+        else
+            code = lang;
+    }
+
+    return code;
+}
+
 }

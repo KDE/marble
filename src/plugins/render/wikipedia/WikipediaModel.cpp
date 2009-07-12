@@ -20,6 +20,7 @@
 #include "MarbleDataFacade.h"
 #include "MarbleDirs.h"
 #include "WikipediaItem.h"
+#include "MarbleLocale.h"
 
 // Qt
 #include <QtCore/QDebug>
@@ -38,6 +39,8 @@ WikipediaModel::WikipediaModel( QObject *parent )
       m_showThumbnail( true )
 {
     m_wikipediaIcon.addFile( MarbleDirs::path( "svg/wikipedia.svg" ) );
+
+    m_languageCode = MarbleLocale::simpleLanguageCode();
 }
 
 WikipediaModel::~WikipediaModel() {
@@ -67,6 +70,8 @@ void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     geonamesUrl += QString::number( box.west() * RAD2DEG );
     geonamesUrl += "&maxRows=";
     geonamesUrl += QString::number( number );
+    geonamesUrl += "&lang=";
+    geonamesUrl += m_languageCode;
     
     downloadDescriptionFile( QUrl( geonamesUrl ) );
 }

@@ -27,14 +27,15 @@
 using namespace Marble;
 
 // The Wikipedia icon is not a square
-const QRect wikiIconRect( 0, 0, 47, 40 );
+const QRect wikiIconRect( 0, 0, 32, 27 );
 const QSize miniWikiIconSize( 22, 19 );
 const int miniWikiIconBorder = 3;
 
 WikipediaItem::WikipediaItem( QObject *parent )
     : AbstractDataPluginItem( parent ),
       m_browser( 0 ),
-      m_wikiIcon()
+      m_wikiIcon(),
+      m_settings()
 {
     m_action = new QAction( this );
     connect( m_action, SIGNAL( triggered() ), this, SLOT( openBrowser() ) );
@@ -63,7 +64,7 @@ void WikipediaItem::addDownloadedFile( const QString& url, const QString& type )
 
     if ( type == "thumbnail" ) {
         m_thumbnail.load( url );
-        setSize( m_thumbnail.size() );
+        updateSize();
     }
 }
 
@@ -77,7 +78,7 @@ void WikipediaItem::paint( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    if ( m_thumbnail.isNull() ) {
+    if ( !showThumbnail() ) {
         m_wikiIcon.paint( painter, wikiIconRect );
     }
     else {
@@ -152,9 +153,29 @@ void WikipediaItem::openBrowser( ) {
 void WikipediaItem::setIcon( const QIcon& icon ) {
     m_action->setIcon( icon );
     m_wikiIcon = icon;
-    if ( m_thumbnail.isNull() ) {
+
+    updateSize();
+}
+
+void WikipediaItem::setSettings( QHash<QString, QVariant> settings ) {
+    if ( settings != m_settings ) {
+        m_settings = settings;
+        updateSize();
+        update();
+    }
+}
+
+void WikipediaItem::updateSize() {
+    if ( showThumbnail() ) {
+        setSize( m_thumbnail.size() );
+    }
+    else {
         setSize( wikiIconRect.size() );
     }
+}
+
+bool WikipediaItem::showThumbnail() {
+    return m_settings.value( "showThumbnails", false ).toBool() && !m_thumbnail.isNull();
 }
 
 #include "WikipediaItem.moc"

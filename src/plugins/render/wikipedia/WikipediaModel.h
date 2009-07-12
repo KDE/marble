@@ -50,6 +50,7 @@ class WikipediaModel : public AbstractDataPluginModel
     
  private:
     QIcon m_wikipediaIcon;
+    QString m_languageCode;
 
     bool m_showThumbnail;
 };

@@ -64,6 +64,8 @@ class WikipediaPlugin : public AbstractDataPlugin {
 
     void setDialogNumberOfItems( quint32 number );
 
+    void updateItemSettings();
+
  private:
     QIcon m_icon;
     PluginAboutDialog *m_aboutDialog;
