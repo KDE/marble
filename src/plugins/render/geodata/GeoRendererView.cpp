@@ -149,6 +149,12 @@ void GeoRendererView::setBrushStyle( QString mapped )
      * model. This might not be wanted. On the other hand - is a copy of the
      * style within every Placemark wanted and how should this be called here?
      */
+    if( !m_root->style( mapped ).polyStyle().fill() ) {
+        if( m_painter->brush().color() != Qt::transparent )
+        m_painter->setBrush( QColor( Qt::transparent ) );
+        return;
+    }
+
     if( m_painter->brush().color() != m_root->style( mapped ).polyStyle().color() ) {
 /*        qDebug() << "BrushColor:" 
                  << m_root->style( mapped ).polyStyle().color() 
@@ -162,6 +168,12 @@ void GeoRendererView::setPenStyle( QString mapped )
     /*
      * see the note in the setBrushStyle function
      */
+    if( !m_root->style( mapped ).polyStyle().outline() ) {
+        m_currentPen.setColor( Qt::transparent );
+        if( m_painter->pen() != m_currentPen ) m_painter->setPen( m_currentPen );
+        return;
+    }
+
     if( m_currentPen.color() != m_root->style( mapped ).lineStyle().color() || 
         m_currentPen.widthF() != m_root->style( mapped ).lineStyle().width() ) {
 /*            qDebug() << "PenColor:" 
@@ -173,6 +185,7 @@ void GeoRendererView::setPenStyle( QString mapped )
         m_currentPen.setColor( m_root->style( mapped ).lineStyle().color() );
         m_currentPen.setWidthF( m_root->style( mapped ).lineStyle().width() );
     }
+
     if ( m_painter->mapQuality() != Marble::High && m_painter->mapQuality() != Marble::Print )
     {
 //            m_currentPen.setWidth( 0 );
@@ -180,7 +193,8 @@ void GeoRendererView::setPenStyle( QString mapped )
         penColor.setAlpha( 255 );
         m_currentPen.setColor( penColor );
     }
-    m_painter->setPen( m_currentPen );
+
+    if( m_painter->pen() != m_currentPen ) m_painter->setPen( m_currentPen );
 }
 
 bool GeoRendererView::renderGeoDataGeometry( GeoDataGeometry *object, QString styleUrl )
