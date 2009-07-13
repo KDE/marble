@@ -116,9 +116,10 @@ GeoSceneProperty* GeoSceneGroup::property( const QString& name )
     QVector<GeoSceneProperty*>::const_iterator it = m_properties.constBegin();
     QVector<GeoSceneProperty*>::const_iterator end = m_properties.constEnd();
     for (; it != end; ++it) {
-        if ( (*it)->name() == name )
+        if ( (*it)->name() == name ) {
             property = *it;
             break;
+        }
     }
 
     return property;
