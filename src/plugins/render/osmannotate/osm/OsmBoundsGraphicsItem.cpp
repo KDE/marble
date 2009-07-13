@@ -23,7 +23,7 @@ OsmBoundsGraphicsItem::OsmBoundsGraphicsItem( GeoDataGeometry& other )
 {
 }
 
-void OsmBoundsGraphicsItem::paint( Geopainter* painter, ViewportParams * viewport,
+void OsmBoundsGraphicsItem::paint( GeoPainter* painter, ViewportParams * viewport,
                                    const QString &renderPos, GeoSceneLayer* layer )
 {
 
