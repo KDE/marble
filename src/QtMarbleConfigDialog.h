@@ -60,7 +60,7 @@ class QtMarbleConfigDialog : public QDialog
 
     QString proxyUser() const;
     QString proxyPass() const;
-    bool proxyType() const;
+    ProxyType proxyType() const;
     bool proxyAuth() const;
 
     Q_SIGNALS:

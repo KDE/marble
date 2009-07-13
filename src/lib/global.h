@@ -104,8 +104,8 @@ enum GraphicsSystem {
  * @brief This enum is used to specify the proxy that is used.
  */
 enum ProxyType {
-    HttpProxy,          ///< Uses an Http proxy
-    Socks5Proxy         ///< Uses a Socks5Proxy
+    HttpProxy = 0x0 ,          ///< Uses an Http proxy
+    Socks5Proxy = 0x1         ///< Uses a Socks5Proxy
 };
 
 /**

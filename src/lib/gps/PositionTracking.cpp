@@ -74,51 +74,7 @@ PositionTracking::~PositionTracking()
 void PositionTracking::construct( const QSize &canvasSize,
                              ViewParams *viewParams )
 {
-    //qreal const radius = viewParams->m_radius;
 
-    // FIXME: Review
-//#ifdef HAVE_LIBGPS
-//    if( !m_gpsd ) {
-//        m_currentDraw.clear();
-//        return;
-//    }
-//#endif
-    QPointF  position;
-    QPointF  previousPosition;
-
-    bool draw = false;
-
-    draw = m_gpsCurrentPosition->getPixelPos( canvasSize, viewParams,
-                                              &position );
-
-    draw = m_gpsPreviousPosition->getPixelPos( canvasSize, viewParams,
-                                               &previousPosition );
-
-    if ( !draw ) {
-        m_currentDraw.clear();
-        return;
-    }
-
-    qreal distance = std::sqrt( AbstractLayer::distance( position,
-                                                     previousPosition) );
-    if (distance == 0) {
-        return;
-    }
-
-    QPointF unitVector = ( ( position - previousPosition )
-                           / distance );
-    // The normal of the unit vector between first and second
-    QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x() );
-
-    m_previousDraw = m_currentDraw;
-
-    m_currentDraw.clear();
-    m_currentDraw << position
-                  << ( position - ( unitVector * 9 ) 
-                                + ( unitVector2 * 9 ) )
-                  << ( position + ( unitVector * 19.0 ) )
-                  << ( position - ( unitVector * 9 ) 
-                                - ( unitVector2 * 9 ) );
 }
 
 
@@ -159,6 +115,9 @@ bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
         PositionProviderStatusAvailable )
     {
         m_gpsTracking->setPosition( m_positionProvider->position() );
+        m_gpsTracking->setPosition( m_gpsTracking->position().latitude(GeoDataCoordinates::Degree),
+                                       m_gpsTracking->position().longitude( GeoDataCoordinates::Degree ) );
+
 
         if (m_gpsTrackSeg == 0 ) {
             m_gpsTrackSeg = new TrackSegment();
@@ -200,10 +159,45 @@ void PositionTracking::draw( ClipPainter *painter,
     Q_UNUSED( canvasSize )
     Q_UNUSED( viewParams )
 
+    QPointF position;
+    QPointF previousPosition;
+
+    //FIXME: this is a workaround for dealing with NAN values. we need to protect against that in the future
+    m_gpsCurrentPosition->setPosition( m_gpsCurrentPosition->position().latitude(GeoDataCoordinates::Degree),
+                                       m_gpsCurrentPosition->position().longitude( GeoDataCoordinates::Degree ) );
+    m_gpsPreviousPosition->setPosition( m_gpsPreviousPosition->position().latitude(GeoDataCoordinates::Degree),
+                                       m_gpsPreviousPosition->position().longitude( GeoDataCoordinates::Degree ) );
+
+
+    m_gpsCurrentPosition->getPixelPos( canvasSize, viewParams, &position );
+    m_gpsPreviousPosition->getPixelPos( canvasSize, viewParams, &previousPosition );
+
+
+    QPointF unitVector = ( position - previousPosition  ) ;
+
+    if( unitVector.x() || unitVector.y() ) {
+        qreal magnitude = sqrt( (unitVector.x() * unitVector.x() )
+                          + ( unitVector.y() * unitVector.y() ) );
+        unitVector = unitVector / magnitude;
+        QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x() );
+        m_relativeLeft = ( position - ( unitVector * 9   ) + ( unitVector2 * 9 ) ) - position ;
+        m_relativeRight = ( position - ( unitVector * 9 ) - ( unitVector2 * 9 ) ) - position;
+        m_relativeTip = ( position + ( unitVector * 19.0 ) ) - position;
+    }
+
+    QPolygonF arrow;
+
+    arrow   << position
+            << position + m_relativeLeft
+            << position + m_relativeTip
+            << position + m_relativeRight;
+
     QPoint temp;
+    painter->save();
     painter->setPen( Qt::black );
     painter->setBrush( Qt::white );
-    painter->drawPolygon( m_currentDraw, Qt::OddEvenFill );
+    painter->drawPolygon( arrow );
+    painter->restore();
 }
 
 

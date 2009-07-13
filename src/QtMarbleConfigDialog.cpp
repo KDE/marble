@@ -178,8 +178,14 @@ void QtMarbleConfigDialog::readSettings()
     w_cacheSettings->kcfg_proxyPort->setValue( proxyPort() );
     w_cacheSettings->kcfg_proxyUser->setText( proxyUser() );
     w_cacheSettings->kcfg_proxyPass->setText( proxyPass() );
-    w_cacheSettings->kcfg_proxyHttp->setChecked( proxyHttp() );
-    w_cacheSettings->kcfg_proxySocks5->setChecked( proxySocks5() );
+
+    //FIXME: are we guarenteed that the indexes will stay the same?
+    if( proxyType() == Marble::HttpProxy ){
+        w_cacheSettings->kcfg_proxyType->setCurrentIndex( 0 );
+    } else if ( proxyType() == Marble::Socks5Proxy ) {
+        w_cacheSettings->kcfg_proxyType->setCurrentIndex( 1 );
+    }
+
     if ( proxyAuth() ) {
         w_cacheSettings->kcfg_proxyAuth->setCheckState( Qt::Checked );
     } else {
@@ -264,8 +270,7 @@ void QtMarbleConfigDialog::writeSettings()
     settings->setValue( "persistentTileCacheLimit", w_cacheSettings->kcfg_persistentTileCacheLimit->value() );
     settings->setValue( "proxyUrl", w_cacheSettings->kcfg_proxyUrl->text() );
     settings->setValue( "proxyPort", w_cacheSettings->kcfg_proxyPort->value() );
-    settings->setValue( "proxyHttp", w_cacheSettings->kcfg_proxyHttp->isChecked() );
-    settings->setValue( "proxySocks5", w_cacheSettings->kcfg_proxySocks5->isChecked() );
+    settings->setValue( "proxyType", w_cacheSettings->kcfg_proxyType->currentIndex() );
     if ( w_cacheSettings->kcfg_proxyAuth->isChecked() ) {
         settings->setValue( "proxyAuth", true );
         settings->setValue( "proxyUser", w_cacheSettings->kcfg_proxyUser->text() );
@@ -390,14 +395,9 @@ QString QtMarbleConfigDialog::proxyPass() const
     return settings->value( "Cache/proxyPass", "" ).toString();
 }
 
-bool QtMarbleConfigDialog::proxyHttp() const
+Marble::ProxyType QtMarbleConfigDialog::proxyType() const
 {
-    return settings->value( "Cache/proxyHttp", "" ).toBool();
-}
-
-bool QtMarbleConfigDialog::proxySocks5() const
-{
-    return settings->value( "Cache/proxySocks5", "" ).toBool();
+    return (Marble::ProxyType)settings->value( "Cache/proxyType", "" ).toInt();
 }
 
 bool QtMarbleConfigDialog::proxyAuth() const

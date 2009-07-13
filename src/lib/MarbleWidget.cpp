@@ -1005,7 +1005,7 @@ void MarbleWidget::updateGps()
                                                          d->m_map->viewParams(),
                                                          temp );
     if ( draw ) {
-        qDebug() << "Updating viewport for GPS";
+//        qDebug() << "Updating viewport for GPS";
         update( temp );
     }
 }
