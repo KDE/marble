@@ -24,7 +24,7 @@ namespace Marble {
 
 
 
-class MARBLE_EXPORT TmpGraphicsItem : public GeoGraphicsItem
+class TmpGraphicsItem : public GeoGraphicsItem
 {
 public:
     TmpGraphicsItem();
