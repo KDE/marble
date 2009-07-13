@@ -14,6 +14,7 @@
 #include "GeoDataLineString.h"
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
+#include "OsmBoundsGraphicsItem.h"
 #include "OsmElementDictionary.h"
 
 namespace Marble
@@ -38,15 +39,18 @@ GeoNode* OsmBoundsTagHandler::parse( GeoParser& parser ) const
 
     GeoDataCoordinates topLeft( minlon, minlat, 0, GeoDataCoordinates::Degree );
     GeoDataCoordinates topRight( maxlon, minlat, 0 , GeoDataCoordinates::Degree );
-    GeoDataCoordinates botLeft( minlon, maxlat, 0 , GeoDataCoordinates::Degree );
-    GeoDataCoordinates botRight( maxlon, maxlat, 0 , GeoDataCoordinates::Degree );
+    GeoDataCoordinates bottomLeft( minlon, maxlat, 0 , GeoDataCoordinates::Degree );
+    GeoDataCoordinates bottomRight( maxlon, maxlat, 0 , GeoDataCoordinates::Degree );
 
     bound.append( topLeft );
     bound.append( topRight );
-    bound.append( botRight );
-    bound.append( botLeft );
+    bound.append( bottomRight );
+    bound.append( bottomLeft );
 
     QList<GeoGraphicsItem*>* model = parser.activeModel();
+
+
+    OsmBoundsGraphicsItem* item = new OsmBoundsGraphicsItem(bound);
 //
 //    GeoDataPlacemark* place = new GeoDataPlacemark;
 //
@@ -55,6 +59,8 @@ GeoNode* OsmBoundsTagHandler::parse( GeoParser& parser ) const
 //    place->setGeometry( GeoDataLinearRing( bound ) );
 //
 //    model->append( dynamic_cast<GeoGraphicsItem*>( place ) );
+
+    model->append( item );
 
     return 0;
 

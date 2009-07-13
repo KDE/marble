@@ -8,7 +8,6 @@ FILE( GLOB geodata_data_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/data/*
 FILE( GLOB geodata_scene_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/scene/*.cpp )
 FILE( GLOB geodata_handlers_dgml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/handlers/dgml/*.cpp )
 FILE( GLOB geodata_handlers_kml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/handlers/kml/*.cpp )
-FILE( GLOB geodata_handlers_osm_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/handlers/osm/*.cpp )
 
 FILE( GLOB geodata_data_HDRS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/data/*.h )
 
@@ -42,7 +41,6 @@ SET( geodata_SRCS
         ${geodata_parser_SRCS}
         ${geodata_handlers_gpx_SRCS}
         ${geodata_handlers_kml_SRCS}
-        ${geodata_handlers_osm_SRCS}
         ${geodata_handlers_dgml_SRCS}
         ${geodata_handlers_osmnamefinder_SRCS}
    )
