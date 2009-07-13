@@ -602,7 +602,6 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
 
     renderPositions.clear();
     renderPositions << "SURFACE";
-    d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
 
     // Paint the vector layer.
     if ( d->m_mapTheme->map()->hasVectorLayers() ) {
@@ -610,8 +609,14 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
         if ( !d->m_mapTheme->map()->hasTextureLayers() ) {
             d->m_veccomposer->paintBaseVectorMap( painter, viewParams );
         }
+
+        d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
+
         // Add further Vectors
         d->m_veccomposer->paintVectorMap( painter, viewParams );
+    }
+    else {
+        d->m_layerManager->renderLayers( painter, viewParams, renderPositions );        
     }
 
     // Paint the GeoDataPlacemark layer
