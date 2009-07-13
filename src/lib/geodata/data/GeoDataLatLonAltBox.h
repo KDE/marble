@@ -105,6 +105,12 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
      */
     bool isNull() const;
 
+    /**
+     * @brief returns the center of this box
+     * @return a coordinate, body-center of the box
+     */
+    virtual GeoDataCoordinates center() const;
+
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
     /// Unserialize the contents of the feature from @p stream.

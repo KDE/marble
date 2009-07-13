@@ -255,6 +255,16 @@ bool GeoDataLatLonBox::crossesDateLine() const
     return false;
 }
 
+GeoDataCoordinates GeoDataLatLonBox::center() const
+{
+    if( crossesDateLine() )
+        return GeoDataCoordinates( east() + 2 * M_PI - (east() + 2 * M_PI - west()) / 2,
+                                north() - (north() - south()) / 2 );
+    else
+        return GeoDataCoordinates( east() - (east() - west()) / 2,
+                                north() - (north() - south()) / 2 );
+}
+
 bool GeoDataLatLonBox::containsPole( Marble::Pole pole ) const
 {
     switch ( pole ) {

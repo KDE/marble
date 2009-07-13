@@ -112,6 +112,12 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     bool     crossesDateLine() const;
 
     /**
+     * @brief returns the center of this box
+     * @return a coordinate, face-center of the box
+     */
+    virtual GeoDataCoordinates center() const;
+
+    /**
      * @brief Detect whether the bounding box contains one of the poles.
      * @return @c true  the bounding box contains one of the poles.
      *         @c false the bounding box doesn't contain one of the poles.
