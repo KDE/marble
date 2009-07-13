@@ -113,6 +113,18 @@ AltitudeMode GeoDataLatLonAltBox::altitudeMode() const
     return d->m_altitudeMode;
 }
 
+GeoDataCoordinates GeoDataLatLonAltBox::center() const
+{
+    if( crossesDateLine() )
+        return GeoDataCoordinates( east() + 2 * M_PI - (east() + 2 * M_PI - west()) / 2,
+                                north() - (north() - south()) / 2, 
+                                d->m_maxAltitude - (d->m_maxAltitude - d->m_minAltitude) / 2);
+    else
+        return GeoDataCoordinates( east() - (east() - west()) / 2,
+                                north() - (north() - south()) / 2, 
+                                d->m_maxAltitude - (d->m_maxAltitude - d->m_minAltitude) / 2);
+}
+
 void GeoDataLatLonAltBox::setAltitudeMode( const AltitudeMode altitudeMode )
 {
     d->m_altitudeMode = altitudeMode;
