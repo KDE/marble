@@ -34,8 +34,8 @@
 using namespace Marble;
 
 // The Wikipedia icon is not a square
-const int wikipediaIconWidth = 47;
-const int wikipediaIconHeight = 40;
+const int wikipediaIconWidth = 32;
+const int wikipediaIconHeight = 27;
 const int wikipediaSmallIconSize = 16;
 
 WikipediaModel::WikipediaModel( QObject *parent )
