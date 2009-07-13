@@ -12,6 +12,7 @@
 #define OSMBOUNDSGRAPHICSITEM_H
 
 #include "GeoDataLineString.h"
+#include "GeoDataGeometry.h"
 
 namespace Marble{
 
@@ -19,14 +20,18 @@ class GeoPainter;
 class ViewportParams;
 class GeoSceneLayer;
 
-class OsmBoundsGraphicsItem : public GeoDataLineString
+class OsmBoundsGraphicsItem
 {
 public:
     OsmBoundsGraphicsItem();
-    OsmBoundsGraphicsItem( GeoDataGeometry& other );
+    OsmBoundsGraphicsItem( const GeoDataLineString& other );
+
+    void append ( const GeoDataCoordinates& value );
 
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
+private:
+    GeoDataLineString m_lineString;
 };
 
 }

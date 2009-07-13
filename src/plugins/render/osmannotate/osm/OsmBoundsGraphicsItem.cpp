@@ -14,13 +14,13 @@
 
 namespace Marble{
 
-OsmBoundsGraphicsItem::OsmBoundsGraphicsItem() : GeoDataLineString()
+OsmBoundsGraphicsItem::OsmBoundsGraphicsItem()
 {
 }
 
-OsmBoundsGraphicsItem::OsmBoundsGraphicsItem( GeoDataGeometry& other )
-//        : GeoDataLineString( other )
+void OsmBoundsGraphicsItem::append( const GeoDataCoordinates& value )
 {
+    m_lineString.append( value );
 }
 
 void OsmBoundsGraphicsItem::paint( GeoPainter* painter, ViewportParams * viewport,

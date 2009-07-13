@@ -29,7 +29,7 @@ GeoNode* OsmBoundsTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() );
 
-    GeoDataLineString bound;
+    OsmBoundsGraphicsItem* item = new OsmBoundsGraphicsItem();
 
     qreal minlon = parser.attribute("minlon").toDouble();
     qreal minlat = parser.attribute("minlat").toDouble();
@@ -42,15 +42,15 @@ GeoNode* OsmBoundsTagHandler::parse( GeoParser& parser ) const
     GeoDataCoordinates bottomLeft( minlon, maxlat, 0 , GeoDataCoordinates::Degree );
     GeoDataCoordinates bottomRight( maxlon, maxlat, 0 , GeoDataCoordinates::Degree );
 
-    bound.append( topLeft );
-    bound.append( topRight );
-    bound.append( bottomRight );
-    bound.append( bottomLeft );
+    item->append( topLeft );
+    item->append( topRight );
+    item->append( bottomRight );
+    item->append( bottomLeft );
 
     QList<GeoGraphicsItem*>* model = parser.activeModel();
 
 
-    OsmBoundsGraphicsItem* item = new OsmBoundsGraphicsItem(bound);
+
 //
 //    GeoDataPlacemark* place = new GeoDataPlacemark;
 //
@@ -60,7 +60,7 @@ GeoNode* OsmBoundsTagHandler::parse( GeoParser& parser ) const
 //
 //    model->append( dynamic_cast<GeoGraphicsItem*>( place ) );
 
-    model->append( item );
+    model->append( dynamic_cast<GeoGraphicsItem*> (item) );
 
     return 0;
 

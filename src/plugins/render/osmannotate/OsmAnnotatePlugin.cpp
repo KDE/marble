@@ -179,7 +179,8 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
         QListIterator<GeoGraphicsItem*> it( *m_itemModel );
 
         while( it.hasNext() ) {
-            it.next()->paint( painter, viewport, renderPos, layer );
+            GeoGraphicsItem* i = it.next();
+            i->paint( painter, viewport, renderPos, layer );
         }
 
 //        painter->drawPolygon( ring );
