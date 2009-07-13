@@ -77,11 +77,11 @@ class MarbleWidgetPrivate
           m_animationsEnabled( false ),
           m_inputhandler( 0 ),
           m_physics( new MarblePhysics( parent ) ),
+          m_mainToolbar(),
           m_proxyHost(),
           m_proxyPort( 0 ),
           m_user(),
-          m_password(), 
-          m_mainToolbar()
+          m_password()
     {
     }
 
