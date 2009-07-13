@@ -15,6 +15,7 @@
 #include <QtCore/QUrl>
 #include <QtCore/QDebug>
 #include <QtCore/QTimer>
+#include <QtCore/QPointF>
 #include <QtCore/QtAlgorithms>
 #include <QtCore/QVariant>
 
@@ -218,7 +219,7 @@ QList<AbstractDataPluginItem *> AbstractDataPluginModel::whichItemAt( const QPoi
     QList<AbstractDataPluginItem *> itemsAt;
     
     foreach( AbstractDataPluginItem* item, d->m_displayedItems ) {
-        if( item && item->contains( curpos ) )
+        if( item && item->contains( QPointF( curpos ) ) )
             itemsAt.append( item );
     }
     

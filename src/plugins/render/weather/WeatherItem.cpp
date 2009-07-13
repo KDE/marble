@@ -270,7 +270,7 @@ void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
     painter->setPen( Qt::SolidLine );
     
     painter->setFont( d->s_font );
-    painter->drawRoundedRect( QRect( QPoint( 0, 0 ), size() ), 4, 4 );
+    painter->drawRoundedRect( QRectF( QPointF( 0, 0 ), size() ), 4, 4 );
     
     // Condition
     if ( d->isConditionShown() ) {

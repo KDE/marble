@@ -27,11 +27,11 @@ ScreenGraphicsItem::ScreenGraphicsItem( ScreenGraphicsItemPrivate *d_ptr )
 ScreenGraphicsItem::~ScreenGraphicsItem() {
 }
 
-QPoint ScreenGraphicsItem::position() const {
+QPointF ScreenGraphicsItem::position() const {
     return p()->m_position;
 }
 
-void ScreenGraphicsItem::setPosition( const QPoint& position ) {
+void ScreenGraphicsItem::setPosition( const QPointF& position ) {
     p()->m_position = position;
 }
 

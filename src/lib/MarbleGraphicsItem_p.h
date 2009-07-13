@@ -17,6 +17,7 @@
 // Qt
 #include<QtCore/QList>
 #include<QtCore/QSize>
+#include<QtCore/QSizeF>
 #include<QtCore/QRect>
 #include<QtGui/QPixmapCache>
 
@@ -33,8 +34,8 @@ class MarbleGraphicsItemPrivate {
     virtual ~MarbleGraphicsItemPrivate() {
     }
      
-    virtual QList<QPoint> positions() {
-        return QList<QPoint>();
+    virtual QList<QPointF> positions() {
+        return QList<QPointF>();
     }
     
     void ensureValidCacheKey() {
@@ -45,11 +46,11 @@ class MarbleGraphicsItemPrivate {
         }
     }
     
-    QList<QRect> boundingRects() {
-        QList<QRect> list;
+    QList<QRectF> boundingRects() {
+        QList<QRectF> list;
         
-        foreach( QPoint point, positions() ) {
-            QRect rect( point, m_size );
+        foreach( QPointF point, positions() ) {
+            QRectF rect( point, m_size );
             if( rect.x() < 0 )
                 rect.setLeft( 0 );
             if( rect.y() < 0 )
@@ -66,7 +67,7 @@ class MarbleGraphicsItemPrivate {
         Q_UNUSED( viewport );
     };
     
-    QSize m_size;
+    QSizeF m_size;
     QSize m_logicalCacheSize;
     
     bool m_removeCachedPixmap;

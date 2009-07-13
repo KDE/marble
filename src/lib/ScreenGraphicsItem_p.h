@@ -26,8 +26,8 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
     virtual ~ScreenGraphicsItemPrivate() {
     }
      
-    QList<QPoint> positions() {
-        QList<QPoint> list;
+    QList<QPointF> positions() {
+        QList<QPointF> list;
         
         list.append( m_position );
         return list;
@@ -38,7 +38,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
         Q_UNUSED( viewport );
     }
     
-    QPoint m_position;
+    QPointF m_position;
 };
 
 }

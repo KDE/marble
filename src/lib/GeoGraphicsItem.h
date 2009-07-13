@@ -81,7 +81,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
     /**
      * Returns all coordinates of the item in view coordinates according to the given projection.
      */
-    QList<QPoint> positions();
+    QList<QPointF> positions();
 
     /**
      * Paints the item in item coordinates

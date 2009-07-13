@@ -26,8 +26,8 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
     virtual ~GeoGraphicsItemPrivate() {
     }
      
-    QList<QPoint> positions() {
-        QList<QPoint> list;
+    QList<QPointF> positions() {
+        QList<QPointF> list;
         
         list.append( m_positions );
         return list;
@@ -58,7 +58,7 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
     
     GeoDataCoordinates m_coordinate;
     QString m_target;
-    QList<QPoint> m_positions;
+    QList<QPointF> m_positions;
 };
 
 }

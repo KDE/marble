@@ -39,12 +39,12 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem {
     /**
      * Returns the postion of the item
      */
-    QPoint position() const;
+    QPointF position() const;
     
     /**
      * Set the position of the item
      */
-    void setPosition( const QPoint& position );
+    void setPosition( const QPointF& position );
     
  protected:
     /**

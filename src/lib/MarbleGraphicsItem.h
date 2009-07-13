@@ -14,10 +14,10 @@
 #include "marble_export.h"
 
 #include <QtCore/QList>
-#include <QtCore/QSize>
+#include <QtCore/QSizeF>
 
 class QEvent;
-class QPoint;
+class QPointF;
 class QObject;
 class QString;
 
@@ -52,12 +52,18 @@ class MARBLE_EXPORT MarbleGraphicsItem {
     /**
      * Returns true if the Item contains @p point in view coordinates.
      */
-    bool contains( const QPoint& point ) const;
+    bool contains( const QPointF& point ) const;
+
+    /**
+     * Returns true if the Item contains @p point in view coordinates.
+     * Overloaded member function provided for convenience.
+     */
+//    bool contains( const QPoint& point ) const;
     
     /**
      * Returns the size of the item
      */
-    QSize size() const;
+    QSizeF size() const;
     
     /**
      * Returns the cache mode of the item
@@ -89,7 +95,7 @@ class MARBLE_EXPORT MarbleGraphicsItem {
     /**
      * Set the size of the item
      */
-    void setSize( const QSize& size );
+    void setSize( const QSizeF& size );
     
     MarbleGraphicsItemPrivate * const d;
     

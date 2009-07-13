@@ -64,7 +64,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
         QPixmap cachePixmap;
         bool pixmapAvailable = QPixmapCache::find( p()->m_cacheKey, cachePixmap );
         if ( !pixmapAvailable ) {
-            QSize neededPixmapSize = size() + QSize( 1, 1 ); // adding a pixel for rounding errors
+            QSize neededPixmapSize = size().toSize() + QSize( 1, 1 ); // adding a pixel for rounding errors
         
             if ( cachePixmap.size() != neededPixmapSize ) {
                 if ( size().isValid() && !size().isNull() ) {
@@ -86,7 +86,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
             QPixmapCache::insert( p()->m_cacheKey, cachePixmap );
         }
         
-        foreach( QPoint position, p()->positions() ) {
+        foreach( QPointF position, p()->positions() ) {
             painter->save();
             
             painter->drawPixmap( position, cachePixmap );
@@ -95,7 +95,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
         }
     }
     else {
-        foreach( QPoint position, p()->positions() ) {
+        foreach( QPointF position, p()->positions() ) {
             painter->save();
         
             painter->translate( position );
@@ -108,15 +108,15 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
     return successful;
 }
 
-bool MarbleGraphicsItem::contains( const QPoint& point ) const {
-    foreach( QRect rect, d->boundingRects() ) {
+bool MarbleGraphicsItem::contains( const QPointF& point ) const {
+    foreach( QRectF rect, d->boundingRects() ) {
         if( rect.contains( point ) )
             return true;
     }
     return false;
 }
 
-QSize MarbleGraphicsItem::size() const {
+QSizeF MarbleGraphicsItem::size() const {
     return p()->m_size;
 }
 
@@ -136,7 +136,7 @@ void MarbleGraphicsItem::update() {
     p()->m_removeCachedPixmap = true;
 }
 
-void MarbleGraphicsItem::setSize( const QSize& size ) {
+void MarbleGraphicsItem::setSize( const QSizeF& size ) {
     p()->m_size = size;
     update();
 }

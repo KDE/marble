@@ -61,7 +61,7 @@ void GeoGraphicsItem::setTarget( const QString& target ) {
     p()->m_target = target;
 }
 
-QList<QPoint> GeoGraphicsItem::positions() {
+QList<QPointF> GeoGraphicsItem::positions() {
     return p()->positions();
 }
 
