@@ -46,15 +46,15 @@ GeoNode* OsmBoundsTagHandler::parse( GeoParser& parser ) const
     bound.append( botRight );
     bound.append( botLeft );
 
-    GeoDataDocument* doc = geoDataDoc( parser );
-
-    GeoDataPlacemark place;
-
-    place.setCoordinate( topLeft.longitude(), topLeft.latitude(), topLeft.altitude() );
-
-    place.setGeometry( GeoDataLinearRing( bound ) );
-
-    doc->append( place );
+    QList<GeoGraphicsItem*>* model = parser.activeModel();
+//
+//    GeoDataPlacemark* place = new GeoDataPlacemark;
+//
+//    place->setCoordinate( topLeft.longitude(), topLeft.latitude(), topLeft.altitude() );
+//
+//    place->setGeometry( GeoDataLinearRing( bound ) );
+//
+//    model->append( dynamic_cast<GeoGraphicsItem*>( place ) );
 
     return 0;
 

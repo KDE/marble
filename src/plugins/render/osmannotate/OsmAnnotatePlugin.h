@@ -93,7 +93,7 @@ private:
     void setupActions(MarbleWidget* m);
 
     GeoDataLineString* tmp_lineString;
-    GeoDataDocument* m_document;
+    QList<GeoGraphicsItem*>* m_itemModel;
 };
 
 }

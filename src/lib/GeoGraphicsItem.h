@@ -83,7 +83,6 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
      */
     QList<QPoint> positions();
 
- protected:
     /**
      * Paints the item in item coordinates
      */

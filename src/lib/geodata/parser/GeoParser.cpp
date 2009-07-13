@@ -39,6 +39,7 @@ namespace Marble
 GeoParser::GeoParser( GeoDataGenericSourceType source )
     : QXmlStreamReader(),
       m_document( 0 ),
+      m_itemModel( 0 ),
       m_source( source )
 {
 }
@@ -206,6 +207,22 @@ GeoDocument* GeoParser::releaseDocument()
     GeoDocument* document = m_document;
     m_document = 0;
     return document;
+}
+
+QList<GeoGraphicsItem*>* GeoParser::activeModel()
+{
+    if( ! m_itemModel ) {
+        m_itemModel = new QList<GeoGraphicsItem*>();
+    }
+    Q_ASSERT(m_itemModel);
+    return m_itemModel;
+}
+
+QList<GeoGraphicsItem*>* GeoParser::releaseModel()
+{
+    QList<GeoGraphicsItem*>* model = m_itemModel;
+    m_itemModel = 0;
+    return model;
 }
 
 }

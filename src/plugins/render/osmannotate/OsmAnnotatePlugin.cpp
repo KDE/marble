@@ -111,7 +111,7 @@ void OsmAnnotatePlugin::initialize ()
 
     widgetInitalised= false;
     tmp_lineString = 0;
-    m_document = 0;
+    m_itemModel = 0;
     m_addPlacemark =0;
     m_drawPolygon = 0;
 }
@@ -175,11 +175,14 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
 
     //Figure out how to add the data parsed to a scene for rendering
     //FIXME: this is a terrible hack intended just to test!
-    if( m_document ) {
-        GeoDataPlacemark p(m_document->at(0));
-        GeoDataLinearRing ring(* p.geometry() );
+    if( m_itemModel ) {
+        QListIterator<GeoGraphicsItem*> it( *m_itemModel );
 
-        painter->drawPolygon( ring );
+        while( it.hasNext() ) {
+            it.next()->paint( painter, viewport, renderPos, layer );
+        }
+
+//        painter->drawPolygon( ring );
 
     }
 
@@ -232,14 +235,14 @@ void OsmAnnotatePlugin::loadOsmFile()
             //do not quit on a failed read!
             //return
         }
-        GeoDocument* document = parser.releaseDocument();
-        Q_ASSERT( document );
+        QList<GeoGraphicsItem*>* model = parser.releaseModel();
+        Q_ASSERT( model );
 
-        m_document = static_cast<GeoDataDocument*>( document );
+        m_itemModel = model;
 
         file.close();
 
-        qDebug() << "size of container is " << m_document->size();
+        qDebug() << "size of container is " << model->size();
     }
 }
 

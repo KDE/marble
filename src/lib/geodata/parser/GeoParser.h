@@ -34,6 +34,7 @@ namespace Marble
 typedef int GeoDataGenericSourceType;
 
 class GeoDocument;
+class GeoGraphicsItem;
 class GeoStackItem;
 
 class GEODATA_EXPORT GeoParser : public QXmlStreamReader
@@ -49,6 +50,9 @@ class GEODATA_EXPORT GeoParser : public QXmlStreamReader
     // and set the contained m_document pointer to 0.
     GeoDocument* releaseDocument();
     GeoDocument* activeDocument() { return m_document; }
+
+    QList<GeoGraphicsItem*>* releaseModel();
+    QList<GeoGraphicsItem*>* activeModel();
 
     // Used by tag handlers, to be overridden by GeoDataParser/GeoSceneParser
     virtual bool isValidElement( const QString& tagName ) const;
@@ -71,6 +75,7 @@ protected:
 
 protected:
     GeoDocument* m_document;
+    QList<GeoGraphicsItem*>* m_itemModel;
     GeoDataGenericSourceType m_source;
 
 private:
