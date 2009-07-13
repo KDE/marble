@@ -206,7 +206,7 @@ void MarbleWidgetPrivate::construct()
 
     m_logZoom  = 0;
 
-    m_widget->connect( m_model->sunLocator(), SIGNAL( reenableWidgetInput() ),
+    m_widget->connect( m_model->sunLocator(), SIGNAL( enableWidgetInput(bool) ),
                        m_widget, SLOT( setInputEnabled( bool ) ) );
 
     m_widget->connect( m_model->sunLocator(), SIGNAL( updateStars() ),
@@ -1037,7 +1037,7 @@ void MarbleWidget::updateGps()
                                                          d->m_map->viewParams(),
                                                          temp );
     if ( draw ) {
-        qDebug() << "Updating viewport for GPS";
+//        qDebug() << "Updating viewport for GPS";
         update( temp );
     }
 }

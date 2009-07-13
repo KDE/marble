@@ -95,6 +95,9 @@ Q_SIGNALS:
     qreal               m_speed;
     //used to draw the arrow in gps tracking
     GpxFile             *m_currentGpx;
+    QPointF             m_relativeTip;
+    QPointF             m_relativeLeft;
+    QPointF             m_relativeRight;
     QPolygonF           m_currentDraw;
     QPolygonF           m_previousDraw;
     QPointF             m_previousDistancePosition;

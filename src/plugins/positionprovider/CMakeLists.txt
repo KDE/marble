@@ -11,4 +11,5 @@ else(libgps_FOUND)
 
 endif(libgps_FOUND)
 
-add_subdirectory( geoclue )
+# experimental implementation
+# add_subdirectory( geoclue )
