@@ -19,6 +19,7 @@ namespace osm {
     extern const char* osmTag_osm;
 
     extern const char* osmTag_bounds;
+    extern const char* osmTag_node;
 
 }
 

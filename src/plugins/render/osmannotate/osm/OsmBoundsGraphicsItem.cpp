@@ -10,12 +10,19 @@
 
 #include "OsmBoundsGraphicsItem.h"
 
+#include "GeoDataLinearRing.h"
+#include "GeoPainter.h"
+
 #include <QtCore/QDebug>
 
 namespace Marble{
 
 OsmBoundsGraphicsItem::OsmBoundsGraphicsItem()
+        : GeoGraphicsItem()
 {
+    m_pen.setColor( Qt::black );
+    m_pen.setStyle( Qt::SolidLine );
+    m_pen.setWidth( 1 );
 }
 
 void OsmBoundsGraphicsItem::append( const GeoDataCoordinates& value )
@@ -26,11 +33,15 @@ void OsmBoundsGraphicsItem::append( const GeoDataCoordinates& value )
 void OsmBoundsGraphicsItem::paint( GeoPainter* painter, ViewportParams * viewport,
                                    const QString &renderPos, GeoSceneLayer* layer )
 {
-
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    qDebug() << "Painting from OSMBounds";
+    painter->save();
+    painter->setPen( m_pen );
+
+    painter->drawPolygon( GeoDataLinearRing(m_lineString) );
+
+    painter->restore();
 
 }
 

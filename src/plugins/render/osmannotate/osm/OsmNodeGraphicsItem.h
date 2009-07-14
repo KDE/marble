@@ -8,36 +8,34 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-#ifndef OSMBOUNDSGRAPHICSITEM_H
-#define OSMBOUNDSGRAPHICSITEM_H
+#ifndef OSMNODEGRAPHICSITEM_H
+#define OSMNODEGRAPHICSITEM_H
 
-#include "GeoDataLineString.h"
-#include "GeoDataGeometry.h"
+#include "GeoDataPoint.h"
 #include "GeoGraphicsItem.h"
 
 #include <QtGui/QPen>
 
-namespace Marble{
+namespace Marble
+{
 
-class GeoPainter;
-class ViewportParams;
-class GeoSceneLayer;
-
-class OsmBoundsGraphicsItem : public GeoGraphicsItem
+class OsmNodeGraphicsItem : public GeoGraphicsItem
 {
 public:
-    OsmBoundsGraphicsItem();
-    OsmBoundsGraphicsItem( const GeoDataLineString& other );
-
-    void append ( const GeoDataCoordinates& value );
+    OsmNodeGraphicsItem();
 
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
+
+    void setPoint( const GeoDataCoordinates& point );
+
 private:
-    GeoDataLineString m_lineString;
-    QPen    m_pen;
+    QPen m_pen;
+    //FIXME this should be a GeoDataPoint. In fact there should be a
+    // GeoPointGraphicsItem that this class should subclass
+    GeoDataCoordinates m_point;
 };
 
 }
 
-#endif // OSMBOUNDSGRAPHICSITEM_H
+#endif // OSMNODEGRAPHICSITEM_H
