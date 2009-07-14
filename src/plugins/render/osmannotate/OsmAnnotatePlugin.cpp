@@ -112,8 +112,6 @@ void OsmAnnotatePlugin::initialize ()
     widgetInitalised= false;
     tmp_lineString = 0;
     m_itemModel = 0;
-    m_addPlacemark =0;
-    m_drawPolygon = 0;
 }
 
 bool OsmAnnotatePlugin::isInitialized () const
@@ -125,7 +123,13 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
 {
     if( !widgetInitalised ) {
         MarbleWidget* marbleWidget = (MarbleWidget*) painter->device();
-        setupActions( marbleWidget );
+        QList<QActionGroup*> actionGroups = setupActions( marbleWidget );
+
+        QListIterator<QActionGroup*> it(actionGroups);
+
+        while( it.hasNext() ) {
+            marbleWidget->registerActions( it.next() );
+        }
 
         connect(this, SIGNAL(redraw()),
                 marbleWidget, SLOT(repaint()) );
@@ -190,8 +194,14 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
     return true;
 }
 
-void OsmAnnotatePlugin::drawPolygon(bool b)
+void OsmAnnotatePlugin::setAddingPlacemark( bool b)
 {
+    m_addingPlacemark = b;
+}
+
+void OsmAnnotatePlugin::setDrawingPolygon(bool b)
+{
+    m_drawingPolygon = b;
     if( !b ) {
         //stopped drawing the polygon
         if ( tmp_lineString != 0 ) {
@@ -259,8 +269,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 
         // deal with adding a placemark
         if ( mouseEvent->button() == Qt::LeftButton
-             && m_addPlacemark
-             && m_addPlacemark->isChecked() )
+             && m_addingPlacemark )
         {
             //Add a placemark on the screen
             qreal lon, lat;
@@ -276,7 +285,9 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 
                 //FIXME only repaint the new placemark
                 ( ( MarbleWidget* ) watched)->repaint();
-                m_addPlacemark->setChecked( false );
+                //FIXME: enable a way to disable adding a placemark
+                //using signals and slots
+//                m_addPlacemark->setChecked( false );
                 return true;
             }
 
@@ -285,8 +296,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 
         // deal with drawing a polygon
         if ( mouseEvent->button() == Qt::LeftButton
-             && m_drawPolygon
-             && m_drawPolygon->isChecked() )
+             && m_drawingPolygon )
         {
             qreal lon, lat;
 
@@ -349,17 +359,29 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     return false;
 }
 
-void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
+QList<QActionGroup*> OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
 {
+    QList<QActionGroup*> result;
+    QActionGroup* group = new QActionGroup(0);
+    QAction*    m_addPlacemark;
+    QAction*    m_drawPolygon;
+    QAction*    m_drawLine;
+    QAction*    m_beginSeperator;
+    QAction*    m_endSeperator;
+    QAction*    m_loadOsmFile;
+    QAction*    m_enableInputAction;
+
     m_addPlacemark = new QAction(this);
     m_addPlacemark->setText( "Add Placemark" );
     m_addPlacemark->setCheckable( true );
+    connect( m_addPlacemark, SIGNAL( toggled(bool)),
+             this, SLOT(setAddingPlacemark(bool)) );
 
     m_drawPolygon = new QAction( this );
     m_drawPolygon->setText( "Draw Polygon" );
     m_drawPolygon->setCheckable( true );
     connect( m_drawPolygon, SIGNAL(toggled(bool)),
-             this, SLOT(drawPolygon(bool)) );
+             this, SLOT(setDrawingPolygon(bool)) );
 
     m_loadOsmFile = new QAction( this );
     m_loadOsmFile->setText( "Load Osm File" );
@@ -371,12 +393,24 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     m_endSeperator = new QAction ( this );
     m_endSeperator->setSeparator( true );
 
-    widget->registerAction( m_beginSeperator );
-    widget->registerAction( m_addPlacemark );
-    widget->registerAction( m_drawPolygon );
-    widget->registerAction( m_loadOsmFile );
-    widget->registerAction( m_endSeperator );
+        m_enableInputAction = new QAction(this);
+//    m_enableInputAction->setText("Enable Marble Input");
+    m_enableInputAction->setCheckable(true);
+    m_enableInputAction->setChecked( true );
+    m_enableInputAction->setIcon( QIcon( MarbleDirs::path("bitmaps/hand.png") ) );
+//    m_enableInputAction->set
+    connect( m_enableInputAction, SIGNAL(toggled(bool)),
+                       widget, SLOT( setInputEnabled(bool)) );
 
+    group->addAction( m_enableInputAction );
+    group->addAction( m_beginSeperator );
+    group->addAction( m_addPlacemark );
+    group->addAction( m_drawPolygon );
+    group->addAction( m_loadOsmFile );
+    group->addAction( m_endSeperator );
+
+    result.append( group );
+    return result;
 }
 
 }

@@ -21,7 +21,7 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-
+#include <QtGui/QActionGroup>
 #include <QtCore/QTimer>
 #include <QtGui/QWidget>
 #include <QtGui/QImage>
@@ -478,7 +478,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * Regestering an action with the marble Widget activates it and places it in
      * the main toolbar.
      */
-    void registerAction( QAction* action );
+    void registerActions( QActionGroup* actions );
 
     /**
      * Disables an action and removes it from the main toolbar.

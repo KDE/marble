@@ -113,7 +113,6 @@ class MarbleWidgetPrivate
     MarblePhysics    *m_physics;
     
     QToolBar        *m_mainToolbar;
-    QAction         *m_enableInputAction;
 
     //This stuff is NEVER used. Needs to be deleted
     QString          m_proxyHost;
@@ -134,8 +133,6 @@ MarbleWidget::MarbleWidget(QWidget *parent)
     if( parent && parent->parent() && parent->parent()->inherits( "QMainWindow" ) ) {
         ((QMainWindow*) parent->parent())->addToolBar(d->m_mainToolbar);
     }
-
-    registerAction( d->m_enableInputAction );
 }
 
 
@@ -222,16 +219,6 @@ void MarbleWidgetPrivate::construct()
     m_widget->setMouseTracking( m_widget );
 
     m_mainToolbar = new QToolBar(0);
-
-    m_enableInputAction = new QAction(m_mainToolbar);
-//    m_enableInputAction->setText("Enable Marble Input");
-    m_enableInputAction->setCheckable(true);
-    m_enableInputAction->setChecked( true );
-    m_enableInputAction->setIcon( QIcon( MarbleDirs::path("bitmaps/hand.png") ) );
-//    m_enableInputAction->set
-
-    m_widget->connect( m_enableInputAction, SIGNAL(toggled(bool)),
-                       m_widget, SLOT( setInputEnabled(bool)) );
 
     m_widget->connect( m_model, SIGNAL( pluginSettingsChanged() ),
                        m_widget, SIGNAL( pluginSettingsChanged() ) );
@@ -1297,9 +1284,9 @@ QString MarbleWidget::password() const
     return d->m_password;
 }
 
-void MarbleWidget::registerAction( QAction *action )
+void MarbleWidget::registerActions( QActionGroup* actions)
 {
-    d->m_mainToolbar->addAction( action );
+    d->m_mainToolbar->addActions( actions->actions() );
 }
 
 void MarbleWidget::removeAction( QAction *action )

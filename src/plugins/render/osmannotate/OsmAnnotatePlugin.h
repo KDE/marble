@@ -16,6 +16,7 @@
 #define MARBLEOSMANNOTATEPLUGIN_H
 
 #include <QtCore/QObject>
+#include <QtGui/QActionGroup>
 #include <QtGui/QToolBar>
 #include <QtGui/QGroupBox>
 
@@ -62,7 +63,7 @@ class OsmAnnotatePlugin :  public RenderPlugin
     bool isInitialized () const;
 
 
-
+    QList<QActionGroup*> actionGroups();
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
@@ -75,25 +76,24 @@ class OsmAnnotatePlugin :  public RenderPlugin
 
     bool    widgetInitalised;
 
-    QAction*    m_addPlacemark;
-    QAction*    m_drawPolygon;
-    QAction*    m_drawLine;
-    QAction*    m_beginSeperator;
-    QAction*    m_endSeperator;
-    QAction*    m_loadOsmFile;
 
 signals:
     void redraw();
 public slots:
-    void drawPolygon(bool);
     void loadOsmFile();
+
+    void setAddingPlacemark( bool );
+    void setDrawingPolygon( bool );
  protected:
     bool eventFilter(QObject* watched, QEvent* event);
 private:
-    void setupActions(MarbleWidget* m);
+    QList<QActionGroup*> setupActions(MarbleWidget* m);
 
     GeoDataLineString* tmp_lineString;
     QList<GeoGraphicsItem*>* m_itemModel;
+
+    bool m_addingPlacemark;
+    bool m_drawingPolygon;
 };
 
 }
