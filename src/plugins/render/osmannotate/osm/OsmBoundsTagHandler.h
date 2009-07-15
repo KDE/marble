@@ -12,12 +12,13 @@
 #define OSMBOUNDSTAGHANDLER_H
 
 #include "GeoTagHandler.h"
+#include "marble_export.h"
 
 namespace Marble
 {
 namespace osm {
 
-class OsmBoundsTagHandler : public GeoTagHandler
+class MARBLE_EXPORT OsmBoundsTagHandler : public GeoTagHandler
 {
 public:
     virtual GeoNode* parse(GeoParser&) const;

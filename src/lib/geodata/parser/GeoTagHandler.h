@@ -23,6 +23,7 @@
 #define GeoTagHandler_h
 
 #include <QtCore/QHash>
+#include "marble_export.h"
 
 namespace Marble
 {
@@ -30,7 +31,7 @@ namespace Marble
 class GeoNode;
 class GeoParser;
 
-class GeoTagHandler {
+class MARBLE_EXPORT GeoTagHandler {
 public:
     // API to be implemented by child handlers.
     virtual GeoNode* parse(GeoParser&) const = 0;
