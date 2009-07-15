@@ -55,13 +55,6 @@ enum GeoGraphicsItemChange {
     TmpGraphicsItem* getParent();
     void setParent( TmpGraphicsItem* p );
 
-    //determines if this object is offset from its parent
-    //by geocoorninates. If it is not then then it is drawn as screen
-    //coordinate offset from its parent.
-    //ONLY valid if there is a parent object.
-    //FIXME remove this? is this needed at all?
-    bool isGeoOffset();
-
     //Start dealing with the event stuff
     //is this the best thing to call the event distributer?
     bool sceneEvent( QEvent* event );

@@ -9,124 +9,28 @@
 //
 
 #include "TextAnnotation.h"
-#include "GeoPainter.h"
-#include "ViewportParams.h"
-#include "MarbleDirs.h"
-#include "GeoWidgetBubble.h"
-#include "TextEditor.h"
-#include "AbstractProjection.h"
 
-#include <QtCore/QDebug>
-#include <QtGui/QPixmap>
-#include <QtGui/QTextEdit>
-#include <QtGui/QPushButton>
-#include <QtCore/QVariant>
+#include "GeoDataPlacemark.h"
+
 
 namespace Marble{
 
 TextAnnotation::TextAnnotation()
 {
-   bubble = new GeoWidgetBubble();
-
-   //FIXME decide who actually owns this widget and setup destruction
-   //accordingly
-   m_textEditor = new TextEditor();
-   bubble->setGeoWidget( m_textEditor );
 }
 
-QRect TextAnnotation::screenBounding()
+GeoDataPlacemark TextAnnotation::toGeoData()
 {
-    //FIXME the first 2 should actually offset it
-    return QRect(-5,-5,20,20);
-}
+    GeoDataPlacemark placemark;
 
-void TextAnnotation::paint( GeoPainter *painter,
-                            ViewportParams *viewport,
-                            const QString& renderPos,
-                            GeoSceneLayer * layer )
-{
-    qreal degPix = viewport->angularResolution() * RAD2DEG;
+    placemark.setName( name() );
+    placemark.setDescription( description() );
 
-    painter->drawEllipse(coordinate(), screenBounding().width(), screenBounding().height(), true);
-    //Would it not be useful to have a draw latlongbox?
-//    painter->drawRect(geoBounding());
-    qreal north, south, east, west;
+    //FIXME: make this work for all geometries and not just points
+//    placemark.setGeometry( geometry() );
+    placemark.setGeometry( GeoDataPoint( geometry() ) );
 
-    //don't need this if its done by the painter soon
-//    geoBounding(viewport->angularResolution());
-//    north = m_regions.at(0).boundingRect().top();
-//    south = m_regions.at(0).boundingRect().bottom();
-//    east = m_regions.at(0).boundingRect().right();
-//    west = m_regions.at(0).boundingRect().left();
-
-    //would like a method to draw a QRegion ;)
-//    painter->drawRect(GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ),
-//                      m_regions.at(0).boundingRect().width() * RAD2DEG,
-//                      m_regions.at(0).boundingRect().height() * RAD2DEG,true);
-
-
-    painter->drawPoint( GeoDataCoordinates((west + east) /2 , (north + south) / 2, 0 ) );
-
-    painter->drawPixmap( coordinate(), QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) )  );
-
-    qreal x, y;
-    bool hidden;
-    bool visable = viewport->currentProjection()->screenCoordinates( coordinate(), viewport, x, y, hidden );
-
-    if( visable && !hidden ) {
-        QList<QRegion> list;
-        list.append( QRegion( x -10 , y-10 , 20 , 20 ) );
-        setRegions( list );
-        painter->drawRect( regions().at(0).boundingRect() );
-        bubble->moveTo( QPoint( x, y ) );
-        bubble->paint( painter, viewport, renderPos, layer );
-    } else {
-        bubble->hide();
-    }
-
-    //FIXME This shouldn't really be a part of this method at all as each item should
-    //be a part of the scene regardless if it has a parent or not!
-    //Parent - Child relationship should only be used in the paint function to decide
-    //if the coordinate of the object should be an offset of the parent or an actual
-    //coordinate.
-    QListIterator<TmpGraphicsItem*> it(getChildren());
-
-    if( it.hasNext() ) {
-        TmpGraphicsItem* p = it.next();
-        p->paint(painter, viewport, renderPos, layer );
-    }
-
-
-
-
-}
-
-QVariant TextAnnotation::itemChange(GeoGraphicsItemChange change, QVariant v )
-{
-    switch ( change ) {
-        case TmpGraphicsItem::ItemSelectChange :
-        if ( v.toBool() ) {
-            //make the bubble visable
-        } else {
-            //hide the bubble
-        }
-        break;
-
-        default:
-        //do nothing
-        break;
-    }
-    return TmpGraphicsItem::itemChange( change, v );
-}
-
-bool TextAnnotation::mousePressEvent( QMouseEvent* event )
-{
-    if( bubble->isHidden() ) {
-        bubble->setHidden( false );
-    } else {
-        bubble->setHidden( true );
-    }
-    return true;
+    return placemark;
 }
 
 }

@@ -24,6 +24,7 @@
 #include <QtGui/QAction>
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
+#include "AreaAnnotation.h"
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "GeoDataDocument.h"
@@ -31,10 +32,9 @@
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
 #include "GeoDataPlacemark.h"
-#include "TextAnnotation.h"
 #include "GeoDataParser.h"
-#include "AreaAnnotation.h"
 #include "MarbleWidget.h"
+#include "PlacemarkTextAnnotation.h"
 
 namespace Marble
 {
@@ -85,7 +85,7 @@ void OsmAnnotatePlugin::initialize ()
 
     //Setup the model
     GeoDataCoordinates madrid( -13.7, 40.4, 0.0, GeoDataCoordinates::Degree );
-    TextAnnotation* annon = new TextAnnotation();
+    PlacemarkTextAnnotation* annon = new PlacemarkTextAnnotation();
 
     annon->setCoordinate(madrid);
     
@@ -230,7 +230,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
                                                                   lon, lat, GeoDataCoordinates::Radian);
             if ( valid ) {
                 GeoDataCoordinates point( lon, lat );
-                TextAnnotation* t = new TextAnnotation();
+                PlacemarkTextAnnotation* t = new PlacemarkTextAnnotation();
                 t->setCoordinate(point);
                 model.append(t);
 

@@ -51,6 +51,7 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
     typedef GeoDataCoordinates::Unit Unit;
 
     GeoDataPoint( const GeoDataPoint& other );
+    GeoDataPoint( const GeoDataCoordinates& other );
     GeoDataPoint( const GeoDataGeometry& other );
     GeoDataPoint();
 

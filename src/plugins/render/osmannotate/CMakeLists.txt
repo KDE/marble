@@ -11,6 +11,7 @@ FILE( GLOB geodata_handlers_osm_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} osm/*.
 
 set( osmannotate_SRCS
         OsmAnnotatePlugin.cpp
+        PlacemarkTextAnnotation.cpp
         TmpGraphicsItem.cpp
         TextAnnotation.cpp
         AreaAnnotation.cpp

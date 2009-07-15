@@ -13,6 +13,7 @@
 
 #include <QWidget>
 
+class QLineEdit;
 class QToolButton;
 class QTextEdit;
 class QHBoxLayout;
@@ -26,6 +27,11 @@ public:
     TextEditor();
     ~TextEditor();
 
+    //return the plain text name
+    QString name();
+    //return the HTML description
+    QString description();
+
 private:
     QAction* m_boldAction;
     QAction* m_underLineAction;
@@ -35,7 +41,8 @@ private:
     QToolButton* m_underLineButton;
     QToolButton* m_italicButton;
 
-    QTextEdit* m_textEditor;
+    QLineEdit* m_name;
+    QTextEdit* m_description;
 
     QHBoxLayout* m_buttonLayout;
     QVBoxLayout* m_layout;

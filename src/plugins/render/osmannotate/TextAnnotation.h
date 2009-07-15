@@ -11,29 +11,23 @@
 #ifndef TEXTANNOTATION_H
 #define TEXTANNOTATION_H
 
-
 #include "TmpGraphicsItem.h"
+
 namespace Marble{
 
-class GeoWidgetBubble;
-class TextEditor;
+class GeoDataPlacemark;
 
-class TextAnnotation : public TmpGraphicsItem
+class TextAnnotation
 {
 public:
     TextAnnotation();
 
-    virtual QRect screenBounding();
-    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
-                        const QString& renderPos, GeoSceneLayer * layer = 0 );
-    virtual QVariant itemChange(GeoGraphicsItemChange c, QVariant v);
+    virtual QString name() = 0 ;
+    virtual QString description() = 0;
+    virtual GeoDataGeometry geometry() = 0;
 
-protected:
-    virtual bool mousePressEvent( QMouseEvent *event );
+    GeoDataPlacemark toGeoData();
 
-private:
-    GeoWidgetBubble* bubble;
-    TextEditor* m_textEditor;
 };
 
 }

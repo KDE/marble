@@ -13,6 +13,7 @@
 #include <QtCore/QDebug>
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
+#include <QtGui/QLineEdit>
 #include <QtGui/QToolButton>
 #include <QtGui/QTextEdit>
 #include <QtGui/QHBoxLayout>
@@ -28,7 +29,13 @@ TextEditor::TextEditor() : QWidget()
     m_buttonLayout = new QHBoxLayout;
     m_layout = new QVBoxLayout;
 
-    m_textEditor = new QTextEdit;
+    m_description = new QTextEdit;
+    m_description->viewport()->setAutoFillBackground( true );
+    QApplication::setPalette( QPalette() );
+    m_description->setBackgroundRole( QPalette::Window );
+
+    m_name = new QLineEdit;
+    m_name->setText(tr("Placemark Name"));
 
     // setup the actions and create the buttons
     m_boldAction = new QAction( this );
@@ -51,12 +58,9 @@ TextEditor::TextEditor() : QWidget()
     m_buttonLayout->addWidget( m_italicButton );
     m_buttonLayout->addWidget( m_underLineButton );
 
+    m_layout->addWidget( m_name );
     m_layout->addLayout( m_buttonLayout );
-    m_layout->addWidget( m_textEditor );
-
-    m_textEditor->viewport()->setAutoFillBackground( true );
-    QApplication::setPalette( QPalette() );
-    m_textEditor->setBackgroundRole( QPalette::Window );
+    m_layout->addWidget( m_description );
 
     setLayout( m_layout );
 }
@@ -64,6 +68,16 @@ TextEditor::TextEditor() : QWidget()
 TextEditor::~TextEditor()
 {
 
+}
+
+QString TextEditor::name()
+{
+    return m_name->text();
+}
+
+QString TextEditor::description()
+{
+    return m_description->toHtml();
 }
 
 }
