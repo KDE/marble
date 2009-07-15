@@ -24,10 +24,8 @@ public:
     TextAnnotation();
 
     virtual QRect screenBounding();
-    virtual void geoBounding(qreal angularResoluiton);
     virtual void paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 );
-    virtual bool isGeoProjected();
     virtual QVariant itemChange(GeoGraphicsItemChange c, QVariant v);
 
 protected:

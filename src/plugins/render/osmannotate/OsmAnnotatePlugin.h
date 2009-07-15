@@ -63,16 +63,12 @@ class OsmAnnotatePlugin :  public RenderPlugin
     bool isInitialized () const;
 
 
+    //intended to be called from the outside the plugin to replace
+    //the "registerActions" calls.
+    //FIXME: need to guarentee marbleWiget has been initialised before this call
     QList<QActionGroup*> actionGroups();
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
-
-    //Intended to be replaced by an actual model system
-    QList<TmpGraphicsItem*> model;
-
-    //Only examples as a preview
-    QWidget*    vid;
-    QWidget*    but;
 
     bool    widgetInitalised;
 
@@ -89,8 +85,13 @@ public slots:
 private:
     QList<QActionGroup*> setupActions(MarbleWidget* m);
 
-    GeoDataLineString* tmp_lineString;
+    //Intended to be replaced by an actual model system
+    //FIXME: Merge the two models once TmpGraphicsItem is eliminated
+    QList<TmpGraphicsItem*> model;
     QList<GeoGraphicsItem*>* m_itemModel;
+
+    //used while creating new polygons
+    GeoDataLineString* m_tmp_lineString;
 
     bool m_addingPlacemark;
     bool m_drawingPolygon;

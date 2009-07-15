@@ -82,11 +82,6 @@ QIcon OsmAnnotatePlugin::icon () const
 
 void OsmAnnotatePlugin::initialize ()
 {
-    //initialise the first test widget
-    QPushButton * button;
-
-    button = new QPushButton(0);
-    but = button;
 
     //Setup the model
     GeoDataCoordinates madrid( -13.7, 40.4, 0.0, GeoDataCoordinates::Degree );
@@ -97,20 +92,8 @@ void OsmAnnotatePlugin::initialize ()
     //FIXME memory leak withouth a model to do memory management
     model.append(annon);
 
-    //Attempted to add a video widget as a tech preview but this needs to
-    //be properly considered. Phonon includes in a plugin?
-//    video = new Phonon::VideoWidget(0);
-//
-//    vid = video;
-//
-//    Phonon::VideoWidget * video;
-//    Phonon::MediaObject m;
-//    QString fileName("/home/foo/bar.ogg");
-//
-//    m.setCurrentSource(fileName);
-
     widgetInitalised= false;
-    tmp_lineString = 0;
+    m_tmp_lineString = 0;
     m_itemModel = 0;
 }
 
@@ -138,21 +121,10 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
     }
     painter->autoMapQuality();
 
-    //Set the parents if they have not already been set
-
-//    if ( vid->parent() == 0 ) {
-//        vid->setParent( (QWidget*)painter->device() );
-//        //start video
-//    }
-
-    if ( but->parent() == 0 ) {
-
+    //so the user can keep track of the current polygon drawing
+    if( m_tmp_lineString ) {
+        painter->drawPolyline( *m_tmp_lineString );
     }
-
-    int x, y;
-    bool hidden;
-
-    GeoDataCoordinates madrid( -13.7, 40.4, 0.0, GeoDataCoordinates::Degree );
     
     QListIterator<TmpGraphicsItem*> i(model);
     
@@ -161,24 +133,6 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
         tmp->paint(painter, viewport, renderPos, layer);
     }
 
-    if ( tmp_lineString != 0 ) {
-        painter->drawPolyline( *tmp_lineString );
-    }
-
-
-
-
-//    viewport->currentProjection()->screenCoordinates( madrid, viewport, x, y, hidden );
-
-//    if( !hidden ) {
-//        but->move(QPoint(x, y));
-//        but->setVisible(false);
-//    } else {
-//        but->setVisible(false);
-//    }
-
-    //Figure out how to add the data parsed to a scene for rendering
-    //FIXME: this is a terrible hack intended just to test!
     if( m_itemModel ) {
         QListIterator<GeoGraphicsItem*> it( *m_itemModel );
 
@@ -186,9 +140,6 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
             GeoGraphicsItem* i = it.next();
             i->paint( painter, viewport, renderPos, layer );
         }
-
-//        painter->drawPolygon( ring );
-
     }
 
     return true;
@@ -204,12 +155,12 @@ void OsmAnnotatePlugin::setDrawingPolygon(bool b)
     m_drawingPolygon = b;
     if( !b ) {
         //stopped drawing the polygon
-        if ( tmp_lineString != 0 ) {
+        if ( m_tmp_lineString != 0 ) {
             AreaAnnotation* area = new AreaAnnotation();
             GeoDataPolygon poly( Tessellate );
-            poly.setOuterBoundary( GeoDataLinearRing(*tmp_lineString) );
-            delete tmp_lineString;
-            tmp_lineString = 0;
+            poly.setOuterBoundary( GeoDataLinearRing(*m_tmp_lineString) );
+            delete m_tmp_lineString;
+            m_tmp_lineString = 0;
 
             area->setGeometry( poly );
 
@@ -304,11 +255,11 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
                                                                    mouseEvent->pos().y(),
                                                                    lon, lat, GeoDataCoordinates::Radian);
             if ( valid ) {
-                if ( tmp_lineString == 0 ) {
-                    tmp_lineString = new GeoDataLineString( Tessellate );
+                if ( m_tmp_lineString == 0 ) {
+                    m_tmp_lineString = new GeoDataLineString( Tessellate );
                 }
 
-                tmp_lineString->append(GeoDataCoordinates(lon, lat));
+                m_tmp_lineString->append(GeoDataCoordinates(lon, lat));
 
                 //FIXME only repaint the line string so far
                 marbleWidget->repaint();
@@ -362,7 +313,13 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 QList<QActionGroup*> OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
 {
     QList<QActionGroup*> result;
+
+    QActionGroup* initial = new QActionGroup(0);
+    initial->setExclusive( false );
+
     QActionGroup* group = new QActionGroup(0);
+    group->setExclusive( true );
+
     QAction*    m_addPlacemark;
     QAction*    m_drawPolygon;
     QAction*    m_drawLine;
@@ -393,22 +350,23 @@ QList<QActionGroup*> OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     m_endSeperator = new QAction ( this );
     m_endSeperator->setSeparator( true );
 
-        m_enableInputAction = new QAction(this);
-//    m_enableInputAction->setText("Enable Marble Input");
+    m_enableInputAction = new QAction(this);
+    m_enableInputAction->setToolTip(tr("Enable Marble Input"));
     m_enableInputAction->setCheckable(true);
     m_enableInputAction->setChecked( true );
     m_enableInputAction->setIcon( QIcon( MarbleDirs::path("bitmaps/hand.png") ) );
-//    m_enableInputAction->set
     connect( m_enableInputAction, SIGNAL(toggled(bool)),
                        widget, SLOT( setInputEnabled(bool)) );
 
-    group->addAction( m_enableInputAction );
-    group->addAction( m_beginSeperator );
+    initial->addAction( m_enableInputAction );
+    initial->addAction( m_beginSeperator );
+
     group->addAction( m_addPlacemark );
     group->addAction( m_drawPolygon );
     group->addAction( m_loadOsmFile );
     group->addAction( m_endSeperator );
 
+    result.append( initial );
     result.append( group );
     return result;
 }

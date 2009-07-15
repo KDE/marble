@@ -40,32 +40,6 @@ QRect TextAnnotation::screenBounding()
     return QRect(-5,-5,20,20);
 }
 
-void TextAnnotation::geoBounding(qreal angularResolution)
-{
-    //FIXME
-    // Remove this method when the QRegion is actually done by the painter
-    // it will be preduced in the GeoGraphicsItemPrivate during a paint event
-
-
-    qreal lat, lon, alt, width, height;
-    coordinate(lon, lat, alt);
-
-    //problem with this approach is that the geoBounding is View
-    //Dependant. This does not lend well to a good consistant model.
-    width = screenBounding().width() * angularResolution;
-    height = screenBounding().height() * angularResolution;
-    QRect bound( coordinate().longitude() - (width/2),
-                 coordinate().latitude() - (height/2),
-                 width, height) ;
-
-    QRegion path;
-    path = path.united( bound);
-    QList<QRegion> list;
-    list.append ( path );
-    setRegions( list );
-
-}
-
 void TextAnnotation::paint( GeoPainter *painter,
                             ViewportParams *viewport,
                             const QString& renderPos,
@@ -73,7 +47,7 @@ void TextAnnotation::paint( GeoPainter *painter,
 {
     qreal degPix = viewport->angularResolution() * RAD2DEG;
 
-    painter->drawEllipse(coordinate(), screenBounding().width(), screenBounding().height(), isGeoProjected());
+    painter->drawEllipse(coordinate(), screenBounding().width(), screenBounding().height(), true);
     //Would it not be useful to have a draw latlongbox?
 //    painter->drawRect(geoBounding());
     qreal north, south, east, west;
@@ -125,11 +99,6 @@ void TextAnnotation::paint( GeoPainter *painter,
 
 
 
-}
-
-bool TextAnnotation::isGeoProjected()
-{
-    return false;
 }
 
 QVariant TextAnnotation::itemChange(GeoGraphicsItemChange change, QVariant v )

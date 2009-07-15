@@ -14,13 +14,14 @@
 #include "GeoDataPoint.h"
 #include "GeoGraphicsItem.h"
 #include "GeoPointGraphicsItem.h"
+#include "marble_export.h"
 
 #include <QtGui/QPen>
 
 namespace Marble
 {
 
-class OsmNodeGraphicsItem : public GeoPointGraphicsItem
+class MARBLE_EXPORT OsmNodeGraphicsItem : public GeoPointGraphicsItem
 {
 public:
     OsmNodeGraphicsItem();
