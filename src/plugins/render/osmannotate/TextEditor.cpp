@@ -32,17 +32,17 @@ TextEditor::TextEditor() : QWidget()
 
     // setup the actions and create the buttons
     m_boldAction = new QAction( this );
-    m_boldAction->setText("Bold");
+    m_boldAction->setText(tr("Bold"));
     m_boldButton = new QToolButton;
     m_boldButton->setDefaultAction( m_boldAction );
 
     m_italicAction = new QAction( this );
-    m_italicAction->setText( "Italic" );
+    m_italicAction->setText( tr("Italic") );
     m_italicButton = new QToolButton;
     m_italicButton->setDefaultAction( m_italicAction );
 
     m_underLineAction = new QAction( this );
-    m_underLineAction->setText( "UnderLine" );
+    m_underLineAction->setText( tr("UnderLine") );
     m_underLineButton = new QToolButton;
     m_underLineButton->setDefaultAction( m_underLineAction );
 
