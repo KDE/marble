@@ -30,7 +30,6 @@ public:
                             GeoDataFolder (const Marble::GeoDataFolder& other);
                             GeoDataFolder (const Marble::GeoDataFeature& other);
     virtual bool            isFolder () const;
-    virtual EnumFeatureId   featureId () const;
 };   // GeoDataFolder
 
 };   // Marble

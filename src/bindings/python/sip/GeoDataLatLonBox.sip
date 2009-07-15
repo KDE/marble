@@ -29,7 +29,6 @@ public:
                             GeoDataLatLonBox ();
                             GeoDataLatLonBox (qreal north, qreal south, qreal east, qreal west, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
                             GeoDataLatLonBox (const Marble::GeoDataLatLonBox&);
-    virtual bool            isFolder () const;
     qreal                   north (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
     void                    setNorth (const qreal north, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
     qreal                   south (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;

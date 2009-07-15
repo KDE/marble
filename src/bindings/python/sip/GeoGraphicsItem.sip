@@ -41,8 +41,6 @@ public:
 protected:
     virtual void            paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0) = 0;
 
-public:
-    void                    setCoordinate (const Marble::GeoDataPoint& point);
 };   // GeoGraphicsItem
 
 };   // Marble

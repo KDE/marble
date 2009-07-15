@@ -57,7 +57,6 @@ protected:
 
 
     virtual bool            eventFilter (QObject* object, QEvent* e);
-    bool                    needsUpdate ();
     void                    setSize (const QSize& size);
 };   // MarbleGraphicsItem
 

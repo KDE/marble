@@ -26,7 +26,10 @@ class GeoDataLinearRing : Marble::GeoDataLineString
 
 public:
     explicit                GeoDataLinearRing (Marble::TessellationFlags f = Marble::NoTessellation);
+                            GeoDataLinearRing (const Marble::GeoDataGeometry& other);
     virtual bool            isClosed () const;
+//FIXME mapped type needed
+//    virtual QVector<Marble::GeoDataLineString*>  toRangeCorrected () const;
 };   // GeoDataLinearRing
 
 };   // Marble

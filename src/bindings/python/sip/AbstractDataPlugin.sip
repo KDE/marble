@@ -39,13 +39,13 @@ public:
 
 
     virtual void            initialize () = 0;
-    bool                    isInitialized () const;
+    virtual bool            isInitialized () const;
     Marble::AbstractDataPluginModel*  model () const;
     void                    setModel (Marble::AbstractDataPluginModel* model);
     void                    setNameId (const QString& name);
     QString                 nameId () const;
-    quint32                 numberOfItems () const;
     void                    setNumberOfItems (quint32 number);
+    quint32                 numberOfItems () const;
     QList<Marble::AbstractDataPluginItem*>  whichItemAt (const QPoint& curpos);
 };   // AbstractDataPlugin
 

@@ -46,9 +46,6 @@ public:
 //mt     FileViewModel*     fileViewModel () const;
 
 
-
-private:
-                            MarbleDataFacade (const Marble::MarbleDataFacade&);
 };   // MarbleDataFacade
 
 };   // Marble

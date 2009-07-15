@@ -33,9 +33,6 @@ public:
 // MarbleWidgetInputHandler isn't an exported class
 //ig    void                    setInputHandler (Marble::MarbleWidgetInputHandler* handler);
 
-//mt undefined symbol: HttpDownloadManager* downloadManager -- need mapped type?
-//mt     void               setDownloadManager (HttpDownloadManager* downloadManager);
-
 
     const QRegion           activeRegion ();
     const QRegion           mapRegion ();

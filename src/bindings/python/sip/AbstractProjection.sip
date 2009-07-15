@@ -45,10 +45,6 @@ public:
     };
 
                             AbstractProjection ();
-    virtual qreal           maxLat () const;
-    virtual qreal           minLat () const;
-    virtual bool            repeatX () const;
-    virtual void            setRepeatX (bool val);
     virtual bool            traversablePoles () const;
     virtual bool            traversableDateLine () const;
     virtual Marble::AbstractProjection::SurfaceType  surfaceType () const = 0;

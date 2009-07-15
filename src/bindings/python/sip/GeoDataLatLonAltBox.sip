@@ -29,7 +29,6 @@ public:
                             GeoDataLatLonAltBox ();
                             GeoDataLatLonAltBox (const Marble::GeoDataLatLonAltBox&);
                             GeoDataLatLonAltBox (const Marble::GeoDataLatLonBox&);
-    virtual bool            isFolder () const;
     qreal                   minAltitude () const;
     void                    setMinAltitude (const qreal minAltitude);
     qreal                   maxAltitude () const;

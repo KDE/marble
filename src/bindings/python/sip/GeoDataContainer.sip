@@ -51,11 +51,6 @@ public:
 
 private:
 //ig                            GeoDataContainer (Marble::GeoDataContainerPrivate* priv);
-
-public:
-    virtual Marble::GeoDataObject*  child (int);
-    virtual int             childPosition (Marble::GeoDataObject*);
-    virtual int             childCount ();
 };   // GeoDataContainer
 
 };   // Marble
