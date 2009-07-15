@@ -20,6 +20,7 @@
 // Qt
 #include <QtCore/QDebug>
 #include <QtCore/QHash>
+#include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtGui/QAction>
 #include <QtGui/QBrush>
@@ -38,7 +39,7 @@ class WeatherItemPrivate {
  public:
     WeatherItemPrivate( WeatherItem *parent )
         : m_priority( 0 ),
-          m_action( new QAction( tr("Weather"), parent ) ),
+          m_action( new QAction( "Weather", parent ) ),
           m_parent( parent ),
           m_temperatureSize()
     {
