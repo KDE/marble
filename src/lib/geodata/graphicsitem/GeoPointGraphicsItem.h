@@ -8,31 +8,28 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-#ifndef OSMNODEGRAPHICSITEM_H
-#define OSMNODEGRAPHICSITEM_H
+#ifndef GEOPOINTGRAPHICSITEM_H
+#define GEOPOINTGRAPHICSITEM_H
 
 #include "GeoDataPoint.h"
 #include "GeoGraphicsItem.h"
-#include "GeoPointGraphicsItem.h"
-
-#include <QtGui/QPen>
 
 namespace Marble
 {
 
-class OsmNodeGraphicsItem : public GeoPointGraphicsItem
+class GeoPointGraphicsItem : public GeoGraphicsItem
 {
 public:
-    OsmNodeGraphicsItem();
+    GeoPointGraphicsItem();
 
+    void setPoint( const GeoDataPoint& point );
+    
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
-
-
-private:
-    QPen m_pen;
+protected:
+    GeoDataPoint    m_point;
 };
 
 }
 
-#endif // OSMNODEGRAPHICSITEM_H
+#endif // GEOPOINTGRAPHICSITEM_H

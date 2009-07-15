@@ -37,6 +37,7 @@ class GeoPainterPrivate;
 class GeoDataCoordinates;
 class GeoDataLineString;
 class GeoDataLinearRing;
+class GeoDataPoint;
 class GeoDataPolygon;
 
 /**
@@ -90,6 +91,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     void drawAnnotation (  const GeoDataCoordinates & position, const QString & text, QSizeF bubbleSize = QSizeF( 130, 100 ), qreal bubbleOffsetX = -10, qreal bubbleOffsetY = -30, qreal xRnd = 5, qreal yRnd = 5 );
 
     void drawPoint (  const GeoDataCoordinates & position );
+    void drawPoint ( const GeoDataPoint & point );
     void drawPoints (  const GeoDataCoordinates * points, int pointCount );
 
     // Of course in theory we could have the "isGeoProjected" parameter used

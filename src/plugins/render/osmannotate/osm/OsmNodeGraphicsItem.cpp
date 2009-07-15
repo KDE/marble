@@ -16,7 +16,7 @@ namespace Marble
 {
 
 OsmNodeGraphicsItem::OsmNodeGraphicsItem()
-        : GeoGraphicsItem()
+        : GeoPointGraphicsItem()
 {
     m_pen.setColor( Qt::black );
 }
@@ -27,11 +27,6 @@ void OsmNodeGraphicsItem::paint( GeoPainter *painter, ViewportParams* viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    //FIXME GeoPainter should have a method to directly draw a
-    //GeoDataPoint. after that most of this code can be removed
-    qreal lon, lat;
-    m_point.geoCoordinates( lon, lat );
-
     painter->save();
     //stop points from blurring
     painter->setRenderHint( QPainter::Antialiasing, false );
@@ -41,9 +36,5 @@ void OsmNodeGraphicsItem::paint( GeoPainter *painter, ViewportParams* viewport,
 
 }
 
-void OsmNodeGraphicsItem::setPoint( const GeoDataCoordinates& point )
-{
-    m_point = GeoDataCoordinates( point );
-}
 
 }

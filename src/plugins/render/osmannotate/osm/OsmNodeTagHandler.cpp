@@ -32,7 +32,7 @@ GeoNode* OsmNodeTagHandler::parse ( GeoParser& parser) const
     qreal lon = parser.attribute("lon").toDouble();
     qreal lat = parser.attribute("lat").toDouble();
 
-    item->setPoint( GeoDataCoordinates(lon, lat, 0, GeoDataCoordinates::Degree ) );
+    item->setPoint( GeoDataPoint(lon, lat, 0, GeoDataCoordinates::Degree ) );
 
     parser.activeModel()->append( item );
 

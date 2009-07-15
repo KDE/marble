@@ -18,6 +18,7 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
+#include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
 
 #include "global.h"
@@ -207,6 +208,11 @@ void GeoPainter::drawPoint (  const GeoDataCoordinates & position )
             QPainter::drawPoint( d->m_x[it], y );
         }
     }
+}
+
+void GeoPainter::drawPoint( const GeoDataPoint & point )
+{
+    drawPoint( GeoDataCoordinates( point ) );
 }
 
 void GeoPainter::drawPoints (  const GeoDataCoordinates * points, int pointCount )
