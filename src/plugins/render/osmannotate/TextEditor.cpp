@@ -23,13 +23,22 @@ namespace Marble {
 
 TextEditor::TextEditor() : QWidget()
 {
-    setMaximumWidth( 250 );
     setCursor( Qt::ArrowCursor );
 
     m_buttonLayout = new QHBoxLayout;
     m_layout = new QVBoxLayout;
 
+    /*
+     *Note: these widgets do not need to be constructed with a parent
+     *as adding them to a layout automatically sets the parent. If a
+     *parent is already set it will mess up the layouts.
+     */
     m_description = new QTextEdit;
+    m_description->setMinimumHeight( 50 );
+    m_description->setSizePolicy( QSizePolicy::Fixed,
+                                  QSizePolicy::MinimumExpanding );
+    m_description->viewport()->setSizePolicy( QSizePolicy::Fixed,
+                                              QSizePolicy::MinimumExpanding );
     m_description->viewport()->setAutoFillBackground( true );
     QApplication::setPalette( QPalette() );
     m_description->setBackgroundRole( QPalette::Window );
@@ -63,6 +72,9 @@ TextEditor::TextEditor() : QWidget()
     m_layout->addWidget( m_description );
 
     setLayout( m_layout );
+    setMaximumWidth( 250 );
+    setMinimumHeight( 50 );
+    setSizePolicy( QSizePolicy::Fixed, QSizePolicy::MinimumExpanding );
 }
 
 TextEditor::~TextEditor()

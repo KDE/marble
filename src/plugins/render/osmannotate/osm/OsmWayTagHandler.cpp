@@ -8,18 +8,23 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
+#include "OsmWayTagHandler.h"
+
+#include "GeoParser.h"
 #include "OsmElementDictionary.h"
 
 namespace Marble
 {
 
-namespace osm {
+namespace osm
+{
 
-    const char* osmTag_osm = "osm";
+static GeoTagHandlerRegistrar s_handlerbounds( GeoTagHandler::QualifiedName(osmTag_way, ""),
+                                               new OsmWayTagHandler() );
 
-    const char* osmTag_bounds = "bounds";
-    const char* osmTag_node = "node";
-    const char* osmTag_way = "way";
+GeoNode* OsmWayTagHandler::parse( GeoParser& parser ) const
+{
+}
 
 }
 

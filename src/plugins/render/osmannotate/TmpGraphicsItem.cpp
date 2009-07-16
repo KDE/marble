@@ -16,7 +16,7 @@ namespace Marble{
 
 TmpGraphicsItem::TmpGraphicsItem()
 {
-    parent = 0;
+    m_parent = 0;
 
     //sensible default?
     geoOffset = false;
@@ -37,24 +37,24 @@ QList<QRegion> TmpGraphicsItem::regions()
     return QList<QRegion>( m_regions );
 }
 
-QList<TmpGraphicsItem*> TmpGraphicsItem::getChildren()
+QList<TmpGraphicsItem*> TmpGraphicsItem::children()
 {
-    return QList<TmpGraphicsItem*>(children);
+    return QList<TmpGraphicsItem*>(m_children);
 }
 
 void TmpGraphicsItem::addChild(TmpGraphicsItem* c)
 {
-    children.append(c);
+    m_children.append(c);
 }
 
-TmpGraphicsItem* TmpGraphicsItem::getParent()
+TmpGraphicsItem* TmpGraphicsItem::parent()
 {
-    return parent;
+    return m_parent;
 }
 
 void TmpGraphicsItem::setParent( TmpGraphicsItem* p )
 {
-    parent = p;
+    m_parent = p;
 }
 
 bool TmpGraphicsItem::sceneEvent( QEvent* event )

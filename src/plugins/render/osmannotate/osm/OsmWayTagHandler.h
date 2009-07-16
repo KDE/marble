@@ -8,22 +8,26 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-#ifndef OSMELEMENTDICTIONARY_H
-#define OSMELEMENTDICTIONARY_H
+#ifndef OSMWAYTAGHANDLER_H
+#define OSMWAYTAGHANDLER_H
+
+#include "GeoTagHandler.h"
+#include "marble_export.h"
 
 namespace Marble
 {
 
-namespace osm {
+namespace osm
+{
 
-    extern const char* osmTag_osm;
-
-    extern const char* osmTag_bounds;
-    extern const char* osmTag_node;
-    extern const char* osmTag_way;
+class MARBLE_EXPORT OsmWayTagHandler : public GeoTagHandler
+{
+public:
+    virtual GeoNode* parse( GeoParser& parser ) const;
+};
 
 }
 
 }
 
-#endif // OSMELEMENTDICTIONARY_H
+#endif // OSMWAYTAGHANDLER_H

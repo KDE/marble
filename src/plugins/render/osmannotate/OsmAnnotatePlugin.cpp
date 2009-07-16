@@ -95,6 +95,8 @@ void OsmAnnotatePlugin::initialize ()
     widgetInitalised= false;
     m_tmp_lineString = 0;
     m_itemModel = 0;
+    m_addingPlacemark = false;
+    m_drawingPolygon = false;
 }
 
 bool OsmAnnotatePlugin::isInitialized () const
@@ -323,8 +325,8 @@ QList<QActionGroup*> OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     QAction*    m_addPlacemark;
     QAction*    m_drawPolygon;
     QAction*    m_drawLine;
-    QAction*    m_beginSeperator;
-    QAction*    m_endSeperator;
+    QAction*    m_beginSeparator;
+    QAction*    m_endSeparator;
     QAction*    m_loadOsmFile;
     QAction*    m_enableInputAction;
 
@@ -345,10 +347,10 @@ QList<QActionGroup*> OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     connect( m_loadOsmFile, SIGNAL(triggered()),
              this, SLOT(loadOsmFile()) );
 
-    m_beginSeperator = new QAction( this );
-    m_beginSeperator->setSeparator( true );
-    m_endSeperator = new QAction ( this );
-    m_endSeperator->setSeparator( true );
+    m_beginSeparator = new QAction( this );
+    m_beginSeparator->setSeparator( true );
+    m_endSeparator = new QAction ( this );
+    m_endSeparator->setSeparator( true );
 
     m_enableInputAction = new QAction(this);
     m_enableInputAction->setToolTip(tr("Enable Marble Input"));
@@ -359,12 +361,12 @@ QList<QActionGroup*> OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
                        widget, SLOT( setInputEnabled(bool)) );
 
     initial->addAction( m_enableInputAction );
-    initial->addAction( m_beginSeperator );
+    initial->addAction( m_beginSeparator );
 
     group->addAction( m_addPlacemark );
     group->addAction( m_drawPolygon );
     group->addAction( m_loadOsmFile );
-    group->addAction( m_endSeperator );
+    group->addAction( m_endSeparator );
 
     result.append( initial );
     result.append( group );

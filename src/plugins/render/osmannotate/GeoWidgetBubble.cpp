@@ -52,7 +52,8 @@ void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* view,
         painter->save();
 
         //draw the border
-        painter->setBrush( QBrush( Qt::lightGray, Qt::SolidPattern ));
+        painter->setPen( QPen( QColor( 125, 125, 125) ) );
+        painter->setBrush( QBrush( QColor( 255, 255, 255) , Qt::SolidPattern ));
         painter->drawRoundedRect( QRect( position + borderOffset, widgetSize + borderSize ),
                                   30, 30  );
 

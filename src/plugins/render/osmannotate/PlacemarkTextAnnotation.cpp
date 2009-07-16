@@ -94,7 +94,7 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter,
     //Parent - Child relationship should only be used in the paint function to decide
     //if the coordinate of the object should be an offset of the parent or an actual
     //coordinate.
-    QListIterator<TmpGraphicsItem*> it(getChildren());
+    QListIterator<TmpGraphicsItem*> it(children());
 
     if( it.hasNext() ) {
         TmpGraphicsItem* p = it.next();

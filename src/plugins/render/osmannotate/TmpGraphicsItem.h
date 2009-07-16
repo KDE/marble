@@ -49,10 +49,10 @@ enum GeoGraphicsItemChange {
     QList<QRegion> regions();
 
 
-    QList<TmpGraphicsItem*> getChildren();
+    QList<TmpGraphicsItem*> children();
     void addChild(TmpGraphicsItem* c);
 
-    TmpGraphicsItem* getParent();
+    TmpGraphicsItem* parent();
     void setParent( TmpGraphicsItem* p );
 
     //Start dealing with the event stuff
@@ -70,13 +70,13 @@ protected:
 
  private:
     //intended to go in the private class
-    QList<TmpGraphicsItem*> children;
+    QList<TmpGraphicsItem*> m_children;
 
     QList<QRegion> m_regions;
 
     //Allows for the implementation of local coordinate systems
     //for children objects
-    TmpGraphicsItem* parent;
+    TmpGraphicsItem* m_parent;
 
     bool geoOffset;
 
