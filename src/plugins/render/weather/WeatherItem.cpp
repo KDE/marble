@@ -39,7 +39,7 @@ class WeatherItemPrivate {
  public:
     WeatherItemPrivate( WeatherItem *parent )
         : m_priority( 0 ),
-          m_action( new QAction( "Weather", parent ) ),
+          m_action( new QAction( QObject::tr( "Weather" ), parent ) ),
           m_parent( parent ),
           m_temperatureSize()
     {
