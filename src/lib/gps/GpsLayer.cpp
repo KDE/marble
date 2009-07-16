@@ -63,6 +63,7 @@ PositionTracking* GpsLayer::getPositionTracking()
 void GpsLayer::paintLayer( ClipPainter *painter, 
                           const QSize &canvasSize, ViewParams *viewParams )
 {
+    painter->save();
     if ( visible() ) {
         m_currentPosition->draw( painter, canvasSize, 
                                  viewParams );
@@ -80,6 +81,7 @@ void GpsLayer::paintLayer( ClipPainter *painter,
                  (*it)->draw( painter, canvasSize, viewParams );
              }
     }
+    painter->restore();
 }
 
 void GpsLayer::paintCurrentPosition( ClipPainter *painter, 
@@ -102,4 +104,9 @@ void GpsLayer::loadGpx( const QString &fileName )
 //     test << *tempFile;
 
     m_fileModel->addFile( tempFile );
+}
+
+void GpsLayer::addGpxFile( GpxFile* file )
+{
+    m_fileModel->addFile( file );
 }

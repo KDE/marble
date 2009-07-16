@@ -48,6 +48,7 @@
 #include "MarbleWidgetInputHandler.h"
 #include "TileCreatorDialog.h"
 #include "gps/GpsLayer.h"
+#include "gps/GpxFile.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
 #include "MergedLayerDecorator.h"
@@ -1031,12 +1032,11 @@ void MarbleWidget::updateGps()
 
 void MarbleWidget::openGpxFile(QString &filename)
 {
-#ifndef KML_GSOC
-    d->m_model->gpsLayer()->loadGpx( filename );
-#else
-    GpxFileViewItem* item = new GpxFileViewItem( new GpxFile( filename ) );
+    GpxFile* gpxFile = new GpxFile( filename );
+    GpxFileViewItem* item = new GpxFileViewItem( gpxFile );
+
     d->m_model->fileViewModel()->append( item );
-#endif
+    d->m_model->gpsLayer()->addGpxFile( gpxFile );
 }
 
 GpxFileModel *MarbleWidget::gpxFileModel()
