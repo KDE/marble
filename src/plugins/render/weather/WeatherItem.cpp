@@ -18,6 +18,7 @@
 #include "weatherGlobal.h"
 
 // Qt
+#include <QtCore/QCoreApplication>
 #include <QtCore/QDebug>
 #include <QtCore/QHash>
 #include <QtCore/QObject>
@@ -36,10 +37,12 @@ const qint32 horizontalSpacing = 4;
 const qint32 verticalSpacing = 2;
 
 class WeatherItemPrivate {
+    Q_DECLARE_TR_FUNCTIONS(WeatherItemPrivate)
+    
  public:
     WeatherItemPrivate( WeatherItem *parent )
         : m_priority( 0 ),
-          m_action( new QAction( QObject::tr( "Weather" ), parent ) ),
+          m_action( new QAction( tr( "Weather" ), parent ) ),
           m_parent( parent ),
           m_temperatureSize()
     {
