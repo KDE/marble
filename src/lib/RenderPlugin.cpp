@@ -86,6 +86,16 @@ QAction* RenderPlugin::action() const
     return d->m_action;
 }
 
+QList<QActionGroup*>* RenderPlugin::actions() const
+{
+    return 0;
+}
+
+QList<QActionGroup*>* RenderPlugin::toolbarActions() const
+{
+    return 0;
+}
+
 QStandardItem* RenderPlugin::item() const {
     d->m_item->setIcon( icon() );
     d->m_item->setText( name() );

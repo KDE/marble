@@ -97,6 +97,12 @@ void OsmAnnotatePlugin::initialize ()
     m_itemModel = 0;
     m_addingPlacemark = false;
     m_drawingPolygon = false;
+
+    m_actions = 0;
+    m_toolbarActions = 0;
+
+    connect( this, SIGNAL(actionGroupsChanged()),
+             this, SLOT(registerActions() ) );
 }
 
 bool OsmAnnotatePlugin::isInitialized () const
@@ -104,17 +110,22 @@ bool OsmAnnotatePlugin::isInitialized () const
     return true;
 }
 
+QList<QActionGroup*>* OsmAnnotatePlugin::actions() const
+{
+    return m_actions;
+}
+
+QList<QActionGroup*>* OsmAnnotatePlugin::toolbarActions() const
+{
+    return m_toolbarActions;
+}
+
 bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
     if( !widgetInitalised ) {
         MarbleWidget* marbleWidget = (MarbleWidget*) painter->device();
-        QList<QActionGroup*> actionGroups = setupActions( marbleWidget );
-
-        QListIterator<QActionGroup*> it(actionGroups);
-
-        while( it.hasNext() ) {
-            marbleWidget->registerActions( it.next() );
-        }
+        m_marbleWidget = marbleWidget;
+        setupActions( marbleWidget );
 
         connect(this, SIGNAL(redraw()),
                 marbleWidget, SLOT(repaint()) );
@@ -171,6 +182,16 @@ void OsmAnnotatePlugin::setDrawingPolygon(bool b)
             //FIXME only redraw the new polygon
             emit(redraw());
         }
+    }
+}
+
+void OsmAnnotatePlugin::registerActions()
+{
+    qDebug() << "Registering Actions!!!!!";
+    QListIterator<QActionGroup*> it(*m_toolbarActions);
+
+    while( it.hasNext() ) {
+        m_marbleWidget->registerActions( it.next() );
     }
 }
 
@@ -312,9 +333,10 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     return false;
 }
 
-QList<QActionGroup*> OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
+void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
 {
-    QList<QActionGroup*> result;
+    QList<QActionGroup*>* toolbarActions = new QList<QActionGroup*>();
+    QList<QActionGroup*>* actions = new QList<QActionGroup*>();
 
     QActionGroup* initial = new QActionGroup(0);
     initial->setExclusive( false );
@@ -368,9 +390,25 @@ QList<QActionGroup*> OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     group->addAction( m_loadOsmFile );
     group->addAction( m_endSeparator );
 
-    result.append( initial );
-    result.append( group );
-    return result;
+    actions->append( initial );
+    actions->append( group );
+
+    toolbarActions->append( initial );
+    toolbarActions->append( group );
+
+    //delete the old groups if they exist
+    if( m_actions ) {
+        delete m_actions;
+    }
+
+    if( m_toolbarActions ) {
+        delete m_toolbarActions;
+    }
+
+    m_actions = actions;
+    m_toolbarActions = toolbarActions;
+
+    emit actionGroupsChanged();
 }
 
 }

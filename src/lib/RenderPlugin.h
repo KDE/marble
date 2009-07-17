@@ -23,6 +23,7 @@
 
 
 class QAction;
+class QActionGroup;
 class QStandardItem;
 
 namespace Marble
@@ -60,6 +61,24 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     void  setDataFacade( MarbleDataFacade* );
 
     QAction       *action() const;
+    /**
+     *This method is used by the main window to get all of the actions that this
+     *plugin defines. There is no guarentee where the main window will place the
+     *actions but it will generally be in a Menu. The returned QList should
+     *also contain all of the actions returned by @see toolbarActions().
+     *@return A QList of grouped actions
+     */
+    virtual QList<QActionGroup*>*   actions() const;
+
+    /**
+     *This method returns a subset of the actions returned by @see actions() which
+     *are intended to be placed in a more prominant place such as a toolbar above
+     *the Marble Widget. You are not guaranteed that they will be in an actual
+     *toobar but they will be visable and discoverable
+     *@return A QList of grouped toolbar actions
+     */
+    virtual QList<QActionGroup*>*   toolbarActions() const;
+    
     QStandardItem *item()   const;
 
     void applyItemState();
@@ -105,6 +124,12 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * This signal is emitted if the settings of the RenderPlugin changed.
      */
     void settingsChanged( QString nameId );
+
+    /**
+     * This signal is emitted if the actions that the plugin supports change in
+     * any way
+     */
+    void actionGroupsChanged();
 
  protected:
     bool eventFilter( QObject *, QEvent * );

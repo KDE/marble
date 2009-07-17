@@ -52,7 +52,7 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter,
 {
     qreal degPix = viewport->angularResolution() * RAD2DEG;
 
-    painter->drawEllipse(coordinate(), screenBounding().width(), screenBounding().height(), true);
+//    painter->drawEllipse(coordinate(), screenBounding().width(), screenBounding().height(), true);
     //Would it not be useful to have a draw latlongbox?
 //    painter->drawRect(geoBounding());
     qreal north, south, east, west;

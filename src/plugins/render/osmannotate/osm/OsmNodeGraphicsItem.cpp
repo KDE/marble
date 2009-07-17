@@ -31,7 +31,7 @@ void OsmNodeGraphicsItem::paint( GeoPainter *painter, ViewportParams* viewport,
     //stop points from blurring
     painter->setRenderHint( QPainter::Antialiasing, false );
     painter->setPen(m_pen);
-    painter->drawPoint( m_point );
+    painter->drawRect( m_point, 2, 2, false );
     painter->restore();
 
 }

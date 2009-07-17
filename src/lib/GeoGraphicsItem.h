@@ -95,7 +95,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
 
 //Declares the operator|() for flags but breaks other enum comparisons related to 
 //GeoGraphicsItem
-//FIXME ... is this nessesary?
+//FIXME ... is this necessary?
 //Q_DECLARE_OPERATORS_FOR_FLAGS(GeoGraphicsItem::GeoGraphicsItemFlags)
 
 } // Namespace Marble
