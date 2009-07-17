@@ -836,14 +836,20 @@ QString MarbleWidget::mapThemeId() const
 
 void MarbleWidget::setMapThemeId( const QString& mapThemeId )
 {
-    qDebug() << "MapThemeId" << mapThemeId;
     if ( !mapThemeId.isEmpty() && mapThemeId == d->m_model->mapThemeId() )
         return;
-
+    
     d->m_map->setMapThemeId( mapThemeId );
-
+    
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
+
+    // Now we want a full repaint as the atmosphere might differ
+    setAttribute( Qt::WA_NoSystemBackground,
+                  false );
+
+    centerSun();
+
     repaint();
 }
 
@@ -1213,11 +1219,13 @@ void MarbleWidget::centerSun()
 {
     SunLocator  *sunLocator = d->m_model->sunLocator();
 
-    qreal  lon = sunLocator->getLon();
-    qreal  lat = sunLocator->getLat();
-    centerOn( lon, lat );
+    if ( sunLocator && sunLocator->getCentered() ) {
+        qreal  lon = sunLocator->getLon();
+        qreal  lat = sunLocator->getLat();
+        centerOn( lon, lat );
 
-    setInputEnabled( false );
+        setInputEnabled( false );
+    }
 }
 
 SunLocator* MarbleWidget::sunLocator()

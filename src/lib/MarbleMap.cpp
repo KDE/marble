@@ -90,7 +90,8 @@ void MarbleMapPrivate::construct()
                        m_parent, SLOT( updateChangedMap() ) );
 
     m_justModified = false;
-
+    m_dirtyAtmosphere = false;
+    
     m_measureTool = new MeasureTool( m_model, m_parent );
 
     m_parent->connect( m_model, SIGNAL( timeout() ),
@@ -136,7 +137,7 @@ void MarbleMapPrivate::doResize()
                                              QImage::Format_RGB32 ));
 
     if ( m_viewParams.showAtmosphere() ) {
-        drawAtmosphere();
+        m_dirtyAtmosphere=true;
     }
 
     // Recreate the 
@@ -263,6 +264,11 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
         qDebug() << "No theme yet!";
         paintMarbleSplash( painter, dirtyRect );
         return;
+    }
+
+    if ( m_dirtyAtmosphere ) {
+        drawAtmosphere();
+        m_dirtyAtmosphere = false;
     }
 
     m_model->paintGlobe( &painter,
@@ -504,6 +510,13 @@ void MarbleMap::setDistance( qreal distance )
     setRadius( (int)( model()->planet()->radius() * 0.4
             / distance
             / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) ) );
+
+    // We don't do this on every paintEvent to improve performance.
+    // Redrawing the atmosphere is only needed if the size of the
+    // globe changes.
+    if ( d->m_viewParams.showAtmosphere() ) {
+        d->m_dirtyAtmosphere=true;
+    }            
 }
 
 qreal MarbleMap::centerLatitude() const
@@ -709,10 +722,10 @@ void MarbleMap::zoomView(int newZoom)
     setRadius( d->fromLogScale( newZoom ) );
 
     // We don't do this on every paintEvent to improve performance.
-    // Redrawing the atmosphere is only needed if the size of the 
+    // Redrawing the atmosphere is only needed if the size of the
     // globe changes.
     if ( d->m_viewParams.showAtmosphere() ) {
-        d->drawAtmosphere();
+        d->m_dirtyAtmosphere=true;
     }
 
     emit zoomChanged( newZoom );
@@ -804,7 +817,7 @@ void MarbleMap::setProjection( Projection projection )
     d->m_viewParams.setProjection( projection );
  
     if ( d->m_viewParams.showAtmosphere() ) {
-        d->drawAtmosphere();
+        d->m_dirtyAtmosphere=true;
     }
 
     d->m_model->setupTextureMapper( projection );
@@ -895,7 +908,7 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
 {
     QTime t;
     t.start();
-
+    
     d->paintGround( painter, dirtyRect );
     customPaint( &painter );
     d->paintOverlay( painter, dirtyRect );
@@ -939,6 +952,14 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     GeoSceneDocument *mapTheme = d->m_viewParams.mapTheme();
 
     d->m_model->setMapTheme( mapTheme, d->m_viewParams.projection() );
+    
+    // We don't do this on every paintEvent to improve performance.
+    // Redrawing the atmosphere is only needed if the size of the
+    // globe changes.
+    d->doResize();
+    d->m_dirtyAtmosphere=true;
+
+    centerSun();
 
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
@@ -967,9 +988,14 @@ void MarbleMap::setShowCompass( bool visible )
 
 void MarbleMap::setShowAtmosphere( bool visible )
 {
-    d->m_viewParams.setShowAtmosphere( visible );
-    // Quick and dirty way to force a whole update of the view
-    d->doResize();
+    bool previousVisible = showAtmosphere();
+
+    if ( visible != previousVisible ) {
+        d->m_viewParams.setShowAtmosphere( visible );
+
+        // Quick and dirty way to force a whole update of the view
+        d->doResize();
+    }
 }
 
 void MarbleMap::setShowCrosshairs( bool visible )
@@ -1248,11 +1274,13 @@ void MarbleMap::centerSun()
 {
     SunLocator  *sunLocator = d->m_model->sunLocator();
 
-    qreal  lon = sunLocator->getLon();
-    qreal  lat = sunLocator->getLat();
-    centerOn( lon, lat );
+    if ( sunLocator && sunLocator->getCentered() ) {
+        qreal  lon = sunLocator->getLon();
+        qreal  lat = sunLocator->getLat();
+        centerOn( lon, lat );
 
-    qDebug() << "Centering on Sun at " << lat << lon;
+        qDebug() << "Centering on Sun at " << lat << lon;
+    }
 }
 
 SunLocator* MarbleMap::sunLocator()

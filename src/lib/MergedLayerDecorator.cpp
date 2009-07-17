@@ -102,7 +102,7 @@ void MergedLayerDecorator::paint( const QString& themeId, GeoSceneDocument *mapT
             paintClouds();
         }
     }
-    if ( m_sunLocator->getShow() && mapTheme && mapTheme->head()->target() == "earth" ) {
+    if ( m_sunLocator->getShow() && mapTheme ) {
 
         // Initialize citylights layer if it hasn't happened already
         if ( !m_cityLightsTheme ) {
@@ -196,7 +196,7 @@ void MergedLayerDecorator::paintSunShading()
 {
     if ( m_tile->depth() != 32 )
         return;
-	
+
     // TODO add support for 8-bit maps?
     // add sun shading
     const qreal  global_width  = m_tile->width()
@@ -221,8 +221,8 @@ void MergedLayerDecorator::paintSunShading()
             return;
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
             qreal lat = lat_scale * ( m_y * tileHeight + cur_y ) - 0.5*M_PI;
-            qreal a = sin( ( lat-DEG2RAD * m_sunLocator->getLat() )/2.0 );
-            qreal c = cos(lat)*cos( DEG2RAD * m_sunLocator->getLat() );
+            qreal a = sin( ( lat+DEG2RAD * m_sunLocator->getLat() )/2.0 );
+            qreal c = cos(lat)*cos( -DEG2RAD * m_sunLocator->getLat() );
 
             QRgb* scanline  = (QRgb*)m_tile->scanLine( cur_y );
             QRgb* nscanline = (QRgb*)nighttile.scanLine( cur_y );
@@ -285,8 +285,8 @@ void MergedLayerDecorator::paintSunShading()
     } else {
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
             qreal lat = lat_scale * ( m_y * tileHeight + cur_y ) - 0.5*M_PI;
-            qreal a = sin( (lat-DEG2RAD * m_sunLocator->getLat() )/2.0 );
-            qreal c = cos(lat)*cos( DEG2RAD * m_sunLocator->getLat() );
+            qreal a = sin( (lat+DEG2RAD * m_sunLocator->getLat() )/2.0 );
+            qreal c = cos(lat)*cos( -DEG2RAD * m_sunLocator->getLat() );
 
             QRgb* scanline = (QRgb*)m_tile->scanLine( cur_y );
 

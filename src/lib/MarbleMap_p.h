@@ -61,6 +61,7 @@ class MarbleMapPrivate
     int              m_height;
     ViewParams       m_viewParams;
     bool             m_justModified; // FIXME: Rename to isDirty
+    bool             m_dirtyAtmosphere;
 
     // The home position
     GeoDataCoordinates     m_homePoint;
