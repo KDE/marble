@@ -227,8 +227,8 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
     // analytically the lon-/lat- range.
     qreal pitch = GeoDataPoint::normalizeLat( viewport->planetAxis().pitch() );
 
-    if ( 2 * viewport->radius() + 1 <= viewport->height()
-         &&  2 * viewport->radius() + 1 <= viewport->width() )
+    if ( 2.0 * viewport->radius() <= viewport->height()
+         &&  2.0 * viewport->radius() <= viewport->width() )
     { 
         // Unless the planetaxis is in the screen plane the allowed longitude range
         // covers full -180 deg to +180 deg:
@@ -239,7 +239,7 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
             latLonAltBox.setNorth( +fabs( M_PI / 2.0 - fabs( pitch ) ) );
             latLonAltBox.setSouth( -M_PI / 2.0 );
         }
-        if ( pitch < +0.0 || pitch < -M_PI ) {
+        if ( pitch < 0.0 && pitch > -M_PI ) {
             latLonAltBox.setWest(  -M_PI );
             latLonAltBox.setEast(  +M_PI );
             latLonAltBox.setNorth( +M_PI / 2.0 );
@@ -268,11 +268,8 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
     qreal dummyX, dummyY; // not needed
     bool dummyVal;
 
-    if ( screenCoordinates( maxLatPoint, viewport, dummyX, dummyY, dummyVal ) ) {
-        latLonAltBox.setWest( -M_PI );
-        latLonAltBox.setEast( +M_PI );
-    }
-    if ( screenCoordinates( minLatPoint, viewport, dummyX, dummyY, dummyVal ) ) {
+    if ( screenCoordinates( maxLatPoint, viewport, dummyX, dummyY, dummyVal ) ||
+         screenCoordinates( minLatPoint, viewport, dummyX, dummyY, dummyVal ) ) {
         latLonAltBox.setWest( -M_PI );
         latLonAltBox.setEast( +M_PI );
     }
