@@ -65,7 +65,7 @@ class SphericalProjection : public AbstractProjection
      * @return @c true  if the geographical coordinates are visible on the screen
      *         @c false if the geographical coordinates are not visible on the screen
      */
-    bool screenCoordinates( qreal lon, qreal lat,
+    bool screenCoordinates( const qreal lon, const qreal lat,
                             const ViewportParams *params,
                             qreal& x, qreal& y );
 
@@ -88,22 +88,10 @@ class SphericalProjection : public AbstractProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool geoCoordinates( int x, int y,
+    bool geoCoordinates( const int x, const int y,
                          const ViewportParams *params,
                          qreal& lon, qreal& lat,
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree );
-
-    /**
-     * @brief Get a quaternion representing a point on the earth corresponding to a pixel in the map.
-     * @param x  the x coordinate of the pixel
-     * @param y  the y coordinate of the pixel
-     * @param q  the out parameter where the result is returned
-     * @return @c true  if the pixel (x, y) is within the globe
-     *         @c false if the pixel (x, y) is outside the globe, i.e. in space
-     */
-    bool geoCoordinates( int x, int y, 
-                         const ViewportParams *params,
-                         Quaternion &q );
 
     GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
                                       const ViewportParams *viewport );

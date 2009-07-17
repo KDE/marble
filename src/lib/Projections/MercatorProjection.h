@@ -88,7 +88,7 @@ class MercatorProjection : public AbstractProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool geoCoordinates( int x, int y,
+    bool geoCoordinates( const int x, const int y,
                          const ViewportParams *params,
                          qreal& lon, qreal& lat,
                          GeoDataCoordinates::Unit = GeoDataCoordinates::Degree );
