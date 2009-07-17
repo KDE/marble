@@ -144,8 +144,7 @@ void SunLocator::updatePosition()
     while(d->m_lon < 0)
         d->m_lon += 2*M_PI;
 
-    // convert positive north to positive south
-    d->m_lat = -delta_sun;
+    d->m_lat = delta_sun;
 }
 
 
