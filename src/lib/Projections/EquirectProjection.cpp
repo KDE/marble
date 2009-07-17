@@ -48,7 +48,7 @@ qreal EquirectProjection::minValidLat() const
     return -90.0 * DEG2RAD;
 }
 
-bool EquirectProjection::screenCoordinates( qreal lon, qreal lat,
+bool EquirectProjection::screenCoordinates( const qreal lon, const qreal lat,
                                             const ViewportParams *viewport,
                                             qreal& x, qreal& y )
 {
@@ -190,7 +190,7 @@ bool EquirectProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 }
 
 
-bool EquirectProjection::geoCoordinates( int x, int y,
+bool EquirectProjection::geoCoordinates( const int x, const int y,
                                          const ViewportParams *viewport,
                                          qreal& lon, qreal& lat,
                                          GeoDataCoordinates::Unit unit )

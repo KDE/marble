@@ -52,12 +52,13 @@ qreal MercatorProjection::minValidLat() const
     return -85.05113 * DEG2RAD;
 }
 
-bool MercatorProjection::screenCoordinates( qreal lon, qreal lat,
+bool MercatorProjection::screenCoordinates( const qreal lon, const qreal _lat,
                                             const ViewportParams *viewport,
                                             qreal& x, qreal& y )
 {
     bool retval = true;
-
+    qreal lat = _lat;
+    
     if ( lat > maxLat() ) {
         lat = maxLat();
         retval = false;
@@ -235,7 +236,7 @@ bool MercatorProjection::screenCoordinates( const GeoDataCoordinates &coordinate
 }
 
 
-bool MercatorProjection::geoCoordinates( int x, int y,
+bool MercatorProjection::geoCoordinates( const int x, const int y,
                                          const ViewportParams *viewport,
                                          qreal& lon, qreal& lat,
                                          GeoDataCoordinates::Unit unit )

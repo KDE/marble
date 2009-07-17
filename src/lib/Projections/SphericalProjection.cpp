@@ -62,7 +62,7 @@ qreal SphericalProjection::minValidLat() const
     return -90.0 * DEG2RAD;
 }
 
-bool SphericalProjection::screenCoordinates( qreal lon, qreal lat,
+bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
                                              const ViewportParams *viewport,
                                              qreal& x, qreal& y )
 {
@@ -181,7 +181,7 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
 }
 
 
-bool SphericalProjection::geoCoordinates( int x, int y,
+bool SphericalProjection::geoCoordinates( const int x, const int y,
                                           const ViewportParams *viewport,
                                           qreal& lon, qreal& lat,
                                           GeoDataCoordinates::Unit unit )

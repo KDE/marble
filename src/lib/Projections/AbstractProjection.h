@@ -185,7 +185,7 @@ class AbstractProjection
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    virtual bool geoCoordinates( int x, int y,
+    virtual bool geoCoordinates( const int x, const int y,
                                  const ViewportParams *viewport,
                                  qreal& lon, qreal& lat,
                                  Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Degree ) = 0;
