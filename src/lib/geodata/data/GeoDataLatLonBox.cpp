@@ -294,7 +294,7 @@ bool GeoDataLatLonBox::contains( const GeoDataCoordinates &point ) const
     // We need to take care of the normal case ...
     if ( ( ( lon < d->m_west || lon > d->m_east ) && ( d->m_west < d->m_east ) ) ||
     // ... and the case where the bounding box crosses the date line:
-         ( ( lon > d->m_west || lon < d->m_east ) && ( d->m_west > d->m_east ) ) )
+         ( ( lon < d->m_west && lon > d->m_east ) && ( d->m_west > d->m_east ) ) )
         return false;
     
     if ( lat < d->m_south || lat > d->m_north )
