@@ -142,11 +142,7 @@ GeoDataGeometry PlacemarkTextAnnotation::geometry()
 
 bool PlacemarkTextAnnotation::mousePressEvent( QMouseEvent* event )
 {
-    if( bubble->isHidden() ) {
-        bubble->setHidden( false );
-    } else {
-        bubble->setHidden( true );
-    }
+    bubble->setHidden( !bubble->isHidden() );
     return true;
 }
 
