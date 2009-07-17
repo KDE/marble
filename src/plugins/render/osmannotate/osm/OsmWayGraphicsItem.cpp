@@ -8,23 +8,19 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-#ifndef OSMELEMENTDICTIONARY_H
-#define OSMELEMENTDICTIONARY_H
+#include "OsmWayGraphicsItem.h"
 
 namespace Marble
 {
 
-namespace osm {
+OsmWayGraphicsItem::OsmWayGraphicsItem()
+        : GeoLineStringGraphicsItem()
+{
+}
 
-    extern const char* osmTag_osm;
-
-    extern const char* osmTag_bounds;
-    extern const char* osmTag_node;
-    extern const char* osmTag_way;
-    extern const char* osmTag_nd;
-
+void OsmWayGraphicsItem::addNodeReferenceId( int reference )
+{
+    m_nodeIdList.append( reference );
 }
 
 }
-
-#endif // OSMELEMENTDICTIONARY_H

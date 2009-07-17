@@ -12,6 +12,8 @@
 
 #include "GeoParser.h"
 #include "OsmElementDictionary.h"
+#include "OsmWayGraphicsItem.h"
+#include <QDebug>
 
 namespace Marble
 {
@@ -24,6 +26,9 @@ static GeoTagHandlerRegistrar s_handlerbounds( GeoTagHandler::QualifiedName(osmT
 
 GeoNode* OsmWayTagHandler::parse( GeoParser& parser ) const
 {
+    OsmWayGraphicsItem* way = new OsmWayGraphicsItem();
+    qDebug() << ((GeoNode*)(way));
+    return ((GeoNode*)(way));
 }
 
 }
