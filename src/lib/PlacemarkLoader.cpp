@@ -48,6 +48,7 @@ PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& contents, cons
 
 PlacemarkLoader::~PlacemarkLoader()
 {
+    delete m_document;
 }
 
 QString PlacemarkLoader::path() const
