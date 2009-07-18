@@ -59,7 +59,8 @@ class AbstractDataPluginModelPrivate {
           m_lastDataFacade( 0 ),
           m_downloadTimer( new QTimer( m_parent ) ),
           m_descriptionFileNumber( 0 ),
-          m_itemSettings()
+          m_itemSettings(),
+          m_downloadManager( 0 )
     {
     }
     
@@ -76,6 +77,8 @@ class AbstractDataPluginModelPrivate {
         
         m_storagePolicy->clearCache();
         delete m_storagePolicy;
+
+        delete m_downloadManager;
     }
     
     AbstractDataPluginModel *m_parent;
