@@ -198,6 +198,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
 MarbleControlBox::~MarbleControlBox()
 {
+    delete d->m_celestialList;
     delete d;
 }
 
