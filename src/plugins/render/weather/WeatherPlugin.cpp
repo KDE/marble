@@ -77,6 +77,7 @@ WeatherPlugin::WeatherPlugin()
 
 WeatherPlugin::~WeatherPlugin() {
     delete m_aboutDialog;
+    delete m_configDialog;
 }
 
 void WeatherPlugin::initialize() {
