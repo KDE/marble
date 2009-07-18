@@ -55,6 +55,8 @@ MarbleRunnerManager::~MarbleRunnerManager()
         m_runners.removeOne(runner);
         delete runner;
     }
+
+    delete m_model;
 }
 
 void MarbleRunnerManager::newText(QString text)
