@@ -175,7 +175,7 @@ const qreal RAD2DEG = 180.0 / M_PI;
 // Version definitions to use with an external application (as digiKam)
 
 // String for about dialog.
-const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.8 RC1" );
+const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.8" );
 
 // API Version id:
 // form : 0xMMmmpp
