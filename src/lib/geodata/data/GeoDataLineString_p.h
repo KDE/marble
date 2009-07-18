@@ -32,6 +32,11 @@ class GeoDataLineStringPrivate : public Marble::GeoDataGeometryPrivate
     {
     }
 
+    ~GeoDataLineStringPrivate()
+    {
+    qDeleteAll(m_rangeCorrected);
+    }
+
     virtual GeoDataGeometryPrivate* copy()
     { 
         GeoDataLineStringPrivate* copy = new GeoDataLineStringPrivate;
