@@ -78,7 +78,8 @@ void QNamDownloadJob::finished()
     }
 
     m_networkReply->disconnect( this );
-    delete m_networkReply;
+    // No delete. This method is called by a signal QNetworkReply::finished.
+    m_networkReply->deleteLater();
     m_networkReply = 0;
 }
 
