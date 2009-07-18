@@ -35,6 +35,7 @@ class AbstractDataPluginPrivate
     }
     
     ~AbstractDataPluginPrivate() {
+        delete m_model;
     }
     
     AbstractDataPluginModel *m_model;
