@@ -283,7 +283,8 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal wid
         GeoDataLatLonBox ellipseBox( centerLat + 0.5 * height, centerLat - 0.5 * height,
                                      centerLon + 0.5 * width,  centerLon - 0.5 * width, 
                                      GeoDataCoordinates::Degree );
-        if ( !d->m_viewport->resolves( ellipseBox ) ) return;
+        if ( !d->m_viewport->viewLatLonAltBox().intersects( ellipseBox ) ||
+             !d->m_viewport->resolves( ellipseBox ) ) return;
 
         GeoDataLinearRing ellipse;
         qreal lon = 0.0;
@@ -310,7 +311,7 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal wid
             lon = centerLon + 0.5 * width * t;
             ellipse << GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
         }
-
+        
         drawPolygon( ellipse );
 
     }
@@ -425,8 +426,6 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRul
 //        qDebug() << "Polygon doesn't get displayed on the viewport";
         return;
     }
-//    qDebug() << "Drawing Polygon";
-
 
     if ( !linearRing.latLonAltBox().crossesDateLine() ) {
         QVector<QPolygonF*> polygons;
