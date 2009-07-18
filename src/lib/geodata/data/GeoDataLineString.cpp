@@ -207,6 +207,7 @@ QVector<GeoDataCoordinates>::ConstIterator GeoDataLineString::constEnd() const
 void GeoDataLineString::append ( const GeoDataCoordinates& value )
 {
     GeoDataGeometry::detach();
+    p()->m_rangeCorrected.clear();
     p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
     p()->m_vector.append( value );
@@ -215,6 +216,7 @@ void GeoDataLineString::append ( const GeoDataCoordinates& value )
 GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& value )
 {
     GeoDataGeometry::detach();
+    p()->m_rangeCorrected.clear();
     p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
     p()->m_vector.append( value );
@@ -224,6 +226,7 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& va
 void GeoDataLineString::clear()
 {
     GeoDataGeometry::detach();
+    p()->m_rangeCorrected.clear();
     p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
 
@@ -296,13 +299,13 @@ QVector<GeoDataLineString*> GeoDataLineString::toRangeCorrected() const
 {
     if ( p()->m_dirtyRange ) {
 
-        qDeleteAll( p()->m_rangeCorrected );
+        qDeleteAll( p()->m_rangeCorrected ); // This shouldn't be needed
 
         GeoDataLineString poleCorrected = toPoleCorrected();
 
         p()->m_rangeCorrected = poleCorrected.toDateLineCorrected();
     }
-
+    
     return p()->m_rangeCorrected;
 }
 
@@ -525,6 +528,7 @@ qreal GeoDataLineString::length( qreal planetRadius ) const
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator pos )
 {
     GeoDataGeometry::detach();
+    p()->m_rangeCorrected.clear();
     p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
     return p()->m_vector.erase( pos );
@@ -534,6 +538,7 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
                                                                  QVector<GeoDataCoordinates>::Iterator end )
 {
     GeoDataGeometry::detach();
+    p()->m_rangeCorrected.clear();
     p()->m_dirtyRange = true;
     p()->m_dirtyBox = true;
     return p()->m_vector.erase( begin, end );
