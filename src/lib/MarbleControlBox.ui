@@ -53,7 +53,7 @@
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="NavigationTab">
       <property name="geometry">
@@ -774,63 +774,86 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="longitudeLabel">
-            <property name="toolTip">
-             <string>Longitude of your current position</string>
+           <widget class="QFrame" name="coordinateLabel">
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
             </property>
-            <property name="text">
-             <string>Longitude</string>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="longitudeValue">
-            <property name="toolTip">
-             <string>Longitude of your current position</string>
-            </property>
-            <property name="text">
-             <string>+00°00'00&quot; E</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="latitudeLabel">
-            <property name="toolTip">
-             <string>Latitude of your current position</string>
-            </property>
-            <property name="text">
-             <string>Latitude</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="latitudeValue">
-            <property name="toolTip">
-             <string>Latitude of your current position</string>
-            </property>
-            <property name="text">
-             <string>+00°00'00&quot; N</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="altitudeLabel">
-            <property name="toolTip">
-             <string>Altitude of your current position</string>
-            </property>
-            <property name="text">
-             <string>Altitude</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="altitudeValue">
-            <property name="toolTip">
-             <string>Altitude of your current position</string>
-            </property>
-            <property name="text">
-             <string>000 m</string>
-            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <property name="margin">
+              <number>7</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="longitudeLabel">
+               <property name="toolTip">
+                <string>Longitude of your current position</string>
+               </property>
+               <property name="text">
+                <string>Longitude</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="longitudeValue">
+               <property name="toolTip">
+                <string>Longitude of your current position</string>
+               </property>
+               <property name="text">
+                <string>+00°00'00&quot; E</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="latitudeLabel">
+               <property name="toolTip">
+                <string>Latitude of your current position</string>
+               </property>
+               <property name="text">
+                <string>Latitude</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="latitudeValue">
+               <property name="toolTip">
+                <string>Latitude of your current position</string>
+               </property>
+               <property name="text">
+                <string>+00°00'00&quot; N</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="altitudeLabel">
+               <property name="toolTip">
+                <string>Altitude of your current position</string>
+               </property>
+               <property name="text">
+                <string>Altitude</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="altitudeValue">
+               <property name="toolTip">
+                <string>Altitude of your current position</string>
+               </property>
+               <property name="text">
+                <string>000 m</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+            <zorder>longitudeLabel</zorder>
+            <zorder>longitudeLabel</zorder>
+            <zorder>longitudeLabel</zorder>
+            <zorder>longitudeValue</zorder>
+            <zorder>latitudeLabel</zorder>
+            <zorder>latitudeValue</zorder>
+            <zorder>altitudeLabel</zorder>
+            <zorder>altitudeValue</zorder>
            </widget>
           </item>
          </layout>
