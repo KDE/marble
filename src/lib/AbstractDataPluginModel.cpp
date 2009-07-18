@@ -57,7 +57,8 @@ class AbstractDataPluginModelPrivate {
           m_downloadedNumber( 0 ),
           m_lastDataFacade( 0 ),
           m_downloadTimer( new QTimer( m_parent ) ),
-          m_descriptionFileNumber( 0 )
+          m_descriptionFileNumber( 0 ),
+          m_downloadManager( 0 )
     {
     }
     
@@ -88,7 +89,6 @@ class AbstractDataPluginModelPrivate {
     QTimer *m_downloadTimer;
     quint32 m_descriptionFileNumber;
     
-    CacheStoragePolicy *m_storagePolicy;
     HttpDownloadManager *m_downloadManager;
 };
 
@@ -97,10 +97,10 @@ AbstractDataPluginModel::AbstractDataPluginModel( const QString& name, QObject *
       d( new AbstractDataPluginModelPrivate( name, this ) )
 {
     // Initializing file and download System
-    d->m_storagePolicy = new CacheStoragePolicy( MarbleDirs::localPath()
-                                                 + "/cache/" + d->m_name + '/' );
+    CacheStoragePolicy *storagePolicy = new CacheStoragePolicy( MarbleDirs::localPath()
+                                                                + "/cache/" + d->m_name + '/' );
     d->m_downloadManager = new HttpDownloadManager( QUrl(),
-                                                    d->m_storagePolicy );
+                                                    storagePolicy );
     connect( d->m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
              this,                 SLOT( processFinishedJob( QString , QString ) ) );
     
@@ -113,6 +113,7 @@ AbstractDataPluginModel::AbstractDataPluginModel( const QString& name, QObject *
 
 AbstractDataPluginModel::~AbstractDataPluginModel()
 {
+    d->m_downloadManager->storagePolicy()->clearCache();
     delete d->m_downloadManager;
     delete d;
 }
@@ -305,7 +306,7 @@ QString AbstractDataPluginModel::generateFilepath( const QString& id, const QStr
     
 bool AbstractDataPluginModel::fileExists( const QString& fileName ) const
 {
-    return d->m_storagePolicy->fileExists( fileName );
+    return d->m_downloadManager->storagePolicy()->fileExists( fileName );
 }
 
 bool AbstractDataPluginModel::fileExists( const QString& id, const QString& type ) const
@@ -387,7 +388,11 @@ void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlStri
     Q_UNUSED( relativeUrlString );
     
     if( id.startsWith( descriptionPrefix ) ) {
-        parseFile( d->m_storagePolicy->data( id ) );
+        CacheStoragePolicy *storagePolicy
+                = qobject_cast<CacheStoragePolicy*>( d->m_downloadManager->storagePolicy() );
+        if ( storagePolicy ) {
+            parseFile( storagePolicy->data( id ) );
+        }
     }
     else {
         // The downloaded file contains item data.

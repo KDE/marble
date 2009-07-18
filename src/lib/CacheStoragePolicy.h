@@ -24,6 +24,8 @@ namespace Marble
 
 class MARBLE_EXPORT CacheStoragePolicy : public StoragePolicy
 {
+    Q_OBJECT
+
     public:
         /**
          * Creates a new cache storage policy.
