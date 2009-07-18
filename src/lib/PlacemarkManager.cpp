@@ -43,7 +43,7 @@ class PlacemarkManagerPrivate
     public:
         PlacemarkManagerPrivate( QObject* parent )
         : m_model( 0 )
-        , m_geomodel( new MarbleGeometryModel() )
+        , m_geomodel( 0 )
         , m_fileViewModel( new FileViewModel(parent ) )
         , m_finalized( true )
         , m_target( QString() )
@@ -160,7 +160,7 @@ void PlacemarkManager::addGeoDataDocument( GeoDataDocument* document )
     }
 
     // do not set this file if it only contains points
-    if( doc->isVisible() )
+    if( doc->isVisible() && d->m_geomodel )
         d->m_geomodel->setGeoDataRoot( doc );
     emit geoDataDocumentAdded( *doc );
 }
