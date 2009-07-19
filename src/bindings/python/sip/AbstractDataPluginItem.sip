@@ -41,7 +41,7 @@
 namespace Marble
 {
 
-class AbstractDataPluginItem : QObject /Abstract/
+class AbstractDataPluginItem : QObject, Marble::GeoGraphicsItem /Abstract/
 {
 %TypeHeaderCode
 #include <AbstractDataPluginItem.h>

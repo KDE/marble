@@ -90,6 +90,7 @@
 %Include global.sip
 %Include MarbleAboutDialog.sip
 %Include ScreenGraphicsItem.sip
+%Include AbstractLayerInterface.sip
 
 // ---- API isn't exported.
 //%Include MapThemeSortFilterProxyModel.sip

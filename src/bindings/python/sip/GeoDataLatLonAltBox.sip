@@ -42,6 +42,7 @@ public:
     static Marble::GeoDataLatLonAltBox  fromLineString (const Marble::GeoDataLineString& lineString);
     virtual QString         toString (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
     bool                    isNull () const;
+    virtual Marble::GeoDataCoordinates  center () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
 };   // GeoDataLatLonAltBox
