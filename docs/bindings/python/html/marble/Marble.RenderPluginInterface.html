@@ -57,13 +57,13 @@ Namespace: Marble<br />
 <p>The class that specifies the Marble layer interface of a plugin.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192578668">backendTypes</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192578316">pluginInstance</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192579916">render</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> renderPos="NONE", GeoSceneLayer layer=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192579084">renderPolicy</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj192579500">renderPosition</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193541772">backendTypes</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193542252">pluginInstance</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193543884">render</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> renderPos="NONE", GeoSceneLayer layer=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193542220">renderPolicy</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#obj193543468">renderPosition</a> (self)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="obj192578668"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="obj193541772"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -84,7 +84,7 @@ backend is able to process.
 Examples to replace available default backends would be "vector" or
 "texture". To provide a completely new kind of functionality please
 choose your own unique string.
-</p></div></div><a class="anchor" name="obj192578316"></a>
+</p></div></div><a class="anchor" name="obj193542252"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -97,7 +97,7 @@ choose your own unique string.
 </table>
 </div>
 <div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns a new object of the plugin
-</p></div></div><a class="anchor" name="obj192579916"></a>
+</p></div></div><a class="anchor" name="obj193543884"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -140,7 +140,7 @@ choose your own unique string.
 <div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Renders the content provided by the plugin on the viewport.
 <dl class="return" compact><dt><b>Returns:</b></dt><dd> true Returns whether the rendering has been successful
 </dd></dl>
-</p></div></div><a class="anchor" name="obj192579084"></a>
+</p></div></div><a class="anchor" name="obj193542220"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -165,7 +165,7 @@ DGML file.
 "SPECIFIED_ALWAYS" -- In case it got specified in the DGML file
 render according to the specification
 otherwise choose the preferred position
-</p></div></div><a class="anchor" name="obj192579500"></a>
+</p></div></div><a class="anchor" name="obj193543468"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
