@@ -165,9 +165,16 @@ maps/moon/clementine/legend.html
 maps/moon/clementine/clementine.dgml
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/moon/clementine)
 
-FILE (GLOB PNT_FILES mwdbii/*.PNT)
 install (FILES
-  ${PNT_FILES}
+mwdbii/DATELINE.PNT
+mwdbii/PCOAST.PNT
+mwdbii/PDIFFBORDER.PNT
+mwdbii/PGLACIER.PNT
+mwdbii/PISLAND.PNT
+mwdbii/PLAKEISLAND.PNT
+mwdbii/PLAKE.PNT
+mwdbii/PUSA48.DIFF.PNT
+mwdbii/RIVER.PNT
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/mwdbii)
 
 FILE (GLOB STAR_FILES stars/*.dat)
