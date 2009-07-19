@@ -522,7 +522,9 @@ bool AbstractFloatItem::eventFilter( QObject *object, QEvent *e )
                 }
 
                 setPosition(QPointF(newX,newY));
-                QRect newFloatItemRect = QRectF(positivePosition(QRect(0,0,widget->width(),widget->height())), size() ).toRect();
+                QRect newFloatItemRect = 
+QRectF(positivePosition(QRect(0,0,widget->width(),widget->height())), size() + QSize( 1, 1 ) 
+).toRect();
                 d->m_floatItemMoveStartPos = event->pos();
                 QRegion dirtyRegion(floatItemRect.toRect());
                 dirtyRegion = dirtyRegion.united(newFloatItemRect);
