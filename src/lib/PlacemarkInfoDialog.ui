@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>537</width>
-    <height>578</height>
+    <width>780</width>
+    <height>580</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -457,7 +457,7 @@ p, li { white-space: pre-wrap; }
          <item>
           <widget class="QToolButton" name="m_pBackButton">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="toolTip">
             <string>Back</string>
@@ -474,26 +474,6 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="toolButtonStyle">
             <enum>Qt::ToolButtonTextBesideIcon</enum>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QToolButton" name="m_pForwardButton">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="toolTip">
-            <string>Forward</string>
-           </property>
-           <property name="whatsThis">
-            <string>Move forward one step in the browsing history.</string>
-           </property>
-           <property name="text">
-            <string>...</string>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>../../../../../../../../.designer/backup</normaloff>../../../../../../../../.designer/backup</iconset>
            </property>
           </widget>
          </item>
@@ -527,7 +507,14 @@ p, li { white-space: pre-wrap; }
         </layout>
        </item>
        <item>
-        <widget class="TinyWebBrowser" name="m_pWikipediaBrowser"/>
+        <widget class="TinyWebBrowser" name="m_pWikipediaBrowser" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -562,8 +549,9 @@ p, li { white-space: pre-wrap; }
  <customwidgets>
   <customwidget>
    <class>TinyWebBrowser</class>
-   <extends>QTextBrowser</extends>
+   <extends>QWidget</extends>
    <header>TinyWebBrowser.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>
@@ -577,92 +565,12 @@ p, li { white-space: pre-wrap; }
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>266</x>
-     <y>555</y>
+     <x>490</x>
+     <y>557</y>
     </hint>
     <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_pButtonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>PlacemarkInfoDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>334</x>
-     <y>555</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_pBackButton</sender>
-   <signal>clicked()</signal>
-   <receiver>m_pWikipediaBrowser</receiver>
-   <slot>backward()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>54</x>
-     <y>60</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>55</x>
-     <y>125</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_pForwardButton</sender>
-   <signal>clicked()</signal>
-   <receiver>m_pWikipediaBrowser</receiver>
-   <slot>forward()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>98</x>
-     <y>70</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>106</x>
-     <y>113</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_pWikipediaBrowser</sender>
-   <signal>forwardAvailable(bool)</signal>
-   <receiver>m_pForwardButton</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>135</x>
-     <y>109</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>98</x>
-     <y>70</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>m_pWikipediaBrowser</sender>
-   <signal>backwardAvailable(bool)</signal>
-   <receiver>m_pBackButton</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>39</x>
-     <y>129</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>32</x>
-     <y>54</y>
+     <x>533</x>
+     <y>553</y>
     </hint>
    </hints>
   </connection>

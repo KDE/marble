@@ -200,9 +200,16 @@ install (FILES
 licenses/lgpl2.txt
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/licenses)
 
-FILE (GLOB PNT_FILES mwdbii/*.PNT)
 install (FILES
-  ${PNT_FILES}
+mwdbii/DATELINE.PNT
+mwdbii/PCOAST.PNT
+mwdbii/PDIFFBORDER.PNT
+mwdbii/PGLACIER.PNT
+mwdbii/PISLAND.PNT
+mwdbii/PLAKEISLAND.PNT
+mwdbii/PLAKE.PNT
+mwdbii/PUSA48.DIFF.PNT
+mwdbii/RIVER.PNT
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/mwdbii)
 
 FILE (GLOB STAR_FILES stars/*.dat)

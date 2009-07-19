@@ -17,10 +17,6 @@
 #include <QtCore/QFile>
 #include <QtCore/QLocale>
 #include <QtCore/QTimer>
-#include <QtGui/QPainter>
-#include <QtGui/QLabel>
-#include <QtGui/QTextBrowser>
-#include <QtGui/QTextFrame>
 
 #include "GeoDataCoordinates.h"
 #include "MarbleDirs.h"
@@ -33,23 +29,20 @@ PlacemarkInfoDialog::PlacemarkInfoDialog(const QPersistentModelIndex &index, QWi
 {
     setupUi(this);
 
-    m_pBackButton->hide();
-    m_pForwardButton->hide();
+    setWindowTitle( tr("Marble Info Center - %1").arg( m_index.data().toString() ) );
+    resize( 780, 580 );
 
+    m_pBackButton->hide();
+    
     connect( m_pPrintButton, SIGNAL( clicked() ),
              m_pWikipediaBrowser, SLOT( print() ) );
-    // m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>() hold the coordinate of current placemark	
-    setWindowTitle( tr("Marble Info Center - %1").arg( m_index.data().toString() ) );
-//  The page to shown in placemark is emitted here ..
+
     connect( m_pWikipediaBrowser, SIGNAL( statusMessage( QString ) ),
              this,                SLOT( showMessage( QString) ) );
     connect( this,                SIGNAL( source( QString ) ),
              m_pWikipediaBrowser, SLOT( setSource( QString ) ) );//for wikipedia
-    showContent();
 
-        QTextFrameFormat format = description_val_browser->document()->rootFrame()->frameFormat();
-        format.setMargin( 12) ;
-        description_val_browser->document()->rootFrame()->setFrameFormat( format );
+    showContent();
 }
 
 
@@ -177,12 +170,23 @@ void PlacemarkInfoDialog::showContent()
     if ( altitude <= 0 )
         elevation_val_lbl->setText( tr("-") );
 
-    if ( role == 'O' ||  role == 'o' || role == 'v' || role == 'h' || role == 'u' || role == 'i' || role == 'r' || role == 'a' || role == 'c' || role == 'm') {
+    if (    role == 'O' ||  role == 'o' || role == 'v' || role == 'h' || role == 'u'
+         || role == 'i' || role == 'r' || role == 'a' || role == 'c' || role == 'm' ) {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
         country_lbl->setVisible( false );
         country_val_lbl->setVisible( false );
     }
+
+    if ( role == 'A' ) {
+        population_val_lbl->setVisible( false );
+        population_lbl->setVisible( false );
+        country_lbl->setVisible( false );
+        country_val_lbl->setVisible( false );
+        elevation_val_lbl->setVisible( false );
+        elevation_lbl->setVisible( false );
+    }
+
     if ( role == 'K' )
     {
         country_lbl->setVisible( false );
@@ -196,6 +200,8 @@ void PlacemarkInfoDialog::showContent()
     if ( role == 'H' || role == 'V' || role == 'W') {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
+        area_val_lbl->setVisible( false );
+        area_lbl->setVisible( false );
     }
     else if ( role == 'P' || role == 'M' ) {
         population_val_lbl->setVisible( false );
