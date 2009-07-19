@@ -408,9 +408,11 @@ void MarblePlacemarkModel::createFilterProperties( PlacemarkContainer &container
         if ( placemark.role() == 'K' )
             placemark.setPopularityIndex( 19 );
         if ( !placemark.isVisible() ) {
-            placemark.setPopulation(-1);
+            placemark.setPopularityIndex( -1 );
         }
-        if ( placemark.population() < 0 ) {
+        // Workaround: Emulate missing "setVisible" serialization by allowing for population
+        // values smaller than -1 which are considered invisible.
+        if ( placemark.population() < -1 ) {
             placemark.setPopularityIndex( -1 );
         }
     }
