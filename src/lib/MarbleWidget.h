@@ -475,17 +475,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     QString password() const;
 
     /**
-     * Regestering an action with the marble Widget activates it and places it in
-     * the main toolbar.
-     */
-    void registerActions( QActionGroup* actions );
-
-    /**
-     * Disables an action and removes it from the main toolbar.
-     */
-    void removeAction( QAction* action );
-
-    /**
      * @brief Returns a list of all RenderPlugins on the widget, this includes float items
      * @return the list of RenderPlugins
      */

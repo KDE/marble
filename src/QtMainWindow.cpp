@@ -24,6 +24,7 @@
 #include <QtGui/QIcon>
 #include <QtGui/QMenuBar>
 #include <QtGui/QStatusBar>
+#include <QtGui/QToolBar>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QFileDialog>
 #include <QtGui/QMessageBox>
@@ -251,6 +252,13 @@ void MainWindow::createMenus()
 
     connect( m_infoBoxesMenu, SIGNAL( aboutToShow() ), this, SLOT( createInfoBoxesMenu() ) ); 
     connect( m_onlineServicesMenu, SIGNAL( aboutToShow() ), this, SLOT( createOnlineServicesMenu() ) ); 
+
+//    FIXME: Discuss if this is the best place to put this
+    QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
+    for (; it != pluginList.constEnd(); ++it) {
+        connect( (*it), SIGNAL( actionGroupsChanged() ),
+                 this, SLOT( createPluginMenus() ) );
+    }
 }
 
 void MainWindow::createInfoBoxesMenu()
@@ -283,6 +291,46 @@ void MainWindow::createOnlineServicesMenu()
             m_onlineServicesMenu->addAction( (*i)->action() );
         }
     }
+}
+
+void MainWindow::createPluginMenus()
+{
+    //Remove and delete toolbars if they exist
+    while( !m_pluginToolbars.isEmpty() ) {
+        QToolBar* tb = m_pluginToolbars.takeFirst();
+        this->removeToolBar(tb);
+        delete tb;
+    }
+
+    //remove and delete old menus if they exist
+    while(  !m_pluginMenus.isEmpty() ) {
+        QMenu* menu = m_pluginMenus.takeFirst();
+//        FIXME: this does not provide an easy way to remove a menu.
+//        Make a workaround
+//        this->menuBar()->removeAction();
+    }
+
+    QList<QActionGroup*> *tmp_toolbarActionGroups;
+    QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i;
+
+    //Load the toolbars
+    for( i = renderPluginList.constBegin(); i != renderPluginList.constEnd(); ++i ) {
+        tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
+
+        if ( tmp_toolbarActionGroups ) {
+            QToolBar* toolbar = new QToolBar(this);
+
+            foreach( QActionGroup* ag, *tmp_toolbarActionGroups ) {
+                toolbar->addActions( ag->actions() );
+            }
+
+            m_pluginToolbars.append( toolbar );
+            this->addToolBar( toolbar );
+        }
+    }
+
+//    FIXME: load the menus once the method has been settled on
 }
 
 void MainWindow::createStatusBar()

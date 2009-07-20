@@ -24,7 +24,6 @@
 #include <QtGui/QPaintEvent>
 #include <QtGui/QRegion>
 #include <QtGui/QStyleOptionGraphicsItem>
-#include <QtGui/QToolBar>
 #include <QtGui/QMainWindow>
 #include <QtGui/QAction>
 #include <QtNetwork/QNetworkProxy>
@@ -78,7 +77,6 @@ class MarbleWidgetPrivate
           m_animationsEnabled( false ),
           m_inputhandler( 0 ),
           m_physics( new MarblePhysics( parent ) ),
-          m_mainToolbar(),
           m_proxyHost(),
           m_proxyPort( 0 ),
           m_user(),
@@ -112,8 +110,6 @@ class MarbleWidgetPrivate
     MarbleWidgetInputHandler  *m_inputhandler;
 
     MarblePhysics    *m_physics;
-    
-    QToolBar        *m_mainToolbar;
 
     //This stuff is NEVER used. Needs to be deleted
     QString          m_proxyHost;
@@ -130,10 +126,6 @@ MarbleWidget::MarbleWidget(QWidget *parent)
 {
 //    setAttribute( Qt::WA_PaintOnScreen, true );
     d->construct();
-
-    if( parent && parent->parent() && parent->parent()->inherits( "QMainWindow" ) ) {
-        ((QMainWindow*) parent->parent())->addToolBar(d->m_mainToolbar);
-    }
 }
 
 
@@ -218,8 +210,6 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->setInputHandler( new MarbleWidgetDefaultInputHandler );
     m_widget->setMouseTracking( m_widget );
-
-    m_mainToolbar = new QToolBar(0);
 
     m_widget->connect( m_model, SIGNAL( pluginSettingsChanged() ),
                        m_widget, SIGNAL( pluginSettingsChanged() ) );
@@ -1290,16 +1280,6 @@ QString MarbleWidget::user() const
 QString MarbleWidget::password() const
 {
     return d->m_password;
-}
-
-void MarbleWidget::registerActions( QActionGroup* actions)
-{
-    d->m_mainToolbar->addActions( actions->actions() );
-}
-
-void MarbleWidget::removeAction( QAction *action )
-{
-    d->m_mainToolbar->removeAction( action );
 }
 
 QList<RenderPlugin *> MarbleWidget::renderPlugins() const

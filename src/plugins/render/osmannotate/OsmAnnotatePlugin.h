@@ -62,8 +62,8 @@ class OsmAnnotatePlugin :  public RenderPlugin
 
     bool isInitialized () const;
 
-    virtual QList<QActionGroup*>* actions() const;
-    virtual QList<QActionGroup*>* toolbarActions() const;
+    virtual QList<QActionGroup*>* actionGroups() const;
+    virtual QList<QActionGroup*>* toolbarActionGroups() const;
 
     bool render( GeoPainter *painter, ViewportParams *viewport,
                  const QString& renderPos, GeoSceneLayer * layer = 0 );
@@ -79,7 +79,6 @@ public slots:
     void setAddingPlacemark( bool );
     void setDrawingPolygon( bool );
 
-    void registerActions();
 protected:
     bool eventFilter(QObject* watched, QEvent* event);
 private:

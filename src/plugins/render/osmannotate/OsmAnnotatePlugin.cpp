@@ -100,9 +100,6 @@ void OsmAnnotatePlugin::initialize ()
 
     m_actions = 0;
     m_toolbarActions = 0;
-
-    connect( this, SIGNAL(actionGroupsChanged()),
-             this, SLOT(registerActions() ) );
 }
 
 bool OsmAnnotatePlugin::isInitialized () const
@@ -110,12 +107,12 @@ bool OsmAnnotatePlugin::isInitialized () const
     return true;
 }
 
-QList<QActionGroup*>* OsmAnnotatePlugin::actions() const
+QList<QActionGroup*>* OsmAnnotatePlugin::actionGroups() const
 {
     return m_actions;
 }
 
-QList<QActionGroup*>* OsmAnnotatePlugin::toolbarActions() const
+QList<QActionGroup*>* OsmAnnotatePlugin::toolbarActionGroups() const
 {
     return m_toolbarActions;
 }
@@ -182,16 +179,6 @@ void OsmAnnotatePlugin::setDrawingPolygon(bool b)
             //FIXME only redraw the new polygon
             emit(redraw());
         }
-    }
-}
-
-void OsmAnnotatePlugin::registerActions()
-{
-    qDebug() << "Registering Actions!!!!!";
-    QListIterator<QActionGroup*> it(*m_toolbarActions);
-
-    while( it.hasNext() ) {
-        m_marbleWidget->registerActions( it.next() );
     }
 }
 
@@ -397,13 +384,8 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     toolbarActions->append( group );
 
     //delete the old groups if they exist
-    if( m_actions ) {
-        delete m_actions;
-    }
-
-    if( m_toolbarActions ) {
-        delete m_toolbarActions;
-    }
+    delete m_actions;
+    delete m_toolbarActions;
 
     m_actions = actions;
     m_toolbarActions = toolbarActions;

@@ -68,7 +68,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      *also contain all of the actions returned by @see toolbarActions().
      *@return A QList of grouped actions
      */
-    virtual QList<QActionGroup*>*   actions() const;
+    virtual QList<QActionGroup*>*   actionGroups() const;
 
     /**
      *This method returns a subset of the actions returned by @see actions() which
@@ -77,7 +77,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      *toobar but they will be visable and discoverable
      *@return A QList of grouped toolbar actions
      */
-    virtual QList<QActionGroup*>*   toolbarActions() const;
+    virtual QList<QActionGroup*>*   toolbarActionGroups() const;
     
     QStandardItem *item()   const;
 

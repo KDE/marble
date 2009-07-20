@@ -81,6 +81,7 @@ class MainWindow : public QMainWindow
     void  lockPosition( bool );
     void  createInfoBoxesMenu();
     void  createOnlineServicesMenu();
+    void  createPluginMenus();
 
  private:
     ControlView *m_controlView;
@@ -91,6 +92,12 @@ class MainWindow : public QMainWindow
     QMenu *m_settingsMenu;
     QMenu *m_infoBoxesMenu;
     QMenu *m_onlineServicesMenu;
+
+    /// Store plugin toolbar pointers so that they can be removed/updated later
+    QList<QToolBar*> m_pluginToolbars;
+
+    /// Store plugin menus so that they can be removed/updated later
+    QList<QMenu*> m_pluginMenus;
 
     // File Menu
     QAction *m_exportMapAct;
