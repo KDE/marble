@@ -26,9 +26,11 @@ static GeoTagHandlerRegistrar s_handlerbounds( GeoTagHandler::QualifiedName(osmT
 
 GeoNode* OsmWayTagHandler::parse( GeoParser& parser ) const
 {
+    GeoNode* result;
     OsmWayGraphicsItem* way = new OsmWayGraphicsItem();
-    qDebug() << ((GeoNode*)(way));
-    return ((GeoNode*)(way));
+    result = reinterpret_cast<GeoNode*>(way);
+    Q_ASSERT( result );
+    return result;
 }
 
 }

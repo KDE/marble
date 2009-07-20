@@ -13,6 +13,8 @@
 #include "OsmNdTagHandler.h"
 #include "OsmWayGraphicsItem.h"
 
+#include <QtCore/QDebug>
+
 namespace Marble
 {
 namespace osm
@@ -28,9 +30,26 @@ GeoNode* OsmNdTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parent = parser.parentElement();
 
+    //FIXME: problem with the stack implementation
+
+    //this should be "way"
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << "parent element name:" << parent.first.first;
+    Q_ASSERT( parent.first.first.compare("way") == 0 );
+
+    //this should be set because we know that the containing
+    // <way> element did not return 0
+    qDebug() << " parent associated node pointer:" << parent.associatedNode();
+
+    Q_ASSERT( parent.associatedNode() );
+
     GeoNode* wayNode = parent.associatedNode();
 
-    OsmWayGraphicsItem* way = (OsmWayGraphicsItem*)wayNode;
+    QString n = parser.name().toString();
+
+    OsmWayGraphicsItem* way = reinterpret_cast<OsmWayGraphicsItem*>(wayNode);
+
+    Q_ASSERT( way );
 
     //the line that crashes
 //    way->addNodeReferenceId( parser.attribute("ref").toInt() );
