@@ -198,6 +198,8 @@ void PlacemarkManager::loadPlacemarkContainer( PlacemarkLoader* loader, Placemar
     if ( container )
     { 
         d->m_model->addPlacemarks( *container, false, d->m_finalized && d->m_loaderList.isEmpty() );
+        delete container;
+        container = 0;
     }
 
     if( d->m_loaderList.isEmpty() ) {
