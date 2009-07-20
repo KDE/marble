@@ -34,15 +34,16 @@ class PlacemarkLoader : public QThread {
         void placemarkLoaderFailed( PlacemarkLoader* );
         void newGeoDataDocumentAdded( GeoDataDocument* );
     private:
-        bool loadFile( const QString& filename, PlacemarkContainer* placemarkContainer );
-        void saveFile( const QString& filename, PlacemarkContainer* placemarkContainer );
-        void importKml( const QString& filename, PlacemarkContainer* placemarkContainer );
-        void importKmlFromData( PlacemarkContainer* placemarkContainer );
+        bool loadFile( const QString& filename );
+        void saveFile( const QString& filename );
+        void importKml( const QString& filename );
+        void importKmlFromData();
 
         QString m_filepath;
         QString m_contents;
         bool m_finalize;
         GeoDataDocument *m_document;
+        PlacemarkContainer *m_container;
 };
 
 } // namespace Marble

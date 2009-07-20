@@ -195,13 +195,13 @@ void PlacemarkManager::cleanupLoader( PlacemarkLoader* loader )
 void PlacemarkManager::loadPlacemarkContainer( PlacemarkLoader* loader, PlacemarkContainer * container )
 {
     qDebug() << "Containername:" << container->name() << "to be finalized:" << (d->m_loaderList.size() == 1) << d->m_loaderList.size();
-    d->m_loaderList.removeAll( loader );
     if ( container )
     { 
-        d->m_model->addPlacemarks( *container, false, d->m_finalized && d->m_loaderList.isEmpty() );
+        d->m_model->addPlacemarks( *container, false, d->m_finalized && d->m_loaderList.size() == 1 );
         delete container;
         container = 0;
     }
+    d->m_loaderList.removeAll( loader );
 
     if( d->m_loaderList.isEmpty() ) {
         emit finalize();
@@ -211,6 +211,7 @@ void PlacemarkManager::loadPlacemarkContainer( PlacemarkLoader* loader, Placemar
          d->m_pathList.removeAll( loader->path() );
          delete loader;
     }
+//     delete container;
 }
 
 void PlacemarkManager::loadKml( const QString& filename, bool clearPrevious )

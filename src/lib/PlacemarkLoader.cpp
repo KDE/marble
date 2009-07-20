@@ -33,7 +33,8 @@ PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& file, bool fin
       m_filepath( file ),
       m_contents( QString() ),
       m_finalize( finalize ),
-      m_document( 0 )
+      m_document( 0 ),
+      m_container( 0 )
 {
 }
 
@@ -42,7 +43,8 @@ PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& contents, cons
       m_filepath( file ), 
       m_contents( contents ),
       m_finalize( finalize ),
-      m_document( 0 )
+      m_document( 0 ),
+      m_container( 0 )
 {
 }
 
@@ -63,7 +65,7 @@ void PlacemarkLoader::run()
         QString defaultsrcname;
         QString defaulthomecache;
 
-        PlacemarkContainer *container = new PlacemarkContainer( m_filepath );
+        m_container = new PlacemarkContainer( m_filepath );
     
         if( m_filepath.endsWith(".kml") ) {
             m_filepath.remove(QRegExp("\\.kml$"));
@@ -109,9 +111,9 @@ void PlacemarkLoader::run()
             bool loadok = false;
 
             if ( !cacheoutdated ) {
-                loadok = loadFile( defaultcachename, container );
+                loadok = loadFile( defaultcachename );
                 if ( loadok )
-                    emit placemarksLoaded( this, container );
+                    emit placemarksLoaded( this, m_container );
             }
             qDebug() << "Loading ended" << loadok;
             if ( loadok ) {
@@ -125,35 +127,34 @@ void PlacemarkLoader::run()
         if ( QFile::exists( defaultsrcname ) ) {
 
             // Read the KML file.
-            importKml( defaultsrcname, container );
+            importKml( defaultsrcname );
 
-            qDebug() << "ContainerSize for" << m_filepath << ":" << container->size();
+            qDebug() << "ContainerSize for" << m_filepath << ":" << m_container->size();
             // Save the contents in the efficient cache format.
-            saveFile( defaulthomecache, container );
+            saveFile( defaulthomecache );
 
             qDebug() << "placemarksLoaded";
 
             // ...and finally add it to the PlacemarkContainer
-            emit placemarksLoaded( this, container );
+            emit placemarksLoaded( this, m_container );
         }
         else {
             qDebug() << "No Default Placemark Source File for " << m_filepath;
             emit placemarkLoaderFailed( this );
         }
     } else {
-        PlacemarkContainer *container = new PlacemarkContainer( m_filepath );
+        m_container = new PlacemarkContainer( m_filepath );
 
         // Read the KML Data
-        importKmlFromData( container );
+        importKmlFromData();
 
-        emit placemarksLoaded( this, container );
+        emit placemarksLoaded( this, m_container );
     }
 }
 
 const quint32 MarbleMagicNumber = 0x31415926;
 
-void PlacemarkLoader::importKml( const QString& filename,
-                                 PlacemarkContainer* placemarkContainer )
+void PlacemarkLoader::importKml( const QString& filename )
 {
     GeoDataParser parser( GeoData_KML );
 
@@ -176,8 +177,8 @@ void PlacemarkLoader::importKml( const QString& filename,
     delete m_document;
     m_document = static_cast<GeoDataDocument*>( document );
     m_document->setFileName( m_filepath );
-    *placemarkContainer = PlacemarkContainer( m_document->placemarks(), 
-                                              m_filepath );
+    m_container = new PlacemarkContainer( m_document->placemarks(), 
+                                          m_filepath );
 
     file.close();
 
@@ -186,7 +187,7 @@ void PlacemarkLoader::importKml( const QString& filename,
     emit newGeoDataDocumentAdded( m_document );
 }
 
-void PlacemarkLoader::importKmlFromData( PlacemarkContainer* placemarkContainer )
+void PlacemarkLoader::importKmlFromData()
 {
     GeoDataParser parser( GeoData_KML );
 
@@ -204,8 +205,8 @@ void PlacemarkLoader::importKmlFromData( PlacemarkContainer* placemarkContainer 
     delete m_document;
     m_document = static_cast<GeoDataDocument*>( document );
     m_document->setFileName( m_filepath );
-    *placemarkContainer = PlacemarkContainer( m_document->placemarks(), 
-                                              m_filepath );
+    m_container = new PlacemarkContainer( m_document->placemarks(), 
+                                          m_filepath );
 
     buffer.close();
 
@@ -214,8 +215,7 @@ void PlacemarkLoader::importKmlFromData( PlacemarkContainer* placemarkContainer 
     emit newGeoDataDocumentAdded( m_document );
 }
 
-void PlacemarkLoader::saveFile( const QString& filename,
-                                 PlacemarkContainer* placemarkContainer )
+void PlacemarkLoader::saveFile( const QString& filename )
 {
     if ( !QDir( MarbleDirs::localPath() + "/placemarks/" ).exists() )
         ( QDir::root() ).mkpath( MarbleDirs::localPath() + "/placemarks/" );
@@ -235,8 +235,8 @@ void PlacemarkLoader::saveFile( const QString& filename,
     qreal lat;
     qreal alt;
 
-    PlacemarkContainer::const_iterator it = placemarkContainer->constBegin();
-    PlacemarkContainer::const_iterator const end = placemarkContainer->constEnd();
+    PlacemarkContainer::const_iterator it = m_container->constBegin();
+    PlacemarkContainer::const_iterator const end = m_container->constEnd();
     for (; it != end; ++it )
     {
         out << (*it).name();
@@ -257,8 +257,7 @@ bool PlacemarkLoader::finalize()
     return m_finalize;
 }
 
-bool PlacemarkLoader::loadFile( const QString& filename,
-                                 PlacemarkContainer* placemarkContainer )
+bool PlacemarkLoader::loadFile( const QString& filename )
 {
     QFile file( filename );
     file.open( QIODevice::ReadOnly );
@@ -319,7 +318,7 @@ bool PlacemarkLoader::loadFile( const QString& filename,
         in >> tmpint64;
         mark.setPopulation( tmpint64 );
 
-        placemarkContainer->append( mark );
+        m_container->append( mark );
         m_document->append( mark );
     }
 
