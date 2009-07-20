@@ -16,7 +16,7 @@
 
 namespace Marble{
 
-class MARBLE_EXPORT OsmWayGraphicsItem : public GeoLineStringGraphicsItem
+class OsmWayGraphicsItem : public GeoLineStringGraphicsItem
 {
 public:
     OsmWayGraphicsItem();

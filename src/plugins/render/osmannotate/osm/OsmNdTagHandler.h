@@ -19,7 +19,7 @@ namespace Marble
 namespace osm
 {
 
-class MARBLE_EXPORT OsmNdTagHandler : public GeoTagHandler
+class OsmNdTagHandler : public GeoTagHandler
 {
 public:
     virtual GeoNode* parse( GeoParser& parser ) const;
