@@ -53,4 +53,9 @@
   <Action name="edit_copy"/>
 </ToolBar>
 
+<ToolBar position="Top" hidden="false" name="pluginToolBar">
+    <text>Plugin ToolBar</text>
+     <ActionList name="plugins_actionlist" />
+</ToolBar>
+
 </kpartgui>

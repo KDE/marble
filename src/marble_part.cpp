@@ -687,6 +687,13 @@ void MarblePart::setupActions()
 
     KStandardAction::preferences( this, SLOT( editSettings() ),
 				  actionCollection() );
+
+    //    FIXME: Discuss if this is the best place to put this
+    QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
+    for (; it != pluginList.constEnd(); ++it) {
+        connect( (*it), SIGNAL( actionGroupsChanged() ),
+                 this, SLOT( createPluginMenus() ) );
+    }
 }
 
 void MarblePart::createInfoBoxesMenu()
@@ -749,6 +756,27 @@ void MarblePart::mapThemeChanged( const QString& newMapTheme )
     Q_UNUSED( newMapTheme );
     updateTileZoomLevel();
     updateStatusBar();
+}
+
+void MarblePart::createPluginMenus()
+{
+    unplugActionList("plugins_actionlist");
+    QList<QActionGroup*> *tmp_toolbarActionGroups;
+    QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
+    QList<RenderPlugin *>::const_iterator i;
+
+    //Load the toolbars
+    for( i = renderPluginList.constBegin(); i != renderPluginList.constEnd(); ++i ) {
+        tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
+
+        if ( tmp_toolbarActionGroups ) {
+
+            foreach( QActionGroup* ag, *tmp_toolbarActionGroups ) {
+                plugActionList( "plugins_actionlist", ag->actions() );
+            }
+        }
+    }
+
 }
 
 void MarblePart::updateTileZoomLevel()

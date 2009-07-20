@@ -57,6 +57,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  showDistance( const QString& position);
     void  showZoomLevel( int zoomLevel );
     void  mapThemeChanged( const QString& newMapTheme );
+    void  createPluginMenus();
 
   private Q_SLOTS:
     void  initObject();
