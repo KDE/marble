@@ -71,6 +71,8 @@ class AbstractLayer: public QObject
      */
     void setVisible( bool visible );
 
+    virtual void clearModel() = 0;
+
  public:
     /**
      * @brief Construct this layer with a parent
