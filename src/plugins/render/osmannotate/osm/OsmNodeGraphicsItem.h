@@ -21,7 +21,7 @@
 namespace Marble
 {
 
-class MARBLE_EXPORT OsmNodeGraphicsItem : public GeoPointGraphicsItem
+class OsmNodeGraphicsItem : public GeoPointGraphicsItem
 {
 public:
     OsmNodeGraphicsItem();
