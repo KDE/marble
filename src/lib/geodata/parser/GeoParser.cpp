@@ -96,7 +96,7 @@ bool GeoParser::read( QIODevice* device )
                 if ( !m_nodeStack.isEmpty() )
                     raiseError(
                         QObject::tr("Parsing failed. Still %n unclosed tag(s) after document end.", "",
-                        m_nodeStack.size() ));
+                        m_nodeStack.size() ) + errorString());
             } else
                 raiseDocumentElementError();
         }
@@ -125,7 +125,12 @@ GeoStackItem GeoParser::parentElement( unsigned int depth )
 
 void GeoParser::parseDocument()
 {
-    Q_ASSERT( isStartElement() );
+    if( !isStartElement() ) {
+        raiseError( QString("Error parsing file at line: %1 and column %2 . ")
+                    .arg( lineNumber() ).arg( columnNumber() )
+                    +  QString("This is an Invalid File") );
+        return;
+    }
 
     while ( !atEnd() ) {
         readNext();
