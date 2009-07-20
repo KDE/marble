@@ -55,7 +55,7 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter,
 //    painter->drawEllipse(coordinate(), screenBounding().width(), screenBounding().height(), true);
     //Would it not be useful to have a draw latlongbox?
 //    painter->drawRect(geoBounding());
-    qreal north, south, east, west;
+    qreal north = 0, south = 0, east = 0, west = 0;
 
     //don't need this if its done by the painter soon
 //    geoBounding(viewport->angularResolution());
