@@ -110,3 +110,10 @@ void GpsLayer::addGpxFile( GpxFile* file )
 {
     m_fileModel->addFile( file );
 }
+
+void GpsLayer::clearModel()
+{
+    delete m_fileModel;
+    m_fileModel = 0;
+    m_fileModel = new GpxFileModel();
+}

@@ -27,6 +27,7 @@ class Waypoint;
 
 class GpsLayer : public AbstractLayer
 {
+
  public:
     explicit GpsLayer( GpxFileModel *fileModel, QObject *parent =0 );
     ~GpsLayer();
@@ -47,6 +48,8 @@ class GpsLayer : public AbstractLayer
 
     GpxFileModel        *m_fileModel;
     PositionTracking*   getPositionTracking();
+public slots:
+    virtual void clearModel();
  private:
     Waypoint            *m_currentPosition;
 

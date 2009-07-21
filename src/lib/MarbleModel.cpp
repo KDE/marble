@@ -204,17 +204,17 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( d->m_placemarkmodel,           SIGNAL( layoutChanged() ),
              d->m_placemarkLayout,          SLOT( requestStyleReset() ) );
 
-    d->m_gpxFileModel = new GpxFileModel( this );
-    d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
-
-    connect( d->m_gpxFileModel, SIGNAL( modelChanged() ),
-             this,              SIGNAL( modelChanged() ) );
-
     /*
      * Create FileViewModel
      */
     connect( fileViewModel(), SIGNAL( modelChanged() ),
              this,            SIGNAL( modelChanged() ) );
+
+    d->m_gpxFileModel = new GpxFileModel( this );
+    d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
+
+    connect( fileViewModel(), SIGNAL(layoutChanged()),
+             d->m_gpsLayer, SLOT(clearModel() ) );
 
     d->m_dateTime       = new ExtDateTime();
     /* Assume we are dealing with the earth */
