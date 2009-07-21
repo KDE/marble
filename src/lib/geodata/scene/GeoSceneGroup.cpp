@@ -93,6 +93,7 @@ void GeoSceneGroup::addProperty( GeoSceneProperty* property )
         if ( currentProperty->name() == property->name() ) {
             delete currentProperty;
             it = m_properties.erase(it);
+            break;
         }
         else {
             ++it;

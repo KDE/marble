@@ -84,6 +84,7 @@ void GeoSceneLayer::addDataset( GeoSceneAbstractDataset* dataset )
         if ( currentAbstractDataset->name() == dataset->name() ) {
             delete currentAbstractDataset;
             it = m_datasets.erase(it);
+            break;
         }
         else {
             ++it;
@@ -102,8 +103,10 @@ GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name )
     QVector<GeoSceneAbstractDataset*>::const_iterator it = m_datasets.constBegin();
     QVector<GeoSceneAbstractDataset*>::const_iterator end = m_datasets.constEnd();
     for (; it != end; ++it) {
-        if ( (*it)->name() == name )
+        if ( (*it)->name() == name ) {
             dataset = *it;
+            break;
+        }
     }
 
     if ( dataset ) {
@@ -177,7 +180,9 @@ void GeoSceneLayer::addFilter( GeoSceneFilter * filter )
 
 void GeoSceneLayer::removeFilter( GeoSceneFilter * filter )
 {
-    if( filter == m_filter ) { m_filter = 0; }
+    if ( filter == m_filter ) {
+        m_filter = 0;
+    }
 }
 
 }

@@ -39,7 +39,7 @@ class GeoSceneSettingsPrivate
     }
 
     /// The hash table holding all the properties in the settings.
-    QVector<GeoSceneProperty*>  m_properties;
+    QVector<GeoSceneProperty*> m_properties;
     QVector<GeoSceneGroup*> m_groups;
 };
 
@@ -153,6 +153,7 @@ void GeoSceneSettings::addGroup( GeoSceneGroup* group )
         if ( currentGroup->name() == group->name() ) {
             delete currentGroup;
             it = d->m_groups.erase(it);
+            break;
         }
         else {
             ++it;
@@ -175,8 +176,10 @@ GeoSceneGroup* GeoSceneSettings::group( const QString& name )
     QVector<GeoSceneGroup*>::const_iterator it = d->m_groups.constBegin();
     QVector<GeoSceneGroup*>::const_iterator groupEnd = d->m_groups.constEnd();
     for (; it != groupEnd; ++it) {
-        if ( (*it)->name() == name )
+        if ( (*it)->name() == name ) {
             group = *it;
+            break;
+        }
     }
 
     if ( group ) {
@@ -196,6 +199,7 @@ void GeoSceneSettings::addProperty( GeoSceneProperty* property )
         if ( currentProperty->name() == property->name() ) {
             delete currentProperty;
             it = d->m_properties.erase(it);
+            break;
         }
         else {
             ++it;
@@ -219,8 +223,10 @@ GeoSceneProperty* GeoSceneSettings::property( const QString& name )
     QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.constBegin();
     QVector<GeoSceneProperty*>::const_iterator propEnd = d->m_properties.constEnd();
     for (; it != propEnd; ++it) {
-        if ( (*it)->name() == name )
+        if ( (*it)->name() == name ) {
             property = *it;
+            break;
+        }
     }
 
     if ( property ) {

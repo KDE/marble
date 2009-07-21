@@ -51,6 +51,7 @@ void GeoSceneSection::addItem( GeoSceneItem* item )
         if ( currentItem->name() == item->name() ) {
             delete currentItem;
             it = m_items.erase(it);
+            break;
         }
         else {
             ++it;
@@ -69,8 +70,10 @@ GeoSceneItem* GeoSceneSection::item( const QString& name )
     QVector<GeoSceneItem*>::const_iterator it = m_items.constBegin();
     QVector<GeoSceneItem*>::const_iterator end = m_items.constEnd();
     for (; it != end; ++it) {
-        if ( (*it)->name() == name )
+        if ( (*it)->name() == name ) {
             item = *it;
+            break;
+        }
     }
 
     if ( item ) {

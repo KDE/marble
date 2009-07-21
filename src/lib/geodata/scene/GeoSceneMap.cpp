@@ -76,6 +76,7 @@ void GeoSceneMap::addLayer( GeoSceneLayer* layer )
         if ( currentLayer->name() == layer->name() ) {
             delete currentLayer;
             it = d->m_layers.erase(it);
+            break;
         }
         else {
             ++it;
@@ -94,8 +95,10 @@ GeoSceneLayer* GeoSceneMap::layer( const QString& name )
     QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
     QVector<GeoSceneLayer*>::const_iterator end = d->m_layers.constEnd();
     for (; it != end; ++it) {
-        if ( (*it)->name() == name )
+        if ( (*it)->name() == name ) {
             layer = *it;
+            break;
+        }
     }
 
     if ( layer ) {
@@ -123,6 +126,7 @@ void GeoSceneMap::addFilter( GeoSceneFilter* filter )
         if ( currentFilter->name() == filter->name() ) {
             delete currentFilter;
             it = d->m_filters.erase(it);
+            break;
         }
         else {
             ++it;
@@ -141,8 +145,10 @@ GeoSceneFilter* GeoSceneMap::filter( const QString& name )
     QVector<GeoSceneFilter*>::const_iterator it = d->m_filters.constBegin();
     QVector<GeoSceneFilter*>::const_iterator end = d->m_filters.constEnd();
     for (; it != end; ++it) {
-        if ( (*it)->name() == name )
+        if ( (*it)->name() == name ) {
             filter = *it;
+            break;
+        }
     }
 
     if ( filter ) {

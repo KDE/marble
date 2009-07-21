@@ -60,6 +60,7 @@ void GeoSceneLegend::addSection( GeoSceneSection* section )
         if ( currentSection->name() == section->name() ) {
             delete currentSection;
             it = d->m_sections.erase(it);
+            break;
         }
         else {
             ++it;
@@ -78,8 +79,10 @@ GeoSceneSection* GeoSceneLegend::section( const QString& name )
     QVector<GeoSceneSection*>::const_iterator it = d->m_sections.constBegin();
     QVector<GeoSceneSection*>::const_iterator end = d->m_sections.constEnd();
     for (; it != end; ++it) {
-        if ( (*it)->name() == name )
+        if ( (*it)->name() == name ) {
             section = *it;
+            break;
+        }
     }
 
     if ( section ) {
