@@ -32,11 +32,12 @@ GpsLayer::GpsLayer( GpxFileModel *fileModel, QObject *parent )
     m_tracks = new TrackContainer();*/
 
 //     m_files = new QVector<GpxFile*>();
-    m_fileModel = fileModel;
+//    m_fileModel = fileModel;
 
 //     m_gpsTrack = new Track();
     m_currentGpx = new GpxFile();
-    m_fileModel->addFile( m_currentGpx );
+//    m_fileModel->addFile( m_currentGpx );
+    m_ownedGpxFiles.append( m_currentGpx );
     m_tracking = new PositionTracking( m_currentGpx ); 
 
 }
@@ -70,13 +71,25 @@ void GpsLayer::paintLayer( ClipPainter *painter,
         QRegion temp; // useless variable
         updateGps( canvasSize, viewParams, temp);
         paintCurrentPosition( painter, canvasSize, viewParams );
+        if( !m_currentGpx ) {
+            m_currentGpx = new GpxFile();
+            m_currentGpx->addTrack( m_tracking->currentGpsTrack() );
+            m_ownedGpxFiles.append( m_currentGpx );
+        }
         m_currentGpx->draw( painter, canvasSize, viewParams );
     }
 
-    const QVector<GpxFile*> * const allFiles = m_fileModel->allFiles();
-    QVector<GpxFile*>::const_iterator it;
-    for( it = allFiles->constBegin();
-         it != allFiles->constEnd(); ++it ) {
+//    const QVector<GpxFile*> * const allFiles = m_fileModel->allFiles();
+    QList<GpxFile*>::const_iterator it;
+    for( it = m_externalGpxFiles.constBegin();
+         it != m_externalGpxFiles.constEnd(); ++it ) {
+             if( (*it) != m_currentGpx ) {
+                 (*it)->draw( painter, canvasSize, viewParams );
+             }
+    }
+
+    for( it = m_ownedGpxFiles.constBegin();
+         it != m_ownedGpxFiles.constEnd(); ++it ) {
              if( (*it) != m_currentGpx ) {
                  (*it)->draw( painter, canvasSize, viewParams );
              }
@@ -100,20 +113,23 @@ void GpsLayer::loadGpx( const QString &fileName )
 {
     GpxFile *tempFile = new GpxFile( fileName );
 
-//     QTextStream test(stderr);
-//     test << *tempFile;
-
-    m_fileModel->addFile( tempFile );
+//    m_fileModel->addFile( tempFile );
+    m_ownedGpxFiles.append( tempFile );
 }
 
 void GpsLayer::addGpxFile( GpxFile* file )
 {
-    m_fileModel->addFile( file );
+//    m_fileModel->addFile( file );
+    m_externalGpxFiles.append( file );
 }
 
 void GpsLayer::clearModel()
 {
-    delete m_fileModel;
-    m_fileModel = 0;
-    m_fileModel = new GpxFileModel();
+    while( !m_ownedGpxFiles.isEmpty() ) {
+        GpxFile* file = m_ownedGpxFiles.takeFirst();
+        m_currentGpx = 0;
+        delete file;
+    }
+
+    m_externalGpxFiles.clear();
 }

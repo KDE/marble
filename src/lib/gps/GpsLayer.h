@@ -46,7 +46,9 @@ class GpsLayer : public AbstractLayer
     bool updateGps(const QSize &canvasSize, ViewParams *viewParams,
                    QRegion &reg);
 
-    GpxFileModel        *m_fileModel;
+    QList<GpxFile*>     m_ownedGpxFiles;
+    QList<GpxFile*>     m_externalGpxFiles;
+//    GpxFileModel        *m_fileModel;
     PositionTracking*   getPositionTracking();
 public slots:
     virtual void clearModel();

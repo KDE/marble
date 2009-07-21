@@ -201,5 +201,11 @@ void PositionTracking::draw( ClipPainter *painter,
 }
 
 
+Track* PositionTracking::currentGpsTrack()
+{
+    return m_gpsTrack;
+}
+
+
 
 #include "PositionTracking.moc"

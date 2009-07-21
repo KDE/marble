@@ -82,6 +82,8 @@ public:
                 const QSize &canvasSize, 
                 ViewParams *viewParams );
 
+    Track*  currentGpsTrack();
+
 
  public slots:
     void  notifyPosition( GeoDataCoordinates );
