@@ -49,9 +49,19 @@ QVector<GeoDataLineString*> GeoDataLinearRing::toRangeCorrected() const
 {
     if ( p()->m_dirtyRange ) {
 
-        qDeleteAll( p()->m_rangeCorrected );
+        qDeleteAll( p()->m_rangeCorrected ); // This shouldn't be needed
 
-        GeoDataLinearRing poleCorrected = toPoleCorrected();
+        GeoDataLinearRing poleCorrected;
+
+        if ( latLonAltBox().crossesDateLine() )
+        {
+            GeoDataLinearRing normalizedLineString = toNormalized();
+            poleCorrected = normalizedLineString.toPoleCorrected();
+            p()->m_rangeCorrected = poleCorrected.toDateLineCorrected();
+        }
+        else {
+            poleCorrected = toPoleCorrected();
+        }
 
         p()->m_rangeCorrected = poleCorrected.toDateLineCorrected();
     }

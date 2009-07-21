@@ -49,6 +49,13 @@ class AbstractProjectionPrivate
                                     const GeoDataCoordinates &currentCoords,
                                     int count, const ViewportParams *viewport,
                                     TessellationFlags f = 0 );
+
+    void repeatPolygons( const ViewportParams *viewport,
+                         QVector<QPolygonF *> &polygons );
+
+    void translatePolygons( const QVector<QPolygonF *> &polygons,
+                            QVector<QPolygonF *> &translatedPolygons,
+                            qreal xOffset );
 };
 
 } // namespace Marble

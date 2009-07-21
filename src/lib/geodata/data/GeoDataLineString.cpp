@@ -279,6 +279,8 @@ GeoDataLineString GeoDataLineString::toNormalized() const
     qreal lon;
     qreal lat;
 
+    // FIXME: Think about how we can avoid unnecessary copies
+    //        if the linestring stays the same.
     for( QVector<GeoDataCoordinates>::const_iterator itCoords
           = p()->m_vector.constBegin();
          itCoords != p()->m_vector.constEnd();
@@ -301,11 +303,21 @@ QVector<GeoDataLineString*> GeoDataLineString::toRangeCorrected() const
 
         qDeleteAll( p()->m_rangeCorrected ); // This shouldn't be needed
 
-        GeoDataLineString poleCorrected = toPoleCorrected();
-
+        GeoDataLineString poleCorrected;
+        
+        if ( latLonAltBox().crossesDateLine() )
+        {
+            GeoDataLineString normalizedLineString = toNormalized();
+            poleCorrected = normalizedLineString.toPoleCorrected();
+            p()->m_rangeCorrected = poleCorrected.toDateLineCorrected();
+        }
+        else {
+            poleCorrected = toPoleCorrected();
+        }
+        
         p()->m_rangeCorrected = poleCorrected.toDateLineCorrected();
     }
-    
+
     return p()->m_rangeCorrected;
 }
 
