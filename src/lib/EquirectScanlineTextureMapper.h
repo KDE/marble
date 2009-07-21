@@ -21,6 +21,8 @@ namespace Marble
 
 class EquirectScanlineTextureMapper : public AbstractScanlineTextureMapper
 {
+    Q_OBJECT
+
  public:
     explicit EquirectScanlineTextureMapper( TileLoader *tileLoader,
 					    QObject    *parent = 0 );

@@ -13,7 +13,3 @@
 
 
 Marble::PositionProviderPluginInterface::~PositionProviderPluginInterface() {}
-
-
-
-#include "PositionProviderPluginInterface.moc"

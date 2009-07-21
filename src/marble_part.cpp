@@ -1166,7 +1166,7 @@ void MarblePart::readPluginSettings() {
 
         QHash<QString,QVariant> hash = plugin->settings();
 
-        foreach ( QString key, group.keyList() ) {
+        foreach ( const QString& key, group.keyList() ) {
             hash.insert( key, group.readEntry( key ) );
         }
 

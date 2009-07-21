@@ -86,7 +86,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
             QPixmapCache::insert( p()->m_cacheKey, cachePixmap );
         }
         
-        foreach( QPointF position, p()->positions() ) {
+        foreach( const QPointF& position, p()->positions() ) {
             painter->save();
             
             painter->drawPixmap( position, cachePixmap );
@@ -95,7 +95,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
         }
     }
     else {
-        foreach( QPointF position, p()->positions() ) {
+        foreach( const QPointF& position, p()->positions() ) {
             painter->save();
         
             painter->translate( position );
@@ -109,7 +109,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
 }
 
 bool MarbleGraphicsItem::contains( const QPointF& point ) const {
-    foreach( QRectF rect, d->boundingRects() ) {
+    foreach( const QRectF& rect, d->boundingRects() ) {
         if( rect.contains( point ) )
             return true;
     }

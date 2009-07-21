@@ -17,7 +17,6 @@
 #include <QtGui/QImage>
 
 #include "global.h"
-#include "GeoPolygon.h"
 #include "MarbleDirs.h"
 #include "Quaternion.h"
 #include "TextureTile.h"

@@ -20,7 +20,6 @@
 #include <QtGui/QImage>
 
 // Marble
-#include "GeoPolygon.h"
 #include "MarbleDirs.h"
 #include "TextureTile.h"
 #include "TileLoader.h"

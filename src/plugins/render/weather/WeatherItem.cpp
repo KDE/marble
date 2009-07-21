@@ -106,7 +106,7 @@ class WeatherItemPrivate {
         // Getting the size of the first row.
         // The row should at least be able to contain a image.
         QSize row1Size( 0, imageSize.height() );
-        foreach ( QSize size, elementSize1 ) {
+        foreach ( const QSize& size, elementSize1 ) {
             row1Size += QSize( size.width(), 0 );
             // The height of the first row is the maximum of the elements height.
             if ( size.height() > row1Size.height() ) {
@@ -117,7 +117,7 @@ class WeatherItemPrivate {
         // Getting the size of the second row.
         // The row should at least be able to contain a image.
         QSize row2Size( 0, imageSize.height() );
-        foreach ( QSize size, elementSize2 ) {
+        foreach ( const QSize& size, elementSize2 ) {
             row2Size += QSize( size.width(), 0 );
             // The height of the second row is the maximum of the elements height.
             if ( size.height() > row2Size.height() ) {

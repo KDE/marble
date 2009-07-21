@@ -47,7 +47,6 @@
 #include "SphericalScanlineTextureMapper.h"
 #include "EquirectScanlineTextureMapper.h"
 #include "MercatorScanlineTextureMapper.h"
-#include "GeoPolygon.h"
 #include "gps/GpxFileModel.h"
 #include "HttpDownloadManager.h"
 #include "KmlFileViewItem.h"
