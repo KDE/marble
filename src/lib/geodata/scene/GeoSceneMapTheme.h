@@ -40,7 +40,6 @@ class GeoSceneLegendItem
 {
  public:
     GeoSceneLegendItem();
-    ~GeoSceneLegendItem() {}
 
     QColor   background()             const { return m_background; }
     void     setBackground( QColor bg )     { m_background = bg;   }
@@ -59,7 +58,7 @@ class GeoSceneLegendItem
 class LegendSection
 {
  public:
-    LegendSection() 
+    LegendSection()
         : m_heading(),
           m_items()
     { }
