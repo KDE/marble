@@ -125,6 +125,7 @@ void OnfRunner::slotRequestFinished( int id, bool error )
         it->setVisualCategory( category() );
     }
     emit runnerFinished( this, placemarks );
+    delete results;
     return;
 }
 

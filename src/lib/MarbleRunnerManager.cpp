@@ -88,6 +88,7 @@ void MarbleRunnerManager::newText(QString text)
 void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVector<GeoDataPlacemark> result )
 {
     m_runners.removeOne(runner);
+    runner->deleteLater();
     qDebug() << "Runner finished, active runners: " << m_runners.size();
     qDebug() << "Runner reports" << result.size() << "results";
     if( result.isEmpty() )
