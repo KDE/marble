@@ -16,7 +16,6 @@
 #include <QtCore/QFile>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
-#include <QtXml/QDomDocument>
 #include <QtGui/QIcon>
 #include <QtGui/QStandardItemModel>
 
@@ -35,7 +34,7 @@ GeoSceneLegendItem::GeoSceneLegendItem()
   : m_background( Qt::transparent ),
     m_symbol(),
     m_text()
-{    
+{
 }
 
 
@@ -54,61 +53,47 @@ GeoSceneMapTheme::~GeoSceneMapTheme()
     m_legend.clear();
 }
 
-
 QStringList GeoSceneMapTheme::findGeoSceneMapThemes( const QString& path )
 {
-    QDir  localPaths = QDir( MarbleDirs::localPath()  + '/' + path );
-    QDir  sysdirs    = QDir( MarbleDirs::systemPath() + '/' + path );
+    QDir localPaths = QDir( MarbleDirs::localPath()  + '/' + path );
+    QDir sysdirs    = QDir( MarbleDirs::systemPath() + '/' + path );
 
-    QStringList  localmappaths = localPaths.entryList( QStringList( "*"
-),
-                                                       QDir::AllDirs
-                                                       |
-QDir::NoSymLinks
-                                                       |
-QDir::NoDotAndDotDot );
-    QStringList  sysmappaths = sysdirs.entryList( QStringList( "*" ),
-                                                  QDir::AllDirs
-                                                  | QDir::NoSymLinks
-                                                  | QDir::NoDotAndDotDot
-);
+    QStringList localmappaths = localPaths.entryList( QStringList("*"),
+                                                      QDir::AllDirs
+                                                      | QDir::NoSymLinks
+                                                      | QDir::NoDotAndDotDot );
+    QStringList sysmappaths = sysdirs.entryList( QStringList( "*" ),
+                                                 QDir::AllDirs
+                                                 | QDir::NoSymLinks
+                                                 | QDir::NoDotAndDotDot );
 
-
-    QStringList  localmapdirs;
-    QStringList  sysmapdirs;
+    QStringList localmapdirs;
+    QStringList sysmapdirs;
 
     for ( int planet = 0; planet < localmappaths.size(); ++planet ) {
-
-        QDir themeDir = QDir( MarbleDirs::localPath() + "/maps/"
-+ localmappaths.at( planet ) );
-        QStringList thememappaths = themeDir.entryList( 
-                                     QStringList( "*" ),
-                                     QDir::AllDirs |
-                                     QDir::NoSymLinks |
-                                     QDir::NoDotAndDotDot );
+        QDir themeDir = QDir( MarbleDirs::localPath() + "/maps/" + localmappaths.at( planet ) );
+        QStringList thememappaths = themeDir.entryList( QStringList( "*" ),
+                                                        QDir::AllDirs
+                                                        | QDir::NoSymLinks
+                                                        | QDir::NoDotAndDotDot );
         for ( int theme = 0; theme < thememappaths.size(); ++theme ) {
-            localmapdirs << ( MarbleDirs::localPath() + "/maps/" 
-                              + localmappaths.at( planet ) + '/'
+            localmapdirs << ( MarbleDirs::localPath() + "/maps/" + localmappaths.at( planet ) + '/'
                               + thememappaths.at( theme ) );
         }
     }
 
     for ( int planet = 0; planet < sysmappaths.size(); ++planet ) {
-
-        QDir themeDir = QDir( MarbleDirs::systemPath() + "/maps/"
-+ sysmappaths.at( planet ) );
-        QStringList thememappaths =  themeDir.entryList( 
-                                     QStringList( "*" ),
-                                     QDir::AllDirs |
-                                     QDir::NoSymLinks |
-                                     QDir::NoDotAndDotDot );
+        QDir themeDir = QDir( MarbleDirs::systemPath() + "/maps/" + sysmappaths.at( planet ) );
+        QStringList thememappaths = themeDir.entryList( QStringList( "*" ),
+                                                        QDir::AllDirs
+                                                        | QDir::NoSymLinks
+                                                        | QDir::NoDotAndDotDot );
         for ( int theme = 0; theme < thememappaths.size(); ++theme ) {
-            sysmapdirs << ( MarbleDirs::systemPath() + "/maps/" 
-                            + sysmappaths.at( planet ) + '/' 
+            sysmapdirs << ( MarbleDirs::systemPath() + "/maps/" + sysmappaths.at( planet ) + '/'
                             + thememappaths.at( theme ) );
         }
     }
-        
+
     QStringList  mapfiles;
     QStringList  tmp;
     QString      themedir;
@@ -121,8 +106,7 @@ QDir::NoDotAndDotDot );
         themedirname = QDir( themedir ).dirName();
 
         tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
-                                              QDir::Files |
-QDir::NoSymLinks );
+                                              QDir::Files | QDir::NoSymLinks );
         if ( !tmp.isEmpty() ) {
             QStringListIterator  k( tmp );
             while ( k.hasNext() ) {
@@ -138,8 +122,7 @@ QDir::NoSymLinks );
         themedirname = QDir( themedir ).path().section( '/', -2, -1);
 
         tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
-                                              QDir::Files |
-QDir::NoSymLinks );
+                                              QDir::Files | QDir::NoSymLinks );
         if ( !tmp.isEmpty() ) {
             QStringListIterator  l( tmp );
             while ( l.hasNext() ) {
@@ -165,8 +148,7 @@ QDir::NoSymLinks );
 }
 
 
-QStandardItemModel* GeoSceneMapTheme::mapThemeModel( const QStringList&
-stringlist )
+QStandardItemModel* GeoSceneMapTheme::mapThemeModel( const QStringList& stringlist )
 {
     QStandardItemModel  *mapthememodel = new QStandardItemModel();
 
@@ -178,12 +160,12 @@ stringlist )
     mapthememodel->setHeaderData(2, Qt::Horizontal, tr("Path"));
 
     QStringListIterator  it(stringlist);
-    GeoSceneMapTheme            *maptheme = new GeoSceneMapTheme();
+    GeoSceneMapTheme *maptheme = new GeoSceneMapTheme();
 
     // Make sure we don't keep excessively large previews in memory
     // TODO: Scale the icon down to the default icon size in katlasselectview.
     //       For now maxIconSize already equals what's expected by the listview.
-    QSize maxIconSize( 136,136 ); 
+    QSize maxIconSize( 136, 136 );
 
     int  row = 0;
     while ( it.hasNext() ) {
@@ -192,36 +174,36 @@ stringlist )
 //        maptheme->open( MarbleDirs::path( "maps/" + currentmaptheme ) );
 
         mapthememodel->insertRows( row, 1, QModelIndex() );
-        mapthememodel->setData( mapthememodel->index( row, 0,
-QModelIndex() ),
-                                tr( maptheme->name().toUtf8() ), 
+        mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
+                                tr( maptheme->name().toUtf8() ),
                                 Qt::DisplayRole );
 
         QPixmap themeIconPixmap;
         QString relativePath;
 
-        relativePath = "maps/" +  maptheme->prefix() + '/' +
-maptheme->icon();
+        relativePath = "maps/" +  maptheme->prefix() + '/' + maptheme->icon();
         themeIconPixmap.load( MarbleDirs::path( relativePath ) );
 
         if ( themeIconPixmap.isNull() ) {
-            relativePath = "svg/application-x-marble-gray.png"; 
+            relativePath = "svg/application-x-marble-gray.png";
             themeIconPixmap.load( MarbleDirs::path( relativePath ) );
         }
         else {
-            themeIconPixmap = themeIconPixmap.scaled( maxIconSize, 
-                              Qt::KeepAspectRatio,
-Qt::SmoothTransformation );
-        } 
+            themeIconPixmap = themeIconPixmap.scaled( maxIconSize,
+                                                      Qt::KeepAspectRatio,
+                                                      Qt::SmoothTransformation );
+        }
 
         QIcon mapThemeIcon =  QIcon(themeIconPixmap);
 
-        mapthememodel->setData( mapthememodel->index( row, 0,
-        QModelIndex() ), mapThemeIcon, Qt::DecorationRole );
-        mapthememodel->setData( mapthememodel->index( row, 0,
-        QModelIndex() ), QString( "<span style=\" max-width: 150 px;\"> " + tr( maptheme->description().toLatin1() ) + " </span>"), Qt::ToolTipRole);
+        mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
+                                mapThemeIcon, Qt::DecorationRole );
+        mapthememodel->setData( mapthememodel->index( row, 0, QModelIndex() ),
+                                QString( "<span style=\" max-width: 150 px;\"> "
+                                + tr( maptheme->description().toLatin1() ) + " </span>"),
+                                Qt::ToolTipRole );
         mapthememodel->setData( mapthememodel->index( row, 1, QModelIndex() ),
-        currentmaptheme );
+                                currentmaptheme );
     }
 
     delete maptheme;
