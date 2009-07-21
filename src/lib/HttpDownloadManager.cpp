@@ -152,7 +152,7 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     iEnd = m_activatedJobList.end();
     for (; i != iEnd; ++i ) {
         if ( job->destinationFileName() == (*i)->destinationFileName() ) {
-            qDebug() << "Download rejected: It's being downloaded already.";
+            qDebug() << "Download rejected: It's being downloaded already:" << job->destinationFileName();
             (*i)->setInitiatorId( job->initiatorId() );
             return false;
         }

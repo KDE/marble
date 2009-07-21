@@ -131,7 +131,6 @@ bool AbstractProjection::screenCoordinates( const GeoDataLineString &lineString,
         return false;
     }
 
-
     QVector<GeoDataLineString*> lineStrings;
 
     if (
@@ -139,7 +138,6 @@ bool AbstractProjection::screenCoordinates( const GeoDataLineString &lineString,
          ( lineString.latLonAltBox().crossesDateLine() )
        ) {
         // We correct for Poles and DateLines:
-
         lineStrings = lineString.toRangeCorrected();
 
         foreach ( GeoDataLineString * itLineString, lineStrings ) {
@@ -351,8 +349,99 @@ bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineStrin
         delete polygon; // Clean up "unused" empty polygon instances
     }
 
+    d->repeatPolygons( viewport, polygons );
+
     return polygons.isEmpty();
 }
+
+
+void AbstractProjectionPrivate::repeatPolygons( const ViewportParams *viewport,
+                                                QVector<QPolygonF *> &polygons ) {
+    if ( !q->repeatX() ) {
+        // The projection doesn't allow repeats in direction of the x-axis
+        return;
+    }
+    
+    bool globeHidesPoint = false;
+
+    qreal xEast = 0;
+    qreal xWest = 0;
+    qreal y = 0;
+
+    // Choose a latitude that is inside the viewport.
+    qreal centerLatitude = viewport->viewLatLonAltBox().center().latitude();
+    
+    GeoDataCoordinates westCoords( -M_PI, centerLatitude );
+    GeoDataCoordinates eastCoords( +M_PI, centerLatitude );
+
+    q->screenCoordinates( westCoords, viewport, xWest, y, globeHidesPoint );
+    q->screenCoordinates( eastCoords, viewport, xEast, y, globeHidesPoint );
+
+    if ( xWest <= 0 && xEast >= viewport->width() - 1 ) {
+//        qDebug() << "No repeats";
+        return;
+    }
+
+    qreal repeatXInterval = xEast - xWest;
+
+    qreal repeatsLeft  = 0;
+    qreal repeatsRight = 0;
+
+    if ( xWest > 0 ) {
+        repeatsLeft = (int)( xWest / repeatXInterval ) + 1;
+    }
+    if ( xEast < viewport->width() ) {
+        repeatsRight = (int)( ( viewport->width() - xEast ) / repeatXInterval ) + 1;
+    }
+
+    QVector<QPolygonF *> repeatedPolygons;
+    QVector<QPolygonF *> translatedPolygons;
+
+    qreal xOffset = 0;
+    qreal it = repeatsLeft;
+    
+    while ( it > 0 ) {
+        xOffset = -it * repeatXInterval;
+        translatePolygons( polygons, translatedPolygons, xOffset );
+        repeatedPolygons << translatedPolygons;
+        translatedPolygons.clear();
+        --it;
+    }
+
+    repeatedPolygons << polygons;
+
+    it = 1;
+
+    while ( it <= repeatsRight ) {
+        xOffset = +it * repeatXInterval;
+        translatePolygons( polygons, translatedPolygons, xOffset );
+        repeatedPolygons << translatedPolygons;
+        translatedPolygons.clear();
+        ++it;
+    }
+
+    polygons = repeatedPolygons;
+
+//    qDebug() << Q_FUNC_INFO << "Coordinates: " << xWest << xEast
+//             << "Repeats: " << repeatsLeft << repeatsRight;
+}
+
+void AbstractProjectionPrivate::translatePolygons( const QVector<QPolygonF *> &polygons,
+                                                   QVector<QPolygonF *> &translatedPolygons,
+                                                   qreal xOffset ) {
+//    qDebug() << "Translation: " << xOffset;
+
+    QVector<QPolygonF *>::const_iterator itPolygon = polygons.constBegin();
+    QVector<QPolygonF *>::const_iterator itEnd = polygons.constEnd();
+    
+    for( ; itPolygon != itEnd; ++itPolygon ) {
+        QPolygonF * polygon = new QPolygonF;
+        *polygon = **itPolygon;
+        polygon->translate( xOffset, 0 );
+        translatedPolygons.append( polygon );
+    }
+}
+
 
 void AbstractProjectionPrivate::manageHorizonCrossing( bool globeHidesPoint,
                                                 const GeoDataCoordinates& horizonCoords,
