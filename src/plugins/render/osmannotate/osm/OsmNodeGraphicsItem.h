@@ -29,9 +29,13 @@ public:
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
 
+    void setId( int id );
+    int id();
+
 
 private:
     QPen m_pen;
+    int m_id;
 };
 
 }

@@ -63,7 +63,7 @@ bool GeoDataParser::isValidDocumentElement() const
         return isValidElement(kml::kmlTag_kml);
     case GeoData_OSM:
         //does not have a namespace
-        return true;
+        return isValidElement("osm");
     default:
         Q_ASSERT(false);
         return false;

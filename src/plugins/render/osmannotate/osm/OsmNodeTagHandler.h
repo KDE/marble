@@ -17,6 +17,8 @@
 namespace Marble
 {
 
+class OsmNodeGraphicsItem;
+
 namespace osm
 {
 
@@ -24,6 +26,8 @@ class OsmNodeTagHandler : public GeoTagHandler
 {
 public:
     virtual GeoNode* parse(GeoParser&) const;
+
+    static QMap<int, OsmNodeGraphicsItem*> nodeRef;
 };
 
 }

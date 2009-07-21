@@ -25,6 +25,11 @@ void GeoPointGraphicsItem::setPoint( const GeoDataPoint& point )
     m_point = GeoDataPoint( point );
 }
 
+GeoDataPoint GeoPointGraphicsItem::point()
+{
+    return GeoDataPoint(m_point);
+}
+
 void GeoPointGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
                                   const QString& renderPos, GeoSceneLayer* layer )
 {

@@ -24,6 +24,7 @@ public:
     GeoLineStringGraphicsItem();
 
     void setLineString( const GeoDataLineString& lineString );
+    void append( const GeoDataCoordinates& coordinates );
 
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );

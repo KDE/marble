@@ -33,13 +33,13 @@ GeoNode* OsmNdTagHandler::parse( GeoParser& parser ) const
     //FIXME: problem with the stack implementation
 
     //this should be "way"
-    qDebug() << Q_FUNC_INFO;
-    qDebug() << "parent element name:" << parent.first.first;
+//    qDebug() << Q_FUNC_INFO;
+//    qDebug() << "parent element name:" << parent.first.first;
     Q_ASSERT( parent.first.first.compare("way") == 0 );
 
     //this should be set because we know that the containing
     // <way> element did not return 0
-    qDebug() << " parent associated node pointer:" << parent.associatedNode();
+//    qDebug() << " parent associated node pointer:" << parent.associatedNode();
 
     Q_ASSERT( parent.associatedNode() );
 
@@ -52,7 +52,7 @@ GeoNode* OsmNdTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( way );
 
     //the line that crashes
-//    way->addNodeReferenceId( parser.attribute("ref").toInt() );
+    way->addNodeReferenceId( parser.attribute("ref").toInt() );
 
     return 0;
 

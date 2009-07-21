@@ -30,6 +30,9 @@ public:
      */
     void addNodeReferenceId( int reference );
 
+    virtual void paint( GeoPainter* painter, ViewportParams *viewport,
+                        const QString &renderPos, GeoSceneLayer *layer );
+
 private:
     QList<int> m_nodeIdList;
 };

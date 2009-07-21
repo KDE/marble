@@ -14,11 +14,15 @@
 #include "OsmElementDictionary.h"
 #include "OsmNodeGraphicsItem.h"
 
+#include <QtCore/QMap>
+
 namespace Marble
 {
 
 namespace osm
 {
+
+QMap<int, OsmNodeGraphicsItem*> OsmNodeTagHandler::nodeRef;
 
 static GeoTagHandlerRegistrar s_handlerbounds( GeoTagHandler::QualifiedName(osmTag_node, ""),
                                                new OsmNodeTagHandler() );
@@ -33,6 +37,9 @@ GeoNode* OsmNodeTagHandler::parse ( GeoParser& parser) const
     qreal lat = parser.attribute("lat").toDouble();
 
     item->setPoint( GeoDataPoint(lon, lat, 0, GeoDataCoordinates::Degree ) );
+    item->setId( parser.attribute("id").toInt() );
+
+    nodeRef.insert( item->id(), item );
 
     parser.activeModel()->append( item );
 

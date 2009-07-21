@@ -25,6 +25,11 @@ void GeoLineStringGraphicsItem::setLineString(const GeoDataLineString& lineStrin
     m_lineString = GeoDataLineString( lineString );
 }
 
+void GeoLineStringGraphicsItem::append( const GeoDataCoordinates& coordinates)
+{
+    m_lineString.append( coordinates );
+}
+
 void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
                                        const QString& renderPos, GeoSceneLayer* layer )
 {

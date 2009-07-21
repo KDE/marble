@@ -36,5 +36,15 @@ void OsmNodeGraphicsItem::paint( GeoPainter *painter, ViewportParams* viewport,
 
 }
 
+void OsmNodeGraphicsItem::setId( int id )
+{
+    m_id = id;
+}
+
+int OsmNodeGraphicsItem::id()
+{
+    return m_id;
+}
+
 
 }
