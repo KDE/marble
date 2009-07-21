@@ -18,9 +18,6 @@
   <property name="windowTitle" >
    <string>Creating Map</string>
   </property>
-  <property name="windowIcon" >
-   <iconset/>
-  </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
     <number>6</number>

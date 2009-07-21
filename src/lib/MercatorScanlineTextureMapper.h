@@ -21,6 +21,8 @@ namespace Marble
 
 class MercatorScanlineTextureMapper : public AbstractScanlineTextureMapper
 {
+    Q_OBJECT
+
  public:
     explicit MercatorScanlineTextureMapper( TileLoader *tileLoader,
 					    QObject    *parent = 0 );

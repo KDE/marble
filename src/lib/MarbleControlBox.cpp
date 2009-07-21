@@ -33,7 +33,6 @@
 #include <QtCore/QTimer>
 #include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QStandardItemModel>
-#include <QtGui/QStandardItemModel>
 #include <QtGui/QTextFrame>
 
 #include <global.h>
