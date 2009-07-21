@@ -182,11 +182,6 @@ GeoSceneGroup* GeoSceneSettings::group( const QString& name )
         }
     }
 
-    if ( group ) {
-        Q_ASSERT(group->name() == name);
-        return group;
-    }
-
     return group;
 }
 
@@ -227,11 +222,6 @@ GeoSceneProperty* GeoSceneSettings::property( const QString& name )
             property = *it;
             break;
         }
-    }
-
-    if ( property ) {
-        Q_ASSERT(property->name() == name);
-        return property;
     }
 
     return property;

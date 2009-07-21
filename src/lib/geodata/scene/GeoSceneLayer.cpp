@@ -109,11 +109,6 @@ GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name )
         }
     }
 
-    if ( dataset ) {
-        Q_ASSERT(dataset->name() == name);
-        return dataset;
-    }
-
 //    dataset = new GeoSceneAbstractDataset( name );
 //    addDataset( dataset );
 

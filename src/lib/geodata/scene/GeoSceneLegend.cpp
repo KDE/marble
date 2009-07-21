@@ -86,7 +86,6 @@ GeoSceneSection* GeoSceneLegend::section( const QString& name )
     }
 
     if ( section ) {
-        Q_ASSERT(section->name() == name);
         return section;
     }
 

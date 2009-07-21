@@ -102,7 +102,6 @@ GeoSceneLayer* GeoSceneMap::layer( const QString& name )
     }
 
     if ( layer ) {
-        Q_ASSERT(layer->name() == name);
         return layer;
     }
 
@@ -152,7 +151,6 @@ GeoSceneFilter* GeoSceneMap::filter( const QString& name )
     }
 
     if ( filter ) {
-        Q_ASSERT(filter->name() == name);
         return filter;
     }
 
