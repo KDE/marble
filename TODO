@@ -8,167 +8,21 @@ an idea also commits itself to implement the feature near-term.
 
 Therefore the actual TODO list is rather located at:
 
-http://techbase.kde.org/Schedules/KDE4/4.2_Feature_Plan
+http://techbase.kde.org/Schedules/KDE4
 
 
 
-This file describes what we need to do before certain milestones.
-
-Mark those tasks that you want to perform with your name:
- INGE   Inge Wallin              ingwa     inge@lysator.liu.se
- TACK   Torsten Rahn             tackat
- CARU   Carlos Licea             carutsu
- MURA   Murad Tagirov
- JM     Jens-Michael Hoffmann    jm        jensmh@gmx.de
 
 
 Whenever -- not tied to any release
 ================================================================
 
-Documentation
- * Write more in DESIGN                                                 INGE
-   - Describe the view parameters                                       --
-   - Describe the vector engine                                         --
-   - Describe the placemark engine                                      --
- * Write more in USECASES                                               INGE
-
-Add maps to GHNS:
- * Annual precipation,                                                  DONE
-    - precipation July                                                  DONE
-    - precipation December                                              DONE
- * Annual temperature                                                   DONE
-    - temperature July                                                  DONE
-    - temperature December                                              DONE
-
-
-Before KDE 4.0.2
-================================================================
-
-Bugs
- * Fix Double Click on map						----
-   (should center the map on the point being double clicked).
- * Find the reason why labels overlap when a KML file gets loaded.	TACK
- * More bugs: See the BUGS file.
-
-Documentation:
- * APIDOX for classes in geodata/data                                   INGE
-    - IconStyle                                                         inge
-    - HotSpot?                                                          --
-    - Serializable?                                                     --
- * APIDOX for classes in AbstractLayer                                  ----
-    - ...
- * APIDOX for classes in src/lib:                                       INGE
-   - Mainpage.dox                                                       done
-   - MarbleWidget                                                       done
-   - MarbleControlBox                                                   --
-   - MarbleModel                                                        --
-   - MarbleNavigator                                                    done
-   - MarblePlacemarkModel                                               --
- * Programmers manual for using Marble components in other applications ----
- * Apidox for all public classes                                        ----
-
-Widget:
- * Separate the view from the globe (model)                             INGE
-    - Let the view parameters be in the view instead of in the globe    done
-    - Don't open any dialogs from the globe, do it from the controller. inge
-    - Let the view know about the globe, but not the other way.         done
-
- 
-Before KDE 4.2
-================================================================
-
-Documentation / Specification
- * Update manual for the new features					----	
-    - Update screenshots     						--
- * Add formal description of DGML                                      	TACK
-
-
-Planning and architecture:
- * write proposals for Marble 0.6 / KDE 4.1                             ----
-    - Data source plugins                                               --
-    - Visualization plugins (layers?)                                   TACK in progress
-    - Bounding boxes                                                    TACK
-    - Model-View concept                                                --
-    - Spatial Indices                                                   --
-
-Make it a more complete KDE4 application as a real member of kdeedu.
- * DBus Support                                                         TACK
-
-Vector backend
- * Better scalability                                                   ----
-
 Features:
  * Support to display Timezones, Data available e.g. at:                ----
         http://sarangworld.com/NMLUG/WorldTZ_102.zip
-
- * Fix GPS Support (that's a regression) 				----
-    - Make it a Marble plugin						--
-
-
-Internal structure:
- * New class MarbleMap that can paint a map on any QPainter             DONE
-    - Check Apidox if there is anything missing.                        --
- * Make MarbleModel a real model and MarbleWidget a real view           ----
-     Move to 4.2?  Probably...
- * Layer Management Class                                               TACK
-    - Split off MapTheme / DGML parsing into geodata/parser.            done
-      Have a GeoDataMapTheme class that basically only includes
-      those parts of the current MapTheme except for parsing.
-    - Implement / move <head> features as lined out in                  done
-      layermanagement.txt This should happen after the 
-      QXmlStreamReader port.
- * Plugin interface (see also GeoPainter)                               TACK
-    - Make a QPlugin based interface                                    done
-    - Move backends into plugins / threads                              --
- * GeoPainter								----
- * Create a LatLonBoundingBox                                           DONE
-    - Use it everywhere :-) 						--
- * Download manager fixes:						----
-    - After maps get downloaded sometimes the resolution doesn't get	--
-      updated to what is has just been stored on the disc
-    - Implement "retry to download the tile 3 times during the current	--
-      session if the tile couldn't get fetched on first try"
-
-User experience / Usability
- * Add a small indicator to the status bar indicates map downloads      ----
-   (see explanation below)
-
-Smaller issues
- * Make the about dialog for MarbleWidget more consistent with the      ----
-   application About dialog.  Or perhaps disable it for the KDE
-   version?
-
-Installation issues
- * Only install the public include files                                ----
-
-Integration with Qt designer
- * control files for the following widgets                              TACK
-   - MarbleControlBox                                                   --
-   - MarbleLocator (search field for placemarks)                        --
-   - MarbleLegendBrowser                                                --
 
 Data
  * Evaluate the implementation of tile specifications like              ----
    - http://wiki.osgeo.org/index.php/WMS_Tiling_Client_Recommendation   --
    - http://wiki.osgeo.org/index.php/Tile_Map_Service_Specification     --
 
-   for practical relevance and implement those bits into our client
-   that make sense for us to have.
-
-
-
-Longer Explanations for some things
-================================================================
-
-The following are longer explanations for some features so that we
-don't have to explain them in the list above and thus get better
-overview.
-
-
-Small indicator in the status bar for downloads
------------------------------------------------
-    Downloads (should be really tiny and not obtrusive just to see
-    that something is going on). Ideally the user would get a tooltip
-    once he hovers that progress bar with numbers of files in the
-    queue, maybe amount of data that has been downloaded during the
-    session.
