@@ -212,14 +212,14 @@ bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineStrin
     // which isn't really convenient to achieve with a for loop ...
 
     const bool isLong = lineString.size() > 50;
-
+    
     while ( itCoords != itEnd )
     {
         isAtHorizon = false;
 
         // Optimization for line strings with a big amount of nodes
         bool skipNode = isLong && !processingLastNode &&
-                        viewport->resolves( *itPreviousCoords, *itCoords);
+                        viewport->resolves( *itPreviousCoords, *itCoords );
 
         if ( !skipNode ) {
 
@@ -661,6 +661,22 @@ void AbstractProjection::tessellateLineSegment( const GeoDataCoordinates &aCoord
                                         tessellatedNodes, viewport,
                                         f );
         }
+        else {
+            QPolygonF path;
+            qreal x = 0.0;
+            qreal y = 0.0;
+            bool globeHidesPoint = false;
+
+            screenCoordinates( aCoords, viewport, x, y, globeHidesPoint );
+            if ( !globeHidesPoint ) {
+                path << QPointF( x, y );
+            }
+            screenCoordinates( bCoords, viewport, x, y, globeHidesPoint );
+            if ( !globeHidesPoint ) {
+                path << QPointF( x, y );
+            }
+            *polygon << path;
+        }
 #ifdef SAFE_DISTANCE
     }
 #endif
@@ -678,10 +694,10 @@ QPolygonF AbstractProjectionPrivate::processTessellation(  const GeoDataCoordina
     const bool clampToGround = f.testFlag( FollowGround );
     bool followLatitudeCircle = false;     
 
-    // Maximum amount of tesselation nodes.
+    // Maximum amount of tessellation nodes.
     if ( tessellatedNodes > maxTessellationNodes ) tessellatedNodes = maxTessellationNodes;
 
-//    qDebug() << "Creating tesselation nodes:" << tessellatedNodes;
+//    qDebug() << "Creating tessellation nodes:" << tessellatedNodes;
 
     qreal previousAltitude = previousCoords.altitude();
 
@@ -755,13 +771,13 @@ QPolygonF AbstractProjectionPrivate::processTessellation(  const GeoDataCoordina
         qreal altitude = clampToGround ? 0 : altDiff * t + previousAltitude;
 
         if ( followLatitudeCircle ) {
-            // To tesselate along latitude circles use the 
+            // To tessellate along latitude circles use the 
             // linear interpolation of the longitude.
             lon = lonDiff * t + previousLongitude;
             lat = previousLatitude;
         }
         else {
-            // To tesselate along great circles use the 
+            // To tessellate along great circles use the 
             // normalized linear interpolation ("NLERP") for latitude and longitude.
             itpos.nlerp( previousCoords.quaternion(), currentCoords.quaternion(), t );
             itpos. getSpherical( lon, lat );
@@ -839,13 +855,13 @@ GeoDataCoordinates AbstractProjectionPrivate::findHorizon( const GeoDataCoordina
     qreal altDiff = currentCoords.altitude() - previousCoords.altitude();
 
     if ( followLatitudeCircle ) {
-        // To tesselate along latitude circles use the
+        // To tessellate along latitude circles use the
         // linear interpolation of the longitude.
         lon = lonDiff * 0.5 + previousLongitude;
         lat = previousLatitude;
     }
     else {
-        // To tesselate along great circles use the
+        // To tessellate along great circles use the
         // normalized linear interpolation ("NLERP") for latitude and longitude.
         Quaternion  itpos;
         itpos.nlerp( previousCoords.quaternion(), currentCoords.quaternion(), 0.5 );
