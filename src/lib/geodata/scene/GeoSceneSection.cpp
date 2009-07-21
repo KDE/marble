@@ -76,12 +76,10 @@ GeoSceneItem* GeoSceneSection::item( const QString& name )
         }
     }
 
-    if ( item ) {
-        return item;
+    if ( !item ) {
+        item = new GeoSceneItem( name );
+        addItem( item );
     }
-
-    item = new GeoSceneItem( name );
-    addItem( item );
 
     return item;
 }

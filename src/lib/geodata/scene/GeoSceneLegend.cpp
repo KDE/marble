@@ -85,12 +85,10 @@ GeoSceneSection* GeoSceneLegend::section( const QString& name )
         }
     }
 
-    if ( section ) {
-        return section;
+    if ( !section ) {
+        section = new GeoSceneSection( name );
+        addSection( section );
     }
-
-    section = new GeoSceneSection( name );
-    addSection( section );
 
     return section;
 }

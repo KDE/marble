@@ -101,12 +101,10 @@ GeoSceneLayer* GeoSceneMap::layer( const QString& name )
         }
     }
 
-    if ( layer ) {
-        return layer;
+    if ( !layer ) {
+        layer = new GeoSceneLayer( name );
+        addLayer( layer );
     }
-
-    layer = new GeoSceneLayer( name );
-    addLayer( layer );
 
     return layer;
 }
@@ -150,12 +148,10 @@ GeoSceneFilter* GeoSceneMap::filter( const QString& name )
         }
     }
 
-    if ( filter ) {
-        return filter;
+    if ( !filter ) {
+        filter = new GeoSceneFilter( name );
+        addFilter( filter );
     }
-
-    filter = new GeoSceneFilter( name );
-    addFilter( filter );
 
     return filter;
 }
