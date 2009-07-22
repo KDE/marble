@@ -51,7 +51,7 @@ QString OsmAnnotatePlugin::renderPolicy() const
 
 QStringList OsmAnnotatePlugin::renderPosition() const
 {
-    return QStringList( "ALWAYS_ON_TOP" );
+    return QStringList( "HOVERS_ABOVE_SURFACE" );
 }
 
 QString OsmAnnotatePlugin::name() const
@@ -119,6 +119,10 @@ QList<QActionGroup*>* OsmAnnotatePlugin::toolbarActionGroups() const
 
 bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
+    if ( renderPos != "HOVERS_ABOVE_SURFACE" ) {
+        return true;
+    }
+    
     if( !widgetInitalised ) {
         MarbleWidget* marbleWidget = (MarbleWidget*) painter->device();
         m_marbleWidget = marbleWidget;

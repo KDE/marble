@@ -61,7 +61,7 @@ QString GeoRendererPlugin::renderPolicy() const
 
 QStringList GeoRendererPlugin::renderPosition() const
 {
-    return QStringList( "SURFACE" );
+    return QStringList( "HOVERS_ABOVE_SURFACE" );
 }
 
 QString GeoRendererPlugin::name() const
@@ -107,7 +107,7 @@ bool GeoRendererPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
 
-    if ( renderPos != "SURFACE" ) {
+    if ( renderPos != "HOVERS_ABOVE_SURFACE" ) {
         return true;
     }
 
