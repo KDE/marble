@@ -61,6 +61,25 @@ void GeoGraphicsItem::setTarget( const QString& target ) {
     p()->m_target = target;
 }
 
+GeoGraphicsItem::GeoGraphicsItemFlags GeoGraphicsItem::flags()
+{
+    return p()->m_flags;
+}
+
+void GeoGraphicsItem::setFlag( GeoGraphicsItemFlag flag, bool enabled )
+ {
+    if( enabled ) {
+        p()->m_flags = p()->m_flags | flag;
+    } else {
+        p()->m_flags = p()->m_flags & ~flag;
+    }
+}
+
+void GeoGraphicsItem::setFlags( GeoGraphicsItemFlags flags )
+{
+    p()->m_flags = flags;
+}
+
 QList<QPointF> GeoGraphicsItem::positions() {
     return p()->positions();
 }

@@ -41,10 +41,11 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
     enum GeoGraphicsItemFlag{
         NoOptions = 0x0,
         ItemIsMovable = 0x1,
-        ItemIsSelectable = 0x2
+        ItemIsSelectable = 0x2,
+        ItemIsVisable = 0x4
     };
 
-    Q_DECLARE_FLAGS( GeoGraphicsItemFlags, GeoGraphicsItemFlag )
+    Q_DECLARE_FLAGS(GeoGraphicsItemFlags, GeoGraphicsItemFlag)
     
     /**
      * Return the coordinate of the item as a GeoDataCoordinates
@@ -77,6 +78,24 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
      * Set the target of the item with @p target.
      */
     void setTarget( const QString& target );
+
+    /**
+     * Get the GeoGraphicItemFlags value that describes which flags are set on
+     * this item. @see QFlags
+     */
+    GeoGraphicsItemFlags flags();
+
+    /**
+     * Set or unset a single flag
+     * @param enabled sets if the flag is to be set or unset
+     */
+     void setFlag( GeoGraphicsItemFlag flag, bool enabled = true );
+
+     /**
+      * Replace all of the current flags.
+      * @param flags is the new value for this item's flags.
+      */
+     void setFlags( GeoGraphicsItemFlags flags );
     
     /**
      * Returns all coordinates of the item in view coordinates according to the given projection.
@@ -93,11 +112,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
     GeoGraphicsItemPrivate *p() const;
 };
 
-//Declares the operator|() for flags but breaks other enum comparisons related to 
-//GeoGraphicsItem
-//FIXME ... is this necessary?
-//Q_DECLARE_OPERATORS_FOR_FLAGS(GeoGraphicsItem::GeoGraphicsItemFlags)
-
 } // Namespace Marble
+Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::GeoGraphicsItem::GeoGraphicsItemFlags)
 
 #endif // GEOGRAPHICSITEM_H

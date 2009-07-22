@@ -59,6 +59,7 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
     GeoDataCoordinates m_coordinate;
     QString m_target;
     QList<QPointF> m_positions;
+    GeoGraphicsItem::GeoGraphicsItemFlags m_flags;
 };
 
 }

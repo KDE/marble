@@ -29,6 +29,8 @@ GeoNode* OsmWayTagHandler::parse( GeoParser& parser ) const
     GeoNode* result;
     OsmWayGraphicsItem* way = new OsmWayGraphicsItem();
 
+    way->setFlag( GeoGraphicsItem::ItemIsVisable );
+
     parser.activeModel()->append(way);
 
     result = reinterpret_cast<GeoNode*>(way);

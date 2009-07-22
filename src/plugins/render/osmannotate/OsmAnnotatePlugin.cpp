@@ -152,7 +152,9 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
 
         while( it.hasNext() ) {
             GeoGraphicsItem* i = it.next();
-            i->paint( painter, viewport, renderPos, layer );
+            if( i->flags() & GeoGraphicsItem::ItemIsVisable ) {
+                i->paint( painter, viewport, renderPos, layer );
+            }
         }
     }
 
