@@ -262,7 +262,7 @@ int ViewParams::radiusUpdated() const
     return d->m_radiusUpdated;
 }
 
-void ViewParams::setRadiusUpdated( int radiusUpdated )
+void ViewParams::setRadiusUpdated( const int radiusUpdated )
 {
     d->m_radiusUpdated = radiusUpdated;
 }
