@@ -374,7 +374,10 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QStr
                                 LabelPositionFlags labelPositionFlags )
 {
     // If the object is not visible in the viewport return 
-    if ( ! d->m_viewport->viewLatLonAltBox().intersects( lineString.latLonAltBox() ) )
+    if ( ! d->m_viewport->viewLatLonAltBox().intersects( lineString.latLonAltBox() ) ||
+    // If the size of the object is below the resolution of the viewport then return
+         ! d->m_viewport->resolves( lineString.latLonAltBox() )
+        )
     {
 //        qDebug() << "LineString doesn't get displayed on the viewport";
         return;
@@ -421,7 +424,10 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QStr
 void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRule fillRule )
 {
     // If the object is not visible in the viewport return
-    if ( ! d->m_viewport->viewLatLonAltBox().intersects( linearRing.latLonAltBox() ) )
+    if ( ! d->m_viewport->viewLatLonAltBox().intersects( linearRing.latLonAltBox() ) ||
+    // If the size of the object is below the resolution of the viewport then return
+         ! d->m_viewport->resolves( linearRing.latLonAltBox() )
+        )
     {
 //        qDebug() << "Polygon doesn't get displayed on the viewport";
         return;
@@ -469,7 +475,10 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRul
 void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fillRule )
 {
     // If the object is not visible in the viewport return 
-    if ( ! d->m_viewport->viewLatLonAltBox().intersects( polygon.outerBoundary().latLonAltBox() ) )
+    if ( ! d->m_viewport->viewLatLonAltBox().intersects( polygon.outerBoundary().latLonAltBox() ) ||
+    // If the size of the object is below the resolution of the viewport then return
+         ! d->m_viewport->resolves( polygon.outerBoundary().latLonAltBox() )
+        )
     {
 //        qDebug() << "Polygon doesn't get displayed on the viewport";
         return;
