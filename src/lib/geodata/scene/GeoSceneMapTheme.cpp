@@ -95,22 +95,18 @@ QStringList GeoSceneMapTheme::findGeoSceneMapThemes( const QString& path )
     }
 
     QStringList  mapfiles;
-    QStringList  tmp;
-    QString      themedir;
-    QString      themedirname;
-    QString      themexml;
 
     QStringListIterator  it( localmapdirs );
     while ( it.hasNext() ) {
-        themedir = it.next() + '/';
-        themedirname = QDir( themedir ).dirName();
+        QString themedir = it.next() + '/';
+        QString themedirname = QDir( themedir ).dirName();
 
-        tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
-                                              QDir::Files | QDir::NoSymLinks );
+        QStringList tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
+                                                          QDir::Files | QDir::NoSymLinks );
         if ( !tmp.isEmpty() ) {
             QStringListIterator  k( tmp );
             while ( k.hasNext() ) {
-                themexml = k.next();
+                QString themexml = k.next();
                 mapfiles << themedirname + '/' + themexml;
             }
         }
@@ -118,15 +114,15 @@ QStringList GeoSceneMapTheme::findGeoSceneMapThemes( const QString& path )
 
     QStringListIterator  j( sysmapdirs );
     while ( j.hasNext() ) {
-        themedir = j.next();
-        themedirname = QDir( themedir ).path().section( '/', -2, -1);
+        QString themedir = j.next();
+        QString themedirname = QDir( themedir ).path().section( '/', -2, -1 );
 
-        tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
-                                              QDir::Files | QDir::NoSymLinks );
+        QStringList tmp = ( QDir( themedir ) ).entryList( QStringList( "*.dgml" ),
+                                                          QDir::Files | QDir::NoSymLinks );
         if ( !tmp.isEmpty() ) {
             QStringListIterator  l( tmp );
             while ( l.hasNext() ) {
-                themexml = l.next();
+                QString themexml = l.next();
                 mapfiles << themedirname + '/' + themexml;
             }
         }
@@ -178,10 +174,8 @@ QStandardItemModel* GeoSceneMapTheme::mapThemeModel( const QStringList& stringli
                                 tr( maptheme->name().toUtf8() ),
                                 Qt::DisplayRole );
 
+        QString relativePath = "maps/" + maptheme->prefix() + '/' + maptheme->icon();
         QPixmap themeIconPixmap;
-        QString relativePath;
-
-        relativePath = "maps/" +  maptheme->prefix() + '/' + maptheme->icon();
         themeIconPixmap.load( MarbleDirs::path( relativePath ) );
 
         if ( themeIconPixmap.isNull() ) {
