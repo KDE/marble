@@ -67,7 +67,7 @@ class WeatherItem : public AbstractDataPluginItem {
     
     // Forecasts to appear later
  private:
-    Q_DISABLE_COPY(WeatherItem);
+    Q_DISABLE_COPY(WeatherItem)
     WeatherItemPrivate * const d;
     friend class WeatherItemPrivate;
 };
