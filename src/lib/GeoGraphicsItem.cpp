@@ -23,11 +23,13 @@ using namespace Marble;
 GeoGraphicsItem::GeoGraphicsItem()
     : MarbleGraphicsItem( new GeoGraphicsItemPrivate )
 {
+    setFlag( ItemIsVisible, true );
 }
 
 GeoGraphicsItem::GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr )
     : MarbleGraphicsItem( d_ptr )
 {
+    setFlag( ItemIsVisible, true );
 }
 
 GeoGraphicsItem::~GeoGraphicsItem() {

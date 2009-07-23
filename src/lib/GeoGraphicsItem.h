@@ -42,7 +42,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
         NoOptions = 0x0,
         ItemIsMovable = 0x1,
         ItemIsSelectable = 0x2,
-        ItemIsVisable = 0x4
+        ItemIsVisible = 0x4
     };
 
     Q_DECLARE_FLAGS(GeoGraphicsItemFlags, GeoGraphicsItemFlag)

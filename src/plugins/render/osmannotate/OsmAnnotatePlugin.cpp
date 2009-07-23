@@ -29,11 +29,9 @@
 #include "GeoPainter.h"
 #include "GeoDataDocument.h"
 #include "GeoDataCoordinates.h"
-#include "GeoDataLineString.h"
-#include "GeoDataLinearRing.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
 #include "MarbleWidget.h"
+#include "osm/OsmBoundsGraphicsItem.h"
 #include "PlacemarkTextAnnotation.h"
 
 namespace Marble
@@ -142,7 +140,7 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
 
         while( it.hasNext() ) {
             GeoGraphicsItem* i = it.next();
-            if( i->flags() & GeoGraphicsItem::ItemIsVisable ) {
+            if( i->flags() & GeoGraphicsItem::ItemIsVisible ) {
                 i->paint( painter, viewport, renderPos, layer );
             }
         }
@@ -210,7 +208,19 @@ void OsmAnnotatePlugin::loadOsmFile()
 
         file.close();
 
-        qDebug() << "size of container is " << model->size();
+        // now zoom to the newly added OSM file
+        if( m_itemModel->size() > 0 ) {
+            OsmBoundsGraphicsItem* item;
+            // mostly guarenteed that the first item will be a bounds item
+            item = dynamic_cast<OsmBoundsGraphicsItem*>( m_itemModel->first() );
+            if( item ) {
+                //get the place to zoom to
+                qDebug() << item->coordinate().toString();
+                //get the zoom level
+                // difficult?
+            }
+        }
+
     }
 }
 

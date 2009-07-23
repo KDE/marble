@@ -29,7 +29,11 @@ void OsmWayGraphicsItem::addNodeReferenceId( int reference )
 {
     m_nodeIdList.append( reference );
     if( osm::OsmNodeTagHandler::nodeRef.contains( reference ) ) {
-        append( osm::OsmNodeTagHandler::nodeRef.value( reference )->point() );
+        OsmNodeGraphicsItem* node = osm::OsmNodeTagHandler::nodeRef.value( reference );
+        append( node->point() );
+        //make node invisible only if its in a way
+        node->setFlag( GeoGraphicsItem::ItemIsVisible, false );
+
     }
 }
 
