@@ -34,7 +34,7 @@ public:
     GeoOnfParser();
 
 private:
-    bool isValidDocumentElement() const;
+    bool isValidRootElement() const;
     GeoDocument* createDocument() const;
     bool isValidElement(const QString& tagName) const;
 };

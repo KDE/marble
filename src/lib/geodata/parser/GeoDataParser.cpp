@@ -53,7 +53,7 @@ GeoDataParser::~GeoDataParser()
 {
 }
 
-bool GeoDataParser::isValidDocumentElement() const
+bool GeoDataParser::isValidRootElement() const
 {
     switch ((GeoDataSourceType) m_source) {
     // TODO: case GeoData_GeoRSS:
@@ -70,7 +70,7 @@ bool GeoDataParser::isValidDocumentElement() const
     }
 }
 
-void GeoDataParser::raiseDocumentElementError()
+void GeoDataParser::raiseRootElementError()
 {
     switch ((GeoDataSourceType) m_source) {
     // TODO: case GeoData_GeoRSS:
@@ -81,7 +81,7 @@ void GeoDataParser::raiseDocumentElementError()
         raiseError(QObject::tr("The file is not a valid KML 2.0 / 2.1 / 2.2 file"));
         break;
     default:
-        GeoParser::raiseDocumentElementError();
+        GeoParser::raiseRootElementError();
         break;
     }
 }

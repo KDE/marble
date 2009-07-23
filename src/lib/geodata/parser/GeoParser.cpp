@@ -86,7 +86,7 @@ bool GeoParser::read( QIODevice* device )
         readNext();
 
         if ( isStartElement() ) {
-            if ( isValidDocumentElement() ) {
+            if ( isValidRootElement() ) {
 #if DUMP_PARENT_STACK > 0
                 dumpParentStack( name().toString(), m_nodeStack.size(), false );
 #endif
@@ -98,7 +98,7 @@ bool GeoParser::read( QIODevice* device )
                         QObject::tr("Parsing failed. Still %n unclosed tag(s) after document end.", "",
                         m_nodeStack.size() ) + errorString());
             } else
-                raiseDocumentElementError();
+                raiseRootElementError();
         }
     }
 
@@ -141,7 +141,7 @@ void GeoParser::parseDocument()
             raiseWarning( QString( "%1: %2" ).arg( error() ).arg( errorString() ) );
 
         if ( isEndElement() ) {
-            if ( !isValidDocumentElement() )
+            if ( !isValidRootElement() )
                 m_nodeStack.pop();
 
 #if DUMP_PARENT_STACK > 0
@@ -190,7 +190,7 @@ void GeoParser::parseDocument()
     }
 }
 
-void GeoParser::raiseDocumentElementError()
+void GeoParser::raiseRootElementError()
 {
     raiseError( QObject::tr( "File format unrecognized" ));
 }

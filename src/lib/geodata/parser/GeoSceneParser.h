@@ -42,8 +42,8 @@ public:
 
 private:
     virtual bool isValidElement(const QString& tagName) const;
-    virtual bool isValidDocumentElement() const;
-    virtual void raiseDocumentElementError();
+    virtual bool isValidRootElement() const;
+    virtual void raiseRootElementError();
 
     virtual GeoDocument* createDocument() const;
 };

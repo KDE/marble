@@ -46,7 +46,7 @@ GeoSceneParser::~GeoSceneParser()
 {
 }
 
-bool GeoSceneParser::isValidDocumentElement() const
+bool GeoSceneParser::isValidRootElement() const
 {
     switch ((GeoSceneSourceType) m_source) {
     case GeoScene_DGML:
@@ -57,13 +57,13 @@ bool GeoSceneParser::isValidDocumentElement() const
     }
 }
 
-void GeoSceneParser::raiseDocumentElementError()
+void GeoSceneParser::raiseRootElementError()
 {
     switch ((GeoSceneSourceType) m_source) {
     case GeoScene_DGML:
         raiseError(QObject::tr("The file is not a valid DGML 2.0 file"));
     default:
-        GeoParser::raiseDocumentElementError();
+        GeoParser::raiseRootElementError();
         break;
     }
 }

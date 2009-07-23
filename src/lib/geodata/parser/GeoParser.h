@@ -67,9 +67,16 @@ class GEODATA_EXPORT GeoParser : public QXmlStreamReader
     QString attribute( const char* attributeName ) const;
 
 protected:
-    // To be implemented by GeoDataParser/GeoSceneParser
-    virtual bool isValidDocumentElement() const = 0;
-    virtual void raiseDocumentElementError();
+    /**
+     * This method is intended to check if the current element being served by
+     * the GeoParser is a valid Document Root element. This method is to be
+     * implemented by GeoDataParser/GeoSceneParser and must check based on the
+     * current XML Document type, e.g. KML, GPX etc.
+     * @return @c true if the element is a valid document root.
+     */
+    virtual bool isValidRootElement() const = 0;
+
+    virtual void raiseRootElementError();
 
     virtual GeoDocument* createDocument() const = 0;
 
