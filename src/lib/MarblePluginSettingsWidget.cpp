@@ -45,6 +45,11 @@ void MarblePluginSettingsWidget::setAboutIcon( const QIcon& icon ) {
     d->m_itemDelegate->setAboutIcon( icon );
 }
 
+MarblePluginSettingsWidget::~MarblePluginSettingsWidget()
+{
+    delete d;
+}
+
 void MarblePluginSettingsWidget::setConfigIcon( const QIcon& icon ) {
     d->m_itemDelegate->setConfigIcon( icon );
 }

@@ -17,7 +17,7 @@
 /** @file
  * This file contains the multiple inheritance ui-wrapper for the
  * MarblePluginSettingsWidget ui file.
- * 
+ *
  * @author Torsten Rahn  <torsten@kde.org>
  */
 
@@ -26,7 +26,7 @@
 
 #include "marble_export.h"
 
-/** 
+/**
  * @short A public class that adds methods to the UI Plugins Settings Widget.
  *
  */
@@ -45,9 +45,9 @@ class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget, private Ui::Mar
 
  public:
     MarblePluginSettingsWidget( QWidget *parent = 0 );
-
+    ~MarblePluginSettingsWidget();
     void setModel( QStandardItemModel* );
-    
+
     void setAboutIcon( const QIcon& icon );
     void setConfigIcon( const QIcon& icon );
 
