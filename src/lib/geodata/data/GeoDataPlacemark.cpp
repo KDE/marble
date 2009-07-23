@@ -20,6 +20,7 @@
 // Qt
 #include <QtCore/QDataStream>
 #include <QtCore/QDebug>
+#include <QtXml/QXmlStreamWriter>
 
 namespace Marble
 {
@@ -189,6 +190,19 @@ void GeoDataPlacemark::pack( QDataStream& stream ) const
     p()->m_coordinate.pack( stream );
 }
 
+QXmlStreamWriter& GeoDataPlacemark::pack( QXmlStreamWriter& stream ) const
+{
+    stream.writeStartElement( "placemark" );
+
+    stream.writeEndElement();
+    return stream;
+}
+
+QXmlStreamWriter& GeoDataPlacemark::operator <<( QXmlStreamWriter& stream ) const
+{
+    pack( stream );
+    return stream;
+}
 
 void GeoDataPlacemark::unpack( QDataStream& stream )
 {

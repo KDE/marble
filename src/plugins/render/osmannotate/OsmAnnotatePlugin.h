@@ -37,7 +37,7 @@ namespace Marble
 class OsmAnnotatePlugin :  public RenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RenderPluginInterface )
+    Q_INTERFACES( Marble::RenderPluginInterface );
     MARBLE_PLUGIN( OsmAnnotatePlugin )
 
  public:
@@ -73,8 +73,11 @@ class OsmAnnotatePlugin :  public RenderPlugin
 
 signals:
     void redraw();
+    void placemarkAdded();
+
 public slots:
     void loadOsmFile();
+    void saveOsmFile();
 
     void setAddingPlacemark( bool );
     void setDrawingPolygon( bool );

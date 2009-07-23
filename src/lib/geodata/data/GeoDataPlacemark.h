@@ -16,6 +16,7 @@
 
 
 #include <QtCore/QChar>
+class QXmlStreamWriter;
 
 #include "GeoDataPoint.h"
 #include "GeoDataLineString.h"
@@ -148,9 +149,30 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      */
     void setCountryCode( const QString &code );
 
-    // Serialize the Placemark to @p stream
+    /**
+     * Serialize the Placemark to a data stream. This is a binary serialisation
+     * and is deserialised using @see unpack()
+     * @param stream the QDataStream to serialise object to.
+     */
     virtual void pack( QDataStream& stream ) const;
-    // Unserialize the Placemark from @p stream
+
+    /**
+     * Serialise this Placemark to a XML stream writer @see QXmlStreamWriter in
+     * the Qt documentation for more info. This will output the XML
+     * representation of this Placemark. The default XML format is KML, to have
+     * other formats supported you need to create a subclass and overide this
+     * method.
+     * @param stream the XML Stream Reader to output to.
+     */
+    virtual QXmlStreamWriter& pack( QXmlStreamWriter& stream ) const;
+
+    virtual QXmlStreamWriter& operator <<( QXmlStreamWriter& stream ) const;
+
+    /**
+     * Deserialize the Placemark from a data stream. This has the opposite effect
+     * from @see pack()
+     * @param stream the QDataStream to deserialise from.
+     */
     virtual void unpack( QDataStream& stream );
 
     virtual bool isPlacemark() const { return true; }

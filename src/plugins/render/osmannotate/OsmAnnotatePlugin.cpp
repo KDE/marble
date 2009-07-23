@@ -82,16 +82,6 @@ QIcon OsmAnnotatePlugin::icon () const
 
 void OsmAnnotatePlugin::initialize ()
 {
-
-    //Setup the model
-    GeoDataCoordinates madrid( -13.7, 40.4, 0.0, GeoDataCoordinates::Degree );
-    PlacemarkTextAnnotation* annon = new PlacemarkTextAnnotation();
-
-    annon->setCoordinate(madrid);
-    
-    //FIXME memory leak withouth a model to do memory management
-    model.append(annon);
-
     widgetInitalised= false;
     m_tmp_lineString = 0;
     m_itemModel = 0;
@@ -224,6 +214,18 @@ void OsmAnnotatePlugin::loadOsmFile()
     }
 }
 
+void OsmAnnotatePlugin::saveOsmFile()
+{
+    TmpGraphicsItem* item;
+    QListIterator<TmpGraphicsItem*> it(model);
+    while( it.hasNext() ) {
+        item = it.next();
+        qDebug() << "Saving item!";
+//        implement the XML writer here
+//        qDebug() << item;
+    }
+}
+
 bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 {
     MarbleWidget* marbleWidget = (MarbleWidget*) watched;
@@ -252,9 +254,8 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 
                 //FIXME only repaint the new placemark
                 ( ( MarbleWidget* ) watched)->repaint();
-                //FIXME: enable a way to disable adding a placemark
-                //using signals and slots
-//                m_addPlacemark->setChecked( false );
+                emit placemarkAdded();
+
                 return true;
             }
 
@@ -343,6 +344,7 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     QAction*    m_beginSeparator;
     QAction*    m_endSeparator;
     QAction*    m_loadOsmFile;
+    QAction*    m_saveOsmFile;
     QAction*    m_enableInputAction;
 
     m_addPlacemark = new QAction(this);
@@ -350,6 +352,8 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     m_addPlacemark->setCheckable( true );
     connect( m_addPlacemark, SIGNAL( toggled(bool)),
              this, SLOT(setAddingPlacemark(bool)) );
+    connect( this, SIGNAL(placemarkAdded()) ,
+             m_addPlacemark, SLOT(toggle()) );
 
     m_drawPolygon = new QAction( this );
     m_drawPolygon->setText( "Draw Polygon" );
@@ -361,6 +365,11 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     m_loadOsmFile->setText( "Load Osm File" );
     connect( m_loadOsmFile, SIGNAL(triggered()),
              this, SLOT(loadOsmFile()) );
+
+    m_saveOsmFile = new QAction( this );
+    m_saveOsmFile->setText( "Save Osm File" );
+    connect( m_saveOsmFile, SIGNAL(triggered()),
+             this, SLOT(saveOsmFile()) );
 
     m_beginSeparator = new QAction( this );
     m_beginSeparator->setSeparator( true );
@@ -381,6 +390,7 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     group->addAction( m_addPlacemark );
     group->addAction( m_drawPolygon );
     group->addAction( m_loadOsmFile );
+    group->addAction( m_saveOsmFile );
     group->addAction( m_endSeparator );
 
     actions->append( initial );
