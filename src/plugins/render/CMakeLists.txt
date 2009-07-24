@@ -17,4 +17,4 @@ add_subdirectory( navigation )
 # add_subdirectory ( FITemplate )
 
 # add_subdirectory( dataview )
-add_subdirectory( fileview )
+# add_subdirectory( fileview )
