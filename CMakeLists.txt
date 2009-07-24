@@ -280,3 +280,6 @@ if(QTONLY)
     ADD_CUSTOM_TARGET(uninstall
         "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 endif(QTONLY)
+
+include(MarbleCPackOptions)
+include(CPack)
