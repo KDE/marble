@@ -5,13 +5,15 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2008 Torsten Rahn <tackat@kde.org>"
+// Copyright 2006-2009 Torsten Rahn <tackat@kde.org>"
 
 
 #include "GeoPainter.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QList>
 #include <QtGui/QPainterPath>
+#include <QtGui/QRegion>
 
 #include "AbstractProjection.h"
 
@@ -35,15 +37,17 @@ class GeoPainterPrivate
  public:
     GeoPainterPrivate( ViewportParams *viewport, MapQuality mapQuality )
         : m_viewport( viewport ),
-	  m_mapQuality( mapQuality ),
+          m_mapQuality( mapQuality ),
           m_x( new qreal[100] )
     {
     }
+
 
     ~GeoPainterPrivate()
     {
         delete[] m_x;
     }
+
 
     void createPolygonsFromLineString( const GeoDataLineString & lineString, 
                    QVector<QPolygonF *> &polygons )
@@ -63,7 +67,11 @@ class GeoPainterPrivate
     }
 
 
-    void createAnnotationLayout (  qreal x, qreal y, QSizeF bubbleSize, qreal bubbleOffsetX, qreal bubbleOffsetY, qreal xRnd, qreal yRnd, QPainterPath& path, QRectF& rect )
+    void createAnnotationLayout (  qreal x, qreal y,
+                                   QSizeF bubbleSize,
+                                   qreal bubbleOffsetX, qreal bubbleOffsetY,
+                                   qreal xRnd, qreal yRnd,
+                                   QPainterPath& path, QRectF& rect )
     {
         // TODO: MOVE this into an own Annotation class
         qreal arrowPosition = 0.3;
@@ -137,11 +145,12 @@ class GeoPainterPrivate
         rect.setBottomRight( QPointF( right, bottom ) );
     }
 
+
     ViewportParams  *m_viewport;
     MapQuality       m_mapQuality;
-
     qreal             *m_x;
 };
+
 
 GeoPainter::GeoPainter( QPaintDevice* pd, ViewportParams *viewport,
 			MapQuality mapQuality, bool clip )
@@ -150,12 +159,14 @@ GeoPainter::GeoPainter( QPaintDevice* pd, ViewportParams *viewport,
 {
 }
 
+
 GeoPainter::~GeoPainter()
 {
     delete d;
 }
 
-void GeoPainter::autoMapQuality ()
+
+void GeoPainter::autoMapQuality()
 {
     bool antialiased = false;
 
@@ -167,12 +178,17 @@ void GeoPainter::autoMapQuality ()
     setRenderHint( QPainter::Antialiasing, antialiased );
 }
 
+
 MapQuality GeoPainter::mapQuality() const
 {
     return d->m_mapQuality;
 }
 
-void GeoPainter::drawAnnotation (  const GeoDataCoordinates & position, const QString & text, QSizeF bubbleSize, qreal bubbleOffsetX, qreal bubbleOffsetY, qreal xRnd, qreal yRnd )
+
+void GeoPainter::drawAnnotation( const GeoDataCoordinates & position,
+                                 const QString & text, QSizeF bubbleSize,
+                                 qreal bubbleOffsetX, qreal bubbleOffsetY,
+                                 qreal xRnd, qreal yRnd )
 {
     int pointRepeatNum;
     qreal y;
@@ -193,6 +209,7 @@ void GeoPainter::drawAnnotation (  const GeoDataCoordinates & position, const QS
     }
 }
 
+
 void GeoPainter::drawPoint (  const GeoDataCoordinates & position )
 {
     int pointRepeatNum;
@@ -210,20 +227,37 @@ void GeoPainter::drawPoint (  const GeoDataCoordinates & position )
     }
 }
 
+
+QRegion GeoPainter::regionFromPoint ( const GeoDataCoordinates & position,
+                                      qreal width )
+{
+    return regionFromRect( position, width, width, false, 3 );
+}
+
+
 void GeoPainter::drawPoint( const GeoDataPoint & point )
 {
     drawPoint( GeoDataCoordinates( point ) );
 }
 
-void GeoPainter::drawPoints (  const GeoDataCoordinates * points, int pointCount )
+
+QRegion GeoPainter::regionFromPoint ( const GeoDataPoint & point,
+                                      qreal width )
+{
+    return regionFromRect( GeoDataCoordinates( point ), width, width, false, 3 );
+}
+
+
+void GeoPainter::drawPoints (  const GeoDataCoordinates * positions,
+                               int pointCount )
 {
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    const GeoDataCoordinates * itPoint = points;
-    while( itPoint < points + pointCount ) {
+    const GeoDataCoordinates * itPoint = positions;
+    while( itPoint < positions + pointCount ) {
         bool visible = projection->screenCoordinates( *itPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
     
         if ( visible ) {
@@ -237,8 +271,15 @@ void GeoPainter::drawPoints (  const GeoDataCoordinates * points, int pointCount
     }
 }
 
-void GeoPainter::drawText ( const GeoDataCoordinates & position, const QString & text )
+
+void GeoPainter::drawText ( const GeoDataCoordinates & position,
+                            const QString & text )
 {
+    // Of course in theory we could have the "isGeoProjected" parameter used
+    // for drawText as well. However this would require us to convert all
+    // glyphs to PainterPaths / QPolygons. From QPolygons we could create
+    // GeoDataPolygons which could get painted on screen. Any patches appreciated ;-)
+
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
@@ -256,7 +297,10 @@ void GeoPainter::drawText ( const GeoDataCoordinates & position, const QString &
     }
 }
 
-void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal width, qreal height, bool isGeoProjected )
+
+void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint,
+                               qreal width, qreal height,
+                               bool isGeoProjected )
 {
     int pointRepeatNum;
     qreal y;
@@ -269,7 +313,8 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal wid
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                QPainter::drawEllipse(  d->m_x[it] - width / 2.0, y - height / 2.0, width, height  );
+                QPainter::drawEllipse(  d->m_x[it] - width / 2.0,
+                                        y - height / 2.0, width, height  );
             }
         }
     }
@@ -278,7 +323,8 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal wid
         qreal centerLon = 0.0;
         qreal centerLat = 0.0;
         qreal altitude = centerPoint.altitude();
-        centerPoint.geoCoordinates( centerLon, centerLat, GeoDataCoordinates::Degree );
+        centerPoint.geoCoordinates( centerLon, centerLat,
+                                    GeoDataCoordinates::Degree );
 
         // Ensure a valid latitude range: 
         if ( centerLat + 0.5 * height > 90.0 || centerLat - 0.5 * height < -90.0 ) {
@@ -324,14 +370,20 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint, qreal wid
 
 }
 
-void GeoPainter::drawImage ( const GeoDataCoordinates & centerPoint, const QImage & image, bool isGeoProjected )
+
+void GeoPainter::drawImage ( const GeoDataCoordinates & centerPoint,
+                             const QImage & image /*, bool isGeoProjected */ )
 {
+    // isGeoProjected = true would project the image/pixmap onto the globe. This
+    // requires to deal with the TextureMapping classes -> should get
+    // implemented later on
+
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    if ( !isGeoProjected ) {
+//    if ( !isGeoProjected ) {
         bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, image.size(), globeHidesPoint );
 
         if ( visible ) {
@@ -340,59 +392,77 @@ void GeoPainter::drawImage ( const GeoDataCoordinates & centerPoint, const QImag
                 QPainter::drawImage( d->m_x[it] - ( image.width() / 2 ), y - ( image.height() / 2 ), image );
             }
         }
-    }
+//    }
 }
 
-void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPoint, const QPixmap & pixmap, bool isGeoProjected )
+
+void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPoint,
+                              const QPixmap & pixmap /* , bool isGeoProjected */ )
 {
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    if ( !isGeoProjected ) {
+//    if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
         bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, pixmap.size(), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
             for( int it = 0; it < pointRepeatNum; ++it ) {
-                QPainter::drawPixmap( d->m_x[it] - ( pixmap.width() / 2 ), y - ( pixmap.height() / 2 ), pixmap );
+                QPainter::drawPixmap( d->m_x[it] - ( pixmap.width() / 2 ),
+                                      y - ( pixmap.height() / 2 ), pixmap );
             }
         }
-    }
+//    }
 }
 
-void GeoPainter::drawLine (  const GeoDataCoordinates & p1,  const GeoDataCoordinates & p2, bool isGeoProjected )
+
+void GeoPainter::drawLine (  const GeoDataCoordinates & startPoint,
+                             const GeoDataCoordinates & endPoint,
+                             bool isGeoProjected )
 {
     GeoDataLineString line;
     line.setTessellate( isGeoProjected );
 
-    GeoDataCoordinates c1 ( p1 );
-    GeoDataCoordinates c2 ( p2 );
-
-    line << c1 << c2;
+    line << startPoint << endPoint;
 
     drawPolyline( line ); 
 }
 
-void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QString& labelText,
+
+QRegion GeoPainter::regionFromLine (const GeoDataCoordinates & startPoint,
+                                    const GeoDataCoordinates & endPoint,
+                                    bool isGeoProjected,
+                                    qreal strokeWidth )
+{
+    GeoDataLineString line;
+    line.setTessellate( isGeoProjected );
+
+    line << startPoint << endPoint;
+
+    return regionFromPolyline( line );
+}
+
+
+void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
+                                const QString& labelText,
                                 LabelPositionFlags labelPositionFlags )
 {
-    // If the object is not visible in the viewport return 
+    // Immediately leave this method now if:
+    // - the object is not visible in the viewport or if
+    // - the size of the object is below the resolution of the viewport
     if ( ! d->m_viewport->viewLatLonAltBox().intersects( lineString.latLonAltBox() ) ||
-    // If the size of the object is below the resolution of the viewport then return
          ! d->m_viewport->resolves( lineString.latLonAltBox() )
         )
     {
-//        qDebug() << "LineString doesn't get displayed on the viewport";
+        // qDebug() << "LineString doesn't get displayed on the viewport";
         return;
     }
 
     QVector<QPolygonF*> polygons;
     d->createPolygonsFromLineString( lineString, polygons );
-
-//    qDebug() << "Number of polygons:" << polygons.count();
 
     if ( labelText.isEmpty() ) {
         foreach( QPolygonF* itPolygon, polygons ) {
@@ -427,15 +497,52 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString, const QStr
     qDeleteAll( polygons );
 }
 
-void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRule fillRule )
+
+QRegion GeoPainter::regionFromPolyline ( const GeoDataLineString & lineString,
+                                         qreal strokeWidth )
 {
-    // If the object is not visible in the viewport return
+    // Immediately leave this method now if:
+    // - the object is not visible in the viewport or if
+    // - the size of the object is below the resolution of the viewport
+    if ( ! d->m_viewport->viewLatLonAltBox().intersects( lineString.latLonAltBox() ) ||
+         ! d->m_viewport->resolves( lineString.latLonAltBox() )
+        )
+    {
+        // qDebug() << "LineString doesn't get displayed on the viewport";
+        return QRegion();
+    }
+
+    QList<QRegion> regions;
+    QPainterPath painterPath;
+
+    QVector<QPolygonF*> polygons;
+    d->createPolygonsFromLineString( lineString, polygons );
+
+    foreach( QPolygonF* itPolygon, polygons ) {
+        painterPath.addPolygon( *itPolygon );
+    }
+
+    qDeleteAll( polygons );
+
+    QPainterPathStroker stroker;
+    stroker.setWidth( strokeWidth );
+    QPainterPath strokePath = stroker.createStroke( painterPath );
+
+    return QRegion( strokePath.toFillPolygon().toPolygon() );
+}
+
+
+void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing,
+                               Qt::FillRule fillRule )
+{
+    // Immediately leave this method now if:
+    // - the object is not visible in the viewport or if
+    // - the size of the object is below the resolution of the viewport
     if ( ! d->m_viewport->viewLatLonAltBox().intersects( linearRing.latLonAltBox() ) ||
-    // If the size of the object is below the resolution of the viewport then return
          ! d->m_viewport->resolves( linearRing.latLonAltBox() )
         )
     {
-//        qDebug() << "Polygon doesn't get displayed on the viewport";
+        // qDebug() << "Polygon doesn't get displayed on the viewport";
         return;
     }
 
@@ -478,7 +585,55 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing, Qt::FillRul
     }
 }
 
-void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fillRule )
+
+QRegion GeoPainter::regionFromPolygon ( const GeoDataLinearRing & linearRing,
+                                        Qt::FillRule fillRule, qreal strokeWidth )
+{
+    // Immediately leave this method now if:
+    // - the object is not visible in the viewport or if
+    // - the size of the object is below the resolution of the viewport
+    if ( ! d->m_viewport->viewLatLonAltBox().intersects( linearRing.latLonAltBox() ) ||
+         ! d->m_viewport->resolves( linearRing.latLonAltBox() )
+        )
+    {
+        // qDebug() << "Polygon doesn't get displayed on the viewport";
+        return QRegion();
+    }
+
+    QRegion regions;
+
+    QVector<QPolygonF*> polygons;
+    d->createPolygonsFromLinearRing( linearRing, polygons );
+
+    if ( strokeWidth == 0 ) {
+        // This is the faster way
+        foreach( QPolygonF* itPolygon, polygons ) {
+            regions += QRegion ( (*itPolygon).toPolygon(), fillRule );
+        }
+    }
+    else {
+        QPainterPath painterPath;
+        foreach( QPolygonF* itPolygon, polygons ) {
+            painterPath.addPolygon( *itPolygon );
+        }
+
+        qDeleteAll( polygons );
+
+        QPainterPathStroker stroker;
+        stroker.setWidth( strokeWidth );
+        QPainterPath strokePath = stroker.createStroke( painterPath );
+        painterPath = painterPath.united( strokePath );
+        regions = QRegion( painterPath.toFillPolygon().toPolygon() );
+    }
+
+    qDeleteAll( polygons );
+
+    return regions;
+}
+
+
+void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
+                               Qt::FillRule fillRule )
 {
     // If the object is not visible in the viewport return 
     if ( ! d->m_viewport->viewLatLonAltBox().intersects( polygon.outerBoundary().latLonAltBox() ) ||
@@ -486,10 +641,10 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fill
          ! d->m_viewport->resolves( polygon.outerBoundary().latLonAltBox() )
         )
     {
-//        qDebug() << "Polygon doesn't get displayed on the viewport";
+        // qDebug() << "Polygon doesn't get displayed on the viewport";
         return;
     }
-//    qDebug() << "Drawing Polygon";
+    // qDebug() << "Drawing Polygon";
 
     // Creating the outer screen polygons first
     QVector<QPolygonF*> outerPolygons;
@@ -520,7 +675,10 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon, Qt::FillRule fill
     qDeleteAll( outerPolygons );    
 }
 
-void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates, qreal width, qreal height, bool isGeoProjected )
+
+void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates,
+                            qreal width, qreal height,
+                            bool isGeoProjected )
 {
     int pointRepeatNum;
     qreal y;
@@ -573,7 +731,76 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates, qreal 
     }
 }
 
-void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPoint, int width, int height, int xRnd, int yRnd, bool isGeoProjected )
+
+QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinates,
+                                     qreal width, qreal height,
+                                     bool isGeoProjected,
+                                     qreal strokeWidth )
+{
+    int pointRepeatNum;
+    qreal y;
+    bool globeHidesPoint;
+    AbstractProjection *projection = d->m_viewport->currentProjection();
+
+
+    if ( !isGeoProjected ) {
+
+        QRegion regions;
+
+        bool visible = projection->screenCoordinates( centerCoordinates,
+                       d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
+
+        if ( visible ) {
+            // Draw all the x-repeat-instances of the point on the screen
+            for( int it = 0; it < pointRepeatNum; ++it ) {
+                regions += QRegion( d->m_x[it] - ( ( width + strokeWidth ) / 2.0 ),
+                                    y - ( ( height + strokeWidth ) / 2.0 ),
+                                    width + strokeWidth,
+                                    height + strokeWidth );
+            }
+        }
+        return regions;
+    }
+    else {
+        qreal lon = 0.0;
+        qreal lat = 0.0;
+        qreal altitude = centerCoordinates.altitude();
+        centerCoordinates.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
+
+        if ( width > 180.0 ) width = 180.0;
+        qreal lonLeft = lon - width * 0.5;
+        qreal lonRight =  lon + width * 0.5;
+
+        qreal latTop = lat + height * 0.5;
+        if ( latTop > +90.0 ) latTop = 90.0;
+        if ( latTop < -90.0 ) latTop = -90.0;
+
+        qreal latBottom = lat - height * 0.5;
+        if ( latBottom > +90.0 ) latBottom = 90.0;
+        if ( latBottom < -90.0 ) latBottom = -90.0;
+
+        GeoDataCoordinates bottomLeft( lonLeft, latBottom,
+                                    altitude, GeoDataCoordinates::Degree );
+        GeoDataCoordinates bottomRight( lonRight, latBottom,
+                                    altitude, GeoDataCoordinates::Degree );
+        GeoDataCoordinates topRight( lonRight, latTop,
+                                    altitude, GeoDataCoordinates::Degree );
+        GeoDataCoordinates topLeft( lonLeft, latTop,
+                                    altitude, GeoDataCoordinates::Degree );
+
+        GeoDataLinearRing rectangle( Tessellate | RespectLatitudeCircle );
+
+        rectangle << bottomLeft << bottomRight << topRight << topLeft;
+
+        return regionFromPolygon( rectangle, Qt::OddEvenFill, strokeWidth );
+    }
+}
+
+
+void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPoint,
+                                 int width, int height,
+                                 int xRnd, int yRnd,
+                                 bool isGeoProjected )
 {
     int pointRepeatNum;
     qreal y;
@@ -594,7 +821,8 @@ void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPoint, int widt
 }
 
 
-    // Reenabling QPainter methods.
+
+// Reenabling QPainter methods.
 
 void GeoPainter::drawLine ( int x1, int y1, int x2, int y2 )
 {
@@ -621,7 +849,10 @@ void GeoPainter::drawEllipse ( const QRectF & rectangle )
     QPainter::drawEllipse( rectangle );
 }
 
-void GeoPainter::drawImage ( const QRect &target, const QImage &image, const QRect &source, Qt::ImageConversionFlags flags )
+void GeoPainter::drawImage ( const QRect &target,
+                             const QImage &image,
+                             const QRect &source,
+                             Qt::ImageConversionFlags flags )
 {
     QPainter::drawImage( target, image, source, flags );
 }

@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
-// Copyright 2008      Torsten Rahn   <rahn@kde.org>
+// Copyright 2008-2009 Torsten Rahn   <rahn@kde.org>
 //
 
 

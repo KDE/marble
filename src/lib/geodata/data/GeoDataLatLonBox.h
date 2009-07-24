@@ -6,7 +6,7 @@
 // the source code.
 //
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
-// Copyright 2008      Torsten Rahn   <rahn@kde.org>
+// Copyright 2008-2009 Torsten Rahn   <rahn@kde.org>
 //
 
 
@@ -37,8 +37,14 @@ class GeoDataLineString;
  * The bounding box gets described by assigning the northern, southern, 
  * eastern and western boundary.
  * So usually the value of the eastern boundary is bigger than the
- * value of the western boundary. Only if the bounding box crosses the
- * date line then the eastern boundary has got a smaller value than 
+ * value of the western boundary.
+ *
+ * This is also true if the GeoDataLatLonBox covers the whole longitude
+ * range from 180 deg West to 180 deg East. Notably in this case
+ * the bounding box crosses the date line.
+ *
+ * If the GeoDataLatLonBox does not cover the whole longitude range but still
+ * crosses the date line then the eastern boundary has got a smaller value than
  * the western one.
  */
 

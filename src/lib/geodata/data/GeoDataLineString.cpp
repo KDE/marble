@@ -287,10 +287,11 @@ GeoDataLineString GeoDataLineString::toNormalized() const
          ++itCoords ) {
 
         itCoords->geoCoordinates( lon, lat );
+        qreal alt = itCoords->altitude();
         GeoDataCoordinates::normalizeLonLat( lon, lat );
 
         GeoDataCoordinates normalizedCoords( *itCoords );
-        normalizedCoords.set( lon, lat );
+        normalizedCoords.set( lon, lat, alt );
         normalizedLineString << normalizedCoords;        
     }
 
