@@ -37,7 +37,7 @@ namespace Marble
 class OsmAnnotatePlugin :  public RenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RenderPluginInterface );
+    Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( OsmAnnotatePlugin )
 
  public:
