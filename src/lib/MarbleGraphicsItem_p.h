@@ -13,25 +13,58 @@
 
 // Marble
 #include "AbstractProjection.h"
+#include "GeoPainter.h"
 
 // Qt
 #include<QtCore/QList>
+#include<QtCore/QSet>
 #include<QtCore/QSize>
 #include<QtCore/QSizeF>
 #include<QtCore/QRect>
-#include<QtGui/QPixmapCache>
 
 namespace Marble {
 
 class MarbleGraphicsItemPrivate {
  public:
-    MarbleGraphicsItemPrivate()
+    MarbleGraphicsItemPrivate( MarbleGraphicsItem *marbleGraphicsItem,
+                               MarbleGraphicsItem *parent = 0 )
         : m_removeCachedPixmap( false ),
-          m_cacheMode( MarbleGraphicsItem::NoCache )
+          m_cacheMode( MarbleGraphicsItem::NoCache ),
+          m_visibility( true ),
+          m_parent( parent ),
+          m_children( 0 ),
+          m_marbleGraphicsItem( marbleGraphicsItem )
     {
+        if ( m_parent ) {
+            m_parent->p()->addChild( m_marbleGraphicsItem );
+        }
     }
     
     virtual ~MarbleGraphicsItemPrivate() {
+        // Delete all children
+        if ( m_children ) {
+            qDeleteAll( *m_children );
+            m_children->clear();
+        }
+
+        // Remove from parent
+        if ( m_parent ) {
+            m_parent->p()->removeChild( m_marbleGraphicsItem );
+        }
+    }
+
+    void addChild( MarbleGraphicsItem *child ) {
+        if ( m_children == 0 ) {
+            m_children = new QSet<MarbleGraphicsItem *>();
+        }
+
+        m_children->insert( child );
+    }
+
+    void removeChild( MarbleGraphicsItem *child ) {
+        if ( m_children ) {
+            m_children->remove( child );
+        }
     }
      
     virtual QList<QPointF> positions() {
@@ -65,7 +98,7 @@ class MarbleGraphicsItemPrivate {
     virtual void setProjection( AbstractProjection *projection, ViewportParams *viewport ) {
         Q_UNUSED( projection );
         Q_UNUSED( viewport );
-    };
+    }
     
     QSizeF m_size;
     QSize m_logicalCacheSize;
@@ -76,6 +109,15 @@ class MarbleGraphicsItemPrivate {
     
     // TODO: Substitute this by QPixmapCache::Key once it is available.
     QString m_cacheKey;
+
+    bool m_visibility;
+
+    // The parent of the item
+    MarbleGraphicsItem *m_parent;
+    // The set of children. WARNING: This is not initialized by default.
+    QSet<MarbleGraphicsItem *> *m_children;
+
+    MarbleGraphicsItem *m_marbleGraphicsItem;
 };
 
 }

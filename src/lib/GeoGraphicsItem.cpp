@@ -21,7 +21,7 @@
 using namespace Marble;
 
 GeoGraphicsItem::GeoGraphicsItem()
-    : MarbleGraphicsItem( new GeoGraphicsItemPrivate )
+    : MarbleGraphicsItem( new GeoGraphicsItemPrivate( this ) )
 {
     setFlag( ItemIsVisible, true );
 }

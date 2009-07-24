@@ -13,12 +13,15 @@
 
 #include "marble_export.h"
 
+#include <QtCore/QPointF>
 #include <QtCore/QList>
 #include <QtCore/QSizeF>
 
+class QBrush;
 class QEvent;
-class QPointF;
+class QPainterPath;
 class QObject;
+class QRectF;
 class QString;
 
 namespace Marble {
@@ -30,6 +33,8 @@ class ViewportParams;
 class MarbleGraphicsItemPrivate;
 
 class MARBLE_EXPORT MarbleGraphicsItem {
+    friend class MarbleGraphicsItemPrivate;
+
  public:
     enum CacheMode {
         NoCache,
@@ -37,28 +42,22 @@ class MARBLE_EXPORT MarbleGraphicsItem {
         DeviceCoordinateCache
     };
      
-    MarbleGraphicsItem();
+    MarbleGraphicsItem( MarbleGraphicsItem *parent = 0 );
     MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
     
     virtual ~MarbleGraphicsItem();
     
     /**
      * Paints the item on the screen in view coordinates.
-     * It is now save to call this function from a thread other than the gui thread.
+     * It is not save to call this function from a thread other than the gui thread.
      */
     bool paintEvent( GeoPainter *painter, ViewportParams *viewport, 
                      const QString& renderPos, GeoSceneLayer *layer = 0 );
                         
     /**
-     * Returns true if the Item contains @p point in view coordinates.
+     * Returns true if the Item contains @p point in parent coordinates.
      */
     bool contains( const QPointF& point ) const;
-
-    /**
-     * Returns true if the Item contains @p point in view coordinates.
-     * Overloaded member function provided for convenience.
-     */
-//    bool contains( const QPoint& point ) const;
     
     /**
      * Returns the size of the item
@@ -74,13 +73,33 @@ class MARBLE_EXPORT MarbleGraphicsItem {
      * Set the cache mode of the item
      */
     void setCacheMode( CacheMode mode, const QSize & logicalCacheSize = QSize() );
-    
+
     /**
-     * Schedules an painting update for the Item. As long it is not added to an GraphicsScene 
+     * Schedules an painting update for the Item. As long it is not added to an GraphicsScene
      * (which doesn't exist yet) it will be repainted at the next paint event instead of using
      * the cache.
      */
     void update();
+
+    /**
+     * Returns if the item is visible.
+     */
+    bool visible() const;
+
+    /**
+     * Makes the item visible or invisible, depending on @p visible.
+     */
+    void setVisible( bool visible );
+
+    /**
+     * Hides the item. Equivalent to setVisible( false )
+     */
+    void hide();
+
+    /**
+     * Shows the item. Equivalent to setVisible( true )
+     */
+    void show();
     
  protected:
     /**

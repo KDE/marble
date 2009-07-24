@@ -23,8 +23,8 @@
 
 using namespace Marble;
 
-MarbleGraphicsItem::MarbleGraphicsItem()
-    : d( new MarbleGraphicsItemPrivate )
+MarbleGraphicsItem::MarbleGraphicsItem( MarbleGraphicsItem *parent )
+    : d( new MarbleGraphicsItemPrivate( this, parent ) )
 {
 }
 
@@ -38,8 +38,12 @@ MarbleGraphicsItem::~MarbleGraphicsItem() {
 }
 
 bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewport, 
-                 const QString& renderPos, GeoSceneLayer *layer )
+                                     const QString& renderPos, GeoSceneLayer *layer )
 {
+    if ( !p()->m_visibility ) {
+        return true;
+    }
+
     p()->setProjection( viewport->currentProjection(), viewport );
     
     // Remove the pixmap if it has been requested. This prevents QPixmapCache from being used
@@ -82,6 +86,12 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
             // The cache image will get a 0.5 pixel bounding to save antialiasing effects.
             pixmapPainter.translate( 0.5, 0.5 );
             paint( &pixmapPainter, viewport, renderPos, layer );
+            // Paint children
+            if ( p()->m_children ) {
+                foreach ( MarbleGraphicsItem *item, *p()->m_children ) {
+                    item->paintEvent( &pixmapPainter, viewport, renderPos, layer );
+                }
+            }
             // Update the pixmap in cache
             QPixmapCache::insert( p()->m_cacheKey, cachePixmap );
         }
@@ -97,10 +107,16 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
     else {
         foreach( const QPointF& position, p()->positions() ) {
             painter->save();
-        
+
             painter->translate( position );
             paint( painter, viewport, renderPos, layer );
-        
+            // Paint children
+            if ( p()->m_children ) {
+                foreach ( MarbleGraphicsItem *item, *p()->m_children ) {
+                    item->paintEvent( painter, viewport, renderPos, layer );
+                }
+            }
+
             painter->restore();
         }
     }
@@ -134,6 +150,26 @@ void MarbleGraphicsItem::setCacheMode( CacheMode mode, const QSize & logicalCach
 
 void MarbleGraphicsItem::update() {
     p()->m_removeCachedPixmap = true;
+    // Update the parent.
+    if ( p()->m_parent ) {
+        p()->m_parent->update();
+    }
+}
+
+bool MarbleGraphicsItem::visible() const {
+    return p()->m_visibility;
+}
+
+void MarbleGraphicsItem::setVisible( bool visible ) {
+    p()->m_visibility = visible;
+}
+
+void MarbleGraphicsItem::hide() {
+    setVisible( false );
+}
+
+void MarbleGraphicsItem::show() {
+    setVisible( true );
 }
 
 void MarbleGraphicsItem::setSize( const QSizeF& size ) {

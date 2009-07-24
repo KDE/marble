@@ -94,25 +94,25 @@ bool FileViewFloatItem::isInitialized() const
     return m_fileViewParent != 0;
 }
 
-bool FileViewFloatItem::needsUpdate(ViewportParams *viewport)
-{
-    Q_UNUSED( viewport )
-
-    return true;
-}
-
 QPainterPath FileViewFloatItem::backgroundShape() const
 {
     QPainterPath path;
-    path.addRoundedRect( QRectF( 0.0, 0.0, renderedRect().size().width() - 1, renderedRect().size().height() - 1 ), 6, 6 );
+    QSizeF paintedSize = paintedRect().size();
+    path.addRoundedRect( QRectF( 0.0, 0.0, paintedSize.width() - 1, paintedSize.height() - 1 ), 6, 6 );
     return path;
 }
 
-bool FileViewFloatItem::renderFloatItem(GeoPainter *painter,
-        ViewportParams *viewport, GeoSceneLayer * layer)
+void FileViewFloatItem::changeViewport( ViewportParams *viewport ) {
+    Q_UNUSED( viewport );
+    update();
+}
+
+void FileViewFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewport,
+                                      const QString& renderPos, GeoSceneLayer * layer)
 {
-    Q_UNUSED(viewport);
-    Q_UNUSED(layer);
+    Q_UNUSED( viewport );
+    Q_UNUSED( layer );
+    Q_UNUSED( renderPos );
 
     if( !m_fileView->model() ) {
         m_fileView->setModel(dataFacade()->fileViewModel());
@@ -124,8 +124,6 @@ bool FileViewFloatItem::renderFloatItem(GeoPainter *painter,
 
     painter->begin( painter->device() );
     m_fileView->repaint();
-
-    return true;
 }
 
 bool FileViewFloatItem::eventFilter(QObject *object, QEvent *e)
@@ -147,16 +145,15 @@ bool FileViewFloatItem::eventFilter(QObject *object, QEvent *e)
     Q_ASSERT( m_marbleWidget );
     // Mouse events are forwarded to the underlying widget
     QMouseEvent *event = static_cast<QMouseEvent*> (e);
-    QRectF floatItemRect = QRectF(positivePosition(QRectF(0, 0,
-            widget->width(), widget->height())), size());
+    QRectF floatItemRect = QRectF( positivePosition(), size() );
 
     QPoint shiftedPos = event->pos() - floatItemRect.topLeft().toPoint()
             - QPoint( padding(), padding() );
     if( e->type() == QEvent::MouseMove ) {
-        m_itemPosition = event->pos() + QPoint( 6 * padding(), 0 );
+        m_itemPosition = event->globalPos();
     }
 
-    if( floatItemRect.contains(event->pos()) ) {
+    if( floatItemRect.contains( event->pos() ) ) {
         QWidget *child = m_fileViewParent->childAt( shiftedPos );
 
         if( child ) {
@@ -202,8 +199,7 @@ void FileViewFloatItem::updateFileView()
     {
         // Trigger a repaint of the float item. Otherwise button state updates
         // are delayed
-        QRectF floatItemRect = QRectF(positivePosition(QRect(0,0,
-                m_marbleWidget->width(),m_marbleWidget->height())), size()).toRect();
+        QRectF floatItemRect = QRectF(positivePosition(), size()).toRect();
         QRegion dirtyRegion(floatItemRect.toRect());
 
         m_marbleWidget->repaint(dirtyRegion);
@@ -215,8 +211,9 @@ void FileViewFloatItem::contextMenu( const QPoint& pos )
     if( !m_marbleWidget )
         return;
 
-    qDebug() << "custom Context menu requested!" << pos;
     QMenu *test = new QMenu( m_fileView );
+    // We need the global position to move the menu.
+    // pos contains the relative position.
     test->move( m_itemPosition );
     connect( test->addAction( tr( "Open new kml file..." ) ), SIGNAL( triggered() ),
              this, SLOT( addFile() ) );

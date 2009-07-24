@@ -54,11 +54,12 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     bool isInitialized () const;
 
-    bool needsUpdate( ViewportParams *viewport );
-
     virtual QPainterPath backgroundShape() const;
 
-    bool renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer *layer = 0 );
+    void changeViewport( ViewportParams *viewport );
+
+    void paintContent( GeoPainter *painter, ViewportParams *viewport,
+                       const QString& renderPos, GeoSceneLayer *layer = 0 );
 
  protected:
     bool eventFilter( QObject *object, QEvent *e );
@@ -91,9 +92,6 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     /** Radius of the viewport last time */
     int m_oldViewportRadius;
-
-    /** Repaint needed */
-    bool m_repaintScheduled;
 };
 
 }

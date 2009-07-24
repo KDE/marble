@@ -79,41 +79,42 @@ bool CompassFloatItem::isInitialized() const
 
 QPainterPath CompassFloatItem::backgroundShape() const
 {
+    QRectF contentRect = this->contentRect();
     QPainterPath path;
     int fontheight = QFontMetrics( font() ).ascent();
-    int compassLength = static_cast<int>( contentRect().height() ) - 5 - fontheight;
+    int compassLength = static_cast<int>( contentRect.height() ) - 5 - fontheight;
 
-    path.addEllipse( QRectF( QPointF( marginLeft() + padding() + ( contentRect().width() - compassLength ) / 2 , marginTop() + padding() + 5 + fontheight ), QSize( compassLength, compassLength ) ).toRect() );
+    path.addEllipse( QRectF( QPointF( marginLeft() + padding() + ( contentRect.width() - compassLength ) / 2,
+                                      marginTop() + padding() + 5 + fontheight ),
+                             QSize( compassLength, compassLength ) ).toRect() );
     return path;
 }
 
-bool CompassFloatItem::needsUpdate( ViewportParams *viewport )
+void CompassFloatItem::changeViewport( ViewportParams *viewport )
 {
-// figure out the polarity ...
-    if ( m_polarity == viewport->polarity() ) {
-        return false;
+    // figure out the polarity ...
+    if ( m_polarity != viewport->polarity() ) {
+        update();
     }
-
-    m_polarity = viewport->polarity();
-
-    return true;
 }
 
-bool CompassFloatItem::renderFloatItem( GeoPainter *painter,
-                                        ViewportParams *viewport,
-                                        GeoSceneLayer * layer )
+void CompassFloatItem::paintContent( GeoPainter *painter,
+                                     ViewportParams *viewport,
+                                     const QString& renderPos,
+                                     GeoSceneLayer * layer )
 {
     Q_UNUSED( layer )
+    Q_UNUSED( renderPos )
 
     painter->save();
 
     painter->setRenderHint( QPainter::Antialiasing, true );
 
     QRectF compassRect( contentRect() );
+    m_polarity = viewport->polarity();
 
-//    qDebug() << "Polarity" << m_polarity;
     QString dirstr = tr( "N" );
-    if ( m_polarity == -1 ) 
+    if ( m_polarity == -1 )
         dirstr = tr( "S" );
     if ( m_polarity == 0 )
         dirstr = "";
@@ -140,7 +141,7 @@ bool CompassFloatItem::renderFloatItem( GeoPainter *painter,
 
     painter->autoMapQuality();
 
-    int compassLength = static_cast<int>( contentRect().height() ) - 5 - fontheight;
+    int compassLength = static_cast<int>( compassRect.height() ) - 5 - fontheight;
         
     QSize compassSize( compassLength, compassLength ); 
 
@@ -153,11 +154,9 @@ bool CompassFloatItem::renderFloatItem( GeoPainter *painter,
         m_svgobj->render( &mapPainter ); 
         mapPainter.setViewport( QRect( QPoint( 0, 0 ), viewport->size() ) );
     }
-    painter->drawPixmap( QPoint( static_cast<int>( contentRect().width() - compassLength ) / 2, fontheight + 5 ), m_compass );
+    painter->drawPixmap( QPoint( static_cast<int>( compassRect.width() - compassLength ) / 2, fontheight + 5 ), m_compass );
 
     painter->restore();
-
-    return true;
 }
 
 }

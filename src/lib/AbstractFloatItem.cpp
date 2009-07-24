@@ -24,131 +24,38 @@ namespace Marble
 class AbstractFloatItemPrivate
 {
   public:
-    AbstractFloatItemPrivate( const QPointF &point, const QSizeF &size )
-        : m_position( point ),
-          m_size( size ),
-          m_visible( true ),
-          m_newItemProperties( true ),
-          m_floatItemMoving( false )
+    AbstractFloatItemPrivate()
     {
-        calculateLayout();
     }
 
     ~AbstractFloatItemPrivate()
     {
     }
 
-    void calculateLayout()
-    {
-        qreal marginTop = ( s_marginTop == 0.0 ) ? s_margin : s_marginTop;
-        qreal marginBottom = ( s_marginBottom == 0.0 ) ? s_margin : s_marginBottom;
-        qreal marginLeft = ( s_marginLeft == 0.0 ) ? s_margin : s_marginLeft;
-        qreal marginRight = ( s_marginRight == 0.0 ) ? s_margin : s_marginRight;
-
-        m_renderedRect = QRectF( m_position.x() + marginLeft, m_position.y() + marginTop, m_size.width() - ( marginLeft + marginRight ), m_size.height() - ( marginTop + marginBottom ) );
-
-        m_contentRect = QRectF(
-            m_position.x() + marginLeft + s_padding,
-            m_position.y() + marginTop + s_padding,
-            m_size.width() - ( marginLeft + marginRight + 2.0 * s_padding ),
-            m_size.height() - ( marginTop + marginBottom + 2.0 * s_padding )
-        );
-    }
-
-    QPointF             m_position;
-    QSizeF              m_size;
-    bool                m_visible;
-
-    QRectF              m_renderedRect;
-    QRectF              m_contentRect;
 
     static QPen         s_pen;
-    static QBrush       s_background;
-    static qreal       s_border;
-    static QBrush       s_borderBrush;
-    static Qt::PenStyle s_borderStyle;
     static QFont        s_font;
-    static qreal       s_margin;
-    static qreal       s_marginTop;
-    static qreal       s_marginBottom;
-    static qreal       s_marginLeft;
-    static qreal       s_marginRight;
-    static qreal       s_padding;
-    static bool         s_pixmapCacheEnabled;
-    static bool         s_positionLocked;
-
-    QPixmap             m_cachePixmap;
-    bool                m_newItemProperties;
-
-    QPoint              m_floatItemMoveStartPos;
-    bool                m_floatItemMoving;
 };
 
 QPen         AbstractFloatItemPrivate::s_pen = QPen( Qt::black );
-QBrush       AbstractFloatItemPrivate::s_background = QBrush( QColor( 192, 192, 192, 192 ) );
-qreal       AbstractFloatItemPrivate::s_border = 1.0;
-QBrush       AbstractFloatItemPrivate::s_borderBrush = QBrush( Qt::black );
-Qt::PenStyle AbstractFloatItemPrivate::s_borderStyle = Qt::SolidLine;
 #ifdef Q_OS_MACX
     QFont AbstractFloatItemPrivate::s_font = QFont( "Sans Serif", 10 );
 #else
     QFont AbstractFloatItemPrivate::s_font = QFont( "Sans Serif", 8 );
 #endif
-qreal       AbstractFloatItemPrivate::s_margin = 0.0;
-qreal       AbstractFloatItemPrivate::s_marginTop = 0.0;
-qreal       AbstractFloatItemPrivate::s_marginBottom = 0.0;
-qreal       AbstractFloatItemPrivate::s_marginLeft = 0.0;
-qreal       AbstractFloatItemPrivate::s_marginRight = 0.0;
-qreal       AbstractFloatItemPrivate::s_padding = 4.0;
-bool         AbstractFloatItemPrivate::s_pixmapCacheEnabled = true;
-bool         AbstractFloatItemPrivate::s_positionLocked = false;
 
 AbstractFloatItem::AbstractFloatItem( const QPointF &point, const QSizeF &size )
     : RenderPlugin(),
-      d( new AbstractFloatItemPrivate( point, size ) )
+      FrameGraphicsItem( point, size ),
+      d( new AbstractFloatItemPrivate() )
 {
+    setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
+    setPadding( 4.0 );
 }
 
 AbstractFloatItem::~AbstractFloatItem()
 {
     delete d;
-}
-
-void AbstractFloatItem::setPosition( const QPointF& position )
-{
-    d->m_position = position;
-
-    d->calculateLayout();
-}
-
-QPointF AbstractFloatItem::position() const
-{
-    return d->m_position;
-}
-
-QPointF AbstractFloatItem::positivePosition( const QRectF& viewPort ) const
-{
-    qreal x, y;
-    x = ( d->m_position.x() < 0 ) ? viewPort.width() - d->m_size.width() + d->m_position.x() : d->m_position.x();
-    y = ( d->m_position.y() < 0 ) ? viewPort.height() - d->m_size.height() + d->m_position.y() : d->m_position.y();
-
-    return QPointF( x, y );
-}
-
-void AbstractFloatItem::setSize( const QSizeF& size )
-{
-    if ( size == d->m_size )
-        return;
-
-    d->m_size = size;
-
-    d->calculateLayout();
-    d->m_newItemProperties = true;
-}
-
-QSizeF AbstractFloatItem::size() const
-{
-    return d->m_size;
 }
 
 QPen AbstractFloatItem::pen() const
@@ -159,81 +66,15 @@ QPen AbstractFloatItem::pen() const
 void AbstractFloatItem::setPen( const QPen &pen )
 {
     d->s_pen = pen;
-    d->m_newItemProperties = true;
-}
-
-QBrush AbstractFloatItem::background() const
-{
-    return d->s_background;
-}
-
-void AbstractFloatItem::setBackground( const QBrush &background )
-{
-    d->s_background = background;
-    d->m_newItemProperties = true;
-}
-
-QRectF AbstractFloatItem::contentRect() const
-{
-    return d->m_contentRect;
-}
-
-QRectF AbstractFloatItem::renderedRect() const
-{
-    return d->m_renderedRect;
+    update();
 }
 
 QPainterPath AbstractFloatItem::backgroundShape() const
 {
+    QRectF renderedRect = paintedRect( QPointF( 0.0, 0.0 ) );
     QPainterPath path;
-    path.addRect( QRectF( 0.0, 0.0, d->m_renderedRect.size().width(), d->m_renderedRect.size().height() ) );
+    path.addRect( QRectF( 0.0, 0.0, renderedRect.size().width(), renderedRect.size().height() ) );
     return path;
-}
-
-void AbstractFloatItem::renderBackground( QPainter* painter )
-{
-    painter->save();
-
-    painter->setPen( QPen( d->s_borderBrush, d->s_border, d->s_borderStyle ) );
-    painter->setBrush( d->s_background );
-    painter->setRenderHint( QPainter::Antialiasing, true );
-    painter->translate( QPointF( marginLeft(), marginTop() ) );
-    painter->drawPath( backgroundShape() );
-
-    painter->restore();
-}
-
-qreal AbstractFloatItem::border() const
-{
-    return d->s_border;
-}
-
-void AbstractFloatItem::setBorder( qreal border )
-{
-    d->s_border = border;
-    d->m_newItemProperties = true;
-}
-
-QBrush AbstractFloatItem::borderBrush() const
-{
-    return d->s_borderBrush;
-}
-
-void AbstractFloatItem::setBorderBrush( const QBrush &borderBrush )
-{
-    d->s_borderBrush = borderBrush;
-    d->m_newItemProperties = true;
-}
-
-Qt::PenStyle AbstractFloatItem::borderStyle() const
-{
-    return d->s_borderStyle;
-}
-
-void AbstractFloatItem::setBorderStyle( Qt::PenStyle borderStyle )
-{
-    d->s_borderStyle = borderStyle;
-    d->m_newItemProperties = true;
 }
 
 QFont AbstractFloatItem::font() const
@@ -244,113 +85,7 @@ QFont AbstractFloatItem::font() const
 void AbstractFloatItem::setFont( const QFont &font )
 {
     d->s_font = font;
-    d->m_newItemProperties = true;
-}
-
-qreal AbstractFloatItem::margin() const
-{
-    return d->s_margin;
-}
-
-void AbstractFloatItem::setMargin( qreal margin )
-{
-    d->s_margin = margin;
-
-    d->calculateLayout();
-    d->m_newItemProperties = true;
-}
-
-qreal AbstractFloatItem::marginTop() const
-{
-    return d->s_marginTop;
-}
-
-void AbstractFloatItem::setMarginTop( qreal marginTop )
-{
-    d->s_marginTop = marginTop;
-
-    d->calculateLayout();
-    d->m_newItemProperties = true;
-}
-
-qreal AbstractFloatItem::marginBottom() const
-{
-    return d->s_marginBottom;
-}
-
-void AbstractFloatItem::setMarginBottom( qreal marginBottom )
-{
-    d->s_marginBottom = marginBottom;
-
-    d->calculateLayout();
-    d->m_newItemProperties = true;
-}
-
-qreal AbstractFloatItem::marginLeft() const
-{
-    return d->s_marginLeft;
-}
-
-void AbstractFloatItem::setMarginLeft( qreal marginLeft )
-{
-    d->s_marginLeft = marginLeft;
-
-    d->calculateLayout();
-    d->m_newItemProperties = true;
-}
-
-qreal AbstractFloatItem::marginRight() const
-{
-    return d->s_marginRight;
-}
-
-void AbstractFloatItem::setMarginRight( qreal marginRight )
-{
-    d->s_marginRight = marginRight;
-
-    d->calculateLayout();
-    d->m_newItemProperties = true;
-}
-
-qreal AbstractFloatItem::padding () const
-{
-    return d->s_padding;
-}
-
-void AbstractFloatItem::setPadding( qreal padding )
-{
-    d->s_padding = padding;
-
-    d->calculateLayout();
-    d->m_newItemProperties = true;
-}
-
-bool AbstractFloatItem::positionLocked() const
-{
-       return d->s_positionLocked;
-}
-
-void AbstractFloatItem::setPositionLocked( bool enabled )
-{
-       d->s_positionLocked = enabled;
-}
-
-bool AbstractFloatItem::needsUpdate( ViewportParams *viewport )
-{
-    Q_UNUSED( viewport );
-
-    return false;
-}
-
-bool AbstractFloatItem::pixmapCacheEnabled() const
-{
-    return d->s_pixmapCacheEnabled;
-}
-
-void AbstractFloatItem::setPixmapCacheEnabled( bool pixmapCacheEnabled )
-{
-    d->s_pixmapCacheEnabled = pixmapCacheEnabled;
-    d->m_newItemProperties = true;
+    update();
 }
 
 QString AbstractFloatItem::renderPolicy() const
@@ -363,82 +98,53 @@ QStringList AbstractFloatItem::renderPosition() const
     return QStringList( "FLOAT_ITEM" );
 }
 
-bool AbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport,
-                                const QString& renderPos, GeoSceneLayer * layer)
-{
-//    qDebug() << "renderPos: " << renderPos;
-
-    bool success = true;
-
-    if ( renderPos == "FLOAT_ITEM" ) {
-        // Prevent unneeded redraws
-        if ( !needsUpdate( viewport ) && d->s_pixmapCacheEnabled && !d->m_newItemProperties ) {
-            painter->drawPixmap( positivePosition( painter->viewport() ), d->m_cachePixmap );
-            return true;
-        }
-
-            // Reinitialize cachePixmap if the float item changes its size
-        // or other important common properties
-        if ( ( d->s_pixmapCacheEnabled && d->m_newItemProperties ) || d->m_cachePixmap.isNull() ) {
-            // Add extra space for the border
-            QSize cachePixmapSize = d->m_size.toSize() + QSize( 1, 1 ); // adding a pixel for rounding errors
-
-            if ( d->m_size.isValid() && !d->m_size.isNull() ) {
-                d->m_cachePixmap = QPixmap( cachePixmapSize ).copy();
-            }
-            else {
-                qDebug() << "Warning: Invalid pixmap size suggested: " << d->m_size;
-            }
-        }
-        // unset the dirty flag once all checks are passed
-        d->m_newItemProperties = false;
-
-        if ( d->s_pixmapCacheEnabled ) {
-            d->m_cachePixmap.fill( Qt::transparent );
-            GeoPainter pixmapPainter( &( d->m_cachePixmap ), viewport, Normal );
-
-            pixmapPainter.translate( 0.5, 0.5 );
-            renderBackground( &pixmapPainter );
-
-            pixmapPainter.translate( d->s_padding, d->s_padding );
-
-            pixmapPainter.setFont( d->s_font );
-            success = renderFloatItem( &pixmapPainter, viewport, layer );
-
-            painter->drawPixmap( positivePosition( painter->viewport() ), d->m_cachePixmap );
-        }
-        else {
-            painter->translate( positivePosition( painter->viewport() ) );
-
-            painter->translate( 0.5, 0.5 );
-            renderBackground( painter );
-            painter->translate( d->s_padding, d->s_padding );
-
-            painter->setFont( d->s_font );
-            success = renderFloatItem( painter, viewport, layer );
-
-            painter->resetTransform();
-        }
-    }
-    else {
-        success = renderOnMap( painter, viewport, renderPos, layer );
-    }
-
-    return success;
+void AbstractFloatItem::setVisible( bool visible ) {
+    RenderPlugin::setVisible( visible );
 }
 
-bool AbstractFloatItem::renderFloatItem( GeoPainter *painter,
-                                         ViewportParams *viewport,
-                                         GeoSceneLayer *layer )
+bool AbstractFloatItem::visible() const {
+    return RenderPlugin::visible();
+}
+
+void AbstractFloatItem::setPositionLocked( bool lock ) {
+    ScreenGraphicsItem::GraphicsItemFlags flags = this->flags();
+
+    if ( lock ) {
+        flags &= ~ScreenGraphicsItem::ItemIsMovable;
+    }
+    else {
+        flags |= ScreenGraphicsItem::ItemIsMovable;
+    }
+
+    setFlags( flags );
+}
+
+bool AbstractFloatItem::positionLocked() {
+    return ( flags() & ScreenGraphicsItem::ItemIsMovable ) ? false : true;
+}
+
+bool AbstractFloatItem::eventFilter( QObject *object, QEvent *e ) {
+    if ( !enabled() || !visible() ) {
+        return false;
+    }
+
+    return ScreenGraphicsItem::eventFilter( object, e );
+}
+
+bool AbstractFloatItem::render( GeoPainter *painter, ViewportParams *viewport,
+             const QString& renderPos, GeoSceneLayer * layer )
 {
-    // In the derived method here is the right place to draw the
-    // contents of the float item.
+    if ( !enabled() || !visible() ) {
+        return true;
+    }
 
-    Q_UNUSED( painter );
-    Q_UNUSED( viewport );
-    Q_UNUSED( layer );
-
-    return true;
+    if ( renderPos == "FLOAT_ITEM" ) {
+        paintEvent( painter, viewport, renderPos, layer );
+        return true;
+    }
+    else {
+        return renderOnMap( painter, viewport, renderPos, layer );
+    }
 }
 
 bool AbstractFloatItem::renderOnMap( GeoPainter     *painter,
@@ -455,97 +161,6 @@ bool AbstractFloatItem::renderOnMap( GeoPainter     *painter,
     Q_UNUSED( layer );
 
     return true;
-}
-
-
-bool AbstractFloatItem::eventFilter( QObject *object, QEvent *e )
-{
-    if ( !enabled() || !visible() || positionLocked() ) {
-        return false;
-    }
-
-    MarbleWidget *widget = dynamic_cast<MarbleWidget*>(object);
-    if ( !widget ) {
-        return false;
-    }
-
-	if ( e->type() == QEvent::MouseMove && !d->m_floatItemMoving ) {
-		return false;
-	}
-
-    // Move float items
-    bool cursorAboveFloatItem(false);
-    if ( e->type() == QEvent::MouseMove
-                || e->type() == QEvent::MouseButtonPress
-                || e->type() == QEvent::MouseButtonRelease )
-    {
-        QMouseEvent *event = static_cast<QMouseEvent*>(e);
-        QRectF floatItemRect = QRectF(positivePosition(QRectF(0,0,widget->width(),
-                widget->height())), size() + QSize(1,1));
-
-        // Click and move above a float item triggers moving the float item
-        if ( floatItemRect.contains(event->pos()) ) {
-            cursorAboveFloatItem = true;
-
-            if ( e->type() == QEvent::MouseButtonPress && event->button() == Qt::LeftButton ) {
-                d->m_floatItemMoveStartPos = event->pos();
-                d->m_floatItemMoving = true;
-                return true;
-            }
-        }
-
-        if ( e->type() == QEvent::MouseMove && event->buttons() & Qt::LeftButton
-            && ( cursorAboveFloatItem || d->m_floatItemMoving ) )
-        {
-            d->m_floatItemMoving = true;
-            const QPoint &point = event->pos();
-            QPointF position = floatItemRect.topLeft();
-            qreal newX = position.x()+point.x()-d->m_floatItemMoveStartPos.x();
-            qreal newY = position.y()+point.y()-d->m_floatItemMoveStartPos.y();
-            if ( newX >= 0 && newY >= 0 ) {
-                // Docking behavior
-                const qreal dockArea = 60.0; // Alignment area width/height
-                const qreal dockJump = 30.0; // Alignment indicator jump size
-                if ( widget->width()-size().width()-newX < dockArea ) {
-                    newX = qMin(qreal(-1.0), size().width()+newX-widget->width());
-                    if (d->m_floatItemMoveStartPos.x()<event->pos().x()) {
-                        // Indicate change to right alignment with a short jump
-                        newX = qMax( newX, -(dockArea-dockJump) );
-                    }
-                }
-                if ( widget->height()-size().height()-newY < dockArea ) {
-                    newY = qMin(qreal(-1.0),size().height()+newY-widget->height());
-                    if (d->m_floatItemMoveStartPos.y()<event->pos().y()) {
-                       // Indicate change to bottom alignment with a short jump
-                       newY = qMax( newY, -(dockArea-dockJump) );
-                    }
-                }
-
-                setPosition(QPointF(newX,newY));
-                QRect newFloatItemRect = QRectF(positivePosition(QRect(0,0,widget->width(),widget->height())), size() ).toRect();
-                d->m_floatItemMoveStartPos = event->pos();
-                QRegion dirtyRegion(floatItemRect.toRect());
-                dirtyRegion = dirtyRegion.united(newFloatItemRect);
-
-                widget->setAttribute( Qt::WA_NoSystemBackground,  false );
-                widget->repaint(dirtyRegion);
-                widget->setAttribute( Qt::WA_NoSystemBackground,  widget->map()->mapCoversViewport() );
-                return true;
-            }
-        }
-
-        if ( e->type() == QEvent::MouseButtonRelease ) {
-            d->m_floatItemMoving = false;
-        }
-
-        // Adjusting Cursor shape
-        if ( cursorAboveFloatItem || d->m_floatItemMoving ) {
-            widget->setCursor(QCursor(Qt::SizeAllCursor));
-            return true;
-        }
-    }
-
-    return false;
 }
 
 }

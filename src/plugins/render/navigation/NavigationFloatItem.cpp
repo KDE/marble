@@ -25,7 +25,7 @@ using namespace Marble;
 NavigationFloatItem::NavigationFloatItem(const QPointF &point,
         const QSizeF &size) :
     AbstractFloatItem(point, size), m_marbleWidget(0),
-            m_navigationParent(0), m_repaintScheduled(true)
+            m_navigationParent(0)
 {
     // Plugin is enabled by default
     setEnabled( true );
@@ -89,41 +89,33 @@ bool NavigationFloatItem::isInitialized() const
     return m_navigationParent != 0;
 }
 
-bool NavigationFloatItem::needsUpdate(ViewportParams *viewport)
+QPainterPath NavigationFloatItem::backgroundShape() const
+{
+    QPainterPath path;
+    QSizeF paintedSize = paintedRect().size();
+    path.addRoundedRect( QRectF( 0.0, 0.0, paintedSize.width() - 1, paintedSize.height() - 1 ), 6, 6 );
+    return path;
+}
+
+void NavigationFloatItem::changeViewport( ViewportParams *viewport )
 {
     if ( viewport->radius() != m_oldViewportRadius ) {
         m_oldViewportRadius = viewport->radius();
         // The slider depends on the map state (zoom factor)
-        return true;
+        update();
     }
-    
-    if ( m_repaintScheduled )
-    {
-        m_repaintScheduled = false;
-        return true;
-    }
-
-    return false;
 }
 
-QPainterPath NavigationFloatItem::backgroundShape() const
+void NavigationFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewport,
+                                        const QString& renderPos, GeoSceneLayer * layer )
 {
-    QPainterPath path;
-    path.addRoundedRect( QRectF( 0.0, 0.0, renderedRect().size().width() - 1, renderedRect().size().height() - 1 ), 6, 6 );
-    return path;
-}
-
-bool NavigationFloatItem::renderFloatItem(GeoPainter *painter,
-        ViewportParams *viewport, GeoSceneLayer * layer)
-{
-    Q_UNUSED(viewport);
-    Q_UNUSED(layer);
+    Q_UNUSED( viewport );
+    Q_UNUSED( layer );
+    Q_UNUSED( renderPos );
 
     // Paint widget without a background
     m_navigationParent->render( painter, 
           QPoint( padding(), padding() ), QRegion(),QWidget::RenderFlags(QWidget::DrawChildren));
-
-    return true;
 }
 
 bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
@@ -167,20 +159,19 @@ bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
             || e->type() == QEvent::MouseButtonRelease ) {
         // Mouse events are forwarded to the underlying widget
         QMouseEvent *event = static_cast<QMouseEvent*> (e);
-        QRectF floatItemRect = QRectF(positivePosition(QRectF(0, 0,
-                widget->width(), widget->height())), size());
+        QRectF floatItemRect = QRectF( positivePosition(), size() );
 
         QPoint shiftedPos = event->pos() - floatItemRect.topLeft().toPoint()
                 - QPoint(padding(), padding());
         if ( floatItemRect.contains(event->pos()) ) {
-            QWidget *child = m_navigationParent->childAt(shiftedPos);
+            QWidget *child = m_navigationParent->childAt( shiftedPos );
             if ( child ) {
-                m_marbleWidget->setCursor(Qt::ArrowCursor);
+                m_marbleWidget->setCursor( Qt::ArrowCursor );
                 shiftedPos -= child->pos(); // transform to children's coordinates
-                QMouseEvent shiftedEvent = QMouseEvent(e->type(), shiftedPos,
+                QMouseEvent shiftedEvent = QMouseEvent( e->type(), shiftedPos,
                         event->globalPos(), event->button(), event->buttons(),
-                        event->modifiers());
-                if ( QApplication::sendEvent(child, &shiftedEvent) ) {
+                        event->modifiers() );
+                if ( QApplication::sendEvent( child, &shiftedEvent ) ) {
                     return true;
                 }
             }
@@ -248,22 +239,14 @@ void NavigationFloatItem::updateButtons( int value )
     {
         // Trigger a repaint of the float item. Otherwise button state updates
         // are delayed
-        QRectF floatItemRect = QRectF(positivePosition(QRect(0,0,
-                m_marbleWidget->width(),m_marbleWidget->height())), size()).toRect();
+        QRectF floatItemRect = QRectF(positivePosition(), size()).toRect();
         QRegion dirtyRegion(floatItemRect.toRect());
     
         m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,  false );
 
-        if ( m_repaintScheduled ) {
-            m_marbleWidget->repaint();
-        }
-        else {
-            m_marbleWidget->repaint(dirtyRegion);
-        }
+        update();
 
         m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,  m_marbleWidget->map()->mapCoversViewport() );
-        
-        m_repaintScheduled = true;
     }
 }
 

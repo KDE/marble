@@ -31,22 +31,69 @@ class ScreenGraphicsItemPrivate;
 
 class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem {
  public:
-    ScreenGraphicsItem();
+    enum GraphicsItemFlag {
+        ItemIsMovable = 0x1
+    };
+    Q_DECLARE_FLAGS(GraphicsItemFlags, GraphicsItemFlag)
+
+    ScreenGraphicsItem( MarbleGraphicsItem *parent = 0 );
+    ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
+                        MarbleGraphicsItem *parent = 0 );
     ScreenGraphicsItem( ScreenGraphicsItemPrivate *d_ptr );
+    ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
+                        ScreenGraphicsItemPrivate *d_ptr );
     
     virtual ~ScreenGraphicsItem();
-    
+
     /**
-     * Returns the postion of the item
+     * @brief Set the position of the float item
+     * @param pos Position
+     *
+     * Positive x-coordinates are counted left-aligned from the left map border.
+     * Negative x-coordinates are counted right-aligned from the right map border.
+     *
+     * Positive y-coordinates are counted top-aligned from the top map border.
+     * Negative y-coordinates are counted right-aligned from the bottom map border.
+     */
+    void    setPosition( const QPointF& position );
+
+    /**
+     * @brief Return the position of the float item
+     *
+     * Positive x-coordinates are counted left-aligned from the left map border.
+     * Negative x-coordinates are counted right-aligned from the right map border.
+     *
+     * Positive y-coordinates are counted top-aligned from the top map border.
+     * Negative y-coordinates are counted right-aligned from the bottom map border.
      */
     QPointF position() const;
-    
+
     /**
-     * Set the position of the item
+     * @brief Return the positive position of the float item
+     *
+     * All coordinates are counted positive and depend on the current viewport.
+     *
+     * Positive x-coordinates are counted left-aligned from the left map border.
+     * Positive y-coordinates are counted top-aligned from the top map border.
      */
-    void setPosition( const QPointF& position );
+    QPointF positivePosition() const;
+
+    virtual void changeViewport( ViewportParams *viewport );
+
+    /**
+     * Returns the flags of the item.
+     */
+    GraphicsItemFlags flags();
+
+    /**
+     * Sets the flags to flags. All flags in flags will be enabled and all other flags will
+     * be disabled. By default all flags are disabled.
+     */
+    void setFlags( GraphicsItemFlags flags );
     
  protected:
+    virtual bool eventFilter( QObject *, QEvent * );
+
     /**
      * Paints the item in item coordinates
      */

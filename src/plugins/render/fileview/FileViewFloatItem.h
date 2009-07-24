@@ -54,11 +54,12 @@ class FileViewFloatItem: public AbstractFloatItem
 
     bool isInitialized () const;
 
-    bool needsUpdate( ViewportParams *viewport );
+    void changeViewport( ViewportParams *viewport );
 
     virtual QPainterPath backgroundShape() const;
 
-    bool renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer *layer = 0 );
+    void paintContent( GeoPainter *painter, ViewportParams *viewport,
+                       const QString& renderPos, GeoSceneLayer *layer = 0 );
 
  protected:
     bool eventFilter( QObject *object, QEvent *e );

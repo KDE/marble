@@ -79,29 +79,31 @@ bool OverviewMap::isInitialized () const
     return true;
 }
 
-bool OverviewMap::needsUpdate( ViewportParams *viewport )
+void OverviewMap::changeViewport( ViewportParams *viewport )
 {
     GeoDataLatLonAltBox latLonAltBox = viewport->currentProjection()->latLonAltBox( QRect( QPoint( 0, 0 ), viewport->size() ), viewport );
     qreal centerLon, centerLat;
     viewport->centerCoordinates( centerLon, centerLat );
     QString target = dataFacade()->target();
 
-    if ( m_latLonAltBox == latLonAltBox 
-	&& m_centerLon == centerLon
-	&& m_centerLat == centerLat 
-    && m_target == target ) {
-        return false;
+    if ( !( m_latLonAltBox == latLonAltBox
+            && m_centerLon == centerLon
+            && m_centerLat == centerLat
+            && m_target == target ) )
+    {
+        m_latLonAltBox = latLonAltBox;
+        m_centerLon = centerLon;
+        m_centerLat = centerLat;
+        update();
     }
-    m_latLonAltBox = latLonAltBox;
-    m_centerLon = centerLon;
-    m_centerLat = centerLat;
-//    qDebug() << "true";
-    return true;
 }
 
-bool OverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer )
+void OverviewMap::paintContent( GeoPainter *painter, ViewportParams *viewport,
+                                const QString& renderPos, GeoSceneLayer * layer )
 {
-    Q_UNUSED(layer);
+    Q_UNUSED( layer );
+    Q_UNUSED( renderPos );
+
     painter->save();
 
     painter->autoMapQuality();
@@ -219,8 +221,6 @@ bool OverviewMap::renderFloatItem( GeoPainter *painter, ViewportParams *viewport
     painter->drawEllipse( QRectF( x - circleRadius, y - circleRadius , 2 * circleRadius, 2 * circleRadius ) );
 
     painter->restore();
-
-    return true;
 }
 
 bool OverviewMap::eventFilter( QObject *object, QEvent *e )
@@ -237,8 +237,7 @@ bool OverviewMap::eventFilter( QObject *object, QEvent *e )
     bool cursorAboveFloatItem(false);
     if ( e->type() == QEvent::MouseButtonDblClick || e->type() == QEvent::MouseMove ) {
         QMouseEvent *event = static_cast<QMouseEvent*>(e);
-        QRectF floatItemRect = QRectF(positivePosition(QRectF(0,0,widget->width(),
-                widget->height())), size());
+        QRectF floatItemRect = QRectF( positivePosition(), size() );
 
         if ( floatItemRect.contains(event->pos()) ) {
             cursorAboveFloatItem = true;

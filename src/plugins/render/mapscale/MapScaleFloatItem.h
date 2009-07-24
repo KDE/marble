@@ -50,9 +50,10 @@ class MapScaleFloatItem : public AbstractFloatItem
 
     bool isInitialized () const;
 
-    bool needsUpdate( ViewportParams *viewport );
+    void changeViewport( ViewportParams *viewport );
 
-    bool renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
+    void paintContent( GeoPainter *painter, ViewportParams *viewport,
+                       const QString& renderPos, GeoSceneLayer * layer = 0 );
 
  private:
     int   invScale() const            { return m_invScale; }

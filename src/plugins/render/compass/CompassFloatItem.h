@@ -58,9 +58,10 @@ class CompassFloatItem  : public AbstractFloatItem
 
     QPainterPath backgroundShape() const;
 
-    bool needsUpdate( ViewportParams *viewport );
+    void changeViewport( ViewportParams *viewport );
 
-    bool renderFloatItem( GeoPainter *painter, ViewportParams *viewport, GeoSceneLayer * layer = 0 );
+    void paintContent( GeoPainter *painter, ViewportParams *viewport,
+                       const QString& renderPos, GeoSceneLayer * layer = 0 );
 
  private:
     Q_DISABLE_COPY( CompassFloatItem )

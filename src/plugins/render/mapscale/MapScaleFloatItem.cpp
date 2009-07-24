@@ -85,37 +85,39 @@ bool MapScaleFloatItem::isInitialized () const
     return true;
 }
 
-bool MapScaleFloatItem::needsUpdate( ViewportParams *viewport )
+void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
 {
     int viewportWidth = viewport->width();
 
     QString target = dataFacade()->target();
 
-    if (    m_radius == viewport->radius() && viewportWidth == m_viewportWidth 
-         && m_target == target && m_scaleInitDone )
+    if ( !(    m_radius == viewport->radius() 
+            && viewportWidth == m_viewportWidth
+            && m_target == target
+            && m_scaleInitDone ) )
     {
-        return false;
+        int fontHeight     = QFontMetrics( font() ).ascent();
+        setSize( QSizeF( viewport->width() / 2, 2 * padding() + fontHeight + 3 + m_scaleBarHeight ) );
+
+        m_leftBarMargin  = QFontMetrics( font() ).boundingRect( "0" ).width() / 2;
+        m_rightBarMargin = QFontMetrics( font() ).boundingRect( "0000" ).width() / 2;
+
+        m_scaleBarWidth = contentRect().width() - m_leftBarMargin - m_rightBarMargin;
+        m_viewportWidth = viewport->width();
+        m_radius = viewport->radius();
+        m_scaleInitDone = true;
+
+        update();
     }
-
-    int fontHeight     = QFontMetrics( font() ).ascent();
-    setSize( QSizeF( viewport->width() / 2, 2 * padding() + fontHeight + 3 + m_scaleBarHeight ) ); 
-
-    m_leftBarMargin  = QFontMetrics( font() ).boundingRect( "0" ).width() / 2;
-    m_rightBarMargin = QFontMetrics( font() ).boundingRect( "0000" ).width() / 2;
-
-    m_scaleBarWidth = contentRect().width() - m_leftBarMargin - m_rightBarMargin;
-    m_viewportWidth = viewport->width();
-    m_radius = viewport->radius();
-    m_scaleInitDone = true;
-
-    return true;
 }
 
-bool MapScaleFloatItem::renderFloatItem( GeoPainter *painter,
-					 ViewportParams *viewport,
-					 GeoSceneLayer * layer )
+void MapScaleFloatItem::paintContent( GeoPainter *painter,
+                                      ViewportParams *viewport,
+                                      const QString& renderPos,
+                                      GeoSceneLayer * layer )
 {
     Q_UNUSED( layer )
+    Q_UNUSED( renderPos )
 
     painter->save();
 
@@ -123,10 +125,8 @@ bool MapScaleFloatItem::renderFloatItem( GeoPainter *painter,
 
     int fontHeight     = QFontMetrics( font() ).ascent();
 
-    setSize( QSizeF( viewport->width() / 2, 2 * padding() + fontHeight + 3 + m_scaleBarHeight ) ); 
-
     m_scaleBarDistance = (qreal)(m_scaleBarWidth) * dataFacade()->planetRadius() / 
-                      (qreal)(viewport->radius());
+                         (qreal)(viewport->radius());
 
     Marble::DistanceUnit distanceUnit;
     distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
@@ -193,8 +193,6 @@ bool MapScaleFloatItem::renderFloatItem( GeoPainter *painter,
     }
 
     painter->restore();
-
-    return true;
 }
 
 void MapScaleFloatItem::calcScaleBar()
