@@ -20,10 +20,12 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/kml
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/handlers/dgml
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/parser
+ ${CMAKE_CURRENT_SOURCE_DIR}/graphicsview
  ${QT_INCLUDE_DIR}
 )
 INCLUDE(${QT_USE_FILE})
 INCLUDE(geodata/CMakeLists.txt)
+INCLUDE(graphicsview/CMakeLists.txt)
 
 if (QTONLY)
   set(GENERIC_LIB_VERSION "0.7.0")
@@ -54,6 +56,7 @@ endif (QTONLY)
 
 set(marblewidget_SRCS
     ${geodata_SRCS}
+    ${graphicsview_SRCS}
     MarbleWidget.cpp
     MarbleModel.cpp
     MarbleMap.cpp
@@ -152,12 +155,7 @@ set(marblewidget_SRCS
     AbstractDataPlugin.cpp
     AbstractDataPluginModel.cpp
     AbstractDataPluginItem.cpp
-    MarbleGraphicsItem.cpp
-    GeoGraphicsItem.cpp
-    ScreenGraphicsItem.cpp
-    FrameGraphicsItem.cpp
-    LabelGraphicsItem.cpp
-
+    
     PluginInterface.cpp
     NetworkPluginInterface.cpp
     RenderPlugin.cpp
@@ -272,6 +270,7 @@ if (APPLE AND QTONLY)
   # do nothing because we dont put .h files in the bundle
 else (APPLE AND QTONLY)
   install( FILES
+    ${graphicsview_HDRS}
     MarbleWidget.h
     MarbleMap.h
     MarbleModel.h
@@ -315,11 +314,6 @@ else (APPLE AND QTONLY)
     AbstractDataPlugin.h
     AbstractDataPluginModel.h
     AbstractDataPluginItem.h
-    MarbleGraphicsItem.h
-    GeoGraphicsItem.h
-    ScreenGraphicsItem.h
-    FrameGraphicsItem.h
-    LabelGraphicsItem.h
 
     LatLonEdit.h
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
