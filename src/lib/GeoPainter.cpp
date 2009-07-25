@@ -442,7 +442,7 @@ QRegion GeoPainter::regionFromLine (const GeoDataCoordinates & startPoint,
 
     line << startPoint << endPoint;
 
-    return regionFromPolyline( line );
+    return regionFromPolyline( line, strokeWidth );
 }
 
 

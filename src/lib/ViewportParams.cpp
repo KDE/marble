@@ -339,6 +339,14 @@ bool ViewportParams::resolves ( const GeoDataLatLonBox &latLonBox ) const
     return latLonBox.width() + latLonBox.height() > 2.0 * angularResolution();
 }
 
+
+bool ViewportParams::resolves ( const GeoDataLatLonAltBox &latLonAltBox ) const
+{
+    return    latLonAltBox.width() + latLonAltBox.height() > 2.0 * angularResolution()
+           || latLonAltBox.maxAltitude() - latLonAltBox.minAltitude() > 10000;
+           
+}
+
 bool ViewportParams::resolves ( const GeoDataCoordinates &coord1, 
                                 const GeoDataCoordinates &coord2 ) const
 {

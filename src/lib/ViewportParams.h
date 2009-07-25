@@ -70,6 +70,8 @@ class MARBLE_EXPORT ViewportParams
 
     bool resolves ( const GeoDataLatLonBox &latLonBox ) const;
 
+    bool resolves ( const GeoDataLatLonAltBox &latLonAltBox ) const;
+
     // Determines whether two points are located enough apart so that it makes 
     // sense to display them as distinct points. If this is not the case
     // calculation and drawing of one point can be skipped as only a single
