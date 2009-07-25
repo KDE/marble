@@ -223,6 +223,23 @@ GeoDataLineString& GeoDataLineString::operator << ( const GeoDataCoordinates& va
     return *this;
 }
 
+GeoDataLineString& GeoDataLineString::operator << ( const GeoDataLineString& value )
+{
+    GeoDataGeometry::detach();
+    p()->m_rangeCorrected.clear();
+    p()->m_dirtyRange = true;
+    p()->m_dirtyBox = true;
+
+    QVector<GeoDataCoordinates>::const_iterator itCoords = value.constBegin();
+    QVector<GeoDataCoordinates>::const_iterator itEnd = value.constEnd();
+
+    for( ; itCoords != itEnd; ++itCoords ) {
+        p()->m_vector.append( *itCoords );
+    }
+
+    return *this;
+}
+
 void GeoDataLineString::clear()
 {
     GeoDataGeometry::detach();
@@ -361,10 +378,10 @@ void GeoDataLineStringPrivate::toPoleCorrected( const GeoDataLineString& q, GeoD
         }
     }
 
-    for( QVector<GeoDataCoordinates>::const_iterator itCoords
-          = m_vector.constBegin();
-         itCoords != m_vector.constEnd();
-         ++itCoords ) {
+    QVector<GeoDataCoordinates>::const_iterator itCoords = m_vector.constBegin();
+    QVector<GeoDataCoordinates>::const_iterator itEnd = m_vector.constEnd();
+
+    for( ; itCoords != itEnd; ++itCoords ) {
 
         currentCoords  = *itCoords;
 
@@ -497,6 +514,13 @@ void GeoDataLineStringPrivate::toDateLineCorrected(
         previousSign = currentSign;
         previousLon  = currentLon;
         itPreviousPoint = itPoint;
+    }
+
+    // If the line string doesn't cross the dateline an even number of times
+    // then need to take care of the data stored in the unfinishedLineString
+    if ( unfinished && unfinishedLineString && !unfinishedLineString->isEmpty() ) {
+        *dateLineCorrected << *unfinishedLineString;
+        delete unfinishedLineString;
     }
 
     lineStrings << dateLineCorrected;
