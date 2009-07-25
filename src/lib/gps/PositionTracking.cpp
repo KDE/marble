@@ -76,7 +76,9 @@ PositionTracking::~PositionTracking()
 void PositionTracking::construct( const QSize &canvasSize,
                              ViewParams *viewParams )
 {
-
+    // FIXME: Unused parameters should get fixed during refactoring of this class
+    Q_UNUSED( canvasSize )
+    Q_UNUSED( viewParams )
 }
 
 
@@ -97,6 +99,8 @@ QRegion PositionTracking::genRegion( const QSize &canvasSize,
 void PositionTracking::notifyPosition( GeoDataCoordinates pos )
 {
     //qDebug() << "Position from gpsd: " << pos.toString();
+    // FIXME: Unused parameters should get fixed during refactoring of this class
+    Q_UNUSED( pos )
 }
 
 void PositionTracking::updateSpeed( TrackPoint* previous, TrackPoint* next )
