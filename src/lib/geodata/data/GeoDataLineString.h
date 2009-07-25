@@ -94,6 +94,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
 
     void append ( const GeoDataCoordinates& value );
     GeoDataLineString& operator << ( const GeoDataCoordinates& value );
+    GeoDataLineString& operator << ( const GeoDataLineString& value );
     
     QVector<GeoDataCoordinates>::Iterator begin();
     QVector<GeoDataCoordinates>::Iterator end();
