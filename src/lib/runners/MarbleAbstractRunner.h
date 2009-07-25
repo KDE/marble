@@ -49,7 +49,7 @@ public:
     /**
      * Destructor.
      */
-    ~MarbleAbstractRunner();
+    virtual ~MarbleAbstractRunner();
     /**
      * This function gives the  icon for this runner
      * @return the icon of the runner

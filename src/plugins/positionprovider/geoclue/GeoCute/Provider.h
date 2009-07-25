@@ -16,7 +16,7 @@ class Provider : public QObject {
     public:
         Provider(const QString& service, const QString& path,
             QObject* parent = 0);
-        ~Provider();
+        virtual ~Provider();
         Status status() const;
 
     signals:

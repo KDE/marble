@@ -104,7 +104,7 @@ void MeasureTool::drawMeasurePoints( GeoPainter *painter,
             }
         }
 
-        delete x;
+        delete[] x;
     }
 }
 
