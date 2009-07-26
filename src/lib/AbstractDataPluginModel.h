@@ -89,7 +89,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      * starts additionally needed downloads.
      * This method has to be implemented in a subclass.
      **/
-    virtual void parseFile( const QByteArray& file ) = 0;
+    virtual void parseFile( const QByteArray& file );
         
     /**
      * Downloads the file from @p url. @p item -> addDownloadedFile() will be called when the
