@@ -33,6 +33,7 @@ public:
     Marble::GeoDataLatLonAltBox  viewLatLonAltBox () const;
     qreal                   angularResolution () const;
     bool                    resolves (const Marble::GeoDataLatLonBox& latLonBox) const;
+    bool                    resolves (const Marble::GeoDataLatLonAltBox &latLonAltBox) const;
     bool                    resolves (const Marble::GeoDataCoordinates& coord1, const Marble::GeoDataCoordinates& coord2) const;
     int                     radius () const;
     void                    setRadius (int newRadius);

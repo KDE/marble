@@ -59,6 +59,7 @@ public:
     const Marble::GeoDataCoordinates&  last () const;
     void                    append (const Marble::GeoDataCoordinates& value);
     Marble::GeoDataLineString&  operator << (const Marble::GeoDataCoordinates& value);
+    Marble::GeoDataLineString&  operator << (const Marble::GeoDataLineString& value);
 //ig    QVector<Marble::GeoDataCoordinates>::Iterator  begin ();
 //ig    QVector<Marble::GeoDataCoordinates>::Iterator  end ();
 //ig    QVector<Marble::GeoDataCoordinates>::ConstIterator  constBegin () const;
