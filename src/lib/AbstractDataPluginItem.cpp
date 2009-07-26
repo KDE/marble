@@ -80,6 +80,15 @@ void AbstractDataPluginItem::setAddedAngularResolution( qreal resolution )
     d->m_addedAngularResolution = resolution;
 }
 
+QAction *AbstractDataPluginItem::action() {
+    return 0;
+}
+
+void AbstractDataPluginItem::addDownloadedFile( const QString& url, const QString& type ) {
+    Q_UNUSED( url )
+    Q_UNUSED( type )
+}
+
 } // Marble namespace
 
 #include "AbstractDataPluginItem.moc"

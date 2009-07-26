@@ -223,6 +223,10 @@ QList<AbstractDataPluginItem *> AbstractDataPluginModel::whichItemAt( const QPoi
     return itemsAt;
 }
 
+void AbstractDataPluginModel::parseFile( const QByteArray& file ) {
+    Q_UNUSED( file );
+}
+
 void AbstractDataPluginModel::downloadItemData( const QUrl& url,
                                                 const QString& type,
                                                 AbstractDataPluginItem *item )

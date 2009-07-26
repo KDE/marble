@@ -51,13 +51,13 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
     qreal addedAngularResolution() const;
     void setAddedAngularResolution( qreal resolution );
     
-    virtual QAction *action() = 0;
+    virtual QAction *action();
     
     virtual QString itemType() const = 0;
      
     virtual bool initialized() = 0;
     
-    virtual void addDownloadedFile( const QString& url, const QString& type ) = 0;
+    virtual void addDownloadedFile( const QString& url, const QString& type );
     
     virtual void paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;

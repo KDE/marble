@@ -26,6 +26,7 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "AbstractFloatItem.h"
+#include "AbstractDataPluginItem.h"
 #include "MeasureTool.h"
 #include "MarbleWidgetPopupMenu.h"
 
@@ -398,8 +399,23 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         // Adjusting Cursor shape
 
         QPoint mousePosition( event->x(), event->y() );
+        
+        // Find out if there are data items and if one has defined an action
+        QList<AbstractDataPluginItem *> dataItems
+                = m_widget->model()->whichItemAt( mousePosition );
+        bool dataAction = false;
+        for ( QList<AbstractDataPluginItem *>::iterator it = dataItems.begin();
+              it != dataItems.end();
+              ++it )
+        {
+            if ( (*it)->action() ) {
+                dataAction = true;
+                break;
+            }
+        }
+        
         if ( ( m_widget->model()->whichFeatureAt( mousePosition ).size() == 0 )
-             && ( m_widget->model()->whichItemAt( mousePosition ).size() == 0 ) )
+             && ( !dataAction ) )
         {
             if ( !m_leftpressed )
                 arrowcur [1][1] = QCursor(Qt::OpenHandCursor);
