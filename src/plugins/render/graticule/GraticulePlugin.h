@@ -18,6 +18,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QObject>
 #include <QtCore/QVector>
+#include <QtGui/QPen>
 
 #include "RenderPlugin.h"
 
@@ -68,7 +69,16 @@ class GraticulePlugin : public RenderPlugin
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
  private:
-    /**
+     /**
+     * @brief Renders the coordinate grid within the defined view bounding box.
+     * @param painter the painter used to draw the grid
+     * @param viewport the viewport
+     */
+    void renderGrid( GeoPainter *painter, ViewportParams *viewport,
+                     const QPen& majorCirclePen,
+                     const QPen& minorCirclePen );
+
+     /**
      * @brief Renders a latitude line within the defined view bounding box.
      * @param painter the painter used to draw the latitude line
      * @param latitude the latitude of the coordinate line measured in degree .
@@ -136,6 +146,10 @@ class GraticulePlugin : public RenderPlugin
     // Maps the zoom factor to the amount of lines per 360 deg
     QMap<qreal,qreal> m_boldLineMap;
     QMap<qreal,qreal> m_normalLineMap;
+
+    QPen m_majorCirclePen;
+    QPen m_minorCirclePen;
+    QPen m_shadowPen;
 };
 
 }

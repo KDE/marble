@@ -68,6 +68,10 @@ void GraticulePlugin::initialize ()
 {
     // Initialize range maps that map the zoom to the number of coordinate grid lines.
     initLineMaps( GeoDataCoordinates::defaultNotation() );
+    m_majorCirclePen = QPen( QColor( Qt::yellow ) );
+    m_minorCirclePen = QPen( QColor( Qt::white ) );
+    m_shadowPen = QPen( Qt::NoPen );
+//    m_shadowPen = QPen( QColor( 0, 0, 0, 128 ) );
 }
 
 bool GraticulePlugin::isInitialized () const
@@ -93,19 +97,6 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
         initLineMaps( GeoDataCoordinates::defaultNotation() );
     }
 
-    GeoDataLatLonAltBox viewLatLonAltBox = viewport->viewLatLonAltBox();
-
-/*
-    // TESTCASE
-    for ( int i = -90; i < 90 ; i+=3 ){
-        renderLatitudeCircle( painter, i, viewLatLonAltBox );
-    }
-
-    for ( int i = -180; i < 180.0 ; i+=3 ){
-        renderLongitudeHalfCircle( painter, i, viewLatLonAltBox );                
-    }
-*/
-
     // Setting the label font for the coordinate lines.
 #ifdef Q_OS_MACX
     int defaultFontSize = 10;
@@ -115,24 +106,41 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     QFont gridFont("Sans Serif");
     gridFont.setPointSize( defaultFontSize );    
+    gridFont.setBold( true );
 
-    QFont prominentLineFont = gridFont;
-    prominentLineFont.setBold( true );
-    painter->setFont( prominentLineFont );
+    painter->setFont( gridFont );
 
+    if ( m_shadowPen != Qt::NoPen ) {
+        painter->translate( +1.0, +1.0 );
+        renderGrid( painter, viewport, m_shadowPen, m_shadowPen );
+        painter->translate( -1.0, -1.0 );
+    }
+    renderGrid( painter, viewport, m_majorCirclePen, m_minorCirclePen );
+
+    painter->restore();
+
+    return true;
+}
+
+void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
+                                  const QPen& majorCirclePen,
+                                  const QPen& minorCirclePen )
+{
     // Render the normal grid
 
-    painter->setPen( QColor( Qt::white ) );
-//    painter->setPen( QPen( QBrush( Qt::white ), 0.75 ) );
+    painter->setPen( minorCirclePen );
+    // painter->setPen( QPen( QBrush( Qt::white ), 0.75 ) );
 
     // calculate the angular distance between coordinate lines of the normal grid
     qreal normalDegreeStep = 360.0 / m_normalLineMap.lowerBound(viewport->radius()).value();
 
-    renderLongitudeLines( painter, viewLatLonAltBox, 
-                          normalDegreeStep, normalDegreeStep, 
-                          Marble::LineStart | Marble::IgnoreXMargin );  
+    GeoDataLatLonAltBox viewLatLonAltBox = viewport->viewLatLonAltBox();
+
+    renderLongitudeLines( painter, viewLatLonAltBox,
+                          normalDegreeStep, normalDegreeStep,
+                          Marble::LineStart | Marble::IgnoreXMargin );
     renderLatitudeLines(  painter, viewLatLonAltBox, normalDegreeStep,
-                          Marble::LineStart | Marble::IgnoreYMargin );  
+                          Marble::LineStart | Marble::IgnoreYMargin );
 
     // Render some non-cut off longitude lines ..
     renderLongitudeLine( painter, 90.0, viewLatLonAltBox );
@@ -140,19 +148,25 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     // Render the bold grid
 
-//    painter->setPen( QPen( QBrush( Qt::white ), 2.0 ) );
+    if (    painter->mapQuality() == Marble::High
+         || painter->mapQuality() == Marble::Print ) {
 
-    // calculate the angular distance between coordinate lines of the bold grid
-    qreal boldDegreeStep = 360.0 / m_boldLineMap.lowerBound(viewport->radius()).value();
+        QPen boldPen = minorCirclePen;
+        boldPen.setWidthF( 1.5 );
+        painter->setPen( boldPen );
+    
+        // calculate the angular distance between coordinate lines of the bold grid
+        qreal boldDegreeStep = 360.0 / m_boldLineMap.lowerBound(viewport->radius()).value();
 
-    renderLongitudeLines( painter, viewLatLonAltBox, 
-                          boldDegreeStep, normalDegreeStep,
-                          Marble::NoLabel
-                        );  
-    renderLatitudeLines(  painter, viewLatLonAltBox, boldDegreeStep,                                    
-                          Marble::NoLabel );  
-
-    painter->setPen( QColor( Qt::yellow ) );
+        renderLongitudeLines( painter, viewLatLonAltBox,
+                            boldDegreeStep, normalDegreeStep,
+                            Marble::NoLabel
+                            );
+        renderLatitudeLines(  painter, viewLatLonAltBox, boldDegreeStep,
+                            Marble::NoLabel );
+    }
+                            
+    painter->setPen( majorCirclePen );
 
     // Render the equator
     renderLatitudeLine( painter, 0.0, viewLatLonAltBox, tr( "Equator" ) );
@@ -161,26 +175,22 @@ bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,
     renderLongitudeLine( painter, 0.0, viewLatLonAltBox, 0.0, tr( "Prime Meridian" ) );
     renderLongitudeLine( painter, 180.0, viewLatLonAltBox, 0.0, tr( "Antimeridian" ) );
 
-    QPen graticulePen = painter->pen();
-    graticulePen.setStyle( Qt::DotLine );        
-    painter->setPen( graticulePen );
+    QPen tropicsPen = majorCirclePen;
+    tropicsPen.setStyle( Qt::DotLine );
+    painter->setPen( tropicsPen );
 
     // Determine the planet's axial tilt
     qreal axialTilt = RAD2DEG * dataFacade()->planet()->epsilon();
 
     if ( axialTilt > 0 ) {
         // Render the tropics
-        renderLatitudeLine( painter, +axialTilt, viewLatLonAltBox, tr( "Tropic of Cancer" )  );        
-        renderLatitudeLine( painter, -axialTilt, viewLatLonAltBox, tr( "Tropic of Capricorn" ) );        
+        renderLatitudeLine( painter, +axialTilt, viewLatLonAltBox, tr( "Tropic of Cancer" )  );
+        renderLatitudeLine( painter, -axialTilt, viewLatLonAltBox, tr( "Tropic of Capricorn" ) );
 
         // Render the arctics
-        renderLatitudeLine( painter, +90.0 - axialTilt, viewLatLonAltBox, tr( "Arctic Circle" ) );        
-        renderLatitudeLine( painter, -90.0 + axialTilt, viewLatLonAltBox, tr( "Antarctic Circle" ) );        
-    }
-
-    painter->restore();
-
-    return true;
+        renderLatitudeLine( painter, +90.0 - axialTilt, viewLatLonAltBox, tr( "Arctic Circle" ) );
+        renderLatitudeLine( painter, -90.0 + axialTilt, viewLatLonAltBox, tr( "Antarctic Circle" ) );
+    }    
 }
 
 void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude,
