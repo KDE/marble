@@ -25,6 +25,8 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QCursor>
 
+#include "marble_export.h"
+
 class QEvent;
 class QTimer;
 class QRubberBand;
@@ -37,7 +39,7 @@ class MarbleWidget;
 class MarbleMap;
 class MarbleWidgetPopupMenu;
 
-class MarbleWidgetInputHandler  : public QObject
+class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
 {
     Q_OBJECT
 
@@ -63,18 +65,20 @@ class MarbleWidgetInputHandler  : public QObject
     void restoreViewContext();
 
  protected:
-    Q_DISABLE_COPY( MarbleWidgetInputHandler )
     MarbleWidget  *m_widget;
     MarbleModel   *m_model;
 
     bool     m_positionSignalConnected;
 
     QTimer   *m_mouseWheelTimer;
+	
+ private:
+    Q_DISABLE_COPY( MarbleWidgetInputHandler )
 };
 
 
 
-class MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
+class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
 {
  Q_OBJECT
 
