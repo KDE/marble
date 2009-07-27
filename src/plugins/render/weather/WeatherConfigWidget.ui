@@ -16,12 +16,19 @@
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
     <widget class="QGroupBox" name="m_informationGroupBox">
+     <property name="toolTip">
+      <string/>
+     </property>
      <property name="title">
       <string>Information</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QCheckBox" name="m_weatherConditionBox">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;\np, li { white-space: pre-wrap; }\n&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Here you can choose if you want the weather condition to be shown. For example clouds or clear sky. Marble will only show the condition if this information is available.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</string>
+        </property>
         <property name="text">
          <string>Weather condition</string>
         </property>
@@ -29,6 +36,10 @@
       </item>
       <item>
        <widget class="QCheckBox" name="m_temperatureBox">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;\np, li { white-space: pre-wrap; }\n&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Selects if you want the temperature to be shown. The temperature will only be shown for the stations it is available for.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</string>
+        </property>
         <property name="text">
          <string>Temperature</string>
         </property>
@@ -36,6 +47,10 @@
       </item>
       <item>
        <widget class="QCheckBox" name="m_windDirectionBox">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;\np, li { white-space: pre-wrap; }\n&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select if you want the wind direction to be shown. The wind direction will only be shown if it is available for the particular station.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</string>
+        </property>
         <property name="text">
          <string>Wind direction</string>
         </property>
@@ -43,6 +58,10 @@
       </item>
       <item>
        <widget class="QCheckBox" name="m_windSpeedBox">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;\np, li { white-space: pre-wrap; }\n&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Select if you want the wind speed to be shown. The wind speed will only be shown if it is available for the particular station.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</string>
+        </property>
         <property name="text">
          <string>Wind speed</string>
         </property>
@@ -68,6 +87,10 @@
         </item>
         <item>
          <widget class="QComboBox" name="m_temperatureComboBox">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;\np, li { white-space: pre-wrap; }\n&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The unit that gets used to measure the temperature.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</string>
+          </property>
           <item>
            <property name="text">
             <string>Celsius</string>
@@ -93,6 +116,10 @@
         </item>
         <item>
          <widget class="QComboBox" name="m_windSpeedComboBox">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;\np, li { white-space: pre-wrap; }\n&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The unit that gets used to measure the wind speed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</string>
+          </property>
           <item>
            <property name="text">
             <string>Kilometer per hour</string>
@@ -133,6 +160,10 @@
         </item>
         <item>
          <widget class="QComboBox" name="m_pressureComboBox">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;\np, li { white-space: pre-wrap; }\n&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The unit that gets used to measure the air pressure.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;
+</string>
+          </property>
           <item>
            <property name="text">
             <string>Hecto Pascal</string>
