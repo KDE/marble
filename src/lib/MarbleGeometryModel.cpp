@@ -132,7 +132,7 @@ int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
     }
 
     int size = 0;
-    if( reinterpret_cast<GeoDataFeature*>( parentItem ) &&
+    if( dynamic_cast<GeoDataFeature*>( parentItem ) &&
        (static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataDocumentId ||
         static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataFolderId ) )
     {
@@ -140,7 +140,7 @@ int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
         size = folder.features().size();
     }
 
-    if( reinterpret_cast<GeoDataFeature*>( parentItem ) &&
+    if( dynamic_cast<GeoDataFeature*>( parentItem ) &&
        static_cast<GeoDataFeature*>( parentItem )->featureId() == GeoDataPlacemarkId )
     {
         /* there is only one GeoDataGeometry Object per Placemark; if Styles
@@ -148,7 +148,7 @@ int MarbleGeometryModel::rowCount( const QModelIndex &parent ) const
         size = 1;
     }
 
-    if( reinterpret_cast<GeoDataGeometry*>( parentItem ) &&
+    if( dynamic_cast<GeoDataGeometry*>( parentItem ) &&
         static_cast<GeoDataGeometry*>( parentItem )->geometryId() == GeoDataMultiGeometryId )
     {
         size = static_cast<GeoDataMultiGeometry*>( parentItem )->size();
