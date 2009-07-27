@@ -39,6 +39,11 @@ class GeoDataPlacemarkPrivate;
  * mountain.  It is filled with data by the KML or GPX loader and the
  * PlacemarkModel makes use of it.
  *
+ * A Placemark can have an associated geometry which will be rendered to the map
+ * along with the placemark's point icon. If you would like to render more than
+ * one geometry for any one placemark than use @see setGeometry() to set add a
+ * @see MultiGeometry.
+ *
  * This is more or less only a GeoDataFeature with a geographic
  * position and a country code attached to it.  The country code is
  * not provided in a KML file.
@@ -84,8 +89,10 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     GeoDataCoordinates coordinate() const;
 
     /**
-    * Return a pointer to the current Geometry object
-    */
+     * The geometry of the GeoDataPlacemark is to be rendered to the marble map
+     * along with the icon at the coordinate associated with this Placemark.
+     * @return a pointer to the current Geometry object
+     */
     GeoDataGeometry* geometry() const;
 
     /**
@@ -106,9 +113,11 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     void setCoordinate( const GeoDataPoint &point );
 
     /**
-    * Set any kind of @p GeoDataGeometry like @p GeoDataPoint , 
-    * @p GeoDataLineString , @p GeoDataLinearRing , @p GeoDataMultiGeometry
-    */
+     * Sets the current Geometry of this Placmark. @see geometry() and the class 
+     * overview for description of the geometry consept. The geometry can be set 
+     * to any @see GeoDataGeometry like @see GeoDataPoint,@see GeoDataLineString,
+     * @see GeoDataLinearRing and @see GeoDataMultiGeometry
+     */
     void setGeometry( const GeoDataPoint& entry );
     void setGeometry( const GeoDataLineString& entry );
     void setGeometry( const GeoDataLinearRing& entry );

@@ -10,6 +10,7 @@
 
 #include "OsmWayGraphicsItem.h"
 
+#include "GeoDataPlacemark.h"
 #include "GeoPainter.h"
 #include "OsmNodeGraphicsItem.h"
 #include "OsmNodeTagHandler.h"
@@ -21,13 +22,19 @@ namespace Marble
 {
 
 OsmWayGraphicsItem::OsmWayGraphicsItem()
-        : GeoLineStringGraphicsItem()
+        : GeoGraphicsItem()
 {
+    m_placemark = new GeoDataPlacemark();
+    m_placemark->setGeometry( GeoDataLineString() );
+}
+
+OsmWayGraphicsItem::~OsmWayGraphicsItem()
+{
+    delete m_placemark;
 }
 
 void OsmWayGraphicsItem::addNodeReferenceId( int reference )
 {
-    m_nodeIdList.append( reference );
     if( osm::OsmNodeTagHandler::nodeRef.contains( reference ) ) {
         OsmNodeGraphicsItem* node = osm::OsmNodeTagHandler::nodeRef.value( reference );
         append( node->point() );
@@ -37,12 +44,24 @@ void OsmWayGraphicsItem::addNodeReferenceId( int reference )
     }
 }
 
+void OsmWayGraphicsItem::append( const GeoDataPoint& point )
+{
+    GeoDataLineString* line = dynamic_cast<GeoDataLineString*>(m_placemark->geometry());
+    if( line ) {
+        line->append( point );
+    }
+}
+
 void OsmWayGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
                                 const QString& renderPos, GeoSceneLayer* layer )
 {
     painter->save();
+
     painter->setPen( Qt::black );
-    painter->drawPolyline( m_lineString );
+    if( m_placemark->geometry() ) {
+        painter->drawPolyline( *m_placemark->geometry() );
+    }
+
     painter->restore();
 }
 

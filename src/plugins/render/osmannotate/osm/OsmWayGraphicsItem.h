@@ -11,15 +11,18 @@
 #ifndef OSMWAYGRAPHICSITEM_H
 #define OSMWAYGRAPHICSITEM_H
 
-#include "GeoLineStringGraphicsItem.h"
-#include "marble_export.h"
+#include "GeoGraphicsItem.h"
 
 namespace Marble{
 
-class OsmWayGraphicsItem : public GeoLineStringGraphicsItem
+class GeoDataPlacemark;
+class GeoDataPoint;
+
+class OsmWayGraphicsItem : public GeoGraphicsItem
 {
 public:
     OsmWayGraphicsItem();
+    virtual ~OsmWayGraphicsItem();
 
     /**
      * This method is intended to be used only while parsing OSM files. It allows
@@ -30,11 +33,18 @@ public:
      */
     void addNodeReferenceId( int reference );
 
+    /**
+     * This method is intended to append a @see GeoDataPoint to the internal
+     * data representation of this OSM Way item. This only appends to the end of
+     * the Line String that represents this OSM Way and hense extends its length
+     */
+    void append( const GeoDataPoint& point );
+
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
 
 private:
-    QList<int> m_nodeIdList;
+    GeoDataPlacemark*   m_placemark;
 };
 
 }
