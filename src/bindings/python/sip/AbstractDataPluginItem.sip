@@ -55,10 +55,10 @@ public:
     void                    setId (const QString& id);
     qreal                   addedAngularResolution () const;
     void                    setAddedAngularResolution (qreal resolution);
-    virtual QAction*        action () = 0;
+    virtual QAction*        action ();
     virtual QString         itemType () const = 0;
     virtual bool            initialized () = 0;
-    virtual void            addDownloadedFile (const QString& url, const QString& type) = 0;
+    virtual void            addDownloadedFile (const QString& url, const QString& type);
     virtual void            paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0) = 0;
     virtual bool            operator< (const Marble::AbstractDataPluginItem* other) const = 0;
 
