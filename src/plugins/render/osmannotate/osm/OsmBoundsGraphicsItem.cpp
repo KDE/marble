@@ -28,6 +28,7 @@ OsmBoundsGraphicsItem::OsmBoundsGraphicsItem()
 void OsmBoundsGraphicsItem::append( const GeoDataCoordinates& value )
 {
     m_lineString.append( value );
+    setCoordinate( m_lineString.latLonAltBox().center() );
 }
 
 void OsmBoundsGraphicsItem::paint( GeoPainter* painter, ViewportParams * viewport,

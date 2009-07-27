@@ -10,11 +10,6 @@
 
 #include "OsmAnnotatePlugin.h"
 
-#include <QtGui/QColor>
-#include <QtGui/QPixmap>
-#include <QtGui/QRadialGradient>
-#include <QtGui/QPushButton>
-#include <QtGui/QPainterPath>
 #include <QtGui/QFileDialog>
 
 //#include <Phonon/MediaObject>
@@ -22,13 +17,10 @@
 
 #include <QtCore/QDebug>
 #include <QtGui/QAction>
-#include "ViewportParams.h"
 #include "AbstractProjection.h"
 #include "AreaAnnotation.h"
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
-#include "GeoDataDocument.h"
-#include "GeoDataCoordinates.h"
 #include "GeoDataParser.h"
 #include "MarbleWidget.h"
 #include "osm/OsmBoundsGraphicsItem.h"
@@ -212,10 +204,12 @@ void OsmAnnotatePlugin::loadOsmFile()
         if( m_itemModel->size() > 0 ) {
             OsmBoundsGraphicsItem* item;
             // mostly guarenteed that the first item will be a bounds item
+            // if not then don't centre on anything
             item = dynamic_cast<OsmBoundsGraphicsItem*>( m_itemModel->first() );
             if( item ) {
-                //get the place to zoom to
-                qDebug() << item->coordinate().toString();
+                // FIXME: uncomment this line if you would like to recreate the
+                // crash in BUG:201681
+//                m_marbleWidget->centerOn( item->coordinate(), false );
                 //get the zoom level
                 // difficult?
             }

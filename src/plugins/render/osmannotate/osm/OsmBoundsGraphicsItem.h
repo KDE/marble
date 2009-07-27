@@ -34,7 +34,14 @@ public:
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
 private:
-    GeoDataLineString m_lineString;
+    /**
+     * This class is using a GeoDataLineString as its data representation so
+     * that it can be closer to the visual representation. It does not make
+     * sense to use a LatLon box as it does not explicitly have a geographical
+     * representation.
+     */
+    GeoDataLineString   m_lineString;
+
     QPen    m_pen;
 };
 
