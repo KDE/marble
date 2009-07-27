@@ -298,7 +298,7 @@ void GeoPainter::drawText ( const GeoDataCoordinates & position,
 }
 
 
-void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint,
+void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPosition,
                                qreal width, qreal height,
                                bool isGeoProjected )
 {
@@ -308,7 +308,7 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint,
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( !isGeoProjected ) {
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
+        bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -322,9 +322,9 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint,
         // Initialize variables
         qreal centerLon = 0.0;
         qreal centerLat = 0.0;
-        qreal altitude = centerPoint.altitude();
-        centerPoint.geoCoordinates( centerLon, centerLat,
-                                    GeoDataCoordinates::Degree );
+        qreal altitude = centerPosition.altitude();
+        centerPosition.geoCoordinates( centerLon, centerLat,
+                                       GeoDataCoordinates::Degree );
 
         // Ensure a valid latitude range: 
         if ( centerLat + 0.5 * height > 90.0 || centerLat - 0.5 * height < -90.0 ) {
@@ -371,7 +371,85 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPoint,
 }
 
 
-void GeoPainter::drawImage ( const GeoDataCoordinates & centerPoint,
+QRegion GeoPainter::regionFromEllipse ( const GeoDataCoordinates & centerPosition,
+                                        qreal width, qreal height,
+                                        bool isGeoProjected,
+                                        qreal strokeWidth )
+{
+    int pointRepeatNum;
+    qreal y;
+    bool globeHidesPoint;
+    AbstractProjection *projection = d->m_viewport->currentProjection();
+
+    if ( !isGeoProjected ) {
+        QRegion regions;
+
+        bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
+
+        if ( visible ) {
+            // Draw all the x-repeat-instances of the point on the screen
+            for( int it = 0; it < pointRepeatNum; ++it ) {
+                regions += QRegion( d->m_x[it] - width / 2.0,
+                                    y - height / 2.0,
+                                    width + strokeWidth,
+                                    height + strokeWidth,
+                                    QRegion::Ellipse );
+            }
+        }
+        return regions;
+    }
+    else {
+        // Initialize variables
+        qreal centerLon = 0.0;
+        qreal centerLat = 0.0;
+        qreal altitude = centerPosition.altitude();
+        centerPosition.geoCoordinates( centerLon, centerLat,
+                                       GeoDataCoordinates::Degree );
+
+        // Ensure a valid latitude range:
+        if ( centerLat + 0.5 * height > 90.0 || centerLat - 0.5 * height < -90.0 ) {
+            return QRegion();
+        }
+
+        // Don't show the ellipse if it's too small:
+        GeoDataLatLonBox ellipseBox( centerLat + 0.5 * height, centerLat - 0.5 * height,
+                                     centerLon + 0.5 * width,  centerLon - 0.5 * width,
+                                     GeoDataCoordinates::Degree );
+        if ( !d->m_viewport->viewLatLonAltBox().intersects( ellipseBox ) ||
+             !d->m_viewport->resolves( ellipseBox ) ) return QRegion();
+
+        GeoDataLinearRing ellipse;
+        qreal lon = 0.0;
+        qreal lat = 0.0;
+
+        // Optimizing the precision by determining the size which the
+        // ellipse covers on the screen:
+        qreal degreeResolution = d->m_viewport->angularResolution() * RAD2DEG;
+        // To create a circle shape even for very small precision we require uneven numbers:
+        int precision = width / degreeResolution / 8 + 1;
+        if ( precision > 81 ) precision = 81;
+
+        // Calculate the shape of the upper half of the ellipse:
+        for ( int i = 0; i <= precision; ++i ) {
+            qreal t = 1.0 - 2.0 * (qreal)(i) / (qreal)(precision);
+            lat = centerLat + 0.5 * height * sqrt( 1.0 - t * t );
+            lon = centerLon + 0.5 * width * t;
+            ellipse << GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
+        }
+        // Calculate the shape of the lower half of the ellipse:
+        for ( int i = 0; i <= precision; ++i ) {
+            qreal t = 2.0 * (qreal)(i) / (qreal)(precision) -  1.0;
+            lat = centerLat - 0.5 * height * sqrt( 1.0 - t * t );
+            lon = centerLon + 0.5 * width * t;
+            ellipse << GeoDataCoordinates( lon, lat, altitude, GeoDataCoordinates::Degree );
+        }
+
+        return regionFromPolygon( ellipse, Qt::OddEvenFill, strokeWidth );
+    }
+}
+    
+
+void GeoPainter::drawImage ( const GeoDataCoordinates & centerPosition,
                              const QImage & image /*, bool isGeoProjected */ )
 {
     // isGeoProjected = true would project the image/pixmap onto the globe. This
@@ -384,7 +462,7 @@ void GeoPainter::drawImage ( const GeoDataCoordinates & centerPoint,
     AbstractProjection *projection = d->m_viewport->currentProjection();
 
 //    if ( !isGeoProjected ) {
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, image.size(), globeHidesPoint );
+        bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, image.size(), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -396,7 +474,7 @@ void GeoPainter::drawImage ( const GeoDataCoordinates & centerPoint,
 }
 
 
-void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPoint,
+void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPosition,
                               const QPixmap & pixmap /* , bool isGeoProjected */ )
 {
     int pointRepeatNum;
@@ -406,7 +484,7 @@ void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPoint,
 
 //    if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, pixmap.size(), globeHidesPoint );
+        bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, pixmap.size(), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -797,7 +875,7 @@ QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinate
 }
 
 
-void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPoint,
+void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPosition,
                                  int width, int height,
                                  int xRnd, int yRnd,
                                  bool isGeoProjected )
@@ -809,7 +887,7 @@ void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPoint,
 
     if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( centerPoint, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
+        bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen

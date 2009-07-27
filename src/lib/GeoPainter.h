@@ -256,6 +256,22 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
 
 /*!
+    \brief Creates a region for an ellipse at a given position
+
+    A QRegion object is created that represents the area covered by
+    GeoPainter::drawEllipse(). As such it can be used e.g. for input event
+    handling for objects that have been painted using GeoPainter::drawEllipse().
+
+    The \a strokeWidth allows to extrude the QRegion by half the amount of
+    "stroke width" pixels. For input event handling it's always advisable to use
+    a width that is slightly bigger than the width of the painter's pen.
+*/
+    QRegion regionFromEllipse ( const GeoDataCoordinates & centerPosition,
+                                qreal width, qreal height, bool isGeoProjected = false,
+                                qreal strokeWidth = 3 );
+
+
+/*!
     \brief Draws an image at the given position.
     The image is placed with its center located at the given \a centerPosition.
 
@@ -399,7 +415,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     in screen coordinates. In this case the \a width and the \a height
     are interpreted to be pixels.
 */
-    void drawRect ( const GeoDataCoordinates & centerPoint,
+    void drawRect ( const GeoDataCoordinates & centerPosition,
                     qreal width, qreal height,
                     bool isGeoProjected = false );
 
@@ -419,7 +435,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     a width that is slightly bigger than the width of the painter's pen. This is
     especially true for small objects.
 */
-    QRegion regionFromRect ( const GeoDataCoordinates & centerPoint,
+    QRegion regionFromRect ( const GeoDataCoordinates & centerPosition,
                              qreal width, qreal height,
                              bool isGeoProjected = false,
                              qreal strokeWidth = 3 );
@@ -447,7 +463,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     in screen coordinates. In this case the \a width and the \a height
     are interpreted to be pixels.
 */
-    void drawRoundRect ( const GeoDataCoordinates & centerPoint,
+    void drawRoundRect ( const GeoDataCoordinates & centerPosition,
                          int width, int height,
                          int xRnd = 25, int yRnd = 25,
                          bool isGeoProjected = false );
