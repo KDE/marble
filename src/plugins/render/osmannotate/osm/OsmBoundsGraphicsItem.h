@@ -33,6 +33,7 @@ public:
 
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );
+    virtual GeoDataLatLonBox    latLonBox();
 private:
     /**
      * This class is using a GeoDataLineString as its data representation so

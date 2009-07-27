@@ -55,6 +55,7 @@ class TileCreator;
 class SunLocator;
 class GpxFileModel;
 class FileViewModel;
+class GeoDataLatLonBox;
 class GeoPainter;
 class RenderPlugin;
 class AbstractFloatItem;
@@ -629,6 +630,15 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *               by looking vertically down.
      */
     void  centerOn( const GeoDataCoordinates &point, bool animated = false );
+
+    /**
+     * @brief Center the view on a bounding box so that it completley fills the viewport
+     * This method not only centers on the center of the GeoDataLatLon box but it also
+     * adjusts the zoom of the marble widget so that the LatLon box provided fills
+     * the viewport
+     * @param box The GeoDataLatLonBox to zoom and move the MarbleWidget to.
+     */
+    void centerOn( const GeoDataLatLonBox& box, bool animated = false );
 
     /**
      * @brief  Set the latitude for the center point

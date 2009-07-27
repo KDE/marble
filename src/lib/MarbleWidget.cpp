@@ -582,6 +582,23 @@ void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
     repaint();
 }
 
+void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
+{
+    //FIXME: actually centerOn the middle of the bounding box once BUG:201681 is fixed
+    qDebug() << Q_FUNC_INFO;
+    qDebug() << "Centering on: " << box.center().toString();
+
+    ViewportParams* viewparams = d->m_map->viewParams()->viewport();
+    int bigestScreenSize = viewparams->height() > viewparams->width() ?
+                     viewparams->height() : viewparams->width();
+
+    qreal bigestBoundingSize = box.height() > box.width() ? box.height() : box.width();
+
+    int zoomRadius = ( 0.25 * M_PI ) * ( bigestScreenSize / bigestBoundingSize );
+
+    setRadius( zoomRadius );
+}
+
 void MarbleWidget::updateAnimation( qreal updateValue )
 {
     GeoDataCoordinates position = d->m_physics->suggestedPosition();

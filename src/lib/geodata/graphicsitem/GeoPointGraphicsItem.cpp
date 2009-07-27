@@ -22,12 +22,12 @@ GeoPointGraphicsItem::GeoPointGraphicsItem()
 
 void GeoPointGraphicsItem::setPoint( const GeoDataPoint& point )
 {
-    m_point = GeoDataPoint( point );
+    m_point = point;
 }
 
 GeoDataPoint GeoPointGraphicsItem::point()
 {
-    return GeoDataPoint(m_point);
+    return m_point;
 }
 
 void GeoPointGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,

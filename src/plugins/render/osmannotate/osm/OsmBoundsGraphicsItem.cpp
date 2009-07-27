@@ -46,4 +46,9 @@ void OsmBoundsGraphicsItem::paint( GeoPainter* painter, ViewportParams * viewpor
 
 }
 
+GeoDataLatLonBox OsmBoundsGraphicsItem::latLonBox()
+{
+    return GeoDataLatLonBox( m_lineString.latLonAltBox() );
+}
+
 }

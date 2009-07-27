@@ -212,6 +212,7 @@ void OsmAnnotatePlugin::loadOsmFile()
 //                m_marbleWidget->centerOn( item->coordinate(), false );
                 //get the zoom level
                 // difficult?
+                m_marbleWidget->centerOn( item->latLonBox() );
             }
         }
 
