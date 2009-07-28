@@ -570,6 +570,13 @@ void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
         GeoDataCoordinates targetPosition = position;
         targetPosition.setAltitude( distance() );
 
+        // Avoid zero distance
+        qreal minDistance = 0.0001;
+        
+        if ( targetPosition <= 0.0001 ) {
+            targetPosition = minDistance;
+        }
+        
         d->m_physics->jumpTo( targetPosition );
     } else {
         qreal  lon, lat;
