@@ -260,6 +260,10 @@ int MarbleWidget::radius() const
 
 void MarbleWidget::setRadius(int radius)
 {
+    if ( radius == d->m_map->radius() ) {
+        return;
+    }
+        
     d->m_map->setRadius( radius );
 
     // We only have to repaint the background every time if the earth
