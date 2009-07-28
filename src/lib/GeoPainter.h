@@ -166,6 +166,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
                 the x-axis.
     \param yRnd Specifies the geometry of the rounded corners in pixels along
                 the y-axis.
+
+    \see GeoDataCoordinates
 */
     void drawAnnotation( const GeoDataCoordinates & position,
                          const QString & text,
@@ -177,6 +179,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 /*!
     \brief Draws a single point at a given geographic position.
     The point is drawn using the painter's pen color.
+
+    \see GeoDataCoordinates
 */
     void drawPoint ( const GeoDataCoordinates & position );
 
@@ -192,6 +196,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     The width allows to set the "stroke width" for the region. For input
     event handling it's always advisable to use a width that is slightly
     bigger than the width of the painter's pen.
+
+    \see GeoDataCoordinates
 */
     QRegion regionFromPoint ( const GeoDataCoordinates & position,
                               qreal strokeWidth = 3);
@@ -200,6 +206,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 /*!
     \brief Draws a single point at a given geographic position.
     The point is drawn using the painter's pen color.
+
+    \see GeoDataPoint
 */
     void drawPoint ( const GeoDataPoint & point );
 
@@ -250,6 +258,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     If \a isGeoProjected is false then the outline of the ellipse is drawn
     in screen coordinates. In this case the \a width and the \a height
     are interpreted to be pixels.
+
+    \see GeoDataCoordinates
 */
     void drawEllipse ( const GeoDataCoordinates & centerPosition,
                        qreal width, qreal height, bool isGeoProjected = false );
@@ -265,6 +275,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     The \a strokeWidth allows to extrude the QRegion by half the amount of
     "stroke width" pixels. For input event handling it's always advisable to use
     a width that is slightly bigger than the width of the painter's pen.
+
+    \see GeoDataCoordinates
 */
     QRegion regionFromEllipse ( const GeoDataCoordinates & centerPosition,
                                 qreal width, qreal height, bool isGeoProjected = false,
@@ -277,6 +289,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
     The image rendering is performed in screen coordinates and is
     not subject to the current projection.
+
+    \see GeoDataCoordinates
 */
     void drawImage ( const GeoDataCoordinates & centerPosition,
                      const QImage & image /* , bool isGeoProjected = false */ );
@@ -288,6 +302,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
     The image rendering is performed in screen coordinates and is
     not subject to the current projection.
+
+    \see GeoDataCoordinates
 */
     void drawPixmap ( const GeoDataCoordinates & centerPosition,
                       const QPixmap & pixmap /*, bool isGeoProjected = false */ );
@@ -300,6 +316,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     If \a isGeoProjected is true then the line is bent across the surface.
     If \a isGeoProjected is false then a straight line in screen coordinates is
     the result.
+
+    \see GeoDataCoordinates
 */
     void drawLine (  const GeoDataCoordinates & startPosition,
                      const GeoDataCoordinates & endPosition,
@@ -317,6 +335,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     The \a strokeWidth allows to extrude the QRegion by half the amount of
     "stroke width" pixels. For input event handling it's always advisable to use
     a width that is slightly bigger than the width of the painter's pen.
+
+    \see GeoDataCoordinates
 */
     QRegion regionFromLine ( const GeoDataCoordinates & startPosition,
                              const GeoDataCoordinates & endPosition,
@@ -332,6 +352,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     the painter's font property.
     The position of the \a labelText can be specified using the
     \a labelPositionFlags.
+
+    \see GeoDataLineString
 */
     void drawPolyline ( const GeoDataLineString & lineString,
                         const QString& labelText = QString(),
@@ -349,6 +371,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     The \a strokeWidth allows to extrude the QRegion by half the amount of
     "stroke width" pixels. For input event handling it's always advisable to use
     a width that is slightly bigger than the width of the painter's pen.
+
+    \see GeoDataLineString
 */
     QRegion regionFromPolyline ( const GeoDataLineString & lineString,
                                  qreal strokeWidth = 3 );
@@ -361,6 +385,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     background is painted using the current brush of the painter.
     Like in QPainter::drawPolygon() the \a fillRule specifies the
     fill algorithm that is used to fill the polygon.
+
+    \see GeoDataLinearRing
 */
     void drawPolygon ( const GeoDataLinearRing & linearRing,
                        Qt::FillRule fillRule = Qt::OddEvenFill );
@@ -383,6 +409,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
     For the polygon case a "cosmetic" strokeWidth of zero should provide the
     best performance.
+
+    \see GeoDataLinearRing
 */
     QRegion regionFromPolygon ( const GeoDataLinearRing & linearRing,
                                 Qt::FillRule fillRule, qreal strokeWidth = 3 );
@@ -395,6 +423,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     background is painted using the current brush of the painter.
     Like in QPainter::drawPolygon() the \a fillRule specifies the
     fill algorithm that is used to fill the polygon.
+
+    \see GeoDataPolygon
 */    
     void drawPolygon ( const GeoDataPolygon & polygon,
                        Qt::FillRule fillRule = Qt::OddEvenFill );
@@ -414,6 +444,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     If \a isGeoProjected is false then the outline of the rectangle is drawn
     in screen coordinates. In this case the \a width and the \a height
     are interpreted to be pixels.
+
+    \see GeoDataCoordinates
 */
     void drawRect ( const GeoDataCoordinates & centerPosition,
                     qreal width, qreal height,
@@ -434,6 +466,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     "stroke width" pixels. For input event handling it's always advisable to use
     a width that is slightly bigger than the width of the painter's pen. This is
     especially true for small objects.
+
+    \see GeoDataCoordinates
 */
     QRegion regionFromRect ( const GeoDataCoordinates & centerPosition,
                              qreal width, qreal height,
@@ -462,6 +496,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     If \a isGeoProjected is false then the outline of the rectangle is drawn
     in screen coordinates. In this case the \a width and the \a height
     are interpreted to be pixels.
+
+    \see GeoDataCoordinates
 */
     void drawRoundRect ( const GeoDataCoordinates & centerPosition,
                          int width, int height,
