@@ -497,7 +497,7 @@ qreal MarbleMap::distance() const
     // (about 800 pixels) equals the viewing angle of a human being.
 
     const qreal VIEW_ANGLE = 110.0;
-
+    
     return ( model()->planet()->radius() * 0.4
             / (qreal)( radius() )
             / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
@@ -505,6 +505,13 @@ qreal MarbleMap::distance() const
 
 void MarbleMap::setDistance( qreal distance )
 {
+    qreal minDistance = 0.0001;
+
+    if ( distance <= minDistance ) {
+        qDebug() << "Invalid distance: 0 m";
+        distance = minDistance;
+    }
+    
     const qreal VIEW_ANGLE = 110.0;
 
     setRadius( (int)( model()->planet()->radius() * 0.4
@@ -1203,6 +1210,7 @@ QString MarbleMap::distanceString() const
     // reality. Therefore we assume that the average window width
     // (about 800 pixels) equals the viewing angle of a human being.
     //
+
     qreal distance = ( model()->planet()->radius() * 0.4
 			/ (qreal)( radius() )
 			/ tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
