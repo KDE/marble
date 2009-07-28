@@ -505,7 +505,7 @@ qreal MarbleMap::distance() const
 
 void MarbleMap::setDistance( qreal distance )
 {
-    qreal minDistance = 0.0001;
+    qreal minDistance = 0.001;
 
     if ( distance <= minDistance ) {
         qDebug() << "Invalid distance: 0 m";

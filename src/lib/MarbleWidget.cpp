@@ -571,10 +571,10 @@ void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
         targetPosition.setAltitude( distance() );
 
         // Avoid zero distance
-        qreal minDistance = 0.0001;
+        qreal minDistance = 0.001;
         
-        if ( targetPosition <= 0.0001 ) {
-            targetPosition = minDistance;
+        if ( targetPosition.altitude() <= minDistance ) {
+            targetPosition.setAltitude( minDistance );
         }
         
         d->m_physics->jumpTo( targetPosition );
