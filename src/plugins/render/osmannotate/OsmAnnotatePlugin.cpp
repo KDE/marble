@@ -29,6 +29,16 @@
 namespace Marble
 {
 
+OsmAnnotatePlugin::OsmAnnotatePlugin()
+        : RenderPlugin()
+{
+
+}
+
+OsmAnnotatePlugin::~OsmAnnotatePlugin()
+{
+}
+
 QStringList OsmAnnotatePlugin::backendTypes() const
 {
     return QStringList( "osmannotation" );
@@ -203,15 +213,10 @@ void OsmAnnotatePlugin::loadOsmFile()
         // now zoom to the newly added OSM file
         if( m_itemModel->size() > 0 ) {
             OsmBoundsGraphicsItem* item;
-            // mostly guarenteed that the first item will be a bounds item
+            // mostly guaranteed that the first item will be a bounds item
             // if not then don't centre on anything
             item = dynamic_cast<OsmBoundsGraphicsItem*>( m_itemModel->first() );
             if( item ) {
-                // FIXME: uncomment this line if you would like to recreate the
-                // crash in BUG:201681
-//                m_marbleWidget->centerOn( item->coordinate(), false );
-                //get the zoom level
-                // difficult?
                 m_marbleWidget->centerOn( item->latLonBox() );
             }
         }

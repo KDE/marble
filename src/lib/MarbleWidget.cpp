@@ -595,19 +595,23 @@ void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
 
 void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
 {
-    //FIXME: actually centerOn the middle of the bounding box once BUG:201681 is fixed
-    qDebug() << Q_FUNC_INFO;
-    qDebug() << "Centering on: " << box.center().toString();
-
+    //work out the needed zoom level
     ViewportParams* viewparams = d->m_map->viewParams()->viewport();
     int maxScreenSize = viewparams->height() > viewparams->width() ?
                      viewparams->height() : viewparams->width();
 
     qreal maxBoundingSize = box.height() > box.width() ? box.height() : box.width();
 
-    int zoomRadius = ( 0.25 * M_PI ) * ( maxScreenSize / maxBoundingSize );
+    //prevent devide by zero
+    if( maxBoundingSize ) {
+        int zoomRadius = ( 0.25 * M_PI ) * ( maxScreenSize / maxBoundingSize );
+        setRadius( zoomRadius );
+    }
 
-    setRadius( zoomRadius );
+    //move the map
+    d->m_map->centerOn( box.center().longitude( GeoDataCoordinates::Degree ),
+                        box.center().latitude( GeoDataCoordinates::Degree ) );
+
     repaint();
 }
 

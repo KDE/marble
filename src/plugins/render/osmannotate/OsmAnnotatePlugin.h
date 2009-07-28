@@ -41,6 +41,9 @@ class OsmAnnotatePlugin :  public RenderPlugin
     MARBLE_PLUGIN( OsmAnnotatePlugin )
 
  public:
+    OsmAnnotatePlugin();
+    virtual ~OsmAnnotatePlugin();
+
     QStringList backendTypes() const;
 
     QString renderPolicy() const;
