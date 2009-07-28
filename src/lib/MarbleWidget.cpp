@@ -589,14 +589,15 @@ void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
     qDebug() << "Centering on: " << box.center().toString();
 
     ViewportParams* viewparams = d->m_map->viewParams()->viewport();
-    int bigestScreenSize = viewparams->height() > viewparams->width() ?
+    int maxScreenSize = viewparams->height() > viewparams->width() ?
                      viewparams->height() : viewparams->width();
 
-    qreal bigestBoundingSize = box.height() > box.width() ? box.height() : box.width();
+    qreal maxBoundingSize = box.height() > box.width() ? box.height() : box.width();
 
-    int zoomRadius = ( 0.25 * M_PI ) * ( bigestScreenSize / bigestBoundingSize );
+    int zoomRadius = ( 0.25 * M_PI ) * ( maxScreenSize / maxBoundingSize );
 
     setRadius( zoomRadius );
+    repaint();
 }
 
 void MarbleWidget::updateAnimation( qreal updateValue )
