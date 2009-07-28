@@ -251,6 +251,10 @@ int MarbleWidget::radius() const
 
 void MarbleWidget::setRadius(int radius)
 {
+    if ( radius == d->m_map->radius() ) {
+        return;
+    }
+        
     d->m_map->setRadius( radius );
 
     // We only have to repaint the background every time if the earth
@@ -557,6 +561,13 @@ void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
         GeoDataCoordinates targetPosition = position;
         targetPosition.setAltitude( distance() );
 
+        // Avoid zero distance
+        qreal minDistance = 0.001;
+        
+        if ( targetPosition.altitude() <= minDistance ) {
+            targetPosition.setAltitude( minDistance );
+        }
+        
         d->m_physics->jumpTo( targetPosition );
     } else {
         qreal  lon, lat;
