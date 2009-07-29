@@ -22,7 +22,7 @@
 
 using namespace Marble;
 
-GpsLayer::GpsLayer( GpxFileModel *fileModel, QObject *parent ) 
+GpsLayer::GpsLayer( GpxFileModel *fileModel, QObject *parent )
                 :AbstractLayer( parent )
 {
     m_currentPosition = new Waypoint( 0,0 );
@@ -37,12 +37,13 @@ GpsLayer::GpsLayer( GpxFileModel *fileModel, QObject *parent )
 //     m_gpsTrack = new Track();
     m_currentGpx = new GpxFile();
     m_fileModel->addFile( m_currentGpx );
-    m_tracking = new PositionTracking( m_currentGpx ); 
+    m_tracking = new PositionTracking( m_currentGpx );
 
 }
 
 GpsLayer::~GpsLayer()
 {
+    // leaks m_fileModel, see comment in clearModel()
     delete m_currentPosition;
     delete m_tracking;
     delete m_currentGpx;
@@ -60,12 +61,12 @@ PositionTracking* GpsLayer::getPositionTracking()
     return m_tracking;
 }
 
-void GpsLayer::paintLayer( ClipPainter *painter, 
+void GpsLayer::paintLayer( ClipPainter *painter,
                           const QSize &canvasSize, ViewParams *viewParams )
 {
     painter->save();
     if ( visible() ) {
-        m_currentPosition->draw( painter, canvasSize, 
+        m_currentPosition->draw( painter, canvasSize,
                                  viewParams );
         QRegion temp; // useless variable
         updateGps( canvasSize, viewParams, temp);
@@ -84,8 +85,8 @@ void GpsLayer::paintLayer( ClipPainter *painter,
     painter->restore();
 }
 
-void GpsLayer::paintCurrentPosition( ClipPainter *painter, 
-                                     const QSize &canvasSize, 
+void GpsLayer::paintCurrentPosition( ClipPainter *painter,
+                                     const QSize &canvasSize,
                                      ViewParams *viewParams )
 {
     m_tracking->draw( painter, canvasSize, viewParams );
@@ -113,6 +114,10 @@ void GpsLayer::addGpxFile( GpxFile* file )
 
 void GpsLayer::clearModel()
 {
+    // Here is a know memory leak, because m_fileModel does not get
+    // deleted in the destructor.
+    // It is recommended not to touch the code because any attempt to fix it
+    // would create a new leak. This stuff is conceptually broken.
     delete m_fileModel;
     m_fileModel = 0;
     m_fileModel = new GpxFileModel();
