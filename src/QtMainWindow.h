@@ -76,6 +76,7 @@ class MainWindow : public QMainWindow
     void  enterWhatsThis();
     void  aboutMarble();
     void  handbook();
+    void  openMapSite();
     void  openFile();
     void  setupStatusBar();
     void  lockPosition( bool );
@@ -94,6 +95,7 @@ class MainWindow : public QMainWindow
 
     // File Menu
     QAction *m_exportMapAct;
+    QAction *m_downloadAct;
     QAction *m_printAct;
     QAction *m_workOfflineAct;
     QAction *m_quitAct;
@@ -119,7 +121,7 @@ class MainWindow : public QMainWindow
     QAction *m_aboutQtAct;
     QAction *m_openAct;
     QAction *m_lockFloatItemsAct;
-    QAction *m_handbook;
+    QAction *m_handbookAct;
 
     QString m_position;
     QString m_distance;
