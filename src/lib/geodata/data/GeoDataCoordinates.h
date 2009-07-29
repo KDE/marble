@@ -19,15 +19,9 @@
 #include <QtCore/QVector>
 #include <QtCore/QString>
 
-#include <cmath>
-
 #include "geodata_export.h"
 #include "global.h"
 
-/* M_PI is a #define that may or may not be handled in <cmath> */
-#ifndef M_PI
-#define M_PI 3.14159265358979323846264338327950288419717
-#endif
 
 /*
 */
