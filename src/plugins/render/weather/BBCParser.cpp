@@ -344,6 +344,7 @@ void BBCParser::setupHashes() {
     dayConditions["mist"] = WeatherData::Mist;
     dayConditions["fog"] = WeatherData::Mist;
     dayConditions["foggy"] = WeatherData::Mist;
+    dayConditions["dense fog"] = WeatherData::Mist;
     dayConditions["tropical storm"] = WeatherData::Thunderstorm;
     dayConditions["hazy"] = WeatherData::Mist;
     dayConditions["light shower"] = WeatherData::LightShowersDay;
@@ -373,6 +374,7 @@ void BBCParser::setupHashes() {
     dayConditions["heavy snow shower"] = WeatherData::Snow;
     dayConditions["heavy snow showers"] = WeatherData::Snow;
     dayConditions["cloudy with heavy snow"] = WeatherData::Snow;
+    dayConditions["sandstorm"] = WeatherData::SandStorm;
     dayConditions["na"] = WeatherData::ConditionNotAvailable;
     dayConditions["N/A"] = WeatherData::ConditionNotAvailable;
     
@@ -389,6 +391,7 @@ void BBCParser::setupHashes() {
     nightConditions["mist"] = WeatherData::Mist;
     nightConditions["fog"] = WeatherData::Mist;
     nightConditions["foggy"] = WeatherData::Mist;
+    nightConditions["dense fog"] = WeatherData::Mist;
     nightConditions["tropical storm"] = WeatherData::Thunderstorm;
     nightConditions["hazy"] = WeatherData::Mist;
     nightConditions["light shower"] = WeatherData::LightShowersNight;
@@ -418,6 +421,7 @@ void BBCParser::setupHashes() {
     nightConditions["heavy snow shower"] = WeatherData::Snow;
     nightConditions["heavy snow showers"] = WeatherData::Snow;
     nightConditions["cloudy with heavy snow"] = WeatherData::Snow;
+    nightConditions["sandstorm"] = WeatherData::SandStorm;
     nightConditions["na"] = WeatherData::ConditionNotAvailable;
     nightConditions["N/A"] = WeatherData::ConditionNotAvailable;
 

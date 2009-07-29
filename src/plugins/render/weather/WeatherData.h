@@ -49,7 +49,8 @@ class WeatherData {
         LightSnow,
         Snow,
         RainSnow,
-        Mist
+        Mist,
+        SandStorm // no icon available
 //         FreezingDrizzle, would be nice, but no icon for the moment
 //         Flurries, would be nice, but no icon available
     };

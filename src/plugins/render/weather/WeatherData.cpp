@@ -146,6 +146,8 @@ class WeatherDataPrivate {
                             MarbleDirs::path( "weather/weather-snow-rain.svgz" ) );
             s_iconPath.insert( WeatherData::Mist,
                             MarbleDirs::path( "weather/weather-mist.svgz" ) );
+            s_iconPath.insert( WeatherData::SandStorm,
+                            MarbleDirs::path( "weather/weather-none-available.svgz" ) );
         }
     }
     
