@@ -36,7 +36,8 @@ MarbleWidgetInputHandler::MarbleWidgetInputHandler()
     : m_widget( 0 ),
       m_model( 0 ),
       m_positionSignalConnected( false ),
-      m_mouseWheelTimer( new QTimer(this) )
+      m_mouseWheelTimer( new QTimer(this) ),
+      m_disabledMouseButtons(Qt::NoButton)
 {
     connect( m_mouseWheelTimer, SIGNAL( timeout() ),
 	     this,              SLOT( restoreViewContext() ) );
@@ -58,9 +59,25 @@ void MarbleWidgetInputHandler::init(MarbleWidget *w)
     }
 }
 
+void MarbleWidgetInputHandler::setMouseButtonPopupEnabled(Qt::MouseButton mouseButton, bool enabled)
+{
+  if (enabled)
+  {
+    m_disabledMouseButtons &= ~Qt::MouseButtons(mouseButton);
+  }
+  else
+  {
+    m_disabledMouseButtons |= mouseButton;
+  }
+}
+
+bool MarbleWidgetInputHandler::isMouseButtonPopupEnabled(Qt::MouseButton mouseButton) const
+{
+  return !(m_disabledMouseButtons & mouseButton);
+}
 
 MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler()
-    : MarbleWidgetInputHandler(), m_popupmenu( 0 ), m_leftpopup(true)
+    : MarbleWidgetInputHandler(), m_popupmenu( 0 )
 {
     curpmtl.load( MarbleDirs::path("bitmaps/cursor_tl.xpm") );
     curpmtc.load( MarbleDirs::path("bitmaps/cursor_tc.xpm") );
@@ -122,7 +139,7 @@ void MarbleWidgetDefaultInputHandler::init(MarbleWidget *w)
         m_popupmenu    = new MarbleWidgetPopupMenu( m_widget, m_model );
     }
     connect( this, SIGNAL( rmbRequest( int, int ) ),
-                       m_popupmenu,    SLOT( showRmbMenu( int, int ) ) );
+                       this,    SLOT( showRmbMenu( int, int ) ) );
     connect( m_popupmenu, SIGNAL( addMeasurePoint( qreal, qreal ) ),
                        measureTool, SLOT( addMeasurePoint( qreal, qreal ) ) );
     connect( m_popupmenu, SIGNAL( removeLastMeasurePoint() ),
@@ -137,20 +154,16 @@ void MarbleWidgetDefaultInputHandler::init(MarbleWidget *w)
 
 void MarbleWidgetDefaultInputHandler::showLmbMenu( int x, int y)
 {
-  if (m_leftpopup)
-  {
-    m_popupmenu->showLmbMenu(x,y);
-  }
+    if ( isMouseButtonPopupEnabled( Qt::LeftButton ) ) {
+        m_popupmenu->showLmbMenu( x, y );
+    }
 }
 
-void MarbleWidgetDefaultInputHandler::setLeftMouseButtonPopup(bool enabled)
+void MarbleWidgetDefaultInputHandler::showRmbMenu( int x, int y)
 {
-  m_leftpopup = enabled;
-}
-    
-bool MarbleWidgetDefaultInputHandler::leftMouseButtonPopup()
-{
-  return m_leftpopup;
+    if ( isMouseButtonPopupEnabled( Qt::RightButton ) ) {
+        m_popupmenu->showRmbMenu( x, y );
+    }
 }
 
 bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )

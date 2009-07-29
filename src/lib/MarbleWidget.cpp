@@ -246,6 +246,10 @@ void MarbleWidget::setInputHandler(MarbleWidgetInputHandler *handler)
     }
 }
 
+MarbleWidgetInputHandler *MarbleWidget::inputHandler() const
+{
+  return d->m_inputhandler;
+}
 
 Quaternion MarbleWidget::planetAxis() const
 {

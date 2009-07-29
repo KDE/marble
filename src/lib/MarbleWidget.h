@@ -187,6 +187,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     MarbleModel  *model() const;
 
     /**
+     * Returns the current input handler
+     */
+    MarbleWidgetInputHandler *inputHandler() const;
+
+    /**
      * @brief Set the input handler
      */
     void setInputHandler(MarbleWidgetInputHandler *handler);
