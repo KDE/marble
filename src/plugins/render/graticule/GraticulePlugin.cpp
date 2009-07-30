@@ -143,13 +143,13 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
                           Marble::LineStart | Marble::IgnoreYMargin );
 
     // Render some non-cut off longitude lines ..
-    renderLongitudeLine( painter, 90.0, viewLatLonAltBox );
+    renderLongitudeLine( painter, +90.0, viewLatLonAltBox );
     renderLongitudeLine( painter, -90.0, viewLatLonAltBox );
 
     // Render the bold grid
 
-    if (    painter->mapQuality() == Marble::High
-         || painter->mapQuality() == Marble::Print ) {
+    if (    painter->mapQuality() == Marble::HighQuality
+         || painter->mapQuality() == Marble::PrintQuality ) {
 
         QPen boldPen = minorCirclePen;
         boldPen.setWidthF( 1.5 );

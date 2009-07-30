@@ -106,8 +106,8 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
 
     bool antialiased = false;
 
-    if (   viewParams->mapQuality() == Marble::High
-        || viewParams->mapQuality() == Marble::Print )
+    if (   viewParams->mapQuality() == Marble::HighQuality
+        || viewParams->mapQuality() == Marble::PrintQuality )
     {
         antialiased = true;
     }
@@ -180,8 +180,8 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
 
     bool antialiased = false;
 
-    if (   viewParams->mapQuality() == Marble::High
-        || viewParams->mapQuality() == Marble::Print )
+    if (   viewParams->mapQuality() == Marble::HighQuality
+        || viewParams->mapQuality() == Marble::PrintQuality )
     {
 	antialiased = true;
     }
@@ -258,8 +258,8 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
 
     bool antialiased = false;
 
-    if (   viewParams->mapQuality() == Marble::High
-        || viewParams->mapQuality() == Marble::Print )
+    if (   viewParams->mapQuality() == Marble::HighQuality
+        || viewParams->mapQuality() == Marble::PrintQuality )
     {
         antialiased = true;
     }
@@ -339,8 +339,8 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         QPen borderDashPen( Qt::black );
         m_vectorMap->setBrush( m_countryBrush );
 
-        if ( viewParams->mapQuality() == Marble::High 
-          || viewParams->mapQuality() == Marble::Print ) {
+        if ( viewParams->mapQuality() == Marble::HighQuality 
+          || viewParams->mapQuality() == Marble::PrintQuality ) {
 
             countryPen.setColor( penColor );
             m_vectorMap->setPen( countryPen );
@@ -356,7 +356,7 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
                 m_vectorMap->paintMap( painter, antialiased );
             }
         }
-        if ( viewParams->mapQuality() == Marble::Normal ) {
+        if ( viewParams->mapQuality() == Marble::NormalQuality ) {
 
             // Only paint fancy style if the coast line doesn't get painted as well
             // (as it looks a bit awkward otherwise)
@@ -374,8 +374,8 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
                 m_vectorMap->paintMap( painter, antialiased );
             }
         }
-        if ( viewParams->mapQuality() == Marble::Outline 
-          || viewParams->mapQuality() == Marble::Low ) {
+        if ( viewParams->mapQuality() == Marble::OutlineQuality 
+          || viewParams->mapQuality() == Marble::LowQuality ) {
 
             if ( !showCoastlines ) {
                 countryPen.setWidthF( 1.0 );

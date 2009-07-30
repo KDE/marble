@@ -32,7 +32,7 @@ void MarbleTest::timeDemo()
 {
     m_marbleWidget->zoomView( 1500 );
     m_marbleWidget->setMapThemeId( "earth/srtm/srtm.dgml" );
-    m_marbleWidget->setMapQuality( Marble::Normal );
+    m_marbleWidget->setMapQuality( Marble::NormalQuality );
 //    m_marbleWidget->resize( 800, 600 );
     m_marbleWidget->centerOn( 9.4, 54.8 );
 

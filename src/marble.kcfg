@@ -71,24 +71,24 @@
   <entry key="stillQuality" type="Enum" >
    <label>The quality at which a still map gets painted.</label>
    <choices name="Marble::MapQuality">
-    <choice name="MapQuality::Outline"/>
-    <choice name="MapQuality::Low"/>
-    <choice name="MapQuality::Normal"/>
-    <choice name="MapQuality::High"/>
-    <choice name="MapQuality::Print"/>
+    <choice name="MapQuality::OutlineQuality"/>
+    <choice name="MapQuality::LowQuality"/>
+    <choice name="MapQuality::NormalQuality"/>
+    <choice name="MapQuality::HighQuality"/>
+    <choice name="MapQuality::PrintQuality"/>
    </choices>
-   <default>Marble::High</default>
+   <default>Marble::HighQuality</default>
   </entry>
   <entry key="animationQuality" type="Enum" >
    <label>The quality at which an animated map gets painted.</label>
    <choices name="Marble::MapQuality">
-    <choice name="MapQuality::Outline"/>
-    <choice name="MapQuality::Low"/>
-    <choice name="MapQuality::Normal"/>
-    <choice name="MapQuality::High"/>
-    <choice name="MapQuality::Print"/>
+    <choice name="MapQuality::OutlineQuality"/>
+    <choice name="MapQuality::LowQuality"/>
+    <choice name="MapQuality::NormalQuality"/>
+    <choice name="MapQuality::HighQuality"/>
+    <choice name="MapQuality::PrintQuality"/>
    </choices>
-   <default>Marble::Low</default>
+   <default>Marble::LowQuality</default>
   </entry>
   <entry key="graphicsSystem" type="Enum" >
    <label>The graphics system that is used by Qt to render the graphics.</label>

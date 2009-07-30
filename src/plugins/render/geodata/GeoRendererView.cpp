@@ -186,7 +186,8 @@ void GeoRendererView::setPenStyle( QString mapped )
         m_currentPen.setWidthF( m_root->style( mapped ).lineStyle().width() );
     }
 
-    if ( m_painter->mapQuality() != Marble::High && m_painter->mapQuality() != Marble::Print )
+    if (    m_painter->mapQuality() != Marble::HighQuality
+         && m_painter->mapQuality() != Marble::PrintQuality )
     {
 //            m_currentPen.setWidth( 0 );
         QColor penColor = m_currentPen.color();

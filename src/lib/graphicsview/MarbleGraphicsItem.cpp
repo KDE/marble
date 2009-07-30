@@ -80,7 +80,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
             }
         
             cachePixmap.fill( Qt::transparent );
-            GeoPainter pixmapPainter( &( cachePixmap ), viewport, Normal );
+            GeoPainter pixmapPainter( &( cachePixmap ), viewport, NormalQuality );
             // We paint in best quality here, as we only have to paint once.
             pixmapPainter.setRenderHint( QPainter::Antialiasing, true );
             // The cache image will get a 0.5 pixel bounding to save antialiasing effects.

@@ -62,7 +62,7 @@ public:
 ViewParamsPrivate::ViewParamsPrivate()
     : m_mapTheme( 0 ),
       m_viewport(),
-      m_mapQuality( Normal ),
+      m_mapQuality( NormalQuality ),
       m_planetAxisUpdated(),
       m_radiusUpdated( 0 ),
       // Show / don't show parameters

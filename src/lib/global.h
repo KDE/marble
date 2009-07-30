@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Torsten Rahn <tackat@kde.org>"
+// Copyright 2007-2009 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 //
 
@@ -93,11 +93,11 @@ enum ViewContext {
  * @brief This enum is used to choose the map quality shown in the view.
  */
 enum MapQuality {
-    Outline,            ///< Only a wire representation is drawn
-    Low,                ///< Low resolution (e.g. interlaced)
-    Normal,             ///< Normal quality
-    High,               ///< High quality (e.g. antialiasing for lines)
-    Print               ///< Print quality
+    OutlineQuality,     ///< Only a wire representation is drawn
+    LowQuality,         ///< Low resolution (e.g. interlaced)
+    NormalQuality,      ///< Normal quality
+    HighQuality,        ///< High quality (e.g. antialiasing for lines)
+    PrintQuality        ///< Print quality
 }; 
 
 /**

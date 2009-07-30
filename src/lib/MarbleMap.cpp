@@ -285,7 +285,7 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
     //        PrintQuality. Either cache on a pixmap - or maybe
     //        better: Add to GlobeScanlineTextureMapper.
 
-    if ( m_viewParams.mapQuality() == Marble::Print )
+    if ( m_viewParams.mapQuality() == Marble::PrintQuality )
         drawFog( painter );
 }
 
@@ -302,8 +302,8 @@ void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect )
 
     bool antialiased = false;
 
-    if (   m_viewParams.mapQuality() == Marble::High
-        || m_viewParams.mapQuality() == Marble::Print ) {
+    if (   m_viewParams.mapQuality() == Marble::HighQuality
+        || m_viewParams.mapQuality() == Marble::PrintQuality ) {
             antialiased = true;
     }
 
@@ -583,7 +583,8 @@ QPixmap MarbleMap::mapScreenShot()
     QPixmap screenshotPixmap( size() );
     screenshotPixmap.fill( Qt::transparent );
 
-    GeoPainter painter( &screenshotPixmap, viewParams()->viewport(), Marble::Print );
+    GeoPainter painter( &screenshotPixmap, viewParams()->viewport(),
+                        Marble::PrintQuality );
     painter.begin( &screenshotPixmap );
     QRect dirtyRect( QPoint(), size() );
     paint( painter, dirtyRect );

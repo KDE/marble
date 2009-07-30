@@ -449,12 +449,14 @@ Marble::AngleUnit QtMarbleConfigDialog::angleUnit() const
 
 Marble::MapQuality QtMarbleConfigDialog::stillQuality() const
 {
-    return (Marble::MapQuality) d->m_settings->value( "View/stillQuality", Marble::High ).toInt();
+    return (Marble::MapQuality) d->m_settings->value( "View/stillQuality",
+                                Marble::HighQuality ).toInt();
 }
 
 Marble::MapQuality QtMarbleConfigDialog::animationQuality() const
 {
-    return (Marble::MapQuality) d->m_settings->value( "View/animationQuality", Marble::Low ).toInt();
+    return (Marble::MapQuality) d->m_settings->value( "View/animationQuality",
+                                Marble::LowQuality ).toInt();
 }
 
 int QtMarbleConfigDialog::labelLocalization() const
