@@ -833,7 +833,7 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     customPaint( &painter );
     d->m_map->d->paintOverlay( painter, dirtyRect );
 
-    qreal fps = 1000.0 / (qreal)( t.elapsed() );
+    qreal fps = 1000.0 / (qreal)( t.elapsed() + 1 );
     d->m_map->d->paintFps( painter, dirtyRect, fps );
     emit d->m_map->framesPerSecond( fps );
 }
