@@ -107,6 +107,9 @@ void MainWindow::createActions()
      connect( m_openAct, SIGNAL( triggered() ),
               this, SLOT( openFile() ) );
 
+     m_downloadAct = new QAction( QIcon(":/icons/get-hot-new-stuff.png"), tr("Download Maps...", this);
+     connect(m_downloadAct, SIGNAL(triggered()), this, SLOT(openMapSite()));
+              
      m_exportMapAct = new QAction( QIcon(":/icons/document-save-as.png"), tr("&Export Map..."), this);
      m_exportMapAct->setShortcut(tr("Ctrl+S"));
      m_exportMapAct->setStatusTip(tr("Save a screenshot of the map"));
@@ -177,10 +180,10 @@ void MainWindow::createActions()
      m_controlSunAct->setStatusTip(tr("Configure Sun Control"));
      connect(m_controlSunAct, SIGNAL(triggered()), this, SLOT( controlSun()));
 
-     m_handbook = new QAction( QIcon(":/icons/help-contents.png"), tr("Marble Desktop Globe &Handbook"), this);
-     m_handbook->setShortcut(tr("F1"));
-     m_handbook->setStatusTip(tr("Show the Handbook for Marble Desktop Globe"));
-     connect(m_handbook, SIGNAL(triggered()), this, SLOT(handbook()));
+     m_handbookAct = new QAction( QIcon(":/icons/help-contents.png"), tr("Marble Desktop Globe &Handbook"), this);
+     m_handbookAct->setShortcut(tr("F1"));
+     m_handbookAct->setStatusTip(tr("Show the Handbook for Marble Desktop Globe"));
+     connect(m_handbookAct, SIGNAL(triggered()), this, SLOT(handbook()));
 
      m_whatsThisAct = new QAction( QIcon(":/icons/help-whatsthis.png"), tr("What's &This"), this);
      m_whatsThisAct->setShortcut(tr("Shift+F1"));
@@ -201,6 +204,7 @@ void MainWindow::createMenus()
 {
     m_fileMenu = menuBar()->addMenu(tr("&File"));
     m_fileMenu->addAction(m_openAct);
+    m_fileMenu->addAction(m_downloadAct);
     m_fileMenu->addAction(m_exportMapAct);
     m_fileMenu->addAction(m_printAct);
     m_fileMenu->addSeparator();
@@ -242,7 +246,7 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_configDialogAct);
 
     m_helpMenu = menuBar()->addMenu(tr("&Help"));
-    m_helpMenu->addAction(m_handbook);
+    m_helpMenu->addAction(m_handbookAct);
     m_helpMenu->addSeparator();
     m_helpMenu->addAction(m_whatsThisAct);
     m_helpMenu->addSeparator();
@@ -337,6 +341,12 @@ void MainWindow::createStatusBar()
 {
     statusBar()->showMessage(tr("Ready"));
     statusBar()->hide();
+}
+
+void MainWindow::openMapSite()
+{
+    if( !QDesktopServices::openUrl( QUrl( "http://edu.kde.org/marble/maps.php" ) ) )
+    qDebug() << "URL not opened";
 }
 
 void MainWindow::exportMapScreenShot()
