@@ -26,11 +26,8 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
     virtual ~GeoGraphicsItemPrivate() {
     }
      
-    QList<QPointF> positions() {
-        QList<QPointF> list;
-        
-        list.append( m_positions );
-        return list;
+    QList<QPointF> positions() const {
+        return m_positions;
     }
     
     void setProjection( AbstractProjection *projection, ViewportParams *viewport ) {
