@@ -107,7 +107,7 @@ void MainWindow::createActions()
      connect( m_openAct, SIGNAL( triggered() ),
               this, SLOT( openFile() ) );
 
-     m_downloadAct = new QAction( QIcon(":/icons/get-hot-new-stuff.png"), tr("Download Maps...", this);
+     m_downloadAct = new QAction( QIcon(":/icons/get-hot-new-stuff.png"), tr("Download Maps..."), this);
      connect(m_downloadAct, SIGNAL(triggered()), this, SLOT(openMapSite()));
               
      m_exportMapAct = new QAction( QIcon(":/icons/document-save-as.png"), tr("&Export Map..."), this);
