@@ -485,6 +485,16 @@ void GeoDataFeature::setStyleMap( GeoDataStyleMap* styleMap )
     d->m_styleMap = styleMap;
 }
 
+GeoDataLookAt* GeoDataFeature::lookAt() const
+{
+	return p()->m_lookAt;
+}
+
+void GeoDataFeature::setLookAt( GeoDataLookAt* lookAt )
+{
+	p()->m_lookAt = lookAt;
+}
+	
 int GeoDataFeature::popularityIndex() const
 {
     return d->m_popularityIndex;

@@ -21,6 +21,7 @@
 #include <QtGui/QColor>
 
 #include "GeoDataObject.h"
+#include "GeoDataLookAt.h"
 #include "GeoGraphicsItem.h"
 
 #include "geodata_export.h"
@@ -262,7 +263,19 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     * Sets the styleMap of the feature
     */
     void setStyleMap( GeoDataStyleMap* map );
-    
+
+	/**
+	 * Returns pointer to the GeoDataLooAt of the feature.
+	 */
+	GeoDataLookAt* lookAt() const;
+
+	/**
+	 * Sets the lookAt of the placemark.
+	 * @param  LookAt  the new LookAt of the feature.
+	 */
+	void setLookAt( GeoDataLookAt *lookAt );
+
+	
 
     // ----------------------------------------------------------------
     // The following functions are use for painting, and mostly for placemarks.

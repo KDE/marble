@@ -130,6 +130,7 @@ void GeoDataCoordinates::setLongitude( qreal _lon, GeoDataCoordinates::Unit unit
     }
 }
 
+
 /*
  * call detach() at the start of all non-static, non-const functions
  */
@@ -147,6 +148,7 @@ void GeoDataCoordinates::setLatitude( qreal _lat, GeoDataCoordinates::Unit unit 
         break;
     }
 }
+
 
 void GeoDataCoordinates::geoCoordinates( qreal& lon, qreal& lat, 
                                GeoDataCoordinates::Unit unit ) const
@@ -167,7 +169,7 @@ void GeoDataCoordinates::geoCoordinates( qreal& lon, qreal& lat,
 
 qreal GeoDataCoordinates::longitude( GeoDataCoordinates::Unit unit ) const
 {
-    switch ( unit ) 
+    switch ( unit )
     {
     default:
     case Radian:
@@ -179,7 +181,7 @@ qreal GeoDataCoordinates::longitude( GeoDataCoordinates::Unit unit ) const
 
 qreal GeoDataCoordinates::latitude( GeoDataCoordinates::Unit unit ) const
 {
-    switch ( unit ) 
+    switch ( unit )
     {
     default:
     case Radian:

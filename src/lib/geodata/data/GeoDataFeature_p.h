@@ -104,6 +104,7 @@ class GeoDataFeaturePrivate
 
     GeoDataStyle* m_style;
     GeoDataStyleMap* m_styleMap;
+	GeoDataLookAt* m_lookAt;
     
     QAtomicInt  ref;
 };
