@@ -68,7 +68,7 @@ void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* view,
 
 void GeoWidgetBubble::setGeoWidget( QWidget* w )
 {
-    QPalette p( QColor(Qt::lightGray ), QColor( Qt::lightGray) );
+    QPalette p(Qt::lightGray, Qt::lightGray);
 
     m_widget= w;
     m_widget->setVisible(false);
