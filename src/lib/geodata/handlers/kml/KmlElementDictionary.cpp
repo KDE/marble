@@ -31,6 +31,7 @@ namespace kml
 const char* kmlTag_nameSpace20 = "http://earth.google.com/kml/2.0";
 const char* kmlTag_nameSpace21 = "http://earth.google.com/kml/2.1";
 const char* kmlTag_nameSpace22 = "http://earth.google.com/kml/2.2";
+const char* kmlTag_nameSpaceOgc22 = "http://www.opengis.net/kml/2.2";
 
 const char* kmlTag_address = "address";
 const char* kmlTag_AddressDetails = "AddressDetails";

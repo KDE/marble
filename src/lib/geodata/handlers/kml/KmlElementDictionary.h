@@ -31,6 +31,7 @@ namespace kml
     extern const char* kmlTag_nameSpace20;
     extern const char* kmlTag_nameSpace21;
     extern const char* kmlTag_nameSpace22;
+    extern const char* kmlTag_nameSpaceOgc22;
 
     extern const char* kmlTag_address;
     extern const char* kmlTag_AddressDetails;
@@ -188,11 +189,13 @@ namespace kml
 #define KML_DEFINE_TAG_HANDLER_20(Name) GEODATA_DEFINE_TAG_HANDLER(kml, Kml, Name, kmlTag_nameSpace20)
 #define KML_DEFINE_TAG_HANDLER_21(Name) GEODATA_DEFINE_TAG_HANDLER(kml, Kml, Name, kmlTag_nameSpace21)
 #define KML_DEFINE_TAG_HANDLER_22(Name) GEODATA_DEFINE_TAG_HANDLER(kml, Kml, Name, kmlTag_nameSpace22)
+#define KML_DEFINE_TAG_HANDLER_OGC22(Name) GEODATA_DEFINE_TAG_HANDLER(kml, Kml, Name, kmlTag_nameSpaceOgc22)
 
 #define KML_DEFINE_TAG_HANDLER(Name) \
 	KML_DEFINE_TAG_HANDLER_20(Name) \
 	KML_DEFINE_TAG_HANDLER_21(Name) \
-    KML_DEFINE_TAG_HANDLER_22(Name)
+    KML_DEFINE_TAG_HANDLER_22(Name) \
+    KML_DEFINE_TAG_HANDLER_OGC22(Name)
 
 }
 
