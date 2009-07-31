@@ -27,7 +27,8 @@ LabelGraphicsItemPrivate::LabelGraphicsItemPrivate()
 {
 }
 
-QFont LabelGraphicsItemPrivate::font() {
+QFont LabelGraphicsItemPrivate::font()
+{
     return QApplication::font();
 }
 
@@ -40,13 +41,15 @@ LabelGraphicsItem::LabelGraphicsItem( MarbleGraphicsItem *parent )
     setPadding( 4 );
 }
 
-void LabelGraphicsItem::setText( const QString& text ) {
+void LabelGraphicsItem::setText( const QString& text )
+{
     d->m_text = text;
     QFontMetrics metrics( d->font() );
     setContentSize( metrics.boundingRect( text ).size() );
 }
 
-void LabelGraphicsItem::clear() {
+void LabelGraphicsItem::clear()
+{
     d->m_text.clear();
     setSize( QSizeF( 0.0, 0.0 ) );
 }

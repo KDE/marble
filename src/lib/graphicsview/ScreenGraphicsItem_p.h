@@ -18,9 +18,11 @@
 
 #include <QtCore/QDebug>
 
-namespace Marble {
+namespace Marble
+{
 
-class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
+class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
+{
  public:
     ScreenGraphicsItemPrivate( ScreenGraphicsItem *screenGraphicsItem,
                                MarbleGraphicsItem *parent )
@@ -32,18 +34,21 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
           m_flags( 0 )
     {
     }
-    
-    virtual ~ScreenGraphicsItemPrivate() {
+
+    virtual ~ScreenGraphicsItemPrivate()
+    {
     }
-     
-    QList<QPointF> positions() {
+
+    QList<QPointF> positions()
+    {
         QList<QPointF> list;
 
         list.append( positivePosition() );
         return list;
     }
 
-    QPointF positivePosition() {
+    QPointF positivePosition()
+    {
         if ( !m_parentSize.isValid() ) {
             qDebug() << "Invalid screen size";
         }
@@ -56,8 +61,9 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
 
         return position;
     }
-    
-    void setProjection( AbstractProjection *projection, ViewportParams *viewport ) {
+
+    void setProjection( AbstractProjection *projection, ViewportParams *viewport )
+    {
         Q_UNUSED( projection );
 
         // If we have no parent
@@ -74,7 +80,8 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
         screenGraphicsItem->changeViewport( viewport );
     }
 
-    bool isMovable() {
+    bool isMovable()
+    {
         return ( m_flags & ScreenGraphicsItem::ItemIsMovable ) ? true : false;
     }
 

@@ -34,100 +34,122 @@ FrameGraphicsItem::FrameGraphicsItem( const QPointF& position, const QSizeF& siz
 {
 }
 
-FrameGraphicsItem::~FrameGraphicsItem() {
+FrameGraphicsItem::~FrameGraphicsItem()
+{
     delete d;
 }
 
-qreal FrameGraphicsItem::margin() const {
+qreal FrameGraphicsItem::margin() const
+{
     return d->m_margin;
 }
 
-void FrameGraphicsItem::setMargin( qreal margin ) {
+void FrameGraphicsItem::setMargin( qreal margin )
+{
     d->m_margin = margin;
     update();
 }
 
-qreal FrameGraphicsItem::marginTop() const {
+qreal FrameGraphicsItem::marginTop() const
+{
     return d->m_marginTop;
 }
 
-void FrameGraphicsItem::setMarginTop( qreal marginTop ) {
+void FrameGraphicsItem::setMarginTop( qreal marginTop )
+{
     d->m_marginTop = marginTop;
     update();
 }
 
-qreal FrameGraphicsItem::marginBottom() const {
+qreal FrameGraphicsItem::marginBottom() const
+{
     return d->m_marginBottom;
 }
 
-void FrameGraphicsItem::setMarginBottom( qreal marginBottom ) {
+void FrameGraphicsItem::setMarginBottom( qreal marginBottom )
+{
     d->m_marginBottom = marginBottom;
     update();
 }
 
-qreal FrameGraphicsItem::marginLeft() const {
+qreal FrameGraphicsItem::marginLeft() const
+{
     return d->m_marginLeft;
 }
 
-void FrameGraphicsItem::setMarginLeft( qreal marginLeft ) {
+void FrameGraphicsItem::setMarginLeft( qreal marginLeft )
+{
     d->m_marginLeft = marginLeft;
     update();
 }
 
-qreal FrameGraphicsItem::marginRight() const {
+qreal FrameGraphicsItem::marginRight() const
+{
     return d->m_marginRight;
 }
 
-void FrameGraphicsItem::setMarginRight( qreal marginRight ) {
+void FrameGraphicsItem::setMarginRight( qreal marginRight )
+{
     d->m_marginRight = marginRight;
     update();
 }
 
-qreal FrameGraphicsItem::borderWidth() const {
+qreal FrameGraphicsItem::borderWidth() const
+{
     return d->m_borderWidth;
 }
 
-void FrameGraphicsItem::setBorderWidth( qreal width ) {
+void FrameGraphicsItem::setBorderWidth( qreal width )
+{
     d->m_borderWidth = width;
     update();
 }
 
-qreal FrameGraphicsItem::padding() const {
+qreal FrameGraphicsItem::padding() const
+{
     return d->m_padding;
 }
 
-void FrameGraphicsItem::setPadding( qreal width ) {
+void FrameGraphicsItem::setPadding( qreal width )
+{
     d->m_padding = width;
 }
 
-QBrush FrameGraphicsItem::borderBrush() const {
+QBrush FrameGraphicsItem::borderBrush() const
+{
     return d->m_borderBrush;
 }
 
-void FrameGraphicsItem::setBorderBrush( const QBrush &brush ) {
+void FrameGraphicsItem::setBorderBrush( const QBrush &brush )
+{
     d->m_borderBrush = brush;
     update();
 }
 
-Qt::PenStyle FrameGraphicsItem::borderStyle () const {
+Qt::PenStyle FrameGraphicsItem::borderStyle () const
+{
     return d->m_borderStyle;
 }
 
-void FrameGraphicsItem::setBorderStyle( Qt::PenStyle style ) {
+void FrameGraphicsItem::setBorderStyle( Qt::PenStyle style )
+{
     d->m_borderStyle = style;
     update();
 }
 
-QBrush FrameGraphicsItem::background() const {
+QBrush FrameGraphicsItem::background() const
+{
     return d->m_backgroundBrush;
 }
 
-void FrameGraphicsItem::setBackground( const QBrush &background ) {
+void FrameGraphicsItem::setBackground( const QBrush &background )
+{
     d->m_backgroundBrush = background;
     update();
 }
 
-QRectF FrameGraphicsItem::contentRect( const QPointF& position ) const {
+QRectF FrameGraphicsItem::contentRect( const QPointF& position ) const
+{
     qreal marginTop = ( d->m_marginTop == 0.0 ) ? d->m_margin : d->m_marginTop;
     qreal marginBottom = ( d->m_marginBottom == 0.0 ) ? d->m_margin : d->m_marginBottom;
     qreal marginLeft = ( d->m_marginLeft == 0.0 ) ? d->m_margin : d->m_marginLeft;
@@ -143,7 +165,8 @@ QRectF FrameGraphicsItem::contentRect( const QPointF& position ) const {
     return contentRect;
 }
 
-QRectF FrameGraphicsItem::paintedRect( const QPointF& position ) const {
+QRectF FrameGraphicsItem::paintedRect( const QPointF& position ) const
+{
     qreal marginTop = ( d->m_marginTop == 0.0 ) ? d->m_margin : d->m_marginTop;
     qreal marginBottom = ( d->m_marginBottom == 0.0 ) ? d->m_margin : d->m_marginBottom;
     qreal marginLeft = ( d->m_marginLeft == 0.0 ) ? d->m_margin : d->m_marginLeft;
@@ -158,7 +181,8 @@ QRectF FrameGraphicsItem::paintedRect( const QPointF& position ) const {
     return paintedRect;
 }
 
-void FrameGraphicsItem::setContentSize( const QSizeF& size ) {
+void FrameGraphicsItem::setContentSize( const QSizeF& size )
+{
     qreal marginTop = ( d->m_marginTop == 0.0 ) ? d->m_margin : d->m_marginTop;
     qreal marginBottom = ( d->m_marginBottom == 0.0 ) ? d->m_margin : d->m_marginBottom;
     qreal marginLeft = ( d->m_marginLeft == 0.0 ) ? d->m_margin : d->m_marginLeft;
@@ -171,12 +195,14 @@ void FrameGraphicsItem::setContentSize( const QSizeF& size ) {
     setSize( totalSize );
 }
 
-QPainterPath FrameGraphicsItem::backgroundShape() const {
+QPainterPath FrameGraphicsItem::backgroundShape() const
+{
     return QPainterPath();
 }
 
 
-void FrameGraphicsItem::paintBackground( GeoPainter *painter ) {
+void FrameGraphicsItem::paintBackground( GeoPainter *painter )
+{
     painter->save();
 
     painter->setPen( QPen( d->m_borderBrush, d->m_borderWidth, d->m_borderStyle ) );

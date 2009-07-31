@@ -24,7 +24,8 @@ class QObject;
 class QRectF;
 class QString;
 
-namespace Marble {
+namespace Marble
+{
     
 class GeoPainter;
 class GeoSceneLayer;
@@ -32,7 +33,8 @@ class ViewportParams;
 
 class MarbleGraphicsItemPrivate;
 
-class MARBLE_EXPORT MarbleGraphicsItem {
+class MARBLE_EXPORT MarbleGraphicsItem
+{
     friend class MarbleGraphicsItemPrivate;
 
  public:

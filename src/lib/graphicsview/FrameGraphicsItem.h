@@ -15,7 +15,8 @@
 #include "marble_export.h"
 #include "ScreenGraphicsItem.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class FrameGraphicsItemPrivate;
 

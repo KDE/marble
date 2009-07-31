@@ -22,9 +22,11 @@
 #include<QtCore/QSizeF>
 #include<QtCore/QRect>
 
-namespace Marble {
+namespace Marble
+{
 
-class MarbleGraphicsItemPrivate {
+class MarbleGraphicsItemPrivate
+{
  public:
     MarbleGraphicsItemPrivate( MarbleGraphicsItem *marbleGraphicsItem,
                                MarbleGraphicsItem *parent = 0 )
@@ -39,8 +41,9 @@ class MarbleGraphicsItemPrivate {
             m_parent->p()->addChild( m_marbleGraphicsItem );
         }
     }
-    
-    virtual ~MarbleGraphicsItemPrivate() {
+
+    virtual ~MarbleGraphicsItemPrivate()
+    {
         // Delete all children
         if ( m_children ) {
             qDeleteAll( *m_children );
@@ -53,7 +56,8 @@ class MarbleGraphicsItemPrivate {
         }
     }
 
-    void addChild( MarbleGraphicsItem *child ) {
+    void addChild( MarbleGraphicsItem *child )
+    {
         if ( m_children == 0 ) {
             m_children = new QSet<MarbleGraphicsItem *>();
         }
@@ -61,52 +65,57 @@ class MarbleGraphicsItemPrivate {
         m_children->insert( child );
     }
 
-    void removeChild( MarbleGraphicsItem *child ) {
+    void removeChild( MarbleGraphicsItem *child )
+    {
         if ( m_children ) {
             m_children->remove( child );
         }
     }
-     
-    virtual QList<QPointF> positions() {
+
+    virtual QList<QPointF> positions()
+    {
         return QList<QPointF>();
     }
-    
-    void ensureValidCacheKey() {
+
+    void ensureValidCacheKey()
+    {
         if( m_cacheKey.isNull() ) {
             static unsigned int key = 0;
             m_cacheKey = QString( "MarbleGraphicsItem:" ) + QString::number( key );
             key++;
         }
     }
-    
-    QList<QRectF> boundingRects() {
+
+    QList<QRectF> boundingRects()
+    {
         QList<QRectF> list;
-        
+
         foreach( QPointF point, positions() ) {
             QRectF rect( point, m_size );
             if( rect.x() < 0 )
                 rect.setLeft( 0 );
             if( rect.y() < 0 )
                 rect.setTop( 0 );
-            
+
             list.append( rect );
         }
-        
+
         return list;
     }
-    
-    virtual void setProjection( AbstractProjection *projection, ViewportParams *viewport ) {
+
+    virtual void setProjection( AbstractProjection *projection, ViewportParams *viewport )
+    {
         Q_UNUSED( projection );
         Q_UNUSED( viewport );
     }
-    
+
     QSizeF m_size;
     QSize m_logicalCacheSize;
-    
+
     bool m_removeCachedPixmap;
-    
+
     MarbleGraphicsItem::CacheMode m_cacheMode;
-    
+
     // TODO: Substitute this by QPixmapCache::Key once it is available.
     QString m_cacheKey;
 

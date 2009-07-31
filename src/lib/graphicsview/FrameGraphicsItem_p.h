@@ -16,9 +16,11 @@
 #include<QtGui/QBrush>
 #include<QtGui/QPixmapCache>
 
-namespace Marble {
+namespace Marble
+{
 
-class FrameGraphicsItemPrivate {
+class FrameGraphicsItemPrivate
+{
  public:
     FrameGraphicsItemPrivate()
         : m_margin( 0.0 ),

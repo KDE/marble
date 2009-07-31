@@ -22,14 +22,16 @@ class QPoint;
 class QRect;
 class QString;
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoPainter;
 class ViewportParams;
 
 class ScreenGraphicsItemPrivate;
 
-class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem {
+class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
+{
  public:
     enum GraphicsItemFlag {
         ItemIsMovable = 0x1

@@ -23,7 +23,8 @@ ScreenGraphicsItem::ScreenGraphicsItem( MarbleGraphicsItem *parent )
 {
 }
 
-ScreenGraphicsItem::ScreenGraphicsItem( const QPointF& position, const QSizeF& size, MarbleGraphicsItem *parent )
+ScreenGraphicsItem::ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
+                                        MarbleGraphicsItem *parent )
     : MarbleGraphicsItem( new ScreenGraphicsItemPrivate( this, parent ) )
 {
     setPosition( position );
@@ -35,37 +36,45 @@ ScreenGraphicsItem::ScreenGraphicsItem( ScreenGraphicsItemPrivate *d_ptr )
 {
 }
 
-ScreenGraphicsItem::ScreenGraphicsItem( const QPointF& position, const QSizeF& size, ScreenGraphicsItemPrivate *d_ptr )
+ScreenGraphicsItem::ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
+                                        ScreenGraphicsItemPrivate *d_ptr )
     : MarbleGraphicsItem( d_ptr )
 {
     setPosition( position );
     setSize( size );
 }
 
-ScreenGraphicsItem::~ScreenGraphicsItem() {
+ScreenGraphicsItem::~ScreenGraphicsItem()
+{
 }
 
-QPointF ScreenGraphicsItem::position() const {
+QPointF ScreenGraphicsItem::position() const
+{
     return p()->m_position;
 }
 
-void ScreenGraphicsItem::setPosition( const QPointF& position ) {
+void ScreenGraphicsItem::setPosition( const QPointF& position )
+{
     p()->m_position = position;
 }
 
-QPointF ScreenGraphicsItem::positivePosition() const {
+QPointF ScreenGraphicsItem::positivePosition() const
+{
     return p()->positivePosition();
 }
 
-ScreenGraphicsItem::GraphicsItemFlags ScreenGraphicsItem::flags() {
+ScreenGraphicsItem::GraphicsItemFlags ScreenGraphicsItem::flags()
+{
     return p()->m_flags;
 }
 
-void ScreenGraphicsItem::setFlags( ScreenGraphicsItem::GraphicsItemFlags flags ) {
+void ScreenGraphicsItem::setFlags( ScreenGraphicsItem::GraphicsItemFlags flags )
+{
     p()->m_flags = flags;
 }
 
-void ScreenGraphicsItem::changeViewport( ViewportParams *viewport ) {
+void ScreenGraphicsItem::changeViewport( ViewportParams *viewport )
+{
     Q_UNUSED( viewport );
 }
 
@@ -158,6 +167,7 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
     return false;
 }
 
-ScreenGraphicsItemPrivate *ScreenGraphicsItem::p() const {
+ScreenGraphicsItemPrivate *ScreenGraphicsItem::p() const
+{
     return reinterpret_cast<ScreenGraphicsItemPrivate *>( d );
 }

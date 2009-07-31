@@ -13,9 +13,11 @@
 
 #include "MarbleGraphicsItem_p.h"
 
-namespace Marble {
+namespace Marble
+{
 
-class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
+class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
+{
  public:
     GeoGraphicsItemPrivate( GeoGraphicsItem *parent )
         : MarbleGraphicsItemPrivate( parent ),
@@ -23,20 +25,23 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
     {
     }
     
-    virtual ~GeoGraphicsItemPrivate() {
+    virtual ~GeoGraphicsItemPrivate()
+    {
     }
-     
-    QList<QPointF> positions() {
+
+    QList<QPointF> positions()
+    {
         return m_positions;
     }
-    
-    void setProjection( AbstractProjection *projection, ViewportParams *viewport ) {
+
+    void setProjection( AbstractProjection *projection, ViewportParams *viewport )
+    {
         m_positions.clear();
-        
+
         qreal x[100], y;
         int pointRepeatNumber;
         bool globeHidesPoint;
-        
+
         if( projection->screenCoordinates( m_coordinate,
                                            viewport,
                                            x, y,
@@ -47,12 +52,12 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
             for( int i = 0; i < pointRepeatNumber; ++i ) {
                 qint32 leftX = x[i] - ( m_size.width() / 2 );
                 qint32 topY = y    - ( m_size.height() / 2 );
-            
+
                 m_positions.append( QPoint( leftX, topY ) );
             }
         }
     }
-    
+
     GeoDataCoordinates m_coordinate;
     QString m_target;
     QList<QPointF> m_positions;

@@ -23,7 +23,8 @@ class QPoint;
 class QRect;
 class QString;
 
-namespace Marble {
+namespace Marble
+{
     
 class GeoDataCoordinates;
 class GeoPainter;
@@ -32,13 +33,14 @@ class ViewportParams;
 
 class GeoGraphicsItemPrivate;
 
-class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
+class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
+{
  public:
     GeoGraphicsItem();
     GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr );
     virtual ~GeoGraphicsItem();
 
-    enum GeoGraphicsItemFlag{
+    enum GeoGraphicsItemFlag {
         NoOptions = 0x0,
         ItemIsMovable = 0x1,
         ItemIsSelectable = 0x2,
@@ -46,12 +48,12 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
     };
 
     Q_DECLARE_FLAGS(GeoGraphicsItemFlags, GeoGraphicsItemFlag)
-    
+
     /**
      * Return the coordinate of the item as a GeoDataCoordinates
      */
     GeoDataCoordinates coordinate() const;
-                        
+
     /**
      * Return the coordinate of the item as @p longitude
      * and @p latitude.
@@ -63,17 +65,17 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
      * @p latitude.
      */
     void setCoordinate( qreal longitude, qreal latitude, qreal altitude = 0 );
-    
+
     /**
      * Set the coordinate of the item with an @p GeoDataPoint.
      */
     void setCoordinate( const GeoDataCoordinates &point );
-    
+
     /**
      * Get the target of the item. The target is the current planet string.s
      */
     QString target();
-    
+
     /**
      * Set the target of the item with @p target.
      */
@@ -89,14 +91,14 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
      * Set or unset a single flag
      * @param enabled sets if the flag is to be set or unset
      */
-     void setFlag( GeoGraphicsItemFlag flag, bool enabled = true );
+    void setFlag( GeoGraphicsItemFlag flag, bool enabled = true );
 
-     /**
-      * Replace all of the current flags.
-      * @param flags is the new value for this item's flags.
-      */
-     void setFlags( GeoGraphicsItemFlags flags );
-    
+    /**
+     * Replace all of the current flags.
+     * @param flags is the new value for this item's flags.
+     */
+    void setFlags( GeoGraphicsItemFlags flags );
+
     /**
      * Returns all coordinates of the item in view coordinates according to the given projection.
      */
@@ -107,7 +109,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem {
      */
     virtual void paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
-    
+
  private:     
     GeoGraphicsItemPrivate *p() const;
 };

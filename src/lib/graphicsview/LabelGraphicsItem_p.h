@@ -15,9 +15,11 @@
 
 class QFont;
 
-namespace Marble {
+namespace Marble
+{
 
-class LabelGraphicsItemPrivate {
+class LabelGraphicsItemPrivate
+{
  public:
     LabelGraphicsItemPrivate();
 
