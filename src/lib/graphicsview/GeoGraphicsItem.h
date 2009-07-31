@@ -37,7 +37,6 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
 {
  public:
     GeoGraphicsItem();
-    explicit GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr );
     virtual ~GeoGraphicsItem();
 
     enum GeoGraphicsItemFlag {
@@ -109,6 +108,9 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
      */
     virtual void paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
+
+ protected:
+    explicit GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr );
 
  private:     
     GeoGraphicsItemPrivate *p() const;

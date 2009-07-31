@@ -41,9 +41,6 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
     explicit ScreenGraphicsItem( MarbleGraphicsItem *parent = 0 );
     ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
                         MarbleGraphicsItem *parent = 0 );
-    explicit ScreenGraphicsItem( ScreenGraphicsItemPrivate *d_ptr );
-    ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
-                        ScreenGraphicsItemPrivate *d_ptr );
     
     virtual ~ScreenGraphicsItem();
 
@@ -94,6 +91,10 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
     void setFlags( GraphicsItemFlags flags );
     
  protected:
+    explicit ScreenGraphicsItem( ScreenGraphicsItemPrivate *d_ptr );
+    ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
+                        ScreenGraphicsItemPrivate *d_ptr );
+
     virtual bool eventFilter( QObject *, QEvent * );
 
     /**

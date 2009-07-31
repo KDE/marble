@@ -45,7 +45,6 @@ class MARBLE_EXPORT MarbleGraphicsItem
     };
      
     explicit MarbleGraphicsItem( MarbleGraphicsItem *parent = 0 );
-    explicit MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
     
     virtual ~MarbleGraphicsItem();
     
@@ -104,6 +103,8 @@ class MARBLE_EXPORT MarbleGraphicsItem
     void show();
     
  protected:
+    explicit MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
+
     /**
      * Paints the item in item coordinates. This has to be reimplemented by the subclass
      * This function will be called by paintEvent().
