@@ -39,7 +39,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
     {
     }
 
-    QList<QPointF> positions()
+    QList<QPointF> positions() const
     {
         QList<QPointF> list;
 
@@ -47,7 +47,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         return list;
     }
 
-    QPointF positivePosition()
+    QPointF positivePosition() const
     {
         if ( !m_parentSize.isValid() ) {
             qDebug() << "Invalid screen size";
@@ -80,7 +80,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         screenGraphicsItem->changeViewport( viewport );
     }
 
-    bool isMovable()
+    bool isMovable() const
     {
         return ( m_flags & ScreenGraphicsItem::ItemIsMovable ) ? true : false;
     }

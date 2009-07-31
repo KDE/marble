@@ -24,7 +24,7 @@ class LabelGraphicsItemPrivate
     LabelGraphicsItemPrivate();
 
     // TODO: This has to go up to MarbleGraphicsItem
-    QFont font();
+    QFont font() const;
 
     QString m_text;
 };

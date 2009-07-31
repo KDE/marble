@@ -27,7 +27,7 @@ LabelGraphicsItemPrivate::LabelGraphicsItemPrivate()
 {
 }
 
-QFont LabelGraphicsItemPrivate::font()
+QFont LabelGraphicsItemPrivate::font() const
 {
     return QApplication::font();
 }

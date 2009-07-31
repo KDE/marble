@@ -74,7 +74,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     /**
      * Get the target of the item. The target is the current planet string.s
      */
-    QString target();
+    QString target() const;
 
     /**
      * Set the target of the item with @p target.
@@ -85,7 +85,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
      * Get the GeoGraphicItemFlags value that describes which flags are set on
      * this item. @see QFlags
      */
-    GeoGraphicsItemFlags flags();
+    GeoGraphicsItemFlags flags() const;
 
     /**
      * Set or unset a single flag
@@ -102,7 +102,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     /**
      * Returns all coordinates of the item in view coordinates according to the given projection.
      */
-    QList<QPointF> positions();
+    QList<QPointF> positions() const;
 
     /**
      * Paints the item in item coordinates

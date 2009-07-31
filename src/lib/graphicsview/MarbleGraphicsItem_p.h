@@ -72,7 +72,7 @@ class MarbleGraphicsItemPrivate
         }
     }
 
-    virtual QList<QPointF> positions()
+    virtual QList<QPointF> positions() const
     {
         return QList<QPointF>();
     }
@@ -86,7 +86,7 @@ class MarbleGraphicsItemPrivate
         }
     }
 
-    QList<QRectF> boundingRects()
+    QList<QRectF> boundingRects() const
     {
         QList<QRectF> list;
 

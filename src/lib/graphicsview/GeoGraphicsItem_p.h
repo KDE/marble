@@ -29,7 +29,7 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
     {
     }
 
-    QList<QPointF> positions()
+    QList<QPointF> positions() const
     {
         return m_positions;
     }
