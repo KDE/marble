@@ -11,7 +11,9 @@
 #ifndef TEXTANNOTATION_H
 #define TEXTANNOTATION_H
 
-#include "TmpGraphicsItem.h"
+#include <QtCore/QString>
+
+#include "GeoDataPlacemark.h"
 
 namespace Marble{
 
