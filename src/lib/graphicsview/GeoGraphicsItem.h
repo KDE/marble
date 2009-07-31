@@ -37,7 +37,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
 {
  public:
     GeoGraphicsItem();
-    GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr );
+    explicit GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr );
     virtual ~GeoGraphicsItem();
 
     enum GeoGraphicsItemFlag {

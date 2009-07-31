@@ -23,7 +23,7 @@ class FrameGraphicsItemPrivate;
 class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
 {
  public:
-    FrameGraphicsItem( MarbleGraphicsItem *parent = 0 );
+    explicit FrameGraphicsItem( MarbleGraphicsItem *parent = 0 );
     FrameGraphicsItem( const QPointF& position, const QSizeF& size,
                MarbleGraphicsItem *parent = 0 );
 

@@ -44,8 +44,8 @@ class MARBLE_EXPORT MarbleGraphicsItem
         DeviceCoordinateCache
     };
      
-    MarbleGraphicsItem( MarbleGraphicsItem *parent = 0 );
-    MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
+    explicit MarbleGraphicsItem( MarbleGraphicsItem *parent = 0 );
+    explicit MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
     
     virtual ~MarbleGraphicsItem();
     

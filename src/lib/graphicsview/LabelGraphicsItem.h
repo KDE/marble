@@ -28,7 +28,7 @@ class LabelGraphicsItemPrivate;
 class MARBLE_EXPORT LabelGraphicsItem : public FrameGraphicsItem
 {
  public:
-    LabelGraphicsItem( MarbleGraphicsItem *parent = 0 );
+    explicit LabelGraphicsItem( MarbleGraphicsItem *parent = 0 );
 
     void setText( const QString& text );
     void clear();

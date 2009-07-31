@@ -38,10 +38,10 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
     };
     Q_DECLARE_FLAGS(GraphicsItemFlags, GraphicsItemFlag)
 
-    ScreenGraphicsItem( MarbleGraphicsItem *parent = 0 );
+    explicit ScreenGraphicsItem( MarbleGraphicsItem *parent = 0 );
     ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
                         MarbleGraphicsItem *parent = 0 );
-    ScreenGraphicsItem( ScreenGraphicsItemPrivate *d_ptr );
+    explicit ScreenGraphicsItem( ScreenGraphicsItemPrivate *d_ptr );
     ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
                         ScreenGraphicsItemPrivate *d_ptr );
     

@@ -28,8 +28,8 @@ namespace Marble
 class MarbleGraphicsItemPrivate
 {
  public:
-    MarbleGraphicsItemPrivate( MarbleGraphicsItem *marbleGraphicsItem,
-                               MarbleGraphicsItem *parent = 0 )
+    explicit MarbleGraphicsItemPrivate( MarbleGraphicsItem *marbleGraphicsItem,
+                                        MarbleGraphicsItem *parent = 0 )
         : m_removeCachedPixmap( false ),
           m_cacheMode( MarbleGraphicsItem::NoCache ),
           m_visibility( true ),

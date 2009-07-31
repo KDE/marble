@@ -19,7 +19,7 @@ namespace Marble
 class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
 {
  public:
-    GeoGraphicsItemPrivate( GeoGraphicsItem *parent )
+    explicit GeoGraphicsItemPrivate( GeoGraphicsItem *parent )
         : MarbleGraphicsItemPrivate( parent ),
           m_positions()
     {
