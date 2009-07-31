@@ -82,7 +82,7 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
     /**
      * Returns the flags of the item.
      */
-    GraphicsItemFlags flags();
+    GraphicsItemFlags flags() const;
 
     /**
      * Sets the flags to flags. All flags in flags will be enabled and all other flags will

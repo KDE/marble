@@ -63,7 +63,7 @@ QPointF ScreenGraphicsItem::positivePosition() const
     return p()->positivePosition();
 }
 
-ScreenGraphicsItem::GraphicsItemFlags ScreenGraphicsItem::flags()
+ScreenGraphicsItem::GraphicsItemFlags ScreenGraphicsItem::flags() const
 {
     return p()->m_flags;
 }
