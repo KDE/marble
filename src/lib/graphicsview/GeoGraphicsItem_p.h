@@ -26,7 +26,7 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
     virtual ~GeoGraphicsItemPrivate() {
     }
      
-    QList<QPointF> positions() const {
+    QList<QPointF> positions() {
         return m_positions;
     }
     

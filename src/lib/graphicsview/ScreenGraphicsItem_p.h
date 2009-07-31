@@ -38,7 +38,7 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate {
      
     QList<QPointF> positions() {
         QList<QPointF> list;
-        
+
         list.append( positivePosition() );
         return list;
     }
