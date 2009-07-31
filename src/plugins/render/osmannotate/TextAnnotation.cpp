@@ -19,6 +19,10 @@ TextAnnotation::TextAnnotation()
 {
 }
 
+TextAnnotation::~TextAnnotation()
+{
+}
+
 GeoDataPlacemark TextAnnotation::toGeoData()
 {
     GeoDataPlacemark placemark;

@@ -21,6 +21,7 @@ class TextAnnotation
 {
 public:
     TextAnnotation();
+    virtual ~TextAnnotation();
 
     virtual QString name() = 0 ;
     virtual QString description() = 0;
