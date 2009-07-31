@@ -32,12 +32,12 @@ QVariant TmpGraphicsItem::itemChange(GeoGraphicsItemChange change, QVariant v )
     return QVariant();
 }
 
-QList<QRegion> TmpGraphicsItem::regions()
+QList<QRegion> TmpGraphicsItem::regions() const
 {
     return QList<QRegion>( m_regions );
 }
 
-QList<TmpGraphicsItem*> TmpGraphicsItem::children()
+QList<TmpGraphicsItem*> TmpGraphicsItem::children() const
 {
     return QList<TmpGraphicsItem*>(m_children);
 }

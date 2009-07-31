@@ -33,12 +33,12 @@ public:
     QWidget* getGeoWidget();
 
     void initaliseMarbleWidget( QWidget* parent );
-    bool marbleWidgetIsInitalised();
+    bool marbleWidgetIsInitalised() const;
 
     void moveTo( QPoint screenPos );
     void hide();
     void setHidden( bool hide );
-    bool isHidden();
+    bool isHidden() const;
 
 private:
     QWidget* m_widget;

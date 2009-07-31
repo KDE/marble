@@ -28,9 +28,9 @@ public:
     ~TextEditor();
 
     //return the plain text name
-    QString name();
+    QString name() const;
     //return the HTML description
-    QString description();
+    QString description() const;
 
 private:
     QAction* m_boldAction;

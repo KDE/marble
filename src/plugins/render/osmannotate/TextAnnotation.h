@@ -25,11 +25,11 @@ public:
     TextAnnotation();
     virtual ~TextAnnotation();
 
-    virtual QString name() = 0 ;
-    virtual QString description() = 0;
-    virtual GeoDataGeometry geometry() = 0;
+    virtual QString name() const = 0 ;
+    virtual QString description() const = 0;
+    virtual GeoDataGeometry geometry() const = 0;
 
-    GeoDataPlacemark toGeoData();
+    GeoDataPlacemark toGeoData() const;
 
 };
 

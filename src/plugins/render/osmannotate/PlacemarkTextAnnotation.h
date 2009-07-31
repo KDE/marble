@@ -27,15 +27,15 @@ public:
     PlacemarkTextAnnotation();
 
     //GeoGraphicsItem
-    virtual QRect screenBounding();
+    virtual QRect screenBounding() const;
     virtual void paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 );
     virtual QVariant itemChange(GeoGraphicsItemChange c, QVariant v);
 
     //TextAnnotation
-    virtual QString name();
-    virtual QString description();
-    virtual GeoDataGeometry geometry();
+    virtual QString name() const;
+    virtual QString description() const;
+    virtual GeoDataGeometry geometry() const;
 
 private:
     GeoWidgetBubble* bubble;

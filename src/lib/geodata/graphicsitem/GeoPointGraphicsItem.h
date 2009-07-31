@@ -24,7 +24,7 @@ public:
     GeoPointGraphicsItem();
 
     void setPoint( const GeoDataPoint& point );
-    GeoDataPoint point();
+    GeoDataPoint point() const;
     
     virtual void paint( GeoPainter* painter, ViewportParams *viewport,
                         const QString &renderPos, GeoSceneLayer *layer );

@@ -23,7 +23,7 @@ TextAnnotation::~TextAnnotation()
 {
 }
 
-GeoDataPlacemark TextAnnotation::toGeoData()
+GeoDataPlacemark TextAnnotation::toGeoData() const
 {
     GeoDataPlacemark placemark;
 

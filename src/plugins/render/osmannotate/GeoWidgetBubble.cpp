@@ -87,7 +87,7 @@ void GeoWidgetBubble::initaliseMarbleWidget( QWidget* parent )
     marbleWidgetInitalised = true;
 }
 
-bool GeoWidgetBubble::marbleWidgetIsInitalised()
+bool GeoWidgetBubble::marbleWidgetIsInitalised() const
 {
     return marbleWidgetInitalised;
 }
@@ -117,7 +117,7 @@ void GeoWidgetBubble::setHidden( bool hide )
     }
 }
 
-bool GeoWidgetBubble::isHidden()
+bool GeoWidgetBubble::isHidden() const
 {
     return m_hidden;
 }

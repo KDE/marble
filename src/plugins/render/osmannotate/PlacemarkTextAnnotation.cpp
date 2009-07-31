@@ -39,7 +39,7 @@ PlacemarkTextAnnotation::PlacemarkTextAnnotation()
     bubble->setGeoWidget( m_textEditor );
 }
 
-QRect PlacemarkTextAnnotation::screenBounding()
+QRect PlacemarkTextAnnotation::screenBounding() const
 {
     //FIXME the first 2 should actually offset it
     return QRect(-5,-5,20,20);
@@ -124,17 +124,17 @@ QVariant PlacemarkTextAnnotation::itemChange(GeoGraphicsItemChange change, QVari
     return TmpGraphicsItem::itemChange( change, v );
 }
 
-QString PlacemarkTextAnnotation::name()
+QString PlacemarkTextAnnotation::name() const
 {
     return m_textEditor->name();
 }
 
-QString PlacemarkTextAnnotation::description()
+QString PlacemarkTextAnnotation::description() const
 {
     return m_textEditor->description();
 }
 
-GeoDataGeometry PlacemarkTextAnnotation::geometry()
+GeoDataGeometry PlacemarkTextAnnotation::geometry() const
 {
     return GeoDataPoint( coordinate() );
 }

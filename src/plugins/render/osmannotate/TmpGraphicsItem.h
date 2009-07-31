@@ -46,10 +46,10 @@ enum GeoGraphicsItemChange {
     //Designed to recreated the QGraphicsItem::itemChange()
     virtual QVariant itemChange( GeoGraphicsItemChange change, QVariant Value );
 
-    QList<QRegion> regions();
+    QList<QRegion> regions() const;
 
 
-    QList<TmpGraphicsItem*> children();
+    QList<TmpGraphicsItem*> children() const;
     void addChild(TmpGraphicsItem* c);
 
     TmpGraphicsItem* parent();

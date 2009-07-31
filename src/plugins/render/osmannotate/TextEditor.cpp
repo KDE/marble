@@ -82,12 +82,12 @@ TextEditor::~TextEditor()
 
 }
 
-QString TextEditor::name()
+QString TextEditor::name() const
 {
     return m_name->text();
 }
 
-QString TextEditor::description()
+QString TextEditor::description() const
 {
     return m_description->toHtml();
 }

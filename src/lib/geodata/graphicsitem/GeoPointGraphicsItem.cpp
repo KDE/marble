@@ -25,7 +25,7 @@ void GeoPointGraphicsItem::setPoint( const GeoDataPoint& point )
     m_point = point;
 }
 
-GeoDataPoint GeoPointGraphicsItem::point()
+GeoDataPoint GeoPointGraphicsItem::point() const
 {
     return m_point;
 }
