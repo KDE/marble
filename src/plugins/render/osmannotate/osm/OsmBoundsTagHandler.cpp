@@ -60,7 +60,7 @@ GeoNode* OsmBoundsTagHandler::parse( GeoParser& parser ) const
 //
 //    model->append( dynamic_cast<GeoGraphicsItem*>( place ) );
 
-    model->append( dynamic_cast<GeoGraphicsItem*> (item) );
+    model->append( item );
 
     return 0;
 
