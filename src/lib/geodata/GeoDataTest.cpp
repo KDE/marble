@@ -191,7 +191,7 @@ QString formatOutput(int depth)
 
 void dumpGeoDataPlacemark(const GeoDataPlacemark& placemark)
 {
-	qDebug() << placemark.name() << placemark.population() << placemark.coordinate().toString()<<"lookAt info "<<(placemark.lookAt()->coordinate())->toString()<<placemark.lookAt()->altitude();
+//	qDebug() << placemark.name() << placemark.population() << placemark.coordinate().toString()<<"lookAt info "<<(placemark.lookAt()->coordinate())->toString()<<placemark.lookAt()->altitude();
 }
 
 void dumpFoldersRecursively(const GeoDataContainer& container, int depth)

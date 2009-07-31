@@ -15,6 +15,7 @@
 
 #include <QtCore/QDebug>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QToolTip>
 #include <QRubberBand>
 
 #include "global.h"
@@ -31,6 +32,8 @@
 #include "MarbleWidgetPopupMenu.h"
 
 using namespace Marble;
+
+const int TOOLTIP_START_INTERVAL = 1000;
 
 MarbleWidgetInputHandler::MarbleWidgetInputHandler()
     : m_widget( 0 ),
@@ -105,6 +108,10 @@ MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler()
     m_selectionRubber->hide();
 
     m_dragThreshold   = 3;    
+
+    m_toolTipTimer.setSingleShot( true );
+    m_toolTipTimer.setInterval( TOOLTIP_START_INTERVAL );
+    connect( &m_toolTipTimer, SIGNAL( timeout() ), this, SLOT( openItemToolTip() ) );
 }
 
 MarbleWidgetDefaultInputHandler::~MarbleWidgetDefaultInputHandler()
@@ -163,6 +170,15 @@ void MarbleWidgetDefaultInputHandler::showRmbMenu( int x, int y)
 {
     if ( isMouseButtonPopupEnabled( Qt::RightButton ) ) {
         m_popupmenu->showRmbMenu( x, y );
+    }
+}
+
+void MarbleWidgetDefaultInputHandler::openItemToolTip() {
+    if ( !m_lastToolTipItem.isNull() ) {
+        QToolTip::showText( m_widget->mapToGlobal( m_toolTipPosition ),
+                            m_lastToolTipItem->toolTip(),
+                            m_widget,
+                            m_widget->geometry() );
     }
 }
 
@@ -430,14 +446,34 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         QList<AbstractDataPluginItem *> dataItems
                 = m_widget->model()->whichItemAt( mousePosition );
         bool dataAction = false;
+        QPointer<AbstractDataPluginItem> toolTipItem;
         for ( QList<AbstractDataPluginItem *>::iterator it = dataItems.begin();
-              it != dataItems.end();
+              it != dataItems.end() && dataAction == false && toolTipItem.isNull();
               ++it )
         {
             if ( (*it)->action() ) {
                 dataAction = true;
-                break;
             }
+
+            if ( !(*it)->toolTip().isNull() && toolTipItem.isNull() ) {
+                toolTipItem = (*it);
+            }
+        }
+
+        if ( toolTipItem.isNull() ) {
+            m_toolTipTimer.stop();
+        }
+        else if ( !( m_lastToolTipItem.data() == toolTipItem.data() ) ) {
+            m_toolTipTimer.start();
+            m_lastToolTipItem = toolTipItem;
+            m_toolTipPosition = mousePosition;
+        }
+        else {
+            if ( !m_toolTipTimer.isActive() ) {
+                m_toolTipTimer.start();
+            }
+
+            m_toolTipPosition = mousePosition;
         }
         
         if ( ( m_widget->model()->whichFeatureAt( mousePosition ).size() == 0 )

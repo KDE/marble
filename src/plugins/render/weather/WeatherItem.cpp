@@ -46,24 +46,6 @@ class WeatherItemPrivate {
           m_parent( parent ),
           m_temperatureSize()
     {
-        if ( s_windDirections.isEmpty() ) {
-            s_windDirections.insert( WeatherData::N, "N" );
-            s_windDirections.insert( WeatherData::NNE, "NNE" );
-            s_windDirections.insert( WeatherData::NE, "NE" );
-            s_windDirections.insert( WeatherData::ENE, "ENE" );
-            s_windDirections.insert( WeatherData::E, "E" );
-            s_windDirections.insert( WeatherData::SSE, "SSE" );
-            s_windDirections.insert( WeatherData::SE, "SE" );
-            s_windDirections.insert( WeatherData::S, "ESE" );
-            s_windDirections.insert( WeatherData::NNW, "NNW" );
-            s_windDirections.insert( WeatherData::NW, "NW" );
-            s_windDirections.insert( WeatherData::WNW, "WNW" );
-            s_windDirections.insert( WeatherData::W, "W" );
-            s_windDirections.insert( WeatherData::SSW, "SSW" );
-            s_windDirections.insert( WeatherData::SW, "SW" );
-            s_windDirections.insert( WeatherData::WSW, "WSW" );
-            s_windDirections.insert( WeatherData::DirectionNotAvailable, "N/A" );
-        }
     }
     
     void updateSize() {
@@ -162,6 +144,42 @@ class WeatherItemPrivate {
         
         m_parent->setSize( size );
     }
+
+    void updateToolTip() {
+        QString toolTip;
+        toolTip += tr( "Station: %1\n" ).arg( m_parent->stationName() );
+        if ( m_currentWeather.hasValidCondition() && m_currentWeather.hasValidTemperature() )
+            toolTip += QString( "%2, %3\n" ).arg( m_currentWeather.conditionString() )
+                                           .arg( temperatureString() );
+        else if ( m_currentWeather.hasValidCondition() )
+            toolTip += QString( "%2\n" ).arg( m_currentWeather.conditionString() );
+        else if ( m_currentWeather.hasValidTemperature() )
+            toolTip += QString( "%2\n" ).arg( temperatureString() );
+
+        if ( m_currentWeather.hasValidWindSpeed() && m_currentWeather.hasValidWindDirection() )
+            toolTip += tr( "Wind: %4, %5\n", "Wind: WindSpeed, WindDirection" )
+                    .arg( windSpeedString( ) )
+                    .arg( m_currentWeather.windDirectionString() );
+        else if ( m_currentWeather.hasValidWindSpeed() )
+            toolTip += tr( "Wind: %4\n", "Wind: WindSpeed" )
+                    .arg( m_currentWeather.windSpeedString() );
+        else if ( m_currentWeather.hasValidWindDirection() )
+            toolTip += tr( "Wind: %4\n", "Wind: WindDirection" )
+                    .arg( m_currentWeather.windDirectionString() );
+
+        if ( m_currentWeather.hasValidPressure() && m_currentWeather.hasValidPressureDevelopment() )
+            toolTip += tr( "Pressure: %6, %7", "Pressure: Pressure, Development" )
+                    .arg( pressureString() )
+                    .arg( m_currentWeather.pressureDevelopmentString() );
+        else if ( m_currentWeather.hasValidPressure() )
+            toolTip += tr( "Pressure: %6", "Pressure: Pressure" )
+                    .arg( pressureString() );
+        else if ( m_currentWeather.hasValidPressureDevelopment() )
+            toolTip += tr( "Pressure %7", "Pressure Development" )
+                    .arg( m_currentWeather.pressureDevelopmentString() );
+
+        m_parent->setToolTip( toolTip );
+    }
     
     bool isConditionShown() {
         return m_currentWeather.hasValidCondition()
@@ -196,6 +214,13 @@ class WeatherItemPrivate {
                                                              WeatherData::kph ).toInt();
         return m_currentWeather.windSpeedString( speedUnit );
     }
+
+    QString pressureString() {
+        WeatherData::PressureUnit pressureUnit
+                = (WeatherData::PressureUnit) m_settings.value( "pressureUnit",
+                                                                WeatherData::HectoPascal ).toInt();
+        return m_currentWeather.pressureString( pressureUnit );
+    }
     
     WeatherData m_currentWeather;
     int m_priority;
@@ -212,7 +237,6 @@ class WeatherItemPrivate {
     
     static QFont s_font;
     static QSvgRenderer s_windIcons;
-    static QHash<WeatherData::WindDirection, QString> s_windDirections;
 };
 
 // FIXME: Fonts to be defined globally
@@ -223,9 +247,6 @@ class WeatherItemPrivate {
 #endif
 
 QSvgRenderer WeatherItemPrivate::s_windIcons( MarbleDirs::path( "weather/wind-arrows.svgz" ) );
-
-QHash<WeatherData::WindDirection, QString> WeatherItemPrivate::s_windDirections
-        = QHash<WeatherData::WindDirection, QString>();
 
 WeatherItem::WeatherItem( QObject *parent )
     : AbstractDataPluginItem( parent ),
@@ -307,7 +328,7 @@ void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
     }
 
     // Calculate the real size of the wind direction icon.
-    QString windDirectionString = d->s_windDirections.value( d->m_currentWeather.windDirection() );
+    QString windDirectionString = d->m_currentWeather.windDirectionString();
     QRect windDirectionRect;
     if( d->isWindDirectionShown() ) {
         QSizeF windDirectionSizeF = d->s_windIcons.boundsOnElement( windDirectionString ).size();
@@ -331,7 +352,7 @@ void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
         if ( d->isWindDirectionShown() ) {
             windDirectionRect.moveTopLeft( windDirectionRect.topLeft() + bottomRow.topLeft() );
             d->s_windIcons.render( painter,
-                                   d->s_windDirections.value( d->m_currentWeather.windDirection() ),
+                                   d->m_currentWeather.windDirectionString(),
                                    windDirectionRect );
             bottomRow.setLeft( bottomRow.left() + imageSize.width() );
         }
@@ -351,7 +372,7 @@ void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
         // Paint the wind direction icon.
         windDirectionRect.moveTopLeft( windDirectionRect.topLeft() + topRow.topLeft() );
         d->s_windIcons.render( painter,
-                               d->s_windDirections.value( d->m_currentWeather.windDirection() ),
+                               d->m_currentWeather.windDirectionString(),
                                windDirectionRect );
         topRow.setLeft( topRow.left() + imageSize.width() );
     }
@@ -376,6 +397,7 @@ QString WeatherItem::stationName() const {
 void WeatherItem::setStationName( const QString& name ) {
     d->m_action->setText( name );
     d->m_stationName = name;
+    d->updateToolTip();
     update();
 }
 
@@ -386,6 +408,7 @@ WeatherData WeatherItem::currentWeather() const {
 void WeatherItem::setCurrentWeather( const WeatherData &weather ) {
     d->m_currentWeather = weather;
     d->updateSize();
+    d->updateToolTip();
     update();
 }
 
@@ -404,6 +427,7 @@ void WeatherItem::setSettings( QHash<QString, QVariant> settings ) {
     d->m_settings = settings;
 
     d->updateSize();
+    d->updateToolTip();
     update();
 }
 

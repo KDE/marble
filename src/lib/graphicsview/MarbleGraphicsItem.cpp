@@ -188,6 +188,14 @@ void MarbleGraphicsItem::setSize( const QSizeF& size )
     update();
 }
 
+QString MarbleGraphicsItem::toolTip() const {
+    return p()->m_toolTip;
+}
+
+void MarbleGraphicsItem::setToolTip( const QString& toolTip ) {
+    p()->m_toolTip = toolTip;
+}
+
 bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
 {
     Q_UNUSED( object );

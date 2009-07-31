@@ -19,8 +19,10 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QPoint>
+#include <QtCore/QPointer>
 #include <QtCore/QString>
 #include <QtCore/QTime>
+#include <QtCore/QTimer>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QPixmap>
 #include <QtGui/QCursor>
@@ -28,7 +30,6 @@
 #include "marble_export.h"
 
 class QEvent;
-class QTimer;
 class QRubberBand;
 
 namespace Marble
@@ -38,6 +39,7 @@ class MarbleModel;
 class MarbleWidget;
 class MarbleMap;
 class MarbleWidgetPopupMenu;
+class AbstractDataPluginItem;
 
 class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
 {
@@ -112,6 +114,8 @@ class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputH
 
     void showRmbMenu( int, int );
 
+    void openItemToolTip();
+
     
  private:
     QPixmap  curpmtl;
@@ -141,6 +145,10 @@ class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputH
 
     QPoint       m_selectionOrigin;
     QRubberBand *m_selectionRubber;
+
+    QPointer<AbstractDataPluginItem> m_lastToolTipItem;
+    QTimer                           m_toolTipTimer;
+    QPoint                           m_toolTipPosition;
     
     MarbleWidgetPopupMenu     *m_popupmenu;
     

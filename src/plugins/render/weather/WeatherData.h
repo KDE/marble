@@ -12,6 +12,7 @@
 #define WEATHERDATA_H
 
 #include<QtCore/QtGlobal>
+#include<QtCore/QCoreApplication>
 
 class QDateTime;
 class QIcon;
@@ -21,6 +22,7 @@ namespace Marble {
 class WeatherDataPrivate;
 
 class WeatherData {
+    Q_DECLARE_TR_FUNCTIONS ( WeatherData )
  public:
     enum WeatherCondition {
         // Clouds
@@ -53,6 +55,7 @@ class WeatherData {
         SandStorm // no icon available
 //         FreezingDrizzle, would be nice, but no icon for the moment
 //         Flurries, would be nice, but no icon available
+        // REMEMBER to change the implementation of conditionString() if you add items to this enum
     };
     
     enum WindDirection {
@@ -127,6 +130,7 @@ class WeatherData {
     WeatherData::WeatherCondition condition() const;
     void setCondition( WeatherData::WeatherCondition condition );
     bool hasValidCondition() const;
+    QString conditionString() const;
     
     /**
      * Get the icon showing the current condition.
@@ -136,6 +140,7 @@ class WeatherData {
     WeatherData::WindDirection windDirection() const;
     void setWindDirection( WeatherData::WindDirection direction );
     bool hasValidWindDirection() const;
+    QString windDirectionString() const;
     
     qreal windSpeed( WeatherData::SpeedUnit format = WeatherData::mps ) const;
     void setWindSpeed( qreal speed, WeatherData::SpeedUnit format = WeatherData::mps );
@@ -168,10 +173,12 @@ class WeatherData {
     void setPressure( qreal pressure,
                       WeatherData::PressureUnit format = WeatherData::HectoPascal );
     bool hasValidPressure() const;
+    QString pressureString( WeatherData::PressureUnit format = WeatherData::HectoPascal ) const;
 
     WeatherData::PressureDevelopment pressureDevelopment() const;
     void setPressureDevelopment( WeatherData::PressureDevelopment );
     bool hasValidPressureDevelopment() const;
+    QString pressureDevelopmentString() const;
     
     qreal humidity() const;
     void setHumidity( qreal humidity );

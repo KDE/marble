@@ -56,6 +56,8 @@ const qreal KEL2CEL = -273.15;
 const qreal CEL2KEL = -KEL2CEL;
 
 class WeatherDataPrivate {
+    Q_DECLARE_TR_FUNCTIONS ( WeatherDataPrivate )
+
  public:
     WeatherDataPrivate()
         : m_dateTime( QDateTime::currentDateTime() ),
@@ -317,6 +319,55 @@ bool WeatherData::hasValidCondition() const {
     return d->m_condition != WeatherData::ConditionNotAvailable;
 }
 
+QString WeatherData::conditionString() const {
+    switch ( condition() ) {
+        case ClearDay:
+            return tr( "sunny" );
+        case ClearNight:
+            return tr( "clear" );
+        case FewCloudsDay:
+        case FewCloudsNight:
+            return tr( "few clouds" );
+        case PartlyCloudyDay:
+        case PartlyCloudyNight:
+            return tr( "partly cloudy" );
+        case Overcast:
+            return tr( "overcast" );
+        case LightShowersDay:
+        case LightShowersNight:
+            return tr( "light showers" );
+        case ShowersDay:
+        case ShowersNight:
+            return tr( "showers" );
+        case LightRain:
+            return tr( "light rain" );
+        case Rain:
+            return tr( "rain" );
+        case ChanceThunderstormDay:
+        case ChanceThunderstormNight:
+            return tr( "occasionally thunderstorm" );
+        case Thunderstorm:
+            return tr( "thunderstorm" );
+        case Hail:
+            return tr( "hail" );
+        case ChanceSnowDay:
+        case ChanceSnowNight:
+            return tr( "occasionally snow" );
+        case LightSnow:
+            return tr( "light snow" );
+        case Snow:
+            return tr( "snow" );
+        case RainSnow:
+            return tr( "rain and snow" );
+        case Mist:
+            return tr( "mist" );
+        case SandStorm:
+            return tr( "sandstorm" );
+        default:
+            return "Condition not available";
+    }
+}
+
 QIcon WeatherData::icon() const {
     QIcon icon = WeatherDataPrivate::s_icons.value( condition() );
     
@@ -343,6 +394,45 @@ void WeatherData::setWindDirection( WeatherData::WindDirection direction ) {
 
 bool WeatherData::hasValidWindDirection() const {
     return d->m_windDirection != WeatherData::DirectionNotAvailable;
+}
+
+QString WeatherData::windDirectionString() const {
+    switch ( windDirection() ) {
+        case N:
+            return tr( "N" );
+        case NNE:
+            return tr( "NNE" );
+        case NE:
+            return tr( "NE" );
+        case ENE:
+            return tr( "ENE" );
+        case E:
+            return tr( "E" );
+        case SSE:
+            return tr( "SSE" );
+        case SE:
+            return tr( "SE" );
+        case ESE:
+            return tr( "ESE" );
+        case S:
+            return tr( "S" );
+        case NNW:
+            return tr( "NNW" );
+        case NW:
+            return tr( "NW" );
+        case WNW:
+            return tr( "WNW" );
+        case W:
+            return tr( "W" );
+        case SSW:
+            return tr( "SSW" );
+        case SW:
+            return tr( "SW" );
+        case WSW:
+            return tr( "WSW" );
+        default:
+            return "";
+    }
 }
 
 qreal WeatherData::windSpeed( WeatherData::SpeedUnit format ) const {
@@ -584,6 +674,31 @@ bool WeatherData::hasValidPressure() const {
     return d->isPositiveValue( d->m_pressure );
 }
 
+QString WeatherData::pressureString( WeatherData::PressureUnit unit ) const {
+    QLocale locale = QLocale::system();
+    // We round to integer.
+    QString string = locale.toString( pressure( unit ), 'f', 2 );
+    string += " ";
+    switch ( unit ) {
+        case WeatherData::HectoPascal:
+            string += tr( "hPa" );
+            break;
+        case WeatherData::KiloPascal:
+            string += tr( "kPa" );
+            break;
+        case WeatherData::Bar:
+            string += tr( "Bar" );
+            break;
+        case WeatherData::mmHg:
+            string += tr( "mmHg" );
+            break;
+        case WeatherData::inchHg:
+            string += tr( "inch Hg" );
+            break;
+    }
+    return string;
+}
+
 WeatherData::PressureDevelopment WeatherData::pressureDevelopment() const {
     return d->m_pressureDevelopment;
 }
@@ -595,6 +710,19 @@ void WeatherData::setPressureDevelopment( WeatherData::PressureDevelopment press
 
 bool WeatherData::hasValidPressureDevelopment() const {
     return d->m_pressureDevelopment != WeatherData::PressureDevelopmentNotAvailable;
+}
+
+QString WeatherData::pressureDevelopmentString() const {
+    switch ( pressureDevelopment() ) {
+        case Rising:
+            return tr( "rising", "air pressure is rising" );
+        case NoChange:
+            return tr( "steady", "air pressure has no change" );
+        case Falling:
+            return tr( "falling", "air pressure falls" );
+        default:
+            return "";
+    }
 }
 
 qreal WeatherData::humidity() const {

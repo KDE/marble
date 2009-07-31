@@ -125,6 +125,8 @@ class MarbleGraphicsItemPrivate
     MarbleGraphicsItem *m_parent;
     // The set of children. WARNING: This is not initialized by default.
     QSet<MarbleGraphicsItem *> *m_children;
+    
+    QString m_toolTip;
 
     MarbleGraphicsItem *m_marbleGraphicsItem;
 };
