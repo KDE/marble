@@ -110,7 +110,8 @@ void HttpDownloadManager::addJob( const QString& relativeUrlString, const QStrin
     sourceUrl.setPath( path + relativeUrlString );
 
     HttpJob *job = createJob( sourceUrl, relativeUrlString, id );
-    addJob( job );
+    if ( job )
+        addJob( job );
 }
 
 void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFileName,
@@ -120,7 +121,8 @@ void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFile
         return;
 
     HttpJob *job = createJob( sourceUrl, destFileName, id );
-    addJob( job );
+    if ( job )
+        addJob( job );
 }
 
 bool HttpDownloadManager::acceptJob( HttpJob  *job )
@@ -277,6 +279,10 @@ HttpJob *HttpDownloadManager::createJob( const QUrl& sourceUrl, const QString& d
             m_networkPlugin = networkPlugins.takeFirst();
             qDeleteAll( networkPlugins );
             m_networkPlugin->setParent( this );
+        }
+        else {
+            m_downloadEnabled = false;
+            return 0;
         }
     }
     Q_ASSERT( m_networkPlugin );
