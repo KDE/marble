@@ -16,7 +16,8 @@
 #include <QtGui/QIcon>
 #include <QtGui/QPixmap>
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleDataFacade;
 

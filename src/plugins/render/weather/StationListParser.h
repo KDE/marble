@@ -19,7 +19,8 @@
 
 class QString;
 
-namespace Marble {
+namespace Marble
+{
 
 class BBCWeatherItem;
     

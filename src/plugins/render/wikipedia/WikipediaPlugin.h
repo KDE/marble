@@ -19,11 +19,13 @@
 #include <QtCore/QHash>
 #include <QtGui/QIcon>
 
-namespace Marble {
+namespace Marble
+{
 
 class PluginAboutDialog;
 
-class WikipediaPlugin : public AbstractDataPlugin {
+class WikipediaPlugin : public AbstractDataPlugin
+{
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( WikipediaPlugin )

@@ -98,15 +98,18 @@ QStringList AbstractFloatItem::renderPosition() const
     return QStringList( "FLOAT_ITEM" );
 }
 
-void AbstractFloatItem::setVisible( bool visible ) {
+void AbstractFloatItem::setVisible( bool visible )
+{
     RenderPlugin::setVisible( visible );
 }
 
-bool AbstractFloatItem::visible() const {
+bool AbstractFloatItem::visible() const
+{
     return RenderPlugin::visible();
 }
 
-void AbstractFloatItem::setPositionLocked( bool lock ) {
+void AbstractFloatItem::setPositionLocked( bool lock )
+{
     ScreenGraphicsItem::GraphicsItemFlags flags = this->flags();
 
     if ( lock ) {
@@ -119,11 +122,13 @@ void AbstractFloatItem::setPositionLocked( bool lock ) {
     setFlags( flags );
 }
 
-bool AbstractFloatItem::positionLocked() {
+bool AbstractFloatItem::positionLocked()
+{
     return ( flags() & ScreenGraphicsItem::ItemIsMovable ) ? false : true;
 }
 
-bool AbstractFloatItem::eventFilter( QObject *object, QEvent *e ) {
+bool AbstractFloatItem::eventFilter( QObject *object, QEvent *e )
+{
     if ( !enabled() || !visible() ) {
         return false;
     }

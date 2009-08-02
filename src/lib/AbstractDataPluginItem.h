@@ -23,7 +23,8 @@ class QRect;
 class QSize;
 class QPoint;
 
-namespace Marble {
+namespace Marble
+{
     
 class AbstractDataPluginItemPrivate;
 class GeoDataCoordinates;
@@ -32,7 +33,8 @@ class GeoSceneLayer;
 class CacheStoragePolicy;
 class ViewportParams;
 
-class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsItem {
+class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsItem
+{
     Q_OBJECT
     
  public:

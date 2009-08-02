@@ -89,27 +89,33 @@ void GeoGraphicsItem::setFlags( GeoGraphicsItemFlags flags )
     p()->m_flags = flags;
 }
 
-int GeoGraphicsItem::minLodPixels() const {
+int GeoGraphicsItem::minLodPixels() const
+{
     return p()->m_minLodPixels;
 }
 
-void GeoGraphicsItem::setMinLodPixels( int pixels ) {
+void GeoGraphicsItem::setMinLodPixels( int pixels )
+{
     p()->m_minLodPixels = pixels;
 }
 
-int GeoGraphicsItem::maxLodPixels() const {
+int GeoGraphicsItem::maxLodPixels() const
+{
     return p()->m_maxLodPixels;
 }
 
-void GeoGraphicsItem::setMaxLodPixels( int pixels ) {
+void GeoGraphicsItem::setMaxLodPixels( int pixels )
+{
     p()->m_maxLodPixels = pixels;
 }
 
-GeoDataLatLonAltBox GeoGraphicsItem::geoBoundingBox() const {
+GeoDataLatLonAltBox GeoGraphicsItem::geoBoundingBox() const
+{
     return p()->m_geoBoundingBox;
 }
 
-void GeoGraphicsItem::setGeoBoundingBox( const GeoDataLatLonAltBox& boundingBox ) {
+void GeoGraphicsItem::setGeoBoundingBox( const GeoDataLatLonAltBox& boundingBox )
+{
     p()->m_geoBoundingBox = boundingBox;
 }
 

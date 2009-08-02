@@ -16,9 +16,11 @@
 class QString;
 class QUrl;
 
-namespace Marble {
+namespace Marble
+{
 
-class BBCWeatherItem : public WeatherItem {
+class BBCWeatherItem : public WeatherItem
+{
  public:
     BBCWeatherItem( QObject *parent = 0 );
     ~BBCWeatherItem();

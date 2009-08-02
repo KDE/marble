@@ -18,7 +18,8 @@
 
 using namespace Marble;
 
-PhotoPlugin::PhotoPlugin() {  
+PhotoPlugin::PhotoPlugin()
+{
     setNameId( "photo" );
     
     // Plugin is enabled by default
@@ -27,25 +28,30 @@ PhotoPlugin::PhotoPlugin() {
     setVisible( false );
 }
      
-void PhotoPlugin::initialize() {
+void PhotoPlugin::initialize()
+{
     qDebug() << "PhotoPlugin: Initialize";
     setModel( new PhotoPluginModel( this ) );
     setNumberOfItems( numberOfImagesPerFetch );
 }
 
-QString PhotoPlugin::name() const {
+QString PhotoPlugin::name() const
+{
     return tr( "Photos" );
 }
 
-QString PhotoPlugin::guiString() const {
+QString PhotoPlugin::guiString() const
+{
     return tr( "&Photos" );
 }
    
-QString PhotoPlugin::description() const {
+QString PhotoPlugin::description() const
+{
     return tr( "Automatically downloads images from around the world in preference to their popularity" );
 }
     
-QIcon PhotoPlugin::icon() const {
+QIcon PhotoPlugin::icon() const
+{
     return QIcon();
 }
 Q_EXPORT_PLUGIN2(PhotoPlugin, Marble::PhotoPlugin)

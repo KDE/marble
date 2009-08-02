@@ -29,10 +29,12 @@ BBCWeatherItem::BBCWeatherItem( QObject *parent )
 {
 }
 
-BBCWeatherItem::~BBCWeatherItem() {
+BBCWeatherItem::~BBCWeatherItem()
+{
 }
 
-bool BBCWeatherItem::request( const QString& type ) {
+bool BBCWeatherItem::request( const QString& type )
+{
     if ( type == "bbcobservation" ) {
         if ( !m_observationRequested ) {
             m_observationRequested = true;
@@ -48,11 +50,13 @@ bool BBCWeatherItem::request( const QString& type ) {
     return false;
 }
 
-QString BBCWeatherItem::service() const {
+QString BBCWeatherItem::service() const
+{
     return QString( "BBC" );
 }
 
-void BBCWeatherItem::addDownloadedFile( const QString& url, const QString& type ) {
+void BBCWeatherItem::addDownloadedFile( const QString& url, const QString& type )
+{
     if( type == "bbcobservation" ) {
         QFile file( url );
         if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
@@ -79,21 +83,25 @@ void BBCWeatherItem::addDownloadedFile( const QString& url, const QString& type 
     }
 }
 
-quint32 BBCWeatherItem::bbcId() const {
+quint32 BBCWeatherItem::bbcId() const
+{
     return m_bbcId;
 }
 
-void BBCWeatherItem::setBbcId( quint32 id ) {
+void BBCWeatherItem::setBbcId( quint32 id )
+{
     m_bbcId = id;
     setId( QString( "bbc" ) + QString::number( id ) );
 }
 
-QUrl BBCWeatherItem::observationUrl() const {
+QUrl BBCWeatherItem::observationUrl() const
+{
     return QUrl( QString( "http://newsrss.bbc.co.uk/weather/forecast/%1/ObservationsRSS.xml" )
                     .arg( QString::number( bbcId() ) ) );
 }
 
-QUrl BBCWeatherItem::forecastUrl() const {
+QUrl BBCWeatherItem::forecastUrl() const
+ {
     return QUrl( QString( "http://newsrss.bbc.co.uk/weather/forecast/%1/Next3DaysRSS.xml" )
                     .arg( QString::number( bbcId() ) ) );
 }

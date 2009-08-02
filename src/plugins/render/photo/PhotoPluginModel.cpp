@@ -117,7 +117,8 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     }
 }
 
-void PhotoPluginModel::parseFile( const QByteArray& file ) {
+void PhotoPluginModel::parseFile( const QByteArray& file )
+{
     QList<AbstractDataPluginItem*> list;
     FlickrParser parser( &list, this );
     

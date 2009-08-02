@@ -18,11 +18,13 @@ class QDate;
 class QDateTime;
 class QIcon;
 
-namespace Marble {
+namespace Marble
+{
     
 class WeatherDataPrivate;
 
-class WeatherData {
+class WeatherData
+{
     Q_DECLARE_TR_FUNCTIONS ( WeatherData )
  public:
     enum WeatherCondition {

@@ -42,28 +42,34 @@ WikipediaItem::WikipediaItem( QObject *parent )
     setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
 }
 
-WikipediaItem::~WikipediaItem() {
+WikipediaItem::~WikipediaItem()
+{
     delete m_browser;
 }
 
-QString WikipediaItem::name() const {
+QString WikipediaItem::name() const
+{
     return id();
 }
 
-void WikipediaItem::setName( const QString& name ) {
+void WikipediaItem::setName( const QString& name )
+{
     setId( name );
     updateToolTip();
 }
 
-QString WikipediaItem::itemType() const {
+QString WikipediaItem::itemType() const
+{
     return "wikipediaItem";
 }
      
-bool WikipediaItem::initialized() {
+bool WikipediaItem::initialized()
+{
     return true;
 }
     
-void WikipediaItem::addDownloadedFile( const QString& url, const QString& type ) {
+void WikipediaItem::addDownloadedFile( const QString& url, const QString& type )
+{
     Q_UNUSED( url )
     Q_UNUSED( type )
 
@@ -73,7 +79,8 @@ void WikipediaItem::addDownloadedFile( const QString& url, const QString& type )
     }
 }
 
-bool WikipediaItem::operator<( const AbstractDataPluginItem *other ) const {
+bool WikipediaItem::operator<( const AbstractDataPluginItem *other ) const
+{
     return this->id() < other->id();
 }
    
@@ -82,6 +89,7 @@ void WikipediaItem::paint( GeoPainter *painter, ViewportParams *viewport,
 {
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
+    Q_UNUSED( viewport )
 
     if ( !showThumbnail() ) {
         m_wikiIcon.paint( painter, wikiIconRect );
@@ -103,57 +111,69 @@ void WikipediaItem::paint( GeoPainter *painter, ViewportParams *viewport,
     }
 }
 
-qreal WikipediaItem::longitude() {
+qreal WikipediaItem::longitude()
+{
     return coordinate().longitude();
 }
     
-void WikipediaItem::setLongitude( qreal longitude ) {
+void WikipediaItem::setLongitude( qreal longitude )
+{
     GeoDataCoordinates updatedCoordinates = coordinate();
     updatedCoordinates.setLongitude( longitude );
     setCoordinate( updatedCoordinates );
 }
     
-qreal WikipediaItem::latitude() {
+qreal WikipediaItem::latitude()
+{
     return coordinate().latitude();
 }
 
-void WikipediaItem::setLatitude( qreal latitude ) {
+void WikipediaItem::setLatitude( qreal latitude )
+{
     GeoDataCoordinates updatedCoordinates = coordinate();
     updatedCoordinates.setLatitude( latitude );
     setCoordinate( updatedCoordinates );
 }
 
-QUrl WikipediaItem::url() {
+QUrl WikipediaItem::url()
+{
     return m_url;
 }
 
-void WikipediaItem::setUrl( const QUrl& url ) {
+void WikipediaItem::setUrl( const QUrl& url )
+{
     m_url = url;
 }
 
-QUrl WikipediaItem::thumbnailImageUrl() {
+QUrl WikipediaItem::thumbnailImageUrl()
+{
     return m_thumbnailImageUrl;
 }
 
-void WikipediaItem::setThumbnailImageUrl( const QUrl& thumbnailImageUrl ) {
+void WikipediaItem::setThumbnailImageUrl( const QUrl& thumbnailImageUrl )
+{
     m_thumbnailImageUrl = thumbnailImageUrl;
 }
 
-QString WikipediaItem::summary() {
+QString WikipediaItem::summary()
+{
     return m_summary;
 }
 
-void WikipediaItem::setSummary( const QString& summary ) {
+void WikipediaItem::setSummary( const QString& summary )
+{
     m_summary = summary;
     updateToolTip();
 }
 
-QAction *WikipediaItem::action() {
+QAction *WikipediaItem::action()
+{
     m_action->setText( id() );
     return m_action;
 }
 
-void WikipediaItem::openBrowser( ) {
+void WikipediaItem::openBrowser( )
+{
     if( m_browser ) {
         delete m_browser;
     }
@@ -164,14 +184,16 @@ void WikipediaItem::openBrowser( ) {
              m_browser, SLOT( setWindowTitle(QString) ) );
 }
     
-void WikipediaItem::setIcon( const QIcon& icon ) {
+void WikipediaItem::setIcon( const QIcon& icon )
+{
     m_action->setIcon( icon );
     m_wikiIcon = icon;
 
     updateSize();
 }
 
-void WikipediaItem::setSettings( QHash<QString, QVariant> settings ) {
+void WikipediaItem::setSettings( QHash<QString, QVariant> settings )
+{
     if ( settings != m_settings ) {
         m_settings = settings;
         updateSize();
@@ -180,7 +202,8 @@ void WikipediaItem::setSettings( QHash<QString, QVariant> settings ) {
     }
 }
 
-void WikipediaItem::updateSize() {
+void WikipediaItem::updateSize()
+{
     if ( showThumbnail() ) {
         setSize( m_thumbnail.size() );
     }
@@ -189,7 +212,8 @@ void WikipediaItem::updateSize() {
     }
 }
 
-void WikipediaItem::updateToolTip() {
+void WikipediaItem::updateToolTip()
+{
     QString toolTip;
     toolTip += "<html><head><meta name=\"qrichtext\" content=\"1\" />";
     toolTip += "<style type=\"text/css\">\\np, li { white-space: pre-wrap; }\\n</style></head>";
@@ -208,7 +232,8 @@ void WikipediaItem::updateToolTip() {
     setToolTip( toolTip.arg( name() ).arg( summary() ) );
 }
 
-bool WikipediaItem::showThumbnail() {
+bool WikipediaItem::showThumbnail()
+{
     return m_settings.value( "showThumbnails", false ).toBool() && !m_thumbnail.isNull();
 }
 

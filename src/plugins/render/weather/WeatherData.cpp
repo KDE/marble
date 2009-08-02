@@ -26,7 +26,8 @@
 
 #include <cmath>
 
-namespace Marble {
+namespace Marble
+{
     
 // Factors
 // m/s to knots
@@ -56,7 +57,8 @@ const qreal HPA2IHG = HPA2HG / 25.4;
 const qreal KEL2CEL = -273.15;
 const qreal CEL2KEL = -KEL2CEL;
 
-class WeatherDataPrivate {
+class WeatherDataPrivate
+{
     Q_DECLARE_TR_FUNCTIONS ( WeatherDataPrivate )
 
  public:
@@ -96,7 +98,8 @@ class WeatherDataPrivate {
         initializeIcons();
     }
     
-    void initializeIcons() {
+    void initializeIcons()
+    {
         if( s_iconPath.size() == 0 ) {
             // Clouds
             s_iconPath.insert( WeatherData::ConditionNotAvailable,
@@ -156,7 +159,8 @@ class WeatherDataPrivate {
         }
     }
     
-    qreal fromKelvin( qreal temp, WeatherData::TemperatureUnit format ) const {
+    qreal fromKelvin( qreal temp, WeatherData::TemperatureUnit format ) const
+    {
         if( WeatherData::Kelvin == format ) {
             return temp;
         }
@@ -172,7 +176,8 @@ class WeatherDataPrivate {
         }
     }
     
-    qreal toKelvin( qreal temp, WeatherData::TemperatureUnit format ) const {
+    qreal toKelvin( qreal temp, WeatherData::TemperatureUnit format ) const
+    {
         if( WeatherData::Kelvin == format ) {
             return temp;
         }
@@ -188,7 +193,8 @@ class WeatherDataPrivate {
         }
     }
 
-    static bool isPositiveValue( qreal value ) {
+    static bool isPositiveValue( qreal value )
+    {
         // A small tolerance
         if( value > -0.5 ) {
             return true;
@@ -196,7 +202,8 @@ class WeatherDataPrivate {
         return false;
     }
     
-    QString generateTemperatureString( qreal temp, WeatherData::TemperatureUnit format ) const {
+    QString generateTemperatureString( qreal temp, WeatherData::TemperatureUnit format ) const
+    {
         QLocale locale = QLocale::system();
         // We round to integer.
         QString string = locale.toString( floor( fromKelvin( temp, format ) + 0.5 ) );
@@ -279,12 +286,14 @@ WeatherData::WeatherData( const WeatherData &other )
     d->ref.ref();
 }
 
-WeatherData::~WeatherData() {
+WeatherData::~WeatherData()
+{
     if ( !d->ref.deref() )
         delete d;
 }
 
-bool WeatherData::isValid() const {
+bool WeatherData::isValid() const
+{
     return hasValidPublishingTime()
            || hasValidDataDate()
            || hasValidCondition()
@@ -299,46 +308,56 @@ bool WeatherData::isValid() const {
            || hasValidHumidity();
 }
 
-QDateTime WeatherData::publishingTime() const {
+QDateTime WeatherData::publishingTime() const
+{
     return d->m_pubTime;
 }
 
-void WeatherData::setPublishingTime( const QDateTime& dateTime ) {
+void WeatherData::setPublishingTime( const QDateTime& dateTime )
+{
     detach();
     d->m_pubTime = dateTime.toUTC();
 }
 
-bool WeatherData::hasValidPublishingTime() const {
+bool WeatherData::hasValidPublishingTime() const
+{
     return d->m_pubTime.isValid();
 }
 
-QDate WeatherData::dataDate() const {
+QDate WeatherData::dataDate() const
+{
     return d->m_dataDate;
 }
 
-void WeatherData::setDataDate( const QDate& date ) {
+void WeatherData::setDataDate( const QDate& date )
+{
     detach();
     d->m_dataDate = date;
 }
 
-bool WeatherData::hasValidDataDate() const {
+bool WeatherData::hasValidDataDate() const
+{
     return d->m_dataDate.isValid();
 }
 
-WeatherData::WeatherCondition WeatherData::condition() const {
+WeatherData::WeatherCondition WeatherData::condition() const
+{
     return d->m_condition;
 }
 
-void WeatherData::setCondition( WeatherData::WeatherCondition condition ) {
+void WeatherData::setCondition( WeatherData::WeatherCondition condition )
+{
     detach();
     d->m_condition = condition;
 }
 
-bool WeatherData::hasValidCondition() const {
+bool WeatherData::hasValidCondition() const
+{
     return d->m_condition != WeatherData::ConditionNotAvailable;
 }
 
-QString WeatherData::conditionString() const {
+QString WeatherData::conditionString() const
+{
     switch ( condition() ) {
         case ClearDay:
             return tr( "sunny" );
@@ -387,7 +406,8 @@ QString WeatherData::conditionString() const {
     }
 }
 
-QIcon WeatherData::icon() const {
+QIcon WeatherData::icon() const
+{
     QIcon icon = WeatherDataPrivate::s_icons.value( condition() );
     
     // If the icon is in the hash, simply return it.
@@ -402,20 +422,24 @@ QIcon WeatherData::icon() const {
     }
 }
 
-WeatherData::WindDirection WeatherData::windDirection() const {
+WeatherData::WindDirection WeatherData::windDirection() const
+{
     return d->m_windDirection;
 }
 
-void WeatherData::setWindDirection( WeatherData::WindDirection direction ) {
+void WeatherData::setWindDirection( WeatherData::WindDirection direction )
+{
     detach();
     d->m_windDirection = direction;
 }
 
-bool WeatherData::hasValidWindDirection() const {
+bool WeatherData::hasValidWindDirection() const
+{
     return d->m_windDirection != WeatherData::DirectionNotAvailable;
 }
 
-QString WeatherData::windDirectionString() const {
+QString WeatherData::windDirectionString() const
+{
     switch ( windDirection() ) {
         case N:
             return tr( "N" );
@@ -454,7 +478,8 @@ QString WeatherData::windDirectionString() const {
     }
 }
 
-qreal WeatherData::windSpeed( WeatherData::SpeedUnit format ) const {
+qreal WeatherData::windSpeed( WeatherData::SpeedUnit format ) const
+{
     if ( WeatherData::mps == format ) {
         return d->m_windSpeed;
     }
@@ -501,7 +526,8 @@ qreal WeatherData::windSpeed( WeatherData::SpeedUnit format ) const {
     }
 }
 
-void WeatherData::setWindSpeed( qreal speed, WeatherData::SpeedUnit format ) {
+void WeatherData::setWindSpeed( qreal speed, WeatherData::SpeedUnit format )
+{
     detach();
     if ( WeatherData::mps == format ) {
         d->m_windSpeed = speed;
@@ -549,11 +575,13 @@ void WeatherData::setWindSpeed( qreal speed, WeatherData::SpeedUnit format ) {
     }
 }
 
-bool WeatherData::hasValidWindSpeed() const {
+bool WeatherData::hasValidWindSpeed() const
+{
     return d->isPositiveValue( d->m_windSpeed );
 }
 
-QString WeatherData::windSpeedString( WeatherData::SpeedUnit unit ) const {
+QString WeatherData::windSpeedString( WeatherData::SpeedUnit unit ) const
+{
     QLocale locale = QLocale::system();
     // We round to integer.
     QString string = locale.toString( floor( windSpeed( unit ) + 0.5 ) );
@@ -578,74 +606,90 @@ QString WeatherData::windSpeedString( WeatherData::SpeedUnit unit ) const {
     return string;
 }
 
-qreal WeatherData::temperature( WeatherData::TemperatureUnit format ) const {
+qreal WeatherData::temperature( WeatherData::TemperatureUnit format ) const
+{
     return d->fromKelvin( d->m_temperature, format );
 }
 
-void WeatherData::setTemperature( qreal temp, WeatherData::TemperatureUnit format ) {
+void WeatherData::setTemperature( qreal temp, WeatherData::TemperatureUnit format )
+{
     detach();
     d->m_temperature = d->toKelvin( temp, format );
 }
 
-bool WeatherData::hasValidTemperature() const {
+bool WeatherData::hasValidTemperature() const
+{
     return d->isPositiveValue( d->m_temperature );
 }
 
-QString WeatherData::temperatureString( WeatherData::TemperatureUnit format ) const {
+QString WeatherData::temperatureString( WeatherData::TemperatureUnit format ) const
+{
     return d->generateTemperatureString( d->m_temperature,
                                          format );
 }
 
-qreal WeatherData::maxTemperature( WeatherData::TemperatureUnit format ) const {
+qreal WeatherData::maxTemperature( WeatherData::TemperatureUnit format ) const
+{
     return d->fromKelvin( d->m_maxTemperature, format );
 }
 
-void WeatherData::setMaxTemperature( qreal temp, WeatherData::TemperatureUnit format ) {
+void WeatherData::setMaxTemperature( qreal temp, WeatherData::TemperatureUnit format )
+{
     detach();
     d->m_maxTemperature = d->toKelvin( temp, format );
 }
 
-QString WeatherData::maxTemperatureString( WeatherData::TemperatureUnit format ) const {
+QString WeatherData::maxTemperatureString( WeatherData::TemperatureUnit format ) const
+{
     return d->generateTemperatureString( d->m_maxTemperature,
                                          format );
 }
 
-bool WeatherData::hasValidMaxTemperature() const {
+bool WeatherData::hasValidMaxTemperature() const
+{
     return d->isPositiveValue( d->m_maxTemperature );
 }
 
-qreal WeatherData::minTemperature( WeatherData::TemperatureUnit format ) const {
+qreal WeatherData::minTemperature( WeatherData::TemperatureUnit format ) const
+{
     return d->fromKelvin( d->m_minTemperature, format );
 }
 
-QString WeatherData::minTemperatureString( WeatherData::TemperatureUnit format ) const {
+QString WeatherData::minTemperatureString( WeatherData::TemperatureUnit format ) const
+{
     return d->generateTemperatureString( d->m_minTemperature,
                                          format );
 }
 
-void WeatherData::setMinTemperature( qreal temp, WeatherData::TemperatureUnit format ) {
+void WeatherData::setMinTemperature( qreal temp, WeatherData::TemperatureUnit format )
+{
     detach();
     d->m_minTemperature = d->toKelvin( temp, format );
 }
 
-bool WeatherData::hasValidMinTemperature() const {
+bool WeatherData::hasValidMinTemperature() const
+{
     return d->isPositiveValue( d->m_minTemperature );
 }
 
-WeatherData::Visibility WeatherData::visibility() const {
+WeatherData::Visibility WeatherData::visibility() const
+{
     return d->m_visibility;
 }
 
-void WeatherData::setVisibilty( WeatherData::Visibility visibility ) {
+void WeatherData::setVisibilty( WeatherData::Visibility visibility )
+{
     detach();
     d->m_visibility = visibility;
 }
 
-bool WeatherData::hasValidVisibility() const {
+bool WeatherData::hasValidVisibility() const
+{
     return d->m_visibility != WeatherData::VisibilityNotAvailable;
 }
 
-qreal WeatherData::pressure( WeatherData::PressureUnit format ) const {
+qreal WeatherData::pressure( WeatherData::PressureUnit format ) const
+{
     if ( WeatherData::HectoPascal == format ) {
         return d->m_pressure;
     }
@@ -667,7 +711,8 @@ qreal WeatherData::pressure( WeatherData::PressureUnit format ) const {
     }
 }
 
-void WeatherData::setPressure( qreal pressure, WeatherData::PressureUnit format ) {
+void WeatherData::setPressure( qreal pressure, WeatherData::PressureUnit format )
+{
     detach();
     if ( WeatherData::HectoPascal == format ) {
         d->m_pressure = pressure;
@@ -689,11 +734,13 @@ void WeatherData::setPressure( qreal pressure, WeatherData::PressureUnit format 
     }
 }
 
-bool WeatherData::hasValidPressure() const {
+bool WeatherData::hasValidPressure() const
+{
     return d->isPositiveValue( d->m_pressure );
 }
 
-QString WeatherData::pressureString( WeatherData::PressureUnit unit ) const {
+QString WeatherData::pressureString( WeatherData::PressureUnit unit ) const
+{
     QLocale locale = QLocale::system();
     // We round to integer.
     QString string = locale.toString( pressure( unit ), 'f', 2 );
@@ -718,20 +765,24 @@ QString WeatherData::pressureString( WeatherData::PressureUnit unit ) const {
     return string;
 }
 
-WeatherData::PressureDevelopment WeatherData::pressureDevelopment() const {
+WeatherData::PressureDevelopment WeatherData::pressureDevelopment() const
+{
     return d->m_pressureDevelopment;
 }
 
-void WeatherData::setPressureDevelopment( WeatherData::PressureDevelopment pressureDevelopment ) {
+void WeatherData::setPressureDevelopment( WeatherData::PressureDevelopment pressureDevelopment )
+{
     detach();
     d->m_pressureDevelopment = pressureDevelopment;
 }
 
-bool WeatherData::hasValidPressureDevelopment() const {
+bool WeatherData::hasValidPressureDevelopment() const
+{
     return d->m_pressureDevelopment != WeatherData::PressureDevelopmentNotAvailable;
 }
 
-QString WeatherData::pressureDevelopmentString() const {
+QString WeatherData::pressureDevelopmentString() const
+{
     switch ( pressureDevelopment() ) {
         case Rising:
             return tr( "rising", "air pressure is rising" );
@@ -744,16 +795,19 @@ QString WeatherData::pressureDevelopmentString() const {
     }
 }
 
-qreal WeatherData::humidity() const {
+qreal WeatherData::humidity() const
+{
     return d->m_humidity;
 }
 
-void WeatherData::setHumidity( qreal humidity ) {
+void WeatherData::setHumidity( qreal humidity )
+{
     detach();
     d->m_humidity = humidity;
 }
 
-bool WeatherData::hasValidHumidity() const {
+bool WeatherData::hasValidHumidity() const
+{
     return d->isPositiveValue( d->m_humidity );
 }
 

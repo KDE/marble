@@ -25,7 +25,8 @@ FakeWeatherService::FakeWeatherService( QObject *parent )
 {
 }
 
-FakeWeatherService::~FakeWeatherService() {
+FakeWeatherService::~FakeWeatherService()
+{
 }
     
 void FakeWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,

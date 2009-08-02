@@ -29,10 +29,14 @@ WeatherModel::WeatherModel( QObject *parent )
      addService( new BBCWeatherService( this ) );
 }
     
-WeatherModel::~WeatherModel() {
+WeatherModel::~WeatherModel()
+{
 }
 
-void WeatherModel::downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item ) {
+void WeatherModel::downloadItemData( const QUrl& url,
+                                     const QString& type,
+                                     AbstractDataPluginItem *item )
+{
     AbstractDataPluginItem *existingItem = findItem( item->id() );
     if ( !existingItem ) {
         WeatherItem *weatherItem = qobject_cast<WeatherItem*>( item );
@@ -51,7 +55,8 @@ void WeatherModel::downloadItemData( const QUrl& url, const QString& type, Abstr
     }
 }
 
-void WeatherModel::addItemToList( AbstractDataPluginItem *item ) {
+void WeatherModel::addItemToList( AbstractDataPluginItem *item )
+{
     AbstractDataPluginItem *existingItem = findItem( item->id() );
     if ( !existingItem ) {
         AbstractDataPluginModel::addItemToList( item );
@@ -68,12 +73,14 @@ void WeatherModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     emit additionalItemsRequested( box, facade, number );
 }
 
-void WeatherModel::parseFile( const QByteArray& file ) {
+void WeatherModel::parseFile( const QByteArray& file )
+{
     // We won't request any description files so we don't need to parse it
     Q_UNUSED( file );
 }
 
-void WeatherModel::addService( AbstractWeatherService *service ) {
+void WeatherModel::addService( AbstractWeatherService *service )
+{
     connect( service, SIGNAL( createdItem( AbstractDataPluginItem * ) ),
              this, SLOT( addItemToList( AbstractDataPluginItem * ) ) );
     connect( service, SIGNAL( requestedDownload( const QUrl&,

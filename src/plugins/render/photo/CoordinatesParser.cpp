@@ -21,7 +21,8 @@ CoordinatesParser::CoordinatesParser( GeoDataCoordinates *coordinates )
 {
 }
 
-bool CoordinatesParser::read( QIODevice *device ) {
+bool CoordinatesParser::read( QIODevice *device )
+{
     setDevice( device );
     
     while( !atEnd() ) {
@@ -41,7 +42,8 @@ bool CoordinatesParser::read( QIODevice *device ) {
 }
 
 
-void CoordinatesParser::readUnknownElement() {
+void CoordinatesParser::readUnknownElement()
+{
     Q_ASSERT( isStartElement() );
 
     while ( !atEnd() ) {
@@ -55,7 +57,8 @@ void CoordinatesParser::readUnknownElement() {
     }
 }
 
-void CoordinatesParser::readRsp() {
+void CoordinatesParser::readRsp()
+{
     Q_ASSERT( isStartElement() );
     
     while( !atEnd() ) {
@@ -73,7 +76,8 @@ void CoordinatesParser::readRsp() {
     }
 }
 
-void CoordinatesParser::readPhoto() {
+void CoordinatesParser::readPhoto()
+{
     Q_ASSERT( isStartElement()
               && name() == "photo" );
     
@@ -92,7 +96,8 @@ void CoordinatesParser::readPhoto() {
     }
 }
 
-void CoordinatesParser::readLocation() {
+void CoordinatesParser::readLocation()
+{
     Q_ASSERT( isStartElement()
               && name() == "location" );
  

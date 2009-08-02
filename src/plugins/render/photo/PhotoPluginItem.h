@@ -19,9 +19,11 @@ class QAction;
 class QUrl;
 class QWebView;
 
-namespace Marble {
+namespace Marble
+{
  
-class PhotoPluginItem : public AbstractDataPluginItem {
+class PhotoPluginItem : public AbstractDataPluginItem
+{
     Q_OBJECT
  public:
     explicit PhotoPluginItem( QObject *parent );

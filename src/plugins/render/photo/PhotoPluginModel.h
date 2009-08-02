@@ -13,7 +13,8 @@
 
 #include "AbstractDataPluginModel.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleDataFacade;
 

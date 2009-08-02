@@ -21,7 +21,8 @@ class QString;
 class QAction;
 class QDate;
 
-namespace Marble {
+namespace Marble
+{
     
 class GeoPainter;
 class ViewportParams;
@@ -34,7 +35,8 @@ class WeatherItemPrivate;
  * This is the class painting a weather item on the screen. So it is a subclass of
  * AbstractDataItem.
  */
-class WeatherItem : public AbstractDataPluginItem {
+class WeatherItem : public AbstractDataPluginItem
+{
     Q_OBJECT
  public:
     WeatherItem( QObject *parent = 0 );

@@ -35,7 +35,8 @@ BBCWeatherService::BBCWeatherService( QObject *parent )
 {
 }
 
-BBCWeatherService::~BBCWeatherService() {
+BBCWeatherService::~BBCWeatherService()
+{
 }
     
 void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
@@ -62,7 +63,8 @@ void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
     }
 }
 
-void BBCWeatherService::setupList() {
+void BBCWeatherService::setupList()
+{
     QTime time;
     QFile file( MarbleDirs::path( "weather/bbc-stations.xml" ) );
 

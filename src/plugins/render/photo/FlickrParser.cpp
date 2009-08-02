@@ -28,7 +28,8 @@ FlickrParser::FlickrParser( QList<AbstractDataPluginItem *> *list,
 {
 }
 
-bool FlickrParser::read( QByteArray data ) {
+bool FlickrParser::read( QByteArray data )
+{
     addData( data );
 
     while (!atEnd()) {
@@ -47,7 +48,8 @@ bool FlickrParser::read( QByteArray data ) {
     return !error();
 }
 
-void FlickrParser::readUnknownElement() {
+void FlickrParser::readUnknownElement()
+{
     Q_ASSERT( isStartElement() );
 
     while ( !atEnd() ) {
@@ -61,7 +63,8 @@ void FlickrParser::readUnknownElement() {
     }
 }
 
-void FlickrParser::readFlickr() {
+void FlickrParser::readFlickr()
+{
     Q_ASSERT( isStartElement()
               && name() == "rsp" 
               && attributes().value( "stat" ) == "ok" );
@@ -81,7 +84,8 @@ void FlickrParser::readFlickr() {
     }
 }
 
-void FlickrParser::readPhotos() {
+void FlickrParser::readPhotos()
+{
     Q_ASSERT( isStartElement()
               && name() == "photos" );
 
@@ -100,7 +104,8 @@ void FlickrParser::readPhotos() {
     }
 }
 
-void FlickrParser::readPhoto() {
+void FlickrParser::readPhoto()
+{
     Q_ASSERT( isStartElement()
               && name() == "photo" );
               

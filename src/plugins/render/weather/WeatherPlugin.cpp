@@ -75,52 +75,63 @@ WeatherPlugin::WeatherPlugin()
     readSettings();
 }
 
-WeatherPlugin::~WeatherPlugin() {
+WeatherPlugin::~WeatherPlugin()
+{
     delete m_aboutDialog;
     delete m_configDialog;
 }
 
-void WeatherPlugin::initialize() {
+void WeatherPlugin::initialize()
+{
     WeatherModel *model = new WeatherModel( this );
     setModel( model );
     updateItemSettings();
     setNumberOfItems( numberOfStationsPerFetch );
 }
 
-QString WeatherPlugin::name() const {
+QString WeatherPlugin::name() const
+{
     return tr( "Weather" );
 }
 
-QString WeatherPlugin::guiString() const {
+QString WeatherPlugin::guiString() const
+{
     return tr( "&Weather" );
 }
 
-QString WeatherPlugin::description() const {
+QString WeatherPlugin::description() const
+{
     return tr( "Download weather information from many weather stations all around the world" );
 }
 
-QIcon WeatherPlugin::icon() const {
+QIcon WeatherPlugin::icon() const
+{
     return m_icon;
 }
 
-QDialog *WeatherPlugin::aboutDialog() const {
+QDialog *WeatherPlugin::aboutDialog() const
+{
     return m_aboutDialog;
 }
 
-QDialog *WeatherPlugin::configDialog() const {
+QDialog *WeatherPlugin::configDialog() const
+{
     return m_configDialog;
 }
 
-QHash<QString,QVariant> WeatherPlugin::settings() const {
+QHash<QString,QVariant> WeatherPlugin::settings() const
+{
     return m_settings;
 }
 
-void WeatherPlugin::setSettings( QHash<QString,QVariant> settings ) {
+void WeatherPlugin::setSettings( QHash<QString,QVariant> settings )
+{
     m_settings = settings;
     readSettings();
 }
 
-void WeatherPlugin::readSettings() {
+void WeatherPlugin::readSettings()
+{
     // Information
     if ( m_settings.value( "showCondition", showConditionDefault ).toBool() )
         ui_configWidget.m_weatherConditionBox->setCheckState( Qt::Checked );
@@ -193,7 +204,8 @@ void WeatherPlugin::readSettings() {
     updateItemSettings();
 }
 
-void WeatherPlugin::writeSettings() {
+void WeatherPlugin::writeSettings()
+{
     // Information
     m_settings.insert( "showCondition",
                        ui_configWidget.m_weatherConditionBox->checkState() == Qt::Checked );
@@ -212,7 +224,8 @@ void WeatherPlugin::writeSettings() {
     emit settingsChanged( nameId() );
 }
 
-void WeatherPlugin::updateItemSettings() {
+void WeatherPlugin::updateItemSettings()
+{
     AbstractDataPluginModel *abstractModel = model();
     if( abstractModel != 0 ) {
         abstractModel->setItemSettings( m_settings );

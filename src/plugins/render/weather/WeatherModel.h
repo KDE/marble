@@ -17,13 +17,15 @@
 
 class QByteArray;
 
-namespace Marble {
+namespace Marble
+{
 
 class AbstractWeatherService;
 class GeoDataLatLonAltBox;
 class MarbleDataFacade;
     
-class WeatherModel : public AbstractDataPluginModel {
+class WeatherModel : public AbstractDataPluginModel
+{
     Q_OBJECT
     
  public:

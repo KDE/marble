@@ -22,9 +22,11 @@
 #include <QtCore/QRect>
 #include <QtCore/QSize>
 
-namespace Marble {
+namespace Marble
+{
 
-class AbstractDataPluginItemPrivate {
+class AbstractDataPluginItemPrivate
+{
  public:
     AbstractDataPluginItemPrivate()
         : m_addedAngularResolution( 0 )
@@ -45,35 +47,43 @@ AbstractDataPluginItem::AbstractDataPluginItem( QObject *parent )
 {
 }
 
-AbstractDataPluginItem::~AbstractDataPluginItem() {
+AbstractDataPluginItem::~AbstractDataPluginItem()
+{
     delete d;
 }
 
-QString AbstractDataPluginItem::target() {
+QString AbstractDataPluginItem::target()
+{
     return d->m_target;
 }
 
-void AbstractDataPluginItem::setTarget( const QString& target ) {
+void AbstractDataPluginItem::setTarget( const QString& target )
+{
     d->m_target = target;
 }
 
-QString AbstractDataPluginItem::id() const {
+QString AbstractDataPluginItem::id() const
+{
     return d->m_id;
 }
 
-void AbstractDataPluginItem::setId( const QString& id ) {
+void AbstractDataPluginItem::setId( const QString& id )
+{
     d->m_id = id;
 }
 
-qreal AbstractDataPluginItem::addedAngularResolution() const {
+qreal AbstractDataPluginItem::addedAngularResolution() const
+{
     return d->m_addedAngularResolution;
 }
 
-void AbstractDataPluginItem::setAddedAngularResolution( qreal resolution ) {
+void AbstractDataPluginItem::setAddedAngularResolution( qreal resolution )
+{
     d->m_addedAngularResolution = resolution;
 }
 
-void AbstractDataPluginItem::setSettings( QHash<QString, QVariant> settings ) {
+void AbstractDataPluginItem::setSettings( QHash<QString, QVariant> settings )
+{
     d->m_settings = settings;
 }
 
@@ -82,11 +92,13 @@ bool AbstractDataPluginItem::isGeoProjected()
     return false;
 }
 
-QAction *AbstractDataPluginItem::action() {
+QAction *AbstractDataPluginItem::action()
+{
     return 0;
 }
 
-void AbstractDataPluginItem::addDownloadedFile( const QString& url, const QString& type ) {
+void AbstractDataPluginItem::addDownloadedFile( const QString& url, const QString& type )
+{
     Q_UNUSED( url )
     Q_UNUSED( type )
 }

@@ -43,10 +43,12 @@ WikipediaModel::WikipediaModel( QObject *parent )
     m_languageCode = MarbleLocale::languageCode();
 }
 
-WikipediaModel::~WikipediaModel() {
+WikipediaModel::~WikipediaModel()
+{
 }
 
-void WikipediaModel::setShowThumbnail( bool show ) {
+void WikipediaModel::setShowThumbnail( bool show )
+{
     m_showThumbnail = show;
 }
 
@@ -76,7 +78,8 @@ void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
     downloadDescriptionFile( QUrl( geonamesUrl ) );
 }
 
-void WikipediaModel::parseFile( const QByteArray& file ) {
+void WikipediaModel::parseFile( const QByteArray& file )
+{
     QList<WikipediaItem*> list;
     GeonamesParser parser( &list, this );
     

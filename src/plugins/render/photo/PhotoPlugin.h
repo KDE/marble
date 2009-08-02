@@ -15,9 +15,11 @@
 
 class QIcon;
 
-namespace Marble {
+namespace Marble
+{
 
-class PhotoPlugin : public AbstractDataPlugin {
+class PhotoPlugin : public AbstractDataPlugin
+{
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( PhotoPlugin )

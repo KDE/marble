@@ -41,7 +41,8 @@ BBCParser::BBCParser()
     BBCParser::setupHashes();
 }
 
-QList<WeatherData> BBCParser::read( QIODevice *device ) {
+QList<WeatherData> BBCParser::read( QIODevice *device )
+{
     m_list.clear();
     setDevice( device );
 
@@ -59,7 +60,8 @@ QList<WeatherData> BBCParser::read( QIODevice *device ) {
     return m_list;
 }
 
-void BBCParser::readUnknownElement() {
+void BBCParser::readUnknownElement()
+{
     Q_ASSERT( isStartElement() );
 
     while ( !atEnd() ) {
@@ -73,7 +75,8 @@ void BBCParser::readUnknownElement() {
     }
 }
 
-void BBCParser::readBBC() {
+void BBCParser::readBBC()
+{
     Q_ASSERT( isStartElement()
               && name() == "rss" );
               
@@ -92,7 +95,8 @@ void BBCParser::readBBC() {
     }
 }
 
-void BBCParser::readChannel() {
+void BBCParser::readChannel()
+{
     Q_ASSERT( isStartElement()
               && name() == "channel" );
 
@@ -111,7 +115,8 @@ void BBCParser::readChannel() {
     }
 }
 
-void BBCParser::readItem() {
+void BBCParser::readItem()
+{
     Q_ASSERT( isStartElement()
               && name() == "item" );
     
@@ -138,7 +143,8 @@ void BBCParser::readItem() {
     m_list.append( item );
 }
 
-void BBCParser::readDescription( WeatherData *data ) {
+void BBCParser::readDescription( WeatherData *data )
+{
     Q_ASSERT( isStartElement()
               && name() == "description" );
         
@@ -248,7 +254,8 @@ void BBCParser::readDescription( WeatherData *data ) {
     }
 }
 
-void BBCParser::readTitle( WeatherData *data ) {
+void BBCParser::readTitle( WeatherData *data )
+{
     Q_ASSERT( isStartElement()
               && name() == "title" );
     
@@ -310,7 +317,8 @@ void BBCParser::readTitle( WeatherData *data ) {
     }
 }
 
-void BBCParser::readPubDate( WeatherData *data ) {
+void BBCParser::readPubDate( WeatherData *data )
+{
     Q_ASSERT( isStartElement()
               && name() == "pubDate" );
 
@@ -362,7 +370,8 @@ void BBCParser::readPubDate( WeatherData *data ) {
     }
 }
 
-void BBCParser::setupHashes() {
+void BBCParser::setupHashes()
+{
     if( !( ( dayConditions.isEmpty() )
            || ( nightConditions.isEmpty() )
            || ( windDirections.isEmpty() )

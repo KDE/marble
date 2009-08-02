@@ -44,23 +44,28 @@ PhotoPluginItem::PhotoPluginItem( QObject *parent )
     connect( m_action, SIGNAL( triggered() ), this, SLOT( openBrowser() ) );
 }
 
-PhotoPluginItem::~PhotoPluginItem() {
+PhotoPluginItem::~PhotoPluginItem()
+{
     delete m_browser;
 }
 
-QString PhotoPluginItem::name() const {
+QString PhotoPluginItem::name() const
+{
     return title();
 }
 
-QString PhotoPluginItem::itemType() const {
+QString PhotoPluginItem::itemType() const
+{
     return QString( "photoItem" );
 }
  
-bool PhotoPluginItem::initialized() {
+bool PhotoPluginItem::initialized()
+{
     return !m_smallImage.isNull() && m_hasCoordinates;
 }
 
-void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type ) {
+void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type )
+{
     if( type == "thumbnail" ) {
         m_smallImage.load( url );
         setSize( m_smallImage.size() );
@@ -86,21 +91,25 @@ void PhotoPluginItem::paint( GeoPainter *painter, ViewportParams *viewport,
 {
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
+    Q_UNUSED( viewport )
 
     painter->drawPixmap( 0, 0, m_smallImage );
 }
              
-bool PhotoPluginItem::operator<( const AbstractDataPluginItem *other ) const {
+bool PhotoPluginItem::operator<( const AbstractDataPluginItem *other ) const
+{
     return this->id() < other->id();
 }
 
-QUrl PhotoPluginItem::photoUrl() const {
+QUrl PhotoPluginItem::photoUrl() const
+{
     QString url = "http://farm%1.static.flickr.com/%2/%3_%4_t.jpg";
     
     return QUrl( url.arg( farm() ).arg( server() ).arg( id() ).arg( secret() ) );
 }
 
-QUrl PhotoPluginItem::infoUrl() const {
+QUrl PhotoPluginItem::infoUrl() const
+{
     QHash<QString,QString> options;
     
     options.insert( "photo_id", id() );
@@ -108,55 +117,67 @@ QUrl PhotoPluginItem::infoUrl() const {
     return PhotoPluginModel::generateUrl( "flickr", "flickr.photos.geo.getLocation", options );
 }
 
-QString PhotoPluginItem::server() const {
+QString PhotoPluginItem::server() const
+{
     return m_server;
 }
 
-void PhotoPluginItem::setServer( const QString& server ) {
+void PhotoPluginItem::setServer( const QString& server )
+{
     m_server = server;
 }
 
-QString PhotoPluginItem::farm() const {
+QString PhotoPluginItem::farm() const
+{
     return m_farm;
 }
 
-void PhotoPluginItem::setFarm( const QString& farm ) {
+void PhotoPluginItem::setFarm( const QString& farm )
+{
     m_farm = farm;
 }
 
-QString PhotoPluginItem::secret() const {
+QString PhotoPluginItem::secret() const
+{
     return m_secret;
 }
 
-void PhotoPluginItem::setSecret( const QString& secret ) {
+void PhotoPluginItem::setSecret( const QString& secret )
+{
     m_secret = secret;
 }
 
-QString PhotoPluginItem::owner() const {
+QString PhotoPluginItem::owner() const
+{
     return m_owner;
 }
     
-void PhotoPluginItem::setOwner( const QString& owner ) {
+void PhotoPluginItem::setOwner( const QString& owner )
+{
     m_owner = owner;
 }
 
-QString PhotoPluginItem::title() const {
+QString PhotoPluginItem::title() const
+{
     return m_title;
 }
 
-void PhotoPluginItem::setTitle( const QString& title ) {
+void PhotoPluginItem::setTitle( const QString& title )
+{
     m_title = title;
     m_action->setText( title );
 }
 
-QAction *PhotoPluginItem::action() {
+QAction *PhotoPluginItem::action()
+{
     if( m_action->icon().isNull() ) {
         m_action->setIcon( QIcon( m_smallImage ) );
     }
     return m_action;
 }
 
-void PhotoPluginItem::openBrowser( ) {
+void PhotoPluginItem::openBrowser()
+{
     if( m_browser ) {
         delete m_browser;
     }

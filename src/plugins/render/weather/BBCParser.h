@@ -22,7 +22,8 @@
 class QByteArray;
 class QObject;
 
-namespace Marble {
+namespace Marble
+{
 
 class BBCParser : public QXmlStreamReader
 {

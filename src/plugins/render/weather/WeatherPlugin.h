@@ -19,11 +19,13 @@
 
 class QIcon;
 
-namespace Marble {
+namespace Marble
+{
 
 class PluginAboutDialog;
 
-class WeatherPlugin : public AbstractDataPlugin {
+class WeatherPlugin : public AbstractDataPlugin
+{
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( WeatherPlugin )

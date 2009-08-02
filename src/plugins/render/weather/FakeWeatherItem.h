@@ -15,9 +15,11 @@
 
 class QString;
 
-namespace Marble {
+namespace Marble
+{
 
-class FakeWeatherItem : public WeatherItem {
+class FakeWeatherItem : public WeatherItem
+{
  public:
     FakeWeatherItem( QObject *parent = 0 );
     ~FakeWeatherItem();

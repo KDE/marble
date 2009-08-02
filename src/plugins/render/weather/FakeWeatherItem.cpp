@@ -18,14 +18,17 @@ FakeWeatherItem::FakeWeatherItem( QObject *parent )
 {
 }
 
-FakeWeatherItem::~FakeWeatherItem() {
+FakeWeatherItem::~FakeWeatherItem()
+{
 }
 
-QString FakeWeatherItem::service() const {
+QString FakeWeatherItem::service() const
+{
     return QString( "fake" );
 }
 
-void FakeWeatherItem::addDownloadedFile( const QString& url, const QString& type ) {
+void FakeWeatherItem::addDownloadedFile( const QString& url, const QString& type )
+{
     // There are no downloadable files for the fake backend
     Q_UNUSED( url );
     Q_UNUSED( type );

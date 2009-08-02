@@ -28,7 +28,8 @@ GeonamesParser::GeonamesParser( QList<WikipediaItem *> *list,
 {
 }
 
-bool GeonamesParser::read( const QByteArray& data ) {
+bool GeonamesParser::read( const QByteArray& data )
+{
     addData( data );
 
     while (!atEnd()) {
@@ -45,7 +46,8 @@ bool GeonamesParser::read( const QByteArray& data ) {
     return !error();
 }
 
-void GeonamesParser::readUnknownElement() {
+void GeonamesParser::readUnknownElement()
+{
     Q_ASSERT( isStartElement() );
 
     while ( !atEnd() ) {
@@ -59,7 +61,8 @@ void GeonamesParser::readUnknownElement() {
     }
 }
 
-void GeonamesParser::readGeonames() {
+void GeonamesParser::readGeonames()
+{
     Q_ASSERT( isStartElement()
               && name() == "geonames" );
     
@@ -78,7 +81,8 @@ void GeonamesParser::readGeonames() {
     }
 }
 
-void GeonamesParser::readEntry() {
+void GeonamesParser::readEntry()
+{
     Q_ASSERT( isStartElement()
               && name() == "entry" );
               
@@ -110,7 +114,8 @@ void GeonamesParser::readEntry() {
     }
 }
 
-void GeonamesParser::readTitle( WikipediaItem *item ) {
+void GeonamesParser::readTitle( WikipediaItem *item )
+{
     Q_ASSERT( isStartElement()
               && name() == "title" );
               
@@ -126,7 +131,8 @@ void GeonamesParser::readTitle( WikipediaItem *item ) {
     }
 }
 
-void GeonamesParser::readLongitude( WikipediaItem *item ) {
+void GeonamesParser::readLongitude( WikipediaItem *item )
+{
     Q_ASSERT( isStartElement()
               && name() == "lng" );
               
@@ -142,7 +148,8 @@ void GeonamesParser::readLongitude( WikipediaItem *item ) {
     }
 }
 
-void GeonamesParser::readLatitude( WikipediaItem *item ) {
+void GeonamesParser::readLatitude( WikipediaItem *item )
+{
     Q_ASSERT( isStartElement()
               && name() == "lat" );
               
@@ -158,7 +165,8 @@ void GeonamesParser::readLatitude( WikipediaItem *item ) {
     }
 }
 
-void GeonamesParser::readUrl( WikipediaItem *item ) {
+void GeonamesParser::readUrl( WikipediaItem *item )
+{
     Q_ASSERT( isStartElement()
               && name() == "wikipediaUrl" );
               
@@ -174,7 +182,8 @@ void GeonamesParser::readUrl( WikipediaItem *item ) {
     }
 }
 
-void GeonamesParser::readSummary( WikipediaItem *item ) {
+void GeonamesParser::readSummary( WikipediaItem *item )
+{
     Q_ASSERT( isStartElement()
               && name() == "summary" );
 
@@ -190,7 +199,8 @@ void GeonamesParser::readSummary( WikipediaItem *item ) {
     }
 }
 
-void GeonamesParser::readThumbnailImage( WikipediaItem *item ) {
+void GeonamesParser::readThumbnailImage( WikipediaItem *item )
+{
     Q_ASSERT( isStartElement()
               && name() == "thumbnailImg" );
              

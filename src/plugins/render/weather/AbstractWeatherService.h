@@ -14,11 +14,13 @@
 // Marble
 #include "WeatherModel.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class AbstractWeatherServicePrivate;
 
-class AbstractWeatherService : public QObject {
+class AbstractWeatherService : public QObject
+{
     Q_OBJECT
     
  public:

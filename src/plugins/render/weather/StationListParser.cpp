@@ -38,7 +38,8 @@ StationListParser::StationListParser( QObject *parent )
 {
 }
 
-QList<BBCWeatherItem*> StationListParser::read( QIODevice *device ) {
+QList<BBCWeatherItem*> StationListParser::read( QIODevice *device )
+{
     m_list.clear();
     setDevice( device );
 
@@ -56,7 +57,8 @@ QList<BBCWeatherItem*> StationListParser::read( QIODevice *device ) {
     return m_list;
 }
 
-void StationListParser::readUnknownElement() {
+void StationListParser::readUnknownElement()
+{
     Q_ASSERT( isStartElement() );
 
     while ( !atEnd() ) {
@@ -70,7 +72,8 @@ void StationListParser::readUnknownElement() {
     }
 }
 
-void StationListParser::readStationList() {
+void StationListParser::readStationList()
+{
     Q_ASSERT( isStartElement()
               && name() == "StationList" );
               
@@ -89,7 +92,8 @@ void StationListParser::readStationList() {
     }
 }
     
-void StationListParser::readStation() {
+void StationListParser::readStation()
+{
     Q_ASSERT( isStartElement()
               && name() == "Station" );
     
@@ -124,7 +128,8 @@ void StationListParser::readStation() {
     m_list.insert( i, item );
 }
 
-QString StationListParser::readCharacters() {
+QString StationListParser::readCharacters()
+{
     Q_ASSERT( isStartElement() );
     
     QString string;
@@ -147,7 +152,8 @@ QString StationListParser::readCharacters() {
     return string;
 }
 
-void StationListParser::readPoint( BBCWeatherItem *item ) {
+void StationListParser::readPoint( BBCWeatherItem *item )
+{
     Q_ASSERT( isStartElement()
               && name() == "Point" );
     

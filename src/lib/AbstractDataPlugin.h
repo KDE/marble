@@ -17,7 +17,8 @@
 
 class QEvent;
 
-namespace Marble {
+namespace Marble
+{
     
 class Geopainter;
 class ViewportParams;
@@ -37,7 +38,8 @@ class AbstractDataPluginPrivate;
  * Additionally it should be useful to set standard values via setEnabled (often true)
  * and setVisible (often false) in the constructor of a subclass.
  **/
-class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin {
+class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
+{
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
     

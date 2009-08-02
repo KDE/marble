@@ -17,7 +17,8 @@
 class QByteArray;
 class QObject;
 
-namespace Marble {
+namespace Marble
+{
     
 class AbstractDataPluginItem;
 

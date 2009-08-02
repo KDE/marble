@@ -31,7 +31,8 @@
 
 #include <cmath>
 
-namespace Marble {
+namespace Marble
+{
 
 const QString descriptionPrefix( "description_" );
 
@@ -47,7 +48,8 @@ const qreal boxComparisonFactor = 16.0;
 // Separator to separate the id of the item from the file type
 const char fileIdSeparator = '_';
     
-class AbstractDataPluginModelPrivate {
+class AbstractDataPluginModelPrivate
+{
  public:
     AbstractDataPluginModelPrivate( const QString& name, AbstractDataPluginModel * parent )
         : m_parent( parent ),
@@ -116,7 +118,8 @@ AbstractDataPluginModel::AbstractDataPluginModel( const QString& name, QObject *
     d->m_downloadTimer->start( timeBetweenDownloads );
 }
 
-AbstractDataPluginModel::~AbstractDataPluginModel() {
+AbstractDataPluginModel::~AbstractDataPluginModel()
+{
     delete d;
 }
 
@@ -215,7 +218,8 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
     return list;
 }
 
-QList<AbstractDataPluginItem *> AbstractDataPluginModel::whichItemAt( const QPoint& curpos ) {
+QList<AbstractDataPluginItem *> AbstractDataPluginModel::whichItemAt( const QPoint& curpos )
+{
     QList<AbstractDataPluginItem *> itemsAt;
     
     foreach( AbstractDataPluginItem* item, d->m_displayedItems ) {
@@ -226,7 +230,8 @@ QList<AbstractDataPluginItem *> AbstractDataPluginModel::whichItemAt( const QPoi
     return itemsAt;
 }
 
-void AbstractDataPluginModel::parseFile( const QByteArray& file ) {
+void AbstractDataPluginModel::parseFile( const QByteArray& file )
+{
     Q_UNUSED( file );
 }
 
@@ -248,7 +253,8 @@ void AbstractDataPluginModel::downloadItemData( const QUrl& url,
     addItemToList( item );
 }
 
-void AbstractDataPluginModel::downloadDescriptionFile( const QUrl& url ) {    
+void AbstractDataPluginModel::downloadDescriptionFile( const QUrl& url )
+{
     if( !url.isEmpty() ) {  
         QString name( descriptionPrefix );
         name += QString::number( d->m_descriptionFileNumber );
@@ -269,7 +275,8 @@ static bool lessThanByPointer( const AbstractDataPluginItem *item1,
     }
 }
 
-void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item ) {
+void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item )
+{
     if( !item ) {
         return;
     }
@@ -298,15 +305,18 @@ void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item ) {
     connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
 }
 
-QString AbstractDataPluginModel::name() const {
+QString AbstractDataPluginModel::name() const
+{
     return d->m_name;
 }
 
-void AbstractDataPluginModel::setName( const QString& name ) {
+void AbstractDataPluginModel::setName( const QString& name )
+{
     d->m_name = name;
 }
 
-QString AbstractDataPluginModel::generateFilename( const QString& id, const QString& type ) const {
+QString AbstractDataPluginModel::generateFilename( const QString& id, const QString& type ) const
+{
     QString name;
     name += id;
     name += fileIdSeparator;
@@ -315,19 +325,23 @@ QString AbstractDataPluginModel::generateFilename( const QString& id, const QStr
     return name;
 }
 
-QString AbstractDataPluginModel::generateFilepath( const QString& id, const QString& type ) const {
+QString AbstractDataPluginModel::generateFilepath( const QString& id, const QString& type ) const
+{
     return MarbleDirs::localPath() + "/cache/" + d->m_name + '/' + generateFilename( id, type );
 }
     
-bool AbstractDataPluginModel::fileExists( const QString& fileName ) const {
+bool AbstractDataPluginModel::fileExists( const QString& fileName ) const
+{
     return d->m_downloadManager->storagePolicy()->fileExists( fileName );
 }
 
-bool AbstractDataPluginModel::fileExists( const QString& id, const QString& type ) const {
+bool AbstractDataPluginModel::fileExists( const QString& id, const QString& type ) const
+{
     return fileExists( generateFilename( id, type ) );
 }
 
-AbstractDataPluginItem *AbstractDataPluginModel::findItem( const QString& id ) const {
+AbstractDataPluginItem *AbstractDataPluginModel::findItem( const QString& id ) const
+{
     QList<AbstractDataPluginItem*>::iterator listIt;
     
     for( listIt = d->m_itemSet.begin();
@@ -342,7 +356,8 @@ AbstractDataPluginItem *AbstractDataPluginModel::findItem( const QString& id ) c
     return 0;
 }
 
-bool AbstractDataPluginModel::itemExists( const QString& id ) const {
+bool AbstractDataPluginModel::itemExists( const QString& id ) const
+{
     if ( findItem( id ) ) {
         return true;
     }
@@ -351,11 +366,13 @@ bool AbstractDataPluginModel::itemExists( const QString& id ) const {
     }
 }
 
-void AbstractDataPluginModel::setItemSettings( QHash<QString,QVariant> itemSettings ) {
+void AbstractDataPluginModel::setItemSettings( QHash<QString,QVariant> itemSettings )
+{
     d->m_itemSettings = itemSettings;
 }
 
-void AbstractDataPluginModel::handleChangedViewport() {
+void AbstractDataPluginModel::handleChangedViewport()
+{
     if( !d->m_lastDataFacade ) {
         return;
     }
@@ -396,7 +413,8 @@ void AbstractDataPluginModel::handleChangedViewport() {
 }
 
 void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlString,
-                                                  const QString& id ) {
+                                                  const QString& id )
+{
     Q_UNUSED( relativeUrlString );
     
     if( id.startsWith( descriptionPrefix ) ) {
@@ -435,7 +453,8 @@ void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlStri
     }
 }
 
-void AbstractDataPluginModel::removeItem( QObject *item ) {
+void AbstractDataPluginModel::removeItem( QObject *item )
+{
     d->m_itemSet.removeAll( (AbstractDataPluginItem *) item );
     QHash<QString, AbstractDataPluginItem *>::iterator i;
     for( i = d->m_downloadingItems.begin(); i != d->m_downloadingItems.end(); ++i ) {

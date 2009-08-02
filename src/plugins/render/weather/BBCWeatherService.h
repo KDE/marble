@@ -13,11 +13,13 @@
 
 #include "AbstractWeatherService.h"
 
-namespace Marble {
+namespace Marble
+{
     
 class BBCWeatherItem;
 
-class BBCWeatherService : public AbstractWeatherService {
+class BBCWeatherService : public AbstractWeatherService
+{
     Q_OBJECT
  
  public:

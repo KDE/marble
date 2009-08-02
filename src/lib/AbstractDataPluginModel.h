@@ -22,7 +22,8 @@ class QPoint;
 class QTimer;
 class QUrl;
 
-namespace Marble {
+namespace Marble
+{
     
 class AbstractDataPluginModelPrivate;
 class AbstractDataPluginItem;

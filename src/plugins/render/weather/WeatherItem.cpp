@@ -29,7 +29,8 @@
 #include <QtGui/QFontMetrics>
 #include <QtSvg/QSvgRenderer>
 
-namespace Marble {
+namespace Marble
+{
     
 const QSize borderSpacing( 4, 4 );
 const QSize imageSize( 28, 28 );
@@ -37,7 +38,8 @@ const double imageSizeRatio = ( (double) imageSize.width()) / ( (double) imageSi
 const qint32 horizontalSpacing = 4;
 const qint32 verticalSpacing = 2;
 
-class WeatherItemPrivate {
+class WeatherItemPrivate
+{
     Q_DECLARE_TR_FUNCTIONS(WeatherItemPrivate)
     
  public:
@@ -49,7 +51,8 @@ class WeatherItemPrivate {
     {
     }
     
-    void updateSize() {
+    void updateSize()
+    {
         // Getting the string sizes.
         QFontMetrics metrics( s_font );
         m_temperatureSize
@@ -149,7 +152,8 @@ class WeatherItemPrivate {
         m_parent->setSize( size );
     }
 
-    void updateToolTip() {
+    void updateToolTip()
+    {
         QLocale locale = QLocale::system();
         QString toolTip;
         toolTip += tr( "Station: %1\n" ).arg( m_parent->stationName() );
@@ -208,46 +212,54 @@ class WeatherItemPrivate {
         m_parent->setToolTip( toolTip );
     }
     
-    bool isConditionShown() {
+    bool isConditionShown()
+    {
         return m_currentWeather.hasValidCondition()
                && m_settings.value( "showCondition", showConditionDefault ).toBool();
     }
     
-    bool isTemperatureShown() {
+    bool isTemperatureShown()
+    {
         return m_currentWeather.hasValidTemperature()
                && m_settings.value( "showTemperature", showTemperatureDefault ).toBool();
     }
     
-    bool isWindDirectionShown() {
+    bool isWindDirectionShown()
+    {
         return m_currentWeather.hasValidWindDirection()
                && m_settings.value( "showWindDirection", showWindDirectionDefault ).toBool();
     }
     
-    bool isWindSpeedShown() {
+    bool isWindSpeedShown()
+    {
         return m_currentWeather.hasValidWindSpeed()
                && m_settings.value( "showWindSpeed", showWindSpeedDefault ).toBool();
     }
 
-    QString temperatureString() {
+    QString temperatureString()
+    {
         WeatherData::TemperatureUnit tUnit = temperatureUnit();
         return m_currentWeather.temperatureString( tUnit );
     }
 
-    WeatherData::TemperatureUnit temperatureUnit() {
+    WeatherData::TemperatureUnit temperatureUnit()
+    {
         WeatherData::TemperatureUnit tUnit
                 = (WeatherData::TemperatureUnit) m_settings.value( "temperatureUnit",
                                                                    WeatherData::Celsius ).toInt();
         return tUnit;
     }
 
-    QString windSpeedString() {
+    QString windSpeedString()
+    {
         WeatherData::SpeedUnit speedUnit
                 = (WeatherData::SpeedUnit) m_settings.value( "windSpeedUnit",
                                                              WeatherData::kph ).toInt();
         return m_currentWeather.windSpeedString( speedUnit );
     }
 
-    QString pressureString() {
+    QString pressureString()
+    {
         WeatherData::PressureUnit pressureUnit
                 = (WeatherData::PressureUnit) m_settings.value( "pressureUnit",
                                                                 WeatherData::HectoPascal ).toInt();
@@ -290,24 +302,29 @@ WeatherItem::WeatherItem( QObject *parent )
     d->updateSize();
 }
 
-WeatherItem::~WeatherItem() {
+WeatherItem::~WeatherItem()
+{
     delete d;
 }
 
-QAction *WeatherItem::action() {
+QAction *WeatherItem::action()
+{
     return d->m_action;
 }
 
-QString WeatherItem::itemType() const {
+QString WeatherItem::itemType() const
+{
     return QString( "weatherItem" );
 }
 
-bool WeatherItem::request( const QString& type ) {
+bool WeatherItem::request( const QString& type )
+{
     Q_UNUSED( type )
     return false;
 }
  
-bool WeatherItem::initialized() {
+bool WeatherItem::initialized()
+{
     WeatherData current = currentWeather();
     return d->isConditionShown()
            || d->isTemperatureShown()
@@ -419,7 +436,8 @@ void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
     painter->restore();
 }
 
-bool WeatherItem::operator<( const AbstractDataPluginItem *other ) const {
+bool WeatherItem::operator<( const AbstractDataPluginItem *other ) const
+{
     const WeatherItem *weatherItem = qobject_cast<const WeatherItem *>(other);
     if( weatherItem ) {
         return ( priority() > ( (WeatherItem *) other )->priority() );
@@ -429,39 +447,46 @@ bool WeatherItem::operator<( const AbstractDataPluginItem *other ) const {
     }
 }
 
-QString WeatherItem::stationName() const {
+QString WeatherItem::stationName() const
+{
     return d->m_stationName;
 }
 
-void WeatherItem::setStationName( const QString& name ) {
+void WeatherItem::setStationName( const QString& name )
+{
     d->m_action->setText( name );
     d->m_stationName = name;
     d->updateToolTip();
     update();
 }
 
-WeatherData WeatherItem::currentWeather() const {
+WeatherData WeatherItem::currentWeather() const
+{
     return d->m_currentWeather;
 }
 
-void WeatherItem::setCurrentWeather( const WeatherData &weather ) {
+void WeatherItem::setCurrentWeather( const WeatherData &weather )
+{
     d->m_currentWeather = weather;
     d->updateSize();
     d->updateToolTip();
     update();
 }
 
-QMap<QDate, WeatherData> WeatherItem::forecastWeather() const {
+QMap<QDate, WeatherData> WeatherItem::forecastWeather() const
+{
     return d->m_forecastWeather;
 }
 
-void WeatherItem::setForecastWeather( const QMap<QDate, WeatherData>& forecasts ) {
+void WeatherItem::setForecastWeather( const QMap<QDate, WeatherData>& forecasts )
+{
     d->m_forecastWeather = forecasts;
 
     d->updateToolTip();
 }
 
-void WeatherItem::addForecastWeather( const QList<WeatherData>& forecasts ) {
+void WeatherItem::addForecastWeather( const QList<WeatherData>& forecasts )
+{
     foreach( WeatherData data, forecasts ) {
         QDate date = data.dataDate();
         WeatherData other = d->m_forecastWeather.value( date );
@@ -490,15 +515,18 @@ void WeatherItem::addForecastWeather( const QList<WeatherData>& forecasts ) {
     d->updateToolTip();
 }
 
-quint8 WeatherItem::priority() const {
+quint8 WeatherItem::priority() const
+{
     return d->m_priority;
 }
 
-void WeatherItem::setPriority( quint8 priority ) {
+void WeatherItem::setPriority( quint8 priority )
+{
     d->m_priority = priority;
 }
 
-void WeatherItem::setSettings( QHash<QString, QVariant> settings ) {
+void WeatherItem::setSettings( QHash<QString, QVariant> settings )
+{
     if ( d->m_settings == settings ) {
         return;
     }

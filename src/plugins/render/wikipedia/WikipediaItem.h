@@ -21,9 +21,11 @@
 class QAction;
 class QWebView;
 
-namespace Marble {
+namespace Marble
+{
  
-class WikipediaItem : public AbstractDataPluginItem {
+class WikipediaItem : public AbstractDataPluginItem
+{
     Q_OBJECT
     
  public:

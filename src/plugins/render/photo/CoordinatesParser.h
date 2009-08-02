@@ -15,7 +15,8 @@
 
 class QIODevice;
 
-namespace Marble {
+namespace Marble
+{
     
 class GeoDataCoordinates;
 
