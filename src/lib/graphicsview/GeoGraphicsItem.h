@@ -27,6 +27,7 @@ namespace Marble
 {
     
 class GeoDataCoordinates;
+class GeoDataLatLonAltBox;
 class GeoPainter;
 class GeoSceneLayer;
 class ViewportParams;
@@ -97,6 +98,46 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
      * @param flags is the new value for this item's flags.
      */
     void setFlags( GeoGraphicsItemFlags flags );
+
+    /**
+     * Returns the minimum number of pixels the GeoGraphicsItem has to be projected on for this item
+     * to be considered as active. 0 would mean no minimum number of pixels which is also the
+     * standard value.
+     */
+    int minLodPixels() const;
+
+    /**
+     * Sets the minimum number of pixels the GeoGraphicsItem has to be projected on for this item to
+     * be considered as active.
+     */
+    void setMinLodPixels( int pixels );
+
+    /**
+     * Returns the minimum number of pixels the GeoGraphicsItem has to be projected on for this item
+     * to be considered as active. -1 would mean no maximum number of pixels which is also the
+     * standard value.
+     */
+    int maxLodPixels() const;
+
+    /**
+     * Sets the maximum number of pixels the GeoGraphicsItem has to be projected on for this item to
+     * be considered as active.
+     */
+    void setMaxLodPixels( int pixels );
+
+    // int minFadeExtend() const;
+    // int maxFadeExtend() const;
+
+    /**
+     * Returns the box that is used to determine if an item is active or inactive.
+     */
+    GeoDataLatLonAltBox geoBoundingBox() const;
+
+    /**
+     * Set the box used to determine if an item is active or inactive. If an empty box is passed
+     * the item will be shown in every case.
+     */
+    void setGeoBoundingBox( const GeoDataLatLonAltBox& boundingBox );
 
     /**
      * Returns all coordinates of the item in view coordinates according to the given projection.

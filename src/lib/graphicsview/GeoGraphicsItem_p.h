@@ -11,7 +11,10 @@
 #ifndef SCREENGRAPHICSITEMPRIVATE_H
 #define SCREENGRAPHICSITEMPRIVATE_H
 
+
+// Marble
 #include "MarbleGraphicsItem_p.h"
+#include "GeoDataLatLonAltBox.h"
 
 namespace Marble
 {
@@ -21,7 +24,10 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
  public:
     explicit GeoGraphicsItemPrivate( GeoGraphicsItem *parent )
         : MarbleGraphicsItemPrivate( parent ),
-          m_positions()
+          m_positions(),
+          m_minLodPixels( 0 ),
+          m_maxLodPixels( -1 ),
+          m_geoBoundingBox()
     {
     }
     
@@ -62,6 +68,11 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
     QString m_target;
     QList<QPointF> m_positions;
     GeoGraphicsItem::GeoGraphicsItemFlags m_flags;
+
+    // LOD
+    int m_minLodPixels;
+    int m_maxLodPixels;
+    GeoDataLatLonAltBox m_geoBoundingBox;
 };
 
 }
