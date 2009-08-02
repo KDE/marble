@@ -167,10 +167,10 @@ bool FileViewFloatItem::eventFilter(QObject *object, QEvent *e)
             } else if( reinterpret_cast<QScrollBar*>( child ) == m_fileView->verticalScrollBar() ) {
                 shiftedPos -= QPoint( m_fileView->viewport()->size().width(), 0 );
             }
-            QMouseEvent* shiftedEvent = new QMouseEvent( e->type(), shiftedPos,
+            QMouseEvent shiftedEvent( e->type(), shiftedPos,
                     event->globalPos(), event->button(), event->buttons(),
                     event->modifiers() );
-            if( QApplication::sendEvent(child, shiftedEvent) ) {
+            if( QApplication::sendEvent(child, &shiftedEvent) ) {
                 if( e->type() == QEvent::MouseButtonPress || 
                     e->type() == QEvent::MouseButtonRelease || 
                     e->type() == QEvent::MouseButtonDblClick ||
