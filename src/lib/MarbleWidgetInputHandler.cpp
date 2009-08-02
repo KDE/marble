@@ -178,7 +178,7 @@ void MarbleWidgetDefaultInputHandler::openItemToolTip() {
         QToolTip::showText( m_widget->mapToGlobal( m_toolTipPosition ),
                             m_lastToolTipItem->toolTip(),
                             m_widget,
-                            m_widget->geometry() );
+                            m_lastToolTipItem->containsRect( m_toolTipPosition ).toRect() );
     }
 }
 

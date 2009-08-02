@@ -37,6 +37,7 @@ private:
     void readLongitude( WikipediaItem *item );
     void readLatitude( WikipediaItem *item );
     void readUrl( WikipediaItem *item );
+    void readSummary( WikipediaItem *item );
     void readThumbnailImage( WikipediaItem *item );
 
     QList<WikipediaItem *> *m_list;

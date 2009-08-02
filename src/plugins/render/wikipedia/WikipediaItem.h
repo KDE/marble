@@ -32,6 +32,8 @@ class WikipediaItem : public AbstractDataPluginItem {
     ~WikipediaItem();
     
     QString name() const;
+
+    void setName( const QString& name );
     
     QString itemType() const;
      
@@ -59,6 +61,10 @@ class WikipediaItem : public AbstractDataPluginItem {
     QUrl thumbnailImageUrl();
     
     void setThumbnailImageUrl( const QUrl& thumbnailImageUrl );
+
+    QString summary();
+
+    void setSummary( const QString& summary );
     
     QAction *action();
     
@@ -71,10 +77,12 @@ class WikipediaItem : public AbstractDataPluginItem {
     
  private:
     void updateSize();
+    void updateToolTip();
     bool showThumbnail();
 
     QUrl m_url;
     QUrl m_thumbnailImageUrl;
+    QString m_summary;
     QWebView *m_browser;
     QAction *m_action;
 

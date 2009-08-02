@@ -50,6 +50,11 @@ QString WikipediaItem::name() const {
     return id();
 }
 
+void WikipediaItem::setName( const QString& name ) {
+    setId( name );
+    updateToolTip();
+}
+
 QString WikipediaItem::itemType() const {
     return "wikipediaItem";
 }
@@ -134,6 +139,15 @@ void WikipediaItem::setThumbnailImageUrl( const QUrl& thumbnailImageUrl ) {
     m_thumbnailImageUrl = thumbnailImageUrl;
 }
 
+QString WikipediaItem::summary() {
+    return m_summary;
+}
+
+void WikipediaItem::setSummary( const QString& summary ) {
+    m_summary = summary;
+    updateToolTip();
+}
+
 QAction *WikipediaItem::action() {
     m_action->setText( id() );
     return m_action;
@@ -161,6 +175,7 @@ void WikipediaItem::setSettings( QHash<QString, QVariant> settings ) {
     if ( settings != m_settings ) {
         m_settings = settings;
         updateSize();
+        updateToolTip();
         update();
     }
 }
@@ -172,6 +187,25 @@ void WikipediaItem::updateSize() {
     else {
         setSize( wikiIconRect.size() );
     }
+}
+
+void WikipediaItem::updateToolTip() {
+    QString toolTip;
+    toolTip += "<html><head><meta name=\"qrichtext\" content=\"1\" />";
+    toolTip += "<style type=\"text/css\">\\np, li { white-space: pre-wrap; }\\n</style></head>";
+    toolTip += "<body style=\" font-family:'Sans Serif'; font-size:9pt; font-weight:400; ";
+    toolTip += "font-style:normal;\"><p style=\" margin-top:0px; margin-bottom:0px; ";
+    toolTip += "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">";
+    if ( summary().isEmpty() ) {
+        toolTip += "%1";
+    }
+    else {
+        toolTip += tr( "%1:<br>%2", "Title:\nSummary" );
+    }
+
+    toolTip += "</p></body></html>\n";
+
+    setToolTip( toolTip.arg( name() ).arg( summary() ) );
 }
 
 bool WikipediaItem::showThumbnail() {

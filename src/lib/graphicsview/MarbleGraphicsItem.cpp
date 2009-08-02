@@ -134,6 +134,15 @@ bool MarbleGraphicsItem::contains( const QPointF& point ) const
     return false;
 }
 
+QRectF MarbleGraphicsItem::containsRect( const QPointF& point ) const
+{
+    foreach( const QRectF& rect, d->boundingRects() ) {
+        if( rect.contains( point ) )
+            return rect;
+    }
+    return QRectF();
+}
+
 QSizeF MarbleGraphicsItem::size() const
 {
     return p()->m_size;

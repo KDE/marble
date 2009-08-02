@@ -100,6 +100,8 @@ void GeonamesParser::readEntry() {
                 readLatitude( item );
             else if( name() == "wikipediaUrl" )
                 readUrl( item );
+            else if( name() == "summary" )
+                readSummary( item );
             else if( name() == "thumbnailImg" )
                 readThumbnailImage( item );
             else
@@ -119,7 +121,7 @@ void GeonamesParser::readTitle( WikipediaItem *item ) {
             break;
         
         if( isCharacters() ) {
-            item->setId( text().toString() );
+            item->setName( text().toString() );
         }
     }
 }
@@ -168,6 +170,22 @@ void GeonamesParser::readUrl( WikipediaItem *item ) {
         
         if( isCharacters() ) {
             item->setUrl( QUrl::fromEncoded( text().toString().toUtf8() ) );
+        }
+    }
+}
+
+void GeonamesParser::readSummary( WikipediaItem *item ) {
+    Q_ASSERT( isStartElement()
+              && name() == "summary" );
+
+    while( !atEnd() ) {
+        readNext();
+
+        if( isEndElement() )
+            break;
+
+        if( isCharacters() ) {
+            item->setSummary( text().toString() );
         }
     }
 }

@@ -59,6 +59,11 @@ class MARBLE_EXPORT MarbleGraphicsItem
      * Returns true if the Item contains @p point in parent coordinates.
      */
     bool contains( const QPointF& point ) const;
+
+    /**
+     * Returns the rect of one represenation of the object that is at the given position.
+     */
+    QRectF containsRect( const QPointF& point ) const;
     
     /**
      * Returns the size of the item
