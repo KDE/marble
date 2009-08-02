@@ -308,7 +308,7 @@ void MainWindow::createPluginMenus()
 
     //remove and delete old menus if they exist
     while(  !m_pluginMenus.isEmpty() ) {
-        QMenu* menu = m_pluginMenus.takeFirst();
+        m_pluginMenus.takeFirst();
 //        FIXME: this does not provide an easy way to remove a menu.
 //        Make a workaround
 //        this->menuBar()->removeAction();

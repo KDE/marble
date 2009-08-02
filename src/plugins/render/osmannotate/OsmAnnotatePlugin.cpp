@@ -350,7 +350,6 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
 
     QAction*    m_addPlacemark;
     QAction*    m_drawPolygon;
-    QAction*    m_drawLine;
     QAction*    m_beginSeparator;
     QAction*    m_endSeparator;
     QAction*    m_loadOsmFile;
