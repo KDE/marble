@@ -44,11 +44,11 @@ const qreal KPA2HPA = 1/HPA2KPA;
 const qreal BAR2HPA = 1000;
 const qreal HPA2BAR = 1/BAR2HPA;
 // mmHg to HectoPascal
-const qreal HG2HPA = 133;
+const qreal HG2HPA = 1.33;
 const qreal HPA2HG = 1/HG2HPA;
 // inchHg to HectoPascal
-const qreal IHG2HPA = HG2HPA / 25.4;
-const qreal HPA2IHG = HPA2HG * 25.4;
+const qreal IHG2HPA = HG2HPA * 25.4;
+const qreal HPA2IHG = HPA2HG / 25.4;
 
 // Summands
 // Kelvin to degree Celsius
