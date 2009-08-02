@@ -35,10 +35,19 @@ WeatherModel::~WeatherModel() {
 void WeatherModel::downloadItemData( const QUrl& url, const QString& type, AbstractDataPluginItem *item ) {
     AbstractDataPluginItem *existingItem = findItem( item->id() );
     if ( !existingItem ) {
+        WeatherItem *weatherItem = qobject_cast<WeatherItem*>( item );
+        if( weatherItem ) {
+            weatherItem->request( type );
+        }
         AbstractDataPluginModel::downloadItemData( url, type, item );
     } else {
         if ( existingItem != item )
             item->deleteLater();
+        
+        WeatherItem *existingWeatherItem = qobject_cast<WeatherItem*>( existingItem );
+        if( existingWeatherItem && existingWeatherItem->request( type ) ) {
+            AbstractDataPluginModel::downloadItemData( url, type, existingWeatherItem );
+        }
     }
 }
 

@@ -55,6 +55,7 @@ void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
         if ( (*it) && box.contains( (*it)->coordinate() ) ) {
             (*it)->setTarget( "earth" );
             emit requestedDownload( (*it)->observationUrl(), "bbcobservation", (*it) );
+            emit requestedDownload( (*it)->forecastUrl(),    "bbcforecast",    (*it) );
             fetched++;
         }
         ++it;

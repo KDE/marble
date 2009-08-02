@@ -23,11 +23,29 @@
 using namespace Marble;
 
 BBCWeatherItem::BBCWeatherItem( QObject *parent )
-    : WeatherItem( parent )
+    : WeatherItem( parent ),
+      m_observationRequested( false ),
+      m_forecastRequested( false )
 {
 }
 
 BBCWeatherItem::~BBCWeatherItem() {
+}
+
+bool BBCWeatherItem::request( const QString& type ) {
+    if ( type == "bbcobservation" ) {
+        if ( !m_observationRequested ) {
+            m_observationRequested = true;
+            return true;
+        }
+    }
+    else if ( type == "bbcforecast" ) {
+        if ( !m_forecastRequested ) {
+            m_forecastRequested = true;
+            return true;
+        }
+    }
+    return false;
 }
 
 QString BBCWeatherItem::service() const {
@@ -47,6 +65,18 @@ void BBCWeatherItem::addDownloadedFile( const QString& url, const QString& type 
             setCurrentWeather( data.at( 0 ) );
         }
     }
+    else if ( type == "bbcforecast" ) {
+        QFile file( url );
+
+        if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
+            return;
+        }
+
+        BBCParser parser;
+        QList<WeatherData> data = parser.read( &file );
+
+        addForecastWeather( data );
+    }
 }
 
 quint32 BBCWeatherItem::bbcId() const {
@@ -60,5 +90,10 @@ void BBCWeatherItem::setBbcId( quint32 id ) {
 
 QUrl BBCWeatherItem::observationUrl() const {
     return QUrl( QString( "http://newsrss.bbc.co.uk/weather/forecast/%1/ObservationsRSS.xml" )
+                    .arg( QString::number( bbcId() ) ) );
+}
+
+QUrl BBCWeatherItem::forecastUrl() const {
+    return QUrl( QString( "http://newsrss.bbc.co.uk/weather/forecast/%1/Next3DaysRSS.xml" )
                     .arg( QString::number( bbcId() ) ) );
 }

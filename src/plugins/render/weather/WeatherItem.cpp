@@ -19,6 +19,7 @@
 
 // Qt
 #include <QtCore/QCoreApplication>
+#include <QtCore/QDate>
 #include <QtCore/QDebug>
 #include <QtCore/QHash>
 #include <QtCore/QObject>
@@ -133,6 +134,9 @@ class WeatherItemPrivate {
 
         m_topRowRect = QRect( QPoint( borderSpacing.width(), borderSpacing.height() ),
                               row1Size );
+        if ( m_topRowRect.size().isEmpty() ) {
+            m_topRowRect.setHeight( 0 );
+        }
         m_bottomRowRect = QRect( m_topRowRect.bottomLeft() + QPoint( 0, verticalSpacing ),
                                  row2Size );
         // The rects are allowed to take the full width.
@@ -146,6 +150,7 @@ class WeatherItemPrivate {
     }
 
     void updateToolTip() {
+        QLocale locale = QLocale::system();
         QString toolTip;
         toolTip += tr( "Station: %1\n" ).arg( m_parent->stationName() );
         if ( m_currentWeather.hasValidCondition() && m_currentWeather.hasValidTemperature() )
@@ -178,6 +183,28 @@ class WeatherItemPrivate {
             toolTip += tr( "Pressure %7", "Pressure Development" )
                     .arg( m_currentWeather.pressureDevelopmentString() );
 
+        if ( !m_forecastWeather.isEmpty() ) {
+            toolTip += "\n";
+
+            QDate minDate = QDate::currentDate();
+            minDate.addDays( -1 );
+            foreach( WeatherData data, m_forecastWeather ) {
+                QDate date = data.dataDate();
+                if( date >= minDate
+                    && data.hasValidCondition()
+                    && data.hasValidMinTemperature()
+                    && data.hasValidMaxTemperature() )
+                {
+                    toolTip += "\n";
+                    toolTip += tr( "%1: %2, %3 to %4", "DayOfWeek: Condition, MinTemp to MaxTemp" )
+                               .arg( locale.standaloneDayName( date.dayOfWeek() ) )
+                               .arg( data.conditionString() )
+                               .arg( data.minTemperatureString( temperatureUnit() ) )
+                               .arg( data.maxTemperatureString( temperatureUnit() ) );
+                }
+            }
+        }
+
         m_parent->setToolTip( toolTip );
     }
     
@@ -202,10 +229,15 @@ class WeatherItemPrivate {
     }
 
     QString temperatureString() {
-        WeatherData::TemperatureUnit temperatureUnit
+        WeatherData::TemperatureUnit tUnit = temperatureUnit();
+        return m_currentWeather.temperatureString( tUnit );
+    }
+
+    WeatherData::TemperatureUnit temperatureUnit() {
+        WeatherData::TemperatureUnit tUnit
                 = (WeatherData::TemperatureUnit) m_settings.value( "temperatureUnit",
                                                                    WeatherData::Celsius ).toInt();
-        return m_currentWeather.temperatureString( temperatureUnit );
+        return tUnit;
     }
 
     QString windSpeedString() {
@@ -223,6 +255,8 @@ class WeatherItemPrivate {
     }
     
     WeatherData m_currentWeather;
+    QMap<QDate, WeatherData> m_forecastWeather;
+
     int m_priority;
     QAction *m_action;
     WeatherItem *m_parent;
@@ -266,6 +300,11 @@ QAction *WeatherItem::action() {
 
 QString WeatherItem::itemType() const {
     return QString( "weatherItem" );
+}
+
+bool WeatherItem::request( const QString& type ) {
+    Q_UNUSED( type )
+    return false;
 }
  
 bool WeatherItem::initialized() {
@@ -410,6 +449,45 @@ void WeatherItem::setCurrentWeather( const WeatherData &weather ) {
     d->updateSize();
     d->updateToolTip();
     update();
+}
+
+QMap<QDate, WeatherData> WeatherItem::forecastWeather() const {
+    return d->m_forecastWeather;
+}
+
+void WeatherItem::setForecastWeather( const QMap<QDate, WeatherData>& forecasts ) {
+    d->m_forecastWeather = forecasts;
+
+    d->updateToolTip();
+}
+
+void WeatherItem::addForecastWeather( const QList<WeatherData>& forecasts ) {
+    foreach( WeatherData data, forecasts ) {
+        QDate date = data.dataDate();
+        WeatherData other = d->m_forecastWeather.value( date );
+        if ( !other.isValid() ) {
+            d->m_forecastWeather.insert( date, data );
+        }
+        else if ( other.publishingTime() < data.publishingTime() ) {
+            d->m_forecastWeather.remove( date );
+            d->m_forecastWeather.insert( date, data );
+        }
+    }
+
+    // Remove old items
+    QDate minDate = QDate::currentDate();
+    minDate.addDays( -1 );
+
+    QMap<QDate, WeatherData>::iterator it = d->m_forecastWeather.begin();
+
+    while( it != d->m_forecastWeather.end() ) {
+        if ( it.key() < minDate ) {
+            d->m_forecastWeather.remove( it.key() );
+        }
+        it++;
+    }
+
+    d->updateToolTip();
 }
 
 quint8 WeatherItem::priority() const {

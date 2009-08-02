@@ -17,6 +17,7 @@
 
 // Qt
 #include <QtCore/QAtomicInt>
+#include <QtCore/QDate>
 #include <QtCore/QDateTime>
 #include <QtCore/QDebug>
 #include <QtCore/QHash>
@@ -60,7 +61,8 @@ class WeatherDataPrivate {
 
  public:
     WeatherDataPrivate()
-        : m_dateTime( QDateTime::currentDateTime() ),
+        : m_pubTime(),
+          m_dataDate(),
           m_condition( WeatherData::ConditionNotAvailable ),
           m_windDirection( WeatherData::DirectionNotAvailable ),
           m_windSpeed( -1.0 ),
@@ -77,7 +79,8 @@ class WeatherDataPrivate {
     }
     
     WeatherDataPrivate( const WeatherDataPrivate &other )
-        : m_dateTime( other.m_dateTime ),
+        : m_pubTime( other.m_pubTime ),
+          m_dataDate( other.m_dataDate ),
           m_condition( other.m_condition ),
           m_windDirection( other.m_windDirection ),
           m_windSpeed( other.m_windSpeed ),
@@ -214,7 +217,8 @@ class WeatherDataPrivate {
     
     WeatherDataPrivate& operator=( const WeatherDataPrivate &other )
     {
-        m_dateTime = other.m_dateTime;
+        m_pubTime = other.m_pubTime;
+        m_dataDate = other.m_dataDate;
         m_condition = other.m_condition;
         m_windDirection = other.m_windDirection;
         m_windSpeed = other.m_windSpeed;
@@ -229,8 +233,9 @@ class WeatherDataPrivate {
         ref = other.ref;
         return *this;
     }
-     
-    QDateTime m_dateTime;
+
+    QDateTime m_pubTime;
+    QDate m_dataDate;
     WeatherData::WeatherCondition m_condition;
     WeatherData::WindDirection m_windDirection;
     
@@ -280,7 +285,8 @@ WeatherData::~WeatherData() {
 }
 
 bool WeatherData::isValid() const {
-    return hasValidDateTime()
+    return hasValidPublishingTime()
+           || hasValidDataDate()
            || hasValidCondition()
            || hasValidWindDirection()
            || hasValidWindSpeed()
@@ -293,17 +299,30 @@ bool WeatherData::isValid() const {
            || hasValidHumidity();
 }
 
-QDateTime WeatherData::dateTime() const {
-    return d->m_dateTime;
+QDateTime WeatherData::publishingTime() const {
+    return d->m_pubTime;
 }
 
-void WeatherData::setDateTime( const QDateTime& dateTime ) {
+void WeatherData::setPublishingTime( const QDateTime& dateTime ) {
     detach();
-    d->m_dateTime = dateTime.toUTC();
+    d->m_pubTime = dateTime.toUTC();
 }
 
-bool WeatherData::hasValidDateTime() const {
-    return d->m_dateTime.isValid();
+bool WeatherData::hasValidPublishingTime() const {
+    return d->m_pubTime.isValid();
+}
+
+QDate WeatherData::dataDate() const {
+    return d->m_dataDate;
+}
+
+void WeatherData::setDataDate( const QDate& date ) {
+    detach();
+    d->m_dataDate = date;
+}
+
+bool WeatherData::hasValidDataDate() const {
+    return d->m_dataDate.isValid();
 }
 
 WeatherData::WeatherCondition WeatherData::condition() const {

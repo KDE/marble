@@ -23,15 +23,20 @@ class BBCWeatherItem : public WeatherItem {
     BBCWeatherItem( QObject *parent = 0 );
     ~BBCWeatherItem();
     
+    virtual bool request( const QString& type );
+
     QString service() const;
     void addDownloadedFile( const QString& url, const QString& type );
     
     QUrl observationUrl() const;
+    QUrl forecastUrl() const;
    
     quint32 bbcId() const;
     void setBbcId( quint32 id );
  private:    
     quint32 m_bbcId;
+    bool m_observationRequested;
+    bool m_forecastRequested;
 };
 
 } // namespace Marble

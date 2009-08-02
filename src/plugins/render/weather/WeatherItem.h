@@ -14,8 +14,12 @@
 // Marble
 #include "AbstractDataPluginItem.h"
 
+// Qt
+#include <QtCore/QMap>
+
 class QString;
 class QAction;
+class QDate;
 
 namespace Marble {
     
@@ -39,6 +43,11 @@ class WeatherItem : public AbstractDataPluginItem {
     QAction *action();
     
     QString itemType() const;
+
+    /**
+     * Test if the item wants to request @p type again.
+     */
+    virtual bool request( const QString& type );
     
     /**
      * Returns the provider of the weather information.
@@ -59,6 +68,15 @@ class WeatherItem : public AbstractDataPluginItem {
     
     WeatherData currentWeather() const;
     void setCurrentWeather( const WeatherData& weather );
+
+    QMap<QDate, WeatherData> forecastWeather() const;
+    void setForecastWeather( const QMap<QDate, WeatherData>& forecasts );
+
+    /**
+     * Adds additional forecasts to the list. If there are multiple forecasts for one day,
+     * it will choose the most recent (as of pubDate).
+     */
+    void addForecastWeather( const QList<WeatherData>& forecasts );
     
     quint8 priority() const;
     void setPriority( quint8 priority );

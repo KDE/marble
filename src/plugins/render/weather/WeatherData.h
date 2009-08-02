@@ -14,6 +14,7 @@
 #include<QtCore/QtGlobal>
 #include<QtCore/QCoreApplication>
 
+class QDate;
 class QDateTime;
 class QIcon;
 
@@ -123,9 +124,35 @@ class WeatherData {
 
     bool isValid() const;
     
-    QDateTime dateTime() const;
-    void setDateTime( const QDateTime& dateTime );
-    bool hasValidDateTime() const;
+    /**
+     * Get the time when the data was published.
+     */
+    QDateTime publishingTime() const;
+
+    /**
+     * Set the time when the data was published.
+     */
+    void setPublishingTime( const QDateTime& dateTime );
+
+    /**
+     * Checks, if the data item has a valid publishing time.
+     */
+    bool hasValidPublishingTime() const;
+
+    /**
+     * Get the date the data is meant for.
+     */
+    QDate dataDate() const;
+
+    /**
+     * Set the date the data is meant for.
+     */
+    void setDataDate( const QDate& date );
+
+    /**
+     * Checks, if the data item has a valid data date.
+     */
+    bool hasValidDataDate() const;
     
     WeatherData::WeatherCondition condition() const;
     void setCondition( WeatherData::WeatherCondition condition );

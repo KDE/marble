@@ -164,6 +164,22 @@ void BBCParser::readDescription( WeatherData *data ) {
                 data->setTemperature( value.toDouble(), WeatherData::Celsius );
             }
 
+            // Max Temperature
+            regExp.setPattern( "(Max Temp:\\s*)(\\d+)(.C)" );
+            pos = regExp.indexIn( description );
+            if ( pos > -1 ) {
+                QString value = regExp.cap( 2 );
+                data->setMaxTemperature( value.toDouble(), WeatherData::Celsius );
+            }
+
+            // Min Temperature
+            regExp.setPattern( "(Min Temp:\\s*)(\\d+)(.C)" );
+            pos = regExp.indexIn( description );
+            if ( pos > -1 ) {
+                QString value = regExp.cap( 2 );
+                data->setMinTemperature( value.toDouble(), WeatherData::Celsius );
+            }
+
             // Wind direction
             regExp.setPattern( "(Wind Direction:\\s*)([NESW]+)(,)" );
             pos = regExp.indexIn( description );
@@ -221,7 +237,7 @@ void BBCParser::readDescription( WeatherData *data ) {
             if ( pos > -1 ) {
                 QString visibility = regExp.cap( 2 );
 
-                if ( visibilityStates.contains( visibility ) ) {
+                if ( visibilityStates.contains( visibility.toLower() ) ) {
                     data->setVisibilty( visibilityStates.value( visibility ) );
                 }
                 else {
@@ -251,10 +267,10 @@ void BBCParser::readTitle( WeatherData *data ) {
             QRegExp regExp;
             
             // Condition
-            regExp.setPattern( "(\\D:\\s*)([\\w ]+)(\\.\\s*)" );
+            regExp.setPattern( "(^.*)(:\\s*)([\\w ]+)([\\,\\.]\\s*)" );
             int pos = regExp.indexIn( title );
             if ( pos > -1 ) {
-                QString value = regExp.cap( 2 );
+                QString value = regExp.cap( 3 );
                 
                 if( dayConditions.contains( value ) ) {
                     // TODO: Switch for day/night
@@ -262,6 +278,32 @@ void BBCParser::readTitle( WeatherData *data ) {
                 }
                 else {
                     qDebug() << "UNHANDLED BBC WEATHER CONDITION, PLEASE REPORT: " << value;
+                }
+
+                QString dayString = regExp.cap( 1 );
+                Qt::DayOfWeek dayOfWeek = (Qt::DayOfWeek) 0;
+                if ( dayString.contains( "Monday" ) )
+                    dayOfWeek = Qt::Monday;
+                else if ( dayString.contains( "Tuesday" ) )
+                    dayOfWeek = Qt::Tuesday;
+                else if ( dayString.contains( "Wednesday" ) )
+                    dayOfWeek = Qt::Wednesday;
+                else if ( dayString.contains( "Thursday" ) )
+                    dayOfWeek = Qt::Thursday;
+                else if ( dayString.contains( "Friday" ) )
+                    dayOfWeek = Qt::Friday;
+                else if ( dayString.contains( "Saturday" ) )
+                    dayOfWeek = Qt::Saturday;
+                else if ( dayString.contains( "Sunday" ) )
+                    dayOfWeek = Qt::Sunday;
+                QDate date = QDate::currentDate();
+                date = date.addDays( -1 );
+
+                for ( int i = 0; i < 7; i++ ) {
+                    if ( date.dayOfWeek() == dayOfWeek ) {
+                        data->setDataDate( date );
+                    }
+                    date = date.addDays( 1 );
                 }
             }
         }
@@ -314,7 +356,7 @@ void BBCParser::readPubDate( WeatherData *data ) {
                     dateTime = dateTime.addSecs( -60   *regExp.cap( 16 ).toInt() );
                 }
 
-                data->setDateTime( dateTime );
+                data->setPublishingTime( dateTime );
             }
         }
     }
@@ -428,6 +470,7 @@ void BBCParser::setupHashes() {
     windDirections["N"] = WeatherData::N;
     windDirections["NE"] = WeatherData::NE;
     windDirections["ENE"] = WeatherData::ENE;
+    windDirections["NNE"] = WeatherData::NNE;
     windDirections["E"] = WeatherData::E;
     windDirections["SSE"] = WeatherData::SSE;
     windDirections["SE"] = WeatherData::SE;
@@ -448,14 +491,14 @@ void BBCParser::setupHashes() {
     pressureDevelopments["rising"] = WeatherData::Rising;
     pressureDevelopments["N/A"] = WeatherData::PressureDevelopmentNotAvailable;
 
-    visibilityStates["Excellent"] = WeatherData::VeryGood;
-    visibilityStates["Very good"] = WeatherData::VeryGood;
-    visibilityStates["Good"] = WeatherData::Good;
-    visibilityStates["Moderate"] = WeatherData::Normal;
-    visibilityStates["Poor"] = WeatherData::Poor;
-    visibilityStates["Very poor"] = WeatherData::VeryPoor;
-    visibilityStates["Fog"] = WeatherData::Fog;
-    visibilityStates["N/A"] = WeatherData::VisibilityNotAvailable;
+    visibilityStates["excellent"] = WeatherData::VeryGood;
+    visibilityStates["very good"] = WeatherData::VeryGood;
+    visibilityStates["good"] = WeatherData::Good;
+    visibilityStates["moderate"] = WeatherData::Normal;
+    visibilityStates["poor"] = WeatherData::Poor;
+    visibilityStates["very poor"] = WeatherData::VeryPoor;
+    visibilityStates["fog"] = WeatherData::Fog;
+    visibilityStates["n/a"] = WeatherData::VisibilityNotAvailable;
 
     monthNames["Jan"] = 1;
     monthNames["Feb"] = 2;
