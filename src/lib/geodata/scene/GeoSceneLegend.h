@@ -45,7 +45,7 @@ class GEODATA_EXPORT GeoSceneLegend : public GeoNode
     ~GeoSceneLegend();
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() { return geonode::GeoSceneLegendType; }
+    virtual QString nodeType() const { return geonode::GeoSceneLegendType; }
 
     /**
      * @brief  Add a section to the legend

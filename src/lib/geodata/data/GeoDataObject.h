@@ -54,7 +54,7 @@ public:
     virtual ~GeoDataObject();
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() { return geonode::GeoDataObjectType; }
+    virtual QString nodeType() const { return geonode::GeoDataObjectType; }
 
     /**
      * @brief Get the id of the object.

@@ -55,7 +55,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     virtual ~GeoDataContainer();
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() { return geonode::GeoDataContainerType; }
+    virtual QString nodeType() const { return geonode::GeoDataContainerType; }
 
     /**
      * @brief A convenience function that returns all folders in this container.

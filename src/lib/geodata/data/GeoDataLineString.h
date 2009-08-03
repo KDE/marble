@@ -96,8 +96,8 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
 */
     virtual ~GeoDataLineString();
 
-/// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() { return geonode::GeoDataLineStringType; }
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() const { return geonode::GeoDataLineStringType; }
 
     
 /*!

@@ -47,7 +47,7 @@ class GeoSceneGroup : public QObject,
     ~GeoSceneGroup();
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() { return geonode::GeoSceneGroupType; }
+    virtual QString nodeType() const { return geonode::GeoSceneGroupType; }
 
     /**
      * @brief  Get the availability of a property in this group

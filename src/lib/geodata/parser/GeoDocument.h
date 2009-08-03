@@ -112,7 +112,7 @@ public:
 class GEODATA_EXPORT GeoNode {
 public:
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() { return geonode::GeoNodeType; }
+    virtual QString nodeType() const { return geonode::GeoNodeType; }
 
 protected:
     GeoNode();

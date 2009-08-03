@@ -42,7 +42,7 @@ class GEODATA_EXPORT GeoSceneIcon : public GeoNode
     ~GeoSceneIcon();
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() { return geonode::GeoSceneIconType; }
+    virtual QString nodeType() const { return geonode::GeoSceneIconType; }
 
     QString pixmap() const;
     void setPixmap(const QString&);

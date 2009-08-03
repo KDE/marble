@@ -80,7 +80,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     bool operator==( const GeoDataFeature& ) const { return false; };
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() { return geonode::GeoDataFeatureType; }
+    virtual QString nodeType() const { return geonode::GeoDataFeatureType; }
     virtual bool isFolder() const { return false; }
     virtual bool isPlacemark() const { return false; }
 

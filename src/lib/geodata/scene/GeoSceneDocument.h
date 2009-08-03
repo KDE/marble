@@ -52,7 +52,7 @@ class GEODATA_EXPORT GeoSceneDocument : public QObject,
     ~GeoSceneDocument();
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() { return geonode::GeoSceneDocumentType; }
+    virtual QString nodeType() const { return geonode::GeoSceneDocumentType; }
     virtual bool isGeoSceneDocument() const { return true; }
 
     GeoSceneHead*     head() const;

@@ -44,7 +44,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     explicit GeoSceneTexture( const QString& name );
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() { return geonode::GeoSceneTextureType; }
+    virtual QString nodeType() const { return geonode::GeoSceneTextureType; }
 
     QString sourceDir() const;
     void setSourceDir( const QString& sourceDir );

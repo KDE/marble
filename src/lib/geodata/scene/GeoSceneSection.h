@@ -43,7 +43,7 @@ class GeoSceneSection : public GeoNode
     ~GeoSceneSection();
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() { return geonode::GeoSceneSectionType; }
+    virtual QString nodeType() const { return geonode::GeoSceneSectionType; }
 
     /**
      * @brief  Add an item to the legend section

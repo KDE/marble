@@ -43,7 +43,7 @@ class GeoSceneFilter : public GeoNode
     ~GeoSceneFilter();
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() { return geonode::GeoScenePaletteType; }
+    virtual QString nodeType() const { return geonode::GeoScenePaletteType; }
 
     QString name() const;
     void setName( const QString& name );

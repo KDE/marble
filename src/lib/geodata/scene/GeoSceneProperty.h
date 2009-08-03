@@ -45,7 +45,7 @@ class GEODATA_EXPORT GeoSceneProperty : public QObject,
     explicit GeoSceneProperty( const QString& name );
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() { return geonode::GeoScenePropertyType; }
+    virtual QString nodeType() const { return geonode::GeoScenePropertyType; }
 
     QString name() const;
     bool available() const;
