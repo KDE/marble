@@ -165,6 +165,14 @@ QRectF FrameGraphicsItem::contentRect( const QPointF& position ) const
     return contentRect;
 }
 
+QRectF FrameGraphicsItem::contentRect() const {
+    return contentRect( QPointF( 0.0, 0.0 ) );
+}
+
+QSizeF FrameGraphicsItem::contentSize() const {
+    return contentRect().size();
+}
+
 QRectF FrameGraphicsItem::paintedRect( const QPointF& position ) const
 {
     qreal marginTop = ( d->m_marginTop == 0.0 ) ? d->m_margin : d->m_marginTop;

@@ -10,6 +10,8 @@ SET( graphicsview_HDRS
         graphicsview/ScreenGraphicsItem.h
         graphicsview/FrameGraphicsItem.h
         graphicsview/LabelGraphicsItem.h
+        graphicsview/AbstractMarbleGraphicsLayout.h
+        graphicsview/MarbleGraphicsGridLayout.h
    )
 
 SET( graphicsview_SRCS
@@ -18,4 +20,6 @@ SET( graphicsview_SRCS
         graphicsview/ScreenGraphicsItem.cpp
         graphicsview/FrameGraphicsItem.cpp
         graphicsview/LabelGraphicsItem.cpp
+        graphicsview/AbstractMarbleGraphicsLayout.h
+        graphicsview/MarbleGraphicsGridLayout.h
    )

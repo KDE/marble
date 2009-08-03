@@ -13,7 +13,9 @@
 
 // Marble
 #include "AbstractProjection.h"
+#include "AbstractMarbleGraphicsLayout.h"
 #include "GeoPainter.h"
+#include "MarbleGraphicsItem.h"
 
 // Qt
 #include<QtCore/QList>
@@ -35,10 +37,11 @@ class MarbleGraphicsItemPrivate
           m_visibility( true ),
           m_parent( parent ),
           m_children( 0 ),
+          m_layout( 0 ),
           m_marbleGraphicsItem( marbleGraphicsItem )
     {
         if ( m_parent ) {
-            m_parent->p()->addChild( m_marbleGraphicsItem );
+//            m_parent->p()>addChild( m_marbleGraphicsItem );
         }
     }
 
@@ -52,8 +55,11 @@ class MarbleGraphicsItemPrivate
 
         // Remove from parent
         if ( m_parent ) {
-            m_parent->p()->removeChild( m_marbleGraphicsItem );
+//            m_parent->p()->removeChild( m_marbleGraphicsItem );
         }
+
+        // Delete Layout
+        delete m_layout;
     }
 
     void addChild( MarbleGraphicsItem *child )
@@ -125,6 +131,9 @@ class MarbleGraphicsItemPrivate
     MarbleGraphicsItem *m_parent;
     // The set of children. WARNING: This is not initialized by default.
     QSet<MarbleGraphicsItem *> *m_children;
+
+    // The layout handling the positions of the children
+    AbstractMarbleGraphicsLayout *m_layout;
     
     QString m_toolTip;
 

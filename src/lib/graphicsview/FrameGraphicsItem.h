@@ -15,6 +15,8 @@
 #include "marble_export.h"
 #include "ScreenGraphicsItem.h"
 
+class QBrush;
+
 namespace Marble
 {
 
@@ -135,8 +137,11 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
      */
     void setBackground( const QBrush &background );
 
-    QRectF contentRect( const QPointF& position = QPointF( 0.0, 0.0 ) ) const;
+    QRectF contentRect( const QPointF& position ) const;
     QRectF paintedRect( const QPointF& position = QPointF( 0.0, 0.0 ) ) const;
+
+    QRectF contentRect() const;
+    QSizeF contentSize() const;
 
     /**
      * Sets the size of the item. The given size is the size required for contents.

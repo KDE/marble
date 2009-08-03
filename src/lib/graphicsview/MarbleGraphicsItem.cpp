@@ -12,7 +12,7 @@
 
 #include "MarbleGraphicsItem_p.h"
 
-//Marble
+// Marble
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 
@@ -87,6 +87,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
             // The cache image will get a 0.5 pixel bounding to save antialiasing effects.
             pixmapPainter.translate( 0.5, 0.5 );
             paint( &pixmapPainter, viewport, renderPos, layer );
+
             // Paint children
             if ( p()->m_children ) {
                 foreach ( MarbleGraphicsItem *item, *p()->m_children ) {
@@ -111,6 +112,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
 
             painter->translate( position );
             paint( painter, viewport, renderPos, layer );
+
             // Paint children
             if ( p()->m_children ) {
                 foreach ( MarbleGraphicsItem *item, *p()->m_children ) {
@@ -148,6 +150,19 @@ QSizeF MarbleGraphicsItem::size() const
     return p()->m_size;
 }
 
+AbstractMarbleGraphicsLayout *MarbleGraphicsItem::layout() const
+{
+    return p()->m_layout;
+}
+
+void MarbleGraphicsItem::setLayout( AbstractMarbleGraphicsLayout *layout )
+{
+    // Deleting the old layout
+    delete p()->m_layout;
+    p()->m_layout = layout;
+    update();
+}
+
 MarbleGraphicsItem::CacheMode MarbleGraphicsItem::cacheMode() const
 {
     return p()->m_cacheMode;
@@ -165,6 +180,12 @@ void MarbleGraphicsItem::setCacheMode( CacheMode mode, const QSize & logicalCach
 void MarbleGraphicsItem::update()
 {
     p()->m_removeCachedPixmap = true;
+
+    // Adjust positions
+    if ( p()->m_layout ) {
+        p()->m_layout->updatePositions( this );
+    }
+
     // Update the parent.
     if ( p()->m_parent ) {
         p()->m_parent->update();
@@ -197,11 +218,28 @@ void MarbleGraphicsItem::setSize( const QSizeF& size )
     update();
 }
 
-QString MarbleGraphicsItem::toolTip() const {
+QSizeF MarbleGraphicsItem::contentSize() const
+{
+    return size();
+}
+
+void MarbleGraphicsItem::setContentSize( const QSizeF& size )
+{
+    setSize( size );
+}
+
+QRectF MarbleGraphicsItem::contentRect() const
+{
+    return QRectF( QPointF( 0, 0 ), contentSize() );
+}
+
+QString MarbleGraphicsItem::toolTip() const
+{
     return p()->m_toolTip;
 }
 
-void MarbleGraphicsItem::setToolTip( const QString& toolTip ) {
+void MarbleGraphicsItem::setToolTip( const QString& toolTip )
+{
     p()->m_toolTip = toolTip;
 }
 

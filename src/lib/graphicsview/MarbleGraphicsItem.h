@@ -16,17 +16,17 @@
 #include <QtCore/QPointF>
 #include <QtCore/QList>
 #include <QtCore/QSizeF>
+#include <QtCore/QRectF>
+#include <QtCore/QString>
 
-class QBrush;
 class QEvent;
 class QPainterPath;
 class QObject;
-class QRectF;
-class QString;
 
 namespace Marble
 {
     
+class AbstractMarbleGraphicsLayout;
 class GeoPainter;
 class GeoSceneLayer;
 class ViewportParams;
@@ -64,11 +64,17 @@ class MARBLE_EXPORT MarbleGraphicsItem
      * Returns the rect of one represenation of the object that is at the given position.
      */
     QRectF containsRect( const QPointF& point ) const;
-    
+
     /**
-     * Returns the size of the item
+     * Returns the layout of the MarbleGraphicsItem.
      */
-    QSizeF size() const;
+    AbstractMarbleGraphicsLayout *layout() const;
+
+    /**
+     * Set the layout of the graphics item. The layout will now handle positions of added child
+     * items. The MarbleGraphicsItem takes ownership of the layout.
+     */
+    void setLayout( AbstractMarbleGraphicsLayout *layout );
     
     /**
      * Returns the cache mode of the item
@@ -116,7 +122,33 @@ class MARBLE_EXPORT MarbleGraphicsItem
      * Set the tool tip for this GraphicItem.
      */
     void setToolTip( const QString& toolTip );
-    
+
+    /**
+     * Returns the size of the item
+     */
+    QSizeF size() const;
+
+    /**
+     * Set the size of the item
+     */
+    void setSize( const QSizeF& size );
+
+    /**
+     * Returns the size of the content of the MarbleGraphicsItem.
+     * This is identical to size() for default MarbleGraphicsItems.
+     */
+    virtual QSizeF contentSize() const;
+
+    /**
+     * Set the size of the content of the item.
+     */
+    virtual void setContentSize( const QSizeF& size );
+
+    /**
+     * Returns the rect of the content in item coordinates.
+     */
+    virtual QRectF contentRect() const;
+
  protected:
     explicit MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
 
@@ -128,11 +160,6 @@ class MARBLE_EXPORT MarbleGraphicsItem
                         const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
      
     virtual bool eventFilter( QObject *object, QEvent *e );
-    
-    /**
-     * Set the size of the item
-     */
-    void setSize( const QSizeF& size );
     
     MarbleGraphicsItemPrivate * const d;
     
