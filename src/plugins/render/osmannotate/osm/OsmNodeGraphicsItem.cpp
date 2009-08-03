@@ -26,6 +26,7 @@ void OsmNodeGraphicsItem::paint( GeoPainter *painter, ViewportParams* viewport,
 {
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
+    Q_UNUSED( viewport )
 
     painter->save();
     //stop points from blurring

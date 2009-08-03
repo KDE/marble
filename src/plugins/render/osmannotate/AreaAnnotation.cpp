@@ -27,6 +27,10 @@ void AreaAnnotation::setGeometry( GeoDataPolygon g )
 void AreaAnnotation::paint(GeoPainter *painter, ViewportParams *viewport,
                            const QString &renderPos, GeoSceneLayer *layer )
 {
+    Q_UNUSED(viewport);
+    Q_UNUSED(renderPos);
+    Q_UNUSED(layer);
+
     painter->save();
 
     painter->setBrush( QBrush( QColor( 0, 255, 255, 80 )  ) );

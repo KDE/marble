@@ -27,7 +27,6 @@ public:
                         const QString& renderPos, GeoSceneLayer * layer = 0 );
     //FIXME Waiting to be removed
     virtual QRect screenBounding(){return QRect();}
-    virtual void geoBounding(qreal angularResolution){}
 private:
     GeoDataPolygon m_geo;
 };

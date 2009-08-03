@@ -24,11 +24,12 @@ GeoWidgetBubble::GeoWidgetBubble()
     m_hidden = true;
 }
 
-void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* view,
+void GeoWidgetBubble::paint( GeoPainter* painter, ViewportParams* viewport,
                              const QString &renderPos, GeoSceneLayer *layer )
 {
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
+    Q_UNUSED( viewport );
 
     if( !marbleWidgetInitalised && ( m_widget!=0)  ) {
         initaliseMarbleWidget( (QWidget* ) painter->device() );

@@ -33,6 +33,9 @@ void GeoLineStringGraphicsItem::append( const GeoDataCoordinates& coordinates)
 void GeoLineStringGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
                                        const QString& renderPos, GeoSceneLayer* layer )
 {
+    Q_UNUSED(viewport);
+    Q_UNUSED(renderPos);
+    Q_UNUSED(layer);
     painter->drawPolyline( m_lineString );
 }
 

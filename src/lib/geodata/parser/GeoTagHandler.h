@@ -31,6 +31,14 @@ namespace Marble
 class GeoNode;
 class GeoParser;
 
+/**
+ * @brief A base class for XML tag handlers
+ * This is a base class that is used in the GeoParser architecture. To implement
+ * a new GeoData format you will need to subclass GeoTagHandler and reimplement
+ * the @see parse(GeoParser&) method. You also need to register the newly
+ * implemented GeoTagHandler by declaring an instance of the helper structure
+ * @see GeoTagHandlerRegistrar with a corrisponding @see QualifiedName.
+ */
 class MARBLE_EXPORT GeoTagHandler {
 public:
     // API to be implemented by child handlers.

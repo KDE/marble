@@ -55,6 +55,9 @@ void OsmWayGraphicsItem::append( const GeoDataPoint& point )
 void OsmWayGraphicsItem::paint( GeoPainter* painter, ViewportParams* viewport,
                                 const QString& renderPos, GeoSceneLayer* layer )
 {
+    Q_UNUSED(viewport);
+    Q_UNUSED(renderPos);
+    Q_UNUSED(layer);
     painter->save();
 
     painter->setPen( Qt::black );

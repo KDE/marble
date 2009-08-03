@@ -29,6 +29,8 @@ TmpGraphicsItem::~TmpGraphicsItem()
 
 QVariant TmpGraphicsItem::itemChange(GeoGraphicsItemChange change, QVariant v )
 {
+    Q_UNUSED(change);
+    Q_UNUSED(v);
     return QVariant();
 }
 
@@ -68,6 +70,7 @@ bool TmpGraphicsItem::sceneEvent( QEvent* event )
 
 bool TmpGraphicsItem::mousePressEvent( QMouseEvent* event )
 {
+    Q_UNUSED( event )
     //FIXME re-implement the whole ItemIsSelectable and call an
     //Item Change
     return false;

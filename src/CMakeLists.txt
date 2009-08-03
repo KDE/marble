@@ -18,6 +18,7 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/graphicsitem
   ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/handlers/dgml
   ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/parser
+  ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/writer
   ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/scene
   ${CMAKE_CURRENT_SOURCE_DIR}/lib/graphicsview
   ${CMAKE_CURRENT_BINARY_DIR}

@@ -149,6 +149,7 @@ GeoDataGeometry PlacemarkTextAnnotation::geometry() const
 
 bool PlacemarkTextAnnotation::mousePressEvent( QMouseEvent* event )
 {
+    Q_UNUSED(event);
     bubble->setHidden( !bubble->isHidden() );
     return true;
 }

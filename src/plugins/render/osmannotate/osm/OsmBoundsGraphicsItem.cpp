@@ -36,6 +36,7 @@ void OsmBoundsGraphicsItem::paint( GeoPainter* painter, ViewportParams * viewpor
 {
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
+    Q_UNUSED( viewport )
 
     painter->save();
     painter->setPen( m_pen );
