@@ -14,7 +14,10 @@
 namespace Marble{
 
 //needs to handle a specific doctype. different versions different writer classes?
-static GeoTagWriterRegistrar s_writerPlacemark( GeoTagWriter::QualifiedName(kml::kmlTag_Placemark,
+//don't use the tag dictionary for tag names, because with the writer we are using
+// the object type strings instead
+//FIXME: USE object strings provided by idis
+static GeoTagWriterRegistrar s_writerPlacemark( GeoTagWriter::QualifiedName("ObjectType",
                                                                             kml::kmlTag_nameSpace20),
                                                new KmlPlacemarkTagWriter() );
 
