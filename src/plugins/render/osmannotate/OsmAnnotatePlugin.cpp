@@ -363,7 +363,7 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     QAction*    m_enableInputAction;
 
     m_addPlacemark = new QAction(this);
-    m_addPlacemark->setText( "Add Placemark" );
+    m_addPlacemark->setText( tr("Add Placemark") );
     m_addPlacemark->setCheckable( true );
     connect( m_addPlacemark, SIGNAL( toggled(bool)),
              this, SLOT(setAddingPlacemark(bool)) );
@@ -371,18 +371,18 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
              m_addPlacemark, SLOT(toggle()) );
 
     m_drawPolygon = new QAction( this );
-    m_drawPolygon->setText( "Draw Polygon" );
+    m_drawPolygon->setText( tr("Draw Polygon") );
     m_drawPolygon->setCheckable( true );
     connect( m_drawPolygon, SIGNAL(toggled(bool)),
              this, SLOT(setDrawingPolygon(bool)) );
 
     m_loadOsmFile = new QAction( this );
-    m_loadOsmFile->setText( "Load Osm File" );
+    m_loadOsmFile->setText( tr("Load Osm File") );
     connect( m_loadOsmFile, SIGNAL(triggered()),
              this, SLOT(loadOsmFile()) );
 
     m_saveOsmFile = new QAction( this );
-    m_saveOsmFile->setText( "Save Osm File" );
+    m_saveOsmFile->setText( tr("Save Osm File") );
     connect( m_saveOsmFile, SIGNAL(triggered()),
              this, SLOT(saveOsmFile()) );
 
