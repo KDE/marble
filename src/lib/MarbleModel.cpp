@@ -147,20 +147,6 @@ MarbleModel::MarbleModel( QObject *parent )
 {
     MarbleModelPrivate::refCounter.ref();
     d->m_dataFacade = new MarbleDataFacade( this );
-    d->m_layerManager = new LayerManager( d->m_dataFacade, this );
-
-    // FIXME: more on the spot update names and API
-    connect ( d->m_layerManager,      SIGNAL( floatItemsChanged() ),
-              this,                   SIGNAL( modelChanged() ) );
-
-    connect ( d->m_layerManager, SIGNAL( pluginSettingsChanged() ),
-              this,              SIGNAL( pluginSettingsChanged() ) );
-
-    d->m_timer = new QTimer( this );
-    d->m_timer->start( 200 );
-
-    connect( d->m_timer, SIGNAL( timeout() ),
-             this,       SIGNAL( timeout() ) );
 
     d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
 
@@ -214,6 +200,21 @@ MarbleModel::MarbleModel( QObject *parent )
 
     connect( fileViewModel(), SIGNAL(layoutChanged()),
              d->m_gpsLayer, SLOT(clearModel() ) );
+
+    d->m_layerManager = new LayerManager( d->m_dataFacade, this );
+
+    // FIXME: more on the spot update names and API
+    connect ( d->m_layerManager,      SIGNAL( floatItemsChanged() ),
+              this,                   SIGNAL( modelChanged() ) );
+
+    connect ( d->m_layerManager, SIGNAL( pluginSettingsChanged() ),
+              this,              SIGNAL( pluginSettingsChanged() ) );
+
+    d->m_timer = new QTimer( this );
+    d->m_timer->start( 200 );
+
+    connect( d->m_timer, SIGNAL( timeout() ),
+             this,       SIGNAL( timeout() ) );
 
     d->m_dateTime       = new ExtDateTime();
     /* Assume we are dealing with the earth */
