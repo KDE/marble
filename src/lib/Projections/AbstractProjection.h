@@ -206,7 +206,10 @@ class AbstractProjection
 
     // The usage of the following methods is DEPRECATED!
 
-    /* DEPRECATED */
+    /**
+     * @deprecated
+     * use @see screenCoordinates(qreal,qreal,const ViewportParams*,qreal&,qreal&)
+     */
     bool screenCoordinates( qreal lon, qreal lat,
                                     const ViewportParams *viewport,
                                     int& x, int& y );

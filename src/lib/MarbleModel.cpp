@@ -643,7 +643,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
 
     renderPositions.clear();
     renderPositions << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
-                    << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM";
+                    << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
                                
     d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
 }

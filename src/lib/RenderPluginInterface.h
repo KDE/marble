@@ -87,6 +87,7 @@ class RenderPluginInterface: public PluginInterface
      * "ORBIT"
      * "ALWAYS_ON_TOP"
      * "FLOAT_ITEM"
+     * "USER_TOOLS"
      */
     virtual QStringList renderPosition() const = 0;
 

@@ -51,7 +51,10 @@ QString OsmAnnotatePlugin::renderPolicy() const
 
 QStringList OsmAnnotatePlugin::renderPosition() const
 {
-    return QStringList( "HOVERS_ABOVE_SURFACE" );
+    QStringList positions;
+    positions.append( "HOVERS_ABOVE_SURFACE" );
+    positions.append( "USER_TOOLS" );
+    return positions;
 }
 
 QString OsmAnnotatePlugin::name() const
@@ -109,7 +112,7 @@ QList<QActionGroup*>* OsmAnnotatePlugin::toolbarActionGroups() const
 
 bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer )
 {
-    if ( renderPos != "HOVERS_ABOVE_SURFACE" ) {
+    if ( renderPos != "HOVERS_ABOVE_SURFACE" && renderPos != "USER_TOOLS" ) {
         return true;
     }
     
@@ -123,29 +126,32 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
 
         widgetInitalised = true;
     }
-    painter->autoMapQuality();
 
-    //so the user can keep track of the current polygon drawing
-    if( m_tmp_lineString ) {
-        painter->drawPolyline( *m_tmp_lineString );
+    if( renderPos == "HOVERS_ABOVE_SURFACE" ) {
+        painter->autoMapQuality();
+
+        //so the user can keep track of the current polygon drawing
+        if( m_tmp_lineString ) {
+            painter->drawPolyline( *m_tmp_lineString );
+        }
+
+        if( m_itemModel ) {
+            QListIterator<GeoGraphicsItem*> it( *m_itemModel );
+
+            while( it.hasNext() ) {
+                GeoGraphicsItem* i = it.next();
+                if( i->flags() & GeoGraphicsItem::ItemIsVisible ) {
+                    i->paint( painter, viewport, renderPos, layer );
+                }
+            }
+        }
     }
-    
+
     QListIterator<TmpGraphicsItem*> i(model);
-    
+
     while(i.hasNext()) {
         TmpGraphicsItem* tmp= i.next();
         tmp->paint(painter, viewport, renderPos, layer);
-    }
-
-    if( m_itemModel ) {
-        QListIterator<GeoGraphicsItem*> it( *m_itemModel );
-
-        while( it.hasNext() ) {
-            GeoGraphicsItem* i = it.next();
-            if( i->flags() & GeoGraphicsItem::ItemIsVisible ) {
-                i->paint( painter, viewport, renderPos, layer );
-            }
-        }
     }
 
     return true;

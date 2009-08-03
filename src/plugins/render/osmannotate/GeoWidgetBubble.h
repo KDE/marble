@@ -36,7 +36,6 @@ public:
     bool marbleWidgetIsInitalised() const;
 
     void moveTo( QPoint screenPos );
-    void hide();
     void setHidden( bool hide );
     bool isHidden() const;
 

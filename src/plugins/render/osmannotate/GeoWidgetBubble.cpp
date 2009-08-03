@@ -97,15 +97,15 @@ void GeoWidgetBubble::moveTo( QPoint pos )
      m_screenPosition = pos;
 }
 
-void GeoWidgetBubble::hide()
-{
-    setHidden(true);
-}
-
 void GeoWidgetBubble::setHidden( bool hide )
 {
+    if( m_hidden == hide ) {
+        return;
+    }
+
     //if its not hidden and we want to hide
     if( hide && !m_hidden ) {
+        m_widget->setVisible( m_hidden );
         m_hidden = true ;
     }
     else if (  !hide && m_hidden ) {

@@ -77,15 +77,23 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter,
     bool hidden;
     bool visable = viewport->currentProjection()->screenCoordinates( coordinate(), viewport, x, y, hidden );
 
-    if( visable && !hidden ) {
-        QList<QRegion> list;
+    if( renderPos == "HOVERS_ABOVE_SURFACE" ) {
+        painter->drawPixmap( coordinate(),
+                             QPixmap( MarbleDirs::path( "bitmaps/annotation.png" ) )  );
+         QList<QRegion> list;
         list.append( QRegion( x -10 , y-10 , 20 , 20 ) );
         setRegions( list );
         painter->drawRect( regions().at(0).boundingRect() );
+        return;
+    }
+
+
+
+    if( visable && !hidden ) {
         bubble->moveTo( QPoint( x, y ) );
         bubble->paint( painter, viewport, renderPos, layer );
     } else {
-        bubble->hide();
+        bubble->setHidden(true );
     }
 
     //FIXME This shouldn't really be a part of this method at all as each item should
