@@ -15,6 +15,9 @@
 #include "FrameGraphicsItem.h"
 #include "marble_export.h"
 
+class QImage;
+class QIcon;
+
 namespace Marble
 {
 
@@ -31,6 +34,9 @@ class MARBLE_EXPORT LabelGraphicsItem : public FrameGraphicsItem
     explicit LabelGraphicsItem( MarbleGraphicsItem *parent = 0 );
 
     void setText( const QString& text );
+    void setImage( const QImage& image, const QSize& size = QSize() );
+    void setIcon( const QIcon& icon, const QSize& size );
+
     void clear();
 
  protected:

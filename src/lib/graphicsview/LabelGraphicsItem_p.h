@@ -12,6 +12,8 @@
 #define LABELGRAPHICSITEMPRIVATE_H
 
 #include <QtCore/QString>
+#include <QtGui/QImage>
+#include <QtGui/QIcon>
 
 class QFont;
 
@@ -27,6 +29,8 @@ class LabelGraphicsItemPrivate
     QFont font() const;
 
     QString m_text;
+    QImage m_image;
+    QIcon m_icon;
 };
 
 } // namespace Marble

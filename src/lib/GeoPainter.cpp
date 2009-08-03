@@ -935,6 +935,18 @@ void GeoPainter::drawImage ( const QRect &target,
     QPainter::drawImage( target, image, source, flags );
 }
 
+void GeoPainter::drawImage( const QRect& rect,
+                            const QImage& image )
+{
+    QPainter::drawImage( rect, image );
+}
+
+void GeoPainter::drawImage( const QRectF& rect,
+                            const QImage& image )
+{
+    QPainter::drawImage( rect, image );
+}
+
 void GeoPainter::drawPixmap( int x, int y, const QPixmap &pixmap )
 {
     QPainter::drawPixmap( x, y, pixmap );

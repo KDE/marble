@@ -43,14 +43,36 @@ LabelGraphicsItem::LabelGraphicsItem( MarbleGraphicsItem *parent )
 
 void LabelGraphicsItem::setText( const QString& text )
 {
+    clear();
     d->m_text = text;
     QFontMetrics metrics( d->font() );
     setContentSize( metrics.boundingRect( text ).size() );
 }
 
+void LabelGraphicsItem::setImage( const QImage& image, const QSize& size )
+{
+    clear();
+    d->m_image = image;
+    if ( size.isNull() ) {
+        setContentSize( image.size() );
+    }
+    else {
+        setContentSize( size );
+    }
+}
+
+void LabelGraphicsItem::setIcon( const QIcon& icon, const QSize& size )
+{
+    clear();
+    d->m_icon = icon;
+    setContentSize( size );
+}
+
 void LabelGraphicsItem::clear()
 {
     d->m_text.clear();
+    d->m_image = QImage();
+    d->m_icon = QIcon();
     setSize( QSizeF( 0.0, 0.0 ) );
 }
 
@@ -62,9 +84,20 @@ void LabelGraphicsItem::paintContent( GeoPainter *painter, ViewportParams *viewp
     Q_UNUSED( layer )
 
     painter->save();
-    painter->setFont( d->font() );
-    painter->drawText( contentRect().toRect(),
-                       Qt::AlignVCenter | Qt::AlignLeft,
-                       d->m_text );
+
+    if ( !d->m_text.isNull() ) {
+        painter->setFont( d->font() );
+        painter->drawText( contentRect().toRect(),
+                           Qt::AlignVCenter | Qt::AlignLeft,
+                           d->m_text );
+    }
+    else if ( !d->m_image.isNull() ) {
+        painter->drawImage( contentRect(),
+                            d->m_image );
+    }
+    else if ( !d->m_icon.isNull() ) {
+        d->m_icon.paint( painter, contentRect().toRect(), Qt::AlignCenter );
+    }
+
     painter->restore();
 }

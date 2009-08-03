@@ -518,6 +518,8 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     void drawImage ( const QRect & target, const QImage & image,
                      const QRect & source,
                      Qt::ImageConversionFlags flags = Qt::AutoColor );
+    void drawImage ( const QRect& rect, const QImage& image );
+    void drawImage ( const QRectF& rect, const QImage& image );
     void drawPixmap ( int x, int y, const QPixmap & pixmap );
     void drawPixmap ( const QPointF & point, const QPixmap & pixmap );
     void drawPixmap ( const QPoint & point, const QPixmap & pixmap );
