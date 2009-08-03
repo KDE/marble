@@ -42,6 +42,9 @@ class GeoSceneSection : public GeoNode
     explicit GeoSceneSection( const QString& name );
     ~GeoSceneSection();
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoSceneSectionType; }
+
     /**
      * @brief  Add an item to the legend section
      * @param  item  the new item

@@ -37,6 +37,9 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry {
 
     virtual ~GeoDataMultiGeometry();
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataMultiGeometryType; }
+
     int size() const;
     GeoDataGeometry& at( int pos );
     const GeoDataGeometry& at( int pos ) const;

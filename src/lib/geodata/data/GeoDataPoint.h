@@ -68,6 +68,9 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
 
     ~GeoDataPoint();
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataPointType; }
+
     // Type definitions
     typedef QVector<GeoDataPoint> Vector;
 

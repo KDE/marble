@@ -98,6 +98,10 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
     virtual ~GeoDataPolygon();
 
 
+/// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataPolygonType; }
+
+
 /*!
     \brief Returns whether a Polygon is a closed polygon.
 

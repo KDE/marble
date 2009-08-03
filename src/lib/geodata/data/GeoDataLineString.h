@@ -96,6 +96,9 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
 */
     virtual ~GeoDataLineString();
 
+/// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataLineStringType; }
+
     
 /*!
     \brief Returns whether a LineString is a closed polygon.

@@ -55,6 +55,9 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
     */
     GeoDataLabelStyle& operator=( const GeoDataLabelStyle& other );
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataLabelStyleType; }
+
     /**
      * @brief Set the scale of the label
      * @param  scale  the new scale

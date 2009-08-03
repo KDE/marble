@@ -40,6 +40,9 @@ class GeoDataStyleSelectorPrivate;
 class GEODATA_EXPORT GeoDataStyleSelector : public GeoDataObject
 {
   public:
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataStyleSelectorType; }
+
     /**
      * @brief Set a new style id.
      * @param  value  the new id

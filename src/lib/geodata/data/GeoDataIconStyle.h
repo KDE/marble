@@ -37,6 +37,9 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
 
     GeoDataIconStyle& operator=( const GeoDataIconStyle& other );
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataIconStyleType; }
+
     void setIcon( const QPixmap& icon );
     QPixmap icon() const;
     

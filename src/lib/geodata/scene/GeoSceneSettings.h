@@ -50,6 +50,9 @@ class GEODATA_EXPORT GeoSceneSettings : public QObject,
     GeoSceneSettings();
     virtual ~GeoSceneSettings();
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoSceneSettingsType; }
+
     /**
      * @brief  Get the availability of a property across groups
      * @param  name  the property name

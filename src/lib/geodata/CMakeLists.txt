@@ -42,6 +42,7 @@ SET( geodata_SRCS
         ${geodata_graphicsitem_SRCS}
         ${geodata_scene_SRCS} 
         ${geodata_parser_SRCS}
+        ${geodata_writer_SRCS}
         ${geodata_handlers_gpx_SRCS}
         ${geodata_handlers_kml_SRCS}
         ${geodata_handlers_dgml_SRCS}

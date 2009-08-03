@@ -51,6 +51,8 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer {
     GeoDataFolder( const GeoDataFeature& other );
     ~GeoDataFolder();
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataFolderType; }
     virtual bool isFolder() const { return true; }
 };
 

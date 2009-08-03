@@ -62,6 +62,9 @@ class GeoDataColorStylePrivate;
 class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
 {
   public:
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataColorStyleType; }
+
     /**
      * @brief  Set a new color
      * @param  value  the new color value

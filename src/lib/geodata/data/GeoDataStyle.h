@@ -64,6 +64,9 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
                   const QFont &font, const QColor &color  );
     ~GeoDataStyle();
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataStyleType; }
+
     /// set the icon style
     void setIconStyle( const GeoDataIconStyle& style );
     /// Return the icon style of this style

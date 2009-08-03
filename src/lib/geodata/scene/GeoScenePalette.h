@@ -38,6 +38,9 @@ class GeoScenePalette : public GeoNode
  public:
     GeoScenePalette( const QString& type, const QString& file );
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoScenePaletteType; }
+
     QString type() const;
     void    setType( const QString& type );
 

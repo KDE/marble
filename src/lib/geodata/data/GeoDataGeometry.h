@@ -63,6 +63,8 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     
     virtual ~GeoDataGeometry();
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataGeometryType; }
     virtual bool isFolder() const { return false; }
     virtual EnumGeometryId geometryId() const;
 

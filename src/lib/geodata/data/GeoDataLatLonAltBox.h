@@ -58,6 +58,9 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
 
     GeoDataLatLonAltBox& operator=( const GeoDataLatLonAltBox& other );
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataLatLonAltBoxType; }
+
     /**
      * @brief Get the lower altitude boundary of the bounding box.
      * @return the height of the lower altitude boundary.

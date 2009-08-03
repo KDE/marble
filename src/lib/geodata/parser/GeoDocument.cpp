@@ -29,6 +29,55 @@ namespace Marble
      unsigned long GeoDocument::s_leakProtector = 0;     
 #endif      
 
+namespace geonode
+{
+const char* GeoDataColorStyleType = "GeoDataColorStyle";
+const char* GeoDataContainerType = "GeoDataContainer";
+const char* GeoDataDocumentType = "GeoDataDocument";
+const char* GeoDataFeatureType = "GeoDataFeature";
+const char* GeoDataFolderType = "GeoDataFolder";
+const char* GeoDataGeometryType = "GeoDataGeometry";
+const char* GeoDataHotspotType = "GeoDataHotspot";
+const char* GeoDataIconStyleType = "GeoDataIconStyle";
+const char* GeoDataInnerBoundaryType = "GeoDataInnerBoundary";
+const char* GeoDataLabelStyleType = "GeoDataLabelStyle";
+const char* GeoDataLatLonAltBoxType = "GeoDataLatLonAlt";
+const char* GeoDataLatLonBoxType = "GeoDataLatLonBox";
+const char* GeoDataLinearRingType = "GeoDataLinearRing";
+const char* GeoDataLineStringType = "GeoDataLineString";
+const char* GeoDataLineStyleType = "GeoDataLineStyle";
+const char* GeoDataMultiGeometryType = "GeoDataMultyGeometry";
+const char* GeoDataObjectType = "GeoDataObject";
+const char* GeoDataOuterBoundaryType = "GeoDataOuterBoundary";
+const char* GeoDataPlacemarkType = "GeoDataPlacemark";
+const char* GeoDataPointType = "GeoDataPoint";
+const char* GeoDataPolygonType = "GeoDataPolygon";
+const char* GeoDataPolyStyleType = "GeoDataPolyStyle";
+const char* GeoDataStyleSelectorType = "GeoDataStyleSelector";
+const char* GeoDataStyleType = "GeoDataStyle";
+const char* GeoDataSyleMapType = "GeoDataStyleMap";
+const char* GeoNodeType = "GeoNode";
+const char* GeoSceneAbstractDatasetType = "GeoSceneAbstractDataset";
+const char* GeoSceneDocumentType = "GeoSceneDocument";
+const char* GeoSceneFilterType = "GeoSceneFilter";
+const char* GeoSceneGroupType = "GeoSceneGroup";
+const char* GeoSceneHeadType = "GeoSceneHead";
+const char* GeoSceneIconType = "GeoSceneIcon";
+const char* GeoSceneItemType = "GeoSceneItem";
+const char* GeoSceneLayerType = "GeoSceneLayer";
+const char* GeoSceneLegendType = "GeoSceneLegend";
+const char* GeoSceneMapType = "GeoSceneMap";
+const char* GeoScenePaletteType = "GeoScenePalette";
+const char* GeoScenePropertyType = "GeoSceneProperty";
+const char* GeoSceneSectionType = "GeoSceneSection";
+const char* GeoSceneSettingsType = "GeoSceneSettings";
+const char* GeoSceneTextureType = "GeoSceneTexture";
+const char* GeoSceneVectorType = "GeoSceneVector";
+const char* GeoSceneXmlDataSourceType = "GeoSceneXmlDataSource";
+const char* GeoSceneZoomType = "GeoSceneZoom";
+}
+
+
 GeoDocument::GeoDocument()
 {
 }

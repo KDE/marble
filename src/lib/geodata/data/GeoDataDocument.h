@@ -58,6 +58,8 @@ public:
     GeoDataDocument( const GeoDataDocument& other );
     ~GeoDataDocument();
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataDocumentType; }
     virtual bool isGeoDataDocument() const { return true; }
 
     /**

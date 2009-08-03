@@ -47,6 +47,9 @@ class GEODATA_EXPORT GeoSceneMap : public GeoNode
     GeoSceneMap();
     ~GeoSceneMap();
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoSceneMapType; }
+
     QColor backgroundColor() const;
     void setBackgroundColor( const QColor& );
 

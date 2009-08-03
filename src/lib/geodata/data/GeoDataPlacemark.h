@@ -83,6 +83,9 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     */
     bool operator==( const GeoDataPlacemark& other ) const;
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataPlacemarkType; }
+
     /**
      * Return the coordinate of the placemark as a GeoDataCoordinates
      */

@@ -36,6 +36,9 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
 
     GeoDataHotSpot& operator=( const GeoDataHotSpot& other );
 
+    /// Provides type information for downcasting a GeoNode
+    virtual QString nodeType() { return geonode::GeoDataHotspotType; }
+
     /**
     * @brief this function returns the hotspot and the units the hotspot is measured in
     * @param xunits after running hotspot, you'll receive the unit in which x is measured
