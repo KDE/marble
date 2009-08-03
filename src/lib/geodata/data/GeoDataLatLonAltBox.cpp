@@ -30,6 +30,11 @@ class GeoDataLatLonAltBoxPrivate
     {
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataLatLonAltBoxType;
+    }
+
     qreal m_minAltitude;
     qreal m_maxAltitude;
     AltitudeMode m_altitudeMode;
@@ -86,6 +91,11 @@ GeoDataLatLonAltBox::GeoDataLatLonAltBox( const GeoDataLatLonBox & other )
 GeoDataLatLonAltBox::~GeoDataLatLonAltBox()
 {
     delete d;
+}
+
+QString GeoDataLatLonAltBox::nodeType() const
+{
+    return d->nodeType();
 }
 
 qreal GeoDataLatLonAltBox::minAltitude() const

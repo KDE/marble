@@ -35,7 +35,12 @@ class GeoDataLinearRingPrivate : public Marble::GeoDataLineStringPrivate
         return copy;
     }
 
-    virtual EnumGeometryId geometryId() const 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataLinearRingType;
+    }
+
+    virtual EnumGeometryId geometryId() const
     {
         return GeoDataLinearRingId;
     }

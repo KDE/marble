@@ -99,7 +99,7 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
 
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const { return geonode::GeoDataPolygonType; }
+    virtual QString nodeType() const;
 
 
 /*!

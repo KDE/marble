@@ -36,9 +36,6 @@ class GEODATA_EXPORT GeoSceneZoom : public GeoNode
  public:
     GeoSceneZoom();
 
-    /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const { return geonode::GeoSceneZoomType; }
-
     int minimum() const;
     void setMinimum( int name );
     int maximum() const;

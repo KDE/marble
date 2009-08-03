@@ -30,7 +30,12 @@ class GeoDataStyleMapPrivate
     ~GeoDataStyleMapPrivate()
     {
     }
-    
+
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataSyleMapType;
+    }
+
     QString lastKey;
 };
 
@@ -49,6 +54,11 @@ GeoDataStyleMap::GeoDataStyleMap( const GeoDataStyleMap& other )
 GeoDataStyleMap::~GeoDataStyleMap()
 {
     delete d;
+}
+
+QString GeoDataStyleMap::nodeType() const
+{
+    return d->nodeType();
 }
 
 QString GeoDataStyleMap::lastKey() const

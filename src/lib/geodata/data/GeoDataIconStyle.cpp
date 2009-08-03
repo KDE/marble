@@ -42,6 +42,11 @@ class GeoDataIconStylePrivate
     {
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataIconStyleType;
+    }
+
     float            m_scale;
 
     QPixmap          m_icon;
@@ -75,6 +80,11 @@ GeoDataIconStyle& GeoDataIconStyle::operator=( const GeoDataIconStyle& other )
     GeoDataColorStyle::operator=( other );
     *d = *other.d;
     return *this;
+}
+
+QString GeoDataIconStyle::nodeType() const
+{
+    return d->nodeType();
 }
 
 void GeoDataIconStyle::setIcon( const QPixmap &icon )

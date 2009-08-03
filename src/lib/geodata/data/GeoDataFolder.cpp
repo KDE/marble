@@ -22,10 +22,34 @@
 
 #include "GeoDataFolder.h"
 
+#include "GeoDataContainer_p.h"
+
 namespace Marble
 {
 
+class GeoDataFolderPrivate : public Marble::GeoDataContainerPrivate
+{
+  public:
+    GeoDataFolderPrivate()
+    {
+    }
+
+    virtual void* copy()
+    {
+        GeoDataFolderPrivate* copy = new GeoDataFolderPrivate;
+        *copy = *this;
+        return copy;
+    }
+
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataFolderType;
+    }
+};
+
+
 GeoDataFolder::GeoDataFolder()
+        : GeoDataContainer( new GeoDataFolderPrivate )
 {
 }
 
@@ -41,6 +65,16 @@ GeoDataFolder::GeoDataFolder( const GeoDataFeature& other )
 
 GeoDataFolder::~GeoDataFolder()
 {
+}
+
+GeoDataFolderPrivate* GeoDataFolder::p() const
+{
+    return static_cast<GeoDataFolderPrivate*>(d);
+}
+
+QString GeoDataFolder::nodeType() const
+{
+    return p()->nodeType();
 }
 
 }

@@ -116,6 +116,11 @@ GeoDataFeature& GeoDataFeature::operator=( const GeoDataFeature& other )
     return *this;
 }
 
+QString GeoDataFeature::nodeType() const
+{
+    return p()->nodeType();
+}
+
 EnumFeatureId GeoDataFeature::featureId() const
 {
     return d->featureId();

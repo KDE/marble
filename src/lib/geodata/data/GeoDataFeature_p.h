@@ -88,6 +88,11 @@ class GeoDataFeaturePrivate
     {
     }
 
+    virtual QString nodeType() const
+    {
+        return Marble::GeoDataTypes::GeoDataFeatureType;
+    }
+
     QString     m_name;         // Name of the feature. Is shown on screen
     QString     m_description;  // A longer textual description
     QString     m_address;      // The address.  Optional

@@ -40,9 +40,6 @@ class GeoSceneVector : public GeoSceneAbstractDataset
  public:
     explicit GeoSceneVector( const QString& name );
 
-    /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const { return geonode::GeoSceneAbstractDatasetType; }
-
     QString sourceFile() const;
     void setSourceFile( const QString& sourceFile );
 

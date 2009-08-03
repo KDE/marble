@@ -50,6 +50,11 @@ class GeoDataLabelStylePrivate
     {
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataLabelStyleType;
+    }
+
     /// The current scale of the label
     float  m_scale;
     /// The current alignment of the label
@@ -85,6 +90,11 @@ GeoDataLabelStyle& GeoDataLabelStyle::operator=( const GeoDataLabelStyle& other 
     GeoDataColorStyle::operator=( other );
     *d = *other.d;
     return *this;
+}
+
+QString GeoDataLabelStyle::nodeType() const
+{
+    return d->nodeType();
 }
 
 void GeoDataLabelStyle::setAlignment( GeoDataLabelStyle::Alignment alignment )

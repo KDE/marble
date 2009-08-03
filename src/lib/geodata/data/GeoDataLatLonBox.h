@@ -60,8 +60,8 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
 
     GeoDataLatLonBox& operator=( const GeoDataLatLonBox& other );
 
-    /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const { return geonode::GeoDataLatLonBoxType; }
+    /// Provides type information for downcasting a GeoData
+    virtual QString nodeType() const;
 
     /**
      * @brief Get the northern boundary of the bounding box.

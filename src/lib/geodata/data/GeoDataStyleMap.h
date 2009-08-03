@@ -40,7 +40,7 @@ class GEODATA_EXPORT GeoDataStyleMap : public GeoDataStyleSelector,
 {
   public:
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const { return geonode::GeoDataSyleMapType; }
+    virtual QString nodeType() const;
 
     /**
     * @brief return the last key

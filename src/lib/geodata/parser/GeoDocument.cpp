@@ -29,7 +29,7 @@ namespace Marble
      unsigned long GeoDocument::s_leakProtector = 0;     
 #endif      
 
-namespace geonode
+namespace GeoDataTypes
 {
 const char* GeoDataColorStyleType = "GeoDataColorStyle";
 const char* GeoDataContainerType = "GeoDataContainer";
@@ -56,25 +56,6 @@ const char* GeoDataPolyStyleType = "GeoDataPolyStyle";
 const char* GeoDataStyleSelectorType = "GeoDataStyleSelector";
 const char* GeoDataStyleType = "GeoDataStyle";
 const char* GeoDataSyleMapType = "GeoDataStyleMap";
-const char* GeoNodeType = "GeoNode";
-const char* GeoSceneAbstractDatasetType = "GeoSceneAbstractDataset";
-const char* GeoSceneDocumentType = "GeoSceneDocument";
-const char* GeoSceneFilterType = "GeoSceneFilter";
-const char* GeoSceneGroupType = "GeoSceneGroup";
-const char* GeoSceneHeadType = "GeoSceneHead";
-const char* GeoSceneIconType = "GeoSceneIcon";
-const char* GeoSceneItemType = "GeoSceneItem";
-const char* GeoSceneLayerType = "GeoSceneLayer";
-const char* GeoSceneLegendType = "GeoSceneLegend";
-const char* GeoSceneMapType = "GeoSceneMap";
-const char* GeoScenePaletteType = "GeoScenePalette";
-const char* GeoScenePropertyType = "GeoSceneProperty";
-const char* GeoSceneSectionType = "GeoSceneSection";
-const char* GeoSceneSettingsType = "GeoSceneSettings";
-const char* GeoSceneTextureType = "GeoSceneTexture";
-const char* GeoSceneVectorType = "GeoSceneVector";
-const char* GeoSceneXmlDataSourceType = "GeoSceneXmlDataSource";
-const char* GeoSceneZoomType = "GeoSceneZoom";
 }
 
 

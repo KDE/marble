@@ -42,6 +42,11 @@ GeoDataMultiGeometryPrivate* GeoDataMultiGeometry::p() const
     return static_cast<GeoDataMultiGeometryPrivate*>(d);
 }
 
+QString GeoDataMultiGeometry::nodeType() const
+{
+    return p()->nodeType();
+}
+
 int GeoDataMultiGeometry::size() const
 {
     return p()->m_vector.size();

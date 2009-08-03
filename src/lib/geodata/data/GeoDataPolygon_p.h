@@ -37,7 +37,12 @@ class  GeoDataPolygonPrivate : public Marble::GeoDataGeometryPrivate
         return copy;
     }
 
-    virtual EnumGeometryId geometryId() const 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataPolygonType;
+    }
+
+    virtual EnumGeometryId geometryId() const
     {
         return GeoDataPolygonId;
     }

@@ -34,6 +34,11 @@ class GeoDataStylePrivate
     {
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataStyleType;
+    }
+
     GeoDataIconStyle   m_iconStyle;
     GeoDataLabelStyle  m_labelStyle;
     GeoDataLineStyle   m_lineStyle;
@@ -68,6 +73,11 @@ GeoDataStyle& GeoDataStyle::operator=( const GeoDataStyle& other )
     GeoDataStyleSelector::operator=( other );
     *d = *other.d;
     return *this;
+}
+
+QString GeoDataStyle::nodeType() const
+{
+    return d->nodeType();
 }
 
 void GeoDataStyle::setIconStyle( const GeoDataIconStyle& style )

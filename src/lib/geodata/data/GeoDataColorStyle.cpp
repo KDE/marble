@@ -32,6 +32,11 @@ class GeoDataColorStylePrivate
     {
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataColorStyleType;
+    }
+
     /// stores the current color
     QColor     m_color;
     /// stores the current color mode
@@ -59,6 +64,11 @@ GeoDataColorStyle& GeoDataColorStyle::operator=( const GeoDataColorStyle& other 
     GeoDataObject::operator=( other );
     *d = *other.d;
     return *this;
+}
+
+QString GeoDataColorStyle::nodeType() const
+{
+    return d->nodeType();
 }
 
 void GeoDataColorStyle::setColor( const QColor &value )

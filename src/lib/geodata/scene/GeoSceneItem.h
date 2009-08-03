@@ -41,9 +41,6 @@ class GeoSceneItem : public GeoNode
     explicit GeoSceneItem( const QString& name );
     ~GeoSceneItem();
 
-    /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const { return geonode::GeoSceneItemType; }
-
     QString name() const;
 
     QString text() const;

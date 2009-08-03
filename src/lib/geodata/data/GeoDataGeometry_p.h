@@ -47,6 +47,11 @@ class GeoDataGeometryPrivate
         return copy;
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataGeometryType;
+    }
+
     virtual EnumGeometryId geometryId() const
     {
         return InvalidGeometryId;

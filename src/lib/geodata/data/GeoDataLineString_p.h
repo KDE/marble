@@ -44,6 +44,11 @@ class GeoDataLineStringPrivate : public Marble::GeoDataGeometryPrivate
         return copy;
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataLineStringType;
+    }
+
     virtual EnumGeometryId geometryId() const 
     {
         return GeoDataLineStringId;

@@ -44,8 +44,6 @@ class GEODATA_EXPORT GeoSceneHead : public GeoNode
     GeoSceneHead();
     ~GeoSceneHead();
 
-    /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const { return geonode::GeoSceneHeadType; }
 
     const QString name() const;
     void setName( const QString& name );

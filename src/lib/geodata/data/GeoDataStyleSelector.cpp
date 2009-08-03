@@ -31,6 +31,11 @@ class GeoDataStyleSelectorPrivate
     {
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataStyleSelectorType;
+    }
+
     /// The style id.
     QString  m_styleId;
 };
@@ -56,6 +61,11 @@ GeoDataStyleSelector& GeoDataStyleSelector::operator=( const GeoDataStyleSelecto
     GeoDataObject::operator=( other );
     *d = *other.d;
     return *this;
+}
+
+QString GeoDataStyleSelector::nodeType() const
+{
+    return d->nodeType();
 }
 
 void GeoDataStyleSelector::setStyleId( const QString &value )

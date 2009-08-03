@@ -22,6 +22,11 @@ class GeoDataPolyStylePrivate
     {
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataPolyStyleType;
+    }
+
     /// whether to fill the polygon
     bool  m_fill;
     /// whether to draw the outline
@@ -54,6 +59,11 @@ GeoDataPolyStyle& GeoDataPolyStyle::operator=( const GeoDataPolyStyle& other )
     GeoDataColorStyle::operator=( other );
     *d = *other.d;
     return *this;
+}
+
+QString GeoDataPolyStyle::nodeType() const
+{
+    return d->nodeType();
 }
 
 void GeoDataPolyStyle::setFill( const bool &fill )

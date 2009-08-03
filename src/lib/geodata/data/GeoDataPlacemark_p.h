@@ -73,6 +73,11 @@ class GeoDataPlacemarkPrivate : public Marble::GeoDataFeaturePrivate
         return copy;
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataPlacemarkType;
+    }
+
     virtual EnumFeatureId featureId() const
     {
         return GeoDataPlacemarkId;

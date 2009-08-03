@@ -41,9 +41,6 @@ class GEODATA_EXPORT GeoSceneXmlDataSource : public GeoSceneAbstractDataset
  public:
     explicit GeoSceneXmlDataSource( const QString& name );
 
-    /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const { return geonode::GeoSceneAbstractDatasetType; }
-
     QString filename() const;
     void setFilename( const QString& fileName );
 

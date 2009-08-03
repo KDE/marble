@@ -30,6 +30,11 @@ class GeoDataLineStylePrivate
     {
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataLineStyleType;
+    }
+
     /// The current width of the line
     float  m_width;
 };
@@ -60,6 +65,11 @@ GeoDataLineStyle& GeoDataLineStyle::operator=( const GeoDataLineStyle& other )
     GeoDataColorStyle::operator=( other );
     *d = *other.d;
     return *this;
+}
+
+QString GeoDataLineStyle::nodeType() const
+{
+    return d->nodeType();
 }
 
 void GeoDataLineStyle::setWidth( const float &width )

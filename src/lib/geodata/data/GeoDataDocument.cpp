@@ -58,6 +58,11 @@ GeoDataDocumentPrivate* GeoDataDocument::p() const
     return static_cast<GeoDataDocumentPrivate*>(d);
 }
 
+QString GeoDataDocument::nodeType() const
+{
+    return p()->nodeType();
+}
+
 QString GeoDataDocument::fileName() const
 {
     return p()->m_filename;

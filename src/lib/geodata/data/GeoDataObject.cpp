@@ -27,6 +27,11 @@ class GeoDataObjectPrivate
     {
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataObjectType;
+    }
+
     int  m_id;
     int  m_targetId;
 };
@@ -52,6 +57,11 @@ GeoDataObject & GeoDataObject::operator=( const GeoDataObject & rhs )
 GeoDataObject::~GeoDataObject()
 {
     delete d;
+}
+
+QString GeoDataObject::nodeType() const
+{
+    return d->nodeType();
 }
 
 int GeoDataObject::id() const

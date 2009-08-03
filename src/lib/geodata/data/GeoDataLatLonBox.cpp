@@ -31,6 +31,10 @@ class GeoDataLatLonBoxPrivate
           m_rotation( 0.0 )
     {
     }
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataLatLonBoxType;
+    }
 
     qreal m_north;
     qreal m_south;
@@ -70,6 +74,11 @@ GeoDataLatLonBox::GeoDataLatLonBox( const GeoDataLatLonBox & other )
 GeoDataLatLonBox::~GeoDataLatLonBox()
 {
     delete d;
+}
+
+QString GeoDataLatLonBox::nodeType() const
+{
+    return d->nodeType();
 }
 
 qreal GeoDataLatLonBox::north( GeoDataCoordinates::Unit unit ) const

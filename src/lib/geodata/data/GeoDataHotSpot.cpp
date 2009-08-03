@@ -42,6 +42,11 @@ class GeoDataHotSpotPrivate
     {
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataHotspotType;
+    }
+
     QPointF m_hotSpot;
     GeoDataHotSpot::Units m_xunits;
     GeoDataHotSpot::Units m_yunits;
@@ -84,6 +89,11 @@ void GeoDataHotSpot::setHotSpot( const QPointF& hotSpot, Units xunits, Units yun
     d->m_hotSpot = hotSpot;
     d->m_xunits = xunits;
     d->m_yunits = yunits;
+}
+
+QString GeoDataHotSpot::nodeType() const
+{
+    return d->nodeType();
 }
 
 void GeoDataHotSpot::pack( QDataStream& stream ) const

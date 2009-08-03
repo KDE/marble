@@ -36,10 +36,10 @@
 namespace Marble
 {
 
-namespace geonode
+namespace GeoDataTypes
 {
 /**
- * the following const char* XXType are used to provide RTTI to the GeoNode for
+ * the following const char* XXType are used to provide RTTI to the GeoData for
  * downcasting to the good object
  * please keep alphabetic order to prevent mess
  */
@@ -68,25 +68,6 @@ extern const char* GeoDataPolyStyleType;
 extern const char* GeoDataStyleSelectorType;
 extern const char* GeoDataStyleType;
 extern const char* GeoDataSyleMapType;
-extern const char* GeoNodeType;
-extern const char* GeoSceneAbstractDatasetType;
-extern const char* GeoSceneDocumentType;
-extern const char* GeoSceneFilterType;
-extern const char* GeoSceneGroupType;
-extern const char* GeoSceneHeadType;
-extern const char* GeoSceneIconType;
-extern const char* GeoSceneItemType;
-extern const char* GeoSceneLayerType;
-extern const char* GeoSceneLegendType;
-extern const char* GeoSceneMapType;
-extern const char* GeoScenePaletteType;
-extern const char* GeoScenePropertyType;
-extern const char* GeoSceneSectionType;
-extern const char* GeoSceneSettingsType;
-extern const char* GeoSceneTextureType;
-extern const char* GeoSceneVectorType;
-extern const char* GeoSceneXmlDataSourceType;
-extern const char* GeoSceneZoomType;
 }
 
 /**
@@ -110,10 +91,6 @@ public:
  * @short A shared base class for all classes that are mapped to a specifig tag (ie. GeoFolder)
  */
 class GEODATA_EXPORT GeoNode {
-public:
-    /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const { return geonode::GeoNodeType; }
-
 protected:
     GeoNode();
     virtual ~GeoNode();

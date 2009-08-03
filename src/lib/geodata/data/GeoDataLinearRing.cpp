@@ -33,6 +33,11 @@ GeoDataLinearRing::~GeoDataLinearRing()
 {
 }
 
+QString GeoDataLinearRing::nodeType() const
+{
+    return p()->nodeType();
+}
+
 bool GeoDataLinearRing::isClosed() const
 {
     return true;

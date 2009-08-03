@@ -41,6 +41,11 @@ GeoDataPolygonPrivate* GeoDataPolygon::p() const
     return static_cast<GeoDataPolygonPrivate*>(d);
 }
 
+QString GeoDataPolygon::nodeType() const
+{
+    return p()->nodeType();
+}
+
 bool GeoDataPolygon::isClosed() const
 {
     return true;

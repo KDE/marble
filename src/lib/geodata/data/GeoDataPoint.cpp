@@ -60,6 +60,11 @@ GeoDataPoint::~GeoDataPoint()
 {
 }
 
+QString GeoDataPoint::nodeType() const
+{
+    return GeoDataTypes::GeoDataPointType;
+}
+
 void GeoDataPoint::detach()
 {
     GeoDataCoordinates::detach();

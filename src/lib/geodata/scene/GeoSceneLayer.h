@@ -42,9 +42,6 @@ class GEODATA_EXPORT GeoSceneAbstractDataset : public GeoNode
  public:
     virtual ~GeoSceneAbstractDataset() {};
 
-    /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const { return geonode::GeoSceneLayerType; }
-
     QString name() const;
 
     QString fileFormat() const;

@@ -32,6 +32,11 @@ class GeoDataDocumentPrivate : public Marble::GeoDataContainerPrivate
         return copy;
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataDocumentType;
+    }
+
     virtual EnumFeatureId featureId() const
     {
         return GeoDataDocumentId;

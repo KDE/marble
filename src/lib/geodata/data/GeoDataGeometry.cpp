@@ -98,6 +98,11 @@ GeoDataGeometryPrivate* GeoDataGeometry::p() const
     return static_cast<GeoDataGeometryPrivate*>(d);
 }
 
+QString GeoDataGeometry::nodeType() const
+{
+    return d->nodeType();
+}
+
 EnumGeometryId GeoDataGeometry::geometryId() const
 {
     return d->geometryId();

@@ -44,6 +44,9 @@ namespace Marble
  * @see GeoDataFeature
  * @see GeoDataContainer
  */
+
+    class GeoDataFolderPrivate;
+
 class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer {
  public:
     GeoDataFolder();
@@ -51,9 +54,12 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer {
     GeoDataFolder( const GeoDataFeature& other );
     ~GeoDataFolder();
 
-    /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const { return geonode::GeoDataFolderType; }
+    /// Provides type information for downcasting a GeoData
+    virtual QString nodeType() const;
     virtual bool isFolder() const { return true; }
+
+private:
+    GeoDataFolderPrivate *p() const;
 };
 
 }

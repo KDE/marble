@@ -30,6 +30,11 @@ class  GeoDataMultiGeometryPrivate : public Marble::GeoDataGeometryPrivate
         return copy;
     }
 
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataMultiGeometryType;
+    }
+
     virtual EnumGeometryId geometryId() const
     {
         return GeoDataMultiGeometryId;

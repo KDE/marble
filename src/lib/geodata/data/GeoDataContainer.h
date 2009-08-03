@@ -54,8 +54,8 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     /// Destruct the GeoDataContainer
     virtual ~GeoDataContainer();
 
-    /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const { return geonode::GeoDataContainerType; }
+    /// Provides type information for downcasting a GeoData
+    virtual QString nodeType() const;
 
     /**
      * @brief A convenience function that returns all folders in this container.
@@ -142,6 +142,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     virtual void unpack( QDataStream& stream );
 private:
     friend class GeoDataDocument;
+    friend class GeoDataFolder;
     GeoDataContainer( GeoDataContainerPrivate *priv );
 };
 

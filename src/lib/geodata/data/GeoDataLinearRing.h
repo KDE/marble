@@ -86,7 +86,7 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString {
     virtual ~GeoDataLinearRing();
 
     /// Provides type information for downcasting a GeoNode
-    virtual QString nodeType() const { return geonode::GeoDataLinearRingType; }
+    virtual QString nodeType() const;
     
 /*!
     \brief Returns whether a LinearRing is a closed polygon.
