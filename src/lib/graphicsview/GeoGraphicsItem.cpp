@@ -109,14 +109,14 @@ void GeoGraphicsItem::setMaxLodPixels( int pixels )
     p()->m_maxLodPixels = pixels;
 }
 
-GeoDataLatLonAltBox GeoGraphicsItem::geoBoundingBox() const
+GeoDataLatLonAltBox GeoGraphicsItem::latLonAltBox() const
 {
-    return p()->m_geoBoundingBox;
+    return p()->m_latLonAltBox;
 }
 
-void GeoGraphicsItem::setGeoBoundingBox( const GeoDataLatLonAltBox& boundingBox )
+void GeoGraphicsItem::setLatLonAltBox( const GeoDataLatLonAltBox& latLonAltBox )
 {
-    p()->m_geoBoundingBox = boundingBox;
+    p()->m_latLonAltBox = latLonAltBox;
 }
 
 QList<QPointF> GeoGraphicsItem::positions() const

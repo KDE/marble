@@ -131,13 +131,13 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     /**
      * Returns the box that is used to determine if an item is active or inactive.
      */
-    GeoDataLatLonAltBox geoBoundingBox() const;
+    GeoDataLatLonAltBox latLonAltBox() const;
 
     /**
      * Set the box used to determine if an item is active or inactive. If an empty box is passed
      * the item will be shown in every case.
      */
-    void setGeoBoundingBox( const GeoDataLatLonAltBox& boundingBox );
+    void setLatLonAltBox( const GeoDataLatLonAltBox& latLonAltBox );
 
     /**
      * Returns all coordinates of the item in view coordinates according to the given projection.
