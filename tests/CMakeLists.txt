@@ -52,3 +52,9 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/data )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/parser )
 marble_add_test( GeoPolygonTest )
+
+############################
+# Drop in New Tests
+############################
+
+marble_add_test( TestGeoDataParser )
