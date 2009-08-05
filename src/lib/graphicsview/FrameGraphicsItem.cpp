@@ -39,6 +39,18 @@ FrameGraphicsItem::~FrameGraphicsItem()
     delete d;
 }
 
+FrameGraphicsItem::FrameType FrameGraphicsItem::frame()
+{
+    return d->m_frame;
+}
+
+void FrameGraphicsItem::setFrame( FrameType type ) {
+    d->m_frame = type;
+    if ( type == RectFrame && padding() < 2 ) {
+        setPadding( 2 );
+    }
+}
+
 qreal FrameGraphicsItem::margin() const
 {
     return d->m_margin;
@@ -205,9 +217,16 @@ void FrameGraphicsItem::setContentSize( const QSizeF& size )
 
 QPainterPath FrameGraphicsItem::backgroundShape() const
 {
-    return QPainterPath();
+    if ( d->m_frame == RectFrame ) {
+        QRectF renderedRect = paintedRect( QPointF( 0.0, 0.0 ) );
+        QPainterPath path;
+        path.addRect( QRectF( 0.0, 0.0, renderedRect.size().width(), renderedRect.size().height() ) );
+        return path;
+    }
+    else {
+        return QPainterPath();
+    }
 }
-
 
 void FrameGraphicsItem::paintBackground( GeoPainter *painter )
 {

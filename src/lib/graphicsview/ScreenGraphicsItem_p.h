@@ -50,7 +50,8 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
     QPointF positivePosition() const
     {
         if ( !m_parentSize.isValid() ) {
-            qDebug() << "Invalid screen size";
+            qDebug() << "Invalid parent size";
+            return m_position;
         }
         QPointF position;
         qreal x = m_position.x();
@@ -69,15 +70,17 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         // If we have no parent
         if( m_parent == 0 ) {
             // Saving the screen size needed for positions()
-            m_parentSize = viewport->size();
-        }
-        else {
-            m_parentSize = m_parent->size();
+            setParentSize( viewport->size() );
         }
 
         ScreenGraphicsItem *screenGraphicsItem
                 = static_cast<ScreenGraphicsItem *>( m_marbleGraphicsItem );
         screenGraphicsItem->changeViewport( viewport );
+    }
+
+    virtual void setParentSize( QSizeF size )
+    {
+        m_parentSize = size;
     }
 
     bool isMovable() const

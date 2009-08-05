@@ -77,8 +77,6 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
  protected:
     virtual bool eventFilter( QObject *object, QEvent *e );
 
-    virtual QPainterPath backgroundShape() const;
-
  private:
     Q_DISABLE_COPY( AbstractFloatItem )
     AbstractFloatItemPrivate * const d;

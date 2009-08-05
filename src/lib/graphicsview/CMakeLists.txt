@@ -20,6 +20,6 @@ SET( graphicsview_SRCS
         graphicsview/ScreenGraphicsItem.cpp
         graphicsview/FrameGraphicsItem.cpp
         graphicsview/LabelGraphicsItem.cpp
-        graphicsview/AbstractMarbleGraphicsLayout.h
-        graphicsview/MarbleGraphicsGridLayout.h
+        graphicsview/AbstractMarbleGraphicsLayout.cpp
+        graphicsview/MarbleGraphicsGridLayout.cpp
    )

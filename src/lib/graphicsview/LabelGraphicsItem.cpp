@@ -17,6 +17,7 @@
 
 // Qt
 #include <QtGui/QApplication>
+#include <QtCore/QDebug>
 #include <QtGui/QFont>
 #include <QtCore/QString>
 
@@ -38,7 +39,10 @@ LabelGraphicsItem::LabelGraphicsItem( MarbleGraphicsItem *parent )
     : FrameGraphicsItem( parent ),
       d( new LabelGraphicsItemPrivate() )
 {
-    setPadding( 4 );
+    setMarginLeft( 2 );
+    setMarginRight( 2 );
+    setMarginTop( 1 );
+    setMarginBottom( 1 );
 }
 
 void LabelGraphicsItem::setText( const QString& text )
@@ -46,19 +50,23 @@ void LabelGraphicsItem::setText( const QString& text )
     clear();
     d->m_text = text;
     QFontMetrics metrics( d->font() );
-    setContentSize( metrics.boundingRect( text ).size() );
+    setContentSize( metrics.boundingRect( text ).size() + QSize( 4, 2 ) );
+
+    update();
 }
 
 void LabelGraphicsItem::setImage( const QImage& image, const QSize& size )
 {
     clear();
     d->m_image = image;
-    if ( size.isNull() ) {
+    if ( size.isEmpty() ) {
         setContentSize( image.size() );
     }
     else {
         setContentSize( size );
     }
+
+    update();
 }
 
 void LabelGraphicsItem::setIcon( const QIcon& icon, const QSize& size )
@@ -66,6 +74,8 @@ void LabelGraphicsItem::setIcon( const QIcon& icon, const QSize& size )
     clear();
     d->m_icon = icon;
     setContentSize( size );
+
+    update();
 }
 
 void LabelGraphicsItem::clear()
@@ -74,6 +84,8 @@ void LabelGraphicsItem::clear()
     d->m_image = QImage();
     d->m_icon = QIcon();
     setSize( QSizeF( 0.0, 0.0 ) );
+
+    update();
 }
 
 void LabelGraphicsItem::paintContent( GeoPainter *painter, ViewportParams *viewport,
@@ -87,6 +99,7 @@ void LabelGraphicsItem::paintContent( GeoPainter *painter, ViewportParams *viewp
 
     if ( !d->m_text.isNull() ) {
         painter->setFont( d->font() );
+        painter->setPen( QColor( Qt::black ) );
         painter->drawText( contentRect().toRect(),
                            Qt::AlignVCenter | Qt::AlignLeft,
                            d->m_text );

@@ -10,10 +10,12 @@
 
 #include "AbstractMarbleGraphicsLayout.h"
 
+using namespace Marble;
+
 AbstractMarbleGraphicsLayout::AbstractMarbleGraphicsLayout()
 {
 }
 
-virtual ~AbstractMarbleGraphicsLayout()
+AbstractMarbleGraphicsLayout::~AbstractMarbleGraphicsLayout()
 {
 }

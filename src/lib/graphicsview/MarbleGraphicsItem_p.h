@@ -18,6 +18,7 @@
 #include "MarbleGraphicsItem.h"
 
 // Qt
+#include<QtCore/QDebug>
 #include<QtCore/QList>
 #include<QtCore/QSet>
 #include<QtCore/QSize>
@@ -41,21 +42,25 @@ class MarbleGraphicsItemPrivate
           m_marbleGraphicsItem( marbleGraphicsItem )
     {
         if ( m_parent ) {
-//            m_parent->p()>addChild( m_marbleGraphicsItem );
+            m_parent->p()->addChild( m_marbleGraphicsItem );
+            setParentSize( m_parent->size() );
         }
     }
 
     virtual ~MarbleGraphicsItemPrivate()
     {
-        // Delete all children
-        if ( m_children ) {
-            qDeleteAll( *m_children );
-            m_children->clear();
-        }
-
         // Remove from parent
         if ( m_parent ) {
-//            m_parent->p()->removeChild( m_marbleGraphicsItem );
+            m_parent->p()->removeChild( m_marbleGraphicsItem );
+        }
+
+        // Delete all children
+        if ( m_children ) {
+            // See above: The children will remove itself from the list
+            while ( !m_children->isEmpty() ) {
+                delete *m_children->begin();
+            }
+            delete m_children;
         }
 
         // Delete Layout
@@ -113,6 +118,26 @@ class MarbleGraphicsItemPrivate
     {
         Q_UNUSED( projection );
         Q_UNUSED( viewport );
+    }
+
+    virtual void setParentSize( QSizeF size )
+    {
+        Q_UNUSED( size );
+    }
+
+    void updateLabelPositions()
+    {
+        // This has to be done recursively because we need a correct size from all children.
+        if ( m_children ) {
+            foreach ( MarbleGraphicsItem *item, *m_children ) {
+                item->p()->updateLabelPositions();
+            }
+        }
+
+        // Adjust positions
+        if ( m_layout ) {
+            m_layout->updatePositions( m_marbleGraphicsItem );
+        }
     }
 
     QSizeF m_size;

@@ -25,11 +25,26 @@ class FrameGraphicsItemPrivate;
 class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
 {
  public:
+    enum FrameType {
+        NoFrame,
+        RectFrame
+    };
+
     explicit FrameGraphicsItem( MarbleGraphicsItem *parent = 0 );
     FrameGraphicsItem( const QPointF& position, const QSizeF& size,
                MarbleGraphicsItem *parent = 0 );
 
     virtual ~FrameGraphicsItem();
+
+    /**
+     * Returns the type of the frame.
+     */
+    FrameType frame();
+
+    /**
+     * Sets the type of the Frame. Standard is NoFrame.
+     */
+    void setFrame( FrameType type );
 
     /**
      * Returns themargin of the item. This is used for all margins with the value 0.0.

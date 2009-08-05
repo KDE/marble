@@ -16,6 +16,9 @@
 #include "MarbleDirs.h"
 #include "WeatherData.h"
 #include "weatherGlobal.h"
+#include "FrameGraphicsItem.h"
+#include "LabelGraphicsItem.h"
+#include "MarbleGraphicsGridLayout.h"
 
 // Qt
 #include <QtCore/QCoreApplication>
@@ -47,109 +50,29 @@ class WeatherItemPrivate
         : m_priority( 0 ),
           m_action( new QAction( tr( "Weather" ), parent ) ),
           m_parent( parent ),
-          m_temperatureSize()
+          m_frameItem( new FrameGraphicsItem( m_parent ) ),
+          m_conditionLabel( new LabelGraphicsItem( m_frameItem ) ),
+          m_temperatureLabel( new LabelGraphicsItem( m_frameItem ) ),
+          m_windDirectionLabel( new LabelGraphicsItem( m_frameItem ) ),
+          m_windSpeedLabel( new LabelGraphicsItem( m_frameItem ) )
     {
-    }
-    
-    void updateSize()
-    {
-        // Getting the string sizes.
-        QFontMetrics metrics( s_font );
-        m_temperatureSize
-                = metrics.boundingRect( temperatureString() ).size() + QSize( 6, 0 );
-        m_windSpeedSize
-                = metrics.boundingRect( windSpeedString() ).size() + QSize( 6, 0 );
+        MarbleGraphicsGridLayout *topLayout = new MarbleGraphicsGridLayout( 1, 1 );
+        parent->setLayout( topLayout );
+        topLayout->addItem( m_frameItem, 0, 0 );
 
-        // The list containing the size of all elements in the first row.
-        QList<QSize> elementSize1;
-        // The list conatining the size of all elements in the second row.
-        QList<QSize> elementSize2;
-        
-        // Image size
-        if ( isConditionShown() )
-        {
-            elementSize1.append( imageSize ) ;
-        }
-        
-        // TextSize
-        if ( isTemperatureShown() ) {
-            elementSize1.append( m_temperatureSize );
-        }
-        
-        // Wind
-        if ( isWindSpeedShown() ) {
-            // Append a second row.
-            elementSize2.append( m_windSpeedSize );
-            if ( isWindDirectionShown() ) {
-                elementSize2.append( imageSize );
-            }
-        }
-        else if ( isWindDirectionShown() ) {
-            // Don't append second row
-            elementSize1.append( imageSize );
-        }
-        
-        // Getting the size of the first row.
-        // The row should at least be able to contain a image.
-        QSize row1Size( 0, imageSize.height() );
-        foreach ( const QSize& size, elementSize1 ) {
-            row1Size += QSize( size.width(), 0 );
-            // The height of the first row is the maximum of the elements height.
-            if ( size.height() > row1Size.height() ) {
-                row1Size.setHeight( size.height() );
-            }
-        }
+        MarbleGraphicsGridLayout *gridLayout = new MarbleGraphicsGridLayout( 2, 2 );
+        gridLayout->setAlignment( Qt::AlignCenter );
+        m_frameItem->setLayout( gridLayout );
+        m_frameItem->setFrame( FrameGraphicsItem::RectFrame );
 
-        // Getting the size of the second row.
-        // The row should at least be able to contain a image.
-        QSize row2Size( 0, imageSize.height() );
-        foreach ( const QSize& size, elementSize2 ) {
-            row2Size += QSize( size.width(), 0 );
-            // The height of the second row is the maximum of the elements height.
-            if ( size.height() > row2Size.height() ) {
-                row2Size.setHeight( size.height() );
-            }
-        }
-        
-        // Calculating the overall size.
-        QSize size;
-        if ( !row1Size.isEmpty() ) {
-            size += QSize( 0, row1Size.height() );
-            if ( row1Size.width() > size.width() ) {
-                size.setWidth( row1Size.width() );
-            }
-        }
+        gridLayout->addItem( m_conditionLabel, 0, 0 );
+        gridLayout->addItem( m_temperatureLabel, 0, 1 );
+        gridLayout->setAlignment( m_temperatureLabel, Qt::AlignRight | Qt::AlignVCenter );
+        gridLayout->addItem( m_windDirectionLabel, 1, 0 );
+        gridLayout->addItem( m_windSpeedLabel, 1, 1 );
+        gridLayout->setAlignment( m_windSpeedLabel, Qt::AlignRight | Qt::AlignVCenter );
 
-        if ( !row2Size.isEmpty() ) {
-            size += QSize( 0, row2Size.height() );
-            if ( row2Size.width() > size.width() ) {
-                size.setWidth( row2Size.width() );
-            }
-        }
-
-        // The space between the rows
-        if ( !row1Size.isEmpty() && !row2Size.isEmpty() ) {
-            size += QSize( verticalSpacing, 0 );
-        }
-
-        // The border of the item
-        size += QSize( borderSpacing.width(), borderSpacing.height() ) * 2;
-
-        m_topRowRect = QRect( QPoint( borderSpacing.width(), borderSpacing.height() ),
-                              row1Size );
-        if ( m_topRowRect.size().isEmpty() ) {
-            m_topRowRect.setHeight( 0 );
-        }
-        m_bottomRowRect = QRect( m_topRowRect.bottomLeft() + QPoint( 0, verticalSpacing ),
-                                 row2Size );
-        // The rects are allowed to take the full width.
-        m_topRowRect.setWidth( size.width() );
-        m_bottomRowRect.setWidth( size.width() );
-        // Leave out the border
-        m_topRowRect.setRight( m_topRowRect.right() - borderSpacing.width() * 2 );
-        m_bottomRowRect.setRight( m_bottomRowRect.right() - borderSpacing.width() * 2 );
-        
-        m_parent->setSize( size );
+        updateLabels();
     }
 
     void updateToolTip()
@@ -210,6 +133,53 @@ class WeatherItemPrivate
         }
 
         m_parent->setToolTip( toolTip );
+    }
+
+    void updateLabels()
+    {
+        if ( isConditionShown() ) {
+            m_conditionLabel->setIcon( m_currentWeather.icon(), imageSize );
+        }
+        else {
+            m_conditionLabel->clear();
+        }
+
+        if ( isTemperatureShown() ) {
+            m_temperatureLabel->setText( temperatureString() );
+        }
+        else {
+            m_temperatureLabel->clear();
+        }
+
+        if ( isWindDirectionShown() ) {
+            QString windDirectionString = m_currentWeather.windDirectionString();
+            QSizeF windDirectionImageSize;
+            QSizeF windDirectionSizeF = s_windIcons.boundsOnElement( windDirectionString ).size();
+            double windDirectionRatio = windDirectionSizeF.width() / windDirectionSizeF.height();
+            if ( windDirectionRatio >= imageSizeRatio ) {
+                windDirectionImageSize.setWidth( imageSize.width() );
+                windDirectionImageSize.setHeight( imageSize.width() / windDirectionRatio );
+            }
+            else {
+                windDirectionImageSize.setHeight( imageSize.height() );
+                windDirectionImageSize.setWidth( imageSize.height() * windDirectionRatio );
+            }
+
+            QImage windArrow( windDirectionImageSize.toSize(), QImage::Format_ARGB32 );
+            windArrow.fill( Qt::transparent );
+            QPainter painter( &windArrow );
+            s_windIcons.render( &painter, windDirectionString );
+            m_windDirectionLabel->setImage( windArrow );
+        }
+
+        if ( isWindSpeedShown() ) {
+            m_windSpeedLabel->setText( windSpeedString() );
+        }
+        else {
+            m_windSpeedLabel->clear();
+        }
+
+        m_parent->update();
     }
     
     bool isConditionShown()
@@ -272,17 +242,19 @@ class WeatherItemPrivate
     int m_priority;
     QAction *m_action;
     WeatherItem *m_parent;
-    // The size of the string displaying the temperature.
-    QSize m_temperatureSize;
-    // The size of the string displaying the wind speed.
-    QSize m_windSpeedSize;
     QString m_stationName;
     QHash<QString,QVariant> m_settings;
-    QRect m_topRowRect;
-    QRect m_bottomRowRect;
     
     static QFont s_font;
     static QSvgRenderer s_windIcons;
+
+    // Labels and Layout
+    // We are not the owner of these items.
+    FrameGraphicsItem *m_frameItem;
+    LabelGraphicsItem *m_conditionLabel;
+    LabelGraphicsItem *m_temperatureLabel;
+    LabelGraphicsItem *m_windDirectionLabel;
+    LabelGraphicsItem *m_windSpeedLabel;
 };
 
 // FIXME: Fonts to be defined globally
@@ -299,7 +271,6 @@ WeatherItem::WeatherItem( QObject *parent )
     d( new WeatherItemPrivate( this ) )
 {
     setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
-    d->updateSize();
 }
 
 WeatherItem::~WeatherItem()
@@ -338,102 +309,7 @@ void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( viewport );
     Q_UNUSED( renderPos );
     Q_UNUSED( layer );
-
-    // The rect for the first row.
-    QRect topRow = d->m_topRowRect;
-    // The rect for the second row.
-    QRect bottomRow = d->m_bottomRowRect;
-    
-    painter->save();
-    // FIXME: I think background rendering should be done in MarbleGraphicsItem.
-    // This would be able to merge background with abstractfloatitem (on branch).
-    painter->setBrush( QBrush( QColor( 192, 192, 192, 192 ) ) );
-    painter->setPen( Qt::SolidLine );
-    
-    painter->setFont( d->s_font );
-    painter->drawRoundedRect( QRectF( QPointF( 0, 0 ), size() ), 4, 4 );
-    
-    // Condition
-    if ( d->isConditionShown() ) {
-        painter->drawPixmap( topRow.topLeft(),
-                             d->m_currentWeather.icon().pixmap( imageSize ) );
-        topRow.setLeft( topRow.left() + imageSize.width() );
-    }
-
-    // Temperature
-    if ( d->isTemperatureShown() ) {
-        QRect temperatureRect;
-        Qt::Alignment alignment;
-        temperatureRect.setWidth( d->m_temperatureSize.width() );
-        temperatureRect.setHeight( topRow.height() );
-        // If we have a two line layout or condition and temperature is alone in line 1,
-        // align temperature right.
-        if ( d->isWindSpeedShown() || !d->isWindDirectionShown() ) {
-            temperatureRect.moveTopRight( topRow.topRight() );
-            alignment = Qt::AlignVCenter | Qt::AlignRight;
-            topRow.setRight( topRow.right() - d->m_temperatureSize.width() );
-        }
-        else {
-            temperatureRect.moveTopLeft( topRow.topLeft() );
-            alignment = Qt::AlignCenter;
-            topRow.setLeft( topRow.left() + d->m_temperatureSize.width() );
-        }
-        painter->drawText( temperatureRect,
-                           alignment,
-                           d->temperatureString() );
-    }
-
-    // Calculate the real size of the wind direction icon.
-    QString windDirectionString = d->m_currentWeather.windDirectionString();
-    QRect windDirectionRect;
-    if( d->isWindDirectionShown() ) {
-        QSizeF windDirectionSizeF = d->s_windIcons.boundsOnElement( windDirectionString ).size();
-        double windDirectionRation = windDirectionSizeF.width() / windDirectionSizeF.height();
-        if ( windDirectionRation >= imageSizeRatio ) {
-            windDirectionRect.setWidth( imageSize.width() );
-            windDirectionRect.setHeight( imageSize.width() / windDirectionRation );
-            windDirectionRect.moveTop( ( imageSize.height() - windDirectionRect.height() ) / 2 );
-        }
-        else {
-            windDirectionRect.setHeight( imageSize.height() );
-            windDirectionRect.setWidth( imageSize.height() * windDirectionRation );
-            windDirectionRect.moveLeft( ( imageSize.width() - windDirectionRect.width() ) / 2 );
-        }
-    }
-
-    if ( d->isWindSpeedShown() ) {
-        // Append second row
-
-        // Paint the wind direction icon.
-        if ( d->isWindDirectionShown() ) {
-            windDirectionRect.moveTopLeft( windDirectionRect.topLeft() + bottomRow.topLeft() );
-            d->s_windIcons.render( painter,
-                                   d->m_currentWeather.windDirectionString(),
-                                   windDirectionRect );
-            bottomRow.setLeft( bottomRow.left() + imageSize.width() );
-        }
-
-        // Paint the wind speed string.
-        QRect windSpeedRect;
-        windSpeedRect.setWidth( d->m_windSpeedSize.width() );
-        windSpeedRect.setHeight( bottomRow.height() );
-        windSpeedRect.moveTopRight( bottomRow.topRight() );
-        painter->drawText( windSpeedRect,
-                           Qt::AlignVCenter | Qt::AlignRight,
-                           d->windSpeedString() );
-        bottomRow.setRight( bottomRow.right() - d->m_windSpeedSize.width() );
-    }
-    else if ( d->isWindDirectionShown() ) {
-        // Don't append second row
-        // Paint the wind direction icon.
-        windDirectionRect.moveTopLeft( windDirectionRect.topLeft() + topRow.topLeft() );
-        d->s_windIcons.render( painter,
-                               d->m_currentWeather.windDirectionString(),
-                               windDirectionRect );
-        topRow.setLeft( topRow.left() + imageSize.width() );
-    }
-
-    painter->restore();
+    Q_UNUSED( painter );
 }
 
 bool WeatherItem::operator<( const AbstractDataPluginItem *other ) const
@@ -457,7 +333,7 @@ void WeatherItem::setStationName( const QString& name )
     d->m_action->setText( name );
     d->m_stationName = name;
     d->updateToolTip();
-    update();
+    d->updateLabels();
 }
 
 WeatherData WeatherItem::currentWeather() const
@@ -468,9 +344,8 @@ WeatherData WeatherItem::currentWeather() const
 void WeatherItem::setCurrentWeather( const WeatherData &weather )
 {
     d->m_currentWeather = weather;
-    d->updateSize();
     d->updateToolTip();
-    update();
+    d->updateLabels();
 }
 
 QMap<QDate, WeatherData> WeatherItem::forecastWeather() const
@@ -532,9 +407,8 @@ void WeatherItem::setSettings( QHash<QString, QVariant> settings )
     }
     d->m_settings = settings;
 
-    d->updateSize();
     d->updateToolTip();
-    update();
+    d->updateLabels();
 }
 
 } // namespace Marble

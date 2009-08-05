@@ -15,6 +15,9 @@
 #include "AbstractMarbleGraphicsLayout.h"
 #include "marble_export.h"
 
+// Qt
+#include <QtCore/QCoreApplication>
+
 namespace Marble
 {
 
@@ -24,15 +27,24 @@ class MarbleGraphicsGridLayoutPrivate;
 class MARBLE_EXPORT MarbleGraphicsGridLayout : public AbstractMarbleGraphicsLayout
 {
  public:
-    MarbleGraphicsGridLayout( int width, int height );
+    MarbleGraphicsGridLayout( int rows, int columns );
+    ~MarbleGraphicsGridLayout();
 
-    void addItem( ScreenGraphicsItem *item, int x, int y );
+    void addItem( ScreenGraphicsItem *item, int row, int column );
 
     /**
      * This updates the positions of all items in the layout.
      * Calling this will be done on every repainting, so you won't have to do it yourself.
      */
     void updatePositions( MarbleGraphicsItem *parent );
+
+    Qt::Alignment alignment() const;
+
+    Qt::Alignment alignment( ScreenGraphicsItem *item ) const;
+
+    void setAlignment( Qt::Alignment align );
+
+    void setAlignment( ScreenGraphicsItem *item, Qt::Alignment );
 
  private:
     MarbleGraphicsGridLayoutPrivate * const d;

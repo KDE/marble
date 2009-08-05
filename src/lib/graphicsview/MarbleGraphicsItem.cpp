@@ -45,6 +45,8 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
         return true;
     }
 
+    p()->updateLabelPositions();
+
     p()->setProjection( viewport->currentProjection(), viewport );
     
     // Remove the pixmap if it has been requested. This prevents QPixmapCache from being used
@@ -181,11 +183,6 @@ void MarbleGraphicsItem::update()
 {
     p()->m_removeCachedPixmap = true;
 
-    // Adjust positions
-    if ( p()->m_layout ) {
-        p()->m_layout->updatePositions( this );
-    }
-
     // Update the parent.
     if ( p()->m_parent ) {
         p()->m_parent->update();
@@ -216,6 +213,12 @@ void MarbleGraphicsItem::setSize( const QSizeF& size )
 {
     p()->m_size = size;
     update();
+
+    if ( p()->m_children ) {
+        foreach ( MarbleGraphicsItem *item, *p()->m_children ) {
+            item->p()->setParentSize( size );
+        }
+    }
 }
 
 QSizeF MarbleGraphicsItem::contentSize() const

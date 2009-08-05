@@ -11,6 +11,9 @@
 #ifndef FRAMEGRAPHICSITEMPRIVATE_H
 #define FRAMEGRAPHICSITEMPRIVATE_H
 
+// Marble
+#include "FrameGraphicsItem.h"
+
 // Qt
 #include<QtCore/QDebug>
 #include<QtGui/QBrush>
@@ -23,7 +26,8 @@ class FrameGraphicsItemPrivate
 {
  public:
     FrameGraphicsItemPrivate()
-        : m_margin( 0.0 ),
+        : m_frame( FrameGraphicsItem::NoFrame ),
+          m_margin( 0.0 ),
           m_marginTop( 0.0 ),
           m_marginBottom( 0.0 ),
           m_marginLeft( 0.0 ),
@@ -35,6 +39,8 @@ class FrameGraphicsItemPrivate
           m_backgroundBrush( QBrush( QColor( 192, 192, 192, 192 ) ) )
     {
     }
+
+    FrameGraphicsItem::FrameType m_frame;
 
     // Margin
     qreal m_margin;

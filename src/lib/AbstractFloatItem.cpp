@@ -50,6 +50,7 @@ AbstractFloatItem::AbstractFloatItem( const QPointF &point, const QSizeF &size )
       d( new AbstractFloatItemPrivate() )
 {
     setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
+    setFrame( RectFrame );
     setPadding( 4.0 );
 }
 
@@ -67,14 +68,6 @@ void AbstractFloatItem::setPen( const QPen &pen )
 {
     d->s_pen = pen;
     update();
-}
-
-QPainterPath AbstractFloatItem::backgroundShape() const
-{
-    QRectF renderedRect = paintedRect( QPointF( 0.0, 0.0 ) );
-    QPainterPath path;
-    path.addRect( QRectF( 0.0, 0.0, renderedRect.size().width(), renderedRect.size().height() ) );
-    return path;
 }
 
 QFont AbstractFloatItem::font() const
