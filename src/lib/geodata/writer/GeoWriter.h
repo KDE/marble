@@ -12,6 +12,7 @@
 #define GEOWRITER_H
 
 #include "GeoDataFeature.h"
+#include "marble_export.h"
 
 #include <QtXml/QXmlStreamWriter>
 
@@ -23,7 +24,7 @@ namespace Marble{
  * It works with the GeoData classes and writes XML based on the type of output
  * format that the writer is currently working with.
  */
-class GeoWriter : public QXmlStreamWriter
+class MARBLE_EXPORT GeoWriter : public QXmlStreamWriter
 {
 public:
     GeoWriter();
