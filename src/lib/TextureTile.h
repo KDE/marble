@@ -35,7 +35,8 @@ namespace Marble
 class TextureTilePrivate;
 class GeoSceneTexture;
 
-class TextureTile : public AbstractTile {
+class TextureTile : public AbstractTile
+{
     Q_OBJECT
 
  public:
