@@ -39,10 +39,6 @@ LabelGraphicsItem::LabelGraphicsItem( MarbleGraphicsItem *parent )
     : FrameGraphicsItem( parent ),
       d( new LabelGraphicsItemPrivate() )
 {
-    setMarginLeft( 2 );
-    setMarginRight( 2 );
-    setMarginTop( 1 );
-    setMarginBottom( 1 );
 }
 
 void LabelGraphicsItem::setText( const QString& text )

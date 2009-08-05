@@ -27,7 +27,8 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
  public:
     enum FrameType {
         NoFrame,
-        RectFrame
+        RectFrame,
+        RoundedRectFrame
     };
 
     explicit FrameGraphicsItem( MarbleGraphicsItem *parent = 0 );

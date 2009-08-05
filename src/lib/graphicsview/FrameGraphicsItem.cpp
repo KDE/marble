@@ -21,6 +21,9 @@
 
 using namespace Marble;
 
+const int RECT_FRAME_MIN_PADDING = 1;
+const int ROUNDED_RECT_FRAME_MIN_PADDING = 2;
+
 FrameGraphicsItem::FrameGraphicsItem( MarbleGraphicsItem *parent )
         : ScreenGraphicsItem( parent ),
           d( new FrameGraphicsItemPrivate() )
@@ -46,9 +49,7 @@ FrameGraphicsItem::FrameType FrameGraphicsItem::frame()
 
 void FrameGraphicsItem::setFrame( FrameType type ) {
     d->m_frame = type;
-    if ( type == RectFrame && padding() < 2 ) {
-        setPadding( 2 );
-    }
+    setPadding( padding() );
 }
 
 qreal FrameGraphicsItem::margin() const
@@ -124,7 +125,15 @@ qreal FrameGraphicsItem::padding() const
 
 void FrameGraphicsItem::setPadding( qreal width )
 {
-    d->m_padding = width;
+    if ( d->m_frame == RectFrame && width < RECT_FRAME_MIN_PADDING ) {
+        d->m_padding = RECT_FRAME_MIN_PADDING;
+    }
+    else if ( d->m_frame == RoundedRectFrame && width < ROUNDED_RECT_FRAME_MIN_PADDING ) {
+        d->m_padding = ROUNDED_RECT_FRAME_MIN_PADDING;
+    }
+    else {
+        d->m_padding = width;
+    }
 }
 
 QBrush FrameGraphicsItem::borderBrush() const
@@ -217,15 +226,18 @@ void FrameGraphicsItem::setContentSize( const QSizeF& size )
 
 QPainterPath FrameGraphicsItem::backgroundShape() const
 {
+    QPainterPath path;
     if ( d->m_frame == RectFrame ) {
         QRectF renderedRect = paintedRect( QPointF( 0.0, 0.0 ) );
-        QPainterPath path;
         path.addRect( QRectF( 0.0, 0.0, renderedRect.size().width(), renderedRect.size().height() ) );
-        return path;
     }
-    else {
-        return QPainterPath();
+    else if ( d->m_frame == RoundedRectFrame ) {
+        QSizeF paintedSize = paintedRect().size();
+        path.addRoundedRect( QRectF( 0.0, 0.0, paintedSize.width() - 1, paintedSize.height() - 1 ),
+                             6, 6 );
     }
+
+    return path;
 }
 
 void FrameGraphicsItem::paintBackground( GeoPainter *painter )

@@ -31,6 +31,8 @@ NavigationFloatItem::NavigationFloatItem(const QPointF &point,
     setEnabled( true );
     // Plugin is not visible by default
     setVisible( false );
+
+    setFrame( FrameGraphicsItem::RoundedRectFrame );
 }
 
 NavigationFloatItem::~NavigationFloatItem()
@@ -87,14 +89,6 @@ void NavigationFloatItem::initialize()
 bool NavigationFloatItem::isInitialized() const
 {
     return m_navigationParent != 0;
-}
-
-QPainterPath NavigationFloatItem::backgroundShape() const
-{
-    QPainterPath path;
-    QSizeF paintedSize = paintedRect().size();
-    path.addRoundedRect( QRectF( 0.0, 0.0, paintedSize.width() - 1, paintedSize.height() - 1 ), 6, 6 );
-    return path;
 }
 
 void NavigationFloatItem::changeViewport( ViewportParams *viewport )

@@ -46,6 +46,16 @@ class MARBLE_EXPORT MarbleGraphicsGridLayout : public AbstractMarbleGraphicsLayo
 
     void setAlignment( ScreenGraphicsItem *item, Qt::Alignment );
 
+    /**
+     * Returns the spacing between the items inside the layout.
+     */
+    int spacing() const;
+
+    /**
+     * Set the spacing between the items inside the layout. By default the spacing is 0.
+     */
+    void setSpacing( int spacing );
+
  private:
     MarbleGraphicsGridLayoutPrivate * const d;
 };

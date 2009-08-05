@@ -54,8 +54,6 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     bool isInitialized () const;
 
-    virtual QPainterPath backgroundShape() const;
-
     void changeViewport( ViewportParams *viewport );
 
     void paintContent( GeoPainter *painter, ViewportParams *viewport,

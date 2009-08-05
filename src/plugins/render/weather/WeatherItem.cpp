@@ -62,8 +62,9 @@ class WeatherItemPrivate
 
         MarbleGraphicsGridLayout *gridLayout = new MarbleGraphicsGridLayout( 2, 2 );
         gridLayout->setAlignment( Qt::AlignCenter );
+        gridLayout->setSpacing( 4 );
         m_frameItem->setLayout( gridLayout );
-        m_frameItem->setFrame( FrameGraphicsItem::RectFrame );
+        m_frameItem->setFrame( FrameGraphicsItem::RoundedRectFrame );
 
         gridLayout->addItem( m_conditionLabel, 0, 0 );
         gridLayout->addItem( m_temperatureLabel, 0, 1 );
