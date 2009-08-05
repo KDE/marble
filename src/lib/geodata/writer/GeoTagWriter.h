@@ -30,7 +30,7 @@ class GeoWriter;
 class GeoTagWriter
 {
 public:
-    virtual bool write( GeoNode &node, GeoWriter& writer ) = 0;
+    virtual bool write( GeoNode &node, GeoWriter& writer ) const = 0;
 
     /**
      * @brief Object Name and Namespace Pair
@@ -55,10 +55,16 @@ private:
     friend struct GeoTagWriterRegistrar;
     static void registerWriter(const QualifiedName&, const GeoTagWriter*);
 
+private:
     //Collect the Tag Writers and provide a singleton like accessor
     typedef QHash<QualifiedName, const GeoTagWriter*> TagHash;
     static TagHash* tagWriterHash();
     static TagHash* s_tagWriterHash;
+
+private:
+    // Only our writer is allowed to access tag handlers.
+    friend class GeoWriter;
+    static const GeoTagWriter* recognizes(const QualifiedName&);
 };
 
 // Helper structure

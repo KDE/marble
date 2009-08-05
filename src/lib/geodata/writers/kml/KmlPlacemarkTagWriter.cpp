@@ -10,6 +10,9 @@
 
 #include "KmlPlacemarkTagWriter.h"
 #include "KmlElementDictionary.h"
+//FIXME:should the GeoDataTypes enum be in the GeoDocument?
+#include "GeoDocument.h"
+#include "GeoWriter.h"
 
 namespace Marble{
 
@@ -17,15 +20,17 @@ namespace Marble{
 //don't use the tag dictionary for tag names, because with the writer we are using
 // the object type strings instead
 //FIXME: USE object strings provided by idis
-static GeoTagWriterRegistrar s_writerPlacemark( GeoTagWriter::QualifiedName("ObjectType",
-                                                                            kml::kmlTag_nameSpace20),
+static GeoTagWriterRegistrar s_writerPlacemark( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPlacemarkType,
+                                                                            kml::kmlTag_nameSpace22),
                                                new KmlPlacemarkTagWriter() );
 
 
-bool KmlPlacemarkTagWriter::write( GeoNode &node, GeoWriter& writer )
+bool KmlPlacemarkTagWriter::write( GeoNode &node, GeoWriter& writer ) const
 {
-    //write some stuff to the GeoWriter... which is just an XMLStream writer!
-    return false;
+    writer.writeStartElement( kml::kmlTag_Placemark );
+    //Write the actual important stuff!
+    writer.writeEndElement();
+    return true;
 }
 
 }

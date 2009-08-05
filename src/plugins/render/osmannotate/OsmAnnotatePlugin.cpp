@@ -22,6 +22,7 @@
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "GeoDataParser.h"
+#include "GeoWriter.h"
 #include "MarbleWidget.h"
 #include "osm/OsmBoundsGraphicsItem.h"
 #include "PlacemarkTextAnnotation.h"
@@ -232,13 +233,28 @@ void OsmAnnotatePlugin::loadOsmFile()
 
 void OsmAnnotatePlugin::saveOsmFile()
 {
-    TmpGraphicsItem* item;
-    QListIterator<TmpGraphicsItem*> it(model);
-    while( it.hasNext() ) {
-        item = it.next();
-        qDebug() << "Saving item!";
-//        implement the XML writer here
-//        qDebug() << item;
+    QList<GeoDataFeature> features;
+    GeoDataPlacemark test;
+    features.append( test );
+    QString filename;
+    filename = QFileDialog::getSaveFileName( 0, tr("Save Annotation File"),
+                            QString(),
+                            tr("All Supported Files (*.kml);;KML file (*.kml)"));
+
+    if ( ! filename.isNull() ) {
+
+        GeoWriter writer;
+        //FIXME: a better way to do this?
+        writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+
+        QFile file( filename );
+
+        // Open file in right mode
+        file.open( QIODevice::ReadWrite );
+
+        if ( !writer.write( &file, features ) ) {
+            qWarning( "Could not write the file." );
+        }
     }
 }
 

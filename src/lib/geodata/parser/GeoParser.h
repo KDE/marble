@@ -43,11 +43,19 @@ class GEODATA_EXPORT GeoParser : public QXmlStreamReader
     explicit GeoParser( GeoDataGenericSourceType sourceType );
     virtual ~GeoParser();
 
-    // Main API.
+    /**
+     * @brief Main API for reading the XML document.
+     * This is the only mentod that is necessary to call to start the GeoParser.
+     * To retrieve the resulting data see @see releaseDocument() and
+     * @see releaseModel()
+     */
     bool read( QIODevice* );
 
-    // If parsing was successful, retrieve the resulting document
-    // and set the contained m_document pointer to 0.
+    /**
+     * @brief retrieve the parsed document and reset the parser
+     * If parsing was successful, retrieve the resulting document
+     * and set the contained m_document pointer to 0.
+     */
     GeoDocument* releaseDocument();
     GeoDocument* activeDocument() { return m_document; }
 

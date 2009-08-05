@@ -44,4 +44,15 @@ GeoTagWriter::TagHash* GeoTagWriter::tagWriterHash()
     return s_tagWriterHash;
 }
 
+const GeoTagWriter* GeoTagWriter::recognizes( const QualifiedName &qname )
+{
+    TagHash* hash = tagWriterHash();
+
+    if( !hash->contains( qname ) ) {
+        return 0;
+    }
+
+    return hash->value( qname );
+}
+
 }

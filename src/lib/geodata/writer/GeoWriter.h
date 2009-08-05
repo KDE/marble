@@ -11,7 +11,11 @@
 #ifndef GEOWRITER_H
 #define GEOWRITER_H
 
+#include "GeoDataFeature.h"
+
 #include <QtXml/QXmlStreamWriter>
+
+namespace Marble{
 
 /**
  * @brief Standard Marble way of writing XML
@@ -23,6 +27,28 @@ class GeoWriter : public QXmlStreamWriter
 {
 public:
     GeoWriter();
+
+    /**
+     * @brief The main API call to use the XML writer.
+     * To use the XML writer you need to provide an IODevice to write the XML to
+     * and a QList of GeoDataFeatures which contains the data you wish to write.
+     * To define the type of XML document that is to be written you need to set
+     * the current Document Type for this GeoWriter. See @see setDocumentType()
+     */
+    bool write( QIODevice* device,
+                const QList<GeoDataFeature>& features);
+
+    /**
+     * @brief Set the current document type.
+     * The current Document Type defines which set of hadlers are to be used
+     * when writing the GeoDocument. This string should corrispond with the
+     * string used to register the required Tag Writers in @see GeoTagWriter
+     */
+    void setDocumentType( const QString& documentType );
+private:
+    QString m_documentType;
 };
+
+}
 
 #endif // GEOWRITER_H
