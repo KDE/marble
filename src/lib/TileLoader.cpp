@@ -63,10 +63,6 @@ class TileLoaderPrivate
             m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
         }
 
-        ~TileLoaderPrivate()
-        {
-        }
-
         DatasetProvider *m_datasetProvider;
         HttpDownloadManager *m_downloadManager;
         GeoSceneLayer *m_layer;
@@ -293,7 +289,6 @@ int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
 //    qDebug() << "TileLoader::maxPartialTileLevel tilepath" << tilepath;
     QStringList leveldirs = ( QDir( tilepath ) ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
 
-    QString str;
     bool ok = true;
 
     QStringList::const_iterator constIterator = leveldirs.constBegin();
