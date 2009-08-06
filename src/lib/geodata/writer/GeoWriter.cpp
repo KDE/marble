@@ -36,9 +36,23 @@ bool GeoWriter::write(QIODevice* device, const QList<GeoDataFeature> &features)
         const GeoTagWriter* writer = GeoTagWriter::recognizes( name );
 
         if( writer ) {
-            writer->write( f, (*this) );
+            if(!writer->write( f, (*this) ) ) {
+                //something went wrong while writing
+                return false;
+            }
+        } else {
+            //do not have a handler for this element
+            return false;
         }
     }
+    return true;
+}
+
+bool GeoWriter::write( QIODevice *device, const GeoDataFeature &feature)
+{
+    QList<GeoDataFeature> list;
+    list.append(feature);
+    return write(device, list);
 }
 
 void GeoWriter::setDocumentType( const QString &documentType )

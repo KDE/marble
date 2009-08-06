@@ -1,6 +1,9 @@
 #include <QObject>
 #include <QtTest/QtTest>
 
+/**
+ * This class is intended to test the GeoDataParser. Should it replace KMLTest?
+ */
 class TestGeoDataParser : public QObject
 {
 Q_OBJECT

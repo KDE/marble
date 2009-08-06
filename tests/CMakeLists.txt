@@ -21,6 +21,13 @@ ENDIF (APPLE)
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 #############################################################
+# Make the current test source directory avaiable in #define TESTSRCDIR
+# use this for accessing TESTSRCDIR/data
+#############################################################
+
+add_definitions( -DTESTSRCDIR=\\"${CMAKE_CURRENT_SOURCE_DIR}\\" )
+
+#############################################################
 
 # MarbleWidget test
 marble_add_test( MarbleWidgetSpeedTest )
@@ -51,6 +58,7 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/data )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/parser )
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/writer )
 marble_add_test( GeoPolygonTest )
 
 ############################
@@ -58,6 +66,7 @@ marble_add_test( GeoPolygonTest )
 ############################
 
 marble_add_test( TestGeoDataParser )
+marble_add_test( TestGeoDataWriter )
 
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 

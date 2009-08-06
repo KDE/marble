@@ -39,6 +39,16 @@ public:
     bool write( QIODevice* device,
                 const QList<GeoDataFeature>& features);
 
+
+    /**
+     * @brief Overloaded convienience method to write a single feature or tree
+     * This convenience method allows you to call the GeoWriter using just a
+     * single @see GeoDataFeature. This accounts for the case where a KML
+     * document is contained in one single root element.
+     * See @see write(QIODevice*, const QList<GeoDataFeature>&) for more details
+     */
+    bool write( QIODevice* device, const GeoDataFeature& feature );
+
     /**
      * @brief Set the current document type.
      * The current Document Type defines which set of hadlers are to be used

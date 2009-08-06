@@ -29,7 +29,7 @@ endif( NOT QTONLY AND NOT KDE4_FOUND)
 ####################################################
 # build unit tests
 if( QTONLY )
-    option( BUILD_MARBLE_TESTS "build marble tests if building QTONLY " OFF )
+    option( BUILD_MARBLE_TESTS "build marble tests if building QTONLY " ON )
     if( BUILD_MARBLE_TESTS )
         enable_testing()
     endif( BUILD_MARBLE_TESTS )
