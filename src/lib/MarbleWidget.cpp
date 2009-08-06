@@ -64,6 +64,8 @@ namespace Marble
 # endif
 #endif
 
+const int REPAINT_SCHEDULING_INTERVAL = 1000;
+
 
 class MarbleWidgetPrivate
 {
@@ -81,7 +83,8 @@ class MarbleWidgetPrivate
           m_proxyHost(),
           m_proxyPort( 0 ),
           m_user(),
-          m_password()
+          m_password(),
+          m_repaintTimer()
     {
     }
 
@@ -117,6 +120,9 @@ class MarbleWidgetPrivate
     qint16           m_proxyPort;
     QString          m_user;
     QString          m_password;
+
+    // For scheduling repaints
+    QTimer           m_repaintTimer;
 };
 
 
@@ -172,6 +178,14 @@ void MarbleWidgetPrivate::construct()
 		       m_widget, SIGNAL( themeChanged( QString ) ) );
     m_widget->connect( m_model,  SIGNAL( modelChanged() ),
 		       m_widget, SLOT( updateChangedMap() ) );
+
+    // Repaint scheduling
+    m_widget->connect( m_map,    SIGNAL( repaintNeeded( QRegion ) ),
+                       m_widget, SLOT( scheduleRepaint( QRegion ) ) );
+    m_repaintTimer.setSingleShot( true );
+    m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
+    m_widget->connect( &m_repaintTimer, SIGNAL( timeout() ),
+                       m_widget, SLOT( update() ) );
 
     // When some fundamental things change in the map, we got to show
     // this in the view, i.e. here.
@@ -812,6 +826,8 @@ const QRegion MarbleWidget::mapRegion()
 
 void MarbleWidget::paintEvent(QPaintEvent *evt)
 {
+    // Stop repaint timer if it is already running
+    d->m_repaintTimer.stop();
     QTime t;
     t.start();
 
@@ -1120,6 +1136,13 @@ void MarbleWidget::updateChangedMap()
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
     update();
+}
+
+void MarbleWidget::scheduleRepaint( QRegion dirtyRegion )
+{
+    if ( !d->m_repaintTimer.isActive() ) {
+        d->m_repaintTimer.start();
+    }
 }
 
 MapQuality MarbleWidget::mapQuality( ViewContext viewContext )

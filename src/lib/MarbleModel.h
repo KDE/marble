@@ -350,6 +350,13 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void pluginSettingsChanged();
 
+    /**
+     * This signal is emitted when the repaint of the view was requested.
+     * If available with the @p dirtyRegion which is the region the view will change in.
+     * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
+     */
+    void repaintNeeded( QRegion dirtyRegion );
+
  private:
     Q_DISABLE_COPY( MarbleModel )
     MarbleModelPrivate  * const d;

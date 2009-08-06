@@ -22,6 +22,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QEvent>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QRegion>
 
 namespace Marble
 {
@@ -108,7 +109,13 @@ AbstractDataPluginModel *AbstractDataPlugin::model() const
 
 void AbstractDataPlugin::setModel( AbstractDataPluginModel* model )
 {
+    if ( d->m_model ) {
+        disconnect( d->m_model, SIGNAL( itemsUpdated() ), this, SLOT( requestRepaint() ) );
+        delete d->m_model;
+    }
     d->m_model = model;
+
+    connect( d->m_model, SIGNAL( itemsUpdated() ), this, SLOT( requestRepaint() ) );
 }
 
 QString AbstractDataPlugin::nameId() const
@@ -144,6 +151,11 @@ QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt( const QPoint& c
     else {
         return QList<AbstractDataPluginItem *>();
     }
+}
+
+void AbstractDataPlugin::requestRepaint()
+{
+    emit repaintNeeded( QRegion() );
 }
 
 } // namespace Marble

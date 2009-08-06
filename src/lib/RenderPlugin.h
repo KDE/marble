@@ -131,6 +131,13 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      */
     void actionGroupsChanged();
 
+    /**
+     * This signal is emitted if an update of the view is needed. If available with the
+     * @p dirtyRegion which is the region the view will change in. If dirtyRegion.isEmpty() returns
+     * true, the whole viewport has to be repainted.
+     */
+    void repaintNeeded( QRegion dirtyRegion );
+
  protected:
     bool eventFilter( QObject *, QEvent * );
 

@@ -112,6 +112,9 @@ void MarbleMapPrivate::construct()
     m_parent->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
                        m_parent,              SLOT( centerSun() ) );
 
+    m_parent->connect( m_model,               SIGNAL( repaintNeeded( QRegion ) ),
+                       m_parent,              SIGNAL( repaintNeeded( QRegion ) ) );
+
     // A new instance of FileStorageWatcher.
     // The thread will be started at setting persistent tile cache size.
     m_storageWatcher = new FileStorageWatcher( MarbleDirs::localPath(), m_parent );

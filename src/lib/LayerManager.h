@@ -21,6 +21,7 @@
 #include "marble_export.h"
 
 class QPoint;
+class QRegion;
 
 namespace Marble
 {
@@ -82,9 +83,16 @@ class MARBLE_EXPORT LayerManager : public QObject
     void floatItemsChanged();
 
     /**
-     * This signal is emit when the settings of a plugin changed.
+     * This signal is emitted when the settings of a plugin changed.
      */
     void pluginSettingsChanged();
+
+    /**
+     * This signal is emitted when the repaint of the view was requested by a plugin.
+     * If available with the @p dirtyRegion which is the region the view will change in.
+     * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
+     */
+    void repaintNeeded( QRegion dirtyRegion );
 
  public Q_SLOTS:
     void loadLayers();

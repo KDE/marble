@@ -917,6 +917,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void updateChangedMap();
 
     /**
+     * Schedule repaint
+     */
+    void scheduleRepaint( QRegion dirtyRegion );
+
+    /**
      * @brief Set the map quality depending on the view context 
      */
     void setMapQuality( Marble::MapQuality, Marble::ViewContext = Marble::Still );

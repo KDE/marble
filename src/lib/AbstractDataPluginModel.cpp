@@ -303,6 +303,10 @@ void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item )
     d->m_itemSet.insert( i, item );
     
     connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
+
+    if ( item->initialized() ) {
+        emit itemsUpdated();
+    }
 }
 
 QString AbstractDataPluginModel::name() const
@@ -449,6 +453,10 @@ void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlStri
                                      fileType );
 
             d->m_downloadingItems.erase( i );
+
+            if ( (*i)->initialized() ) {
+                emit itemsUpdated();
+            }
         }
     }
 }

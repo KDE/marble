@@ -61,6 +61,8 @@ LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
     foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
         connect( renderPlugin, SIGNAL( settingsChanged( QString ) ),
                  this, SIGNAL( pluginSettingsChanged() ) );
+        connect( renderPlugin, SIGNAL( repaintNeeded( QRegion ) ),
+                 this, SIGNAL( repaintNeeded( QRegion ) ) );
 
         AbstractFloatItem * const floatItem =
             qobject_cast<AbstractFloatItem *>( renderPlugin );
