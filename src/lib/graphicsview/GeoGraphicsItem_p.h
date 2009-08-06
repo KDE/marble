@@ -40,9 +40,15 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         return m_positions;
     }
 
-    void setProjection( AbstractProjection *projection, ViewportParams *viewport )
+    void setProjection( AbstractProjection *projection,
+                        ViewportParams *viewport,
+                        GeoPainter *painter )
     {
         m_positions.clear();
+
+        if ( !isActive( painter ) ) {
+            return;
+        }
 
         qreal x[100], y;
         int pointRepeatNumber;
@@ -61,6 +67,39 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
 
                 m_positions.append( QPoint( leftX, topY ) );
             }
+        }
+    }
+
+    /**
+     * Returns true if the item is active and should be shown.
+     * This depends on the LOD settings.
+     */
+    virtual bool isActive( GeoPainter *painter )
+    {
+        if ( m_latLonAltBox.isNull()
+             || ( m_minLodPixels == 0 && m_maxLodPixels == -1 ) )
+        {
+            return true;
+        }
+
+        QRegion region = painter->regionFromRect( m_latLonAltBox.center(),
+                                                  m_latLonAltBox.width(),
+                                                  m_latLonAltBox.height(),
+                                                  true );
+
+        int pixels = 0;
+
+        foreach( QRect rect, region.rects() ) {
+            pixels += rect.width() * rect.height();
+        }
+
+        if ( pixels >= m_minLodPixels
+             && pixels <= m_maxLodPixels )
+        {
+            return true;
+        }
+        else {
+            return false;
         }
     }
 

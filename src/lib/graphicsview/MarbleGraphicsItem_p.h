@@ -114,10 +114,13 @@ class MarbleGraphicsItemPrivate
         return list;
     }
 
-    virtual void setProjection( AbstractProjection *projection, ViewportParams *viewport )
+    virtual void setProjection( AbstractProjection *projection,
+                                ViewportParams *viewport,
+                                GeoPainter *painter )
     {
         Q_UNUSED( projection );
         Q_UNUSED( viewport );
+        Q_UNUSED( painter );
     }
 
     virtual void setParentSize( QSizeF size )

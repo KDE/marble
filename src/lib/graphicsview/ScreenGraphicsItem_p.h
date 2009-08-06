@@ -63,9 +63,12 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         return position;
     }
 
-    void setProjection( AbstractProjection *projection, ViewportParams *viewport )
+    void setProjection( AbstractProjection *projection,
+                        ViewportParams *viewport,
+                        GeoPainter *painter )
     {
         Q_UNUSED( projection );
+        Q_UNUSED( painter );
 
         // If we have no parent
         if( m_parent == 0 ) {

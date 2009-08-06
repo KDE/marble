@@ -71,9 +71,9 @@ class Station
         return string
     end
     
-    def priority=(newPriority)
-        @priority = newPriority
-    end
+#    def priority=(newPriority)
+#        @priority = newPriority
+#    end
     
     def angelDistance(other)
         begin
