@@ -22,7 +22,6 @@
 
 #include "GeoDataObject.h"
 #include "GeoDataLookAt.h"
-#include "GeoGraphicsItem.h"
 
 #include "geodata_export.h"
 

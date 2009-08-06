@@ -16,7 +16,6 @@
 
 
 #include "GeoDataObject.h"
-#include "GeoGraphicsItem.h"
 #include "global.h"
 
 #include "geodata_export.h"
