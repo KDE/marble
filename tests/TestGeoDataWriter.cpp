@@ -1,3 +1,13 @@
+//
+// This file is part of the Marble Desktop Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
+//
+
 #include <QtCore/QObject>
 #include <QtTest/QtTest>
 
@@ -19,6 +29,9 @@ private slots:
     void countFeatures();
     void saveFile_data();
     void saveFile();
+    void saveAndLoad_data();
+    void saveAndLoad();
+    void saveAndCompare_data();
     void saveAndCompare();
     void cleanupTestCase();
 private:
@@ -120,9 +133,70 @@ void TestGeoDataWriter::saveFile()
 
 }
 
+void TestGeoDataWriter::saveAndLoad_data()
+{
+    QTest::addColumn<QSharedPointer<GeoDataParser> >("parser");
+
+    QTest::newRow("NewYork") << parsers.value( "NewYork.kml" ) ;
+    QTest::newRow("NewYorkDocument") << parsers.value( "NewYorkDocument.kml" );
+}
+
+void TestGeoDataWriter::saveAndLoad()
+{
+    //Save the file and then verify loading it again
+    QFETCH( QSharedPointer<GeoDataParser>, parser );
+
+    QTemporaryFile tempFile;
+    GeoWriter writer;
+    //FIXME: a better way to do this?
+    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+
+    // Open file in right mode
+    QVERIFY( tempFile.open() );
+
+    QVERIFY( writer.write( &tempFile,
+                           *dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) );
+
+    GeoDataParser resultParser( GeoData_KML );
+
+    QVERIFY( resultParser.read( &tempFile ) );
+}
+
+void TestGeoDataWriter::saveAndCompare_data()
+{
+    QTest::addColumn<QSharedPointer<GeoDataParser> >("parser");
+    QTest::addColumn<QString>("origional");
+
+    QTest::newRow("NewYork") << parsers.value( "NewYork.kml" ) << "NewYork.kml";
+    QTest::newRow("NewYorkDocument") << parsers.value( "NewYorkDocument.kml" ) << "NewYorkDocument.kml";
+}
+
 void TestGeoDataWriter::saveAndCompare()
 {
     //save the file and compare it to the origional
+    QFETCH( QSharedPointer<GeoDataParser>, parser );
+    QFETCH( QString, origional );
+
+    //attempt to save a file using the GeoWriter
+    QTemporaryFile tempFile;
+
+    GeoWriter writer;
+    //FIXME: a better way to do this?
+    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+
+    // Open file in right mode
+    QVERIFY( tempFile.open() );
+
+    QVERIFY( writer.write( &tempFile,
+                           *dynamic_cast<GeoDataFeature*>(parser->activeDocument() ) ) );
+
+    QFile file( dataDir.filePath( origional ) );
+    QVERIFY( file.open( QIODevice::ReadOnly ) );
+    QVERIFY( tempFile.reset() );
+    QTextStream oldFile( &file );
+    QTextStream newFile( &tempFile );
+
+    QCOMPARE( newFile.readAll(), oldFile.readAll() );
 }
 
 void TestGeoDataWriter::cleanupTestCase()

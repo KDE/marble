@@ -8,14 +8,15 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-#ifndef KMLPLACEMARKTAGWRITER_H
-#define KMLPLACEMARKTAGWRITER_H
+#ifndef KMLDOCUMENTTAGWRITER_H
+#define KMLDOCUMENTTAGWRITER_H
 
 #include "GeoTagWriter.h"
 
-namespace Marble{
+namespace Marble
+{
 
-class KmlPlacemarkTagWriter : public GeoTagWriter
+class KmlDocumentTagWriter : public GeoTagWriter
 {
 public:
     virtual bool write( const GeoDataObject &node, GeoWriter& writer ) const;
@@ -23,4 +24,4 @@ public:
 
 }
 
-#endif // KMLPLACEMARKTAGWRITER_H
+#endif // KMLDOCUMENTTAGWRITER_H

@@ -13,6 +13,8 @@
 #include "GeoTagWriter.h"
 #include "KmlElementDictionary.h"
 
+#include <QtCore/QDebug>
+
 namespace Marble
 {
 
@@ -32,16 +34,8 @@ bool GeoWriter::write(QIODevice* device, const QList<GeoDataFeature> &features)
 
     while ( it.hasNext() ) {
         GeoDataFeature f = it.next();
-        GeoTagWriter::QualifiedName name( f.nodeType(), m_documentType );
-        const GeoTagWriter* writer = GeoTagWriter::recognizes( name );
 
-        if( writer ) {
-            if(!writer->write( f, (*this) ) ) {
-                //something went wrong while writing
-                return false;
-            }
-        } else {
-            //do not have a handler for this element
+        if( ! writeElement( f ) ) {
             return false;
         }
     }
@@ -53,6 +47,27 @@ bool GeoWriter::write( QIODevice *device, const GeoDataFeature &feature)
     QList<GeoDataFeature> list;
     list.append(feature);
     return write(device, list);
+}
+
+bool GeoWriter::writeElement(const GeoDataObject &object)
+{
+    //Add checks to see that everything is ok here
+    //
+
+    GeoTagWriter::QualifiedName name( object.nodeType(), m_documentType );
+    const GeoTagWriter* writer = GeoTagWriter::recognizes( name );
+
+    if( writer ) {
+        if( ! writer->write( object, *this ) ) {
+            qDebug() << "An error has been reported by the GeoWriter for: "
+                    << name;
+            return false;
+        }
+    } else {
+        qDebug() << "There is no GeoWriter registered for: " << name;
+        return false;
+    }
+    return true;
 }
 
 void GeoWriter::setDocumentType( const QString &documentType )

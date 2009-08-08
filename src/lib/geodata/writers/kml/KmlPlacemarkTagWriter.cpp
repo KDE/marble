@@ -25,7 +25,8 @@ static GeoTagWriterRegistrar s_writerPlacemark( GeoTagWriter::QualifiedName(GeoD
                                                new KmlPlacemarkTagWriter() );
 
 
-bool KmlPlacemarkTagWriter::write( GeoNode &node, GeoWriter& writer ) const
+bool KmlPlacemarkTagWriter::write( const GeoDataObject &node,
+                                   GeoWriter& writer ) const
 {
     writer.writeStartElement( kml::kmlTag_Placemark );
     //Write the actual important stuff!

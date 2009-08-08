@@ -57,6 +57,10 @@ public:
      */
     void setDocumentType( const QString& documentType );
 private:
+    friend class GeoTagWriter;
+    bool writeElement( const GeoDataObject& object );
+
+private:
     QString m_documentType;
 };
 

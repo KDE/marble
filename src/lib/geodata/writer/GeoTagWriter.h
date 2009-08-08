@@ -18,7 +18,7 @@
 namespace Marble
 {
 
-class GeoNode;
+class GeoDataObject;
 class GeoWriter;
 
 /**
@@ -30,7 +30,7 @@ class GeoWriter;
 class GeoTagWriter
 {
 public:
-    virtual bool write( GeoNode &node, GeoWriter& writer ) const = 0;
+    virtual bool write( const GeoDataObject &node, GeoWriter& writer ) const = 0;
 
     /**
      * @brief Object Name and Namespace Pair
