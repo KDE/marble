@@ -27,8 +27,22 @@ GeoWriter::GeoWriter()
 bool GeoWriter::write(QIODevice* device, const QList<GeoDataFeature> &features)
 {
     setDevice( device );
+    setAutoFormatting( true );
+
+    writeDTD("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+
     //FIXME: write the starting tags. Possibly register a tag handler to do this
     // with a null string as the object name?
+    GeoTagWriter::QualifiedName name( "", m_documentType );
+    const GeoTagWriter* writer = GeoTagWriter::recognizes(name);
+    if( writer ) {
+        //FIXME is this too much of a hack?
+        //geodataobject is never used in this context
+        writer->write( GeoDataObject(), *this );
+    } else {
+        qDebug() << "There is no GeoWriter registered for: " << name;
+        return false;
+    }
 
     QListIterator<GeoDataFeature> it(features);
 
@@ -39,6 +53,9 @@ bool GeoWriter::write(QIODevice* device, const QList<GeoDataFeature> &features)
             return false;
         }
     }
+
+    //close the document
+    writeEndElement();
     return true;
 }
 

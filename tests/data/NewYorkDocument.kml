@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2">
 <Document>
-  <name></name>
-  <description><![CDATA[]]></description>
   <Placemark>
     <name>New York City</name>
     <description>New York City</description>

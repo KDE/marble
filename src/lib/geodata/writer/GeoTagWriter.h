@@ -50,6 +50,8 @@ protected:
     GeoTagWriter();
     virtual ~GeoTagWriter();
 
+    bool writeElement( const GeoDataObject& object, GeoWriter& writer ) const;
+
 private:
     // Only our registrar is allowed to register tag writers.
     friend struct GeoTagWriterRegistrar;

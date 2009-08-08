@@ -11,6 +11,8 @@
 
 #include "GeoTagWriter.h"
 
+#include "GeoWriter.h"
+
 namespace Marble
 {
 
@@ -22,6 +24,12 @@ GeoTagWriter::GeoTagWriter()
 
 GeoTagWriter::~GeoTagWriter()
 {
+}
+
+bool GeoTagWriter::writeElement( const GeoDataObject &object,
+                                 GeoWriter &writer) const
+{
+    return writer.writeElement( object );
 }
 
 void GeoTagWriter::registerWriter(const QualifiedName& name,

@@ -9,7 +9,9 @@
 //
 
 #include "KmlPlacemarkTagWriter.h"
+
 #include "KmlElementDictionary.h"
+#include "GeoDataPlacemark.h"
 //FIXME:should the GeoDataTypes enum be in the GeoDocument?
 #include "GeoDocument.h"
 #include "GeoWriter.h"
@@ -28,8 +30,25 @@ static GeoTagWriterRegistrar s_writerPlacemark( GeoTagWriter::QualifiedName(GeoD
 bool KmlPlacemarkTagWriter::write( const GeoDataObject &node,
                                    GeoWriter& writer ) const
 {
+    const GeoDataPlacemark &placemark = static_cast<const GeoDataPlacemark&>(node);
     writer.writeStartElement( kml::kmlTag_Placemark );
-    //Write the actual important stuff!
+
+    if( !placemark.name().isEmpty() ) {
+        writer.writeStartElement( "name" );
+        writer.writeCharacters( placemark.name() );
+        writer.writeEndElement();
+    }
+
+    if( !placemark.description().isEmpty() ) {
+        writer.writeStartElement( "description" );
+        writer.writeCharacters( placemark.description() );
+        writer.writeEndElement();
+    }
+
+    if( placemark.geometry() ) {
+        writeElement( *placemark.geometry(), writer );
+    }
+
     writer.writeEndElement();
     return true;
 }

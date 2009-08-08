@@ -196,7 +196,7 @@ void TestGeoDataWriter::saveAndCompare()
     QTextStream oldFile( &file );
     QTextStream newFile( &tempFile );
 
-    QCOMPARE( newFile.readAll(), oldFile.readAll() );
+    QCOMPARE( newFile.readAll().simplified(), oldFile.readAll().simplified() );
 }
 
 void TestGeoDataWriter::cleanupTestCase()

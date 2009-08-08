@@ -17,6 +17,7 @@
 #include "GeoDataObject.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QVector>
 
 namespace Marble
 {
@@ -30,6 +31,12 @@ bool KmlDocumentTagWriter::write( const GeoDataObject &node, GeoWriter& writer )
     const GeoDataDocument &document = static_cast<const GeoDataDocument&>(node);
 
     writer.writeStartElement( kml::kmlTag_Document );
+
+    QVector<GeoDataFeature>::ConstIterator it =  document.constBegin();
+
+    for( ; it < document.constEnd(); ++it ) {
+        writeElement( (*it), writer );
+    }
 
     //Write the actual important stuff!
     writer.writeEndElement();

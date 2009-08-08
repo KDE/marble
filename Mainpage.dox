@@ -45,8 +45,8 @@ MarbleNavigator is incorporated into the MarbleControlBox in the first
 tab.  This control widget can be used in simpler application where
 theming, searching and other advanced controls are not needed.
 
-@see MarbleWidget
-@see MarbleModel
+@see Marble::MarbleWidget
+@see Marble::MarbleModel
 @see MarbleControlBox
 @see MarbleNavigator
 
