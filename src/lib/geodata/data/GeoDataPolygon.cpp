@@ -84,12 +84,7 @@ void GeoDataPolygon::setTessellationFlags( TessellationFlags f )
 
 GeoDataLatLonAltBox GeoDataPolygon::latLonAltBox() const
 {
-    if (p()->m_dirtyBox) {
-        // calculate LatLonAltBox
-    }
-    p()->m_dirtyBox = false;
-
-    return GeoDataLatLonAltBox();
+    return p()->outer.latLonAltBox();
 }
 
 GeoDataLinearRing& GeoDataPolygon::outerBoundary() const
