@@ -23,7 +23,7 @@
 using namespace Marble;
 
 WeatherModel::WeatherModel( QObject *parent )
-    : AbstractDataPluginModel( "weather", parent, LevelOfDetailSelection )
+    : AbstractDataPluginModel( "weather", parent )
 {
 //     addService( new FakeWeatherService( this ) );
      addService( new BBCWeatherService( this ) );

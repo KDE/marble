@@ -48,22 +48,7 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     Q_OBJECT
  
  public:
-    enum ItemSelectionMode {
-        PrioritySelection,
-        LevelOfDetailSelection
-    };
-
-    /**
-     * The default contructor of AbstractDataPluginModel.
-     * @p name the name of the model
-     * @p parent the parent of the object
-     * @p mode If set to PrioritySelection the model will sort the items by priority and return
-     * these with the highest priority first. If set to LevelOfDetailSelection the items will be
-     * painted depending on their LOD settings.
-     */
-    AbstractDataPluginModel( const QString& name,
-                             QObject *parent = 0,
-                             ItemSelectionMode mode = PrioritySelection );
+    explicit AbstractDataPluginModel( const QString& name, QObject *parent = 0 );
     virtual ~AbstractDataPluginModel();
         
     /**
@@ -90,8 +75,6 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
      */
     void setItemSettings( QHash<QString,QVariant> itemSettings );
        
-    ItemSelectionMode itemSelectionMode() const;
-
  protected:
     /**
      * Managing to get @p number additional items in @p box. This includes generating a url and

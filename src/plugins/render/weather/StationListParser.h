@@ -23,7 +23,6 @@ namespace Marble
 {
 
 class BBCWeatherItem;
-class GeoDataLatLonAltBox;
     
 class StationListParser : public QXmlStreamReader
 {
@@ -38,8 +37,6 @@ private:
     void readStation();
     QString readCharacters();
     void readPoint( BBCWeatherItem *item );
-    void readRegion( BBCWeatherItem *item );
-    GeoDataLatLonAltBox readLatLonAltBox();
 
     QList<BBCWeatherItem *> m_list;
     QObject *m_parent;

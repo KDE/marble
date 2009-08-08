@@ -695,6 +695,8 @@ QRegion GeoPainter::regionFromPolygon ( const GeoDataLinearRing & linearRing,
             painterPath.addPolygon( *itPolygon );
         }
 
+        qDeleteAll( polygons );
+
         QPainterPathStroker stroker;
         stroker.setWidth( strokeWidth );
         QPainterPath strokePath = stroker.createStroke( painterPath );

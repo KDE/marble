@@ -8,7 +8,7 @@ require 'pp'
 
 class Station
     attr_reader :long, :lat, :priority, :station
-    attr_writer :priority, :west, :east, :north, :south
+    attr_writer :priority
     def initialize(number)
 	@id = number.to_s
         @url = 'http://newsrss.bbc.co.uk/weather/forecast/' + @id + '/ObservationsRSS.xml'
@@ -67,14 +67,6 @@ class Station
         string += "    <Point>\n"
         string += "        <coordinates>" + @long.to_s + "," + @lat.to_s + "</coordinates>\n"
         string += "    </Point>\n"
-        string += "    <Region>\n"
-        string += "        <LatLonAltBox>\n"
-        string += "            <north>" + @north.to_s + "</north>\n"
-        string += "            <south>" + @south.to_s + "</south>\n"
-        string += "            <west>"  + @west.to_s  + "</west>\n"
-        string += "            <east>"  + @east.to_s  + "</east>\n"
-        string += "        </LatLonAltBox>\n"
-        string += "    <Region>\n"
         string += "</Station>\n"
         return string
     end
@@ -101,51 +93,11 @@ stations = Array.new()
     if station.parse
         minDist = 2.0 * Math::PI
         minDistStation = "none"
-        otherSideLong = station.long - 180
-        if otherSideLong < - 180
-            otherSideLong = 360 + otherSideLong
-        end
-        minWest = otherSideLong
-        minEast = otherSideLong
-        minNorth = 90
-        minSouth = -90
         stations.each do |other|
             distance = station.angelDistance( other )
             if distance < minDist
                 minDist = distance
                 minDistStation = other.station
-            end
-            if other.lat >= station.lat and other.lat < minNorth
-                minNorth = other.lat
-            end
-            if other.lat <= station.lat and other.lat > minSouth
-                minSouth = other.lat
-            end
-            
-            if other.long <= otherSideLong and otherSideLong >= 0
-                if (minWest >= otherSideLong or minWest < other.long) and other.long < station.long
-                    minWest = other.long
-                end    
-                if other.long < minEast and other.long > station.long
-                    minEast = other.long
-                end
-            elsif other.long <= otherSideLong and otherSideLong < 0
-                if minEast <= otherSideLong and other.long < minEast
-                    minEast = other.long
-                end
-            elsif other.long > otherSideLong and otherSideLong >= 0
-                if minWest >= otherSideLong and other.long > minWest
-                    minWest = other.long
-                end
-                
-            elsif other.long > otherSideLong and otherSideLong < 0
-                if other.long > minWest and other.long < station.long
-                    minWest = other.long
-                end
-                
-                if (minEast <= otherSideLong or minWest > other.long) and other.long > station.long
-                    minEast = other.long
-                end
             end
         end
         
@@ -157,16 +109,6 @@ stations = Array.new()
         end
         
         station.priority = priority
-        
-        if minWest == minEast && minWest == otherSideLong
-            minWest = minWest + 0.01
-            minEast = minEast - 0.01
-        end
-        
-        station.west = minWest
-        station.east = minEast
-        station.north = minNorth
-        station.south = minSouth
         
         puts station.to_xml
         

@@ -51,11 +51,8 @@ const char fileIdSeparator = '_';
 class AbstractDataPluginModelPrivate
 {
  public:
-    AbstractDataPluginModelPrivate( const QString& name,
-                                    AbstractDataPluginModel::ItemSelectionMode mode,
-                                    AbstractDataPluginModel * parent )
-        : m_itemSelectionMode( mode ),
-          m_parent( parent ),
+    AbstractDataPluginModelPrivate( const QString& name, AbstractDataPluginModel * parent )
+        : m_parent( parent ),
           m_name( name ),
           m_lastBox(),
           m_downloadedBox(),
@@ -84,7 +81,6 @@ class AbstractDataPluginModelPrivate
         delete m_downloadManager;
     }
     
-    const AbstractDataPluginModel::ItemSelectionMode m_itemSelectionMode;
     AbstractDataPluginModel *m_parent;
     QString m_name;
     GeoDataLatLonAltBox m_lastBox;
@@ -103,11 +99,9 @@ class AbstractDataPluginModelPrivate
     HttpDownloadManager *m_downloadManager;
 };
 
-AbstractDataPluginModel::AbstractDataPluginModel( const QString& name,
-                                                  QObject *parent,
-                                                  ItemSelectionMode mode )
+AbstractDataPluginModel::AbstractDataPluginModel( const QString& name, QObject *parent )
     : QObject(  parent ),
-      d( new AbstractDataPluginModelPrivate( name, mode, this ) )
+      d( new AbstractDataPluginModelPrivate( name, this ) )
 {
     // Initializing file and download System
     CacheStoragePolicy *storagePolicy = new CacheStoragePolicy( MarbleDirs::localPath()
@@ -135,9 +129,81 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
 {
     GeoDataLatLonAltBox currentBox = viewport->viewLatLonAltBox();
     QString target = facade->target();
-
+    QList<AbstractDataPluginItem*> list;
+    
+    QList<AbstractDataPluginItem*>::iterator i;
+    
+    d->m_displayedItems.removeAll( 0 );
+    
+    // Items that are already shown have the highest priority
+    for ( i = d->m_displayedItems.begin();
+          i != d->m_displayedItems.end() && list.size() < number;
+          ++i )
+    {
+        // Don't try to access an object that doesn't exist
+        if( !*i ) {
+            continue;
+        }
+    
+        // Only show items that are initialized
+        if( !(*i)->initialized() ) {
+            continue;
+        }
+        
+        // Only show items that are on the current planet
+        if( (*i)->target() != target ) {
+            continue;
+        }
+        
+        if( !currentBox.contains( (*i)->coordinate() ) ) {
+            continue;
+        }
+        
+        // If the item was added initially at a nearer position, they don't have priority,
+        // because we zoomed out since then.
+        if( (*i)->addedAngularResolution() >= viewport->angularResolution() ) {
+            list.append( *i );
+            (*i)->setSettings( d->m_itemSettings );
+        }
+    }
+        
+    d->m_itemSet.removeAll( 0 );
+    
+    for ( i = d->m_itemSet.begin(); i != d->m_itemSet.end() && list.size() < number; ++i ) {
+        // Don't try to access an object that doesn't exist
+        if( !*i ) {
+            qDebug() << "Warning: Null pointer in m_itemSet";
+            continue;
+        }
+        
+        // Only show items that are initialized
+        if( !(*i)->initialized() ) {
+            continue;
+        }
+        
+        // Only show items that are on the current planet
+        if( (*i)->target() != target ) {
+            continue;
+        }
+        
+        // If the item is on the viewport, we want to return it
+        if( currentBox.contains( (*i)->coordinate() )
+            && !list.contains( *i ) )
+        {
+            list.append( *i );
+            (*i)->setSettings( d->m_itemSettings );
+            
+            // We want to save the angular resolution of the first time the item got added.
+            // If it is in the list of displayedItems, it was added before
+            if( !d->m_displayedItems.contains( *i ) ) {
+                (*i)->setAddedAngularResolution( viewport->angularResolution() );
+            }
+        }
+        // FIXME: We have to do something if the item that is not on the viewport.
+    }
+    
     d->m_lastDataFacade = facade;
-
+    
     if( (!(currentBox == d->m_lastBox)
           || number != d->m_lastNumber ) )
     {
@@ -145,106 +211,20 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
         d->m_lastNumber = number;
         d->m_lastDataFacade = facade;
     }
-
-    if ( itemSelectionMode() == PrioritySelection ) {
-        // The list of items to be returned.
-        QList<AbstractDataPluginItem*> list;
-
-        QList<AbstractDataPluginItem*>::iterator i;
-
-        d->m_displayedItems.removeAll( 0 );
-
-        // Items that are already shown have the highest priority
-        for ( i = d->m_displayedItems.begin();
-        i != d->m_displayedItems.end() && list.size() < number;
-        ++i )
-        {
-            // Don't try to access an object that doesn't exist
-            if( !*i ) {
-                continue;
-            }
-
-            // Only show items that are initialized
-            if( !(*i)->initialized() ) {
-                continue;
-            }
-
-            // Only show items that are on the current planet
-            if( (*i)->target() != target ) {
-                continue;
-            }
-
-            if( !currentBox.contains( (*i)->coordinate() ) ) {
-                continue;
-            }
-
-            // If the item was added initially at a nearer position, they don't have priority,
-            // because we zoomed out since then.
-            if( (*i)->addedAngularResolution() >= viewport->angularResolution() ) {
-                list.append( *i );
-                (*i)->setSettings( d->m_itemSettings );
-            }
-        }
-        
-        d->m_itemSet.removeAll( 0 );
-
-        for ( i = d->m_itemSet.begin(); i != d->m_itemSet.end() && list.size() < number; ++i ) {
-            // Don't try to access an object that doesn't exist
-            if( !*i ) {
-                qDebug() << "Warning: Null pointer in m_itemSet";
-                continue;
-            }
-
-            // Only show items that are initialized
-            if( !(*i)->initialized() ) {
-                continue;
-            }
-
-            // Only show items that are on the current planet
-            if( (*i)->target() != target ) {
-                continue;
-            }
-
-            // If the item is on the viewport, we want to return it
-            if( currentBox.contains( (*i)->coordinate() )
-                && !list.contains( *i ) )
-                {
-                list.append( *i );
-                (*i)->setSettings( d->m_itemSettings );
-
-                // We want to save the angular resolution of the first time the item got added.
-                // If it is in the list of displayedItems, it was added before
-                if( !d->m_displayedItems.contains( *i ) ) {
-                    (*i)->setAddedAngularResolution( viewport->angularResolution() );
-                }
-            }
-            // FIXME: We have to do something if the item is not on the viewport.
-        }
-
-        d->m_displayedItems = list;
-        return list;
-    }
     else {
-        return d->m_itemSet;
     }
+    
+    d->m_displayedItems = list;
+    return list;
 }
 
 QList<AbstractDataPluginItem *> AbstractDataPluginModel::whichItemAt( const QPoint& curpos )
 {
     QList<AbstractDataPluginItem *> itemsAt;
     
-    if ( itemSelectionMode() == PrioritySelection ) {
-        foreach( AbstractDataPluginItem* item, d->m_displayedItems ) {
-            if( item && item->contains( QPointF( curpos ) ) )
-                itemsAt.append( item );
-        }
-    }
-    else {
-        foreach( AbstractDataPluginItem* item, d->m_itemSet ) {
-            if( item && item->contains( QPointF( curpos ) ) ) {
-                itemsAt.append( item );
-            }
-        }
+    foreach( AbstractDataPluginItem* item, d->m_displayedItems ) {
+        if( item && item->contains( QPointF( curpos ) ) )
+            itemsAt.append( item );
     }
     
     return itemsAt;
@@ -314,19 +294,14 @@ void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item )
     
     qDebug() << "New item " << item->id();
     
-    if ( itemSelectionMode() == PrioritySelection ) {
-        // This find the right position in the sorted to insert the new item
-        QList<AbstractDataPluginItem*>::iterator i = qLowerBound( d->m_itemSet.begin(),
-                                                                  d->m_itemSet.end(),
-                                                                  item,
-                                                                  lessThanByPointer );
-        // Insert the item on the right position in the list
-        d->m_itemSet.insert( i, item );
-    }
-    else {
-        d->m_itemSet.prepend( item );
-    }
-
+    // This find the right position in the sorted to insert the new item 
+    QList<AbstractDataPluginItem*>::iterator i = qLowerBound( d->m_itemSet.begin(),
+                                                                d->m_itemSet.end(),
+                                                                item,
+                                                                lessThanByPointer );
+    // Insert the item on the right position in the list
+    d->m_itemSet.insert( i, item );
+    
     connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
 
     if ( item->initialized() ) {
@@ -398,11 +373,6 @@ bool AbstractDataPluginModel::itemExists( const QString& id ) const
 void AbstractDataPluginModel::setItemSettings( QHash<QString,QVariant> itemSettings )
 {
     d->m_itemSettings = itemSettings;
-}
-
-AbstractDataPluginModel::ItemSelectionMode AbstractDataPluginModel::itemSelectionMode() const
-{
-    return d->m_itemSelectionMode;
 }
 
 void AbstractDataPluginModel::handleChangedViewport()

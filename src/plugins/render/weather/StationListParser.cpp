@@ -15,7 +15,6 @@
 #include "global.h"
 #include "BBCWeatherItem.h"
 #include "GeoDataCoordinates.h"
-#include "GeoDataLatLonAltBox.h"
 
 // Qt
 #include <QtCore/QDebug>
@@ -115,8 +114,6 @@ void StationListParser::readStation()
                 item->setPriority( readCharacters().toInt() );
             else if ( name() == "Point" )
                 readPoint( item );
-            else if ( name() == "Region" )
-                readRegion( item );
             else
                 readUnknownElement();
         }
@@ -181,69 +178,4 @@ void StationListParser::readPoint( BBCWeatherItem *item )
                 readUnknownElement();
         }
     }
-}
-
-void StationListParser::readRegion( BBCWeatherItem *item )
-{
-    Q_ASSERT( isStartElement()
-              && name() == "Region" );
-
-    while ( !atEnd() ) {
-        readNext();
-
-        if ( isEndElement() )
-            break;
-
-        if ( isStartElement() ) {
-            if ( name() == "LatLonAltBox" ) {
-                GeoDataLatLonAltBox box = readLatLonAltBox();
-                if ( !box.isNull() ) {
-                    item->setLatLonAltBox( box );
-                    item->setMinLodPixels( 10 );
-                }
-            }
-            else {
-                readUnknownElement();
-            }
-        }
-    }
-}
-
-GeoDataLatLonAltBox StationListParser::readLatLonAltBox()
-{
-    Q_ASSERT( isStartElement()
-              && name() == "LatLonAltBox" );
-
-    GeoDataLatLonAltBox box;
-
-    while ( !atEnd() ) {
-        readNext();
-
-        if ( isEndElement() )
-            break;
-
-        if ( isStartElement() ) {
-            if ( name() == "north" ) {
-                QString northString = readCharacters();
-                box.setNorth( northString.toDouble() * DEG2RAD );
-            }
-            else if ( name() == "south" ) {
-                QString southString = readCharacters();
-                box.setSouth( southString.toDouble() * DEG2RAD );
-            }
-            else if ( name() == "west" ) {
-                QString westString = readCharacters();
-                box.setWest( westString.toDouble() * DEG2RAD );
-            }
-            else if ( name() == "east" ) {
-                QString eastString = readCharacters();
-                box.setEast( eastString.toDouble() * DEG2RAD );
-            }
-            else {
-                readUnknownElement();
-            }
-        }
-    }
-
-    return box;
 }

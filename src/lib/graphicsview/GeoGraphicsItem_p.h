@@ -82,20 +82,15 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
             return true;
         }
 
+        QRegion region = painter->regionFromRect( m_latLonAltBox.center(),
+                                                  m_latLonAltBox.width(),
+                                                  m_latLonAltBox.height(),
+                                                  true );
+
         int pixels = 0;
 
-        qDebug() << m_latLonAltBox.toString();
-
-        if ( m_latLonAltBox.width() && m_latLonAltBox.height() ) {
-            QRegion region = painter->regionFromRect( m_latLonAltBox.center(),
-                                                      m_latLonAltBox.width(),
-                                                      m_latLonAltBox.height(),
-                                                      true );
-
-
-            foreach( QRect rect, region.rects() ) {
-                pixels += rect.width() * rect.height();
-            }
+        foreach( QRect rect, region.rects() ) {
+            pixels += rect.width() * rect.height();
         }
 
         if ( pixels >= m_minLodPixels
