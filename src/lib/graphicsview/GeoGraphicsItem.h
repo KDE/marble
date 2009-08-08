@@ -113,9 +113,9 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
     void setMinLodPixels( int pixels );
 
     /**
-     * Returns the minimum number of pixels the GeoGraphicsItem has to be projected on for this item
-     * to be considered as active. -1 would mean no maximum number of pixels which is also the
-     * standard value.
+     * Returns the maximum number of pixels the GeoGraphicsItem has to be
+     * projected on for this item to be considered as active. -1 would mean no
+     * maximum number of pixels which is also the standard value.
      */
     int maxLodPixels() const;
 

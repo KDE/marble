@@ -1,0 +1,154 @@
+//
+// This file is part of the Marble Desktop Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2009 Torsten Rahn <tackat@kde.org>
+//
+
+
+#ifndef GEODATALOD_H
+#define GEODATALOD_H
+
+#include "GeoDataObject.h"
+
+
+namespace Marble
+{
+
+class GeoDataLodPrivate;
+
+/*!
+    \class GeoDataLod
+    \brief The level of detail which indicates visibility and importance.
+
+    GeoDataLod is a tool class that implements the Lod tag/class
+    of the Open Geospatial Consortium standard KML 2.2.
+
+    "Lod" is an abbreviation for "Level of Detail" and refers to 
+    the extent of the region of a feature.
+    In geodesic coordinates the size of the region can be described 
+    in terms of a LatLon(Alt)Box. 
+    Projected to screen coordinates the size of a region would naturally
+    be measured in pixels.
+    The size of such a region varies depending on the distance of the 
+    observer towards the feature. 
+    
+    The "Level of Detail" describes how many pixels a region needs to
+    cover in order to be considered "active" and visible. 
+    It also describes how "quickly" the feature fades in and out. 
+*/
+
+class GEODATA_EXPORT GeoDataLod : public GeoDataObject {
+    
+/*!
+    \brief Creates a new Level of Detail object.
+*/
+    GeoDataLod();
+
+    
+/*!
+    \brief Destroys a Level of Detail object.
+*/
+    virtual ~GeoDataLod();
+
+    
+/*!
+    \brief Provides type information for downcasting a GeoNode
+*/
+    virtual QString nodeType() const;
+    
+    
+/*!
+    \brief Returns the mimimum size that is needed for the region to be active
+    Returns the minimum number of pixels the region has to be projected on for
+    the feature to be considered active. 
+    A value of 0 would mean no minimum number of pixels which is also the
+    standard value.
+*/
+    int minLodPixels() const;
+
+    
+/*!
+    \brief Sets the mimimum size that is needed for the region to be active
+    Sets the minimum number of \a pixels the region has to be projected on for
+    the feature to be considered active.
+*/
+    void setMinLodPixels( int pixels );
+
+    
+/*!
+    \brief Returns the maximum size that is needed for the region to be active
+    Returns the maximum number of pixels the region has to be projected on for
+    the feature to be considered active. 
+    A value of 0 would mean no minimum number of pixels which is also the
+    standard value.
+*/
+    int maxLodPixels() const;
+
+    
+/*!
+    \brief Sets the maximum size that is needed for the region to be active
+    Sets the maximum number of \a pixels the region has to be projected on for
+    the feature to be considered active.
+*/
+    void setMaxLodPixels( int pixels );
+   
+
+/*!
+    \brief Returns how "quickly" the region fades when the region is far away.
+    Returns the distance (counted from minLodPixels) over which the feature
+    fades in or out. 
+*/
+    int minFadeExtent() const;
+
+    
+/*!
+    \brief Sets how "quickly" the region fades when the region is far away.
+    Sets the distance (counted from minLodPixels) over which the feature fades
+    in or out. 
+*/
+    void setMinFadeExtent( int pixels );
+
+    
+/*!
+    \brief Returns how "quickly" the region fades when the region is near.
+    Returns the distance (counted from maxLodPixels) over which the feature
+    fades in or out. 
+*/
+    int maxFadeExtent() const;
+
+    
+/*!
+    \brief Sets how "quickly" the region fades when the region is near.
+    Sets the distance (counted from maxLodPixels) over which the feature fades
+    in or out. 
+*/
+    void setMaxFadeExtent( int pixels );
+    
+    
+    // Serialization
+/*!
+    \brief Serialize the Lod to a stream.
+    \param stream the stream.
+*/
+    virtual void pack( QDataStream& stream ) const;
+
+    
+/*!
+    \brief Unserialize the Lod from a stream.
+    \param stream the stream.
+*/
+    virtual void unpack( QDataStream& stream );
+
+    
+ protected:
+    GeoDataLodPrivate *p() const;
+    GeoDataLod(GeoDataLodPrivate* priv);
+};
+
+}
+
+#endif // GEODATALOD_H
