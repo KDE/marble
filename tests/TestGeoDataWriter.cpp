@@ -26,7 +26,7 @@ private:
     QMap<QString, QSharedPointer<GeoDataParser> > parsers;
 };
 
-Q_DECLARE_METATYPE( QSharedPointer<GeoDataParser> );
+Q_DECLARE_METATYPE( QSharedPointer<GeoDataParser> )
 
 void TestGeoDataWriter::initTestCase()
 {
