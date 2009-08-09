@@ -145,6 +145,56 @@ class GeoPainterPrivate
         rect.setBottomRight( QPointF( right, bottom ) );
     }
 
+    GeoDataLinearRing geoRectToLinearRing( const GeoDataCoordinates & centerCoordinates,
+                                           qreal width, qreal height )
+    {
+        qreal lon = 0.0;
+        qreal lat = 0.0;
+        qreal altitude = centerCoordinates.altitude();
+        centerCoordinates.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
+
+        qreal west = lon - width * 0.5;
+        if ( west < -180 ) west = west + 360;
+        if ( west > 180 ) west = west - 360;
+
+        qreal east =  lon + width * 0.5;
+        if ( east < -180 ) east = east + 360;
+        if ( east > 180 ) east = east - 360;
+
+        qreal north = lat + height * 0.5;
+        if ( north > +90.0 ) north = 90.0;
+        if ( north < -90.0 ) north = -90.0;
+
+        qreal south = lat - height * 0.5;
+        if ( south > +90.0 ) south = 90.0;
+        if ( south < -90.0 ) south = -90.0;
+
+        GeoDataCoordinates southWest( west, south,
+                                      altitude, GeoDataCoordinates::Degree );
+        GeoDataCoordinates southEast( east, south,
+                                      altitude, GeoDataCoordinates::Degree );
+        GeoDataCoordinates northEast( east, north,
+                                      altitude, GeoDataCoordinates::Degree );
+        GeoDataCoordinates northWest( west, north,
+                                      altitude, GeoDataCoordinates::Degree );
+
+        GeoDataLinearRing rectangle( Tessellate | RespectLatitudeCircle );
+
+        // If the width of the rect is larger as 180 degree, we have to enforce the long way.
+        if ( width >= 180 ) {
+            qreal center = lon;
+            GeoDataCoordinates southCenter( center, south, altitude, GeoDataCoordinates::Degree );
+            GeoDataCoordinates northCenter( center, north, altitude, GeoDataCoordinates::Degree );
+
+            rectangle << southWest << southCenter << southEast << northEast << northCenter << northWest;
+        }
+        else {
+            rectangle << southWest << southEast << northEast << northWest;
+        }
+
+        return rectangle;
+    }
+
 
     ViewportParams  *m_viewport;
     MapQuality       m_mapQuality;
@@ -674,7 +724,6 @@ QRegion GeoPainter::regionFromPolygon ( const GeoDataLinearRing & linearRing,
          ! d->m_viewport->resolves( linearRing.latLonAltBox() )
         )
     {
-        // qDebug() << "Polygon doesn't get displayed on the viewport";
         return QRegion();
     }
 
@@ -773,37 +822,8 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates,
         }
     }
     else {
-        qreal lon = 0.0;
-        qreal lat = 0.0;
-        qreal altitude = centerCoordinates.altitude();
-        centerCoordinates.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
-
-        if ( width > 180.0 ) width = 180.0;
-        qreal lonLeft = lon - width * 0.5;
-        qreal lonRight =  lon + width * 0.5;
-
-        qreal latTop = lat + height * 0.5;
-        if ( latTop > +90.0 ) latTop = 90.0;
-        if ( latTop < -90.0 ) latTop = -90.0;
-
-        qreal latBottom = lat - height * 0.5;
-        if ( latBottom > +90.0 ) latBottom = 90.0;
-        if ( latBottom < -90.0 ) latBottom = -90.0;
-
-        GeoDataCoordinates bottomLeft( lonLeft, latBottom,
-                                    altitude, GeoDataCoordinates::Degree );
-        GeoDataCoordinates bottomRight( lonRight, latBottom,
-                                    altitude, GeoDataCoordinates::Degree );
-        GeoDataCoordinates topRight( lonRight, latTop,
-                                    altitude, GeoDataCoordinates::Degree );
-        GeoDataCoordinates topLeft( lonLeft, latTop,
-                                    altitude, GeoDataCoordinates::Degree );
-
-        GeoDataLinearRing rectangle( Tessellate | RespectLatitudeCircle );
-
-        rectangle << bottomLeft << bottomRight << topRight << topLeft;
-
-        drawPolygon( rectangle, Qt::OddEvenFill ); 
+        drawPolygon( d->geoRectToLinearRing( centerCoordinates, width, height ),
+                     Qt::OddEvenFill );
     }
 }
 
@@ -838,37 +858,8 @@ QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinate
         return regions;
     }
     else {
-        qreal lon = 0.0;
-        qreal lat = 0.0;
-        qreal altitude = centerCoordinates.altitude();
-        centerCoordinates.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
-
-        if ( width > 180.0 ) width = 180.0;
-        qreal lonLeft = lon - width * 0.5;
-        qreal lonRight =  lon + width * 0.5;
-
-        qreal latTop = lat + height * 0.5;
-        if ( latTop > +90.0 ) latTop = 90.0;
-        if ( latTop < -90.0 ) latTop = -90.0;
-
-        qreal latBottom = lat - height * 0.5;
-        if ( latBottom > +90.0 ) latBottom = 90.0;
-        if ( latBottom < -90.0 ) latBottom = -90.0;
-
-        GeoDataCoordinates bottomLeft( lonLeft, latBottom,
-                                    altitude, GeoDataCoordinates::Degree );
-        GeoDataCoordinates bottomRight( lonRight, latBottom,
-                                    altitude, GeoDataCoordinates::Degree );
-        GeoDataCoordinates topRight( lonRight, latTop,
-                                    altitude, GeoDataCoordinates::Degree );
-        GeoDataCoordinates topLeft( lonLeft, latTop,
-                                    altitude, GeoDataCoordinates::Degree );
-
-        GeoDataLinearRing rectangle( Tessellate | RespectLatitudeCircle );
-
-        rectangle << bottomLeft << bottomRight << topRight << topLeft;
-
-        return regionFromPolygon( rectangle, Qt::OddEvenFill, strokeWidth );
+        return regionFromPolygon( d->geoRectToLinearRing( centerCoordinates, width, height ),
+                                  Qt::OddEvenFill, strokeWidth );
     }
 }
 
