@@ -153,21 +153,11 @@ class GeoPainterPrivate
         qreal altitude = centerCoordinates.altitude();
         centerCoordinates.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
 
-        qreal west = lon - width * 0.5;
-        if ( west < -180 ) west = west + 360;
-        if ( west > 180 ) west = west - 360;
+        qreal west = GeoDataCoordinates::normalizeLon( lon - width * 0.5 );
+        qreal east =  GeoDataCoordinates::normalizeLon( lon + width * 0.5 );
 
-        qreal east =  lon + width * 0.5;
-        if ( east < -180 ) east = east + 360;
-        if ( east > 180 ) east = east - 360;
-
-        qreal north = lat + height * 0.5;
-        if ( north > +90.0 ) north = 90.0;
-        if ( north < -90.0 ) north = -90.0;
-
-        qreal south = lat - height * 0.5;
-        if ( south > +90.0 ) south = 90.0;
-        if ( south < -90.0 ) south = -90.0;
+        qreal north = GeoDataCoordinates::normalizeLat( lat + height * 0.5 );
+        qreal south = GeoDataCoordinates::normalizeLat( lat - height * 0.5 );
 
         GeoDataCoordinates southWest( west, south,
                                       altitude, GeoDataCoordinates::Degree );
