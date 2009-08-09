@@ -222,14 +222,14 @@ void WikipediaItem::updateToolTip()
     toolTip += "margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">";
     if ( summary().isEmpty() ) {
         toolTip += "%1";
+        toolTip += "</p></body></html>\n";
+        setToolTip( toolTip.arg( name() ) );
     }
     else {
-        toolTip += tr( "%1:<br>%2", "Title:\nSummary" );
+        toolTip += tr( "<b>%1</b><br>%2", "Title:\nSummary" );
+        toolTip += "</p></body></html>\n";
+        setToolTip( toolTip.arg( name() ).arg( summary() ) );
     }
-
-    toolTip += "</p></body></html>\n";
-
-    setToolTip( toolTip.arg( name() ).arg( summary() ) );
 }
 
 bool WikipediaItem::showThumbnail()
