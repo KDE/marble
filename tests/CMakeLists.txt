@@ -54,17 +54,14 @@ else (QTONLY)
 
 endif (QTONLY)
 
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib )
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata )
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/data )
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/parser )
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/writer )
-marble_add_test( GeoPolygonTest )
+#FIXME: this stuff should actually be done only once and in the main CMake File!
+include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/plugins/render/osmannotate )
+
 
 ############################
 # Drop in New Tests
 ############################
-
+marble_add_test( GeoPolygonTest )
 marble_add_test( TestGeoDataParser )
 marble_add_test( TestGeoDataWriter )
 
@@ -74,3 +71,4 @@ marble_add_test( PluginManagerTest )
 marble_add_test( MarbleWidgetTest )
 add_definitions( -DCITIES_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}/../../../data/placemarks/cityplacemarks.kml\\\"" )
 marble_add_test( KMLTest )
+marble_add_test( TestOsmAnnotation )

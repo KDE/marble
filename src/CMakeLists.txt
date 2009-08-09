@@ -8,23 +8,6 @@ if(BUILD_WITH_DBUS)
 add_definitions(-DMARBLE_DBUS)
 endif(BUILD_WITH_DBUS)
 
-include_directories(
-  ${CMAKE_CURRENT_SOURCE_DIR}
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/AbstractLayer
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/Projections
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/data
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/graphicsitem
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/handlers/dgml
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/parser
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/writer
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/geodata/scene
-  ${CMAKE_CURRENT_SOURCE_DIR}/lib/graphicsview
-  ${CMAKE_CURRENT_BINARY_DIR}
-  ${CMAKE_CURRENT_BINARY_DIR}/lib
-)
-
 add_subdirectory( tilecreator )
 add_subdirectory( lib )
 add_subdirectory( plugins )

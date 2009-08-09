@@ -250,6 +250,25 @@ endif(WIN32)
 include( MarbleMacros )
 
 ####################################################
+# Add the include directories
+
+include_directories(
+  ${CMAKE_CURRENT_SOURCE_DIR}
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/AbstractLayer
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/Projections
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/geodata
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/geodata/data
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/geodata/graphicsitem
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/geodata/handlers/dgml
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/geodata/parser
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/geodata/writer
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/geodata/scene
+  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/graphicsview
+  ${CMAKE_CURRENT_BINARY_DIR}/src
+  ${CMAKE_CURRENT_BINARY_DIR}/src/lib
+)
+####################################################
 # Descend into subdirectories
 add_subdirectory(src)
 add_subdirectory(data)

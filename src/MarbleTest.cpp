@@ -17,9 +17,9 @@
 #include <QtGui/QMessageBox>
 #include <QtGui/QFileDialog>
 
-#include <lib/global.h>
-#include <lib/MarbleWidget.h>
-#include <lib/MarbleModel.h>
+#include <global.h>
+#include <MarbleWidget.h>
+#include <MarbleModel.h>
 
 using namespace Marble;
 
