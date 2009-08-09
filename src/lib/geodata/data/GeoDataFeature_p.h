@@ -25,6 +25,7 @@ class GeoDataFeaturePrivate
     GeoDataFeaturePrivate() :
         m_name(),
         m_description(),
+        m_descriptionCDATA(),
         m_address(),
         m_phoneNumber(),
         m_styleUrl(),        
@@ -42,6 +43,7 @@ class GeoDataFeaturePrivate
     GeoDataFeaturePrivate( const GeoDataFeaturePrivate& other ) :
         m_name( other.m_name ),
         m_description( other.m_description ),
+        m_descriptionCDATA( other.m_descriptionCDATA),
         m_address( other.m_address ),
         m_phoneNumber( other.m_phoneNumber ),
         m_styleUrl( other.m_styleUrl ),
@@ -60,6 +62,7 @@ class GeoDataFeaturePrivate
     {
         m_name = other.m_name;
         m_description = other.m_description;
+        m_descriptionCDATA = other.m_descriptionCDATA;
         m_address = other.m_address;
         m_phoneNumber = other.m_phoneNumber;
         m_styleUrl = other.m_styleUrl;
@@ -95,6 +98,7 @@ class GeoDataFeaturePrivate
 
     QString     m_name;         // Name of the feature. Is shown on screen
     QString     m_description;  // A longer textual description
+    bool        m_descriptionCDATA; // True if description should be considered CDATA
     QString     m_address;      // The address.  Optional
     QString     m_phoneNumber;  // Phone         Optional
     QString     m_styleUrl;     // styleUrl     Url#tag to a document wide style

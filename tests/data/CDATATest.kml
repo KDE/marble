@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+<Placemark>
+  <name>Feature.kml</name>
+  <Snippet maxLines="4">
+    The snippet is a way of
+    providing an alternative
+    description that will be
+    shown in the List view.
+  </Snippet> 
+  <description>
+    <![CDATA[
+      Styles: <i>Italics</i>, <b>Bold</b>, <u>Underlined</u>, 
+      <s>Strike Out</s>, subscript<sub>subscript</sub>,
+      superscript<sup>superscript</sup>,  
+      <big>Big</big>, <small>Small</small>, <tt>Typewriter</tt>,
+      <em>Emphasized</em>, <strong>Strong</strong>, <code>Code</code>
+      <hr />
+      Fonts: 
+      <font color="red">red by name</font>, 
+      <font color="#408010">leaf green by hexadecimal RGB</font>, 
+      <font size=1>size 1</font>, <font size=2>size 2</font>,
+      <font size=3>size 3</font>, <font size=4>size 4</font>,
+      <font size=5>size 5</font>, <font size=6>size 6</font>, 
+      <font size=7>size 7</font>,
+      <font face=times>Times</font>, 
+      <font face=verdana>Verdana</font>, 
+      <font face=arial>Arial</font>
+      <br/>
+      <hr />
+      Links:
+      <a href="http://doc.trolltech.com/3.3/qstylesheet.html">
+      QT Rich Text Rendering
+      </a>
+      <br />
+      <hr />
+      Alignment:
+      <br />
+      <p align=left>left</p><p align=center>center</p>
+      <p align=right>right</p>
+      <hr />
+      Ordered Lists:
+      <br />
+      <ol><li>First</li><li>Second</li><li>Third</li></ol>
+      <ol type="a"><li>First</li><li>Second</li><li>Third</li></ol>
+      <ol type="A"><li>First</li><li>Second</li><li>Third</li></ol>
+      <hr />
+      Unordered Lists:
+      <br />
+      <ul><li>A</li><li>B</li><li>C</li></ul>
+      <ul type="circle"><li>A</li><li>B</li><li>C</li></ul>
+      <ul type="square"><li>A</li><li>B</li><li>C</li></ul>
+      <hr />
+      Definitions:
+      <br />
+      <dl>
+      <dt>Scrumpy</dt>
+      <dd>Hard English cider from the west country</dd>
+      <dt>Pentanque</dt>
+      <dd>A form of boules where the goal is to throw metal ball as
+      close as possible to a jack</dd>
+      </dl>
+      <hr />
+      Block Quote:
+      <br />
+      <blockquote>
+      We shall not cease from exploration<br />
+      And the end of all our exploring<br />
+      Will be to arrive where we started<br />
+      And know the place for the first time
+      </blockquote>
+      <br />
+      <hr />
+      Centered:
+      <br />
+      <center>See, I have a Rhyme assisting<br />
+      my feeble brain,<br />
+      its tasks oft-times resisting!</center>
+      <hr />
+      Headings:
+      <br />
+      <h1>Header 1</h1>
+      <h2>Header 2</h2>
+      <h3>Header 3</h3>
+      <h3>Header 4</h4>
+      <h3>Header 5</h5>
+      <hr />
+      Images:
+      <br />
+      <img src="http://earth.google.com/images/googleearth.gif" />
+      <br />
+      <i>Scaled image</i>
+      <br />
+      <img src="http://earth.google.com/images/googleearth.gif"
+      width="100" />
+      <br />
+      <hr />
+      Tables:
+      <table border="1" padding="3" width="300">
+      <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+      <tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
+      </table>
+    ]]>
+  </description>
+  <Point>
+    <coordinates>-122.378927,37.826793,0</coordinates>
+  </Point>
+</Placemark>
+</Document>
+</kml>

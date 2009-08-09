@@ -179,6 +179,18 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /// Set the description of this feature to @p value.
     void setDescription( const QString &value );
 
+    /**
+     * @brief test if the descirption is CDATA or not
+     * CDATA allows for special characters to be included in XML and also allows
+     * for other XML formats to be embedded in the XML without intefering with
+     * parser namespace.
+     * @return @true if the description should be treated as CDATA
+     *         @false if the description is a plain string
+     */
+    bool descriptionIsCDATA() const;
+    /// Set the description to be CDATA See: @see descriptionIsCDATA()
+    void setDescriptionCDATA( bool cdata );
+
     /// Return the styleUrl of the feature.
     QString styleUrl() const;
     /// Set the styleUrl of this feature to @p value.

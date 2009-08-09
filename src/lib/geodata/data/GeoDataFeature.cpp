@@ -407,6 +407,17 @@ void GeoDataFeature::setDescription( const QString &value)
     d->m_description = value;
 }
 
+bool GeoDataFeature::descriptionIsCDATA() const
+{
+    return d->m_descriptionCDATA;
+}
+
+void GeoDataFeature::setDescriptionCDATA( bool cdata )
+{
+    detach();
+    d->m_descriptionCDATA = cdata;
+}
+
 QString GeoDataFeature::styleUrl() const
 {
     return d->m_styleUrl;

@@ -92,6 +92,7 @@ void TestGeoDataWriter::countFeatures_data()
 //    This parser won't work because of the flaw that prevents single placemark files from loading
     QTest::newRow("New York") << parsers.value("NewYork.kml") << 1;
     QTest::newRow("New York Document") << parsers.value("NewYorkDocument.kml") << 2;
+    QTest::newRow("CDATATest") << parsers.value("CDATATest.kml") << 1;
 }
 
 void TestGeoDataWriter::countFeatures()
@@ -112,6 +113,7 @@ void TestGeoDataWriter::saveFile_data()
 
     QTest::newRow( "NewYork" ) << parsers.value("NewYork.kml");
     QTest::newRow( "NewYorkDocument") << parsers.value("NewYorkDocument.kml");
+    QTest::newRow("CDATATest") << parsers.value("CDATATest.kml");
 }
 
 void TestGeoDataWriter::saveFile()
@@ -139,6 +141,7 @@ void TestGeoDataWriter::saveAndLoad_data()
 
     QTest::newRow("NewYork") << parsers.value( "NewYork.kml" ) ;
     QTest::newRow("NewYorkDocument") << parsers.value( "NewYorkDocument.kml" );
+    QTest::newRow("CDATATest") << parsers.value("CDATATest.kml");
 }
 
 void TestGeoDataWriter::saveAndLoad()
@@ -159,6 +162,7 @@ void TestGeoDataWriter::saveAndLoad()
 
     GeoDataParser resultParser( GeoData_KML );
 
+    tempFile.reset();
     QVERIFY( resultParser.read( &tempFile ) );
 }
 

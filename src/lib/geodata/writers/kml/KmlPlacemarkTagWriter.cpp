@@ -41,7 +41,11 @@ bool KmlPlacemarkTagWriter::write( const GeoDataObject &node,
 
     if( !placemark.description().isEmpty() ) {
         writer.writeStartElement( "description" );
-        writer.writeCharacters( placemark.description() );
+        if( placemark.descriptionIsCDATA() ) {
+            writer.writeCDATA( placemark.description() );
+        } else {
+            writer.writeCharacters( placemark.description() );
+        }
         writer.writeEndElement();
     }
 

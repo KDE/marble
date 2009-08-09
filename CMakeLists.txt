@@ -31,7 +31,7 @@ endif( NOT QTONLY AND NOT KDE4_FOUND)
 if( QTONLY )
     option( BUILD_MARBLE_TESTS "build marble tests if building QTONLY " ON )
     if( BUILD_MARBLE_TESTS )
-        enable_testing()
+        INCLUDE(CTest)
     endif( BUILD_MARBLE_TESTS )
 else( QTONLY )
     # for KDE builds this gets set in the kdeedu CMakeLists.txt

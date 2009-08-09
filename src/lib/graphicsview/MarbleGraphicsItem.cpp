@@ -147,6 +147,11 @@ QRectF MarbleGraphicsItem::containsRect( const QPointF& point ) const
     return QRectF();
 }
 
+QList<QRectF> MarbleGraphicsItem::boundingRects() const
+{
+    return p()->boundingRects();
+}
+
 QSizeF MarbleGraphicsItem::size() const
 {
     return p()->m_size;

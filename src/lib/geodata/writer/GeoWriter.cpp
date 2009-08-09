@@ -28,8 +28,7 @@ bool GeoWriter::write(QIODevice* device, const QList<GeoDataFeature> &features)
 {
     setDevice( device );
     setAutoFormatting( true );
-
-    writeDTD("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+    writeStartDocument();
 
     //FIXME: write the starting tags. Possibly register a tag handler to do this
     // with a null string as the object name?

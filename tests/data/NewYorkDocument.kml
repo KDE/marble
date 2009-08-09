@@ -5,7 +5,7 @@
     <name>New York City</name>
     <description>New York City</description>
     <Point>
-      <coordinates>-74.006393,40.714172,0</coordinates>
+      <coordinates>-74.006393,40.714172</coordinates>
     </Point>
   </Placemark>
   <Placemark>
