@@ -88,6 +88,20 @@ GeoDataLatLonAltBox::GeoDataLatLonAltBox( const GeoDataLatLonBox & other )
 }
 
 
+GeoDataLatLonAltBox::GeoDataLatLonAltBox( const GeoDataCoordinates & coordinates )
+    : GeoDataLatLonBox(),
+      d( new GeoDataLatLonAltBoxPrivate )
+{
+    setWest( coordinates.longitude() );
+    setEast( coordinates.longitude() );
+    setNorth( coordinates.latitude() );
+    setSouth( coordinates.latitude() );
+    
+    d->m_minAltitude = coordinates.altitude();
+    d->m_maxAltitude = coordinates.altitude();
+}
+
+
 GeoDataLatLonAltBox::~GeoDataLatLonAltBox()
 {
     delete d;

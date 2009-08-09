@@ -13,11 +13,14 @@
 #define GEODATAREGION_H
 
 #include "GeoDataObject.h"
+#include "GeoDataLatLonAltBox.h"
+#include "GeoDataLod.h"
 
 
 namespace Marble
 {
 
+class GeoDataFeature;
 class GeoDataRegionPrivate;
 
 /*!
@@ -45,6 +48,7 @@ class GeoDataRegionPrivate;
 
 class GEODATA_EXPORT GeoDataRegion : public GeoDataObject {
 
+  public:
 /*!
     \brief Creates a new GeoDataRegion object that is not assigned to a \a feature.
     Naturally it's recommended to assign a feature or a link to the region (and
@@ -59,49 +63,25 @@ class GEODATA_EXPORT GeoDataRegion : public GeoDataObject {
     \brief Creates a new GeoDataRegion object that is associated to a \a feature.
     In the model the feature represents the parent object of the region.
 */
-    explicit GeoDataRegion( const GeoDataFeature & feature );
+    explicit GeoDataRegion( GeoDataFeature * feature );
 
-
-/*!
-    \brief Creates a new GeoDataRegion object that is associated to a \a link.
-    In the model the link represents the parent object of the region.
-*/
-    explicit GeoDataRegion( const GeoDataLink & link );
     
-
 /*!
     \brief Destroys a Region object.
 */
     virtual ~GeoDataRegion();
 
     
-    /// Provides type information for downcasting a GeoNode
+/*!
+    \brief Provides type information for downcasting a GeoNode
+*/
     virtual QString nodeType() const;
 
-    
-/*!
-    \brief Returns whether a feature or a link is considered to be visible.
-    The region is visible if the region is active and if the associated
-    latLonAltBox intersects with the camera's/observer's
-    \a viewLatLonAltBox.
-*/
-    bool isVisible( const GeoDataLatLonAltBox& viewLatLonAltBox ) const;
-
-    
-/*!
-    \brief Returns whether a feature or a link is considered to be active.
-    The value of the returned boolean is based on the lod property and its
-    minLodPixels and maxLodPixels values.
-*/
-    bool isActive() const;
-
 
 /*!
-    \brief Returns the suggested alpha level at which the feature is visible.
-    The alpha level is calculated by taking the minFadeExtent and maxFadeExtent
-    properties of the Level of Detail ("lod" object) into account.
+    \brief Assigns a feature associated as a parent
 */
-    qreal alpha() const;
+    void setParent( GeoDataFeature * feature );
 
     
 /*!
@@ -159,8 +139,7 @@ class GEODATA_EXPORT GeoDataRegion : public GeoDataObject {
 
 
  protected:
-    GeoDataRegionPrivate *p() const;
-    GeoDataRegion(GeoDataRegionPrivate* priv);
+    GeoDataRegionPrivate  * const d;
 };
 
 }

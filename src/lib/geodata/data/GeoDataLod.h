@@ -42,7 +42,8 @@ class GeoDataLodPrivate;
 */
 
 class GEODATA_EXPORT GeoDataLod : public GeoDataObject {
-    
+
+  public:
 /*!
     \brief Creates a new Level of Detail object.
 */

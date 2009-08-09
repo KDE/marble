@@ -72,7 +72,7 @@ GeoDataGeometry* GeoDataPlacemark::geometry() const
 }
 
 GeoDataCoordinates GeoDataPlacemark::coordinate() const
-{
+{    
     if( p()->m_geometry && 
       ( p()->m_geometry->geometryId() == GeoDataLineStringId || 
         p()->m_geometry->geometryId() == GeoDataLinearRingId ) ) {

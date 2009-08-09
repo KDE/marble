@@ -51,9 +51,10 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
 
  public:
     GeoDataLatLonAltBox();
-    GeoDataLatLonAltBox( const GeoDataLatLonAltBox & );
-    GeoDataLatLonAltBox( const GeoDataLatLonBox & );
-
+    GeoDataLatLonAltBox( const GeoDataLatLonAltBox & other );
+    GeoDataLatLonAltBox( const GeoDataLatLonBox & other );
+    GeoDataLatLonAltBox( const GeoDataCoordinates & coordinates );
+    
     virtual ~GeoDataLatLonAltBox();
 
     GeoDataLatLonAltBox& operator=( const GeoDataLatLonAltBox& other );

@@ -54,6 +54,7 @@ const char* GeoDataPlacemarkType = "GeoDataPlacemark";
 const char* GeoDataPointType = "GeoDataPoint";
 const char* GeoDataPolygonType = "GeoDataPolygon";
 const char* GeoDataPolyStyleType = "GeoDataPolyStyle";
+const char* GeoDataRegionType = "GeoDataRegion";
 const char* GeoDataStyleSelectorType = "GeoDataStyleSelector";
 const char* GeoDataStyleType = "GeoDataStyle";
 const char* GeoDataSyleMapType = "GeoDataStyleMap";

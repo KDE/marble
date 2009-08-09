@@ -140,13 +140,6 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     virtual bool intersects( const GeoDataLatLonBox & ) const;
 
     /**
-     * @brief Create a bounding box from a set of geographic points.
-     * @return the bounding box that contains the geographic points.
-     * NOTE: Use fromLineString for line strings!
-     */
-    static GeoDataLatLonBox fromCoordinates( const QVector<GeoDataCoordinates*>& coordinates );
-
-    /**
      * @brief Create the smallest bounding box from a line string.
      * @return the smallest bounding box that contains the linestring.
      */
