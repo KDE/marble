@@ -34,7 +34,7 @@ namespace OsmNamefinder
 {
 
 static GeoTagHandlerRegistrar
-handler( GeoTagHandler::QualifiedName( tag_named, tag_namespace ),
+namedTagHandler( GeoTagHandler::QualifiedName( tag_named, tag_namespace ),
          new NamedTagHandler );
 
 

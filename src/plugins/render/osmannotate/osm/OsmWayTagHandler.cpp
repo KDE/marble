@@ -21,7 +21,7 @@ namespace Marble
 namespace osm
 {
 
-static GeoTagHandlerRegistrar s_handlerbounds( GeoTagHandler::QualifiedName(osmTag_way, ""),
+static GeoTagHandlerRegistrar osmWayTagHandler( GeoTagHandler::QualifiedName(osmTag_way, ""),
                                                new OsmWayTagHandler() );
 
 GeoNode* OsmWayTagHandler::parse( GeoParser& parser ) const

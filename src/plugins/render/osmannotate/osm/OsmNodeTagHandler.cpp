@@ -24,7 +24,7 @@ namespace osm
 
 QMap<int, OsmNodeGraphicsItem*> OsmNodeTagHandler::nodeRef;
 
-static GeoTagHandlerRegistrar s_handlerbounds( GeoTagHandler::QualifiedName(osmTag_node, ""),
+static GeoTagHandlerRegistrar osmNodeTagHandler( GeoTagHandler::QualifiedName(osmTag_node, ""),
                                                new OsmNodeTagHandler() );
 
 GeoNode* OsmNodeTagHandler::parse ( GeoParser& parser) const
