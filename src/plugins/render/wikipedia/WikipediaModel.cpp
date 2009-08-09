@@ -38,7 +38,7 @@ WikipediaModel::WikipediaModel( QObject *parent )
     : AbstractDataPluginModel( "wikipedia", parent ),
       m_showThumbnail( true )
 {
-    m_wikipediaIcon.addFile( MarbleDirs::path( "svg/wikipedia.svg" ) );
+    m_wikipediaIcon.addFile( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) );
 
     m_languageCode = MarbleLocale::languageCode();
 }
