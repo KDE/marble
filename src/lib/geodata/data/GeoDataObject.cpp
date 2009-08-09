@@ -15,6 +15,9 @@
 #include <QtCore/QtGlobal>
 #include <QtCore/QDataStream>
 
+#include "GeoDataObject.h"
+
+
 namespace Marble
 {
 

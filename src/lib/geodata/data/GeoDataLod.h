@@ -68,7 +68,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject {
     A value of 0 would mean no minimum number of pixels which is also the
     standard value.
 */
-    int minLodPixels() const;
+    qreal minLodPixels() const;
 
     
 /*!
@@ -76,17 +76,17 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject {
     Sets the minimum number of \a pixels the region has to be projected on for
     the feature to be considered active.
 */
-    void setMinLodPixels( int pixels );
+    void setMinLodPixels( qreal pixels );
 
     
 /*!
     \brief Returns the maximum size that is needed for the region to be active
     Returns the maximum number of pixels the region has to be projected on for
     the feature to be considered active. 
-    A value of 0 would mean no minimum number of pixels which is also the
+    A value of -1 would mean no minimum number of pixels which is also the
     standard value.
 */
-    int maxLodPixels() const;
+    qreal maxLodPixels() const;
 
     
 /*!
@@ -94,7 +94,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject {
     Sets the maximum number of \a pixels the region has to be projected on for
     the feature to be considered active.
 */
-    void setMaxLodPixels( int pixels );
+    void setMaxLodPixels( qreal pixels );
    
 
 /*!
@@ -102,7 +102,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject {
     Returns the distance (counted from minLodPixels) over which the feature
     fades in or out. 
 */
-    int minFadeExtent() const;
+    qreal minFadeExtent() const;
 
     
 /*!
@@ -110,7 +110,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject {
     Sets the distance (counted from minLodPixels) over which the feature fades
     in or out. 
 */
-    void setMinFadeExtent( int pixels );
+    void setMinFadeExtent( qreal pixels );
 
     
 /*!
@@ -118,7 +118,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject {
     Returns the distance (counted from maxLodPixels) over which the feature
     fades in or out. 
 */
-    int maxFadeExtent() const;
+    qreal maxFadeExtent() const;
 
     
 /*!
@@ -126,7 +126,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject {
     Sets the distance (counted from maxLodPixels) over which the feature fades
     in or out. 
 */
-    void setMaxFadeExtent( int pixels );
+    void setMaxFadeExtent( qreal pixels );
     
     
     // Serialization
@@ -145,8 +145,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject {
 
     
  protected:
-    GeoDataLodPrivate *p() const;
-    GeoDataLod(GeoDataLodPrivate* priv);
+    GeoDataLodPrivate  * const d;
 };
 
 }
