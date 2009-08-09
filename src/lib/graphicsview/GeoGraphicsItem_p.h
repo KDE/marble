@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef SCREENGRAPHICSITEMPRIVATE_H
-#define SCREENGRAPHICSITEMPRIVATE_H
+#ifndef GEOGRAPHICSITEMPRIVATE_H
+#define GEOGRAPHICSITEMPRIVATE_H
 
 
 // Marble
@@ -116,4 +116,4 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
 
 }
 
-#endif // SCREENGRAPHICSITEMPRIVATE_H
+#endif // GEOGRAPHICSITEMPRIVATE_H
