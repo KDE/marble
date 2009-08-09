@@ -1,9 +1,5 @@
 project(marble)
 
-if( NOT QTONLY )
-    kde4_no_enable_final(marble)
-endif( NOT QTONLY )
-
 ####################################################
 # CMake Settings 
 SET(CMAKE_COLOR_MAKEFILE ON)
@@ -39,6 +35,7 @@ if( QTONLY )
     endif( BUILD_MARBLE_TESTS )
 else( QTONLY )
     # for KDE builds this gets set in the kdeedu CMakeLists.txt
+    kde4_no_enable_final(marble)
     set( BUILD_MARBLE_TESTS ON )
 endif( QTONLY )
 
