@@ -16,9 +16,9 @@
 namespace Marble
 {
 #ifdef Q_OS_MACX
-# define defaultSize 10
+static const int defaultSize = 10;
 #else
-# define defaultSize 8
+static const int defaultSize = 8;
 #endif
 
 
