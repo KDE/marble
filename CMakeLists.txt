@@ -1,5 +1,9 @@
 project(marble)
 
+if( NOT QTONLY )
+    kde4_no_enable_final(marble)
+endif( NOT QTONLY )
+
 ####################################################
 # CMake Settings 
 SET(CMAKE_COLOR_MAKEFILE ON)
