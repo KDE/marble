@@ -32,8 +32,8 @@
 
 		 <legalnotice>&FDLNotice;</legalnotice>
 
-		 <date>2009-01-24</date>
-		 <releaseinfo>0.7</releaseinfo>
+		 <date>2009-08-04</date>
+		 <releaseinfo>0.8</releaseinfo>
 
 		 <abstract>
 			<para>&marble; is a geographical atlas and a virtual desktop globe 
@@ -112,6 +112,9 @@
          <para>
             In case you should get lost you can always reset the viewing angle and zoom level back to the point where we started off: Just hit the <guilabel>Home</guilabel> button (or the <keycap>Home</keycap> button on your keyboard). To set a home location click with the &RMB; on a location in the maps and select <guimenuitem>Set Home Location</guimenuitem> in the context menu.
          </para>
+	 <para>A click onto the status bar using the right mouse button offers a menu which lets you customize the appearance of the status bar. 
+	 You can show the position, altitude, the current tile level and a progress indicator that displays the status of the map data download. 
+	 </para>
 	 </chapter>
 
      <chapter id="map-views">
@@ -258,7 +261,7 @@
                                      <keycombo action="simul">&Ctrl;<keycap>O</keycap></keycombo>
                                  </shortcut>
                                  <guimenu>File</guimenu>
-                                 <guimenuitem>Open Map...</guimenuitem>
+                                 <guimenuitem>Open...</guimenuitem>
                          </menuchoice></term>
                          <listitem><para><action>Opens</action> a map file.</para></listitem>
                      </varlistentry>
@@ -268,9 +271,9 @@
                                      <keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo>
                                  </shortcut>
                                  <guimenu>File</guimenu>
-                                 <guimenuitem>Maps...</guimenuitem>
+                                 <guimenuitem>Download Maps...</guimenuitem>
                          </menuchoice></term>
-                         <listitem><para><action>Displays</action> the <guilabel>Get Hot New Stuff!</guilabel> dialog to download additional maps for &marble;.</para></listitem>
+                         <listitem><para><action>Displays</action> the <guilabel>Get Hot New Stuff!</guilabel> dialog to download additional maps for &marble;, among others maps for Mars and Venus.</para></listitem>
                      </varlistentry>
                      <varlistentry>
                          <term><menuchoice>
@@ -371,6 +374,14 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 <varlistentry>
 <term><menuchoice>
 <guimenu>View</guimenu>
+<guimenuitem>Online Services</guimenuitem>
+</menuchoice></term>
+<listitem><para>The <guimenuitem>Wikipedia</guimenuitem> plugin displays georeferenced Wikipedia articles as an icon on the map. A click onto the icon launches a browser window that displays the referenced site. The data is provided through a webservice via GeoNames.org. Likewise a <guimenuitem>Photos</guimenuitem> plugin currently provides photos via the FlickR photo sharing site</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
 <guimenuitem>Clouds</guimenuitem>
 </menuchoice></term>
 <listitem><para><action>Show</action> real-time cloud cover. A real time cloud map that gets updated every 3 hours. It uses GOES, METEOSAT, and GMS satellite imagery downloaded from the Geostationary Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet Project</para></listitem>
@@ -387,7 +398,7 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 <varlistentry>
 <term><menuchoice>
 <guimenu>View</guimenu>
-<guimenuitem>Sun Control</guimenuitem>
+<guimenuitem>Sun Control...</guimenuitem>
 </menuchoice></term>
 <listitem><para><action>Displays</action> the <guilabel>Sun Control</guilabel> where you can set date and time, the simulation time speed, the <guilabel>Sun Shading</guilabel> and center the map on sun position.</para></listitem>
 </varlistentry>
@@ -494,6 +505,15 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 </varlistentry>
 
 <varlistentry>
+<term><guilabel>Graphics system</guilabel></term>
+<listitem>
+<para>Specifies the graphics system - <guilabel>Native X11</guilabel> or <guilabel>Raster (Software rendering)</guilabel> - 
+that Qt uses to draw the map. Changing this setting might be a good idea if there are performance issues with 
+the system's graphics drivers. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
 <term><guilabel>During animations</guilabel></term>
 <listitem>
 <para>Specifies the map quality that gets displayed during map animations (&eg; while dragging the globe). Especially on slow machines it is advisable to set this option to <guilabel>Low Quality</guilabel> as this will give better speed.</para>
@@ -508,7 +528,7 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>Default Map Font</guilabel></term>
+<term><guilabel>Default map font</guilabel></term>
 <listitem>
 <para>The default font that gets used on the map.</para>
 </listitem>
@@ -611,6 +631,36 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 </varlistentry>
 
 <varlistentry>
+<term><guilabel>Crosshairs</guilabel></term>
+<listitem>
+<para>Enable this to display a small crosshair in the center of the map.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>File view</guilabel></term>
+<listitem>
+<para>Displays a list of currently opened files.</para>
+</listitem>
+</varlistentry>
+
+<!-- enabled in released version?
+<varlistentry>
+<term><guilabel>GeoRenderer Plugin</guilabel></term>
+<listitem>
+<para>This plugin draws the map content (e.g. provided via a KML file).</para>
+</listitem>
+</varlistentry>
+-->
+
+<varlistentry>
+<term><guilabel>Coordinate Grid</guilabel></term>
+<listitem>
+<para>A plugin that shows a coordinate grid.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
 <term><guilabel>Scale Bar</guilabel></term>
 <listitem>
 <para>This is a float item that provides a map scale.</para>
@@ -618,23 +668,23 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>Crosshairs</guilabel></term>
+<term><guilabel>Navigation</guilabel></term>
 <listitem>
-<para>Enable this to display a small crosshair in the center of the map.</para>
+<para>Displays the mouse control to zoom and move as float item on the map.</para>
 </listitem>
 </varlistentry>
-<!-- enabled in released version?
-<varlistentry>
-<term><guilabel>Geodata Plugin</guilabel></term>
-<listitem>
-<para>This is a simple test plugin.</para>
-</listitem>
-</varlistentry>
--->
+
 <varlistentry>
 <term><guilabel>Overview Map</guilabel></term>
 <listitem>
 <para>This is a float item that provides an overview map.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Photos</guilabel></term>
+<listitem>
+<para>Automatically downloads images from around the world in preference to their popularity.</para>
 </listitem>
 </varlistentry>
 
@@ -646,9 +696,9 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 </varlistentry>
 
 <varlistentry>
-<term><guilabel>Navigation</guilabel></term>
+<term><guilabel>Wikipedia Articles</guilabel></term>
 <listitem>
-<para>Displays the mouse control to zoom and move as float item on the map.</para>
+<para>Automatically downloads Wikipedia articles and shows them on the right position on the map.</para>
 </listitem>
 </varlistentry>
 
