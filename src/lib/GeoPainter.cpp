@@ -9,6 +9,7 @@
 
 
 #include "GeoPainter.h"
+#include "GeoPainter_p.h"
 
 #include <QtCore/QDebug>
 #include <QtCore/QList>
@@ -28,169 +29,155 @@
 
 // #define MARBLE_DEBUG
 
+using namespace Marble;
 
-namespace Marble
-{
-
-class GeoPainterPrivate
-{
- public:
-    GeoPainterPrivate( ViewportParams *viewport, MapQuality mapQuality )
+GeoPainterPrivate::GeoPainterPrivate( ViewportParams *viewport, MapQuality mapQuality )
         : m_viewport( viewport ),
-          m_mapQuality( mapQuality ),
-          m_x( new qreal[100] )
-    {
+        m_mapQuality( mapQuality ),
+        m_x( new qreal[100] )
+{
+}
+
+GeoPainterPrivate::~GeoPainterPrivate()
+{
+    delete[] m_x;
+}
+
+void GeoPainterPrivate::createPolygonsFromLineString( const GeoDataLineString & lineString,
+                                                      QVector<QPolygonF *> &polygons )
+{
+    AbstractProjection *projection = m_viewport->currentProjection();
+
+    projection->screenCoordinates( lineString, m_viewport, polygons );
+}
+
+void GeoPainterPrivate::createPolygonsFromLinearRing( const GeoDataLinearRing & linearRing,
+                                                      QVector<QPolygonF *> &polygons )
+{
+    AbstractProjection *projection = m_viewport->currentProjection();
+
+    projection->screenCoordinates( linearRing, m_viewport, polygons );
+}
+
+void GeoPainterPrivate::createAnnotationLayout (  qreal x, qreal y,
+                                                  QSizeF bubbleSize,
+                                                  qreal bubbleOffsetX, qreal bubbleOffsetY,
+                                                  qreal xRnd, qreal yRnd,
+                                                  QPainterPath& path, QRectF& rect )
+{
+    // TODO: MOVE this into an own Annotation class
+    qreal arrowPosition = 0.3;
+    qreal arrowWidth = 12.0;
+
+    qreal width =  bubbleSize.width();
+    qreal height = bubbleSize.height();
+
+    qreal dx =  ( bubbleOffsetX > 0 ) ? 1.0 : -1.0; // x-Mirror
+    qreal dy =  ( bubbleOffsetY < 0 ) ? 1.0 : -1.0; // y-Mirror
+
+    qreal x0 =  ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) - xRnd *dx;
+    qreal x1 =  ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd );
+    qreal x2 =  ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) + xRnd * dx;
+    qreal x3 =  ( x + bubbleOffsetX ) - dx * arrowWidth / 2.0;
+    qreal x4 =  ( x + bubbleOffsetX ) + dx * arrowWidth / 2.0;
+    qreal x5 =  ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd )- xRnd * dx;
+    qreal x6 =  ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd );
+    qreal x7 =  ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd ) + xRnd * dx;
+
+    qreal y0 =  ( y + bubbleOffsetY );
+    qreal y1 =  ( y + bubbleOffsetY ) - dy * yRnd;
+    qreal y2 =  ( y + bubbleOffsetY ) - dy * 2 * yRnd;
+    qreal y5 =  ( y + bubbleOffsetY ) - dy * ( height - 2 * yRnd );
+    qreal y6 =  ( y + bubbleOffsetY ) - dy * ( height - yRnd );
+    qreal y7 =  ( y + bubbleOffsetY ) - dy * height;
+
+    QPointF p1 ( x, y ); // pointing point
+    QPointF p2 ( x4, y0 );
+    QPointF p3 ( x6, y0 );
+    QPointF p4 ( x7, y1 );
+    QPointF p5 ( x7, y6 );
+    QPointF p6 ( x6, y7 );
+    QPointF p7 ( x1, y7 );
+    QPointF p8 ( x0, y6 );
+    QPointF p9 ( x0, y1 );
+    QPointF p10( x1, y0 );
+    QPointF p11( x3, y0 );
+
+    QRectF bubbleBoundingBox(  QPointF( x0, y7 ), QPointF( x7, y0 ) );
+
+    path.moveTo( p1 );
+    path.lineTo( p2 );
+
+    path.lineTo( p3 );
+    QRectF bottomRight( QPointF( x5, y2 ), QPointF( x7, y0 ) );
+    path.arcTo( bottomRight, 270.0, 90.0 );
+
+    path.lineTo( p5 );
+    QRectF topRight( QPointF( x5, y7 ), QPointF( x7, y5 ) );
+    path.arcTo( topRight, 0.0, 90.0 );
+
+    path.lineTo( p7 );
+    QRectF topLeft( QPointF( x0, y7 ), QPointF( x2, y5 ) );
+    path.arcTo( topLeft, 90.0, 90.0 );
+
+    path.lineTo( p9 );
+    QRectF bottomLeft( QPointF( x0, y2 ), QPointF( x2, y0 ) );
+    path.arcTo( bottomLeft, 180.0, 90.0 );
+
+    path.lineTo( p10 );
+    path.lineTo( p11 );
+    path.lineTo( p1 );
+
+    qreal left   = ( dx > 0 ) ? x1 : x6;
+    qreal right  = ( dx > 0 ) ? x6 : x1;
+    qreal top    = ( dy > 0 ) ? y6 : y1;
+    qreal bottom = ( dy > 0 ) ? y1 : y6;
+
+    rect.setTopLeft( QPointF( left, top ) );
+    rect.setBottomRight( QPointF( right, bottom ) );
+}
+
+GeoDataLinearRing GeoPainterPrivate::createLinearRingFromGeoRect( const GeoDataCoordinates & centerCoordinates,
+                                                                  qreal width, qreal height )
+{
+    qreal lon = 0.0;
+    qreal lat = 0.0;
+    qreal altitude = centerCoordinates.altitude();
+    centerCoordinates.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
+
+    qreal west = GeoDataCoordinates::normalizeLon( lon - width * 0.5 );
+    qreal east =  GeoDataCoordinates::normalizeLon( lon + width * 0.5 );
+
+    qreal north = GeoDataCoordinates::normalizeLat( lat + height * 0.5 );
+    qreal south = GeoDataCoordinates::normalizeLat( lat - height * 0.5 );
+
+    GeoDataCoordinates southWest( west, south,
+                                  altitude, GeoDataCoordinates::Degree );
+    GeoDataCoordinates southEast( east, south,
+                                  altitude, GeoDataCoordinates::Degree );
+    GeoDataCoordinates northEast( east, north,
+                                  altitude, GeoDataCoordinates::Degree );
+    GeoDataCoordinates northWest( west, north,
+                                  altitude, GeoDataCoordinates::Degree );
+
+    GeoDataLinearRing rectangle( Tessellate | RespectLatitudeCircle );
+
+    // If the width of the rect is larger as 180 degree, we have to enforce the long way.
+    if ( width >= 180 ) {
+        qreal center = lon;
+        GeoDataCoordinates southCenter( center, south, altitude, GeoDataCoordinates::Degree );
+        GeoDataCoordinates northCenter( center, north, altitude, GeoDataCoordinates::Degree );
+
+        rectangle << southWest << southCenter << southEast << northEast << northCenter << northWest;
+    }
+    else {
+        rectangle << southWest << southEast << northEast << northWest;
     }
 
+    return rectangle;
+}
 
-    ~GeoPainterPrivate()
-    {
-        delete[] m_x;
-    }
-
-
-    void createPolygonsFromLineString( const GeoDataLineString & lineString, 
-                   QVector<QPolygonF *> &polygons )
-    {
-        AbstractProjection *projection = m_viewport->currentProjection();
-
-        projection->screenCoordinates( lineString, m_viewport, polygons );
-    }
-
-
-    void createPolygonsFromLinearRing( const GeoDataLinearRing & linearRing, 
-                   QVector<QPolygonF *> &polygons )
-    {
-        AbstractProjection *projection = m_viewport->currentProjection();
-
-        projection->screenCoordinates( linearRing, m_viewport, polygons );
-    }
-
-
-    void createAnnotationLayout (  qreal x, qreal y,
-                                   QSizeF bubbleSize,
-                                   qreal bubbleOffsetX, qreal bubbleOffsetY,
-                                   qreal xRnd, qreal yRnd,
-                                   QPainterPath& path, QRectF& rect )
-    {
-        // TODO: MOVE this into an own Annotation class
-        qreal arrowPosition = 0.3;
-        qreal arrowWidth = 12.0;
-
-        qreal width =  bubbleSize.width();
-        qreal height = bubbleSize.height();
-
-        qreal dx =  ( bubbleOffsetX > 0 ) ? 1.0 : -1.0; // x-Mirror
-        qreal dy =  ( bubbleOffsetY < 0 ) ? 1.0 : -1.0; // y-Mirror
-
-        qreal x0 =  ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) - xRnd *dx;
-        qreal x1 =  ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd );
-        qreal x2 =  ( x + bubbleOffsetX ) - dx * ( 1.0 - arrowPosition ) * ( width - 2.0 * xRnd ) + xRnd * dx;
-        qreal x3 =  ( x + bubbleOffsetX ) - dx * arrowWidth / 2.0;
-        qreal x4 =  ( x + bubbleOffsetX ) + dx * arrowWidth / 2.0;
-        qreal x5 =  ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd )- xRnd * dx;
-        qreal x6 =  ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd );
-        qreal x7 =  ( x + bubbleOffsetX ) + dx * arrowPosition * ( width - 2.0 * xRnd ) + xRnd * dx;
-
-        qreal y0 =  ( y + bubbleOffsetY );
-        qreal y1 =  ( y + bubbleOffsetY ) - dy * yRnd;
-        qreal y2 =  ( y + bubbleOffsetY ) - dy * 2 * yRnd;
-        qreal y5 =  ( y + bubbleOffsetY ) - dy * ( height - 2 * yRnd );
-        qreal y6 =  ( y + bubbleOffsetY ) - dy * ( height - yRnd );
-        qreal y7 =  ( y + bubbleOffsetY ) - dy * height;
-
-        QPointF p1 ( x, y ); // pointing point
-        QPointF p2 ( x4, y0 );
-        QPointF p3 ( x6, y0 );
-        QPointF p4 ( x7, y1 );
-        QPointF p5 ( x7, y6 );
-        QPointF p6 ( x6, y7 );
-        QPointF p7 ( x1, y7 );
-        QPointF p8 ( x0, y6 );
-        QPointF p9 ( x0, y1 );
-        QPointF p10( x1, y0 );
-        QPointF p11( x3, y0 );
-
-        QRectF bubbleBoundingBox(  QPointF( x0, y7 ), QPointF( x7, y0 ) );
-
-        path.moveTo( p1 );
-        path.lineTo( p2 );
-
-        path.lineTo( p3 );
-        QRectF bottomRight( QPointF( x5, y2 ), QPointF( x7, y0 ) );
-        path.arcTo( bottomRight, 270.0, 90.0 );
-
-        path.lineTo( p5 );
-        QRectF topRight( QPointF( x5, y7 ), QPointF( x7, y5 ) );
-        path.arcTo( topRight, 0.0, 90.0 );
-
-        path.lineTo( p7 );
-        QRectF topLeft( QPointF( x0, y7 ), QPointF( x2, y5 ) );
-        path.arcTo( topLeft, 90.0, 90.0 );
-
-        path.lineTo( p9 );
-        QRectF bottomLeft( QPointF( x0, y2 ), QPointF( x2, y0 ) );
-        path.arcTo( bottomLeft, 180.0, 90.0 );
-
-        path.lineTo( p10 );
-        path.lineTo( p11 );
-        path.lineTo( p1 );
-
-        qreal left   = ( dx > 0 ) ? x1 : x6;
-        qreal right  = ( dx > 0 ) ? x6 : x1;
-        qreal top    = ( dy > 0 ) ? y6 : y1;
-        qreal bottom = ( dy > 0 ) ? y1 : y6;
-
-        rect.setTopLeft( QPointF( left, top ) );
-        rect.setBottomRight( QPointF( right, bottom ) );
-    }
-
-    GeoDataLinearRing geoRectToLinearRing( const GeoDataCoordinates & centerCoordinates,
-                                           qreal width, qreal height )
-    {
-        qreal lon = 0.0;
-        qreal lat = 0.0;
-        qreal altitude = centerCoordinates.altitude();
-        centerCoordinates.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
-
-        qreal west = GeoDataCoordinates::normalizeLon( lon - width * 0.5 );
-        qreal east =  GeoDataCoordinates::normalizeLon( lon + width * 0.5 );
-
-        qreal north = GeoDataCoordinates::normalizeLat( lat + height * 0.5 );
-        qreal south = GeoDataCoordinates::normalizeLat( lat - height * 0.5 );
-
-        GeoDataCoordinates southWest( west, south,
-                                      altitude, GeoDataCoordinates::Degree );
-        GeoDataCoordinates southEast( east, south,
-                                      altitude, GeoDataCoordinates::Degree );
-        GeoDataCoordinates northEast( east, north,
-                                      altitude, GeoDataCoordinates::Degree );
-        GeoDataCoordinates northWest( west, north,
-                                      altitude, GeoDataCoordinates::Degree );
-
-        GeoDataLinearRing rectangle( Tessellate | RespectLatitudeCircle );
-
-        // If the width of the rect is larger as 180 degree, we have to enforce the long way.
-        if ( width >= 180 ) {
-            qreal center = lon;
-            GeoDataCoordinates southCenter( center, south, altitude, GeoDataCoordinates::Degree );
-            GeoDataCoordinates northCenter( center, north, altitude, GeoDataCoordinates::Degree );
-
-            rectangle << southWest << southCenter << southEast << northEast << northCenter << northWest;
-        }
-        else {
-            rectangle << southWest << southEast << northEast << northWest;
-        }
-
-        return rectangle;
-    }
-
-
-    ViewportParams  *m_viewport;
-    MapQuality       m_mapQuality;
-    qreal             *m_x;
-};
-
+// -------------------------------------------------------------------------------------------------
 
 GeoPainter::GeoPainter( QPaintDevice* pd, ViewportParams *viewport,
 			MapQuality mapQuality, bool clip )
@@ -812,7 +799,7 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates,
         }
     }
     else {
-        drawPolygon( d->geoRectToLinearRing( centerCoordinates, width, height ),
+        drawPolygon( d->createLinearRingFromGeoRect( centerCoordinates, width, height ),
                      Qt::OddEvenFill );
     }
 }
@@ -848,7 +835,7 @@ QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinate
         return regions;
     }
     else {
-        return regionFromPolygon( d->geoRectToLinearRing( centerCoordinates, width, height ),
+        return regionFromPolygon( d->createLinearRingFromGeoRect( centerCoordinates, width, height ),
                                   Qt::OddEvenFill, strokeWidth );
     }
 }
@@ -979,6 +966,4 @@ void GeoPainter::drawText ( const QPointF & position, const QString & text )
 void GeoPainter::drawText ( const QPoint & position, const QString & text )
 {
     QPainter::drawText( position, text );
-}
-
 }
