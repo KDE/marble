@@ -49,6 +49,8 @@ bool KmlPointTagWriter::write( const GeoDataObject &node,
 
     writer.writeEndElement();
     writer.writeEndElement();
+
+    return true;
 }
 
 }
