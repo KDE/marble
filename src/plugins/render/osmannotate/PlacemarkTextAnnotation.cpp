@@ -152,16 +152,17 @@ void PlacemarkTextAnnotation::setDescription( const QString &description )
     m_textEditor->setDescription( description );
 }
 
-GeoDataGeometry PlacemarkTextAnnotation::geometry() const
+GeoDataPoint PlacemarkTextAnnotation::geometry() const
 {
-    return GeoDataPoint( coordinate() );
+    GeoDataPoint point( coordinate() );
+    return point;
 }
 
 void PlacemarkTextAnnotation::setGeometry( const GeoDataGeometry &geometry )
 {
     //FIXME: undefined reference
 //    if( geometry.nodeType() == GeoDataTypes::GeoDataPointType ) {
-        setCoordinate( GeoDataCoordinates( static_cast<GeoDataPoint>(geometry) ) );
+        static_cast<GeoDataPoint>(geometry);
 //    }
 }
 

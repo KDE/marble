@@ -19,13 +19,15 @@
 #include <QtGui/QAction>
 #include "AbstractProjection.h"
 #include "AreaAnnotation.h"
-#include "MarbleDirs.h"
-#include "GeoPainter.h"
+#include "GeoDataDocument.h"
 #include "GeoDataParser.h"
+#include "GeoPainter.h"
 #include "GeoWriter.h"
+#include "MarbleDirs.h"
 #include "MarbleWidget.h"
 #include "osm/OsmBoundsGraphicsItem.h"
 #include "PlacemarkTextAnnotation.h"
+#include "TextAnnotation.h"
 
 namespace Marble
 {
@@ -231,11 +233,17 @@ void OsmAnnotatePlugin::loadOsmFile()
     }
 }
 
-void OsmAnnotatePlugin::saveOsmFile()
+void OsmAnnotatePlugin::saveAnnotationFile()
 {
-    QList<GeoDataFeature> features;
-    GeoDataPlacemark test;
-    features.append( test );
+    GeoDataDocument document;
+
+    QList<TextAnnotation*> allAnnotations = annotations();
+
+    TextAnnotation* annotation;
+    foreach( annotation, allAnnotations ) {
+        document.append( annotation->toGeoData() );
+    }
+
     QString filename;
     filename = QFileDialog::getSaveFileName( 0, tr("Save Annotation File"),
                             QString(),
@@ -252,9 +260,54 @@ void OsmAnnotatePlugin::saveOsmFile()
         // Open file in right mode
         file.open( QIODevice::ReadWrite );
 
-        if ( !writer.write( &file, features ) ) {
+        if ( !writer.write( &file, document ) ) {
             qWarning( "Could not write the file." );
         }
+    }
+}
+
+void OsmAnnotatePlugin::loadAnnotationFile()
+{
+    //load the file here
+    QString filename;
+    filename = QFileDialog::getOpenFileName(0, tr("Open Annotation File"),
+                            QString(),
+                            tr("All Supported Files (*.kml);;Kml Annotation file (*.kml)"));
+
+    if ( ! filename.isNull() ) {
+
+        GeoDataParser parser( GeoData_KML );
+
+        QFile file( filename );
+        if ( !file.exists() ) {
+            qWarning( "File does not exist!" );
+            return;
+        }
+
+        // Open file in right mode
+        file.open( QIODevice::ReadOnly );
+
+        if ( !parser.read( &file ) ) {
+            qWarning( "Could not parse file!" );
+            //do not quit on a failed read!
+            //return
+        }
+        GeoDataDocument* document = dynamic_cast<GeoDataDocument*>(parser.releaseDocument() );
+        Q_ASSERT( document );
+
+        file.close();
+
+        QVector<GeoDataFeature>::ConstIterator it = document->constBegin();
+        for( ; it < document->constEnd(); ++it ) {
+            PlacemarkTextAnnotation* annotation = new PlacemarkTextAnnotation();
+            annotation->setName( (*it).name() );
+            annotation->setDescription( (*it).description() );
+            annotation->setCoordinate( GeoDataPlacemark((*it)).coordinate() );
+            model.append( annotation );
+        }
+
+        delete document;
+        emit repaintNeeded(QRegion());
     }
 }
 
@@ -375,7 +428,8 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     QAction*    m_beginSeparator;
     QAction*    m_endSeparator;
     QAction*    m_loadOsmFile;
-    QAction*    m_saveOsmFile;
+    QAction*    m_saveAnnotationFile;
+    QAction*    m_loadAnnotationFile;
     QAction*    m_enableInputAction;
 
     m_addPlacemark = new QAction(this);
@@ -397,10 +451,15 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     connect( m_loadOsmFile, SIGNAL(triggered()),
              this, SLOT(loadOsmFile()) );
 
-    m_saveOsmFile = new QAction( this );
-    m_saveOsmFile->setText( tr("Save Osm File") );
-    connect( m_saveOsmFile, SIGNAL(triggered()),
-             this, SLOT(saveOsmFile()) );
+    m_saveAnnotationFile = new QAction( this );
+    m_saveAnnotationFile->setText( tr("Save Annotation File") );
+    connect( m_saveAnnotationFile, SIGNAL(triggered()),
+             this, SLOT(saveAnnotationFile()) );
+
+    m_loadAnnotationFile = new QAction( this );
+    m_loadAnnotationFile->setText( tr("Load Annotation File" ) );
+    connect( m_loadAnnotationFile, SIGNAL(triggered()),
+             this, SLOT(loadAnnotationFile()) );
 
     m_beginSeparator = new QAction( this );
     m_beginSeparator->setSeparator( true );
@@ -421,7 +480,8 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     group->addAction( m_addPlacemark );
     group->addAction( m_drawPolygon );
     group->addAction( m_loadOsmFile );
-    group->addAction( m_saveOsmFile );
+    group->addAction( m_saveAnnotationFile );
+    group->addAction( m_loadAnnotationFile );
     group->addAction( m_endSeparator );
 
     actions->append( initial );
@@ -438,6 +498,20 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     m_toolbarActions = toolbarActions;
 
     emit actionGroupsChanged();
+}
+
+QList<TextAnnotation*> OsmAnnotatePlugin::annotations() const
+{
+    QList<TextAnnotation*> tmpAnnotations;
+    TmpGraphicsItem* item;
+    foreach( item, model ) {
+        TextAnnotation* annotation = dynamic_cast<TextAnnotation*>(item);
+        if( annotation ) {
+            tmpAnnotations.append( annotation );
+        }
+    }
+
+    return tmpAnnotations;
 }
 
 }

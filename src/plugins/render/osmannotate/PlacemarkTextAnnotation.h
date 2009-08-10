@@ -37,7 +37,7 @@ public:
     virtual void setName( const QString &name );
     virtual QString description() const;
     virtual void setDescription( const QString &description );
-    virtual GeoDataGeometry geometry() const;
+    virtual GeoDataPoint geometry() const;
     virtual void setGeometry( const GeoDataGeometry &geometry );
 
 private:

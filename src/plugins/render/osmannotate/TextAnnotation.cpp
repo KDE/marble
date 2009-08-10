@@ -12,6 +12,8 @@
 
 #include "GeoDataPlacemark.h"
 
+#include <QtCore/QDebug>
+
 
 namespace Marble{
 
@@ -33,8 +35,8 @@ GeoDataPlacemark TextAnnotation::toGeoData() const
     placemark.setDescriptionCDATA( true );
 
     //FIXME: make this work for all geometries and not just points
-//    placemark.setGeometry( geometry() );
-    placemark.setGeometry( GeoDataPoint( geometry() ) );
+//    FIXME change the geometry() to return a GeoDataGeometry and this won't work
+    placemark.setGeometry( geometry() );
 
     return placemark;
 }

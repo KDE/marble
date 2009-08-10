@@ -28,6 +28,7 @@ namespace Marble
 
     class MarbleWidget;
     class GeoDataDocument;
+    class TextAnnotation;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
@@ -80,7 +81,8 @@ signals:
 
 public slots:
     void loadOsmFile();
-    void saveOsmFile();
+    void saveAnnotationFile();
+    void loadAnnotationFile();
 
     void setAddingPlacemark( bool );
     void setDrawingPolygon( bool );
@@ -99,6 +101,8 @@ private:
     //FIXME: Merge the two models once TmpGraphicsItem is eliminated
     QList<TmpGraphicsItem*> model;
     QList<GeoGraphicsItem*>* m_itemModel;
+
+    QList<TextAnnotation*> annotations() const;
 
     //used while creating new polygons
     GeoDataLineString* m_tmp_lineString;
