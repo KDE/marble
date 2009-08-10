@@ -29,6 +29,8 @@ GeoDataPlacemark TextAnnotation::toGeoData() const
 
     placemark.setName( name() );
     placemark.setDescription( description() );
+    //allow for HTML in the description
+    placemark.setDescriptionCDATA( true );
 
     //FIXME: make this work for all geometries and not just points
 //    placemark.setGeometry( geometry() );

@@ -87,9 +87,19 @@ QString TextEditor::name() const
     return m_name->text();
 }
 
+void TextEditor::setName(const QString &name )
+{
+    m_name->setText( name );
+}
+
 QString TextEditor::description() const
 {
     return m_description->toHtml();
+}
+
+void TextEditor::setDescription( const QString &description )
+{
+    m_description->setHtml( description );
 }
 
 }

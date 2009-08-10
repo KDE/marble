@@ -72,7 +72,7 @@ void TestGeoDataWriter::initTestCase()
         QVERIFY( file.open( QIODevice::ReadOnly ) );
 
         //Parser and verify
-        QVERIFY( parser->read( &file ) );
+        QVERIFY2( parser->read( &file ), filename.toAscii() );
 
         parsers.insert( filename, parserPointer );
 

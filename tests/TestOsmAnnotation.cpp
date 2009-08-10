@@ -24,12 +24,15 @@ private slots:
     void saveAnnotations_data();
     void saveAnnotations();
 private:
-    QList<QSharedPointer<TextAnnotation> > textAnnotations;
+    QMap< QString, QSharedPointer<TextAnnotation> > textAnnotations;
 };
 
 void TestOsmAnnotation::initTestCase()
 {
-
+    PlacemarkTextAnnotation* standard;
+//    uncomment the following to get the Undefined references
+//    standard = new PlacemarkTextAnnotation();
+//    standard->setName( "Standard Annon" );
 }
 
 void TestOsmAnnotation::saveAnnotations_data()

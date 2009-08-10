@@ -29,8 +29,10 @@ public:
 
     //return the plain text name
     QString name() const;
+    void setName( const QString &name );
     //return the HTML description
     QString description() const;
+    void setDescription( const QString &description );
 
 private:
     QAction* m_boldAction;

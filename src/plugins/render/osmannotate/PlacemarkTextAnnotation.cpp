@@ -13,6 +13,7 @@
 
 #include "AbstractProjection.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDocument.h"
 #include "GeoPainter.h"
 #include "GeoWidgetBubble.h"
 #include "ViewportParams.h"
@@ -136,14 +137,32 @@ QString PlacemarkTextAnnotation::name() const
     return m_textEditor->name();
 }
 
+void PlacemarkTextAnnotation::setName( const QString &name )
+{
+    m_textEditor->setName( name );
+}
+
 QString PlacemarkTextAnnotation::description() const
 {
     return m_textEditor->description();
 }
 
+void PlacemarkTextAnnotation::setDescription( const QString &description )
+{
+    m_textEditor->setDescription( description );
+}
+
 GeoDataGeometry PlacemarkTextAnnotation::geometry() const
 {
     return GeoDataPoint( coordinate() );
+}
+
+void PlacemarkTextAnnotation::setGeometry( const GeoDataGeometry &geometry )
+{
+    //FIXME: undefined reference
+//    if( geometry.nodeType() == GeoDataTypes::GeoDataPointType ) {
+        setCoordinate( GeoDataCoordinates( static_cast<GeoDataPoint>(geometry) ) );
+//    }
 }
 
 

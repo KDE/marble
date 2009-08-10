@@ -26,8 +26,11 @@ public:
     virtual ~TextAnnotation();
 
     virtual QString name() const = 0 ;
+    virtual void setName( const QString& name ) = 0;
     virtual QString description() const = 0;
+    virtual void setDescription( const QString& description ) = 0;
     virtual GeoDataGeometry geometry() const = 0;
+    virtual void setGeometry( const GeoDataGeometry &geometry ) = 0;
 
     GeoDataPlacemark toGeoData() const;
 
