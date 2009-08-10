@@ -94,3 +94,4 @@ add_definitions( -DCITIES_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}/../../../data/pl
 marble_add_test( KMLTest )
 
 marble_add_test( TestOsmAnnotation )
+marble_add_test( TestGeoDataGeometry )
