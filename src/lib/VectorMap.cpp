@@ -13,7 +13,7 @@
 #include "VectorMap.h"
 
 #include <cmath>
-#include <stdlib.h>
+#include <cstdlib>
 
 #include <QtCore/QVector>
 #include <QtCore/QDebug>

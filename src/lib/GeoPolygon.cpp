@@ -12,7 +12,7 @@
 
 #include "GeoPolygon.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <fcntl.h>
 #include <cmath>
 using std::fabs;

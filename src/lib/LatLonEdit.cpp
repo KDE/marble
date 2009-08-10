@@ -23,7 +23,7 @@
 #include <QtGui/QWidget>
 #include <QtCore/QDebug>
 
-#include <cmath>
+#include <cstdlib>
 
 #include "global.h"
 

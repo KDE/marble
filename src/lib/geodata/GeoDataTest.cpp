@@ -42,7 +42,7 @@
 
 #ifdef Q_OS_WIN
 #include <stdio.h>
-#include <stdlib.h>
+#include <cstdlib>
 
 void myMessageOutput(QtMsgType type, const char *msg)
 {
