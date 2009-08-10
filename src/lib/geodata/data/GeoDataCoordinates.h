@@ -218,16 +218,18 @@ class GEODATA_EXPORT GeoDataCoordinates
     static void setDefaultNotation( GeoDataCoordinates::Notation notation );
 
     /**
-     * @brief normalize the longitude to always be -M_PI <= lon <= +M_PI
+     * @brief normalize the longitude to always be -M_PI <= lon <= +M_PI (Radian).
      * @param lon longitude
      */
-    static qreal normalizeLon( qreal lon );
+    static qreal normalizeLon( qreal lon,
+                               GeoDataCoordinates::Unit = GeoDataCoordinates::Radian );
 
     /**
-     * @brief normalize latitude to always be in -M_PI / 2. <= lat <= +M_PI / 2.
+     * @brief normalize latitude to always be in -M_PI / 2. <= lat <= +M_PI / 2 (Radian).
      * @param lat latitude
      */
-    static qreal normalizeLat( qreal lat );
+    static qreal normalizeLat( qreal lat,
+                               GeoDataCoordinates::Unit = GeoDataCoordinates::Radian );
 
     /**
      * @brief normalize both longitude and latitude at the same time
@@ -242,7 +244,8 @@ class GEODATA_EXPORT GeoDataCoordinates
      * @param lon the longitude value
      * @param lat the latitude value
      */
-    static void normalizeLonLat( qreal &lon, qreal &lat );
+    static void normalizeLonLat( qreal &lon, qreal &lat,
+                                 GeoDataCoordinates::Unit = GeoDataCoordinates::Radian );
     
     /**
      * @brief try to parse the string into a coordinate pair

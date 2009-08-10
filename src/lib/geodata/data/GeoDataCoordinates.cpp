@@ -204,52 +204,68 @@ void GeoDataCoordinates::setDefaultNotation( GeoDataCoordinates::Notation notati
 }
 
 //static
-qreal GeoDataCoordinates::normalizeLon( qreal lon )
+qreal GeoDataCoordinates::normalizeLon( qreal lon, GeoDataCoordinates::Unit unit )
 {
-    if ( lon > +M_PI ) {
-        int cycles = (int)( ( lon + M_PI ) / ( 2 * M_PI ) );
-        return lon - ( cycles * 2 * M_PI );
+    qreal halfCircle;
+    if ( unit = GeoDataCoordinates::Radian ) {
+        halfCircle = M_PI;
+    }
+    else {
+        halfCircle = 180;
+    }
+
+    if ( lon > +halfCircle ) {
+        int cycles = (int)( ( lon + halfCircle ) / ( 2 * halfCircle ) );
+        return lon - ( cycles * 2 * halfCircle );
     } 
-    if ( lon < -M_PI ) {
-        int cycles = (int)( ( lon - M_PI ) / ( 2 * M_PI ) );
-        return lon - ( cycles * 2 * M_PI );
+    if ( lon < -halfCircle ) {
+        int cycles = (int)( ( lon - halfCircle ) / ( 2 * halfCircle ) );
+        return lon - ( cycles * 2 * halfCircle );
     }
 
     return lon;
 }
 
 //static
-qreal GeoDataCoordinates::normalizeLat( qreal lat )
+qreal GeoDataCoordinates::normalizeLat( qreal lat, GeoDataCoordinates::Unit unit )
 {
-    if ( lat > ( +M_PI / 2.0 ) ) {
-        int cycles = (int)( ( lat + M_PI ) / ( 2 * M_PI ) );
+    qreal halfCircle;
+    if ( unit = GeoDataCoordinates::Radian ) {
+        halfCircle = M_PI;
+    }
+    else {
+        halfCircle = 180;
+    }
+
+    if ( lat > ( halfCircle / 2.0 ) ) {
+        int cycles = (int)( ( lat + halfCircle ) / ( 2 * halfCircle ) );
         qreal temp;
         if( cycles == 0 ) { // pi/2 < lat < pi
-            temp = M_PI - lat;
+            temp = halfCircle - lat;
         } else {
-            temp = lat - ( cycles * 2 * M_PI );
+            temp = lat - ( cycles * 2 * halfCircle );
         }
-        if ( temp > ( +M_PI / 2.0 ) ) {
-            return ( +M_PI - temp );
+        if ( temp > ( halfCircle / 2.0 ) ) {
+            return ( halfCircle - temp );
         }
-        if ( temp < ( -M_PI / 2.0 ) ) {
-            return ( -M_PI - temp );
+        if ( temp < ( -halfCircle / 2.0 ) ) {
+            return ( -halfCircle - temp );
         }
         return temp;
     } 
-    if ( lat < ( -M_PI / 2.0 ) ) {
-        int cycles = (int)( ( lat - M_PI ) / ( 2 * M_PI ) );
+    if ( lat < ( -halfCircle / 2.0 ) ) {
+        int cycles = (int)( ( lat - halfCircle ) / ( 2 * halfCircle ) );
         qreal temp;
         if( cycles == 0 ) { 
-            temp = -M_PI - lat;
+            temp = -halfCircle - lat;
         } else {
-            temp = lat - ( cycles * 2 * M_PI );
+            temp = lat - ( cycles * 2 * halfCircle );
         }
-        if ( temp > ( +M_PI / 2.0 ) ) {
-            return ( +M_PI - temp );
+        if ( temp > ( +halfCircle / 2.0 ) ) {
+            return ( +halfCircle - temp );
         }
-        if ( temp < ( -M_PI / 2.0 ) ) {
-            return ( -M_PI - temp );
+        if ( temp < ( -halfCircle / 2.0 ) ) {
+            return ( -halfCircle - temp );
         }
         return temp;
     }
@@ -257,57 +273,65 @@ qreal GeoDataCoordinates::normalizeLat( qreal lat )
 }
 
 //static
-void GeoDataCoordinates::normalizeLonLat( qreal &lon, qreal &lat )
+void GeoDataCoordinates::normalizeLonLat( qreal &lon, qreal &lat, GeoDataCoordinates::Unit unit )
 {
-    if ( lon > +M_PI ) {
-        int cycles = (int)( ( lon + M_PI ) / ( 2 * M_PI ) );
-        lon = lon - ( cycles * 2 * M_PI );
-    } 
-    if ( lon < -M_PI ) {
-        int cycles = (int)( ( lon - M_PI ) / ( 2 * M_PI ) );
-        lon = lon - ( cycles * 2 * M_PI );
+    qreal halfCircle;
+    if ( unit = GeoDataCoordinates::Radian ) {
+        halfCircle = M_PI;
+    }
+    else {
+        halfCircle = 180;
     }
 
-    if ( lat > ( +M_PI / 2.0 ) ) {
-        int cycles = (int)( ( lat + M_PI ) / ( 2 * M_PI ) );
+    if ( lon > +halfCircle ) {
+        int cycles = (int)( ( lon + halfCircle ) / ( 2 * halfCircle ) );
+        lon = lon - ( cycles * 2 * halfCircle );
+    } 
+    if ( lon < -halfCircle ) {
+        int cycles = (int)( ( lon - halfCircle ) / ( 2 * halfCircle ) );
+        lon = lon - ( cycles * 2 * halfCircle );
+    }
+
+    if ( lat > ( +halfCircle / 2.0 ) ) {
+        int cycles = (int)( ( lat + halfCircle ) / ( 2 * halfCircle ) );
         qreal temp;
         if( cycles == 0 ) { // pi/2 < lat < pi
-            temp = M_PI - lat;
+            temp = halfCircle - lat;
         } else {
-            temp = lat - ( cycles * 2 * M_PI );
+            temp = lat - ( cycles * 2 * halfCircle );
         }
-        if ( temp > ( +M_PI / 2.0 ) ) {
-            lat =  +M_PI - temp;
+        if ( temp > ( +halfCircle / 2.0 ) ) {
+            lat =  +halfCircle - temp;
         }
-        if ( temp < ( -M_PI / 2.0 ) ) {
-            lat =  -M_PI - temp;
+        if ( temp < ( -halfCircle / 2.0 ) ) {
+            lat =  -halfCircle - temp;
         }
         lat = temp;
         if( lon > 0 ) { 
-            lon = -M_PI + lon;
+            lon = -halfCircle + lon;
         } else {
-            lon = M_PI + lon;
+            lon = halfCircle + lon;
         }
     } 
-    if ( lat < ( -M_PI / 2.0 ) ) {
-        int cycles = (int)( ( lat - M_PI ) / ( 2 * M_PI ) );
+    if ( lat < ( -halfCircle / 2.0 ) ) {
+        int cycles = (int)( ( lat - halfCircle ) / ( 2 * halfCircle ) );
         qreal temp;
         if( cycles == 0 ) { 
-            temp = -M_PI - lat;
+            temp = -halfCircle - lat;
         } else {
-            temp = lat - ( cycles * 2 * M_PI );
+            temp = lat - ( cycles * 2 * halfCircle );
         }
-        if ( temp > ( +M_PI / 2.0 ) ) {
-            lat =  +M_PI - temp;
+        if ( temp > ( +halfCircle / 2.0 ) ) {
+            lat =  +halfCircle - temp;
         }
-        if ( temp < ( -M_PI / 2.0 ) ) {
-            lat =  -M_PI - temp;
+        if ( temp < ( -halfCircle / 2.0 ) ) {
+            lat =  -halfCircle - temp;
         }
         lat = temp;
         if( lon > 0 ) { 
-            lon = -M_PI + lon;
+            lon = -halfCircle + lon;
         } else {
-            lon = M_PI + lon;
+            lon = halfCircle + lon;
         }
     } 
     return;
