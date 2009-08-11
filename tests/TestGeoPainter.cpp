@@ -41,7 +41,7 @@ void TestGeoPainter::createLinearRingFromGeoRectTest()
 //                                                        (*it).width( GeoDataCoordinates::Degree ),
 //                                                        (*it).height( GeoDataCoordinates::Degree ) );
 //
-//        QCOMPARE( ring.latLonAltBox(), (*it) );
+//        QCOMPARE( ring.latLonAltBox().toString(), (*it).toString() );
 //    }
 }
 

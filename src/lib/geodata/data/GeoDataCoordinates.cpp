@@ -207,14 +207,14 @@ void GeoDataCoordinates::setDefaultNotation( GeoDataCoordinates::Notation notati
 qreal GeoDataCoordinates::normalizeLon( qreal lon, GeoDataCoordinates::Unit unit )
 {
     qreal halfCircle;
-    if ( unit = GeoDataCoordinates::Radian ) {
+    if ( unit == GeoDataCoordinates::Radian ) {
         halfCircle = M_PI;
     }
     else {
         halfCircle = 180;
     }
 
-    if ( lon > +halfCircle ) {
+    if ( lon > halfCircle ) {
         int cycles = (int)( ( lon + halfCircle ) / ( 2 * halfCircle ) );
         return lon - ( cycles * 2 * halfCircle );
     } 
@@ -230,7 +230,7 @@ qreal GeoDataCoordinates::normalizeLon( qreal lon, GeoDataCoordinates::Unit unit
 qreal GeoDataCoordinates::normalizeLat( qreal lat, GeoDataCoordinates::Unit unit )
 {
     qreal halfCircle;
-    if ( unit = GeoDataCoordinates::Radian ) {
+    if ( unit == GeoDataCoordinates::Radian ) {
         halfCircle = M_PI;
     }
     else {
@@ -276,7 +276,7 @@ qreal GeoDataCoordinates::normalizeLat( qreal lat, GeoDataCoordinates::Unit unit
 void GeoDataCoordinates::normalizeLonLat( qreal &lon, qreal &lat, GeoDataCoordinates::Unit unit )
 {
     qreal halfCircle;
-    if ( unit = GeoDataCoordinates::Radian ) {
+    if ( unit == GeoDataCoordinates::Radian ) {
         halfCircle = M_PI;
     }
     else {

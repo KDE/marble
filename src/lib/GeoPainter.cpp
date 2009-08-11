@@ -145,8 +145,8 @@ GeoDataLinearRing GeoPainterPrivate::createLinearRingFromGeoRect( const GeoDataC
     qreal altitude = centerCoordinates.altitude();
     centerCoordinates.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
 
-    lon = GeoDataCoordinates::normalizeLon( lon );
-    lat = GeoDataCoordinates::normalizeLat( lat );
+    lon = GeoDataCoordinates::normalizeLon( lon, GeoDataCoordinates::Degree );
+    lat = GeoDataCoordinates::normalizeLat( lat, GeoDataCoordinates::Degree );
 
     qreal west = GeoDataCoordinates::normalizeLon( lon - width * 0.5, GeoDataCoordinates::Degree );
     qreal east =  GeoDataCoordinates::normalizeLon( lon + width * 0.5, GeoDataCoordinates::Degree );
