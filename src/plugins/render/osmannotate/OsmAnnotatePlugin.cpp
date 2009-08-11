@@ -313,102 +313,111 @@ void OsmAnnotatePlugin::loadAnnotationFile()
 
 bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
 {
-    MarbleWidget* marbleWidget = (MarbleWidget*) watched;
+    MarbleWidget* marbleWidget = dynamic_cast<MarbleWidget*>( watched );
+    Q_ASSERT( marbleWidget );
+
     //FIXME why is the QEvent::MousePress not working? caught somewhere else?
     //does this mean we need to centralise the event handling?
 
-    // Catch the mouse button press
-    if ( event->type() == QEvent::MouseButtonPress ) {
-        QMouseEvent* mouseEvent = (QMouseEvent*) event;
+    //so far only accept mouse events
+    if( event->type() != QEvent::MouseButtonPress
+        && event->type() != QEvent::MouseButtonRelease
+        && event->type() != QEvent::MouseMove )
+    {
+        return false;
+    }
 
-        // deal with adding a placemark
-        if ( mouseEvent->button() == Qt::LeftButton
-             && m_addingPlacemark )
-        {
-            //Add a placemark on the screen
-            qreal lon, lat;
-
-            bool valid = ((MarbleWidget*)watched)->geoCoordinates(((QMouseEvent*)event)->pos().x(),
-                                                                  ((QMouseEvent*)event)->pos().y(),
-                                                                  lon, lat, GeoDataCoordinates::Radian);
-            if ( valid ) {
-                GeoDataCoordinates point( lon, lat );
-                PlacemarkTextAnnotation* t = new PlacemarkTextAnnotation();
-                t->setCoordinate(point);
-                model.append(t);
-
-                //FIXME only repaint the new placemark
-                ( ( MarbleWidget* ) watched)->repaint();
-                emit placemarkAdded();
-
-                return true;
-            }
+    QMouseEvent* mouseEvent = dynamic_cast<QMouseEvent*>(event);
+    Q_ASSERT( mouseEvent );
 
 
-        }
+    GeoDataCoordinates coordinates;
 
-        // deal with drawing a polygon
-        if ( mouseEvent->button() == Qt::LeftButton
-             && m_drawingPolygon )
-        {
-            qreal lon, lat;
+    //Pass event on to Geo Graphics Items if there is one
+    // Only working in Geo Coordinates for hit tests
 
-            bool valid = ((MarbleWidget*)watched)->geoCoordinates( mouseEvent->pos().x(),
-                                                                   mouseEvent->pos().y(),
-                                                                   lon, lat, GeoDataCoordinates::Radian);
-            if ( valid ) {
-                if ( m_tmp_lineString == 0 ) {
-                    m_tmp_lineString = new GeoDataLineString( Tessellate );
+//    FIXME: currently waiting for a decision on http://reviewboard.kde.org/r/1264/
+//    bool isOnGlobe = marbleWidget->geoCoordinates(mouseEvent->pos(), coordinates );
+
+    qreal lon, lat;
+    bool isOnGlobe = marbleWidget->geoCoordinates( mouseEvent->pos().x(),
+                                                   mouseEvent->pos().y(),
+                                                   lon, lat,
+                                                   GeoDataCoordinates::Radian );
+
+    coordinates = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Radian );
+
+    if( !isOnGlobe ) {
+        //dont handle this event
+        return false;
+    }
+
+    //Pass the event to Graphics Items
+    QList<TmpGraphicsItem*>::ConstIterator itemIterator = model.constBegin();
+    for( ; itemIterator < model.constEnd() ; ++itemIterator ) {
+        QListIterator<QRegion> it ( (*itemIterator)->regions() );
+
+        while ( it.hasNext() ) {
+            QRegion p = it.next();
+            if( p.contains( mouseEvent->pos() ) ) {
+                if( (*itemIterator)->sceneEvent( event ) ) {
+                    return true;
                 }
-
-                m_tmp_lineString->append(GeoDataCoordinates(lon, lat));
-
-                //FIXME only repaint the line string so far
-                marbleWidget->repaint();
-
             }
-            return true;
         }
+    }
 
-        //deal with clicking
-        if ( mouseEvent->button() == Qt::LeftButton ) {
-            qreal lon, lat;
+    //FIXME: finish cleaning this up
+
+    // deal with adding a placemark
+    if ( mouseEvent->button() == Qt::LeftButton
+         && m_addingPlacemark )
+    {
+        //Add a placemark on the screen
+        qreal lon, lat;
 
         bool valid = ((MarbleWidget*)watched)->geoCoordinates(((QMouseEvent*)event)->pos().x(),
                                                               ((QMouseEvent*)event)->pos().y(),
                                                               lon, lat, GeoDataCoordinates::Radian);
-        //if the event is in an item change cursor
-        // FIXME make this more effecient by using the bsptree
-        QListIterator<TmpGraphicsItem*> i(model);
-        while(i.hasNext()) {
-            TmpGraphicsItem* item = i.next();
-            if(valid) {
-                //FIXME check against all regions!
-                QListIterator<QRegion> it ( item->regions() );
+        if ( valid ) {
+            GeoDataCoordinates point( lon, lat );
+            PlacemarkTextAnnotation* t = new PlacemarkTextAnnotation();
+            t->setCoordinate(point);
+            model.append(t);
 
-                while ( it.hasNext() ) {
-                    QRegion p = it.next();
-                    if( p.contains( mouseEvent->pos() ) ) {
-                        return item->sceneEvent( event );
-                    }
-                }
-            }
+            //FIXME only repaint the new placemark
+            ( ( MarbleWidget* ) watched)->repaint();
+            emit placemarkAdded();
 
+            return true;
         }
 
-        }
+
     }
 
-//    // this stuff below is for hit tests. Just a sample mouse over for all bounding boxes
-//    if ( event->type() == QEvent::MouseMove ||
-//         event->type() == QEvent::MouseButtonPress ||
-//         event->type() == QEvent::MouseButtonRelease ) {
-//        QMouseEvent* mouseEvent = (QMouseEvent*) event;
-//
-//
-//
-//
-//    }
+    // deal with drawing a polygon
+    if ( mouseEvent->button() == Qt::LeftButton
+         && m_drawingPolygon )
+    {
+        qreal lon, lat;
+
+        bool valid = ((MarbleWidget*)watched)->geoCoordinates( mouseEvent->pos().x(),
+                                                               mouseEvent->pos().y(),
+                                                               lon, lat, GeoDataCoordinates::Radian);
+        if ( valid ) {
+            if ( m_tmp_lineString == 0 ) {
+                m_tmp_lineString = new GeoDataLineString( Tessellate );
+            }
+
+            m_tmp_lineString->append(GeoDataCoordinates(lon, lat));
+
+            //FIXME only repaint the line string so far
+            marbleWidget->repaint();
+
+        }
+        return true;
+    }
+
     return false;
 }
 
