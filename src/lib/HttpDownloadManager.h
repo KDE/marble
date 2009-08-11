@@ -37,7 +37,7 @@ class HttpJob;
 class StoragePolicy;
 class NetworkPlugin;
 
-/*
+/**
  * @Short This class manages scheduled downloads. 
 
  * The downloadmanager offers a maximum number of active jobs and a

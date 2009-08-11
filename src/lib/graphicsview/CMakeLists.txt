@@ -4,6 +4,8 @@
 # them against the main application
 #
 
+FILE( GLOB screengraphicsitem_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} graphicsview/screengraphicsitem/*.cpp )
+
 SET( graphicsview_HDRS 
         graphicsview/MarbleGraphicsItem.h
         graphicsview/GeoGraphicsItem.h

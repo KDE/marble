@@ -17,9 +17,14 @@
 
 #include <QtCore/QDebug>
 #include <QtGui/QAction>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkRequest>
+
 #include "AbstractProjection.h"
 #include "AreaAnnotation.h"
 #include "GeoDataDocument.h"
+#include "GeoDataLatLonBox.h"
 #include "GeoDataParser.h"
 #include "GeoPainter.h"
 #include "GeoWriter.h"
@@ -27,6 +32,7 @@
 #include "MarbleWidget.h"
 #include "osm/OsmBoundsGraphicsItem.h"
 #include "PlacemarkTextAnnotation.h"
+#include "PointScreenGraphicsItem.h"
 #include "TextAnnotation.h"
 
 namespace Marble
@@ -35,11 +41,14 @@ namespace Marble
 OsmAnnotatePlugin::OsmAnnotatePlugin()
         : RenderPlugin()
 {
-
+    m_itemModel = 0;
+    m_networkAccessManager = 0;
 }
 
 OsmAnnotatePlugin::~OsmAnnotatePlugin()
 {
+    delete m_itemModel;
+    delete m_networkAccessManager;
 }
 
 QStringList OsmAnnotatePlugin::backendTypes() const
@@ -90,12 +99,21 @@ void OsmAnnotatePlugin::initialize ()
 {
     widgetInitalised= false;
     m_tmp_lineString = 0;
-    m_itemModel = 0;
+    m_itemModel = new QList<GeoGraphicsItem*>();
     m_addingPlacemark = false;
     m_drawingPolygon = false;
 
     m_actions = 0;
     m_toolbarActions = 0;
+
+    PointScreenGraphicsItem* topLeft = new PointScreenGraphicsItem();
+    PointScreenGraphicsItem* bottomRight = new PointScreenGraphicsItem();
+
+    topLeft->setVisible(false);
+    bottomRight->setVisible(false);
+
+    m_selectionBox.first = topLeft;
+    m_selectionBox.second = bottomRight;
 }
 
 bool OsmAnnotatePlugin::isInitialized () const
@@ -157,6 +175,11 @@ bool OsmAnnotatePlugin::render( GeoPainter *painter, ViewportParams *viewport, c
         tmp->paint(painter, viewport, renderPos, layer);
     }
 
+    if( m_selectionBox.first->visible() ) {
+        m_selectionBox.first->paint( painter, viewport, renderPos, layer );
+        m_selectionBox.second->paint( painter, viewport, renderPos, layer );
+    }
+
     return true;
 }
 
@@ -187,6 +210,18 @@ void OsmAnnotatePlugin::setDrawingPolygon(bool b)
     }
 }
 
+void OsmAnnotatePlugin::receiveNetworkReply( QNetworkReply *reply )
+{
+    if( reply->error() == QNetworkReply::NoError ) {
+        readOsmFile( reply, false );
+    } else {
+        m_errorMessage.showMessage( QString("Error while trying to download the"
+                                            "OSM file from the server. The"
+                                            "error was:\n" )
+                                    + reply->errorString() );
+    }
+}
+
 void OsmAnnotatePlugin::loadOsmFile()
 {
     QString filename;
@@ -195,8 +230,6 @@ void OsmAnnotatePlugin::loadOsmFile()
                             tr("All Supported Files (*.osm);;Open Street Map Data (*.osm)"));
 
     if ( ! filename.isNull() ) {
-
-        GeoDataParser parser( GeoData_OSM );
 
         QFile file( filename );
         if ( !file.exists() ) {
@@ -207,30 +240,73 @@ void OsmAnnotatePlugin::loadOsmFile()
         // Open file in right mode
         file.open( QIODevice::ReadOnly );
 
-        if ( !parser.read( &file ) ) {
-            qWarning( "Could not parse file!" );
-            //do not quit on a failed read!
-            //return
-        }
-        QList<GeoGraphicsItem*>* model = parser.releaseModel();
-        Q_ASSERT( model );
-
-        m_itemModel = model;
+        readOsmFile( &file, true );
 
         file.close();
-
-        // now zoom to the newly added OSM file
-        if( m_itemModel->size() > 0 ) {
-            OsmBoundsGraphicsItem* item;
-            // mostly guaranteed that the first item will be a bounds item
-            // if not then don't centre on anything
-            item = dynamic_cast<OsmBoundsGraphicsItem*>( m_itemModel->first() );
-            if( item ) {
-                m_marbleWidget->centerOn( item->latLonBox() );
-            }
-        }
-
     }
+}
+
+void OsmAnnotatePlugin::downloadOsmFile()
+{
+    if( !m_selectionBox.first->visible() ) {
+        m_errorMessage.showMessage( tr("Please select an area before trying to "
+                                       "download an OSM file" ) );
+        return;
+    }
+    QPointF topLeft = m_selectionBox.first->position();
+    QPointF bottomRight = m_selectionBox.second->position();
+
+    qreal lonTop, latTop;
+    qreal lonBottom, latBottom;
+
+    GeoDataCoordinates topLeftCoordinates;
+    GeoDataCoordinates bottomRightCoordinates;
+
+    bool topIsOnGlobe = m_marbleWidget->geoCoordinates( topLeft.x(),
+                                                        topLeft.y(),
+                                                        lonTop, latTop,
+                                                        GeoDataCoordinates::Radian);
+    bool bottomIsOnGlobe = m_marbleWidget->geoCoordinates( bottomRight.x(),
+                                                           bottomRight.y(),
+                                                           lonBottom, latBottom,
+                                                           GeoDataCoordinates::Radian );
+
+    if( ! ( topIsOnGlobe && bottomIsOnGlobe ) ) {
+        m_errorMessage.showMessage( tr("One of the selection points is not on"
+                                       " the Globe. Please only select a region"
+                                       " on the globe") );
+        return;
+    }
+
+    topLeftCoordinates = GeoDataCoordinates( lonTop, latTop, 0,
+                                             GeoDataCoordinates::Radian );
+
+    bottomRightCoordinates = GeoDataCoordinates( lonBottom, latBottom, 0,
+                                                 GeoDataCoordinates::Radian );
+
+    GeoDataLineString tempString;
+    tempString.append( topLeftCoordinates );
+    tempString.append( bottomRightCoordinates );
+
+    GeoDataLatLonAltBox bounds = GeoDataLatLonAltBox::fromLineString( tempString );
+
+    QString request;
+    request = QString("http://api.openstreetmap.org/api/0.6/map?bbox=%1,%2,%3,%4")
+              .arg(bounds.west(GeoDataCoordinates::Degree) )
+              .arg(bounds.south(GeoDataCoordinates::Degree) )
+              .arg(bounds.east( GeoDataCoordinates::Degree) )
+              .arg( bounds.north( GeoDataCoordinates::Degree ) );
+
+    QNetworkRequest networkRequest;
+    networkRequest.setUrl(QUrl(request) );
+
+    if( ! m_networkAccessManager ) {
+        m_networkAccessManager = new QNetworkAccessManager( this ) ;
+        connect( m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
+                 this, SLOT(receiveNetworkReply(QNetworkReply*)) );
+    }
+
+    m_networkAccessManager->get( networkRequest );
 }
 
 void OsmAnnotatePlugin::saveAnnotationFile()
@@ -309,6 +385,27 @@ void OsmAnnotatePlugin::loadAnnotationFile()
         delete document;
         emit repaintNeeded(QRegion());
     }
+}
+
+void OsmAnnotatePlugin::selectArea( bool startSelectingArea )
+{
+    if ( !startSelectingArea ) {
+        //finished selecting
+        m_selectionBox.first->setVisible( false );
+        m_selectionBox.second->setVisible( false );
+        return;
+    }
+
+    //move the 2 squares to the middle
+    QPointF middle( m_marbleWidget->size().width() /2 ,
+                    m_marbleWidget->size().height() /2 );
+    m_selectionBox.first->setPosition( middle - QPointF( 20, 20 ) );
+    m_selectionBox.second->setPosition( middle + QPointF( 20, 20 ) );
+
+    m_selectionBox.first->setVisible( true );
+    m_selectionBox.second->setVisible( true );
+
+    emit repaintNeeded(QRegion());
 }
 
 bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
@@ -432,72 +529,96 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     QActionGroup* group = new QActionGroup(0);
     group->setExclusive( true );
 
-    QAction*    m_addPlacemark;
-    QAction*    m_drawPolygon;
-    QAction*    m_beginSeparator;
-    QAction*    m_endSeparator;
-    QAction*    m_loadOsmFile;
-    QAction*    m_saveAnnotationFile;
-    QAction*    m_loadAnnotationFile;
-    QAction*    m_enableInputAction;
+    QActionGroup* nonExclusiveGroup = new QActionGroup(0);
+    nonExclusiveGroup->setExclusive( false );
 
-    m_addPlacemark = new QAction(this);
-    m_addPlacemark->setText( tr("Add Placemark") );
-    m_addPlacemark->setCheckable( true );
-    connect( m_addPlacemark, SIGNAL( toggled(bool)),
+    QAction*    addPlacemark;
+    QAction*    drawPolygon;
+    QAction*    beginSeparator;
+    QAction*    endSeparator;
+    QAction*    loadOsmFile;
+    QAction*    saveAnnotationFile;
+    QAction*    loadAnnotationFile;
+    QAction*    enableInputAction;
+    QAction*    selectArea;
+    QAction*    downloadOsm;
+
+    addPlacemark = new QAction(this);
+    addPlacemark->setText( tr("Add Placemark") );
+    addPlacemark->setCheckable( true );
+    connect( addPlacemark, SIGNAL( toggled(bool)),
              this, SLOT(setAddingPlacemark(bool)) );
     connect( this, SIGNAL(placemarkAdded()) ,
-             m_addPlacemark, SLOT(toggle()) );
+             addPlacemark, SLOT(toggle()) );
 
-    m_drawPolygon = new QAction( this );
-    m_drawPolygon->setText( tr("Draw Polygon") );
-    m_drawPolygon->setCheckable( true );
-    connect( m_drawPolygon, SIGNAL(toggled(bool)),
+    drawPolygon = new QAction( this );
+    drawPolygon->setText( tr("Draw Polygon") );
+    drawPolygon->setCheckable( true );
+    connect( drawPolygon, SIGNAL(toggled(bool)),
              this, SLOT(setDrawingPolygon(bool)) );
 
-    m_loadOsmFile = new QAction( this );
-    m_loadOsmFile->setText( tr("Load Osm File") );
-    connect( m_loadOsmFile, SIGNAL(triggered()),
+    loadOsmFile = new QAction( this );
+    loadOsmFile->setText( tr("Load Osm File") );
+    connect( loadOsmFile, SIGNAL(triggered()),
              this, SLOT(loadOsmFile()) );
 
-    m_saveAnnotationFile = new QAction( this );
-    m_saveAnnotationFile->setText( tr("Save Annotation File") );
-    connect( m_saveAnnotationFile, SIGNAL(triggered()),
+    saveAnnotationFile = new QAction( this );
+    saveAnnotationFile->setText( tr("Save Annotation File") );
+    connect( saveAnnotationFile, SIGNAL(triggered()),
              this, SLOT(saveAnnotationFile()) );
 
-    m_loadAnnotationFile = new QAction( this );
-    m_loadAnnotationFile->setText( tr("Load Annotation File" ) );
-    connect( m_loadAnnotationFile, SIGNAL(triggered()),
+    loadAnnotationFile = new QAction( this );
+    loadAnnotationFile->setText( tr("Load Annotation File" ) );
+    connect( loadAnnotationFile, SIGNAL(triggered()),
              this, SLOT(loadAnnotationFile()) );
 
-    m_beginSeparator = new QAction( this );
-    m_beginSeparator->setSeparator( true );
-    m_endSeparator = new QAction ( this );
-    m_endSeparator->setSeparator( true );
+    beginSeparator = new QAction( this );
+    beginSeparator->setSeparator( true );
+    endSeparator = new QAction ( this );
+    endSeparator->setSeparator( true );
 
-    m_enableInputAction = new QAction(this);
-    m_enableInputAction->setToolTip(tr("Enable Marble Input"));
-    m_enableInputAction->setCheckable(true);
-    m_enableInputAction->setChecked( true );
-    m_enableInputAction->setIcon( QIcon( MarbleDirs::path("bitmaps/hand.png") ) );
-    connect( m_enableInputAction, SIGNAL(toggled(bool)),
+    enableInputAction = new QAction(this);
+    enableInputAction->setToolTip(tr("Enable Marble Input"));
+    enableInputAction->setCheckable(true);
+    enableInputAction->setChecked( true );
+    enableInputAction->setIcon( QIcon( MarbleDirs::path("bitmaps/hand.png") ) );
+    connect( enableInputAction, SIGNAL(toggled(bool)),
                        widget, SLOT( setInputEnabled(bool)) );
 
-    initial->addAction( m_enableInputAction );
-    initial->addAction( m_beginSeparator );
+    selectArea = new QAction( this );
+    selectArea->setText( tr("Select Map Area") );
+    selectArea->setCheckable( true );
+    connect( selectArea, SIGNAL(triggered(bool)),
+             this, SLOT(selectArea(bool)) );
 
-    group->addAction( m_addPlacemark );
-    group->addAction( m_drawPolygon );
-    group->addAction( m_loadOsmFile );
-    group->addAction( m_saveAnnotationFile );
-    group->addAction( m_loadAnnotationFile );
-    group->addAction( m_endSeparator );
+
+    downloadOsm = new QAction( this );
+    downloadOsm->setText( tr("Download Osm File") );
+    downloadOsm->setToolTip(tr("Download Osm File for selected area"));
+    connect( downloadOsm, SIGNAL(triggered()),
+             this, SLOT(downloadOsmFile()) );
+
+
+    initial->addAction( enableInputAction );
+    initial->addAction( beginSeparator );
+
+    group->addAction( addPlacemark );
+    group->addAction( drawPolygon );
+    group->addAction( loadOsmFile );
+    group->addAction( saveAnnotationFile );
+    group->addAction( loadAnnotationFile );
+    group->addAction( endSeparator );
+
+    nonExclusiveGroup->addAction( selectArea );
+    nonExclusiveGroup->addAction( downloadOsm );
 
     actions->append( initial );
     actions->append( group );
+    actions->append( nonExclusiveGroup );
 
     toolbarActions->append( initial );
     toolbarActions->append( group );
+    toolbarActions->append( nonExclusiveGroup );
 
     //delete the old groups if they exist
     delete m_actions;
@@ -507,6 +628,37 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     m_toolbarActions = toolbarActions;
 
     emit actionGroupsChanged();
+}
+
+void OsmAnnotatePlugin::readOsmFile( QIODevice *device, bool flyToFile ) {
+
+    GeoDataParser parser( GeoData_OSM );
+
+    if ( !parser.read( device ) ) {
+        qWarning( "Could not parse file!" );
+        //do not quit on a failed read!
+        //return
+    }
+    QList<GeoGraphicsItem*>* model = parser.releaseModel();
+    Q_ASSERT( model );
+
+    m_itemModel->append(*model);
+
+    // now zoom to the newly added OSM file
+    if( flyToFile && m_itemModel->size() > 0 ) {
+        OsmBoundsGraphicsItem* item;
+        // mostly guaranteed that the first item will be a bounds item
+        // if not then don't centre on anything
+        item = dynamic_cast<OsmBoundsGraphicsItem*>( model->first() );
+        if( item ) {
+            m_marbleWidget->centerOn( item->latLonBox() );
+        }
+    }
+
+    model->clear();
+    delete model;
+
+    emit repaintNeeded(QRegion());
 }
 
 QList<TextAnnotation*> OsmAnnotatePlugin::annotations() const

@@ -53,6 +53,13 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     GeoDataLatLonAltBox();
     GeoDataLatLonAltBox( const GeoDataLatLonAltBox & other );
     GeoDataLatLonAltBox( const GeoDataLatLonBox & other );
+    /**
+     * @brief A LatLonAltBox with the data from a GeoDataCoordinate
+     * This way of creating a GeoDataLatLonAltBox sets the north and south
+     * values of this box to the Latitude value in the GeoDataCoordinate,
+     * resulting in a Box that has a 0 Area. This is useful for building
+     * LatLonAltBoxes from GeoDataCoordinates.
+     */
     GeoDataLatLonAltBox( const GeoDataCoordinates & coordinates );
     
     virtual ~GeoDataLatLonAltBox();

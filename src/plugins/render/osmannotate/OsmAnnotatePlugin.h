@@ -17,8 +17,12 @@
 
 #include <QtCore/QObject>
 #include <QtGui/QActionGroup>
+#include <QtGui/QErrorMessage>
 #include <QtGui/QToolBar>
 #include <QtGui/QGroupBox>
+
+class QNetworkAccessManager;
+class QNetworkReply;
 
 #include "RenderPlugin.h"
 #include "TmpGraphicsItem.h"
@@ -29,6 +33,7 @@ namespace Marble
     class MarbleWidget;
     class GeoDataDocument;
     class TextAnnotation;
+    class PointScreenGraphicsItem;
 
 /**
  * @short The class that specifies the Marble layer interface of a plugin.
@@ -81,16 +86,22 @@ signals:
 
 public slots:
     void loadOsmFile();
+    void downloadOsmFile();
     void saveAnnotationFile();
     void loadAnnotationFile();
 
+    void selectArea( bool );
+
     void setAddingPlacemark( bool );
     void setDrawingPolygon( bool );
+
+    void receiveNetworkReply( QNetworkReply* );
 
 protected:
     bool eventFilter(QObject* watched, QEvent* event);
 private:
     void setupActions(MarbleWidget* m);
+    void readOsmFile( QIODevice* device, bool flyToFile );
 
     MarbleWidget* m_marbleWidget;
 
@@ -107,8 +118,12 @@ private:
     //used while creating new polygons
     GeoDataLineString* m_tmp_lineString;
 
+    QPair<PointScreenGraphicsItem*, PointScreenGraphicsItem*> m_selectionBox;
+
     bool m_addingPlacemark;
     bool m_drawingPolygon;
+    QNetworkAccessManager* m_networkAccessManager;
+    QErrorMessage m_errorMessage;
 };
 
 }
