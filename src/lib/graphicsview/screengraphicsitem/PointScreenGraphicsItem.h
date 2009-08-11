@@ -13,12 +13,13 @@
 #define POINTSCREENGRAPHICSITEM_H
 
 #include "ScreenGraphicsItem.h"
+#include "marble_export.h"
 
 namespace Marble
 {
 
 
-class PointScreenGraphicsItem : public ScreenGraphicsItem
+class MARBLE_EXPORT PointScreenGraphicsItem : public ScreenGraphicsItem
 {
 public:
     PointScreenGraphicsItem();
