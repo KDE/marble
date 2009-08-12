@@ -900,13 +900,13 @@ void MarblePart::editSettings()
     // FIXME: Delete the following  line once OpenGL support is officially supported.
     ui_viewSettings.kcfg_graphicsSystem->removeItem( Marble::OpenGLGraphics );
 
-    QString nativeString ( tr("Native") );
+    QString nativeString ( i18n("Native") );
 
     #ifdef Q_WS_X11
-    nativeString = tr( "Native (X11)" );
+    nativeString = i18n( "Native (X11)" );
     #endif
     #ifdef Q_WS_MAC
-    nativeString = tr( "Native (Mac OS X Core Graphics)" );
+    nativeString = i18n( "Native (Mac OS X Core Graphics)" );
     #endif
 
     ui_viewSettings.kcfg_graphicsSystem->setItemText( Marble::NativeGraphics, nativeString );
