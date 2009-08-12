@@ -947,13 +947,13 @@ void MarblePart::editSettings()
     // FIXME: Delete the following  line once OpenGL support is officially supported.
     ui_viewSettings.kcfg_graphicsSystem->removeItem( Marble::OpenGLGraphics );
 
-    QString nativeString ( tr("Native") );
+    QString nativeString ( i18n("Native") );
 
     #ifdef Q_WS_X11
-    nativeString = tr( "Native (X11)" );
+    nativeString = i18n( "Native (X11)" );
     #endif
     #ifdef Q_WS_MAC
-    nativeString = tr( "Native (Mac OS X Core Graphics)" );
+    nativeString = i18n( "Native (Mac OS X Core Graphics)" );
     #endif
 
     ui_viewSettings.kcfg_graphicsSystem->setItemText( Marble::NativeGraphics, nativeString );
@@ -1107,10 +1107,10 @@ void MarblePart::slotUpdateSettings()
     if (    m_initialGraphicsSystem != graphicsSystem 
          && m_previousGraphicsSystem != graphicsSystem ) {
         KMessageBox::information (m_controlView->marbleWidget(),
-                                tr("You have decided to run Marble with a different graphics system.\n"
+                                i18n("You have decided to run Marble with a different graphics system.\n"
                                    "For this change to become effective, Marble has to be restarted.\n"
                                    "Please close the application and start Marble again."),
-                                tr("Graphics System Change") );
+                                i18n("Graphics System Change") );
     }    
     m_previousGraphicsSystem = graphicsSystem;
 }
