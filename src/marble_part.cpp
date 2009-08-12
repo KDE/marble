@@ -1053,10 +1053,10 @@ void MarblePart::slotUpdateSettings()
     if (    m_initialGraphicsSystem != graphicsSystem 
          && m_previousGraphicsSystem != graphicsSystem ) {
         KMessageBox::information (m_controlView->marbleWidget(),
-                                tr("You have decided to run Marble with a different graphics system.\n"
+                                i18n("You have decided to run Marble with a different graphics system.\n"
                                    "For this change to become effective, Marble has to be restarted.\n"
                                    "Please close the application and start Marble again."),
-                                tr("Graphics System Change") );
+                                i18n("Graphics System Change") );
     }    
     m_previousGraphicsSystem = graphicsSystem;
 }
