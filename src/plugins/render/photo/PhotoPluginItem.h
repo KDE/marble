@@ -17,10 +17,11 @@
 
 class QAction;
 class QUrl;
-class QWebView;
 
 namespace Marble
 {
+
+class TinyWebBrowser;
  
 class PhotoPluginItem : public AbstractDataPluginItem
 {
@@ -75,7 +76,7 @@ class PhotoPluginItem : public AbstractDataPluginItem
     bool m_hasCoordinates;
     QPixmap m_smallImage;
     QPixmap m_microImage;
-    QWebView *m_browser;
+    TinyWebBrowser *m_browser;
     QAction *m_action;
     
     QString m_server;

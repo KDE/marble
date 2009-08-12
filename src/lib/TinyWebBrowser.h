@@ -15,18 +15,30 @@
 // Author: Torsten Rahn
 //
 
-#include <qglobal.h>
 
 #ifndef TINYWEBBROWSER_H
 #define TINYWEBBROWSER_H
 
+// Qt
+#include <qglobal.h>
 #include <QtWebKit/QWebView>
 #include <QtGui/QDesktopServices>
+
+// Marble
+#include "marble_export.h"
 
 namespace Marble
 {
 
-class TinyWebBrowser : public QWebView
+class TinyWebBrowserPrivate;
+
+/**
+ * This class provides a tiny web browser based on QWebView (WebKit).
+ * It is different from QWebView as it has the button "Open in new Window"
+ * disabled per default and instead opens every link in the default web
+ * browser of the user.
+ */
+class MARBLE_EXPORT TinyWebBrowser : public QWebView
 {
     Q_OBJECT
 
@@ -35,17 +47,20 @@ class TinyWebBrowser : public QWebView
     ~TinyWebBrowser();
 
  public Q_SLOTS:
-    void setSource( const QString& relativeUrl );
+    void setWikipediaPath( const QString& relativeUrl );
     void print();
 
  Q_SIGNALS:
     void statusMessage( QString );
 
+ protected:
+    QWebView *createWindow( QWebPage::WebWindowType type );
+
  private Q_SLOTS:
     void openExternalLink( QUrl );
 
  private:
-    QString         m_source;
+    TinyWebBrowserPrivate *d;
 };
 
 }

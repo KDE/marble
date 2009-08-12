@@ -283,6 +283,7 @@ else (APPLE AND QTONLY)
     MapThemeManager.h
     MarbleAboutDialog.h
     MarbleWidgetInputHandler.h
+    TinyWebBrowser.h
 
     MapThemeSortFilterProxyModel.h
     

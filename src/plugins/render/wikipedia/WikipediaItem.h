@@ -23,6 +23,8 @@ class QWebView;
 
 namespace Marble
 {
+
+class TinyWebBrowser;
  
 class WikipediaItem : public AbstractDataPluginItem
 {
@@ -85,7 +87,7 @@ class WikipediaItem : public AbstractDataPluginItem
     QUrl m_url;
     QUrl m_thumbnailImageUrl;
     QString m_summary;
-    QWebView *m_browser;
+    TinyWebBrowser *m_browser;
     QAction *m_action;
 
     QPixmap m_thumbnail;

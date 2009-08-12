@@ -31,7 +31,6 @@
 #include <QtCore/QHash>
 #include <QtCore/QUrl>
 #include <QtGui/QMouseEvent>
-#include <QtWebKit/QWebView>
 
 using namespace Marble;
 
@@ -178,15 +177,12 @@ QAction *PhotoPluginItem::action()
 
 void PhotoPluginItem::openBrowser()
 {
-    if( m_browser ) {
-        delete m_browser;
+    if( !m_browser ) {
+        m_browser = new TinyWebBrowser();
     }
-    m_browser = new QWebView();
     QString url = "http://www.flickr.com/photos/%1/%2/";
     m_browser->load( QUrl( url.arg( owner() ).arg( id() ) ) );
     m_browser->show();
-    connect( m_browser, SIGNAL( titleChanged(QString) ),
-             m_browser, SLOT( setWindowTitle(QString) ) );
 }
 
 #include "PhotoPluginItem.moc"

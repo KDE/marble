@@ -159,6 +159,7 @@ void MarbleWidgetPopupMenu::showFeatureInfo( QAction* action )
         QModelIndex index = m_featurelist.at( actionidx -1 );
 
         PlacemarkInfoDialog dialog( index, m_widget );
+        dialog.setWindowModality( Qt::WindowModal );
         dialog.exec();
     }
 }

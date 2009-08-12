@@ -15,9 +15,11 @@
 
 // Qt
 #include <QtCore/QFileInfo>
+#include <QtCore/QPointer>
 #include <QtCore/QUrl>
 #include <QtCore/QDebug>
 #include <QtCore/QRegExp>
+#include <QtGui/QAction>
 #include <QtGui/QPainter>
 #include <QtGui/QPrintDialog>
 #include <QtGui/QPrinter>
@@ -29,7 +31,15 @@
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 
-using namespace Marble;
+namespace Marble
+{
+
+class TinyWebBrowserPrivate
+{
+ public:
+    ~TinyWebBrowserPrivate() {
+    }
+};
 
 static QString guessWikipediaDomain()
 {
@@ -39,7 +49,8 @@ static QString guessWikipediaDomain()
 }
 
 TinyWebBrowser::TinyWebBrowser( QWidget* parent )
-    : QWebView( parent )
+    : QWebView( parent ),
+      d( new TinyWebBrowserPrivate() )
 {
     connect( this, SIGNAL( statusBarMessage( QString ) ),
              this, SIGNAL( statusMessage( QString ) ) );
@@ -47,13 +58,19 @@ TinyWebBrowser::TinyWebBrowser( QWidget* parent )
     page()->setLinkDelegationPolicy( QWebPage::DelegateAllLinks );
     connect( this, SIGNAL( linkClicked( QUrl ) ),
              this, SLOT( openExternalLink( QUrl ) ) );
+    connect( this, SIGNAL( titleChanged( QString ) ),
+             this, SLOT( setWindowTitle( QString ) ) );
+
+    pageAction( QWebPage::OpenLinkInNewWindow )->setEnabled( false );
+    pageAction( QWebPage::OpenLinkInNewWindow )->setVisible( false );
 }
 
 TinyWebBrowser::~TinyWebBrowser()
 {
+    delete d;
 }
 
-void TinyWebBrowser::setSource( const QString& relativeUrl )
+void TinyWebBrowser::setWikipediaPath( const QString& relativeUrl )
 {
     QUrl url = relativeUrl;
     if ( url.isRelative() )
@@ -70,9 +87,22 @@ void TinyWebBrowser::print()
     QWebView::print( &printer );
 }
 
+QWebView *TinyWebBrowser::createWindow( QWebPage::WebWindowType type )
+{
+    TinyWebBrowser *view = new TinyWebBrowser( this );
+
+    if ( type == QWebPage::WebModalDialog ) {
+        view->setWindowModality( Qt::WindowModal );
+    }
+
+    return view;
+}
+
 void TinyWebBrowser::openExternalLink( QUrl url )
 {
     QDesktopServices::openUrl( url );
 }
+
+} // namespace Marble
 
 #include "TinyWebBrowser.moc"

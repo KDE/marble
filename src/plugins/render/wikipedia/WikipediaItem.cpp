@@ -23,6 +23,7 @@
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "GeoSceneLayer.h"
+#include "TinyWebBrowser.h"
 
 using namespace Marble;
 
@@ -174,14 +175,11 @@ QAction *WikipediaItem::action()
 
 void WikipediaItem::openBrowser( )
 {
-    if( m_browser ) {
-        delete m_browser;
+    if( !m_browser ) {
+        m_browser = new TinyWebBrowser();
     }
-    m_browser = new QWebView();
     m_browser->load( url() );
     m_browser->show();
-    connect( m_browser, SIGNAL( titleChanged(QString) ),
-             m_browser, SLOT( setWindowTitle(QString) ) );
 }
     
 void WikipediaItem::setIcon( const QIcon& icon )

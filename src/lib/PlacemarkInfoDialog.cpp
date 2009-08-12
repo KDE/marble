@@ -40,7 +40,7 @@ PlacemarkInfoDialog::PlacemarkInfoDialog(const QPersistentModelIndex &index, QWi
     connect( m_pWikipediaBrowser, SIGNAL( statusMessage( QString ) ),
              this,                SLOT( showMessage( QString) ) );
     connect( this,                SIGNAL( source( QString ) ),
-             m_pWikipediaBrowser, SLOT( setSource( QString ) ) );//for wikipedia
+             m_pWikipediaBrowser, SLOT( setWikipediaPath( QString ) ) );//for wikipedia
 
     showContent();
 }
