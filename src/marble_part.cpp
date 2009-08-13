@@ -674,6 +674,8 @@ void MarblePart::setupActions()
     connect( m_controlSunAction, SIGNAL( triggered( bool ) ),
 	     this,               SLOT( controlSun() ) );
 
+    KStandardAction::redisplay( this, SLOT( reload() ), actionCollection() );
+
     // Action: Lock float items
     m_lockFloatItemsAct = new KAction ( this );
     actionCollection()->addAction( "options_lock_floatitems",
@@ -1113,6 +1115,11 @@ void MarblePart::slotUpdateSettings()
                                 i18n("Graphics System Change") );
     }    
     m_previousGraphicsSystem = graphicsSystem;
+}
+
+void MarblePart::reload()
+{
+    m_controlView->marbleWidget()->map()->reload();
 }
 
 void MarblePart::showPluginAboutDialog( QString nameId ) {

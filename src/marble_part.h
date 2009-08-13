@@ -120,6 +120,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  retrievePluginState();
 
     void  slotUpdateSettings();
+    void reload();
 
     /**
      * Shows the about dialog for the plugin with the corresponding @p nameId.

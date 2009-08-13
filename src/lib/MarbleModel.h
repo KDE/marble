@@ -295,6 +295,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     int tileZoomLevel() const;
 
+    void reloadMap() const;
+
  public Q_SLOTS:
     void clearVolatileTileCache();
     /**
@@ -356,6 +358,9 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
      */
     void repaintNeeded( QRegion dirtyRegion );
+
+    void downloadTile( const QUrl& sourceUrl, const QString& destinationFileName,
+                       const QString& id ) const;
 
  private:
     Q_DISABLE_COPY( MarbleModel )

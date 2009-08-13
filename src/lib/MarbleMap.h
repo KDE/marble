@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2008 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+// Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
@@ -273,6 +274,13 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief  Return a QPixmap with the current contents of the map.
      */
     QPixmap mapScreenShot();
+
+    /**
+     * @brief Reload the currently displayed map by reloading texture tiles
+     *        from the internet. In the future this should be extended to all
+     *        kinds of data which is used in the map.
+     */
+    void reload() const;
 
     /**
      * @brief  Return the property value by name.

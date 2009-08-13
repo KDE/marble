@@ -3,7 +3,7 @@
  *
  * Copyright 2005-2007 Torsten Rahn <tackat@kde.org>"
  * Copyright 2007      Inge Wallin  <ingwa@kde.org>"
- * Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
+ * Copyright 2008,2009 Jens-Michael Hoffmann <jensmh@gmx.de>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -31,7 +31,6 @@
 #include "DatasetProvider.h"
 #include "TextureTile.h"
 #include "MarbleDirs.h"
-#include "TileId.h"
 #include "MarbleModel.h"
 #include "TileLoaderHelper.h"
 
@@ -274,6 +273,18 @@ quint64 TileLoader::volatileCacheLimit() const
     return d->m_tileCache.maxCost() / 1024;
 }
 
+QList<TileId> TileLoader::tilesOnDisplay() const
+{
+    QList<TileId> result;
+    QHash<TileId, TextureTile*>::const_iterator pos = d->m_tileHash.constBegin();
+    QHash<TileId, TextureTile*>::const_iterator const end = d->m_tileHash.constEnd();
+    for (; pos != end; ++pos ) {
+        if ( pos.value()->used() ) {
+            result.append( pos.key() );
+        }
+    }
+    return result;
+}
 
 int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
 {

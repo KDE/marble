@@ -7,7 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
-// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2008,2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 // Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
@@ -67,6 +67,7 @@
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 #include "TileLoader.h"
+#include "TileLoaderHelper.h"
 #include "VectorComposer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
@@ -146,6 +147,8 @@ MarbleModel::MarbleModel( QObject *parent )
       d( new MarbleModelPrivate( this ) )
 {
     MarbleModelPrivate::refCounter.ref();
+    connect( this, SIGNAL( downloadTile( QUrl, QString, QString )),
+             d->m_downloadManager, SLOT( addJob( QUrl, QString, QString )));
     d->m_dataFacade = new MarbleDataFacade( this );
 
     d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
@@ -887,6 +890,31 @@ int MarbleModel::tileZoomLevel() const
         return -1;
 
     return d->m_texmapper->tileZoomLevel();
+}
+
+void MarbleModel::reloadMap() const
+{
+    if ( !d->m_mapTheme->map()->hasTextureLayers() )
+        return;
+
+    const QString themeId = d->m_mapTheme->head()->theme();
+    GeoSceneLayer * const layer = static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->
+                                                               layer( themeId ));
+    Q_ASSERT( layer );
+    GeoSceneTexture * const texture = static_cast<GeoSceneTexture*>( layer->groundDataset() );
+    Q_ASSERT( texture );
+
+    Q_ASSERT( d->m_tileLoader );
+    QList<TileId> displayed = d->m_tileLoader->tilesOnDisplay();
+    QList<TileId>::const_iterator pos = displayed.constBegin();
+    QList<TileId>::const_iterator const end = displayed.constEnd();
+    for (; pos != end; ++pos ) {
+        TileId const & id = *pos;
+        QUrl sourceUrl = TileLoaderHelper::downloadUrl( texture, id.zoomLevel(), id.x(), id.y() );
+        QString destFileName = TileLoaderHelper::relativeTileFileName( texture, id.zoomLevel(),
+                                                                       id.x(), id.y() );
+        emit downloadTile( sourceUrl, destFileName, id.toString() );
+    }
 }
 
 }

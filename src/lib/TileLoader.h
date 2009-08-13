@@ -3,6 +3,7 @@
  *
  * Copyright 2005-2007 Torsten Rahn <tackat@kde.org>"
  * Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+ * Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -24,6 +25,8 @@
 #define MARBLE_TILELOADER_H
 
 #include <QtCore/QObject>
+
+#include "TileId.h"
 
 class QString;
 
@@ -139,6 +142,13 @@ class TileLoader : public QObject
          * @return the cache limit in kilobytes
          */
         quint64 volatileCacheLimit() const;
+
+        /**
+         * @brief Returns a list of TileIds of the tiles which are currently
+         *        displayed. This is used for example for the map reload
+         *        functionality.
+         */
+        QList<TileId> tilesOnDisplay() const;
 
         /**
          * Returns the highest level in which some tiles are available for the given @p

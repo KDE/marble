@@ -8,6 +8,7 @@
 // Copyright 2006-2009 Torsten Rahn <tackat@kde.org>"
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>"
 // Copyright 2008      Carlos Licea <carlos.licea@kdemail.net>
+// Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 
@@ -594,6 +595,11 @@ QPixmap MarbleMap::mapScreenShot()
     painter.end();
 
     return screenshotPixmap;
+}
+
+void MarbleMap::reload() const
+{
+    d->m_model->reloadMap();
 }
 
 bool MarbleMap::propertyValue( const QString& name ) const
