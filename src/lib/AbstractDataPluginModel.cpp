@@ -303,6 +303,7 @@ void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item )
     d->m_itemSet.insert( i, item );
     
     connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
+    connect( item, SIGNAL( updated() ), this, SIGNAL( itemsUpdated() ) );
 
     if ( item->initialized() ) {
         emit itemsUpdated();

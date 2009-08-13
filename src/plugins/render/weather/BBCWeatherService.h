@@ -13,10 +13,13 @@
 
 #include "AbstractWeatherService.h"
 
+#include "GeoDataLatLonAltBox.h"
+
 namespace Marble
 {
     
 class BBCWeatherItem;
+class StationListParser;
 
 class BBCWeatherService : public AbstractWeatherService
 {
@@ -31,10 +34,18 @@ class BBCWeatherService : public AbstractWeatherService
                              MarbleDataFacade *facade,
                              qint32 number = 10 );
  
+ private Q_SLOTS:
+    void fetchStationList();
+
  private:
     void setupList();
 
     QList<BBCWeatherItem*> m_items;
+    bool m_parsingStarted;
+    StationListParser *m_parser;
+    GeoDataLatLonAltBox m_scheduledBox;
+    qint32 m_scheduledNumber;
+    MarbleDataFacade *m_scheduledFacade;
 };
 
 } // namespace Marble

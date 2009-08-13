@@ -18,6 +18,7 @@
 // Qt
 #include <QtCore/QDebug>
 #include <QtCore/QFile>
+#include <QtCore/QTime>
 #include <QtCore/QUrl>
 
 using namespace Marble;
@@ -57,29 +58,8 @@ QString BBCWeatherItem::service() const
 
 void BBCWeatherItem::addDownloadedFile( const QString& url, const QString& type )
 {
-    if( type == "bbcobservation" ) {
-        QFile file( url );
-        if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
-            return;
-        }
-        
-        BBCParser parser;
-        QList<WeatherData> data = parser.read( &file );
-        if( !data.isEmpty() ) {
-            setCurrentWeather( data.at( 0 ) );
-        }
-    }
-    else if ( type == "bbcforecast" ) {
-        QFile file( url );
-
-        if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
-            return;
-        }
-
-        BBCParser parser;
-        QList<WeatherData> data = parser.read( &file );
-
-        addForecastWeather( data );
+    if( type == "bbcobservation" || type == "bbcforecast" ) {
+        BBCParser::instance()->scheduleRead( url, this, type );
     }
 }
 

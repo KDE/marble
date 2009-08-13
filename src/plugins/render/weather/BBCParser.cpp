@@ -14,11 +14,14 @@
 // Marble
 #include "global.h"
 #include "WeatherData.h"
+#include "BBCWeatherItem.h"
 
 // Qt
 #include <QtCore/QByteArray>
 #include <QtCore/QDateTime>
 #include <QtCore/QDebug>
+#include <QtCore/QFile>
+#include <QtCore/QMutexLocker>
 #include <QtCore/QRegExp>
 
 using namespace Marble;
@@ -36,10 +39,92 @@ QHash<QString, WeatherData::Visibility> BBCParser::visibilityStates
 QHash<QString, int> BBCParser::monthNames
         = QHash<QString, int>();
 
+const int WAIT_ATTEMPTS = 20;
+const int WAIT_TIME = 100;
+
 BBCParser::BBCParser()
+    : QThread(),
+      m_end( false )
 {
     BBCParser::setupHashes();
 }
+
+BBCParser::~BBCParser()
+{
+    m_schedule.clear();
+    if ( isRunning() ) {
+        m_end = true;
+        wait( 1000 );
+    }
+}
+
+BBCParser *BBCParser::instance()
+{
+    static BBCParser parser;
+    return &parser;
+}
+
+void BBCParser::scheduleRead( const QString& path,
+                              BBCWeatherItem *item,
+                              const QString& type )
+{
+    ScheduleEntry entry;
+    entry.path = path;
+    entry.item = item;
+    entry.type = type;
+
+    m_schedule.push( entry );
+
+    QMutexLocker locker( &m_runStateMutex );
+    if ( !isRunning() ) {
+        start( QThread::IdlePriority );
+    }
+}
+
+void BBCParser::run()
+{
+    int waitAttempts = WAIT_ATTEMPTS;
+    while( 1 ) {
+        m_runStateMutex.lock();
+        if ( m_schedule.isEmpty() ) {
+            waitAttempts--;
+            if ( !waitAttempts || m_end ) {
+                break;
+            }
+            else {
+                m_runStateMutex.unlock();
+                msleep( WAIT_TIME );
+            }
+        }
+        else {
+            m_runStateMutex.unlock();
+            ScheduleEntry entry = m_schedule.pop();
+
+            QFile file( entry.path );
+            if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
+                return;
+            }
+
+            QList<WeatherData> data = read( &file );
+
+            if( !data.isEmpty() && !entry.item.isNull() ) {
+                if ( entry.type == "bbcobservation" ) {
+                    entry.item->setCurrentWeather( data.at( 0 ) );
+                }
+                else if ( entry.type == "bbcforecast" ) {
+                    entry.item->addForecastWeather( data );
+                }
+
+                emit parsedFile();
+            }
+
+            waitAttempts = WAIT_ATTEMPTS;
+        }
+    }
+
+    m_runStateMutex.unlock();
+}
+
 
 QList<WeatherData> BBCParser::read( QIODevice *device )
 {
@@ -381,7 +466,7 @@ void BBCParser::setupHashes()
     {
         return;
     }
-    
+
     dayConditions["sunny"] = WeatherData::ClearDay;
     dayConditions["clear"] = WeatherData::ClearDay;
     dayConditions["clear sky"] = WeatherData::ClearDay;
@@ -396,6 +481,7 @@ void BBCParser::setupHashes()
     dayConditions["fog"] = WeatherData::Mist;
     dayConditions["foggy"] = WeatherData::Mist;
     dayConditions["dense fog"] = WeatherData::Mist;
+    dayConditions["Thick Fog"] = WeatherData::Mist;
     dayConditions["tropical storm"] = WeatherData::Thunderstorm;
     dayConditions["hazy"] = WeatherData::Mist;
     dayConditions["light shower"] = WeatherData::LightShowersDay;
@@ -443,6 +529,7 @@ void BBCParser::setupHashes()
     nightConditions["fog"] = WeatherData::Mist;
     nightConditions["foggy"] = WeatherData::Mist;
     nightConditions["dense fog"] = WeatherData::Mist;
+    nightConditions["Thick Fog"] = WeatherData::Mist;
     nightConditions["tropical storm"] = WeatherData::Thunderstorm;
     nightConditions["hazy"] = WeatherData::Mist;
     nightConditions["light shower"] = WeatherData::LightShowersNight;
@@ -522,3 +609,5 @@ void BBCParser::setupHashes()
     monthNames["Nov"] = 11;
     monthNames["Dec"] = 12;
 }
+
+#include "BBCParser.moc"

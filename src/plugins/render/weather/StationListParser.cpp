@@ -18,6 +18,7 @@
 
 // Qt
 #include <QtCore/QDebug>
+#include <QtCore/QFile>
 #include <QtCore/QString>
 
 using namespace Marble;
@@ -34,14 +35,14 @@ static bool lessThanByPointer( const BBCWeatherItem *item1,
 }
 
 StationListParser::StationListParser( QObject *parent )
-    : m_parent( parent )
+    : QThread( parent ),
+      QXmlStreamReader()
 {
 }
 
-QList<BBCWeatherItem*> StationListParser::read( QIODevice *device )
+void StationListParser::read()
 {
     m_list.clear();
-    setDevice( device );
 
     while ( !atEnd() ) {
         readNext();
@@ -53,8 +54,29 @@ QList<BBCWeatherItem*> StationListParser::read( QIODevice *device )
                 raiseError( "The file is not an valid file." );
         }
     }
+}
 
+QList<BBCWeatherItem *> StationListParser::stationList() const
+{
     return m_list;
+}
+
+void StationListParser::setPath( QString path )
+{
+    m_path = path;
+}
+
+void StationListParser::run()
+{
+    QFile file( m_path );
+
+    if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
+        return;
+    }
+
+    setDevice( &file );
+    read();
+    emit parsedStationList();
 }
 
 void StationListParser::readUnknownElement()
@@ -97,7 +119,7 @@ void StationListParser::readStation()
     Q_ASSERT( isStartElement()
               && name() == "Station" );
     
-    BBCWeatherItem *item = new BBCWeatherItem( m_parent );
+    BBCWeatherItem *item = new BBCWeatherItem();
     
     while ( !atEnd() ) {
         readNext();
@@ -179,3 +201,5 @@ void StationListParser::readPoint( BBCWeatherItem *item )
         }
     }
 }
+
+#include "StationListParser.moc"

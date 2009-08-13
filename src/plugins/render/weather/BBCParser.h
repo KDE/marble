@@ -17,6 +17,10 @@
 // Qt
 #include <QtCore/QHash>
 #include <QtCore/QList>
+#include <QtCore/QMutex>
+#include <QtCore/QPointer>
+#include <QtCore/QStack>
+#include <QtCore/QThread>
 #include <QtCore/QXmlStreamReader>
 
 class QByteArray;
@@ -25,14 +29,33 @@ class QObject;
 namespace Marble
 {
 
-class BBCParser : public QXmlStreamReader
+class BBCWeatherItem;
+
+struct ScheduleEntry {
+    QString path;
+    QPointer<BBCWeatherItem> item;
+    QString type;
+};
+
+class BBCParser : public QThread, public QXmlStreamReader
 {
+    Q_OBJECT;
 public:
     BBCParser();
+    ~BBCParser();
 
-    QList<WeatherData> read( QIODevice *device );
+    static BBCParser *instance();
+    void scheduleRead( const QString& path, BBCWeatherItem *item, const QString& type );
+
+protected:
+    void run();
+
+Q_SIGNALS:
+    void parsedFile();
 
 private:
+    QList<WeatherData> read( QIODevice *device );
+
     void readUnknownElement();
     void readBBC();
     void readChannel();
@@ -44,6 +67,9 @@ private:
     void setupHashes();
 
     QList<WeatherData> m_list;
+    QStack<ScheduleEntry> m_schedule;
+    QMutex m_runStateMutex;
+    bool m_end;
     
     static QHash<QString, WeatherData::WeatherCondition> dayConditions;
     static QHash<QString, WeatherData::WeatherCondition> nightConditions;

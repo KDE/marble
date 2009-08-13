@@ -347,6 +347,7 @@ void WeatherItem::setCurrentWeather( const WeatherData &weather )
     d->m_currentWeather = weather;
     d->updateToolTip();
     d->updateLabels();
+    emit updated();
 }
 
 QMap<QDate, WeatherData> WeatherItem::forecastWeather() const
@@ -359,6 +360,7 @@ void WeatherItem::setForecastWeather( const QMap<QDate, WeatherData>& forecasts 
     d->m_forecastWeather = forecasts;
 
     d->updateToolTip();
+    emit updated();
 }
 
 void WeatherItem::addForecastWeather( const QList<WeatherData>& forecasts )
@@ -389,6 +391,7 @@ void WeatherItem::addForecastWeather( const QList<WeatherData>& forecasts )
     }
 
     d->updateToolTip();
+    emit updated();
 }
 
 quint8 WeatherItem::priority() const

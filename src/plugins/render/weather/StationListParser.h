@@ -15,6 +15,7 @@
 #include <QtCore/QHash>
 #include <QtCore/QStringList>
 #include <QtCore/QList>
+#include <QtCore/QThread>
 #include <QtCore/QXmlStreamReader>
 
 class QString;
@@ -24,12 +25,23 @@ namespace Marble
 
 class BBCWeatherItem;
     
-class StationListParser : public QXmlStreamReader
+class StationListParser : public QThread, public QXmlStreamReader
 {
+    Q_OBJECT
 public:
     StationListParser( QObject *parent );
 
-    QList<BBCWeatherItem *> read( QIODevice *device );
+    void read();
+
+    QList<BBCWeatherItem *> stationList() const;
+
+    void setPath( QString path );
+
+Q_SIGNALS:
+    void parsedStationList();
+
+protected:
+    void run();
 
 private:
     void readUnknownElement();
@@ -38,6 +50,7 @@ private:
     QString readCharacters();
     void readPoint( BBCWeatherItem *item );
 
+    QString m_path;
     QList<BBCWeatherItem *> m_list;
     QObject *m_parent;
 };

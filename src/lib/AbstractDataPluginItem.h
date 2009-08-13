@@ -81,6 +81,9 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
     virtual bool isGeoProjected();
                          
     virtual bool operator<( const AbstractDataPluginItem *other ) const = 0;
+
+ Q_SIGNALS:
+    void updated();
     
  private:
     AbstractDataPluginItemPrivate * const d;
