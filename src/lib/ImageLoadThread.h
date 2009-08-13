@@ -24,7 +24,8 @@ namespace Marble
 
 class TileId;
 
-class ImageLoadThread : public QThread {
+class ImageLoadThread : public QThread
+{
     Q_OBJECT
 
  public:

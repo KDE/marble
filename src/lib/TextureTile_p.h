@@ -26,7 +26,8 @@ namespace Marble
 {
 
 
-class TextureTilePrivate : AbstractTilePrivate {
+class TextureTilePrivate : AbstractTilePrivate
+{
     Q_DECLARE_PUBLIC( TextureTile )
 
  public:

@@ -19,7 +19,8 @@ class QModelIndex;
 namespace Marble
 {
 
-class MapThemeSortFilterProxyModel : public QSortFilterProxyModel {
+class MapThemeSortFilterProxyModel : public QSortFilterProxyModel
+{
      Q_OBJECT
 
     public:

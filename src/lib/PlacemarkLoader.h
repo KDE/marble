@@ -18,7 +18,8 @@ namespace Marble
 class PlacemarkContainer;
 class GeoDataDocument;
 
-class PlacemarkLoader : public QThread {
+class PlacemarkLoader : public QThread
+{
     Q_OBJECT
     public:
         PlacemarkLoader( QObject* parent, const QString& file, bool finalize = true );

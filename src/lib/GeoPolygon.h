@@ -122,7 +122,8 @@ class MARBLE_EXPORT PntMap : public QObject,
     Q_DISABLE_COPY( PntMap )
 };
 
-class MARBLE_EXPORT PntMapLoader : public QThread {
+class MARBLE_EXPORT PntMapLoader : public QThread
+{
     Q_OBJECT
     public:
         PntMapLoader( PntMap* parent, const QString& filename );

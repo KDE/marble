@@ -21,7 +21,8 @@ namespace Marble
 {
 
 
-class MarbleLocalePrivate {
+class MarbleLocalePrivate
+{
  public:
     MarbleLocalePrivate();
     virtual ~MarbleLocalePrivate();

@@ -210,7 +210,8 @@ const quint8 maxBaseTileLevel = 4;
 class MarbleGlobalPrivate;
 class MarbleLocale;
 
-class  MARBLE_EXPORT MarbleGlobal {
+class  MARBLE_EXPORT MarbleGlobal
+{
  public:
     static MarbleGlobal * getInstance();
     ~MarbleGlobal();

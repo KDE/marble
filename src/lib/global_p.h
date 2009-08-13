@@ -23,7 +23,8 @@ namespace Marble
 {
 
 
-class MarbleGlobalPrivate {
+class MarbleGlobalPrivate
+{
  public:
     MarbleGlobalPrivate();
     virtual ~MarbleGlobalPrivate();

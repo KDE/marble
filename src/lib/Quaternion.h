@@ -39,7 +39,8 @@ typedef qreal    xmmfloat[4];
 typedef xmmfloat  matrix[3];
 
 
-class MARBLE_EXPORT Quaternion {
+class MARBLE_EXPORT Quaternion
+{
  public:
     Quaternion();
     Quaternion(qreal w, qreal x, qreal y, qreal z);

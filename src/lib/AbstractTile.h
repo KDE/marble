@@ -27,7 +27,8 @@ namespace Marble
 
 class AbstractTilePrivate;
 
-class AbstractTile : public QObject {
+class AbstractTile : public QObject
+{
     Q_OBJECT
 
  public:
