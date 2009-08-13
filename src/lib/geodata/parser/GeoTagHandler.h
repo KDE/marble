@@ -39,7 +39,8 @@ class GeoParser;
  * implemented GeoTagHandler by declaring an instance of the helper structure
  * @see GeoTagHandlerRegistrar with a corrisponding @see QualifiedName.
  */
-class MARBLE_EXPORT GeoTagHandler {
+class MARBLE_EXPORT GeoTagHandler
+{
 public:
     // API to be implemented by child handlers.
     virtual GeoNode* parse(GeoParser&) const = 0;
@@ -70,7 +71,8 @@ private:
 };
 
 // Helper structure
-struct GeoTagHandlerRegistrar {
+struct GeoTagHandlerRegistrar
+{
 public:
     GeoTagHandlerRegistrar(const GeoTagHandler::QualifiedName& name, const GeoTagHandler* handler)
     {

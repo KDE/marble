@@ -35,7 +35,8 @@ enum GeoSceneSourceType {
     GeoScene_DGML   = 0
 };
 
-class GEODATA_EXPORT GeoSceneParser : public GeoParser {
+class GEODATA_EXPORT GeoSceneParser : public GeoParser
+{
 public:
     explicit GeoSceneParser(GeoSceneSourceType source);
     virtual ~GeoSceneParser();

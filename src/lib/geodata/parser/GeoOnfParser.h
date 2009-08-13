@@ -29,7 +29,8 @@ namespace Marble
 
 class GeoDocument;
 
-class GEODATA_EXPORT GeoOnfParser : public GeoParser {
+class GEODATA_EXPORT GeoOnfParser : public GeoParser
+{
 public:
     GeoOnfParser();
 

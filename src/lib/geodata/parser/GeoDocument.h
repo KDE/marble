@@ -75,7 +75,8 @@ extern const char* GeoDataSyleMapType;
 /**
  * @short A shared base class between GeoDataDocument/GeoSourceDocument
  */
-class GEODATA_EXPORT GeoDocument {
+class GEODATA_EXPORT GeoDocument
+{
 protected:
     GeoDocument();
 
@@ -92,7 +93,8 @@ public:
 /**
  * @short A shared base class for all classes that are mapped to a specifig tag (ie. GeoFolder)
  */
-class GEODATA_EXPORT GeoNode {
+class GEODATA_EXPORT GeoNode
+{
 protected:
     GeoNode();
     virtual ~GeoNode();

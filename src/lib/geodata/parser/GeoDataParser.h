@@ -38,7 +38,8 @@ enum GeoDataSourceType {
     GeoData_OSM    = 3
 };
 
-class GEODATA_EXPORT GeoDataParser : public GeoParser {
+class GEODATA_EXPORT GeoDataParser : public GeoParser
+{
 public:
     explicit GeoDataParser(GeoDataSourceType source);
     virtual ~GeoDataParser();
