@@ -39,7 +39,7 @@ struct ScheduleEntry {
 
 class BBCParser : public QThread, public QXmlStreamReader
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     BBCParser();
     ~BBCParser();
