@@ -713,7 +713,8 @@ void MarblePart::createInfoBoxesMenu()
     plugActionList( "infobox_actionlist", actionList );
 }
 
-void MarblePart::createOnlineServicesMenu() {
+void MarblePart::createOnlineServicesMenu()
+{
     QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
     
     QList<QAction*> actionList;
@@ -1122,7 +1123,8 @@ void MarblePart::reload()
     m_controlView->marbleWidget()->map()->reload();
 }
 
-void MarblePart::showPluginAboutDialog( QString nameId ) {
+void MarblePart::showPluginAboutDialog( QString nameId )
+{
     QList<RenderPlugin *> renderItemList = m_controlView->marbleWidget()->renderPlugins();
 
     foreach ( RenderPlugin *renderItem, renderItemList ) {
@@ -1135,7 +1137,8 @@ void MarblePart::showPluginAboutDialog( QString nameId ) {
     }
 }
 
-void MarblePart::showPluginConfigDialog( QString nameId ) {
+void MarblePart::showPluginConfigDialog( QString nameId )
+{
     QList<RenderPlugin *> renderItemList = m_controlView->marbleWidget()->renderPlugins();
 
     foreach ( RenderPlugin *renderItem, renderItemList ) {
@@ -1148,7 +1151,8 @@ void MarblePart::showPluginConfigDialog( QString nameId ) {
     }
 }
 
-void MarblePart::writePluginSettings() {
+void MarblePart::writePluginSettings()
+{
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
 
     foreach( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
@@ -1165,7 +1169,8 @@ void MarblePart::writePluginSettings() {
     }
 }
 
-void MarblePart::readPluginSettings() {
+void MarblePart::readPluginSettings()
+{
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
 
     foreach( RenderPlugin *plugin, m_controlView->marbleWidget()->renderPlugins() ) {
