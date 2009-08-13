@@ -8,7 +8,8 @@
 
 
 
-namespace GeoCute {
+namespace GeoCute
+{
 
 enum PositionFieldFlag {
     PositionFieldNone = 0,
@@ -20,7 +21,8 @@ enum PositionFieldFlag {
 Q_DECLARE_FLAGS(PositionFields, PositionFieldFlag)
 Q_DECLARE_OPERATORS_FOR_FLAGS(PositionFields)
 
-struct Position {
+struct Position
+{
     Accuracy accuracy;
     qreal altitude;
     PositionFields fields;

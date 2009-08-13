@@ -8,9 +8,11 @@
 
 class QString;
 
-namespace GeoCute {
+namespace GeoCute
+{
 
-class VelocityProvider : public Provider {
+class VelocityProvider : public Provider
+{
     Q_OBJECT
     
     public:

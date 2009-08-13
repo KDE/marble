@@ -3,7 +3,8 @@
 
 
 
-namespace GeoCute {
+namespace GeoCute
+{
 
 enum AccuracyLevel {
     AccuracyLevelNone = 0,

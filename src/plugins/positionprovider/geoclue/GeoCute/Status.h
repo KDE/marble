@@ -3,7 +3,8 @@
 
 
 
-namespace GeoCute {
+namespace GeoCute
+{
 
 enum Status {
     StatusError = 0,

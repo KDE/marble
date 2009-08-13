@@ -12,7 +12,8 @@
 
 static const QString interfaceName = "org.freedesktop.Geoclue.Position";
 
-class GeoCute::PositionProvider::Private {
+class GeoCute::PositionProvider::Private
+{
     public:
         Private(PositionProvider& parent, const QString& service,
             const QString& path);

@@ -11,7 +11,8 @@
 
 static const QString interfaceName = "org.freedesktop.Geoclue";
 
-class GeoCute::Provider::Private {
+class GeoCute::Provider::Private
+{
     public:
         Private(Provider& parent, const QString& service,
             const QString& path);

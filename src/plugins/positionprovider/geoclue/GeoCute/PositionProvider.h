@@ -10,9 +10,11 @@
 
 class QString;
 
-namespace GeoCute {
+namespace GeoCute
+{
 
-class PositionProvider : public Provider {
+class PositionProvider : public Provider
+{
     Q_OBJECT
     
     public:

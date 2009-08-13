@@ -9,9 +9,11 @@
 
 class QDBusArgument;
 
-namespace GeoCute {
+namespace GeoCute
+{
     
-class Accuracy {
+class Accuracy
+{
     public:
         AccuracyLevel level;
         qreal horizontal;

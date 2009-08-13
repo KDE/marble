@@ -11,9 +11,11 @@
 
 
 
-namespace GeoCute {
+namespace GeoCute
+{
 
-class SimpleDBusInterface : public QObject {
+class SimpleDBusInterface : public QObject
+{
     Q_OBJECT
 
     public:

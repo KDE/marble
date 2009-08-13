@@ -7,7 +7,8 @@
 
 
 
-namespace GeoCute {
+namespace GeoCute
+{
     
 enum ResourceFlags {
     ResourceNone = 0,
@@ -24,7 +25,8 @@ enum SignallingFlags {
 
 class PositionProvider;
 
-class MasterClient : public QObject {
+class MasterClient : public QObject
+{
     Q_OBJECT
     
     public:

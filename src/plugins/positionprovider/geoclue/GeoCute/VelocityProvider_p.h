@@ -12,7 +12,8 @@
 
 static const QString interfaceName = "org.freedesktop.Geoclue.Velocity";
 
-class GeoCute::VelocityProvider::Private {
+class GeoCute::VelocityProvider::Private
+{
     public:
         Private(VelocityProvider& parent, const QString& service,
             const QString& path);

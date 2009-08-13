@@ -16,7 +16,8 @@ static const QString masterPathName = "/org/freedesktop/Geoclue/Master";
 
 static QString createClientPath();
 
-class GeoCute::MasterClient::Private {
+class GeoCute::MasterClient::Private
+{
     public:
         Private();
         

@@ -8,9 +8,11 @@
 
 
 
-namespace GeoCute {
+namespace GeoCute
+{
 
-class Provider : public QObject {
+class Provider : public QObject
+{
     Q_OBJECT
     
     public:
