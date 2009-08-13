@@ -19,7 +19,8 @@ class QTextEdit;
 class QHBoxLayout;
 class QVBoxLayout;
 
-namespace Marble {
+namespace Marble
+{
 
 class TextEditor : public QWidget
 {

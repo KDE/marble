@@ -15,7 +15,8 @@
 
 #include "GeoDataPlacemark.h"
 
-namespace Marble{
+namespace Marble
+{
 
 class GeoDataPlacemark;
 

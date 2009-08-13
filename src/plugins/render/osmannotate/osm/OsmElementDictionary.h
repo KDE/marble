@@ -14,7 +14,8 @@
 namespace Marble
 {
 
-namespace osm {
+namespace osm
+{
 
     extern const char* osmTag_osm;
 

@@ -13,7 +13,8 @@
 
 #include "GeoGraphicsItem.h"
 
-namespace Marble{
+namespace Marble
+{
 
 class GeoDataPlacemark;
 class GeoDataPoint;

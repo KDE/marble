@@ -18,7 +18,8 @@
 
 
 
-namespace GeoCute {
+namespace GeoCute
+{
     class PositionProvider;
 }
 

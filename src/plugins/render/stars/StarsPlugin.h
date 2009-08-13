@@ -26,7 +26,8 @@ class QDateTime;
 namespace Marble
 {
 
-class StarPoint {
+class StarPoint
+{
  public:
     StarPoint() {}
     /**

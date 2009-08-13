@@ -31,7 +31,8 @@ class GeoDataFeature;
 class GeoDataGeometry;
 class GeoPainter;
 
-class GeoRendererView : public QAbstractItemView {
+class GeoRendererView : public QAbstractItemView
+{
  public:
     GeoRendererView( QWidget * parent = 0 );
     

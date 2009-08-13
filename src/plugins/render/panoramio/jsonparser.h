@@ -26,7 +26,8 @@ sanity checking would include :
 (3)some other plan that i have yet not thought upon :)
     @author Shashank Singh
 */
-struct panoramioDataStructure {
+struct panoramioDataStructure
+{
     long int count;// Total number of photographs will be stored in this int
     long int photo_id ; // Id of each photograph
     QString photo_title; // Title of each photograph

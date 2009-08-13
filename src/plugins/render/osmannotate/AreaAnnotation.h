@@ -14,7 +14,8 @@
 #include "TmpGraphicsItem.h"
 #include "GeoDataPolygon.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class  AreaAnnotation : public TmpGraphicsItem
 {

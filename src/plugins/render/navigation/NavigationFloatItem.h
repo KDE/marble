@@ -29,7 +29,8 @@ class MarbleWidget;
  * @short Provides a float item with zoom and move controls
  *
  */
-class NavigationFloatItem: public AbstractFloatItem {
+class NavigationFloatItem: public AbstractFloatItem
+{
 Q_OBJECT
 //Q_INTERFACES( MarbleLayerInterface )
 MARBLE_PLUGIN( NavigationFloatItem )

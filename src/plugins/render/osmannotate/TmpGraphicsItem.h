@@ -20,7 +20,8 @@
 #include "GeoDataLatLonAltBox.h"
 #include "marble_export.h"
 
-namespace Marble {
+namespace Marble
+{
 
 
 

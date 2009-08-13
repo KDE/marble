@@ -14,7 +14,8 @@
 #include "AbstractDataPluginModel.h"
 #include "jsonparser.h"
 
-namespace Marble {
+namespace Marble
+{
 
 const quint32 numberOfImagesPerFetch = 7;
   

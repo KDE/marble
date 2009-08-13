@@ -18,7 +18,8 @@ This class implements a Widget that shows image in thumbnail format and then it 
 
 	@author Shashank Singh <shashank.singh@geodesic.com>
 */
-class imageWidget : public QWidget {
+class imageWidget : public QWidget
+{
     Q_OBJECT
     Q_DISABLE_COPY(imageWidget) //i am trying to save this class from deepcopy
 public:

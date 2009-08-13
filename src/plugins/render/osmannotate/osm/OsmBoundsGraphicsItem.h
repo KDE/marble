@@ -17,7 +17,8 @@
 
 #include <QtGui/QPen>
 
-namespace Marble{
+namespace Marble
+{
 
 class GeoPainter;
 class ViewportParams;

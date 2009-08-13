@@ -16,7 +16,8 @@
 
 namespace Marble
 {
-namespace osm {
+namespace osm
+{
 
 class OsmBoundsTagHandler : public GeoTagHandler
 {

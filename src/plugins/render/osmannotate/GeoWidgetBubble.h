@@ -14,7 +14,8 @@
 #include <QtCore/QString>
 #include <QtGui/QWidget>
 
-namespace Marble {
+namespace Marble
+{
 
 class GeoPainter;
 class ViewportParams;

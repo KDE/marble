@@ -17,9 +17,11 @@
 
 #include <QtGui/QIcon>
 
-namespace Marble {
+namespace Marble
+{
 
-class PanoramioPlugin : public AbstractDataPlugin {
+class PanoramioPlugin : public AbstractDataPlugin
+{
     Q_OBJECT
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( PanoramioPlugin )
