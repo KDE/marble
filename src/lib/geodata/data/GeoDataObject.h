@@ -46,7 +46,8 @@ class GeoDataObjectPrivate;
  * Marble.
  */
 class GEODATA_EXPORT GeoDataObject : public GeoNode,
-                      public Serializable {
+                      public Serializable
+{
 public:
     GeoDataObject();
     GeoDataObject( const GeoDataObject & );

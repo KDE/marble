@@ -46,7 +46,8 @@ class GeoDataRegionPrivate;
      that is being looked at by the observer.
 */
 
-class GEODATA_EXPORT GeoDataRegion : public GeoDataObject {
+class GEODATA_EXPORT GeoDataRegion : public GeoDataObject
+{
 
   public:
 /*!

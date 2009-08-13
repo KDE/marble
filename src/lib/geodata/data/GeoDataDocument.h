@@ -51,7 +51,8 @@ class GeoDataDocumentPrivate;
  * styleUrl for a given Feature or StyleMap.
  */
 class GEODATA_EXPORT GeoDataDocument : public GeoDocument,
-                                       public GeoDataContainer {
+                                       public GeoDataContainer
+{
 public:
     GeoDataDocument();
     GeoDataDocument( GeoDataFeature& other );

@@ -41,7 +41,8 @@ class GeoDataLodPrivate;
     It also describes how "quickly" the feature fades in and out. 
 */
 
-class GEODATA_EXPORT GeoDataLod : public GeoDataObject {
+class GEODATA_EXPORT GeoDataLod : public GeoDataObject
+{
 
   public:
 /*!

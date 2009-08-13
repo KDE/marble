@@ -71,7 +71,8 @@ class GeoDataLineStringPrivate;
     geodesic bounding box or the length of a LineString.
 */
 
-class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry {
+class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
+{
 
  public:
     typedef QVector<GeoDataCoordinates>::Iterator Iterator;

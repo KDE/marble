@@ -78,7 +78,8 @@ class GeoDataPolygonPrivate;
     \see GeoDataLinearRing
 */
 
-class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry {
+class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
+{
  public:
 /*!
     \brief Creates a new Polygon.

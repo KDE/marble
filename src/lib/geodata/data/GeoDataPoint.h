@@ -45,7 +45,8 @@ class GeoDataPointPrivate;
 */
 
 class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
-                                    public GeoDataGeometry {
+                                    public GeoDataGeometry
+{
  public:
     typedef GeoDataCoordinates::Notation Notation;
     typedef GeoDataCoordinates::Unit Unit;

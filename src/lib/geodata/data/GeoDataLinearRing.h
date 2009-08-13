@@ -65,7 +65,8 @@ namespace Marble
 
 class GeoDataLinearRingPrivate;
 
-class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString {
+class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
+{
 
  public:
 /*!
