@@ -101,7 +101,7 @@ public:
     /// Reimplemented from Serializable
     virtual void unpack( QDataStream& steam );
 
- protected:
+ private:
 
     GeoDataObjectPrivate * d;
 };
