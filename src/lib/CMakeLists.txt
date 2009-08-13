@@ -321,7 +321,3 @@ else (APPLE AND QTONLY)
     DESTINATION ${CMAKE_INSTALL_PREFIX}/include/marble
 )
 endif (APPLE AND QTONLY)
-
-if( BUILD_MARBLE_TESTS )
-add_subdirectory( tests )
-endif( BUILD_MARBLE_TESTS )
