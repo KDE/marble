@@ -18,20 +18,7 @@ namespace Marble
 class GeoDataStyleMapPrivate
 {
   public:
-    GeoDataStyleMapPrivate()
-    {
-    }
-
-    GeoDataStyleMapPrivate( const GeoDataStyleMapPrivate& other )
-    {
-        lastKey = other.lastKey;
-    }
-
-    ~GeoDataStyleMapPrivate()
-    {
-    }
-
-    virtual QString nodeType() const
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataSyleMapType;
     }

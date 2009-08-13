@@ -22,17 +22,7 @@ class GeoDataColorStylePrivate
     {
     }
 
-    GeoDataColorStylePrivate( const GeoDataColorStylePrivate& other )
-      : m_color( other.m_color ),
-        m_colorMode( other.m_colorMode )
-    {
-    }
-
-    ~GeoDataColorStylePrivate()
-    {
-    }
-
-    virtual QString nodeType() const
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataColorStyleType;
     }

@@ -22,7 +22,7 @@ class GeoDataPolyStylePrivate
     {
     }
 
-    virtual QString nodeType() const
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataPolyStyleType;
     }

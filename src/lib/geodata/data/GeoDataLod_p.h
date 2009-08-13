@@ -27,7 +27,7 @@ class GeoDataLodPrivate
     {
     }
 
-    virtual QString nodeType() const
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataLodType;
     }

@@ -24,13 +24,6 @@ class GeoDataIconStylePrivate
     {
     }
 
-    GeoDataIconStylePrivate( const GeoDataIconStylePrivate& other )
-        : m_scale( other.m_scale ),
-          m_icon( other.m_icon ),
-          m_hotSpot( other.m_hotSpot )
-    {
-    }
-
     GeoDataIconStylePrivate( const QPixmap& icon, const QPointF &hotSpot )
         : m_scale( 1.0 ),
           m_icon( icon ),
@@ -38,11 +31,7 @@ class GeoDataIconStylePrivate
     {
     }
 
-    ~GeoDataIconStylePrivate()
-    {
-    }
-
-    virtual QString nodeType() const
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataIconStyleType;
     }

@@ -31,7 +31,8 @@ class GeoDataLatLonBoxPrivate
           m_rotation( 0.0 )
     {
     }
-    virtual QString nodeType() const
+
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataLatLonBoxType;
     }

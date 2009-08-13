@@ -31,18 +31,7 @@ class GeoDataHotSpotPrivate
     {
     }
 
-    GeoDataHotSpotPrivate( const GeoDataHotSpotPrivate& other )
-        : m_hotSpot( other.m_hotSpot ),
-          m_xunits( other.m_xunits ),
-          m_yunits( other.m_yunits )
-    {
-    }
-
-    ~GeoDataHotSpotPrivate()
-    {
-    }
-
-    virtual QString nodeType() const
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataHotspotType;
     }

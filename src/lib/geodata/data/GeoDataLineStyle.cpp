@@ -21,16 +21,7 @@ class GeoDataLineStylePrivate
     {
     }
 
-    GeoDataLineStylePrivate( const GeoDataLineStylePrivate& other )
-     : m_width( other.m_width )
-    {
-    }
-
-    ~GeoDataLineStylePrivate()
-    {
-    }
-
-    virtual QString nodeType() const
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataLineStyleType;
     }

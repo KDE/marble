@@ -30,7 +30,7 @@ class GeoDataLatLonAltBoxPrivate
     {
     }
 
-    virtual QString nodeType() const
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataLatLonAltBoxType;
     }

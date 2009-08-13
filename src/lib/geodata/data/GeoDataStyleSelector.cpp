@@ -18,20 +18,7 @@ namespace Marble
 class GeoDataStyleSelectorPrivate
 {
   public:
-    GeoDataStyleSelectorPrivate()
-    {
-    }
-
-    GeoDataStyleSelectorPrivate( const GeoDataStyleSelectorPrivate& other )
-    {
-        m_styleId = other.m_styleId;
-    }
-
-    ~GeoDataStyleSelectorPrivate()
-    {
-    }
-
-    virtual QString nodeType() const
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataStyleSelectorType;
     }

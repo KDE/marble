@@ -30,11 +30,7 @@ class GeoDataStylePrivate
     {
     }
 
-    ~GeoDataStylePrivate()
-    {
-    }
-
-    virtual QString nodeType() const
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataStyleType;
     }

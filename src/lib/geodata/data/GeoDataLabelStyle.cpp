@@ -32,25 +32,14 @@ class GeoDataLabelStylePrivate
     {
     }
 
-    GeoDataLabelStylePrivate( const GeoDataLabelStylePrivate& other )
-        : m_scale( other.m_scale ),
-          m_alignment( other.m_alignment ),
-          m_font( other.m_font )
-    {
-    }
-
-    GeoDataLabelStylePrivate( const QFont &font )
+    explicit GeoDataLabelStylePrivate( const QFont &font )
         : m_scale( 1.0 ),
           m_alignment( GeoDataLabelStyle::Corner ),
           m_font( font )
     {
     }
 
-    ~GeoDataLabelStylePrivate()
-    {
-    }
-
-    virtual QString nodeType() const
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataLabelStyleType;
     }

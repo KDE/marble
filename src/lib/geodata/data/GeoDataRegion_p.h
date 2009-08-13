@@ -27,15 +27,15 @@ class GeoDataRegionPrivate
     }
 
 
-    GeoDataRegionPrivate( GeoDataFeature * feature )
+    explicit GeoDataRegionPrivate( GeoDataFeature * feature )
          : m_parent( feature ),
            m_latLonAltBox( 0 ),
            m_lod( 0 )
     {
     }
-    
 
-    virtual QString nodeType() const
+
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataRegionType;
     }

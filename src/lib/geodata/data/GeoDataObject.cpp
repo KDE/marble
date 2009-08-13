@@ -30,7 +30,7 @@ class GeoDataObjectPrivate
     {
     }
 
-    virtual QString nodeType() const
+    QString nodeType() const
     {
         return GeoDataTypes::GeoDataObjectType;
     }
