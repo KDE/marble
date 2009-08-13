@@ -55,7 +55,7 @@ class GEODATA_EXPORT GeoDataDocument : public GeoDocument,
 {
 public:
     GeoDataDocument();
-    GeoDataDocument( GeoDataFeature& other );
+    GeoDataDocument( const GeoDataFeature& other );
     GeoDataDocument( const GeoDataDocument& other );
     ~GeoDataDocument();
 
