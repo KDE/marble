@@ -36,12 +36,12 @@ QVariant TmpGraphicsItem::itemChange(GeoGraphicsItemChange change, QVariant v )
 
 QList<QRegion> TmpGraphicsItem::regions() const
 {
-    return QList<QRegion>( m_regions );
+    return m_regions;
 }
 
 QList<TmpGraphicsItem*> TmpGraphicsItem::children() const
 {
-    return QList<TmpGraphicsItem*>(m_children);
+    return m_children;
 }
 
 void TmpGraphicsItem::addChild(TmpGraphicsItem* c)
@@ -84,7 +84,7 @@ void TmpGraphicsItem::setGeoOffset( bool g )
 void TmpGraphicsItem::setRegions( const QList<QRegion>& regions )
 {
     m_regions.clear();
-    m_regions = QList<QRegion>( regions );
+    m_regions = regions;
 }
 
 }
