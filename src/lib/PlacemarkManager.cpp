@@ -43,7 +43,7 @@ class PlacemarkManagerPrivate
         PlacemarkManagerPrivate( )
         : m_model( 0 )
         , m_geomodel( 0 )
-        , m_fileViewModel( new FileViewModel(parent ) )
+        , m_fileViewModel( new FileViewModel() )
         , m_finalized( true )
         , m_target( QString() )
         {

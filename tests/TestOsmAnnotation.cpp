@@ -29,7 +29,7 @@ private:
 
 void TestOsmAnnotation::initTestCase()
 {
-    PlacemarkTextAnnotation* standard;
+//    PlacemarkTextAnnotation* standard;
 //    uncomment the following to get the Undefined references
 //    standard = new PlacemarkTextAnnotation();
 //    standard->setName( "Standard Annon" );
