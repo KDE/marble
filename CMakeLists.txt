@@ -145,7 +145,6 @@ endif(WIN32)
 # Will removed in feature after success
 #add_definitions(-DKML_DEBUG)
 #add_definitions(-DKML_GSOC)
-add_definitions(-DDUMP_PARENT_STACK)
 
 ####################################################
 # Where to look first for cmake modules, 
@@ -223,8 +222,7 @@ ADD_CUSTOM_TARGET(svnversion
 # In pedantic mode, enable warnings, halt compile on warnings
 # Its good programming practice to build with no warnings....
 if (PEDANTIC)
-  ADD_DEFINITIONS( -g -ansi
-                   -W -Wall -Werror -Wundef
+  ADD_DEFINITIONS( -W -Wall -Werror -Wundef
                    -Wnon-virtual-dtor -Woverloaded-virtual
                    -Wno-long-long -Wchar-subscripts
                    -Wcast-align -Wpointer-arith -Wformat-security )
