@@ -11,6 +11,8 @@
 #include <QtTest/QTest>
 #include <QtCore/QList>
 #include <QtCore/QDebug>
+#include "GeoDataDocument.h"
+#include "GeoDataFolder.h"
 #include "GeoDataCoordinates.h"
 
 namespace Marble
@@ -20,9 +22,45 @@ class TestGeoData : public QObject
 {
     Q_OBJECT
  private slots:
+    void nodeTypeTest();
     void normalizeLatTest();
     void normalizeLonTest();
 };
+
+/// test the nodeType function through various construction tests
+void TestGeoData::nodeTypeTest()
+{
+    /// basic testing of nodeType
+    GeoDataFolder folder;
+    QString folderType(GeoDataTypes::GeoDataFolderType );
+    QCOMPARE( folder.nodeType(), folderType );
+
+    /// testing the nodeType of an object appended to a container
+    GeoDataDocument document;
+    document.append( folder );
+    GeoDataFeature &featureRef = document.last();
+    QCOMPARE( featureRef.nodeType(), folderType );
+    QCOMPARE( static_cast<GeoDataObject*>(&featureRef)->nodeType(), folderType );
+
+    /// testing the nodeType of an object assigned to a super type object
+    GeoDataFeature featureAssign;
+    featureAssign = folder;
+    QCOMPARE( featureAssign.nodeType(), folderType);
+
+    /// testing the nodeType of an object copied into a super type object
+    GeoDataFeature featureCopy( folder );
+    QCOMPARE( featureCopy.nodeType(), folderType );
+
+    /// testing the nodeType of an object assigned to a non shared data object
+    GeoDataObject objectAssign;
+    objectAssign = folder;
+    QCOMPARE( objectAssign.nodeType(), folderType );
+
+    /// testing the nodeType of an object copied to a non shared data object
+    GeoDataObject objectCopy(folder);
+    QCOMPARE( objectCopy.nodeType(), folderType );
+}
+
 
 void TestGeoData::normalizeLatTest()
 {
