@@ -24,6 +24,7 @@ static GeoTagWriterRegistrar s_writerKml( GeoTagWriter::QualifiedName( "",
 
 bool KmlTagWriter::write( const GeoDataObject &node, GeoWriter& writer ) const
 {
+    Q_UNUSED(node);
     writer.writeStartElement( "kml" );
     writer.writeAttribute( "xmlns", kml::kmlTag_nameSpace22 );
 

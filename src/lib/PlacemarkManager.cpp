@@ -40,7 +40,7 @@ namespace Marble {
 class PlacemarkManagerPrivate
 {
     public:
-        PlacemarkManagerPrivate( QObject* parent )
+        PlacemarkManagerPrivate( )
         : m_model( 0 )
         , m_geomodel( 0 )
         , m_fileViewModel( new FileViewModel(parent ) )
@@ -62,7 +62,7 @@ class PlacemarkManagerPrivate
 
 PlacemarkManager::PlacemarkManager( QObject *parent )
     : QObject( parent )
-    , d( new PlacemarkManagerPrivate( parent ) )
+    , d( new PlacemarkManagerPrivate() )
 {
     
 }

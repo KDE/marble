@@ -738,6 +738,7 @@ void MarbleModelPrivate::notifyModelChanged()
 
 void MarbleModelPrivate::geoDataDocumentAdded( const GeoDataDocument& document )
 {
+    Q_UNUSED(document);
 /*    QVector<GeoDataFeature>::Iterator end = document->end();
     QVector<GeoDataFeature>::Iterator itr = document->begin();
     for ( ; itr != end; ++itr ) {

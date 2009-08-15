@@ -42,6 +42,8 @@ void QNamDownloadJob::execute()
 
 void QNamDownloadJob::downloadProgress( qint64 bytesReceived, qint64 bytesTotal )
 {
+    Q_UNUSED(bytesReceived);
+    Q_UNUSED(bytesTotal);
 //     qDebug() << "downloadProgress" << destinationFileName()
 //              << bytesReceived << '/' << bytesTotal;
 }

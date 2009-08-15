@@ -191,6 +191,7 @@ QString formatOutput(int depth)
 
 void dumpGeoDataPlacemark(const GeoDataPlacemark& placemark)
 {
+    Q_UNUSED(placemark);
 //	qDebug() << placemark.name() << placemark.population() << placemark.coordinate().toString()<<"lookAt info "<<(placemark.lookAt()->coordinate())->toString()<<placemark.lookAt()->altitude();
 }
 

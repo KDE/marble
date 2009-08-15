@@ -614,6 +614,7 @@ void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
 
 void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
 {
+    Q_UNUSED(animated);
     //work out the needed zoom level
     ViewportParams* viewparams = d->m_map->viewParams()->viewport();
     int maxScreenSize = viewparams->height() > viewparams->width() ?
@@ -1140,6 +1141,7 @@ void MarbleWidget::updateChangedMap()
 
 void MarbleWidget::scheduleRepaint( QRegion dirtyRegion )
 {
+    Q_UNUSED(dirtyRegion);
     if ( !d->m_repaintTimer.isActive() ) {
         d->m_repaintTimer.start();
     }
