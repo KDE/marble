@@ -62,7 +62,7 @@ void TmpGraphicsItem::setParent( TmpGraphicsItem* p )
 bool TmpGraphicsItem::sceneEvent( QEvent* event )
 {
     if( event->type() == QEvent::MouseButtonPress ) {
-        return mousePressEvent( (QMouseEvent*) event );
+        return mousePressEvent( static_cast<QMouseEvent*>( event ));
     }
 
     return false;
