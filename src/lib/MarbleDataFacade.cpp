@@ -21,9 +21,11 @@
 #include "global.h"
 #include "MarbleModel.h"
 #include "MarbleGeoDataModel.h"
+#include "MarbleGeometryModel.h"
+#include "MarblePlacemarkModel.h"
 #include "Planet.h"
 
-#include "GeoDataDocument.h"
+#include "FileViewModel.h"
 #include "GeoDataParser.h"
 
 #include "GeoSceneDocument.h"
@@ -35,23 +37,33 @@ namespace Marble
 class MarbleDataFacadePrivate
 {
  public:
-    MarbleDataFacadePrivate( MarbleModel *model, MarbleGeoDataModel *gmodel )
-        : m_model( model ), m_geodatamodel( gmodel )
+    MarbleDataFacadePrivate( MarbleModel *model )
+        : m_model( model ),
+        m_fileviewmodel( new FileViewModel() ),
+        m_geodatamodel( new MarbleGeoDataModel() ),
+        m_geometrymodel( new MarbleGeometryModel() ),
+        m_placemarkmodel( new MarblePlacemarkModel )
     {
     }
 
     ~MarbleDataFacadePrivate()
     {
+        delete m_fileviewmodel;
         delete m_geodatamodel;
+        delete m_geometrymodel;
+        delete m_placemarkmodel;
     }
 
     MarbleModel  *m_model;
+    FileViewModel *m_fileviewmodel;
     MarbleGeoDataModel *m_geodatamodel;
+    MarbleGeometryModel *m_geometrymodel;
+    MarblePlacemarkModel *m_placemarkmodel;
 };
 
 
 MarbleDataFacade::MarbleDataFacade( MarbleModel *model )
-    : d( new MarbleDataFacadePrivate( model, new MarbleGeoDataModel() ) )
+    : d( new MarbleDataFacadePrivate( model ) )
 {
 }
 
@@ -91,17 +103,19 @@ MarbleGeoDataModel* MarbleDataFacade::geoDataModel()
     return d->m_geodatamodel;
 }
 
-QAbstractItemModel* MarbleDataFacade::renderModel()
+MarbleGeometryModel* MarbleDataFacade::geometryModel()
 {
-    return d->m_model->geometryModel();
+    return d->m_geometrymodel;
+}
+
+MarblePlacemarkModel* MarbleDataFacade::placemarkModel()
+{
+    return d->m_placemarkmodel;
 }
 
 FileViewModel* MarbleDataFacade::fileViewModel() const
 {
-    if(d->m_model)
-        return d->m_model->fileViewModel();
-    else
-        return 0;
+    return d->m_fileviewmodel;
 }
 
 }

@@ -39,9 +39,10 @@ namespace Marble
 
 class MarbleModel;
 class MarbleGeoDataModel;
-class MarbleDataFacadePrivate;
-class GeoDataDocument;
+class MarbleGeometryModel;
+class MarblePlacemarkModel;
 class FileViewModel;
+class MarbleDataFacadePrivate;
 class Planet;
 
 /**
@@ -77,8 +78,9 @@ class MARBLE_EXPORT MarbleDataFacade
 
     MarbleGeoDataModel* geoDataModel();
     
-    QAbstractItemModel* renderModel();
-    
+    MarbleGeometryModel* geometryModel();
+
+    MarblePlacemarkModel* placemarkModel();
     FileViewModel* fileViewModel() const;
  private:
     MarbleDataFacadePrivate  * const d;

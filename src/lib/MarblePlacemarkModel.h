@@ -31,8 +31,6 @@ namespace Marble
 class GeoDataCoordinates;
 class GeoDataStyle;
 class PlacemarkContainer;
-class PlacemarkManager;
-
 /**
  * This class represents a model of all place marks which
  * are currently available through a given PlacemarkManager.
@@ -68,8 +66,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      * @param manager The place mark manager on which the model shall work.
      * @param parent The parent object.
      */
-    explicit MarblePlacemarkModel( PlacemarkManager *manager, 
-                                   QObject *parent = 0 );
+    explicit MarblePlacemarkModel( QObject *parent = 0 );
 
     /**
      * Destroys the place mark model.

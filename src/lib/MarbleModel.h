@@ -139,7 +139,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     QAbstractItemModel*  placemarkModel() const;
     QItemSelectionModel* placemarkSelectionModel() const;
-    QAbstractItemModel*  geometryModel() const;
 
     /**
      * @brief Return the name of the current map theme.

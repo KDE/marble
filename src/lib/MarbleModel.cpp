@@ -84,7 +84,8 @@ class MarbleModelPrivate
           m_mapTheme( 0 ),
           m_layerManager( 0 ),
           m_downloadManager( new HttpDownloadManager( QUrl(), new FileStoragePolicy(
-                                                                   MarbleDirs::localPath() )))
+                                                                   MarbleDirs::localPath() ))),
+          m_placemarkmanager( 0 )
     {
     }
 
@@ -115,9 +116,7 @@ class MarbleModelPrivate
 
     // Places on the map
     PlacemarkManager        *m_placemarkmanager;
-    MarblePlacemarkModel    *m_placemarkmodel;
     PlacemarkLayout         *m_placemarkLayout;
-    MarbleGeometryModel     *m_geometrymodel;
     QSortFilterProxyModel   *m_popSortModel;
 
     // Misc stuff.
@@ -165,14 +164,14 @@ MarbleModel::MarbleModel( QObject *parent )
     }
 
     d->m_placemarkmanager = new PlacemarkManager();
+    d->m_placemarkmanager->setDataFacade(d->m_dataFacade);
 
     connect( d->m_placemarkmanager, SIGNAL( geoDataDocumentAdded( const GeoDataDocument& ) ),
              this,                  SLOT( geoDataDocumentAdded( const GeoDataDocument& ) ) );
 
-    d->m_placemarkmodel = new MarblePlacemarkModel( d->m_placemarkmanager, this );
     d->m_popSortModel = new QSortFilterProxyModel( this );
 
-    d->m_popSortModel->setSourceModel( d->m_placemarkmodel );
+    d->m_popSortModel->setSourceModel( d->m_dataFacade->placemarkModel() );
 //    d->m_popSortModel->setSortLocaleAware( true );
 //    d->m_popSortModel->setDynamicSortFilter( true );
     d->m_popSortModel->setSortRole( MarblePlacemarkModel::PopularityIndexRole );
@@ -180,28 +179,25 @@ MarbleModel::MarbleModel( QObject *parent )
     
     d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_popSortModel );
 
-    d->m_geometrymodel = new MarbleGeometryModel();
-    d->m_placemarkmanager->setGeoModel( d->m_geometrymodel );
-
     d->m_placemarkLayout = new PlacemarkLayout( this );
     connect( d->m_placemarkmanager,         SIGNAL( finalize() ),
              d->m_placemarkLayout,          SLOT( requestStyleReset() ) );
     connect( d->m_placemarkselectionmodel,  SIGNAL( selectionChanged( QItemSelection,
                                                                       QItemSelection) ),
              d->m_placemarkLayout,          SLOT( requestStyleReset() ) );
-    connect( d->m_placemarkmodel,           SIGNAL( layoutChanged() ),
+    connect( d->m_dataFacade->placemarkModel(),           SIGNAL( layoutChanged() ),
              d->m_placemarkLayout,          SLOT( requestStyleReset() ) );
 
     /*
      * Create FileViewModel
      */
-    connect( fileViewModel(), SIGNAL( modelChanged() ),
+    connect( d->m_dataFacade->fileViewModel(), SIGNAL( modelChanged() ),
              this,            SIGNAL( modelChanged() ) );
 
     d->m_gpxFileModel = new GpxFileModel( this );
     d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
 
-    connect( fileViewModel(), SIGNAL(layoutChanged()),
+    connect( d->m_dataFacade->fileViewModel(), SIGNAL(layoutChanged()),
              d->m_gpsLayer, SLOT(clearModel() ) );
 
     d->m_layerManager = new LayerManager( d->m_dataFacade, this );
@@ -245,8 +241,6 @@ MarbleModel::~MarbleModel()
         delete d->m_veccomposer;
         delete d->m_texcolorizer;
     }
-    delete d->m_geometrymodel;
-    delete d->m_placemarkmodel;
     delete d->m_popSortModel;
     delete d->m_placemarkmanager;
     delete d->m_gpsLayer;
@@ -414,8 +408,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             }
         }
     }
-
-    d->m_geometrymodel->setGeoDataRoot( 0 );
+    d->m_dataFacade->geometryModel()->setGeoDataRoot( 0 );
     QStringList loadedContainers = d->m_placemarkmanager->containers();
     QStringList loadList;
     const QVector<GeoSceneLayer*> & layers = d->m_mapTheme->map()->layers();
@@ -657,17 +650,12 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
 
 QAbstractItemModel *MarbleModel::placemarkModel() const
 {
-    return d->m_placemarkmodel;
+    return d->m_dataFacade->placemarkModel();
 }
 
 QItemSelectionModel *MarbleModel::placemarkSelectionModel() const
 {
     return d->m_placemarkselectionmodel;
-}
-
-QAbstractItemModel *MarbleModel::geometryModel() const
-{
-    return d->m_geometrymodel;
 }
 
 VectorComposer *MarbleModel::vectorComposer() const
@@ -702,7 +690,7 @@ GpxFileModel *MarbleModel::gpxFileModel() const
 
 FileViewModel *MarbleModel::fileViewModel() const
 {
-    return d->m_placemarkmanager->fileViewModel();
+    return d->m_dataFacade->fileViewModel();
 }
 
 void MarbleModel::addPlacemarkFile( const QString& filename )
@@ -746,8 +734,7 @@ void MarbleModelPrivate::geoDataDocumentAdded( const GeoDataDocument& document )
         QString styleUrl = itr->styleUrl().remove('#');
         itr->setStyle( &document->style( styleUrl ) );
     }
-
-    m_geometrymodel->setGeoDataRoot( document );*/
+*/
 }
 
 void MarbleModel::update()

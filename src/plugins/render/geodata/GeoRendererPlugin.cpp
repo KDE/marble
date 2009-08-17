@@ -21,6 +21,7 @@
 #include "MarbleDirs.h"
 #include "MarbleDataFacade.h"
 #include "MarbleGeoDataModel.h"
+#include "MarbleGeometryModel.h"
 #include "GeoPainter.h"
 
 #include "GeoDataCoordinates.h"
@@ -111,10 +112,10 @@ bool GeoRendererPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         return true;
     }
 
-    if( !dataFacade() || !dataFacade()->renderModel() )
+    if( !dataFacade() || !dataFacade()->geometryModel() )
         return false;
 
-    if( !m_view->model() ) m_view->setModel( dataFacade()->renderModel() );
+    if( !m_view->model() ) m_view->setModel( dataFacade()->geometryModel() );
     m_view->setGeoPainter( painter );
     return true;
 }

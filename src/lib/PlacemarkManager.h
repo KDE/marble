@@ -26,6 +26,7 @@ class GeoDataDocument;
 class PlacemarkContainer;
 class MarblePlacemarkModel;
 class MarbleGeometryModel;
+class MarbleDataFacade;
 class PlacemarkManagerPrivate;
 class FileViewModel;
 
@@ -64,18 +65,9 @@ class PlacemarkManager : public QObject
     MarblePlacemarkModel *model() const;
 
     /**
-     * Returns the GeometryModel which represents the GeoData tree of the
-     * place mark manager. The above MarblePlacemarkModel only represents
-     * a part of the data (namely Placemarks)
-     *
-     * Note: The manager has not the ownership of the model.
+     * Sets the DataFacade from which the models can be accessed.
      */
-    MarbleGeometryModel *geomodel() const;
-    
-    /**
-     * Sets the GeometryModel to which the graphical views can be attached.
-     */
-    void setGeoModel( MarbleGeometryModel * model );
+    void setDataFacade ( MarbleDataFacade *facade );
 
     /**
      * return a list containing all containers that have been queued for loading or that are
@@ -110,11 +102,6 @@ class PlacemarkManager : public QObject
     */
     void addPlacemarkData( const QString& data, const QString& key );
 
-    /**
-    * return the Model which stores the opened kml/gpx files
-    */
-    FileViewModel* fileViewModel() const;
-
  Q_SIGNALS:
     void geoDataDocumentAdded( const GeoDataDocument& );
     void finalize();
@@ -125,7 +112,6 @@ class PlacemarkManager : public QObject
     void addGeoDataDocument( GeoDataDocument* );
 
  private:
-    void setPlacemarkModel( MarblePlacemarkModel *model );
 
     /**
      * internal helper function which returns the regular name of a kml or cache file

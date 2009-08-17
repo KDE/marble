@@ -26,6 +26,7 @@
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleGeometryModel.h"
+#include "MarbleDataFacade.h"
 #include "PlacemarkContainer.h"
 #include "PlacemarkLoader.h"
 
@@ -41,18 +42,14 @@ class PlacemarkManagerPrivate
 {
     public:
         PlacemarkManagerPrivate( )
-        : m_model( 0 )
-        , m_geomodel( 0 )
-        , m_fileViewModel( new FileViewModel() )
+        : m_datafacade( 0 )
         , m_finalized( true )
         , m_target( QString() )
         {
-        };
+        }
 
-        MarblePlacemarkModel* m_model;
-        MarbleGeometryModel* m_geomodel;
+        MarbleDataFacade* m_datafacade;
         QList<PlacemarkLoader*> m_loaderList;
-        FileViewModel* m_fileViewModel;
         QStringList m_pathList;
 
         bool m_finalized;
@@ -76,47 +73,27 @@ PlacemarkManager::~PlacemarkManager()
         }
     }
 
-    delete d->m_model;
-    delete d->m_fileViewModel;
     delete d;
-    /* do not delete the d->m_geomodel here
-     * it is not this models property
-     */
 }
 
 MarblePlacemarkModel* PlacemarkManager::model() const
 {
-    return d->m_model;
+    return d->m_datafacade->placemarkModel();
 }
 
-FileViewModel* PlacemarkManager::fileViewModel() const
+void PlacemarkManager::setDataFacade( MarbleDataFacade *facade )
 {
-    return d->m_fileViewModel;
-}
-
-MarbleGeometryModel* PlacemarkManager::geomodel() const
-{
-    return d->m_geomodel;
-}
-
-void PlacemarkManager::setGeoModel( MarbleGeometryModel * model )
-{
-    d->m_geomodel = model;
-}
-
-void PlacemarkManager::setPlacemarkModel( MarblePlacemarkModel *model )
-{
-    d->m_model = model;
+    d->m_datafacade = facade;
 }
 
 void PlacemarkManager::clearPlacemarks()
 {
-    d->m_model->clearPlacemarks();
+    d->m_datafacade->placemarkModel()->clearPlacemarks();
 }
 
 QStringList PlacemarkManager::containers() const
 {
-    return fileViewModel()->containers() + d->m_pathList;
+    return d->m_datafacade->fileViewModel()->containers() + d->m_pathList;
 }
 
 QString PlacemarkManager::toRegularName( QString name )
@@ -145,7 +122,7 @@ void PlacemarkManager::addGeoDataDocument( GeoDataDocument* document )
 {
     AbstractFileViewItem* item = new KmlFileViewItem( *this, *document );
 
-    d->m_fileViewModel->append( item );
+    d->m_datafacade->fileViewModel()->append( item );
 
     // now get the document that will be preserved throughout the life time
     GeoDataDocument* doc = dynamic_cast<KmlFileViewItem*>(item)->document();
@@ -159,8 +136,8 @@ void PlacemarkManager::addGeoDataDocument( GeoDataDocument* document )
     }
 
     // do not set this file if it only contains points
-    if( doc->isVisible() && d->m_geomodel )
-        d->m_geomodel->setGeoDataRoot( doc );
+    if( doc->isVisible() && d->m_datafacade->geometryModel() )
+        d->m_datafacade->geometryModel()->setGeoDataRoot( doc );
     emit geoDataDocumentAdded( *doc );
 }
 
@@ -172,11 +149,12 @@ void PlacemarkManager::addPlacemarkData( const QString& data, const QString& key
 void PlacemarkManager::removePlacemarkKey( const QString& key )
 {
     QString nkey = key;
+    FileViewModel *fileViewModel = d->m_datafacade->fileViewModel();
     qDebug() << "trying to remove file:" << key;
-    for( int i = 0; i < d->m_fileViewModel->rowCount(); ++i )
+    for( int i = 0; i < fileViewModel->rowCount(); ++i )
     {
-        if( toRegularName( nkey ) == toRegularName( d->m_fileViewModel->data(d->m_fileViewModel->index(i, 0)).toString() ) ) {
-            d->m_fileViewModel->remove(d->m_fileViewModel->index(i, 0));
+        if( toRegularName( nkey ) == toRegularName( fileViewModel->data(fileViewModel->index(i, 0)).toString() ) ) {
+            fileViewModel->remove(fileViewModel->index(i, 0));
             break;
         }
     };
@@ -197,7 +175,7 @@ void PlacemarkManager::loadPlacemarkContainer( PlacemarkLoader* loader, Placemar
     d->m_loaderList.removeAll( loader );
     if ( container )
     { 
-        d->m_model->addPlacemarks( *container, false, d->m_finalized && d->m_loaderList.isEmpty() );
+        d->m_datafacade->placemarkModel()->addPlacemarks( *container, false, d->m_finalized && d->m_loaderList.isEmpty() );
     }
 
     if( d->m_loaderList.isEmpty() ) {
@@ -221,7 +199,7 @@ void PlacemarkManager::loadKmlFromData( const QString& data, const QString& key,
 {
     Q_UNUSED( finalize )
 
-    Q_ASSERT( d->m_model != 0 && "You have called loadKmlFromData before creating a model!" );
+    Q_ASSERT( d->m_datafacade->placemarkModel() != 0 && "You have called loadKmlFromData before creating a model!" );
 
     PlacemarkContainer container;
 

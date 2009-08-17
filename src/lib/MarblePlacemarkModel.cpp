@@ -23,17 +23,15 @@
 // Marble
 #include "GeoDataStyle.h"       // In geodata/data/
 #include "PlacemarkContainer.h"
-#include "PlacemarkManager.h"
 
 using namespace Marble;
 
 class MarblePlacemarkModel::Private
 {
-    friend class PlacemarkManager;
 
  public:
-    Private( PlacemarkManager *manager, MarblePlacemarkModel *parent )
-        : m_parent( parent ), m_manager( manager )
+    Private( MarblePlacemarkModel *parent )
+        : m_parent( parent )
     {
     }
 
@@ -42,7 +40,6 @@ class MarblePlacemarkModel::Private
     }
 
     MarblePlacemarkModel  *m_parent;
-    PlacemarkManager      *m_manager;
     PlacemarkContainer     m_placemarkContainer;
 };
 
@@ -50,23 +47,15 @@ class MarblePlacemarkModel::Private
 // ---------------------------------------------------------------------------
 
 
-MarblePlacemarkModel::MarblePlacemarkModel( PlacemarkManager *manager, 
-                                            QObject *parent )
+MarblePlacemarkModel::MarblePlacemarkModel( QObject *parent )
     : QAbstractListModel( parent ),
-      d( new Private( manager, this ) )
+      d( new Private( this ) )
 {
-    // Register at PlacemarkManager
-    if ( d->m_manager )
-        d->m_manager->setPlacemarkModel( this );
 }
 
 MarblePlacemarkModel::~MarblePlacemarkModel()
 {
     clearPlacemarks();
-    // Unregister from PlacemarkManager
-    if ( d->m_manager )
-        d->m_manager->setPlacemarkModel( 0 );
-
     delete d;
 }
 
