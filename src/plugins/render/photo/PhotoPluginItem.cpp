@@ -83,6 +83,10 @@ void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type
             m_hasCoordinates = true;
         }
     }
+
+    if ( initialized() ) {
+        emit updated();
+    }
 }
 
 void PhotoPluginItem::paint( GeoPainter *painter, ViewportParams *viewport,

@@ -37,9 +37,6 @@ public:
 
     void setPath( QString path );
 
-Q_SIGNALS:
-    void parsedStationList();
-
 protected:
     void run();
 

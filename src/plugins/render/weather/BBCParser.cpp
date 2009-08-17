@@ -44,6 +44,7 @@ const int WAIT_TIME = 100;
 
 BBCParser::BBCParser()
     : QThread(),
+      m_running( false ),
       m_end( false )
 {
     BBCParser::setupHashes();
@@ -75,9 +76,12 @@ void BBCParser::scheduleRead( const QString& path,
 
     m_schedule.push( entry );
 
-    QMutexLocker locker( &m_runStateMutex );
-    if ( !isRunning() ) {
-        start( QThread::IdlePriority );
+    QMutexLocker locker( &m_runningMutex );
+    if ( !m_running ) {
+        if ( wait( 2 * WAIT_TIME ) ) {
+            m_running = true;
+            start( QThread::IdlePriority );
+        }
     }
 }
 
@@ -85,19 +89,21 @@ void BBCParser::run()
 {
     int waitAttempts = WAIT_ATTEMPTS;
     while( 1 ) {
-        m_runStateMutex.lock();
+        m_runningMutex.lock();
         if ( m_schedule.isEmpty() ) {
             waitAttempts--;
             if ( !waitAttempts || m_end ) {
+                m_running = false;
+                m_runningMutex.unlock();
                 break;
             }
             else {
-                m_runStateMutex.unlock();
+                m_runningMutex.unlock();
                 msleep( WAIT_TIME );
             }
         }
         else {
-            m_runStateMutex.unlock();
+            m_runningMutex.unlock();
             ScheduleEntry entry = m_schedule.pop();
 
             QFile file( entry.path );
@@ -121,8 +127,6 @@ void BBCParser::run()
             waitAttempts = WAIT_ATTEMPTS;
         }
     }
-
-    m_runStateMutex.unlock();
 }
 
 

@@ -454,10 +454,6 @@ void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlStri
                                      fileType );
 
             d->m_downloadingItems.erase( i );
-
-            if ( (*i)->initialized() ) {
-                emit itemsUpdated();
-            }
         }
     }
 }

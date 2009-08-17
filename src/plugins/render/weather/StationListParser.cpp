@@ -76,7 +76,6 @@ void StationListParser::run()
 
     setDevice( &file );
     read();
-    emit parsedStationList();
 }
 
 void StationListParser::readUnknownElement()

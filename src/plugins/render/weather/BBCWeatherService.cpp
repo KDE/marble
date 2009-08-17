@@ -94,9 +94,11 @@ void BBCWeatherService::setupList()
 
     m_parser = new StationListParser( this );
     m_parser->setPath( MarbleDirs::path( "weather/bbc-stations.xml" ) );
-    connect( m_parser, SIGNAL( parsedStationList() ),
+    connect( m_parser, SIGNAL( finished() ),
              this,     SLOT( fetchStationList() ) );
-    m_parser->start( QThread::IdlePriority );
+    if ( m_parser->wait( 100 ) ) {
+        m_parser->start( QThread::IdlePriority );
+    }
 }
 
 #include "BBCWeatherService.moc"

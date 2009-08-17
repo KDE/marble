@@ -104,6 +104,8 @@ void WikipediaModel::parseFile( const QByteArray& file )
             addItemToList( *it );
         }
     }
+
+    emit itemsUpdated();
 }
 
 #include "WikipediaModel.moc"
