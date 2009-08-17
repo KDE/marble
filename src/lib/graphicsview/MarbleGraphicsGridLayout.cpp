@@ -115,18 +115,32 @@ void MarbleGraphicsGridLayout::updatePositions( MarbleGraphicsItem *parent )
     double *endY = new double[d->m_rows];
     QRectF contentRect = parent->contentRect();
 
-    double nextStartX = contentRect.left();
     for ( int i = 0; i < d->m_columns; i++ ) {
-        startX[i] = nextStartX;
-        endX[i] = nextStartX + maxWidth[i];
-        nextStartX = endX[i] + d->m_spacing;
+        if ( i == 0 ) {
+            startX[0] = contentRect.left();
+        }
+        else if ( maxWidth[i] == 0 ) {
+            startX[i] = endX[i-1];
+        }
+        else {
+            startX[i] = endX[i-1] + d->m_spacing;
+        }
+
+        endX[i] = startX[i] + maxWidth[i];
     }
 
-    double nextStartY = contentRect.top();
     for ( int i = 0; i < d->m_rows; i++ ) {
-        startY[i] = nextStartY;
-        endY[i] = nextStartY + maxHeight[i];
-        nextStartY = endY[i] + d->m_spacing;
+        if ( i == 0 ) {
+            startY[0] = contentRect.left();
+        }
+        else if ( maxHeight[i] == 0 ) {
+            startY[i] = endY[i-1];
+        }
+        else {
+            startY[i] = endY[i-1] + d->m_spacing;
+        }
+
+        endY[i] = startY[i] + maxHeight[i];
     }
 
     // Setting the positions
@@ -166,7 +180,8 @@ void MarbleGraphicsGridLayout::updatePositions( MarbleGraphicsItem *parent )
         }
     }
 
-    parent->setContentSize( QSizeF( endX[d->m_columns - 1], endY[d->m_rows - 1] ) );
+    parent->setContentSize( QSizeF( endX[d->m_columns - 1] - contentRect.left(),
+                                    endY[d->m_rows - 1] - contentRect.top() ) );
 }
 
 Qt::Alignment MarbleGraphicsGridLayout::alignment() const

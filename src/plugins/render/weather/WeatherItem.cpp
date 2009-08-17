@@ -146,7 +146,7 @@ class WeatherItemPrivate
         }
 
         if ( isTemperatureShown() ) {
-            m_temperatureLabel->setText( temperatureString() );
+            m_temperatureLabel->setText( temperatureString(), 0, imageSize.height() );
         }
         else {
             m_temperatureLabel->clear();
@@ -172,9 +172,12 @@ class WeatherItemPrivate
             s_windIcons.render( &painter, windDirectionString );
             m_windDirectionLabel->setImage( windArrow );
         }
+        else {
+            m_windDirectionLabel->clear();
+        }
 
         if ( isWindSpeedShown() ) {
-            m_windSpeedLabel->setText( windSpeedString() );
+            m_windSpeedLabel->setText( windSpeedString(), 0, imageSize.height() );
         }
         else {
             m_windSpeedLabel->clear();

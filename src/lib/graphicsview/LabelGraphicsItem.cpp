@@ -41,12 +41,17 @@ LabelGraphicsItem::LabelGraphicsItem( MarbleGraphicsItem *parent )
 {
 }
 
-void LabelGraphicsItem::setText( const QString& text )
+void LabelGraphicsItem::setText( const QString& text, int minWidth, int minHeight )
 {
     clear();
     d->m_text = text;
     QFontMetrics metrics( d->font() );
-    setContentSize( metrics.boundingRect( text ).size() + QSize( 4, 2 ) );
+    QSizeF size = metrics.boundingRect( text ).size() + QSizeF( 14, 2 );
+    if ( size.width() < minWidth )
+        size.setWidth( minWidth );
+    if ( size.height() < minHeight )
+        size.setHeight( minHeight );
+    setContentSize( size );
 
     update();
 }
