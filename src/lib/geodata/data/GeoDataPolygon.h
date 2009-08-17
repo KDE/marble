@@ -199,8 +199,13 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
     GeoDataPolygonPrivate *p() const;
 };
 
-class GEODATA_EXPORT GeoDataOuterBoundary : public GeoDataPolygon {};
-class GEODATA_EXPORT GeoDataInnerBoundary : public GeoDataPolygon {};
+class GEODATA_EXPORT GeoDataOuterBoundary : public GeoDataPolygon
+{
+};
+
+class GEODATA_EXPORT GeoDataInnerBoundary : public GeoDataPolygon
+{
+};
 
 }
 

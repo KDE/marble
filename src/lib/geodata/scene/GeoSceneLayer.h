@@ -65,7 +65,8 @@ class GEODATA_EXPORT GeoSceneAbstractDataset : public GeoNode
  * @short Layer of a GeoScene document.
  */
 
-class GEODATA_EXPORT GeoSceneLayer : public GeoNode {
+class GEODATA_EXPORT GeoSceneLayer : public GeoNode
+{
  public:
     explicit GeoSceneLayer( const QString& name );
     ~GeoSceneLayer();
