@@ -65,7 +65,7 @@ class TileLoaderPrivate
         DatasetProvider *m_datasetProvider;
         HttpDownloadManager *m_downloadManager;
         GeoSceneLayer *m_layer;
-        QHash <TileId, TextureTile*>  m_tileHash;
+        QHash <TileId, TextureTile*>  m_tilesOnDisplay;
         int           m_tileWidth;
         int           m_tileHeight;
         QCache <TileId, TextureTile>  m_tileCache;
@@ -131,8 +131,8 @@ void TileLoader::setLayer( GeoSceneLayer * layer )
 
 void TileLoader::resetTilehash()
 {
-    QHash<TileId, TextureTile*>::const_iterator it = d->m_tileHash.constBegin();
-    while ( it != d->m_tileHash.constEnd() ) {
+    QHash<TileId, TextureTile*>::const_iterator it = d->m_tilesOnDisplay.constBegin();
+    while ( it != d->m_tilesOnDisplay.constEnd() ) {
         it.value()->setUsed( false );
         ++it;
     }
@@ -143,7 +143,7 @@ void TileLoader::cleanupTilehash()
     // Make sure that tiles which haven't been used during the last
     // rendering of the map at all get removed from the tile hash.
 
-    QHashIterator<TileId, TextureTile*> it( d->m_tileHash );
+    QHashIterator<TileId, TextureTile*> it( d->m_tilesOnDisplay );
     while ( it.hasNext() ) {
         it.next();
         if ( !it.value()->used() ) {
@@ -151,25 +151,25 @@ void TileLoader::cleanupTilehash()
             // but the item will get deleted nevertheless and the pointer we have 
             // doesn't get set to zero (so don't delete it in this case or it will crash!)
             d->m_tileCache.insert( it.key(), it.value(), it.value()->numBytes() );
-            d->m_tileHash.remove( it.key() );
+            d->m_tilesOnDisplay.remove( it.key() );
         }
     }
 }
 
 void TileLoader::flush()
 {
-    // Remove all tiles from m_tileHash
-    QHashIterator<TileId, TextureTile*> it( d->m_tileHash );
+    // Remove all tiles from m_tilesOnDisplay
+    QHashIterator<TileId, TextureTile*> it( d->m_tilesOnDisplay );
     while ( it.hasNext() ) {
         it.next();
         // If insert call result is false then the cache is too small to store the tile 
         // but the item will get deleted nevertheless and the pointer we have 
         // doesn't get set to zero (so don't delete it in this case or it will crash!)
         d->m_tileCache.insert( it.key(), it.value(), it.value()->numBytes() );
-        d->m_tileHash.remove( it.key() );
+        d->m_tilesOnDisplay.remove( it.key() );
     }
 
-    d->m_tileHash.clear();
+    d->m_tilesOnDisplay.clear();
 }
 
 int TileLoader::tileWidth() const
@@ -209,7 +209,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     TileId tileId( tileLevel, tilx, tily );
 
     // check if the tile is in the hash
-    TextureTile * tile = d->m_tileHash.value( tileId, 0 );
+    TextureTile * tile = d->m_tilesOnDisplay.value( tileId, 0 );
     if ( tile ) {
         tile->setUsed( true );
         return tile;
@@ -227,7 +227,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
         const QDateTime now = QDateTime::currentDateTime();
 
         if ( tile->created().secsTo( now ) < texture->expire()) {
-            d->m_tileHash[tileId] = tile;
+            d->m_tilesOnDisplay[tileId] = tile;
             tile->setUsed( true );
             return tile;
         } else {
@@ -241,7 +241,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
 
     // qDebug() << "load Tile from Disk: " << tileId.toString();
     tile = new TextureTile( tileId );
-    d->m_tileHash[tileId] = tile;
+    d->m_tilesOnDisplay[tileId] = tile;
 
     // FIXME: Implement asynchronous tile loading
     // d->m_datasetProvider->loadDatasets( tile );
@@ -276,8 +276,8 @@ quint64 TileLoader::volatileCacheLimit() const
 QList<TileId> TileLoader::tilesOnDisplay() const
 {
     QList<TileId> result;
-    QHash<TileId, TextureTile*>::const_iterator pos = d->m_tileHash.constBegin();
-    QHash<TileId, TextureTile*>::const_iterator const end = d->m_tileHash.constEnd();
+    QHash<TileId, TextureTile*>::const_iterator pos = d->m_tilesOnDisplay.constBegin();
+    QHash<TileId, TextureTile*>::const_iterator const end = d->m_tilesOnDisplay.constEnd();
     for (; pos != end; ++pos ) {
         if ( pos.value()->used() ) {
             result.append( pos.key() );
@@ -355,18 +355,18 @@ void TileLoader::reloadTile( const QString &idStr )
 //    qDebug() << "TileLoader::reloadTile:" << idStr;
  
     const TileId id = TileId::fromString( idStr );
-    if ( d->m_tileHash.contains( id ) ) {
+    if ( d->m_tilesOnDisplay.contains( id ) ) {
         int  level = id.zoomLevel();
         int  y     = id.y();
         int  x     = id.x();
 
         // TODO should emit signal rather than directly calling paintTile
-//         emit paintTile( d->m_tileHash[id], x, y, level, d->m_theme, true );
+//         emit paintTile( d->m_tilesOnDisplay[id], x, y, level, d->m_theme, true );
         GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
 
-        (d->m_tileHash[id])->loadDataset( texture, level, x, y, &( d->m_tileCache ) ); 
-        m_parent->paintTile( d->m_tileHash[id], x, y, level, texture, true );
-//         (d->m_tileHash[id])->reloadTile( x, y, level, d->m_theme );
+        (d->m_tilesOnDisplay[id])->loadDataset( texture, level, x, y, &( d->m_tileCache ) ); 
+        m_parent->paintTile( d->m_tilesOnDisplay[id], x, y, level, texture, true );
+//         (d->m_tilesOnDisplay[id])->reloadTile( x, y, level, d->m_theme );
     } else {
       // Remove "false" tile from cache so it doesn't get loaded anymore
       d->m_tileCache.remove( id );
