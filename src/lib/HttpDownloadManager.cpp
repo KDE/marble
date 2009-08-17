@@ -139,15 +139,15 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
             return false;
         }
     }
-    
+
     QList<HttpJob*>::iterator i = m_waitingQueue.begin();
     QList<HttpJob*>::iterator iEnd = m_waitingQueue.end();
     for (; i != iEnd; ++i) {
-	if ( job->destinationFileName() == (*i)->destinationFileName() ) {
-	    qDebug() << "Download rejected: Will try to download again in some time.";
-	    (*i)->setInitiatorId( job->initiatorId() );
-	    return false;
-	}
+        if ( job->destinationFileName() == (*i)->destinationFileName() ) {
+            qDebug() << "Download rejected: Will try to download again in some time.";
+            (*i)->setInitiatorId( job->initiatorId() );
+            return false;
+        }
     }
 
     i = m_activatedJobList.begin();
@@ -225,27 +225,27 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
 
         if ( pos >= 0 ) {
             m_activatedJobList.removeAt( pos );
-	    emit jobRemoved();
+            emit jobRemoved();
 
-	    // This should always return true
-	    if( !m_waitingQueue.contains( job ) ) {
-		if( job->tryAgain() ) {
-		    qDebug() << QString( "Download of %1 failed, but trying again soon" )
-			.arg( job->destinationFileName() );
-		    m_waitingQueue.enqueue( job );
+            // This should always return true
+            if( !m_waitingQueue.contains( job ) ) {
+                if( job->tryAgain() ) {
+                    qDebug() << QString( "Download of %1 failed, but trying again soon" )
+                        .arg( job->destinationFileName() );
+                    m_waitingQueue.enqueue( job );
                     if( !m_requeueTimer->isActive() )
                         m_requeueTimer->start();
-		}
-		else {
-            qDebug() << "JOB-address: " << job << "Blacklist-size:" << m_jobBlackList.size() << "err:" << err;
-		    m_jobBlackList.insert( job->sourceUrl().toString() );
-		    qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" )
-			.arg( job->destinationFileName() ).arg( m_jobBlackList.size() );
+                }
+                else {
+                    qDebug() << "JOB-address: " << job << "Blacklist-size:" << m_jobBlackList.size() << "err:" << err;
+                    m_jobBlackList.insert( job->sourceUrl().toString() );
+                    qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" )
+                        .arg( job->destinationFileName() ).arg( m_jobBlackList.size() );
 
                     job->deleteLater();
-		}
-	    }
-	}
+                }
+            }
+        }
     }
     else {
 //         qDebug() << "HttpDownloadManager: Download Complete:"
@@ -253,7 +253,7 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
         emit downloadComplete( job->destinationFileName(), job->initiatorId() );
         removeJob( job );
     }
-    
+
     activateJobs();
 }
 
@@ -261,9 +261,9 @@ void HttpDownloadManager::requeue()
 {
     m_requeueTimer->stop();
     while( !m_waitingQueue.isEmpty() ) {
-	HttpJob* job = m_waitingQueue.dequeue();
-	qDebug() << QString( "Requeuing %1." ).arg( job->destinationFileName() );
-	addJob( job );
+        HttpJob* job = m_waitingQueue.dequeue();
+        qDebug() << QString( "Requeuing %1." ).arg( job->destinationFileName() );
+        addJob( job );
     }
 }
 
