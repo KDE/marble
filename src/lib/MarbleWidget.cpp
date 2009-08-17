@@ -41,13 +41,11 @@
 #include "GeoPainter.h"
 #include "FileViewModel.h"
 #include "GeoDataCoordinates.h"
-#include "GpxFileViewItem.h"
 #include "MarblePhysics.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidgetInputHandler.h"
 #include "TileCreatorDialog.h"
 #include "gps/GpsLayer.h"
-#include "gps/GpxFile.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
 #include "MergedLayerDecorator.h"
@@ -1083,11 +1081,7 @@ void MarbleWidget::updateGps()
 
 void MarbleWidget::openGpxFile(QString &filename)
 {
-    GpxFile* gpxFile = new GpxFile( filename );
-    GpxFileViewItem* item = new GpxFileViewItem( gpxFile );
-
-    d->m_model->fileViewModel()->append( item );
-    d->m_model->gpsLayer()->addGpxFile( gpxFile );
+    d->m_map->openGpxFile(filename);
 }
 
 GpxFileModel *MarbleWidget::gpxFileModel()

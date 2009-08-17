@@ -43,7 +43,6 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneZoom.h"
-#include "GpxFileViewItem.h"
 #include "HttpDownloadManager.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
@@ -1148,12 +1147,7 @@ void MarbleMap::updateGps()
 
 void MarbleMap::openGpxFile(QString &filename)
 {
-#ifndef KML_GSOC
-    d->m_model->gpsLayer()->loadGpx( filename );
-#else
-    GpxFileViewItem* item = new GpxFileViewItem( new GpxFile( filename ) );
-    d->m_model->fileViewModel()->append( item );
-#endif
+    d->m_model->openGpxFile( filename );
 }
 
 GpxFileModel *MarbleMap::gpxFileModel()

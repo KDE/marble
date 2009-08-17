@@ -48,6 +48,8 @@
 #include "EquirectScanlineTextureMapper.h"
 #include "MercatorScanlineTextureMapper.h"
 #include "gps/GpxFileModel.h"
+#include "gps/GpxFile.h"
+#include "GpxFileViewItem.h"
 #include "HttpDownloadManager.h"
 #include "KmlFileViewItem.h"
 #include "LayerManager.h"
@@ -691,6 +693,15 @@ GpxFileModel *MarbleModel::gpxFileModel() const
 FileViewModel *MarbleModel::fileViewModel() const
 {
     return d->m_dataFacade->fileViewModel();
+}
+
+void MarbleModel::openGpxFile( const QString& filename )
+{
+    GpxFile* gpxFile = new GpxFile( filename );
+    GpxFileViewItem* item = new GpxFileViewItem( gpxFile );
+
+    d->m_dataFacade->fileViewModel()->append( item );
+    d->m_gpxFileModel->addFile( gpxFile );
 }
 
 void MarbleModel::addPlacemarkFile( const QString& filename )

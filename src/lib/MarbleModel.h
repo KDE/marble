@@ -200,6 +200,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void setDownloadManager( HttpDownloadManager *downloadManager );
 
+    void openGpxFile( const QString& filename );
     void addPlacemarkFile( const QString& filename );
     void addPlacemarkData( const QString& data, const QString& key = "data" );
     void removePlacemarkKey( const QString& key );

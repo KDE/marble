@@ -97,21 +97,6 @@ void GpsLayer::changeCurrentPosition( qreal lat, qreal lon )
     m_currentPosition->setPosition( lat, lon );
 }
 
-void GpsLayer::loadGpx( const QString &fileName )
-{
-    GpxFile *tempFile = new GpxFile( fileName );
-
-//     QTextStream test(stderr);
-//     test << *tempFile;
-
-    m_fileModel->addFile( tempFile );
-}
-
-void GpsLayer::addGpxFile( GpxFile* file )
-{
-    m_fileModel->addFile( file );
-}
-
 void GpsLayer::clearModel()
 {
     // Here is a know memory leak, because m_fileModel does not get
