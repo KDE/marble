@@ -18,8 +18,6 @@
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
-#include <QtXml/QXmlInputSource>
-#include <QtXml/QXmlSimpleReader>
 
 #include "KmlFileViewItem.h"
 #include "FileViewModel.h"
@@ -43,17 +41,12 @@ class PlacemarkManagerPrivate
     public:
         PlacemarkManagerPrivate( )
         : m_datafacade( 0 )
-        , m_finalized( true )
-        , m_target( QString() )
         {
         }
 
         MarbleDataFacade* m_datafacade;
         QList<PlacemarkLoader*> m_loaderList;
         QStringList m_pathList;
-
-        bool m_finalized;
-        QString m_target;
 };
 }
 
@@ -105,7 +98,7 @@ void PlacemarkManager::addPlacemarkFile( const QString& filepath, bool finalized
 {
     if( ! containers().contains( toRegularName( filepath ) ) ) {
         qDebug() << "adding container:" << toRegularName( filepath ) << finalized;
-        PlacemarkLoader* loader = new PlacemarkLoader( this, filepath, finalized );
+        PlacemarkLoader* loader = new PlacemarkLoader( this, filepath );
         connect (   loader, SIGNAL( placemarksLoaded( PlacemarkLoader*, PlacemarkContainer * ) ), 
                     this, SLOT( loadPlacemarkContainer( PlacemarkLoader*, PlacemarkContainer * ) ) );
         connect (   loader, SIGNAL( placemarkLoaderFailed( PlacemarkLoader* ) ), 
@@ -175,7 +168,7 @@ void PlacemarkManager::loadPlacemarkContainer( PlacemarkLoader* loader, Placemar
     d->m_loaderList.removeAll( loader );
     if ( container )
     { 
-        d->m_datafacade->placemarkModel()->addPlacemarks( *container, false, d->m_finalized && d->m_loaderList.isEmpty() );
+        d->m_datafacade->placemarkModel()->addPlacemarks( *container, false, d->m_loaderList.isEmpty() );
     }
 
     if( d->m_loaderList.isEmpty() ) {
@@ -201,9 +194,6 @@ void PlacemarkManager::loadKmlFromData( const QString& data, const QString& key,
 
     Q_ASSERT( d->m_datafacade->placemarkModel() != 0 && "You have called loadKmlFromData before creating a model!" );
 
-    PlacemarkContainer container;
-
-    d->m_finalized = true;
     qDebug() << "adding container:" << key;
     PlacemarkLoader* loader = new PlacemarkLoader( this, data, key );
     connect (   loader, SIGNAL( placemarksLoaded( PlacemarkLoader*, PlacemarkContainer * ) ), 

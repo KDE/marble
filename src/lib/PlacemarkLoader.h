@@ -22,11 +22,10 @@ class PlacemarkLoader : public QThread
 {
     Q_OBJECT
     public:
-        PlacemarkLoader( QObject* parent, const QString& file, bool finalize = true );
-        PlacemarkLoader( QObject* parent, const QString& contents, const QString& name, bool finalize = true );
+        PlacemarkLoader( QObject* parent, const QString& file );
+        PlacemarkLoader( QObject* parent, const QString& contents, const QString& name );
         virtual ~PlacemarkLoader();
 
-        bool finalize();
         void run();
         QString path() const;
         
@@ -42,7 +41,6 @@ class PlacemarkLoader : public QThread
 
         QString m_filepath;
         QString m_contents;
-        bool m_finalize;
         GeoDataDocument *m_document;
         PlacemarkContainer *m_container;
 };

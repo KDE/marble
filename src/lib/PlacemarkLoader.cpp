@@ -28,21 +28,19 @@
 
 namespace Marble {
 
-PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& file, bool finalize )
+PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& file )
     : QThread( parent ), 
       m_filepath( file ),
       m_contents( QString() ),
-      m_finalize( finalize ),
       m_document( 0 ),
       m_container( 0 )
 {
 }
 
-PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& contents, const QString& file, bool finalize )
+PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& contents, const QString& file )
     : QThread( parent ), 
       m_filepath( file ), 
       m_contents( contents ),
-      m_finalize( finalize ),
       m_document( 0 ),
       m_container( 0 )
 {
@@ -251,11 +249,6 @@ void PlacemarkLoader::saveFile( const QString& filename )
         out << (double)(*it).area();
         out << (qint64)(*it).population();
     }
-}
-
-bool PlacemarkLoader::finalize()
-{
-    return m_finalize;
 }
 
 bool PlacemarkLoader::loadFile( const QString& filename )
