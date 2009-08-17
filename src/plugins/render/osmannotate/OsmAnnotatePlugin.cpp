@@ -630,8 +630,8 @@ void OsmAnnotatePlugin::setupActions(MarbleWidget* widget)
     emit actionGroupsChanged();
 }
 
-void OsmAnnotatePlugin::readOsmFile( QIODevice *device, bool flyToFile ) {
-
+void OsmAnnotatePlugin::readOsmFile( QIODevice *device, bool flyToFile )
+{
     GeoDataParser parser( GeoData_OSM );
 
     if ( !parser.read( device ) ) {

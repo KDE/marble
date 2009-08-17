@@ -34,7 +34,8 @@ namespace Marble
  * @short The class that specifies the a simple panormaio plugin
  *
  */
-struct twitterStructure {
+struct twitterStructure
+{
     QString twit ;
     GeoDataCoordinates location;
 };

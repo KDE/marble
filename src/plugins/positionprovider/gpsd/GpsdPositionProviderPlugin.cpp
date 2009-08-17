@@ -49,7 +49,8 @@ void GpsdPositionProviderPlugin::initialize()
     m_thread->start();
 }
 
-void GpsdPositionProviderPlugin::update(gps_data_t data) {
+void GpsdPositionProviderPlugin::update(gps_data_t data)
+{
     PositionProviderStatus oldStatus = m_status;
     GeoDataCoordinates oldPosition = m_position;
     if (data.status == STATUS_NO_FIX)
@@ -80,19 +81,24 @@ PositionProviderPlugin* GpsdPositionProviderPlugin::newInstance() const
     return new GpsdPositionProviderPlugin;
 }
 
-PositionProviderStatus GpsdPositionProviderPlugin::status() const {
+PositionProviderStatus GpsdPositionProviderPlugin::status() const
+{
     return m_status;
 }
 
-GeoDataCoordinates GpsdPositionProviderPlugin::position() const {
+GeoDataCoordinates GpsdPositionProviderPlugin::position() const
+{
     return m_position;
 }
 
-GeoDataAccuracy GpsdPositionProviderPlugin::accuracy() const {
+GeoDataAccuracy GpsdPositionProviderPlugin::accuracy() const
+{
     return m_accuracy;
 }
 
-GpsdPositionProviderPlugin::GpsdPositionProviderPlugin() : m_thread( 0 ) {}
+GpsdPositionProviderPlugin::GpsdPositionProviderPlugin() : m_thread( 0 )
+{
+}
 
 GpsdPositionProviderPlugin::~GpsdPositionProviderPlugin()
 {

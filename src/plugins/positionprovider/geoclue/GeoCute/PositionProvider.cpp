@@ -22,7 +22,8 @@ PositionProvider::Private::Private(PositionProvider& parent,
         SLOT(positionChangedCall(QDBusMessage)));
 }
 
-void PositionProvider::Private::positionChangedCall(QDBusMessage message) {
+void PositionProvider::Private::positionChangedCall(QDBusMessage message)
+{
     // FIXME: Check the number of arguments
     // FIXME: Make sure all result members are actually filled
     Position result;
@@ -41,13 +42,17 @@ void PositionProvider::Private::positionChangedCall(QDBusMessage message) {
 
 PositionProvider::PositionProvider(const QString& service, const QString& path,
     QObject* parent)
-    : Provider(service, path, parent), d(new Private(*this, service, path)) { }
+    : Provider(service, path, parent), d(new Private(*this, service, path))
+{
+}
 
-PositionProvider::~PositionProvider() {
+PositionProvider::~PositionProvider()
+{
     delete d;
 }
 
-PositionProvider* PositionProvider::detailed() {
+PositionProvider* PositionProvider::detailed()
+{
     // FIXME: The following code has been replaced for the moment
     // because it leads to a crash in geoclue-master
     MasterClient mc;
@@ -58,7 +63,8 @@ PositionProvider* PositionProvider::detailed() {
     // return new PositionProvider("example.provider.hostip", "/");
 }
 
-Position PositionProvider::position() const {
+Position PositionProvider::position() const
+{
     return d->currentPosition;
 }
 

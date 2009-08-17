@@ -27,7 +27,8 @@
 
 using namespace Marble;
 
-class GeoDataDebugModel::Private {
+class GeoDataDebugModel::Private
+{
  public:
     Private(GeoDataDocument* rootDocument) : m_rootDocument( rootDocument ) {};
     GeoDataDocument* m_rootDocument;

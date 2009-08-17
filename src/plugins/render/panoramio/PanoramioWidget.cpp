@@ -26,15 +26,18 @@ PanoramioWidget::PanoramioWidget( QObject *parent )
 {
 }
 
-QString PanoramioWidget::widgetType() const {
+QString PanoramioWidget::widgetType() const
+{
     return "panoramioWidget";
 }
      
-bool PanoramioWidget::initialized() {
+bool PanoramioWidget::initialized()
+{
     return !smallImage.isNull();
 }
     
-void PanoramioWidget::addDownloadedFile( QString url, QString type ) {
+void PanoramioWidget::addDownloadedFile( QString url, QString type )
+{
     if( standardImageSize == type ) {
         // Loading original image
         QImage largeImage;
@@ -50,15 +53,18 @@ void PanoramioWidget::addDownloadedFile( QString url, QString type ) {
     }
 }
 
-QDate PanoramioWidget::uploadDate() const {
+QDate PanoramioWidget::uploadDate() const
+{
     return m_uploadDate;
 }
     
-void PanoramioWidget::setUploadDate( QDate uploadDate ) {
+void PanoramioWidget::setUploadDate( QDate uploadDate )
+{
     m_uploadDate = uploadDate;
 }
 
-bool PanoramioWidget::operator<( const AbstractDataPluginWidget *other ) const {
+bool PanoramioWidget::operator<( const AbstractDataPluginWidget *other ) const
+{
     if( other->widgetType() == widgetType() ) {
         return uploadDate() > ((PanoramioWidget *) other)->uploadDate();
     }

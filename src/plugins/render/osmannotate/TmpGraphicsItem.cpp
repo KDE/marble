@@ -12,7 +12,8 @@
 
 #include <QtCore/QVariant>
 
-namespace Marble{
+namespace Marble
+{
 
 TmpGraphicsItem::TmpGraphicsItem()
 {

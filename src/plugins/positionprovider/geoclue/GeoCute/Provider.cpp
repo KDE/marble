@@ -20,11 +20,13 @@ Provider::Private::Private(Provider& parent, const QString& service,
     interface.connect("StatusChanged", &parent, SLOT(statusChangedCall(int)));
 }
 
-Provider::Private::~Private() {
+Provider::Private::~Private()
+{
     interface.asyncCall("RemoveReference");
 }
 
-void Provider::Private::statusChangedCall(int status) {
+void Provider::Private::statusChangedCall(int status)
+{
     const Status newStatus = static_cast<Status>(status);
     if (newStatus != currentStatus) {
         currentStatus = newStatus;
@@ -37,13 +39,17 @@ void Provider::Private::statusChangedCall(int status) {
 
 Provider::Provider(const QString& service, const QString& path,
     QObject* parent)
-    : QObject(parent), d(new Private(*this, service, path)) { }
+    : QObject(parent), d(new Private(*this, service, path))
+{
+}
 
-Provider::~Provider() {
+Provider::~Provider()
+{
     delete d;
 }
 
-Status Provider::status() const {
+Status Provider::status() const
+{
     return d->currentStatus;
 }
 

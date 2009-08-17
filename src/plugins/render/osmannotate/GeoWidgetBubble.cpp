@@ -14,7 +14,8 @@
 
 #include <QtGui/QWidget>
 
-namespace Marble{
+namespace Marble
+{
 
 GeoWidgetBubble::GeoWidgetBubble()
 {

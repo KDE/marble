@@ -1,24 +1,30 @@
 #include "imagewidget.h"
-imageWidget::imageWidget() {
+imageWidget::imageWidget()
+{
 }
 
-imageWidget:: ~imageWidget() {
+imageWidget::~imageWidget()
+{
 }
 
-void imageWidget::addImage(QPixmap temp) {
+void imageWidget::addImage(QPixmap temp)
+{
     image=temp;
 }
 
 
-void imageWidget::paintEvent(QPaintEvent * event ) {
+void imageWidget::paintEvent(QPaintEvent * event )
+{
 qDebug()<<__func__<<"painevent";
 }
 
-void imageWidget::mousePressEvent ( QMouseEvent * event ) {
+void imageWidget::mousePressEvent ( QMouseEvent * event )
+{
 qDebug()<<__func__<<"mouseevent";
 }
 
-QPixmap * imageWidget::returnPointerToImage(){
+QPixmap * imageWidget::returnPointerToImage()
+{
 return &image;
 }
 #include "imagewidget.moc"

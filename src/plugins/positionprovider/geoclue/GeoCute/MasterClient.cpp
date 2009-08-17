@@ -11,7 +11,8 @@
 
 using namespace GeoCute;
 
-static QString createClientPath() {
+static QString createClientPath()
+{
     SimpleDBusInterface masterInterface(serviceName, masterPathName,
         masterInterfaceName);
     QDBusReply<QDBusObjectPath> reply = masterInterface.call("Create");
@@ -22,12 +23,17 @@ static QString createClientPath() {
 }
 
 MasterClient::Private::Private()
-    : interface(serviceName, createClientPath(), interfaceName) { }
+    : interface(serviceName, createClientPath(), interfaceName)
+{
+}
 
 MasterClient::MasterClient(QObject* parent)
-    : QObject(parent), d(new Private) { }
+    : QObject(parent), d(new Private)
+{
+}
 
-MasterClient::~MasterClient() {
+MasterClient::~MasterClient()
+{
     delete d;
 }
 
@@ -40,7 +46,8 @@ void MasterClient::setRequirements(AccuracyLevel accuracy, int min_time,
     }
 }
 
-PositionProvider* MasterClient::positionProvider() {
+PositionProvider* MasterClient::positionProvider()
+{
     if (!d->interface.path().isEmpty()) {
         d->interface.call("PositionStart");
         return new PositionProvider(d->interface.service(), d->interface.path());

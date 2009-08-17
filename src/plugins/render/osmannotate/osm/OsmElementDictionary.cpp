@@ -13,7 +13,8 @@
 namespace Marble
 {
 
-namespace osm {
+namespace osm
+{
 
     const char* osmTag_osm = "osm";
 

@@ -8,9 +8,12 @@ SimpleDBusInterface::SimpleDBusInterface(const QString& service,
     const QString& path, const QString& interface,
     const QDBusConnection& connection, QObject* parent)
     : QObject(parent), p_connection(connection), p_interface(interface),
-      p_path(path), p_service(service) { }
+      p_path(path), p_service(service)
+{
+}
 
-QDBusPendingCall SimpleDBusInterface::asyncCall(const QString& method) const {
+QDBusPendingCall SimpleDBusInterface::asyncCall(const QString& method) const
+{
     const QDBusMessage message
         = QDBusMessage::createMethodCall(p_service, p_path, p_interface, method);
     return p_connection.asyncCall(message);
@@ -60,15 +63,18 @@ void SimpleDBusInterface::connect(const QString& name, QObject* receiver,
     p_connection.connect(p_service, p_path, p_interface, name, receiver, slot);
 }
 
-QString SimpleDBusInterface::interface() const {
+QString SimpleDBusInterface::interface() const
+{
     return p_interface;
 }
 
-QString SimpleDBusInterface::path() const {
+QString SimpleDBusInterface::path() const
+{
     return p_path;
 }
 
-QString SimpleDBusInterface::service() const {
+QString SimpleDBusInterface::service() const
+{
     return p_service;
 }
 

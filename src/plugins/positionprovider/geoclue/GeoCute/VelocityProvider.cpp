@@ -18,7 +18,8 @@ VelocityProvider::Private::Private(VelocityProvider& parent,
         SLOT(velocityChangedCall(QDBusMessage)));
 }
 
-void VelocityProvider::Private::velocityChangedCall(QDBusMessage message) {
+void VelocityProvider::Private::velocityChangedCall(QDBusMessage message)
+{
     Velocity newVelocity;
     newVelocity.fields
         = static_cast<VelocityFields>(message.arguments()[0].toInt());
@@ -35,13 +36,17 @@ void VelocityProvider::Private::velocityChangedCall(QDBusMessage message) {
 VelocityProvider::VelocityProvider(const QString& service, const QString& path,
     QObject* parent)
     : Provider(service, path, parent),
-      d(new Private(*this, service, path)) { }
+      d(new Private(*this, service, path))
+{
+}
 
-VelocityProvider::~VelocityProvider() {
+VelocityProvider::~VelocityProvider()
+{
     delete d;
 }
 
-Velocity VelocityProvider::velocity() {
+Velocity VelocityProvider::velocity()
+{
     return d->currentVelocity;
 }
 

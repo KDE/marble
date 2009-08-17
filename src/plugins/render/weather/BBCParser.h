@@ -31,7 +31,8 @@ namespace Marble
 
 class BBCWeatherItem;
 
-struct ScheduleEntry {
+struct ScheduleEntry
+{
     QString path;
     QPointer<BBCWeatherItem> item;
     QString type;

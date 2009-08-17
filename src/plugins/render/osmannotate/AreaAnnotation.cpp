@@ -11,7 +11,8 @@
 #include "GeoPainter.h"
 
 
-namespace Marble {
+namespace Marble
+{
 
 
 

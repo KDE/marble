@@ -28,7 +28,8 @@ GpsdConnection::GpsdConnection( QObject* parent )
         qDebug() << "Connection to gpsd failed, no position info available.";
 }
 
-void GpsdConnection::update() {
+void GpsdConnection::update()
+{
     gps_data_t* data = m_gpsd.query( "o" );
     if ( data )
         emit gpsdInfo( *data );

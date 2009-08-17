@@ -62,26 +62,32 @@ PositionProviderPlugin* GeoCluePositionProviderPlugin::newInstance() const
     return new GeoCluePositionProviderPlugin;
 }
 
-PositionProviderStatus GeoCluePositionProviderPlugin::status() const {
+PositionProviderStatus GeoCluePositionProviderPlugin::status() const
+{
     return m_status;
 }
 
-GeoDataCoordinates GeoCluePositionProviderPlugin::position() const {
+GeoDataCoordinates GeoCluePositionProviderPlugin::position() const
+{
     return m_position;
 }
 
-GeoDataAccuracy GeoCluePositionProviderPlugin::accuracy() const {
+GeoDataAccuracy GeoCluePositionProviderPlugin::accuracy() const
+{
     return m_accuracy;
 }
 
-GeoCluePositionProviderPlugin::GeoCluePositionProviderPlugin() : m_positionProvider(0) {}
+GeoCluePositionProviderPlugin::GeoCluePositionProviderPlugin() : m_positionProvider(0)
+{
+}
 
 GeoCluePositionProviderPlugin::~GeoCluePositionProviderPlugin()
 {
     delete m_positionProvider;
 }
 
-void GeoCluePositionProviderPlugin::updatePosition(GeoCute::Position newPosition) {
+void GeoCluePositionProviderPlugin::updatePosition(GeoCute::Position newPosition)
+{
     m_position = GeoDataCoordinates(newPosition.longitude, newPosition.latitude,
                                     newPosition.altitude, GeoDataCoordinates::Degree);
     m_accuracy.level = static_cast<GeoDataAccuracy::Level>(newPosition.accuracy.level);
@@ -91,7 +97,8 @@ void GeoCluePositionProviderPlugin::updatePosition(GeoCute::Position newPosition
     emit positionChanged(m_position, m_accuracy);
 }
 
-void GeoCluePositionProviderPlugin::updateStatus(GeoCute::Status newStatus) {
+void GeoCluePositionProviderPlugin::updateStatus(GeoCute::Status newStatus)
+{
     m_status = static_cast<PositionProviderStatus>(newStatus);
 
     emit statusChanged(m_status);

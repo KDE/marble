@@ -20,24 +20,29 @@ PanoramioPlugin::PanoramioPlugin()
     setNameId( "panoramio" );
 }
      
-void PanoramioPlugin::initialize() {
+void PanoramioPlugin::initialize()
+{
     setModel( new PanoramioModel( this ) );
     setNumberOfWidgets( numberOfImagesPerFetch );
 }
 
-QString PanoramioPlugin::name() const {
+QString PanoramioPlugin::name() const
+{
     return tr( "Panoramio Photos" );
 }
 
-QString PanoramioPlugin::guiString() const {
+QString PanoramioPlugin::guiString() const
+{
     return tr( "&Panoramio" );
 }
    
-QString PanoramioPlugin::description() const {
+QString PanoramioPlugin::description() const
+{
     return tr( "Automatically downloads images from around the world in preference to their popularity" );
 }
     
-QIcon PanoramioPlugin::icon() const {
+QIcon PanoramioPlugin::icon() const
+{
     return QIcon();
 }
 Q_EXPORT_PLUGIN2(PanoramioPlugin, Marble::PanoramioPlugin)

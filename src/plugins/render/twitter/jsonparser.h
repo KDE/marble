@@ -27,14 +27,16 @@ sanity checking would include :
 (3)some other plan that i have yet not thought upon :)
     @author Shashank Singh
 */
-struct twitterDataStructure {
+struct twitterDataStructure
+{
 //defining the only parts that are required ,, all oher fields are hence left
     QString user;
     QString location;
     QString text;
 };
 
-struct googleMapDataStructure {
+struct googleMapDataStructure
+{
     qreal lat;
     qreal lon;
 };

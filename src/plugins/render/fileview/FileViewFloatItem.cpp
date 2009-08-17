@@ -101,7 +101,8 @@ QPainterPath FileViewFloatItem::backgroundShape() const
     return path;
 }
 
-void FileViewFloatItem::changeViewport( ViewportParams *viewport ) {
+void FileViewFloatItem::changeViewport( ViewportParams *viewport )
+{
     Q_UNUSED( viewport );
     update();
 }

@@ -15,7 +15,8 @@
 
 #include <QtCore/QDebug>
 
-namespace Marble{
+namespace Marble
+{
 
 OsmBoundsGraphicsItem::OsmBoundsGraphicsItem()
         : GeoGraphicsItem()

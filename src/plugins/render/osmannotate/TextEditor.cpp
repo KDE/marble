@@ -19,7 +19,8 @@
 #include <QtGui/QHBoxLayout>
 
 
-namespace Marble {
+namespace Marble
+{
 
 TextEditor::TextEditor() : QWidget()
 {

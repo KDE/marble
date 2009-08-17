@@ -11,15 +11,16 @@
 // Self
 #include "AbstractWeatherService.h"
 
-namespace Marble {
+namespace Marble
+{
 
 AbstractWeatherService::AbstractWeatherService( QObject *parent )
     : QObject( parent )
 {
 }
 
-AbstractWeatherService::~AbstractWeatherService() {
-    
+AbstractWeatherService::~AbstractWeatherService()
+{
 }
 
 } // namespace Marble
