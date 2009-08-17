@@ -33,7 +33,8 @@ namespace Marble
 
 class GeoSceneTexture;
 
-namespace TileLoaderHelper {
+namespace TileLoaderHelper
+{
     /**
      * @brief Get the maximum number of tile rows for a given tile level.
      * @param levelZeroRows  the number of rows in level zero

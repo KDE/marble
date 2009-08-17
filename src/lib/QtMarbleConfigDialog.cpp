@@ -33,9 +33,11 @@
 #include "MarbleWidget.h"
 #include "RenderPlugin.h"
 
-namespace Marble {
+namespace Marble
+{
 
-class QtMarbleConfigDialogPrivate {
+class QtMarbleConfigDialogPrivate
+{
  public:
     QtMarbleConfigDialogPrivate( MarbleWidget *marbleWidget )
         : ui_viewSettings(),
@@ -44,11 +46,13 @@ class QtMarbleConfigDialogPrivate {
     {
     }
 
-    ~QtMarbleConfigDialogPrivate() {
+    ~QtMarbleConfigDialogPrivate()
+    {
         delete m_settings;
     }
 
-    void initSettings() {
+    void initSettings()
+    {
         m_settings = new QSettings("kde.org", "Marble Desktop Globe");
     }
 
@@ -205,7 +209,8 @@ void QtMarbleConfigDialog::syncSettings()
     QNetworkProxy::setApplicationProxy(proxy);
 }
 
-void QtMarbleConfigDialog::showPluginAboutDialog( QString nameId ) {
+void QtMarbleConfigDialog::showPluginAboutDialog( QString nameId )
+{
     QList<RenderPlugin *> renderItemList = d->m_marbleWidget->renderPlugins();
 
     foreach ( RenderPlugin *renderItem, renderItemList ) {
@@ -218,7 +223,8 @@ void QtMarbleConfigDialog::showPluginAboutDialog( QString nameId ) {
     }
 }
 
-void QtMarbleConfigDialog::showPluginConfigDialog( QString nameId ) {
+void QtMarbleConfigDialog::showPluginConfigDialog( QString nameId )
+{
     QList<RenderPlugin *> renderItemList = d->m_marbleWidget->renderPlugins();
 
     foreach ( RenderPlugin *renderItem, renderItemList ) {
@@ -231,7 +237,8 @@ void QtMarbleConfigDialog::showPluginConfigDialog( QString nameId ) {
     }
 }
 
-void QtMarbleConfigDialog::writePluginSettings() {
+void QtMarbleConfigDialog::writePluginSettings()
+{
     d->m_marbleWidget->writePluginSettings( *d->m_settings );
 }
 
@@ -409,7 +416,8 @@ void QtMarbleConfigDialog::writeSettings()
     d->m_previousGraphicsSystem = graphicsSystem();
 }
 
-void QtMarbleConfigDialog::retrievePluginState() {
+void QtMarbleConfigDialog::retrievePluginState()
+{
     QList<RenderPlugin *>  pluginList = d->m_marbleWidget->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {
@@ -417,7 +425,8 @@ void QtMarbleConfigDialog::retrievePluginState() {
     }
 }
 
-void QtMarbleConfigDialog::applyPluginState() {
+void QtMarbleConfigDialog::applyPluginState()
+{
     QList<RenderPlugin *>  pluginList = d->m_marbleWidget->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
     for (; i != pluginList.constEnd(); ++i) {

@@ -16,7 +16,8 @@
 namespace Marble
 {
 
-class PluginManagerTest : public QObject {
+class PluginManagerTest : public QObject
+{
     Q_OBJECT
     private slots:
         void loadPlugins();

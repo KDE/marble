@@ -13,7 +13,8 @@
 
 #include "marble_export.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class PlanetPrivate;
 

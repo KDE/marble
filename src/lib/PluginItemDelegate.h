@@ -20,7 +20,8 @@ class QRect;
 class QStyleOptionButton;
 class QStyleOptionViewItem;
 
-namespace Marble {
+namespace Marble
+{
 
 class PluginItemDelegate : public QAbstractItemDelegate
 {

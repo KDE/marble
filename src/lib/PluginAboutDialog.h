@@ -17,11 +17,13 @@
 // Marble
 #include "marble_export.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class PluginAboutDialogPrivate;
 
-struct Author {
+struct Author
+{
     QString name;
     QString task;
     QString email;

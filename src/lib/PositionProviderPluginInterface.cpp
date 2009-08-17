@@ -12,4 +12,6 @@
 
 
 
-Marble::PositionProviderPluginInterface::~PositionProviderPluginInterface() {}
+Marble::PositionProviderPluginInterface::~PositionProviderPluginInterface()
+{
+}

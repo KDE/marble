@@ -47,7 +47,8 @@ FrameGraphicsItem::FrameType FrameGraphicsItem::frame()
     return d->m_frame;
 }
 
-void FrameGraphicsItem::setFrame( FrameType type ) {
+void FrameGraphicsItem::setFrame( FrameType type )
+{
     d->m_frame = type;
     setPadding( padding() );
 }
@@ -186,11 +187,13 @@ QRectF FrameGraphicsItem::contentRect( const QPointF& position ) const
     return contentRect;
 }
 
-QRectF FrameGraphicsItem::contentRect() const {
+QRectF FrameGraphicsItem::contentRect() const
+{
     return contentRect( QPointF( 0.0, 0.0 ) );
 }
 
-QSizeF FrameGraphicsItem::contentSize() const {
+QSizeF FrameGraphicsItem::contentSize() const
+{
     return contentRect().size();
 }
 

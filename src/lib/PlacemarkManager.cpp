@@ -35,7 +35,8 @@
 
 using namespace Marble;
 
-namespace Marble {
+namespace Marble
+{
 class PlacemarkManagerPrivate
 {
     public:

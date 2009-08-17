@@ -34,7 +34,8 @@ class QPointF;
 
 class KTimeZone;
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleMap;
 class SunLocator;

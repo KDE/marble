@@ -16,7 +16,8 @@
 #include "GeoDocument.h"
 #include "GeoWriter.h"
 
-namespace Marble{
+namespace Marble
+{
 
 //needs to handle a specific doctype. different versions different writer classes?
 //don't use the tag dictionary for tag names, because with the writer we are using

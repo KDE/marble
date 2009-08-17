@@ -12,9 +12,13 @@
 
 
 
-Marble::PositionProviderPlugin::PositionProviderPlugin() {}
+Marble::PositionProviderPlugin::PositionProviderPlugin()
+{
+}
 
-Marble::PositionProviderPlugin::~PositionProviderPlugin() {}
+Marble::PositionProviderPlugin::~PositionProviderPlugin()
+{
+}
 
 
 

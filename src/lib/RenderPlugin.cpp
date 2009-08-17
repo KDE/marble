@@ -96,7 +96,8 @@ QList<QActionGroup*>* RenderPlugin::toolbarActionGroups() const
     return 0;
 }
 
-QStandardItem* RenderPlugin::item() const {
+QStandardItem* RenderPlugin::item() const
+{
     d->m_item->setIcon( icon() );
     d->m_item->setText( name() );
     d->m_item->setEditable( false );
@@ -158,25 +159,30 @@ bool RenderPlugin::visible() const
     return d->m_visible;
 }
 
-QDialog *RenderPlugin::aboutDialog() const {
+QDialog *RenderPlugin::aboutDialog() const
+{
     return 0;
 }
 
-QDialog *RenderPlugin::configDialog() const {
+QDialog *RenderPlugin::configDialog() const
+{
     return 0;
 }
 
-QHash<QString,QVariant> RenderPlugin::settings() const {
+QHash<QString,QVariant> RenderPlugin::settings() const
+{
     return QHash<QString,QVariant>();
 }
 
-void RenderPlugin::setSettings( QHash<QString,QVariant> settings ) {
+void RenderPlugin::setSettings( QHash<QString,QVariant> settings )
+{
     Q_UNUSED( settings );
 }
 
-bool RenderPlugin::eventFilter( QObject *, QEvent * ) {
+bool RenderPlugin::eventFilter( QObject *, QEvent * )
+{
     return false;
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+}
 
 } // namespace Marble
 

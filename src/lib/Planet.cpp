@@ -16,7 +16,8 @@
 
 #include "global.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class PlanetPrivate
 {

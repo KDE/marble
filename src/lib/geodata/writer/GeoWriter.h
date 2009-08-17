@@ -16,7 +16,8 @@
 
 #include <QtXml/QXmlStreamWriter>
 
-namespace Marble{
+namespace Marble
+{
 
 /**
  * @brief Standard Marble way of writing XML

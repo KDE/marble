@@ -54,7 +54,8 @@
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
 
-namespace Marble {
+namespace Marble
+{
 
 WorldClock::WorldClock(QObject *parent, const QVariantList &args)
     : Plasma::Applet(parent, args),

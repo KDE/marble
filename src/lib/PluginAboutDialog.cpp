@@ -18,16 +18,20 @@
 // Qt
 #include <QtCore/QTextStream>
 
-namespace Marble {
+namespace Marble
+{
 
 // The index of the "Data" tab.
 int dataTabIndex = 2;
 
-class PluginAboutDialogPrivate {
+class PluginAboutDialogPrivate
+{
  public:
-    PluginAboutDialogPrivate() {
+    PluginAboutDialogPrivate()
+    {
     }
-    ~PluginAboutDialogPrivate() {
+    ~PluginAboutDialogPrivate()
+    {
     }
 
     Ui::MarbleAboutDialog u_dialog;
@@ -45,28 +49,34 @@ PluginAboutDialog::PluginAboutDialog( QWidget *parent )
     setLicenseAgreementText( QString() );
 }
 
-PluginAboutDialog::~PluginAboutDialog() {
+PluginAboutDialog::~PluginAboutDialog()
+{
     delete d;
 }
 
-void PluginAboutDialog::setName( const QString& name ) {
+void PluginAboutDialog::setName( const QString& name )
+{
     d->u_dialog.m_pMarbleTitleLabel->setText( name );
     setWindowTitle( tr( "About %1" ).arg( name ) );
 }
 
-void PluginAboutDialog::setVersion( const QString& version ) {
+void PluginAboutDialog::setVersion( const QString& version )
+{
     d->u_dialog.m_pMarbleVersionLabel->setText( tr( "Version %1" ).arg( version ) );
 }
 
-void PluginAboutDialog::setPixmap( const QPixmap& pixmap ) {
+void PluginAboutDialog::setPixmap( const QPixmap& pixmap )
+{
     d->u_dialog.m_pMarbleLogoLabel->setPixmap( pixmap );
 }
 
-void PluginAboutDialog::setAboutText( const QString& about ) {
+void PluginAboutDialog::setAboutText( const QString& about )
+{
     d->u_dialog.m_pMarbleAboutBrowser->setText( about );
 }
 
-void PluginAboutDialog::setAuthors( const QList<Author>& authors ) {
+void PluginAboutDialog::setAuthors( const QList<Author>& authors )
+{
     QString string;
     foreach ( Author author, authors ) {
         string += author.name;
@@ -80,11 +90,13 @@ void PluginAboutDialog::setAuthors( const QList<Author>& authors ) {
     setAuthorsText( string );
 }
 
-void PluginAboutDialog::setAuthorsText( const QString& authors ) {
+void PluginAboutDialog::setAuthorsText( const QString& authors )
+{
     d->u_dialog.m_pMarbleAuthorsBrowser->setText( authors );
 }
 
-void PluginAboutDialog::setDataText( const QString& data ) {
+void PluginAboutDialog::setDataText( const QString& data )
+{
     if ( data.isNull() ) {
         d->u_dialog.tabWidget->removeTab( d->u_dialog.tabWidget->indexOf( d->u_dialog.m_dataTab ) );
     }
@@ -94,7 +106,8 @@ void PluginAboutDialog::setDataText( const QString& data ) {
     }
 }
 
-void PluginAboutDialog::setLicense( PluginAboutDialog::LicenseKey license ) {
+void PluginAboutDialog::setLicense( PluginAboutDialog::LicenseKey license )
+{
     QString filename;
     switch ( license ) {
         case PluginAboutDialog::License_LGPL_V2:
@@ -119,7 +132,8 @@ void PluginAboutDialog::setLicense( PluginAboutDialog::LicenseKey license ) {
     }
 }
 
-void PluginAboutDialog::setLicenseAgreementText( const QString& license ) {
+void PluginAboutDialog::setLicenseAgreementText( const QString& license )
+{
     if ( license.isNull() ) {
         setLicense( PluginAboutDialog::License_LGPL_V2 );
     }

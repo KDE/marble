@@ -28,7 +28,8 @@
 #define M_PI 3.14159265358979323846264338327950288419717
 #endif
 
-namespace Marble {
+namespace Marble
+{
 
 using std::sin;
 using std::cos;

@@ -13,7 +13,8 @@
 
 #include "GeoTagWriter.h"
 
-namespace Marble{
+namespace Marble
+{
 
 class KmlPlacemarkTagWriter : public GeoTagWriter
 {

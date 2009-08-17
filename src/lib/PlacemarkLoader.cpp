@@ -26,7 +26,8 @@
 #include "PlacemarkContainer.h"
 
 
-namespace Marble {
+namespace Marble
+{
 
 PlacemarkLoader::PlacemarkLoader( QObject* parent, const QString& file )
     : QThread( parent ), 

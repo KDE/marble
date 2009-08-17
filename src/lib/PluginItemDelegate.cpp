@@ -38,7 +38,8 @@ PluginItemDelegate::PluginItemDelegate( QAbstractItemView *view, QObject * paren
     view->setMouseTracking( true );
 }
 
-PluginItemDelegate::~PluginItemDelegate() {
+PluginItemDelegate::~PluginItemDelegate()
+{
 }
 
 void PluginItemDelegate::paint( QPainter *painter,
@@ -128,11 +129,13 @@ QSize PluginItemDelegate::sizeHint( const QStyleOptionViewItem& option,
     return size;
 }
 
-void PluginItemDelegate::setAboutIcon( const QIcon& icon ) {
+void PluginItemDelegate::setAboutIcon( const QIcon& icon )
+{
     m_aboutIcon = icon;
 }
 
-void PluginItemDelegate::setConfigIcon( const QIcon& icon ) {
+void PluginItemDelegate::setConfigIcon( const QIcon& icon )
+{
     m_configIcon = icon;
 }
 
@@ -377,7 +380,8 @@ QStyleOptionButton PluginItemDelegate::buttonOption( const QStyleOptionViewItem&
     return buttonOption;
 }
 
-QSize PluginItemDelegate::nameSize( const QModelIndex& index ) const {
+QSize PluginItemDelegate::nameSize( const QModelIndex& index ) const
+{
     QString name = index.data( Qt::DisplayRole ).toString();
     QSize nameSize( QApplication::fontMetrics().size( 0, name ) );
     return nameSize;

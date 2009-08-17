@@ -15,7 +15,8 @@
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 
-namespace Marble {
+namespace Marble
+{
 
 static GeoTagWriterRegistrar s_writerPoint( GeoTagWriter::QualifiedName(GeoDataTypes::GeoDataPointType,
                                                                             kml::kmlTag_nameSpace22),

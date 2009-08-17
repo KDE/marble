@@ -26,7 +26,8 @@
 namespace Marble
 {
 
-class KMLTest : public QObject {
+class KMLTest : public QObject
+{
     Q_OBJECT
     private slots:
         void initTestCase();

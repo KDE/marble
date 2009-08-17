@@ -21,7 +21,8 @@ namespace Marble
 
 class MarbleWidget;
 
-class MarbleTest {
+class MarbleTest
+{
  public:
     explicit MarbleTest( MarbleWidget* marbleWidget );
     virtual ~MarbleTest(){ }

@@ -22,7 +22,8 @@
 class QSettings;
 class QStandardItemModel;
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleCacheSettingsWidget;
 class MarblePluginSettingsWidget;

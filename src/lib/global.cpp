@@ -12,7 +12,8 @@
 #include "global_p.h"
 
 
-namespace Marble {
+namespace Marble
+{
 
 MarbleGlobalPrivate::MarbleGlobalPrivate()
 {

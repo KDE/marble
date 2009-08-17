@@ -70,7 +70,8 @@ private:
 };
 
 // Helper structure
-struct GeoTagWriterRegistrar {
+struct GeoTagWriterRegistrar
+{
 public:
     GeoTagWriterRegistrar(const GeoTagWriter::QualifiedName& name, const GeoTagWriter* writer)
     {
