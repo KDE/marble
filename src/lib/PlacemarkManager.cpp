@@ -79,11 +79,6 @@ void PlacemarkManager::setDataFacade( MarbleDataFacade *facade )
     d->m_datafacade = facade;
 }
 
-void PlacemarkManager::clearPlacemarks()
-{
-    d->m_datafacade->placemarkModel()->clearPlacemarks();
-}
-
 QStringList PlacemarkManager::containers() const
 {
     return d->m_datafacade->fileViewModel()->containers() + d->m_pathList;
@@ -94,20 +89,13 @@ QString PlacemarkManager::toRegularName( QString name )
     return name.remove(".kml").remove(".cache");
 }
 
-void PlacemarkManager::addPlacemarkFile( const QString& filepath, bool finalized )
+void PlacemarkManager::addPlacemarkFile( const QString& filepath )
 {
     if( ! containers().contains( toRegularName( filepath ) ) ) {
-        qDebug() << "adding container:" << toRegularName( filepath ) << finalized;
+        qDebug() << "adding container:" << toRegularName( filepath );
         PlacemarkLoader* loader = new PlacemarkLoader( this, filepath );
-        connect (   loader, SIGNAL( placemarksLoaded( PlacemarkLoader*, PlacemarkContainer * ) ), 
-                    this, SLOT( loadPlacemarkContainer( PlacemarkLoader*, PlacemarkContainer * ) ) );
-        connect (   loader, SIGNAL( placemarkLoaderFailed( PlacemarkLoader* ) ), 
-                    this, SLOT( cleanupLoader( PlacemarkLoader* ) ) );
-        connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
-                    this, SLOT( addGeoDataDocument( GeoDataDocument* ) ) );
-        d->m_loaderList.append( loader );
+        appendLoader( loader );
         d->m_pathList.append( toRegularName( filepath ) );
-        loader->start();
     }
 }
 
@@ -136,7 +124,11 @@ void PlacemarkManager::addGeoDataDocument( GeoDataDocument* document )
 
 void PlacemarkManager::addPlacemarkData( const QString& data, const QString& key )
 {
-    loadKmlFromData( data, key, false );
+    Q_ASSERT( d->m_datafacade->placemarkModel() != 0 && "You have called loadKmlFromData before creating a model!" );
+
+    qDebug() << "adding container:" << key;
+    PlacemarkLoader* loader = new PlacemarkLoader( this, data, key );
+    appendLoader( loader );
 }
 
 void PlacemarkManager::removePlacemarkKey( const QString& key )
@@ -151,6 +143,21 @@ void PlacemarkManager::removePlacemarkKey( const QString& key )
             break;
         }
     };
+}
+
+void PlacemarkManager::appendLoader( PlacemarkLoader *loader )
+{
+    connect (   loader, SIGNAL( placemarksLoaded( PlacemarkLoader*, PlacemarkContainer * ) ),
+                this, SLOT( loadPlacemarkContainer( PlacemarkLoader*, PlacemarkContainer * ) ) );
+
+    connect (   loader, SIGNAL( placemarkLoaderFailed( PlacemarkLoader* ) ),
+                this, SLOT( cleanupLoader( PlacemarkLoader* ) ) );
+
+    connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ),
+                this, SLOT( addGeoDataDocument( GeoDataDocument* ) ) );
+
+    d->m_loaderList.append( loader );
+    loader->start();
 }
 
 void PlacemarkManager::cleanupLoader( PlacemarkLoader* loader )
@@ -179,31 +186,6 @@ void PlacemarkManager::loadPlacemarkContainer( PlacemarkLoader* loader, Placemar
          d->m_pathList.removeAll( loader->path() );
          delete loader;
     }
-}
-
-void PlacemarkManager::loadKml( const QString& filename, bool clearPrevious )
-{
-    Q_UNUSED( clearPrevious )
-
-    addPlacemarkFile( filename, true );
-}
-
-void PlacemarkManager::loadKmlFromData( const QString& data, const QString& key, bool finalize )
-{
-    Q_UNUSED( finalize )
-
-    Q_ASSERT( d->m_datafacade->placemarkModel() != 0 && "You have called loadKmlFromData before creating a model!" );
-
-    qDebug() << "adding container:" << key;
-    PlacemarkLoader* loader = new PlacemarkLoader( this, data, key );
-    connect (   loader, SIGNAL( placemarksLoaded( PlacemarkLoader*, PlacemarkContainer * ) ), 
-                this, SLOT( loadPlacemarkContainer( PlacemarkLoader*, PlacemarkContainer * ) ) );
-    connect (   loader, SIGNAL( placemarkLoaderFailed( PlacemarkLoader* ) ), 
-                this, SLOT( cleanupLoader( PlacemarkLoader* ) ) );
-    connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ), 
-                this, SLOT( addGeoDataDocument( GeoDataDocument* ) ) );
-    d->m_loaderList.append( loader );
-    loader->start();
 }
 
 #include "PlacemarkManager.moc"

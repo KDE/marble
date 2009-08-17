@@ -75,22 +75,10 @@ class PlacemarkManager : public QObject
      */
     QStringList containers() const;
 
-    void clearPlacemarks();
-
     /**
      * Loads a new place mark file into the manager.
      */
-    void addPlacemarkFile( const QString &fileName, bool finalize = true );
-
-    /**
-     * Loads a new KML file into the manager.
-     */
-    void loadKml( const QString &fileName, bool clearPrevious = false );
-
-    /**
-     * Loads a new KML data as string into the manager.
-     */
-    void loadKmlFromData( const QString& data, const QString& key = "data", bool finalize = true );
+    void addPlacemarkFile( const QString &fileName );
 
     /**
     * removes an existing GeoDataDocument from the manager
@@ -112,6 +100,8 @@ class PlacemarkManager : public QObject
     void addGeoDataDocument( GeoDataDocument* );
 
  private:
+
+    void appendLoader( PlacemarkLoader *loader );
 
     /**
      * internal helper function which returns the regular name of a kml or cache file

@@ -22,7 +22,6 @@
 #include <QtGui/QSlider>
 
 #include "FileViewModel.h"
-#include "AbstractFileViewItem.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "MarbleWidget.h"

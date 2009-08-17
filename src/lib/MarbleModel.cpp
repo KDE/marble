@@ -442,7 +442,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     // load new standard Placemarks
     foreach(const QString& container, loadList) {
         loadList.pop_front();
-        d->m_placemarkmanager->addPlacemarkFile( container, loadList.isEmpty() );
+        d->m_placemarkmanager->addPlacemarkFile( container );
     }
     d->notifyModelChanged();
     d->m_placemarkLayout->requestStyleReset();
@@ -706,7 +706,7 @@ void MarbleModel::openGpxFile( const QString& filename )
 
 void MarbleModel::addPlacemarkFile( const QString& filename )
 {
-    d->m_placemarkmanager->loadKml( filename, false );
+    d->m_placemarkmanager->addPlacemarkFile( filename );
 
     d->notifyModelChanged();
 }
