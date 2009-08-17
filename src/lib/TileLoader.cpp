@@ -253,7 +253,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     connect( tile, SIGNAL( tileUpdateDone() ),
              this, SIGNAL( tileUpdateAvailable() ) );
 
-    tile->loadDataset( texture, tileLevel, tilx, tily, &( d->m_tileCache ) );
+    tile->loadDataset( texture, tileLevel, tilx, tily, &d->m_tileCache );
     tile->initJumpTables( false );
 
     // TODO should emit signal rather than directly calling paintTile
@@ -298,7 +298,7 @@ int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
 
     QString tilepath = MarbleDirs::path( TileLoaderHelper::themeStr( texture ) );
 //    qDebug() << "TileLoader::maxPartialTileLevel tilepath" << tilepath;
-    QStringList leveldirs = ( QDir( tilepath ) ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
+    QStringList leveldirs = QDir( tilepath ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
 
     bool ok = true;
 
@@ -364,7 +364,7 @@ void TileLoader::reloadTile( const QString &idStr )
 //         emit paintTile( d->m_tilesOnDisplay[id], x, y, level, d->m_theme, true );
         GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
 
-        (d->m_tilesOnDisplay[id])->loadDataset( texture, level, x, y, &( d->m_tileCache ) ); 
+        d->m_tilesOnDisplay[id]->loadDataset( texture, level, x, y, &d->m_tileCache ); 
         m_parent->paintTile( d->m_tilesOnDisplay[id], x, y, level, texture, true );
 //         (d->m_tilesOnDisplay[id])->reloadTile( x, y, level, d->m_theme );
     } else {
