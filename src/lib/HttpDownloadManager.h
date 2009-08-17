@@ -49,9 +49,8 @@ class NetworkPlugin;
 
 class MARBLE_EXPORT HttpDownloadManager : public QObject 
 {
-    friend class HttpJob;
-
     Q_OBJECT
+
  public:
     /**
      * Creates a new http download manager.
