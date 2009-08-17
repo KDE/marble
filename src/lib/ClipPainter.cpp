@@ -292,7 +292,8 @@ void ClipPainterPrivate::labelPosition( const QPolygonF & polygon, QVector<QPoin
     }
 }
 
-bool ClipPainterPrivate::pointAllowsLabel( const QPointF& point ){
+bool ClipPainterPrivate::pointAllowsLabel( const QPointF& point )
+{
 
     if ( point.x() > m_labelAreaMargin && point.x() < q->viewport().width() - m_labelAreaMargin 
          && point.y() > m_labelAreaMargin && point.y() < q->viewport().height() - m_labelAreaMargin ) {
@@ -303,7 +304,8 @@ bool ClipPainterPrivate::pointAllowsLabel( const QPointF& point ){
 
 QPointF ClipPainterPrivate::interpolateLabelPoint( const QPointF& previousPoint, 
                                                    const QPointF& currentPoint,
-                                                   LabelPositionFlags labelPositionFlags ) {
+                                                   LabelPositionFlags labelPositionFlags )
+{
     qreal m = _m( previousPoint, currentPoint );
     if ( previousPoint.x() <= m_labelAreaMargin ) {
         if ( labelPositionFlags.testFlag( IgnoreXMargin ) ) {
@@ -1115,7 +1117,8 @@ void ClipPainterPrivate::clipOnce( QPolygonF & clippedPolyObject,
 
 #ifdef DEBUG_DRAW_NODES
 
-void ClipPainterPrivate::debugDrawNodes( const QPolygonF & polygon ) {
+void ClipPainterPrivate::debugDrawNodes( const QPolygonF & polygon )
+{
 
     q->save();
     q->setRenderHint( QPainter::Antialiasing, false );

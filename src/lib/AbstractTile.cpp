@@ -16,7 +16,8 @@
 #include <QtCore/QDebug>
 
 
-namespace Marble {
+namespace Marble
+{
 
 AbstractTilePrivate::AbstractTilePrivate( const TileId& id )
     : m_id( id ),

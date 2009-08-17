@@ -1344,7 +1344,8 @@ QList<RenderPlugin *> MarbleWidget::renderPlugins() const
     return d->m_model->renderPlugins();
 }
 
-void MarbleWidget::readPluginSettings( QSettings& settings ) {
+void MarbleWidget::readPluginSettings( QSettings& settings )
+{
     foreach( RenderPlugin *plugin, renderPlugins() ) {
         settings.beginGroup( QString( "plugin_" ) + plugin->nameId() );
 
@@ -1360,7 +1361,8 @@ void MarbleWidget::readPluginSettings( QSettings& settings ) {
     }
 }
 
-void MarbleWidget::writePluginSettings( QSettings& settings ) const {
+void MarbleWidget::writePluginSettings( QSettings& settings ) const
+{
     foreach( RenderPlugin *plugin, renderPlugins() ) {
         settings.beginGroup( QString( "plugin_" ) + plugin->nameId() );
 

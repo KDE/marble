@@ -28,7 +28,8 @@
 #include "global.h"
 
 using namespace Marble;
-namespace Marble {
+namespace Marble
+{
 
 class LatLonEditPrivate : public Ui::LatLonEditPrivate
 {

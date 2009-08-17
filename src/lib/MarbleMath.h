@@ -19,7 +19,8 @@
 #include <math.h>
 
 
-namespace {
+namespace
+{
     const qreal a1 = 1.0/6.0; 
     const qreal a2 = 1.0/24.0; 
     const qreal a3 = 61.0/5040; 

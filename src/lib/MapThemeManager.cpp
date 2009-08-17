@@ -33,12 +33,14 @@
 
 using namespace Marble;
 
-namespace {
+namespace
+{
     const QString mapDirName = "maps";
     const int columnRelativePath = 1;
 }
 
-namespace Marble {
+namespace Marble
+{
 
 class MapThemeManagerPrivate
 {

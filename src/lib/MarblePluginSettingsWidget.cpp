@@ -18,9 +18,11 @@
 // Marble
 #include "PluginItemDelegate.h"
 
-namespace Marble {
+namespace Marble
+{
 
-class MarblePluginSettingsWidgetPrivate {
+class MarblePluginSettingsWidgetPrivate
+{
  public:
     PluginItemDelegate *m_itemDelegate;
 };
@@ -41,7 +43,8 @@ MarblePluginSettingsWidget::MarblePluginSettingsWidget( QWidget *parent )
              this, SIGNAL( configPluginClicked( QString ) ) );
 }
 
-void MarblePluginSettingsWidget::setAboutIcon( const QIcon& icon ) {
+void MarblePluginSettingsWidget::setAboutIcon( const QIcon& icon )
+{
     d->m_itemDelegate->setAboutIcon( icon );
 }
 
@@ -50,7 +53,8 @@ MarblePluginSettingsWidget::~MarblePluginSettingsWidget()
     delete d;
 }
 
-void MarblePluginSettingsWidget::setConfigIcon( const QIcon& icon ) {
+void MarblePluginSettingsWidget::setConfigIcon( const QIcon& icon )
+{
     d->m_itemDelegate->setConfigIcon( icon );
 }
 

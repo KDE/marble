@@ -33,7 +33,8 @@
 
 using namespace Marble;
 
-class MarbleGeometryModel::Private {
+class MarbleGeometryModel::Private
+{
  public:
     Private( GeoDataDocument* rootDocument ) : m_rootDocument( rootDocument )
     {

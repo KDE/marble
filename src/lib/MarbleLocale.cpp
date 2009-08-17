@@ -15,7 +15,8 @@
 #include <QtCore/QLocale>
 
 
-namespace Marble {
+namespace Marble
+{
 
 MarbleLocalePrivate::MarbleLocalePrivate()
     : m_distanceUnit( Marble::NoDistanceUnit ),
@@ -57,15 +58,18 @@ void MarbleLocale::setDistanceUnit( Marble::DistanceUnit distanceUnit )
     d->m_distanceUnit = distanceUnit;
 }
 
-void MarbleLocale::setMeasureSystem( Marble::MeasureSystem measureSystem ) {
+void MarbleLocale::setMeasureSystem( Marble::MeasureSystem measureSystem )
+{
     d->m_measureSystem = measureSystem;
 }
 
-Marble::MeasureSystem MarbleLocale::measureSystem() const {
+Marble::MeasureSystem MarbleLocale::measureSystem() const
+{
     return d->m_measureSystem;
 }
 
-QString MarbleLocale::languageCode() {
+QString MarbleLocale::languageCode()
+{
     const QString lang = QLocale::system().name();
     QString code;
 

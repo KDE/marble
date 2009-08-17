@@ -173,7 +173,8 @@ void MarbleWidgetDefaultInputHandler::showRmbMenu( int x, int y)
     }
 }
 
-void MarbleWidgetDefaultInputHandler::openItemToolTip() {
+void MarbleWidgetDefaultInputHandler::openItemToolTip()
+{
     if ( !m_lastToolTipItem.isNull() ) {
         QToolTip::showText( m_widget->mapToGlobal( m_toolTipPosition ),
                             m_lastToolTipItem->toolTip(),
