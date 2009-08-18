@@ -35,7 +35,7 @@ if( QTONLY )
     endif( BUILD_MARBLE_TESTS )
 else( QTONLY )
     # for KDE builds this gets set in the kdeedu CMakeLists.txt
-    set( BUILD_MARBLE_TESTS ON )
+    set( BUILD_MARBLE_TESTS OFF )
 endif( QTONLY )
 
 if( BUILD_MARBLE_TESTS )
