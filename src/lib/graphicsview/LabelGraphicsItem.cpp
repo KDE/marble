@@ -23,8 +23,9 @@
 
 using namespace Marble;
 
-LabelGraphicsItemPrivate::LabelGraphicsItemPrivate()
-    : m_text()
+LabelGraphicsItemPrivate::LabelGraphicsItemPrivate( LabelGraphicsItem *parent )
+    : m_text(),
+      m_parent( parent )
 {
 }
 
@@ -33,27 +34,53 @@ QFont LabelGraphicsItemPrivate::font() const
     return QApplication::font();
 }
 
+void LabelGraphicsItemPrivate::updateSize()
+{
+    QSizeF updatedSize = m_calculatedSize;
+    if ( updatedSize.isEmpty() ) {
+        updatedSize.setHeight( 0 );
+        updatedSize.setWidth( 0 );
+    }
+    else {
+        if ( m_minimumSize.width() > updatedSize.width() ) {
+            updatedSize.setWidth( m_minimumSize.width() );
+        }
+        if ( m_minimumSize.height() > updatedSize.height() ) {
+            updatedSize.setHeight( m_minimumSize.height() );
+        }
+    }
+
+    m_parent->setContentSize( updatedSize );
+}
+
 // ----------------------------------------------------------------
 
 LabelGraphicsItem::LabelGraphicsItem( MarbleGraphicsItem *parent )
     : FrameGraphicsItem( parent ),
-      d( new LabelGraphicsItemPrivate() )
+      d( new LabelGraphicsItemPrivate( this ) )
 {
 }
 
-void LabelGraphicsItem::setText( const QString& text, int minWidth, int minHeight )
+QString LabelGraphicsItem::text() const
+{
+    return d->m_text;
+}
+
+void LabelGraphicsItem::setText( const QString& text )
 {
     clear();
     d->m_text = text;
     QFontMetrics metrics( d->font() );
     QSizeF size = metrics.boundingRect( text ).size() + QSizeF( 14, 2 );
-    if ( size.width() < minWidth )
-        size.setWidth( minWidth );
-    if ( size.height() < minHeight )
-        size.setHeight( minHeight );
-    setContentSize( size );
+    d->m_calculatedSize = size;
+    d->updateSize();
 
     update();
+}
+
+QImage LabelGraphicsItem::image() const
+{
+    return d->m_image;
 }
 
 void LabelGraphicsItem::setImage( const QImage& image, const QSize& size )
@@ -61,20 +88,40 @@ void LabelGraphicsItem::setImage( const QImage& image, const QSize& size )
     clear();
     d->m_image = image;
     if ( size.isEmpty() ) {
-        setContentSize( image.size() );
+        d->m_calculatedSize = image.size();
     }
     else {
-        setContentSize( size );
+        d->m_calculatedSize = size;
     }
+    d->updateSize();
 
     update();
+}
+
+QIcon LabelGraphicsItem::icon() const
+{
+    return d->m_icon;
 }
 
 void LabelGraphicsItem::setIcon( const QIcon& icon, const QSize& size )
 {
     clear();
     d->m_icon = icon;
-    setContentSize( size );
+    d->m_calculatedSize = size;
+    d->updateSize();
+
+    update();
+}
+
+QSizeF LabelGraphicsItem::minimumSize() const
+{
+    return d->m_minimumSize;
+}
+
+void LabelGraphicsItem::setMinimumSize( const QSizeF& size )
+{
+    d->m_minimumSize = size;
+    d->updateSize();
 
     update();
 }
@@ -84,7 +131,8 @@ void LabelGraphicsItem::clear()
     d->m_text.clear();
     d->m_image = QImage();
     d->m_icon = QIcon();
-    setSize( QSizeF( 0.0, 0.0 ) );
+    d->m_calculatedSize = QSizeF( 0.0, 0.0 );
+    d->updateSize();
 
     update();
 }

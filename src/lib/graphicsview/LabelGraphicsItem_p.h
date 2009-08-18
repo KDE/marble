@@ -12,6 +12,7 @@
 #define LABELGRAPHICSITEMPRIVATE_H
 
 #include <QtCore/QString>
+#include <QtCore/QSizeF>
 #include <QtGui/QImage>
 #include <QtGui/QIcon>
 
@@ -20,10 +21,14 @@ class QFont;
 namespace Marble
 {
 
+class LabelGraphicsItem;
+
 class LabelGraphicsItemPrivate
 {
  public:
-    LabelGraphicsItemPrivate();
+    LabelGraphicsItemPrivate( LabelGraphicsItem *parent );
+
+    void updateSize();
 
     // TODO: This has to go up to MarbleGraphicsItem
     QFont font() const;
@@ -31,6 +36,11 @@ class LabelGraphicsItemPrivate
     QString m_text;
     QImage m_image;
     QIcon m_icon;
+
+    QSizeF m_minimumSize;
+    QSizeF m_calculatedSize;
+
+    LabelGraphicsItem *m_parent;
 };
 
 } // namespace Marble

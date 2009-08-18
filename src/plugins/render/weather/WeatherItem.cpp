@@ -56,6 +56,10 @@ class WeatherItemPrivate
           m_windDirectionLabel( new LabelGraphicsItem( m_frameItem ) ),
           m_windSpeedLabel( new LabelGraphicsItem( m_frameItem ) )
     {
+        // Setting minimum sizes
+        m_temperatureLabel->setMinimumSize( QSizeF( 0, imageSize.height() ) );
+        m_windSpeedLabel->setMinimumSize( QSizeF( 0, imageSize.height() ) );
+
         MarbleGraphicsGridLayout *topLayout = new MarbleGraphicsGridLayout( 1, 1 );
         parent->setLayout( topLayout );
         topLayout->addItem( m_frameItem, 0, 0 );
@@ -146,7 +150,7 @@ class WeatherItemPrivate
         }
 
         if ( isTemperatureShown() ) {
-            m_temperatureLabel->setText( temperatureString(), 0, imageSize.height() );
+            m_temperatureLabel->setText( temperatureString() );
         }
         else {
             m_temperatureLabel->clear();
@@ -177,7 +181,7 @@ class WeatherItemPrivate
         }
 
         if ( isWindSpeedShown() ) {
-            m_windSpeedLabel->setText( windSpeedString(), 0, imageSize.height() );
+            m_windSpeedLabel->setText( windSpeedString() );
         }
         else {
             m_windSpeedLabel->clear();

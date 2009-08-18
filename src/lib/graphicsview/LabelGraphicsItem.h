@@ -33,9 +33,17 @@ class MARBLE_EXPORT LabelGraphicsItem : public FrameGraphicsItem
  public:
     explicit LabelGraphicsItem( MarbleGraphicsItem *parent = 0 );
 
-    void setText( const QString& text, int minWidth = 0, int minHeight = 0 );
+    QString text() const;
+    void setText( const QString& text );
+
+    QImage image() const;
     void setImage( const QImage& image, const QSize& size = QSize() );
+
+    QIcon icon() const;
     void setIcon( const QIcon& icon, const QSize& size );
+
+    void setMinimumSize( const QSizeF& size );
+    QSizeF minimumSize() const;
 
     void clear();
 
