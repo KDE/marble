@@ -311,15 +311,6 @@ bool WeatherItem::initialized()
            || d->isWindSpeedShown();
 }
 
-void WeatherItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos, GeoSceneLayer * layer )
-{
-    Q_UNUSED( viewport );
-    Q_UNUSED( renderPos );
-    Q_UNUSED( layer );
-    Q_UNUSED( painter );
-}
-
 bool WeatherItem::operator<( const AbstractDataPluginItem *other ) const
 {
     const WeatherItem *weatherItem = qobject_cast<const WeatherItem *>(other);

@@ -144,12 +144,6 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
      */
     QList<QPointF> positions() const;
 
-    /**
-     * Paints the item in item coordinates
-     */
-    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
-                        const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
-
  protected:
     explicit GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr );
 

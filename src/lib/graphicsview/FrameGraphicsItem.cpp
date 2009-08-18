@@ -260,7 +260,7 @@ void FrameGraphicsItem::paint( GeoPainter *painter, ViewportParams *viewport,
     painter->save();
     painter->translate( paintedRect( QPointF( 0.0, 0.0 ) ).topLeft() );
     paintBackground( painter );
-    painter->translate( padding(), padding() );
+    painter->translate( d->m_padding, d->m_padding );
     paintContent( painter, viewport, renderPos, layer );
     painter->restore();
 }

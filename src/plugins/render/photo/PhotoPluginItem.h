@@ -13,7 +13,7 @@
 
 #include "AbstractDataPluginItem.h"
 
-#include <QtGui/QPixmap>
+#include <QtGui/QImage>
 
 class QAction;
 class QUrl;
@@ -21,6 +21,7 @@ class QUrl;
 namespace Marble
 {
 
+class LabelGraphicsItem;
 class TinyWebBrowser;
  
 class PhotoPluginItem : public AbstractDataPluginItem
@@ -37,9 +38,6 @@ class PhotoPluginItem : public AbstractDataPluginItem
     bool initialized();
     
     void addDownloadedFile( const QString& url, const QString& type );
-    
-    void paint( GeoPainter *painter, ViewportParams *viewport,
-                const QString& renderPos, GeoSceneLayer * layer = 0 );
                  
     bool operator<( const AbstractDataPluginItem *other ) const;
     
@@ -73,9 +71,10 @@ class PhotoPluginItem : public AbstractDataPluginItem
     void openBrowser();
     
  private:
+    LabelGraphicsItem *m_image;
     bool m_hasCoordinates;
-    QPixmap m_smallImage;
-    QPixmap m_microImage;
+    QImage m_smallImage;
+    QImage m_microImage;
     TinyWebBrowser *m_browser;
     QAction *m_action;
     

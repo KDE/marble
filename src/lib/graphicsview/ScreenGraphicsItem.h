@@ -89,12 +89,6 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
      * be disabled. By default all flags are disabled.
      */
     void setFlags( GraphicsItemFlags flags );
-
-    /**
-     * Paints the item in item coordinates
-     */
-    virtual void paint( GeoPainter *painter, ViewportParams *viewport,
-                        const QString& renderPos, GeoSceneLayer * layer = 0 ) = 0;
     
  protected:
     explicit ScreenGraphicsItem( ScreenGraphicsItemPrivate *d_ptr );

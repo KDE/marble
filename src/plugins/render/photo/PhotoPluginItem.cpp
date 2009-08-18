@@ -20,6 +20,8 @@
 #include "AbstractDataPluginItem.h"
 #include "GeoDataCoordinates.h"
 #include "GeoPainter.h"
+#include "LabelGraphicsItem.h"
+#include "MarbleGraphicsGridLayout.h"
 #include "TinyWebBrowser.h"
 #include "ViewportParams.h"
 
@@ -31,11 +33,13 @@
 #include <QtCore/QHash>
 #include <QtCore/QUrl>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QPixmap>
 
 using namespace Marble;
 
 PhotoPluginItem::PhotoPluginItem( QObject *parent )
     : AbstractDataPluginItem( parent ),
+      m_image( 0 ),
       m_hasCoordinates( false ),
       m_browser( 0 )
 {
@@ -66,8 +70,15 @@ bool PhotoPluginItem::initialized()
 void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type )
 {
     if( type == "thumbnail" ) {
+        if ( !m_image ) {
+            m_image = new LabelGraphicsItem( this );
+            m_image->setFrame( FrameGraphicsItem::RectFrame );
+            MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout( 1, 1 );
+            layout->addItem( m_image, 0, 0 );
+            setLayout( layout );
+        }
         m_smallImage.load( url );
-        setSize( m_smallImage.size() );
+        m_image->setImage( m_smallImage );
     }
     else if ( type == "info" ) {        
         QFile file( url );
@@ -87,16 +98,6 @@ void PhotoPluginItem::addDownloadedFile( const QString& url, const QString& type
     if ( initialized() ) {
         emit updated();
     }
-}
-
-void PhotoPluginItem::paint( GeoPainter *painter, ViewportParams *viewport,
-                             const QString& renderPos, GeoSceneLayer * layer )
-{
-    Q_UNUSED( renderPos )
-    Q_UNUSED( layer )
-    Q_UNUSED( viewport )
-
-    painter->drawPixmap( 0, 0, m_smallImage );
 }
              
 bool PhotoPluginItem::operator<( const AbstractDataPluginItem *other ) const
@@ -174,7 +175,7 @@ void PhotoPluginItem::setTitle( const QString& title )
 QAction *PhotoPluginItem::action()
 {
     if( m_action->icon().isNull() ) {
-        m_action->setIcon( QIcon( m_smallImage ) );
+        m_action->setIcon( QIcon( QPixmap::fromImage( m_smallImage ) ) );
     }
     return m_action;
 }

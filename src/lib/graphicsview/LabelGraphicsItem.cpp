@@ -149,16 +149,18 @@ void LabelGraphicsItem::paintContent( GeoPainter *painter, ViewportParams *viewp
     if ( !d->m_text.isNull() ) {
         painter->setFont( d->font() );
         painter->setPen( QColor( Qt::black ) );
-        painter->drawText( contentRect().toRect(),
+        painter->drawText( QRect( QPoint( 0, 0 ), contentSize().toSize() ),
                            Qt::AlignVCenter | Qt::AlignLeft,
                            d->m_text );
     }
     else if ( !d->m_image.isNull() ) {
-        painter->drawImage( contentRect(),
+        painter->drawImage( QRectF( QPointF( 0, 0 ), contentSize() ),
                             d->m_image );
     }
     else if ( !d->m_icon.isNull() ) {
-        d->m_icon.paint( painter, contentRect().toRect(), Qt::AlignCenter );
+        d->m_icon.paint( painter,
+                         QRect( QPoint( 0, 0 ), contentSize().toSize() ),
+                         Qt::AlignCenter );
     }
 
     painter->restore();

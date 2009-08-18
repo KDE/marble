@@ -251,6 +251,15 @@ void MarbleGraphicsItem::setToolTip( const QString& toolTip )
     p()->m_toolTip = toolTip;
 }
 
+void MarbleGraphicsItem::paint( GeoPainter *painter, ViewportParams *viewport,
+                         const QString& renderPos, GeoSceneLayer * layer )
+{
+    Q_UNUSED( viewport );
+    Q_UNUSED( renderPos );
+    Q_UNUSED( layer );
+    Q_UNUSED( painter );
+}
+
 bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
 {
     Q_UNUSED( object );
