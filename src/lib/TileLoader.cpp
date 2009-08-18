@@ -131,10 +131,10 @@ void TileLoader::setLayer( GeoSceneLayer * layer )
 
 void TileLoader::resetTilehash()
 {
-    QHash<TileId, TextureTile*>::const_iterator pos = d->m_tilesOnDisplay.constBegin();
+    QHash<TileId, TextureTile*>::const_iterator it = d->m_tilesOnDisplay.constBegin();
     QHash<TileId, TextureTile*>::const_iterator const end = d->m_tilesOnDisplay.constEnd();
-    for (; pos != end; ++pos ) {
-        pos.value()->setUsed( false );
+    for (; it != end; ++it ) {
+        it.value()->setUsed( false );
     }
 }
 
@@ -302,10 +302,10 @@ int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
 
     bool ok = true;
 
-    QStringList::const_iterator pos = leveldirs.constBegin();
+    QStringList::const_iterator it = leveldirs.constBegin();
     QStringList::const_iterator const end = leveldirs.constEnd();
-    for (; pos != end; ++pos ) {
-        int value = (*pos).toInt( &ok, 10 );
+    for (; it != end; ++it ) {
+        int value = (*it).toInt( &ok, 10 );
         if ( ok && value > maxtilelevel )
             maxtilelevel = value;
     }
