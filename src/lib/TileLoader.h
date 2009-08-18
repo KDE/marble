@@ -33,7 +33,6 @@ class QString;
 namespace Marble
 {
 
-class SunLocator;
 class TextureTile;
 class HttpDownloadManager;
 class MarbleModel;
@@ -64,7 +63,6 @@ class TileLoader : public QObject
          *
          * @param downloadManager The download manager that shall be used to fetch
          *                        the tiles from a remote resource.
-         * @param sunLocator The sun locator that shall be used to 'sunnify' the tiles.
          */
         TileLoader( HttpDownloadManager *downloadManager, MarbleModel* parent);
 
