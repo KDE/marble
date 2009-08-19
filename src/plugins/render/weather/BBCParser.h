@@ -12,6 +12,7 @@
 #define BBCPARSER_H
 
 // Marble
+#include "AbstractWorkerThread.h"
 #include "WeatherData.h"
 
 // Qt
@@ -20,7 +21,6 @@
 #include <QtCore/QMutex>
 #include <QtCore/QPointer>
 #include <QtCore/QStack>
-#include <QtCore/QThread>
 #include <QtCore/QXmlStreamReader>
 
 class QByteArray;
@@ -38,18 +38,19 @@ struct ScheduleEntry
     QString type;
 };
 
-class BBCParser : public QThread, public QXmlStreamReader
+class BBCParser : public AbstractWorkerThread, public QXmlStreamReader
 {
     Q_OBJECT
 public:
-    BBCParser();
+    BBCParser( QObject *parent = 0 );
     ~BBCParser();
 
     static BBCParser *instance();
     void scheduleRead( const QString& path, BBCWeatherItem *item, const QString& type );
 
 protected:
-    void run();
+    bool workAvailable();
+    void work();
 
 Q_SIGNALS:
     void parsedFile();
@@ -69,9 +70,6 @@ private:
 
     QList<WeatherData> m_list;
     QStack<ScheduleEntry> m_schedule;
-    bool m_running;
-    QMutex m_runningMutex;
-    bool m_end;
     
     static QHash<QString, WeatherData::WeatherCondition> dayConditions;
     static QHash<QString, WeatherData::WeatherCondition> nightConditions;

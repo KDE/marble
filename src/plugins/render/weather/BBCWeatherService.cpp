@@ -12,6 +12,7 @@
 #include "BBCWeatherService.h"
 
 // Marble
+#include "BBCItemGetter.h"
 #include "BBCWeatherItem.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
@@ -34,9 +35,7 @@ BBCWeatherService::BBCWeatherService( QObject *parent )
     : AbstractWeatherService( parent ),
       m_parsingStarted( false ),
       m_parser( 0 ),
-      m_scheduledBox(),
-      m_scheduledNumber( 0 ),
-      m_scheduledFacade( 0 )
+      m_itemGetter( new BBCItemGetter( this ) )
 {
 }
 
@@ -54,38 +53,18 @@ void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
         setupList();
     }
 
-    if ( m_items.isEmpty() ) {
-        m_scheduledBox = box;
-        m_scheduledNumber = number;
-        m_scheduledFacade = facade;
-        return;
-    }
-
-    qint32 fetched = 0;
-    QList<BBCWeatherItem *>::iterator it = m_items.begin();
-    
-    while ( fetched < number && it != m_items.end() ) {
-        if ( (*it) && box.contains( (*it)->coordinate() ) ) {
-            (*it)->setTarget( "earth" );
-            emit requestedDownload( (*it)->observationUrl(), "bbcobservation", (*it) );
-            emit requestedDownload( (*it)->forecastUrl(),    "bbcforecast",    (*it) );
-            fetched++;
-        }
-        ++it;
-    }
+    m_itemGetter->setSchedule( box, facade, number );
 }
 
 void BBCWeatherService::fetchStationList()
 {
-    m_items = m_parser->stationList();
+    connect( m_itemGetter,
+             SIGNAL( requestedDownload( QUrl, QString, AbstractDataPluginItem* ) ),
+             this,
+             SIGNAL( requestedDownload( QUrl, QString, AbstractDataPluginItem* ) ) );
+    m_itemGetter->setStationList( m_parser->stationList() );
     delete m_parser;
     m_parser = 0;
-
-    if ( m_scheduledNumber
-         && !m_scheduledBox.isNull()
-         && m_scheduledFacade ) {
-        getAdditionalItems( m_scheduledBox, m_scheduledFacade, m_scheduledNumber );
-    }
 }
 
 void BBCWeatherService::setupList()

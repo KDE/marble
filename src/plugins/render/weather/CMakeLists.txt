@@ -12,6 +12,7 @@ set( weather_SRCS WeatherData.cpp
                   WeatherModel.cpp 
                   WeatherPlugin.cpp
                   AbstractWeatherService.cpp
+                  BBCItemGetter.cpp
                   BBCParser.cpp
                   BBCWeatherService.cpp
                   BBCWeatherItem.cpp

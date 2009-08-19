@@ -13,12 +13,14 @@
 
 #include "AbstractWeatherService.h"
 
-#include "GeoDataLatLonAltBox.h"
+class QMutex;
 
 namespace Marble
 {
-    
+
+class BBCItemGetter;
 class BBCWeatherItem;
+class GeoDataLatLonAltBox;
 class StationListParser;
 
 class BBCWeatherService : public AbstractWeatherService
@@ -40,12 +42,9 @@ class BBCWeatherService : public AbstractWeatherService
  private:
     void setupList();
 
-    QList<BBCWeatherItem*> m_items;
     bool m_parsingStarted;
     StationListParser *m_parser;
-    GeoDataLatLonAltBox m_scheduledBox;
-    qint32 m_scheduledNumber;
-    MarbleDataFacade *m_scheduledFacade;
+    BBCItemGetter *m_itemGetter;
 };
 
 } // namespace Marble

@@ -39,24 +39,14 @@ QHash<QString, WeatherData::Visibility> BBCParser::visibilityStates
 QHash<QString, int> BBCParser::monthNames
         = QHash<QString, int>();
 
-const int WAIT_ATTEMPTS = 20;
-const int WAIT_TIME = 100;
-
-BBCParser::BBCParser()
-    : QThread(),
-      m_running( false ),
-      m_end( false )
+BBCParser::BBCParser( QObject *parent )
+        : AbstractWorkerThread( parent )
 {
     BBCParser::setupHashes();
 }
 
 BBCParser::~BBCParser()
 {
-    m_schedule.clear();
-    if ( isRunning() ) {
-        m_end = true;
-        wait( 1000 );
-    }
 }
 
 BBCParser *BBCParser::instance()
@@ -76,59 +66,36 @@ void BBCParser::scheduleRead( const QString& path,
 
     m_schedule.push( entry );
 
-    QMutexLocker locker( &m_runningMutex );
-    if ( !m_running ) {
-        if ( wait( 2 * WAIT_TIME ) ) {
-            m_running = true;
-            start( QThread::IdlePriority );
-        }
-    }
+    ensureRunning();
 }
 
-void BBCParser::run()
+bool BBCParser::workAvailable()
 {
-    int waitAttempts = WAIT_ATTEMPTS;
-    while( 1 ) {
-        m_runningMutex.lock();
-        if ( m_schedule.isEmpty() ) {
-            waitAttempts--;
-            if ( !waitAttempts || m_end ) {
-                m_running = false;
-                m_runningMutex.unlock();
-                break;
-            }
-            else {
-                m_runningMutex.unlock();
-                msleep( WAIT_TIME );
-            }
-        }
-        else {
-            m_runningMutex.unlock();
-            ScheduleEntry entry = m_schedule.pop();
-
-            QFile file( entry.path );
-            if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
-                return;
-            }
-
-            QList<WeatherData> data = read( &file );
-
-            if( !data.isEmpty() && !entry.item.isNull() ) {
-                if ( entry.type == "bbcobservation" ) {
-                    entry.item->setCurrentWeather( data.at( 0 ) );
-                }
-                else if ( entry.type == "bbcforecast" ) {
-                    entry.item->addForecastWeather( data );
-                }
-
-                emit parsedFile();
-            }
-
-            waitAttempts = WAIT_ATTEMPTS;
-        }
-    }
+    return !m_schedule.isEmpty();
 }
 
+void BBCParser::work()
+{
+    ScheduleEntry entry = m_schedule.pop();
+
+    QFile file( entry.path );
+    if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
+        return;
+    }
+
+    QList<WeatherData> data = read( &file );
+
+    if( !data.isEmpty() && !entry.item.isNull() ) {
+        if ( entry.type == "bbcobservation" ) {
+            entry.item->setCurrentWeather( data.at( 0 ) );
+        }
+        else if ( entry.type == "bbcforecast" ) {
+            entry.item->addForecastWeather( data );
+        }
+
+        emit parsedFile();
+    }
+}
 
 QList<WeatherData> BBCParser::read( QIODevice *device )
 {
