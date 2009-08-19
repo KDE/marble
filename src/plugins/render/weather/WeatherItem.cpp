@@ -83,6 +83,10 @@ class WeatherItemPrivate
         updateLabels();
     }
 
+    ~WeatherItemPrivate() {
+        delete m_browser;
+    }
+
     void updateToolTip()
     {
         QLocale locale = QLocale::system();
@@ -233,18 +237,24 @@ class WeatherItemPrivate
 
     QString windSpeedString()
     {
-        WeatherData::SpeedUnit speedUnit
-                = (WeatherData::SpeedUnit) m_settings.value( "windSpeedUnit",
-                                                             WeatherData::kph ).toInt();
-        return m_currentWeather.windSpeedString( speedUnit );
+        return m_currentWeather.windSpeedString( speedUnit() );
+    }
+
+    WeatherData::SpeedUnit speedUnit()
+    {
+        return (WeatherData::SpeedUnit) m_settings.value( "windSpeedUnit",
+                                                          WeatherData::kph ).toInt();
     }
 
     QString pressureString()
     {
-        WeatherData::PressureUnit pressureUnit
-                = (WeatherData::PressureUnit) m_settings.value( "pressureUnit",
-                                                                WeatherData::HectoPascal ).toInt();
-        return m_currentWeather.pressureString( pressureUnit );
+        return m_currentWeather.pressureString( pressureUnit() );
+    }
+
+    WeatherData::PressureUnit pressureUnit()
+    {
+        return (WeatherData::PressureUnit) m_settings.value( "pressureUnit",
+                                                             WeatherData::HectoPascal ).toInt();
     }
     
     WeatherData m_currentWeather;
@@ -423,7 +433,7 @@ void WeatherItem::setSettings( QHash<QString, QVariant> settings )
 
 void WeatherItem::openBrowser()
 {
-    qDebug() << "Open browser";
+    QLocale locale = QLocale::system();
     if( !d->m_browser ) {
         d->m_browser = new TinyWebBrowser();
     }
@@ -433,8 +443,19 @@ void WeatherItem::openBrowser()
     html += "<h1>" + tr( "Weather for %1" ).arg( stationName() ) + "</h1>";
     if ( d->m_currentWeather.isValid() ) {
         html += "<h2>" + tr( "Current Observation" ) + "</h2>";
-        html += tr( "Publishing Time: %1" )
-                    .arg( d->m_currentWeather.publishingTime().toLocalTime().toString() );
+        html += d->m_currentWeather.toHtml( d->temperatureUnit(),
+                                            d->speedUnit(),
+                                            d->pressureUnit() );
+    }
+    if ( !d->m_forecastWeather.isEmpty() ) {
+        html += "<h2>" + tr( "Forecasts" ) + "</h2>";
+    }
+    foreach ( WeatherData data, d->m_forecastWeather ) {
+        QDate date = data.dataDate();
+        html += "<h3>" + locale.standaloneDayName( date.dayOfWeek() ) + "</h3>";
+        html += data.toHtml( d->temperatureUnit(),
+                             d->speedUnit(),
+                             d->pressureUnit() );
     }
     html += "</body>";
     html += "</html>";

@@ -811,6 +811,60 @@ bool WeatherData::hasValidHumidity() const
     return d->isPositiveValue( d->m_humidity );
 }
 
+QString WeatherData::humidityString() const
+{
+    return QString( "%1 %" ).arg( humidity() );
+}
+
+QString WeatherData::toHtml( WeatherData::TemperatureUnit temperatureUnit,
+                             WeatherData::SpeedUnit speedUnit,
+                             WeatherData::PressureUnit pressureUnit ) const
+{
+    QString html;
+    if ( hasValidPublishingTime() ) {
+        html += tr( "Publishing time: %1<br>" )
+                 .arg( publishingTime().toLocalTime().toString() );
+    }
+    if ( hasValidCondition() ) {
+        html += tr( "Condition: %1<br>" )
+                 .arg( conditionString() );
+    }
+    if ( hasValidTemperature() ) {
+        html += tr( "Temperature: %1<br>" )
+                 .arg( temperatureString( temperatureUnit ) );
+    }
+    if ( hasValidMaxTemperature() ) {
+        html += tr( "Max temperature: %1<br>" )
+                 .arg( maxTemperatureString( temperatureUnit ) );
+    }
+    if ( hasValidMinTemperature() ) {
+        html += tr( "Min temperature: %1<br>" )
+                 .arg( minTemperatureString( temperatureUnit ) );
+    }
+    if ( hasValidWindDirection() ) {
+        html += tr( "Wind direction: %1<br>" )
+                 .arg( windDirectionString() );
+    }
+    if ( hasValidWindSpeed() ) {
+        html += tr( "Wind speed: %1<br>" )
+                 .arg( windSpeedString( speedUnit ) );
+    }
+    if ( hasValidPressure() ) {
+        html += tr( "Pressure: %1<br>" )
+                 .arg( pressureString( pressureUnit ) );
+    }
+    if ( hasValidPressureDevelopment() ) {
+        html += tr( "Pressure development: %1<br>")
+                 .arg( pressureDevelopmentString() );
+    }
+    if ( hasValidHumidity() ) {
+        html += tr( "Humidity: %1<br>" )
+                 .arg( humidityString() );
+    }
+
+    return html;
+}
+
 WeatherData& WeatherData::operator=( const WeatherData &other )
 {
     qAtomicAssign( d, other.d );

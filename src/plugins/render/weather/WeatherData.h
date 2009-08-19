@@ -212,6 +212,11 @@ class WeatherData
     qreal humidity() const;
     void setHumidity( qreal humidity );
     bool hasValidHumidity() const;
+    QString humidityString() const;
+
+    QString toHtml( WeatherData::TemperatureUnit temperatureUnit,
+                    WeatherData::SpeedUnit speedUnit,
+                    WeatherData::PressureUnit pressureUnit ) const;
     
     WeatherData& operator=( const WeatherData &other );
     
