@@ -24,7 +24,7 @@ namespace Marble
 {
 
 class AbstractDataPluginItem;
-class BBCWeatherItem;
+class BBCStation;
 class MarbleDataFacade;
 
 class BBCItemGetter : public AbstractWorkerThread
@@ -39,19 +39,17 @@ class BBCItemGetter : public AbstractWorkerThread
                       MarbleDataFacade *facade,
                       qint32 number );
 
-    void setStationList( const QList<BBCWeatherItem*>& items );
+    void setStationList( const QList<BBCStation>& items );
 
  protected:
     bool workAvailable();
     void work();
 
  Q_SIGNALS:
-    void requestedDownload( const QUrl& url,
-                            const QString& type,
-                            AbstractDataPluginItem *item );
+    void foundStation( BBCStation );
 
  public:
-    QList<BBCWeatherItem*> m_items;
+    QList<BBCStation> m_items;
     QMutex m_scheduleMutex;
     GeoDataLatLonAltBox m_scheduledBox;
     qint32 m_scheduledNumber;

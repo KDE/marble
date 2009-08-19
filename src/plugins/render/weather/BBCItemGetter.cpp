@@ -10,6 +10,7 @@
 
 // Self
 #include "BBCItemGetter.h"
+#include "BBCStation.h"
 #include "BBCWeatherItem.h"
 
 // Qt
@@ -42,7 +43,7 @@ void BBCItemGetter::setSchedule( const GeoDataLatLonAltBox& box,
     ensureRunning();
 }
 
-void BBCItemGetter::setStationList( const QList<BBCWeatherItem*>& items )
+void BBCItemGetter::setStationList( const QList<BBCStation>& items )
 {
     m_items = items;
     ensureRunning();
@@ -70,14 +71,12 @@ void BBCItemGetter::work()
     m_scheduleMutex.unlock();
 
     qint32 fetched = 0;
-    QList<BBCWeatherItem *>::ConstIterator it = m_items.constBegin();
-    QList<BBCWeatherItem *>::ConstIterator end = m_items.constEnd();
+    QList<BBCStation>::ConstIterator it = m_items.constBegin();
+    QList<BBCStation>::ConstIterator end = m_items.constEnd();
 
     while ( fetched < number && it != end ) {
-        if ( (*it) && box.contains( (*it)->coordinate() ) ) {
-            (*it)->setTarget( "earth" );
-            emit requestedDownload( (*it)->observationUrl(), "bbcobservation", (*it) );
-            emit requestedDownload( (*it)->forecastUrl(),    "bbcforecast",    (*it) );
+        if ( box.contains( it->coordinate() ) ) {
+            emit foundStation( (*it) );
             fetched++;
         }
         ++it;

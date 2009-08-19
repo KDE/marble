@@ -13,7 +13,7 @@
 
 // Marble
 #include "global.h"
-#include "BBCWeatherItem.h"
+#include "BBCStation.h"
 #include "GeoDataCoordinates.h"
 
 // Qt
@@ -23,21 +23,15 @@
 
 using namespace Marble;
 
-static bool lessThanByPointer( const BBCWeatherItem *item1,
-                               const BBCWeatherItem *item2 )
-{
-    if( item1 != 0 && item2 != 0 ) {
-        return item1->operator<( item2 );
-    }
-    else {
-        return false;
-    }
-}
-
 StationListParser::StationListParser( QObject *parent )
     : QThread( parent ),
       QXmlStreamReader()
 {
+}
+
+StationListParser::~StationListParser()
+{
+    wait( 1000 );
 }
 
 void StationListParser::read()
@@ -56,7 +50,7 @@ void StationListParser::read()
     }
 }
 
-QList<BBCWeatherItem *> StationListParser::stationList() const
+QList<BBCStation> StationListParser::stationList() const
 {
     return m_list;
 }
@@ -118,7 +112,7 @@ void StationListParser::readStation()
     Q_ASSERT( isStartElement()
               && name() == "Station" );
     
-    BBCWeatherItem *item = new BBCWeatherItem();
+    BBCStation station;
     
     while ( !atEnd() ) {
         readNext();
@@ -128,25 +122,24 @@ void StationListParser::readStation()
         
         if( isStartElement() ) {
             if( name() == "name" )
-                item->setStationName( readCharacters() );
+                station.setName( readCharacters() );
             else if ( name() == "id" )
-                item->setBbcId( readCharacters().toLong() );
+                station.setBbcId( readCharacters().toLong() );
             else if ( name() == "priority" )
-                item->setPriority( readCharacters().toInt() );
+                station.setPriority( readCharacters().toInt() );
             else if ( name() == "Point" )
-                readPoint( item );
+                readPoint( &station );
             else
                 readUnknownElement();
         }
     }
 
     // This find the right position in the sorted to insert the new item
-    QList<BBCWeatherItem*>::iterator i = qLowerBound( m_list.begin(),
-                                                      m_list.end(),
-                                                      item,
-                                                      lessThanByPointer );
+    QList<BBCStation>::iterator i = qLowerBound( m_list.begin(),
+                                                 m_list.end(),
+                                                 station );
     // Insert the item on the right position in the list
-    m_list.insert( i, item );
+    m_list.insert( i, station );
 }
 
 QString StationListParser::readCharacters()
@@ -173,7 +166,7 @@ QString StationListParser::readCharacters()
     return string;
 }
 
-void StationListParser::readPoint( BBCWeatherItem *item )
+void StationListParser::readPoint( BBCStation *station )
 {
     Q_ASSERT( isStartElement()
               && name() == "Point" );
@@ -192,7 +185,7 @@ void StationListParser::readPoint( BBCWeatherItem *item )
                 if ( coorList.size() >= 2 ) {
                     GeoDataCoordinates coordinates( coorList.at( 0 ).toFloat() * DEG2RAD,
                                                     coorList.at( 1 ).toFloat() * DEG2RAD );
-                    item->setCoordinate( coordinates );
+                    station->setCoordinate( coordinates );
                 }
             }
             else

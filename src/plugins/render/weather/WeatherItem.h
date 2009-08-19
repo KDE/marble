@@ -82,7 +82,9 @@ class WeatherItem : public AbstractDataPluginItem
 
     void setSettings( QHash<QString, QVariant> settings );
     
-    // Forecasts to appear later
+ public Q_SLOTS:
+    void openBrowser();
+
  private:
     Q_DISABLE_COPY(WeatherItem)
     WeatherItemPrivate * const d;

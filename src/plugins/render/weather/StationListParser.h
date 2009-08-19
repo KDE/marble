@@ -23,17 +23,18 @@ class QString;
 namespace Marble
 {
 
-class BBCWeatherItem;
+class BBCStation;
     
 class StationListParser : public QThread, public QXmlStreamReader
 {
     Q_OBJECT
 public:
     StationListParser( QObject *parent );
+    ~StationListParser();
 
     void read();
 
-    QList<BBCWeatherItem *> stationList() const;
+    QList<BBCStation> stationList() const;
 
     void setPath( QString path );
 
@@ -45,10 +46,10 @@ private:
     void readStationList();
     void readStation();
     QString readCharacters();
-    void readPoint( BBCWeatherItem *item );
+    void readPoint( BBCStation *station );
 
     QString m_path;
-    QList<BBCWeatherItem *> m_list;
+    QList<BBCStation> m_list;
     QObject *m_parent;
 };
 

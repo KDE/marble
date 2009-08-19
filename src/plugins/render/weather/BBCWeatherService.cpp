@@ -13,6 +13,7 @@
 
 // Marble
 #include "BBCItemGetter.h"
+#include "BBCStation.h"
 #include "BBCWeatherItem.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
@@ -37,6 +38,7 @@ BBCWeatherService::BBCWeatherService( QObject *parent )
       m_parser( 0 ),
       m_itemGetter( new BBCItemGetter( this ) )
 {
+     qRegisterMetaType<BBCStation>("BBCStation");
 }
 
 BBCWeatherService::~BBCWeatherService()
@@ -59,12 +61,24 @@ void BBCWeatherService::getAdditionalItems( const GeoDataLatLonAltBox& box,
 void BBCWeatherService::fetchStationList()
 {
     connect( m_itemGetter,
-             SIGNAL( requestedDownload( QUrl, QString, AbstractDataPluginItem* ) ),
+             SIGNAL( foundStation( BBCStation ) ),
              this,
-             SIGNAL( requestedDownload( QUrl, QString, AbstractDataPluginItem* ) ) );
+             SLOT( createItem( BBCStation ) ) );
     m_itemGetter->setStationList( m_parser->stationList() );
     delete m_parser;
     m_parser = 0;
+}
+
+void BBCWeatherService::createItem( BBCStation station )
+{
+    BBCWeatherItem *item = new BBCWeatherItem( this );
+    item->setBbcId( station.bbcId() );
+    item->setCoordinate( station.coordinate() );
+    item->setPriority( station.priority() );
+    item->setStationName( station.name() );
+    item->setTarget( "earth" );
+    emit requestedDownload( item->observationUrl(), "bbcobservation", item );
+    emit requestedDownload( item->forecastUrl(),    "bbcforecast",    item );
 }
 
 void BBCWeatherService::setupList()

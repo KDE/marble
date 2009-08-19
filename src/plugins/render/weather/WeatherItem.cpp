@@ -19,6 +19,7 @@
 #include "FrameGraphicsItem.h"
 #include "LabelGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
+#include "TinyWebBrowser.h"
 
 // Qt
 #include <QtCore/QCoreApplication>
@@ -49,6 +50,7 @@ class WeatherItemPrivate
     WeatherItemPrivate( WeatherItem *parent )
         : m_priority( 0 ),
           m_action( new QAction( tr( "Weather" ), parent ) ),
+          m_browser( 0 ),
           m_parent( parent ),
           m_frameItem( new FrameGraphicsItem( m_parent ) ),
           m_conditionLabel( new LabelGraphicsItem( m_frameItem ) ),
@@ -60,6 +62,7 @@ class WeatherItemPrivate
         m_temperatureLabel->setMinimumSize( QSizeF( 0, imageSize.height() ) );
         m_windSpeedLabel->setMinimumSize( QSizeF( 0, imageSize.height() ) );
 
+        // Layouting the item
         MarbleGraphicsGridLayout *topLayout = new MarbleGraphicsGridLayout( 1, 1 );
         parent->setLayout( topLayout );
         topLayout->addItem( m_frameItem, 0, 0 );
@@ -249,6 +252,7 @@ class WeatherItemPrivate
 
     int m_priority;
     QAction *m_action;
+    TinyWebBrowser *m_browser;
     WeatherItem *m_parent;
     QString m_stationName;
     QHash<QString,QVariant> m_settings;
@@ -288,6 +292,10 @@ WeatherItem::~WeatherItem()
 
 QAction *WeatherItem::action()
 {
+    disconnect( d->m_action, SIGNAL( triggered() ),
+                this,        SLOT( openBrowser() ) );
+    connect(    d->m_action, SIGNAL( triggered() ),
+                this,        SLOT( openBrowser() ) );
     return d->m_action;
 }
 
@@ -411,6 +419,28 @@ void WeatherItem::setSettings( QHash<QString, QVariant> settings )
 
     d->updateToolTip();
     d->updateLabels();
+}
+
+void WeatherItem::openBrowser()
+{
+    qDebug() << "Open browser";
+    if( !d->m_browser ) {
+        d->m_browser = new TinyWebBrowser();
+    }
+    QString html;
+    html += "<html>";
+    html += "<body>";
+    html += "<h1>" + tr( "Weather for %1" ).arg( stationName() ) + "</h1>";
+    if ( d->m_currentWeather.isValid() ) {
+        html += "<h2>" + tr( "Current Observation" ) + "</h2>";
+        html += tr( "Publishing Time: %1" )
+                    .arg( d->m_currentWeather.publishingTime().toLocalTime().toString() );
+    }
+    html += "</body>";
+    html += "</html>";
+
+    d->m_browser->setHtml( html );
+    d->m_browser->show();
 }
 
 } // namespace Marble
