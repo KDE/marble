@@ -30,6 +30,7 @@ QNamDownloadJob::QNamDownloadJob( const QUrl & sourceUrl,
 void QNamDownloadJob::execute()
 {
     QNetworkRequest request( sourceUrl() );
+    request.setRawHeader( "User-Agent", "Marble TinyWebBrowser" );
     m_networkReply = m_networkAccessManager->get( request );
 
     connect( m_networkReply, SIGNAL( downloadProgress( qint64, qint64 )),
