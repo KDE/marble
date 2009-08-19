@@ -99,3 +99,4 @@ void GeoDataLod::unpack( QDataStream& stream )
 }
 
 }
+

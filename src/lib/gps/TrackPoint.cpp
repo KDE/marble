@@ -22,7 +22,7 @@ TrackPoint::TrackPoint( qreal lat, qreal lon )
 
 // FIXME: shouldn't this be ": Waypoint( in )" ?
 TrackPoint::TrackPoint( const TrackPoint & in )
-    :Waypoint ( 0, 0 )
+    : AbstractLayerInterface(), Waypoint ( 0, 0 )
 {
     setPosition( in.position() );
 }

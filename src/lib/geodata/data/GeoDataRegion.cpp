@@ -135,3 +135,4 @@ void GeoDataRegion::unpack( QDataStream& stream )
 
 
 }
+

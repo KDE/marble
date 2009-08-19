@@ -45,7 +45,7 @@ GeoDataDocument::GeoDataDocument( const GeoDataFeature& other )
 }
 
 GeoDataDocument::GeoDataDocument( const GeoDataDocument& other )
-: GeoDataContainer( other )
+    : GeoDocument(), GeoDataContainer( other )
 {
 }
 
