@@ -50,6 +50,10 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 */
     GeoDataLod();
 
+/*!
+    \brief Creates a new Level of Detail object as a copy of @p other.
+*/
+    GeoDataLod( const GeoDataLod& other );
     
 /*!
     \brief Destroys a Level of Detail object.
@@ -145,6 +149,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 */
     virtual void unpack( QDataStream& stream );
 
+    GeoDataLod &operator=( const GeoDataLod& other );
     
  protected:
     GeoDataLodPrivate  * const d;

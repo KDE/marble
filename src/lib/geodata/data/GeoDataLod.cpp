@@ -21,6 +21,11 @@ GeoDataLod::GeoDataLod()
 {
 }
 
+GeoDataLod::GeoDataLod( const GeoDataLod& other )
+    : GeoDataObject( other ),
+      d( new GeoDataLodPrivate( *other.d ) )
+{
+}
 
 GeoDataLod::~GeoDataLod()
 {
@@ -96,6 +101,12 @@ void GeoDataLod::unpack( QDataStream& stream )
 
     stream >> d->m_minLodPixels >> d->m_maxLodPixels;
     stream >> d->m_minFadeExtent >> d->m_maxFadeExtent;
+}
+
+GeoDataLod &GeoDataLod::operator=( const GeoDataLod& other )
+{
+    *d = *other.d;
+    return *this;
 }
 
 }

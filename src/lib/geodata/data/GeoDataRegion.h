@@ -59,6 +59,10 @@ class GEODATA_EXPORT GeoDataRegion : public GeoDataObject
 */
     GeoDataRegion();
 
+/*!
+    \brief Creates a new GeoDataRegion as a copy of \p other.
+*/
+    GeoDataRegion( const GeoDataRegion& other );
     
 /*!
     \brief Creates a new GeoDataRegion object that is associated to a \a feature.
@@ -138,6 +142,7 @@ class GEODATA_EXPORT GeoDataRegion : public GeoDataObject
 */
     virtual void unpack( QDataStream& stream );
 
+    GeoDataRegion &operator=( const GeoDataRegion& other );
 
  protected:
     GeoDataRegionPrivate  * const d;

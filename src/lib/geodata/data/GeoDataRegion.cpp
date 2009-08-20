@@ -29,6 +29,11 @@ GeoDataRegion::GeoDataRegion()
 {
 }
 
+GeoDataRegion::GeoDataRegion( const GeoDataRegion& other )
+    : GeoDataObject( other ),
+      d( new GeoDataRegionPrivate( *other.d ) )
+{
+}
 
 GeoDataRegion::GeoDataRegion( GeoDataFeature * feature )
     : GeoDataObject(),
@@ -133,6 +138,11 @@ void GeoDataRegion::unpack( QDataStream& stream )
     d->m_latLonAltBox->unpack( stream );
 }
 
+GeoDataRegion &GeoDataRegion::operator=( const GeoDataRegion& other )
+{
+    *d = *other.d;
+    return *this;
+}
 
 }
 
