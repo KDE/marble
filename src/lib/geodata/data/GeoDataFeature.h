@@ -33,6 +33,7 @@ class GeoDataContainer;
 class GeoDataFolder;
 class GeoDataDocument;
 class GeoDataPlacemark;
+class GeoDataRegion;
 
 class GeoDataStyle;
 class GeoDataStyleSelector;
@@ -219,6 +220,18 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     void setStyle( GeoDataStyle* style );
 
     /**
+     * Return the region assigned to the placemark.
+     */
+    GeoDataRegion region() const;
+    /**
+     * @brief Sets the region of the placemark.
+     * @param region new value for the region
+     *
+     * The feature is only shown when the region if active.
+     */
+    void setRegion( const GeoDataRegion& region );
+
+    /**
      * Return the symbol index of the placemark.
      */
     GeoDataVisualCategory visualCategory() const; 
@@ -265,27 +278,27 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     void setPopularity( qint64 popularity );
     
     /**
-    * Return a pointer to a GeoDataStyleMap object which represents the styleMap
-    * of this feature. A styleMap is simply a QMap<QString,QString> which can connect
-    * two styles with a keyword. This can be used to have a highlighted and a
-    * normal style.
-    * @see GeoDataStyleMap
-    */
+     * Return a pointer to a GeoDataStyleMap object which represents the styleMap
+     * of this feature. A styleMap is simply a QMap<QString,QString> which can connect
+     * two styles with a keyword. This can be used to have a highlighted and a
+     * normal style.
+     * @see GeoDataStyleMap
+     */
     GeoDataStyleMap* styleMap() const;
     /**
-    * Sets the styleMap of the feature
-    */
+     * Sets the styleMap of the feature
+     */
     void setStyleMap( GeoDataStyleMap* map );
 
     /**
-      * Returns pointer to the GeoDataLooAt of the feature.
-      */
+     * Returns pointer to the GeoDataLooAt of the feature.
+     */
     GeoDataLookAt* lookAt() const;
 
     /**
-      * Sets the lookAt of the placemark.
-      * @param  LookAt  the new LookAt of the feature.
-      */
+     * Sets the lookAt of the placemark.
+     * @param  LookAt  the new LookAt of the feature.
+     */
     void setLookAt( GeoDataLookAt *lookAt );
 
 	

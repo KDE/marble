@@ -27,6 +27,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataRegion.h"
 
 
 namespace Marble
@@ -468,6 +469,17 @@ void GeoDataFeature::setStyle( GeoDataStyle* style )
 {
     detach();
     d->m_style = style;
+}
+
+GeoDataRegion GeoDataFeature::region() const
+{
+    return d->m_region;
+}
+
+void GeoDataFeature::setRegion( const GeoDataRegion& region )
+{
+    detach();
+    d->m_region = region;
 }
 
 GeoDataFeature::GeoDataVisualCategory GeoDataFeature::visualCategory() const

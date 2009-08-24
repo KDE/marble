@@ -15,6 +15,7 @@
 #include <QtCore/QAtomicInt>
 
 #include "GeoDataFeature.h"
+#include "GeoDataRegion.h"
 
 namespace Marble
 {
@@ -36,6 +37,7 @@ class GeoDataFeaturePrivate
         m_role(' '),
         m_style( 0 ),
         m_styleMap( 0 ),
+        m_region(),
         ref( 0 )
     {
     }
@@ -54,6 +56,7 @@ class GeoDataFeaturePrivate
         m_role( other.m_role ),
         m_style( other.m_style ),               //FIXME: both style and stylemap need to be reworked internally!!!!
         m_styleMap( other.m_styleMap ),
+        m_region( other.m_region ),
         ref( 0 )
     {
     }
@@ -73,6 +76,7 @@ class GeoDataFeaturePrivate
         m_style = other.m_style;
         m_styleMap = other.m_styleMap;
         m_visualCategory = other.m_visualCategory;
+        m_region = other.m_region;
     }
     
     virtual void* copy() 
@@ -80,7 +84,7 @@ class GeoDataFeaturePrivate
         GeoDataFeaturePrivate* copy = new GeoDataFeaturePrivate;
         *copy = *this;
         return copy;
-    };
+    }
 
     virtual EnumFeatureId featureId() const
     {
@@ -111,9 +115,11 @@ class GeoDataFeaturePrivate
 
     QChar       m_role;
 
-    GeoDataStyle* m_style;
+    GeoDataStyle*    m_style;
     GeoDataStyleMap* m_styleMap;
-	GeoDataLookAt* m_lookAt;
+    GeoDataLookAt*   m_lookAt;
+
+    GeoDataRegion m_region;
     
     QAtomicInt  ref;
 };
