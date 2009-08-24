@@ -277,16 +277,16 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     */
     void setStyleMap( GeoDataStyleMap* map );
 
-	/**
-	 * Returns pointer to the GeoDataLooAt of the feature.
-	 */
-	GeoDataLookAt* lookAt() const;
+    /**
+      * Returns pointer to the GeoDataLooAt of the feature.
+      */
+    GeoDataLookAt* lookAt() const;
 
-	/**
-	 * Sets the lookAt of the placemark.
-	 * @param  LookAt  the new LookAt of the feature.
-	 */
-	void setLookAt( GeoDataLookAt *lookAt );
+    /**
+      * Sets the lookAt of the placemark.
+      * @param  LookAt  the new LookAt of the feature.
+      */
+    void setLookAt( GeoDataLookAt *lookAt );
 
 	
 
