@@ -80,6 +80,8 @@ class WeatherItem : public AbstractDataPluginItem
     quint8 priority() const;
     void setPriority( quint8 priority );
 
+    virtual QString creditHtml() const;
+
     void setSettings( QHash<QString, QVariant> settings );
     
  public Q_SLOTS:

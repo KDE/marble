@@ -420,6 +420,11 @@ void WeatherItem::setPriority( quint8 priority )
     d->m_priority = priority;
 }
 
+QString WeatherItem::creditHtml() const
+{
+    return QString();
+}
+
 void WeatherItem::setSettings( QHash<QString, QVariant> settings )
 {
     if ( d->m_settings == settings ) {
@@ -456,6 +461,12 @@ void WeatherItem::openBrowser()
         html += data.toHtml( d->temperatureUnit(),
                              d->speedUnit(),
                              d->pressureUnit() );
+    }
+    QString credit = creditHtml();
+    if ( !credit.isEmpty() ) {
+        html += "<p>";
+        html += creditHtml();
+        html += "</p>";
     }
     html += "</body>";
     html += "</html>";

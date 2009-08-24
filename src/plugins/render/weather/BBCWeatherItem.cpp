@@ -81,7 +81,12 @@ QUrl BBCWeatherItem::observationUrl() const
 }
 
 QUrl BBCWeatherItem::forecastUrl() const
- {
+{
     return QUrl( QString( "http://newsrss.bbc.co.uk/weather/forecast/%1/Next3DaysRSS.xml" )
                     .arg( QString::number( bbcId() ) ) );
+}
+
+QString BBCWeatherItem::creditHtml() const
+{
+    return tr( "Supported by <a href=\"http://backstage.bbc.co.uk\" target=\"_BLANK\">backstage.bbc.co.uk</a>.<br>Weather data from UK MET Office" );
 }

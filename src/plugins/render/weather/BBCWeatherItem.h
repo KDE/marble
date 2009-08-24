@@ -35,6 +35,8 @@ class BBCWeatherItem : public WeatherItem
    
     quint32 bbcId() const;
     void setBbcId( quint32 id );
+
+    QString creditHtml() const;
  private:    
     quint32 m_bbcId;
     bool m_observationRequested;
