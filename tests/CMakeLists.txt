@@ -29,6 +29,25 @@ add_definitions( -DTESTSRCDIR=\\"${CMAKE_CURRENT_SOURCE_DIR}\\" )
 
 #############################################################
 
+#############################################################
+# Configure the test scripts and put them in the project root
+# directory. 
+#############################################################
+
+#make sure that the cmake and ctest stuff is available
+if( CMAKE_COMMAND AND CMAKE_CTEST_COMMAND )
+
+configure_file( 
+    "${CMAKE_CURRENT_SOURCE_DIR}/CTestNightlyScript.cmake.in"
+    "${PROJECT_BINARY_DIR}/CTestNightlyScript.cmake" )
+
+else( CMAKE_COMMAND AND CMAKE_CTEST_COMMAND )
+
+message( STATUS "Both the CTest and CMake command are needed to create test scripts" ) 
+message( STATUS "Test Scripts have not been created" )
+
+endif( CMAKE_COMMAND AND CMAKE_CTEST_COMMAND )
+
 
 #############################################################
 # Add extra Libs for testing Plugins
