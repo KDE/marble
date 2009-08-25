@@ -471,7 +471,7 @@ void GeoDataFeature::setStyle( GeoDataStyle* style )
     d->m_style = style;
 }
 
-GeoDataRegion GeoDataFeature::region() const
+GeoDataRegion& GeoDataFeature::region() const
 {
     return d->m_region;
 }

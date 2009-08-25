@@ -60,8 +60,10 @@ void GeoDataRegion::setParent( GeoDataFeature * feature )
 }
 
 
-GeoDataLatLonAltBox GeoDataRegion::latLonAltBox() const
+GeoDataLatLonAltBox& GeoDataRegion::latLonAltBox() const
 {
+    // FIXME: This isn't exactly what a 'const' function should do, is it?
+
     // If the latLonAltBox hasn't been set try to determine it automatically
     if ( !d->m_latLonAltBox ) {
         // If there is a parent try to 
@@ -102,7 +104,7 @@ void GeoDataRegion::setLatLonAltBox( const GeoDataLatLonAltBox & latLonAltBox )
 }
 
 
-GeoDataLod GeoDataRegion::lod() const
+GeoDataLod& GeoDataRegion::lod() const
 {
     // If the lod hasn't been set then return a shared one
     if ( !d->m_lod ) {

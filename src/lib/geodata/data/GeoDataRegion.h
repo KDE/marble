@@ -101,7 +101,7 @@ class GEODATA_EXPORT GeoDataRegion : public GeoDataObject
     there is no geometry assigned to the feature or if the parent object of the
     region is a GeoDataLink).
 */
-    GeoDataLatLonAltBox latLonAltBox() const;
+    GeoDataLatLonAltBox& latLonAltBox() const;
 
     
 /*!
@@ -118,7 +118,7 @@ class GEODATA_EXPORT GeoDataRegion : public GeoDataObject
     If no \a lod has been set then a GeoDataLod object with default values
     is being returned.
 */
-    GeoDataLod lod() const;
+    GeoDataLod& lod() const;
 
     
 /*!

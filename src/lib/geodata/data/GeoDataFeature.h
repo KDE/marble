@@ -222,7 +222,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /**
      * Return the region assigned to the placemark.
      */
-    GeoDataRegion region() const;
+    GeoDataRegion& region() const;
     /**
      * @brief Sets the region of the placemark.
      * @param region new value for the region
