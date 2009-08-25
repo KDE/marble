@@ -14,6 +14,8 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 
+#include "global.h"
+
 namespace Marble
 {
 
@@ -30,7 +32,7 @@ QNamDownloadJob::QNamDownloadJob( const QUrl & sourceUrl,
 void QNamDownloadJob::execute()
 {
     QNetworkRequest request( sourceUrl() );
-    request.setRawHeader( "User-Agent", "Marble TinyWebBrowser" );
+    request.setRawHeader( "User-Agent", getUserAgent().toLatin1() );
     m_networkReply = m_networkAccessManager->get( request );
 
     connect( m_networkReply, SIGNAL( downloadProgress( qint64, qint64 )),
@@ -83,6 +85,13 @@ void QNamDownloadJob::finished()
     // No delete. This method is called by a signal QNetworkReply::finished.
     m_networkReply->deleteLater();
     m_networkReply = 0;
+}
+
+QString QNamDownloadJob::getUserAgent() const
+{
+    QString userAgent = QString( "Mozilla/5.0 (compatible; Marble/%1; Viewer; QNamNetworkPlugin)" )
+        .arg( MARBLE_VERSION_STRING );
+    return userAgent;
 }
 
 }

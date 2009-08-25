@@ -38,6 +38,8 @@ class QNamDownloadJob: public HttpJob
     void finished();
 
  private:
+    QString getUserAgent() const;
+
     QNetworkAccessManager * m_networkAccessManager;
     QNetworkReply * m_networkReply;
 };
