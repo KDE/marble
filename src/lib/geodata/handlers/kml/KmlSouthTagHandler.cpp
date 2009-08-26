@@ -31,7 +31,7 @@ GeoNode* KmlsouthTagHandler::parse( GeoParser& parser ) const
     if( parentItem.represents( kmlTag_LatLonAltBox ) ) {
         float south = parser.readElementText().trimmed().toFloat();
 
-        parentItem.nodeAs<GeoDataLatLonAltBox>()->setSouth( south );
+        parentItem.nodeAs<GeoDataLatLonAltBox>()->setSouth( south, GeoDataCoordinates::Degree );
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_south << "> containing: " << south
                  << " parent item name: " << parentItem.qualifiedName().first;

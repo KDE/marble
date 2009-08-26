@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Placemark>
+  <name>New York City</name>
+  <description>New York City</description>
+  <Point>
+    <coordinates>-74.006393,40.714172,0</coordinates>
+  </Point>
+  <Region>
+    <LatLonAltBox>
+      <west>-75</west>
+      <east>-73</east>
+      <north>42</north>
+      <south>40</south>
+      <minAltitude>-1</minAltitude>
+      <maxAltitude>1</maxAltitude>
+      <altitudeMode>absolute</altitudeMode>
+    </LatLonAltBox>
+    <Lod>
+      <minLodPixels>10</minLodPixels>
+      <maxLodPixels>10000</maxLodPixels>
+      <minFadeExtend>5</minFadeExtend>
+      <maxFadeExtend>5</maxFadeExtend>
+    </Lod>
+  </Region>
+</Placemark>
+</kml>
