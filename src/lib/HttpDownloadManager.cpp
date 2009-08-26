@@ -20,6 +20,9 @@
 #include "NetworkPlugin.h"
 #include "PluginManager.h"
 
+
+// #define MARBLE_DOWNLOAD_DEBUG
+
 using namespace Marble;
 
 // Time before a failed download job is requeued in ms
@@ -134,7 +137,9 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     QStack<HttpJob*>::iterator const jEnd = m_jobQueue.end();
     for (; j != jEnd; ++j ) {
         if ( job->destinationFileName() == (*j)->destinationFileName() ) {
+#ifdef MARBLE_DOWNLOAD_DEBUG            
             qDebug() << "Download rejected: It's in the queue already.";
+#endif
             (*j)->setInitiatorId( job->initiatorId() );
             return false;
         }
@@ -144,7 +149,9 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     QList<HttpJob*>::iterator iEnd = m_waitingQueue.end();
     for (; i != iEnd; ++i) {
 	if ( job->destinationFileName() == (*i)->destinationFileName() ) {
+#ifdef MARBLE_DOWNLOAD_DEBUG
 	    qDebug() << "Download rejected: Will try to download again in some time.";
+#endif        
 	    (*i)->setInitiatorId( job->initiatorId() );
 	    return false;
 	}
@@ -154,7 +161,9 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
     iEnd = m_activatedJobList.end();
     for (; i != iEnd; ++i ) {
         if ( job->destinationFileName() == (*i)->destinationFileName() ) {
+#ifdef MARBLE_DOWNLOAD_DEBUG
             qDebug() << "Download rejected: It's being downloaded already:" << job->destinationFileName();
+#endif
             (*i)->setInitiatorId( job->initiatorId() );
             return false;
         }
@@ -162,7 +171,9 @@ bool HttpDownloadManager::acceptJob( HttpJob  *job )
 
     QSet<QString>::const_iterator const pos = m_jobBlackList.find( job->sourceUrl().toString() );
     if ( pos != m_jobBlackList.end() ) {
+#ifdef MARBLE_DOWNLOAD_DEBUG
         qDebug() << "Download rejected: Blacklisted.";
+#endif
         return false;
     }
 
@@ -230,18 +241,21 @@ void HttpDownloadManager::reportResult( HttpJob* job, int err )
 	    // This should always return true
 	    if( !m_waitingQueue.contains( job ) ) {
 		if( job->tryAgain() ) {
+#ifdef MARBLE_DOWNLOAD_DEBUG
 		    qDebug() << QString( "Download of %1 failed, but trying again soon" )
 			.arg( job->destinationFileName() );
+#endif
 		    m_waitingQueue.enqueue( job );
                     if( !m_requeueTimer->isActive() )
                         m_requeueTimer->start();
 		}
 		else {
+#ifdef MARBLE_DOWNLOAD_DEBUG
             qDebug() << "JOB-address: " << job << "Blacklist-size:" << m_jobBlackList.size() << "err:" << err;
 		    m_jobBlackList.insert( job->sourceUrl().toString() );
 		    qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" )
 			.arg( job->destinationFileName() ).arg( m_jobBlackList.size() );
-
+#endif
                     job->deleteLater();
 		}
 	    }
@@ -262,7 +276,9 @@ void HttpDownloadManager::requeue()
     m_requeueTimer->stop();
     while( !m_waitingQueue.isEmpty() ) {
 	HttpJob* job = m_waitingQueue.dequeue();
+#ifdef MARBLE_DOWNLOAD_DEBUG
 	qDebug() << QString( "Requeuing %1." ).arg( job->destinationFileName() );
+#endif
 	addJob( job );
     }
 }
@@ -291,7 +307,9 @@ HttpJob *HttpDownloadManager::createJob( const QUrl& sourceUrl, const QString& d
 
 void HttpDownloadManager::jobRedirected( HttpJob *job, QUrl newLocation )
 {
+#ifdef MARBLE_DOWNLOAD_DEBUG
     qDebug() << "jobRedirected" << job->sourceUrl() << " -> " << newLocation;
+#endif
     HttpJob * const newJob = m_networkPlugin->createJob( newLocation, job->destinationFileName(),
                                                          job->initiatorId() );
     removeJob( job );
