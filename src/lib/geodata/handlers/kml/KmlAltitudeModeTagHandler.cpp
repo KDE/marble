@@ -1,5 +1,6 @@
 /*
     Copyright (C) 2008 Patrick Spendrin <ps_ml@gmx.de>
+    Copyright (C) 2009 Bastian Holst <bastianholst@gmx.de>
 
     This file is part of the KDE project
 
@@ -41,38 +42,40 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_altitudeMode ) );
 
-    GeoStackItem parentItem = parser.parentElement();
-    
-    GeoDataGeometry* geometry;
-    bool validParents = false;
+    QString content = parser.readElementText().trimmed();
 
-    if( parentItem.is<GeoDataFeature>() && 
-        parentItem.nodeAs<GeoDataFeature>()->featureId() == GeoDataPlacemarkId && 
-        parentItem.represents( kmlTag_Point ) ) {
-        geometry = parentItem.nodeAs<GeoDataPlacemark>()->geometry();
-        validParents = true;
-    } else if( parentItem.is<GeoDataGeometry>() && 
-               parentItem.nodeAs<GeoDataPoint>()->geometryId() == GeoDataPointId ) {
-        geometry = parentItem.nodeAs<GeoDataPoint>();
-        validParents = true;
+    AltitudeMode mode;
+    if( content == QString( "relativeToGround" ) ) {
+        mode = RelativeToGround;
+    }
+    else if( content == QString( "absolute" ) ) {
+        mode = Absolute;
+    }
+    else { // clampToGround is Standard
+        mode = ClampToGround;
     }
 
-    if( validParents ) {
-        QString content = parser.readElementText().trimmed();
-        
-        if( content == QString( "relativeToGround" ) ) {
-            geometry->setAltitudeMode( RelativeToGround );
-        } else if( content == QString( "absolute" ) ) {
-            geometry->setAltitudeMode( Absolute );
-        } else { // clampToGround is Standard
-            geometry->setAltitudeMode( ClampToGround );
-        }
+    GeoStackItem parentItem = parser.parentElement();
+
+    if ( parentItem.is<GeoDataFeature>()
+         && parentItem.nodeAs<GeoDataFeature>()->featureId() == GeoDataPlacemarkId
+         && parentItem.represents( kmlTag_Point ) )
+    {
+         parentItem.nodeAs<GeoDataPlacemark>()->geometry()->setAltitudeMode( mode );
+    }
+    else if ( parentItem.is<GeoDataGeometry>()
+              && parentItem.nodeAs<GeoDataPoint>()->geometryId() == GeoDataPointId )
+    {
+        parentItem.nodeAs<GeoDataPoint>()->setAltitudeMode( mode );
+    }
+    else if ( parentItem.is<GeoDataLatLonAltBox>() ) {
+        parentItem.nodeAs<GeoDataLatLonAltBox>()->setAltitudeMode( mode );
+    }
+
 #ifdef DEBUG_TAGS
         qDebug() << "Parsed <" << kmlTag_altitudeMode << "> containing: " << content
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
-    }
-
     return 0;
 }
 
