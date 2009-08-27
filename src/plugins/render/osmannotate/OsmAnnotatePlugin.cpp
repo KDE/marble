@@ -215,10 +215,9 @@ void OsmAnnotatePlugin::receiveNetworkReply( QNetworkReply *reply )
     if( reply->error() == QNetworkReply::NoError ) {
         readOsmFile( reply, false );
     } else {
-        m_errorMessage.showMessage( QString("Error while trying to download the"
+        m_errorMessage.showMessage( tr("Error while trying to download the"
                                             "OSM file from the server. The"
-                                            "error was:\n" )
-                                    + reply->errorString() );
+                                            "error was:\n %1" ).arg(reply->errorString()) );
     }
 }
 
