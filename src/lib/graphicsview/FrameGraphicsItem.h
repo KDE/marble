@@ -14,7 +14,7 @@
 // Marble
 #include "marble_export.h"
 #include "ScreenGraphicsItem.h"
-
+#include <QPainterPath>
 class QBrush;
 
 namespace Marble

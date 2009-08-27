@@ -19,7 +19,6 @@
 #include <QtGui/QIcon>
 
 class QAction;
-class QWebView;
 
 namespace Marble
 {

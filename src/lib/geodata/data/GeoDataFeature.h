@@ -36,7 +36,6 @@ class GeoDataPlacemark;
 class GeoDataRegion;
 
 class GeoDataStyle;
-class GeoDataStyleSelector;
 class GeoDataStyleMap;
 
 

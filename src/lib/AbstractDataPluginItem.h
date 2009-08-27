@@ -19,19 +19,11 @@
 #include "marble_export.h"
 
 class QAction;
-class QRect;
-class QSize;
-class QPoint;
 
 namespace Marble
 {
     
 class AbstractDataPluginItemPrivate;
-class GeoDataCoordinates;
-class GeoPainter;
-class GeoSceneLayer;
-class CacheStoragePolicy;
-class ViewportParams;
 
 class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsItem
 {

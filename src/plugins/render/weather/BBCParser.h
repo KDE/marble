@@ -23,7 +23,6 @@
 #include <QtCore/QStack>
 #include <QtCore/QXmlStreamReader>
 
-class QByteArray;
 class QObject;
 
 namespace Marble

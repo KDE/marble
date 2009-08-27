@@ -37,7 +37,6 @@ static const int tessellationPrecision = 10;
 static const int latLonAltBoxSamplingRate = 4;
 
 class GeoDataLineString;
-class GeoDataLinearRing;
 class ViewportParams;
 class AbstractProjectionPrivate;
 

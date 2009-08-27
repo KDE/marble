@@ -24,9 +24,6 @@
 
 class QTreeView;
 
-class GeoDataGeometry;
-class GeoDataFeature;
-class GeoDataDocument;
 
 
 

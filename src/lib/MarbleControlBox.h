@@ -35,16 +35,13 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-class QByteArray;
 class QModelIndex;
-class QAbstractItemModel;
 class QResizeEvent;
 class QStandardItemModel;
 
 namespace Marble
 {
 
-class GeoDataDocument;
 class MarbleWidget;
 class MarbleControlBoxPrivate;
 class MarblePlacemarkModel;

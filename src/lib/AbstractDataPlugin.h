@@ -15,12 +15,10 @@
 #include "marble_export.h"
 #include "RenderPlugin.h"
 
-class QEvent;
 
 namespace Marble
 {
     
-class Geopainter;
 class ViewportParams;
 class GeoSceneLayer;
 class AbstractDataPluginItem;

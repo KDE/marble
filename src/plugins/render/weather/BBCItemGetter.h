@@ -23,7 +23,6 @@
 namespace Marble
 {
 
-class AbstractDataPluginItem;
 class BBCStation;
 class MarbleDataFacade;
 

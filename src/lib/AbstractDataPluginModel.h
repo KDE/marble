@@ -19,7 +19,6 @@
 #include "marble_export.h"
 
 class QPoint;
-class QTimer;
 class QUrl;
 
 namespace Marble
@@ -27,8 +26,6 @@ namespace Marble
     
 class AbstractDataPluginModelPrivate;
 class AbstractDataPluginItem;
-class CacheStoragePolicy;
-class HttpDownloadManager;
 class GeoDataLatLonAltBox;
 class MarbleDataFacade;
 class ViewportParams;

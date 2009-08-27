@@ -31,7 +31,6 @@ namespace Marble
 {
 
     class MarbleWidget;
-    class GeoDataDocument;
     class TextAnnotation;
     class PointScreenGraphicsItem;
 

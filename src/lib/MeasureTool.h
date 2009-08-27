@@ -29,7 +29,6 @@ namespace Marble
 {
 
 class MarbleModel;
-class GeoDataCoordinates;
 class GeoPainter;
 class ViewportParams;
 

@@ -23,9 +23,6 @@
 namespace Marble
 {
 
-class GeoDataGeometry;
-class GeoDataFeature;
-class GeoDataDocument;
 class GeoRendererView;
 
 /**

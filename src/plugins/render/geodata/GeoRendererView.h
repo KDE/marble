@@ -27,7 +27,6 @@ class QItemSelection;
 namespace Marble
 {
 class GeoDataDocument;
-class GeoDataFeature;
 class GeoDataGeometry;
 class GeoPainter;
 

@@ -14,7 +14,6 @@
 #include <QtCore/QObject>
 
 // forward declarations
-class QSlider;
 
 #include "AbstractFloatItem.h"
 

@@ -25,7 +25,6 @@
 
 class QImage;
 class QPaintDevice;
-class QPixMap;
 class QPolygonF;
 class QRect;
 class QRectF;

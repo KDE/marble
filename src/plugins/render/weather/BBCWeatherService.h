@@ -13,14 +13,12 @@
 
 #include "AbstractWeatherService.h"
 
-class QMutex;
 
 namespace Marble
 {
 
 class BBCItemGetter;
 class BBCStation;
-class BBCWeatherItem;
 class GeoDataLatLonAltBox;
 class StationListParser;
 

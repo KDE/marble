@@ -17,7 +17,6 @@
 namespace Marble
 {
 
-class AbstractWeatherServicePrivate;
 
 class AbstractWeatherService : public QObject
 {

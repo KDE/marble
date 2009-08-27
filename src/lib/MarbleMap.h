@@ -38,8 +38,6 @@
 class QAbstractItemModel;
 class QModelIndex;
 class QItemSelectionModel;
-class QStyleOptionGraphicsItem;
-class QUrl;
 
 namespace Marble
 {

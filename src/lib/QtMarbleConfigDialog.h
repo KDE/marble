@@ -19,14 +19,10 @@
 #include "ui_MarbleViewSettingsWidget.h"
 #include "ui_MarbleNavigationSettingsWidget.h"
 
-class QSettings;
-class QStandardItemModel;
 
 namespace Marble
 {
 
-class MarbleCacheSettingsWidget;
-class MarblePluginSettingsWidget;
 class MarbleWidget;
 
 class QtMarbleConfigDialogPrivate;

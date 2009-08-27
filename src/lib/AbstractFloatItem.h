@@ -27,7 +27,6 @@
 #include "FrameGraphicsItem.h"
 #include "marble_export.h"
 
-class QAction;
 class QPainter;
 
 namespace Marble

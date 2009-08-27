@@ -24,9 +24,6 @@ class QDate;
 namespace Marble
 {
     
-class GeoPainter;
-class ViewportParams;
-class GeoSceneLayer;
 class WeatherData;
 
 class WeatherItemPrivate;

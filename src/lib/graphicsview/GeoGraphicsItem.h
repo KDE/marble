@@ -20,7 +20,6 @@
 #include <QtCore/QList>
 
 class QPoint;
-class QRect;
 class QString;
 
 namespace Marble
@@ -28,9 +27,6 @@ namespace Marble
     
 class GeoDataCoordinates;
 class GeoDataLatLonAltBox;
-class GeoPainter;
-class GeoSceneLayer;
-class ViewportParams;
 
 class GeoGraphicsItemPrivate;
 

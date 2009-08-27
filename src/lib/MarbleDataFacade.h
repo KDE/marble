@@ -32,7 +32,6 @@
 
 #include "global.h"
 
-class QAbstractItemModel;
 
 namespace Marble
 {

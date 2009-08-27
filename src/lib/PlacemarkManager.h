@@ -25,10 +25,8 @@ namespace Marble
 class GeoDataDocument;
 class PlacemarkContainer;
 class MarblePlacemarkModel;
-class MarbleGeometryModel;
 class MarbleDataFacade;
 class PlacemarkManagerPrivate;
-class FileViewModel;
 
 /**
  * This class is responsible for loading the

@@ -19,13 +19,10 @@
 #include <QtCore/QList>
 
 class QPoint;
-class QRect;
-class QString;
 
 namespace Marble
 {
 
-class GeoPainter;
 class ViewportParams;
 
 class ScreenGraphicsItemPrivate;

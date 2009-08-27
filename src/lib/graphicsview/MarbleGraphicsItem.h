@@ -20,7 +20,6 @@
 #include <QtCore/QString>
 
 class QEvent;
-class QPainterPath;
 class QObject;
 
 namespace Marble

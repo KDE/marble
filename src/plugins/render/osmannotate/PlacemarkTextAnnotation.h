@@ -19,7 +19,6 @@ namespace Marble
 
 class GeoWidgetBubble;
 class TextEditor;
-class GeoDataPlacemark;
 
 class PlacemarkTextAnnotation : public TextAnnotation, public TmpGraphicsItem
 {

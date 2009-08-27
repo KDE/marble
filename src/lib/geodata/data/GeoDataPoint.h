@@ -26,7 +26,6 @@
 namespace Marble
 {
 
-class GeoDataPointPrivate;
 
 /** 
  * @short A Geometry object representing a 3d point

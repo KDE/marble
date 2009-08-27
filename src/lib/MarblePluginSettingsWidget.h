@@ -36,7 +36,6 @@ class QStandardItemModel;
 namespace Marble
 {
 
-class RenderPlugin;
 class MarblePluginSettingsWidgetPrivate;
 
 class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget, private Ui::MarblePluginSettingsWidget
