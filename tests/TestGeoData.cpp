@@ -23,7 +23,9 @@ class TestGeoData : public QObject
     Q_OBJECT
  private slots:
     void nodeTypeTest();
+    void normalizeLatTest_data();
     void normalizeLatTest();
+    void normalizeLonTest_data();
     void normalizeLonTest();
 };
 
@@ -61,67 +63,74 @@ void TestGeoData::nodeTypeTest()
     QCOMPARE( objectCopy.nodeType(), folderType );
 }
 
+void normalizeLatTest_data()
+{
+    QTest::addColumn( "latRadian" );
+
+    QTest::newRow( "north pole" ) << M_PI / 2;
+    QTest::newRow( "south pole" ) << - M_PI / 2;
+    QTest::newRow( "somewhere" ) << 1;
+}
 
 void TestGeoData::normalizeLatTest()
 {
-    QList<qreal> list;
-    list.append( M_PI / 2 );
-    list.append( -M_PI / 2 );
-    list.append( 1 );
+    QFETCH( qreal, latRadian );
 
-    foreach( qreal latRadian, list ) {
-        qreal latDegree = RAD2DEG * latRadian;
-        for ( int i = 1; i < 10; ++i ) {
-            if ( ( i % 2 ) == 0 ) {
-                QCOMPARE( GeoDataCoordinates::normalizeLat( latRadian + i * M_PI, GeoDataCoordinates::Radian ), latRadian );
-                QCOMPARE( GeoDataCoordinates::normalizeLat( latRadian + i * M_PI ), latRadian );
-                QCOMPARE( GeoDataCoordinates::normalizeLat( latDegree + i * 180, GeoDataCoordinates::Degree ), latDegree );
-            }
-            else {
-                QCOMPARE( GeoDataCoordinates::normalizeLat( latRadian + i * M_PI, GeoDataCoordinates::Radian ), -latRadian );
-                QCOMPARE( GeoDataCoordinates::normalizeLat( latRadian + i * M_PI ), -latRadian );
-                QCOMPARE( GeoDataCoordinates::normalizeLat( latDegree + i * 180, GeoDataCoordinates::Degree ), -latDegree );
-            }
+    qreal latDegree = RAD2DEG * latRadian;
+    for ( int i = 1; i < 10; ++i ) {
+        if ( ( i % 2 ) == 0 ) {
+            QCOMPARE( GeoDataCoordinates::normalizeLat( latRadian + i * M_PI, GeoDataCoordinates::Radian ), latRadian );
+            QCOMPARE( GeoDataCoordinates::normalizeLat( latRadian + i * M_PI ), latRadian );
+            QCOMPARE( GeoDataCoordinates::normalizeLat( latDegree + i * 180, GeoDataCoordinates::Degree ), latDegree );
+        }
+        else {
+            QCOMPARE( GeoDataCoordinates::normalizeLat( latRadian + i * M_PI, GeoDataCoordinates::Radian ), -latRadian );
+            QCOMPARE( GeoDataCoordinates::normalizeLat( latRadian + i * M_PI ), -latRadian );
+            QCOMPARE( GeoDataCoordinates::normalizeLat( latDegree + i * 180, GeoDataCoordinates::Degree ), -latDegree );
         }
     }
 }
 
+void TestGeoData::normalizeLonTest_data()
+{
+    QTest::addColumn( "lonRadian" );
+
+    QTest::newRow( "half east" ) << M_PI / 2;
+    QTest::newRow( "half west" ) << - M_PI / 2;
+    QTest::newRow( "somewhere" ) << 1;
+    QTest::newRow( "date line east" ) << M_PI;
+    QTest::newRow( "date line west" ) << - M_PI;
+}
+
 void TestGeoData::normalizeLonTest()
 {
-    QList<qreal> list;
-    list.append( M_PI / 2 );
-    list.append( -M_PI / 2 );
-    list.append( 1 );
-    list.append( M_PI );
-    list.append( -M_PI );
+    QFETCH( qreal, lonRadian );
 
-    foreach( qreal lonRadian, list ) {
-        qreal lonDegree = RAD2DEG * lonRadian;
-        for ( int i = 1; i < 10; ++i ) {
-            if ( lonRadian == M_PI || lonRadian == -M_PI ) {
-                int lonRadianLarge = qRound( lonRadian * 1000 );
-                int lonDegreeLarge = qRound( lonDegree * 1000 );
-                if ( qRound( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI ) * 1000 ) != lonRadianLarge
-                     && qRound( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI ) * 1000 ) != -lonRadianLarge )
-                {
-                    QFAIL( "Error at M_PI/-M_PI" );
-                }
-                if ( qRound( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI, GeoDataCoordinates::Radian ) * 1000 ) != lonRadianLarge
-                     && qRound( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI, GeoDataCoordinates::Radian ) * 1000 ) != -lonRadianLarge )
-                {
-                    QFAIL( "Error at M_PI/-M_PI" );
-                }
-                if ( qRound( GeoDataCoordinates::normalizeLon( lonDegree + i * 360, GeoDataCoordinates::Degree ) * 1000 ) != lonDegreeLarge
-                     && qRound( GeoDataCoordinates::normalizeLon( lonDegree + i * 360, GeoDataCoordinates::Degree ) * 1000 ) != -lonDegreeLarge )
-                {
-                    QFAIL( "Error at M_PI/-M_PI" );
-                }
+    qreal lonDegree = RAD2DEG * lonRadian;
+    for ( int i = 1; i < 10; ++i ) {
+        if ( lonRadian == M_PI || lonRadian == -M_PI ) {
+            int lonRadianLarge = qRound( lonRadian * 1000 );
+            int lonDegreeLarge = qRound( lonDegree * 1000 );
+            if ( qRound( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI ) * 1000 ) != lonRadianLarge
+                 && qRound( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI ) * 1000 ) != -lonRadianLarge )
+            {
+                QFAIL( "Error at M_PI/-M_PI" );
             }
-            else {
-                QCOMPARE( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI, GeoDataCoordinates::Radian ), lonRadian );
-                QCOMPARE( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI ), lonRadian );
-                QCOMPARE( GeoDataCoordinates::normalizeLon( lonDegree + i * 360, GeoDataCoordinates::Degree ), lonDegree );
+            if ( qRound( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI, GeoDataCoordinates::Radian ) * 1000 ) != lonRadianLarge
+                 && qRound( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI, GeoDataCoordinates::Radian ) * 1000 ) != -lonRadianLarge )
+            {
+                QFAIL( "Error at M_PI/-M_PI" );
             }
+            if ( qRound( GeoDataCoordinates::normalizeLon( lonDegree + i * 360, GeoDataCoordinates::Degree ) * 1000 ) != lonDegreeLarge
+                 && qRound( GeoDataCoordinates::normalizeLon( lonDegree + i * 360, GeoDataCoordinates::Degree ) * 1000 ) != -lonDegreeLarge )
+            {
+                QFAIL( "Error at M_PI/-M_PI" );
+            }
+        }
+        else {
+            QCOMPARE( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI, GeoDataCoordinates::Radian ), lonRadian );
+            QCOMPARE( GeoDataCoordinates::normalizeLon( lonRadian + i * 2 * M_PI ), lonRadian );
+            QCOMPARE( GeoDataCoordinates::normalizeLon( lonDegree + i * 360, GeoDataCoordinates::Degree ), lonDegree );
         }
     }
 }
