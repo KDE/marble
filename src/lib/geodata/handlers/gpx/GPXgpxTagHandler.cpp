@@ -24,7 +24,9 @@
 #include <QtCore/QDebug>
 
 #include "GPXElementDictionary.h"
-#include "GeoParser.h"
+#include "GeoDataParser.h"
+
+#include "GeoDataDocument.h"
 
 namespace Marble
 {
@@ -34,11 +36,11 @@ GPX_DEFINE_TAG_HANDLER(gpx)
 
 GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
 {
-    Q_UNUSED(parser); // Don't complain when asserts are turned off
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_gpx));
-
-    qDebug() << "Parsed <Document> start!";    
-    return 0;
+    GeoDataDocument* doc = geoDataDoc( parser );
+//#ifdef DEBUG_TAGS
+    qDebug() << "Parsed <" << gpxTag_gpx << "> document: " << doc;
+//#endif
+    return doc;
 }
 
 }
