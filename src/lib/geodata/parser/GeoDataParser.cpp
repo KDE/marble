@@ -53,8 +53,28 @@ GeoDataParser::~GeoDataParser()
 {
 }
 
-bool GeoDataParser::isValidRootElement() const
+bool GeoDataParser::isValidRootElement()
 {
+    if (m_source == GeoData_UNKNOWN)
+    {
+        if (GeoParser::isValidElement(gpx::gpxTag_gpx))
+        {
+            m_source = GeoData_GPX;
+        }
+        else if (GeoParser::isValidElement(kml::kmlTag_kml))
+        {
+            m_source = GeoData_KML;
+        }
+        else if (GeoParser::isValidElement("osm"))
+        {
+            m_source = GeoData_OSM;
+        }
+        else
+        {
+            Q_ASSERT(false);
+            return false;
+        }
+    }
     switch ((GeoDataSourceType) m_source) {
     // TODO: case GeoData_GeoRSS:
     case GeoData_GPX:

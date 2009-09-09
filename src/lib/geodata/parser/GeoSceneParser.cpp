@@ -46,7 +46,7 @@ GeoSceneParser::~GeoSceneParser()
 {
 }
 
-bool GeoSceneParser::isValidRootElement() const
+bool GeoSceneParser::isValidRootElement()
 {
     switch ((GeoSceneSourceType) m_source) {
     case GeoScene_DGML:

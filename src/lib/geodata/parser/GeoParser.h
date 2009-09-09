@@ -82,7 +82,7 @@ protected:
      * current XML Document type, e.g. KML, GPX etc.
      * @return @c true if the element is a valid document root.
      */
-    virtual bool isValidRootElement() const = 0;
+    virtual bool isValidRootElement() = 0;
 
     virtual void raiseRootElementError();
 

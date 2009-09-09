@@ -33,7 +33,7 @@ GeoOnfParser::GeoOnfParser()
     setNamespaceProcessing( false );
 }
 
-bool GeoOnfParser::isValidRootElement() const
+bool GeoOnfParser::isValidRootElement()
 {
     return isValidElement( OsmNamefinder::tag_searchresults );
 }

@@ -43,7 +43,7 @@ public:
 
 private:
     virtual bool isValidElement(const QString& tagName) const;
-    virtual bool isValidRootElement() const;
+    virtual bool isValidRootElement();
     virtual void raiseRootElementError();
 
     virtual GeoDocument* createDocument() const;
