@@ -132,18 +132,48 @@ void GeoParser::parseDocument()
         return;
     }
 
+    bool processChildren = true;
+    GeoTagHandler::QualifiedName qName( name().toString(),
+                                        namespaceUri().toString() );
+
+    if( tokenType() == QXmlStreamReader::Invalid )
+        raiseWarning( QString( "%1: %2" ).arg( error() ).arg( errorString() ) );
+
+    GeoStackItem stackItem( qName, 0 );
+
+    if ( const GeoTagHandler* handler = GeoTagHandler::recognizes( qName )) {
+        stackItem.assignNode( handler->parse( *this ));
+        processChildren = !isEndElement();
+    }
+    // Only add GeoStackItem to the parent chain, if the tag handler
+    // for the current element possibly contains non-textual children.
+    // Consider following DGML snippet "<name>Test</name>" - the
+    // DGMLNameTagHandler assumes that <name> only contains textual
+    // children, and reads the joined value of all children using
+    // readElementText(). This implicates that tags like <name>
+    // don't contain any children that would need to be processed using
+    // this parseDocument() function.
+    if ( processChildren ) {
+        m_nodeStack.push( stackItem );
+#if DUMP_PARENT_STACK > 0
+        dumpParentStack( name().toString(), m_nodeStack.size(), false );
+#endif
+    }
+#if DUMP_PARENT_STACK > 0
+    else {
+        // This is only used for debugging purposes.
+        m_nodeStack.push( stackItem );
+        dumpParentStack( name().toString() + "-discarded", m_nodeStack.size(), false );
+
+        m_nodeStack.pop();
+        dumpParentStack( name().toString() + "-discarded", m_nodeStack.size(), true );
+    }
+#endif
+
     while ( !atEnd() ) {
         readNext();
-        GeoTagHandler::QualifiedName qName( name().toString(),
-                                            namespaceUri().toString() );
-
-        if( tokenType() == QXmlStreamReader::Invalid ) 
-            raiseWarning( QString( "%1: %2" ).arg( error() ).arg( errorString() ) );
-
         if ( isEndElement() ) {
-            if ( !isValidRootElement() )
-                m_nodeStack.pop();
-
+            m_nodeStack.pop();
 #if DUMP_PARENT_STACK > 0
             dumpParentStack( name().toString(), m_nodeStack.size(), true );
 #endif
@@ -151,41 +181,7 @@ void GeoParser::parseDocument()
         }
 
         if ( isStartElement() ) {
-            bool processChildren = true;
-            GeoStackItem stackItem( qName, 0 );
-
-            if ( const GeoTagHandler* handler = GeoTagHandler::recognizes( qName )) {
-                stackItem.assignNode( handler->parse( *this ));
-                processChildren = !isEndElement();
-            }
-
-            // Only add GeoStackItem to the parent chain, if the tag handler
-            // for the current element possibly contains non-textual children.
-            // Consider following DGML snippet "<name>Test</name>" - the
-            // DGMLNameTagHandler assumes that <name> only contains textual
-            // children, and reads the joined value of all children using
-            // readElementText(). This implicates that tags like <name>
-            // don't contain any children that would need to be processed using
-            // this parseDocument() function.
-            if ( processChildren ) {
-                m_nodeStack.push( stackItem );
-
-#if DUMP_PARENT_STACK > 0
-                dumpParentStack( name().toString(), m_nodeStack.size(), false );
-#endif
-
-                parseDocument();
-            }
-#if DUMP_PARENT_STACK > 0
-            else {
-                // This is only used for debugging purposes.
-                m_nodeStack.push( stackItem );
-                dumpParentStack( name().toString(), m_nodeStack.size(), false );
-
-                m_nodeStack.pop();
-                dumpParentStack( name().toString(), m_nodeStack.size(), true );
-            }
-#endif
+            parseDocument();
         }
     }
 }
