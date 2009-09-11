@@ -56,31 +56,30 @@ void FileLoader::run()
     if( m_contents.isEmpty() ) {
         QString defaultcachename;
         QString defaultsrcname;
-        QString defaulthomecache;
 
-        if( m_filepath.endsWith(".kml") ) {
-            m_filepath.remove(QRegExp("\\.kml$"));
-        }
         qDebug() << "starting parser for" << m_filepath;
 
         QFileInfo fileinfo(m_filepath);
+        QString path = fileinfo.path();
+        if (path == ".") path.clear();
+        QString name = fileinfo.completeBaseName();
+        QString suffix = fileinfo.suffix();
+
         if ( fileinfo.isAbsolute() ) {
             // We got an _absolute_ path now: e.g. "/patrick.kml"
-            defaultcachename = m_filepath + ".cache";
-            defaultsrcname   = m_filepath + ".kml";
+            defaultcachename = path + name + ".cache";
+            defaultsrcname   = path + '/' + name + '.' + suffix;
         }
         else {
             if ( m_filepath.contains( '/' ) ) {
                 // _relative_ path: "maps/mars/viking/patrick.kml"
-                defaultcachename = MarbleDirs::path( m_filepath + ".cache" );
-                defaultsrcname   = MarbleDirs::path( m_filepath + ".kml");
-                defaulthomecache = MarbleDirs::localPath() + m_filepath + ".cache";
+                defaultcachename = MarbleDirs::path( path + name + ".cache" );
+                defaultsrcname   = MarbleDirs::path( path + '/' + name + '.' + suffix);
             }
             else {
                 // _standard_ shared placemarks: "placemarks/patrick.kml"
-                defaultcachename = MarbleDirs::path( "placemarks/" + m_filepath + ".cache" );
-                defaultsrcname   = MarbleDirs::path( "placemarks/" + m_filepath + ".kml");
-                defaulthomecache = MarbleDirs::localPath() + "/placemarks/" + m_filepath + ".cache";
+                defaultcachename = MarbleDirs::path( "placemarks/" + path + name + ".cache" );
+                defaultsrcname   = MarbleDirs::path( "placemarks/" + path + name + '.' + suffix );
             }
         }
 
@@ -120,10 +119,11 @@ void FileLoader::run()
             {
                 // Read the KML file.
                 importKml( defaultsrcname );
+                saveFile( defaultcachename );
             }
             else
             {
-                qDebug() << "No Default Placemark Source File for " << m_filepath;
+                qDebug() << "No Default Placemark Source File for " << defaultsrcname;
             }
         }
     } else {
@@ -256,6 +256,43 @@ bool FileLoader::loadFile( const QString &filename )
 
     m_document->setVisible( false );
     return true;
+}
+
+void FileLoader::saveFile( const QString& filename )
+{
+    if ( !QDir( MarbleDirs::localPath() + "/placemarks/" ).exists() )
+        ( QDir::root() ).mkpath( MarbleDirs::localPath() + "/placemarks/" );
+
+    QFile file( filename );
+    file.open( QIODevice::WriteOnly );
+    QDataStream out( &file );
+
+    // Write a header with a "magic number" and a version
+    // out << (quint32)0xA0B0C0D0;
+    out << (quint32)MarbleMagicNumber;
+    out << (qint32)014;
+
+    out.setVersion( QDataStream::Qt_4_2 );
+
+    qreal lon;
+    qreal lat;
+    qreal alt;
+
+    QVector<Marble::GeoDataPlacemark>::const_iterator it = m_document->placemarks().constBegin();
+    QVector<Marble::GeoDataPlacemark>::const_iterator const end = m_document->placemarks().constEnd();
+    for (; it != end; ++it )
+    {
+        out << (*it).name();
+        (it)->coordinate( lon, lat, alt );
+
+        // Use double to provide a single cache file format across architectures
+        out << (double)(lon) << (double)(lat) << (double)(alt);
+        out << QString( (*it).role() );
+        out << QString( (*it).description() );
+        out << QString( (*it).countryCode() );
+        out << (double)(*it).area();
+        out << (qint64)(*it).population();
+    }
 }
 
 #include "FileLoader.moc"

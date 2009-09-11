@@ -88,16 +88,18 @@ QStringList FileManager::containers() const
 
 QString FileManager::toRegularName( QString name )
 {
-    return name.remove(".kml").remove(".cache");
+    QFileInfo fileinfo(name);
+    return fileinfo.completeBaseName();
 }
 
 void FileManager::addFile( const QString& filepath )
 {
-    if( ! containers().contains( toRegularName( filepath ) ) ) {
-        qDebug() << "adding container:" << toRegularName( filepath );
+    QString regularName = toRegularName( filepath );
+    if( ! containers().contains( regularName ) ) {
+        qDebug() << "adding container:" << regularName;
         FileLoader* loader = new FileLoader( this, filepath );
         appendLoader( loader );
-        d->m_pathList.append( toRegularName( filepath ) );
+        d->m_pathList.append( filepath );
     }
 }
 

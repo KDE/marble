@@ -36,7 +36,7 @@ class FileLoader : public QThread
         void importKml( const QString& filename );
         void importKmlFromData();
         bool loadFile(const QString &filename );
-        void saveFile();
+        void saveFile(const QString& filename );
 
         QString m_filepath;
         QString m_contents;
