@@ -55,12 +55,6 @@ void GpxFileViewItem::saveFile()
     stream << ( *m_gpxFile );
 }
 
-void GpxFileViewItem::closeFile( int start )
-{
-    Q_UNUSED( start );
-    //TODO
-}
-
 bool GpxFileViewItem::isShown() const
 {
     return (m_gpxFile->checkState() == Qt::Checked );

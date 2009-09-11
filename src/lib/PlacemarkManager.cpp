@@ -19,6 +19,7 @@
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
 
+#include "FileManager.h"
 #include "KmlFileViewItem.h"
 #include "FileViewModel.h"
 #include "MarbleDirs.h"
@@ -44,6 +45,7 @@ class PlacemarkManagerPrivate
         }
 
         MarbleDataFacade* m_datafacade;
+        FileManager *m_fileManager;
 };
 }
 
@@ -70,14 +72,49 @@ void PlacemarkManager::setDataFacade( MarbleDataFacade *facade )
 //    d->m_datafacade->placemarkModel()->setPlacemarkContainer(&d->m_placemarkContainer);
 }
 
-void PlacemarkManager::addGeoDataDocument(const GeoDataDocument &document)
+void PlacemarkManager::setFileManager( FileManager *fileManager )
 {
-    qDebug() << "PlacemarkManager::geoDataDocumentAdded:" << document.name();
-    if (!document.placemarks().isEmpty())
-    { 
-//        d->m_placemarkContainer << document->placemarks();
-        QVector<GeoDataPlacemark> result = document.placemarks();
-        d->m_datafacade->placemarkModel()->addPlacemarks( result );
+    d->m_fileManager = fileManager;
+    connect( d->m_fileManager, SIGNAL( fileAdded(int)),
+             this,          SLOT(addGeoDataDocument(int)) );
+    connect( d->m_fileManager, SIGNAL( fileRemoved(int)),
+             this,          SLOT(removeGeoDataDocument(int)) );
+}
+
+void PlacemarkManager::addGeoDataDocument( int index )
+{
+    KmlFileViewItem *file =
+            static_cast<KmlFileViewItem*>(d->m_fileManager->at(index));
+    if (file)
+    {
+        const GeoDataDocument &document = *file->document();
+        qDebug() << "PlacemarkManager::addGeoDataDocument:"
+                << document.fileName();
+        if (!document.placemarks().isEmpty())
+        {
+            QVector<GeoDataPlacemark> result = document.placemarks();
+            d->m_datafacade->placemarkModel()->addPlacemarks( result );
+        }
+    }
+}
+
+void PlacemarkManager::removeGeoDataDocument( int index )
+{
+    KmlFileViewItem *file =
+            static_cast<KmlFileViewItem*>(d->m_fileManager->at(index));
+    if (file)
+    {
+        const GeoDataDocument &document = *file->document();
+        qDebug() << "PlacemarkManager::removeGeoDataDocument:"
+                << document.fileName();
+        int start = 0;
+        for ( int i = 0; i < index; ++i )
+        {
+            start += d->m_fileManager->at(i)->size();
+        }
+        d->m_datafacade->placemarkModel()->removePlacemarks(
+                document.fileName(), start, d->m_fileManager->at(index)->size() );
+
     }
 }
 

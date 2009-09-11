@@ -150,10 +150,20 @@ void FileManager::closeFile( int index )
     qDebug() << "FileManager::closeFile";
     if (index < d->m_fileItemList.size() )
     {
-        d->m_fileItemList.at( index )->closeFile( indexStart( index ));
+        emit fileRemoved( index );
+        KmlFileViewItem *file =
+                static_cast<KmlFileViewItem*>(d->m_fileItemList.at(index));
+        if (file)
+        {
+            MarbleGeometryModel *geometryModel =
+                    d->m_datafacade->geometryModel();
+            if (geometryModel->geoDataRoot() == file->document())
+            {
+                geometryModel->setGeoDataRoot(0);
+            }
+        }
         delete d->m_fileItemList.at( index );
         d->m_fileItemList.removeAt( index );
-        emit fileRemoved( index );
     }
 }
 
@@ -204,15 +214,6 @@ void FileManager::cleanupLoader( FileLoader* loader )
          d->m_pathList.removeAll( loader->path() );
          delete loader;
     }
-}
-
-int FileManager::indexStart( int index )
-{
-    int start = 0;
-    for( int i = 0; i < index; i++ ) {
-        start += d->m_fileItemList.at( i )->size();
-    }
-    return start;
 }
 
 #include "FileManager.moc"

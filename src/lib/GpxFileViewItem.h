@@ -34,7 +34,6 @@ class GpxFileViewItem
      * AbstractFileViewItem methods
      */
     virtual void saveFile();
-    virtual void closeFile( int start );
     virtual bool isShown() const;
     virtual void setShown( bool value );
     virtual QString name() const;

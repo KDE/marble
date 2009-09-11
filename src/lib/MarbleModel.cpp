@@ -169,13 +169,12 @@ MarbleModel::MarbleModel( QObject *parent )
     }
     d->m_fileManager = new FileManager();
     d->m_fileManager->setDataFacade(d->m_dataFacade);
+
     d->m_placemarkmanager = new PlacemarkManager();
     d->m_placemarkmanager->setDataFacade(d->m_dataFacade);
-
-    connect( d->m_fileManager, SIGNAL( geoDataDocumentAdded( const GeoDataDocument & ) ),
-             d->m_placemarkmanager, SLOT(addGeoDataDocument(const GeoDataDocument & )) );
     connect( d->m_fileManager, SIGNAL( geoDataDocumentAdded( const GeoDataDocument& ) ),
              this,             SLOT( geoDataDocumentAdded( const GeoDataDocument& ) ) );
+    d->m_placemarkmanager->setFileManager(d->m_fileManager);
 
     d->m_popSortModel = new QSortFilterProxyModel( this );
 

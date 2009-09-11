@@ -20,6 +20,7 @@
 namespace Marble
 {
 
+class FileManager;
 class GeoDataDocument;
 class MarblePlacemarkModel;
 class MarbleDataFacade;
@@ -64,8 +65,14 @@ class PlacemarkManager : public QObject
      */
     void setDataFacade ( MarbleDataFacade *facade );
 
- public Q_SLOTS:
-    void addGeoDataDocument( const GeoDataDocument & );
+    /**
+     * Sets the FileManager from which the placemarks are loaded.
+     */
+    void setFileManager ( FileManager *fileManager );
+
+public Q_SLOTS:
+    void addGeoDataDocument( int index );
+    void removeGeoDataDocument( int index );
 
  private:
 

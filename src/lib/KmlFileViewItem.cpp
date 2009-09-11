@@ -42,12 +42,6 @@ GeoDataDocument* KmlFileViewItem::document()
     return &m_document;
 }
 
-void KmlFileViewItem::closeFile( int start )
-{
-    qDebug() << "closing file" << m_document.name() << m_document.fileName();
-    m_fileManager.dataFacade()->placemarkModel()->removePlacemarks( m_document.fileName(), start, size() );
-}
-
 int KmlFileViewItem::size() const
 {
     return m_document.placemarks().size();
