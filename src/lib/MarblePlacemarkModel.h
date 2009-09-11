@@ -80,9 +80,6 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
     int rowCount( const QModelIndex &parent = QModelIndex() ) const;
     int columnCount( const QModelIndex &parent = QModelIndex() ) const;
 
-    Marble::GeoDataCoordinates coordinateData( const QModelIndex &index ) const;
-    Marble::GeoDataStyle* styleData( const QModelIndex &index ) const;
-
     /**
      * Return the data according to the index.
      *
@@ -101,9 +98,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      *
      * Note: The model takes ownership of the place marks!
      */
-    void addPlacemarks( QVector<Marble::GeoDataPlacemark> &placemarks,
-                        bool clearPrevious = false,
-                        bool finalize = true );
+    void addPlacemarks( QVector<Marble::GeoDataPlacemark> &placemarks );
 
     /**
      * This method is used by the PlacemarkManager to remove
@@ -113,13 +108,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      */
     void removePlacemarks( const QString &containerName,
                            int start,
-                           int length,
-                           bool finalize = true );
-
-    /**
-    * This method returns a list of open Containers (== open kml files)
-    */
-    QStringList containers() const;
+                           int length );
 
  Q_SIGNALS:
     /**
@@ -129,12 +118,6 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
 
  private:
 
-    /**
-     * This method is used by the PlacemarkManager to clear
-     * the model.
-     */
-    void clearPlacemarks();
-    
     void createFilterProperties( QVector<Marble::GeoDataPlacemark> &container );
 
     Q_DISABLE_COPY( MarblePlacemarkModel )

@@ -77,7 +77,7 @@ void PlacemarkManager::addGeoDataDocument(const GeoDataDocument &document)
     { 
 //        d->m_placemarkContainer << document->placemarks();
         QVector<GeoDataPlacemark> result = document.placemarks();
-        d->m_datafacade->placemarkModel()->addPlacemarks( result, false );
+        d->m_datafacade->placemarkModel()->addPlacemarks( result );
     }
 }
 

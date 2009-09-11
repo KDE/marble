@@ -94,7 +94,7 @@ void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVec
     if( result.isEmpty() )
         return;
 
-    m_model->addPlacemarks( result, false );
+    m_model->addPlacemarks( result );
 
     emit modelChanged( m_model );
 }

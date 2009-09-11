@@ -31,7 +31,7 @@ class KmlFileViewItem : public AbstractFileViewItem
      * AbstractFileViewItem methods
      */
     virtual void saveFile();
-    virtual void closeFile( int start, bool finalize = true );
+    virtual void closeFile( int start );
     virtual bool isShown() const;
     virtual void setShown( bool value );
     virtual int size() const;

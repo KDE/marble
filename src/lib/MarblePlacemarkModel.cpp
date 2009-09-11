@@ -52,7 +52,7 @@ MarblePlacemarkModel::MarblePlacemarkModel( QObject *parent )
 
 MarblePlacemarkModel::~MarblePlacemarkModel()
 {
-    clearPlacemarks();
+    d->m_placemarkContainer.clear();
     delete d;
 }
 
@@ -71,24 +71,6 @@ int MarblePlacemarkModel::columnCount( const QModelIndex &parent ) const
         return 1;
     else
         return 0;
-}
-
-GeoDataCoordinates MarblePlacemarkModel::coordinateData( const QModelIndex &index ) const
-{
-    if ( !index.isValid() ) {
-        qDebug() << "MarblePlacemarkModel: Error - index invalid";
-        return GeoDataCoordinates();
-    }
-    return d->m_placemarkContainer.at( index.row() ).coordinate();
-}
-
-GeoDataStyle* MarblePlacemarkModel::styleData( const QModelIndex &index ) const
-{
-    if ( !index.isValid() )
-        return 0;
-    else {
-        return d->m_placemarkContainer.at( index.row() ).style();
-    }
 }
 
 QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
@@ -167,22 +149,10 @@ QModelIndexList MarblePlacemarkModel::approxMatch( const QModelIndex & start, in
     return results;
 }
 
-void MarblePlacemarkModel::addPlacemarks( QVector<Marble::GeoDataPlacemark> &placemarks,
-                                          bool clearPrevious,
-                                          bool finalize )
+void MarblePlacemarkModel::addPlacemarks( QVector<Marble::GeoDataPlacemark> &placemarks )
 {
-    Q_UNUSED( finalize )
-
     if( placemarks.count() <= 0 )
         return;
-
-    if ( clearPrevious ) {
-        beginRemoveRows( QModelIndex(), 0, rowCount() );
-
-        d->m_placemarkContainer.clear();
-
-        endRemoveRows();
-    }
 
     const int length = d->m_placemarkContainer.count();
     beginInsertRows( QModelIndex(), length, length + placemarks.count() - 1 );
@@ -196,11 +166,8 @@ void MarblePlacemarkModel::addPlacemarks( QVector<Marble::GeoDataPlacemark> &pla
 
 void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
                                               int start,
-                                              int length,
-                                              bool finalize )
+                                              int length )
 {
-    Q_UNUSED( finalize )
-
     QTime t;
     t.start();
 
@@ -213,17 +180,6 @@ void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
     // there have not been any additions, but without the following line marble seems to crash here.
     emit dataChanged( index( 0, 0 ), index( 0, 0 ) );
     qDebug() << "removePlacemarks(" << containerName << "): Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
-}
-
-QStringList MarblePlacemarkModel::containers() const
-{
-    return QStringList();
-}
-
-void MarblePlacemarkModel::clearPlacemarks()
-{
-    d->m_placemarkContainer.clear();
-    reset();
 }
 
 void MarblePlacemarkModel::createFilterProperties( QVector<Marble::GeoDataPlacemark> &container )
