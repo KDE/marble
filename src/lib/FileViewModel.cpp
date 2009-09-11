@@ -111,9 +111,9 @@ void FileViewModel::closeFile()
         m_manager->closeFile( m_selectionModel->selectedRows().first().row() );
     }
 }
-void FileViewModel::setPlacemarkManager( PlacemarkManager *placemarkManager)
+void FileViewModel::setFileManager( FileManager *fileManager)
 {
-    m_manager = placemarkManager;
+    m_manager = fileManager;
     connect (m_manager, SIGNAL(fileAdded(int)),
              this, SLOT(append(int)));
     connect (m_manager, SIGNAL(fileRemoved(int)),

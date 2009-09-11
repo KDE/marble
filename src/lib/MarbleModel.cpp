@@ -172,8 +172,10 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_placemarkmanager = new PlacemarkManager();
     d->m_placemarkmanager->setDataFacade(d->m_dataFacade);
 
-    connect( d->m_placemarkmanager, SIGNAL( geoDataDocumentAdded( const GeoDataDocument& ) ),
-             this,                  SLOT( geoDataDocumentAdded( const GeoDataDocument& ) ) );
+    connect( d->m_fileManager, SIGNAL( geoDataDocumentAdded( const GeoDataDocument & ) ),
+             d->m_placemarkmanager, SLOT(addGeoDataDocument(const GeoDataDocument & )) );
+    connect( d->m_fileManager, SIGNAL( geoDataDocumentAdded( const GeoDataDocument& ) ),
+             this,             SLOT( geoDataDocumentAdded( const GeoDataDocument& ) ) );
 
     d->m_popSortModel = new QSortFilterProxyModel( this );
 
@@ -186,7 +188,7 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_popSortModel );
 
     d->m_placemarkLayout = new PlacemarkLayout( this );
-    connect( d->m_placemarkmanager,         SIGNAL( finalize() ),
+    connect( d->m_fileManager,              SIGNAL( finalize() ),
              d->m_placemarkLayout,          SLOT( requestStyleReset() ) );
     connect( d->m_placemarkselectionmodel,  SIGNAL( selectionChanged( QItemSelection,
                                                                       QItemSelection) ),
@@ -416,7 +418,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         }
     }
     d->m_dataFacade->geometryModel()->setGeoDataRoot( 0 );
-    QStringList loadedContainers = d->m_placemarkmanager->containers();
+    QStringList loadedContainers = d->m_fileManager->containers();
     QStringList loadList;
     const QVector<GeoSceneLayer*> & layers = d->m_mapTheme->map()->layers();
     QVector<GeoSceneLayer*>::const_iterator it = layers.constBegin();
@@ -442,12 +444,12 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     // unload old standard Placemarks which are not part of the new map
     foreach(const QString& container, loadedContainers) {
         loadedContainers.pop_front();
-        d->m_placemarkmanager->removePlacemarkKey( container );
+        d->m_fileManager->removeFile( container );
     }
     // load new standard Placemarks
     foreach(const QString& container, loadList) {
         loadList.pop_front();
-        d->m_placemarkmanager->addPlacemarkFile( container );
+        d->m_fileManager->addFile( container );
     }
     d->notifyModelChanged();
     d->m_placemarkLayout->requestStyleReset();
@@ -705,27 +707,27 @@ void MarbleModel::openGpxFile( const QString& filename )
     GpxFile* gpxFile = new GpxFile( filename );
     GpxFileViewItem* item = new GpxFileViewItem( gpxFile );
 
-    d->m_placemarkmanager->addFile( item );
+    d->m_fileManager->addFile( item );
     d->m_gpxFileModel->addFile( gpxFile );
 }
 
 void MarbleModel::addPlacemarkFile( const QString& filename )
 {
-    d->m_placemarkmanager->addPlacemarkFile( filename );
+    d->m_fileManager->addFile( filename );
 
     d->notifyModelChanged();
 }
 
 void MarbleModel::addPlacemarkData( const QString& data, const QString& key )
 {
-    d->m_placemarkmanager->addPlacemarkData( data, key );
+    d->m_fileManager->addData( key, data );
 
     d->notifyModelChanged();
 }
 
-void MarbleModel::removePlacemarkKey( const QString& key )
+void MarbleModel::removePlacemarkKey( const QString& fileName )
 {
-    d->m_placemarkmanager->removePlacemarkKey( key );
+    d->m_fileManager->removeFile( fileName );
 
     d->notifyModelChanged();
 }

@@ -19,7 +19,7 @@
 
 #include "marble_export.h"
 
-#include "PlacemarkManager.h"
+#include "FileManager.h"
 
 namespace Marble
 {
@@ -39,7 +39,7 @@ class MARBLE_EXPORT FileViewModel : public QAbstractListModel
     virtual Qt::ItemFlags flags( const QModelIndex& index ) const;
     virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole );
 
-    void setPlacemarkManager( PlacemarkManager * placemarkManager );
+    void setFileManager( FileManager * fileManager );
     QItemSelectionModel * selectionModel();
 
   Q_SIGNALS:
@@ -54,7 +54,7 @@ class MARBLE_EXPORT FileViewModel : public QAbstractListModel
   private:
     Q_DISABLE_COPY( FileViewModel )
     QItemSelectionModel *m_selectionModel;
-    PlacemarkManager *m_manager;
+    FileManager *m_manager;
     
 };
 

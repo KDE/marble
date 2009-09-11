@@ -103,7 +103,6 @@ set(marblewidget_SRCS
     VisiblePlacemark.cpp
     PlacemarkManager.cpp
     PlacemarkLayout.cpp
-    PlacemarkLoader.cpp
     PlacemarkPainter.cpp
     PlacemarkInfoDialog.cpp
     Planet.cpp

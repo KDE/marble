@@ -69,7 +69,7 @@ FileManager::~FileManager()
 void FileManager::setDataFacade( MarbleDataFacade *facade )
 {
     d->m_datafacade = facade;
-//    d->m_datafacade->fileViewModel()->setFileManager(this);
+    d->m_datafacade->fileViewModel()->setFileManager(this);
 }
 
 MarbleDataFacade *FileManager::dataFacade()
@@ -173,29 +173,28 @@ AbstractFileViewItem * FileManager::at( int index )
 
 void FileManager::addGeoDataDocument( GeoDataDocument* document )
 {
-    Q_UNUSED( document );
-//    KmlFileViewItem* item = new KmlFileViewItem( *this, *document );
-//    addFile( item );
-//
-//    // now get the document that will be preserved throughout the life time
-//    GeoDataDocument* doc = item->document();
-//    // remove the hashes in front of the styles.
-//    QVector<GeoDataFeature>::Iterator end = doc->end();
-//    QVector<GeoDataFeature>::Iterator itr = doc->begin();
-//    for ( ; itr != end; ++itr ) {
-//        // use *itr (or itr.value()) here
-//        QString styleUrl = itr->styleUrl().remove('#');
-//        itr->setStyle( &doc->style( styleUrl ) );
-//    }
-//
-//    // do not set this file if it only contains points
-//    if( doc->isVisible() && d->m_datafacade->geometryModel() )
-//        d->m_datafacade->geometryModel()->setGeoDataRoot( doc );
-//    emit geoDataDocumentAdded( *doc );
-//
-//    if( d->m_loaderList.isEmpty() ) {
-//        emit finalize();
-//    }
+    KmlFileViewItem* item = new KmlFileViewItem( *this, *document );
+    addFile( item );
+
+    // now get the document that will be preserved throughout the life time
+    GeoDataDocument* doc = item->document();
+    // remove the hashes in front of the styles.
+    QVector<GeoDataFeature>::Iterator end = doc->end();
+    QVector<GeoDataFeature>::Iterator itr = doc->begin();
+    for ( ; itr != end; ++itr ) {
+        // use *itr (or itr.value()) here
+        QString styleUrl = itr->styleUrl().remove('#');
+        itr->setStyle( &doc->style( styleUrl ) );
+    }
+
+    // do not set this file if it only contains points
+    if( doc->isVisible() && d->m_datafacade->geometryModel() )
+        d->m_datafacade->geometryModel()->setGeoDataRoot( doc );
+    emit geoDataDocumentAdded( *doc );
+
+    if( d->m_loaderList.isEmpty() ) {
+        emit finalize();
+    }
 }
 
 void FileManager::cleanupLoader( FileLoader* loader )

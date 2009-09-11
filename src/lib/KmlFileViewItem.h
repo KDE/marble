@@ -19,12 +19,12 @@
 namespace Marble
 {
 
-class PlacemarkManager;
+class FileManager;
 
 class KmlFileViewItem : public AbstractFileViewItem
 {
   public:
-    KmlFileViewItem( PlacemarkManager& manager, const GeoDataDocument& document );
+    KmlFileViewItem( FileManager &manager, const GeoDataDocument& document );
     ~KmlFileViewItem();
 
     /*
@@ -39,7 +39,7 @@ class KmlFileViewItem : public AbstractFileViewItem
 
     GeoDataDocument* document();
   private:
-    PlacemarkManager&   m_placemarkManager;
+    FileManager  &m_fileManager;
     GeoDataDocument    m_document;
 };
 

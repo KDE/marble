@@ -17,10 +17,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
-#include "PlacemarkLoader.h"
-
-#include "GeoDataPlacemark.h"
-
 namespace Marble
 {
 
@@ -68,56 +64,10 @@ class PlacemarkManager : public QObject
      */
     void setDataFacade ( MarbleDataFacade *facade );
 
-    /**
-     * return a list containing all containers that have been queued for loading or that are
-     * loaded already
-     */
-    QStringList containers() const;
-
-    /**
-     * Loads a new place mark file into the manager.
-     */
-    void addPlacemarkFile( const QString &fileName );
-
-    /**
-    * removes an existing GeoDataDocument from the manager
-    */
-    void removePlacemarkKey( const QString& key );
-
-    /**
-    * add Data containing KML code as string
-    */
-    void addPlacemarkData( const QString& data, const QString& key );
-
-    void addFile( AbstractFileViewItem * item );
-    void saveFile( int index );
-    void closeFile( int index );
-
-    int size() const;
-    AbstractFileViewItem * at( int index );
-
-
- Q_SIGNALS:
-    void geoDataDocumentAdded( const GeoDataDocument& );
-    void finalize();
-    void fileAdded( int index );
-    void fileRemoved( int index );
-
- private Q_SLOTS:
-    void loadPlacemarkContainer( PlacemarkLoader* loader, QVector<Marble::GeoDataPlacemark> * );
-    void cleanupLoader( PlacemarkLoader* loader );
-    void addGeoDataDocument( GeoDataDocument* );
+ public Q_SLOTS:
+    void addGeoDataDocument( const GeoDataDocument & );
 
  private:
-
-    int indexStart( int index );
-
-    void appendLoader( PlacemarkLoader *loader );
-
-    /**
-     * internal helper function which returns the regular name of a kml or cache file
-     */
-    static QString toRegularName( QString name );
 
     Q_DISABLE_COPY( PlacemarkManager )
 

@@ -12,15 +12,17 @@
 #include "KmlFileViewItem.h"
 #include "GeoDataDocument.h"    // In geodata/data/
 #include "GeoDataPlacemark.h"
-#include "PlacemarkManager.h"
+#include "FileManager.h"
+#include "MarbleDataFacade.h"
 #include "MarblePlacemarkModel.h"
+#include "MarbleGeometryModel.h"
 
 #include <QtCore/QDebug>
 
 using namespace Marble;
 
-KmlFileViewItem::KmlFileViewItem( PlacemarkManager& manager, const GeoDataDocument& document ) :
-    m_placemarkManager( manager ),
+KmlFileViewItem::KmlFileViewItem( FileManager& manager, const GeoDataDocument& document ) :
+    m_fileManager( manager ),
     m_document( document )
 {
 }
@@ -43,7 +45,7 @@ GeoDataDocument* KmlFileViewItem::document()
 void KmlFileViewItem::closeFile( int start, bool finalize )
 {
     qDebug() << "closing file" << m_document.name() << m_document.fileName();
-    m_placemarkManager.model()->removePlacemarks( m_document.fileName(), start, size(), finalize );
+    m_fileManager.dataFacade()->placemarkModel()->removePlacemarks( m_document.fileName(), start, size(), finalize );
 }
 
 int KmlFileViewItem::size() const
