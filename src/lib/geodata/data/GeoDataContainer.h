@@ -78,7 +78,6 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      * @return A QVector of GeoDataPlacemark
      *
      * @see GeoDataPlacemark
-     * @see PlacemarkContainer
      */
     QVector<GeoDataPlacemark> placemarks() const;
     

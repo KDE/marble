@@ -46,7 +46,6 @@
 #include "gps/GpxFileModel.h"
 #include "gps/GpsLayer.h"
 #include "gps/PositionTracking.h"
-#include "PlacemarkContainer.h"
 #include "MarbleLocale.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleRunnerManager.h"

@@ -40,8 +40,6 @@ public:
     explicit MarbleRunnerManager( QObject *parent = 0 );
     ~MarbleRunnerManager();
     
-    void setModel(MarblePlacemarkModel *model);
-    MarblePlacemarkModel* model();
 public slots:
     void newText(QString text);
 signals:

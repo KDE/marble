@@ -13,9 +13,10 @@
 #include <QtCore/QString>
 #include <QtCore/QThread>
 
+#include "GeoDataPlacemark.h"
+
 namespace Marble
 {
-class PlacemarkContainer;
 class GeoDataDocument;
 
 class PlacemarkLoader : public QThread
@@ -30,7 +31,7 @@ class PlacemarkLoader : public QThread
         QString path() const;
         
     Q_SIGNALS:
-        void placemarksLoaded( PlacemarkLoader*, PlacemarkContainer * );
+        void placemarksLoaded( PlacemarkLoader*, QVector<Marble::GeoDataPlacemark> * );
         void placemarkLoaderFailed( PlacemarkLoader* );
         void newGeoDataDocumentAdded( GeoDataDocument* );
     private:
@@ -42,7 +43,7 @@ class PlacemarkLoader : public QThread
         QString m_filepath;
         QString m_contents;
         GeoDataDocument *m_document;
-        PlacemarkContainer *m_container;
+        QVector<Marble::GeoDataPlacemark> *m_container;
 };
 
 } // namespace Marble

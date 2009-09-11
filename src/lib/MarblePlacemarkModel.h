@@ -25,12 +25,13 @@
 
 #include "marble_export.h"
 
+#include "GeoDataPlacemark.h"
+
 namespace Marble
 {
 
 class GeoDataCoordinates;
 class GeoDataStyle;
-class PlacemarkContainer;
 /**
  * This class represents a model of all place marks which
  * are currently available through a given PlacemarkManager.
@@ -100,7 +101,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      *
      * Note: The model takes ownership of the place marks!
      */
-    void addPlacemarks( PlacemarkContainer &placemarks, 
+    void addPlacemarks( QVector<Marble::GeoDataPlacemark> &placemarks,
                         bool clearPrevious = false,
                         bool finalize = true );
 
@@ -134,9 +135,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      */
     void clearPlacemarks();
     
-    virtual void sort( int column, Qt::SortOrder order = Qt::AscendingOrder );
-
-    void createFilterProperties( PlacemarkContainer &container );
+    void createFilterProperties( QVector<Marble::GeoDataPlacemark> &container );
 
     Q_DISABLE_COPY( MarblePlacemarkModel )
     class Private;

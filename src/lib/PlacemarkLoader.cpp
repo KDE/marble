@@ -23,7 +23,6 @@
 #include "GeoDataPlacemark.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
-#include "PlacemarkContainer.h"
 
 
 namespace Marble
@@ -65,7 +64,7 @@ void PlacemarkLoader::run()
         QString defaultsrcname;
         QString defaulthomecache;
 
-        m_container = new PlacemarkContainer( m_filepath );
+        m_container = new QVector<Marble::GeoDataPlacemark>;
     
         if( m_filepath.endsWith(".kml") ) {
             m_filepath.remove(QRegExp("\\.kml$"));
@@ -143,7 +142,7 @@ void PlacemarkLoader::run()
             emit placemarkLoaderFailed( this );
         }
     } else {
-        m_container = new PlacemarkContainer( m_filepath );
+        m_container = new QVector<Marble::GeoDataPlacemark>;
 
         // Read the KML Data
         importKmlFromData();
@@ -177,9 +176,6 @@ void PlacemarkLoader::importKml( const QString& filename )
     m_document = static_cast<GeoDataDocument*>( document );
     m_document->setFileName( m_filepath );
 
-    m_container = new PlacemarkContainer( m_document->placemarks(), 
-                                          m_filepath );
-
     file.close();
 
     qDebug() << "newGeoDataDocumentAdded" << m_filepath;
@@ -204,9 +200,6 @@ void PlacemarkLoader::importKmlFromData()
 
     m_document = static_cast<GeoDataDocument*>( document );
     m_document->setFileName( m_filepath );
-
-    m_container = new PlacemarkContainer( m_document->placemarks(), 
-                                          m_filepath );
 
     buffer.close();
 
@@ -235,8 +228,8 @@ void PlacemarkLoader::saveFile( const QString& filename )
     qreal lat;
     qreal alt;
 
-    PlacemarkContainer::const_iterator it = m_container->constBegin();
-    PlacemarkContainer::const_iterator const end = m_container->constEnd();
+    QVector<Marble::GeoDataPlacemark>::const_iterator it = m_container->constBegin();
+    QVector<Marble::GeoDataPlacemark>::const_iterator const end = m_container->constEnd();
     for (; it != end; ++it )
     {
         out << (*it).name();

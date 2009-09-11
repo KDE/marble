@@ -19,11 +19,12 @@
 
 #include "PlacemarkLoader.h"
 
+#include "GeoDataPlacemark.h"
+
 namespace Marble
 {
 
 class GeoDataDocument;
-class PlacemarkContainer;
 class MarblePlacemarkModel;
 class MarbleDataFacade;
 class PlacemarkManagerPrivate;
@@ -103,7 +104,7 @@ class PlacemarkManager : public QObject
     void fileRemoved( int index );
 
  private Q_SLOTS:
-    void loadPlacemarkContainer( PlacemarkLoader* loader, PlacemarkContainer * );
+    void loadPlacemarkContainer( PlacemarkLoader* loader, QVector<Marble::GeoDataPlacemark> * );
     void cleanupLoader( PlacemarkLoader* loader );
     void addGeoDataDocument( GeoDataDocument* );
 

@@ -22,7 +22,6 @@
 
 #include "MarblePlacemarkModel.h"
 #include "PlacemarkManager.h"
-#include "PlacemarkContainer.h"
 #include "GeoDataPlacemark.h"
 
 #include "LatLonRunner.h"
@@ -41,7 +40,7 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
     : QObject(parent),
       m_activeRunners(0),
       m_lastString(""),
-      m_model(new MarblePlacemarkModel(0))
+      m_model(new MarblePlacemarkModel)
 {
     qRegisterMetaType<QVector<GeoDataPlacemark> >("QVector<GeoDataPlacemark>");
 }
@@ -95,20 +94,9 @@ void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVec
     if( result.isEmpty() )
         return;
 
-    PlacemarkContainer cont( result, "Runner Results" );
-    m_model->addPlacemarks( cont, false );
+    m_model->addPlacemarks( result, false );
 
     emit modelChanged( m_model );
-}
-
-MarblePlacemarkModel* MarbleRunnerManager::model()
-{
-    return m_model;
-}
-
-void MarbleRunnerManager::setModel( MarblePlacemarkModel *model )
-{
-    m_model = model;
 }
 
 }

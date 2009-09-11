@@ -22,7 +22,6 @@
 
 // Marble
 #include "GeoDataStyle.h"       // In geodata/data/
-#include "PlacemarkContainer.h"
 
 using namespace Marble;
 
@@ -30,8 +29,7 @@ class MarblePlacemarkModel::Private
 {
 
  public:
-    Private( MarblePlacemarkModel *parent )
-        : m_parent( parent )
+    Private()
     {
     }
 
@@ -39,8 +37,7 @@ class MarblePlacemarkModel::Private
     {
     }
 
-    MarblePlacemarkModel  *m_parent;
-    PlacemarkContainer     m_placemarkContainer;
+    QVector<Marble::GeoDataPlacemark>     m_placemarkContainer;
 };
 
 
@@ -49,7 +46,7 @@ class MarblePlacemarkModel::Private
 
 MarblePlacemarkModel::MarblePlacemarkModel( QObject *parent )
     : QAbstractListModel( parent ),
-      d( new Private( this ) )
+      d( new Private )
 {
 }
 
@@ -59,21 +56,6 @@ MarblePlacemarkModel::~MarblePlacemarkModel()
     delete d;
 }
 
-void MarblePlacemarkModel::sort( int column, Qt::SortOrder order )
-{
-    Q_UNUSED( column )
-    Q_UNUSED( order )
-
-    QTime t;
-    t.start();
-    qDebug() << "start sorting";
-
-    emit layoutAboutToBeChanged();
-//    d->m_placemarkContainer.sort( order );
-    emit layoutChanged();
-
-    qDebug() << "MarblePlacemarkModel (sort): Time elapsed:" << t.elapsed() << "ms";
-}
 
 int MarblePlacemarkModel::rowCount( const QModelIndex &parent ) const
 {
@@ -185,7 +167,7 @@ QModelIndexList MarblePlacemarkModel::approxMatch( const QModelIndex & start, in
     return results;
 }
 
-void MarblePlacemarkModel::addPlacemarks( PlacemarkContainer &placemarks, 
+void MarblePlacemarkModel::addPlacemarks( QVector<Marble::GeoDataPlacemark> &placemarks,
                                           bool clearPrevious,
                                           bool finalize )
 {
@@ -228,9 +210,6 @@ void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
     d->m_placemarkContainer.erase(begin, end);
     endRemoveRows();
 
-/*    if ( finalize ) {
-//          sort( Qt::DescendingOrder );
-    }*/
     // there have not been any additions, but without the following line marble seems to crash here.
     emit dataChanged( index( 0, 0 ), index( 0, 0 ) );
     qDebug() << "removePlacemarks(" << containerName << "): Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
@@ -247,7 +226,7 @@ void MarblePlacemarkModel::clearPlacemarks()
     reset();
 }
 
-void MarblePlacemarkModel::createFilterProperties( PlacemarkContainer &container )
+void MarblePlacemarkModel::createFilterProperties( QVector<Marble::GeoDataPlacemark> &container )
 {
 
     QVector<GeoDataPlacemark>::Iterator i;

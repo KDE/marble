@@ -25,7 +25,6 @@
 #include "MarblePlacemarkModel.h"
 #include "MarbleGeometryModel.h"
 #include "MarbleDataFacade.h"
-#include "PlacemarkContainer.h"
 #include "PlacemarkLoader.h"
 
 #include "GeoDataDocument.h"
@@ -56,7 +55,6 @@ PlacemarkManager::PlacemarkManager( QObject *parent )
     : QObject( parent )
     , d( new PlacemarkManagerPrivate() )
 {
-    
 }
 
 
@@ -218,9 +216,9 @@ void PlacemarkManager::cleanupLoader( PlacemarkLoader* loader )
     }
 }
 
-void PlacemarkManager::loadPlacemarkContainer( PlacemarkLoader* loader, PlacemarkContainer * container )
+void PlacemarkManager::loadPlacemarkContainer( PlacemarkLoader* loader, QVector<Marble::GeoDataPlacemark> * container )
 {
-    qDebug() << "Containername:" << container->name() << "to be finalized:" << (d->m_loaderList.size() == 1) << d->m_loaderList.size();
+    qDebug() << "Containername " << "to be finalized:" << (d->m_loaderList.size() == 1) << d->m_loaderList.size();
     d->m_loaderList.removeAll( loader );
     if ( container )
     { 

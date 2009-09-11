@@ -101,7 +101,6 @@ set(marblewidget_SRCS
     MeasureTool.cpp
     ImageLoadThread.cpp
     VisiblePlacemark.cpp
-    PlacemarkContainer.cpp
     PlacemarkManager.cpp
     PlacemarkLayout.cpp
     PlacemarkLoader.cpp
