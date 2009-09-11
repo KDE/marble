@@ -109,7 +109,7 @@ void FileManager::addData( const QString &name, const QString &data )
 
 void FileManager::appendLoader( FileLoader *loader )
 {
-    connect (   loader, SIGNAL( fileLoaderFailed( FileLoader* ) ),
+    connect (   loader, SIGNAL( loaderFinished( FileLoader* ) ),
                 this, SLOT( cleanupLoader( FileLoader* ) ) );
 
     connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ),
@@ -200,10 +200,6 @@ void FileManager::addGeoDataDocument( GeoDataDocument* document )
     // do not set this file if it only contains points
     if( doc->isVisible() && d->m_datafacade->geometryModel() )
         d->m_datafacade->geometryModel()->setGeoDataRoot( doc );
-
-    if( d->m_loaderList.isEmpty() ) {
-        emit finalize();
-    }
 }
 
 void FileManager::cleanupLoader( FileLoader* loader )

@@ -90,7 +90,6 @@ class FileManager : public QObject
  Q_SIGNALS:
     void fileAdded( int index );
     void fileRemoved( int index );
-    void finalize();
 
  private Q_SLOTS:
     void addGeoDataDocument( GeoDataDocument *document );

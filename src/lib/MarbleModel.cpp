@@ -184,8 +184,6 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_popSortModel );
 
     d->m_placemarkLayout = new PlacemarkLayout( this );
-    connect( d->m_fileManager,              SIGNAL( finalize() ),
-             d->m_placemarkLayout,          SLOT( requestStyleReset() ) );
     connect( d->m_placemarkselectionmodel,  SIGNAL( selectionChanged( QItemSelection,
                                                                       QItemSelection) ),
              d->m_placemarkLayout,          SLOT( requestStyleReset() ) );

@@ -91,7 +91,8 @@ void FileLoader::run()
             QDateTime sourceLastModified;
             QDateTime cacheLastModified;
 
-            if ( QFile::exists( defaultsrcname ) ) {
+            if ( QFile::exists( defaultsrcname ) )
+            {
                 sourceLastModified = QFileInfo( defaultsrcname ).lastModified();
                 cacheLastModified  = QFileInfo( defaultcachename ).lastModified();
 
@@ -101,31 +102,36 @@ void FileLoader::run()
 
             bool loadok = false;
 
-            if ( !cacheoutdated ) {
+            if ( !cacheoutdated )
+            {
                 loadok = loadFile( defaultcachename );
                 if ( loadok )
                     emit newGeoDataDocumentAdded( m_document );
             }
             qDebug() << "Loading ended" << loadok;
-            if ( loadok ) {
+            if ( loadok )
+            {
                 qDebug() << "placemarksLoaded";
-                return;
             }
         }
-
-
-        if ( QFile::exists( defaultsrcname ) ) {
-            // Read the KML file.
-            importKml( defaultsrcname );
-        }
-        else {
-            qDebug() << "No Default Placemark Source File for " << m_filepath;
-            emit fileLoaderFailed( this );
+        else
+        {
+            if ( QFile::exists( defaultsrcname ) )
+            {
+                // Read the KML file.
+                importKml( defaultsrcname );
+            }
+            else
+            {
+                qDebug() << "No Default Placemark Source File for " << m_filepath;
+            }
         }
     } else {
         // Read the KML Data
         importKmlFromData();
     }
+
+    emit loaderFinished( this );
 }
 
 const quint32 MarbleMagicNumber = 0x31415926;

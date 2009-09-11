@@ -30,7 +30,7 @@ class FileLoader : public QThread
         QString path() const;
 
     Q_SIGNALS:
-        void fileLoaderFailed( FileLoader* );
+        void loaderFinished( FileLoader* );
         void newGeoDataDocumentAdded( GeoDataDocument* );
     private:
         void importKml( const QString& filename );
