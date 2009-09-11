@@ -14,11 +14,12 @@
 #define FILEVIEWMODEL_H
 
 #include <QtCore/QAbstractListModel>
-#include <QtCore/QList>
-#include <QtCore/QModelIndex>
 #include <QtCore/QVariant>
+#include <QtGui/QItemSelectionModel>
 
 #include "marble_export.h"
+
+#include "PlacemarkManager.h"
 
 namespace Marble
 {
@@ -38,11 +39,8 @@ class MARBLE_EXPORT FileViewModel : public QAbstractListModel
     virtual Qt::ItemFlags flags( const QModelIndex& index ) const;
     virtual bool setData(const QModelIndex& index, const QVariant& value, int role = Qt::EditRole );
 
-    void setSelectedIndex( const QModelIndex& index );
-    void append( AbstractFileViewItem* item );
-    void remove( const QModelIndex& index );
-    
-    QStringList containers() const;
+    void setPlacemarkManager( PlacemarkManager * placemarkManager );
+    QItemSelectionModel * selectionModel();
 
   Q_SIGNALS:
     void modelChanged();
@@ -50,13 +48,14 @@ class MARBLE_EXPORT FileViewModel : public QAbstractListModel
   public slots:
     void saveFile();
     void closeFile();
+    void append( int item );
+    void remove( int item );
 
   private:
     Q_DISABLE_COPY( FileViewModel )
-    QModelIndex m_selectedIndex;
-    QList < AbstractFileViewItem* > m_itemList;
+    QItemSelectionModel *m_selectionModel;
+    PlacemarkManager *m_manager;
     
-    int indexStart( const QModelIndex& index );
 };
 
 }

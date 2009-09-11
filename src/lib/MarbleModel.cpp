@@ -700,7 +700,7 @@ void MarbleModel::openGpxFile( const QString& filename )
     GpxFile* gpxFile = new GpxFile( filename );
     GpxFileViewItem* item = new GpxFileViewItem( gpxFile );
 
-    d->m_dataFacade->fileViewModel()->append( item );
+    d->m_placemarkmanager->addFile( item );
     d->m_gpxFileModel->addFile( gpxFile );
 }
 

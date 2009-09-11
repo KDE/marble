@@ -270,7 +270,9 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 
     //set up everything for the FileModel
     d->uiWidget.m_fileView->setModel( widget->fileViewModel() );
-
+    delete d->uiWidget.m_fileView->selectionModel();
+    d->uiWidget.m_fileView->setSelectionModel(
+            widget->fileViewModel()->selectionModel());
     connect( d->uiWidget.m_fileView->selectionModel(),
 	     SIGNAL( selectionChanged( QItemSelection, QItemSelection )),
 	     this,

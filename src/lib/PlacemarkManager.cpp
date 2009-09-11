@@ -48,6 +48,7 @@ class PlacemarkManagerPrivate
         MarbleDataFacade* m_datafacade;
         QList<PlacemarkLoader*> m_loaderList;
         QStringList m_pathList;
+        QList < AbstractFileViewItem* > m_fileItemList;
 };
 }
 
@@ -67,6 +68,11 @@ PlacemarkManager::~PlacemarkManager()
         }
     }
 
+    foreach( AbstractFileViewItem *file, d->m_fileItemList)
+    {
+        delete file;
+    }
+
     delete d;
 }
 
@@ -78,11 +84,16 @@ MarblePlacemarkModel* PlacemarkManager::model() const
 void PlacemarkManager::setDataFacade( MarbleDataFacade *facade )
 {
     d->m_datafacade = facade;
+    d->m_datafacade->fileViewModel()->setPlacemarkManager(this);
 }
 
 QStringList PlacemarkManager::containers() const
 {
-    return d->m_datafacade->fileViewModel()->containers() + d->m_pathList;
+    QStringList retList;
+    for( int line = 0; line < d->m_fileItemList.count(); ++line ) {
+        retList << d->m_fileItemList.at( line )->name();
+    }
+    return retList + d->m_pathList;
 }
 
 QString PlacemarkManager::toRegularName( QString name )
@@ -102,12 +113,11 @@ void PlacemarkManager::addPlacemarkFile( const QString& filepath )
 
 void PlacemarkManager::addGeoDataDocument( GeoDataDocument* document )
 {
-    AbstractFileViewItem* item = new KmlFileViewItem( *this, *document );
-
-    d->m_datafacade->fileViewModel()->append( item );
+    KmlFileViewItem* item = new KmlFileViewItem( *this, *document );
+    addFile( item );
 
     // now get the document that will be preserved throughout the life time
-    GeoDataDocument* doc = dynamic_cast<KmlFileViewItem*>(item)->document();
+    GeoDataDocument* doc = item->document();
     // remove the hashes in front of the styles.
     QVector<GeoDataFeature>::Iterator end = doc->end();
     QVector<GeoDataFeature>::Iterator itr = doc->begin();
@@ -135,15 +145,53 @@ void PlacemarkManager::addPlacemarkData( const QString& data, const QString& key
 void PlacemarkManager::removePlacemarkKey( const QString& key )
 {
     QString nkey = key;
-    FileViewModel *fileViewModel = d->m_datafacade->fileViewModel();
     qDebug() << "trying to remove file:" << key;
-    for( int i = 0; i < fileViewModel->rowCount(); ++i )
+    for( int i = 0; i < d->m_fileItemList.size(); ++i )
     {
-        if( toRegularName( nkey ) == toRegularName( fileViewModel->data(fileViewModel->index(i, 0)).toString() ) ) {
-            fileViewModel->remove(fileViewModel->index(i, 0));
+        if( toRegularName( nkey ) == toRegularName( d->m_fileItemList.at(i)->name() ) ) {
+            closeFile(i);
             break;
         }
-    };
+    }
+}
+
+void PlacemarkManager::addFile ( AbstractFileViewItem * item )
+{
+    d->m_fileItemList.append( item );
+    emit fileAdded(d->m_fileItemList.indexOf( item ) );
+}
+
+void PlacemarkManager::saveFile( int index )
+{
+    if (index < d->m_fileItemList.size() )
+    {
+        d->m_fileItemList.at( index )->saveFile();
+    }
+}
+
+void PlacemarkManager::closeFile( int index )
+{
+    if (index < d->m_fileItemList.size() )
+    {
+        d->m_fileItemList.at( index )->closeFile( indexStart( index ));
+        delete d->m_fileItemList.at( index );
+        d->m_fileItemList.removeAt( index );
+        emit fileRemoved( index );
+    }
+}
+
+int PlacemarkManager::size() const
+{
+    return d->m_fileItemList.size();
+}
+
+AbstractFileViewItem * PlacemarkManager::at( int index )
+{
+    if (index < d->m_fileItemList.size() )
+    {
+        return d->m_fileItemList.at( index );
+    }
+    return 0;
 }
 
 void PlacemarkManager::appendLoader( PlacemarkLoader *loader )
@@ -187,6 +235,15 @@ void PlacemarkManager::loadPlacemarkContainer( PlacemarkLoader* loader, Placemar
          d->m_pathList.removeAll( loader->path() );
          delete loader;
     }
+}
+
+int PlacemarkManager::indexStart( int index )
+{
+    int start = 0;
+    for( int i = 0; i < index; i++ ) {
+        start += d->m_fileItemList.at( i )->size();
+    }
+    return start;
 }
 
 #include "PlacemarkManager.moc"

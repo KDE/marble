@@ -88,9 +88,19 @@ class PlacemarkManager : public QObject
     */
     void addPlacemarkData( const QString& data, const QString& key );
 
+    void addFile( AbstractFileViewItem * item );
+    void saveFile( int index );
+    void closeFile( int index );
+
+    int size() const;
+    AbstractFileViewItem * at( int index );
+
+
  Q_SIGNALS:
     void geoDataDocumentAdded( const GeoDataDocument& );
     void finalize();
+    void fileAdded( int index );
+    void fileRemoved( int index );
 
  private Q_SLOTS:
     void loadPlacemarkContainer( PlacemarkLoader* loader, PlacemarkContainer * );
@@ -98,6 +108,8 @@ class PlacemarkManager : public QObject
     void addGeoDataDocument( GeoDataDocument* );
 
  private:
+
+    int indexStart( int index );
 
     void appendLoader( PlacemarkLoader *loader );
 

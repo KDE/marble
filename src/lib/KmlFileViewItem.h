@@ -32,10 +32,10 @@ class KmlFileViewItem : public AbstractFileViewItem
      */
     virtual void saveFile();
     virtual void closeFile( int start, bool finalize = true );
-    virtual QVariant data( int role = Qt::DisplayRole ) const;
     virtual bool isShown() const;
     virtual void setShown( bool value );
     virtual int size() const;
+    virtual QString name() const;
 
     GeoDataDocument* document();
   private:

@@ -46,20 +46,6 @@ void KmlFileViewItem::closeFile( int start, bool finalize )
     m_placemarkManager.model()->removePlacemarks( m_document.fileName(), start, size(), finalize );
 }
 
-QVariant KmlFileViewItem::data( int role ) const
-{
-    if( role == Qt::DisplayRole ) {
-        if(!m_document.name().isEmpty())
-            return m_document.name();
-        else if(!m_document.fileName().isEmpty())
-            return m_document.fileName();
-        else
-            return QString("KML Document");
-    }
-    else
-        return QVariant();
-}
-
 int KmlFileViewItem::size() const
 {
     return m_document.placemarks().size();
@@ -73,4 +59,15 @@ bool KmlFileViewItem::isShown() const
 void KmlFileViewItem::setShown( bool value )
 {
     m_document.setVisible( value );
+}
+
+QString KmlFileViewItem::name() const
+{
+    if(!m_document.name().isEmpty())
+        return m_document.name();
+    else if(!m_document.fileName().isEmpty())
+        return m_document.fileName();
+    else
+        return QString("KML Document");
+
 }

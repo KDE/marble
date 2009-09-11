@@ -62,16 +62,6 @@ void GpxFileViewItem::closeFile( int start, bool finalize )
     //TODO
 }
 
-QVariant GpxFileViewItem::data( int role ) const
-{
-    if( role == Qt::DisplayRole )
-        return m_gpxFile->display();
-    else if( role == AbstractFileViewItem::FilePointerRole )
-        return qVariantFromValue(m_gpxFile);
-    else
-        return QVariant();
-}
-
 bool GpxFileViewItem::isShown() const
 {
     return (m_gpxFile->checkState() == Qt::Checked );
@@ -80,4 +70,9 @@ bool GpxFileViewItem::isShown() const
 void GpxFileViewItem::setShown( bool value )
 {
     m_gpxFile->setCheckState( value );
+}
+
+QString GpxFileViewItem::name() const
+{
+    return m_gpxFile->display();
 }

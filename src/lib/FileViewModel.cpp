@@ -15,27 +15,23 @@
 // Other
 #include "AbstractFileViewItem.h"
 
-#include <QStringList>
-
 using namespace Marble;
 
 FileViewModel::FileViewModel( QObject* parent ) :
-    QAbstractListModel( parent )
+    QAbstractListModel( parent ),
+    m_selectionModel(new QItemSelectionModel(this))
 {
 }
 
 FileViewModel::~FileViewModel()
 {
-    foreach ( AbstractFileViewItem* item, m_itemList ) {
-        delete item;
-    }
 }
 
 int FileViewModel::rowCount( const QModelIndex & parent ) const
 {
     Q_UNUSED( parent );
 
-    return m_itemList.count();
+    return m_manager->size();
 }
 
 QVariant FileViewModel::data( const QModelIndex & index, int role ) const
@@ -46,15 +42,15 @@ QVariant FileViewModel::data( const QModelIndex & index, int role ) const
 
     int row = index.row();
 
-    if ( row < m_itemList.count() ) {
+    if ( row < m_manager->size() ) {
         if ( index.column() == 0 ) {
-            const AbstractFileViewItem& item = *m_itemList.at( row );
+            const AbstractFileViewItem& item = *m_manager->at( row );
 
             if ( role == Qt::CheckStateRole ) {
                 return item.isShown () ? Qt::Checked : Qt::Unchecked;
             }
-            else {
-                return item.data( role );
+            if ( role == Qt::DisplayRole ) {
+                return item.name();
             }
         }
     }
@@ -71,17 +67,6 @@ Qt::ItemFlags FileViewModel::flags( const QModelIndex & index ) const
                           Qt::ItemIsSelectable );
 }
 
-QStringList FileViewModel::containers() const
-{
-    QStringList retList;
-
-    for( int line = 0; line < m_itemList.count(); ++line ) {
-        retList << m_itemList.at( line )->data().toString();
-    }
-    
-    return retList;
-}
-
 bool FileViewModel::setData( const QModelIndex& index, const QVariant& value, int role )
 {
     if ( !index.isValid() ) {
@@ -90,11 +75,11 @@ bool FileViewModel::setData( const QModelIndex& index, const QVariant& value, in
 
     int row = index.row();
 
-    if ( row < m_itemList.count() ) {
+    if ( row < m_manager->size() ) {
         if ( index.column() == 0 ) {
             if ( role == Qt::CheckStateRole ) {
 
-                AbstractFileViewItem& item = *m_itemList.at( row );
+                AbstractFileViewItem& item = *m_manager->at( row );
                 bool newValue = value.toBool ();
 
                 if ( item.isShown() != newValue ) {
@@ -111,76 +96,47 @@ bool FileViewModel::setData( const QModelIndex& index, const QVariant& value, in
     return false;
 }
 
-void FileViewModel::setSelectedIndex( const QModelIndex& index )
-{
-    m_selectedIndex = index;
-}
-
-void FileViewModel::append( AbstractFileViewItem* item )
-{
-    m_itemList.append( item );
-    emit layoutChanged();
-    emit modelChanged();
-}
-
-void FileViewModel::remove( const QModelIndex& index )
-{
-    if ( index.isValid() ) {
-
-        int row = index.row();
-        int start = indexStart( index );
-        if ( row < m_itemList.count() ) {
-            if ( index.column() == 0 ) {
-
-                AbstractFileViewItem *item = m_itemList.at( row );
-                item->closeFile( start );
-
-                delete item;
-                m_itemList.removeAt( row );
-
-                emit layoutChanged();
-                emit modelChanged();
-            }
-        }
-    }
-}
-
 void FileViewModel::saveFile()
 {
-    if ( m_selectedIndex.isValid() ) {
-
-        int row = m_selectedIndex.row();
-
-        if ( row < m_itemList.count() ) {
-            if ( m_selectedIndex.column() == 0 ) {
-
-                AbstractFileViewItem& item = *m_itemList.at( row );
-                item.saveFile();
-
-/*                delete &item;
-                m_itemList.removeAt( row );
-
-                emit layoutChanged();
-                emit modelChanged();*/
-            }
-        }
+    if ( m_selectionModel->hasSelection() )
+    {
+        m_manager->saveFile( m_selectionModel->selectedRows().first().row() );
     }
 }
 
 void FileViewModel::closeFile()
 {
-    remove( m_selectedIndex );
+    if ( m_selectionModel->hasSelection() )
+    {
+        m_manager->closeFile( m_selectionModel->selectedRows().first().row() );
+    }
+}
+void FileViewModel::setPlacemarkManager( PlacemarkManager *placemarkManager)
+{
+    m_manager = placemarkManager;
+    connect (m_manager, SIGNAL(fileAdded(int)),
+             this, SLOT(append(int)));
+    connect (m_manager, SIGNAL(fileRemoved(int)),
+             this, SLOT(remove(int)));
 }
 
-int FileViewModel::indexStart( const QModelIndex& index )
+QItemSelectionModel * FileViewModel::selectionModel()
 {
-    int start = 0;
-    if ( index.isValid() ) {
-        for( int i = 0; i < index.row(); i++ ) {
-            start += m_itemList.at( i )->size();
-        };
-    }
-    return start;
+    return m_selectionModel;
+}
+
+void FileViewModel::append( int order )
+{
+    beginInsertRows(QModelIndex(), order, order);
+    endInsertRows();
+    emit modelChanged();
+}
+
+void FileViewModel::remove( int index )
+{
+    beginRemoveRows(QModelIndex(), index, index);
+    endRemoveRows();
+    emit modelChanged();
 }
 
 #include "FileViewModel.moc"

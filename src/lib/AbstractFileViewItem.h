@@ -29,9 +29,9 @@ class AbstractFileViewItem
     virtual void saveFile() = 0;
     virtual void closeFile( int start, bool finalize = true ) = 0;
     virtual int size() const { return 0; };
-    virtual QVariant data( int role = Qt::DisplayRole ) const = 0;
     virtual bool isShown() const = 0;
     virtual void setShown( bool value ) = 0;
+    virtual QString name() const = 0;
 };
 
 }

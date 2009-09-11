@@ -35,9 +35,9 @@ class GpxFileViewItem
      */
     virtual void saveFile();
     virtual void closeFile( int start, bool finalize = true );
-    virtual QVariant data( int role = Qt::DisplayRole ) const;
     virtual bool isShown() const;
     virtual void setShown( bool value );
+    virtual QString name() const;
 
   private:
     Q_DISABLE_COPY( GpxFileViewItem )
