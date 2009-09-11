@@ -130,6 +130,8 @@ set(marblewidget_SRCS
     #jsonparser.cpp
     VectorComposer.cpp
     VectorMap.cpp
+    FileLoader.cpp
+    FileManager.cpp
     FileViewModel.cpp
     GpxFileViewItem.cpp
     KmlFileViewItem.cpp

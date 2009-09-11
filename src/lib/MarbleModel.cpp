@@ -58,6 +58,7 @@
 #include "MarblePlacemarkModel.h"
 #include "MarbleGeometryModel.h"
 #include "MergedLayerDecorator.h"
+#include "FileManager.h"
 #include "PlacemarkManager.h"
 #include "PlacemarkLayout.h"
 #include "PlacemarkPainter.h"
@@ -87,6 +88,7 @@ class MarbleModelPrivate
           m_layerManager( 0 ),
           m_downloadManager( new HttpDownloadManager( QUrl(), new FileStoragePolicy(
                                                                    MarbleDirs::localPath() ))),
+          m_fileManager( 0 ),
           m_placemarkmanager( 0 )
     {
     }
@@ -117,6 +119,7 @@ class MarbleModelPrivate
     static VectorComposer   *m_veccomposer; // FIXME: Make not a pointer.
 
     // Places on the map
+    FileManager             *m_fileManager;
     PlacemarkManager        *m_placemarkmanager;
     PlacemarkLayout         *m_placemarkLayout;
     QSortFilterProxyModel   *m_popSortModel;
@@ -164,7 +167,8 @@ MarbleModel::MarbleModel( QObject *parent )
            in setMapTheme if the theme being loaded does need it. If the theme
            doesn't need it, it's left as is. */
     }
-
+    d->m_fileManager = new FileManager();
+    d->m_fileManager->setDataFacade(d->m_dataFacade);
     d->m_placemarkmanager = new PlacemarkManager();
     d->m_placemarkmanager->setDataFacade(d->m_dataFacade);
 
@@ -245,6 +249,7 @@ MarbleModel::~MarbleModel()
     }
     delete d->m_popSortModel;
     delete d->m_placemarkmanager;
+    delete d->m_fileManager;
     delete d->m_gpsLayer;
     delete d->m_mapTheme;
     delete d->m_timer;
