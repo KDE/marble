@@ -100,7 +100,6 @@ class MarbleModelPrivate
 
     void resize( int width, int height );
     void notifyModelChanged();
-    void geoDataDocumentAdded( const GeoDataDocument& document );
 
     static QAtomicInt       refCounter;
     MarbleModel             *m_parent;
@@ -172,8 +171,6 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_placemarkmanager = new PlacemarkManager();
     d->m_placemarkmanager->setDataFacade(d->m_dataFacade);
-    connect( d->m_fileManager, SIGNAL( geoDataDocumentAdded( const GeoDataDocument& ) ),
-             this,             SLOT( geoDataDocumentAdded( const GeoDataDocument& ) ) );
     d->m_placemarkmanager->setFileManager(d->m_fileManager);
 
     d->m_popSortModel = new QSortFilterProxyModel( this );
@@ -739,19 +736,6 @@ QVector<QModelIndex> MarbleModel::whichFeatureAt( const QPoint& curpos ) const
 void MarbleModelPrivate::notifyModelChanged()
 {
     emit m_parent->modelChanged();
-}
-
-void MarbleModelPrivate::geoDataDocumentAdded( const GeoDataDocument& document )
-{
-    Q_UNUSED(document);
-/*    QVector<GeoDataFeature>::Iterator end = document->end();
-    QVector<GeoDataFeature>::Iterator itr = document->begin();
-    for ( ; itr != end; ++itr ) {
-        // use *itr (or itr.value()) here
-        QString styleUrl = itr->styleUrl().remove('#');
-        itr->setStyle( &document->style( styleUrl ) );
-    }
-*/
 }
 
 void MarbleModel::update()

@@ -200,7 +200,6 @@ void FileManager::addGeoDataDocument( GeoDataDocument* document )
     // do not set this file if it only contains points
     if( doc->isVisible() && d->m_datafacade->geometryModel() )
         d->m_datafacade->geometryModel()->setGeoDataRoot( doc );
-    emit geoDataDocumentAdded( *doc );
 
     if( d->m_loaderList.isEmpty() ) {
         emit finalize();

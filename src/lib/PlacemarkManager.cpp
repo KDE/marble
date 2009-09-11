@@ -24,7 +24,6 @@
 #include "FileViewModel.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
-#include "MarbleGeometryModel.h"
 #include "MarbleDataFacade.h"
 
 #include "GeoDataDocument.h"

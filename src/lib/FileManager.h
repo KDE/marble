@@ -88,7 +88,6 @@ class FileManager : public QObject
 
 
  Q_SIGNALS:
-    void geoDataDocumentAdded( const GeoDataDocument &document );
     void fileAdded( int index );
     void fileRemoved( int index );
     void finalize();

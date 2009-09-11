@@ -15,7 +15,6 @@
 #include "FileManager.h"
 #include "MarbleDataFacade.h"
 #include "MarblePlacemarkModel.h"
-#include "MarbleGeometryModel.h"
 
 #include <QtCore/QDebug>
 

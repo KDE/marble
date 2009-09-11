@@ -110,12 +110,6 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
                            int start,
                            int length );
 
- Q_SIGNALS:
-    /**
-     * @brief Signal that the persistant Index has been updated
-     */
-    void indexUpdated();
-
  private:
 
     void createFilterProperties( QVector<Marble::GeoDataPlacemark> &container );

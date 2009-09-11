@@ -43,7 +43,6 @@ public:
 public slots:
     void newText(QString text);
 signals:
-    void allDone();
     void modelChanged( MarblePlacemarkModel *model );
 
 private slots:
