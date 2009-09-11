@@ -160,8 +160,7 @@ void MarblePlacemarkModel::addPlacemarks( QVector<Marble::GeoDataPlacemark> &pla
     d->m_placemarkContainer << placemarks;
 
     endInsertRows();
-
-    emit dataChanged( index( length, 0 ), index( length + placemarks.count() - 1, 0 ) );
+    emit layoutChanged();
 }
 
 void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
@@ -171,14 +170,12 @@ void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
     QTime t;
     t.start();
 
-    beginRemoveRows( QModelIndex(), 0, length );
+    beginRemoveRows( QModelIndex(), start, start + length );
     QVector<Marble::GeoDataPlacemark>::iterator begin = d->m_placemarkContainer.begin() + start;
-    QVector<Marble::GeoDataPlacemark>::iterator end = d->m_placemarkContainer.begin() + start + length;
+    QVector<Marble::GeoDataPlacemark>::iterator end = begin + length;
     d->m_placemarkContainer.erase(begin, end);
     endRemoveRows();
-
-    // there have not been any additions, but without the following line marble seems to crash here.
-    emit dataChanged( index( 0, 0 ), index( 0, 0 ) );
+    emit layoutChanged();
     qDebug() << "removePlacemarks(" << containerName << "): Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
 }
 
