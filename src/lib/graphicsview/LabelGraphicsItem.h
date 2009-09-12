@@ -32,6 +32,7 @@ class MARBLE_EXPORT LabelGraphicsItem : public FrameGraphicsItem
 {
  public:
     explicit LabelGraphicsItem( MarbleGraphicsItem *parent = 0 );
+    ~LabelGraphicsItem();
 
     QString text() const;
     void setText( const QString& text );

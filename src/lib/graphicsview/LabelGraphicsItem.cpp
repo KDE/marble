@@ -61,6 +61,11 @@ LabelGraphicsItem::LabelGraphicsItem( MarbleGraphicsItem *parent )
 {
 }
 
+LabelGraphicsItem::~LabelGraphicsItem()
+{
+    delete d;
+}
+
 QString LabelGraphicsItem::text() const
 {
     return d->m_text;
