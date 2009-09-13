@@ -51,16 +51,17 @@ GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
                      << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
             return static_cast<GeoDataDocument*>(&parentItem.nodeAs<GeoDataContainer>()->last());
-        } else {
-            return 0;
         }
-    } else {
-        GeoDataDocument* doc = geoDataDoc( parser );
+        else if ( parentItem.first.first == kmlTag_kml)
+        {
+            GeoDataDocument* doc = geoDataDoc( parser );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Document << "> document: " << doc;
+            qDebug() << "Parsed <" << kmlTag_Document << "> document: " << doc;
 #endif
-        return doc;
+            return doc;
+        }
     }
+    return 0;
 }
 
 }

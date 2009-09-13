@@ -158,6 +158,20 @@ void GeoParser::parseDocument()
 #if DUMP_PARENT_STACK > 0
         dumpParentStack( name().toString(), m_nodeStack.size(), false );
 #endif
+        while ( !atEnd() ) {
+            readNext();
+            if ( isEndElement() ) {
+                m_nodeStack.pop();
+#if DUMP_PARENT_STACK > 0
+                dumpParentStack( name().toString(), m_nodeStack.size(), true );
+#endif
+                break;
+            }
+
+            if ( isStartElement() ) {
+                parseDocument();
+            }
+        }
     }
 #if DUMP_PARENT_STACK > 0
     else {
@@ -169,21 +183,6 @@ void GeoParser::parseDocument()
         dumpParentStack( name().toString() + "-discarded", m_nodeStack.size(), true );
     }
 #endif
-
-    while ( !atEnd() ) {
-        readNext();
-        if ( isEndElement() ) {
-            m_nodeStack.pop();
-#if DUMP_PARENT_STACK > 0
-            dumpParentStack( name().toString(), m_nodeStack.size(), true );
-#endif
-            break;
-        }
-
-        if ( isStartElement() ) {
-            parseDocument();
-        }
-    }
 }
 
 void GeoParser::raiseRootElementError()
