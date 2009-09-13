@@ -67,13 +67,13 @@ void FileLoader::run()
 
         if ( fileinfo.isAbsolute() ) {
             // We got an _absolute_ path now: e.g. "/patrick.kml"
-            defaultcachename = path + name + ".cache";
+            defaultcachename = path + '/' + name + ".cache";
             defaultsrcname   = path + '/' + name + '.' + suffix;
         }
         else {
             if ( m_filepath.contains( '/' ) ) {
                 // _relative_ path: "maps/mars/viking/patrick.kml"
-                defaultcachename = MarbleDirs::path( path + name + ".cache" );
+                defaultcachename = MarbleDirs::path( path + '/' + name + ".cache" );
                 defaultsrcname   = MarbleDirs::path( path + '/' + name + '.' + suffix);
             }
             else {
