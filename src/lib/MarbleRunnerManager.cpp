@@ -42,6 +42,7 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
       m_lastString(""),
       m_model(new MarblePlacemarkModel)
 {
+    m_model->setPlacemarkContainer(&m_placemarkContainer);
     qRegisterMetaType<QVector<GeoDataPlacemark> >("QVector<GeoDataPlacemark>");
 }
 
@@ -60,14 +61,9 @@ MarbleRunnerManager::~MarbleRunnerManager()
 
 void MarbleRunnerManager::newText(QString text)
 {
-    if( text != m_lastString ) {
-        m_lastString = text;
-        qDebug() << "Creating new model";
-        MarblePlacemarkModel *model = new MarblePlacemarkModel(0);
-        emit modelChanged( model );
-        delete m_model;
-        m_model = model;
-    }
+    m_lastString = text;
+    m_placemarkContainer.clear();
+    emit modelChanged( m_model );
 
     LatLonRunner* llrunner = new LatLonRunner;
     m_runners << dynamic_cast<MarbleAbstractRunner*>(llrunner);
@@ -94,8 +90,9 @@ void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVec
     if( result.isEmpty() )
         return;
 
-    m_model->addPlacemarks( result );
-
+    int start = m_placemarkContainer.size();
+    m_placemarkContainer << result;
+    m_model->addPlacemarks( start, result.size() );
     emit modelChanged( m_model );
 }
 

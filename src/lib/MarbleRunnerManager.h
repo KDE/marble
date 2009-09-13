@@ -53,6 +53,7 @@ private:
     QString m_lastString;
     MarblePlacemarkModel *m_model;
     QList<MarbleAbstractRunner*> m_runners;
+    QVector<GeoDataPlacemark> m_placemarkContainer;
     
 };
 

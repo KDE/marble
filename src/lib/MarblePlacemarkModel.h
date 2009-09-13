@@ -10,7 +10,7 @@
 //
 
 //
-// MarblePlacemarkModel resembles the model for Placemarks
+// MarblePlacemarkModel exposes the model for Placemarks
 //
 
 
@@ -64,7 +64,6 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
     /**
      * Creates a new place mark model.
      *
-     * @param manager The place mark manager on which the model shall work.
      * @param parent The parent object.
      */
     explicit MarblePlacemarkModel( QObject *parent = 0 );
@@ -73,7 +72,9 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      * Destroys the place mark model.
      */
     ~MarblePlacemarkModel();
-	
+
+    void setPlacemarkContainer( QVector<Marble::GeoDataPlacemark> *container );
+
     /**
      * Return the number of Placemarks in the Model.
      */
@@ -95,16 +96,13 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
     /**
      * This method is used by the PlacemarkManager to add new
      * place marks to the model.
-     *
-     * Note: The model takes ownership of the place marks!
      */
-    void addPlacemarks( QVector<Marble::GeoDataPlacemark> &placemarks );
+    void addPlacemarks( int start,
+                        int length );
 
     /**
      * This method is used by the PlacemarkManager to remove
      * place marks from the model.
-     *
-     * Note: The model takes ownership of the place marks!
      */
     void removePlacemarks( const QString &containerName,
                            int start,
@@ -112,16 +110,9 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
 
  private:
 
-    void createFilterProperties( QVector<Marble::GeoDataPlacemark> &container );
-
     Q_DISABLE_COPY( MarblePlacemarkModel )
     class Private;
     Private* const d;
-
- protected:
-    int cityPopIdx( qint64 population ) const;
-    int spacePopIdx( qint64 diameter ) const;
-    int areaPopIdx( qreal area ) const;
 };
 
 }

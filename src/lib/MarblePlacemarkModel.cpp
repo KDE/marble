@@ -37,7 +37,7 @@ class MarblePlacemarkModel::Private
     {
     }
 
-    QVector<Marble::GeoDataPlacemark>     m_placemarkContainer;
+    QVector<Marble::GeoDataPlacemark>     *m_placemarkContainer;
 };
 
 
@@ -52,15 +52,18 @@ MarblePlacemarkModel::MarblePlacemarkModel( QObject *parent )
 
 MarblePlacemarkModel::~MarblePlacemarkModel()
 {
-    d->m_placemarkContainer.clear();
     delete d;
 }
 
+void MarblePlacemarkModel::setPlacemarkContainer( QVector<Marble::GeoDataPlacemark> *container )
+{
+    d->m_placemarkContainer = container;
+}
 
 int MarblePlacemarkModel::rowCount( const QModelIndex &parent ) const
 {
     if ( !parent.isValid() )
-        return d->m_placemarkContainer.size();
+        return d->m_placemarkContainer->size();
     else
         return 0;
 }
@@ -78,37 +81,37 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
     if ( !index.isValid() )
         return QVariant();
 
-    if ( index.row() >= d->m_placemarkContainer.size() )
+    if ( index.row() >= d->m_placemarkContainer->size() )
         return QVariant();
 
     if ( role == Qt::DisplayRole ) {
-        return d->m_placemarkContainer.at( index.row() ).name();
+        return d->m_placemarkContainer->at( index.row() ).name();
     } else if ( role == Qt::DecorationRole ) {
-          return qVariantFromValue( d->m_placemarkContainer.at( index.row() ).style()->iconStyle().icon() );
+          return qVariantFromValue( d->m_placemarkContainer->at( index.row() ).style()->iconStyle().icon() );
     } else if ( role == PopularityIndexRole ) {
-        return d->m_placemarkContainer.at( index.row() ).popularityIndex();
+        return d->m_placemarkContainer->at( index.row() ).popularityIndex();
     } else if ( role == VisualCategoryRole ) {
-        return d->m_placemarkContainer.at( index.row() ).visualCategory();
+        return d->m_placemarkContainer->at( index.row() ).visualCategory();
     } else if ( role == AreaRole ) {
-        return d->m_placemarkContainer.at( index.row() ).area();
+        return d->m_placemarkContainer->at( index.row() ).area();
     } else if ( role == PopulationRole ) {
-        return d->m_placemarkContainer.at( index.row() ).population();
+        return d->m_placemarkContainer->at( index.row() ).population();
     } else if ( role == CountryCodeRole ) {
-        return d->m_placemarkContainer.at( index.row() ).countryCode();
+        return d->m_placemarkContainer->at( index.row() ).countryCode();
     } else if ( role == PopularityRole ) {
-        return d->m_placemarkContainer.at( index.row() ).popularity();
+        return d->m_placemarkContainer->at( index.row() ).popularity();
     } else if ( role == DescriptionRole ) {
-        return d->m_placemarkContainer.at( index.row() ).description();
+        return d->m_placemarkContainer->at( index.row() ).description();
     } else if ( role == Qt::ToolTipRole ) {
-        return d->m_placemarkContainer.at( index.row() ).description();
+        return d->m_placemarkContainer->at( index.row() ).description();
     } else if ( role == GeoTypeRole ) {
-        return d->m_placemarkContainer.at( index.row() ).role();
+        return d->m_placemarkContainer->at( index.row() ).role();
     } else if ( role == CoordinateRole ) {
-        return qVariantFromValue( d->m_placemarkContainer.at( index.row() ).coordinate() );
+        return qVariantFromValue( d->m_placemarkContainer->at( index.row() ).coordinate() );
     } else if ( role == StyleRole ) {
-        return qVariantFromValue( d->m_placemarkContainer.at( index.row() ).style() );
+        return qVariantFromValue( d->m_placemarkContainer->at( index.row() ).style() );
 /*    } else if ( role == ObjectPointerRole ) {
-        return qVariantFromValue( dynamic_cast<GeoDataObject*>( d->m_placemarkContainer.at( index.row() ) ) );*/
+        return qVariantFromValue( dynamic_cast<GeoDataObject*>( d->m_placemarkContainer->at( index.row() ) ) );*/
     } else
         return QVariant();
 }
@@ -149,18 +152,15 @@ QModelIndexList MarblePlacemarkModel::approxMatch( const QModelIndex & start, in
     return results;
 }
 
-void MarblePlacemarkModel::addPlacemarks( QVector<Marble::GeoDataPlacemark> &placemarks )
+void MarblePlacemarkModel::addPlacemarks( int start,
+                                          int length )
 {
-    if( placemarks.count() <= 0 )
-        return;
-
-    const int length = d->m_placemarkContainer.count();
-    beginInsertRows( QModelIndex(), length, length + placemarks.count() - 1 );
-    createFilterProperties( placemarks );
-    d->m_placemarkContainer << placemarks;
-
+    QTime t;
+    t.start();
+    beginInsertRows( QModelIndex(), start, start + length );
     endInsertRows();
     emit layoutChanged();
+    qDebug() << "addPlacemarks: Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
 }
 
 void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
@@ -169,233 +169,10 @@ void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
 {
     QTime t;
     t.start();
-
     beginRemoveRows( QModelIndex(), start, start + length );
-    QVector<Marble::GeoDataPlacemark>::iterator begin = d->m_placemarkContainer.begin() + start;
-    QVector<Marble::GeoDataPlacemark>::iterator end = begin + length;
-    d->m_placemarkContainer.erase(begin, end);
     endRemoveRows();
     emit layoutChanged();
     qDebug() << "removePlacemarks(" << containerName << "): Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
-}
-
-void MarblePlacemarkModel::createFilterProperties( QVector<Marble::GeoDataPlacemark> &container )
-{
-
-    QVector<GeoDataPlacemark>::Iterator i;
-    for ( i = container.begin(); i != container.end(); ++i ) {
-        GeoDataPlacemark& placemark = *i;
-
-        bool hasPopularity = false;
-
-        // Mountain (H), Volcano (V), Shipwreck (W)
-        if ( placemark.role() == 'H' || placemark.role() == 'V' || placemark.role() == 'W' )
-        {
-            qreal altitude = placemark.coordinate().altitude();
-            if ( altitude != 0.0 )
-            {
-                hasPopularity = true;
-                placemark.setPopularity( (qint64)(altitude * 1000.0) );
-                placemark.setPopularityIndex( cityPopIdx( qAbs( (qint64)(altitude * 1000.0) ) ) );
-            }
-        }
-        // Continent (K), Ocean (O), Nation (S)
-        else if ( placemark.role() == 'K' || placemark.role() == 'O' || placemark.role() == 'S' )
-        {
-            qreal area = placemark.area();
-            if ( area >= 0.0 )
-            {
-                hasPopularity = true;
-//                qDebug() << placemark->name() << " " << (qint64)(area);
-                placemark.setPopularity( (qint64)(area * 100) );
-                placemark.setPopularityIndex( areaPopIdx( area ) );
-            }
-        }
-        // Pole (P)
-        else if ( placemark.role() == 'P' )
-        {
-            placemark.setPopularity( 1000000000 );
-            placemark.setPopularityIndex( 18 );
-        }
-        // Magnetic Pole (M)
-        else if ( placemark.role() == 'M' )
-        {
-            placemark.setPopularity( 10000000 );
-            placemark.setPopularityIndex( 13 );
-        }
-        // MannedLandingSite (h)
-        else if ( placemark.role() == 'h' )
-        {
-            placemark.setPopularity( 1000000000 );
-            placemark.setPopularityIndex( 18 );
-        }
-        // RoboticRover (r)
-        else if ( placemark.role() == 'r' )
-        {
-            placemark.setPopularity( 10000000 );
-            placemark.setPopularityIndex( 16 );
-        }
-        // UnmannedSoftLandingSite (u)
-        else if ( placemark.role() == 'u' )
-        {
-            placemark.setPopularity( 1000000 );
-            placemark.setPopularityIndex( 14 );
-        }
-        // UnmannedSoftLandingSite (i)
-        else if ( placemark.role() == 'i' )
-        {
-            placemark.setPopularity( 1000000 );
-            placemark.setPopularityIndex( 14 );
-        }
-        // Space Terrain: Craters, Maria, Montes, Valleys, etc.
-        else if (    placemark.role() == 'm' || placemark.role() == 'v' 
-                  || placemark.role() == 'o' || placemark.role() == 'c'
-                  || placemark.role() == 'a' )
-        {
-            qint64 diameter = placemark.population();
-            if ( diameter >= 0 )
-            {
-                hasPopularity = true;
-                placemark.setPopularity( diameter );
-                if ( placemark.role() == 'c' ) {
-                    placemark.setPopularityIndex( spacePopIdx( diameter ) );
-                    if ( placemark.name() == "Tycho" || placemark.name() == "Copernicus" ) {
-                        placemark.setPopularityIndex( 17 );
-                    }
-                }
-                else {
-                    placemark.setPopularityIndex( spacePopIdx( diameter ) );
-                }
-
-                if ( placemark.role() == 'a' && diameter == 0 ) {
-                    placemark.setPopularity( 1000000000 );
-                    placemark.setPopularityIndex( 18 );
-                }
-            }
-        }
-        else
-        {
-            qint64 population = placemark.population();
-            if ( population >= 0 )
-            {
-                hasPopularity = true;
-                placemark.setPopularity( population );
-                placemark.setPopularityIndex( cityPopIdx( population ) );
-            }
-        }
-
-//  Then we set the visual category:
-
-        if ( placemark.role() == 'H' )      placemark.setVisualCategory( GeoDataPlacemark::Mountain );
-        else if ( placemark.role() == 'V' ) placemark.setVisualCategory( GeoDataPlacemark::Volcano );
-
-        else if ( placemark.role() == 'm' ) placemark.setVisualCategory( GeoDataPlacemark::Mons );
-        else if ( placemark.role() == 'v' ) placemark.setVisualCategory( GeoDataPlacemark::Valley );
-        else if ( placemark.role() == 'o' ) placemark.setVisualCategory( GeoDataPlacemark::OtherTerrain );
-        else if ( placemark.role() == 'c' ) placemark.setVisualCategory( GeoDataPlacemark::Crater );
-        else if ( placemark.role() == 'a' ) placemark.setVisualCategory( GeoDataPlacemark::Mare );
-
-        else if ( placemark.role() == 'P' ) placemark.setVisualCategory( GeoDataPlacemark::GeographicPole );
-        else if ( placemark.role() == 'M' ) placemark.setVisualCategory( GeoDataPlacemark::MagneticPole );
-        else if ( placemark.role() == 'W' ) placemark.setVisualCategory( GeoDataPlacemark::ShipWreck );
-        else if ( placemark.role() == 'F' ) placemark.setVisualCategory( GeoDataPlacemark::AirPort );
-        else if ( placemark.role() == 'A' ) placemark.setVisualCategory( GeoDataPlacemark::Observatory );
-        else if ( placemark.role() == 'K' ) placemark.setVisualCategory( GeoDataPlacemark::Continent );
-        else if ( placemark.role() == 'O' ) placemark.setVisualCategory( GeoDataPlacemark::Ocean );
-        else if ( placemark.role() == 'S' ) placemark.setVisualCategory( GeoDataPlacemark::Nation );
-        else if ( placemark.role() == 'N' ) placemark.setVisualCategory( 
-            ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallCity )
-                + ( placemark.popularityIndex() -1 ) / 4 * 4 ) ) );
-        else if ( placemark.role() == 'R' ) placemark.setVisualCategory( 
-            ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallStateCapital )
-                + ( placemark.popularityIndex() -1 ) / 4 * 4 ) ) );
-        else if ( placemark.role() == 'C' || placemark.role() == 'B' ) placemark.setVisualCategory( 
-            ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallNationCapital )
-                + ( placemark.popularityIndex() -1 ) / 4 * 4 ) ) );
-
-        else if ( placemark.role() == ' ' && !hasPopularity && placemark.visualCategory() == GeoDataPlacemark::Unknown ) {
-            placemark.setVisualCategory( GeoDataPlacemark::Unknown ); // default location
-            placemark.setPopularityIndex(0);
-        }
-        else if ( placemark.role() == 'h' ) placemark.setVisualCategory( GeoDataPlacemark::MannedLandingSite );
-        else if ( placemark.role() == 'r' ) placemark.setVisualCategory( GeoDataPlacemark::RoboticRover );
-        else if ( placemark.role() == 'u' ) placemark.setVisualCategory( GeoDataPlacemark::UnmannedSoftLandingSite );
-        else if ( placemark.role() == 'i' ) placemark.setVisualCategory( GeoDataPlacemark::UnmannedHardLandingSite );
-
-        if ( placemark.role() == 'W' && placemark.popularityIndex() > 12 )
-            placemark.setPopularityIndex( 12 );
-        if ( placemark.role() == 'O' )
-            placemark.setPopularityIndex( 16 );
-        if ( placemark.role() == 'K' )
-            placemark.setPopularityIndex( 19 );
-        if ( !placemark.isVisible() ) {
-            placemark.setPopularityIndex( -1 );
-        }
-        // Workaround: Emulate missing "setVisible" serialization by allowing for population
-        // values smaller than -1 which are considered invisible.
-        if ( placemark.population() < -1 ) {
-            placemark.setPopularityIndex( -1 );
-        }
-    }
-
-}
-
-int MarblePlacemarkModel::cityPopIdx( qint64 population ) const
-{
-    int popidx = 15;
-
-    if ( population < 2500 )        popidx=1;
-    else if ( population < 5000)    popidx=2;
-    else if ( population < 7500)    popidx=3;
-    else if ( population < 10000)   popidx=4;
-    else if ( population < 25000)   popidx=5;
-    else if ( population < 50000)   popidx=6;
-    else if ( population < 75000)   popidx=7;
-    else if ( population < 100000)  popidx=8;
-    else if ( population < 250000)  popidx=9;
-    else if ( population < 500000)  popidx=10;
-    else if ( population < 750000)  popidx=11;
-    else if ( population < 1000000) popidx=12;
-    else if ( population < 2500000) popidx=13;
-    else if ( population < 5000000) popidx=14;
-
-    return popidx;
-}
-
-int MarblePlacemarkModel::spacePopIdx( qint64 population ) const
-{
-    int popidx = 18;
-
-    if ( population < 1000 )        popidx=1;
-    else if ( population < 2000)    popidx=2;
-    else if ( population < 4000)    popidx=3;
-    else if ( population < 6000)    popidx=4;
-    else if ( population < 8000)    popidx=5;
-    else if ( population < 10000)   popidx=6;
-    else if ( population < 20000)   popidx=7;
-
-    else if ( population < 40000  )  popidx=8;
-    else if ( population < 60000)    popidx=9;
-    else if ( population < 80000  )  popidx=10;
-    else if ( population < 100000)   popidx=11;
-    else if ( population < 200000 )  popidx=13;
-    else if ( population < 400000 )  popidx=15;
-    else if ( population < 600000 )  popidx=17;
-
-    return popidx;
-}
-
-int MarblePlacemarkModel::areaPopIdx( qreal area ) const
-{
-    int popidx = 17;
-    if      ( area <  200000  )      popidx=11;
-    else if ( area <  400000  )      popidx=12;
-    else if ( area < 1000000  )      popidx=13;
-    else if ( area < 2500000  )      popidx=14;
-    else if ( area < 5000000  )      popidx=15;
-    else if ( area < 10000000 )      popidx=16;
-
-    return popidx;
 }
 
 #include "MarblePlacemarkModel.moc"

@@ -22,6 +22,7 @@ namespace Marble
 
 class FileManager;
 class GeoDataDocument;
+class GeoDataPlacemark;
 class MarblePlacemarkModel;
 class MarbleDataFacade;
 class PlacemarkManagerPrivate;
@@ -75,6 +76,10 @@ public Q_SLOTS:
     void removeGeoDataDocument( int index );
 
  private:
+    void createFilterProperties( QVector<Marble::GeoDataPlacemark> &container );
+    int cityPopIdx( qint64 population ) const;
+    int spacePopIdx( qint64 diameter ) const;
+    int areaPopIdx( qreal area ) const;
 
     Q_DISABLE_COPY( PlacemarkManager )
 
