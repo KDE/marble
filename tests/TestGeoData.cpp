@@ -14,6 +14,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLatLonAltBox.h"
 
 namespace Marble
 {
@@ -27,6 +28,9 @@ class TestGeoData : public QObject
     void normalizeLatTest();
     void normalizeLonTest_data();
     void normalizeLonTest();
+    
+    void latLonAltBoxIntersects_data();
+    void latLonAltBoxIntersects();
 };
 
 /// test the nodeType function through various construction tests
@@ -63,13 +67,13 @@ void TestGeoData::nodeTypeTest()
     QCOMPARE( objectCopy.nodeType(), folderType );
 }
 
-void normalizeLatTest_data()
+void TestGeoData::normalizeLatTest_data()
 {
-    QTest::addColumn( "latRadian" );
+    QTest::addColumn<qreal>( "latRadian" );
 
     QTest::newRow( "north pole" ) << M_PI / 2;
     QTest::newRow( "south pole" ) << - M_PI / 2;
-    QTest::newRow( "somewhere" ) << 1;
+    QTest::newRow( "somewhere" ) << 1.0;
 }
 
 void TestGeoData::normalizeLatTest()
@@ -93,11 +97,11 @@ void TestGeoData::normalizeLatTest()
 
 void TestGeoData::normalizeLonTest_data()
 {
-    QTest::addColumn( "lonRadian" );
+    QTest::addColumn<qreal>( "lonRadian" );
 
     QTest::newRow( "half east" ) << M_PI / 2;
     QTest::newRow( "half west" ) << - M_PI / 2;
-    QTest::newRow( "somewhere" ) << 1;
+    QTest::newRow( "somewhere" ) << 1.0;
     QTest::newRow( "date line east" ) << M_PI;
     QTest::newRow( "date line west" ) << - M_PI;
 }
@@ -133,6 +137,66 @@ void TestGeoData::normalizeLonTest()
             QCOMPARE( GeoDataCoordinates::normalizeLon( lonDegree + i * 360, GeoDataCoordinates::Degree ), lonDegree );
         }
     }
+}
+
+void TestGeoData::latLonAltBoxIntersects_data()
+{
+    QTest::addColumn<qreal>( "box1north" );
+    QTest::addColumn<qreal>( "box1south" );
+    QTest::addColumn<qreal>( "box1west" );
+    QTest::addColumn<qreal>( "box1east" );
+    QTest::addColumn<qreal>( "box1minAltitude" );
+    QTest::addColumn<qreal>( "box1maxAltitude" );
+    QTest::addColumn<qreal>( "box2north" );
+    QTest::addColumn<qreal>( "box2south" );
+    QTest::addColumn<qreal>( "box2west" );
+    QTest::addColumn<qreal>( "box2east" );
+    QTest::addColumn<qreal>( "box2minAltitude" );
+    QTest::addColumn<qreal>( "box2maxAltitude" );
+    QTest::addColumn<bool>( "intersects" );
+    
+    QTest::newRow( "same" ) << 56.0 << 40.0 << 0.0 << 11.0 << 10.0 << 12.0
+                            << 56.0 << 40.0 << 0.0 << 11.0 << 10.0 << 12.0
+                            << true;
+    QTest::newRow( "dateLineFalse" ) << 30.0 << -30.0 << -170.0 << 170.0 << 0.0 << 0.0
+                                     << 30.0 << -30.0 << 171.0 << -171.0 << 0.0 << 0.0
+                                     << false;
+    QTest::newRow( "dateLineTrue" ) << 20.0 << 0.0 << -171.0 << 171.0 << 0.0 << 0.0
+                                    << 30.0 << -30.0 << 170.0 << -170.0 << 0.0 << 0.0
+                                    << true;
+}
+
+void TestGeoData::latLonAltBoxIntersects()
+{
+    QFETCH( qreal, box1north );
+    QFETCH( qreal, box1south );
+    QFETCH( qreal, box1west );
+    QFETCH( qreal, box1east );
+    QFETCH( qreal, box1minAltitude );
+    QFETCH( qreal, box1maxAltitude );
+    QFETCH( qreal, box2north );
+    QFETCH( qreal, box2south );
+    QFETCH( qreal, box2west );
+    QFETCH( qreal, box2east );
+    QFETCH( qreal, box2minAltitude );
+    QFETCH( qreal, box2maxAltitude );
+    QFETCH( bool, intersects );
+    
+    GeoDataLatLonAltBox box1;
+    GeoDataLatLonAltBox box2;
+    box1.setNorth( box1north, GeoDataCoordinates::Degree );
+    box1.setSouth( box1south, GeoDataCoordinates::Degree );
+    box1.setWest( box1west, GeoDataCoordinates::Degree );
+    box1.setEast( box1east, GeoDataCoordinates::Degree );
+    box1.setMinAltitude( box1minAltitude );
+    box1.setMaxAltitude( box1maxAltitude );
+    box2.setNorth( box2north, GeoDataCoordinates::Degree );
+    box2.setSouth( box2south, GeoDataCoordinates::Degree );
+    box2.setWest( box2west, GeoDataCoordinates::Degree );
+    box2.setEast( box2east, GeoDataCoordinates::Degree );
+    box2.setMinAltitude( box2minAltitude );
+    box2.setMaxAltitude( box2maxAltitude );
+    QCOMPARE( box1.intersects( box2 ), intersects );
 }
 
 }

@@ -71,14 +71,14 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
 
     /**
      * @brief Get the lower altitude boundary of the bounding box.
-     * @return the height of the lower altitude boundary.
+     * @return the height of the lower altitude boundary in meters.
      */
     qreal minAltitude() const;
     void setMinAltitude( const qreal minAltitude );
 
     /**
      * @brief Get the upper altitude boundary of the bounding box.
-     * @return the height of the upper altitude boundary.
+     * @return the height of the upper altitude boundary in meters.
      */
     qreal maxAltitude() const;
     void setMaxAltitude( const qreal maxAltitude );
@@ -95,6 +95,9 @@ class GEODATA_EXPORT GeoDataLatLonAltBox : public GeoDataLatLonBox
     virtual bool contains( const GeoDataCoordinates & ) const;
     bool     contains( const GeoDataLatLonAltBox & ) const;
 
+    /**
+     * @brief Check if this GeoDataLatLonAltBox intersects with the given one.
+     */
     virtual bool intersects( const GeoDataLatLonAltBox & ) const;
 
     using GeoDataLatLonBox::intersects;
