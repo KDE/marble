@@ -30,6 +30,7 @@ class MarblePlacemarkModel::Private
 
  public:
     Private()
+      : m_size(0)
     {
     }
 
@@ -37,6 +38,7 @@ class MarblePlacemarkModel::Private
     {
     }
 
+    int m_size;
     QVector<Marble::GeoDataPlacemark>     *m_placemarkContainer;
 };
 
@@ -63,7 +65,7 @@ void MarblePlacemarkModel::setPlacemarkContainer( QVector<Marble::GeoDataPlacema
 int MarblePlacemarkModel::rowCount( const QModelIndex &parent ) const
 {
     if ( !parent.isValid() )
-        return d->m_placemarkContainer->size();
+        return d->m_size;
     else
         return 0;
 }
@@ -158,6 +160,7 @@ void MarblePlacemarkModel::addPlacemarks( int start,
     QTime t;
     t.start();
     beginInsertRows( QModelIndex(), start, start + length );
+    d->m_size += length;
     endInsertRows();
     emit layoutChanged();
     qDebug() << "addPlacemarks: Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
@@ -170,6 +173,7 @@ void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
     QTime t;
     t.start();
     beginRemoveRows( QModelIndex(), start, start + length );
+    d->m_size -= length;
     endRemoveRows();
     emit layoutChanged();
     qDebug() << "removePlacemarks(" << containerName << "): Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
