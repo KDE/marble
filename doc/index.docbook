@@ -112,7 +112,7 @@
          <para>
             In case you should get lost you can always reset the viewing angle and zoom level back to the point where we started off: Just hit the <guilabel>Home</guilabel> button (or the <keycap>Home</keycap> button on your keyboard). To set a home location click with the &RMB; on a location in the maps and select <guimenuitem>Set Home Location</guimenuitem> in the context menu.
          </para>
-	 <para>A click onto the status bar using the right mouse button offers a menu which lets you customize the appearance of the status bar. 
+	 <para>A click onto the status bar using the &RMB; offers a menu which lets you customize the appearance of the status bar. 
 	 You can show the position, altitude, the current tile level and a progress indicator that displays the status of the map data download. 
 	 </para>
 	 </chapter>
@@ -508,7 +508,7 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 <term><guilabel>Graphics system</guilabel></term>
 <listitem>
 <para>Specifies the graphics system - <guilabel>Native X11</guilabel> or <guilabel>Raster (Software rendering)</guilabel> - 
-that Qt uses to draw the map. Changing this setting might be a good idea if there are performance issues with 
+that &Qt; uses to draw the map. Changing this setting might be a good idea if there are performance issues with 
 the system's graphics drivers. </para>
 </listitem>
 </varlistentry>
