@@ -48,7 +48,7 @@ class MARBLE_EXPORT HttpJob: public QObject
     /**
      * errorCode contains 0, if there was no error and 1 otherwise
      */
-    void jobDone( Marble::HttpJob *, int errorCode );
+    void jobDone( HttpJob *, int errorCode );
     void redirected( HttpJob * job, QUrl redirectionTarget );
 
     /**
