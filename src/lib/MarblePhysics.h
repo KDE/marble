@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      Torsten Rahn  <rahn@kde.org>"
+// Copyright 2008      Torsten Rahn  <rahn@kde.org>
 //
 
 #ifndef MARBLE_PHYSICS_H

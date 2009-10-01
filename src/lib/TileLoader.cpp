@@ -1,8 +1,8 @@
 /**
  * This file is part of the Marble Desktop Globe.
  *
- * Copyright 2005-2007 Torsten Rahn <tackat@kde.org>"
- * Copyright 2007      Inge Wallin  <ingwa@kde.org>"
+ * Copyright 2005-2007 Torsten Rahn <tackat@kde.org>
+ * Copyright 2007      Inge Wallin  <ingwa@kde.org>
  * Copyright 2008,2009 Jens-Michael Hoffmann <jensmh@gmx.de>
  *
  * This library is free software; you can redistribute it and/or

@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>"
+// Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
 //
 
 

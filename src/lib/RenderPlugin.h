@@ -5,8 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Torsten Rahn <tackat@kde.org>"
-// Copyright 2008 Inge Wallin  <inge@lysator.liu.se>"
+// Copyright 2008 Torsten Rahn <tackat@kde.org>
+// Copyright 2008 Inge Wallin  <inge@lysator.liu.se>
 //
 
 

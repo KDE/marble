@@ -5,8 +5,8 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Christian Ehrlicher <ch.ehrlicher@gmx.de>"
-// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>"
+// Copyright 2007      Christian Ehrlicher <ch.ehrlicher@gmx.de>
+// Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
 //
 
 #ifndef GEODATA_EXPORT_H

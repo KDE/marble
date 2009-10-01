@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>"
+// Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
 //
 
 #ifndef MarbleGeoDataModel_H

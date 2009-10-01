@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Torsten Rahn     <tackat@kde.org>"
+// Copyright 2007      Torsten Rahn     <tackat@kde.org>
 //
 
 

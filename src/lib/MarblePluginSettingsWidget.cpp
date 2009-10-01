@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007      Torsten Rahn  <rahn@kde.org>"
+// Copyright 2007      Torsten Rahn  <rahn@kde.org>
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
