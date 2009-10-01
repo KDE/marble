@@ -19,13 +19,8 @@
 #define MARBLE_HTTPDOWNLOADMANAGER_H
 
 
-#include <QtCore/QMap>
 #include <QtCore/QString>
 #include <QtCore/QUrl>
-#include <QtCore/QList>
-#include <QtCore/QSet>
-#include <QtCore/QStack>
-#include <QtCore/QQueue>
 
 #include "DownloadPolicy.h"
 #include "DownloadQueueSet.h"
@@ -37,9 +32,10 @@ class QTimer;
 namespace Marble
 {
 
+class DownloadPolicy;
+class DownloadQueueSet;
 class HttpJob;
 class StoragePolicy;
-class NetworkPlugin;
 
 /**
  * @Short This class manages scheduled downloads. 
@@ -140,24 +136,8 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     DownloadQueueSet *findQueues( const QString& hostName );
     DownloadQueueSet const *findQueues( const QString& hostName ) const;
 
-    bool              m_downloadEnabled;
-
-    QTimer           *m_requeueTimer;
-
-    /**
-     * Contains per download policy a queue set containing of
-     * - a queue where jobs are waiting for being activated (=downloaded)
-     * - a queue containing currently being downloaded
-     * - a queue for retries of failed downloads
-     */
-    QMap<DownloadPolicyKey, DownloadQueueSet *> m_queueSets;
-
-    int               m_jobQueueLimit;
-
-    QUrl              m_serverUrl;
-    StoragePolicy    *m_storagePolicy;
-
-    NetworkPlugin    *m_networkPlugin;
+    class Private;
+    Private * const d;
 };
 
 }
