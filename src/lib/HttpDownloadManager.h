@@ -19,12 +19,16 @@
 #define MARBLE_HTTPDOWNLOADMANAGER_H
 
 
+#include <QtCore/QMap>
 #include <QtCore/QString>
 #include <QtCore/QUrl>
 #include <QtCore/QList>
 #include <QtCore/QSet>
 #include <QtCore/QStack>
 #include <QtCore/QQueue>
+
+#include "DownloadPolicy.h"
+#include "DownloadQueueSet.h"
 
 #include "marble_export.h"
 
@@ -84,6 +88,7 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
      * Switches loading on/off, useful for offline mode.
      */
     void setDownloadEnabled( const bool enable );
+    void addDownloadPolicy( const DownloadPolicy& );
 
     StoragePolicy* storagePolicy() const;
 
@@ -97,11 +102,6 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
      * Adds a new job with a sourceUrl, destination file name and given id.
      */
     void addJob( const QUrl& sourceUrl, const QString& destFilename, const QString &id );
-
-    /**
-     * Removes the @p job from the manager.
-     */
-    void removeJob( HttpJob *job );
 
 
  Q_SIGNALS:
@@ -128,41 +128,30 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
 
 
  private Q_SLOTS:
-    void activateJobs();
-    void reportResult( Marble::HttpJob *job, int id );
+    void finishJob( const QByteArray& data, const QString& destinationFileName,
+		    const QString& id );
     void requeue();
-    void jobRedirected( HttpJob *job, QUrl newLocation );
-    void jobDataReceived( HttpJob *job, QByteArray data );
+    void startRetryTimer();
 
  private:
     Q_DISABLE_COPY( HttpDownloadManager )
-    // Check whether the job gets processed already or whether it got blacklisted
-    bool              acceptJob( HttpJob *job );
     HttpJob          *createJob( const QUrl& sourceUrl, const QString& destFileName,
                                  const QString &id );
-
-    /**
-     * Helper method for activateJobs(), also used in handling of redirections,
-     * where the new job should be activated imediately.
-     */
-    void activateJob( HttpJob * const job );
-
-    /**
-     * Helper method for the public addJob methods which contains shared code.
-     */
-    void              addJob( HttpJob* );
+    DownloadQueueSet *findQueues( const QString& hostName );
+    DownloadQueueSet const *findQueues( const QString& hostName ) const;
 
     bool              m_downloadEnabled;
 
     QTimer           *m_requeueTimer;
-    QStack<HttpJob*>  m_jobQueue;
-    QQueue<HttpJob*>  m_waitingQueue;
-    QList<HttpJob*>   m_activatedJobList;
 
-    /// Contains the blacklisted source urls
-    QSet<QString>     m_jobBlackList;
+    /**
+     * Contains per download policy a queue set containing of
+     * - a queue where jobs are waiting for being activated (=downloaded)
+     * - a queue containing currently being downloaded
+     * - a queue for retries of failed downloads
+     */
+    QMap<DownloadPolicyKey, DownloadQueueSet *> m_queueSets;
 
-    int               m_activatedJobsLimit;
     int               m_jobQueueLimit;
 
     QUrl              m_serverUrl;

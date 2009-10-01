@@ -28,7 +28,6 @@ const quint32 requeueTime = 60000;
 HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl,
                                           StoragePolicy *policy )
     : m_downloadEnabled( true ), //enabled for now
-      m_activatedJobsLimit( 40 ),
       m_jobQueueLimit( 1000 ),
       m_serverUrl( serverUrl ),
       m_storagePolicy( policy ),
@@ -37,28 +36,17 @@ HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl,
       m_requeueTimer = new QTimer( this );
       m_requeueTimer->setInterval( requeueTime );
       connect( m_requeueTimer, SIGNAL( timeout() ), this, SLOT( requeue() ) );
+
+      // default download policy
+      DownloadPolicy defaultDownloadPolicy;
+      defaultDownloadPolicy.setMaximumConnections( 20 );
+      addDownloadPolicy( defaultDownloadPolicy );
 }
 
 
 HttpDownloadManager::~HttpDownloadManager()
 {
     m_downloadEnabled = false;
-
-    qDeleteAll( m_jobQueue );
-    m_jobQueue.clear();
-
-    // activated jobs have to be deleted using deleteLater()
-    // because they may be connected to signals
-    QList<HttpJob*>::const_iterator pos = m_activatedJobList.constBegin();
-    QList<HttpJob*>::const_iterator const end = m_activatedJobList.constEnd();
-    for (; pos != end; ++pos ) {
-        (*pos)->deleteLater();
-    }
-    m_activatedJobList.clear();
-
-    qDeleteAll( m_waitingQueue );
-    m_waitingQueue.clear();
-
     delete m_storagePolicy;
     delete m_networkPlugin;
 }
@@ -73,9 +61,9 @@ void HttpDownloadManager::setJobQueueLimit( int jobQueueLimit )
     m_jobQueueLimit = jobQueueLimit;
 }
 
+// FIXME: remove this method
 void HttpDownloadManager::setActivatedJobsLimit( int activatedJobsLimit )
 {
-    m_activatedJobsLimit = activatedJobsLimit;
 }
 
 void HttpDownloadManager::setDownloadEnabled( const bool enable )
@@ -83,35 +71,31 @@ void HttpDownloadManager::setDownloadEnabled( const bool enable )
     m_downloadEnabled = enable;
 }
 
+void HttpDownloadManager::addDownloadPolicy( const DownloadPolicy& policy )
+{
+    DownloadQueueSet * const queueSet = new DownloadQueueSet( policy );
+    connect( queueSet, SIGNAL( jobFinished( QByteArray, QString, QString )),
+             SLOT( finishJob( QByteArray, QString, QString )));
+    connect( queueSet, SIGNAL( jobRetry() ), SLOT( startRetryTimer() ));
+    connect( queueSet, SIGNAL( jobRedirected( QUrl, QString, QString )),
+             SLOT( addJob( QUrl, QString, QString )));
+    // relay jobAdded/jobRemoved signals (interesting for progress bar)
+    connect( queueSet, SIGNAL( jobAdded() ), SIGNAL( jobAdded() ));
+    connect( queueSet, SIGNAL( jobRemoved() ), SIGNAL( jobRemoved() ));
+    m_queueSets.insert( queueSet->downloadPolicy().key(), queueSet );
+}
+
 StoragePolicy* HttpDownloadManager::storagePolicy() const
 {
     return m_storagePolicy;
 }
 
-void HttpDownloadManager::addJob( HttpJob * job )
-{
-    if ( acceptJob( job ) ) {
-        m_jobQueue.push( job );
-        emit jobAdded();
-        activateJobs();
-    }
-    else {
-        job->deleteLater();
-    }
-}
-
 void HttpDownloadManager::addJob( const QString& relativeUrlString, const QString &id )
 {
-    if ( !m_downloadEnabled )
-        return;
-
     QUrl sourceUrl( m_serverUrl );
     QString path = sourceUrl.path();
     sourceUrl.setPath( path + relativeUrlString );
-
-    HttpJob *job = createJob( sourceUrl, relativeUrlString, id );
-    if ( job )
-        addJob( job );
+    addJob( sourceUrl, relativeUrlString, id );
 }
 
 void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFileName,
@@ -120,151 +104,46 @@ void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFile
     if ( !m_downloadEnabled )
         return;
 
-    HttpJob *job = createJob( sourceUrl, destFileName, id );
-    if ( job )
-        addJob( job );
-}
-
-bool HttpDownloadManager::acceptJob( HttpJob  *job )
-{
-    // We update the initiatorId as the previous initiator
-    // likely doesn't exist anymore
-
-    QStack<HttpJob*>::iterator j = m_jobQueue.begin();
-    QStack<HttpJob*>::iterator const jEnd = m_jobQueue.end();
-    for (; j != jEnd; ++j ) {
-        if ( job->destinationFileName() == (*j)->destinationFileName() ) {
-            qDebug() << "Download rejected: It's in the queue already.";
-            (*j)->setInitiatorId( job->initiatorId() );
-            return false;
+    DownloadQueueSet * const queueSet = findQueues( sourceUrl.host() );
+    if ( queueSet->canAcceptJob( sourceUrl, destFileName )) {
+        HttpJob * const job = createJob( sourceUrl, destFileName, id );
+        if ( job ) {
+            queueSet->addJob( job );
         }
     }
+}
 
-    QList<HttpJob*>::iterator i = m_waitingQueue.begin();
-    QList<HttpJob*>::iterator iEnd = m_waitingQueue.end();
-    for (; i != iEnd; ++i) {
-        if ( job->destinationFileName() == (*i)->destinationFileName() ) {
-            qDebug() << "Download rejected: Will try to download again in some time.";
-            (*i)->setInitiatorId( job->initiatorId() );
-            return false;
+void HttpDownloadManager::finishJob( const QByteArray& data, const QString& destinationFileName,
+                                     const QString& id )
+{
+    qDebug() << "emitting downloadComplete( QByteArray, " << id << ")";
+    emit downloadComplete( data, id );
+    if ( m_storagePolicy ) {
+        const bool saved = m_storagePolicy->updateFile( destinationFileName, data );
+        if ( saved ) {
+            qDebug() << "emitting downloadComplete( " << destinationFileName << ", " << id << ")";
+            emit downloadComplete( destinationFileName, id );
+        } else {
+            qWarning() << "Could not save:" << destinationFileName;
         }
     }
-
-    i = m_activatedJobList.begin();
-    iEnd = m_activatedJobList.end();
-    for (; i != iEnd; ++i ) {
-        if ( job->destinationFileName() == (*i)->destinationFileName() ) {
-            qDebug() << "Download rejected: It's being downloaded already:" << job->destinationFileName();
-            (*i)->setInitiatorId( job->initiatorId() );
-            return false;
-        }
-    }
-
-    QSet<QString>::const_iterator const pos = m_jobBlackList.find( job->sourceUrl().toString() );
-    if ( pos != m_jobBlackList.end() ) {
-        qDebug() << "Download rejected: Blacklisted.";
-        return false;
-    }
-
-    return true;
-}
-
-void HttpDownloadManager::removeJob( HttpJob* job )
-{
-    int pos = m_activatedJobList.indexOf( job );
-
-    if ( pos > 0 ) {
-        m_activatedJobList.removeAt( pos );
-//        qDebug() << "Removing: " << job->initiatorId();
-        job->deleteLater();
-    }
-    emit jobRemoved();
-
-    activateJobs();
-}
-
-void HttpDownloadManager::activateJob( HttpJob * const job )
-{
-    // qDebug() << "On activatedJobList: " << job->sourceUrl().toString()
-    //          << job->destinationFileName();
-    m_activatedJobList.push_back( job );
-
-    // No duplicate connections please
-    // FIXME: move calls to disconnect to the right place, here it just
-    // unconditionally disconnects even if there was no connection before
-    disconnect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
-                this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
-    disconnect( job, SIGNAL( redirected( HttpJob *, QUrl ) ),
-                this, SLOT( jobRedirected( HttpJob *, QUrl ) ) );
-    disconnect( job, SIGNAL( dataReceived( HttpJob *, QByteArray ) ),
-                this, SLOT( jobDataReceived( HttpJob *, QByteArray ) ) );
-    connect( job, SIGNAL( jobDone( Marble::HttpJob*, int ) ),
-             this, SLOT( reportResult( Marble::HttpJob*, int ) ) );
-    connect( job, SIGNAL( redirected( HttpJob *, QUrl ) ),
-             SLOT( jobRedirected( HttpJob *, QUrl ) ) );
-    connect( job, SIGNAL( dataReceived( HttpJob *, QByteArray ) ),
-             SLOT( jobDataReceived( HttpJob *, QByteArray ) ) );
-
-    job->execute();
-}
-
-void HttpDownloadManager::activateJobs()
-{
-    while ( m_jobQueue.count() > 0
-            && m_activatedJobList.count() < m_activatedJobsLimit )
-    {
-        HttpJob *job = m_jobQueue.pop();
-        activateJob( job );
-    }
-}
-
-void HttpDownloadManager::reportResult( HttpJob* job, int err )
-{
-    if ( err != 0 ) {
-        int pos = m_activatedJobList.indexOf( job );
-
-        if ( pos >= 0 ) {
-            m_activatedJobList.removeAt( pos );
-            emit jobRemoved();
-
-            // This should always return true
-            if( !m_waitingQueue.contains( job ) ) {
-                if( job->tryAgain() ) {
-                    qDebug() << QString( "Download of %1 failed, but trying again soon" )
-                        .arg( job->destinationFileName() );
-                    m_waitingQueue.enqueue( job );
-                    if( !m_requeueTimer->isActive() )
-                        m_requeueTimer->start();
-                }
-                else {
-                    qDebug() << "JOB-address: " << job << "Blacklist-size:" << m_jobBlackList.size() << "err:" << err;
-                    m_jobBlackList.insert( job->sourceUrl().toString() );
-                    qDebug() << QString( "Download of %1 Blacklisted. Number of blacklist items: %2" )
-                        .arg( job->destinationFileName() ).arg( m_jobBlackList.size() );
-
-                    job->deleteLater();
-                }
-            }
-        }
-    }
-    else {
-//         qDebug() << "HttpDownloadManager: Download Complete:"
-//                  << job->destinationFileName() << job->initiatorId();
-        emit downloadComplete( job->destinationFileName(), job->initiatorId() );
-        removeJob( job );
-    }
-
-    activateJobs();
 }
 
 void HttpDownloadManager::requeue()
 {
     m_requeueTimer->stop();
-    while( !m_waitingQueue.isEmpty() ) {
-        HttpJob* job = m_waitingQueue.dequeue();
-        qDebug() << QString( "Requeuing %1." ).arg( job->destinationFileName() );
-        addJob( job );
+
+    QMap<DownloadPolicyKey, DownloadQueueSet *>::iterator pos = m_queueSets.begin();
+    QMap<DownloadPolicyKey, DownloadQueueSet *>::iterator const end = m_queueSets.end();
+    for (; pos != end; ++pos ) {
+        pos.value()->retryJobs();
     }
+}
+
+void HttpDownloadManager::startRetryTimer()
+{
+    if ( !m_requeueTimer->isActive() )
+        m_requeueTimer->start();
 }
 
 HttpJob *HttpDownloadManager::createJob( const QUrl& sourceUrl, const QString& destFileName,
@@ -289,21 +168,43 @@ HttpJob *HttpDownloadManager::createJob( const QUrl& sourceUrl, const QString& d
     return m_networkPlugin->createJob( sourceUrl, destFileName, id );
 }
 
-void HttpDownloadManager::jobRedirected( HttpJob *job, QUrl newLocation )
+DownloadQueueSet const * HttpDownloadManager::findQueues( const QString& hostName ) const
 {
-    qDebug() << "jobRedirected" << job->sourceUrl() << " -> " << newLocation;
-    HttpJob * const newJob = m_networkPlugin->createJob( newLocation, job->destinationFileName(),
-                                                         job->initiatorId() );
-    removeJob( job );
-    activateJob( newJob );
+    DownloadQueueSet const * result = 0;
+    QMap<DownloadPolicyKey, DownloadQueueSet*>::const_iterator pos = m_queueSets.constBegin();
+    QMap<DownloadPolicyKey, DownloadQueueSet*>::const_iterator const end = m_queueSets.constEnd();
+    for (; pos != end; ++pos ) {
+        if ( pos.key().matches( hostName )) {
+            result = pos.value();
+            break;
+        }
+    }
+    // FIXME:
+    if ( !result ) {
+        Q_ASSERT( !m_queueSets.isEmpty() );
+        result = m_queueSets.constBegin().value();
+    }
+    return result;
 }
 
-void HttpDownloadManager::jobDataReceived( HttpJob *job, QByteArray data )
+DownloadQueueSet *HttpDownloadManager::findQueues( const QString& hostName )
 {
-    emit downloadComplete( data, job->initiatorId() );
-    const bool error = storagePolicy()
-        && !storagePolicy()->updateFile( job->destinationFileName(), data );
-    reportResult( job, error );
+    DownloadQueueSet * result = 0;
+    QMap<DownloadPolicyKey, DownloadQueueSet*>::iterator pos = m_queueSets.begin();
+    QMap<DownloadPolicyKey, DownloadQueueSet*>::iterator const end = m_queueSets.end();
+    for (; pos != end; ++pos ) {
+        if ( pos.key().matches( hostName )) {
+            result = pos.value();
+            break;
+        }
+    }
+    // FIXME:
+    if ( !result ) {
+        Q_ASSERT( !m_queueSets.isEmpty() );
+        result = m_queueSets.begin().value();
+    }
+    return result;
 }
+
 
 #include "HttpDownloadManager.moc"

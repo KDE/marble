@@ -1,0 +1,226 @@
+// Copyright 2009  Jens-Michael Hoffmann <jmho@c-xx.com>
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either 
+// version 2.1 of the License, or (at your option) any later version.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public 
+// License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+
+#include "DownloadQueueSet.h"
+
+#include <QDebug>
+
+#include "HttpJob.h"
+
+namespace Marble
+{
+
+DownloadQueueSet::DownloadQueueSet()
+{
+}
+
+DownloadQueueSet::DownloadQueueSet( DownloadPolicy const & policy )
+    : m_downloadPolicy( policy )
+{
+}
+
+DownloadQueueSet::~DownloadQueueSet()
+{
+    // todo: delete HttpJobs
+}
+
+DownloadPolicy DownloadQueueSet::downloadPolicy() const
+{
+    return m_downloadPolicy;
+}
+
+void DownloadQueueSet::setDownloadPolicy( DownloadPolicy const & policy )
+{
+    m_downloadPolicy = policy;
+}
+
+bool DownloadQueueSet::canAcceptJob( const QUrl& sourceUrl,
+                                     const QString& destinationFileName ) const
+{
+    if ( jobIsQueued( destinationFileName )) {
+        qDebug() << "Download rejected: It's in the queue already:"
+                 << destinationFileName;
+        return false;
+    }
+    if ( jobIsWaitingForRetry( destinationFileName )) {
+        qDebug() << "Download rejected: Will try to download again in some time:"
+                 << destinationFileName;
+        return false;
+    }
+    if ( jobIsActive( destinationFileName )) {
+        qDebug() << "Download rejected: It's being downloaded already:"
+                 << destinationFileName;
+        return false;
+    }
+    if ( jobIsBlackListed( sourceUrl )) {
+        qDebug() << "Download rejected: Blacklisted.";
+        return false;
+    }
+    return true;
+}
+
+void DownloadQueueSet::addJob( HttpJob * const job )
+{
+    m_jobQueue.push( job );
+    qDebug() << "addJob: new job queue size:" << m_jobQueue.count();
+    emit jobAdded();
+    activateJobs();
+}
+
+void DownloadQueueSet::activateJobs()
+{
+    while ( !m_jobQueue.isEmpty()
+            && m_activeJobs.count() < m_downloadPolicy.maximumConnections() )
+    {
+        HttpJob * const job = m_jobQueue.pop();
+        activateJob( job );
+    }
+}
+
+void DownloadQueueSet::retryJobs()
+{
+    while ( !m_retryQueue.isEmpty() ) {
+        HttpJob * const job = m_retryQueue.dequeue();
+        qDebug() << "Requeuing" << job->destinationFileName();
+        // FIXME: addJob calls activateJobs every time
+        addJob( job );
+    }
+}
+
+void DownloadQueueSet::finishJob( HttpJob * job, QByteArray data )
+{
+    qDebug() << "finishJob: " << job->destinationFileName();
+
+    deactivateJob( job );
+    emit jobRemoved();
+    emit jobFinished( data, job->destinationFileName(), job->initiatorId() );
+    job->deleteLater();
+    activateJobs();
+}
+
+void DownloadQueueSet::redirectJob( HttpJob * job, QUrl newSourceUrl )
+{
+    qDebug() << "jobRedirected:" << job->sourceUrl() << " -> " << newSourceUrl;
+
+    deactivateJob( job );
+    emit jobRemoved();
+    emit jobRedirected( newSourceUrl, job->destinationFileName(), job->initiatorId() );
+    job->deleteLater();
+}
+
+void DownloadQueueSet::retryOrBlacklistJob( HttpJob * job, const int errorCode )
+{
+    Q_ASSERT( errorCode != 0 );
+    Q_ASSERT( !m_retryQueue.contains( job ));
+
+    deactivateJob( job );
+    emit jobRemoved();
+
+    if ( job->tryAgain() ) {
+        qDebug() << QString( "Download of %1 failed, but trying again soon" )
+            .arg( job->destinationFileName() );
+        m_retryQueue.enqueue( job );
+        emit jobRetry();
+    }
+    else {
+        qDebug() << "JOB-address: " << job
+                 << "Blacklist-size:" << m_jobBlackList.size()
+                 << "err:" << errorCode;
+        m_jobBlackList.insert( job->sourceUrl().toString() );
+        qDebug() << QString( "Download of %1 Blacklisted. "
+                             "Number of blacklist items: %2" )
+            .arg( job->destinationFileName() )
+            .arg( m_jobBlackList.size() );
+
+        job->deleteLater();
+    }
+    activateJobs();
+}
+
+void DownloadQueueSet::activateJob( HttpJob * const job )
+{
+    m_activeJobs.push_back( job );
+
+    connect( job, SIGNAL( jobDone( HttpJob *, int )),
+             SLOT( retryOrBlacklistJob( HttpJob *, int )));
+    connect( job, SIGNAL( redirected( HttpJob *, QUrl )),
+             SLOT( redirectJob( HttpJob *, QUrl )));
+    connect( job, SIGNAL( dataReceived( HttpJob *, QByteArray )),
+             SLOT( finishJob( HttpJob *, QByteArray )));
+
+    job->execute();
+}
+
+/**
+   pre condition: - job is in m_activeJobs
+                  - job's signal are connected to our slots
+   post condition: - job is not in m_activeJobs anymore (and btw not
+                     in any other queue)
+                   - job's signals are disconnected from our slots
+ */
+void DownloadQueueSet::deactivateJob( HttpJob * const job )
+{
+    const bool disconnected = job->disconnect();
+    Q_ASSERT( disconnected );
+    const bool removed = m_activeJobs.removeOne( job );
+    Q_ASSERT( removed );
+}
+
+bool DownloadQueueSet::jobIsActive( QString const & destinationFileName ) const
+{
+    QList<HttpJob*>::const_iterator pos = m_activeJobs.constBegin();
+    QList<HttpJob*>::const_iterator const end = m_activeJobs.constEnd();
+    for (; pos != end; ++pos) {
+        if ( (*pos)->destinationFileName() == destinationFileName ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool DownloadQueueSet::jobIsQueued( QString const & destinationFileName ) const
+{
+    QStack<HttpJob*>::const_iterator pos = m_jobQueue.constBegin();
+    QStack<HttpJob*>::const_iterator const end = m_jobQueue.constEnd();
+    for (; pos != end; ++pos) {
+        if ( (*pos)->destinationFileName() == destinationFileName ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool DownloadQueueSet::jobIsWaitingForRetry( QString const & destinationFileName ) const
+{
+    QList<HttpJob*>::const_iterator pos = m_retryQueue.constBegin();
+    QList<HttpJob*>::const_iterator const end = m_retryQueue.constEnd();
+    for (; pos != end; ++pos) {
+        if ( (*pos)->destinationFileName() == destinationFileName ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool DownloadQueueSet::jobIsBlackListed( const QUrl& sourceUrl ) const
+{
+    QSet<QString>::const_iterator const pos =
+        m_jobBlackList.constFind( sourceUrl.toString() );
+    return pos != m_jobBlackList.constEnd();
+}
+
+}
+
+#include "DownloadQueueSet.moc"

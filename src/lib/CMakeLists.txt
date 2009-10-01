@@ -76,6 +76,8 @@ set(marblewidget_SRCS
 
     QtMarbleConfigDialog.cpp
     ClipPainter.cpp
+    DownloadPolicy.cpp
+    DownloadQueueSet.cpp
     GeoPainter.cpp
     GeoPolygon.cpp
     HttpDownloadManager.cpp
