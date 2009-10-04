@@ -123,7 +123,7 @@ class WeatherItemPrivate
                     .arg( m_currentWeather.pressureDevelopmentString() );
 
         if ( !m_forecastWeather.isEmpty() ) {
-            toolTip += "\n";
+            toolTip += '\n';
 
             QDate minDate = QDate::currentDate();
             minDate.addDays( -1 );
@@ -134,7 +134,7 @@ class WeatherItemPrivate
                     && data.hasValidMinTemperature()
                     && data.hasValidMaxTemperature() )
                 {
-                    toolTip += "\n";
+                    toolTip += '\n';
                     toolTip += tr( "%1: %2, %3 to %4", "DayOfWeek: Condition, MinTemp to MaxTemp" )
                                .arg( locale.standaloneDayName( date.dayOfWeek() ) )
                                .arg( data.conditionString() )

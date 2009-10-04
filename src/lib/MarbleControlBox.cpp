@@ -418,7 +418,7 @@ void MarbleControlBox::receiveGpsCoordinates( GeoDataCoordinates in, qreal speed
         // TODO read this value from the incoming signal
         speedString = QLocale::system().toString( unitSpeed, 'f', 1);
 
-        d->uiWidget.speedLabel->setText( speedString.rightJustified(5) + " " + unitString );
+        d->uiWidget.speedLabel->setText( speedString.rightJustified(5) + ' ' + unitString );
 
         d->uiWidget.longitudeValue->setText( in.lonToString() );
         d->uiWidget.latitudeValue->setText( in.latToString() );
