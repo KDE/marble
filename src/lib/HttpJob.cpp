@@ -78,7 +78,6 @@ void HttpJob::setDestinationFileName( const QString &fileName )
     d->m_destinationFileName = fileName;
 }
 
-
 bool HttpJob::tryAgain()
 {
     if( d->m_trialsLeft > 0 ) {
