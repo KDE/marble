@@ -19,10 +19,10 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 
+#include "global.h"
+
 namespace Marble
 {
-
-enum DownloadUsage { DownloadBulk, DownloadBrowse };
 
 class DownloadPolicyKey
 {

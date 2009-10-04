@@ -169,6 +169,14 @@ enum Pole {
     SouthPole            ///< Only South Pole
 };
 
+/**
+ * @brief This enum is used to describe the type of download
+ */
+enum DownloadUsage {
+    DownloadBulk,       ///< Bulk download, for example "File/Download region"
+    DownloadBrowse      ///< Browsing mode, normal operation of Marble, like a web browser
+};
+
 const int defaultLevelZeroColumns = 2;
 const int defaultLevelZeroRows = 1;
 
