@@ -60,7 +60,7 @@ class MARBLE_EXPORT TinyWebBrowser : public QWebView
     void openExternalLink( QUrl );
 
  private:
-    TinyWebBrowserPrivate *d;
+    TinyWebBrowserPrivate * const d;
 };
 
 }

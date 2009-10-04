@@ -105,7 +105,7 @@ class MARBLE_EXPORT PluginAboutDialog : public QDialog
  private:
     Q_DISABLE_COPY( PluginAboutDialog )
 
-    PluginAboutDialogPrivate *d;
+    PluginAboutDialogPrivate * const d;
 };
 
 } // namespace Marble

@@ -126,7 +126,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     private:
     Q_DISABLE_COPY( QtMarbleConfigDialog )
 
-    QtMarbleConfigDialogPrivate *d;
+    QtMarbleConfigDialogPrivate * const d;
 };
 
 } // Marble namespace

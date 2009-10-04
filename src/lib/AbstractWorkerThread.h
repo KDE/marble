@@ -50,7 +50,7 @@ class MARBLE_EXPORT AbstractWorkerThread : public QThread
     void run();
 
  private:
-    AbstractWorkerThreadPrivate *d;
+    AbstractWorkerThreadPrivate * const d;
 };
 
 }
