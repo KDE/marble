@@ -9,13 +9,12 @@
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-
-#include "GeoDataDocument.h"
+#include "GeoDataObject.h"
 
 #include <QtCore/QtGlobal>
 #include <QtCore/QDataStream>
 
-#include "GeoDataObject.h"
+#include "GeoDataDocument.h"
 
 
 namespace Marble

@@ -15,7 +15,7 @@
 #include "marble_export.h"
 
 // Qt
-#include <QThread>
+#include <QtCore/QThread>
 
 namespace Marble
 {

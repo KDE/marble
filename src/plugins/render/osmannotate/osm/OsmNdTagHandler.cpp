@@ -8,9 +8,10 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
+#include "OsmNdTagHandler.h"
+
 #include "GeoParser.h"
 #include "OsmElementDictionary.h"
-#include "OsmNdTagHandler.h"
 #include "OsmWayGraphicsItem.h"
 
 #include <QtCore/QDebug>

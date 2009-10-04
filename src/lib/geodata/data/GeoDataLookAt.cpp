@@ -1,12 +1,10 @@
 //own
 #include "GeoDataLookAt.h"
+#include "GeoDataLookAt_p.h"
 
 //Qt
 #include <QtCore/QDataStream>
 #include <QtCore/QDebug>
-
-//Private
-#include "GeoDataLookAt_p.h"
 
 namespace Marble
 {
