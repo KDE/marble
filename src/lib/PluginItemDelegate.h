@@ -28,7 +28,7 @@ class PluginItemDelegate : public QAbstractItemDelegate
     Q_OBJECT
 
  public:
-    PluginItemDelegate( QAbstractItemView *view, QObject * parent = 0 );
+    explicit PluginItemDelegate( QAbstractItemView *view, QObject * parent = 0 );
     ~PluginItemDelegate();
     
     void paint( QPainter *painter,

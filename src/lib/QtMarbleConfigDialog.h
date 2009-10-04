@@ -32,7 +32,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     Q_OBJECT
     
     public:
-    QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget *parent = 0 );
+    explicit QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget *parent = 0 );
     ~QtMarbleConfigDialog();
 
     // View Settings
