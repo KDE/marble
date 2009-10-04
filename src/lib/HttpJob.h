@@ -19,6 +19,8 @@
 #include <QtCore/QString>
 #include <QtCore/QUrl>
 
+#include "global.h"
+
 #include "marble_export.h"
 
 namespace Marble
@@ -43,6 +45,9 @@ class MARBLE_EXPORT HttpJob: public QObject
     void setDestinationFileName( const QString & );
 
     bool tryAgain();
+
+    DownloadUsage downloadUsage() const;
+    void setDownloadUsage( const DownloadUsage );
 
  Q_SIGNALS:
     /**

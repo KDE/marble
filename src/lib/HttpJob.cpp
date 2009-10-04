@@ -24,6 +24,7 @@ class Marble::HttpJobPrivate
     QString        m_destinationFileName;
     QString        m_initiatorId;
     int            m_trialsLeft;
+    DownloadUsage  m_downloadUsage;
 };
 
 HttpJobPrivate::HttpJobPrivate( const QUrl & sourceUrl, const QString & destFileName,
@@ -31,7 +32,8 @@ HttpJobPrivate::HttpJobPrivate( const QUrl & sourceUrl, const QString & destFile
     : m_sourceUrl( sourceUrl ),
       m_destinationFileName( destFileName ),
       m_initiatorId( id ),
-      m_trialsLeft( 3 )
+      m_trialsLeft( 3 ),
+      m_downloadUsage( DownloadBrowse )
 {
 }
 
@@ -76,6 +78,7 @@ void HttpJob::setDestinationFileName( const QString &fileName )
     d->m_destinationFileName = fileName;
 }
 
+
 bool HttpJob::tryAgain()
 {
     if( d->m_trialsLeft > 0 ) {
@@ -85,6 +88,16 @@ bool HttpJob::tryAgain()
     else {
 	return false;
     }
+}
+
+DownloadUsage HttpJob::downloadUsage() const
+{
+    return d->m_downloadUsage;
+}
+
+void HttpJob::setDownloadUsage( const DownloadUsage usage )
+{
+    d->m_downloadUsage = usage;
 }
 
 #include "HttpJob.moc"
