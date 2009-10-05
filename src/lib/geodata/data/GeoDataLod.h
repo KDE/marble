@@ -68,7 +68,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
     
     
 /*!
-    \brief Returns the mimimum size that is needed for the region to be active
+    \brief Returns the minimum size that is needed for the region to be active
     Returns the minimum number of pixels the region has to be projected on for
     the feature to be considered active. 
     A value of 0 would mean no minimum number of pixels which is also the
@@ -78,7 +78,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 
     
 /*!
-    \brief Sets the mimimum size that is needed for the region to be active
+    \brief Sets the minimum size that is needed for the region to be active
     Sets the minimum number of \a pixels the region has to be projected on for
     the feature to be considered active.
 */

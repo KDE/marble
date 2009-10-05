@@ -42,7 +42,7 @@ class HttpJob;
      Job is executed by calling the jobs execute() method
 
    now there are different possibilities:
-   1) Job emits jobDone (some error occured, or canceled (kio))
+   1) Job emits jobDone (some error occurred, or canceled (kio))
       Job is disconnected
       signal jobRemoved is emitted
       Job is either moved from m_activeJobs to m_retryQueue

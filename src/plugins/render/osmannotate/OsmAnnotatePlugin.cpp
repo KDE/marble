@@ -413,7 +413,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     Q_ASSERT( marbleWidget );
 
     //FIXME why is the QEvent::MousePress not working? caught somewhere else?
-    //does this mean we need to centralise the event handling?
+    //does this mean we need to centralize the event handling?
 
     //so far only accept mouse events
     if( event->type() != QEvent::MouseButtonPress
@@ -444,7 +444,7 @@ bool    OsmAnnotatePlugin::eventFilter(QObject* watched, QEvent* event)
     coordinates = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Radian );
 
     if( !isOnGlobe ) {
-        //dont handle this event
+        //don't handle this event
         return false;
     }
 

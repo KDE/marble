@@ -620,7 +620,7 @@ void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
 
     qreal maxBoundingSize = box.height() > box.width() ? box.height() : box.width();
 
-    //prevent devide by zero
+    //prevent divide by zero
     if( maxBoundingSize ) {
         int zoomRadius = ( 0.25 * M_PI ) * ( maxScreenSize / maxBoundingSize );
         setRadius( zoomRadius );

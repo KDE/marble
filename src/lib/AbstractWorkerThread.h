@@ -29,7 +29,7 @@ class AbstractWorkerThreadPrivate;
  * think about Multi-Threading additionally.
  * The AbstractWorkerThread runs the function work() as long as workAvailable()
  * returns true. If there is no work available for a longer time, the thread will
- * switch itself off. As a result you have to call ensureRunning() everytime you
+ * switch itself off. As a result you have to call ensureRunning() every time you
  * want something to be worked on. You'll probably want to call this in your
  * addSchedule() function.
  */

@@ -237,7 +237,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     }
 
     // tile (valid) has not been found in hash or cache, so load it from disk
-    // and place it in the hash from where it will get transfered to the cache
+    // and place it in the hash from where it will get transferred to the cache
 
     // qDebug() << "load Tile from Disk: " << tileId.toString();
     tile = new TextureTile( tileId );

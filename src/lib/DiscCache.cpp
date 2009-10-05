@@ -120,7 +120,7 @@ bool DiscCache::insert( const QString &key, const QByteArray &data )
     if ( !file.open( QIODevice::WriteOnly ) )
         return false;
 
-    // If we overwrite an existing entry, substract the size first
+    // If we overwrite an existing entry, subtract the size first
     if ( m_Entries.contains( key ) )
         m_CurrentCacheSize -= m_Entries.value( key ).second;
 
@@ -149,7 +149,7 @@ void DiscCache::remove( const QString &key )
     if ( !QFile::remove( keyToFileName( key ) ) )
         return;
 
-    // Substract from current size
+    // Subtract from current size
     m_CurrentCacheSize -= m_Entries.value( key ).second;
 
     // Finally remove entry

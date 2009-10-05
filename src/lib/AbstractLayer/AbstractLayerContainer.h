@@ -104,7 +104,7 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
     /**
      * @brief get the distance between 2 points
      *
-     * This is just a convience method to make certain optimisations 
+     * This is just a convience method to make certain optimizations
      * easier, such as not drawing an @c AbstractLayerData if it is 
      * too close to another
      * @return the square of the distance between the points, if the 
