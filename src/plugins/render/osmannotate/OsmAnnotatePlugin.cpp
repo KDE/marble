@@ -86,7 +86,7 @@ QString OsmAnnotatePlugin::nameId() const
 
 QString OsmAnnotatePlugin::description() const
 {
-    return tr( "This is a render and interaciton plugin used for annotating OSM data." );
+    return tr( "This is a render and interaction plugin used for annotating OSM data." );
 }
 
 QIcon OsmAnnotatePlugin::icon () const
@@ -215,8 +215,8 @@ void OsmAnnotatePlugin::receiveNetworkReply( QNetworkReply *reply )
     if( reply->error() == QNetworkReply::NoError ) {
         readOsmFile( reply, false );
     } else {
-        m_errorMessage.showMessage( tr("Error while trying to download the"
-                                            "OSM file from the server. The"
+        m_errorMessage.showMessage( tr("Error while trying to download the "
+                                            "OSM file from the server. The "
                                             "error was:\n %1" ).arg(reply->errorString()) );
     }
 }
@@ -273,7 +273,7 @@ void OsmAnnotatePlugin::downloadOsmFile()
     if( ! ( topIsOnGlobe && bottomIsOnGlobe ) ) {
         m_errorMessage.showMessage( tr("One of the selection points is not on"
                                        " the Globe. Please only select a region"
-                                       " on the globe") );
+                                       " on the globe.") );
         return;
     }
 

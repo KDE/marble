@@ -59,7 +59,7 @@ TextEditor::TextEditor() : QWidget()
     m_italicButton->setDefaultAction( m_italicAction );
 
     m_underLineAction = new QAction( this );
-    m_underLineAction->setText( tr("UnderLine") );
+    m_underLineAction->setText( tr("Underline") );
     m_underLineButton = new QToolButton;
     m_underLineButton->setDefaultAction( m_underLineAction );
 
