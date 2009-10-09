@@ -48,12 +48,12 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
         qreal lat = 0;
         qreal lon = 0;
         tmp = attributes.value(gpxTag_lat);
-        if ( tmp != "")
+        if ( !tmp.isEmpty() )
         {
             lat = tmp.toString().toFloat();
         }
         tmp = attributes.value(gpxTag_lon);
-        if ( tmp != "")
+        if ( !tmp.isEmpty() )
         {
             lon = tmp.toString().toFloat();
         }
