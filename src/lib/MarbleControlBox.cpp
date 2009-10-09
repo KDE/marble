@@ -51,7 +51,6 @@
 #include "MarbleRunnerManager.h"
 #include "MathHelper.h"
 #include "MapThemeSortFilterProxyModel.h"
-#include "MapThemeManager.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "Planet.h"
