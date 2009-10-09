@@ -118,6 +118,8 @@ class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputH
 
     
  private:
+    Q_DISABLE_COPY( MarbleWidgetDefaultInputHandler )
+
     QPixmap  curpmtl;
     QPixmap  curpmtc;
     QPixmap  curpmtr;
