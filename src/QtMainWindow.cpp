@@ -61,7 +61,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWi
 {
     setUpdatesEnabled( false );
     
-    QString selectedPath = ( marbleDataPath.isEmpty() ) ? readMarbleDataPath() : marbleDataPath;
+    QString selectedPath = marbleDataPath.isEmpty() ? readMarbleDataPath() : marbleDataPath;
     if ( !selectedPath.isEmpty() )
         MarbleDirs::setMarbleDataPath( selectedPath );
 
