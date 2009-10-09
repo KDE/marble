@@ -16,7 +16,7 @@
 
 
 #include <QtCore/QChar>
-class QXmlStreamWriter;
+#include <QtXml/QXmlStreamWriter>
 
 #include "GeoDataPoint.h"
 #include "GeoDataLineString.h"

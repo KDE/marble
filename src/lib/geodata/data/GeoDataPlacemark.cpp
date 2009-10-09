@@ -20,7 +20,6 @@
 // Qt
 #include <QtCore/QDataStream>
 #include <QtCore/QDebug>
-#include <QtXml/QXmlStreamWriter>
 
 namespace Marble
 {
