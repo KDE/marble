@@ -11,9 +11,10 @@
 #include "OverviewMap.h"
 
 #include <QtCore/QRect>
+#include <QtGui/QCursor>
+#include <QtGui/QMouseEvent>
 #include <QtGui/QPixmap>
 #include <QtSvg/QSvgRenderer>
-#include <QtGui/QCursor>
 
 #include "AbstractProjection.h"
 #include "MarbleDirs.h"

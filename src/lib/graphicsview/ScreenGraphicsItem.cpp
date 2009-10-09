@@ -12,6 +12,8 @@
 #include "ScreenGraphicsItem.h"
 #include "ScreenGraphicsItem_p.h"
 
+#include <QtGui/QMouseEvent>
+
 // Marble
 #include "MarbleMap.h"
 #include "MarbleWidget.h"

@@ -11,6 +11,7 @@
 #include "NavigationFloatItem.h"
 
 #include <QtCore/QRect>
+#include <QtGui/QMouseEvent>
 #include <QtGui/QPixmap>
 #include <QtGui/QSlider>
 #include <QtGui/QWidget>

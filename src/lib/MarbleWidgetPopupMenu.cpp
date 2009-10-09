@@ -22,9 +22,10 @@
 #include "Planet.h"
 
 // Qt
+#include <QtCore/QDebug>
+#include <QtCore/QMimeData>
 #include <QtGui/QAction>
 #include <QtGui/QClipboard>
-#include <QtCore/QDebug>
 #include <QtGui/QMenu>
 
 using namespace Marble;

@@ -14,9 +14,15 @@
 #include <cmath>
 
 #include <QtCore/QDebug>
+#include <QtCore/QPoint>
+#include <QtCore/QPointer>
+#include <QtCore/QTime>
+#include <QtCore/QTimer>
+#include <QtGui/QCursor>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QPixmap>
+#include <QtGui/QRubberBand>
 #include <QtGui/QToolTip>
-#include <QRubberBand>
 
 #include "global.h"
 #include "GeoDataCoordinates.h"

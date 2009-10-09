@@ -18,19 +18,13 @@
 #define MARBLEWIDGETINPUTHANDLER_H
 
 #include <QtCore/QObject>
-#include <QtCore/QPoint>
-#include <QtCore/QPointer>
 #include <QtCore/QString>
-#include <QtCore/QTime>
-#include <QtCore/QTimer>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QPixmap>
-#include <QtGui/QCursor>
 
 #include "marble_export.h"
 
 class QEvent;
 class QRubberBand;
+class QTimer;
 
 namespace Marble
 {
