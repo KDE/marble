@@ -119,41 +119,8 @@ class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputH
     
  private:
     Q_DISABLE_COPY( MarbleWidgetDefaultInputHandler )
-
-    QPixmap  curpmtl;
-    QPixmap  curpmtc;
-    QPixmap  curpmtr;
-    QPixmap  curpmcr;
-    QPixmap  curpmcl;
-    QPixmap  curpmbl;
-    QPixmap  curpmbc;
-    QPixmap  curpmbr;
-
-    QCursor  arrowcur[3][3];
-
-    int      m_dirX;
-    int      m_dirY;
-
-    bool     m_leftpressed;
-    bool     m_midpressed;
-    int      m_leftpressedx;
-    int      m_leftpressedy;
-    int      m_midpressedy;
-    qreal   m_leftpresseda;
-    qreal   m_leftpressedb;
-
-    int      m_dragThreshold;
-    QTime    m_dragtimer;
-
-    QPoint       m_selectionOrigin;
-    QRubberBand *m_selectionRubber;
-
-    QPointer<AbstractDataPluginItem> m_lastToolTipItem;
-    QTimer                           m_toolTipTimer;
-    QPoint                           m_toolTipPosition;
-    
-    MarbleWidgetPopupMenu     *m_popupmenu;
-    
+    class Private;
+    Private * const d;
 };
 
 }
