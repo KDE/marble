@@ -100,9 +100,6 @@ class MarbleWidgetDefaultInputHandler::Private
 
     QCursor m_arrowcur[3][3];
 
-    int m_dirX;
-    int m_dirY;
-
     bool m_leftpressed;
     bool m_midpressed;
     int m_leftpressedx;
@@ -251,13 +248,13 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
     if ( e->type() == QEvent::MouseMove
          || e->type() == QEvent::MouseButtonPress
          || e->type() == QEvent::MouseButtonRelease )
-        {
+    {
 
         QMouseEvent *event = static_cast<QMouseEvent*>( e );
         QRegion activeRegion = m_widget->activeRegion();
 
-        d->m_dirX = 0;
-        d->m_dirY = 0;
+        int dirX = 0;
+        int dirY = 0;
 
         // To prevent error from lost MouseButtonRelease events
         if ( event->type() == QEvent::MouseMove
@@ -464,32 +461,32 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             QRect boundingRect = m_widget->mapRegion().boundingRect();
 
             if ( boundingRect.width() != 0 ) {
-                d->m_dirX = (int)( 3 * ( event->x() - boundingRect.left() ) / boundingRect.width() ) - 1;
+                dirX = (int)( 3 * ( event->x() - boundingRect.left() ) / boundingRect.width() ) - 1;
             }
 
-            if ( d->m_dirX > 1 )
-                d->m_dirX = 1;
-            if ( d->m_dirX < -1 )
-                d->m_dirX = -1;
+            if ( dirX > 1 )
+                dirX = 1;
+            if ( dirX < -1 )
+                dirX = -1;
 
             if ( boundingRect.height() != 0 ) {
-                d->m_dirY = (int)( 3 * ( event->y() - boundingRect.top() ) / boundingRect.height() ) - 1;
+                dirY = (int)( 3 * ( event->y() - boundingRect.top() ) / boundingRect.height() ) - 1;
             }
 
-            if ( d->m_dirY > 1 )
-                d->m_dirY = 1;
-            if ( d->m_dirY < -1 )
-                d->m_dirY = -1;
+            if ( dirY > 1 )
+                dirY = 1;
+            if ( dirY < -1 )
+                dirY = -1;
 
             if ( event->button() == Qt::LeftButton
                  && e->type() == QEvent::MouseButtonPress ) {
 
                 if ( polarity < 0 )
-                    m_widget->rotateBy( -m_widget->moveStep() * (qreal)(+d->m_dirX),
-                                        m_widget->moveStep() * (qreal)(+d->m_dirY) );
+                    m_widget->rotateBy( -m_widget->moveStep() * (qreal)(+dirX),
+                                        m_widget->moveStep() * (qreal)(+dirY) );
                 else
-                    m_widget->rotateBy( -m_widget->moveStep() * (qreal)(-d->m_dirX),
-                                        m_widget->moveStep() * (qreal)(+d->m_dirY) );
+                    m_widget->rotateBy( -m_widget->moveStep() * (qreal)(-dirX),
+                                        m_widget->moveStep() * (qreal)(+dirY) );
             }
         }
 
@@ -544,7 +541,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_arrowcur [1][1] = QCursor( Qt::PointingHandCursor );
         }
 
-        m_widget->setCursor( d->m_arrowcur[d->m_dirX+1][d->m_dirY+1] );
+        m_widget->setCursor( d->m_arrowcur[dirX+1][dirY+1] );
 
         return false; // let others, especially float items, still process the event
     }
