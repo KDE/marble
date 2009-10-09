@@ -43,16 +43,29 @@ namespace Marble
 class MapThemeManagerPrivate
 {
 public:
+    MapThemeManagerPrivate();
+    ~MapThemeManagerPrivate();
     QStandardItemModel* m_mapThemeModel;
     QFileSystemWatcher* m_fileSystemWatcher;
 };
+
+MapThemeManagerPrivate::MapThemeManagerPrivate()
+    : m_mapThemeModel( new QStandardItemModel( 0, 3 ) ),
+      m_fileSystemWatcher( new QFileSystemWatcher )
+{
+}
+
+MapThemeManagerPrivate::~MapThemeManagerPrivate()
+{
+    delete m_mapThemeModel;
+    delete m_fileSystemWatcher;
+}
 
 
 MapThemeManager::MapThemeManager(QObject *parent)
     : QObject(parent),
     d(new MapThemeManagerPrivate)
 {
-    d->m_mapThemeModel = new QStandardItemModel( 0, 3 );
     initFileSystemWatcher();
 
     // Delayed model initialization
@@ -61,8 +74,6 @@ MapThemeManager::MapThemeManager(QObject *parent)
 
 MapThemeManager::~MapThemeManager()
 {
-    delete d->m_mapThemeModel;
-    delete d->m_fileSystemWatcher;
     delete d;
 }
 
@@ -73,7 +84,7 @@ void MapThemeManager::initFileSystemWatcher()
     foreach(const QString& path, paths)
         qDebug() << "path to watch: " << path;
 */
-    d->m_fileSystemWatcher = new QFileSystemWatcher( paths, this );
+    d->m_fileSystemWatcher->addPaths( paths );
     connect( d->m_fileSystemWatcher, SIGNAL( directoryChanged( const QString& )),
              this, SLOT( directoryChanged( const QString& )));
     connect( d->m_fileSystemWatcher, SIGNAL( fileChanged( const QString& )),
