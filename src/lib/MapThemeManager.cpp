@@ -35,8 +35,8 @@ using namespace Marble;
 
 namespace
 {
-    const QString mapDirName = "maps";
-    const int columnRelativePath = 1;
+    static const QString mapDirName = "maps";
+    static const int columnRelativePath = 1;
 }
 
 namespace Marble
