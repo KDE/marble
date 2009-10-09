@@ -499,10 +499,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             = m_widget->model()->whichItemAt( mousePosition );
         bool dataAction = false;
         QPointer<AbstractDataPluginItem> toolTipItem;
-        for ( QList<AbstractDataPluginItem *>::iterator it = dataItems.begin();
-              it != dataItems.end() && dataAction == false && toolTipItem.isNull();
-              ++it )
-        {
+        QList<AbstractDataPluginItem *>::iterator it = dataItems.begin();
+        QList<AbstractDataPluginItem *>::iterator const end = dataItems.end();
+        for (; it != end && dataAction == false && toolTipItem.isNull(); ++it ) {
             if ( (*it)->action() ) {
                 dataAction = true;
             }
