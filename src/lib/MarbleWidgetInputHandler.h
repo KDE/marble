@@ -46,19 +46,19 @@ class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
     void setPositionSignalConnected( bool connected ){ m_positionSignalConnected = connected; }
     bool isPositionSignalConnected() const { return m_positionSignalConnected; }
 
-    virtual void init(MarbleWidget*);
+    virtual void init( MarbleWidget* );
 
     /**
      * @brief  Set whether a popup menu appears on a click (not drag) with the left mouse button
      * @param  enabled True to enable the popup menu (default), false to disable it
      */
-    void setMouseButtonPopupEnabled(Qt::MouseButton mouseButton, bool enabled);
+    void setMouseButtonPopupEnabled( Qt::MouseButton mouseButton, bool enabled );
 
     /**
      * @brief  Return whether the left mouse button popup menu is active
      * @return True iff a popup menu is shown on left mouse button clicks
      */
-    bool isMouseButtonPopupEnabled(Qt::MouseButton mouseButton) const;
+    bool isMouseButtonPopupEnabled( Qt::MouseButton mouseButton ) const;
 
  Q_SIGNALS:
     // Mouse button menus
@@ -81,7 +81,7 @@ class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
     QTimer   *m_mouseWheelTimer;
 
     Qt::MouseButtons m_disabledMouseButtons;
-    
+
  private:
     Q_DISABLE_COPY( MarbleWidgetInputHandler )
 };
@@ -90,7 +90,7 @@ class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
 
 class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputHandler
 {
- Q_OBJECT
+    Q_OBJECT
 
  public:
     MarbleWidgetDefaultInputHandler();
@@ -98,8 +98,8 @@ class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputH
 
     static bool keyEvent( MarbleMap * map, QEvent* e );
     
-    virtual void init(MarbleWidget*);
-    
+    virtual void init( MarbleWidget* );
+
  protected:
     bool eventFilter( QObject *, QEvent * );
 
