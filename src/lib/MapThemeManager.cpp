@@ -62,9 +62,9 @@ MapThemeManagerPrivate::~MapThemeManagerPrivate()
 }
 
 
-MapThemeManager::MapThemeManager(QObject *parent)
-    : QObject(parent),
-    d(new MapThemeManagerPrivate)
+MapThemeManager::MapThemeManager( QObject *parent )
+    : QObject( parent ),
+      d( new MapThemeManagerPrivate )
 {
     initFileSystemWatcher();
 
@@ -105,25 +105,24 @@ GeoSceneDocument* MapThemeManager::loadMapThemeFile( const QString& mapThemePath
 {
     // Check whether file exists
     QFile file( MarbleDirs::path( mapThemePath ) );
-    if (!file.exists()) {
+    if ( !file.exists() ) {
         qDebug() << "File does not exist:" << MarbleDirs::path( mapThemePath );
         return 0;
     }
 
     // Open file in right mode
-    file.open(QIODevice::ReadOnly);
+    file.open( QIODevice::ReadOnly );
 
-    GeoSceneParser parser(GeoScene_DGML);
+    GeoSceneParser parser( GeoScene_DGML );
 
-    if (!parser.read(&file)) {
+    if ( !parser.read( &file )) {
         qDebug("Could not parse file!");
         return 0;
     }
 
     // Get result document
-    GeoSceneDocument* document = static_cast<GeoSceneDocument*>(parser.releaseDocument());
-    Q_ASSERT(document);
-
+    GeoSceneDocument* document = static_cast<GeoSceneDocument*>( parser.releaseDocument() );
+    Q_ASSERT( document );
     return document;
 }
 
@@ -153,7 +152,6 @@ QStringList MapThemeManager::findMapThemes( const QString& basePath )
     QStringList mapDirs;
 
     for ( int planet = 0; planet < mapPaths.size(); ++planet ) {
-
         QDir themeDir = QDir( mapPathName + '/' + mapPaths.at( planet ) );
         QStringList themeMapPaths = themeDir.entryList( 
                                      QStringList( "*" ),
@@ -166,12 +164,11 @@ QStringList MapThemeManager::findMapThemes( const QString& basePath )
         }
     }
 
-
     QStringList mapFiles;
     QStringListIterator it( mapDirs );
     while ( it.hasNext() ) {
         QString themeDir = it.next() + '/';
-        QString themeDirName = QDir( themeDir ).path().section( '/', -2, -1);
+        QString themeDirName = QDir( themeDir ).path().section( '/', -2, -1 );
         QStringList tmp = ( QDir( themeDir ) ).entryList( QStringList( "*.dgml" ),
                                               QDir::Files | QDir::NoSymLinks );
         if ( !tmp.isEmpty() ) {
@@ -196,8 +193,8 @@ QStringList MapThemeManager::findMapThemes()
     // remove duplicate entries
     allMapFiles.sort();
     for ( int i = 1; i < allMapFiles.size(); ++i ) {
-        if ( allMapFiles.at(i) == allMapFiles.at( i - 1 ) ) {
-            allMapFiles.removeAt(i);
+        if ( allMapFiles.at(i) == allMapFiles.at( i-1 ) ) {
+            allMapFiles.removeAt( i );
             --i;
         }
     }
@@ -238,13 +235,13 @@ QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThe
         QSize maxIconSize( 136, 136 );
         if ( themeIconPixmap.size() != maxIconSize ) {
             qDebug() << "Smooth scaling theme icon";
-            themeIconPixmap = themeIconPixmap.scaled( maxIconSize, 
-                                                    Qt::KeepAspectRatio,
-                                                    Qt::SmoothTransformation );
+            themeIconPixmap = themeIconPixmap.scaled( maxIconSize,
+                                                      Qt::KeepAspectRatio,
+                                                      Qt::SmoothTransformation );
         }
     }
 
-    QIcon mapThemeIcon =  QIcon(themeIconPixmap);
+    QIcon mapThemeIcon =  QIcon( themeIconPixmap );
 
     QString name = mapTheme->head()->name();
     QString description = mapTheme->head()->description();
@@ -252,11 +249,11 @@ QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThe
     QStandardItem *item = new QStandardItem( name );
     item->setData( tr( name.toUtf8() ), Qt::DisplayRole );
     item->setData( mapThemeIcon, Qt::DecorationRole );
-    item->setData( QString( "<span style=\" max-width: 150 px;\"> " 
-                   + tr( description.toUtf8() ) + " </span>"), Qt::ToolTipRole);
+    item->setData( QString( "<span style=\" max-width: 150 px;\"> "
+                            + tr( description.toUtf8() ) + " </span>" ), Qt::ToolTipRole );
 
     itemList << item;
-    itemList << new QStandardItem( mapTheme->head()->target() + '/' 
+    itemList << new QStandardItem( mapTheme->head()->target() + '/'
                                    + mapTheme->head()->theme() + '/'
                                    + mapTheme->head()->theme() + ".dgml" );
     itemList << new QStandardItem( tr( description.toUtf8() ) );
@@ -275,14 +272,14 @@ void MapThemeManager::updateMapThemeModel()
     d->m_mapThemeModel->setHeaderData(2, Qt::Horizontal, tr("Description"));
 
     QStringList stringlist = findMapThemes();
-    QStringListIterator  it(stringlist);
+    QStringListIterator it( stringlist );
 
     while ( it.hasNext() ) {
         QString mapThemeID = it.next();
 
     	QList<QStandardItem *> itemList = createMapThemeRow( mapThemeID );
         if ( !itemList.empty() ) {
-            d->m_mapThemeModel->appendRow(itemList);
+            d->m_mapThemeModel->appendRow( itemList );
         }
     }
 }
@@ -309,9 +306,9 @@ void MapThemeManager::fileChanged( const QString& path )
     QString mapThemeId = path.section( '/', -3 );
     qDebug() << "mapThemeId:" << mapThemeId;
     QList<QStandardItem *> matchingItems = d->m_mapThemeModel->findItems( mapThemeId,
-                                                                       Qt::MatchFixedString
-				                                       | Qt::MatchCaseSensitive,
-                                                                       columnRelativePath );
+                                                                          Qt::MatchFixedString
+                                                                          | Qt::MatchCaseSensitive,
+                                                                          columnRelativePath );
     qDebug() << "matchingItems:" << matchingItems.size();
     Q_ASSERT( matchingItems.size() <= 1 );
     int insertAtRow = 0;
