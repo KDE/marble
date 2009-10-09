@@ -24,8 +24,8 @@
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 
-#include <QThread>
-#include <QVector>
+#include <QtCore/QThread>
+#include <QtCore/QVector>
 
 class QString;
 

@@ -13,7 +13,7 @@
 #include "SunControlWidget.h"
 
 // Qt
-#include <QShowEvent>
+#include <QtGui/QShowEvent>
 
 #include "ExtDateTime.h"
 

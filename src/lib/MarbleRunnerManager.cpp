@@ -31,7 +31,7 @@
 #include <QtCore/QString>
 #include <QtCore/QVector>
 
-#include <QtDebug>
+#include <QtCore/QtDebug>
 
 namespace Marble
 {

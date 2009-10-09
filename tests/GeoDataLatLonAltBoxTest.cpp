@@ -8,7 +8,7 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#include <QObject>
+#include <QtCore/QObject>
 #include <QtTest/QtTest>
 
 #include "GeoDataCoordinates.h"

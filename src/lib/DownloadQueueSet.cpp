@@ -15,7 +15,7 @@
 
 #include "DownloadQueueSet.h"
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include "HttpJob.h"
 
