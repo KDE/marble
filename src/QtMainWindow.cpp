@@ -260,8 +260,8 @@ void MainWindow::createMenus()
 
 //    FIXME: Discuss if this is the best place to put this
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
-    for (; it != end; ++it ) {
+    QList<RenderPlugin *>::const_iterator const listEnd = pluginList.constEnd();
+    for (; it != listEnd; ++it ) {
         connect( (*it), SIGNAL( actionGroupsChanged() ),
                  this, SLOT( createPluginMenus() ) );
     }
