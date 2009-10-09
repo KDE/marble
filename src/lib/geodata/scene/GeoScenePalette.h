@@ -44,7 +44,7 @@ class GeoScenePalette : public GeoNode
     QString file() const;
     void    setFile( const QString& file );
 
-    bool operator==( const GeoScenePalette& rhs );
+    bool operator==( const GeoScenePalette& rhs ) const;
 
  private:
     QString m_type;

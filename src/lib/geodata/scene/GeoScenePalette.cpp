@@ -51,7 +51,7 @@ void GeoScenePalette::setFile( const QString& file )
     m_file = file;
 }
 
-bool GeoScenePalette::operator==( const GeoScenePalette& rhs )
+bool GeoScenePalette::operator==( const GeoScenePalette& rhs ) const
 {
     return m_file == rhs.m_file && m_type == rhs.m_type;
 }
