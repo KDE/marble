@@ -76,7 +76,7 @@ int main (int argc, char *argv[])
                          "pspendrin@gmail.com" );
     aboutData.addAuthor( ki18n( "Jens-Michael Hoffmann" ),
                          ki18n( "OpenStreetMap Integration, OSM Namefinder, Download Management" ),
-                         "jensmh@gmx.de" );
+                         "jmho@c-xx.com", "http://www.c-xx.com" );
     aboutData.addAuthor( ki18n( "Henry de Valence" ),
                          ki18n( "Core Developer: Marble Runners, World-Clock Plasmoid" ),
                          "hdevalence@gmail.com" );
