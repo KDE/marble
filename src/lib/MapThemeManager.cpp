@@ -31,8 +31,6 @@
 #include "GeoSceneParser.h"
 #include "MarbleDirs.h"
 
-using namespace Marble;
-
 namespace
 {
     static const QString mapDirName = "maps";
@@ -49,7 +47,6 @@ public:
     QFileSystemWatcher* m_fileSystemWatcher;
 };
 
-}
 
 MapThemeManager::MapThemeManager(QObject *parent)
     : QObject(parent),
@@ -362,6 +359,8 @@ void MapThemeManager::addMapThemePaths( const QString& mapPathName, QStringList&
             }
         }
     }
+}
+
 }
 
 #include "MapThemeManager.moc"
