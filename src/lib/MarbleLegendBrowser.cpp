@@ -102,7 +102,8 @@ void MarbleLegendBrowser::initTheme()
         d->m_checkBoxMap.clear();
 
         QVector<GeoSceneProperty*>::const_iterator it = allProperties.constBegin();
-        for (; it != allProperties.constEnd(); ++it) {
+        QVector<GeoSceneProperty*>::const_iterator const end = allProperties.constEnd();
+        for (; it != end; ++it ) {
             if ( (*it)->available() ) {
                 d->m_checkBoxMap[ (*it)->name() ] = (*it)->value();
             }
@@ -192,8 +193,9 @@ void MarbleLegendBrowser::translateHtml( QString & html )
     s.replace( QRegExp( "\\s*\n\\s*" ), "\n" );
     QStringList words = s.split( '\n', QString::SkipEmptyParts );
 
-    for (QStringList::const_iterator i = words.constBegin(); 
-         i != words.constEnd(); ++i)
+    QStringList::const_iterator i = words.constBegin();
+    QStringList::const_iterator const end = words.constEnd();
+    for (; i != end; ++i )
         html.replace( *i, tr( (*i).toUtf8() ) );
 }
 

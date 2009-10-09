@@ -82,7 +82,8 @@ void MeasureTool::drawMeasurePoints( GeoPainter *painter,
 
     // Paint the marks.
     GeoDataLineString::const_iterator it = m_measureLineString.constBegin();
-    for (; it != m_measureLineString.constEnd(); ++it )
+    GeoDataLineString::const_iterator const end = m_measureLineString.constEnd();
+    for (; it != end; ++it )
     {
         qreal  lon;
         qreal  lat;

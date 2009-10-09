@@ -52,8 +52,9 @@ QUrl PhotoPluginModel::generateUrl( const QString& service,
     url += "&api_key=";
     url += flickrApiKey;
     
-    QHash<QString,QString>::const_iterator it;
-    for( it = options.constBegin(); it != options.constEnd(); ++it ) {
+    QHash<QString,QString>::const_iterator it = options.constBegin();
+    QHash<QString,QString>::const_iterator const end = options.constEnd();
+    for (; it != end; ++it ) {
         url += '&';
         url += it.key();
         url += '=';

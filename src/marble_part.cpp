@@ -420,7 +420,8 @@ void MarblePart::readSettings()
 
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    for (; i != pluginList.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
         if ( pluginEnabled.contains( (*i)->nameId() ) ) {
             (*i)->setEnabled( pluginEnabled[ (*i)->nameId() ] );
             // I think this isn't needed, as it is part of setEnabled()
@@ -530,7 +531,8 @@ void MarblePart::writeSettings()
 
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    for (; i != pluginList.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
 	pluginEnabled << static_cast<int>( (*i)->enabled() );
         pluginVisible << static_cast<int>( (*i)->visible() );
 	pluginNameId  << (*i)->nameId();
@@ -651,7 +653,8 @@ void MarblePart::setupActions()
     // Action: Show Crosshairs option
     QList<RenderPlugin *> pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    for (; i != pluginList.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
         if ( (*i)->nameId() == "crosshairs" ) {
             actionCollection()->addAction( "show_crosshairs", (*i)->action() );
         }
@@ -692,7 +695,8 @@ void MarblePart::setupActions()
 
     //    FIXME: Discuss if this is the best place to put this
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
-    for (; it != pluginList.constEnd(); ++it) {
+    QList<RenderPlugin *>::const_iterator const itEnd = pluginList.constEnd();
+    for (; it != itEnd; ++it ) {
         connect( (*it), SIGNAL( actionGroupsChanged() ),
                  this, SLOT( createPluginMenus() ) );
     }
@@ -705,7 +709,8 @@ void MarblePart::createInfoBoxesMenu()
     QList<QAction*> actionList;
 
     QList<AbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
-    for (; i != floatItemList.constEnd(); ++i) {
+    QList<AbstractFloatItem *>::const_iterator const end = floatItemList.constEnd();
+    for (; i != end; ++i ) {
         actionList.append( (*i)->action() );
     }
 
@@ -719,9 +724,9 @@ void MarblePart::createOnlineServicesMenu()
     
     QList<QAction*> actionList;
     
-    QList<RenderPlugin *>::const_iterator i;
-    
-    for( i = renderPluginList.constBegin(); i != renderPluginList.constEnd(); ++i ) {
+    QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
+    for (; i != end; ++i ) {
         // FIXME: This will go into the layer manager when AbstractDataPlugin is an interface
         AbstractDataPlugin *dataPlugin = qobject_cast<AbstractDataPlugin *>(*i);
         
@@ -766,10 +771,11 @@ void MarblePart::createPluginMenus()
     unplugActionList("plugins_actionlist");
     QList<QActionGroup*> *tmp_toolbarActionGroups;
     QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
-    QList<RenderPlugin *>::const_iterator i;
+    QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
+    QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
 
     //Load the toolbars
-    for( i = renderPluginList.constBegin(); i != renderPluginList.constEnd(); ++i ) {
+    for (; i != end; ++i ) {
         tmp_toolbarActionGroups = (*i)->toolbarActionGroups();
 
         if ( tmp_toolbarActionGroups ) {
@@ -986,7 +992,8 @@ void MarblePart::editSettings()
 
     QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    for (; i != pluginList.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
 	parentItem->appendRow( (*i)->item() );
     }
 
@@ -1026,7 +1033,8 @@ void MarblePart::applyPluginState()
 {
     QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    for (; i != pluginList.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
         (*i)->applyItemState();
     }
 }
@@ -1035,7 +1043,8 @@ void MarblePart::retrievePluginState()
 {
     QList<RenderPlugin *>  pluginList = m_controlView->marbleWidget()->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    for (; i != pluginList.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
         (*i)->retrieveItemState();
     }
 }
@@ -1191,7 +1200,8 @@ void MarblePart::lockFloatItemPosition( bool enabled )
     QList<AbstractFloatItem *> floatItemList = m_controlView->marbleWidget()->floatItems();
 
     QList<AbstractFloatItem *>::const_iterator i = floatItemList.constBegin();
-    for (; i != floatItemList.constEnd(); ++i) {
+    QList<AbstractFloatItem *>::const_iterator const end = floatItemList.constEnd();
+    for (; i != end; ++i ) {
         // Locking one would suffice as it affects all. 
 	// Nevertheless go through all.
         (*i)->setPositionLocked(enabled);

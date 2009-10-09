@@ -135,7 +135,8 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
 
     QList<RenderPlugin *>  pluginList = d->m_marbleWidget->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    for (; i != pluginList.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
         parentItem->appendRow( (*i)->item() );
     }
 
@@ -315,7 +316,8 @@ void QtMarbleConfigDialog::readSettings()
 
     QList<RenderPlugin *> pluginList = d->m_marbleWidget->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    for (; i != pluginList.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
         if ( pluginEnabled.contains( (*i)->nameId() ) ) {
             (*i)->setEnabled( pluginEnabled[ (*i)->nameId() ] );
         }
@@ -392,7 +394,8 @@ void QtMarbleConfigDialog::writeSettings()
  
     QList<RenderPlugin *> pluginList = d->m_marbleWidget->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    for (; i != pluginList.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
         pluginEnabled << static_cast<int>( (*i)->enabled() );
         pluginVisible << static_cast<int>( (*i)->visible() );
         pluginNameId  << (*i)->nameId();
@@ -420,7 +423,8 @@ void QtMarbleConfigDialog::retrievePluginState()
 {
     QList<RenderPlugin *>  pluginList = d->m_marbleWidget->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    for (; i != pluginList.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
         (*i)->retrieveItemState();
     }
 }
@@ -429,7 +433,8 @@ void QtMarbleConfigDialog::applyPluginState()
 {
     QList<RenderPlugin *>  pluginList = d->m_marbleWidget->renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    for (; i != pluginList.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
         (*i)->applyItemState();
     }
 }

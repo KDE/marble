@@ -94,7 +94,8 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     int  actionidx = 1;
 
     QVector<QModelIndex>::const_iterator it = m_featurelist.constBegin();
-    for (; it != m_featurelist.constEnd(); ++it )
+    QVector<QModelIndex>::const_iterator const itEnd = m_featurelist.constEnd();
+    for (; it != itEnd; ++it )
     {
         QAction *action = new QAction( (*it).data().toString(), m_lmbMenu );
         action->setData( actionidx );
@@ -104,8 +105,9 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     }
     
     m_itemList = m_model->whichItemAt( curpos );
-    QList<AbstractDataPluginItem *>::const_iterator itW;
-    for( itW = m_itemList.constBegin(); itW != m_itemList.constEnd(); ++itW )
+    QList<AbstractDataPluginItem *>::const_iterator itW = m_itemList.constBegin();
+    QList<AbstractDataPluginItem *>::const_iterator const itWEnd = m_itemList.constEnd();
+    for (; itW != itWEnd; ++itW )
     {
         m_lmbMenu->addAction( (*itW)->action() );
     }

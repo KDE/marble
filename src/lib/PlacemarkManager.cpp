@@ -126,8 +126,9 @@ void PlacemarkManager::removeGeoDataDocument( int index )
 void PlacemarkManager::createFilterProperties( QVector<Marble::GeoDataPlacemark> &container )
 {
 
-    QVector<GeoDataPlacemark>::Iterator i;
-    for ( i = container.begin(); i != container.end(); ++i ) {
+    QVector<GeoDataPlacemark>::Iterator i = container.begin();
+    QVector<GeoDataPlacemark>::Iterator const end = container.end();
+    for (; i != end; ++i ) {
         GeoDataPlacemark& placemark = *i;
 
         bool hasPopularity = false;

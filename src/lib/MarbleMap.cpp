@@ -644,7 +644,8 @@ bool MarbleMap::showCrosshairs() const
 
     QList<RenderPlugin *> pluginList = renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    for (; i != pluginList.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
         if ( (*i)->nameId() == "crosshairs" ) {
             visible = (*i)->visible();
         }
@@ -1018,7 +1019,8 @@ void MarbleMap::setShowCrosshairs( bool visible )
 {
     QList<RenderPlugin *> pluginList = renderPlugins();
     QList<RenderPlugin *>::const_iterator i = pluginList.constBegin();
-    for (; i != pluginList.constEnd(); ++i) {
+    QList<RenderPlugin *>::const_iterator const end = pluginList.constEnd();
+    for (; i != end; ++i ) {
         if ( (*i)->nameId() == "crosshairs" ) {
             (*i)->setVisible( visible );
         }

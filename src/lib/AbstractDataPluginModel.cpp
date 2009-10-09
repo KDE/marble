@@ -67,13 +67,15 @@ class AbstractDataPluginModelPrivate
     }
     
     ~AbstractDataPluginModelPrivate() {
-        QList<AbstractDataPluginItem*>::iterator lIt;
-        for( lIt = m_itemSet.begin(); lIt != m_itemSet.end(); ++lIt ) {
+        QList<AbstractDataPluginItem*>::iterator lIt = m_itemSet.begin();
+        QList<AbstractDataPluginItem*>::iterator const lItEnd = m_itemSet.end();
+        for (; lIt != lItEnd; ++lIt ) {
             (*lIt)->deleteLater();
         }
         
-        QHash<QString,AbstractDataPluginItem*>::iterator hIt;
-        for( hIt = m_downloadingItems.begin(); hIt != m_downloadingItems.end(); ++hIt ) {
+        QHash<QString,AbstractDataPluginItem*>::iterator hIt = m_downloadingItems.begin();
+        QHash<QString,AbstractDataPluginItem*>::iterator const hItEnd = m_downloadingItems.end();
+        for (; hIt != hItEnd; ++hIt ) {
             (*hIt)->deleteLater();
         }
         
@@ -131,15 +133,13 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
     QString target = facade->target();
     QList<AbstractDataPluginItem*> list;
     
-    QList<AbstractDataPluginItem*>::iterator i;
-    
     d->m_displayedItems.removeAll( 0 );
-    
+
+    QList<AbstractDataPluginItem*>::iterator i = d->m_displayedItems.begin();
+    QList<AbstractDataPluginItem*>::iterator end = d->m_displayedItems.end();
+
     // Items that are already shown have the highest priority
-    for ( i = d->m_displayedItems.begin();
-          i != d->m_displayedItems.end() && list.size() < number;
-          ++i )
-    {
+    for (; i != end && list.size() < number; ++i ) {
         // Don't try to access an object that doesn't exist
         if( !*i ) {
             continue;
@@ -169,7 +169,9 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
         
     d->m_itemSet.removeAll( 0 );
     
-    for ( i = d->m_itemSet.begin(); i != d->m_itemSet.end() && list.size() < number; ++i ) {
+    for ( i = d->m_itemSet.begin(), end = d->m_itemSet.end();
+          i != end && list.size() < number; ++i )
+    {
         // Don't try to access an object that doesn't exist
         if( !*i ) {
             qDebug() << "Warning: Null pointer in m_itemSet";
@@ -347,12 +349,10 @@ bool AbstractDataPluginModel::fileExists( const QString& id, const QString& type
 
 AbstractDataPluginItem *AbstractDataPluginModel::findItem( const QString& id ) const
 {
-    QList<AbstractDataPluginItem*>::iterator listIt;
+    QList<AbstractDataPluginItem*>::iterator listIt = d->m_itemSet.begin();
+    QList<AbstractDataPluginItem*>::iterator const end = d->m_itemSet.end();
     
-    for( listIt = d->m_itemSet.begin();
-         listIt != d->m_itemSet.end();
-         ++listIt )
-    {
+    for (; listIt != end; ++listIt ) {
         if( (*listIt)->id() == id ) {
             return (*listIt);
         }
