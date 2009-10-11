@@ -14,16 +14,11 @@
 // The HttpDownloadManager manages http downloads.
 //
 
-
 #ifndef MARBLE_HTTPDOWNLOADMANAGER_H
 #define MARBLE_HTTPDOWNLOADMANAGER_H
 
-
 #include <QtCore/QString>
 #include <QtCore/QUrl>
-
-#include "DownloadPolicy.h"
-#include "DownloadQueueSet.h"
 
 #include "marble_export.h"
 
