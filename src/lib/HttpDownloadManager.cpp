@@ -32,7 +32,7 @@ const quint32 requeueTime = 60000;
 class HttpDownloadManager::Private
 {
   public:
-    Private( const QUrl& serverUrl, StoragePolicy *policy );
+    explicit Private( StoragePolicy *policy );
     ~Private();
 
     bool m_downloadEnabled;
@@ -44,16 +44,14 @@ class HttpDownloadManager::Private
      * - a queue for retries of failed downloads */
     QMap<DownloadPolicyKey, DownloadQueueSet *> m_queueSets;
     int m_jobQueueLimit;
-    QUrl m_serverUrl;
     StoragePolicy *m_storagePolicy;
     NetworkPlugin *m_networkPlugin;
 };
 
-HttpDownloadManager::Private::Private( const QUrl& serverUrl, StoragePolicy *policy )
+HttpDownloadManager::Private::Private( StoragePolicy *policy )
     : m_downloadEnabled( true ), //enabled for now
       m_requeueTimer( 0 ),
       m_jobQueueLimit( 1000 ),
-      m_serverUrl( serverUrl ),
       m_storagePolicy( policy ),
       m_networkPlugin( 0 )
 {
@@ -66,9 +64,8 @@ HttpDownloadManager::Private::~Private()
 }
 
 
-HttpDownloadManager::HttpDownloadManager( const QUrl& serverUrl,
-                                          StoragePolicy *policy )
-    : d( new Private( serverUrl, policy ))
+HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy )
+    : d( new Private( policy ))
 {
       d->m_requeueTimer = new QTimer( this );
       d->m_requeueTimer->setInterval( requeueTime );
@@ -85,11 +82,6 @@ HttpDownloadManager::~HttpDownloadManager()
 {
     d->m_downloadEnabled = false;
     delete d;
-}
-
-void HttpDownloadManager::setServerUrl( const QUrl& serverUrl )
-{
-    d->m_serverUrl = serverUrl;
 }
 
 void HttpDownloadManager::setJobQueueLimit( int jobQueueLimit )
@@ -124,14 +116,6 @@ void HttpDownloadManager::addDownloadPolicy( const DownloadPolicy& policy )
 StoragePolicy* HttpDownloadManager::storagePolicy() const
 {
     return d->m_storagePolicy;
-}
-
-void HttpDownloadManager::addJob( const QString& relativeUrlString, const QString &id )
-{
-    QUrl sourceUrl( d->m_serverUrl );
-    QString path = sourceUrl.path();
-    sourceUrl.setPath( path + relativeUrlString );
-    addJob( sourceUrl, relativeUrlString, id );
 }
 
 void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFileName,

@@ -86,7 +86,7 @@ class MarbleModelPrivate
           m_dataFacade( 0 ),
           m_mapTheme( 0 ),
           m_layerManager( 0 ),
-          m_downloadManager( new HttpDownloadManager( QUrl(), new FileStoragePolicy(
+          m_downloadManager( new HttpDownloadManager( new FileStoragePolicy(
                                                                    MarbleDirs::localPath() ))),
           m_fileManager( 0 ),
           m_placemarkmanager( 0 )

@@ -108,8 +108,7 @@ AbstractDataPluginModel::AbstractDataPluginModel( const QString& name, QObject *
     // Initializing file and download System
     CacheStoragePolicy *storagePolicy = new CacheStoragePolicy( MarbleDirs::localPath()
                                                                 + "/cache/" + d->m_name + '/' );
-    d->m_downloadManager = new HttpDownloadManager( QUrl(),
-                                                    storagePolicy );
+    d->m_downloadManager = new HttpDownloadManager( storagePolicy );
     connect( d->m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
              this,                 SLOT( processFinishedJob( QString , QString ) ) );
     

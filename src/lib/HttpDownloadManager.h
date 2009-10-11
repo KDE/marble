@@ -55,20 +55,14 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     /**
      * Creates a new http download manager.
      *
-     * @param serverUrl The url of the server to download from.
      * @param policy The storage policy for this manager.
      */
-    HttpDownloadManager( const QUrl& serverUrl, StoragePolicy *policy );
+    explicit HttpDownloadManager( StoragePolicy *policy );
 
     /**
      * Destroys the http download manager.
      */
     virtual ~HttpDownloadManager();
-
-    /**
-     * Sets the url of the server to download from.
-     */
-    void setServerUrl( const QUrl& serverUrl );
 
     /**
      * Sets the limit of jobs to be queued.
@@ -89,10 +83,6 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     StoragePolicy* storagePolicy() const;
 
  public Q_SLOTS:
-    /**
-     * Adds a new job with the relative url and the given id.
-     */
-    void addJob( const QString& relativeUrlString, const QString &id );
 
     /**
      * Adds a new job with a sourceUrl, destination file name and given id.
