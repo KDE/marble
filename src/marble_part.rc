@@ -55,7 +55,7 @@
 </ToolBar>
 
 <ToolBar position="Top" hidden="false" name="pluginToolBar">
-    <text>Edit ToolBar</text>
+    <text>Edit Toolbar</text>
      <ActionList name="plugins_actionlist" />
 </ToolBar>
 
