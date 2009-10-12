@@ -31,8 +31,8 @@ FileStoragePolicy::FileStoragePolicy( const QString &dataDirectory, QObject *par
 {
     if ( m_dataDirectory.isEmpty() )
         m_dataDirectory = MarbleDirs::localPath() + "/cache/";
- 
-    if ( ! QDir( m_dataDirectory ).exists() ) 
+
+    if ( !QDir( m_dataDirectory ).exists() ) 
         QDir::root().mkpath( m_dataDirectory );
 }
 
@@ -43,7 +43,6 @@ FileStoragePolicy::~FileStoragePolicy()
 bool FileStoragePolicy::fileExists( const QString &fileName ) const
 {
     const QString fullName( m_dataDirectory + '/' + fileName );
-
     return QFile::exists( fullName );
 }
 
@@ -53,7 +52,7 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
 
     // Create directory if it doesn't exist yet...
     QFileInfo info( fullName );
-    
+
     const QDir localFileDir = info.dir();
     const QString localFileDirPath = localFileDir.absolutePath();
 
@@ -67,16 +66,16 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
         qCritical() << "file.open" << m_errorMsg;
         return false;
     }
-    
+
     quint64 oldSize = file.size();
 
     if ( !file.write( data ) ) {
         m_errorMsg = QString( "%1: %2" ).arg( fullName ).arg( file.errorString() );
         qCritical() << "file.write" << m_errorMsg;
-	emit sizeChanged( file.size() - oldSize );
+        emit sizeChanged( file.size() - oldSize );
         return false;
     }
-    
+
     emit sizeChanged( file.size() - oldSize );
     file.close();
 
@@ -115,7 +114,7 @@ void FileStoragePolicy::clearCache()
                 while (itTile.hasNext()) {
                     itTile.next();
                     QString filePath = itTile.filePath();
-		    QString lowerCase = filePath.toLower();
+                    QString lowerCase = filePath.toLower();
 
                     // We try to be very careful and just delete images
                     if ( lowerCase.endsWith( ".jpg" ) 
@@ -124,9 +123,9 @@ void FileStoragePolicy::clearCache()
                       || lowerCase.endsWith( ".svg" )
                     )
                     {
-			// We cannot emit clear, because we don't make a full clear
-			QFile file( filePath );
-			emit sizeChanged( -file.size() );
+                        // We cannot emit clear, because we don't make a full clear
+                        QFile file( filePath );
+                        emit sizeChanged( -file.size() );
                         file.remove();
                     }
                 }
