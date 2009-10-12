@@ -125,7 +125,6 @@ HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy )
 
 HttpDownloadManager::~HttpDownloadManager()
 {
-    d->m_downloadEnabled = false;
     delete d;
 }
 
