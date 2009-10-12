@@ -35,6 +35,10 @@ class HttpDownloadManager::Private
     explicit Private( StoragePolicy *policy );
     ~Private();
 
+    HttpJob *createJob( const QUrl& sourceUrl, const QString& destFileName,
+                        const QString &id );
+    DownloadQueueSet *findQueues( const QString& hostName );
+
     bool m_downloadEnabled;
     QTimer *m_requeueTimer;
     /**
@@ -46,6 +50,7 @@ class HttpDownloadManager::Private
     int m_jobQueueLimit;
     StoragePolicy *m_storagePolicy;
     NetworkPlugin *m_networkPlugin;
+
 };
 
 HttpDownloadManager::Private::Private( StoragePolicy *policy )
@@ -63,6 +68,47 @@ HttpDownloadManager::Private::~Private()
     delete m_networkPlugin;
 }
 
+HttpJob *HttpDownloadManager::Private::createJob( const QUrl& sourceUrl,
+                                                  const QString& destFileName,
+                                                  const QString &id )
+{
+    if ( !m_networkPlugin ) {
+        PluginManager pluginManager;
+        QList<NetworkPlugin *> networkPlugins = pluginManager.createNetworkPlugins();
+        if ( !networkPlugins.isEmpty() ) {
+            // FIXME: not just take the first plugin, but use some configuration setting
+            // take the first plugin and delete the rest
+            m_networkPlugin = networkPlugins.takeFirst();
+            qDeleteAll( networkPlugins );
+        }
+        else {
+            m_downloadEnabled = false;
+            return 0;
+        }
+    }
+    Q_ASSERT( m_networkPlugin );
+    return m_networkPlugin->createJob( sourceUrl, destFileName, id );
+}
+
+DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostName )
+{
+    DownloadQueueSet * result = 0;
+    QMap<DownloadPolicyKey, DownloadQueueSet*>::iterator pos = m_queueSets.begin();
+    QMap<DownloadPolicyKey, DownloadQueueSet*>::iterator const end = m_queueSets.end();
+    for (; pos != end; ++pos ) {
+        if ( pos.key().matches( hostName )) {
+            result = pos.value();
+            break;
+        }
+    }
+    // FIXME:
+    if ( !result ) {
+        Q_ASSERT( !m_queueSets.isEmpty() );
+        result = m_queueSets.begin().value();
+    }
+    return result;
+}
+
 
 HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy )
     : d( new Private( policy ))
@@ -76,7 +122,6 @@ HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy )
       defaultDownloadPolicy.setMaximumConnections( 20 );
       addDownloadPolicy( defaultDownloadPolicy );
 }
-
 
 HttpDownloadManager::~HttpDownloadManager()
 {
@@ -124,9 +169,9 @@ void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFile
     if ( !d->m_downloadEnabled )
         return;
 
-    DownloadQueueSet * const queueSet = findQueues( sourceUrl.host() );
+    DownloadQueueSet * const queueSet = d->findQueues( sourceUrl.host() );
     if ( queueSet->canAcceptJob( sourceUrl, destFileName )) {
-        HttpJob * const job = createJob( sourceUrl, destFileName, id );
+        HttpJob * const job = d->createJob( sourceUrl, destFileName, id );
         if ( job ) {
             queueSet->addJob( job );
         }
@@ -165,66 +210,5 @@ void HttpDownloadManager::startRetryTimer()
     if ( !d->m_requeueTimer->isActive() )
         d->m_requeueTimer->start();
 }
-
-HttpJob *HttpDownloadManager::createJob( const QUrl& sourceUrl, const QString& destFileName,
-                                         const QString &id )
-{
-    if ( !d->m_networkPlugin ) {
-        PluginManager pluginManager;
-        QList<NetworkPlugin *> networkPlugins = pluginManager.createNetworkPlugins();
-        if ( !networkPlugins.isEmpty() ) {
-            // FIXME: not just take the first plugin, but use some configuration setting
-            // take the first plugin and delete the rest
-            d->m_networkPlugin = networkPlugins.takeFirst();
-            qDeleteAll( networkPlugins );
-            d->m_networkPlugin->setParent( this );
-        }
-        else {
-            d->m_downloadEnabled = false;
-            return 0;
-        }
-    }
-    Q_ASSERT( d->m_networkPlugin );
-    return d->m_networkPlugin->createJob( sourceUrl, destFileName, id );
-}
-
-DownloadQueueSet const * HttpDownloadManager::findQueues( const QString& hostName ) const
-{
-    DownloadQueueSet const * result = 0;
-    QMap<DownloadPolicyKey, DownloadQueueSet*>::const_iterator pos = d->m_queueSets.constBegin();
-    QMap<DownloadPolicyKey, DownloadQueueSet*>::const_iterator const end = d->m_queueSets.constEnd();
-    for (; pos != end; ++pos ) {
-        if ( pos.key().matches( hostName )) {
-            result = pos.value();
-            break;
-        }
-    }
-    // FIXME:
-    if ( !result ) {
-        Q_ASSERT( !d->m_queueSets.isEmpty() );
-        result = d->m_queueSets.constBegin().value();
-    }
-    return result;
-}
-
-DownloadQueueSet *HttpDownloadManager::findQueues( const QString& hostName )
-{
-    DownloadQueueSet * result = 0;
-    QMap<DownloadPolicyKey, DownloadQueueSet*>::iterator pos = d->m_queueSets.begin();
-    QMap<DownloadPolicyKey, DownloadQueueSet*>::iterator const end = d->m_queueSets.end();
-    for (; pos != end; ++pos ) {
-        if ( pos.key().matches( hostName )) {
-            result = pos.value();
-            break;
-        }
-    }
-    // FIXME:
-    if ( !result ) {
-        Q_ASSERT( !d->m_queueSets.isEmpty() );
-        result = d->m_queueSets.begin().value();
-    }
-    return result;
-}
-
 
 #include "HttpDownloadManager.moc"

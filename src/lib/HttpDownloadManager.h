@@ -116,11 +116,6 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
 
  private:
     Q_DISABLE_COPY( HttpDownloadManager )
-    HttpJob          *createJob( const QUrl& sourceUrl, const QString& destFileName,
-                                 const QString &id );
-    DownloadQueueSet *findQueues( const QString& hostName );
-    DownloadQueueSet const *findQueues( const QString& hostName ) const;
-
     class Private;
     Private * const d;
 };
