@@ -64,7 +64,7 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
     QFile file( fullName );
     if ( !file.open( QIODevice::WriteOnly ) ) {
         m_errorMsg = QString( "%1: %2" ).arg( fullName ).arg( file.errorString() );
-        // qDebug() << "file.open" << m_errorMsg;
+        qCritical() << "file.open" << m_errorMsg;
         return false;
     }
     
@@ -72,7 +72,7 @@ bool FileStoragePolicy::updateFile( const QString &fileName, const QByteArray &d
 
     if ( !file.write( data ) ) {
         m_errorMsg = QString( "%1: %2" ).arg( fullName ).arg( file.errorString() );
-        // qDebug() << "file.write" << m_errorMsg;
+        qCritical() << "file.write" << m_errorMsg;
 	emit sizeChanged( file.size() - oldSize );
         return false;
     }
