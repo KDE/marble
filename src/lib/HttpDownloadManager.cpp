@@ -47,6 +47,7 @@ class HttpDownloadManager::Private
      * - a queue containing currently being dowloaded
      * - a queue for retries of failed downloads */
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> > m_queueSets;
+    DownloadQueueSet m_defaultQueues;
     int m_jobQueueLimit;
     StoragePolicy *m_storagePolicy;
     NetworkPlugin *m_networkPlugin;
@@ -60,6 +61,10 @@ HttpDownloadManager::Private::Private( StoragePolicy *policy )
       m_storagePolicy( policy ),
       m_networkPlugin( 0 )
 {
+    // setup default download policy and associated queue set
+    DownloadPolicy defaultDownloadPolicy;
+    defaultDownloadPolicy.setMaximumConnections( 20 );
+    m_defaultQueues.setDownloadPolicy( defaultDownloadPolicy );
 }
 
 HttpDownloadManager::Private::~Private()
@@ -102,10 +107,9 @@ DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostN
             break;
         }
     }
-    // FIXME:
     if ( !result ) {
-        Q_ASSERT( !m_queueSets.isEmpty() );
-        result = m_queueSets.first().second;
+        qWarning() << "No download policy found, using default policy.";
+        result = &m_defaultQueues;
     }
     return result;
 }
@@ -114,14 +118,10 @@ DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostN
 HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy )
     : d( new Private( policy ))
 {
-      d->m_requeueTimer = new QTimer( this );
-      d->m_requeueTimer->setInterval( requeueTime );
-      connect( d->m_requeueTimer, SIGNAL( timeout() ), this, SLOT( requeue() ) );
-
-      // default download policy
-      DownloadPolicy defaultDownloadPolicy;
-      defaultDownloadPolicy.setMaximumConnections( 20 );
-      addDownloadPolicy( defaultDownloadPolicy );
+    d->m_requeueTimer = new QTimer( this );
+    d->m_requeueTimer->setInterval( requeueTime );
+    connect( d->m_requeueTimer, SIGNAL( timeout() ), this, SLOT( requeue() ) );
+    connectQueueSet( &d->m_defaultQueues );
 }
 
 HttpDownloadManager::~HttpDownloadManager()
@@ -147,14 +147,7 @@ void HttpDownloadManager::setDownloadEnabled( const bool enable )
 void HttpDownloadManager::addDownloadPolicy( const DownloadPolicy& policy )
 {
     DownloadQueueSet * const queueSet = new DownloadQueueSet( policy );
-    connect( queueSet, SIGNAL( jobFinished( QByteArray, QString, QString )),
-             SLOT( finishJob( QByteArray, QString, QString )));
-    connect( queueSet, SIGNAL( jobRetry() ), SLOT( startRetryTimer() ));
-    connect( queueSet, SIGNAL( jobRedirected( QUrl, QString, QString )),
-             SLOT( addJob( QUrl, QString, QString )));
-    // relay jobAdded/jobRemoved signals (interesting for progress bar)
-    connect( queueSet, SIGNAL( jobAdded() ), SIGNAL( jobAdded() ));
-    connect( queueSet, SIGNAL( jobRemoved() ), SIGNAL( jobRemoved() ));
+    connectQueueSet( queueSet );
     d->m_queueSets.append( QPair<DownloadPolicyKey, DownloadQueueSet *>
                            ( queueSet->downloadPolicy().key(), queueSet ));
 }
@@ -210,6 +203,18 @@ void HttpDownloadManager::startRetryTimer()
 {
     if ( !d->m_requeueTimer->isActive() )
         d->m_requeueTimer->start();
+}
+
+void HttpDownloadManager::connectQueueSet( DownloadQueueSet * queueSet )
+{
+    connect( queueSet, SIGNAL( jobFinished( QByteArray, QString, QString )),
+             SLOT( finishJob( QByteArray, QString, QString )));
+    connect( queueSet, SIGNAL( jobRetry() ), SLOT( startRetryTimer() ));
+    connect( queueSet, SIGNAL( jobRedirected( QUrl, QString, QString )),
+             SLOT( addJob( QUrl, QString, QString )));
+    // relay jobAdded/jobRemoved signals (interesting for progress bar)
+    connect( queueSet, SIGNAL( jobAdded() ), SIGNAL( jobAdded() ));
+    connect( queueSet, SIGNAL( jobRemoved() ), SIGNAL( jobRemoved() ));
 }
 
 #include "HttpDownloadManager.moc"

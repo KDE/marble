@@ -116,6 +116,8 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
 
  private:
     Q_DISABLE_COPY( HttpDownloadManager )
+
+    void connectQueueSet( DownloadQueueSet * );
     class Private;
     Private * const d;
 };
