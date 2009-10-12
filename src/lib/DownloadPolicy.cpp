@@ -58,20 +58,9 @@ void DownloadPolicyKey::setUsage( DownloadUsage const usage )
     m_usage = usage;
 }
 
-bool DownloadPolicyKey::matches( QString const & hostName ) const
+bool DownloadPolicyKey::matches( QString const & hostName, const DownloadUsage usage ) const
 {
-    return m_hostNames.contains( hostName );
-}
-
-bool operator<( DownloadPolicyKey const & lhs, DownloadPolicyKey const & rhs )
-{
-    // FIXME:  implement operator< for QStringList
-//    if ( lhs.m_hostNames.size() < rhs.m_hostNames.size() )
-//        return true;
-//    else if ( rhs.m_hostNames.size() < lhs.m_hostNames.size() )
-//        return false;
-//    else
-    return lhs.m_usage < rhs.m_usage;
+    return m_hostNames.contains( hostName ) && m_usage == usage;
 }
 
 

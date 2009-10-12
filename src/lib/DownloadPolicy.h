@@ -39,15 +39,12 @@ class DownloadPolicyKey
     DownloadUsage usage() const;
     void setUsage( DownloadUsage const usage );
 
-    /// FIXME: take usage into account
-    bool matches( QString const & hostName ) const;
+    bool matches( const QString & hostName, const DownloadUsage usage ) const;
 
  private:
     QStringList m_hostNames;
     DownloadUsage m_usage;
 };
-
-bool operator<( DownloadPolicyKey const & lhs, DownloadPolicyKey const & rhs );
 
 
 class DownloadPolicy

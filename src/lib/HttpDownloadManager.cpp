@@ -37,7 +37,7 @@ class HttpDownloadManager::Private
 
     HttpJob *createJob( const QUrl& sourceUrl, const QString& destFileName,
                         const QString &id );
-    DownloadQueueSet *findQueues( const QString& hostName );
+    DownloadQueueSet *findQueues( const QString& hostName, const DownloadUsage usage );
 
     bool m_downloadEnabled;
     QTimer *m_requeueTimer;
@@ -46,7 +46,7 @@ class HttpDownloadManager::Private
      * - a queue where jobs are waiting for being activated (=dowloaded)
      * - a queue containing currently being dowloaded
      * - a queue for retries of failed downloads */
-    QMap<DownloadPolicyKey, DownloadQueueSet *> m_queueSets;
+    QList<QPair<DownloadPolicyKey, DownloadQueueSet *> > m_queueSets;
     int m_jobQueueLimit;
     StoragePolicy *m_storagePolicy;
     NetworkPlugin *m_networkPlugin;
@@ -90,21 +90,22 @@ HttpJob *HttpDownloadManager::Private::createJob( const QUrl& sourceUrl,
     return m_networkPlugin->createJob( sourceUrl, destFileName, id );
 }
 
-DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostName )
+DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostName,
+                                                            const DownloadUsage usage )
 {
     DownloadQueueSet * result = 0;
-    QMap<DownloadPolicyKey, DownloadQueueSet*>::iterator pos = m_queueSets.begin();
-    QMap<DownloadPolicyKey, DownloadQueueSet*>::iterator const end = m_queueSets.end();
+    QList<QPair<DownloadPolicyKey, DownloadQueueSet*> >::iterator pos = m_queueSets.begin();
+    QList<QPair<DownloadPolicyKey, DownloadQueueSet*> >::iterator const end = m_queueSets.end();
     for (; pos != end; ++pos ) {
-        if ( pos.key().matches( hostName )) {
-            result = pos.value();
+        if ( (*pos).first.matches( hostName, usage )) {
+            result = (*pos).second;
             break;
         }
     }
     // FIXME:
     if ( !result ) {
         Q_ASSERT( !m_queueSets.isEmpty() );
-        result = m_queueSets.begin().value();
+        result = m_queueSets.first().second;
     }
     return result;
 }
@@ -154,7 +155,8 @@ void HttpDownloadManager::addDownloadPolicy( const DownloadPolicy& policy )
     // relay jobAdded/jobRemoved signals (interesting for progress bar)
     connect( queueSet, SIGNAL( jobAdded() ), SIGNAL( jobAdded() ));
     connect( queueSet, SIGNAL( jobRemoved() ), SIGNAL( jobRemoved() ));
-    d->m_queueSets.insert( queueSet->downloadPolicy().key(), queueSet );
+    d->m_queueSets.append( QPair<DownloadPolicyKey, DownloadQueueSet *>
+                           ( queueSet->downloadPolicy().key(), queueSet ));
 }
 
 StoragePolicy* HttpDownloadManager::storagePolicy() const
@@ -168,7 +170,7 @@ void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFile
     if ( !d->m_downloadEnabled )
         return;
 
-    DownloadQueueSet * const queueSet = d->findQueues( sourceUrl.host() );
+    DownloadQueueSet * const queueSet = d->findQueues( sourceUrl.host(), DownloadBrowse );
     if ( queueSet->canAcceptJob( sourceUrl, destFileName )) {
         HttpJob * const job = d->createJob( sourceUrl, destFileName, id );
         if ( job ) {
@@ -197,10 +199,10 @@ void HttpDownloadManager::requeue()
 {
     d->m_requeueTimer->stop();
 
-    QMap<DownloadPolicyKey, DownloadQueueSet *>::iterator pos = d->m_queueSets.begin();
-    QMap<DownloadPolicyKey, DownloadQueueSet *>::iterator const end = d->m_queueSets.end();
+    QList<QPair<DownloadPolicyKey, DownloadQueueSet *> >::iterator pos = d->m_queueSets.begin();
+    QList<QPair<DownloadPolicyKey, DownloadQueueSet *> >::iterator const end = d->m_queueSets.end();
     for (; pos != end; ++pos ) {
-        pos.value()->retryJobs();
+        (*pos).second->retryJobs();
     }
 }
 
