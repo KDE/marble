@@ -306,11 +306,11 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     selectProjection( d->m_widget->projection() );
 
     connect( d->m_widget, SIGNAL( zoomChanged( int ) ),
-	    this,        SLOT( changeZoom( int ) ) );
+             this,        SLOT( changeZoom( int ) ) );
     connect( this,        SIGNAL( centerOn( const QModelIndex&, bool ) ),
-	    d->m_widget, SLOT( centerOn( const QModelIndex&, bool ) ) );
+             d->m_widget, SLOT( centerOn( const QModelIndex&, bool ) ) );
     connect( this,        SIGNAL( selectMapTheme( const QString& ) ),
-	    d->m_widget, SLOT( setMapThemeId( const QString& ) ) );
+             d->m_widget, SLOT( setMapThemeId( const QString& ) ) );
 
     // connect signals for the Legend
 
@@ -322,10 +322,11 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              d->m_widget, SLOT( setShowGps( bool ) ) );
     connect( this, SIGNAL( gpsPositionChanged( qreal, qreal ) ),
              d->m_widget, SLOT( changeCurrentPosition( qreal, qreal ) ) );
-    connect ( d->m_widget->model()->gpsLayer()->getPositionTracking(), SIGNAL(gpsLocation( GeoDataCoordinates, qreal )),
-              this, SLOT(receiveGpsCoordinates(GeoDataCoordinates, qreal)) );
-    connect ( d->uiWidget.navigationCheckBox, SIGNAL(clicked(bool) ),
-              d->m_widget->model()->gpsLayer(), SLOT(setVisible(bool)) );
+    connect( d->m_widget->model()->gpsLayer()->getPositionTracking(),
+             SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
+             this, SLOT( receiveGpsCoordinates( GeoDataCoordinates, qreal ) ) );
+    connect( d->uiWidget.navigationCheckBox, SIGNAL(clicked(bool) ),
+             d->m_widget->model()->gpsLayer(), SLOT( setVisible(bool) ) );
 
     connect( d->m_widget, SIGNAL( timeout() ),
              this,        SIGNAL( updateGps() ) );

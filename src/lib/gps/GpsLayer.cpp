@@ -69,7 +69,7 @@ void GpsLayer::paintLayer( ClipPainter *painter,
         m_currentPosition->draw( painter, canvasSize,
                                  viewParams );
         QRegion temp; // useless variable
-        updateGps( canvasSize, viewParams, temp);
+        updateGps( canvasSize, viewParams, temp );
         paintCurrentPosition( painter, canvasSize, viewParams );
         m_currentGpx->draw( painter, canvasSize, viewParams );
     }

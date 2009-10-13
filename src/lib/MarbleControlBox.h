@@ -84,7 +84,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      * @brief Construct a new MarbleControlBox
      * @param parent the parent widget
      */
-    explicit MarbleControlBox(QWidget *parent = 0);
+    explicit MarbleControlBox( QWidget *parent = 0 );
     ~MarbleControlBox();
  
     /**
@@ -162,7 +162,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void projectionSelected( Projection );
     
     void gpsInputDisabled( bool );
-    void gpsPositionChanged( qreal lat, qreal lon);
+    void gpsPositionChanged( qreal lat, qreal lon );
     void updateGps();
    
  public Q_SLOTS:
@@ -193,8 +193,8 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      * value of the slider, but nothing more.  In particular it
      * doesn't emit the zoomChanged signal.
      */
-    void changeZoom(int zoom);
-    void receiveGpsCoordinates( GeoDataCoordinates in, qreal speed  );
+    void changeZoom( int zoom );
+    void receiveGpsCoordinates( GeoDataCoordinates in, qreal speed );
     void enableFileViewActions();
     
     /**
@@ -231,7 +231,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
  private Q_SLOTS:
 
     /// called whenever the user types something new in the search box
-    void searchLineChanged(const QString &search);
+    void searchLineChanged( const QString &search );
     
     /// called the Return or Enter key is pressed in the search box.
     void searchReturnPressed();
@@ -257,11 +257,11 @@ protected:
      * Navigation tab will be hidden, leaving only the Zoom Up and
      * Zoom Down buttons.
      */
-    void resizeEvent ( QResizeEvent * );
+    void resizeEvent( QResizeEvent * );
 
  private:
     Q_DISABLE_COPY( MarbleControlBox )
-    MarbleControlBoxPrivate  * const d;
+    MarbleControlBoxPrivate * const d;
 };
 
 }

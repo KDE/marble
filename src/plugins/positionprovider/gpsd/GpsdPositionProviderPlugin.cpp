@@ -49,16 +49,16 @@ void GpsdPositionProviderPlugin::initialize()
     m_thread->start();
 }
 
-void GpsdPositionProviderPlugin::update(gps_data_t data)
+void GpsdPositionProviderPlugin::update( gps_data_t data )
 {
     PositionProviderStatus oldStatus = m_status;
     GeoDataCoordinates oldPosition = m_position;
-    if (data.status == STATUS_NO_FIX)
+    if ( data.status == STATUS_NO_FIX )
         m_status = PositionProviderStatusUnavailable;
     else {
         m_status = PositionProviderStatusAvailable;
         m_position.set( data.fix.longitude, data.fix.latitude,
-        data.fix.altitude, GeoDataCoordinates::Degree );
+                        data.fix.altitude, GeoDataCoordinates::Degree );
         m_accuracy.level = GeoDataAccuracy::Detailed;
         // FIXME: Add real values here
         m_accuracy.horizontal = 5;
@@ -67,7 +67,7 @@ void GpsdPositionProviderPlugin::update(gps_data_t data)
     if (m_status != oldStatus)
         emit statusChanged( m_status );
     // FIXME: Check whether position has changed first
-    if (m_status == PositionProviderStatusAvailable)
+    if ( m_status == PositionProviderStatusAvailable )
         emit positionChanged( m_position, m_accuracy );
 }
 
