@@ -330,6 +330,7 @@ void MainWindow::exportMapScreenShot()
 
 void MainWindow::printMapScreenShot()
 {
+#ifndef QT_NO_PRINTER
     QPixmap mapPixmap = m_controlView->mapScreenShot();
 
     QSize printSize = mapPixmap.size();
@@ -354,6 +355,7 @@ void MainWindow::printMapScreenShot()
         painter.drawPixmap( mapPrintRect, mapPixmap, mapPixmap.rect() );
 
     }
+#endif    
 }
 
 void MainWindow::showFullScreen( bool isChecked )

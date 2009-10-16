@@ -80,11 +80,13 @@ void TinyWebBrowser::setSource( const QString& relativeUrl )
 
 void TinyWebBrowser::print()
 {
+#ifndef QT_NO_PRINTER	
   QPrinter printer;
 
   QPrintDialog dlg( &printer, this );
   if ( dlg.exec() )
     QWebView::print( &printer );
+#endif
 }
 
 void TinyWebBrowser::openExternalLink( QUrl url )
