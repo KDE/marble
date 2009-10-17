@@ -356,52 +356,44 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
                 m_vectorMap->paintMap( painter, antialiased );
             }
         }
-        if ( viewParams->mapQuality() == Marble::Normal ) {
-
-            // Only paint fancy style if the coast line doesn't get painted as well
-            // (as it looks a bit awkward otherwise)
-
-            if ( !showCoastlines ) {
-                countryPen.setColor( penColor.darker(110) );
-            }
-
-            m_vectorMap->setPen( countryPen );
-            m_vectorMap->paintMap( painter, antialiased );
-
-            if ( !showCoastlines ) {
-                borderDashPen.setStyle( Qt::DotLine );
-                m_vectorMap->setPen( borderDashPen );
-                m_vectorMap->paintMap( painter, antialiased );
-            }
-        }
-        if ( viewParams->mapQuality() == Marble::Outline 
-          || viewParams->mapQuality() == Marble::Low ) {
-
+        if ( viewParams->mapQuality() == Marble::Outline
+          || viewParams->mapQuality() == Marble::Low 
+          || viewParams->mapQuality() == Marble::Normal ) {
             if ( !showCoastlines ) {
                 countryPen.setWidthF( 1.0 );
                 countryPen.setColor( penColor.darker(115) );
             }
             m_vectorMap->setPen( countryPen );
             m_vectorMap->paintMap( painter, antialiased );
-         }
+        }
 
-         // US-States
-         m_vectorMap->setzBoundingBoxLimit( -1.0 );
-         m_vectorMap->setzPointLimit( -1.0 );
-         m_vectorMap->createFromPntMap( m_usaStates, viewParams->viewport() );
+        // US-States
+        m_vectorMap->setzBoundingBoxLimit( -1.0 );
+        m_vectorMap->setzPointLimit( -1.0 );
+        m_vectorMap->createFromPntMap( m_usaStates, viewParams->viewport() );
 
-         m_vectorMap->setPen( m_statePen );
-         m_vectorMap->setBrush( m_stateBrush );
-         m_vectorMap->paintMap( painter, antialiased );
-
+        QPen statePen( m_statePen);
+        if ( viewParams->mapQuality() == Marble::Outline
+          || viewParams->mapQuality() == Marble::Low ) {
+            statePen.setStyle( Qt::SolidLine );
+        }
+        m_vectorMap->setPen( statePen );
+        m_vectorMap->setBrush( m_stateBrush );
+        m_vectorMap->paintMap( painter, antialiased );
+        
         // International Dateline
-         m_vectorMap->setzBoundingBoxLimit( -1.0 );
-         m_vectorMap->setzPointLimit( -1.0 );
-         m_vectorMap->createFromPntMap( m_dateLine, viewParams->viewport() );
+        m_vectorMap->setzBoundingBoxLimit( -1.0 );
+        m_vectorMap->setzPointLimit( -1.0 );
+        m_vectorMap->createFromPntMap( m_dateLine, viewParams->viewport() );
 
-         m_vectorMap->setPen( m_dateLinePen );
-         m_vectorMap->setBrush( m_dateLineBrush );
-         m_vectorMap->paintMap( painter, antialiased );
+        QPen dateLinePen( m_dateLinePen);
+        if ( viewParams->mapQuality() == Marble::Outline
+          || viewParams->mapQuality() == Marble::Low ) {
+            dateLinePen.setStyle( Qt::SolidLine );
+        }
+        m_vectorMap->setPen( dateLinePen );
+        m_vectorMap->setBrush( m_dateLineBrush );
+        m_vectorMap->paintMap( painter, antialiased );
     }
 
     // qDebug() << "M_VectorMap calculated nodes: " << m_vectorMap->nodeCount();
