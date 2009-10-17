@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="marble_part" version="5">
+<kpartgui name="marble_part" version="9">
 
 <MenuBar>
   <Menu name="file" noMerge="1"><text>&amp;File</text>
@@ -54,7 +54,7 @@
   <Action name="edit_copy"/>
 </ToolBar>
 
-<ToolBar position="Top" hidden="false" name="pluginToolBar">
+<ToolBar position="Top" hidden="true" name="pluginToolBar">
     <text>Edit Toolbar</text>
      <ActionList name="plugins_actionlist" />
 </ToolBar>
