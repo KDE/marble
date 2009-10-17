@@ -176,7 +176,10 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
     renderLongitudeLine( painter, 180.0, viewLatLonAltBox, 0.0, tr( "Antimeridian" ) );
 
     QPen tropicsPen = majorCirclePen;
-    tropicsPen.setStyle( Qt::DotLine );
+    if (   painter->mapQuality() != Marble::OutlineQuality
+        && painter->mapQuality() != Marble::LowQuality ) {
+        tropicsPen.setStyle( Qt::DotLine );
+    }
     painter->setPen( tropicsPen );
 
     // Determine the planet's axial tilt
@@ -418,54 +421,55 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 void GraticulePlugin::initLineMaps( GeoDataCoordinates::Notation notation)
 {
     /* Define Upper Bound keys and associated values: */
-    m_normalLineMap[90]     = 4;          // 90 deg
-    m_normalLineMap[400]    = 12;          // 30 deg
-    m_normalLineMap[650]   = 36;         // 10 deg
-    m_normalLineMap[8000]   = 72;         // 5 deg
-    m_normalLineMap[16000]  = 360;         //  1 deg
-    m_normalLineMap[32000] = 720;        //  0.5 deg
+    m_normalLineMap[100]     = 4;          // 90 deg
+    m_normalLineMap[1000]    = 12;          // 30 deg
+    m_normalLineMap[4000]   = 36;         // 10 deg
+    m_normalLineMap[16000]   = 72;         // 5 deg
+    m_normalLineMap[64000]  = 360;         //  1 deg
+    m_normalLineMap[128000] = 720;        //  0.5 deg
 
-    m_boldLineMap[650]     = 0;         //  1 deg
-    m_boldLineMap[8000]    = 12;         //  1 deg
+    m_boldLineMap[1000]     = 0;         //  1 deg
+    m_boldLineMap[4000]    = 12;         //  1 deg
     m_boldLineMap[16000]   = 36;         //  1 deg
 
     switch ( notation )
     {
         case GeoDataCoordinates::Decimal :
-            m_normalLineMap[64000]  = 360 * 10;       //  0.1 deg
-            m_normalLineMap[256000] = 360 * 20;       //  0.05 deg
-            m_normalLineMap[1024000] = 360 * 100;      //  0.01 deg
-            m_normalLineMap[4096000] = 360 * 200;      //  0.005 deg
-            m_normalLineMap[16384000] = 360 * 1000;    //  0.001 deg
-            m_normalLineMap[65536000] = 360 * 2000;    //  0.0005 deg
-            m_normalLineMap[262144000] = 360 * 10000;  //  0.00001 deg
+            
+            m_normalLineMap[512000]  = 360 * 10;       //  0.1 deg
+            m_normalLineMap[2048000] = 360 * 20;       //  0.05 deg
+            m_normalLineMap[8192000] = 360 * 100;      //  0.01 deg
+            m_normalLineMap[16384000] = 360 * 200;      //  0.005 deg
+            m_normalLineMap[32768000] = 360 * 1000;    //  0.001 deg
+            m_normalLineMap[131072000] = 360 * 2000;    //  0.0005 deg
+            m_normalLineMap[524288000] = 360 * 10000;  //  0.00001 deg
 
-            m_boldLineMap[64000]     = 360;          // 0.1 deg
-            m_boldLineMap[256000]    = 720;          // 0.05 deg
-            m_boldLineMap[1024000]   = 360 * 10;     // 0.01 deg
-            m_boldLineMap[4096000]   = 360 * 20;     // 0.005 deg
-            m_boldLineMap[16384000]  = 360 * 100;    // 0.001 deg
-            m_boldLineMap[65535000]  = 360 * 200;    // 0.0005 deg
-            m_boldLineMap[262144000] = 360 * 1000;   // 0.00001 deg
+            m_boldLineMap[512000]     = 360;          // 0.1 deg
+            m_boldLineMap[2048000]    = 720;          // 0.05 deg
+            m_boldLineMap[8192000]   = 360 * 10;     // 0.01 deg
+            m_boldLineMap[1638400]   = 360 * 20;     // 0.005 deg
+            m_boldLineMap[32768000]  = 360 * 100;    // 0.001 deg
+            m_boldLineMap[131072000]  = 360 * 200;    // 0.0005 deg
+            m_boldLineMap[524288000] = 360 * 1000;   // 0.00001 deg
 
         break;
         default:
-        case GeoDataCoordinates::DMS :
-            m_normalLineMap[64000]  = 360 * 6;         //  10'
-            m_normalLineMap[256000] = 360 * 12;        //  5'
-            m_normalLineMap[1024000] = 360 * 60;        //  1'
-            m_normalLineMap[4096000] = 360 * 60 * 2;    //  30"
+        case GeoDataCoordinates::DMS :            
+            m_normalLineMap[512000]  = 360 * 6;         //  10'
+            m_normalLineMap[1024000] = 360 * 12;        //  5'
+            m_normalLineMap[4096000] = 360 * 60;        //  1'
+            m_normalLineMap[8192000] = 360 * 60 * 2;    //  30"
             m_normalLineMap[16384000] = 360 * 60 * 6;   //  10"
-            m_normalLineMap[65536000] = 360 * 60 * 12;  //  5"
-            m_normalLineMap[262144000] = 360 * 60 * 60; //  1"
+            m_normalLineMap[65535000] = 360 * 60 * 12;  //  5"
+            m_normalLineMap[524288000] = 360 * 60 * 60; //  1"
 
-            m_boldLineMap[64000]     = 360;          // 10'
-            m_boldLineMap[256000]    = 720;          // 5'
-            m_boldLineMap[1024000]   = 360 * 6;      // 1'
-            m_boldLineMap[4096000]   = 360 * 12;     // 30"
+            m_boldLineMap[512000]     = 360;          // 10'
+            m_boldLineMap[1024000]    = 720;          // 5'
+            m_boldLineMap[4096000]   = 360 * 6;      // 1'
+            m_boldLineMap[8192000]   = 360 * 12;     // 30"
             m_boldLineMap[16384000]  = 360 * 60;     // 10"
             m_boldLineMap[65535000]  = 360 * 60 * 2; // 5"
-            m_boldLineMap[262144000] = 360 * 60 * 6; // 1"
+            m_boldLineMap[524288000] = 360 * 60 * 6; // 1"
 
         break;
     }
