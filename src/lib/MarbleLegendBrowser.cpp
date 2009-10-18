@@ -15,6 +15,7 @@
 #include <QtCore/QUrl>
 #include <QtCore/QDebug>
 #include <QtGui/QDesktopServices>
+#include <QtCore/QEvent>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtGui/QPainter>
@@ -46,6 +47,7 @@ class MarbleLegendBrowserPrivate
     QMap<QString, QPixmap>  m_symbolMap;
     QString              m_html;
     QString              m_loadedSectionsHtml;
+    bool                 m_isLegendLoaded;
 };
 
 
@@ -56,6 +58,7 @@ MarbleLegendBrowser::MarbleLegendBrowser( QWidget *parent )
     : QTextBrowser( parent ),
       d( new MarbleLegendBrowserPrivate )
 {
+    d->m_isLegendLoaded = false;
     d->m_marbleWidget = 0;
     // Disable changing layout due to the ScrollBarPolicy:
     setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
@@ -114,7 +117,12 @@ void MarbleLegendBrowser::initTheme()
                   this, SLOT( setCheckedProperty( QString, bool ) ) );
     }
 
-    loadLegend();
+    if ( isVisible() ) {
+        loadLegend();
+    }
+    else {
+        d->m_isLegendLoaded = false;
+    }
 }
 
 void MarbleLegendBrowser::loadLegend()
@@ -138,7 +146,7 @@ void MarbleLegendBrowser::loadLegend()
         if ( !customLegendPath.isEmpty() )
             d->m_html = readHtml( QUrl::fromLocalFile( customLegendPath  ) );
         else
-            d->m_html = "";
+            d->m_html = QString();
     }
 
     if ( d->m_html.isEmpty() ) {
@@ -162,7 +170,20 @@ void MarbleLegendBrowser::loadLegend()
     document()->rootFrame()->setFrameFormat( format );
     viewport()->update();
 
+    d->m_isLegendLoaded = true;
     qDebug("loadLegend: Time elapsed: %d ms", t.elapsed());
+}
+
+bool MarbleLegendBrowser::event( QEvent * event )
+{
+    // "Delayed initialization": legend gets created only 
+    if ( event->type() == QEvent::Show ) {
+        if ( !d->m_isLegendLoaded ) {
+            loadLegend();
+            return true;
+        }
+    }
+    return QTextBrowser::event( event );
 }
 
 QString MarbleLegendBrowser::readHtml( const QUrl & name )
@@ -334,24 +355,27 @@ void MarbleLegendBrowser::toggleCheckBoxStatus( const QUrl &link )
     }
     setUpdatesEnabled( true );
 
-    repaint();
+    update();
 }
 
 void MarbleLegendBrowser::setCheckedProperty( const QString& name, bool checked )
 {
+    // If there is no change then leave immediately
+    if ( d->m_checkBoxMap[ name ] == checked )
+        return;
+    
     d->m_checkBoxMap[ name ] = checked;
 
     setUpdatesEnabled( false );
     {
         int scrollPosition = verticalScrollBar()->sliderPosition();
-
         loadLegend();
 
         verticalScrollBar()->setSliderPosition( scrollPosition );
     }
     setUpdatesEnabled( true );
 
-    repaint();
+    update();
 }
 
 }

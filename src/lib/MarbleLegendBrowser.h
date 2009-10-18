@@ -23,6 +23,7 @@
 
 #include "marble_export.h"
 
+class QEvent;
 class QUrl;
 
 namespace Marble
@@ -68,6 +69,7 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
     void toggleCheckBoxStatus( const QUrl &);
 
  protected:
+    bool event( QEvent * event );
     QString  readHtml( const QUrl & name );
     QString  generateSectionsHtml();
     void  translateHtml( QString & html );
