@@ -69,6 +69,8 @@ class StarsPlugin : public RenderPlugin
     Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN( StarsPlugin )
  public:
+    StarsPlugin();
+    
     QStringList backendTypes() const;
 
     QString renderPolicy() const;
@@ -97,6 +99,7 @@ class StarsPlugin : public RenderPlugin
     qreal siderealTime( const QDateTime& );
 
  private:
+    bool m_isInitialized;
     QVector<StarPoint> m_stars;
 };
 

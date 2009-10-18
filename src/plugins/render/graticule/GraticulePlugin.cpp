@@ -24,6 +24,11 @@
 namespace Marble
 {
 
+GraticulePlugin::GraticulePlugin()
+    : m_isInitialized( false )
+{
+}
+
 QStringList GraticulePlugin::backendTypes() const
 {
     return QStringList( "graticule" );
@@ -72,11 +77,12 @@ void GraticulePlugin::initialize ()
     m_minorCirclePen = QPen( QColor( Qt::white ) );
     m_shadowPen = QPen( Qt::NoPen );
 //    m_shadowPen = QPen( QColor( 0, 0, 0, 128 ) );
+    m_isInitialized = true;
 }
 
 bool GraticulePlugin::isInitialized () const
 {
-    return true;
+    return m_isInitialized;
 }
 
 bool GraticulePlugin::render( GeoPainter *painter, ViewportParams *viewport,

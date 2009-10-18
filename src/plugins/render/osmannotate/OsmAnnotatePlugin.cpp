@@ -39,10 +39,11 @@ namespace Marble
 {
 
 OsmAnnotatePlugin::OsmAnnotatePlugin()
-        : RenderPlugin()
+        : RenderPlugin(),
+          m_itemModel( 0 ),
+          m_networkAccessManager( 0 ),
+          m_isInitialized( false )
 {
-    m_itemModel = 0;
-    m_networkAccessManager = 0;
 }
 
 OsmAnnotatePlugin::~OsmAnnotatePlugin()
@@ -114,11 +115,12 @@ void OsmAnnotatePlugin::initialize ()
 
     m_selectionBox.first = topLeft;
     m_selectionBox.second = bottomRight;
+    m_isInitialized = true;
 }
 
 bool OsmAnnotatePlugin::isInitialized () const
 {
-    return true;
+    return m_isInitialized;
 }
 
 QList<QActionGroup*>* OsmAnnotatePlugin::actionGroups() const

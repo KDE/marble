@@ -65,6 +65,8 @@ class GeoRendererPlugin : public RenderPlugin
     bool isInitialized () const;
 
     bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
+ private:
+    bool m_isInitialized;
 };
 
 }

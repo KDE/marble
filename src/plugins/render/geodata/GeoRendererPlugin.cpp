@@ -41,7 +41,8 @@ namespace Marble
 {
 
 GeoRendererPlugin::GeoRendererPlugin()
-    : m_view( 0 )
+    : m_view( 0 ),
+      m_isInitialized( false )
 {
 }
 
@@ -94,11 +95,12 @@ QIcon GeoRendererPlugin::icon () const
 void GeoRendererPlugin::initialize ()
 {
     m_view = new GeoRendererView();
+    m_isInitialized = true;
 }
 
 bool GeoRendererPlugin::isInitialized () const
 {
-    return true;
+    return m_isInitialized;
 }
 
 bool GeoRendererPlugin::render( GeoPainter *painter, ViewportParams *viewport,

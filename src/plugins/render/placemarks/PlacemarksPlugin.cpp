@@ -38,6 +38,11 @@
 namespace Marble
 {
 
+PlacemarksPlugin::PlacemarksPlugin()
+    : m_isInitialized( false )
+{
+}
+    
 QStringList PlacemarksPlugin::backendTypes() const
 {
     return QStringList( "geodata" );
@@ -84,11 +89,12 @@ void PlacemarksPlugin::initialize ()
     dataFacade()->geoDataModel()->addGeoDataFile( PLACEMARKS_DATA_PATH "/jakobsweg.kml" );
     m_currentBrush = QColor( 0xff, 0x0, 0x0 );
     m_currentPen = QColor( 0xff, 0x0, 0x0 );
+    m_initialized = true;
 }
 
 bool PlacemarksPlugin::isInitialized () const
 {
-    return true;
+    return m_initialized;
 }
 
 void PlacemarksPlugin::setBrushStyle( GeoPainter *painter, GeoDataDocument* root, QString mapped )

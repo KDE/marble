@@ -32,7 +32,8 @@ using namespace Marble;
 const quint32 numberOfStationsPerFetch = 20;
 
 WeatherPlugin::WeatherPlugin()
-    : m_icon(),
+    : m_isInitialized( false ),
+      m_icon(),
       m_aboutDialog( 0 ),
       m_configDialog( 0 ),
       m_settings()
@@ -44,35 +45,8 @@ WeatherPlugin::WeatherPlugin()
     // Plugin is not visible by default
     setVisible( false );
 
-    m_aboutDialog = new PluginAboutDialog();
-    m_aboutDialog->setName( "Weather Plugin" );
-    m_aboutDialog->setVersion( "0.1" );
-    // FIXME: Can we store this string for all of Marble
-    m_aboutDialog->setAboutText( tr( "<br />(c) 2009 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
-    QList<Author> authors;
-    Author bholst;
-    bholst.name = "Bastian Holst";
-    bholst.task = tr( "Developer" );
-    bholst.email = "bastianholst@gmx.de";
-    authors.append( bholst );
-    m_aboutDialog->setAuthors( authors );
-    m_aboutDialog->setDataText( tr( "Supported by backstage.bbc.co.uk.\nWeather data from UK MET Office" ) );
-    m_icon.addFile( MarbleDirs::path( "weather/weather-clear.svgz" ) );
-    m_aboutDialog->setPixmap( m_icon.pixmap( 62, 62 ) );
-
-    // Initializing configuration dialog
-    m_configDialog = new QDialog();
-    ui_configWidget.setupUi( m_configDialog );
-    connect( ui_configWidget.m_buttonBox, SIGNAL( accepted() ),
-                                          SLOT( writeSettings() ) );
-    connect( ui_configWidget.m_buttonBox, SIGNAL( rejected() ),
-                                          SLOT( readSettings() ) );
-    QPushButton *applyButton = ui_configWidget.m_buttonBox->button( QDialogButtonBox::Apply );
-    connect( applyButton, SIGNAL( clicked() ),
-             this,        SLOT( writeSettings() ) );
-    connect( this, SIGNAL( settingsChanged( QString ) ),
-             this, SLOT( updateItemSettings() ) );
-    readSettings();
+    configDialog();
+    readSettings();    
 }
 
 WeatherPlugin::~WeatherPlugin()
@@ -87,6 +61,12 @@ void WeatherPlugin::initialize()
     setModel( model );
     updateItemSettings();
     setNumberOfItems( numberOfStationsPerFetch );
+    m_isInitialized = true;
+}
+
+bool WeatherPlugin::isInitialized() const
+{
+    return m_isInitialized;
 }
 
 QString WeatherPlugin::name() const
@@ -111,11 +91,42 @@ QIcon WeatherPlugin::icon() const
 
 QDialog *WeatherPlugin::aboutDialog() const
 {
+    if ( !m_aboutDialog ) {
+        m_aboutDialog = new PluginAboutDialog();
+        m_aboutDialog->setName( "Weather Plugin" );
+        m_aboutDialog->setVersion( "0.1" );
+        // FIXME: Can we store this string for all of Marble
+        m_aboutDialog->setAboutText( tr( "<br />(c) 2009 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>" ) );
+        QList<Author> authors;
+        Author bholst;
+        bholst.name = "Bastian Holst";
+        bholst.task = tr( "Developer" );
+        bholst.email = "bastianholst@gmx.de";
+        authors.append( bholst );
+        m_aboutDialog->setAuthors( authors );
+        m_aboutDialog->setDataText( tr( "Supported by backstage.bbc.co.uk.\nWeather data from UK MET Office" ) );
+        m_icon.addFile( MarbleDirs::path( "weather/weather-clear.svgz" ) );
+        m_aboutDialog->setPixmap( m_icon.pixmap( 62, 62 ) );
+    }
     return m_aboutDialog;
 }
 
 QDialog *WeatherPlugin::configDialog() const
 {
+    if ( !m_configDialog ) {
+        // Initializing configuration dialog
+        m_configDialog = new QDialog();
+        ui_configWidget.setupUi( m_configDialog );
+            connect( ui_configWidget.m_buttonBox, SIGNAL( accepted() ),
+                                            SLOT( writeSettings() ) );
+        connect( ui_configWidget.m_buttonBox, SIGNAL( rejected() ),
+                                            SLOT( readSettings() ) );
+        QPushButton *applyButton = ui_configWidget.m_buttonBox->button( QDialogButtonBox::Apply );
+        connect( applyButton, SIGNAL( clicked() ),
+                this,        SLOT( writeSettings() ) );
+        connect( this, SIGNAL( settingsChanged( QString ) ),
+                this, SLOT( updateItemSettings() ) );
+    }
     return m_configDialog;
 }
 

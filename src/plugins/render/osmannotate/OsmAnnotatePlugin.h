@@ -123,6 +123,7 @@ private:
     bool m_drawingPolygon;
     QNetworkAccessManager* m_networkAccessManager;
     QErrorMessage m_errorMessage;
+    bool m_isInitialized;
 };
 
 }

@@ -78,7 +78,6 @@ LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
     // Just for initial testing
     foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {
         renderPlugin->setDataFacade( d->m_dataFacade );
-        renderPlugin->initialize();
     }
 }
 
@@ -143,6 +142,10 @@ void LayerManager::renderLayer( GeoPainter *painter, ViewParams *viewParams,
     foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
         if ( renderPlugin && renderPlugin->renderPosition().contains( renderPosition )  ){
             if ( renderPlugin->enabled() && renderPlugin->visible() ) {
+                if ( !renderPlugin->isInitialized() )
+                {
+                    renderPlugin->initialize();
+                }
                 renderPlugin->render( painter, viewport, renderPosition );
             }
         }

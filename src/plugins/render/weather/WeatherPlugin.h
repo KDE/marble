@@ -36,6 +36,8 @@ class WeatherPlugin : public AbstractDataPlugin
     ~WeatherPlugin();
     
     void initialize();
+
+    bool isInitialized() const;
     
     QString name() const;
     
@@ -62,10 +64,13 @@ class WeatherPlugin : public AbstractDataPlugin
     void changedSettings();
 
  private:
-    QIcon m_icon;
-    PluginAboutDialog *m_aboutDialog;
-    QDialog *m_configDialog;
-    Ui::WeatherConfigWidget ui_configWidget;
+    bool m_isInitialized;
+
+    mutable QIcon m_icon;
+    mutable PluginAboutDialog *m_aboutDialog;
+    mutable QDialog * m_configDialog;
+    mutable Ui::WeatherConfigWidget ui_configWidget;
+
     QHash<QString,QVariant> m_settings;
 };
 

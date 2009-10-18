@@ -28,6 +28,8 @@ class PhotoPlugin : public AbstractDataPlugin
     PhotoPlugin();
      
     void initialize();
+
+    bool isInitialized () const;
     
     QString name() const;
     
@@ -36,6 +38,8 @@ class PhotoPlugin : public AbstractDataPlugin
     QString description() const;
     
     QIcon icon() const;
+ private:
+    bool m_isInitialized;
 };
 
 }

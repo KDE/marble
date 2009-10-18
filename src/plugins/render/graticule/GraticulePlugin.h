@@ -44,6 +44,8 @@ class GraticulePlugin : public RenderPlugin
     MARBLE_PLUGIN( GraticulePlugin )
 
  public:
+    GraticulePlugin();
+    
     QStringList backendTypes() const;
 
     QString renderPolicy() const;
@@ -150,6 +152,8 @@ class GraticulePlugin : public RenderPlugin
     QPen m_majorCirclePen;
     QPen m_minorCirclePen;
     QPen m_shadowPen;
+
+    bool m_isInitialized;
 };
 
 }

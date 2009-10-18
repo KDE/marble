@@ -22,6 +22,11 @@
 namespace Marble
 {
 
+StarsPlugin::StarsPlugin()
+    : m_isInitialized( false )
+{
+}
+
 QStringList StarsPlugin::backendTypes() const
 {
     return QStringList( "stars" );
@@ -97,11 +102,12 @@ void StarsPlugin::initialize ()
         m_stars << star;
 //        qDebug() << "RA:" << ra << "DE:" << de << "MAG:" << mag;
     }
+    m_isInitialized = true;
 }
 
 bool StarsPlugin::isInitialized () const
 {
-    return true;
+    return m_isInitialized;
 }
 
 bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,

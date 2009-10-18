@@ -35,7 +35,9 @@ class WikipediaPlugin : public AbstractDataPlugin
     ~WikipediaPlugin();
      
     void initialize();
-    
+
+    bool isInitialized() const;
+
     QString name() const;
     
     QString guiString() const;
@@ -69,10 +71,12 @@ class WikipediaPlugin : public AbstractDataPlugin
     void updateItemSettings();
 
  private:
-    QIcon m_icon;
-    PluginAboutDialog *m_aboutDialog;
-    Ui::WikipediaConfigWidget ui_configWidget;
-    QDialog *m_configDialog;
+    bool m_isInitialized;
+
+    mutable QIcon m_icon;
+    mutable PluginAboutDialog *m_aboutDialog;
+    mutable Ui::WikipediaConfigWidget ui_configWidget;
+    mutable QDialog *m_configDialog;
     QHash<QString,QVariant> m_settings;
 };
 

@@ -19,6 +19,7 @@
 using namespace Marble;
 
 PhotoPlugin::PhotoPlugin()
+    : m_isInitialized( false )
 {
     setNameId( "photo" );
     
@@ -33,6 +34,12 @@ void PhotoPlugin::initialize()
     qDebug() << "PhotoPlugin: Initialize";
     setModel( new PhotoPluginModel( this ) );
     setNumberOfItems( numberOfImagesPerFetch );
+    m_isInitialized = true;
+}
+
+bool PhotoPlugin::isInitialized() const
+{
+    return m_isInitialized;
 }
 
 QString PhotoPlugin::name() const
