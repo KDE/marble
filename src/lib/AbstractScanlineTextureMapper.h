@@ -57,11 +57,15 @@ public:
     void notifyMapChanged();
 
  protected:
+    void pixelValueF( qreal lon, qreal lat, 
+                     QRgb* scanLine );
     void pixelValue( qreal lon, qreal lat, 
-                     QRgb* scanLine, bool smooth = false );
+                     QRgb* scanLine );
 
+    void pixelValueApproxF(const qreal& lon, const qreal& lat,
+                          QRgb *scanLine, int n );
     void pixelValueApprox(const qreal& lon, const qreal& lat,
-                          QRgb *scanLine, int n, bool smooth = false );
+                          QRgb *scanLine, int n );
 
     int interpolationStep( ViewParams *viewParams ) const;
     bool    m_interpolate;

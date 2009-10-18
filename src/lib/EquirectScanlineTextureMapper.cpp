@@ -140,13 +140,19 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
             if ( lon >  M_PI ) lon -= 2 * M_PI;
 
             if ( m_interpolate ) {
-                pixelValueApprox( lon, lat, scanLine, n, highQuality );
+                if (highQuality)
+                    pixelValueApproxF( lon, lat, scanLine, n );
+                else
+                    pixelValueApprox( lon, lat, scanLine, n );
 
                 scanLine += ( n - 1 );
             }
 
             if ( x < m_imageWidth ) {
-                pixelValue( lon, lat, scanLine, highQuality );
+                if ( highQuality )
+                    pixelValueF( lon, lat, scanLine );
+                else
+                    pixelValue( lon, lat, scanLine );
             }
             m_prevLon = lon;
             m_prevLat = lat; // preparing for interpolation

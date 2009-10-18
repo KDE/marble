@@ -166,15 +166,13 @@ void AbstractScanlineTextureMapper::resizeMap(int width, int height)
     }
 }
 
-void AbstractScanlineTextureMapper::pixelValue(qreal lon,
+void AbstractScanlineTextureMapper::pixelValueF(qreal lon,
                                                qreal lat, 
-                                               QRgb* scanLine,
-                                               bool smooth )
+                                               QRgb* scanLine )
 {
     // The same method using integers performs about 33% faster.
     // However we need the qreal version to create the high quality mode.
 
-    if ( smooth ) {
         // Convert the lon and lat coordinates of the position on the scanline
         // measured in radian to the pixel position of the requested 
         // coordinate on the current tile.
@@ -199,8 +197,15 @@ void AbstractScanlineTextureMapper::pixelValue(qreal lon,
         else {
             *scanLine = 0;
         }
-    }
-    else {
+}
+
+void AbstractScanlineTextureMapper::pixelValue(qreal lon,
+                                               qreal lat, 
+                                               QRgb* scanLine )
+{
+    // The same method using integers performs about 33% faster.
+    // However we need the qreal version to create the high quality mode.
+
         // Convert the lon and lat coordinates of the position on the scanline
         // measured in radian to the pixel position of the requested 
         // coordinate on the current tile.
@@ -226,7 +231,6 @@ void AbstractScanlineTextureMapper::pixelValue(qreal lon,
         else {
             *scanLine = 0;
         }
-    }
 }
 
 // This method interpolates color values for skipped pixels in a scanline.
@@ -239,10 +243,9 @@ void AbstractScanlineTextureMapper::pixelValue(qreal lon,
 // This method will do by far most of the calculations for the 
 // texturemapping, so we move towards integer math to improve speed.
 
-void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
+void AbstractScanlineTextureMapper::pixelValueApproxF(const qreal& lon,
                               const qreal& lat, QRgb *scanLine,
-                              int n,
-                              bool smooth )
+                              int n )
 {
     // stepLon/Lat: Distance between two subsequent approximated positions
 
@@ -255,8 +258,6 @@ void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
     const qreal nInverse = 1.0 / (qreal)(n);
 
     if ( fabs(stepLon) < M_PI ) {
-        if ( smooth ) {
-
             m_prevLon = rad2PixelX( m_prevLon );
             m_prevLat = rad2PixelY( m_prevLat );
 
@@ -324,8 +325,64 @@ void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
 */
                 ++scanLine;
             }
+    }
+
+    // For the case where we cross the dateline between (lon, lat) and 
+    // (prevlon, prevlat) we need a more sophisticated calculation.
+    // However as this will happen rather rarely, we use 
+    // pixelValue(...) directly to make the code more readable.
+
+    else {
+        stepLon = ( TWOPI - fabs(stepLon) ) * nInverse;
+        stepLat = stepLat * nInverse;
+        // We need to distinguish two cases:  
+        // crossing the dateline from east to west ...
+
+        if ( m_prevLon < lon ) {
+
+            for ( int j = 1; j < n; ++j ) {
+                m_prevLat += stepLat;
+                m_prevLon -= stepLon;
+                if ( m_prevLon <= -M_PI ) 
+                    m_prevLon += TWOPI;
+                pixelValueF( m_prevLon, m_prevLat, scanLine );
+                ++scanLine;
+            }
         }
-        else {
+
+        // ... and vice versa: from west to east.
+
+        else { 
+            qreal curStepLon = lon - n * stepLon;
+
+            for ( int j = 1; j < n; ++j ) {
+                m_prevLat += stepLat;
+                curStepLon += stepLon;
+                qreal  evalLon = curStepLon;
+                if ( curStepLon <= -M_PI )
+                    evalLon += TWOPI;
+                pixelValueF( evalLon, m_prevLat, scanLine );
+                ++scanLine;
+            }
+        }
+    }
+}
+
+void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
+                              const qreal& lat, QRgb *scanLine,
+                              int n )
+{
+    // stepLon/Lat: Distance between two subsequent approximated positions
+
+    qreal stepLat = lat - m_prevLat;
+    qreal stepLon = lon - m_prevLon;
+
+    // As long as the distance is smaller than 180 deg we can assume that 
+    // we didn't cross the dateline.
+
+    const qreal nInverse = 1.0 / (qreal)(n);
+
+    if ( fabs(stepLon) < M_PI ) {
             m_prevLon = rad2PixelX( m_prevLon );
             m_prevLat = rad2PixelY( m_prevLat );
 
@@ -361,7 +418,6 @@ void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
                 *scanLine = m_tile->pixel( iPosX, iPosY ); 
                 ++scanLine;
             }
-        }
     }
 
     // For the case where we cross the dateline between (lon, lat) and 
@@ -382,7 +438,7 @@ void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
                 m_prevLon -= stepLon;
                 if ( m_prevLon <= -M_PI ) 
                     m_prevLon += TWOPI;
-                pixelValue( m_prevLon, m_prevLat, scanLine, smooth );
+                pixelValue( m_prevLon, m_prevLat, scanLine );
                 ++scanLine;
             }
         }
@@ -398,7 +454,7 @@ void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
                 qreal  evalLon = curStepLon;
                 if ( curStepLon <= -M_PI )
                     evalLon += TWOPI;
-                pixelValue( evalLon, m_prevLat, scanLine, smooth );
+                pixelValue( evalLon, m_prevLat, scanLine );
                 ++scanLine;
             }
         }
