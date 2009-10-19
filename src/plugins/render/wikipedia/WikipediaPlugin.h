@@ -66,11 +66,13 @@ class WikipediaPlugin : public AbstractDataPlugin
     void readSettings();
     void writeSettings();
 
-    void setDialogNumberOfItems( quint32 number );
+    void checkNumberOfItems( quint32 number );
 
     void updateItemSettings();
 
  private:
+    void updateDialogShowThumbnails( bool shown ) const;
+     
     bool m_isInitialized;
 
     mutable QIcon m_icon;

@@ -32,6 +32,7 @@ class WikipediaModel : public AbstractDataPluginModel
     ~WikipediaModel();
 
     void setShowThumbnail( bool show );
+    bool showThumbnail() const;
  
  protected:
     /**

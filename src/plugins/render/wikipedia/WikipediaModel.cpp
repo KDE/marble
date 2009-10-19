@@ -52,6 +52,11 @@ void WikipediaModel::setShowThumbnail( bool show )
     m_showThumbnail = show;
 }
 
+bool WikipediaModel::showThumbnail() const
+{
+    return m_showThumbnail;
+}
+
 void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                          MarbleDataFacade *facade,
                                          qint32 number )
