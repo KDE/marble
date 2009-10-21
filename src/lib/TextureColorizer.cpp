@@ -294,14 +294,14 @@ void TextureColorizer::colorize(ViewParams *viewParams)
 void TextureColorizer::generatePalette(const QString& seafile,
                                        const QString& landfile)
 {
-    QImage   gradientImage ( 256, 3, QImage::Format_RGB32 );
+    QImage   gradientImage ( 256, 1, QImage::Format_RGB32 );
     QPainter  gradientPainter;
     gradientPainter.begin( &gradientImage );
     gradientPainter.setPen( Qt::NoPen );
 
 
     int shadingStart = 120;
-    QImage    shadingImage ( 16, 3, QImage::Format_RGB32 );
+    QImage    shadingImage ( 16, 1, QImage::Format_RGB32 );
     QPainter  shadingPainter;
     shadingPainter.begin( &shadingImage );
     shadingPainter.setPen( Qt::NoPen );
@@ -331,7 +331,7 @@ void TextureColorizer::generatePalette(const QString& seafile,
             }
         }
         gradientPainter.setBrush( gradient );
-        gradientPainter.drawRect( 0, 0, 256, 3 );        
+        gradientPainter.drawRect( 0, 0, 256, 1 );
 
         QLinearGradient  shadeGradient( - shadingStart, 0, 256 - shadingStart, 0 );
 
@@ -340,16 +340,16 @@ void TextureColorizer::generatePalette(const QString& seafile,
         shadeGradient.setColorAt(0.75, QColor(Qt::black));
         shadeGradient.setColorAt(1.00, QColor(Qt::black));
 
-        const QRgb * gradientScanLine  = (QRgb*)( gradientImage.scanLine( 1 ) );
-        const QRgb * shadingScanLine   = (QRgb*)( shadingImage.scanLine( 1 ) );
+        const QRgb * gradientScanLine  = (QRgb*)( gradientImage.scanLine( 0 ) );
+        const QRgb * shadingScanLine   = (QRgb*)( shadingImage.scanLine( 0 ) );
 
         for ( int i = 0; i < 256; ++i ) {
 
-            QRgb  shadeColor = *(gradientScanLine + i );
+            QRgb shadeColor = *(gradientScanLine + i );
             shadeGradient.setColorAt(0.496, shadeColor);
             shadeGradient.setColorAt(0.504, shadeColor);
             shadingPainter.setBrush( shadeGradient );
-            shadingPainter.drawRect( 0, 0, 16, 3 );  
+            shadingPainter.drawRect( 0, 0, 16, 1 );
 
             // populate texturepalette[][]
             for ( int j = 0; j < 16; ++j ) {

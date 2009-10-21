@@ -33,6 +33,7 @@
 #include <QtCore/QModelIndex>
 #include <QtCore/QString>
 #include <QtCore/QVector>
+#include <QtGui/QRegion>
 
 #include "global.h"
 #include "ExtDateTime.h"
@@ -183,6 +184,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void  setupTextureMapper( Projection projection );
 
+    /**
+     * @brief  Setup the Vector Composer
+     */
+    void  setupVectorComposer();
+    
     /**
      * @brief Return the downloadmanager to load missing tiles
      * @return the HttpDownloadManager instance.
@@ -357,7 +363,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * If available with the @p dirtyRegion which is the region the view will change in.
      * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
      */
-    void repaintNeeded( QRegion dirtyRegion );
+    void repaintNeeded( QRegion dirtyRegion = QRegion() );
 
     void downloadTile( const QUrl& sourceUrl, const QString& destinationFileName,
                        const QString& id ) const;

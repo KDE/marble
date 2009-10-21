@@ -771,7 +771,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     QFont defaultFont() const;
     void setDefaultFont( const QFont& font );
-
+    
  Q_SIGNALS:
     /**
      * @brief Signal that the zoom has changed, and to what.

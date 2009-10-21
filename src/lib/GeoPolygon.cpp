@@ -108,7 +108,8 @@ void GeoPolygon::displayBoundary()
 
 
 PntMap::PntMap()
-    : m_isInitialized( false )
+    : m_isInitialized( false ),
+      m_loader( 0 )
 {
 }
 

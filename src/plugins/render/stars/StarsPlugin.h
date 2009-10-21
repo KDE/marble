@@ -99,7 +99,9 @@ class StarsPlugin : public RenderPlugin
     qreal siderealTime( const QDateTime& );
 
  private:
+    void loadStars();
     bool m_isInitialized;
+    bool m_starsLoaded;
     QVector<StarPoint> m_stars;
 };
 

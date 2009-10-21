@@ -569,15 +569,18 @@ void MarbleControlBox::selectTheme( const QString &theme )
         QString selectedId = d->m_widget->mapTheme()->head()->target();
         
         QList<QStandardItem*> itemList = d->m_celestialList->findItems( selectedId, Qt::MatchExactly, 1 );
-        QStandardItem * selectedItem = itemList.first();
 
-        if ( selectedItem ) {
-            int selectedIndex = selectedItem->row();
-            d->uiWidget.celestialBodyComboBox->setCurrentIndex( selectedIndex );
-            d->m_mapSortProxy->setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
+        if ( !itemList.isEmpty() ) {
+            QStandardItem * selectedItem = itemList.first();
+
+            if ( selectedItem ) {
+                int selectedIndex = selectedItem->row();
+                d->uiWidget.celestialBodyComboBox->setCurrentIndex( selectedIndex );
+                d->m_mapSortProxy->setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
+            }
+
+            d->m_mapSortProxy->sort( 0 );
         }
-
-        d->m_mapSortProxy->sort( 0 );
     }
 }
 

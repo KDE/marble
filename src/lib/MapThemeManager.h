@@ -55,7 +55,7 @@ class MARBLE_EXPORT MapThemeManager : public QObject
  public:
     explicit MapThemeManager(QObject *parent = 0);
     ~MapThemeManager();
-
+    
     /**
      * @brief Provides a model of the locally existing themes. 
      *
@@ -118,6 +118,14 @@ class MARBLE_EXPORT MapThemeManager : public QObject
      */
     QList<QStandardItem *> createMapThemeRow( const QString& mapThemeID );
 
+    /**
+     * @brief Initialization.
+     *
+     * This method allows to provide a delayed initialization 
+     * once the model is requested.
+     */
+    void initialize();
+    
     void initFileSystemWatcher();
 
     MapThemeManagerPrivate * const d;

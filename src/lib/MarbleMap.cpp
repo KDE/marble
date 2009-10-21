@@ -354,6 +354,7 @@ MarbleMap::MarbleMap()
     d->m_modelIsOwned = true;
 
     d->construct();
+    d->m_model->setupVectorComposer();
     qDebug("Model: Time elapsed: %d ms", t.elapsed());
 }
 
@@ -368,6 +369,7 @@ MarbleMap::MarbleMap(MarbleModel *model)
     d->m_modelIsOwned = false;
 
     d->construct();
+    d->m_model->setupVectorComposer();
 }
 
 MarbleMap::~MarbleMap()

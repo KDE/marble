@@ -25,11 +25,11 @@ namespace Marble
 
 CompassFloatItem::CompassFloatItem ( const QPointF &point, const QSizeF &size )
     : AbstractFloatItem( point, size ),
+      m_isInitialized( false ),
+      m_svgobj( 0 ),
       m_compass(),
       m_polarity( 0 )
 {
-    m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/compass.svg" ),
-                                 this );
 }
 
 CompassFloatItem::~CompassFloatItem ()
@@ -70,11 +70,14 @@ QIcon CompassFloatItem::icon() const
 
 void CompassFloatItem::initialize()
 {
+    m_svgobj = new QSvgRenderer( MarbleDirs::path( "svg/compass.svg" ),
+                                 this );
+    m_isInitialized = true;
 }
 
 bool CompassFloatItem::isInitialized() const
 {
-    return true;
+    return m_isInitialized;
 }
 
 QPainterPath CompassFloatItem::backgroundShape() const

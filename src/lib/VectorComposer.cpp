@@ -15,7 +15,6 @@
 
 #include <QtGui/QColor>
 #include <QtCore/QDebug>
-#include <QtCore/QTimer>
 
 #include "GeoPolygon.h"
 #include "GeoPainter.h"
@@ -27,8 +26,9 @@
 
 using namespace Marble;
 
-VectorComposer::VectorComposer()
-    : m_vectorMap( new VectorMap() ),
+VectorComposer::VectorComposer( QObject * parent )
+    : QObject( parent ),
+      m_vectorMap( new VectorMap() ),
       m_coastLines( new PntMap() ),
       m_islands( new PntMap() ),
       m_lakeislands( new PntMap() ),
@@ -46,15 +46,24 @@ VectorComposer::VectorComposer()
       m_textureLandBrush( QBrush( QColor( 255, 0, 0 ) ) ),
       m_textureGlacierBrush( QBrush( QColor( 0, 255, 0 ) ) ),
       m_textureLakeBrush( QBrush( QColor( 0, 0, 0 ) ) ),
-      m_dateLineBrush( QBrush( Qt::NoBrush ) )
+      m_dateLineBrush( QBrush( Qt::NoBrush ) ),
+      m_coastLinesLoaded( false ),
+      m_overlaysLoaded( false )
 {
     m_textureBorderPen.setStyle( Qt::SolidLine );
     m_textureBorderPen.setColor( QColor( 0, 255, 0 ) );
     m_dateLinePen.setStyle( Qt::DashLine );
     m_dateLinePen.setColor( QColor( 0, 0, 0 ) );
 
-    loadCoastlines();
-    loadOverlay();
+    connect( m_coastLines, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
+    connect( m_islands, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
+    connect( m_lakeislands, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
+    connect( m_lakes, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
+    connect( m_glaciers, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
+    connect( m_rivers, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
+    connect( m_countries, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
+    connect( m_usaStates, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
+    connect( m_dateLine, SIGNAL( initialized() ), SIGNAL( datasetLoaded() ) );
 }
 
 VectorComposer::~VectorComposer()
@@ -73,17 +82,22 @@ VectorComposer::~VectorComposer()
 
 void VectorComposer::loadCoastlines()
 {
+    qDebug() << Q_FUNC_INFO;
+
+    // Coastlines
     m_coastLines->load( MarbleDirs::path( "mwdbii/PCOAST.PNT" ) );
     m_islands->load( MarbleDirs::path( "mwdbii/PISLAND.PNT" ) );
     m_lakeislands->load( MarbleDirs::path( "mwdbii/PLAKEISLAND.PNT" ) );
     m_lakes->load( MarbleDirs::path( "mwdbii/PLAKE.PNT" ) );
-}
 
-void VectorComposer::loadOverlay()
-{
     // Ice and snow ...
     m_glaciers->load( MarbleDirs::path( "mwdbii/PGLACIER.PNT" ) );
+}
 
+void VectorComposer::loadOverlays()
+{
+    qDebug() << Q_FUNC_INFO;
+    
     // The rivers.
     m_rivers->load( MarbleDirs::path( "mwdbii/RIVER.PNT" ) );
 
@@ -99,6 +113,11 @@ void VectorComposer::loadOverlay()
 
 void VectorComposer::drawTextureMap(ViewParams *viewParams)
 {
+    if ( !m_coastLinesLoaded ) {
+        m_coastLinesLoaded = true;
+        loadCoastlines();
+    }
+    
     QPaintDevice  *origimg = viewParams->coastImage();
     Quaternion     rotAxis = viewParams->planetAxis();
 
@@ -176,6 +195,11 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
 void VectorComposer::paintBaseVectorMap( GeoPainter *painter, 
                                          ViewParams *viewParams )
 {
+    if ( !m_coastLinesLoaded ) {
+        m_coastLinesLoaded = true;
+        loadCoastlines();
+    }
+
     Quaternion  rotAxis = viewParams->planetAxis();
 
     bool antialiased = false;
@@ -269,7 +293,13 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
     viewParams->propertyValue( "coastlines", showCoastlines );
 
     if ( showCoastlines ) {
-        m_vectorMap->setzBoundingBoxLimit( 0.4 ); 
+
+        if ( !m_coastLinesLoaded ) {
+            m_coastLinesLoaded = true;
+            loadCoastlines();
+        }
+
+        m_vectorMap->setzBoundingBoxLimit( 0.4 );
         m_vectorMap->setzPointLimit( 0 ); // 0.6 results in green pacific
     
         m_vectorMap->createFromPntMap( m_coastLines, viewParams->viewport() );
@@ -303,6 +333,10 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
     viewParams->propertyValue( "rivers", showRivers );
 
     if ( showWaterbodies && showRivers ) {
+        if ( !m_overlaysLoaded ) {
+            m_overlaysLoaded = true;
+            loadOverlays();
+        }
         // Rivers
          m_vectorMap->setzBoundingBoxLimit( -1.0 );
          m_vectorMap->setzPointLimit( -1.0 );
@@ -317,6 +351,10 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
     viewParams->propertyValue( "borders", showBorders );
 
     if ( showBorders ) {
+        if ( !m_overlaysLoaded ) {
+            m_overlaysLoaded = true;
+            loadOverlays();
+        }
         // Countries
          m_vectorMap->setzBoundingBoxLimit( -1.0 );
          m_vectorMap->setzPointLimit( -1.0 );

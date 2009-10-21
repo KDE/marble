@@ -22,6 +22,7 @@
 #define VECTORCOMPOSER_H
 
 
+#include <QtCore/QObject>
 #include <QtCore/QVector>
 #include <QtGui/QBrush>
 #include <QtGui/QPen>
@@ -37,18 +38,18 @@ class VectorMap;
 class ViewParams;
 
 
-class VectorComposer
+class VectorComposer : public QObject
 {
-
+    Q_OBJECT
  public:
-    VectorComposer();
+    VectorComposer( QObject * parent = 0 );
     virtual ~VectorComposer();
 
     // This method contains all the polygons that define the coast lines.
     void loadCoastlines();
 
     // This method contains all the other polygons
-    void loadOverlay();
+    void loadOverlays();
 
     void  drawTextureMap( ViewParams *viewParams );
     void  paintBaseVectorMap( GeoPainter*, ViewParams* );
@@ -117,6 +118,9 @@ class VectorComposer
         m_statePen.setStyle( Qt::DotLine );
     }
 
+ Q_SIGNALS:
+    void datasetLoaded();
+
  private:
     Q_DISABLE_COPY( VectorComposer )
     VectorMap  *m_vectorMap;
@@ -162,6 +166,9 @@ class VectorComposer
     QBrush      m_dateLineBrush;
 
     QVector<qreal> m_dashes;
+
+    bool        m_coastLinesLoaded;
+    bool        m_overlaysLoaded;
 };
 
 }

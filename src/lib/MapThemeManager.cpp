@@ -47,11 +47,13 @@ public:
     ~MapThemeManagerPrivate();
     QStandardItemModel* m_mapThemeModel;
     QFileSystemWatcher* m_fileSystemWatcher;
+    bool m_isInitialized;
 };
 
 MapThemeManagerPrivate::MapThemeManagerPrivate()
     : m_mapThemeModel( new QStandardItemModel( 0, 3 ) ),
-      m_fileSystemWatcher( new QFileSystemWatcher )
+      m_fileSystemWatcher( new QFileSystemWatcher ),
+      m_isInitialized( false )
 {
 }
 
@@ -66,15 +68,20 @@ MapThemeManager::MapThemeManager( QObject *parent )
     : QObject( parent ),
       d( new MapThemeManagerPrivate )
 {
-    initFileSystemWatcher();
-
-    // Delayed model initialization
-    QTimer::singleShot( 0, this, SLOT( updateMapThemeModel() ) );
 }
 
 MapThemeManager::~MapThemeManager()
 {
     delete d;
+}
+
+void MapThemeManager::initialize()
+{
+    initFileSystemWatcher();
+
+    // Delayed model initialization
+    updateMapThemeModel();
+    d->m_isInitialized = true;
 }
 
 void MapThemeManager::initFileSystemWatcher()
@@ -204,6 +211,9 @@ QStringList MapThemeManager::findMapThemes()
 
 QStandardItemModel* MapThemeManager::mapThemeModel()
 {
+    if ( !d->m_isInitialized ) {
+        initialize();
+    }
     return d->m_mapThemeModel;
 }
 

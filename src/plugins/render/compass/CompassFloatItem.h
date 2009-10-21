@@ -66,6 +66,8 @@ class CompassFloatItem  : public AbstractFloatItem
  private:
     Q_DISABLE_COPY( CompassFloatItem )
 
+    bool           m_isInitialized;
+
     QSvgRenderer  *m_svgobj;
     QPixmap        m_compass;
 

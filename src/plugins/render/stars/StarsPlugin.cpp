@@ -23,7 +23,8 @@ namespace Marble
 {
 
 StarsPlugin::StarsPlugin()
-    : m_isInitialized( false )
+    : m_isInitialized( false ),
+      m_starsLoaded( false )
 {
 }
 
@@ -70,6 +71,16 @@ QIcon StarsPlugin::icon () const
 
 void StarsPlugin::initialize ()
 {
+    m_isInitialized = true;
+}
+
+bool StarsPlugin::isInitialized () const
+{
+    return m_isInitialized;
+}
+
+void StarsPlugin::loadStars() {
+    qDebug() << Q_FUNC_INFO;
     // Load star data
     m_stars.clear();
 
@@ -102,12 +113,7 @@ void StarsPlugin::initialize ()
         m_stars << star;
 //        qDebug() << "RA:" << ra << "DE:" << de << "MAG:" << mag;
     }
-    m_isInitialized = true;
-}
-
-bool StarsPlugin::isInitialized () const
-{
-    return m_isInitialized;
+    m_starsLoaded = true;
 }
 
 bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
@@ -152,6 +158,13 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     if ( !viewport->globeCoversViewport() && viewport->projection() == Spherical )
     {
+        // Delayed initialization: 
+        // Load the star database only if the sky is actually being painted...
+        if ( !m_starsLoaded ) {
+            loadStars();
+            m_starsLoaded = true;
+        }
+
         int x, y;
 
         const qreal  skyRadius      = 0.6 * sqrt( (qreal)viewport->width() * viewport->width() + viewport->height() * viewport->height() );

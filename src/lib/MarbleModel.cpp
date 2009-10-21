@@ -149,6 +149,8 @@ MarbleModel::MarbleModel( QObject *parent )
     : QObject( parent ),
       d( new MarbleModelPrivate( this ) )
 {
+    QTime t;
+    t.start();
     MarbleModelPrivate::refCounter.ref();
     connect( this, SIGNAL( downloadTile( QUrl, QString, QString )),
              d->m_downloadManager, SLOT( addJob( QUrl, QString, QString )));
@@ -158,14 +160,6 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_texmapper = 0;
     
-    if( MarbleModelPrivate::refCounter == 1 ) {
-        d->m_veccomposer = new VectorComposer();
-        d->m_texcolorizer = 0;
-        /* d->m_texcolorizer is not initialized here since it takes a long time
-           to create the palette and it might not even be used. Instead it's created
-           in setMapTheme if the theme being loaded does need it. If the theme
-           doesn't need it, it's left as is. */
-    }
     d->m_fileManager = new FileManager();
     d->m_fileManager->setDataFacade(d->m_dataFacade);
 
@@ -377,9 +371,9 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     setupTextureMapper( currentProjection );
 
     // Set all the colors for the vector layers
-    if ( d->m_mapTheme->map()->hasVectorLayers() ) {
+    if ( d->m_mapTheme->map()->hasVectorLayers() && d->m_veccomposer ) {
         d->m_veccomposer->setOceanColor( d->m_mapTheme->map()->backgroundColor() );
-
+        
         // Just as with textures, this is a workaround for DGML2 to
         // emulate the old behaviour.
 
@@ -512,6 +506,19 @@ void MarbleModel::setupTextureMapper( Projection projection )
              this,           SLOT( notifyModelChanged() ) );
 }
 
+void MarbleModel::setupVectorComposer()
+{
+    if( MarbleModelPrivate::refCounter == 1 ) {
+        d->m_veccomposer = new VectorComposer();
+        connect( d->m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( modelChanged() ) );
+        d->m_texcolorizer = 0;
+        /* d->m_texcolorizer is not initialized here since it takes a long time
+           to create the palette and it might not even be used. Instead it's created
+           in setMapTheme if the theme being loaded does need it. If the theme
+           doesn't need it, it's left as is. */
+    }    
+}
+
 HttpDownloadManager* MarbleModel::downloadManager() const
 {
     return d->m_downloadManager;
@@ -534,7 +541,9 @@ void MarbleModelPrivate::resize( int width, int height )
     if ( m_mapTheme->map()->hasTextureLayers() ) {
         m_texmapper->resizeMap( width, height );
     }
-    m_veccomposer->resizeMap( width, height );
+    if ( m_veccomposer ) {
+        m_veccomposer->resizeMap( width, height );
+    }
 }
 
 
@@ -564,7 +573,8 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
             // Create the height map image a.k.a viewParams->m_canvasImage.
             d->m_texmapper->mapTexture( viewParams );
 
-            if ( !viewParams->showElevationModel()
+            if ( d->m_veccomposer
+                && !viewParams->showElevationModel()
                 && layer->role() == "dem"
                 && !d->m_mapTheme->map()->filters().isEmpty() ) {
 
@@ -605,7 +615,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     renderPositions << "SURFACE";
 
     // Paint the vector layer.
-    if ( d->m_mapTheme->map()->hasVectorLayers() ) {
+    if ( d->m_veccomposer && d->m_mapTheme->map()->hasVectorLayers() ) {
 
         if ( !d->m_mapTheme->map()->hasTextureLayers() ) {
             d->m_veccomposer->paintBaseVectorMap( painter, viewParams );
