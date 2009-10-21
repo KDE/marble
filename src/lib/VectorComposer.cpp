@@ -443,3 +443,5 @@ void VectorComposer::resizeMap( int width, int height )
 {
     m_vectorMap->resizeMap( width, height );
 }
+
+#include "VectorComposer.moc"
