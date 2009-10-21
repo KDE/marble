@@ -3,6 +3,7 @@ project(marble)
 ####################################################
 # CMake Settings 
 SET(CMAKE_COLOR_MAKEFILE ON)
+# SET(CMAKE_SKIP_RPATH ON)
 
 ####################################################
 # Generate the tiles with the tilecreator at compile time

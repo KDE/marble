@@ -80,11 +80,13 @@ void TinyWebBrowser::setWikipediaPath( const QString& relativeUrl )
 
 void TinyWebBrowser::print()
 {
+#ifndef QT_NO_PRINTER	
   QPrinter printer;
 
   QPrintDialog dlg( &printer, this );
   if ( dlg.exec() )
     QWebView::print( &printer );
+#endif
 }
 
 QWebView *TinyWebBrowser::createWindow( QWebPage::WebWindowType type )
