@@ -22,6 +22,7 @@ FILE( GLOB geodata_data_HDRS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/data/*
 SET( geodata_handlers_gpx_SRCS
         geodata/handlers/gpx/GPXElementDictionary.cpp
         geodata/handlers/gpx/GPXgpxTagHandler.cpp
+        geodata/handlers/gpx/GPXnameTagHandler.cpp
         geodata/handlers/gpx/GPXwptTagHandler.cpp
    )
 
