@@ -133,7 +133,6 @@ set(marblewidget_SRCS
     FileLoader.cpp
     FileManager.cpp
     FileViewModel.cpp
-    GpxFileViewItem.cpp
     KmlFileViewItem.cpp
     gps/PositionTracking.cpp
     gps/GpsElement.cpp

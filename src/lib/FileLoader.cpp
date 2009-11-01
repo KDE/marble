@@ -138,7 +138,7 @@ const quint32 MarbleMagicNumber = 0x31415926;
 
 void FileLoader::importKml( const QString& filename )
 {
-    GeoDataParser parser( GeoData_KML );
+    GeoDataParser parser( GeoData_UNKNOWN );
 
     QFile file( filename );
     if ( !file.exists() ) {
