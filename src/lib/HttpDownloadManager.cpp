@@ -137,6 +137,7 @@ void HttpDownloadManager::setJobQueueLimit( int jobQueueLimit )
 // FIXME: remove this method
 void HttpDownloadManager::setActivatedJobsLimit( int activatedJobsLimit )
 {
+    Q_UNUSED(activatedJobsLimit);
 }
 
 void HttpDownloadManager::setDownloadEnabled( const bool enable )
