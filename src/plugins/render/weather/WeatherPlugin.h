@@ -64,8 +64,6 @@ class WeatherPlugin : public AbstractDataPlugin
     void changedSettings();
 
  private:
-    void updateConfigDialog() const;
-    
     bool m_isInitialized;
 
     mutable QIcon m_icon;
