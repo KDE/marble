@@ -21,6 +21,7 @@ namespace Marble
 {
 
 class FileManager;
+class GeoDataContainer;
 class GeoDataDocument;
 class GeoDataPlacemark;
 class MarblePlacemarkModel;
@@ -76,6 +77,7 @@ public Q_SLOTS:
     void removeGeoDataDocument( int index );
 
  private:
+    QVector<GeoDataPlacemark> recurseContainer(GeoDataContainer container);
     void createFilterProperties( QVector<Marble::GeoDataPlacemark> &container );
     int cityPopIdx( qint64 population ) const;
     int spacePopIdx( qint64 diameter ) const;

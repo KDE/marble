@@ -46,6 +46,7 @@ class PlacemarkManagerPrivate
         MarbleDataFacade* m_datafacade;
         FileManager *m_fileManager;
         QVector<GeoDataPlacemark> m_placemarkContainer;
+        QVector<int> m_sizeForDocument;
 };
 }
 
@@ -88,12 +89,14 @@ void PlacemarkManager::addGeoDataDocument( int index )
     if (file)
     {
         const GeoDataDocument &document = *file->document();
-        QVector<GeoDataPlacemark> result = document.placemarks();
+        QVector<GeoDataPlacemark> result = recurseContainer(document);
         if (!result.isEmpty())
         {
             createFilterProperties( result );
             int start = d->m_placemarkContainer.size();
             d->m_placemarkContainer << result;
+            d->m_sizeForDocument.resize(index+1);
+            d->m_sizeForDocument[index] = result.size();
             qDebug() << "PlacemarkManager::addGeoDataDocument:"
                     << document.fileName() << " size " << result.size();
             d->m_datafacade->placemarkModel()->addPlacemarks( start, result.size() );
@@ -112,15 +115,34 @@ void PlacemarkManager::removeGeoDataDocument( int index )
         int start = 0;
         for ( int i = 0; i < index; ++i )
         {
-            start += d->m_fileManager->at(i)->size();
+            start += d->m_sizeForDocument[i];
         }
-        int size = d->m_fileManager->at(index)->size();
+        int size = d->m_sizeForDocument[index];
         d->m_placemarkContainer.remove(start, size);
+        d->m_sizeForDocument.remove(index);
         qDebug() << "PlacemarkManager::removeGeoDataDocument:"
                 << document.fileName() << " size " << size;
         d->m_datafacade->placemarkModel()->removePlacemarks(
                 document.fileName(), start, size );
     }
+}
+
+QVector<GeoDataPlacemark> PlacemarkManager::recurseContainer(GeoDataContainer container)
+{
+    QVector<GeoDataPlacemark> results;
+
+    const QVector<GeoDataFeature> features = container.features();
+    QVector<GeoDataFeature>::const_iterator it = features.constBegin();
+    QVector<GeoDataFeature>::const_iterator end = features.constEnd();
+
+    results += container.placemarks();
+    for (; it != end; ++it) {
+        if ( GeoDataFolderId == it->featureId() ) {
+            const GeoDataContainer *cont = static_cast<const GeoDataContainer*>(it);
+            results += recurseContainer(*cont);
+        }
+    }
+    return results;
 }
 
 void PlacemarkManager::createFilterProperties( QVector<Marble::GeoDataPlacemark> &container )
