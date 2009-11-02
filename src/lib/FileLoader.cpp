@@ -19,6 +19,7 @@
 
 #include "GeoDataParser.h"
 #include "GeoDataDocument.h"
+#include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "MarbleDirs.h"
 
@@ -274,24 +275,42 @@ void FileLoader::saveFile( const QString& filename )
 
     out.setVersion( QDataStream::Qt_4_2 );
 
+    savePlacemarks(out, m_document);
+}
+
+void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *container)
+{
     qreal lon;
     qreal lat;
     qreal alt;
 
-    QVector<Marble::GeoDataPlacemark>::const_iterator it = m_document->placemarks().constBegin();
-    QVector<Marble::GeoDataPlacemark>::const_iterator const end = m_document->placemarks().constEnd();
+    const QVector<GeoDataPlacemark> placemarks = container->placemarks();
+    QVector<Marble::GeoDataPlacemark>::const_iterator it = placemarks.constBegin();
+    QVector<Marble::GeoDataPlacemark>::const_iterator const end = placemarks.constEnd();
     for (; it != end; ++it )
     {
-        out << (*it).name();
-        (it)->coordinate( lon, lat, alt );
+        out << it->name();
+        it->coordinate( lon, lat, alt );
 
         // Use double to provide a single cache file format across architectures
         out << (double)(lon) << (double)(lat) << (double)(alt);
-        out << QString( (*it).role() );
-        out << QString( (*it).description() );
-        out << QString( (*it).countryCode() );
-        out << (double)(*it).area();
-        out << (qint64)(*it).population();
+        out << QString( it->role() );
+        out << QString( it->description() );
+        out << QString( it->countryCode() );
+        out << (double) it->area();
+        out << (qint64) it->population();
+    }
+
+    const QVector<GeoDataFolder> folders = container->folders();
+    QVector<GeoDataFolder>::const_iterator cont = folders.constBegin();
+    QVector<GeoDataFolder>::const_iterator endcont = folders.constEnd();
+    for (; cont != endcont; ++cont )
+    {
+        if (GeoDataFolderId == cont->featureId() )
+        {
+            const GeoDataContainer *subcontainer = static_cast<const GeoDataContainer*>(cont);
+            savePlacemarks(out, subcontainer);
+        }
     }
 }
 

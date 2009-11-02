@@ -15,7 +15,7 @@
 
 namespace Marble
 {
-
+class GeoDataContainer;
 class GeoDataDocument;
 
 class FileLoader : public QThread
@@ -37,6 +37,7 @@ class FileLoader : public QThread
         void importKmlFromData();
         bool loadFile(const QString &filename );
         void saveFile(const QString& filename );
+        void savePlacemarks(QDataStream &out, const GeoDataContainer *container);
 
         QString m_filepath;
         QString m_contents;

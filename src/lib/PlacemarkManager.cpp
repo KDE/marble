@@ -119,7 +119,8 @@ void PlacemarkManager::removeGeoDataDocument( int index )
         }
         int size = d->m_sizeForDocument[index];
         d->m_placemarkContainer.remove(start, size);
-        d->m_sizeForDocument.remove(index);
+        if (d->m_sizeForDocument.size() > index)
+            d->m_sizeForDocument.remove(index);
         qDebug() << "PlacemarkManager::removeGeoDataDocument:"
                 << document.fileName() << " size " << size;
         d->m_datafacade->placemarkModel()->removePlacemarks(
