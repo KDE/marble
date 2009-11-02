@@ -41,11 +41,6 @@ GeoDataDocument* KmlFileViewItem::document()
     return &m_document;
 }
 
-int KmlFileViewItem::size() const
-{
-    return m_document.placemarks().size();
-}
-
 bool KmlFileViewItem::isShown() const
 {
     return m_document.isVisible();

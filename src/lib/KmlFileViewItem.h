@@ -33,7 +33,6 @@ class KmlFileViewItem : public AbstractFileViewItem
     virtual void saveFile();
     virtual bool isShown() const;
     virtual void setShown( bool value );
-    virtual int size() const;
     virtual QString name() const;
 
     GeoDataDocument* document();
