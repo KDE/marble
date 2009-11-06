@@ -62,7 +62,11 @@ MarbleRunnerManager::~MarbleRunnerManager()
 void MarbleRunnerManager::newText(QString text)
 {
     m_lastString = text;
+    
+    m_modelMutex.lock();
+    m_model->removePlacemarks("MarbleRunnerManager", 0, m_placemarkContainer.size());
     m_placemarkContainer.clear();
+    m_modelMutex.unlock();
     emit modelChanged( m_model );
 
     LatLonRunner* llrunner = new LatLonRunner;
@@ -90,9 +94,11 @@ void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVec
     if( result.isEmpty() )
         return;
 
+    m_modelMutex.lock();
     int start = m_placemarkContainer.size();
     m_placemarkContainer << result;
     m_model->addPlacemarks( start, result.size() );
+    m_modelMutex.unlock();
     emit modelChanged( m_model );
 }
 

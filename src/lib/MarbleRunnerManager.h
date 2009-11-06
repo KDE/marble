@@ -24,6 +24,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QVector>
 #include <QtCore/QString>
+#include <QtCore/QMutex>
 
 namespace Marble
 {
@@ -54,7 +55,7 @@ private:
     MarblePlacemarkModel *m_model;
     QList<MarbleAbstractRunner*> m_runners;
     QVector<GeoDataPlacemark> m_placemarkContainer;
-    
+    QMutex m_modelMutex;
 };
 
 }
