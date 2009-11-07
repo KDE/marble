@@ -233,7 +233,6 @@ void SunLocator::shadePixelComposite(QRgb& pixcol, QRgb& dpixcol,
 
 void SunLocator::update()
 {
-    qDebug() << "void SunLocator::update()";
     updatePosition();
     if ( d->m_show || d->m_centered ) {
         if ( d->m_show )

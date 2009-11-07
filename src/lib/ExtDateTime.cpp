@@ -97,7 +97,6 @@ void ExtDateTime::timerTimeout()
     int  min = m_datetime.time().minute();
     if ( m_lastmin != min ) {
         m_lastmin = min;
-        qDebug() << "timeChanged";
         emit timeChanged();
     }
 }
