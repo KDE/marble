@@ -308,7 +308,7 @@ void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *contai
     {
         if (GeoDataFolderId == cont->featureId() )
         {
-            const GeoDataContainer *subcontainer = static_cast<const GeoDataContainer*>(cont);
+            const GeoDataContainer *subcontainer = & (*cont);
             savePlacemarks(out, subcontainer);
         }
     }

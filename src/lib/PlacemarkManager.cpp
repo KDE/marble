@@ -139,8 +139,7 @@ QVector<GeoDataPlacemark> PlacemarkManager::recurseContainer(GeoDataContainer co
     results += container.placemarks();
     for (; it != end; ++it) {
         if ( GeoDataFolderId == it->featureId() ) {
-            const GeoDataContainer *cont = static_cast<const GeoDataContainer*>(it);
-            results += recurseContainer(*cont);
+            results += recurseContainer(*it);
         }
     }
     return results;
