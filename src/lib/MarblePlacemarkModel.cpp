@@ -157,12 +157,19 @@ QModelIndexList MarblePlacemarkModel::approxMatch( const QModelIndex & start, in
 void MarblePlacemarkModel::addPlacemarks( int start,
                                           int length )
 {
+    Q_UNUSED(start);
+
+// performance wise a reset is far better when the provided list
+// is significant. That is an issue because we have
+// MarbleControlBox::m_sortproxy as a sorting customer.
+// I leave the balance search as an exercise to the reader...
+
     QTime t;
     t.start();
-    beginInsertRows( QModelIndex(), start, start + length );
+//    beginInsertRows( QModelIndex(), start, start + length );
     d->m_size += length;
-    endInsertRows();
-    emit layoutChanged();
+//    endInsertRows();
+    reset();
     qDebug() << "addPlacemarks: Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
 }
 
@@ -175,7 +182,6 @@ void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
     beginRemoveRows( QModelIndex(), start, start + length );
     d->m_size -= length;
     endRemoveRows();
-    emit layoutChanged();
     qDebug() << "removePlacemarks(" << containerName << "): Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
 }
 
