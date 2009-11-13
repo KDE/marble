@@ -184,6 +184,10 @@ const int defaultLevelZeroRows = 1;
 const qreal MI2KM = 1.609344;
 const qreal KM2MI = 1.0 / MI2KM;
 
+// Conversion Metric / Imperial System: meter vs. feet
+const qreal M2FT = 3.2808;
+const qreal FT2M = 1.0 / M2FT;
+
 // Conversion degree vs. radians
 const qreal DEG2RAD = M_PI / 180.0;
 const qreal RAD2DEG = 180.0 / M_PI;

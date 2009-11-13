@@ -400,29 +400,37 @@ void MarbleControlBox::receiveGpsCoordinates( GeoDataCoordinates in, qreal speed
     if ( d->uiWidget.navigationCheckBox->isChecked() ) {
         QString unitString;
         QString speedString;
+        QString distanceUnitString;
+        QString distanceString;
         qreal unitSpeed = 0.0;
+        qreal distance = 0.0;
 
         switch ( d->m_locale->measureSystem() ) {
             case Marble::Metric:
             //kilometers per hour
             unitString = tr("km/h");
             unitSpeed = speed / 1000;
+            distanceUnitString = tr("m");
+            distance = in.altitude();
             break;
 
             case Marble::Imperial:
             //miles per hour
             unitString = tr("m/h");
             unitSpeed = (speed/1000) * KM2MI;
+            distanceUnitString = tr("ft");
+            distance = in.altitude() * M2FT;
             break;
         }
         // TODO read this value from the incoming signal
         speedString = QLocale::system().toString( unitSpeed, 'f', 1);
+        distanceString = QString( "%1 %2" ).arg( distance, 0, 'f', 1, QChar(' ') ).arg( distanceUnitString );
 
         d->uiWidget.speedLabel->setText( speedString.rightJustified(5) + ' ' + unitString );
 
         d->uiWidget.longitudeValue->setText( in.lonToString() );
         d->uiWidget.latitudeValue->setText( in.latToString() );
-        d->uiWidget.altitudeValue->setText( QString::number( in.altitude() ) );
+        d->uiWidget.altitudeValue->setText( distanceString );
     }
 }
 
