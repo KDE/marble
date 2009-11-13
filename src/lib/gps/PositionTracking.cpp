@@ -121,8 +121,9 @@ bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
         PositionProviderStatusAvailable )
     {
         m_gpsTracking->setPosition( m_positionProvider->position() );
-        m_gpsTracking->setPosition( m_gpsTracking->position().latitude(GeoDataCoordinates::Degree),
-                                    m_gpsTracking->position().longitude( GeoDataCoordinates::Degree ) );
+        m_gpsTracking->setPosition( GeoDataCoordinates ( m_gpsTracking->position().longitude(GeoDataCoordinates::Degree),
+                                    m_gpsTracking->position().latitude( GeoDataCoordinates::Degree ),
+                                    m_gpsTracking->position().altitude(), GeoDataCoordinates::Degree ) );
 
 
         if (m_gpsTrackSeg == 0 ) {
