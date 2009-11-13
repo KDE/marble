@@ -61,6 +61,9 @@ MarbleRunnerManager::~MarbleRunnerManager()
 
 void MarbleRunnerManager::newText(QString text)
 {
+    if (text == m_lastString)
+      return;
+    
     m_lastString = text;
     
     m_modelMutex.lock();
