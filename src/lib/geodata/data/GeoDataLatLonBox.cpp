@@ -12,8 +12,7 @@
 
 #include "GeoDataLatLonBox.h"
 
-#include <QtCore/QDebug>
-
+#include "MarbleDebug.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 

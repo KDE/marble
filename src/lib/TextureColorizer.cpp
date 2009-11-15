@@ -14,7 +14,6 @@
 
 #include <cmath>
 
-#include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QString>
 #include <QtCore/QTime>
@@ -23,6 +22,7 @@
 #include <QtGui/QPainter>
 
 #include "global.h"
+#include "MarbleDebug.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneSettings.h"
 #include "ViewParams.h"

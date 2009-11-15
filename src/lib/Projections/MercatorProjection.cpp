@@ -12,7 +12,7 @@
 // Local
 #include "MercatorProjection.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 // Marble
 #include "ViewportParams.h"

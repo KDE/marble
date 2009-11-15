@@ -17,8 +17,9 @@
 
 #include <cmath>
 
-#include <QtCore/QDebug>
 #include <QtCore/QCoreApplication>
+
+#include "MarbleDebug.h"
 #include "global.h"
 
 

@@ -15,10 +15,10 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QDataStream>
 #include <QtCore/QDateTime>
-#include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
 
+#include "MarbleDebug.h"
 #include "FileManager.h"
 #include "KmlFileViewItem.h"
 #include "FileViewModel.h"

@@ -11,7 +11,7 @@
 #include "ImageLoadThread.h"
 
 #include <QtGui/QColor>
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "TileId.h"
 

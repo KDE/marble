@@ -20,7 +20,7 @@
 */
 #include "osm-namefinder/NamedTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"

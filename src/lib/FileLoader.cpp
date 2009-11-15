@@ -13,7 +13,6 @@
 #include <QtCore/QBuffer>
 #include <QtCore/QDataStream>
 #include <QtCore/QDateTime>
-#include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QThread>
 
@@ -22,6 +21,7 @@
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
 #include "MarbleDirs.h"
+#include "MarbleDebug.h"
 
 namespace Marble
 {

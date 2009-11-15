@@ -14,10 +14,10 @@
 #include "TileCreatorDialog.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QTimer>
 
 // Marble
+#include "MarbleDebug.h"
 #include "TileCreator.h"
 
 #include "ui_TileCreatorDialog.h"

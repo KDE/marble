@@ -21,7 +21,7 @@
 #include "ui_LatLonEdit.h"
 
 #include <QtGui/QWidget>
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include <cstdlib>
 

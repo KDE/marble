@@ -13,10 +13,10 @@
 
 #include <cmath>
 
-#include <QtCore/QDebug>
 #include <QtGui/QImage>
 
 #include "global.h"
+#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "Quaternion.h"
 #include "TextureTile.h"

@@ -14,7 +14,7 @@
 
 #include "AbstractProjection_p.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtGui/QRegion>
 
 // Marble

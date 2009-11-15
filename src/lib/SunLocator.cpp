@@ -20,7 +20,7 @@
 #include "Planet.h"
 #include "MarbleMath.h"
  
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include <cmath>
 // M_PI is sometimes defined in <cmath>

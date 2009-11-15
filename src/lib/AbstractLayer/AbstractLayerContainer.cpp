@@ -12,9 +12,9 @@
 
 #include "AbstractLayerData.h"
 #include "ClipPainter.h"
+#include "MarbleDebug.h"
 
 #include <QtCore/QBitArray>
-#include <QtCore/QDebug>
 #include <QtCore/QPointF>
 
 using namespace Marble;

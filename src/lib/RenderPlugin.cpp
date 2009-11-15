@@ -14,11 +14,11 @@
 
 // Marble
 #include "MarbleDataFacade.h"
+#include "MarbleDebug.h"
 
 // Qt
 #include <QtGui/QAction>
 #include <QtGui/QStandardItem>
-#include <QtCore/QDebug>
 
 
 namespace Marble

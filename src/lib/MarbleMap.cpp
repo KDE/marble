@@ -21,7 +21,6 @@
 
 // Qt
 #include <QtCore/QCoreApplication>
-#include <QtCore/QDebug>
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QTime>
 #include <QtGui/QItemSelectionModel>
@@ -33,6 +32,7 @@
 #endif
 
 // Marble
+#include "MarbleDebug.h"
 #include "AbstractProjection.h"
 #include "AbstractScanlineTextureMapper.h"
 #include "GeoPainter.h"

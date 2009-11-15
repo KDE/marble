@@ -17,7 +17,6 @@
 #include <cmath>
 
 #include <QtCore/QRegExp>
-#include <QtCore/QDebug>
 #include <QtCore/QLocale>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
@@ -25,6 +24,7 @@
 #include <QtCore/QAtomicInt>
 
 #include "global.h"
+#include "MarbleDebug.h"
 
 #include "Quaternion.h"
 

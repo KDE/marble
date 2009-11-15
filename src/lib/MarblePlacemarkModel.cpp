@@ -15,12 +15,12 @@
 #include "MarblePlacemarkModel_P.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QModelIndex>
 #include <QtCore/QTime>
 #include <QtGui/QPixmap>
 
 // Marble
+#include "MarbleDebug.h"
 #include "GeoDataStyle.h"       // In geodata/data/
 
 using namespace Marble;

@@ -28,7 +28,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 
 namespace Marble

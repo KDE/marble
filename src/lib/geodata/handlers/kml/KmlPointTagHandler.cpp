@@ -21,7 +21,7 @@
 
 #include "KmlPointTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
 #include "GeoDataPlacemark.h"

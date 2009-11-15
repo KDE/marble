@@ -21,7 +21,7 @@
 
 #include "KmlDocumentTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
 #include "GeoDataDocument.h"

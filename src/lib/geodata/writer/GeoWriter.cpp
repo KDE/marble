@@ -13,7 +13,7 @@
 #include "GeoTagWriter.h"
 #include "KmlElementDictionary.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 namespace Marble
 {

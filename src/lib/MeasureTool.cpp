@@ -18,11 +18,11 @@
 #include <cmath>
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QPoint>
 #include <QtGui/QPainter>
 
 // marble
+#include "MarbleDebug.h"
 #include "MarbleMath.h"
 #include "MarbleModel.h"
 #include "MarbleLocale.h"

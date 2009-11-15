@@ -16,7 +16,7 @@
 #include "GeoDataCoordinates.h"
 
 // Qt
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 using namespace Marble;
 

@@ -13,7 +13,7 @@
 #include "AbstractTile.h"
 #include "AbstractTile_p.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 
 namespace Marble

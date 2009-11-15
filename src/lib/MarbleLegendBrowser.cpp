@@ -13,7 +13,6 @@
 #include "MarbleLegendBrowser.h"
 
 #include <QtCore/QUrl>
-#include <QtCore/QDebug>
 #include <QtGui/QDesktopServices>
 #include <QtCore/QEvent>
 #include <QtCore/QFile>
@@ -33,6 +32,7 @@
 #include "GeoSceneSettings.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
+#include "MarbleDebug.h"
 
 #include "MarbleDirs.h"
 

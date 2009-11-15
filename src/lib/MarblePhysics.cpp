@@ -11,7 +11,7 @@
 // Own
 #include "MarblePhysics.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtCore/QTimeLine>
 
 #include "Quaternion.h"

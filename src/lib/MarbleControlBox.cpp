@@ -28,7 +28,6 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QDataStream>
 #include <QtCore/QtAlgorithms>
-#include <QtCore/QDebug>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
 #include <QtGui/QSortFilterProxyModel>
@@ -47,6 +46,7 @@
 #include "gps/GpsLayer.h"
 #include "gps/PositionTracking.h"
 #include "MarbleLocale.h"
+#include "MarbleDebug.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleRunnerManager.h"
 #include "MathHelper.h"

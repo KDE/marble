@@ -11,13 +11,13 @@
 
 #include "FileManager.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
 
 #include "FileLoader.h"
 #include "FileViewModel.h"
 #include "KmlFileViewItem.h"
+#include "MarbleDebug.h"
 #include "MarbleDataFacade.h"
 #include "MarbleGeometryModel.h"
 

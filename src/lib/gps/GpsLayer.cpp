@@ -16,7 +16,7 @@
 #include "GpxFileModel.h"
 
 #include <QtCore/QString>
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtGui/QRegion>
 #include <cmath>
 

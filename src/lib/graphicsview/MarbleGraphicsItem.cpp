@@ -17,7 +17,7 @@
 #include "ViewportParams.h"
 
 // Qt
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtGui/QPixmap>
 #include <QtGui/QPixmapCache>
 

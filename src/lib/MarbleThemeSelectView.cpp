@@ -11,7 +11,7 @@
 
 #include "MarbleThemeSelectView.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtGui/QResizeEvent>
 
 using namespace Marble;

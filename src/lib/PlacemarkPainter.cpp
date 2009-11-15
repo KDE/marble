@@ -11,13 +11,13 @@
 
 #include "PlacemarkPainter.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QModelIndex>
 #include <QtCore/QPoint>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QPainter>
 #include <QtGui/QPixmap>
 
+#include "MarbleDebug.h"
 #include "AbstractProjection.h"
 #include "GeoDataStyle.h"
 #include "MarblePlacemarkModel.h"

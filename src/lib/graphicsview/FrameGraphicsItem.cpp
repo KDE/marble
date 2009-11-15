@@ -16,7 +16,7 @@
 #include "GeoPainter.h"
 
 // Qt
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtCore/QSizeF>
 
 using namespace Marble;

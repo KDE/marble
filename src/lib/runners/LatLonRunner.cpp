@@ -25,7 +25,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QVector>

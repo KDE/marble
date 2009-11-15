@@ -15,10 +15,10 @@
 // just for now:
 #include <QtCore/QFile>
 #include <QtCore/QString>
-#include <QtCore/QDebug>
 #include <QtCore/QAbstractItemModel>
 
 #include "global.h"
+#include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "MarbleGeoDataModel.h"
 #include "MarbleGeometryModel.h"

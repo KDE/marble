@@ -17,7 +17,7 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QPainter>
 #include <QtCore/QPoint>
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 using namespace Marble;
 

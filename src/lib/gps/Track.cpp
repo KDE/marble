@@ -13,7 +13,7 @@
 #include "Track.h"
 
 // QT
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 
 using namespace Marble;

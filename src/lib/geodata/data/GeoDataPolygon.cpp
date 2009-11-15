@@ -13,7 +13,7 @@
 #include "GeoDataPolygon.h"
 #include "GeoDataPolygon_p.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 
 namespace Marble

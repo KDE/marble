@@ -21,7 +21,7 @@
 
 #include "DgmlDocumentTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "DgmlElementDictionary.h"
 #include "GeoSceneDocument.h"

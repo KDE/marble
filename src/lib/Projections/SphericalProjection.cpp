@@ -12,7 +12,7 @@
 // Local
 #include "SphericalProjection.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 // Marble
 #include "ViewportParams.h"

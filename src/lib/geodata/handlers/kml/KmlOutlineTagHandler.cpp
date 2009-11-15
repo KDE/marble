@@ -21,7 +21,7 @@
 
 #include "KmlOutlineTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
 #include "GeoDataPolyStyle.h"

@@ -22,9 +22,9 @@
 
 #include <QtCore/QDate>
 #include <QtCore/QDateTime>
-#include <QtCore/QDebug>
 #include <QtCore/QString>
 
+#include "MarbleDebug.h"
 #include "GeoParser.h"
 #include "GeoDataDocument.h"
 #include "osm-namefinder/AttributeDictionary.h"

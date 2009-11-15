@@ -21,9 +21,9 @@
 
 #include "KmlHrefTagHandler.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QUrl>
 
+#include "MarbleDebug.h"
 #include "KmlElementDictionary.h"
 #include "GeoDataIconStyle.h"
 #include "GeoDataParser.h"

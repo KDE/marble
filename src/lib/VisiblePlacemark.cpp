@@ -11,7 +11,7 @@
 
 #include "VisiblePlacemark.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "GeoDataStyle.h"
 #include "MarblePlacemarkModel.h"

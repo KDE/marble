@@ -17,7 +17,6 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QPointer>
 #include <QtCore/QUrl>
-#include <QtCore/QDebug>
 #include <QtCore/QRegExp>
 #include <QtGui/QAction>
 #include <QtGui/QPainter>
@@ -26,6 +25,7 @@
 #include <QtGui/QTextFrame>
 
 // Marble
+#include "MarbleDebug.h"
 #include "HttpDownloadManager.h"
 #include "CacheStoragePolicy.h"
 #include "MarbleDirs.h"

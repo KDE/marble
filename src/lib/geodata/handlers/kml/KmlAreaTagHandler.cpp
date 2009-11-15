@@ -22,7 +22,7 @@
 #if KML_LAZY_IMP
 #include "KmlAreaTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
 

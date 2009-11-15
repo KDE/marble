@@ -13,13 +13,13 @@
 #include "TextureTile.h"
 #include "TextureTile_p.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QFileInfo>
 #include <QtGui/QImage>
 
 #include <cmath>
 
 #include "global.h"
+#include "MarbleDebug.h"
 #include "GeoSceneTexture.h"
 #include "MarbleDirs.h"
 #include "TileLoaderHelper.h"

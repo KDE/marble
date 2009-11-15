@@ -14,10 +14,10 @@
 #include "LayerManager.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtGui/QAction>
 
 // Local dir
+#include "MarbleDebug.h"
 #include "AbstractDataPlugin.h"
 #include "AbstractDataPluginItem.h"
 #include "AbstractFloatItem.h"

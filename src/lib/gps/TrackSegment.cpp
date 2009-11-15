@@ -18,7 +18,7 @@
 #include <QtGui/QColor>
 
 #include <cmath>
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 using namespace Marble;
 

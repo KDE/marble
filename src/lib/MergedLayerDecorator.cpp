@@ -17,10 +17,10 @@
 
 #include "MergedLayerDecorator.h"
 
-#include <QtCore/QDebug>
 #include <QtGui/QPainter>
 
 #include "global.h"
+#include "MarbleDebug.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneMap.h"

@@ -21,7 +21,7 @@
 
 #include "GeoSceneSection.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "GeoSceneItem.h"
 

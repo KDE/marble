@@ -13,12 +13,12 @@
 #include "MarbleGeoDataModel.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QModelIndex>
 #include <QtCore/QFile>
 #include <QtGui/QPixmap>
 
 // Marble
+#include "MarbleDebug.h"
 #include "GeoDataDocument.h"       // In geodata/data/
 #include "GeoDataContainer.h"
 #include "GeoDataParser.h"

@@ -12,10 +12,11 @@
 
 #include "MarbleDirs.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtGui/QApplication>
+
+#include "MarbleDebug.h"
 
 #ifdef Q_OS_MACX
 //for getting app bundle path

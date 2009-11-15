@@ -13,7 +13,6 @@
 
 #include <cmath>
 
-#include <QtCore/QDebug>
 #include <QtCore/QPoint>
 #include <QtCore/QPointer>
 #include <QtCore/QTime>
@@ -25,6 +24,7 @@
 #include <QtGui/QToolTip>
 
 #include "global.h"
+#include "MarbleDebug.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"

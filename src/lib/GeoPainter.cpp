@@ -11,12 +11,12 @@
 #include "GeoPainter.h"
 #include "GeoPainter_p.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QList>
 #include <QtGui/QPainterPath>
 #include <QtGui/QRegion>
 
 #include "AbstractProjection.h"
+#include "MarbleDebug.h"
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"

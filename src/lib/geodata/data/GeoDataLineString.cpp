@@ -16,8 +16,7 @@
 #include "GeoDataLinearRing.h"
 #include "MarbleMath.h"
 #include "Quaternion.h"
-
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 
 namespace Marble

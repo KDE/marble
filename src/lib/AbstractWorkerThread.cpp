@@ -10,9 +10,9 @@
 
 // Self
 #include "AbstractWorkerThread.h"
+#include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QMutex>
 
 namespace Marble

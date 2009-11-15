@@ -12,7 +12,6 @@
 #include "PlacemarkLayout.h"
 
 #include <QtCore/QAbstractItemModel>
-#include <QtCore/QDebug>
 #include <QtCore/QList>
 #include <QtCore/QPoint>
 #include <QtCore/QVector>
@@ -26,6 +25,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 
+#include "MarbleDebug.h"
 #include "global.h"
 #include "PlacemarkPainter.h"
 #include "MarblePlacemarkModel.h"

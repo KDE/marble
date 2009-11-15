@@ -15,7 +15,7 @@
 #include "ScreenGraphicsItem.h"
 
 // Qt
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtCore/QHash>
 #include <QtCore/QRectF>
 #include <QtCore/QSizeF>

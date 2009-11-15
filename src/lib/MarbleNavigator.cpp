@@ -13,9 +13,10 @@
 #include "MarbleNavigator.h"
 
 #include <QtCore/QtAlgorithms>
-#include <QtCore/QDebug>
 #include <QtCore/QTimer>
 #include <QtGui/QStringListModel>
+
+#include "MarbleDebug.h"
 
 #include "ui_MarbleNavigator.h"
 

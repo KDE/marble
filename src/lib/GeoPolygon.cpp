@@ -19,7 +19,6 @@ using std::fabs;
 
 #include <QtCore/QFile>
 #include <QtCore/QDataStream> 
-#include <QtCore/QDebug>
 #include <QtCore/QTime>
 #ifdef Q_OS_UNIX
 # include <unistd.h>
@@ -28,6 +27,7 @@ using std::fabs;
 # include <sys/mman.h> /* mmap() is defined in this header */
 #endif
 
+#include "MarbleDebug.h"
 #include "Quaternion.h"
 
 using namespace Marble;

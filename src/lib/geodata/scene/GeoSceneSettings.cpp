@@ -21,7 +21,7 @@
 
 #include "GeoSceneSettings.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "GeoSceneProperty.h"
 #include "GeoSceneGroup.h"

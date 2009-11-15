@@ -13,7 +13,7 @@
 
 #include "MarblePlacemarkModel.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtGui/QStandardItemModel>
 
 using namespace Marble;

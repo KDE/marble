@@ -21,7 +21,7 @@
 
 #include "KmlLinearRingTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
 

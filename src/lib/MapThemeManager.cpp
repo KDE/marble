@@ -22,13 +22,13 @@
 #include <QtCore/QString>
 #include <QtCore/QStringList>
 #include <QtCore/QTimer>
-#include <QtCore/QDebug>
 
 // Local dir
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneIcon.h"
 #include "GeoSceneParser.h"
+#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 
 namespace

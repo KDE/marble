@@ -10,7 +10,7 @@
 
 #include "GmlSax.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtGui/QMessageBox>
 
 using namespace Marble;

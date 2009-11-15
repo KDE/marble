@@ -21,7 +21,7 @@
 
 #include "KmlVisibilityTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
 #include "GeoDataFeature.h"

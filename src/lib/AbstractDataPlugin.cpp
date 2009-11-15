@@ -17,9 +17,9 @@
 #include "GeoPainter.h"
 #include "GeoSceneLayer.h"
 #include "ViewportParams.h"
+#include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QEvent>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QRegion>

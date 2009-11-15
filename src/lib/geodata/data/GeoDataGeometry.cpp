@@ -19,7 +19,7 @@
 #include "GeoDataLineString.h"
 #include "GeoDataMultiGeometry.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 
 namespace Marble

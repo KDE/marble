@@ -13,7 +13,6 @@
 
 // Qt
 #include <QtCore/QDateTime>
-#include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QDirIterator>
 #include <QtCore/QFileInfo>
@@ -21,6 +20,7 @@
 
 // Marble
 #include "global.h"
+#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 
 using namespace Marble;

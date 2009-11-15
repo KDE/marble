@@ -16,8 +16,8 @@
 #include <QtCore/QSize>
 #include <QtCore/QObject>
 #include <QtCore/QPoint>
-#include <QtCore/QDebug>
 
+#include "MarbleDebug.h"
 #include "AbstractLayerContainer.h"
 #include "ClipPainter.h"
 #include "GeoDataCoordinates.h"

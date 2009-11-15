@@ -17,7 +17,7 @@
 
 // Qt
 #include <QtGui/QApplication>
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtGui/QFont>
 #include <QtCore/QString>
 

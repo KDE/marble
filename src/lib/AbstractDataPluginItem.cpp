@@ -15,10 +15,10 @@
 #include "AbstractProjection.h"
 #include "GeoDataCoordinates.h"
 #include "ViewportParams.h"
+#include "MarbleDebug.h"
 
 // Qt
 #include <QtGui/QAction>
-#include <QtCore/QDebug>
 #include <QtCore/QRect>
 #include <QtCore/QSize>
 

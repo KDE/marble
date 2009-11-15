@@ -23,7 +23,7 @@
 
 #include "DgmlFilterTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "DgmlElementDictionary.h"
 #include "DgmlAttributeDictionary.h"

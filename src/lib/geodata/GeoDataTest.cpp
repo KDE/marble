@@ -19,7 +19,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtCore/QFile>
 #include <QtCore/QStringList>
 #include <QtGui/QApplication>

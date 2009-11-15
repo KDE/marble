@@ -13,12 +13,12 @@
 #include "GeoDataFeature.h"
 #include "GeoDataFeature_p.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QDataStream>
 #include <QtCore/QSize>
 #include <QtGui/QPixmap>
 
 #include "MarbleDirs.h"
+#include "MarbleDebug.h"
 
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"

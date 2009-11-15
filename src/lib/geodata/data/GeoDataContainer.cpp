@@ -15,10 +15,10 @@
 #include "GeoDataContainer_p.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtGui/QImage>
 
 // Marble
+#include "MarbleDebug.h"
 #include "GeoDataFeature.h"
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"

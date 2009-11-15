@@ -14,8 +14,8 @@
 #include <cmath>
 
 #include <QtGui/QColor>
-#include <QtCore/QDebug>
 
+#include "MarbleDebug.h"
 #include "GeoPolygon.h"
 #include "GeoPainter.h"
 #include "global.h"

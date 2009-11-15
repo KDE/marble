@@ -13,13 +13,13 @@
 
 // Qt
 #include <QtCore/QUrl>
-#include <QtCore/QDebug>
 #include <QtCore/QTimer>
 #include <QtCore/QPointF>
 #include <QtCore/QtAlgorithms>
 #include <QtCore/QVariant>
 
 // Marble
+#include "MarbleDebug.h"
 #include "AbstractDataPluginItem.h"
 #include "CacheStoragePolicy.h"
 #include "GeoDataCoordinates.h"

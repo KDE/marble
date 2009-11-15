@@ -21,11 +21,10 @@
 
 #include "KmlStyleUrlTagHandler.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QString>
 
 #include "KmlElementDictionary.h"
-
+#include "MarbleDebug.h"
 #include "GeoDataFeature.h"
 #include "GeoDataStyleMap.h"
 

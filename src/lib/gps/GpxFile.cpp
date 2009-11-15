@@ -13,7 +13,7 @@
 
 #include <QtCore/QFile>
 #include <QtXml/QXmlInputSource>
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "Track.h"
 #include "Route.h"

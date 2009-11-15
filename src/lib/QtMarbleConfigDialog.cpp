@@ -12,7 +12,6 @@
 #include "QtMarbleConfigDialog.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QList>
 #include <QtCore/QSettings>
 #include <QtNetwork/QNetworkProxy>
@@ -26,6 +25,7 @@
 
 // Marble
 #include "global.h"
+#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleCacheSettingsWidget.h"
 #include "MarblePluginSettingsWidget.h"

@@ -12,8 +12,8 @@
 
 #include <QtCore/QSize>
 #include <QtCore/QPoint>
-#include <QtCore/QDebug>
 
+#include "MarbleDebug.h"
 #include "ClipPainter.h"
 #include "ViewParams.h"
 #include "AbstractProjection.h"

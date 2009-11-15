@@ -10,7 +10,7 @@
 
 #include "KmlMinLodPixelsTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
 #include "GeoDataLod.h"

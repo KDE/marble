@@ -21,7 +21,7 @@
 
 #include "DgmlStorageLayoutTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "DgmlAttributeDictionary.h"
 #include "DgmlElementDictionary.h"

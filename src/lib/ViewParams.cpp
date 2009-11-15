@@ -12,9 +12,9 @@
 
 #include "ViewParams.h"
 
-#include <QtCore/QDebug>
 #include <QtGui/QImage>
 
+#include "MarbleDebug.h"
 #include "AbstractProjection.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneSettings.h"

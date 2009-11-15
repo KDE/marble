@@ -13,7 +13,6 @@
 
 #include <cmath>
 
-#include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QRect>
 #include <QtCore/QSize>
@@ -25,6 +24,7 @@
 
 #include "global.h"
 #include "MarbleDirs.h"
+#include "MarbleDebug.h"
 #include "TileLoaderHelper.h"
 
 namespace Marble

@@ -23,8 +23,8 @@
 // Own
 #include "GeoDataParser.h"
 
-// Qt
-#include <QtCore/QDebug>
+// Marble
+#include "MarbleDebug.h"
 
 // Geodata
 #include "GeoDataDocument.h"

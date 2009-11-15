@@ -33,9 +33,9 @@
 #include "MarbleDirs.h"
 #include "MarbleModel.h"
 #include "TileLoaderHelper.h"
+#include "MarbleDebug.h"
 
 #include <QtCore/QCache>
-#include <QtCore/QDebug>
 #include <QtCore/QHash>
 #include <QtGui/QImage>
 

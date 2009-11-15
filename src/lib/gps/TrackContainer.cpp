@@ -10,7 +10,7 @@
 
 #include "TrackContainer.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "AbstractLayerData.h"
 

@@ -19,10 +19,10 @@
 #include "MarbleModel.h"
 #include "GeoDataPlacemark.h"
 #include "PlacemarkInfoDialog.h"
+#include "MarbleDebug.h"
 #include "Planet.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QMimeData>
 #include <QtGui/QAction>
 #include <QtGui/QClipboard>

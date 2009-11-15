@@ -12,13 +12,13 @@
 
 #include "ViewportParams.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QRect>
 
 #include <QtGui/QPainterPath>
 #include <QtGui/QPainterPathStroker>
 #include <QtGui/QRegion>
 
+#include "MarbleDebug.h"
 #include "SphericalProjection.h"
 #include "EquirectProjection.h"
 #include "MercatorProjection.h"

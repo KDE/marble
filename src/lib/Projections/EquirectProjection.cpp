@@ -15,7 +15,7 @@
 // Marble
 #include "ViewportParams.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 using namespace Marble;
 

@@ -15,8 +15,8 @@
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "GeoDataObject.h"
+#include "MarbleDebug.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QVector>
 
 namespace Marble

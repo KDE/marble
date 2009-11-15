@@ -26,7 +26,7 @@
 
 #include <cmath>
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "GeoSceneTexture.h"
 #include "global.h"

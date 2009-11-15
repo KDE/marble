@@ -16,11 +16,11 @@
 #include <cmath>
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtGui/QImage>
 
 // Marble
 #include "MarbleDirs.h"
+#include "MarbleDebug.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
 #include "ViewParams.h"

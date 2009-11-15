@@ -25,7 +25,7 @@
 
 #include "Kml_scaleTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
 #include "GeoDataIconStyle.h"

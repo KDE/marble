@@ -12,8 +12,8 @@
 #include <QtCore/QString>
 #include <QtCore/QHash>
 #include <QtCore/QObject>
-#include <QtCore/QDebug>
 
+#include "MarbleDebug.h"
 #include "global.h"
 
 namespace Marble

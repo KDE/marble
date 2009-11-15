@@ -13,9 +13,9 @@
 
 // Marble
 #include "RenderPlugin.h"
+#include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QEvent>
 #include <QtCore/QSize>
 #include <QtCore/QVariant>

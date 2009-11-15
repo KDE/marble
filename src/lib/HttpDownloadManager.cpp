@@ -12,11 +12,11 @@
 
 #include "HttpDownloadManager.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QList>
 #include <QtCore/QMap>
 #include <QtCore/QTimer>
 
+#include "MarbleDebug.h"
 #include "DownloadPolicy.h"
 #include "DownloadQueueSet.h"
 #include "HttpJob.h"

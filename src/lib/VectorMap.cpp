@@ -16,9 +16,9 @@
 #include <cstdlib>
 
 #include <QtCore/QVector>
-#include <QtCore/QDebug>
 #include <QtGui/QColor>
 
+#include "MarbleDebug.h"
 #include "global.h"
 #include "AbstractProjection.h"
 #include "GeoPainter.h"

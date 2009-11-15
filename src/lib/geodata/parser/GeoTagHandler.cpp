@@ -23,8 +23,8 @@
 // Own
 #include "GeoTagHandler.h"
 
-// Qt
-#include <QtCore/QDebug>
+// Marble
+#include "MarbleDebug.h"
 
 
 namespace Marble

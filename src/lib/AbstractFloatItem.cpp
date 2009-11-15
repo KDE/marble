@@ -12,9 +12,9 @@
 #include "AbstractFloatItem.h"
 #include "MarbleWidget.h"
 #include "MarbleMap.h"
+#include "MarbleDebug.h"
 
 #include <QtGui/QAction>
-#include <QtCore/QDebug>
 #include <QtCore/QRectF>
 #include "GeoPainter.h"
 

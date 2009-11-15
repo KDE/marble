@@ -17,7 +17,7 @@
 #include "GeoDataPoint.h"
 #include "GeoDataPolygon.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 
 namespace Marble

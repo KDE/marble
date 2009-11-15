@@ -21,7 +21,7 @@
 
 #include "GeoSceneProperty.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 namespace Marble
 {

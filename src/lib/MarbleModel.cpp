@@ -16,7 +16,6 @@
 #include <cmath>
 
 #include <QtCore/QAtomicInt>
-#include <QtCore/QDebug>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
 #include <QtCore/QAbstractItemModel>
@@ -24,6 +23,7 @@
 #include <QtGui/QSortFilterProxyModel>
 
 #include "global.h"
+#include "MarbleDebug.h"
 #include "gps/GpsLayer.h"
 
 #include "GeoSceneDocument.h"

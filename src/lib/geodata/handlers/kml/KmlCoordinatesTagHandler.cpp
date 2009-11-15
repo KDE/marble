@@ -21,10 +21,10 @@
 
 #include "KmlCoordinatesTagHandler.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QStringList>
 #include <QtCore/QRegExp>
 
+#include "MarbleDebug.h"
 #include "KmlElementDictionary.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"

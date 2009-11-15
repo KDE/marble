@@ -14,13 +14,13 @@
 #include "PluginManager.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QList>
 #include <QtCore/QPluginLoader>
 #include <QtCore/QTime>
 
 // Local dir
 #include "MarbleDirs.h"
+#include "MarbleDebug.h"
 #include "RenderPlugin.h"
 #include "NetworkPlugin.h"
 #include "PositionProviderPlugin.h"

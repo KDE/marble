@@ -16,7 +16,7 @@
 
 #include "ExtDateTime.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtCore/QTimer>
 
 using namespace Marble;

@@ -13,7 +13,7 @@
 #include <QtCore/QPointF>
 #include <QtCore/QString>
 #include <QtCore/QStringList>
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "MarbleDirs.h"
 #include "GeoDataParser.h"

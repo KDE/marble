@@ -13,13 +13,13 @@
 #include "FileStoragePolicy.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QDir>
 #include <QtCore/QDirIterator>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 
 // Marble
+#include "MarbleDebug.h"
 #include "global.h"
 #include "MarbleDirs.h"
 

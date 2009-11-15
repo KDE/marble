@@ -14,7 +14,6 @@
 #include <cmath>
 
 #include <QtCore/QCoreApplication>
-#include <QtCore/QDebug>
 #include <QtCore/QHash>
 #include <QtCore/QSettings>
 #include <QtCore/QTimer>
@@ -34,6 +33,7 @@
 
 #include "AbstractProjection.h"
 #include "MarbleDirs.h"
+#include "MarbleDebug.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "Quaternion.h"

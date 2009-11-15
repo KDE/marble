@@ -14,7 +14,7 @@
 
 #include <cmath>
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 // #define DEBUG_DRAW_NODES
 

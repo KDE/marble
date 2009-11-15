@@ -21,7 +21,7 @@
 
 #include "KmlWidthTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
 #include "GeoDataLineStyle.h"

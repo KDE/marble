@@ -11,7 +11,6 @@
 
 #include "DeferredFlag.h"
 
-#include <QtCore/QDebug>
 #include <QtGui/QColor>
 #include <QtGui/QPainter>
 #include <QtGui/QPainterPath>
@@ -19,6 +18,7 @@
 #include <QtSvg/QSvgRenderer>
 
 #include "MarbleDirs.h"
+#include "MarbleDebug.h"
 
 using namespace Marble;
 

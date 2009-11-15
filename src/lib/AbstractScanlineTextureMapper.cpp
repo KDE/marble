@@ -11,7 +11,7 @@
 
 #include "AbstractScanlineTextureMapper.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "GeoSceneTexture.h"
 #include "MarbleDirs.h"

@@ -19,7 +19,7 @@
 
 #include "GPXnameTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
 #include "GeoDataParser.h"

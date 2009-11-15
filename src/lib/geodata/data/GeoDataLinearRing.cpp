@@ -13,8 +13,7 @@
 #include "GeoDataLinearRing_p.h"
 
 #include "MarbleMath.h"
-
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 namespace Marble
 {

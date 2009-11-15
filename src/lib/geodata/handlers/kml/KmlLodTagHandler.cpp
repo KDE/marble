@@ -10,7 +10,7 @@
 
 #include "KmlLodTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
 #include "GeoDataParser.h"

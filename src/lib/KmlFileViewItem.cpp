@@ -16,7 +16,7 @@
 #include "MarbleDataFacade.h"
 #include "MarblePlacemarkModel.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 using namespace Marble;
 

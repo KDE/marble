@@ -14,7 +14,6 @@
 #include "MarbleGeometryModel.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QModelIndex>
 #include <QtCore/QFile>
 #include <QtCore/QVector>
@@ -30,6 +29,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataObject.h"
 #include "GeoDataParser.h"
+#include "MarbleDebug.h"
 
 using namespace Marble;
 

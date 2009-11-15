@@ -10,7 +10,7 @@
 
 #include "KmlEastTagHandler.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include "KmlElementDictionary.h"
 #include "GeoDataLatLonAltBox.h"

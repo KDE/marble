@@ -12,10 +12,8 @@
 // Own
 #include "DatasetProvider.h"
 
-// Qt
-#include <QtCore/QDebug>
-
 // Local dir
+#include "MarbleDebug.h"
 #include "AbstractTile.h"
 #include "TileId.h"
 
