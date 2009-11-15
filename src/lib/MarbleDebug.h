@@ -1,7 +1,7 @@
 #ifndef MARBLEDEBUG_H
 #define MARBLEDEBUG_H
 
-#include <QDebug>
+#include <QtCore/QDebug>
 
 #include "marble_export.h"
 
@@ -11,8 +11,8 @@ namespace Marble {
   */
 class NullDevice : public QIODevice {
     public:
-        qint64 readData ( char * data, qint64 maxSize ) { return -1; };
-        qint64 writeData ( const char * data, qint64 maxSize ) { return maxSize; };
+        qint64 readData ( char * /*data*/, qint64 /*maxSize*/ ) { return -1; };
+        qint64 writeData ( const char * /*data*/, qint64 maxSize ) { return maxSize; };
 };
 
 /**
