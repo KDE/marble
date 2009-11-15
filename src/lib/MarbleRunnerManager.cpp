@@ -60,14 +60,16 @@ MarbleRunnerManager::~MarbleRunnerManager()
 
 void MarbleRunnerManager::newText(QString text)
 {
-    if( text != m_lastString ) {
-        m_lastString = text;
-        qDebug() << "Creating new model";
-        MarblePlacemarkModel *model = new MarblePlacemarkModel(0);
-        emit modelChanged( model );
-        delete m_model;
-        m_model = model;
+    if( text == m_lastString ) {
+      return;
     }
+
+    m_lastString = text;
+    qDebug() << "Creating new model";
+    MarblePlacemarkModel *model = new MarblePlacemarkModel(0);
+    emit modelChanged( model );
+    delete m_model;
+    m_model = model;
 
     LatLonRunner* llrunner = new LatLonRunner;
     m_runners << dynamic_cast<MarbleAbstractRunner*>(llrunner);
