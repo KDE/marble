@@ -71,7 +71,7 @@ void MergedLayerDecorator::initCityLights()
     // As long as we don't have an Layer Management Class we just lookup 
     // the name of the layer that has the same name as the theme ID
 
-    qDebug() << Q_FUNC_INFO;
+    mDebug() << Q_FUNC_INFO;
     m_cityLightsTheme = MapThemeManager::loadMapTheme( "earth/citylights/citylights.dgml" );
     if (m_cityLightsTheme) {
         QString cityLightsId = m_cityLightsTheme->head()->theme();
@@ -161,7 +161,7 @@ void MergedLayerDecorator::paintClouds()
     if ( cloudtile.height() != m_tile->height() || cloudtile.width() != m_tile->width() )
         return;
 
-//     qDebug() << "cloud tile:" << cloudtile.height() << cloudtile.width() << cloudtile.depth()
+//     mDebug() << "cloud tile:" << cloudtile.height() << cloudtile.width() << cloudtile.depth()
 //              << "  map tile:" << m_tile->height() << m_tile->width() << m_tile->depth();
 
     const int  ctileHeight = cloudtile.height();

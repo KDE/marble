@@ -42,7 +42,7 @@ GeoNode* KmlinnerBoundaryIsTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
 
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_innerBoundaryIs << ">"
+        mDebug() << "Parsed <" << kmlTag_innerBoundaryIs << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
 

@@ -24,25 +24,25 @@ namespace Marble
 GeoDataLineString::GeoDataLineString( TessellationFlags f )
   : GeoDataGeometry( new GeoDataLineStringPrivate( f ) )
 {
-//    qDebug() << "1) GeoDataLineString created:" << p();
+//    mDebug() << "1) GeoDataLineString created:" << p();
 }
 
 GeoDataLineString::GeoDataLineString( GeoDataLineStringPrivate* priv )
   : GeoDataGeometry( priv )
 {
-//    qDebug() << "2) GeoDataLineString created:" << p();
+//    mDebug() << "2) GeoDataLineString created:" << p();
 }
 
 GeoDataLineString::GeoDataLineString( const GeoDataGeometry & other )
   : GeoDataGeometry( other )
 {
-//    qDebug() << "3) GeoDataLineString created:" << p();
+//    mDebug() << "3) GeoDataLineString created:" << p();
 }
 
 GeoDataLineString::~GeoDataLineString()
 {
 #ifdef DEBUG_GEODATA
-    qDebug() << "delete Linestring";
+    mDebug() << "delete Linestring";
 #endif
 }
 
@@ -66,7 +66,7 @@ void GeoDataLineStringPrivate::interpolateDateLine( const GeoDataCoordinates & p
 
     int recursionCounter = 0;
 
-//    qDebug() << Q_FUNC_INFO;
+//    mDebug() << Q_FUNC_INFO;
 
     if ( f.testFlag( RespectLatitudeCircle ) && previousCoords.latitude() == currentCoords.latitude() ) {
         dateLineCoords = currentCoords;
@@ -99,7 +99,7 @@ GeoDataCoordinates GeoDataLineStringPrivate::findDateLine( const GeoDataCoordina
                           + fabs( currentSign * M_PI - currentCoords.longitude() );
 
     if ( longitudeDiff < 0.001 || recursionCounter == 100 ) {
-//        qDebug() << "stopped at recursion" << recursionCounter << " and longitude difference " << longitudeDiff; 
+//        mDebug() << "stopped at recursion" << recursionCounter << " and longitude difference " << longitudeDiff; 
         return currentCoords;
     }
     ++recursionCounter;
@@ -120,9 +120,9 @@ GeoDataCoordinates GeoDataLineStringPrivate::findDateLine( const GeoDataCoordina
     int interpolatedSign = ( interpolatedCoords.longitude() < 0.0 ) ? -1 : +1 ;
 
 /*
-    qDebug() << "SRC" << previousCoords.toString();
-    qDebug() << "TAR" << currentCoords.toString();
-    qDebug() << "IPC" << interpolatedCoords.toString();
+    mDebug() << "SRC" << previousCoords.toString();
+    mDebug() << "TAR" << currentCoords.toString();
+    mDebug() << "IPC" << interpolatedCoords.toString();
 */
 
     if ( interpolatedSign != currentSign ) {
@@ -604,7 +604,7 @@ void GeoDataLineString::pack( QDataStream& stream ) const
           = p()->m_vector.constBegin(); 
          iterator != p()->m_vector.constEnd();
          ++iterator ) {
-        qDebug() << "innerRing: size" << p()->m_vector.size();
+        mDebug() << "innerRing: size" << p()->m_vector.size();
         GeoDataCoordinates coord = ( *iterator );
         coord.pack( stream );
     }

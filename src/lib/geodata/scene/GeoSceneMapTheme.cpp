@@ -138,7 +138,7 @@ QStringList GeoSceneMapTheme::findGeoSceneMapThemes( const QString& path )
     }
 
     // for (int i = 0; i < mapfiles.size(); ++i)
-    //	   qDebug() << "Files: " << mapfiles.at(i);
+    //	   mDebug() << "Files: " << mapfiles.at(i);
 
     return mapfiles;
 }

@@ -43,7 +43,7 @@ searchTagHandler( GeoTagHandler::QualifiedName( tag_searchresults, tag_namespace
 GeoNode * SearchResultsTagHandler::parse( GeoParser & parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( tag_searchresults ));
-    qDebug() << "SearchResultsTagHandler";
+    mDebug() << "SearchResultsTagHandler";
 
     // FIXME:
     GeoDocument * const document = parser.activeDocument();

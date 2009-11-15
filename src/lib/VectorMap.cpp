@@ -89,7 +89,7 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
     qreal zlimit = ( ( imgradius2 < radius * radius )
                       ? sqrt( 1 - imgradius2 / ( radius * radius ) )
                       : 0.0 );
-    // qDebug() << "zlimit: " << zlimit;
+    // mDebug() << "zlimit: " << zlimit;
 
     m_zBoundingBoxLimit = ( ( m_zBoundingBoxLimit >= 0.0
                               && zlimit < m_zBoundingBoxLimit )
@@ -128,14 +128,14 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
                 m_polygon.reserve( (*itPolyLine)->size() );
                 m_polygon.setClosed( (*itPolyLine)->getClosed() );
 
-                // qDebug() << i << " Visible: YES";
+                // mDebug() << i << " Visible: YES";
                 createPolyLine( (*itPolyLine)->constBegin(),
                                 (*itPolyLine)->constEnd(), detail, viewport );
 
                 break; // abort foreach test of current boundary
             } 
             // else
-            //     qDebug() << i << " Visible: NOT";
+            //     mDebug() << i << " Visible: NOT";
         }
     }
 }
@@ -802,7 +802,7 @@ const QPointF VectorMap::horizonPoint()
     //	ya = sqrt( ((qreal)m_radius + 1) * ( (qreal)m_radius + 1) - xa*xa);
     ya = ( m_rlimit > xa * xa )
         ? sqrt( (qreal)(m_rlimit) - (qreal)( xa * xa ) ) : 0;
-    // qDebug() << " m_rlimit" << m_rlimit << " xa*xa" << xa*xa << " ya: " << ya;
+    // mDebug() << " m_rlimit" << m_rlimit << " xa*xa" << xa*xa << " ya: " << ya;
     if ( ( m_currentPoint.y() - ( m_imgry + 1 ) ) < 0 )
         ya = -ya; 
 
@@ -833,20 +833,20 @@ void VectorMap::createArc()
 
         // Reassigning sgndiff this way seems dull
         sgndiff = diff / fabs(diff);
-        // qDebug() << "SGN: " << sgndiff;
+        // mDebug() << "SGN: " << sgndiff;
 
         // qDebug () << " beta: " << beta << " alpha " << alpha << " diff: " << diff;
 	
         int  itx;
         int  ity;
-        // qDebug() << "r: " << (m_radius+1) << "rn: " << sqrt((qreal)(m_rlimit));
+        // mDebug() << "r: " << (m_radius+1) << "rn: " << sqrt((qreal)(m_rlimit));
         qreal  arcradius = sqrt( (qreal)( m_rlimit ) );
 
         for ( int it = 1; it < fabs(diff); ++it ) {
             qreal angle = DEG2RAD * (qreal)( alpha + (sgndiff * it) );
             itx = (int)( m_imgrx +  arcradius * cos( angle ) + 1 );
             ity = (int)( m_imgry +  arcradius * sin( angle ) + 1 );
-            // qDebug() << " ity: " << ity;
+            // mDebug() << " ity: " << ity;
             m_polygon.append( QPoint( itx, ity ) );		
         }
 

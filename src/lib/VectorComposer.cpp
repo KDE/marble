@@ -82,7 +82,7 @@ VectorComposer::~VectorComposer()
 
 void VectorComposer::loadCoastlines()
 {
-    qDebug() << Q_FUNC_INFO;
+    mDebug() << Q_FUNC_INFO;
 
     // Coastlines
     m_coastLines->load( MarbleDirs::path( "mwdbii/PCOAST.PNT" ) );
@@ -96,7 +96,7 @@ void VectorComposer::loadCoastlines()
 
 void VectorComposer::loadOverlays()
 {
-    qDebug() << Q_FUNC_INFO;
+    mDebug() << Q_FUNC_INFO;
     
     // The rivers.
     m_rivers->load( MarbleDirs::path( "mwdbii/RIVER.PNT" ) );
@@ -189,7 +189,7 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
                                viewParams->mapQuality() );
     }
 
-    // qDebug() << "TextureMap calculated nodes: " << m_vectorMap->nodeCount();
+    // mDebug() << "TextureMap calculated nodes: " << m_vectorMap->nodeCount();
 }
 
 void VectorComposer::paintBaseVectorMap( GeoPainter *painter, 
@@ -435,7 +435,7 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         m_vectorMap->paintMap( painter, antialiased );
     }
 
-    // qDebug() << "M_VectorMap calculated nodes: " << m_vectorMap->nodeCount();
+    // mDebug() << "M_VectorMap calculated nodes: " << m_vectorMap->nodeCount();
 }
 
 

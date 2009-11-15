@@ -45,7 +45,7 @@ GeoNode* KmlhrefTagHandler::parse( GeoParser& parser ) const
         QString content = parser.readElementText().trimmed();
         parentItem.nodeAs<GeoDataIconStyle>()->setIconPath( content );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_href << "> containing: " << content
+        mDebug() << "Parsed <" << kmlTag_href << "> containing: " << content
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

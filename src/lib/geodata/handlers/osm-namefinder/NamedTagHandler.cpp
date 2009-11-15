@@ -41,10 +41,10 @@ namedTagHandler( GeoTagHandler::QualifiedName( tag_named, tag_namespace ),
 GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( tag_named ));
-    qDebug() << "NamedTagHandler";
+    mDebug() << "NamedTagHandler";
 
     GeoStackItem parentItem = parser.parentElement();
-    qDebug() << "parentItem:" << parentItem.qualifiedName().first;
+    mDebug() << "parentItem:" << parentItem.qualifiedName().first;
 
     // FIXME: better check tags before?
     GeoDataPlacemark named;
@@ -91,19 +91,19 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
         suggestedZoomLevel = zoomStr.toInt();
     named.setPopularityIndex( suggestedZoomLevel );
 
-    qDebug() << "parsed named:" << named.name() << " lon:" << lon << " lat:" << lat;
+    mDebug() << "parsed named:" << named.name() << " lon:" << lon << " lat:" << lat;
 
     if ( parentItem.represents( tag_searchresults )) {
-        qDebug() << "added via parent searchresults";
+        mDebug() << "added via parent searchresults";
         GeoDataContainer * const parent = parentItem.nodeAs<GeoDataContainer>();
         Q_ASSERT( parent );
         parent->append( named );
 
     } else if ( parentItem.represents( tag_place )) {
-        qDebug() << "added via parent place, not implemented";
+        mDebug() << "added via parent place, not implemented";
 
     } else if ( parentItem.represents( tag_nearestplaces )) {
-        qDebug() << "added via parent nearestplaces, not implemented";
+        mDebug() << "added via parent nearestplaces, not implemented";
 
     } else if ( parentItem.first.first.isEmpty() && !parentItem.second ) {
         // ok, it is the parentItem would be searchresults, but we

@@ -133,20 +133,20 @@ Planet::Planet( const QString& id )
                 name( id ), id );
     // sun and moon
     } else if ( id == "sun" ) {
-        qDebug() << "WARNING:";
-        qDebug() << "creating \"sun\" which has invalid orbital elements";
+        mDebug() << "WARNING:";
+        mDebug() << "creating \"sun\" which has invalid orbital elements";
         //FIXME: fill in with valid data
         d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 695000000.0,
                 name( id ), id );
     } else if ( id == "moon" ) {
-        qDebug() << "WARNING:";
-        qDebug() << "creating \"moon\" which has invalid orbital elements";
+        mDebug() << "WARNING:";
+        mDebug() << "creating \"moon\" which has invalid orbital elements";
         //FIXME: fill in with valid data
         d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1738000.0,
                 name( id ), id );
     } else {
-        qDebug() << "WARNING:";
-        qDebug() << "creating planet" << id << "without enough info";
+        mDebug() << "WARNING:";
+        mDebug() << "creating planet" << id << "without enough info";
         d->setup( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 name( QString() ), QString("unknown") );
     }
@@ -341,7 +341,7 @@ QString Planet::name( const QString& id )
     } else if ( id == "moon" ) {
         return QObject::tr("Moon", "the earth's moon");
     } else if ( id.isEmpty() ) {
-        qDebug() << "Warning: empty id";
+        mDebug() << "Warning: empty id";
         return QObject::tr("Unknown Planet", "a planet without data");
     }
 

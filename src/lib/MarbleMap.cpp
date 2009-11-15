@@ -264,7 +264,7 @@ void MarbleMapPrivate::drawFog( QPainter &painter )
 void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
 {
     if ( !m_viewParams.mapTheme() ) {
-        qDebug() << "No theme yet!";
+        mDebug() << "No theme yet!";
         paintMarbleSplash( painter, dirtyRect );
         return;
     }
@@ -513,7 +513,7 @@ void MarbleMap::setDistance( qreal distance )
     qreal minDistance = 0.001;
 
     if ( distance <= minDistance ) {
-        qDebug() << "Invalid distance: 0 m";
+        mDebug() << "Invalid distance: 0 m";
         distance = minDistance;
     }
     
@@ -986,7 +986,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
 
 void MarbleMap::setPropertyValue( const QString& name, bool value )
 {
-    qDebug() << "In MarbleMap the property " << name << "was set to " << value;
+    mDebug() << "In MarbleMap the property " << name << "was set to " << value;
     d->m_viewParams.setPropertyValue( name, value );
 }
 
@@ -1036,7 +1036,7 @@ void MarbleMap::setShowClouds( bool visible )
     d->m_model->layerDecorator()->setShowClouds( visible );
 
     if ( previousVisible != visible ) {
-        qDebug() << "Changing cloud layer";
+        mDebug() << "Changing cloud layer";
         d->m_model->update();
     }
 }
@@ -1193,7 +1193,7 @@ void MarbleMap::clearVolatileTileCache()
 
 void MarbleMap::setVolatileTileCacheLimit( quint64 kilobytes )
 {
-    qDebug() << "kiloBytes" << kilobytes;
+    mDebug() << "kiloBytes" << kilobytes;
     d->m_volatileTileCacheLimit = kilobytes;
     d->m_model->setVolatileTileCacheLimit( kilobytes );
 }
@@ -1280,10 +1280,10 @@ void MarbleMap::updateSun()
     // Update the sun shading.
     //SunLocator  *sunLocator = d->m_model->sunLocator();
 
-    qDebug() << "MarbleMap: Updating the sun shading map...";
+    mDebug() << "MarbleMap: Updating the sun shading map...";
     d->m_model->update();
     setNeedsUpdate();
-    //qDebug() << "Finished updating the sun shading map";
+    //mDebug() << "Finished updating the sun shading map";
 }
 
 void MarbleMap::centerSun()
@@ -1295,7 +1295,7 @@ void MarbleMap::centerSun()
         qreal  lat = sunLocator->getLat();
         centerOn( lon, lat );
 
-        qDebug() << "Centering on Sun at " << lat << lon;
+        mDebug() << "Centering on Sun at " << lat << lon;
     }
 }
 

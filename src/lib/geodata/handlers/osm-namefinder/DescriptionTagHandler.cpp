@@ -38,7 +38,7 @@ descriptionTagHandler( GeoTagHandler::QualifiedName( tag_description, tag_namesp
 GeoNode * DescriptionTagHandler::parse( GeoParser & parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( tag_description ));
-    qDebug() << "DescriptionTagHandler";
+    mDebug() << "DescriptionTagHandler";
 
     GeoStackItem parentItem = parser.parentElement();
     if ( parentItem.represents( tag_named )) {

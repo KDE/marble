@@ -137,17 +137,17 @@ void ViewParams::setMapThemeId( const QString& mapThemeId )
         // Check whether the previous theme works 
         if ( !d->m_mapTheme ){ 
             // Fall back to default theme
-            qDebug() << "Falling back to default theme";
+            mDebug() << "Falling back to default theme";
             mapTheme = MapThemeManager::loadMapTheme("earth/srtm/srtm.dgml");
 
             // If this last resort doesn't work either shed a tear and exit
             if ( !mapTheme ) {
-                qDebug() << "Couldn't find a valid DGML map.";
+                mDebug() << "Couldn't find a valid DGML map.";
                 exit(-1);
             }
         }
         else {
-            qDebug() << "Selected theme doesn't work, so we stick to the previous one";
+            mDebug() << "Selected theme doesn't work, so we stick to the previous one";
             return;
         }
     }
@@ -166,7 +166,7 @@ void ViewParams::setPropertyValue( const QString &name, bool value )
         d->m_mapTheme->settings()->setPropertyValue( name, value );
     }
     else {
-        qDebug() << "WARNING: Failed to access a map theme! Property: " << name;
+        mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
     }
 }
 
@@ -177,7 +177,7 @@ void ViewParams::propertyValue( const QString &name, bool &value )
     }
     else {
         value = false;
-        qDebug() << "WARNING: Failed to access a map theme! Property: " << name;
+        mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
     }
 }
 
@@ -188,7 +188,7 @@ void ViewParams::propertyAvailable( const QString &name, bool &value )
     }
     else {
         value = false;
-        qDebug() << "WARNING: Failed to access a map theme! Property: " << name;
+        mDebug() << "WARNING: Failed to access a map theme! Property: " << name;
     }
 }
 

@@ -121,7 +121,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 
     // Setting the proper planet name
     QString targetString = m_model->planet()->name();
-    qDebug() << "targetString" << targetString;
+    mDebug() << "targetString" << targetString;
     // FIXME: this should be removed later on ...
     if ( targetString == "Earth" ) 
         targetString = tr( "&Earth" );
@@ -177,7 +177,7 @@ void MarbleWidgetPopupMenu::slotSetHomePoint()
     bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Degree );
     if ( valid )
     {
-//        qDebug() << "Setting Home Location: " << lon << ", " << lat;   
+//        mDebug() << "Setting Home Location: " << lon << ", " << lat;   
         m_widget->setHome( lon, lat, m_widget->zoom() );
     }
 }

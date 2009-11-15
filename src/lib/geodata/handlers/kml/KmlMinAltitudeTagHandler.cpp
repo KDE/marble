@@ -33,7 +33,7 @@ GeoNode* KmlminAltitudeTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataLatLonAltBox>()->setMinAltitude( minAltitude );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_minAltitude << "> containing: " << minAltitude
+        mDebug() << "Parsed <" << kmlTag_minAltitude << "> containing: " << minAltitude
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

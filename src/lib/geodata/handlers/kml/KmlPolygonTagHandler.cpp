@@ -44,7 +44,7 @@ GeoNode* KmlPolygonTagHandler::parse( GeoParser& parser ) const
     
     GeoDataPolygon polygon;
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Polygon << ">"
+        mDebug() << "Parsed <" << kmlTag_Polygon << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
 

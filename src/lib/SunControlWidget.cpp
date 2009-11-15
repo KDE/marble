@@ -102,8 +102,8 @@ void SunControlWidget::updateDateTime()
     int hour = time.hour();
     int cur_hour = m_uiWidget.timeSlider->value();
 	
-    // 	qDebug() << "date:" << date << cur_date;
-    // 	qDebug() << "time:" << time << cur_time;
+    // 	mDebug() << "date:" << date << cur_date;
+    // 	mDebug() << "time:" << time << cur_time;
 	
     if ( date != cur_date )
         m_uiWidget.calendarWidget->setSelectedDate( date );
@@ -140,7 +140,7 @@ void SunControlWidget::datetimeChanged(QDateTime datetime)
     QDateTime cur_datetime = m_sunLocator->datetime()->datetime();
     cur_datetime = cur_datetime.addSecs(-cur_datetime.time().second()); // remove seconds
 	
-    // 	qDebug() << cur_datetime << datetime;
+    // 	mDebug() << cur_datetime << datetime;
     if ( cur_datetime == datetime )
         return;
 	

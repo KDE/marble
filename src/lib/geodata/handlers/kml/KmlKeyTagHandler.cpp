@@ -46,7 +46,7 @@ GeoNode* KmlkeyTagHandler::parse( GeoParser& parser ) const
         
         parentItem.nodeAs<GeoDataStyleMap>()->setLastKey( content );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_key << "> containing: " << content
+        mDebug() << "Parsed <" << kmlTag_key << "> containing: " << content
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
     }

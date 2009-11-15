@@ -49,7 +49,7 @@ void AbstractLayerContainer::draw ( ClipPainter *painter,
     Q_UNUSED( painter );
     Q_UNUSED( point );
 
-    //qDebug() << "AbstractLayerContainter::draw( ClipPainter, QPoint)";
+    //mDebug() << "AbstractLayerContainter::draw( ClipPainter, QPoint)";
 }
 
 void AbstractLayerContainer::draw(ClipPainter *painter, 

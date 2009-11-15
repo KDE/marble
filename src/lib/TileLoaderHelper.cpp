@@ -37,7 +37,7 @@ namespace Marble
 int TileLoaderHelper::levelToRow( int levelZeroRows, int level )
 {
     if ( level < 0 ) {
-        qDebug() << QString( "TileLoaderHelper::levelToRow(): Invalid level: %1" )
+        mDebug() << QString( "TileLoaderHelper::levelToRow(): Invalid level: %1" )
             .arg( level );
         return 0;
     }
@@ -47,7 +47,7 @@ int TileLoaderHelper::levelToRow( int levelZeroRows, int level )
 int TileLoaderHelper::levelToColumn( int levelZeroColumns, int level )
 {
     if ( level < 0 ) {
-        qDebug() << QString( "TileLoaderHelper::levelToColumn(): Invalid level: %1" )
+        mDebug() << QString( "TileLoaderHelper::levelToColumn(): Invalid level: %1" )
             .arg( level );
         return 0;
     }
@@ -57,7 +57,7 @@ int TileLoaderHelper::levelToColumn( int levelZeroColumns, int level )
 int TileLoaderHelper::rowToLevel( int levelZeroRows, int row )
 {
     if ( row < levelZeroRows ) {
-        qDebug() << QString( "TileLoaderHelper::rowToLevel(): Invalid number of rows: %1" )
+        mDebug() << QString( "TileLoaderHelper::rowToLevel(): Invalid number of rows: %1" )
             .arg( row );
         return 0;
     }
@@ -67,7 +67,7 @@ int TileLoaderHelper::rowToLevel( int levelZeroRows, int row )
 int TileLoaderHelper::columnToLevel( int levelZeroColumns, int column )
 {
     if ( column < levelZeroColumns ) {
-        qDebug() << QString( "TileLoaderHelper::columnToLevel(): Invalid number of columns: %1" )
+        mDebug() << QString( "TileLoaderHelper::columnToLevel(): Invalid number of columns: %1" )
         .arg( column );
         return 0;
     }
@@ -93,7 +93,7 @@ QUrl TileLoaderHelper::downloadUrl( GeoSceneTexture *textureLayer, int zoomLevel
             break;
 
         case GeoSceneTexture::Custom:
-            qDebug() << "Warning: unhandled enum value GeoSceneTexture::Custom"
+            mDebug() << "Warning: unhandled enum value GeoSceneTexture::Custom"
                      << "in TileLoaderHelper::downloadUrl()";
             break;
         }
@@ -127,7 +127,7 @@ QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture *textureLayer, i
             break;
 
         case GeoSceneTexture::Custom:
-            qDebug() << "Warning: unhandled enum value GeoSceneTexture::Custom"
+            mDebug() << "Warning: unhandled enum value GeoSceneTexture::Custom"
                      << "in TileLoaderHelper::relativeTileFileName()";
             break;
         }

@@ -39,7 +39,7 @@ nearestPlacesTagHandler( GeoTagHandler::QualifiedName( tag_nearestplaces, tag_na
 GeoNode * NearestPlacesTagHandler::parse( GeoParser & parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( tag_nearestplaces ));
-    qDebug() << "NearestPlacesTagHandler";
+    mDebug() << "NearestPlacesTagHandler";
 
     GeoStackItem parentItem = parser.parentElement();
     GeoDataPlacemark * named = 0;

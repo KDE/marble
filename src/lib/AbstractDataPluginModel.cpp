@@ -173,7 +173,7 @@ QList<AbstractDataPluginItem*> AbstractDataPluginModel::items( ViewportParams *v
     {
         // Don't try to access an object that doesn't exist
         if( !*i ) {
-            qDebug() << "Warning: Null pointer in m_itemSet";
+            mDebug() << "Warning: Null pointer in m_itemSet";
             continue;
         }
         
@@ -293,7 +293,7 @@ void AbstractDataPluginModel::addItemToList( AbstractDataPluginItem *item )
         }
     }
     
-    qDebug() << "New item " << item->id();
+    mDebug() << "New item " << item->id();
     
     // This find the right position in the sorted to insert the new item 
     QList<AbstractDataPluginItem*>::iterator i = qLowerBound( d->m_itemSet.begin(),
@@ -435,7 +435,7 @@ void AbstractDataPluginModel::processFinishedJob( const QString& relativeUrlStri
         QStringList fileInformation = id.split( fileIdSeparator );
         
         if( fileInformation.size() < 2) {
-            qDebug() << "Strange file information " << id;
+            mDebug() << "Strange file information " << id;
             return;
         }
         QString itemId = fileInformation.at( 0 );

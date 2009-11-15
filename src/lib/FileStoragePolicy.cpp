@@ -86,14 +86,14 @@ void FileStoragePolicy::clearCache()
 {
     if ( m_dataDirectory.isEmpty() || !m_dataDirectory.endsWith("data") )
     {
-        qDebug() << "Error: Refusing to erase files under unknown conditions for safety reasons!";
+        mDebug() << "Error: Refusing to erase files under unknown conditions for safety reasons!";
         return;
     }
 
     QString cachedMapsDirectory = m_dataDirectory + "/maps";
 
     QDirIterator it( cachedMapsDirectory, QDir::NoDotAndDotDot | QDir::Dirs );
-    qDebug() << cachedMapsDirectory;
+    mDebug() << cachedMapsDirectory;
     while (it.hasNext()) {
         it.next();
         QString planetDirectory = it.filePath();

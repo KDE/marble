@@ -143,7 +143,7 @@ void GpsTracking::getData( bool error )
 
 void GpsTracking::notifyPosition( GeoDataCoordinates pos )
 {
-    qDebug() << "Position from gpsd: " << pos.toString();
+    mDebug() << "Position from gpsd: " << pos.toString();
 }
 
 void GpsTracking::updateIp( )
@@ -151,8 +151,8 @@ void GpsTracking::updateIp( )
 //         QTextStream out(&gmlFile);
 //         gmlFile.write( host.readAll() );
 //         out << host.readAll();
-//         qDebug() << gmlFile.readAll();
-//         qDebug() << host.readAll();
+//         mDebug() << gmlFile.readAll();
+//         mDebug() << host.readAll();
 //         
     qreal lon;
     qreal lat;
@@ -167,7 +167,7 @@ void GpsTracking::updateIp( )
 
     gmlReader.parse( &gmlInput );
 
-    qDebug() << "in the real world" << lon << lat;
+    mDebug() << "in the real world" << lon << lat;
     m_gpsCurrentPosition->setPosition( lat, lon );
 }
 

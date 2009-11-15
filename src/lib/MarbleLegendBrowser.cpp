@@ -91,7 +91,7 @@ void MarbleLegendBrowser::setMarbleWidget( MarbleWidget *marbleWidget )
 
 void MarbleLegendBrowser::initTheme()
 {
-    qDebug() << "initTheme";
+    mDebug() << "initTheme";
 
     // Check for a theme specific legend.html first
     if ( d->m_marbleWidget != 0
@@ -127,7 +127,7 @@ void MarbleLegendBrowser::initTheme()
 
 void MarbleLegendBrowser::loadLegend()
 {
-    qDebug() << "loadLegend";
+    mDebug() << "loadLegend";
     QTime t;
     t.start();
 

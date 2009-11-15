@@ -110,7 +110,7 @@ PlacemarkLayout::~PlacemarkLayout()
 
 void PlacemarkLayout::requestStyleReset()
 {
-    qDebug() << "Style reset requested.";
+    mDebug() << "Style reset requested.";
     m_styleResetRequested = true;
 }
 
@@ -153,7 +153,7 @@ PlacemarkPainter* PlacemarkLayout::placemarkPainter() const
 int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
                                      const QItemSelectionModel* selectionModel ) const
 {
-    qDebug() << "Detecting maxLabelHeight ...";
+    mDebug() << "Detecting maxLabelHeight ...";
 
     int maxLabelHeight = 0;
 
@@ -178,7 +178,7 @@ int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
             maxLabelHeight = textHeight; 
     }
 
-    //qDebug() <<"Detected maxLabelHeight: " << maxLabelHeight;
+    //mDebug() <<"Detected maxLabelHeight: " << maxLabelHeight;
     return maxLabelHeight;
 }
 
@@ -342,7 +342,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     {
         const QModelIndex& index = model->index( i, 0 );
         if( !index.isValid() ) {
-            qDebug() << "invalid index!!!";
+            mDebug() << "invalid index!!!";
             continue;
         }
 
@@ -495,7 +495,7 @@ QRect PlacemarkLayout::roomForLabel( GeoDataStyle * style,
 
     QFont labelFont = style->labelStyle().font();
     int textHeight = QFontMetrics( labelFont ).height();
-//    qDebug() << textHeight;
+//    mDebug() << textHeight;
 
     if ( style->labelStyle().alignment() == GeoDataLabelStyle::Corner ) {
         int  xpos = symbolwidth / 2 + x + 1;

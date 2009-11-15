@@ -181,8 +181,8 @@ bool GeoDataLatLonAltBox::contains( const GeoDataLatLonAltBox &other ) const
 {
     // check the contain criterion for the altitude first as this is trivial:
 
-    // qDebug() << "this " << this->toString(GeoDataCoordinates::Degree);
-    // qDebug() << "other" << other.toString(GeoDataCoordinates::Degree);
+    // mDebug() << "this " << this->toString(GeoDataCoordinates::Degree);
+    // mDebug() << "other" << other.toString(GeoDataCoordinates::Degree);
 
     if ( d->m_maxAltitude >= other.maxAltitude() && d->m_minAltitude <= other.minAltitude() ) {
 

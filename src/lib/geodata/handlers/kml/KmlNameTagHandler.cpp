@@ -43,7 +43,7 @@ GeoNode* KmlnameTagHandler::parse( GeoParser& parser ) const
         
         parentItem.nodeAs<GeoDataFeature>()->setName( name );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_name << "> containing: " << name
+        mDebug() << "Parsed <" << kmlTag_name << "> containing: " << name
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

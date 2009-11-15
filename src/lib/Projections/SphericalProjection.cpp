@@ -283,7 +283,7 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
         latLonAltBox.setEast( +M_PI );
     }
 
-//    qDebug() << latLonAltBox.text( GeoDataCoordinates::Degree );
+//    mDebug() << latLonAltBox.text( GeoDataCoordinates::Degree );
 
     return latLonAltBox;
 }

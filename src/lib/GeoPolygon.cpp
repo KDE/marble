@@ -89,17 +89,17 @@ void GeoPolygon::displayBoundary()
     qreal      lon;
     qreal      lat;
     m_boundary.at(0)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
-    qDebug() << "Boundary:" << lon << ", " << lat;
+    mDebug() << "Boundary:" << lon << ", " << lat;
     m_boundary.at(1)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
-    qDebug() << "Boundary:" << lon << ", " << lat;
+    mDebug() << "Boundary:" << lon << ", " << lat;
     m_boundary.at(2)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
-    qDebug() << "Boundary:" << lon << ", " << lat;
+    mDebug() << "Boundary:" << lon << ", " << lat;
     m_boundary.at(3)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
-    qDebug() << "Boundary:" << lon << ", " << lat;
+    mDebug() << "Boundary:" << lon << ", " << lat;
     m_boundary.at(4)->geoCoordinates(lon, lat, GeoDataCoordinates::Degree);
-    qDebug() << "Boundary:" << lon << ", " << lat;
+    mDebug() << "Boundary:" << lon << ", " << lat;
 
-//     qDebug() << "Points#: " << size() << " File: " << m_sourceFileName
+//     mDebug() << "Points#: " << size() << " File: " << m_sourceFileName
 //              << " dateline " << getDateLine() << " Index: " << getIndex();
 }
 
@@ -164,16 +164,16 @@ void PntMapLoader::run()
     struct stat  statbuf;
 
     if ( (fd = open (m_filename.toLatin1(), O_RDONLY) ) < 0)  // krazy:exclude=syscalls
-        qDebug() << "cannot open" << m_filename << " for reading";
+        mDebug() << "cannot open" << m_filename << " for reading";
 
     if ( fstat (fd,&statbuf) < 0 ) // krazy:exclude=syscalls
-        qDebug() << "fstat error";
+        mDebug() << "fstat error";
 
     int  filelength = statbuf.st_size;
 	
     if ((src = (unsigned char*) mmap (0, filelength, PROT_READ, MAP_SHARED, fd, 0))
         == (unsigned char*) (caddr_t) -1)
-        qDebug() << "mmap error for input";
+        mDebug() << "mmap error for input";
 		
     short  header;
     short  iLat;
@@ -357,16 +357,16 @@ void PntMapLoader::run()
 
         if ( !isOriginalSide ) {
             (*itPolyLine)->setDateLine( GeoPolygon::Odd );
-//            qDebug() << "Odd  >> File: " << (*itPolyLine)->m_sourceFileName;
+//            mDebug() << "Odd  >> File: " << (*itPolyLine)->m_sourceFileName;
             (*itPolyLine)->setBoundary( -M_PI, latTop, M_PI, -M_PI / 2.0 );
-//            qDebug() << " lonLeft: " << lonLeft << " lonRight: " << lonRight << " otherLonLeft: " << otherLonLeft << " otherlonRight: " << otherLonRight;
+//            mDebug() << " lonLeft: " << lonLeft << " lonRight: " << lonRight << " otherLonLeft: " << otherLonLeft << " otherlonRight: " << otherLonRight;
         }
 
         if ( isOriginalSide && isCrossingDateLine ) {
             (*itPolyLine)->setDateLine( GeoPolygon::Even );
-//            qDebug() << "Even >> File: " << (*itPolyLine)->m_sourceFileName << " Size: " << (*itPolyLine)->size();
+//            mDebug() << "Even >> File: " << (*itPolyLine)->m_sourceFileName << " Size: " << (*itPolyLine)->size();
 
-//            qDebug() << " lonLeft: " << lonLeft << " lonRight: " << lonRight << " otherLonLeft: " << otherLonLeft << " otherlonRight: " << otherLonRight;
+//            mDebug() << " lonLeft: " << lonLeft << " lonRight: " << lonRight << " otherLonLeft: " << otherLonLeft << " otherlonRight: " << otherLonRight;
 
             qreal leftLonRight, rightLonLeft;
 
@@ -381,7 +381,7 @@ void PntMapLoader::run()
 
             (*itPolyLine)->setBoundary( rightLonLeft, latTop, leftLonRight, latBottom );
 
-//            qDebug() << "Crosses: lonLeft: " << rightLonLeft << " is right from: lonRight: " << leftLonRight;
+//            mDebug() << "Crosses: lonLeft: " << rightLonLeft << " is right from: lonRight: " << leftLonRight;
 
         }
         if ( !isCrossingDateLine ) {
@@ -389,7 +389,7 @@ void PntMapLoader::run()
             (*itPolyLine)->setBoundary( lonLeft, latTop, lonRight, latBottom );
         }
     }
-//    qDebug() << "Elapsed: " << timer->elapsed();
+//    mDebug() << "Elapsed: " << timer->elapsed();
     delete timer;
 
     emit pntMapLoaded( true );

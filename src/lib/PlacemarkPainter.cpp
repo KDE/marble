@@ -30,7 +30,7 @@ PlacemarkPainter::PlacemarkPainter( QObject* parent )
     : QObject( parent )
 {
     m_useXWorkaround = testXBug();
-    qDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );
+    mDebug() << "Use workaround: " << ( m_useXWorkaround ? "1" : "0" );
 
     m_defaultLabelColor = Qt::black;
 }

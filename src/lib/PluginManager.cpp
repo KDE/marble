@@ -107,7 +107,7 @@ QList<PositionProviderPlugin *> PluginManager::createPositionProviderPlugins() c
 
 void PluginManager::loadPlugins()
 {
-    qDebug() << "Starting to load Plugins.";
+    mDebug() << "Starting to load Plugins.";
 
     QStringList pluginFileNameList = MarbleDirs::pluginEntryList( "", QDir::Files );
 
@@ -123,7 +123,7 @@ void PluginManager::loadPlugins()
     d->m_positionProviderPluginTemplates.clear();
 
     foreach( const QString &fileName, pluginFileNameList ) {
-        // qDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
+        // mDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
         QPluginLoader loader( MarbleDirs::pluginPath( fileName ) );
 
         QObject * obj = loader.instance();
@@ -133,25 +133,25 @@ void PluginManager::loadPlugins()
         PositionProviderPlugin * positionProviderPlugin = 0;
         if ( obj ) {
             if ( obj->inherits( "Marble::RenderPlugin" ) ) {
-                qDebug() << "render plugin found" << MarbleDirs::pluginPath( fileName );
+                mDebug() << "render plugin found" << MarbleDirs::pluginPath( fileName );
                 renderPlugin = qobject_cast<RenderPlugin *>( obj );
                 d->m_renderPluginTemplates.append( renderPlugin );
             }
             else if ( obj->inherits( "Marble::NetworkPlugin" ) ) {
-                qDebug() << "network plugin found" << MarbleDirs::pluginPath( fileName );
+                mDebug() << "network plugin found" << MarbleDirs::pluginPath( fileName );
                 networkPlugin = qobject_cast<NetworkPlugin *>( obj );
                 d->m_networkPluginTemplates.append( networkPlugin );
             }
             else if ( obj->inherits( "Marble::PositionProviderPlugin" ) ) {
-                qDebug() << "position provider plugin found" << MarbleDirs::pluginPath( fileName );
+                mDebug() << "position provider plugin found" << MarbleDirs::pluginPath( fileName );
                 positionProviderPlugin = qobject_cast<PositionProviderPlugin *>( obj );
                 d->m_positionProviderPluginTemplates.append( positionProviderPlugin );
             }
         }
 
         if( !renderPlugin && !networkPlugin && !positionProviderPlugin) {
-            qDebug() << "Plugin Failure: " << fileName << " is not a valid Marble Plugin:";
-            qDebug() << loader.errorString();
+            mDebug() << "Plugin Failure: " << fileName << " is not a valid Marble Plugin:";
+            mDebug() << loader.errorString();
         }
     }
 }

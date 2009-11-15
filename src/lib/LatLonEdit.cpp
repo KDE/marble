@@ -89,10 +89,10 @@ void LatLonEdit::signChanged()
 {
     /* Only flip the value if they disagree */
     if( d->m_sign->currentIndex() == 0 && d->m_value < 0 ) {
-        qDebug() << "d->m_sign->currentIndex() == 0 && d->m_value < 0";
+        mDebug() << "d->m_sign->currentIndex() == 0 && d->m_value < 0";
         d->m_value *= -1;
     } else if( d->m_sign->currentIndex() == 1 && d->m_value > 0 ) {
-        qDebug() << "d->m_sign->currentIndex() == 1 && d->m_value > 0";
+        mDebug() << "d->m_sign->currentIndex() == 1 && d->m_value > 0";
         d->m_value *= -1;
     }
 }
@@ -119,7 +119,7 @@ void LatLonEdit::setDimension( Marble::Dimension dimension )
         d->m_sign->addItem( tr("N", "North, the direction" ) );
         d->m_sign->addItem( tr("S", "South, the direction" ) );
     } else {
-        qDebug() << "Unrecognized dimension" << dimension;
+        mDebug() << "Unrecognized dimension" << dimension;
         for(int i = 0; i < d->m_sign->count(); ++i)
             d->m_sign->removeItem(i);
         d->m_deg->setMinimum( -32768 );
@@ -192,7 +192,7 @@ void LatLonEdit::setValue( qreal newvalue )
         return; //out of bounds
     d->m_value = newvalue;
     reverseRecalculate();
-    //qDebug() << "valueChanged: now " << d->m_value;
+    //mDebug() << "valueChanged: now " << d->m_value;
     emit valueChanged( d->m_value );
 }
 
@@ -201,7 +201,7 @@ void LatLonEdit::recalculate()
     qreal deg = d->m_deg->value();
     qreal min = (qreal)(d->m_min->value()) / 60.0;
     qreal sec = (qreal)(d->m_sec->value()) / 3600.0;
-    qDebug() << "Recalculate" << deg << min << sec;
+    mDebug() << "Recalculate" << deg << min << sec;
     /*this is delayed in order to avoid false emissions of valueChanged */
     bool changesign = false;
 
@@ -220,10 +220,10 @@ void LatLonEdit::recalculate()
     if(changesign) {
         d->m_sign->setCurrentIndex(d->m_sign->currentIndex() == 1 ? 0:1);
         d->m_deg->setValue( abs(d->m_deg->value()) );
-        qDebug() << "setval " << abs(d->m_deg->value()) << "d->m_sign->setEnabled(true);";
+        mDebug() << "setval " << abs(d->m_deg->value()) << "d->m_sign->setEnabled(true);";
         d->m_sign->setEnabled(true);
     }
-    qDebug() << "m_value = " << d->m_value;
+    mDebug() << "m_value = " << d->m_value;
     emit valueChanged( d->m_value );
 }
 

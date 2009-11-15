@@ -290,7 +290,7 @@ bool GeoDataLatLonBox::containsPole( Marble::Pole pole ) const
         break;
     }
 
-    qDebug() << Q_FUNC_INFO << "Invalid pole";
+    mDebug() << Q_FUNC_INFO << "Invalid pole";
     return false;
 }
 

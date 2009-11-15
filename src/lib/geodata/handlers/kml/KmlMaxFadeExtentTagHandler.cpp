@@ -33,7 +33,7 @@ GeoNode* KmlmaxFadeExtentTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataLod>()->setMaxFadeExtent( maxFadeExtent );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_maxFadeExtent << "> containing: " << maxFadeExtent
+        mDebug() << "Parsed <" << kmlTag_maxFadeExtent << "> containing: " << maxFadeExtent
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

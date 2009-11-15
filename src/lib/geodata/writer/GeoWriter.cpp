@@ -39,7 +39,7 @@ bool GeoWriter::write(QIODevice* device, const QList<GeoDataFeature> &features)
         //geodataobject is never used in this context
         writer->write( GeoDataObject(), *this );
     } else {
-        qDebug() << "There is no GeoWriter registered for: " << name;
+        mDebug() << "There is no GeoWriter registered for: " << name;
         return false;
     }
 
@@ -75,12 +75,12 @@ bool GeoWriter::writeElement(const GeoDataObject &object)
 
     if( writer ) {
         if( ! writer->write( object, *this ) ) {
-            qDebug() << "An error has been reported by the GeoWriter for: "
+            mDebug() << "An error has been reported by the GeoWriter for: "
                     << name;
             return false;
         }
     } else {
-        qDebug() << "There is no GeoWriter registered for: " << name;
+        mDebug() << "There is no GeoWriter registered for: " << name;
         return false;
     }
     return true;

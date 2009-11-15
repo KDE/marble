@@ -63,7 +63,7 @@ GeoNode* KmlextrudeTagHandler::parse( GeoParser& parser ) const
             geometry->setExtrude( false );
         }
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_extrude << "> containing: " << content
+        mDebug() << "Parsed <" << kmlTag_extrude << "> containing: " << content
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
     }

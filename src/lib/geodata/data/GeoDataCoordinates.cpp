@@ -65,7 +65,7 @@ GeoDataCoordinates::~GeoDataCoordinates()
     if (!d->ref.deref())
         delete d;
 #ifdef DEBUG_GEODATA
-//    qDebug() << "delete coordinates";
+//    mDebug() << "delete coordinates";
 #endif
 }
 
@@ -341,7 +341,7 @@ void GeoDataCoordinates::normalizeLonLat( qreal &lon, qreal &lat, GeoDataCoordin
 GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& successful )
 {
     QString input = string.toLower().trimmed();
-    qDebug() << "Creating GeoDataCoordinates from string " << input;
+    mDebug() << "Creating GeoDataCoordinates from string " << input;
     
     qreal lat, lon;
     
@@ -371,11 +371,11 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     //               ^----------cap(2)--------------^
     regex = QRegExp( regexstr );
     if( input.contains( regex ) ) {
-        qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
+        mDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
         lat = regex.cap(1).toDouble();
         lon = regex.cap(2).toDouble();
         
-        qDebug() << "Created lat / lon " << lat << lon;
+        mDebug() << "Created lat / lon " << lat << lon;
         
         GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
         successful = true;
@@ -414,17 +414,17 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
              + "(?:\\s|[^\\d" +dec+ "])+" + dir + "\\s*$";
     regex = QRegExp( regexstr );
     if( input.contains( regex ) ) {
-        qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
+        mDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
         QString latdeg, londeg, latdir, londir;
         
         if( input.contains( QRegExp( latfirst ) ) ) {
-            qDebug() << "latitude comes first";
+            mDebug() << "latitude comes first";
             latdeg = regex.cap( 1 );
             latdir = regex.cap( 2 );
             londeg = regex.cap( 3 );
             londir = regex.cap( 4 );
         } else { 
-            qDebug() << "longitude comes first";
+            mDebug() << "longitude comes first";
             londeg = regex.cap( 1 );
             londir = regex.cap( 2 );
             latdeg = regex.cap( 3 );
@@ -442,7 +442,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
         if( londir == c[3].at(0) || londir == c[3] ) 
             lon *= -1.0;
         
-        qDebug() << "Created lat / lon " << lat << lon;
+        mDebug() << "Created lat / lon " << lat << lon;
         
         GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
         successful = true;
@@ -458,11 +458,11 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
     regexstr += "(\\d{1,2})(?:\\s|[^\\d" +dec+ "])+"  +  dir + "\\s*$";
     regex = QRegExp( regexstr );
     if( input.contains( regex ) ) {
-        qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
+        mDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
         QString latdeg, londeg, latmin, lonmin, latsec, lonsec, latdir, londir;
         
         if( input.contains( QRegExp( latfirst ) ) ) {
-            qDebug() << "latitude comes first";
+            mDebug() << "latitude comes first";
             latdeg = regex.cap( 1 );
             latmin = regex.cap( 2 );
             latsec = regex.cap( 3 );
@@ -472,7 +472,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
             lonsec = regex.cap( 7 );
             londir = regex.cap( 8 );
         } else { 
-            qDebug() << "longitude comes first";
+            mDebug() << "longitude comes first";
             londeg = regex.cap( 1 );
             lonmin = regex.cap( 2 );
             lonsec = regex.cap( 3 );
@@ -494,7 +494,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
         if( londir == c[3].at(0) || londir == c[3] )
             lon *= -1.0;
 
-        qDebug() << "Created lat / lon " << lat << lon;
+        mDebug() << "Created lat / lon " << lat << lon;
         
         GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
         successful = true;
@@ -510,11 +510,11 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
              +   dir + "\\s*$";
     regex = QRegExp( regexstr );
     if( input.contains( regex ) ) {
-        qDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
+        mDebug() << "REGEX: " << regexstr << "matches" << regex.cap(0);
         QString latdeg, londeg, latmin, lonmin, latdir, londir;
         
         if( input.contains( QRegExp( latfirst ) ) ) {
-            qDebug() << "latitude comes first";
+            mDebug() << "latitude comes first";
             latdeg = regex.cap( 1 );
             latmin = regex.cap( 2 );
             latdir = regex.cap( 3 );
@@ -522,7 +522,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
             lonmin = regex.cap( 5 );
             londir = regex.cap( 6 );
         } else { 
-            qDebug() << "longitude comes first";
+            mDebug() << "longitude comes first";
             londeg = regex.cap( 1 );
             lonmin = regex.cap( 2 );
             londir = regex.cap( 3 );
@@ -539,7 +539,7 @@ GeoDataCoordinates GeoDataCoordinates::fromString( const QString& string, bool& 
         if( londir == c[3].at(0) || londir == c[3] ) //west, so we invert
             lon *= -1.0;
 
-        qDebug() << "Created lat / lon " << lat << lon;
+        mDebug() << "Created lat / lon " << lat << lon;
         
         GeoDataCoordinates coords( lon, lat, 0, GeoDataCoordinates::Degree );
         successful = true;
@@ -773,7 +773,7 @@ bool GeoDataCoordinates::isPole( Marble::Pole pole ) const
             // FIXME: Should we just normalize latitude and longitude and be done?
             //        While this might work well for persistent data it would create some 
             //        possible overhead for temporary data, so this needs careful thinking.
-            qDebug() << "GeoDataCoordinates not normalized!";
+            mDebug() << "GeoDataCoordinates not normalized!";
 
             // Only as a last resort we cover the unlikely case where
             // the latitude is not normalized to the range of 

@@ -278,17 +278,17 @@ void MarbleDirs::setMarblePluginPath( const QString& adaptedPath )
 
 void MarbleDirs::debug()
 {
-    qDebug() << "=== MarbleDirs: ===";
-    qDebug() << "Local Path:" << localPath();
-    qDebug() << "Plugin Local Path:" << pluginLocalPath();
-    qDebug() << "";
-    qDebug() << "Marble Data Path (Run Time) :" << runTimeMarbleDataPath; 
-    qDebug() << "Marble Data Path (Compile Time):" << QString(MARBLE_DATA_PATH); 
-    qDebug() << "";
-    qDebug() << "Marble Plugin Path (Run Time) :" << runTimeMarblePluginPath; 
-    qDebug() << "Marble Plugin Path (Compile Time):" << QString(MARBLE_PLUGIN_PATH); 
-    qDebug() << "";
-    qDebug() << "System Path:" << systemPath();
-    qDebug() << "Plugin System Path:" << pluginSystemPath();
-    qDebug() << "===================";
+    mDebug() << "=== MarbleDirs: ===";
+    mDebug() << "Local Path:" << localPath();
+    mDebug() << "Plugin Local Path:" << pluginLocalPath();
+    mDebug() << "";
+    mDebug() << "Marble Data Path (Run Time) :" << runTimeMarbleDataPath; 
+    mDebug() << "Marble Data Path (Compile Time):" << QString(MARBLE_DATA_PATH); 
+    mDebug() << "";
+    mDebug() << "Marble Plugin Path (Run Time) :" << runTimeMarblePluginPath; 
+    mDebug() << "Marble Plugin Path (Compile Time):" << QString(MARBLE_PLUGIN_PATH); 
+    mDebug() << "";
+    mDebug() << "System Path:" << systemPath();
+    mDebug() << "Plugin System Path:" << pluginSystemPath();
+    mDebug() << "===================";
 }

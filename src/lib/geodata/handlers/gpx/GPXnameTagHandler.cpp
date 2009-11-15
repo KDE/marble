@@ -44,7 +44,7 @@ GeoNode* GPXnameTagHandler::parse(GeoParser& parser) const
 
         placemark->setName(parser.readElementText().trimmed());
 //#ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << gpxTag_name << "> : " << placemark->name();
+        mDebug() << "Parsed <" << gpxTag_name << "> : " << placemark->name();
 //#endif
     }
     return 0;

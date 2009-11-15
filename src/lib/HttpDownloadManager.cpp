@@ -176,12 +176,12 @@ void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFile
 void HttpDownloadManager::finishJob( const QByteArray& data, const QString& destinationFileName,
                                      const QString& id )
 {
-    qDebug() << "emitting downloadComplete( QByteArray, " << id << ")";
+    mDebug() << "emitting downloadComplete( QByteArray, " << id << ")";
     emit downloadComplete( data, id );
     if ( d->m_storagePolicy ) {
         const bool saved = d->m_storagePolicy->updateFile( destinationFileName, data );
         if ( saved ) {
-            qDebug() << "emitting downloadComplete( " << destinationFileName << ", " << id << ")";
+            mDebug() << "emitting downloadComplete( " << destinationFileName << ", " << id << ")";
             emit downloadComplete( destinationFileName, id );
         } else {
             qWarning() << "Could not save:" << destinationFileName;

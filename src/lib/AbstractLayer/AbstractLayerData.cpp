@@ -46,7 +46,7 @@ QString AbstractLayerData::toString()
 
 void AbstractLayerData::draw ( ClipPainter *, const QPoint & )
 {
-    qDebug() <<"in AbstractLayerData::draw() for single point";
+    mDebug() <<"in AbstractLayerData::draw() for single point";
 }
 
 
@@ -58,7 +58,7 @@ void AbstractLayerData::draw(ClipPainter *painter,
     Q_UNUSED( canvasSize );
     Q_UNUSED( viewParams );
 
-    //qDebug() <<"in AbstractLayerData::draw() without bounding box";
+    //mDebug() <<"in AbstractLayerData::draw() without bounding box";
 }
 
 bool AbstractLayerData::visible() const

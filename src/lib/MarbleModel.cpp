@@ -226,7 +226,7 @@ MarbleModel::MarbleModel( QObject *parent )
 
 MarbleModel::~MarbleModel()
 {
-//    qDebug() << "MarbleModel::~MarbleModel";
+//    mDebug() << "MarbleModel::~MarbleModel";
     
     delete d->m_texmapper;
 
@@ -250,7 +250,7 @@ MarbleModel::~MarbleModel()
     delete d->m_planet;
     delete d;
     MarbleModelPrivate::refCounter.deref();
-    qDebug() << "Model deleted:" << this;
+    mDebug() << "Model deleted:" << this;
 }
 
 bool MarbleModel::showGps() const
@@ -303,25 +303,25 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     d->m_mapTheme = mapTheme;
 
     // Some output to show how to use this stuff ...
-    qDebug() << "DGML2 Name       : " << d->m_mapTheme->head()->name(); 
+    mDebug() << "DGML2 Name       : " << d->m_mapTheme->head()->name(); 
 /*
-    qDebug() << "DGML2 Description: " << d->m_mapTheme->head()->description(); 
+    mDebug() << "DGML2 Description: " << d->m_mapTheme->head()->description(); 
 
     if ( d->m_mapTheme->map()->hasTextureLayers() )
-        qDebug() << "Contains texture layers! ";
+        mDebug() << "Contains texture layers! ";
     else
-        qDebug() << "Does not contain any texture layers! ";
+        mDebug() << "Does not contain any texture layers! ";
 
-    qDebug() << "Number of SRTM textures: " << d->m_mapTheme->map()->layer("srtm")->datasets().count();
+    mDebug() << "Number of SRTM textures: " << d->m_mapTheme->map()->layer("srtm")->datasets().count();
 
     if ( d->m_mapTheme->map()->hasVectorLayers() )
-        qDebug() << "Contains vector layers! ";
+        mDebug() << "Contains vector layers! ";
     else
-        qDebug() << "Does not contain any vector layers! ";
+        mDebug() << "Does not contain any vector layers! ";
 */
     //Don't change the planet unless we have to...
     if( d->m_mapTheme->head()->target().toLower() != d->m_planet->id() ) {
-        qDebug() << "Changing Planet";
+        mDebug() << "Changing Planet";
         *(d->m_planet) = Planet( d->m_mapTheme->head()->target().toLower() );
         sunLocator()->setPlanet(d->m_planet);
     }
@@ -346,7 +346,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         if ( !TileLoader::baseTilesAvailable( layer )
             && !installMap.isEmpty() )
         {
-            qDebug() << "Base tiles not available. Creating Tiles ... \n"
+            mDebug() << "Base tiles not available. Creating Tiles ... \n"
                      << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
             MarbleDirs::debug();
 
@@ -475,7 +475,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             }
         }
     }
-    qDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
+    mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
     emit themeChanged( mapTheme->head()->mapThemeId() );
 
     d->m_layerManager->syncViewParamsAndPlugins( mapTheme );
@@ -587,7 +587,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
                 if( filter->type() == "colorize" ) {
                     d->m_texcolorizer->colorize( viewParams );
                 }
-            } //else { qDebug() << "No filters to act on..."; }
+            } //else { mDebug() << "No filters to act on..."; }
         }
     }
 
@@ -745,7 +745,7 @@ void MarbleModelPrivate::notifyModelChanged()
 
 void MarbleModel::update()
 {
-    qDebug() << "MarbleModel::update()";
+    mDebug() << "MarbleModel::update()";
     QTimer::singleShot( 0, d->m_tileLoader, SLOT( update() ) );
 }
 
@@ -761,8 +761,8 @@ QString MarbleModel::planetName()   const
 
 ExtDateTime* MarbleModel::dateTime() const
 {
-//    qDebug() << "In dateTime, model:" << this;
-//    qDebug() << d << ":" << d->m_dateTime;
+//    mDebug() << "In dateTime, model:" << this;
+//    mDebug() << d << ":" << d->m_dateTime;
     return d->m_dateTime;
 }
 
@@ -779,7 +779,7 @@ MergedLayerDecorator* MarbleModel::layerDecorator() const
 void MarbleModel::clearVolatileTileCache()
 {
     d->m_tileLoader->update();
-    qDebug() << "Cleared Volatile Cache!";
+    mDebug() << "Cleared Volatile Cache!";
 }
 
 quint64 MarbleModel::volatileTileCacheLimit() const
@@ -817,7 +817,7 @@ void MarbleModel::clearPersistentTileCache()
         if ( !TileLoader::baseTilesAvailable( layer )
             && !installMap.isEmpty() )
         {
-            qDebug() << "Base tiles not available. Creating Tiles ... \n"
+            mDebug() << "Base tiles not available. Creating Tiles ... \n"
                      << "SourceDir: " << sourceDir << "InstallMap:" << installMap;
             MarbleDirs::debug();
 
@@ -838,7 +838,7 @@ void MarbleModel::clearPersistentTileCache()
 void MarbleModel::paintTile( TextureTile* tile, int x, int y, int level,
                              GeoSceneTexture *textureLayer, bool requestTileUpdate )
 {
-//    qDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level
+//    mDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level
 //             << "requestTileUpdate" << requestTileUpdate;
     
     if ( d->m_downloadManager != 0 ) {

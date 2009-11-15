@@ -73,7 +73,7 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
     }
 
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_altitudeMode << "> containing: " << content
+        mDebug() << "Parsed <" << kmlTag_altitudeMode << "> containing: " << content
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
     return 0;

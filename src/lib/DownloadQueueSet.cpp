@@ -50,22 +50,22 @@ bool DownloadQueueSet::canAcceptJob( const QUrl& sourceUrl,
                                      const QString& destinationFileName ) const
 {
     if ( jobIsQueued( destinationFileName )) {
-        qDebug() << "Download rejected: It's in the queue already:"
+        mDebug() << "Download rejected: It's in the queue already:"
                  << destinationFileName;
         return false;
     }
     if ( jobIsWaitingForRetry( destinationFileName )) {
-        qDebug() << "Download rejected: Will try to download again in some time:"
+        mDebug() << "Download rejected: Will try to download again in some time:"
                  << destinationFileName;
         return false;
     }
     if ( jobIsActive( destinationFileName )) {
-        qDebug() << "Download rejected: It's being downloaded already:"
+        mDebug() << "Download rejected: It's being downloaded already:"
                  << destinationFileName;
         return false;
     }
     if ( jobIsBlackListed( sourceUrl )) {
-        qDebug() << "Download rejected: Blacklisted.";
+        mDebug() << "Download rejected: Blacklisted.";
         return false;
     }
     return true;
@@ -74,7 +74,7 @@ bool DownloadQueueSet::canAcceptJob( const QUrl& sourceUrl,
 void DownloadQueueSet::addJob( HttpJob * const job )
 {
     m_jobQueue.push( job );
-    qDebug() << "addJob: new job queue size:" << m_jobQueue.count();
+    mDebug() << "addJob: new job queue size:" << m_jobQueue.count();
     emit jobAdded();
     activateJobs();
 }
@@ -93,7 +93,7 @@ void DownloadQueueSet::retryJobs()
 {
     while ( !m_retryQueue.isEmpty() ) {
         HttpJob * const job = m_retryQueue.dequeue();
-        qDebug() << "Requeuing" << job->destinationFileName();
+        mDebug() << "Requeuing" << job->destinationFileName();
         // FIXME: addJob calls activateJobs every time
         addJob( job );
     }
@@ -101,7 +101,7 @@ void DownloadQueueSet::retryJobs()
 
 void DownloadQueueSet::finishJob( HttpJob * job, QByteArray data )
 {
-    qDebug() << "finishJob: " << job->destinationFileName();
+    mDebug() << "finishJob: " << job->destinationFileName();
 
     deactivateJob( job );
     emit jobRemoved();
@@ -112,7 +112,7 @@ void DownloadQueueSet::finishJob( HttpJob * job, QByteArray data )
 
 void DownloadQueueSet::redirectJob( HttpJob * job, QUrl newSourceUrl )
 {
-    qDebug() << "jobRedirected:" << job->sourceUrl() << " -> " << newSourceUrl;
+    mDebug() << "jobRedirected:" << job->sourceUrl() << " -> " << newSourceUrl;
 
     deactivateJob( job );
     emit jobRemoved();
@@ -129,17 +129,17 @@ void DownloadQueueSet::retryOrBlacklistJob( HttpJob * job, const int errorCode )
     emit jobRemoved();
 
     if ( job->tryAgain() ) {
-        qDebug() << QString( "Download of %1 failed, but trying again soon" )
+        mDebug() << QString( "Download of %1 failed, but trying again soon" )
             .arg( job->destinationFileName() );
         m_retryQueue.enqueue( job );
         emit jobRetry();
     }
     else {
-        qDebug() << "JOB-address: " << job
+        mDebug() << "JOB-address: " << job
                  << "Blacklist-size:" << m_jobBlackList.size()
                  << "err:" << errorCode;
         m_jobBlackList.insert( job->sourceUrl().toString() );
-        qDebug() << QString( "Download of %1 Blacklisted. "
+        mDebug() << QString( "Download of %1 Blacklisted. "
                              "Number of blacklist items: %2" )
             .arg( job->destinationFileName() )
             .arg( m_jobBlackList.size() );

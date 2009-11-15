@@ -42,7 +42,7 @@ GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
     GeoStackItem parentItem = parser.parentElement();
     if( parentItem.represents( kmlTag_Placemark ) ) {
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Point << "> returning: " << parentItem.nodeAs<GeoDataPlacemark>()
+        mDebug() << "Parsed <" << kmlTag_Point << "> returning: " << parentItem.nodeAs<GeoDataPlacemark>()
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
         return parentItem.nodeAs<GeoDataPlacemark>();
@@ -50,7 +50,7 @@ GeoNode* KmlPointTagHandler::parse( GeoParser& parser ) const
         GeoDataPoint point;
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( point );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Point << "> returning: " << parentItem.nodeAs<GeoDataMultiGeometry>()
+        mDebug() << "Parsed <" << kmlTag_Point << "> returning: " << parentItem.nodeAs<GeoDataMultiGeometry>()
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
         return &parentItem.nodeAs<GeoDataMultiGeometry>()->last();

@@ -49,8 +49,8 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                 || viewParams->mapQuality() == Marble::PrintQuality );
     const bool printQuality = ( viewParams->mapQuality() == Marble::PrintQuality );
 
-    qDebug() << "m_maxGlobalX: " << m_maxGlobalX;
-    qDebug() << "radius      : " << radius << endl;
+    mDebug() << "m_maxGlobalX: " << m_maxGlobalX;
+    mDebug() << "radius      : " << radius << endl;
     // Scanline based algorithm to do texture mapping
 
     // Initialize needed variables:

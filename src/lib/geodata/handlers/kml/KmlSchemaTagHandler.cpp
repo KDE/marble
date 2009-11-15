@@ -43,20 +43,20 @@ GeoNode* KmlSchemaTagHandler::parse( GeoParser& parser ) const
     
     if( parentItem.represents( kmlTag_Document ) ) {
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Schema << ">"
+        mDebug() << "Parsed <" << kmlTag_Schema << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
         
         QString name = parser.attribute( "name" ).trimmed();
         QString parent = parser.attribute( "parent" ).trimmed();
 #ifdef DEBUG_TAGS
-        qDebug() << "attribute 'name':" << name;
-        qDebug() << "attribute 'parent':" << parent;
+        mDebug() << "attribute 'name':" << name;
+        mDebug() << "attribute 'parent':" << parent;
 #endif // DEBUG_TAGS
         if( parent.toLower() == QString("placemark")) {
 #ifdef DEBUG_TAGS
-            qDebug() << "should register new tag" << name << "derived from placemark";
-            qDebug() << "not implemented yet.";
+            mDebug() << "should register new tag" << name << "derived from placemark";
+            mDebug() << "not implemented yet.";
 #endif // DEBUG_TAGS
         }
         return parentItem.nodeAs<GeoDataDocument>();

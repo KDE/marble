@@ -33,7 +33,7 @@ GeoNode* KmlminLodPixelsTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataLod>()->setMinLodPixels( minLodPixels );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_minLodPixels << "> containing: " << minLodPixels
+        mDebug() << "Parsed <" << kmlTag_minLodPixels << "> containing: " << minLodPixels
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

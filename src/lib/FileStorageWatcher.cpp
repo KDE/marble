@@ -69,7 +69,7 @@ void FileStorageWatcherThread::setCacheLimit( quint64 bytes )
 
 void FileStorageWatcherThread::addToCurrentSize( qint64 bytes )
 {
-//     qDebug() << "Current cache size changed by " << bytes;
+//     mDebug() << "Current cache size changed by " << bytes;
     qint64 changedSize = bytes + m_currentCacheSize;
     if( changedSize >= 0 )
 	m_currentCacheSize = changedSize;
@@ -86,7 +86,7 @@ void FileStorageWatcherThread::resetCurrentSize()
 
 void FileStorageWatcherThread::updateTheme( QString mapTheme )
 {
-    qDebug() << "Theme changed to " << mapTheme;
+    mDebug() << "Theme changed to " << mapTheme;
     m_themeMutex.lock();
     m_mapThemeId = mapTheme;
     m_themeMutex.unlock();
@@ -100,7 +100,7 @@ void FileStorageWatcherThread::prepareQuit()
 
 void FileStorageWatcherThread::getCurrentCacheSize()
 {
-    qDebug() << "FileStorageWatcher: Creating cache size";
+    mDebug() << "FileStorageWatcher: Creating cache size";
     quint64 dataSize = 0;
     QDirIterator it( m_dataDirectory, QDir::Files, QDirIterator::Subdirectories );
     
@@ -115,7 +115,7 @@ void FileStorageWatcherThread::getCurrentCacheSize()
 
 void FileStorageWatcherThread::ensureCacheSize()
 {
-//     qDebug() << "Size of tile cache: " << m_currentCacheSize;
+//     mDebug() << "Size of tile cache: " << m_currentCacheSize;
     // We start deleting files if m_currentCacheSize is larger than
     // the hard cache limit. Then we delete files until our cache size
     // is smaller than the cache limit.
@@ -136,7 +136,7 @@ void FileStorageWatcherThread::ensureCacheSize()
 	if ( m_dataDirectory.isEmpty() ||
 	    !m_dataDirectory.endsWith("data") )
 	{
-	    qDebug()
+	    mDebug()
 	     << "Error: Refusing to erase files under"
 	     << "unknown conditions for safety reasons!";
 	    return;
@@ -190,7 +190,7 @@ void FileStorageWatcherThread::ensureCacheSize()
 	}
 	
 	if( m_currentCacheSize > m_cacheSoftLimit ) {
-	    qDebug() << "FileStorageWatcher: Could not set cache size.";
+	    mDebug() << "FileStorageWatcher: Could not set cache size.";
 	    // Set the cache limit to a higher value, so we won't start
 	    // trying to delete something next time.  Softlimit is now exactly
 	    // on the current cache size.
@@ -201,7 +201,7 @@ void FileStorageWatcherThread::ensureCacheSize()
 
 void FileStorageWatcherThread::ensureSizePerPlanet( QString planetDirectory, QString currentTheme )
 {
-    qDebug() << "Deleting from folder: " << planetDirectory;
+    mDebug() << "Deleting from folder: " << planetDirectory;
     
     // lastTheme will store the path to our currentTheme
     QString lastTheme;
@@ -217,7 +217,7 @@ void FileStorageWatcherThread::ensureSizePerPlanet( QString planetDirectory, QSt
 	// We have found the currently shown theme.
 	// Please delete here at last.
 	if( !currentTheme.isEmpty() && fileInfo.fileName() == currentTheme ) {
-	    qDebug() << "FileStorageWatcher: Skipping " << themeDirectory
+	    mDebug() << "FileStorageWatcher: Skipping " << themeDirectory
 	             << " for now";
 	    lastTheme = themeDirectory;
 	    continue;
@@ -227,7 +227,7 @@ void FileStorageWatcherThread::ensureSizePerPlanet( QString planetDirectory, QSt
     }
     
     if( keepDeleting() ) {
-	qDebug() << "Removing files of: "
+	mDebug() << "Removing files of: "
 	         << lastTheme;
 	ensureSizePerTheme( lastTheme );
     }
@@ -240,7 +240,7 @@ static bool greaterThanByNumber( const QString &s1, const QString &s2)
 
 void FileStorageWatcherThread::ensureSizePerTheme( QString themeDirectory )
 {
-    qDebug() << "Deleting from folder: " << themeDirectory;
+    mDebug() << "Deleting from folder: " << themeDirectory;
 
     // Delete from folders with high numbers first
     QStringList folders =
@@ -280,7 +280,7 @@ void FileStorageWatcherThread::ensureSizePerTheme( QString themeDirectory )
 		&& ( info.lastModified().secsTo( QDateTime::currentDateTime() )
 		     > deleteOnlyFilesOlderThan ) )
 	    {
-		qDebug() << "FileStorageWatcher: Delete "
+		mDebug() << "FileStorageWatcher: Delete "
 		         << filePath;
 		m_filesDeleted++;
 		m_currentCacheSize -= info.size();
@@ -319,7 +319,7 @@ FileStorageWatcher::FileStorageWatcher( const QString &dataDirectory, QObject * 
 
 FileStorageWatcher::~FileStorageWatcher()
 {
-    qDebug() << "Deleting FileStorageWatcher";
+    mDebug() << "Deleting FileStorageWatcher";
     
     // Making sure that Thread is stopped.
     m_quitting = true;
@@ -328,7 +328,7 @@ FileStorageWatcher::~FileStorageWatcher()
 	m_thread->prepareQuit();
     quit();
     if( !wait( 5000 ) ) {
-	qDebug() << "Failed to stop FileStorageWatcher-Thread, terminating!";
+	mDebug() << "Failed to stop FileStorageWatcher-Thread, terminating!";
 	terminate();
     }
     
@@ -384,7 +384,7 @@ void FileStorageWatcher::run()
 	m_thread->setCacheLimit( m_limit );
 	m_thread->updateTheme( m_theme );
 	m_started = true;
-	qDebug() << m_started;
+	mDebug() << m_started;
 	m_themeLimitMutex->unlock();
 	
 	m_thread->getCurrentCacheSize();

@@ -31,7 +31,7 @@ GeoNode* KmlRegionTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 #ifdef DEBUG_TAGS
-    qDebug() << "Parsed <" << kmlTag_Region << ">"
+    mDebug() << "Parsed <" << kmlTag_Region << ">"
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif
 

@@ -39,7 +39,7 @@ placeTagHandler( GeoTagHandler::QualifiedName( tag_place, tag_namespace ),
 GeoNode * PlaceTagHandler::parse( GeoParser & parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( tag_place ));
-    qDebug() << "PlaceTagHandler";
+    mDebug() << "PlaceTagHandler";
 
     GeoStackItem parentItem = parser.parentElement();
     GeoDataPlacemark * place = 0;

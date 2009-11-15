@@ -96,7 +96,7 @@ void FileManager::addFile( const QString& filepath )
 {
     QString regularName = toRegularName( filepath );
     if( ! containers().contains( regularName ) ) {
-        qDebug() << "adding container:" << regularName;
+        mDebug() << "adding container:" << regularName;
         FileLoader* loader = new FileLoader( this, filepath );
         appendLoader( loader );
         d->m_pathList.append( filepath );
@@ -134,7 +134,7 @@ void FileManager::removeFile( const QString& key )
 
 void FileManager::addFile ( AbstractFileViewItem * item )
 {
-    qDebug() << "FileManager::addFile";
+    mDebug() << "FileManager::addFile";
     d->m_fileItemList.append( item );
     emit fileAdded(d->m_fileItemList.indexOf( item ) );
 }
@@ -149,7 +149,7 @@ void FileManager::saveFile( int index )
 
 void FileManager::closeFile( int index )
 {
-    qDebug() << "FileManager::closeFile";
+    mDebug() << "FileManager::closeFile";
     if (index < d->m_fileItemList.size() )
     {
         emit fileRemoved( index );

@@ -59,7 +59,7 @@ QVector<GeoDataGeometry>& GeoDataMultiGeometry::vector() const
 
 GeoDataGeometry& GeoDataMultiGeometry::at( int pos )
 {
-    qDebug() << "detaching!";
+    mDebug() << "detaching!";
     GeoDataGeometry::detach();
     return p()->m_vector[ pos ];
 }

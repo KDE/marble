@@ -100,7 +100,7 @@ void SunLocator::updatePosition()
         if (days < 0.0)
             days += 1.0;
 
-        qDebug() << "MOON:" << (int)(days*100) << "% of orbit completed and"
+        mDebug() << "MOON:" << (int)(days*100) << "% of orbit completed and"
                  << (int)(abs((days-0.5)*2) * 100) << "% illuminated";
 
         d->m_lon = (1-days) * 2*M_PI;
@@ -251,7 +251,7 @@ void SunLocator::setShow(bool show)
         return;
     }
 
-    qDebug() << "void SunLocator::setShow( bool )";
+    mDebug() << "void SunLocator::setShow( bool )";
     d->m_show = show;
     updatePosition();
 
@@ -264,8 +264,8 @@ void SunLocator::setCentered(bool centered)
         return;
     }
 
-    qDebug() << "SunLocator::setCentered";
-    qDebug() << "sunLocator =" << this;
+    mDebug() << "SunLocator::setCentered";
+    mDebug() << "sunLocator =" << this;
     d->m_centered = centered;
     if ( d->m_centered ) {
         updatePosition();
@@ -286,7 +286,7 @@ void SunLocator::setPlanet(Planet *planet)
 
     Planet* previousPlanet = d->m_planet;
 
-    qDebug() << "SunLocator::setPlanet(Planet*)";
+    mDebug() << "SunLocator::setPlanet(Planet*)";
     d->m_planet = planet;
     updatePosition();
 

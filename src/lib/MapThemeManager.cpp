@@ -89,7 +89,7 @@ void MapThemeManager::initFileSystemWatcher()
     const QStringList paths = pathsToWatch();
 /*
     foreach(const QString& path, paths)
-        qDebug() << "path to watch: " << path;
+        mDebug() << "path to watch: " << path;
 */
     d->m_fileSystemWatcher->addPaths( paths );
     connect( d->m_fileSystemWatcher, SIGNAL( directoryChanged( const QString& )),
@@ -103,7 +103,7 @@ GeoSceneDocument* MapThemeManager::loadMapTheme( const QString& mapThemeStringID
     if ( mapThemeStringID.isEmpty() )
         return 0;
 
-    qDebug() << "loadMapTheme" << mapThemeStringID;
+    mDebug() << "loadMapTheme" << mapThemeStringID;
     const QString mapThemePath = mapDirName + '/' + mapThemeStringID;
     return loadMapThemeFile( mapThemePath );
 }
@@ -113,7 +113,7 @@ GeoSceneDocument* MapThemeManager::loadMapThemeFile( const QString& mapThemePath
     // Check whether file exists
     QFile file( MarbleDirs::path( mapThemePath ) );
     if ( !file.exists() ) {
-        qDebug() << "File does not exist:" << MarbleDirs::path( mapThemePath );
+        mDebug() << "File does not exist:" << MarbleDirs::path( mapThemePath );
         return 0;
     }
 
@@ -244,7 +244,7 @@ QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThe
         //       For now maxIconSize already equals what's expected by the listview.
         QSize maxIconSize( 136, 136 );
         if ( themeIconPixmap.size() != maxIconSize ) {
-            qDebug() << "Smooth scaling theme icon";
+            mDebug() << "Smooth scaling theme icon";
             themeIconPixmap = themeIconPixmap.scaled( maxIconSize,
                                                       Qt::KeepAspectRatio,
                                                       Qt::SmoothTransformation );
@@ -296,7 +296,7 @@ void MapThemeManager::updateMapThemeModel()
 
 void MapThemeManager::directoryChanged( const QString& path )
 {
-    qDebug() << "directoryChanged:" << path;
+    mDebug() << "directoryChanged:" << path;
 
     QStringList paths = pathsToWatch();
     d->m_fileSystemWatcher->addPaths( paths );
@@ -306,7 +306,7 @@ void MapThemeManager::directoryChanged( const QString& path )
 
 void MapThemeManager::fileChanged( const QString& path )
 {
-    qDebug() << "fileChanged:" << path;
+    mDebug() << "fileChanged:" << path;
 
     // 1. if the file does not (anymore) exist, it got deleted and we
     //    have to delete the corresponding item from the model
@@ -314,12 +314,12 @@ void MapThemeManager::fileChanged( const QString& path )
     //    the item with a new one.
 
     QString mapThemeId = path.section( '/', -3 );
-    qDebug() << "mapThemeId:" << mapThemeId;
+    mDebug() << "mapThemeId:" << mapThemeId;
     QList<QStandardItem *> matchingItems = d->m_mapThemeModel->findItems( mapThemeId,
                                                                           Qt::MatchFixedString
                                                                           | Qt::MatchCaseSensitive,
                                                                           columnRelativePath );
-    qDebug() << "matchingItems:" << matchingItems.size();
+    mDebug() << "matchingItems:" << matchingItems.size();
     Q_ASSERT( matchingItems.size() <= 1 );
     int insertAtRow = 0;
 

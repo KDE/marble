@@ -21,6 +21,7 @@
 #include "MarbleRunnerManager.h"
 
 #include "MarblePlacemarkModel.h"
+#include "MarbleDebug.h"
 #include "PlacemarkManager.h"
 #include "GeoDataPlacemark.h"
 
@@ -30,8 +31,6 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QVector>
-
-#include <QtCore/QtDebug>
 
 namespace Marble
 {
@@ -92,8 +91,8 @@ void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVec
 {
     m_runners.removeOne(runner);
     runner->deleteLater();
-    qDebug() << "Runner finished, active runners: " << m_runners.size();
-    qDebug() << "Runner reports" << result.size() << "results";
+    mDebug() << "Runner finished, active runners: " << m_runners.size();
+    mDebug() << "Runner reports" << result.size() << "results";
     if( result.isEmpty() )
         return;
 

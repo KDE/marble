@@ -44,7 +44,7 @@ GeoNode* KmlfillTagHandler::parse( GeoParser& parser ) const
         
         parentItem.nodeAs<GeoDataPolyStyle>()->setFill( fill );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_fill << "> containing: " << fill
+        mDebug() << "Parsed <" << kmlTag_fill << "> containing: " << fill
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

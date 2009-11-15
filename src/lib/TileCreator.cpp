@@ -81,7 +81,7 @@ void TileCreator::cancelTileCreation()
 
 void TileCreator::run()
 {
-    qDebug() << "Prefix: " << d->m_sourceDir 
+    mDebug() << "Prefix: " << d->m_sourceDir 
 	     << "installmap:" << d->m_installMap;
 
     // If the sourceDir starts with a '/' assume an absolute path.
@@ -89,12 +89,12 @@ void TileCreator::run()
     QString  sourcePath;
     if ( QDir::isAbsolutePath( d->m_sourceDir ) ) {
         sourcePath = d->m_sourceDir + '/' + d->m_installMap;
-        qDebug() << "Trying absolulte path:" << sourcePath;
+        mDebug() << "Trying absolulte path:" << sourcePath;
     }
     else {
         sourcePath = MarbleDirs::path( "maps/" + d->m_sourceDir 
 				       + '/' + d->m_installMap );
-        qDebug() << "Trying relative path:" 
+        mDebug() << "Trying relative path:" 
 		 << "maps/" + d->m_sourceDir + '/' + d->m_installMap;
     }
     if ( d->m_targetDir.isNull() )
@@ -103,8 +103,8 @@ void TileCreator::run()
     if ( !d->m_targetDir.endsWith('/') )
         d->m_targetDir += '/';
 
-    qDebug() << "Creating tiles from: " << sourcePath;
-    qDebug() << "Installing tiles to: " << d->m_targetDir;
+    mDebug() << "Creating tiles from: " << sourcePath;
+    mDebug() << "Installing tiles to: " << d->m_targetDir;
     QImageReader testImage( sourcePath );
 
     QVector<QRgb> grayScalePalette;
@@ -115,7 +115,7 @@ void TileCreator::run()
     int  imageWidth  = testImage.size().width();
     int  imageHeight = testImage.size().height();
 
-    qDebug() << QString( "TileCreator::createTiles() image dimensions %1 x %2").arg(imageWidth).arg(imageHeight);
+    mDebug() << QString( "TileCreator::createTiles() image dimensions %1 x %2").arg(imageWidth).arg(imageHeight);
 
     if ( imageWidth < 1 || imageHeight < 1 ) {
         qDebug("Invalid imagemap!");
@@ -136,11 +136,11 @@ void TileCreator::run()
         maxTileLevel = static_cast<int>( approxMaxTileLevel + 1 );
 
     if ( maxTileLevel < 0 ) {
-        qDebug() 
+        mDebug() 
         << QString( "TileCreator::createTiles(): Invalid Maximum Tile Level: %1" )
         .arg( maxTileLevel );
     }
-    qDebug() << "Maximum Tile Level: " << maxTileLevel;
+    mDebug() << "Maximum Tile Level: " << maxTileLevel;
 
     int maxRows = TileLoaderHelper::levelToRow( defaultLevelZeroRows, maxTileLevel );
 
@@ -151,7 +151,7 @@ void TileCreator::run()
                           ||  imageHeight != maxRows * (int)(tileSize) );
 
     if ( needsScaling ) 
-        qDebug() << "Image Size doesn't match 2*n*TILEWIDTH x n*TILEHEIGHT geometry. Scaling ...";  
+        mDebug() << "Image Size doesn't match 2*n*TILEWIDTH x n*TILEHEIGHT geometry. Scaling ...";  
 
     int  stdImageWidth  = 2 * maxRows * tileSize;
     if ( stdImageWidth == 0 )
@@ -159,7 +159,7 @@ void TileCreator::run()
 
     int  stdImageHeight  = maxRows * tileSize;
     if ( stdImageWidth != imageWidth ) {
-        qDebug() << 
+        mDebug() << 
         QString( "TileCreator::createTiles() The size of the final image will measure  %1 x %2 pixels").arg(stdImageWidth).arg(stdImageHeight);
     }
 
@@ -178,7 +178,7 @@ void TileCreator::run()
         tileLevel++;
     }
 
-    qDebug() << totalTileCount << " tiles to be created in total.";
+    mDebug() << totalTileCount << " tiles to be created in total.";
 
     int  mmax = TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, maxTileLevel );
     int  nmax = TileLoaderHelper::levelToRow( defaultLevelZeroRows, maxTileLevel );
@@ -220,7 +220,7 @@ void TileCreator::run()
         }
 
         if ( row.isNull() ) {
-            qDebug() << "Read-Error! Null QImage!";
+            mDebug() << "Read-Error! Null QImage!";
             return;
         }
 
@@ -244,7 +244,7 @@ void TileCreator::run()
 
             bool  ok = tile.save( tileName, "jpg", 100 );
             if ( !ok )
-                qDebug() << "Error while writing Tile: " << tileName;
+                mDebug() << "Error while writing Tile: " << tileName;
 
             percentCompleted =  (int) ( 90 * (qreal)(createdTilesCount) 
                                         / (qreal)(totalTileCount) );	
@@ -254,7 +254,7 @@ void TileCreator::run()
         }
     }
 
-    qDebug() << "tileLevel: " << maxTileLevel << " successfully created.";
+    mDebug() << "tileLevel: " << maxTileLevel << " successfully created.";
 
     tileLevel = maxTileLevel;
 
@@ -272,7 +272,7 @@ void TileCreator::run()
                                   .arg(tileLevel)
                                   .arg( n, tileDigits, 10, QChar('0') ) ) );
 
-            // qDebug() << "dirName: " << dirName;
+            // mDebug() << "dirName: " << dirName;
             if ( !QDir( dirName ).exists() ) 
                 ( QDir::root() ).mkpath( dirName );
 
@@ -379,7 +379,7 @@ void TileCreator::run()
 
                 bool  ok = tile.save( tileName, "jpg", 100 );
                 if ( ! ok ) 
-                    qDebug() << "Error while writing Tile: " << tileName;
+                    mDebug() << "Error while writing Tile: " << tileName;
 
                 percentCompleted =  (int) ( 90 * (qreal)(createdTilesCount)
                                             / (qreal)(totalTileCount) );	
@@ -388,9 +388,9 @@ void TileCreator::run()
                 emit progress( percentCompleted );
             }
         }
-        qDebug() << "tileLevel: " << tileLevel << " successfully created.";
+        mDebug() << "tileLevel: " << tileLevel << " successfully created.";
     }
-    qDebug() << "Tile creation completed.";
+    mDebug() << "Tile creation completed.";
 
     // Applying correct lower JPEG compression now that we created all tiles
 
@@ -424,12 +424,12 @@ void TileCreator::run()
                 }
 
                 if ( !ok )
-                    qDebug() << "Error while writing Tile: " << tileName; 
+                    mDebug() << "Error while writing Tile: " << tileName; 
                 // Don't exceed 99% as this would cancel the thread unexpectedly
                 percentCompleted = 90 + (int)( 9 * (qreal)(savedTilesCount) 
                                                / (qreal)(totalTileCount) );	
                 emit progress( percentCompleted );
-                //qDebug() << "Saving Tile #" << savedTilesCount
+                //mDebug() << "Saving Tile #" << savedTilesCount
                 //         << " of " << totalTileCount
                 //         << " Percent: " << percentCompleted;
             }
@@ -440,7 +440,7 @@ void TileCreator::run()
     percentCompleted = 100;
     emit progress( percentCompleted );
 
-    qDebug() << "percentCompleted: " << percentCompleted;
+    mDebug() << "percentCompleted: " << percentCompleted;
 }
 
 }

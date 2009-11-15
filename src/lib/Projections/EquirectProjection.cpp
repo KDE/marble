@@ -299,7 +299,7 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
         latLonAltBox.setWest( -M_PI );
     }
 
-//    qDebug() << latLonAltBox.text( GeoDataCoordinates::Degree );
+//    mDebug() << latLonAltBox.text( GeoDataCoordinates::Degree );
 
     return latLonAltBox;
 }

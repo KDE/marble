@@ -45,7 +45,7 @@ GeoNode* KmlMarblePlacemarkTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 #ifdef DEBUG_TAGS
-    qDebug() << "Parsed <" << kmlTag_MarblePlacemark << "> containing: " << &placemark
+    mDebug() << "Parsed <" << kmlTag_MarblePlacemark << "> containing: " << &placemark
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
 

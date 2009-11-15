@@ -45,7 +45,7 @@ GeoNode* KmlLineStringTagHandler::parse( GeoParser& parser ) const
     
     GeoDataLineString lineString;
 #ifdef DEBUG_TAGS
-    qDebug() << "Parsed <" << kmlTag_LineString << ">"
+    mDebug() << "Parsed <" << kmlTag_LineString << ">"
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif
 

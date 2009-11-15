@@ -44,7 +44,7 @@ GeoNode* KmlLinearRingTagHandler::parse( GeoParser& parser ) const
     
     GeoDataLinearRing linearRing;
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_LinearRing << ">"
+        mDebug() << "Parsed <" << kmlTag_LinearRing << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
 

@@ -109,7 +109,7 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
     qreal tileLevelF = log( linearLevel ) / log( 2.0 ) + 1.0;
     tileLevel = (int)( tileLevelF );
 
-//    qDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
+//    mDebug() << "tileLevelF: " << tileLevelF << " tileLevel: " << tileLevel;
 
     if ( tileLevel > m_maxTileLevel )
         tileLevel = m_maxTileLevel;
@@ -123,7 +123,7 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
 
 void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
 {
-    //    qDebug() << "Texture Level was set to: " << tileLevel;
+    //    mDebug() << "Texture Level was set to: " << tileLevel;
     m_tileLevel = tileLevel;
 
     m_globalWidth = m_tileLoader->globalWidth( m_tileLevel );
@@ -548,14 +548,14 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
 void AbstractScanlineTextureMapper::notifyMapChanged()
 {
     detectMaxTileLevel();
-//    qDebug() << "MAPCHANGED";
+//    mDebug() << "MAPCHANGED";
     emit mapChanged();
 }
 
 void AbstractScanlineTextureMapper::detectMaxTileLevel()
 {
     m_maxTileLevel = TileLoader::maxPartialTileLevel( m_tileLoader->layer() ) + 1 ;
-//    qDebug() << "MaxTileLevel: " << m_maxTileLevel;
+//    mDebug() << "MaxTileLevel: " << m_maxTileLevel;
 }
 
 #include "AbstractScanlineTextureMapper.moc"

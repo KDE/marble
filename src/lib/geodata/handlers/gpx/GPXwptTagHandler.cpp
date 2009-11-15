@@ -60,11 +60,11 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
         placemark.setCoordinate(lat, lon);
         doc->append(placemark);
 //#ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << gpxTag_wpt << "> waypoint: " << doc->size();
+        mDebug() << "Parsed <" << gpxTag_wpt << "> waypoint: " << doc->size();
 //#endif
         return static_cast<GeoDataPlacemark*>(&doc->last());
     }
-    qDebug() << "wpt parsing with parentitem" << parentItem.qualifiedName();
+    mDebug() << "wpt parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

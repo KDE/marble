@@ -33,7 +33,7 @@ GeoNode* KmlwestTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataLatLonAltBox>()->setWest( west, GeoDataCoordinates::Degree );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_west << "> containing: " << west
+        mDebug() << "Parsed <" << kmlTag_west << "> containing: " << west
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

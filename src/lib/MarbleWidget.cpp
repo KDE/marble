@@ -903,7 +903,7 @@ GeoSceneDocument *MarbleWidget::mapTheme() const
 
 void MarbleWidget::setPropertyValue( const QString& name, bool value )
 {
-    qDebug() << "In MarbleWidget the property " << name << "was set to " << value;
+    mDebug() << "In MarbleWidget the property " << name << "was set to " << value;
     d->m_map->setPropertyValue( name, value );
 
     // Update texture map during the repaint that follows:
@@ -1074,7 +1074,7 @@ void MarbleWidget::updateGps()
                                                          d->m_map->viewParams(),
                                                          temp );
     if ( draw ) {
-//        qDebug() << "Updating viewport for GPS";
+//        mDebug() << "Updating viewport for GPS";
         update( temp );
     }
 }
@@ -1106,7 +1106,7 @@ void MarbleWidget::setPersistentTileCacheLimit( quint64 kiloBytes )
 
 void MarbleWidget::clearVolatileTileCache()
 {
-    qDebug() << "About to clear VolatileTileCache";
+    mDebug() << "About to clear VolatileTileCache";
     d->m_map->clearVolatileTileCache();
 }
 
@@ -1218,7 +1218,7 @@ void MarbleWidget::setSelection(const QRect& region)
 {
     QPoint tl = region.topLeft();
     QPoint br = region.bottomRight();
-    qDebug() << "Selection region: (" << tl.x() << ", " <<  tl.y() << ") (" 
+    mDebug() << "Selection region: (" << tl.x() << ", " <<  tl.y() << ") (" 
              << br.x() << ", " << br.y() << ")" << endl;
 
     AbstractProjection *proj = d->m_map->viewParams()->currentProjection();
@@ -1230,7 +1230,7 @@ void MarbleWidget::setSelection(const QRect& region)
     coordinates << box.west(GeoDataPoint::Degree) << box.north(GeoDataPoint::Degree)
                 << box.east(GeoDataPoint::Degree) << box.south(GeoDataPoint::Degree);
 
-    qDebug() << "West: " << coordinates[0] << " North: " <<  coordinates[1]
+    mDebug() << "West: " << coordinates[0] << " North: " <<  coordinates[1]
              << " East: " << coordinates[2] << " South: " << coordinates[3] << endl;
 
     emit regionSelected(coordinates);
@@ -1256,10 +1256,10 @@ void MarbleWidget::updateSun()
     // Update the sun shading.
     //SunLocator  *sunLocator = d->m_model->sunLocator();
 
-    qDebug() << "MarbleWidget: Updating the sun shading map...";
+    mDebug() << "MarbleWidget: Updating the sun shading map...";
     d->m_model->update();
     setNeedsUpdate();
-    //qDebug() << "Finished updating the sun shading map";
+    //mDebug() << "Finished updating the sun shading map";
 }
 
 void MarbleWidget::centerSun()
@@ -1295,7 +1295,7 @@ void MarbleWidget::setInputEnabled( bool enabled )
 
     else // input is disabled
     {
-        qDebug() << "MarbleWidget::disableInput";
+        mDebug() << "MarbleWidget::disableInput";
         removeEventFilter( d->m_inputhandler );
         setCursor( Qt::ArrowCursor );
     }
@@ -1316,7 +1316,7 @@ void MarbleWidget::setProxy( const QString& proxyHost, const quint16 proxyPort, 
 
     QNetworkProxy proxy( type, d->m_proxyHost, d->m_proxyPort, d->m_user, d->m_password );
     QNetworkProxy::setApplicationProxy( proxy );
-    qDebug() << "MarbleWidget::setProxy" << type << d->m_proxyHost << d->m_proxyPort << d->m_user << d->m_password;
+    mDebug() << "MarbleWidget::setProxy" << type << d->m_proxyHost << d->m_proxyPort << d->m_user << d->m_password;
 }
 
 QString MarbleWidget::proxyHost() const

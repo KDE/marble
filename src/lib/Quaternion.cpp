@@ -131,7 +131,7 @@ void Quaternion::display() const
     QString quatdisplay = QString("Quaternion: w= %1, x= %2, y= %3, z= %4, |q|= %5" )
         .arg(v[Q_W]).arg(v[Q_X]).arg(v[Q_Y]).arg(v[Q_Z]).arg(quatNorm);
 
-    qDebug() << quatdisplay;
+    mDebug() << quatdisplay;
 }
 
 Quaternion& Quaternion::operator*=(const Quaternion &q)

@@ -47,7 +47,7 @@ GeoNode* KmlFolderTagHandler::parse(GeoParser& parser) const
         parentPtr->append( folder );
 
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Folder << "> containing: " << &parentItem.nodeAs<GeoDataContainer>()->last()
+        mDebug() << "Parsed <" << kmlTag_Folder << "> containing: " << &parentItem.nodeAs<GeoDataContainer>()->last()
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
         return static_cast<GeoDataFolder*>(&parentPtr->last());

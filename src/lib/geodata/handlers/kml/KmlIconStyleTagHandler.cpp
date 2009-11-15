@@ -44,7 +44,7 @@ GeoNode* KmlIconStyleTagHandler::parse( GeoParser& parser ) const
         GeoDataIconStyle style;
         parentItem.nodeAs<GeoDataStyle>()->setIconStyle( style );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_IconStyle << "> containing: " << &style
+        mDebug() << "Parsed <" << kmlTag_IconStyle << "> containing: " << &style
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
         return &parentItem.nodeAs<GeoDataStyle>()->iconStyle();

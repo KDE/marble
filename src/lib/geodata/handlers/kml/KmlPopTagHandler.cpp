@@ -47,7 +47,7 @@ GeoNode* KmlpopTagHandler::parse( GeoParser& parser ) const
         if( pop < 0 ) pop = 0;
         parentItem.nodeAs<GeoDataPlacemark>()->setPopulation( pop );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_pop << "> containing: " << population
+        mDebug() << "Parsed <" << kmlTag_pop << "> containing: " << population
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

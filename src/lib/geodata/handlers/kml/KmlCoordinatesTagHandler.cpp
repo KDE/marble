@@ -92,7 +92,7 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
                     }
                     parentItem.nodeAs<GeoDataMultiGeometry>()->append( point );
                 } else if ( parentItem.represents( kmlTag_Point ) ) {
-/*                    qDebug() << "found a free Point!";
+/*                    mDebug() << "found a free Point!";
                     qreal lon, lat;
                     coord.geoCoordinates(lon, lat);
                     parentItem.nodeAs<GeoDataPoint>()->set(lon, lat, coord.altitude());*/
@@ -101,7 +101,7 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
                 }
             }
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_coordinates << "> containing: " << coordinates
+        mDebug() << "Parsed <" << kmlTag_coordinates << "> containing: " << coordinates
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
         }

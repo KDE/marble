@@ -41,7 +41,7 @@ GeoNode* KmlIconTagHandler::parse( GeoParser& parser ) const
     
     if ( parentItem.represents( kmlTag_IconStyle ) ) {
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Icon << "> containing: " << parentItem.nodeAs<GeoDataIconStyle>()
+        mDebug() << "Parsed <" << kmlTag_Icon << "> containing: " << parentItem.nodeAs<GeoDataIconStyle>()
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
         return parentItem.nodeAs<GeoDataIconStyle>();

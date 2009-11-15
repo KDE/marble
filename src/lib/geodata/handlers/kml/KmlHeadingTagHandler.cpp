@@ -41,7 +41,7 @@ GeoNode* KmlheadingTagHandler::parse( GeoParser& parser ) const
     
     if ( parentItem.represents( kmlTag_IconStyle ) ) {
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_heading << "> containing: " << parser.readElementText().trimmed().toFloat()
+        mDebug() << "Parsed <" << kmlTag_heading << "> containing: " << parser.readElementText().trimmed().toFloat()
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

@@ -47,7 +47,7 @@ GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
             parentItem.nodeAs<GeoDataContainer>()->append( document );
 
 #ifdef DEBUG_TAGS
-            qDebug() << "Parsed <" << kmlTag_Document << "> containing: " << &parentItem.nodeAs<GeoDataContainer>()->last()
+            mDebug() << "Parsed <" << kmlTag_Document << "> containing: " << &parentItem.nodeAs<GeoDataContainer>()->last()
                      << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
             return static_cast<GeoDataDocument*>(&parentItem.nodeAs<GeoDataContainer>()->last());
@@ -56,7 +56,7 @@ GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
         {
             GeoDataDocument* doc = geoDataDoc( parser );
 #ifdef DEBUG_TAGS
-            qDebug() << "Parsed <" << kmlTag_Document << "> document: " << doc;
+            mDebug() << "Parsed <" << kmlTag_Document << "> document: " << doc;
 #endif
             return doc;
         }

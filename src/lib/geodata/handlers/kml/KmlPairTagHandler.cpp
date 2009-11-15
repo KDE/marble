@@ -43,7 +43,7 @@ GeoNode* KmlPairTagHandler::parse( GeoParser& parser ) const
     
     if( parentItem.represents( kmlTag_StyleMap ) ) {
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_Pair << ">"
+        mDebug() << "Parsed <" << kmlTag_Pair << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
         return parentItem.nodeAs<GeoDataStyleMap>();

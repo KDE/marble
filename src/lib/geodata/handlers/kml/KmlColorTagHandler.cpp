@@ -56,7 +56,7 @@ GeoNode* KmlcolorTagHandler::parse( GeoParser& parser ) const
             QColor::fromRgba( rgba ) );
         }
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_color << "> containing: " << rgba
+        mDebug() << "Parsed <" << kmlTag_color << "> containing: " << rgba
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

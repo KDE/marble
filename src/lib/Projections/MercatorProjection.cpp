@@ -329,7 +329,7 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
         }
     }
 
-//    qDebug() << latLonAltBox.text( GeoDataCoordinates::Degree );
+//    mDebug() << latLonAltBox.text( GeoDataCoordinates::Degree );
 
     return latLonAltBox;
 }

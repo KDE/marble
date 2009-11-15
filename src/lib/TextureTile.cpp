@@ -166,7 +166,7 @@ void TextureTilePrivate::scaleTileFrom( Marble::GeoSceneTexture *textureLayer, Q
     const int columnsCurrentLevel = TileLoaderHelper::levelToColumn( levelZeroColumns,
                                                                      sourceLevel );
 
-    // qDebug() << "About to start cropping an existing image.";
+    // mDebug() << "About to start cropping an existing image.";
 
     QSize tilesize = tile.size();
     qreal normalizedX2 = (qreal)(targetX + 1) / (qreal)( rowsRequestedLevel );
@@ -193,7 +193,7 @@ void TextureTilePrivate::scaleTileFrom( Marble::GeoSceneTexture *textureLayer, Q
     tile = tile.copy( left, top, rectWidth, rectHeight );
     tile = tile.scaled( tilesize ); // TODO: use correct size
     m_state = AbstractTile::TilePartial;
-    // qDebug() << "Finished scaling up the Temporary Tile.";
+    // mDebug() << "Finished scaling up the Temporary Tile.";
 }
 
 
@@ -218,7 +218,7 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
 {
     Q_D( TextureTile );
 
-    // qDebug() << "TextureTile::loadDataset" << level << x << y;
+    // mDebug() << "TextureTile::loadDataset" << level << x << y;
     QImage temptile;
 
     d->m_used = true; // Needed to avoid frequent deletion of tiles
@@ -291,11 +291,11 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
             //   available, it should get displayed.
  
             if ( !fileInfo.exists() ) {
-//                qDebug() << "File does not exist:" << fileInfo.filePath();
+//                mDebug() << "File does not exist:" << fileInfo.filePath();
                 download = true;
             }
             else if ( lastModified.secsTo( now ) > textureLayer->expire() ) {
-//                qDebug() << "File does exist, but is expired:" << fileInfo.filePath()
+//                mDebug() << "File does exist, but is expired:" << fileInfo.filePath()
 //                        << "age (seconds):" << lastModified.secsTo( now )
 //                        << "allowed age:" << textureLayer->expire();
                 download = true;
@@ -304,7 +304,7 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
             if ( fileInfo.exists() ) {
 
                 temptile.load( absfilename );
-                // qDebug() << "TextureTile::loadDataset "
+                // mDebug() << "TextureTile::loadDataset "
                 //          << "depth:" << temptile.depth()
                 //          << "format:" << temptile.format()
                 //          << "bytesPerLine:" << temptile.bytesPerLine()
@@ -338,25 +338,25 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
             QString destFileName =
                 TileLoaderHelper::relativeTileFileName( textureLayer, currentLevel,
                                                         currentX, currentY );
-//            qDebug() << "emit downloadTile(" << sourceUrl << destFileName << ");";
+//            mDebug() << "emit downloadTile(" << sourceUrl << destFileName << ");";
             emit downloadTile( sourceUrl, destFileName, d->m_id.toString() );
         }
     }
 
-//    qDebug() << "TextureTile::loadDataset end";
+//    mDebug() << "TextureTile::loadDataset end";
 
     d->m_depth = d->m_rawtile.depth();
 
-//    qDebug() << "m_depth =" << m_depth;
+//    mDebug() << "m_depth =" << m_depth;
 }
 
 void TextureTile::initJumpTables( bool requestTileUpdate )
 {
     Q_D( TextureTile );
-    //    qDebug() << "Entered initJumpTables( bool ) of Tile" << d->m_id;
+    //    mDebug() << "Entered initJumpTables( bool ) of Tile" << d->m_id;
 
     if ( d->m_rawtile.isNull() ) {
-        qDebug() << "An essential tile is missing. Please rerun the application.";
+        mDebug() << "An essential tile is missing. Please rerun the application.";
         exit(-1);
     }
 
@@ -372,7 +372,7 @@ void TextureTile::initJumpTables( bool requestTileUpdate )
             d->jumpTable8 = jumpTableFromQImage8( d->m_rawtile );
             break;
         default:
-            qDebug() << QString("Color m_depth %1 of tile could not be retrieved. Exiting.").
+            mDebug() << QString("Color m_depth %1 of tile could not be retrieved. Exiting.").
                 arg( d->m_depth );
             exit( -1 );
     }
@@ -380,7 +380,7 @@ void TextureTile::initJumpTables( bool requestTileUpdate )
     d->m_isGrayscale = d->m_rawtile.isGrayscale();
 
     if ( requestTileUpdate ) {
-        // qDebug() << "TileUpdate available";
+        // mDebug() << "TileUpdate available";
         emit tileUpdateDone();
     }
 }

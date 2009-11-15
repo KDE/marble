@@ -50,11 +50,11 @@ bool GmlSax::endElement( const QString &namespaceURI,
     
     if ( qName == "gml:coordinates") {
         QString temp = currentText;
-        qDebug() << temp;
+        mDebug() << temp;
         
         QStringList tempList = temp.split( ',' );
         
-        qDebug() << tempList[0]<<  tempList[1];
+        mDebug() << tempList[0]<<  tempList[1];
         
         *m_lon = tempList[0].toDouble();
         *m_lat = tempList[1].toDouble();

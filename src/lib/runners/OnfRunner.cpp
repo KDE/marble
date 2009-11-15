@@ -24,11 +24,11 @@
 #include "GeoOnfParser.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
+#include "MarbleDebug.h"
 
 #include <QtCore/QString>
 #include <QtCore/QBuffer>
 #include <QtCore/QVector>
-#include <QtCore/QtDebug>
 
 #include <QtNetwork/QHttp>
 
@@ -87,21 +87,21 @@ void OnfRunner::run()
         delete m_buffer;
     }
     m_buffer = new QBuffer;
-    qDebug() << "ONF search: GET /namefinder/search.xml?find=" << m_input;
+    mDebug() << "ONF search: GET /namefinder/search.xml?find=" << m_input;
     m_http->get( "/namefinder/search.xml?find=" + m_input, m_buffer );
 }
 
 void OnfRunner::slotRequestFinished( int id, bool error )
 {
     if( error ) {
-        qDebug() << "ONF request" << id << "failed:" << m_http->error()
+        mDebug() << "ONF request" << id << "failed:" << m_http->error()
                  << m_http->errorString();
         fail();
         return;
     }
     
-    qDebug() << "ONF search result buffer size:" << m_buffer->size();
-    //qDebug() << m_buffer->data();
+    mDebug() << "ONF search result buffer size:" << m_buffer->size();
+    //mDebug() << m_buffer->data();
     
     QByteArray array = m_buffer->data();
     QBuffer data( &array );

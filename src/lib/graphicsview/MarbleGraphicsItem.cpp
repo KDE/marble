@@ -78,7 +78,7 @@ bool MarbleGraphicsItem::paintEvent( GeoPainter *painter, ViewportParams *viewpo
                     cachePixmap = QPixmap( neededPixmapSize ).copy();
                 }
                 else {
-                    qDebug() << "Warning: Invalid pixmap size suggested: " << d->m_size;
+                    mDebug() << "Warning: Invalid pixmap size suggested: " << d->m_size;
                 }
             }
         

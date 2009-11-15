@@ -58,7 +58,7 @@ void FileLoader::run()
         QString defaultcachename;
         QString defaultsrcname;
 
-        qDebug() << "starting parser for" << m_filepath;
+        mDebug() << "starting parser for" << m_filepath;
 
         QFileInfo fileinfo(m_filepath);
         QString path = fileinfo.path();
@@ -85,7 +85,7 @@ void FileLoader::run()
         }
 
         if ( QFile::exists( defaultcachename ) ) {
-            qDebug() << "Loading Cache File:" + defaultcachename;
+            mDebug() << "Loading Cache File:" + defaultcachename;
 
             bool      cacheoutdated = false;
             QDateTime sourceLastModified;
@@ -108,10 +108,10 @@ void FileLoader::run()
                 if ( loadok )
                     emit newGeoDataDocumentAdded( m_document );
             }
-            qDebug() << "Loading ended" << loadok;
+            mDebug() << "Loading ended" << loadok;
             if ( loadok )
             {
-                qDebug() << "placemarksLoaded";
+                mDebug() << "placemarksLoaded";
             }
         }
         else
@@ -124,7 +124,7 @@ void FileLoader::run()
             }
             else
             {
-                qDebug() << "No Default Placemark Source File for " << defaultsrcname;
+                mDebug() << "No Default Placemark Source File for " << defaultsrcname;
             }
         }
     } else {
@@ -162,7 +162,7 @@ void FileLoader::importKml( const QString& filename )
 
     file.close();
 
-    qDebug() << "newGeoDataDocumentAdded" << m_filepath;
+    mDebug() << "newGeoDataDocumentAdded" << m_filepath;
 
     emit newGeoDataDocumentAdded( m_document );
 }
@@ -187,7 +187,7 @@ void FileLoader::importKmlFromData()
 
     buffer.close();
 
-    qDebug() << "newGeoDataDocumentAdded" << m_filepath;
+    mDebug() << "newGeoDataDocumentAdded" << m_filepath;
 
     emit newGeoDataDocumentAdded( m_document );
 }

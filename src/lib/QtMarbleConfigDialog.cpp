@@ -194,7 +194,7 @@ void QtMarbleConfigDialog::syncSettings()
             proxy.setType( QNetworkProxy::HttpProxy );
         }
         else {
-            qDebug() << "Unknown proxy type! Using Http Proxy instead.";
+            mDebug() << "Unknown proxy type! Using Http Proxy instead.";
             proxy.setType( QNetworkProxy::HttpProxy );
         }
     }

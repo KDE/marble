@@ -58,7 +58,7 @@ qreal AbstractProjection::maxLat() const
 void AbstractProjection::setMaxLat( qreal maxLat )
 {
     if ( maxLat < maxValidLat() ) {
-        qDebug() << Q_FUNC_INFO << "Trying to set maxLat to a value that is out of the valid range.";
+        mDebug() << Q_FUNC_INFO << "Trying to set maxLat to a value that is out of the valid range.";
         return;
     }
     d->m_maxLat = maxLat;
@@ -77,7 +77,7 @@ qreal AbstractProjection::minLat() const
 void AbstractProjection::setMinLat( qreal minLat )
 {
     if ( minLat < minValidLat() ) {
-        qDebug() << Q_FUNC_INFO << "Trying to set minLat to a value that is out of the valid range.";
+        mDebug() << Q_FUNC_INFO << "Trying to set minLat to a value that is out of the valid range.";
         return;
     }
     d->m_minLat = minLat;
@@ -96,7 +96,7 @@ bool AbstractProjection::repeatX() const
 void AbstractProjection::setRepeatX( bool repeatX )
 {
     if ( repeatX && !repeatableX() ) {
-        qDebug() << Q_FUNC_INFO << "Trying to repeat a projection that is not repeatable";
+        mDebug() << Q_FUNC_INFO << "Trying to repeat a projection that is not repeatable";
         return;
     }
 
@@ -127,7 +127,7 @@ bool AbstractProjection::screenCoordinates( const GeoDataLineString &lineString,
     // Compare bounding box size of the line string with the angularResolution
     // Immediately return if the latLonAltBox is smaller.
     if ( !viewport->resolves( lineString.latLonAltBox() ) ) {
-//      qDebug() << "Object too small to be resolved";
+//      mDebug() << "Object too small to be resolved";
         return false;
     }
 
@@ -378,7 +378,7 @@ void AbstractProjectionPrivate::repeatPolygons( const ViewportParams *viewport,
     q->screenCoordinates( eastCoords, viewport, xEast, y, globeHidesPoint );
 
     if ( xWest <= 0 && xEast >= viewport->width() - 1 ) {
-//        qDebug() << "No repeats";
+//        mDebug() << "No repeats";
         return;
     }
 
@@ -422,14 +422,14 @@ void AbstractProjectionPrivate::repeatPolygons( const ViewportParams *viewport,
 
     polygons = repeatedPolygons;
 
-//    qDebug() << Q_FUNC_INFO << "Coordinates: " << xWest << xEast
+//    mDebug() << Q_FUNC_INFO << "Coordinates: " << xWest << xEast
 //             << "Repeats: " << repeatsLeft << repeatsRight;
 }
 
 void AbstractProjectionPrivate::translatePolygons( const QVector<QPolygonF *> &polygons,
                                                    QVector<QPolygonF *> &translatedPolygons,
                                                    qreal xOffset ) {
-//    qDebug() << "Translation: " << xOffset;
+//    mDebug() << "Translation: " << xOffset;
 
     QVector<QPolygonF *>::const_iterator itPolygon = polygons.constBegin();
     QVector<QPolygonF *>::const_iterator itEnd = polygons.constEnd();
@@ -606,7 +606,7 @@ bool AbstractProjection::exceedsLatitudeRange( const GeoDataCoordinates &coords 
             // FIXME: Should we just normalize latitude and longitude and be done?
             //        While this might work well for persistent data it would create some 
             //        possible overhead for temporary data, so this needs careful thinking.
-            qDebug() << "GeoDataCoordinates not normalized!";
+            mDebug() << "GeoDataCoordinates not normalized!";
             return false;
         }
     }
@@ -697,7 +697,7 @@ QPolygonF AbstractProjectionPrivate::processTessellation(  const GeoDataCoordina
     // Maximum amount of tessellation nodes.
     if ( tessellatedNodes > maxTessellationNodes ) tessellatedNodes = maxTessellationNodes;
 
-//    qDebug() << "Creating tessellation nodes:" << tessellatedNodes;
+//    mDebug() << "Creating tessellation nodes:" << tessellatedNodes;
 
     qreal previousAltitude = previousCoords.altitude();
 
@@ -722,11 +722,11 @@ QPolygonF AbstractProjectionPrivate::processTessellation(  const GeoDataCoordina
             }
         }
         else {
-//            qDebug() << "Don't FollowLatitudeCircle";
+//            mDebug() << "Don't FollowLatitudeCircle";
         }
     }
     else {
-//        qDebug() << "Don't RespectLatitudeCircle";
+//        mDebug() << "Don't RespectLatitudeCircle";
     }
     
 
@@ -845,7 +845,7 @@ GeoDataCoordinates AbstractProjectionPrivate::findHorizon( const GeoDataCoordina
             lonDiff = currentLongitude - previousLongitude;
         }
         else {
-//            qDebug() << "Don't FollowLatitudeCircle";
+//            mDebug() << "Don't FollowLatitudeCircle";
         }
     }
 

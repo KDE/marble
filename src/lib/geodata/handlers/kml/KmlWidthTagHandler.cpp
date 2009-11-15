@@ -44,7 +44,7 @@ GeoNode* KmlwidthTagHandler::parse( GeoParser& parser ) const
         
         parentItem.nodeAs<GeoDataLineStyle>()->setWidth( width );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_width << "> containing: " << width
+        mDebug() << "Parsed <" << kmlTag_width << "> containing: " << width
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

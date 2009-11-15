@@ -32,7 +32,7 @@ GeoDataPolygon::GeoDataPolygon( const GeoDataGeometry & other )
 GeoDataPolygon::~GeoDataPolygon()
 {
 #ifdef DEBUG_GEODATA
-    qDebug() << "delete polygon";
+    mDebug() << "delete polygon";
 #endif
 }
 
@@ -122,7 +122,7 @@ void GeoDataPolygon::pack( QDataStream& stream ) const
           = p()->inner.constBegin(); 
          iterator != p()->inner.constEnd();
          ++iterator ) {
-        qDebug() << "innerRing: size" << p()->inner.size();
+        mDebug() << "innerRing: size" << p()->inner.size();
         GeoDataLinearRing linearRing = ( *iterator );
         linearRing.pack( stream );
     }

@@ -47,7 +47,7 @@ GeoNode* KmlopenTagHandler::parse( GeoParser& parser ) const
         else
             parentItem.nodeAs<GeoDataFeature>()->setOpen( false );*/
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_open << "> containing: " << open
+        mDebug() << "Parsed <" << kmlTag_open << "> containing: " << open
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

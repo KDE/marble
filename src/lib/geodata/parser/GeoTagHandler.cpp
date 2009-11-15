@@ -61,7 +61,7 @@ void GeoTagHandler::registerHandler(const QualifiedName& qName, const GeoTagHand
     Q_ASSERT(hash->contains(qName));
 
 #if DUMP_TAG_HANDLER_REGISTRATION > 0
-    qDebug() << "[GeoTagHandler] -> Recognizing" << qName.first << "tag with namespace" << qName.second;
+    mDebug() << "[GeoTagHandler] -> Recognizing" << qName.first << "tag with namespace" << qName.second;
 #endif
 }
 

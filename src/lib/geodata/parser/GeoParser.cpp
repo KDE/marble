@@ -103,7 +103,7 @@ bool GeoParser::read( QIODevice* device )
     }
 
     if ( error() )
-        qDebug() << "[GeoParser::read] -> Error occurred:" << errorString() << " at line: " << lineNumber();
+        mDebug() << "[GeoParser::read] -> Error occurred:" << errorString() << " at line: " << lineNumber();
 
     return !error();
 }
@@ -194,7 +194,7 @@ void GeoParser::raiseWarning( const QString& warning )
 {
     // TODO: Maybe introduce a strict parsing mode where we feed the warning to
     // raiseError() (which stops parsing).
-    qDebug() << "[GeoParser::raiseWarning] -> " << warning;
+    mDebug() << "[GeoParser::raiseWarning] -> " << warning;
 }
 
 QString GeoParser::attribute( const char* attributeName ) const

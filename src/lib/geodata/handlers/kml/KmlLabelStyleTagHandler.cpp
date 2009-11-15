@@ -45,7 +45,7 @@ GeoNode* KmlLabelStyleTagHandler::parse( GeoParser& parser ) const
     
         parentItem.nodeAs<GeoDataStyle>()->setLabelStyle( style );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_LabelStyle << "> containing: " << &parentItem.nodeAs<GeoDataStyle>()->labelStyle()
+        mDebug() << "Parsed <" << kmlTag_LabelStyle << "> containing: " << &parentItem.nodeAs<GeoDataStyle>()->labelStyle()
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
         return &parentItem.nodeAs<GeoDataStyle>()->labelStyle();

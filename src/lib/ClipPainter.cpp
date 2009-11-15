@@ -145,9 +145,9 @@ void ClipPainter::drawPolygon ( const QPolygonF & polygon,
 
         foreach( const QPolygonF & clippedPolyObject, clippedPolyObjects ) { 
             if ( clippedPolyObject.size() > 2 ) {
-                // qDebug() << "Size: " << clippedPolyObject.size();
+                // mDebug() << "Size: " << clippedPolyObject.size();
                 QPainter::drawPolygon ( clippedPolyObject, fillRule );
-                // qDebug() << "done";
+                // mDebug() << "done";
                 #ifdef DEBUG_DRAW_NODES
                     d->debugDrawNodes( clippedPolyObject );
                 #endif
@@ -174,9 +174,9 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon )
 
         foreach( const QPolygonF & clippedPolyObject, clippedPolyObjects ) { 
             if ( clippedPolyObject.size() > 1 ) {
-                // qDebug() << "Size: " << clippedPolyObject.size();
+                // mDebug() << "Size: " << clippedPolyObject.size();
                 QPainter::drawPolyline ( clippedPolyObject );
-                // qDebug() << "done";
+                // mDebug() << "done";
 
                 #ifdef DEBUG_DRAW_NODES
                     d->debugDrawNodes( clippedPolyObject );
@@ -206,9 +206,9 @@ void ClipPainter::drawPolyline( const QPolygonF & polygon, QVector<QPointF>& lab
 
         foreach( const QPolygonF & clippedPolyObject, clippedPolyObjects ) { 
             if ( clippedPolyObject.size() > 1 ) {
-                // qDebug() << "Size: " << clippedPolyObject.size();
+                // mDebug() << "Size: " << clippedPolyObject.size();
                 QPainter::drawPolyline ( clippedPolyObject );
-                // qDebug() << "done";
+                // mDebug() << "done";
 
                 #ifdef DEBUG_DRAW_NODES
                     d->debugDrawNodes( clippedPolyObject );
@@ -339,7 +339,7 @@ QPointF ClipPainterPrivate::interpolateLabelPoint( const QPointF& previousPoint,
                           q->viewport().height() - m_labelAreaMargin );        
     }
 
-//    qDebug() << Q_FUNC_INFO << "Previous and current node position are allowed!";
+//    mDebug() << Q_FUNC_INFO << "Previous and current node position are allowed!";
 
     return QPointF( -1.0, -1.0 );
 }
@@ -439,7 +439,7 @@ void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon,
                                           QVector<QPolygonF> & clippedPolyObjects,
                                           bool isClosed )
 {
-    //	qDebug() << "ClipPainter enabled." ;
+    //	mDebug() << "ClipPainter enabled." ;
 
     // Only create a new polyObject as soon as we know for sure that 
     // the current point is on the screen. 
@@ -457,7 +457,7 @@ void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon,
 
     while ( itPoint != itEndPoint ) {
         m_currentPoint = (*itPoint);
-        // qDebug() << "m_currentPoint.x()" << m_currentPoint.x() << "m_currentPOint.y()" << m_currentPoint.y();
+        // mDebug() << "m_currentPoint.x()" << m_currentPoint.x() << "m_currentPOint.y()" << m_currentPoint.y();
 
         // Figure out the sector of the current point.
         m_currentSector = sector( m_currentPoint );

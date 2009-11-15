@@ -97,7 +97,7 @@ void PlacemarkManager::addGeoDataDocument( int index )
             d->m_placemarkContainer << result;
             d->m_sizeForDocument.resize(index+1);
             d->m_sizeForDocument[index] = result.size();
-            qDebug() << "PlacemarkManager::addGeoDataDocument:"
+            mDebug() << "PlacemarkManager::addGeoDataDocument:"
                     << document.fileName() << " size " << result.size();
             d->m_datafacade->placemarkModel()->addPlacemarks( start, result.size() );
         }
@@ -121,7 +121,7 @@ void PlacemarkManager::removeGeoDataDocument( int index )
         d->m_placemarkContainer.remove(start, size);
         if (d->m_sizeForDocument.size() > index)
             d->m_sizeForDocument.remove(index);
-        qDebug() << "PlacemarkManager::removeGeoDataDocument:"
+        mDebug() << "PlacemarkManager::removeGeoDataDocument:"
                 << document.fileName() << " size " << size;
         d->m_datafacade->placemarkModel()->removePlacemarks(
                 document.fileName(), start, size );
@@ -173,7 +173,7 @@ void PlacemarkManager::createFilterProperties( QVector<Marble::GeoDataPlacemark>
             if ( area >= 0.0 )
             {
                 hasPopularity = true;
-//                qDebug() << placemark->name() << " " << (qint64)(area);
+//                mDebug() << placemark->name() << " " << (qint64)(area);
                 placemark.setPopularity( (qint64)(area * 100) );
                 placemark.setPopularityIndex( areaPopIdx( area ) );
             }

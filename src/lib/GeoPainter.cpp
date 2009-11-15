@@ -565,7 +565,7 @@ void GeoPainter::drawPolyline ( const GeoDataLineString & lineString,
          ! d->m_viewport->resolves( lineString.latLonAltBox() )
         )
     {
-        // qDebug() << "LineString doesn't get displayed on the viewport";
+        // mDebug() << "LineString doesn't get displayed on the viewport";
         return;
     }
 
@@ -616,7 +616,7 @@ QRegion GeoPainter::regionFromPolyline ( const GeoDataLineString & lineString,
          ! d->m_viewport->resolves( lineString.latLonAltBox() )
         )
     {
-        // qDebug() << "LineString doesn't get displayed on the viewport";
+        // mDebug() << "LineString doesn't get displayed on the viewport";
         return QRegion();
     }
 
@@ -650,7 +650,7 @@ void GeoPainter::drawPolygon ( const GeoDataLinearRing & linearRing,
          ! d->m_viewport->resolves( linearRing.latLonAltBox() )
         )
     {
-        // qDebug() << "Polygon doesn't get displayed on the viewport";
+        // mDebug() << "Polygon doesn't get displayed on the viewport";
         return;
     }
 
@@ -746,10 +746,10 @@ void GeoPainter::drawPolygon ( const GeoDataPolygon & polygon,
          ! d->m_viewport->resolves( polygon.outerBoundary().latLonAltBox() )
         )
     {
-        // qDebug() << "Polygon doesn't get displayed on the viewport";
+        // mDebug() << "Polygon doesn't get displayed on the viewport";
         return;
     }
-    // qDebug() << "Drawing Polygon";
+    // mDebug() << "Drawing Polygon";
 
     // Creating the outer screen polygons first
     QVector<QPolygonF*> outerPolygons;

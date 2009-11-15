@@ -53,11 +53,11 @@ PositionTracking::PositionTracking( GpxFile *currentGpx,
         m_positionProvider = plugins.takeFirst();
         qDeleteAll( plugins );
         m_positionProvider->setParent( this );
-        qDebug() << "Initializing position provider:" << m_positionProvider->name();
+        mDebug() << "Initializing position provider:" << m_positionProvider->name();
         m_positionProvider->initialize();
     } else {
         // useful when there is no plugin available.
-        qDebug() << "No position provider available";
+        mDebug() << "No position provider available";
         m_positionProvider = 0;
     }
 }
@@ -98,7 +98,7 @@ QRegion PositionTracking::genRegion( const QSize &canvasSize,
 
 void PositionTracking::notifyPosition( GeoDataCoordinates pos )
 {
-    //qDebug() << "Position from gpsd: " << pos.toString();
+    //mDebug() << "Position from gpsd: " << pos.toString();
     // FIXME: Unused parameters should get fixed during refactoring of this class
     Q_UNUSED( pos )
 }

@@ -458,7 +458,7 @@ GeoDataStyle* GeoDataFeature::style() const
         } else
         {
             // This should not happen
-            qDebug() << "No Style got assigned!";
+            mDebug() << "No Style got assigned!";
             return new GeoDataStyle( QPixmap(), 
               QFont( "Sans Serif",  8, 50, false ), QColor( Qt::black ) );
         }

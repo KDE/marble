@@ -111,7 +111,7 @@ void TileLoader::setLayer( GeoSceneLayer * layer )
     d->m_tileCache.clear();
 
     if ( !layer ) {
-        qDebug() << "No layer specified! (GeoSceneLayer * layer = 0)";
+        mDebug() << "No layer specified! (GeoSceneLayer * layer = 0)";
         return;
     }
 
@@ -239,7 +239,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     // tile (valid) has not been found in hash or cache, so load it from disk
     // and place it in the hash from where it will get transferred to the cache
 
-    // qDebug() << "load Tile from Disk: " << tileId.toString();
+    // mDebug() << "load Tile from Disk: " << tileId.toString();
     tile = new TextureTile( tileId );
     d->m_tilesOnDisplay[tileId] = tile;
 
@@ -297,7 +297,7 @@ int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
     if ( !texture ) return maxtilelevel;
 
     QString tilepath = MarbleDirs::path( TileLoaderHelper::themeStr( texture ) );
-//    qDebug() << "TileLoader::maxPartialTileLevel tilepath" << tilepath;
+//    mDebug() << "TileLoader::maxPartialTileLevel tilepath" << tilepath;
     QStringList leveldirs = QDir( tilepath ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
 
     bool ok = true;
@@ -310,7 +310,7 @@ int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
             maxtilelevel = value;
     }
 
-//    qDebug() << "Detected maximum tile level that contains data: "
+//    mDebug() << "Detected maximum tile level that contains data: "
 //             << maxtilelevel;
 
     return maxtilelevel;
@@ -344,7 +344,7 @@ bool TileLoader::baseTilesAvailable( GeoSceneLayer * layer )
 
 void TileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 {
-    qDebug() << QString("Setting tile cache to %1 kilobytes.").arg( kiloBytes );
+    mDebug() << QString("Setting tile cache to %1 kilobytes.").arg( kiloBytes );
     d->m_tileCache.setMaxCost( kiloBytes * 1024 );
 }
 
@@ -352,7 +352,7 @@ void TileLoader::reloadTile( const QString &idStr )
 {
     if ( !d->m_layer ) return;
 
-//    qDebug() << "TileLoader::reloadTile:" << idStr;
+//    mDebug() << "TileLoader::reloadTile:" << idStr;
  
     const TileId id = TileId::fromString( idStr );
     if ( d->m_tilesOnDisplay.contains( id ) ) {
@@ -370,14 +370,14 @@ void TileLoader::reloadTile( const QString &idStr )
     } else {
       // Remove "false" tile from cache so it doesn't get loaded anymore
       d->m_tileCache.remove( id );
-      qDebug() << "No such ID:" << idStr;
+      mDebug() << "No such ID:" << idStr;
     }
 }
 
 void TileLoader::reloadTile( const QString &relativeUrlString, const QString &_id )
 {
     Q_UNUSED( relativeUrlString );
-    // qDebug() << "Reloading Tile" << relativeUrlString << "id:" << _id;
+    // mDebug() << "Reloading Tile" << relativeUrlString << "id:" << _id;
 
     reloadTile( _id );
 }
@@ -387,14 +387,14 @@ void TileLoader::reloadTile( const QString& serverUrlString, const QString &rela
 {
     Q_UNUSED( serverUrlString );
     Q_UNUSED( relativeUrlString );
-    // qDebug() << "Reloading Tile" << serverUrlString << relativeUrlString << "id:" << _id;
+    // mDebug() << "Reloading Tile" << serverUrlString << relativeUrlString << "id:" << _id;
 
     reloadTile( _id );
 }
 
 void TileLoader::update()
 {
-    qDebug() << "TileLoader::update()";
+    mDebug() << "TileLoader::update()";
     flush(); // trigger a reload of all tiles that are currently in use
     d->m_tileCache.clear(); // clear the tile cache in physical memory
     emit tileUpdateAvailable();

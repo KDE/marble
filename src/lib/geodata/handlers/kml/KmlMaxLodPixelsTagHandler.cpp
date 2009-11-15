@@ -33,7 +33,7 @@ GeoNode* KmlmaxLodPixelsTagHandler::parse( GeoParser& parser ) const
 
         parentItem.nodeAs<GeoDataLod>()->setMaxLodPixels( maxLodPixels );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_maxLodPixels << "> containing: " << maxLodPixels
+        mDebug() << "Parsed <" << kmlTag_maxLodPixels << "> containing: " << maxLodPixels
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

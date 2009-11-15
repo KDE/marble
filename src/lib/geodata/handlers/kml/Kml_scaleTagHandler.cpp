@@ -48,14 +48,14 @@ GeoNode* KmlscaleTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataIconStyle>()->setScale( 
         parser.readElementText().trimmed().toFloat() );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_scale << "> containing: " << parser.readElementText().trimmed()
+        mDebug() << "Parsed <" << kmlTag_scale << "> containing: " << parser.readElementText().trimmed()
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     } else if( parentItem.represents( kmlTag_LabelStyle ) ) {
         parentItem.nodeAs<GeoDataLabelStyle>()->setScale( 
         parser.readElementText().trimmed().toFloat() );
 #ifdef DEBUG_TAGS
-        qDebug() << "Parsed <" << kmlTag_scale << "> containing: " << parser.readElementText().trimmed()
+        mDebug() << "Parsed <" << kmlTag_scale << "> containing: " << parser.readElementText().trimmed()
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
     }

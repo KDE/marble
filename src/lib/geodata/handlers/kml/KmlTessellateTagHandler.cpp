@@ -85,7 +85,7 @@ GeoNode* KmltessellateTagHandler::parse( GeoParser& parser ) const
         
 #ifdef DEBUG_TAGS
     if( validParents ) {
-        qDebug() << "Parsed <" << kmlTag_tessellate << "> containing: " << content
+        mDebug() << "Parsed <" << kmlTag_tessellate << "> containing: " << content
                  << " parent item name: " << parentItem.qualifiedName().first;
     }
 #endif

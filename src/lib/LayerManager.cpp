@@ -133,7 +133,7 @@ void LayerManager::renderLayer( GeoPainter *painter, ViewParams *viewParams,
                                 const QString& renderPosition )
 {
     if ( !viewParams || !viewParams->viewport() ) {
-        qDebug() << "LayerManager: No valid viewParams set!";
+        mDebug() << "LayerManager: No valid viewParams set!";
         return;
     }
 

@@ -43,7 +43,7 @@ void DatasetProvider::loadDatasets( AbstractTile * tile )
 {
     TileId id = tile->id();
 
-    qDebug() << "DatasetProvider" << id.toString();
+    mDebug() << "DatasetProvider" << id.toString();
 }
 
 
