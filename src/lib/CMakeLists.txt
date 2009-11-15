@@ -73,6 +73,7 @@ set(marblewidget_SRCS
     MarbleGeoDataModel.cpp
     MarbleGeometryModel.cpp
     MarbleDataFacade.cpp
+    MarbleDebug.cpp
 
     QtMarbleConfigDialog.cpp
     ClipPainter.cpp
