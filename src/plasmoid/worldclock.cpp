@@ -295,30 +295,41 @@ void WorldClock::recalculateFonts( )
     locstr.remove( 0, locstr.lastIndexOf( '/' ) + 1 ).replace( '_', ' ' );
     QRect timeRect( m_points.value( "topleft" ), m_points.value( "middleright" ) );
     QRect locationRect( m_points.value( "middleleft" ), m_points.value( "bottomright" ) );
+    
+    m_locationFont = calculateFont(locstr, locationRect);
+    m_timeFont = calculateFont(timestr, timeRect);
+}
+
+QFont WorldClock::calculateFont(const QString &text, const QRect &boundingBox) const
+{
+    QFont resultFont( "Helvetica", 3, QFont::Bold);
+     
+    int unscaled = 0; // Avoid infinite loops, bug 189633
+    QRect lastBox;
+    
     //we set very small defaults and then increase them
-    int lastSize = 3;
-    for ( int curSize = 4; ; ++curSize, ++lastSize ) {
-        QFont font( "Helvetica", curSize, QFont::Bold);
-        QFontMetrics metrics( font );
-        QRect rect = metrics.boundingRect( locstr );
-        if ( rect.width()  > locationRect.width() ||
-             rect.height() > locationRect.height() ) {
+    for ( int curSize = resultFont.pointSize()+1; unscaled<100; ++curSize ) {
+        resultFont.setPointSize(curSize);
+        QFontMetrics metrics( resultFont );
+        QRect rect = metrics.boundingRect( text );
+        if ( rect.width()  > boundingBox.width() ||
+             rect.height() > boundingBox.height() ) {
             break;
         }
-    }
-    m_locationFont = QFont( "Helvetica", lastSize, QFont::Bold);
-    lastSize = 3;
-    for ( int curSize = 4; ; ++curSize, ++lastSize ) {
-        QFont font( "Helvetica", curSize, QFont::Bold);
-        QFontMetrics metrics( font );
-        QRect rect = metrics.boundingRect( timestr );
-        if ( rect.width()  > timeRect.width() ||
-             rect.height() > timeRect.height() ) {
-            break;
+
+        if ( rect.width() > lastBox.width() || 
+            rect.height() > lastBox.height() ) {
+            unscaled = 0;
         }
+        else {
+            ++unscaled;
+        }
+
+        lastBox = rect;
     }
-    m_timeFont = QFont( "Helvetica", lastSize, QFont::Bold);
-    return;
+        
+    resultFont.setPointSize(resultFont.pointSize()-1);
+    return resultFont;
 }
 
 void WorldClock::recalculateTranslation()

@@ -67,6 +67,7 @@ class WorldClock : public Plasma::Applet
         //these are used for sizing & positioning text
         void recalculatePoints();
         void recalculateFonts();
+        QFont calculateFont(const QString &text, const QRect &boundingBox) const;
         void recalculateTranslation();
 
         //for changing zones based on mouse position
