@@ -119,8 +119,9 @@ bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
         PositionProviderStatusAvailable )
     {
         m_gpsTracking->setPosition( m_positionProvider->position() );
-        m_gpsTracking->setPosition( m_gpsTracking->position().latitude(GeoDataCoordinates::Degree),
-                                       m_gpsTracking->position().longitude( GeoDataCoordinates::Degree ) );
+        m_gpsTracking->setPosition( GeoDataCoordinates ( m_gpsTracking->position().longitude(GeoDataCoordinates::Degree),
+                                    m_gpsTracking->position().latitude( GeoDataCoordinates::Degree ),
+                                    m_gpsTracking->position().altitude(), GeoDataCoordinates::Degree ) );
 
 
         if (m_gpsTrackSeg == 0 ) {
@@ -167,10 +168,12 @@ void PositionTracking::draw( ClipPainter *painter,
     QPointF previousPosition;
 
     //FIXME: this is a workaround for dealing with NAN values. we need to protect against that in the future
-    m_gpsCurrentPosition->setPosition( m_gpsCurrentPosition->position().latitude(GeoDataCoordinates::Degree),
-                                       m_gpsCurrentPosition->position().longitude( GeoDataCoordinates::Degree ) );
-    m_gpsPreviousPosition->setPosition( m_gpsPreviousPosition->position().latitude(GeoDataCoordinates::Degree),
-                                       m_gpsPreviousPosition->position().longitude( GeoDataCoordinates::Degree ) );
+    m_gpsCurrentPosition->setPosition( GeoDataCoordinates ( m_gpsCurrentPosition->position().longitude(GeoDataCoordinates::Degree),
+                                       m_gpsCurrentPosition->position().latitude( GeoDataCoordinates::Degree ),
+                                       m_gpsCurrentPosition->position().altitude(), GeoDataCoordinates::Degree ) );
+    m_gpsPreviousPosition->setPosition( GeoDataCoordinates ( m_gpsPreviousPosition->position().longitude(GeoDataCoordinates::Degree),
+                                       m_gpsPreviousPosition->position().latitude( GeoDataCoordinates::Degree ),
+                                       m_gpsPreviousPosition->position().altitude(), GeoDataCoordinates::Degree) );
 
 
     m_gpsCurrentPosition->getPixelPos( canvasSize, viewParams, &position );
