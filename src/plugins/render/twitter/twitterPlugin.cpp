@@ -74,7 +74,7 @@ void twitterPlugin::initialize()
     m_storagePolicy = new CacheStoragePolicy(MarbleDirs::localPath() + "/cache/");
     m_downloadManager = new HttpDownloadManager(QUrl("http://twiter.com"), m_storagePolicy);
     downloadtwitter(0, 0, 0.0, 0.0, 0.0, 0.0);
-     qDebug() << "twitter plugin was started";
+     mDebug() << "twitter plugin was started";
 }
 
 bool twitterPlugin::isInitialized() const
@@ -111,10 +111,10 @@ void twitterPlugin::slotJsonDownloadComplete(QString relativeUrlString, QString 
 {
 static int counter=0;
 twitterStructure temp;
-//qDebug()<<"::::"<<temp.;
+//mDebug()<<"::::"<<temp.;
 //temp.twit = parsedData[counter].text ;
  parsedData = twitterJsonParser.parseAllObjects(QString::fromUtf8(m_storagePolicy->data(id)), 20);
-qDebug()<<"::::::::::::::::slot"<<parsedData[0].text;
+mDebug()<<"::::::::::::::::slot"<<parsedData[0].text;
     disconnect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotJsonDownloadComplete(QString , QString)));
 
     connect(m_downloadManager, SIGNAL(downloadComplete(QString, QString)), this, SLOT(slotGeoCodingReplyRecieved(QString , QString)));
@@ -129,7 +129,7 @@ qDebug()<<"::::::::::::::::slot"<<parsedData[0].text;
 
 void twitterPlugin::downloadtwitter(int rangeFrom , int rangeTo , qreal east , qreal west , qreal north , qreal south)
 {
-qDebug()<<"::::::downloading"<<rangeFrom ;
+mDebug()<<"::::::downloading"<<rangeFrom ;
 /** to use identi.ca line also */
     m_downloadManager->addJob(QUrl("http://twitter.com/statuses/public_timeline.json"), "twitter", "twitter");
 //    m_downloadManager->addJob(QUrl("http://identi.ca/api/statuses/public_timeline.json"), "identica", "identica");
@@ -142,7 +142,7 @@ qDebug()<<"::::::downloading"<<rangeFrom ;
 void twitterPlugin::findLatLonOfStreetAddress(QString streetAddress)
 {
     m_downloadManager->addJob("http://maps.google.com/maps/geo?q=" + streetAddress + "&output=json&key=ABQIAAAASD_v8YRzG0tBD18730KjmRTxoHoIpYL45xcSRJH0O7cH64DuXRT7rQeRcgCLAhjkteQ8vkWAATM_JQ", streetAddress, streetAddress);
-    qDebug() << "twitter added Geo Coding job for " << streetAddress;
+    mDebug() << "twitter added Geo Coding job for " << streetAddress;
 }
 
 void twitterPlugin::slotGeoCodingReplyRecieved(QString relativeUrlString, QString id)
@@ -156,7 +156,7 @@ void twitterPlugin::slotGeoCodingReplyRecieved(QString relativeUrlString, QStrin
     twitterData.location = GeoDataCoordinates(geoCodedData.lat, geoCodedData.lon, 1.0, GeoDataCoordinates::Degree);
    twitsWithLocation.append(twitterData);
   localCountOfTwitts ++;
-qDebug()<<"::::::::::::::::::::twitter count has value == " << localCountOfTwitts;
+mDebug()<<"::::::::::::::::::::twitter count has value == " << localCountOfTwitts;
     if (localCountOfTwitts >= 1)
         privateFlagForRenderingTwitts = 1;//1 means unblock
 }

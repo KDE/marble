@@ -80,7 +80,7 @@ bool StarsPlugin::isInitialized () const
 }
 
 void StarsPlugin::loadStars() {
-    qDebug() << Q_FUNC_INFO;
+    mDebug() << Q_FUNC_INFO;
     // Load star data
     m_stars.clear();
 
@@ -98,7 +98,7 @@ void StarsPlugin::loadStars() {
     qint32 version;
     in >> version;
     if ( version > 001 ) {
-        qDebug() << "stars.dat: file too new.";
+        mDebug() << "stars.dat: file too new.";
         return;
     }
     double ra;
@@ -111,7 +111,7 @@ void StarsPlugin::loadStars() {
         in >> mag;
         StarPoint star( (qreal)(ra), (qreal)(de), (qreal)(mag) );
         m_stars << star;
-//        qDebug() << "RA:" << ra << "DE:" << de << "MAG:" << mag;
+//        mDebug() << "RA:" << ra << "DE:" << de << "MAG:" << mag;
     }
     m_starsLoaded = true;
 }

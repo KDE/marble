@@ -45,19 +45,19 @@ void QNamDownloadJob::downloadProgress( qint64 bytesReceived, qint64 bytesTotal 
 {
     Q_UNUSED(bytesReceived);
     Q_UNUSED(bytesTotal);
-//     qDebug() << "downloadProgress" << destinationFileName()
+//     mDebug() << "downloadProgress" << destinationFileName()
 //              << bytesReceived << '/' << bytesTotal;
 }
 
 void QNamDownloadJob::error( QNetworkReply::NetworkError code )
 {
-    qDebug() << "error" << destinationFileName() << code;
+    mDebug() << "error" << destinationFileName() << code;
 }
 
 void QNamDownloadJob::finished()
 {
     QNetworkReply::NetworkError const error = m_networkReply->error();
-//     qDebug() << "finished" << destinationFileName()
+//     mDebug() << "finished" << destinationFileName()
 //              << "error" << error;
 
     switch ( error ) {

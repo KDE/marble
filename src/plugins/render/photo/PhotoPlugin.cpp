@@ -31,7 +31,7 @@ PhotoPlugin::PhotoPlugin()
      
 void PhotoPlugin::initialize()
 {
-    qDebug() << "PhotoPlugin: Initialize";
+    mDebug() << "PhotoPlugin: Initialize";
     setModel( new PhotoPluginModel( this ) );
     setNumberOfItems( numberOfImagesPerFetch );
     m_isInitialized = true;

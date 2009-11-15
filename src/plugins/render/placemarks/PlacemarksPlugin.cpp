@@ -101,7 +101,7 @@ void PlacemarksPlugin::setBrushStyle( GeoPainter *painter, GeoDataDocument* root
 {
     if( root->style( mapped ) && root->style( mapped )->polyStyle() ) {
         if( m_currentBrush.color() != root->style( mapped )->polyStyle()->color() ) {
-            qDebug() << "BrushColor:" << root->style( mapped )->polyStyle()->color() << m_currentBrush.color();
+            mDebug() << "BrushColor:" << root->style( mapped )->polyStyle()->color() << m_currentBrush.color();
             m_currentBrush.setColor( root->style( mapped )->polyStyle()->color() );
             painter->setBrush( m_currentBrush );
         }
@@ -113,8 +113,8 @@ void PlacemarksPlugin::setPenStyle( GeoPainter *painter, GeoDataDocument* root, 
     if( root->style( mapped ) && root->style( mapped )->lineStyle() ) {
         if( m_currentPen.color() != root->style( mapped )->lineStyle()->color() || 
             m_currentPen.widthF() != root->style( mapped )->lineStyle()->width() ) {
-            qDebug() << "PenColor:" << root->style( mapped )->lineStyle()->color() << m_currentPen.color();
-            qDebug() << "PenWidth:" << root->style( mapped )->lineStyle()->width() << m_currentPen.widthF();
+            mDebug() << "PenColor:" << root->style( mapped )->lineStyle()->color() << m_currentPen.color();
+            mDebug() << "PenWidth:" << root->style( mapped )->lineStyle()->width() << m_currentPen.widthF();
             m_currentPen.setColor( root->style( mapped )->lineStyle()->color() );
             m_currentPen.setWidthF( root->style( mapped )->lineStyle()->width() );
             painter->setPen( m_currentPen );

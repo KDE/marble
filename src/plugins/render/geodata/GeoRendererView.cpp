@@ -156,7 +156,7 @@ void GeoRendererView::setBrushStyle( QString mapped )
     }
 
     if( m_painter->brush().color() != m_root->style( mapped ).polyStyle().color() ) {
-/*        qDebug() << "BrushColor:" 
+/*        mDebug() << "BrushColor:" 
                  << m_root->style( mapped ).polyStyle().color() 
                  << m_painter->brush().color();*/
         m_painter->setBrush( m_root->style( mapped ).polyStyle().color() );
@@ -176,10 +176,10 @@ void GeoRendererView::setPenStyle( QString mapped )
 
     if( m_currentPen.color() != m_root->style( mapped ).lineStyle().color() || 
         m_currentPen.widthF() != m_root->style( mapped ).lineStyle().width() ) {
-/*            qDebug() << "PenColor:" 
+/*            mDebug() << "PenColor:" 
                  << m_root->style( mapped ).lineStyle().color() 
                  << m_currentPen.color();
-        qDebug() << "PenWidth:" 
+        mDebug() << "PenWidth:" 
                  << m_root->style( mapped ).lineStyle().width() 
                  << m_currentPen.widthF();*/
         m_currentPen.setColor( m_root->style( mapped ).lineStyle().color() );

@@ -57,7 +57,7 @@ QList <twitterDataStructure> jsonParser::parseAllObjects(const QString &content 
 
 googleMapDataStructure jsonParser::geoCodingAPIparseObject(QString content)
 {
-    qDebug() << "in geoCodingAPIparseObject";
+    mDebug() << "in geoCodingAPIparseObject";
     QString temp = "var myJSONObject = " + content;
 
     googleMapDataStructure returnStructure;
@@ -67,7 +67,7 @@ googleMapDataStructure jsonParser::geoCodingAPIparseObject(QString content)
 
     returnStructure.lon = myEngine.evaluate("lon()").toNumber();
     returnStructure.lat = myEngine.evaluate("lat()").toNumber();
-    qDebug() << "twitter lan lon text=" << returnStructure.lat << returnStructure.lon;
+    mDebug() << "twitter lan lon text=" << returnStructure.lat << returnStructure.lon;
     return returnStructure;
 }
 

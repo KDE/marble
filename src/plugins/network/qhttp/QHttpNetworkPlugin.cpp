@@ -61,7 +61,7 @@ void QHttpHttpJob::execute()
         cleanupPath = QUrl::toPercentEncoding( sourceUrl().path(), "/", " -" );
     }
 
-//    qDebug() << sourceUrl().host() << "and path=" << cleanupPath;
+//    mDebug() << sourceUrl().host() << "and path=" << cleanupPath;
     QHttpRequestHeader header( QLatin1String( "GET" ), cleanupPath );
     header.setValue( "Connection", "Keep-Alive" );
     header.setValue( "User-Agent", "Marble TinyWebBrowser" );
@@ -76,7 +76,7 @@ void QHttpHttpJob::httpRequestFinished( int requestId, bool error )
         return;
 
     QHttpResponseHeader responseHeader = m_http->lastResponse();
-//     qDebug() << "responseHeader.statusCode():" << responseHeader.statusCode()
+//     mDebug() << "responseHeader.statusCode():" << responseHeader.statusCode()
 //              << responseHeader.reasonPhrase();
 
 //    FIXME: Check whether this assumption is a safe on:

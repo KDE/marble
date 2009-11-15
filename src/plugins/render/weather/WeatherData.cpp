@@ -171,7 +171,7 @@ class WeatherDataPrivate
             return ( temp * 1.8 ) - 459.67;
         }
         else {
-            qDebug() << "Wrong temperature format";
+            mDebug() << "Wrong temperature format";
             return 0;
         }
     }
@@ -188,7 +188,7 @@ class WeatherDataPrivate
             return ( temp + 459.67 ) / 1.8;
         }
         else {
-            qDebug() << "Wrong temperature format";
+            mDebug() << "Wrong temperature format";
             return 0;
         }
     }
@@ -521,7 +521,7 @@ qreal WeatherData::windSpeed( WeatherData::SpeedUnit format ) const
             return 12;
     }
     else {
-        qDebug() << "Wrong speed format";
+        mDebug() << "Wrong speed format";
         return 0;
     }
 }
@@ -571,7 +571,7 @@ void WeatherData::setWindSpeed( qreal speed, WeatherData::SpeedUnit format )
             d->m_windSpeed = 34;
     }
     else {
-        qDebug() << "Wrong speed format";
+        mDebug() << "Wrong speed format";
     }
 }
 
@@ -706,7 +706,7 @@ qreal WeatherData::pressure( WeatherData::PressureUnit format ) const
         return d->m_pressure * HPA2IHG;
     }
     else {
-        qDebug() << "Wrong pressure format";
+        mDebug() << "Wrong pressure format";
         return 0;
     }
 }
@@ -730,7 +730,7 @@ void WeatherData::setPressure( qreal pressure, WeatherData::PressureUnit format 
         d->m_pressure = pressure * IHG2HPA;
     }
     else {
-        qDebug() << "Wrong pressure format";
+        mDebug() << "Wrong pressure format";
     }
 }
 

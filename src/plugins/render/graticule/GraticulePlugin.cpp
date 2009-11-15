@@ -212,7 +212,7 @@ void GraticulePlugin::renderLatitudeLine( GeoPainter *painter, qreal latitude,
 
     // Coordinate line is not displayed inside the viewport
     if ( latitude < fromSouthLat || toNorthLat < latitude ) {
-        // qDebug() << "Lat: Out of View";
+        // mDebug() << "Lat: Out of View";
         return;
     }
 
@@ -261,7 +261,7 @@ void GraticulePlugin::renderLongitudeLine( GeoPainter *painter, qreal longitude,
             longitude < toEastLon && fromWestLon < longitude &&
             fromWestLon != -180.0 && toEastLon != +180.0 )
        ) {
-        // qDebug() << "Lon: Out of View:" << viewLatLonAltBox.toString() << " Crossing: "<< viewLatLonAltBox.crossesDateLine() << "Longitude: " << longitude;
+        // mDebug() << "Lon: Out of View:" << viewLatLonAltBox.toString() << " Crossing: "<< viewLatLonAltBox.crossesDateLine() << "Longitude: " << longitude;
         return;
     }
 

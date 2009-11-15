@@ -25,7 +25,7 @@ GpsdConnection::GpsdConnection( QObject* parent )
         connect( &m_timer, SIGNAL( timeout() ), this, SLOT( update() ) );
         m_timer.start( 1000 );
     } else
-        qDebug() << "Connection to gpsd failed, no position info available.";
+        mDebug() << "Connection to gpsd failed, no position info available.";
 }
 
 void GpsdConnection::update()

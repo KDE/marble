@@ -80,7 +80,7 @@ panoramioDataStructure jsonParser::parseObjectOnPosition(const QString &content 
         dataStorage.upload_date = QDate( 1970,     1,   1 );
     }
 
-//     qDebug()<<":::::::"<<__func__<<myEngine.evaluate("longitude(x)").toNumber();
+//     mDebug()<<":::::::"<<__func__<<myEngine.evaluate("longitude(x)").toNumber();
     return dataStorage;
 }
 

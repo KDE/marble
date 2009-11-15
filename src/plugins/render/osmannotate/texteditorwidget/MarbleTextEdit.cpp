@@ -11,9 +11,9 @@ MarbleTextEdit::MarbleTextEdit(QWidget * parent)
 void MarbleTextEdit::resizeEvent ( QResizeEvent * event )
 {
     if( viewport()->size().height() > this->size().height() ) {
-        qDebug() << "Viewport Bigger than widget!!!!!!";
+        mDebug() << "Viewport Bigger than widget!!!!!!";
     } else {
-        qDebug() << "viewport Smaller than widget";
+        mDebug() << "viewport Smaller than widget";
         this->resize( viewport()->size() );
     }
     QTextEdit::resizeEvent( event );

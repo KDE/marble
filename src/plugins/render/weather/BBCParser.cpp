@@ -252,7 +252,7 @@ void BBCParser::readDescription( WeatherData *data )
                     data->setWindDirection( windDirections.value( wind ) );
                 }
                 else {
-                    qDebug() << "UNHANDLED WIND DIRECTION, PLEASE REPORT: " << wind;
+                    mDebug() << "UNHANDLED WIND DIRECTION, PLEASE REPORT: " << wind;
                 }
             }
 
@@ -288,7 +288,7 @@ void BBCParser::readDescription( WeatherData *data )
                     data->setPressureDevelopment( pressureDevelopments.value( pressureDevelopment ) );
                 }
                 else {
-                    qDebug() << "UNHANDLED PRESSURE DEVELOPMENT, PLEASE REPORT: "
+                    mDebug() << "UNHANDLED PRESSURE DEVELOPMENT, PLEASE REPORT: "
                              << pressureDevelopment;
                 }
             }
@@ -303,7 +303,7 @@ void BBCParser::readDescription( WeatherData *data )
                     data->setVisibilty( visibilityStates.value( visibility ) );
                 }
                 else {
-                    qDebug() << "UNHANDLED VISIBILITY, PLEASE REPORT: " << visibility;
+                    mDebug() << "UNHANDLED VISIBILITY, PLEASE REPORT: " << visibility;
                 }
             }
         }
@@ -340,7 +340,7 @@ void BBCParser::readTitle( WeatherData *data )
                     data->setCondition( dayConditions.value( value ) );
                 }
                 else {
-                    qDebug() << "UNHANDLED BBC WEATHER CONDITION, PLEASE REPORT: " << value;
+                    mDebug() << "UNHANDLED BBC WEATHER CONDITION, PLEASE REPORT: " << value;
                 }
 
                 QString dayString = regExp.cap( 1 );

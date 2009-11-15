@@ -15,12 +15,12 @@ void imageWidget::addImage(QPixmap temp)
 
 void imageWidget::paintEvent(QPaintEvent * event )
 {
-qDebug()<<__func__<<"painevent";
+mDebug()<<__func__<<"painevent";
 }
 
 void imageWidget::mousePressEvent ( QMouseEvent * event )
 {
-qDebug()<<__func__<<"mouseevent";
+mDebug()<<__func__<<"mouseevent";
 }
 
 QPixmap * imageWidget::returnPointerToImage()

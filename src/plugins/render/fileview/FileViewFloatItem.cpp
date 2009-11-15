@@ -246,7 +246,7 @@ void FileViewFloatItem::addFile()
 void FileViewFloatItem::removeFile()
 {
     reinterpret_cast<FileViewModel*>(m_fileView->model())->setSelectedIndex( *m_persIndex );
-    qDebug() << m_fileView->model()->data( *m_persIndex, Qt::DisplayRole ).toString();
+    mDebug() << m_fileView->model()->data( *m_persIndex, Qt::DisplayRole ).toString();
     // close selected file
     reinterpret_cast<FileViewModel*>(m_fileView->model())->closeFile();
 }

@@ -34,13 +34,13 @@ GeoNode* OsmNdTagHandler::parse( GeoParser& parser ) const
     //FIXME: problem with the stack implementation
 
     //this should be "way"
-//    qDebug() << Q_FUNC_INFO;
-//    qDebug() << "parent element name:" << parent.first.first;
+//    mDebug() << Q_FUNC_INFO;
+//    mDebug() << "parent element name:" << parent.first.first;
     Q_ASSERT( parent.first.first.compare("way") == 0 );
 
     //this should be set because we know that the containing
     // <way> element did not return 0
-//    qDebug() << " parent associated node pointer:" << parent.associatedNode();
+//    mDebug() << " parent associated node pointer:" << parent.associatedNode();
 
     Q_ASSERT( parent.associatedNode() );
 

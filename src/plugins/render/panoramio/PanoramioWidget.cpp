@@ -47,7 +47,7 @@ void PanoramioWidget::addDownloadedFile( QString url, QString type )
                                         Qt::SmoothTransformation );
     }
     else {
-        qDebug() << "PanoramioWidget: addDownloadFile can't handle type " << type;
+        mDebug() << "PanoramioWidget: addDownloadFile can't handle type " << type;
     }
 }
 
