@@ -23,7 +23,7 @@ class MARBLE_EXPORT MarbleDebug {
     public:
         static bool enable;
         static QIODevice* nullDevice() { static QIODevice *device = new NullDevice; return device; };
-}
+};
 
 /**
   * an inline function which should replace qDebug()
