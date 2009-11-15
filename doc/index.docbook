@@ -384,7 +384,7 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 <guimenu>View</guimenu>
 <guimenuitem>Clouds</guimenuitem>
 </menuchoice></term>
-<listitem><para><action>Show</action> real-time cloud cover. A real time cloud map that gets updated every 3 hours. It uses GOES, METEOSAT, and GMS satellite imagery downloaded from the Geostationary Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet Project</para></listitem>
+<listitem><para><action>Show</action> real-time cloud cover. A real-time cloud map that gets updated every 3 hours. It uses GOES, METEOSAT, and GMS satellite imagery downloaded from the Geostationary Satellite Imagery page at Dundee University.  Credits: Hari Nair, Xplanet Project</para></listitem>
 </varlistentry>
 
 <varlistentry>
