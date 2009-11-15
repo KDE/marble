@@ -21,13 +21,12 @@
 #include <kparts/part.h>
 #include <kparts/componentfactory.h>
 
-#include <QtCore/QDebug>
-
 // GeoData
 #include <GeoSceneDocument.h>
 #include <GeoSceneHead.h>
 
 // Local dir
+#include "MarbleDebug.h"
 #include "ControlView.h"
 #include "marble_part.h"
 

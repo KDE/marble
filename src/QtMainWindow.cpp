@@ -11,7 +11,7 @@
 
 #include "QtMainWindow.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtCore/QList>
 #include <QtCore/QSettings>
 #include <QtCore/QUrl>

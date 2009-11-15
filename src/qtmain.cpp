@@ -19,6 +19,7 @@
 #include "QtMainWindow.h"
 
 #include "MarbleDirs.h"
+#include "MarbleDebug.h"
 #include "MarbleTest.h"
 
 #ifdef STATIC_BUILD
@@ -87,6 +88,10 @@ int main(int argc, char *argv[])
     int dataPathIndex=0;
 
     for ( int i = 1; i < argc - 1; ++i ) {
+        if ( strcmp( argv[ i ], "--debug-info" ) == 0 )
+        {
+            MarbleDebug::enable = true;
+        }
         if ( strcmp( argv[ i ], "--marbleDataPath" ) == 0 )
         {
             dataPathIndex = i + 1;

@@ -19,10 +19,10 @@
 #include <KGlobal>
 
 #include <QtCore/QFile>
-#include <QtCore/QDebug>
  
 #include "ControlView.h"
 #include "KdeMainWindow.h"
+#include "MarbleDebug.h"
 
 #include "MarbleTest.h"
 
@@ -218,6 +218,7 @@ int main (int argc, char *argv[])
 
     
     KCmdLineOptions  options;
+    options.add( "debug-info", ki18n( "Enable debug output") );
     options.add( "timedemo", ki18n( "Make a time measurement to check performance" ) );
     options.add( "gpsdemo", ki18n( "Check speed of gps drawing" ) );
     options.add( "fps", ki18n( "Show frame rate" ) );
@@ -241,6 +242,12 @@ int main (int argc, char *argv[])
         }
     }
 
+    if ( args->isSet( "debug-info" ) ) {
+        MarbleDebug::enable = true;
+    } else {
+        MarbleDebug::enable = false;
+    }
+    
     MainWindow *window = new MainWindow();
     window->setAttribute( Qt::WA_DeleteOnClose, true );
     window->show();

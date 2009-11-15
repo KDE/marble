@@ -12,12 +12,12 @@
 #include "MarbleTest.h"
 
 #include <QtCore/QCoreApplication>
-#include <QtCore/QDebug>
 #include <QtCore/QTime>
 #include <QtGui/QMessageBox>
 #include <QtGui/QFileDialog>
 
 #include <global.h>
+#include <MarbleDebug.h>
 #include <MarbleWidget.h>
 #include <MarbleModel.h>
 
