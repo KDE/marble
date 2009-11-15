@@ -14,7 +14,7 @@
 #include "OsmElementDictionary.h"
 #include "OsmWayGraphicsItem.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 namespace Marble
 {

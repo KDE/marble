@@ -16,9 +16,7 @@
 #include "FakeWeatherService.h"
 #include "AbstractDataPluginItem.h"
 #include "WeatherItem.h"
-
-// Qt
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 using namespace Marble;
 

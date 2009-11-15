@@ -10,7 +10,7 @@
 
 #include "KIONetworkPlugin.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 #include <klocale.h>
 #include <kio/job.h>

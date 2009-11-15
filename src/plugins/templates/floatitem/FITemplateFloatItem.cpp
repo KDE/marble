@@ -13,13 +13,13 @@
 #include "FITemplateFloatItem.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QRect>
 #include <QtGui/QColor>
 #include <QtGui/QPixmap>
 #include <QtSvg/QSvgRenderer>
 
 // Marble
+#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "GeoPainter.h"
 #include "GeoDataCoordinates.h"

@@ -10,7 +10,7 @@
 
 #include "GpsdConnection.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 
 

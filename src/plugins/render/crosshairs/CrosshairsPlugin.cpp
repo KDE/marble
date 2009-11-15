@@ -10,7 +10,7 @@
 
 #include "CrosshairsPlugin.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include "GeoPainter.h"
 
 #include "ViewportParams.h"

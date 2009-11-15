@@ -21,10 +21,10 @@
 #include "StationListParser.h"
 #include "WeatherData.h"
 #include "WeatherModel.h"
+#include "MarbleDebug.h"
 #include "global.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QList>
 #include <QtCore/QTime>

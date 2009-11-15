@@ -19,9 +19,9 @@
 #include "MarbleLocale.h"
 #include "global.h"
 #include "weatherGlobal.h"
+#include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtGui/QComboBox>
 #include <QtGui/QDialog>
 #include <QtGui/QIcon>

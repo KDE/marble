@@ -10,8 +10,8 @@
 
 #include "GraticulePlugin.h"
 
-#include <QtCore/QDebug>
 #include <QtGui/QBrush>
+#include "MarbleDebug.h"
 #include "GeoPainter.h"
 #include "GeoDataLineString.h"
 #include "Planet.h"

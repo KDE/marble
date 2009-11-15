@@ -19,8 +19,8 @@
 #include "ViewportParams.h"
 #include "MarbleDirs.h"
 #include "TextEditor.h"
+#include "MarbleDebug.h"
 
-#include <QtCore/QDebug>
 #include <QtGui/QPixmap>
 #include <QtGui/QTextEdit>
 #include <QtGui/QPushButton>

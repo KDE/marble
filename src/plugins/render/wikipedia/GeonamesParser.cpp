@@ -14,10 +14,10 @@
 // Marble
 #include "global.h"
 #include "WikipediaItem.h"
+#include "MarbleDebug.h"
 
 // Qt
 #include <QtCore/QByteArray>
-#include <QtCore/QDebug>
 
 using namespace Marble;
 

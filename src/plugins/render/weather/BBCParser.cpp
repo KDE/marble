@@ -15,11 +15,11 @@
 #include "global.h"
 #include "WeatherData.h"
 #include "BBCWeatherItem.h"
+#include "MarbleDebug.h"
 
 // Qt
 #include <QtCore/QByteArray>
 #include <QtCore/QDateTime>
-#include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QMutexLocker>
 #include <QtCore/QRegExp>

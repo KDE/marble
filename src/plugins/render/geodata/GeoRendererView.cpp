@@ -23,11 +23,11 @@
 #include "GeoDataPolyStyle.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "MarbleDebug.h"
 
 #include "GeoPainter.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtGui/QPaintEvent>
 
 using namespace Marble;

@@ -12,9 +12,9 @@
 #include "BBCItemGetter.h"
 #include "BBCStation.h"
 #include "BBCWeatherItem.h"
+#include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QMutexLocker>
 #include <QtCore/QUrl>
 

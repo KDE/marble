@@ -14,12 +14,12 @@
 // Marble
 #include "global.h"
 #include "MarbleDirs.h"
+#include "MarbleDebug.h"
 
 // Qt
 #include <QtCore/QAtomicInt>
 #include <QtCore/QDate>
 #include <QtCore/QDateTime>
-#include <QtCore/QDebug>
 #include <QtCore/QHash>
 #include <QtCore/QLocale>
 #include <QtGui/QIcon>

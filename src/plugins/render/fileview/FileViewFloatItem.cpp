@@ -10,7 +10,6 @@
 
 #include "FileViewFloatItem.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QRect>
 #include <QtCore/QPoint>
 #include <QtGui/QApplication>
@@ -21,6 +20,7 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QSlider>
 
+#include "MarbleDebug.h"
 #include "FileViewModel.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"

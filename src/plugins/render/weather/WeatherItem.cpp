@@ -20,11 +20,11 @@
 #include "LabelGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "TinyWebBrowser.h"
+#include "MarbleDebug.h"
 
 // Qt
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDate>
-#include <QtCore/QDebug>
 #include <QtCore/QHash>
 #include <QtCore/QObject>
 #include <QtCore/QString>

@@ -15,12 +15,12 @@
 //#include <Phonon/MediaObject>
 //#include <Phonon/VideoWidget>
 
-#include <QtCore/QDebug>
 #include <QtGui/QAction>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkRequest>
 
+#include "MarbleDebug.h"
 #include "AbstractProjection.h"
 #include "AreaAnnotation.h"
 #include "GeoDataDocument.h"

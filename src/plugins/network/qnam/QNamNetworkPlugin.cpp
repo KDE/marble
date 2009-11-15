@@ -9,7 +9,7 @@
 //
 #include "QNamNetworkPlugin.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtCore/QString>
 #include <QtCore/QUrl>
 #include <QtNetwork/QNetworkAccessManager>

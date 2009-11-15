@@ -19,9 +19,9 @@
 #include "AbstractDataPluginItem.h"
 #include "GeoDataLatLonAltBox.h"
 #include "MarbleDataFacade.h"
+#include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QHash>
 #include <QtCore/QString>
 #include <QtCore/QUrl>

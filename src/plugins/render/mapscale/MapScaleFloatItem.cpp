@@ -10,10 +10,10 @@
 
 #include "MapScaleFloatItem.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QRect>
 #include <QtGui/QPixmap>
 
+#include "MarbleDebug.h"
 #include "global.h"
 #include "MarbleLocale.h"
 #include "MarbleDataFacade.h"

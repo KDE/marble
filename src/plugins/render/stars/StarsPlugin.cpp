@@ -10,9 +10,9 @@
 
 #include "StarsPlugin.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QRectF>
 #include <QtCore/QDateTime>
+#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleDataFacade.h"
 #include "GeoPainter.h"

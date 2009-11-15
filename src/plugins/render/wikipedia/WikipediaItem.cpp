@@ -13,13 +13,13 @@
 
 // Qt
 #include <QtGui/QAction>
-#include <QtCore/QDebug>
 #include <QtGui/QIcon>
 #include <QtGui/QPixmap>
 #include <QtGui/QMouseEvent>
 #include <QtWebKit/QWebView>
 
 // Marble
+#include "MarbleDebug.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "GeoSceneLayer.h"

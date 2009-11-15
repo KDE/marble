@@ -15,9 +15,9 @@
 #include "WikipediaModel.h"
 #include "PluginAboutDialog.h"
 #include "MarbleDirs.h"
+#include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtGui/QPushButton>
 #include <QtGui/QLabel>
 

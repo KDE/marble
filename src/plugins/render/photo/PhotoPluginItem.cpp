@@ -24,11 +24,11 @@
 #include "MarbleGraphicsGridLayout.h"
 #include "TinyWebBrowser.h"
 #include "ViewportParams.h"
+#include "MarbleDebug.h"
 
 // Qt
 #include <QtGui/QAction>
 #include <QtGui/QIcon>
-#include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QHash>
 #include <QtCore/QUrl>

@@ -14,8 +14,8 @@
 #include "GeoPainter.h"
 #include "OsmNodeGraphicsItem.h"
 #include "OsmNodeTagHandler.h"
+#include "MarbleDebug.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QMap>
 
 namespace Marble

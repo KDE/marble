@@ -14,9 +14,9 @@
 // Marble
 #include "BBCParser.h"
 #include "WeatherData.h"
+#include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QFile>
 #include <QtCore/QTime>
 #include <QtCore/QUrl>

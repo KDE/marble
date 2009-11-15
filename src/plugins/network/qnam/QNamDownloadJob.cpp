@@ -10,7 +10,7 @@
 
 #include "QNamDownloadJob.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkRequest>
 

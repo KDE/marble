@@ -11,13 +11,13 @@
 #include "GeoRendererPlugin.h"
 #include "GeoRendererView.h"
 
-#include <QtCore/QDebug>
 #include <QtGui/QColor>
 #include <QtGui/QBrush>
 #include <QtGui/QPen>
 #include <QtGui/QPixmap>
 #include <QtGui/QRadialGradient>
 
+#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleDataFacade.h"
 #include "MarbleGeoDataModel.h"

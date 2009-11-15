@@ -14,10 +14,10 @@
 // Marble
 #include "AbstractDataPluginItem.h"
 #include "PhotoPluginItem.h"
+#include "MarbleDebug.h"
 
 // Qt
 #include <QtCore/QByteArray>
-#include <QtCore/QDebug>
 
 using namespace Marble;
 

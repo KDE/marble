@@ -10,7 +10,8 @@
 
 #include "TextEditor.h"
 
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
+
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QLineEdit>

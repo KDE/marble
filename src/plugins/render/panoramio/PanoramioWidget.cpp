@@ -11,10 +11,8 @@
 // Self
 #include "PanoramioWidget.h"
 
-// Qt
-#include <QtCore/QDebug>
-
 // Marble
+#include "MarbleDebug.h"
 #include "GeoPainter.h"
 #include "ViewportParams.h"
 #include "GeoSceneLayer.h"

@@ -14,7 +14,7 @@
 #include "PhotoPluginModel.h"
 
 // Marble
-#include <QtCore/QDebug>
+#include "MarbleDebug.h"
 
 using namespace Marble;
 

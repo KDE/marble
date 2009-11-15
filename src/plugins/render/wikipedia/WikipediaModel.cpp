@@ -21,9 +21,9 @@
 #include "MarbleDirs.h"
 #include "WikipediaItem.h"
 #include "MarbleLocale.h"
+#include "MarbleDebug.h"
 
 // Qt
-#include <QtCore/QDebug>
 #include <QtCore/QUrl>
 #include <QtCore/QString>
 #include <QtGui/QIcon>
