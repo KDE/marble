@@ -14,6 +14,7 @@ set( tilecreator_SRCS
             ../lib/geodata/scene/GeoSceneTexture.cpp
             ../lib/geodata/scene/GeoSceneLayer.cpp
             ../lib/MarbleDirs.cpp
+            ../lib/MarbleDebug.cpp
             main.cpp
             tccore.cpp
 )
