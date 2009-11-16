@@ -253,12 +253,10 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
         bool download = false;
         bool currentTileAvailable = false;
 
-        TextureTile *currentTile = 0;
-        TileId currentTileId( currentLevel, (int)(currentX), (int)(currentY) );
-
         // Check whether the current tile id is available in the CACHE:
         if ( tileCache ) {
-            currentTile = tileCache->take( currentTileId );
+            TileId currentTileId( currentLevel, (int)(currentX), (int)(currentY) );
+            TextureTile *currentTile = tileCache->take( currentTileId );
 
             if ( currentTile ) {
                 // the tile was in the cache, but is it up to date?
@@ -266,16 +264,14 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
                 if ( lastModified.secsTo( now ) < textureLayer->expire()) {
                     temptile = currentTile->rawtile();
                     currentTileAvailable = true;
-                } else {
-                    delete currentTile;
-                    currentTile = 0;
                 }
+                delete currentTile;
             }
         }
         // If the current tile id is not in the cache or if it was 
         // in the cache but has expired load from DISK:
 
-        if ( !currentTile ) {
+        if ( temptile.isNull() ) {
             QString relfilename =
                 TileLoaderHelper::relativeTileFileName( textureLayer, currentLevel,
                                                         (int)(currentX), (int)(currentY) );
@@ -309,6 +305,7 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
                 //          << "format:" << temptile.format()
                 //          << "bytesPerLine:" << temptile.bytesPerLine()
                 //          << "numBytes:" << temptile.numBytes() ;
+                download = temptile.isNull();
                 currentTileAvailable = true;
             }
         }
