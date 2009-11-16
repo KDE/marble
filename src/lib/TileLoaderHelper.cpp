@@ -93,8 +93,11 @@ QUrl TileLoaderHelper::downloadUrl( GeoSceneTexture *textureLayer, int zoomLevel
             break;
 
         case GeoSceneTexture::Custom:
-            mDebug() << "Warning: unhandled enum value GeoSceneTexture::Custom"
-                     << "in TileLoaderHelper::downloadUrl()";
+            path += textureLayer->customStorageLayout();
+            path.replace( "{zoomLevel}", QString::number( zoomLevel ) );
+            path.replace( "{suffix}", suffix );
+            path.replace( "{x}", QString::number( x ) );
+            path.replace( "{y}", QString::number( y ) );
             break;
         }
         tileUrl.setPath( path );
@@ -127,8 +130,12 @@ QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture *textureLayer, i
             break;
 
         case GeoSceneTexture::Custom:
-            mDebug() << "Warning: unhandled enum value GeoSceneTexture::Custom"
-                     << "in TileLoaderHelper::relativeTileFileName()";
+            relFileName = QString( "%1/%2/%3/%4.%5" )
+                .arg( themeStr( textureLayer ) )
+                .arg( level )
+                .arg( x )
+                .arg( y )
+                .arg( suffix );
             break;
         }
     }
