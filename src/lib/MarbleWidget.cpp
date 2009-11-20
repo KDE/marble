@@ -162,6 +162,7 @@ void MarbleWidgetPrivate::construct()
     m_widget->setMinimumSize( 200, 300 );
     m_widget->setFocusPolicy( Qt::WheelFocus );
     m_widget->setFocus( Qt::OtherFocusReason );
+    m_widget->setAttribute( Qt::WA_AcceptTouchEvents );
 
     // Initialize the map and forward some signals.
     m_map->setSize( m_widget->width(), m_widget->height() );

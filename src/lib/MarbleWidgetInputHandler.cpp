@@ -22,6 +22,7 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QRubberBand>
 #include <QtGui/QToolTip>
+#include <QTouchEvent>
 
 #include "global.h"
 #include "MarbleDebug.h"
@@ -553,6 +554,30 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             m_widget->zoomViewBy( (int)(wheelevt->delta() / 3) );
             m_mouseWheelTimer->start( 400 );
             return true;
+        } else if ( e->type() == QEvent::TouchBegin ||
+                    e->type() == QEvent::TouchUpdate ||
+                    e->type() == QEvent::TouchEnd) {
+
+            QList<QTouchEvent::TouchPoint> touchPoints = static_cast<QTouchEvent *>( e )->touchPoints();
+            if (touchPoints.count() == 2) {
+                const QTouchEvent::TouchPoint &touchPoint0 = touchPoints.first();
+                const QTouchEvent::TouchPoint &touchPoint1 = touchPoints.last();
+                const QLineF line0(touchPoint0.lastPos(), touchPoint1.lastPos());
+                const QLineF line1(touchPoint0.pos(), touchPoint1.pos());
+                //scalefator is the ratio the view will be scaled compared to now,
+                // 1:the same, 2: the double, 0.5: half
+                qreal scaleFactor = 1;
+
+                if (line0.length() > 0) {
+                    scaleFactor = line1.length() / line0.length();
+                }
+
+                m_widget->setViewContext( Marble::Animation );
+
+                //convert the scaleFactor to be 0: the same: < 0: smaller, > 0: bigger and make it bigger by multiplying for an arbitrary big value
+                m_widget->zoomViewBy( (scaleFactor-1)*200);
+                m_mouseWheelTimer->start( 400 );
+            }
         }
         else
             return false;
