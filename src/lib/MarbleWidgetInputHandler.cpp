@@ -554,9 +554,11 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             m_widget->zoomViewBy( (int)(wheelevt->delta() / 3) );
             m_mouseWheelTimer->start( 400 );
             return true;
-        } else if ( e->type() == QEvent::TouchBegin ||
-                    e->type() == QEvent::TouchUpdate ||
-                    e->type() == QEvent::TouchEnd) {
+        }
+#if QT_VERSION >= 0x40600
+        else if ( e->type() == QEvent::TouchBegin ||
+                  e->type() == QEvent::TouchUpdate ||
+                  e->type() == QEvent::TouchEnd) {
 
             QList<QTouchEvent::TouchPoint> touchPoints = static_cast<QTouchEvent *>( e )->touchPoints();
             if (touchPoints.count() == 2) {
@@ -579,6 +581,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 m_mouseWheelTimer->start( 400 );
             }
         }
+#endif
         else
             return false;
     }
