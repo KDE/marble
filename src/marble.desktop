@@ -1,5 +1,6 @@
 [Desktop Entry]
 Type=Application
+TryExec=marble
 Exec=marble
 Name=Marble
 Name[bg]=Marble
