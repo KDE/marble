@@ -104,7 +104,7 @@
          <para>
             Zoom in and out by moving the vertical slider up and down. If your mouse has got a mouse 
             wheel you can use that one instead - or you just hold the &LMB; and the &RMB; down both at once while moving the mouse up and down.
-            Changing the zoom level step by step can be done via the <guilabel>Zoom In</guilabel> and <guilabel>Zoom Out</guilabel> buttons which are placed above and below the zoom slider (or using the <keycap>+</keycap> and <keycap>-</keycap> keys on your keyboard.
+            Changing the zoom level step by step can be done via the <guilabel>Zoom In</guilabel> and <guilabel>Zoom Out</guilabel> buttons which are placed above and below the zoom slider (or using the <keycap>+</keycap> and <keycap>-</keycap> keys on your keyboard).
          </para>
          <para>
             Depending on the map's resolution zooming in will provide you with more detail. Smaller cities will appear and using the topographic map you might notice that coastlines are provided as vector graphics.
