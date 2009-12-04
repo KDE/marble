@@ -27,9 +27,9 @@ class GeoDataAccuracy
 #include <GeoDataAccuracy.h>
 %End
 
-public:
 
-    enum 
+public:
+    enum
     {
         none,
         Country,
@@ -43,8 +43,10 @@ public:
 //ig    Marble::GeoDataAccuracy::anonymous level;
     qreal horizontal;
     qreal vertical;
-};   // GeoDataAccuracy
+};
+// GeoDataAccuracy
 
-};   // Marble
+};
+// Marble
 
 

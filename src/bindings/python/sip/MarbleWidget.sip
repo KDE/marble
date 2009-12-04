@@ -29,16 +29,7 @@ public:
     explicit                MarbleWidget (Marble::MarbleMap* map, QWidget* parent /TransferThis/ = 0);
     Marble::MarbleMap*      map () const;
     Marble::MarbleModel*    model () const;
-
-// MarbleWidgetInputHandler isn't an exported class
-//ig    void                    setInputHandler (Marble::MarbleWidgetInputHandler* handler);
-
-//mt undefined symbol: HttpDownloadManager* downloadManager -- need mapped type?
-//mt     void               setDownloadManager (HttpDownloadManager* downloadManager);
-
-
     const QRegion           activeRegion ();
-    const QRegion           projectedRegion ();
     int                     radius () const;
     void                    setRadius (int radius);
     int                     zoom () const;
@@ -92,19 +83,7 @@ public:
     QList<Marble::AbstractFloatItem*>  floatItems () const;
     Marble::Projection      projection () const;
     QString                 mapThemeId () const;
-
-
-//mt undefined symbol: GeoSceneDocument* None -- need mapped type?
-//mt     Marble::GeoSceneDocument*  mapTheme () const;
-
-
-
-
-//mt undefined symbol: GpxFileModel* None -- need mapped type?
-//mt     GpxFileModel*      gpxFileModel ();
-
-
-//ig     FileViewModel*     fileViewModel () const;
+//ig    FileViewModel*          fileViewModel () const;
     Marble::MapQuality      mapQuality (Marble::ViewContext = Marble::Still);
     Marble::ViewContext     viewContext () const;
     bool                    animationsEnabled () const;
@@ -114,8 +93,6 @@ public:
     void                    setDefaultFont (const QFont& font);
     void                    updateSun ();
     void                    centerSun ();
-    void                    enableInput ();
-    void                    disableInput ();
     void                    zoomView (int zoom);
     void                    zoomViewBy (int zoomStep);
     void                    zoomIn ();
@@ -184,12 +161,6 @@ signals:
     void                    timeout ();
     void                    framesPerSecond (qreal fps);
 
-
-//mt undefined symbol: QList<double>& None -- need mapped type?
-//mt     void               regionSelected (const QList<double>&);
-
-
-
 protected:
     void                    leaveEvent (QEvent* event);
     void                    paintEvent (QPaintEvent* event);
@@ -198,10 +169,26 @@ protected:
     void                    connectNotify (const char* signal);
     void                    disconnectNotify (const char* signal);
 
-private:
-                            MarbleWidget (const Marble::MarbleWidget&);
-};   // MarbleWidget
+public:
+    virtual ~MarbleWidget ();
+//ig    MarbleWidgetInputHandler*  inputHandler () const;
+//ig    void                    setInputHandler (MarbleWidgetInputHandler* handler);
+    const QRegion           mapRegion ();
+    bool                    screenCoordinates (qreal lon, qreal lat, qreal& x, qreal& y);
+    void                    readPluginSettings (QSettings& settings);
+    void                    writePluginSettings (QSettings& settings) const;
+//ig    Marble::GeoSceneDocument*  mapTheme () const;
+//ig    GpxFileModel*           gpxFileModel ();
+    void                    setInputEnabled (bool);
+    void                    centerOn (const Marble::GeoDataLatLonBox& box, bool animated = 0);
+    void                    scheduleRepaint (QRegion dirtyRegion);
+signals:
+//ig    void                    regionSelected (const QList<double>&);
+    void                    pluginSettingsChanged ();
+};
+// MarbleWidget
 
-};   // Marble
+};
+// Marble
 
 

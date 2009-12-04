@@ -37,8 +37,12 @@ public:
     virtual int             childCount ();
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& steam);
-};   // GeoDataObject
+    virtual ~GeoDataObject ();
+    virtual QString         nodeType () const;
+};
+// GeoDataObject
 
-};   // Marble
+};
+// Marble
 
 

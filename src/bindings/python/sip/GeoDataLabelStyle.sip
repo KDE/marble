@@ -24,8 +24,8 @@ class GeoDataLabelStyle : Marble::GeoDataColorStyle
 #include <GeoDataLabelStyle.h>
 %End
 
-public:
 
+public:
     enum Alignment
     {
         Corner,
@@ -43,8 +43,12 @@ public:
     QFont                   font () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-};   // GeoDataLabelStyle
+    ~GeoDataLabelStyle ();
+    virtual QString         nodeType () const;
+};
+// GeoDataLabelStyle
 
-};   // Marble
+};
+// Marble
 
 

@@ -30,15 +30,19 @@ public:
     qreal                   value () const;
 
 //FIXME implementation is missing.
-//    Marble::Dimension       dimension () const;
+//ig    Marble::Dimension       dimension () const;
     void                    setValue (qreal newvalue);
     void                    setDimension (Marble::Dimension dimension);
 
 signals:
     void                    dimensionChanged (Marble::Dimension dimension);
     void                    valueChanged (qreal value);
-};   // LatLonEdit
+public:
+    ~LatLonEdit ();
+};
+// LatLonEdit
 
-};   // Marble
+};
+// Marble
 
 

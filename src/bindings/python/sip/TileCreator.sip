@@ -34,10 +34,12 @@ protected:
 signals:
     void                    progress (int value);
 
-private:
-                            TileCreator (const Marble::TileCreator&);
-};   // TileCreator
+public:
+    virtual ~TileCreator ();
+};
+// TileCreator
 
-};   // Marble
+};
+// Marble
 
 

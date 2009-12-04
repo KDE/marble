@@ -31,9 +31,12 @@ public:
     virtual void            unpack (QDataStream& stream);
                             GeoDataStyleSelector ();
                             GeoDataStyleSelector (const Marble::GeoDataStyleSelector& other);
-                            ~GeoDataStyleSelector ();
-};   // GeoDataStyleSelector
+    ~GeoDataStyleSelector ();
+    virtual QString         nodeType () const;
+};
+// GeoDataStyleSelector
 
-};   // Marble
+};
+// Marble
 
 

@@ -24,7 +24,6 @@ class MarbleDataFacade /Abstract/
 #include <MarbleDataFacade.h>
 %End
 
-public:
 
 
 public:
@@ -33,24 +32,15 @@ public:
     const Marble::Planet*   planet () const;
     QDateTime               dateTime () const;
     QString                 target () const;
+    ~MarbleDataFacade ();
+//ig    MarbleGeoDataModel*     geoDataModel ();
+//ig    MarbleGeometryModel*    geometryModel ();
+//ig    MarblePlacemarkModel*   placemarkModel ();
+//ig    FileViewModel*          fileViewModel () const;
+};
+// MarbleDataFacade
 
-
-//mt undefined symbol: MarbleGeoDataModel* None -- need mapped type?
-//mt     MarbleGeoDataModel*  geoDataModel ();
-
-
-    QAbstractItemModel*     renderModel ();
-
-
-//mt undefined symbol: FileViewModel* None -- need mapped type?
-//mt     FileViewModel*     fileViewModel () const;
-
-
-
-private:
-                            MarbleDataFacade (const Marble::MarbleDataFacade&);
-};   // MarbleDataFacade
-
-};   // Marble
+};
+// Marble
 
 

@@ -27,7 +27,6 @@ class GeoDataDocument : Marble::GeoDocument, Marble::GeoDataContainer
 
 public:
                             GeoDataDocument ();
-                            GeoDataDocument (Marble::GeoDataFeature& other);
                             GeoDataDocument (const Marble::GeoDataDocument& other);
     virtual bool            isGeoDataDocument () const;
     QString                 fileName () const;
@@ -42,9 +41,13 @@ public:
     QList<Marble::GeoDataStyleMap>  styleMaps () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-    virtual EnumFeatureId   featureId () const;
-};   // GeoDataDocument
+                            GeoDataDocument (const Marble::GeoDataFeature& other);
+    ~GeoDataDocument ();
+    virtual QString         nodeType () const;
+};
+// GeoDataDocument
 
-};   // Marble
+};
+// Marble
 
 

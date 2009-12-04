@@ -24,8 +24,8 @@ class GeoDataHotSpot : Marble::GeoDataObject
 #include <GeoDataHotSpot.h>
 %End
 
-public:
 
+public:
     enum Units
     {
         Fraction,
@@ -39,8 +39,12 @@ public:
     void                    setHotSpot (const QPointF& hotSpot = QPointF(0.5,0.5), Marble::GeoDataHotSpot::Units xunits = Marble::GeoDataHotSpot::Fraction, Marble::GeoDataHotSpot::Units yunits = Marble::GeoDataHotSpot::Fraction);
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-};   // GeoDataHotSpot
+    ~GeoDataHotSpot ();
+    virtual QString         nodeType () const;
+};
+// GeoDataHotSpot
 
-};   // Marble
+};
+// Marble
 
 

@@ -25,8 +25,8 @@ class GeoDataCoordinates
 %End
 
 
-public:
 
+public:
     enum Unit
     {
         Radian,
@@ -57,12 +57,11 @@ public:
     int                     detail () const;
     void                    setDetail (const int det);
     const Marble::Quaternion&  quaternion () const;
-    bool                    isAtPole (Marble::Pole) const;
     static Marble::GeoDataCoordinates::Notation  defaultNotation ();
     static void             setDefaultNotation (Marble::GeoDataCoordinates::Notation notation);
-    static qreal            normalizeLon (qreal lon);
-    static qreal            normalizeLat (qreal lat);
-    static void             normalizeLonLat (qreal& lon /in, out/, qreal& lat /in, out/);
+    static qreal            normalizeLon (qreal lon, Marble::GeoDataCoordinates::Unit = Marble::GeoDataCoordinates::Radian);
+    static qreal            normalizeLat (qreal lat, Marble::GeoDataCoordinates::Unit = Marble::GeoDataCoordinates::Radian);
+    static void             normalizeLonLat (qreal& lon /in,out/, qreal& lat /in,out/, Marble::GeoDataCoordinates::Unit = Marble::GeoDataCoordinates::Radian);
     static Marble::GeoDataCoordinates  fromString (const QString& string, bool& successful /out/);
     QString                 toString () const;
     QString                 toString (Marble::GeoDataCoordinates::Notation notation, int precision = -1) const;
@@ -74,8 +73,12 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
     virtual void            detach ();
-};   // GeoDataCoordinates
+    virtual ~GeoDataCoordinates ();
+    bool                    isPole (Marble::Pole = Marble::AnyPole) const;
+};
+// GeoDataCoordinates
 
-};   // Marble
+};
+// Marble
 
 

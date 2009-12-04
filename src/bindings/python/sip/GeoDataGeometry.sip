@@ -43,8 +43,14 @@ public:
     virtual void            unpack (QDataStream& stream);
     void                    detach ();
 
-};   // GeoDataGeometry
+    virtual ~GeoDataGeometry ();
+    virtual QString         nodeType () const;
+private:
+//ig                            GeoDataGeometry (GeoDataGeometryPrivate* priv);
+};
+// GeoDataGeometry
 
-};   // Marble
+};
+// Marble
 
 

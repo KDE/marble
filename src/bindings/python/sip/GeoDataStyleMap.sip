@@ -17,14 +17,13 @@
 
 namespace Marble
 {
-class GeoDataStyleMap : Marble::GeoDataStyleSelector /*, QMap<QString,QString> */
+class GeoDataStyleMap : Marble::GeoDataStyleSelector
 {
 %TypeHeaderCode
 #include <GeoDataStyleMap.h>
 %End
 
 public:
-    QString                 lastKey ();
     void                    setLastKey (QString key);
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
@@ -32,9 +31,15 @@ public:
 //FIXME explicitly add python dict methods.
 
 private:
-                            GeoDataStyleMap (const Marble::GeoDataStyleMap&);
-};   // GeoDataStyleMap
+                            GeoDataStyleMap (const Marble::GeoDataStyleMap& other);
+public:
+    virtual QString         nodeType () const;
+    QString                 lastKey () const;
+    ~GeoDataStyleMap ();
+};
+// GeoDataStyleMap
 
-};   // Marble
+};
+// Marble
 
 

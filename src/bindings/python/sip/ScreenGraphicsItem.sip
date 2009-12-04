@@ -28,14 +28,28 @@ class ScreenGraphicsItem : Marble::MarbleGraphicsItem
 %End
 
 public:
-                            ScreenGraphicsItem ();
-//ig                        ScreenGraphicsItem (ScreenGraphicsItemPrivate* d_ptr);
-    QPoint                  position () const;
-    void                    setPosition (const QPoint& position);
+                            ScreenGraphicsItem (Marble::MarbleGraphicsItem* parent = 0);
+//ig                            ScreenGraphicsItem (ScreenGraphicsItemPrivate* d_ptr);
+    QPointF                 position () const;
 
+
+    enum GraphicsItemFlag
+    {
+        ItemIsMovable
+    };
+    typedef QFlags<Marble::ScreenGraphicsItem::GraphicsItemFlag> GraphicsItemFlags;
+                            ScreenGraphicsItem (const QPointF& position, const QSizeF& size, Marble::MarbleGraphicsItem* parent = 0);
+    virtual ~ScreenGraphicsItem ();
+    void                    setPosition (const QPointF& position);
+    QPointF                 positivePosition () const;
+    virtual void            changeViewport (Marble::ViewportParams* viewport);
+    Marble::ScreenGraphicsItem::GraphicsItemFlags  flags () const;
+    void                    setFlags (Marble::ScreenGraphicsItem::GraphicsItemFlags flags);
 protected:
-     virtual bool       paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0) = 0;
+//ig                            ScreenGraphicsItem (const QPointF& position, const QSizeF& size, ScreenGraphicsItemPrivate* d_ptr);
+    virtual bool            eventFilter (QObject*, QEvent*);
+};
+// ScreenGraphicsItem
 
-};   // ScreenGraphicsItem
-
-};   // Marble
+};
+// Marble

@@ -39,11 +39,14 @@ public:
     static void             setMarbleDataPath (const QString& adaptedPath);
     static void             setMarblePluginPath (const QString& adaptedPath);
     static void             debug ();
-
 private:
-                            MarbleDirs (const Marble::MarbleDirs&);
-};   // MarbleDirs
+//force
+                            MarbleDirs (const Marble::MarbleDirs& other);
+//end
+};
+// MarbleDirs
 
-};   // Marble
+};
+// Marble
 
 

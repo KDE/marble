@@ -26,8 +26,14 @@ class GeoDataLinearRing : Marble::GeoDataLineString
 
 public:
     explicit                GeoDataLinearRing (Marble::TessellationFlags f = Marble::NoTessellation);
-    virtual                 ~GeoDataLinearRing();
+    virtual ~GeoDataLinearRing ();
     virtual bool            isClosed () const;
-};   // GeoDataLinearRing
+                            GeoDataLinearRing (const Marble::GeoDataGeometry& other);
+    virtual QString         nodeType () const;
+    virtual qreal           length (qreal planetRadius) const;
+//ig    virtual QVector<Marble::GeoDataLineString*>  toRangeCorrected () const;
+};
+// GeoDataLinearRing
 
-};   // Marble
+};
+// Marble

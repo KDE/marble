@@ -33,8 +33,8 @@ public:
     QList<Marble::AbstractDataPluginItem*>  whichItemAt (const QPoint& curpos);
 
 protected:
-    virtual void            getAdditionalItems (const Marble::GeoDataLatLonAltBox& box, Marble::MarbleDataFacade* facade, qint32 number = 10) = 0;
-    virtual void            parseFile (const QByteArray& file) = 0;
+    virtual void            getAdditionalItems (const Marble::GeoDataLatLonAltBox& box, Marble::MarbleDataFacade* facade, qint32 number = 10)=0;
+    virtual void            parseFile (const QByteArray& file)=0;
     void                    downloadItemData (const QUrl& url, const QString& type, Marble::AbstractDataPluginItem* item);
     void                    downloadDescriptionFile (const QUrl& url);
     void                    addItemToList (Marble::AbstractDataPluginItem* item);
@@ -44,9 +44,18 @@ protected:
     QString                 generateFilepath (const QString& id, const QString& type) const;
     bool                    fileExists (const QString& fileName) const;
     bool                    fileExists (const QString& id, const QString& type) const;
-    bool                    itemExists (const QString& id);
-};   // AbstractDataPluginModel
+public:
+    virtual ~AbstractDataPluginModel ();
+    void                    setItemSettings (QHash<QString,QVariant> itemSettings);
+protected:
+    Marble::AbstractDataPluginItem*  findItem (const QString& id) const;
+    bool                    itemExists (const QString& id) const;
+signals:
+    void                    itemsUpdated ();
+};
+// AbstractDataPluginModel
 
-};   // Marble
+};
+// Marble
 
 

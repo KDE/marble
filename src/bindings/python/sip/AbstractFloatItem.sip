@@ -29,72 +29,28 @@ class AbstractFloatItem : Marble::RenderPlugin
 
 public:
     explicit                AbstractFloatItem (const QPointF& point = QPointF(10.0,10.0), const QSizeF& size = QSizeF(150.0,50.0));
-    void                    setPosition (const QPointF& position);
-    QPointF                 position () const;
-    QPointF                 positivePosition (const QRectF& viewPort) const;
-    void                    setSize (const QSizeF& size);
-    virtual QSizeF          size () const;
     QPen                    pen () const;
     void                    setPen (const QPen& pen);
-    QBrush                  background () const;
-    void                    setBackground (const QBrush& background);
-    QRectF                  contentRect () const;
-    QRectF                  renderedRect () const;
-    virtual QPainterPath    backgroundShape () const;
-    void                    renderBackground (QPainter*);
-    qreal                   border () const;
-    void                    setBorder (qreal width);
-    QBrush                  borderBrush () const;
-    void                    setBorderBrush (const QBrush& brush);
-    Qt::PenStyle            borderStyle () const;
-    void                    setBorderStyle (Qt::PenStyle);
     QFont                   font () const;
     void                    setFont (const QFont& font);
-    qreal                   margin () const;
-    void                    setMargin (qreal margin);
-    qreal                   marginTop () const;
-    void                    setMarginTop (qreal marginTop);
-    qreal                   marginBottom () const;
-    void                    setMarginBottom (qreal marginBottom);
-    qreal                   marginLeft () const;
-    void                    setMarginLeft (qreal marginLeft);
-    qreal                   marginRight () const;
-    void                    setMarginRight (qreal marginRight);
-    qreal                   padding () const;
-    void                    setPadding (qreal width);
-    bool                    positionLocked () const;
-    void                    setPositionLocked (bool enabled);
-    virtual bool            needsUpdate (Marble::ViewportParams* viewport);
-    bool                    pixmapCacheEnabled () const;
-    void                    setPixmapCacheEnabled (bool enabled);
-
-
-//mt undefined symbol: GeoSceneLayer* layer -- need mapped type?
-//mt     bool               render (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& pos = "FLOAT_ITEM", GeoSceneLayer* layer = 0);
-
-
-
-
-//mt undefined symbol: GeoSceneLayer* layer -- need mapped type?
-//mt     virtual bool       renderFloatItem (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, GeoSceneLayer* layer = 0);
-
-
-
-
-//mt undefined symbol: GeoSceneLayer* layer -- need mapped type?
-//mt     virtual bool       renderOnMap (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, GeoSceneLayer* layer = 0);
-
-
+    void                    setPositionLocked (bool lock);
     virtual QString         renderPolicy () const;
     virtual QStringList     renderPosition () const;
 
 protected:
-    bool                    eventFilter (QObject*, QEvent*);
+    bool                    eventFilter (QObject* object, QEvent* e);
 
-private:
-                            AbstractFloatItem (const Marble::AbstractFloatItem&);
-};   // AbstractFloatItem
+public:
+    virtual ~AbstractFloatItem ();
+    bool                    render (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos = "FLOAT_ITEM", Marble::GeoSceneLayer* layer = 0);
+    virtual bool            renderOnMap (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0);
+    void                    setVisible (bool visible);
+    bool                    visible () const;
+    bool                    positionLocked ();
+};
+// AbstractFloatItem
 
-};   // Marble
+};
+// Marble
 
 

@@ -39,8 +39,13 @@ public:
     virtual void            unpack (QDataStream& stream);
     virtual void            detach ();
 
-};   // GeoDataPoint
+                            GeoDataPoint (const Marble::GeoDataCoordinates& other);
+    ~GeoDataPoint ();
+    virtual QString         nodeType () const;
+};
+// GeoDataPoint
 
-};   // Marble
+};
+// Marble
 
 

@@ -32,13 +32,7 @@ public:
     QStringList             backendTypes () const;
     QString                 renderPolicy () const;
     QStringList             renderPosition () const;
-
-
-//mt undefined symbol: GeoSceneLayer* layer -- need mapped type?
-//mt     bool               render (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos = "NONE", GeoSceneLayer* layer = 0);
-
-
-    virtual void            initialize () = 0;
+    virtual void            initialize ()=0;
     bool                    isInitialized () const;
     Marble::AbstractDataPluginModel*  model () const;
     void                    setModel (Marble::AbstractDataPluginModel* model);
@@ -47,8 +41,14 @@ public:
     quint32                 numberOfItems () const;
     void                    setNumberOfItems (quint32 number);
     QList<Marble::AbstractDataPluginItem*>  whichItemAt (const QPoint& curpos);
-};   // AbstractDataPlugin
+    virtual ~AbstractDataPlugin ();
+    bool                    render (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos = "NONE", Marble::GeoSceneLayer* layer = 0);
+signals:
+    void                    changedNumberOfItems (quint32 number);
+};
+// AbstractDataPlugin
 
-};   // Marble
+};
+// Marble
 
 

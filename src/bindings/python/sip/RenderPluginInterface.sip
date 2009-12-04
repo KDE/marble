@@ -29,14 +29,16 @@ class RenderPluginInterface : Marble::PluginInterface /Abstract/
 %End
 
 public:
-    virtual Marble::RenderPlugin*  pluginInstance () = 0;
-    virtual QStringList     backendTypes () const = 0;
-    virtual QString         renderPolicy () const = 0;
-    virtual QStringList     renderPosition () const = 0;
-    virtual bool            render (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos = "NONE", Marble::GeoSceneLayer* layer = 0) = 0;
+    virtual Marble::RenderPlugin*  pluginInstance ()=0;
+    virtual QStringList     backendTypes () const=0;
+    virtual QString         renderPolicy () const=0;
+    virtual QStringList     renderPosition () const=0;
+    virtual bool            render (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos = "NONE", Marble::GeoSceneLayer* layer = 0)=0;
 
-};   // RenderPluginInterface
+};
+// RenderPluginInterface
 
-};   // Marble
+};
+// Marble
 
 

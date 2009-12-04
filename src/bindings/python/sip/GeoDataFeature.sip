@@ -116,8 +116,20 @@ public:
     static void             setDefaultFont (const QFont& font);
     virtual void            detach ();
 
-};   // GeoDataFeature
+    virtual ~GeoDataFeature ();
+    virtual QString         nodeType () const;
+    bool                    descriptionIsCDATA () const;
+    void                    setDescriptionCDATA (bool cdata);
+    Marble::GeoDataRegion&  region () const;
+    void                    setRegion (const Marble::GeoDataRegion& region);
+    Marble::GeoDataLookAt*  lookAt () const;
+    void                    setLookAt (Marble::GeoDataLookAt* lookAt);
+protected:
+//ig                            GeoDataFeature (GeoDataFeaturePrivate* priv);
+};
+// GeoDataFeature
 
-};   // Marble
+};
+// Marble
 
 

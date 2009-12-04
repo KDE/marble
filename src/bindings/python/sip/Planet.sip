@@ -62,8 +62,11 @@ public:
     void                    setName (const QString& name);
     void                    setId (const QString& id);
     static QString          name (const QString& id);
-};   // Planet
+    ~Planet ();
+};
+// Planet
 
-};   // Marble
+};
+// Marble
 
 

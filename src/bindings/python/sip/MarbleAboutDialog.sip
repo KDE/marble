@@ -27,10 +27,11 @@ class MarbleAboutDialog : QDialog
 public:
     explicit                MarbleAboutDialog (QWidget* parent /TransferThis/ = 0);
 
-private:
-                            MarbleAboutDialog (const Marble::MarbleAboutDialog&);
-};   // MarbleAboutDialog
+    ~MarbleAboutDialog ();
+};
+// MarbleAboutDialog
 
-};   // Marble
+};
+// Marble
 
 

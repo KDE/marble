@@ -28,15 +28,8 @@ public:
                             ViewParams ();
     Marble::ViewportParams*  viewport ();
     void                    setMapThemeId (const QString&);
-
-//FIXME implementation is missing.
-//    QString                 mapThemeId ();
-
-//mt undefined symbol: GeoSceneDocument* None -- need mapped type?
-//mt     Marble::GeoSceneDocument*  mapTheme ();
-
     Marble::Projection      projection () const;
-    Marble::AbstractProjection*  currentProjection () const;
+//ig    Marble::AbstractProjection*  currentProjection () const;
     void                    setProjection (Marble::Projection newProjection);
     Marble::MapQuality      mapQuality ();
     void                    setMapQuality (Marble::MapQuality);
@@ -47,7 +40,7 @@ public:
     void                    setRadius (int newRadius);
     Marble::Quaternion      planetAxis () const;
     void                    setPlanetAxis (const Marble::Quaternion& newAxis);
-    void               centerCoordinates (qreal& centerLon /out/, qreal& centerLat /out/);
+    void                    centerCoordinates (qreal& centerLon /out/, qreal& centerLat /out/);
     QImage*                 canvasImage () const;
 
 // FIXME const here causes trouble
@@ -69,10 +62,21 @@ public:
     Marble::Quaternion      planetAxisUpdated () const;
     void                    setPlanetAxisUpdated (const Marble::Quaternion&);
 
+    ~ViewParams ();
+//FIXME implementation is missing.
+//ig    QString                 mapThemeId ();
+//ig    Marble::GeoSceneDocument*  mapTheme ();
 private:
+//force
                             ViewParams (const Marble::ViewParams&);
-};   // ViewParams
+//end
+public:
+    void                    setCanvasImage (QImage *);
+    void                    setCoastImage (QImage *);
+};
+// ViewParams
 
-};   // Marble
+};
+// Marble
 
 

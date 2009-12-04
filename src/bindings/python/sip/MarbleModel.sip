@@ -29,59 +29,13 @@ public:
     void                    paintGlobe (Marble::GeoPainter* painter, int width, int height, Marble::ViewParams* viewParams, bool redrawBackground, const QRect& dirtyRect);
     QAbstractItemModel*     placemarkModel () const;
     QItemSelectionModel*    placemarkSelectionModel () const;
-    QAbstractItemModel*     geometryModel () const;
     QString                 mapThemeId () const;
-
-
-//mt undefined symbol: GeoSceneDocument* None -- need mapped type?
-//mt     Marble::GeoSceneDocument*  mapTheme () const;
-
-
-
-
-//mt undefined symbol: GeoSceneDocument* mapTheme -- need mapped type?
-//mt     void               setMapTheme (Marble::GeoSceneDocument* mapTheme, Marble::Projection currentProjection);
-
-
     void                    setupTextureMapper (Marble::Projection projection);
-
-
-//mt undefined symbol: HttpDownloadManager* None -- need mapped type?
-//mt     HttpDownloadManager*  downloadManager () const;
-
-
-
-
-//mt undefined symbol: HttpDownloadManager* downloadManager -- need mapped type?
-//mt     void               setDownloadManager (HttpDownloadManager* downloadManager);
-
-
     void                    addPlacemarkFile (const QString& filename);
     void                    addPlacemarkData (const QString& data, const QString& key = "data");
-    void                    removePlacemarkKey( const QString& key );
+    void                    removePlacemarkKey (const QString& key);
     QVector<QModelIndex>    whichFeatureAt (const QPoint&) const;
-
-
-//mt undefined symbol: PlacemarkLayout* None -- need mapped type?
-//mt     PlacemarkLayout*   placemarkLayout () const;
-
-//mt undefined symbol: VectorComposer* None -- need mapped type?
-//mt     VectorComposer*    vectorComposer () const;
-
-//mt undefined symbol: TextureColorizer* None -- need mapped type?
-//mt     TextureColorizer*  textureColorizer () const;
-
-//mt undefined symbol: AbstractScanlineTextureMapper* None -- need mapped type?
-//mt     AbstractScanlineTextureMapper*  textureMapper () const;
-
-//mt undefined symbol: GpsLayer* None -- need mapped type?
-//mt     GpsLayer*          gpsLayer () const;
-
-//mt undefined symbol: GpxFileModel* None -- need mapped type?
-//mt     GpxFileModel*      gpxFileModel () const;
-
-
-//ig     FileViewModel*     fileViewModel () const;
+//ig    FileViewModel*          fileViewModel () const;
     bool                    showGps () const;
     void                    setShowGps (bool visible);
     void                    startPolling (int time = 1000);
@@ -90,12 +44,6 @@ public:
     QString                 planetName () const;
 //ig    Marble::ExtDateTime*    dateTime () const;
     Marble::SunLocator*     sunLocator () const;
-
-
-//mt undefined symbol: MergedLayerDecorator* None -- need mapped type?
-//mt     MergedLayerDecorator*  layerDecorator () const;
-
-
     quint64                 volatileTileCacheLimit () const;
     QList<Marble::RenderPlugin*>  renderPlugins () const;
     QList<Marble::AbstractFloatItem*>  floatItems () const;
@@ -106,7 +54,7 @@ public:
     void                    clearVolatileTileCache ();
     void                    setVolatileTileCacheLimit (quint64 kiloBytes);
     void                    clearPersistentTileCache ();
-//ig     void               paintTile (TextureTile* tile, int x, int y, int level, Marble::GeoSceneTexture* textureLayer, bool requestTileUpdate);
+//ig    void                    paintTile (TextureTile* tile, int x, int y, int level, Marble::GeoSceneTexture* textureLayer, bool requestTileUpdate);
     void                    update ();
 
 signals:
@@ -115,11 +63,30 @@ signals:
     void                    modelChanged ();
     void                    timeout ();
 
-private:
-                            MarbleModel (const Marble::MarbleModel&);
+public:
+    virtual ~MarbleModel ();
+//ig    Marble::GeoSceneDocument*  mapTheme () const;
+//ig    void                    setMapTheme (Marble::GeoSceneDocument* mapTheme, Marble::Projection currentProjection);
+    void                    setupVectorComposer ();
+//ig    HttpDownloadManager*    downloadManager () const;
+//ig    void                    setDownloadManager (HttpDownloadManager* downloadManager);
+    void                    openGpxFile (const QString& filename);
+//ig    PlacemarkLayout*        placemarkLayout () const;
+//ig    VectorComposer*         vectorComposer () const;
+//ig    TextureColorizer*       textureColorizer () const;
+//ig    AbstractScanlineTextureMapper*  textureMapper () const;
+//ig    GpsLayer*               gpsLayer () const;
+//ig    GpxFileModel*           gpxFileModel () const;
+//ig    MergedLayerDecorator*   layerDecorator () const;
+    void                    reloadMap () const;
+signals:
+    void                    pluginSettingsChanged ();
+    void                    repaintNeeded (QRegion dirtyRegion = QRegion());
+    void                    downloadTile (const QUrl& sourceUrl, const QString& destinationFileName, const QString& id) const;
+};
+// MarbleModel
 
-};   // MarbleModel
-
-};   // Marble
+};
+// Marble
 
 

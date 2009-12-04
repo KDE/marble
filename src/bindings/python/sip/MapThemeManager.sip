@@ -27,20 +27,16 @@ class MapThemeManager : QObject
 public:
     explicit                MapThemeManager (QObject* parent /TransferThis/ = 0);
     QStandardItemModel*     mapThemeModel ();
-
-
-//mt undefined symbol: GeoSceneDocument* None -- need mapped type?
-//mt     static Marble::GeoSceneDocument*  loadMapTheme (const QString& mapThemeStringID);
-
-
     void                    updateMapThemeModel ();
     void                    directoryChanged (const QString& path);
     void                    fileChanged (const QString& path);
 
-private:
-                            MapThemeManager (const Marble::MapThemeManager&);
-};   // MapThemeManager
+    ~MapThemeManager ();
+//ig    static Marble::GeoSceneDocument*  loadMapTheme (const QString& mapThemeStringID);
+};
+// MapThemeManager
 
-};   // Marble
+};
+// Marble
 
 

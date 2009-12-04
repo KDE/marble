@@ -29,7 +29,6 @@ public:
                             GeoDataLatLonBox ();
                             GeoDataLatLonBox (qreal north, qreal south, qreal east, qreal west, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
                             GeoDataLatLonBox (const Marble::GeoDataLatLonBox&);
-    virtual bool            isFolder () const;
     qreal                   north (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
     void                    setNorth (const qreal north, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
     qreal                   south (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
@@ -58,8 +57,14 @@ public:
     virtual bool            isNull () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-};   // GeoDataLatLonBox
+    virtual ~GeoDataLatLonBox ();
+    virtual QString         nodeType () const;
+    virtual Marble::GeoDataCoordinates  center () const;
+    bool                    containsPole (Marble::Pole pole = Marble::AnyPole) const;
+};
+// GeoDataLatLonBox
 
-};   // Marble
+};
+// Marble
 
 

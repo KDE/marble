@@ -23,9 +23,10 @@ class Serializable
 %End
 
 public:
-    virtual void            pack (QDataStream& stream) const = 0;
-    virtual void            unpack (QDataStream& stream) = 0;
-};   // Serializable
+    virtual void            pack (QDataStream& stream) const=0;
+    virtual void            unpack (QDataStream& stream)=0;
+};
+// Serializable
 
 
 enum EnumFeatureId

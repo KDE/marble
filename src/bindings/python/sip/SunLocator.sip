@@ -26,21 +26,7 @@ class SunLocator : QObject /Abstract/
 
 
 public:
-//ig                            SunLocator (Marble::ExtDateTime* dateTime, Marble::Planet* planet);
     qreal                   shading (qreal lon, qreal a, qreal c) const;
-
-
-//io ambiguous symbol: QRgb& pixcol -- specify In, Out or both
-//io     void               shadePixel (QRgb& pixcol, qreal shade) const;
-
-
-
-
-//io ambiguous symbol: QRgb& pixcol -- specify In, Out or both
-//io ambiguous symbol: QRgb& dpixcol -- specify In, Out or both
-//io     void               shadePixelComposite (QRgb& pixcol, QRgb& dpixcol, qreal shade) const;
-
-
     void                    setShow (bool show);
     void                    setCitylights (bool show);
     void                    setCentered (bool show);
@@ -58,12 +44,18 @@ signals:
     void                    updateStars ();
     void                    updateSun ();
     void                    centerSun ();
-    void                    reenableWidgetInput ();
 
-private:
-                            SunLocator (const Marble::SunLocator&);
-};   // SunLocator
+public:
+//ig                            SunLocator (ExtDateTime* dateTime, Marble::Planet* planet);
+    virtual ~SunLocator ();
+    void                    shadePixel (QRgb& pixcol, qreal shade) const;
+    void                    shadePixelComposite (QRgb& pixcol, QRgb& dpixcol, qreal shade) const;
+signals:
+    void                    enableWidgetInput (bool);
+};
+// SunLocator
 
-};   // Marble
+};
+// Marble
 
 

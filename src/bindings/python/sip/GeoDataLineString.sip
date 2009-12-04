@@ -47,25 +47,36 @@ public:
     const Marble::GeoDataCoordinates&  first () const;
 //ig    Marble::GeoDataCoordinates&  last ();
     const Marble::GeoDataCoordinates&  last () const;
-    void                    append (const Marble::GeoDataCoordinates& value);
-    Marble::GeoDataLineString&  operator << (const Marble::GeoDataCoordinates& value);
+    void                    append (const Marble::GeoDataCoordinates& position);
+    Marble::GeoDataLineString&  operator << (const Marble::GeoDataCoordinates& position);
 //ig    QVector<Marble::GeoDataCoordinates>::Iterator  begin ();
 //ig    QVector<Marble::GeoDataCoordinates>::Iterator  end ();
 //ig    QVector<Marble::GeoDataCoordinates>::ConstIterator  constBegin () const;
 //ig    QVector<Marble::GeoDataCoordinates>::ConstIterator  constEnd () const;
     void                    clear ();
-//ig    QVector<Marble::GeoDataCoordinates>::Iterator  erase (QVector<Marble::GeoDataCoordinates>::Iterator pos);
-//ig    QVector<Marble::GeoDataCoordinates>::Iterator  erase (QVector<Marble::GeoDataCoordinates>::Iterator begin, QVector<Marble::GeoDataCoordinates>::Iterator end);
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
 
 protected:
 //ig    Marble::GeoDataLineStringPrivate*  p () const;
-//ig                                       GeoDataLineString (Marble::GeoDataLineStringPrivate* priv);
 
 public:
-                            GeoDataLineString (const Marble::GeoDataLineString&);
-    virtual EnumGeometryId  geometryId () const;
-};   // GeoDataLineString
+    virtual ~GeoDataLineString ();
+    virtual QString         nodeType () const;
+    virtual qreal           length (qreal planetRadius) const;
+//ig    virtual QVector<Marble::GeoDataLineString*>  toRangeCorrected () const;
+    virtual Marble::GeoDataLineString  toNormalized () const;
+    virtual Marble::GeoDataLineString  toPoleCorrected () const;
+//ig    virtual QVector<Marble::GeoDataLineString*>  toDateLineCorrected () const;
+    bool                    isEmpty () const;
+//ig    Marble::GeoDataLineString&  operator << (const Marble::GeoDataLineString& lineString);
+//ig    QVector<GeoDataCoordinates>::Iterator  erase (QVector<GeoDataCoordinates>::Iterator position);
+//ig    QVector<GeoDataCoordinates>::Iterator  erase (QVector<GeoDataCoordinates>::Iterator begin, QVector<GeoDataCoordinates>::Iterator end);
+    void                    remove (int i);
+protected:
+//ig                            GeoDataLineString (GeoDataLineStringPrivate* priv);
+};
+// GeoDataLineString
 
-};   // Marble
+};
+// Marble

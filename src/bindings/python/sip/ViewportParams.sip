@@ -27,7 +27,7 @@ class ViewportParams
 public:
                             ViewportParams ();
     Marble::Projection      projection () const;
-    Marble::AbstractProjection*  currentProjection () const;
+//ig    Marble::AbstractProjection*  currentProjection () const;
     void                    setProjection (Marble::Projection newProjection);
     int                     polarity () const;
     Marble::GeoDataLatLonAltBox  viewLatLonAltBox () const;
@@ -39,8 +39,6 @@ public:
     bool                    globeCoversViewport () const;
     Marble::Quaternion      planetAxis () const;
     bool                    setPlanetAxis (const Marble::Quaternion& newAxis);
-//FIXME
-//    Marble::matrix*         planetAxisMatrix () const;
     int                     width () const;
     int                     height () const;
     QSize                   size () const;
@@ -50,10 +48,18 @@ public:
     void                    centerCoordinates (qreal& centerLon /out/, qreal& centerLat /out/) const;
     bool                    mapCoversViewport () const;
 
+    ~ViewportParams ();
+    bool                    resolves (const Marble::GeoDataLatLonAltBox& latLonAltBox) const;
+//ig    Marble::matrix*         planetAxisMatrix () const;
+    QRegion                 activeRegion () const;
 private:
+//force
                             ViewportParams (const Marble::ViewportParams&);
-};   // ViewportParams
+//end
+};
+// ViewportParams
 
-};   // Marble
+};
+// Marble
 
 

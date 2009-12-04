@@ -21,22 +21,45 @@
 namespace Marble
 {
 
-class PluginInterface
+class PluginInterface /Abstract/
 {
 %TypeHeaderCode
 #include <PluginInterface.h>
 %End
 
 public:
-    virtual QString         name () const = 0;
-    virtual QString         guiString () const = 0;
-    virtual QString         nameId () const = 0;
-    virtual QString         description () const = 0;
-    virtual QIcon           icon () const = 0;
-    virtual void            initialize () = 0;
-    virtual bool            isInitialized () const = 0;
-};   // PluginInterface
+    virtual QString         name () const=0;
+    virtual QString         guiString () const=0;
+    virtual QString         nameId () const=0;
+    virtual QString         description () const=0;
+    virtual QIcon           icon () const=0;
+    virtual void            initialize ()=0;
+    virtual bool            isInitialized () const=0;
+    virtual ~PluginInterface ();
+%ConvertToSubClassCode
+    // CTSCC for subclasses of 'PluginInterface'
+    sipType = NULL;
 
-};   // Marble
+    if (dynamic_cast<Marble::RenderPlugin*>(sipCpp))
+        {
+        sipType = sipType_Marble_RenderPlugin;
+        if (dynamic_cast<Marble::AbstractDataPlugin*>(sipCpp))
+            sipType = sipType_Marble_AbstractDataPlugin;
+        else if (dynamic_cast<Marble::AbstractFloatItem*>(sipCpp))
+            sipType = sipType_Marble_AbstractFloatItem;
+        }
+%End
+};
+// PluginInterface
+
+};
+// Marble
 
 
+%ModuleHeaderCode
+//ctscc
+#include <AbstractDataPlugin.h>
+#include <AbstractFloatItem.h>
+#include <PluginInterface.h>
+#include <RenderPlugin.h>
+%End

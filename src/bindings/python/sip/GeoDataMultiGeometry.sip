@@ -44,12 +44,16 @@ public:
 //ig    QVector<Marble::GeoDataGeometry>::ConstIterator  constEnd () const;
     void                    clear ();
     QVector<Marble::GeoDataGeometry>&  vector () const;
-//ig    QVector<Marble::GeoDataGeometry>::Iterator  erase (QVector<Marble::GeoDataGeometry>::Iterator pos);
-//ig    QVector<Marble::GeoDataGeometry>::Iterator  erase (QVector<Marble::GeoDataGeometry>::Iterator begin, QVector<Marble::GeoDataGeometry>::Iterator end);
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-};   // GeoDataMultiGeometry
+    virtual ~GeoDataMultiGeometry ();
+    virtual QString         nodeType () const;
+//ig    QVector<GeoDataGeometry>::Iterator  erase (QVector<GeoDataGeometry>::Iterator pos);
+//ig    QVector<GeoDataGeometry>::Iterator  erase (QVector<GeoDataGeometry>::Iterator begin, QVector<GeoDataGeometry>::Iterator end);
+};
+// GeoDataMultiGeometry
 
-};   // Marble
+};
+// Marble
 
 

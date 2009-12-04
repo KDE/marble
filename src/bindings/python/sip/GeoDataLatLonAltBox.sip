@@ -27,9 +27,8 @@ class GeoDataLatLonAltBox : Marble::GeoDataLatLonBox
 
 public:
                             GeoDataLatLonAltBox ();
-                            GeoDataLatLonAltBox (const Marble::GeoDataLatLonAltBox&);
-                            GeoDataLatLonAltBox (const Marble::GeoDataLatLonBox&);
-    virtual bool            isFolder () const;
+                            GeoDataLatLonAltBox (const Marble::GeoDataLatLonAltBox& other);
+                            GeoDataLatLonAltBox (const Marble::GeoDataLatLonBox& other);
     qreal                   minAltitude () const;
     void                    setMinAltitude (const qreal minAltitude);
     qreal                   maxAltitude () const;
@@ -45,8 +44,15 @@ public:
     bool                    isNull () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-};   // GeoDataLatLonAltBox
+                            GeoDataLatLonAltBox (const Marble::GeoDataCoordinates& coordinates);
+    virtual ~GeoDataLatLonAltBox ();
+    virtual QString         nodeType () const;
+    virtual Marble::GeoDataCoordinates  center () const;
+};
+// GeoDataLatLonAltBox
 
-};   // Marble
+//ig bool                    operator == (const Marble::GeoDataLatLonAltBox& lhs, const Marble::GeoDataLatLonAltBox& rhs);
+};
+// Marble
 
 

@@ -44,10 +44,12 @@ public:
 protected:
     void                    resizeEvent (QResizeEvent*);
 
-private:
-                            MarbleNavigator (const Marble::MarbleNavigator&);
-};   // MarbleNavigator
+public:
+    ~MarbleNavigator ();
+};
+// MarbleNavigator
 
-};   // Marble
+};
+// Marble
 
 

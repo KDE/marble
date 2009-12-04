@@ -29,7 +29,8 @@ enum TessellationFlag
     Tessellate,
     RespectLatitudeCircle,
     FollowGround,
-    RotationIndicatesFill
+    RotationIndicatesFill,
+    SkipLatLonNormalization
 };
 
 typedef QFlags<Marble::TessellationFlag> TessellationFlags;
@@ -45,8 +46,9 @@ enum Projection
 
 enum DistanceUnit
 {
-    Metric,
-    Imperial
+    NoDistanceUnit,
+    Meter,
+    MilesFeet
 };
 
 
@@ -76,11 +78,11 @@ enum ViewContext
 
 enum MapQuality
 {
-    Outline,
-    Low,
-    Normal,
-    High,
-    Print
+    OutlineQuality,
+    LowQuality,
+    NormalQuality,
+    HighQuality,
+    PrintQuality
 };
 
 
@@ -152,17 +154,30 @@ class MarbleGlobal
 public:
     static Marble::MarbleGlobal*  getInstance ();
 
-
-//mt undefined symbol: MarbleLocale* None -- need mapped type?
-//mt     MarbleLocale*      locale () const;
-
-
-
 private:
                             MarbleGlobal ();
-                            MarbleGlobal (const Marble::MarbleGlobal&);
-};   // MarbleGlobal
+public:
+    ~MarbleGlobal ();
+//ig    MarbleLocale*           locale () const;
+};
+// MarbleGlobal
 
-};   // Marble
+enum MeasureSystem
+{
+    Metric,
+    Imperial
+};
+enum ProxyType
+{
+    HttpProxy,
+    Socks5Proxy
+};
+enum DownloadUsage
+{
+    DownloadBulk,
+    DownloadBrowse
+};
+};
+// Marble
 
 

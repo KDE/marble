@@ -38,8 +38,12 @@ public:
     float                   scale () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-};   // GeoDataIconStyle
+    ~GeoDataIconStyle ();
+    virtual QString         nodeType () const;
+};
+// GeoDataIconStyle
 
-};   // Marble
+};
+// Marble
 
 

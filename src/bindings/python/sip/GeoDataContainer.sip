@@ -49,15 +49,15 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
 
+
+    virtual ~GeoDataContainer ();
+    virtual QString         nodeType () const;
 private:
-//ig                            GeoDataContainer (Marble::GeoDataContainerPrivate* priv);
+//ig                            GeoDataContainer (GeoDataContainerPrivate* priv);
+};
+// GeoDataContainer
 
-public:
-    virtual Marble::GeoDataObject*  child (int);
-    virtual int             childPosition (Marble::GeoDataObject*);
-    virtual int             childCount ();
-};   // GeoDataContainer
-
-};   // Marble
+};
+// Marble
 
 

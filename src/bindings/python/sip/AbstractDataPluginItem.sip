@@ -25,6 +25,7 @@
 #include <AbstractDataPluginItem.h>
 #include <AbstractDataPluginModel.h>
 #include <AbstractFloatItem.h>
+#include <AbstractWorkerThread.h>
 #include <LatLonEdit.h>
 #include <MapThemeManager.h>
 #include <MarbleAboutDialog.h>
@@ -33,9 +34,13 @@
 #include <MarbleModel.h>
 #include <MarbleNavigator.h>
 #include <MarbleWidget.h>
+#include <PluginAboutDialog.h>
+#include <QtMarbleConfigDialog.h>
 #include <RenderPlugin.h>
 #include <SunLocator.h>
 #include <TileCreator.h>
+#include <TinyWebBrowser.h>
+#include <qobject.h>
 %End
 
 namespace Marble
@@ -55,57 +60,70 @@ public:
     void                    setId (const QString& id);
     qreal                   addedAngularResolution () const;
     void                    setAddedAngularResolution (qreal resolution);
-    virtual QAction*        action () = 0;
-    virtual QString         itemType () const = 0;
-    virtual bool            initialized () = 0;
-    virtual void            addDownloadedFile (const QString& url, const QString& type) = 0;
-    virtual bool            paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0) = 0;
-    virtual bool            operator< (const Marble::AbstractDataPluginItem* other) const = 0;
+    virtual QAction*        action ()=0;
+    virtual QString         itemType () const=0;
+    virtual bool            initialized ()=0;
+    virtual void            addDownloadedFile (const QString& url, const QString& type)=0;
+    virtual bool            operator < (const Marble::AbstractDataPluginItem* other) const =0;
 
-public:
 
 //  Subclasses of QObject
 
 %ConvertToSubClassCode
-    sipClass = NULL;
+    // CTSCC for subclasses of 'QObject'
+    sipType = NULL;
 
     if (dynamic_cast<Marble::AbstractDataPluginItem*>(sipCpp))
-        sipClass = sipClass_Marble_AbstractDataPluginItem;
+        sipType = sipType_Marble_AbstractDataPluginItem;
     else if (dynamic_cast<Marble::AbstractDataPluginModel*>(sipCpp))
-        sipClass = sipClass_Marble_AbstractDataPluginModel;
-    else if (dynamic_cast<Marble::LatLonEdit*>(sipCpp))
-        sipClass = sipClass_Marble_LatLonEdit;
+        sipType = sipType_Marble_AbstractDataPluginModel;
     else if (dynamic_cast<Marble::MapThemeManager*>(sipCpp))
-        sipClass = sipClass_Marble_MapThemeManager;
-    else if (dynamic_cast<Marble::MarbleAboutDialog*>(sipCpp))
-        sipClass = sipClass_Marble_MarbleAboutDialog;
-    else if (dynamic_cast<Marble::MarbleControlBox*>(sipCpp))
-        sipClass = sipClass_Marble_MarbleControlBox;
+        sipType = sipType_Marble_MapThemeManager;
     else if (dynamic_cast<Marble::MarbleMap*>(sipCpp))
-        sipClass = sipClass_Marble_MarbleMap;
+        sipType = sipType_Marble_MarbleMap;
     else if (dynamic_cast<Marble::MarbleModel*>(sipCpp))
-        sipClass = sipClass_Marble_MarbleModel;
-    else if (dynamic_cast<Marble::MarbleNavigator*>(sipCpp))
-        sipClass = sipClass_Marble_MarbleNavigator;
-    else if (dynamic_cast<Marble::MarbleWidget*>(sipCpp))
-        sipClass = sipClass_Marble_MarbleWidget;
+        sipType = sipType_Marble_MarbleModel;
     else if (dynamic_cast<Marble::RenderPlugin*>(sipCpp))
         {
-            sipClass = sipClass_Marble_RenderPlugin;
-            if (dynamic_cast<Marble::AbstractDataPlugin*>(sipCpp))
-                sipClass = sipClass_Marble_AbstractDataPlugin;
-            else if (dynamic_cast<Marble::AbstractFloatItem*>(sipCpp))
-                sipClass = sipClass_Marble_AbstractFloatItem;
+        sipType = sipType_Marble_RenderPlugin;
+        if (dynamic_cast<Marble::AbstractDataPlugin*>(sipCpp))
+            sipType = sipType_Marble_AbstractDataPlugin;
+        else if (dynamic_cast<Marble::AbstractFloatItem*>(sipCpp))
+            sipType = sipType_Marble_AbstractFloatItem;
         }
     else if (dynamic_cast<Marble::SunLocator*>(sipCpp))
-        sipClass = sipClass_Marble_SunLocator;
+        sipType = sipType_Marble_SunLocator;
+    else if (dynamic_cast<Marble::AbstractWorkerThread*>(sipCpp))
+        sipType = sipType_Marble_AbstractWorkerThread;
     else if (dynamic_cast<Marble::TileCreator*>(sipCpp))
-        sipClass = sipClass_Marble_TileCreator;
-
+        sipType = sipType_Marble_TileCreator;
+    else if (dynamic_cast<Marble::LatLonEdit*>(sipCpp))
+        sipType = sipType_Marble_LatLonEdit;
+    else if (dynamic_cast<Marble::MarbleControlBox*>(sipCpp))
+        sipType = sipType_Marble_MarbleControlBox;
+    else if (dynamic_cast<Marble::MarbleNavigator*>(sipCpp))
+        sipType = sipType_Marble_MarbleNavigator;
+    else if (dynamic_cast<Marble::MarbleWidget*>(sipCpp))
+        sipType = sipType_Marble_MarbleWidget;
+    else if (dynamic_cast<Marble::MarbleAboutDialog*>(sipCpp))
+        sipType = sipType_Marble_MarbleAboutDialog;
+    else if (dynamic_cast<Marble::PluginAboutDialog*>(sipCpp))
+        sipType = sipType_Marble_PluginAboutDialog;
+    else if (dynamic_cast<Marble::QtMarbleConfigDialog*>(sipCpp))
+        sipType = sipType_Marble_QtMarbleConfigDialog;
+    else if (dynamic_cast<Marble::TinyWebBrowser*>(sipCpp))
+        sipType = sipType_Marble_TinyWebBrowser;
 %End
 
-};   // AbstractDataPluginItem
+    virtual ~AbstractDataPluginItem ();
+    virtual void            setSettings (QHash<QString,QVariant> settings);
+    virtual bool            isGeoProjected ();
+signals:
+    void                    updated ();
+};
+// AbstractDataPluginItem
 
-};   // Marble
+};
+// Marble
 
 

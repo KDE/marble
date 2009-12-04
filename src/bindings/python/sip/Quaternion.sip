@@ -18,7 +18,7 @@
 namespace Marble
 {
 
-enum 
+enum
 {
     Q_X,
     Q_Y,
@@ -63,8 +63,10 @@ public:
 //FIXME    void                    toMatrix (Marble::matrix& m) const;
 //FIXME    void                    rotateAroundAxis (const Marble::matrix& m);
 //FIXME    Marble::xmmfloat v;
-};   // Quaternion
+};
+// Quaternion
 
-};   // Marble
+};
+// Marble
 
 

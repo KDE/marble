@@ -40,16 +40,34 @@ public:
     void                    setEnabled (bool enabled);
     void                    setVisible (bool visible);
 
-signals:
-    void                    valueChanged (QString nameId, bool visible);
 
 protected:
     bool                    eventFilter (QObject*, QEvent*);
 
-private:
-                            RenderPlugin (const Marble::RenderPlugin&);
-};   // RenderPlugin
+public:
+    enum ItemDataRole
+    {
+        NameId,
+        AboutDialogAvailable,
+        ConfigurationDialogAvailable,
+        BackendTypes
+    };
+    virtual ~RenderPlugin ();
+    virtual QList<QActionGroup*>*  actionGroups () const;
+    virtual QList<QActionGroup*>*  toolbarActionGroups () const;
+    virtual QDialog*        aboutDialog () const;
+    virtual QDialog*        configDialog () const;
+    virtual QHash<QString,QVariant>  settings () const;
+    virtual void            setSettings (QHash<QString,QVariant> settings);
+signals:
+    void                    visibilityChanged (QString nameId, bool visible);
+    void                    settingsChanged (QString nameId);
+    void                    actionGroupsChanged ();
+    void                    repaintNeeded (QRegion dirtyRegion);
+};
+// RenderPlugin
 
-};   // Marble
+};
+// Marble
 
 

@@ -49,20 +49,16 @@ signals:
 
 public:
     void                    selectTheme (const QString&);
-    void                    celestialBodySelected (const QString&);
     void                    selectProjection (Marble::Projection projection);
 // FIXME PlacemarkModel header isn't installed
-//    void                    setLocations (MarblePlacemarkModel* locations);
+//ig    void                    setLocations (MarblePlacemarkModel* locations);
     void                    changeZoom (int zoom);
-    void                    disableGpsInput (bool);
-    void                    receiveGpsCoordinates (qreal, qreal, Marble::GeoDataCoordinates::Unit);
     void                    receiveGpsCoordinates (Marble::GeoDataCoordinates in, qreal speed);
     void                    enableFileViewActions ();
     void                    setNavigationTabShown (bool show);
     void                    setLegendTabShown (bool show);
     void                    setMapViewTabShown (bool show);
     void                    setCurrentLocationTabShown (bool show);
-    void                    setCurrentLocation2TabShown (bool show);
     void                    setFileViewTabShown (bool show);
     void                    updateMapThemeView ();
     void                    projectionSelected (int projectionIndex);
@@ -70,10 +66,13 @@ public:
 protected:
     void                    resizeEvent (QResizeEvent*);
 
-private:
-                            MarbleControlBox (const Marble::MarbleControlBox&);
-};   // MarbleControlBox
+public:
+    ~MarbleControlBox ();
+    void                    selectCurrentMapTheme (const QString&);
+};
+// MarbleControlBox
 
-};   // Marble
+};
+// Marble
 
 

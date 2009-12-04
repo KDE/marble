@@ -29,12 +29,6 @@ public:
     explicit                MarbleMap (Marble::MarbleModel* model);
     Marble::MarbleModel*    model () const;
     Marble::ViewParams*     viewParams ();
-
-
-//mt undefined symbol: MeasureTool* None -- need mapped type?
-//mt     MeasureTool*       measureTool ();
-
-
     void                    setSize (int width, int height);
     void                    setSize (QSize size);
     QSize                   size () const;
@@ -138,13 +132,7 @@ public:
     void                    notifyMouseClick (int x, int y);
     void                    updateGps ();
     void                    openGpxFile (QString& filename);
-
-
-//mt undefined symbol: GpxFileModel* None -- need mapped type?
-//mt     GpxFileModel*      gpxFileModel ();
-
-
-//ig     FileViewModel*     fileViewModel () const;
+//ig    FileViewModel*          fileViewModel () const;
     void                    clearPersistentTileCache ();
     void                    setPersistentTileCacheLimit (quint64 kiloBytes);
     void                    clearVolatileTileCache ();
@@ -169,10 +157,17 @@ signals:
 protected:
     virtual void            customPaint (Marble::GeoPainter* painter);
 
-private:
-                            MarbleMap (const Marble::MarbleMap&);
-};   // MarbleMap
+public:
+    virtual ~MarbleMap ();
+//ig    MeasureTool*            measureTool ();
+    void                    reload () const;
+//ig    GpxFileModel*           gpxFileModel ();
+signals:
+    void                    repaintNeeded (QRegion dirtyRegion);
+};
+// MarbleMap
 
-};   // Marble
+};
+// Marble
 
 

@@ -35,8 +35,12 @@ public:
     bool                    outline () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-};   // GeoDataPolyStyle
+    ~GeoDataPolyStyle ();
+    virtual QString         nodeType () const;
+};
+// GeoDataPolyStyle
 
-};   // Marble
+};
+// Marble
 
 

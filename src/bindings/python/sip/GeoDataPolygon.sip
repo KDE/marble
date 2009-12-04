@@ -40,7 +40,12 @@ public:
     void                    appendInnerBoundary (const Marble::GeoDataLinearRing& boundary);
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-};   // GeoDataPolygon
+    virtual ~GeoDataPolygon ();
+    virtual QString         nodeType () const;
+protected:
+//ig    GeoDataPolygonPrivate*  p () const;
+};
+// GeoDataPolygon
 
 
 class GeoDataOuterBoundary : Marble::GeoDataPolygon
@@ -49,7 +54,8 @@ class GeoDataOuterBoundary : Marble::GeoDataPolygon
 #include <GeoDataPolygon.h>
 %End
 
-};   // GeoDataOuterBoundary
+};
+// GeoDataOuterBoundary
 
 
 class GeoDataInnerBoundary : Marble::GeoDataPolygon
@@ -58,8 +64,10 @@ class GeoDataInnerBoundary : Marble::GeoDataPolygon
 #include <GeoDataPolygon.h>
 %End
 
-};   // GeoDataInnerBoundary
+};
+// GeoDataInnerBoundary
 
-};   // Marble
+};
+// Marble
 
 

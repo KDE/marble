@@ -29,22 +29,38 @@ class GeoGraphicsItem : Marble::MarbleGraphicsItem
 
 public:
                             GeoGraphicsItem ();
-//ig                        GeoGraphicsItem (GeoGraphicsItemPrivate* d_ptr);
+//ig                            GeoGraphicsItem (GeoGraphicsItemPrivate* d_ptr);
     Marble::GeoDataCoordinates  coordinate () const;
 //ig    void                    coordinate (qreal& longitude /Out/, qreal& latitude /Out/, qreal& altitude /Out/) const;
     void                    setCoordinate (qreal longitude, qreal latitude, qreal altitude = 0);
     void                    setCoordinate (const Marble::GeoDataCoordinates& point);
-    QString                 target ();
     void                    setTarget (const QString& target);
-    QList<QPoint>           positions ();
 
-protected:
-    virtual bool            paint (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos, Marble::GeoSceneLayer* layer = 0) = 0;
 
-public:
-    void                    setCoordinate (const Marble::GeoDataPoint& point);
-};   // GeoGraphicsItem
+    virtual ~GeoGraphicsItem ();
+    enum GeoGraphicsItemFlag
+    {
+        NoOptions,
+        ItemIsMovable,
+        ItemIsSelectable,
+        ItemIsVisible
+    };
+    typedef QFlags<Marble::GeoGraphicsItem::GeoGraphicsItemFlag> GeoGraphicsItemFlags;
+    QString                 target () const;
+    Marble::GeoGraphicsItem::GeoGraphicsItemFlags  flags () const;
+    void                    setFlag (Marble::GeoGraphicsItem::GeoGraphicsItemFlag flag, bool enabled = 1);
+    void                    setFlags (Marble::GeoGraphicsItem::GeoGraphicsItemFlags flags);
+    int                     minLodPixels () const;
+    void                    setMinLodPixels (int pixels);
+    int                     maxLodPixels () const;
+    void                    setMaxLodPixels (int pixels);
+    Marble::GeoDataLatLonAltBox  latLonAltBox () const;
+    void                    setLatLonAltBox (const Marble::GeoDataLatLonAltBox& latLonAltBox);
+    QList<QPointF>          positions () const;
+};
+// GeoGraphicsItem
 
-};   // Marble
+};
+// Marble
 
 

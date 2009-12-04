@@ -49,10 +49,15 @@ public:
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
     virtual bool            isPlacemark () const;
-//ig     void               coordinate (qreal& longitude /out/, qreal& latitude /out/, qreal& altitude /out/);
 
-};   // GeoDataPlacemark
+    ~GeoDataPlacemark ();
+    virtual QString         nodeType () const;
+    virtual QXmlStreamWriter&  pack (QXmlStreamWriter& stream) const;
+    virtual QXmlStreamWriter&  operator << (QXmlStreamWriter& stream) const;
+};
+// GeoDataPlacemark
 
-};   // Marble
+};
+// Marble
 
 
