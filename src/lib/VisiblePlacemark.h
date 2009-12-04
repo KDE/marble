@@ -43,7 +43,7 @@ class VisiblePlacemark
 
     /**
      * Sets the @p index of the place mark model which
-     * is associated with this visible plave mark.
+     * is associated with this visible place mark.
      */
     void setModelIndex( const QModelIndex &index );
 

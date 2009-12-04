@@ -405,7 +405,7 @@ QPointF ClipPainterPrivate::clipRight( qreal m, const QPointF & point ) const
 
 int ClipPainterPrivate::sector( const QPointF & point ) const
 {
-    // If we think of the image borders as (infinitly long) parallel
+    // If we think of the image borders as (infinitely long) parallel
     // lines then the plane is divided into 9 sectors.  Each of these
     // sections is identified by a unique keynumber (currentSector):
     //
@@ -486,8 +486,8 @@ void ClipPainterPrivate::clipPolyObject ( const QPolygonF & polygon,
             }
             else {
                 // This case mostly deals with lines that reach from one
-                // sector that is located offscreen to another one that
-                // is located offscreen. In this situation the line 
+                // sector that is located off screen to another one that
+                // is located off screen. In this situation the line 
                 // can get clipped once, twice, or not at all.
                 clipMultiple( clippedPolyObject, clippedPolyObjects, isClosed );
             }
@@ -535,7 +535,7 @@ void ClipPainterPrivate::clipMultiple( QPolygonF & clippedPolyObject,
     Q_UNUSED( isClosed )
 
     // Take care of adding nodes in the image corners if the iterator 
-    // traverses offscreen sections.
+    // traverses off screen sections.
 
     qreal  m = _m( m_previousPoint, m_currentPoint );
 
@@ -1060,7 +1060,7 @@ void ClipPainterPrivate::clipOnce( QPolygonF & clippedPolyObject,
     // Calculating the slope.
     qreal m = _m( m_previousPoint, m_currentPoint );
 
-    // Calculate in which sector the end of the line is located that is offscreen 
+    // Calculate in which sector the end of the line is located that is off screen 
     int offscreenpos = ( m_currentSector == 4 ) ? m_previousSector : m_currentSector;
 
     // "Rise over run" for all possible situations .

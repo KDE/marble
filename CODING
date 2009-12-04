@@ -97,7 +97,7 @@ The Marble coding style has a couple of exceptions to the foundation.
 Spaces and Parenthesis
 - - - - - - - - - - -
 
-Due to historic reasons, the coding style of Marble havs one
+Due to historic reasons, the coding style of Marble has one
 exception to the kdelibs style.  That exception is that we use the Qt
 way of using parenthesis, with a space inside both opening and closing
 parenthesis.  For example
@@ -168,7 +168,7 @@ emacs
 - - -
 
 If you are an emacs user, you can put the following lines in your
-.emacs file.  Then these style guielines will be followed almost
+.emacs file.  Then these style guidelines will be followed almost
 automatically:
 
 

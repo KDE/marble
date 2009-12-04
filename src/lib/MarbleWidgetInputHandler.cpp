@@ -566,7 +566,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 const QTouchEvent::TouchPoint &touchPoint1 = touchPoints.last();
                 const QLineF line0(touchPoint0.lastPos(), touchPoint1.lastPos());
                 const QLineF line1(touchPoint0.pos(), touchPoint1.pos());
-                //scalefator is the ratio the view will be scaled compared to now,
+                //scaleFactor is the ratio the view will be scaled compared to now,
                 // 1:the same, 2: the double, 0.5: half
                 qreal scaleFactor = 1;
 

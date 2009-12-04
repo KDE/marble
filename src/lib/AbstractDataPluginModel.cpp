@@ -397,7 +397,7 @@ void AbstractDataPluginModel::handleChangedViewport()
              || fabs( d->m_downloadedBox.west() - d->m_lastBox.west() ) * boxComparisonFactor
                                 > d->m_lastBox.width() ) )
     {
-        // We will wait a littlebit longer to start the the
+        // We will wait a little bit longer to start the the
         // next download as we will really download something now.
         d->m_downloadTimer->setInterval( timeBetweenDownloads );
         

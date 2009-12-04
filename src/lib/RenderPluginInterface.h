@@ -61,7 +61,7 @@ class RenderPluginInterface: public PluginInterface
      * FIXME: Document this
      *.
      * Possible Values:
-     * "ALWAYS"            -- the plugin renders at the preferred posion
+     * "ALWAYS"            -- the plugin renders at the preferred position
      *                        no matter what got specified in the DGML file.
      * "SPECIFIED"         -- renders only in case it got specified in the
      *                        DGML file.

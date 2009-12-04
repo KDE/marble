@@ -42,7 +42,7 @@ public:
 
 
     /**
-     * @brief Overloaded convienience method to write a single feature or tree
+     * @brief Overloaded convenience method to write a single feature or tree
      * This convenience method allows you to call the GeoWriter using just a
      * single @see GeoDataFeature. This accounts for the case where a KML
      * document is contained in one single root element.
@@ -52,8 +52,8 @@ public:
 
     /**
      * @brief Set the current document type.
-     * The current Document Type defines which set of hadlers are to be used
-     * when writing the GeoDocument. This string should corrispond with the
+     * The current Document Type defines which set of handlers are to be used
+     * when writing the GeoDocument. This string should correspond with the
      * string used to register the required Tag Writers in @see GeoTagWriter
      */
     void setDocumentType( const QString& documentType );

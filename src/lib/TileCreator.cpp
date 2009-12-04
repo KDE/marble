@@ -89,7 +89,7 @@ void TileCreator::run()
     QString  sourcePath;
     if ( QDir::isAbsolutePath( d->m_sourceDir ) ) {
         sourcePath = d->m_sourceDir + '/' + d->m_installMap;
-        mDebug() << "Trying absolulte path:" << sourcePath;
+        mDebug() << "Trying absolute path:" << sourcePath;
     }
     else {
         sourcePath = MarbleDirs::path( "maps/" + d->m_sourceDir 
@@ -183,7 +183,7 @@ void TileCreator::run()
     int  mmax = TileLoaderHelper::levelToColumn( defaultLevelZeroColumns, maxTileLevel );
     int  nmax = TileLoaderHelper::levelToRow( defaultLevelZeroRows, maxTileLevel );
 
-    // Loading each row at highest spatial resolution and croping tiles
+    // Loading each row at highest spatial resolution and cropping tiles
     int      percentCompleted = 0;
     int      createdTilesCount = 0;
     QString  tileName;

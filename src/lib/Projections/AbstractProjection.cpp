@@ -550,7 +550,7 @@ GeoDataLatLonAltBox AbstractProjection::latLonAltBox( const QRect& screenRect,
     // Now we need to check whether maxLat (e.g. the north pole) gets displayed
     // inside the viewport.
 
-    // We need a point on the screen at maxLat that definetely gets displayed:
+    // We need a point on the screen at maxLat that definitely gets displayed:
 
     // FIXME: Some of the following code can be safely removed as soon as we properly handle
     //        GeoDataLinearRing::latLonAltBox().

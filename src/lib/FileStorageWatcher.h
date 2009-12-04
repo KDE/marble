@@ -73,7 +73,7 @@ class FileStorageWatcherThread : public QObject
 
     private Q_SLOTS:
 	/**
-	 * Ensures that the cache doesn't exeeds limits.
+	 * Ensures that the cache doesn't exceed limits.
 	 */
 	void ensureCacheSize();
     

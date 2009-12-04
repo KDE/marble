@@ -60,7 +60,7 @@ class MARBLE_EXPORT MarbleGraphicsItem
     bool contains( const QPointF& point ) const;
 
     /**
-     * Returns the rect of one represenation of the object that is at the given position.
+     * Returns the rect of one representation of the object that is at the given position.
      */
     QRectF containsRect( const QPointF& point ) const;
 

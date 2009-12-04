@@ -261,7 +261,7 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
         }
     }
     else {
-        // We need a point on the screen at maxLat that definetely gets displayed:
+        // We need a point on the screen at maxLat that definitely gets displayed:
         qreal averageLatitude = ( latLonAltBox.north() + latLonAltBox.south() ) / 2.0;
     
         GeoDataCoordinates maxLonPoint( +M_PI, averageLatitude, GeoDataCoordinates::Radian );
@@ -281,7 +281,7 @@ GeoDataLatLonAltBox EquirectProjection::latLonAltBox( const QRect& screenRect,
     // Now we need to check whether maxLat (e.g. the north pole) gets displayed
     // inside the viewport.
 
-    // We need a point on the screen at maxLat that definetely gets displayed:
+    // We need a point on the screen at maxLat that definitely gets displayed:
     qreal averageLongitude = latLonAltBox.east();
 
     GeoDataCoordinates maxLatPoint( averageLongitude, maxLat(), 0.0, GeoDataCoordinates::Radian );

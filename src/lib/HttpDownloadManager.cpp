@@ -43,8 +43,8 @@ class HttpDownloadManager::Private
     QTimer *m_requeueTimer;
     /**
      * Contains per download policy a queue set containing of
-     * - a queue where jobs are waiting for being activated (=dowloaded)
-     * - a queue containing currently being dowloaded
+     * - a queue where jobs are waiting for being activated (=downloaded)
+     * - a queue containing currently being downloaded
      * - a queue for retries of failed downloads */
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> > m_queueSets;
     DownloadQueueSet m_defaultQueues;

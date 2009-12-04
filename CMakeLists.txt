@@ -52,7 +52,7 @@ if( QTONLY )
     # this might be replaced by a workaround
     cmake_minimum_required( VERSION 2.4.8 )
 
-    #supress the policy warnings while keeping the same behaviour
+    #suppress the policy warnings while keeping the same behaviour
     if( COMMAND cmake_policy )    
     cmake_policy( SET CMP0005 OLD )
     cmake_policy( SET CMP0003 OLD )

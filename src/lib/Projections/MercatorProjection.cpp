@@ -311,7 +311,7 @@ GeoDataLatLonAltBox MercatorProjection::latLonAltBox( const QRect& screenRect,
         }
     }
     else {
-        // We need a point on the screen at maxLat that definetely
+        // We need a point on the screen at maxLat that definitely
         // gets displayed:
         qreal averageLatitude = ( latLonAltBox.north() + latLonAltBox.south() ) / 2.0;
     

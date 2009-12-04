@@ -15,7 +15,7 @@ IF(WIN32 AND NOT UNIX)
   SET(CPACK_GENERATOR NSIS)     # can be NSIS, STGZ, TBZ2, TGZ, TZ and ZIP
   SET(CPACK_NSIS_COMPRESSOR "/SOLID lzma")
   # There is a bug in NSI that does not handle full unix paths properly. Make
-  # sure there is at least one set of four (4) backlasshes.
+  # sure there is at least one set of four (4) backslashes.
   # SET(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}/install_win32\\\\sim-window-small.bmp")
   SET(CPACK_NSIS_INSTALLED_ICON_NAME "marble.exe")
   SET(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY}")

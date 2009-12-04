@@ -631,7 +631,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief  Center the view on a point
      * This method centers the Marble map on the point described by the latitude
-     * and longitude in the GeoDataCoordinate paramerter @c point. It also zooms
+     * and longitude in the GeoDataCoordinate parameter @c point. It also zooms
      * the map to be at the elevation described by the altitude. If this is
      * not the desired functionality or you do not have an accurate altitude
      * then use @see centerOn(qreal, qreal, bool)
@@ -641,7 +641,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  centerOn( const GeoDataCoordinates &point, bool animated = false );
 
     /**
-     * @brief Center the view on a bounding box so that it completley fills the viewport
+     * @brief Center the view on a bounding box so that it completely fills the viewport
      * This method not only centers on the center of the GeoDataLatLon box but it also
      * adjusts the zoom of the marble widget so that the LatLon box provided fills
      * the viewport.

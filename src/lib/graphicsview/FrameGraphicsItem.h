@@ -48,7 +48,7 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
     void setFrame( FrameType type );
 
     /**
-     * Returns themargin of the item. This is used for all margins with the value 0.0.
+     * Returns the margin of the item. This is used for all margins with the value 0.0.
      * The padding is the space outside the painted space.
      */
     qreal margin() const;

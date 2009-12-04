@@ -24,10 +24,10 @@ Route::Route() :  AbstractLayerContainer(),
 void Route::draw( ClipPainter *painter, const QSize &canvasSize,
                   ViewParams *viewParams )
 {
-    //temparory item to keep track of previous point
+    //temporary item to keep track of previous point
     AbstractLayerData *first=0;
 
-    //record the posisions of the points
+    //record the positions of the points
     QPoint firstPos;
     QPoint secondPos;
     const_iterator it;

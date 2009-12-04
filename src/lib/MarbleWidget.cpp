@@ -145,7 +145,7 @@ MarbleWidget::MarbleWidget(MarbleMap *map, QWidget *parent)
 MarbleWidget::~MarbleWidget()
 {
     // Remove and delete an existing InputHandler
-    // initiazized in d->construct()
+    // initialized in d->construct()
     setInputHandler( 0 );
 
     delete d;

@@ -177,7 +177,7 @@ inline qreal AbstractScanlineTextureMapper::rad2PixelY( qreal lat ) const
     case GeoSceneTexture::Mercator:
         if ( fabs( lat ) < 1.4835 ) {
             // We develop the inverse Gudermannian into a MacLaurin Series:
-            // Inspite of the many elements needed to get decent 
+            // In spite of the many elements needed to get decent 
             // accuracy this is still faster by far than calculating the 
             // trigonometric expression:
             // return - asinh( tan( lat ) ) * 0.5 * m_normGlobalHeight;

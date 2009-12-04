@@ -37,7 +37,7 @@ class GeoDataCoordinates;
  * @brief framework class for each display layer in Marble
  *
  * This class is intended to be used as a base class for all layers in
- * Marble. It contains convienience classes and can be used as a 
+ * Marble. It contains convenience classes and can be used as a 
  * framework for implementing new layers. So far there is default
  * implementations for all of the virtual methods so that any
  * developer may implement a whole new layer with the least amount of
@@ -80,7 +80,7 @@ class AbstractLayer: public QObject
     explicit AbstractLayer( QObject * parent=0 );
 
     /**
-     * @brief distructor
+     * @brief destructor
      */
     ~AbstractLayer();
 
@@ -88,9 +88,9 @@ class AbstractLayer: public QObject
      * @brief get screen pixel position from a geographical position
      * 
      * Method to simplify the retrieval of the screen pixel position 
-     * from a longditude and latitude. This static method is not 
+     * from a longitude and latitude. This static method is not 
      * intended for use in a layer that implements AbstractLayerData 
-     * objects because AbstractLayerData has a memeber function for 
+     * objects because AbstractLayerData has a member function for 
      * this purpose
      * @param _lon the longitude of the point we want to find
      * @param _lat the latitude of the point we want to find 
@@ -113,7 +113,7 @@ class AbstractLayer: public QObject
      /**
       * @brief get screen pixel position. 
       * 
-      * Method to simplify the retreval of the screen pixel position
+      * Method to simplify the retrieval of the screen pixel position
       * from a GeoDataCoordinates object.
       * @param geoPosition the position of the point we want to find
       * @param invRotAxis inversion of the Quaternion status of the
@@ -146,7 +146,7 @@ class AbstractLayer: public QObject
     static qreal distance ( const QPoint &, const QPoint & );
 
     /**
-     * @brief overloaded method to allow for double presision distance
+     * @brief overloaded method to allow for double precision distance
      */
     static qreal distance ( const QPointF &, const QPointF & );
 

@@ -21,7 +21,7 @@ ENDIF (APPLE)
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 
 #############################################################
-# Make the current test source directory avaiable in #define TESTSRCDIR
+# Make the current test source directory available in #define TESTSRCDIR
 # use this for accessing TESTSRCDIR/data
 #############################################################
 

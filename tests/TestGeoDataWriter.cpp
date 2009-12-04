@@ -60,7 +60,7 @@ void TestGeoDataWriter::initTestCase()
         //Add example files
         QFile file( dataDir.filePath(filename));
 
-        //Verify file existance
+        //Verify file existence
         QVERIFY( file.exists() );
 
         //Make the parsers
@@ -169,7 +169,7 @@ void TestGeoDataWriter::saveAndLoad()
 void TestGeoDataWriter::saveAndCompare_data()
 {
     QTest::addColumn<QSharedPointer<GeoDataParser> >("parser");
-    QTest::addColumn<QString>("origional");
+    QTest::addColumn<QString>("original");
 
     QTest::newRow("NewYork") << parsers.value( "NewYork.kml" ) << "NewYork.kml";
     QTest::newRow("NewYorkDocument") << parsers.value( "NewYorkDocument.kml" ) << "NewYorkDocument.kml";
@@ -177,7 +177,7 @@ void TestGeoDataWriter::saveAndCompare_data()
 
 void TestGeoDataWriter::saveAndCompare()
 {
-    //save the file and compare it to the origional
+    //save the file and compare it to the original
     QFETCH( QSharedPointer<GeoDataParser>, parser );
     QFETCH( QString, origional );
 

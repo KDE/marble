@@ -33,7 +33,7 @@
 namespace Marble
 {
 
-// Set to a value greather than 0, to dump parent node chain while parsing
+// Set to a value greater than 0, to dump parent node chain while parsing
 #define DUMP_PARENT_STACK 0
 
 GeoParser::GeoParser( GeoDataGenericSourceType source )

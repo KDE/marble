@@ -180,9 +180,9 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     void setDescription( const QString &value );
 
     /**
-     * @brief test if the descirption is CDATA or not
+     * @brief test if the description is CDATA or not
      * CDATA allows for special characters to be included in XML and also allows
-     * for other XML formats to be embedded in the XML without intefering with
+     * for other XML formats to be embedded in the XML without interfering with
      * parser namespace.
      * @return @true if the description should be treated as CDATA
      *         @false if the description is a plain string

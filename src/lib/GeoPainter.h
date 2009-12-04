@@ -50,7 +50,7 @@ class GeoDataPolygon;
     This class allows application developers to draw simple geometric shapes
     and objects onto the map.
 
-    The API is modelled after the QPainter API.
+    The API is modeled after the QPainter API.
 
     The GeoPainter provides a wide range of methods that are using geographic
     ("geodesic") coordinates to position the item.
@@ -149,7 +149,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
     The optional parameters which describe the layout of the bubble are
     similar to those used by QPainter::drawRoundRect().
     Unlike in QPainter the rounded corners are not specified in percentage
-    but in pixels to provide for optimal asthetics.
+    but in pixels to provide for optimal aesthetics.
     By choosing a positive or negative bubbleOffset it's possible to
     place the annotation on top, bottom, left or right of the annotated
     position.
@@ -185,7 +185,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
     
 /*!
-    \brief Creates a region for a given geograpic position.
+    \brief Creates a region for a given geographic position.
 
     A QRegion object is created that represents the area covered by
     GeoPainter::drawPoint( GeoDataCoordinates ). It can be used e.g. for
@@ -212,7 +212,7 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
 
 /*!
-    \brief Create a region for a given geograpic position.
+    \brief Create a region for a given geographic position.
 
     A QRegion object is created that represents the area covered by
     GeoPainter::drawPoint( GeoDataPoint ). It can be used e.g. for
@@ -475,14 +475,14 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
    
 /*!
-    \brief Draws a rectangle with rounded cordners at the given position.
+    \brief Draws a rectangle with rounded corners at the given position.
     The rectangle is placed with its center located at the given
     \a centerPosition.
 
     For the outline it uses the painter's pen and for the background the
     painter's brush.
     Unlike in QPainter::drawRoundedRect() the rounded corners are not specified
-    in percentage but in pixels to provide for optimal asthetics.
+    in percentage but in pixels to provide for optimal aesthetics.
 
     \param xRnd Specifies the geometry of the rounded corners in pixels along
                 the x-axis.

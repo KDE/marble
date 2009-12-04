@@ -91,7 +91,7 @@ public:
 };
 
 /**
- * @short A shared base class for all classes that are mapped to a specifig tag (ie. GeoFolder)
+ * @short A shared base class for all classes that are mapped to a specific tag (ie. GeoFolder)
  */
 class GEODATA_EXPORT GeoNode
 {

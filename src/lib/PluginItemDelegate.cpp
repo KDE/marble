@@ -317,7 +317,7 @@ QStyleOptionButton PluginItemDelegate::checkboxOption( const QStyleOptionViewIte
         checkboxOption.state = option.state | QStyle::State_Off;
     QSize size = QApplication::style()->sizeFromContents( QStyle::CT_CheckBox, &option, QSize() );
     if ( size.isEmpty() ) {
-        // A checkbox has definately a size != 0
+        // A checkbox has definitely a size != 0
         checkboxOption.rect.setSize( QSize( 22, 22 ) );
     }
     else {

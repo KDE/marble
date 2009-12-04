@@ -105,7 +105,7 @@ void PositionTracking::notifyPosition( GeoDataCoordinates pos )
 
 void PositionTracking::updateSpeed( TrackPoint* previous, TrackPoint* next )
 {
-    //This function makes the asumption that the update stage happens once
+    //This function makes the assumption that the update stage happens once
     //every second.
     qreal distance = distanceSphere( previous->position().longitude(),
                                      previous->position().latitude(),

@@ -45,7 +45,7 @@ class GEODATA_EXPORT GeoParser : public QXmlStreamReader
 
     /**
      * @brief Main API for reading the XML document.
-     * This is the only mentod that is necessary to call to start the GeoParser.
+     * This is the only method that is necessary to call to start the GeoParser.
      * To retrieve the resulting data see @see releaseDocument() and
      * @see releaseModel()
      */

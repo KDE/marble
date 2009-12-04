@@ -63,7 +63,7 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     QAction       *action() const;
     /**
      *This method is used by the main window to get all of the actions that this
-     *plugin defines. There is no guarentee where the main window will place the
+     *plugin defines. There is no guarantee where the main window will place the
      *actions but it will generally be in a Menu. The returned QList should
      *also contain all of the actions returned by @see toolbarActions().
      *@return A QList of grouped actions
@@ -72,9 +72,9 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 
     /**
      *This method returns a subset of the actions returned by @see actions() which
-     *are intended to be placed in a more prominant place such as a toolbar above
+     *are intended to be placed in a more prominent place such as a toolbar above
      *the Marble Widget. You are not guaranteed that they will be in an actual
-     *toobar but they will be visable and discoverable
+     *toolbar but they will be visible and discoverable
      *@return A QList of grouped toolbar actions
      */
     virtual QList<QActionGroup*>*   toolbarActionGroups() const;

@@ -203,7 +203,7 @@ bool GpsTracking::update(const QSize &canvasSize, ViewParams *viewParams,
 #ifndef HAVE_LIBGPS
         Q_UNUSED( canvasSize );
 #else
-        //m_gpsdData has been successully set
+        //m_gpsdData has been successfully set
         if ( m_gpsdData != 0 ){
             m_gpsdData =m_gpsd->query( "p" );
             m_gpsTracking->setPosition( m_gpsdData->fix.latitude,

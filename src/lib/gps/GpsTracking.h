@@ -67,7 +67,7 @@ public:
      *            following this update
      * @return @c true the region of the screen needs to be repainted
      *         @c false the gps object was not updated so no repaint
-     *                  nessary.
+     *                  necessary.
      */
     bool update(const QSize &canvasSize, ViewParams *viewParams,
                 QRegion &reg);

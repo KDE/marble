@@ -268,7 +268,7 @@ GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
     // Now we check whether maxLat (e.g. the north pole) gets displayed
     // inside the viewport to get more accurate values for east and west.
 
-    // We need a point on the screen at maxLat that definetely gets displayed:
+    // We need a point on the screen at maxLat that definitely gets displayed:
     qreal averageLongitude = ( latLonAltBox.west() + latLonAltBox.east() ) / 2.0;
 
     GeoDataCoordinates maxLatPoint( averageLongitude, maxLat(), 0.0, GeoDataCoordinates::Radian );

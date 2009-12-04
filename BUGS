@@ -59,7 +59,7 @@ The bugs
 
   Flags needs a border
 
-  tackat: Yes, it only now occured to me that the widget could be
+  tackat: Yes, it only now occurred to me that the widget could be
   white indeed (very unlikely for the final version but ...). I don't
   want to add a border. But I'll add a slight shadow instead.
 
@@ -72,7 +72,7 @@ The bugs
   tackat: No. There is enough space below the name of the city. But
   for some languages putting it into the same line as the name of the
   placemark (which is very long in some cases already) this would
-  definetely conflict with the length of the translation of the
+  definitely conflict with the length of the translation of the
   placemark type ("Capital", "Capital of Region", etc.).
 
 
@@ -89,7 +89,7 @@ The bugs
 
   "Data sheet" sounds pretty technical. How about "information"?
 
-  tackat: Accidently I used "Data Sheet" in two places: The Window
+  tackat: Accidentally I used "Data Sheet" in two places: The Window
   title and the tab. The first tab should indeed be just a "data
   sheet" (Information is pretty useless as basically everything on the
   screen is "information". Naming the Window title "Data Sheet" is

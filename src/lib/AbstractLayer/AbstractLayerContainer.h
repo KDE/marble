@@ -84,9 +84,9 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
     /**
      * @brief  draw all AbstraceLayerData objects in this container
      * 
-     * @c draw() is intended to deal with drawing all visable Data
+     * @c draw() is intended to deal with drawing all visible Data
      * Objects in this Container by calling their @c draw() function.
-     * @param painter this will be used to draw the contianer
+     * @param painter this will be used to draw the container
      * @param canvasSize the size of the marble widget view
      * @param radius measure of zoom level
      * @param invRotAxis inversion of the rotation Quaternion that
@@ -104,7 +104,7 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
     /**
      * @brief get the distance between 2 points
      *
-     * This is just a convience method to make certain optimizations
+     * This is just a convenience method to make certain optimizations
      * easier, such as not drawing an @c AbstractLayerData if it is 
      * too close to another
      * @return the square of the distance between the points, if the 
@@ -163,9 +163,9 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
      * @brief A representation of which items in m_data should be in
      *        memory.
      * 
-     * This is intended to be the only read/write accessable part of
+     * This is intended to be the only read/write accessible part of
      * this container. processVisable() will deal with updating this
-     * and the actuall memory swapping will be done elswere.
+     * and the actual memory swapping will be done elsewhere.
      */
     QBitArray *m_visible;
     

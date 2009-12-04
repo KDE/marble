@@ -227,7 +227,7 @@ void TextureColorizer::colorize(ViewParams *viewParams)
                   readData < readDataEnd;
                   readData += 4, ++writeData, ++coastData )
             {
-                // Cheap Embosss / Bumpmapping
+                // Cheap Emboss / Bumpmapping
 
                 uchar& grey = *readData; // qBlue(*data);
 

@@ -116,8 +116,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     void setCoordinate( const GeoDataPoint &point );
 
     /**
-     * Sets the current Geometry of this Placmark. @see geometry() and the class 
-     * overview for description of the geometry consept. The geometry can be set 
+     * Sets the current Geometry of this Placemark. @see geometry() and the class 
+     * overview for description of the geometry concept. The geometry can be set 
      * to any @see GeoDataGeometry like @see GeoDataPoint,@see GeoDataLineString,
      * @see GeoDataLinearRing and @see GeoDataMultiGeometry
      */
@@ -172,7 +172,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * Serialise this Placemark to a XML stream writer @see QXmlStreamWriter in
      * the Qt documentation for more info. This will output the XML
      * representation of this Placemark. The default XML format is KML, to have
-     * other formats supported you need to create a subclass and overide this
+     * other formats supported you need to create a subclass and override this
      * method.
      * @param stream the XML Stream Reader to output to.
      */

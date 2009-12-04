@@ -37,7 +37,7 @@ class GeoParser;
  * a new GeoData format you will need to subclass GeoTagHandler and reimplement
  * the @see parse(GeoParser&) method. You also need to register the newly
  * implemented GeoTagHandler by declaring an instance of the helper structure
- * @see GeoTagHandlerRegistrar with a corrisponding @see QualifiedName.
+ * @see GeoTagHandlerRegistrar with a corresponding @see QualifiedName.
  */
 class MARBLE_EXPORT GeoTagHandler
 {

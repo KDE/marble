@@ -23,7 +23,7 @@
 #ifndef DgmlAuxillaryDictionary_h
 #define DgmlAuxillaryDictionary_h
 
-// Lists all known DGML 2.0 auxillary strings
+// Lists all known DGML 2.0 auxiliary strings
 
 namespace Marble
 {

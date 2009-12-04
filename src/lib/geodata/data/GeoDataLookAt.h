@@ -66,7 +66,7 @@ namespace Marble
 			qreal longitude( GeoDataCoordinates::Unit unit = GeoDataCoordinates::Radian ) const;
 
 			/**
-			 * @brief retrieves the poiner to GeoDataCoordinates object of the GeoDataLookAt object
+			 * @brief retrieves the pointer to GeoDataCoordinates object of the GeoDataLookAt object
 			 * @return GeoDataCoordinates*
 			 */
 			GeoDataCoordinates* coordinate() const;

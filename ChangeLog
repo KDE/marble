@@ -247,7 +247,7 @@ Added a basic Model that allows introspection into the GeoData loaded from KML
     * src/lib/geodata/handlers/gpx/GPXgpxTagHandler.cpp:
     * src/lib/geodata/handlers/gpx/GPXgpxTagHandler.h:
 
-    Remove unneccessary constructors and destructors. The generated
+    Remove unnecessary constructors and destructors. The generated
     ones are equivalent.
 
 2008-08-20  Jens-Michael Hoffmann  <jensmh@gmx.de>
@@ -321,7 +321,7 @@ Added a basic Model that allows introspection into the GeoData loaded from KML
     * src/lib/geodata/handlers/dgml/DgmlGroupTagHandler.cpp:
     * src/lib/geodata/handlers/dgml/DgmlIconTagHandler.h:
 
-    Remove unneccessary constructors and destructors. The generated
+    Remove unnecessary constructors and destructors. The generated
     ones are equivalent.
 
 2008-08-19  Inge Wallin  <inge@lysator.liu.se>
@@ -1202,7 +1202,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
     Change container type of m_jobQueue from QQueue to QStack which
     has the advantage that tiles of the current visited area are
     loaded first.
-    This is noticable if you scroll and zoom a lot or if the internet
+    This is noticeable if you scroll and zoom a lot or if the internet
     connection is slower than DSL like GPRS/EDGE or even 3G GSM.
 
 2008-08-04  Jens-Michael Hoffmann  <jensmh@gmx.de>
@@ -1396,7 +1396,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
     to GeoDataCoordinates. This is needed because the extensions
     provided by GeoDataPoint are not needed most of the times:
     GeoDataPoint derives from GeoDataGeometry and GeoDataObject -
-    these features are very seldomly needed if you just want to check
+    these features are very seldom needed if you just want to check
     if a certain 3d-point is within GeoDataLatLonAltBox.
     Another point in this port is that using GeoDataPoint in a
     QVector is very expensive in terms of speed - use GeoDataCoordinates
@@ -1494,7 +1494,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
 
     Fix bug 162681 in trunk (slow tile download).
     The problem with the download implementation was that
-    there was only one QHttp object in HttpFetchFile, throught
+    there was only one QHttp object in HttpFetchFile, through
     which all requests were serialized.
     Now we have got one QHttp object per active HttpJob, so
     this bottleneck is gone now.
@@ -2282,7 +2282,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
 
     * src/lib/PlaceMarkContainer.{h|cpp}
 
-    make PlaceMarkContainer copiable and
+    make PlaceMarkContainer copyable and
     add new ctor for QVector<GeoDataPlacemark*>
 
 2008-06-08  Patrick Spendrin    <ps_ml@gmx.de>
@@ -2506,7 +2506,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
     - Add api docs.
     - Use qobject_cast instead of C style cast.
     - Remove empty inline destructor.
-    - Not neccessary to declare default constructor as explicit.
+    - Not necessary to declare default constructor as explicit.
     - Initialisation order for constructor init list.
     - Initialise base class objects in constructors.
 
@@ -2891,7 +2891,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
     Save call to QHash::contains in the time critical section, this gives
     me a small improvement with --timedemo: 12.5 fps -> 12.7 fps.
     * src/lib/geodata/handlers/dgml/DgmlTextureTagHandler.cpp:
-    Fix parsing of expire attribut. Default to MAX_INT.
+    Fix parsing of expire attribute. Default to MAX_INT.
     * src/lib/geodata/scene/GeoSceneLayer.cpp:
     Set default for m_expire to MAX_INT.
     * data/maps/earth/openstreetmap/openstreetmap.dgml:
@@ -4336,7 +4336,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
 
     * src/lib/MarbleMap.{cpp,h}:
 
-    - Getting rid of a leftover occurance of quickDirty()
+    - Getting rid of a leftover occurrence of quickDirty()
 
 2008-05-11  Torsten Rahn  <rahn@kde.org>
 
@@ -5099,14 +5099,14 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
 
 2008-04-25  Inge Wallin  <inge@lysator.liu.se>
 
-	Crazy issue 13: Proper include directives
+	Krazy issue 13: Proper include directives
 	* src/marble_part.cpp: duplicate include
 	* src/tilecreator/tccore.h: add include guard
 
-	Crazy issue 25: Spelling errors
+	Krazy issue 25: Spelling errors
 	* src/lib/geodata/scene/GeoSceneMap.h: Spelling fixes
 	
-	Crazy issue 6: Single char QStrings better written as a QChar
+	Krazy issue 6: Single char QStrings better written as a QChar
 	* src/lib/MapThemeManager.cpp (createMapThemeRow): 
 
 2008-04-25  Torsten Rahn  <rahn@kde.org>
@@ -5236,7 +5236,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
       mandatory when choosing units ... Fixes wrong coordinates 
       being copied.
     - Fixing missing colons in Patrick's and Jens' Changelog
-      entries. ( prevents proper highlightning in Kate ) :-)
+      entries. ( prevents proper highlighting in Kate ) :-)
 
 2008-04-22  Torsten Rahn  <rahn@kde.org>
 
@@ -5325,7 +5325,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
     * src/lib/MarbleDirs.cpp:
     * src/tilecreator/tccore.cpp:
     
-    - add an option to create the tiles of srtm data at compiletime
+    - add an option to create the tiles of srtm data at compile time
       this should make it possible to ship marble with it
     - use QCoreApplication for the tilecreators sake
     
@@ -5435,7 +5435,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
     Patch by David Roberts:
 
     - Patch to move the Merged Layer Painter into the TextureMapper class.
-    - Removes all those strange occurances of SunLocator, etc. from 
+    - Removes all those strange occurrences of SunLocator, etc. from 
       TileLoader and TextureTile.
     - Makes it possible to switch clouds and Tile IDs on and off later on ...
 
@@ -5846,7 +5846,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
     * src/lib/MarbleNavigationSettingsWidget.ui:
     * src/lib/MarbleCacheSettingsWidget.ui:
 
-    - Splitted up the settings ui and kcfg-ized it.
+    - Split up the settings ui and kcfg-ized it.
     - made some strings more user readable.
 
 2008-03-19  Inge Wallin  <inge@lysator.liu.se>
@@ -6353,7 +6353,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
 2008-02-13  Carlos Licea  <carlos.licea@kdemail.net>
     * src/lib/MeasureTool{cpp,h}:: continue trying to fix the interpolation of the
     measure of two points which crosses the dateline. Not solved yet,
-    although I still have to deeply analize it.
+    although I still have to deeply analyze it.
     * src/lib/MarbleMap{cpp,h}:: added Mercator case to screenCoordinates and
     geoCoordinates.
     * src/lib/TextureColorizer{cpp,h}:: make it work for the Mercator projection.
@@ -6551,7 +6551,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
 	* src/lib/gps/TrackContainer.{h,cpp}
 	* src/lib/gps/TrackSegment.{h,cpp}
 	* src/lib/gps/WaypointContainer.{h,cpp}
-	Bounding boxes are now referenses.
+	Bounding boxes are now references.
 
 2008-02-01  Torsten Rahn  <rahn@kde.org>
 
@@ -6610,7 +6610,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
     * data/credits_authors.html:
     -Changed my e-Mail to carlos.licea@kdemail.net
     * src/lib/FlatScanLineTextureMapper{cpp,h}::
-    -Beggin the implementation of the Mercator projection.    
+    -Begin the implementation of the Mercator projection.    
 
 2008-01-28  Torsten Rahn  <rahn@kde.org>
 
@@ -6695,7 +6695,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
 2008-01-24  Torsten Rahn  <rahn@kde.org>
 
     * src/lib/MarbleWidget{cpp,h}::
-        - Fixing embarassing bug which resulted in a 
+        - Fixing embarrassing bug which resulted in a 
           severe slowdown from tile level 9 up.
     * src/lib/MapScaleFloatItem{cpp,h}::
         - Some dirty fix for the below-1km issue with the 
@@ -6817,7 +6817,7 @@ Also displaying points now. Fixed crash when the kml has no StyleMap. Added samp
     in the future. "Center" centers the globe on 
     that position.
     - Renaming some methods and properties
-    accordingy (showSun -> showSunShading).
+    accordingly (showSun -> showSunShading).
 
 2008-01-20  Inge Wallin  <inge@lysator.liu.se>
 
@@ -8035,7 +8035,7 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-25  Carlos Licea  <carlos_licea@hotmail.com>
     *MarbleWidget: solved the trace bug. As I expected the
      problem was an exception for the Spherical projection
-     tha wasn't needed in the flat projection.
+     that wasn't needed in the flat projection.
 
 2007-08-24  Murad Tagirov  <tmurad@gmail.com>
 
@@ -8045,7 +8045,7 @@ there, are their any dependencies to other code regarding this ownership?)
     * src/lib/kml/KMLIconStyleParser.{h,cpp}
     * src/lib/kml/KMLColorStyleParser{cpp,h}:
 
-    - Implemnted parsing of <IconStyle> tag
+    - Implemented parsing of <IconStyle> tag
     * src/lib/kml/KMLStyle.{h,cpp}
     * src/lib/kml/KMLStyleParser.{h,cpp}
 
@@ -8210,7 +8210,7 @@ there, are their any dependencies to other code regarding this ownership?)
 
 2007-08-21  Murad Tagirov  <tmurad@gmail.com>
 
-    Created class GpxFileViewItem. Moved almost all functioanality
+    Created class GpxFileViewItem. Moved almost all functionality
     from GpxFileModel to FileViewModel and GpxFileViewItem. Currently
     some part of code is ifdefed with "#if 0" in MarbleWidget and
     MarbleControlBox to keep existing functionality.
@@ -8336,7 +8336,7 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-18  Carlos Licea  <carlos_licea@hotmail.com>
 
 	Removed the Projection function from MarbleModel.
-	Aded m_lastProjection to MarbleWidget.
+	Added m_lastProjection to MarbleWidget.
 
 2007-08-18  Inge Wallin  <inge@lysator.liu.se>
 
@@ -8412,12 +8412,12 @@ there, are their any dependencies to other code regarding this ownership?)
     * src/lib/BoundingBox{cpp,h}: :
     * src/lib/AbstractLayer/AbstractLayerContainer{cpp,h}:} :
 
-    Added an implementation for getting pixel position withought need
+    Added an implementation for getting pixel position without need
     for the "double radius" to "int radius" cast.
     * src/lib/AbstractLayer/AbstractLayerData.{h,cpp} : double math
 
     Added a new slot "enableFileViewActions()" and connected the
-    relivant signals from the File View selection model. Also
+    relevant signals from the File View selection model. Also
     connected the button signals to the GpxFileModel save and close
     implementations.
     * src/lib/MarbleControlBox{cpp,h}: :
@@ -8717,12 +8717,12 @@ there, are their any dependencies to other code regarding this ownership?)
     * src/katlascontrol{cpp,h}: : new method to enable/disable File view
     * src/lib/MarbleControlBox.ui : new tab
 
-    Added a GpxFileModel to MarbleModelPrivate and added nessary
+    Added a GpxFileModel to MarbleModelPrivate and added necessary
     accessors.
     * src/lib/MarbleWidget{cpp,h}: : accessor
     * src/lib/MarbleModel.h : new member variable and accessors
 
-    Added nessary ModelItem functions to GpxFile
+    Added necessary ModelItem functions to GpxFile
     * src/lib/gps/GpxFile{cpp,h}: : more like a model item
 
     Added new Class GpxFileModel
@@ -8735,7 +8735,7 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-13  Torsten Rahn  <rahn@kde.org>
 
 	- adding window manager application icon
-	- adding What's this icon to the ressource file.
+	- adding What's this icon to the resource file.
 
     * src/marble.qrc
     * src/QtMainWindow{cpp,h}:
@@ -8806,15 +8806,15 @@ there, are their any dependencies to other code regarding this ownership?)
 
     Altered the updateGps() function in MarbleWidget so that it now
     only updates the region where the the gps marker was and
-    currenly is
+    currently is
     * src/lib/MarbleWidget{cpp,h}: : updateGps() now uses regions
 
     Added a new class that represents a GpsTracking Object. It is
-    designed to remove the need for the Gps Layer to know abount gpsd
+    designed to remove the need for the Gps Layer to know about gpsd
     or any other methods of getting current location.
     * src/lib/gps/GpsTracking.{ h, cpp } : new class
 
-    Removed anyting that GpsTracking now covers from GpsLayer
+    Removed anything that GpsTracking now covers from GpsLayer
     * src/lib/gps/GpsLayer.{h, cpp} : removed tracking code
 
     Made convince method distance() static in AbstractLayer
@@ -8921,7 +8921,7 @@ there, are their any dependencies to other code regarding this ownership?)
 2007-08-10  Andrew Manson   <g.real.ate@gmail.com>
 
     Added a method to extract the global Quaternion from the Widget
-    for the use in Bounding Box. Code was just Coppied from
+    for the use in Bounding Box. Code was just Copied from
     MarbleWidget::geoCoordinates.
     Added a method MarbleWidget::setBoundingBox that applies the
     current View's BoundingBox to the bounding box object in
@@ -8930,7 +8930,7 @@ there, are their any dependencies to other code regarding this ownership?)
                                      and setBoundingBox
 
      Added the implementation of a GpxFile so that it may be used for
-    a file model/view implementation. Just meant to seperate the
+    a file model/view implementation. Just meant to separate the
     containers from the model.
     * src/lib/gps/GpxFile.{h,cpp} : new class
 
@@ -8942,7 +8942,7 @@ there, are their any dependencies to other code regarding this ownership?)
     * src/lib/gps/GpxSax.{cpp,h} : implemented GpxFile
 
     Added a constructor to TrackPoint that creates a deep copy of
-    annother Trackpoint and fixed the drawing of each point.
+    another Trackpoint and fixed the drawing of each point.
     * src/lib/gps/TrackPoint.{h,cpp} : new constructor and better
                                        painting.
 
@@ -8958,14 +8958,14 @@ there, are their any dependencies to other code regarding this ownership?)
     detection.
     * src/lib/BoundingBox.{h,cpp} : new class
 
-    Added a default implemetation of paintLayer to AbstractLayer and
-    added another convience class to measure the istance between two
+    Added a default implementation of paintLayer to AbstractLayer and
+    added another convenience class to measure the distance between two
     QPointF.
     * src/lib/AbstractLayer/AbstractLayer.{h,cpp} : default
                                         implementation of paint and
-                                        new convinence class.
+                                        new convenience class.
 
-    Added a new interface that aviods the need to subclass
+    Added a new interface that avoids the need to subclass
     AbstractLayer{data, container} to implement a new layer and
     instead making them only a default implementation.
     * src/lib/AbstractLayer/AbstractLayerInterface.{h, cpp}: new class
@@ -9249,7 +9249,7 @@ http://en.wikipedia.org/wiki/International_Dateline
     Please use lon-lat order in Marble (not lat-lon).
 
     - Cleaned up the MarbleWidget class: Added API docs,
-      moved all occurences of lat-lon to lon-lat order.
+      moved all occurrences of lat-lon to lon-lat order.
 
     * src/lib/MarbleWidget.{h,cpp}
     * src/lib/MarbleWidgetInputHandler.{h,cpp}
@@ -9269,7 +9269,7 @@ http://en.wikipedia.org/wiki/International_Dateline
 
     Added initial support of serialization of kml
     objects to memory stream. In order to serialize any
-    object class must be inherited from Serializable abastract class
+    object class must be inherited from Serializable abstract class
     * src/lib/kml/Serializable.h: new file
     * src/lib/placemarkmanager{cpp,h}:
     * src/lib/kml/KMLFeature.{h,cpp}
@@ -9485,7 +9485,7 @@ http://en.wikipedia.org/wiki/International_Dateline
 	* src/lib/maptheme.h (class ViewParams): Don't export this class
 
  	Remove storage of half of image width/height
-	* src/lib/GridMap{cpp,h}:: Remove storage of half of image width/heigh.
+	* src/lib/GridMap{cpp,h}:: Remove storage of half of image width/height.
 
 	Cleaning and remove storage of half of image width/height
 	* src/lib/AbstractScanlineTextureMapper.{h,cpp},
@@ -9510,7 +9510,7 @@ http://en.wikipedia.org/wiki/International_Dateline
 	* src/lib/placemarkpainter.h (drawLabelText): not inline
 	* src/lib/placemark.h (population): not inline
 	* src/lib/xmlhandler.h (popidx): not inline
-	(seleced): not inline
+	(selected): not inline
 
 	Make it easier to change test setup.
 	* src/MarbleTest{cpp,h}: (timeDemo): More logical setup
@@ -9582,7 +9582,7 @@ http://en.wikipedia.org/wiki/International_Dateline
     Temporary disabled weightfilter if KML_GSOC is defined
     * src/lib/placemarkpainter{cpp,h}:
 
-    Commented m_coordinate field becauase PlaceMark class
+    Commented m_coordinate field because PlaceMark class
     already has same protected field
     * src/lib/kml/KMLPlaceMark.h
 
@@ -9597,7 +9597,7 @@ http://en.wikipedia.org/wiki/International_Dateline
 
 2007-07-29  Torsten Rahn  <rahn@kde.org>
 
-	- ressource priorities: homeDir, systemDir, unixDir
+	- resource priorities: homeDir, systemDir, unixDir
 
 2007-07-29  Torsten Rahn  <rahn@kde.org>
 
@@ -9621,12 +9621,12 @@ http://en.wikipedia.org/wiki/International_Dateline
     different zoom levels for drawing a large gpx file
     * src/MarbleTest. {cpp,h} : Added the test
 
-    Added teh catch for the command line argument "--gpsdemo" that
+    Added the catch for the command line argument "--gpsdemo" that
     initiates the Gps test
     * src/kdemain{cpp,h}::
     * src/qtmain{cpp,h}::
 
-    Added accessors to katlascontrol for enableing/disableing the
+    Added accessors to katlascontrol for enabling/disabling the
     tabs in MarbleControlBox
     * src/katlascontrol.{cpp,h}:
 
@@ -9639,21 +9639,21 @@ http://en.wikipedia.org/wiki/International_Dateline
     * src/lib/gps/GpsElement{cpp,h}:: comments + getters
     * src/lib/gps/Track.h: comments
 
-    Made GpsDataElements follow more object oriented aproach layed
+    Made GpsDataElements follow more object oriented approach layed
     down by AbstractLayerData by implementing draw(). Cleaned up Api
     comments.
-    * src/lib/gps/Track.{h,cpp}: following OO Aproach
-    * src/lib/gps/Waypoint.{h,cpp}: comments, OO Aproach
+    * src/lib/gps/Track.{h,cpp}: following OO Approach
+    * src/lib/gps/Waypoint.{h,cpp}: comments, OO Approach
 
     Repaired problems with Gpx file loading and applied a true
     representation of a tracksegment
     * src/lib/gps/GpxSax{cpp,h}::
 
-    made TrackSegment follow Object Oriented Aproach and draw a red
+    made TrackSegment follow Object Oriented Approach and draw a red
     triangle after every 5 trackpoints
     * src/lib/gps/TrackSegment.{cpp,h}:
 
-    Added a convience method to AbstractLayer to finde the square of
+    Added a convenience method to AbstractLayer to find the square of
     the distance between 2 QPoints
     * src/lib/AbstractLayer/AbstractLayerContainer.{h,cpp}:
 
@@ -9708,7 +9708,7 @@ http://en.wikipedia.org/wiki/International_Dateline
 	Move the image caches to ViewParams (same commit as the next entry)
 	* src/lib/ViewParams.h (ViewParams): m_coastImage: New member
 	* src/lib/ViewParams{cpp,h}: (ViewParams): Initialize new member
-	* src/lib/MarbleWidget{cpp,h}:: Use new call conventions everyhere
+	* src/lib/MarbleWidget{cpp,h}:: Use new call conventions everywhere
 	* src/lib/MarbleModel.{h,cpp} (paintGlobe): new parameters:
 	width,height
 
@@ -9784,7 +9784,7 @@ for a presentation yesterday.
 
 2007-07-12  Andrew Manson   <g.real.ate@gmail.com>
     Cleaned up the comments for all of the AbstractLayer classes and
-    formalised the api more.
+    formalized the api more.
 
     AbstractLayer now contains a Vector of AbstractLayerContainers
     and a simple implementation to call each of their draw() methods
@@ -9871,7 +9871,7 @@ for a presentation yesterday.
 	Krazy fixes: Add 'explicit' to constructors:
 	* src/lib/AbstractScanlineTextureMapper.h,
 	src/lib/FlatScanlineTextureMapper.h,
-	src/lib/GlobeScanlineTextureMapper.h: Add explict keyword
+	src/lib/GlobeScanlineTextureMapper.h: Add explicit keyword
 
 	Remove m_canvasimg from MarbleModelPrivate.
 	* src/lib/MarbleModel.{h,cpp} (paintGlobe): Add parameter canvasImage
@@ -9885,7 +9885,7 @@ for a presentation yesterday.
 	* src/lib/MarbleModel.{h,cpp} (setMapTheme): Add a parent
 	parameter
 	(class MarbleModelPrivate): remove m_view.
-	* src/lib/MarbleWidget{cpp,h}: (setMapTheme): Use new call convenction.
+	* src/lib/MarbleWidget{cpp,h}: (setMapTheme): Use new call convention.
 
 	Improve parameter parsing in KDE version.
 	* src/kdemain{cpp,h}: (main): Use KDE classes to parse command line
@@ -10005,7 +10005,7 @@ Thanks Benoit!
 2007-06-28  Andrew Manson   <g.real.ate@gmail.com>
 
     Added a new tab to MarbleControlBox, Gps Option, and setup method
-    in MarbleControlBox.h/cpp. Also connected nessary signals for
+    in MarbleControlBox.h/cpp. Also connected necessary signals for
     using GpsOption.
     *src/MarbleControlBox.{h,cpp} (setupGpsOption) : New Method
 
@@ -10018,7 +10018,7 @@ Thanks Benoit!
     Layer to mark if it is visible.
     *src/lib/AbstractLayer/AbstractLayer.{h,cpp} (m_showLayer):New
 
-    Added nessary variables to MarbleModelPrivate for the gps layer
+    Added necessary variables to MarbleModelPrivate for the gps layer
     * src/lib/MarbleModel{cpp,h}: (m_gpsLayer, m_showGps) : New Variables
 
     Added new file to take care of gps layer with a Waypoint to
@@ -10112,7 +10112,7 @@ Thanks Benoit!
 
 2007-06-19  Andrew Manson   <g.real.ate@gmail.com>
 
-    Incuded the nessary classes for all GPS Data Structures available
+    Included the necessary classes for all GPS Data Structures available
     in the GPX schema.
     * src/lib/gps/GpsElement.[cpp,h] : Added
     * src/lib/gps/Route.[cpp,h] : Added
@@ -10120,7 +10120,7 @@ Thanks Benoit!
     * src/lib/gps/Waypoint.[cpp,h] : Added
     * src/lib/gps/WaypointContainer.[cpp,h] : Added
 
-    Added Implementations of nessary AbstractLayer classes that are
+    Added Implementations of necessary AbstractLayer classes that are
     extended by the GPS Classes.
     * src/lib/AbstractLayer/AbstractLayerContainer{cpp,h}: : Added
     * src/lib/AbstractLayer/AbstractLayerData{cpp,h}: : Added
@@ -10269,7 +10269,7 @@ Thanks Benoit!
     * src/lib/kml/KMLFeatureParser.{h,cpp}
     * src/lib/kml/KMLObjectParser.{h,cpp}
 
-    Added documentation some of classses in class diagram
+    Added documentation some of classes in class diagram
     * projects/kml/KMLClasses.xmi
 
 2007-06-15  Torsten Rahn  <rahn@kde.org>
@@ -10410,14 +10410,14 @@ Thanks Benoit!
 	Fix copyright statements
 	* src/lib/kml/*.{h,cpp}: Set the correct email for Murad Tagirov
 
-	Krazy 13: Check for inlince methods in public classes
+	Krazy 13: Check for inline methods in public classes
 	* src/MarbleControlBox{cpp,h}: (setLocations): Make non-inline
 	(minimumZoom): Make non-inline
 
-	Krazy 13: Check for inlince methods in public classes
+	Krazy 13: Check for inline methods in public classes
 	* src/lib/MarbleWidget.{h,cpp}: make all functions non-inline
 
-	Krazy 13: Check for inlince methods in public classes
+	Krazy 13: Check for inline methods in public classes
 	* src/lib/searchlistview{cpp,h}: (activate): Make non-inline.
 
 	Krazy 12: Check for proper include directives
@@ -10513,7 +10513,7 @@ Murad, this should look like:
 2007-06-04  Osterfeld
 
 	Remove #ifndef Q_OS_MACX surrounding #include .moc
-	* Almost all files: Remove surrounding #nfndef
+	* Almost all files: Remove surrounding #ifndef
 
 2007-06-04  Torsten Rahn  <rahn@kde.org>
 

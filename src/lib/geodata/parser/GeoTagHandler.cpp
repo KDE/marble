@@ -30,7 +30,7 @@
 namespace Marble
 {
 
-// Set to a value greather than 0, to dump tag handlers as they get registered
+// Set to a value greater than 0, to dump tag handlers as they get registered
 #define DUMP_TAG_HANDLER_REGISTRATION 0
 
 GeoTagHandler::TagHash* GeoTagHandler::s_tagHandlerHash = 0;

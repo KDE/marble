@@ -88,7 +88,7 @@ Shows where on the world it is light or dark.  See also xearth.
 
 Importance:     3
 Priority:       3
-Features:       - Layer effects (ligth/dark in this case)
+Features:       - Layer effects (light/dark in this case)
                 - Plugins?
 
 
@@ -105,7 +105,7 @@ Features:       - Tracking of current position on the view
                 - Loading old gps data into the view
                 - Downloading all information for sections of a map (so 
                   that the data is available in advance for a trip)
-                - Loggin into live gps feeds 
+                - Logging into live gps feeds 
                 - Displaying more than one gps device
 
 6. Flight planning

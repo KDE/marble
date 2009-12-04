@@ -201,7 +201,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @param downloadManager the HttpDownloadManager instance
      *
      * This function sets the downloadmanager to load tiles that
-     * are missing locally. The desctruction of the instance
+     * are missing locally. The destruction of the instance
      * will be handled by MarbleModel.
      */
     void setDownloadManager( HttpDownloadManager *downloadManager );

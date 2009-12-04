@@ -20,7 +20,7 @@ namespace Marble
 {
 
 /**
- * @brief representaion of a GPS Waypoint.
+ * @brief representation of a GPS Waypoint.
  * 
  * A Waypoint is a point of interest, or named feature on a map.
  */
@@ -39,7 +39,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     Waypoint( qreal lat, qreal lon );
     
     /**
-     * @brief Constructor froim a geopoint object
+     * @brief Constructor from a geopoint object
      * @param position the geopoint that will be the position of this
      *                 waypoint
      */
@@ -260,7 +260,7 @@ class Waypoint : public AbstractLayerData, public GpsElement
     qreal m_hdop;
     
     /**
-     * @brief Vertical dilution of presision.
+     * @brief Vertical dilution of precision.
      */
     qreal m_vdop;
     

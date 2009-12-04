@@ -43,7 +43,7 @@ NOTE: MarbleNavigator is currently not part of the library, but it
  - MapTheme
 
 This class contains a set of colors, an icon some other misc data that
-will control the appearence of the map.  By defining a new MapTheme,
+will control the appearance of the map.  By defining a new MapTheme,
 you can give a new appearance of an already existing map.
 
 
@@ -150,7 +150,7 @@ FIXME: To be written...
 4. Library
 ==========
 
-This section describes the library in more detail than the overvew
+This section describes the library in more detail than the overview
 above, including the internal classes that are not exported to the
 external applications.  This section is for developers that want to
 develop Marble itself, and not just use the classes in his/her own

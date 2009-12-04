@@ -185,7 +185,7 @@ void FileStorageWatcherThread::ensureCacheSize()
 	    return;
 	} 
 	else {
-	    // We havent stopped because of to many files
+	    // We haven't stopped because of to many files
 	    m_deleting = false;
 	}
 	

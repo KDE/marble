@@ -21,7 +21,7 @@
 
 #include "DgmlAuxillaryDictionary.h"
 
-// One static list of all auxillary strings, to avoid string comparisons all-over-the-place
+// One static list of all auxiliary strings, to avoid string comparisons all-over-the-place
 
 namespace Marble
 {

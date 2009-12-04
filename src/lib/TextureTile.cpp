@@ -280,7 +280,7 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
             lastModified = fileInfo.lastModified();
 
             // - if the file does not exist, we want to download it and search an
-            //   existing tile of a lower zoom level for imediate display
+            //   existing tile of a lower zoom level for immediate display
             // - if the file exists and is expired according to the value of the
             //   expire element we want to download it again and display the old
             //   tile until the new one is there. Once the updated tile is

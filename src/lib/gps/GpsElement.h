@@ -62,12 +62,12 @@ class GpsElement
     QString gpsComment() const;
     
     /**
-     * @brief m_discription setter
+     * @brief m_description setter
      */
     void setDescription( const QString &description );
     
     /**
-     * @brief m_discription getter
+     * @brief m_description getter
      * @return description about this particular gps data element or 
      *         an empty string if that information has not been 
      *         provided
@@ -144,7 +144,7 @@ class GpsElement
     /**
      * @brief the number of the gps element
      * 
-     * this referes to the number of this gps element in a sequence
+     * this refers to the number of this gps element in a sequence
      * of elements. this does not apply to waypoints
      */
     int m_number;

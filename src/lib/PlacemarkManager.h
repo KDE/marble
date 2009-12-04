@@ -33,7 +33,7 @@ class PlacemarkManagerPrivate;
  * place mark objects from the different files
  * and file formats.
  *
- * The loaded data are accessable via the
+ * The loaded data are accessible via the
  * MarblePlacemarkModel returned by model().
  */
 class PlacemarkManager : public QObject

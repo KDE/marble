@@ -69,7 +69,7 @@ class MarblePlacemarkModel;
  * The <b>Map View</b> page gives the user a choice of different
  * datasets to display, which can also be thought of as different
  * visual themes. The default datasets are a standard Atlas view, a
- * Night view, and a Sattelite view.
+ * Night view, and a Satellite view.
  *
  * @see MarbleWidget
  * @see MarbleNavigator

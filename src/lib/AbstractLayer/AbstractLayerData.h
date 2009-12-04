@@ -36,7 +36,7 @@ class AbstractLayerData : public virtual AbstractLayerInterface
     explicit AbstractLayerData( const GeoDataCoordinates &position );
     
     /**
-     * @brief make a Data object from latitude and londitude
+     * @brief make a Data object from latitude and longitude
      * @param lat longitude of the object
      * @param lon latitude of the object
      */
@@ -67,9 +67,9 @@ class AbstractLayerData : public virtual AbstractLayerInterface
     /**
      * @brief calculate where to draw this object and draw it
      * 
-     * This is a convience method that allows for the calculations of
+     * This is a convenience method that allows for the calculations of
      * where to draw this AbstractLayerObject on screen to be done
-     * localy. The other @c draw() method is intended to do the actual
+     * locally. The other @c draw() method is intended to do the actual
      * drawing and can be called from within this one. 
      * @param painter used to draw the AbstractLayerData object
      * @param canvasSize the size of the Marble Widget screen
@@ -81,7 +81,7 @@ class AbstractLayerData : public virtual AbstractLayerInterface
 
     /**
      * @brief check if this Layer Data is visible on screen
-     * @return the visibililiy of this Data
+     * @return the visibility of this Data
      */
     bool visible() const;
     
@@ -111,16 +111,16 @@ class AbstractLayerData : public virtual AbstractLayerInterface
      * @brief m_position setter
      * @param posIn the new GeoDataCoordinates
      * 
-     * coppies the Geopoint posIn
+     * copies the Geopoint posIn
      */
     void setPosition( const GeoDataCoordinates &posIn );
     
     /**
      * @brief m_position setter
      * @param lat the latitude of the new position
-     * @param lon the longitde of the new position
+     * @param lon the longitude of the new position
      * 
-     * convience method to set the position from latitude and
+     * convenience method to set the position from latitude and
      * longitude
      */
     void setPosition( const qreal &lat, const qreal &lon);
@@ -132,11 +132,11 @@ class AbstractLayerData : public virtual AbstractLayerInterface
      * @param screenSize the size of the Widget Canvas
      * @param invRotAxis Quaternion representation of the rotation of
      *                   the globe, previously inverted
-     * @param radius the current radius of the globe, measuer of zoom
+     * @param radius the current radius of the globe, measure of zoom
      *               level
      * @param [out]position the QPoint that will be updated with the 
      *                      position on screen 
-     * @return @c true if the position is on the visable side of the
+     * @return @c true if the position is on the visible side of the
      *                 globe
      *         @c false if the position is on the other side of the 
      *                  globe
@@ -159,7 +159,7 @@ class AbstractLayerData : public virtual AbstractLayerInterface
     GeoDataCoordinates *m_position;
     
     /**
-     * @brief visability of the AbstractLayerData
+     * @brief visibility of the AbstractLayerData
      */
     bool m_visible;
 };

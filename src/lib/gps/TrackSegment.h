@@ -18,7 +18,7 @@ namespace Marble
 {
 
 /**
- * @brief uninterupted sequence of trackPoints
+ * @brief uninterrupted sequence of trackPoints
  * 
  * A track is made up of tracksegments that record a sequence of track
  * points. if signal is lost at any time from the gps device then a 

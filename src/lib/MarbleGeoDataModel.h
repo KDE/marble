@@ -28,7 +28,7 @@ class GeoDataDocument;
 /**
  * @short The representation of GeoData in a model
  * This class represents all available data given by kml-data files.
- * It will encapsule the different Tiles needed to form one layer.
+ * It will encapsulate the different Tiles needed to form one layer.
  * Thus each layer will be represented by one MarbleGeoDataModel.
  */
 class MARBLE_EXPORT MarbleGeoDataModel : public QAbstractListModel
