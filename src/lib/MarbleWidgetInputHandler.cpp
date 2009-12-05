@@ -585,6 +585,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         else
             return false;
     }
+    return QObject::eventFilter( o, e );
 }
 
 bool MarbleWidgetDefaultInputHandler::keyEvent( MarbleMap * map, QEvent* e )
