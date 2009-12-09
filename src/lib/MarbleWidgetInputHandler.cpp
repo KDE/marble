@@ -22,7 +22,10 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QRubberBand>
 #include <QtGui/QToolTip>
-#include <QTouchEvent>
+
+#if QT_VERSION >= 0x40600
+  #include <QTouchEvent>
+#endif
 
 #include "global.h"
 #include "MarbleDebug.h"
