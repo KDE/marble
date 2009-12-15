@@ -204,22 +204,13 @@ set (marblewidget_UI
 # FIXME: cleaner approach of src/lib/MarbleControlBox.* vs. marble.qrc
 qt4_add_resources(marblewidget_SRCS libmarble.qrc ../marble.qrc)
 
-if (QTONLY)
-  qt4_wrap_ui(marblewidget_SRCS ${marblewidget_UI})
-  qt4_automoc(${marblewidget_SRCS})
-else (QTONLY)
-  kde4_add_ui_files(marblewidget_SRCS ${marblewidget_UI})
-endif (QTONLY)
+qt4_wrap_ui(marblewidget_SRCS ${marblewidget_UI})
+qt4_automoc(${marblewidget_SRCS})
 
 
 # link with release version of Qt libs
-if (QTONLY)
-    ADD_LIBRARY(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
-    TARGET_LINK_LIBRARIES (marblewidget ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTSCRIPT_LIBRARY} ${QT_QTMAIN_LIBRARY} ${QT_QTWEBKIT_LIBRARY} )
-else (QTONLY)
-    KDE4_ADD_LIBRARY(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
-    TARGET_LINK_LIBRARIES (marblewidget ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_KDEUI_LIBRARY} ${KDE4_KIO_LIBRARY} ${QT_QTMAIN_LIBRARY} ${QT_QTSCRIPT_LIBRARY}  ${QT_QTWEBKIT_LIBRARY} )
-endif (QTONLY)
+ADD_LIBRARY(marblewidget SHARED ${marblewidget_SRCS} ${SOURCES_UI_HDRS})
+TARGET_LINK_LIBRARIES (marblewidget ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTXML_LIBRARY} ${QT_QTSVG_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTSCRIPT_LIBRARY} ${QT_QTMAIN_LIBRARY} ${QT_QTWEBKIT_LIBRARY} )
 
 if (APPLE)
   #defined in top level makefile

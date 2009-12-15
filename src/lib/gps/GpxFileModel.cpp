@@ -16,17 +16,11 @@
 #include <QtCore/Qt>
 #include <QtCore/QFile>
 #include <QtCore/QVectorIterator>
+#include <QtGui/QFileDialog>
 #include "MarbleDebug.h"
 
 #include <config-marble.h>
 
-
-#ifdef QTONLY
-    #include <QtGui/QFileDialog>
-#else
-    #include <KFileDialog>
-    #include <KUrl>
-#endif
 
 using namespace Marble;
 
@@ -52,16 +46,9 @@ GpxFileModel::~GpxFileModel()
 void    GpxFileModel::saveFile()
 {
     QString fileName;
-#ifdef QTONLY
     fileName = QFileDialog::getSaveFileName( 0, tr("Save File"),
                                              QString(),
                                              tr("GpxFile (*.gpx)"));
-#else
-    fileName = KFileDialog::getSaveFileName( KUrl(), 
-                                             tr("GpxFile (*.gpx)"),
-                                             0,
-                                             tr("Save File") );
-#endif
     
     QFile file( fileName );
     if ( !file.open( QIODevice::WriteOnly | QIODevice::Text ) ) {
@@ -177,6 +164,6 @@ QVector<GpxFile*> * GpxFileModel::allFiles()
     return m_data;
 }
 
-  #include "GpxFileModel.moc"
+#include "GpxFileModel.moc"
 
 
