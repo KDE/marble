@@ -146,7 +146,7 @@ void MarbleLegendBrowser::loadLegend()
         if ( !customLegendPath.isEmpty() )
             d->m_html = readHtml( QUrl::fromLocalFile( customLegendPath  ) );
         else
-            d->m_html = QString();
+            d->m_html.clear();
     }
 
     if ( d->m_html.isEmpty() ) {
