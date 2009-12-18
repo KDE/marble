@@ -43,8 +43,8 @@ class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
     MarbleWidgetInputHandler();
     virtual ~MarbleWidgetInputHandler();
 
-    void setPositionSignalConnected( bool connected ){ m_positionSignalConnected = connected; }
-    bool isPositionSignalConnected() const { return m_positionSignalConnected; }
+    void setPositionSignalConnected( bool connected );
+    bool isPositionSignalConnected() const;
 
     virtual void init( MarbleWidget* );
 
@@ -73,14 +73,8 @@ class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
     void restoreViewContext();
 
  protected:
-    MarbleWidget  *m_widget;
-    MarbleModel   *m_model;
-
-    bool     m_positionSignalConnected;
-
-    QTimer   *m_mouseWheelTimer;
-
-    Qt::MouseButtons m_disabledMouseButtons;
+    class Protected;
+    Protected * const d;
 
  private:
     Q_DISABLE_COPY( MarbleWidgetInputHandler )
