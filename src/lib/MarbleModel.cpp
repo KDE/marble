@@ -16,6 +16,7 @@
 #include <cmath>
 
 #include <QtCore/QAtomicInt>
+#include <QtCore/QPointer>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
 #include <QtCore/QAbstractItemModel>
@@ -355,11 +356,12 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
                                      installMap,
                                      (role == "dem") ? "true" : "false" );
 
-            TileCreatorDialog  tileCreatorDlg( tileCreator, 0 );
-            tileCreatorDlg.setSummary( d->m_mapTheme->head()->name(),
-                                       d->m_mapTheme->head()->description() );
-            tileCreatorDlg.exec();
+            QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
+            tileCreatorDlg->setSummary( d->m_mapTheme->head()->name(),
+                                        d->m_mapTheme->head()->description() );
+            tileCreatorDlg->exec();
             qDebug("Tile creation completed");
+            delete tileCreatorDlg;
         }
         d->m_tileLoader->setLayer( layer );
     }
@@ -826,11 +828,12 @@ void MarbleModel::clearPersistentTileCache()
                                      installMap,
                                      (role == "dem") ? "true" : "false" );
 
-            TileCreatorDialog  tileCreatorDlg( tileCreator, 0 );
-            tileCreatorDlg.setSummary( d->m_mapTheme->head()->name(),
-                       d->m_mapTheme->head()->description() );
-            tileCreatorDlg.exec();
+            QPointer<TileCreatorDialog> tileCreatorDlg = new TileCreatorDialog( tileCreator, 0 );
+            tileCreatorDlg->setSummary( d->m_mapTheme->head()->name(),
+                                        d->m_mapTheme->head()->description() );
+            tileCreatorDlg->exec();
             qDebug("Tile creation completed");
+            delete tileCreatorDlg;
         }
     }
 }

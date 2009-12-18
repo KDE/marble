@@ -24,6 +24,7 @@
 
 // Qt
 #include <QtCore/QMimeData>
+#include <QtCore/QPointer>
 #include <QtGui/QAction>
 #include <QtGui/QClipboard>
 #include <QtGui/QMenu>
@@ -161,9 +162,10 @@ void MarbleWidgetPopupMenu::showFeatureInfo( QAction* action )
     if ( actionidx > 0 ) {
         QModelIndex index = m_featurelist.at( actionidx -1 );
 
-        PlacemarkInfoDialog dialog( index, m_widget );
-        dialog.setWindowModality( Qt::WindowModal );
-        dialog.exec();
+        QPointer<PlacemarkInfoDialog> dialog = new PlacemarkInfoDialog( index, m_widget );
+        dialog->setWindowModality( Qt::WindowModal );
+        dialog->exec();
+        delete dialog;
     }
 }
 
