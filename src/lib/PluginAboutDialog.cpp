@@ -78,7 +78,7 @@ void PluginAboutDialog::setAboutText( const QString& about )
 void PluginAboutDialog::setAuthors( const QList<Author>& authors )
 {
     QString string;
-    foreach ( Author author, authors ) {
+    foreach ( const Author& author, authors ) {
         string += author.name;
         string += "\n    ";
         string += author.email;

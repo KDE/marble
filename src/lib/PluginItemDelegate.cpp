@@ -120,7 +120,7 @@ QSize PluginItemDelegate::sizeHint( const QStyleOptionViewItem& option,
     elementSize.append( configButton.rect.size() );
     elementSize.append( nameSize( index ) );
 
-    foreach( QSize buttonSize, elementSize ) {
+    foreach( const QSize& buttonSize, elementSize ) {
         if( buttonSize.height() > size.height() )
             size.setHeight( buttonSize.height() );
         size.setWidth( size.width() + buttonSize.width() );

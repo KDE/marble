@@ -127,7 +127,7 @@ class WeatherItemPrivate
 
             QDate minDate = QDate::currentDate();
             minDate.addDays( -1 );
-            foreach( WeatherData data, m_forecastWeather ) {
+            foreach( const WeatherData& data, m_forecastWeather ) {
                 QDate date = data.dataDate();
                 if( date >= minDate
                     && data.hasValidCondition()
@@ -381,7 +381,7 @@ void WeatherItem::setForecastWeather( const QMap<QDate, WeatherData>& forecasts 
 
 void WeatherItem::addForecastWeather( const QList<WeatherData>& forecasts )
 {
-    foreach( WeatherData data, forecasts ) {
+    foreach( const WeatherData& data, forecasts ) {
         QDate date = data.dataDate();
         WeatherData other = d->m_forecastWeather.value( date );
         if ( !other.isValid() ) {
@@ -455,7 +455,7 @@ void WeatherItem::openBrowser()
     if ( !d->m_forecastWeather.isEmpty() ) {
         html += "<h2>" + tr( "Forecasts" ) + "</h2>";
     }
-    foreach ( WeatherData data, d->m_forecastWeather ) {
+    foreach ( const WeatherData& data, d->m_forecastWeather ) {
         QDate date = data.dataDate();
         html += "<h3>" + locale.standaloneDayName( date.dayOfWeek() ) + "</h3>";
         html += data.toHtml( d->temperatureUnit(),
