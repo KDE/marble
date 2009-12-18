@@ -26,8 +26,6 @@
 
 // Marble
 #include "MarbleDebug.h"
-#include "HttpDownloadManager.h"
-#include "CacheStoragePolicy.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 
