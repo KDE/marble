@@ -44,9 +44,12 @@ class MarbleGraphicsGridLayoutPrivate
         }
     }
 
-    MarbleGraphicsGridLayoutPrivate()
+    ~MarbleGraphicsGridLayoutPrivate()
     {
-        delete m_items;
+        for ( int i = 0; i < m_rows; ++i ) {
+            delete[] m_items[i];
+        }
+        delete[] m_items;
     }
 
     // A two dimensional array of pointers to ScreenGraphicsItems
