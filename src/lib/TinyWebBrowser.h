@@ -9,13 +9,6 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-//
-// The Tiny Web Browser is a web browser based on QTextBrowser.
-//
-// Author: Torsten Rahn
-//
-
-
 #ifndef TINYWEBBROWSER_H
 #define TINYWEBBROWSER_H
 
