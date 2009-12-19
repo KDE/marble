@@ -12,13 +12,14 @@
 #include "MarbleGraphicsGridLayout.h"
 
 // Marble
+#include "MarbleDebug.h"
 #include "ScreenGraphicsItem.h"
 
 // Qt
-#include "MarbleDebug.h"
 #include <QtCore/QHash>
 #include <QtCore/QRectF>
 #include <QtCore/QSizeF>
+#include <QtCore/QVector>
 
 namespace Marble
 {
@@ -78,16 +79,9 @@ void MarbleGraphicsGridLayout::addItem( ScreenGraphicsItem *item, int row, int c
 
 void MarbleGraphicsGridLayout::updatePositions( MarbleGraphicsItem *parent )
 {
-    double *maxWidth = new double[d->m_columns];
-    double *maxHeight = new double[d->m_rows];
-
     // Initialize with 0.0
-    for ( int i = 0; i < d->m_columns; i++ ) {
-        maxWidth[i] = 0.0;
-    }
-    for ( int i = 0; i < d->m_rows; i++ ) {
-        maxHeight[i] = 0.0;
-    }
+    QVector<double> maxWidth( d->m_columns, 0.0 );
+    QVector<double> maxHeight( d->m_rows, 0.0 );
 
     // Determining the cell sizes
     for ( int row = 0; row < d->m_rows; row++ ) {
@@ -109,10 +103,10 @@ void MarbleGraphicsGridLayout::updatePositions( MarbleGraphicsItem *parent )
         }
     }
 
-    double *startX = new double[d->m_columns];
-    double *endX = new double[d->m_columns];
-    double *startY = new double[d->m_rows];
-    double *endY = new double[d->m_rows];
+    QVector<double> startX( d->m_columns );
+    QVector<double> endX( d->m_columns );
+    QVector<double> startY( d->m_rows );
+    QVector<double> endY( d->m_rows );
     QRectF contentRect = parent->contentRect();
 
     for ( int i = 0; i < d->m_columns; i++ ) {
