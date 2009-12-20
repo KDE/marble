@@ -145,6 +145,7 @@ void LayerManager::renderLayer( GeoPainter *painter, ViewParams *viewParams,
                 if ( !renderPlugin->isInitialized() )
                 {
                     renderPlugin->initialize();
+                    emit renderPluginInitialized( renderPlugin );
                 }
                 renderPlugin->render( painter, viewport, renderPosition );
             }

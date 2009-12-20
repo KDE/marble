@@ -34,6 +34,7 @@ class MarbleWidget;
 class MarbleMap;
 class MarbleWidgetPopupMenu;
 class AbstractDataPluginItem;
+class RenderPlugin;
 
 class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
 {
@@ -71,6 +72,7 @@ class MARBLE_EXPORT MarbleWidgetInputHandler  : public QObject
 
  protected Q_SLOTS:
     void restoreViewContext();
+    void installPluginEventFilter( RenderPlugin *renderPlugin );
 
  protected:
     class Protected;

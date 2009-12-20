@@ -367,6 +367,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     void downloadTile( const QUrl& sourceUrl, const QString& destinationFileName,
                        const QString& id ) const;
+    
+    /**
+     * @brief Signal that a render item has been initialized
+     */
+    void renderPluginInitialized( RenderPlugin *renderPlugin );
 
  private:
     Q_DISABLE_COPY( MarbleModel )

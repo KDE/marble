@@ -81,6 +81,11 @@ class MARBLE_EXPORT LayerManager : public QObject
      * @brief Signal that the number of floatItems has changed
      */
     void floatItemsChanged();
+    
+    /**
+     * @brief Signal that a render item has been initialized
+     */
+    void renderPluginInitialized( RenderPlugin *renderPlugin );
 
     /**
      * This signal is emitted when the settings of a plugin changed.

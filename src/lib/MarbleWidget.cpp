@@ -229,6 +229,9 @@ void MarbleWidgetPrivate::construct()
 
     m_widget->connect( m_model, SIGNAL( pluginSettingsChanged() ),
                        m_widget, SIGNAL( pluginSettingsChanged() ) );
+                       
+    m_widget->connect( m_model, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
+                       m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
 }
 
 // ----------------------------------------------------------------

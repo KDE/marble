@@ -206,6 +206,8 @@ MarbleModel::MarbleModel( QObject *parent )
               this,              SIGNAL( pluginSettingsChanged() ) );
     connect ( d->m_layerManager, SIGNAL( repaintNeeded( QRegion ) ),
               this,              SIGNAL( repaintNeeded( QRegion ) ) );
+    connect ( d->m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
+              this,              SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
 
     d->m_timer = new QTimer( this );
     d->m_timer->start( 200 );

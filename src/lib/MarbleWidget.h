@@ -976,6 +976,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * This signal is emit when the settings of a plugin changed.
      */
     void pluginSettingsChanged();
+    
+    /**
+     * @brief Signal that a render item has been initialized
+     */
+    void renderPluginInitialized( RenderPlugin *renderPlugin );
 
  protected:
     /**

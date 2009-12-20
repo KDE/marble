@@ -95,9 +95,13 @@ void MarbleWidgetInputHandler::init( MarbleWidget *w )
 {
     d->m_widget = w;
     d->m_model = w->model();
+    
+    connect( d->m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
+             this,        SLOT( installPluginEventFilter( RenderPlugin * ) ) );
 
     foreach( RenderPlugin *renderPlugin, d->m_widget->renderPlugins() ) {
-        d->m_widget->installEventFilter( renderPlugin );
+        if( renderPlugin->isInitialized() )
+            d->m_widget->installEventFilter( renderPlugin );
     }
 }
 
@@ -217,6 +221,11 @@ void MarbleWidgetInputHandler::restoreViewContext()
     {
         d->m_widget->updateChangedMap();
     }
+}
+
+void MarbleWidgetInputHandler::installPluginEventFilter( RenderPlugin *renderPlugin )
+{
+    d->m_widget->installEventFilter( renderPlugin );
 }
 
 void MarbleWidgetDefaultInputHandler::init( MarbleWidget *w )
