@@ -76,9 +76,39 @@ PositionTracking::~PositionTracking()
 void PositionTracking::construct( const QSize &canvasSize,
                              ViewParams *viewParams )
 {
-    // FIXME: Unused parameters should get fixed during refactoring of this class
-    Q_UNUSED( canvasSize )
-    Q_UNUSED( viewParams )
+    QPointF position;
+    QPointF previousPosition;
+
+    //FIXME: this is a workaround for dealing with NAN values. we need to protect against that in the future
+    m_gpsCurrentPosition->setPosition( GeoDataCoordinates ( m_gpsCurrentPosition->position().longitude(GeoDataCoordinates::Degree),
+                                       m_gpsCurrentPosition->position().latitude( GeoDataCoordinates::Degree ),
+                                       m_gpsCurrentPosition->position().altitude(), GeoDataCoordinates::Degree ) );
+    m_gpsPreviousPosition->setPosition( GeoDataCoordinates ( m_gpsPreviousPosition->position().longitude(GeoDataCoordinates::Degree),
+                                       m_gpsPreviousPosition->position().latitude( GeoDataCoordinates::Degree ),
+                                       m_gpsPreviousPosition->position().altitude(), GeoDataCoordinates::Degree) );
+
+
+    m_gpsCurrentPosition->getPixelPos( canvasSize, viewParams, &position );
+    m_gpsPreviousPosition->getPixelPos( canvasSize, viewParams, &previousPosition );
+
+
+    QPointF unitVector = ( position - previousPosition  ) ;
+
+    if( unitVector.x() || unitVector.y() ) {
+        qreal magnitude = sqrt( (unitVector.x() * unitVector.x() )
+                          + ( unitVector.y() * unitVector.y() ) );
+        unitVector = unitVector / magnitude;
+        QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x() );
+        m_relativeLeft = ( position - ( unitVector * 9   ) + ( unitVector2 * 9 ) ) - position ;
+        m_relativeRight = ( position - ( unitVector * 9 ) - ( unitVector2 * 9 ) ) - position;
+        m_relativeTip = ( position + ( unitVector * 19.0 ) ) - position;
+    }
+
+    m_currentDraw.clear();
+    m_currentDraw << position
+            << position + m_relativeLeft
+            << position + m_relativeTip
+            << position + m_relativeRight;
 }
 
 
@@ -87,13 +117,17 @@ QRegion PositionTracking::genRegion( const QSize &canvasSize,
 {
         construct( canvasSize, viewParams );
 
-        QRect temp1( m_currentDraw.boundingRect().toRect() );
-        QRect temp2( m_previousDraw.boundingRect().toRect() );
+        QRegion dirty;
+        QList<QPolygonF> items;
+        items << m_previousDraw << m_currentDraw;
+        foreach(const QPolygonF &polygon, items)
+        {
+            QRect rect = polygon.boundingRect().toRect();
+            rect.adjust( -5, -5, 10, 10 );
+            dirty |= rect ;
+        }
 
-        temp1.adjust( -5, -5, 10, 10 );
-        temp2.adjust( -5, -5, 10, 10 );
-
-        return QRegion(temp1).united( QRegion(temp2) );
+        return dirty;
 }
 
 void PositionTracking::notifyPosition( GeoDataCoordinates pos )
@@ -145,6 +179,7 @@ bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
             m_gpsPreviousPosition = m_gpsCurrentPosition;
             m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking );
             reg = genRegion( canvasSize, viewParams );
+            // mDebug() << "Dirty region: " << reg;
             emit gpsLocation( m_gpsTracking->position(), m_speed );
             return true;
         } else {
@@ -163,50 +198,16 @@ void PositionTracking::draw( ClipPainter *painter,
                         const QSize &canvasSize, 
                         ViewParams *viewParams )
 {
-    Q_UNUSED( canvasSize )
-    Q_UNUSED( viewParams )
+    // Needed to have the current position stick to the gps position
+    // when dragging the map. See bug 199858.
+    construct( canvasSize, viewParams );
 
-    QPointF position;
-    QPointF previousPosition;
-
-    //FIXME: this is a workaround for dealing with NAN values. we need to protect against that in the future
-    m_gpsCurrentPosition->setPosition( GeoDataCoordinates ( m_gpsCurrentPosition->position().longitude(GeoDataCoordinates::Degree),
-                                       m_gpsCurrentPosition->position().latitude( GeoDataCoordinates::Degree ),
-                                       m_gpsCurrentPosition->position().altitude(), GeoDataCoordinates::Degree ) );
-    m_gpsPreviousPosition->setPosition( GeoDataCoordinates ( m_gpsPreviousPosition->position().longitude(GeoDataCoordinates::Degree),
-                                       m_gpsPreviousPosition->position().latitude( GeoDataCoordinates::Degree ),
-                                       m_gpsPreviousPosition->position().altitude(), GeoDataCoordinates::Degree) );
-
-
-    m_gpsCurrentPosition->getPixelPos( canvasSize, viewParams, &position );
-    m_gpsPreviousPosition->getPixelPos( canvasSize, viewParams, &previousPosition );
-
-
-    QPointF unitVector = ( position - previousPosition  ) ;
-
-    if( unitVector.x() || unitVector.y() ) {
-        qreal magnitude = sqrt( (unitVector.x() * unitVector.x() )
-                          + ( unitVector.y() * unitVector.y() ) );
-        unitVector = unitVector / magnitude;
-        QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x() );
-        m_relativeLeft = ( position - ( unitVector * 9   ) + ( unitVector2 * 9 ) ) - position ;
-        m_relativeRight = ( position - ( unitVector * 9 ) - ( unitVector2 * 9 ) ) - position;
-        m_relativeTip = ( position + ( unitVector * 19.0 ) ) - position;
-    }
-
-    QPolygonF arrow;
-
-    arrow   << position
-            << position + m_relativeLeft
-            << position + m_relativeTip
-            << position + m_relativeRight;
-
-    QPoint temp;
     painter->save();
     painter->setPen( Qt::black );
     painter->setBrush( Qt::white );
-    painter->drawPolygon( arrow );
+    painter->drawPolygon( m_currentDraw );
     painter->restore();
+    m_previousDraw = m_currentDraw;
 }
 
 
