@@ -87,12 +87,12 @@ int main(int argc, char *argv[])
     QString marbleDataPath;
     int dataPathIndex=0;
 
-    for ( int i = 1; i < argc - 1; ++i ) {
+    for ( int i = 1; i < argc; ++i ) {
         if ( strcmp( argv[ i ], "--debug-info" ) == 0 )
         {
             MarbleDebug::enable = true;
         }
-        if ( strcmp( argv[ i ], "--marbleDataPath" ) == 0 )
+        if ( strcmp( argv[ i ], "--marbleDataPath" ) == 0 && i + 1 < argc )
         {
             dataPathIndex = i + 1;
             marbleDataPath = argv[ dataPathIndex ];
