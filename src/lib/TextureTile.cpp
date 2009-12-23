@@ -305,7 +305,7 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
                 //          << "format:" << temptile.format()
                 //          << "bytesPerLine:" << temptile.bytesPerLine()
                 //          << "numBytes:" << temptile.numBytes() ;
-                download = temptile.isNull();
+                download |= temptile.isNull();
                 currentTileAvailable = true;
             }
         }
