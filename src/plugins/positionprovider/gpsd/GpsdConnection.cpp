@@ -12,6 +12,9 @@
 
 #include "MarbleDebug.h"
 
+#ifndef GPSD_API_MAJOR_VERSION
+    #define GPSD_API_MAJOR_VERSION 2
+#endif
 
 
 using namespace Marble;
