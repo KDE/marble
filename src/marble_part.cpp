@@ -826,8 +826,7 @@ void MarblePart::setupStatusBar()
         QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING);
     m_distanceLabel = setupStatusBarLabel( templateDistanceString );
 
-    const QString templateTileZoomLevelString =
-        QString( "%1" ).arg( TILEZOOMLEVEL_STRING );
+    const QString templateTileZoomLevelString = i18n( TILEZOOMLEVEL_STRING );
     m_tileZoomLevelLabel = setupStatusBarLabel( templateTileZoomLevelString );
 
     connect( m_controlView->marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
