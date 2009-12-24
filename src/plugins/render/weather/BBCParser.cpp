@@ -219,7 +219,7 @@ void BBCParser::readDescription( WeatherData *data )
             QRegExp regExp;
             
             // Temperature
-            regExp.setPattern( "(Temperature:\\s*)(\\d+)(.C)" );
+            regExp.setPattern( "(Temperature:\\s*)(-?\\d+)(.C)" );
             int pos = regExp.indexIn( description );
             if ( pos > -1 ) {
                 QString value = regExp.cap( 2 );
@@ -227,7 +227,7 @@ void BBCParser::readDescription( WeatherData *data )
             }
 
             // Max Temperature
-            regExp.setPattern( "(Max Temp:\\s*)(\\d+)(.C)" );
+            regExp.setPattern( "(Max Temp:\\s*)(-?\\d+)(.C)" );
             pos = regExp.indexIn( description );
             if ( pos > -1 ) {
                 QString value = regExp.cap( 2 );
@@ -235,7 +235,7 @@ void BBCParser::readDescription( WeatherData *data )
             }
 
             // Min Temperature
-            regExp.setPattern( "(Min Temp:\\s*)(\\d+)(.C)" );
+            regExp.setPattern( "(Min Temp:\\s*)(-?\\d+)(.C)" );
             pos = regExp.indexIn( description );
             if ( pos > -1 ) {
                 QString value = regExp.cap( 2 );
