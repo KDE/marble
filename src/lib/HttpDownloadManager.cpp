@@ -16,10 +16,10 @@
 #include <QtCore/QMap>
 #include <QtCore/QTimer>
 
-#include "MarbleDebug.h"
 #include "DownloadPolicy.h"
 #include "DownloadQueueSet.h"
 #include "HttpJob.h"
+#include "MarbleDebug.h"
 #include "StoragePolicy.h"
 #include "NetworkPlugin.h"
 #include "PluginManager.h"
@@ -108,7 +108,8 @@ DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostN
         }
     }
     if ( !result ) {
-        qWarning() << "No download policy found, using default policy.";
+        mDebug() << "No download policy found for" << hostName << usage
+                 << ", using default policy.";
         result = &m_defaultQueues;
     }
     return result;
