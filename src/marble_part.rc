@@ -2,7 +2,8 @@
 <kpartgui name="marble_part" version="9">
 
 <MenuBar>
-  <Menu name="file" noMerge="1"><text>&amp;File</text>
+  <Menu name="file" noMerge="1">
+    <text>&amp;File</text>
     <Action name="file_open"/>
     <Action name="new_stuff"/>
     <Action name="exportMap"/>
@@ -11,23 +12,27 @@
     <Action name="workOffline"/>
     <Action name="file_quit"/>
   </Menu>
-  <Menu name="edit" noMerge="1"><text>&amp;Edit</text>
+  <Menu name="edit" noMerge="1">
+    <text>&amp;Edit</text>
     <Action name="edit_copy"/>
     <Action name="edit_copy_coordinates"/>
   </Menu>
-  <Menu name="view" noMerge="1"><text>&amp;View</text>
+  <Menu name="view" noMerge="1">
+    <text>&amp;View</text>
     <Merge name="StandardToolBarMenuHandler" />
     <Action name="show_currentlocation" group="show_merge"/>
     <Separator/>
     <Action name="show_crosshairs" group="show_merge"/>
     <Separator/>
-    <Menu name="infoboxes" noMerge="1"><text>&amp;Info Boxes</text>
-    <Action name="options_lock_floatitems"/>
-    <Separator/>
-    <ActionList name="infobox_actionlist" />
+    <Menu name="infoboxes" noMerge="1">
+      <text>&amp;Info Boxes</text>
+      <Action name="options_lock_floatitems"/>
+      <Separator/>
+      <ActionList name="infobox_actionlist" />
     </Menu>
-    <Menu name="onlineservices" noMerge="1"><text>&amp;Online Services</text>
-    <ActionList name="onlineservices_actionlist" />
+    <Menu name="onlineservices" noMerge="1">
+      <text>&amp;Online Services</text>
+      <ActionList name="onlineservices_actionlist" />
     </Menu>
     <Separator/>
     <Action name="show_clouds"/>
@@ -36,7 +41,8 @@
     <Action name="control_sun"/>
     <Action name="view_redisplay"/>
   </Menu>
-  <Menu name="settings" noMerge="1"><text>&amp;Settings</text>
+  <Menu name="settings" noMerge="1">
+    <text>&amp;Settings</text>
     <Merge name="StandardToolBarMenuHandler" />
     <Separator/>
     <Action name="options_show_statusbar"/>
@@ -47,7 +53,8 @@
   </Menu>
 </MenuBar>
 
-<ToolBar position="Top" noMerge="1" hidden="true" name="mainToolBar"><text>Main Toolbar</text>
+<ToolBar position="Top" noMerge="1" hidden="true" name="mainToolBar">
+  <text>Main Toolbar</text>
   <Action name="file_open"/>
   <Action name="file_print"/>
   <Separator/>
@@ -55,8 +62,8 @@
 </ToolBar>
 
 <ToolBar position="Top" hidden="true" name="pluginToolBar">
-    <text>Edit Toolbar</text>
-     <ActionList name="plugins_actionlist" />
+  <text>Edit Toolbar</text>
+  <ActionList name="plugins_actionlist" />
 </ToolBar>
 
 </kpartgui>
