@@ -12,11 +12,6 @@
 
 #include "MarbleDebug.h"
 
-#ifndef GPSD_API_MAJOR_VERSION
-    #define GPSD_API_MAJOR_VERSION 2
-#endif
-
-
 using namespace Marble;
 
 GpsdConnection::GpsdConnection( QObject* parent )
@@ -36,13 +31,13 @@ GpsdConnection::GpsdConnection( QObject* parent )
 
 void GpsdConnection::update()
 {
-    gps_data_t* data;
-#if GPSD_API_MAJOR_VERSION == 2
-    data = m_gpsd.query( "o" );
-#elif GPSD_API_MAJOR_VERSION == 3 && defined( POLICY_SET )
+    gps_data_t* data = 0;
+#if GPSD_API_MAJOR_VERSION == 3 && defined( POLICY_SET )
     while ((data = m_gpsd.poll()) && !(data->set & POLICY_SET)) {
         data = m_gpsd.poll();
     }
+#else
+        data = m_gpsd.query( "o" );
 #endif
     if ( data )
         emit gpsdInfo( *data );
