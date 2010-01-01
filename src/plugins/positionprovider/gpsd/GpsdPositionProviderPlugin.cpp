@@ -11,7 +11,7 @@
 #include "GpsdPositionProviderPlugin.h"
 
 #include "GpsdThread.h"
-
+#include "MarbleDebug.h"
 
 
 using namespace Marble;
@@ -104,6 +104,13 @@ GpsdPositionProviderPlugin::~GpsdPositionProviderPlugin()
 {
     if (m_thread) {
         m_thread->exit();
+        
+        if (!m_thread->wait( 5000 ) )
+        {
+          mDebug() << "Failed to stop GpsdThread, terminating it.";
+          m_thread->terminate();
+        }
+
         m_thread->wait();
         delete m_thread;
     }
