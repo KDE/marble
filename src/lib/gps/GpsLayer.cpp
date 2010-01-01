@@ -37,7 +37,7 @@ GpsLayer::GpsLayer( GpxFileModel *fileModel, QObject *parent )
 //     m_gpsTrack = new Track();
     m_currentGpx = new GpxFile();
     m_fileModel->addFile( m_currentGpx );
-    m_tracking = new PositionTracking( m_currentGpx );
+    m_tracking = new PositionTracking( m_currentGpx, this );
 
 }
 
@@ -45,7 +45,6 @@ GpsLayer::~GpsLayer()
 {
     // leaks m_fileModel, see comment in clearModel()
     delete m_currentPosition;
-    delete m_tracking;
     delete m_currentGpx;
 }
 
