@@ -25,7 +25,7 @@ GpsdConnection::GpsdConnection( QObject* parent )
 {
     gps_data_t* data = m_gpsd.open();
     if ( data ) {
-#if GPSD_API_MAJOR_VERSION == 3
+#if GPSD_API_MAJOR_VERSION == 3 && defined( WATCH_ENABLE ) 
         m_gpsd.stream( WATCH_ENABLE );
 #endif
         connect( &m_timer, SIGNAL( timeout() ), this, SLOT( update() ) );
@@ -39,7 +39,7 @@ void GpsdConnection::update()
     gps_data_t* data;
 #if GPSD_API_MAJOR_VERSION == 2
     data = m_gpsd.query( "o" );
-#elif GPSD_API_MAJOR_VERSION == 3
+#elif GPSD_API_MAJOR_VERSION == 3 && defined( POLICY_SET )
     while ((data = m_gpsd.poll()) && !(data->set & POLICY_SET)) {
         data = m_gpsd.poll();
     }
