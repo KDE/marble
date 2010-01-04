@@ -53,20 +53,20 @@ endif( CMAKE_COMMAND AND CMAKE_CTEST_COMMAND )
 # Add extra Libs for testing Plugins
 #############################################################
 #FIXME: Find a better way to do this!
-set(osmannotate_SRCS
-    ../src/plugins/render/osmannotate/TextAnnotation.cpp
-    ../src/plugins/render/osmannotate/PlacemarkTextAnnotation.cpp
-    ../src/plugins/render/osmannotate/GeoWidgetBubble.cpp
-    ../src/plugins/render/osmannotate/TmpGraphicsItem.cpp
-    ../src/plugins/render/osmannotate/TextEditor.cpp )
+#set(osmannotate_SRCS
+#    ../src/plugins/render/osmannotate/TextAnnotation.cpp
+#    ../src/plugins/render/osmannotate/PlacemarkTextAnnotation.cpp
+#    ../src/plugins/render/osmannotate/GeoWidgetBubble.cpp
+#    ../src/plugins/render/osmannotate/TmpGraphicsItem.cpp
+#    ../src/plugins/render/osmannotate/TextEditor.cpp )
 
-add_library(OsmAnnotatePluginTestLib SHARED ${osmannotate_SRCS} )
-target_link_libraries( OsmAnnotatePluginTestLib
-                            ${QT_QTGUI_LIBRARY}
-                            ${QT_QTMAIN_LIBRARY}
-                            ${QT_QTCORE_LIBRARY}
-                            marblewidget )
-
+#add_library(OsmAnnotatePluginTestLib SHARED ${osmannotate_SRCS} )
+#target_link_libraries( OsmAnnotatePluginTestLib
+#                            ${QT_QTGUI_LIBRARY}
+#                            ${QT_QTMAIN_LIBRARY}
+#                            ${QT_QTCORE_LIBRARY}
+#                            marblewidget )
+#
 #############################################################
 
 # MarbleWidget test
@@ -95,7 +95,7 @@ else (QTONLY)
 endif (QTONLY)
 
 #FIXME: this stuff should actually be done only once and in the main CMake File!
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/plugins/render/osmannotate )
+# include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/../src/plugins/render/osmannotate )
 
 
 ############################
@@ -114,5 +114,5 @@ marble_add_test( TestGeoData )
 add_definitions( -DCITIES_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}/../../../data/placemarks/cityplacemarks.kml\\\"" )
 marble_add_test( KMLTest )
 
-marble_add_test( TestOsmAnnotation )
+# marble_add_test( TestOsmAnnotation )
 marble_add_test( TestGeoDataGeometry )

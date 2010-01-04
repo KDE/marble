@@ -529,7 +529,14 @@ void MainWindow::aboutMarble()
 
 void MainWindow::handbook()
 {
-    if( !QDesktopServices::openUrl( QUrl( "http://docs.kde.org/stable/en/kdeedu/marble/index.html" ) ) ) 
+    const QString code = MarbleLocale::languageCode();
+
+    QUrl handbookLocation( "http://docs.kde.org/stable/" + code + "/kdeedu/marble/index.html" );
+
+    if ( handbookLocation.isEmpty() )
+        handbookLocation = QUrl("http://docs.kde.org/stable/en/kdeedu/marble/index.html");
+
+    if( !QDesktopServices::openUrl( handbookLocation ) )
     qDebug() << "URL not opened";
 }
 
