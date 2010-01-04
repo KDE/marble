@@ -40,8 +40,9 @@ GeoDataPlacemark::GeoDataPlacemark( const GeoDataFeature& other )
 }
 
 GeoDataPlacemark::GeoDataPlacemark( const QString& name )
-    : GeoDataFeature( name )
+    : GeoDataFeature( new GeoDataPlacemarkPrivate )
 {
+    d->m_name = name;
 }
 
 GeoDataPlacemark::~GeoDataPlacemark()
