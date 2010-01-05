@@ -12,7 +12,6 @@
 #ifndef KMLFILEVIEWITEM_H
 #define KMLFILEVIEWITEM_H
 
-#include <QtCore/QVariant>
 #include "AbstractFileViewItem.h"
 #include "GeoDataDocument.h"
 

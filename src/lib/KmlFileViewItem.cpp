@@ -8,15 +8,10 @@
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
 //
 
-
 #include "KmlFileViewItem.h"
-#include "GeoDataDocument.h"    // In geodata/data/
-#include "GeoDataPlacemark.h"
-#include "FileManager.h"
-#include "MarbleDataFacade.h"
-#include "MarblePlacemarkModel.h"
 
-#include "MarbleDebug.h"
+#include "FileManager.h"
+
 
 using namespace Marble;
 
