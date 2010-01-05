@@ -18,6 +18,7 @@
 #include <QtCore/QAbstractItemModel>
 
 #include "global.h"
+#include "ExtDateTime.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "MarbleGeoDataModel.h"

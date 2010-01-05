@@ -298,7 +298,6 @@ else (APPLE AND QTONLY)
     ${geodata_data_HDRS}
     geodata/geodata_export.h
     geodata/parser/GeoDocument.h
-    ExtDateTime.h
     TileCreator.h
     PluginInterface.h
     RenderPlugin.h

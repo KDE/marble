@@ -41,7 +41,7 @@
 #include "GeoDataStyle.h"
 
 #include "DgmlAuxillaryDictionary.h"
-
+#include "ExtDateTime.h"
 #include "FileStoragePolicy.h"
 #include "GeoPainter.h"
 #include "FileViewModel.h"

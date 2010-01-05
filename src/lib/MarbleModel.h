@@ -36,7 +36,6 @@
 #include <QtGui/QRegion>
 
 #include "global.h"
-#include "ExtDateTime.h"
 
 class QItemSelectionModel;
 class QAbstractItemModel;

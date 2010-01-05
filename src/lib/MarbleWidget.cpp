@@ -16,6 +16,7 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QHash>
 #include <QtCore/QSettings>
+#include <QtCore/QTime>
 #include <QtCore/QTimer>
 #include <QtCore/QAbstractItemModel>
 #include <QtGui/QItemSelectionModel>
