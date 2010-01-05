@@ -331,12 +331,10 @@ QVector<GeoDataLineString*> GeoDataLineString::toRangeCorrected() const
         {
             GeoDataLineString normalizedLineString = toNormalized();
             poleCorrected = normalizedLineString.toPoleCorrected();
-            p()->m_rangeCorrected = poleCorrected.toDateLineCorrected();
         }
         else {
             poleCorrected = toPoleCorrected();
         }
-        
         p()->m_rangeCorrected = poleCorrected.toDateLineCorrected();
     }
 
