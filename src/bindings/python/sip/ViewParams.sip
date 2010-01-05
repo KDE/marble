@@ -60,7 +60,7 @@ public:
     int                     radiusUpdated () const;
     void                    setRadiusUpdated (const int);
     Marble::Quaternion      planetAxisUpdated () const;
-    void                    setPlanetAxisUpdated (const Marble::Quaternion&);
+    void                    setPlanetAxisUpdated (const Marble::Quaternion &x);
 
     ~ViewParams ();
 //FIXME implementation is missing.
@@ -71,8 +71,8 @@ private:
                             ViewParams (const Marble::ViewParams&);
 //end
 public:
-    void                    setCanvasImage (QImage *);
-    void                    setCoastImage (QImage *);
+    void                    setCanvasImage (QImage*);
+    void                    setCoastImage (QImage*);
 };
 // ViewParams
 

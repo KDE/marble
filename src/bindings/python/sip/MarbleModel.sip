@@ -83,6 +83,7 @@ signals:
     void                    pluginSettingsChanged ();
     void                    repaintNeeded (QRegion dirtyRegion = QRegion());
     void                    downloadTile (const QUrl& sourceUrl, const QString& destinationFileName, const QString& id) const;
+    void                    renderPluginInitialized (Marble::RenderPlugin* renderPlugin);
 };
 // MarbleModel
 

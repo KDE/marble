@@ -185,6 +185,7 @@ public:
 signals:
 //ig    void                    regionSelected (const QList<double>&);
     void                    pluginSettingsChanged ();
+    void                    renderPluginInitialized (Marble::RenderPlugin* renderPlugin);
 };
 // MarbleWidget
 
