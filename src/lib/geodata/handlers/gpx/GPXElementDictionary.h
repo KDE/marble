@@ -36,6 +36,9 @@ namespace gpx
     extern const char* gpxTag_lat;
     extern const char* gpxTag_lon;
     extern const char* gpxTag_name;
+    extern const char* gpxTag_trk;
+    extern const char* gpxTag_trkpt;
+    extern const char* gpxTag_trkseg;
     extern const char* gpxTag_wpt;
     // TODO: add all remaining tags!
 }

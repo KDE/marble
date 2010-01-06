@@ -17,31 +17,30 @@
     Copyright 2009 Thibaut GRIDEL <tgridel@free.fr>
 */
 
-#include "GPXwptTagHandler.h"
+#include "GPXtrkptTagHandler.h"
 
 #include "MarbleDebug.h"
 
 #include "GPXElementDictionary.h"
 #include "GeoDataParser.h"
-#include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
-#include "GeoDataPoint.h"
+#include "GeoDataLineString.h"
+#include "GeoDataCoordinates.h"
 
 namespace Marble
 {
 namespace gpx
 {
-GPX_DEFINE_TAG_HANDLER(wpt)
+GPX_DEFINE_TAG_HANDLER(trkpt)
 
-GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
+GeoNode* GPXtrkptTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_wpt));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_trkpt));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_gpx))
+    if (parentItem.represents(gpxTag_trkseg))
     {
-        GeoDataDocument* doc = parentItem.nodeAs<GeoDataDocument>();
-        GeoDataPlacemark placemark;
+        GeoDataLineString* linestring = parentItem.nodeAs<GeoDataLineString>();
+        GeoDataCoordinates coord;
 
         QXmlStreamAttributes attributes = parser.attributes();
         QStringRef tmp;
@@ -57,14 +56,16 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
         {
             lon = tmp.toString().toFloat();
         }
-        placemark.setCoordinate(lat, lon);
-        doc->append(placemark);
+        coord.set(lon, lat, 0, GeoDataCoordinates::Degree);
+        linestring->append(coord);
+
 #ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_wpt << "> waypoint: " << doc->size();
+        mDebug() << "Parsed <" << gpxTag_trkpt << "> waypoint: " << linestring->size()
+                << coord.toString(GeoDataCoordinates::Decimal);
 #endif
-        return static_cast<GeoDataPlacemark*>(&doc->last());
+        return static_cast<GeoDataLineString*>(linestring);
     }
-    mDebug() << "wpt parsing with parentitem" << parentItem.qualifiedName();
+    mDebug() << "trkpt parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

@@ -37,9 +37,9 @@ GPX_DEFINE_TAG_HANDLER(gpx)
 GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
 {
     GeoDataDocument* doc = geoDataDoc( parser );
-//#ifdef DEBUG_TAGS
+#ifdef DEBUG_TAGS
     mDebug() << "Parsed <" << gpxTag_gpx << "> document: " << doc;
-//#endif
+#endif
     return doc;
 }
 

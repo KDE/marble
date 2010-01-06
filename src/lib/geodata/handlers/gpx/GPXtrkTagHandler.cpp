@@ -14,10 +14,10 @@
     You should have received a copy of the GNU Library General Public License
     along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-    Copyright 2009 Thibaut GRIDEL <tgridel@free.fr>
+    Copyright 2010 Thibaut GRIDEL <tgridel@free.fr>
 */
 
-#include "GPXnameTagHandler.h"
+#include "GPXtrkTagHandler.h"
 
 #include "MarbleDebug.h"
 
@@ -31,23 +31,27 @@ namespace Marble
 {
 namespace gpx
 {
-GPX_DEFINE_TAG_HANDLER(name)
+GPX_DEFINE_TAG_HANDLER(trk)
 
-GeoNode* GPXnameTagHandler::parse(GeoParser& parser) const
+GeoNode* GPXtrkTagHandler::parse(GeoParser& parser) const
 {
-    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_name));
+    Q_ASSERT(parser.isStartElement() && parser.isValidElement(gpxTag_trk));
 
     GeoStackItem parentItem = parser.parentElement();
-    if (parentItem.represents(gpxTag_wpt)
-        || parentItem.represents(gpxTag_trk))
+    if (parentItem.represents(gpxTag_gpx))
     {
-        GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
+        GeoDataDocument* doc = parentItem.nodeAs<GeoDataDocument>();
+        GeoDataPlacemark placemark;
+        GeoDataMultiGeometry multigeometry;
+        placemark.setGeometry(multigeometry);
 
-        placemark->setName(parser.readElementText().trimmed());
+        doc->append(placemark);
 #ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << gpxTag_name << "> : " << placemark->name();
+        mDebug() << "Parsed <" << gpxTag_trk << "> trk: " << doc->size();
 #endif
+        return static_cast<GeoDataPlacemark*>(&doc->last());
     }
+    mDebug() << "trk parsing with parentitem" << parentItem.qualifiedName();
     return 0;
 }
 

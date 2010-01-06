@@ -23,6 +23,9 @@ SET( geodata_handlers_gpx_SRCS
         geodata/handlers/gpx/GPXElementDictionary.cpp
         geodata/handlers/gpx/GPXgpxTagHandler.cpp
         geodata/handlers/gpx/GPXnameTagHandler.cpp
+        geodata/handlers/gpx/GPXtrkTagHandler.cpp
+        geodata/handlers/gpx/GPXtrkptTagHandler.cpp
+        geodata/handlers/gpx/GPXtrksegTagHandler.cpp
         geodata/handlers/gpx/GPXwptTagHandler.cpp
    )
 
