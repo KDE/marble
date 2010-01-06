@@ -591,11 +591,35 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
     }
     else {
         if ( e->type() == QEvent::Wheel ) {
+            MarbleWidget *marbleWidget = MarbleWidgetInputHandler::d->m_widget;
             // FIXME: disable animation quality after some time
-            MarbleWidgetInputHandler::d->m_widget->setViewContext( Marble::Animation );
+            marbleWidget->setViewContext( Marble::Animation );
 
             QWheelEvent *wheelevt = static_cast<QWheelEvent*>( e );
-            MarbleWidgetInputHandler::d->m_widget->zoomViewBy( (int)(wheelevt->delta() / 3) );
+
+            qreal  destLat;
+            qreal  destLon;
+            bool isValid = marbleWidget->geoCoordinates(wheelevt->x(), wheelevt->y(),
+                             destLon, destLat, GeoDataCoordinates::Radian );
+
+            marbleWidget->setUpdatesEnabled( false );
+            marbleWidget->zoomViewBy( (int)(wheelevt->delta() / 3) );
+
+            qreal  mouseLat;
+            qreal  mouseLon;
+            isValid = isValid && marbleWidget->geoCoordinates(wheelevt->x(), wheelevt->y(),
+                        mouseLon, mouseLat, GeoDataCoordinates::Radian );
+
+            qreal centerLat = DEG2RAD * marbleWidget->centerLatitude();
+            qreal centerLon = DEG2RAD * marbleWidget->centerLongitude();
+
+            if ( isValid ) {
+                qreal lon = destLon - (mouseLon - centerLon);
+                qreal lat = destLat - (mouseLat - centerLat);
+                marbleWidget->centerOn( RAD2DEG * lon, RAD2DEG * lat );
+            }
+            marbleWidget->setUpdatesEnabled( true );
+
             MarbleWidgetInputHandler::d->m_mouseWheelTimer->start( 400 );
             return true;
         }
