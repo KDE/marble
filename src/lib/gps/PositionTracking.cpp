@@ -13,7 +13,6 @@
 
 #include "AbstractLayer.h"
 #include "ClipPainter.h"
-#include "GmlSax.h"
 #include "GpxFile.h"
 #include "Track.h"
 #include "TrackPoint.h"
