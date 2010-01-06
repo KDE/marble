@@ -21,6 +21,8 @@
 #include <QtGui/QPainter>
 #include <QtGui/QTextFrame>
 #include <QtGui/QScrollBar>
+#include <QtGui/QStyle>
+#include <QtGui/QStyleOptionButton>
 #include <QtCore/QRegExp>
 
 #include "GeoSceneDocument.h"
@@ -305,16 +307,30 @@ QVariant MarbleLegendBrowser::loadResource ( int type, const QUrl & name )
     if ( type == QTextDocument::ImageResource
          && name.toString().startsWith("checkbox:", Qt::CaseInsensitive) )
     {
+        QStyleOptionButton option;
+        option.initFrom(this);
+        int width = style()->pixelMetric(QStyle::PM_IndicatorWidth, &option, this );
+        int height = style()->pixelMetric(QStyle::PM_IndicatorHeight, &option, this );
+        option.rect = QRect( 0, 0, width, height );
+        
         QString checkBoxName = name.toString().section(':', 1, -1);
         if ( !d->m_checkBoxMap.contains( checkBoxName ) ) {
-            newName = MarbleDirs::path( "bitmaps/checkbox_disabled.png" );
+            option.state = QStyle::State_None;
         }
         else if ( d->m_checkBoxMap.value( checkBoxName ) )
-            newName = MarbleDirs::path( "bitmaps/checkbox_checked.png" );
+            option.state |= QStyle::State_On;
         else
-            newName = MarbleDirs::path( "bitmaps/checkbox_empty.png" );
+            option.state |= QStyle::State_Off;
+            
+        QPixmap pixmap( width, height );
+        pixmap.fill( Qt::transparent );
 
-        return QTextBrowser::loadResource( type, QUrl::fromLocalFile( newName ) );
+        QPainter painter;
+        painter.begin(&pixmap);
+        style()->drawPrimitive(QStyle::PE_IndicatorCheckBox, &option, &painter, this);
+        painter.end();
+
+        return pixmap;
     }
 
     if ( type == QTextDocument::ImageResource
