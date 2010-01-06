@@ -21,7 +21,6 @@
 #include "MarbleDebug.h"
 #include "FileManager.h"
 #include "KmlFileViewItem.h"
-#include "FileViewModel.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleDataFacade.h"
