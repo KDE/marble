@@ -16,6 +16,7 @@
 #include <QtCore/QSettings>
 #include <QtCore/QUrl>
 #include <QtGui/QCloseEvent>
+#include <QtCore/QTimer>
 
 #include <QtGui/QAction>
 #include <QtGui/QLabel>
