@@ -31,17 +31,17 @@
 #endif
 
 // Marble
-#include "MarbleDebug.h"
 #include "AbstractProjection.h"
 #include "AbstractScanlineTextureMapper.h"
-#include "GeoPainter.h"
 #include "FileStorageWatcher.h"
 #include "FileViewModel.h"
 #include "GeoDataFeature.h"
+#include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneZoom.h"
 #include "HttpDownloadManager.h"
+#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 #include "MarbleModel.h"
@@ -50,14 +50,12 @@
 #include "MergedLayerDecorator.h"
 #include "PlacemarkLayout.h"
 #include "Planet.h"
+#include "RenderPlugin.h"
 #include "StoragePolicy.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
-
-#include "RenderPlugin.h"
-
 #include "gps/GpsLayer.h"
 
 using namespace Marble;
