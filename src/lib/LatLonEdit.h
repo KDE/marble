@@ -21,7 +21,6 @@
 #define LATLONEDIT_H
 
 #include <QtGui/QWidget>
-#include <QtCore/QtPlugin>
 
 #include "global.h"
 #include "marble_export.h"
