@@ -13,9 +13,9 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
-#include <QtCore/QList>
 #include <QtCore/QObject>
 #include <QtCore/QString>
+#include <QtCore/QStringList>
 
 namespace Marble
 {
