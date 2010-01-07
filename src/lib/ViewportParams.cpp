@@ -54,6 +54,10 @@ public:
     static SphericalProjection  s_sphericalProjection;
     static EquirectProjection   s_equirectProjection;
     static MercatorProjection   s_mercatorProjection;
+
+    GeoDataCoordinates   m_focusPoint;
+    bool                 m_hasFocusPoint;
+
 };
 
 ViewportParamsPrivate::ViewportParamsPrivate()
@@ -66,7 +70,8 @@ ViewportParamsPrivate::ViewportParamsPrivate()
       m_dirtyBox( true ),
       m_viewLatLonAltBox(),
       m_dirtyRegion( true ),
-      m_activeRegion()
+      m_activeRegion(),
+      m_hasFocusPoint(false)
 {
 } 
 
@@ -386,5 +391,33 @@ QRegion ViewportParams::activeRegion() const
     return d->m_activeRegion;
 }
 
+GeoDataCoordinates ViewportParams::focusPoint() const
+{
+    if (d->m_hasFocusPoint) {
+        return d->m_focusPoint;
+    }
+    else {
+       qreal lon, lat;
+       centerCoordinates(lon, lat);
+       return GeoDataCoordinates(lon, lat, 0.0, GeoDataCoordinates::Radian);
+    }
+
+}
+
+void ViewportParams::setFocusPoint(const GeoDataCoordinates &focusPoint)
+{
+    d->m_focusPoint = focusPoint;
+    d->m_hasFocusPoint = true;
+}
+
+void ViewportParams::resetFocusPoint()
+{
+    d->m_hasFocusPoint = false;
+}
+
+bool ViewportParams::focusPointIsCenter() const
+{
+    return !d->m_hasFocusPoint;
+}
 
 }

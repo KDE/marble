@@ -221,6 +221,8 @@ void MarbleWidgetInputHandler::restoreViewContext()
     {
         d->m_widget->updateChangedMap();
     }
+
+    d->m_widget->map()->viewParams()->viewport()->resetFocusPoint();
 }
 
 void MarbleWidgetInputHandler::installPluginEventFilter( RenderPlugin *renderPlugin )
@@ -618,6 +620,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 qreal lat = destLat - (mouseLat - centerLat);
                 marbleWidget->centerOn( RAD2DEG * lon, RAD2DEG * lat );
             }
+            marbleWidget->map()->viewParams()->viewport()->setFocusPoint(GeoDataCoordinates(destLon, destLat));
             marbleWidget->setUpdatesEnabled( true );
 
             MarbleWidgetInputHandler::d->m_mouseWheelTimer->start( 400 );
