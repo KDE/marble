@@ -20,7 +20,6 @@
 #include <cmath>
 
 // Qt
-#include <QtCore/QCoreApplication>
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QTime>
 #include <QtGui/QItemSelectionModel>
@@ -39,7 +38,6 @@
 #include "FileStorageWatcher.h"
 #include "FileViewModel.h"
 #include "GeoDataFeature.h"
-#include "GeoDataCoordinates.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneZoom.h"
@@ -52,7 +50,6 @@
 #include "MergedLayerDecorator.h"
 #include "PlacemarkLayout.h"
 #include "Planet.h"
-#include "Quaternion.h"
 #include "StoragePolicy.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
