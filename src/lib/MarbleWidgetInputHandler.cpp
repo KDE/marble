@@ -645,10 +645,22 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                     scaleFactor = line1.length() / line0.length();
                 }
 
-                MarbleWidgetInputHandler::d->m_widget->setViewContext( Marble::Animation );
+                MarbleWidget *marbleWidget = MarbleWidgetInputHandler::d->m_widget;
+
+                marbleWidget->setViewContext( Marble::Animation );
+
+                qreal  destLat;
+                qreal  destLon;
+                QPointF center = line1.pointAt(0.5);
+                bool isValid = marbleWidget->geoCoordinates(center.x(), center.y(),
+                             destLon, destLat, GeoDataCoordinates::Radian );
+
+                if (isValid) {
+                    marbleWidget->map()->viewParams()->viewport()->setFocusPoint(GeoDataCoordinates(destLon, destLat));
+                }
 
                 //convert the scaleFactor to be 0: the same: < 0: smaller, > 0: bigger and make it bigger by multiplying for an arbitrary big value
-                MarbleWidgetInputHandler::d->m_widget->zoomViewBy( (scaleFactor-1)*200);
+                marbleWidget->zoomViewBy( (scaleFactor-1)*200);
                 MarbleWidgetInputHandler::d->m_mouseWheelTimer->start( 400 );
             }
         }
