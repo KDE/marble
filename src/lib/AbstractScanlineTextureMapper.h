@@ -19,8 +19,6 @@
 #include <math.h>
 
 #include "MarbleMath.h"
-#include "TileLoader.h"
-#include "TextureTile.h"
 #include "GeoSceneTexture.h"
 #include "MathHelper.h"
 

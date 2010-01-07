@@ -8,13 +8,9 @@
 // Copyright 2007      Carlos Licea     <carlos _licea@hotmail.com>
 //
 
-
 #include "AbstractScanlineTextureMapper.h"
 
 #include "MarbleDebug.h"
-
-#include "GeoSceneTexture.h"
-#include "MarbleDirs.h"
 #include "TextureTile.h"
 #include "TileLoader.h"
 #include "TileLoaderHelper.h"
