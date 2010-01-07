@@ -13,8 +13,9 @@
 #include "AbstractTile.h"
 #include "AbstractTile_p.h"
 
-#include "MarbleDebug.h"
+#include <QtCore/QDateTime>
 
+#include "TileId.h"
 
 namespace Marble
 {

@@ -17,15 +17,15 @@
 #define MARBLE_ABSTRACTTILE_H
 
 #include <QtCore/QObject>
-#include <QtCore/QDateTime>
 
-#include "TileId.h"
 
+class QDateTime;
 
 namespace Marble
 {
 
 class AbstractTilePrivate;
+class TileId;
 
 class AbstractTile : public QObject
 {

@@ -16,6 +16,8 @@
 #ifndef MARBLE_ABSTRACTTILE_P_H
 #define MARBLE_ABSTRACTTILE_P_H
 
+#include <QtCore/QDateTime>
+
 #include "TileId.h"
 
 

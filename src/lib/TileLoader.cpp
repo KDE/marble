@@ -36,6 +36,7 @@
 #include "MarbleDebug.h"
 
 #include <QtCore/QCache>
+#include <QtCore/QDateTime>
 #include <QtCore/QHash>
 #include <QtGui/QImage>
 
