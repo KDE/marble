@@ -15,9 +15,7 @@
 #include "MarblePlacemarkModel_P.h"
 
 // Qt
-#include <QtCore/QModelIndex>
 #include <QtCore/QTime>
-#include <QtGui/QPixmap>
 
 // Marble
 #include "MarbleDebug.h"

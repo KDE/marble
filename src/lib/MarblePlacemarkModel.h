@@ -19,7 +19,6 @@
 
 
 #include <QtCore/QAbstractListModel>
-#include <QtCore/QList>
 #include <QtCore/QModelIndex>
 #include <QtCore/QVariant>
 
