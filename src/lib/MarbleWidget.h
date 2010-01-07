@@ -21,16 +21,11 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-#include <QtGui/QActionGroup>
-#include <QtCore/QTimer>
 #include <QtGui/QWidget>
-#include <QtGui/QImage>
 #include <QtGui/QPixmap>
-#include <QtDesigner/QDesignerExportWidget>
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"       // In geodata/data/
-#include "MarbleWidgetInputHandler.h"
 #include "Quaternion.h"
 #include "global.h"             // types needed in all of marble.
 
@@ -44,7 +39,7 @@ namespace Marble
 {
 
 // MarbleWidget 
-// class MarbleWidgetInputHandler;
+class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
 
 // Marble

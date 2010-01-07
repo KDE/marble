@@ -13,7 +13,6 @@
 
 #include <cmath>
 
-#include <QtCore/QCoreApplication>
 #include <QtCore/QHash>
 #include <QtCore/QSettings>
 #include <QtCore/QTime>
@@ -23,9 +22,6 @@
 #include <QtGui/QSizePolicy>
 #include <QtGui/QPaintEvent>
 #include <QtGui/QRegion>
-#include <QtGui/QStyleOptionGraphicsItem>
-#include <QtGui/QMainWindow>
-#include <QtGui/QAction>
 #include <QtNetwork/QNetworkProxy>
 
 #ifdef MARBLE_DBUS
@@ -37,11 +33,9 @@
 #include "MarbleDebug.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
-#include "Quaternion.h"
 #include "ViewParams.h"
 #include "GeoPainter.h"
 #include "FileViewModel.h"
-#include "GeoDataCoordinates.h"
 #include "MarblePhysics.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidgetInputHandler.h"
@@ -52,7 +46,7 @@
 #include "MergedLayerDecorator.h"
 #include "ViewportParams.h"
 
-#include "MarbleMap_p.h"
+#include "MarbleMap_p.h" // FIXME: remove this
 
 namespace Marble
 {
