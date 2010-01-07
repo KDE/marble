@@ -28,6 +28,7 @@
 
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataCoordinates.h"
+#include "marble_export.h"
 
 namespace Marble
 {
@@ -45,7 +46,7 @@ class AbstractProjectionPrivate;
  * @short A base class for all projections in Marble.
  */
 
-class AbstractProjection
+class MARBLE_EXPORT AbstractProjection
 {
     // Not a QObject so far because we don't need to send signals.
  public:
