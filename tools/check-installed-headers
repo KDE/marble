@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# This script checks if all Marble development headers are really necessary
+# as often unnecessary headers get included by accident.
+#
+# Parameter 1: Directory with Marble development headers
+#
+# Algorithm:
+#     - for each marble header:
+#          - check if it is included in another marble header,
+#            if it is not included in any other marble header,
+#            it is perhaps unnecessary
+#
+marble_include_dir=${1}
+#echo Marble include directory: $marble_include_dir
+
+marble_headers=$(find $marble_include_dir -name "*.h")
+#echo Marble headers: $marble_headers
+
+for header_path in $marble_headers; do
+    header_filename=$(basename $header_path)
+    #echo $header_filename
+
+    #echo grep --exclude=$header_filename $header_filename $marble_headers
+    grep --silent --exclude=$header_filename $header_filename $marble_headers
+    # grep exit status
+    # 0 => matches found
+    # 1 => no matches found
+    # 2 => error
+    if [[ $? -eq 1 ]]; then
+        grep --silent EXPORT $header_path
+        if [[ $? -eq 1 ]]; then
+            # class is at least exported
+            echo >/dev/null
+            echo not exported, probably unnecessary: $header_filename;
+#        else
+#            echo exported, but perhaps unnecessary: $header_filename;
+        fi;
+
+    fi;
+done
