@@ -12,8 +12,10 @@
 // Own
 #include "FileViewModel.h"
 
-// Other
+#include <QtGui/QItemSelectionModel>
+
 #include "AbstractFileViewItem.h"
+#include "FileManager.h"
 
 using namespace Marble;
 

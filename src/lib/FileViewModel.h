@@ -15,16 +15,16 @@
 
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QVariant>
-#include <QtGui/QItemSelectionModel>
 
 #include "marble_export.h"
 
-#include "FileManager.h"
+class QItemSelectionModel;
 
 namespace Marble
 {
 
 class AbstractFileViewItem;
+class FileManager;
 
 class MARBLE_EXPORT FileViewModel : public QAbstractListModel
 {
