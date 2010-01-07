@@ -21,13 +21,13 @@
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
 
-#include <QtGui/QWidget>
 #include <QtGui/QPixmap>
+#include <QtGui/QWidget>
 
-#include "marble_export.h"
-#include "GeoDataCoordinates.h"       // In geodata/data/
+#include "GeoDataCoordinates.h"
 #include "Quaternion.h"
 #include "global.h"             // types needed in all of marble.
+#include "marble_export.h"
 
 // Qt
 class QAbstractItemModel;
@@ -38,22 +38,19 @@ class QSettings;
 namespace Marble
 {
 
-// MarbleWidget 
-class MarbleWidgetInputHandler;
-class MarbleWidgetPrivate;
-
-// Marble
-class MarbleMap;
-class MarbleModel;
-class TileCreator;
-class SunLocator;
-class GpxFileModel;
+class AbstractFloatItem;
 class FileViewModel;
 class GeoDataLatLonBox;
 class GeoPainter;
-class RenderPlugin;
-class AbstractFloatItem;
 class GeoSceneDocument;
+class GpxFileModel;
+class MarbleMap;
+class MarbleModel;
+class MarbleWidgetInputHandler;
+class MarbleWidgetPrivate;
+class RenderPlugin;
+class SunLocator;
+class TileCreator;
 
 /**
  * @short A widget class that displays a view of the earth.

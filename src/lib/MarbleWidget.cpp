@@ -13,15 +13,15 @@
 
 #include <cmath>
 
+#include <QtCore/QAbstractItemModel>
 #include <QtCore/QHash>
 #include <QtCore/QSettings>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
-#include <QtCore/QAbstractItemModel>
 #include <QtGui/QItemSelectionModel>
-#include <QtGui/QSizePolicy>
 #include <QtGui/QPaintEvent>
 #include <QtGui/QRegion>
+#include <QtGui/QSizePolicy>
 #include <QtNetwork/QNetworkProxy>
 
 #ifdef MARBLE_DBUS
@@ -29,24 +29,24 @@
 #endif
 
 #include "AbstractProjection.h"
-#include "MarbleDirs.h"
-#include "MarbleDebug.h"
-#include "MarbleMap.h"
-#include "MarbleModel.h"
-#include "ViewParams.h"
-#include "GeoPainter.h"
 #include "FileViewModel.h"
+#include "GeoPainter.h"
+#include "MarbleDebug.h"
+#include "MarbleDirs.h"
+#include "MarbleMap.h"
+#include "MarbleMap_p.h" // FIXME: remove this
+#include "MarbleModel.h"
 #include "MarblePhysics.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidgetInputHandler.h"
-#include "TileCreatorDialog.h"
-#include "gps/GpsLayer.h"
+#include "MergedLayerDecorator.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
-#include "MergedLayerDecorator.h"
+#include "TileCreatorDialog.h"
+#include "ViewParams.h"
 #include "ViewportParams.h"
+#include "gps/GpsLayer.h"
 
-#include "MarbleMap_p.h" // FIXME: remove this
 
 namespace Marble
 {
