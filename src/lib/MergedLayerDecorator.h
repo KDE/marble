@@ -19,7 +19,6 @@
 #include <QtGui/QImage>
 #include <QtCore/QObject>
 
-#include "SunLocator.h"
 #include "TileId.h"
 
 class QString;
@@ -29,6 +28,7 @@ namespace Marble
 {
 class GeoSceneDocument;
 class GeoSceneTexture;
+class SunLocator;
 
 class MergedLayerDecorator : public QObject
 {

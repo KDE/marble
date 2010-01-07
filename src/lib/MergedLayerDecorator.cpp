@@ -19,6 +19,7 @@
 
 #include <QtGui/QPainter>
 
+#include "SunLocator.h"
 #include "global.h"
 #include "MarbleDebug.h"
 #include "GeoSceneDocument.h"
@@ -27,7 +28,6 @@
 #include "GeoSceneSettings.h"
 #include "GeoSceneTexture.h"
 #include "MapThemeManager.h"
-#include "MarbleDirs.h"
 #include "TextureTile.h"
 #include "TileLoaderHelper.h"
 #include "Planet.h"
