@@ -18,8 +18,8 @@
 #include <cmath>
 #include <math.h>
 
-#include "MarbleMath.h"
 #include "GeoSceneTexture.h"
+#include "MarbleMath.h"
 #include "MathHelper.h"
 
 
