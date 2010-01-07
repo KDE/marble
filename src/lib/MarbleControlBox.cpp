@@ -23,30 +23,21 @@
 
 #include "MarbleControlBox.h"
 
-#include <QtCore/QAbstractItemModel>
-#include <QtCore/QBuffer>
-#include <QtCore/QByteArray>
-#include <QtCore/QDataStream>
-#include <QtCore/QtAlgorithms>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
 #include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QStandardItemModel>
-#include <QtGui/QTextFrame>
 
 #include <global.h>
 
 #include <MarbleWidget.h>
 #include <MarbleMap.h>
-#include <ViewParams.h>
 #include <MarbleModel.h>
-#include <MarbleDirs.h>
 #include <FileViewModel.h>
 #include "gps/GpxFileModel.h"
 #include "gps/GpsLayer.h"
 #include "gps/PositionTracking.h"
 #include "MarbleLocale.h"
-#include "MarbleDebug.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleRunnerManager.h"
 #include "MathHelper.h"
@@ -55,8 +46,7 @@
 #include "GeoSceneHead.h"
 #include "Planet.h"
 
-#include "GeoOnfParser.h"
-#include "GeoDataDocument.h"
+#include "GeoDataCoordinates.h"
 
 using namespace Marble;
 
@@ -394,7 +384,7 @@ void MarbleControlBox::changeZoom(int zoom)
 }
 
 
-void MarbleControlBox::receiveGpsCoordinates( GeoDataCoordinates in, qreal speed )
+void MarbleControlBox::receiveGpsCoordinates( const GeoDataCoordinates &in, qreal speed )
 {
     Q_UNUSED( speed );
     if ( d->uiWidget.navigationCheckBox->isChecked() ) {

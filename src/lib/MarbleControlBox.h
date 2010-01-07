@@ -21,11 +21,9 @@
 
 #include "marble_export.h"
 
-#include <QtCore/QString>
 #include <QtGui/QWidget>
 
 #include "global.h"
-#include "GeoDataCoordinates.h"       // In geodata/data/
 
 
 /** @file
@@ -38,10 +36,12 @@
 class QModelIndex;
 class QResizeEvent;
 class QStandardItemModel;
+class QString;
 
 namespace Marble
 {
 
+class GeoDataCoordinates;
 class MarbleWidget;
 class MarbleControlBoxPrivate;
 class MarblePlacemarkModel;
@@ -194,7 +194,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
      * doesn't emit the zoomChanged signal.
      */
     void changeZoom( int zoom );
-    void receiveGpsCoordinates( GeoDataCoordinates in, qreal speed );
+    void receiveGpsCoordinates( const GeoDataCoordinates& in, qreal speed );
     void enableFileViewActions();
     
     /**
