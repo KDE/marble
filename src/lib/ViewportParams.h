@@ -103,6 +103,35 @@ class MARBLE_EXPORT ViewportParams
 
     QRegion activeRegion() const;
 
+    /**
+      * @return The current point of focus, e.g. the point that is not moved
+      * when changing the zoom level. If not set, it defaults to the
+      * center point.
+      * @see centerCoordinates setFocusPoint resetFocusPoint focusPointIsCenter
+      */
+    GeoDataCoordinates focusPoint() const;
+
+    /**
+      * @brief Change the point of focus, overridding any previously set focus point.
+      * @param focusPoint New focus point
+      * @see focusPoint resetFocusPoint focusPointIsCenter
+      */
+    void setFocusPoint(const GeoDataCoordinates &focusPoint);
+
+    /**
+      * @brief Invalidate any focus point set with @ref setFocusPoint.
+      * @see focusPoint setFocusPoint focusPointIsCenter
+      */
+    void resetFocusPoint();
+
+    /**
+      * @brief Determine whether the focus point is different from the center point
+      * @return False iff an explicit focus point was set with @ref setFocusPoint
+      * and @ref resetFocusPoint has not been called afterwards
+      * @see focusPoint setFocusPoint resetFocusPoint
+      */
+    bool focusPointIsCenter() const;
+
  private:
     Q_DISABLE_COPY( ViewportParams )
     ViewportParamsPrivate * const d;

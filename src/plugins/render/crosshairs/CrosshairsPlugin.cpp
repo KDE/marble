@@ -10,6 +10,7 @@
 
 #include "CrosshairsPlugin.h"
 
+#include "AbstractProjection.h"
 #include "MarbleDebug.h"
 #include "GeoPainter.h"
 
@@ -74,11 +75,16 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( layer )
 
     if ( renderPos == "ALWAYS_ON_TOP" ) {
-        int  centerx  = viewport->width() / 2;
-        int  centery  = viewport->height() / 2;
+        qreal  centerx  = viewport->width() / 2;
+        qreal  centery  = viewport->height() / 2;
         int  boxwidth = 6;
         int  boxheight = 2;
         int  boxoffset = 4;
+
+        GeoDataCoordinates focusPoint = viewport->focusPoint();
+        if (!viewport->focusPointIsCenter()) {
+            viewport->currentProjection()->screenCoordinates(focusPoint, viewport, centerx, centery);
+        }
 
         painter->save();
 
@@ -90,7 +96,7 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
         painter->drawRect( centerx - 1, centery - boxoffset - boxwidth, boxheight, boxwidth );
         painter->drawRect( centerx - 1, centery + boxoffset, boxheight, boxwidth );
-        
+
     /*
         painter->drawLine( centerx - halfsize, centery,
                             centerx + halfsize, centery );
