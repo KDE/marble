@@ -8,15 +8,8 @@
 // Copyright 2008      Torsten Rahn   <rahn@kde.org>
 //
 
-
 #include "AbstractFloatItem.h"
-#include "MarbleWidget.h"
-#include "MarbleMap.h"
-#include "MarbleDebug.h"
 
-#include <QtGui/QAction>
-#include <QtCore/QRectF>
-#include "GeoPainter.h"
 
 namespace Marble
 {

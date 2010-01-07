@@ -13,21 +13,17 @@
 #define MARBLE_ABSTRACT_FLOATITEM_H
 
 #include <QtCore/QPointF>
-#include <QtCore/QRectF>
 #include <QtCore/QSizeF>
 #include <QtCore/QString>
 #include <QtCore/Qt>
 
 #include <QtGui/QPen>
-#include <QtGui/QBrush>
-#include <QtGui/QPainterPath>
 #include <QtGui/QFont>
 
 #include "RenderPlugin.h"
 #include "FrameGraphicsItem.h"
 #include "marble_export.h"
 
-class QPainter;
 
 namespace Marble
 {
