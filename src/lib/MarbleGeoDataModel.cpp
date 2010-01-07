@@ -13,14 +13,11 @@
 #include "MarbleGeoDataModel.h"
 
 // Qt
-#include <QtCore/QModelIndex>
 #include <QtCore/QFile>
-#include <QtGui/QPixmap>
+#include <QtCore/QString>
 
 // Marble
-#include "MarbleDebug.h"
 #include "GeoDataDocument.h"       // In geodata/data/
-#include "GeoDataContainer.h"
 #include "GeoDataParser.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
@@ -73,7 +70,7 @@ QVariant MarbleGeoDataModel::data( const QModelIndex &index, int role ) const
     return QVariant();
 }
 
-unsigned long MarbleGeoDataModel::addGeoDataFile( QString filename )
+unsigned long MarbleGeoDataModel::addGeoDataFile( const QString &filename )
 {
     /*
     * read a GeoDataDocument for now - hard coded

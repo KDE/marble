@@ -13,13 +13,12 @@
 
 
 #include <QtCore/QAbstractListModel>
-#include <QtCore/QList>
 #include <QtCore/QModelIndex>
-#include <QtCore/QPersistentModelIndex>
 #include <QtCore/QVariant>
-#include <QtCore/QString>
 
 #include "marble_export.h"
+
+class QString;
 
 namespace Marble
 {
@@ -64,7 +63,7 @@ class MARBLE_EXPORT MarbleGeoDataModel : public QAbstractListModel
     * the return value is a unique id given for each loaded document 
     * @param filename the filename in the local filesystem
     */
-    unsigned long addGeoDataFile( QString filename );
+    unsigned long addGeoDataFile( const QString &filename );
 
     /**
     * @brief Unload a document from geoDataRoot
