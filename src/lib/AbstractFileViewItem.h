@@ -13,7 +13,7 @@
 #ifndef ABSTRACTFILEVIEWITEM_H
 #define ABSTRACTFILEVIEWITEM_H
 
-#include <QtCore/QVariant>
+#include <QtCore/QString>
 
 namespace Marble
 {
