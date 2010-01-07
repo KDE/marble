@@ -17,8 +17,6 @@ FILE( GLOB geodata_writers_kml_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata
 FILE( GLOB geodata_parser_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/parser/*.cpp )
 FILE( GLOB geodata_writer_SRCS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/writer/*.cpp )
 
-FILE( GLOB geodata_data_HDRS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} geodata/data/*.h )
-
 SET( geodata_handlers_gpx_SRCS
         geodata/handlers/gpx/GPXElementDictionary.cpp
         geodata/handlers/gpx/GPXgpxTagHandler.cpp

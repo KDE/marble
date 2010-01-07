@@ -272,14 +272,10 @@ else (APPLE AND QTONLY)
     MarbleNavigator.h
     MarbleDataFacade.h
     AbstractFloatItem.h
-    AbstractLayer/AbstractLayerInterface.h
     MapThemeManager.h
     MarbleAboutDialog.h
     MarbleWidgetInputHandler.h
     TinyWebBrowser.h
-
-    MapThemeSortFilterProxyModel.h
-    
     QtMarbleConfigDialog.h
     global.h
     MarbleDirs.h
@@ -294,7 +290,36 @@ else (APPLE AND QTONLY)
     Quaternion.h
     SunLocator.h
     ClipPainter.h
-    ${geodata_data_HDRS}
+    geodata/data/GeoDataAbstractView.h
+    geodata/data/GeoDataAccuracy.h
+    geodata/data/GeoDataColorStyle.h
+    geodata/data/GeoDataContainer.h
+    geodata/data/GeoDataCoordinates.h
+    geodata/data/GeoDataDocument.h
+    geodata/data/GeoDataFeature.h
+    geodata/data/GeoDataFolder.h
+    geodata/data/GeoDataGeometry.h
+    geodata/data/GeoDataHotSpot.h
+    geodata/data/GeoDataIconStyle.h
+    geodata/data/GeoDataLabelStyle.h
+    geodata/data/GeoDataLatLonAltBox.h
+    geodata/data/GeoDataLatLonBox.h
+    geodata/data/GeoDataLinearRing.h
+    geodata/data/GeoDataLineString.h
+    geodata/data/GeoDataLineStyle.h
+    geodata/data/GeoDataLod.h
+    geodata/data/GeoDataLookAt.h
+    geodata/data/GeoDataMultiGeometry.h
+    geodata/data/GeoDataObject.h
+    geodata/data/GeoDataPlacemark.h
+    geodata/data/GeoDataPoint.h
+    geodata/data/GeoDataPolygon.h
+    geodata/data/GeoDataPolyStyle.h
+    geodata/data/GeoDataRegion.h
+    geodata/data/GeoDataStyle.h
+    geodata/data/GeoDataStyleMap.h
+    geodata/data/GeoDataStyleSelector.h
+    geodata/data/Serializable.h
     geodata/geodata_export.h
     geodata/parser/GeoDocument.h
     TileCreator.h
