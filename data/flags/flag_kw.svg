@@ -1,12 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg	xmlns="http://www.w3.org/2000/svg"
-	xmlns:xlink="http://www.w3.org/1999/xlink"
-	width="1200"
-	height="600"
-	viewBox="0 0 12 6">
-<rect width="12" height="2" fill="#009977" id="green" />
-<rect width="12" height="2" y="2" fill="#fff" id="white" />
-<rect width="12" height="2" y="4" fill="#ce1126" id="red" />
-<path d="M 0,0 L 3,2 v 2 L 0,6 z" fill="#000" id="black" />
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="600" viewBox="0 0 12 6">
+<rect width="12" height="2" fill="#009977"/>
+<rect width="12" height="2" y="2" fill="#fff" id="white"/>
+<rect width="12" height="2" y="4" fill="#ce1126" id="red"/>
+<path d="M 0,0 L 3,2 v 2 L 0,6 z" fill="#000" id="black"/>
 </svg>

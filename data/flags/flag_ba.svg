@@ -1,97 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   width="1000"
-   height="500"
-   id="svg11581"
-   version="1.0"
-   viewBox="0 0 200 100">
-  <defs
-     id="defs11583" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     gridtolerance="10000"
-     guidetolerance="10"
-     objecttolerance="50"
-     width="200px"
-     height="100px"
-     showgrid="true" />
-  <metadata
-     id="metadata11586">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="layer1">
-    <rect
-       style="opacity:1;fill:#171796;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.403;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect11593"
-       width="200"
-       height="100"
-       x="0"
-       y="0" />
-    <path
-       style="fill:#f7d117;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 53,0 L 153,0 L 153,100 L 53,0 z "
-       id="path11595" />
-    <path
-       id="path11682"
-       d="M 81.53,51.12 L 85,51.125 L 88.46,51.12 L 90.58,57.68 L 85,53.625 L 79.41,57.68 L 81.53,51.12 z "
-       style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(-50,-51.125)" />
-    <path
-       id="path11689"
-       d="M 81.53,51.12 L 75.96,47.06 L 82.87,47.06 L 85,40.5 L 87.12,47.06 L 94.03,47.06 L 88.46,51.12 L 85,51.125 L 81.53,51.12 z "
-       style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(50,48.875)" />
-    <path
-       style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z "
-       id="path11746"
-       transform="translate(-37.5,-38.625)" />
-    <path
-       id="path11754"
-       d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z "
-       style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(-25,-26.125)" />
-    <path
-       style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z "
-       id="path11762"
-       transform="translate(-12.5,-13.625)" />
-    <path
-       id="path11770"
-       d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z "
-       style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(0,-1.125)" />
-    <path
-       style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z "
-       id="path11778"
-       transform="translate(12.5,11.375)" />
-    <path
-       id="path11786"
-       d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z "
-       style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(25,23.875)" />
-    <path
-       style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z "
-       id="path11794"
-       transform="translate(37.5,36.375)" />
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" width="1000" height="500" id="svg11581" version="1.0" viewBox="0 0 200 100">
+  <defs id="defs11583"/>
+  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" gridtolerance="10000" guidetolerance="10" objecttolerance="50" width="200px" height="100px" showgrid="true"/>
+  
+  <g id="layer1">
+    <rect width="200" height="100" x="0" y="0" opacity="1" fill="#171796" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1.403" stroke-linecap="square" stroke-miterlimit="4" stroke-dasharray="none" stroke-opacity="1"/>
+    <path d="M 53,0 L 153,0 L 153,100 L 53,0 z " fill="#f7d117" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+    <path d="M 81.53,51.12 L 85,51.125 L 88.46,51.12 L 90.58,57.68 L 85,53.625 L 79.41,57.68 L 81.53,51.12 z " transform="translate(-50,-51.125)" fill="white" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+    <path d="M 81.53,51.12 L 75.96,47.06 L 82.87,47.06 L 85,40.5 L 87.12,47.06 L 94.03,47.06 L 88.46,51.12 L 85,51.125 L 81.53,51.12 z " transform="translate(50,48.875)" fill="white" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+    <path d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z " transform="translate(-37.5,-38.625)" fill="white" fill-opacity="1" fill-rule="nonzero" stroke="none" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+    <path d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z " transform="translate(-25,-26.125)" fill="white" fill-opacity="1" fill-rule="nonzero" stroke="none" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+    <path d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z " transform="translate(-12.5,-13.625)" fill="white" fill-opacity="1" fill-rule="nonzero" stroke="none" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+    <path d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z " transform="translate(0,-1.125)" fill="white" fill-opacity="1" fill-rule="nonzero" stroke="none" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+    <path d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z " transform="translate(12.5,11.375)" fill="white" fill-opacity="1" fill-rule="nonzero" stroke="none" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+    <path d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z " transform="translate(25,23.875)" fill="white" fill-opacity="1" fill-rule="nonzero" stroke="none" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+    <path d="M 79.41,57.68 L 85,40.5 L 90.58,57.68 L 75.96,47.06 L 94.03,47.06 L 79.41,57.68 z " transform="translate(37.5,36.375)" fill="white" fill-opacity="1" fill-rule="nonzero" stroke="none" stroke-width="1px" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
   </g>
 </svg>

@@ -1,87 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   width="1026"
-   height="684"
-   viewBox="0 0 360 240"
-   id="Flag of Turkey">
-  <defs
-     id="defs2102" />
-  <g
-     style="fill:#e30a17"
-     id="g2080">
-    <rect
-       width="360"
-       height="240"
-       x="0"
-       y="0"
-       id="rect2082" />
-    <circle
-       cx="120"
-       cy="120"
-       r="60"
-       style="fill:white"
-       id="circle2084" />
-    <circle
-       cx="135"
-       cy="120"
-       r="48"
-       id="circle2086" />
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="1026" height="684" viewBox="0 0 360 240" id="Flag of Turkey">
+  <defs id="defs2102"/>
+  <g fill="#e30a17">
+    <rect width="360" height="240" x="0" y="0"/>
+    <circle cx="120" cy="120" r="60" fill="white"/>
+    <circle cx="135" cy="120" r="48"/>
   </g>
-  <g
-     transform="matrix(0,-30,30,0,200.7,120)"
-     style="fill:white"
-     id="star">
-    <g
-       id="cone">
-      <polygon
-         points="0,0 0,1 0.5,1 0,0 "
-         transform="matrix(0.951057,0.309017,-0.309017,0.951057,0,-1)"
-         id="triangle" />
-      <use
-         transform="scale(-1,1)"
-         id="use2091"
-         x="0"
-         y="0"
-         width="360"
-         height="240"
-         xlink:href="#triangle" />
+  <g transform="matrix(0,-30,30,0,200.7,120)" id="star" fill="white">
+    <g id="cone">
+      <polygon points="0,0 0,1 0.5,1 0,0 " transform="matrix(0.951057,0.309017,-0.309017,0.951057,0,-1)" id="triangle"/>
+      <use transform="scale(-1,1)" id="use2091" x="0" y="0" width="360" height="240" xlink:href="#triangle"/>
     </g>
-    <use
-       transform="matrix(0.309017,0.951057,-0.951057,0.309017,0,0)"
-       id="use2093"
-       x="0"
-       y="0"
-       width="360"
-       height="240"
-       xlink:href="#cone" />
-    <use
-       transform="matrix(0.309017,-0.951057,0.951057,0.309017,0,0)"
-       id="use2095"
-       x="0"
-       y="0"
-       width="360"
-       height="240"
-       xlink:href="#cone" />
-    <use
-       transform="matrix(-0.809017,0.587785,-0.587785,-0.809017,0,0)"
-       id="use2097"
-       x="0"
-       y="0"
-       width="360"
-       height="240"
-       xlink:href="#cone" />
-    <use
-       transform="matrix(-0.809017,-0.587785,0.587785,-0.809017,0,0)"
-       id="use2099"
-       x="0"
-       y="0"
-       width="360"
-       height="240"
-       xlink:href="#cone" />
+    <use transform="matrix(0.309017,0.951057,-0.951057,0.309017,0,0)" id="use2093" x="0" y="0" width="360" height="240" xlink:href="#cone"/>
+    <use transform="matrix(0.309017,-0.951057,0.951057,0.309017,0,0)" id="use2095" x="0" y="0" width="360" height="240" xlink:href="#cone"/>
+    <use transform="matrix(-0.809017,0.587785,-0.587785,-0.809017,0,0)" id="use2097" x="0" y="0" width="360" height="240" xlink:href="#cone"/>
+    <use transform="matrix(-0.809017,-0.587785,0.587785,-0.809017,0,0)" id="use2099" x="0" y="0" width="360" height="240" xlink:href="#cone"/>
   </g>
 </svg>

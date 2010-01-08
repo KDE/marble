@@ -1,50 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   x="0.0000000"
-   y="0.0000000"
-   width="600.00000"
-   height="300.00000"
-   id="svg4639">
-  <defs
-     id="defs4641" />
-  <rect
-     width="525.00000"
-     height="262.50000"
-     x="125.00000"
-     y="414.86218"
-     transform="matrix(1.142857,0.000000,0.000000,1.142857,-142.8571,-474.1281)"
-     style="fill:#000000;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
-     id="rect4648" />
-  <rect
-     width="525.00000"
-     height="87.500000"
-     x="125.00000"
-     y="502.36218"
-     transform="matrix(1.142857,0.000000,0.000000,1.142857,-142.8571,-474.1281)"
-     style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
-     id="rect5270" />
-  <rect
-     width="525.00000"
-     height="87.500000"
-     x="125.00000"
-     y="589.86218"
-     transform="matrix(1.142857,0.000000,0.000000,1.142857,-142.8571,-474.1281)"
-     style="fill:#007a3d;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
-     id="rect5892" />
-  <path
-     d="M 125.0,414.8 L 387.5,546.1 L 125.0,677.3 L 125.0,414.8 z "
-     transform="matrix(1.142857,0.000000,0.000000,1.142857,-142.8571,-474.1281)"
-     style="fill:#ce1126;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
-     id="path7135" />
-  <path
-     d="M 162.5,100.4 L 140.8,155.4 L 84.31,138.1 L 113.7,189.3 L 65.00,222.7 L 123.4,231.6 L 119.1,290.5 L 162.5,250.4 L 205.8,290.5 L 201.5,231.6 L 259.9,222.7 L 211.2,189.3 L 240.6,138.1 L 184.1,155.4 L 162.5,100.4 z "
-     transform="matrix(0.214286,0.000000,0.000000,0.214286,57.87853,107.0385)"
-     style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
-     id="path7757" />
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0.0000000" y="0.0000000" width="600.00000" height="300.00000" id="svg4639">
+  <defs id="defs4641"/>
+  <rect width="525.00000" height="262.50000" x="125.00000" y="414.86218" transform="matrix(1.142857,0.000000,0.000000,1.142857,-142.8571,-474.1281)" fill="#000000" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+  <rect width="525.00000" height="87.500000" x="125.00000" y="502.36218" transform="matrix(1.142857,0.000000,0.000000,1.142857,-142.8571,-474.1281)" fill="#ffffff" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+  <rect width="525.00000" height="87.500000" x="125.00000" y="589.86218" transform="matrix(1.142857,0.000000,0.000000,1.142857,-142.8571,-474.1281)" fill="#007a3d" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+  <path d="M 125.0,414.8 L 387.5,546.1 L 125.0,677.3 L 125.0,414.8 z " transform="matrix(1.142857,0.000000,0.000000,1.142857,-142.8571,-474.1281)" fill="#ce1126" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+  <path d="M 162.5,100.4 L 140.8,155.4 L 84.31,138.1 L 113.7,189.3 L 65.00,222.7 L 123.4,231.6 L 119.1,290.5 L 162.5,250.4 L 205.8,290.5 L 201.5,231.6 L 259.9,222.7 L 211.2,189.3 L 240.6,138.1 L 184.1,155.4 L 162.5,100.4 z " transform="matrix(0.214286,0.000000,0.000000,0.214286,57.87853,107.0385)" fill="#ffffff" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
 </svg>

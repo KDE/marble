@@ -1,49 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   version="1.1"
-   width="1500"
-   height="1000"
-   viewBox="0 0 3 2"
-   id="svg277">
-  <metadata
-     id="metadata288">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs286" />
-  <sodipodi:namedview
-     borderopacity="1.0"
-     bordercolor="#666666"
-     pagecolor="#ffffff"
-     id="base" />
-  <rect
-     width="1"
-     height="2"
-     fill="#008d46"
-     id="rect279" />
-  <rect
-     width="1"
-     height="2"
-     x="1"
-     fill="#fafeff"
-     id="rect281"
-     style="fill:#ffffff;fill-opacity:1" />
-  <rect
-     width="1"
-     height="2"
-     x="2"
-     fill="#d2232c"
-     id="rect283" />
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="1500" height="1000" viewBox="0 0 3 2" id="svg277">
+  
+  <defs id="defs286"/>
+  <sodipodi:namedview borderopacity="1.0" bordercolor="#666666" pagecolor="#ffffff" id="base"/>
+  <rect width="1" height="2" fill="#008d46"/>
+  <rect width="1" height="2" x="1" fill="#fafeff" fill="#ffffff" fill-opacity="1"/>
+  <rect width="1" height="2" x="2" fill="#d2232c"/>
 </svg>

@@ -1,36 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   version="1.0"
-   width="450"
-   height="300"
-   id="svg2">
-  <defs
-     id="defs4" />
-  <g
-     id="g2760">
-    <rect
-       width="150"
-       height="300"
-       x="0"
-       y="0"
-       style="fill:#002b7f;fill-opacity:1"
-       id="rect1872" />
-    <rect
-       width="150"
-       height="300"
-       x="150"
-       y="0"
-       style="fill:#fcd116;fill-opacity:1"
-       id="rect2764" />
-    <rect
-       width="150"
-       height="300"
-       x="300"
-       y="0"
-       style="fill:#ce1126;fill-opacity:1"
-       id="rect4544" />
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.0" width="450" height="300" id="svg2">
+  <defs id="defs4"/>
+  <g>
+    <rect width="150" height="300" x="0" y="0" fill="#002b7f" fill-opacity="1"/>
+    <rect width="150" height="300" x="150" y="0" fill="#fcd116" fill-opacity="1"/>
+    <rect width="150" height="300" x="300" y="0" fill="#ce1126" fill-opacity="1"/>
   </g>
 </svg>

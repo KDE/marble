@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 9 6">
-   <rect id="red_stripe"	fill="#C63D42"	width="9" height="6"/>
-   <rect id="blue_stripe"	fill="#00579C"	width="9" height="4" y="2"/>
-   <rect id="white_stripe"	fill="#FFF"	width="9" height="2" y="4"/>
+   <rect id="red_stripe" fill="#C63D42" width="9" height="6"/>
+   <rect id="blue_stripe" fill="#00579C" width="9" height="4" y="2"/>
+   <rect id="white_stripe" fill="#FFF" width="9" height="2" y="4"/>
 </svg>

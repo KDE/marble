@@ -1,70 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg:svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   version="1.0"
-   x="0.0000000"
-   y="0.0000000"
-   width="450.00000"
-   height="300.00000"
-   id="svg4017">
-  <sodipodi:namedview
-     borderopacity="1.0"
-     bordercolor="#666666"
-     pagecolor="#ffffff"
-     id="base" />
-  <svg:defs
-     id="defs4019" />
-  <svg:metadata
-     id="metadata4020">
-    <RDF
-       id="RDF4021">
-      <Work
-         about=""
-         id="Work4022">
-        <format
-           id="format4023">image/svg+xml</format>
-        <type
-           id="type4025"
-           resource="http://purl.org/dc/dcmitype/StillImage" />
-      </Work>
-    </RDF>
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </svg:metadata>
-  <svg:rect
-     width="450"
-     height="100"
-     x="0"
-     y="199.99997"
-     style="fill:#006b3f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     id="rect4026" />
-  <svg:rect
-     width="450"
-     height="100"
-     x="2.8891475e-007"
-     y="100"
-     style="fill:#fcd116;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     id="rect4648" />
-  <svg:rect
-     width="450"
-     height="100"
-     x="-3.9118544e-007"
-     y="-7.7975019e-006"
-     style="fill:#ce1126;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     id="rect5270" />
-  <svg:path
-     d="M 232.7,576.2 L 257.8,576.2 L 265.6,552.3 L 273.3,576.2 L 298.4,576.2 L 278.1,590.9 L 285.9,614.8 L 265.6,600.1 L 245.3,614.8 L 253.0,590.9 L 232.7,576.2 z "
-     style="fill:#000000;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-     id="path2203"
-     transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)" />
+<svg:svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" version="1.0" x="0.0000000" y="0.0000000" width="450.00000" height="300.00000" id="svg4017">
+  <sodipodi:namedview borderopacity="1.0" bordercolor="#666666" pagecolor="#ffffff" id="base"/>
+  <svg:defs id="defs4019"/>
+  
+  <svg:rect width="450" height="100" x="0" y="199.99997" id="rect4026" fill="#006b3f" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+  <svg:rect width="450" height="100" x="2.8891475e-007" y="100" id="rect4648" fill="#fcd116" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+  <svg:rect width="450" height="100" x="-3.9118544e-007" y="-7.7975019e-006" id="rect5270" fill="#ce1126" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+  <svg:path d="M 232.7,576.2 L 257.8,576.2 L 265.6,552.3 L 273.3,576.2 L 298.4,576.2 L 278.1,590.9 L 285.9,614.8 L 265.6,600.1 L 245.3,614.8 L 253.0,590.9 L 232.7,576.2 z " id="path2203" transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)" fill="#000000" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
 </svg:svg>

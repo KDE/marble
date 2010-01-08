@@ -1,40 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
- xmlns="http://www.w3.org/2000/svg"
- xmlns:xlink="http://www.w3.org/1999/xlink"
- version="1.0"
- x="0"
- y="0"
- width="500"
- height="300"
- id="svg1">
- <defs
- id="defs3" />
- <rect
- width="62.5"
- height="37.5"
- x="125"
- y="639.86218"
- transform="matrix(8,0,0,8,-1000.000,-5118.897)"
- style="fill:#00a3dd;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
- id="rect908" />
- <rect
- width="62.5"
- height="25"
- x="125"
- y="639.86218"
- transform="matrix(8,0,0,8,-1000,-5118.897)"
- style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
- id="rect1530" />
- <rect
- width="62.5"
- height="12.5"
- x="125"
- y="639.86218"
- transform="matrix(8,0,0,8,-1000,-5118.897)"
- style="fill:#ef2b2d;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
- id="rect1531" />
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0" y="0" width="500" height="300" id="svg1">
+ <defs id="defs3"/>
+ <rect width="62.5" height="37.5" x="125" y="639.86218" transform="matrix(8,0,0,8,-1000.000,-5118.897)" fill="#00a3dd" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+ <rect width="62.5" height="25" x="125" y="639.86218" transform="matrix(8,0,0,8,-1000,-5118.897)" fill="#ffffff" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+ <rect width="62.5" height="12.5" x="125" y="639.86218" transform="matrix(8,0,0,8,-1000,-5118.897)" fill="#ef2b2d" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
 </svg>

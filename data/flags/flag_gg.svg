@@ -1,62 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   width="750"
-   height="500"
-   id="svg7885">
-  <defs
-     id="defs7887" />
-  <g
-     id="layer1">
-    <rect
-       width="750"
-       height="500"
-       ry="0"
-       x="0"
-       y="0"
-       style="fill:#c11020;fill-opacity:1;fill-rule:evenodd;stroke:none;display:inline"
-       id="rect1318" />
-    <rect
-       width="300"
-       height="175"
-       x="0"
-       y="0"
-       style="fill:white;fill-opacity:1;fill-rule:evenodd;stroke:none;display:inline"
-       id="rect4093" />
-    <path
-       d="M 341.2,58.37 L 359.2,76.34 L 359.2,76.37 L 359.2,90.56 L 359.2,234.2 L 215.5,234.2 L 201.3,234.2 L 201.3,234.2 L 183.3,216.2 L 183.3,234.2 L 183.375,250 L 183.3,265.7 L 183.3,283.7 L 201.3,265.7 L 201.3,265.7 L 215.5,265.7 L 359.2,265.7 L 359.2,409.4 L 359.2,423.6 L 359.2,423.6 L 341.2,441.6 L 359.2,441.6 L 375,441.625 L 390.7,441.6 L 408.7,441.6 L 390.7,423.6 L 390.7,423.6 L 390.7,409.4 L 390.7,265.7 L 534.4,265.7 L 548.6,265.7 L 548.6,265.7 L 566.6,283.7 L 566.6,265.7 L 566.625,250 L 566.6,234.2 L 566.6,216.2 L 548.6,234.2 L 548.6,234.2 L 534.4,234.2 L 390.7,234.2 L 390.7,90.56 L 390.7,76.37 L 390.7,76.34 L 408.7,58.37 L 390.7,58.37 L 375,58.375 L 359.2,58.37 L 341.2,58.37 z "
-       style="fill:#ffd605;fill-opacity:1;fill-rule:evenodd;stroke:none;display:inline"
-       id="path3341" />
-    <use
-       transform="translate(450,0)"
-       style="stroke:none"
-       id="use10501"
-       x="0"
-       y="0"
-       width="750"
-       height="500"
-       xlink:href="#rect4093" />
-    <use
-       transform="translate(0,325)"
-       style="stroke:none"
-       id="use10503"
-       x="0"
-       y="0"
-       width="750"
-       height="500"
-       xlink:href="#rect4093" />
-    <use
-       transform="translate(450,325)"
-       style="stroke:none"
-       id="use10505"
-       x="0"
-       y="0"
-       width="750"
-       height="500"
-       xlink:href="#rect4093" />
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="750" height="500" id="svg7885">
+  <defs id="defs7887"/>
+  <g id="layer1">
+    <rect width="750" height="500" ry="0" x="0" y="0" fill="#c11020" fill-opacity="1" fill-rule="evenodd" stroke="none" display="inline"/>
+    <rect width="300" height="175" x="0" y="0" fill="white" fill-opacity="1" fill-rule="evenodd" stroke="none" display="inline"/>
+    <path d="M 341.2,58.37 L 359.2,76.34 L 359.2,76.37 L 359.2,90.56 L 359.2,234.2 L 215.5,234.2 L 201.3,234.2 L 201.3,234.2 L 183.3,216.2 L 183.3,234.2 L 183.375,250 L 183.3,265.7 L 183.3,283.7 L 201.3,265.7 L 201.3,265.7 L 215.5,265.7 L 359.2,265.7 L 359.2,409.4 L 359.2,423.6 L 359.2,423.6 L 341.2,441.6 L 359.2,441.6 L 375,441.625 L 390.7,441.6 L 408.7,441.6 L 390.7,423.6 L 390.7,423.6 L 390.7,409.4 L 390.7,265.7 L 534.4,265.7 L 548.6,265.7 L 548.6,265.7 L 566.6,283.7 L 566.6,265.7 L 566.625,250 L 566.6,234.2 L 566.6,216.2 L 548.6,234.2 L 548.6,234.2 L 534.4,234.2 L 390.7,234.2 L 390.7,90.56 L 390.7,76.37 L 390.7,76.34 L 408.7,58.37 L 390.7,58.37 L 375,58.375 L 359.2,58.37 L 341.2,58.37 z " fill="#ffd605" fill-opacity="1" fill-rule="evenodd" stroke="none" display="inline"/>
+    <use transform="translate(450,0)" id="use10501" x="0" y="0" width="750" height="500" xlink:href="#rect4093" stroke="none"/>
+    <use transform="translate(0,325)" id="use10503" x="0" y="0" width="750" height="500" xlink:href="#rect4093" stroke="none"/>
+    <use transform="translate(450,325)" id="use10505" x="0" y="0" width="750" height="500" xlink:href="#rect4093" stroke="none"/>
   </g>
 </svg>

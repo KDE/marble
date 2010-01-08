@@ -1,21 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="900" height="600">
-        <clipPath id = "r">
+        <clipPath id="r">
             <rect width="900" height="600"/>
         </clipPath>
-   <path d="M 0,0 L 900,0 L 0,600 z" fill="#003580"
-   id="blue_area" />
-   <path d="M 0,600 L 900,600 L 900,0 z" fill="#009543"
-   id="green_area" />   
-   <line x1="0" y1="600" x2="900" y2="0" stroke="white" stroke-width="200" clip-path="url(#r)"
-   id="white_stripes" />
-   <line x1="0" y1="600" x2="900" y2="0" stroke="#d21034" stroke-width="150" clip-path="url(#r)"
-   id="red_stripe" />
-   <path d="M 679.3,422.7 L 626.6,413.6 L 635.6,466.3 L 594.5,432.1 L 576.0,482.3 L 557.5,432.1 L 516.4,466.3 L 525.4,413.6 L 472.7,422.7 L 506.9,381.5 L 456.7,363.0 L 506.9,344.5 L 472.7,303.4 L 525.4,312.4 L 516.4,259.8 L 557.5,293.9 L 576.0,243.8 L 594.5,293.9 L 635.6,259.8 L 626.6,312.4 L 679.3,303.4 L 645.1,344.5 L 695.2,363.0 L 645.1,381.5 L 679.3,422.7 z " transform="matrix(0.838568,0,0,0.838568,-303.0406,-139.4657)" fill="#ffce00"
-   id="star" />
-   <path d="M 239.1926 161.73254 A 58.284271 58.284271 0 1 1  122.6,161.7 A 58.284271 58.284271 0 1 1  239.1926 161.73254 z" transform="matrix(1.029437,0,0,1.029437,-6.233738,-1.49345)" fill="#003580"
-   id="blue_gap" />
-   <path d="M 231.62321 165.51724 A 52.985703 52.985703 0 1 1  125.6,165.5 A 52.985703 52.985703 0 1 1  231.62321 165.51724 z" transform="matrix(0.943651,0,0,0.943651,11.42854,8.809477)" fill="#ffce00"
-   id="yellow_circle" />
+   <path d="M 0,0 L 900,0 L 0,600 z" fill="#003580" id="blue_area"/>
+   <path d="M 0,600 L 900,600 L 900,0 z" fill="#009543"/>   
+   <line x1="0" y1="600" x2="900" y2="0" stroke="white" stroke-width="200" clip-path="url(#r)" id="white_stripes"/>
+   <line x1="0" y1="600" x2="900" y2="0" stroke="#d21034" stroke-width="150" clip-path="url(#r)" id="red_stripe"/>
+   <path d="M 679.3,422.7 L 626.6,413.6 L 635.6,466.3 L 594.5,432.1 L 576.0,482.3 L 557.5,432.1 L 516.4,466.3 L 525.4,413.6 L 472.7,422.7 L 506.9,381.5 L 456.7,363.0 L 506.9,344.5 L 472.7,303.4 L 525.4,312.4 L 516.4,259.8 L 557.5,293.9 L 576.0,243.8 L 594.5,293.9 L 635.6,259.8 L 626.6,312.4 L 679.3,303.4 L 645.1,344.5 L 695.2,363.0 L 645.1,381.5 L 679.3,422.7 z " transform="matrix(0.838568,0,0,0.838568,-303.0406,-139.4657)" fill="#ffce00" id="star"/>
+   <path d="M 239.1926 161.73254 A 58.284271 58.284271 0 1 1  122.6,161.7 A 58.284271 58.284271 0 1 1  239.1926 161.73254 z" transform="matrix(1.029437,0,0,1.029437,-6.233738,-1.49345)" fill="#003580" id="blue_gap"/>
+   <path d="M 231.62321 165.51724 A 52.985703 52.985703 0 1 1  125.6,165.5 A 52.985703 52.985703 0 1 1  231.62321 165.51724 z" transform="matrix(0.943651,0,0,0.943651,11.42854,8.809477)" fill="#ffce00" id="yellow_circle"/>
 </svg>

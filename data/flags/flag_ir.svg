@@ -1,195 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   width="1155"
-   height="660"
-   id="svg734">
-  <defs
-     id="defs736" />
-  <rect
-     width="868.11023"
-     height="162.9288"
-     x="0"
-     y="333.13419"
-     transform="matrix(1.330476,0,0,2.025427,8.715308e-5,-344.7391)"
-     style="font-size:12px;fill:#da0000;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
-     id="rect1927" />
-  <rect
-     width="868.11023"
-     height="162.9288"
-     x="0"
-     y="-1.1e-005"
-     transform="matrix(1.330476,0,0,2.025427,8.715308e-5,-2e-4)"
-     style="font-size:12px;fill:#239f40;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
-     id="rect1926" />
-  <rect
-     width="868.11023"
-     height="496.06302"
-     x="0"
-     y="-4e-006"
-     transform="matrix(1.330476,0,0,0.443492,8.715308e-5,220.0001)"
-     style="font-size:12px;fill:white;fill-opacity:1;fill-rule:evenodd;stroke-width:1pt"
-     id="rect1052" />
-  <g
-     id="g16700">
-    <path
-       d="M 5,450 L 5,455 L 75,455 L 75,450 L 5,450 z M 80,450 L 80,460 L 57.5,460 L 57.5,475 L 75,475 L 75,470 L 62.5,470 L 62.5,465 L 75,465 L 80,465 L 80,475 L 105,475 L 105,450 L 100,450 L 100,470 L 95,470 L 95,450 L 90,450 L 90,470 L 85,470 L 85,450 L 80,450 z M 5,460 L 5,475 L 10,475 L 10,465 L 25,465 L 25,475 L 52.5,475 L 52.5,460 L 35,460 L 35,465 L 47.5,465 L 47.5,470 L 30,470 L 30,460 L 5,460 z M 15,470 L 15,475 L 20,475 L 20,470 L 15,470 z "
-       transform="translate(-2.5,-265)"
-       style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.403;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path16551" />
-    <rect
-       width="45"
-       height="5"
-       x="2.5"
-       y="175"
-       transform="matrix(1.055556,0,0,46,-0.138889,-7835)"
-       style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.403;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect16680" />
-    <rect
-       width="45"
-       height="5"
-       x="2.5"
-       y="175"
-       transform="matrix(1.055556,0,0,46,52.36111,-7835)"
-       style="fill:white;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.403;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect16682" />
-    <use
-       transform="translate(0,265)"
-       id="use16698"
-       x="0"
-       y="0"
-       width="1155"
-       height="660"
-       xlink:href="#path16551" />
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="1155" height="660" id="svg734">
+  <defs id="defs736"/>
+  <rect width="868.11023" height="162.9288" x="0" y="333.13419" transform="matrix(1.330476,0,0,2.025427,8.715308e-5,-344.7391)" font-size="12px" fill="#da0000" fill-opacity="1" fill-rule="evenodd" stroke-width="1pt"/>
+  <rect width="868.11023" height="162.9288" x="0" y="-1.1e-005" transform="matrix(1.330476,0,0,2.025427,8.715308e-5,-2e-4)" font-size="12px" fill="#239f40" fill-opacity="1" fill-rule="evenodd" stroke-width="1pt"/>
+  <rect width="868.11023" height="496.06302" x="0" y="-4e-006" transform="matrix(1.330476,0,0,0.443492,8.715308e-5,220.0001)" font-size="12px" fill="white" fill-opacity="1" fill-rule="evenodd" stroke-width="1pt"/>
+  <g>
+    <path d="M 5,450 L 5,455 L 75,455 L 75,450 L 5,450 z M 80,450 L 80,460 L 57.5,460 L 57.5,475 L 75,475 L 75,470 L 62.5,470 L 62.5,465 L 75,465 L 80,465 L 80,475 L 105,475 L 105,450 L 100,450 L 100,470 L 95,470 L 95,450 L 90,450 L 90,470 L 85,470 L 85,450 L 80,450 z M 5,460 L 5,475 L 10,475 L 10,465 L 25,465 L 25,475 L 52.5,475 L 52.5,460 L 35,460 L 35,465 L 47.5,465 L 47.5,470 L 30,470 L 30,460 L 5,460 z M 15,470 L 15,475 L 20,475 L 20,470 L 15,470 z " transform="translate(-2.5,-265)" fill="white" fill-opacity="1" fill-rule="nonzero" stroke="none" stroke-width="1.403" stroke-linecap="square" stroke-miterlimit="4" stroke-dasharray="none" stroke-opacity="1"/>
+    <rect width="45" height="5" x="2.5" y="175" transform="matrix(1.055556,0,0,46,-0.138889,-7835)" fill="white" fill-opacity="1" fill-rule="nonzero" stroke="none" stroke-width="1.403" stroke-linecap="square" stroke-miterlimit="4" stroke-dasharray="none" stroke-opacity="1"/>
+    <rect width="45" height="5" x="2.5" y="175" transform="matrix(1.055556,0,0,46,52.36111,-7835)" fill="white" fill-opacity="1" fill-rule="nonzero" stroke="none" stroke-width="1.403" stroke-linecap="square" stroke-miterlimit="4" stroke-dasharray="none" stroke-opacity="1"/>
+    <use transform="translate(0,265)" id="use16698" x="0" y="0" width="1155" height="660" xlink:href="#path16551"/>
   </g>
-  <use
-     transform="translate(105,0)"
-     id="use16706"
-     x="0"
-     y="0"
-     width="1155"
-     height="660"
-     xlink:href="#g16700" />
-  <use
-     transform="translate(210,0)"
-     id="use16708"
-     x="0"
-     y="0"
-     width="1155"
-     height="660"
-     xlink:href="#g16700" />
-  <use
-     transform="translate(315,0)"
-     id="use16710"
-     x="0"
-     y="0"
-     width="1155"
-     height="660"
-     xlink:href="#g16700" />
-  <use
-     transform="translate(420,0)"
-     id="use16712"
-     x="0"
-     y="0"
-     width="1155"
-     height="660"
-     xlink:href="#g16700" />
-  <use
-     transform="translate(525,0)"
-     id="use16714"
-     x="0"
-     y="0"
-     width="1155"
-     height="660"
-     xlink:href="#g16700" />
-  <use
-     transform="translate(630,0)"
-     id="use16716"
-     x="0"
-     y="0"
-     width="1155"
-     height="660"
-     xlink:href="#g16700" />
-  <g
-     transform="translate(-9.740612e-5,-140.0002)"
-     id="g16340">
-    <path
-       d="M 406.1,188.7 C 387.9,198.0 348.4,244.8 391.0,297.6 C 364.5,291.7 330.9,213.8 406.1,188.7 z "
-       transform="matrix(1.330475,0,0,1.330475,4.398692e-2,140.0002)"
-       style="fill:#da0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       id="path1930" />
-    <path
-       d="M 410.9,191.3 C 402.7,201.3 377.5,256.9 426.2,293.2 C 449.0,310.4 434.9,311.3 434.2,314.2 C 397.4,294.7 385.4,268.2 385.7,244.5 C 386.0,220.8 398.5,199.8 410.9,191.3 z "
-       transform="matrix(1.330475,0,0,1.330475,4.398692e-2,140.0002)"
-       style="fill:#da0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       id="path1931" />
-    <path
-       d="M 480.7,309.1 C 466.3,309.4 448.1,307.2 434.7,300.2 C 436.9,304.5 438.7,307.2 440.9,311.5 C 453.8,312.7 471.5,314.1 480.7,309.1 z "
-       transform="matrix(1.330475,0,0,1.330475,4.398692e-2,140.0002)"
-       style="fill:#da0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1"
-       id="path1932" />
-    <path
-       d="M 388.6,309.1 C 403.0,309.4 421.2,307.2 434.7,300.2 C 432.4,304.5 430.6,307.2 428.4,311.5 C 415.5,312.7 397.8,314.1 388.6,309.1 z "
-       transform="matrix(1.330475,0,0,1.330475,4.398692e-2,140.0002)"
-       style="fill:#da0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1"
-       id="path1933" />
-    <path
-       d="M 415.1,174.7 C 418.0,182.5 425.6,183.6 433.8,179.1 C 439.8,182.6 449.0,182.9 452.2,175.1 C 454.6,194.3 434.5,189.8 433.7,186.0 C 426.2,193.3 412.2,189.1 415.1,174.7 z "
-       transform="matrix(1.330475,0,0,1.330475,4.398692e-2,140.0002)"
-       style="fill:#da0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-       id="path1934" />
-    <path
-       d="M 434.4,321.2 L 441.9,312.6 L 443.0,196.1 L 434.0,188.2 L 425.0,195.8 L 426.8,312.9 L 434.4,321.2 z "
-       transform="matrix(1.330475,0,0,1.330475,4.398692e-2,140.0002)"
-       style="fill:#da0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       id="path1042" />
-    <g
-       transform="matrix(-1.330475,0,0,1.330475,1154.956,140.0002)"
-       id="use1808">
-      <path
-         d="M 406.1,188.7 C 387.9,198.0 348.4,244.8 391.0,297.6 C 364.5,291.7 330.9,213.8 406.1,188.7 z "
-         style="fill:#da0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-         id="path16099" />
-      <path
-         d="M 410.9,191.3 C 402.7,201.3 377.5,256.9 426.2,293.2 C 449.0,310.4 434.9,311.3 434.2,314.2 C 397.4,294.7 385.4,268.2 385.7,244.5 C 386.0,220.8 398.5,199.8 410.9,191.3 z "
-         style="fill:#da0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1pt;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
-         id="path16101" />
+  <use transform="translate(105,0)" id="use16706" x="0" y="0" width="1155" height="660" xlink:href="#g16700"/>
+  <use transform="translate(210,0)" id="use16708" x="0" y="0" width="1155" height="660" xlink:href="#g16700"/>
+  <use transform="translate(315,0)" id="use16710" x="0" y="0" width="1155" height="660" xlink:href="#g16700"/>
+  <use transform="translate(420,0)" id="use16712" x="0" y="0" width="1155" height="660" xlink:href="#g16700"/>
+  <use transform="translate(525,0)" id="use16714" x="0" y="0" width="1155" height="660" xlink:href="#g16700"/>
+  <use transform="translate(630,0)" id="use16716" x="0" y="0" width="1155" height="660" xlink:href="#g16700"/>
+  <g transform="translate(-9.740612e-5,-140.0002)">
+    <path d="M 406.1,188.7 C 387.9,198.0 348.4,244.8 391.0,297.6 C 364.5,291.7 330.9,213.8 406.1,188.7 z " transform="matrix(1.330475,0,0,1.330475,4.398692e-2,140.0002)" fill="#da0000" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1"/>
+    <path d="M 410.9,191.3 C 402.7,201.3 377.5,256.9 426.2,293.2 C 449.0,310.4 434.9,311.3 434.2,314.2 C 397.4,294.7 385.4,268.2 385.7,244.5 C 386.0,220.8 398.5,199.8 410.9,191.3 z " transform="matrix(1.330475,0,0,1.330475,4.398692e-2,140.0002)" fill="#da0000" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1"/>
+    <path d="M 480.7,309.1 C 466.3,309.4 448.1,307.2 434.7,300.2 C 436.9,304.5 438.7,307.2 440.9,311.5 C 453.8,312.7 471.5,314.1 480.7,309.1 z " transform="matrix(1.330475,0,0,1.330475,4.398692e-2,140.0002)" fill="#da0000" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="butt" stroke-linejoin="round" stroke-opacity="1"/>
+    <path d="M 388.6,309.1 C 403.0,309.4 421.2,307.2 434.7,300.2 C 432.4,304.5 430.6,307.2 428.4,311.5 C 415.5,312.7 397.8,314.1 388.6,309.1 z " transform="matrix(1.330475,0,0,1.330475,4.398692e-2,140.0002)" fill="#da0000" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="butt" stroke-linejoin="round" stroke-opacity="1"/>
+    <path d="M 415.1,174.7 C 418.0,182.5 425.6,183.6 433.8,179.1 C 439.8,182.6 449.0,182.9 452.2,175.1 C 454.6,194.3 434.5,189.8 433.7,186.0 C 426.2,193.3 412.2,189.1 415.1,174.7 z " transform="matrix(1.330475,0,0,1.330475,4.398692e-2,140.0002)" fill="#da0000" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1"/>
+    <path d="M 434.4,321.2 L 441.9,312.6 L 443.0,196.1 L 434.0,188.2 L 425.0,195.8 L 426.8,312.9 L 434.4,321.2 z " transform="matrix(1.330475,0,0,1.330475,4.398692e-2,140.0002)" fill="#da0000" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1"/>
+    <g transform="matrix(-1.330475,0,0,1.330475,1154.956,140.0002)" id="use1808">
+      <path d="M 406.1,188.7 C 387.9,198.0 348.4,244.8 391.0,297.6 C 364.5,291.7 330.9,213.8 406.1,188.7 z " fill="#da0000" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1"/>
+      <path d="M 410.9,191.3 C 402.7,201.3 377.5,256.9 426.2,293.2 C 449.0,310.4 434.9,311.3 434.2,314.2 C 397.4,294.7 385.4,268.2 385.7,244.5 C 386.0,220.8 398.5,199.8 410.9,191.3 z " fill="#da0000" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-width="1pt" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1"/>
     </g>
   </g>
-  <use
-     transform="translate(735,0)"
-     id="use16718"
-     x="0"
-     y="0"
-     width="1155"
-     height="660"
-     xlink:href="#g16700" />
-  <use
-     transform="translate(840,0)"
-     id="use16720"
-     x="0"
-     y="0"
-     width="1155"
-     height="660"
-     xlink:href="#g16700" />
-  <use
-     transform="translate(945,0)"
-     id="use16722"
-     x="0"
-     y="0"
-     width="1155"
-     height="660"
-     xlink:href="#g16700" />
-  <use
-     transform="translate(1050,0)"
-     id="use16724"
-     x="0"
-     y="0"
-     width="1155"
-     height="660"
-     xlink:href="#g16700" />
+  <use transform="translate(735,0)" id="use16718" x="0" y="0" width="1155" height="660" xlink:href="#g16700"/>
+  <use transform="translate(840,0)" id="use16720" x="0" y="0" width="1155" height="660" xlink:href="#g16700"/>
+  <use transform="translate(945,0)" id="use16722" x="0" y="0" width="1155" height="660" xlink:href="#g16700"/>
+  <use transform="translate(1050,0)" id="use16724" x="0" y="0" width="1155" height="660" xlink:href="#g16700"/>
 </svg>

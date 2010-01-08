@@ -1,32 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Notepad -->
-<!-- (PD) December 17, 2005 - _Zach Harden_  -->
-<svg
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   width="450"
-   height="390"
-   id="Flag of Belgium">
-  <rect
-     style="fill:#000000"
-     x="0"
-     y="0"
-     width="150"
-     height="390"
-     id="black bar" />
-  <rect
-     style="fill:#ffda0c"
-     x="150"
-     y="0"
-     width="150"
-     height="390"
-     id="yellow bar" />
-  <rect
-     style="fill:#f31830"
-     x="300"
-     y="0"
-     width="150"
-     height="390"
-     id="red bar" />
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="450" height="390" id="Flag of Belgium">
+  <rect x="0" y="0" width="150" height="390" id="black bar" fill="#000000"/>
+  <rect x="150" y="0" width="150" height="390" id="yellow bar" fill="#ffda0c"/>
+  <rect x="300" y="0" width="150" height="390" id="red bar" fill="#f31830"/>
 </svg>

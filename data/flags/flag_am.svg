@@ -1,6 +1,6 @@
-<?xml version="1.0" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <svg width="1200" height="600">
-<path style="fill:#ff0000" d="M1200 0 l0 200 l-1200 0 l0 -200 l1200 0 z"/>
-<path style="fill:#0000aa" d="M1200 200 l0 200 l-1200 0 l0 -200 l1200 0 z"/>
-<path style="fill:#ff9900" d="M1200 400 l0 200 l-1200 0 l0 -200 l1200 0 z"/>
+<path d="M1200 0 l0 200 l-1200 0 l0 -200 l1200 0 z" fill="#ff0000"/>
+<path d="M1200 200 l0 200 l-1200 0 l0 -200 l1200 0 z" fill="#0000aa"/>
+<path d="M1200 400 l0 200 l-1200 0 l0 -200 l1200 0 z" fill="#ff9900"/>
 </svg>

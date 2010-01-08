@@ -1,142 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   x="0.0000000"
-   y="0.0000000"
-   width="500.00000"
-   height="300.00000"
-   id="svg1">
-  <defs
-     id="defs3" />
-  <metadata
-     id="metadata4">
-    <rdf:RDF
-       id="RDF5">
-      <cc:Work
-         rdf:about=""
-         id="Work6">
-        <dc:format
-           id="format7">image/svg+xml</dc:format>
-        <dc:type
-           id="type9"
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <rect
-     width="312.50000"
-     height="187.50000"
-     x="125.00000"
-     y="489.86218"
-     transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)"
-     style="fill:#1eb53a;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-     id="rect908" />
-  <path
-     d="M 125.0,677.3 L 437.5,677.3 L 281.2,583.6 L 125.0,677.3 z "
-     transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)"
-     style="fill:#ce1126;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-     id="path1530" />
-  <path
-     d="M 125.0,489.8 L 437.5,489.8 L 281.2,583.6 L 125.0,489.8 z "
-     transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)"
-     style="fill:#ce1126;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-     id="path2152" />
-  <path
-     d="M 125.0,677.3 L 149.2,677.3 L 437.5,504.4 L 437.5,489.8 L 413.2,489.8 L 125.0,662.7 L 125.0,677.3 z "
-     transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)"
-     style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-     id="path2153" />
-  <path
-     d="M 437.5,677.3 L 413.2,677.3 L 125.0,504.4 L 125.0,489.8 L 149.2,489.8 L 437.5,662.7 L 437.5,677.3 z "
-     transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)"
-     style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-     id="path2775" />
-  <path
-     d="M 203.71306 555.23749 A 35.933472 30.800117 0 1 0 131.8,555.2 A 35.933472 30.800117 0 1 0 203.71306 555.23749 z"
-     transform="matrix(2.365483,0.000000,0.000000,2.759730,-146.8797,-1382.305)"
-     style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-     id="path2776" />
-  <g
-     transform="matrix(0.277152,0.000000,0.000000,0.277152,232.6779,-37.08654)"
-     style="fill:#1eb53a;fill-opacity:1.0000000;"
-     id="g4022">
-    <path
-       d="M 0.000,552.3 L 125.0,552.3 L 62.50,444.1 L 0.000,552.3 z "
-       style="fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="path4020" />
-    <path
-       d="M -1.1969655e-31,480.18718 L 125.0,480.1 L 62.49,588.4 L -1.1969655e-31,480.18718 z "
-       style="fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="path4021" />
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0.0000000" y="0.0000000" width="500.00000" height="300.00000" id="svg1">
+  <defs id="defs3"/>
+  
+  <rect width="312.50000" height="187.50000" x="125.00000" y="489.86218" transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)" fill="#1eb53a" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+  <path d="M 125.0,677.3 L 437.5,677.3 L 281.2,583.6 L 125.0,677.3 z " transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)" fill="#ce1126" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+  <path d="M 125.0,489.8 L 437.5,489.8 L 281.2,583.6 L 125.0,489.8 z " transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)" fill="#ce1126" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+  <path d="M 125.0,677.3 L 149.2,677.3 L 437.5,504.4 L 437.5,489.8 L 413.2,489.8 L 125.0,662.7 L 125.0,677.3 z " transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)" fill="#ffffff" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+  <path d="M 437.5,677.3 L 413.2,677.3 L 125.0,504.4 L 125.0,489.8 L 149.2,489.8 L 437.5,662.7 L 437.5,677.3 z " transform="matrix(1.600000,0.000000,0.000000,1.600000,-200.0000,-783.7795)" fill="#ffffff" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+  <path d="M 203.71306 555.23749 A 35.933472 30.800117 0 1 0 131.8,555.2 A 35.933472 30.800117 0 1 0 203.71306 555.23749 z" transform="matrix(2.365483,0.000000,0.000000,2.759730,-146.8797,-1382.305)" fill="#ffffff" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+  <g transform="matrix(0.277152,0.000000,0.000000,0.277152,232.6779,-37.08654)" fill="#1eb53a" fill-opacity="1.0000000">
+    <path d="M 0.000,552.3 L 125.0,552.3 L 62.50,444.1 L 0.000,552.3 z " fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+    <path d="M -1.1969655e-31,480.18718 L 125.0,480.1 L 62.49,588.4 L -1.1969655e-31,480.18718 z " fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
   </g>
-  <g
-     transform="matrix(0.277152,0.000000,0.000000,0.277152,194.5779,28.91346)"
-     style="fill:#1eb53a;fill-opacity:1.0000000;"
-     id="g4032">
-    <path
-       d="M 0.000,552.3 L 125.0,552.3 L 62.50,444.1 L 0.000,552.3 z "
-       style="fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="path4033" />
-    <path
-       d="M -1.1969655e-31,480.18718 L 125.0,480.1 L 62.49,588.4 L -1.1969655e-31,480.18718 z "
-       style="fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="path4034" />
+  <g transform="matrix(0.277152,0.000000,0.000000,0.277152,194.5779,28.91346)" fill="#1eb53a" fill-opacity="1.0000000">
+    <path d="M 0.000,552.3 L 125.0,552.3 L 62.50,444.1 L 0.000,552.3 z " fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+    <path d="M -1.1969655e-31,480.18718 L 125.0,480.1 L 62.49,588.4 L -1.1969655e-31,480.18718 z " fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
   </g>
-  <g
-     transform="matrix(0.277152,0.000000,0.000000,0.277152,270.7779,28.91346)"
-     style="fill:#1eb53a;fill-opacity:1.0000000;"
-     id="g4037">
-    <path
-       d="M 0.000,552.3 L 125.0,552.3 L 62.50,444.1 L 0.000,552.3 z "
-       style="fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="path4038" />
-    <path
-       d="M -1.1969655e-31,480.18718 L 125.0,480.1 L 62.49,588.4 L -1.1969655e-31,480.18718 z "
-       style="fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="path4039" />
+  <g transform="matrix(0.277152,0.000000,0.000000,0.277152,270.7779,28.91346)" fill="#1eb53a" fill-opacity="1.0000000">
+    <path d="M 0.000,552.3 L 125.0,552.3 L 62.50,444.1 L 0.000,552.3 z " fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+    <path d="M -1.1969655e-31,480.18718 L 125.0,480.1 L 62.49,588.4 L -1.1969655e-31,480.18718 z " fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
   </g>
-  <g
-     transform="matrix(0.227200,0.000000,0.000000,0.227266,197.7000,54.66850)"
-     style="fill:#ce1126;fill-opacity:1.0000000;"
-     id="g4684">
-    <path
-       d="M 0.000,552.3 L 125.0,552.3 L 62.50,444.1 L 0.000,552.3 z "
-       style="fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="path4685" />
-    <path
-       d="M -1.1969655e-31,480.18718 L 125.0,480.1 L 62.49,588.4 L -1.1969655e-31,480.18718 z "
-       style="fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="path4686" />
+  <g transform="matrix(0.227200,0.000000,0.000000,0.227266,197.7000,54.66850)" fill="#ce1126" fill-opacity="1.0000000">
+    <path d="M 0.000,552.3 L 125.0,552.3 L 62.50,444.1 L 0.000,552.3 z " fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+    <path d="M -1.1969655e-31,480.18718 L 125.0,480.1 L 62.49,588.4 L -1.1969655e-31,480.18718 z " fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
   </g>
-  <g
-     transform="matrix(0.227200,0.000000,0.000000,0.227266,235.8000,-11.33150)"
-     style="fill:#ce1126;fill-opacity:1.0000000;"
-     id="g4687">
-    <path
-       d="M 0.000,552.3 L 125.0,552.3 L 62.50,444.1 L 0.000,552.3 z "
-       style="fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="path4688" />
-    <path
-       d="M -1.1969655e-31,480.18718 L 125.0,480.1 L 62.49,588.4 L -1.1969655e-31,480.18718 z "
-       style="fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="path4689" />
+  <g transform="matrix(0.227200,0.000000,0.000000,0.227266,235.8000,-11.33150)" fill="#ce1126" fill-opacity="1.0000000">
+    <path d="M 0.000,552.3 L 125.0,552.3 L 62.50,444.1 L 0.000,552.3 z " fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+    <path d="M -1.1969655e-31,480.18718 L 125.0,480.1 L 62.49,588.4 L -1.1969655e-31,480.18718 z " fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
   </g>
-  <g
-     transform="matrix(0.227200,0.000000,0.000000,0.227266,273.9000,54.66850)"
-     style="fill:#ce1126;fill-opacity:1.0000000;"
-     id="g4690">
-    <path
-       d="M 0.000,552.3 L 125.0,552.3 L 62.50,444.1 L 0.000,552.3 z "
-       style="fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="path4691" />
-    <path
-       d="M -1.1969655e-31,480.18718 L 125.0,480.1 L 62.49,588.4 L -1.1969655e-31,480.18718 z "
-       style="fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="path4692" />
+  <g transform="matrix(0.227200,0.000000,0.000000,0.227266,273.9000,54.66850)" fill="#ce1126" fill-opacity="1.0000000">
+    <path d="M 0.000,552.3 L 125.0,552.3 L 62.50,444.1 L 0.000,552.3 z " fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+    <path d="M -1.1969655e-31,480.18718 L 125.0,480.1 L 62.49,588.4 L -1.1969655e-31,480.18718 z " fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
   </g>
 </svg>

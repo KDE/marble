@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg  xmlns="http://www.w3.org/2000/svg" id="Flag_of_Iceland" height="720" width="1000" version="1.1">
+<svg xmlns="http://www.w3.org/2000/svg" id="Flag_of_Iceland" height="720" width="1000" version="1.1">
  <g transform="scale(40)">
-  <rect width="25" height="18" style="fill:#003897"/>
+  <rect width="25" height="18" fill="#003897"/>
 
-  <rect width="25" height="4" y="7" style="fill:#ffffff"/>
-  <rect width="4" height="18" x="7" style="fill:#ffffff"/>
+  <rect width="25" height="4" y="7" fill="#ffffff"/>
+  <rect width="4" height="18" x="7" fill="#ffffff"/>
 
-  <rect width="25" height="2" y="8" style="fill:#d72828"/>
-  <rect width="2" height="18" x="8" style="fill:#d72828"/>
+  <rect width="25" height="2" y="8" fill="#d72828"/>
+  <rect width="2" height="18" x="8" fill="#d72828"/>
  </g>
 </svg>
