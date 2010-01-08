@@ -1,30 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   width="400"
-   height="300"
-   id="Flag of Gabon">
-  <rect
-     style="fill:#009e60"
-     x="0"
-     y="0"
-     width="400"
-     height="100"
-     id="Green Stripe" />
-  <rect
-     style="fill:#fcd116"
-     x="0"
-     y="100"
-     width="400"
-     height="100"
-     id="Yellow Stripe" />
-  <rect
-     style="fill:#3a75c4"
-     x="0"
-     y="200"
-     width="400"
-     height="100"
-     id="Blue Stripe" />
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="400" height="300" id="Flag of Gabon">
+  <rect x="0" y="0" width="400" height="100" id="Green Stripe" fill="#009e60"/>
+  <rect x="0" y="100" width="400" height="100" id="Yellow Stripe" fill="#fcd116"/>
+  <rect x="0" y="200" width="400" height="100" id="Blue Stripe" fill="#3a75c4"/>
 </svg>

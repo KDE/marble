@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Notepad -->
-<!-- (PD) December 29, 2005 - _Zach Harden_  -->
-<svg
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   width="900"
-   height="600"
-   id="Flag of Chad">
-  <rect
-     style="fill:#002569"
-     x="0"
-     y="0"
-     width="300"
-     height="600"
-     id="blue stripe" />
-  <rect
-     style="fill:#FFCE00"
-     x="300"
-     y="0"
-     width="300"
-     height="600"
-     id="yellow stripe" />
-  <rect
-     style="fill:#D21034"
-     x="600"
-     y="0"
-     width="300"
-     height="600"
-     id="red stripe" />
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="900" height="600" id="Flag of Chad">
+  <rect x="0" y="0" width="300" height="600" id="blue stripe" fill="#002569"/>
+  <rect x="300" y="0" width="300" height="600" id="yellow stripe" fill="#FFCE00"/>
+  <rect x="600" y="0" width="300" height="600" id="red stripe" fill="#D21034"/>
 
 </svg>

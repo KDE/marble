@@ -1,46 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   width="450"
-   height="300"
-   id="svg2">
-  <defs
-     id="defs4" />
-  <g
-     id="g1887">
-    <rect
-       width="450.00009"
-       height="300.00006"
-       x="0"
-       y="-5.9999998e-005"
-       style="fill:#5881bb;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-opacity:1"
-       id="rect1306" />
-    <rect
-       width="450.00009"
-       height="16.66667"
-       x="0"
-       y="233.33333"
-       style="fill:#f9d616;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-opacity:1"
-       id="rect2035" />
-    <use
-       transform="translate(0,-33.33334)"
-       id="use2763"
-       x="0"
-       y="0"
-       width="27"
-       height="18"
-       xlink:href="#rect2035" />
-    <path
-       d="M 66.73,116.6 L 53.95,79.41 L 16.66,66.73 L 53.92,53.95 L 66.59,16.66 L 79.37,53.92 L 116.6,66.59 L 79.41,79.37 L 66.73,116.6 z "
-       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-opacity:1"
-       id="path2765" />
-    <path
-       d="M 66.72,108.3 L 56.07,77.28 L 24.99,66.72 L 56.04,56.07 L 66.60,24.99 L 77.25,56.04 L 108.3,66.60 L 77.28,77.25 L 66.72,108.3 z "
-       style="fill:#ef2b2d;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-opacity:1"
-       id="path3496" />
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="450" height="300" id="svg2">
+  <defs id="defs4"/>
+  <g>
+    <rect width="450.00009" height="300.00006" x="0" y="-5.9999998e-005" fill="#5881bb" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-opacity="1"/>
+    <rect width="450.00009" height="16.66667" x="0" y="233.33333" fill="#f9d616" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-opacity="1"/>
+    <use transform="translate(0,-33.33334)" id="use2763" x="0" y="0" width="27" height="18" xlink:href="#rect2035"/>
+    <path d="M 66.73,116.6 L 53.95,79.41 L 16.66,66.73 L 53.92,53.95 L 66.59,16.66 L 79.37,53.92 L 116.6,66.59 L 79.41,79.37 L 66.73,116.6 z " fill="#ffffff" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-opacity="1"/>
+    <path d="M 66.72,108.3 L 56.07,77.28 L 24.99,66.72 L 56.04,56.07 L 66.60,24.99 L 77.25,56.04 L 108.3,66.60 L 77.28,77.25 L 66.72,108.3 z " fill="#ef2b2d" fill-opacity="1" fill-rule="evenodd" stroke="none" stroke-opacity="1"/>
   </g>
 </svg>

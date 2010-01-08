@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="900" height="600" viewBox="0 0 6 4">
-<!--
-	According to the Czech Copyright Act, this image is in the public domain. (Law No. 121/2000, Article 3, Section a)
--->
+
 <desc>Flag of the Czech Republic</desc>
 	<path id="white" d="M0,0 h6 v2 l-1,1 h-3 z" fill="white"/>
 	<path id="red" d="M1,2 h5 v2 h-6 z" fill="#d7141a"/>

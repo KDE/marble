@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   width="1000"
-   height="600"
-   id="Flag of the Bangladesh">
-  <rect
-     style="fill:#006a4e"
-     x="0"
-     y="0"
-     width="1000"
-     height="600"
-     id="Green Background" />
-  <circle fill="#f42a41" cx="450" cy="300" r="200" id="Red Circle" />
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="1000" height="600" id="Flag of the Bangladesh">
+  <rect x="0" y="0" width="1000" height="600" id="Green Background" fill="#006a4e"/>
+  <circle fill="#f42a41" cx="450" cy="300" r="200" id="Red Circle"/>
 </svg>

@@ -1,56 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   x="0.0000000"
-   y="0.0000000"
-   width="450.00000"
-   height="300.00000"
-   id="svg5304">
-  <defs
-     id="defs5306" />
-  <metadata
-     id="metadata5307">
-    <rdf:RDF
-       id="RDF5308">
-      <cc:Work
-         rdf:about=""
-         id="Work5309">
-        <dc:format
-           id="format5310">image/svg+xml</dc:format>
-        <dc:type
-           id="type5312"
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     transform="matrix(1.200000,0.000000,0.000000,1.200000,-150.0000,-512.8346)"
-     id="g2837">
-    <rect
-       width="375.00000"
-       height="250.00000"
-       x="125.00000"
-       y="427.36218"
-       style="fill:#ce1126;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="rect5313" />
-    <rect
-       width="250.00000"
-       height="250.00000"
-       x="250.00000"
-       y="427.36218"
-       style="fill:#fcd116;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="rect5936" />
-    <rect
-       width="125.00000"
-       height="250.00000"
-       x="375.00000"
-       y="427.36218"
-       style="fill:#009460;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:1.000pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000;"
-       id="rect6558" />
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0.0000000" y="0.0000000" width="450.00000" height="300.00000" id="svg5304">
+  <defs id="defs5306"/>
+  
+  <g transform="matrix(1.200000,0.000000,0.000000,1.200000,-150.0000,-512.8346)">
+    <rect width="375.00000" height="250.00000" x="125.00000" y="427.36218" fill="#ce1126" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+    <rect width="250.00000" height="250.00000" x="250.00000" y="427.36218" fill="#fcd116" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+    <rect width="125.00000" height="250.00000" x="375.00000" y="427.36218" fill="#009460" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="1.000pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
   </g>
 </svg>

@@ -1,25 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Notepad -->
-<!-- (PD) December 17, 2005 - _Zach Harden_  -->
-<svg
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   width="750"
-   height="600"
-   id="Flag of Monaco">
-  <rect
-     style="fill:#ce1126"
-     x="0"
-     y="0"
-     width="750"
-     height="300"
-     id="red Stripe" />
-  <rect
-     style="fill:#ffffff"
-     x="0"
-     y="300"
-     width="750"
-     height="300"
-     id="white stripe" />
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="750" height="600" id="Flag of Monaco">
+  <rect x="0" y="0" width="750" height="300" id="red Stripe" fill="#ce1126"/>
+  <rect x="0" y="300" width="750" height="300" id="white stripe" fill="#ffffff"/>
 </svg>

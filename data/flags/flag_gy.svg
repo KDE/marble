@@ -1,47 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   x="0.0000000"
-   y="0.0000000"
-   width="500.00000"
-   height="300.00000"
-   id="svg1">
-  <defs
-     id="defs3" />
-  <g
-     id="layer1">
-    <rect
-       width="500.00000"
-       height="300.00000"
-       x="125.00000"
-       y="377.36218"
-       transform="translate(-125.0000,-377.3622)"
-       style="fill:#009e49;fill-opacity:1.0000000;stroke:none;stroke-width:2.500;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000"
-       id="rect1061" />
-    <path
-       d="M 125.0,377.3 L 625.0,527.3 L 125.0,677.3 L 125.0,377.3 z "
-       transform="translate(-125.0000,-377.3622)"
-       style="fill:#ffffff;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:0.250pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
-       id="path1683" />
-    <path
-       d="M 125.0,390.4 L 581.5,527.3 L 125.0,664.3 L 125.0,390.4 z "
-       transform="translate(-125.0000,-377.3622)"
-       style="fill:#fcd116;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:0.250pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
-       id="path4172" />
-    <path
-       d="M 125.0,377.3 L 375.0,527.3 L 125.0,677.3 L 125.0,377.3 z "
-       transform="translate(-125.0000,-377.3622)"
-       style="fill:#000000;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:0.250pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
-       id="path2307" />
-    <path
-       d="M 125.0,394.8 L 345.8,527.3 L 125.0,659.8 L 125.0,394.8 z "
-       transform="translate(-125.0000,-377.3622)"
-       style="fill:#ce1126;fill-opacity:1.0000000;fill-rule:evenodd;stroke:none;stroke-width:0.250pt;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1.0000000"
-       id="path3550" />
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" x="0.0000000" y="0.0000000" width="500.00000" height="300.00000" id="svg1">
+  <defs id="defs3"/>
+  <g id="layer1">
+    <rect width="500.00000" height="300.00000" x="125.00000" y="377.36218" transform="translate(-125.0000,-377.3622)" fill="#009e49" fill-opacity="1.0000000" stroke="none" stroke-width="2.500" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4.0000000" stroke-opacity="1.0000000"/>
+    <path d="M 125.0,377.3 L 625.0,527.3 L 125.0,677.3 L 125.0,377.3 z " transform="translate(-125.0000,-377.3622)" fill="#ffffff" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="0.250pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+    <path d="M 125.0,390.4 L 581.5,527.3 L 125.0,664.3 L 125.0,390.4 z " transform="translate(-125.0000,-377.3622)" fill="#fcd116" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="0.250pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+    <path d="M 125.0,377.3 L 375.0,527.3 L 125.0,677.3 L 125.0,377.3 z " transform="translate(-125.0000,-377.3622)" fill="#000000" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="0.250pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
+    <path d="M 125.0,394.8 L 345.8,527.3 L 125.0,659.8 L 125.0,394.8 z " transform="translate(-125.0000,-377.3622)" fill="#ce1126" fill-opacity="1.0000000" fill-rule="evenodd" stroke="none" stroke-width="0.250pt" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1.0000000"/>
   </g>
 </svg>

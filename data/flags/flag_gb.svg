@@ -1,55 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   version="1.0"
-   width="1200"
-   height="600"
-   viewBox="-15 -7.5 30 15"
-   id="Union Jack">
-  <defs
-     id="defs2106">
-    <clipPath
-       id="border">
-      <rect
-         width="30"
-         height="15"
-         x="-15"
-         y="-7.5"
-         id="rect2109" />
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.0" width="1200" height="600" viewBox="-15 -7.5 30 15" id="Union Jack">
+  <defs id="defs2106">
+    <clipPath id="border">
+      <rect width="30" height="15" x="-15" y="-7.5"/>
     </clipPath>
   </defs>
-  <g
-     clip-path="url(#border)"
-     id="g2111">
-    <circle
-       cx="0"
-       cy="0"
-       r="20"
-       style="fill:#00247d"
-       id="circle2113" />
-    <path
-       d="M -20,-10 L 20,10 M -20,10 L 20,-10"
-       style="stroke:white;stroke-width:3"
-       id="diags_white" />
-    <path
-       d="M -20,-10 L 20,10 M -20,10 L 20,-10"
-       style="stroke:#cf142b;stroke-width:2"
-       id="diags_red" />
-    <path
-       d="M 0,0 L 20,10 L 17,10 L -3,0 M 0,0 L 20,-10 L 23,-10 L 3,0 M 0,0 L -20,10 L -23,10 L -3,0 M 0,0 L -20,-10 L -17,-10 L 3,0"
-       style="fill:white;stroke:none"
-       id="eraser_white" />
-    <comment
-       id="comment2118">I think the above two lines give the simplest way to make the diagonals</comment>
-    <path
-       d="M -20,0 L 20,0 M 0,-10 L 0,10"
-       style="stroke:white;stroke-width:5"
-       id="cross_white" />
-    <path
-       d="M -20,0 L 20,0 M 0,-10 L 0,10"
-       style="stroke:#cf142b;stroke-width:3"
-       id="cross_red" />
+  <g clip-path="url(#border)">
+    <circle cx="0" cy="0" r="20" fill="#00247d"/>
+    <path d="M -20,-10 L 20,10 M -20,10 L 20,-10" id="diags_white" stroke="white" stroke-width="3"/>
+    <path d="M -20,-10 L 20,10 M -20,10 L 20,-10" id="diags_red" stroke="#cf142b" stroke-width="2"/>
+    <path d="M 0,0 L 20,10 L 17,10 L -3,0 M 0,0 L 20,-10 L 23,-10 L 3,0 M 0,0 L -20,10 L -23,10 L -3,0 M 0,0 L -20,-10 L -17,-10 L 3,0" id="eraser_white" fill="white" stroke="none"/>
+    <comment id="comment2118">I think the above two lines give the simplest way to make the diagonals</comment>
+    <path d="M -20,0 L 20,0 M 0,-10 L 0,10" id="cross_white" stroke="white" stroke-width="5"/>
+    <path d="M -20,0 L 20,0 M 0,-10 L 0,10" id="cross_red" stroke="#cf142b" stroke-width="3"/>
   </g>
 </svg>

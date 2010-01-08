@@ -1,76 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   version="1.0"
-   width="810"
-   height="540"
-   viewBox="0 0 27 18"
-   id="svg2"
-   sodipodi:version="0.32"
-   inkscape:version="0.45"
-   sodipodi:docname="flag_gr.svg"
-   inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   sodipodi:docbase="/home/tackat/marble-0.4/0.4/marble/data/flags"
-   sodipodi:modified="true">
-  <metadata
-     id="metadata8">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <sodipodi:namedview
-     inkscape:window-height="572"
-     inkscape:window-width="748"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     guidetolerance="10.0"
-     gridtolerance="10.0"
-     objecttolerance="10.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
-     pagecolor="#ffffff"
-     id="base"
-     inkscape:zoom="0.7"
-     inkscape:cx="405.65"
-     inkscape:cy="157.64314"
-     inkscape:window-x="270"
-     inkscape:window-y="0"
-     inkscape:current-layer="svg2" />
-  <defs
-     id="defs11" />
-  <desc
-     id="desc4">Flag of Greece</desc>
-  <path
-     d="M 0,2.4980018e-16 L 27,2.4980018e-16 L 27,18 L 0,18 L 0,2.4980018e-16 z "
-     style="fill:#101f8a"
-     id="path6"
-     sodipodi:nodetypes="ccccc" />
-  <path
-     style="fill:#ffffff"
-     d="M 4,0 L 6,0 L 6,4 L 10,4 L 10,6 L 6,6 L 6,10 L 27,10 L 27,12 L 0,12 L 0,10 L 4,10 L 4,6 L 0,6 L 0,4 L 4,4 L 4,0 z "
-     id="path2175" />
-  <path
-     style="fill:#ffffff"
-     d="M 10,2 L 27,2 L 27,4 L 10,4 L 10,2 z "
-     id="path2173" />
-  <path
-     style="fill:#ffffff"
-     d="M 10,6 L 27,6 L 27,8 L 10,8 L 10,6 z "
-     id="path2171" />
-  <path
-     style="fill:#ffffff"
-     d="M 0,14 L 27,14 L 27,16 L 0,16 L 0,14 z "
-     id="path8" />
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.0" width="810" height="540" viewBox="0 0 27 18" id="svg2">
+  
+  
+  <defs id="defs11"/>
+  <desc id="desc4">Flag of Greece</desc>
+  <path d="M 0,2.4980018e-16 L 27,2.4980018e-16 L 27,18 L 0,18 L 0,2.4980018e-16 z " fill="#101f8a"/>
+  <path d="M 4,0 L 6,0 L 6,4 L 10,4 L 10,6 L 6,6 L 6,10 L 27,10 L 27,12 L 0,12 L 0,10 L 4,10 L 4,6 L 0,6 L 0,4 L 4,4 L 4,0 z " fill="#ffffff"/>
+  <path d="M 10,2 L 27,2 L 27,4 L 10,4 L 10,2 z " fill="#ffffff"/>
+  <path d="M 10,6 L 27,6 L 27,8 L 10,8 L 10,6 z " fill="#ffffff"/>
+  <path d="M 0,14 L 27,14 L 27,16 L 0,16 L 0,14 z " fill="#ffffff"/>
 </svg>

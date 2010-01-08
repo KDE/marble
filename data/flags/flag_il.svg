@@ -1,68 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   width="440"
-   height="320"
-   id="svg1872">
-  <metadata
-     id="metadata1880">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <sodipodi:namedview
-     guidetolerance="10.0"
-     gridtolerance="10.0"
-     objecttolerance="10.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
-     pagecolor="#ffffff"
-     id="base" />
-  <defs
-     id="defs1884" />
-  <rect
-     width="440"
-     height="320"
-     x="0"
-     y="0"
-     style="fill:white"
-     id="background" />
-  <rect
-     width="440"
-     height="50"
-     x="0"
-     y="30"
-     style="fill:#0471cb"
-     id="rect1875" />
-  <rect
-     width="440"
-     height="50"
-     x="0"
-     y="240"
-     style="fill:#0471cb"
-     id="rect1877" />
-  <path
-     style="fill:#0471cb;fill-opacity:1;stroke:none;stroke-width:11;stroke-opacity:1"
-     d="M 220,91 L 215.25,99.25 L 165,186.25 L 160.25,194.5 L 169.78125,194.5 L 270.21875,194.5 L 279.75,194.5 L 275,186.25 L 224.75,99.25 L 220,91 z M 220,112.96875 L 260.71875,183.5 L 179.28125,183.5 L 220,112.96875 z "
-     id="triangle" />
-  <use
-     transform="matrix(-1,0,0,-1,439.5873,319.1534)"
-     id="use1881"
-     x="0"
-     y="0"
-     width="440"
-     height="320"
-     xlink:href="#triangle" />
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="440" height="320" id="svg1872">
+  
+  <sodipodi:namedview guidetolerance="10.0" gridtolerance="10.0" objecttolerance="10.0" borderopacity="1.0" bordercolor="#666666" pagecolor="#ffffff" id="base"/>
+  <defs id="defs1884"/>
+  <rect width="440" height="320" x="0" y="0" id="background" fill="white"/>
+  <rect width="440" height="50" x="0" y="30" fill="#0471cb"/>
+  <rect width="440" height="50" x="0" y="240" fill="#0471cb"/>
+  <path d="M 220,91 L 215.25,99.25 L 165,186.25 L 160.25,194.5 L 169.78125,194.5 L 270.21875,194.5 L 279.75,194.5 L 275,186.25 L 224.75,99.25 L 220,91 z M 220,112.96875 L 260.71875,183.5 L 179.28125,183.5 L 220,112.96875 z " id="triangle" fill="#0471cb" fill-opacity="1" stroke="none" stroke-width="11" stroke-opacity="1"/>
+  <use transform="matrix(-1,0,0,-1,439.5873,319.1534)" id="use1881" x="0" y="0" width="440" height="320" xlink:href="#triangle"/>
 </svg>

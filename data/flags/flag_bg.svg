@@ -1,32 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Notepad -->
-<!-- (PD) December 17, 2005 - _Zach Harden_  -->
-<svg
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.0"
-   width="500"
-   height="300"
-   id="Bulgaria Flag">
-  <rect
-     style="fill:#fff"
-     x="0"
-     y="0"
-     width="500"
-     height="100"
-     id="white stripe" />
-  <rect
-     style="fill:#00966E"
-     x="0"
-     y="100"
-     width="500"
-     height="100"
-     id="green Stripe" />
-  <rect
-     style="fill:#D62612"
-     x="0"
-     y="200"
-     width="500"
-     height="100"
-     id="red Stripe" />
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="500" height="300" id="Bulgaria Flag">
+  <rect x="0" y="0" width="500" height="100" id="white stripe" fill="#fff"/>
+  <rect x="0" y="100" width="500" height="100" fill="#00966E"/>
+  <rect x="0" y="200" width="500" height="100" id="red Stripe" fill="#D62612"/>
 </svg>

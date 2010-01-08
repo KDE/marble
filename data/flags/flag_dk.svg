@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
-  "http://www.w3.org/TR/2003/REC-SVG11-20030114/DTD/svg11.dtd">
-<svg
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   version="1.0"
-   width="370"
-   height="280">
-  <rect
-     width="370"
-     height="280"
-     fill="#d00c33"/>
-  <path
-     d="M140,0 v280" stroke-width="40" stroke="white" />
-  <path
-     d="M0,140 h370" stroke-width="40" stroke="white" />
+<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.0" width="370" height="280">
+  <rect width="370" height="280" fill="#d00c33"/>
+  <path d="M140,0 v280" stroke-width="40" stroke="white"/>
+  <path d="M0,140 h370" stroke-width="40" stroke="white"/>
   
 </svg>

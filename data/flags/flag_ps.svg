@@ -1,61 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://web.resource.org/cc/"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   width="1200"
-   height="600"
-   id="svg2"
-   version="1.0">
-  <defs
-     id="defs4" />
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     width="1200px"
-     height="600px" />
-  <metadata
-     id="metadata7">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     id="layer1">
-    <rect
-       style="opacity:1;fill:#408040;fill-opacity:1;stroke:none;stroke-opacity:1"
-       id="rect1872"
-       width="1200"
-       height="200"
-       x="0"
-       y="400" />
-    <rect
-       y="200"
-       x="0"
-       height="200"
-       width="1200"
-       id="rect1874"
-       style="opacity:1;fill:white;fill-opacity:1;stroke:none;stroke-opacity:1" />
-    <rect
-       y="0"
-       x="0"
-       height="200"
-       width="1200"
-       id="rect1876"
-       style="opacity:1;fill:#333;fill-opacity:1;stroke:none;stroke-opacity:1" />
-    <path
-       style="fill:#c33;fill-opacity:1;stroke:none;stroke-opacity:1"
-       d="M 0,0 L 300,300 L 0,600 L 0,0 z "
-       id="rect3649" />
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" width="1200" height="600" id="svg2" version="1.0">
+  <defs id="defs4"/>
+  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" width="1200px" height="600px"/>
+  
+  <g id="layer1">
+    <rect width="1200" height="200" x="0" y="400" opacity="1" fill="#408040" fill-opacity="1" stroke="none" stroke-opacity="1"/>
+    <rect y="200" x="0" height="200" width="1200" opacity="1" fill="white" fill-opacity="1" stroke="none" stroke-opacity="1"/>
+    <rect y="0" x="0" height="200" width="1200" opacity="1" fill="#333" fill-opacity="1" stroke="none" stroke-opacity="1"/>
+    <path d="M 0,0 L 300,300 L 0,600 L 0,0 z " fill="#c33" fill-opacity="1" stroke="none" stroke-opacity="1"/>
   </g>
 </svg>
