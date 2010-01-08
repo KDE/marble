@@ -15,6 +15,7 @@
 
 #include "MarbleDebug.h"
 #include "global.h"
+#include "Projections/AbstractProjection.h"
 #include "MarbleLocale.h"
 #include "MarbleDataFacade.h"
 #include "GeoPainter.h"
@@ -125,8 +126,19 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
 
     int fontHeight     = QFontMetrics( font() ).ascent();
 
-    m_scaleBarDistance = (qreal)(m_scaleBarWidth) * dataFacade()->planetRadius() / 
+    qreal pixel2Length = dataFacade()->planetRadius() /
                          (qreal)(viewport->radius());
+    
+    if ( viewport->currentProjection()->surfaceType() == AbstractProjection::Cylindrical )
+    {
+        qreal centerLatitude = viewport->viewLatLonAltBox().center().latitude();
+        // For flat maps we calculate the length of the 90 deg section of the
+        // central latitude circle. For flat maps this distance matches
+        // the pixel based radius propertyy.
+        pixel2Length *= M_PI / 2 * cos( centerLatitude );
+    }
+    
+    m_scaleBarDistance = (qreal)(m_scaleBarWidth) * pixel2Length;
 
     Marble::DistanceUnit distanceUnit;
     distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
