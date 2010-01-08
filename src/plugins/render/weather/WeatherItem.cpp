@@ -150,7 +150,7 @@ class WeatherItemPrivate
     void updateLabels()
     {
         if ( isConditionShown() ) {
-            m_conditionLabel->setIcon( m_currentWeather.icon(), imageSize );
+            m_conditionLabel->setImage( m_currentWeather.icon(), imageSize );
         }
         else {
             m_conditionLabel->clear();

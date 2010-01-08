@@ -170,30 +170,30 @@ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/moon/clementine)
 
 install (FILES
 weather/bbc-stations.xml
-weather/weather-clear-night.svgz
-weather/weather-clear.svgz
-weather/weather-clouds-night.svgz
-weather/weather-clouds.svgz
-weather/weather-few-clouds-night.svgz
-weather/weather-few-clouds.svgz
-weather/weather-hail.svgz
-weather/weather-many-clouds.svg
-weather/weather-mist.svgz
-weather/weather-none-available.svgz
-weather/weather-showers-day.svgz
-weather/weather-showers-night.svgz
-weather/weather-showers-scattered-day.svgz
-weather/weather-showers-scattered-night.svgz
-weather/weather-showers-scattered.svgz
-weather/weather-showers.svgz
-weather/weather-snow-rain.svgz
-weather/weather-snow-scattered-day.svgz
-weather/weather-snow-scattered-night.svgz
-weather/weather-snow-scattered.svgz
-weather/weather-snow.svgz
-weather/weather-storm-day.svgz
-weather/weather-storm-night.svgz
-weather/weather-storm.svgz
+weather/weather-clear-night.png
+weather/weather-clear.png
+weather/weather-clouds-night.png
+weather/weather-clouds.png
+weather/weather-few-clouds-night.png
+weather/weather-few-clouds.png
+weather/weather-hail.png
+weather/weather-many-clouds.png
+weather/weather-mist.png
+weather/weather-none-available.png
+weather/weather-showers-day.png
+weather/weather-showers-night.png
+weather/weather-showers-scattered-day.png
+weather/weather-showers-scattered-night.png
+weather/weather-showers-scattered.png
+weather/weather-showers.png
+weather/weather-snow-rain.png
+weather/weather-snow-scattered-day.png
+weather/weather-snow-scattered-night.png
+weather/weather-snow-scattered.png
+weather/weather-snow.png
+weather/weather-storm-day.png
+weather/weather-storm-night.png
+weather/weather-storm.png
 weather/wind-arrows.svgz
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/weather)
 

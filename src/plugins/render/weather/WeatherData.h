@@ -16,7 +16,7 @@
 
 class QDate;
 class QDateTime;
-class QIcon;
+class QImage;
 
 namespace Marble
 {
@@ -164,7 +164,7 @@ class WeatherData
     /**
      * Get the icon showing the current condition.
      */
-    QIcon icon() const;
+    QImage icon() const;
     
     WeatherData::WindDirection windDirection() const;
     void setWindDirection( WeatherData::WindDirection direction );
