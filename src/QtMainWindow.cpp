@@ -161,7 +161,7 @@ void MainWindow::createActions()
      m_lockFloatItemsAct = new QAction( tr("Lock Position"),this);
      m_lockFloatItemsAct->setCheckable( true );
      m_lockFloatItemsAct->setStatusTip(tr("Lock Position of Floating Items"));
-     connect(m_lockFloatItemsAct, SIGNAL(toggled( bool )), this, SLOT( lockPosition( bool )));
+     connect(m_lockFloatItemsAct, SIGNAL(triggered( bool )), this, SLOT( lockPosition( bool )));
 
      m_showCloudsAct = new QAction( tr("&Clouds"), this);
      m_showCloudsAct->setCheckable( true );
@@ -677,7 +677,9 @@ void MainWindow::readSettings()
 	    m_controlView->marbleWidget()->goHome();
 	 }
          
-         m_lockFloatItemsAct->setChecked( settings.value( "lockFloatItemPositions", false ).toBool() );
+         bool isLocked = settings.value( "lockFloatItemPositions", false ).toBool();
+         m_lockFloatItemsAct->setChecked( isLocked );
+         lockPosition(isLocked);
      settings.endGroup();
      
      settings.beginGroup( "Sun" );
