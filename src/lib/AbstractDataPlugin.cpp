@@ -145,7 +145,7 @@ void AbstractDataPlugin::setNumberOfItems( quint32 number )
 
 QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt( const QPoint& curpos )
 {
-    if ( enabled() && visible() ) {
+    if ( d->m_model && enabled() && visible()) {
         return d->m_model->whichItemAt( curpos );
     }
     else {
