@@ -105,7 +105,7 @@ QDialog *WeatherPlugin::aboutDialog() const
         authors.append( bholst );
         m_aboutDialog->setAuthors( authors );
         m_aboutDialog->setDataText( tr( "Supported by backstage.bbc.co.uk.\nWeather data from UK MET Office" ) );
-        m_icon.addFile( MarbleDirs::path( "weather/weather-clear.svgz" ) );
+        m_icon.addFile( MarbleDirs::path( "weather/weather-clear.png" ) );
         m_aboutDialog->setPixmap( m_icon.pixmap( 62, 62 ) );
     }
     return m_aboutDialog;

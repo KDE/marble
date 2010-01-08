@@ -22,7 +22,7 @@
 #include <QtCore/QDateTime>
 #include <QtCore/QHash>
 #include <QtCore/QLocale>
-#include <QtGui/QIcon>
+#include <QtGui/QImage>
 
 #include <cmath>
 
@@ -103,59 +103,59 @@ class WeatherDataPrivate
         if( s_iconPath.size() == 0 ) {
             // Clouds
             s_iconPath.insert( WeatherData::ConditionNotAvailable,
-                            MarbleDirs::path( "weather/weather-none-available.svgz" ) );
+                            MarbleDirs::path( "weather/weather-none-available.png" ) );
             s_iconPath.insert( WeatherData::ClearDay,
-                            MarbleDirs::path( "weather/weather-clear.svgz" ) );
+                            MarbleDirs::path( "weather/weather-clear.png" ) );
             s_iconPath.insert( WeatherData::ClearNight,
-                            MarbleDirs::path( "weather/weather-clear-night.svgz" ) );
+                            MarbleDirs::path( "weather/weather-clear-night.png" ) );
             s_iconPath.insert( WeatherData::FewCloudsDay,
-                            MarbleDirs::path( "weather/weather-few-clouds.svgz" ) );
+                            MarbleDirs::path( "weather/weather-few-clouds.png" ) );
             s_iconPath.insert( WeatherData::FewCloudsNight,
-                            MarbleDirs::path( "weather/weather-few-clouds-night.svgz" ) );
+                            MarbleDirs::path( "weather/weather-few-clouds-night.png" ) );
             s_iconPath.insert( WeatherData::PartlyCloudyDay,
-                            MarbleDirs::path( "weather/weather-clouds.svgz" ) );
+                            MarbleDirs::path( "weather/weather-clouds.png" ) );
             s_iconPath.insert( WeatherData::PartlyCloudyNight,
-                            MarbleDirs::path( "weather/weather-clouds-night.svgz" ) );
+                            MarbleDirs::path( "weather/weather-clouds-night.png" ) );
             s_iconPath.insert( WeatherData::Overcast,
-                            MarbleDirs::path( "weather/weather-many-clouds.svg" ) );
+                            MarbleDirs::path( "weather/weather-many-clouds.png" ) );
 
             // Rain
             s_iconPath.insert( WeatherData::LightShowersDay,
-                            MarbleDirs::path( "weather/weather-showers-scattered-day.svgz" ) );
+                            MarbleDirs::path( "weather/weather-showers-scattered-day.png" ) );
             s_iconPath.insert( WeatherData::LightShowersNight,
-                            MarbleDirs::path( "weather/weather-showers-scattered-night.svgz" ) );
+                            MarbleDirs::path( "weather/weather-showers-scattered-night.png" ) );
             s_iconPath.insert( WeatherData::ShowersDay,
-                            MarbleDirs::path( "weather/weather-showers-day.svgz" ) );
+                            MarbleDirs::path( "weather/weather-showers-day.png" ) );
             s_iconPath.insert( WeatherData::ShowersNight,
-                            MarbleDirs::path( "weather/weather-showers-night.svgz" ) );
+                            MarbleDirs::path( "weather/weather-showers-night.png" ) );
             s_iconPath.insert( WeatherData::LightRain,
-                            MarbleDirs::path( "weather/weather-showers-scattered.svgz" ) );
+                            MarbleDirs::path( "weather/weather-showers-scattered.png" ) );
             s_iconPath.insert( WeatherData::Rain,
-                            MarbleDirs::path( "weather/weather-showers.svgz" ) );
+                            MarbleDirs::path( "weather/weather-showers.png" ) );
 
             // Special
             s_iconPath.insert( WeatherData::ChanceThunderstormDay,
-                            MarbleDirs::path( "weather/weather-storm-day.svgz" ) );
+                            MarbleDirs::path( "weather/weather-storm-day.png" ) );
             s_iconPath.insert( WeatherData::ChanceThunderstormNight,
-                            MarbleDirs::path( "weather/weather-storm-night.svgz" ) );
+                            MarbleDirs::path( "weather/weather-storm-night.png" ) );
             s_iconPath.insert( WeatherData::Thunderstorm,
-                            MarbleDirs::path( "weather/weather-storm.svgz" ) );
+                            MarbleDirs::path( "weather/weather-storm.png" ) );
             s_iconPath.insert( WeatherData::Hail,
-                            MarbleDirs::path( "weather/weather-hail.svgz" ) );
+                            MarbleDirs::path( "weather/weather-hail.png" ) );
             s_iconPath.insert( WeatherData::ChanceSnowDay,
-                            MarbleDirs::path( "weather/weather-snow-scattered-day.svgz" ) );
+                            MarbleDirs::path( "weather/weather-snow-scattered-day.png" ) );
             s_iconPath.insert( WeatherData::ChanceSnowNight,
-                            MarbleDirs::path( "weather/weather-snow-scattered-night.svgz" ) );
+                            MarbleDirs::path( "weather/weather-snow-scattered-night.png" ) );
             s_iconPath.insert( WeatherData::LightSnow,
-                            MarbleDirs::path( "weather/weather-snow-scattered.svgz" ) );
+                            MarbleDirs::path( "weather/weather-snow-scattered.png" ) );
             s_iconPath.insert( WeatherData::Snow,
-                            MarbleDirs::path( "weather/weather-snow.svgz" ) );
+                            MarbleDirs::path( "weather/weather-snow.png" ) );
             s_iconPath.insert( WeatherData::RainSnow,
-                            MarbleDirs::path( "weather/weather-snow-rain.svgz" ) );
+                            MarbleDirs::path( "weather/weather-snow-rain.png" ) );
             s_iconPath.insert( WeatherData::Mist,
-                            MarbleDirs::path( "weather/weather-mist.svgz" ) );
+                            MarbleDirs::path( "weather/weather-mist.png" ) );
             s_iconPath.insert( WeatherData::SandStorm,
-                            MarbleDirs::path( "weather/weather-none-available.svgz" ) );
+                            MarbleDirs::path( "weather/weather-none-available.png" ) );
         }
     }
     
@@ -266,12 +266,12 @@ class WeatherDataPrivate
     
     QAtomicInt ref;
     
-    static QHash<WeatherData::WeatherCondition, QIcon> s_icons;
+    static QHash<WeatherData::WeatherCondition, QImage> s_icons;
     static QHash<WeatherData::WeatherCondition, QString> s_iconPath;
     static WeatherData::TemperatureUnit s_standardTemperatureUnit;
 };
 
-QHash<WeatherData::WeatherCondition, QIcon> WeatherDataPrivate::s_icons = QHash<WeatherData::WeatherCondition, QIcon>();
+QHash<WeatherData::WeatherCondition, QImage> WeatherDataPrivate::s_icons = QHash<WeatherData::WeatherCondition, QImage>();
 QHash<WeatherData::WeatherCondition, QString> WeatherDataPrivate::s_iconPath = QHash<WeatherData::WeatherCondition, QString>();
 WeatherData::TemperatureUnit WeatherDataPrivate::s_standardTemperatureUnit = WeatherData::Celsius;
 
@@ -406,9 +406,9 @@ QString WeatherData::conditionString() const
     }
 }
 
-QIcon WeatherData::icon() const
+QImage WeatherData::icon() const
 {
-    QIcon icon = WeatherDataPrivate::s_icons.value( condition() );
+    QImage icon = WeatherDataPrivate::s_icons.value( condition() );
     
     // If the icon is in the hash, simply return it.
     if ( !icon.isNull() ) {
@@ -416,7 +416,7 @@ QIcon WeatherData::icon() const
     }
     // If it isn't in the hash, the icon will be created (from the value stored in s_iconPath).
     else {
-        icon.addFile( WeatherDataPrivate::s_iconPath.value( condition() ) );
+        icon = QImage( WeatherDataPrivate::s_iconPath.value( condition() ) );
         WeatherDataPrivate::s_icons.insert( condition(), icon );
         return icon;
     }
