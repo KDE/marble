@@ -22,6 +22,7 @@ class KAction;
 class KConfigDialog;
 
 class QLabel;
+class QPrinter;
 class QProgressBar;
 class QStandardItemModel;
 
@@ -64,6 +65,9 @@ class MarblePart: public KParts::ReadOnlyPart
 
     void  exportMapScreenShot();
     void  printMapScreenShot();
+    void  printPixmap( QPrinter * printer, const QPixmap& pixmap );
+    void  printPreview();
+    void  paintPrintPreview( QPrinter * printer );
     void  copyMap();
     void  copyCoordinates();
     void  setShowClouds( bool );
@@ -165,6 +169,7 @@ class MarblePart: public KParts::ReadOnlyPart
     // Actions for the GUI.
     KAction      *m_exportMapAction;
     KAction      *m_printMapAction;
+    KAction      *m_printPreviewAction;
     KAction      *m_workOfflineAction;
     KAction      *m_copyMapAction;
     KAction      *m_copyCoordinatesAction;

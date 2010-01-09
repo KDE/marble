@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
+// Copyright 2006-2010 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
@@ -31,6 +31,7 @@
 #include <QtGui/QMessageBox>
 
 #include <QtGui/QPrintDialog>
+#include <QtGui/QPrintPreviewDialog>
 #include <QtGui/QPrinter>
 #include <QtGui/QPainter>
 
@@ -115,12 +116,16 @@ void MainWindow::createActions()
      m_exportMapAct->setShortcut(tr("Ctrl+S"));
      m_exportMapAct->setStatusTip(tr("Save a screenshot of the map"));
      connect(m_exportMapAct, SIGNAL(triggered()), this, SLOT(exportMapScreenShot()));
-
+     
      m_printAct = new QAction( QIcon(":/icons/document-print.png"), tr("&Print..."), this);
      m_printAct->setShortcut(tr("Ctrl+P"));
      m_printAct->setStatusTip(tr("Print a screenshot of the map"));
      connect(m_printAct, SIGNAL(triggered()), this, SLOT(printMapScreenShot()));
 
+     m_printPreviewAct = new QAction( QIcon(":/icons/document-printpreview.png"), tr("Print Previe&w ..."), this);
+     m_printPreviewAct->setStatusTip(tr("Print a screenshot of the map"));
+     connect(m_printPreviewAct, SIGNAL(triggered()), this, SLOT(printPreview()));
+     
      m_quitAct = new QAction( QIcon(":/icons/application-exit.png"), tr("&Quit"), this);
      m_quitAct->setShortcut(tr("Ctrl+Q"));
      m_quitAct->setStatusTip(tr("Quit the Application"));
@@ -207,7 +212,9 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_openAct);
     m_fileMenu->addAction(m_downloadAct);
     m_fileMenu->addAction(m_exportMapAct);
+    m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_printAct);
+    m_fileMenu->addAction(m_printPreviewAct);
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_workOfflineAct);
     m_fileMenu->addAction(m_quitAct);
@@ -385,31 +392,56 @@ void MainWindow::exportMapScreenShot()
 void MainWindow::printMapScreenShot()
 {
 #ifndef QT_NO_PRINTER
-    QPixmap mapPixmap = m_controlView->mapScreenShot();
-
-    QSize printSize = mapPixmap.size();
-
-    QPrinter printer;
-
+    QPrinter printer( QPrinter::HighResolution );
     QPrintDialog printDialog( &printer, this );
 
     if (printDialog.exec() == QDialog::Accepted) {
-
-        QRect mapPageRect = printer.pageRect();
-
-        printSize.scale( ( printer.pageRect() ).size(), Qt::KeepAspectRatio );
-
-        QPoint printTopLeft( mapPageRect.x() + mapPageRect.width() /2  - printSize.width() /2 ,
-                             mapPageRect.y() + mapPageRect.height()/2  - printSize.height()/2 );
-
-        QRect mapPrintRect( printTopLeft, printSize );
-
-        QPainter painter( &printer );
-
-        painter.drawPixmap( mapPrintRect, mapPixmap, mapPixmap.rect() );
-
+        QPixmap mapPixmap = m_controlView->mapScreenShot();
+        printPixmap( &printer, mapPixmap );
     }
 #endif    
+}
+
+void MainWindow::printPixmap( QPrinter * printer, const QPixmap& pixmap  )
+{
+#ifndef QT_NO_PRINTER
+    QSize printSize = pixmap.size();
+    
+    QRect mapPageRect = printer->pageRect();
+
+    printSize.scale( printer->pageRect().size(), Qt::KeepAspectRatio );
+
+    QPoint printTopLeft( ( mapPageRect.width() - printSize.width() ) / 2 ,
+                         ( mapPageRect.height() - printSize.height() ) / 2 );
+
+    QRect mapPrintRect( printTopLeft, printSize );
+
+    QPainter painter;
+    if (!painter.begin(printer))
+        return;
+    painter.drawPixmap( mapPrintRect, pixmap, pixmap.rect() );
+    painter.end();
+#endif
+}
+
+void MainWindow::printPreview()
+{
+#ifndef QT_NO_PRINTER
+    QPrinter printer( QPrinter::HighResolution );
+
+    QPrintPreviewDialog preview( &printer, this );
+    preview.setWindowFlags ( Qt::Window );
+    connect( &preview, SIGNAL( paintRequested( QPrinter * ) ), SLOT( paintPrintPreview( QPrinter * ) ) );
+    preview.exec();
+#endif
+}
+
+void MainWindow::paintPrintPreview( QPrinter * printer )
+{
+#ifndef QT_NO_PRINTER
+    QPixmap mapPixmap = m_controlView->mapScreenShot();
+    printPixmap( printer, mapPixmap );
+#endif
 }
 
 void MainWindow::showFullScreen( bool isChecked )

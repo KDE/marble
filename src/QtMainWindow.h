@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
+// Copyright 2006-2010 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
@@ -22,6 +22,7 @@
 class QAction;
 class QLabel;
 class QMenu;
+class QPrinter;
 
 namespace Marble
 {
@@ -53,56 +54,69 @@ class MainWindow : public QMainWindow
     void  readSettings();
     void  writeSettings();
 
- public Q_SLOTS:
+ private Q_SLOTS:
     void  showPosition( const QString& position);
     void  showDistance( const QString& position);
 
- private Q_SLOTS:
     void  initObject();
     void  editSettings();
     void  updateSettings();
+    
+    // File Menu
+    void  openFile();
+    void  openMapSite();
     void  exportMapScreenShot();
     void  printMapScreenShot();
+    void  printPixmap( QPrinter * printer, const QPixmap& pixmap );
+    void  printPreview();
+    void  paintPrintPreview( QPrinter * printer );
+    void  workOffline( bool );
+    
+    // Edit Menu
     void  copyMap();
     void  copyCoordinates();
-    void  showFullScreen( bool );
-    void  showSideBar( bool );
-    void  showStatusBar( bool );
-    void  showClouds( bool );
-    void  workOffline( bool );
-    void  showAtmosphere( bool );
-    void  controlSun();
-    void  showSun( bool );
-    void  enterWhatsThis();
-    void  aboutMarble();
-    void  handbook();
-    void  openMapSite();
-    void  openFile();
-    void  setupStatusBar();
+    
+    // View Menu
     void  lockPosition( bool );
     void  createInfoBoxesMenu();
     void  createOnlineServicesMenu();
     void  createPluginMenus();
+    void  showClouds( bool );
+    void  showAtmosphere( bool );
+    void  controlSun();
+    void  showSun( bool );
+    
+    // Settings Menu
+    void  showFullScreen( bool );
+    void  showSideBar( bool );
+    void  showStatusBar( bool );
+    void  setupStatusBar();
+    
+    // Help Menu
+    void  enterWhatsThis();
+    void  aboutMarble();
+    void  handbook();
 
  private:
     ControlView *m_controlView;
     SunControlWidget* m_sunControlDialog;
+    QtMarbleConfigDialog *m_configDialog;
 
+    /// Store plugin toolbar pointers so that they can be removed/updated later
+    QList<QToolBar*> m_pluginToolbars;
+    /// Store plugin menus so that they can be removed/updated later
+    QList<QMenu*> m_pluginMenus;
+    
     QMenu *m_fileMenu;
     QMenu *m_helpMenu;
     QMenu *m_settingsMenu;
     QMenu *m_infoBoxesMenu;
     QMenu *m_onlineServicesMenu;
 
-    /// Store plugin toolbar pointers so that they can be removed/updated later
-    QList<QToolBar*> m_pluginToolbars;
-
-    /// Store plugin menus so that they can be removed/updated later
-    QList<QMenu*> m_pluginMenus;
-
     // File Menu
     QAction *m_exportMapAct;
     QAction *m_downloadAct;
+    QAction *m_printPreviewAct;
     QAction *m_printAct;
     QAction *m_workOfflineAct;
     QAction *m_quitAct;
@@ -130,15 +144,11 @@ class MainWindow : public QMainWindow
     QAction *m_lockFloatItemsAct;
     QAction *m_handbookAct;
 
-    QString m_position;
-    QString m_distance;
-
-    // Zoom label for the statusbar.
-    QLabel       *m_positionLabel;
-    QLabel       *m_distanceLabel;
-    
-    QtMarbleConfigDialog *m_configDialog;
-
+    // Status Bar
+    QString     m_position;
+    QString     m_distance;
+    QLabel      *m_positionLabel;
+    QLabel      *m_distanceLabel;    
     void updateStatusBar();
 };
 

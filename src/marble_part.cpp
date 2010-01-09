@@ -23,6 +23,7 @@
 #include <QtGui/QFontMetrics>
 #include <QtGui/QPrinter>
 #include <QtGui/QPrintDialog>
+#include <QtGui/QPrintPreviewDialog>
 #include <QtGui/QProgressBar>
 #include <QtGui/QPainter>
 #include <QtGui/QStandardItemModel>
@@ -216,29 +217,59 @@ void MarblePart::exportMapScreenShot()
 
 void MarblePart::printMapScreenShot()
 {
-    QPixmap       mapPixmap = m_controlView->mapScreenShot();
-    QSize         printSize = mapPixmap.size();
-    QPrinter      printer;
-
+#ifndef QT_NO_PRINTER
+    QPrinter printer( QPrinter::HighResolution );
     QPrintDialog *printDialog = KdePrint::createPrintDialog(&printer, widget());
 
-    if ( printDialog->exec() ) {
-
-        QRect  mapPageRect = printer.pageRect();
-
-        printSize.scale( ( printer.pageRect() ).size(), Qt::KeepAspectRatio );
-
-        QPoint  printTopLeft( mapPageRect.x() + mapPageRect.width() / 2
-                              - printSize.width() / 2,
-                              mapPageRect.y() + mapPageRect.height() / 2
-                              - printSize.height() / 2 );
-
-        QRect     mapPrintRect( printTopLeft, printSize );
-        QPainter  painter( &printer );
-
-        painter.drawPixmap( mapPrintRect, mapPixmap, mapPixmap.rect() );
+    if (printDialog->exec()) {
+        QPixmap mapPixmap = m_controlView->mapScreenShot();
+        printPixmap( &printer, mapPixmap );
     }
+    
     delete printDialog;
+#endif
+}
+
+void MarblePart::printPixmap( QPrinter * printer, const QPixmap& pixmap  )
+{
+#ifndef QT_NO_PRINTER
+    QSize printSize = pixmap.size();
+
+    QRect mapPageRect = printer->pageRect();
+
+    printSize.scale( printer->pageRect().size(), Qt::KeepAspectRatio );
+
+    QPoint printTopLeft( ( mapPageRect.width() - printSize.width() ) / 2 ,
+                         ( mapPageRect.height() - printSize.height() ) / 2 );
+
+    QRect mapPrintRect( printTopLeft, printSize );
+
+    QPainter painter;
+    if (!painter.begin(printer))
+        return;
+    painter.drawPixmap( mapPrintRect, pixmap, pixmap.rect() );
+    painter.end();
+#endif
+}
+
+void MarblePart::printPreview()
+{
+#ifndef QT_NO_PRINTER
+    QPrinter printer( QPrinter::HighResolution );
+
+    QPrintPreviewDialog preview( &printer, widget() );
+    preview.setWindowFlags ( Qt::Window );
+    connect( &preview, SIGNAL( paintRequested( QPrinter * ) ), SLOT( paintPrintPreview( QPrinter * ) ) );
+    preview.exec();
+#endif
+}
+
+void MarblePart::paintPrintPreview( QPrinter * printer )
+{
+#ifndef QT_NO_PRINTER
+    QPixmap mapPixmap = m_controlView->mapScreenShot();
+    printPixmap( printer, mapPixmap );
+#endif
 }
 
 void MarblePart::setShowClouds( bool isChecked )
@@ -562,6 +593,9 @@ void MarblePart::setupActions()
     m_printMapAction = KStandardAction::print( this, SLOT( printMapScreenShot() ),
                                                actionCollection() );
 
+    m_printPreviewAction = KStandardAction::printPreview( this, SLOT( printPreview() ),
+                                               actionCollection() );
+                                               
     // Action: Export Map
     m_exportMapAction = new KAction( this );
     actionCollection()->addAction( "exportMap", m_exportMapAction );

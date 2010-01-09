@@ -1222,13 +1222,12 @@ QString MarbleMap::distanceString() const
 
     const Marble::DistanceUnit distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
 
-    // FIXME: why is "km" translated and "mi" not?
     if ( distanceUnit == Marble::Meter ) {
         distanceUnitString = tr("km");
     }
     else {
         distance *= KM2MI;
-        distanceUnitString = "mi";
+        distanceUnitString = tr("mi");
     }
 
     return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( distanceUnitString );

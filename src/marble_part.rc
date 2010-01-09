@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="marble_part" version="9">
+<kpartgui name="marble_part" version="12">
 
 <MenuBar>
   <Menu name="file" noMerge="1">
@@ -7,7 +7,9 @@
     <Action name="file_open"/>
     <Action name="new_stuff"/>
     <Action name="exportMap"/>
+    <Separator/>
     <Action name="file_print"/>
+    <Action name="file_print_preview"/>
     <Separator/>
     <Action name="workOffline"/>
     <Action name="file_quit"/>
@@ -19,10 +21,10 @@
   </Menu>
   <Menu name="view" noMerge="1">
     <text>&amp;View</text>
-    <Merge name="StandardToolBarMenuHandler" />
     <Action name="show_currentlocation" group="show_merge"/>
     <Separator/>
     <Action name="show_crosshairs" group="show_merge"/>
+    <Action name="view_redisplay"/>
     <Separator/>
     <Menu name="infoboxes" noMerge="1">
       <text>&amp;Info Boxes</text>
@@ -39,7 +41,6 @@
     <Action name="show_atmosphere"/>
     <Separator/>
     <Action name="control_sun"/>
-    <Action name="view_redisplay"/>
   </Menu>
   <Menu name="settings" noMerge="1">
     <text>&amp;Settings</text>
@@ -60,10 +61,10 @@
   <Separator/>
   <Action name="edit_copy"/>
 </ToolBar>
-
+<!--
 <ToolBar position="Top" hidden="true" name="pluginToolBar">
   <text>Edit Toolbar</text>
   <ActionList name="plugins_actionlist" />
 </ToolBar>
-
+-->
 </kpartgui>
