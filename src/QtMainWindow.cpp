@@ -160,7 +160,7 @@ void MainWindow::createActions()
      m_lockFloatItemsAct = new QAction( tr("Lock Position"),this);
      m_lockFloatItemsAct->setCheckable( true );
      m_lockFloatItemsAct->setStatusTip(tr("Lock Position of Floating Items"));
-     connect(m_lockFloatItemsAct, SIGNAL(triggered( bool )), this, SLOT( lockPosition( bool )));
+     connect(m_lockFloatItemsAct, SIGNAL(toggled( bool )), this, SLOT( lockPosition( bool )));
 
      m_showCloudsAct = new QAction( tr("&Clouds"), this);
      m_showCloudsAct->setCheckable( true );
@@ -398,8 +398,8 @@ void MainWindow::printMapScreenShot()
 
         printSize.scale( ( printer.pageRect() ).size(), Qt::KeepAspectRatio );
 
-        QPoint printTopLeft( mapPageRect.x() + mapPageRect.width() /2  - printSize.width() /2 ,
-                             mapPageRect.y() + mapPageRect.height()/2  - printSize.height()/2 );
+        QPoint printTopLeft( mapPageRect.width() /2  - printSize.width() /2 ,
+                             mapPageRect.height()/2  - printSize.height()/2 );
 
         QRect mapPrintRect( printTopLeft, printSize );
 
@@ -676,9 +676,7 @@ void MainWindow::readSettings()
 	    m_controlView->marbleWidget()->goHome();
 	 }
          
-         bool isLocked = settings.value( "lockFloatItemPositions", false ).toBool();
-         m_lockFloatItemsAct->setChecked( isLocked );
-         lockPosition(isLocked);
+         m_lockFloatItemsAct->setChecked( settings.value( "lockFloatItemPositions", false ).toBool() );
      settings.endGroup();
      
      settings.beginGroup( "Sun" );
