@@ -198,8 +198,13 @@ void QtMarbleConfigDialog::syncSettings()
             proxy.setType( QNetworkProxy::HttpProxy );
         }
     }
+
+    QString hostName = proxyUrl();
+    if ( hostName.startsWith("http://" ) ) {
+        hostName = hostName.mid( QString( "http://" ).size() );
+    }
     
-    proxy.setHostName( proxyUrl() );
+    proxy.setHostName( hostName );
     proxy.setPort( proxyPort() );
     
     if ( proxyAuth() ) {

@@ -1102,7 +1102,12 @@ void MarblePart::slotUpdateSettings()
         }
     }
     
-    proxy.setHostName( MarbleSettings::proxyUrl() );
+    QString hostName = MarbleSettings::proxyUrl();
+    if ( hostName.startsWith("http://" ) ) {
+        hostName = hostName.mid( QString( "http://" ).size() );
+    }
+
+    proxy.setHostName( hostName );
     proxy.setPort( MarbleSettings::proxyPort() );
     
     if ( MarbleSettings::proxyAuth() ) {

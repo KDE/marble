@@ -1313,40 +1313,39 @@ void MarbleWidget::setInputEnabled( bool enabled )
 
 void MarbleWidget::setProxy( const QString& proxyHost, const quint16 proxyPort, const QString& user, const QString& password  )
 {
-    d->m_proxyHost = proxyHost;
-    d->m_proxyPort = proxyPort;
-    d->m_user = user;
-    d->m_password = password;
-
     QNetworkProxy::ProxyType type = QNetworkProxy::HttpProxy;
 
     // Make sure that no proxy is used for an empty string or the default value: 
     if ( proxyHost.isEmpty() || proxyHost == "http://" )
         type = QNetworkProxy::NoProxy;
 
-    QNetworkProxy proxy( type, d->m_proxyHost, d->m_proxyPort, d->m_user, d->m_password );
+    QString hostName = proxyHost;
+    if ( hostName.startsWith("http://" ) ) {
+        hostName = hostName.mid( QString( "http://" ).size() );
+    }
+    
+    QNetworkProxy proxy( type, hostName, proxyPort, user, password );
     QNetworkProxy::setApplicationProxy( proxy );
-    mDebug() << "MarbleWidget::setProxy" << type << d->m_proxyHost << d->m_proxyPort << d->m_user << d->m_password;
 }
 
 QString MarbleWidget::proxyHost() const
 {
-    return d->m_proxyHost;
+    return QNetworkProxy::applicationProxy().hostName();
 }
 
 quint16 MarbleWidget::proxyPort() const
 {
-    return d->m_proxyPort;
+    return QNetworkProxy::applicationProxy().port();
 }
 
 QString MarbleWidget::user() const
 {
-    return d->m_user;
+    return QNetworkProxy::applicationProxy().user();
 }
 
 QString MarbleWidget::password() const
 {
-    return d->m_password;
+    return QNetworkProxy::applicationProxy().password();
 }
 
 QList<RenderPlugin *> MarbleWidget::renderPlugins() const
