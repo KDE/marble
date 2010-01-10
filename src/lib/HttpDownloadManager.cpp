@@ -148,7 +148,7 @@ void HttpDownloadManager::setDownloadEnabled( const bool enable )
 
 void HttpDownloadManager::addDownloadPolicy( const DownloadPolicy& policy )
 {
-    DownloadQueueSet * const queueSet = new DownloadQueueSet( policy );
+    DownloadQueueSet * const queueSet = new DownloadQueueSet( policy, this );
     connectQueueSet( queueSet );
     d->m_queueSets.append( QPair<DownloadPolicyKey, DownloadQueueSet *>
                            ( queueSet->downloadPolicy().key(), queueSet ));

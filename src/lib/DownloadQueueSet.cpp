@@ -22,12 +22,14 @@
 namespace Marble
 {
 
-DownloadQueueSet::DownloadQueueSet()
+DownloadQueueSet::DownloadQueueSet( QObject * parent )
+    : QObject( parent )
 {
 }
 
-DownloadQueueSet::DownloadQueueSet( DownloadPolicy const & policy )
-    : m_downloadPolicy( policy )
+DownloadQueueSet::DownloadQueueSet( DownloadPolicy const & policy, QObject * parent )
+    : QObject( parent ),
+      m_downloadPolicy( policy )
 {
 }
 
