@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=World Clock
 Name[ca]=Rellotge mundial
+Name[ca@valencia]=Rellotge mundial
 Name[cs]=Světové hodiny
 Name[da]=Verdensur
 Name[de]=Weltzeituhr
@@ -42,6 +43,7 @@ Name[zh_CN]=世界时钟
 Name[zh_TW]=世界時鐘
 Comment=Shows the time in different parts of the world
 Comment[ca]=Mostra l'hora en diverses parts del món
+Comment[ca@valencia]=Mostra l'hora en diverses parts del món
 Comment[cs]=Ukazuje čas v různých částech světa
 Comment[da]=Viser tiden i forskellige dele af verden
 Comment[de]=Zeigt die Zeit in verschiedenen Erdteilen
