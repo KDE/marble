@@ -16,6 +16,7 @@
 
 // Qt
 #include <QtCore/QDir>
+#include <QtCore/QPointer>
 #include <QtCore/QStringList>
 #include <QtCore/QTimer>
 #include <QtGui/QClipboard>
@@ -252,15 +253,17 @@ void MarblePart::printPixmap( QPrinter * printer, const QPixmap& pixmap  )
 #endif
 }
 
+// QPointer is used because of issues described in http://www.kdedevelopers.org/node/3919
 void MarblePart::printPreview()
 {
 #ifndef QT_NO_PRINTER
     QPrinter printer( QPrinter::HighResolution );
 
-    QPrintPreviewDialog preview( &printer, widget() );
-    preview.setWindowFlags ( Qt::Window );
-    connect( &preview, SIGNAL( paintRequested( QPrinter * ) ), SLOT( paintPrintPreview( QPrinter * ) ) );
-    preview.exec();
+    QPointer<QPrintPreviewDialog> preview = new QPrintPreviewDialog( &printer, widget() );
+    preview->setWindowFlags( Qt::Window );
+    connect( preview, SIGNAL( paintRequested( QPrinter * ) ), SLOT( paintPrintPreview( QPrinter * ) ) );
+    preview->exec();
+    delete preview;
 #endif
 }
 
