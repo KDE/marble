@@ -45,6 +45,7 @@ namespace dgml
     extern const char* dgmlAttr_labelColor;
     extern const char* dgmlAttr_levelZeroColumns;
     extern const char* dgmlAttr_levelZeroRows;
+    extern const char* dgmlAttr_maximumConnections;
     extern const char* dgmlAttr_mode;
     extern const char* dgmlAttr_name;
     extern const char* dgmlAttr_password;
@@ -57,6 +58,7 @@ namespace dgml
     extern const char* dgmlAttr_style;
     extern const char* dgmlAttr_text;
     extern const char* dgmlAttr_type;
+    extern const char* dgmlAttr_usage;
     extern const char* dgmlAttr_user;
     extern const char* dgmlAttr_width;
 }

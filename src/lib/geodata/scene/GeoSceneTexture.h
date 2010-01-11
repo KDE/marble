@@ -23,10 +23,13 @@
 #ifndef GEOSCENETEXTURE_H
 #define GEOSCENETEXTURE_H
 
+#include <QtCore/QList>
+#include <QtCore/QStringList>
 #include <QtCore/QUrl>
 #include <QtCore/QVector>
 
 #include "GeoSceneLayer.h"
+#include "global.h"
 
 /**
  * @short Texture dataset stored in a layer.
@@ -34,6 +37,7 @@
 
 namespace Marble
 {
+class DownloadPolicy;
 
 class GeoSceneTexture : public GeoSceneAbstractDataset
 {
@@ -42,6 +46,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     enum Projection { Equirectangular, Mercator };
 
     explicit GeoSceneTexture( const QString& name );
+    ~GeoSceneTexture();
 
     QString sourceDir() const;
     void setSourceDir( const QString& sourceDir );
@@ -70,9 +75,15 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     QUrl downloadUrl();
     void addDownloadUrl( const QUrl & );
 
+    QList<DownloadPolicy *> downloadPolicies() const;
+    void addDownloadPolicy( const DownloadUsage usage, const int maximumConnections );
+
     virtual QString type();
 
  private:
+    Q_DISABLE_COPY( GeoSceneTexture )
+    QStringList hostNames() const;
+
     QString m_sourceDir;
     QString m_installMap;
     StorageLayoutMode m_storageLayoutMode;
@@ -86,6 +97,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
 
     /// Points to next Url for the round robin algorithm
     QVector<QUrl>::const_iterator m_nextUrl;
+    QList<DownloadPolicy *> m_downloadPolicies;
 };
 
 }

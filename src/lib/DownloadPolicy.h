@@ -27,6 +27,7 @@ namespace Marble
 class DownloadPolicyKey
 {
     friend bool operator<( DownloadPolicyKey const & lhs, DownloadPolicyKey const & rhs );
+    friend bool operator==( DownloadPolicyKey const & lhs, DownloadPolicyKey const & rhs );
 
  public:
     DownloadPolicyKey();
@@ -46,9 +47,16 @@ class DownloadPolicyKey
     DownloadUsage m_usage;
 };
 
+inline bool operator==( const DownloadPolicyKey & lhs, const DownloadPolicyKey & rhs )
+{
+    return lhs.m_hostNames == rhs.m_hostNames && lhs.m_usage == rhs.m_usage;
+}
+
 
 class DownloadPolicy
 {
+    friend bool operator==( const DownloadPolicy & lhs, const DownloadPolicy & rhs );
+
  public:
     DownloadPolicy();
     explicit DownloadPolicy( const DownloadPolicyKey & key );
@@ -62,6 +70,11 @@ class DownloadPolicy
     DownloadPolicyKey m_key;
     int m_maximumConnections;
 };
+
+inline bool operator==( const DownloadPolicy & lhs, const DownloadPolicy & rhs )
+{
+    return lhs.m_key == rhs.m_key && lhs.m_maximumConnections == rhs.m_maximumConnections;
+}
 
 }
 

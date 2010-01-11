@@ -148,6 +148,8 @@ void HttpDownloadManager::setDownloadEnabled( const bool enable )
 
 void HttpDownloadManager::addDownloadPolicy( const DownloadPolicy& policy )
 {
+    if ( hasDownloadPolicy( policy ))
+        return;
     DownloadQueueSet * const queueSet = new DownloadQueueSet( policy, this );
     connectQueueSet( queueSet );
     d->m_queueSets.append( QPair<DownloadPolicyKey, DownloadQueueSet *>
@@ -160,15 +162,16 @@ StoragePolicy* HttpDownloadManager::storagePolicy() const
 }
 
 void HttpDownloadManager::addJob( const QUrl& sourceUrl, const QString& destFileName,
-                                  const QString &id )
+                                  const QString &id, const DownloadUsage usage )
 {
     if ( !d->m_downloadEnabled )
         return;
 
-    DownloadQueueSet * const queueSet = d->findQueues( sourceUrl.host(), DownloadBrowse );
+    DownloadQueueSet * const queueSet = d->findQueues( sourceUrl.host(), usage );
     if ( queueSet->canAcceptJob( sourceUrl, destFileName )) {
         HttpJob * const job = d->createJob( sourceUrl, destFileName, id );
         if ( job ) {
+            job->setDownloadUsage( usage );
             queueSet->addJob( job );
         }
     }
@@ -217,6 +220,20 @@ void HttpDownloadManager::connectQueueSet( DownloadQueueSet * queueSet )
     // relay jobAdded/jobRemoved signals (interesting for progress bar)
     connect( queueSet, SIGNAL( jobAdded() ), SIGNAL( jobAdded() ));
     connect( queueSet, SIGNAL( jobRemoved() ), SIGNAL( jobRemoved() ));
+}
+
+bool HttpDownloadManager::hasDownloadPolicy( const DownloadPolicy& policy ) const
+{
+    bool found = false;
+    QList<QPair<DownloadPolicyKey, DownloadQueueSet*> >::iterator pos = d->m_queueSets.begin();
+    QList<QPair<DownloadPolicyKey, DownloadQueueSet*> >::iterator const end = d->m_queueSets.end();
+    for (; pos != end; ++pos ) {
+        if ( (*pos).second->downloadPolicy() == policy ) {
+            found = true;
+            break;
+        }
+    }
+    return found;
 }
 
 #include "HttpDownloadManager.moc"

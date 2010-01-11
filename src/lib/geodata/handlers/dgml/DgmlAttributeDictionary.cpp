@@ -43,6 +43,7 @@ const char* dgmlAttr_host             = "host";
 const char* dgmlAttr_labelColor       = "labelColor";
 const char* dgmlAttr_levelZeroColumns = "levelZeroColumns";
 const char* dgmlAttr_levelZeroRows    = "levelZeroRows";
+const char* dgmlAttr_maximumConnections = "maximumConnections";
 const char* dgmlAttr_mode             = "mode";
 const char* dgmlAttr_name             = "name";
 const char* dgmlAttr_password         = "password";
@@ -55,6 +56,7 @@ const char* dgmlAttr_spacing          = "spacing";
 const char* dgmlAttr_style            = "style";
 const char* dgmlAttr_text             = "text";
 const char* dgmlAttr_type             = "type";
+const char* dgmlAttr_usage            = "usage";
 const char* dgmlAttr_user             = "user";
 const char* dgmlAttr_width            = "width";
 }

@@ -20,6 +20,7 @@
 #include <QtCore/QString>
 #include <QtCore/QUrl>
 
+#include "global.h"
 #include "marble_export.h"
 
 class QTimer;
@@ -82,7 +83,8 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     /**
      * Adds a new job with a sourceUrl, destination file name and given id.
      */
-    void addJob( const QUrl& sourceUrl, const QString& destFilename, const QString &id );
+    void addJob( const QUrl& sourceUrl, const QString& destFilename, const QString &id,
+                 const DownloadUsage usage = DownloadBrowse );
 
 
  Q_SIGNALS:
@@ -118,6 +120,7 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     Q_DISABLE_COPY( HttpDownloadManager )
 
     void connectQueueSet( DownloadQueueSet * );
+    bool hasDownloadPolicy( const DownloadPolicy& policy ) const;
     class Private;
     Private * const d;
 };

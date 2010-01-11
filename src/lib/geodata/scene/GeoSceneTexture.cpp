@@ -22,7 +22,8 @@
 
 #include "GeoSceneTexture.h"
 
-#include "global.h"
+#include "DownloadPolicy.h"
+#include "MarbleDebug.h"
 
 namespace Marble
 {
@@ -39,6 +40,11 @@ GeoSceneTexture::GeoSceneTexture( const QString& name )
       m_downloadUrls(),
       m_nextUrl( m_downloadUrls.constEnd() )
 {
+}
+
+GeoSceneTexture::~GeoSceneTexture()
+{
+    qDeleteAll( m_downloadPolicies );
 }
 
 QString GeoSceneTexture::sourceDir() const
@@ -132,9 +138,32 @@ void GeoSceneTexture::addDownloadUrl( const QUrl & url )
     m_nextUrl = m_downloadUrls.constBegin();
 }
 
+QList<DownloadPolicy *> GeoSceneTexture::downloadPolicies() const
+{
+    return m_downloadPolicies;
+}
+
+void GeoSceneTexture::addDownloadPolicy( const DownloadUsage usage, const int maximumConnections )
+{
+    DownloadPolicy * const policy = new DownloadPolicy( DownloadPolicyKey( hostNames(), usage ));
+    policy->setMaximumConnections( maximumConnections );
+    m_downloadPolicies.append( policy );
+    mDebug() << "added download policy" << hostNames() << usage << maximumConnections;
+}
+
 QString GeoSceneTexture::type()
 {
     return "texture";
+}
+
+QStringList GeoSceneTexture::hostNames() const
+{
+    QStringList result;
+    QVector<QUrl>::const_iterator pos = m_downloadUrls.constBegin();
+    QVector<QUrl>::const_iterator const end = m_downloadUrls.constEnd();
+    for (; pos != end; ++pos )
+        result.append( (*pos).host() );
+    return result;
 }
 
 }

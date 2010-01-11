@@ -40,6 +40,7 @@ const char* dgmlTag_Description = "description";
 const char* dgmlTag_Dgml = "dgml";
 const char* dgmlTag_Discrete = "discrete";
 const char* dgmlTag_Document = "document";
+const char* dgmlTag_DownloadPolicy = "downloadPolicy";
 const char* dgmlTag_DownloadUrl = "downloadUrl";
 const char* dgmlTag_Filter = "filter";
 const char* dgmlTag_Geodata = "geodata";

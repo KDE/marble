@@ -7,7 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2008,2009 Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2008, 2009, 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 // Copyright 2008-2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
@@ -304,6 +304,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
                                Projection currentProjection )
 {
     d->m_mapTheme = mapTheme;
+    addDownloadPolicies( d->m_mapTheme );
 
     // Some output to show how to use this stuff ...
     mDebug() << "DGML2 Name       : " << d->m_mapTheme->head()->name(); 
@@ -913,6 +914,32 @@ void MarbleModel::reloadMap() const
         QString destFileName = TileLoaderHelper::relativeTileFileName( texture, id.zoomLevel(),
                                                                        id.x(), id.y() );
         emit downloadTile( sourceUrl, destFileName, id.toString() );
+    }
+}
+
+void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
+{
+    if ( !mapTheme )
+        return;
+    if ( !mapTheme->map()->hasTextureLayers() )
+        return;
+
+    // As long as we don't have an Layer Management Class we just lookup 
+    // the name of the layer that has the same name as the theme ID
+    const QString themeId = d->m_mapTheme->head()->theme();
+    GeoSceneLayer * const layer = static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeId ));
+    if ( !layer )
+        return;
+
+    GeoSceneTexture * const texture = static_cast<GeoSceneTexture*>( layer->groundDataset() );
+    if ( !texture )
+        return;
+
+    QList<DownloadPolicy *> policies = texture->downloadPolicies();
+    QList<DownloadPolicy *>::const_iterator pos = policies.constBegin();
+    QList<DownloadPolicy *>::const_iterator const end = policies.constEnd();
+    for (; pos != end; ++pos ) {
+        d->m_downloadManager->addDownloadPolicy( **pos );
     }
 }
 
