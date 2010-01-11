@@ -245,7 +245,7 @@ class MARBLE_EXPORT AbstractProjection
 
  private:
     Q_DISABLE_COPY( AbstractProjection )
-    AbstractProjectionPrivate * d;
+    AbstractProjectionPrivate * const d;
 };
 
 }
