@@ -837,9 +837,18 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
         doClip = ( d->m_map->radius() > width() / 2
                    || d->m_map->radius() > height() / 2 );
 
+    QPaintDevice *paintDevice = this;
+    QImage image;
+    if (!isEnabled())
+    {
+        // Paint to an intermediate image
+        image = QImage(rect().size(), QImage::Format_ARGB32_Premultiplied);
+        paintDevice = &image;
+    }
+
     // Create a painter that will do the painting.
-    GeoPainter painter( this, map()->viewParams()->viewport(),
-			map()->viewParams()->mapQuality(), doClip );
+    GeoPainter painter( paintDevice, map()->viewParams()->viewport(),
+                        map()->viewParams()->mapQuality(), doClip );
 
     QRect  dirtyRect = evt->rect();
 
@@ -848,6 +857,20 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     d->m_map->customPaint( &painter );
     customPaint( &painter );
     d->m_map->d->paintOverlay( painter, dirtyRect );
+
+    if (!isEnabled())
+    {
+        // Draw a grayscale version of the intermediate image
+        QRgb* pixel = reinterpret_cast<QRgb*>(image.scanLine(0));
+        for (int i=0; i<image.width()*image.height(); ++i, ++pixel) {
+            int gray = qGray(*pixel);
+            *pixel = qRgb(gray,gray,gray);
+        }
+
+        GeoPainter widgetPainter( this, map()->viewParams()->viewport(),
+                            map()->viewParams()->mapQuality(), doClip );
+        widgetPainter.drawImage(rect(), image);
+    }
 
     if (d->m_map->showFrameRate())
     {
@@ -1385,6 +1408,16 @@ void MarbleWidget::writePluginSettings( QSettings& settings ) const
 QList<AbstractFloatItem *> MarbleWidget::floatItems() const
 {
     return d->m_model->floatItems();
+}
+
+void MarbleWidget::changeEvent ( QEvent * event )
+{
+    if (event->type() == QEvent::EnabledChange)
+    {
+        setInputEnabled(isEnabled());
+    }
+
+    QWidget::changeEvent(event);
 }
 
 }
