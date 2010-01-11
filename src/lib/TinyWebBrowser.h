@@ -13,7 +13,7 @@
 #define TINYWEBBROWSER_H
 
 // Qt
-#include <qglobal.h>
+#include <QtCore/QtGlobal>
 #include <QtWebKit/QWebView>
 #include <QtGui/QDesktopServices>
 
