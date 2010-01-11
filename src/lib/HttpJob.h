@@ -15,6 +15,7 @@
 #ifndef HTTPJOB_H
 #define HTTPJOB_H
 
+#include <QtCore/QByteArray>
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QUrl>
@@ -48,6 +49,10 @@ class MARBLE_EXPORT HttpJob: public QObject
 
     DownloadUsage downloadUsage() const;
     void setDownloadUsage( const DownloadUsage );
+
+    void setUserAgentPluginId( const QString & pluginId ) const;
+
+    QByteArray userAgent() const;
 
  Q_SIGNALS:
     /**

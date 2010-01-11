@@ -68,7 +68,9 @@ HttpJob * QNamNetworkPlugin::createJob( const QUrl & sourceUrl,
                                         const QString & destination,
                                         const QString & id )
 {
-    return new QNamDownloadJob( sourceUrl, destination, id, m_networkAccessManager );
+    HttpJob * const job = new QNamDownloadJob( sourceUrl, destination, id, m_networkAccessManager );
+    job->setUserAgentPluginId( "QNamNetworkPlugin" );
+    return job;
 }
 
 NetworkPlugin * QNamNetworkPlugin::newInstance() const

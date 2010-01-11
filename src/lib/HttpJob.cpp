@@ -13,6 +13,8 @@
 
 #include "HttpJob.h"
 
+#include <QtCore/QDebug>
+
 using namespace Marble;
 
 class Marble::HttpJobPrivate
@@ -25,6 +27,7 @@ class Marble::HttpJobPrivate
     QString        m_initiatorId;
     int            m_trialsLeft;
     DownloadUsage  m_downloadUsage;
+    QString m_pluginId;
 };
 
 HttpJobPrivate::HttpJobPrivate( const QUrl & sourceUrl, const QString & destFileName,
@@ -33,7 +36,10 @@ HttpJobPrivate::HttpJobPrivate( const QUrl & sourceUrl, const QString & destFile
       m_destinationFileName( destFileName ),
       m_initiatorId( id ),
       m_trialsLeft( 3 ),
-      m_downloadUsage( DownloadBrowse )
+      m_downloadUsage( DownloadBrowse ),
+      // FIXME: remove initialization depending on if empty pluginId
+      // results in valid user agent string
+      m_pluginId( "unknown" )
 {
 }
 
@@ -97,6 +103,30 @@ DownloadUsage HttpJob::downloadUsage() const
 void HttpJob::setDownloadUsage( const DownloadUsage usage )
 {
     d->m_downloadUsage = usage;
+}
+
+void HttpJob::setUserAgentPluginId( const QString & pluginId ) const
+{
+    d->m_pluginId = pluginId;
+}
+
+QByteArray HttpJob::userAgent() const
+{
+    QString result( "Mozilla/5.0 (compatible; Marble/%1; %2; %3)" );
+    result.arg( MARBLE_VERSION_STRING );
+    switch ( d->m_downloadUsage ) {
+    case DownloadBrowse:
+        result.arg( "Browser" );
+        break;
+    case DownloadBulk:
+        result.arg( "BulkDownloader" );
+        break;
+    default:
+        qCritical() << "Unknown download usage value:" << d->m_downloadUsage;
+        result.arg( "unknown" );
+    }
+    result.arg( d->m_pluginId );
+    return result.toAscii();
 }
 
 #include "HttpJob.moc"
