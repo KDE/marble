@@ -365,7 +365,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void repaintNeeded( QRegion dirtyRegion = QRegion() );
 
     void downloadTile( const QUrl& sourceUrl, const QString& destinationFileName,
-                       const QString& id ) const;
+                       const QString& id, DownloadUsage ) const;
     
     /**
      * @brief Signal that a render item has been initialized
