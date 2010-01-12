@@ -26,7 +26,6 @@ namespace Marble
 
 class DownloadPolicyKey
 {
-    friend bool operator<( DownloadPolicyKey const & lhs, DownloadPolicyKey const & rhs );
     friend bool operator==( DownloadPolicyKey const & lhs, DownloadPolicyKey const & rhs );
 
  public:
