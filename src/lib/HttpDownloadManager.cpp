@@ -215,8 +215,8 @@ void HttpDownloadManager::connectQueueSet( DownloadQueueSet * queueSet )
     connect( queueSet, SIGNAL( jobFinished( QByteArray, QString, QString )),
              SLOT( finishJob( QByteArray, QString, QString )));
     connect( queueSet, SIGNAL( jobRetry() ), SLOT( startRetryTimer() ));
-    connect( queueSet, SIGNAL( jobRedirected( QUrl, QString, QString )),
-             SLOT( addJob( QUrl, QString, QString )));
+    connect( queueSet, SIGNAL( jobRedirected( QUrl, QString, QString, DownloadUsage )),
+             SLOT( addJob( QUrl, QString, QString, DownloadUsage )));
     // relay jobAdded/jobRemoved signals (interesting for progress bar)
     connect( queueSet, SIGNAL( jobAdded() ), SIGNAL( jobAdded() ));
     connect( queueSet, SIGNAL( jobRemoved() ), SIGNAL( jobRemoved() ));

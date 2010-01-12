@@ -118,7 +118,8 @@ void DownloadQueueSet::redirectJob( HttpJob * job, QUrl newSourceUrl )
 
     deactivateJob( job );
     emit jobRemoved();
-    emit jobRedirected( newSourceUrl, job->destinationFileName(), job->initiatorId() );
+    emit jobRedirected( newSourceUrl, job->destinationFileName(), job->initiatorId(),
+                        job->downloadUsage() );
     job->deleteLater();
 }
 

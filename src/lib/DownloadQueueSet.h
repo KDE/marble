@@ -95,7 +95,7 @@ class DownloadQueueSet: public QObject
     void jobFinished( const QByteArray& data, const QString& destinationFileName,
                       const QString& id );
     void jobRedirected( const QUrl& newSourceUrl, const QString& destinationFileName,
-                        const QString& id );
+                        const QString& id, DownloadUsage );
 
  private Q_SLOTS:
     void finishJob( HttpJob * job, QByteArray data );
