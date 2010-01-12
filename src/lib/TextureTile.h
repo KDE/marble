@@ -24,6 +24,7 @@
 #include <QtGui/QColor>
 
 #include "AbstractTile.h"
+#include "global.h"
 
 class QImage;
 class QString;
@@ -73,7 +74,7 @@ class TextureTile : public AbstractTile
  Q_SIGNALS:
     void tileUpdateDone();
     void downloadTile(const QUrl& sourceUrl, const QString& destinationFileName,
-                      const QString& id);
+                      const QString& id, DownloadUsage );
 
  public Q_SLOTS:
     void initJumpTables( bool requestTileUpdate = true );

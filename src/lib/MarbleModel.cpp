@@ -848,8 +848,8 @@ void MarbleModel::paintTile( TextureTile* tile, int x, int y, int level,
 //             << "requestTileUpdate" << requestTileUpdate;
     
     if ( d->m_downloadManager != 0 ) {
-        connect( d->m_layerDecorator, SIGNAL( downloadTile( QUrl, QString, QString ) ),
-                 d->m_downloadManager, SLOT( addJob( QUrl, QString, QString ) ) );
+        connect( d->m_layerDecorator, SIGNAL( downloadTile( QUrl, QString, QString, DownloadUsage ) ),
+                 d->m_downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage ) ) );
     }
 
     d->m_layerDecorator->setInfo( x, y, level, tile->id() );

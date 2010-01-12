@@ -246,7 +246,7 @@ void AbstractDataPluginModel::downloadItemData( const QUrl& url,
 
     QString id = generateFilename( item->id(), type );
     
-    d->m_downloadManager->addJob( url, id, id );
+    d->m_downloadManager->addJob( url, id, id, DownloadBrowse );
     d->m_downloadingItems.insert( id, item );
     
     connect( item, SIGNAL( destroyed( QObject* ) ), this, SLOT( removeItem( QObject* ) ) );
@@ -260,7 +260,7 @@ void AbstractDataPluginModel::downloadDescriptionFile( const QUrl& url )
         QString name( descriptionPrefix );
         name += QString::number( d->m_descriptionFileNumber );
         
-        d->m_downloadManager->addJob( url, name, name );
+        d->m_downloadManager->addJob( url, name, name, DownloadBrowse );
         d->m_descriptionFileNumber++;
     }
 }

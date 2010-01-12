@@ -142,8 +142,8 @@ QImage MergedLayerDecorator::loadDataset( GeoSceneTexture *textureLayer )
     // TODO use a TileLoader rather than directly accessing TextureTile?
     TextureTile tile( m_id );
     
-    connect( &tile, SIGNAL( downloadTile( const QUrl&, const QString&, const QString& ) ),
-             this, SIGNAL( downloadTile( const QUrl&, const QString&, const QString& ) ) );
+    connect( &tile, SIGNAL( downloadTile( const QUrl&, const QString&, const QString&, DownloadUsage ) ),
+             this, SIGNAL( downloadTile( const QUrl&, const QString&, const QString&, DownloadUsage ) ) );
 
     tile.loadDataset( textureLayer, m_level, m_x, m_y );
     return *( tile.tile() );

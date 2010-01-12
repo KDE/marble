@@ -84,7 +84,7 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
      * Adds a new job with a sourceUrl, destination file name and given id.
      */
     void addJob( const QUrl& sourceUrl, const QString& destFilename, const QString &id,
-                 const DownloadUsage usage = DownloadBrowse );
+                 const DownloadUsage usage );
 
 
  Q_SIGNALS:

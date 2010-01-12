@@ -20,6 +20,7 @@
 #include <QtCore/QObject>
 
 #include "TileId.h"
+#include "global.h"
 
 class QString;
 class QUrl;
@@ -54,7 +55,7 @@ class MergedLayerDecorator : public QObject
 	
  Q_SIGNALS:
     void downloadTile(const QUrl& sourceUrl, const QString& destinationFileName,
-                      const QString& id);
+                      const QString& id, DownloadUsage );
     void repaintMap();
 	
  private:

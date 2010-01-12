@@ -248,8 +248,8 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
     // d->m_datasetProvider->loadDatasets( tile );
 
     if ( d->m_downloadManager != 0 ) {
-        connect( tile, SIGNAL( downloadTile( QUrl, QString, QString ) ),
-                 d->m_downloadManager, SLOT( addJob( QUrl, QString, QString ) ) );
+        connect( tile, SIGNAL( downloadTile( QUrl, QString, QString, DownloadUsage ) ),
+                 d->m_downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage ) ) );
     }
     connect( tile, SIGNAL( tileUpdateDone() ),
              this, SIGNAL( tileUpdateAvailable() ) );

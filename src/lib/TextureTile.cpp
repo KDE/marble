@@ -336,7 +336,7 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
                 TileLoaderHelper::relativeTileFileName( textureLayer, currentLevel,
                                                         currentX, currentY );
 //            mDebug() << "emit downloadTile(" << sourceUrl << destFileName << ");";
-            emit downloadTile( sourceUrl, destFileName, d->m_id.toString() );
+            emit downloadTile( sourceUrl, destFileName, d->m_id.toString(), DownloadBrowse );
         }
     }
 
