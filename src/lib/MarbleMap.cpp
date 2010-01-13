@@ -1201,23 +1201,7 @@ void MarbleMap::updateChangedMap()
 
 QString MarbleMap::distanceString() const
 {
-    const qreal VIEW_ANGLE = 110.0;
-
-    // Due to Marble's orthographic projection ("we have no focus")
-    // it's actually not possible to calculate a "real" distance.
-    // Additionally the viewing angle of the earth doesn't adjust to
-    // the window's size.
-    //
-    // So the only possible workaround is to come up with a distance
-    // definition which gives a reasonable approximation of
-    // reality. Therefore we assume that the average window width
-    // (about 800 pixels) equals the viewing angle of a human being.
-    //
-
-    qreal distance = ( model()->planet()->radius() * 0.4
-			/ (qreal)( radius() )
-			/ tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
-
+    qreal dist = distance();
     QString distanceUnitString;
 
     const Marble::DistanceUnit distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
@@ -1226,11 +1210,11 @@ QString MarbleMap::distanceString() const
         distanceUnitString = tr("km");
     }
     else {
-        distance *= KM2MI;
+        dist *= KM2MI;
         distanceUnitString = tr("mi");
     }
 
-    return QString( "%L1 %2" ).arg( distance, 8, 'f', 1, QChar(' ') ).arg( distanceUnitString );
+    return QString( "%L1 %2" ).arg( dist, 8, 'f', 1, QChar(' ') ).arg( distanceUnitString );
 }
 
 
