@@ -8,56 +8,72 @@
 
 namespace Marble
 {
-	
-GeoDataLookAt::GeoDataLookAt()
+
+GeoDataLookAt::GeoDataLookAt() : d (new GeoDataLookAtPrivate)
 {
-	d = new GeoDataLookAtPrivate();
-	d->m_coord = new GeoDataCoordinates();
+    // nothing to do
+}
+
+GeoDataLookAt::GeoDataLookAt(const GeoDataLookAt& other) : 
+        d (new GeoDataLookAtPrivate(*other.d))
+{
+    // nothing to do
+}
+
+GeoDataLookAt& GeoDataLookAt::operator=(const GeoDataLookAt &other)                                   
+{
+    *d = *other.d;
+    return *this;    
 }
 
 GeoDataLookAt::~GeoDataLookAt()
 {
-	if( !d )
-		delete d;
+    delete d;
 }
 
 void GeoDataLookAt::setAltitude( qreal altitude)
 {
-	d->m_coord->setAltitude(altitude);
+    d->m_coord.setAltitude(altitude);
 }
 
 qreal GeoDataLookAt::altitude() const
 {
-	return d->m_coord->altitude();
+    return d->m_coord.altitude();
 }
 
 void GeoDataLookAt::setLatitude( qreal latitude, GeoDataCoordinates::Unit unit)
 {
-	d->m_coord->setLatitude(latitude,unit);
-
+    d->m_coord.setLatitude(latitude,unit);
 }
 
 qreal GeoDataLookAt::latitude(GeoDataCoordinates::Unit unit) const
 {
-	return d->m_coord->latitude(unit);
-
+    return d->m_coord.latitude(unit);
 }
 
 void GeoDataLookAt::setLongitude( qreal longitude, GeoDataCoordinates::Unit unit)
 {
-	d->m_coord->setLongitude(longitude,unit);
+    d->m_coord.setLongitude(longitude,unit);
 }
 
 qreal GeoDataLookAt::longitude(GeoDataCoordinates::Unit unit) const
 {
-	return d->m_coord->longitude(unit);
-
+    return d->m_coord.longitude(unit);
 }
 
-GeoDataCoordinates* GeoDataLookAt::coordinate() const
+GeoDataCoordinates GeoDataLookAt::coordinates() const
 {
-	return d->m_coord;
-}
+    return d->m_coord;
 }
 
+void GeoDataLookAt::setRange( qreal range )
+{
+    d->m_range = range;
+}
 
+qreal GeoDataLookAt::range() const
+{
+    return d->m_range;
+}
+
+}

@@ -2,22 +2,24 @@
 #define GEODATALOOKAT_P_H
 
 #include "GeoDataCoordinates.h"
+
 namespace Marble
 {
-class GeoDataLookAtPrivate
-{
-	public :
 
-		GeoDataLookAtPrivate()
-		{
-		}
+    class GeoDataLookAtPrivate
+    {
+    public :
 
-		~GeoDataLookAtPrivate()
-		{
-		}
-		
-		GeoDataCoordinates *m_coord;
+    GeoDataLookAtPrivate() : m_range(0.0)
+    {
+        // nothing to do
+    }
+
+    GeoDataCoordinates m_coord;
+
+    qreal m_range;
 };
-} 
-#endif
 
+}
+
+#endif
