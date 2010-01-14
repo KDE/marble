@@ -793,8 +793,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     void  mouseClickGeoPosition( qreal lon, qreal lat, GeoDataCoordinates::Unit );
 
-    void  timeout();
-
     void  framesPerSecond( qreal fps );
 
     /**

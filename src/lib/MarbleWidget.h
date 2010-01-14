@@ -954,8 +954,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     void  mouseClickGeoPosition( qreal lon, qreal lat, GeoDataCoordinates::Unit );
 
-    void  timeout();
-
     void  framesPerSecond( qreal fps );
 
     /** This signal is emit when a new rectangle region is selected over the map 

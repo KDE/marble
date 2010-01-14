@@ -163,7 +163,6 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     
     void gpsInputDisabled( bool );
     void gpsPositionChanged( qreal lat, qreal lon );
-    void updateGps();
    
  public Q_SLOTS:
 

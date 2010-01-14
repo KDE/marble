@@ -318,8 +318,6 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( d->uiWidget.navigationCheckBox, SIGNAL(clicked(bool) ),
              d->m_widget->model()->gpsLayer(), SLOT( setVisible(bool) ) );
 
-    connect( d->m_widget, SIGNAL( timeout() ),
-             this,        SIGNAL( updateGps() ) );
 }
 
 void MarbleControlBox::setWidgetTabShown( QWidget * widget,
