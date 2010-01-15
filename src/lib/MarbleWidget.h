@@ -1008,6 +1008,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void  connectNotify ( const char * signal );
     void  disconnectNotify ( const char * signal );
 
+    /**
+      * @brief Reimplementation of the changeEvent() function in QWidget to
+      * react to changes of the enabled state
+      */
+    void changeEvent ( QEvent * event );
+
  private:
     Q_DISABLE_COPY( MarbleWidget )
     MarbleWidgetPrivate  * const d;
