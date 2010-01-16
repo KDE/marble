@@ -47,7 +47,7 @@ class HttpDownloadManager::Private
      * - a queue containing currently being downloaded
      * - a queue for retries of failed downloads */
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> > m_queueSets;
-    DownloadQueueSet m_defaultQueues;
+    QMap<DownloadUsage, DownloadQueueSet *> m_defaultQueueSets;
     int m_jobQueueLimit;
     StoragePolicy *m_storagePolicy;
     NetworkPlugin *m_networkPlugin;
@@ -62,13 +62,20 @@ HttpDownloadManager::Private::Private( StoragePolicy *policy )
       m_networkPlugin( 0 )
 {
     // setup default download policy and associated queue set
-    DownloadPolicy defaultDownloadPolicy;
-    defaultDownloadPolicy.setMaximumConnections( 20 );
-    m_defaultQueues.setDownloadPolicy( defaultDownloadPolicy );
+    DownloadPolicy defaultBrowsePolicy;
+    defaultBrowsePolicy.setMaximumConnections( 20 );
+    m_defaultQueueSets[ DownloadBrowse ] = new DownloadQueueSet( defaultBrowsePolicy );
+    DownloadPolicy defaultBulkDownloadPolicy;
+    defaultBulkDownloadPolicy.setMaximumConnections( 2 );
+    m_defaultQueueSets[ DownloadBulk ] = new DownloadQueueSet( defaultBulkDownloadPolicy );
 }
 
 HttpDownloadManager::Private::~Private()
 {
+    QMap<DownloadUsage, DownloadQueueSet *>::iterator pos = m_defaultQueueSets.begin();
+    QMap<DownloadUsage, DownloadQueueSet *>::iterator const end = m_defaultQueueSets.end();
+    for (; pos != end; ++pos )
+        delete pos.value();
     delete m_storagePolicy;
     delete m_networkPlugin;
 }
@@ -110,7 +117,7 @@ DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostN
     if ( !result ) {
         mDebug() << "No download policy found for" << hostName << usage
                  << ", using default policy.";
-        result = &m_defaultQueues;
+        result = m_defaultQueueSets[ usage ];
     }
     return result;
 }
@@ -122,7 +129,7 @@ HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy )
     d->m_requeueTimer = new QTimer( this );
     d->m_requeueTimer->setInterval( requeueTime );
     connect( d->m_requeueTimer, SIGNAL( timeout() ), this, SLOT( requeue() ) );
-    connectQueueSet( &d->m_defaultQueues );
+    connectDefaultQueueSets();
 }
 
 HttpDownloadManager::~HttpDownloadManager()
@@ -208,6 +215,14 @@ void HttpDownloadManager::startRetryTimer()
 {
     if ( !d->m_requeueTimer->isActive() )
         d->m_requeueTimer->start();
+}
+
+void HttpDownloadManager::connectDefaultQueueSets()
+{
+    QMap<DownloadUsage, DownloadQueueSet *>::iterator pos = d->m_defaultQueueSets.begin();
+    QMap<DownloadUsage, DownloadQueueSet *>::iterator const end = d->m_defaultQueueSets.end();
+    for (; pos != end; ++pos )
+        connectQueueSet( pos.value() );
 }
 
 void HttpDownloadManager::connectQueueSet( DownloadQueueSet * queueSet )
