@@ -79,7 +79,7 @@ uint TextureTilePrivate::pixel( int x, int y ) const
 {
     if ( m_depth == 8 || m_depth == 1 ) {
         if ( !m_isGrayscale )
-            return m_rawtile.pixel( x, y );
+            return m_rawtile.color( (jumpTable8)[y][x] );
         else
             return (jumpTable8)[y][x];
     }
