@@ -77,13 +77,16 @@ TextureTilePrivate::~TextureTilePrivate()
 
 uint TextureTilePrivate::pixel( int x, int y ) const
 {
-    if ( m_depth == 8 || m_depth == 1 ) {
-        if ( !m_isGrayscale )
-            return m_rawtile.color( (jumpTable8)[y][x] );
-        else
+    if ( m_depth == 8 ) {
+        if ( m_isGrayscale )
             return (jumpTable8)[y][x];
+        else
+            return m_rawtile.color( (jumpTable8)[y][x] );
     }
-    return (jumpTable32)[y][x];
+    if ( m_depth == 32 )
+        return (jumpTable32)[y][x];
+    
+    return m_rawtile.pixel( x, y );
 }
 
 uint TextureTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
