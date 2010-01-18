@@ -24,7 +24,8 @@ add_sip_python_module(PyKDE4.marble sip/marblemod.sip
     ${QT_QTCORE_LIBRARY}
     ${QT_QTGUI_LIBRARY}
     ${QT_QTUITOOLS_LIBRARY}
-    ${KDE4_KIO_LIBRARY}
-    ${KDE4_KDECORE_LIBRARY}
-    ${KDE4_KDEUI_LIBRARY}
+    ${QT_QTWEBKIT_LIBRARY}
 )
+#    ${KDE4_KIO_LIBRARY}
+#    ${KDE4_KDECORE_LIBRARY}
+#    ${KDE4_KDEUI_LIBRARY}
