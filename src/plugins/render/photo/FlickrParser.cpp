@@ -108,8 +108,8 @@ void FlickrParser::readPhoto()
 {
     Q_ASSERT( isStartElement()
               && name() == "photo" );
-              
-        if( attributes().hasAttribute( "id" ) ) {
+
+    if( attributes().hasAttribute( "id" ) ) {
         PhotoPluginItem *item = new PhotoPluginItem( m_parent );
         item->setId( attributes().value( "id" ).toString() );
         item->setServer( attributes().value( "server" ).toString() );
