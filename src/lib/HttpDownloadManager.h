@@ -61,11 +61,6 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     virtual ~HttpDownloadManager();
 
     /**
-     * Sets the limit of jobs to be queued.
-     */
-    void setJobQueueLimit( int jobQueueLimit );
-
-    /**
      * Sets the limit of active jobs.
      */
     void setActivatedJobsLimit( int activatedJobsLimit );

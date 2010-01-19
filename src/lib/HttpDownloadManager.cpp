@@ -48,7 +48,6 @@ class HttpDownloadManager::Private
      * - a queue for retries of failed downloads */
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> > m_queueSets;
     QMap<DownloadUsage, DownloadQueueSet *> m_defaultQueueSets;
-    int m_jobQueueLimit;
     StoragePolicy *m_storagePolicy;
     NetworkPlugin *m_networkPlugin;
 
@@ -57,7 +56,6 @@ class HttpDownloadManager::Private
 HttpDownloadManager::Private::Private( StoragePolicy *policy )
     : m_downloadEnabled( true ), //enabled for now
       m_requeueTimer( 0 ),
-      m_jobQueueLimit( 1000 ),
       m_storagePolicy( policy ),
       m_networkPlugin( 0 )
 {
@@ -135,11 +133,6 @@ HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy )
 HttpDownloadManager::~HttpDownloadManager()
 {
     delete d;
-}
-
-void HttpDownloadManager::setJobQueueLimit( int jobQueueLimit )
-{
-    d->m_jobQueueLimit = jobQueueLimit;
 }
 
 // FIXME: remove this method
