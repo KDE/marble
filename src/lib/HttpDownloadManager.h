@@ -61,11 +61,6 @@ class MARBLE_EXPORT HttpDownloadManager : public QObject
     virtual ~HttpDownloadManager();
 
     /**
-     * Sets the limit of active jobs.
-     */
-    void setActivatedJobsLimit( int activatedJobsLimit );
-
-    /**
      * Switches loading on/off, useful for offline mode.
      */
     void setDownloadEnabled( const bool enable );
