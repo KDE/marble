@@ -14,7 +14,6 @@
 // Marble
 #include "AbstractDataPluginItem.h"
 #include "PhotoPluginItem.h"
-#include "MarbleDebug.h"
 
 // Qt
 #include <QtCore/QByteArray>
