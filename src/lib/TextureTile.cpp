@@ -105,12 +105,22 @@ uint TextureTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
     if ( ( iY + 1 ) < m_rawtile.height() ) {
 
         QRgb bottomLeftValue  =  pixel( iX, iY + 1 );
-
+#define CHEAPHIGH
+#ifdef CHEAPHIGH
+        QRgb leftValue;
+        if ( fY < 0.33 )
+            leftValue = topLeftValue;
+        else if ( fY < 0.66 ) 
+            leftValue = (((bottomLeftValue ^ topLeftValue) & 0xfefefefeUL) >> 1)
+                            + (bottomLeftValue & topLeftValue);
+        else 
+            leftValue = bottomLeftValue;
+#else        
         // blending the color values of the top left and bottom left point
         qreal ml_red   = ( 1.0 - fY ) * qRed  ( topLeftValue  ) + fY * qRed  ( bottomLeftValue  );
         qreal ml_green = ( 1.0 - fY ) * qGreen( topLeftValue  ) + fY * qGreen( bottomLeftValue  );
         qreal ml_blue  = ( 1.0 - fY ) * qBlue ( topLeftValue  ) + fY * qBlue ( bottomLeftValue  );
-
+#endif
         // Interpolation in x-direction
         if ( iX + 1 < m_rawtile.width() ) {
 
@@ -119,6 +129,27 @@ uint TextureTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
             QRgb topRightValue    =  pixel( iX + 1, iY );
             QRgb bottomRightValue =  pixel( iX + 1, iY + 1 );
 
+#ifdef CHEAPHIGH
+            QRgb rightValue;
+            if ( fY < 0.33 )
+                rightValue = topRightValue;
+            else if ( fY < 0.66 )
+                rightValue = (((bottomRightValue ^ topRightValue) & 0xfefefefeUL) >> 1)
+                                + (bottomRightValue & topRightValue);
+            else
+                rightValue = bottomRightValue;
+
+            QRgb averageValue;
+            if ( fX < 0.33 )
+                averageValue = leftValue;
+            else if ( fX < 0.66 )
+                averageValue = (((leftValue ^ rightValue) & 0xfefefefeUL) >> 1)
+                                + (leftValue & rightValue);
+            else
+                averageValue = rightValue;
+
+            return averageValue;
+#else
             // blending the color values of the top right and bottom right point
             qreal mr_red   = ( 1.0 - fY ) * qRed  ( topRightValue ) + fY * qRed  ( bottomRightValue );
             qreal mr_green = ( 1.0 - fY ) * qGreen( topRightValue ) + fY * qGreen( bottomRightValue );
@@ -131,9 +162,14 @@ uint TextureTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
             int mm_blue  = (int)( ( 1.0 - fX ) * ml_blue  + fX * mr_blue  );
     
             return qRgb( mm_red, mm_green, mm_blue );
+#endif
         }
         else {
+#ifdef CHEAPHIGH
+            return leftValue;
+#else
             return qRgb( ml_red, ml_green, ml_blue );
+#endif
         }
     }
     else {
@@ -146,13 +182,25 @@ uint TextureTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
                 return topLeftValue;
 
             QRgb topRightValue    =  pixel( iX + 1, iY );
+#ifdef CHEAPHIGH
+            QRgb topValue;
+            if ( fX < 0.33 )
+                topValue = topLeftValue;
+            else if ( fX < 0.66 )
+                topValue = (((topLeftValue ^ topRightValue) & 0xfefefefeUL) >> 1)
+                                + (topLeftValue & topRightValue);
+            else
+                topValue = topRightValue;
 
+            return topValue;
+#else
             // blending the color values of the top left and top right point
             int tm_red   = (int)( ( 1.0 - fX ) * qRed  ( topLeftValue ) + fX * qRed  ( topRightValue ) );
             int tm_green = (int)( ( 1.0 - fX ) * qGreen( topLeftValue ) + fX * qGreen( topRightValue ) );
             int tm_blue  = (int)( ( 1.0 - fX ) * qBlue ( topLeftValue ) + fX * qBlue ( topRightValue ) );
 
             return qRgb( tm_red, tm_green, tm_blue );
+#endif
         }
     }
 
