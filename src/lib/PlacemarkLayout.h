@@ -127,7 +127,7 @@ class PlacemarkLayout : public QObject
  private:
     void styleReset();
 
-    QRect  roomForLabel ( Marble::GeoDataStyle * style,
+    QRect  roomForLabel( GeoDataStyle * style,
                          const QVector<VisiblePlacemark*> &currentsec,
                          const int x, const int y,
                          const int textWidth );

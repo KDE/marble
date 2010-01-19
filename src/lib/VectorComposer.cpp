@@ -125,8 +125,8 @@ void VectorComposer::drawTextureMap(ViewParams *viewParams)
 
     bool antialiased = false;
 
-    if (   viewParams->mapQuality() == Marble::HighQuality
-        || viewParams->mapQuality() == Marble::PrintQuality )
+    if (   viewParams->mapQuality() == HighQuality
+        || viewParams->mapQuality() == PrintQuality )
     {
         antialiased = true;
     }
@@ -204,8 +204,8 @@ void VectorComposer::paintBaseVectorMap( GeoPainter *painter,
 
     bool antialiased = false;
 
-    if (   viewParams->mapQuality() == Marble::HighQuality
-        || viewParams->mapQuality() == Marble::PrintQuality )
+    if (   viewParams->mapQuality() == HighQuality
+        || viewParams->mapQuality() == PrintQuality )
     {
 	antialiased = true;
     }
@@ -282,8 +282,8 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
 
     bool antialiased = false;
 
-    if (   viewParams->mapQuality() == Marble::HighQuality
-        || viewParams->mapQuality() == Marble::PrintQuality )
+    if (   viewParams->mapQuality() == HighQuality
+        || viewParams->mapQuality() == PrintQuality )
     {
         antialiased = true;
     }
@@ -377,8 +377,8 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         QPen borderDashPen( Qt::black );
         m_vectorMap->setBrush( m_countryBrush );
 
-        if ( viewParams->mapQuality() == Marble::HighQuality 
-          || viewParams->mapQuality() == Marble::PrintQuality ) {
+        if ( viewParams->mapQuality() == HighQuality 
+          || viewParams->mapQuality() == PrintQuality ) {
 
             countryPen.setColor( penColor );
             m_vectorMap->setPen( countryPen );
@@ -394,9 +394,9 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
                 m_vectorMap->paintMap( painter, antialiased );
             }
         }
-        if ( viewParams->mapQuality() == Marble::OutlineQuality
-          || viewParams->mapQuality() == Marble::LowQuality
-          || viewParams->mapQuality() == Marble::NormalQuality ) {
+        if ( viewParams->mapQuality() == OutlineQuality
+          || viewParams->mapQuality() == LowQuality
+          || viewParams->mapQuality() == NormalQuality ) {
 
             if ( !showCoastlines ) {
                 countryPen.setWidthF( 1.0 );
@@ -412,8 +412,8 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         m_vectorMap->createFromPntMap( m_usaStates, viewParams->viewport() );
 
         QPen statePen( m_statePen);
-        if ( viewParams->mapQuality() == Marble::OutlineQuality
-          || viewParams->mapQuality() == Marble::LowQuality ) {
+        if ( viewParams->mapQuality() == OutlineQuality
+          || viewParams->mapQuality() == LowQuality ) {
             statePen.setStyle( Qt::SolidLine );
         }
         m_vectorMap->setPen( statePen );
@@ -426,8 +426,8 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
         m_vectorMap->createFromPntMap( m_dateLine, viewParams->viewport() );
 
         QPen dateLinePen( m_dateLinePen);
-        if ( viewParams->mapQuality() == Marble::OutlineQuality
-          || viewParams->mapQuality() == Marble::LowQuality ) {
+        if ( viewParams->mapQuality() == OutlineQuality
+          || viewParams->mapQuality() == LowQuality ) {
             dateLinePen.setStyle( Qt::SolidLine );
         }
         m_vectorMap->setPen( dateLinePen );

@@ -78,7 +78,7 @@ class MARBLE_EXPORT MarbleGeoDataModel : public QAbstractListModel
     * Return a pointer to the root object of a geodata tree.
     * This tree is a merged version of all the files loaded into this model
     */
-    Marble::GeoDataDocument* geoDataRoot();
+    GeoDataDocument* geoDataRoot();
  Q_SIGNALS:
  
     /**

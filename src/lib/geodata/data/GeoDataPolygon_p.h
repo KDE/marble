@@ -16,7 +16,7 @@
 namespace Marble
 {
 
-class  GeoDataPolygonPrivate : public Marble::GeoDataGeometryPrivate
+class GeoDataPolygonPrivate : public GeoDataGeometryPrivate
 {
   public:
      GeoDataPolygonPrivate( TessellationFlags f )

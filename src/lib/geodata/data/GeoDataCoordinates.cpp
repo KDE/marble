@@ -744,7 +744,7 @@ const Quaternion& GeoDataCoordinates::quaternion() const
     return d->m_q;
 }
 
-bool GeoDataCoordinates::isPole( Marble::Pole pole ) const
+bool GeoDataCoordinates::isPole( Pole pole ) const
 {
     // Evaluate the most likely case first:
     // The case where we haven't hit the pole and where our latitude is normalized
@@ -755,14 +755,14 @@ bool GeoDataCoordinates::isPole( Marble::Pole pole ) const
     else {
         if ( fabs( (qreal) 2.0 * d->m_lat ) == M_PI ) {
             // Ok, we have hit a pole. Now let's check whether it's the one we've asked for:
-            if ( pole == Marble::AnyPole ){
+            if ( pole == AnyPole ){
                 return true;
             }
             else {
-                if ( pole == Marble::NorthPole && 2.0 * d->m_lat == +M_PI ) {
+                if ( pole == NorthPole && 2.0 * d->m_lat == +M_PI ) {
                     return true;
                 }
-                if ( pole == Marble::SouthPole && 2.0 * d->m_lat == -M_PI ) {
+                if ( pole == SouthPole && 2.0 * d->m_lat == -M_PI ) {
                     return true;
                 }
                 return false;
@@ -783,14 +783,14 @@ bool GeoDataCoordinates::isPole( Marble::Pole pole ) const
             }
             else {
                 // Ok, we have hit a pole. Now let's check whether it's the one we've asked for:
-                if ( pole == Marble::AnyPole ){
+                if ( pole == AnyPole ){
                     return true;
                 }
                 else {
-                    if ( pole == Marble::NorthPole && 2.0 * d->m_lat == +M_PI ) {
+                    if ( pole == NorthPole && 2.0 * d->m_lat == +M_PI ) {
                         return true;
                     }
-                    if ( pole == Marble::SouthPole && 2.0 * d->m_lat == -M_PI ) {
+                    if ( pole == SouthPole && 2.0 * d->m_lat == -M_PI ) {
                         return true;
                     }
                     return false;

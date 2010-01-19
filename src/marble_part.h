@@ -210,8 +210,8 @@ class MarblePart: public KParts::ReadOnlyPart
     KParts::StatusBarExtension *m_statusBarExtension;
 
     // Information about the graphics system
-    Marble::GraphicsSystem m_initialGraphicsSystem;
-    Marble::GraphicsSystem m_previousGraphicsSystem;
+    GraphicsSystem m_initialGraphicsSystem;
+    GraphicsSystem m_previousGraphicsSystem;
 };
 
 }

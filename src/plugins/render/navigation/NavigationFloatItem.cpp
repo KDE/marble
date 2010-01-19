@@ -200,7 +200,7 @@ void NavigationFloatItem::adjustForAnimation()
         return;
     }
 
-    m_marbleWidget->setViewContext( Marble::Animation );
+    m_marbleWidget->setViewContext( Animation );
 }
 
 void NavigationFloatItem::adjustForStill()
@@ -209,10 +209,10 @@ void NavigationFloatItem::adjustForStill()
         return;
     }
 
-    m_marbleWidget->setViewContext( Marble::Still );
+    m_marbleWidget->setViewContext( Still );
 
-    if ( m_marbleWidget->mapQuality( Marble::Still )
-        != m_marbleWidget->mapQuality( Marble::Animation ) ) {
+    if ( m_marbleWidget->mapQuality( Still )
+        != m_marbleWidget->mapQuality( Animation ) ) {
         m_marbleWidget->updateChangedMap();
     }
 }

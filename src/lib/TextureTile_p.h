@@ -45,7 +45,7 @@ class TextureTilePrivate : AbstractTilePrivate
     inline uint pixel( int x, int y ) const;
     inline uint pixelF( qreal x, qreal y, const QRgb& pixel ) const;
 
-    void scaleTileFrom( Marble::GeoSceneTexture *textureLayer, QImage &tile,
+    void scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile,
                         qreal sourceX, qreal sourceY, int sourceLevel,
                         int targetX, int targetY, int targetLevel );
 };

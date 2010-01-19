@@ -102,7 +102,7 @@ class MARBLE_EXPORT LayerManager : public QObject
  public Q_SLOTS:
     void loadLayers();
 
-    void syncViewParamsAndPlugins( Marble::GeoSceneDocument *mapTheme );
+    void syncViewParamsAndPlugins( GeoSceneDocument *mapTheme );
     void syncActionWithProperty( QString, bool );
     void syncPropertyWithAction( QString, bool );
  

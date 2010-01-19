@@ -16,7 +16,7 @@
 namespace Marble
 {
 
-class GeoDataContainerPrivate : public Marble::GeoDataFeaturePrivate
+class GeoDataContainerPrivate : public GeoDataFeaturePrivate
 {
   public:
     GeoDataContainerPrivate()

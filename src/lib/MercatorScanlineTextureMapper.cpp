@@ -45,9 +45,9 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     QImage       *canvasImage = viewParams->canvasImage();
     const qint64  radius      = viewParams->radius();
 
-    const bool highQuality  = ( viewParams->mapQuality() == Marble::HighQuality
-                || viewParams->mapQuality() == Marble::PrintQuality );
-    const bool printQuality = ( viewParams->mapQuality() == Marble::PrintQuality );
+    const bool highQuality  = ( viewParams->mapQuality() == HighQuality
+                || viewParams->mapQuality() == PrintQuality );
+    const bool printQuality = ( viewParams->mapQuality() == PrintQuality );
 
     mDebug() << "m_maxGlobalX: " << m_maxGlobalX;
     mDebug() << "radius      : " << radius << endl;
@@ -73,7 +73,7 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     const int n = interpolationStep( viewParams );
 
     bool interlaced = ( m_interlaced 
-            || viewParams->mapQuality() == Marble::LowQuality );
+            || viewParams->mapQuality() == LowQuality );
 
     // Calculate translation of center point
     qreal centerLon, centerLat;

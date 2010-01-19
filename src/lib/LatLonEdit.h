@@ -37,15 +37,15 @@ class MARBLE_EXPORT  LatLonEdit : public QWidget
     //Q_PROPERTY( qreal value READ value WRITE setValue )
     //Q_PROPERTY( int dimension READ dimension WRITE setDimension )
 public:
-    explicit LatLonEdit(QWidget *parent = 0, Marble::Dimension dimension = Marble::Longitude );
+    explicit LatLonEdit(QWidget *parent = 0, Dimension dimension = Longitude );
     ~LatLonEdit();
     qreal value() const;
-    Marble::Dimension dimension() const;
+    Dimension dimension() const;
 public Q_SLOTS:
     void setValue(qreal newvalue);
-    void setDimension( Marble::Dimension dimension );
+    void setDimension( Dimension dimension );
 Q_SIGNALS:
-    void dimensionChanged( Marble::Dimension dimension );
+    void dimensionChanged( Dimension dimension );
     void valueChanged( qreal value );
 private Q_SLOTS:
     // changes value based on combobox

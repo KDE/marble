@@ -27,8 +27,8 @@ class MarbleLocalePrivate
     MarbleLocalePrivate();
     virtual ~MarbleLocalePrivate();
 
-    Marble::DistanceUnit m_distanceUnit;
-    Marble::MeasureSystem m_measureSystem;
+    DistanceUnit m_distanceUnit;
+    MeasureSystem m_measureSystem;
 };
 
 }

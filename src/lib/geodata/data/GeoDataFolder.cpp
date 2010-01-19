@@ -27,7 +27,7 @@
 namespace Marble
 {
 
-class GeoDataFolderPrivate : public Marble::GeoDataContainerPrivate
+class GeoDataFolderPrivate : public GeoDataContainerPrivate
 {
   public:
     GeoDataFolderPrivate()

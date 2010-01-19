@@ -72,7 +72,7 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
      */
     ~MarblePlacemarkModel();
 
-    void setPlacemarkContainer( QVector<Marble::GeoDataPlacemark> *container );
+    void setPlacemarkContainer( QVector<GeoDataPlacemark> *container );
 
     /**
      * Return the number of Placemarks in the Model.

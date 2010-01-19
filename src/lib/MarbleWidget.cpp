@@ -67,9 +67,9 @@ class MarbleWidgetPrivate
         : m_widget( parent ),
           m_map( map ),
           m_model( map->model() ),
-          m_viewContext( Marble::Still ),
-          m_stillQuality( Marble::HighQuality ),
-          m_animationQuality( Marble::LowQuality ),
+          m_viewContext( Still ),
+          m_stillQuality( HighQuality ),
+          m_animationQuality( LowQuality ),
           m_animationsEnabled( false ),
           m_inputhandler( 0 ),
           m_physics( new MarblePhysics( parent ) ),
@@ -639,9 +639,9 @@ void MarbleWidget::updateAnimation( qreal updateValue )
     GeoDataCoordinates position = d->m_physics->suggestedPosition();
 
     if ( updateValue < 1.0 ) {
-        setViewContext( Marble::Animation );
+        setViewContext( Animation );
         centerOn( position );
-        setViewContext( Marble::Still );
+        setViewContext( Still );
         return;
     }
 
@@ -1201,7 +1201,7 @@ ViewContext MarbleWidget::viewContext() const
     return d->m_viewContext;
 }
 
-void MarbleWidget::setViewContext( Marble::ViewContext viewContext )
+void MarbleWidget::setViewContext( ViewContext viewContext )
 {
     d->m_viewContext = viewContext;
 
@@ -1221,12 +1221,12 @@ void MarbleWidget::setAnimationsEnabled( bool enabled )
     d->m_animationsEnabled = enabled;
 }
 
-Marble::AngleUnit MarbleWidget::defaultAngleUnit() const
+AngleUnit MarbleWidget::defaultAngleUnit() const
 {
     return map()->defaultAngleUnit();
 }
 
-void MarbleWidget::setDefaultAngleUnit( Marble::AngleUnit angleUnit )
+void MarbleWidget::setDefaultAngleUnit( AngleUnit angleUnit )
 {
     map()->setDefaultAngleUnit( angleUnit );
 }

@@ -16,7 +16,7 @@
 namespace Marble
 {
 
-class  GeoDataMultiGeometryPrivate : public Marble::GeoDataGeometryPrivate
+class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
 {
   public:
      GeoDataMultiGeometryPrivate()

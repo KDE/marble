@@ -283,7 +283,7 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
     //        PrintQuality. Either cache on a pixmap - or maybe
     //        better: Add to GlobeScanlineTextureMapper.
 
-    if ( m_viewParams.mapQuality() == Marble::PrintQuality )
+    if ( m_viewParams.mapQuality() == PrintQuality )
         drawFog( painter );
 }
 
@@ -300,8 +300,8 @@ void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect )
 
     bool antialiased = false;
 
-    if (   m_viewParams.mapQuality() == Marble::HighQuality
-        || m_viewParams.mapQuality() == Marble::PrintQuality ) {
+    if (   m_viewParams.mapQuality() == HighQuality
+        || m_viewParams.mapQuality() == PrintQuality ) {
             antialiased = true;
     }
 
@@ -584,7 +584,7 @@ QPixmap MarbleMap::mapScreenShot()
     screenshotPixmap.fill( Qt::transparent );
 
     GeoPainter painter( &screenshotPixmap, viewParams()->viewport(),
-                        Marble::PrintQuality );
+                        PrintQuality );
     painter.begin( &screenshotPixmap );
     QRect dirtyRect( QPoint(), size() );
     paint( painter, dirtyRect );
@@ -1204,9 +1204,9 @@ QString MarbleMap::distanceString() const
     qreal dist = distance();
     QString distanceUnitString;
 
-    const Marble::DistanceUnit distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
+    const DistanceUnit distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
 
-    if ( distanceUnit == Marble::Meter ) {
+    if ( distanceUnit == Meter ) {
         distanceUnitString = tr("km");
     }
     else {
@@ -1223,18 +1223,18 @@ bool MarbleMap::mapCoversViewport()
     return d->m_viewParams.viewport()->mapCoversViewport();
 }
 
-Marble::AngleUnit MarbleMap::defaultAngleUnit() const
+AngleUnit MarbleMap::defaultAngleUnit() const
 {
     if ( GeoDataCoordinates::defaultNotation() == GeoDataCoordinates::Decimal ) {
-        return Marble::DecimalDegree;
+        return DecimalDegree;
     }
 
-    return Marble::DMSDegree;
+    return DMSDegree;
 }
 
-void MarbleMap::setDefaultAngleUnit( Marble::AngleUnit angleUnit )
+void MarbleMap::setDefaultAngleUnit( AngleUnit angleUnit )
 {
-    if ( angleUnit == Marble::DecimalDegree ) {
+    if ( angleUnit == DecimalDegree ) {
         GeoDataCoordinates::setDefaultNotation( GeoDataCoordinates::Decimal );
         return;
     }

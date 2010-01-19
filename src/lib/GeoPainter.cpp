@@ -200,8 +200,8 @@ void GeoPainter::autoMapQuality()
 {
     bool antialiased = false;
 
-    if (   d->m_mapQuality == Marble::HighQuality
-        || d->m_mapQuality == Marble::PrintQuality ) {
+    if (   d->m_mapQuality == HighQuality
+        || d->m_mapQuality == PrintQuality ) {
             antialiased = true;
     }
 

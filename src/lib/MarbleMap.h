@@ -766,8 +766,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     bool mapCoversViewport();
 
-    Marble::AngleUnit defaultAngleUnit() const;
-    void setDefaultAngleUnit( Marble::AngleUnit angleUnit );
+    AngleUnit defaultAngleUnit() const;
+    void setDefaultAngleUnit( AngleUnit angleUnit );
 
     QFont defaultFont() const;
     void setDefaultFont( const QFont& font );

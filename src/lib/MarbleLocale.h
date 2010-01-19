@@ -34,11 +34,11 @@ class MARBLE_EXPORT MarbleLocale
     MarbleLocale();
     ~MarbleLocale();
 
-    void setDistanceUnit( Marble::DistanceUnit distanceUnit );
-    Marble::DistanceUnit distanceUnit() const;
+    void setDistanceUnit( DistanceUnit distanceUnit );
+    DistanceUnit distanceUnit() const;
 
-    void setMeasureSystem( Marble::MeasureSystem measureSystem );
-    Marble::MeasureSystem measureSystem() const;
+    void setMeasureSystem( MeasureSystem measureSystem );
+    MeasureSystem measureSystem() const;
 
     static QString languageCode();
     static QString simpleLanguageCode();

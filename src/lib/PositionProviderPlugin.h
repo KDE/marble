@@ -38,9 +38,9 @@ class MARBLE_EXPORT PositionProviderPlugin : public QObject, public PositionProv
 
     
  signals:
-    void statusChanged( Marble::PositionProviderStatus status ) const;
-    void positionChanged( Marble::GeoDataCoordinates position,
-                          Marble::GeoDataAccuracy accuracy ) const;
+    void statusChanged( PositionProviderStatus status ) const;
+    void positionChanged( GeoDataCoordinates position,
+                          GeoDataAccuracy accuracy ) const;
 
  protected:
     PositionProviderPlugin();

@@ -34,7 +34,7 @@ namespace Marble
 class LatLonEditPrivate : public Ui::LatLonEditPrivate
 {
 public:
-    Marble::Dimension m_dimension;
+    Dimension m_dimension;
     qreal m_value;
 
     LatLonEditPrivate(QWidget* parent) { setupUi(parent); }
@@ -42,7 +42,7 @@ public:
 
 }
 
-LatLonEdit::LatLonEdit(QWidget *parent, Marble::Dimension dimension )
+LatLonEdit::LatLonEdit(QWidget *parent, Dimension dimension )
     : QWidget( parent ), d(new LatLonEditPrivate(this))
 {
     d->m_value = 0;
@@ -97,21 +97,21 @@ void LatLonEdit::signChanged()
     }
 }
 
-void LatLonEdit::setDimension( Marble::Dimension dimension )
+void LatLonEdit::setDimension( Dimension dimension )
 {
     //don't do anything
     if( d->m_dimension == dimension ) {
         return;
     }
 
-    if( dimension == Marble::Longitude ) {
+    if( dimension == Longitude ) {
         for(int i = 0; i < d->m_sign->count(); ++i)
             d->m_sign->removeItem(i);
         d->m_deg->setMinimum( -180 );
         d->m_deg->setMaximum( 180 );
         d->m_sign->addItem( tr("E", "East, the direction" ) );
         d->m_sign->addItem( tr("W", "West, the direction" ) );
-    } else if( dimension == Marble::Latitude ) {
+    } else if( dimension == Latitude ) {
         for(int i = 0; i < d->m_sign->count(); ++i)
             d->m_sign->removeItem(i);
         d->m_deg->setMinimum( -90 );

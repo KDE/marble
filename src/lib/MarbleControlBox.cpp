@@ -392,7 +392,7 @@ void MarbleControlBox::receiveGpsCoordinates( const GeoDataCoordinates &in, qrea
     qreal distance = 0.0;
 
     switch ( d->m_locale->measureSystem() ) {
-        case Marble::Metric:
+        case Metric:
         //kilometers per hour
         unitString = tr("km/h");
         unitSpeed = speed / 1000;
@@ -400,7 +400,7 @@ void MarbleControlBox::receiveGpsCoordinates( const GeoDataCoordinates &in, qrea
         distance = in.altitude();
         break;
 
-        case Marble::Imperial:
+        case Imperial:
         //miles per hour
         unitString = tr("m/h");
         unitSpeed = (speed/1000) * KM2MI;
@@ -630,7 +630,7 @@ void MarbleControlBox::adjustForAnimation()
     if ( !d->m_widget )
         return;
 
-    d->m_widget->setViewContext( Marble::Animation );
+    d->m_widget->setViewContext( Animation );
 }
 
 void MarbleControlBox::adjustForStill()
@@ -639,10 +639,10 @@ void MarbleControlBox::adjustForStill()
     if ( !d->m_widget )
         return;
 
-    d->m_widget->setViewContext( Marble::Still );
+    d->m_widget->setViewContext( Still );
 
-    if ( d->m_widget->mapQuality( Marble::Still )
-        != d->m_widget->mapQuality( Marble::Animation ) )
+    if ( d->m_widget->mapQuality( Still )
+        != d->m_widget->mapQuality( Animation ) )
     {
         d->m_widget->updateChangedMap();
     }

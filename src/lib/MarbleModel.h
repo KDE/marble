@@ -152,7 +152,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     QString mapThemeId() const;
 
-    Marble::GeoSceneDocument *mapTheme() const;
+    GeoSceneDocument *mapTheme() const;
 
     /**
      * @brief Set a new map theme to use.
@@ -174,7 +174,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * Example: 
      *    maptheme = "earth/bluemarble/bluemarble.dgml" 
      */
-    void setMapTheme( Marble::GeoSceneDocument* mapTheme,
+    void setMapTheme( GeoSceneDocument* mapTheme,
 		      Projection currentProjection );
 
     /**
@@ -314,7 +314,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
 //  private Q_SLOTS:
     void paintTile( TextureTile* tile, int x, int y, int level,
-                    Marble::GeoSceneTexture *textureLayer,
+                    GeoSceneTexture *textureLayer,
                     bool requestTileUpdate );
 
     /**

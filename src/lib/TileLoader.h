@@ -89,12 +89,12 @@ class TileLoader : public QObject
         /**
          * Sets the texture layer @p the tiles shall be loaded for.
          */
-        void setLayer( Marble::GeoSceneLayer * layer );
+        void setLayer( GeoSceneLayer * layer );
 
         /**
          * Returns the texture layer the tiles shall be loaded for.
          */
-        Marble::GeoSceneLayer * layer() const;
+        GeoSceneLayer * layer() const;
 
         /**
          * Resets the internal tile hash.
@@ -152,13 +152,13 @@ class TileLoader : public QObject
          * Returns the highest level in which some tiles are available for the given @p
          * texture layer.
          */
-        static int maxPartialTileLevel( Marble::GeoSceneLayer * layer );
+        static int maxPartialTileLevel( GeoSceneLayer * layer );
 
         /**
          * Returns whether the mandatory most basic tile level is fully available for
          * the given @p texture layer.
          */
-        static bool baseTilesAvailable( Marble::GeoSceneLayer * layer );
+        static bool baseTilesAvailable( GeoSceneLayer * layer );
 
     public Q_SLOTS:
         /**
@@ -192,7 +192,7 @@ class TileLoader : public QObject
         void tileUpdateAvailable();
         
         void paintTile(TextureTile* tile, int x, int y, int level,
-                       Marble::GeoSceneLayer * layer,
+                       GeoSceneLayer * layer,
                        bool requestTileUpdate);
 
     private:

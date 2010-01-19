@@ -60,7 +60,7 @@ class MARBLE_EXPORT ViewParams
  */
     void setMapThemeId( const QString& );
     QString mapThemeId();
-    Marble::GeoSceneDocument *mapTheme();
+    GeoSceneDocument *mapTheme();
 
     // Convenience methods:
 
@@ -68,8 +68,8 @@ class MARBLE_EXPORT ViewParams
     AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
 
-    Marble::MapQuality mapQuality();
-    void setMapQuality( Marble::MapQuality );
+    MapQuality mapQuality();
+    void setMapQuality( MapQuality );
 
     /**
      * @brief  Set the value of a map theme property

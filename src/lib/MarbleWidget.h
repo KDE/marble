@@ -521,7 +521,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Get the GeoSceneDocument object of the current map theme
      */
-    Marble::GeoSceneDocument * mapTheme() const;
+    GeoSceneDocument * mapTheme() const;
 
     /**
      * @brief Return a QAbstractItemModel containing GPX files.
@@ -536,20 +536,20 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Retrieve the map quality depending on the view context 
      */
-    Marble::MapQuality mapQuality( Marble::ViewContext = Marble::Still );
+    MapQuality mapQuality( ViewContext = Still );
 
     /**
      * @brief Retrieve the view context (i.e. still or animated map) 
      */
-    Marble::ViewContext viewContext( ) const;
+    ViewContext viewContext( ) const;
 
     /**
      * @brief Retrieve whether travels to a point should get animated 
      */
     bool animationsEnabled() const;
 
-    Marble::AngleUnit defaultAngleUnit() const;
-    void setDefaultAngleUnit( Marble::AngleUnit angleUnit );
+    AngleUnit defaultAngleUnit() const;
+    void setDefaultAngleUnit( AngleUnit angleUnit );
 
     QFont defaultFont() const;
     void setDefaultFont( const QFont& font );
@@ -915,12 +915,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Set the map quality depending on the view context 
      */
-    void setMapQuality( Marble::MapQuality, Marble::ViewContext = Marble::Still );
+    void setMapQuality( MapQuality, ViewContext = Still );
 
     /**
      * @brief Set the view context (i.e. still or animated map) 
      */
-    void setViewContext( Marble::ViewContext viewContext );
+    void setViewContext( ViewContext viewContext );
 
     /**
      * @brief Set whether travels to a point should get animated 

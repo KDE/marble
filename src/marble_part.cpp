@@ -107,10 +107,10 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     MarbleLocale *marbleLocale = MarbleGlobal::getInstance()->locale();
     KLocale *kLocale = KGlobal::locale();
     if ( kLocale->measureSystem() == KLocale::Metric ) {
-        marbleLocale->setMeasureSystem( Marble::Metric );
+        marbleLocale->setMeasureSystem( Metric );
     }
     else {
-        marbleLocale->setMeasureSystem( Marble::Imperial );
+        marbleLocale->setMeasureSystem( Imperial );
     }
     
     m_controlView = new ControlView( parentWidget );
@@ -388,7 +388,7 @@ void MarblePart::readSettings()
 {
     qDebug() << "Start: MarblePart::readSettings()";
     // Last location on quit
-    if ( MarbleSettings::onStartup() == Marble::LastLocationVisited ) {
+    if ( MarbleSettings::onStartup() == LastLocationVisited ) {
         m_controlView->marbleWidget()->centerOn(
             MarbleSettings::quitLongitude(),
             MarbleSettings::quitLatitude() );
@@ -399,7 +399,7 @@ void MarblePart::readSettings()
     m_controlView->marbleWidget()->setHome( MarbleSettings::homeLongitude(),
                                             MarbleSettings::homeLatitude(),
                                             MarbleSettings::homeZoom() );
-    if ( MarbleSettings::onStartup() == Marble::ShowHomeLocation ) {
+    if ( MarbleSettings::onStartup() == ShowHomeLocation ) {
         m_controlView->marbleWidget()->goHome();
     }
 
@@ -427,7 +427,7 @@ void MarblePart::readSettings()
     m_controlView->sunLocator()->setCentered( MarbleSettings::centerOnSun() );
 
     // View
-    m_initialGraphicsSystem = (Marble::GraphicsSystem) MarbleSettings::graphicsSystem();
+    m_initialGraphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
     m_previousGraphicsSystem = m_initialGraphicsSystem;
 
     // Plugins
@@ -535,12 +535,12 @@ void MarblePart::writeSettings()
 
     MarbleSettings::setShowCurrentLocation( m_currentLocationAction->isChecked() );
 
-    MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Marble::Still ) );
+    MarbleSettings::setStillQuality( m_controlView->marbleWidget()->mapQuality( Still ) );
     MarbleSettings::setAnimationQuality( m_controlView->marbleWidget()->
-                                         mapQuality( Marble::Animation ) );
+                                         mapQuality( Animation ) );
 
     // FIXME: Hopefully Qt will have a getter for this one in the future ...
-    Marble::GraphicsSystem graphicsSystem = (Marble::GraphicsSystem) MarbleSettings::graphicsSystem();
+    GraphicsSystem graphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
     MarbleSettings::setGraphicsSystem( graphicsSystem );
 
 
@@ -990,7 +990,7 @@ void MarblePart::editSettings()
 
     // It's experimental -- so we remove it for now.
     // FIXME: Delete the following  line once OpenGL support is officially supported.
-    ui_viewSettings.kcfg_graphicsSystem->removeItem( Marble::OpenGLGraphics );
+    ui_viewSettings.kcfg_graphicsSystem->removeItem( OpenGLGraphics );
 
     QString nativeString ( i18n("Native") );
 
@@ -1001,7 +1001,7 @@ void MarblePart::editSettings()
     nativeString = i18n( "Native (Mac OS X Core Graphics)" );
     #endif
 
-    ui_viewSettings.kcfg_graphicsSystem->setItemText( Marble::NativeGraphics, nativeString );
+    ui_viewSettings.kcfg_graphicsSystem->setItemText( NativeGraphics, nativeString );
 
     // navigation page
     Ui_MarbleNavigationSettingsWidget  ui_navigationSettings;
@@ -1093,18 +1093,18 @@ void MarblePart::slotUpdateSettings()
     m_controlView->marbleWidget()->setDefaultFont( MarbleSettings::mapFont() );
 
     m_controlView->marbleWidget()->
-        setMapQuality( (Marble::MapQuality) MarbleSettings::stillQuality(),
-                       Marble::Still );
+        setMapQuality( (MapQuality) MarbleSettings::stillQuality(),
+                       Still );
     m_controlView->marbleWidget()->
-        setMapQuality( (Marble::MapQuality) MarbleSettings::animationQuality(),
-                       Marble::Animation );
+        setMapQuality( (MapQuality) MarbleSettings::animationQuality(),
+                       Animation );
 
-    Marble::GraphicsSystem graphicsSystem = (Marble::GraphicsSystem) MarbleSettings::graphicsSystem();
+    GraphicsSystem graphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
 
     m_controlView->marbleWidget()->
-        setDefaultAngleUnit( (Marble::AngleUnit) MarbleSettings::angleUnit() );
+        setDefaultAngleUnit( (AngleUnit) MarbleSettings::angleUnit() );
     MarbleGlobal::getInstance()->locale()->
-        setDistanceUnit( (Marble::DistanceUnit) MarbleSettings::distanceUnit() );
+        setDistanceUnit( (DistanceUnit) MarbleSettings::distanceUnit() );
 
     m_distance = m_controlView->marbleWidget()->distanceString();
     updateStatusBar();

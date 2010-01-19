@@ -172,7 +172,7 @@ void WeatherPlugin::readSettings()
         temperatureUnit = m_settings.value( "temperatureUnit" ).toInt();
     }
     else {
-        if ( locale->measureSystem() == Marble::Metric ) {
+        if ( locale->measureSystem() == Metric ) {
             temperatureUnit = WeatherData::Celsius;
         }
         else {
@@ -187,7 +187,7 @@ void WeatherPlugin::readSettings()
         windSpeedUnit = m_settings.value( "windSpeedUnit" ).toInt();
     }
     else {
-        if ( locale->measureSystem() == Marble::Metric ) {
+        if ( locale->measureSystem() == Metric ) {
             windSpeedUnit = WeatherData::kph;
         }
         else {
@@ -202,7 +202,7 @@ void WeatherPlugin::readSettings()
         pressureUnit = m_settings.value( "pressureUnit" ).toInt();
     }
     else {
-        if ( locale->measureSystem() == Marble::Metric ) {
+        if ( locale->measureSystem() == Metric ) {
             pressureUnit = WeatherData::HectoPascal;
         }
         else {

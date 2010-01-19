@@ -213,7 +213,7 @@ QVariant MarbleGeometryModel::data( const QModelIndex &index, int role ) const
     if( role == Qt::UserRole + 11 ) //equivalent to MarblePlacemarkModel::ObjectPointerRole
     {
         /* return the pointer item as a QVariant of (meta-)type
-         * Marble::GeoDataObject* */
+         * GeoDataObject* */
         QVariant v;
         v.setValue( item );
         return v;

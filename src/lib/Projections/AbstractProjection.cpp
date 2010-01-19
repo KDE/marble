@@ -112,7 +112,7 @@ bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
     return screenCoordinates( geopoint, viewport, x, y, globeHidesPoint );
 }
 
-bool AbstractProjection::screenCoordinates( const Marble::GeoDataCoordinates &coordinates,
+bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
                                     const ViewportParams *viewport,
                                     qreal *x, qreal &y, int &pointRepeatNum,                                    bool &globeHidesPoint )
 {
@@ -134,7 +134,7 @@ bool AbstractProjection::screenCoordinates( const GeoDataLineString &lineString,
     QVector<GeoDataLineString*> lineStrings;
 
     if (
-         ( !traversablePoles() && lineString.latLonAltBox().containsPole( Marble::AnyPole ) ) ||
+         ( !traversablePoles() && lineString.latLonAltBox().containsPole( AnyPole ) ) ||
          ( lineString.latLonAltBox().crossesDateLine() )
        ) {
         // We correct for Poles and DateLines:

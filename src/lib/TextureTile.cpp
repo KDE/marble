@@ -156,7 +156,7 @@ uint TextureTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
     return topLeftValue;
 }
 
-void TextureTilePrivate::scaleTileFrom( Marble::GeoSceneTexture *textureLayer, QImage &tile,
+void TextureTilePrivate::scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile,
                     qreal sourceX, qreal sourceY, int sourceLevel,
                     int targetX, int targetY, int targetLevel )
 {

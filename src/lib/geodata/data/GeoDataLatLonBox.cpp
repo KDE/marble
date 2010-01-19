@@ -274,17 +274,17 @@ GeoDataCoordinates GeoDataLatLonBox::center() const
                                 north() - (north() - south()) / 2 );
 }
 
-bool GeoDataLatLonBox::containsPole( Marble::Pole pole ) const
+bool GeoDataLatLonBox::containsPole( Pole pole ) const
 {
     switch ( pole ) {
-      case Marble::NorthPole :
+      case NorthPole:
         return ( 2 * north() == +M_PI );
         break;
-      case Marble::SouthPole :
+      case SouthPole:
         return ( 2 * south() == -M_PI );
         break;
       default:
-      case Marble::AnyPole :
+      case AnyPole:
         return (    2 * north() == +M_PI
                  || 2 * south() == -M_PI );
         break;

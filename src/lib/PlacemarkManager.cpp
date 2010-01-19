@@ -144,7 +144,7 @@ QVector<GeoDataPlacemark> PlacemarkManager::recurseContainer(GeoDataContainer co
     return results;
 }
 
-void PlacemarkManager::createFilterProperties( QVector<Marble::GeoDataPlacemark> &container )
+void PlacemarkManager::createFilterProperties( QVector<GeoDataPlacemark> &container )
 {
 
     QVector<GeoDataPlacemark>::Iterator i = container.begin();

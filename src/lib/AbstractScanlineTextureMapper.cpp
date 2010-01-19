@@ -459,7 +459,7 @@ void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
 
 int AbstractScanlineTextureMapper::interpolationStep( ViewParams *viewParams ) const
 {
-    if ( viewParams->mapQuality() == Marble::PrintQuality ) {
+    if ( viewParams->mapQuality() == PrintQuality ) {
         return 1;    // Don't interpolate for print quality.
     }
 

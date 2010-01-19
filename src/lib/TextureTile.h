@@ -47,7 +47,7 @@ class TextureTile : public AbstractTile
     virtual ~TextureTile();
     
     // TODO: Move into DatasetProvider:
-    void loadDataset( Marble::GeoSceneTexture *textureLayer, int level, int x,
+    void loadDataset( GeoSceneTexture *textureLayer, int level, int x,
                       int y, QCache<TileId, TextureTile> *tileCache = 0 );
 
     int depth() const;

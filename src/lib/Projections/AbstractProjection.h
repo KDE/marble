@@ -131,13 +131,13 @@ class MARBLE_EXPORT AbstractProjection
      *
      * @see ViewportParams
      */
-    virtual bool screenCoordinates( const Marble::GeoDataCoordinates &geopoint, 
+    virtual bool screenCoordinates( const GeoDataCoordinates &geopoint, 
                                     const ViewportParams *viewport,
                                     qreal &x, qreal &y, 
                                     bool &globeHidesPoint ) = 0;
 
     // Will just call the virtual version with a dummy globeHidesPoint.
-    bool screenCoordinates( const Marble::GeoDataCoordinates &geopoint, 
+    bool screenCoordinates( const GeoDataCoordinates &geopoint, 
                             const ViewportParams *viewport,
                             qreal &x, qreal &y );
 
@@ -157,12 +157,12 @@ class MARBLE_EXPORT AbstractProjection
      *
      * @see ViewportParams
      */
-    bool screenCoordinates( const Marble::GeoDataCoordinates &coordinates,
+    bool screenCoordinates( const GeoDataCoordinates &coordinates,
                                     const ViewportParams *viewport,
                                     qreal *x, qreal &y, int &pointRepeatNum,
                                     bool &globeHidesPoint );
 
-    virtual bool screenCoordinates( const Marble::GeoDataCoordinates &coordinates,
+    virtual bool screenCoordinates( const GeoDataCoordinates &coordinates,
                                     const ViewportParams *viewport,
                                     qreal *x, qreal &y, int &pointRepeatNum,
                                     const QSizeF& size,
@@ -187,10 +187,10 @@ class MARBLE_EXPORT AbstractProjection
     virtual bool geoCoordinates( const int x, const int y,
                                  const ViewportParams *viewport,
                                  qreal& lon, qreal& lat,
-                                 Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Degree ) = 0;
+                                 GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) = 0;
 
 
-    virtual Marble::GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
+    virtual GeoDataLatLonAltBox latLonAltBox( const QRect& screenRect,
                                                       const ViewportParams *viewport );
 
     bool exceedsLatitudeRange( const GeoDataCoordinates& coords ) const;
@@ -215,7 +215,7 @@ class MARBLE_EXPORT AbstractProjection
                                     int& x, int& y );
 
     /* DEPRECATED */
-    bool screenCoordinates( const Marble::GeoDataCoordinates &geopoint, 
+    bool screenCoordinates( const GeoDataCoordinates &geopoint, 
                                     const ViewportParams *viewport,
                                     int &x, int &y, bool &globeHidesPoint );
 

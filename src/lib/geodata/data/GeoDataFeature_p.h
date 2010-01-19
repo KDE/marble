@@ -97,7 +97,7 @@ class GeoDataFeaturePrivate
 
     virtual QString nodeType() const
     {
-        return Marble::GeoDataTypes::GeoDataFeatureType;
+        return GeoDataTypes::GeoDataFeatureType;
     }
 
     QString     m_name;         // Name of the feature. Is shown on screen

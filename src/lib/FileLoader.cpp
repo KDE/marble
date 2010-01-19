@@ -288,8 +288,8 @@ void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *contai
     qreal alt;
 
     const QVector<GeoDataPlacemark> placemarks = container->placemarks();
-    QVector<Marble::GeoDataPlacemark>::const_iterator it = placemarks.constBegin();
-    QVector<Marble::GeoDataPlacemark>::const_iterator const end = placemarks.constEnd();
+    QVector<GeoDataPlacemark>::const_iterator it = placemarks.constBegin();
+    QVector<GeoDataPlacemark>::const_iterator const end = placemarks.constEnd();
     for (; it != end; ++it )
     {
         out << it->name();

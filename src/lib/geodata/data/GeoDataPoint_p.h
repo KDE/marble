@@ -17,8 +17,7 @@
 namespace Marble
 {
 
-class  GeoDataPointPrivate : public Marble::GeoDataGeometryPrivate,
-                             public Marble::GeoDataCoordinatesPrivate
+class GeoDataPointPrivate : public GeoDataGeometryPrivate, public GeoDataCoordinatesPrivate
 {
   public:
      GeoDataPointPrivate()

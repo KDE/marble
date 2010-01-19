@@ -214,10 +214,10 @@ void MarbleWidgetInputHandler::restoreViewContext()
     // Needs to stop the timer since it repeats otherwise.
     d->m_mouseWheelTimer->stop();
 
-    // Redraw the map with the quality set for Marble::Still (if necessary).
-    d->m_widget->setViewContext( Marble::Still );
-    if ( d->m_widget->mapQuality( Marble::Still )
-        != d->m_widget->mapQuality( Marble::Animation ) )
+    // Redraw the map with the quality set for Still (if necessary).
+    d->m_widget->setViewContext( Still );
+    if ( d->m_widget->mapQuality( Still )
+        != d->m_widget->mapQuality( Animation ) )
     {
         d->m_widget->updateChangedMap();
     }
@@ -372,7 +372,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_leftpresseda = MarbleWidgetInputHandler::d->m_widget->centerLongitude() * DEG2RAD;
                 d->m_leftpressedb = MarbleWidgetInputHandler::d->m_widget->centerLatitude() * DEG2RAD;
 
-                MarbleWidgetInputHandler::d->m_widget->setViewContext( Marble::Animation );
+                MarbleWidgetInputHandler::d->m_widget->setViewContext( Animation );
             }
 
             if ( e->type() == QEvent::MouseButtonPress
@@ -382,7 +382,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_midpressedy = event->y();
 
                 d->m_selectionRubber->hide();
-                MarbleWidgetInputHandler::d->m_widget->setViewContext( Marble::Animation );
+                MarbleWidgetInputHandler::d->m_widget->setViewContext( Animation );
             }
 
             if ( e->type() == QEvent::MouseButtonPress
@@ -417,9 +417,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                     emit lmbRequest( d->m_leftpressedx, d->m_leftpressedy );
                 }
 
-                MarbleWidgetInputHandler::d->m_widget->setViewContext( Marble::Still );
-                if ( MarbleWidgetInputHandler::d->m_widget->mapQuality( Marble::Still )
-                    != MarbleWidgetInputHandler::d->m_widget->mapQuality( Marble::Animation ) )
+                MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
+                if ( MarbleWidgetInputHandler::d->m_widget->mapQuality( Still )
+                    != MarbleWidgetInputHandler::d->m_widget->mapQuality( Animation ) )
                 {
                     MarbleWidgetInputHandler::d->m_widget->updateChangedMap();
                 }
@@ -431,9 +431,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                  && event->button() == Qt::MidButton ) {
                 d->m_midpressed = false;
 
-                MarbleWidgetInputHandler::d->m_widget->setViewContext( Marble::Still );
-                if ( MarbleWidgetInputHandler::d->m_widget->mapQuality( Marble::Still )
-                    != MarbleWidgetInputHandler::d->m_widget->mapQuality( Marble::Animation ) )
+                MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
+                if ( MarbleWidgetInputHandler::d->m_widget->mapQuality( Still )
+                    != MarbleWidgetInputHandler::d->m_widget->mapQuality( Animation ) )
                 {
                     MarbleWidgetInputHandler::d->m_widget->updateChangedMap();
                 }
@@ -595,7 +595,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         if ( e->type() == QEvent::Wheel ) {
             MarbleWidget *marbleWidget = MarbleWidgetInputHandler::d->m_widget;
             // FIXME: disable animation quality after some time
-            marbleWidget->setViewContext( Marble::Animation );
+            marbleWidget->setViewContext( Animation );
 
             QWheelEvent *wheelevt = static_cast<QWheelEvent*>( e );
 
@@ -647,7 +647,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
                 MarbleWidget *marbleWidget = MarbleWidgetInputHandler::d->m_widget;
 
-                marbleWidget->setViewContext( Marble::Animation );
+                marbleWidget->setViewContext( Animation );
 
                 qreal  destLat;
                 qreal  destLon;

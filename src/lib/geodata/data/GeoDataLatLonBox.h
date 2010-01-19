@@ -131,7 +131,7 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
      * @return @c true  the bounding box contains one of the poles.
      *         @c false the bounding box doesn't contain one of the poles.
      */
-    bool     containsPole( Marble::Pole pole = Marble::AnyPole ) const;
+    bool containsPole( Pole pole = AnyPole ) const;
 
     virtual bool contains( const GeoDataPoint & ) const; // NOTE: Why do we need this one?
     virtual bool contains( const GeoDataCoordinates & ) const;

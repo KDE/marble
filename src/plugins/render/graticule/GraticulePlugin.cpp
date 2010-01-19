@@ -144,9 +144,9 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
 
     renderLongitudeLines( painter, viewLatLonAltBox,
                           normalDegreeStep, normalDegreeStep,
-                          Marble::LineStart | Marble::IgnoreXMargin );
+                          LineStart | IgnoreXMargin );
     renderLatitudeLines(  painter, viewLatLonAltBox, normalDegreeStep,
-                          Marble::LineStart | Marble::IgnoreYMargin );
+                          LineStart | IgnoreYMargin );
 
     // Render some non-cut off longitude lines ..
     renderLongitudeLine( painter, +90.0, viewLatLonAltBox );
@@ -154,8 +154,8 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
 
     // Render the bold grid
 
-    if (    painter->mapQuality() == Marble::HighQuality
-         || painter->mapQuality() == Marble::PrintQuality ) {
+    if (    painter->mapQuality() == HighQuality
+         || painter->mapQuality() == PrintQuality ) {
 
         QPen boldPen = minorCirclePen;
         boldPen.setWidthF( 1.5 );
@@ -166,10 +166,10 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
 
         renderLongitudeLines( painter, viewLatLonAltBox,
                             boldDegreeStep, normalDegreeStep,
-                            Marble::NoLabel
+                            NoLabel
                             );
         renderLatitudeLines(  painter, viewLatLonAltBox, boldDegreeStep,
-                            Marble::NoLabel );
+                            NoLabel );
     }
                             
     painter->setPen( majorCirclePen );
@@ -182,8 +182,8 @@ void GraticulePlugin::renderGrid( GeoPainter *painter, ViewportParams *viewport,
     renderLongitudeLine( painter, 180.0, viewLatLonAltBox, 0.0, tr( "Antimeridian" ) );
 
     QPen tropicsPen = majorCirclePen;
-    if (   painter->mapQuality() != Marble::OutlineQuality
-        && painter->mapQuality() != Marble::LowQuality ) {
+    if (   painter->mapQuality() != OutlineQuality
+        && painter->mapQuality() != LowQuality ) {
         tropicsPen.setStyle( Qt::DotLine );
     }
     painter->setPen( tropicsPen );
@@ -316,7 +316,7 @@ void GraticulePlugin::renderLatitudeLines( GeoPainter *painter,
                             -1, 'g' );
 
         // No additional labels for the equator
-        if ( labelPositionFlags.testFlag( Marble::LineCenter ) && itStep == 0.0 ) {
+        if ( labelPositionFlags.testFlag( LineCenter ) && itStep == 0.0 ) {
             label.clear();
         }
 
@@ -361,7 +361,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
             // No additional labels for the prime meridian and the antimeridian
 
-            if ( labelPositionFlags.testFlag( Marble::LineCenter ) && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
+            if ( labelPositionFlags.testFlag( LineCenter ) && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
             {
                 label.clear();
             }
@@ -387,7 +387,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
 
             // No additional labels for the prime meridian and the antimeridian
 
-            if ( labelPositionFlags.testFlag( Marble::LineCenter ) && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
+            if ( labelPositionFlags.testFlag( LineCenter ) && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
             {
                 label.clear();
             }
@@ -409,7 +409,7 @@ void GraticulePlugin::renderLongitudeLines( GeoPainter *painter,
                                 -1, 'g' );
 
             // No additional labels for the prime meridian and the antimeridian
-            if ( labelPositionFlags.testFlag( Marble::LineCenter ) && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
+            if ( labelPositionFlags.testFlag( LineCenter ) && ( itStep == 0.0 || itStep == 180.0 || itStep == -180.0 ) )
             {
                 label.clear();
             }
