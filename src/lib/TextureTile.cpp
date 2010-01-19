@@ -31,7 +31,7 @@ static uint **jumpTableFromQImage32( QImage &img )
 {
     const int  height = img.height();
     const int  bpl    = img.bytesPerLine() / 4;
-    uint      *data = (QRgb*)(img.scanLine(0));
+    uint      *data = reinterpret_cast<QRgb*>(img.bits());
     uint     **jumpTable = new uint*[height];
 
     for ( int y = 0; y < height; ++y ) {

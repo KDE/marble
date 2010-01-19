@@ -53,7 +53,7 @@ public:
 
  private Q_SLOTS:
     void notifyMapChanged();
-
+    
  protected:
     void pixelValueF( qreal lon, qreal lat, 
                      QRgb* scanLine );
@@ -85,6 +85,18 @@ public:
     qreal rad2PixelX( const qreal longitude ) const;
     qreal rad2PixelY( const qreal latitude ) const;
 
+    // Checks whether the pixelValueApprox method will make use of more than
+    // one tile
+    bool isOutOfTileRange( int itLon, int itLat,
+                           int itStepLon, int itStepLat,
+                           int tileWidth, int tileHeight,
+                           int n ) const;
+
+    bool isOutOfTileRangeF( qreal itLon, qreal itLat,
+                            qreal itStepLon, qreal itStepLat,
+                            int tileWidth, int tileHeight,
+                            int n ) const;
+                           
     // maximum values for global texture coordinates
     // ( with origin in upper left corner, measured in pixel) 
     int     m_maxGlobalX;

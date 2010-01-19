@@ -272,22 +272,26 @@ void AbstractScanlineTextureMapper::pixelValueApproxF(const qreal& lon,
         qreal oldPosX = -1;
         qreal oldPosY = 0;
 
+        const bool alwaysCheckTileRange =
+                isOutOfTileRangeF( itLon, itLat, itStepLon, itStepLat,
+                                   tileWidth, tileHeight, n );
+        
         for ( int j=1; j < n; ++j ) {
             qreal posX = itLon + itStepLon * j;
             qreal posY = itLat + itStepLat * j;
-
-            if ( posX >= tileWidth 
-                 || posX < 0.0
-                 || posY >= tileHeight
-                 || posY < 0.0 )
-            {
-                nextTile( posX, posY );
-                itLon = m_prevLon + m_toTileCoordinatesLon;
-                itLat = m_prevLat + m_toTileCoordinatesLat;
-                posX = itLon + itStepLon * j;
-                posY = itLat + itStepLat * j;
-                oldPosX = -1;
-            }
+            if ( alwaysCheckTileRange )
+                if ( posX >= tileWidth
+                    || posX < 0.0
+                    || posY >= tileHeight
+                    || posY < 0.0 )
+                {
+                    nextTile( posX, posY );
+                    itLon = m_prevLon + m_toTileCoordinatesLon;
+                    itLat = m_prevLat + m_toTileCoordinatesLat;
+                    posX = itLon + itStepLon * j;
+                    posY = itLat + itStepLat * j;
+                    oldPosX = -1;
+                }
 
             *scanLine = m_tile->pixel( posX, posY ); 
 
@@ -355,6 +359,23 @@ void AbstractScanlineTextureMapper::pixelValueApproxF(const qreal& lon,
     }
 }
 
+
+bool AbstractScanlineTextureMapper::isOutOfTileRangeF( qreal itLon, qreal itLat,
+                                                       qreal itStepLon, qreal itStepLat,
+                                                       int tileWidth, int tileHeight,
+                                                       int n ) const
+{
+    qreal minIPosX = itLon + itStepLon;
+    qreal minIPosY = itLat + itStepLat;
+    qreal maxIPosX = itLon + itStepLon * ( n - 1 );
+    qreal maxIPosY = itLat + itStepLat * ( n - 1 );
+    return (    maxIPosX >= tileWidth  || maxIPosX < 0
+             || maxIPosY >= tileHeight || maxIPosY < 0
+             || minIPosX >= tileWidth  || minIPosX < 0
+             || minIPosY >= tileHeight || minIPosY < 0 );
+}
+
+
 void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
                               const qreal& lat, QRgb *scanLine,
                               int n )
@@ -386,24 +407,38 @@ void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
         const int tileWidth = m_tileLoader->tileWidth();
         const int tileHeight = m_tileLoader->tileHeight();
 
-        for ( int j = 1; j < n; ++j ) {
-            int iPosX = ( itLon + itStepLon * j ) >> 7;
-            int iPosY = ( itLat + itStepLat * j ) >> 7;
-
-            if ( iPosX >= tileWidth 
-                 || iPosX < 0
-                 || iPosY >= tileHeight
-                 || iPosY < 0 )
-            {
-                nextTile( iPosX, iPosY );
-                itLon = (int)( ( m_prevLon + m_toTileCoordinatesLon ) * 128.0 );
-                itLat = (int)( ( m_prevLat + m_toTileCoordinatesLat ) * 128.0 );
-                iPosX = ( itLon + itStepLon * j ) >> 7;
-                iPosY = ( itLat + itStepLat * j ) >> 7;
+        const bool alwaysCheckTileRange =
+                isOutOfTileRange( itLon, itLat, itStepLon, itStepLat,
+                                  tileWidth, tileHeight, n );
+                                  
+        if ( !alwaysCheckTileRange ) {
+            for ( int j = 1; j < n; ++j ) {
+                int iPosX = ( itLon + itStepLon * j ) >> 7;
+                int iPosY = ( itLat + itStepLat * j ) >> 7;
+                *scanLine = m_tile->pixel( iPosX, iPosY );
+                ++scanLine;
             }
+        }        
+        else {
+            for ( int j = 1; j < n; ++j ) {
+                int iPosX = ( itLon + itStepLon * j ) >> 7;
+                int iPosY = ( itLat + itStepLat * j ) >> 7;
 
-            *scanLine = m_tile->pixel( iPosX, iPosY ); 
-            ++scanLine;
+                if ( iPosX >= tileWidth
+                    || iPosX < 0
+                    || iPosY >= tileHeight
+                    || iPosY < 0 )
+                {
+                    nextTile( iPosX, iPosY );
+                    itLon = (int)( ( m_prevLon + m_toTileCoordinatesLon ) * 128.0 );
+                    itLat = (int)( ( m_prevLat + m_toTileCoordinatesLat ) * 128.0 );
+                    iPosX = ( itLon + itStepLon * j ) >> 7;
+                    iPosY = ( itLat + itStepLat * j ) >> 7;
+                }
+
+                *scanLine = m_tile->pixel( iPosX, iPosY );
+                ++scanLine;
+            }
         }
     }
 
@@ -447,6 +482,23 @@ void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
         }
     }
 }
+
+
+bool AbstractScanlineTextureMapper::isOutOfTileRange( int itLon, int itLat,
+                                                      int itStepLon, int itStepLat,
+                                                      int tileWidth, int tileHeight,
+                                                      int n ) const
+{
+    int minIPosX = ( itLon + itStepLon ) >> 7;
+    int minIPosY = ( itLat + itStepLat ) >> 7;
+    int maxIPosX = ( itLon + itStepLon * ( n - 1 ) ) >> 7;
+    int maxIPosY = ( itLat + itStepLat * ( n - 1 ) ) >> 7;
+    return (    maxIPosX >= tileWidth  || maxIPosX < 0
+             || maxIPosY >= tileHeight || maxIPosY < 0
+             || minIPosX >= tileWidth  || minIPosX < 0
+             || minIPosY >= tileHeight || minIPosY < 0 );
+}
+
 
 int AbstractScanlineTextureMapper::interpolationStep( ViewParams *viewParams ) const
 {
