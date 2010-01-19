@@ -362,12 +362,7 @@ AbstractDataPluginItem *AbstractDataPluginModel::findItem( const QString& id ) c
 
 bool AbstractDataPluginModel::itemExists( const QString& id ) const
 {
-    if ( findItem( id ) ) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return findItem( id );
 }
 
 void AbstractDataPluginModel::setItemSettings( QHash<QString,QVariant> itemSettings )
