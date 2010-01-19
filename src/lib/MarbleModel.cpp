@@ -926,8 +926,8 @@ void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
 
     // As long as we don't have an Layer Management Class we just lookup 
     // the name of the layer that has the same name as the theme ID
-    const QString themeId = d->m_mapTheme->head()->theme();
-    GeoSceneLayer * const layer = static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeId ));
+    const QString themeId = mapTheme->head()->theme();
+    GeoSceneLayer * const layer = static_cast<GeoSceneLayer*>( mapTheme->map()->layer( themeId ));
     if ( !layer )
         return;
 
