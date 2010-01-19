@@ -109,14 +109,7 @@ QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos 
     QList<AbstractDataPluginItem *> itemList;
     
     foreach( AbstractDataPlugin *plugin, d->m_dataPlugins ) {
-#if QT_VERSION >= 0x040500
         itemList.append( plugin->whichItemAt( curpos ) );
-#else
-        QList<AbstractDataPluginItem *> subList =  plugin->whichItemAt( curpos );
-        foreach( AbstractDataPluginItem *item, subList ) {
-            itemList.append( item );
-        }
-#endif
     }
     return itemList;
 }

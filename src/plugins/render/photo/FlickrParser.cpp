@@ -109,11 +109,7 @@ void FlickrParser::readPhoto()
     Q_ASSERT( isStartElement()
               && name() == "photo" );
               
-#if QT_VERSION >= 0x040500
         if( attributes().hasAttribute( "id" ) ) {
-#else
-        if( attributes().value( "id" ).isEmpty() ) {
-#endif
         PhotoPluginItem *item = new PhotoPluginItem( m_parent );
         item->setId( attributes().value( "id" ).toString() );
         item->setServer( attributes().value( "server" ).toString() );
