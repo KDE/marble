@@ -204,15 +204,19 @@ void TextureTilePrivate::scaleTileFrom( GeoSceneTexture *textureLayer, QImage &t
 
 
 TextureTile::TextureTile( TileId const& id, QObject * parent )
-    : AbstractTile( *new TextureTilePrivate( id ), parent )
+    : AbstractTile( *new TextureTilePrivate( id ), parent ), d(0)
 {
-//    Q_D( TextureTile );
-//    d->q_ptr = this; 
+    // The d-ptr is cached as a member to avoid having to use d_func()
+    // or the Q_D macro in the pixel() function. Otherwise it leads
+    // to measurable runtime overhead because pixel() is called frequently.
+    d = d_func();
 }
 
 TextureTile::TextureTile( TextureTilePrivate &dd, QObject * parent )
-    : AbstractTile( dd, parent )
+    : AbstractTile( dd, parent ), d(0)
 {
+    // See comment above
+    d = d_func();
 }
 
 TextureTile::~TextureTile()
@@ -222,8 +226,6 @@ TextureTile::~TextureTile()
 void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, int y,
                                QCache<TileId, TextureTile> *tileCache )
 {
-    Q_D( TextureTile );
-
     // mDebug() << "TextureTile::loadDataset" << level << x << y;
     QImage temptile;
 
@@ -355,7 +357,6 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
 
 void TextureTile::initJumpTables( bool requestTileUpdate )
 {
-    Q_D( TextureTile );
     //    mDebug() << "Entered initJumpTables( bool ) of Tile" << d->m_id;
 
     if ( d->m_rawtile.isNull() ) {
@@ -390,15 +391,11 @@ void TextureTile::initJumpTables( bool requestTileUpdate )
 
 uint TextureTile::pixel( int x, int y ) const
 {
-    Q_D( const TextureTile );
-
     return d->pixel( x, y );
 }
 
 uint TextureTile::pixelF( qreal x, qreal y ) const
 {
-    Q_D( const TextureTile );
-
     int iX = (int)(x);
     int iY = (int)(y);
 
@@ -409,32 +406,26 @@ uint TextureTile::pixelF( qreal x, qreal y ) const
 
 uint TextureTile::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) const
 {
-    Q_D( const TextureTile );
-
     return d->pixelF( x, y, topLeftValue );
 }
 
 int TextureTile::depth() const
 {
-    Q_D( const TextureTile );
     return d->m_depth;
 }
 
 int TextureTile::numBytes() const
 {
-    Q_D( const TextureTile );
     return d->m_rawtile.numBytes();
 }
 
 QImage TextureTile::rawtile() 
 {
-    Q_D( TextureTile );
     return d->m_rawtile;
 }
 
 QImage * TextureTile::tile()
 {
-    Q_D( TextureTile );
     return &(d->m_rawtile);
 }
 
