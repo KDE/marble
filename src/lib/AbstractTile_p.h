@@ -28,7 +28,7 @@ namespace Marble
 class AbstractTilePrivate
 {
  public:
-    AbstractTilePrivate( const TileId& id );
+    explicit AbstractTilePrivate( const TileId& id );
     virtual ~AbstractTilePrivate();
 
     TileId    m_id;

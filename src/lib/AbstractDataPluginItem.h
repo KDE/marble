@@ -30,7 +30,7 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
     Q_OBJECT
     
  public:
-    AbstractDataPluginItem( QObject *parent = 0 );
+    explicit AbstractDataPluginItem( QObject *parent = 0 );
     virtual ~AbstractDataPluginItem();
     
     QString target();
