@@ -425,7 +425,7 @@ QString WeatherItem::creditHtml() const
     return QString();
 }
 
-void WeatherItem::setSettings( QHash<QString, QVariant> settings )
+void WeatherItem::setSettings( const QHash<QString, QVariant>& settings )
 {
     if ( d->m_settings == settings ) {
         return;

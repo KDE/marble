@@ -191,7 +191,7 @@ void WikipediaItem::setIcon( const QIcon& icon )
     updateSize();
 }
 
-void WikipediaItem::setSettings( QHash<QString, QVariant> settings )
+void WikipediaItem::setSettings( const QHash<QString, QVariant>& settings )
 {
     if ( settings != m_settings ) {
         m_settings = settings;

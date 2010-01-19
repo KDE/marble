@@ -79,7 +79,7 @@ class WeatherItem : public AbstractDataPluginItem
 
     virtual QString creditHtml() const;
 
-    void setSettings( QHash<QString, QVariant> settings );
+    void setSettings( const QHash<QString, QVariant>& settings );
     
  public Q_SLOTS:
     void openBrowser();

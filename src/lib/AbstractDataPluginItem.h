@@ -51,7 +51,7 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
      * This is usually called automatically before painting. If you reimplement this it would be
      * useful to check for changes before copying.
      */
-    virtual void setSettings( QHash<QString, QVariant> settings );
+    virtual void setSettings( const QHash<QString, QVariant>& settings );
     
     /**
      * Returns the action of this specific item.

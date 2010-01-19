@@ -82,7 +82,7 @@ void AbstractDataPluginItem::setAddedAngularResolution( qreal resolution )
     d->m_addedAngularResolution = resolution;
 }
 
-void AbstractDataPluginItem::setSettings( QHash<QString, QVariant> settings )
+void AbstractDataPluginItem::setSettings( const QHash<QString, QVariant>& settings )
 {
     d->m_settings = settings;
 }

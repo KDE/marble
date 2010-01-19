@@ -73,7 +73,7 @@ class WikipediaItem : public AbstractDataPluginItem
     
     void setIcon( const QIcon& icon );
 
-    void setSettings( QHash<QString, QVariant> settings );
+    void setSettings( const QHash<QString, QVariant>& settings );
     
  public Q_SLOTS:
     void openBrowser();
