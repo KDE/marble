@@ -383,16 +383,6 @@ void TileLoader::reloadTile( const QString &relativeUrlString, const QString &_i
     reloadTile( _id );
 }
 
-void TileLoader::reloadTile( const QString& serverUrlString, const QString &relativeUrlString,
-                             const QString &_id )
-{
-    Q_UNUSED( serverUrlString );
-    Q_UNUSED( relativeUrlString );
-    // mDebug() << "Reloading Tile" << serverUrlString << relativeUrlString << "id:" << _id;
-
-    reloadTile( _id );
-}
-
 void TileLoader::update()
 {
     mDebug() << "TileLoader::update()";
