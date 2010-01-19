@@ -195,16 +195,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     HttpDownloadManager* downloadManager() const;
 
-   /**
-     * @brief Set the downloadmanager to load missing tiles
-     * @param downloadManager the HttpDownloadManager instance
-     *
-     * This function sets the downloadmanager to load tiles that
-     * are missing locally. The destruction of the instance
-     * will be handled by MarbleModel.
-     */
-    void setDownloadManager( HttpDownloadManager *downloadManager );
-
     void openGpxFile( const QString& filename );
     void addPlacemarkFile( const QString& filename );
     void addPlacemarkData( const QString& data, const QString& key = "data" );

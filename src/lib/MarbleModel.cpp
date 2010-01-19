@@ -528,18 +528,6 @@ HttpDownloadManager* MarbleModel::downloadManager() const
     return d->m_downloadManager;
 }
 
-
-void MarbleModel::setDownloadManager( HttpDownloadManager *downloadManager )
-{
-    HttpDownloadManager *previousDownloadManager = d->m_downloadManager;
-
-    d->m_tileLoader->setDownloadManager( downloadManager );
-    d->m_downloadManager = downloadManager;
-
-    delete previousDownloadManager;
-}
-
-
 void MarbleModelPrivate::resize( int width, int height )
 {
     if ( m_mapTheme->map()->hasTextureLayers() ) {
