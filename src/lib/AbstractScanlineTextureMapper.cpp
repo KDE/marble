@@ -19,13 +19,6 @@
 
 using namespace Marble;
 
-// Defining INTERLACE will make sure that for two subsequent scanlines
-// every second scanline will be a deep copy of the first scanline.
-// This results in a more coarse resolution and in a speedup for the 
-// texture mapping of approx. 25%.
-
-
-
 AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
     : QObject( parent ),
       m_interpolate( false ),
