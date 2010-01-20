@@ -105,7 +105,7 @@ uint TextureTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
     if ( ( iY + 1 ) < m_rawtile.height() ) {
 
         QRgb bottomLeftValue  =  pixel( iX, iY + 1 );
-#define CHEAPHIGH
+// #define CHEAPHIGH
 #ifdef CHEAPHIGH
         QRgb leftValue;
         if ( fY < 0.33 )
