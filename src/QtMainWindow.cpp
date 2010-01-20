@@ -136,7 +136,7 @@ void MainWindow::createActions()
      m_copyMapAct->setStatusTip(tr("Copy a screenshot of the map"));
      connect(m_copyMapAct, SIGNAL(triggered()), this, SLOT(copyMap()));
      
-     m_configDialogAct = new QAction( tr("&Settings"), this);
+     m_configDialogAct = new QAction( tr("&Configure Marble"), this);
      m_configDialogAct->setStatusTip(tr("Show the configuration dialog"));
      connect(m_configDialogAct, SIGNAL(triggered()), this, SLOT(editSettings()));
 
