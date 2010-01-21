@@ -412,10 +412,12 @@ void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
                                   tileWidth, tileHeight, n );
                                   
         if ( !alwaysCheckTileRange ) {
+            int iPosXf = itLon;
+            int iPosYf = itLat;
             for ( int j = 1; j < n; ++j ) {
-                int iPosX = ( itLon + itStepLon * j ) >> 7;
-                int iPosY = ( itLat + itStepLat * j ) >> 7;
-                *scanLine = m_tile->pixel( iPosX, iPosY );
+                iPosXf += itStepLon;
+                iPosYf += itStepLat;
+                *scanLine = m_tile->pixel( iPosXf >> 7, iPosYf >> 7 );
                 ++scanLine;
             }
         }        
