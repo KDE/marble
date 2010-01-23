@@ -22,6 +22,7 @@ namespace Marble
 class PositionTracking;
 class GpxFile;
 class GpxFileModel;
+class PluginManager;
 class Track;
 class Waypoint;
 
@@ -29,7 +30,8 @@ class GpsLayer : public AbstractLayer
 {
 
  public:
-    explicit GpsLayer( GpxFileModel *fileModel, QObject *parent =0 );
+    explicit GpsLayer( GpxFileModel *fileModel,
+                       PluginManager *pluginManager, QObject *parent =0 );
     ~GpsLayer();
     virtual void paintLayer( ClipPainter *painter, 
                              const QSize &canvasSize,

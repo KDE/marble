@@ -31,6 +31,7 @@ class TrackSegment;
 class ViewParams;
 class Waypoint;
 class GeoDataCoordinates;
+class PluginManager;
 class PositionProviderPlugin;
 
 class PositionTracking : public QObject 
@@ -40,6 +41,7 @@ class PositionTracking : public QObject
 public:
 
     explicit PositionTracking( GpxFile *currentGpx,
+                               PluginManager *pluginManager,
                           QObject *parent = 0 );
     ~PositionTracking();
 

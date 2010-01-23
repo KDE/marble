@@ -195,7 +195,7 @@ MarbleModel::MarbleModel( QObject *parent )
              this,            SIGNAL( modelChanged() ) );
 
     d->m_gpxFileModel = new GpxFileModel( this );
-    d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
+    d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel, d->m_pluginManager );
 
     connect( d->m_dataFacade->fileViewModel(), SIGNAL(layoutChanged()),
              d->m_gpsLayer, SLOT(clearModel() ) );

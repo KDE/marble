@@ -32,6 +32,7 @@
 using namespace Marble;
 
 PositionTracking::PositionTracking( GpxFile *currentGpx,
+                                    PluginManager *pluginManager,
                           QObject *parent ) 
      : QObject( parent )
 {
@@ -44,8 +45,7 @@ PositionTracking::PositionTracking( GpxFile *currentGpx,
     m_gpsTrackSeg = 0;
     m_updateDelay = 0;
 
-    PluginManager pluginManager;
-    QList<PositionProviderPlugin *> plugins = pluginManager.createPositionProviderPlugins();
+    QList<PositionProviderPlugin *> plugins = pluginManager->createPositionProviderPlugins();
     if ( !plugins.isEmpty() ) {
         // FIXME: not just take the first plugin, but use some configuration setting
         // take the first plugin and delete the rest
