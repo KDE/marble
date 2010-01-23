@@ -72,15 +72,6 @@ class MARBLE_EXPORT PluginManager : public QObject
      */
     QList<PositionProviderPlugin *> createPositionProviderPlugins() const;
 
- public Q_SLOTS:
-    /**
-     * @brief Browses the plugin directories and loads plugins.
-     *
-     * This method browses all plugin directories and loads
-     * all plugins found in there.
-     */
-    void loadPlugins();
-
  private:
     Q_DISABLE_COPY( PluginManager )
 

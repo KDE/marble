@@ -32,6 +32,14 @@ namespace Marble
 class PluginManagerPrivate
 {
  public:
+    PluginManagerPrivate()
+            : m_pluginsLoaded(false)
+    {
+    }
+
+    void loadPlugins();
+
+    bool m_pluginsLoaded;
     QList<RenderPlugin *> m_renderPluginTemplates;
     QList<NetworkPlugin *> m_networkPluginTemplates;
     QList<PositionProviderPlugin *> m_positionProviderPluginTemplates;
@@ -41,11 +49,6 @@ PluginManager::PluginManager( QObject *parent )
     : QObject(parent),
       d( new PluginManagerPrivate() )
 {
-    // For testing:
-    QTime t;
-    t.start();
-    loadPlugins();
-    qDebug("Time elapsed: %d ms", t.elapsed());
 }
 
 PluginManager::~PluginManager()
@@ -58,6 +61,8 @@ PluginManager::~PluginManager()
 QList<AbstractFloatItem *> PluginManager::createFloatItems() const
 {
     QList<AbstractFloatItem *> floatItemList;
+
+    d->loadPlugins();
 
     QList<RenderPlugin *>::const_iterator i = d->m_renderPluginTemplates.constBegin();
     QList<RenderPlugin *>::const_iterator const end = d->m_renderPluginTemplates.constEnd();
@@ -75,6 +80,9 @@ QList<AbstractFloatItem *> PluginManager::createFloatItems() const
 QList<RenderPlugin *> PluginManager::createRenderPlugins() const
 {
     QList<RenderPlugin *> result;
+
+    d->loadPlugins();
+
     QList<RenderPlugin *>::const_iterator i = d->m_renderPluginTemplates.constBegin();
     QList<RenderPlugin *>::const_iterator const end = d->m_renderPluginTemplates.constEnd();
     for (; i != end; ++i) {
@@ -86,6 +94,9 @@ QList<RenderPlugin *> PluginManager::createRenderPlugins() const
 QList<NetworkPlugin *> PluginManager::createNetworkPlugins() const
 {
     QList<NetworkPlugin *> result;
+
+    d->loadPlugins();
+
     QList<NetworkPlugin *>::const_iterator pos = d->m_networkPluginTemplates.constBegin();
     QList<NetworkPlugin *>::const_iterator const end = d->m_networkPluginTemplates.constEnd();
     for (; pos != end; ++pos ) {
@@ -97,6 +108,9 @@ QList<NetworkPlugin *> PluginManager::createNetworkPlugins() const
 QList<PositionProviderPlugin *> PluginManager::createPositionProviderPlugins() const
 {
     QList<PositionProviderPlugin *> result;
+
+    d->loadPlugins();
+
     QList<PositionProviderPlugin *>::const_iterator pos = d->m_positionProviderPluginTemplates.constBegin();
     QList<PositionProviderPlugin *>::const_iterator const end = d->m_positionProviderPluginTemplates.constEnd();
     for (; pos != end; ++pos ) {
@@ -105,22 +119,29 @@ QList<PositionProviderPlugin *> PluginManager::createPositionProviderPlugins() c
     return result;
 }
 
-void PluginManager::loadPlugins()
+void PluginManagerPrivate::loadPlugins()
 {
+    if (m_pluginsLoaded)
+    {
+        return;
+    }
+
+    QTime t;
+    t.start();
     mDebug() << "Starting to load Plugins.";
 
     QStringList pluginFileNameList = MarbleDirs::pluginEntryList( "", QDir::Files );
 
     MarbleDirs::debug();
 
-    qDeleteAll( d->m_renderPluginTemplates );
-    d->m_renderPluginTemplates.clear();
+    qDeleteAll( m_renderPluginTemplates );
+    m_renderPluginTemplates.clear();
 
-    qDeleteAll( d->m_networkPluginTemplates );
-    d->m_networkPluginTemplates.clear();
+    qDeleteAll( m_networkPluginTemplates );
+    m_networkPluginTemplates.clear();
 
-    qDeleteAll( d->m_positionProviderPluginTemplates );
-    d->m_positionProviderPluginTemplates.clear();
+    qDeleteAll( m_positionProviderPluginTemplates );
+    m_positionProviderPluginTemplates.clear();
 
     foreach( const QString &fileName, pluginFileNameList ) {
         // mDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
@@ -135,17 +156,17 @@ void PluginManager::loadPlugins()
             if ( obj->inherits( "Marble::RenderPlugin" ) ) {
                 mDebug() << "render plugin found" << MarbleDirs::pluginPath( fileName );
                 renderPlugin = qobject_cast<RenderPlugin *>( obj );
-                d->m_renderPluginTemplates.append( renderPlugin );
+                m_renderPluginTemplates.append( renderPlugin );
             }
             else if ( obj->inherits( "Marble::NetworkPlugin" ) ) {
                 mDebug() << "network plugin found" << MarbleDirs::pluginPath( fileName );
                 networkPlugin = qobject_cast<NetworkPlugin *>( obj );
-                d->m_networkPluginTemplates.append( networkPlugin );
+                m_networkPluginTemplates.append( networkPlugin );
             }
             else if ( obj->inherits( "Marble::PositionProviderPlugin" ) ) {
                 mDebug() << "position provider plugin found" << MarbleDirs::pluginPath( fileName );
                 positionProviderPlugin = qobject_cast<PositionProviderPlugin *>( obj );
-                d->m_positionProviderPluginTemplates.append( positionProviderPlugin );
+                m_positionProviderPluginTemplates.append( positionProviderPlugin );
             }
         }
 
@@ -154,6 +175,9 @@ void PluginManager::loadPlugins()
             mDebug() << loader.errorString();
         }
     }
+
+    m_pluginsLoaded = true;
+    qDebug("Time elapsed: %d ms", t.elapsed());
 }
 
 }
