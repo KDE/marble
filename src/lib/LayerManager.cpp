@@ -35,27 +35,30 @@ namespace Marble
 class LayerManagerPrivate
 {
  public:
-    LayerManagerPrivate( MarbleDataFacade* dataFacade )
+    LayerManagerPrivate( MarbleDataFacade* dataFacade,
+                         PluginManager* pluginManager )
         : m_mapTheme(0),
-          m_dataFacade( dataFacade )
+          m_dataFacade( dataFacade ),
+          m_pluginManager( pluginManager )
     {
+        m_renderPlugins = pluginManager->createRenderPlugins();
     }
 
     GeoSceneDocument *m_mapTheme;
 
     MarbleDataFacade *m_dataFacade;
+    PluginManager *m_pluginManager;
     QList<RenderPlugin *> m_renderPlugins;
     QList<AbstractFloatItem *> m_floatItems;
     QList<AbstractDataPlugin *> m_dataPlugins;
 };
 
 
-LayerManager::LayerManager( MarbleDataFacade* dataFacade, QObject *parent )
+LayerManager::LayerManager( MarbleDataFacade* dataFacade,
+                            PluginManager* pluginManager, QObject *parent )
     : QObject( parent ),
-      d( new LayerManagerPrivate( dataFacade) )
+      d( new LayerManagerPrivate( dataFacade, pluginManager) )
 {
-    PluginManager pm;
-    d->m_renderPlugins = pm.createRenderPlugins();
 
     // get float items and data plugins
     foreach( RenderPlugin * renderPlugin, d->m_renderPlugins ) {

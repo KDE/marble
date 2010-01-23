@@ -200,7 +200,7 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( d->m_dataFacade->fileViewModel(), SIGNAL(layoutChanged()),
              d->m_gpsLayer, SLOT(clearModel() ) );
 
-    d->m_layerManager = new LayerManager( d->m_dataFacade, this );
+    d->m_layerManager = new LayerManager( d->m_dataFacade, d->m_pluginManager, this );
 
     // FIXME: more on the spot update names and API
     connect ( d->m_layerManager,      SIGNAL( floatItemsChanged() ),

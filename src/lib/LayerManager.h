@@ -36,6 +36,7 @@ class RenderPlugin;
 class AbstractFloatItem;
 class AbstractDataPlugin;
 class MarbleDataFacade;
+class PluginManager;
 
 /**
  * @short The class that handles Marble's DGML layers.
@@ -47,7 +48,9 @@ class MARBLE_EXPORT LayerManager : public QObject
     Q_OBJECT
 
  public:
-    explicit LayerManager( MarbleDataFacade*, QObject *parent = 0);
+    explicit LayerManager( MarbleDataFacade* dataFacade,
+                           PluginManager* pluginManager,
+                           QObject *parent = 0);
     ~LayerManager();
 
     void renderLayers( GeoPainter *painter, ViewParams *viewParams, const QStringList& renderPositions );
