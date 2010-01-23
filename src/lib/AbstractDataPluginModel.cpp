@@ -51,7 +51,8 @@ const char fileIdSeparator = '_';
 class AbstractDataPluginModelPrivate
 {
  public:
-    AbstractDataPluginModelPrivate( const QString& name, AbstractDataPluginModel * parent )
+    AbstractDataPluginModelPrivate( const QString& name,
+                                    AbstractDataPluginModel * parent )
         : m_parent( parent ),
           m_name( name ),
           m_lastBox(),
@@ -101,14 +102,16 @@ class AbstractDataPluginModelPrivate
     HttpDownloadManager *m_downloadManager;
 };
 
-AbstractDataPluginModel::AbstractDataPluginModel( const QString& name, QObject *parent )
+AbstractDataPluginModel::AbstractDataPluginModel( const QString& name,
+                                                  PluginManager *pluginManager,
+                                                  QObject *parent )
     : QObject(  parent ),
       d( new AbstractDataPluginModelPrivate( name, this ) )
 {
     // Initializing file and download System
     CacheStoragePolicy *storagePolicy = new CacheStoragePolicy( MarbleDirs::localPath()
                                                                 + "/cache/" + d->m_name + '/' );
-    d->m_downloadManager = new HttpDownloadManager( storagePolicy );
+    d->m_downloadManager = new HttpDownloadManager( storagePolicy, pluginManager );
     connect( d->m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
              this,                 SLOT( processFinishedJob( QString , QString ) ) );
     

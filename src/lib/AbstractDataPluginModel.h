@@ -28,6 +28,7 @@ class AbstractDataPluginModelPrivate;
 class AbstractDataPluginItem;
 class GeoDataLatLonAltBox;
 class MarbleDataFacade;
+class PluginManager;
 class ViewportParams;
 
 /**
@@ -45,7 +46,9 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
     Q_OBJECT
  
  public:
-    explicit AbstractDataPluginModel( const QString& name, QObject *parent = 0 );
+    explicit AbstractDataPluginModel( const QString& name,
+                                      PluginManager *pluginManager,
+                                      QObject *parent = 0 );
     virtual ~AbstractDataPluginModel();
         
     /**

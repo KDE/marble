@@ -64,6 +64,7 @@ class ViewParams;
 class TextureTile;
 class MergedLayerDecorator;
 class RenderPlugin;
+class PluginManager;
 class AbstractFloatItem;
 class GeoDataDocument;
 class GeoSceneDocument;
@@ -256,6 +257,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @return the cache limit in kilobytes
      */
     quint64 volatileTileCacheLimit() const;
+
+    PluginManager* pluginManager() const;
 
     /**
      * @brief Returns a list of all RenderPlugins in the model, this includes float items

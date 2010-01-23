@@ -25,7 +25,8 @@ class PhotoPluginModel : public AbstractDataPluginModel
     Q_OBJECT
     
  public:
-    PhotoPluginModel( QObject *parent = 0 );
+    PhotoPluginModel( PluginManager *pluginManager,
+                      QObject *parent = 0 );
     
     static QUrl generateUrl( const QString& service,
                              const QString& method,

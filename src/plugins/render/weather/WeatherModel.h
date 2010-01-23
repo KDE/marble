@@ -29,7 +29,8 @@ class WeatherModel : public AbstractDataPluginModel
     Q_OBJECT
     
  public:
-    explicit WeatherModel( QObject *parent );
+    explicit WeatherModel( PluginManager *pluginManager,
+                           QObject *parent );
     ~WeatherModel();
     
  public Q_SLOTS:

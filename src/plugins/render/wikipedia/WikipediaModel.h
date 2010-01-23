@@ -28,7 +28,8 @@ class WikipediaModel : public AbstractDataPluginModel
     Q_OBJECT
     
  public:
-    WikipediaModel( QObject *parent = 0 );
+    WikipediaModel( PluginManager *pluginManager,
+                    QObject *parent = 0 );
     ~WikipediaModel();
 
     void setShowThumbnail( bool show );

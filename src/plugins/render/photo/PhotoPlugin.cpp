@@ -32,7 +32,7 @@ PhotoPlugin::PhotoPlugin()
 void PhotoPlugin::initialize()
 {
     mDebug() << "PhotoPlugin: Initialize";
-    setModel( new PhotoPluginModel( this ) );
+    setModel( new PhotoPluginModel( pluginManager(), this ) );
     setNumberOfItems( numberOfImagesPerFetch );
     m_isInitialized = true;
 }

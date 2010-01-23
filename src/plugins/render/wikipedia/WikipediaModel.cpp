@@ -34,8 +34,9 @@
 
 using namespace Marble;
 
-WikipediaModel::WikipediaModel( QObject *parent )
-    : AbstractDataPluginModel( "wikipedia", parent ),
+WikipediaModel::WikipediaModel( PluginManager *pluginManager,
+                                QObject *parent )
+    : AbstractDataPluginModel( "wikipedia", pluginManager, parent ),
       m_showThumbnail( true )
 {
     m_wikipediaIcon.addFile( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) );

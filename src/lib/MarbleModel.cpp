@@ -89,7 +89,8 @@ class MarbleModelPrivate
           m_mapTheme( 0 ),
           m_layerManager( 0 ),
           m_downloadManager( new HttpDownloadManager( new FileStoragePolicy(
-                                                                   MarbleDirs::localPath() ))),
+                                                                   MarbleDirs::localPath() ),
+                                                      m_pluginManager ) ),
           m_fileManager( 0 ),
           m_placemarkmanager( 0 )
     {
@@ -849,6 +850,11 @@ void MarbleModel::paintTile( TextureTile* tile, int x, int y, int level,
 
     d->m_layerDecorator->paint( "maps/" + textureLayer->sourceDir(), mapTheme() );
     tile->initJumpTables( requestTileUpdate );
+}
+
+PluginManager* MarbleModel::pluginManager() const
+{
+    return d->m_pluginManager;
 }
 
 QList<RenderPlugin *> MarbleModel::renderPlugins() const

@@ -43,6 +43,7 @@ class MarblePlacemarkModel;
 class FileViewModel;
 class MarbleDataFacadePrivate;
 class Planet;
+class PluginManager;
 
 /**
  * @short A read-only interface to internal Marble data.
@@ -81,6 +82,8 @@ class MARBLE_EXPORT MarbleDataFacade
 
     MarblePlacemarkModel* placemarkModel();
     FileViewModel* fileViewModel() const;
+    PluginManager* pluginManager();
+
  private:
     MarbleDataFacadePrivate  * const d;
 };

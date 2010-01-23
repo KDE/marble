@@ -32,7 +32,8 @@ const quint32 requeueTime = 60000;
 class HttpDownloadManager::Private
 {
   public:
-    explicit Private( StoragePolicy *policy );
+    explicit Private( StoragePolicy *policy,
+                      PluginManager *pluginManager );
     ~Private();
 
     HttpJob *createJob( const QUrl& sourceUrl, const QString& destFileName,
@@ -49,14 +50,17 @@ class HttpDownloadManager::Private
     QList<QPair<DownloadPolicyKey, DownloadQueueSet *> > m_queueSets;
     QMap<DownloadUsage, DownloadQueueSet *> m_defaultQueueSets;
     StoragePolicy *m_storagePolicy;
+    PluginManager *m_pluginManager;
     NetworkPlugin *m_networkPlugin;
 
 };
 
-HttpDownloadManager::Private::Private( StoragePolicy *policy )
+HttpDownloadManager::Private::Private( StoragePolicy *policy,
+                                       PluginManager *pluginManager )
     : m_downloadEnabled( true ), //enabled for now
       m_requeueTimer( 0 ),
       m_storagePolicy( policy ),
+      m_pluginManager( pluginManager ),
       m_networkPlugin( 0 )
 {
     // setup default download policy and associated queue set
@@ -83,8 +87,7 @@ HttpJob *HttpDownloadManager::Private::createJob( const QUrl& sourceUrl,
                                                   const QString &id )
 {
     if ( !m_networkPlugin ) {
-        PluginManager pluginManager;
-        QList<NetworkPlugin *> networkPlugins = pluginManager.createNetworkPlugins();
+        QList<NetworkPlugin *> networkPlugins = m_pluginManager->createNetworkPlugins();
         if ( !networkPlugins.isEmpty() ) {
             // FIXME: not just take the first plugin, but use some configuration setting
             // take the first plugin and delete the rest
@@ -121,8 +124,9 @@ DownloadQueueSet *HttpDownloadManager::Private::findQueues( const QString& hostN
 }
 
 
-HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy )
-    : d( new Private( policy ))
+HttpDownloadManager::HttpDownloadManager( StoragePolicy *policy,
+                                          PluginManager *pluginManager )
+    : d( new Private( policy, pluginManager ))
 {
     d->m_requeueTimer = new QTimer( this );
     d->m_requeueTimer->setInterval( requeueTime );

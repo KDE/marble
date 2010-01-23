@@ -20,8 +20,9 @@
 
 using namespace Marble;
 
-WeatherModel::WeatherModel( QObject *parent )
-    : AbstractDataPluginModel( "weather", parent )
+WeatherModel::WeatherModel( PluginManager *pluginManager,
+                            QObject *parent )
+    : AbstractDataPluginModel( "weather", pluginManager, parent )
 {
 //     addService( new FakeWeatherService( this ) );
      addService( new BBCWeatherService( this ) );

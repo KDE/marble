@@ -57,7 +57,7 @@ WeatherPlugin::~WeatherPlugin()
 
 void WeatherPlugin::initialize()
 {
-    WeatherModel *model = new WeatherModel( this );
+    WeatherModel *model = new WeatherModel( pluginManager(), this );
     setModel( model );
     updateItemSettings();
     setNumberOfItems( numberOfStationsPerFetch );

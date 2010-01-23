@@ -27,6 +27,7 @@
 #include "Planet.h"
 
 #include "FileViewModel.h"
+#include "PluginManager.h"
 #include "GeoDataParser.h"
 
 #include "GeoSceneDocument.h"
@@ -117,6 +118,11 @@ MarblePlacemarkModel* MarbleDataFacade::placemarkModel()
 FileViewModel* MarbleDataFacade::fileViewModel() const
 {
     return d->m_fileviewmodel;
+}
+
+PluginManager* MarbleDataFacade::pluginManager()
+{
+    return d->m_model->pluginManager();
 }
 
 }

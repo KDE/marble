@@ -16,6 +16,7 @@
 #include "AbstractDataPluginItem.h"
 #include "GeoPainter.h"
 #include "GeoSceneLayer.h"
+#include "MarbleDataFacade.h"
 #include "ViewportParams.h"
 #include "MarbleDebug.h"
 
@@ -116,6 +117,11 @@ void AbstractDataPlugin::setModel( AbstractDataPluginModel* model )
     d->m_model = model;
 
     connect( d->m_model, SIGNAL( itemsUpdated() ), this, SLOT( requestRepaint() ) );
+}
+
+PluginManager* AbstractDataPlugin::pluginManager() const
+{
+    return dataFacade()->pluginManager();
 }
 
 QString AbstractDataPlugin::nameId() const
