@@ -102,7 +102,7 @@ Projection ViewParams::projection() const
     return d->m_viewport.projection();
 }
 
-MapQuality ViewParams::mapQuality()
+MapQuality ViewParams::mapQuality() const
 {
     return d->m_mapQuality; 
 }

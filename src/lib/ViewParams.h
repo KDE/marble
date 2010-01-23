@@ -59,7 +59,7 @@ class MARBLE_EXPORT ViewParams
  *  passed on to the MarbleModel and the MarbleLegendBrowser. 
  */
     void setMapThemeId( const QString& );
-    QString mapThemeId();
+    //QString mapThemeId() const;
     GeoSceneDocument *mapTheme();
 
     // Convenience methods:
@@ -68,7 +68,7 @@ class MARBLE_EXPORT ViewParams
     AbstractProjection *currentProjection() const;
     void setProjection(Projection newProjection);
 
-    MapQuality mapQuality();
+    MapQuality mapQuality() const;
     void setMapQuality( MapQuality );
 
     /**
