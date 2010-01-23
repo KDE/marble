@@ -83,9 +83,7 @@ void OnfRunner::run()
     }
     */
     //make a new buffer
-    if( m_buffer ) {
-        delete m_buffer;
-    }
+    delete m_buffer;
     m_buffer = new QBuffer;
     mDebug() << "ONF search: GET /namefinder/search.xml?find=" << m_input;
     m_http->get( "/namefinder/search.xml?find=" + m_input, m_buffer );
