@@ -63,6 +63,7 @@
 #include "PlacemarkLayout.h"
 #include "PlacemarkPainter.h"
 #include "Planet.h"
+#include "PluginManager.h"
 #include "StoragePolicy.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
@@ -84,6 +85,7 @@ class MarbleModelPrivate
     MarbleModelPrivate( MarbleModel *parent )
         : m_parent( parent ),
           m_dataFacade( 0 ),
+          m_pluginManager( new PluginManager( parent ) ),
           m_mapTheme( 0 ),
           m_layerManager( 0 ),
           m_downloadManager( new HttpDownloadManager( new FileStoragePolicy(
@@ -104,6 +106,8 @@ class MarbleModelPrivate
     static QAtomicInt       refCounter;
     MarbleModel             *m_parent;
     MarbleDataFacade        *m_dataFacade;
+
+    PluginManager           *m_pluginManager;
 
     // View and paint stuff
     GeoSceneDocument        *m_mapTheme;
