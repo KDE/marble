@@ -31,6 +31,7 @@
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"       // In geodata/data/
+#include "GeoDataLookAt.h"
 #include "Quaternion.h"
 #include "global.h"             // types needed in all of marble.
 
@@ -151,7 +152,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
     int         zoom() const;
 
     /**
-     * @brief Return the current distance.
+     * @brief Return the current distance. Convenience function calling distance(radius())
+     * @see distance(qreal) radius
      */
     qreal      distance() const;
 
@@ -420,6 +422,37 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     QList<RenderPlugin *> renderPlugins() const;
     QList<AbstractFloatItem *> floatItems() const;
+
+    /**
+      * @brief Move camera to the given position. This can change
+      * both the zoom value and the position
+      */
+    void flyTo(const GeoDataLookAt &lookat);
+
+    /**
+      * @brief Return the current camera position
+      */
+    GeoDataLookAt lookAt() const;
+
+    /**
+      * @brief Return the distance (km) at the given globe radius (pixel)
+      */
+    qreal      radiusFromDistance(qreal distance) const;
+
+    /**
+      * @brief Return the distance (km) at the given globe radius (pixel)
+      */
+    qreal      distanceFromRadius(qreal radius) const;
+
+    /**
+      * Returns the zoom value (no unit) corresponding to the given camera distance (km)
+      */
+    qreal zoomFromDistance(qreal distance) const;
+
+    /**
+      * Returns the distance (km) corresponding to the given zoom value
+      */
+    qreal distanceFromZoom(qreal zoom) const;
 
  public Q_SLOTS:
 

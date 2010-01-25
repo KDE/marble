@@ -25,6 +25,7 @@
 #include <QtGui/QWidget>
 
 #include "GeoDataCoordinates.h"
+#include "GeoDataLookAt.h"
 #include "Quaternion.h"
 #include "global.h"             // types needed in all of marble.
 #include "marble_export.h"
@@ -569,22 +570,22 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * interpretation.  A zoom value around 1000 lets the viewer see
      * all of the earth in the default window.
      */
-    void  zoomView(int zoom);
+    void  zoomView(int zoom, FlyToMode mode = Instant);
 
     /**
      * @brief  Zoom the view by a certain step
      * @param  zoomStep  the difference between the old zoom and the new
      */
-    void  zoomViewBy(int zoomStep);
+    void  zoomViewBy(int zoomStep, FlyToMode mode = Instant);
 
     /**
      * @brief  Zoom in by the amount zoomStep.
      */
-    void  zoomIn();
+    void  zoomIn(FlyToMode mode = Automatic);
     /**
      * @brief  Zoom out by the amount zoomStep.
      */
-    void  zoomOut();
+    void  zoomOut(FlyToMode mode = Automatic);
 
     /**
      * @brief  Rotate the view by the two angles phi and theta.
@@ -597,7 +598,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * of (lon, lat), otherwise the resulting angle will be the sum of
      * the previous position and the two offsets.
      */
-    void  rotateBy( const qreal &deltaLon, const qreal &deltaLat );
+    void  rotateBy( const qreal &deltaLon, const qreal &deltaLat, FlyToMode mode = Instant );
 
     /**
      * @brief  Rotate the view by the angle specified by a Quaternion.
@@ -645,13 +646,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the latitude for the center point
      * @param  lat  the new value for the latitude
      */
-    void setCenterLatitude( qreal lat );
+    void setCenterLatitude( qreal lat, FlyToMode mode = Instant);
 
     /**
      * @brief  Set the longitude for the center point
      * @param  lon  the new value for the longitude
      */
-    void setCenterLongitude( qreal lon );
+    void setCenterLongitude( qreal lon, FlyToMode mode = Instant);
 
     /**
      * @brief  Set the Projection used for the map
@@ -684,24 +685,24 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief  Move left by the moveStep.
      */
-    void  moveLeft();
+    void  moveLeft(FlyToMode mode = Automatic);
     /**
      * @brief  Move right by the moveStep.
      */
-    void  moveRight();
+    void  moveRight(FlyToMode mode = Automatic);
     /**
      * @brief  Move up by the moveStep.
      */
-    void  moveUp();
+    void  moveUp(FlyToMode mode = Automatic);
     /**
      * @brief  Move down by the moveStep.
      */
-    void  moveDown();
+    void  moveDown(FlyToMode mode = Automatic);
 
     /**
      * @brief Center the view on the default start point with the default zoom.
      */
-    void  goHome();
+    void  goHome(FlyToMode mode = Automatic);
 
     /**
      * @brief Set a new map theme
@@ -928,10 +929,22 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void setAnimationsEnabled( bool enabled );
 
     void setSelection(const QRect& region);
-
- private Q_SLOTS:
-
-    void updateAnimation( qreal currentValue );
+    
+    /**
+      * @brief Change the camera position to the given position.
+      * @param lookat New camera position. Changing the camera position means
+      * that both the current center position as well as the zoom value may change
+      * @param mode Interpolation type for intermediate camera positions. Automatic
+      * (default) chooses a suitable interpolation among Instant, Lenar and Jump.
+      * Instant will directly set the new zoom and position values, while
+      * Linear results in a linear interpolation of intermediate center coordinates
+      * along the sphere and a linear interpolation of changes in the camera distance
+      * to the ground. Finally, Jump will behave the same as Linear with regard to
+      * the center position interpolation, but use a parabolic height increase 
+      * towards the middle point of the intermediate positions. This appears
+      * like a jump of the camera.
+      */
+    void flyTo(const GeoDataLookAt &lookat, FlyToMode mode = Automatic);
 
  Q_SIGNALS:
     /**
@@ -1004,8 +1017,20 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
       */
     void changeEvent ( QEvent * event );
 
+private Q_SLOTS:
+    /**
+      * @brief Switch to still mode when an animation is finished
+      */
+    void startStillMode();
+
+    /**
+      * @brief Updates zoom and position during animations
+      * @see flyTo
+      */
+    void updateAnimation(const GeoDataLookAt &lookat);
+
  private:
-    Q_DISABLE_COPY( MarbleWidget )
+    Q_DISABLE_COPY( MarbleWidget );
     MarbleWidgetPrivate  * const d;
 };
 

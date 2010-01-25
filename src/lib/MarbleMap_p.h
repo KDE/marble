@@ -35,8 +35,8 @@ class MarbleMapPrivate
  public:
     explicit MarbleMapPrivate( MarbleMap *parent );
 
-    inline static int toLogScale( int zoom ) { return (int)(200.0 * log( (qreal)zoom ) ); }
-    inline static int fromLogScale( int zoom ) { return (int)pow( M_E, ( (qreal)zoom / 200.0 ) ); }
+    inline static qreal zoom( qreal radius ) { return (200.0 * log( radius ) ); }
+    inline static qreal radius( qreal zoom ) { return pow( M_E, ( zoom / 200.0 ) ); }
 
     void  construct();
 
@@ -84,6 +84,9 @@ class MarbleMapPrivate
     FileStorageWatcher  *m_storageWatcher;
     quint64          m_persistentTileCacheLimit;
     quint64          m_volatileTileCacheLimit;
+
+    const qreal      m_viewAngle;
+
 };
 
 }

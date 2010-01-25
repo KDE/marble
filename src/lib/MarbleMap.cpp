@@ -70,7 +70,8 @@ using namespace Marble;
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent )
         : m_parent( parent ),
           m_persistentTileCacheLimit( 0 ), // No limit
-          m_volatileTileCacheLimit( 1024*1024*30 ) // 30 MB
+          m_volatileTileCacheLimit( 1024*1024*30 ), // 30 MB
+          m_viewAngle(110.0)
 {
 }
 
@@ -329,7 +330,6 @@ void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fp
     }
 }
 
-
 // ----------------------------------------------------------------
 
 
@@ -352,7 +352,6 @@ MarbleMap::MarbleMap()
     d->m_model->setupVectorComposer();
     qDebug("Model: Time elapsed: %d ms", t.elapsed());
 }
-
 
 MarbleMap::MarbleMap(MarbleModel *model)
     : d( new MarbleMapPrivate( this ) )
@@ -443,6 +442,9 @@ void MarbleMap::setRadius(int radius)
     if ( !mapCoversViewport() ) {
         setNeedsUpdate();
     }
+
+    emit zoomChanged( d->m_logzoom );
+    emit distanceChanged(distanceString());
 }
 
 
@@ -486,6 +488,11 @@ int MarbleMap::zoom() const
 
 qreal MarbleMap::distance() const
 {
+    return distanceFromRadius(radius());
+}
+
+qreal MarbleMap::distanceFromRadius(qreal radius) const
+{
     // Due to Marble's orthographic projection ("we have no focus")
     // it's actually not possible to calculate a "real" distance.
     // Additionally the viewing angle of the earth doesn't adjust to
@@ -496,34 +503,28 @@ qreal MarbleMap::distance() const
     // reality. Therefore we assume that the average window width
     // (about 800 pixels) equals the viewing angle of a human being.
 
-    const qreal VIEW_ANGLE = 110.0;
-    
     return ( model()->planet()->radius() * 0.4
-            / (qreal)( radius() )
-            / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) );
+            / radius / tan( 0.5 * d->m_viewAngle * DEG2RAD ) );
 }
 
-void MarbleMap::setDistance( qreal distance )
+qreal MarbleMap::radiusFromDistance(qreal distance) const
+{      
+    return  model()->planet()->radius() /
+            ( distance * tan( 0.5 * d->m_viewAngle * DEG2RAD ) / 0.4 );
+}
+
+void MarbleMap::setDistance( qreal newDistance )
 {
     qreal minDistance = 0.001;
 
-    if ( distance <= minDistance ) {
+    if ( newDistance <= minDistance ) {
         mDebug() << "Invalid distance: 0 m";
-        distance = minDistance;
-    }
-    
-    const qreal VIEW_ANGLE = 110.0;
+        newDistance = minDistance;
+    }    
 
-    setRadius( (int)( model()->planet()->radius() * 0.4
-            / distance
-            / tan( 0.5 * VIEW_ANGLE * DEG2RAD ) ) );
-
-    // We don't do this on every paintEvent to improve performance.
-    // Redrawing the atmosphere is only needed if the size of the
-    // globe changes.
-    if ( d->m_viewParams.showAtmosphere() ) {
-        d->m_dirtyAtmosphere=true;
-    }            
+    int newRadius = radiusFromDistance(newDistance);
+    d->m_logzoom = d->zoom(newRadius);
+    setRadius(newRadius);
 }
 
 qreal MarbleMap::centerLatitude() const
@@ -731,9 +732,9 @@ void MarbleMap::zoomView(int newZoom)
 
     // Prevent infinite loops.
     if ( newZoom  == d->m_logzoom )
-	return;
+        return;
     d->m_logzoom = newZoom;
-    setRadius( d->fromLogScale( newZoom ) );
+    setRadius( d->radius( newZoom ) );
 
     // We don't do this on every paintEvent to improve performance.
     // Redrawing the atmosphere is only needed if the size of the
@@ -741,14 +742,12 @@ void MarbleMap::zoomView(int newZoom)
     if ( d->m_viewParams.showAtmosphere() ) {
         d->m_dirtyAtmosphere=true;
     }
-
-    emit zoomChanged( newZoom );
 }
 
 
 void MarbleMap::zoomViewBy( int zoomStep )
 {
-    zoomView( d->toLogScale( radius() ) + zoomStep );
+    zoomView( zoom() + zoomStep );
 }
 
 
@@ -1291,5 +1290,41 @@ QList<AbstractFloatItem *> MarbleMap::floatItems() const
 {
     return d->m_model->floatItems();
 }
+
+void MarbleMap::flyTo(const GeoDataLookAt &lookat)
+{
+    int zoom = zoomFromDistance(lookat.range() * METER2KM );
+    if (zoom < minimumZoom() || zoom > maximumZoom())
+        return; // avoid moving when zooming is impossible
+
+    setDistance(lookat.range() * METER2KM );
+    GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
+    centerOn(lookat.longitude(deg), lookat.latitude(deg));
+}
+
+GeoDataLookAt MarbleMap::lookAt() const
+{
+    GeoDataLookAt result;
+    qreal lon(0.0), lat(0.0);
+
+    d->m_viewParams.centerCoordinates(lon, lat);
+    result.setLongitude(lon);
+    result.setLatitude(lat);
+    result.setAltitude(0.0);
+    result.setRange( distance() * KM2METER );
+
+    return result;
+}
+
+qreal MarbleMap::distanceFromZoom(qreal zoom) const
+{
+    return distanceFromRadius(d->radius(zoom));
+}
+
+qreal MarbleMap::zoomFromDistance(qreal distance) const
+{
+    return d->zoom(radiusFromDistance(distance));
+}
+
 
 #include "MarbleMap.moc"

@@ -92,7 +92,7 @@ class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputH
     MarbleWidgetDefaultInputHandler();
     ~MarbleWidgetDefaultInputHandler();
 
-    static bool keyEvent( MarbleMap * map, QEvent* e );
+    static bool keyEvent( MarbleWidget * widget, QEvent* e );
     
     virtual void init( MarbleWidget* );
 
@@ -106,7 +106,8 @@ class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputH
 
     void openItemToolTip();
 
-    
+    void lmbTimeout();
+
  private:
     Q_DISABLE_COPY( MarbleWidgetDefaultInputHandler )
     class Private;

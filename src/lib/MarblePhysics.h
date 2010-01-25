@@ -11,40 +11,65 @@
 #ifndef MARBLE_PHYSICS_H
 #define MARBLE_PHYSICS_H
 
-#include "GeoDataCoordinates.h"
+#include "GeoDataLookAt.h"
+
 #include <QtCore/QObject>
 
-class QTimeLine;
+class MarblePhysicsPrivate;
 
 namespace Marble
-{
+{    
+
+class ViewportParams;
 
 class MarblePhysics : public QObject
 {
  Q_OBJECT
 
  public:
-    MarblePhysics( QObject * parent );
+    /**
+      * @brief Constructor
+      * parent Pointer to the parent object
+      */
+    MarblePhysics( QObject * parent = 0);
+    
+    /**
+      * @brief Destructor
+      */
     ~MarblePhysics();
 
-    void jumpTo( const GeoDataCoordinates &targetPoint );
-    GeoDataCoordinates suggestedPosition() const;
+    /**
+      * @brief Calculate an interpolation between source and target according
+      * to the given mode
+      * @param source Camera position indicating the start point of the interpolation
+      * @param target Camera position indicating the target point of the interpolation
+      * @param mode Interpolation (animation) mode. Instant means no interpolation.
+      * @see positionReached
+      */
+    void flyTo( const GeoDataLookAt &source, const GeoDataLookAt &target, ViewportParams *viewport, FlyToMode mode = Instant );
 
  Q_SIGNALS:
-    void valueChanged( qreal );
+    /**
+      * Emitted for each interpolation point between source and target after
+      * flyTo was called.
+      * @param position Interpolated or final camera position
+      * @see flyTo
+      */
+    void positionReached( const GeoDataLookAt position );
 
- public Q_SLOTS:
+    /**
+      * The target was reached.
+      * @see flyTo
+      */
+    void finished();
 
-    void setCurrentPosition( const GeoDataCoordinates &currentPostion );
-
+private Q_SLOTS:
+    void updateProgress(qreal progress);
+    
  private:
     Q_DISABLE_COPY( MarblePhysics )
-    GeoDataCoordinates m_sourcePosition;
-    GeoDataCoordinates m_targetPosition;
-
-    QTimeLine *m_timeLine;
-
-    int    m_jumpDuration;
+    
+    MarblePhysicsPrivate* d;
 };
 
 }

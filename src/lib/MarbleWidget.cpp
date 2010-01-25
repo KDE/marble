@@ -88,6 +88,22 @@ class MarbleWidgetPrivate
 
     void  construct();
 
+    /**
+      * @brief Rotate the globe in the given direction in discrete steps
+      * @param stepsRight Number of steps to go right. Negative values go left.
+      * @param stepsDown Number of steps to go down. Negative values go up.
+      * @param mode Interpolation mode to use when travelling to the target
+      */
+    void moveByStep(MarbleWidget* widget, int stepsRight, int stepsDown, FlyToMode mode);
+
+    /**
+      * @brief Update widget flags and cause a full repaint
+      *
+      * The background of the widget only needs to be redrawn in certain cases. This
+      * method sets the widget flags accordingly and triggers a repaint.
+      */
+    void repaint();
+
     MarbleWidget    *m_widget;
     // The model we are showing.
     MarbleMap       *m_map;
@@ -187,6 +203,8 @@ void MarbleWidgetPrivate::construct()
     // this in the view, i.e. here.
     m_widget->connect( m_map,    SIGNAL( zoomChanged( int ) ),
                        m_widget, SIGNAL( zoomChanged( int ) ) );
+    m_widget->connect( m_map,    SIGNAL( distanceChanged( QString) ),
+                       m_widget, SIGNAL( distanceChanged( QString) ) );
 
     // Set background: black.
     m_widget->setPalette( QPalette ( Qt::black ) );
@@ -213,8 +231,11 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_model->sunLocator(), SIGNAL( updateStars() ),
                        m_widget, SLOT( update() ) );
 
-    m_widget->connect( m_physics, SIGNAL( valueChanged( qreal ) ),
-                       m_widget, SLOT( updateAnimation( qreal ) ) );
+    m_widget->connect( m_physics, SIGNAL( positionReached( GeoDataLookAt ) ),
+                       m_widget, SLOT( updateAnimation( GeoDataLookAt ) ) );
+
+    m_widget->connect( m_physics, SIGNAL( finished() ),
+                       m_widget, SLOT( startStillMode () ) );
 
     m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun() ),
                        m_widget, SLOT( centerSun() ) );
@@ -227,6 +248,24 @@ void MarbleWidgetPrivate::construct()
                        
     m_widget->connect( m_model, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
+}
+
+void MarbleWidgetPrivate::moveByStep(MarbleWidget* widget, int stepsRight, int stepsDown, FlyToMode mode)
+{
+    int polarity = m_map->viewParams()->viewport()->polarity();
+    qreal left = polarity * stepsRight * m_map->moveStep();
+    qreal down = stepsDown * m_map->moveStep();
+    widget->rotateBy(left, down, mode);
+}
+
+void MarbleWidgetPrivate::repaint()
+{
+    // We only have to repaint the background every time if the earth
+    // doesn't cover the whole image.
+    m_widget->setAttribute( Qt::WA_NoSystemBackground,
+                  m_map->mapCoversViewport() && !m_model->mapThemeId().isEmpty() );
+
+    m_widget->repaint();
 }
 
 // ----------------------------------------------------------------
@@ -283,15 +322,7 @@ void MarbleWidget::setRadius(int radius)
     }
         
     d->m_map->setRadius( radius );
-
-    // We only have to repaint the background every time if the earth
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-
-    emit distanceChanged( distanceString() );
-
-    repaint();
+    d->repaint();
 }
 
 
@@ -463,152 +494,128 @@ quint64 MarbleWidget::volatileTileCacheLimit() const
 }
 
 
-void MarbleWidget::zoomView(int newZoom)
+void MarbleWidget::zoomView(int newZoom, FlyToMode mode)
 {
-    // This function is tricky since it needs to be possible to call
-    // both from above as an ordinary function, and "from below",
-    // i.e. as a slot.  That's why we need to save m_logZoom from when
-    // we repainted last time.
+    if (mode == Instant || !d->m_animationsEnabled) {
+        // This function is tricky since it needs to be possible to call
+        // both from above as an ordinary function, and "from below",
+        // i.e. as a slot.  That's why we need to save m_logZoom from when
+        // we repainted last time.
 
-    // Make all the internal changes to the map.
-    d->m_map->zoomView( newZoom );
+        // Make all the internal changes to the map.
+        d->m_map->zoomView( newZoom );
 
-    // If no change, we don't need to repainting or anything else.
-    if ( d->m_logZoom == newZoom )
-	return;
+        // If no change, we don't need to repainting or anything else.
+        if ( d->m_logZoom == newZoom )
+            return;
 
-    d->m_logZoom = newZoom;
-
-    // We only have to repaint the background every time if the globe
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-
-    emit distanceChanged( distanceString() );
-
-    repaint();
+        d->m_logZoom = newZoom;
+        d->repaint();
+    }
+    else {
+        GeoDataLookAt target = d->m_map->lookAt();
+        int radius = d->m_map->d->radius(newZoom);
+        target.setRange( 1000 * d->m_map->distanceFromRadius(radius) );
+        flyTo(target, mode == Automatic ? Instant : mode);
+    }
 }
 
 
-void MarbleWidget::zoomViewBy( int zoomStep )
+void MarbleWidget::zoomViewBy( int zoomStep, FlyToMode mode )
 {
-    zoomView( MarbleMapPrivate::toLogScale( radius() ) + zoomStep );
+    zoomView( zoom() + zoomStep, mode );
 }
 
 
-void MarbleWidget::zoomIn()
+void MarbleWidget::zoomIn(FlyToMode mode)
 {
-    d->m_map->zoomIn();
+    if (mode == Instant || !d->m_animationsEnabled) {
+        d->m_map->zoomIn();
+        d->repaint();
+    }
+    else {
+        GeoDataLookAt target = d->m_map->lookAt();
+        MarbleMap *map = d->m_map;
+        int newRadius = map->d->radius(map->zoom() + map->d->m_zoomStep);
+        target.setRange( 1000 * d->m_map->distanceFromRadius(newRadius) );
+        flyTo(target, mode);
+    }
 }
 
-void MarbleWidget::zoomOut()
+void MarbleWidget::zoomOut(FlyToMode mode)
 {
-    d->m_map->zoomOut();
+    if (mode == Instant || !d->m_animationsEnabled) {
+        d->m_map->zoomOut();
+        d->repaint();
+    }
+    else {
+        GeoDataLookAt target = d->m_map->lookAt();
+        MarbleMap *map = d->m_map;
+        int newRadius = map->d->radius(map->zoom() - map->d->m_zoomStep);
+        target.setRange( 1000 * d->m_map->distanceFromRadius(newRadius) );
+        flyTo(target, mode);
+    }
 }
 
 void MarbleWidget::rotateBy(const Quaternion& incRot)
 {
     d->m_map->rotateBy( incRot );
-
-    // We only have to repaint the background every time if the earth
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-
-    repaint();
+    d->repaint();
 }
 
-void MarbleWidget::rotateBy( const qreal& deltaLon, const qreal& deltaLat)
+void MarbleWidget::rotateBy( const qreal& deltaLon, const qreal& deltaLat, FlyToMode mode)
 {
-    d->m_map->rotateBy( deltaLon, deltaLat );
+    Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );
+    Quaternion  rotTheta( 1.0, 0.0, deltaLon / 180.0, 0.0 );
 
-    // We only have to repaint the background every time if the earth
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-
-    repaint();
+    Quaternion  axis = d->m_map->viewParams()->planetAxis();
+    qreal lon(0.0), lat(0.0);
+    axis.getSpherical(lon, lat);
+    axis = rotTheta * axis;
+    axis *= rotPhi;
+    axis.normalize();
+    lat = -axis.pitch();
+    lon = axis.yaw();
+    
+    GeoDataLookAt target = d->m_map->lookAt();
+    target.setLongitude(lon);
+    target.setLatitude(lat);
+    flyTo(target, mode);
 }
 
 
 void MarbleWidget::centerOn( const qreal& lon, const qreal& lat, bool animated )
 {
-    if ( d->m_animationsEnabled && animated ) {
-        d->m_physics->setCurrentPosition( GeoDataCoordinates( centerLongitude(), centerLatitude(),
-                                                              distance(),
-                                                              GeoDataCoordinates::Degree ) );
-        d->m_physics->jumpTo( GeoDataCoordinates( lon, lat, distance(),
-                                                  GeoDataCoordinates::Degree ) );
-    } else {
-        d->m_map->centerOn( lon, lat );
-    }
-
-    // We only have to repaint the background every time if the earth
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-
-    repaint();
+    GeoDataCoordinates target(lon, lat, 0.0, GeoDataCoordinates::Degree);
+    centerOn(target, animated);
 }
 
 void MarbleWidget::centerOn( const QModelIndex& index, bool animated )
 {
-    if ( d->m_animationsEnabled && animated ) {
-        QItemSelectionModel *selectionModel = d->m_map->model()->placemarkSelectionModel();
-        Q_ASSERT( selectionModel );
-    
-        selectionModel->clear();
-    
-        if ( index.isValid() ) {
-            const GeoDataCoordinates targetPosition =
-                index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
+    QItemSelectionModel *selectionModel = d->m_map->model()->placemarkSelectionModel();
+    Q_ASSERT( selectionModel );
 
-            d->m_physics->setCurrentPosition( GeoDataCoordinates( centerLongitude(),
-                                                                  centerLatitude(), distance(),
-                                                                  GeoDataCoordinates::Degree ) );
-            d->m_physics->jumpTo( targetPosition );
+    selectionModel->clear();
 
-            selectionModel->select( index, QItemSelectionModel::SelectCurrent );
-        }
-    } else {
-        d->m_map->centerOn( index );
+    if ( index.isValid() ) {
+        const GeoDataCoordinates targetPosition =
+            index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
+
+        GeoDataLookAt target = d->m_map->lookAt();
+        target.setLongitude(targetPosition.longitude());
+        target.setLatitude(targetPosition.latitude());
+        flyTo(target, animated ? Automatic : Instant);
+
+        selectionModel->select( index, QItemSelectionModel::SelectCurrent );
     }
-
-    // We only have to repaint the background every time if the earth
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-
-    repaint();
 }
 
 void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
 {
-    if ( d->m_animationsEnabled && animated ) {
-        GeoDataCoordinates targetPosition = position;
-        targetPosition.setAltitude( distance() );
-
-        // Avoid zero distance
-        qreal minDistance = 0.001;
-        
-        if ( targetPosition.altitude() <= minDistance ) {
-            targetPosition.setAltitude( minDistance );
-        }
-        
-        d->m_physics->jumpTo( targetPosition );
-    } else {
-        qreal  lon, lat;
-        position.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
-        d->m_map->setDistance( position.altitude() );
-        d->m_map->centerOn( lon, lat );
-    }
-
-    // We only have to repaint the background every time if the earth
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-
-    repaint();
+    GeoDataLookAt target = d->m_map->lookAt();
+    target.setLongitude(position.longitude());
+    target.setLatitude(position.latitude());
+    flyTo(target, animated ? Automatic : Instant);
 }
 
 void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
@@ -634,38 +641,14 @@ void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
     repaint();
 }
 
-void MarbleWidget::updateAnimation( qreal updateValue )
+void MarbleWidget::setCenterLatitude( qreal lat, FlyToMode mode )
 {
-    GeoDataCoordinates position = d->m_physics->suggestedPosition();
-
-    if ( updateValue < 1.0 ) {
-        setViewContext( Animation );
-        centerOn( position );
-        setViewContext( Still );
-        return;
-    }
-
-    centerOn( position );
+    centerOn( centerLongitude(), lat, mode );
 }
 
-void MarbleWidget::setCenterLatitude( qreal lat )
+void MarbleWidget::setCenterLongitude( qreal lon, FlyToMode mode )
 {
-    centerOn( centerLongitude(), lat );
-
-    // We only have to repaint the background every time if the earth
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-}
-
-void MarbleWidget::setCenterLongitude( qreal lon )
-{
-    centerOn( lon, centerLatitude() );
-
-    // We only have to repaint the background every time if the earth
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
+    centerOn( lon, centerLatitude(), mode );
 }
 
 Projection MarbleWidget::projection() const
@@ -676,11 +659,7 @@ Projection MarbleWidget::projection() const
 void MarbleWidget::setProjection( Projection projection )
 {
     d->m_map->setProjection( projection );
-
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-
-    repaint();
+    d->repaint();
 }
 
 void MarbleWidget::setProjection( int projection )
@@ -704,53 +683,25 @@ void MarbleWidget::setHome(const GeoDataCoordinates& homePoint, int zoom)
 }
 
 
-void MarbleWidget::moveLeft()
+void MarbleWidget::moveLeft(FlyToMode mode)
 {
-    d->m_map->moveLeft();
-
-    // We only have to repaint the background every time if the earth
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-
-    repaint();
+    d->moveByStep(this, -1, 0, mode);
 }
 
-void MarbleWidget::moveRight()
+void MarbleWidget::moveRight(FlyToMode mode)
 {
-    d->m_map->moveRight();
-
-    // We only have to repaint the background every time if the earth
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-
-    repaint();
+    d->moveByStep(this, 1, 0, mode);
 }
 
 
-void MarbleWidget::moveUp()
+void MarbleWidget::moveUp(FlyToMode mode)
 {
-    d->m_map->moveUp();
-
-    // We only have to repaint the background every time if the earth
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-
-    repaint();
+    d->moveByStep(this, 0, -1, mode);
 }
 
-void MarbleWidget::moveDown()
+void MarbleWidget::moveDown(FlyToMode mode)
 {
-    d->m_map->moveDown();
-
-    // We only have to repaint the background every time if the earth
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-
-    repaint();
+    d->moveByStep(this, 0, 1, mode);
 }
 
 void MarbleWidget::leaveEvent (QEvent*)
@@ -762,11 +713,7 @@ void MarbleWidget::resizeEvent (QResizeEvent*)
 {
     setUpdatesEnabled( false );
     d->m_map->setSize( width(), height() );
-
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
-
-    repaint();
+    d->repaint();
     setUpdatesEnabled( true );
 }
 
@@ -887,16 +834,29 @@ void MarbleWidget::customPaint(GeoPainter *painter)
 }
 
 
-void MarbleWidget::goHome()
+void MarbleWidget::goHome(FlyToMode mode)
 {
-    d->m_map->goHome();
+    if (!d->m_animationsEnabled || mode == Instant)
+    {
+        d->m_map->goHome();
 
-    // We only have to repaint the background every time if the earth
-    // doesn't cover the whole image.
-    setAttribute( Qt::WA_NoSystemBackground,
-                  d->m_map->mapCoversViewport() && !mapThemeId().isEmpty() );
+         // not obsolete in case the zoomlevel stays unaltered
+        d->repaint();
+    }
+    else {
+        qreal  homeLon = 0;
+        qreal  homeLat = 0;
+        int homeZoom = 0;
+        d->m_map->home(homeLon, homeLat, homeZoom);
 
-    repaint(); // not obsolete in case the zoomlevel stays unaltered
+        GeoDataLookAt target;
+        target.setLongitude(homeLon, GeoDataCoordinates::Degree);
+        target.setLatitude(homeLat, GeoDataCoordinates::Degree);
+        int radius = d->m_map->d->radius(homeZoom);
+        target.setRange( 1000 * d->m_map->distanceFromRadius(radius) );
+
+        flyTo(target, mode);
+    }
 }
 
 QString MarbleWidget::mapThemeId() const
@@ -1418,6 +1378,34 @@ void MarbleWidget::changeEvent ( QEvent * event )
     }
 
     QWidget::changeEvent(event);
+}
+
+void MarbleWidget::flyTo(const GeoDataLookAt &lookat, FlyToMode mode)
+{
+    if (!d->m_animationsEnabled || mode == Instant) {
+        d->m_map->flyTo(lookat);
+        d->repaint();
+    }
+    else {
+        GeoDataLookAt source = d->m_map->lookAt();
+        setViewContext( Marble::Animation );
+        ViewportParams *viewport = d->m_map->viewParams()->viewport();
+        d->m_physics->flyTo(source, lookat, viewport, mode);
+    }
+}
+
+void MarbleWidget::updateAnimation(const GeoDataLookAt &lookat)
+{
+    setViewContext( Marble::Animation );
+    d->m_map->flyTo(lookat);
+    d->repaint();
+}
+
+void MarbleWidget::startStillMode()
+{
+    setViewContext( Marble::Still );
+    setNeedsUpdate();
+    d->repaint();
 }
 
 }

@@ -177,6 +177,17 @@ enum DownloadUsage {
     DownloadBrowse      ///< Browsing mode, normal operation of Marble, like a web browser
 };
 
+/** 
+ * @brief Describes possible flight mode (interpolation between source
+ *        and target camera positions)
+ */
+enum FlyToMode {
+    Automatic, ///< A sane value is chosen automatically depending on animation settings and the action
+    Instant, ///< Change camera position immediately (no interpolation)
+    Linear, ///< Linear interpolation of lon, lat and distance to ground
+    Jump ///< Linear interpolation of lon and lat, distance increases towards the middle point, then decreases    
+};
+
 const int defaultLevelZeroColumns = 2;
 const int defaultLevelZeroRows = 1;
 
@@ -192,6 +203,9 @@ const qreal FT2M = 1.0 / M2FT;
 const qreal DEG2RAD = M_PI / 180.0;
 const qreal RAD2DEG = 180.0 / M_PI;
 
+// Converstion meter vs kilometer
+const qreal KM2METER = 1000.0;
+const qreal METER2KM = 1.0 / KM2METER;
 
 // Version definitions to use with an external application (as digiKam)
 
