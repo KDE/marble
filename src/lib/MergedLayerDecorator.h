@@ -51,7 +51,7 @@ class MergedLayerDecorator : public QObject
     bool showTileId() const;
 	
     void setTile(QImage* tile);
-    void setInfo(int x, int y, int level, TileId const& id);
+    void setInfo( TileId const &id );
 	
  Q_SIGNALS:
     void downloadTile(const QUrl& sourceUrl, const QString& destinationFileName,
@@ -71,9 +71,6 @@ class MergedLayerDecorator : public QObject
  protected:
     Q_DISABLE_COPY( MergedLayerDecorator )
     QImage* m_tile;
-    int m_x;
-    int m_y;
-    int m_level;
     TileId m_id;
     SunLocator* m_sunLocator;
     bool m_cloudlayer;

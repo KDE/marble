@@ -845,7 +845,7 @@ void MarbleModel::paintTile( TextureTile* tile, int x, int y, int level,
                  d->m_downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage ) ) );
     }
 
-    d->m_layerDecorator->setInfo( x, y, level, tile->id() );
+    d->m_layerDecorator->setInfo( tile->id() );
     d->m_layerDecorator->setTile( tile->tile() );
 
     d->m_layerDecorator->paint( "maps/" + textureLayer->sourceDir(), mapTheme() );
