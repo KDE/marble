@@ -90,7 +90,7 @@ void WikipediaModel::parseFile( const QByteArray& file )
     
     for( it = list.begin(); it != list.end(); ++it ) {
         if( itemExists( (*it)->id() ) ) {
-            delete (*it);
+            delete *it;
             continue;
         }
 
@@ -99,7 +99,7 @@ void WikipediaModel::parseFile( const QByteArray& file )
         (*it)->setTarget( "earth" );
         QUrl thumbnailImageUrl = (*it)->thumbnailImageUrl();
         if ( m_showThumbnail && !thumbnailImageUrl.isEmpty() ) {
-            downloadItemData( thumbnailImageUrl, "thumbnail", (*it) );
+            downloadItemData( thumbnailImageUrl, "thumbnail", *it );
         }
         else {
             addItemToList( *it );
