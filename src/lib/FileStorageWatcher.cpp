@@ -27,10 +27,10 @@ using namespace Marble;
 
 // Only remove 20 files without checking
 // changed cacheLimits and changed themes etc.
-static const quint8 maxFilesDelete = 20;
+static const int maxFilesDelete = 20;
 // Delete only files that are older than 120 Seconds
-static const quint8 deleteOnlyFilesOlderThan = 120;
-static const quint8 softLimitPercent = 5;
+static const int deleteOnlyFilesOlderThan = 120;
+static const int softLimitPercent = 5;
 
 
 // Methods of FileStorageWatcherThread

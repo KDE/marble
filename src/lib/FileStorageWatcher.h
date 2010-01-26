@@ -100,7 +100,7 @@ class FileStorageWatcherThread : public QObject
         quint64 m_cacheLimit;
 	quint64 m_cacheSoftLimit;
         quint64 m_currentCacheSize;
-	quint8  m_filesDeleted;
+	int     m_filesDeleted;
 	bool 	m_deleting;
 	QString m_mapThemeId;
 	QMutex	m_limitMutex;
