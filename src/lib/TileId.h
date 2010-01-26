@@ -11,6 +11,7 @@
 #ifndef MARBLE_TILE_ID_H
 #define MARBLE_TILE_ID_H
 
+#include <QtCore/QHash>
 #include <QtCore/QString>
 
 namespace Marble
@@ -38,9 +39,46 @@ class TileId
     int m_tileY;
 };
 
-
 bool operator==( TileId const& lhs, TileId const& rhs );
 uint qHash( TileId const& );
+
+
+// inline definitions
+
+inline int TileId::zoomLevel() const
+{
+    return m_zoomLevel;
+}
+
+inline int TileId::x() const
+{
+    return m_tileX;
+}
+
+inline int TileId::y() const
+{
+    return m_tileY;
+}
+
+inline QString TileId::toString() const
+{
+    return QString( "%1:%2:%3" ).arg( m_zoomLevel ).arg( m_tileX ).arg( m_tileY );
+}
+
+inline bool operator==( TileId const& lhs, TileId const& rhs )
+{
+    return lhs.m_zoomLevel == rhs.m_zoomLevel
+        && lhs.m_tileX == rhs.m_tileX
+        && lhs.m_tileY == rhs.m_tileY;
+}
+
+inline uint qHash( TileId const& tid )
+{
+    const quint64 tmp = (( quint64 )( tid.m_zoomLevel ) << 36 )
+        + (( quint64 )( tid.m_tileX ) << 18 )
+        + ( quint64 )( tid.m_tileY );
+    return ::qHash( tmp );
+}
 
 }
 
