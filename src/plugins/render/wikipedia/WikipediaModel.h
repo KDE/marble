@@ -14,7 +14,6 @@
 #include "AbstractDataPluginModel.h"
 
 #include <QtGui/QIcon>
-#include <QtGui/QPixmap>
 
 namespace Marble
 {
