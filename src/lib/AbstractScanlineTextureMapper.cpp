@@ -26,7 +26,6 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
       m_maxGlobalY( 0 ),
       m_imageHeight( 0 ),
       m_imageWidth( 0 ),
-      m_imageRadius( 0 ),
       m_prevLat( 0.0 ),
       m_prevLon( 0.0 ),
       m_toTileCoordinatesLon( 0.0 ),
@@ -137,9 +136,6 @@ void AbstractScanlineTextureMapper::resizeMap(int width, int height)
 {
     m_imageHeight = height;
     m_imageWidth  = width;
-
-    m_imageRadius = ( m_imageWidth * m_imageWidth / 4
-                      + m_imageHeight * m_imageHeight / 4 );
 
     // Find the optimal interpolation interval m_nBest for the 
     // current image canvas width

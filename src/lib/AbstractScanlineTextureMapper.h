@@ -104,7 +104,6 @@ public:
 
     int     m_imageHeight;
     int     m_imageWidth;
-    int     m_imageRadius;
 
     // Previous coordinates
     qreal  m_prevLat;
