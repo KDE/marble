@@ -142,7 +142,7 @@ QImage MergedLayerDecorator::loadDataset( GeoSceneTexture *textureLayer )
     connect( &tile, SIGNAL( downloadTile( const QUrl&, const QString&, const QString&, DownloadUsage ) ),
              this, SIGNAL( downloadTile( const QUrl&, const QString&, const QString&, DownloadUsage ) ) );
 
-    tile.loadDataset( textureLayer, m_id.zoomLevel(), m_id.x(), m_id.y() );
+    tile.loadDataset( textureLayer, m_id );
     return *( tile.tile() );
 }
 

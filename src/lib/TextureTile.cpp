@@ -271,7 +271,7 @@ TextureTile::~TextureTile()
 {
 }
 
-void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, int y,
+void TextureTile::loadDataset( GeoSceneTexture *textureLayer, const TileId &id,
                                QCache<TileId, TextureTile> *tileCache )
 {
     // mDebug() << "TextureTile::loadDataset" << level << x << y;
@@ -288,18 +288,19 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
 
     const int levelZeroColumns = textureLayer->levelZeroColumns();
     const int levelZeroRows = textureLayer->levelZeroRows();
-    const int rowsRequestedLevel = TileLoaderHelper::levelToRow( levelZeroRows, level );
-    const int columnsRequestedLevel = TileLoaderHelper::levelToColumn( levelZeroColumns, level );
+    const int rowsRequestedLevel = TileLoaderHelper::levelToRow( levelZeroRows, id.zoomLevel() );
+    const int columnsRequestedLevel = TileLoaderHelper::levelToColumn( levelZeroColumns,
+                                                                       id.zoomLevel() );
     bool tileFound = false;
-    for ( int currentLevel = level; !tileFound && currentLevel > -1; --currentLevel ) {
+    for ( int currentLevel = id.zoomLevel(); !tileFound && currentLevel > -1; --currentLevel ) {
 
         const int rowsCurrentLevel = 
             TileLoaderHelper::levelToRow( levelZeroRows, currentLevel );
         const int columnsCurrentLevel =
             TileLoaderHelper::levelToColumn( levelZeroColumns, currentLevel );
 
-        qreal normalizedX = (qreal)(x) / (qreal)( rowsRequestedLevel );
-        qreal normalizedY = (qreal)(y) / (qreal)( columnsRequestedLevel );
+        qreal normalizedX = (qreal)( id.x() ) / (qreal)( rowsRequestedLevel );
+        qreal normalizedY = (qreal)( id.y() ) / (qreal)( columnsRequestedLevel );
         qreal currentX    = normalizedX * (qreal)( rowsCurrentLevel );
         qreal currentY    = normalizedY * (qreal)( columnsCurrentLevel );
 
@@ -370,9 +371,9 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, int level, int x, 
             if ( !temptile.isNull() ) {
 
                 // Don't scale if the current tile isn't a fallback
-                if ( level != currentLevel ) { 
+                if ( id.zoomLevel() != currentLevel ) { 
                     d->scaleTileFrom( textureLayer, temptile, currentX, currentY, currentLevel,
-                                      x, y, level );
+                                      id.x(), id.y(), id.zoomLevel() );
                 }
                 else {
                     d->m_state = TileComplete;
