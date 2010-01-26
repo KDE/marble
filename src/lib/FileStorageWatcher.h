@@ -59,7 +59,7 @@ class FileStorageWatcherThread : public QObject
 	 *
 	 * @param mapTheme The identifier of the new theme.
 	 */
-	void updateTheme( QString mapTheme );
+	void updateTheme( const QString &mapTheme );
 	
 	/**
 	 * Stop doing things that take a long time to quit.
@@ -83,12 +83,12 @@ class FileStorageWatcherThread : public QObject
 	/**
 	 * Deletes files of a planet if needed
 	 */
-	void ensureSizePerPlanet( QString planetDirectory, QString currentTheme = QString() );
+	void ensureSizePerPlanet( const QString &planetDirectory, const QString &currentTheme = QString() );
 	
 	/**
 	 * Deletes files of a theme if needed
 	 */
-	void ensureSizePerTheme( QString themeDirectory );
+	void ensureSizePerTheme( const QString &themeDirectory );
 	
 	/**
 	 * Returns true if it is necessary to delete files.
@@ -154,7 +154,7 @@ class FileStorageWatcher : public QThread
 	 *
 	 * @param mapTheme The identifier of the new theme.
 	 */
-	void updateTheme( QString mapTheme );
+	void updateTheme( const QString &mapTheme );
 	
     Q_SIGNALS:
 	void sizeChanged( qint64 bytes );

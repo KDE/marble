@@ -84,7 +84,7 @@ void FileStorageWatcherThread::resetCurrentSize()
     emit variableChanged();
 }
 
-void FileStorageWatcherThread::updateTheme( QString mapTheme )
+void FileStorageWatcherThread::updateTheme( const QString &mapTheme )
 {
     mDebug() << "Theme changed to " << mapTheme;
     m_themeMutex.lock();
@@ -199,7 +199,8 @@ void FileStorageWatcherThread::ensureCacheSize()
     }
 }
 
-void FileStorageWatcherThread::ensureSizePerPlanet( QString planetDirectory, QString currentTheme )
+void FileStorageWatcherThread::ensureSizePerPlanet( const QString &planetDirectory,
+                                                    const QString &currentTheme )
 {
     mDebug() << "Deleting from folder: " << planetDirectory;
     
@@ -238,7 +239,7 @@ static bool greaterThanByNumber( const QString &s1, const QString &s2)
     return s1.toInt() > s2.toInt();
 }
 
-void FileStorageWatcherThread::ensureSizePerTheme( QString themeDirectory )
+void FileStorageWatcherThread::ensureSizePerTheme( const QString &themeDirectory )
 {
     mDebug() << "Deleting from folder: " << themeDirectory;
 
@@ -366,7 +367,7 @@ void FileStorageWatcher::resetCurrentSize()
     emit cleared();
 }
 
-void FileStorageWatcher::updateTheme( QString mapTheme )
+void FileStorageWatcher::updateTheme( const QString &mapTheme )
 {
     QMutexLocker locker( m_themeLimitMutex );
     if( m_started )
