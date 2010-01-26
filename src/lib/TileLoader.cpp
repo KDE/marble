@@ -259,7 +259,7 @@ TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
 
     // TODO should emit signal rather than directly calling paintTile
     // emit paintTile( tile, tilx, tily, tileLevel, d->m_theme, false );
-    m_parent->paintTile( tile, tilx, tily, tileLevel, texture, false );
+    m_parent->paintTile( tile, texture, false );
 
     return tile;
 }
@@ -357,16 +357,13 @@ void TileLoader::reloadTile( const QString &idStr )
  
     const TileId id = TileId::fromString( idStr );
     if ( d->m_tilesOnDisplay.contains( id ) ) {
-        int  level = id.zoomLevel();
-        int  y     = id.y();
-        int  x     = id.x();
 
         // TODO should emit signal rather than directly calling paintTile
 //         emit paintTile( d->m_tilesOnDisplay[id], x, y, level, d->m_theme, true );
         GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
 
         d->m_tilesOnDisplay[id]->loadDataset( texture, id, &d->m_tileCache ); 
-        m_parent->paintTile( d->m_tilesOnDisplay[id], x, y, level, texture, true );
+        m_parent->paintTile( d->m_tilesOnDisplay[id], texture, true );
 //         (d->m_tilesOnDisplay[id])->reloadTile( x, y, level, d->m_theme );
     } else {
       // Remove "false" tile from cache so it doesn't get loaded anymore
