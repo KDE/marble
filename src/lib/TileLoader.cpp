@@ -52,31 +52,31 @@ namespace Marble
 
 class TileLoaderPrivate
 {
-    public:
-        TileLoaderPrivate()
-            : m_datasetProvider( 0 ),
-              m_downloadManager( 0 ),
-              m_layer( 0 ),
-              m_tileWidth( 0 ),
-              m_tileHeight( 0 )
-        {
-            m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
-        }
+public:
+    TileLoaderPrivate()
+        : m_datasetProvider( 0 ),
+          m_downloadManager( 0 ),
+          m_layer( 0 ),
+          m_tileWidth( 0 ),
+          m_tileHeight( 0 )
+    {
+        m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
+    }
 
-        DatasetProvider *m_datasetProvider;
-        HttpDownloadManager *m_downloadManager;
-        GeoSceneLayer *m_layer;
-        QHash <TileId, TextureTile*>  m_tilesOnDisplay;
-        int           m_tileWidth;
-        int           m_tileHeight;
-        QCache <TileId, TextureTile>  m_tileCache;
+    DatasetProvider *m_datasetProvider;
+    HttpDownloadManager *m_downloadManager;
+    GeoSceneLayer *m_layer;
+    QHash <TileId, TextureTile*>  m_tilesOnDisplay;
+    int           m_tileWidth;
+    int           m_tileHeight;
+    QCache <TileId, TextureTile>  m_tileCache;
 };
 
 
 
-TileLoader::TileLoader( HttpDownloadManager *downloadManager, MarbleModel* parent)
+TileLoader::TileLoader( HttpDownloadManager *downloadManager, MarbleModel* parent )
     : d( new TileLoaderPrivate() ),
-      m_parent(parent)
+      m_parent( parent )
 {
     setDownloadManager( downloadManager );
 }
@@ -148,8 +148,8 @@ void TileLoader::cleanupTilehash()
     while ( it.hasNext() ) {
         it.next();
         if ( !it.value()->used() ) {
-            // If insert call result is false then the cache is too small to store the tile 
-            // but the item will get deleted nevertheless and the pointer we have 
+            // If insert call result is false then the cache is too small to store the tile
+            // but the item will get deleted nevertheless and the pointer we have
             // doesn't get set to zero (so don't delete it in this case or it will crash!)
             d->m_tileCache.insert( it.key(), it.value(), it.value()->numBytes() );
             d->m_tilesOnDisplay.remove( it.key() );
@@ -163,8 +163,8 @@ void TileLoader::flush()
     QHashIterator<TileId, TextureTile*> it( d->m_tilesOnDisplay );
     while ( it.hasNext() ) {
         it.next();
-        // If insert call result is false then the cache is too small to store the tile 
-        // but the item will get deleted nevertheless and the pointer we have 
+        // If insert call result is false then the cache is too small to store the tile
+        // but the item will get deleted nevertheless and the pointer we have
         // doesn't get set to zero (so don't delete it in this case or it will crash!)
         d->m_tileCache.insert( it.key(), it.value(), it.value()->numBytes() );
         d->m_tilesOnDisplay.remove( it.key() );
@@ -189,7 +189,7 @@ int TileLoader::globalWidth( int level ) const
 
     GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
 
-    return d->m_tileWidth * TileLoaderHelper::levelToColumn( 
+    return d->m_tileWidth * TileLoaderHelper::levelToColumn(
                                 texture->levelZeroColumns(), level );
 }
 
@@ -199,7 +199,7 @@ int TileLoader::globalHeight( int level ) const
 
     GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
 
-    return d->m_tileHeight * TileLoaderHelper::levelToRow( 
+    return d->m_tileHeight * TileLoaderHelper::levelToRow(
                                 texture->levelZeroRows(), level );
 }
 
@@ -299,7 +299,8 @@ int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
 
     QString tilepath = MarbleDirs::path( TileLoaderHelper::themeStr( texture ) );
 //    mDebug() << "TileLoader::maxPartialTileLevel tilepath" << tilepath;
-    QStringList leveldirs = QDir( tilepath ).entryList( QDir::AllDirs | QDir::NoSymLinks | QDir::NoDotAndDotDot );
+    QStringList leveldirs = QDir( tilepath ).entryList( QDir::AllDirs | QDir::NoSymLinks
+                                                        | QDir::NoDotAndDotDot );
 
     bool ok = true;
 
@@ -327,7 +328,7 @@ bool TileLoader::baseTilesAvailable( GeoSceneLayer * layer )
     const int  levelZeroColumns = texture->levelZeroColumns();
     const int  levelZeroRows    = texture->levelZeroRows();
 
-    bool noerr = true; 
+    bool noerr = true;
 
     // Check whether the tiles from the lowest texture level are available
     //
@@ -362,22 +363,22 @@ void TileLoader::reloadTile( const QString &idStr )
 //         emit paintTile( d->m_tilesOnDisplay[id], x, y, level, d->m_theme, true );
         GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
 
-        d->m_tilesOnDisplay[id]->loadDataset( texture, id, &d->m_tileCache ); 
+        d->m_tilesOnDisplay[id]->loadDataset( texture, id, &d->m_tileCache );
         m_parent->paintTile( d->m_tilesOnDisplay[id], texture, true );
 //         (d->m_tilesOnDisplay[id])->reloadTile( x, y, level, d->m_theme );
     } else {
-      // Remove "false" tile from cache so it doesn't get loaded anymore
-      d->m_tileCache.remove( id );
-      mDebug() << "No such ID:" << idStr;
+        // Remove "false" tile from cache so it doesn't get loaded anymore
+        d->m_tileCache.remove( id );
+        mDebug() << "No such ID:" << idStr;
     }
 }
 
-void TileLoader::reloadTile( const QString &relativeUrlString, const QString &_id )
+void TileLoader::reloadTile( const QString &relativeUrlString, const QString &id )
 {
     Q_UNUSED( relativeUrlString );
-    // mDebug() << "Reloading Tile" << relativeUrlString << "id:" << _id;
+    // mDebug() << "Reloading Tile" << relativeUrlString << "id:" << id;
 
-    reloadTile( _id );
+    reloadTile( id );
 }
 
 void TileLoader::update()
