@@ -384,7 +384,7 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer,
                 d->m_depth = d->m_rawtile.depth();
                 d->m_created = lastModified;
                 tileFound = true;
-                initJumpTables( false );
+                initJumpTables();
             }
         }
 
@@ -403,7 +403,7 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer,
 //    mDebug() << "TextureTile::loadDataset end";
 }
 
-void TextureTile::initJumpTables( bool requestTileUpdate )
+void TextureTile::initJumpTables()
 {
     //    mDebug() << "Entered initJumpTables( bool ) of Tile" << d->m_id;
 
@@ -430,11 +430,6 @@ void TextureTile::initJumpTables( bool requestTileUpdate )
     }
 
     d->m_isGrayscale = d->m_rawtile.isGrayscale();
-
-    if ( requestTileUpdate ) {
-        // mDebug() << "TileUpdate available";
-        emit tileUpdateDone();
-    }
 }
 
 uint TextureTile::pixel( int x, int y ) const

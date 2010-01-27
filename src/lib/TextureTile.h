@@ -82,7 +82,7 @@ class TextureTile : public AbstractTile
  private:
     Q_DECLARE_PRIVATE( TextureTile )
     Q_DISABLE_COPY( TextureTile )
-    void initJumpTables( bool requestTileUpdate = true );
+    void initJumpTables();
     TextureTilePrivate *d;
 };
 
