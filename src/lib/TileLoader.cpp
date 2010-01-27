@@ -253,11 +253,10 @@ TextureTile* TileLoader::loadTile( TileId const &tileId )
              this, SIGNAL( tileUpdateAvailable() ) );
 
     tile->loadDataset( texture, &d->m_tileCache );
-    tile->initJumpTables( false );
 
     // TODO should emit signal rather than directly calling paintTile
     // emit paintTile( tile, tilx, tily, tileLevel, d->m_theme, false );
-    m_parent->paintTile( tile, texture, false );
+    m_parent->paintTile( tile, texture );
 
     return tile;
 }
@@ -362,7 +361,8 @@ void TileLoader::reloadTile( const QString &idStr )
         GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
 
         d->m_tilesOnDisplay[id]->loadDataset( texture, &d->m_tileCache );
-        m_parent->paintTile( d->m_tilesOnDisplay[id], texture, true );
+        m_parent->paintTile( d->m_tilesOnDisplay[id], texture );
+        emit tileUpdateAvailable();
 //         (d->m_tilesOnDisplay[id])->reloadTile( x, y, level, d->m_theme );
     } else {
         // Remove "false" tile from cache so it doesn't get loaded anymore

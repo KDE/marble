@@ -381,8 +381,10 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer,
                 }
 
                 d->m_rawtile = temptile;
+                d->m_depth = d->m_rawtile.depth();
                 d->m_created = lastModified;
                 tileFound = true;
+                initJumpTables( false );
             }
         }
 
@@ -399,10 +401,6 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer,
     }
 
 //    mDebug() << "TextureTile::loadDataset end";
-
-    d->m_depth = d->m_rawtile.depth();
-
-//    mDebug() << "m_depth =" << m_depth;
 }
 
 void TextureTile::initJumpTables( bool requestTileUpdate )

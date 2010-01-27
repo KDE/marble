@@ -834,8 +834,7 @@ void MarbleModel::clearPersistentTileCache()
     }
 }
 
-void MarbleModel::paintTile( TextureTile* tile, GeoSceneTexture *textureLayer,
-                             bool requestTileUpdate )
+void MarbleModel::paintTile( TextureTile* tile, GeoSceneTexture *textureLayer )
 {
 //    mDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level
 //             << "requestTileUpdate" << requestTileUpdate;
@@ -849,7 +848,6 @@ void MarbleModel::paintTile( TextureTile* tile, GeoSceneTexture *textureLayer,
     d->m_layerDecorator->setTile( tile->tile() );
 
     d->m_layerDecorator->paint( "maps/" + textureLayer->sourceDir(), mapTheme() );
-    tile->initJumpTables( requestTileUpdate );
 }
 
 PluginManager* MarbleModel::pluginManager() const

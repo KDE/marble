@@ -306,7 +306,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void clearPersistentTileCache();
 
 //  private Q_SLOTS:
-    void paintTile( TextureTile* tile, GeoSceneTexture *textureLayer, bool requestTileUpdate );
+    void paintTile( TextureTile* tile, GeoSceneTexture *textureLayer );
 
     /**
      * @brief Update the model

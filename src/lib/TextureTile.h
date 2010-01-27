@@ -76,15 +76,13 @@ class TextureTile : public AbstractTile
     void downloadTile(const QUrl& sourceUrl, const QString& destinationFileName,
                       const QString& id, DownloadUsage );
 
- public Q_SLOTS:
-    void initJumpTables( bool requestTileUpdate = true );
-
  protected:
     TextureTile( TextureTilePrivate &dd, QObject *parent );
 
  private:
     Q_DECLARE_PRIVATE( TextureTile )
     Q_DISABLE_COPY( TextureTile )
+    void initJumpTables( bool requestTileUpdate = true );
     TextureTilePrivate *d;
 };
 
