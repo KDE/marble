@@ -80,11 +80,9 @@ class TileLoader : public QObject
         /**
          * Loads a tile and returns it.
          *
-         * @param tilx The x coordinate of the requested tile.
-         * @param tily The y coordinate of the requested tile.
-         * @param tileLevel The zoom level of the requested tile.
+         * @param tileId The Id of the requested tile, containing the x and y coordinate and the zoom level.
          */
-        TextureTile* loadTile( int tilx, int tily, int tileLevel );
+        TextureTile* loadTile( TileId const &tileId );
 
         /**
          * Sets the texture layer @p the tiles shall be loaded for.

@@ -203,11 +203,9 @@ int TileLoader::globalHeight( int level ) const
                                 texture->levelZeroRows(), level );
 }
 
-TextureTile* TileLoader::loadTile( int tilx, int tily, int tileLevel )
+TextureTile* TileLoader::loadTile( TileId const &tileId )
 {
     if ( !d->m_layer ) return 0;
-
-    TileId tileId( tileLevel, tilx, tily );
 
     // check if the tile is in the hash
     TextureTile * tile = d->m_tilesOnDisplay.value( tileId, 0 );

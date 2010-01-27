@@ -12,6 +12,7 @@
 
 #include "MarbleDebug.h"
 #include "TextureTile.h"
+#include "TileId.h"
 #include "TileLoader.h"
 #include "TileLoaderHelper.h"
 #include "ViewParams.h"
@@ -531,7 +532,7 @@ void AbstractScanlineTextureMapper::nextTile( int &posX, int &posY )
     int tileCol = lon / m_tileLoader->tileWidth();
     int tileRow = lat / m_tileLoader->tileHeight();
 
-    m_tile = m_tileLoader->loadTile( tileCol, tileRow, m_tileLevel );
+    m_tile = m_tileLoader->loadTile( TileId( m_tileLevel, tileCol, tileRow ));
 
     // Update position variables:
     // m_tilePosX/Y stores the position of the tiles in 
@@ -566,7 +567,7 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
     int tileCol = lon / m_tileLoader->tileWidth();
     int tileRow = lat / m_tileLoader->tileHeight();
 
-    m_tile = m_tileLoader->loadTile( tileCol, tileRow, m_tileLevel );
+    m_tile = m_tileLoader->loadTile( TileId( m_tileLevel, tileCol, tileRow ));
 
     // Update position variables:
     // m_tilePosX/Y stores the position of the tiles in 
