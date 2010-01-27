@@ -77,14 +77,16 @@ void MarbleRunnerManager::newText(QString text)
              this,     SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
     llrunner->parse(text);
     
-    OnfRunner* onfrunner = new OnfRunner;
-    m_runners << dynamic_cast<MarbleAbstractRunner*>(onfrunner);
-    connect( onfrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
-             this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
-    onfrunner->parse(text);
+    if (m_celestialBodyId == "earth") {
+        OnfRunner* onfrunner = new OnfRunner;
+        m_runners << dynamic_cast<MarbleAbstractRunner*>(onfrunner);
+        connect( onfrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
+                 this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
+        onfrunner->parse(text);
+        onfrunner->start();
+    }
 
     llrunner->start();
-    onfrunner->start();
 }
 
 void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVector<GeoDataPlacemark> result )
@@ -102,6 +104,11 @@ void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVec
     m_model->addPlacemarks( start, result.size() );
     m_modelMutex.unlock();
     emit modelChanged( m_model );
+}
+
+void MarbleRunnerManager::setCelestialBodyId(const QString &celestialBodyId)
+{
+    m_celestialBodyId = celestialBodyId;
 }
 
 }

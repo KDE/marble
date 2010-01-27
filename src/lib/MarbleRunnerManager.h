@@ -41,6 +41,8 @@ public:
     explicit MarbleRunnerManager( QObject *parent = 0 );
     ~MarbleRunnerManager();
     
+    void setCelestialBodyId(const QString &celestialBodyId);
+
 public slots:
     void newText(QString text);
 signals:
@@ -56,6 +58,7 @@ private:
     QList<MarbleAbstractRunner*> m_runners;
     QVector<GeoDataPlacemark> m_placemarkContainer;
     QMutex m_modelMutex;
+    QString m_celestialBodyId;
 };
 
 }

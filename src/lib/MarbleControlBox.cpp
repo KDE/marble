@@ -575,6 +575,7 @@ void MarbleControlBox::selectTheme( const QString &theme )
         }
 
         QString selectedId = d->m_widget->mapTheme()->head()->target();
+        d->m_runnerManager->setCelestialBodyId( selectedId );
         
         QList<QStandardItem*> itemList = d->m_celestialList->findItems( selectedId, Qt::MatchExactly, 1 );
 
