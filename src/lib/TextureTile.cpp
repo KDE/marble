@@ -408,8 +408,8 @@ void TextureTile::initJumpTables()
     //    mDebug() << "Entered initJumpTables( bool ) of Tile" << d->m_id;
 
     if ( d->m_rawtile.isNull() ) {
-        mDebug() << "An essential tile is missing. Please rerun the application.";
-        exit(-1);
+        qWarning() << "An essential tile is missing. Please rerun the application.";
+        return;
     }
 
     switch ( d->m_depth ) {
@@ -424,9 +424,8 @@ void TextureTile::initJumpTables()
             d->jumpTable8 = jumpTableFromQImage8( d->m_rawtile );
             break;
         default:
-            mDebug() << QString("Color m_depth %1 of tile could not be retrieved. Exiting.").
-                arg( d->m_depth );
-            exit( -1 );
+            qWarning() << "Color depth" << d->m_depth << " is not supported.";
+            return;
     }
 
     d->m_isGrayscale = d->m_rawtile.isGrayscale();

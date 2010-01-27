@@ -137,17 +137,18 @@ void ViewParams::setMapThemeId( const QString& mapThemeId )
         // Check whether the previous theme works 
         if ( !d->m_mapTheme ){ 
             // Fall back to default theme
-            mDebug() << "Falling back to default theme";
-            mapTheme = MapThemeManager::loadMapTheme("earth/srtm/srtm.dgml");
+            QString defaultTheme = "earth/srtm/srtm.dgml";
+            qWarning() << "Falling back to default theme " << defaultTheme;
+            mapTheme = MapThemeManager::loadMapTheme(defaultTheme);
 
             // If this last resort doesn't work either shed a tear and exit
             if ( !mapTheme ) {
-                mDebug() << "Couldn't find a valid DGML map.";
-                exit(-1);
+                qWarning() << "Couldn't find a valid DGML map.";
+                return;
             }
         }
         else {
-            mDebug() << "Selected theme doesn't work, so we stick to the previous one";
+            qWarning() << "Selected theme doesn't work, so we stick to the previous one";
             return;
         }
     }

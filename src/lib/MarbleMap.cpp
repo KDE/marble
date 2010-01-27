@@ -964,18 +964,20 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     d->m_viewParams.setMapThemeId( mapThemeId );
     GeoSceneDocument *mapTheme = d->m_viewParams.mapTheme();
 
-    d->m_model->setMapTheme( mapTheme, d->m_viewParams.projection() );
-    
-    // We don't do this on every paintEvent to improve performance.
-    // Redrawing the atmosphere is only needed if the size of the
-    // globe changes.
-    d->doResize();
-    d->m_dirtyAtmosphere=true;
+    if (mapTheme) {
+        d->m_model->setMapTheme( mapTheme, d->m_viewParams.projection() );
 
-    centerSun();
+        // We don't do this on every paintEvent to improve performance.
+        // Redrawing the atmosphere is only needed if the size of the
+        // globe changes.
+        d->doResize();
+        d->m_dirtyAtmosphere=true;
 
-    // Update texture map during the repaint that follows:
-    setNeedsUpdate();
+        centerSun();
+
+        // Update texture map during the repaint that follows:
+        setNeedsUpdate();
+    }
 }
 
 void MarbleMap::setPropertyValue( const QString& name, bool value )
