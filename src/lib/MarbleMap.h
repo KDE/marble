@@ -276,13 +276,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     QPixmap mapScreenShot();
 
     /**
-     * @brief Reload the currently displayed map by reloading texture tiles
-     *        from the internet. In the future this should be extended to all
-     *        kinds of data which is used in the map.
-     */
-    void reload() const;
-
-    /**
      * @brief  Return the property value by name.
      * @return The property value (usually: visibility).
      */
@@ -804,6 +797,13 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     QFont defaultFont() const;
     void setDefaultFont( const QFont& font );
+    
+    /**
+     * @brief Reload the currently displayed map by reloading texture tiles
+     *        from the internet. In the future this should be extended to all
+     *        kinds of data which is used in the map.
+     */
+    void reload() const;
     
  Q_SIGNALS:
     /**

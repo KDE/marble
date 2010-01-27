@@ -16,6 +16,7 @@
 #include "AbstractDataPluginItem.h"
 #include "MarbleAboutDialog.h"
 #include "MarbleWidget.h"
+#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "GeoDataPlacemark.h"
 #include "PlacemarkInfoDialog.h"
@@ -67,6 +68,10 @@ void MarbleWidgetPopupMenu::createActions()
     m_setHomePointAction  = new QAction( tr( "&Set Home Location" ), this);
     m_rmbMenu->addAction( m_setHomePointAction );
     m_rmbMenu->addSeparator();
+    
+    QAction *reloadAction  = new QAction( tr( "Rel&oad Map" ), this);
+    m_rmbMenu->addAction( reloadAction );
+    m_rmbMenu->addSeparator();    
 
     m_aboutDialogAction = new QAction( tr( "&About" ), this );
     m_rmbMenu->addAction( m_aboutDialogAction );
@@ -83,6 +88,7 @@ void MarbleWidgetPopupMenu::createActions()
                                    SLOT( slotAboutDialog() ) );
     connect( m_copyCoordinateAction,SIGNAL( triggered() ),
                          SLOT( slotCopyCoordinates() ) );
+    connect( reloadAction, SIGNAL(triggered()), m_widget->map(), SLOT(reload()));
 }
 
 
