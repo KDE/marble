@@ -271,7 +271,7 @@ TextureTile::~TextureTile()
 {
 }
 
-void TextureTile::loadDataset( GeoSceneTexture *textureLayer, const TileId &id,
+void TextureTile::loadDataset( GeoSceneTexture *textureLayer,
                                QCache<TileId, TextureTile> *tileCache )
 {
     // mDebug() << "TextureTile::loadDataset" << level << x << y;
@@ -288,19 +288,20 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, const TileId &id,
 
     const int levelZeroColumns = textureLayer->levelZeroColumns();
     const int levelZeroRows = textureLayer->levelZeroRows();
-    const int rowsRequestedLevel = TileLoaderHelper::levelToRow( levelZeroRows, id.zoomLevel() );
+    const int rowsRequestedLevel = TileLoaderHelper::levelToRow( levelZeroRows,
+                                                                 d->m_id.zoomLevel() );
     const int columnsRequestedLevel = TileLoaderHelper::levelToColumn( levelZeroColumns,
-                                                                       id.zoomLevel() );
+                                                                       d->m_id.zoomLevel() );
     bool tileFound = false;
-    for ( int currentLevel = id.zoomLevel(); !tileFound && currentLevel > -1; --currentLevel ) {
+    for ( int currentLevel = d->m_id.zoomLevel(); !tileFound && currentLevel > -1; --currentLevel ) {
 
         const int rowsCurrentLevel = 
             TileLoaderHelper::levelToRow( levelZeroRows, currentLevel );
         const int columnsCurrentLevel =
             TileLoaderHelper::levelToColumn( levelZeroColumns, currentLevel );
 
-        qreal normalizedX = (qreal)( id.x() ) / (qreal)( rowsRequestedLevel );
-        qreal normalizedY = (qreal)( id.y() ) / (qreal)( columnsRequestedLevel );
+        qreal normalizedX = (qreal)( d->m_id.x() ) / (qreal)( rowsRequestedLevel );
+        qreal normalizedY = (qreal)( d->m_id.y() ) / (qreal)( columnsRequestedLevel );
         qreal currentX    = normalizedX * (qreal)( rowsCurrentLevel );
         qreal currentY    = normalizedY * (qreal)( columnsCurrentLevel );
 
@@ -371,9 +372,9 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer, const TileId &id,
             if ( !temptile.isNull() ) {
 
                 // Don't scale if the current tile isn't a fallback
-                if ( id.zoomLevel() != currentLevel ) { 
+                if ( d->m_id.zoomLevel() != currentLevel ) { 
                     d->scaleTileFrom( textureLayer, temptile, currentX, currentY, currentLevel,
-                                      id.x(), id.y(), id.zoomLevel() );
+                                      d->m_id.x(), d->m_id.y(), d->m_id.zoomLevel() );
                 }
                 else {
                     d->m_state = TileComplete;

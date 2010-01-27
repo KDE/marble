@@ -47,7 +47,7 @@ class TextureTile : public AbstractTile
     virtual ~TextureTile();
     
     // TODO: Move into DatasetProvider:
-    void loadDataset( GeoSceneTexture *textureLayer, const TileId &id,
+    void loadDataset( GeoSceneTexture *textureLayer,
                       QCache<TileId, TextureTile> *tileCache = 0 );
 
     int depth() const;

@@ -123,7 +123,7 @@ void TileLoader::setLayer( GeoSceneLayer * layer )
 
     GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
 
-    tile.loadDataset( texture, id );
+    tile.loadDataset( texture );
 
     // We assume that all tiles have the same size. TODO: check to be safe
     d->m_tileWidth  = tile.rawtile().width();
@@ -252,7 +252,7 @@ TextureTile* TileLoader::loadTile( TileId const &tileId )
     connect( tile, SIGNAL( tileUpdateDone() ),
              this, SIGNAL( tileUpdateAvailable() ) );
 
-    tile->loadDataset( texture, tileId, &d->m_tileCache );
+    tile->loadDataset( texture, &d->m_tileCache );
     tile->initJumpTables( false );
 
     // TODO should emit signal rather than directly calling paintTile
@@ -361,7 +361,7 @@ void TileLoader::reloadTile( const QString &idStr )
 //         emit paintTile( d->m_tilesOnDisplay[id], x, y, level, d->m_theme, true );
         GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
 
-        d->m_tilesOnDisplay[id]->loadDataset( texture, id, &d->m_tileCache );
+        d->m_tilesOnDisplay[id]->loadDataset( texture, &d->m_tileCache );
         m_parent->paintTile( d->m_tilesOnDisplay[id], texture, true );
 //         (d->m_tilesOnDisplay[id])->reloadTile( x, y, level, d->m_theme );
     } else {
