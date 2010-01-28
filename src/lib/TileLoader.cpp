@@ -249,9 +249,6 @@ TextureTile* TileLoader::loadTile( TileId const &tileId )
         connect( tile, SIGNAL( downloadTile( QUrl, QString, QString, DownloadUsage ) ),
                  d->m_downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage ) ) );
     }
-    connect( tile, SIGNAL( tileUpdateDone() ),
-             this, SIGNAL( tileUpdateAvailable() ) );
-
     tile->loadDataset( texture, &d->m_tileCache );
 
     // TODO should emit signal rather than directly calling paintTile
