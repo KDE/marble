@@ -55,7 +55,7 @@ void MarbleSearchListView::selectItem(const QString& text)
         scrollTo( resultlist[0] );
     }
     else
-        qDebug( "noitem!" );
+        mDebug() << "noitem!";
 }
 
 

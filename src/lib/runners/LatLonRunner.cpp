@@ -47,6 +47,7 @@ GeoDataFeature::GeoDataVisualCategory LatLonRunner::category() const
 
 LatLonRunner::~LatLonRunner()
 {
+    wait(50); // give the thread some time to shut down cleanly
 }
 
 void LatLonRunner::run()
