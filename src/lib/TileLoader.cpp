@@ -281,12 +281,12 @@ QList<TileId> TileLoader::tilesOnDisplay() const
     return result;
 }
 
-int TileLoader::maximumTileLevel( GeoSceneLayer * layer )
+int TileLoader::maximumTileLevel() const
 {
-    if ( !layer )
+    if ( !d->m_layer )
         return -1;
 
-    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( layer->groundDataset() );
+    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
     if ( !texture )
         return -1;
 
