@@ -29,6 +29,7 @@
 #include <QtCore/QString>
 #include <QtCore/QBuffer>
 #include <QtCore/QVector>
+#include <QtCore/QUrl>
 
 #include <QtNetwork/QHttp>
 
@@ -85,8 +86,11 @@ void OnfRunner::run()
     //make a new buffer
     delete m_buffer;
     m_buffer = new QBuffer;
-    mDebug() << "ONF search: GET /namefinder/search.xml?find=" << m_input;
-    m_http->get( "/namefinder/search.xml?find=" + m_input, m_buffer );
+    QString base = "/namefinder/search.xml?find=%1";
+    QString input = QUrl::toPercentEncoding(m_input);
+    QString request = base.arg(input);
+    mDebug() << "ONF search: GET " << request;
+    m_http->get( request, m_buffer );
 }
 
 void OnfRunner::slotRequestFinished( int id, bool error )
