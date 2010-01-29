@@ -147,10 +147,10 @@ class TileLoader : public QObject
         QList<TileId> tilesOnDisplay() const;
 
         /**
-         * Returns the highest level in which some tiles are available for the given @p
-         * texture layer.
+         * Returns the highest level in which some tiles are theoretically
+         * available for the given @p texture layer.
          */
-        static int maxPartialTileLevel( GeoSceneLayer * layer );
+        static int maximumTileLevel( GeoSceneLayer * layer );
 
         /**
          * Returns whether the mandatory most basic tile level is fully available for

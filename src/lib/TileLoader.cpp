@@ -281,18 +281,23 @@ QList<TileId> TileLoader::tilesOnDisplay() const
     return result;
 }
 
-int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
+int TileLoader::maximumTileLevel( GeoSceneLayer * layer )
 {
-    int maxtilelevel = -1;
-
-    if ( !layer ) return maxtilelevel;
+    if ( !layer )
+        return -1;
 
     GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( layer->groundDataset() );
+    if ( !texture )
+        return -1;
 
-    if ( !texture ) return maxtilelevel;
+    // if maximum tile level is configured in the DGML files,
+    // then use it, otherwise use old detection code.
+    if ( texture->maximumTileLevel() >= 0 )
+        return texture->maximumTileLevel();
 
+    int maximumTileLevel = -1;
     QString tilepath = MarbleDirs::path( TileLoaderHelper::themeStr( texture ) );
-//    mDebug() << "TileLoader::maxPartialTileLevel tilepath" << tilepath;
+    //    mDebug() << "TileLoader::maxPartialTileLevel tilepath" << tilepath;
     QStringList leveldirs = QDir( tilepath ).entryList( QDir::AllDirs | QDir::NoSymLinks
                                                         | QDir::NoDotAndDotDot );
 
@@ -302,16 +307,14 @@ int TileLoader::maxPartialTileLevel( GeoSceneLayer * layer )
     QStringList::const_iterator const end = leveldirs.constEnd();
     for (; it != end; ++it ) {
         int value = (*it).toInt( &ok, 10 );
-        if ( ok && value > maxtilelevel )
-            maxtilelevel = value;
+        if ( ok && value > maximumTileLevel )
+            maximumTileLevel = value;
     }
 
-//    mDebug() << "Detected maximum tile level that contains data: "
-//             << maxtilelevel;
-
-    return maxtilelevel;
+    //    mDebug() << "Detected maximum tile level that contains data: "
+    //             << maxtilelevel;
+    return maximumTileLevel + 1;
 }
-
 
 bool TileLoader::baseTilesAvailable( GeoSceneLayer * layer )
 {

@@ -37,6 +37,7 @@
                 <texture name="schagen1689_data"><!-- type="texture"-->
                     <sourcedir format="JPG"> earth/schagen1689 </sourcedir>
                     <installmap> schagen1689.jpg </installmap>
+                    <storageLayout maximumTileLevel="2"/>
                 </texture>
             </layer>
 

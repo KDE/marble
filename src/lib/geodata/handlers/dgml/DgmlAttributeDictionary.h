@@ -46,6 +46,7 @@ namespace dgml
     extern const char* dgmlAttr_levelZeroColumns;
     extern const char* dgmlAttr_levelZeroRows;
     extern const char* dgmlAttr_maximumConnections;
+    extern const char* dgmlAttr_maximumTileLevel;
     extern const char* dgmlAttr_mode;
     extern const char* dgmlAttr_name;
     extern const char* dgmlAttr_password;

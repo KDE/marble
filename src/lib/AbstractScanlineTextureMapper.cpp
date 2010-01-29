@@ -592,7 +592,7 @@ void AbstractScanlineTextureMapper::notifyMapChanged()
 
 void AbstractScanlineTextureMapper::detectMaxTileLevel()
 {
-    m_maxTileLevel = TileLoader::maxPartialTileLevel( m_tileLoader->layer() ) + 1 ;
+    m_maxTileLevel = TileLoader::maximumTileLevel( m_tileLoader->layer() );
 //    mDebug() << "MaxTileLevel: " << m_maxTileLevel;
 }
 

@@ -36,6 +36,7 @@ GeoSceneTexture::GeoSceneTexture( const QString& name )
       m_customStorageLayout( "" ),
       m_levelZeroColumns( defaultLevelZeroColumns ),
       m_levelZeroRows( defaultLevelZeroRows ),
+      m_maximumTileLevel( -1 ),
       m_projection( Equirectangular ),
       m_downloadUrls(),
       m_nextUrl( m_downloadUrls.constEnd() )
@@ -105,6 +106,16 @@ int GeoSceneTexture::levelZeroRows() const
 void GeoSceneTexture::setLevelZeroRows( const int rows )
 {
     m_levelZeroRows = rows;
+}
+
+int GeoSceneTexture::maximumTileLevel() const
+{
+    return m_maximumTileLevel;
+}
+
+void GeoSceneTexture::setMaximumTileLevel( const int maximumTileLevel )
+{
+    m_maximumTileLevel = maximumTileLevel;
 }
 
 GeoSceneTexture::Projection GeoSceneTexture::projection() const

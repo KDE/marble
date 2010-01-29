@@ -37,6 +37,7 @@
                 <texture name="temp-dec_data"><!-- type="texture"-->
                     <sourcedir format="JPG"> earth/temp-dec </sourcedir>
                     <installmap> temp-dec.jpg </installmap>
+                    <storageLayout maximumTileLevel="1"/>
                 </texture>
             </layer>
             

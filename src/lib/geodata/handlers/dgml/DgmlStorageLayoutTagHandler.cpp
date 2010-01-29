@@ -53,6 +53,13 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
         levelZeroRows = levelZeroRowsStr.toInt();
     }
 
+    // Attribute maximumTileLevel
+    int maximumTileLevel = -1;
+    const QString maximumTileLevelStr = parser.attribute( dgmlAttr_maximumTileLevel ).trimmed();
+    if ( !maximumTileLevelStr.isEmpty() ) {
+        maximumTileLevel = maximumTileLevelStr.toInt();
+    }
+
     // Attribute mode
     GeoSceneTexture::StorageLayoutMode mode = GeoSceneTexture::Marble;
     const QString modeStr = parser.attribute(dgmlAttr_mode).trimmed();
@@ -72,6 +79,7 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(dgmlTag_Texture)) {
         parentItem.nodeAs<GeoSceneTexture>()->setLevelZeroColumns( levelZeroColumns );
         parentItem.nodeAs<GeoSceneTexture>()->setLevelZeroRows( levelZeroRows );
+        parentItem.nodeAs<GeoSceneTexture>()->setMaximumTileLevel( maximumTileLevel );
         parentItem.nodeAs<GeoSceneTexture>()->setStorageLayoutMode( mode );
 	if ( mode == GeoSceneTexture::Custom )
             parentItem.nodeAs<GeoSceneTexture>()->setCustomStorageLayout( customLayout );

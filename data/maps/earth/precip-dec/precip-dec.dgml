@@ -37,6 +37,7 @@
                 <texture name="precip-dec_data"><!-- type="texture"-->
                     <sourcedir format="JPG"> earth/precip-dec </sourcedir>
                     <installmap> precip-dec.jpg </installmap>
+                    <storageLayout maximumTileLevel="1"/>
                 </texture>
             </layer>
             

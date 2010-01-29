@@ -37,6 +37,7 @@
                 <texture name="temp-july_data"><!-- type="texture"-->
                     <sourcedir format="JPG"> earth/temp-july </sourcedir>
                     <installmap> temp-july.jpg </installmap>
+                    <storageLayout maximumTileLevel="1"/>
                 </texture>
             </layer>
             

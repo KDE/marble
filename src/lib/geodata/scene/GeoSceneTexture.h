@@ -66,6 +66,9 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     int levelZeroRows() const;
     void setLevelZeroRows( const int );
 
+    int maximumTileLevel() const;
+    void setMaximumTileLevel( const int );
+
     Projection projection() const;
     void setProjection( const Projection );
 
@@ -90,6 +93,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     QString m_customStorageLayout;
     int m_levelZeroColumns;
     int m_levelZeroRows;
+    int m_maximumTileLevel;
     Projection m_projection;
 
     /// List of Urls which are used in a round robin fashion

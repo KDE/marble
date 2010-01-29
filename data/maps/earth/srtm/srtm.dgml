@@ -39,6 +39,7 @@
                 <texture name="srtm_data"><!-- type="texture"-->
                     <sourcedir format="JPG"> earth/srtm </sourcedir>
                     <installmap> srtm.jpg </installmap>
+                    <storageLayout maximumTileLevel="5"/>
                 </texture>
             </layer>
             

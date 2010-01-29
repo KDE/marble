@@ -44,6 +44,7 @@ const char* dgmlAttr_labelColor       = "labelColor";
 const char* dgmlAttr_levelZeroColumns = "levelZeroColumns";
 const char* dgmlAttr_levelZeroRows    = "levelZeroRows";
 const char* dgmlAttr_maximumConnections = "maximumConnections";
+const char* dgmlAttr_maximumTileLevel = "maximumTileLevel";
 const char* dgmlAttr_mode             = "mode";
 const char* dgmlAttr_name             = "name";
 const char* dgmlAttr_password         = "password";
