@@ -165,10 +165,7 @@ class TileLoader : public QObject
          */
         void setVolatileCacheLimit( quint64 kiloBytes );
 
-        /**
-         * Reloads the tile with the given @p id.
-         */
-        void reloadTile( const QString &relativeUrlString, const QString &id );
+        void updateTile( const QByteArray &data, const QString &id );
 
         /**
          * Effectively triggers a reload of all tiles that are currently in use
@@ -188,11 +185,6 @@ class TileLoader : public QObject
                        bool requestTileUpdate);
 
     private:
-        /**
-         * @brief Helper method for the slots reloadTile.
-         */
-        void reloadTile( const QString &idStr );
-
         Q_DISABLE_COPY( TileLoader )
 
         TileLoaderPrivate* const d;

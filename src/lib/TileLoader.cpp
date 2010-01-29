@@ -100,8 +100,8 @@ void TileLoader::setDownloadManager( HttpDownloadManager *downloadManager )
 
     d->m_downloadManager = downloadManager;
     if ( d->m_downloadManager != 0 ) {
-        connect( d->m_downloadManager, SIGNAL( downloadComplete( QString, QString ) ),
-                 this,              SLOT( reloadTile( QString, QString ) ) );
+        connect( d->m_downloadManager, SIGNAL( downloadComplete( QByteArray, QString )),
+                 SLOT( updateTile( QByteArray, QString )));
     }
 }
 
@@ -347,36 +347,22 @@ void TileLoader::setVolatileCacheLimit( quint64 kiloBytes )
     d->m_tileCache.setMaxCost( kiloBytes * 1024 );
 }
 
-void TileLoader::reloadTile( const QString &idStr )
+void TileLoader::updateTile( const QByteArray &data, const QString &idStr )
 {
-    if ( !d->m_layer ) return;
+    if ( !d->m_layer )
+        return;
 
-//    mDebug() << "TileLoader::reloadTile:" << idStr;
- 
     const TileId id = TileId::fromString( idStr );
-    if ( d->m_tilesOnDisplay.contains( id ) ) {
-
-        // TODO should emit signal rather than directly calling paintTile
-//         emit paintTile( d->m_tilesOnDisplay[id], x, y, level, d->m_theme, true );
-        GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
-
-        d->m_tilesOnDisplay[id]->loadDataset( texture, &d->m_tileCache );
-        m_parent->paintTile( d->m_tilesOnDisplay[id], texture );
+    QHash<TileId, TextureTile*>::iterator pos = d->m_tilesOnDisplay.find( id );
+    if ( pos != d->m_tilesOnDisplay.end()) {
+        pos.value()->setImage( data );
+        GeoSceneTexture * const texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
+        m_parent->paintTile( pos.value(), texture );
         emit tileUpdateAvailable();
-//         (d->m_tilesOnDisplay[id])->reloadTile( x, y, level, d->m_theme );
     } else {
         // Remove "false" tile from cache so it doesn't get loaded anymore
         d->m_tileCache.remove( id );
-        mDebug() << "No such ID:" << idStr;
     }
-}
-
-void TileLoader::reloadTile( const QString &relativeUrlString, const QString &id )
-{
-    Q_UNUSED( relativeUrlString );
-    // mDebug() << "Reloading Tile" << relativeUrlString << "id:" << id;
-
-    reloadTile( id );
 }
 
 void TileLoader::update()

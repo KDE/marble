@@ -271,6 +271,15 @@ TextureTile::~TextureTile()
 {
 }
 
+void TextureTile::setImage( const QByteArray & data )
+{
+    d->m_rawtile = QImage::fromData( data );
+    d->m_depth = d->m_rawtile.depth();
+    d->m_isGrayscale = d->m_rawtile.isGrayscale();
+    d->m_created = QDateTime::currentDateTime();
+    initJumpTables();
+}
+
 void TextureTile::loadDataset( GeoSceneTexture *textureLayer,
                                QCache<TileId, TextureTile> *tileCache )
 {

@@ -41,11 +41,11 @@ class TextureTile : public AbstractTile
     Q_OBJECT
 
  public:
-
     explicit TextureTile( TileId const& tid, QObject * parent = 0 );
-
     virtual ~TextureTile();
-    
+
+    void setImage( const QByteArray & data );
+
     // TODO: Move into DatasetProvider:
     void loadDataset( GeoSceneTexture *textureLayer,
                       QCache<TileId, TextureTile> *tileCache = 0 );
