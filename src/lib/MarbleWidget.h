@@ -1030,7 +1030,7 @@ private Q_SLOTS:
     void updateAnimation(const GeoDataLookAt &lookat);
 
  private:
-    Q_DISABLE_COPY( MarbleWidget );
+    Q_DISABLE_COPY( MarbleWidget )
     MarbleWidgetPrivate  * const d;
 };
 
