@@ -312,10 +312,9 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer,
         bool currentTileAvailable = false;
 
         // Check whether the current tile id is available in the CACHE:
+        const TileId currentTileId( currentLevel, (int)(currentX), (int)(currentY) );
         if ( tileCache ) {
-            TileId currentTileId( currentLevel, (int)(currentX), (int)(currentY) );
             TextureTile *currentTile = tileCache->take( currentTileId );
-
             if ( currentTile ) {
                 // the tile was in the cache, but is it up to date?
                 lastModified = currentTile->created();
@@ -396,7 +395,7 @@ void TextureTile::loadDataset( GeoSceneTexture *textureLayer,
                 TileLoaderHelper::relativeTileFileName( textureLayer, currentLevel,
                                                         currentX, currentY );
 //            mDebug() << "emit downloadTile(" << sourceUrl << destFileName << ");";
-            emit downloadTile( sourceUrl, destFileName, d->m_id.toString(), DownloadBrowse );
+            emit downloadTile( sourceUrl, destFileName, currentTileId.toString(), DownloadBrowse );
         }
     }
 
