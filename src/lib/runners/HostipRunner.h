@@ -35,7 +35,7 @@ class HostipRunner : public MarbleAbstractRunner
 {
     Q_OBJECT
 public:
-    HostipRunner(QObject *parent = 0);
+    explicit HostipRunner(QObject *parent = 0);
 
     ~HostipRunner();
 
