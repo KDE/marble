@@ -35,7 +35,7 @@ class OnfRunner : public MarbleAbstractRunner
 {
     Q_OBJECT
 public:
-    OnfRunner(QObject *parent = 0);
+    explicit OnfRunner(QObject *parent = 0);
     ~OnfRunner();
     GeoDataFeature::GeoDataVisualCategory category() const;
     void run();
