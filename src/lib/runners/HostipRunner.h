@@ -24,9 +24,9 @@
 #include "MarbleAbstractRunner.h"
 
 #include <QtCore/QString>
-#include <QtCore/QBuffer>
-#include <QtNetwork/QHttp>
 #include <QtNetwork/QHostInfo>
+
+class QNetworkReply;
 
 namespace Marble
 {
@@ -47,17 +47,15 @@ public:
     
 private Q_SLOTS:
     // Http request with hostip.info done
-    void slotRequestFinished( int id, bool error );
+    void slotRequestFinished( QNetworkReply* );
 
     // IP address lookup finished
     void slotLookupFinished(const QHostInfo &host);
 
-private:
-    // Emit empty result list
-    void returnNoResults();
+    // No results (or an error)
+    void slotNoResults();
 
-    QHttp m_http;
-    QBuffer m_buffer;
+private:
     QHostInfo m_hostInfo;
 };
 

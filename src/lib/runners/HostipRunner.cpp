@@ -27,19 +27,21 @@
 
 #include <QtCore/QString>
 #include <QtCore/QVector>
+#include <QtCore/QUrl>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
 
 namespace Marble
 {
 
 HostipRunner::HostipRunner( QObject *parent ) :
-        MarbleAbstractRunner( parent ), m_http("api.hostip.info")
+        MarbleAbstractRunner( parent )
 {
     // nothing to do
 }
 
 HostipRunner::~HostipRunner()
 {
-    m_http.abort();
     quit();
 
     if (!wait(5000)) {
@@ -52,7 +54,7 @@ GeoDataFeature::GeoDataVisualCategory HostipRunner::category() const
     return GeoDataFeature::Coordinate;
 }
 
-void HostipRunner::returnNoResults()
+void HostipRunner::slotNoResults()
 {
     emit runnerFinished( this, QVector<GeoDataPlacemark>() );
 }
@@ -62,7 +64,7 @@ void HostipRunner::run()
     if( !m_input.contains('.') ) {
         // Simple IP/hostname heuristic to avoid requests not needed:
         // String must contain at least one dot.
-        returnNoResults();
+        slotNoResults();
     }
     else {
         // Lookup the IP address for a hostname, or the hostname if an IP address was given
@@ -77,28 +79,23 @@ void HostipRunner::slotLookupFinished(const QHostInfo &info)
     if (!info.addresses().isEmpty()) {
         m_hostInfo = info;
         QString hostAddress = info.addresses().first().toString();
-        QString query = QString("/get_html.php?ip=%1&position=true").arg(hostAddress);
+        QString query = QString("http://api.hostip.info/get_html.php?ip=%1&position=true").arg(hostAddress);
 
-        connect( &m_http, SIGNAL( requestFinished( int, bool ) ),
-                 this, SLOT( slotRequestFinished( int, bool ) ) );
-        m_http.get( query, &m_buffer );
+        QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+        connect(manager, SIGNAL(finished(QNetworkReply*)),
+                this, SLOT(slotRequestFinished(QNetworkReply*)));
+        QNetworkReply *reply = manager->get(QNetworkRequest(QUrl(query)));
+        connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
+                this, SLOT(slotNoResults()));
     }
     else
-      returnNoResults();
+      slotNoResults();
 }
 
-void HostipRunner::slotRequestFinished( int id, bool error )
+void HostipRunner::slotRequestFinished( QNetworkReply* reply )
 {
-    if ( error ) {
-        mDebug() << "Hostip request" << id << "failed:" << m_http.error()
-                 << m_http.errorString();
-        returnNoResults();
-        return;
-    }
-        
-    QByteArray array = m_buffer.data();
     double lon(0.0), lat(0.0);
-    foreach (const QString &line, QString(array).split('\n')) {
+    for (QString line = reply->readLine(); !line.isEmpty(); line = reply->readLine()) {
         QString lonInd = "Longitude: ";
         if (line.startsWith(lonInd)) {
             lon = line.mid(lonInd.length()).toDouble();
