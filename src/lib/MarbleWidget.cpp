@@ -788,8 +788,13 @@ void MarbleWidget::paintEvent(QPaintEvent *evt)
     QImage image;
     if (!isEnabled())
     {
+        // If the globe covers fully the screen then we can use the faster
+        // RGB32 as there are no translucent areas involved.
+        QImage::Format imageFormat = ( map()->mapCoversViewport() )
+                                     ? QImage::Format_RGB32
+                                     : QImage::Format_ARGB32_Premultiplied;
         // Paint to an intermediate image
-        image = QImage(rect().size(), QImage::Format_ARGB32_Premultiplied);
+        image = QImage(rect().size(), imageFormat);
         paintDevice = &image;
     }
 

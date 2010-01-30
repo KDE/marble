@@ -131,15 +131,22 @@ void MarbleMapPrivate::doResize()
 {
     QSize size(m_parent->width(), m_parent->height());
     m_viewParams.viewport()->setSize( size );
+
+    // If the globe covers fully the screen then we can use the faster
+    // RGB32 as there are no translucent areas involved.
+    QImage::Format imageFormat = ( m_parent->mapCoversViewport() )
+                                 ? QImage::Format_RGB32
+                                 : QImage::Format_ARGB32_Premultiplied;
+
     // Recreate the canvas image with the new size.
     m_viewParams.setCanvasImage( new QImage( m_parent->width(), m_parent->height(),
-                                             QImage::Format_RGB32 ));
+                                             imageFormat ));
 
     if ( m_viewParams.showAtmosphere() ) {
         m_dirtyAtmosphere=true;
     }
 
-    // Recreate the 
+    // Recreate the coastline detection offscreen image
     m_viewParams.setCoastImage( new QImage( m_parent->width(), m_parent->height(),
                                             QImage::Format_RGB32 ));
 
