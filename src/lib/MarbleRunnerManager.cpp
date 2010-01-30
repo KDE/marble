@@ -27,6 +27,7 @@
 
 #include "LatLonRunner.h"
 #include "OnfRunner.h"
+#include "HostipRunner.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -72,18 +73,25 @@ void MarbleRunnerManager::newText(QString text)
     emit modelChanged( m_model );
 
     LatLonRunner* llrunner = new LatLonRunner;
-    m_runners << dynamic_cast<MarbleAbstractRunner*>(llrunner);
+    m_runners << llrunner;
     connect( llrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
              this,     SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
     llrunner->parse(text);
     
     if (m_celestialBodyId == "earth") {
         OnfRunner* onfrunner = new OnfRunner;
-        m_runners << dynamic_cast<MarbleAbstractRunner*>(onfrunner);
+        m_runners << onfrunner;
         connect( onfrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
                  this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
         onfrunner->parse(text);
         onfrunner->start();
+
+        HostipRunner* iprunner = new HostipRunner;
+        m_runners << iprunner;
+        connect( iprunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
+                 this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
+        iprunner->parse(text);
+        iprunner->start();
     }
 
     llrunner->start();
