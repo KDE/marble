@@ -30,23 +30,25 @@ void Route::draw( ClipPainter *painter, const QSize &canvasSize,
     //record the positions of the points
     QPoint firstPos;
     QPoint secondPos;
-    const_iterator it;
+    iterator it;
 
     // Initialise first to the beginning of the vector.
     first = *(begin());
 
-    for ( it = constBegin(); it < constEnd(); ++it){
-        first->getPixelPos( canvasSize, viewParams,
+    for ( it = begin(); it < end(); ++it){
+        bool valid = first->getPixelPos( canvasSize, viewParams,
                             &firstPos );
 
-        (*it)->getPixelPos( canvasSize, viewParams , 
+        valid = valid && (*it)->getPixelPos( canvasSize, viewParams ,
                             &secondPos );
 
-        if ( distance( firstPos, secondPos ) > 25 ) {
+        if ( valid && distance( firstPos, secondPos ) > 25 ) {
             first->draw( painter, firstPos );
             (*it)->draw( painter, secondPos );
             painter->drawLine( firstPos, secondPos );
         }
+
+        first = *it;
     }
 }
 
