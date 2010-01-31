@@ -1071,7 +1071,7 @@ void MarbleWidget::updateGps()
     }
 }
 
-void MarbleWidget::openGpxFile(QString &filename)
+void MarbleWidget::openGpxFile(const QString &filename)
 {
     d->m_map->openGpxFile(filename);
 }

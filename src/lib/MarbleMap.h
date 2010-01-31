@@ -759,7 +759,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     /**
      * @brief Opens a gpx file for viewing on the Marble Map
      */
-    void openGpxFile( QString &filename );
+    void openGpxFile( const QString &filename );
 
     /**
      * @brief Return a QAbstractItemModel containing GPX files.

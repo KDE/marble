@@ -1152,7 +1152,7 @@ void MarbleMap::updateGps()
 #endif
 }
 
-void MarbleMap::openGpxFile(QString &filename)
+void MarbleMap::openGpxFile(const QString &filename)
 {
     d->m_model->openGpxFile( filename );
 }
