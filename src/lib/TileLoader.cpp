@@ -100,8 +100,8 @@ void TileLoader::setDownloadManager( HttpDownloadManager *downloadManager )
 
     d->m_downloadManager = downloadManager;
     if ( d->m_downloadManager != 0 ) {
-        connect( d->m_downloadManager, SIGNAL( downloadComplete( QByteArray, QString )),
-                 SLOT( updateTile( QByteArray, QString )));
+        connect( d->m_downloadManager, SIGNAL( downloadComplete( QString, QString )),
+                 SLOT( updateTile( QString, QString )));
     }
 }
 
@@ -358,6 +358,23 @@ void TileLoader::updateTile( const QByteArray &data, const QString &idStr )
         pos.value()->setImage( data );
         GeoSceneTexture * const texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
         m_parent->paintTile( pos.value(), texture );
+        emit tileUpdateAvailable();
+    } else {
+        // Remove "false" tile from cache so it doesn't get loaded anymore
+        d->m_tileCache.remove( id );
+    }
+}
+
+void TileLoader::updateTile( const QString &fileName, const QString &idStr )
+{
+    if ( !d->m_layer )
+        return;
+
+    const TileId id = TileId::fromString( idStr );
+    if ( d->m_tilesOnDisplay.contains( id ) ) {
+        GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( d->m_layer->groundDataset() );
+        d->m_tilesOnDisplay[id]->loadDataset( texture, &d->m_tileCache );
+        m_parent->paintTile( d->m_tilesOnDisplay[id], texture );
         emit tileUpdateAvailable();
     } else {
         // Remove "false" tile from cache so it doesn't get loaded anymore
