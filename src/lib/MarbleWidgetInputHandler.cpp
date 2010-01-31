@@ -461,7 +461,8 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( e->type() == QEvent::MouseButtonPress
                  && event->button() == Qt::LeftButton ) {
 
-                d->m_lmbTimer.start(400);
+                if (isMouseButtonPopupEnabled(Qt::LeftButton))
+                    d->m_lmbTimer.start(400);
 
                 d->m_leftpressed = true;
                 d->m_midpressed = false;
