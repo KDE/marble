@@ -278,6 +278,7 @@ void TextureTile::setImage( const QByteArray & data )
     d->m_isGrayscale = d->m_rawtile.isGrayscale();
     d->m_created = QDateTime::currentDateTime();
     initJumpTables();
+    d->m_state = TileComplete;
 }
 
 void TextureTile::loadDataset( GeoSceneTexture *textureLayer,
