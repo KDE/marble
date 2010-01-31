@@ -84,7 +84,7 @@ const QDateTime & AbstractTile::created() const
     return d->m_created;
 }
 
-void AbstractTile::setCreated( QDateTime created )
+void AbstractTile::setCreated( const QDateTime &created )
 {
     Q_D( AbstractTile );
     d->m_created = created;

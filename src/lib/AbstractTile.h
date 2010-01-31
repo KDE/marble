@@ -59,7 +59,7 @@ class AbstractTile : public QObject
     void setState( TileState state );
 
     const QDateTime & created() const;
-    void setCreated( QDateTime created );
+    void setCreated( const QDateTime &created );
 
 protected:
     AbstractTilePrivate * const d_ptr;
