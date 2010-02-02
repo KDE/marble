@@ -39,8 +39,12 @@ WikipediaPlugin::WikipediaPlugin()
     // Plugin is not visible by default
     setVisible( false );
     
-    configDialog();
-    readSettings();
+    connect( this, SIGNAL( settingsChanged( QString ) ),
+             this, SLOT( updateSettings() ) );
+    connect( this, SIGNAL( changedNumberOfItems( quint32 ) ),
+             this, SLOT( checkNumberOfItems( quint32 ) ) );
+     
+    setSettings( QHash<QString,QVariant>() );
 }
 
 WikipediaPlugin::~WikipediaPlugin()
@@ -54,7 +58,7 @@ void WikipediaPlugin::initialize()
     WikipediaModel *model = new WikipediaModel( pluginManager(), this );
     // Ensure that all settings get forwarded to the model.
     setModel( model );
-    updateItemSettings();
+    updateSettings();
     m_isInitialized = true;
 }
 
@@ -112,6 +116,7 @@ QDialog *WikipediaPlugin::configDialog() const
         // Initializing configuration dialog
         m_configDialog = new QDialog();
         ui_configWidget.setupUi( m_configDialog );
+        readSettings();
         ui_configWidget.m_itemNumberSpinBox->setRange( 0, maximumNumberOfItems );
         connect( ui_configWidget.m_buttonBox, SIGNAL( accepted() ),
                                             SLOT( writeSettings() ) );
@@ -120,10 +125,6 @@ QDialog *WikipediaPlugin::configDialog() const
         QPushButton *applyButton = ui_configWidget.m_buttonBox->button( QDialogButtonBox::Apply );
         connect( applyButton, SIGNAL( clicked() ),
                 this,        SLOT( writeSettings() ) );
-        connect( this, SIGNAL( changedNumberOfItems( quint32 ) ),
-                this, SLOT( setDialogNumberOfItems( quint32 ) ) );
-        connect( this, SIGNAL( settingsChanged( QString ) ),
-                this, SLOT( updateItemSettings() ) );
     }
     return m_configDialog;
 }
@@ -135,36 +136,36 @@ QHash<QString,QVariant> WikipediaPlugin::settings() const
 
 void WikipediaPlugin::setSettings( QHash<QString,QVariant> settings )
 {
+    if ( !settings.contains( "numberOfItems" ) ) {
+        settings.insert( "numberOfItems", 15 );
+    }
+    else if ( settings.value( "numberOfItems" ).toUInt() > maximumNumberOfItems ) {
+        settings.insert( "numberOfItems", maximumNumberOfItems );
+    }
+    
+    if ( !settings.contains( "showThumbnails" ) ) {
+        settings.insert( "showThumbnails", true );
+    }
+    
     m_settings = settings;
     readSettings();
+    emit settingsChanged( nameId() );
 }
 
-void WikipediaPlugin::setShowThumbnails( bool shown )
-{
-    if ( shown ) {
+void WikipediaPlugin::readSettings() const
+{    
+    if ( !m_configDialog )
+        return;
+    
+    ui_configWidget.m_itemNumberSpinBox
+        ->setValue( (int) m_settings.value( "numberOfItems" ).toInt() );
+    
+    if ( m_settings.value( "showThumbnails" ).toBool() ) {
         ui_configWidget.m_showThumbnailCheckBox->setCheckState( Qt::Checked );
     }
     else {
         ui_configWidget.m_showThumbnailCheckBox->setCheckState( Qt::Unchecked );
     }
-
-    WikipediaModel *wikipediaModel = qobject_cast<WikipediaModel*>( model() );
-
-    m_settings.insert( "showThumbnails", shown );
-    if ( wikipediaModel ) {
-        wikipediaModel->setShowThumbnail( shown );
-    }
-}
-
-void WikipediaPlugin::readSettings()
-{
-    setNumberOfItems( m_settings.value( "numberOfItems", 15 ).toUInt() );
-    setDialogNumberOfItems( numberOfItems() );
-    if ( !m_settings.contains( "showThumbnails" ) ) {
-        m_settings.insert( "showThumbnails", true );
-    }
-
-    setShowThumbnails( m_settings.value( "showThumbnails" ).toBool() );
 }
 
 void WikipediaPlugin::writeSettings()
@@ -172,34 +173,39 @@ void WikipediaPlugin::writeSettings()
     setNumberOfItems( ui_configWidget.m_itemNumberSpinBox->value() );
     m_settings.insert( "numberOfItems", ui_configWidget.m_itemNumberSpinBox->value() );
     if ( ui_configWidget.m_showThumbnailCheckBox->checkState() == Qt::Checked ) {
-        setShowThumbnails( true );
         m_settings.insert( "showThumbnails", true );
     }
     else {
-        setShowThumbnails( false );
         m_settings.insert( "showThumbnails", false );
     }
 
     emit settingsChanged( nameId() );
 }
 
-void WikipediaPlugin::setDialogNumberOfItems( quint32 number )
+void WikipediaPlugin::updateSettings()
 {
-    if ( number <= maximumNumberOfItems ) {
-        ui_configWidget.m_itemNumberSpinBox->setValue( (int) number );
-    }
-    else {
-        // Force a the number of items being lower or equal maximumNumberOfItems
-        setNumberOfItems( maximumNumberOfItems );
-    }
-}
-
-void WikipediaPlugin::updateItemSettings()
-{
+    setNumberOfItems( m_settings.value( "numberOfItems" ).toUInt() );
+    
     AbstractDataPluginModel *abstractModel = model();
     if( abstractModel != 0 ) {
         abstractModel->setItemSettings( m_settings );
     }
+    
+    WikipediaModel *wikipediaModel = qobject_cast<WikipediaModel*>( model() );
+    if ( wikipediaModel ) {
+        wikipediaModel->setShowThumbnail( m_settings.value( "showThumbnails" ).toBool() );
+    }
+}
+
+void WikipediaPlugin::checkNumberOfItems( quint32 number ) {
+    if( number > maximumNumberOfItems ) {
+        setNumberOfItems( maximumNumberOfItems );
+    }
+    else {
+        m_settings.insert( "numberOfItems", number );
+    }
+    
+    readSettings();
 }
 
 Q_EXPORT_PLUGIN2(WikipediaPlugin, Marble::WikipediaPlugin)

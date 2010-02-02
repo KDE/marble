@@ -50,8 +50,6 @@ class WikipediaPlugin : public AbstractDataPlugin
 
     QDialog *configDialog() const;
 
-    void setShowThumbnails( bool shown );
-
     /**
      * @return: The settings of the item.
      */
@@ -63,12 +61,11 @@ class WikipediaPlugin : public AbstractDataPlugin
     virtual void setSettings( QHash<QString,QVariant> settings );
 
  private Q_SLOTS:
-    void readSettings();
+    void readSettings() const;
     void writeSettings();
 
-    void setDialogNumberOfItems( quint32 number );
-
-    void updateItemSettings();
+    void updateSettings();
+    void checkNumberOfItems( quint32 number );
 
  private:
     bool m_isInitialized;
