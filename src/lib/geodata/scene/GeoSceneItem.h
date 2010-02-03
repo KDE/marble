@@ -55,7 +55,8 @@ class GeoSceneItem : public GeoNode
     int  spacing() const;
     void setSpacing( int spacing );
 
-    GeoSceneIcon* icon() const;
+    const GeoSceneIcon* icon() const;
+    GeoSceneIcon* icon();
 
  private:
     Q_DISABLE_COPY( GeoSceneItem )

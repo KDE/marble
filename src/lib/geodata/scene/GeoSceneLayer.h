@@ -77,8 +77,11 @@ class GEODATA_EXPORT GeoSceneLayer : public GeoNode
      */
     void addDataset( GeoSceneAbstractDataset* );
 
+    const GeoSceneAbstractDataset * dataset( const QString& ) const;
     GeoSceneAbstractDataset * dataset( const QString& );
-    GeoSceneAbstractDataset * groundDataset() const;
+
+    const GeoSceneAbstractDataset * groundDataset() const;
+    GeoSceneAbstractDataset * groundDataset();
 
     QVector<GeoSceneAbstractDataset*> datasets() const;
 
@@ -96,6 +99,7 @@ class GEODATA_EXPORT GeoSceneLayer : public GeoNode
     QString role() const;
     void setRole( const QString& type );
 
+    const GeoSceneFilter * filter() const;
     GeoSceneFilter * filter();
     void addFilter( GeoSceneFilter * filter );
     void removeFilter( GeoSceneFilter * filter );

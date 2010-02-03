@@ -96,6 +96,21 @@ void GeoSceneLayer::addDataset( GeoSceneAbstractDataset* dataset )
     }
 }
 
+const GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name ) const
+{
+    GeoSceneAbstractDataset* dataset = 0;
+
+    QVector<GeoSceneAbstractDataset*>::const_iterator it = m_datasets.constBegin();
+    QVector<GeoSceneAbstractDataset*>::const_iterator end = m_datasets.constEnd();
+    for (; it != end; ++it) {
+        if ( (*it)->name() == name ) {
+            dataset = *it;
+            break;
+        }
+    }
+    return dataset;
+}
+
 GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name )
 {
     GeoSceneAbstractDataset* dataset = 0;
@@ -108,14 +123,18 @@ GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name )
             break;
         }
     }
-
-//    dataset = new GeoSceneAbstractDataset( name );
-//    addDataset( dataset );
-
     return dataset;
 }
 
-GeoSceneAbstractDataset * GeoSceneLayer::groundDataset() const
+const GeoSceneAbstractDataset * GeoSceneLayer::groundDataset() const
+{
+    if ( m_datasets.isEmpty() )
+        return 0;
+
+    return m_datasets.first();
+}
+
+GeoSceneAbstractDataset * GeoSceneLayer::groundDataset()
 {
     if ( m_datasets.isEmpty() )
         return 0;
@@ -161,6 +180,11 @@ QString GeoSceneLayer::role() const
 void GeoSceneLayer::setRole( const QString& role )
 {
     m_role = role;
+}
+
+const GeoSceneFilter* GeoSceneLayer::filter() const
+{
+    return m_filter;
 }
 
 GeoSceneFilter* GeoSceneLayer::filter()

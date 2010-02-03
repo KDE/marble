@@ -45,23 +45,26 @@ class GEODATA_EXPORT GeoSceneHead : public GeoNode
     ~GeoSceneHead();
 
 
-    const QString name() const;
+    QString name() const;
     void setName( const QString& name );
-    const QString target() const;
+    QString target() const;
     void setTarget( const QString& target );
-    const QString theme() const;
+    QString theme() const;
     void setTheme( const QString& theme );
 
-    const QString mapThemeId() const;
+    QString mapThemeId() const;
 
-    const QString description() const;
+    QString description() const;
     void setDescription( const QString& );
 
     bool visible() const;
     void setVisible( bool visible );
 
-    GeoSceneZoom* zoom() const;
-    GeoSceneIcon* icon() const;
+    const GeoSceneZoom* zoom() const;
+    GeoSceneZoom* zoom();
+
+    const GeoSceneIcon* icon() const;
+    GeoSceneIcon* icon();
 
  private:
     Q_DISABLE_COPY( GeoSceneHead )

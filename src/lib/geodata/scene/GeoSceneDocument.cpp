@@ -72,22 +72,42 @@ GeoSceneDocument::~GeoSceneDocument()
     delete d;
 }
 
-GeoSceneHead* GeoSceneDocument::head() const
+const GeoSceneHead* GeoSceneDocument::head() const
 {
     return d->m_head;
 }
 
-GeoSceneMap* GeoSceneDocument::map() const
+GeoSceneHead* GeoSceneDocument::head()
+{
+    return d->m_head;
+}
+
+const GeoSceneMap* GeoSceneDocument::map() const
 {
     return d->m_map;
 }
 
-GeoSceneSettings* GeoSceneDocument::settings() const
+GeoSceneMap* GeoSceneDocument::map()
+{
+    return d->m_map;
+}
+
+const GeoSceneSettings* GeoSceneDocument::settings() const
 {
     return d->m_settings;
 }
 
-GeoSceneLegend* GeoSceneDocument::legend() const
+GeoSceneSettings* GeoSceneDocument::settings()
+{
+    return d->m_settings;
+}
+
+const GeoSceneLegend* GeoSceneDocument::legend() const
+{
+    return d->m_legend;
+}
+
+GeoSceneLegend* GeoSceneDocument::legend()
 {
     return d->m_legend;
 }

@@ -53,10 +53,17 @@ class GEODATA_EXPORT GeoSceneDocument : public QObject,
 
     virtual bool isGeoSceneDocument() const { return true; }
 
-    GeoSceneHead*     head() const;
-    GeoSceneMap*      map() const;
-    GeoSceneSettings* settings() const;
-    GeoSceneLegend*   legend() const;
+    const GeoSceneHead* head() const;
+    GeoSceneHead* head();
+
+    const GeoSceneMap* map() const;
+    GeoSceneMap* map();
+
+    const GeoSceneSettings* settings() const;
+    GeoSceneSettings* settings();
+
+    const GeoSceneLegend* legend() const;
+    GeoSceneLegend* legend();
 
  Q_SIGNALS:
     void valueChanged( QString, bool );

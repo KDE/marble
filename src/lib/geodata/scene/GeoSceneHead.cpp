@@ -71,17 +71,7 @@ GeoSceneHead::~GeoSceneHead()
     delete d;
 }
 
-GeoSceneIcon* GeoSceneHead::icon() const
-{
-    return d->m_icon;
-}
-
-GeoSceneZoom* GeoSceneHead::zoom() const
-{
-    return d->m_zoom;
-}
-
-const QString GeoSceneHead::name() const
+QString GeoSceneHead::name() const
 {
     return d->m_name;
 }
@@ -91,7 +81,7 @@ void GeoSceneHead::setName( const QString& name )
     d->m_name = name;
 }
 
-const QString GeoSceneHead::target() const
+QString GeoSceneHead::target() const
 {
     return d->m_target;
 }
@@ -101,12 +91,12 @@ void GeoSceneHead::setTarget( const QString& target )
     d->m_target = target;
 }
 
-const QString GeoSceneHead::theme() const
+QString GeoSceneHead::theme() const
 {
     return d->m_theme;
 }
 
-const QString GeoSceneHead::mapThemeId() const
+QString GeoSceneHead::mapThemeId() const
 {
     return d->m_target + '/' + d->m_theme + '/' + d->m_theme + ".dgml";
 }
@@ -116,7 +106,7 @@ void GeoSceneHead::setTheme( const QString& theme )
     d->m_theme = theme;
 }
 
-const QString GeoSceneHead::description() const
+QString GeoSceneHead::description() const
 {
     return d->m_description;
 }
@@ -135,5 +125,26 @@ void GeoSceneHead::setVisible( bool visible )
 {
     d->m_visible = visible;
 }
+
+const GeoSceneIcon* GeoSceneHead::icon() const
+{
+    return d->m_icon;
+}
+
+GeoSceneIcon* GeoSceneHead::icon()
+{
+    return d->m_icon;
+}
+
+const GeoSceneZoom* GeoSceneHead::zoom() const
+{
+    return d->m_zoom;
+}
+
+GeoSceneZoom* GeoSceneHead::zoom()
+{
+    return d->m_zoom;
+}
+
 
 }

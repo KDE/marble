@@ -41,7 +41,12 @@ GeoSceneItem::~GeoSceneItem()
     delete m_icon;
 }
 
-GeoSceneIcon* GeoSceneItem::icon() const
+const GeoSceneIcon* GeoSceneItem::icon() const
+{
+    return m_icon;
+}
+
+GeoSceneIcon* GeoSceneItem::icon()
 {
     return m_icon;
 }
