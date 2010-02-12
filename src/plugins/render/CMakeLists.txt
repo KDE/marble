@@ -1,4 +1,4 @@
-add_subdirectory( test )
+# add_subdirectory( test )
 add_subdirectory( crosshairs )
 add_subdirectory( geodata )
 # add_subdirectory( placemarks )
@@ -20,4 +20,3 @@ add_subdirectory( navigation )
 
 # add_subdirectory( dataview )
 # add_subdirectory( fileview )
-add_subdirectory(aprs)
