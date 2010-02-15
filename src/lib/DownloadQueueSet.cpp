@@ -103,7 +103,7 @@ void DownloadQueueSet::retryJobs()
 
 void DownloadQueueSet::finishJob( HttpJob * job, QByteArray data )
 {
-    mDebug() << "finishJob: " << job->destinationFileName();
+    mDebug() << "finishJob: " << job->sourceUrl() << job->destinationFileName();
 
     deactivateJob( job );
     emit jobRemoved();
@@ -132,8 +132,8 @@ void DownloadQueueSet::retryOrBlacklistJob( HttpJob * job, const int errorCode )
     emit jobRemoved();
 
     if ( job->tryAgain() ) {
-        mDebug() << QString( "Download of %1 failed, but trying again soon" )
-            .arg( job->destinationFileName() );
+        mDebug() << QString( "Download of %1 to %2 failed, but trying again soon" )
+            .arg( job->sourceUrl().toString() ).arg( job->destinationFileName() );
         m_retryQueue.enqueue( job );
         emit jobRetry();
     }
