@@ -30,6 +30,9 @@ QNamDownloadJob::QNamDownloadJob( const QUrl & sourceUrl,
 void QNamDownloadJob::execute()
 {
     QNetworkRequest request( sourceUrl() );
+#if QT_VERSION >= 0x40600
+    request.setAttribute( QNetworkRequest::HttpPipeliningAllowedAttribute, true );
+#endif
     request.setRawHeader( "User-Agent", userAgent() );
     m_networkReply = m_networkAccessManager->get( request );
 
@@ -59,6 +62,13 @@ void QNamDownloadJob::finished()
     QNetworkReply::NetworkError const error = m_networkReply->error();
 //     mDebug() << "finished" << destinationFileName()
 //              << "error" << error;
+
+#if QT_VERSION >= 0x40600
+    const QVariant httpPipeliningWasUsed =
+        m_networkReply->attribute( QNetworkRequest::HttpPipeliningWasUsedAttribute );
+    if ( !httpPipeliningWasUsed.isNull() )
+        mDebug() << "http pipelining used:" << httpPipeliningWasUsed.toBool();
+#endif
 
     switch ( error ) {
     case QNetworkReply::NoError: {
