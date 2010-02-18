@@ -51,7 +51,7 @@ TextureTile * TileLoader::loadTile( TileId const & stackedTileId, TileId const &
         // but check if an update should be triggered
         GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
         TextureTile * const tile = new TextureTile( tileId, fileName );
-        tile->setComposedTileId( stackedTileId );
+        tile->setStackedTileId( stackedTileId );
         tile->setLastModified( fileInfo.lastModified() );
         tile->setExpireSecs( textureLayer->expire() );
 
@@ -69,7 +69,7 @@ TextureTile * TileLoader::loadTile( TileId const & stackedTileId, TileId const &
     // tile was not locally available => trigger download and look for tiles in other levels
     // for scaling
     TextureTile * const tile = new TextureTile( tileId );
-    tile->setComposedTileId( stackedTileId );
+    tile->setStackedTileId( stackedTileId );
     m_waitingForUpdate.insert( tileId, tile );
     triggerDownload( tileId );
     QImage * const replacementTile = scaledLowerLevelTile( tileId );
@@ -92,7 +92,7 @@ void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
     tile->setImage( data );
     tile->setState( TextureTile::StateUptodate );
     tile->setLastModified( QDateTime::currentDateTime() );
-    emit tileCompleted( tile->composedTileId(), id );
+    emit tileCompleted( tile->stackedTileId(), id );
 }
 
 inline GeoSceneTexture const * TileLoader::findTextureLayer( TileId const & id ) const

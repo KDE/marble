@@ -51,7 +51,7 @@ class TextureTile
     ~TextureTile();
 
     TileId const & id() const;
-    TileId const & composedTileId() const;
+    TileId const & stackedTileId() const;
     QDateTime const & lastModified() const;
     bool expired() const;
     QImage const * image() const;
@@ -66,12 +66,12 @@ class TextureTile
     void setImage( QByteArray const & data );
     void setImage( QImage * const );
     void setMergeRule( MergeRule const );
-    void setComposedTileId( TileId const & );
+    void setStackedTileId( TileId const & );
     void setLastModified( QDateTime const & );
     void setExpireSecs( int const );
 
     TileId const m_id;
-    TileId m_composedTileId;
+    TileId m_stackedTileId;
     State m_state;
     MergeRule m_mergeRule;
     QDateTime m_lastModified;
@@ -87,9 +87,9 @@ inline TileId const & TextureTile::id() const
     return m_id;
 }
 
-inline TileId const & TextureTile::composedTileId() const
+inline TileId const & TextureTile::stackedTileId() const
 {
-    return m_composedTileId;
+    return m_stackedTileId;
 }
 
 inline QDateTime const & TextureTile::lastModified() const
@@ -137,9 +137,9 @@ inline void TextureTile::setMergeRule( MergeRule const mergeRule )
     m_mergeRule = mergeRule;
 }
 
-inline void TextureTile::setComposedTileId( TileId const & id )
+inline void TextureTile::setStackedTileId( TileId const & id )
 {
-    m_composedTileId = id;
+    m_stackedTileId = id;
 }
 
 inline void TextureTile::setLastModified( QDateTime const & lastModified )
