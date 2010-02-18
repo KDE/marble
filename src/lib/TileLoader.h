@@ -35,7 +35,6 @@ namespace Marble
 
 class TextureTile;
 class HttpDownloadManager;
-class MapThemeManager;
 class MarbleModel;
 class GeoSceneLayer;
 
@@ -65,8 +64,7 @@ class TileLoader : public QObject
          * @param downloadManager The download manager that shall be used to fetch
          *                        the tiles from a remote resource.
          */
-        TileLoader( MapThemeManager const * mapThemeManager, HttpDownloadManager *downloadManager,
-                    MarbleModel* parent);
+        TileLoader( HttpDownloadManager *downloadManager, MarbleModel* parent);
 
         /**
          * Destroys the tile loader.

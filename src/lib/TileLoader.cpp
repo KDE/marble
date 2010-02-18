@@ -73,8 +73,8 @@ public:
 };
 
 
-TileLoader::TileLoader( MapThemeManager const * mapThemeManager,
-                        HttpDownloadManager *downloadManager, MarbleModel* parent )
+
+TileLoader::TileLoader( HttpDownloadManager *downloadManager, MarbleModel* parent )
     : d( new TileLoaderPrivate() ),
       m_parent( parent )
 {
