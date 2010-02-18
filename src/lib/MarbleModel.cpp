@@ -23,6 +23,7 @@
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QSortFilterProxyModel>
 
+#include "MapThemeManager.h"
 #include "global.h"
 #include "MarbleDebug.h"
 #include "gps/GpsLayer.h"
@@ -86,6 +87,7 @@ class MarbleModelPrivate
         : m_parent( parent ),
           m_dataFacade( 0 ),
           m_pluginManager( new PluginManager( parent ) ),
+          m_mapThemeManager( new MapThemeManager( parent )),
           m_mapTheme( 0 ),
           m_layerManager( 0 ),
           m_downloadManager( new HttpDownloadManager( new FileStoragePolicy(
@@ -109,6 +111,7 @@ class MarbleModelPrivate
     MarbleDataFacade        *m_dataFacade;
 
     PluginManager           *m_pluginManager;
+    MapThemeManager         *m_mapThemeManager;
 
     // View and paint stuff
     GeoSceneDocument        *m_mapTheme;
@@ -161,7 +164,7 @@ MarbleModel::MarbleModel( QObject *parent )
              d->m_downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage )));
     d->m_dataFacade = new MarbleDataFacade( this );
 
-    d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
+    d->m_tileLoader = new TileLoader( d->m_mapThemeManager, d->m_downloadManager, this );
 
     d->m_texmapper = 0;
     
