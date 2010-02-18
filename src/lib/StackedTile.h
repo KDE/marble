@@ -71,10 +71,6 @@ class StackedTile : public AbstractTile
     uint pixelF( qreal x, qreal y ) const;
     uint pixelF( qreal x, qreal y, const QRgb& pixel ) const;
 
- Q_SIGNALS:
-    void downloadTile(const QUrl& sourceUrl, const QString& destinationFileName,
-                      const QString& id, DownloadUsage );
-
  protected:
     StackedTile( StackedTilePrivate &dd, QObject *parent );
 
