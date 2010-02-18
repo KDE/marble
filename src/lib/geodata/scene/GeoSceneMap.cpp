@@ -109,6 +109,21 @@ GeoSceneLayer* GeoSceneMap::layer( const QString& name )
     return layer;
 }
 
+const GeoSceneLayer* GeoSceneMap::layer( const QString& name ) const
+{
+    const GeoSceneLayer* layer = 0;
+
+    QVector<GeoSceneLayer*>::const_iterator it = d->m_layers.constBegin();
+    QVector<GeoSceneLayer*>::const_iterator end = d->m_layers.constEnd();
+    for (; it != end; ++it) {
+        if ( (*it)->name() == name ) {
+            layer = *it;
+            break;
+        }
+    }
+    return layer;
+}
+
 QVector<GeoSceneLayer*> GeoSceneMap::layers() const
 {
     return d->m_layers;

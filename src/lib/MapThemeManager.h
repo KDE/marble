@@ -55,7 +55,12 @@ class MARBLE_EXPORT MapThemeManager : public QObject
  public:
     explicit MapThemeManager(QObject *parent = 0);
     ~MapThemeManager();
-    
+
+    /**
+     * @brief Returns a list of all locally available map themes
+     */
+    QList<GeoSceneDocument const*> mapThemes() const;
+
     /**
      * @brief Provides a model of the locally existing themes. 
      *

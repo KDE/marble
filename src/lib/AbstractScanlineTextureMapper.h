@@ -13,6 +13,7 @@
 #define ABSTRACTSCANLINETEXTUREMAPPER_H
 
 #include <QtCore/QObject>
+#include <QtCore/QSize>
 #include <QtGui/QColor>
 
 #include <cmath>
@@ -26,8 +27,8 @@
 namespace Marble
 {
 
-class TextureTile;
-class TileLoader;
+class StackedTile;
+class StackedTileLoader;
 class ViewParams;
 
 class AbstractScanlineTextureMapper : public QObject
@@ -35,7 +36,8 @@ class AbstractScanlineTextureMapper : public QObject
     Q_OBJECT
 
 public:
-    explicit AbstractScanlineTextureMapper( TileLoader *tileLoader, QObject * parent=0 );
+    AbstractScanlineTextureMapper( GeoSceneTexture *textureLayer, StackedTileLoader *tileLoader,
+                                   QObject *parent = 0 );
     ~AbstractScanlineTextureMapper();
 
     virtual void mapTexture( ViewParams *viewParams ) = 0;
@@ -121,10 +123,13 @@ public:
 
     // ------------------------
     // Tile stuff
-    TileLoader  *m_tileLoader;
+    GeoSceneTexture *m_textureLayer;
+    /// size of the tiles of of the current texture layer
+    QSize m_tileSize;
+    StackedTileLoader *m_tileLoader;
     GeoSceneTexture::Projection m_tileProjection;
 
-    TextureTile *m_tile;
+    StackedTile *m_tile;
 
     int          m_tileLevel;
     int          m_maxTileLevel;
@@ -142,10 +147,15 @@ public:
 
  private:
     Q_DISABLE_COPY( AbstractScanlineTextureMapper )
+    void initGlobalWidth();
+    void initGlobalHeight();
+    void initTileSize();
+
     int         m_globalWidth;
     int         m_globalHeight;
     qreal       m_normGlobalWidth;
     qreal       m_normGlobalHeight;
+    uint        m_mapThemeIdHash;
 };
 
 inline void AbstractScanlineTextureMapper::setMaxTileLevel( int level )

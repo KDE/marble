@@ -24,8 +24,8 @@ class EquirectScanlineTextureMapper : public AbstractScanlineTextureMapper
     Q_OBJECT
 
  public:
-    explicit EquirectScanlineTextureMapper( TileLoader *tileLoader,
-					    QObject    *parent = 0 );
+    EquirectScanlineTextureMapper( GeoSceneTexture *textureLayer, StackedTileLoader *tileLoader,
+                                   QObject *parent = 0 );
     void mapTexture( ViewParams *viewParams );
 
  private:

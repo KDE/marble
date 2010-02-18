@@ -635,7 +635,8 @@ bool MarbleMap::showGrid() const
 
 bool MarbleMap::showClouds() const
 {
-    return d->m_model->layerDecorator()->showClouds();
+    // TODO
+    return true;
 }
 
 bool MarbleMap::showAtmosphere() const
@@ -1034,15 +1035,9 @@ void MarbleMap::setShowCrosshairs( bool visible )
 
 void MarbleMap::setShowClouds( bool visible )
 {
-    bool previousVisible = d->m_model->layerDecorator()->showClouds();
-
-    d->m_model->layerDecorator()->setShowClouds( visible );
-
-    if ( previousVisible != visible ) {
-        mDebug() << "Changing cloud layer";
-        d->m_model->update();
-    }
+    // TODO
 }
+
 void MarbleMap::setShowTileId( bool visible )
 {
 

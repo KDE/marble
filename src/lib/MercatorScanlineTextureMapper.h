@@ -24,8 +24,8 @@ class MercatorScanlineTextureMapper : public AbstractScanlineTextureMapper
     Q_OBJECT
 
  public:
-    explicit MercatorScanlineTextureMapper( TileLoader *tileLoader,
-					    QObject    *parent = 0 );
+    MercatorScanlineTextureMapper( GeoSceneTexture *textureLayer, StackedTileLoader *tileLoader,
+                                   QObject *parent = 0 );
     void mapTexture( ViewParams *viewParams );
 
  private:

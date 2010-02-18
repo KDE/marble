@@ -19,8 +19,7 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "Quaternion.h"
-#include "TextureTile.h"
-#include "TileLoader.h"
+#include "StackedTileLoader.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "MathHelper.h"
@@ -28,9 +27,10 @@
 
 using namespace Marble;
 
-SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( TileLoader *tileLoader,
-                                                                QObject * parent )
-    : AbstractScanlineTextureMapper( tileLoader, parent )
+SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( GeoSceneTexture *textureLayer,
+                                                                StackedTileLoader *tileLoader,
+                                                                QObject *parent )
+    : AbstractScanlineTextureMapper( textureLayer, tileLoader, parent )
 {
     m_interlaced = false;
 }

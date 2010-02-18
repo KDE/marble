@@ -22,8 +22,7 @@
 // Marble
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
-#include "TextureTile.h"
-#include "TileLoader.h"
+#include "StackedTileLoader.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
@@ -31,9 +30,10 @@
 
 using namespace Marble;
 
-MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( TileLoader *tileLoader,
-                                                              QObject * parent )
-    : AbstractScanlineTextureMapper( tileLoader, parent ),
+MercatorScanlineTextureMapper::MercatorScanlineTextureMapper( GeoSceneTexture *textureLayer,
+                                                              StackedTileLoader *tileLoader,
+                                                              QObject *parent )
+    : AbstractScanlineTextureMapper( textureLayer, tileLoader, parent ),
       m_oldCenterLon( 0.0 ),
       m_oldYPaintedTop( 0 )
 {

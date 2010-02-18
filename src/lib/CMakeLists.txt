@@ -74,7 +74,8 @@ set(marblewidget_SRCS
     MarbleGeometryModel.cpp
     MarbleDataFacade.cpp
     MarbleDebug.cpp
-
+    TextureTile.cpp
+    TileLoader.cpp
     QtMarbleConfigDialog.cpp
     ClipPainter.cpp
     DownloadPolicy.cpp
@@ -122,9 +123,9 @@ set(marblewidget_SRCS
     FileStorageWatcher.cpp
     DatasetProvider.cpp
     AbstractTile.cpp
-    TextureTile.cpp
+    StackedTile.cpp
     TileId.cpp
-    TileLoader.cpp
+    StackedTileLoader.cpp
     TileLoaderHelper.cpp
     TileCreator.cpp
     TinyWebBrowser.cpp

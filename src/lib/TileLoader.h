@@ -1,198 +1,80 @@
-/**
- * This file is part of the Marble Desktop Globe.
- *
- * Copyright 2005-2007 Torsten Rahn <tackat@kde.org>
- * Copyright 2007      Inge Wallin  <ingwa@kde.org>
- * Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public License
- * along with this library; see the file COPYING.LIB.  If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1301, USA.
- */
+// Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
+//
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
+//
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef MARBLE_TILELOADER_H
-#define MARBLE_TILELOADER_H
+#ifndef MARBLE_TILE_LOADER_H
+#define MARBLE_TILE_LOADER_H
 
+#include <QtCore/QHash>
 #include <QtCore/QObject>
+#include <QtCore/QString>
 
 #include "TileId.h"
+#include "global.h"
 
-class QString;
+class QByteArray;
+class QImage;
+class QUrl;
 
 namespace Marble
 {
-
+class HttpDownloadManager; // remove?
+class GeoSceneTexture;
+class MapThemeManager;
 class TextureTile;
-class HttpDownloadManager;
-class MarbleModel;
-class GeoSceneLayer;
 
-class TileLoaderPrivate;
-
-/**
- * @short Tile loading from a quad tree
- *
- * This class loads tiles into memory. For faster access
- * we keep the tileIDs and their respective pointers to 
- * the tiles in a hashtable.
- * The class also contains convenience methods to remove entries 
- * from the hashtable and to return more detailed properties
- * about each tile level and their tiles.
- *
- * @author Torsten Rahn <rahn@kde.org>
- **/
-
-class TileLoader : public QObject
+class TileLoader: public QObject
 {
     Q_OBJECT
 
-    public:
-        /**
-         * Creates a new tile loader.
-         *
-         * @param downloadManager The download manager that shall be used to fetch
-         *                        the tiles from a remote resource.
-         */
-        TileLoader( HttpDownloadManager *downloadManager, MarbleModel* parent);
+ public:
+    TileLoader( MapThemeManager const * const, HttpDownloadManager * const );
 
-        /**
-         * Destroys the tile loader.
-         */
-        virtual ~TileLoader();
+    TextureTile * loadTile( TileId const & composedTileId, TileId const & baseTileId );
+    void setTextureLayers( QHash<uint, GeoSceneTexture*> const & );
 
-        /**
-         * Sets the download manager that shall be used to fetch the
-         * tiles from a remote resource.
-         */
-        void setDownloadManager( HttpDownloadManager *downloadManager );
+ public Q_SLOTS:
+    void updateTile( QByteArray const & imageData, QString const & tileId );
 
-        /**
-         * Loads a tile and returns it.
-         *
-         * @param tileId The Id of the requested tile, containing the x and y coordinate and the zoom level.
-         */
-        TextureTile* loadTile( TileId const &tileId );
+ Q_SIGNALS:
+    void downloadTile( QUrl const & sourceUrl, QString const & destinationFileName,
+                       QString const & id, DownloadUsage );
 
-        /**
-         * Sets the texture layer @p the tiles shall be loaded for.
-         */
-        void setLayer( GeoSceneLayer * layer );
+    // when this signal is emitted, the TileLoader gives up ownership of
+    // the corrsponding tile. Might be better to explicitely transfer...
+    void tileCompleted( TileId const & composedTileId, TileId const & baseTileId );
 
-        /**
-         * Returns the texture layer the tiles shall be loaded for.
-         */
-        GeoSceneLayer * layer() const;
+ private:
+    GeoSceneTexture const * findTextureLayer( TileId const & ) const;
+    GeoSceneTexture * findTextureLayer( TileId const & );
+    QString tileFileName( TileId const & ) const;
+    void triggerDownload( TileId const & );
+    QImage * scaledLowerLevelTile( TileId const & );
 
-        /**
-         * Resets the internal tile hash.
-         */
-        void resetTilehash();
+    // TODO: comment about uint hash key
+    QHash<uint, GeoSceneTexture*> m_textureLayers;
 
-        /**
-         * Cleans up the internal tile hash.
-         *
-         * Removes all superfluous tiles from the hash.
-         */
-        void cleanupTilehash();
-
-        /**
-         * Clears the internal tile hash.
-         *
-         * Removes all tiles from the hash.
-         */
-        void flush();
-
-        /**
-         * Returns the width of a tile loaded by this tile loader.
-         */
-        int tileWidth() const;
-
-        /**
-         * Returns the height of a tile loaded by this tile loader.
-         */
-        int tileHeight() const;
-
-        /**
-         * Returns the global width for the given @p level.
-         */
-        int globalWidth( int level ) const;
-
-        /**
-         * Returns the global height for the given @p level.
-         */
-        int globalHeight( int level ) const;
-
-        /**
-         * @brief  Returns the limit of the volatile (in RAM) cache.
-         * @return the cache limit in kilobytes
-         */
-        quint64 volatileCacheLimit() const;
-
-        /**
-         * @brief Returns a list of TileIds of the tiles which are currently
-         *        displayed. This is used for example for the map reload
-         *        functionality.
-         */
-        QList<TileId> tilesOnDisplay() const;
-
-        /**
-         * Returns the highest level in which some tiles are theoretically
-         * available for the given @p texture layer.
-         */
-        int maximumTileLevel() const;
-
-        /**
-         * Returns whether the mandatory most basic tile level is fully available for
-         * the given @p texture layer.
-         */
-        static bool baseTilesAvailable( GeoSceneLayer * layer );
-
-    public Q_SLOTS:
-        /**
-         * @brief Set the limit of the volatile (in RAM) cache.
-         * @param bytes The limit in kilobytes.
-         */
-        void setVolatileCacheLimit( quint64 kiloBytes );
-
-        void updateTile( const QByteArray &data, const QString &id );
-
-        void updateTile( const QString &fileName, const QString &id );
-
-        /**
-         * Effectively triggers a reload of all tiles that are currently in use
-         * and clears the tile cache in physical memory.
-         */
-        void update();
-
-    Q_SIGNALS:
-        /**
-         * This signal is emitted whenever a requested tile has been
-         * downloaded and is available now.
-         */
-        void tileUpdateAvailable();
-        
-        void paintTile(TextureTile* tile, int x, int y, int level,
-                       GeoSceneLayer * layer,
-                       bool requestTileUpdate);
-
-    private:
-        Q_DISABLE_COPY( TileLoader )
-
-        TileLoaderPrivate* const d;
-        MarbleModel* m_parent;
+    // contains tiles, for which a download has been triggered
+    // because the tile was not there at all or is expired.
+    QHash<TileId, TextureTile*> m_waitingForUpdate;
 };
+
+inline void TileLoader::setTextureLayers( QHash<uint, GeoSceneTexture*> const & layers )
+{
+    m_textureLayers = layers;
+}
 
 }
 
-#endif // MARBLE_TILELOADER_H
+#endif

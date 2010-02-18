@@ -61,7 +61,7 @@ class TextureColorizer;
 class TileCreator;
 class VectorComposer;
 class ViewParams;
-class TextureTile;
+class StackedTile;
 class MergedLayerDecorator;
 class RenderPlugin;
 class PluginManager;
@@ -306,7 +306,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void clearPersistentTileCache();
 
 //  private Q_SLOTS:
-    void paintTile( TextureTile* tile, GeoSceneTexture *textureLayer );
+    void paintTile( StackedTile* tile, GeoSceneTexture *textureLayer );
 
     /**
      * @brief Update the model
@@ -368,6 +368,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     Q_PRIVATE_SLOT( d, void notifyModelChanged() )
 
     void addDownloadPolicies( GeoSceneDocument *mapTheme );
+    GeoSceneTexture * textureLayer() const;
 
     MarbleModelPrivate  * const d;
 };

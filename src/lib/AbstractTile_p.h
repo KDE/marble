@@ -12,18 +12,13 @@
 // Description: AbstractTile contains the base class for a single quadtile 
 //
 
-
 #ifndef MARBLE_ABSTRACTTILE_P_H
 #define MARBLE_ABSTRACTTILE_P_H
 
-#include <QtCore/QDateTime>
-
 #include "TileId.h"
-
 
 namespace Marble
 {
-
 
 class AbstractTilePrivate
 {
@@ -34,8 +29,6 @@ class AbstractTilePrivate
     TileId    m_id;
     bool      m_used;
     AbstractTile::TileState m_state;
-
-    QDateTime m_created;
 
     AbstractTile * q_ptr;
 };

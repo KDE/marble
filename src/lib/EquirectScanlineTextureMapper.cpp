@@ -21,17 +21,17 @@
 // Marble
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
-#include "TextureTile.h"
-#include "TileLoader.h"
+#include "StackedTileLoader.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "AbstractProjection.h"
 
 using namespace Marble;
 
-EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( TileLoader *tileLoader,
-                                                              QObject * parent )
-    : AbstractScanlineTextureMapper( tileLoader, parent ),
+EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( GeoSceneTexture *textureLayer,
+                                                              StackedTileLoader *tileLoader,
+                                                              QObject *parent )
+    : AbstractScanlineTextureMapper( textureLayer, tileLoader, parent ),
       m_oldCenterLon( 0.0 ),
       m_oldYPaintedTop( 0 )
 {

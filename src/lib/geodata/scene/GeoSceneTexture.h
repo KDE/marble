@@ -66,6 +66,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     int levelZeroRows() const;
     void setLevelZeroRows( const int );
 
+    bool hasMaximumTileLevel() const;
     int maximumTileLevel() const;
     void setMaximumTileLevel( const int );
 
@@ -103,6 +104,11 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     QVector<QUrl>::const_iterator m_nextUrl;
     QList<DownloadPolicy *> m_downloadPolicies;
 };
+
+inline bool GeoSceneTexture::hasMaximumTileLevel() const
+{
+    return m_maximumTileLevel != -1;
+}
 
 }
 

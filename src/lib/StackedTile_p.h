@@ -10,46 +10,47 @@
 //
 
 //
-// Description: TextureTile contains a single image quadtile 
+// Description: StackedTile contains a single image quadtile 
 // and jumptables for faster access to the pixel data
 //
 
 
-#ifndef MARBLE_TEXTURETILE_P_H
-#define MARBLE_TEXTURETILE_P_H
+#ifndef MARBLE_STACKED_TILE_P_H
+#define MARBLE_STACKED_TILE_P_H
 
 #include "AbstractTile_p.h"
 
+#include <QtCore/QVector>
 #include <QtGui/QImage>
 
 namespace Marble
 {
+class TextureTile;
 
-
-class TextureTilePrivate : AbstractTilePrivate
+class StackedTilePrivate : AbstractTilePrivate
 {
-    Q_DECLARE_PUBLIC( TextureTile )
+    Q_DECLARE_PUBLIC( StackedTile )
 
  public:
     uchar   **jumpTable8;
     uint    **jumpTable32;
 
-    QImage    m_rawtile;
+    QVector<TextureTile*> m_baseTiles;
+    QImage    m_resultTile;
 
     int       m_depth;
     bool      m_isGrayscale;
+    bool      m_forMergedLayerDecorator;
 
-    explicit TextureTilePrivate( const TileId& id );
-    virtual ~TextureTilePrivate();
+    explicit StackedTilePrivate( const TileId& id );
+    virtual ~StackedTilePrivate();
 
     inline uint pixel( int x, int y ) const;
     inline uint pixelF( qreal x, qreal y, const QRgb& pixel ) const;
-
-    void scaleTileFrom( GeoSceneTexture *textureLayer, QImage &tile,
-                        qreal sourceX, qreal sourceY, int sourceLevel,
-                        int targetX, int targetY, int targetLevel );
+    void mergeCopyToResult( TextureTile const * const baseTile );
+    void mergeMultiplyToResult( TextureTile const * const baseTile );
 };
 
 }
 
-#endif // MARBLE_TEXTURETILE_P_H
+#endif // MARBLE_STACKED_TILE_P_H

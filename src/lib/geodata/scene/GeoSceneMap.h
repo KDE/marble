@@ -65,6 +65,7 @@ class GEODATA_EXPORT GeoSceneMap : public GeoNode
      * @return A pointer to the layer request by its name
      */
     GeoSceneLayer* layer( const QString& name );
+    const GeoSceneLayer* layer( const QString& name ) const;
 
     /**
      * @brief  Return all layers

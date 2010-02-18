@@ -75,6 +75,18 @@ MapThemeManager::~MapThemeManager()
     delete d;
 }
 
+QList<GeoSceneDocument const*> MapThemeManager::mapThemes() const
+{
+    QList<GeoSceneDocument const*> result;
+    const QStringList mapThemes = findMapThemes();
+    QStringList::const_iterator pos = mapThemes.constBegin();
+    QStringList::const_iterator const end = mapThemes.constEnd();
+    for (; pos != end; ++pos ) {
+        result.append( loadMapTheme( *pos ));
+    }
+    return result;
+}
+
 void MapThemeManager::initialize()
 {
     initFileSystemWatcher();

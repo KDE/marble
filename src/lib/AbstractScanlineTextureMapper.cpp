@@ -10,17 +10,21 @@
 
 #include "AbstractScanlineTextureMapper.h"
 
+#include <QtGui/QImage>
+
 #include "MarbleDebug.h"
-#include "TextureTile.h"
+#include "StackedTile.h"
 #include "TileId.h"
-#include "TileLoader.h"
+#include "StackedTileLoader.h"
 #include "TileLoaderHelper.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
 
 using namespace Marble;
 
-AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLoader, QObject * parent )
+AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture *textureLayer,
+                                                              StackedTileLoader *tileLoader,
+                                                              QObject *parent )
     : QObject( parent ),
       m_interpolate( false ),
       m_maxGlobalX( 0 ),
@@ -32,6 +36,7 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
       m_toTileCoordinatesLon( 0.0 ),
       m_toTileCoordinatesLat( 0.0 ),
       m_interlaced( false ),
+      m_textureLayer( textureLayer ),
       m_tileLoader( tileLoader ),
       m_tile( 0 ),
       m_tileLevel( 0 ),
@@ -42,42 +47,34 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( TileLoader *tileLo
       m_globalWidth( 0 ),
       m_globalHeight( 0 ),
       m_normGlobalWidth( 0.0 ),
-      m_normGlobalHeight( 0.0 )
+      m_normGlobalHeight( 0.0 ),
+      m_mapThemeIdHash( textureLayer ? qHash( textureLayer->sourceDir() ) : 0 )
 {
-    GeoSceneTexture * texture = 0;
-
-    if ( tileLoader ) {
-        GeoSceneLayer * layer = tileLoader->layer();
-        if ( layer ) {
-            texture = static_cast<GeoSceneTexture *>( layer->groundDataset() );
-        }
-    }
-
-    m_tileProjection = tileLoader && texture
-                        ? texture->projection()
-                        : GeoSceneTexture::Equirectangular;
+    m_tileProjection = textureLayer ? textureLayer->projection()
+        : GeoSceneTexture::Equirectangular;
 
     connect( m_tileLoader, SIGNAL( tileUpdateAvailable() ), 
              this,         SLOT( notifyMapChanged() ) );
 
     detectMaxTileLevel();
+    initTileSize();
 }
 
 
 AbstractScanlineTextureMapper::~AbstractScanlineTextureMapper()
 {
       m_tileLoader->disconnect();
-//      delete m_tileLoader;
 }
 
 
 void AbstractScanlineTextureMapper::setLayer( GeoSceneLayer * layer )
 {
-    m_tileLoader->setLayer( layer );
-    GeoSceneTexture * texture = static_cast<GeoSceneTexture *>( layer->groundDataset() );
-    m_tileProjection = texture->projection();
+    m_textureLayer = static_cast<GeoSceneTexture *>( layer->groundDataset() );
+    m_tileProjection = m_textureLayer->projection();
+    m_mapThemeIdHash = qHash( m_textureLayer->sourceDir() );
     m_tileLevel = -1;
     detectMaxTileLevel();
+    initTileSize();
 }
 
 
@@ -89,7 +86,7 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
     // the tile level from tilesize and the globe radius via log(2)
 
     qreal  linearLevel = ( 2.0 * (qreal)( radius )
-			    / (qreal) ( m_tileLoader->tileWidth() ) );
+			    / (qreal) ( m_tileSize.width() ) );
     int     tileLevel   = 0;
 
     if ( linearLevel < 1.0 )
@@ -115,9 +112,9 @@ void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
     //    mDebug() << "Texture Level was set to: " << tileLevel;
     m_tileLevel = tileLevel;
 
-    m_globalWidth = m_tileLoader->globalWidth( m_tileLevel );
+    initGlobalWidth();
     m_normGlobalWidth = (qreal)( m_globalWidth / ( 2 * M_PI ) );
-    m_globalHeight = m_tileLoader->globalHeight( m_tileLevel );
+    initGlobalHeight();
     m_normGlobalHeight = (qreal)( m_globalHeight /  M_PI );
 
     m_maxGlobalX = m_globalWidth  - 1;
@@ -170,9 +167,9 @@ void AbstractScanlineTextureMapper::pixelValueF(qreal lon,
     // same tile. However at the tile border we might "fall off". If that 
     // happens we need to find out the next tile that needs to be loaded.
 
-    if ( posX  >= (qreal)( m_tileLoader->tileWidth() ) 
+    if ( posX  >= (qreal)( m_tileSize.width() ) 
          || posX < 0.0
-         || posY >= (qreal)( m_tileLoader->tileHeight() )
+         || posY >= (qreal)( m_tileSize.height() )
          || posY < 0.0 )
     {
         nextTile( posX, posY );
@@ -203,9 +200,9 @@ void AbstractScanlineTextureMapper::pixelValue(qreal lon,
     // same tile. However at the tile border we might "fall off". If that 
     // happens we need to find out the next tile that needs to be loaded.
 
-    if ( iPosX  >= m_tileLoader->tileWidth() 
+    if ( iPosX  >= m_tileSize.width() 
          || iPosX < 0
-         || iPosY >= m_tileLoader->tileHeight()
+         || iPosY >= m_tileSize.height()
          || iPosY < 0 )
     {
         nextTile( iPosX, iPosY );
@@ -257,8 +254,8 @@ void AbstractScanlineTextureMapper::pixelValueApproxF(const qreal& lon,
         qreal itLon = m_prevLon + m_toTileCoordinatesLon;
         qreal itLat = m_prevLat + m_toTileCoordinatesLat;
 
-        const int tileWidth = m_tileLoader->tileWidth();
-        const int tileHeight = m_tileLoader->tileHeight();
+        const int tileWidth = m_tileSize.width();
+        const int tileHeight = m_tileSize.height();
 
         // int oldR = 0;
         // int oldG = 0;
@@ -401,8 +398,8 @@ void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
         int itLon = (int)( ( m_prevLon + m_toTileCoordinatesLon ) * 128.0 );
         int itLat = (int)( ( m_prevLat + m_toTileCoordinatesLat ) * 128.0 );
 
-        const int tileWidth = m_tileLoader->tileWidth();
-        const int tileHeight = m_tileLoader->tileHeight();
+        const int tileWidth = m_tileSize.width();
+        const int tileHeight = m_tileSize.height();
 
         const bool alwaysCheckTileRange =
                 isOutOfTileRange( itLon, itLat, itStepLon, itStepLat,
@@ -529,21 +526,21 @@ void AbstractScanlineTextureMapper::nextTile( int &posX, int &posY )
     // tileCol counts the tile columns left from the current tile.
     // tileRow counts the tile rows on the top from the current tile.
 
-    int tileCol = lon / m_tileLoader->tileWidth();
-    int tileRow = lat / m_tileLoader->tileHeight();
+    int tileCol = lon / m_tileSize.width();
+    int tileRow = lat / m_tileSize.height();
 
-    m_tile = m_tileLoader->loadTile( TileId( m_tileLevel, tileCol, tileRow ));
+    m_tile = m_tileLoader->loadTile( TileId( m_mapThemeIdHash, m_tileLevel, tileCol, tileRow ));
 
     // Update position variables:
     // m_tilePosX/Y stores the position of the tiles in 
     // global texture coordinates 
     // ( origin upper left, measured in pixels )
 
-    m_tilePosX = tileCol * m_tileLoader->tileWidth();
+    m_tilePosX = tileCol * m_tileSize.width();
     m_toTileCoordinatesLon = (qreal)(m_globalWidth / 2 - m_tilePosX);
     posX = lon - m_tilePosX;
 
-    m_tilePosY = tileRow * m_tileLoader->tileHeight();
+    m_tilePosY = tileRow * m_tileSize.height();
     m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
     posY = lat - m_tilePosY;
 }
@@ -564,21 +561,21 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
     // tileCol counts the tile columns left from the current tile.
     // tileRow counts the tile rows on the top from the current tile.
 
-    int tileCol = lon / m_tileLoader->tileWidth();
-    int tileRow = lat / m_tileLoader->tileHeight();
+    int tileCol = lon / m_tileSize.width();
+    int tileRow = lat / m_tileSize.height();
 
-    m_tile = m_tileLoader->loadTile( TileId( m_tileLevel, tileCol, tileRow ));
+    m_tile = m_tileLoader->loadTile( TileId( m_mapThemeIdHash, m_tileLevel, tileCol, tileRow ));
 
     // Update position variables:
     // m_tilePosX/Y stores the position of the tiles in 
     // global texture coordinates 
     // ( origin upper left, measured in pixels )
 
-    m_tilePosX = tileCol * m_tileLoader->tileWidth();
+    m_tilePosX = tileCol * m_tileSize.width();
     m_toTileCoordinatesLon = (qreal)(m_globalWidth / 2 - m_tilePosX);
     posX = lon - m_tilePosX;
 
-    m_tilePosY = tileRow * m_tileLoader->tileHeight();
+    m_tilePosY = tileRow * m_tileSize.height();
     m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
     posY = lat - m_tilePosY;
 }
@@ -586,14 +583,40 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
 void AbstractScanlineTextureMapper::notifyMapChanged()
 {
     detectMaxTileLevel();
-//    mDebug() << "MAPCHANGED";
+    //mDebug() << "AbstractScanlineTextureMapper: emitting mapChanged";
     emit mapChanged();
 }
 
 void AbstractScanlineTextureMapper::detectMaxTileLevel()
 {
-    m_maxTileLevel = m_tileLoader->maximumTileLevel();
+    m_maxTileLevel = StackedTileLoader::maximumTileLevel( m_textureLayer );
 //    mDebug() << "MaxTileLevel: " << m_maxTileLevel;
+}
+
+void AbstractScanlineTextureMapper::initGlobalWidth()
+{
+    m_globalWidth = m_tileSize.width()
+        * TileLoaderHelper::levelToColumn( m_textureLayer->levelZeroColumns(), m_tileLevel );
+}
+
+void AbstractScanlineTextureMapper::initGlobalHeight()
+{
+    m_globalHeight = m_tileSize.height()
+        * TileLoaderHelper::levelToRow( m_textureLayer->levelZeroRows(), m_tileLevel );
+}
+
+void AbstractScanlineTextureMapper::initTileSize()
+{
+    if ( !m_textureLayer || !m_tileLoader )
+        return;
+
+    Q_ASSERT( m_textureLayer );
+    Q_ASSERT( m_tileLoader );
+    TileId id( m_textureLayer->sourceDir(), 0, 0, 0 );
+    StackedTile * const testTile = m_tileLoader->loadTile( id );
+    Q_ASSERT( testTile );
+    m_tileSize = testTile->rawtile().size();
+    Q_ASSERT( !m_tileSize.isEmpty() );
 }
 
 #include "AbstractScanlineTextureMapper.moc"

@@ -1,90 +1,157 @@
+// Copyright 2010 Jens-Michael Hoffmann <jmho@c-xx.com>
 //
-// This file is part of the Marble Desktop Globe.
+// This library is free software; you can redistribute it and/or
+// modify it under the terms of the GNU Lesser General Public
+// License as published by the Free Software Foundation; either
+// version 2.1 of the License, or (at your option) any later version.
 //
-// This program is free software licensed under the GNU LGPL. You can
-// find a copy of this license in LICENSE.txt in the top directory of
-// the source code.
+// This library is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+// Lesser General Public License for more details.
 //
-// Copyright 2007-2009  Torsten Rahn <tackat@kde.org>
-// Copyright 2007       Inge Wallin  <ingwa@kde.org>
-//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-//
-// Description: TextureTile contains a single image quadtile 
-// and jumptables for faster access to the pixel data
-//
+#ifndef MARBLE_TEXTURE_TILE_H
+#define MARBLE_TEXTURE_TILE_H
 
+#include <QtCore/QDateTime>
 
-#ifndef MARBLE_TEXTURETILE_H
-#define MARBLE_TEXTURETILE_H
+#include "TileId.h"
 
-
-#include <QtCore/QCache>
-#include <QtCore/QObject>
-#include <QtGui/QColor>
-
-#include "AbstractTile.h"
-#include "global.h"
-
+class QByteArray;
 class QImage;
-class QString;
-class QUrl;
 
 namespace Marble
 {
+class TileLoader;
+class StackedTileLoader;
 
-class TextureTilePrivate;
-class GeoSceneTexture;
-
-class TextureTile : public AbstractTile
+class TextureTile
 {
-    Q_OBJECT
+    friend class TileLoader;
+    friend class StackedTileLoader;
 
  public:
-    explicit TextureTile( TileId const& tid, QObject * parent = 0 );
-    virtual ~TextureTile();
+    enum State {
+        StateEmpty,
+        StateScaled,
+        StateExpired,
+        StateUptodate
+    };
 
-    void setImage( const QByteArray & data );
+    enum MergeRule {
+        MergeCopy,
+        MergeMultiply
+    };
 
-    // TODO: Move into DatasetProvider:
-    void loadDataset( GeoSceneTexture *textureLayer,
-                      QCache<TileId, TextureTile> *tileCache = 0 );
+    explicit TextureTile( TileId const & );
+    TextureTile( TileId const & tileId, QString const & fileName );
+    ~TextureTile();
 
-    int depth() const;
-
-    int numBytes() const;
-
-    QImage rawtile();
-    QImage *tile();
-
-    // Here we retrieve the color value of the requested pixel on the tile.
-    // This needs to be done differently for grayscale ( uchar, 1 byte ).
-    // and color ( uint, 4 bytes ) images.
-
-    uint pixel( int x, int y ) const;
-    
-    // Here we retrieve the color value of the requested subpixel on the tile.
-    // This needs to be done differently for grayscale ( uchar, 1 byte ).
-    // and color ( uint, 4 bytes ) images.
-    // Subpixel calculation is done via bilinear interpolation.
-
-    uint pixelF( qreal x, qreal y ) const;
-    uint pixelF( qreal x, qreal y, const QRgb& pixel ) const;
-
- Q_SIGNALS:
-    void downloadTile(const QUrl& sourceUrl, const QString& destinationFileName,
-                      const QString& id, DownloadUsage );
-
- protected:
-    TextureTile( TextureTilePrivate &dd, QObject *parent );
+    TileId const & id() const;
+    TileId const & composedTileId() const;
+    QDateTime const & lastModified() const;
+    bool expired() const;
+    QImage const * image() const;
+    QImage * image();
+    State state() const;
+    MergeRule mergeRule() const;
 
  private:
-    Q_DECLARE_PRIVATE( TextureTile )
     Q_DISABLE_COPY( TextureTile )
-    void initJumpTables();
-    TextureTilePrivate *d;
+
+    void setState( State const );
+    void setImage( QByteArray const & data );
+    void setImage( QImage * const );
+    void setMergeRule( MergeRule const );
+    void setComposedTileId( TileId const & );
+    void setLastModified( QDateTime const & );
+    void setExpireSecs( int const );
+
+    TileId const m_id;
+    TileId m_composedTileId;
+    State m_state;
+    MergeRule m_mergeRule;
+    QDateTime m_lastModified;
+    int m_expireSecs;
+    QImage * m_image;
 };
+
+
+// inline definitions
+
+inline TileId const & TextureTile::id() const
+{
+    return m_id;
+}
+
+inline TileId const & TextureTile::composedTileId() const
+{
+    return m_composedTileId;
+}
+
+inline QDateTime const & TextureTile::lastModified() const
+{
+    return m_lastModified;
+}
+
+inline bool TextureTile::expired() const
+{
+    return m_lastModified.secsTo( QDateTime::currentDateTime() ) >= m_expireSecs;
+}
+
+inline QImage const * TextureTile::image() const
+{
+    return m_image;
+}
+
+inline QImage * TextureTile::image()
+{
+    return m_image;
+}
+
+inline TextureTile::State TextureTile::state() const
+{
+    return m_state;
+}
+
+inline TextureTile::MergeRule TextureTile::mergeRule() const
+{
+    return m_mergeRule;
+}
+
+inline void TextureTile::setState( State const state )
+{
+    m_state = state;
+}
+
+inline void TextureTile::setImage( QImage * const image )
+{
+    m_image = image;
+}
+
+inline void TextureTile::setMergeRule( MergeRule const mergeRule )
+{
+    m_mergeRule = mergeRule;
+}
+
+inline void TextureTile::setComposedTileId( TileId const & id )
+{
+    m_composedTileId = id;
+}
+
+inline void TextureTile::setLastModified( QDateTime const & lastModified )
+{
+    m_lastModified = lastModified;
+}
+
+inline void TextureTile::setExpireSecs( int const expireSecs )
+{
+    m_expireSecs = expireSecs;
+}
 
 }
 
-#endif // MARBLE_TEXTURETILE_H
+#endif

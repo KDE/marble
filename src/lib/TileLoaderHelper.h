@@ -87,7 +87,7 @@ namespace TileLoaderHelper
     /**
      * @brief Get the relative file name of a tile.
      */
-    QString relativeTileFileName( GeoSceneTexture *textureLayer, int zoomLevel, int x, int y );
+    QString relativeTileFileName( GeoSceneTexture const * const textureLayer, int zoomLevel, int x, int y );
 
     /**
      * @brief Get the theme string
@@ -95,7 +95,7 @@ namespace TileLoaderHelper
      * @return the old style theme string which used to be the argument for many methods,
      *         for example "maps/earth/srtm".
      */
-    QString themeStr( GeoSceneTexture *textureLayer );
+    QString themeStr( GeoSceneTexture const * const textureLayer );
 }
 
 }

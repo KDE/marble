@@ -21,7 +21,7 @@
 namespace Marble
 {
 
-class TileLoader;
+class StackedTileLoader;
 
 
 /*
@@ -36,7 +36,8 @@ class TileLoader;
 class SphericalScanlineTextureMapper : public AbstractScanlineTextureMapper
 {
  public:
-    explicit SphericalScanlineTextureMapper( TileLoader *tileLoader, QObject * parent =0 );
+    SphericalScanlineTextureMapper( GeoSceneTexture *textureLayer, StackedTileLoader *tileLoader,
+                                    QObject *parent = 0 );
 
     void mapTexture( ViewParams *viewParams );
 

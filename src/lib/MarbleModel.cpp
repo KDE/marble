@@ -23,6 +23,7 @@
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QSortFilterProxyModel>
 
+#include "MapThemeManager.h"
 #include "global.h"
 #include "MarbleDebug.h"
 #include "gps/GpsLayer.h"
@@ -67,10 +68,10 @@
 #include "StoragePolicy.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
-#include "TextureTile.h"
+#include "StackedTile.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
-#include "TileLoader.h"
+#include "StackedTileLoader.h"
 #include "TileLoaderHelper.h"
 #include "VectorComposer.h"
 #include "ViewParams.h"
@@ -86,6 +87,7 @@ class MarbleModelPrivate
         : m_parent( parent ),
           m_dataFacade( 0 ),
           m_pluginManager( new PluginManager( parent ) ),
+          m_mapThemeManager( new MapThemeManager( parent )),
           m_mapTheme( 0 ),
           m_layerManager( 0 ),
           m_downloadManager( new HttpDownloadManager( new FileStoragePolicy(
@@ -109,6 +111,7 @@ class MarbleModelPrivate
     MarbleDataFacade        *m_dataFacade;
 
     PluginManager           *m_pluginManager;
+    MapThemeManager         *m_mapThemeManager;
 
     // View and paint stuff
     GeoSceneDocument        *m_mapTheme;
@@ -117,7 +120,7 @@ class MarbleModelPrivate
 
     HttpDownloadManager     *m_downloadManager;
 
-    TileLoader              *m_tileLoader;
+    StackedTileLoader       *m_tileLoader;
     AbstractScanlineTextureMapper   *m_texmapper;
 
     static VectorComposer   *m_veccomposer; // FIXME: Make not a pointer.
@@ -161,7 +164,7 @@ MarbleModel::MarbleModel( QObject *parent )
              d->m_downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage )));
     d->m_dataFacade = new MarbleDataFacade( this );
 
-    d->m_tileLoader = new TileLoader( d->m_downloadManager, this );
+    d->m_tileLoader = new StackedTileLoader( d->m_mapThemeManager, d->m_downloadManager, this );
 
     d->m_texmapper = 0;
     
@@ -224,7 +227,7 @@ MarbleModel::MarbleModel( QObject *parent )
     /* Assume we are dealing with the earth */
     d->m_planet = new Planet( "earth" );
     d->m_sunLocator     = new SunLocator( d->m_dateTime, d->m_planet );
-    d->m_layerDecorator = new MergedLayerDecorator( d->m_sunLocator );
+    d->m_layerDecorator = new MergedLayerDecorator( d->m_tileLoader, d->m_sunLocator );
 
     connect(d->m_dateTime,   SIGNAL( timeChanged() ),
             d->m_sunLocator, SLOT( update() ) );
@@ -352,7 +355,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         QString installMap = texture->installMap();
         QString role = d->m_mapTheme->map()->layer( themeID )->role();
 
-        if ( !TileLoader::baseTilesAvailable( layer )
+        if ( !StackedTileLoader::baseTilesAvailable( layer )
             && !installMap.isEmpty() )
         {
             mDebug() << "Base tiles not available. Creating Tiles ... \n"
@@ -371,7 +374,6 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             qDebug("Tile creation completed");
             delete tileCreatorDlg;
         }
-        d->m_tileLoader->setLayer( layer );
     }
     else {
         d->m_tileLoader->flush();
@@ -496,18 +498,20 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 void MarbleModel::setupTextureMapper( Projection projection )
 {
   // FIXME: replace this with an approach based on the factory method pattern.
-
     delete d->m_texmapper;
 
     switch( projection ) {
         case Spherical:
-            d->m_texmapper = new SphericalScanlineTextureMapper( d->m_tileLoader, this );
+            d->m_texmapper = new SphericalScanlineTextureMapper( textureLayer(), d->m_tileLoader,
+                                                                 this );
             break;
         case Equirectangular:
-            d->m_texmapper = new EquirectScanlineTextureMapper( d->m_tileLoader, this );
+            d->m_texmapper = new EquirectScanlineTextureMapper( textureLayer(), d->m_tileLoader,
+                                                                this );
             break;
         case Mercator:
-            d->m_texmapper = new MercatorScanlineTextureMapper( d->m_tileLoader, this );
+            d->m_texmapper = new MercatorScanlineTextureMapper( textureLayer(), d->m_tileLoader,
+                                                                this );
             break;
     }
 
@@ -812,7 +816,7 @@ void MarbleModel::clearPersistentTileCache()
         QString installMap = texture->installMap();
         QString role = d->m_mapTheme->map()->layer( themeID )->role();
 
-        if ( !TileLoader::baseTilesAvailable( layer )
+        if ( !StackedTileLoader::baseTilesAvailable( layer )
             && !installMap.isEmpty() )
         {
             mDebug() << "Base tiles not available. Creating Tiles ... \n"
@@ -834,15 +838,10 @@ void MarbleModel::clearPersistentTileCache()
     }
 }
 
-void MarbleModel::paintTile( TextureTile* tile, GeoSceneTexture *textureLayer )
+void MarbleModel::paintTile( StackedTile* tile, GeoSceneTexture *textureLayer )
 {
 //    mDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level
 //             << "requestTileUpdate" << requestTileUpdate;
-    
-    if ( d->m_downloadManager != 0 ) {
-        connect( d->m_layerDecorator, SIGNAL( downloadTile( QUrl, QString, QString, DownloadUsage ) ),
-                 d->m_downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage ) ) );
-    }
 
     d->m_layerDecorator->setInfo( tile->id() );
     d->m_layerDecorator->setTile( tile->tile() );
@@ -937,6 +936,24 @@ void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
     for (; pos != end; ++pos ) {
         d->m_downloadManager->addDownloadPolicy( **pos );
     }
+}
+
+// this method will only temporarily "pollute" the MarbleModel class
+GeoSceneTexture * MarbleModel::textureLayer() const
+{
+    if ( !d->m_mapTheme )
+        return 0;
+    if ( !d->m_mapTheme->map()->hasTextureLayers() )
+        return 0;
+
+    // As long as we don't have an Layer Management Class we just lookup
+    // the name of the layer that has the same name as the theme Id
+    const QString themeId = d->m_mapTheme->head()->theme();
+    GeoSceneLayer * const layer = static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeId ));
+    if ( !layer )
+        return 0;
+
+    return static_cast<GeoSceneTexture*>( layer->groundDataset() );
 }
 
 }

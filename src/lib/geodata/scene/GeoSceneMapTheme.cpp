@@ -20,7 +20,6 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "TileLoader.h"
 
 namespace Marble
 {

@@ -30,13 +30,15 @@ namespace Marble
 class GeoSceneDocument;
 class GeoSceneTexture;
 class SunLocator;
+class StackedTile;
+class StackedTileLoader;
 
 class MergedLayerDecorator : public QObject
 {
     Q_OBJECT
 	
  public:
-    explicit MergedLayerDecorator(SunLocator* sunLocator);
+    MergedLayerDecorator( StackedTileLoader * const tileLoader, SunLocator* sunLocator );
     virtual ~MergedLayerDecorator();
 
     // The Parameter themeId is only used for displaying the TileId,
@@ -44,9 +46,6 @@ class MergedLayerDecorator : public QObject
     void paint( const QString& themeId, GeoSceneDocument *mapTheme = 0 );
     void paintTileId(const QString& themeId);
     
-    void setShowClouds(bool show);
-    bool showClouds() const;
-
     void setShowTileId(bool show);
     bool showTileId() const;
 	
@@ -54,15 +53,12 @@ class MergedLayerDecorator : public QObject
     void setInfo( TileId const &id );
 	
  Q_SIGNALS:
-    void downloadTile(const QUrl& sourceUrl, const QString& destinationFileName,
-                      const QString& id, DownloadUsage );
     void repaintMap();
 	
  private:
-    QImage loadDataset( GeoSceneTexture *textureLayer );
+    StackedTile * loadDataset( GeoSceneTexture *textureLayer );
     int maxDivisor( int maximum, int fullLength );
 
-    void initClouds();
     void initCityLights();
 
     void paintSunShading();
@@ -70,15 +66,13 @@ class MergedLayerDecorator : public QObject
 	
  protected:
     Q_DISABLE_COPY( MergedLayerDecorator )
+    StackedTileLoader * const m_tileLoader;
     QImage* m_tile;
     TileId m_id;
     SunLocator* m_sunLocator;
-    bool m_cloudlayer;
     bool m_showTileId;
     GeoSceneDocument *m_cityLightsTheme;
-    GeoSceneDocument *m_blueMarbleTheme;
     GeoSceneTexture *m_cityLightsTextureLayer;
-    GeoSceneTexture *m_cloudsTextureLayer;
 };
 
 }

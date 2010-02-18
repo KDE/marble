@@ -56,10 +56,6 @@ class AbstractTile : public QObject
     void setUsed( bool used );
 
     TileState state() const;
-    void setState( TileState state );
-
-    const QDateTime & created() const;
-    void setCreated( const QDateTime &created );
 
 protected:
     AbstractTilePrivate * const d_ptr;

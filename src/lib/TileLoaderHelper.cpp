@@ -105,8 +105,8 @@ QUrl TileLoaderHelper::downloadUrl( GeoSceneTexture *textureLayer, int zoomLevel
     return tileUrl;
 }
 
-QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture *textureLayer, int level, int x,
-                                                int y )
+QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture const * const textureLayer,
+                                                int level, int x, int y )
 {
     QString relFileName;
     if ( textureLayer ) {
@@ -142,7 +142,7 @@ QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture *textureLayer, i
     return relFileName;
 }
 
-QString TileLoaderHelper::themeStr( GeoSceneTexture *textureLayer )
+QString TileLoaderHelper::themeStr( GeoSceneTexture const * const textureLayer )
 {
     QString oldThemeStr;
 

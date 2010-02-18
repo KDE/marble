@@ -13,8 +13,6 @@
 #include "AbstractTile.h"
 #include "AbstractTile_p.h"
 
-#include <QtCore/QDateTime>
-
 #include "TileId.h"
 
 namespace Marble
@@ -23,8 +21,7 @@ namespace Marble
 AbstractTilePrivate::AbstractTilePrivate( const TileId& id )
     : m_id( id ),
       m_used( false ),
-      m_state( AbstractTile::TileEmpty ),
-      m_created( QDateTime::currentDateTime() )
+      m_state( AbstractTile::TileEmpty )
 {
 }
 
@@ -70,24 +67,6 @@ AbstractTile::TileState AbstractTile::state() const
 {
     Q_D( const AbstractTile );
     return d->m_state;
-}
-
-void AbstractTile::setState( TileState state )
-{
-    Q_D( AbstractTile );
-    d->m_state = state;
-}
-
-const QDateTime & AbstractTile::created() const
-{
-    Q_D( const AbstractTile );
-    return d->m_created;
-}
-
-void AbstractTile::setCreated( const QDateTime &created )
-{
-    Q_D( AbstractTile );
-    d->m_created = created;
 }
 
 }
