@@ -42,43 +42,43 @@ TileLoader::TileLoader( MapThemeManager const * const mapThemeManager,
 //     - if not expired: create TextureTile, set state to "uptodate", return it => done
 //     - if expired: create TextureTile, state is set to Expired by default, trigger dl,
 
-TextureTile * TileLoader::loadTile( TileId const & composedTileId, TileId const & baseTileId )
+TextureTile * TileLoader::loadTile( TileId const & stackedTileId, TileId const & tileId )
 {
-    QString const fileName = tileFileName( baseTileId );
+    QString const fileName = tileFileName( tileId );
     QFileInfo const fileInfo( fileName );
     if ( fileInfo.exists() ) {
         // file is there, so create and return a tile object in any case,
         // but check if an update should be triggered
-        GeoSceneTexture const * const textureLayer = findTextureLayer( baseTileId );
-        TextureTile * const tile = new TextureTile( baseTileId, fileName );
-        tile->setComposedTileId( composedTileId );
+        GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
+        TextureTile * const tile = new TextureTile( tileId, fileName );
+        tile->setComposedTileId( stackedTileId );
         tile->setLastModified( fileInfo.lastModified() );
         tile->setExpireSecs( textureLayer->expire() );
 
         if ( !tile->expired() ) {
-            mDebug() << "TileLoader::loadTile" << baseTileId.toString() << "StateUptodate";
+            mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateUptodate";
             tile->setState( TextureTile::StateUptodate );
         } else {
-            mDebug() << "TileLoader::loadTile" << baseTileId.toString() << "StateExpired";
-            m_waitingForUpdate.insert( baseTileId, tile );
-            triggerDownload( baseTileId );
+            mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateExpired";
+            m_waitingForUpdate.insert( tileId, tile );
+            triggerDownload( tileId );
         }
         return tile;
     }
 
     // tile was not locally available => trigger download and look for tiles in other levels
     // for scaling
-    TextureTile * const tile = new TextureTile( baseTileId );
-    tile->setComposedTileId( composedTileId );
-    m_waitingForUpdate.insert( baseTileId, tile );
-    triggerDownload( baseTileId );
-    QImage * const replacementTile = scaledLowerLevelTile( baseTileId );
+    TextureTile * const tile = new TextureTile( tileId );
+    tile->setComposedTileId( stackedTileId );
+    m_waitingForUpdate.insert( tileId, tile );
+    triggerDownload( tileId );
+    QImage * const replacementTile = scaledLowerLevelTile( tileId );
     if ( replacementTile ) {
-        mDebug() << "TileLoader::loadTile" << baseTileId.toString() << "StateScaled";
+        mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateScaled";
         tile->setImage( replacementTile );
         tile->setState( TextureTile::StateScaled );
     } else {
-        mDebug() << "TileLoader::loadTile" << baseTileId.toString() << "No tiles found";
+        mDebug() << "TileLoader::loadTile" << tileId.toString() << "No tiles found";
     }
     return tile;
 }
