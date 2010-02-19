@@ -450,6 +450,7 @@ void MarbleMap::setRadius(int radius)
         setNeedsUpdate();
     }
 
+    d->m_logzoom = d->zoom(radius);
     emit zoomChanged( d->m_logzoom );
     emit distanceChanged(distanceString());
 }
@@ -530,7 +531,6 @@ void MarbleMap::setDistance( qreal newDistance )
     }    
 
     int newRadius = radiusFromDistance(newDistance);
-    d->m_logzoom = d->zoom(newRadius);
     setRadius(newRadius);
 }
 
@@ -741,7 +741,6 @@ void MarbleMap::zoomView(int newZoom)
     // Prevent infinite loops.
     if ( newZoom  == d->m_logzoom )
         return;
-    d->m_logzoom = newZoom;
     setRadius( d->radius( newZoom ) );
 
     // We don't do this on every paintEvent to improve performance.
