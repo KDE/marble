@@ -13,18 +13,14 @@
 #ifndef MARBLERENDERPLUGININTERFACEH
 #define MARBLERENDERPLUGININTERFACEH
 
-#include <QtCore/QString>
-#include <QtCore/QStringList>
 #include <QtCore/QtPlugin>
 
 #include "PluginInterface.h"
+#include "LayerInterface.h"
 
 namespace Marble
 {
 
-class GeoPainter;
-class GeoSceneLayer;
-class ViewportParams;
 class RenderPlugin;
 
 /**
@@ -32,7 +28,7 @@ class RenderPlugin;
  *
  */
 
-class RenderPluginInterface: public PluginInterface
+class RenderPluginInterface: public PluginInterface, public LayerInterface
 {
  public:
     virtual ~RenderPluginInterface();
@@ -70,33 +66,6 @@ class RenderPluginInterface: public PluginInterface
      *                        otherwise choose the preferred position
      */
     virtual QString renderPolicy() const = 0;
-
-    /**
-     * @brief Preferred level in the layer stack for the rendering
-     *
-     * Gives a preferred level in the existing layer stack where
-     * the render() method of this plugin should get executed.
-     *.
-     * Possible Values:
-     * "NONE"
-     * "STARS"
-     * "BEHIND_TARGET"
-     * "SURFACE"
-     * "HOVERS_ABOVE_SURFACE"
-     * "ATMOSPHERE"
-     * "ORBIT"
-     * "ALWAYS_ON_TOP"
-     * "FLOAT_ITEM"
-     * "USER_TOOLS"
-     */
-    virtual QStringList renderPosition() const = 0;
-
-    /**
-     * @brief Renders the content provided by the plugin on the viewport.
-     * @return @c true  Returns whether the rendering has been successful
-     */
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 ) = 0;
 };
 
 }

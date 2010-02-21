@@ -874,6 +874,16 @@ QList<AbstractDataPluginItem *> MarbleModel::whichItemAt( const QPoint& curpos )
     return d->m_layerManager->whichItemAt( curpos );
 }
 
+void MarbleModel::addLayer( LayerInterface *layer )
+{
+    d->m_layerManager->addLayer(layer);
+}
+
+void MarbleModel::removeLayer( LayerInterface *layer )
+{
+    d->m_layerManager->removeLayer(layer);
+}
+
 Planet* MarbleModel::planet() const
 {
     return d->m_planet;

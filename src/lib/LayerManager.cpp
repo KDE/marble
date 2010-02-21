@@ -28,6 +28,7 @@
 #include "PluginManager.h"
 #include "RenderPlugin.h"
 #include "ViewParams.h"
+#include "LayerInterface.h"
 
 namespace Marble
 {
@@ -51,6 +52,7 @@ class LayerManagerPrivate
     QList<RenderPlugin *> m_renderPlugins;
     QList<AbstractFloatItem *> m_floatItems;
     QList<AbstractDataPlugin *> m_dataPlugins;
+    QList<LayerInterface *> m_internalLayers;
 };
 
 
@@ -147,6 +149,12 @@ void LayerManager::renderLayer( GeoPainter *painter, ViewParams *viewParams,
             }
         }
     }
+
+    foreach( LayerInterface *layer, d->m_internalLayers) {
+        if ( layer && layer->renderPosition().contains( renderPosition )) {
+            layer->render(painter, viewport, renderPosition);
+        }
+    }
 }
 
 void LayerManager::loadLayers()
@@ -213,6 +221,16 @@ void LayerManager::syncPropertyWithAction( QString nameId, bool checked )
         }
         d->m_mapTheme->settings()->setPropertyValue( nameId, checked );
     }
+}
+
+void LayerManager::addLayer(LayerInterface *layer)
+{
+    d->m_internalLayers.push_back(layer);
+}
+
+void LayerManager::removeLayer(LayerInterface *layer)
+{
+    d->m_internalLayers.removeAll(layer);
 }
 
 }

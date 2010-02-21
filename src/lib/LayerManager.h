@@ -37,6 +37,7 @@ class AbstractFloatItem;
 class AbstractDataPlugin;
 class MarbleDataFacade;
 class PluginManager;
+class LayerInterface;
 
 /**
  * @short The class that handles Marble's DGML layers.
@@ -78,6 +79,16 @@ class MARBLE_EXPORT LayerManager : public QObject
      * @brief Returns all items of dataPlugins on the position curpos 
      */
     QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
+
+    /**
+     * @brief Add a layer to be included in rendering.
+     */
+    void addLayer(LayerInterface *layer);
+
+    /**
+     * @brief Remove a layer from being included in rendering.
+     */
+    void removeLayer(LayerInterface *layer);
 
  Q_SIGNALS:
     /**

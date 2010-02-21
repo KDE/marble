@@ -70,6 +70,7 @@ class GeoDataDocument;
 class GeoSceneDocument;
 class GeoSceneTexture;
 class Planet;
+class LayerInterface;
 
 /**
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -280,6 +281,16 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Returns all widgets of dataPlugins on the position curpos 
      */
     QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
+
+    /**
+     * @brief Add a layer to be included in rendering.
+     */
+    void addLayer( LayerInterface *layer );
+
+    /**
+     * @brief Remove a layer from being included in rendering.
+     */
+    void removeLayer( LayerInterface *layer );
 
     /**
      * @brief Returns the planet object for the current map.
