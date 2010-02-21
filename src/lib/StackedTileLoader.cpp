@@ -186,34 +186,23 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
         tile->setForMergedLayerDecorator();
     d->m_tilesOnDisplay[ stackedTileId ] = tile;
 
-    GeoSceneLayer const * const sceneLayer = findSceneLayer( stackedTileId );
-    mDebug() << "scene layer:" << sceneLayer->name();
-
-    QVector<GeoSceneAbstractDataset*> textureLayers = sceneLayer->datasets();
-    mDebug() << "StackedTileLoader::loadTile: loading base tiles:"
-             << textureLayers.size() << "texture layers found";
-
-    QVector<GeoSceneAbstractDataset*>::const_iterator pos = textureLayers.constBegin();
-    QVector<GeoSceneAbstractDataset*>::const_iterator const end = textureLayers.constEnd();
+    QVector<GeoSceneTexture const *> const textureLayers = findRelevantTextureLayers( stackedTileId );
+    QVector<GeoSceneTexture const *>::const_iterator pos = textureLayers.constBegin();
+    QVector<GeoSceneTexture const *>::const_iterator const end = textureLayers.constEnd();
     for (; pos != end; ++pos ) {
-        GeoSceneTexture const * const textureLayer = dynamic_cast<GeoSceneTexture const *>( *pos );
-        if ( !textureLayer )
-            mDebug() << "not a texture layer" << (*pos)->name();
-        if ( textureLayer && ( !textureLayer->hasMaximumTileLevel()
-                               || stackedTileId.zoomLevel() <= textureLayer->maximumTileLevel() )) {
-            TileId const simpleTileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
-                                       stackedTileId.x(), stackedTileId.y() );
-            mDebug() << "StackedTileLoader::loadTile: base tile" << textureLayer->sourceDir()
-                     << simpleTileId.toString();
-            TextureTile * const simpleTile = d->m_simpleTileLoader->loadTile( stackedTileId,
-                                                                              simpleTileId );
-            // hack to try clouds, first tile is not handled here, MergeCopy is the default,
-            // the merge rule for following tiles is set to MergeMultiply here
-            if ( simpleTile && tile->hasBaseTiles() )
-                simpleTile->setMergeRule( TextureTile::MergeMultiply );
-            if ( simpleTile )
-                tile->addBaseTile( simpleTile );
-        }
+        GeoSceneTexture const * const textureLayer = *pos;
+        TileId const simpleTileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
+                                   stackedTileId.x(), stackedTileId.y() );
+        mDebug() << "StackedTileLoader::loadTile: base tile" << textureLayer->sourceDir()
+                 << simpleTileId.toString();
+        TextureTile * const simpleTile = d->m_simpleTileLoader->loadTile( stackedTileId,
+                                                                          simpleTileId );
+        // hack to try clouds, first tile is not handled here, MergeCopy is the default,
+        // the merge rule for following tiles is set to MergeMultiply here
+        if ( simpleTile && tile->hasBaseTiles() )
+            simpleTile->setMergeRule( TextureTile::MergeMultiply );
+        if ( simpleTile )
+            tile->addBaseTile( simpleTile );
     }
     Q_ASSERT( tile->hasBaseTiles() );
 
@@ -345,6 +334,25 @@ inline GeoSceneTexture * StackedTileLoader::findTextureLayer( TileId const & id 
     GeoSceneTexture * const textureLayer = d->m_textureLayers.value( id.mapThemeIdHash(), 0 );
     Q_ASSERT( textureLayer );
     return textureLayer;
+}
+
+// 
+QVector<GeoSceneTexture const *>
+StackedTileLoader::findRelevantTextureLayers( TileId const & stackedTileId ) const
+{
+    GeoSceneLayer const * const sceneLayer = findSceneLayer( stackedTileId );
+    QVector<GeoSceneAbstractDataset*> textureLayers = sceneLayer->datasets();
+    QVector<GeoSceneTexture const *> result;
+    QVector<GeoSceneAbstractDataset*>::const_iterator pos = textureLayers.constBegin();
+    QVector<GeoSceneAbstractDataset*>::const_iterator const end = textureLayers.constEnd();
+    for (; pos != end; ++pos ) {
+        GeoSceneTexture const * const candidate = dynamic_cast<GeoSceneTexture const *>( *pos );
+        if ( candidate && ( !candidate->hasMaximumTileLevel()
+                            || stackedTileId.zoomLevel() <= candidate->maximumTileLevel() )) {
+            result.append( candidate );
+        }
+    }
+    return result;
 }
 
 void StackedTileLoader::initTextureLayers()

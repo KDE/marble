@@ -158,6 +158,8 @@ class StackedTileLoader : public QObject
         GeoSceneLayer const * findSceneLayer( TileId const & ) const;
         GeoSceneTexture const * findTextureLayer( TileId const & ) const;
         GeoSceneTexture * findTextureLayer( TileId const & );
+        QVector<GeoSceneTexture const *>
+            findRelevantTextureLayers( TileId const & stackedTileId ) const;
         void initTextureLayers();
         void mergeDecorations( StackedTile * const, GeoSceneTexture * const ) const;
 
