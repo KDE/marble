@@ -162,6 +162,7 @@ set(marblewidget_SRCS
     
     PluginInterface.cpp
     NetworkPluginInterface.cpp
+    LayerInterface.cpp
     RenderPlugin.cpp
     RenderPluginInterface.cpp
     PositionProviderPlugin.cpp

@@ -25,6 +25,9 @@ class LayerInterface
 {
 public:
 
+    /** Destructor */
+    virtual ~LayerInterface();
+
     /**
      * @brief Preferred level in the layer stack for the rendering
      *
