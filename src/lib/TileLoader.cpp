@@ -156,7 +156,7 @@ QImage * TileLoader::scaledLowerLevelTile( TileId const & id )
             mDebug() << "QImage::copy:" << startX << startY << partWidth << partHeight;
             QImage const part = toScale.copy( startX, startY, partWidth, partHeight );
             mDebug() << "QImage::scaled:" << toScale.size();
-            result = new QImage ( part.scaled( toScale.size() ));
+            result = new QImage( part.scaled( toScale.size() ));
         }
         --level;
     }
