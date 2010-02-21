@@ -78,10 +78,10 @@ class StackedTile : public AbstractTile
     Q_DECLARE_PRIVATE( StackedTile )
     Q_DISABLE_COPY( StackedTile )
 
-    void addBaseTile( TextureTile * const );
+    void addTile( TextureTile * const );
     void deriveCompletionState();
     void initJumpTables();
-    bool hasBaseTiles() const;
+    bool hasTiles() const;
     void initResultTile();
 
     StackedTilePrivate *d;

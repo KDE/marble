@@ -193,18 +193,18 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
         GeoSceneTexture const * const textureLayer = *pos;
         TileId const simpleTileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                                    stackedTileId.x(), stackedTileId.y() );
-        mDebug() << "StackedTileLoader::loadTile: base tile" << textureLayer->sourceDir()
+        mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
                  << simpleTileId.toString();
         TextureTile * const simpleTile = d->m_simpleTileLoader->loadTile( stackedTileId,
                                                                           simpleTileId );
         // hack to try clouds, first tile is not handled here, MergeCopy is the default,
         // the merge rule for following tiles is set to MergeMultiply here
-        if ( simpleTile && tile->hasBaseTiles() )
+        if ( simpleTile && tile->hasTiles() )
             simpleTile->setMergeRule( TextureTile::MergeMultiply );
         if ( simpleTile )
-            tile->addBaseTile( simpleTile );
+            tile->addTile( simpleTile );
     }
-    Q_ASSERT( tile->hasBaseTiles() );
+    Q_ASSERT( tile->hasTiles() );
 
     if ( tile->state() != StackedTile::TileEmpty ) {
         tile->initResultTile();

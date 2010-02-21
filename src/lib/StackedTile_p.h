@@ -35,7 +35,7 @@ class StackedTilePrivate : AbstractTilePrivate
     uchar   **jumpTable8;
     uint    **jumpTable32;
 
-    QVector<TextureTile*> m_baseTiles;
+    QVector<TextureTile*> m_tiles;
     QImage    m_resultTile;
 
     int       m_depth;
@@ -47,8 +47,8 @@ class StackedTilePrivate : AbstractTilePrivate
 
     inline uint pixel( int x, int y ) const;
     inline uint pixelF( qreal x, qreal y, const QRgb& pixel ) const;
-    void mergeCopyToResult( TextureTile const * const baseTile );
-    void mergeMultiplyToResult( TextureTile const * const baseTile );
+    void mergeCopyToResult( TextureTile const * const tile );
+    void mergeMultiplyToResult( TextureTile const * const tile );
 };
 
 }
