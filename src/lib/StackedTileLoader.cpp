@@ -203,8 +203,10 @@ StackedTile* StackedTileLoader::loadTile( TileId const &tileId, bool const forMe
                                || tileId.zoomLevel() <= textureLayer->maximumTileLevel() )) {
             TileId const simpleTileId( textureLayer->sourceDir(), tileId.zoomLevel(),
                                        tileId.x(), tileId.y() );
-            mDebug() << "StackedTileLoader::loadTile: base tile" << textureLayer->sourceDir() << simpleTileId.toString();
-            TextureTile * const simpleTile = d->m_simpleTileLoader->loadTile( tileId, simpleTileId );
+            mDebug() << "StackedTileLoader::loadTile: base tile" << textureLayer->sourceDir()
+                     << simpleTileId.toString();
+            TextureTile * const simpleTile = d->m_simpleTileLoader->loadTile( tileId,
+                                                                              simpleTileId );
             // hack to try clouds
             if ( simpleTile && tile->hasBaseTiles() )
                 simpleTile->setMergeRule( TextureTile::MergeMultiply );
@@ -375,7 +377,7 @@ void StackedTileLoader::initTextureLayers()
 }
 
 void StackedTileLoader::mergeDecorations( StackedTile * const tile,
-                                   GeoSceneTexture * const textureLayer ) const
+                                          GeoSceneTexture * const textureLayer ) const
 {
     Q_ASSERT( tile->state() != StackedTile::TileEmpty );
     if ( !tile->forMergedLayerDecorator() )
