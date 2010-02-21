@@ -147,25 +147,26 @@ void StackedTileLoader::flush()
     d->m_tilesOnDisplay.clear();
 }
 
-StackedTile* StackedTileLoader::loadTile( TileId const &tileId, bool const forMergedLayerDecorator )
+StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
+                                          bool const forMergedLayerDecorator )
 {
     // check if the tile is in the hash
-    StackedTile * tile = d->m_tilesOnDisplay.value( tileId, 0 );
+    StackedTile * tile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
     if ( tile ) {
         tile->setUsed( true );
         return tile;
     }
     // here ends the performance critical section of this method
 
-    mDebug() << "StackedTileLoader::loadTile" << tileId.toString();
+    mDebug() << "StackedTileLoader::loadTile" << stackedTileId.toString();
 
     // the tile was not in the hash or has been removed because of expiration
     // so check if it is in the cache
-    tile = d->m_tileCache.take( tileId );
+    tile = d->m_tileCache.take( stackedTileId );
     if ( tile ) {
         // the tile was in the cache, but is it up to date?
         if ( !tile->expired() ) {
-            d->m_tilesOnDisplay[ tileId ] = tile;
+            d->m_tilesOnDisplay[ stackedTileId ] = tile;
             tile->setUsed( true );
             return tile;
         } else {
@@ -174,18 +175,18 @@ StackedTile* StackedTileLoader::loadTile( TileId const &tileId, bool const forMe
         }
     }
 
-    GeoSceneTexture * const texture = d->m_textureLayers[ tileId.mapThemeIdHash() ];
+    GeoSceneTexture * const texture = d->m_textureLayers[ stackedTileId.mapThemeIdHash() ];
 
     // tile (valid) has not been found in hash or cache, so load it from disk
     // and place it in the hash from where it will get transferred to the cache
 
-    // mDebug() << "load Tile from Disk: " << tileId.toString();
-    tile = new StackedTile( tileId );
+    // mDebug() << "load Tile from Disk: " << stackedTileId.toString();
+    tile = new StackedTile( stackedTileId );
     if ( forMergedLayerDecorator )
         tile->setForMergedLayerDecorator();
-    d->m_tilesOnDisplay[ tileId ] = tile;
+    d->m_tilesOnDisplay[ stackedTileId ] = tile;
 
-    GeoSceneLayer const * const sceneLayer = d->m_sceneLayers.value( tileId.mapThemeIdHash(), 0 );
+    GeoSceneLayer const * const sceneLayer = d->m_sceneLayers.value( stackedTileId.mapThemeIdHash(), 0 );
     Q_ASSERT( sceneLayer );
     mDebug() << "scene layer:" << sceneLayer->name();
 
@@ -200,12 +201,12 @@ StackedTile* StackedTileLoader::loadTile( TileId const &tileId, bool const forMe
         if ( !textureLayer )
             mDebug() << "not a texture layer" << (*pos)->name();
         if ( textureLayer && ( !textureLayer->hasMaximumTileLevel()
-                               || tileId.zoomLevel() <= textureLayer->maximumTileLevel() )) {
-            TileId const simpleTileId( textureLayer->sourceDir(), tileId.zoomLevel(),
-                                       tileId.x(), tileId.y() );
+                               || stackedTileId.zoomLevel() <= textureLayer->maximumTileLevel() )) {
+            TileId const simpleTileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
+                                       stackedTileId.x(), stackedTileId.y() );
             mDebug() << "StackedTileLoader::loadTile: base tile" << textureLayer->sourceDir()
                      << simpleTileId.toString();
-            TextureTile * const simpleTile = d->m_simpleTileLoader->loadTile( tileId,
+            TextureTile * const simpleTile = d->m_simpleTileLoader->loadTile( stackedTileId,
                                                                               simpleTileId );
             // hack to try clouds
             if ( simpleTile && tile->hasBaseTiles() )
@@ -303,17 +304,17 @@ void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
     d->m_tileCache.setMaxCost( kiloBytes * 1024 );
 }
 
-void StackedTileLoader::updateTile( TileId const & composedTileId, TileId const & baseTileId )
+void StackedTileLoader::updateTile( TileId const & stackedTileId, TileId const & baseTileId )
 {
-    StackedTile * const tile = d->m_tilesOnDisplay.value( composedTileId, 0 );
+    StackedTile * const tile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
     if ( tile ) {
         tile->deriveCompletionState();
         tile->initResultTile();
-        mergeDecorations( tile, findTextureLayer( composedTileId ));
+        mergeDecorations( tile, findTextureLayer( stackedTileId ));
         emit tileUpdateAvailable();
     } else
         // TODO: also update tiles in the cache, not doing it is really a waste of i/o
-        d->m_tileCache.remove( composedTileId );
+        d->m_tileCache.remove( stackedTileId );
 }
 
 void StackedTileLoader::update()

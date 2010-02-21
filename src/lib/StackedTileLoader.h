@@ -79,9 +79,11 @@ class StackedTileLoader : public QObject
         /**
          * Loads a tile and returns it.
          *
-         * @param tileId The Id of the requested tile, containing the x and y coordinate and the zoom level.
+         * @param stackedTileId The Id of the requested tile, containing the x and y coordinate
+         *                      and the zoom level.
          */
-        StackedTile* loadTile( TileId const &tileId, bool const forMergedLayerDecorator = false );
+        StackedTile* loadTile( TileId const &stackedTileId,
+                               bool const forMergedLayerDecorator = false );
 
         /**
          * Resets the internal tile hash.
@@ -136,7 +138,7 @@ class StackedTileLoader : public QObject
 
         /**
          */
-        void updateTile( TileId const & composedTileId, TileId const & baseTileId );
+        void updateTile( TileId const & stackedTileId, TileId const & baseTileId );
 
         /**
          * Effectively triggers a reload of all tiles that are currently in use
