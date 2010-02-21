@@ -247,12 +247,12 @@ void NavigationFloatItem::updateButtons( int value )
     
     #ifdef MARBLE_SMALL_SCREEN
     if ( m_marbleWidget ) {
-        int minZoom = m_marbleWidget->map()->minimumZoom();
-        int maxZoom = m_marbleWidget->map()->maximumZoom();
+        minZoom = m_marbleWidget->map()->minimumZoom();
+        maxZoom = m_marbleWidget->map()->maximumZoom();
     }
     #else
-    int minZoom = m_navigationWidget.zoomSlider->minimum();
-    int maxZoom = m_navigationWidget.zoomSlider->maximum();
+    minZoom = m_navigationWidget.zoomSlider->minimum();
+    maxZoom = m_navigationWidget.zoomSlider->maximum();
     #endif
     
     if ( value <= minZoom ) {
