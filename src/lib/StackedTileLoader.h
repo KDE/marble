@@ -155,6 +155,7 @@ class StackedTileLoader : public QObject
 
     private:
         Q_DISABLE_COPY( StackedTileLoader )
+        GeoSceneLayer const * findSceneLayer( TileId const & ) const;
         GeoSceneTexture const * findTextureLayer( TileId const & ) const;
         GeoSceneTexture * findTextureLayer( TileId const & );
         void initTextureLayers();

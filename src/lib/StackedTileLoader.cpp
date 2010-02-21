@@ -186,8 +186,7 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
         tile->setForMergedLayerDecorator();
     d->m_tilesOnDisplay[ stackedTileId ] = tile;
 
-    GeoSceneLayer const * const sceneLayer = d->m_sceneLayers.value( stackedTileId.mapThemeIdHash(), 0 );
-    Q_ASSERT( sceneLayer );
+    GeoSceneLayer const * const sceneLayer = findSceneLayer( stackedTileId );
     mDebug() << "scene layer:" << sceneLayer->name();
 
     QVector<GeoSceneAbstractDataset*> textureLayers = sceneLayer->datasets();
@@ -323,6 +322,14 @@ void StackedTileLoader::update()
     flush(); // trigger a reload of all tiles that are currently in use
     d->m_tileCache.clear(); // clear the tile cache in physical memory
     emit tileUpdateAvailable();
+}
+
+inline GeoSceneLayer const * StackedTileLoader::findSceneLayer( TileId const & stackedTileId ) const
+{
+    GeoSceneLayer const * const result = d->m_sceneLayers.value( stackedTileId.mapThemeIdHash(),
+                                                                 0 );
+    Q_ASSERT( result );
+    return result;
 }
 
 inline GeoSceneTexture const * StackedTileLoader::findTextureLayer( TileId const & id ) const
