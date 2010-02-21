@@ -87,6 +87,10 @@ void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
 {
     TileId const id = TileId::fromString( tileId );
     TextureTile * const tile = m_waitingForUpdate.value( id, 0 );
+    // preliminary fix for reload map crash
+    // TODO: fix properly
+    if ( !tile )
+        return;
     Q_ASSERT( tile );
     m_waitingForUpdate.remove( id );
     tile->setImage( data );
