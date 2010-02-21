@@ -207,7 +207,8 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
                      << simpleTileId.toString();
             TextureTile * const simpleTile = d->m_simpleTileLoader->loadTile( stackedTileId,
                                                                               simpleTileId );
-            // hack to try clouds
+            // hack to try clouds, first tile is not handled here, MergeCopy is the default,
+            // the merge rule for following tiles is set to MergeMultiply here
             if ( simpleTile && tile->hasBaseTiles() )
                 simpleTile->setMergeRule( TextureTile::MergeMultiply );
             if ( simpleTile )
