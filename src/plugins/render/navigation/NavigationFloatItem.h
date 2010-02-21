@@ -13,11 +13,17 @@
 
 #include <QtCore/QObject>
 
+#include "global.h"
+
 // forward declarations
 
 #include "AbstractFloatItem.h"
 
+#ifdef MARBLE_SMALL_SCREEN
+#include "ui_navigation_small.h"
+#else
 #include "ui_navigation.h"
+#endif
 
 namespace Marble
 {
@@ -35,7 +41,11 @@ Q_OBJECT
 MARBLE_PLUGIN( NavigationFloatItem )
  public:
     explicit NavigationFloatItem( const QPointF &point = QPointF( -10, -10 ),
-                            const QSizeF &size = QSizeF( 100.0, 250.0 ) );
+#ifdef MARBLE_SMALL_SCREEN
+                                  const QSizeF &size = QSizeF( 88.0, 141.0 ) );
+#else 
+                                  const QSizeF &size = QSizeF( 104.0, 254.0 ) );
+#endif
     ~NavigationFloatItem();
 
     QStringList backendTypes() const;
@@ -83,7 +93,11 @@ MARBLE_PLUGIN( NavigationFloatItem )
     MarbleWidget *m_marbleWidget;
 
     /** Navigation controls */
+    #ifdef MARBLE_SMALL_SCREEN
+    Ui::NavigationSmall m_navigationWidget;
+    #else
     Ui::Navigation m_navigationWidget;
+    #endif
 
     /** Navigation controls embedding widget */
     QWidget *m_navigationParent;

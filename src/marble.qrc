@@ -10,6 +10,7 @@
         <file>icons/document-save-as.png</file>
         <file>icons/edit-copy.png</file>
         <file>icons/go-home.png</file>
+        <file>icons/go-home-large.png</file>
         <file>icons/get-hot-new-stuff.png</file>
         <file>icons/help-contents.png</file>
         <file>icons/help-whatsthis.png</file>
@@ -22,5 +23,7 @@
         <file>icons/user-offline.png</file>
         <file>icons/zoom-in.png</file>
         <file>icons/zoom-out.png</file>
+        <file>icons/zoom-in-large.png</file>
+        <file>icons/zoom-out-large.png</file>
     </qresource>
 </RCC>
