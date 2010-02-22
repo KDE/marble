@@ -329,6 +329,7 @@ else (APPLE AND QTONLY)
     PluginInterface.h
     RenderPlugin.h
     RenderPluginInterface.h
+    LayerInterface.h
     PluginAboutDialog.h
     marble_export.h
     Planet.h
