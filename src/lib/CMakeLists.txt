@@ -28,8 +28,8 @@ INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
 
 if (QTONLY)
-  set(GENERIC_LIB_VERSION "0.9.0")
-  set(GENERIC_LIB_SOVERSION "9")
+  set(GENERIC_LIB_VERSION "0.10.0")
+  set(GENERIC_LIB_SOVERSION "10")
 endif (QTONLY)
 
 if (QTONLY)
