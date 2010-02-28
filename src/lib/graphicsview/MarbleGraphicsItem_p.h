@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2009-2010 Bastian Holst <bastianholst@gmx.de>
 //
 
 #ifndef MARBLEGRAPHICSITEMPRIVATE_H
@@ -86,6 +86,11 @@ class MarbleGraphicsItemPrivate
     virtual QList<QPointF> positions() const
     {
         return QList<QPointF>();
+    }
+    
+    virtual QList<QPointF> absolutePositions() const
+    {
+        return positions();
     }
 
     void ensureValidCacheKey()

@@ -29,6 +29,7 @@ namespace Marble
 {
 
 class MarbleWidget;
+class WidgetGraphicsItem;
 
 /**
  * @short Provides a float item with zoom and move controls
@@ -91,6 +92,10 @@ MARBLE_PLUGIN( NavigationFloatItem )
  private:
     /** MarbleWidget this float item is installed as event filter for */
     MarbleWidget *m_marbleWidget;
+    
+    /** The GraphicsItem presenting the widgets. NavigationFloatItem doesn't take direct ownership
+        of this */
+    WidgetGraphicsItem *m_widgetItem;
 
     /** Navigation controls */
     #ifdef MARBLE_SMALL_SCREEN
@@ -98,9 +103,6 @@ MARBLE_PLUGIN( NavigationFloatItem )
     #else
     Ui::Navigation m_navigationWidget;
     #endif
-
-    /** Navigation controls embedding widget */
-    QWidget *m_navigationParent;
 
     /** Radius of the viewport last time */
     int m_oldViewportRadius;

@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2009-2010 Bastian Holst <bastianholst@gmx.de>
 //
 
 #include "MarbleGraphicsItem.h"
@@ -14,12 +14,15 @@
 
 // Marble
 #include "GeoPainter.h"
+#include "MarbleDebug.h"
 #include "ViewportParams.h"
 
 // Qt
-#include "MarbleDebug.h"
+#include <QtCore/QList>
+#include <QtCore/QSet>
 #include <QtGui/QPixmap>
 #include <QtGui/QPixmapCache>
+#include <QtGui/QMouseEvent>
 
 using namespace Marble;
 
@@ -262,8 +265,38 @@ void MarbleGraphicsItem::paint( GeoPainter *painter, ViewportParams *viewport,
 
 bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
 {
-    Q_UNUSED( object );
-    Q_UNUSED( e );
+    if ( ! ( e->type() == QEvent::MouseButtonDblClick
+             || e->type() == QEvent::MouseMove
+             || e->type() == QEvent::MouseButtonPress
+             || e->type() == QEvent::MouseButtonRelease ) )
+    {
+        return false;
+    }
+    
+    QMouseEvent *event = static_cast<QMouseEvent*> (e);
+    
+    if( p()->m_children ) {
+        QList<QPointF> absolutePositions = p()->absolutePositions();
+        
+        foreach( QPointF absolutePosition, absolutePositions ) {
+            QPoint shiftedPos = event->pos() - absolutePosition.toPoint();
+            
+            if ( QRect( QPoint( 0, 0 ), size().toSize() ).contains( shiftedPos ) ) {
+                foreach( MarbleGraphicsItem *child, *p()->m_children ) {
+                    QList<QRectF> childRects = child->boundingRects();
+                    
+                    foreach( QRectF childRect, childRects ) {
+                        if( childRect.toRect().contains( shiftedPos ) ) {
+                            if( child->eventFilter( object, e ) ) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     return false;
 }
 

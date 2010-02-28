@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2009      Bastian Holst <bastianholst@gmx.de>
+// Copyright 2009-2010 Bastian Holst <bastianholst@gmx.de>
 //
 
 #ifndef SCREENGRAPHICSITEMPRIVATE_H
@@ -13,6 +13,7 @@
 
 #include "MarbleGraphicsItem_p.h"
 
+#include "GeoGraphicsItem.h"
 #include "ScreenGraphicsItem.h"
 #include "ViewportParams.h"
 
@@ -61,6 +62,35 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
         position.setY( ( y >= 0 ) ? y : m_parentSize.height() + y - m_size.height() );
 
         return position;
+    }
+    
+    QList<QPointF> absolutePositions() const
+    {
+        if( m_parent == 0 ) {
+            return positions();
+        }
+        
+        QList<QPointF> parentPositions;        
+        ScreenGraphicsItem *screenItem = dynamic_cast<ScreenGraphicsItem*>( m_parent );
+        
+        if( screenItem ) {
+            parentPositions = screenItem->absolutePositions();
+        }
+        else {
+            GeoGraphicsItem *geoItem = dynamic_cast<GeoGraphicsItem*>( m_parent );
+            if( geoItem ) {
+                parentPositions = geoItem->positions();
+            }
+        }
+        
+        QPointF relativePosition = positivePosition();
+        
+        QList<QPointF> absolutePositions;
+        foreach( QPointF point, parentPositions ) {
+            absolutePositions.append( point + relativePosition );
+        }
+        
+        return absolutePositions;
     }
 
     void setProjection( AbstractProjection *projection,

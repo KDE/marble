@@ -42,37 +42,47 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
     virtual ~ScreenGraphicsItem();
 
     /**
-     * @brief Set the position of the float item
+     * @brief Set the position of the ScreenGraphicsItem
      * @param pos Position
      *
-     * Positive x-coordinates are counted left-aligned from the left map border.
-     * Negative x-coordinates are counted right-aligned from the right map border.
+     * Positive x-coordinates are counted left-aligned from the left border of the parent item.
+     * Negative x-coordinates are counted right-aligned from the right border of the parent item.
      *
-     * Positive y-coordinates are counted top-aligned from the top map border.
-     * Negative y-coordinates are counted right-aligned from the bottom map border.
+     * Positive y-coordinates are counted top-aligned from the top border of the parent item.
+     * Negative y-coordinates are counted right-aligned from the bottom border of the parent item.
      */
     void    setPosition( const QPointF& position );
 
     /**
-     * @brief Return the position of the float item
+     * @brief Return the position of the ScreenGraphicsItem
      *
-     * Positive x-coordinates are counted left-aligned from the left map border.
-     * Negative x-coordinates are counted right-aligned from the right map border.
+     * Positive x-coordinates are counted left-aligned from the left border of the parent item.
+     * Negative x-coordinates are counted right-aligned from the right border of the parent item.
      *
-     * Positive y-coordinates are counted top-aligned from the top map border.
-     * Negative y-coordinates are counted right-aligned from the bottom map border.
+     * Positive y-coordinates are counted top-aligned from the top border of the parent item.
+     * Negative y-coordinates are counted right-aligned from the bottom border of the parent item.
      */
     QPointF position() const;
 
     /**
-     * @brief Return the positive position of the float item
+     * @brief Return the positive position of the ScreenGraphicsItem
      *
      * All coordinates are counted positive and depend on the current viewport.
      *
-     * Positive x-coordinates are counted left-aligned from the left map border.
-     * Positive y-coordinates are counted top-aligned from the top map border.
+     * Positive x-coordinates are counted left-aligned from the left border of the parent item.
+     * Positive y-coordinates are counted top-aligned from the top border of the parent item.
      */
     QPointF positivePosition() const;
+    
+    /**
+     * @brief Return the absolute position of the ScreenGraphicsItem
+     *
+     * All coordinates are counted positive and depend on the current viewport.
+     *
+     * Positive x-coordinates are counted left-aligned from the left border of the map.
+     * Positive y-coordinates are counted top-aligned from the top border of the map.
+     */
+    QList<QPointF> absolutePositions() const;
 
     virtual void changeViewport( ViewportParams *viewport );
 
@@ -100,4 +110,4 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
 
 } // Namespace Marble
 
-#endif // GEOGRAPHICSITEM_H
+#endif // SCREENGRAPHICSITEM_H

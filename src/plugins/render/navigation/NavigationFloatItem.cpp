@@ -5,32 +5,34 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2008 Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2008      Dennis Nienhüser <earthwings@gentoo.org>
+// Copyright 2010      Bastian Holst <bastianholst@gmx.de>
 //
 
 #include "NavigationFloatItem.h"
 
-#include <QtCore/QDebug>
 #include <QtCore/QRect>
-#include <QtGui/QMouseEvent>
 #include <QtGui/QPixmap>
 #include <QtGui/QSlider>
 #include <QtGui/QWidget>
 
-#include "GeoPainter.h"
 #include "ViewportParams.h"
+#include "MarbleDebug.h"
 #include "MarbleWidget.h"
 #include "MarbleMap.h"
+#include "WidgetGraphicsItem.h"
+#include "MarbleGraphicsGridLayout.h"
 
 using namespace Marble;
 
 const int defaultMinZoom = 900;
 const int defaultMaxZoom = 2400;
 
-NavigationFloatItem::NavigationFloatItem(const QPointF &point,
-        const QSizeF &size) :
-    AbstractFloatItem(point, size), m_marbleWidget(0),
-            m_navigationParent(0), m_oldViewportRadius(0)
+NavigationFloatItem::NavigationFloatItem( const QPointF &point, const QSizeF &size )
+    : AbstractFloatItem( point, size ),
+      m_marbleWidget( 0 ),
+      m_widgetItem( 0 ),
+      m_oldViewportRadius( 0 )
 {
     // Plugin is enabled by default
     setEnabled( true );
@@ -49,7 +51,6 @@ NavigationFloatItem::NavigationFloatItem(const QPointF &point,
 
 NavigationFloatItem::~NavigationFloatItem()
 {
-    delete m_navigationParent;
 }
 
 QStringList NavigationFloatItem::backendTypes() const
@@ -84,10 +85,18 @@ QIcon NavigationFloatItem::icon() const
 
 void NavigationFloatItem::initialize()
 {
-    m_navigationParent = new QWidget(0);
-    m_navigationParent->setFixedSize(size().toSize() - QSize(2 * padding(), 2
+    QWidget *navigationParent = new QWidget( 0 );
+    navigationParent->setFixedSize(size().toSize() - QSize(2 * padding(), 2
             * padding()));
-    m_navigationWidget.setupUi(m_navigationParent);
+    m_navigationWidget.setupUi( navigationParent );
+    
+    m_widgetItem = new WidgetGraphicsItem( this );
+    m_widgetItem->setWidget( navigationParent );
+    
+    MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout( 1, 1 );
+    layout->addItem( m_widgetItem, 0, 0 );
+    
+    setLayout( layout );
 
     #ifndef MARBLE_SMALL_SCREEN
     connect( m_navigationWidget.zoomSlider,  SIGNAL( sliderPressed() ),
@@ -102,7 +111,7 @@ void NavigationFloatItem::initialize()
 
 bool NavigationFloatItem::isInitialized() const
 {
-    return m_navigationParent != 0;
+    return m_widgetItem;
 }
 
 void NavigationFloatItem::changeViewport( ViewportParams *viewport )
@@ -117,13 +126,6 @@ void NavigationFloatItem::changeViewport( ViewportParams *viewport )
 void NavigationFloatItem::paintContent( GeoPainter *painter, ViewportParams *viewport,
                                         const QString& renderPos, GeoSceneLayer * layer )
 {
-    Q_UNUSED( viewport );
-    Q_UNUSED( layer );
-    Q_UNUSED( renderPos );
-
-    // Paint widget without a background
-    m_navigationParent->render( painter, 
-          QPoint( padding(), padding() ), QRegion(),QWidget::RenderFlags(QWidget::DrawChildren));
 }
 
 bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
@@ -162,32 +164,7 @@ bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
         connect(m_navigationWidget.moveDownButton, SIGNAL( clicked() ), m_marbleWidget, SLOT( moveDown() ) );
         #endif
         connect(m_navigationWidget.goHomeButton, SIGNAL( clicked() ), m_marbleWidget, SLOT( goHome() ) );
-    }
-
-    Q_ASSERT(m_marbleWidget);
-
-    if ( e->type() == QEvent::MouseButtonDblClick || e->type()
-            == QEvent::MouseMove || e->type() == QEvent::MouseButtonPress
-            || e->type() == QEvent::MouseButtonRelease ) {
-        // Mouse events are forwarded to the underlying widget
-        QMouseEvent *event = static_cast<QMouseEvent*> (e);
-        QRectF floatItemRect = QRectF( positivePosition(), size() );
-
-        QPoint shiftedPos = event->pos() - floatItemRect.topLeft().toPoint()
-                - QPoint(padding(), padding());
-        if ( floatItemRect.contains(event->pos()) ) {
-            QWidget *child = m_navigationParent->childAt( shiftedPos );
-            if ( child ) {
-                m_marbleWidget->setCursor( Qt::ArrowCursor );
-                shiftedPos -= child->pos(); // transform to children's coordinates
-                QMouseEvent shiftedEvent = QMouseEvent( e->type(), shiftedPos,
-                        event->globalPos(), event->button(), event->buttons(),
-                        event->modifiers() );
-                if ( QApplication::sendEvent( child, &shiftedEvent ) ) {
-                    return true;
-                }
-            }
-        }
+        updateButtons( m_marbleWidget->map()->zoom() );
     }
 
     return AbstractFloatItem::eventFilter(object, e);

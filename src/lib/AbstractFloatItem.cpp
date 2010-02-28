@@ -8,8 +8,11 @@
 // Copyright 2008      Torsten Rahn   <rahn@kde.org>
 //
 
+// Self
 #include "AbstractFloatItem.h"
 
+// Marble
+#include "MarbleDebug.h"
 
 namespace Marble
 {
