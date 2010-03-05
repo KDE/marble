@@ -2,3 +2,9 @@
 ProvidersUrl=http://edu.kde.org/marble/newstuff/providers.xml
 InstallPath=.marble/data/maps
 Uncompress=true
+
+[KNewStuff3]
+ProvidersUrl=http://edu.kde.org/marble/newstuff/providers.xml
+Categories=Marble,Maps
+TargetDir=.marble/data/maps
+Uncompress=archive

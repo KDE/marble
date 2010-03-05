@@ -47,8 +47,8 @@
 #include <kstatusbar.h>
 #include <ktoggleaction.h>
 #include <ktogglefullscreenaction.h>
-#include <knewstuff2/ui/knewstuffaction.h>
-#include <knewstuff2/engine.h>
+#include <knewstuff3/knewstuffaction.h>
+#include <knewstuff3/downloaddialog.h>
 #include <KStandardDirs>
 #include <kdeprintdialog.h>
 
@@ -652,11 +652,11 @@ void MarblePart::setupActions()
 			   actionCollection() );
 
     // Action: Get hot new stuff
-    m_newStuffAction = KNS::standardAction( i18nc( "Action for downloading maps (GHNS)",
-                                                   "Download Maps..."),
-                                            this,
-                                            SLOT( showNewStuffDialog() ),
-                                            actionCollection(), "new_stuff" );
+    m_newStuffAction = KNS3::standardAction( i18nc( "Action for downloading maps (GHNS)",
+                                                    "Download Maps..."),
+                                             this,
+                                             SLOT( showNewStuffDialog() ),
+                                             actionCollection(), "new_stuff" );
     m_newStuffAction->setStatusTip( i18nc( "Status tip", "Download new maps"));
     m_newStuffAction->setShortcut( Qt::CTRL + Qt::Key_N );
 
@@ -947,11 +947,9 @@ void MarblePart::showNewStuffDialog()
                                                       "marble/marble.knsrc" );
     kDebug() << "KNS config file:" << newStuffConfig;
 
-    KNS::Engine  engine;
-    bool         ret = engine.init( newStuffConfig );
-    if ( ret ) {
-        KNS::Entry::List entries = engine.downloadDialogModal(0);
-    }
+    QPointer<KNS3::DownloadDialog> dialog(new KNS3::DownloadDialog(newStuffConfig));
+    dialog->exec();
+    delete dialog;
 
     // Update the map theme widget by updating the model.
     // Shouldn't be needed anymore ...

@@ -95,7 +95,7 @@ if (NOT QTONLY)
   set(marblepart_SRCS marble_part.cpp)
   kde4_add_kcfg_files(marblepart_SRCS settings.kcfgc)
   kde4_add_plugin(marble_part WITH_PREFIX ${marblepart_SRCS} ControlView.cpp)
-  target_link_libraries(marble_part ${KDE4_KPARTS_LIBS} ${KDE4_KNEWSTUFF2_LIBS} marblewidget)
+  target_link_libraries(marble_part ${KDE4_KPARTS_LIBS} ${KDE4_KNEWSTUFF3_LIBS} marblewidget)
 
   install(TARGETS marble_part DESTINATION ${PLUGIN_INSTALL_DIR})
   install(FILES marble_part.desktop DESTINATION ${SERVICES_INSTALL_DIR})
@@ -153,7 +153,7 @@ else (QTONLY)
     target_link_libraries (
       marble 
       ${KDE4_KPARTS_LIBS} 
-      ${KDE4_KNEWSTUFF2_LIBS} 
+      ${KDE4_KNEWSTUFF3_LIBS}
       marblewidget
       )
 endif (QTONLY)
