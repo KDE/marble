@@ -144,6 +144,8 @@ RoutingWidget::RoutingWidget(MarbleWidget* marbleWidget, QWidget* parent) :
             this, SLOT(activatePlacemark(QModelIndex)));
     connect(d->m_routingLayer, SIGNAL(pointSelected(GeoDataCoordinates)),
             this, SLOT(retrieveSelectedPoint(GeoDataCoordinates)));
+    connect(d->m_routingLayer, SIGNAL(pointSelectionAborted()),
+            this, SLOT(pointSelectionCanceled()));
     connect(d->m_routingManager, SIGNAL(stateChanged(RoutingManager::State,GeoDataLineString)),
             this, SLOT(updateRouteState(RoutingManager::State,GeoDataLineString)));
 
@@ -242,10 +244,8 @@ void RoutingWidget::handleSearchResult(RoutingInputWidget* widget)
     }
 }
 
-void RoutingWidget::activateInputWidget(RoutingInputWidget* widget)
+void RoutingWidget::centerOnInputWidget(RoutingInputWidget* widget)
 {
-    d->setActiveInput(widget);
-
     if (widget->hasTargetPosition()) {
         d->m_widget->centerOn(widget->targetPosition());
     }
@@ -274,9 +274,9 @@ void RoutingWidget::addInputWidget()
         connect(input, SIGNAL(removalRequest(RoutingInputWidget*)),
                 this, SLOT(removeInputWidget(RoutingInputWidget*)));
         connect(input, SIGNAL(activityRequest(RoutingInputWidget*)),
-                this, SLOT(activateInputWidget(RoutingInputWidget*)));
-        connect(input, SIGNAL(mapInputRequest(RoutingInputWidget*)),
-                this, SLOT(requestMapPosition(RoutingInputWidget*)));
+                this, SLOT(centerOnInputWidget(RoutingInputWidget*)));
+        connect(input, SIGNAL(mapInputModeEnabled(RoutingInputWidget*, bool)),
+                this, SLOT(requestMapPosition(RoutingInputWidget*, bool)));
         connect(input, SIGNAL(targetValidityChanged(bool)),
                 this, SLOT(adjustSearchButton()));
 
@@ -314,10 +314,18 @@ void RoutingWidget::updateRouteState(RoutingManager::State state, const GeoDataL
     d->m_routingLayer->setRouteDirty(state == RoutingManager::Downloading);
 }
 
-void RoutingWidget::requestMapPosition(RoutingInputWidget* widget)
+void RoutingWidget::requestMapPosition(RoutingInputWidget* widget, bool enabled)
 {
-    d->m_inputRequest = widget;
-    d->m_routingLayer->setPointSelectionEnabled(true);
+    pointSelectionCanceled();
+
+    if (enabled) {
+        d->m_inputRequest = widget;
+        d->m_routingLayer->setPointSelectionEnabled(true);
+        d->m_widget->setFocus(Qt::OtherFocusReason);
+    }
+    else {
+        d->m_routingLayer->setPointSelectionEnabled(false);
+    }
 }
 
 void RoutingWidget::retrieveSelectedPoint(const GeoDataCoordinates &coordinates)
@@ -333,6 +341,13 @@ void RoutingWidget::retrieveSelectedPoint(const GeoDataCoordinates &coordinates)
 void RoutingWidget::adjustSearchButton()
 {
     d->adjustSearchButton();
+}
+
+void RoutingWidget::pointSelectionCanceled()
+{
+    if (d->m_inputRequest) {
+        d->m_inputRequest->abortMapInputRequest();
+    }
 }
 
 } // namespace Marble

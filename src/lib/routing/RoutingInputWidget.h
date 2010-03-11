@@ -89,6 +89,9 @@ public Q_SLOTS:
       */
     void setTargetPosition(const GeoDataCoordinates &position);
 
+    /** Cancel a started input request from the map */
+    void abortMapInputRequest();
+
 Q_SIGNALS:
     /** All runners are finished */
     void searchFinished(RoutingInputWidget*);
@@ -100,7 +103,7 @@ Q_SIGNALS:
     void activityRequest(RoutingInputWidget*);
 
     /** User requests position input from the map */
-    void mapInputRequest(RoutingInputWidget*);
+    void mapInputModeEnabled(RoutingInputWidget*, bool enabled);
 
     /** hasTargetPosition changed because of selecting a placemark or changing the search term */
     void targetValidityChanged(bool targetValid);
@@ -116,7 +119,7 @@ private Q_SLOTS:
     void requestRemoval();
 
     /** Handle click on the map input button */
-    void requestMapPosition();
+    void setMapInputModeEnabled(bool enabled);
 
     /** Progress animation update */
     void updateProgress();

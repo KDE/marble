@@ -67,7 +67,7 @@ private Q_SLOTS:
     void handleSearchResult(RoutingInputWidget* widget);
 
     /** Switch to the placemark model of an input field */
-    void activateInputWidget(RoutingInputWidget* widget);
+    void centerOnInputWidget(RoutingInputWidget* widget);
 
     /** A placemark was selected in the map, synchronize list view */
     void activatePlacemark(const QModelIndex &index );
@@ -82,13 +82,16 @@ private Q_SLOTS:
     void updateRouteState(RoutingManager::State state, const GeoDataLineString &route);
 
     /** An input field requests a position input from the map */
-    void requestMapPosition(RoutingInputWidget* widget);
+    void requestMapPosition(RoutingInputWidget* widget, bool enabled);
 
     /** Position in the map selected by the user after a previous slotMapInputRequested */
     void retrieveSelectedPoint(const GeoDataCoordinates &coordinates);
 
     /** Update the text of the Search / GetDirections button */
     void adjustSearchButton();
+
+    /** The user canceled point selection from the map */
+    void pointSelectionCanceled();
 
 private:
     RoutingWidgetPrivate* const d;

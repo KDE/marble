@@ -102,7 +102,12 @@ Q_SIGNALS:
     /**
       * A point was selected by a mouse click after setPointSelectionEnabled(true) was called
       */
-    void pointSelected(const GeoDataCoordinates &coordinates);
+    void pointSelected(const GeoDataCoordinates &coordinates);   
+
+    /**
+      * Selection of points was aborted by the user without selecting a point
+      */
+    void pointSelectionAborted();
 
 protected:
     /** Overriding QWidget, used to make the layer interactive */

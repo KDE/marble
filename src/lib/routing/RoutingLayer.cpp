@@ -32,6 +32,7 @@
 #include <QtGui/QPixmap>
 #include <QtGui/QIcon>
 #include <QtGui/QMouseEvent>
+#include <QtGui/QKeyEvent>
 #include <QtGui/QAbstractProxyModel>
 #include <QtGui/QItemSelectionModel>
 
@@ -110,6 +111,9 @@ public:
 
     /** Dragging trip points, route polygon hovering */
     inline bool handleMouseMove(QMouseEvent* e);
+
+    /** Escape to stop selecting points */
+    inline bool handleKeyEvent(QKeyEvent *e);
 
     /** True if the given point (screen coordinates) is among the route instruction points */
     inline bool isInfoPoint(const QPoint &point);
@@ -345,6 +349,18 @@ bool RoutingLayerPrivate::handleMouseMove(QMouseEvent* e)
     return false;
 }
 
+bool RoutingLayerPrivate::handleKeyEvent(QKeyEvent *e)
+{
+    if (m_pointSelection && e->key() == Qt::Key_Escape)
+    {
+        m_pointSelection = false;
+        emit q->pointSelectionAborted();
+        return true;
+    }
+
+    return false;
+}
+
 bool RoutingLayerPrivate::isInfoPoint(const QPoint &point)
 {
     foreach(const QRegion &region, m_infoRegions) {
@@ -394,6 +410,11 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
 bool RoutingLayer::eventFilter(QObject *obj, QEvent *event)
 {
     Q_UNUSED(obj)
+
+    if (event->type() == QEvent::KeyPress ) {
+        QKeyEvent* e = static_cast<QKeyEvent*>(event);
+        return d->handleKeyEvent(e);
+    }
 
     if (event->type() == QEvent::MouseButtonPress) {
         QMouseEvent* e = static_cast<QMouseEvent*>(event);

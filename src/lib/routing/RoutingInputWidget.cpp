@@ -67,7 +67,7 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate(QWidget *parent) :
         m_stateIcon(":/data/bitmaps/routing_via.png")
 {
     m_stateButton = new QPushButton(parent);
-    m_stateButton->setToolTip("Activate this destination");
+    m_stateButton->setToolTip("Center Map here");
     m_stateButton->setIcon(m_stateIcon);
     m_stateButton->setEnabled(false);
     m_stateButton->setFlat(true);
@@ -77,13 +77,13 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate(QWidget *parent) :
     m_removeButton = new QPushButton(parent);
     /** @todo: Use an icon instead */
     m_removeButton->setText("X");
-    m_removeButton->setToolTip("Remove this destination");
+    m_removeButton->setToolTip("Remove this input field");
     m_removeButton->setFlat(true);
     m_removeButton->setMaximumWidth(12);
 
     m_pickButton = new QPushButton(parent);
     m_pickButton->setIcon(QIcon(":/data/bitmaps/routing_select.png"));
-    m_pickButton->setToolTip("Choose destination from the map");
+    m_pickButton->setToolTip("Choose position from the map");
     m_pickButton->setCheckable(true);
     m_pickButton->setFlat(true);
     m_pickButton->setMaximumWidth(22);
@@ -108,8 +108,8 @@ RoutingInputWidget::RoutingInputWidget(QWidget *parent) :
 
     connect(d->m_stateButton, SIGNAL(clicked()),
             this, SLOT(requestActivity()));
-    connect(d->m_pickButton, SIGNAL(clicked()),
-            this, SLOT(requestMapPosition()));
+    connect(d->m_pickButton, SIGNAL(clicked(bool)),
+            this, SLOT(setMapInputModeEnabled(bool)));
     connect(d->m_removeButton, SIGNAL(clicked()),
             this, SLOT(requestRemoval()));
 
@@ -203,9 +203,9 @@ bool RoutingInputWidget::hasInput() const
     return !d->m_lineEdit->text().isEmpty();
 }
 
-void RoutingInputWidget::requestMapPosition()
+void RoutingInputWidget::setMapInputModeEnabled(bool enabled)
 {
-   emit mapInputRequest(this);
+   emit mapInputModeEnabled(this, enabled);
 }
 
 void RoutingInputWidget::updateProgress()
@@ -229,6 +229,11 @@ void RoutingInputWidget::setInvalid()
         d->m_hasTarget = false;
         emit targetValidityChanged(d->m_hasTarget);
     }
+}
+
+void RoutingInputWidget::abortMapInputRequest()
+{
+    d->m_pickButton->setChecked(false);
 }
 
 } // namespace Marble
