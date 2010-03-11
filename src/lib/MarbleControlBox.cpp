@@ -39,6 +39,7 @@
 #include "gps/PositionTracking.h"
 #include "MarbleLocale.h"
 #include "MarblePlacemarkModel.h"
+#include "RoutingWidget.h"
 #include "MarbleRunnerManager.h"
 #include "MathHelper.h"
 #include "MapThemeSortFilterProxyModel.h"
@@ -76,12 +77,13 @@ class MarbleControlBoxPrivate
     MapThemeSortFilterProxyModel *m_mapSortProxy;
     
     MarbleRunnerManager  *m_runnerManager;
+    RoutingWidget  *m_routingWidget;
     GeoSceneDocument      *mapTheme;
 
     MarbleLocale* m_locale;
 };
 
-MarbleControlBoxPrivate::MarbleControlBoxPrivate()
+MarbleControlBoxPrivate::MarbleControlBoxPrivate() : m_routingWidget(0)
 {
 }
 
@@ -248,6 +250,9 @@ void MarbleControlBox::updateButtons( int value )
 void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 {
     d->m_widget = widget;
+
+    RoutingWidget *routingWidget = new RoutingWidget(widget, this);
+    d->uiWidget.toolBox->addItem(routingWidget, tr("Routing"));
 
     // Make us aware of all the Placemarks in the MarbleModel so that
     // we can search them.

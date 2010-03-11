@@ -48,6 +48,8 @@ public slots:
 signals:
     void modelChanged( MarblePlacemarkModel *model );
 
+    void searchFinished(const QString &text);
+
 private slots:
     void slotRunnerFinished(MarbleAbstractRunner* runner, QVector<GeoDataPlacemark> result);
 

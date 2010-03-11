@@ -40,7 +40,8 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
     : QObject(parent),
       m_activeRunners(0),
       m_lastString(""),
-      m_model(new MarblePlacemarkModel)
+      m_model(new MarblePlacemarkModel),
+      m_celestialBodyId("earth")
 {
     m_model->setPlacemarkContainer(&m_placemarkContainer);
     qRegisterMetaType<QVector<GeoDataPlacemark> >("QVector<GeoDataPlacemark>");
@@ -61,8 +62,11 @@ MarbleRunnerManager::~MarbleRunnerManager()
 
 void MarbleRunnerManager::newText(QString text)
 {
-    if (text == m_lastString)
+    if (text == m_lastString) {
+      emit searchFinished(text);
+      emit modelChanged( m_model );
       return;
+    }
     
     m_lastString = text;
     
@@ -112,6 +116,10 @@ void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVec
     m_model->addPlacemarks( start, result.size() );
     m_modelMutex.unlock();
     emit modelChanged( m_model );
+
+    if (m_runners.size() == 0) {
+        emit searchFinished(m_lastString);
+    }
 }
 
 void MarbleRunnerManager::setCelestialBodyId(const QString &celestialBodyId)

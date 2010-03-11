@@ -10,6 +10,7 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_BINARY_DIR}/src/lib
  ${CMAKE_CURRENT_SOURCE_DIR}/AbstractLayer
  ${CMAKE_CURRENT_SOURCE_DIR}/Projections
+ ${CMAKE_CURRENT_SOURCE_DIR}/routing
  ${CMAKE_CURRENT_SOURCE_DIR}/runners
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/data
@@ -182,6 +183,19 @@ set(marblewidget_SRCS
 
     MapThemeSortFilterProxyModel.cpp
 
+    routing/RoutingModel.cpp
+    routing/RoutingProxyModel.cpp
+    routing/RoutingManager.cpp
+    routing/RoutingLayer.cpp
+    routing/RoutingInputWidget.cpp
+    routing/RoutingWidget.cpp
+    routing/OrsRoutingProvider.cpp
+    routing/OrsRoutingProvider.h
+    routing/YoursRoutingProvider.h
+    routing/YoursRoutingProvider.cpp
+    routing/AbstractRoutingProvider.cpp
+    routing/AbstractRoutingProvider.h
+
     MarbleRunnerManager.cpp
     runners/MarbleAbstractRunner.cpp
     runners/LatLonRunner.cpp
@@ -201,6 +215,7 @@ set (marblewidget_UI
     MarbleAboutDialog.ui
     SunControlWidget.ui
     LatLonEdit.ui
+    routing/RoutingWidget.ui
 )
 
 # FIXME: cleaner approach of src/lib/MarbleControlBox.* vs. marble.qrc

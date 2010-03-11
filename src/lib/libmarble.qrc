@@ -1,12 +1,16 @@
 <RCC>
-    <qresource>
-        <file>../../data/bitmaps/cursor_bc.xpm</file>
-        <file>../../data/bitmaps/cursor_bl.xpm</file>
-        <file>../../data/bitmaps/cursor_br.xpm</file>
-        <file>../../data/bitmaps/cursor_cl.xpm</file>
-        <file>../../data/bitmaps/cursor_cr.xpm</file>
-        <file>../../data/bitmaps/cursor_tc.xpm</file>
-        <file>../../data/bitmaps/cursor_tl.xpm</file>
-        <file>../../data/bitmaps/cursor_tr.xpm</file>
-    </qresource>
+  <qresource>
+    <file>../../data/bitmaps/routing_select.png</file>
+    <file>../../data/bitmaps/routing_pick.png</file>
+    <file>../../data/bitmaps/routing_via.png</file>
+    <file>../../data/bitmaps/progress.mng</file>
+    <file>../../data/bitmaps/cursor_bc.xpm</file>
+    <file>../../data/bitmaps/cursor_bl.xpm</file>
+    <file>../../data/bitmaps/cursor_br.xpm</file>
+    <file>../../data/bitmaps/cursor_cl.xpm</file>
+    <file>../../data/bitmaps/cursor_cr.xpm</file>
+    <file>../../data/bitmaps/cursor_tc.xpm</file>
+    <file>../../data/bitmaps/cursor_tl.xpm</file>
+    <file>../../data/bitmaps/cursor_tr.xpm</file>
+  </qresource>
 </RCC>
