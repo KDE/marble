@@ -61,7 +61,7 @@ void OrsRoutingProvider::retrieveDirections(const GeoDataLineString &route)
 
     // Please refrain from making this URI public. To use it outside the scope
     // of marble you need permission from the openrouteservice.org team.
-    QUrl url = QUrl("http://openls.giub.uni-bonn.de/openls-osm/determineroute");
+    QUrl url = QUrl("http://openls.geog.uni-heidelberg.de/osm/eu/routing");
 
     QNetworkReply *reply = m_networkAccessManager->post(QNetworkRequest(url), request.toLatin1());
     connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
