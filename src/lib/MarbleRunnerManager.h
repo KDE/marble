@@ -43,6 +43,12 @@ public:
     
     void setCelestialBodyId(const QString &celestialBodyId);
 
+    /**
+      * Toggle offline mode. In offline mode, runners shall not try to access
+      * the network (possibly not returning any results).
+      */
+    void setWorkOffline( bool offline );
+
 public slots:
     void newText(QString text);
 signals:
@@ -61,6 +67,7 @@ private:
     QVector<GeoDataPlacemark> m_placemarkContainer;
     QMutex m_modelMutex;
     QString m_celestialBodyId;
+    bool m_workOffline;
 };
 
 }

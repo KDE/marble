@@ -355,9 +355,7 @@ void MarblePart::showSun( bool active )
 
 void MarblePart::workOffline( bool offline )
 {
-    HttpDownloadManager * const downloadManager =
-        m_controlView->marbleWidget()->map()->model()->downloadManager();
-    downloadManager->setDownloadEnabled( !offline );
+    m_controlView->marbleControl()->setWorkOffline( offline );
 }
 
 void MarblePart::copyMap()

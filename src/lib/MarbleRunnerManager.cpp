@@ -41,7 +41,8 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
       m_activeRunners(0),
       m_lastString(""),
       m_model(new MarblePlacemarkModel),
-      m_celestialBodyId("earth")
+      m_celestialBodyId("earth"),
+      m_workOffline(false)
 {
     m_model->setPlacemarkContainer(&m_placemarkContainer);
     qRegisterMetaType<QVector<GeoDataPlacemark> >("QVector<GeoDataPlacemark>");
@@ -82,7 +83,7 @@ void MarbleRunnerManager::newText(QString text)
              this,     SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
     llrunner->parse(text);
     
-    if (m_celestialBodyId == "earth") {
+    if (m_celestialBodyId == "earth" && !m_workOffline) {
         OnfRunner* onfrunner = new OnfRunner;
         m_runners << onfrunner;
         connect( onfrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
@@ -125,6 +126,11 @@ void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVec
 void MarbleRunnerManager::setCelestialBodyId(const QString &celestialBodyId)
 {
     m_celestialBodyId = celestialBodyId;
+}
+
+void MarbleRunnerManager::setWorkOffline( bool offline )
+{
+    m_workOffline = offline;
 }
 
 }

@@ -46,7 +46,6 @@
 #include "lib/MarbleLocale.h"
 #include "AbstractDataPlugin.h"
 #include "AbstractFloatItem.h"
-#include "HttpDownloadManager.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 
@@ -505,9 +504,7 @@ void MainWindow::showClouds( bool isChecked )
 
 void MainWindow::workOffline( bool offline )
 {
-    HttpDownloadManager * const downloadManager =
-        m_controlView->marbleWidget()->map()->model()->downloadManager();
-    downloadManager->setDownloadEnabled( !offline );
+    m_controlView->marbleControl()->setWorkOffline( offline );
 }
 
 void MainWindow::showAtmosphere( bool isChecked )

@@ -46,6 +46,7 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "Planet.h"
+#include "HttpDownloadManager.h"
 
 #include "GeoDataCoordinates.h"
 
@@ -664,6 +665,14 @@ void MarbleControlBox::adjustForStill()
     {
         d->m_widget->updateChangedMap();
     }
+}
+
+void MarbleControlBox::setWorkOffline(bool offline)
+{
+    HttpDownloadManager * const downloadManager =
+        d->m_widget->map()->model()->downloadManager();
+    downloadManager->setDownloadEnabled( !offline );
+    d->m_runnerManager->setWorkOffline( offline );
 }
 
 }

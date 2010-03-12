@@ -108,6 +108,11 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
   
     void updateCelestialModel();
 
+    /**
+      * Toggle offline mode of download manager and runners.
+      */
+    void setWorkOffline(bool offline);
+
  Q_SIGNALS:
     /**
      * @brief Signal emitted when the Home button has been pressed.
