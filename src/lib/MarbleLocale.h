@@ -41,7 +41,6 @@ class MARBLE_EXPORT MarbleLocale
     MeasureSystem measureSystem() const;
 
     static QString languageCode();
-    static QString simpleLanguageCode();
 
  private:
     Q_DISABLE_COPY( MarbleLocale )
