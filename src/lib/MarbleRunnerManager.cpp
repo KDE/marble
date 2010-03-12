@@ -25,9 +25,10 @@
 #include "PlacemarkManager.h"
 #include "GeoDataPlacemark.h"
 
+#include "HostipRunner.h"
 #include "LatLonRunner.h"
 #include "OnfRunner.h"
-#include "HostipRunner.h"
+#include "OsmNominatimRunner.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -90,6 +91,13 @@ void MarbleRunnerManager::newText(QString text)
                  this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
         onfrunner->parse(text);
         onfrunner->start();
+
+        OsmNominatimRunner* nominatim = new OsmNominatimRunner;
+        m_runners << nominatim;
+        connect( nominatim, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
+                 this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
+        nominatim->parse(text);
+        nominatim->start();
 
         HostipRunner* iprunner = new HostipRunner;
         m_runners << iprunner;

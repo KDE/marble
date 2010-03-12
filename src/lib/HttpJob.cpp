@@ -12,6 +12,7 @@
 //
 
 #include "HttpJob.h"
+#include "TinyWebBrowser.h"
 
 #include <QtCore/QDebug>
 
@@ -112,21 +113,17 @@ void HttpJob::setUserAgentPluginId( const QString & pluginId ) const
 
 QByteArray HttpJob::userAgent() const
 {
-    QString result( "Mozilla/5.0 (compatible; Marble/%1; %2; %3)" );
-    result.arg( MARBLE_VERSION_STRING );
     switch ( d->m_downloadUsage ) {
     case DownloadBrowse:
-        result.arg( "Browser" );
+        return TinyWebBrowser::userAgent("Browser", d->m_pluginId);
         break;
     case DownloadBulk:
-        result.arg( "BulkDownloader" );
+        return TinyWebBrowser::userAgent("BulkDownloader", d->m_pluginId);
         break;
     default:
         qCritical() << "Unknown download usage value:" << d->m_downloadUsage;
-        result.arg( "unknown" );
+        return TinyWebBrowser::userAgent("unknown", d->m_pluginId);
     }
-    result.arg( d->m_pluginId );
-    return result.toAscii();
 }
 
 #include "HttpJob.moc"

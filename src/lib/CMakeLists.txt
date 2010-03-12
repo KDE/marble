@@ -200,6 +200,7 @@ set(marblewidget_SRCS
     runners/MarbleAbstractRunner.cpp
     runners/LatLonRunner.cpp
     runners/OnfRunner.cpp
+    runners/OsmNominatimRunner.cpp
     runners/HostipRunner.cpp
 )
 

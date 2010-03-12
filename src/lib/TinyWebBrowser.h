@@ -39,6 +39,8 @@ class MARBLE_EXPORT TinyWebBrowser : public QWebView
     TinyWebBrowser( QWidget* parent = 0 );
     ~TinyWebBrowser();
 
+    static QByteArray userAgent(const QString &platform, const QString &plugin);
+
  public Q_SLOTS:
     void setWikipediaPath( const QString& relativeUrl );
     void print();

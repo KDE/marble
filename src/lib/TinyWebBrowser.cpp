@@ -104,6 +104,14 @@ void TinyWebBrowser::openExternalLink( QUrl url )
     QDesktopServices::openUrl( url );
 }
 
+QByteArray TinyWebBrowser::userAgent(const QString &platform, const QString &component)
+{
+    QString result( "Mozilla/5.0 (compatible; Marble/%1; %2; %3)" );
+    result = result.arg( MARBLE_VERSION_STRING, platform, component);
+    return result.toAscii();
+}
+
+
 } // namespace Marble
 
 #include "TinyWebBrowser.moc"
