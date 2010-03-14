@@ -13,6 +13,8 @@
 #ifndef MARBLE_LAYER_INTERFACE_H
 #define MARBLE_LAYER_INTERFACE_H
 
+#include "marble_export.h"
+
 #include <QtCore/QStringList>
 
 namespace Marble {
@@ -21,7 +23,7 @@ class GeoPainter;
 class GeoSceneLayer;
 class ViewportParams;
 
-class LayerInterface
+class MARBLE_EXPORT LayerInterface
 {
 public:
 
