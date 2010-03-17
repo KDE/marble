@@ -29,6 +29,7 @@ namespace Marble {
 
 class RoutingInputWidgetPrivate;
 class MarblePlacemarkModel;
+class RouteSkeleton;
 
 /**
   * Combines a line edit for input and a couple of buttons to let
@@ -43,7 +44,7 @@ class RoutingInputWidget : public QWidget
 public:
 
     /** Constructor */
-    explicit RoutingInputWidget(QWidget *parent = 0);
+    explicit RoutingInputWidget(RouteSkeleton *skeleton, int index, QWidget *parent = 0);
 
     /** Destructor */
     ~RoutingInputWidget();
@@ -75,6 +76,11 @@ public:
       * Returns false iff the input text is empty
       */
     bool hasInput() const;
+
+    /**
+      * Change the data index in the route skeleton model
+      */
+    void setIndex(int index);
 
 public Q_SLOTS:
     /**
@@ -129,6 +135,9 @@ private Q_SLOTS:
 
     /** Mark ourself dirty (no target) */
     void setInvalid();
+
+    /** Set the target position (dragging) */
+    void updatePosition(int index, const GeoDataCoordinates &position);
 
 private:
     RoutingInputWidgetPrivate* const d;

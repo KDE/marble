@@ -35,6 +35,7 @@ class MarbleWidget;
 class RoutingModel;
 class MarblePlacemarkModel;
 class RoutingLayerPrivate;
+class RouteSkeleton;
 
 /**
   * @brief A paint layer that serves as a view on a route model
@@ -92,6 +93,11 @@ public:
       */
     void setRouteDirty(bool dirty);
 
+    /**
+      * Change the route skeleton used for painting and dragging route points
+      */
+    void setRouteSkeleton(RouteSkeleton* skeleton);
+
 Q_SIGNALS:
     /**
       * A placemark was selected (clicked) by the user. The index belongs to
@@ -108,6 +114,12 @@ Q_SIGNALS:
       * Selection of points was aborted by the user without selecting a point
       */
     void pointSelectionAborted();
+
+    /**
+      * The route skeleton was changed permanently (no dragging),
+      * new route instructions should be downloaded
+      */
+    void routeDirty();
 
 protected:
     /** Overriding QWidget, used to make the layer interactive */

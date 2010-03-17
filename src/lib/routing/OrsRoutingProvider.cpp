@@ -22,6 +22,7 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "RouteSkeleton.h"
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
@@ -36,21 +37,21 @@ OrsRoutingProvider::OrsRoutingProvider(QObject *parent) :
             this, SLOT(retrieveData(QNetworkReply*)));
 }
 
-void OrsRoutingProvider::retrieveDirections(const GeoDataLineString &route)
+void OrsRoutingProvider::retrieveDirections(RouteSkeleton* route)
 {
-    if (route.size() < 2)
+    if (route->size() < 2)
         return;
 
-    GeoDataCoordinates source = route.first();
-    GeoDataCoordinates destination = route.last();
+    GeoDataCoordinates source = route->source();
+    GeoDataCoordinates destination = route->destination();
 
     QString request = xmlHeader();
     request += requestHeader(Meter, Fastest);
     request += requestPoint(StartPoint, source);
 
-    if (route.size() > 2) {
-        for (int i=1; i<route.size()-1; ++i) {
-            request += requestPoint(ViaPoint, route.at(i));
+    if (route->size() > 2) {
+        for (int i=1; i<route->size()-1; ++i) {
+            request += requestPoint(ViaPoint, route->at(i));
         }
     }
 

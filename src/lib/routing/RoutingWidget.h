@@ -72,6 +72,9 @@ private Q_SLOTS:
     /** A placemark was selected in the map, synchronize list view */
     void activatePlacemark(const QModelIndex &index );
 
+    /** Insert another input field at the given position */
+    void insertInputWidget(int index);
+
     /** Add another input field at the end */
     void addInputWidget();
 
@@ -79,7 +82,7 @@ private Q_SLOTS:
     void removeInputWidget(RoutingInputWidget* widget);
 
     /** Route state changed */
-    void updateRouteState(RoutingManager::State state, const GeoDataLineString &route);
+    void updateRouteState(RoutingManager::State state, RouteSkeleton* route);
 
     /** An input field requests a position input from the map */
     void requestMapPosition(RoutingInputWidget* widget, bool enabled);

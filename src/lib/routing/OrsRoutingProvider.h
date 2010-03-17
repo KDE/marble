@@ -54,7 +54,7 @@ public:
     explicit OrsRoutingProvider(QObject *parent = 0);
 
     /** Overload of AbstractRoutingProvider */
-    virtual void retrieveDirections(const GeoDataLineString &route);
+    virtual void retrieveDirections(RouteSkeleton* route);
 
 private Q_SLOTS:
     /** Route data was retrieved via http */

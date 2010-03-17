@@ -31,6 +31,7 @@ namespace Marble {
 class RoutingManagerPrivate;
 class MarbleWidget;
 class RoutingModel;
+class RouteSkeleton;
 
 /**
   * Delegates data retrieval and model updates to the appropriate
@@ -68,24 +69,22 @@ public:
       * @param destination Destination location. Any string the routing provider supports as input.
       * @see directionModel
       */
-    void retrieveRoute(const GeoDataLineString &route);
+    void retrieveRoute(RouteSkeleton *route);
+
+public Q_SLOTS:
+    /** Update the route */
+    void updateRoute();
 
 Q_SIGNALS:
     /**
       * Directions and waypoints for the given route are being downloaded or have
       * been retrieved -- newState tells which of both
       */
-    void stateChanged(RoutingManager::State newState, const GeoDataLineString &route);
+    void stateChanged(RoutingManager::State newState, RouteSkeleton *route);
 
 private Q_SLOTS:
     /** Routing provider has finished downloading data */
     void setRouteData(AbstractRoutingProvider::Format format, const QByteArray &data);
-
-    /** Model was changed (start/destination moved), update route */
-    void scheduleRouteUpdate();
-
-    /** Update the route */
-    void updateRoute();
 
 private:
     RoutingManagerPrivate* const d;

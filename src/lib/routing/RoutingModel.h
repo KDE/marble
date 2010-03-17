@@ -49,10 +49,7 @@ public:
 
     enum RoutingItemType {
         WayPoint,
-        Instruction,
-        Start,
-        Via,
-        Destination
+        Instruction
     };
 
     /** Constructor */
@@ -72,14 +69,6 @@ public:
     /** Overload of QAbstractListModel */
     QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const;
 
-    // Model editing
-
-    /** Overload of QAbstractListModel */
-    bool setData ( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole );
-
-    /** Overload of QAbstractListModel */
-    Qt::ItemFlags flags ( const QModelIndex & index ) const;
-
     // Model data filling
 
     /**
@@ -96,18 +85,7 @@ public:
       * @todo: Add geodata/handlers/opengis, use it in the route provider and use a
       * parsed GeoDocument here
       */
-    void importOpenGis( const QByteArray &xmlData, const GeoDataLineString &route);
-
-    /**
-      * Insert a via point. Order will be chosen such that the via point is not before
-      * the start or after the destination. Furthermore the distance between neighboring
-      * route points is minimized
-      *
-      * @note: This does not trigger an update of the route. It becomes "dirty"
-      *
-      * @todo: Minimizing the distance might not always be what the user wants
-      */
-    void addVia( const GeoDataCoordinates &position );
+    void importOpenGis( const QByteArray &xmlData);
 
 private:
     RoutingModelPrivate* const d;

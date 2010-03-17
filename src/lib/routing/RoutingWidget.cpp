@@ -36,6 +36,7 @@
 #include "RoutingModel.h"
 #include "RoutingProxyModel.h"
 #include "RoutingInputWidget.h"
+#include "RouteSkeleton.h"
 
 #include "ui_RoutingWidget.h"
 
@@ -59,6 +60,8 @@ public:
 
     QSortFilterProxyModel *m_routingProxyModel;
 
+    RouteSkeleton* m_routeSkeleton;
+
     /** Constructor */
     RoutingWidgetPrivate();
 
@@ -81,15 +84,18 @@ public:
 
 RoutingWidgetPrivate::RoutingWidgetPrivate() :
         m_widget(0), m_routingManager(0), m_routingLayer(0),
-        m_activeInput(0), m_inputRequest(0), m_routingProxyModel(0)
+        m_activeInput(0), m_inputRequest(0), m_routingProxyModel(0),
+        m_routeSkeleton(0)
 {
     // nothing to do
 }
 
 void RoutingWidgetPrivate::adjustInputWidgets()
 {
-    foreach(RoutingInputWidget* widget, m_inputWidgets) {
-        widget->setSimple(m_inputWidgets.size() == 1);
+    bool simple = m_inputWidgets.size() == 1;
+    for(int i=0; i<m_inputWidgets.size(); ++i) {
+        m_inputWidgets[i]->setSimple(simple);
+        m_inputWidgets[i]->setIndex(i);
     }
 
     adjustSearchButton();
@@ -136,18 +142,24 @@ RoutingWidget::RoutingWidget(MarbleWidget* marbleWidget, QWidget* parent) :
     d->m_ui.setupUi(this);
     d->m_widget = marbleWidget;
 
+    d->m_routeSkeleton = new RouteSkeleton(this);
     d->m_routingManager = new RoutingManager( d->m_widget, this );
     d->m_routingLayer = new RoutingLayer(d->m_widget, this );
+    d->m_routingLayer->setRouteSkeleton(d->m_routeSkeleton);
     d->m_widget->map()->model()->addLayer(d->m_routingLayer);
 
+    connect(d->m_routingLayer, SIGNAL(routeDirty()),
+            d->m_routingManager, SLOT(updateRoute()));
     connect(d->m_routingLayer, SIGNAL(placemarkSelected(QModelIndex)),
             this, SLOT(activatePlacemark(QModelIndex)));
     connect(d->m_routingLayer, SIGNAL(pointSelected(GeoDataCoordinates)),
             this, SLOT(retrieveSelectedPoint(GeoDataCoordinates)));
     connect(d->m_routingLayer, SIGNAL(pointSelectionAborted()),
             this, SLOT(pointSelectionCanceled()));
-    connect(d->m_routingManager, SIGNAL(stateChanged(RoutingManager::State,GeoDataLineString)),
-            this, SLOT(updateRouteState(RoutingManager::State,GeoDataLineString)));
+    connect(d->m_routingManager, SIGNAL(stateChanged(RoutingManager::State, RouteSkeleton*)),
+            this, SLOT(updateRouteState(RoutingManager::State, RouteSkeleton*)));
+    connect(d->m_routeSkeleton, SIGNAL(positionAdded(int)),
+            this, SLOT(insertInputWidget(int)));
 
     d->m_routingProxyModel = new RoutingProxyModel(this);
     d->m_routingProxyModel->setSourceModel(d->m_routingManager->routingModel());
@@ -180,20 +192,18 @@ void RoutingWidget::retrieveRoute()
         return;
     }
 
-    GeoDataLineString route;
-    foreach(RoutingInputWidget* widget, d->m_inputWidgets) {
-        if (widget->hasTargetPosition()) {
-            route.append(widget->targetPosition());
-        }
-        else if (widget->hasInput()) {
+    Q_ASSERT(d->m_routeSkeleton->size() == d->m_inputWidgets.size());
+    for (int i=0; i<d->m_inputWidgets.size(); ++i) {
+        RoutingInputWidget* widget = d->m_inputWidgets.at(i);
+        if (!widget->hasTargetPosition() && widget->hasInput()) {
             widget->findPlacemarks();
             return;
-        } // else no input: ignore this field
+        }
     }
 
-    if (route.size() > 1) {
+    if (d->m_routeSkeleton->size() > 1) {
         d->m_routingLayer->setModel( d->m_routingManager->routingModel() );
-        d->m_routingManager->retrieveRoute(route);
+        d->m_routingManager->retrieveRoute(d->m_routeSkeleton);
         d->m_ui.directionsListView->setModel(d->m_routingProxyModel);
         d->m_routingLayer->synchronizeWith( d->m_routingProxyModel,
                                             d->m_ui.directionsListView->selectionModel() );
@@ -266,9 +276,15 @@ void RoutingWidget::activatePlacemark(const QModelIndex &index)
 void RoutingWidget::addInputWidget()
 {
     int index = d->m_ui.routingLayout->count()-2;
-    if (index >= 0) {
-        RoutingInputWidget *input = new RoutingInputWidget(this);
-        d->m_inputWidgets.push_back(input);
+    d->m_routeSkeleton->append(GeoDataCoordinates());
+    insertInputWidget(index);
+}
+
+void RoutingWidget::insertInputWidget(int index)
+{
+    if (index >= 0 && index <= d->m_inputWidgets.size()) {
+        RoutingInputWidget *input = new RoutingInputWidget(d->m_routeSkeleton, index, this);
+        d->m_inputWidgets.insert(index, input);
         connect(input, SIGNAL(searchFinished(RoutingInputWidget*)),
                 this, SLOT(handleSearchResult(RoutingInputWidget*)));
         connect(input, SIGNAL(removalRequest(RoutingInputWidget*)),
@@ -287,13 +303,17 @@ void RoutingWidget::addInputWidget()
 
 void RoutingWidget::removeInputWidget(RoutingInputWidget* widget)
 {
-    d->m_inputWidgets.removeAll(widget);
-    d->m_ui.routingLayout->removeWidget(widget);
-    widget->deleteLater();
-    d->adjustInputWidgets();
+    int index = d->m_inputWidgets.indexOf(widget);
+    if (index >=0 ) {
+        d->m_routeSkeleton->remove(index);
+        d->m_inputWidgets.removeAll(widget);
+        d->m_ui.routingLayout->removeWidget(widget);
+        widget->deleteLater();
+        d->adjustInputWidgets();
+    }
 }
 
-void RoutingWidget::updateRouteState(RoutingManager::State state, const GeoDataLineString &route)
+void RoutingWidget::updateRouteState(RoutingManager::State state, RouteSkeleton* route)
 {
     Q_UNUSED(route);
 

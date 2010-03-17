@@ -20,6 +20,7 @@
 
 #include "YoursRoutingProvider.h"
 
+#include "RouteSkeleton.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 
@@ -36,13 +37,13 @@ YoursRoutingProvider::YoursRoutingProvider(QObject *parent) :
             this, SLOT(retrieveData(QNetworkReply*)));
 }
 
-void YoursRoutingProvider::retrieveDirections(const GeoDataLineString &route)
+void YoursRoutingProvider::retrieveDirections(RouteSkeleton* route)
 {
-    if (route.size() < 2)
+    if (route->size() < 2)
         return;
 
-    GeoDataCoordinates source = route.first();
-    GeoDataCoordinates destination = route.last();
+    GeoDataCoordinates source = route->source();
+    GeoDataCoordinates destination = route->destination();
 
     double fLon = source.longitude(GeoDataCoordinates::Degree);
     double fLat = source.latitude(GeoDataCoordinates::Degree);

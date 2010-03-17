@@ -183,6 +183,7 @@ set(marblewidget_SRCS
 
     MapThemeSortFilterProxyModel.cpp
 
+    routing/RouteSkeleton.cpp
     routing/RoutingModel.cpp
     routing/RoutingProxyModel.cpp
     routing/RoutingManager.cpp
@@ -190,11 +191,8 @@ set(marblewidget_SRCS
     routing/RoutingInputWidget.cpp
     routing/RoutingWidget.cpp
     routing/OrsRoutingProvider.cpp
-    routing/OrsRoutingProvider.h
-    routing/YoursRoutingProvider.h
     routing/YoursRoutingProvider.cpp
     routing/AbstractRoutingProvider.cpp
-    routing/AbstractRoutingProvider.h
 
     MarbleRunnerManager.cpp
     runners/MarbleAbstractRunner.cpp

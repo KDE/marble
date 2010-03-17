@@ -20,16 +20,17 @@
 
 #include "RoutingInputWidget.h"
 
+#include "MarbleRunnerManager.h"
+#include "MarblePlacemarkModel.h"
+#include "MarbleDebug.h"
+#include "RouteSkeleton.h"
+
 #include <QtCore/QTimer>
 #include <QtGui/QLineEdit>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QPushButton>
 #include <QtGui/QMovie>
 #include <QtGui/QIcon>
-
-#include "MarbleRunnerManager.h"
-#include "MarblePlacemarkModel.h"
-#include "MarbleDebug.h"
 
 namespace Marble {
 
@@ -46,33 +47,39 @@ public:
 
     MarbleRunnerManager *m_runnerManager;
 
-    RoutingInputWidgetPrivate(QWidget *parent);
+    RoutingInputWidgetPrivate(RouteSkeleton *skeleton, int index, QWidget *parent);
 
     MarblePlacemarkModel* m_placemarkModel;
-
-    bool m_hasTarget;
-
-    GeoDataCoordinates m_target;
 
     QMovie m_progress;
 
     QTimer m_progressTimer;
 
-    QIcon m_stateIcon;
+    RouteSkeleton* m_route;
+
+    int m_index;
 };
 
-RoutingInputWidgetPrivate::RoutingInputWidgetPrivate(QWidget *parent) :
+RoutingInputWidgetPrivate::RoutingInputWidgetPrivate(RouteSkeleton *skeleton, int index, QWidget *parent) :
         m_lineEdit(0), m_runnerManager(new MarbleRunnerManager(parent)),
-        m_placemarkModel(0), m_hasTarget(false), m_progress(":/data/bitmaps/progress.mng"),
-        m_stateIcon(":/data/bitmaps/routing_via.png")
+        m_placemarkModel(0), m_progress(":/data/bitmaps/progress.mng"),
+        m_route(skeleton), m_index(index)
 {
     m_stateButton = new QPushButton(parent);
     m_stateButton->setToolTip("Center Map here");
-    m_stateButton->setIcon(m_stateIcon);
     m_stateButton->setEnabled(false);
+    m_stateButton->setIcon(QIcon(m_route->pixmap(m_index)));
     m_stateButton->setFlat(true);
     m_stateButton->setMaximumWidth(22);
     m_stateButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    m_lineEdit = new QLineEdit(parent);
+
+    GeoDataCoordinates pos = m_route->at(m_index);
+    if (pos.longitude() != 0.0 && pos.latitude() != 0.0) {
+        m_lineEdit->setText( pos.toString() );
+        m_stateButton->setEnabled(true);
+    }
 
     m_removeButton = new QPushButton(parent);
     /** @todo: Use an icon instead */
@@ -89,13 +96,11 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate(QWidget *parent) :
     m_pickButton->setMaximumWidth(22);
     m_pickButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    m_lineEdit = new QLineEdit(parent);
-
     m_progressTimer.setInterval(100);
 }
 
-RoutingInputWidget::RoutingInputWidget(QWidget *parent) :
-        QWidget(parent), d(new RoutingInputWidgetPrivate(this))
+RoutingInputWidget::RoutingInputWidget(RouteSkeleton *skeleton, int index, QWidget *parent) :
+        QWidget(parent), d(new RoutingInputWidgetPrivate(skeleton, index, this))
 {
     QHBoxLayout* layout = new QHBoxLayout(this);
     layout->setSpacing(0);
@@ -123,6 +128,8 @@ RoutingInputWidget::RoutingInputWidget(QWidget *parent) :
             this, SLOT(updateProgress()));
     connect(d->m_runnerManager, SIGNAL(searchFinished(QString)),
             this, SLOT(finishSearch()));
+    connect(skeleton, SIGNAL(positionChanged(int, GeoDataCoordinates)),
+            this, SLOT(updatePosition(int, GeoDataCoordinates)));
 }
 
 RoutingInputWidget::~RoutingInputWidget()
@@ -142,24 +149,24 @@ void RoutingInputWidget::setTargetPosition(const GeoDataCoordinates &position)
     }
 
     d->m_pickButton->setChecked(false);
-    d->m_target = position;
+    d->m_route->setPosition(d->m_index, position);
     d->m_progressTimer.stop();
-    d->m_stateButton->setIcon(d->m_stateIcon);
     d->m_stateButton->setEnabled(true);
-    if (!d->m_hasTarget) {
-        d->m_hasTarget = true;
-        emit targetValidityChanged(d->m_hasTarget);
+    if (!hasTargetPosition()) {
+        d->m_route->setPosition(d->m_index, position);
+        emit targetValidityChanged(true);
     }
 }
 
 bool RoutingInputWidget::hasTargetPosition() const
 {
-    return d->m_hasTarget;
+    GeoDataCoordinates pos = targetPosition();
+    return pos.longitude() != 0.0 && pos.latitude() != 0.0;
 }
 
 GeoDataCoordinates RoutingInputWidget::targetPosition() const
 {
-    return d->m_target;
+    return d->m_route->at(d->m_index);
 }
 
 void RoutingInputWidget::findPlacemarks()
@@ -218,22 +225,38 @@ void RoutingInputWidget::updateProgress()
 void RoutingInputWidget::finishSearch()
 {
     d->m_progressTimer.stop();
-    d->m_stateButton->setIcon(d->m_stateIcon);
+    d->m_stateButton->setIcon(QIcon(d->m_route->pixmap(d->m_index)));
     d->m_stateButton->setEnabled(true);
     emit searchFinished(this);
 }
 
 void RoutingInputWidget::setInvalid()
 {
-    if (d->m_hasTarget) {
-        d->m_hasTarget = false;
-        emit targetValidityChanged(d->m_hasTarget);
+    if (!hasTargetPosition()) {
+        emit targetValidityChanged(false);
     }
 }
 
 void RoutingInputWidget::abortMapInputRequest()
 {
     d->m_pickButton->setChecked(false);
+}
+
+void RoutingInputWidget::setIndex(int index)
+{
+    d->m_index = index;
+    d->m_stateButton->setEnabled(hasTargetPosition());
+    d->m_stateButton->setIcon(QIcon(d->m_route->pixmap(d->m_index)));
+}
+
+void RoutingInputWidget::updatePosition(int index, const GeoDataCoordinates &position)
+{
+    if (index == d->m_index) {
+        d->m_lineEdit->setText( position.toString() );
+        d->m_stateButton->setEnabled(hasTargetPosition());
+        d->m_stateButton->setIcon(d->m_route->pixmap(d->m_index));
+        emit targetValidityChanged(hasTargetPosition());
+    }
 }
 
 } // namespace Marble
