@@ -191,6 +191,7 @@ void RoutingWidget::retrieveRoute()
         }
     }
 
+    d->m_activeInput = 0;
     if (d->m_routeSkeleton->size() > 1) {
         d->m_routingLayer->setModel( d->m_routingManager->routingModel() );
         d->m_routingManager->retrieveRoute(d->m_routeSkeleton);
