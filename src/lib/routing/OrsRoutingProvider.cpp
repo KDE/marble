@@ -13,6 +13,7 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "RouteSkeleton.h"
+#include "MarbleLocale.h"
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
@@ -79,9 +80,9 @@ QString OrsRoutingProvider::xmlHeader() const
     result += "xmlns:gml=\"http://www.opengis.net/gml\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" ";
     result += "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ";
     result += "xsi:schemaLocation=\"http://www.opengis.net/xls ";
-    result += "http://schemas.opengis.net/ols/1.1.0/RouteService.xsd\" version=\"1.1\" xls:lang=\"en\">\n";
+    result += "http://schemas.opengis.net/ols/1.1.0/RouteService.xsd\" version=\"1.1\" xls:lang=\"%1\">\n";
     result += "<xls:RequestHeader/>\n";
-    return result;
+    return result.arg(MarbleLocale::languageCode());
 }
 
 QString OrsRoutingProvider::requestHeader(DistanceUnit unit, Preference preference) const
