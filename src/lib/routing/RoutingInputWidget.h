@@ -15,6 +15,8 @@
 
 #include <QtGui/QWidget>
 
+class QNetworkReply;
+
 namespace Marble {
 
 class RoutingInputWidgetPrivate;
@@ -128,6 +130,12 @@ private Q_SLOTS:
 
     /** Set the target position (dragging) */
     void updatePosition(int index, const GeoDataCoordinates &position);
+
+    /** Start reverse geocoding request */
+    void startHttpRequest();
+
+    /** Http request with nominatim.openstreetmap.org done */
+    void handleHttpReply( QNetworkReply* );
 
 private:
     RoutingInputWidgetPrivate* const d;

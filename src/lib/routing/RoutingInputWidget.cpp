@@ -14,6 +14,8 @@
 #include "MarblePlacemarkModel.h"
 #include "MarbleDebug.h"
 #include "RouteSkeleton.h"
+#include "TinyWebBrowser.h"
+#include "MarbleLocale.h"
 
 #include <QtCore/QTimer>
 #include <QtGui/QLineEdit>
@@ -21,6 +23,10 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QMovie>
 #include <QtGui/QIcon>
+#include <QtXml/QDomDocument>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QtCore/QUrl>
 
 namespace Marble {
 
@@ -37,8 +43,6 @@ public:
 
     MarbleRunnerManager *m_runnerManager;
 
-    RoutingInputWidgetPrivate(RouteSkeleton *skeleton, int index, QWidget *parent);
-
     MarblePlacemarkModel* m_placemarkModel;
 
     QMovie m_progress;
@@ -48,12 +52,22 @@ public:
     RouteSkeleton* m_route;
 
     int m_index;
+
+    QNetworkAccessManager *m_manager;
+
+    QTimer m_nominatimTimer;
+
+    /** Constructor */
+    RoutingInputWidgetPrivate(RouteSkeleton *skeleton, int index, QWidget *parent);
+
+    /** Initiate reverse geocoding request to download address */
+    void adjustText();
 };
 
 RoutingInputWidgetPrivate::RoutingInputWidgetPrivate(RouteSkeleton *skeleton, int index, QWidget *parent) :
         m_lineEdit(0), m_runnerManager(new MarbleRunnerManager(parent)),
         m_placemarkModel(0), m_progress(":/data/bitmaps/progress.mng"),
-        m_route(skeleton), m_index(index)
+        m_route(skeleton), m_index(index), m_manager(new QNetworkAccessManager(parent))
 {
     m_stateButton = new QPushButton(parent);
     m_stateButton->setToolTip("Center Map here");
@@ -87,6 +101,13 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate(RouteSkeleton *skeleton, in
     m_pickButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     m_progressTimer.setInterval(100);
+    m_nominatimTimer.setInterval(1000);
+    m_nominatimTimer.setSingleShot(true);
+}
+
+void RoutingInputWidgetPrivate::adjustText()
+{
+    m_nominatimTimer.start();
 }
 
 RoutingInputWidget::RoutingInputWidget(RouteSkeleton *skeleton, int index, QWidget *parent) :
@@ -120,11 +141,36 @@ RoutingInputWidget::RoutingInputWidget(RouteSkeleton *skeleton, int index, QWidg
             this, SLOT(finishSearch()));
     connect(skeleton, SIGNAL(positionChanged(int, GeoDataCoordinates)),
             this, SLOT(updatePosition(int, GeoDataCoordinates)));
+    connect(&d->m_nominatimTimer, SIGNAL(timeout()),
+            this, SLOT(startHttpRequest()));
 }
 
 RoutingInputWidget::~RoutingInputWidget()
 {
     delete d;
+}
+
+void RoutingInputWidget::startHttpRequest()
+{
+    if (!hasTargetPosition())
+        return;
+
+    GeoDataCoordinates position = targetPosition();
+    QString base = "http://nominatim.openstreetmap.org/reverse?format=xml&addressdetails=0";
+    // @todo: Alternative URI with addressdetails=1 could be used for shorther placemark name
+    QString query = "&lon=%1&lat=%2&accept-language=%3";
+    double lon = position.longitude(GeoDataCoordinates::Degree);
+    double lat = position.latitude(GeoDataCoordinates::Degree);
+    QString url = QString(base + query).arg(lon).arg(lat).arg(MarbleLocale::languageCode());
+
+    QObject::connect(d->m_manager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(handleHttpReply(QNetworkReply*)));
+
+    QNetworkRequest request;
+    request.setUrl(QUrl(url));
+    request.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "RoutingInputWidget") );
+
+    d->m_manager->get(QNetworkRequest(request));
 }
 
 void RoutingInputWidget::setPlacemarkModel(MarblePlacemarkModel* model)
@@ -145,6 +191,7 @@ void RoutingInputWidget::setTargetPosition(const GeoDataCoordinates &position)
     if (!hasTargetPosition()) {
         d->m_route->setPosition(d->m_index, position);
         emit targetValidityChanged(true);
+        d->adjustText();
     }
 }
 
@@ -246,6 +293,25 @@ void RoutingInputWidget::updatePosition(int index, const GeoDataCoordinates &pos
         d->m_stateButton->setEnabled(hasTargetPosition());
         d->m_stateButton->setIcon(d->m_route->pixmap(d->m_index));
         emit targetValidityChanged(hasTargetPosition());
+        d->adjustText();
+    }
+}
+
+void RoutingInputWidget::handleHttpReply( QNetworkReply* reply )
+{
+    QDomDocument xml;
+    if (!xml.setContent(reply->readAll())) {
+        qWarning() << "Cannot parse osm nominatim result " << xml.toString();
+        return;
+    }
+
+    QVector<GeoDataPlacemark> placemarks;
+    QDomElement root = xml.documentElement();
+    QDomNodeList places = root.elementsByTagName("result");
+    if (places.size()==1) {
+        QString address = places.item(0).toElement().text();
+        d->m_lineEdit->setText(address);
+        d->m_lineEdit->setCursorPosition(0);
     }
 }
 
