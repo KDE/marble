@@ -143,6 +143,8 @@ RoutingInputWidget::RoutingInputWidget(RouteSkeleton *skeleton, int index, QWidg
             this, SLOT(updatePosition(int, GeoDataCoordinates)));
     connect(&d->m_nominatimTimer, SIGNAL(timeout()),
             this, SLOT(startHttpRequest()));
+
+    d->adjustText();
 }
 
 RoutingInputWidget::~RoutingInputWidget()
@@ -188,11 +190,7 @@ void RoutingInputWidget::setTargetPosition(const GeoDataCoordinates &position)
     d->m_route->setPosition(d->m_index, position);
     d->m_progressTimer.stop();
     d->m_stateButton->setEnabled(true);
-    if (!hasTargetPosition()) {
-        d->m_route->setPosition(d->m_index, position);
-        emit targetValidityChanged(true);
-        d->adjustText();
-    }
+    emit targetValidityChanged(true);
 }
 
 bool RoutingInputWidget::hasTargetPosition() const
