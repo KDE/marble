@@ -621,17 +621,14 @@ void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
 void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
 {
     Q_UNUSED(animated);
-    //work out the needed zoom level
+
     ViewportParams* viewparams = d->m_map->viewParams()->viewport();
-    int maxScreenSize = viewparams->height() > viewparams->width() ?
-                     viewparams->height() : viewparams->width();
-
-    qreal maxBoundingSize = box.height() > box.width() ? box.height() : box.width();
-
     //prevent divide by zero
-    if( maxBoundingSize ) {
-        int zoomRadius = ( 0.25 * M_PI ) * ( maxScreenSize / maxBoundingSize );
-        setRadius( zoomRadius );
+    if( box.height() && box.width() ) {
+        //work out the needed zoom level
+        int horizontalRadius = ( 0.25 * M_PI ) * ( viewparams->height() / box.height() );
+        int verticalRadius = ( 0.25 * M_PI ) * ( viewparams->width() / box.width() );
+        setRadius( qMin<int>(horizontalRadius, verticalRadius) );
     }
 
     //move the map
