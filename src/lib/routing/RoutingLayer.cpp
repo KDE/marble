@@ -210,7 +210,7 @@ void RoutingLayerPrivate::renderRoute(GeoPainter* painter)
             if (m_selectionModel->selection().contains(proxyIndex))
             {
                 painter->setPen(QColor(Qt::black));
-                painter->setBrush(QBrush(QColor::fromRgb(227,173,0,100))); // yellow, oxygen palette
+                painter->setBrush(QBrush(QColor::fromRgb(227,173,0,200))); // yellow, oxygen palette
                 painter->drawAnnotation(pos, index.data().toString(), QSize(120,60), 10, 30, 15, 15 );
 
                 painter->setPen(bluePen);
