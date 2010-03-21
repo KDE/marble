@@ -297,6 +297,9 @@ void RoutingInputWidget::updatePosition(int index, const GeoDataCoordinates &pos
 
 void RoutingInputWidget::handleHttpReply( QNetworkReply* reply )
 {
+    if (!reply->bytesAvailable())
+      return;
+
     QDomDocument xml;
     if (!xml.setContent(reply->readAll())) {
         qWarning() << "Cannot parse osm nominatim result " << xml.toString();
