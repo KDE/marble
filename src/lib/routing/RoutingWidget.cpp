@@ -319,7 +319,9 @@ void RoutingWidget::updateRouteState(RoutingManager::State state, RouteSkeleton*
             }
         }
 
-        d->m_widget->centerOn(GeoDataLatLonBox::fromLineString(bbox));
+        if (bbox.size()>1) {
+          d->m_widget->centerOn(GeoDataLatLonBox::fromLineString(bbox));
+        }
     }
 
     d->m_routingLayer->setRouteDirty(state == RoutingManager::Downloading);
