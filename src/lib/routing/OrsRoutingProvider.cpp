@@ -37,7 +37,29 @@ void OrsRoutingProvider::retrieveDirections(RouteSkeleton* route)
     GeoDataCoordinates destination = route->destination();
 
     QString request = xmlHeader();
-    request += requestHeader(Meter, Fastest);
+    QString unit = "KM";
+    QString preference = "Fastest";
+
+    switch (route->routePreference()) {
+      case RouteSkeleton::CarFastest:
+        unit = "KM";
+        preference = "Fastest";
+        break;
+    case RouteSkeleton::CarShortest:
+      unit = "KM";
+      preference = "Shortest";
+      break;
+    case RouteSkeleton::Bicycle:
+      unit = "M";
+      preference = "Bicycle";
+      break;
+    case RouteSkeleton::Pedestrian:
+      unit = "M";
+      preference = "Pedestrian";
+      break;
+    }
+
+    request += requestHeader(unit, preference);
     request += requestPoint(StartPoint, source);
 
     if (route->size() > 2) {
@@ -47,7 +69,7 @@ void OrsRoutingProvider::retrieveDirections(RouteSkeleton* route)
     }
 
     request += requestPoint(EndPoint, destination);
-    request += requestFooter();
+    request += requestFooter(route->avoidFeatures());
     request += xmlFooter();
     //mDebug() << "POST: " << request;
 
@@ -85,15 +107,14 @@ QString OrsRoutingProvider::xmlHeader() const
     return result.arg(MarbleLocale::languageCode());
 }
 
-QString OrsRoutingProvider::requestHeader(DistanceUnit unit, Preference preference) const
+QString OrsRoutingProvider::requestHeader(const QString &unit, const QString &routePreference ) const
 {
     QString result = "<xls:Request methodName=\"RouteRequest\" requestID=\"123456789\" version=\"1.1\">\n";
     result += "<xls:DetermineRouteRequest distanceUnit=\"%1\">\n";
     result += "<xls:RoutePlan>\n";
     result += "<xls:RoutePreference>%2</xls:RoutePreference>\n";
     result += "<xls:WayPointList>\n";
-    QString pref = preference == Fastest ? "Fastest" : preference == Shortest ? "Shortest" : "Pedestrian";
-    return result.arg(unit == MilesFeet ? "M" : "KM").arg( pref );
+    return result.arg( unit ).arg( routePreference );
 }
 
 QString OrsRoutingProvider::requestPoint(PointType pointType, const GeoDataCoordinates &coordinates) const
@@ -112,9 +133,22 @@ QString OrsRoutingProvider::requestPoint(PointType pointType, const GeoDataCoord
     return result;
 }
 
-QString OrsRoutingProvider::requestFooter() const
+QString OrsRoutingProvider::requestFooter(RouteSkeleton::AvoidFeatures avoidFeatures) const
 {
     QString result = "</xls:WayPointList>\n";
+
+    if (avoidFeatures != RouteSkeleton::AvoidNone)
+    {
+      result += "<xls:AvoidList>\n"; {
+      if (avoidFeatures & RouteSkeleton::AvoidTollWay)
+        result += "<xls:AvoidFeature>Tollway</xls:AvoidFeature>";
+      }
+      if (avoidFeatures & RouteSkeleton::AvoidHighway) {
+        result += "<xls:AvoidFeature>Highway</xls:AvoidFeature>";
+      }
+      result += "</xls:AvoidList>\n";
+    }
+
     result += "</xls:RoutePlan>\n";
     result += "<xls:RouteInstructionsRequest provideGeometry=\"true\" />\n";
     result += "<xls:RouteGeometryRequest/>\n";

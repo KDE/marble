@@ -88,6 +88,7 @@ void RoutingWidgetPrivate::adjustInputWidgets()
         m_inputWidgets[i]->setIndex(i);
     }
 
+    m_ui.optionsLabel->setVisible(!simple);
     adjustSearchButton();
 }
 
@@ -165,8 +166,15 @@ RoutingWidget::RoutingWidget(MarbleWidget* marbleWidget, QWidget* parent) :
              this, SLOT( retrieveRoute ( ) ) );
     connect( d->m_ui.moreLabel, SIGNAL(linkActivated(QString)),
              this, SLOT(addInputWidget()));
+    connect( d->m_ui.optionsLabel, SIGNAL(linkActivated(QString)),
+             this, SLOT(toggleOptionsVisibility()));
 
     addInputWidget(); // Need at least one input field
+    d->m_ui.routePreferenceComboBox->setVisible(false);
+    d->m_ui.highwaysCheckBox->setVisible(false);
+    d->m_ui.tollWaysCheckBox->setVisible(false);
+    d->m_ui.preferenceLabel->setVisible(false);
+    d->m_ui.avoidLabel->setVisible(false);
 }
 
 RoutingWidget::~RoutingWidget()
@@ -181,6 +189,23 @@ void RoutingWidget::retrieveRoute()
         d->m_inputWidgets.first()->findPlacemarks();
         return;
     }
+
+    int index = d->m_ui.routePreferenceComboBox->currentIndex();
+    RouteSkeleton::RoutePreference pref = RouteSkeleton::CarFastest;
+    if (index == 1)
+      pref = RouteSkeleton::CarShortest;
+    if (index == 2)
+      pref = RouteSkeleton::Bicycle;
+    if (index == 3)
+      pref = RouteSkeleton::Pedestrian;
+    RouteSkeleton::AvoidFeatures avoid = RouteSkeleton::AvoidNone;
+    if (d->m_ui.highwaysCheckBox->isChecked())
+      avoid |= RouteSkeleton::AvoidHighway;
+    if (d->m_ui.tollWaysCheckBox->isChecked())
+      avoid |= RouteSkeleton::AvoidTollWay;
+
+    d->m_routeSkeleton->setRoutePreference(pref);
+    d->m_routeSkeleton->setAvoidFeatures(avoid);
 
     Q_ASSERT(d->m_routeSkeleton->size() == d->m_inputWidgets.size());
     for (int i=0; i<d->m_inputWidgets.size(); ++i) {
@@ -266,7 +291,7 @@ void RoutingWidget::activatePlacemark(const QModelIndex &index)
 
 void RoutingWidget::addInputWidget()
 {
-    int index = d->m_ui.routingLayout->count()-2;
+    int index = d->m_ui.routingLayout->count()-3;
     d->m_routeSkeleton->append(GeoDataCoordinates());
     insertInputWidget(index);
 }
@@ -361,6 +386,16 @@ void RoutingWidget::pointSelectionCanceled()
     if (d->m_inputRequest) {
         d->m_inputRequest->abortMapInputRequest();
     }
+}
+
+void RoutingWidget::toggleOptionsVisibility()
+{
+    bool visible = !d->m_ui.routePreferenceComboBox->isVisible();
+    d->m_ui.routePreferenceComboBox->setVisible(visible);
+    d->m_ui.highwaysCheckBox->setVisible(visible);
+    d->m_ui.tollWaysCheckBox->setVisible(visible);
+    d->m_ui.preferenceLabel->setVisible(visible);
+    d->m_ui.avoidLabel->setVisible(visible);
 }
 
 } // namespace Marble

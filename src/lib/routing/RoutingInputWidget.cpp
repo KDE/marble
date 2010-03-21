@@ -236,7 +236,6 @@ void RoutingInputWidget::requestRemoval()
 void RoutingInputWidget::setSimple(bool simple)
 {
     d->m_removeButton->setVisible(!simple);
-    d->m_stateButton->setVisible(!simple);
     d->m_pickButton->setVisible(!simple);
 }
 

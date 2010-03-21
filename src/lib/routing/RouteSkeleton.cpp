@@ -25,9 +25,22 @@ public:
 
     QMap<int,QPixmap> m_pixmapCache;
 
+    RouteSkeleton::RoutePreference m_routePreference;
+
+    RouteSkeleton::AvoidFeatures m_avoidFeatures;
+
     /** Determines a suitable index for inserting a via point */
     int viaIndex(const GeoDataCoordinates &position) const;
+
+    RouteSkeletonPrivate();
 };
+
+RouteSkeletonPrivate::RouteSkeletonPrivate() :
+    m_routePreference(RouteSkeleton::CarFastest),
+    m_avoidFeatures(RouteSkeleton::AvoidNone)
+{
+  // nothing to do
+}
 
 int RouteSkeletonPrivate::viaIndex(const GeoDataCoordinates &position) const
 {
@@ -180,6 +193,26 @@ void RouteSkeleton::setPosition( int index, const GeoDataCoordinates &position)
         d->m_route[index] = position;
         emit positionChanged(index, position);
     }
+}
+
+void RouteSkeleton::setAvoidFeatures(RouteSkeleton::AvoidFeatures features)
+{
+  d->m_avoidFeatures = features;
+}
+
+RouteSkeleton::AvoidFeatures RouteSkeleton::avoidFeatures() const
+{
+  return d->m_avoidFeatures;
+}
+
+void RouteSkeleton::setRoutePreference(RouteSkeleton::RoutePreference preference)
+{
+  d->m_routePreference = preference;
+}
+
+RouteSkeleton::RoutePreference RouteSkeleton::routePreference() const
+{
+  return d->m_routePreference;
 }
 
 } // namespace Marble

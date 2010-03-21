@@ -12,6 +12,7 @@
 #define ORS_ROUTING_PROVIDER_H
 
 #include "AbstractRoutingProvider.h"
+#include "RouteSkeleton.h"
 
 #include <QtNetwork/QNetworkReply>
 
@@ -26,12 +27,6 @@ namespace Marble {
 class OrsRoutingProvider : public AbstractRoutingProvider
 {
     Q_OBJECT
-
-    enum Preference {
-        Fastest,
-        Shortest,
-        Pedestrian
-    };
 
     enum PointType {
         StartPoint,
@@ -58,13 +53,13 @@ private:
     QString xmlHeader() const;
 
     /** Builds the route request header in the xml request. */
-    QString requestHeader(DistanceUnit unit = Meter, Preference preference = Fastest ) const;
+    QString requestHeader(const QString &unit, const QString &routePreference ) const;
 
     /** Builds a route point substring. */
     QString requestPoint(PointType pointType, const GeoDataCoordinates &coordinates) const;
 
     /** Builds the route request footer in the xml request. */
-    QString requestFooter() const;
+    QString requestFooter( RouteSkeleton::AvoidFeatures avoidFeatures ) const;
 
     /** Builds the xml request footer. */
     QString xmlFooter() const;
