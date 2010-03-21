@@ -19,14 +19,15 @@
 #include "MarbleDebug.h"
 #include "MarbleWidgetInputHandler.h"
 
-#include <QtGui/QSortFilterProxyModel>
-
 #include "RoutingManager.h"
 #include "RoutingLayer.h"
 #include "RoutingModel.h"
 #include "RoutingProxyModel.h"
 #include "RoutingInputWidget.h"
 #include "RouteSkeleton.h"
+
+#include <QtGui/QSortFilterProxyModel>
+#include <QtCore/QTime>
 
 #include "ui_RoutingWidget.h"
 
@@ -175,6 +176,7 @@ RoutingWidget::RoutingWidget(MarbleWidget* marbleWidget, QWidget* parent) :
     d->m_ui.tollWaysCheckBox->setVisible(false);
     d->m_ui.preferenceLabel->setVisible(false);
     d->m_ui.avoidLabel->setVisible(false);
+    d->m_ui.descriptionLabel->setVisible(false);
 }
 
 RoutingWidget::~RoutingWidget()
@@ -267,6 +269,7 @@ void RoutingWidget::handleSearchResult(RoutingInputWidget* widget)
 
     if (placemarks.size() > 1) {
         d->m_widget->centerOn(GeoDataLatLonBox::fromLineString(placemarks));
+        d->m_ui.descriptionLabel->setVisible(false);
     }
 }
 
@@ -291,7 +294,7 @@ void RoutingWidget::activatePlacemark(const QModelIndex &index)
 
 void RoutingWidget::addInputWidget()
 {
-    int index = d->m_ui.routingLayout->count()-3;
+    int index = d->m_ui.routingLayout->count()-4;
     d->m_routeSkeleton->append(GeoDataCoordinates());
     insertInputWidget(index);
 }
@@ -346,6 +349,12 @@ void RoutingWidget::updateRouteState(RoutingManager::State state, RouteSkeleton*
 
         if (bbox.size()>1) {
           d->m_widget->centerOn(GeoDataLatLonBox::fromLineString(bbox));
+          QString label = tr("Estimated travel time: %1 (%2 km)");
+          qreal distance = d->m_routingManager->routingModel()->totalDistance();
+          QTime time = d->m_routingManager->routingModel()->totalTime();
+          QString timeString = time.toString(Qt::DefaultLocaleShortDate);
+          d->m_ui.descriptionLabel->setText(label.arg(timeString).arg(distance, 0, 'f', 1));
+          d->m_ui.descriptionLabel->setVisible(true);
         }
     }
 

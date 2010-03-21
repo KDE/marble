@@ -77,6 +77,17 @@ public:
       */
     void importOpenGis( const QByteArray &xmlData);
 
+    /**
+      * Returns the total (estimated) time it takes to travel from
+      * source to destination
+      */
+    QTime totalTime() const;
+
+    /**
+      * Returns the total route distance (kilometer)
+      */
+    qreal totalDistance() const;
+
 private:
     RoutingModelPrivate* const d;
 };

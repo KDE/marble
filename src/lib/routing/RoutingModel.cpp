@@ -26,6 +26,7 @@
 
 #include <QtCore/QVector>
 #include <QtCore/QBuffer>
+#include <QtCore/QRegExp>
 #include <QtGui/QPixmap>
 #include <QtXml/QDomDocument>
 
@@ -46,8 +47,19 @@ namespace Marble {
     public:
         RouteElements m_route;
 
+        QTime m_totalTime;
+
+        qreal m_totalDistance;
+
+        RoutingModelPrivate();
+
         RouteElement parseGmlPos(const QStringList &content) const;
     };
+
+    RoutingModelPrivate::RoutingModelPrivate() : m_totalDistance(0.0)
+    {
+      // nothing to do
+    }
 
     RouteElement RoutingModelPrivate::parseGmlPos(const QStringList &content) const
     {
@@ -133,6 +145,42 @@ namespace Marble {
 
         QDomElement root = xml.documentElement();
 
+        QDomNodeList summary = root.elementsByTagName("xls:RouteSummary");
+        if (summary.size() > 0) {
+            QDomNodeList time = summary.item(0).toElement().elementsByTagName("xls:TotalTime");
+            QDomNodeList distance = summary.item(0).toElement().elementsByTagName("xls:TotalDistance");
+            if (time.size() == 1 && distance.size() == 1) {
+              QRegExp regexp = QRegExp("^PT(?:(\\d+)H)?(?:(\\d+)M)?(\\d+)S");
+              if (regexp.indexIn(time.item(0).toElement().text()) == 0) {
+                QStringList matches = regexp.capturedTexts();
+                int hours(0), minutes(0), seconds(0);
+                switch(matches.size()) {
+                case 4:
+                  hours   = regexp.cap(matches.size()-3).toInt();
+                  // Intentionally no break
+                case 3:
+                  minutes = regexp.cap(matches.size()-2).toInt();
+                  // Intentionally no break
+                case 2:
+                  seconds = regexp.cap(matches.size()-1).toInt();
+                  break;
+                default:
+                  qWarning() << "Unable to parse time string " << time.item(0).toElement().text();
+                }
+
+                d->m_totalTime = QTime(hours, minutes, seconds, 0);
+                d->m_totalDistance = distance.item(0).attributes().namedItem("value").nodeValue().toDouble();
+                QString unit = distance.item(0).attributes().namedItem("uom").nodeValue();
+                if (unit == "M") {
+                  d->m_totalDistance *= METER2KM;
+                }
+                else if (unit != "KM") {
+                  qWarning() << "Cannot parse distance unit " << unit << ", treated as km.";
+                }
+              }
+            }
+        }
+
         QDomNodeList geometry = root.elementsByTagName("xls:RouteGeometry");
         if (geometry.size() > 0) {
             QDomNodeList waypoints = geometry.item(0).toElement().elementsByTagName("gml:pos");
@@ -171,6 +219,16 @@ namespace Marble {
         }
 
         reset();
+    }
+
+    QTime RoutingModel::totalTime() const
+    {
+      return d->m_totalTime;
+    }
+
+    qreal RoutingModel::totalDistance() const
+    {
+      return d->m_totalDistance;
     }
 
 } // namespace Marble
