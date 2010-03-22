@@ -138,7 +138,7 @@ class StackedTileLoader : public QObject
 
         /**
          */
-        void updateTile( TileId const & stackedTileId, TileId const & baseTileId );
+        void updateTile( TileId const & stackedTileId, TileId const & tileId );
 
         /**
          * Effectively triggers a reload of all tiles that are currently in use

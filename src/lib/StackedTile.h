@@ -14,21 +14,15 @@
 // and jumptables for faster access to the pixel data
 //
 
-
 #ifndef MARBLE_STACKED_TILE_H
 #define MARBLE_STACKED_TILE_H
 
-
-#include <QtCore/QCache>
-#include <QtCore/QObject>
 #include <QtGui/QColor>
 
 #include "AbstractTile.h"
 #include "global.h"
 
 class QImage;
-class QString;
-class QUrl;
 
 namespace Marble
 {

@@ -293,7 +293,7 @@ void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
     d->m_tileCache.setMaxCost( kiloBytes * 1024 );
 }
 
-void StackedTileLoader::updateTile( TileId const & stackedTileId, TileId const & baseTileId )
+void StackedTileLoader::updateTile( TileId const & stackedTileId, TileId const & tileId )
 {
     StackedTile * const tile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
     if ( tile ) {

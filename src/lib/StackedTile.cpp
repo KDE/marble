@@ -13,18 +13,13 @@
 #include "StackedTile.h"
 #include "StackedTile_p.h"
 
-#include <QtCore/QFileInfo>
 #include <QtGui/QImage>
 
 #include <cmath>
 
 #include "GeoSceneTexture.h"
 #include "MarbleDebug.h"
-#include "MarbleDirs.h"
 #include "TextureTile.h"
-#include "TileLoaderHelper.h"
-#include "global.h"
-
 
 using namespace Marble;
 
