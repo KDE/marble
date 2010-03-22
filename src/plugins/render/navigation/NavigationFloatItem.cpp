@@ -28,8 +28,8 @@ using namespace Marble;
 const int defaultMinZoom = 900;
 const int defaultMaxZoom = 2400;
 
-NavigationFloatItem::NavigationFloatItem( const QPointF &point, const QSizeF &size )
-    : AbstractFloatItem( point, size ),
+NavigationFloatItem::NavigationFloatItem( const QPointF &point )
+    : AbstractFloatItem( point ),
       m_marbleWidget( 0 ),
       m_widgetItem( 0 ),
       m_oldViewportRadius( 0 )
@@ -86,8 +86,6 @@ QIcon NavigationFloatItem::icon() const
 void NavigationFloatItem::initialize()
 {
     QWidget *navigationParent = new QWidget( 0 );
-    navigationParent->setFixedSize(size().toSize() - QSize(2 * padding(), 2
-            * padding()));
     m_navigationWidget.setupUi( navigationParent );
     
     m_widgetItem = new WidgetGraphicsItem( this );

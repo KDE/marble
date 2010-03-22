@@ -18,6 +18,7 @@
 
 #include "MarbleLocale.h"
 
+#include "global.h"
 
 namespace Marble
 {
@@ -27,9 +28,12 @@ class MarbleGlobalPrivate
 {
  public:
     MarbleGlobalPrivate();
+    
     virtual ~MarbleGlobalPrivate();
 
     MarbleLocale m_locale;
+    
+    MarbleGlobal::Profile m_profile;
 };
 
 }

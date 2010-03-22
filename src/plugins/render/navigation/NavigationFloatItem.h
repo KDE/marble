@@ -41,12 +41,7 @@ Q_OBJECT
 //Q_INTERFACES( MarbleLayerInterface )
 MARBLE_PLUGIN( NavigationFloatItem )
  public:
-    explicit NavigationFloatItem( const QPointF &point = QPointF( -10, -10 ),
-#ifdef MARBLE_SMALL_SCREEN
-                                  const QSizeF &size = QSizeF( 88.0, 141.0 ) );
-#else 
-                                  const QSizeF &size = QSizeF( 104.0, 254.0 ) );
-#endif
+    explicit NavigationFloatItem( const QPointF &point = QPointF( -10, -10 ) );
     ~NavigationFloatItem();
 
     QStringList backendTypes() const;

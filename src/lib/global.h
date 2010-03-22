@@ -250,7 +250,15 @@ class  MARBLE_EXPORT MarbleGlobal
     ~MarbleGlobal();
 
     MarbleLocale * locale() const;
+    
+    enum Profile {
+        Default,
+        MobileInternetDevice
+    };
 
+    Profile profile() const;
+    void setProfile( Profile profile );
+    
  private:
     MarbleGlobal();
 

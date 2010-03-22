@@ -37,8 +37,11 @@ WidgetGraphicsItem::~WidgetGraphicsItem() {
 void WidgetGraphicsItem::setWidget( QWidget *widget ) {
     d->m_widget = widget;
     
-    QSize size = widget->size();
+    QSize size = widget->sizeHint().expandedTo( widget->size() );
+    size = size.expandedTo( widget->minimumSize() );
+    size = size.boundedTo( widget->maximumSize() );
     setSize( size );
+    widget->resize( size );
 }
 
 QWidget *WidgetGraphicsItem::widget() const {

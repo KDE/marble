@@ -16,6 +16,7 @@ namespace Marble
 {
 
 MarbleGlobalPrivate::MarbleGlobalPrivate()
+    : m_profile( MarbleGlobal::Default ) 
 {
 }
 
@@ -42,6 +43,14 @@ MarbleGlobal * MarbleGlobal::getInstance()
 MarbleLocale * MarbleGlobal::locale() const
 {
     return &d->m_locale; 
+}
+
+MarbleGlobal::Profile MarbleGlobal::profile() const {
+    return d->m_profile;
+}
+
+void MarbleGlobal::setProfile( MarbleGlobal::Profile profile ) {
+    d->m_profile = profile;
 }
 
 }
