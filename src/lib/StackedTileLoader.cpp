@@ -133,17 +133,15 @@ void StackedTileLoader::cleanupTilehash()
 
 void StackedTileLoader::flush()
 {
-    // Remove all tiles from m_tilesOnDisplay
-    QHashIterator<TileId, StackedTile*> it( d->m_tilesOnDisplay );
-    while ( it.hasNext() ) {
-        it.next();
+    // move all tiles from m_tilesOnDisplay into tile cache
+    QHash<TileId, StackedTile*>::const_iterator it = d->m_tilesOnDisplay.constBegin();
+    QHash<TileId, StackedTile*>::const_iterator const end = d->m_tilesOnDisplay.constEnd();
+    for (; it != end; ++it ) {
         // If insert call result is false then the cache is too small to store the tile
         // but the item will get deleted nevertheless and the pointer we have
         // doesn't get set to zero (so don't delete it in this case or it will crash!)
         d->m_tileCache.insert( it.key(), it.value(), it.value()->numBytes() );
-        d->m_tilesOnDisplay.remove( it.key() );
     }
-
     d->m_tilesOnDisplay.clear();
 }
 
