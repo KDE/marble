@@ -61,7 +61,7 @@ public:
     StackedTileLoaderPrivate()
         : m_datasetProvider( 0 ),
           m_mapThemeManager( 0 ),
-          m_simpleTileLoader( 0 )
+          m_tileLoader( 0 )
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
     }
@@ -71,7 +71,7 @@ public:
     // TODO: comment about uint hash key
     QHash<uint, GeoSceneLayer const *> m_sceneLayers;
     QHash<uint, GeoSceneTexture*> m_textureLayers;
-    TileLoader *m_simpleTileLoader;
+    TileLoader *m_tileLoader;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
     QCache <TileId, StackedTile>  m_tileCache;
 };
@@ -85,9 +85,9 @@ StackedTileLoader::StackedTileLoader( MapThemeManager const * const mapThemeMana
 {
     d->m_mapThemeManager = mapThemeManager;
     initTextureLayers();
-    d->m_simpleTileLoader = new TileLoader( mapThemeManager, downloadManager );
-    d->m_simpleTileLoader->setTextureLayers( d->m_textureLayers );
-    connect( d->m_simpleTileLoader, SIGNAL( tileCompleted( TileId, TileId )),
+    d->m_tileLoader = new TileLoader( mapThemeManager, downloadManager );
+    d->m_tileLoader->setTextureLayers( d->m_textureLayers );
+    connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId, TileId )),
              SLOT( updateTile( TileId, TileId )));
     setDownloadManager( downloadManager );
 }
@@ -96,7 +96,7 @@ StackedTileLoader::~StackedTileLoader()
 {
     flush();
     d->m_tileCache.clear();
-    delete d->m_simpleTileLoader;
+    delete d->m_tileLoader;
     delete d;
 }
 
@@ -195,8 +195,7 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
                                    stackedTileId.x(), stackedTileId.y() );
         mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
                  << simpleTileId.toString();
-        TextureTile * const simpleTile = d->m_simpleTileLoader->loadTile( stackedTileId,
-                                                                          simpleTileId );
+        TextureTile * const simpleTile = d->m_tileLoader->loadTile( stackedTileId, simpleTileId );
         // hack to try clouds, first tile is not handled here, MergeCopy is the default,
         // the merge rule for following tiles is set to MergeMultiply here
         if ( simpleTile && tile->hasTiles() )
