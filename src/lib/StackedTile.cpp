@@ -261,13 +261,13 @@ StackedTile::~StackedTile()
 {
 }
 
-bool StackedTile::expired() const
+bool StackedTile::isExpired() const
 {
     bool result = false;
     QVector<TextureTile*>::const_iterator pos = d->m_tiles.constBegin();
     QVector<TextureTile*>::const_iterator const end = d->m_tiles.constEnd();
     for (; pos != end; ++pos )
-        result |= (*pos)->expired();
+        result |= (*pos)->isExpired();
     return result;
 }
 

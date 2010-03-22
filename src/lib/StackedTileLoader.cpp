@@ -165,7 +165,7 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
     tile = d->m_tileCache.take( stackedTileId );
     if ( tile ) {
         // the tile was in the cache, but is it up to date?
-        if ( !tile->expired() ) {
+        if ( !tile->isExpired() ) {
             d->m_tilesOnDisplay[ stackedTileId ] = tile;
             tile->setUsed( true );
             return tile;

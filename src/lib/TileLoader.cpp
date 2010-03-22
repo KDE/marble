@@ -55,7 +55,7 @@ TextureTile * TileLoader::loadTile( TileId const & stackedTileId, TileId const &
         tile->setLastModified( fileInfo.lastModified() );
         tile->setExpireSecs( textureLayer->expire() );
 
-        if ( !tile->expired() ) {
+        if ( !tile->isExpired() ) {
             mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateUptodate";
             tile->setState( TextureTile::StateUptodate );
         } else {

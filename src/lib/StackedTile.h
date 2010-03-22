@@ -43,7 +43,7 @@ class StackedTile : public AbstractTile
 
     int depth() const;
     int numBytes() const;
-    bool expired() const;
+    bool isExpired() const;
 
     bool forMergedLayerDecorator() const;
     void setForMergedLayerDecorator();

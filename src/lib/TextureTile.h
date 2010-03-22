@@ -53,7 +53,7 @@ class TextureTile
     TileId const & id() const;
     TileId const & stackedTileId() const;
     QDateTime const & lastModified() const;
-    bool expired() const;
+    bool isExpired() const;
     QImage const * image() const;
     QImage * image();
     State state() const;
@@ -97,7 +97,7 @@ inline QDateTime const & TextureTile::lastModified() const
     return m_lastModified;
 }
 
-inline bool TextureTile::expired() const
+inline bool TextureTile::isExpired() const
 {
     return m_lastModified.secsTo( QDateTime::currentDateTime() ) >= m_expireSecs;
 }
