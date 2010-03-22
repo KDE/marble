@@ -23,22 +23,22 @@
 
 #include "StackedTileLoader.h"
 
-#include "TextureTile.h"
-#include "TileLoader.h"
-#include "MarbleModel.h"
-#include "global.h"
+#include "DatasetProvider.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
 #include "GeoSceneTexture.h"
 #include "HttpDownloadManager.h"
-#include "DatasetProvider.h"
-#include "StackedTile.h"
 #include "MapThemeManager.h"
-#include "MarbleDirs.h"
-#include "TileLoaderHelper.h"
 #include "MarbleDebug.h"
+#include "MarbleDirs.h"
+#include "MarbleModel.h"
+#include "StackedTile.h"
+#include "TextureTile.h"
+#include "TileLoader.h"
+#include "TileLoaderHelper.h"
+#include "global.h"
 
 #include <QtCore/QCache>
 #include <QtCore/QDateTime>

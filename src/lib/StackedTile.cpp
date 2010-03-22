@@ -18,12 +18,12 @@
 
 #include <cmath>
 
-#include "TextureTile.h"
-#include "global.h"
-#include "MarbleDebug.h"
 #include "GeoSceneTexture.h"
+#include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "TextureTile.h"
 #include "TileLoaderHelper.h"
+#include "global.h"
 
 
 using namespace Marble;
