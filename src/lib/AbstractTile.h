@@ -18,9 +18,6 @@
 
 #include <QtCore/QObject>
 
-
-class QDateTime;
-
 namespace Marble
 {
 
@@ -64,7 +61,6 @@ protected:
 private:
     Q_DECLARE_PRIVATE( AbstractTile )
     Q_DISABLE_COPY( AbstractTile )
-
 };
 
 }
