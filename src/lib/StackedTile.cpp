@@ -70,14 +70,6 @@ StackedTilePrivate::~StackedTilePrivate()
 {
       delete [] jumpTable32;
       delete [] jumpTable8;
-
-      QVector<TextureTile*>::const_iterator pos = m_tiles.constBegin();
-      QVector<TextureTile*>::const_iterator const end = m_tiles.constEnd();
-      for (; pos != end; ++pos )
-          // only delete tiles with stateUptodate as the other ones are managed
-          // by the TileLoader until they are fully up to date.
-          if ( (*pos)->state() == TextureTile::StateUptodate )
-              delete *pos;
 }
 
 uint StackedTilePrivate::pixel( int x, int y ) const
@@ -212,12 +204,12 @@ uint StackedTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
     return topLeftValue;
 }
 
-inline void StackedTilePrivate::mergeCopyToResult( TextureTile const * const other )
+inline void StackedTilePrivate::mergeCopyToResult( QSharedPointer<TextureTile> const & other )
 {
     m_resultTile = other->image()->copy();
 }
 
-void StackedTilePrivate::mergeMultiplyToResult( TextureTile const * const other )
+void StackedTilePrivate::mergeMultiplyToResult( QSharedPointer<TextureTile> const & other )
 {
     // for this operation we assume that the tiles have the same size
     QImage const * const otherImage = other->image();
@@ -264,8 +256,8 @@ StackedTile::~StackedTile()
 bool StackedTile::isExpired() const
 {
     bool result = false;
-    QVector<TextureTile*>::const_iterator pos = d->m_tiles.constBegin();
-    QVector<TextureTile*>::const_iterator const end = d->m_tiles.constEnd();
+    QVector<QSharedPointer<TextureTile> >::const_iterator pos = d->m_tiles.constBegin();
+    QVector<QSharedPointer<TextureTile> >::const_iterator const end = d->m_tiles.constEnd();
     for (; pos != end; ++pos )
         result |= (*pos)->isExpired();
     return result;
@@ -281,7 +273,7 @@ void StackedTile::setForMergedLayerDecorator()
     d->m_forMergedLayerDecorator = true;
 }
 
-void StackedTile::addTile( TextureTile * const tile )
+void StackedTile::addTile( QSharedPointer<TextureTile> const & tile )
 {
     d->m_tiles.append( tile );
     deriveCompletionState();
@@ -290,8 +282,8 @@ void StackedTile::addTile( TextureTile * const tile )
 void StackedTile::deriveCompletionState()
 {
     QMap<TextureTile::State, int> count;
-    QVector<TextureTile*>::const_iterator pos = d->m_tiles.constBegin();
-    QVector<TextureTile*>::const_iterator const end = d->m_tiles.constEnd();
+    QVector<QSharedPointer<TextureTile> >::const_iterator pos = d->m_tiles.constBegin();
+    QVector<QSharedPointer<TextureTile> >::const_iterator const end = d->m_tiles.constEnd();
     for (; pos != end; ++pos )
         ++count[ (*pos)->state() ];
 
@@ -378,8 +370,8 @@ bool StackedTile::hasTiles() const
 void StackedTile::initResultTile()
 {
     Q_ASSERT( hasTiles() );
-    QVector<TextureTile*>::const_iterator pos = d->m_tiles.constBegin();
-    QVector<TextureTile*>::const_iterator const end = d->m_tiles.constEnd();
+    QVector<QSharedPointer<TextureTile> >::const_iterator pos = d->m_tiles.constBegin();
+    QVector<QSharedPointer<TextureTile> >::const_iterator const end = d->m_tiles.constEnd();
     for (; pos != end; ++pos )
         if ( (*pos)->state() != TextureTile::StateEmpty )
             switch ( (*pos)->mergeRule() ) {

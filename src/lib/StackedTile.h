@@ -17,6 +17,7 @@
 #ifndef MARBLE_STACKED_TILE_H
 #define MARBLE_STACKED_TILE_H
 
+#include <QtCore/QSharedPointer>
 #include <QtGui/QColor>
 
 #include "AbstractTile.h"
@@ -72,7 +73,7 @@ class StackedTile : public AbstractTile
     Q_DECLARE_PRIVATE( StackedTile )
     Q_DISABLE_COPY( StackedTile )
 
-    void addTile( TextureTile * const );
+    void addTile( QSharedPointer<TextureTile> const & );
     void deriveCompletionState();
     void initJumpTables();
     bool hasTiles() const;

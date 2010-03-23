@@ -18,6 +18,7 @@
 
 #include <QtCore/QHash>
 #include <QtCore/QObject>
+#include <QtCore/QSharedPointer>
 #include <QtCore/QString>
 
 #include "TileId.h"
@@ -41,7 +42,7 @@ class TileLoader: public QObject
  public:
     TileLoader( MapThemeManager const * const, HttpDownloadManager * const );
 
-    TextureTile * loadTile( TileId const & stackedTileId, TileId const & tileId );
+    QSharedPointer<TextureTile> loadTile( TileId const & stackedTileId, TileId const & tileId );
     void setTextureLayers( QHash<uint, GeoSceneTexture*> const & );
 
  public Q_SLOTS:
@@ -67,7 +68,7 @@ class TileLoader: public QObject
 
     // contains tiles, for which a download has been triggered
     // because the tile was not there at all or is expired.
-    QHash<TileId, TextureTile*> m_waitingForUpdate;
+    QHash<TileId, QSharedPointer<TextureTile> > m_waitingForUpdate;
 };
 
 inline void TileLoader::setTextureLayers( QHash<uint, GeoSceneTexture*> const & layers )

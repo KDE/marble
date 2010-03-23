@@ -42,7 +42,7 @@ TileLoader::TileLoader( MapThemeManager const * const mapThemeManager,
 //     - if not expired: create TextureTile, set state to "uptodate", return it => done
 //     - if expired: create TextureTile, state is set to Expired by default, trigger dl,
 
-TextureTile * TileLoader::loadTile( TileId const & stackedTileId, TileId const & tileId )
+QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & stackedTileId, TileId const & tileId )
 {
     QString const fileName = tileFileName( tileId );
     QFileInfo const fileInfo( fileName );
@@ -50,7 +50,7 @@ TextureTile * TileLoader::loadTile( TileId const & stackedTileId, TileId const &
         // file is there, so create and return a tile object in any case,
         // but check if an update should be triggered
         GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
-        TextureTile * const tile = new TextureTile( tileId, fileName );
+        QSharedPointer<TextureTile> const tile( new TextureTile( tileId, fileName ));
         tile->setStackedTileId( stackedTileId );
         tile->setLastModified( fileInfo.lastModified() );
         tile->setExpireSecs( textureLayer->expire() );
@@ -68,7 +68,7 @@ TextureTile * TileLoader::loadTile( TileId const & stackedTileId, TileId const &
 
     // tile was not locally available => trigger download and look for tiles in other levels
     // for scaling
-    TextureTile * const tile = new TextureTile( tileId );
+    QSharedPointer<TextureTile> const tile( new TextureTile( tileId ));
     tile->setStackedTileId( stackedTileId );
     m_waitingForUpdate.insert( tileId, tile );
     triggerDownload( tileId );
@@ -86,7 +86,8 @@ TextureTile * TileLoader::loadTile( TileId const & stackedTileId, TileId const &
 void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
 {
     TileId const id = TileId::fromString( tileId );
-    TextureTile * const tile = m_waitingForUpdate.value( id, 0 );
+    QSharedPointer<TextureTile> const tile =
+        m_waitingForUpdate.value( id, QSharedPointer<TextureTile>() );
     // preliminary fix for reload map crash
     // TODO: fix properly
     if ( !tile )

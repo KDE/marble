@@ -191,7 +191,8 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
                                    stackedTileId.x(), stackedTileId.y() );
         mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
                  << simpleTileId.toString();
-        TextureTile * const simpleTile = d->m_tileLoader->loadTile( stackedTileId, simpleTileId );
+        QSharedPointer<TextureTile> const simpleTile = d->m_tileLoader->loadTile( stackedTileId,
+                                                                                  simpleTileId );
         // hack to try clouds, first tile is not handled here, MergeCopy is the default,
         // the merge rule for following tiles is set to MergeMultiply here
         if ( simpleTile && tile->hasTiles() )
