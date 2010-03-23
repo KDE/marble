@@ -22,14 +22,6 @@
 
 // #define QT_STRICT_ITERATORS
 
-// Checking Qt for maemo flags to find out if we are on a small screen device.
-#ifdef Q_WS_HILDON // flag for Qt 4.5 (diablo and fremantle)
- #define MARBLE_SMALL_SCREEN
-#endif
-#ifdef Q_WS_MAEMO_5
- #define MARBLE_SMALL_SCREEN
-#endif
-
 
 namespace Marble
 {
@@ -258,6 +250,11 @@ class  MARBLE_EXPORT MarbleGlobal
 
     Profile profile() const;
     void setProfile( Profile profile );
+    
+    /**
+     * Automatically sets the profile to the default value for the device marble is running on.
+     */
+    void setProfile();
     
  private:
     MarbleGlobal();

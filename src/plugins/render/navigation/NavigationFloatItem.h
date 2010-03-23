@@ -19,11 +19,8 @@
 
 #include "AbstractFloatItem.h"
 
-#ifdef MARBLE_SMALL_SCREEN
 #include "ui_navigation_small.h"
-#else
 #include "ui_navigation.h"
-#endif
 
 namespace Marble
 {
@@ -62,9 +59,6 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
     void changeViewport( ViewportParams *viewport );
 
-    void paintContent( GeoPainter *painter, ViewportParams *viewport,
-                       const QString& renderPos, GeoSceneLayer *layer = 0 );
-
  protected:
     bool eventFilter( QObject *object, QEvent *e );
 
@@ -93,11 +87,11 @@ MARBLE_PLUGIN( NavigationFloatItem )
     WidgetGraphicsItem *m_widgetItem;
 
     /** Navigation controls */
-    #ifdef MARBLE_SMALL_SCREEN
-    Ui::NavigationSmall m_navigationWidget;
-    #else
+    Ui::NavigationSmall m_navigationWidgetSmall;
     Ui::Navigation m_navigationWidget;
-    #endif
+    
+    /** Used Profile */
+    MarbleGlobal::Profile m_profile;
 
     /** Radius of the viewport last time */
     int m_oldViewportRadius;

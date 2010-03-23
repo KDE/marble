@@ -60,6 +60,7 @@ using namespace Marble;
 
 MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWindow(parent), m_sunControlDialog(0)
 {
+    MarbleGlobal::getInstance()->setProfile();
     setUpdatesEnabled( false );
     
     QString selectedPath = marbleDataPath.isEmpty() ? readMarbleDataPath() : marbleDataPath;
