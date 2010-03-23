@@ -844,7 +844,7 @@ void MarbleModel::paintTile( StackedTile* tile, GeoSceneTexture *textureLayer )
 //             << "requestTileUpdate" << requestTileUpdate;
 
     d->m_layerDecorator->setInfo( tile->id() );
-    d->m_layerDecorator->setTile( tile->tile() );
+    d->m_layerDecorator->setTile( tile->resultTile() );
 
     d->m_layerDecorator->paint( "maps/" + textureLayer->sourceDir(), mapTheme() );
 }

@@ -360,14 +360,14 @@ int StackedTile::numBytes() const
     return d->m_resultTile.numBytes();
 }
 
-QImage StackedTile::rawtile() 
+QImage const * StackedTile::resultTile() const
 {
-    return d->m_resultTile;
+    return &d->m_resultTile;
 }
 
-QImage * StackedTile::tile()
+QImage * StackedTile::resultTile()
 {
-    return &(d->m_resultTile);
+    return &d->m_resultTile;
 }
 
 bool StackedTile::hasTiles() const

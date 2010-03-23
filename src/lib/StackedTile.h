@@ -48,8 +48,8 @@ class StackedTile : public AbstractTile
     bool forMergedLayerDecorator() const;
     void setForMergedLayerDecorator();
 
-    QImage rawtile();
-    QImage *tile();
+    QImage const * resultTile() const;
+    QImage * resultTile();
 
     // Here we retrieve the color value of the requested pixel on the tile.
     // This needs to be done differently for grayscale ( uchar, 1 byte ).

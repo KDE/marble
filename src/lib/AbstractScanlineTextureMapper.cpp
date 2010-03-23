@@ -617,7 +617,7 @@ void AbstractScanlineTextureMapper::initTileSize()
     TileId id( m_textureLayer->sourceDir(), 0, 0, 0 );
     StackedTile * const testTile = m_tileLoader->loadTile( id );
     Q_ASSERT( testTile );
-    m_tileSize = testTile->rawtile().size();
+    m_tileSize = testTile->resultTile()->size();
     Q_ASSERT( !m_tileSize.isEmpty() );
 }
 

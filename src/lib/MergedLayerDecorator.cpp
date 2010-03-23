@@ -134,7 +134,7 @@ void MergedLayerDecorator::paintSunShading()
         if ( tile->state() == StackedTile::TileEmpty )
             return;
 
-        QImage * nighttile = tile->tile();
+        QImage * nighttile = tile->resultTile();
 
         for ( int cur_y = 0; cur_y < tileHeight; ++cur_y ) {
             qreal lat = lat_scale * ( m_id.y() * tileHeight + cur_y ) - 0.5*M_PI;
