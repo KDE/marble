@@ -74,7 +74,10 @@ QString MarbleLocale::languageCode()
     QString code;
 
     int index = lang.indexOf ( '_' );
-    if ( index != -1 ) {
+    if ( lang == "C" ) {
+        code = "en";
+    }
+    else if ( index != -1 ) {
         code = lang.left ( index );
     }
     else {
