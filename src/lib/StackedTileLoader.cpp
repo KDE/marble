@@ -151,7 +151,6 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
     // check if the tile is in the hash
     StackedTile * tile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
     if ( tile ) {
-        tile->setUsed( true );
         return tile;
     }
     // here ends the performance critical section of this method
@@ -165,7 +164,6 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
         // the tile was in the cache, but is it up to date?
         if ( !tile->isExpired() ) {
             d->m_tilesOnDisplay[ stackedTileId ] = tile;
-            tile->setUsed( true );
             return tile;
         } else {
             delete tile;
