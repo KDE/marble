@@ -17,6 +17,7 @@
 #define MARBLE_TEXTURE_TILE_H
 
 #include <QtCore/QDateTime>
+#include <QtGui/QImage>
 
 #include "TileId.h"
 
@@ -58,6 +59,7 @@ class TextureTile
     QImage * image();
     State state() const;
     MergeRule mergeRule() const;
+    int byteCount() const;
 
  private:
     Q_DISABLE_COPY( TextureTile )
@@ -120,6 +122,12 @@ inline TextureTile::State TextureTile::state() const
 inline TextureTile::MergeRule TextureTile::mergeRule() const
 {
     return m_mergeRule;
+}
+
+inline int TextureTile::byteCount() const
+{
+    // FIXME: once Qt 4.6 is required for Marble, use QImage::byteCount()
+    return m_image ? m_image->numBytes() : 0;
 }
 
 inline void TextureTile::setState( State const state )

@@ -38,6 +38,7 @@ class StackedTilePrivate : AbstractTilePrivate
 
     QVector<QSharedPointer<TextureTile> > m_tiles;
     QImage    m_resultTile;
+    int m_byteCount;
 
     int       m_depth;
     bool      m_isGrayscale;
@@ -50,6 +51,7 @@ class StackedTilePrivate : AbstractTilePrivate
     inline uint pixelF( qreal x, qreal y, const QRgb& pixel ) const;
     void mergeCopyToResult( QSharedPointer<TextureTile> const & tile );
     void mergeMultiplyToResult( QSharedPointer<TextureTile> const & tile );
+    void calcByteCount();
 };
 
 }

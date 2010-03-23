@@ -18,7 +18,6 @@
 #include <limits>
 
 #include <QtCore/QString>
-#include <QtGui/QImage>
 
 namespace Marble
 {

@@ -60,6 +60,7 @@ StackedTilePrivate::StackedTilePrivate( const TileId& id ) :
       jumpTable8(0),
       jumpTable32(0),
       m_resultTile(),
+      m_byteCount(0),
       m_depth(0),
       m_isGrayscale( false ),
       m_forMergedLayerDecorator( false )
@@ -233,6 +234,17 @@ void StackedTilePrivate::mergeMultiplyToResult( QSharedPointer<TextureTile> cons
     }
 }
 
+void StackedTilePrivate::calcByteCount()
+{
+    int byteCount = m_resultTile.numBytes();
+    QVector<QSharedPointer<TextureTile> >::const_iterator pos = m_tiles.constBegin();
+    QVector<QSharedPointer<TextureTile> >::const_iterator const end = m_tiles.constEnd();
+    for (; pos != end; ++pos )
+        byteCount += (*pos)->byteCount();
+    m_byteCount = byteCount;
+}
+
+
 StackedTile::StackedTile( TileId const& id, QObject * parent )
     : AbstractTile( *new StackedTilePrivate( id ), parent ), d(0)
 {
@@ -349,7 +361,7 @@ int StackedTile::depth() const
 
 int StackedTile::numBytes() const
 {
-    return d->m_resultTile.numBytes();
+    return d->m_byteCount;
 }
 
 QImage const * StackedTile::resultTile() const
@@ -388,6 +400,7 @@ void StackedTile::initResultTile()
     // for now, this seems to be the best place for initializing this stuff
     d->m_depth = d->m_resultTile.depth();
     d->m_isGrayscale = d->m_resultTile.isGrayscale();
+    d->calcByteCount();
 }
 
 #include "StackedTile.moc"
