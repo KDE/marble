@@ -16,7 +16,7 @@ namespace Marble
 {
 
 MarbleGlobalPrivate::MarbleGlobalPrivate()
-    : m_profile( MarbleGlobal::Default ) 
+    : m_profiles( MarbleGlobal::Default ) 
 {
 }
 
@@ -45,25 +45,25 @@ MarbleLocale * MarbleGlobal::locale() const
     return &d->m_locale; 
 }
 
-MarbleGlobal::Profile MarbleGlobal::profile() const {
-    return d->m_profile;
+MarbleGlobal::Profiles MarbleGlobal::profiles() const {
+    return d->m_profiles;
 }
 
-void MarbleGlobal::setProfile( MarbleGlobal::Profile profile ) {
-    d->m_profile = profile;
+void MarbleGlobal::setProfiles( MarbleGlobal::Profiles profiles ) {
+    d->m_profiles = profiles;
 }
 
-void MarbleGlobal::setProfile() {
+MarbleGlobal::Profiles MarbleGlobal::detectProfiles() {
     MarbleGlobal::Profile profile = MarbleGlobal::Default;
     // Checking Qt for maemo flags to find out if we are on a small screen device.
 #ifdef Q_WS_HILDON // flag for Qt 4.5 (diablo and fremantle)
-    profile = MarbleGlobal::MobileInternetDevice;
+    profile |= MarbleGlobal::SmallScreen;
 #endif
 #ifdef Q_WS_MAEMO_5
-    profile = MarbleGlobal::MobileInternetDevice;
+    profile |= MarbleGlobal::SmallScreen;
 #endif
 
-    setProfile( profile );
+    return profile;
 }
 
 }

@@ -244,17 +244,19 @@ class  MARBLE_EXPORT MarbleGlobal
     MarbleLocale * locale() const;
     
     enum Profile {
-        Default,
-        MobileInternetDevice
+        Default = 0x0,
+        SmallScreen = 0x1
     };
+    
+    Q_DECLARE_FLAGS( Profiles, Profile )
 
-    Profile profile() const;
-    void setProfile( Profile profile );
+    Profiles profiles() const;
+    void setProfiles( Profiles profiles );
     
     /**
-     * Automatically sets the profile to the default value for the device marble is running on.
+     * Automatically detects the profile.
      */
-    void setProfile();
+    static Profiles detectProfiles();
     
  private:
     MarbleGlobal();
@@ -265,7 +267,8 @@ class  MARBLE_EXPORT MarbleGlobal
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::TessellationFlags)
-Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::LabelPositionFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS( Marble::TessellationFlags )
+Q_DECLARE_OPERATORS_FOR_FLAGS( Marble::LabelPositionFlags )
+Q_DECLARE_OPERATORS_FOR_FLAGS( Marble::MarbleGlobal::Profiles )
 
 #endif

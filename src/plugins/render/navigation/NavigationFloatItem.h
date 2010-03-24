@@ -91,7 +91,7 @@ MARBLE_PLUGIN( NavigationFloatItem )
     Ui::Navigation m_navigationWidget;
     
     /** Used Profile */
-    MarbleGlobal::Profile m_profile;
+    MarbleGlobal::Profiles m_profiles;
 
     /** Radius of the viewport last time */
     int m_oldViewportRadius;

@@ -58,7 +58,7 @@ MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
     d->dataLoaded = false;
     d->licenseLoaded = false;
 
-    if( MarbleGlobal::getInstance()->profile() == MarbleGlobal::MobileInternetDevice ) {
+    if( MarbleGlobal::getInstance()->profiles() && MarbleGlobal::SmallScreen ) {
         d->uiWidget.m_pMarbleTitleLabel->hide();
         d->uiWidget.m_pMarbleLogoLabel->hide();
     }

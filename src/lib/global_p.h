@@ -33,7 +33,7 @@ class MarbleGlobalPrivate
 
     MarbleLocale m_locale;
     
-    MarbleGlobal::Profile m_profile;
+    MarbleGlobal::Profiles m_profiles;
 };
 
 }
