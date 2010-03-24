@@ -24,6 +24,7 @@
 #include<QtCore/QSize>
 #include<QtCore/QSizeF>
 #include<QtCore/QRect>
+#include<QtGui/QPixmapCache>
 
 namespace Marble
 {
@@ -95,11 +96,13 @@ class MarbleGraphicsItemPrivate
 
     void ensureValidCacheKey()
     {
+#if QT_VERSION < 0x040600
         if( m_cacheKey.isNull() ) {
             static unsigned int key = 0;
             m_cacheKey = QString( "MarbleGraphicsItem:" ) + QString::number( key );
             key++;
         }
+#endif
     }
 
     QList<QRectF> boundingRects() const
@@ -155,8 +158,11 @@ class MarbleGraphicsItemPrivate
 
     MarbleGraphicsItem::CacheMode m_cacheMode;
 
-    // TODO: Substitute this by QPixmapCache::Key once it is available.
+#if QT_VERSION < 0x040600
     QString m_cacheKey;
+#else
+    QPixmapCache::Key m_cacheKey;
+#endif
 
     bool m_visibility;
 
