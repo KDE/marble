@@ -25,7 +25,9 @@ install (FILES
 svg/compass.svg
 svg/marble-logo.svg
 svg/marble-logo.png
+svg/marble-logo-32dpi.png
 svg/marble-logo-72dpi.png
+svg/marble-logo-inverted-32dpi.png
 svg/marble-logo-inverted-72dpi.png
 svg/application-x-marble.svg
 svg/application-x-marble.png

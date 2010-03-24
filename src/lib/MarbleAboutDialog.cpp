@@ -27,6 +27,7 @@
 
 #include <QtCore/QFile>
 #include <QtGui/QTextFrame>
+#include <QtGui/QTabWidget>
 #include <QtCore/QTextStream>
 #include <QtGui/QPixmap>
 
@@ -57,7 +58,14 @@ MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
     d->dataLoaded = false;
     d->licenseLoaded = false;
 
-    d->uiWidget.m_pMarbleLogoLabel->setPixmap( QPixmap( MarbleDirs::path("svg/marble-logo-72dpi.png") ) );
+    if( MarbleGlobal::getInstance()->profile() == MarbleGlobal::MobileInternetDevice ) {
+        d->uiWidget.m_pMarbleTitleLabel->hide();
+        d->uiWidget.m_pMarbleLogoLabel->hide();
+    }
+    else {
+        d->uiWidget.m_pMarbleLogoLabel->setPixmap( 
+                QPixmap( MarbleDirs::path("svg/marble-logo-72dpi.png") ) );
+    }
     d->uiWidget.m_pMarbleVersionLabel->setText( tr("Version %1").arg(MARBLE_VERSION_STRING) );
 
     connect( d->uiWidget.tabWidget, SIGNAL( currentChanged( int ) ), 

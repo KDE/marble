@@ -98,7 +98,8 @@ void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
             && m_scaleInitDone ) )
     {
         int fontHeight     = QFontMetrics( font() ).ascent();
-        setSize( QSizeF( viewport->width() / 2, 2 * padding() + fontHeight + 3 + m_scaleBarHeight ) );
+        setSize( QSizeF( viewport->width() / 2,
+                         2 * padding() + fontHeight + 3 + m_scaleBarHeight ) );
 
         m_leftBarMargin  = QFontMetrics( font() ).boundingRect( "0" ).width() / 2;
         m_rightBarMargin = QFontMetrics( font() ).boundingRect( "0000" ).width() / 2;
@@ -190,14 +191,23 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
                 intervalStr.setNum( j * m_valueInterval / 1000 );                
             }
 
+        painter->setFont( font() );
+
         if ( j == 0 ) {
             painter->drawText( 0, fontHeight, "0 " + m_unit );
             lastStringEnds = QFontMetrics( font() ).width( "0 " + m_unit );
             continue;
         }
 
-        currentStringBegin = ( j * m_pixelInterval 
-                               - QFontMetrics( font() ).width( intervalStr ) / 2 );
+        if( j == m_bestDivisor ) {
+            currentStringBegin = ( j * m_pixelInterval 
+                                   - QFontMetrics( font() ).boundingRect( intervalStr ).width() );
+        }
+        else {
+            currentStringBegin = ( j * m_pixelInterval 
+                                   - QFontMetrics( font() ).width( intervalStr ) / 2 );
+        }
+        
         if ( lastStringEnds < currentStringBegin ) {
             painter->drawText( currentStringBegin, fontHeight, intervalStr );
             lastStringEnds = currentStringBegin + QFontMetrics( font() ).width( intervalStr );

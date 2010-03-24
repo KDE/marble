@@ -208,6 +208,12 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
+    // Do not create too many menu entries on a MID
+    // FIXME: Some of these options should come back.
+    if( MarbleGlobal::getInstance()->profile() == MarbleGlobal::MobileInternetDevice ) {
+        return;
+    }
+    
     m_fileMenu = menuBar()->addMenu(tr("&File"));
     m_fileMenu->addAction(m_openAct);
     m_fileMenu->addAction(m_downloadAct);
@@ -276,8 +282,15 @@ void MainWindow::createMenus()
 }
 
 void MainWindow::createInfoBoxesMenu()
-{
+{    
     m_infoBoxesMenu->clear();
+    
+    // Do not create too many menu entries on a MID
+    // FIXME: Set up another way of switching the plugins on and off.
+    if( MarbleGlobal::getInstance()->profile() == MarbleGlobal::MobileInternetDevice ) {
+        return;
+    }
+    
     m_infoBoxesMenu->addAction(m_lockFloatItemsAct);
     m_infoBoxesMenu->addSeparator();
 
@@ -295,6 +308,12 @@ void MainWindow::createOnlineServicesMenu()
 {
     m_onlineServicesMenu->clear();
     
+    // Do not create too many menu entries on a MID
+    // FIXME: Set up another way of switching the plugins on and off.
+    if( MarbleGlobal::getInstance()->profile() == MarbleGlobal::MobileInternetDevice ) {
+        return;
+    }
+    
     QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
     
     QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
@@ -310,12 +329,18 @@ void MainWindow::createOnlineServicesMenu()
 }
 
 void MainWindow::createPluginMenus()
-{
-    //Remove and delete toolbars if they exist
+{    
+    // Remove and delete toolbars if they exist
     while( !m_pluginToolbars.isEmpty() ) {
         QToolBar* tb = m_pluginToolbars.takeFirst();
         this->removeToolBar(tb);
         delete tb;
+    }
+    
+    // Do not create too many menu entries on a MID
+    // FIXME: Set up another way of switching the plugins on and off.
+    if( MarbleGlobal::getInstance()->profile() == MarbleGlobal::MobileInternetDevice ) {
+        return;
     }
 
     //remove and delete old menus if they exist
@@ -671,7 +696,12 @@ void MainWindow::readSettings()
          resize(settings.value("size", QSize(640, 480)).toSize());
          move(settings.value("pos", QPoint(200, 200)).toPoint());
          showFullScreen(settings.value("fullScreen", false ).toBool());
-         showSideBar(settings.value("sideBar", true ).toBool());
+         if( MarbleGlobal::getInstance()->profile() == MarbleGlobal::MobileInternetDevice ) {
+             showSideBar(settings.value("sideBar", false ).toBool());
+         }
+         else {
+             showSideBar(settings.value("sideBar", true ).toBool());
+         }
          showStatusBar(settings.value("statusBar", false ).toBool());
          show();
          showClouds(settings.value("showClouds", true ).toBool());
