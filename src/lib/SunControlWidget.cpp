@@ -11,6 +11,7 @@
 
 // Own
 #include "SunControlWidget.h"
+#include "ui_SunControlWidget.h"
 
 // Qt
 #include <QtGui/QShowEvent>
@@ -22,25 +23,26 @@ using namespace Marble;
 
 SunControlWidget::SunControlWidget(QWidget* parent, SunLocator* sunLocator)
     : QDialog( parent ),
+      m_uiWidget( new Ui::SunControlWidget ),
       m_sunLocator( sunLocator )
 {
-    m_uiWidget.setupUi( this );
+    m_uiWidget->setupUi( this );
 	
-    connect( m_uiWidget.showToolButton,   SIGNAL( clicked( bool ) ),
+    connect( m_uiWidget->showToolButton,   SIGNAL( clicked( bool ) ),
              this,                        SLOT( showSunClicked( bool ) ) );
-    connect( m_uiWidget.centerToolButton, SIGNAL( clicked( bool ) ),
+    connect( m_uiWidget->centerToolButton, SIGNAL( clicked( bool ) ),
              this,                        SLOT( centerSunClicked( bool ) ) );
-    connect( m_uiWidget.nowToolButton,    SIGNAL( clicked( bool ) ), 
+    connect( m_uiWidget->nowToolButton,    SIGNAL( clicked( bool ) ), 
              this,                        SLOT( nowClicked( bool ) ) );
-    connect( m_uiWidget.sunShadingComboBox, SIGNAL(  currentIndexChanged ( int ) ), 
+    connect( m_uiWidget->sunShadingComboBox, SIGNAL(  currentIndexChanged ( int ) ), 
              this,                          SLOT( showSunShadingClicked( int ) ) );
-    connect( m_uiWidget.calendarWidget,   SIGNAL( selectionChanged() ),
+    connect( m_uiWidget->calendarWidget,   SIGNAL( selectionChanged() ),
              this,                        SLOT( dateChanged() ) );
-    connect( m_uiWidget.timeEdit,         SIGNAL( timeChanged( const QTime& ) ),
+    connect( m_uiWidget->timeEdit,         SIGNAL( timeChanged( const QTime& ) ),
              this,                        SLOT( timeChanged( const QTime& ) ) );
-    connect( m_uiWidget.timeSlider,       SIGNAL( sliderMoved( int ) ),
+    connect( m_uiWidget->timeSlider,       SIGNAL( sliderMoved( int ) ),
              this,                        SLOT( hourChanged( int ) ) );
-    connect(m_uiWidget.speedSlider, SIGNAL(sliderMoved(int)), this, SLOT(speedChanged(int)));
+    connect(m_uiWidget->speedSlider, SIGNAL(sliderMoved(int)), this, SLOT(speedChanged(int)));
 
     setModal( false );
 
@@ -51,14 +53,15 @@ SunControlWidget::SunControlWidget(QWidget* parent, SunLocator* sunLocator)
 
 SunControlWidget::~SunControlWidget()
 {
+    delete m_uiWidget;
 }
 
 void SunControlWidget::showSunClicked(bool checked)
 {
     if ( checked )
-        m_uiWidget.showToolButton->setText( tr("&Hide") );
+        m_uiWidget->showToolButton->setText( tr("&Hide") );
     else
-        m_uiWidget.showToolButton->setText( tr("Sh&ow") );
+        m_uiWidget->showToolButton->setText( tr("Sh&ow") );
 
     //m_sunLocator->setShow( checked );
     emit showSun( checked );
@@ -94,44 +97,44 @@ void SunControlWidget::updateDateTime()
     QDateTime datetime = m_sunLocator->datetime()->datetime().toLocalTime();
 	
     QDate  date     = datetime.date();
-    QDate  cur_date = m_uiWidget.calendarWidget->selectedDate();
+    QDate  cur_date = m_uiWidget->calendarWidget->selectedDate();
 	
     QTime  time     = datetime.time();
     time = time.addSecs( -time.second() ); // remove seconds
-    QTime  cur_time = m_uiWidget.timeEdit->time();
+    QTime  cur_time = m_uiWidget->timeEdit->time();
 	
     int hour = time.hour();
-    int cur_hour = m_uiWidget.timeSlider->value();
+    int cur_hour = m_uiWidget->timeSlider->value();
 	
     // 	mDebug() << "date:" << date << cur_date;
     // 	mDebug() << "time:" << time << cur_time;
 	
     if ( date != cur_date )
-        m_uiWidget.calendarWidget->setSelectedDate( date );
+        m_uiWidget->calendarWidget->setSelectedDate( date );
     if ( time != cur_time )
-        m_uiWidget.timeEdit->setTime( time );
+        m_uiWidget->timeEdit->setTime( time );
     if ( hour != cur_hour )
-        m_uiWidget.timeSlider->setValue( time.hour() );
+        m_uiWidget->timeSlider->setValue( time.hour() );
 }
 
 void SunControlWidget::timeChanged(const QTime& time)
 {
-    QDate date = m_uiWidget.calendarWidget->selectedDate();
-    m_uiWidget.timeSlider->setValue( time.hour() );
+    QDate date = m_uiWidget->calendarWidget->selectedDate();
+    m_uiWidget->timeSlider->setValue( time.hour() );
     datetimeChanged( QDateTime( date, time ) );
 }
 
 void SunControlWidget::dateChanged()
 {
-    QDate date = m_uiWidget.calendarWidget->selectedDate();
-    QTime time = m_uiWidget.timeEdit->time();
+    QDate date = m_uiWidget->calendarWidget->selectedDate();
+    QTime time = m_uiWidget->timeEdit->time();
     datetimeChanged( QDateTime( date, time ) );
 }
 
 void SunControlWidget::hourChanged(int hour)
 {
-    QTime time( hour, m_uiWidget.timeEdit->time().minute() );
-    m_uiWidget.timeEdit->setTime( time );
+    QTime time( hour, m_uiWidget->timeEdit->time().minute() );
+    m_uiWidget->timeEdit->setTime( time );
 }
 
 void SunControlWidget::datetimeChanged(QDateTime datetime)
@@ -152,21 +155,21 @@ void SunControlWidget::datetimeChanged(QDateTime datetime)
 void SunControlWidget::speedChanged(int speed)
 {
     m_sunLocator->datetime()->setSpeed( speed );
-    m_uiWidget.speedLabel->setText( QString( "%1x" ).arg( speed ) );
+    m_uiWidget->speedLabel->setText( QString( "%1x" ).arg( speed ) );
 }
 
 void SunControlWidget::showEvent(QShowEvent* event)
 {
     if( !event->spontaneous() ) {
         // Loading all options
-        m_uiWidget.speedSlider->setValue( m_sunLocator->datetime()->getSpeed() );
+        m_uiWidget->speedSlider->setValue( m_sunLocator->datetime()->getSpeed() );
         updateDateTime();
         if( m_sunLocator->getCitylights() )
-            m_uiWidget.sunShadingComboBox->setCurrentIndex(1);
+            m_uiWidget->sunShadingComboBox->setCurrentIndex(1);
         else
-            m_uiWidget.sunShadingComboBox->setCurrentIndex(0);
-        m_uiWidget.centerToolButton->setChecked( m_sunLocator->getCentered() );
-        m_uiWidget.showToolButton->setChecked( m_sunLocator->getShow() );
+            m_uiWidget->sunShadingComboBox->setCurrentIndex(0);
+        m_uiWidget->centerToolButton->setChecked( m_sunLocator->getCentered() );
+        m_uiWidget->showToolButton->setChecked( m_sunLocator->getShow() );
     }
 }
 

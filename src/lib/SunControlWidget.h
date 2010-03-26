@@ -22,6 +22,11 @@
 
 #include "marble_export.h"
 
+namespace Ui
+{
+    class SunControlWidget;
+};
+
 namespace Marble
 {
 class SunLocator;
@@ -56,7 +61,7 @@ class MARBLE_EXPORT SunControlWidget : public QDialog
     void showEvent(QShowEvent* event);
     Q_DISABLE_COPY( SunControlWidget )
 
-    Ui::SunControlWidget  m_uiWidget;
+    Ui::SunControlWidget *m_uiWidget;
     SunLocator           *m_sunLocator;
 };
 
