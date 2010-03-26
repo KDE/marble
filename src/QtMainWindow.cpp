@@ -48,7 +48,7 @@
 #include "AbstractFloatItem.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
-
+#include "SunLocator.h"
 
 namespace
 {
