@@ -15,12 +15,13 @@
 
 #include "global.h"
 
-// forward declarations
-
 #include "AbstractFloatItem.h"
 
-#include "ui_navigation_small.h"
-#include "ui_navigation.h"
+namespace Ui
+{
+    class Navigation;
+    class NavigationSmall;
+}
 
 namespace Marble
 {
@@ -87,8 +88,8 @@ MARBLE_PLUGIN( NavigationFloatItem )
     WidgetGraphicsItem *m_widgetItem;
 
     /** Navigation controls */
-    Ui::NavigationSmall m_navigationWidgetSmall;
-    Ui::Navigation m_navigationWidget;
+    Ui::NavigationSmall *m_navigationWidgetSmall;
+    Ui::Navigation *m_navigationWidget;
     
     /** Used Profile */
     MarbleGlobal::Profiles m_profiles;
