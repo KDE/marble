@@ -13,9 +13,9 @@
 #ifndef PLACEMARKINFODIALOG_H
 #define PLACEMARKINFODIALOG_H
 
-
 #include <QtCore/QPersistentModelIndex>
-#include <QtCore/QString>
+
+class QString;
 
 // FIXME: remove "using namespace" from header
 namespace Marble
@@ -28,7 +28,6 @@ using namespace Marble;
 namespace Marble
 {
 class DeferredFlag;
-class Placemark;
 
 class PlacemarkInfoDialog : public QDialog, private Ui::PlacemarkInfoDialog
 {
@@ -39,11 +38,11 @@ class PlacemarkInfoDialog : public QDialog, private Ui::PlacemarkInfoDialog
     explicit PlacemarkInfoDialog( const QPersistentModelIndex &index, QWidget *parent = 0 );
 
  Q_SIGNALS:
-    void source( QString );
+    void source( const QString& );
     
  public Q_SLOTS:
     void setFlagLabel();
-    void showMessage( QString text );
+    void showMessage( const QString& text );
 
  protected:
     void showContent();

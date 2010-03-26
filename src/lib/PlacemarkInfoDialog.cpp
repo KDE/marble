@@ -16,6 +16,7 @@
 
 #include <QtCore/QFile>
 #include <QtCore/QLocale>
+#include <QtCore/QString>
 #include <QtCore/QTimer>
 #include <QtGui/QFont>
 #include <QtGui/QStatusBar>
@@ -48,7 +49,7 @@ PlacemarkInfoDialog::PlacemarkInfoDialog(const QPersistentModelIndex &index, QWi
     showContent();
 }
 
-void PlacemarkInfoDialog::showMessage( QString text )
+void PlacemarkInfoDialog::showMessage( const QString& text )
 {
     QFont statusFont = QStatusBar().font();
     statusFont.setPointSize( qRound( 0.9 * statusFont.pointSize() ) );
