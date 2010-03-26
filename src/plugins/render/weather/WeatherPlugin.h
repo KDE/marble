@@ -12,12 +12,16 @@
 #define WEATHERPLUGIN_H
 
 #include "AbstractDataPlugin.h"
-#include "ui_WeatherConfigWidget.h"
 
 // Qt
 #include <QtCore/QHash>
 
 class QIcon;
+
+namespace Ui
+{
+    class WeatherConfigWidget;
+}
 
 namespace Marble
 {
@@ -69,7 +73,7 @@ class WeatherPlugin : public AbstractDataPlugin
     mutable QIcon m_icon;
     mutable PluginAboutDialog *m_aboutDialog;
     mutable QDialog * m_configDialog;
-    mutable Ui::WeatherConfigWidget ui_configWidget;
+    mutable Ui::WeatherConfigWidget * ui_configWidget;
 
     QHash<QString,QVariant> m_settings;
 };
