@@ -17,16 +17,17 @@
 #include <QtCore/QPersistentModelIndex>
 #include <QtCore/QString>
 
-#include "DeferredFlag.h"
-
 // FIXME: remove "using namespace" from header
+namespace Marble
+{
+}
 using namespace Marble;
 
 #include "ui_PlacemarkInfoDialog.h"
 
 namespace Marble
 {
-
+class DeferredFlag;
 class Placemark;
 
 class PlacemarkInfoDialog : public QDialog, private Ui::PlacemarkInfoDialog

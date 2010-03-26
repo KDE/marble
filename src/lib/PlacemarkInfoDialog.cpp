@@ -20,6 +20,7 @@
 #include <QtGui/QFont>
 #include <QtGui/QStatusBar>
 
+#include "DeferredFlag.h"
 #include "GeoDataCoordinates.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
