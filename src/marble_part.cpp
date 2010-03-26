@@ -54,7 +54,8 @@
 
 // Marble library
 #include "GeoDataCoordinates.h"
-#include "lib/SunControlWidget.h"
+#include "SunControlWidget.h"
+#include "SunLocator.h"
 
 // Local dir
 #include "MarbleCacheSettingsWidget.h"

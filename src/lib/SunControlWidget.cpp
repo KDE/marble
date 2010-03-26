@@ -16,6 +16,7 @@
 #include <QtGui/QShowEvent>
 
 #include "ExtDateTime.h"
+#include "SunLocator.h"
 
 using namespace Marble;
 

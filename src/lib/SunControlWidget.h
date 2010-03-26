@@ -19,12 +19,12 @@
 #include <QtGui/QDialog>
 
 #include "ui_SunControlWidget.h"
-#include "SunLocator.h"
 
 #include "marble_export.h"
 
 namespace Marble
 {
+class SunLocator;
 
 class MARBLE_EXPORT SunControlWidget : public QDialog
 {
