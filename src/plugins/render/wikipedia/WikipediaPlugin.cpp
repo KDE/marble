@@ -12,6 +12,7 @@
 #include "WikipediaPlugin.h"
 
 // Marble
+#include "ui_WikipediaConfigWidget.h"
 #include "WikipediaModel.h"
 #include "PluginAboutDialog.h"
 #include "MarbleDirs.h"
@@ -29,6 +30,7 @@ WikipediaPlugin::WikipediaPlugin()
     : m_isInitialized( false ),
       m_icon(),
       m_aboutDialog( 0 ),
+      ui_configWidget( 0 ),
       m_configDialog( 0 ),
       m_settings()
 {
@@ -50,6 +52,7 @@ WikipediaPlugin::WikipediaPlugin()
 WikipediaPlugin::~WikipediaPlugin()
 {
     delete m_aboutDialog;
+    delete ui_configWidget;
     delete m_configDialog;
 }
      
@@ -115,14 +118,15 @@ QDialog *WikipediaPlugin::configDialog() const
     if ( !m_configDialog ) {
         // Initializing configuration dialog
         m_configDialog = new QDialog();
-        ui_configWidget.setupUi( m_configDialog );
+        ui_configWidget = new Ui::WikipediaConfigWidget;
+        ui_configWidget->setupUi( m_configDialog );
         readSettings();
-        ui_configWidget.m_itemNumberSpinBox->setRange( 0, maximumNumberOfItems );
-        connect( ui_configWidget.m_buttonBox, SIGNAL( accepted() ),
+        ui_configWidget->m_itemNumberSpinBox->setRange( 0, maximumNumberOfItems );
+        connect( ui_configWidget->m_buttonBox, SIGNAL( accepted() ),
                                             SLOT( writeSettings() ) );
-        connect( ui_configWidget.m_buttonBox, SIGNAL( rejected() ),
+        connect( ui_configWidget->m_buttonBox, SIGNAL( rejected() ),
                                             SLOT( readSettings() ) );
-        QPushButton *applyButton = ui_configWidget.m_buttonBox->button( QDialogButtonBox::Apply );
+        QPushButton *applyButton = ui_configWidget->m_buttonBox->button( QDialogButtonBox::Apply );
         connect( applyButton, SIGNAL( clicked() ),
                 this,        SLOT( writeSettings() ) );
     }
@@ -157,22 +161,22 @@ void WikipediaPlugin::readSettings() const
     if ( !m_configDialog )
         return;
     
-    ui_configWidget.m_itemNumberSpinBox
+    ui_configWidget->m_itemNumberSpinBox
         ->setValue( (int) m_settings.value( "numberOfItems" ).toInt() );
     
     if ( m_settings.value( "showThumbnails" ).toBool() ) {
-        ui_configWidget.m_showThumbnailCheckBox->setCheckState( Qt::Checked );
+        ui_configWidget->m_showThumbnailCheckBox->setCheckState( Qt::Checked );
     }
     else {
-        ui_configWidget.m_showThumbnailCheckBox->setCheckState( Qt::Unchecked );
+        ui_configWidget->m_showThumbnailCheckBox->setCheckState( Qt::Unchecked );
     }
 }
 
 void WikipediaPlugin::writeSettings()
 {
-    setNumberOfItems( ui_configWidget.m_itemNumberSpinBox->value() );
-    m_settings.insert( "numberOfItems", ui_configWidget.m_itemNumberSpinBox->value() );
-    if ( ui_configWidget.m_showThumbnailCheckBox->checkState() == Qt::Checked ) {
+    setNumberOfItems( ui_configWidget->m_itemNumberSpinBox->value() );
+    m_settings.insert( "numberOfItems", ui_configWidget->m_itemNumberSpinBox->value() );
+    if ( ui_configWidget->m_showThumbnailCheckBox->checkState() == Qt::Checked ) {
         m_settings.insert( "showThumbnails", true );
     }
     else {

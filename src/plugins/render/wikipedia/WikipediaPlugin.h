@@ -14,10 +14,14 @@
 #include "AbstractDataPlugin.h"
 #include "RenderPlugin.h"
 #include "RenderPluginInterface.h"
-#include "ui_WikipediaConfigWidget.h"
 
 #include <QtCore/QHash>
 #include <QtGui/QIcon>
+
+namespace Ui
+{
+    class WikipediaConfigWidget;
+}
 
 namespace Marble
 {
@@ -72,7 +76,7 @@ class WikipediaPlugin : public AbstractDataPlugin
 
     mutable QIcon m_icon;
     mutable PluginAboutDialog *m_aboutDialog;
-    mutable Ui::WikipediaConfigWidget ui_configWidget;
+    mutable Ui::WikipediaConfigWidget *ui_configWidget;
     mutable QDialog *m_configDialog;
     QHash<QString,QVariant> m_settings;
 };
