@@ -61,8 +61,8 @@
 #include "MarbleCacheSettingsWidget.h"
 #include "MarblePluginSettingsWidget.h"
 
-#include <MarbleDirs.h>
-#include <ControlView.h>
+#include "MarbleDirs.h"
+#include "ControlView.h"
 #include "MarbleLocale.h"
 #include "settings.h"
 
