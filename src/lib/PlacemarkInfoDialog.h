@@ -16,8 +16,6 @@
 
 #include <QtCore/QPersistentModelIndex>
 #include <QtCore/QString>
-#include <QtGui/QFont>
-#include <QtGui/QStatusBar>
 
 #include "DeferredFlag.h"
 
@@ -44,13 +42,7 @@ class PlacemarkInfoDialog : public QDialog, private Ui::PlacemarkInfoDialog
     
  public Q_SLOTS:
     void setFlagLabel();
-    void showMessage( QString text )
-    {
-        QFont  statusFont = QStatusBar().font();
-        statusFont.setPointSize( qRound( 0.9 * statusFont.pointSize() ) );
-        m_pStatusLabel->setFont( statusFont );
-        m_pStatusLabel->setText( text );
-    }
+    void showMessage( QString text );
 
  protected:
     void showContent();

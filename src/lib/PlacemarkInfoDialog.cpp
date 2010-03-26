@@ -17,6 +17,8 @@
 #include <QtCore/QFile>
 #include <QtCore/QLocale>
 #include <QtCore/QTimer>
+#include <QtGui/QFont>
+#include <QtGui/QStatusBar>
 
 #include "GeoDataCoordinates.h"
 #include "MarbleDirs.h"
@@ -45,6 +47,13 @@ PlacemarkInfoDialog::PlacemarkInfoDialog(const QPersistentModelIndex &index, QWi
     showContent();
 }
 
+void PlacemarkInfoDialog::showMessage( QString text )
+{
+    QFont statusFont = QStatusBar().font();
+    statusFont.setPointSize( qRound( 0.9 * statusFont.pointSize() ) );
+    m_pStatusLabel->setFont( statusFont );
+    m_pStatusLabel->setText( text );
+}
 
 void PlacemarkInfoDialog::showContent()
 {
