@@ -54,7 +54,7 @@ void MarbleGlobal::setProfiles( MarbleGlobal::Profiles profiles ) {
 }
 
 MarbleGlobal::Profiles MarbleGlobal::detectProfiles() {
-    MarbleGlobal::Profile profile = MarbleGlobal::Default;
+    MarbleGlobal::Profiles profile = MarbleGlobal::Default;
     // Checking Qt for maemo flags to find out if we are on a small screen device.
 #ifdef Q_WS_HILDON // flag for Qt 4.5 (diablo and fremantle)
     profile |= MarbleGlobal::SmallScreen;
