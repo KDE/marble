@@ -18,8 +18,6 @@
 #include <QtCore/QTime>
 #include <QtGui/QDialog>
 
-#include "ui_SunControlWidget.h"
-
 #include "marble_export.h"
 
 namespace Ui
