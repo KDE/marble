@@ -52,25 +52,23 @@
 #include <KStandardDirs>
 #include <kdeprintdialog.h>
 
-// Marble library
+// Marble library classes
+#include "AbstractFloatItem.h"
+#include "AbstractDataPlugin.h"
 #include "GeoDataCoordinates.h"
+#include "HttpDownloadManager.h"
+#include "MarbleCacheSettingsWidget.h"
+#include "MarbleDirs.h"
+#include "MarbleLocale.h"
+#include "MarbleMap.h"
+#include "MarbleModel.h"
+#include "MarblePluginSettingsWidget.h"
 #include "SunControlWidget.h"
 #include "SunLocator.h"
 
-// Local dir
-#include "MarbleCacheSettingsWidget.h"
-#include "MarblePluginSettingsWidget.h"
-
-#include "MarbleDirs.h"
+// Marble non-library classes
 #include "ControlView.h"
-#include "MarbleLocale.h"
 #include "settings.h"
-
-#include "AbstractFloatItem.h"
-#include "AbstractDataPlugin.h"
-#include "HttpDownloadManager.h"
-#include "MarbleMap.h"
-#include "MarbleModel.h"
 
 using namespace Marble;
 
