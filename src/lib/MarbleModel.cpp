@@ -160,8 +160,6 @@ MarbleModel::MarbleModel( QObject *parent )
     QTime t;
     t.start();
     MarbleModelPrivate::refCounter.ref();
-    connect( this, SIGNAL( downloadTile( QUrl, QString, QString, DownloadUsage )),
-             d->m_downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage )));
     d->m_dataFacade = new MarbleDataFacade( this );
 
     d->m_tileLoader = new StackedTileLoader( d->m_mapThemeManager, d->m_downloadManager, this );
@@ -914,11 +912,7 @@ void MarbleModel::reloadMap() const
     QList<TileId>::const_iterator pos = displayed.constBegin();
     QList<TileId>::const_iterator const end = displayed.constEnd();
     for (; pos != end; ++pos ) {
-        TileId const & id = *pos;
-        QUrl sourceUrl = TileLoaderHelper::downloadUrl( texture, id.zoomLevel(), id.x(), id.y() );
-        QString destFileName = TileLoaderHelper::relativeTileFileName( texture, id.zoomLevel(),
-                                                                       id.x(), id.y() );
-        emit downloadTile( sourceUrl, destFileName, id.toString(), DownloadBrowse );
+        d->m_tileLoader->reloadTile( *pos );
     }
 }
 

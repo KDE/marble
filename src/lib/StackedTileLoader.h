@@ -85,6 +85,8 @@ class StackedTileLoader : public QObject
         StackedTile* loadTile( TileId const &stackedTileId,
                                bool const forMergedLayerDecorator = false );
 
+        StackedTile* reloadTile( TileId const & stackedTileId );
+
         /**
          * Resets the internal tile hash.
          */
@@ -162,6 +164,7 @@ class StackedTileLoader : public QObject
             findRelevantTextureLayers( TileId const & stackedTileId ) const;
         void initTextureLayers();
         void mergeDecorations( StackedTile * const, GeoSceneTexture * const ) const;
+        void reloadCachedTile( StackedTile * const cachedTile );
 
         StackedTileLoaderPrivate* const d;
         MarbleModel* m_parent;

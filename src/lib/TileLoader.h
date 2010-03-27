@@ -43,6 +43,9 @@ class TileLoader: public QObject
     TileLoader( MapThemeManager const * const, HttpDownloadManager * const );
 
     QSharedPointer<TextureTile> loadTile( TileId const & stackedTileId, TileId const & tileId );
+    QSharedPointer<TextureTile> reloadTile( TileId const & stackedTileId, TileId const & tileId );
+    void reloadTile( QSharedPointer<TextureTile> const & tile );
+
     void setTextureLayers( QHash<uint, GeoSceneTexture*> const & );
 
  public Q_SLOTS:

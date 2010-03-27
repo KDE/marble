@@ -18,6 +18,7 @@
 #define MARBLE_STACKED_TILE_H
 
 #include <QtCore/QSharedPointer>
+#include <QtCore/QVector>
 #include <QtGui/QColor>
 
 #include "AbstractTile.h"
@@ -49,6 +50,7 @@ class StackedTile : public AbstractTile
     bool forMergedLayerDecorator() const;
     void setForMergedLayerDecorator();
 
+    QVector<QSharedPointer<TextureTile> > * tiles();
     QImage const * resultTile() const;
     QImage * resultTile();
 

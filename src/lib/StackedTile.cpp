@@ -364,6 +364,11 @@ int StackedTile::numBytes() const
     return d->m_byteCount;
 }
 
+QVector<QSharedPointer<TextureTile> > * StackedTile::tiles()
+{
+    return &d->m_tiles;
+}
+
 QImage const * StackedTile::resultTile() const
 {
     return &d->m_resultTile;
