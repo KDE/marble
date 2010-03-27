@@ -3,7 +3,6 @@ include_directories(
  ${CMAKE_SOURCE_DIR}/src/tilecreator
  ${CMAKE_BINARY_DIR}/src/tilecreator
  ${QT_INCLUDE_DIR}
- ${QT_QTDESIGNER_INCLUDE_DIR}
 )
 include( ${QT_USE_FILE} )
 
