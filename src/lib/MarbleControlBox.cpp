@@ -28,12 +28,12 @@
 #include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QStandardItemModel>
 
-#include <global.h>
+#include "global.h"
 
-#include <MarbleWidget.h>
-#include <MarbleMap.h>
-#include <MarbleModel.h>
-#include <FileViewModel.h>
+#include "MarbleWidget.h"
+#include "MarbleMap.h"
+#include "MarbleModel.h"
+#include "FileViewModel.h"
 #include "gps/GpxFileModel.h"
 #include "gps/GpsLayer.h"
 #include "gps/PositionTracking.h"
