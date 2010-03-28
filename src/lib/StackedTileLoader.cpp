@@ -342,15 +342,21 @@ void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 
 void StackedTileLoader::updateTile( TileId const & stackedTileId, TileId const & tileId )
 {
-    StackedTile * const tile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
-    if ( tile ) {
-        tile->deriveCompletionState();
-        tile->initResultTile();
-        mergeDecorations( tile, findTextureLayer( stackedTileId ));
+    StackedTile * const displayedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
+    if ( displayedTile ) {
+        displayedTile->deriveCompletionState();
+        displayedTile->initResultTile();
+        mergeDecorations( displayedTile, findTextureLayer( stackedTileId ));
         emit tileUpdateAvailable();
-    } else
-        // TODO: also update tiles in the cache, not doing it is really a waste of i/o
-        d->m_tileCache.remove( stackedTileId );
+    }
+    else {
+        StackedTile * const cachedTile = d->m_tileCache.object( stackedTileId );
+        if ( cachedTile ) {
+            cachedTile->deriveCompletionState();
+            cachedTile->initResultTile();
+            mergeDecorations( cachedTile, findTextureLayer( stackedTileId ));
+        }
+    }
 }
 
 void StackedTileLoader::update()
