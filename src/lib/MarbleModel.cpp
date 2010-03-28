@@ -72,7 +72,6 @@
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 #include "StackedTileLoader.h"
-#include "TileLoaderHelper.h"
 #include "VectorComposer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
@@ -897,16 +896,6 @@ int MarbleModel::tileZoomLevel() const
 
 void MarbleModel::reloadMap() const
 {
-    if ( !d->m_mapTheme->map()->hasTextureLayers() )
-        return;
-
-    const QString themeId = d->m_mapTheme->head()->theme();
-    GeoSceneLayer * const layer = static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->
-                                                               layer( themeId ));
-    Q_ASSERT( layer );
-    GeoSceneTexture * const texture = static_cast<GeoSceneTexture*>( layer->groundDataset() );
-    Q_ASSERT( texture );
-
     Q_ASSERT( d->m_tileLoader );
     QList<TileId> displayed = d->m_tileLoader->tilesOnDisplay();
     QList<TileId>::const_iterator pos = displayed.constBegin();
