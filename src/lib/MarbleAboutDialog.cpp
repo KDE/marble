@@ -93,7 +93,7 @@ void MarbleAboutDialog::loadPageContents( int idx )
     {
         d->authorsLoaded = true;
         browser = d->uiWidget.m_pMarbleAuthorsBrowser;
-        browser->setHtml( tr("<b>Active Development Team of Marble 0.8 and 0.7</b>")+
+        browser->setHtml( tr("<b>Active Development Team of Marble 0.10</b>")+
         tr("<p>Torsten Rahn <a href=\"mailto:rahn@kde.org\">rahn@kde.org</a><br>"
            "<i>Core Developer and Original Author</i></p>")+
         tr("<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</a><br>"
@@ -120,6 +120,11 @@ void MarbleAboutDialog::loadPageContents( int idx )
         tr("<b>Google Summer of Code</b>")+
         tr("<p> The Marble Team would like to thank its members who participated "
            "in the Google Summer of Code for their successful work on Marble:</p>")+
+        tr( "<p><b>2009</b></p>" ) +
+        tr( "<p>Andrew Manson <a href=\"mailto:g.real.ate@gmail.com\">g.real.ate@gmail.com</a><br>"
+            "<i>Project: OSM Annotation</i></p>" ) +
+        tr( "<p>Bastian Holst <a href=\"mailto:bastianholst@gmx.de\">bastianholst@gmx.de</a><br>"
+            "<i>Project: Online Services</i></p>" ) +
         tr("<p><b>2008</b></p>")+
         tr("<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</a><br>"
            "<i>Project: Vector Tiles for Marble</i></p>")+

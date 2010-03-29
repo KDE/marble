@@ -63,11 +63,11 @@ int main ( int argc, char *argv[] )
                           ki18n( "Marble Desktop Globe" ),
                           MARBLE_VERSION_STRING.toLatin1(), 
                           ki18n( "A World Atlas." ),
-                          KAboutData::License_LGPL, ki18n( "(c) 2007, 2008, 2009" ),
+                          KAboutData::License_LGPL, ki18n( "(c) 2007, 2008, 2009, 2010" ),
                           KLocalizedString(),
                           "http://edu.kde.org/marble" );
 
-    // Active Development Team of Marble 0.7
+    // Active Development Team of Marble 0.10
     aboutData.addAuthor( ki18n( "Torsten Rahn" ),
                          ki18n( "Core Developer and Original Author" ),
                          "rahn@kde.org" );
@@ -106,6 +106,14 @@ int main ( int argc, char *argv[] )
                          "kde@ewsoftware.de" );
 
     // Google Summer of Code
+    aboutData.addAuthor( ki18n( "Andrew Manson" ),
+                         ki18n( "Google Summer of Code 2009 Project:"
+                                " OSM Annotation",
+                         "g.real.ate@gmail.com" );
+    aboutData.addAuthor( ki18n( "Bastian Holst" ),
+                         ki18n( "Google Summer of Code 2009 Project:"
+                                " Online Services" ),
+                         "bastianholst@gmx.de" );
     aboutData.addAuthor( ki18n( "Patrick Spendrin" ),
                          ki18n( "Google Summer of Code 2008 Project:"
                                 " Vector Tiles for Marble" ),
