@@ -12,7 +12,6 @@
 
 #include "KmlElementDictionary.h"
 #include "GeoDataPlacemark.h"
-//FIXME:should the GeoDataTypes enum be in the GeoDocument?
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 
