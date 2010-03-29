@@ -17,9 +17,6 @@
 #include <QtGui/QPixmapCache>
 #include <QtSvg/QSvgRenderer>
 
-#include "MarbleDirs.h"
-#include "MarbleDebug.h"
-
 using namespace Marble;
 
 DeferredFlag::DeferredFlag( QObject* parent )
