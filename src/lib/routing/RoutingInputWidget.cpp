@@ -13,11 +13,12 @@
 #include "MarbleRunnerManager.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleDebug.h"
+#include "MarbleLocale.h"
 #include "RouteSkeleton.h"
 #include "TinyWebBrowser.h"
-#include "MarbleLocale.h"
 
 #include <QtCore/QTimer>
+#include <QtCore/QUrl>
 #include <QtGui/QLineEdit>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QPushButton>
@@ -26,7 +27,6 @@
 #include <QtXml/QDomDocument>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
-#include <QtCore/QUrl>
 
 namespace Marble {
 

@@ -11,14 +11,13 @@
 #include "RoutingWidget.h"
 
 #include "GeoDataLineString.h"
-#include "RoutingModel.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidget.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarbleDebug.h"
 #include "MarbleWidgetInputHandler.h"
-
+#include "RoutingModel.h"
 #include "RoutingManager.h"
 #include "RoutingLayer.h"
 #include "RoutingModel.h"
@@ -26,8 +25,8 @@
 #include "RoutingInputWidget.h"
 #include "RouteSkeleton.h"
 
-#include <QtGui/QSortFilterProxyModel>
 #include <QtCore/QTime>
+#include <QtGui/QSortFilterProxyModel>
 
 #include "ui_RoutingWidget.h"
 

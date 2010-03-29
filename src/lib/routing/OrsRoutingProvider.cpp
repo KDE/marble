@@ -12,8 +12,8 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "RouteSkeleton.h"
 #include "MarbleLocale.h"
+#include "RouteSkeleton.h"
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>

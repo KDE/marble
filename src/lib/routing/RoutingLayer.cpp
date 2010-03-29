@@ -10,13 +10,13 @@
 
 #include "RoutingLayer.h"
 
-#include "MarbleWidget.h"
-#include "RoutingModel.h"
-#include "RouteSkeleton.h"
-#include "MarblePlacemarkModel.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "GeoPainter.h"
+#include "MarblePlacemarkModel.h"
+#include "MarbleWidget.h"
+#include "RoutingModel.h"
+#include "RouteSkeleton.h"
 
 #include <QtCore/QMap>
 #include <QtCore/QDebug>

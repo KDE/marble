@@ -12,19 +12,13 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "gps/GpxFile.h"
-#include "gps/RouteContainer.h"
-#include "gps/WaypointContainer.h"
-#include "gps/Waypoint.h"
-#include "gps/Route.h"
-#include "gps/TrackPoint.h"
 #include "GeoDataCoordinates.h"
-#include "FileLoader.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
 
 #include <QtCore/QVector>
+#include <QtCore/QTime>
 #include <QtCore/QBuffer>
 #include <QtCore/QRegExp>
 #include <QtGui/QPixmap>

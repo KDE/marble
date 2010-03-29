@@ -11,8 +11,8 @@
 #ifndef MARBLE_ROUTING_MANAGER_H
 #define MARBLE_ROUTING_MANAGER_H
 
+#include "AbstractRoutingProvider.h"
 #include "GeoDataCoordinates.h"
-#include "routing/AbstractRoutingProvider.h"
 
 #include <QtCore/QAbstractItemModel>
 

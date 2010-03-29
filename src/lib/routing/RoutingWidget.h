@@ -11,12 +11,12 @@
 #ifndef MARBLE_ROUTING_WIDGET_H
 #define MARBLE_ROUTING_WIDGET_H
 
-#include <GeoDataCoordinates.h>
-#include <GeoDataLineString.h>
+#include "GeoDataCoordinates.h"
+#include "GeoDataLineString.h"
 #include "RoutingManager.h"
 
-#include <QtGui/QWidget>
 #include <QtCore/QModelIndex>
+#include <QtGui/QWidget>
 
 namespace Marble
 {

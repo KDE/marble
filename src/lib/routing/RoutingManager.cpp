@@ -10,11 +10,11 @@
 
 #include "RoutingManager.h"
 
+#include "MarbleDebug.h"
+#include "MarbleWidget.h"
+#include "OrsRoutingProvider.h"
 #include "RoutingModel.h"
 #include "RouteSkeleton.h"
-#include "MarbleDebug.h"
-#include "OrsRoutingProvider.h"
-#include "MarbleWidget.h"
 
 namespace Marble {
 

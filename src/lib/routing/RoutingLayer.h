@@ -11,8 +11,8 @@
 #ifndef MARBLE_ROUTING_LAYER_H
 #define MARBLE_ROUTING_LAYER_H
 
-#include "LayerInterface.h"
 #include "GeoDataCoordinates.h"
+#include "LayerInterface.h"
 
 #include <QtCore/QModelIndex>
 
