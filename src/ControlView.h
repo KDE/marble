@@ -51,11 +51,11 @@ class ControlView : public QWidget
 
     bool sideBarShown() const { return m_control->isVisible(); }
 
-    void addPlacemarkFile( QString filename ){ m_marbleWidget->addPlacemarkFile( filename ); }
+    void addPlacemarkFile( QString filename ) { m_marbleWidget->addPlacemarkFile( filename ); }
 
-    QPixmap mapScreenShot(){ return m_marbleWidget->mapScreenShot(); }
+    QPixmap mapScreenShot() { return m_marbleWidget->mapScreenShot(); }
     
-    SunLocator* sunLocator() {return m_marbleWidget->sunLocator();}
+    SunLocator* sunLocator() { return m_marbleWidget->sunLocator(); }
     
 
  public slots:

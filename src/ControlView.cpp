@@ -24,29 +24,29 @@ namespace Marble
 {
 
 ControlView::ControlView( QWidget *parent )
-   : QWidget(parent)
+   : QWidget( parent )
 {
-    setWindowTitle(tr("Marble - Desktop Globe"));
+    setWindowTitle( tr( "Marble - Desktop Globe" ) );
 
     resize( 680, 640 );
 
     QVBoxLayout *vlayout = new QVBoxLayout( this );
-    vlayout->setMargin(0);
+    vlayout->setMargin( 0 );
 
-    m_splitter = new QSplitter (this);
+    m_splitter = new QSplitter( this );
     vlayout->addWidget( m_splitter );
 
     m_control = new MarbleControlBox( this );
     m_splitter->addWidget( m_control );
-    m_splitter->setStretchFactor(m_splitter->indexOf(m_control), 0);
+    m_splitter->setStretchFactor( m_splitter->indexOf( m_control ), 0 );
 
     m_marbleWidget = new MarbleWidget( this );
     m_marbleWidget->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding,
                                                 QSizePolicy::MinimumExpanding ) );
 
     m_splitter->addWidget( m_marbleWidget );
-    m_splitter->setStretchFactor(m_splitter->indexOf(m_marbleWidget), 1);
-    m_splitter->setSizes( QList<int>() << 180 << width()-180 );
+    m_splitter->setStretchFactor( m_splitter->indexOf( m_marbleWidget ), 1 );
+    m_splitter->setSizes( QList<int>() << 180 << width() - 180 );
 
     m_control->addMarbleWidget( m_marbleWidget );
 

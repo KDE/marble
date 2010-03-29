@@ -43,7 +43,7 @@ QString readGraphicsSystem( int argc, char *argv[], const KAboutData& aboutData 
     QCoreApplication app( argc, argv );
     KComponentData componentData( aboutData, KComponentData::SkipMainComponentRegistration );
 
-    KConfigGroup viewGroup(componentData.config(), "View");
+    KConfigGroup viewGroup( componentData.config(), "View" );
     QString graphicsSystem = viewGroup.readEntry( "graphicsSystem", "NativeGraphics" );
 
     QString graphicsString( "native" );
@@ -57,7 +57,7 @@ QString readGraphicsSystem( int argc, char *argv[], const KAboutData& aboutData 
     return graphicsString;
 }
 
-int main (int argc, char *argv[])
+int main ( int argc, char *argv[] )
 {
     KAboutData aboutData( "marble", 0, 
                           ki18n( "Marble Desktop Globe" ),
@@ -212,25 +212,25 @@ int main (int argc, char *argv[])
                                 " important source of inspiration by creating"
                                 " Marble's predecessor \"Kartographer\"." ));
 
-    QApplication::setGraphicsSystem( readGraphicsSystem(argc, argv, aboutData ) );
+    QApplication::setGraphicsSystem( readGraphicsSystem( argc, argv, aboutData ) );
 
     KCmdLineArgs::init( argc, argv, &aboutData );
 
     
     KCmdLineOptions  options;
-    options.add( "debug-info", ki18n( "Enable debug output") );
+    options.add( "debug-info", ki18n( "Enable debug output" ) );
     options.add( "timedemo", ki18n( "Make a time measurement to check performance" ) );
     options.add( "gpsdemo", ki18n( "Check speed of gps drawing" ) );
     options.add( "fps", ki18n( "Show frame rate" ) );
     options.add( "enableCurrentLocation", ki18n( "Enable tab to show the current location" ) );
     options.add( "enableFileView",
-                 ki18n( "Enable tab to see gpxFileView") );
+                 ki18n( "Enable tab to see gpxFileView" ) );
     options.add( "tile-id", ki18n( "Show tile id's" ) );
     KCmdLineArgs::addCmdLineOptions( options );
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
     KApplication app;
-    KGlobal::locale()->insertCatalog("marble_qt");
+    KGlobal::locale()->insertCatalog( "marble_qt" );
 
     QString  marbleDataPath;
     int      dataPathIndex = 0;
@@ -271,21 +271,21 @@ int main (int argc, char *argv[])
     }
 
     if ( args->isSet( "enableCurrentLocation" ) ) {
-        window->marbleControl()->setCurrentLocationTabShown(true);
+        window->marbleControl()->setCurrentLocationTabShown( true );
     }
     
     if ( args->isSet( "enableFileView" ) ) {
-        window->marbleControl()->setFileViewTabShown(true);
+        window->marbleControl()->setFileViewTabShown( true );
     }
 
-    if (args->isSet( "tile-id" ) ) {
-	window->marbleControl()->marbleWidget()->setShowTileId(true);
+    if ( args->isSet( "tile-id" ) ) {
+	window->marbleControl()->marbleWidget()->setShowTileId( true );
     }
 
     // Read the files that are given on the command line.
     for ( int i = 0; i < args->count(); ++i ) {
 
-        // FIXME: Use openUrl( args->url(i)) instead?
+        // FIXME: Use openUrl( args->url(i) ) instead?
         if ( QFile::exists( args->arg( i ) ) && i != dataPathIndex )
             window->marbleControl()->addPlacemarkFile( args->arg( i ) );
     }
