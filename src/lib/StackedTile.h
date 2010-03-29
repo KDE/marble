@@ -36,7 +36,6 @@ class StackedTileLoader;
 
 class StackedTile : public AbstractTile
 {
-    Q_OBJECT
     friend class StackedTileLoader;
 
  public:

@@ -407,5 +407,3 @@ void StackedTile::initResultTile()
     d->m_isGrayscale = d->m_resultTile.isGrayscale();
     d->calcByteCount();
 }
-
-#include "StackedTile.moc"
