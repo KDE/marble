@@ -34,9 +34,6 @@ namespace Marble
 
 class TinyWebBrowserPrivate
 {
- public:
-    ~TinyWebBrowserPrivate() {
-    }
 };
 
 static QString guessWikipediaDomain()
@@ -48,7 +45,7 @@ static QString guessWikipediaDomain()
 
 TinyWebBrowser::TinyWebBrowser( QWidget* parent )
     : QWebView( parent ),
-      d( new TinyWebBrowserPrivate() )
+      d( 0 )
 {
     connect( this, SIGNAL( statusBarMessage( QString ) ),
              this, SIGNAL( statusMessage( QString ) ) );
@@ -65,7 +62,8 @@ TinyWebBrowser::TinyWebBrowser( QWidget* parent )
 
 TinyWebBrowser::~TinyWebBrowser()
 {
-    delete d;
+    // not yet needed
+    //delete d;
 }
 
 void TinyWebBrowser::setWikipediaPath( const QString& relativeUrl )
