@@ -108,7 +108,7 @@ int main ( int argc, char *argv[] )
     // Google Summer of Code
     aboutData.addAuthor( ki18n( "Andrew Manson" ),
                          ki18n( "Google Summer of Code 2009 Project:"
-                                " OSM Annotation",
+                                " OSM Annotation" ),
                          "g.real.ate@gmail.com" );
     aboutData.addAuthor( ki18n( "Bastian Holst" ),
                          ki18n( "Google Summer of Code 2009 Project:"
