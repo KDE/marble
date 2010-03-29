@@ -13,9 +13,10 @@
 #define TINYWEBBROWSER_H
 
 // Qt
-#include <QtCore/QtGlobal>
+#include <QtCore/QByteArray>
+#include <QtCore/QString>
+#include <QtCore/QUrl>
 #include <QtWebKit/QWebView>
-#include <QtGui/QDesktopServices>
 
 // Marble
 #include "marble_export.h"

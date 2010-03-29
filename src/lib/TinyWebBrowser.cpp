@@ -16,9 +16,9 @@
 // Qt
 #include <QtCore/QFileInfo>
 #include <QtCore/QPointer>
-#include <QtCore/QUrl>
 #include <QtCore/QRegExp>
 #include <QtGui/QAction>
+#include <QtGui/QDesktopServices>
 #include <QtGui/QPainter>
 #include <QtGui/QPrintDialog>
 #include <QtGui/QPrinter>
