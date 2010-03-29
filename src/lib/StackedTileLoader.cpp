@@ -149,9 +149,9 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
                                           bool const forMergedLayerDecorator )
 {
     // check if the tile is in the hash
-    StackedTile * tile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
-    if ( tile ) {
-        return tile;
+    StackedTile * stackedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
+    if ( stackedTile ) {
+        return stackedTile;
     }
     // here ends the performance critical section of this method
 
@@ -159,15 +159,15 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
 
     // the tile was not in the hash or has been removed because of expiration
     // so check if it is in the cache
-    tile = d->m_tileCache.take( stackedTileId );
-    if ( tile ) {
+    stackedTile = d->m_tileCache.take( stackedTileId );
+    if ( stackedTile ) {
         // the tile was in the cache, but is it up to date?
-        if ( !tile->isExpired() ) {
-            d->m_tilesOnDisplay[ stackedTileId ] = tile;
-            return tile;
+        if ( !stackedTile->isExpired() ) {
+            d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
+            return stackedTile;
         } else {
-            delete tile;
-            tile = 0;
+            delete stackedTile;
+            stackedTile = 0;
         }
     }
 
@@ -177,36 +177,36 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
     // and place it in the hash from where it will get transferred to the cache
 
     // mDebug() << "load Tile from Disk: " << stackedTileId.toString();
-    tile = new StackedTile( stackedTileId );
+    stackedTile = new StackedTile( stackedTileId );
     if ( forMergedLayerDecorator )
-        tile->setForMergedLayerDecorator();
-    d->m_tilesOnDisplay[ stackedTileId ] = tile;
+        stackedTile->setForMergedLayerDecorator();
+    d->m_tilesOnDisplay[ stackedTileId ] = stackedTile;
 
     QVector<GeoSceneTexture const *> const textureLayers = findRelevantTextureLayers( stackedTileId );
     QVector<GeoSceneTexture const *>::const_iterator pos = textureLayers.constBegin();
     QVector<GeoSceneTexture const *>::const_iterator const end = textureLayers.constEnd();
     for (; pos != end; ++pos ) {
         GeoSceneTexture const * const textureLayer = *pos;
-        TileId const simpleTileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
-                                   stackedTileId.x(), stackedTileId.y() );
+        TileId const tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
+                             stackedTileId.x(), stackedTileId.y() );
         mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
-                 << simpleTileId.toString();
-        QSharedPointer<TextureTile> const simpleTile = d->m_tileLoader->loadTile( stackedTileId,
-                                                                                  simpleTileId );
+                 << tileId.toString();
+        QSharedPointer<TextureTile> const tile = d->m_tileLoader->loadTile( stackedTileId, tileId );
         // hack to try clouds, first tile is not handled here, MergeCopy is the default,
         // the merge rule for following tiles is set to MergeMultiply here
-        if ( simpleTile && tile->hasTiles() )
-            simpleTile->setMergeRule( TextureTile::MergeMultiply );
-        if ( simpleTile )
-            tile->addTile( simpleTile );
+        if ( tile ) {
+            if ( stackedTile->hasTiles() )
+                tile->setMergeRule( TextureTile::MergeMultiply );
+            stackedTile->addTile( tile );
+        }
     }
-    Q_ASSERT( tile->hasTiles() );
+    Q_ASSERT( stackedTile->hasTiles() );
 
-    if ( tile->state() != StackedTile::TileEmpty ) {
-        tile->initResultTile();
-        mergeDecorations( tile, texture );
+    if ( stackedTile->state() != StackedTile::TileEmpty ) {
+        stackedTile->initResultTile();
+        mergeDecorations( stackedTile, texture );
     }
-    return tile;
+    return stackedTile;
 }
 
 // The tile to be reloaded might be (alternatively):
