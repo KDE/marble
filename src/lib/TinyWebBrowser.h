@@ -36,7 +36,7 @@ class MARBLE_EXPORT TinyWebBrowser : public QWebView
     Q_OBJECT
 
  public:
-    TinyWebBrowser( QWidget* parent = 0 );
+    explicit TinyWebBrowser( QWidget* parent = 0 );
     ~TinyWebBrowser();
 
     static QByteArray userAgent(const QString &platform, const QString &plugin);
