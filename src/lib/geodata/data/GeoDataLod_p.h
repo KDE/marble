@@ -13,6 +13,8 @@
 
 #include "GeoDataLod.h"
 
+#include "GeoDataTypes.h"
+
 namespace Marble
 {
 

@@ -13,6 +13,8 @@
 
 #include "GeoDataLineString_p.h"
 
+#include "GeoDataTypes.h"
+
 namespace Marble
 {
 

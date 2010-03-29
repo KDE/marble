@@ -11,6 +11,8 @@
 
 #include "GeoDataLineStyle.h"
 
+#include "GeoDataTypes.h"
+
 namespace Marble
 {
 

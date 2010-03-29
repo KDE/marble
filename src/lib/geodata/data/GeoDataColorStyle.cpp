@@ -10,6 +10,8 @@
 
 #include "GeoDataColorStyle.h"
 
+#include "GeoDataTypes.h"
+
 namespace Marble
 {
 

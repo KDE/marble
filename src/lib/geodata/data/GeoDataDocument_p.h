@@ -15,6 +15,8 @@
 #include "GeoDataStyleMap.h"
 #include "GeoDataContainer_p.h"
 
+#include "GeoDataTypes.h"
+
 namespace Marble
 {
 

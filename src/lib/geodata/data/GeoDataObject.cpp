@@ -16,6 +16,8 @@
 
 #include "GeoDataDocument.h"
 
+#include "GeoDataTypes.h"
+
 
 namespace Marble
 {

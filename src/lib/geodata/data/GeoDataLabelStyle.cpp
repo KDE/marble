@@ -13,6 +13,8 @@
 
 #include <QtGui/QFont>
 
+#include "GeoDataTypes.h"
+
 namespace Marble
 {
 #ifdef Q_OS_MACX

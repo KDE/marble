@@ -17,6 +17,8 @@
 #include "GeoDataFeature.h"
 #include "GeoDataRegion.h"
 
+#include "GeoDataTypes.h"
+
 namespace Marble
 {
 

@@ -17,6 +17,8 @@
 #include "GeoDataObject.h"
 #include "MarbleDebug.h"
 
+#include "GeoDataTypes.h"
+
 #include <QtCore/QVector>
 
 namespace Marble

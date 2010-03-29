@@ -22,6 +22,8 @@
 
 #include "GeoDataFolder.h"
 
+#include "GeoDataTypes.h"
+
 #include "GeoDataContainer_p.h"
 
 namespace Marble

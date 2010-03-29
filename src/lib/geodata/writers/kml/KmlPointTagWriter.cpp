@@ -11,7 +11,7 @@
 #include "KmlPointTagWriter.h"
 
 #include "GeoDataPoint.h"
-#include "GeoDocument.h"
+#include "GeoDataTypes.h"
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 

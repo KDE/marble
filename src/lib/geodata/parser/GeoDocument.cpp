@@ -29,38 +29,6 @@ namespace Marble
      unsigned long GeoDocument::s_leakProtector = 0;     
 #endif      
 
-namespace GeoDataTypes
-{
-const char* GeoDataColorStyleType = "GeoDataColorStyle";
-const char* GeoDataContainerType = "GeoDataContainer";
-const char* GeoDataDocumentType = "GeoDataDocument";
-const char* GeoDataFeatureType = "GeoDataFeature";
-const char* GeoDataFolderType = "GeoDataFolder";
-const char* GeoDataGeometryType = "GeoDataGeometry";
-const char* GeoDataHotspotType = "GeoDataHotspot";
-const char* GeoDataIconStyleType = "GeoDataIconStyle";
-const char* GeoDataInnerBoundaryType = "GeoDataInnerBoundary";
-const char* GeoDataLabelStyleType = "GeoDataLabelStyle";
-const char* GeoDataLatLonAltBoxType = "GeoDataLatLonAlt";
-const char* GeoDataLatLonBoxType = "GeoDataLatLonBox";
-const char* GeoDataLinearRingType = "GeoDataLinearRing";
-const char* GeoDataLineStringType = "GeoDataLineString";
-const char* GeoDataLineStyleType = "GeoDataLineStyle";
-const char* GeoDataLodType = "GeoDataLod";
-const char* GeoDataMultiGeometryType = "GeoDataMultyGeometry";
-const char* GeoDataObjectType = "GeoDataObject";
-const char* GeoDataOuterBoundaryType = "GeoDataOuterBoundary";
-const char* GeoDataPlacemarkType = "GeoDataPlacemark";
-const char* GeoDataPointType = "GeoDataPoint";
-const char* GeoDataPolygonType = "GeoDataPolygon";
-const char* GeoDataPolyStyleType = "GeoDataPolyStyle";
-const char* GeoDataRegionType = "GeoDataRegion";
-const char* GeoDataStyleSelectorType = "GeoDataStyleSelector";
-const char* GeoDataStyleType = "GeoDataStyle";
-const char* GeoDataSyleMapType = "GeoDataStyleMap";
-}
-
-
 GeoDocument::GeoDocument()
 {
 }

@@ -110,7 +110,7 @@ set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 marble_add_test( PluginManagerTest )
 marble_add_test( MarbleWidgetTest )
 marble_add_test( TestGeoPainter )
-marble_add_test( TestGeoData )
+marble_add_test( TestGeoData ${CMAKE_CURRENT_SOURCE_DIR}/../src/lib/geodata/parser/GeoDataTypes.cpp )
 add_definitions( -DCITIES_PATH="\\\"${CMAKE_CURRENT_SOURCE_DIR}/../../../data/placemarks/cityplacemarks.kml\\\"" )
 marble_add_test( KMLTest )
 

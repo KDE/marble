@@ -20,6 +20,8 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataGeometry.h"
 
+#include "GeoDataTypes.h"
+
 
 namespace Marble
 {

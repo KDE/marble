@@ -13,7 +13,7 @@
 #include "KmlElementDictionary.h"
 #include "GeoDataPlacemark.h"
 //FIXME:should the GeoDataTypes enum be in the GeoDocument?
-#include "GeoDocument.h"
+#include "GeoDataTypes.h"
 #include "GeoWriter.h"
 
 namespace Marble

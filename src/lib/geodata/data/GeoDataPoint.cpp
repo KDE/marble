@@ -22,6 +22,8 @@
 #include "MarbleDebug.h"
 #include "global.h"
 
+#include "GeoDataTypes.h"
+
 
 namespace Marble
 {

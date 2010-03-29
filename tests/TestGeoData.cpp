@@ -15,6 +15,7 @@
 #include "GeoDataFolder.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
+#include "GeoDataTypes.h"
 
 namespace Marble
 {

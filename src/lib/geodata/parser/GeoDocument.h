@@ -36,42 +36,6 @@
 namespace Marble
 {
 
-namespace GeoDataTypes
-{
-/**
- * the following const char* XXType are used to provide RTTI to the GeoData for
- * downcasting to the good object
- * please keep alphabetic order to prevent mess
- */
-extern const char* GeoDataColorStyleType;
-extern const char* GeoDataContainerType;
-extern const char* GeoDataDocumentType;
-extern const char* GeoDataFeatureType;
-extern const char* GeoDataFolderType;
-extern const char* GeoDataGeometryType;
-extern const char* GeoDataHotspotType;
-extern const char* GeoDataIconStyleType;
-extern const char* GeoDataInnerBoundaryType;
-extern const char* GeoDataLabelStyleType;
-extern const char* GeoDataLatLonAltBoxType;
-extern const char* GeoDataLatLonBoxType;
-extern const char* GeoDataLinearRingType;
-extern const char* GeoDataLineStringType;
-extern const char* GeoDataLineStyleType;
-extern const char* GeoDataLodType;
-extern const char* GeoDataMultiGeometryType;
-extern const char* GeoDataObjectType;
-extern const char* GeoDataOuterBoundaryType;
-extern const char* GeoDataPlacemarkType;
-extern const char* GeoDataPointType;
-extern const char* GeoDataPolygonType;
-extern const char* GeoDataPolyStyleType;
-extern const char* GeoDataRegionType;
-extern const char* GeoDataStyleSelectorType;
-extern const char* GeoDataStyleType;
-extern const char* GeoDataSyleMapType;
-}
-
 /**
  * @short A shared base class between GeoDataDocument/GeoSourceDocument
  */
