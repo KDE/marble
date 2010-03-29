@@ -528,11 +528,8 @@ void MarbleControlBox::searchLineChanged(const QString &search)
 void MarbleControlBox::searchReturnPressed()
 {
     // do nothing if search term empty
-    if ( d->m_searchTerm.isEmpty() ) {
-        return;
-    } else {
+    if ( !d->m_searchTerm.isEmpty() ) {
         d->m_runnerManager->newText( d->m_searchTerm );
-        return;
     }
 }
 
