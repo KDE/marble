@@ -186,6 +186,11 @@ void MainWindow::createActions()
      m_controlSunAct->setStatusTip(tr("Configure Sun Control"));
      connect(m_controlSunAct, SIGNAL(triggered()), this, SLOT( controlSun()));
 
+     m_reloadAct = new QAction( tr("&Redisplay"), this);
+     m_reloadAct->setShortcut(tr("F5"));
+     m_reloadAct->setStatusTip(tr("Reload Current Map"));
+     connect(m_reloadAct, SIGNAL(triggered()), this, SLOT(reload()));
+     
      m_handbookAct = new QAction( QIcon(":/icons/help-contents.png"), tr("Marble Desktop Globe &Handbook"), this);
      m_handbookAct->setShortcut(tr("F1"));
      m_handbookAct->setStatusTip(tr("Show the Handbook for Marble Desktop Globe"));
@@ -239,6 +244,7 @@ void MainWindow::createMenus()
             m_fileMenu->addAction( (*i)->action() );
         }
     }
+    m_fileMenu->addAction(m_reloadAct); 
 
     m_fileMenu->addSeparator();
     m_infoBoxesMenu = m_fileMenu->addMenu("&Info Boxes");
@@ -570,6 +576,11 @@ void MainWindow::controlSun()
 void MainWindow::showSun( bool active )
 {
     m_controlView->marbleWidget()->sunLocator()->setShow( active ); 
+}
+
+void MainWindow::reload()
+{
+    m_controlView->marbleWidget()->map()->reload();
 }
 
 void MainWindow::enterWhatsThis()

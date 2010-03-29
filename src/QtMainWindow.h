@@ -85,6 +85,7 @@ class MainWindow : public QMainWindow
     void  showAtmosphere( bool );
     void  controlSun();
     void  showSun( bool );
+    void  reload();
     
     // Settings Menu
     void  showFullScreen( bool );
@@ -129,6 +130,7 @@ class MainWindow : public QMainWindow
     QAction *m_showCloudsAct;
     QAction *m_showAtmosphereAct;
     QAction *m_controlSunAct;
+    QAction *m_reloadAct;
 
     // Settings Menu
     QAction *m_sideBarAct;
