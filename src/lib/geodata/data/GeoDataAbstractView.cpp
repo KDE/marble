@@ -1,14 +1,12 @@
 #include "GeoDataAbstractView.h"
 
-namespace Marble
+using namespace Marble;
+
+GeoDataAbstractView::GeoDataAbstractView()
 {
+}
 
-	GeoDataAbstractView::GeoDataAbstractView()
-	{
-	}
-
-	GeoDataAbstractView::~GeoDataAbstractView()
-	{
-	}
+GeoDataAbstractView::~GeoDataAbstractView()
+{
 }
 

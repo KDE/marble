@@ -6,10 +6,9 @@
 namespace Marble
 {
 
-    class GeoDataLookAtPrivate
-    {
-    public :
-
+class GeoDataLookAtPrivate
+{
+ public :
     GeoDataLookAtPrivate() : m_range(0.0)
     {
         // nothing to do
@@ -20,6 +19,6 @@ namespace Marble
     qreal m_range;
 };
 
-}
+} // namespace Marble
 
 #endif

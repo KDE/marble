@@ -10,14 +10,12 @@ namespace Marble
 
 class GEODATA_EXPORT GeoDataAbstractView : public GeoDataObject
 {
-	public :
-		
-	GeoDataAbstractView();
-
-	~GeoDataAbstractView();
+ public:
+    GeoDataAbstractView();
+    ~GeoDataAbstractView();
 };
 
-}
+} // namespace Marble
 
 #endif
 
