@@ -46,7 +46,8 @@ class MarblePhysics : public QObject
       * @param mode Interpolation (animation) mode. Instant means no interpolation.
       * @see positionReached
       */
-    void flyTo( const GeoDataLookAt &source, const GeoDataLookAt &target, ViewportParams *viewport, FlyToMode mode = Instant );
+    void flyTo( const GeoDataLookAt &source, const GeoDataLookAt &target,
+                ViewportParams *viewport, FlyToMode mode = Instant );
 
  Q_SIGNALS:
     /**

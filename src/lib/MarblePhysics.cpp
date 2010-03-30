@@ -103,8 +103,10 @@ public:
 MarblePhysics::MarblePhysics( QObject * parent )
     : QObject( parent ), d(new MarblePhysicsPrivate)
 {
-    connect( &d->m_timeline, SIGNAL( valueChanged( qreal ) ), this, SLOT( updateProgress( qreal ) ) );
-    connect( &d->m_timeline, SIGNAL( finished() ), this, SIGNAL( finished() ) );
+    connect( &d->m_timeline, SIGNAL( valueChanged( qreal ) ),
+             this, SLOT( updateProgress( qreal ) ) );
+    connect( &d->m_timeline, SIGNAL( finished() ),
+             this, SIGNAL( finished() ) );
 }
 
 MarblePhysics::~MarblePhysics()
@@ -112,7 +114,8 @@ MarblePhysics::~MarblePhysics()
     delete d;
 }
 
-void MarblePhysics::flyTo( const GeoDataLookAt &source, const GeoDataLookAt &target, ViewportParams *viewport, FlyToMode mode )
+void MarblePhysics::flyTo( const GeoDataLookAt &source, const GeoDataLookAt &target,
+                           ViewportParams *viewport, FlyToMode mode )
 {
     d->m_timeline.stop();
     d->m_source = source;
@@ -121,7 +124,10 @@ void MarblePhysics::flyTo( const GeoDataLookAt &source, const GeoDataLookAt &tar
     FlyToMode effectiveMode = mode;
     qreal x(0), y(0);
     bool globeHidesPoint(false);
-    bool onScreen = viewport->currentProjection()->screenCoordinates(target.coordinates(), viewport, x, y, globeHidesPoint);
+    bool onScreen = viewport->currentProjection()->screenCoordinates( target.coordinates(),
+                                                                      viewport,
+                                                                      x, y,
+                                                                      globeHidesPoint );
     bool invisible = globeHidesPoint || !onScreen;
 
     if (effectiveMode == Automatic)
