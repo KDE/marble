@@ -420,6 +420,17 @@ void GeoDataFeature::setDescriptionCDATA( bool cdata )
     d->m_descriptionCDATA = cdata;
 }
 
+GeoDataAbstractView GeoDataFeature::abstractView() const
+{
+    return d->m_abstractView;
+}
+
+void GeoDataFeature::setAbstractView( const GeoDataAbstractView &abstractView )
+{
+    detach();
+    d->m_abstractView = abstractView;
+}
+
 QString GeoDataFeature::styleUrl() const
 {
     return d->m_styleUrl;
@@ -514,16 +525,6 @@ void GeoDataFeature::setStyleMap( GeoDataStyleMap* styleMap )
     d->m_styleMap = styleMap;
 }
 
-GeoDataLookAt* GeoDataFeature::lookAt() const
-{
-	return p()->m_lookAt;
-}
-
-void GeoDataFeature::setLookAt( GeoDataLookAt* lookAt )
-{
-	p()->m_lookAt = lookAt;
-}
-	
 int GeoDataFeature::popularityIndex() const
 {
     return d->m_popularityIndex;

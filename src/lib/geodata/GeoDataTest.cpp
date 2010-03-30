@@ -28,7 +28,6 @@
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
-#include "GeoDataLookAt.h"
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
@@ -192,7 +191,7 @@ QString formatOutput(int depth)
 void dumpGeoDataPlacemark(const GeoDataPlacemark& placemark)
 {
     Q_UNUSED(placemark);
-//	qDebug() << placemark.name() << placemark.population() << placemark.coordinate().toString()<<"lookAt info "<<(placemark.lookAt()->coordinate())->toString()<<placemark.lookAt()->altitude();
+//	qDebug() << placemark.name() << placemark.population() << placemark.coordinate().toString();
 }
 
 void dumpFoldersRecursively(const GeoDataContainer& container, int depth)

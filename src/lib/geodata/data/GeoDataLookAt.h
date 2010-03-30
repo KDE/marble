@@ -86,6 +86,7 @@ namespace Marble
           */
         qreal range() const;
 
+        void detach();
     private:
         GeoDataLookAtPrivate *d;
 

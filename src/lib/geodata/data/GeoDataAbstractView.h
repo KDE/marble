@@ -8,6 +8,9 @@
 namespace Marble
 {
 
+/**
+ * @see GeoDataLookAt
+ */
 class GEODATA_EXPORT GeoDataAbstractView : public GeoDataObject
 {
  public:

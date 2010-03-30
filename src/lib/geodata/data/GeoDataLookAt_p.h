@@ -1,7 +1,11 @@
 #ifndef GEODATALOOKAT_P_H
 #define GEODATALOOKAT_P_H
 
+// Marble
 #include "GeoDataCoordinates.h"
+
+// Qt
+#include <QtCore/QAtomicInt>
 
 namespace Marble
 {
@@ -9,14 +13,17 @@ namespace Marble
 class GeoDataLookAtPrivate
 {
  public :
-    GeoDataLookAtPrivate() : m_range(0.0)
+    GeoDataLookAtPrivate()
+        : m_coordinates(),
+          m_range( 0.0 ),
+          ref( 1 )
     {
-        // nothing to do
     }
 
-    GeoDataCoordinates m_coord;
-
+    GeoDataCoordinates m_coordinates;
     qreal m_range;
+    
+    QAtomicInt ref;
 };
 
 } // namespace Marble

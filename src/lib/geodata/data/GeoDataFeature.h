@@ -21,7 +21,6 @@
 #include <QtGui/QColor>
 
 #include "GeoDataObject.h"
-#include "GeoDataLookAt.h"
 
 #include "geodata_export.h"
 
@@ -34,6 +33,7 @@ class GeoDataFolder;
 class GeoDataDocument;
 class GeoDataPlacemark;
 class GeoDataRegion;
+class GeoDataAbstractView;
 
 class GeoDataStyle;
 class GeoDataStyleMap;
@@ -191,6 +191,11 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /// Set the description to be CDATA See: @see descriptionIsCDATA()
     void setDescriptionCDATA( bool cdata );
 
+    /// Get the Abstract view of the feature
+    GeoDataAbstractView abstractView() const;
+    /// Set the abstract view of the feature
+    void setAbstractView( const GeoDataAbstractView &abstractView );
+
     /// Return the styleUrl of the feature.
     QString styleUrl() const;
     /// Set the styleUrl of this feature to @p value.
@@ -289,18 +294,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      */
     void setStyleMap( GeoDataStyleMap* map );
 
-    /**
-     * Returns pointer to the GeoDataLooAt of the feature.
-     */
-    GeoDataLookAt* lookAt() const;
-
-    /**
-     * Sets the lookAt of the placemark.
-     * @param  LookAt  the new LookAt of the feature.
-     */
-    void setLookAt( GeoDataLookAt *lookAt );
-
-	
 
     // ----------------------------------------------------------------
     // The following functions are use for painting, and mostly for placemarks.

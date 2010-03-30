@@ -14,6 +14,7 @@
 #include <QtCore/QString>
 #include <QtCore/QAtomicInt>
 
+#include "GeoDataAbstractView.h"
 #include "GeoDataFeature.h"
 #include "GeoDataRegion.h"
 
@@ -31,7 +32,8 @@ class GeoDataFeaturePrivate
         m_descriptionCDATA(),
         m_address(),
         m_phoneNumber(),
-        m_styleUrl(),        
+        m_styleUrl(),
+        m_abstractView(),
         m_popularity( 0 ),
         m_popularityIndex( 19 ),
         m_visible( true ),
@@ -102,14 +104,15 @@ class GeoDataFeaturePrivate
         return GeoDataTypes::GeoDataFeatureType;
     }
 
-    QString     m_name;         // Name of the feature. Is shown on screen
-    QString     m_description;  // A longer textual description
-    bool        m_descriptionCDATA; // True if description should be considered CDATA
-    QString     m_address;      // The address.  Optional
-    QString     m_phoneNumber;  // Phone         Optional
-    QString     m_styleUrl;     // styleUrl     Url#tag to a document wide style
-    qint64      m_popularity;   // Population(!)
-    int         m_popularityIndex; // Index of population
+    QString             m_name;         // Name of the feature. Is shown on screen
+    QString             m_description;  // A longer textual description
+    bool                m_descriptionCDATA; // True if description should be considered CDATA
+    QString             m_address;      // The address.  Optional
+    QString             m_phoneNumber;  // Phone         Optional
+    QString             m_styleUrl;     // styleUrl     Url#tag to a document wide style
+    GeoDataAbstractView m_abstractView; // AbstractView  Optional
+    qint64              m_popularity;   // Population(!)
+    int                 m_popularityIndex; // Index of population
 
     bool        m_visible;      // True if this feature should be shown.
     GeoDataFeature::GeoDataVisualCategory  m_visualCategory; // the visual category
@@ -119,7 +122,6 @@ class GeoDataFeaturePrivate
 
     GeoDataStyle*    m_style;
     GeoDataStyleMap* m_styleMap;
-    GeoDataLookAt*   m_lookAt;
 
     GeoDataRegion m_region;
     
