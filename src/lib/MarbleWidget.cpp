@@ -1382,24 +1382,24 @@ void MarbleWidget::changeEvent ( QEvent * event )
     QWidget::changeEvent(event);
 }
 
-void MarbleWidget::flyTo(const GeoDataLookAt &lookat, FlyToMode mode)
+void MarbleWidget::flyTo( const GeoDataLookAt &lookAt, FlyToMode mode )
 {
-    if (!d->m_animationsEnabled || mode == Instant) {
-        d->m_map->flyTo(lookat);
+    if ( !d->m_animationsEnabled || mode == Instant ) {
+        d->m_map->flyTo( lookAt );
         d->repaint();
     }
     else {
         GeoDataLookAt source = d->m_map->lookAt();
         setViewContext( Marble::Animation );
         ViewportParams *viewport = d->m_map->viewParams()->viewport();
-        d->m_physics->flyTo(source, lookat, viewport, mode);
+        d->m_physics->flyTo( source, lookAt, viewport, mode );
     }
 }
 
-void MarbleWidget::updateAnimation(const GeoDataLookAt &lookat)
+void MarbleWidget::updateAnimation( const GeoDataLookAt &lookAt )
 {
     setViewContext( Marble::Animation );
-    d->m_map->flyTo(lookat);
+    d->m_map->flyTo( lookAt );
     d->repaint();
 }
 

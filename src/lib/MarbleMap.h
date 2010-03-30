@@ -420,7 +420,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
       * @brief Move camera to the given position. This can change
       * both the zoom value and the position
       */
-    void flyTo(const GeoDataLookAt &lookat);
+    void flyTo( const GeoDataLookAt &lookAt );
 
     /**
       * @brief Return the current camera position

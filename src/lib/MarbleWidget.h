@@ -932,7 +932,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     
     /**
       * @brief Change the camera position to the given position.
-      * @param lookat New camera position. Changing the camera position means
+      * @param lookAt New camera position. Changing the camera position means
       * that both the current center position as well as the zoom value may change
       * @param mode Interpolation type for intermediate camera positions. Automatic
       * (default) chooses a suitable interpolation among Instant, Lenar and Jump.
@@ -944,7 +944,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
       * towards the middle point of the intermediate positions. This appears
       * like a jump of the camera.
       */
-    void flyTo(const GeoDataLookAt &lookat, FlyToMode mode = Automatic);
+    void flyTo( const GeoDataLookAt &lookAt, FlyToMode mode = Automatic );
 
  Q_SIGNALS:
     /**
@@ -1027,7 +1027,7 @@ private Q_SLOTS:
       * @brief Updates zoom and position during animations
       * @see flyTo
       */
-    void updateAnimation(const GeoDataLookAt &lookat);
+    void updateAnimation(const GeoDataLookAt &lookAt);
 
  private:
     Q_DISABLE_COPY( MarbleWidget )

@@ -1294,39 +1294,39 @@ QList<AbstractFloatItem *> MarbleMap::floatItems() const
     return d->m_model->floatItems();
 }
 
-void MarbleMap::flyTo(const GeoDataLookAt &lookat)
+void MarbleMap::flyTo( const GeoDataLookAt &lookAt )
 {
-    int zoom = zoomFromDistance(lookat.range() * METER2KM );
-    if (zoom < minimumZoom() || zoom > maximumZoom())
+    int zoom = zoomFromDistance( lookAt.range() * METER2KM );
+    if ( zoom < minimumZoom() || zoom > maximumZoom() )
         return; // avoid moving when zooming is impossible
 
-    setDistance(lookat.range() * METER2KM );
+    setDistance( lookAt.range() * METER2KM );
     GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
-    centerOn(lookat.longitude(deg), lookat.latitude(deg));
+    centerOn( lookAt.longitude(deg), lookAt.latitude(deg) );
 }
 
 GeoDataLookAt MarbleMap::lookAt() const
 {
     GeoDataLookAt result;
-    qreal lon(0.0), lat(0.0);
+    qreal lon( 0.0 ), lat( 0.0 );
 
-    d->m_viewParams.centerCoordinates(lon, lat);
-    result.setLongitude(lon);
-    result.setLatitude(lat);
-    result.setAltitude(0.0);
+    d->m_viewParams.centerCoordinates( lon, lat );
+    result.setLongitude( lon );
+    result.setLatitude( lat );
+    result.setAltitude( 0.0 );
     result.setRange( distance() * KM2METER );
 
     return result;
 }
 
-qreal MarbleMap::distanceFromZoom(qreal zoom) const
+qreal MarbleMap::distanceFromZoom( qreal zoom ) const
 {
-    return distanceFromRadius(d->radius(zoom));
+    return distanceFromRadius( d->radius( zoom ) );
 }
 
-qreal MarbleMap::zoomFromDistance(qreal distance) const
+qreal MarbleMap::zoomFromDistance( qreal distance ) const
 {
-    return d->zoom(radiusFromDistance(distance));
+    return d->zoom( radiusFromDistance( distance ) );
 }
 
 

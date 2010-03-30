@@ -242,35 +242,38 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
     qreal centerLat = DEG2RAD * marbleWidget->centerLatitude();
     qreal centerLon = DEG2RAD * marbleWidget->centerLongitude();
 
-    qreal lon = destLon - (mouseLon - centerLon);
-    qreal lat = destLat - (mouseLat - centerLat);
+    qreal lon = destLon - ( mouseLon - centerLon );
+    qreal lat = destLat - ( mouseLat - centerLat );
 
-    GeoDataLookAt lookat;
-    lookat.setLongitude(lon);
-    lookat.setLatitude(lat);
-    lookat.setAltitude(0.0);
-    lookat.setRange(newDistance * KM2METER);
+    GeoDataLookAt lookAt;
+    lookAt.setLongitude( lon );
+    lookAt.setLatitude( lat );
+    lookAt.setAltitude( 0.0 );
+    lookAt.setRange( newDistance * KM2METER );
     
-    marbleWidget->map()->viewParams()->viewport()->setFocusPoint(GeoDataCoordinates(destLon, destLat));
-    marbleWidget->flyTo(lookat, Linear);
+    marbleWidget->map()->viewParams()->viewport()->setFocusPoint( GeoDataCoordinates( destLon,
+                                                                                      destLat ) );
+    marbleWidget->flyTo( lookAt, Linear );
 }
 
-void MarbleWidgetDefaultInputHandler::Private::MoveTo(MarbleWidget* marbleWidget, const QPoint &pos, qreal factor)
+void MarbleWidgetDefaultInputHandler::Private::MoveTo( MarbleWidget* marbleWidget,
+                                                       const QPoint &pos,
+                                                       qreal factor )
 {
-    Q_ASSERT(factor > 0.0);
+    Q_ASSERT( factor > 0.0 );
 
     qreal  destLat;
     qreal  destLon;
     qreal distance = marbleWidget->map()->distance();
-    marbleWidget->geoCoordinates(pos.x(), pos.y(), destLon, destLat, GeoDataCoordinates::Radian );
+    marbleWidget->geoCoordinates( pos.x(), pos.y(), destLon, destLat, GeoDataCoordinates::Radian );
     
-    GeoDataLookAt lookat;
-    lookat.setLongitude(destLon);
-    lookat.setLatitude(destLat);
-    lookat.setAltitude(0.0);
-    lookat.setRange(distance * factor * KM2METER);
+    GeoDataLookAt lookAt;
+    lookAt.setLongitude( destLon );
+    lookAt.setLatitude( destLat );
+    lookAt.setAltitude( 0.0 );
+    lookAt.setRange( distance * factor * KM2METER );
     
-    marbleWidget->flyTo(lookat);
+    marbleWidget->flyTo( lookAt );
 }
 
 MarbleWidgetDefaultInputHandler::MarbleWidgetDefaultInputHandler()
