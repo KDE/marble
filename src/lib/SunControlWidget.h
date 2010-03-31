@@ -23,7 +23,7 @@
 namespace Ui
 {
     class SunControlWidget;
-};
+}
 
 namespace Marble
 {
