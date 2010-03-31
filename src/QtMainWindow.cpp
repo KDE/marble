@@ -214,10 +214,11 @@ void MainWindow::createActions()
 void MainWindow::createMenus()
 {
     // Do not create too many menu entries on a MID
-    // FIXME: Some of these options should come back.
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         menuBar()->addAction(m_workOfflineAct);
+        menuBar()->addAction(m_sideBarAct);
         menuBar()->addAction(m_fullScreenAct);
+        menuBar()->addAction(m_aboutMarbleAct);
         return;
     }
     
