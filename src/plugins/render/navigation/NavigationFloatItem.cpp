@@ -45,7 +45,7 @@ NavigationFloatItem::NavigationFloatItem( const QPointF &point )
     // Plugin is not visible by default
     setVisible( false );
 
-    if( m_profiles && MarbleGlobal::SmallScreen ) {
+    if( m_profiles & MarbleGlobal::SmallScreen ) {
         setFrame( FrameGraphicsItem::RectFrame );
     }
     else {
@@ -96,7 +96,7 @@ void NavigationFloatItem::initialize()
 {
     QWidget *navigationParent = new QWidget( 0 );
     
-    if( m_profiles && MarbleGlobal::SmallScreen ) {
+    if( m_profiles & MarbleGlobal::SmallScreen ) {
         m_navigationWidgetSmall = new Ui::NavigationSmall;
         m_navigationWidgetSmall->setupUi( navigationParent );
     }
@@ -113,7 +113,7 @@ void NavigationFloatItem::initialize()
     
     setLayout( layout );
 
-    if( !( m_profiles && MarbleGlobal::SmallScreen ) ) {
+    if( !( m_profiles & MarbleGlobal::SmallScreen ) ) {
         connect( m_navigationWidget->zoomSlider,  SIGNAL( sliderPressed() ),
                  this, SLOT( adjustForAnimation() ) );
         connect( m_navigationWidget->zoomSlider,  SIGNAL( sliderReleased() ),
@@ -156,7 +156,7 @@ bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
         int maxZoom = m_marbleWidget->map()->maximumZoom();
         //m_navigationWidget->zoomSlider->setRange(minZoom, maxZoom);
         
-        if( m_profiles && MarbleGlobal::SmallScreen ) {
+        if( m_profiles & MarbleGlobal::SmallScreen ) {
             connect( m_navigationWidgetSmall->zoomInButton, SIGNAL( clicked() ),
                      m_marbleWidget, SLOT( zoomIn() ) );
             connect( m_navigationWidgetSmall->zoomOutButton, SIGNAL( clicked() ),
@@ -203,7 +203,7 @@ bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
 
 void NavigationFloatItem::zoomChanged(int level)
 {
-    if( !( m_profiles && MarbleGlobal::SmallScreen ) ) {
+    if( !( m_profiles & MarbleGlobal::SmallScreen ) ) {
         m_navigationWidget->zoomSlider->setValue(level);
     }
 }
@@ -213,7 +213,7 @@ void NavigationFloatItem::selectTheme(QString theme)
     Q_UNUSED(theme);
     
     if ( m_marbleWidget ) {
-        if( m_profiles && MarbleGlobal::SmallScreen ) {
+        if( m_profiles & MarbleGlobal::SmallScreen ) {
             updateButtons( m_marbleWidget->map()->zoom() );
         }
         else {
@@ -256,7 +256,7 @@ void NavigationFloatItem::updateButtons( int value )
     QToolButton *zoomInButton;
     QToolButton *zoomOutButton;
     
-    if( m_profiles && MarbleGlobal::SmallScreen ) {
+    if( m_profiles & MarbleGlobal::SmallScreen ) {
         if ( m_marbleWidget ) {
             minZoom = m_marbleWidget->map()->minimumZoom();
             maxZoom = m_marbleWidget->map()->maximumZoom();
