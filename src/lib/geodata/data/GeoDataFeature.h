@@ -66,13 +66,13 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     GeoDataFeature( const QString& name );
 
     GeoDataFeature( const GeoDataFeature& other );
-    
+
     // copy ctors for derived classes
     GeoDataFeature( const GeoDataContainer& other );
     GeoDataFeature( const GeoDataFolder& other );
     GeoDataFeature( const GeoDataDocument& other );
     GeoDataFeature( const GeoDataPlacemark& other );
-    
+
     virtual ~GeoDataFeature();
 
     GeoDataFeature& operator=( const GeoDataFeature& other );
@@ -124,7 +124,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
         // Space Terrain
         Crater,                  // c
         Mare,                    // a
-        
+
         // Places of Interest
         GeographicPole,
         MagneticPole,
@@ -200,7 +200,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     QString styleUrl() const;
     /// Set the styleUrl of this feature to @p value.
     void setStyleUrl( const QString &value );
-    
+
     /// Return whether this feature is visible or not
     bool isVisible() const;
     /**
@@ -238,7 +238,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
     /**
      * Return the symbol index of the placemark.
      */
-    GeoDataVisualCategory visualCategory() const; 
+    GeoDataVisualCategory visualCategory() const;
     /**
      * Sets the symbol @p index of the placemark.
      * @param  category  the new category to be used.
@@ -280,7 +280,7 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * @param  popularity  the new popularity value
      */
     void setPopularity( qint64 popularity );
-    
+
     /**
      * Return a pointer to a GeoDataStyleMap object which represents the styleMap
      * of this feature. A styleMap is simply a QMap<QString,QString> which can connect

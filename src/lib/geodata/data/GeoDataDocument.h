@@ -95,7 +95,7 @@ public:
      * @param styleId  the id of the style
      */
     GeoDataStyle& style( const QString& styleId ) const;
-    
+
     /**
     * @brief dump a Vector of all styles
     */
@@ -106,24 +106,24 @@ public:
     * @param map  the new stylemap
     */
     void addStyleMap( const GeoDataStyleMap& map );
-    
+
     /**
     * @brief remove stylemap from storage
     * @param mapId the styleId of the styleMap to be removed
     */
     void removeStyleMap( const QString& mapId );
-    
+
     /**
      * @brief Return a style in the style storage
      * @param styleId  the id of the style
      */
     GeoDataStyleMap& styleMap( const QString& styleId ) const;
-    
+
     /**
     * @brief dump a Vector of all styles
     */
     QList<GeoDataStyleMap> styleMaps() const;
-    
+
     // Serialize the Placemark to @p stream
     virtual void pack( QDataStream& stream ) const;
     // Unserialize the Placemark from @p stream

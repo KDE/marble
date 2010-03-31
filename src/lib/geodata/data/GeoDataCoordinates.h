@@ -29,9 +29,6 @@
 #include "geodata_export.h"
 #include "global.h"
 
-/*
-*/
-
 namespace Marble
 {
 
@@ -40,7 +37,7 @@ const qreal TWOPI = 2 * M_PI;
 class GeoDataCoordinatesPrivate;
 class Quaternion;
 
-/** 
+/**
  * @short A 3d point representation
  *
  * GeoDataCoordinates is the simple representation of a single three
@@ -198,11 +195,11 @@ class GEODATA_EXPORT GeoDataCoordinates
     * This method can be used to check whether the coordinate equals one of 
     * the poles. 
     * NOTE: As the poles might not be visible in the projection at all 
-    *       you should check whether 
-    * 
+    *       you should check whether
+    *
     * bool AbstractProjection::exceedsLatitudeRange() const
     *
-    * isn't what you're looking for ... .
+    * isn't what you're looking for ...
     */
     bool isPole( Pole = AnyPole ) const;
 

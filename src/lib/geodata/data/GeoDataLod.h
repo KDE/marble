@@ -60,13 +60,13 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 */
     virtual ~GeoDataLod();
 
-    
+
 /*!
     \brief Provides type information for downcasting a GeoNode
 */
     virtual QString nodeType() const;
-    
-    
+
+
 /*!
     \brief Returns the minimum size that is needed for the region to be active
     Returns the minimum number of pixels the region has to be projected on for
@@ -76,7 +76,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 */
     qreal minLodPixels() const;
 
-    
+
 /*!
     \brief Sets the minimum size that is needed for the region to be active
     Sets the minimum number of \a pixels the region has to be projected on for
@@ -84,7 +84,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 */
     void setMinLodPixels( qreal pixels );
 
-    
+
 /*!
     \brief Returns the maximum size that is needed for the region to be active
     Returns the maximum number of pixels the region has to be projected on for
@@ -94,14 +94,14 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 */
     qreal maxLodPixels() const;
 
-    
+
 /*!
     \brief Sets the maximum size that is needed for the region to be active
     Sets the maximum number of \a pixels the region has to be projected on for
     the feature to be considered active.
 */
     void setMaxLodPixels( qreal pixels );
-   
+
 
 /*!
     \brief Returns how "quickly" the region fades when the region is far away.
@@ -110,7 +110,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 */
     qreal minFadeExtent() const;
 
-    
+
 /*!
     \brief Sets how "quickly" the region fades when the region is far away.
     Sets the distance (counted from minLodPixels) over which the feature fades
@@ -118,7 +118,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 */
     void setMinFadeExtent( qreal pixels );
 
-    
+
 /*!
     \brief Returns how "quickly" the region fades when the region is near.
     Returns the distance (counted from maxLodPixels) over which the feature
@@ -126,15 +126,15 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 */
     qreal maxFadeExtent() const;
 
-    
+
 /*!
     \brief Sets how "quickly" the region fades when the region is near.
     Sets the distance (counted from maxLodPixels) over which the feature fades
     in or out. 
 */
     void setMaxFadeExtent( qreal pixels );
-    
-    
+
+
     // Serialization
 /*!
     \brief Serialize the Lod to a stream.
@@ -142,7 +142,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 */
     virtual void pack( QDataStream& stream ) const;
 
-    
+
 /*!
     \brief Unserialize the Lod from a stream.
     \param stream the stream.
@@ -150,7 +150,7 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
     virtual void unpack( QDataStream& stream );
 
     GeoDataLod &operator=( const GeoDataLod& other );
-    
+
  protected:
     GeoDataLodPrivate  * const d;
 };

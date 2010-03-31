@@ -13,9 +13,9 @@ namespace Marble
     {
     public:
         GeoDataLookAt();
-        
+
         GeoDataLookAt(const GeoDataLookAt& other);
-        
+
         GeoDataLookAt& operator=(const GeoDataLookAt &other);
 
         ~GeoDataLookAt();

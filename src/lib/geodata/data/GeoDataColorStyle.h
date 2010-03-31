@@ -58,6 +58,7 @@ class GeoDataColorStylePrivate;
  *
  * @see GeoDataIconStyle
  * @see GeoDataLabelStyle
+ * @see GeoDataLineStyle
  */
 class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
 {
