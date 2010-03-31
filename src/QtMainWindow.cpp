@@ -215,7 +215,9 @@ void MainWindow::createMenus()
 {
     // Do not create too many menu entries on a MID
     // FIXME: Some of these options should come back.
-    if( MarbleGlobal::getInstance()->profiles() && MarbleGlobal::SmallScreen ) {
+    if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        menuBar()->addAction(m_workOfflineAct);
+        menuBar()->addAction(m_fullScreenAct);
         return;
     }
     
@@ -293,7 +295,7 @@ void MainWindow::createInfoBoxesMenu()
     
     // Do not create too many menu entries on a MID
     // FIXME: Set up another way of switching the plugins on and off.
-    if( MarbleGlobal::getInstance()->profiles() && MarbleGlobal::SmallScreen ) {
+    if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         return;
     }
     
@@ -316,7 +318,7 @@ void MainWindow::createOnlineServicesMenu()
     
     // Do not create too many menu entries on a MID
     // FIXME: Set up another way of switching the plugins on and off.
-    if( MarbleGlobal::getInstance()->profiles() && MarbleGlobal::SmallScreen ) {
+    if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         return;
     }
     
@@ -345,7 +347,7 @@ void MainWindow::createPluginMenus()
     
     // Do not create too many menu entries on a MID
     // FIXME: Set up another way of switching the plugins on and off.
-    if( MarbleGlobal::getInstance()->profiles() && MarbleGlobal::SmallScreen ) {
+    if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         return;
     }
 
@@ -707,7 +709,7 @@ void MainWindow::readSettings()
          resize(settings.value("size", QSize(640, 480)).toSize());
          move(settings.value("pos", QPoint(200, 200)).toPoint());
          showFullScreen(settings.value("fullScreen", false ).toBool());
-         if( MarbleGlobal::getInstance()->profiles() && MarbleGlobal::SmallScreen ) {
+         if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
              showSideBar(settings.value("sideBar", false ).toBool());
          }
          else {
