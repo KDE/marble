@@ -29,6 +29,8 @@ public:
 
     RouteSkeleton::AvoidFeatures m_avoidFeatures;
 
+    int m_fontSize;
+
     /** Determines a suitable index for inserting a via point */
     int viaIndex(const GeoDataCoordinates &position) const;
 
@@ -37,7 +39,8 @@ public:
 
 RouteSkeletonPrivate::RouteSkeletonPrivate() :
     m_routePreference(RouteSkeleton::CarFastest),
-    m_avoidFeatures(RouteSkeleton::AvoidNone)
+    m_avoidFeatures(RouteSkeleton::AvoidNone),
+    m_fontSize(0)
 {
   // nothing to do
 }
@@ -152,9 +155,28 @@ QPixmap RouteSkeleton::pixmap(int position) const
     painter.drawEllipse(1,1,13,13);
     painter.setBrush(QColor(Qt::black));
 
-    // Paint a character denoting the position (0=A, 1=B, 2=C, ...)
     char text = char('A' + position);
-    painter.drawText(2,2,12,12, Qt::AlignCenter, QString(text));
+
+    // Choose a suitable font size once (same for all pixmaps)
+    if (d->m_fontSize == 0) {
+        QFont font = painter.font();
+        d->m_fontSize = 20;
+        while (d->m_fontSize-- > 0) {
+            font.setPointSize(d->m_fontSize);
+            QFontMetrics fontMetric(font);
+            if (fontMetric.width(text) <= 12 && fontMetric.height() <= 12) {
+                break;
+            }
+        }
+    }
+
+    Q_ASSERT(d->m_fontSize);
+    QFont font = painter.font();
+    font.setPointSize(d->m_fontSize);
+    painter.setFont(font);
+
+    // Paint a character denoting the position (0=A, 1=B, 2=C, ...)
+    painter.drawText(2, 2, 12, 12, Qt::AlignCenter, QString(text));
 
     d->m_pixmapCache.insert(position, QPixmap::fromImage(result));
     return pixmap(position);
