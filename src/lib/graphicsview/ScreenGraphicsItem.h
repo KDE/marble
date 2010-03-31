@@ -38,7 +38,7 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
     explicit ScreenGraphicsItem( MarbleGraphicsItem *parent = 0 );
     ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
                         MarbleGraphicsItem *parent = 0 );
-    
+
     virtual ~ScreenGraphicsItem();
 
     /**
@@ -73,7 +73,7 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
      * Positive y-coordinates are counted top-aligned from the top border of the parent item.
      */
     QPointF positivePosition() const;
-    
+
     /**
      * @brief Return the absolute position of the ScreenGraphicsItem
      *
@@ -96,14 +96,14 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
      * be disabled. By default all flags are disabled.
      */
     void setFlags( GraphicsItemFlags flags );
-    
+
  protected:
     explicit ScreenGraphicsItem( ScreenGraphicsItemPrivate *d_ptr );
     ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
                         ScreenGraphicsItemPrivate *d_ptr );
 
     virtual bool eventFilter( QObject *, QEvent * );
-     
+
  private:
     ScreenGraphicsItemPrivate *p() const;
 };

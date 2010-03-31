@@ -24,7 +24,7 @@ class QString;
 
 namespace Marble
 {
-    
+
 class GeoDataCoordinates;
 class GeoDataLatLonAltBox;
 
@@ -143,7 +143,7 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
  protected:
     explicit GeoGraphicsItem( GeoGraphicsItemPrivate *d_ptr );
 
- private:     
+ private:
     GeoGraphicsItemPrivate *p() const;
 };
 
