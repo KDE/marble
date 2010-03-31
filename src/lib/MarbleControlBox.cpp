@@ -76,7 +76,7 @@ class MarbleControlBoxPrivate
     QStandardItemModel     *m_mapThemeModel;
     QSortFilterProxyModel  *m_sortproxy;
     MapThemeSortFilterProxyModel *m_mapSortProxy;
-    
+
     MarbleRunnerManager  *m_runnerManager;
     RoutingWidget  *m_routingWidget;
     GeoSceneDocument      *mapTheme;
@@ -98,7 +98,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->m_widget = 0;
     d->m_searchTerm.clear();
     d->m_searchTriggered = false;
-    d->uiWidget.setupUi( this );    
+    d->uiWidget.setupUi( this );
 
     setFocusPolicy( Qt::NoFocus );
 //    setFocusProxy( d->uiWidget.searchLineEdit );
@@ -168,11 +168,11 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
              this,                      SLOT( adjustForStill() ) );
 
     d->uiWidget.projectionComboBox->setEnabled( true );
-    
+
     d->m_runnerManager = new MarbleRunnerManager( this );
 
     connect( d->m_runnerManager, SIGNAL( modelChanged(  MarblePlacemarkModel* ) ),
-             this,               SLOT( setLocations( MarblePlacemarkModel* ) ) );    
+             this,               SLOT( setLocations( MarblePlacemarkModel* ) ) );
 
     connect( d->uiWidget.searchLineEdit,  SIGNAL( textChanged( const QString& ) ),
              this,                        SLOT( searchLineChanged( const QString& ) ) );
@@ -230,7 +230,7 @@ void MarbleControlBox::updateCelestialModel()
                                 << new QStandardItem( celestialBodyName )
                                 << new QStandardItem( celestialBodyId ) );
         }
-    }   
+    }
 }
 
 void MarbleControlBox::updateButtons( int value )
@@ -251,6 +251,7 @@ void MarbleControlBox::updateButtons( int value )
 void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 {
     d->m_widget = widget;
+    d->m_runnerManager->setMap( d->m_widget->map() );
 
     RoutingWidget *routingWidget = new RoutingWidget(widget, this);
     d->uiWidget.toolBox->addItem(routingWidget, tr("Routing"));
@@ -259,7 +260,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     // we can search them.
     setLocations( static_cast<MarblePlacemarkModel*>(d->m_widget->placemarkModel()) );
 
-//    FIXME: Why does this fail: "selection model works on a different model than the view..." ? 
+//    FIXME: Why does this fail: "selection model works on a different model than the view..." ?
 //    d->uiWidget.locationListView->setSelectionModel( d->m_widget->placemarkSelectionModel() );
 
     //set up everything for the FileModel
@@ -290,7 +291,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( this, SIGNAL(moveUp()),    d->m_widget, SLOT(moveUp()) );
     connect( this, SIGNAL(moveDown()),  d->m_widget, SLOT(moveDown()) );
 
-    connect( this,        SIGNAL( projectionSelected( Projection ) ),  
+    connect( this,        SIGNAL( projectionSelected( Projection ) ),
              d->m_widget, SLOT( setProjection( Projection ) ) );
 
     connect( d->m_widget, SIGNAL( themeChanged( QString ) ),
@@ -371,10 +372,10 @@ int MarbleControlBox::minimumZoom() const
 void MarbleControlBox::updateMapThemeView()
 {
     updateCelestialModel();
-    
+
     if ( d->m_widget ) {
         QString mapThemeId = d->m_widget->mapThemeId();
-        if ( !mapThemeId.isEmpty() ) 
+        if ( !mapThemeId.isEmpty() )
             selectTheme( mapThemeId );
     }
 }
@@ -549,7 +550,7 @@ void MarbleControlBox::selectTheme( const QString &theme )
         return;
     // Check if the new selected theme is different from the current one
     QModelIndex currentIndex = d->uiWidget.marbleThemeSelectView->currentIndex();
-    QString indexTheme = d->m_mapSortProxy->data( d->m_mapSortProxy->index( 
+    QString indexTheme = d->m_mapSortProxy->data( d->m_mapSortProxy->index(
                          currentIndex.row(), 1, QModelIndex() ) ).toString();
 
 
@@ -557,8 +558,8 @@ void MarbleControlBox::selectTheme( const QString &theme )
     updateButtons( d->uiWidget.zoomSlider->value() );
 
     if ( theme != indexTheme ) {
-        /* indexTheme would be empty if the chosen map has not been set yet. As 
-        this needs to be done after the mapThemeId has been set, check if that is 
+        /* indexTheme would be empty if the chosen map has not been set yet. As
+        this needs to be done after the mapThemeId has been set, check if that is
         not empty first. The behaviour differs between Linux and Windows: on
         Windows the reading of the settings is not delayed, thus the mapThemeId
         is available earlier than on Linux.
@@ -568,7 +569,7 @@ void MarbleControlBox::selectTheme( const QString &theme )
             if( items.size() >= 1 ) {
                 QModelIndex iterIndex = items.first()->index();
                 QModelIndex iterIndexName = d->m_mapSortProxy->mapFromSource( iterIndex.sibling( iterIndex.row(), 0 ) );
-		
+
                 d->uiWidget.marbleThemeSelectView->setCurrentIndex( iterIndexName );
 
                 d->uiWidget.marbleThemeSelectView->scrollTo( iterIndexName );
@@ -577,7 +578,7 @@ void MarbleControlBox::selectTheme( const QString &theme )
 
         QString selectedId = d->m_widget->mapTheme()->head()->target();
         d->m_runnerManager->setCelestialBodyId( selectedId );
-        
+
         QList<QStandardItem*> itemList = d->m_celestialList->findItems( selectedId, Qt::MatchExactly, 1 );
 
         if ( !itemList.isEmpty() ) {
@@ -609,7 +610,7 @@ void MarbleControlBox::selectCurrentMapTheme( const QString& celestialBodyId )
     bool foundMapTheme = false;
 
     QString currentMapThemeId = d->m_widget->mapThemeId();
-    
+
     int row = d->m_mapSortProxy->rowCount();
 
     for ( int i = 0; i < row; ++i )
@@ -642,7 +643,7 @@ void MarbleControlBox::mapCenterOnSignal( const QModelIndex &index )
 
 void MarbleControlBox::adjustForAnimation()
 {
-    // TODO: use signals here as well 
+    // TODO: use signals here as well
     if ( !d->m_widget )
         return;
 

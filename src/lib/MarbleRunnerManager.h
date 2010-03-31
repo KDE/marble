@@ -1,6 +1,6 @@
 /*
     Copyright 2008 Henry de Valence <hdevalence@gmail.com>
-    
+
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
@@ -14,7 +14,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -29,6 +29,7 @@
 namespace Marble
 {
 
+class MarbleMap;
 class MarblePlacemarkModel;
 class GeoDataPlacemark;
 
@@ -40,8 +41,9 @@ class MarbleRunnerManager : public QObject
 public:
     explicit MarbleRunnerManager( QObject *parent = 0 );
     ~MarbleRunnerManager();
-    
+
     void setCelestialBodyId(const QString &celestialBodyId);
+    void setMap(MarbleMap * map);
 
     /**
       * Toggle offline mode. In offline mode, runners shall not try to access
@@ -50,7 +52,7 @@ public:
     void setWorkOffline( bool offline );
 
 public slots:
-    void newText(QString text);
+    void newText(const QString& text);
 signals:
     void modelChanged( MarblePlacemarkModel *model );
 
@@ -60,12 +62,14 @@ private slots:
     void slotRunnerFinished(MarbleAbstractRunner* runner, QVector<GeoDataPlacemark> result);
 
 private:
-    int m_activeRunners;
     QString m_lastString;
+    QMutex m_modelMutex;
+    MarbleMap * m_map;
+    int m_activeRunners;
+    QString m_previousString;
     MarblePlacemarkModel *m_model;
     QList<MarbleAbstractRunner*> m_runners;
     QVector<GeoDataPlacemark> m_placemarkContainer;
-    QMutex m_modelMutex;
     QString m_celestialBodyId;
     bool m_workOffline;
 };

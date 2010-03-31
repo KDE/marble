@@ -1,6 +1,6 @@
 /*
     Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
-    
+
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
@@ -14,7 +14,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -42,9 +42,6 @@ public:
     // Overriding MarbleAbstractRunner
     GeoDataFeature::GeoDataVisualCategory category() const;
 
-    // Overriding QThread
-    virtual void run();
-    
 private Q_SLOTS:
     // Http request with hostip.info done
     void slotRequestFinished( QNetworkReply* );
@@ -54,6 +51,10 @@ private Q_SLOTS:
 
     // No results (or an error)
     void slotNoResults();
+
+protected:
+    // Overriding QThread
+    virtual void run();
 
 private:
     QHostInfo m_hostInfo;

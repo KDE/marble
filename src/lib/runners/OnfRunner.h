@@ -1,6 +1,6 @@
 /*
     Copyright 2008 Henry de Valence <hdevalence@gmail.com>
-    
+
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
@@ -14,7 +14,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -38,10 +38,13 @@ public:
     explicit OnfRunner(QObject *parent = 0);
     ~OnfRunner();
     GeoDataFeature::GeoDataVisualCategory category() const;
-    void run();
-    
+
 public slots:
     void slotRequestFinished( int id, bool error );
+
+protected:
+    virtual void run();
+
 private:
     void fail();
     QHttp *m_http;

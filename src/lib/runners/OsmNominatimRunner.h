@@ -34,9 +34,10 @@ public:
     // Overriding MarbleAbstractRunner
     GeoDataFeature::GeoDataVisualCategory category() const;
 
+protected:
     // Overriding QThread
     virtual void run();
-    
+
 private Q_SLOTS:
     // Http request with nominatim.openstreetmap.org done
     void handleHttpReply( QNetworkReply* );

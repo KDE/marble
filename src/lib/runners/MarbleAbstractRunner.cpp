@@ -1,6 +1,6 @@
 /*
     Copyright 2008 Henry de Valence <hdevalence@gmail.com>
-    
+
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
@@ -14,11 +14,12 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "MarbleAbstractRunner.h"
+#include "MarbleMap.h"
 
 #include <QtCore/QThread>
 #include <QtCore/QString>
@@ -26,7 +27,10 @@
 namespace Marble
 {
 
-MarbleAbstractRunner::MarbleAbstractRunner(QObject *parent) : QThread(parent)
+MarbleAbstractRunner::MarbleAbstractRunner(QObject *parent)
+    : QThread(parent),
+      m_placemarkModel(0),
+      m_map(0)
 {
 }
 
@@ -39,12 +43,22 @@ GeoDataFeature::GeoDataVisualCategory MarbleAbstractRunner::category() const
     return GeoDataFeature::Default;
 }
 
+void MarbleAbstractRunner::setMap(MarbleMap * map)
+{
+    m_map = map;
+}
+
+MarbleMap * MarbleAbstractRunner::map()
+{
+    return m_map;
+}
+
 void MarbleAbstractRunner::parse(const QString &input)
 {
     m_input = input;
 }
 
-void MarbleAbstractRunner::run() 
+void MarbleAbstractRunner::run()
 {
     exec();
 }

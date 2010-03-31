@@ -1,6 +1,6 @@
 /*
     Copyright 2008 Henry de Valence <hdevalence@gmail.com>
-    
+
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
     License as published by the Free Software Foundation; either
@@ -14,7 +14,7 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
     Lesser General Public License for more details.
 
-    You should have received a copy of the GNU Lesser General Public 
+    You should have received a copy of the GNU Lesser General Public
     License along with this library. If not, see <http://www.gnu.org/licenses/>.
 */
 
@@ -29,6 +29,7 @@
 #include "LatLonRunner.h"
 #include "OnfRunner.h"
 #include "OsmNominatimRunner.h"
+#include "LocalDatabaseRunner.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -39,8 +40,8 @@ namespace Marble
 
 MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
     : QObject(parent),
+      m_map(0),
       m_activeRunners(0),
-      m_lastString(""),
       m_model(new MarblePlacemarkModel),
       m_celestialBodyId("earth"),
       m_workOffline(false)
@@ -62,16 +63,16 @@ MarbleRunnerManager::~MarbleRunnerManager()
     delete m_model;
 }
 
-void MarbleRunnerManager::newText(QString text)
+void MarbleRunnerManager::newText(const QString& text)
 {
     if (text == m_lastString) {
       emit searchFinished(text);
       emit modelChanged( m_model );
       return;
     }
-    
+
     m_lastString = text;
-    
+
     m_modelMutex.lock();
     m_model->removePlacemarks("MarbleRunnerManager", 0, m_placemarkContainer.size());
     m_placemarkContainer.clear();
@@ -83,8 +84,16 @@ void MarbleRunnerManager::newText(QString text)
     connect( llrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
              this,     SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
     llrunner->parse(text);
-    
+
     if (m_celestialBodyId == "earth" && !m_workOffline) {
+        LocalDatabaseRunner * localDatabaseRunner = new LocalDatabaseRunner;
+        m_runners << localDatabaseRunner;
+        connect( localDatabaseRunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
+                this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
+        localDatabaseRunner->parse(text);
+        localDatabaseRunner->setMap(m_map);
+        localDatabaseRunner->start();
+
         OnfRunner* onfrunner = new OnfRunner;
         m_runners << onfrunner;
         connect( onfrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
@@ -113,7 +122,9 @@ void MarbleRunnerManager::newText(QString text)
 void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVector<GeoDataPlacemark> result )
 {
     m_runners.removeOne(runner);
-    runner->deleteLater();
+    if ( runner ) {
+        runner->deleteLater();
+    }
     mDebug() << "Runner finished, active runners: " << m_runners.size();
     mDebug() << "Runner reports" << result.size() << "results";
     if( result.isEmpty() )
@@ -129,6 +140,12 @@ void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVec
     if (m_runners.size() == 0) {
         emit searchFinished(m_lastString);
     }
+}
+
+void MarbleRunnerManager::setMap(MarbleMap * map)
+{
+    // TODO: Terminate runners which are making use of the map.
+    m_map = map;
 }
 
 void MarbleRunnerManager::setCelestialBodyId(const QString &celestialBodyId)

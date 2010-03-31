@@ -155,12 +155,12 @@ set(marblewidget_SRCS
     AbstractLayer/AbstractLayer.cpp
     AbstractLayer/AbstractLayerContainer.cpp
     AbstractLayer/AbstractLayerData.cpp
-    
+
     AbstractDataPlugin.cpp
     AbstractDataPluginModel.cpp
     AbstractDataPluginItem.cpp
     AbstractWorkerThread.cpp
-    
+
     PluginInterface.cpp
     NetworkPluginInterface.cpp
     LayerInterface.cpp
@@ -197,6 +197,7 @@ set(marblewidget_SRCS
     MarbleRunnerManager.cpp
     runners/MarbleAbstractRunner.cpp
     runners/LatLonRunner.cpp
+    runners/LocalDatabaseRunner.cpp
     runners/OnfRunner.cpp
     runners/OsmNominatimRunner.cpp
     runners/HostipRunner.cpp
@@ -347,7 +348,7 @@ else (APPLE AND QTONLY)
     PluginAboutDialog.h
     marble_export.h
     Planet.h
-    
+
     AbstractDataPlugin.h
     AbstractDataPluginModel.h
     AbstractDataPluginItem.h
