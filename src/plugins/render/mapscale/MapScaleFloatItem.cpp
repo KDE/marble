@@ -98,13 +98,13 @@ void MapScaleFloatItem::changeViewport( ViewportParams *viewport )
             && m_scaleInitDone ) )
     {
         int fontHeight     = QFontMetrics( font() ).ascent();
-        setSize( QSizeF( viewport->width() / 2,
-                         2 * padding() + fontHeight + 3 + m_scaleBarHeight ) );
+        setContentSize( QSizeF( viewport->width() / 2,
+                                fontHeight + 3 + m_scaleBarHeight ) );
 
         m_leftBarMargin  = QFontMetrics( font() ).boundingRect( "0" ).width() / 2;
         m_rightBarMargin = QFontMetrics( font() ).boundingRect( "0000" ).width() / 2;
 
-        m_scaleBarWidth = contentRect().width() - m_leftBarMargin - m_rightBarMargin;
+        m_scaleBarWidth = contentSize().width() - m_leftBarMargin - m_rightBarMargin;
         m_viewportWidth = viewport->width();
         m_radius = viewport->radius();
         m_scaleInitDone = true;
@@ -129,7 +129,7 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
 
     qreal pixel2Length = dataFacade()->planetRadius() /
                          (qreal)(viewport->radius());
-    
+
     if ( viewport->currentProjection()->surfaceType() == AbstractProjection::Cylindrical )
     {
         qreal centerLatitude = viewport->viewLatLonAltBox().center().latitude();
@@ -138,7 +138,7 @@ void MapScaleFloatItem::paintContent( GeoPainter *painter,
         // the pixel based radius propertyy.
         pixel2Length *= M_PI / 2 * cos( centerLatitude );
     }
-    
+
     m_scaleBarDistance = (qreal)(m_scaleBarWidth) * pixel2Length;
 
     DistanceUnit distanceUnit;

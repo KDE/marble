@@ -28,14 +28,6 @@ ScreenGraphicsItem::ScreenGraphicsItem( MarbleGraphicsItem *parent )
 {
 }
 
-ScreenGraphicsItem::ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
-                                        MarbleGraphicsItem *parent )
-    : MarbleGraphicsItem( new ScreenGraphicsItemPrivate( this, parent ) )
-{
-    setPosition( position );
-    setSize( size );
-}
-
 ScreenGraphicsItem::ScreenGraphicsItem( ScreenGraphicsItemPrivate *d_ptr )
     : MarbleGraphicsItem( d_ptr )
 {

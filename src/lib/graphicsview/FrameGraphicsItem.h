@@ -32,8 +32,6 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
     };
 
     explicit FrameGraphicsItem( MarbleGraphicsItem *parent = 0 );
-    FrameGraphicsItem( const QPointF& position, const QSizeF& size,
-               MarbleGraphicsItem *parent = 0 );
 
     virtual ~FrameGraphicsItem();
 
@@ -160,9 +158,8 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
     QSizeF contentSize() const;
 
     /**
-     * Sets the size of the item. The given size is the size required for contents.
-     * This function does not guarantee a correct content size if you set margin or padding
-     * afterwards.
+     * Sets the size of the content of the item.
+     * @p size is the size required for contents.
      */
     void setContentSize( const QSizeF& size );
 

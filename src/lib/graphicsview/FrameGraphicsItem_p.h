@@ -25,8 +25,9 @@ namespace Marble
 class FrameGraphicsItemPrivate
 {
  public:
-    FrameGraphicsItemPrivate()
+    FrameGraphicsItemPrivate( FrameGraphicsItem *parent )
         : m_frame( FrameGraphicsItem::NoFrame ),
+          m_contentSize( 0.0, 0.0 ),
           m_margin( 0.0 ),
           m_marginTop( 0.0 ),
           m_marginBottom( 0.0 ),
@@ -36,11 +37,28 @@ class FrameGraphicsItemPrivate
           m_borderWidth( 1.0 ),
           m_borderBrush( QBrush( Qt::black ) ),
           m_borderStyle( Qt::SolidLine ),
-          m_backgroundBrush( QBrush( QColor( 192, 192, 192, 192 ) ) )
+          m_backgroundBrush( QBrush( QColor( 192, 192, 192, 192 ) ) ),
+          m_parent( parent )
     {
+        updateSize();
+    }
+
+    void updateSize()
+    {
+        qreal marginTop = ( m_marginTop == 0.0 ) ? m_margin : m_marginTop;
+        qreal marginBottom = ( m_marginBottom == 0.0 ) ? m_margin : m_marginBottom;
+        qreal marginLeft = ( m_marginLeft == 0.0 ) ? m_margin : m_marginLeft;
+        qreal marginRight = ( m_marginRight == 0.0 ) ? m_margin : m_marginRight;
+
+        QSizeF totalSize = m_contentSize;
+        totalSize += QSizeF( marginLeft + marginRight, marginTop + marginBottom );
+        totalSize += QSizeF( m_padding * 2, m_padding * 2 );
+
+        m_parent->setSize( totalSize );
     }
 
     FrameGraphicsItem::FrameType m_frame;
+    QSizeF m_contentSize;
 
     // Margin
     qreal m_margin;
@@ -56,6 +74,8 @@ class FrameGraphicsItemPrivate
     QBrush m_borderBrush;
     Qt::PenStyle m_borderStyle;
     QBrush m_backgroundBrush;
+
+    FrameGraphicsItem * const m_parent;
 };
 
 } // namespace Marble

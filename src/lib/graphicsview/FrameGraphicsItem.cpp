@@ -26,14 +26,7 @@ const int ROUNDED_RECT_FRAME_MIN_PADDING = 2;
 
 FrameGraphicsItem::FrameGraphicsItem( MarbleGraphicsItem *parent )
         : ScreenGraphicsItem( parent ),
-          d( new FrameGraphicsItemPrivate() )
-{
-}
-
-FrameGraphicsItem::FrameGraphicsItem( const QPointF& position, const QSizeF& size,
-                      MarbleGraphicsItem *parent )
-        : ScreenGraphicsItem( position, size, parent ),
-          d( new FrameGraphicsItemPrivate() )
+          d( new FrameGraphicsItemPrivate( this ) )
 {
 }
 
@@ -61,6 +54,7 @@ qreal FrameGraphicsItem::margin() const
 void FrameGraphicsItem::setMargin( qreal margin )
 {
     d->m_margin = margin;
+    d->updateSize();
     update();
 }
 
@@ -72,6 +66,7 @@ qreal FrameGraphicsItem::marginTop() const
 void FrameGraphicsItem::setMarginTop( qreal marginTop )
 {
     d->m_marginTop = marginTop;
+    d->updateSize();
     update();
 }
 
@@ -83,6 +78,7 @@ qreal FrameGraphicsItem::marginBottom() const
 void FrameGraphicsItem::setMarginBottom( qreal marginBottom )
 {
     d->m_marginBottom = marginBottom;
+    d->updateSize();
     update();
 }
 
@@ -94,6 +90,7 @@ qreal FrameGraphicsItem::marginLeft() const
 void FrameGraphicsItem::setMarginLeft( qreal marginLeft )
 {
     d->m_marginLeft = marginLeft;
+    d->updateSize();
     update();
 }
 
@@ -105,6 +102,7 @@ qreal FrameGraphicsItem::marginRight() const
 void FrameGraphicsItem::setMarginRight( qreal marginRight )
 {
     d->m_marginRight = marginRight;
+    d->updateSize();
     update();
 }
 
@@ -116,6 +114,7 @@ qreal FrameGraphicsItem::borderWidth() const
 void FrameGraphicsItem::setBorderWidth( qreal width )
 {
     d->m_borderWidth = width;
+    d->updateSize();
     update();
 }
 
@@ -135,6 +134,7 @@ void FrameGraphicsItem::setPadding( qreal width )
     else {
         d->m_padding = width;
     }
+    d->updateSize();
 }
 
 QBrush FrameGraphicsItem::borderBrush() const
@@ -181,8 +181,8 @@ QRectF FrameGraphicsItem::contentRect( const QPointF& position ) const
 
     QRectF contentRect = QRectF( position.x() + marginLeft + d->m_padding,
                                  position.y() + marginTop + d->m_padding,
-                                 size.width() - ( marginLeft + marginRight + 2.0 * d->m_padding ),
-                                 size.height() - ( marginTop + marginBottom + 2.0 * d->m_padding ) );
+                                 d->m_contentSize.width(),
+                                 d->m_contentSize.height() );
 
     return contentRect;
 }
@@ -194,7 +194,7 @@ QRectF FrameGraphicsItem::contentRect() const
 
 QSizeF FrameGraphicsItem::contentSize() const
 {
-    return contentRect().size();
+    return d->m_contentSize;
 }
 
 QRectF FrameGraphicsItem::paintedRect( const QPointF& position ) const
@@ -215,16 +215,8 @@ QRectF FrameGraphicsItem::paintedRect( const QPointF& position ) const
 
 void FrameGraphicsItem::setContentSize( const QSizeF& size )
 {
-    qreal marginTop = ( d->m_marginTop == 0.0 ) ? d->m_margin : d->m_marginTop;
-    qreal marginBottom = ( d->m_marginBottom == 0.0 ) ? d->m_margin : d->m_marginBottom;
-    qreal marginLeft = ( d->m_marginLeft == 0.0 ) ? d->m_margin : d->m_marginLeft;
-    qreal marginRight = ( d->m_marginRight == 0.0 ) ? d->m_margin : d->m_marginRight;
-
-    QSizeF totalSize = size;
-    totalSize += QSizeF( marginLeft + marginRight, marginTop + marginBottom );
-    totalSize += QSizeF( d->m_padding * 2, d->m_padding * 2 );
-
-    setSize( totalSize );
+    d->m_contentSize = size;
+    d->updateSize();
 }
 
 QPainterPath FrameGraphicsItem::backgroundShape() const

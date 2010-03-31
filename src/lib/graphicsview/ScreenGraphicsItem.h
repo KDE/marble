@@ -36,8 +36,6 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
     Q_DECLARE_FLAGS(GraphicsItemFlags, GraphicsItemFlag)
 
     explicit ScreenGraphicsItem( MarbleGraphicsItem *parent = 0 );
-    ScreenGraphicsItem( const QPointF& position, const QSizeF& size,
-                        MarbleGraphicsItem *parent = 0 );
 
     virtual ~ScreenGraphicsItem();
 

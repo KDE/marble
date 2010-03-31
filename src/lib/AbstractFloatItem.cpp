@@ -42,12 +42,14 @@ QPen         AbstractFloatItemPrivate::s_pen = QPen( Qt::black );
 
 AbstractFloatItem::AbstractFloatItem( const QPointF &point, const QSizeF &size )
     : RenderPlugin(),
-      FrameGraphicsItem( point, size ),
+      FrameGraphicsItem(),
       d( new AbstractFloatItemPrivate() )
 {
     setCacheMode( MarbleGraphicsItem::ItemCoordinateCache );
     setFrame( RectFrame );
     setPadding( 4.0 );
+    setContentSize( size );
+    setPosition( point );
 }
 
 AbstractFloatItem::~AbstractFloatItem()
