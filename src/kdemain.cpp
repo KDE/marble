@@ -240,22 +240,12 @@ int main ( int argc, char *argv[] )
     KApplication app;
     KGlobal::locale()->insertCatalog( "marble_qt" );
 
-    QString  marbleDataPath;
-    int      dataPathIndex = 0;
-
-    for ( int i = 1; i < argc - 1; ++i ) {
-        if ( strcmp( argv[ i ], "--marbleDataPath" ) == 0 ) {
-            dataPathIndex = i + 1;
-            marbleDataPath = argv[ dataPathIndex ];
-        }
-    }
-
     if ( args->isSet( "debug-info" ) ) {
         MarbleDebug::enable = true;
     } else {
         MarbleDebug::enable = false;
     }
-    
+
     MainWindow *window = new MainWindow();
     window->setAttribute( Qt::WA_DeleteOnClose, true );
     window->show();
@@ -294,7 +284,7 @@ int main ( int argc, char *argv[] )
     for ( int i = 0; i < args->count(); ++i ) {
 
         // FIXME: Use openUrl( args->url(i) ) instead?
-        if ( QFile::exists( args->arg( i ) ) && i != dataPathIndex )
+        if ( QFile::exists( args->arg( i ) ) )
             window->marbleControl()->addPlacemarkFile( args->arg( i ) );
     }
 
