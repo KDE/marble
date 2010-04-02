@@ -17,7 +17,7 @@ using namespace Marble;
 int main(int argc, char *argv[])
 {
     TCCoreApplication app( argc, argv );
-    if( argc < 4 ) {
+    if( argc < 5 ) {
     /*
             PREFIX: this is the prefix of the source directory
             INSTALLMAP: this is the map that you want to install - in the form MAPNAME/MAPNAME.jpg
