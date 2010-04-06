@@ -50,11 +50,11 @@ void OrsRoutingProvider::retrieveDirections(RouteSkeleton* route)
       preference = "Shortest";
       break;
     case RouteSkeleton::Bicycle:
-      unit = "M";
+      unit = 'M';
       preference = "Bicycle";
       break;
     case RouteSkeleton::Pedestrian:
-      unit = "M";
+      unit = 'M';
       preference = "Pedestrian";
       break;
     }

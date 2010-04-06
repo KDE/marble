@@ -8,8 +8,8 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_ROUTING_TARGET_INPUT_WIDGET_H
-#define MARBLE_ROUTING_TARGET_INPUT_WIDGET_H
+#ifndef ROUTINGINPUTWIDGET_H
+#define ROUTINGINPUTWIDGET_H
 
 #include "GeoDataCoordinates.h"
 
@@ -143,4 +143,4 @@ private:
 
 } // namespace Marble
 
-#endif // MARBLE_ROUTING_TARGET_INPUT_WIDGET_H
+#endif // ROUTINGINPUTWIDGET_H

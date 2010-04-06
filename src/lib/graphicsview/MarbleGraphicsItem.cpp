@@ -286,14 +286,14 @@ bool MarbleGraphicsItem::eventFilter( QObject *object, QEvent *e )
     if( p()->m_children ) {
         QList<QPointF> absolutePositions = p()->absolutePositions();
         
-        foreach( QPointF absolutePosition, absolutePositions ) {
+        foreach( const QPointF& absolutePosition, absolutePositions ) {
             QPoint shiftedPos = event->pos() - absolutePosition.toPoint();
             
             if ( QRect( QPoint( 0, 0 ), size().toSize() ).contains( shiftedPos ) ) {
                 foreach( MarbleGraphicsItem *child, *p()->m_children ) {
                     QList<QRectF> childRects = child->boundingRects();
                     
-                    foreach( QRectF childRect, childRects ) {
+                    foreach( const QRectF& childRect, childRects ) {
                         if( childRect.toRect().contains( shiftedPos ) ) {
                             if( child->eventFilter( object, e ) ) {
                                 return true;

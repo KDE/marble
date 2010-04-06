@@ -20,7 +20,6 @@
 #include "RoutingModel.h"
 #include "RoutingManager.h"
 #include "RoutingLayer.h"
-#include "RoutingModel.h"
 #include "RoutingProxyModel.h"
 #include "RoutingInputWidget.h"
 #include "RouteSkeleton.h"

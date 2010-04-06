@@ -427,12 +427,13 @@ void MainWindow::printMapScreenShot()
 {
 #ifndef QT_NO_PRINTER
     QPrinter printer( QPrinter::HighResolution );
-    QPrintDialog printDialog( &printer, this );
+    QPointer<QPrintDialog> printDialog = new QPrintDialog( &printer, this );
 
-    if (printDialog.exec() == QDialog::Accepted) {
+    if (printDialog->exec() == QDialog::Accepted) {
         QPixmap mapPixmap = m_controlView->mapScreenShot();
         printPixmap( &printer, mapPixmap );
     }
+    delete printDialog;
 #endif    
 }
 
@@ -463,10 +464,11 @@ void MainWindow::printPreview()
 #ifndef QT_NO_PRINTER
     QPrinter printer( QPrinter::HighResolution );
 
-    QPrintPreviewDialog preview( &printer, this );
-    preview.setWindowFlags ( Qt::Window );
-    connect( &preview, SIGNAL( paintRequested( QPrinter * ) ), SLOT( paintPrintPreview( QPrinter * ) ) );
-    preview.exec();
+    QPointer<QPrintPreviewDialog> preview = new QPrintPreviewDialog( &printer, this );
+    preview->setWindowFlags ( Qt::Window );
+    connect( preview, SIGNAL( paintRequested( QPrinter * ) ), SLOT( paintPrintPreview( QPrinter * ) ) );
+    preview->exec();
+    delete preview;
 #endif
 }
 
