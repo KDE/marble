@@ -4,6 +4,9 @@
 // This program is free software licensed under the GNU LGPL. You can
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
+//
+// Copyright 2008      Shashank Singh <shashank.personal@gmail.com>
+//
 
 #include "jsonparser.h"
 

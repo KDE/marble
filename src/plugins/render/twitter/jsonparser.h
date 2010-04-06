@@ -5,8 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-//
-// Author:  <Shashank Singh>, (C) 2008
+// Copyright 2008      Shashank Singh <shashank.personal@gmail.com>
 //
 
 #ifndef JSONPARSER_H
