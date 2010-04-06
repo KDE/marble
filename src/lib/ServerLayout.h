@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2010,2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 #ifndef MARBLE_SERVERLAYOUT_H
@@ -112,6 +112,18 @@ private:
     qreal latBottom( const Marble::TileId &tileId ) const;
     qreal latTop( const Marble::TileId &tileId ) const;
     QString epsgCode() const;
+};
+
+class QuadTreeServerLayout : public ServerLayout
+{
+public:
+    QuadTreeServerLayout( GeoSceneTexture* textureLayer );
+    virtual QUrl downloadUrl( const QUrl &, const Marble::TileId & ) const;
+
+    virtual QString name() const;
+
+private:
+    static QString encodeQuadTree( const Marble::TileId & );
 };
 
 }

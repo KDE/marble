@@ -5,7 +5,7 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2010 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+// Copyright 2010,2011 Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 //
 
 // Own
@@ -193,6 +193,40 @@ QString WmsServerLayout::epsgCode() const
 
     Q_ASSERT( false ); // not reached
     return QString();
+}
+
+QuadTreeServerLayout::QuadTreeServerLayout( GeoSceneTexture *textureLayer )
+    : ServerLayout( textureLayer )
+{
+}
+
+QUrl QuadTreeServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &id ) const
+{
+    QString urlStr = prototypeUrl.toString();
+
+    urlStr.replace( "{quadIndex}", encodeQuadTree( id ) );
+
+    return QUrl( urlStr );
+}
+
+QString QuadTreeServerLayout::name() const
+{
+    return "QuadTree";
+}
+
+QString QuadTreeServerLayout::encodeQuadTree( const Marble::TileId &id )
+{
+    QString tileNum;
+
+    for ( int i = id.zoomLevel(); i >= 0; i-- ) {
+        const int tileX = (id.x() >> i) % 2;
+        const int tileY = (id.y() >> i) % 2;
+        const int num = ( 2 * tileY ) + tileX;
+
+        tileNum += QString::number( num );
+    }
+
+    return tileNum;
 }
 
 }

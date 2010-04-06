@@ -76,6 +76,8 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
             serverLayout = new CustomServerLayout( texture );
         else if ( modeStr == "WebMapService" )
             serverLayout = new WmsServerLayout( texture );
+        else if ( modeStr == "QuadTree" )
+            serverLayout = new QuadTreeServerLayout( texture );
         else {
             storageLayout = GeoSceneTexture::Marble;
             serverLayout = new MarbleServerLayout( texture );
