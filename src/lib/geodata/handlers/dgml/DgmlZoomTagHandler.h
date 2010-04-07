@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef DgmlZoomTagHandler_h
-#define DgmlZoomTagHandler_h
+#ifndef MARBLE_DGML_ZOOMTAGHANDLER_H
+#define MARBLE_DGML_ZOOMTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -38,4 +38,4 @@ class DgmlZoomTagHandler : public GeoTagHandler
 }
 }
 
-#endif // DgmlZoomTagHandler_h
+#endif

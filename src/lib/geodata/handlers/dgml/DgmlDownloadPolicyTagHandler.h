@@ -13,8 +13,8 @@
 // You should have received a copy of the GNU Lesser General Public 
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef MARBLE_DGML_DOWNLOAD_POLICY_TAG_HANDLER_H
-#define MARBLE_DGML_DOWNLOAD_POLICY_TAG_HANDLER_H
+#ifndef MARBLE_DGML_DOWNLOADPOLICYTAGHANDLER_H
+#define MARBLE_DGML_DOWNLOADPOLICYTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 

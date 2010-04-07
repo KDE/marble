@@ -20,8 +20,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef DgmlAttributeDictionary_h
-#define DgmlAttributeDictionary_h
+#ifndef MARBLE_DGML_ATTRIBUTEDICTIONARY_H
+#define MARBLE_DGML_ATTRIBUTEDICTIONARY_H
 
 namespace Marble
 {
@@ -65,4 +65,4 @@ namespace dgml
 }
 }
 
-#endif // DgmlAttributeDictionary_h
+#endif

@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef DgmlElementDictionary_h
-#define DgmlElementDictionary_h
+#ifndef MARBLE_DGML_ELEMENTDICTIONARY_H
+#define MARBLE_DGML_ELEMENTDICTIONARY_H
 
 #include <marble_export.h>
 
@@ -84,4 +84,4 @@ namespace dgml
 
 }
 
-#endif // DgmlElementDictionary_h
+#endif

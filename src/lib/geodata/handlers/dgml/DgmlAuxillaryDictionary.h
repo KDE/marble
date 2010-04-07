@@ -20,8 +20,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef DgmlAuxillaryDictionary_h
-#define DgmlAuxillaryDictionary_h
+#ifndef MARBLE_DGML_AUXILLARYDICTIONARY_H
+#define MARBLE_DGML_AUXILLARYDICTIONARY_H
 
 // Lists all known DGML 2.0 auxiliary strings
 
@@ -37,4 +37,4 @@ namespace dgml
 }
 }
 
-#endif // DgmlAuxillaryDictionary_h
+#endif
