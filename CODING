@@ -49,6 +49,23 @@ Class names and Variables
 
    All other classes should not have the "Marble" prefix. 
 
+ - All header files should contain an include guard which prevents from
+   including a header file more than once. The include guard name consists
+   of the Marble namespace prefix (if the class is part of the Marble 
+   namespace), the name of the class and an H. The name is in full upper case
+   and separated with an underscore.
+
+   Correct:
+      #ifndef MARBLE_ROUTINGWIDGET_H
+      #define MARBLE_ROUTINGWIDGET_H
+      ...
+      #endif // MARBLE_ROUTINGWIDGET_H
+
+   Wrong:
+      MARBLE_ROUTING_WIDGET_H
+      MARBLEROUTINGWIDGET_H
+      ROUTINGWIDGET_H
+      ROUTING_WIDGET_H
 
  - camelCasing with the first letter being lower cased should be used 
    for methods and variables (e.g. myMethodName()). Full 
