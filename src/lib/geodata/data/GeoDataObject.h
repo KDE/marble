@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GEODATAOBJECT_H
-#define GEODATAOBJECT_H
+#ifndef MARBLE_GEODATAOBJECT_H
+#define MARBLE_GEODATAOBJECT_H
 
 #include "geodata_export.h"
 
@@ -111,4 +111,4 @@ public:
 
 Q_DECLARE_METATYPE( Marble::GeoDataObject* )
 
-#endif // GEODATAOBJECT_H
+#endif

@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GEODATASTYLE_H
-#define GEODATASTYLE_H
+#ifndef MARBLE_GEODATASTYLE_H
+#define MARBLE_GEODATASTYLE_H
 
 
 #include <QtCore/QMetaType>
@@ -109,4 +109,4 @@ class GEODATA_EXPORT GeoDataStyle : public GeoDataStyleSelector
 
 Q_DECLARE_METATYPE( Marble::GeoDataStyle* )
 
-#endif // GEODATASTYLE_H
+#endif

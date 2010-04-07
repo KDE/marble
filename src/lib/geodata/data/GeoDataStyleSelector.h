@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GEODATASTYLESELECTOR_H
-#define GEODATASTYLESELECTOR_H
+#ifndef MARBLE_GEODATASTYLESELECTOR_H
+#define MARBLE_GEODATASTYLESELECTOR_H
 
 
 #include <QtCore/QString>
@@ -79,4 +79,4 @@ private:
 
 }
 
-#endif // GEODATASTYLESELECTOR_H
+#endif

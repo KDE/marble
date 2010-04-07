@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GEODATAHOTSPOT_H
-#define GEODATAHOTSPOT_H
+#ifndef MARBLE_GEODATAHOTSPOT_H
+#define MARBLE_GEODATAHOTSPOT_H
 
 #include <QtCore/QPoint>
 
@@ -61,4 +61,4 @@ class GEODATA_EXPORT GeoDataHotSpot : public GeoDataObject
 
 }
 
-#endif // GEODATAHOTSPOT_H
+#endif

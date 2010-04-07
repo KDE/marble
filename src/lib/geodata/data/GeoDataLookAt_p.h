@@ -9,8 +9,8 @@
 // Copyright 2010      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef GEODATALOOKAT_P_H
-#define GEODATALOOKAT_P_H
+#ifndef MARBLE_GEODATALOOKAT_P_H
+#define MARBLE_GEODATALOOKAT_P_H
 
 // Marble
 #include "GeoDataCoordinates.h"

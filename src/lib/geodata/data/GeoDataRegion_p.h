@@ -8,8 +8,8 @@
 // Copyright 2009      Torsten Rahn <rahn@kde.org>
 //
 
-#ifndef GEODATAREGIONPRIVATE_H
-#define GEODATAREGIONPRIVATE_H
+#ifndef MARBLE_GEODATAREGIONPRIVATE_H
+#define MARBLE_GEODATAREGIONPRIVATE_H
 
 #include "GeoDataRegion.h"
 
@@ -93,4 +93,4 @@ class GeoDataRegionPrivate
 
 } // namespace Marble
 
-#endif //GEODATAREGIONPRIVATE_H
+#endif

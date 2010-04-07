@@ -22,8 +22,8 @@
 */
 
 
-#ifndef GEODATAFOLDER_H
-#define GEODATAFOLDER_H
+#ifndef MARBLE_GEODATAFOLDER_H
+#define MARBLE_GEODATAFOLDER_H
 
 
 #include "GeoDataContainer.h"
@@ -65,4 +65,4 @@ private:
 
 }
 
-#endif // GEODATAFOLDER_H
+#endif

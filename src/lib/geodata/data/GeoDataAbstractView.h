@@ -8,8 +8,8 @@
 // Copyright 2009      Gaurav Gupta <1989.gaurav@googlemail.com>
 //
 
-#ifndef GEODATAABSTRACTVIEW_H
-#define GEODATAABSTRACTVIEW_H
+#ifndef MARBLE_GEODATAABSTRACTVIEW_H
+#define MARBLE_GEODATAABSTRACTVIEW_H
 
 #include "GeoDataObject.h"
 

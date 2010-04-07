@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GEODATALATLONALTBOX_H
-#define GEODATALATLONALTBOX_H
+#ifndef MARBLE_GEODATALATLONALTBOX_H
+#define MARBLE_GEODATALATLONALTBOX_H
 
 
 #include "global.h"
@@ -138,4 +138,4 @@ bool GEODATA_EXPORT operator==( GeoDataLatLonAltBox const& lhs, GeoDataLatLonAlt
 
 }
 
-#endif // GEODATALATLONALTBOX
+#endif

@@ -8,8 +8,8 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-#ifndef GEODATACONTAINERPRIVATE_H
-#define GEODATACONTAINERPRIVATE_H
+#ifndef MARBLE_GEODATACONTAINERPRIVATE_H
+#define MARBLE_GEODATACONTAINERPRIVATE_H
 
 #include "GeoDataFeature_p.h"
 
@@ -47,4 +47,4 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
 
 } // namespace Marble
 
-#endif //GEODATACONTAINERPRIVATE_H
+#endif

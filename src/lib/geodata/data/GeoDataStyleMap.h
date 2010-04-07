@@ -9,8 +9,8 @@
 //
 
 
-#ifndef GEODATASTYLEMAP_H
-#define GEODATASTYLEMAP_H
+#ifndef MARBLE_GEODATASTYLEMAP_H
+#define MARBLE_GEODATASTYLEMAP_H
 
 
 #include <QtCore/QString>
@@ -82,4 +82,4 @@ class GEODATA_EXPORT GeoDataStyleMap : public GeoDataStyleSelector,
 
 }
 
-#endif // GeoDataStyleMap_H
+#endif

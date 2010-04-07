@@ -9,8 +9,8 @@
 //
 
 
-#ifndef GEODATALINESTYLE_H
-#define GEODATALINESTYLE_H
+#ifndef MARBLE_GEODATALINESTYLE_H
+#define MARBLE_GEODATALINESTYLE_H
 
 
 #include <QtGui/QFont>
@@ -82,4 +82,4 @@ class GEODATA_EXPORT GeoDataLineStyle : public GeoDataColorStyle
 
 }
 
-#endif // GeoDataLineStyle_H
+#endif

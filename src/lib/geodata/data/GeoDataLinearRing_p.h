@@ -8,8 +8,8 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-#ifndef GEODATALINEARRINGPRIVATE_H
-#define GEODATALINEARRINGPRIVATE_H
+#ifndef MARBLE_GEODATALINEARRINGPRIVATE_H
+#define MARBLE_GEODATALINEARRINGPRIVATE_H
 
 #include "GeoDataLineString_p.h"
 
@@ -50,4 +50,4 @@ class GeoDataLinearRingPrivate : public GeoDataLineStringPrivate
 
 } // namespace Marble
 
-#endif //GeoDataLinearRingPRIVATE_H
+#endif

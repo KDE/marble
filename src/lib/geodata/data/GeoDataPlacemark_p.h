@@ -8,8 +8,8 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-#ifndef GEODATAPLACEMARKPRIVATE_H
-#define GEODATAPLACEMARKPRIVATE_H
+#ifndef MARBLE_GEODATAPLACEMARKPRIVATE_H
+#define MARBLE_GEODATAPLACEMARKPRIVATE_H
 
 #include "GeoDataFeature_p.h"
 
@@ -96,4 +96,4 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
 
 } // namespace Marble
 
-#endif //GeoDataPlacemarkPrivate_H
+#endif

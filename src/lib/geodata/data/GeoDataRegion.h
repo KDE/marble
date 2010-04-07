@@ -9,8 +9,8 @@
 //
 
 
-#ifndef GEODATAREGION_H
-#define GEODATAREGION_H
+#ifndef MARBLE_GEODATAREGION_H
+#define MARBLE_GEODATAREGION_H
 
 #include "GeoDataObject.h"
 #include "GeoDataLatLonAltBox.h"
@@ -150,4 +150,4 @@ class GEODATA_EXPORT GeoDataRegion : public GeoDataObject
 
 }
 
-#endif // GEODATAREGION_H
+#endif

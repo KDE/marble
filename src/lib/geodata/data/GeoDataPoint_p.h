@@ -8,8 +8,8 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-#ifndef GEODATAPOINTPRIVATE_H
-#define GEODATAPOINTPRIVATE_H
+#ifndef MARBLE_GEODATAPOINTPRIVATE_H
+#define MARBLE_GEODATAPOINTPRIVATE_H
 
 #include "GeoDataGeometry_p.h"
 #include "GeoDataCoordinates_p.h"
@@ -40,4 +40,4 @@ class GeoDataPointPrivate : public GeoDataGeometryPrivate, public GeoDataCoordin
 
 } // namespace Marble
 
-#endif // GeoDataPointPRIVATE_H
+#endif

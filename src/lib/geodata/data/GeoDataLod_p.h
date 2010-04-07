@@ -8,8 +8,8 @@
 // Copyright 2009      Torsten Rahn <rahn@kde.org>
 //
 
-#ifndef GEODATALODPRIVATE_H
-#define GEODATALODPRIVATE_H
+#ifndef MARBLE_GEODATALODPRIVATE_H
+#define MARBLE_GEODATALODPRIVATE_H
 
 #include "GeoDataLod.h"
 
@@ -42,4 +42,4 @@ class GeoDataLodPrivate
 
 } // namespace Marble
 
-#endif //GEODATALODPRIVATE_H
+#endif

@@ -8,8 +8,8 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-#ifndef GEODATAMULTIGEOMETRYPRIVATE_H
-#define GEODATAMULTIGEOMETRYPRIVATE_H
+#ifndef MARBLE_GEODATAMULTIGEOMETRYPRIVATE_H
+#define MARBLE_GEODATAMULTIGEOMETRYPRIVATE_H
 
 #include "GeoDataGeometry_p.h"
 
@@ -46,4 +46,4 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
 
 } // namespace Marble
 
-#endif // GeoDataMultiGeometryPRIVATE_H
+#endif

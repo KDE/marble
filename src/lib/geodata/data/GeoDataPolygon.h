@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GEODATAPOLYGON_H
-#define GEODATAPOLYGON_H
+#ifndef MARBLE_GEODATAPOLYGON_H
+#define MARBLE_GEODATAPOLYGON_H
 
 #include <QtCore/QVector>
 

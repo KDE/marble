@@ -11,8 +11,8 @@
 //
 
 
-#ifndef GEODATACONTAINER_H
-#define GEODATACONTAINER_H
+#ifndef MARBLE_GEODATACONTAINER_H
+#define MARBLE_GEODATACONTAINER_H
 
 #include <QtCore/QVector>
 
@@ -147,4 +147,4 @@ private:
 
 }
 
-#endif // GEODATACONTAINER_H
+#endif

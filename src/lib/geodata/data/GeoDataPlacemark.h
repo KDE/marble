@@ -11,8 +11,8 @@
 //
 
 
-#ifndef GEODATAPLACEMARK_H
-#define GEODATAPLACEMARK_H
+#ifndef MARBLE_GEODATAPLACEMARK_H
+#define MARBLE_GEODATAPLACEMARK_H
 
 
 #include <QtCore/QChar>
@@ -194,4 +194,4 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
 
 }
 
-#endif // GEODATAPLACEMARK_H
+#endif

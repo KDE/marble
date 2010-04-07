@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GEODATALABELSTYLE_H
-#define GEODATALABELSTYLE_H
+#ifndef MARBLE_GEODATALABELSTYLE_H
+#define MARBLE_GEODATALABELSTYLE_H
 
 
 #include <QtGui/QFont>
@@ -106,4 +106,4 @@ class GEODATA_EXPORT GeoDataLabelStyle : public GeoDataColorStyle
 
 }
 
-#endif // GEODATALABELSTYLE_H
+#endif

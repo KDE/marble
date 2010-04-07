@@ -9,8 +9,8 @@
 // Copyright 2010      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef GEODATALOOKAT_H
-#define GEODATALOOKAT_H
+#ifndef MARBLE_GEODATALOOKAT_H
+#define MARBLE_GEODATALOOKAT_H
 
 #include "geodata_export.h"
 #include "GeoDataAbstractView.h"

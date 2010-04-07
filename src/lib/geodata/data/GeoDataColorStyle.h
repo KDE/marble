@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GEODATACOLORSTYLE_H
-#define GEODATACOLORSTYLE_H
+#ifndef MARBLE_GEODATACOLORSTYLE_H
+#define MARBLE_GEODATACOLORSTYLE_H
 
 
 #include <QtGui/QColor>
@@ -113,4 +113,4 @@ class GEODATA_EXPORT GeoDataColorStyle : public GeoDataObject
 
 }
 
-#endif // GEODATACOLORSTYLE_H
+#endif

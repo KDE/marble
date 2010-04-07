@@ -11,8 +11,8 @@
 //
 
 
-#ifndef GEODATACOORDINATES_H
-#define GEODATACOORDINATES_H
+#ifndef MARBLE_GEODATACOORDINATES_H
+#define MARBLE_GEODATACOORDINATES_H
 
 #include <QtCore/QCoreApplication>
 #include <QtCore/QMetaType>
@@ -311,4 +311,4 @@ class GEODATA_EXPORT GeoDataCoordinates
 
 Q_DECLARE_METATYPE( Marble::GeoDataCoordinates )
 
-#endif // GEODATACOORDINATES_H
+#endif

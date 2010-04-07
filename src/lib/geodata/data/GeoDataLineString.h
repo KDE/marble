@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GEODATALINESTRING_H
-#define GEODATALINESTRING_H
+#ifndef MARBLE_GEODATALINESTRING_H
+#define MARBLE_GEODATALINESTRING_H
 
 #include <QtCore/QFlags>
 #include <QtCore/QVector>
@@ -369,4 +369,4 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 
 }
 
-#endif // GEODATALINESTRING_H
+#endif

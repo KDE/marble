@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GEODATALATLONBOX_H
-#define GEODATALATLONBOX_H
+#ifndef MARBLE_GEODATALATLONBOX_H
+#define MARBLE_GEODATALATLONBOX_H
 
 
 #include "global.h"
@@ -167,4 +167,4 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
 
 }
 
-#endif // GEODATALATLONBOX
+#endif

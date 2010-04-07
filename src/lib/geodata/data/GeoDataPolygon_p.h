@@ -8,8 +8,8 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-#ifndef GEODATAPOLYGONPRIVATE_H
-#define GEODATAPOLYGONPRIVATE_H
+#ifndef MARBLE_GEODATAPOLYGONPRIVATE_H
+#define MARBLE_GEODATAPOLYGONPRIVATE_H
 
 #include "GeoDataGeometry_p.h"
 
@@ -59,4 +59,4 @@ class GeoDataPolygonPrivate : public GeoDataGeometryPrivate
 
 } // namespace Marble
 
-#endif // GeoDataPolygonPRIVATE_H
+#endif

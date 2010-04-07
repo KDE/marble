@@ -8,8 +8,8 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-#ifndef GEODATAGEOMETRYPRIVATE_H
-#define GEODATAGEOMETRYPRIVATE_H
+#ifndef MARBLE_GEODATAGEOMETRYPRIVATE_H
+#define MARBLE_GEODATAGEOMETRYPRIVATE_H
 
 #include <QtCore/QString>
 #include <QtCore/QAtomicInt>
@@ -67,4 +67,4 @@ class GeoDataGeometryPrivate
 
 } // namespace Marble
 
-#endif //GeoDataGeometryPRIVATE_H
+#endif

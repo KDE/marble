@@ -11,8 +11,8 @@
 //
 
 
-#ifndef GEODATAPOINT_H
-#define GEODATAPOINT_H
+#ifndef MARBLE_GEODATAPOINT_H
+#define MARBLE_GEODATAPOINT_H
 
 #include <QtCore/QMetaType>
 #include <QtCore/QVector>
@@ -87,4 +87,4 @@ class GEODATA_EXPORT GeoDataPoint : public GeoDataCoordinates,
 
 Q_DECLARE_METATYPE( Marble::GeoDataPoint )
 
-#endif // GEODATAPOINT_H
+#endif

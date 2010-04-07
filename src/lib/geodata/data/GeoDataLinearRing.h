@@ -9,8 +9,8 @@
 //
 
 
-#ifndef GEODATALINEARRING_H
-#define GEODATALINEARRING_H
+#ifndef MARBLE_GEODATALINEARRING_H
+#define MARBLE_GEODATALINEARRING_H
 
 
 #include "geodata_export.h"
@@ -124,4 +124,4 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
 
 }
 
-#endif // GEODATALINEARRING_H
+#endif

@@ -9,8 +9,8 @@
 //
 
 
-#ifndef GEODATALOD_H
-#define GEODATALOD_H
+#ifndef MARBLE_GEODATALOD_H
+#define MARBLE_GEODATALOD_H
 
 #include "GeoDataObject.h"
 
@@ -157,4 +157,4 @@ class GEODATA_EXPORT GeoDataLod : public GeoDataObject
 
 }
 
-#endif // GEODATALOD_H
+#endif

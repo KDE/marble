@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GEODATAFEATURE_H
-#define GEODATAFEATURE_H
+#ifndef MARBLE_GEODATAFEATURE_H
+#define MARBLE_GEODATAFEATURE_H
 
 
 #include <QtCore/QString>
@@ -345,4 +345,4 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
 }
 
-#endif // GEODATAFEATURE_H
+#endif

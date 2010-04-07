@@ -21,8 +21,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GeoDataDocument_h
-#define GeoDataDocument_h
+#ifndef MARBLE_GEODATADOCUMENT_H
+#define MARBLE_GEODATADOCUMENT_H
 
 #include <QtCore/QHash>
 #include <QtCore/QMetaType>
@@ -135,4 +135,4 @@ private:
 
 }
 Q_DECLARE_METATYPE(Marble::GeoDataDocument*)
-#endif // GeoDataDocument_h
+#endif

@@ -8,8 +8,8 @@
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-#ifndef GEODATACOORDINATES_P_H
-#define GEODATACOORDINATES_P_H
+#ifndef MARBLE_GEODATACOORDINATES_P_H
+#define MARBLE_GEODATACOORDINATES_P_H
 
 #include "Quaternion.h"
 #include <QtCore/QAtomicInt>

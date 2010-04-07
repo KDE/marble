@@ -10,8 +10,8 @@
 //
 
 
-#ifndef GEODATAICONSTYLE_H
-#define GEODATAICONSTYLE_H
+#ifndef MARBLE_GEODATAICONSTYLE_H
+#define MARBLE_GEODATAICONSTYLE_H
 
 
 #include <QtGui/QPixmap>
@@ -63,4 +63,4 @@ class GEODATA_EXPORT GeoDataIconStyle : public GeoDataColorStyle
 
 }
 
-#endif // GEODATAICONSTYLE_H
+#endif

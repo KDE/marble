@@ -9,8 +9,8 @@
 //
 
 
-#ifndef GEODATAMULTIGEOMETRY_H
-#define GEODATAMULTIGEOMETRY_H
+#ifndef MARBLE_GEODATAMULTIGEOMETRY_H
+#define MARBLE_GEODATAMULTIGEOMETRY_H
 
 
 #include "geodata_export.h"
@@ -76,4 +76,4 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
 
 }
 
-#endif // GEODATAMULTIGEOMETRY_H
+#endif
