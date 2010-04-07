@@ -10,8 +10,8 @@
 //
 
 
-#ifndef MERCATORPROJECTION_H
-#define MERCATORPROJECTION_H
+#ifndef MARBLE_MERCATORPROJECTION_H
+#define MARBLE_MERCATORPROJECTION_H
 
 
 /** @file
@@ -111,4 +111,4 @@ class MercatorProjection : public AbstractProjection
 
 }
 
-#endif // MERCATORPROJECTION_H
+#endif

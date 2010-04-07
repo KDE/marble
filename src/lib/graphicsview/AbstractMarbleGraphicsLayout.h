@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef ABSTRACTMARBLEGRAPHICSLAYOUT_H
-#define ABSTRACTMARBLEGRAPHICSLAYOUT_H
+#ifndef MARBLE_ABSTRACTMARBLEGRAPHICSLAYOUT_H
+#define MARBLE_ABSTRACTMARBLEGRAPHICSLAYOUT_H
 
 
 #include "marble_export.h"
@@ -34,4 +34,4 @@ class MARBLE_EXPORT AbstractMarbleGraphicsLayout
 
 }
 
-#endif // ABSTRACTMARBLEGRAPHICSLAYOUT_H
+#endif

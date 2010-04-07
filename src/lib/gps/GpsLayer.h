@@ -9,8 +9,8 @@
 //
 
 
-#ifndef GPSLAYER_H
-#define GPSLAYER_H
+#ifndef MARBLE_GPSLAYER_H
+#define MARBLE_GPSLAYER_H
 
 #include "AbstractLayer.h"
 

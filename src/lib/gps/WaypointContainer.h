@@ -7,8 +7,8 @@
 //
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
 //
-#ifndef WAYPOINTCONTAINER_H
-#define WAYPOINTCONTAINER_H
+#ifndef MARBLE_WAYPOINTCONTAINER_H
+#define MARBLE_WAYPOINTCONTAINER_H
 
 #include "AbstractLayerContainer.h"
 
@@ -39,4 +39,4 @@ class WaypointContainer : public virtual AbstractLayerContainer
 
 }
 
-#endif //WAYPOINTCONTAINER_H
+#endif

@@ -8,8 +8,8 @@
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
 //
 
-#ifndef TRACKSEG_H
-#define TRACKSEG_H
+#ifndef MARBLE_TRACKSEGMENT_H
+#define MARBLE_TRACKSEGMENT_H
 
 #include "AbstractLayerContainer.h"
 #include "AbstractLayerData.h"
@@ -41,4 +41,3 @@ class TrackSegment : public AbstractLayerContainer,
 }
 
 #endif
-

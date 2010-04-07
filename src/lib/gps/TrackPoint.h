@@ -9,8 +9,8 @@
 //
 
 
-#ifndef TRACKPOINT_H
-#define TRACKPOINT_H
+#ifndef MARBLE_TRACKPOINT_H
+#define MARBLE_TRACKPOINT_H
 
 
 #include "Waypoint.h"

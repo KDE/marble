@@ -9,8 +9,8 @@
 //
 
 
-#ifndef ABSTRACTLAYERDATA_H
-#define ABSTRACTLAYERDATA_H
+#ifndef MARBLE_ABSTRACTLAYERDATA_H
+#define MARBLE_ABSTRACTLAYERDATA_H
 
 #include "GeoDataCoordinates.h"
 #include "AbstractLayerInterface.h"
@@ -166,5 +166,4 @@ class AbstractLayerData : public virtual AbstractLayerInterface
 
 }
 
-#endif //ABSTRACTLAYERDATA_H
-
+#endif

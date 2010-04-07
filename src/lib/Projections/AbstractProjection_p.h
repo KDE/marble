@@ -8,8 +8,8 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-#ifndef ABSTRACTPROJECTIONPRIVATE_H
-#define ABSTRACTPROJECTIONPRIVATE_H
+#ifndef MARBLE_ABSTRACTPROJECTIONPRIVATE_H
+#define MARBLE_ABSTRACTPROJECTIONPRIVATE_H
 
 
 namespace Marble
@@ -60,4 +60,4 @@ class AbstractProjectionPrivate
 
 } // namespace Marble
 
-#endif //ABSTRACTPROJECTIONPRIVATE_H
+#endif

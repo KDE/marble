@@ -7,8 +7,8 @@
 //
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
-#ifndef TRACKCONTAINER_H
-#define TRACKCONTAINER_H
+#ifndef MARBLE_TRACKCONTAINER_H
+#define MARBLE_TRACKCONTAINER_H
 
 
 #include "AbstractLayerContainer.h"

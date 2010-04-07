@@ -9,8 +9,8 @@
 //
 
 
-#ifndef ABSTRACTLAYERCONTAINER_H
-#define ABSTRACTLAYERCONTAINER_H
+#ifndef MARBLE_ABSTRACTLAYERCONTAINER_H
+#define MARBLE_ABSTRACTLAYERCONTAINER_H
 
 
 #include <QtCore/QVector>
@@ -179,5 +179,4 @@ class AbstractLayerContainer : public QVector<AbstractLayerData*>,
 
 }
 
-#endif //ABSTRACTLAYERCONTAINER_H
-
+#endif

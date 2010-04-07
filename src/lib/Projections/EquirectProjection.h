@@ -10,8 +10,8 @@
 //
 
 
-#ifndef EQUIRECTPROJECTION_H
-#define EQUIRECTPROJECTION_H
+#ifndef MARBLE_EQUIRECTPROJECTION_H
+#define MARBLE_EQUIRECTPROJECTION_H
 
 
 /** @file
@@ -112,4 +112,4 @@ class EquirectProjection : public AbstractProjection
 
 }
 
-#endif // EQUIRECTPROJECTION_H
+#endif

@@ -10,8 +10,8 @@
 //
 
 
-#ifndef SPHERICALPROJECTION_H
-#define SPHERICALPROJECTION_H
+#ifndef MARBLE_SPHERICALPROJECTION_H
+#define MARBLE_SPHERICALPROJECTION_H
 
 
 /** @file
@@ -111,4 +111,4 @@ class SphericalProjection : public AbstractProjection
 
 }
 
-#endif // SPHERICALPROJECTION_H
+#endif

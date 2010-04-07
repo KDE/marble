@@ -10,8 +10,8 @@
 //
 
 
-#ifndef ABSTRACTPROJECTION_H
-#define ABSTRACTPROJECTION_H
+#ifndef MARBLE_ABSTRACTPROJECTION_H
+#define MARBLE_ABSTRACTPROJECTION_H
 
 
 /** @file
@@ -250,4 +250,4 @@ class MARBLE_EXPORT AbstractProjection
 
 }
 
-#endif // ABSTRACTPROJECTION_H
+#endif

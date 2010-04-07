@@ -9,8 +9,8 @@
 //
 
 
-#ifndef GPXFILEMODEL_H
-#define GPXFILEMODEL_H
+#ifndef MARBLE_GPXFILEMODEL_H
+#define MARBLE_GPXFILEMODEL_H
 
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QModelIndex>

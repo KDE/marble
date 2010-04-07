@@ -7,8 +7,8 @@
 //
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
 //
-#ifndef ROUTE_H
-#define ROUTE_H
+#ifndef MARBLE_ROUTE_H
+#define MARBLE_ROUTE_H
 
 #include "AbstractLayerContainer.h"
 #include "AbstractLayerData.h"
@@ -48,4 +48,4 @@ class Route : public AbstractLayerContainer, public GpsElement,
 
 }
 
-#endif //ROUTE_H
+#endif

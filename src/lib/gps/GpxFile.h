@@ -8,8 +8,8 @@
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
 
-#ifndef GPXFILE_H
-#define GPXFILE_H
+#ifndef MARBLE_GPXFILE_H
+#define MARBLE_GPXFILE_H
 
 #include <QtCore/QMetaType>
 #include <QtCore/QString>

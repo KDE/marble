@@ -11,8 +11,8 @@
 //
 
 
-#ifndef ABSTRACTLAYER_H
-#define ABSTRACTLAYER_H
+#ifndef MARBLE_ABSTRACTLAYER_H
+#define MARBLE_ABSTRACTLAYER_H
 
 
 // WARNING: This class is obsolete and will be removed, so do not use it
@@ -174,5 +174,4 @@ class AbstractLayer: public QObject
 
 }
 
-#endif //ABSTRACTLAYER_H
-
+#endif

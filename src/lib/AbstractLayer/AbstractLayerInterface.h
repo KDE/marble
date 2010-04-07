@@ -7,8 +7,8 @@
 //
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
-#ifndef ABSTRACTLAYERINTERFACE_H
-#define ABSTRACTLAYERINTERFACE_H
+#ifndef MARBLE_ABSTRACTLAYERINTERFACE_H
+#define MARBLE_ABSTRACTLAYERINTERFACE_H
 
 #include <QtCore/QTextStream>
 

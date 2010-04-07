@@ -8,8 +8,8 @@
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
 //
 
-#ifndef GPXSAX_H
-#define GPXSAX_H
+#ifndef MARBLE_GPXSAX_H
+#define MARBLE_GPXSAX_H
 
 
 #include <QtXml/QXmlDefaultHandler>

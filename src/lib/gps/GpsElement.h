@@ -8,8 +8,8 @@
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
-#ifndef GPSELEMENT_H
-#define GPSELEMENT_H
+#ifndef MARBLE_GPSELEMENT_H
+#define MARBLE_GPSELEMENT_H
 
 #include <QtCore/QString>
 #include <QtCore/QUrl>
@@ -152,4 +152,4 @@ class GpsElement
 
 }
 
-#endif //GPSELEMENT_H
+#endif

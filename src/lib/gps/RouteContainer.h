@@ -8,8 +8,8 @@
 // Copyright 2007      Andrew Manson  <g.real.ate@gmail.com>
 //
 
-#ifndef ROUTECONTAINER_H
-#define ROUTECONTAINER_H
+#ifndef MARBLE_ROUTECONTAINER_H
+#define MARBLE_ROUTECONTAINER_H
 
 
 #include "AbstractLayerContainer.h"

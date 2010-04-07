@@ -8,8 +8,8 @@
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
-#ifndef WAYPOINT_H
-#define WAYPOINT_H
+#ifndef MARBLE_WAYPOINT_H
+#define MARBLE_WAYPOINT_H
 
 #include "AbstractLayerData.h"
 #include "GpsElement.h"
@@ -284,4 +284,4 @@ class Waypoint : public AbstractLayerData, public GpsElement
 
 }
 
-#endif //WAYPOINT_H
+#endif
