@@ -20,8 +20,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GeoDocument_h
-#define GeoDocument_h
+#ifndef MARBLE_GEODOCUMENT_H
+#define MARBLE_GEODOCUMENT_H
 
 #include <QtCore/QString>
 
@@ -66,4 +66,4 @@ protected:
 
 }
 
-#endif // GeoDocument_h
+#endif

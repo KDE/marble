@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GeoParser_h
-#define GeoParser_h
+#ifndef MARBLE_GEOPARSER_H
+#define MARBLE_GEOPARSER_H
 
 #include <QtCore/QStack>
 #include <QtXml/QXmlStreamReader>
@@ -140,4 +140,4 @@ private:
 
 }
 
-#endif // GeoParser_h
+#endif

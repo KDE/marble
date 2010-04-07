@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GeoTagHandler_h
-#define GeoTagHandler_h
+#ifndef MARBLE_GEOTAGHANDLER_H
+#define MARBLE_GEOTAGHANDLER_H
 
 #include <QtCore/QHash>
 #include "marble_export.h"
@@ -87,4 +87,4 @@ public:
 
 }
 
-#endif // GeoTagHandler_h
+#endif

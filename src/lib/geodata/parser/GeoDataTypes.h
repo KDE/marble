@@ -20,8 +20,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GeoDataTypes_h
-#define GeoDataTypes_h
+#ifndef MARBLE_GEODATATYPES_H
+#define MARBLE_GEODATATYPES_H
 
 namespace Marble
 {
@@ -64,4 +64,4 @@ extern const char* GeoDataSyleMapType;
 
 }
 
-#endif // GeoDataTypes_h
+#endif

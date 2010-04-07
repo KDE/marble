@@ -18,8 +18,8 @@
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
-#ifndef GeoOnfParser_h
-#define GeoOnfParser_h
+#ifndef MARBLE_GEOONFPARSER_H
+#define MARBLE_GEOONFPARSER_H
 
 #include <geodata_export.h>
 #include "GeoParser.h"

@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GeoSceneParser_h
-#define GeoSceneParser_h
+#ifndef MARBLE_GEOSCENEPARSER_H
+#define MARBLE_GEOSCENEPARSER_H
 
 #include <geodata_export.h>
 #include "GeoParser.h"
@@ -54,4 +54,4 @@ GeoSceneDocument* geoSceneDoc(GeoParser& parser);
 
 }
 
-#endif // GeoSceneParser_h
+#endif
