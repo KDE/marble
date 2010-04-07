@@ -9,9 +9,8 @@
 // Copyright 2008      Inge Wallin      <inge@lysator.liu.se>
 //
 
-
-#ifndef MERCATORSCANLINETEXTUREMAPPER_H
-#define MERCATORSCANLINETEXTUREMAPPER_H
+#ifndef MARBLE_MERCATORSCANLINETEXTUREMAPPER_H
+#define MARBLE_MERCATORSCANLINETEXTUREMAPPER_H
 
 
 #include "AbstractScanlineTextureMapper.h"

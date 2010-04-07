@@ -9,9 +9,8 @@
 // Copyright 2008 Inge Wallin  <inge@lysator.liu.se>
 //
 
-
-#ifndef MARBLE_RENDER_PLUGIN_H
-#define MARBLE_RENDER_PLUGIN_H
+#ifndef MARBLE_RENDERPLUGIN_H
+#define MARBLE_RENDERPLUGIN_H
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -150,4 +149,4 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
     virtual RenderPlugin* pluginInstance() { return new T(); };
 }
 
-#endif // MARBLE_RENDER_PLUGIN_H
+#endif

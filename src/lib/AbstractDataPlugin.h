@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef ABSTRACTDATAPLUGIN_H
-#define ABSTRACTDATAPLUGIN_H
+#ifndef MARBLE_ABSTRACTDATAPLUGIN_H
+#define MARBLE_ABSTRACTDATAPLUGIN_H
 
 // Marble
 #include "marble_export.h"
@@ -127,4 +127,4 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
     
 }
 
-#endif // PANORAMIOMODEL_H
+#endif

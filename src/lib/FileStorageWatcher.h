@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef FILESTORAGEWATCHER_H
-#define FILESTORAGEWATCHER_H
+#ifndef MARBLE_FILESTORAGEWATCHER_H
+#define MARBLE_FILESTORAGEWATCHER_H
 
 #include <QtCore/QThread>
 #include <QtCore/QMutex>
@@ -181,4 +181,4 @@ class FileStorageWatcher : public QThread
 
 }
 
-#endif // FILESTORAGEWATCHER_H
+#endif

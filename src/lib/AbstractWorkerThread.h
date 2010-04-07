@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef ABSTRACTWORKERTHREAD_H
-#define ABSTRACTWORKERTHREAD_H
+#ifndef MARBLE_ABSTRACTWORKERTHREAD_H
+#define MARBLE_ABSTRACTWORKERTHREAD_H
 
 // Marble
 #include "marble_export.h"
@@ -55,4 +55,4 @@ class MARBLE_EXPORT AbstractWorkerThread : public QThread
 
 }
 
-#endif // ABSTRACTWORKERTHREAD_H
+#endif

@@ -8,9 +8,8 @@
 // Copyright 2008 Pino Toscano <pino@kde.org>
 //
 
-
-#ifndef MARBLENETWORKPLUGININTERFACE_H
-#define MARBLENETWORKPLUGININTERFACE_H
+#ifndef MARBLE_NETWORKPLUGININTERFACE_H
+#define MARBLE_NETWORKPLUGININTERFACE_H
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -44,4 +43,4 @@ class NetworkPluginInterface: public PluginInterface
 
 Q_DECLARE_INTERFACE( Marble::NetworkPluginInterface, "org.kde.Marble.NetworkPluginInterface/1.00" )
 
-#endif // MARBLENETWORKPLUGININTERFACE_H
+#endif

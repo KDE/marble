@@ -8,8 +8,8 @@
 // Copyright 2007      Tobias Koenig  <tokoe@kde.org>
 //
 
-#ifndef DISCCACHE_H
-#define DISCCACHE_H
+#ifndef MARBLE_DISCCACHE_H
+#define MARBLE_DISCCACHE_H
 
 #include <QtCore/QDateTime>
 #include <QtCore/QMap>

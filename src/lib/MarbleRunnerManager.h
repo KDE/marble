@@ -18,8 +18,8 @@
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MARBLERUNNERMANAGER_H
-#define MARBLERUNNERMANAGER_H
+#ifndef MARBLE_MARBLERUNNERMANAGER_H
+#define MARBLE_MARBLERUNNERMANAGER_H
 
 #include <QtCore/QObject>
 #include <QtCore/QVector>

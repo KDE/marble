@@ -9,9 +9,8 @@
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef TILECREATOR_H
-#define TILECREATOR_H
+#ifndef MARBLE_TILECREATOR_H
+#define MARBLE_TILECREATOR_H
 
 
 #include <QtCore/QString>

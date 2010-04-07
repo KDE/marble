@@ -9,9 +9,8 @@
 // Copyright 2007-2008 Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef VECTORMAP_H
-#define VECTORMAP_H
+#ifndef MARBLE_VECTORMAP_H
+#define MARBLE_VECTORMAP_H
 
 #include <QtCore/QPointF>
 #include <QtGui/QPen>
@@ -127,4 +126,4 @@ class VectorMap : public ScreenPolygon::Vector
 
 }
 
-#endif // VECTORMAP_H
+#endif

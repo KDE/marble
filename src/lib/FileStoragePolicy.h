@@ -8,8 +8,8 @@
 // Copyright 2007      Tobias Koenig <tokoe@kde.org>
 //
 
-#ifndef FILESTORAGEPOLICY_H
-#define FILESTORAGEPOLICY_H
+#ifndef MARBLE_FILESTORAGEPOLICY_H
+#define MARBLE_FILESTORAGEPOLICY_H
 
 #include "StoragePolicy.h"
 

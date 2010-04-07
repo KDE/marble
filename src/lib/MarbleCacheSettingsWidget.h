@@ -9,9 +9,8 @@
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-
-#ifndef MARBLECACHESETTINGSWIDGET_H
-#define MARBLECACHESETTINGSWIDGET_H
+#ifndef MARBLE_MARBLECACHESETTINGSWIDGET_H
+#define MARBLE_MARBLECACHESETTINGSWIDGET_H
 
 
 /** @file
@@ -49,4 +48,4 @@ class MARBLE_EXPORT MarbleCacheSettingsWidget : public QWidget, public Ui::Marbl
 
 }
 
-#endif // MARBLECACHESETTINGSWIDGET_H
+#endif

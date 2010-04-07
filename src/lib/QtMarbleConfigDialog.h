@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef QTMARBLECONFIGDIALOG_H
-#define QTMARBLECONFIGDIALOG_H
+#ifndef MARBLE_QTMARBLECONFIGDIALOG_H
+#define MARBLE_QTMARBLECONFIGDIALOG_H
 
 #include <QtGui/QDialog>
 
@@ -131,4 +131,4 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
 
 } // Marble namespace
 
-#endif // QTMARBLECONFIGDIALOG
+#endif

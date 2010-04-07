@@ -13,9 +13,8 @@
 // MeasureTool enables Marble to set and display measure points
 //
 
-
-#ifndef MEASURETOOL_H
-#define MEASURETOOL_H
+#ifndef MARBLE_MEASURETOOL_H
+#define MARBLE_MEASURETOOL_H
 
 
 #include <QtGui/QFont>
@@ -72,4 +71,4 @@ class MeasureTool : public QObject
 
 }
 
-#endif // MEASURETOOL_H
+#endif

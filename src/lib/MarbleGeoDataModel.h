@@ -8,8 +8,8 @@
 // Copyright 2008      Patrick Spendrin  <ps_ml@gmx.de>
 //
 
-#ifndef MarbleGeoDataModel_H
-#define MarbleGeoDataModel_H
+#ifndef MARBLE_MARBLEGEODATAMODEL_H
+#define MARBLE_MARBLEGEODATAMODEL_H
 
 
 #include <QtCore/QAbstractListModel>
@@ -94,4 +94,4 @@ class MARBLE_EXPORT MarbleGeoDataModel : public QAbstractListModel
 
 }
 
-#endif // MarbleGeoDataModel_H
+#endif

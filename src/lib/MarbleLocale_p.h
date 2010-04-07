@@ -8,13 +8,8 @@
 // Copyright 2008-2009    Torsten Rahn <tackat@kde.org>
 //
 
-//
-// Description: AbstractTile contains the base class for a single quadtile 
-//
-
-
-#ifndef MARBLE_LOCALE_P_H
-#define MARBLE_LOCALE_P_H
+#ifndef MARBLE_MARBLELOCALE_P_H
+#define MARBLE_MARBLELOCALE_P_H
 
 
 namespace Marble
@@ -33,4 +28,4 @@ class MarbleLocalePrivate
 
 }
 
-#endif // MARBLE_LOCALE_P_H
+#endif

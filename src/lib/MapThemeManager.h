@@ -10,9 +10,8 @@
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-
-#ifndef MAPTHEMEMANAGER_H
-#define MAPTHEMEMANAGER_H
+#ifndef MARBLE_MAPTHEMEMANAGER_H
+#define MARBLE_MAPTHEMEMANAGER_H
 
 #include <QtCore/QList>
 #include <QtCore/QObject>
@@ -138,4 +137,4 @@ class MARBLE_EXPORT MapThemeManager : public QObject
 
 }
 
-#endif // MAPTHEMEMANAGER_H
+#endif

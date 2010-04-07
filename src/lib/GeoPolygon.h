@@ -9,9 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef GEOPOLYGON_H
-#define GEOPOLYGON_H
+#ifndef MARBLE_GEOPOLYGON_H
+#define MARBLE_GEOPOLYGON_H
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -137,7 +136,6 @@ class MARBLE_EXPORT PntMapLoader : public QThread
         QString m_filename;
 };
 
-
 }
 
-#endif // GEOPOLYGON_H
+#endif

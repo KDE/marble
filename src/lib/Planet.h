@@ -1,5 +1,5 @@
-//Copyright 2009 Henry de Valence <hdevalence@gmail.com>
-//Copyright 2009 David Roberts <dvdr18@gmail.com>
+// Copyright 2009 Henry de Valence <hdevalence@gmail.com>
+// Copyright 2009 David Roberts <dvdr18@gmail.com>
 //
 // This file is part of the Marble Desktop Globe.
 //
@@ -8,8 +8,8 @@
 // the source code.
 //
 
-#ifndef PLANET_H
-#define PLANET_H
+#ifndef MARBLE_PLANET_H
+#define MARBLE_PLANET_H
 
 #include "marble_export.h"
 

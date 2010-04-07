@@ -11,9 +11,8 @@
 // Copyright 2008      Pino Toscano <pino@kde.org>
 //
 
-
-#ifndef HTTPJOB_H
-#define HTTPJOB_H
+#ifndef MARBLE_HTTPJOB_H
+#define MARBLE_HTTPJOB_H
 
 #include <QtCore/QByteArray>
 #include <QtCore/QObject>
@@ -78,4 +77,4 @@ class MARBLE_EXPORT HttpJob: public QObject
 
 }
 
-#endif // HTTPJOB_H
+#endif

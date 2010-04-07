@@ -9,8 +9,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de
 //
 
-#ifndef STORAGEPOLICY_H
-#define STORAGEPOLICY_H
+#ifndef MARBLE_STORAGEPOLICY_H
+#define MARBLE_STORAGEPOLICY_H
 
 
 #include <QtCore/QObject>

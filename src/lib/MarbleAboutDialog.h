@@ -13,9 +13,8 @@
 // The about dialog 
 //
 
-
-#ifndef MARBLEABOUTDIALOG_H
-#define MARBLEABOUTDIALOG_H
+#ifndef MARBLE_MARBLEABOUTDIALOG_H
+#define MARBLE_MARBLEABOUTDIALOG_H
 
 
 #include <QtGui/QDialog>
@@ -46,4 +45,4 @@ class MARBLE_EXPORT MarbleAboutDialog : public QDialog
 
 }
 
-#endif // KATLASABOUTDIALOG_H
+#endif

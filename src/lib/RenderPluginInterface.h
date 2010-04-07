@@ -9,9 +9,8 @@
 // Copyright 2008 Inge Wallin  <inge@lysator.liu.se>
 //
 
-
-#ifndef MARBLERENDERPLUGININTERFACEH
-#define MARBLERENDERPLUGININTERFACEH
+#ifndef MARBLE_RENDERPLUGININTERFACE_H
+#define MARBLE_RENDERPLUGININTERFACE_H
 
 #include <QtCore/QtPlugin>
 
@@ -72,4 +71,4 @@ class RenderPluginInterface: public PluginInterface, public LayerInterface
 
 Q_DECLARE_INTERFACE( Marble::RenderPluginInterface, "org.kde.Marble.RenderPluginInterface/1.05" )
 
-#endif // MARBLERENDERPLUGININTERFACEH
+#endif

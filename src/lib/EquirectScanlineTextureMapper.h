@@ -9,9 +9,8 @@
 // Copyright 2008      Inge Wallin      <inge@lysator.liu.se>
 //
 
-
-#ifndef EQUIRECTSCANLINETEXTUREMAPPER_H
-#define EQUIRECTSCANLINETEXTUREMAPPER_H
+#ifndef MARBLE_EQUIRECTSCANLINETEXTUREMAPPER_H
+#define MARBLE_EQUIRECTSCANLINETEXTUREMAPPER_H
 
 
 #include "AbstractScanlineTextureMapper.h"

@@ -9,8 +9,8 @@
 // Copyright 2009      Torsten Rahn <tackat@kde.org>
 //
 
-#ifndef MAPTHEMESORTFILTERPROXYMODEL_H
-#define MAPTHEMESORTFILTERPROXYMODEL_H
+#ifndef MARBLE_MAPTHEMESORTFILTERPROXYMODEL_H
+#define MARBLE_MAPTHEMESORTFILTERPROXYMODEL_H
 
 #include <QtGui/QSortFilterProxyModel>
 
@@ -33,4 +33,4 @@ class MapThemeSortFilterProxyModel : public QSortFilterProxyModel
 
 }
 
-#endif //MAPTHEMESORTFILTERPROXYMODEL_H
+#endif

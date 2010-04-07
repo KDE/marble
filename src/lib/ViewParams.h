@@ -9,9 +9,8 @@
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-
-#ifndef VIEWPARAMS_H
-#define VIEWPARAMS_H
+#ifndef MARBLE_VIEWPARAMS_H
+#define MARBLE_VIEWPARAMS_H
 
 
 /** @file
@@ -131,4 +130,4 @@ class MARBLE_EXPORT ViewParams
 
 }
 
-#endif // VIEWPARAMS_H
+#endif

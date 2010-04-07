@@ -8,9 +8,8 @@
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
 //
 
-
-#ifndef MARBLE_ABSTRACT_FLOATITEM_H
-#define MARBLE_ABSTRACT_FLOATITEM_H
+#ifndef MARBLE_ABSTRACTFLOATITEM_H
+#define MARBLE_ABSTRACTFLOATITEM_H
 
 #include <QtCore/QPointF>
 #include <QtCore/QSizeF>
@@ -79,4 +78,4 @@ class MARBLE_EXPORT AbstractFloatItem : public RenderPlugin, public FrameGraphic
 
 }
 
-#endif // MARBLE_ABSTRACT_FLOATITEM_H
+#endif

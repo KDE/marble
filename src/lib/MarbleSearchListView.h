@@ -9,9 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef MARBLESEARCHLISTVIEW_H
-#define MARBLESEARCHLISTVIEW_H
+#ifndef MARBLE_MARBLESEARCHLISTVIEW_H
+#define MARBLE_MARBLESEARCHLISTVIEW_H
 
 
 #include <QtGui/QListView>
@@ -46,4 +45,4 @@ class MARBLE_EXPORT MarbleSearchListView : public QListView
 
 }
 
-#endif // MARBLESEARCHLISTVIEW_H
+#endif

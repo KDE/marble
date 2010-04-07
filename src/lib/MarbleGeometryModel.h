@@ -9,8 +9,8 @@
 // Copyright 2008      Simon Schmeisser <mail_to_wrt@gmx.de>
 //
 
-#ifndef MarbleGeometryModel_H
-#define MarbleGeometryModel_H
+#ifndef MARBLE_MARBLEGEOMETRYMODEL_H
+#define MARBLE_MARBLEGEOMETRYMODEL_H
 
 #include <QtCore/QAbstractItemModel>
 #include <QtCore/QModelIndex>
@@ -102,4 +102,4 @@ class MarbleGeometryModel : public QAbstractItemModel
 
 }
 
-#endif // MarbleGeometryModel_H
+#endif

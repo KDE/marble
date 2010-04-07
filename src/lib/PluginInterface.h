@@ -10,8 +10,8 @@
 //
 // Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 //
-#ifndef MARBLE_PLUGIN_INTERFACE_H
-#define MARBLE_PLUGIN_INTERFACE_H
+#ifndef MARBLE_PLUGININTERFACE_H
+#define MARBLE_PLUGININTERFACE_H
 
 #include <QtCore/QString>
 #include <QtCore/QtPlugin>

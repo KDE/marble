@@ -13,9 +13,8 @@
 // You should have received a copy of the GNU Lesser General Public 
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-
-#ifndef SUNLOCATOR_H
-#define SUNLOCATOR_H
+#ifndef MARBLE_SUNLOCATOR_H
+#define MARBLE_SUNLOCATOR_H
 
 
 #include <QtCore/QObject>

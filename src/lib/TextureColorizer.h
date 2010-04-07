@@ -13,9 +13,8 @@
 // The TextureColorizer maps the Elevationvalues to Legend Colors.
 //
 
-
-#ifndef TEXTURECOLORIZER_H
-#define TEXTURECOLORIZER_H
+#ifndef MARBLE_TEXTURECOLORIZER_H
+#define MARBLE_TEXTURECOLORIZER_H
 
 #include <QtCore/QString>
 

@@ -8,8 +8,8 @@
 // Copyright 2006-2009 Torsten Rahn <tackat@kde.org>
 // Copyright 2009 Bastian Holst <bastianholst@gmx.de>
 
-#ifndef GEOPAINTERPRIVATE_H
-#define GEOPAINTERPRIVATE_H
+#ifndef MARBLE_GEOPAINTERPRIVATE_H
+#define MARBLE_GEOPAINTERPRIVATE_H
 
 #include <QtCore/QVector>
 
@@ -58,5 +58,4 @@ class GeoPainterPrivate
 
 } // namespace Marble
 
-#endif // GEOPAINTERPRIVATE_H
-
+#endif

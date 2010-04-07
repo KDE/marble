@@ -13,8 +13,8 @@
 // You should have received a copy of the GNU Lesser General Public 
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef MARBLE_DOWNLOAD_QUEUE_SET_H
-#define MARBLE_DOWNLOAD_QUEUE_SET_H
+#ifndef MARBLE_DOWNLOADQUEUESET_H
+#define MARBLE_DOWNLOADQUEUESET_H
 
 #include <QtCore/QList>
 #include <QtCore/QQueue>

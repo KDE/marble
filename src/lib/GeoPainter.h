@@ -8,9 +8,8 @@
 // Copyright 2008-2009 Torsten Rahn <tackat@kde.org>
 //
 
-
-#ifndef GEOPAINTER_H
-#define GEOPAINTER_H
+#ifndef MARBLE_GEOPAINTER_H
+#define MARBLE_GEOPAINTER_H
 
 
 #include "marble_export.h"
@@ -537,4 +536,4 @@ class MARBLE_EXPORT GeoPainter : public ClipPainter
 
 }
 
-#endif // GEOPAINTER_H
+#endif

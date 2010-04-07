@@ -13,9 +13,8 @@
 // PlacemarkPainter is responsible for drawing the Placemarks on the map
 //
 
-
-#ifndef PLACEMARKPAINTER_H
-#define PLACEMARKPAINTER_H
+#ifndef MARBLE_PLACEMARKPAINTER_H
+#define MARBLE_PLACEMARKPAINTER_H
 
 
 #include <QtCore/QObject>
@@ -68,4 +67,4 @@ class PlacemarkPainter : public QObject
 
 }
 
-#endif // PLACEMARKPAINTER_H
+#endif

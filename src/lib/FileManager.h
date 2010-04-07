@@ -9,9 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef FILEMANAGER_H
-#define FILEMANAGER_H
+#ifndef MARBLE_FILEMANAGER_H
+#define MARBLE_FILEMANAGER_H
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -113,4 +112,4 @@ class FileManager : public QObject
 
 }
 
-#endif // FILEMANAGER_H
+#endif

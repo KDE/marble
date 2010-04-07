@@ -10,9 +10,8 @@
 // Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-
-#ifndef MARBLEMAP_H
-#define MARBLEMAP_H
+#ifndef MARBLE_MARBLEMAP_H
+#define MARBLE_MARBLEMAP_H
 
 
 /** @file
@@ -851,4 +850,4 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
 }
 
-#endif // MARBLEMAP_H
+#endif

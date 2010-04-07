@@ -13,8 +13,8 @@
 // MarbleModel is the data store and index class for the MarbleWidget.
 //
 
-#ifndef MARBLEMODEL_H
-#define MARBLEMODEL_H
+#ifndef MARBLE_MARBLEMODEL_H
+#define MARBLE_MARBLEMODEL_H
 
 
 /** @file
@@ -383,4 +383,4 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
 }
 
-#endif // MARBLEMODEL_H
+#endif

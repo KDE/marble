@@ -9,9 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef PLACEMARKINFODIALOG_H
-#define PLACEMARKINFODIALOG_H
+#ifndef MARBLE_PLACEMARKINFODIALOG_H
+#define MARBLE_PLACEMARKINFODIALOG_H
 
 #include <QtCore/QPersistentModelIndex>
 
@@ -56,4 +55,4 @@ class PlacemarkInfoDialog : public QDialog, private Ui::PlacemarkInfoDialog
 
 }
 
-#endif // PLACEMARKINFODIALOG_H
+#endif

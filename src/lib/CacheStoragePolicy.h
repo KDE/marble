@@ -8,8 +8,8 @@
 // Copyright 2007      Tobias Koenig <tokoe@kde.org>
 //
 
-#ifndef CACHESTORAGEPOLICY_H
-#define CACHESTORAGEPOLICY_H
+#ifndef MARBLE_CACHESTORAGEPOLICY_H
+#define MARBLE_CACHESTORAGEPOLICY_H
 
 #include "DiscCache.h"
 #include "StoragePolicy.h"

@@ -9,9 +9,8 @@
 // Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-
-#ifndef PLUGINMANAGER_H
-#define PLUGINMANAGER_H
+#ifndef MARBLE_PLUGINMANAGER_H
+#define MARBLE_PLUGINMANAGER_H
 
 #include <QtCore/QList>
 #include <QtCore/QObject>
@@ -80,4 +79,4 @@ class MARBLE_EXPORT PluginManager : public QObject
 
 }
 
-#endif // PLUGINMANAGER_H
+#endif

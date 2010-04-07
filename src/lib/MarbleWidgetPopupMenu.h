@@ -13,9 +13,8 @@
 // The MarbleWidgetPopupMenu handles context menus.
 //
 
-
-#ifndef MARBLEWIDGETPOPUPMENU_H
-#define MARBLEWIDGETPOPUPMENU_H
+#ifndef MARBLE_MARBLEWIDGETPOPUPMENU_H
+#define MARBLE_MARBLEWIDGETPOPUPMENU_H
 
 
 #include <QtCore/QObject>
@@ -86,4 +85,4 @@ class MarbleWidgetPopupMenu  : public QObject
 
 }
 
-#endif // MARBLEWIDGETPOPUPMENU_H
+#endif

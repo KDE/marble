@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef PLUGINABOUTDIALOG_H
-#define PLUGINABOUTDIALOG_H
+#ifndef MARBLE_PLUGINABOUTDIALOG_H
+#define MARBLE_PLUGINABOUTDIALOG_H
 
 #include <QtGui/QDialog>
 #include <QtCore/QList>
@@ -110,4 +110,4 @@ class MARBLE_EXPORT PluginAboutDialog : public QDialog
 
 } // namespace Marble
 
-#endif // PLUGINABOUTDIALOG_H
+#endif

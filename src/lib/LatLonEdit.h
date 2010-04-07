@@ -17,8 +17,8 @@
 ** along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LATLONEDIT_H
-#define LATLONEDIT_H
+#ifndef MARBLE_LATLONEDIT_H
+#define MARBLE_LATLONEDIT_H
 
 #include <QtGui/QWidget>
 

@@ -13,9 +13,8 @@
 // This widget is a control box for the Marble widget.
 //
 
-
-#ifndef MARBLENAVIGATOR_H
-#define MARBLENAVIGATOR_H
+#ifndef MARBLE_MARBLENAVIGATOR_H
+#define MARBLE_MARBLENAVIGATOR_H
 
 
 #include <QtGui/QWidget>
@@ -133,4 +132,4 @@ class MARBLE_EXPORT MarbleNavigator : public QWidget
 
 }
 
-#endif // MARBLENAVIGATOR_H
+#endif

@@ -9,9 +9,8 @@
 // Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-
-#ifndef MARBLEPLUGINSETTINGSWIDGET_H
-#define MARBLEPLUGINSETTINGSWIDGET_H
+#ifndef MARBLE_MARBLEPLUGINSETTINGSWIDGET_H
+#define MARBLE_MARBLEPLUGINSETTINGSWIDGET_H
 
 
 /** @file
@@ -61,4 +60,4 @@ class MARBLE_EXPORT MarblePluginSettingsWidget : public QWidget, private Ui::Mar
 
 }
 
-#endif // MARBLEPLUGINSETTINGSWIDGET_H
+#endif

@@ -8,9 +8,8 @@
 // Copyright 2007      Andrew Manson    <g.real.ate@gmail.com>
 //
 
-
-#ifndef ABSTRACTSCANLINETEXTUREMAPPER_H
-#define ABSTRACTSCANLINETEXTUREMAPPER_H
+#ifndef MARBLE_ABSTRACTSCANLINETEXTUREMAPPER_H
+#define MARBLE_ABSTRACTSCANLINETEXTUREMAPPER_H
 
 #include <QtCore/QObject>
 #include <QtCore/QSize>

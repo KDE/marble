@@ -14,9 +14,8 @@
 // done so that you can do it asynchronously.
 //
 
-
-#ifndef DEFERREDFLAG_H
-#define DEFERREDFLAG_H
+#ifndef MARBLE_DEFERREDFLAG_H
+#define MARBLE_DEFERREDFLAG_H
 
 
 #include <QtCore/QObject>
@@ -52,4 +51,4 @@ class DeferredFlag : public QObject
 
 }
 
-#endif // DEFERREDFLAG_H
+#endif

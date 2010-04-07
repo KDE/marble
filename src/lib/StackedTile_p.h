@@ -14,9 +14,8 @@
 // and jumptables for faster access to the pixel data
 //
 
-
-#ifndef MARBLE_STACKED_TILE_P_H
-#define MARBLE_STACKED_TILE_P_H
+#ifndef MARBLE_STACKEDTILE_P_H
+#define MARBLE_STACKEDTILE_P_H
 
 #include "AbstractTile_p.h"
 
@@ -56,4 +55,4 @@ class StackedTilePrivate : AbstractTilePrivate
 
 }
 
-#endif // MARBLE_STACKED_TILE_P_H
+#endif

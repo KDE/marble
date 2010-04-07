@@ -9,9 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef MARBLE_LOCALE_H
-#define MARBLE_LOCALE_H
+#ifndef MARBLE_MARBLELOCALE_H
+#define MARBLE_MARBLELOCALE_H
 
 #include "marble_export.h"
 #include "global.h"
@@ -49,4 +48,4 @@ class MARBLE_EXPORT MarbleLocale
 
 }
 
-#endif // MARBLE_LOCALE_H
+#endif

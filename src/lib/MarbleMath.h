@@ -9,9 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef MARBLEMATH_H
-#define MARBLEMATH_H
+#ifndef MARBLE_MARBLEMATH_H
+#define MARBLE_MARBLEMATH_H
 
 #include <QtCore/QtGlobal>
 
@@ -102,4 +101,4 @@ inline qreal gdInv( qreal x ) {
 
 }
 
-#endif // MARBLEMATH_H
+#endif

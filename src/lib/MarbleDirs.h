@@ -9,9 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef MARBLEDIRS_H
-#define MARBLEDIRS_H
+#ifndef MARBLE_MARBLEDIRS_H
+#define MARBLE_MARBLEDIRS_H
 
 #include "marble_export.h"
 
@@ -124,4 +123,4 @@ class MARBLE_EXPORT MarbleDirs
 
 }
 
-#endif // MARBLEDIRS_H
+#endif

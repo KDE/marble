@@ -13,9 +13,8 @@
 // MarbleThemeSelectView lets the user choose a map theme
 //
 
-
-#ifndef MARBLETHEMESELECTVIEW_H
-#define MARBLETHEMESELECTVIEW_H
+#ifndef MARBLE_MARBLETHEMESELECTVIEW_H
+#define MARBLE_MARBLETHEMESELECTVIEW_H
 
 
 #include <QtCore/QModelIndex>
@@ -54,4 +53,4 @@ class MARBLE_EXPORT MarbleThemeSelectView : public QListView
 
 }
 
-#endif // KATLASTHEMESELECTVIEW_H
+#endif

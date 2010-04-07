@@ -8,8 +8,8 @@
 // Copyright 2009 Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef PLUGINITEMDELEGATE_H
-#define PLUGINITEMDELEGATE_H
+#ifndef MARBLE_PLUGINITEMDELEGATE_H
+#define MARBLE_PLUGINITEMDELEGATE_H
 
 #include <QtGui/QStyledItemDelegate>
 
@@ -86,4 +86,4 @@ class PluginItemDelegate : public QAbstractItemDelegate
 
 }
 
-#endif // PLUGINITEMDELEGATE_H
+#endif

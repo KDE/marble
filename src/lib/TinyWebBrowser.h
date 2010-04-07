@@ -9,8 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-#ifndef TINYWEBBROWSER_H
-#define TINYWEBBROWSER_H
+#ifndef MARBLE_TINYWEBBROWSER_H
+#define MARBLE_TINYWEBBROWSER_H
 
 // Qt
 #include <QtCore/QByteArray>
@@ -61,4 +61,4 @@ class MARBLE_EXPORT TinyWebBrowser : public QWebView
 
 }
 
-#endif // TINYWEBBROWSER_H
+#endif

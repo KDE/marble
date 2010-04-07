@@ -13,8 +13,8 @@
 // You should have received a copy of the GNU Lesser General Public 
 // License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef MERGED_LAYER_DECORATOR_H
-#define MERGED_LAYER_DECORATOR_H
+#ifndef MARBLE_MERGEDLAYERDECORATOR_H
+#define MARBLE_MERGEDLAYERDECORATOR_H
 
 #include <QtGui/QImage>
 #include <QtCore/QObject>

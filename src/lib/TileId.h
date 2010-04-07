@@ -8,8 +8,8 @@
 // Copyright 2008, 2010 Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-#ifndef MARBLE_TILE_ID_H
-#define MARBLE_TILE_ID_H
+#ifndef MARBLE_TILEID_H
+#define MARBLE_TILEID_H
 
 #include <QtCore/QHash>
 #include <QtCore/QString>

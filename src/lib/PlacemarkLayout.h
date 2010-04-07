@@ -13,9 +13,8 @@
 // PlacemarkLayout is responsible for drawing the Placemarks on the map
 //
 
-
-#ifndef PLACEMARKLAYOUT_H
-#define PLACEMARKLAYOUT_H
+#ifndef MARBLE_PLACEMARKLAYOUT_H
+#define MARBLE_PLACEMARKLAYOUT_H
 
 
 #include <QtCore/QHash>
@@ -156,4 +155,4 @@ class PlacemarkLayout : public QObject
 
 }
 
-#endif // PLACEMARKLAYOUT_H
+#endif

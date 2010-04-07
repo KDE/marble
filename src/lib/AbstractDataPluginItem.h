@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef ABSTRACTDATAPLUGINITEM_H
-#define ABSTRACTDATAPLUGINITEM_H
+#ifndef MARBLE_ABSTRACTDATAPLUGINITEM_H
+#define MARBLE_ABSTRACTDATAPLUGINITEM_H
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -80,4 +80,4 @@ class MARBLE_EXPORT AbstractDataPluginItem : public QObject, public GeoGraphicsI
 
 } // Marble namespace
 
-#endif // ABSTRACTDATAPLUGINITEM_H
+#endif

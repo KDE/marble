@@ -8,8 +8,8 @@
 // Copyright 2010      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef DATAMIGRATION_H
-#define DATAMIGRATION_H
+#ifndef MARBLE_DATAMIGRATION_H
+#define MARBLE_DATAMIGRATION_H
 
 #include<QtCore/QObject>
 

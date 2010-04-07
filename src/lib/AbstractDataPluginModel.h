@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef ABSTRACTDATAPLUGINMODEL_H
-#define ABSTRACTDATAPLUGINMODEL_H
+#ifndef MARBLE_ABSTRACTDATAPLUGINMODEL_H
+#define MARBLE_ABSTRACTDATAPLUGINMODEL_H
 
 #include <QtCore/QObject>
 #include <QtCore/QList>
@@ -181,4 +181,4 @@ class MARBLE_EXPORT AbstractDataPluginModel : public QObject
 
 }
 
-#endif // ABSTRACTDATAPLUGINMODEL_H
+#endif

@@ -21,8 +21,8 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef MARBLE_STACKED_TILE_LOADER_H
-#define MARBLE_STACKED_TILE_LOADER_H
+#ifndef MARBLE_STACKEDTILELOADER_H
+#define MARBLE_STACKEDTILELOADER_H
 
 #include <QtCore/QObject>
 
@@ -172,4 +172,4 @@ class StackedTileLoader : public QObject
 
 }
 
-#endif // MARBLE_STACKED_TILE_LOADER_H
+#endif

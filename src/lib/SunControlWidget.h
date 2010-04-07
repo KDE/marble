@@ -9,9 +9,8 @@
 // Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
 //
 
-
-#ifndef SUNCONTROLWIDGET_H
-#define SUNCONTROLWIDGET_H
+#ifndef MARBLE_SUNCONTROLWIDGET_H
+#define MARBLE_SUNCONTROLWIDGET_H
 
 
 #include <QtCore/QDateTime>

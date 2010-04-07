@@ -13,9 +13,8 @@
 // The Legend Browser displays the legend
 //
 
-
-#ifndef MARBLELEGENDBROWSER_H
-#define MARBLELEGENDBROWSER_H
+#ifndef MARBLE_MARBLELEGENDBROWSER_H
+#define MARBLE_MARBLELEGENDBROWSER_H
 
 
 #include <QtCore/QString>
@@ -83,4 +82,4 @@ class MARBLE_EXPORT MarbleLegendBrowser : public QTextBrowser
 
 }
 
-#endif // MARBLELEGENDBROWSER_H
+#endif

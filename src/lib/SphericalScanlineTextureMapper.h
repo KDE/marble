@@ -8,9 +8,8 @@
 // Copyright 2007      Torsten Rahn     <tackat@kde.org>
 //
 
-
-#ifndef SPHERICALSCANLINETEXTUREMAPPER_H
-#define SPHERICALSCANLINETEXTUREMAPPER_H
+#ifndef MARBLE_SPHERICALSCANLINETEXTUREMAPPER_H
+#define MARBLE_SPHERICALSCANLINETEXTUREMAPPER_H
 
 
 #include <QtGui/QColor>
@@ -47,4 +46,4 @@ class SphericalScanlineTextureMapper : public AbstractScanlineTextureMapper
 
 }
 
-#endif // SPHERICALSCANLINETEXTUREMAPPER_H
+#endif

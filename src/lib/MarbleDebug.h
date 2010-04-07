@@ -8,8 +8,8 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-#ifndef MARBLEDEBUG_H
-#define MARBLEDEBUG_H
+#ifndef MARBLE_MARBLEDEBUG_H
+#define MARBLE_MARBLEDEBUG_H
 
 #include <QtCore/QDebug>
 
@@ -48,4 +48,4 @@ inline QDebug mDebug() {
 
 } // namespace Marble
 
-#endif /* MARBLEDEBUG_H */
+#endif

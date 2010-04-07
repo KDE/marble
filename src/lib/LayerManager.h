@@ -8,9 +8,8 @@
 // Copyright 2006-2008 Torsten Rahn <tackat@kde.org>
 //
 
-
-#ifndef LAYERMANAGER_H
-#define LAYERMANAGER_H
+#ifndef MARBLE_LAYERMANAGER_H
+#define MARBLE_LAYERMANAGER_H
 
 // Qt
 #include <QtCore/QList>
@@ -128,4 +127,4 @@ class MARBLE_EXPORT LayerManager : public QObject
 
 }
 
-#endif // LAYERMANAGER_H
+#endif

@@ -10,8 +10,8 @@
 // Copyright 2008      Carlos Licea <carlos.licea@kdemail.net>
 //
 
-#ifndef MARBLEMAP_P_H
-#define MARBLEMAP_P_H
+#ifndef MARBLE_MARBLEMAP_P_H
+#define MARBLE_MARBLEMAP_P_H
 
 #include "ViewParams.h"
 

@@ -8,8 +8,8 @@
 // Copyright 2008      Torsten Rahn  <rahn@kde.org>
 //
 
-#ifndef MARBLE_PHYSICS_H
-#define MARBLE_PHYSICS_H
+#ifndef MARBLE_MARBLEPHYSICS_H
+#define MARBLE_MARBLEPHYSICS_H
 
 #include "GeoDataLookAt.h"
 
@@ -75,4 +75,4 @@ private Q_SLOTS:
 
 }
 
-#endif // MARBLE_PHYSICS_H
+#endif

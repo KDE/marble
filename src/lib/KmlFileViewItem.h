@@ -8,9 +8,8 @@
 // Copyright 2007      Murad Tagirov <tmurad@gmail.com>
 //
 
-
-#ifndef KMLFILEVIEWITEM_H
-#define KMLFILEVIEWITEM_H
+#ifndef MARBLE_KMLFILEVIEWITEM_H
+#define MARBLE_KMLFILEVIEWITEM_H
 
 #include "AbstractFileViewItem.h"
 #include "GeoDataDocument.h"

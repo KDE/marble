@@ -7,8 +7,8 @@
 //
 // Copyright 2008      Patrick Spendrin <ps_ml@gmx.de>
 //
-#ifndef FILELOADER_H
-#define FILELOADER_H
+#ifndef MARBLE_FILELOADER_H
+#define MARBLE_FILELOADER_H
 
 #include <QtCore/QThread>
 #include <QtCore/QString>
@@ -46,4 +46,4 @@ class FileLoader : public QThread
 
 } // namespace Marble
 
-#endif // FILELOADER_H
+#endif

@@ -9,9 +9,8 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
-#ifndef FILEVIEWMODEL_H
-#define FILEVIEWMODEL_H
+#ifndef MARBLE_FILEVIEWMODEL_H
+#define MARBLE_FILEVIEWMODEL_H
 
 #include <QtCore/QAbstractListModel>
 #include <QtCore/QVariant>

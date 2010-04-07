@@ -13,9 +13,8 @@
 // The MarbleWidgetInputHandler handles mouse and keyboard input.
 //
 
-
-#ifndef MARBLEWIDGETINPUTHANDLER_H
-#define MARBLEWIDGETINPUTHANDLER_H
+#ifndef MARBLE_MARBLEWIDGETINPUTHANDLER_H
+#define MARBLE_MARBLEWIDGETINPUTHANDLER_H
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -116,4 +115,4 @@ class MARBLE_EXPORT MarbleWidgetDefaultInputHandler  : public MarbleWidgetInputH
 
 }
 
-#endif // MARBLEWIDGETINPUTHANDLER
+#endif

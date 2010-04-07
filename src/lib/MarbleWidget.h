@@ -9,9 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef MARBLEWIDGET_H
-#define MARBLEWIDGET_H
+#ifndef MARBLE_MARBLEWIDGET_H
+#define MARBLE_MARBLEWIDGET_H
 
 
 /** @file
@@ -1036,4 +1035,4 @@ private Q_SLOTS:
 
 }
 
-#endif // MARBLEWIDGET_H
+#endif

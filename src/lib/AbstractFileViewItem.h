@@ -9,9 +9,8 @@
 // Copyright 2009      Patrick Spendrin <ps_ml@gmx.de>
 //
 
-
-#ifndef ABSTRACTFILEVIEWITEM_H
-#define ABSTRACTFILEVIEWITEM_H
+#ifndef MARBLE_ABSTRACTFILEVIEWITEM_H
+#define MARBLE_ABSTRACTFILEVIEWITEM_H
 
 #include <QtCore/QString>
 

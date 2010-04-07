@@ -9,9 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef PLACEMARKMANAGER_H
-#define PLACEMARKMANAGER_H
+#ifndef MARBLE_PLACEMARKMANAGER_H
+#define MARBLE_PLACEMARKMANAGER_H
 
 #include <QtCore/QList>
 #include <QtCore/QObject>
@@ -90,4 +89,4 @@ public Q_SLOTS:
 
 }
 
-#endif // PLACEMARKMANAGER_H
+#endif

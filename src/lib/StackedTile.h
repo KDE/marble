@@ -14,8 +14,8 @@
 // and jumptables for faster access to the pixel data
 //
 
-#ifndef MARBLE_STACKED_TILE_H
-#define MARBLE_STACKED_TILE_H
+#ifndef MARBLE_STACKEDTILE_H
+#define MARBLE_STACKEDTILE_H
 
 #include <QtCore/QSharedPointer>
 #include <QtCore/QVector>
@@ -85,4 +85,4 @@ class StackedTile : public AbstractTile
 
 }
 
-#endif // MARBLE_STACKED_TILE_H
+#endif

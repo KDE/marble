@@ -8,9 +8,8 @@
 // Copyright 2008 Torsten Rahn <tackat@kde.org>
 //
 
-
-#ifndef DATASETPROVIDER_H
-#define DATASETPROVIDER_H
+#ifndef MARBLE_DATASETPROVIDER_H
+#define MARBLE_DATASETPROVIDER_H
 
 #include <QtCore/QObject>
 
@@ -47,4 +46,4 @@ class DatasetProvider : public QObject
 
 }
 
-#endif // DATASETPROVIDER_H
+#endif

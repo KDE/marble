@@ -10,13 +10,8 @@
 // Copyright 2007      Thomas Zander <zander@kde.org>
 //
 
-//
-// The TextureColorizer maps the Elevationvalues to Legend Colors.
-//
-
-
-#ifndef MARBLECONTROLBOX_H
-#define MARBLECONTROLBOX_H
+#ifndef MARBLE_MARBLECONTROLBOX_H
+#define MARBLE_MARBLECONTROLBOX_H
 
 
 #include "marble_export.h"
@@ -270,4 +265,4 @@ protected:
 
 }
 
-#endif // MARBLECONTROLBOX_H
+#endif

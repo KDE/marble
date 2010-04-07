@@ -9,9 +9,8 @@
 // Copyright 2009 Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-
-#ifndef MARBLE_NETWORK_PLUGIN_H
-#define MARBLE_NETWORK_PLUGIN_H
+#ifndef MARBLE_NETWORKPLUGIN_H
+#define MARBLE_NETWORKPLUGIN_H
 
 #include "NetworkPluginInterface.h"
 #include "marble_export.h"
@@ -48,4 +47,4 @@ class MARBLE_EXPORT NetworkPlugin : public QObject, public NetworkPluginInterfac
 
 }
 
-#endif // MARBLE_NETWORK_PLUGIN_H
+#endif

@@ -9,9 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef GLOBAL_H
-#define GLOBAL_H
+#ifndef MARBLE_GLOBAL_H
+#define MARBLE_GLOBAL_H
 
 
 #include <math.h>

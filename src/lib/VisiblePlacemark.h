@@ -13,9 +13,8 @@
 // VisiblePlacemarks are those Placemarks which become visible on the map
 //
 
-
-#ifndef VISIBLEPLACEMARK_H
-#define VISIBLEPLACEMARK_H
+#ifndef MARBLE_VISIBLEPLACEMARK_H
+#define MARBLE_VISIBLEPLACEMARK_H
 
 #include <QtGui/QPixmap>
 #include <QtCore/QModelIndex>
@@ -101,4 +100,4 @@ class VisiblePlacemark
 
 }
 
-#endif // VISIBLEPLACEMARK_H
+#endif

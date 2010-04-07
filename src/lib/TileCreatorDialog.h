@@ -13,9 +13,8 @@
 // The TileCreatorDialog displays the progress of the tile creation.
 //
 
-
-#ifndef TILECREATORDIALOG_H
-#define TILECREATORDIALOG_H
+#ifndef MARBLE_TILECREATORDIALOG_H
+#define MARBLE_TILECREATORDIALOG_H
 
 #include <QtGui/QDialog>
 
@@ -49,4 +48,4 @@ class MARBLE_EXPORT TileCreatorDialog : public QDialog
 
 }
 
-#endif // TILECREATORDIALOG_H
+#endif

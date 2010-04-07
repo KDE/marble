@@ -17,9 +17,8 @@
 // Author: Torsten Rahn
 //
 
-
-#ifndef VECTORCOMPOSER_H
-#define VECTORCOMPOSER_H
+#ifndef MARBLE_VECTORCOMPOSER_H
+#define MARBLE_VECTORCOMPOSER_H
 
 
 #include <QtCore/QObject>
@@ -173,4 +172,4 @@ class VectorComposer : public QObject
 
 }
 
-#endif // VECTORCOMPOSER_H
+#endif

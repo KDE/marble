@@ -13,8 +13,8 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef MARBLE_TILE_LOADER_H
-#define MARBLE_TILE_LOADER_H
+#ifndef MARBLE_TILELOADER_H
+#define MARBLE_TILELOADER_H
 
 #include <QtCore/QHash>
 #include <QtCore/QObject>

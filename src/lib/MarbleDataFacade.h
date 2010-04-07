@@ -13,8 +13,8 @@
 // to internal Marble data.  This is usable in e.g. plugins.
 //
 
-#ifndef MARBLEDATAFACADE_H
-#define MARBLEDATAFACADE_H
+#ifndef MARBLE_MARBLEDATAFACADE_H
+#define MARBLE_MARBLEDATAFACADE_H
 
 
 /** @file
@@ -90,4 +90,4 @@ class MARBLE_EXPORT MarbleDataFacade
 
 }
 
-#endif // MARBLEMODEL_H
+#endif

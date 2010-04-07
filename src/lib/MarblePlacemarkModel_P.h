@@ -8,8 +8,8 @@
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 //
 
-#ifndef MARBLEPLACEMARKMODEL_P_H
-#define MARBLEPLACEMARKMODEL_P_H
+#ifndef MARBLE_MARBLEPLACEMARKMODEL_P_H
+#define MARBLE_MARBLEPLACEMARKMODEL_P_H
 
 #include <QtCore/QChar>
 #include <QtCore/QRegExp>

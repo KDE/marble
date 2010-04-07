@@ -9,9 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef CLIPPAINTER_H
-#define CLIPPAINTER_H
+#ifndef MARBLE_CLIPPAINTER_H
+#define MARBLE_CLIPPAINTER_H
 
 
 #include <QtCore/QPointF>
@@ -76,4 +75,4 @@ class MARBLE_EXPORT ClipPainter : public QPainter
 
 }
 
-#endif // CLIPPAINTER_H
+#endif

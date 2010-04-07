@@ -9,9 +9,8 @@
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
 //
 
-
-#ifndef SCREENPOLYGON_H
-#define SCREENPOLYGON_H
+#ifndef MARBLE_SCREENPOLYGON_H
+#define MARBLE_SCREENPOLYGON_H
 
 
 #include <QtCore/QVector>
@@ -40,4 +39,4 @@ class ScreenPolygon : public QPolygonF
 
 }
 
-#endif // SCREENPOLYGON_H
+#endif

@@ -9,9 +9,8 @@
 // Copyright 2008 Inge Wallin  <inge@lysator.liu.se>
 //
 
-
-#ifndef MARBLE_LAYER_INTERFACE_H
-#define MARBLE_LAYER_INTERFACE_H
+#ifndef MARBLE_LAYERINTERFACE_H
+#define MARBLE_LAYERINTERFACE_H
 
 #include "marble_export.h"
 
@@ -61,4 +60,4 @@ public:
 
 } // namespace Marble
 
-#endif // MARBLE_LAYER_INTERFACE_H
+#endif

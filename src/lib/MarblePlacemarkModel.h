@@ -13,9 +13,8 @@
 // MarblePlacemarkModel exposes the model for Placemarks
 //
 
-
-#ifndef MARBLEPLACEMARKMODEL_H
-#define MARBLEPLACEMARKMODEL_H
+#ifndef MARBLE_MARBLEPLACEMARKMODEL_H
+#define MARBLE_MARBLEPLACEMARKMODEL_H
 
 
 #include <QtCore/QAbstractListModel>
@@ -116,4 +115,4 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
 
 }
 
-#endif // MARBLEPLACEMARKMODEL_H
+#endif
