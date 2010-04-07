@@ -18,8 +18,8 @@
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
-#ifndef OsmNamefinder_NearestPlacesTagHandler_h
-#define OsmNamefinder_NearestPlacesTagHandler_h
+#ifndef MARBLE_ONF_NEARESTPLACESTAGHANDLER_H
+#define MARBLE_ONF_NEARESTPLACESTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 

@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef OsmNamefinder_AttributeDictionary_h
-#define OsmNamefinder_AttributeDictionary_h
+#ifndef MARBLE_ONF_ATTRIBUTEDICTIONARY_H
+#define MARBLE_ONF_ATTRIBUTEDICTIONARY_H
 
 #include <marble_export.h>
 
