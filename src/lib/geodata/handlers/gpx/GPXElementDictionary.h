@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GPXElementDictionary_h
-#define GPXElementDictionary_h
+#ifndef MARBLE_GPX_ELEMENTDICTIONARY_H
+#define MARBLE_GPX_ELEMENTDICTIONARY_H
 
 
 namespace Marble
@@ -53,4 +53,4 @@ namespace gpx
 
 }
 
-#endif // GPXElementDictionary_h
+#endif

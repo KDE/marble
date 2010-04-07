@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GPXgpxTagHandler_h
-#define GPXgpxTagHandler_h
+#ifndef MARBLE_GPX_GPXTAGHANDLER_H
+#define MARBLE_GPX_GPXTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -38,4 +38,4 @@ public:
 }
 }
 
-#endif // GPXgpxTagHandler_h
+#endif

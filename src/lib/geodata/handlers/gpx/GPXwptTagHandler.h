@@ -17,8 +17,8 @@
     Copyright 2009 Thibaut GRIDEL <tgridel@free.fr>
 */
 
-#ifndef GPXwptTagHandler_h
-#define GPXwptTagHandler_h
+#ifndef MARBLE_GPX_WPTTAGHANDLER_H
+#define MARBLE_GPX_WPTTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -36,4 +36,4 @@ public:
 }
 }
 
-#endif // GPXwptTagHandler_h
+#endif
