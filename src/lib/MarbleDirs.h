@@ -15,9 +15,10 @@
 
 #include "marble_export.h"
 
-#include <QtCore/QString>
-#include <QtCore/QStringList>
 #include <QtCore/QDir>
+
+class QString;
+class QStringList;
 
 namespace Marble
 {
@@ -96,7 +97,9 @@ class MARBLE_EXPORT MarbleDirs
     static QString pluginSystemPath(); 
 
 
-    static QString localPath(); 
+    static QString localPath();
+
+    static QStringList oldLocalPaths();
 
     static QString pluginLocalPath(); 
 

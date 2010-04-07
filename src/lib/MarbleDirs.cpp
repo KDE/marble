@@ -11,12 +11,15 @@
 
 
 #include "MarbleDirs.h"
+#include "MarbleDebug.h"
 
 #include <QtCore/QDir>
 #include <QtCore/QFile>
+#include <QtCore/QString>
+#include <QtCore/QStringList>
 #include <QtGui/QApplication>
 
-#include "MarbleDebug.h"
+#include <stdlib.h>
 
 #ifdef Q_OS_MACX
 //for getting app bundle path
@@ -214,7 +217,11 @@ if ( !runTimeMarblePluginPath.isEmpty() )
 QString MarbleDirs::localPath() 
 {
 #ifndef Q_OS_WIN
-    return QString( QDir::homePath() + "/.marble/data" ); // local path
+    QString dataHome = getenv( "XDG_DATA_HOME" );
+    if( dataHome.isEmpty() )
+        dataHome = QDir::homePath() + "/.local/share";
+
+    return dataHome + "/marble"; // local path
 #else
     HWND hwnd = 0;
     WCHAR *appdata_path = new WCHAR[MAX_PATH+1];
@@ -224,6 +231,39 @@ QString MarbleDirs::localPath()
     delete[] appdata_path;
     return QString( QDir::fromNativeSeparators( appdata ) + "/.marble/data" ); // local path
 #endif
+}
+
+QStringList MarbleDirs::oldLocalPaths()
+{
+    QStringList possibleOldPaths;
+
+#ifndef Q_OS_WIN
+    QString oldDefault = QDir::homePath() + "/.marble/data";
+    possibleOldPaths.append( oldDefault );
+
+    QString xdgDefault = QDir::homePath() + "/.local/share/marble";
+    possibleOldPaths.append( xdgDefault );
+
+    QString xdg = getenv( "XDG_DATA_HOME" );
+    xdg += "/marble/";
+    possibleOldPaths.append( xdg );
+#endif
+    QString currentLocalPath = QDir( MarbleDirs::localPath() ).canonicalPath();
+    QStringList oldPaths;
+    foreach( const QString& possibleOldPath, possibleOldPaths ) {
+        if( !QDir().exists( possibleOldPath ) ) {
+            continue;
+        }
+
+        QString canonicalPossibleOldPath = QDir( possibleOldPath ).canonicalPath();
+        if( canonicalPossibleOldPath == currentLocalPath ) {
+            continue;
+        }
+
+        oldPaths.append( canonicalPossibleOldPath );
+    }
+
+    return oldPaths;
 }
 
 QString MarbleDirs::pluginLocalPath() 

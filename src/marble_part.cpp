@@ -99,7 +99,7 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     // only set marble data path when a path was given
     if ( arguments.count() != 0 && !arguments.first().isEmpty() )
         MarbleDirs::setMarbleDataPath( arguments.first() );
-    
+
     // Setting measure system to provide nice standards for all unit questions.
     // This has to happen before any initialization so plugins (for example) can
     // use it during initialization.

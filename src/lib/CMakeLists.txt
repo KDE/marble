@@ -155,6 +155,7 @@ set(marblewidget_SRCS
     AbstractLayer/AbstractLayer.cpp
     AbstractLayer/AbstractLayerContainer.cpp
     AbstractLayer/AbstractLayerData.cpp
+    DataMigration.cpp
 
     AbstractDataPlugin.cpp
     AbstractDataPluginModel.cpp
@@ -216,6 +217,7 @@ set (marblewidget_UI
     SunControlWidget.ui
     LatLonEdit.ui
     routing/RoutingWidget.ui
+    DataMigrationWidget.ui
 )
 
 # FIXME: cleaner approach of src/lib/MarbleControlBox.* vs. marble.qrc

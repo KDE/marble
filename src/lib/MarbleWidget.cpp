@@ -29,6 +29,7 @@
 #endif
 
 #include "AbstractProjection.h"
+#include "DataMigration.h"
 #include "FileViewModel.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
@@ -164,6 +165,10 @@ MarbleWidget::~MarbleWidget()
 
 void MarbleWidgetPrivate::construct()
 {
+    QPointer<DataMigration> dataMigration = new DataMigration( m_widget );
+    dataMigration->exec();
+    delete dataMigration;
+
 #ifdef MARBLE_DBUS
     QDBusConnection::sessionBus().registerObject("/MarbleWidget", m_widget, 
                     QDBusConnection::ExportAllSlots | QDBusConnection::ExportAllSignals | QDBusConnection::ExportAllProperties);
