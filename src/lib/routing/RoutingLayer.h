@@ -8,8 +8,8 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_ROUTING_LAYER_H
-#define MARBLE_ROUTING_LAYER_H
+#ifndef MARBLE_ROUTINGLAYER_H
+#define MARBLE_ROUTINGLAYER_H
 
 #include "GeoDataCoordinates.h"
 #include "LayerInterface.h"
@@ -123,4 +123,4 @@ private:
 
 } // namespace Marble
 
-#endif // MARBLE_ROUTING_LAYER_H
+#endif

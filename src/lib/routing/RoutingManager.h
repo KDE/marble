@@ -8,8 +8,8 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_ROUTING_MANAGER_H
-#define MARBLE_ROUTING_MANAGER_H
+#ifndef MARBLE_ROUTINGMANAGER_H
+#define MARBLE_ROUTINGMANAGER_H
 
 #include "AbstractRoutingProvider.h"
 #include "GeoDataCoordinates.h"
@@ -82,4 +82,4 @@ private:
 
 } // namespace Marble
 
-#endif // MARBLE_ROUTING_MANAGER_H
+#endif

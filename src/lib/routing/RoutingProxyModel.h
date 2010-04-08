@@ -8,8 +8,8 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef ROUTINGPROXYMODEL_H
-#define ROUTINGPROXYMODEL_H
+#ifndef MARBLE_ROUTINGPROXYMODEL_H
+#define MARBLE_ROUTINGPROXYMODEL_H
 
 #include <QtGui/QSortFilterProxyModel>
 
@@ -37,4 +37,4 @@ protected:
 
 } // namespace Marble
 
-#endif // ROUTINGPROXYMODEL_H
+#endif

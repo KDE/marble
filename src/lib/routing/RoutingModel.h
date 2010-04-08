@@ -8,8 +8,8 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_ROUTING_MODEL_H
-#define MARBLE_ROUTING_MODEL_H
+#ifndef MARBLE_ROUTINGMODEL_H
+#define MARBLE_ROUTINGMODEL_H
 
 #include "GeoDataLineString.h"
 #include "MarblePlacemarkModel.h"
@@ -96,4 +96,4 @@ private:
 
 Q_DECLARE_METATYPE( Marble::RoutingModel::RoutingItemType )
 
-#endif // MARBLE_ROUTING_MODEL_H
+#endif

@@ -8,8 +8,8 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_ABSTRACT_ROUTING_PROVIDER_H
-#define MARBLE_ABSTRACT_ROUTING_PROVIDER_H
+#ifndef MARBLE_ABSTRACTROUTINGPROVIDER_H
+#define MARBLE_ABSTRACTROUTINGPROVIDER_H
 
 #include "GeoDataLineString.h"
 
@@ -54,4 +54,4 @@ Q_SIGNALS:
 
 Q_DECLARE_METATYPE( Marble::AbstractRoutingProvider::Format )
 
-#endif // MARBLE_ABSTRACT_ROUTING_PROVIDER_H
+#endif

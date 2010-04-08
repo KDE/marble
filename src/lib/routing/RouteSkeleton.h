@@ -8,8 +8,8 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_ROUTE_SKELETON_H
-#define MARBLE_ROUTE_SKELETON_H
+#ifndef MARBLE_ROUTESKELETON_H
+#define MARBLE_ROUTESKELETON_H
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
@@ -115,4 +115,4 @@ private:
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::RouteSkeleton::AvoidFeatures)
 
-#endif // MARBLE_ROUTE_SKELETON_H
+#endif

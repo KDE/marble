@@ -8,8 +8,8 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef ORS_ROUTING_PROVIDER_H
-#define ORS_ROUTING_PROVIDER_H
+#ifndef MARBLE_ORSROUTINGPROVIDER_H
+#define MARBLE_ORSROUTINGPROVIDER_H
 
 #include "AbstractRoutingProvider.h"
 #include "RouteSkeleton.h"
@@ -70,4 +70,4 @@ private:
 } // namespace Marble
 
 
-#endif // ORS_ROUTING_PROVIDER_H
+#endif

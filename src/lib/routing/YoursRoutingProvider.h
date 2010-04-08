@@ -8,8 +8,8 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef YOURS_ROUTING_PROVIDER_H
-#define YOURS_ROUTING_PROVIDER_H
+#ifndef MARBLE_YOURSROUTINGPROVIDER_H
+#define MARBLE_YOURSROUTINGPROVIDER_H
 
 #include "AbstractRoutingProvider.h"
 
@@ -48,4 +48,4 @@ private:
 } // namespace Marble
 
 
-#endif // YOURS_ROUTING_PROVIDER_H
+#endif
