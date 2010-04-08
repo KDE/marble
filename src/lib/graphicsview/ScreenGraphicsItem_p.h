@@ -8,8 +8,8 @@
 // Copyright 2009-2010 Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef SCREENGRAPHICSITEMPRIVATE_H
-#define SCREENGRAPHICSITEMPRIVATE_H
+#ifndef MARBLE_SCREENGRAPHICSITEMPRIVATE_H
+#define MARBLE_SCREENGRAPHICSITEMPRIVATE_H
 
 #include "MarbleGraphicsItem_p.h"
 
@@ -134,4 +134,4 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
 
 }
 
-#endif // SCREENGRAPHICSITEMPRIVATE_H
+#endif

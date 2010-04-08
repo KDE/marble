@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef LABELGRAPHICSITEMPRIVATE_H
-#define LABELGRAPHICSITEMPRIVATE_H
+#ifndef MARBLE_LABELGRAPHICSITEMPRIVATE_H
+#define MARBLE_LABELGRAPHICSITEMPRIVATE_H
 
 #include <QtCore/QString>
 #include <QtCore/QSizeF>
@@ -45,4 +45,4 @@ class LabelGraphicsItemPrivate
 
 } // namespace Marble
 
-#endif // LABELGRAPHICSITEMPRIVATE_H
+#endif

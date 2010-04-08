@@ -8,16 +8,14 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-
-#ifndef POINTSCREENGRAPHICSITEM_H
-#define POINTSCREENGRAPHICSITEM_H
+#ifndef MARBLE_POINTSCREENGRAPHICSITEM_H
+#define MARBLE_POINTSCREENGRAPHICSITEM_H
 
 #include "ScreenGraphicsItem.h"
 #include "marble_export.h"
 
 namespace Marble
 {
-
 
 class MARBLE_EXPORT PointScreenGraphicsItem : public ScreenGraphicsItem
 {
@@ -30,4 +28,4 @@ public:
 
 }
 
-#endif // POINTSCREENGRAPHICSITEM_H
+#endif

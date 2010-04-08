@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef MARBLEGRAPHICSITEM_H
-#define MARBLEGRAPHICSITEM_H
+#ifndef MARBLE_MARBLEGRAPHICSITEM_H
+#define MARBLE_MARBLEGRAPHICSITEM_H
 
 #include "marble_export.h"
 
@@ -173,4 +173,4 @@ class MARBLE_EXPORT MarbleGraphicsItem
 
 } // Namespace Marble
 
-#endif // MARBLEGRAPHICSITEM_H
+#endif

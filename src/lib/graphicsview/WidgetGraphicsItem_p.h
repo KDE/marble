@@ -8,8 +8,8 @@
 // Copyright 2010      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef WIDGETGRAPHICSITEMPRIVATE_H
-#define WIDGETGRAPHICSITEMPRIVATE_H
+#ifndef MARBLE_WIDGETGRAPHICSITEMPRIVATE_H
+#define MARBLE_WIDGETGRAPHICSITEMPRIVATE_H
 
 #include "WidgetGraphicsItem.h"
 
@@ -36,4 +36,4 @@ class WidgetGraphicsItemPrivate
 
 }
 
-#endif // SCREENGRAPHICSITEMPRIVATE_H
+#endif

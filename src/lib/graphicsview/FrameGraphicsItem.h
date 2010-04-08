@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef FRAMEGRAPHICSITEM_H
-#define FRAMEGRAPHICSITEM_H
+#ifndef MARBLE_FRAMEGRAPHICSITEM_H
+#define MARBLE_FRAMEGRAPHICSITEM_H
 
 // Marble
 #include "marble_export.h"
@@ -194,4 +194,4 @@ class MARBLE_EXPORT FrameGraphicsItem : public ScreenGraphicsItem
 
 } // namespace Marble
 
-#endif // FRAMEGRAPHICSITEM_H
+#endif

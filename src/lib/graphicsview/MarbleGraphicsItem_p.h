@@ -8,8 +8,8 @@
 // Copyright 2009-2010 Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef MARBLEGRAPHICSITEMPRIVATE_H
-#define MARBLEGRAPHICSITEMPRIVATE_H
+#ifndef MARBLE_MARBLEGRAPHICSITEMPRIVATE_H
+#define MARBLE_MARBLEGRAPHICSITEMPRIVATE_H
 
 // Marble
 #include "AbstractProjection.h"
@@ -181,4 +181,4 @@ class MarbleGraphicsItemPrivate
 
 }
 
-#endif // MARBLEGRAPHICSITEMPRIVATE_H
+#endif

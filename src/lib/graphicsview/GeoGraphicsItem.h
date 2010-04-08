@@ -9,8 +9,8 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-#ifndef GEOGRAPHICSITEM_H
-#define GEOGRAPHICSITEM_H
+#ifndef MARBLE_GEOGRAPHICSITEM_H
+#define MARBLE_GEOGRAPHICSITEM_H
 
 // Marble
 #include "MarbleGraphicsItem.h"
@@ -150,4 +150,4 @@ class MARBLE_EXPORT GeoGraphicsItem : public MarbleGraphicsItem
 } // Namespace Marble
 Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::GeoGraphicsItem::GeoGraphicsItemFlags)
 
-#endif // GEOGRAPHICSITEM_H
+#endif

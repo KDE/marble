@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef SCREENGRAPHICSITEM_H
-#define SCREENGRAPHICSITEM_H
+#ifndef MARBLE_SCREENGRAPHICSITEM_H
+#define MARBLE_SCREENGRAPHICSITEM_H
 
 // Marble
 #include "MarbleGraphicsItem.h"
@@ -108,4 +108,4 @@ class MARBLE_EXPORT ScreenGraphicsItem : public MarbleGraphicsItem
 
 } // Namespace Marble
 
-#endif // SCREENGRAPHICSITEM_H
+#endif

@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef LABELGRAPHICSITEM_H
-#define LABELGRAPHICSITEM_H
+#ifndef MARBLE_LABELGRAPHICSITEM_H
+#define MARBLE_LABELGRAPHICSITEM_H
 
 // Marble
 #include "FrameGraphicsItem.h"
@@ -60,4 +60,4 @@ class MARBLE_EXPORT LabelGraphicsItem : public FrameGraphicsItem
 
 } // namespace Marble
 
-#endif // LABELGRAPHICSITEM_H
+#endif

@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef MARBLEGRAPHICSGRIDLAYOUT_H
-#define MARBLEGRAPHICSGRIDLAYOUT_H
+#ifndef MARBLE_MARBLEGRAPHICSGRIDLAYOUT_H
+#define MARBLE_MARBLEGRAPHICSGRIDLAYOUT_H
 
 // Marble
 #include "AbstractMarbleGraphicsLayout.h"
@@ -62,4 +62,4 @@ class MARBLE_EXPORT MarbleGraphicsGridLayout : public AbstractMarbleGraphicsLayo
 
 } // namespace Marble
 
-#endif // MARBLEGRAPHICSGRIDLAYOUT_H
+#endif

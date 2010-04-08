@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef GEOGRAPHICSITEMPRIVATE_H
-#define GEOGRAPHICSITEMPRIVATE_H
+#ifndef MARBLE_GEOGRAPHICSITEMPRIVATE_H
+#define MARBLE_GEOGRAPHICSITEMPRIVATE_H
 
 
 // Marble
@@ -116,4 +116,4 @@ class GeoGraphicsItemPrivate : public MarbleGraphicsItemPrivate
 
 }
 
-#endif // GEOGRAPHICSITEMPRIVATE_H
+#endif

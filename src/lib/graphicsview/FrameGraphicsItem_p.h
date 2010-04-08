@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef FRAMEGRAPHICSITEMPRIVATE_H
-#define FRAMEGRAPHICSITEMPRIVATE_H
+#ifndef MARBLE_FRAMEGRAPHICSITEMPRIVATE_H
+#define MARBLE_FRAMEGRAPHICSITEMPRIVATE_H
 
 // Marble
 #include "FrameGraphicsItem.h"
@@ -80,4 +80,4 @@ class FrameGraphicsItemPrivate
 
 } // namespace Marble
 
-#endif // FRAMEGRAPHICSITEMPRIVATE_H
+#endif
