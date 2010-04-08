@@ -47,6 +47,8 @@ WikipediaPlugin::WikipediaPlugin()
              this, SLOT( checkNumberOfItems( quint32 ) ) );
      
     setSettings( QHash<QString,QVariant>() );
+
+    m_icon.addFile( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) );
 }
 
 WikipediaPlugin::~WikipediaPlugin()
@@ -107,7 +109,6 @@ QDialog *WikipediaPlugin::aboutDialog() const
         authors.append( bholst );
         m_aboutDialog->setAuthors( authors );
         m_aboutDialog->setDataText( tr( "Geo positions by geonames.org\nTexts by wikipedia.org" ) );
-        m_icon.addFile( MarbleDirs::path( "svg/wikipedia_shadow.svg" ) );
         m_aboutDialog->setPixmap( m_icon.pixmap( 62, 53 ) );
     }
     return m_aboutDialog;
