@@ -8,8 +8,8 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-#ifndef GEOLINESTRINGGRAPHICSITEM_H
-#define GEOLINESTRINGGRAPHICSITEM_H
+#ifndef MARBLE_GEOLINESTRINGGRAPHICSITEM_H
+#define MARBLE_GEOLINESTRINGGRAPHICSITEM_H
 
 #include "GeoDataLineString.h"
 #include "GeoGraphicsItem.h"
@@ -35,4 +35,4 @@ protected:
 
 }
 
-#endif // GEOLINESTRINGGRAPHICSITEM_H
+#endif

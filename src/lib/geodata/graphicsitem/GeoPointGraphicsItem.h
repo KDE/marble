@@ -8,8 +8,8 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-#ifndef GEOPOINTGRAPHICSITEM_H
-#define GEOPOINTGRAPHICSITEM_H
+#ifndef MARBLE_GEOPOINTGRAPHICSITEM_H
+#define MARBLE_GEOPOINTGRAPHICSITEM_H
 
 #include "GeoDataPoint.h"
 #include "GeoGraphicsItem.h"
@@ -34,4 +34,4 @@ protected:
 
 }
 
-#endif // GEOPOINTGRAPHICSITEM_H
+#endif
