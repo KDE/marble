@@ -18,8 +18,8 @@
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef LATLONRUNNER_H
-#define LATLONRUNNER_H
+#ifndef MARBLE_LATLONRUNNER_H
+#define MARBLE_LATLONRUNNER_H
 
 #include "MarbleAbstractRunner.h"
 

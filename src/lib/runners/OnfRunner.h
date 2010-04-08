@@ -18,8 +18,8 @@
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ONFRUNNER_H
-#define ONFRUNNER_H
+#ifndef MARBLE_ONFRUNNER_H
+#define MARBLE_ONFRUNNER_H
 
 #include "MarbleAbstractRunner.h"
 

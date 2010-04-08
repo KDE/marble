@@ -8,8 +8,8 @@
 // Copyright 2010 Torsten Rahn <rahn@kde.org>
 //
 
-#ifndef LOCALDATABASERUNNER_H
-#define LOCALDATABASERUNNER_H
+#ifndef MARBLE_LOCALDATABASERUNNER_H
+#define MARBLE_LOCALDATABASERUNNER_H
 
 #include "MarbleAbstractRunner.h"
 
@@ -33,4 +33,4 @@ protected:
 
 }
 
-#endif // LOCALDATABASERUNNER_H
+#endif

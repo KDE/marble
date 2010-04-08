@@ -18,8 +18,8 @@
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef HOSTIP_RUNNER_H
-#define HOSTIP_RUNNER_H
+#ifndef MARBLE_HOSTIPRUNNER_H
+#define MARBLE_HOSTIPRUNNER_H
 
 #include "MarbleAbstractRunner.h"
 
@@ -62,4 +62,4 @@ private:
 
 }
 
-#endif // HOSTIP_RUNNER_H
+#endif

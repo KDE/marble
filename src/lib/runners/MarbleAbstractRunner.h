@@ -18,8 +18,8 @@
     License along with this library.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef MARBLEABSTRACTRUNNER_H
-#define MARBLEABSTRACTRUNNER_H
+#ifndef MARBLE_MARBLEABSTRACTRUNNER_H
+#define MARBLE_MARBLEABSTRACTRUNNER_H
 
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"

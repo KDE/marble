@@ -9,8 +9,8 @@
 //
 
 
-#ifndef OSM_NOMINATIM_RUNNER_H
-#define OSM_NOMINATIM_RUNNER_H
+#ifndef MARBLE_OSMNOMINATIMRUNNER_H
+#define MARBLE_OSMNOMINATIMRUNNER_H
 
 #include "MarbleAbstractRunner.h"
 
@@ -51,4 +51,4 @@ private:
 
 }
 
-#endif // OSM_NOMINATIM_RUNNER_H
+#endif
