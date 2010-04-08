@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef KMLLATLONALTBOXTAGHANDLER_H
-#define KMLLATLONALTBOXTAGHANDLER_H
+#ifndef MARBLE_KML_KMLLATLONALTBOXTAGHANDLER_H
+#define MARBLE_KML_KMLLATLONALTBOXTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -27,4 +27,4 @@ class KmlLatLonAltBoxTagHandler : public GeoTagHandler
 }
 }
 
-#endif // KMLLATLONALTBOXTAGHANDLER_H
+#endif

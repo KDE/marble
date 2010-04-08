@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef KMLMAXFADEEXTENTTAGHANDLER_H
-#define KMLMAXFADEEXTENTTAGHANDLER_H
+#ifndef MARBLE_KML_KMLMAXFADEEXTENTTAGHANDLER_H
+#define MARBLE_KML_KMLMAXFADEEXTENTTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -27,4 +27,4 @@ class KmlmaxFadeExtentTagHandler : public GeoTagHandler
 }
 }
 
-#endif // KMLMAXFADEEXTENTTAGHANDLER_H
+#endif

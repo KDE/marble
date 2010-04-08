@@ -18,8 +18,8 @@
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
     Boston, MA 02110-1301, USA.
 */
-#ifndef KmlroleTagHandler_h
-#define KmlroleTagHandler_h
+#ifndef MARBLE_KML_KMLROLETAGHANDLER_H
+#define MARBLE_KML_KMLROLETAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -37,4 +37,4 @@ public:
 }
 }
 
-#endif // KmlroleTagHandler_h
+#endif

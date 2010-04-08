@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef KMLLODTAGHANDLER_H
-#define KMLLODTAGHANDLER_H
+#ifndef MARBLE_KML_KMLLODTAGHANDLER_H
+#define MARBLE_KML_KMLLODTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -27,4 +27,4 @@ class KmlLodTagHandler : public GeoTagHandler
 }
 }
 
-#endif // KMLLODTAGHANDLER_H
+#endif

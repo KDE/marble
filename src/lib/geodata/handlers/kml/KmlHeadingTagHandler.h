@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KmlheadingTagHandler_h
-#define KmlheadingTagHandler_h
+#ifndef MARBLE_KML_KMLHEADINGTAGHANDLER_H
+#define MARBLE_KML_KMLHEADINGTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -38,4 +38,4 @@ public:
 }
 }
 
-#endif // KmlheadingTagHandler_h
+#endif

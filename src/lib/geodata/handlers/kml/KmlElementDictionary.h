@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KMLElementDictionary_h
-#define KMLElementDictionary_h
+#ifndef MARBLE_KML_KMLELEMENTDICTIONARY_H
+#define MARBLE_KML_KMLELEMENTDICTIONARY_H
 
 namespace Marble
 {
@@ -199,4 +199,4 @@ namespace kml
 
 }
 
-#endif // KMLElementDictionary_h
+#endif

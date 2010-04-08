@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef KMLMINALTITUDETAGHANDLER_H
-#define KMLMINALTITUDETAGHANDLER_H
+#ifndef MARBLE_KML_KMLMINALTITUDETAGHANDLER_H
+#define MARBLE_KML_KMLMINALTITUDETAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -27,4 +27,4 @@ class KmlminAltitudeTagHandler : public GeoTagHandler
 }
 }
 
-#endif // KMLMINALTITUDETAGHANDLER_H
+#endif

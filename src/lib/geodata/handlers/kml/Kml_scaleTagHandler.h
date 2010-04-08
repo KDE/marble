@@ -19,12 +19,15 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KmlscaleTagHandler_h
-#define KmlscaleTagHandler_h
+#ifndef MARBLE_KML_KMLsCALETAGHANDLER_H
+#define MARBLE_KML_KMLsCALETAGHANDLER_H
 
 // be aware that there is another Tag called Scale which uses the name KmlscaleTagHandler.h
 // as it is impossible to use the name KmlscaleTagHandler then, use an underscore
 // to mark the lower case variant
+// FIXME: is this really the case nowadays?
+// There does not seem to be a KmlscaleTagHandler.h, nor seems kmlTag_Scale to be used anymore.
+// As a reminder let's keep the small 's' for now.
 
 #include "GeoTagHandler.h"
 
@@ -42,4 +45,4 @@ public:
 }
 }
 
-#endif // KmlscaleTagHandler_h
+#endif

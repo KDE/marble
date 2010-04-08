@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef KMLWESTTAGHANDLER_H
-#define KMLWESTTAGHANDLER_H
+#ifndef MARBLE_KML_KMLWESTTAGHANDLER_H
+#define MARBLE_KML_KMLWESTTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -27,4 +27,4 @@ public:
 }
 }
 
-#endif // KMLWESTTAGHANDLER_H
+#endif

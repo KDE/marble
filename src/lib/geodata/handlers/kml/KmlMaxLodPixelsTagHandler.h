@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef KMLMAXLODPIXELSTAGHANDLER_H
-#define KMLMAXLODPIXELSTAGHANDLER_H
+#ifndef MARBLE_KML_KMLMAXLODPIXELSTAGHANDLER_H
+#define MARBLE_KML_KMLMAXLODPIXELSTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -27,4 +27,4 @@ class KmlmaxLodPixelsTagHandler : public GeoTagHandler
 }
 }
 
-#endif // KMLMAXLODPIXELSTAGHANDLER_H
+#endif

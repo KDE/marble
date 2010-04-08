@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef KMLMINLODPIXELSTAGHANDLER_H
-#define KMLMINLODPIXELSTAGHANDLER_H
+#ifndef MARBLE_KML_KMLMINLODPIXELSTAGHANDLER_H
+#define MARBLE_KML_KMLMINLODPIXELSTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -27,4 +27,4 @@ class KmlminLodPixelsTagHandler : public GeoTagHandler
 }
 }
 
-#endif // KMLMINLODPIXELSTAGHANDLER_H
+#endif

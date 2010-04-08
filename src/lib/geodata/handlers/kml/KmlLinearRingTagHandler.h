@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef KmlLinearRingTagHandler_h
-#define KmlLinearRingTagHandler_h
+#ifndef MARBLE_KML_KMLLINEARRINGTAGHANDLER_H
+#define MARBLE_KML_KMLLINEARRINGTAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -38,4 +38,4 @@ public:
 }
 }
 
-#endif // KmlLinearRingTagHandler_h
+#endif

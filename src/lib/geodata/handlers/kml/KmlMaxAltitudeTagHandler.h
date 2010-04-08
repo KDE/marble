@@ -8,8 +8,8 @@
 // Copyright 2009      Bastian Holst <bastianholst@gmx.de>
 //
 
-#ifndef KMLMAXALTITUDETAGHANDLER_H
-#define KMLMAXALTITUDETAGHANDLER_H
+#ifndef MARBLE_KML_KMLMAXALTITUDETAGHANDLER_H
+#define MARBLE_KML_KMLMAXALTITUDETAGHANDLER_H
 
 #include "GeoTagHandler.h"
 
@@ -27,4 +27,4 @@ class KmlmaxAltitudeTagHandler : public GeoTagHandler
 }
 }
 
-#endif // KMLMAXALTITUDETAGHANDLER_H
+#endif
