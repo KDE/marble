@@ -10,8 +10,8 @@
 //
 
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef MARBLE_MAINWINDOW_H
+#define MARBLE_MAINWINDOW_H
  
 
 #include <QtGui/QMainWindow>

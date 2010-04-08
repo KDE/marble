@@ -14,8 +14,8 @@
 //
 
 
-#ifndef CONTROLVIEW_H
-#define CONTROLVIEW_H
+#ifndef MARBLE_CONTROLVIEW_H
+#define MARBLE_CONTROLVIEW_H
 
 
 #include <QtGui/QWidget>
@@ -77,4 +77,4 @@ class ControlView : public QWidget
 
 }
 
-#endif // CONTROLVIEW_H
+#endif

@@ -13,8 +13,8 @@
 // Description: Some Tests for Marble
 //
 
-#ifndef MARBLETEST_H
-#define MARBLETEST_H
+#ifndef MARBLE_MARBLETEST_H
+#define MARBLE_MARBLETEST_H
 
 namespace Marble
 {
@@ -40,4 +40,4 @@ class MarbleTest
 
 }
 
-#endif // MARBLETEST_H
+#endif

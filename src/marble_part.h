@@ -10,8 +10,8 @@
 // Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
-#ifndef MARBLE_PART_H
-#define MARBLE_PART_H
+#ifndef MARBLE_MARBLEPART_H
+#define MARBLE_MARBLEPART_H
 
 #include <kparts/part.h>
 #include <QtCore/QHash>
