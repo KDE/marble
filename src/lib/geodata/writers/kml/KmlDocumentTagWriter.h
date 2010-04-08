@@ -8,8 +8,8 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-#ifndef KMLDOCUMENTTAGWRITER_H
-#define KMLDOCUMENTTAGWRITER_H
+#ifndef MARBLE_KMLDOCUMENTTAGWRITER_H
+#define MARBLE_KMLDOCUMENTTAGWRITER_H
 
 #include "GeoTagWriter.h"
 
@@ -24,4 +24,4 @@ public:
 
 }
 
-#endif // KMLDOCUMENTTAGWRITER_H
+#endif

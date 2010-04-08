@@ -8,8 +8,8 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-#ifndef KMLPLACEMARKTAGWRITER_H
-#define KMLPLACEMARKTAGWRITER_H
+#ifndef MARBLE_KMLPLACEMARKTAGWRITER_H
+#define MARBLE_KMLPLACEMARKTAGWRITER_H
 
 #include "GeoTagWriter.h"
 
@@ -24,4 +24,4 @@ public:
 
 }
 
-#endif // KMLPLACEMARKTAGWRITER_H
+#endif
