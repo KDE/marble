@@ -20,8 +20,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEOSCENEDOCUMENT_H
-#define GEOSCENEDOCUMENT_H
+#ifndef MARBLE_GEOSCENEDOCUMENT_H
+#define MARBLE_GEOSCENEDOCUMENT_H
 
 #include <QtCore/QObject>
 #include "GeoDocument.h"
@@ -75,4 +75,4 @@ class GEODATA_EXPORT GeoSceneDocument : public QObject,
 
 }
 
-#endif // GEOSCENEDOCUMENT_H
+#endif

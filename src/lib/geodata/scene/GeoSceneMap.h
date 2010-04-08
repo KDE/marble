@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEOSCENEMAP_H
-#define GEOSCENEMAP_H
+#ifndef MARBLE_GEOSCENEMAP_H
+#define MARBLE_GEOSCENEMAP_H
 
 #include <QtGui/QColor>
 #include <QtCore/QString>
@@ -117,4 +117,4 @@ class GEODATA_EXPORT GeoSceneMap : public GeoNode
 
 }
 
-#endif // GEOSCENEMAP_H
+#endif

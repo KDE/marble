@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEOSCENEVECTOR_H
-#define GEOSCENEVECTOR_H
+#ifndef MARBLE_GEOSCENEVECTOR_H
+#define MARBLE_GEOSCENEVECTOR_H
 
 #include <QtCore/QString>
 #include <QtGui/QPen>
@@ -64,4 +64,4 @@ class GeoSceneVector : public GeoSceneAbstractDataset
 
 }
 
-#endif // GEOSCENEVECTOR_H
+#endif

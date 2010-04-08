@@ -10,8 +10,8 @@
 //
 
 
-#ifndef MAPTHEME_H
-#define MAPTHEME_H
+#ifndef MARBLE_GEOSCENEMAPTHEME_H
+#define MARBLE_GEOSCENEMAPTHEME_H
 
 
 #include <QtCore/QObject>
@@ -158,4 +158,4 @@ private:
 
 }
 
-#endif // MAPTHEME_H
+#endif

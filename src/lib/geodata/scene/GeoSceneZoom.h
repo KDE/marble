@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEOSCENEZOOM_H
-#define GEOSCENEZOOM_H
+#ifndef MARBLE_GEOSCENEZOOM_H
+#define MARBLE_GEOSCENEZOOM_H
 
 #include <geodata_export.h>
 #include "GeoDocument.h"
@@ -53,4 +53,4 @@ class GEODATA_EXPORT GeoSceneZoom : public GeoNode
 
 }
 
-#endif // GEOSCENEZOOM_H
+#endif

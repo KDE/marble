@@ -20,8 +20,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEOSCENETEXTURE_H
-#define GEOSCENETEXTURE_H
+#ifndef MARBLE_GEOSCENETEXTURE_H
+#define MARBLE_GEOSCENETEXTURE_H
 
 #include <QtCore/QList>
 #include <QtCore/QStringList>
@@ -112,4 +112,4 @@ inline bool GeoSceneTexture::hasMaximumTileLevel() const
 
 }
 
-#endif // GEOSCENETEXTURE_H
+#endif

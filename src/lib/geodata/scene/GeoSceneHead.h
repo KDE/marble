@@ -19,8 +19,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#ifndef GEOSCENEHEAD_H
-#define GEOSCENEHEAD_H
+#ifndef MARBLE_GEOSCENEHEAD_H
+#define MARBLE_GEOSCENEHEAD_H
 
 #include <QtCore/QString>
 #include "GeoDocument.h"
@@ -73,4 +73,4 @@ class GEODATA_EXPORT GeoSceneHead : public GeoNode
 
 }
 
-#endif // GEOSCENEHEAD_H
+#endif
