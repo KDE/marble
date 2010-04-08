@@ -9,8 +9,8 @@
 // Copyright (C) 2007, 2008 Nikolas Zimmermann <zimmermann@kde.org>
 //
 
-#ifndef GEOTAGWRITER_H
-#define GEOTAGWRITER_H
+#ifndef MARBLE_GEOTAGWRITER_H
+#define MARBLE_GEOTAGWRITER_H
 
 #include <QtCore/QPair>
 #include <QtCore/QHash>
@@ -81,4 +81,4 @@ public:
 
 }
 
-#endif // GEOTAGWRITER_H
+#endif

@@ -8,8 +8,8 @@
 // Copyright 2009      Andrew Manson <g.real.ate@gmail.com>
 //
 
-#ifndef GEOWRITER_H
-#define GEOWRITER_H
+#ifndef MARBLE_GEOWRITER_H
+#define MARBLE_GEOWRITER_H
 
 #include "GeoDataFeature.h"
 #include "marble_export.h"
@@ -67,4 +67,4 @@ private:
 
 }
 
-#endif // GEOWRITER_H
+#endif
