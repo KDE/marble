@@ -53,7 +53,7 @@ class GeoSceneGroup : public QObject,
      * @return @c true  the property was registered in this group
      *         @c false the property wasn't registered in this group
      */
-    bool propertyAvailable( const QString& name, bool& available );
+    bool propertyAvailable( const QString& name, bool& available ) const;
 
     /**
      * @brief  Set the value of a property in this group
@@ -71,7 +71,7 @@ class GeoSceneGroup : public QObject,
      * @return @c true  the property was found and returned accordingly
      *         @c false the property couldn't be found in this group
      */
-    bool propertyValue( const QString& name, bool& value );
+    bool propertyValue( const QString& name, bool& value ) const;
 
     /**
      * @brief  Add a property to this setting group
