@@ -169,7 +169,7 @@ void GeoSceneSettings::addGroup( GeoSceneGroup* group )
     }
 }
 
-GeoSceneGroup* GeoSceneSettings::group( const QString& name )
+const GeoSceneGroup* GeoSceneSettings::group( const QString& name ) const
 {
     GeoSceneGroup* group = 0;
 

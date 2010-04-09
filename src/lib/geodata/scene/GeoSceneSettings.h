@@ -92,7 +92,7 @@ class GEODATA_EXPORT GeoSceneSettings : public QObject,
      * @brief  Get a group from the settings
      * @param  name  the name of the group
      */
-    GeoSceneGroup* group( const QString& name );
+    const GeoSceneGroup* group( const QString& name ) const;
 
     /**
      * @brief  Add a property to the settings
