@@ -78,7 +78,8 @@ class GeoSceneGroup : public QObject,
      * @param  property  the new property
      */
     void addProperty(GeoSceneProperty*);
-    GeoSceneProperty* property(const QString&);
+    const GeoSceneProperty* property( const QString& name ) const;
+    GeoSceneProperty* property( const QString& name );
     QVector<GeoSceneProperty*> properties() const;
 
     QString name() const;

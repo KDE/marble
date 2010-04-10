@@ -111,7 +111,7 @@ void GeoSceneGroup::addProperty( GeoSceneProperty* property )
     }
 }
 
-GeoSceneProperty* GeoSceneGroup::property( const QString& name )
+const GeoSceneProperty* GeoSceneGroup::property( const QString& name ) const
 {
     GeoSceneProperty* property = 0;
 
@@ -125,6 +125,14 @@ GeoSceneProperty* GeoSceneGroup::property( const QString& name )
     }
 
     return property;
+}
+
+// implement non-const method by means of const method,
+// for details, see "Effective C++" (third edition)
+GeoSceneProperty* GeoSceneGroup::property( const QString& name )
+{
+    return const_cast<GeoSceneProperty*>
+        ( static_cast<GeoSceneGroup const *>( this )->property( name ));
 }
 
 QVector<GeoSceneProperty*> GeoSceneGroup::properties() const
