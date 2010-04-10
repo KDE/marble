@@ -244,6 +244,9 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void adjustForAnimation();
     void adjustForStill();
 
+    void changePositionProvider( const QString &provider );
+    void centerOnGps();
+
  private:
     void setWidgetTabShown( QWidget * widget, int insertIndex, 
                             bool show, QString &text );

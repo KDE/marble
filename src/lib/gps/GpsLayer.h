@@ -31,7 +31,7 @@ class GpsLayer : public AbstractLayer
 
  public:
     explicit GpsLayer( GpxFileModel *fileModel,
-                       PluginManager *pluginManager, QObject *parent =0 );
+                       QObject *parent =0 );
     ~GpsLayer();
     virtual void paintLayer( ClipPainter *painter, 
                              const QSize &canvasSize,

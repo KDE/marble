@@ -23,7 +23,7 @@
 using namespace Marble;
 
 GpsLayer::GpsLayer( GpxFileModel *fileModel,
-                    PluginManager *pluginManager, QObject *parent )
+                    QObject *parent )
                 :AbstractLayer( parent )
 {
     m_currentPosition = new Waypoint( 0,0 );
@@ -38,7 +38,7 @@ GpsLayer::GpsLayer( GpxFileModel *fileModel,
 //     m_gpsTrack = new Track();
     m_currentGpx = new GpxFile();
     m_fileModel->addFile( m_currentGpx );
-    m_tracking = new PositionTracking( m_currentGpx, pluginManager, this );
+    m_tracking = new PositionTracking( m_currentGpx, this );
 
 }
 

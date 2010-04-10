@@ -28,7 +28,7 @@ QString GeoCluePositionProviderPlugin::nameId() const
 
 QString GeoCluePositionProviderPlugin::guiString() const
 {
-    return tr( "GeoClue position provider plugin" );
+    return tr( "GeoClue" );
 }
 
 QString GeoCluePositionProviderPlugin::description() const

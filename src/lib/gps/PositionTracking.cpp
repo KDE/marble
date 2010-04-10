@@ -17,7 +17,6 @@
 #include "Track.h"
 #include "TrackPoint.h"
 #include "TrackSegment.h"
-#include "PluginManager.h"
 #include "PositionProviderPlugin.h"
 #include "MarbleMath.h"
 #include "ViewParams.h"
@@ -32,9 +31,8 @@
 using namespace Marble;
 
 PositionTracking::PositionTracking( GpxFile *currentGpx,
-                                    PluginManager *pluginManager,
                           QObject *parent ) 
-     : QObject( parent )
+     : QObject( parent ), m_positionProvider(0)
 {
     m_gpsCurrentPosition  = new TrackPoint( 0,0 );
     m_gpsPreviousPosition = new TrackPoint( 0,0 );
@@ -44,21 +42,6 @@ PositionTracking::PositionTracking( GpxFile *currentGpx,
     currentGpx->addTrack( m_gpsTrack );
     m_gpsTrackSeg = 0;
     m_updateDelay = 0;
-
-    QList<PositionProviderPlugin *> plugins = pluginManager->createPositionProviderPlugins();
-    if ( !plugins.isEmpty() ) {
-        // FIXME: not just take the first plugin, but use some configuration setting
-        // take the first plugin and delete the rest
-        m_positionProvider = plugins.takeFirst();
-        qDeleteAll( plugins );
-        m_positionProvider->setParent( this );
-        mDebug() << "Initializing position provider:" << m_positionProvider->name();
-        m_positionProvider->initialize();
-    } else {
-        // useful when there is no plugin available.
-        mDebug() << "No position provider available";
-        m_positionProvider = 0;
-    }
 }
 
 
@@ -209,6 +192,19 @@ void PositionTracking::draw( ClipPainter *painter,
     m_previousDraw = m_currentDraw;
 }
 
+void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin )
+{
+    if ( m_positionProvider ) {
+        m_positionProvider->deleteLater();
+    }
 
+    m_positionProvider = plugin;
+
+    if ( m_positionProvider ) {
+        m_positionProvider->setParent( this );
+        mDebug() << "Initializing position provider:" << m_positionProvider->name();
+        m_positionProvider->initialize();
+    }
+}
 
 #include "PositionTracking.moc"

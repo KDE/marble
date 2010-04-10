@@ -41,7 +41,6 @@ class PositionTracking : public QObject
 public:
 
     explicit PositionTracking( GpxFile *currentGpx,
-                               PluginManager *pluginManager,
                           QObject *parent = 0 );
     ~PositionTracking();
 
@@ -84,6 +83,11 @@ public:
                 const QSize &canvasSize, 
                 ViewParams *viewParams );
 
+    /**
+      * Change the position provider to use. You can provide 0 to disable
+      * position tracking. Ownership of the provided plugin is taken.
+      */
+    void setPositionProviderPlugin( PositionProviderPlugin* plugin );
 
  public slots:
     void  notifyPosition( GeoDataCoordinates );

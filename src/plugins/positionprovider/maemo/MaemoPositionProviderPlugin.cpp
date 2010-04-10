@@ -54,7 +54,7 @@ QString MaemoPositionProviderPlugin::nameId() const
 
 QString MaemoPositionProviderPlugin::guiString() const
 {
-    return tr( "Maemo GPS (e.g. Nokia N900)" );
+    return tr( "Maemo" );
 }
 
 QString MaemoPositionProviderPlugin::description() const

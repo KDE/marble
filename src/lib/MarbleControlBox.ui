@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>285</width>
+    <width>185</width>
     <height>630</height>
    </rect>
   </property>
@@ -53,15 +53,15 @@
       <string>This control panel allows you to adjust the map according to your needs.</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="NavigationTab">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>275</width>
-        <height>480</height>
+        <width>118</width>
+        <height>409</height>
        </rect>
       </property>
       <attribute name="label">
@@ -427,8 +427,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>275</width>
-        <height>480</height>
+        <width>83</width>
+        <height>77</height>
        </rect>
       </property>
       <attribute name="label">
@@ -455,8 +455,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>275</width>
-        <height>480</height>
+        <width>99</width>
+        <height>202</height>
        </rect>
       </property>
       <attribute name="label">
@@ -586,8 +586,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>275</width>
-        <height>480</height>
+        <width>140</width>
+        <height>106</height>
        </rect>
       </property>
       <attribute name="label">
@@ -653,210 +653,53 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>275</width>
-        <height>480</height>
+        <width>175</width>
+        <height>500</height>
        </rect>
       </property>
       <attribute name="label">
        <string>Current Location</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QCheckBox" name="navigationCheckBox">
-         <property name="toolTip">
-          <string>Centers onto your current position</string>
+        <widget class="QLabel" name="projectionLabel_3">
+         <property name="text">
+          <string>Position Tracking</string>
          </property>
-         <property name="whatsThis">
-          <string>In navigation mode the view will center onto your current position and will try to emulate the behaviour of a navigation system</string>
+         <property name="buddy">
+          <cstring>projectionComboBox</cstring>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="positionTrackingComboBox">
+         <item>
+          <property name="text">
+           <string>Disabled</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="locationLabel">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Sunken</enum>
          </property>
          <property name="text">
-          <string>Navigation mode</string>
+          <string>No position available.</string>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="speedGroupBox">
-         <property name="toolTip">
-          <string>Your current speed</string>
+         <property name="textFormat">
+          <enum>Qt::RichText</enum>
          </property>
-         <property name="whatsThis">
-          <string>Your current speed (measured e.g. via a GPS device)</string>
-         </property>
-         <property name="title">
-          <string>Speed</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QLabel" name="speedLabel">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="toolTip">
-             <string>Your current speed</string>
-            </property>
-            <property name="whatsThis">
-             <string/>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Sunken</enum>
-            </property>
-            <property name="text">
-             <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'DejaVu Sans'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;000,0 km/h&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-            <property name="margin">
-             <number>7</number>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="positionGroupBox">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="toolTip">
-          <string>Your current position</string>
-         </property>
-         <property name="whatsThis">
-          <string>Your current position (measured e.g. via a GPS device)</string>
-         </property>
-         <property name="title">
-          <string>Position</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QLabel" name="positionLabel">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="toolTip">
-             <string>Fuzzy description of your position</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Sunken</enum>
-            </property>
-            <property name="text">
-             <string>&lt;b&gt;Unidentified Position&lt;/b&gt;</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-            <property name="margin">
-             <number>7</number>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QFrame" name="coordinateLabel">
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_6">
-             <property name="margin">
-              <number>7</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="longitudeLabel">
-               <property name="toolTip">
-                <string>Longitude of your current position</string>
-               </property>
-               <property name="text">
-                <string>Longitude</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="longitudeValue">
-               <property name="toolTip">
-                <string>Longitude of your current position</string>
-               </property>
-               <property name="text">
-                <string>+00°00'00&quot; E</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="latitudeLabel">
-               <property name="toolTip">
-                <string>Latitude of your current position</string>
-               </property>
-               <property name="text">
-                <string>Latitude</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="latitudeValue">
-               <property name="toolTip">
-                <string>Latitude of your current position</string>
-               </property>
-               <property name="text">
-                <string>+00°00'00&quot; N</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="altitudeLabel">
-               <property name="toolTip">
-                <string>Altitude of your current position</string>
-               </property>
-               <property name="text">
-                <string>Altitude</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="altitudeValue">
-               <property name="toolTip">
-                <string>Altitude of your current position</string>
-               </property>
-               <property name="text">
-                <string>000 m</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-            <zorder>longitudeLabel</zorder>
-            <zorder>longitudeLabel</zorder>
-            <zorder>longitudeLabel</zorder>
-            <zorder>longitudeValue</zorder>
-            <zorder>latitudeLabel</zorder>
-            <zorder>latitudeValue</zorder>
-            <zorder>altitudeLabel</zorder>
-            <zorder>altitudeValue</zorder>
-           </widget>
-          </item>
-         </layout>
         </widget>
        </item>
        <item>
@@ -896,7 +739,7 @@ p, li { white-space: pre-wrap; }
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../../../marble/src/lib/libmarble.qrc"/>
+  <include location="../../../src/lib/libmarble.qrc"/>
  </resources>
  <connections/>
 </ui>

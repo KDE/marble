@@ -55,6 +55,7 @@ PluginManager::~PluginManager()
 {
     qDeleteAll( d->m_renderPluginTemplates );
     qDeleteAll( d->m_networkPluginTemplates );
+    qDeleteAll( d->m_positionProviderPluginTemplates );
     delete d;
 }
 

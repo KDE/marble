@@ -28,7 +28,7 @@ QString GpsdPositionProviderPlugin::nameId() const
 
 QString GpsdPositionProviderPlugin::guiString() const
 {
-    return tr( "Gpsd position provider plugin" );
+    return tr( "gpsd" );
 }
 
 QString GpsdPositionProviderPlugin::description() const
