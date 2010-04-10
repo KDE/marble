@@ -111,19 +111,12 @@ const GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name ) con
     return dataset;
 }
 
+// implement non-const method by means of const method,
+// for details, see "Effective C++" (third edition)
 GeoSceneAbstractDataset* GeoSceneLayer::dataset( const QString& name )
 {
-    GeoSceneAbstractDataset* dataset = 0;
-
-    QVector<GeoSceneAbstractDataset*>::const_iterator it = m_datasets.constBegin();
-    QVector<GeoSceneAbstractDataset*>::const_iterator end = m_datasets.constEnd();
-    for (; it != end; ++it) {
-        if ( (*it)->name() == name ) {
-            dataset = *it;
-            break;
-        }
-    }
-    return dataset;
+    return const_cast<GeoSceneAbstractDataset*>
+        ( static_cast<GeoSceneLayer const *>( this )->dataset( name ));
 }
 
 const GeoSceneAbstractDataset * GeoSceneLayer::groundDataset() const
@@ -134,12 +127,12 @@ const GeoSceneAbstractDataset * GeoSceneLayer::groundDataset() const
     return m_datasets.first();
 }
 
+// implement non-const method by means of const method,
+// for details, see "Effective C++" (third edition)
 GeoSceneAbstractDataset * GeoSceneLayer::groundDataset()
 {
-    if ( m_datasets.isEmpty() )
-        return 0;
-
-    return m_datasets.first();
+    return const_cast<GeoSceneAbstractDataset*>
+        ( static_cast<GeoSceneLayer const *>( this )->groundDataset() );
 }
 
 QVector<GeoSceneAbstractDataset *> GeoSceneLayer::datasets() const
