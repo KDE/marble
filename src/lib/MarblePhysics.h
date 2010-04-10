@@ -31,7 +31,7 @@ class MarblePhysics : public QObject
       * @brief Constructor
       * parent Pointer to the parent object
       */
-    MarblePhysics( QObject * parent = 0);
+    explicit MarblePhysics( QObject * parent = 0);
     
     /**
       * @brief Destructor

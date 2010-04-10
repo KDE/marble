@@ -38,7 +38,7 @@ class MARBLE_EXPORT MarbleCacheSettingsWidget : public QWidget, public Ui::Marbl
     Q_OBJECT
 
  public:
-    MarbleCacheSettingsWidget( QWidget *parent = 0 );
+    explicit MarbleCacheSettingsWidget( QWidget *parent = 0 );
 
 
  Q_SIGNALS:

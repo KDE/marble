@@ -47,7 +47,7 @@ public:
      * Constructor; note that @p parent should be 0 in order to move the
      * thread object into its own thread.
      */
-    MarbleAbstractRunner(QObject *parent = 0);
+    explicit MarbleAbstractRunner(QObject *parent = 0);
     /**
      * Destructor.
      */
