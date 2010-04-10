@@ -105,6 +105,7 @@ class GEODATA_EXPORT GeoSceneSettings : public QObject,
      * @brief  Get a property from the settings
      * @param  name  the name of the property
      */
+    const GeoSceneProperty* property( const QString& name ) const;
     GeoSceneProperty* property( const QString& name );
 
     /**

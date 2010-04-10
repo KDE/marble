@@ -220,7 +220,7 @@ void GeoSceneSettings::addProperty( GeoSceneProperty* property )
     }
 }
 
-GeoSceneProperty* GeoSceneSettings::property( const QString& name )
+const GeoSceneProperty* GeoSceneSettings::property( const QString& name ) const
 {
     GeoSceneProperty* property = 0;
 
@@ -234,6 +234,14 @@ GeoSceneProperty* GeoSceneSettings::property( const QString& name )
     }
 
     return property;
+}
+
+// implement non-const method by means of const method,
+// for details, see "Effective C++" (third edition)
+GeoSceneProperty* GeoSceneSettings::property( const QString& name )
+{
+    return const_cast<GeoSceneProperty*>
+        ( static_cast<GeoSceneSettings const *>( this )->property( name ));
 }
 
 QVector<GeoSceneProperty*> GeoSceneSettings::rootProperties() const
