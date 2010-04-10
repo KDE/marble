@@ -17,6 +17,7 @@
 
 #include <cmath>
 
+#include "blendings/Blending.h"
 #include "GeoSceneTexture.h"
 #include "MarbleDebug.h"
 #include "TextureTile.h"
@@ -210,30 +211,6 @@ inline void StackedTilePrivate::mergeCopyToResult( QSharedPointer<TextureTile> c
     m_resultTile = other->image()->copy();
 }
 
-void StackedTilePrivate::mergeMultiplyToResult( QSharedPointer<TextureTile> const & other )
-{
-    // for this operation we assume that the tiles have the same size
-    QImage const * const otherImage = other->image();
-    Q_ASSERT( m_resultTile.size() == otherImage->size() );
-    if ( m_resultTile.size() != otherImage->size() )
-        return;
-
-    int const width = m_resultTile.width();
-    int const height = m_resultTile.height();
-    for ( int y = 0; y < height; ++y ) {
-        for ( int x = 0; x < width; ++x ) {
-            qreal const c = qRed( otherImage->pixel( x, y )) / 255.0;
-            QRgb const oldPixel = m_resultTile.pixel( x, y );
-            int const oldRed = qRed( oldPixel );
-            int const oldGreen = qGreen( oldPixel );
-            int const oldBlue = qBlue( oldPixel );
-            m_resultTile.setPixel( x, y, qRgb(( int )( oldRed + ( 255 - oldRed ) * c ),
-                                              ( int )( oldGreen + ( 255 - oldGreen ) * c ),
-                                              ( int )( oldBlue + ( 255 - oldBlue ) * c )));
-        }
-    }
-}
-
 void StackedTilePrivate::calcByteCount()
 {
     int byteCount = m_resultTile.numBytes();
@@ -390,15 +367,17 @@ void StackedTile::initResultTile()
     QVector<QSharedPointer<TextureTile> >::const_iterator pos = d->m_tiles.constBegin();
     QVector<QSharedPointer<TextureTile> >::const_iterator const end = d->m_tiles.constEnd();
     for (; pos != end; ++pos )
-        if ( (*pos)->state() != TextureTile::StateEmpty )
-            switch ( (*pos)->mergeRule() ) {
-            case TextureTile::MergeCopy:
-                d->mergeCopyToResult( *pos );
-                break;
-            case TextureTile::MergeMultiply:
-                d->mergeMultiplyToResult( *pos );
-                break;
+        if ( (*pos)->state() != TextureTile::StateEmpty ) {
+            Blending const * const blending = (*pos)->blending();
+            if ( blending ) {
+                mDebug() << "StackedTile::initResultTile: blending";
+                blending->blend( &d->m_resultTile, *pos );
             }
+            else {
+                mDebug() << "StackedTile::initResultTile: no blending defined => copying top over bottom image";
+                d->mergeCopyToResult( *pos );
+            }
+        }
 
     initJumpTables();
 

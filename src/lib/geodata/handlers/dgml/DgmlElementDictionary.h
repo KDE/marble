@@ -34,6 +34,7 @@ namespace dgml
     extern const char* dgmlTag_nameSpace20;
 
     extern  const char* dgmlTag_Available;
+    extern  const char* dgmlTag_Blending;
     extern  const char* dgmlTag_Brush;
     extern  const char* dgmlTag_Coastline;
     extern  const char* dgmlTag_Color;

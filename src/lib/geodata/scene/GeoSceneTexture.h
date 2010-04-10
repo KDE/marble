@@ -37,6 +37,7 @@
 
 namespace Marble
 {
+class Blending;
 class DownloadPolicy;
 
 class GeoSceneTexture : public GeoSceneAbstractDataset
@@ -73,6 +74,9 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     Projection projection() const;
     void setProjection( const Projection );
 
+    Blending const * blending() const;
+    void setBlending( Blending const * const );
+
     // this method is a little more than just a stupid getter,
     // it implements the round robin for the tile servers.
     // on each invocation the next url is returned
@@ -96,6 +100,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     int m_levelZeroRows;
     int m_maximumTileLevel;
     Projection m_projection;
+    Blending const * m_blending;
 
     /// List of Urls which are used in a round robin fashion
     QVector<QUrl> m_downloadUrls;
@@ -108,6 +113,16 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
 inline bool GeoSceneTexture::hasMaximumTileLevel() const
 {
     return m_maximumTileLevel != -1;
+}
+
+inline Blending const * GeoSceneTexture::blending() const
+{
+    return m_blending;
+}
+
+inline void GeoSceneTexture::setBlending( Blending const * const blending )
+{
+    m_blending = blending;
 }
 
 }

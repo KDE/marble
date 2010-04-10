@@ -217,11 +217,8 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
         mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
                  << tileId.toString();
         QSharedPointer<TextureTile> const tile = d->m_tileLoader->loadTile( stackedTileId, tileId );
-        // hack to try clouds, first tile is not handled here, MergeCopy is the default,
-        // the merge rule for following tiles is set to MergeMultiply here
         if ( tile ) {
-            if ( stackedTile->hasTiles() )
-                tile->setMergeRule( TextureTile::MergeMultiply );
+            tile->setBlending( textureLayer->blending() );
             stackedTile->addTile( tile );
         }
     }
@@ -269,11 +266,8 @@ StackedTile* StackedTileLoader::reloadTile( TileId const & stackedTileId )
         TileId const tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
         QSharedPointer<TextureTile> const tile = d->m_tileLoader->reloadTile( stackedTileId, tileId );
-        // hack to try clouds, first tile is not handled here, MergeCopy is the default,
-        // the merge rule for following tiles is set to MergeMultiply here
         if ( tile ) {
-            if ( stackedTile->hasTiles() )
-                tile->setMergeRule( TextureTile::MergeMultiply );
+            tile->setBlending( textureLayer->blending() );
             stackedTile->addTile( tile );
         }
     }

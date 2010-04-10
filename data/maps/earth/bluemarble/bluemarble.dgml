@@ -42,6 +42,7 @@
                     <sourcedir format="JPG"> earth/clouds </sourcedir>
                     <installmap> clouds.jpg </installmap>
                     <storageLayout maximumTileLevel="1"/>
+                    <blending name="CloudsBlending" />
                 </texture>
             </layer>
                             

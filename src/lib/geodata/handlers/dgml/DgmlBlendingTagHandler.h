@@ -13,44 +13,23 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with this library. If not, see <http://www.gnu.org/licenses/>.
 
-#include "TextureTile.h"
+#ifndef MARBLE_DGML_BLENDING_TAG_HANDLER_H
+#define MARBLE_DGML_BLENDING_TAG_HANDLER_H
 
-#include <limits>
-
-#include <QtCore/QString>
+#include "GeoTagHandler.h"
 
 namespace Marble
 {
-
-TextureTile::TextureTile( TileId const & tileId )
-    : m_id( tileId ),
-      m_state( StateEmpty ),
-      m_blending( 0 ),
-      m_expireSecs( std::numeric_limits<int>::max() ),
-      m_image( 0 )
+namespace dgml
 {
-}
 
-TextureTile::TextureTile( TileId const & tileId, QString const & fileName )
-    : m_id( tileId ),
-      m_state( StateExpired ),
-      m_blending( 0 ),
-      m_expireSecs( std::numeric_limits<int>::max() ),
-      m_image( new QImage( fileName ))
+class DgmlBlendingTagHandler: public GeoTagHandler
 {
-}
-
-TextureTile::~TextureTile()
-{
-    delete m_image;
-}
-
-void TextureTile::setImage( QByteArray const & data )
-{
-    if ( !m_image )
-        m_image = new QImage( QImage::fromData( data ));
-    else
-        m_image->loadFromData( data );
-}
+public:
+    virtual GeoNode* parse( GeoParser& ) const;
+};
 
 }
+}
+
+#endif

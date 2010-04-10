@@ -26,6 +26,7 @@ class QImage;
 
 namespace Marble
 {
+class Blending;
 class TileLoader;
 class StackedTileLoader;
 
@@ -42,11 +43,6 @@ class TextureTile
         StateUptodate
     };
 
-    enum MergeRule {
-        MergeCopy,
-        MergeMultiply
-    };
-
     explicit TextureTile( TileId const & );
     TextureTile( TileId const & tileId, QString const & fileName );
     ~TextureTile();
@@ -58,7 +54,7 @@ class TextureTile
     QImage const * image() const;
     QImage * image();
     State state() const;
-    MergeRule mergeRule() const;
+    Blending const * blending() const;
     int byteCount() const;
 
  private:
@@ -67,7 +63,7 @@ class TextureTile
     void setState( State const );
     void setImage( QByteArray const & data );
     void setImage( QImage * const );
-    void setMergeRule( MergeRule const );
+    void setBlending( Blending const * const );
     void setStackedTileId( TileId const & );
     void setLastModified( QDateTime const & );
     void setExpireSecs( int const );
@@ -75,7 +71,7 @@ class TextureTile
     TileId const m_id;
     TileId m_stackedTileId;
     State m_state;
-    MergeRule m_mergeRule;
+    Blending const * m_blending;
     QDateTime m_lastModified;
     int m_expireSecs;
     QImage * m_image;
@@ -119,9 +115,9 @@ inline TextureTile::State TextureTile::state() const
     return m_state;
 }
 
-inline TextureTile::MergeRule TextureTile::mergeRule() const
+inline Blending const * TextureTile::blending() const
 {
-    return m_mergeRule;
+    return m_blending;
 }
 
 inline int TextureTile::byteCount() const
@@ -140,9 +136,9 @@ inline void TextureTile::setImage( QImage * const image )
     m_image = image;
 }
 
-inline void TextureTile::setMergeRule( MergeRule const mergeRule )
+inline void TextureTile::setBlending( Blending const * const blending )
 {
-    m_mergeRule = mergeRule;
+    m_blending = blending;
 }
 
 inline void TextureTile::setStackedTileId( TileId const & id )
