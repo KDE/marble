@@ -59,6 +59,10 @@ set(marblewidget_SRCS
     ${geodata_SRCS}
     ${graphicsview_SRCS}
     ${screengraphicsitem_SRCS}
+    blendings/Blending.cpp
+    blendings/BlendingAlgorithms.cpp
+    blendings/BlendingFactory.cpp
+    blendings/SunLightBlending.cpp
     MarbleWidget.cpp
     MarbleModel.cpp
     MarbleMap.cpp
