@@ -57,7 +57,7 @@ class GEODATA_EXPORT GeoSceneSettings : public QObject,
      * @return @c true  the property was registered across groups
      *         @c false the property wasn't registered across groups
      */
-    bool propertyAvailable( const QString& name, bool& available  );
+    bool propertyAvailable( const QString& name, bool& available ) const;
 
     /**
      * @brief  Set the value of a property across groups
@@ -75,7 +75,7 @@ class GEODATA_EXPORT GeoSceneSettings : public QObject,
      * @return @c true  the property was found and returned accordingly
      *         @c false the property couldn't be found in this group
      */
-    bool propertyValue( const QString& name, bool& value  );
+    bool propertyValue( const QString& name, bool& value ) const;
 
     /**
      * @brief  Get the whole list of properties stored in the settings

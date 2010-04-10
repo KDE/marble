@@ -54,7 +54,7 @@ GeoSceneSettings::~GeoSceneSettings()
     delete d;
 }
 
-bool GeoSceneSettings::propertyAvailable( const QString& name, bool& available )
+bool GeoSceneSettings::propertyAvailable( const QString& name, bool& available ) const
 {
     mDebug() << "GeoSceneSettings::propertyAvailable" << name;
     QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.constBegin();
@@ -105,7 +105,7 @@ bool GeoSceneSettings::setPropertyValue( const QString& name, bool value )
     return false;
 }
 
-bool GeoSceneSettings::propertyValue( const QString& name, bool& value )
+bool GeoSceneSettings::propertyValue( const QString& name, bool& value ) const
 {
     mDebug() << "GeoSceneSettings::propertyValue" << name;
     QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.constBegin();
