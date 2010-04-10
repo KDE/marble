@@ -335,7 +335,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( d->uiWidget.positionTrackingComboBox, SIGNAL( currentIndexChanged( QString ) ),
              this, SLOT( changePositionProvider( QString ) ) );
     connect( d->uiWidget.locationLabel, SIGNAL( linkActivated( QString ) ),
-             this, SLOT( centerOnGps() ) );
+             this, SLOT( centerOnCurrentLocation() ) );
 }
 
 void MarbleControlBox::setWidgetTabShown( QWidget * widget,
@@ -413,9 +413,9 @@ void MarbleControlBox::changeZoom(int zoom)
 }
 
 
-void MarbleControlBox::receiveGpsCoordinates( const GeoDataCoordinates &in, qreal speed )
+void MarbleControlBox::receiveGpsCoordinates( const GeoDataCoordinates &position, qreal speed )
 {
-    d->m_currentPosition = in;
+    d->m_currentPosition = position;
     QString unitString;
     QString speedString;
     QString distanceUnitString;
@@ -438,7 +438,7 @@ void MarbleControlBox::receiveGpsCoordinates( const GeoDataCoordinates &in, qrea
         unitString = tr("km/h");
         unitSpeed = speed / 1000;
         distanceUnitString = tr("m");
-        distance = in.altitude();
+        distance = position.altitude();
         break;
 
         case Imperial:
@@ -446,14 +446,14 @@ void MarbleControlBox::receiveGpsCoordinates( const GeoDataCoordinates &in, qrea
         unitString = tr("m/h");
         unitSpeed = (speed/1000) * KM2MI;
         distanceUnitString = tr("ft");
-        distance = in.altitude() * M2FT;
+        distance = position.altitude() * M2FT;
         break;
     }
     // TODO read this value from the incoming signal
     speedString = QLocale::system().toString( unitSpeed, 'f', 1);
     distanceString = QString( "%1 %2" ).arg( distance, 0, 'f', 1, QChar(' ') ).arg( distanceUnitString );
 
-    html = html.arg( in.lonToString() ).arg( in.latToString() );
+    html = html.arg( position.lonToString() ).arg( position.latToString() );
     html = html.arg( distanceString ).arg( speedString + ' ' + unitString );
     d->uiWidget.locationLabel->setText( html );
 }
@@ -715,7 +715,7 @@ void MarbleControlBox::changePositionProvider( const QString &provider )
     }
 }
 
-void MarbleControlBox::centerOnGps()
+void MarbleControlBox::centerOnCurrentLocation()
 {
     d->m_widget->centerOn(d->m_currentPosition, true);
 }
