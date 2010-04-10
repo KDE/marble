@@ -148,7 +148,7 @@ qreal MultiplyBlending::blendChannel( qreal const bottomColorIntensity,
 qreal SubtractiveBlending::blendChannel( qreal const bottomColorIntensity,
                                          qreal const topColorIntensity ) const
 {
-    return qMax( bottomColorIntensity - topColorIntensity, 0.0 );
+    return qMax( bottomColorIntensity - topColorIntensity, qreal(0.0) );
 }
 
 
@@ -157,7 +157,7 @@ qreal SubtractiveBlending::blendChannel( qreal const bottomColorIntensity,
 qreal AdditiveBlending::blendChannel( qreal const bottomColorIntensity,
                                       qreal const topColorIntensity ) const
 {
-    return qMin( topColorIntensity + bottomColorIntensity, 1.0 );
+    return qMin( topColorIntensity + bottomColorIntensity, qreal(1.0) );
 }
 
 qreal ColorDodgeBlending::blendChannel( qreal const bottomColorIntensity,
@@ -196,8 +196,8 @@ qreal LightenBlending::blendChannel( qreal const bottomColorIntensity,
 qreal PinLightBlending::blendChannel( qreal const bottomColorIntensity,
                                       qreal const topColorIntensity ) const
 {
-    return qMax( 0.0, qMax( 2.0 + topColorIntensity - 1.0,
-                            qMin( bottomColorIntensity, 2.0 * topColorIntensity )));
+    return qMax( qreal(0.0), qMax( qreal(2.0 + topColorIntensity - 1.0),
+                             qMin( bottomColorIntensity, qreal(2.0 * topColorIntensity ))));
 }
 
 qreal ScreenBlending::blendChannel( qreal const bottomColorIntensity,
