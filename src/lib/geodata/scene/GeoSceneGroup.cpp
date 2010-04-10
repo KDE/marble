@@ -61,6 +61,7 @@ bool GeoSceneGroup::setPropertyValue( const QString& name, bool value )
     for (; it != end; ++it) {
         if ( (*it)->name() == name ) {
             (*it)->setValue( value );
+            emit valueChanged( name, value );
             return true;
         }
     }

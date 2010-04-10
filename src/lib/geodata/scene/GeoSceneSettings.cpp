@@ -56,6 +56,7 @@ GeoSceneSettings::~GeoSceneSettings()
 
 bool GeoSceneSettings::propertyAvailable( const QString& name, bool& available )
 {
+    mDebug() << "GeoSceneSettings::propertyAvailable" << name;
     QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.constBegin();
     QVector<GeoSceneProperty*>::const_iterator propEnd = d->m_properties.constEnd();
     for (; it != propEnd; ++it) {
@@ -106,6 +107,7 @@ bool GeoSceneSettings::setPropertyValue( const QString& name, bool value )
 
 bool GeoSceneSettings::propertyValue( const QString& name, bool& value )
 {
+    mDebug() << "GeoSceneSettings::propertyValue" << name;
     QVector<GeoSceneProperty*>::const_iterator it = d->m_properties.constBegin();
     QVector<GeoSceneProperty*>::const_iterator propEnd = d->m_properties.constEnd();
     for (; it != propEnd; ++it) {
@@ -183,6 +185,13 @@ const GeoSceneGroup* GeoSceneSettings::group( const QString& name ) const
     }
 
     return group;
+}
+
+// implement non-const method by means of const method,
+// for details, see "Effective C++" (third edition)
+GeoSceneGroup* GeoSceneSettings::group( const QString& name )
+{
+    return const_cast<GeoSceneGroup*>( static_cast<GeoSceneSettings const *>( this )->group( name ));
 }
 
 void GeoSceneSettings::addProperty( GeoSceneProperty* property )

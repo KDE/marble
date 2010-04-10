@@ -17,6 +17,7 @@
 #include "MarbleDebug.h"
 #include "AbstractProjection.h"
 #include "GeoSceneDocument.h"
+#include "GeoSceneGroup.h"
 #include "GeoSceneSettings.h"
 #include "MapThemeManager.h"
 #include "ViewportParams.h"
@@ -296,6 +297,40 @@ bool ViewParams::showAtmosphere() const
 void ViewParams::setShowAtmosphere( bool showAtmosphere )
 {
     d->m_showAtmosphere = showAtmosphere;
+}
+
+bool ViewParams::showClouds() const
+{
+    // returns false, if settings are not available
+    if ( !d->m_mapTheme )
+        return false;
+
+    GeoSceneSettings const * const settings = d->m_mapTheme->settings();
+    if ( !settings )
+        return false;
+
+    GeoSceneGroup const * const textureLayerSettings = settings->group( "Texture Layers" );
+    if ( !textureLayerSettings )
+        return false;
+
+    bool cloudsEnabled = false;
+    textureLayerSettings->propertyValue( "clouds_data", cloudsEnabled );
+    return cloudsEnabled;
+}
+
+void ViewParams::setShowClouds( bool const showClouds )
+{
+    if ( !d->m_mapTheme )
+        return;
+
+    GeoSceneSettings * const settings = d->m_mapTheme->settings();
+    if ( !settings )
+        return;
+
+    GeoSceneGroup * const textureLayerSettings = settings->group( "Texture Layers" );
+    if ( !textureLayerSettings )
+        return;
+    textureLayerSettings->setPropertyValue( "clouds_data", showClouds );
 }
 
 Quaternion ViewParams::planetAxisUpdated() const

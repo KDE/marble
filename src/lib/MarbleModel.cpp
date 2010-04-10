@@ -34,6 +34,7 @@
 #include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
 #include "GeoScenePalette.h"
+#include "GeoSceneSettings.h"
 #include "GeoSceneTexture.h"
 #include "GeoSceneVector.h"
 #include "GeoSceneXmlDataSource.h"
@@ -104,6 +105,7 @@ class MarbleModelPrivate
 
     void resize( int width, int height );
     void notifyModelChanged();
+    GeoSceneGroup * textureLayerProperties() const;
 
     static QAtomicInt       refCounter;
     MarbleModel             *m_parent;
@@ -152,6 +154,18 @@ VectorComposer      *MarbleModelPrivate::m_veccomposer = 0;
 TextureColorizer    *MarbleModelPrivate::m_texcolorizer = 0;
 QAtomicInt           MarbleModelPrivate::refCounter(0);
 
+GeoSceneGroup * MarbleModelPrivate::textureLayerProperties() const
+{
+    if ( !m_mapTheme )
+        return 0;
+
+    GeoSceneSettings * const settings = m_mapTheme->settings();
+    if ( !settings )
+        return 0;
+
+    return settings->group( "Texture Layers" );
+}
+
 MarbleModel::MarbleModel( QObject *parent )
     : QObject( parent ),
       d( new MarbleModelPrivate( this ) )
@@ -161,8 +175,8 @@ MarbleModel::MarbleModel( QObject *parent )
     MarbleModelPrivate::refCounter.ref();
     d->m_dataFacade = new MarbleDataFacade( this );
 
-    d->m_tileLoader = new StackedTileLoader( d->m_mapThemeManager, d->m_downloadManager, this );
-
+    d->m_tileLoader = new StackedTileLoader( d->m_mapThemeManager, d->textureLayerProperties(),
+                                             d->m_downloadManager, this );
     d->m_texmapper = 0;
     
     d->m_fileManager = new FileManager();
@@ -310,6 +324,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 {
     d->m_mapTheme = mapTheme;
     addDownloadPolicies( d->m_mapTheme );
+    d->m_tileLoader->setTextureLayerSettings( d->textureLayerProperties() );
 
     // Some output to show how to use this stuff ...
     mDebug() << "DGML2 Name       : " << d->m_mapTheme->head()->name(); 

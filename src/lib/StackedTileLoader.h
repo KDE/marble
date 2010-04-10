@@ -37,6 +37,7 @@ class StackedTile;
 class HttpDownloadManager;
 class MapThemeManager;
 class MarbleModel;
+class GeoSceneGroup;
 class GeoSceneLayer;
 class GeoSceneTexture;
 
@@ -67,6 +68,7 @@ class StackedTileLoader : public QObject
          *                        the tiles from a remote resource.
          */
         StackedTileLoader( MapThemeManager const * const mapThemeManager,
+                           GeoSceneGroup * const textureLayerSettings,
                            HttpDownloadManager * const downloadManager, MarbleModel * const model );
         virtual ~StackedTileLoader();
 
@@ -75,6 +77,7 @@ class StackedTileLoader : public QObject
          * tiles from a remote resource.
          */
         void setDownloadManager( HttpDownloadManager *downloadManager );
+        void setTextureLayerSettings( GeoSceneGroup * const textureLayerSettings );
 
         /**
          * Loads a tile and returns it.
@@ -132,6 +135,8 @@ class StackedTileLoader : public QObject
         static bool baseTilesAvailable( GeoSceneLayer * layer );
 
     public Q_SLOTS:
+        void reset();
+
         /**
          * @brief Set the limit of the volatile (in RAM) cache.
          * @param bytes The limit in kilobytes.

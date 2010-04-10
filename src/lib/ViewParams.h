@@ -117,6 +117,9 @@ class MARBLE_EXPORT ViewParams
     bool showAtmosphere() const;
     void setShowAtmosphere( bool );
 
+    bool showClouds() const;
+    void setShowClouds( bool const );
+
     // FIXME: We should try to get rid of these
     int radiusUpdated() const;
     void setRadiusUpdated( const int );

@@ -25,6 +25,7 @@
 
 #include "DatasetProvider.h"
 #include "GeoSceneDocument.h"
+#include "GeoSceneGroup.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneLayer.h"
 #include "GeoSceneMap.h"
@@ -58,13 +59,16 @@ namespace Marble
 class StackedTileLoaderPrivate
 {
 public:
-    StackedTileLoaderPrivate()
+    explicit StackedTileLoaderPrivate( GeoSceneGroup * const textureLayerSettings )
         : m_datasetProvider( 0 ),
           m_mapThemeManager( 0 ),
-          m_tileLoader( 0 )
+          m_tileLoader( 0 ),
+          m_textureLayerSettings( textureLayerSettings )
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
     }
+
+    bool isTextureLayerEnabled( QString const & name ) const;
 
     DatasetProvider *m_datasetProvider;
     MapThemeManager const *m_mapThemeManager;
@@ -74,13 +78,24 @@ public:
     TileLoader *m_tileLoader;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
     QCache <TileId, StackedTile>  m_tileCache;
+    // we cannot use a const GeoSceneGroup because of QObject connects/disconnects
+    GeoSceneGroup * m_textureLayerSettings;
 };
 
+bool StackedTileLoaderPrivate::isTextureLayerEnabled( QString const & name ) const
+{
+    if ( !m_textureLayerSettings )
+        return true;
+    bool enabled;
+    m_textureLayerSettings->propertyValue( name, enabled );
+    return enabled;
+}
 
 StackedTileLoader::StackedTileLoader( MapThemeManager const * const mapThemeManager,
+                                      GeoSceneGroup * const textureLayerSettings,
                                       HttpDownloadManager * const downloadManager,
                                       MarbleModel * const model )
-    : d( new StackedTileLoaderPrivate ),
+    : d( new StackedTileLoaderPrivate( textureLayerSettings )),
       m_parent( model )
 {
     d->m_mapThemeManager = mapThemeManager;
@@ -102,6 +117,16 @@ StackedTileLoader::~StackedTileLoader()
 
 void StackedTileLoader::setDownloadManager( HttpDownloadManager *downloadManager )
 {
+}
+
+void StackedTileLoader::setTextureLayerSettings( GeoSceneGroup * const textureLayerSettings )
+{
+    if ( d->m_textureLayerSettings )
+        d->m_textureLayerSettings->disconnect( this );
+    d->m_textureLayerSettings = textureLayerSettings;
+    if ( d->m_textureLayerSettings )
+        connect( d->m_textureLayerSettings, SIGNAL( valueChanged( QString, bool )),
+                 this, SLOT( reset() ));
 }
 
 void StackedTileLoader::resetTilehash()
@@ -334,6 +359,13 @@ bool StackedTileLoader::baseTilesAvailable( GeoSceneLayer * layer )
     return noerr;
 }
 
+void StackedTileLoader::reset()
+{
+    mDebug() << "StackedTileLoader::reset";
+    d->m_tilesOnDisplay.clear();
+    d->m_tileCache.clear();
+}
+
 void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 {
     mDebug() << QString("Setting tile cache to %1 kilobytes.").arg( kiloBytes );
@@ -400,10 +432,18 @@ StackedTileLoader::findRelevantTextureLayers( TileId const & stackedTileId ) con
     QVector<GeoSceneAbstractDataset*>::const_iterator const end = textureLayers.constEnd();
     for (; pos != end; ++pos ) {
         GeoSceneTexture const * const candidate = dynamic_cast<GeoSceneTexture const *>( *pos );
-        if ( candidate && ( !candidate->hasMaximumTileLevel()
-                            || stackedTileId.zoomLevel() <= candidate->maximumTileLevel() )) {
+        // check if layer is enabled. A layer is considered to be enabled if one of the
+        // following conditions is true:
+        // 1) it is the first layer
+        // 2) there are no settings available (group "Texture Layers" not defined in DGML)
+        // 3) the layer is configured and enabled in the settings
+        // also check, if layer provides tiles for the current level
+        if ( candidate
+             && ( pos == textureLayers.constBegin()
+                  || d->isTextureLayerEnabled( candidate->name() ))
+             && ( !candidate->hasMaximumTileLevel()
+                  || stackedTileId.zoomLevel() <= candidate->maximumTileLevel() ))
             result.append( candidate );
-        }
     }
     return result;
 }

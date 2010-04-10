@@ -635,8 +635,7 @@ bool MarbleMap::showGrid() const
 
 bool MarbleMap::showClouds() const
 {
-    // TODO
-    return true;
+    return d->m_viewParams.showClouds();
 }
 
 bool MarbleMap::showAtmosphere() const
@@ -1034,16 +1033,15 @@ void MarbleMap::setShowCrosshairs( bool visible )
 
 void MarbleMap::setShowClouds( bool visible )
 {
-    // TODO
+    d->m_viewParams.setShowClouds( visible );
+    setNeedsUpdate();
 }
 
 void MarbleMap::setShowTileId( bool visible )
 {
-
     d->m_model->layerDecorator()->setShowTileId( visible );
-
-
 }
+
 void MarbleMap::setShowGrid( bool visible )
 {
     setPropertyValue( "coordinate-grid", visible );
