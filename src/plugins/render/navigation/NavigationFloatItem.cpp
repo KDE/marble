@@ -42,8 +42,8 @@ NavigationFloatItem::NavigationFloatItem( const QPointF &point )
 {
     // Plugin is enabled by default
     setEnabled( true );
-    // Plugin is not visible by default
-    setVisible( false );
+    // Plugin is visible by default on devices with small screens only
+    setVisible( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen );
 
     if( m_profiles & MarbleGlobal::SmallScreen ) {
         setFrame( FrameGraphicsItem::RectFrame );
