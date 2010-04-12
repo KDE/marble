@@ -59,11 +59,11 @@ namespace Marble
 class StackedTileLoaderPrivate
 {
 public:
-    explicit StackedTileLoaderPrivate( GeoSceneGroup * const textureLayerSettings )
+    StackedTileLoaderPrivate()
         : m_datasetProvider( 0 ),
           m_mapThemeManager( 0 ),
           m_tileLoader( 0 ),
-          m_textureLayerSettings( textureLayerSettings )
+          m_textureLayerSettings( 0 )
     {
         m_tileCache.setMaxCost( 20000 * 1024 ); // Cache size measured in bytes
     }
@@ -95,10 +95,11 @@ StackedTileLoader::StackedTileLoader( MapThemeManager const * const mapThemeMana
                                       GeoSceneGroup * const textureLayerSettings,
                                       HttpDownloadManager * const downloadManager,
                                       MarbleModel * const model )
-    : d( new StackedTileLoaderPrivate( textureLayerSettings )),
+    : d( new StackedTileLoaderPrivate ),
       m_parent( model )
 {
     d->m_mapThemeManager = mapThemeManager;
+    setTextureLayerSettings( textureLayerSettings );
     initTextureLayers();
     d->m_tileLoader = new TileLoader( mapThemeManager, downloadManager );
     d->m_tileLoader->setTextureLayers( d->m_textureLayers );
