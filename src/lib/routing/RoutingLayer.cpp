@@ -240,6 +240,10 @@ void RoutingLayerPrivate::renderSkeleton(GeoPainter* painter)
 
 bool RoutingLayerPrivate::handleMouseButtonPress(QMouseEvent* e)
 {
+    if (e->button() != Qt::LeftButton) {
+        return false;
+    }
+
     if (m_pointSelection) {
         return true;
     }
@@ -282,6 +286,10 @@ bool RoutingLayerPrivate::handleMouseButtonPress(QMouseEvent* e)
 
 bool RoutingLayerPrivate::handleMouseButtonRelease(QMouseEvent* e)
 {
+    if (e->button() != Qt::LeftButton) {
+        return false;
+    }
+
     if (m_pointSelection) {
         qreal lon(0.0), lat(0.0);
         if (m_marbleWidget->geoCoordinates(e->pos().x(), e->pos().y(),

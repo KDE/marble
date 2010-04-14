@@ -51,6 +51,8 @@ public:
 
     RouteSkeleton* m_routeSkeleton;
 
+    bool m_zoomRouteAfterDownload;
+
     /** Constructor */
     RoutingWidgetPrivate();
 
@@ -74,7 +76,7 @@ public:
 RoutingWidgetPrivate::RoutingWidgetPrivate() :
         m_widget(0), m_routingManager(0), m_routingLayer(0),
         m_activeInput(0), m_inputRequest(0), m_routingProxyModel(0),
-        m_routeSkeleton(0)
+        m_routeSkeleton(0), m_zoomRouteAfterDownload(false)
 {
     // nothing to do
 }
@@ -218,6 +220,7 @@ void RoutingWidget::retrieveRoute()
 
     d->m_activeInput = 0;
     if (d->m_routeSkeleton->size() > 1) {
+        d->m_zoomRouteAfterDownload = true;
         d->m_routingLayer->setModel( d->m_routingManager->routingModel() );
         d->m_routingManager->retrieveRoute(d->m_routeSkeleton);
         d->m_ui.directionsListView->setModel(d->m_routingProxyModel);
@@ -334,7 +337,8 @@ void RoutingWidget::updateRouteState(RoutingManager::State state, RouteSkeleton*
 {
     Q_UNUSED(route);
 
-    if (state == RoutingManager::Retrieved) {
+    if (d->m_zoomRouteAfterDownload && state == RoutingManager::Retrieved) {
+        d->m_zoomRouteAfterDownload = false;
         // Parts of the route may lie outside the route trip points
         GeoDataLineString bbox;
         for (int i=0; i<d->m_routingManager->routingModel()->rowCount(); ++i) {
@@ -378,6 +382,7 @@ void RoutingWidget::retrieveSelectedPoint(const GeoDataCoordinates &coordinates)
     if (d->m_inputRequest && d->m_inputWidgets.contains(d->m_inputRequest)) {
         d->m_inputRequest->setTargetPosition(coordinates);
         d->m_inputRequest = 0;
+        d->m_widget->update();
     }
 
     d->m_routingLayer->setPointSelectionEnabled(false);
