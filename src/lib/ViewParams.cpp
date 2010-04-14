@@ -18,12 +18,15 @@
 #include "AbstractProjection.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneGroup.h"
+#include "GeoSceneProperty.h"
 #include "GeoSceneSettings.h"
 #include "MapThemeManager.h"
 #include "ViewportParams.h"
 
 namespace Marble
 {
+static QString const showCloudsPropertyName = "showClouds";
+static QString const cloudsLayerName = "clouds_data";
 
 class ViewParamsPrivate
 {
@@ -55,9 +58,16 @@ public:
     
     bool        m_showGps; //for gps layer
 
+    // here "global" settings are stored, which are used for every map theme
+    // where they are applicable. For example, clouds visibility is stored here,
+    // but this property is only used for some map themes.
+    GeoSceneSettings m_globalSettings;
+
     // Cached data that will make painting faster.
     QImage  *m_canvasImage;     // Base image with space and atmosphere
     QImage  *m_coastImage;      // A slightly higher level image.
+
+    void initGlobalSettings();
 };
 
 ViewParamsPrivate::ViewParamsPrivate()
@@ -75,6 +85,7 @@ ViewParamsPrivate::ViewParamsPrivate()
       m_canvasImage( new QImage( 10, 10, QImage::Format_RGB32 )),
       m_coastImage( new QImage( 10, 10, QImage::Format_RGB32 ))
 {
+    initGlobalSettings();
 }
 
 ViewParamsPrivate::~ViewParamsPrivate()
@@ -82,6 +93,13 @@ ViewParamsPrivate::~ViewParamsPrivate()
     delete m_canvasImage;
     delete m_coastImage;
 }
+
+void ViewParamsPrivate::initGlobalSettings()
+{
+    GeoSceneProperty * const showClouds = new GeoSceneProperty( showCloudsPropertyName );
+    m_globalSettings.addProperty( showClouds );
+}
+
 
 ViewParams::ViewParams()
     : d( new ViewParamsPrivate )
@@ -245,7 +263,6 @@ void ViewParams::setCanvasImage( QImage * const image )
     if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
         d->m_canvasImage->fill(0); // Using Qt::transparent is wrong here (equals "18")!
     }
-
 }
 
 QImage * ViewParams::coastImage() const
@@ -301,25 +318,15 @@ void ViewParams::setShowAtmosphere( bool showAtmosphere )
 
 bool ViewParams::showClouds() const
 {
-    // returns false, if settings are not available
-    if ( !d->m_mapTheme )
-        return false;
-
-    GeoSceneSettings const * const settings = d->m_mapTheme->settings();
-    if ( !settings )
-        return false;
-
-    GeoSceneGroup const * const textureLayerSettings = settings->group( "Texture Layers" );
-    if ( !textureLayerSettings )
-        return false;
-
-    bool cloudsEnabled = false;
-    textureLayerSettings->propertyValue( "clouds_data", cloudsEnabled );
-    return cloudsEnabled;
+    bool showClouds = false;
+    bool const propertyFound = d->m_globalSettings.propertyValue( showCloudsPropertyName,
+                                                                  showClouds );
+    return propertyFound && showClouds;
 }
 
 void ViewParams::setShowClouds( bool const showClouds )
 {
+    d->m_globalSettings.setPropertyValue( showCloudsPropertyName, showClouds );
     if ( !d->m_mapTheme )
         return;
 
@@ -330,7 +337,7 @@ void ViewParams::setShowClouds( bool const showClouds )
     GeoSceneGroup * const textureLayerSettings = settings->group( "Texture Layers" );
     if ( !textureLayerSettings )
         return;
-    textureLayerSettings->setPropertyValue( "clouds_data", showClouds );
+    textureLayerSettings->setPropertyValue( cloudsLayerName, showClouds );
 }
 
 Quaternion ViewParams::planetAxisUpdated() const
