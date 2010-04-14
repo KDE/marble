@@ -348,17 +348,7 @@ bool ViewParams::showClouds() const
 void ViewParams::setShowClouds( bool const showClouds )
 {
     d->m_globalSettings.setPropertyValue( showCloudsPropertyName, showClouds );
-    if ( !d->m_mapTheme )
-        return;
-
-    GeoSceneSettings * const settings = d->m_mapTheme->settings();
-    if ( !settings )
-        return;
-
-    GeoSceneGroup * const textureLayerSettings = settings->group( "Texture Layers" );
-    if ( !textureLayerSettings )
-        return;
-    textureLayerSettings->setPropertyValue( cloudsLayerName, showClouds );
+    d->propagateGlobalToLocalSettings();
 }
 
 Quaternion ViewParams::planetAxisUpdated() const
