@@ -114,31 +114,46 @@ void DataMigration::moveFiles( const QString& source, const QString& target )
                 return;
             }
 
-            if( QDir( dirs.top() ).entryList( QDir::Dirs
-                                              | QDir::Files
-                                              | QDir::NoSymLinks
-                                              | QDir::NoDotAndDotDot ).size() == 0 )
+            QString sourceDirPath = dirs.top();
+            mDebug() << "DataMigration: Current source dir path ="
+                     << sourceDirPath;
+            mDebug() << "SliceSize =" << progressSliceSizeStack.top();
+
+            if( !sourceDirPath.startsWith( sourcePath ) ) {
+                dirs.pop();
+                progress += progressSliceSizeStack.pop();
+                progressDialog.setValue( progress );
+                continue;
+            }
+
+            QDir sourceDir( sourceDirPath );
+            // Creating child file/dir lists.
+            QStringList files = sourceDir.entryList( QDir::Files
+                                                     | QDir::NoSymLinks
+                                                     | QDir::NoDotAndDotDot );
+            QStringList childDirs = sourceDir.entryList( QDir::Dirs
+                                                         | QDir::NoSymLinks
+                                                         | QDir::NoDotAndDotDot );
+            int childSliceSize = 0;
+            if( !childDirs.isEmpty() ) {
+                childSliceSize = progressSliceSizeStack.pop() / childDirs.size();
+                progressSliceSizeStack.push( 0 );
+            }
+
+            if( files.isEmpty() && childDirs.isEmpty() )
             {
                 // Remove empty directory
+                mDebug() << "DataMigration:" << dirs.top()
+                         << "finished";
                 QDir().rmdir( dirs.pop() );
-                progressSliceSizeStack.pop();
+                progress += progressSliceSizeStack.pop();
+                progressDialog.setValue( progress );
             }
             else {
-                QString sourceDirPath = dirs.top();
-
-                if( !sourceDirPath.startsWith( sourcePath ) ) {
-                    dirs.pop();
-                    continue;
-                }
-
-                QDir sourceDir( sourceDirPath );
-                QStringList childDirs = sourceDir.entryList( QDir::Dirs
-                                                             | QDir::NoSymLinks
-                                                             | QDir::NoDotAndDotDot );
-
                 // Add child directories to the stack
                 foreach( const QString& childDir, childDirs ) {
                     dirs.push( sourceDirPath + '/' + childDir );
+                    progressSliceSizeStack.push( childSliceSize );
                 }
 
                 // Creating target dir
@@ -147,11 +162,7 @@ void DataMigration::moveFiles( const QString& source, const QString& target )
                 targetDirPath.prepend( target );
                 QDir().mkpath( targetDirPath );
 
-                progressSliceSizeStack.push( progressSliceSizeStack.top() / ( childDirs.size() + 1 ) );
                 // Copying contents
-                QStringList files = sourceDir.entryList( QDir::Files
-                                                         | QDir::NoSymLinks
-                                                         | QDir::NoDotAndDotDot );
                 foreach( const QString& file, files ) {
                     if( progressDialog.wasCanceled() ) {
                         return;
@@ -172,9 +183,6 @@ void DataMigration::moveFiles( const QString& source, const QString& target )
                     QFile::copy( sourceFilePath, targetFilePath );
                     QFile::remove( sourceFilePath );
                 }
-
-                progress += progressSliceSizeStack.top();
-                progressDialog.setValue( progress );
             }
         }
     }
