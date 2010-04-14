@@ -68,6 +68,7 @@ public:
     QImage  *m_coastImage;      // A slightly higher level image.
 
     void initGlobalSettings();
+    void propagateGlobalToLocalSettings();
 };
 
 ViewParamsPrivate::ViewParamsPrivate()
@@ -98,6 +99,25 @@ void ViewParamsPrivate::initGlobalSettings()
 {
     GeoSceneProperty * const showClouds = new GeoSceneProperty( showCloudsPropertyName );
     m_globalSettings.addProperty( showClouds );
+}
+
+void ViewParamsPrivate::propagateGlobalToLocalSettings()
+{
+    bool showClouds = false;
+    bool const propertyFound = m_globalSettings.propertyValue( showCloudsPropertyName, showClouds );
+    if ( propertyFound ) {
+        if ( !m_mapTheme )
+            return;
+
+        GeoSceneSettings * const settings = m_mapTheme->settings();
+        if ( !settings )
+            return;
+
+        GeoSceneGroup * const textureLayerSettings = settings->group( "Texture Layers" );
+        if ( !textureLayerSettings )
+            return;
+        textureLayerSettings->setPropertyValue( cloudsLayerName, showClouds );
+    }
 }
 
 
@@ -173,6 +193,7 @@ void ViewParams::setMapThemeId( const QString& mapThemeId )
     }
 
     d->m_mapTheme = mapTheme;
+    d->propagateGlobalToLocalSettings();
 }
 
 GeoSceneDocument *ViewParams::mapTheme()
