@@ -8,6 +8,9 @@
 // Copyright 2010      Bastian Holst <bastianholst@gmx.de>
 //
 
+// std
+#include <limits>
+
 // Qt
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
@@ -16,8 +19,10 @@
 #include <QtCore/QPointer>
 #include <QtCore/QStack>
 #include <QtGui/QDialog>
+#include <QtGui/QProgressDialog>
 
 // Marble
+#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "ui_DataMigrationWidget.h"
 
@@ -71,28 +76,52 @@ void DataMigration::exec()
 
 void DataMigration::moveFiles( const QString& source, const QString& target )
 {
-    QDir().remove( target );
+    if( !QDir().rmdir( target ) ) {
+        mDebug() << "Removing of the target directory failed";
+    }
+
     // Trying to simply rename the directory. This is the fastest method, but it is not allways
     // possible. For example when the directories are on different file systems.
     // If the renaming of the directory is not successful, we have to copy and delete each
     // file separatetly.
+    mDebug() << "Rename" << source << "to" << target;
     if( !QDir().rename( source, target ) ) {
+        mDebug() << "Simple renaming of the data directory failed. Moving single files";
+
+        QProgressDialog progressDialog;
+        progressDialog.setWindowModality( Qt::WindowModal );
+        progressDialog.setMinimum( 0 );
+        progressDialog.setMaximum( std::numeric_limits<int>::max() );
+        progressDialog.setAutoReset( false );
+        progressDialog.setAutoClose( false );
+        progressDialog.setWindowTitle( tr( "Marble data conversion" ) );
+        progressDialog.setLabelText( tr( "Converting data ..." ) );
+
         QDir().mkpath( target );
         QString sourcePath = QDir( source ).canonicalPath();
         int sourcePathLength = sourcePath.length();
 
         // Running through all files recursively
         QStack<QString> dirs;
-        dirs.push( sourcePath ); 
+        dirs.push( sourcePath );
+
+        QStack<int> progressSliceSizeStack;
+        progressSliceSizeStack.push( progressDialog.maximum() );
+        int progress = 0;
 
         while( !dirs.isEmpty() ) {
+            if( progressDialog.wasCanceled() ) {
+                return;
+            }
+
             if( QDir( dirs.top() ).entryList( QDir::Dirs
                                               | QDir::Files
                                               | QDir::NoSymLinks
                                               | QDir::NoDotAndDotDot ).size() == 0 )
             {
-                // Remove empty directories
+                // Remove empty directory
                 QDir().rmdir( dirs.pop() );
+                progressSliceSizeStack.pop();
             }
             else {
                 QString sourceDirPath = dirs.top();
@@ -118,11 +147,16 @@ void DataMigration::moveFiles( const QString& source, const QString& target )
                 targetDirPath.prepend( target );
                 QDir().mkpath( targetDirPath );
 
+                progressSliceSizeStack.push( progressSliceSizeStack.top() / ( childDirs.size() + 1 ) );
                 // Copying contents
                 QStringList files = sourceDir.entryList( QDir::Files
                                                          | QDir::NoSymLinks
                                                          | QDir::NoDotAndDotDot );
                 foreach( const QString& file, files ) {
+                    if( progressDialog.wasCanceled() ) {
+                        return;
+                    }
+
                     QString sourceFilePath = sourceDirPath;
                     sourceFilePath += '/';
                     sourceFilePath += file;
@@ -138,6 +172,9 @@ void DataMigration::moveFiles( const QString& source, const QString& target )
                     QFile::copy( sourceFilePath, targetFilePath );
                     QFile::remove( sourceFilePath );
                 }
+
+                progress += progressSliceSizeStack.top();
+                progressDialog.setValue( progress );
             }
         }
     }

@@ -21,7 +21,7 @@ class DataMigration : public QObject
     explicit DataMigration( QObject *parent );
     virtual ~DataMigration();
 
- public slots:
+ public Q_SLOTS:
     void exec();
 
  private:
