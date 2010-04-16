@@ -76,9 +76,9 @@ void RoutingManager::setRouteData(AbstractRoutingProvider::Format format, const 
 
 void RoutingManager::updateRoute()
 {
-    if (d->m_route) {
-        emit stateChanged(Downloading, d->m_route);
-        d->m_routingProvider->retrieveDirections(d->m_route);
+    if ( d->m_route && d->m_route->size() > 1 ) {
+        emit stateChanged( Downloading, d->m_route );
+        d->m_routingProvider->retrieveDirections( d->m_route );
     }
 }
 
