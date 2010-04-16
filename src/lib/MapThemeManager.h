@@ -90,6 +90,12 @@ class MARBLE_EXPORT MapThemeManager : public QObject
     void directoryChanged( const QString& path );
     void fileChanged( const QString & path );
 
+ Q_SIGNALS:
+    /**
+     * @brief This signal will be emitted, when the themes change.
+     */
+    void themesChanged();
+
  private:
     Q_DISABLE_COPY( MapThemeManager )
 

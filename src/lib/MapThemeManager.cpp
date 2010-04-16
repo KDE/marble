@@ -68,6 +68,7 @@ MapThemeManager::MapThemeManager( QObject *parent )
     : QObject( parent ),
       d( new MapThemeManagerPrivate )
 {
+    initFileSystemWatcher();
 }
 
 MapThemeManager::~MapThemeManager()
@@ -89,8 +90,6 @@ QList<GeoSceneDocument const*> MapThemeManager::mapThemes() const
 
 void MapThemeManager::initialize()
 {
-    initFileSystemWatcher();
-
     // Delayed model initialization
     updateMapThemeModel();
     d->m_isInitialized = true;
@@ -150,6 +149,10 @@ QStringList MapThemeManager::pathsToWatch()
     QStringList result;
     const QString localMapPathName = MarbleDirs::localPath() + '/' + mapDirName;
     const QString systemMapPathName = MarbleDirs::systemPath() + '/' + mapDirName;
+
+    if( !QDir().exists( localMapPathName ) ) {
+        QDir().mkpath( localMapPathName );
+    }
 
     result << localMapPathName;
     result << systemMapPathName;
@@ -287,6 +290,7 @@ QList<QStandardItem *> MapThemeManager::createMapThemeRow( QString const& mapThe
 
 void MapThemeManager::updateMapThemeModel()
 {
+    mDebug() << "updateMapThemeModel";
     d->m_mapThemeModel->clear();
 
     d->m_mapThemeModel->setHeaderData(0, Qt::Horizontal, tr("Name"));
@@ -313,6 +317,8 @@ void MapThemeManager::directoryChanged( const QString& path )
     QStringList paths = pathsToWatch();
     d->m_fileSystemWatcher->addPaths( paths );
 
+    mDebug() << "Emitting themesChanged()";
+    emit themesChanged();
     updateMapThemeModel();
 }
 
@@ -351,6 +357,8 @@ void MapThemeManager::fileChanged( const QString& path )
             d->m_mapThemeModel->insertRow( insertAtRow, newMapThemeRow );
         }
     }
+    
+    emit themesChanged();
 }
 
 //

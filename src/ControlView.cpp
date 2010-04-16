@@ -50,6 +50,8 @@ ControlView::ControlView( QWidget *parent )
 
     m_control->addMarbleWidget( m_marbleWidget );
 
+    // TODO: Creating a second MapThemeManager may not be the best solution here.
+    // MarbleModel also holds one with a QFileSystemWatcher.
     m_mapThemeManager = new MapThemeManager;
 
     m_control->setMapThemeModel( m_mapThemeManager->mapThemeModel() );

@@ -99,10 +99,11 @@ StackedTileLoader::StackedTileLoader( MapThemeManager const * const mapThemeMana
       m_parent( model )
 {
     d->m_mapThemeManager = mapThemeManager;
+    connect( d->m_mapThemeManager, SIGNAL( themesChanged() ),
+             this, SLOT( updateTextureLayers() ) );
     setTextureLayerSettings( textureLayerSettings );
-    initTextureLayers();
     d->m_tileLoader = new TileLoader( mapThemeManager, downloadManager );
-    d->m_tileLoader->setTextureLayers( d->m_textureLayers );
+    updateTextureLayers();
     connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId, TileId )),
              SLOT( updateTile( TileId, TileId )));
     setDownloadManager( downloadManager );
@@ -122,12 +123,15 @@ void StackedTileLoader::setDownloadManager( HttpDownloadManager *downloadManager
 
 void StackedTileLoader::setTextureLayerSettings( GeoSceneGroup * const textureLayerSettings )
 {
-    if ( d->m_textureLayerSettings )
-        d->m_textureLayerSettings->disconnect( this );
+    if ( d->m_textureLayerSettings ) {
+        disconnect( d->m_textureLayerSettings, SIGNAL( valueChanged( QSting, bool ) ),
+                    this,                      SLOT( reset() ) );
+    }
     d->m_textureLayerSettings = textureLayerSettings;
-    if ( d->m_textureLayerSettings )
+    if ( d->m_textureLayerSettings ) {
         connect( d->m_textureLayerSettings, SIGNAL( valueChanged( QString, bool )),
-                 this, SLOT( reset() ));
+                 this,                      SLOT( reset() ) );
+    }
 }
 
 void StackedTileLoader::resetTilehash()
@@ -443,7 +447,7 @@ StackedTileLoader::findRelevantTextureLayers( TileId const & stackedTileId ) con
     return result;
 }
 
-void StackedTileLoader::initTextureLayers()
+void StackedTileLoader::updateTextureLayers()
 {
     QList<GeoSceneDocument const *> const & mapThemes = d->m_mapThemeManager->mapThemes();
     QList<GeoSceneDocument const *>::const_iterator pos = mapThemes.constBegin();
@@ -452,13 +456,21 @@ void StackedTileLoader::initTextureLayers()
         GeoSceneHead const * head = (*pos)->head();
         Q_ASSERT( head );
         const QString mapThemeId = head->target() + '/' + head->theme();
-        mDebug() << "StackedTileLoader::initTextureLayers" << mapThemeId;
+        mDebug() << "StackedTileLoader::updateTextureLayers" << mapThemeId;
 
         GeoSceneMap const * map = (*pos)->map();
         Q_ASSERT( map );
         GeoSceneLayer const * sceneLayer = map->layer( head->theme() );
         if ( !sceneLayer ) {
             mDebug() << "ignoring, has no GeoSceneLayer for" << head->theme();
+            continue;
+        }
+
+        uint hash = qHash( mapThemeId );
+        if ( d->m_sceneLayers.contains( hash ) ) {
+            mDebug() << "StackedTileLoader::updateTextureLayers:"
+                     << hash << mapThemeId
+                     << "already exists";
             continue;
         }
 
@@ -475,10 +487,12 @@ void StackedTileLoader::initTextureLayers()
                 continue;
             }
             d->m_textureLayers.insert( qHash( textureLayer->sourceDir() ), textureLayer );
-            mDebug() << "StackedTileLoader::initTextureLayers" << "added texture layer:"
+            mDebug() << "StackedTileLoader::updateTextureLayers" << "added texture layer:"
                      << qHash( textureLayer->sourceDir() ) << textureLayer->sourceDir();
         }
     }
+
+    d->m_tileLoader->setTextureLayers( d->m_textureLayers );
 }
 
 void StackedTileLoader::mergeDecorations( StackedTile * const tile,
