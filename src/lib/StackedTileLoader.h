@@ -27,6 +27,7 @@
 #include <QtCore/QObject>
 
 #include "TileId.h"
+#include "global.h"
 
 class QString;
 
@@ -85,10 +86,10 @@ class StackedTileLoader : public QObject
          * @param stackedTileId The Id of the requested tile, containing the x and y coordinate
          *                      and the zoom level.
          */
-        StackedTile* loadTile( TileId const &stackedTileId,
+        StackedTile* loadTile( TileId const &stackedTileId, DownloadUsage const,
                                bool const forMergedLayerDecorator = false );
 
-        StackedTile* reloadTile( TileId const & stackedTileId );
+        StackedTile* reloadTile( TileId const & stackedTileId, DownloadUsage const );
 
         /**
          * Resets the internal tile hash.
@@ -171,7 +172,7 @@ class StackedTileLoader : public QObject
         QVector<GeoSceneTexture const *>
             findRelevantTextureLayers( TileId const & stackedTileId ) const;
         void mergeDecorations( StackedTile * const, GeoSceneTexture * const ) const;
-        void reloadCachedTile( StackedTile * const cachedTile );
+        void reloadCachedTile( StackedTile * const cachedTile, DownloadUsage const );
 
         StackedTileLoaderPrivate* const d;
         MarbleModel* m_parent;

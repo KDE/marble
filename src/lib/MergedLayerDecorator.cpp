@@ -100,7 +100,7 @@ bool MergedLayerDecorator::showTileId() const
 StackedTile * MergedLayerDecorator::loadDataset( GeoSceneTexture *textureLayer )
 {
     const TileId decorationTileId( textureLayer->sourceDir(), m_id.zoomLevel(), m_id.x(), m_id.y());
-    StackedTile * const tile = m_tileLoader->loadTile( decorationTileId, true );
+    StackedTile * const tile = m_tileLoader->loadTile( decorationTileId, DownloadBrowse, true );
     tile->setUsed( true );
     return tile;
 }

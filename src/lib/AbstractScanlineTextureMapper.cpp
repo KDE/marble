@@ -529,7 +529,8 @@ void AbstractScanlineTextureMapper::nextTile( int &posX, int &posY )
     int tileCol = lon / m_tileSize.width();
     int tileRow = lat / m_tileSize.height();
 
-    m_tile = m_tileLoader->loadTile( TileId( m_mapThemeIdHash, m_tileLevel, tileCol, tileRow ));
+    m_tile = m_tileLoader->loadTile( TileId( m_mapThemeIdHash, m_tileLevel, tileCol, tileRow ),
+                                     DownloadBrowse );
     m_tile->setUsed( true );
 
     // Update position variables:
@@ -565,7 +566,8 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
     int tileCol = lon / m_tileSize.width();
     int tileRow = lat / m_tileSize.height();
 
-    m_tile = m_tileLoader->loadTile( TileId( m_mapThemeIdHash, m_tileLevel, tileCol, tileRow ));
+    m_tile = m_tileLoader->loadTile( TileId( m_mapThemeIdHash, m_tileLevel, tileCol, tileRow ),
+                                     DownloadBrowse );
     m_tile->setUsed( true );
 
     // Update position variables:
@@ -615,7 +617,7 @@ void AbstractScanlineTextureMapper::initTileSize()
     Q_ASSERT( m_textureLayer );
     Q_ASSERT( m_tileLoader );
     TileId id( m_textureLayer->sourceDir(), 0, 0, 0 );
-    StackedTile * const testTile = m_tileLoader->loadTile( id );
+    StackedTile * const testTile = m_tileLoader->loadTile( id, DownloadBrowse );
     Q_ASSERT( testTile );
     m_tileSize = testTile->resultTile()->size();
     Q_ASSERT( !m_tileSize.isEmpty() );

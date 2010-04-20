@@ -42,7 +42,9 @@ TileLoader::TileLoader( MapThemeManager const * const mapThemeManager,
 //     - if not expired: create TextureTile, set state to "uptodate", return it => done
 //     - if expired: create TextureTile, state is set to Expired by default, trigger dl,
 
-QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & stackedTileId, TileId const & tileId )
+QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & stackedTileId,
+                                                  TileId const & tileId,
+                                                  DownloadUsage const usage )
 {
     QString const fileName = tileFileName( tileId );
     QFileInfo const fileInfo( fileName );
@@ -61,7 +63,7 @@ QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & stackedTileId, 
         } else {
             mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateExpired";
             m_waitingForUpdate.insert( tileId, tile );
-            triggerDownload( tileId );
+            triggerDownload( tileId, usage );
         }
         return tile;
     }
@@ -71,7 +73,7 @@ QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & stackedTileId, 
     QSharedPointer<TextureTile> const tile( new TextureTile( tileId ));
     tile->setStackedTileId( stackedTileId );
     m_waitingForUpdate.insert( tileId, tile );
-    triggerDownload( tileId );
+    triggerDownload( tileId, usage );
     QImage * const replacementTile = scaledLowerLevelTile( tileId );
     if ( replacementTile ) {
         mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateScaled";
@@ -93,7 +95,9 @@ QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & stackedTileId, 
 // post condition
 //     - tile object is being returned, with download triggered,
 //       pointer is kept in m_waitingForUpdate until tile is downloaded
-QSharedPointer<TextureTile> TileLoader::reloadTile( TileId const & stackedTileId, TileId const & tileId )
+QSharedPointer<TextureTile> TileLoader::reloadTile( TileId const & stackedTileId,
+                                                    TileId const & tileId,
+                                                    DownloadUsage const usage )
 {
     QSharedPointer<TextureTile> tile =
         m_waitingForUpdate.value( tileId, QSharedPointer<TextureTile>() );
@@ -121,7 +125,7 @@ QSharedPointer<TextureTile> TileLoader::reloadTile( TileId const & stackedTileId
     tile->setExpireSecs( textureLayer->expire() );
     tile->setStackedTileId( stackedTileId );
     m_waitingForUpdate.insert( tileId, tile );
-    triggerDownload( tileId );
+    triggerDownload( tileId, usage );
     return tile;
 }
 
@@ -132,13 +136,13 @@ QSharedPointer<TextureTile> TileLoader::reloadTile( TileId const & stackedTileId
 // post condition
 //     - download is triggered, but only if not in progress (indicated by
 //       m_waitingForUpdate)
-void TileLoader::reloadTile( QSharedPointer<TextureTile> const & tile )
+void TileLoader::reloadTile( QSharedPointer<TextureTile> const & tile, DownloadUsage const usage )
 {
     if ( m_waitingForUpdate.contains( tile->id() ))
         return;
     tile->setState( TextureTile::StateExpired );
     m_waitingForUpdate.insert( tile->id(), tile );
-    triggerDownload( tile->id() );
+    triggerDownload( tile->id(), usage );
 }
 
 void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
@@ -179,14 +183,14 @@ QString TileLoader::tileFileName( TileId const & tileId ) const
                              ( textureLayer, tileId.zoomLevel(), tileId.x(), tileId.y() ));
 }
 
-void TileLoader::triggerDownload( TileId const & id )
+void TileLoader::triggerDownload( TileId const & id, DownloadUsage const usage )
 {
     GeoSceneTexture * const textureLayer = findTextureLayer( id );
     QUrl const sourceUrl = TileLoaderHelper::downloadUrl( textureLayer, id.zoomLevel(), id.x(),
                                                           id.y() );
     QString const destFileName = TileLoaderHelper::relativeTileFileName( textureLayer, id.zoomLevel(),
                                                                          id.x(), id.y() );
-    emit downloadTile( sourceUrl, destFileName, id.toString(), DownloadBrowse );
+    emit downloadTile( sourceUrl, destFileName, id.toString(), usage );
 }
 
     // TODO: get lastModified time stamp into the TextureTile

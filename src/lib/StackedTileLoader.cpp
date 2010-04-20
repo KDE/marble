@@ -175,7 +175,7 @@ void StackedTileLoader::flush()
     d->m_tilesOnDisplay.clear();
 }
 
-StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
+StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId, DownloadUsage const usage,
                                           bool const forMergedLayerDecorator )
 {
     // check if the tile is in the hash
@@ -221,7 +221,8 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
                              stackedTileId.x(), stackedTileId.y() );
         mDebug() << "StackedTileLoader::loadTile: tile" << textureLayer->sourceDir()
                  << tileId.toString();
-        QSharedPointer<TextureTile> const tile = d->m_tileLoader->loadTile( stackedTileId, tileId );
+        QSharedPointer<TextureTile> const tile = d->m_tileLoader->loadTile( stackedTileId, tileId,
+                                                                            usage );
         if ( tile ) {
             tile->setBlending( textureLayer->blending() );
             stackedTile->addTile( tile );
@@ -240,11 +241,12 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId,
 // 1) in the "hash" (m_tilesOnDisplay), which means it is currently displayed
 // 2) not in the hash, but in the "cache", which means it is not currently displayed
 // 3) neither in "hash" nor in "cache"
-StackedTile* StackedTileLoader::reloadTile( TileId const & stackedTileId )
+StackedTile* StackedTileLoader::reloadTile( TileId const & stackedTileId,
+                                            DownloadUsage const usage )
 {
     StackedTile * const displayedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
     if ( displayedTile ) {
-        reloadCachedTile( displayedTile );
+        reloadCachedTile( displayedTile, usage );
         return displayedTile;
     }
     StackedTile * const cachedTile = d->m_tileCache.object( stackedTileId );
@@ -256,7 +258,7 @@ StackedTile* StackedTileLoader::reloadTile( TileId const & stackedTileId )
         // So, all in all it might be better to take the tile out of the cache before calling
         // reloadCachedTile and put it in again afterwards.
         // FIXME: discuss/decide
-        reloadCachedTile( cachedTile );
+        reloadCachedTile( cachedTile, usage );
         return cachedTile;
     }
 
@@ -270,7 +272,8 @@ StackedTile* StackedTileLoader::reloadTile( TileId const & stackedTileId )
         GeoSceneTexture const * const textureLayer = *pos;
         TileId const tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
                              stackedTileId.x(), stackedTileId.y() );
-        QSharedPointer<TextureTile> const tile = d->m_tileLoader->reloadTile( stackedTileId, tileId );
+        QSharedPointer<TextureTile> const tile = d->m_tileLoader->reloadTile( stackedTileId, tileId,
+                                                                              usage );
         if ( tile ) {
             tile->setBlending( textureLayer->blending() );
             stackedTile->addTile( tile );
@@ -506,14 +509,15 @@ void StackedTileLoader::mergeDecorations( StackedTile * const tile,
 // This method should not alter m_tileCache, as the given tile is managed
 // by the cache and may be evicted at any time (that is usually when inserting
 // other tiles in the cache)
-void StackedTileLoader::reloadCachedTile( StackedTile * const cachedTile )
+void StackedTileLoader::reloadCachedTile( StackedTile * const cachedTile,
+                                          DownloadUsage const usage )
 {
     Q_ASSERT( cachedTile );
     QVector<QSharedPointer<TextureTile> > * tiles = cachedTile->tiles();
     QVector<QSharedPointer<TextureTile> >::const_iterator pos = tiles->constBegin();
     QVector<QSharedPointer<TextureTile> >::const_iterator const end = tiles->constEnd();
     for (; pos != end; ++pos ) {
-        d->m_tileLoader->reloadTile( *pos );
+        d->m_tileLoader->reloadTile( *pos, usage );
     }
     cachedTile->deriveCompletionState();
     cachedTile->initResultTile();

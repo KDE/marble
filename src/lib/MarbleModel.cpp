@@ -916,7 +916,10 @@ void MarbleModel::reloadMap() const
     QList<TileId>::const_iterator pos = displayed.constBegin();
     QList<TileId>::const_iterator const end = displayed.constEnd();
     for (; pos != end; ++pos ) {
-        d->m_tileLoader->reloadTile( *pos );
+        // it's debatable here, whether DownloadBulk or DownloadBrowse should be used
+        // but since "reload" or "refresh" seems to be a common action of a browser and it
+        // allows for more connections (in our model), use "DownloadBrowse"
+        d->m_tileLoader->reloadTile( *pos, DownloadBrowse );
     }
 }
 

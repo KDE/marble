@@ -42,9 +42,11 @@ class TileLoader: public QObject
  public:
     TileLoader( MapThemeManager const * const, HttpDownloadManager * const );
 
-    QSharedPointer<TextureTile> loadTile( TileId const & stackedTileId, TileId const & tileId );
-    QSharedPointer<TextureTile> reloadTile( TileId const & stackedTileId, TileId const & tileId );
-    void reloadTile( QSharedPointer<TextureTile> const & tile );
+    QSharedPointer<TextureTile> loadTile( TileId const & stackedTileId, TileId const & tileId,
+                                          DownloadUsage const );
+    QSharedPointer<TextureTile> reloadTile( TileId const & stackedTileId, TileId const & tileId,
+                                            DownloadUsage const );
+    void reloadTile( QSharedPointer<TextureTile> const & tile, DownloadUsage const );
 
     void setTextureLayers( QHash<uint, GeoSceneTexture*> const & );
 
@@ -63,7 +65,7 @@ class TileLoader: public QObject
     GeoSceneTexture const * findTextureLayer( TileId const & ) const;
     GeoSceneTexture * findTextureLayer( TileId const & );
     QString tileFileName( TileId const & ) const;
-    void triggerDownload( TileId const & );
+    void triggerDownload( TileId const &, DownloadUsage const );
     QImage * scaledLowerLevelTile( TileId const & );
 
     // TODO: comment about uint hash key
