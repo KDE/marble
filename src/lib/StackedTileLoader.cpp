@@ -124,7 +124,7 @@ void StackedTileLoader::setDownloadManager( HttpDownloadManager *downloadManager
 void StackedTileLoader::setTextureLayerSettings( GeoSceneGroup * const textureLayerSettings )
 {
     if ( d->m_textureLayerSettings ) {
-        disconnect( d->m_textureLayerSettings, SIGNAL( valueChanged( QSting, bool ) ),
+        disconnect( d->m_textureLayerSettings, SIGNAL( valueChanged( QString, bool ) ),
                     this,                      SLOT( reset() ) );
     }
     d->m_textureLayerSettings = textureLayerSettings;
