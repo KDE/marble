@@ -69,6 +69,7 @@ private:
 
     QList<WeatherData> m_list;
     QStack<ScheduleEntry> m_schedule;
+    QMutex m_scheduleMutex;
     
     static QHash<QString, WeatherData::WeatherCondition> dayConditions;
     static QHash<QString, WeatherData::WeatherCondition> nightConditions;

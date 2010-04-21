@@ -64,19 +64,24 @@ void BBCParser::scheduleRead( const QString& path,
     entry.item = item;
     entry.type = type;
 
+    m_scheduleMutex.lock();
     m_schedule.push( entry );
+    m_scheduleMutex.unlock();
 
     ensureRunning();
 }
 
 bool BBCParser::workAvailable()
 {
+    QMutexLocker locker( &m_scheduleMutex );
     return !m_schedule.isEmpty();
 }
 
 void BBCParser::work()
 {
+    m_scheduleMutex.lock();
     ScheduleEntry entry = m_schedule.pop();
+    m_scheduleMutex.unlock();
 
     QFile file( entry.path );
     if( !file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
