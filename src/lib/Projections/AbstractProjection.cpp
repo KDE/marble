@@ -114,7 +114,7 @@ bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &geopoint,
 
 bool AbstractProjection::screenCoordinates( const GeoDataCoordinates &coordinates,
                                     const ViewportParams *viewport,
-                                    qreal *x, qreal &y, int &pointRepeatNum,                                    bool &globeHidesPoint )
+                                    qreal *x, qreal &y, int &pointRepeatNum, bool &globeHidesPoint )
 {
     return screenCoordinates( coordinates, viewport, x, y, pointRepeatNum, 
            QSizeF( 0.0, 0.0 ), globeHidesPoint );
@@ -356,7 +356,8 @@ bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineStrin
 
 
 void AbstractProjectionPrivate::repeatPolygons( const ViewportParams *viewport,
-                                                QVector<QPolygonF *> &polygons ) {
+                                                QVector<QPolygonF *> &polygons )
+{
     if ( !q->repeatX() ) {
         // The projection doesn't allow repeats in direction of the x-axis
         return;
@@ -428,7 +429,8 @@ void AbstractProjectionPrivate::repeatPolygons( const ViewportParams *viewport,
 
 void AbstractProjectionPrivate::translatePolygons( const QVector<QPolygonF *> &polygons,
                                                    QVector<QPolygonF *> &translatedPolygons,
-                                                   qreal xOffset ) {
+                                                   qreal xOffset )
+{
 //    mDebug() << "Translation: " << xOffset;
 
     QVector<QPolygonF *>::const_iterator itPolygon = polygons.constBegin();
@@ -448,7 +450,8 @@ void AbstractProjectionPrivate::manageHorizonCrossing( bool globeHidesPoint,
                                                 bool& horizonPair,
                                                 GeoDataCoordinates& horizonDisappearCoords,
                                                 bool& horizonOrphan,
-                                                GeoDataCoordinates& horizonOrphanCoords ) {
+                                                GeoDataCoordinates& horizonOrphanCoords )
+{
     if ( !horizonPair ) {
         if ( globeHidesPoint ) {
             horizonDisappearCoords = horizonCoords;
@@ -464,7 +467,8 @@ void AbstractProjectionPrivate::manageHorizonCrossing( bool globeHidesPoint,
 void AbstractProjection::horizonToPolygon( const ViewportParams *viewport,
                                            const GeoDataCoordinates & disappearCoords,
                                            const GeoDataCoordinates & reappearCoords,
-                                           QPolygonF * polygon ) {
+                                           QPolygonF * polygon )
+{
     qreal x, y;
 
     const qreal imageHalfWidth  = viewport->width() / 2;
