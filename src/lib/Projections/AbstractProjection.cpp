@@ -356,7 +356,7 @@ bool AbstractProjection::lineStringToPolygon( const GeoDataLineString &lineStrin
 
 
 void AbstractProjectionPrivate::repeatPolygons( const ViewportParams *viewport,
-                                                QVector<QPolygonF *> &polygons )
+                                                QVector<QPolygonF *> &polygons ) const
 {
     if ( !q->repeatX() ) {
         // The projection doesn't allow repeats in direction of the x-axis
@@ -429,7 +429,7 @@ void AbstractProjectionPrivate::repeatPolygons( const ViewportParams *viewport,
 
 void AbstractProjectionPrivate::translatePolygons( const QVector<QPolygonF *> &polygons,
                                                    QVector<QPolygonF *> &translatedPolygons,
-                                                   qreal xOffset )
+                                                   qreal xOffset ) const
 {
 //    mDebug() << "Translation: " << xOffset;
 
@@ -450,7 +450,7 @@ void AbstractProjectionPrivate::manageHorizonCrossing( bool globeHidesPoint,
                                                 bool& horizonPair,
                                                 GeoDataCoordinates& horizonDisappearCoords,
                                                 bool& horizonOrphan,
-                                                GeoDataCoordinates& horizonOrphanCoords )
+                                                GeoDataCoordinates& horizonOrphanCoords ) const
 {
     if ( !horizonPair ) {
         if ( globeHidesPoint ) {
@@ -691,7 +691,7 @@ QPolygonF AbstractProjectionPrivate::processTessellation(  const GeoDataCoordina
                                                     const GeoDataCoordinates &currentCoords,
                                                     int tessellatedNodes,
                                                     const ViewportParams *viewport,
-                                                    TessellationFlags f )
+                                                    TessellationFlags f ) const
 {
     QPolygonF   path;
 
@@ -821,7 +821,7 @@ GeoDataCoordinates AbstractProjectionPrivate::findHorizon( const GeoDataCoordina
                                                     const GeoDataCoordinates & currentCoords,
                                                     const ViewportParams *viewport,
                                                     TessellationFlags f,
-                                                    int recursionCounter )
+                                                    int recursionCounter ) const
 {
     bool currentHide = globeHidesPoint( currentCoords, viewport ) ;
 
@@ -887,7 +887,7 @@ GeoDataCoordinates AbstractProjectionPrivate::findHorizon( const GeoDataCoordina
 
 
 bool AbstractProjectionPrivate::globeHidesPoint( const GeoDataCoordinates &coordinates,
-                                          const ViewportParams *viewport )
+                                          const ViewportParams *viewport ) const
 {
     qreal       absoluteAltitude = coordinates.altitude() + EARTH_RADIUS;
     Quaternion  qpos             = coordinates.quaternion();

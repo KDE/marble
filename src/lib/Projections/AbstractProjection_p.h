@@ -33,29 +33,29 @@ class AbstractProjectionPrivate
                                     const GeoDataCoordinates & currentCoords,
                                     const ViewportParams *viewport,
                                     TessellationFlags f = 0,
-                                    int recursionCounter = 0 );
+                                    int recursionCounter = 0 ) const;
 
     bool globeHidesPoint( const GeoDataCoordinates &coordinates,
-                          const ViewportParams *viewport );
+                          const ViewportParams *viewport ) const;
 
     void manageHorizonCrossing( bool globeHidesPoint,
                                 const GeoDataCoordinates& horizonCoords,
                                 bool& horizonPair,
                                 GeoDataCoordinates& horizonDisappearCoords,
                                 bool& horizonOrphan,
-                                GeoDataCoordinates& horizonOrphanCoords );
+                                GeoDataCoordinates& horizonOrphanCoords ) const;
 
     QPolygonF processTessellation(  const GeoDataCoordinates &previousCoords,
                                     const GeoDataCoordinates &currentCoords,
                                     int count, const ViewportParams *viewport,
-                                    TessellationFlags f = 0 );
+                                    TessellationFlags f = 0 ) const;
 
     void repeatPolygons( const ViewportParams *viewport,
-                         QVector<QPolygonF *> &polygons );
+                         QVector<QPolygonF *> &polygons ) const;
 
     void translatePolygons( const QVector<QPolygonF *> &polygons,
                             QVector<QPolygonF *> &translatedPolygons,
-                            qreal xOffset );
+                            qreal xOffset ) const;
 };
 
 } // namespace Marble
