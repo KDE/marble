@@ -93,7 +93,7 @@ class MarbleWidgetPrivate
       * @brief Rotate the globe in the given direction in discrete steps
       * @param stepsRight Number of steps to go right. Negative values go left.
       * @param stepsDown Number of steps to go down. Negative values go up.
-      * @param mode Interpolation mode to use when travelling to the target
+      * @param mode Interpolation mode to use when traveling to the target
       */
     void moveByStep(MarbleWidget* widget, int stepsRight, int stepsDown, FlyToMode mode);
 

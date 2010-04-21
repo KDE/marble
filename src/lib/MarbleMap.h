@@ -799,7 +799,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     
     /**
      * @brief Reload the currently displayed map by reloading texture tiles
-     *        from the internet. In the future this should be extended to all
+     *        from the Internet. In the future this should be extended to all
      *        kinds of data which is used in the map.
      */
     void reload() const;

@@ -8,8 +8,13 @@
 // Copyright 2010      Bastian Holst <bastianholst@gmx.de>
 //
 
-// std
-#include <limits>
+// Self
+#include "DataMigration.h"
+
+// Marble
+#include "MarbleDebug.h"
+#include "MarbleDirs.h"
+#include "ui_DataMigrationWidget.h"
 
 // Qt
 #include <QtCore/QDebug>
@@ -21,13 +26,8 @@
 #include <QtGui/QDialog>
 #include <QtGui/QProgressDialog>
 
-// Marble
-#include "MarbleDebug.h"
-#include "MarbleDirs.h"
-#include "ui_DataMigrationWidget.h"
-
-// Self
-#include "DataMigration.h"
+// std
+#include <limits>
 
 using namespace Marble;
 
@@ -80,7 +80,7 @@ void DataMigration::moveFiles( const QString& source, const QString& target )
         mDebug() << "Removing of the target directory failed";
     }
 
-    // Trying to simply rename the directory. This is the fastest method, but it is not allways
+    // Trying to simply rename the directory. This is the fastest method, but it is not always
     // possible. For example when the directories are on different file systems.
     // If the renaming of the directory is not successful, we have to copy and delete each
     // file separatetly.

@@ -58,7 +58,7 @@ class TileLoader: public QObject
                        QString const & id, DownloadUsage );
 
     // when this signal is emitted, the TileLoader gives up ownership of
-    // the corrsponding tile. Might be better to explicitely transfer...
+    // the corrsponding tile. Might be better to explicitly transfer...
     void tileCompleted( TileId const & composedTileId, TileId const & baseTileId );
 
  private:
