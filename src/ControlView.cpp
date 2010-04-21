@@ -16,9 +16,11 @@
 #include <QtGui/QSplitter>
 #include <QtGui/QStringListModel>
 
-#include <MarbleWidget.h>
-#include <MarbleModel.h>
-#include <MapThemeManager.h>
+#include "GeoSceneDocument.h"
+#include "GeoSceneHead.h"
+#include "MarbleWidget.h"
+#include "MarbleModel.h"
+#include "MapThemeManager.h"
 
 namespace Marble
 {
@@ -121,6 +123,20 @@ void ControlView::setCurrentLocationTabShown( bool show )
 void ControlView::setFileViewTabShown( bool show )
 {
     m_control->setFileViewTabShown( show );
+}
+
+QString ControlView::defaultMapThemeId() const
+{
+    QList<GeoSceneDocument const*> themes = m_mapThemeManager->mapThemes();
+    QString result;
+    foreach(GeoSceneDocument const* theme, themes) {
+        result = theme->head()->mapThemeId();
+        if ( result == "earth/srtm/srtm.dgml" ) {
+            return result;
+        }
+    }
+
+    return result;
 }
 
 }

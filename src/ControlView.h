@@ -57,6 +57,12 @@ class ControlView : public QWidget
     
     SunLocator* sunLocator() { return m_marbleWidget->sunLocator(); }
     
+    /**
+      * Returns a default map theme: earth/srtm/srtm.dgml if installed,
+      * any other theme id if earth/srtm/srtm.dgml is not installed,
+      * or an empty string if no themes are installed at all
+      */
+    QString defaultMapThemeId() const;
 
  public slots:
     void setSideBarShown( bool );    

@@ -401,7 +401,11 @@ void MarblePart::readSettings()
     }
 
     // Map theme and projection
-    m_controlView->marbleWidget()->setMapThemeId( MarbleSettings::mapTheme() );
+    QString mapTheme = MarbleSettings::mapTheme();
+    if ( mapTheme.isEmpty() ) {
+        mapTheme = m_controlView->defaultMapThemeId();
+    }
+    m_controlView->marbleWidget()->setMapThemeId( mapTheme );
     m_controlView->marbleWidget()->setProjection( (Projection) MarbleSettings::projection() );
 
     m_controlView->marbleWidget()->setShowClouds( MarbleSettings::showClouds() );

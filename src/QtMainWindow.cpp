@@ -729,7 +729,7 @@ void MainWindow::readSettings()
      setUpdatesEnabled(false);
 
      settings.beginGroup("MarbleWidget");
-         QString mapThemeId = settings.value("mapTheme", "" ).toString();
+         QString mapThemeId = settings.value("mapTheme", m_controlView->defaultMapThemeId() ).toString();
          qDebug() << "ReadSettings: mapThemeId: " << mapThemeId;
          m_controlView->marbleWidget()->setMapThemeId( mapThemeId );
          m_controlView->marbleWidget()->setProjection(
