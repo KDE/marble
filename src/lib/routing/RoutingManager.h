@@ -38,7 +38,7 @@ public:
     };
 
     /** Constructor */
-    RoutingManager(MarbleWidget *widget, QObject *parent = 0);
+    explicit RoutingManager(MarbleWidget *widget, QObject *parent = 0);
 
     /** Destructor */
     ~RoutingManager();
