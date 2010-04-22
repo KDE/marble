@@ -15,6 +15,7 @@
 
 
 #include "marble_export.h"
+#include "PositionProviderPlugin.h"
 
 #include <QtGui/QWidget>
 
@@ -245,6 +246,7 @@ class MARBLE_EXPORT MarbleControlBox : public QWidget
     void adjustForStill();
 
     void changePositionProvider( const QString &provider );
+    void adjustPositionTrackingStatus( PositionProviderStatus status );
     void centerOnCurrentLocation();
 
  private:

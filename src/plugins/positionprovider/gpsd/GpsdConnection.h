@@ -11,12 +11,12 @@
 #ifndef GPSDCONNECTION_H
 #define GPSDCONNECTION_H
 
+#include "PositionProviderPlugin.h"
+
 #include <QtCore/QObject>
 #include <QtCore/QTimer>
 
 #include <libgpsmm.h>
-
-
 
 namespace Marble
 {
@@ -28,19 +28,27 @@ class GpsdConnection : public QObject
  public:
     GpsdConnection( QObject* parent = 0 );
 
+    void initialize();
+
+    QString error() const;    
+
  signals:
     void gpsdInfo( gps_data_t data );
-    
- private:
+
+    void statusChanged( PositionProviderStatus status ) const;    
+
+private:
+    void open();
+
     gpsmm m_gpsd;
     QTimer m_timer;
+    PositionProviderStatus m_status;
+    QString m_error;
     
  private slots:
     void update();
 };
 
 }
-
-
 
 #endif

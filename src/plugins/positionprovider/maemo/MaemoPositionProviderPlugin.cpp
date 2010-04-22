@@ -31,7 +31,7 @@ public:
 };
 
 MaemoPositionProviderPluginPrivate::MaemoPositionProviderPluginPrivate() :
-        m_control( 0 ), m_device( 0 ), m_status( PositionProviderStatusUnavailable )
+        m_control( 0 ), m_device( 0 ), m_status( PositionProviderStatusAcquiring )
 {
     m_timer.setInterval( 1000 );
 }
@@ -79,11 +79,16 @@ PositionProviderStatus MaemoPositionProviderPlugin::status() const
 
 GeoDataCoordinates MaemoPositionProviderPlugin::position() const
 {
-    if ( status() == PositionProviderStatusAvailable ) {
+    if ( status() == PositionProviderStatusAvailable &&
+         d->m_device->fix->fields & LOCATION_GPS_DEVICE_LATLONG_SET ) {
+        qreal alt = 0.0;
+        if ( d->m_device->fix->fields & LOCATION_GPS_DEVICE_ALTITUDE_SET ) {
+            alt = d->m_device->fix->altitude;
+        }
+
         return GeoDataCoordinates( d->m_device->fix->longitude,
                                    d->m_device->fix->latitude,
-                                   d->m_device->fix->altitude,
-                                   GeoDataCoordinates::Degree );
+                                   alt, GeoDataCoordinates::Degree );
     }
 
     return GeoDataCoordinates();
@@ -142,9 +147,12 @@ bool MaemoPositionProviderPlugin::isInitialized() const
 
 void MaemoPositionProviderPlugin::update()
 {
-    PositionProviderStatus newStatus = PositionProviderStatusUnavailable;
+    PositionProviderStatus newStatus = PositionProviderStatusAcquiring;
     if ( d->m_device ) {
-        newStatus = d->m_device->fix ? PositionProviderStatusAvailable : PositionProviderStatusAcquiring;
+        if ( d->m_device->status == LOCATION_GPS_DEVICE_STATUS_FIX && d->m_device->fix )
+            newStatus = PositionProviderStatusAvailable;
+        else
+            newStatus = PositionProviderStatusUnavailable;
     }
 
     if ( newStatus != d->m_status ) {

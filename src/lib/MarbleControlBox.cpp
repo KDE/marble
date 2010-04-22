@@ -336,6 +336,9 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              this, SLOT( changePositionProvider( QString ) ) );
     connect( d->uiWidget.locationLabel, SIGNAL( linkActivated( QString ) ),
              this, SLOT( centerOnCurrentLocation() ) );
+    connect( d->m_widget->model()->gpsLayer()->getPositionTracking(),
+             SIGNAL( statusChanged( PositionProviderStatus) ), this,
+             SLOT( adjustPositionTrackingStatus( PositionProviderStatus) ) );
 }
 
 void MarbleControlBox::setWidgetTabShown( QWidget * widget,
@@ -412,6 +415,34 @@ void MarbleControlBox::changeZoom(int zoom)
              this,                      SIGNAL( zoomChanged( int ) ) );
 }
 
+void MarbleControlBox::adjustPositionTrackingStatus( PositionProviderStatus status )
+{
+    if ( status == PositionProviderStatusAvailable ) {
+        return;
+    }
+
+    QString html = "<html><body><p>";
+
+    switch ( status ) {
+        case PositionProviderStatusUnavailable:
+            html += tr( "Waiting for current location information..." );
+            break;
+        case PositionProviderStatusAcquiring:
+            html += tr( "Initializing current location service..." );
+            break;
+        case PositionProviderStatusAvailable:
+            Q_ASSERT( false );
+            break;
+        case PositionProviderStatusError:
+            html += tr( "Error when determining current location: " );
+            html += d->m_widget->model()->gpsLayer()->getPositionTracking()->error();
+            break;
+    }
+
+    html += "</p></body></html>";
+    d->uiWidget.locationLabel->setEnabled( true );
+    d->uiWidget.locationLabel->setText( html );
+}
 
 void MarbleControlBox::receiveGpsCoordinates( const GeoDataCoordinates &position, qreal speed )
 {
@@ -430,7 +461,7 @@ void MarbleControlBox::receiveGpsCoordinates( const GeoDataCoordinates &position
     html += "<tr><td>Altitude</td><td>%3</td></tr>";
     html += "<tr><td>Speed</td><td>%4</td></tr>";
     html += "</table>";
-    html += "</html></body>";
+    html += "</body></html>";
 
     switch ( d->m_locale->measureSystem() ) {
         case Metric:

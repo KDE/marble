@@ -13,7 +13,6 @@
 #include "GpsdThread.h"
 #include "MarbleDebug.h"
 
-
 using namespace Marble;
 
 QString GpsdPositionProviderPlugin::name() const
@@ -43,9 +42,14 @@ QIcon GpsdPositionProviderPlugin::icon() const
 
 void GpsdPositionProviderPlugin::initialize()
 {
+    m_status = PositionProviderStatusAcquiring;
+    emit statusChanged( m_status );
+
     m_thread = new GpsdThread;
     connect( m_thread, SIGNAL( gpsdInfo( gps_data_t ) ),
              this, SLOT( update( gps_data_t ) ) );
+    connect( m_thread, SIGNAL( statusChanged( PositionProviderStatus ) ),
+             this, SIGNAL( statusChanged( PositionProviderStatus ) ) );
     m_thread->start();
 }
 
@@ -114,6 +118,11 @@ GpsdPositionProviderPlugin::~GpsdPositionProviderPlugin()
         m_thread->wait();
         delete m_thread;
     }
+}
+
+QString GpsdPositionProviderPlugin::error() const
+{
+    return m_thread->error();
 }
 
 Q_EXPORT_PLUGIN2( GpsdPositionProviderPlugin, Marble::GpsdPositionProviderPlugin )

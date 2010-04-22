@@ -11,6 +11,8 @@
 #ifndef GPSDTHREAD_H
 #define GPSDTHREAD_H
 
+#include "PositionProviderPlugin.h"
+
 #include <QtCore/QThread>
 
 #include <libgpsmm.h>
@@ -20,19 +22,31 @@
 namespace Marble
 {
 
+class GpsdConnection;
+
 class GpsdThread: public QThread
 {
     Q_OBJECT
 
  public:
+    GpsdThread();
+
+    ~GpsdThread();
+
     virtual void run();
+
+    QString error() const;
+
+Q_SIGNALS:
+    void statusChanged( PositionProviderStatus status ) const;
+
+private:
+    GpsdConnection* m_connection;
     
  signals:
     void gpsdInfo( gps_data_t data );
 };
 
 }
-
-
 
 #endif

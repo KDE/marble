@@ -22,13 +22,12 @@
 namespace Marble
 {
   
-enum PositionProviderStatusFlag {
-    PositionProviderStatusUnavailable = 0,
+enum PositionProviderStatus {
+    PositionProviderStatusError = 0,
+    PositionProviderStatusUnavailable,
     PositionProviderStatusAcquiring,
     PositionProviderStatusAvailable
 };
-
-Q_DECLARE_FLAGS(PositionProviderStatus, PositionProviderStatusFlag)
 
 /**
  * @short The interface for position provider plugins.
@@ -42,12 +41,19 @@ class PositionProviderPluginInterface: public PluginInterface
     virtual PositionProviderStatus status() const = 0;
     virtual GeoDataCoordinates position() const = 0;
     virtual GeoDataAccuracy accuracy() const = 0;
+
+    /**
+      * Returns an error string to be presented to the user
+      * if the status is PositionProviderStatusError. For other
+      * states, the result value is undefined.
+      */
+    virtual QString error() const;
 };
 
 }
 
-Q_DECLARE_INTERFACE( Marble::PositionProviderPluginInterface, "org.kde.Marble.PositionProviderPluginInterface/1.00" )
+Q_DECLARE_INTERFACE( Marble::PositionProviderPluginInterface, "org.kde.Marble.PositionProviderPluginInterface/1.01" )
 
-
+Q_DECLARE_METATYPE( Marble::PositionProviderStatus );
 
 #endif

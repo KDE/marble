@@ -17,16 +17,12 @@
 #include "Track.h"
 #include "TrackPoint.h"
 #include "TrackSegment.h"
-#include "PositionProviderPlugin.h"
 #include "MarbleMath.h"
+#include "MarbleDebug.h"
 #include "ViewParams.h"
 
 #include <QtXml/QXmlInputSource>
 #include <QtXml/QXmlSimpleReader>
-
-#include "MarbleDebug.h"
-
-
 
 using namespace Marble;
 
@@ -203,8 +199,15 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
     if ( m_positionProvider ) {
         m_positionProvider->setParent( this );
         mDebug() << "Initializing position provider:" << m_positionProvider->name();
+        connect( m_positionProvider, SIGNAL( statusChanged( PositionProviderStatus ) ),
+                this, SIGNAL( statusChanged(PositionProviderStatus ) ) );
         m_positionProvider->initialize();
     }
+}
+
+QString PositionTracking::error() const
+{
+    return m_positionProvider ? m_positionProvider->error() : QString();
 }
 
 #include "PositionTracking.moc"

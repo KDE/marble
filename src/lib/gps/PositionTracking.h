@@ -12,13 +12,13 @@
 #ifndef MARBLE_POSITIONTRACKING_H
 #define MARBLE_POSITIONTRACKING_H
 
+#include "PositionProviderPlugin.h"
+
 #include <QtGui/QRegion>
 #include <QtGui/QPolygonF>
 #include <QtCore/QObject>
 #include <QtCore/QTemporaryFile>
 #include <QtNetwork/QHttp>
-
-
 
 namespace Marble
 {
@@ -32,7 +32,6 @@ class ViewParams;
 class Waypoint;
 class GeoDataCoordinates;
 class PluginManager;
-class PositionProviderPlugin;
 
 class PositionTracking : public QObject 
 {
@@ -89,11 +88,15 @@ public:
       */
     void setPositionProviderPlugin( PositionProviderPlugin* plugin );
 
+    QString error() const;
+
  public slots:
     void  notifyPosition( GeoDataCoordinates );
 
 Q_SIGNALS:
     void  gpsLocation( GeoDataCoordinates, qreal );
+
+    void statusChanged( PositionProviderStatus status );
 
  private:
     void updateSpeed( TrackPoint* previous, TrackPoint* next );

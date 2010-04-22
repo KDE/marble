@@ -43,6 +43,7 @@ class GpsdPositionProviderPlugin: public PositionProviderPlugin
     virtual PositionProviderStatus status() const;
     virtual GeoDataCoordinates position() const;
     virtual GeoDataAccuracy accuracy() const;
+    virtual QString error() const;
     
  private:
     GpsdThread* m_thread;
