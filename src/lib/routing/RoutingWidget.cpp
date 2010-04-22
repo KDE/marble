@@ -295,7 +295,7 @@ void RoutingWidget::activatePlacemark(const QModelIndex &index)
 
 void RoutingWidget::addInputWidget()
 {
-    int index = d->m_ui.routingLayout->count()-4;
+    int index = d->m_ui.routingLayout->count()-5;
     d->m_routeSkeleton->append(GeoDataCoordinates());
     insertInputWidget(index);
 }
