@@ -127,16 +127,28 @@ void ControlView::setFileViewTabShown( bool show )
 
 QString ControlView::defaultMapThemeId() const
 {
+    QStringList fallBackThemes;
+    fallBackThemes << "earth/srtm/srtm.dgml";
+    fallBackThemes << "earth/bluemarble/bluemarble.dgml";
+    fallBackThemes << "earth/openstreetmap/openstreetmap.dgml";
+
+    QStringList installedThemes;
     QList<GeoSceneDocument const*> themes = m_mapThemeManager->mapThemes();
-    QString result;
     foreach(GeoSceneDocument const* theme, themes) {
-        result = theme->head()->mapThemeId();
-        if ( result == "earth/srtm/srtm.dgml" ) {
-            return result;
+        installedThemes << theme->head()->mapThemeId();
+    }
+
+    foreach(const QString &fallback, fallBackThemes) {
+        if (installedThemes.contains(fallback)) {
+            return fallback;
         }
     }
 
-    return result;
+    if (installedThemes.size()) {
+        return installedThemes.first();
+    }
+
+    return QString();
 }
 
 }
