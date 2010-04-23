@@ -73,8 +73,8 @@ void GpsdConnection::initialize()
 void GpsdConnection::update()
 {
     gps_data_t* data = 0;
-#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 3 ) && defined( POLICY_SET )
-    while ((data = m_gpsd.poll()) && !(data->set & POLICY_SET)) {
+#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 3 ) && defined( PACKET_SET )
+    while ((data = m_gpsd.poll()) && !(data->set & PACKET_SET)) {
         data = m_gpsd.poll();
     }
 #else
