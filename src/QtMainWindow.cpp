@@ -638,18 +638,18 @@ void MainWindow::updateStatusBar()
 
 void MainWindow::openFile()
 {
-    QString fileName;
-    fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+    QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Open File"),
                             QString(), 
                             tr("All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*.kml)"));
 
-    if ( ! fileName.isNull() ) {
-        QString extension = fileName.section( '.', -1 );
+    foreach( const QString &fileName, fileNames ) {
+        QFileInfo fileInfo(fileName);
+        QString extension = fileInfo.suffix();
 
         if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
             m_controlView->marbleWidget()->openGpxFile( fileName );
         }
-        else if ( extension.compare( "kml", Qt::CaseInsensitive ) 
+        else if ( extension.compare( "kml", Qt::CaseInsensitive )
                   == 0 ) 
         {
             m_controlView->marbleWidget()->addPlacemarkFile( fileName );
