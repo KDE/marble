@@ -643,8 +643,7 @@ void MainWindow::openFile()
                             tr("All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*.kml)"));
 
     foreach( const QString &fileName, fileNames ) {
-        QFileInfo fileInfo(fileName);
-        QString extension = fileInfo.suffix();
+        QString extension = fileName.section( '.', -1 );
 
         if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
             m_controlView->marbleWidget()->openGpxFile( fileName );

@@ -169,12 +169,11 @@ bool MarblePart::openUrl( const KUrl &url )
 
 bool MarblePart::openFile()
 {
-    QString fileName;
-    fileName = KFileDialog::getOpenFileName( KUrl(),
+    QStringList fileNames = KFileDialog::getOpenFileNames( KUrl(),
                                     i18n("*.gpx *.kml|All Supported Files\n*.gpx|GPS Data\n*.kml|Google Earth KML"),
                                             widget(), i18n("Open File")
                                            );
-    if ( ! fileName.isNull() ) {
+    foreach( const QString &fileName, fileNames ) {
         QString extension = fileName.section( '.', -1 );
 
         if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
