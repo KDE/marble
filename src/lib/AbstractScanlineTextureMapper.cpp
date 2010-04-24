@@ -267,8 +267,7 @@ void AbstractScanlineTextureMapper::pixelValueApproxF(const qreal& lon,
         qreal oldPosY = 0;
 
         const bool alwaysCheckTileRange =
-                isOutOfTileRangeF( itLon, itLat, itStepLon, itStepLat,
-                                   tileWidth, tileHeight, n );
+                isOutOfTileRangeF( itLon, itLat, itStepLon, itStepLat, n );
         
         for ( int j=1; j < n; ++j ) {
             qreal posX = itLon + itStepLon * j;
@@ -356,17 +355,16 @@ void AbstractScanlineTextureMapper::pixelValueApproxF(const qreal& lon,
 
 bool AbstractScanlineTextureMapper::isOutOfTileRangeF( qreal itLon, qreal itLat,
                                                        qreal itStepLon, qreal itStepLat,
-                                                       int tileWidth, int tileHeight,
                                                        int n ) const
 {
     qreal minIPosX = itLon + itStepLon;
     qreal minIPosY = itLat + itStepLat;
     qreal maxIPosX = itLon + itStepLon * ( n - 1 );
     qreal maxIPosY = itLat + itStepLat * ( n - 1 );
-    return (    maxIPosX >= tileWidth  || maxIPosX < 0
-             || maxIPosY >= tileHeight || maxIPosY < 0
-             || minIPosX >= tileWidth  || minIPosX < 0
-             || minIPosY >= tileHeight || minIPosY < 0 );
+    return (    maxIPosX >= m_tileSize.width()  || maxIPosX < 0
+             || maxIPosY >= m_tileSize.height() || maxIPosY < 0
+             || minIPosX >= m_tileSize.width()  || minIPosX < 0
+             || minIPosY >= m_tileSize.height() || minIPosY < 0 );
 }
 
 
@@ -402,8 +400,7 @@ void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
         const int tileHeight = m_tileSize.height();
 
         const bool alwaysCheckTileRange =
-                isOutOfTileRange( itLon, itLat, itStepLon, itStepLat,
-                                  tileWidth, tileHeight, n );
+                isOutOfTileRange( itLon, itLat, itStepLon, itStepLat, n );
                                   
         if ( !alwaysCheckTileRange ) {
             int iPosXf = itLon;
@@ -482,17 +479,16 @@ void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
 
 bool AbstractScanlineTextureMapper::isOutOfTileRange( int itLon, int itLat,
                                                       int itStepLon, int itStepLat,
-                                                      int tileWidth, int tileHeight,
                                                       int n ) const
 {
     int minIPosX = ( itLon + itStepLon ) >> 7;
     int minIPosY = ( itLat + itStepLat ) >> 7;
     int maxIPosX = ( itLon + itStepLon * ( n - 1 ) ) >> 7;
     int maxIPosY = ( itLat + itStepLat * ( n - 1 ) ) >> 7;
-    return (    maxIPosX >= tileWidth  || maxIPosX < 0
-             || maxIPosY >= tileHeight || maxIPosY < 0
-             || minIPosX >= tileWidth  || minIPosX < 0
-             || minIPosY >= tileHeight || minIPosY < 0 );
+    return (    maxIPosX >= m_tileSize.width()  || maxIPosX < 0
+             || maxIPosY >= m_tileSize.height() || maxIPosY < 0
+             || minIPosX >= m_tileSize.width()  || minIPosX < 0
+             || minIPosY >= m_tileSize.height() || minIPosY < 0 );
 }
 
 

@@ -90,12 +90,10 @@ public:
     // one tile
     bool isOutOfTileRange( int itLon, int itLat,
                            int itStepLon, int itStepLat,
-                           int tileWidth, int tileHeight,
                            int n ) const;
 
     bool isOutOfTileRangeF( qreal itLon, qreal itLat,
                             qreal itStepLon, qreal itStepLat,
-                            int tileWidth, int tileHeight,
                             int n ) const;
                            
     // maximum values for global texture coordinates
