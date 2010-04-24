@@ -63,6 +63,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     // Evaluate the degree of interpolation
     const int n = interpolationStep( viewParams );
+    bool interpolate = false;
 
     // Calculate north pole position to decrease pole distortion later on
     Quaternion northPole( 0.0, (qreal)( M_PI * 0.5 ) );
@@ -152,16 +153,16 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                      && northPoleX < leftInterval + 2 * n
                      && x < leftInterval + 3 * n )
                 {
-                    m_interpolate = false;
+                    interpolate = false;
                 }
                 else {
                     x += n - 1;
-                    m_interpolate = !printQuality;
+                    interpolate = !printQuality;
                     ++ncount;
                 } 
             }
             else
-                m_interpolate = false;
+                interpolate = false;
 
             // Evaluate more coordinates for the 3D position vector of
             // the current pixel.
@@ -180,7 +181,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
             // Approx for n-1 out of n pixels within the boundary of
             // xIpLeft to xIpRight
 
-            if ( m_interpolate ) {
+            if ( interpolate ) {
                 if (highQuality)
                     pixelValueApproxF( lon, lat, scanLine, n );
                 else

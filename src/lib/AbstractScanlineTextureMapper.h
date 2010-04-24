@@ -67,7 +67,6 @@ public:
                           QRgb *scanLine, int n );
 
     int interpolationStep( ViewParams *viewParams ) const;
-    bool    m_interpolate;
 
     // method for fast integer calculation
     void nextTile( int& posx, int& posy );

@@ -71,6 +71,7 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     // Evaluate the degree of interpolation
     const int n = interpolationStep( viewParams );
+    bool interpolate = false;
 
     bool interlaced = ( m_interlaced 
             || viewParams->mapQuality() == LowQuality );
@@ -135,16 +136,16 @@ void MercatorScanlineTextureMapper::mapTexture( ViewParams *viewParams )
             if ( x >= xIpLeft && x <= xIpRight ) {
                 x += n - 1;
                 lon += (n - 1) * pixel2Rad;
-                m_interpolate = !printQuality;
+                interpolate = !printQuality;
             }
             else {
-                m_interpolate = false;
+                interpolate = false;
             }
 
             if ( lon < -M_PI ) lon += 2 * M_PI;
             if ( lon >  M_PI ) lon -= 2 * M_PI;
 
-            if ( m_interpolate ) {
+            if ( interpolate ) {
                 if (highQuality)
                     pixelValueApproxF( lon, lat, scanLine, n );
                 else

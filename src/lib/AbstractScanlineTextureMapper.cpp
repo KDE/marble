@@ -26,7 +26,6 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture *t
                                                               StackedTileLoader *tileLoader,
                                                               QObject *parent )
     : QObject( parent ),
-      m_interpolate( false ),
       m_maxGlobalX( 0 ),
       m_maxGlobalY( 0 ),
       m_imageHeight( 0 ),
