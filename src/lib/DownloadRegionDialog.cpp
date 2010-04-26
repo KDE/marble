@@ -45,7 +45,7 @@ public:
     Private( ViewportParams const * const viewport,
              AbstractScanlineTextureMapper const * const textureMapper,
              QDialog * const dialog );
-    QGroupBox * createSelectionMethodBox();
+    QWidget * createSelectionMethodBox();
     QLayout * createTilesCounter();
     QWidget * createOkCancelButtonBox();
 
@@ -89,7 +89,7 @@ DownloadRegionDialog::Private::Private( ViewportParams const * const viewport,
     m_tileLevelRangeWidget->setDefaultLevel( m_originatingTileLevel );
 }
 
-QGroupBox * DownloadRegionDialog::Private::createSelectionMethodBox()
+QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
 {
     QRadioButton * const visibleRegionMethodButton = new QRadioButton( tr( "Visible region" ));
     visibleRegionMethodButton->setChecked( true );
