@@ -29,9 +29,9 @@ class MARBLE_EXPORT TileLevelRangeWidget: public QWidget
     explicit TileLevelRangeWidget( QWidget * const parent = 0, Qt::WindowFlags const f = 0 );
     ~TileLevelRangeWidget();
 
-    void setAllowedTileLevelRange( int const minimumTileLevel,
-                                   int const maximumTileLevel );
-    void setDefaultTileLevel( int const );
+    void setAllowedLevelRange( int const minimumLevel,
+                               int const maximumLevel );
+    void setDefaultLevel( int const );
 
     int topLevel() const;
     int bottomLevel() const;

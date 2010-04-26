@@ -47,19 +47,16 @@ TileLevelRangeWidget::~TileLevelRangeWidget()
     delete d;
 }
 
-void TileLevelRangeWidget::setAllowedTileLevelRange( int const minimumTileLevel,
-                                                     int const maximumTileLevel )
+void TileLevelRangeWidget::setAllowedLevelRange( int const minimumLevel, int const maximumLevel )
 {
-    d->m_ui.minSpinBox->setRange( minimumTileLevel, qMin( d->m_ui.maxSpinBox->value(),
-                                                          maximumTileLevel ));
-    d->m_ui.maxSpinBox->setRange( qMax( d->m_ui.minSpinBox->value(), minimumTileLevel ),
-                                  maximumTileLevel );
+    d->m_ui.minSpinBox->setRange( minimumLevel, qMin( d->m_ui.maxSpinBox->value(), maximumLevel ));
+    d->m_ui.maxSpinBox->setRange( qMax( d->m_ui.minSpinBox->value(), minimumLevel ), maximumLevel );
 }
 
-void TileLevelRangeWidget::setDefaultTileLevel( int const tileLevel )
+void TileLevelRangeWidget::setDefaultLevel( int const level )
 {
-    d->m_ui.minSpinBox->setValue( tileLevel );
-    d->m_ui.maxSpinBox->setValue( tileLevel );
+    d->m_ui.minSpinBox->setValue( level );
+    d->m_ui.maxSpinBox->setValue( level );
 }
 
 int TileLevelRangeWidget::bottomLevel() const

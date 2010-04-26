@@ -84,7 +84,7 @@ DownloadRegionDialog::Private::Private( ViewportParams const * const viewport,
 {
     m_latLonBoxWidget->setEnabled( false );
     m_latLonBoxWidget->setLatLonBox( m_visibleRegion );
-    m_tileLevelRangeWidget->setDefaultTileLevel( m_originatingTileLevel );
+    m_tileLevelRangeWidget->setDefaultLevel( m_originatingTileLevel );
 }
 
 QGroupBox * DownloadRegionDialog::Private::createSelectionMethodBox()
@@ -183,13 +183,13 @@ void DownloadRegionDialog::setAllowedTileLevelRange( int const minimumTileLevel,
 {
     d->m_minimumAllowedTileLevel = minimumTileLevel;
     d->m_maximumAllowedTileLevel = maximumTileLevel;
-    d->m_tileLevelRangeWidget->setAllowedTileLevelRange( minimumTileLevel, maximumTileLevel );
+    d->m_tileLevelRangeWidget->setAllowedLevelRange( minimumTileLevel, maximumTileLevel );
 }
 
 void DownloadRegionDialog::setOriginatingTileLevel( int const tileLevel )
 {
     d->m_originatingTileLevel = tileLevel;
-    d->m_tileLevelRangeWidget->setDefaultTileLevel( tileLevel );
+    d->m_tileLevelRangeWidget->setDefaultLevel( tileLevel );
 }
 
 TileCoordsPyramid DownloadRegionDialog::region() const
