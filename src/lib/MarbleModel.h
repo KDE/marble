@@ -49,6 +49,7 @@ class AbstractDataPlugin;
 class AbstractDataPluginItem;
 class AbstractScanlineTextureMapper;
 class GeoPainter;
+class TileCoordsPyramid;
 class FileViewModel;
 class GpsLayer;
 class GpxFileModel;
@@ -305,6 +306,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     int tileZoomLevel() const;
 
     void reloadMap() const;
+    void downloadRegion( QString const & mapThemeId, TileCoordsPyramid const & ) const;
 
  public Q_SLOTS:
     void clearVolatileTileCache();

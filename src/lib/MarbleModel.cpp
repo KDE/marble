@@ -70,6 +70,7 @@
 #include "SunLocator.h"
 #include "TextureColorizer.h"
 #include "StackedTile.h"
+#include "TileCoordsPyramid.h"
 #include "TileCreator.h"
 #include "TileCreatorDialog.h"
 #include "StackedTileLoader.h"
@@ -920,6 +921,23 @@ void MarbleModel::reloadMap() const
         // but since "reload" or "refresh" seems to be a common action of a browser and it
         // allows for more connections (in our model), use "DownloadBrowse"
         d->m_tileLoader->reloadTile( *pos, DownloadBrowse );
+    }
+}
+
+void MarbleModel::downloadRegion( QString const & mapThemeId,
+                                  TileCoordsPyramid const & pyramid ) const
+{
+    Q_ASSERT( d->m_tileLoader );
+    for ( int level = pyramid.topLevel(); level <= pyramid.bottomLevel(); ++level ) {
+        QRect const coords = pyramid.coords( level );
+        mDebug() << "MarbleModel::downloadRegion level:" << level << "tile coords:" << coords;
+        int x1, y1, x2, y2;
+        coords.getCoords( &x1, &y1, &x2, &y2 );
+        for ( int x = x1; x <= x2; ++x )
+            for ( int y = y1; y <= y2; ++y ) {
+                TileId const tileId( mapThemeId, level, x, y );
+                d->m_tileLoader->reloadTile( tileId, DownloadBulk );
+            }
     }
 }
 

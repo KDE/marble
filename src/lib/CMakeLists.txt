@@ -63,6 +63,8 @@ set(marblewidget_SRCS
     blendings/BlendingAlgorithms.cpp
     blendings/BlendingFactory.cpp
     blendings/SunLightBlending.cpp
+    DownloadRegionDialog.cpp
+    LatLonBoxWidget.cpp
     MarbleWidget.cpp
     MarbleModel.cpp
     MarbleMap.cpp
@@ -80,6 +82,8 @@ set(marblewidget_SRCS
     MarbleDataFacade.cpp
     MarbleDebug.cpp
     TextureTile.cpp
+    TileCoordsPyramid.cpp
+    TileLevelRangeWidget.cpp
     TileLoader.cpp
     QtMarbleConfigDialog.cpp
     ClipPainter.cpp
@@ -209,6 +213,7 @@ set(marblewidget_SRCS
 )
 
 set (marblewidget_UI
+    LatLonBoxWidget.ui
     MarbleControlBox.ui
     MarbleNavigator.ui
     MarbleViewSettingsWidget.ui
@@ -216,6 +221,7 @@ set (marblewidget_UI
     MarbleCacheSettingsWidget.ui
     MarblePluginSettingsWidget.ui
     TileCreatorDialog.ui
+    TileLevelRangeWidget.ui
     PlacemarkInfoDialog.ui
     MarbleAboutDialog.ui
     SunControlWidget.ui
@@ -289,6 +295,8 @@ if (APPLE AND QTONLY)
 else (APPLE AND QTONLY)
   install( FILES
     ${graphicsview_HDRS}
+    DownloadRegionDialog.h
+    LatLonBoxWidget.h
     MarbleWidget.h
     MarbleMap.h
     MarbleModel.h
@@ -299,6 +307,8 @@ else (APPLE AND QTONLY)
     MapThemeManager.h
     MarbleAboutDialog.h
     MarbleWidgetInputHandler.h
+    TileCoordsPyramid.h
+    TileLevelRangeWidget.h
     TinyWebBrowser.h
     QtMarbleConfigDialog.h
     global.h

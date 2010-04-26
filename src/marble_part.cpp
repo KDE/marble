@@ -55,9 +55,11 @@
 // Marble library classes
 #include "AbstractFloatItem.h"
 #include "AbstractDataPlugin.h"
+#include "DownloadRegionDialog.h"
 #include "GeoDataCoordinates.h"
 #include "HttpDownloadManager.h"
 #include "MarbleCacheSettingsWidget.h"
+#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 #include "MarbleMap.h"
@@ -65,6 +67,9 @@
 #include "MarblePluginSettingsWidget.h"
 #include "SunControlWidget.h"
 #include "SunLocator.h"
+#include "TileCoordsPyramid.h"
+#include "ViewParams.h"
+#include "ViewportParams.h"
 
 // Marble non-library classes
 #include "ControlView.h"
@@ -965,6 +970,25 @@ void MarblePart::showNewStuffDialog()
 
 void MarblePart::showDownloadRegionDialog()
 {
+    ViewportParams * const viewport = m_controlView->marbleWidget()->map()->viewParams()->viewport();
+    MarbleModel * const model = m_controlView->marbleWidget()->map()->model();
+    QPointer<DownloadRegionDialog> dialog = new DownloadRegionDialog( viewport,
+                                                                      model->textureMapper() );
+    // FIXME: get allowed range from current map theme
+    dialog->setAllowedTileLevelRange( 0, 18 );
+    QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
+    QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
+    mDebug() << "showDownloadRegionDialog mapThemeId:" << mapThemeId << sourceDir;
+
+    if ( dialog->exec() == QDialog::Accepted ) {
+        // FIXME: use lazy evaluation to not generate up to 100k tiles in one go
+        // this can take considerable time even on very fast systems
+        // in contrast generating the TileIds on the fly when they are needed
+        // does not seem to affect download speed.
+        TileCoordsPyramid const pyramid = dialog->region();
+        model->downloadRegion( sourceDir, pyramid );
+    }
+    delete dialog;
 }
 
 void MarblePart::showStatusBarContextMenu( const QPoint& pos )
