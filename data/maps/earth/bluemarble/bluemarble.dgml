@@ -12,7 +12,7 @@
             <visible> true </visible>
         
             <!-- The description allows for rich text of course: -->
-            <description><![CDATA[<p>Earth as seen from Space.<p>The map is based on NASA's beautiful "Blue Marble Next Generation" pictures. Credits: NASA's Earth Observatory ]]></description>
+            <description><![CDATA[<p>Earth as seen from Space.</p><p>The map is based on NASA's beautiful "Blue Marble Next Generation" pictures. Credits: NASA's Earth Observatory</p>]]></description>
     
             <zoom>
                 <minimum>   900  </minimum>

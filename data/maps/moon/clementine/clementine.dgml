@@ -12,7 +12,7 @@
             <visible> true </visible>
         
             <!-- The description allows for rich text of course: -->
-            <description><![CDATA[<p>The moon.<p>The map is based on data from the Clementine Moon mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="http://astrogeology.usgs.gov">USGS Astrogeology Research Program</a>]]></description>
+            <description><![CDATA[<p>The moon.</p><p>The map is based on data from the Clementine Moon mission (UVVIS Basemap Mosaic). Credits: NASA/SDIO, Courtesy <a href="http://astrogeology.usgs.gov">USGS Astrogeology Research Program</a></p>]]></description>
     
             <zoom>
                 <minimum>   900  </minimum>

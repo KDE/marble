@@ -12,7 +12,7 @@
             <visible> true </visible>
         
             <!-- The description allows for rich text of course: -->
-            <description><![CDATA[<p>A <i>plain map</i>.<p>It uses vector lines to mark coastlines and country borders etc..]]></description>
+            <description><![CDATA[<p>A <i>plain map</i>.</p><p>It uses vector lines to mark coastlines and country borders, etc...</p>]]></description>
     
             <zoom>
                 <minimum>   900  </minimum>
