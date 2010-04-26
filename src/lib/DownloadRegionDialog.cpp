@@ -266,9 +266,9 @@ void DownloadRegionDialog::toggleSelectionMethod()
 void DownloadRegionDialog::updateTilesCount()
 {
     TileCoordsPyramid const pyramid = region();
-    int const tilesCount = pyramid.tilesCount();
+    qint64 const tilesCount = pyramid.tilesCount();
     mDebug() << "updateTilesCount:" << tilesCount;
-    d->m_tilesCountLabel->setNum( tilesCount );
+    d->m_tilesCountLabel->setText( QString::number( tilesCount ));
     d->m_okButton->setEnabled( tilesCount > 0 && tilesCount <= maxTilesCount );
 }
 

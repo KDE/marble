@@ -30,7 +30,7 @@ class MARBLE_EXPORT TileCoordsPyramid
     int bottomLevel() const;
     void setTopLevelCoords( QRect const & coords );
     QRect coords( int const level ) const;
-    int tilesCount() const;
+    qint64 tilesCount() const;
 
  private:
     class Private;

@@ -34,7 +34,6 @@ TileCoordsPyramid::Private::Private( int const topLevel, int const bottomLevel )
 }
 
 
-
 TileCoordsPyramid::TileCoordsPyramid( int const topLevel, int const bottomLevel )
     : d( new Private( topLevel, bottomLevel ))
 {
@@ -75,11 +74,11 @@ QRect TileCoordsPyramid::coords( int const level ) const
     return result;
 }
 
-int TileCoordsPyramid::tilesCount() const
+qint64 TileCoordsPyramid::tilesCount() const
 {
-    int const topLevelTilesCount = d->m_topLevelCoords.width() * d->m_topLevelCoords.height();
+    qint64 const topLevelTilesCount = d->m_topLevelCoords.width() * d->m_topLevelCoords.height();
     int const levels = d->m_bottomLevel - d->m_topLevel + 1;
-    int result = 0;
+    qint64 result = 0;
     for ( int i = 0; i < levels; ++i )
         result += topLevelTilesCount << ( 2 * i );
     return result;
