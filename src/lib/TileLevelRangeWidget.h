@@ -35,13 +35,13 @@ class MARBLE_EXPORT TileLevelRangeWidget: public QWidget
     int topLevel() const;
     int bottomLevel() const;
 
- private Q_SLOTS:
-    void setMaximumTopLevel( int const );
-    void setMinimumBottomLevel( int const );
-
  Q_SIGNALS:
     void topLevelChanged( int );
     void bottomLevelChanged( int );
+
+ private Q_SLOTS:
+    void setMaximumTopLevel( int const );
+    void setMinimumBottomLevel( int const );
 
  private:
     Q_DISABLE_COPY( TileLevelRangeWidget )
