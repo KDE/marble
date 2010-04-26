@@ -59,7 +59,6 @@
 #include "GeoDataCoordinates.h"
 #include "HttpDownloadManager.h"
 #include "MarbleCacheSettingsWidget.h"
-#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
 #include "MarbleMap.h"
@@ -978,7 +977,7 @@ void MarblePart::showDownloadRegionDialog()
     dialog->setAllowedTileLevelRange( 0, 18 );
     QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
     QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
-    mDebug() << "showDownloadRegionDialog mapThemeId:" << mapThemeId << sourceDir;
+    kDebug() << "showDownloadRegionDialog mapThemeId:" << mapThemeId << sourceDir;
 
     if ( dialog->exec() == QDialog::Accepted ) {
         // FIXME: use lazy evaluation to not generate up to 100k tiles in one go
