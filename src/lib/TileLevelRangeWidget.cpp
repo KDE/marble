@@ -34,9 +34,9 @@ TileLevelRangeWidget::TileLevelRangeWidget( QWidget * const parent, Qt::WindowFl
     : QWidget( parent, f ),
       d( new Private( this ))
 {
-    // FIXME: rename min -> topLevel, max -> bottomLevel
     connect( d->m_ui.topSpinBox, SIGNAL( valueChanged( int )), SIGNAL( topLevelChanged( int )));
-    connect( d->m_ui.bottomSpinBox, SIGNAL( valueChanged( int )), SIGNAL( bottomLevelChanged( int )));
+    connect( d->m_ui.bottomSpinBox, SIGNAL( valueChanged( int )),
+             SIGNAL( bottomLevelChanged( int )));
 
     connect( d->m_ui.topSpinBox, SIGNAL( valueChanged( int )), SLOT( setMinimumBottomLevel( int )));
     connect( d->m_ui.bottomSpinBox, SIGNAL( valueChanged( int )), SLOT( setMaximumTopLevel( int )));
