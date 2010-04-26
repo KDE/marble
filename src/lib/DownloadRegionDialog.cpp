@@ -163,6 +163,8 @@ DownloadRegionDialog::DownloadRegionDialog( ViewportParams const * const viewpor
     : QDialog( parent, f ),
       d( new Private( viewport, textureMapper, this ))
 {
+    setWindowTitle( tr( "Download Region" ));
+
     QVBoxLayout * const layout = new QVBoxLayout;
     layout->addWidget( d->createSelectionMethodBox() );
     layout->addWidget( d->m_tileLevelRangeWidget );
