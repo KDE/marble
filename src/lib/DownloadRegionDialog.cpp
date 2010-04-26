@@ -63,7 +63,7 @@ public:
     ViewportParams const * const m_viewport;
     AbstractScanlineTextureMapper const * const m_textureMapper;
     GeoSceneTexture const * const m_textureLayer;
-    GeoDataLatLonBox m_currentRegion;
+    GeoDataLatLonBox m_visibleRegion;
 };
 
 DownloadRegionDialog::Private::Private( ViewportParams const * const viewport,
@@ -80,23 +80,23 @@ DownloadRegionDialog::Private::Private( ViewportParams const * const viewport,
       m_viewport( viewport ),
       m_textureMapper( textureMapper ),
       m_textureLayer( textureMapper->textureLayer() ),
-      m_currentRegion( viewport->viewLatLonAltBox() )
+      m_visibleRegion( viewport->viewLatLonAltBox() )
 {
     m_latLonBoxWidget->setEnabled( false );
-    m_latLonBoxWidget->setLatLonBox( m_currentRegion );
+    m_latLonBoxWidget->setLatLonBox( m_visibleRegion );
     m_tileLevelRangeWidget->setDefaultTileLevel( m_originatingTileLevel );
 }
 
 QGroupBox * DownloadRegionDialog::Private::createSelectionMethodBox()
 {
-    QRadioButton * const currentRegionMethodButton = new QRadioButton( tr( "Current region" ));
-    currentRegionMethodButton->setChecked( true );
+    QRadioButton * const visibleRegionMethodButton = new QRadioButton( tr( "Visible region" ));
+    visibleRegionMethodButton->setChecked( true );
     QRadioButton * const latLonBoxMethodButton = new QRadioButton( tr( "Specify region" ));
     connect( latLonBoxMethodButton, SIGNAL( toggled( bool )),
              m_dialog, SLOT( toggleSelectionMethod() ));
 
     QVBoxLayout * const layout = new QVBoxLayout;
-    layout->addWidget( currentRegionMethodButton );
+    layout->addWidget( visibleRegionMethodButton );
     layout->addWidget( latLonBoxMethodButton );
     layout->addWidget( m_latLonBoxWidget );
 
@@ -194,8 +194,8 @@ void DownloadRegionDialog::setOriginatingTileLevel( int const tileLevel )
 
 TileCoordsPyramid DownloadRegionDialog::region() const
 {
-    // check whether "current region" or "lat/lon region" is selection method
-    GeoDataLatLonBox downloadRegion = d->m_currentRegion;
+    // check whether "visible region" or "lat/lon region" is selection method
+    GeoDataLatLonBox downloadRegion = d->m_visibleRegion;
     if ( d->m_latLonBoxWidget->isEnabled() )
         downloadRegion = d->m_latLonBoxWidget->latLonBox();
 
@@ -216,39 +216,39 @@ TileCoordsPyramid DownloadRegionDialog::region() const
     int const tileWidth = d->m_textureMapper->tileSize().width();
     int const tileHeight = d->m_textureMapper->tileSize().height();
 
-    int const currentLevelTileX1 = qMin( westX, eastX ) / tileWidth;
-    int const currentLevelTileY1 = qMin( northY, southY ) / tileHeight;
+    int const visibleLevelTileX1 = qMin( westX, eastX ) / tileWidth;
+    int const visibleLevelTileY1 = qMin( northY, southY ) / tileHeight;
     int const pixelX2 = qMax( westX, eastX );
     int const pixelY2 = qMax( northY, southY );
-    int const currentLevelTileX2 = pixelX2 / tileWidth + ( pixelX2 % tileWidth > 0 ? 1 : 0 );
-    int const currentLevelTileY2 = pixelY2 / tileHeight + ( pixelY2 % tileHeight > 0 ? 1 : 0 );
+    int const visibleLevelTileX2 = pixelX2 / tileWidth + ( pixelX2 % tileWidth > 0 ? 1 : 0 );
+    int const visibleLevelTileY2 = pixelY2 / tileHeight + ( pixelY2 % tileHeight > 0 ? 1 : 0 );
 
-    mDebug() << "current level tile coords (x1/y1/x2/y2):"
-             << currentLevelTileX1 << currentLevelTileY1 << currentLevelTileX2 << currentLevelTileY2;
+    mDebug() << "visible level tile coords (x1/y1/x2/y2):"
+             << visibleLevelTileX1 << visibleLevelTileY1 << visibleLevelTileX2 << visibleLevelTileY2;
 
     QRect topLevelTileCoords;
-    // the pixel coords calculated above are referring to the originating ("current") tile level,
+    // the pixel coords calculated above are referring to the originating ("visible") tile level,
     // if the top level is now a different level, we have to take it into account
     if ( d->m_originatingTileLevel > d->m_tileLevelRangeWidget->topLevel() ) {
         int const deltaLevel = d->m_originatingTileLevel - d->m_tileLevelRangeWidget->topLevel();
-        topLevelTileCoords.setCoords( currentLevelTileX1 >> deltaLevel,
-                                      currentLevelTileY1 >> deltaLevel,
-                                      currentLevelTileX2 >> deltaLevel,
-                                      currentLevelTileY2 >> deltaLevel );
+        topLevelTileCoords.setCoords( visibleLevelTileX1 >> deltaLevel,
+                                      visibleLevelTileY1 >> deltaLevel,
+                                      visibleLevelTileX2 >> deltaLevel,
+                                      visibleLevelTileY2 >> deltaLevel );
     }
     else if ( d->m_originatingTileLevel < d->m_tileLevelRangeWidget->topLevel() ) {
         int const deltaLevel = d->m_tileLevelRangeWidget->topLevel() - d->m_originatingTileLevel;
-        topLevelTileCoords.setCoords( currentLevelTileX1 << deltaLevel,
-                                      currentLevelTileY1 << deltaLevel,
-                                      (( currentLevelTileX2 + 1 ) << deltaLevel ) - 1,
-                                      (( currentLevelTileY2 + 1 ) << deltaLevel ) - 1 );
+        topLevelTileCoords.setCoords( visibleLevelTileX1 << deltaLevel,
+                                      visibleLevelTileY1 << deltaLevel,
+                                      (( visibleLevelTileX2 + 1 ) << deltaLevel ) - 1,
+                                      (( visibleLevelTileY2 + 1 ) << deltaLevel ) - 1 );
     }
     else
-        topLevelTileCoords.setCoords( currentLevelTileX1, currentLevelTileY1,
-                                      currentLevelTileX2, currentLevelTileY2 );
+        topLevelTileCoords.setCoords( visibleLevelTileX1, visibleLevelTileY1,
+                                      visibleLevelTileX2, visibleLevelTileY2 );
 
     mDebug() << "originating level tile coords (x1/y1/x2/y2):"
-             << currentLevelTileX1 << currentLevelTileY1 << currentLevelTileX2 << currentLevelTileY2;
+             << visibleLevelTileX1 << visibleLevelTileY1 << visibleLevelTileX2 << visibleLevelTileY2;
     mDebug() << "top level tile coords (x1/y1/w x h):" << topLevelTileCoords;
 
     TileCoordsPyramid coordsPyramid( d->m_tileLevelRangeWidget->topLevel(),
