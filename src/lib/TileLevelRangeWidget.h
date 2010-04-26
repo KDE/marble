@@ -45,6 +45,7 @@ class MARBLE_EXPORT TileLevelRangeWidget: public QWidget
     void bottomLevelChanged( int );
 
  private:
+    Q_DISABLE_COPY( TileLevelRangeWidget )
     class Private;
     Private * const d;
 };

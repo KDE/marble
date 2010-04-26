@@ -44,6 +44,7 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
     void updateTilesCount();
 
  private:
+    Q_DISABLE_COPY( DownloadRegionDialog )
     class Private;
     Private * const d;
 };

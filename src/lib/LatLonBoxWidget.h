@@ -40,6 +40,7 @@ class MARBLE_EXPORT LatLonBoxWidget: public QWidget
     void valueChanged();
 
  private:
+    Q_DISABLE_COPY( LatLonBoxWidget )
     class Private;
     Private * const d;
 };
