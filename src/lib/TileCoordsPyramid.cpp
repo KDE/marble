@@ -25,7 +25,7 @@ public:
 
     int m_topLevel;
     int m_bottomLevel;
-    QRect m_topLevelCoords;
+    QRect m_bottomLevelCoords;
 };
 
 TileCoordsPyramid::Private::Private( int const topLevel, int const bottomLevel )
@@ -68,21 +68,21 @@ int TileCoordsPyramid::bottomLevel() const
     return d->m_bottomLevel;
 }
 
-void TileCoordsPyramid::setTopLevelCoords( QRect const & coords )
+void TileCoordsPyramid::setBottomLevelCoords( QRect const & coords )
 {
-    d->m_topLevelCoords = coords;
+    d->m_bottomLevelCoords = coords;
 }
 
 QRect TileCoordsPyramid::coords( int const level ) const
 {
     Q_ASSERT( d->m_topLevel <= level && level <= d->m_bottomLevel );
-    int topX1, topY1, topX2, topY2;
-    d->m_topLevelCoords.getCoords( &topX1, &topY1, &topX2, &topY2 );
-    int const deltaLevel = level - d->m_topLevel;
-    int const x1 = topX1 << deltaLevel;
-    int const y1 = topY1 << deltaLevel;
-    int const x2 = (( topX2 + 1 ) << deltaLevel ) -1;
-    int const y2 = (( topY2 + 1 ) << deltaLevel ) -1;
+    int bottomX1, bottomY1, bottomX2, bottomY2;
+    d->m_bottomLevelCoords.getCoords( &bottomX1, &bottomY1, &bottomX2, &bottomY2 );
+    int const deltaLevel = d->m_bottomLevel - level;
+    int const x1 = bottomX1 >> deltaLevel;
+    int const y1 = bottomY1 >> deltaLevel;
+    int const x2 = bottomX2 >> deltaLevel;
+    int const y2 = bottomY2 >> deltaLevel;
     QRect result;
     result.setCoords( x1, y1, x2, y2 );
     return result;
@@ -90,11 +90,11 @@ QRect TileCoordsPyramid::coords( int const level ) const
 
 qint64 TileCoordsPyramid::tilesCount() const
 {
-    qint64 const topLevelTilesCount = d->m_topLevelCoords.width() * d->m_topLevelCoords.height();
-    int const levels = d->m_bottomLevel - d->m_topLevel + 1;
     qint64 result = 0;
-    for ( int i = 0; i < levels; ++i )
-        result += topLevelTilesCount << ( 2 * i );
+    for ( int level = d->m_topLevel; level <= d->m_bottomLevel; ++level ) {
+        QRect const levelCoords = coords( level );
+        result += levelCoords.width() * levelCoords.height();
+    }
     return result;
 }
 

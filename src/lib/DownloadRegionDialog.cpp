@@ -218,47 +218,49 @@ TileCoordsPyramid DownloadRegionDialog::region() const
 
     int const visibleLevelX1 = qMin( westX, eastX );
     int const visibleLevelY1 = qMin( northY, southY );
-    int const visibleLevelX2  = qMax( westX, eastX );
+    int const visibleLevelX2 = qMax( westX, eastX );
     int const visibleLevelY2 = qMax( northY, southY );
 
-    mDebug() << "visible level pixel coords (x1/y1/x2/y2):"
+    mDebug() << "visible level pixel coords (level/x1/y1/x2/y2):" << d->m_originatingTileLevel
              << visibleLevelX1 << visibleLevelY1 << visibleLevelX2 << visibleLevelY2;
 
-    int topLevelX1, topLevelY1, topLevelX2, topLevelY2;
+    int bottomLevelX1, bottomLevelY1, bottomLevelX2, bottomLevelY2;
     // the pixel coords calculated above are referring to the originating ("visible") tile level,
-    // if the top level is now a different level, we have to take it into account
-    if ( d->m_originatingTileLevel > d->m_tileLevelRangeWidget->topLevel() ) {
-        int const deltaLevel = d->m_originatingTileLevel - d->m_tileLevelRangeWidget->topLevel();
-        topLevelX1 = visibleLevelX1 >> deltaLevel;
-        topLevelY1 = visibleLevelY1 >> deltaLevel;
-        topLevelX2 = visibleLevelX2 >> deltaLevel;
-        topLevelY2 = visibleLevelY2 >> deltaLevel;
+    // if the bottom level is a different level, we have to take it into account
+    if ( d->m_originatingTileLevel > d->m_tileLevelRangeWidget->bottomLevel() ) {
+        int const deltaLevel = d->m_originatingTileLevel - d->m_tileLevelRangeWidget->bottomLevel();
+        bottomLevelX1 = visibleLevelX1 >> deltaLevel;
+        bottomLevelY1 = visibleLevelY1 >> deltaLevel;
+        bottomLevelX2 = visibleLevelX2 >> deltaLevel;
+        bottomLevelY2 = visibleLevelY2 >> deltaLevel;
     }
-    else if ( d->m_originatingTileLevel < d->m_tileLevelRangeWidget->topLevel() ) {
-        int const deltaLevel = d->m_tileLevelRangeWidget->topLevel() - d->m_originatingTileLevel;
-        topLevelX1 = visibleLevelX1 << deltaLevel;
-        topLevelY1 = visibleLevelY1 << deltaLevel;
-        topLevelX2 = visibleLevelX2 << deltaLevel;
-        topLevelY2 = visibleLevelY2 << deltaLevel;
+    else if ( d->m_originatingTileLevel < d->m_tileLevelRangeWidget->bottomLevel() ) {
+        int const deltaLevel = d->m_tileLevelRangeWidget->bottomLevel() - d->m_originatingTileLevel;
+        bottomLevelX1 = visibleLevelX1 << deltaLevel;
+        bottomLevelY1 = visibleLevelY1 << deltaLevel;
+        bottomLevelX2 = visibleLevelX2 << deltaLevel;
+        bottomLevelY2 = visibleLevelY2 << deltaLevel;
     }
     else {
-        topLevelX1 = visibleLevelX1;
-        topLevelY1 = visibleLevelY1;
-        topLevelX2 = visibleLevelX2;
-        topLevelY2 = visibleLevelY2;
+        bottomLevelX1 = visibleLevelX1;
+        bottomLevelY1 = visibleLevelY1;
+        bottomLevelX2 = visibleLevelX2;
+        bottomLevelY2 = visibleLevelY2;
     }
-    mDebug() << "top level pixel coords: (x1/y1/x2/y2):"
-             << topLevelX1 << topLevelY1 << topLevelX2 << topLevelY2;
+    mDebug() << "bottom level pixel coords (level/x1/y1/x2/y2):"
+             << d->m_tileLevelRangeWidget->bottomLevel()
+             << bottomLevelX1 << bottomLevelY1 << bottomLevelX2 << bottomLevelY2;
 
     TileCoordsPyramid coordsPyramid( d->m_tileLevelRangeWidget->topLevel(),
                                      d->m_tileLevelRangeWidget->bottomLevel() );
-    QRect topLevelTileCoords;
-    topLevelTileCoords.setCoords( topLevelX1 / tileWidth,
-                                  topLevelY1 / tileHeight,
-                                  topLevelX2 / tileWidth + ( topLevelX2 % tileWidth > 0 ? 1 : 0 ),
-                                  topLevelY2 / tileHeight + ( topLevelY2 % tileHeight > 0 ? 1 : 0 ));
-    mDebug() << "top level tile coords: (x1/y1/size):" << topLevelTileCoords;
-    coordsPyramid.setTopLevelCoords( topLevelTileCoords );
+    QRect bottomLevelTileCoords;
+    bottomLevelTileCoords.setCoords
+        ( bottomLevelX1 / tileWidth,
+          bottomLevelY1 / tileHeight,
+          bottomLevelX2 / tileWidth + ( bottomLevelX2 % tileWidth > 0 ? 1 : 0 ),
+          bottomLevelY2 / tileHeight + ( bottomLevelY2 % tileHeight > 0 ? 1 : 0 ));
+    mDebug() << "bottom level tile coords: (x1/y1/size):" << bottomLevelTileCoords;
+    coordsPyramid.setBottomLevelCoords( bottomLevelTileCoords );
     mDebug() << "tiles count:" << coordsPyramid.tilesCount();
     return coordsPyramid;
 }
