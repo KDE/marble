@@ -19,6 +19,7 @@
 #include <QtGui/QGroupBox>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QLabel>
+#include <QtGui/QMessageBox>
 #include <QtGui/QPushButton>
 #include <QtGui/QRadioButton>
 #include <QtGui/QVBoxLayout>
@@ -64,6 +65,7 @@ public:
     AbstractScanlineTextureMapper const * const m_textureMapper;
     GeoSceneTexture const * const m_textureLayer;
     GeoDataLatLonBox m_visibleRegion;
+    qint64 m_lastTilesCount;
 };
 
 DownloadRegionDialog::Private::Private( ViewportParams const * const viewport,
@@ -80,7 +82,8 @@ DownloadRegionDialog::Private::Private( ViewportParams const * const viewport,
       m_viewport( viewport ),
       m_textureMapper( textureMapper ),
       m_textureLayer( textureMapper->textureLayer() ),
-      m_visibleRegion( viewport->viewLatLonAltBox() )
+      m_visibleRegion( viewport->viewLatLonAltBox() ),
+      m_lastTilesCount( 0 )
 {
     m_latLonBoxWidget->setEnabled( false );
     m_latLonBoxWidget->setLatLonBox( m_visibleRegion );
@@ -276,7 +279,12 @@ void DownloadRegionDialog::updateTilesCount()
 {
     TileCoordsPyramid const pyramid = region();
     qint64 const tilesCount = pyramid.tilesCount();
-    mDebug() << "updateTilesCount:" << tilesCount;
+    if ( tilesCount > maxTilesCount && d->m_lastTilesCount < maxTilesCount ) {
+        QMessageBox tooManyTiles;
+        tooManyTiles.setText( tr( "There is a limit of %n tiles to download.", "", maxTilesCount ));
+        tooManyTiles.exec();
+    }
+    d->m_lastTilesCount = tilesCount;
     d->m_tilesCountLabel->setText( QString::number( tilesCount ));
     d->m_okButton->setEnabled( tilesCount > 0 && tilesCount <= maxTilesCount );
 }
