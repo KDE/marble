@@ -115,6 +115,7 @@ class MarblePart: public KParts::ReadOnlyPart
 
     void  setupStatusBar();
     void  showNewStuffDialog();
+    void  showDownloadRegionDialog();
     void  showStatusBarContextMenu( const QPoint& pos );
 
     void  editSettings();
@@ -180,6 +181,7 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_fullScreenAct;
     KAction      *m_openAct;
     KAction      *m_newStuffAction;
+    KAction      *m_downloadRegionAction;
     KAction      *m_controlSunAction;
     KAction      *m_lockFloatItemsAct;
 

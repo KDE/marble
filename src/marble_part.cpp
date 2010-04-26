@@ -592,6 +592,13 @@ void MarblePart::writeStatusBarSettings()
 
 void MarblePart::setupActions()
 {
+    // Action: Download Region
+    m_downloadRegionAction = new KAction( this );
+    m_downloadRegionAction->setText( i18nc( "Action for downloading an entire region of a map",
+                                            "Download Region..." ));
+    actionCollection()->addAction( "file_download_region", m_downloadRegionAction );
+    connect( m_downloadRegionAction, SIGNAL( triggered() ), SLOT( showDownloadRegionDialog() ));
+
     // Action: Print Map
     m_printMapAction = KStandardAction::print( this, SLOT( printMapScreenShot() ),
                                                actionCollection() );
@@ -954,6 +961,10 @@ void MarblePart::showNewStuffDialog()
     // Update the map theme widget by updating the model.
     // Shouldn't be needed anymore ...
     //m_controlView->marbleControl()->updateMapThemes();
+}
+
+void MarblePart::showDownloadRegionDialog()
+{
 }
 
 void MarblePart::showStatusBarContextMenu( const QPoint& pos )
