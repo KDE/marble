@@ -928,7 +928,12 @@ void MarbleModel::downloadRegion( QString const & mapThemeId,
                                   TileCoordsPyramid const & pyramid ) const
 {
     Q_ASSERT( d->m_tileLoader );
-    for ( int level = pyramid.topLevel(); level <= pyramid.bottomLevel(); ++level ) {
+    // When downloading a region (the author of these lines thinks) most users probably expect
+    // the download to begin with the low resution tiles and then procede level-wise to
+    // higher resolution tiles. In order to achieve this, we start requesting downloads of
+    // high resolution tiles and request the low resolution tiles at the end because
+    // DownloadQueueSet (silly name) is implemented as stack.
+    for ( int level = pyramid.bottomLevel(); level >= pyramid.topLevel(); --level ) {
         QRect const coords = pyramid.coords( level );
         mDebug() << "MarbleModel::downloadRegion level:" << level << "tile coords:" << coords;
         int x1, y1, x2, y2;
