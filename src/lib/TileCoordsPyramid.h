@@ -24,6 +24,8 @@ class MARBLE_EXPORT TileCoordsPyramid
 {
  public:
     TileCoordsPyramid( int const topLevel, int const bottomLevel );
+    TileCoordsPyramid( TileCoordsPyramid const & other );
+    TileCoordsPyramid & operator=( TileCoordsPyramid const & rhs );
     ~TileCoordsPyramid();
 
     int topLevel() const;
@@ -33,8 +35,9 @@ class MARBLE_EXPORT TileCoordsPyramid
     qint64 tilesCount() const;
 
  private:
+    void swap( TileCoordsPyramid & other );
     class Private;
-    Private * const d;
+    Private * d; // not const, needs to be swapable
 };
 
 }

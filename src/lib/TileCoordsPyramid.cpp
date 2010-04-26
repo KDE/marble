@@ -13,6 +13,8 @@
 
 #include "TileCoordsPyramid.h"
 
+#include <algorithm>
+
 namespace Marble
 {
 
@@ -37,6 +39,18 @@ TileCoordsPyramid::Private::Private( int const topLevel, int const bottomLevel )
 TileCoordsPyramid::TileCoordsPyramid( int const topLevel, int const bottomLevel )
     : d( new Private( topLevel, bottomLevel ))
 {
+}
+
+TileCoordsPyramid::TileCoordsPyramid( TileCoordsPyramid const & other )
+    : d( new Private( *other.d ))
+{
+}
+
+TileCoordsPyramid & TileCoordsPyramid::operator=( TileCoordsPyramid const & rhs )
+{
+    TileCoordsPyramid temp( rhs );
+    swap( temp );
+    return *this;
 }
 
 TileCoordsPyramid::~TileCoordsPyramid()
@@ -82,6 +96,11 @@ qint64 TileCoordsPyramid::tilesCount() const
     for ( int i = 0; i < levels; ++i )
         result += topLevelTilesCount << ( 2 * i );
     return result;
+}
+
+void TileCoordsPyramid::swap( TileCoordsPyramid & other )
+{
+    std::swap( d, other.d );
 }
 
 }
