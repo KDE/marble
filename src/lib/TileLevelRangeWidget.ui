@@ -34,12 +34,12 @@
          <string>&amp;Tile Level Range:</string>
         </property>
         <property name="buddy">
-         <cstring>minSpinBox</cstring>
+         <cstring>topSpinBox</cstring>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="minSpinBox">
+       <widget class="QSpinBox" name="topSpinBox">
         <property name="toolTip">
          <string>Minimum Tile Level</string>
         </property>
@@ -62,7 +62,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="maxSpinBox">
+       <widget class="QSpinBox" name="bottomSpinBox">
         <property name="toolTip">
          <string>Maximum Tile Level</string>
         </property>

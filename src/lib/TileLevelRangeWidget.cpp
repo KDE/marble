@@ -35,11 +35,11 @@ TileLevelRangeWidget::TileLevelRangeWidget( QWidget * const parent, Qt::WindowFl
       d( new Private( this ))
 {
     // FIXME: rename min -> topLevel, max -> bottomLevel
-    connect( d->m_ui.minSpinBox, SIGNAL( valueChanged( int )), SIGNAL( topLevelChanged( int )));
-    connect( d->m_ui.maxSpinBox, SIGNAL( valueChanged( int )), SIGNAL( bottomLevelChanged( int )));
+    connect( d->m_ui.topSpinBox, SIGNAL( valueChanged( int )), SIGNAL( topLevelChanged( int )));
+    connect( d->m_ui.bottomSpinBox, SIGNAL( valueChanged( int )), SIGNAL( bottomLevelChanged( int )));
 
-    connect( d->m_ui.minSpinBox, SIGNAL( valueChanged( int )), SLOT( setMinimumBottomLevel( int )));
-    connect( d->m_ui.maxSpinBox, SIGNAL( valueChanged( int )), SLOT( setMaximumTopLevel( int )));
+    connect( d->m_ui.topSpinBox, SIGNAL( valueChanged( int )), SLOT( setMinimumBottomLevel( int )));
+    connect( d->m_ui.bottomSpinBox, SIGNAL( valueChanged( int )), SLOT( setMaximumTopLevel( int )));
 }
 
 TileLevelRangeWidget::~TileLevelRangeWidget()
@@ -49,34 +49,36 @@ TileLevelRangeWidget::~TileLevelRangeWidget()
 
 void TileLevelRangeWidget::setAllowedLevelRange( int const minimumLevel, int const maximumLevel )
 {
-    d->m_ui.minSpinBox->setRange( minimumLevel, qMin( d->m_ui.maxSpinBox->value(), maximumLevel ));
-    d->m_ui.maxSpinBox->setRange( qMax( d->m_ui.minSpinBox->value(), minimumLevel ), maximumLevel );
+    d->m_ui.topSpinBox->setRange( minimumLevel, qMin( d->m_ui.bottomSpinBox->value(),
+                                                      maximumLevel ));
+    d->m_ui.bottomSpinBox->setRange( qMax( d->m_ui.topSpinBox->value(), minimumLevel ),
+                                     maximumLevel );
 }
 
 void TileLevelRangeWidget::setDefaultLevel( int const level )
 {
-    d->m_ui.minSpinBox->setValue( level );
-    d->m_ui.maxSpinBox->setValue( level );
+    d->m_ui.topSpinBox->setValue( level );
+    d->m_ui.bottomSpinBox->setValue( level );
 }
 
 int TileLevelRangeWidget::bottomLevel() const
 {
-    return d->m_ui.maxSpinBox->value();
+    return d->m_ui.bottomSpinBox->value();
 }
 
 int TileLevelRangeWidget::topLevel() const
 {
-    return d->m_ui.minSpinBox->value();
+    return d->m_ui.topSpinBox->value();
 }
 
 void TileLevelRangeWidget::setMaximumTopLevel( int const level )
 {
-    d->m_ui.minSpinBox->setMaximum( level );
+    d->m_ui.topSpinBox->setMaximum( level );
 }
 
 void TileLevelRangeWidget::setMinimumBottomLevel( int const level )
 {
-    d->m_ui.maxSpinBox->setMinimum( level );
+    d->m_ui.bottomSpinBox->setMinimum( level );
 }
 
 }
