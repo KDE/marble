@@ -106,7 +106,7 @@ QGroupBox * DownloadRegionDialog::Private::createSelectionMethodBox()
 
 QLayout * DownloadRegionDialog::Private::createTilesCounter()
 {
-    QLabel * const description = new QLabel( tr( "Number of tiles:" ));
+    QLabel * const description = new QLabel( tr( "Number of tiles to download:" ));
     m_tilesCountLabel = new QLabel;
 
     QHBoxLayout * const layout = new QHBoxLayout;
