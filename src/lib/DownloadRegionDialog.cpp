@@ -15,6 +15,7 @@
 
 #include <cmath>
 
+#include <QtGui/QDialogButtonBox>
 #include <QtGui/QGroupBox>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QLabel>
@@ -46,7 +47,7 @@ public:
              QDialog * const dialog );
     QGroupBox * createSelectionMethodBox();
     QLayout * createTilesCounter();
-    QLayout * createOkCancelButtonBox();
+    QWidget * createOkCancelButtonBox();
 
     int rad2PixelX( qreal const lon ) const;
     int rad2PixelY( qreal const lat ) const;
@@ -115,15 +116,13 @@ QLayout * DownloadRegionDialog::Private::createTilesCounter()
     return layout;
 }
 
-QLayout * DownloadRegionDialog::Private::createOkCancelButtonBox()
+QWidget * DownloadRegionDialog::Private::createOkCancelButtonBox()
 {
-    QHBoxLayout * const buttonBox = new QHBoxLayout;
-    m_okButton = new QPushButton( tr( "Ok" ));
-    connect( m_okButton, SIGNAL( clicked() ), m_dialog, SLOT( accept() ));
-    QPushButton * const cancelButton = new QPushButton( tr( "Cancel" ));
-    connect( cancelButton, SIGNAL( clicked() ), m_dialog, SLOT( reject() ));
-    buttonBox->addWidget( m_okButton );
-    buttonBox->addWidget( cancelButton );
+    QDialogButtonBox * const buttonBox = new QDialogButtonBox;
+    m_okButton = buttonBox->addButton( QDialogButtonBox::Ok );
+    buttonBox->addButton( QDialogButtonBox::Cancel );
+    connect( buttonBox, SIGNAL( accepted() ), m_dialog, SLOT( accept() ));
+    connect( buttonBox, SIGNAL( rejected() ), m_dialog, SLOT( reject() ));
     return buttonBox;
 }
 
@@ -168,7 +167,7 @@ DownloadRegionDialog::DownloadRegionDialog( ViewportParams const * const viewpor
     layout->addWidget( d->createSelectionMethodBox() );
     layout->addWidget( d->m_tileLevelRangeWidget );
     layout->addLayout( d->createTilesCounter() );
-    layout->addLayout( d->createOkCancelButtonBox() );
+    layout->addWidget( d->createOkCancelButtonBox() );
     setLayout( layout );
 
     connect( d->m_latLonBoxWidget, SIGNAL( valueChanged() ), SLOT( updateTilesCount() ));
