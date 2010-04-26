@@ -47,6 +47,11 @@ TileLevelRangeWidget::~TileLevelRangeWidget()
     delete d;
 }
 
+QSize TileLevelRangeWidget::sizeHint() const
+{
+    return size();
+}
+
 void TileLevelRangeWidget::setAllowedLevelRange( int const minimumLevel, int const maximumLevel )
 {
     d->m_ui.topSpinBox->setRange( minimumLevel, qMin( d->m_ui.bottomSpinBox->value(),
