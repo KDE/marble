@@ -106,17 +106,15 @@ GpsdPositionProviderPlugin::GpsdPositionProviderPlugin() : m_thread( 0 )
 
 GpsdPositionProviderPlugin::~GpsdPositionProviderPlugin()
 {
-    if (m_thread) {
+    if ( m_thread ) {
         m_thread->exit();
         
-        if (!m_thread->wait( 5000 ) )
-        {
-          mDebug() << "Failed to stop GpsdThread, terminating it.";
-          m_thread->terminate();
+        if ( !m_thread->wait( 5000 ) ) {
+            mDebug() << "Failed to stop GpsdThread";
         }
-
-        m_thread->wait();
-        delete m_thread;
+        else {
+            delete m_thread;
+        }
     }
 }
 
