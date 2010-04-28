@@ -17,6 +17,7 @@
 #include <QtCore/QPointer>
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
+#include <QtGui/QAction>
 #include <QtGui/QCursor>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QPixmap>
@@ -176,6 +177,10 @@ class MarbleWidgetDefaultInputHandler::Private
     QPoint m_toolTipPosition;
 
     MarbleWidgetPopupMenu *m_popupmenu;
+
+    QAction  *m_addMeasurePointAction;
+    QAction  *m_removeLastMeasurePointAction;
+    QAction  *m_removeMeasurePointsAction;
 };
 
 MarbleWidgetDefaultInputHandler::Private::Private()
@@ -338,16 +343,29 @@ void MarbleWidgetDefaultInputHandler::init( MarbleWidget *w )
         d->m_popupmenu = new MarbleWidgetPopupMenu( MarbleWidgetInputHandler::d->m_widget,
                                                     MarbleWidgetInputHandler::d->m_model );
     }
+
+    d->m_addMeasurePointAction = new QAction( tr( "Add &Measure Point" ), this);
+    d->m_popupmenu->addAction( Qt::RightButton, d->m_addMeasurePointAction );
+    d->m_removeLastMeasurePointAction = new QAction( tr( "Remove &Last Measure Point" ),
+                                                  this);
+    d->m_removeLastMeasurePointAction->setEnabled(false);
+    d->m_popupmenu->addAction( Qt::RightButton, d->m_removeLastMeasurePointAction );
+    d->m_removeMeasurePointsAction = new QAction( tr( "&Remove Measure Points" ),
+                                                this);
+    d->m_removeMeasurePointsAction->setEnabled(false);
+    d->m_popupmenu->addAction( Qt::RightButton, d->m_removeMeasurePointsAction );
+
+    connect( d->m_addMeasurePointAction, SIGNAL( triggered() ),
+             SLOT( addMeasurePoint() ) );
+    connect( d->m_removeLastMeasurePointAction, SIGNAL(triggered() ),
+             measureTool, SLOT( removeLastMeasurePoint() ) );
+    connect( d->m_removeMeasurePointsAction, SIGNAL( triggered() ),
+             measureTool, SLOT( removeMeasurePoints() ) );
+
     connect( this, SIGNAL( rmbRequest( int, int ) ),
              this, SLOT( showRmbMenu( int, int ) ) );
-    connect( d->m_popupmenu, SIGNAL( addMeasurePoint( qreal, qreal ) ),
-             measureTool, SLOT( addMeasurePoint( qreal, qreal ) ) );
-    connect( d->m_popupmenu, SIGNAL( removeLastMeasurePoint() ),
-             measureTool, SLOT( removeLastMeasurePoint() ) );
-    connect( d->m_popupmenu, SIGNAL( removeMeasurePoints() ),
-             measureTool, SLOT( removeMeasurePoints( ) ) );
     connect( measureTool, SIGNAL( numberOfMeasurePointsChanged( int ) ),
-             d->m_popupmenu, SLOT( slotNumberOfMeasurePointsChanged( int ) ) );
+             this, SLOT( setNumberOfMeasurePoints( int ) ) );
     connect( this, SIGNAL( lmbRequest( int, int ) ),
              this, SLOT( showLmbMenu( int, int ) ) );
 }
@@ -362,6 +380,7 @@ void MarbleWidgetDefaultInputHandler::showLmbMenu( int x, int y )
 void MarbleWidgetDefaultInputHandler::showRmbMenu( int x, int y )
 {
     if ( isMouseButtonPopupEnabled( Qt::RightButton ) ) {
+        d->m_addMeasurePointAction->setData( QPoint( x, y ) );
         d->m_popupmenu->showRmbMenu( x, y );
     }
 }
@@ -792,6 +811,25 @@ bool MarbleWidgetDefaultInputHandler::keyEvent( MarbleWidget * widget, QEvent* e
     }
 
     return false;
+}
+
+void MarbleWidgetDefaultInputHandler::addMeasurePoint()
+{
+    QPoint  p = d->m_addMeasurePointAction->data().toPoint();
+
+    qreal  lat;
+    qreal  lon;
+
+    MarbleWidgetInputHandler::d->m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
+    MeasureTool *measureTool = MarbleWidgetInputHandler::d->m_widget->map()->measureTool();
+    measureTool->addMeasurePoint( lon, lat );
+}
+
+void MarbleWidgetDefaultInputHandler::setNumberOfMeasurePoints( int newNumber )
+{
+    const bool enableMeasureActions = ( newNumber > 0 );
+    d->m_removeMeasurePointsAction->setEnabled(enableMeasureActions);
+    d->m_removeLastMeasurePointAction->setEnabled(enableMeasureActions);
 }
 
 

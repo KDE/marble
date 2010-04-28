@@ -41,23 +41,20 @@ class MarbleWidgetPopupMenu  : public QObject
     MarbleWidgetPopupMenu(MarbleWidget*, MarbleModel*);
     virtual ~MarbleWidgetPopupMenu(){}
 
+    /**
+      * Adds the action to the menu associated with the specified
+      * mouse button
+      */
+    void addAction( Qt::MouseButton button, QAction* action );
+
  public Q_SLOTS:
     void  showLmbMenu( int, int );
     void  showRmbMenu( int, int );
     void  showFeatureInfo( QAction* );
-    void  slotNumberOfMeasurePointsChanged( int newNumber );
-
- Q_SIGNALS:
-    void  addMeasurePoint( qreal, qreal );
-    void  removeLastMeasurePoint();
-    void  removeMeasurePoints();
 
  protected Q_SLOTS:
     void  slotSetHomePoint();
     void  slotCopyCoordinates();
-    void  slotAddMeasurePoint();
-    void  slotRemoveLastMeasurePoint();
-    void  slotRemoveMeasurePoints();
     void  slotAboutDialog();
 
  private:
@@ -77,10 +74,9 @@ class MarbleWidgetPopupMenu  : public QObject
 
     QAction  *m_copyCoordinateAction;
     QAction  *m_setHomePointAction; 
-    QAction  *m_addMeasurePointAction;	
-    QAction  *m_removeLastMeasurePointAction;
-    QAction  *m_removeMeasurePointsAction;	
-    QAction  *m_aboutDialogAction;	
+    QAction  *m_aboutDialogAction;
+
+    QAction  *m_rmbExtensionPoint;
 };
 
 }

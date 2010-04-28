@@ -54,17 +54,7 @@ void MarbleWidgetPopupMenu::createActions()
     m_copyCoordinateAction = new QAction( tr( "0 N 0 W" ), this );
 
     //	Tool actions (Right mouse button)
-    m_addMeasurePointAction = new QAction( tr( "Add &Measure Point" ), this);
-    m_rmbMenu->addAction( m_addMeasurePointAction );
-    m_removeLastMeasurePointAction = new QAction( tr( "Remove &Last Measure Point" ),
-                                                  this);
-    m_removeLastMeasurePointAction->setEnabled(false);
-    m_rmbMenu->addAction( m_removeLastMeasurePointAction );
-    m_removeMeasurePointsAction = new QAction( tr( "&Remove Measure Points" ),
-                                                this);
-    m_removeMeasurePointsAction->setEnabled(false);
-    m_rmbMenu->addAction( m_removeMeasurePointsAction );
-    m_rmbMenu->addSeparator();
+    m_rmbExtensionPoint = m_rmbMenu->addSeparator();
     m_setHomePointAction  = new QAction( tr( "&Set Home Location" ), this);
     m_rmbMenu->addAction( m_setHomePointAction );
     m_rmbMenu->addSeparator();
@@ -78,12 +68,6 @@ void MarbleWidgetPopupMenu::createActions()
 
     connect( m_setHomePointAction,    SIGNAL( triggered() ),
                                        SLOT( slotSetHomePoint() ) );
-    connect( m_addMeasurePointAction, SIGNAL( triggered() ),
-                                       SLOT( slotAddMeasurePoint() ) );
-    connect( m_removeLastMeasurePointAction, SIGNAL(triggered() ),
-				       SLOT( slotRemoveLastMeasurePoint() ) );
-    connect( m_removeMeasurePointsAction, SIGNAL( triggered() ),
-                                           SLOT( slotRemoveMeasurePoints() ) );
     connect( m_aboutDialogAction, SIGNAL( triggered() ), 
                                    SLOT( slotAboutDialog() ) );
     connect( m_copyCoordinateAction,SIGNAL( triggered() ),
@@ -156,7 +140,6 @@ void MarbleWidgetPopupMenu::showRmbMenu( int xpos, int ypos )
 {
     QPoint curpos = QPoint( xpos, ypos );
     m_setHomePointAction->setData( curpos );
-    m_addMeasurePointAction->setData( curpos );
     m_rmbMenu->popup( m_widget->mapToGlobal( curpos ) );
 }
 
@@ -246,39 +229,17 @@ void MarbleWidgetPopupMenu::slotCopyCoordinates()
     }
 }
 
-void MarbleWidgetPopupMenu::slotAddMeasurePoint()
-{
-    QPoint  p = m_addMeasurePointAction->data().toPoint();
-
-    qreal  lat;
-    qreal  lon;
-
-    m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
-
-    emit addMeasurePoint( lon, lat );
-}
-
-void MarbleWidgetPopupMenu::slotRemoveMeasurePoints()
-{
-    emit removeMeasurePoints();
-}
-
 void MarbleWidgetPopupMenu::slotAboutDialog()
 {
     MarbleAboutDialog dlg( m_widget );
     dlg.exec();
 }
 
-void MarbleWidgetPopupMenu::slotRemoveLastMeasurePoint()
+void MarbleWidgetPopupMenu::addAction( Qt::MouseButton button, QAction* action )
 {
-    emit removeLastMeasurePoint();
-}
-
-void MarbleWidgetPopupMenu::slotNumberOfMeasurePointsChanged( int newNumber )
-{
-    const bool enableMeasureActions = ( newNumber > 0 );
-    m_removeMeasurePointsAction->setEnabled(enableMeasureActions);
-    m_removeLastMeasurePointAction->setEnabled(enableMeasureActions);
+    if ( button == Qt::RightButton ) {
+        m_rmbMenu->insertAction( m_rmbExtensionPoint, action );
+    }
 }
 
 #include "MarbleWidgetPopupMenu.moc"
