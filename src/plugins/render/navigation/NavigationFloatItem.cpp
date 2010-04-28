@@ -120,6 +120,8 @@ void NavigationFloatItem::initialize()
                  this, SLOT( adjustForStill() ) );
         connect( m_navigationWidget->zoomSlider, SIGNAL( valueChanged( int ) ),
                  this, SLOT( updateButtons( int ) ) );
+        connect( m_navigationWidget->zoomSlider, SIGNAL( valueChanged(int) ),
+                 this, SLOT( setMarbleZoomValue(int) ) );
         // Other signal/slot connections will be initialized when the marble widget is known
     }
 }
@@ -174,9 +176,7 @@ bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
                      m_marbleWidget, SLOT( zoomIn() ) );
             connect( m_navigationWidget->zoomOutButton, SIGNAL( clicked() ),
                      m_marbleWidget, SLOT( zoomOut() ) );
-        
-            connect( m_navigationWidget->zoomSlider, SIGNAL(sliderMoved(int)),
-                     m_marbleWidget, SLOT(zoomView(int)));
+
             connect( m_navigationWidget->moveLeftButton, SIGNAL( clicked() ),
                      m_marbleWidget, SLOT( moveLeft() ) );
             connect( m_navigationWidget->moveRightButton, SIGNAL( clicked() ),
@@ -190,8 +190,8 @@ bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
                      m_marbleWidget, SLOT( goHome() ) );
         }
         
-        connect( m_marbleWidget->map(), SIGNAL(zoomChanged(int)),
-                 this, SLOT(zoomChanged(int)));
+        connect( m_marbleWidget->map(), SIGNAL( zoomChanged(int) ),
+                 this, SLOT( setZoomSliderValue( int ) ) );
         connect( m_marbleWidget, SIGNAL( themeChanged( QString ) ),
                  this, SLOT( selectTheme( QString ) ) );
         
@@ -201,11 +201,30 @@ bool NavigationFloatItem::eventFilter(QObject *object, QEvent *e)
     return AbstractFloatItem::eventFilter(object, e);
 }
 
-void NavigationFloatItem::zoomChanged(int level)
+void NavigationFloatItem::setZoomSliderValue(int level)
 {
     if( !( m_profiles & MarbleGlobal::SmallScreen ) ) {
         m_navigationWidget->zoomSlider->setValue(level);
     }
+}
+
+void NavigationFloatItem::setMarbleZoomValue( int level )
+{
+    // There exists a circular signal/slot connection between MarbleWidget and this widget's
+    // zoom slider. MarbleWidget prevents recursion, but it still loops one time unless
+    // disconnected here. 
+    // The circular signal/slot connection results into the Marble Globe flickering, when the
+    // zoom slider is used.
+
+    if( !m_marbleWidget ) {
+        return;
+    }
+
+    disconnect( m_marbleWidget->map(), SIGNAL( zoomChanged(int) ),
+                this, SLOT( setZoomSliderValue( int ) ) );
+    m_marbleWidget->zoomView( level );
+    connect( m_marbleWidget->map(), SIGNAL( zoomChanged(int) ),
+                this, SLOT( setZoomSliderValue( int ) ) );
 }
 
 void NavigationFloatItem::selectTheme(QString theme)

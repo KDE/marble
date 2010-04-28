@@ -65,7 +65,9 @@ MARBLE_PLUGIN( NavigationFloatItem )
 
  private Q_SLOTS:
     /** Adjust slider value to zoom level provided */
-    void zoomChanged(int level);
+    void setZoomSliderValue( int level );
+
+    void setMarbleZoomValue( int level );
 
     /** Map theme was changed, adjust controls */
     void selectTheme( QString theme );
