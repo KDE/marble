@@ -217,7 +217,7 @@ void MarbleAboutDialog::loadPageContents( int idx )
            "http://www.openclipart.org</a> and reworked them. "
            "All flags are under the public domain (see comments inside the svg files).</p>")+
         tr("<b>Stars</b>")+
-        tr("<p><i>The Bright Star Catalogue</i><br />5th Revised Ed. (Preliminary Version) "
+        tr("<p><i>The Bright Star Catalogue</i><br />5th Revised Ed. (Preliminary Version) " // krazy:exclude=spelling
            "Hoffleit D., Warren Jr W.H., Astronomical Data Center, NSSDC/ADC (1991)"
            "<a href=\"http://adc.gsfc.nasa.gov/adc-cgi/cat.pl?/catalogs/5/5050\"> "
            "http://adc.gsfc.nasa.gov</a></p>") );
