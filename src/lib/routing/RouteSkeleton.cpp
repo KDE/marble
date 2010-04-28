@@ -199,7 +199,10 @@ void RouteSkeleton::append(const GeoDataCoordinates &coordinates)
 
 void RouteSkeleton::remove(int index)
 {
-    d->m_route.remove(index);
+    if ( index >= 0 && index < d->m_route.size() ) {
+        d->m_route.remove(index);
+        emit positionRemoved( index );
+    }
 }
 
 void RouteSkeleton::addVia( const GeoDataCoordinates &position )

@@ -26,6 +26,7 @@
 
 #include <QtCore/QTime>
 #include <QtGui/QSortFilterProxyModel>
+#include <QtGui/QFileDialog>
 
 #include "ui_RoutingWidget.h"
 
@@ -43,7 +44,7 @@ public:
 
     RoutingInputWidget *m_activeInput;
 
-    QList<RoutingInputWidget*> m_inputWidgets;
+    QVector<RoutingInputWidget*> m_inputWidgets;
 
     RoutingInputWidget* m_inputRequest;
 
@@ -83,13 +84,13 @@ RoutingWidgetPrivate::RoutingWidgetPrivate() :
 
 void RoutingWidgetPrivate::adjustInputWidgets()
 {
-    bool simple = m_inputWidgets.size() == 1;
+    bool simple = m_inputWidgets.size() <= 2;
     for(int i=0; i<m_inputWidgets.size(); ++i) {
         m_inputWidgets[i]->setSimple(simple);
         m_inputWidgets[i]->setIndex(i);
     }
 
-    m_ui.optionsLabel->setVisible(!simple);
+    //m_ui.optionsLabel->setVisible(!simple);
     adjustSearchButton();
 }
 
@@ -148,10 +149,14 @@ RoutingWidget::RoutingWidget(MarbleWidget* marbleWidget, QWidget* parent) :
             this, SLOT(retrieveSelectedPoint(GeoDataCoordinates)));
     connect(d->m_routingLayer, SIGNAL(pointSelectionAborted()),
             this, SLOT(pointSelectionCanceled()));
+    connect(d->m_routingLayer, SIGNAL(exportRequested()),
+            this, SLOT(exportRoute()));
     connect(d->m_routingManager, SIGNAL(stateChanged(RoutingManager::State, RouteSkeleton*)),
             this, SLOT(updateRouteState(RoutingManager::State, RouteSkeleton*)));
     connect(d->m_routeSkeleton, SIGNAL(positionAdded(int)),
             this, SLOT(insertInputWidget(int)));
+    connect(d->m_routeSkeleton, SIGNAL(positionRemoved(int)),
+            this, SLOT(removeInputWidget(int)));
 
     d->m_routingProxyModel = new RoutingProxyModel(this);
     d->m_routingProxyModel->setSourceModel(d->m_routingManager->routingModel());
@@ -165,12 +170,11 @@ RoutingWidget::RoutingWidget(MarbleWidget* marbleWidget, QWidget* parent) :
 
     connect( d->m_ui.searchButton, SIGNAL( clicked( ) ),
              this, SLOT( retrieveRoute ( ) ) );
-    connect( d->m_ui.moreLabel, SIGNAL(linkActivated(QString)),
-             this, SLOT(addInputWidget()));
     connect( d->m_ui.optionsLabel, SIGNAL(linkActivated(QString)),
              this, SLOT(toggleOptionsVisibility()));
 
-    addInputWidget(); // Need at least one input field
+    addInputWidget();
+    addInputWidget(); // Start with source and destination
     d->m_ui.routePreferenceComboBox->setVisible(false);
     d->m_ui.highwaysCheckBox->setVisible(false);
     d->m_ui.tollWaysCheckBox->setVisible(false);
@@ -295,7 +299,7 @@ void RoutingWidget::activatePlacemark(const QModelIndex &index)
 
 void RoutingWidget::addInputWidget()
 {
-    int index = d->m_ui.routingLayout->count()-5;
+    int index = d->m_ui.routingLayout->count()-4;
     d->m_routeSkeleton->append(GeoDataCoordinates());
     insertInputWidget(index);
 }
@@ -327,10 +331,21 @@ void RoutingWidget::removeInputWidget(RoutingInputWidget* widget)
     if (index >=0 ) {
         d->m_routeSkeleton->remove(index);
         d->m_routingManager->updateRoute();
-        d->m_inputWidgets.removeAll(widget);
-        d->m_ui.routingLayout->removeWidget(widget);
+    }
+}
+
+void RoutingWidget::removeInputWidget( int index )
+{
+    if ( index >= 0 && index < d->m_inputWidgets.size() ) {
+        RoutingInputWidget* widget = d->m_inputWidgets.at( index );
+        d->m_inputWidgets.remove( index );
+        d->m_ui.routingLayout->removeWidget( widget );
         widget->deleteLater();
         d->adjustInputWidgets();
+    }
+
+    if ( d->m_inputWidgets.size() < 2 ) {
+        addInputWidget();
     }
 }
 
@@ -412,6 +427,21 @@ void RoutingWidget::toggleOptionsVisibility()
     d->m_ui.tollWaysCheckBox->setVisible(visible);
     d->m_ui.preferenceLabel->setVisible(visible);
     d->m_ui.avoidLabel->setVisible(visible);
+}
+
+void RoutingWidget::exportRoute()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export Route"), // krazy:exclude=qclasses
+                                                    QDir::homePath(),
+                                                    tr("GPX files (*.gpx)"));
+
+    if ( !fileName.isEmpty() ) {
+        QFile gpx(fileName);
+        if (gpx.open(QFile::WriteOnly)) {
+            d->m_routingManager->routingModel()->exportGpx(&gpx);
+            gpx.close();
+        }
+    }
 }
 
 } // namespace Marble

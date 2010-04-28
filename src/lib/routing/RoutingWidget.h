@@ -71,6 +71,9 @@ private Q_SLOTS:
     /** Remove an existing input field */
     void removeInputWidget(RoutingInputWidget* widget);
 
+    /** Remove an existing input field */
+    void removeInputWidget( int index );
+
     /** Route state changed */
     void updateRouteState(RoutingManager::State state, RouteSkeleton* route);
 
@@ -88,6 +91,9 @@ private Q_SLOTS:
 
     /** Show or hide routing options */
     void toggleOptionsVisibility();
+
+    /** Export route to a file */
+    void exportRoute();
 
 private:
     RoutingWidgetPrivate* const d;

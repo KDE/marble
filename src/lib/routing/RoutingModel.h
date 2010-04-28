@@ -88,6 +88,11 @@ public:
       */
     qreal totalDistance() const;
 
+    /**
+      * Export waypoints and instructions in gpx format
+      */
+    void exportGpx(QIODevice *device) const;
+
 private:
     RoutingModelPrivate* const d;
 };

@@ -225,6 +225,42 @@ namespace Marble {
       return d->m_totalDistance;
     }
 
+void RoutingModel::exportGpx(QIODevice *device) const
+{
+    QString content("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n");
+    content += "<gpx xmlns=\"http://www.topografix.com/GPX/1/1\" creator=\"Marble\" version=\"1.1\" ";
+    content += "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ";
+    content += "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\">\n";
+    content += "<metadata><link href=\"http://edu.kde.org/marble\"><text>Marble Virtual Globe</text></link></metadata>\n";
+
+    QList<RouteElement> instructions;
+    content += "<trk>\n<name>Route</name>\n<trkseg>\n";
+    foreach( const RouteElement &element, d->m_route ) {
+        if ( element.type == WayPoint ) {
+            qreal lon = element.position.longitude(GeoDataCoordinates::Degree);
+            qreal lat = element.position.latitude(GeoDataCoordinates::Degree);
+            content += QString("<trkpt lat=\"%1\" lon=\"%2\"></trkpt>\n").arg(lat,0,'f',7).arg(lon,0,'f',7);
+        }
+        else {
+          instructions << element;
+        }
+    }
+    content += "</trkseg></trk>";
+
+    content += "<rte>\n<name>Route</name>\n";
+    foreach( const RouteElement &element, instructions ) {
+        Q_ASSERT( element.type == Instruction );
+        qreal lon = element.position.longitude(GeoDataCoordinates::Degree);
+        qreal lat = element.position.latitude(GeoDataCoordinates::Degree);
+        content += QString("<rtept lat=\"%1\" lon=\"%2\">%3</rtept>\n").arg(lat,0,'f',7).arg(lon,0,'f',7).arg(element.description);
+    }
+
+    content += "</rte>\n";
+    content += "</gpx>\n";
+
+    device->write(content.toLocal8Bit());
+}
+
 } // namespace Marble
 
 #include "RoutingModel.moc"

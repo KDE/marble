@@ -71,19 +71,13 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate(RouteSkeleton *skeleton, in
 {
     m_stateButton = new QPushButton(parent);
     m_stateButton->setToolTip("Center Map here");
-    m_stateButton->setEnabled(false);
+    m_stateButton->setVisible(false);
     m_stateButton->setIcon(QIcon(m_route->pixmap(m_index)));
     m_stateButton->setFlat(true);
     m_stateButton->setMaximumWidth(22);
     m_stateButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     m_lineEdit = new QLineEdit(parent);
-
-    GeoDataCoordinates pos = m_route->at(m_index);
-    if (pos.longitude() != 0.0 && pos.latitude() != 0.0) {
-        m_lineEdit->setText( pos.toString() );
-        m_stateButton->setEnabled(true);
-    }
 
     m_removeButton = new QPushButton(parent);
     /** @todo: Use an icon instead */
@@ -103,6 +97,13 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate(RouteSkeleton *skeleton, in
     m_progressTimer.setInterval(100);
     m_nominatimTimer.setInterval(1000);
     m_nominatimTimer.setSingleShot(true);
+
+    GeoDataCoordinates pos = m_route->at(m_index);
+    if (pos.longitude() != 0.0 && pos.latitude() != 0.0) {
+        m_lineEdit->setText( pos.toString() );
+        m_pickButton->setVisible(false);
+        m_stateButton->setVisible(true);
+    }
 }
 
 void RoutingInputWidgetPrivate::adjustText()
@@ -186,10 +187,10 @@ void RoutingInputWidget::setTargetPosition(const GeoDataCoordinates &position)
         d->m_lineEdit->setText( position.toString() );
     }
 
-    d->m_pickButton->setChecked(false);
+    d->m_pickButton->setVisible(false);
     d->m_route->setPosition(d->m_index, position);
     d->m_progressTimer.stop();
-    d->m_stateButton->setEnabled(true);
+    d->m_stateButton->setVisible(true);
     emit targetValidityChanged(true);
 }
 
@@ -211,6 +212,8 @@ void RoutingInputWidget::findPlacemarks()
         setInvalid();
     }
     else {
+        d->m_pickButton->setVisible(false);
+        d->m_stateButton->setVisible(true);
         d->m_progressTimer.start();
         d->m_runnerManager->newText(text);
     }
@@ -236,7 +239,7 @@ void RoutingInputWidget::requestRemoval()
 void RoutingInputWidget::setSimple(bool simple)
 {
     d->m_removeButton->setVisible(!simple);
-    d->m_pickButton->setVisible(!simple);
+    //d->m_pickButton->setVisible(!simple);
 }
 
 bool RoutingInputWidget::hasInput() const
@@ -260,7 +263,8 @@ void RoutingInputWidget::finishSearch()
 {
     d->m_progressTimer.stop();
     d->m_stateButton->setIcon(QIcon(d->m_route->pixmap(d->m_index)));
-    d->m_stateButton->setEnabled(true);
+    d->m_pickButton->setVisible(false);
+    d->m_stateButton->setVisible(true);
     emit searchFinished(this);
 }
 
@@ -279,7 +283,7 @@ void RoutingInputWidget::abortMapInputRequest()
 void RoutingInputWidget::setIndex(int index)
 {
     d->m_index = index;
-    d->m_stateButton->setEnabled(hasTargetPosition());
+    d->m_stateButton->setVisible(hasTargetPosition());
     d->m_stateButton->setIcon(QIcon(d->m_route->pixmap(d->m_index)));
 }
 
@@ -287,7 +291,7 @@ void RoutingInputWidget::updatePosition(int index, const GeoDataCoordinates &pos
 {
     if (index == d->m_index) {
         d->m_lineEdit->setText( position.toString() );
-        d->m_stateButton->setEnabled(hasTargetPosition());
+        d->m_stateButton->setVisible(hasTargetPosition());
         d->m_stateButton->setIcon(d->m_route->pixmap(d->m_index));
         emit targetValidityChanged(hasTargetPosition());
         d->adjustText();

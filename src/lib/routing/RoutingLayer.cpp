@@ -15,12 +15,14 @@
 #include "GeoPainter.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidget.h"
+#include "MarbleWidgetPopupMenu.h"
 #include "RoutingModel.h"
 #include "RouteSkeleton.h"
 
 #include <QtCore/QMap>
 #include <QtCore/QDebug>
 #include <QtGui/QPixmap>
+#include <QtGui/QMenu>
 #include <QtGui/QIcon>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QKeyEvent>
@@ -87,8 +89,17 @@ public:
 
     RouteSkeleton* m_routeSkeleton;
 
+    MarbleWidgetPopupMenu* m_contextMenu;
+
+    QAction* m_removeViaPointAction;
+
+    int m_activeMenuIndex;
+
     /** Constructor */
     explicit RoutingLayerPrivate(RoutingLayer* parent, MarbleWidget* widget);
+
+    /** Show a context menu at the specified position */
+    void showContextMenu( const QPoint &position );
 
     // The following methods are mostly only called at one place in the code, but often
     // Inlined to avoid the function call overhead. Having functions here is just to
@@ -129,9 +140,20 @@ RoutingLayerPrivate::RoutingLayerPrivate(RoutingLayer* parent, MarbleWidget* wid
   q(parent), m_proxyModel(0), m_movingIndex(-1), m_marbleWidget(widget), m_targetPixmap(":/data/bitmaps/routing_pick.png"),
   m_viaPixmap(":/data/bitmaps/routing_via.png"), m_dragStopOver(false), m_pointSelection(false),
   m_routingModel(0), m_placemarkModel(0), m_selectionModel(0), m_routeDirty(false), m_pixmapSize(22,22),
-  m_routeSkeleton(0)
+  m_routeSkeleton(0), m_activeMenuIndex(-1)
 {
-    // nothing to do
+    m_contextMenu = new MarbleWidgetPopupMenu( m_marbleWidget, m_marbleWidget->model() );
+    m_removeViaPointAction = new QAction( QObject::tr("&Remove this destination"), q );
+    QObject::connect( m_removeViaPointAction, SIGNAL( triggered() ), q, SLOT( removeViaPoint() ) );
+    m_contextMenu->addAction( Qt::RightButton, m_removeViaPointAction );
+    QAction *exportAction = new QAction( QObject::tr("&Export route..."), q );
+    QObject::connect( exportAction, SIGNAL( triggered() ), q, SIGNAL( exportRequested() ) );
+    m_contextMenu->addAction( Qt::RightButton, exportAction );
+}
+
+void RoutingLayerPrivate::showContextMenu( const QPoint &pos )
+{
+    m_contextMenu->showRmbMenu( pos.x(), pos.y() );
 }
 
 void RoutingLayerPrivate::renderPlacemarks( GeoPainter *painter)
@@ -240,38 +262,66 @@ void RoutingLayerPrivate::renderSkeleton(GeoPainter* painter)
 
 bool RoutingLayerPrivate::handleMouseButtonPress(QMouseEvent* e)
 {
-    if (e->button() != Qt::LeftButton) {
-        return false;
-    }
-
     if (m_pointSelection) {
         return true;
     }
 
     foreach(const SkeletonRegion &region, m_regions) {
         if (region.region.contains(e->pos())) {
-            m_movingIndex = region.index;
-            m_insertStopOver = QPoint();
-            m_dragStopOver = false;
-            return true;
+            if ( e->button() == Qt::LeftButton ) {
+                m_movingIndex = region.index;
+                m_insertStopOver = QPoint();
+                m_dragStopOver = false;
+                return true;
+            }
+            else if ( e->button() == Qt::RightButton ) {
+                m_removeViaPointAction->setEnabled( true );
+                m_activeMenuIndex = region.index;
+                showContextMenu( e->pos() );
+                return true;
+            }
+            else
+                return false;
         }
     }
 
     foreach(const ModelRegion &region, m_instructionRegions) {
         if (region.region.contains(e->pos())) {
-            QModelIndex index = m_proxyModel->mapFromSource(region.index);
-            m_selectionModel->select(index, QItemSelectionModel::ClearAndSelect);
-            m_insertStopOver = QPoint();
-            m_dragStopOver = false;
-            return true;
+            if ( e->button() == Qt::LeftButton ) {
+                QModelIndex index = m_proxyModel->mapFromSource(region.index);
+                m_selectionModel->select(index, QItemSelectionModel::ClearAndSelect);
+                m_insertStopOver = QPoint();
+                m_dragStopOver = false;
+                return true;
+            }
+            else if ( e->button() == Qt::RightButton ) {
+                m_removeViaPointAction->setEnabled( false );
+                showContextMenu( e->pos() );
+                return true;
+            }
+            else
+                return false;
         }
     }
 
     if (m_routeRegion.contains(e->pos())) {
-        /** @todo: Determine the neighbored via points and insert in order */
-        m_insertStopOver = e->pos();
-        m_dragStopOver = true;
-        return true;
+        if ( e->button() == Qt::LeftButton ) {
+            /** @todo: Determine the neighbored via points and insert in order */
+            m_insertStopOver = e->pos();
+            m_dragStopOver = true;
+            return true;
+        }
+        else if ( e->button() == Qt::RightButton ) {
+            m_removeViaPointAction->setEnabled( false );
+            showContextMenu( e->pos() );
+            return true;
+        }
+        else
+            return false;
+    }
+
+    if ( e->button() != Qt::LeftButton ) {
+        return false;
     }
 
     foreach(const ModelRegion &region, m_placemarks) {
@@ -514,6 +564,17 @@ void RoutingLayer::setRouteSkeleton(RouteSkeleton* skeleton)
 {
     d->m_routeSkeleton = skeleton;
 }
+
+void RoutingLayer::removeViaPoint()
+{
+    if ( d->m_activeMenuIndex >= 0 ) {
+        d->m_routeSkeleton->remove( d->m_activeMenuIndex );
+        d->m_activeMenuIndex = -1;
+        setRouteDirty( true );
+        emit routeDirty();
+    }
+}
+
 
 } // namespace Marble
 

@@ -107,6 +107,9 @@ Q_SIGNALS:
     /** An element was added at the given position */
     void positionAdded(int index);
 
+    /** The element at the given position was removed */
+    void positionRemoved(int index);
+
 private:
     RouteSkeletonPrivate* const d;
 };
