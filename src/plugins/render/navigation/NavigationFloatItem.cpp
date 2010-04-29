@@ -120,7 +120,7 @@ void NavigationFloatItem::initialize()
                  this, SLOT( adjustForStill() ) );
         connect( m_navigationWidget->zoomSlider, SIGNAL( valueChanged( int ) ),
                  this, SLOT( updateButtons( int ) ) );
-        connect( m_navigationWidget->zoomSlider, SIGNAL( valueChanged(int) ),
+        connect( m_navigationWidget->zoomSlider, SIGNAL( sliderMoved(int) ),
                  this, SLOT( setMarbleZoomValue(int) ) );
         // Other signal/slot connections will be initialized when the marble widget is known
     }
