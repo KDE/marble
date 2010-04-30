@@ -29,8 +29,9 @@ YoursRoutingProvider::YoursRoutingProvider( QObject *parent ) :
 
 void YoursRoutingProvider::retrieveDirections( RouteSkeleton *route )
 {
-    if ( route->size() < 2 )
+    if ( route->size() < 2 ) {
         return;
+    }
 
     GeoDataCoordinates source = route->source();
     GeoDataCoordinates destination = route->destination();

@@ -198,17 +198,22 @@ void RoutingWidget::retrieveRoute()
 
     int index = d->m_ui.routePreferenceComboBox->currentIndex();
     RouteSkeleton::RoutePreference pref = RouteSkeleton::CarFastest;
-    if ( index == 1 )
-      pref = RouteSkeleton::CarShortest;
-    if ( index == 2 )
-      pref = RouteSkeleton::Bicycle;
-    if ( index == 3 )
-      pref = RouteSkeleton::Pedestrian;
+    if ( index == 1 ) {
+        pref = RouteSkeleton::CarShortest;
+    }
+    if ( index == 2 ) {
+        pref = RouteSkeleton::Bicycle;
+    }
+    if ( index == 3 ) {
+        pref = RouteSkeleton::Pedestrian;
+    }
     RouteSkeleton::AvoidFeatures avoid = RouteSkeleton::AvoidNone;
-    if ( d->m_ui.highwaysCheckBox->isChecked() )
-      avoid |= RouteSkeleton::AvoidHighway;
-    if ( d->m_ui.tollWaysCheckBox->isChecked() )
-      avoid |= RouteSkeleton::AvoidTollWay;
+    if ( d->m_ui.highwaysCheckBox->isChecked() ) {
+        avoid |= RouteSkeleton::AvoidHighway;
+    }
+    if ( d->m_ui.tollWaysCheckBox->isChecked() ) {
+        avoid |= RouteSkeleton::AvoidTollWay;
+    }
 
     d->m_routeSkeleton->setRoutePreference( pref );
     d->m_routeSkeleton->setAvoidFeatures( avoid );

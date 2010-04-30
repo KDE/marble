@@ -155,8 +155,9 @@ RoutingInputWidget::~RoutingInputWidget()
 
 void RoutingInputWidget::startHttpRequest()
 {
-    if ( !hasTargetPosition() )
+    if ( !hasTargetPosition() ) {
         return;
+    }
 
     GeoDataCoordinates position = targetPosition();
     QString base = "http://nominatim.openstreetmap.org/reverse?format=xml&addressdetails=0";
@@ -249,7 +250,7 @@ bool RoutingInputWidget::hasInput() const
 
 void RoutingInputWidget::setMapInputModeEnabled( bool enabled )
 {
-   emit mapInputModeEnabled( this, enabled );
+    emit mapInputModeEnabled( this, enabled );
 }
 
 void RoutingInputWidget::updateProgress()
@@ -300,8 +301,9 @@ void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates &po
 
 void RoutingInputWidget::handleHttpReply( QNetworkReply *reply )
 {
-    if ( !reply->bytesAvailable() )
-      return;
+    if ( !reply->bytesAvailable() ) {
+        return;
+    }
 
     QDomDocument xml;
     if ( !xml.setContent( reply->readAll() ) ) {

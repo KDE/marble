@@ -186,8 +186,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     m_instructionRegions.clear();
     GeoDataLineString waypoints;
 
-    for ( int i=0; i<m_routingModel->rowCount(); ++i )
-    {
+    for ( int i=0; i<m_routingModel->rowCount(); ++i ) {
         QModelIndex index = m_routingModel->index( i,0 );
         GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
         RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
@@ -415,8 +414,7 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
 
 bool RoutingLayerPrivate::handleKeyEvent( QKeyEvent *e )
 {
-    if ( m_pointSelection && e->key() == Qt::Key_Escape )
-    {
+    if ( m_pointSelection && e->key() == Qt::Key_Escape ) {
         m_pointSelection = false;
         emit q->pointSelectionAborted();
         return true;
@@ -485,14 +483,17 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
     painter->save();
     painter->setRenderHint( QPainter::Antialiasing, true );
 
-    if ( d->m_placemarkModel)
+    if ( d->m_placemarkModel) {
         d->renderPlacemarks( painter );
+    }
 
-    if ( d->m_routingModel)
+    if ( d->m_routingModel) {
         d->renderRoute( painter );
+    }
 
-    if ( d->m_routeSkeleton)
+    if ( d->m_routeSkeleton) {
         d->renderSkeleton( painter );
+    }
 
     painter->restore();
     return true;

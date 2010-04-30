@@ -96,8 +96,9 @@ namespace Marble {
 
     QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
     {
-        if ( !index.isValid() )
+        if ( !index.isValid() ) {
             return QVariant();
+        }
 
         if ( index.row() < d->m_route.size() && index.column() == 0 )
         {

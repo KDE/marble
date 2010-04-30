@@ -119,16 +119,18 @@ int RouteSkeleton::size() const
 GeoDataCoordinates RouteSkeleton::source() const
 {
     GeoDataCoordinates result;
-    if ( d->m_route.size() )
+    if ( d->m_route.size() ) {
         result = d->m_route.first();
+    }
     return result;
 }
 
 GeoDataCoordinates RouteSkeleton::destination() const
 {
     GeoDataCoordinates result;
-    if ( d->m_route.size() )
+    if ( d->m_route.size() ) {
         result = d->m_route.last();
+    }
     return result;
 }
 
