@@ -39,7 +39,8 @@ class RoutingLayerPrivate
         QRegion region;
 
         PaintRegion( const T &index_, const QRegion &region_ ) :
-                index( index_ ), region( region_ ) {
+                index( index_ ), region( region_ )
+        {
             // nothing to do
         }
     };
