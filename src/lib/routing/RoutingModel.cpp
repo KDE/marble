@@ -178,7 +178,7 @@ namespace Marble {
         QDomNodeList geometry = root.elementsByTagName( "xls:RouteGeometry" );
         if ( geometry.size() > 0 ) {
             QDomNodeList waypoints = geometry.item( 0 ).toElement().elementsByTagName( "gml:pos" );
-            for( unsigned int i = 0; i < waypoints.length(); ++i )
+            for ( unsigned int i = 0; i < waypoints.length(); ++i )
             {
                 QDomNode node = waypoints.item( i );
                 QStringList content = node.toElement().text().split( ' ' );
@@ -193,7 +193,7 @@ namespace Marble {
         QDomNodeList instructionList = root.elementsByTagName( "xls:RouteInstructionsList" );
         if ( instructionList.size() > 0 ) {
             QDomNodeList instructions = instructionList.item( 0 ).toElement().elementsByTagName( "xls:RouteInstruction" );
-            for( unsigned int i = 0; i < instructions.length(); ++i )
+            for ( unsigned int i = 0; i < instructions.length(); ++i )
             {               
                 QDomElement node = instructions.item( i ).toElement();
 

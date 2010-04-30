@@ -41,7 +41,7 @@ void OrsRoutingProvider::retrieveDirections( RouteSkeleton *route )
     QString preference = "Fastest";
 
     switch ( route->routePreference() ) {
-      case RouteSkeleton::CarFastest:
+    case RouteSkeleton::CarFastest:
         unit = "KM";
         preference = "Fastest";
         break;
