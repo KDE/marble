@@ -33,6 +33,10 @@ OverviewMap::OverviewMap( const QPointF &point, const QSizeF &size )
       m_target(QString()),
       m_svgobj(0)
 {
+    // cache is no needed because:
+    // (1) the SVG overview map is already rendered and stored in m_worldmap pixmap
+    // (2) bounding box and location dot keep changing during navigation
+    setCacheMode( NoCache );
 }
 
 OverviewMap::~OverviewMap()
