@@ -79,7 +79,7 @@ namespace Marble {
         delete d;
     }
 
-    int RoutingModel::rowCount ( const QModelIndex & parent ) const
+    int RoutingModel::rowCount ( const QModelIndex &parent ) const
     {
         return parent.isValid() ? 0 : d->m_route.size();
     }

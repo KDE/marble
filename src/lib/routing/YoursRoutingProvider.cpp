@@ -27,7 +27,7 @@ YoursRoutingProvider::YoursRoutingProvider( QObject *parent ) :
             this, SLOT( retrieveData( QNetworkReply* ) ) );
 }
 
-void YoursRoutingProvider::retrieveDirections( RouteSkeleton* route )
+void YoursRoutingProvider::retrieveDirections( RouteSkeleton *route )
 {
     if ( route->size() < 2 )
         return;
@@ -53,7 +53,7 @@ void YoursRoutingProvider::retrieveDirections( RouteSkeleton* route )
             this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
 }
 
-void YoursRoutingProvider::retrieveData( QNetworkReply* reply )
+void YoursRoutingProvider::retrieveData( QNetworkReply *reply )
 {
     QByteArray data = reply->readAll();
     reply->deleteLater();

@@ -21,7 +21,7 @@ namespace Marble {
 class RoutingManagerPrivate
 {
 public:
-    RoutingModel* m_routingModel;
+    RoutingModel *m_routingModel;
 
     AbstractRoutingProvider *m_routingProvider;
 
@@ -29,7 +29,7 @@ public:
 
     RoutingManagerPrivate( MarbleWidget *widget, QObject *parent );
 
-    RouteSkeleton* m_route;
+    RouteSkeleton *m_route;
 };
 
 RoutingManagerPrivate::RoutingManagerPrivate( MarbleWidget *widget, QObject *parent ) :
@@ -52,12 +52,12 @@ RoutingManager::~RoutingManager()
     delete d;
 }
 
-RoutingModel* RoutingManager::routingModel()
+RoutingModel *RoutingManager::routingModel()
 {
     return d->m_routingModel;
 }
 
-void RoutingManager::retrieveRoute( RouteSkeleton* route )
+void RoutingManager::retrieveRoute( RouteSkeleton *route )
 {
     d->m_route = route;
     updateRoute();

@@ -111,7 +111,7 @@ Q_SIGNALS:
     void positionRemoved( int index );
 
 private:
-    RouteSkeletonPrivate* const d;
+    RouteSkeletonPrivate *const d;
 };
 
 } // namespace Marble

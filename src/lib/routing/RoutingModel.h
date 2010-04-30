@@ -51,13 +51,13 @@ public:
     // Model querying
 
     /** Overload of QAbstractListModel */
-    int rowCount ( const QModelIndex & parent = QModelIndex() ) const;
+    int rowCount ( const QModelIndex &parent = QModelIndex() ) const;
 
     /** Overload of QAbstractListModel */
     QVariant headerData ( int section, Qt::Orientation orientation, int role = Qt::DisplayRole ) const;
 
     /** Overload of QAbstractListModel */
-    QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const;
+    QVariant data ( const QModelIndex &index, int role = Qt::DisplayRole ) const;
 
     // Model data filling
 
@@ -94,7 +94,7 @@ public:
     void exportGpx( QIODevice *device ) const;
 
 private:
-    RoutingModelPrivate* const d;
+    RoutingModelPrivate *const d;
 };
 
 } // namespace Marble

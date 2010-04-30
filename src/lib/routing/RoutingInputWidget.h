@@ -57,7 +57,7 @@ public:
     /**
       * Returns the placemark model that contains search results
       */
-    MarblePlacemarkModel* searchResultModel();
+    MarblePlacemarkModel *searchResultModel();
 
     /**
       * @brief Hide all buttons iff simple is true
@@ -92,23 +92,23 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     /** All runners are finished */
-    void searchFinished( RoutingInputWidget* );
+    void searchFinished( RoutingInputWidget * );
 
     /** User requests to remove this widget */
-    void removalRequest( RoutingInputWidget* );
+    void removalRequest( RoutingInputWidget * );
 
     /** User requests to activate this widget */
-    void activityRequest( RoutingInputWidget* );
+    void activityRequest( RoutingInputWidget * );
 
     /** User requests position input from the map */
-    void mapInputModeEnabled( RoutingInputWidget*, bool enabled );
+    void mapInputModeEnabled( RoutingInputWidget *, bool enabled );
 
     /** hasTargetPosition changed because of selecting a placemark or changing the search term */
     void targetValidityChanged( bool targetValid );
 
 private Q_SLOTS:
     /** Runner progress */
-    void setPlacemarkModel( MarblePlacemarkModel* );
+    void setPlacemarkModel( MarblePlacemarkModel * );
 
     /** Handle click on the goto target button */
     void requestActivity();
@@ -135,10 +135,10 @@ private Q_SLOTS:
     void startHttpRequest();
 
     /** Http request with nominatim.openstreetmap.org done */
-    void handleHttpReply( QNetworkReply* );
+    void handleHttpReply( QNetworkReply * );
 
 private:
-    RoutingInputWidgetPrivate* const d;
+    RoutingInputWidgetPrivate *const d;
 };
 
 } // namespace Marble

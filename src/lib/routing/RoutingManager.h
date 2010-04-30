@@ -49,7 +49,7 @@ public:
       * source to the destination.
       * @see retrieveDirections
       */
-    RoutingModel* routingModel();
+    RoutingModel *routingModel();
 
     /**
       * Forward the source and destination locations to the current routing
@@ -77,7 +77,7 @@ private Q_SLOTS:
     void setRouteData( AbstractRoutingProvider::Format format, const QByteArray &data );
 
 private:
-    RoutingManagerPrivate* const d;
+    RoutingManagerPrivate *const d;
 };
 
 } // namespace Marble

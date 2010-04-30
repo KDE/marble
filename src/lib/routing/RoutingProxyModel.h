@@ -31,7 +31,7 @@ public:
 
 protected:
     /** Reimplemened from QSortFilterProxyModel. Filters waypoints without instructions */
-    virtual bool filterAcceptsRow ( int source_row, const QModelIndex & source_parent ) const;
+    virtual bool filterAcceptsRow ( int source_row, const QModelIndex &source_parent ) const;
 
 };
 

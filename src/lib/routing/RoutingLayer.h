@@ -41,7 +41,7 @@ public:
       *   and repainting of (small) areas. Must not be null
       * @param parent Optional parent widget
       */
-    explicit RoutingLayer( MarbleWidget* widget, QWidget * parent = 0 );
+    explicit RoutingLayer( MarbleWidget *widget, QWidget *parent = 0 );
 
     /** Destructor */
     ~RoutingLayer();
@@ -51,24 +51,24 @@ public:
 
     /** Reimplemented from LayerInterface. Paints route items and placemarks */
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
+                         const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
 
     /**
       * Set the proxy model another QAbstractItemView uses that should share
       * its selection model with us. Needed because this class uses an unfiltered
       * model which has different indices than a filtered one.
       */
-    void synchronizeWith( QAbstractProxyModel *model, QItemSelectionModel* selection );
+    void synchronizeWith( QAbstractProxyModel *model, QItemSelectionModel *selection );
 
     /**
       * Set the routing model to use. Implicitly removes the placemark model.
       */
-    void setModel ( RoutingModel* model );
+    void setModel ( RoutingModel *model );
 
     /**
       * Set the placemark model to use. Implicitly removes the routing model.
       */
-    void setModel ( MarblePlacemarkModel* model );
+    void setModel ( MarblePlacemarkModel *model );
 
     /**
       * When enabled, a cross hair cursor is shown in the map and each click
@@ -86,7 +86,7 @@ public:
     /**
       * Change the route skeleton used for painting and dragging route points
       */
-    void setRouteSkeleton( RouteSkeleton* skeleton );
+    void setRouteSkeleton( RouteSkeleton *skeleton );
 
 Q_SIGNALS:
     /**
@@ -124,7 +124,7 @@ private Q_SLOTS:
     void removeViaPoint();
 
 private:
-    RoutingLayerPrivate* const d;
+    RoutingLayerPrivate *const d;
     friend class RoutingLayerPrivate;
 
 };

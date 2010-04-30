@@ -24,11 +24,11 @@ OrsRoutingProvider::OrsRoutingProvider( QObject *parent ) :
         AbstractRoutingProvider( parent ),
         m_networkAccessManager( new QNetworkAccessManager( this ) )
 {
-    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),
-            this, SLOT( retrieveData( QNetworkReply* ) ) );
+    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
+            this, SLOT( retrieveData( QNetworkReply * ) ) );
 }
 
-void OrsRoutingProvider::retrieveDirections( RouteSkeleton* route )
+void OrsRoutingProvider::retrieveDirections( RouteSkeleton *route )
 {
     if ( route->size() < 2 )
         return;
@@ -82,7 +82,7 @@ void OrsRoutingProvider::retrieveDirections( RouteSkeleton* route )
             this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
 }
 
-void OrsRoutingProvider::retrieveData( QNetworkReply* reply )
+void OrsRoutingProvider::retrieveData( QNetworkReply *reply )
 {
     QByteArray data = reply->readAll();
     reply->deleteLater();

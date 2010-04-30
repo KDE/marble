@@ -36,7 +36,7 @@ public:
 
 private Q_SLOTS:
     /** Route data was retrieved via http */
-    void retrieveData( QNetworkReply* reply );
+    void retrieveData( QNetworkReply *reply );
 
     /** A network error occurred */
     void handleError( QNetworkReply::NetworkError );

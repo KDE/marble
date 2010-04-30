@@ -36,7 +36,7 @@ class RoutingWidgetPrivate {
 public:
     Ui::RoutingWidget m_ui;
 
-    MarbleWidget* m_widget;
+    MarbleWidget *m_widget;
 
     RoutingManager *m_routingManager;
 
@@ -46,11 +46,11 @@ public:
 
     QVector<RoutingInputWidget*> m_inputWidgets;
 
-    RoutingInputWidget* m_inputRequest;
+    RoutingInputWidget *m_inputRequest;
 
     QSortFilterProxyModel *m_routingProxyModel;
 
-    RouteSkeleton* m_routeSkeleton;
+    RouteSkeleton *m_routeSkeleton;
 
     bool m_zoomRouteAfterDownload;
 
@@ -118,10 +118,10 @@ void RoutingWidgetPrivate::adjustSearchButton()
     m_ui.searchButton->setToolTip( tooltip );
 }
 
-void RoutingWidgetPrivate::setActiveInput( RoutingInputWidget* widget )
+void RoutingWidgetPrivate::setActiveInput( RoutingInputWidget *widget )
 {
     Q_ASSERT( widget && "Must not pass null" );
-    MarblePlacemarkModel* model = widget->searchResultModel();
+    MarblePlacemarkModel *model = widget->searchResultModel();
 
     m_activeInput = widget;
     m_ui.directionsListView->setModel( model );
@@ -129,7 +129,7 @@ void RoutingWidgetPrivate::setActiveInput( RoutingInputWidget* widget )
     m_routingLayer->synchronizeWith( m_routingProxyModel, m_ui.directionsListView->selectionModel() );
 }
 
-RoutingWidget::RoutingWidget( MarbleWidget* marbleWidget, QWidget* parent ) :
+RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
         QWidget( parent ), d( new RoutingWidgetPrivate )
 {
     d->m_ui.setupUi( this );
@@ -215,7 +215,7 @@ void RoutingWidget::retrieveRoute()
 
     Q_ASSERT( d->m_routeSkeleton->size() == d->m_inputWidgets.size() );
     for ( int i=0; i<d->m_inputWidgets.size(); ++i ) {
-        RoutingInputWidget* widget = d->m_inputWidgets.at( i );
+        RoutingInputWidget *widget = d->m_inputWidgets.at( i );
         if ( !widget->hasTargetPosition() && widget->hasInput() ) {
             widget->findPlacemarks();
             return;
@@ -254,10 +254,10 @@ void RoutingWidget::activateItem ( const QModelIndex &index )
     }
 }
 
-void RoutingWidget::handleSearchResult( RoutingInputWidget* widget )
+void RoutingWidget::handleSearchResult( RoutingInputWidget *widget )
 {
     d->setActiveInput( widget );
-    MarblePlacemarkModel* model = widget->searchResultModel();
+    MarblePlacemarkModel *model = widget->searchResultModel();
 
     if ( model->rowCount() ) {
         // Make sure we have a selection
@@ -278,7 +278,7 @@ void RoutingWidget::handleSearchResult( RoutingInputWidget* widget )
     }
 }
 
-void RoutingWidget::centerOnInputWidget( RoutingInputWidget* widget )
+void RoutingWidget::centerOnInputWidget( RoutingInputWidget *widget )
 {
     if ( widget->hasTargetPosition() ) {
         d->m_widget->centerOn( widget->targetPosition() );
@@ -325,7 +325,7 @@ void RoutingWidget::insertInputWidget( int index )
     }
 }
 
-void RoutingWidget::removeInputWidget( RoutingInputWidget* widget )
+void RoutingWidget::removeInputWidget( RoutingInputWidget *widget )
 {
     int index = d->m_inputWidgets.indexOf( widget );
     if ( index >=0 ) {
@@ -337,7 +337,7 @@ void RoutingWidget::removeInputWidget( RoutingInputWidget* widget )
 void RoutingWidget::removeInputWidget( int index )
 {
     if ( index >= 0 && index < d->m_inputWidgets.size() ) {
-        RoutingInputWidget* widget = d->m_inputWidgets.at( index );
+        RoutingInputWidget *widget = d->m_inputWidgets.at( index );
         d->m_inputWidgets.remove( index );
         d->m_ui.routingLayout->removeWidget( widget );
         widget->deleteLater();
@@ -349,7 +349,7 @@ void RoutingWidget::removeInputWidget( int index )
     }
 }
 
-void RoutingWidget::updateRouteState( RoutingManager::State state, RouteSkeleton* route )
+void RoutingWidget::updateRouteState( RoutingManager::State state, RouteSkeleton *route )
 {
     Q_UNUSED( route );
 
@@ -382,7 +382,7 @@ void RoutingWidget::updateRouteState( RoutingManager::State state, RouteSkeleton
     d->m_routingLayer->setRouteDirty( state == RoutingManager::Downloading );
 }
 
-void RoutingWidget::requestMapPosition( RoutingInputWidget* widget, bool enabled )
+void RoutingWidget::requestMapPosition( RoutingInputWidget *widget, bool enabled )
 {
     pointSelectionCanceled();
 

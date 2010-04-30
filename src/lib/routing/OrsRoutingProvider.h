@@ -39,11 +39,11 @@ public:
     explicit OrsRoutingProvider( QObject *parent = 0 );
 
     /** Overload of AbstractRoutingProvider */
-    virtual void retrieveDirections( RouteSkeleton* route );
+    virtual void retrieveDirections( RouteSkeleton *route );
 
 private Q_SLOTS:
     /** Route data was retrieved via http */
-    void retrieveData( QNetworkReply* reply );
+    void retrieveData( QNetworkReply *reply );
 
     /** A network error occurred */
     void handleError( QNetworkReply::NetworkError );

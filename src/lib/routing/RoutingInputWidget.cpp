@@ -43,13 +43,13 @@ public:
 
     MarbleRunnerManager *m_runnerManager;
 
-    MarblePlacemarkModel* m_placemarkModel;
+    MarblePlacemarkModel *m_placemarkModel;
 
     QMovie m_progress;
 
     QTimer m_progressTimer;
 
-    RouteSkeleton* m_route;
+    RouteSkeleton *m_route;
 
     int m_index;
 
@@ -114,7 +114,7 @@ void RoutingInputWidgetPrivate::adjustText()
 RoutingInputWidget::RoutingInputWidget( RouteSkeleton *skeleton, int index, QWidget *parent ) :
         QWidget( parent ), d( new RoutingInputWidgetPrivate( skeleton, index, this ) )
 {
-    QHBoxLayout* layout = new QHBoxLayout( this );
+    QHBoxLayout *layout = new QHBoxLayout( this );
     layout->setSpacing( 0 );
     layout->setMargin( 0 );
 
@@ -130,8 +130,8 @@ RoutingInputWidget::RoutingInputWidget( RouteSkeleton *skeleton, int index, QWid
     connect( d->m_removeButton, SIGNAL( clicked() ),
             this, SLOT( requestRemoval() ) );
 
-    connect( d->m_runnerManager, SIGNAL( modelChanged( MarblePlacemarkModel* ) ),
-            this, SLOT( setPlacemarkModel( MarblePlacemarkModel* ) ) );
+    connect( d->m_runnerManager, SIGNAL( modelChanged( MarblePlacemarkModel * ) ),
+            this, SLOT( setPlacemarkModel( MarblePlacemarkModel * ) ) );
     connect( d->m_lineEdit, SIGNAL( returnPressed() ),
             this, SLOT( findPlacemarks() ) );
     connect( d->m_lineEdit, SIGNAL( textChanged( QString ) ),
@@ -166,8 +166,8 @@ void RoutingInputWidget::startHttpRequest()
     double lat = position.latitude( GeoDataCoordinates::Degree );
     QString url = QString( base + query ).arg( lon ).arg( lat ).arg( MarbleLocale::languageCode() );
 
-    QObject::connect( d->m_manager, SIGNAL( finished( QNetworkReply* ) ),
-            this, SLOT( handleHttpReply( QNetworkReply* ) ) );
+    QObject::connect( d->m_manager, SIGNAL( finished( QNetworkReply * ) ),
+            this, SLOT( handleHttpReply( QNetworkReply * ) ) );
 
     QNetworkRequest request;
     request.setUrl( QUrl( url ) );
@@ -176,7 +176,7 @@ void RoutingInputWidget::startHttpRequest()
     d->m_manager->get( QNetworkRequest( request ) );
 }
 
-void RoutingInputWidget::setPlacemarkModel( MarblePlacemarkModel* model )
+void RoutingInputWidget::setPlacemarkModel( MarblePlacemarkModel *model )
 {
     d->m_placemarkModel = model;
 }
@@ -219,7 +219,7 @@ void RoutingInputWidget::findPlacemarks()
     }
 }
 
-MarblePlacemarkModel* RoutingInputWidget::searchResultModel()
+MarblePlacemarkModel *RoutingInputWidget::searchResultModel()
 {
     return d->m_placemarkModel;
 }
@@ -298,7 +298,7 @@ void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates &po
     }
 }
 
-void RoutingInputWidget::handleHttpReply( QNetworkReply* reply )
+void RoutingInputWidget::handleHttpReply( QNetworkReply *reply )
 {
     if ( !reply->bytesAvailable() )
       return;

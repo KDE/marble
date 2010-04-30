@@ -22,7 +22,7 @@ RoutingProxyModel::RoutingProxyModel( QObject *parent ) :
     // nothing to do
 }
 
-bool RoutingProxyModel::filterAcceptsRow ( int source_row, const QModelIndex & source_parent ) const
+bool RoutingProxyModel::filterAcceptsRow ( int source_row, const QModelIndex &source_parent ) const
 {
     Q_UNUSED( source_parent )
     if ( !sourceModel() )

@@ -77,26 +77,26 @@ public:
 
     bool m_pointSelection;
 
-    RoutingModel* m_routingModel;
+    RoutingModel *m_routingModel;
 
-    MarblePlacemarkModel* m_placemarkModel;
+    MarblePlacemarkModel *m_placemarkModel;
 
-    QItemSelectionModel * m_selectionModel;
+    QItemSelectionModel *m_selectionModel;
 
     bool m_routeDirty;
 
     QSize m_pixmapSize;
 
-    RouteSkeleton* m_routeSkeleton;
+    RouteSkeleton *m_routeSkeleton;
 
-    MarbleWidgetPopupMenu* m_contextMenu;
+    MarbleWidgetPopupMenu *m_contextMenu;
 
-    QAction* m_removeViaPointAction;
+    QAction *m_removeViaPointAction;
 
     int m_activeMenuIndex;
 
     /** Constructor */
-    explicit RoutingLayerPrivate( RoutingLayer* parent, MarbleWidget* widget );
+    explicit RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget );
 
     /** Show a context menu at the specified position */
     void showContextMenu( const QPoint &position );
@@ -109,19 +109,19 @@ public:
     inline void renderPlacemarks( GeoPainter *painter );
 
     /** Paint waypoint polygon */
-    inline void renderRoute( GeoPainter* painter );
+    inline void renderRoute( GeoPainter *painter );
 
     /** Paint icons for trip points etc */
-    inline void renderSkeleton( GeoPainter* painter );
+    inline void renderSkeleton( GeoPainter *painter );
 
     /** Insert via points or emit position signal, if appropriate */
-    inline bool handleMouseButtonRelease( QMouseEvent* e );
+    inline bool handleMouseButtonRelease( QMouseEvent *e );
 
     /** Select route instructions points, start dragging trip points */
-    inline bool handleMouseButtonPress( QMouseEvent* e );
+    inline bool handleMouseButtonPress( QMouseEvent *e );
 
     /** Dragging trip points, route polygon hovering */
-    inline bool handleMouseMove( QMouseEvent* e );
+    inline bool handleMouseMove( QMouseEvent *e );
 
     /** Escape to stop selecting points */
     inline bool handleKeyEvent( QKeyEvent *e );
@@ -136,7 +136,7 @@ public:
     inline void clearStopOver();
 };
 
-RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer* parent, MarbleWidget* widget ) :
+RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget ) :
   q( parent ), m_proxyModel( 0 ), m_movingIndex( -1 ), m_marbleWidget( widget ), m_targetPixmap( ":/data/bitmaps/routing_pick.png" ),
   m_viaPixmap( ":/data/bitmaps/routing_via.png" ), m_dragStopOver( false ), m_pointSelection( false ),
   m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ), m_routeDirty( false ), m_pixmapSize( 22,22 ),
@@ -181,7 +181,7 @@ void RoutingLayerPrivate::renderPlacemarks( GeoPainter *painter )
     }
 }
 
-void RoutingLayerPrivate::renderRoute( GeoPainter* painter )
+void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 {
     m_instructionRegions.clear();
     GeoDataLineString waypoints;
@@ -246,7 +246,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter* painter )
     }
 }
 
-void RoutingLayerPrivate::renderSkeleton( GeoPainter* painter )
+void RoutingLayerPrivate::renderSkeleton( GeoPainter *painter )
 {
     m_regions.clear();
     for ( int i=0; i<m_routeSkeleton->size(); ++i ) {
@@ -260,7 +260,7 @@ void RoutingLayerPrivate::renderSkeleton( GeoPainter* painter )
     }
 }
 
-bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent* e )
+bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
 {
     if ( m_pointSelection ) {
         return true;
@@ -334,7 +334,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent* e )
     return false;
 }
 
-bool RoutingLayerPrivate::handleMouseButtonRelease( QMouseEvent* e )
+bool RoutingLayerPrivate::handleMouseButtonRelease( QMouseEvent *e )
 {
     if ( e->button() != Qt::LeftButton ) {
         return false;
@@ -370,7 +370,7 @@ bool RoutingLayerPrivate::handleMouseButtonRelease( QMouseEvent* e )
     return false;
 }
 
-bool RoutingLayerPrivate::handleMouseMove( QMouseEvent* e )
+bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
 {
     if ( m_pointSelection ) {
         m_marbleWidget->setCursor( Qt::CrossCursor );
@@ -459,7 +459,7 @@ void RoutingLayerPrivate::clearStopOver()
     m_marbleWidget->repaint( m_movingIndexDirtyRect );
 }
 
-RoutingLayer::RoutingLayer( MarbleWidget* widget, QWidget * parent ) :
+RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
         QObject( parent ), d( new RoutingLayerPrivate( this, widget ) )
 {
     widget->installEventFilter( this );
@@ -476,7 +476,7 @@ QStringList RoutingLayer::renderPosition() const
 }
 
 bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
-                                 const QString& renderPos, GeoSceneLayer * layer )
+                                 const QString& renderPos, GeoSceneLayer *layer )
 {
     Q_UNUSED( viewport )
     Q_UNUSED( renderPos )
@@ -503,41 +503,41 @@ bool RoutingLayer::eventFilter( QObject *obj, QEvent *event )
     Q_UNUSED( obj )
 
     if ( event->type() == QEvent::KeyPress ) {
-        QKeyEvent* e = static_cast<QKeyEvent*>( event );
+        QKeyEvent *e = static_cast<QKeyEvent*>( event );
         return d->handleKeyEvent( e );
     }
 
     if ( event->type() == QEvent::MouseButtonPress ) {
-        QMouseEvent* e = static_cast<QMouseEvent*>( event );
+        QMouseEvent *e = static_cast<QMouseEvent*>( event );
         return d->handleMouseButtonPress( e );
     }
 
     if ( event->type() == QEvent::MouseButtonRelease ) {
-        QMouseEvent* e = static_cast<QMouseEvent*>( event );
+        QMouseEvent *e = static_cast<QMouseEvent*>( event );
         return d->handleMouseButtonRelease( e );
     }
 
     if ( event->type() == QEvent::MouseMove ) {
-        QMouseEvent* e = static_cast<QMouseEvent*>( event );
+        QMouseEvent *e = static_cast<QMouseEvent*>( event );
         return d->handleMouseMove( e );
     }
 
     return false;
 }
 
-void RoutingLayer::setModel ( RoutingModel* model )
+void RoutingLayer::setModel ( RoutingModel *model )
 {
     d->m_placemarkModel = 0;
     d->m_routingModel = model;
 }
 
-void RoutingLayer::setModel ( MarblePlacemarkModel* model )
+void RoutingLayer::setModel ( MarblePlacemarkModel *model )
 {
     d->m_routingModel = 0;
     d->m_placemarkModel = model;
 }
 
-void RoutingLayer::synchronizeWith( QAbstractProxyModel *model, QItemSelectionModel* selection )
+void RoutingLayer::synchronizeWith( QAbstractProxyModel *model, QItemSelectionModel *selection )
 {
     d->m_selectionModel = selection;
     d->m_proxyModel = model;
@@ -560,7 +560,7 @@ void RoutingLayer::setRouteDirty( bool dirty )
     d->m_marbleWidget->repaint();
 }
 
-void RoutingLayer::setRouteSkeleton( RouteSkeleton* skeleton )
+void RoutingLayer::setRouteSkeleton( RouteSkeleton *skeleton )
 {
     d->m_routeSkeleton = skeleton;
 }
