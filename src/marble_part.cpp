@@ -358,6 +358,8 @@ void MarblePart::showSun( bool active )
 void MarblePart::workOffline( bool offline )
 {
     m_controlView->marbleControl()->setWorkOffline( offline );
+    m_newStuffAction->setEnabled( !offline );
+    m_downloadRegionAction->setEnabled( !offline );
 }
 
 void MarblePart::copyMap()
