@@ -93,7 +93,7 @@ void OrsRoutingProvider::retrieveData( QNetworkReply *reply )
 
 void OrsRoutingProvider::handleError( QNetworkReply::NetworkError error )
 {
-    qWarning() << " Error when retrieving openrouteservice.org route: " << error;
+    mDebug() << " Error when retrieving openrouteservice.org route: " << error;
 }
 
 QString OrsRoutingProvider::xmlHeader() const

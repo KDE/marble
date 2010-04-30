@@ -13,8 +13,8 @@
 
 #include "GeoDataLineString.h"
 
-#include <QtCore/QObject>
 #include <QtCore/QByteArray>
+#include <QtCore/QObject>
 
 namespace Marble {
 

@@ -20,14 +20,13 @@
 #include "RouteSkeleton.h"
 
 #include <QtCore/QMap>
-#include <QtCore/QDebug>
-#include <QtGui/QPixmap>
-#include <QtGui/QMenu>
-#include <QtGui/QIcon>
-#include <QtGui/QMouseEvent>
-#include <QtGui/QKeyEvent>
 #include <QtGui/QAbstractProxyModel>
+#include <QtGui/QIcon>
 #include <QtGui/QItemSelectionModel>
+#include <QtGui/QKeyEvent>
+#include <QtGui/QMenu>
+#include <QtGui/QMouseEvent>
+#include <QtGui/QPixmap>
 
 namespace Marble {
 

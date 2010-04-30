@@ -64,7 +64,7 @@ void YoursRoutingProvider::retrieveData( QNetworkReply *reply )
 
 void YoursRoutingProvider::handleError( QNetworkReply::NetworkError error )
 {
-    qWarning() << " Error when retrieving yournavigation.org route: " << error;
+    mDebug() << " Error when retrieving yournavigation.org route: " << error;
 }
 
 } // namespace Marble

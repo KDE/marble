@@ -12,8 +12,6 @@
 
 #include "RoutingModel.h"
 
-#include <QtCore/QDebug>
-
 namespace Marble {
 
 RoutingProxyModel::RoutingProxyModel( QObject *parent ) :

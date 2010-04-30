@@ -10,23 +10,23 @@
 
 #include "RoutingInputWidget.h"
 
-#include "MarbleRunnerManager.h"
-#include "MarblePlacemarkModel.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
+#include "MarblePlacemarkModel.h"
+#include "MarbleRunnerManager.h"
 #include "RouteSkeleton.h"
 #include "TinyWebBrowser.h"
 
 #include <QtCore/QTimer>
 #include <QtCore/QUrl>
-#include <QtGui/QLineEdit>
 #include <QtGui/QHBoxLayout>
+#include <QtGui/QIcon>
+#include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
 #include <QtGui/QMovie>
-#include <QtGui/QIcon>
-#include <QtXml/QDomDocument>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
+#include <QtXml/QDomDocument>
 
 namespace Marble {
 
@@ -307,7 +307,7 @@ void RoutingInputWidget::handleHttpReply( QNetworkReply *reply )
 
     QDomDocument xml;
     if ( !xml.setContent( reply->readAll() ) ) {
-        qWarning() << "Cannot parse osm nominatim result " << xml.toString();
+        mDebug() << "Cannot parse osm nominatim result " << xml.toString();
         return;
     }
 

@@ -14,13 +14,13 @@
 #include "MarbleDirs.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
-#include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
+#include "GeoDataPlacemark.h"
 
-#include <QtCore/QVector>
-#include <QtCore/QTime>
 #include <QtCore/QBuffer>
 #include <QtCore/QRegExp>
+#include <QtCore/QTime>
+#include <QtCore/QVector>
 #include <QtGui/QPixmap>
 #include <QtXml/QDomDocument>
 
@@ -134,7 +134,7 @@ namespace Marble {
 
         QDomDocument xml;
         if ( !xml.setContent( content ) ) {
-            qWarning() << "Cannot parse xml file with routing instructions.";
+            mDebug() << "Cannot parse xml file with routing instructions.";
             return;
         }
 
@@ -160,7 +160,7 @@ namespace Marble {
                   seconds = regexp.cap( matches.size()-1 ).toInt();
                   break;
                 default:
-                  qWarning() << "Unable to parse time string " << time.item( 0 ).toElement().text();
+                  mDebug() << "Unable to parse time string " << time.item( 0 ).toElement().text();
                 }
 
                 d->m_totalTime = QTime( hours, minutes, seconds, 0 );
@@ -170,7 +170,7 @@ namespace Marble {
                   d->m_totalDistance *= METER2KM;
                 }
                 else if ( unit != "KM" ) {
-                  qWarning() << "Cannot parse distance unit " << unit << ", treated as km.";
+                  mDebug() << "Cannot parse distance unit " << unit << ", treated as km.";
                 }
               }
             }
