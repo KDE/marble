@@ -58,6 +58,8 @@ public:
 
     QTimer m_nominatimTimer;
 
+    bool m_workOffline;
+
     /** Constructor */
     RoutingInputWidgetPrivate( RouteSkeleton *skeleton, int index, QWidget *parent );
 
@@ -68,7 +70,8 @@ public:
 RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteSkeleton *skeleton, int index, QWidget *parent ) :
         m_lineEdit( 0 ), m_runnerManager( new MarbleRunnerManager( parent ) ),
         m_placemarkModel( 0 ), m_progress( ":/data/bitmaps/progress.mng" ),
-        m_route( skeleton ), m_index( index ), m_manager( new QNetworkAccessManager( parent ) )
+        m_route( skeleton ), m_index( index ), m_manager( new QNetworkAccessManager( parent ) ),
+        m_workOffline( false )
 {
     m_stateButton = new QPushButton( parent );
     m_stateButton->setToolTip( "Center Map here" );
@@ -156,7 +159,7 @@ RoutingInputWidget::~RoutingInputWidget()
 
 void RoutingInputWidget::startHttpRequest()
 {
-    if ( !hasTargetPosition() ) {
+    if ( d->m_workOffline || !hasTargetPosition() ) {
         return;
     }
 
@@ -319,6 +322,11 @@ void RoutingInputWidget::handleHttpReply( QNetworkReply *reply )
         d->m_lineEdit->setText( address );
         d->m_lineEdit->setCursorPosition( 0 );
     }
+}
+
+void RoutingInputWidget::setWorkOffline( bool offline )
+{
+    d->m_workOffline = offline;
 }
 
 } // namespace Marble

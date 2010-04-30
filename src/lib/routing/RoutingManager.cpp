@@ -30,12 +30,14 @@ public:
     RoutingManagerPrivate( MarbleWidget *widget, QObject *parent );
 
     RouteSkeleton *m_route;
+
+    bool m_workOffline;
 };
 
 RoutingManagerPrivate::RoutingManagerPrivate( MarbleWidget *widget, QObject *parent ) :
         m_routingModel( new RoutingModel( parent ) ),
         m_routingProvider( new OrsRoutingProvider( parent ) ),
-        m_marbleWidget( widget ), m_route( 0 )
+        m_marbleWidget( widget ), m_route( 0 ), m_workOffline( false )
 {
     // nothing to do
 }
@@ -76,7 +78,7 @@ void RoutingManager::setRouteData( AbstractRoutingProvider::Format format, const
 
 void RoutingManager::updateRoute()
 {
-    if ( d->m_route && d->m_route->size() > 1 ) {
+    if ( !d->m_workOffline && d->m_route && d->m_route->size() > 1 ) {
         int realSize = 0;
         for ( int i = 0; i < d->m_route->size(); ++i ) {
             // Sort out dummy targets
@@ -93,6 +95,11 @@ void RoutingManager::updateRoute()
             emit stateChanged( Retrieved, d->m_route );
         }
     }
+}
+
+void RoutingManager::setWorkOffline( bool offline )
+{
+    d->m_workOffline = offline;
 }
 
 } // namespace Marble

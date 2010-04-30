@@ -257,8 +257,8 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     d->m_widget = widget;
     d->m_runnerManager->setMap( d->m_widget->map() );
 
-    RoutingWidget *routingWidget = new RoutingWidget(widget, this);
-    d->uiWidget.toolBox->addItem(routingWidget, tr("Routing"));
+    d->m_routingWidget = new RoutingWidget( widget, this );
+    d->uiWidget.toolBox->addItem( d->m_routingWidget, tr( "Routing" ) );
 
     // Make us aware of all the Placemarks in the MarbleModel so that
     // we can search them.
@@ -721,6 +721,9 @@ void MarbleControlBox::setWorkOffline(bool offline)
         d->m_widget->map()->model()->downloadManager();
     downloadManager->setDownloadEnabled( !offline );
     d->m_runnerManager->setWorkOffline( offline );
+    if ( d->m_routingWidget ) {
+        d->m_routingWidget->setWorkOffline( offline );
+    }
 }
 
 void MarbleControlBox::changePositionProvider( const QString &provider )

@@ -46,6 +46,11 @@ public:
     /** Destructor */
     ~RoutingWidget();
 
+    /**
+      * Toggle offline mode. In offline mode, new routes cannot be downloaded
+      */
+    void setWorkOffline( bool offline );
+
 private Q_SLOTS:
     /** Retrieve route directions */
     void retrieveRoute();

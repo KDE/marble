@@ -55,6 +55,8 @@ public:
 
     bool m_zoomRouteAfterDownload;
 
+    bool m_workOffline;
+
     /** Constructor */
     RoutingWidgetPrivate();
 
@@ -78,7 +80,8 @@ public:
 RoutingWidgetPrivate::RoutingWidgetPrivate() :
         m_widget( 0 ), m_routingManager( 0 ), m_routingLayer( 0 ),
         m_activeInput( 0 ), m_inputRequest( 0 ), m_routingProxyModel( 0 ),
-        m_routeSkeleton( 0 ), m_zoomRouteAfterDownload( false )
+        m_routeSkeleton( 0 ), m_zoomRouteAfterDownload( false ),
+        m_workOffline( false )
 {
     // nothing to do
 }
@@ -314,6 +317,7 @@ void RoutingWidget::insertInputWidget( int index )
 {
     if ( index >= 0 && index <= d->m_inputWidgets.size() ) {
         RoutingInputWidget *input = new RoutingInputWidget( d->m_routeSkeleton, index, this );
+        input->setWorkOffline( d->m_workOffline );
         d->m_inputWidgets.insert( index, input );
         connect( input, SIGNAL( searchFinished( RoutingInputWidget* ) ),
                  this, SLOT( handleSearchResult( RoutingInputWidget* ) ) );
@@ -447,6 +451,16 @@ void RoutingWidget::exportRoute()
             gpx.close();
         }
     }
+}
+
+void RoutingWidget::setWorkOffline( bool offline )
+{
+    foreach ( RoutingInputWidget *widget, d->m_inputWidgets ) {
+        widget->setWorkOffline( offline );
+    }
+
+    d->m_workOffline = offline;
+    d->m_routingManager->setWorkOffline( offline );
 }
 
 } // namespace Marble

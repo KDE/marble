@@ -75,6 +75,11 @@ public:
       */
     void setIndex( int index );
 
+    /**
+      * Toggle offline mode. In offline mode, reverse geocoding is disabled
+      */
+    void setWorkOffline( bool offline );
+
 public Q_SLOTS:
     /**
       * Search for placemarks matching the current input text. Does nothing

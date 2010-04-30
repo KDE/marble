@@ -62,6 +62,11 @@ public:
       */
     void retrieveRoute( RouteSkeleton *route );
 
+    /**
+      * Toggle offline mode. In offline mode, new routes cannot be downloaded
+      */
+    void setWorkOffline( bool offline );
+
 public Q_SLOTS:
     /** Update the route */
     void updateRoute();
