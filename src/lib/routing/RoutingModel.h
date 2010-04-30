@@ -40,7 +40,8 @@ public:
 
     enum RoutingItemType {
         WayPoint,
-        Instruction
+        Instruction,
+        Error
     };
 
     /** Constructor */
@@ -93,6 +94,11 @@ public:
       * Export waypoints and instructions in gpx format
       */
     void exportGpx( QIODevice *device ) const;
+
+    /**
+      * Clear any data held in the model
+      */
+    void clear();
 
 private:
     RoutingModelPrivate *const d;

@@ -222,7 +222,6 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
 
         if ( type == RoutingModel::Instruction ) {
-
             painter->setBrush( QBrush( QColor::fromRgb( 136, 138, 133, 200 ) ) ); // gray, oxygen palette
             QModelIndex proxyIndex = m_proxyModel->mapFromSource( index );
             if ( m_selectionModel->selection().contains( proxyIndex ) ) {
@@ -237,6 +236,10 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
             QRegion region = painter->regionFromEllipse( pos, 12, 12 );
             m_instructionRegions.push_front( ModelRegion( index, region ) );
             painter->drawEllipse( pos, 8, 8 );
+        } else if ( type == RoutingModel::Error ) {
+            painter->setPen( QColor( Qt::white ) );
+            painter->setBrush( QBrush( QColor::fromRgb( 226, 8, 0, 200 ) ) ); // red, oxygen palette
+            painter->drawAnnotation( pos, index.data().toString(), QSize( 180, 80 ), 10, 30, 15, 15 );
         }
     }
 }

@@ -31,7 +31,7 @@ bool RoutingProxyModel::filterAcceptsRow ( int source_row, const QModelIndex &so
 
     QModelIndex index = sourceModel()->index( source_row, 0 );
     RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
-    return type == RoutingModel::Instruction;
+    return type == RoutingModel::Instruction || type == RoutingModel::Error;
 }
 
 } // namespace Marble

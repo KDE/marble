@@ -77,8 +77,21 @@ void RoutingManager::setRouteData( AbstractRoutingProvider::Format format, const
 void RoutingManager::updateRoute()
 {
     if ( d->m_route && d->m_route->size() > 1 ) {
-        emit stateChanged( Downloading, d->m_route );
-        d->m_routingProvider->retrieveDirections( d->m_route );
+        int realSize = 0;
+        for ( int i = 0; i < d->m_route->size(); ++i ) {
+            // Sort out dummy targets
+            if ( d->m_route->at( i ).longitude() != 0.0 && d->m_route->at( i ).latitude() != 0.0 ) {
+                ++realSize;
+            }
+        }
+
+        if ( realSize > 1 ) {
+            emit stateChanged( Downloading, d->m_route );
+            d->m_routingProvider->retrieveDirections( d->m_route );
+        } else {
+            d->m_routingModel->clear();
+            emit stateChanged( Retrieved, d->m_route );
+        }
     }
 }
 

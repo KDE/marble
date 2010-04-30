@@ -138,6 +138,29 @@ void RoutingModel::importOpenGis( const QByteArray &content )
 
     QDomElement root = xml.documentElement();
 
+    QDomNodeList errors = root.elementsByTagName( "xls:Error" );
+    if ( errors.size() > 0 ) {
+        for ( unsigned int i = 0; i < errors.length(); ++i ) {
+            QDomNode node = errors.item( i );
+            QString errorMessage = node.attributes().namedItem( "message" ).nodeValue();
+            QRegExp regexp = QRegExp( "^(.*) Please Check your Position: (-?[0-9]+.[0-9]+) (-?[0-9]+.[0-9]+) !" );
+            if ( regexp.indexIn( errorMessage ) == 0 ) {
+                RouteElement element;
+                GeoDataCoordinates position;
+                if ( regexp.capturedTexts().size() == 4 ) {
+                    element.description = regexp.capturedTexts().at( 1 );
+                    position.setLongitude( regexp.capturedTexts().at( 2 ).toDouble(), GeoDataCoordinates::Degree );
+                    position.setLatitude( regexp.capturedTexts().at( 3 ).toDouble(), GeoDataCoordinates::Degree );
+                    element.position = position;
+                    element.type = Error;
+                    d->m_route.push_back( element );
+                }
+            } else {
+                mDebug() << "Error message " << errorMessage << " not parsable.";
+            }
+        }
+    }
+
     QDomNodeList summary = root.elementsByTagName( "xls:RouteSummary" );
     if ( summary.size() > 0 ) {
         QDomNodeList time = summary.item( 0 ).toElement().elementsByTagName( "xls:TotalTime" );
@@ -254,6 +277,12 @@ void RoutingModel::exportGpx( QIODevice *device ) const
     content += "</gpx>\n";
 
     device->write( content.toLocal8Bit() );
+}
+
+void RoutingModel::clear()
+{
+    d->m_route.clear();
+    reset();
 }
 
 } // namespace Marble
