@@ -58,6 +58,7 @@ public:
     bool m_positionSignalConnected;
     QTimer *m_mouseWheelTimer;
     Qt::MouseButtons m_disabledMouseButtons;
+    qreal m_wheelZoomTargetDistance;
 };
 
 MarbleWidgetInputHandler::Protected::Protected()
@@ -65,7 +66,8 @@ MarbleWidgetInputHandler::Protected::Protected()
       m_model( 0 ),
       m_positionSignalConnected( false ),
       m_mouseWheelTimer( 0 ),
-      m_disabledMouseButtons( Qt::NoButton )
+      m_disabledMouseButtons( Qt::NoButton ),
+      m_wheelZoomTargetDistance( 0.0 )
 {
 }
 
@@ -323,6 +325,7 @@ void MarbleWidgetInputHandler::restoreViewContext()
     }
 
     d->m_widget->map()->viewParams()->viewport()->resetFocusPoint();
+    d->m_wheelZoomTargetDistance = 0.0;
 }
 
 void MarbleWidgetInputHandler::installPluginEventFilter( RenderPlugin *renderPlugin )
@@ -726,7 +729,14 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             marbleWidget->setViewContext( Animation );
 
             int steps = wheelevt->delta() / 3;
-            qreal newDistance = marbleWidget->map()->distanceFromZoom(marbleWidget->map()->zoom() + steps);
+            qreal zoom = marbleWidget->map()->zoom();
+            qreal target = MarbleWidgetInputHandler::d->m_wheelZoomTargetDistance;
+            if ( marbleWidget->animationsEnabled() && target > 0.0 ) {
+                // Do not use intermediate (interpolated) distance values caused by animations
+                zoom = marbleWidget->map()->zoomFromDistance( target );
+            }
+            qreal newDistance = marbleWidget->map()->distanceFromZoom( zoom + steps );
+            MarbleWidgetInputHandler::d->m_wheelZoomTargetDistance = newDistance;
             d->ZoomAt(MarbleWidgetInputHandler::d->m_widget, wheelevt->pos(), newDistance);
 
             MarbleWidgetInputHandler::d->m_mouseWheelTimer->start( 400 );
