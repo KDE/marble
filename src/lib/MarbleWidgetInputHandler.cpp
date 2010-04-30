@@ -448,14 +448,16 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         // Do not handle (and therefore eat) mouse press and release events
         // that occur above visible float items. Mouse motion events are still
         // handled, however.
-        foreach ( AbstractFloatItem *floatItem, MarbleWidgetInputHandler::d->m_widget->floatItems() ) {
-            if ( floatItem->enabled() && floatItem->visible()
-                 && floatItem->contains( event->pos() )
-                 && e->type() != QEvent::MouseMove
-                 && !d->m_selectionRubber->isVisible())
-            {
-                d->m_lmbTimer.stop();                
-                return false;
+        if ( e->type() != QEvent::MouseMove
+             && !d->m_selectionRubber->isVisible() )
+        {
+            foreach ( AbstractFloatItem *floatItem, MarbleWidgetInputHandler::d->m_widget->floatItems() ) {
+                if ( floatItem->enabled() && floatItem->visible()
+                     && floatItem->contains( event->pos() ) )
+                {
+                    d->m_lmbTimer.stop();
+                    return false;
+                }
             }
         }
 
