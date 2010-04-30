@@ -12,8 +12,8 @@
 
 namespace Marble {
 
-AbstractRoutingProvider::AbstractRoutingProvider(QObject *parent) :
-        QObject(parent)
+AbstractRoutingProvider::AbstractRoutingProvider( QObject *parent ) :
+        QObject( parent )
 {
     // nothing to do
 }

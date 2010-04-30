@@ -27,7 +27,7 @@ class RoutingProxyModel : public QSortFilterProxyModel
 {
 public:
     /** Constructor */
-    explicit RoutingProxyModel(QObject *parent = 0);
+    explicit RoutingProxyModel( QObject *parent = 0 );
 
 protected:
     /** Reimplemened from QSortFilterProxyModel. Filters waypoints without instructions */

@@ -38,7 +38,7 @@ public:
     };
 
     /** Constructor */
-    explicit RoutingManager(MarbleWidget *widget, QObject *parent = 0);
+    explicit RoutingManager( MarbleWidget *widget, QObject *parent = 0 );
 
     /** Destructor */
     ~RoutingManager();
@@ -59,7 +59,7 @@ public:
       * @param destination Destination location. Any string the routing provider supports as input.
       * @see directionModel
       */
-    void retrieveRoute(RouteSkeleton *route);
+    void retrieveRoute( RouteSkeleton *route );
 
 public Q_SLOTS:
     /** Update the route */
@@ -70,11 +70,11 @@ Q_SIGNALS:
       * Directions and waypoints for the given route are being downloaded or have
       * been retrieved -- newState tells which of both
       */
-    void stateChanged(RoutingManager::State newState, RouteSkeleton *route);
+    void stateChanged( RoutingManager::State newState, RouteSkeleton *route );
 
 private Q_SLOTS:
     /** Routing provider has finished downloading data */
-    void setRouteData(AbstractRoutingProvider::Format format, const QByteArray &data);
+    void setRouteData( AbstractRoutingProvider::Format format, const QByteArray &data );
 
 private:
     RoutingManagerPrivate* const d;

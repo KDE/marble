@@ -43,7 +43,7 @@ public:
     };
 
     /** Constructor */
-    explicit RoutingModel(QObject *parent = 0);
+    explicit RoutingModel( QObject *parent = 0 );
 
     /** Destructor */
     ~RoutingModel();
@@ -75,7 +75,7 @@ public:
       * @todo: Add geodata/handlers/opengis, use it in the route provider and use a
       * parsed GeoDocument here
       */
-    void importOpenGis( const QByteArray &xmlData);
+    void importOpenGis( const QByteArray &xmlData );
 
     /**
       * Returns the total (estimated) time it takes to travel from
@@ -91,7 +91,7 @@ public:
     /**
       * Export waypoints and instructions in gpx format
       */
-    void exportGpx(QIODevice *device) const;
+    void exportGpx( QIODevice *device ) const;
 
 private:
     RoutingModelPrivate* const d;

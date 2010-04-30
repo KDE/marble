@@ -19,49 +19,49 @@
 
 namespace Marble {
 
-YoursRoutingProvider::YoursRoutingProvider(QObject *parent) :
-        AbstractRoutingProvider(parent),
-        m_networkAccessManager(new QNetworkAccessManager(this))
+YoursRoutingProvider::YoursRoutingProvider( QObject *parent ) :
+        AbstractRoutingProvider( parent ),
+        m_networkAccessManager( new QNetworkAccessManager( this ) )
 {
-    connect(m_networkAccessManager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(retrieveData(QNetworkReply*)));
+    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),
+            this, SLOT( retrieveData( QNetworkReply* ) ) );
 }
 
-void YoursRoutingProvider::retrieveDirections(RouteSkeleton* route)
+void YoursRoutingProvider::retrieveDirections( RouteSkeleton* route )
 {
-    if (route->size() < 2)
+    if ( route->size() < 2 )
         return;
 
     GeoDataCoordinates source = route->source();
     GeoDataCoordinates destination = route->destination();
 
-    double fLon = source.longitude(GeoDataCoordinates::Degree);
-    double fLat = source.latitude(GeoDataCoordinates::Degree);
+    double fLon = source.longitude( GeoDataCoordinates::Degree );
+    double fLat = source.latitude( GeoDataCoordinates::Degree );
 
-    double tLon = destination.longitude(GeoDataCoordinates::Degree);
-    double tLat = destination.latitude(GeoDataCoordinates::Degree);
+    double tLon = destination.longitude( GeoDataCoordinates::Degree );
+    double tLat = destination.latitude( GeoDataCoordinates::Degree );
 
     QString base = "http://www.yournavigation.org/api/1.0/gosmore.php";
     QString args = "?flat=%1&flon=%2&tlat=%3&tlon=%4";
-    args = args.arg(fLat,0,'f',6).arg(fLon,0,'f',6).arg(tLat,0,'f',6).arg(tLon,0,'f',6);
+    args = args.arg( fLat,0,'f',6 ).arg( fLon,0,'f',6 ).arg( tLat,0,'f',6 ).arg( tLon,0,'f',6 );
     QString preferences = "&v=motorcar&fast=1&layer=mapnik&format=kml";
     QString request = base + args + preferences;
     // mDebug() << "GET: " << request;
 
-    QNetworkReply *reply = m_networkAccessManager->get(QNetworkRequest(QUrl(request)));
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
-            this, SLOT(handleError(QNetworkReply::NetworkError)));
+    QNetworkReply *reply = m_networkAccessManager->get( QNetworkRequest( QUrl( request ) ) );
+    connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
+            this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
 }
 
-void YoursRoutingProvider::retrieveData(QNetworkReply* reply)
+void YoursRoutingProvider::retrieveData( QNetworkReply* reply )
 {
     QByteArray data = reply->readAll();
     reply->deleteLater();
     //mDebug() << "Download completed: " << data;
-    emit routeRetrieved(AbstractRoutingProvider::KML, data);
+    emit routeRetrieved( AbstractRoutingProvider::KML, data );
 }
 
-void YoursRoutingProvider::handleError(QNetworkReply::NetworkError error)
+void YoursRoutingProvider::handleError( QNetworkReply::NetworkError error )
 {
     qWarning() << " Error when retrieving yournavigation.org route: " << error;
 }

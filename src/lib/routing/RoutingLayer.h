@@ -41,7 +41,7 @@ public:
       *   and repainting of (small) areas. Must not be null
       * @param parent Optional parent widget
       */
-    explicit RoutingLayer(MarbleWidget* widget, QWidget * parent = 0 );
+    explicit RoutingLayer( MarbleWidget* widget, QWidget * parent = 0 );
 
     /** Destructor */
     ~RoutingLayer();
@@ -76,29 +76,29 @@ public:
       * press and release events are fully eaten to avoid things like context
       * menus chiming in.
       */
-    void setPointSelectionEnabled(bool enabled);
+    void setPointSelectionEnabled( bool enabled );
 
     /**
       * The route is dirty (needs an update) and should be painted to indicate that
       */
-    void setRouteDirty(bool dirty);
+    void setRouteDirty( bool dirty );
 
     /**
       * Change the route skeleton used for painting and dragging route points
       */
-    void setRouteSkeleton(RouteSkeleton* skeleton);
+    void setRouteSkeleton( RouteSkeleton* skeleton );
 
 Q_SIGNALS:
     /**
       * A placemark was selected (clicked) by the user. The index belongs to
       * the model set via setModel
       */
-    void placemarkSelected(const QModelIndex &index);
+    void placemarkSelected( const QModelIndex &index );
 
     /**
       * A point was selected by a mouse click after setPointSelectionEnabled(true) was called
       */
-    void pointSelected(const GeoDataCoordinates &coordinates);   
+    void pointSelected( const GeoDataCoordinates &coordinates );
 
     /**
       * Selection of points was aborted by the user without selecting a point
@@ -118,7 +118,7 @@ Q_SIGNALS:
 
 protected:
     /** Overriding QWidget, used to make the layer interactive */
-    bool eventFilter(QObject *obj, QEvent *event);
+    bool eventFilter( QObject *obj, QEvent *event );
 
 private Q_SLOTS:
     void removeViaPoint();

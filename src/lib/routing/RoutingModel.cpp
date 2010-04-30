@@ -47,29 +47,29 @@ namespace Marble {
 
         RoutingModelPrivate();
 
-        RouteElement parseGmlPos(const QStringList &content) const;
+        RouteElement parseGmlPos( const QStringList &content ) const;
     };
 
-    RoutingModelPrivate::RoutingModelPrivate() : m_totalDistance(0.0)
+    RoutingModelPrivate::RoutingModelPrivate() : m_totalDistance( 0.0 )
     {
       // nothing to do
     }
 
-    RouteElement RoutingModelPrivate::parseGmlPos(const QStringList &content) const
+    RouteElement RoutingModelPrivate::parseGmlPos( const QStringList &content ) const
     {
-        Q_ASSERT(content.length() == 2);
+        Q_ASSERT( content.length() == 2 );
 
         RouteElement element;
         GeoDataCoordinates position;
-        position.setLongitude(content.at(0).toDouble(), GeoDataCoordinates::Degree);
-        position.setLatitude(content.at(1).toDouble(), GeoDataCoordinates::Degree);
+        position.setLongitude( content.at( 0 ).toDouble(), GeoDataCoordinates::Degree );
+        position.setLatitude( content.at( 1 ).toDouble(), GeoDataCoordinates::Degree );
         element.position = position;
 
         return element;
     }
 
-    RoutingModel::RoutingModel(QObject *parent) :
-            QAbstractListModel(parent), d(new RoutingModelPrivate)
+    RoutingModel::RoutingModel( QObject *parent ) :
+            QAbstractListModel( parent ), d( new RoutingModelPrivate )
     {
         // nothing to do
     }
@@ -86,38 +86,38 @@ namespace Marble {
 
     QVariant RoutingModel::headerData ( int section, Qt::Orientation orientation, int role ) const
     {
-        if (orientation == Qt::Horizontal && role == Qt::DisplayRole && section == 0)
+        if ( orientation == Qt::Horizontal && role == Qt::DisplayRole && section == 0 )
         {
-            return QString("Instruction");
+            return QString( "Instruction" );
         }
 
-        return QAbstractListModel::headerData(section, orientation, role);
+        return QAbstractListModel::headerData( section, orientation, role );
     }
 
     QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
     {
-        if (!index.isValid())
+        if ( !index.isValid() )
             return QVariant();
 
-        if (index.row() < d->m_route.size() && index.column() == 0)
+        if ( index.row() < d->m_route.size() && index.column() == 0 )
         {
-            RouteElement element = d->m_route.at(index.row());
-            switch (role) {
+            RouteElement element = d->m_route.at( index.row() );
+            switch ( role ) {
             case Qt::DisplayRole:
             case Qt::ToolTipRole:
                 return element.description;
                 break;
             case Qt::DecorationRole:
-                if (element.type == Instruction)
-                    return QPixmap(MarbleDirs::path( "bitmaps/routing_step.png" ));
+                if ( element.type == Instruction )
+                    return QPixmap( MarbleDirs::path( "bitmaps/routing_step.png" ) );
 
                 return QVariant();
                 break;
             case CoordinateRole:
-                return QVariant::fromValue(d->m_route.at(index.row()).position);
+                return QVariant::fromValue( d->m_route.at( index.row() ).position );
                 break;
             case TypeRole:
-                return QVariant::fromValue(d->m_route.at(index.row()).type);
+                return QVariant::fromValue( d->m_route.at( index.row() ).type );
                 break;
             default:
                 return QVariant();
@@ -127,86 +127,86 @@ namespace Marble {
         return QVariant();
     }
 
-    void RoutingModel::importOpenGis( const QByteArray &content)
+    void RoutingModel::importOpenGis( const QByteArray &content )
     {
         d->m_route.clear();
 
         QDomDocument xml;
-        if (!xml.setContent(content)) {
+        if ( !xml.setContent( content ) ) {
             qWarning() << "Cannot parse xml file with routing instructions.";
             return;
         }
 
         QDomElement root = xml.documentElement();
 
-        QDomNodeList summary = root.elementsByTagName("xls:RouteSummary");
-        if (summary.size() > 0) {
-            QDomNodeList time = summary.item(0).toElement().elementsByTagName("xls:TotalTime");
-            QDomNodeList distance = summary.item(0).toElement().elementsByTagName("xls:TotalDistance");
-            if (time.size() == 1 && distance.size() == 1) {
-              QRegExp regexp = QRegExp("^PT(?:(\\d+)H)?(?:(\\d+)M)?(\\d+)S");
-              if (regexp.indexIn(time.item(0).toElement().text()) == 0) {
+        QDomNodeList summary = root.elementsByTagName( "xls:RouteSummary" );
+        if ( summary.size() > 0 ) {
+            QDomNodeList time = summary.item( 0 ).toElement().elementsByTagName( "xls:TotalTime" );
+            QDomNodeList distance = summary.item( 0 ).toElement().elementsByTagName( "xls:TotalDistance" );
+            if ( time.size() == 1 && distance.size() == 1 ) {
+              QRegExp regexp = QRegExp( "^PT(?:(\\d+)H)?(?:(\\d+)M)?(\\d+)S" );
+              if ( regexp.indexIn( time.item( 0 ).toElement().text() ) == 0 ) {
                 QStringList matches = regexp.capturedTexts();
-                int hours(0), minutes(0), seconds(0);
-                switch(matches.size()) {
+                int hours( 0 ), minutes( 0 ), seconds( 0 );
+                switch( matches.size() ) {
                 case 4:
-                  hours   = regexp.cap(matches.size()-3).toInt();
+                  hours   = regexp.cap( matches.size()-3 ).toInt();
                   // Intentionally no break
                 case 3:
-                  minutes = regexp.cap(matches.size()-2).toInt();
+                  minutes = regexp.cap( matches.size()-2 ).toInt();
                   // Intentionally no break
                 case 2:
-                  seconds = regexp.cap(matches.size()-1).toInt();
+                  seconds = regexp.cap( matches.size()-1 ).toInt();
                   break;
                 default:
-                  qWarning() << "Unable to parse time string " << time.item(0).toElement().text();
+                  qWarning() << "Unable to parse time string " << time.item( 0 ).toElement().text();
                 }
 
-                d->m_totalTime = QTime(hours, minutes, seconds, 0);
-                d->m_totalDistance = distance.item(0).attributes().namedItem("value").nodeValue().toDouble();
-                QString unit = distance.item(0).attributes().namedItem("uom").nodeValue();
-                if (unit == "M") {
+                d->m_totalTime = QTime( hours, minutes, seconds, 0 );
+                d->m_totalDistance = distance.item( 0 ).attributes().namedItem( "value" ).nodeValue().toDouble();
+                QString unit = distance.item( 0 ).attributes().namedItem( "uom" ).nodeValue();
+                if ( unit == "M" ) {
                   d->m_totalDistance *= METER2KM;
                 }
-                else if (unit != "KM") {
+                else if ( unit != "KM" ) {
                   qWarning() << "Cannot parse distance unit " << unit << ", treated as km.";
                 }
               }
             }
         }
 
-        QDomNodeList geometry = root.elementsByTagName("xls:RouteGeometry");
-        if (geometry.size() > 0) {
-            QDomNodeList waypoints = geometry.item(0).toElement().elementsByTagName("gml:pos");
-            for(unsigned int i = 0; i < waypoints.length(); ++i )
+        QDomNodeList geometry = root.elementsByTagName( "xls:RouteGeometry" );
+        if ( geometry.size() > 0 ) {
+            QDomNodeList waypoints = geometry.item( 0 ).toElement().elementsByTagName( "gml:pos" );
+            for( unsigned int i = 0; i < waypoints.length(); ++i )
             {
-                QDomNode node = waypoints.item(i);
-                QStringList content = node.toElement().text().split(' ');
-                if (content.length() == 2) {
-                    RouteElement element = d->parseGmlPos(content);
+                QDomNode node = waypoints.item( i );
+                QStringList content = node.toElement().text().split( ' ' );
+                if ( content.length() == 2 ) {
+                    RouteElement element = d->parseGmlPos( content );
                     element.type = WayPoint;
-                    d->m_route.push_back(element);
+                    d->m_route.push_back( element );
                 }
             }
         }
 
-        QDomNodeList instructionList = root.elementsByTagName("xls:RouteInstructionsList");
-        if (instructionList.size() > 0) {
-            QDomNodeList instructions = instructionList.item(0).toElement().elementsByTagName("xls:RouteInstruction");
-            for(unsigned int i = 0; i < instructions.length(); ++i )
+        QDomNodeList instructionList = root.elementsByTagName( "xls:RouteInstructionsList" );
+        if ( instructionList.size() > 0 ) {
+            QDomNodeList instructions = instructionList.item( 0 ).toElement().elementsByTagName( "xls:RouteInstruction" );
+            for( unsigned int i = 0; i < instructions.length(); ++i )
             {               
-                QDomElement node = instructions.item(i).toElement();
+                QDomElement node = instructions.item( i ).toElement();
 
-                QDomNodeList textNodes = node.elementsByTagName("xls:Instruction");
-                QDomNodeList positions = node.elementsByTagName("gml:pos");
+                QDomNodeList textNodes = node.elementsByTagName( "xls:Instruction" );
+                QDomNodeList positions = node.elementsByTagName( "gml:pos" );
 
-                if (textNodes.size()>0 && positions.size()>0) {
-                    QStringList content = positions.at(0).toElement().text().split(' ');
-                    if (content.length() == 2) {
-                        RouteElement element = d->parseGmlPos(content);
-                        element.description = textNodes.item(0).toElement().text();
+                if ( textNodes.size()>0 && positions.size()>0 ) {
+                    QStringList content = positions.at( 0 ).toElement().text().split( ' ' );
+                    if ( content.length() == 2 ) {
+                        RouteElement element = d->parseGmlPos( content );
+                        element.description = textNodes.item( 0 ).toElement().text();
                         element.type = Instruction;
-                        d->m_route.push_back(element);
+                        d->m_route.push_back( element );
                     }
                 }
             }
@@ -225,9 +225,9 @@ namespace Marble {
       return d->m_totalDistance;
     }
 
-void RoutingModel::exportGpx(QIODevice *device) const
+void RoutingModel::exportGpx( QIODevice *device ) const
 {
-    QString content("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n");
+    QString content( "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n" );
     content += "<gpx xmlns=\"http://www.topografix.com/GPX/1/1\" creator=\"Marble\" version=\"1.1\" ";
     content += "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" ";
     content += "xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd\">\n";
@@ -237,9 +237,9 @@ void RoutingModel::exportGpx(QIODevice *device) const
     content += "<trk>\n<name>Route</name>\n<trkseg>\n";
     foreach( const RouteElement &element, d->m_route ) {
         if ( element.type == WayPoint ) {
-            qreal lon = element.position.longitude(GeoDataCoordinates::Degree);
-            qreal lat = element.position.latitude(GeoDataCoordinates::Degree);
-            content += QString("<trkpt lat=\"%1\" lon=\"%2\"></trkpt>\n").arg(lat,0,'f',7).arg(lon,0,'f',7);
+            qreal lon = element.position.longitude( GeoDataCoordinates::Degree );
+            qreal lat = element.position.latitude( GeoDataCoordinates::Degree );
+            content += QString( "<trkpt lat=\"%1\" lon=\"%2\"></trkpt>\n" ).arg( lat,0,'f',7 ).arg( lon,0,'f',7 );
         }
         else {
           instructions << element;
@@ -250,15 +250,15 @@ void RoutingModel::exportGpx(QIODevice *device) const
     content += "<rte>\n<name>Route</name>\n";
     foreach( const RouteElement &element, instructions ) {
         Q_ASSERT( element.type == Instruction );
-        qreal lon = element.position.longitude(GeoDataCoordinates::Degree);
-        qreal lat = element.position.latitude(GeoDataCoordinates::Degree);
-        content += QString("<rtept lat=\"%1\" lon=\"%2\">%3</rtept>\n").arg(lat,0,'f',7).arg(lon,0,'f',7).arg(element.description);
+        qreal lon = element.position.longitude( GeoDataCoordinates::Degree );
+        qreal lat = element.position.latitude( GeoDataCoordinates::Degree );
+        content += QString( "<rtept lat=\"%1\" lon=\"%2\">%3</rtept>\n" ).arg( lat,0,'f',7 ).arg( lon,0,'f',7 ).arg( element.description );
     }
 
     content += "</rte>\n";
     content += "</gpx>\n";
 
-    device->write(content.toLocal8Bit());
+    device->write( content.toLocal8Bit() );
 }
 
 } // namespace Marble

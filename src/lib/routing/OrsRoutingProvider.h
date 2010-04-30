@@ -36,27 +36,27 @@ class OrsRoutingProvider : public AbstractRoutingProvider
 
 public:
     /** Constructor */
-    explicit OrsRoutingProvider(QObject *parent = 0);
+    explicit OrsRoutingProvider( QObject *parent = 0 );
 
     /** Overload of AbstractRoutingProvider */
-    virtual void retrieveDirections(RouteSkeleton* route);
+    virtual void retrieveDirections( RouteSkeleton* route );
 
 private Q_SLOTS:
     /** Route data was retrieved via http */
-    void retrieveData(QNetworkReply* reply);
+    void retrieveData( QNetworkReply* reply );
 
     /** A network error occurred */
-    void handleError(QNetworkReply::NetworkError);
+    void handleError( QNetworkReply::NetworkError );
 
 private:
     /** Builds the xml request header. */
     QString xmlHeader() const;
 
     /** Builds the route request header in the xml request. */
-    QString requestHeader(const QString &unit, const QString &routePreference ) const;
+    QString requestHeader( const QString &unit, const QString &routePreference ) const;
 
     /** Builds a route point substring. */
-    QString requestPoint(PointType pointType, const GeoDataCoordinates &coordinates) const;
+    QString requestPoint( PointType pointType, const GeoDataCoordinates &coordinates ) const;
 
     /** Builds the route request footer in the xml request. */
     QString requestFooter( RouteSkeleton::AvoidFeatures avoidFeatures ) const;

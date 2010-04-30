@@ -27,24 +27,24 @@ public:
 
     MarbleWidget *m_marbleWidget;
 
-    RoutingManagerPrivate(MarbleWidget *widget, QObject *parent);
+    RoutingManagerPrivate( MarbleWidget *widget, QObject *parent );
 
     RouteSkeleton* m_route;
 };
 
-RoutingManagerPrivate::RoutingManagerPrivate(MarbleWidget *widget, QObject *parent) :
-        m_routingModel(new RoutingModel(parent)),
-        m_routingProvider(new OrsRoutingProvider(parent)),
-        m_marbleWidget(widget), m_route(0)
+RoutingManagerPrivate::RoutingManagerPrivate( MarbleWidget *widget, QObject *parent ) :
+        m_routingModel( new RoutingModel( parent ) ),
+        m_routingProvider( new OrsRoutingProvider( parent ) ),
+        m_marbleWidget( widget ), m_route( 0 )
 {
     // nothing to do
 }
 
-RoutingManager::RoutingManager(MarbleWidget *widget, QObject *parent) : QObject(parent),
-d(new RoutingManagerPrivate(widget, this))
+RoutingManager::RoutingManager( MarbleWidget *widget, QObject *parent ) : QObject( parent ),
+d( new RoutingManagerPrivate( widget, this ) )
 {
-    connect(d->m_routingProvider, SIGNAL(routeRetrieved(AbstractRoutingProvider::Format, QByteArray)),
-            this, SLOT(setRouteData(AbstractRoutingProvider::Format, QByteArray)));
+    connect( d->m_routingProvider, SIGNAL( routeRetrieved( AbstractRoutingProvider::Format, QByteArray ) ),
+            this, SLOT( setRouteData( AbstractRoutingProvider::Format, QByteArray ) ) );
 }
 
 RoutingManager::~RoutingManager()
@@ -57,21 +57,21 @@ RoutingModel* RoutingManager::routingModel()
     return d->m_routingModel;
 }
 
-void RoutingManager::retrieveRoute(RouteSkeleton* route)
+void RoutingManager::retrieveRoute( RouteSkeleton* route )
 {
     d->m_route = route;
     updateRoute();
 }
 
-void RoutingManager::setRouteData(AbstractRoutingProvider::Format format, const QByteArray &data)
+void RoutingManager::setRouteData( AbstractRoutingProvider::Format format, const QByteArray &data )
 {
     /** @todo: switch to using GeoDataDocument* */
-    Q_UNUSED(format);
+    Q_UNUSED( format );
 
-    d->m_routingModel->importOpenGis(data);
+    d->m_routingModel->importOpenGis( data );
     d->m_marbleWidget->repaint();
 
-    emit stateChanged(Retrieved, d->m_route);
+    emit stateChanged( Retrieved, d->m_route );
 }
 
 void RoutingManager::updateRoute()

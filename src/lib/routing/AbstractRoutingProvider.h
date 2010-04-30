@@ -32,7 +32,7 @@ public:
     };
 
     /** Constructor */
-    AbstractRoutingProvider(QObject *parent);
+    AbstractRoutingProvider( QObject *parent );
 
     /** Destructor */
     virtual ~AbstractRoutingProvider();
@@ -44,10 +44,10 @@ public:
       * first one is to be interpreted as source, last as destination, others (possibly
       * empty) as stopover points.
       */
-    virtual void retrieveDirections(RouteSkeleton* route) = 0;
+    virtual void retrieveDirections( RouteSkeleton* route ) = 0;
 
 Q_SIGNALS:
-    void routeRetrieved(AbstractRoutingProvider::Format format, const QByteArray &data);
+    void routeRetrieved( AbstractRoutingProvider::Format format, const QByteArray &data );
 };
 
 } // namespace Marble

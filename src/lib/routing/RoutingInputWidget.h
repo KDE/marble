@@ -36,7 +36,7 @@ class RoutingInputWidget : public QWidget
 public:
 
     /** Constructor */
-    explicit RoutingInputWidget(RouteSkeleton *skeleton, int index, QWidget *parent = 0);
+    explicit RoutingInputWidget( RouteSkeleton *skeleton, int index, QWidget *parent = 0 );
 
     /** Destructor */
     ~RoutingInputWidget();
@@ -62,7 +62,7 @@ public:
     /**
       * @brief Hide all buttons iff simple is true
       */
-    void setSimple(bool simple);
+    void setSimple( bool simple );
 
     /**
       * Returns false iff the input text is empty
@@ -72,7 +72,7 @@ public:
     /**
       * Change the data index in the route skeleton model
       */
-    void setIndex(int index);
+    void setIndex( int index );
 
 public Q_SLOTS:
     /**
@@ -85,30 +85,30 @@ public Q_SLOTS:
       * eliminating any previously set positions
       * @see selectPlacemark hasTargetPosition
       */
-    void setTargetPosition(const GeoDataCoordinates &position);
+    void setTargetPosition( const GeoDataCoordinates &position );
 
     /** Cancel a started input request from the map */
     void abortMapInputRequest();
 
 Q_SIGNALS:
     /** All runners are finished */
-    void searchFinished(RoutingInputWidget*);
+    void searchFinished( RoutingInputWidget* );
 
     /** User requests to remove this widget */
-    void removalRequest(RoutingInputWidget*);
+    void removalRequest( RoutingInputWidget* );
 
     /** User requests to activate this widget */
-    void activityRequest(RoutingInputWidget*);
+    void activityRequest( RoutingInputWidget* );
 
     /** User requests position input from the map */
-    void mapInputModeEnabled(RoutingInputWidget*, bool enabled);
+    void mapInputModeEnabled( RoutingInputWidget*, bool enabled );
 
     /** hasTargetPosition changed because of selecting a placemark or changing the search term */
-    void targetValidityChanged(bool targetValid);
+    void targetValidityChanged( bool targetValid );
 
 private Q_SLOTS:
     /** Runner progress */
-    void setPlacemarkModel(MarblePlacemarkModel*);
+    void setPlacemarkModel( MarblePlacemarkModel* );
 
     /** Handle click on the goto target button */
     void requestActivity();
@@ -117,7 +117,7 @@ private Q_SLOTS:
     void requestRemoval();
 
     /** Handle click on the map input button */
-    void setMapInputModeEnabled(bool enabled);
+    void setMapInputModeEnabled( bool enabled );
 
     /** Progress animation update */
     void updateProgress();
@@ -129,7 +129,7 @@ private Q_SLOTS:
     void setInvalid();
 
     /** Set the target position (dragging) */
-    void updatePosition(int index, const GeoDataCoordinates &position);
+    void updatePosition( int index, const GeoDataCoordinates &position );
 
     /** Start reverse geocoding request */
     void startHttpRequest();

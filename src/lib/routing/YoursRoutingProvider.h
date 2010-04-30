@@ -29,17 +29,17 @@ class YoursRoutingProvider : public AbstractRoutingProvider
 
 public:
     /** Constructor */
-    explicit YoursRoutingProvider(QObject *parent = 0);
+    explicit YoursRoutingProvider( QObject *parent = 0 );
 
     /** Overload of AbstractRoutingProvider */
-    virtual void retrieveDirections(RouteSkeleton* route);
+    virtual void retrieveDirections( RouteSkeleton* route );
 
 private Q_SLOTS:
     /** Route data was retrieved via http */
-    void retrieveData(QNetworkReply* reply);
+    void retrieveData( QNetworkReply* reply );
 
     /** A network error occurred */
-    void handleError(QNetworkReply::NetworkError);
+    void handleError( QNetworkReply::NetworkError );
 
 private:
     QNetworkAccessManager *m_networkAccessManager;

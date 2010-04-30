@@ -43,10 +43,10 @@ public:
       AvoidTollWay = 0x2
     };
 
-    Q_DECLARE_FLAGS(AvoidFeatures, AvoidFeature)
+    Q_DECLARE_FLAGS( AvoidFeatures, AvoidFeature )
 
     /** Constructor */
-    explicit RouteSkeleton(QObject *parent = 0);
+    explicit RouteSkeleton( QObject *parent = 0 );
 
     /** Destructor */
     ~RouteSkeleton();
@@ -61,19 +61,19 @@ public:
     int size() const;
 
     /** Accessor for the n-th position */
-    GeoDataCoordinates at(int index) const;
+    GeoDataCoordinates at( int index ) const;
 
     /** Add the given element to the end */
-    void append(const GeoDataCoordinates &coordinates);
+    void append( const GeoDataCoordinates &coordinates );
 
     /** Add the given element at the given position */
-    void insert(int index, const GeoDataCoordinates &coordinates);
+    void insert( int index, const GeoDataCoordinates &coordinates );
 
     /** Change the value of the element at the given position */
-    void setPosition( int index, const GeoDataCoordinates &position);
+    void setPosition( int index, const GeoDataCoordinates &position );
 
     /** Remove the element at the given position */
-    void remove(int index);
+    void remove( int index );
 
     /** Remove all elements */
     void clear();
@@ -90,25 +90,25 @@ public:
     void addVia( const GeoDataCoordinates &position );
 
     /** Returns a pixmap which indicates the position of the element */
-    QPixmap pixmap(int index) const;
+    QPixmap pixmap( int index ) const;
 
-    void setAvoidFeatures(AvoidFeatures features);
+    void setAvoidFeatures( AvoidFeatures features );
 
     AvoidFeatures avoidFeatures() const;
 
-    void setRoutePreference(RoutePreference preference);
+    void setRoutePreference( RoutePreference preference );
 
     RoutePreference routePreference() const;
 
 Q_SIGNALS:
     /** The value of the n-th element was changed */
-    void positionChanged(int index, const GeoDataCoordinates &position);
+    void positionChanged( int index, const GeoDataCoordinates &position );
 
     /** An element was added at the given position */
-    void positionAdded(int index);
+    void positionAdded( int index );
 
     /** The element at the given position was removed */
-    void positionRemoved(int index);
+    void positionRemoved( int index );
 
 private:
     RouteSkeletonPrivate* const d;
@@ -116,6 +116,6 @@ private:
 
 } // namespace Marble
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::RouteSkeleton::AvoidFeatures)
+Q_DECLARE_OPERATORS_FOR_FLAGS( Marble::RouteSkeleton::AvoidFeatures )
 
 #endif
