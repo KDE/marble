@@ -17,14 +17,15 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 
-namespace Marble {
+namespace Marble
+{
 
 YoursRoutingProvider::YoursRoutingProvider( QObject *parent ) :
         AbstractRoutingProvider( parent ),
         m_networkAccessManager( new QNetworkAccessManager( this ) )
 {
     connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),
-            this, SLOT( retrieveData( QNetworkReply* ) ) );
+             this, SLOT( retrieveData( QNetworkReply* ) ) );
 }
 
 void YoursRoutingProvider::retrieveDirections( RouteSkeleton *route )
@@ -44,14 +45,14 @@ void YoursRoutingProvider::retrieveDirections( RouteSkeleton *route )
 
     QString base = "http://www.yournavigation.org/api/1.0/gosmore.php";
     QString args = "?flat=%1&flon=%2&tlat=%3&tlon=%4";
-    args = args.arg( fLat,0,'f',6 ).arg( fLon,0,'f',6 ).arg( tLat,0,'f',6 ).arg( tLon,0,'f',6 );
+    args = args.arg( fLat, 0, 'f', 6 ).arg( fLon, 0, 'f', 6 ).arg( tLat, 0, 'f', 6 ).arg( tLon, 0, 'f', 6 );
     QString preferences = "&v=motorcar&fast=1&layer=mapnik&format=kml";
     QString request = base + args + preferences;
     // mDebug() << "GET: " << request;
 
     QNetworkReply *reply = m_networkAccessManager->get( QNetworkRequest( QUrl( request ) ) );
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-            this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
+             this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
 }
 
 void YoursRoutingProvider::retrieveData( QNetworkReply *reply )

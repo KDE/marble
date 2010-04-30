@@ -12,7 +12,8 @@
 
 #include "RoutingModel.h"
 
-namespace Marble {
+namespace Marble
+{
 
 RoutingProxyModel::RoutingProxyModel( QObject *parent ) :
         QSortFilterProxyModel( parent )

@@ -29,9 +29,11 @@
 
 #include "ui_RoutingWidget.h"
 
-namespace Marble {
+namespace Marble
+{
 
-class RoutingWidgetPrivate {
+class RoutingWidgetPrivate
+{
 public:
     Ui::RoutingWidget m_ui;
 
@@ -84,7 +86,7 @@ RoutingWidgetPrivate::RoutingWidgetPrivate() :
 void RoutingWidgetPrivate::adjustInputWidgets()
 {
     bool simple = m_inputWidgets.size() <= 2;
-    for ( int i=0; i<m_inputWidgets.size(); ++i ) {
+    for ( int i = 0; i < m_inputWidgets.size(); ++i ) {
         m_inputWidgets[i]->setSimple( simple );
         m_inputWidgets[i]->setIndex( i );
     }
@@ -100,9 +102,9 @@ void RoutingWidgetPrivate::adjustSearchButton()
 
     bool search = m_inputWidgets.size() < 2;
     if ( m_inputWidgets.size() > 1 ) {
-        for ( int i=0; i<m_inputWidgets.size(); ++i ) {
+        for ( int i = 0; i < m_inputWidgets.size(); ++i ) {
             if ( !m_inputWidgets[i]->hasInput() ||
-                ( m_inputWidgets[i]->hasInput() && !m_inputWidgets[i]->hasTargetPosition() ) ) {
+                    ( m_inputWidgets[i]->hasInput() && !m_inputWidgets[i]->hasTargetPosition() ) ) {
                 search = true;
             }
         }
@@ -141,21 +143,21 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     d->m_widget->map()->model()->addLayer( d->m_routingLayer );
 
     connect( d->m_routingLayer, SIGNAL( routeDirty() ),
-            d->m_routingManager, SLOT( updateRoute() ) );
+             d->m_routingManager, SLOT( updateRoute() ) );
     connect( d->m_routingLayer, SIGNAL( placemarkSelected( QModelIndex ) ),
-            this, SLOT( activatePlacemark( QModelIndex ) ) );
+             this, SLOT( activatePlacemark( QModelIndex ) ) );
     connect( d->m_routingLayer, SIGNAL( pointSelected( GeoDataCoordinates ) ),
-            this, SLOT( retrieveSelectedPoint( GeoDataCoordinates ) ) );
+             this, SLOT( retrieveSelectedPoint( GeoDataCoordinates ) ) );
     connect( d->m_routingLayer, SIGNAL( pointSelectionAborted() ),
-            this, SLOT( pointSelectionCanceled() ) );
+             this, SLOT( pointSelectionCanceled() ) );
     connect( d->m_routingLayer, SIGNAL( exportRequested() ),
-            this, SLOT( exportRoute() ) );
+             this, SLOT( exportRoute() ) );
     connect( d->m_routingManager, SIGNAL( stateChanged( RoutingManager::State, RouteSkeleton* ) ),
-            this, SLOT( updateRouteState( RoutingManager::State, RouteSkeleton* ) ) );
+             this, SLOT( updateRouteState( RoutingManager::State, RouteSkeleton* ) ) );
     connect( d->m_routeSkeleton, SIGNAL( positionAdded( int ) ),
-            this, SLOT( insertInputWidget( int ) ) );
+             this, SLOT( insertInputWidget( int ) ) );
     connect( d->m_routeSkeleton, SIGNAL( positionRemoved( int ) ),
-            this, SLOT( removeInputWidget( int ) ) );
+             this, SLOT( removeInputWidget( int ) ) );
 
     d->m_routingProxyModel = new RoutingProxyModel( this );
     d->m_routingProxyModel->setSourceModel( d->m_routingManager->routingModel() );
@@ -218,7 +220,7 @@ void RoutingWidget::retrieveRoute()
     d->m_routeSkeleton->setAvoidFeatures( avoid );
 
     Q_ASSERT( d->m_routeSkeleton->size() == d->m_inputWidgets.size() );
-    for ( int i=0; i<d->m_inputWidgets.size(); ++i ) {
+    for ( int i = 0; i < d->m_inputWidgets.size(); ++i ) {
         RoutingInputWidget *widget = d->m_inputWidgets.at( i );
         if ( !widget->hasTargetPosition() && widget->hasInput() ) {
             widget->findPlacemarks();
@@ -265,12 +267,12 @@ void RoutingWidget::handleSearchResult( RoutingInputWidget *widget )
 
     if ( model->rowCount() ) {
         // Make sure we have a selection
-        activatePlacemark( model->index( 0,0 ) );
+        activatePlacemark( model->index( 0, 0 ) );
     }
 
     GeoDataLineString placemarks;
-    for ( int i=0; i<model->rowCount(); ++i ) {
-        QVariant data = model->index( i,0 ).data( MarblePlacemarkModel::CoordinateRole );
+    for ( int i = 0; i < model->rowCount(); ++i ) {
+        QVariant data = model->index( i, 0 ).data( MarblePlacemarkModel::CoordinateRole );
         if ( !data.isNull() ) {
             placemarks << qVariantValue<GeoDataCoordinates>( data );
         }
@@ -303,7 +305,7 @@ void RoutingWidget::activatePlacemark( const QModelIndex &index )
 
 void RoutingWidget::addInputWidget()
 {
-    int index = d->m_ui.routingLayout->count()-4;
+    int index = d->m_ui.routingLayout->count() - 4;
     d->m_routeSkeleton->append( GeoDataCoordinates() );
     insertInputWidget( index );
 }
@@ -314,15 +316,15 @@ void RoutingWidget::insertInputWidget( int index )
         RoutingInputWidget *input = new RoutingInputWidget( d->m_routeSkeleton, index, this );
         d->m_inputWidgets.insert( index, input );
         connect( input, SIGNAL( searchFinished( RoutingInputWidget* ) ),
-                this, SLOT( handleSearchResult( RoutingInputWidget* ) ) );
+                 this, SLOT( handleSearchResult( RoutingInputWidget* ) ) );
         connect( input, SIGNAL( removalRequest( RoutingInputWidget* ) ),
-                this, SLOT( removeInputWidget( RoutingInputWidget* ) ) );
+                 this, SLOT( removeInputWidget( RoutingInputWidget* ) ) );
         connect( input, SIGNAL( activityRequest( RoutingInputWidget* ) ),
-                this, SLOT( centerOnInputWidget( RoutingInputWidget* ) ) );
+                 this, SLOT( centerOnInputWidget( RoutingInputWidget* ) ) );
         connect( input, SIGNAL( mapInputModeEnabled( RoutingInputWidget*, bool ) ),
-                this, SLOT( requestMapPosition( RoutingInputWidget*, bool ) ) );
+                 this, SLOT( requestMapPosition( RoutingInputWidget*, bool ) ) );
         connect( input, SIGNAL( targetValidityChanged( bool ) ),
-                this, SLOT( adjustSearchButton() ) );
+                 this, SLOT( adjustSearchButton() ) );
 
         d->m_ui.routingLayout->insertWidget( index, input );
         d->adjustInputWidgets();
@@ -332,7 +334,7 @@ void RoutingWidget::insertInputWidget( int index )
 void RoutingWidget::removeInputWidget( RoutingInputWidget *widget )
 {
     int index = d->m_inputWidgets.indexOf( widget );
-    if ( index >=0 ) {
+    if ( index >= 0 ) {
         d->m_routeSkeleton->remove( index );
         d->m_routingManager->updateRoute();
     }
@@ -360,26 +362,26 @@ void RoutingWidget::updateRouteState( RoutingManager::State state, RouteSkeleton
     if ( state == RoutingManager::Retrieved ) {
         // Parts of the route may lie outside the route trip points
         GeoDataLineString bbox;
-        for ( int i=0; i<d->m_routingManager->routingModel()->rowCount(); ++i ) {
-            QModelIndex index = d->m_routingManager->routingModel()->index( i,0 );
+        for ( int i = 0; i < d->m_routingManager->routingModel()->rowCount(); ++i ) {
+            QModelIndex index = d->m_routingManager->routingModel()->index( i, 0 );
             QVariant pos = index.data( RoutingModel::CoordinateRole );
             if ( !pos.isNull() ) {
                 bbox << qVariantValue<GeoDataCoordinates>( pos );
             }
         }
 
-        if ( bbox.size()>1 ) {
-          QString label = tr( "Estimated travel time: %1 (%2 km)" );
-          qreal distance = d->m_routingManager->routingModel()->totalDistance();
-          QTime time = d->m_routingManager->routingModel()->totalTime();
-          QString timeString = time.toString( Qt::DefaultLocaleShortDate );
-          d->m_ui.descriptionLabel->setText( label.arg( timeString ).arg( distance, 0, 'f', 1 ) );
-          d->m_ui.descriptionLabel->setVisible( true );
+        if ( bbox.size() > 1 ) {
+            QString label = tr( "Estimated travel time: %1 (%2 km)" );
+            qreal distance = d->m_routingManager->routingModel()->totalDistance();
+            QTime time = d->m_routingManager->routingModel()->totalTime();
+            QString timeString = time.toString( Qt::DefaultLocaleShortDate );
+            d->m_ui.descriptionLabel->setText( label.arg( timeString ).arg( distance, 0, 'f', 1 ) );
+            d->m_ui.descriptionLabel->setVisible( true );
 
-          if ( d->m_zoomRouteAfterDownload ) {
-              d->m_zoomRouteAfterDownload = false;
-              d->m_widget->centerOn( GeoDataLatLonBox::fromLineString( bbox ) );
-          }
+            if ( d->m_zoomRouteAfterDownload ) {
+                d->m_zoomRouteAfterDownload = false;
+                d->m_widget->centerOn( GeoDataLatLonBox::fromLineString( bbox ) );
+            }
         }
     }
 
@@ -394,8 +396,7 @@ void RoutingWidget::requestMapPosition( RoutingInputWidget *widget, bool enabled
         d->m_inputRequest = widget;
         d->m_routingLayer->setPointSelectionEnabled( true );
         d->m_widget->setFocus( Qt::OtherFocusReason );
-    }
-    else {
+    } else {
         d->m_routingLayer->setPointSelectionEnabled( false );
     }
 }
@@ -436,8 +437,8 @@ void RoutingWidget::toggleOptionsVisibility()
 void RoutingWidget::exportRoute()
 {
     QString fileName = QFileDialog::getSaveFileName( this, tr( "Export Route" ), // krazy:exclude=qclasses
-                                                    QDir::homePath(),
-                                                    tr( "GPX files (*.gpx)" ) );
+                       QDir::homePath(),
+                       tr( "GPX files (*.gpx)" ) );
 
     if ( !fileName.isEmpty() ) {
         QFile gpx( fileName );

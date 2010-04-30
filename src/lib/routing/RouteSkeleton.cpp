@@ -16,14 +16,15 @@
 #include <QtCore/QMap>
 #include <QtGui/QPainter>
 
-namespace Marble {
+namespace Marble
+{
 
 class RouteSkeletonPrivate
 {
 public:
     QVector<GeoDataCoordinates> m_route;
 
-    QMap<int,QPixmap> m_pixmapCache;
+    QMap<int, QPixmap> m_pixmapCache;
 
     RouteSkeleton::RoutePreference m_routePreference;
 
@@ -38,11 +39,11 @@ public:
 };
 
 RouteSkeletonPrivate::RouteSkeletonPrivate() :
-    m_routePreference( RouteSkeleton::CarFastest ),
-    m_avoidFeatures( RouteSkeleton::AvoidNone ),
-    m_fontSize( 0 )
+        m_routePreference( RouteSkeleton::CarFastest ),
+        m_avoidFeatures( RouteSkeleton::AvoidNone ),
+        m_fontSize( 0 )
 {
-  // nothing to do
+    // nothing to do
 }
 
 int RouteSkeletonPrivate::viaIndex( const GeoDataCoordinates &position ) const
@@ -55,7 +56,7 @@ int RouteSkeletonPrivate::viaIndex( const GeoDataCoordinates &position ) const
     int result = 0;
     GeoDataLineString viaFirst;
     GeoDataLineString viaSecond;
-    for ( int i=0; i<m_route.size(); ++i ) {
+    for ( int i = 0; i < m_route.size(); ++i ) {
         Q_ASSERT( viaFirst.size() < 4 && viaSecond.size() < 4 );
         if ( viaFirst.size() == 3 ) {
             viaFirst.remove( 0 );
@@ -87,11 +88,11 @@ int RouteSkeletonPrivate::viaIndex( const GeoDataCoordinates &position ) const
         }
 
         /** @todo: Assumes that destination is the last point */
-        if ( viaSecond.size() == 3 && i+1 < m_route.size() ) {
+        if ( viaSecond.size() == 3 && i + 1 < m_route.size() ) {
             qreal len = viaSecond.length( EARTH_RADIUS );
             if ( minLength < 0.0 || len < minLength ) {
                 minLength = len;
-                result = i+1;
+                result = i + 1;
             }
         }
     }
@@ -153,8 +154,8 @@ QPixmap RouteSkeleton::pixmap( int position ) const
     QPainter painter( &result );
     painter.setRenderHint( QPainter::Antialiasing, true );
     painter.setPen( QColor( Qt::black ) );
-    painter.setBrush( QBrush( QColor::fromRgb( 55,164,44 ) ) );  // green, oxygen palette
-    painter.drawEllipse( 1,1,13,13 );
+    painter.setBrush( QBrush( QColor::fromRgb( 55, 164, 44 ) ) );  // green, oxygen palette
+    painter.drawEllipse( 1, 1, 13, 13 );
     painter.setBrush( QColor( Qt::black ) );
 
     char text = char( 'A' + position );
@@ -224,22 +225,22 @@ void RouteSkeleton::setPosition( int index, const GeoDataCoordinates &position )
 
 void RouteSkeleton::setAvoidFeatures( RouteSkeleton::AvoidFeatures features )
 {
-  d->m_avoidFeatures = features;
+    d->m_avoidFeatures = features;
 }
 
 RouteSkeleton::AvoidFeatures RouteSkeleton::avoidFeatures() const
 {
-  return d->m_avoidFeatures;
+    return d->m_avoidFeatures;
 }
 
 void RouteSkeleton::setRoutePreference( RouteSkeleton::RoutePreference preference )
 {
-  d->m_routePreference = preference;
+    d->m_routePreference = preference;
 }
 
 RouteSkeleton::RoutePreference RouteSkeleton::routePreference() const
 {
-  return d->m_routePreference;
+    return d->m_routePreference;
 }
 
 } // namespace Marble

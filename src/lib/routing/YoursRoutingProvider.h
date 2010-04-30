@@ -17,7 +17,8 @@
 
 class QNetworkAccessManager;
 
-namespace Marble {
+namespace Marble
+{
 
 /**
   * @brief A AbstractRoutingProvider that retrieves routing

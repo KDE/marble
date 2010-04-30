@@ -16,7 +16,8 @@
 
 #include <QtCore/QAbstractItemModel>
 
-namespace Marble {
+namespace Marble
+{
 
 class RoutingManagerPrivate;
 class MarbleWidget;
@@ -33,8 +34,8 @@ class RoutingManager : public QObject
 
 public:
     enum State {
-      Downloading, // A new route is downloaded in the background
-      Retrieved // No download in progress
+        Downloading, // A new route is downloaded in the background
+        Retrieved // No download in progress
     };
 
     /** Constructor */

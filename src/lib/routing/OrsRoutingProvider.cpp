@@ -18,14 +18,15 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 
-namespace Marble {
+namespace Marble
+{
 
 OrsRoutingProvider::OrsRoutingProvider( QObject *parent ) :
         AbstractRoutingProvider( parent ),
         m_networkAccessManager( new QNetworkAccessManager( this ) )
 {
     connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
-            this, SLOT( retrieveData( QNetworkReply * ) ) );
+             this, SLOT( retrieveData( QNetworkReply * ) ) );
 }
 
 void OrsRoutingProvider::retrieveDirections( RouteSkeleton *route )
@@ -47,24 +48,24 @@ void OrsRoutingProvider::retrieveDirections( RouteSkeleton *route )
         preference = "Fastest";
         break;
     case RouteSkeleton::CarShortest:
-      unit = "KM";
-      preference = "Shortest";
-      break;
+        unit = "KM";
+        preference = "Shortest";
+        break;
     case RouteSkeleton::Bicycle:
-      unit = 'M';
-      preference = "Bicycle";
-      break;
+        unit = 'M';
+        preference = "Bicycle";
+        break;
     case RouteSkeleton::Pedestrian:
-      unit = 'M';
-      preference = "Pedestrian";
-      break;
+        unit = 'M';
+        preference = "Pedestrian";
+        break;
     }
 
     request += requestHeader( unit, preference );
     request += requestPoint( StartPoint, source );
 
     if ( route->size() > 2 ) {
-        for ( int i=1; i<route->size()-1; ++i ) {
+        for ( int i = 1; i < route->size() - 1; ++i ) {
             request += requestPoint( ViaPoint, route->at( i ) );
         }
     }
@@ -80,7 +81,7 @@ void OrsRoutingProvider::retrieveDirections( RouteSkeleton *route )
 
     QNetworkReply *reply = m_networkAccessManager->post( QNetworkRequest( url ), request.toLatin1() );
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-            this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
+             this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
 }
 
 void OrsRoutingProvider::retrieveData( QNetworkReply *reply )
@@ -138,16 +139,15 @@ QString OrsRoutingProvider::requestFooter( RouteSkeleton::AvoidFeatures avoidFea
 {
     QString result = "</xls:WayPointList>\n";
 
-    if ( avoidFeatures != RouteSkeleton::AvoidNone )
-    {
-      result += "<xls:AvoidList>\n"; {
-      if ( avoidFeatures & RouteSkeleton::AvoidTollWay )
-        result += "<xls:AvoidFeature>Tollway</xls:AvoidFeature>";
-      }
-      if ( avoidFeatures & RouteSkeleton::AvoidHighway ) {
-        result += "<xls:AvoidFeature>Highway</xls:AvoidFeature>";
-      }
-      result += "</xls:AvoidList>\n";
+    if ( avoidFeatures != RouteSkeleton::AvoidNone ) {
+        result += "<xls:AvoidList>\n"; {
+            if ( avoidFeatures & RouteSkeleton::AvoidTollWay )
+                result += "<xls:AvoidFeature>Tollway</xls:AvoidFeature>";
+        }
+        if ( avoidFeatures & RouteSkeleton::AvoidHighway ) {
+            result += "<xls:AvoidFeature>Highway</xls:AvoidFeature>";
+        }
+        result += "</xls:AvoidList>\n";
     }
 
     result += "</xls:RoutePlan>\n";

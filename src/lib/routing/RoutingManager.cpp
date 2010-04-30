@@ -15,7 +15,8 @@
 #include "RouteSkeleton.h"
 #include "RoutingModel.h"
 
-namespace Marble {
+namespace Marble
+{
 
 class RoutingManagerPrivate
 {
@@ -40,10 +41,10 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleWidget *widget, QObject *par
 }
 
 RoutingManager::RoutingManager( MarbleWidget *widget, QObject *parent ) : QObject( parent ),
-d( new RoutingManagerPrivate( widget, this ) )
+        d( new RoutingManagerPrivate( widget, this ) )
 {
     connect( d->m_routingProvider, SIGNAL( routeRetrieved( AbstractRoutingProvider::Format, QByteArray ) ),
-            this, SLOT( setRouteData( AbstractRoutingProvider::Format, QByteArray ) ) );
+             this, SLOT( setRouteData( AbstractRoutingProvider::Format, QByteArray ) ) );
 }
 
 RoutingManager::~RoutingManager()

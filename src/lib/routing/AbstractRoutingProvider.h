@@ -16,7 +16,8 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QObject>
 
-namespace Marble {
+namespace Marble
+{
 
 class RouteSkeleton;
 
@@ -26,9 +27,9 @@ class AbstractRoutingProvider : public QObject
 
 public:
     enum Format {
-      OpenGIS,
-      GPX,
-      KML
+        OpenGIS,
+        GPX,
+        KML
     };
 
     /** Constructor */

@@ -28,7 +28,8 @@
 #include <QtGui/QMouseEvent>
 #include <QtGui/QPixmap>
 
-namespace Marble {
+namespace Marble
+{
 
 class RoutingLayerPrivate
 {
@@ -38,11 +39,10 @@ class RoutingLayerPrivate
         QRegion region;
 
         PaintRegion( const T &index_, const QRegion &region_ ) :
-                index( index_ ), region( region_ )
-        {
+                index( index_ ), region( region_ ) {
             // nothing to do
         }
-    };    
+    };
 
     typedef PaintRegion<QModelIndex> ModelRegion;
     typedef PaintRegion<int> SkeletonRegion;
@@ -136,10 +136,10 @@ public:
 };
 
 RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget ) :
-  q( parent ), m_proxyModel( 0 ), m_movingIndex( -1 ), m_marbleWidget( widget ), m_targetPixmap( ":/data/bitmaps/routing_pick.png" ),
-  m_viaPixmap( ":/data/bitmaps/routing_via.png" ), m_dragStopOver( false ), m_pointSelection( false ),
-  m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ), m_routeDirty( false ), m_pixmapSize( 22,22 ),
-  m_routeSkeleton( 0 ), m_activeMenuIndex( -1 )
+        q( parent ), m_proxyModel( 0 ), m_movingIndex( -1 ), m_marbleWidget( widget ), m_targetPixmap( ":/data/bitmaps/routing_pick.png" ),
+        m_viaPixmap( ":/data/bitmaps/routing_via.png" ), m_dragStopOver( false ), m_pointSelection( false ),
+        m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ), m_routeDirty( false ), m_pixmapSize( 22, 22 ),
+        m_routeSkeleton( 0 ), m_activeMenuIndex( -1 )
 {
     m_contextMenu = new MarbleWidgetPopupMenu( m_marbleWidget, m_marbleWidget->model() );
     m_removeViaPointAction = new QAction( QObject::tr( "&Remove this destination" ), q );
@@ -159,8 +159,8 @@ void RoutingLayerPrivate::renderPlacemarks( GeoPainter *painter )
 {
     m_placemarks.clear();
     painter->setPen( QColor( Qt::black ) );
-    for ( int i=0; i<m_placemarkModel->rowCount(); ++i ) {
-        QModelIndex index = m_placemarkModel->index( i,0 );
+    for ( int i = 0; i < m_placemarkModel->rowCount(); ++i ) {
+        QModelIndex index = m_placemarkModel->index( i, 0 );
         QVariant data = index.data( MarblePlacemarkModel::CoordinateRole );
         if ( index.isValid() && !data.isNull() ) {
             GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( data );
@@ -175,7 +175,7 @@ void RoutingLayerPrivate::renderPlacemarks( GeoPainter *painter )
             }
 
             QRegion region = painter->regionFromRect( pos, m_targetPixmap.width(), m_targetPixmap.height() );
-            m_placemarks.push_back( ModelRegion( index,region ) );
+            m_placemarks.push_back( ModelRegion( index, region ) );
         }
     }
 }
@@ -185,18 +185,17 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     m_instructionRegions.clear();
     GeoDataLineString waypoints;
 
-    for ( int i=0; i<m_routingModel->rowCount(); ++i ) {
-        QModelIndex index = m_routingModel->index( i,0 );
+    for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
+        QModelIndex index = m_routingModel->index( i, 0 );
         GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
         RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
 
-        if ( type == RoutingModel::WayPoint )
-        {
+        if ( type == RoutingModel::WayPoint ) {
             waypoints << pos;
         }
     }
 
-    QPen bluePen( QColor::fromRgb( 0,87,174,200 ) ); // blue, oxygen palette
+    QPen bluePen( QColor::fromRgb( 0, 87, 174, 200 ) ); // blue, oxygen palette
     bluePen.setWidth( 5 );
     if ( m_routeDirty ) {
         bluePen.setStyle( Qt::DotLine );
@@ -208,37 +207,35 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
     bluePen.setWidth( 2 );
     painter->setPen( bluePen );
-    painter->setBrush( QBrush( QColor::fromRgb( 136,138,133,200 ) ) ); // gray, oxygen palette
+    painter->setBrush( QBrush( QColor::fromRgb( 136, 138, 133, 200 ) ) ); // gray, oxygen palette
 
     if ( !m_insertStopOver.isNull() ) {
         int dx = 1 + m_pixmapSize.width() / 2;
         int dy = 1 + m_pixmapSize.height() / 2;
-        QPoint center = m_insertStopOver - QPoint( dx,dy );
+        QPoint center = m_insertStopOver - QPoint( dx, dy );
         painter->drawPixmap( center, m_targetPixmap );
     }
 
-    for ( int i=0; i<m_routingModel->rowCount(); ++i )
-    {
-        QModelIndex index = m_routingModel->index( i,0 );
+    for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
+        QModelIndex index = m_routingModel->index( i, 0 );
         GeoDataCoordinates pos = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
         RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
 
         if ( type == RoutingModel::Instruction ) {
 
-            painter->setBrush( QBrush( QColor::fromRgb( 136,138,133,200 ) ) ); // gray, oxygen palette
+            painter->setBrush( QBrush( QColor::fromRgb( 136, 138, 133, 200 ) ) ); // gray, oxygen palette
             QModelIndex proxyIndex = m_proxyModel->mapFromSource( index );
-            if ( m_selectionModel->selection().contains( proxyIndex ) )
-            {
+            if ( m_selectionModel->selection().contains( proxyIndex ) ) {
                 painter->setPen( QColor( Qt::black ) );
-                painter->setBrush( QBrush( QColor::fromRgb( 227,173,0,200 ) ) ); // yellow, oxygen palette
-                painter->drawAnnotation( pos, index.data().toString(), QSize( 120,60 ), 10, 30, 15, 15 );
+                painter->setBrush( QBrush( QColor::fromRgb( 227, 173, 0, 200 ) ) ); // yellow, oxygen palette
+                painter->drawAnnotation( pos, index.data().toString(), QSize( 120, 60 ), 10, 30, 15, 15 );
 
                 painter->setPen( bluePen );
-                painter->setBrush( QBrush( QColor::fromRgb( 236,115,49,200 ) ) ); // orange, oxygen palette
+                painter->setBrush( QBrush( QColor::fromRgb( 236, 115, 49, 200 ) ) ); // orange, oxygen palette
             }
 
             QRegion region = painter->regionFromEllipse( pos, 12, 12 );
-            m_instructionRegions.push_front( ModelRegion( index,region ) );
+            m_instructionRegions.push_front( ModelRegion( index, region ) );
             painter->drawEllipse( pos, 8, 8 );
         }
     }
@@ -247,13 +244,13 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 void RoutingLayerPrivate::renderSkeleton( GeoPainter *painter )
 {
     m_regions.clear();
-    for ( int i=0; i<m_routeSkeleton->size(); ++i ) {
+    for ( int i = 0; i < m_routeSkeleton->size(); ++i ) {
         GeoDataCoordinates pos = m_routeSkeleton->at( i );
         if ( pos.longitude() != 0.0 && pos.latitude() != 0.0 ) {
             QPixmap pixmap = m_routeSkeleton->pixmap( i );
             painter->drawPixmap( pos, pixmap );
             QRegion region = painter->regionFromRect( pos, pixmap.width(), pixmap.height() );
-            m_regions.push_front( SkeletonRegion( i,region ) );
+            m_regions.push_front( SkeletonRegion( i, region ) );
         }
     }
 }
@@ -271,14 +268,12 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
                 m_insertStopOver = QPoint();
                 m_dragStopOver = false;
                 return true;
-            }
-            else if ( e->button() == Qt::RightButton ) {
+            } else if ( e->button() == Qt::RightButton ) {
                 m_removeViaPointAction->setEnabled( true );
                 m_activeMenuIndex = region.index;
                 showContextMenu( e->pos() );
                 return true;
-            }
-            else
+            } else
                 return false;
         }
     }
@@ -291,13 +286,11 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
                 m_insertStopOver = QPoint();
                 m_dragStopOver = false;
                 return true;
-            }
-            else if ( e->button() == Qt::RightButton ) {
+            } else if ( e->button() == Qt::RightButton ) {
                 m_removeViaPointAction->setEnabled( false );
                 showContextMenu( e->pos() );
                 return true;
-            }
-            else
+            } else
                 return false;
         }
     }
@@ -308,13 +301,11 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
             m_insertStopOver = e->pos();
             m_dragStopOver = true;
             return true;
-        }
-        else if ( e->button() == Qt::RightButton ) {
+        } else if ( e->button() == Qt::RightButton ) {
             m_removeViaPointAction->setEnabled( false );
             showContextMenu( e->pos() );
             return true;
-        }
-        else
+        } else
             return false;
     }
 
@@ -341,8 +332,8 @@ bool RoutingLayerPrivate::handleMouseButtonRelease( QMouseEvent *e )
     if ( m_pointSelection ) {
         qreal lon( 0.0 ), lat( 0.0 );
         if ( m_marbleWidget->geoCoordinates( e->pos().x(), e->pos().y(),
-                                           lon, lat, GeoDataCoordinates::Radian ) ) {
-            emit q->pointSelected( GeoDataCoordinates( lon,lat ) );
+                                             lon, lat, GeoDataCoordinates::Radian ) ) {
+            emit q->pointSelected( GeoDataCoordinates( lon, lat ) );
             return true;
         }
     }
@@ -381,14 +372,13 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
 
     qreal lon( 0.0 ), lat( 0.0 );
     if ( m_marbleWidget->geoCoordinates( e->pos().x(), e->pos().y(),
-                                       lon, lat, GeoDataCoordinates::Radian ) ) {
+                                         lon, lat, GeoDataCoordinates::Radian ) ) {
 
         if ( m_movingIndex >= 0 ) {
-            GeoDataCoordinates moved( lon,lat );
+            GeoDataCoordinates moved( lon, lat );
             m_routeSkeleton->setPosition( m_movingIndex, moved );
             m_marbleWidget->setCursor( Qt::ArrowCursor );
-        }
-        else if ( m_dragStopOver ) {
+        } else if ( m_dragStopOver ) {
             m_insertStopOver = e->pos();
             m_marbleWidget->setCursor( Qt::ArrowCursor );
         } else if ( isInfoPoint( e->pos() ) ) {
@@ -473,7 +463,7 @@ QStringList RoutingLayer::renderPosition() const
 }
 
 bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
-                                 const QString& renderPos, GeoSceneLayer *layer )
+                           const QString& renderPos, GeoSceneLayer *layer )
 {
     Q_UNUSED( viewport )
     Q_UNUSED( renderPos )

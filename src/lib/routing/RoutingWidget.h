@@ -34,7 +34,7 @@ class RoutingWidget : public QWidget
 {
     Q_OBJECT
 
- public:
+public:
     /**
       * @brief Constructor
       * @param marbleWidget The marble widget used to register an event handler

@@ -10,7 +10,8 @@
 
 #include "AbstractRoutingProvider.h"
 
-namespace Marble {
+namespace Marble
+{
 
 AbstractRoutingProvider::AbstractRoutingProvider( QObject *parent ) :
         QObject( parent )

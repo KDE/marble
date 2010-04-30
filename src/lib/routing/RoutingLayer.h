@@ -19,7 +19,8 @@
 class QAbstractProxyModel;
 class QItemSelectionModel;
 
-namespace Marble {
+namespace Marble
+{
 
 class MarbleWidget;
 class RoutingModel;
@@ -51,7 +52,7 @@ public:
 
     /** Reimplemented from LayerInterface. Paints route items and placemarks */
     bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
+                 const QString &renderPos = "NONE", GeoSceneLayer *layer = 0 );
 
     /**
       * Set the proxy model another QAbstractItemView uses that should share

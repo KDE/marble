@@ -28,7 +28,8 @@
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
 
-namespace Marble {
+namespace Marble
+{
 
 class RoutingInputWidgetPrivate
 {
@@ -124,26 +125,26 @@ RoutingInputWidget::RoutingInputWidget( RouteSkeleton *skeleton, int index, QWid
     layout->addWidget( d->m_removeButton );
 
     connect( d->m_stateButton, SIGNAL( clicked() ),
-            this, SLOT( requestActivity() ) );
+             this, SLOT( requestActivity() ) );
     connect( d->m_pickButton, SIGNAL( clicked( bool ) ),
-            this, SLOT( setMapInputModeEnabled( bool ) ) );
+             this, SLOT( setMapInputModeEnabled( bool ) ) );
     connect( d->m_removeButton, SIGNAL( clicked() ),
-            this, SLOT( requestRemoval() ) );
+             this, SLOT( requestRemoval() ) );
 
     connect( d->m_runnerManager, SIGNAL( modelChanged( MarblePlacemarkModel * ) ),
-            this, SLOT( setPlacemarkModel( MarblePlacemarkModel * ) ) );
+             this, SLOT( setPlacemarkModel( MarblePlacemarkModel * ) ) );
     connect( d->m_lineEdit, SIGNAL( returnPressed() ),
-            this, SLOT( findPlacemarks() ) );
+             this, SLOT( findPlacemarks() ) );
     connect( d->m_lineEdit, SIGNAL( textChanged( QString ) ),
-            this, SLOT( setInvalid() ) );
+             this, SLOT( setInvalid() ) );
     connect( &d->m_progressTimer, SIGNAL( timeout() ),
-            this, SLOT( updateProgress() ) );
+             this, SLOT( updateProgress() ) );
     connect( d->m_runnerManager, SIGNAL( searchFinished( QString ) ),
-            this, SLOT( finishSearch() ) );
+             this, SLOT( finishSearch() ) );
     connect( skeleton, SIGNAL( positionChanged( int, GeoDataCoordinates ) ),
-            this, SLOT( updatePosition( int, GeoDataCoordinates ) ) );
+             this, SLOT( updatePosition( int, GeoDataCoordinates ) ) );
     connect( &d->m_nominatimTimer, SIGNAL( timeout() ),
-            this, SLOT( startHttpRequest() ) );
+             this, SLOT( startHttpRequest() ) );
 
     d->adjustText();
 }
@@ -168,7 +169,7 @@ void RoutingInputWidget::startHttpRequest()
     QString url = QString( base + query ).arg( lon ).arg( lat ).arg( MarbleLocale::languageCode() );
 
     QObject::connect( d->m_manager, SIGNAL( finished( QNetworkReply * ) ),
-            this, SLOT( handleHttpReply( QNetworkReply * ) ) );
+                      this, SLOT( handleHttpReply( QNetworkReply * ) ) );
 
     QNetworkRequest request;
     request.setUrl( QUrl( url ) );
@@ -211,8 +212,7 @@ void RoutingInputWidget::findPlacemarks()
     QString text = d->m_lineEdit->text();
     if ( text.isEmpty() ) {
         setInvalid();
-    }
-    else {
+    } else {
         d->m_pickButton->setVisible( false );
         d->m_stateButton->setVisible( true );
         d->m_progressTimer.start();
@@ -314,7 +314,7 @@ void RoutingInputWidget::handleHttpReply( QNetworkReply *reply )
     QVector<GeoDataPlacemark> placemarks;
     QDomElement root = xml.documentElement();
     QDomNodeList places = root.elementsByTagName( "result" );
-    if ( places.size()==1 ) {
+    if ( places.size() == 1 ) {
         QString address = places.item( 0 ).toElement().text();
         d->m_lineEdit->setText( address );
         d->m_lineEdit->setCursorPosition( 0 );

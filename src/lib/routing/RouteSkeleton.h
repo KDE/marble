@@ -16,7 +16,8 @@
 
 #include <QtCore/QFlags>
 
-namespace Marble {
+namespace Marble
+{
 
 class RouteSkeletonPrivate;
 
@@ -38,9 +39,9 @@ public:
     };
 
     enum AvoidFeature {
-      AvoidNone = 0x0,
-      AvoidHighway = 0x1,
-      AvoidTollWay = 0x2
+        AvoidNone = 0x0,
+        AvoidHighway = 0x1,
+        AvoidTollWay = 0x2
     };
 
     Q_DECLARE_FLAGS( AvoidFeatures, AvoidFeature )

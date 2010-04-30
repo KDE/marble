@@ -13,7 +13,8 @@
 
 #include <QtGui/QSortFilterProxyModel>
 
-namespace Marble {
+namespace Marble
+{
 
 /**
   * @brief A QAbstractItemModel that contains a list of routing instructions.

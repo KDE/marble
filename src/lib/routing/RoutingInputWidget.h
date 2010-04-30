@@ -17,7 +17,8 @@
 
 class QNetworkReply;
 
-namespace Marble {
+namespace Marble
+{
 
 class RoutingInputWidgetPrivate;
 class MarblePlacemarkModel;

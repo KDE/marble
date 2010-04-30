@@ -22,7 +22,8 @@
   * destination. Steps near the source come first, steps near the target
   * last.
   */
-namespace Marble {
+namespace Marble
+{
 
 class RoutingModelPrivate;
 class GeoDataDocument;
