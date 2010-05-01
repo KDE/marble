@@ -179,17 +179,14 @@ inline GeoSceneTexture * TileLoader::findTextureLayer( TileId const & id )
 QString TileLoader::tileFileName( TileId const & tileId ) const
 {
     GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
-    return MarbleDirs::path( TileLoaderHelper::relativeTileFileName
-                             ( textureLayer, tileId.zoomLevel(), tileId.x(), tileId.y() ));
+    return MarbleDirs::path( textureLayer->relativeTileFileName( tileId ));
 }
 
 void TileLoader::triggerDownload( TileId const & id, DownloadUsage const usage )
 {
     GeoSceneTexture * const textureLayer = findTextureLayer( id );
-    QUrl const sourceUrl = TileLoaderHelper::downloadUrl( textureLayer, id.zoomLevel(), id.x(),
-                                                          id.y() );
-    QString const destFileName = TileLoaderHelper::relativeTileFileName( textureLayer, id.zoomLevel(),
-                                                                         id.x(), id.y() );
+    QUrl const sourceUrl = textureLayer->downloadUrl( id );
+    QString const destFileName = textureLayer->relativeTileFileName( id );
     emit downloadTile( sourceUrl, destFileName, id.toString(), usage );
 }
 

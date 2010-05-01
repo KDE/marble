@@ -316,7 +316,7 @@ int StackedTileLoader::maximumTileLevel( GeoSceneTexture const * const texture )
         return texture->maximumTileLevel();
 
     int maximumTileLevel = -1;
-    QString tilepath = MarbleDirs::path( TileLoaderHelper::themeStr( texture ) );
+    QString tilepath = MarbleDirs::path( texture->themeStr() );
     //    mDebug() << "StackedTileLoader::maxPartialTileLevel tilepath" << tilepath;
     QStringList leveldirs = QDir( tilepath ).entryList( QDir::AllDirs | QDir::NoSymLinks
                                                         | QDir::NoDotAndDotDot );
@@ -352,8 +352,8 @@ bool StackedTileLoader::baseTilesAvailable( GeoSceneLayer * layer )
     for ( int column = 0; noerr && column < levelZeroColumns; ++column ) {
         for ( int row = 0; noerr && row < levelZeroRows; ++row ) {
 
-            const QString tilepath = MarbleDirs::path( TileLoaderHelper::relativeTileFileName(
-                texture, 0, column, row ));
+            const QString tilepath = MarbleDirs::path( texture->relativeTileFileName(
+                TileId( texture->sourceDir(), 0, column, row )));
             noerr = QFile::exists( tilepath );
         }
     }

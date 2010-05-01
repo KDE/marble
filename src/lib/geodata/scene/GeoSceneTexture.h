@@ -35,15 +35,18 @@
  * @short Texture dataset stored in a layer.
  */
 
+class ServerLayout;
+
 namespace Marble
 {
 class Blending;
 class DownloadPolicy;
+class TileId;
 
 class GeoSceneTexture : public GeoSceneAbstractDataset
 {
  public:
-    enum StorageLayoutMode { Marble, OpenStreetMap, Custom };
+    enum StorageLayout { Marble, Other };
     enum Projection { Equirectangular, Mercator };
 
     explicit GeoSceneTexture( const QString& name );
@@ -55,11 +58,9 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     QString installMap() const;
     void setInstallMap( const QString& installMap );
 
-    StorageLayoutMode storageLayoutMode() const;
-    void setStorageLayoutMode( StorageLayoutMode const );
+    void setStorageLayout( StorageLayout );
 
-    QString customStorageLayout()const;
-    void setCustomStorageLayout( const QString& );
+    void setServerLayout( const ServerLayout * );
 
     int levelZeroColumns() const;
     void setLevelZeroColumns( const int );
@@ -80,8 +81,12 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     // this method is a little more than just a stupid getter,
     // it implements the round robin for the tile servers.
     // on each invocation the next url is returned
-    QUrl downloadUrl();
+    QUrl downloadUrl( const TileId & );
     void addDownloadUrl( const QUrl & );
+
+    QString relativeTileFileName( const TileId & ) const;
+
+    QString themeStr() const;
 
     QList<DownloadPolicy *> downloadPolicies() const;
     void addDownloadPolicy( const DownloadUsage usage, const int maximumConnections );
@@ -94,8 +99,8 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
 
     QString m_sourceDir;
     QString m_installMap;
-    StorageLayoutMode m_storageLayoutMode;
-    QString m_customStorageLayout;
+    StorageLayout m_storageLayoutMode;
+    const ServerLayout *m_serverLayout;
     int m_levelZeroColumns;
     int m_levelZeroRows;
     int m_maximumTileLevel;

@@ -28,7 +28,6 @@
 
 #include "MarbleDebug.h"
 
-#include "GeoSceneTexture.h"
 #include "global.h"
 
 namespace Marble
@@ -72,85 +71,6 @@ int TileLoaderHelper::columnToLevel( int levelZeroColumns, int column )
         return 0;
     }
     return (int)( std::log( (qreal)(column / levelZeroColumns) ) / std::log( (qreal)2.0 ) );
-}
-
-QUrl TileLoaderHelper::downloadUrl( GeoSceneTexture *textureLayer, int zoomLevel, int x,
-                                    int y )
-{
-    QUrl tileUrl;
-    if ( textureLayer ) {
-        tileUrl = textureLayer->downloadUrl();
-	QString path = tileUrl.path();
-        const QString suffix = textureLayer->fileFormat().toLower();
-
-        switch ( textureLayer->storageLayoutMode() ) {
-        case GeoSceneTexture::Marble:
-            path += relativeTileFileName( textureLayer, zoomLevel, x, y );
-            break;
-
-        case GeoSceneTexture::OpenStreetMap:
-            path += QString( "%1/%2/%3.%4" ).arg( zoomLevel ).arg( x ).arg( y ).arg( suffix );
-            break;
-
-        case GeoSceneTexture::Custom:
-            path += textureLayer->customStorageLayout();
-            path.replace( "{zoomLevel}", QString::number( zoomLevel ) );
-            path.replace( "{suffix}", suffix );
-            path.replace( "{x}", QString::number( x ) );
-            path.replace( "{y}", QString::number( y ) );
-            break;
-        }
-        tileUrl.setPath( path );
-    }
-    return tileUrl;
-}
-
-QString TileLoaderHelper::relativeTileFileName( GeoSceneTexture const * const textureLayer,
-                                                int level, int x, int y )
-{
-    QString relFileName;
-    if ( textureLayer ) {
-        const QString suffix = textureLayer->fileFormat().toLower();
-        switch ( textureLayer->storageLayoutMode() ) {
-        case GeoSceneTexture::Marble:
-            relFileName = QString( "%1/%2/%3/%3_%4.%5" )
-                .arg( themeStr( textureLayer ) )
-                .arg( level )
-                .arg( y, tileDigits, 10, QChar('0') )
-                .arg( x, tileDigits, 10, QChar('0') )
-                .arg( suffix );
-            break;
-        case GeoSceneTexture::OpenStreetMap:
-            relFileName = QString( "%1/%2/%3/%4.%5" )
-                .arg( themeStr( textureLayer ) )
-                .arg( level )
-                .arg( x )
-                .arg( y )
-                .arg( suffix );
-            break;
-
-        case GeoSceneTexture::Custom:
-            relFileName = QString( "%1/%2/%3/%4.%5" )
-                .arg( themeStr( textureLayer ) )
-                .arg( level )
-                .arg( x )
-                .arg( y )
-                .arg( suffix );
-            break;
-        }
-    }
-    return relFileName;
-}
-
-QString TileLoaderHelper::themeStr( GeoSceneTexture const * const textureLayer )
-{
-    QString oldThemeStr;
-
-    if ( textureLayer ) {
-         oldThemeStr = "maps/" + textureLayer->sourceDir();
-    }
-
-    return oldThemeStr;
 }
 
 }

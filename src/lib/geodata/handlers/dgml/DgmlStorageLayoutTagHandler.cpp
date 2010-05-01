@@ -27,6 +27,7 @@
 #include "DgmlElementDictionary.h"
 #include "GeoParser.h"
 #include "GeoSceneTexture.h"
+#include "ServerLayout.h"
 
 namespace Marble
 {
@@ -60,29 +61,29 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
         maximumTileLevel = maximumTileLevelStr.toInt();
     }
 
-    // Attribute mode
-    GeoSceneTexture::StorageLayoutMode mode = GeoSceneTexture::Marble;
-    const QString modeStr = parser.attribute(dgmlAttr_mode).trimmed();
-    if ( modeStr == "OpenStreetMap" )
-        mode = GeoSceneTexture::OpenStreetMap;
-    else if ( modeStr == "Custom" )
-        mode = GeoSceneTexture::Custom;
-
-    // custom Layout?
-    QString customLayout;
-    if ( mode == GeoSceneTexture::Custom ) {
-        customLayout = parser.readElementText().trimmed();
-    }
-
     // Checking for parent item
     GeoStackItem parentItem = parser.parentElement();
     if (parentItem.represents(dgmlTag_Texture)) {
-        parentItem.nodeAs<GeoSceneTexture>()->setLevelZeroColumns( levelZeroColumns );
-        parentItem.nodeAs<GeoSceneTexture>()->setLevelZeroRows( levelZeroRows );
-        parentItem.nodeAs<GeoSceneTexture>()->setMaximumTileLevel( maximumTileLevel );
-        parentItem.nodeAs<GeoSceneTexture>()->setStorageLayoutMode( mode );
-	if ( mode == GeoSceneTexture::Custom )
-            parentItem.nodeAs<GeoSceneTexture>()->setCustomStorageLayout( customLayout );
+        GeoSceneTexture *texture = parentItem.nodeAs<GeoSceneTexture>();
+
+        // Attribute mode
+        GeoSceneTexture::StorageLayout storageLayout = GeoSceneTexture::Other;
+        ServerLayout *serverLayout = 0;
+        const QString modeStr = parser.attribute(dgmlAttr_mode).trimmed();
+        if ( modeStr == "OpenStreetMap" )
+            serverLayout = new OsmServerLayout( texture );
+        else if ( modeStr == "Custom" )
+            serverLayout = new CustomServerLayout();
+        else {
+            storageLayout = GeoSceneTexture::Marble;
+            serverLayout = new MarbleServerLayout( texture );
+        }
+
+        texture->setLevelZeroColumns( levelZeroColumns );
+        texture->setLevelZeroRows( levelZeroRows );
+        texture->setMaximumTileLevel( maximumTileLevel );
+        texture->setStorageLayout( storageLayout );
+        texture->setServerLayout( serverLayout );
     }
 
     return 0;

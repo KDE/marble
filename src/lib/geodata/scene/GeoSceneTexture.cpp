@@ -24,6 +24,8 @@
 
 #include "DownloadPolicy.h"
 #include "MarbleDebug.h"
+#include "ServerLayout.h"
+#include "TileId.h"
 
 namespace Marble
 {
@@ -32,8 +34,7 @@ GeoSceneTexture::GeoSceneTexture( const QString& name )
     : GeoSceneAbstractDataset( name ),
       m_sourceDir( "" ),
       m_installMap( "" ),
-      m_storageLayoutMode( Marble ),
-      m_customStorageLayout( "" ),
+      m_serverLayout( new MarbleServerLayout( this ) ),
       m_levelZeroColumns( defaultLevelZeroColumns ),
       m_levelZeroRows( defaultLevelZeroRows ),
       m_maximumTileLevel( -1 ),
@@ -47,6 +48,7 @@ GeoSceneTexture::GeoSceneTexture( const QString& name )
 GeoSceneTexture::~GeoSceneTexture()
 {
     qDeleteAll( m_downloadPolicies );
+    delete m_serverLayout;
 }
 
 QString GeoSceneTexture::sourceDir() const
@@ -69,24 +71,17 @@ void GeoSceneTexture::setInstallMap( const QString& installMap )
     m_installMap = installMap;
 }
 
-GeoSceneTexture::StorageLayoutMode GeoSceneTexture::storageLayoutMode() const
+void GeoSceneTexture::setStorageLayout( const StorageLayout layout )
 {
-    return m_storageLayoutMode;
+    m_storageLayoutMode = layout;
 }
 
-void GeoSceneTexture::setStorageLayoutMode( const StorageLayoutMode mode )
+void GeoSceneTexture::setServerLayout( const ServerLayout *layout )
 {
-    m_storageLayoutMode = mode;
-}
+    if (m_serverLayout != 0)
+        delete m_serverLayout;
 
-QString GeoSceneTexture::customStorageLayout()const
-{
-    return m_customStorageLayout;
-}
-
-void GeoSceneTexture::setCustomStorageLayout( const QString& layout )
-{
-    m_customStorageLayout = layout;
+    m_serverLayout = layout;
 }
 
 int GeoSceneTexture::levelZeroColumns() const
@@ -129,17 +124,19 @@ void GeoSceneTexture::setProjection( const Projection projection )
     m_projection = projection;
 }
 
-QUrl GeoSceneTexture::downloadUrl()
+QUrl GeoSceneTexture::downloadUrl( const TileId &id )
 {
     // default download url
     if ( m_downloadUrls.empty() )
-        return QUrl( "http://download.kde.org/apps/marble/" );
+        return m_serverLayout->downloadUrl( QUrl( "http://download.kde.org/apps/marble/" ), id );
 
     if ( m_nextUrl == m_downloadUrls.constEnd() )
         m_nextUrl = m_downloadUrls.constBegin();
 
-    QUrl url = *m_nextUrl;
+    const QUrl url = m_serverLayout->downloadUrl( *m_nextUrl, id );
+
     ++m_nextUrl;
+
     return url;
 }
 
@@ -148,6 +145,39 @@ void GeoSceneTexture::addDownloadUrl( const QUrl & url )
     m_downloadUrls.append( url );
     // FIXME: this could be done only once
     m_nextUrl = m_downloadUrls.constBegin();
+}
+
+QString GeoSceneTexture::relativeTileFileName( const TileId &id ) const
+{
+    const QString suffix = fileFormat().toLower();
+
+    QString relFileName;
+
+    switch ( m_storageLayoutMode ) {
+    case GeoSceneTexture::Marble:
+        relFileName = QString( "%1/%2/%3/%3_%4.%5" )
+            .arg( themeStr() )
+            .arg( id.zoomLevel() )
+            .arg( id.y(), tileDigits, 10, QChar('0') )
+            .arg( id.x(), tileDigits, 10, QChar('0') )
+            .arg( suffix );
+        break;
+    case GeoSceneTexture::Other:
+        relFileName = QString( "%1/%2/%3/%4.%5" )
+            .arg( themeStr() )
+            .arg( id.zoomLevel() )
+            .arg( id.x() )
+            .arg( id.y() )
+            .arg( suffix );
+        break;
+    }
+
+    return relFileName;
+}
+
+QString GeoSceneTexture::themeStr() const
+{
+    return "maps/" + sourceDir();
 }
 
 QList<DownloadPolicy *> GeoSceneTexture::downloadPolicies() const

@@ -25,13 +25,8 @@
 #ifndef MARBLE_TILELOADERHELPER_H
 #define MARBLE_TILELOADERHELPER_H
 
-#include <QtCore/QString>
-#include <QtCore/QUrl>
-
 namespace Marble
 {
-
-class GeoSceneTexture;
 
 namespace TileLoaderHelper
 {
@@ -78,24 +73,6 @@ namespace TileLoaderHelper
      *               by the code which makes use of it.
      */
     int columnToLevel( int levelZeroColumns, int column );
-
-    /**
-     * @brief Get the url for download of a tile.
-     */
-    QUrl downloadUrl( GeoSceneTexture *textureLayer, int zoomLevel, int x, int y );
-
-    /**
-     * @brief Get the relative file name of a tile.
-     */
-    QString relativeTileFileName( GeoSceneTexture const * const textureLayer, int zoomLevel, int x, int y );
-
-    /**
-     * @brief Get the theme string
-     * @param theme points to the GeoSceneDocument which represents a .dgml file.
-     * @return the old style theme string which used to be the argument for many methods,
-     *         for example "maps/earth/srtm".
-     */
-    QString themeStr( GeoSceneTexture const * const textureLayer );
 }
 
 }

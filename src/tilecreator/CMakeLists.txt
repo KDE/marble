@@ -10,6 +10,7 @@ set( tilecreator_SRCS
             ../lib/DownloadPolicy.cpp
             ../lib/TileCreator.cpp
             ../lib/TileLoaderHelper.cpp
+            ../lib/ServerLayout.cpp
             ../lib/geodata/parser/GeoDocument.cpp
             ../lib/geodata/scene/GeoSceneTexture.cpp
             ../lib/geodata/scene/GeoSceneLayer.cpp
