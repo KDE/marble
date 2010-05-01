@@ -630,7 +630,7 @@ QRegion GeoPainter::regionFromPolyline ( const GeoDataLineString & lineString,
     stroker.setWidth( strokeWidth );
     QPainterPath strokePath = stroker.createStroke( painterPath );
 
-    return QRegion( strokePath.toFillPolygon().toPolygon() );
+    return QRegion( strokePath.toFillPolygon().toPolygon(), Qt::WindingFill );
 }
 
 
