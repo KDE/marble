@@ -262,7 +262,7 @@ void RoutingLayerPrivate::renderSkeleton( GeoPainter *painter )
 bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
 {
     if ( m_pointSelection ) {
-        return true;
+        return e->button() == Qt::LeftButton;
     }
 
     foreach( const SkeletonRegion &region, m_regions ) {
@@ -334,11 +334,15 @@ bool RoutingLayerPrivate::handleMouseButtonRelease( QMouseEvent *e )
     }
 
     if ( m_pointSelection ) {
-        qreal lon( 0.0 ), lat( 0.0 );
-        if ( m_marbleWidget->geoCoordinates( e->pos().x(), e->pos().y(),
-                                             lon, lat, GeoDataCoordinates::Radian ) ) {
-            emit q->pointSelected( GeoDataCoordinates( lon, lat ) );
-            return true;
+        if ( e->button() == Qt::LeftButton ) {
+            qreal lon( 0.0 ), lat( 0.0 );
+            if ( m_marbleWidget->geoCoordinates( e->pos().x(), e->pos().y(),
+                                                 lon, lat, GeoDataCoordinates::Radian ) ) {
+                emit q->pointSelected( GeoDataCoordinates( lon, lat ) );
+                return true;
+            }
+        } else {
+            return false;
         }
     }
 
