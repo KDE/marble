@@ -286,7 +286,11 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
         if ( region.region.contains( e->pos() ) ) {
             if ( e->button() == Qt::LeftButton ) {
                 QModelIndex index = m_proxyModel->mapFromSource( region.index );
-                m_selectionModel->select( index, QItemSelectionModel::ClearAndSelect );
+                QItemSelectionModel::SelectionFlag command = QItemSelectionModel::ClearAndSelect;
+                if ( m_selectionModel->isSelected( index ) ) {
+                    command = QItemSelectionModel::Clear;
+                }
+                m_selectionModel->select( index, command );
                 m_insertStopOver = QPoint();
                 m_dragStopOver = false;
                 return true;
