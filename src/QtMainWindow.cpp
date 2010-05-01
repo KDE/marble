@@ -39,11 +39,13 @@
 
 #include <QtNetwork/QNetworkProxy>
 
-#include <MarbleDirs.h>
-#include "lib/MarbleAboutDialog.h"
-#include "lib/QtMarbleConfigDialog.h"
-#include "lib/SunControlWidget.h"
-#include "lib/MarbleLocale.h"
+#include "MarbleDirs.h"
+#include "MarbleAboutDialog.h"
+#include "QtMarbleConfigDialog.h"
+#include "SunControlWidget.h"
+#include "MarbleLocale.h"
+#include "DownloadRegionDialog.h"
+#include "ViewParams.h"
 #include "AbstractDataPlugin.h"
 #include "AbstractFloatItem.h"
 #include "MarbleMap.h"
@@ -58,7 +60,8 @@ namespace
 
 using namespace Marble;
 
-MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) : QMainWindow(parent), m_sunControlDialog(0)
+MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
+        QMainWindow(parent), m_sunControlDialog(0), m_downloadRegionAction( 0 )
 {
     MarbleGlobal::getInstance()->setProfiles( MarbleGlobal::detectProfiles() );
 
@@ -118,6 +121,11 @@ void MainWindow::createActions()
      m_exportMapAct->setStatusTip(tr("Save a screenshot of the map"));
      connect(m_exportMapAct, SIGNAL(triggered()), this, SLOT(exportMapScreenShot()));
      
+     // Action: Download Region
+     m_downloadRegionAction = new QAction( tr( "Download Region..." ), this );
+     m_downloadRegionAction->setStatusTip( tr( "Download a map region in different zoom levels for offline usage" ) );
+     connect( m_downloadRegionAction, SIGNAL( triggered() ), SLOT( showDownloadRegionDialog() ) );
+
      m_printAct = new QAction( QIcon(":/icons/document-print.png"), tr("&Print..."), this);
      m_printAct->setShortcut(tr("Ctrl+P"));
      m_printAct->setStatusTip(tr("Print a screenshot of the map"));
@@ -216,16 +224,19 @@ void MainWindow::createMenus()
 {
     // Do not create too many menu entries on a MID
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-        menuBar()->addAction(m_workOfflineAct);
-        menuBar()->addAction(m_sideBarAct);
-        menuBar()->addAction(m_fullScreenAct);
-        menuBar()->addAction(m_aboutMarbleAct);
+        menuBar()->addAction( m_workOfflineAct );
+        menuBar()->addAction( m_sideBarAct );
+        /** @todo: Full screen cannot be left on Maemo currently (shortcuts not working) */
+        //menuBar()->addAction( m_fullScreenAct );
+        menuBar()->addAction( m_downloadRegionAction );
+        menuBar()->addAction( m_aboutMarbleAct );
         return;
     }
     
     m_fileMenu = menuBar()->addMenu(tr("&File"));
     m_fileMenu->addAction(m_openAct);
     m_fileMenu->addAction(m_downloadAct);
+    m_fileMenu->addAction( m_downloadRegionAction );
     m_fileMenu->addAction(m_exportMapAct);
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_printAct);
@@ -858,6 +869,29 @@ void MainWindow::updateSettings()
     */
 
     m_controlView->marbleWidget()->updateChangedMap();
+}
+
+void MainWindow::showDownloadRegionDialog()
+{
+    ViewportParams *const viewport = m_controlView->marbleWidget()->map()->viewParams()->viewport();
+    MarbleModel *const model = m_controlView->marbleWidget()->map()->model();
+    QPointer<DownloadRegionDialog> dialog = new DownloadRegionDialog( viewport,
+                                                                      model->textureMapper() );
+    // FIXME: get allowed range from current map theme
+    dialog->setAllowedTileLevelRange( 0, 18 );
+    QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
+    QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
+    mDebug() << "showDownloadRegionDialog mapThemeId:" << mapThemeId << sourceDir;
+
+    if ( dialog->exec() == QDialog::Accepted ) {
+        // FIXME: use lazy evaluation to not generate up to 100k tiles in one go
+        // this can take considerable time even on very fast systems
+        // in contrast generating the TileIds on the fly when they are needed
+        // does not seem to affect download speed.
+        TileCoordsPyramid const pyramid = dialog->region();
+        model->downloadRegion( sourceDir, pyramid );
+    }
+    delete dialog;
 }
 
 #include "QtMainWindow.moc"

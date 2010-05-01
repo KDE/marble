@@ -66,6 +66,7 @@ class MainWindow : public QMainWindow
     void  openFile();
     void  openMapSite();
     void  exportMapScreenShot();
+    void  showDownloadRegionDialog();
     void  printMapScreenShot();
     void  printPixmap( QPrinter * printer, const QPixmap& pixmap );
     void  printPreview();
@@ -117,6 +118,7 @@ class MainWindow : public QMainWindow
     // File Menu
     QAction *m_exportMapAct;
     QAction *m_downloadAct;
+    QAction *m_downloadRegionAction;
     QAction *m_printPreviewAct;
     QAction *m_printAct;
     QAction *m_workOfflineAct;
