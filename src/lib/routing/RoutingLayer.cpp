@@ -71,9 +71,9 @@ public:
 
     QRect m_movingIndexDirtyRect;
 
-    QPoint m_insertStopOver;
+    QPoint m_dropStopOver;
 
-    bool m_dragStopOver;
+    QPoint m_dragStopOver;
 
     bool m_pointSelection;
 
@@ -138,7 +138,7 @@ public:
 
 RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget ) :
         q( parent ), m_proxyModel( 0 ), m_movingIndex( -1 ), m_marbleWidget( widget ), m_targetPixmap( ":/data/bitmaps/routing_pick.png" ),
-        m_viaPixmap( ":/data/bitmaps/routing_via.png" ), m_dragStopOver( false ), m_pointSelection( false ),
+        m_viaPixmap( ":/data/bitmaps/routing_via.png" ), m_pointSelection( false ),
         m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ), m_routeDirty( false ), m_pixmapSize( 22, 22 ),
         m_routeSkeleton( 0 ), m_activeMenuIndex( -1 )
 {
@@ -210,10 +210,10 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     painter->setPen( bluePen );
     painter->setBrush( QBrush( QColor::fromRgb( 136, 138, 133, 200 ) ) ); // gray, oxygen palette
 
-    if ( !m_insertStopOver.isNull() ) {
+    if ( !m_dropStopOver.isNull() ) {
         int dx = 1 + m_pixmapSize.width() / 2;
         int dy = 1 + m_pixmapSize.height() / 2;
-        QPoint center = m_insertStopOver - QPoint( dx, dy );
+        QPoint center = m_dropStopOver - QPoint( dx, dy );
         painter->drawPixmap( center, m_targetPixmap );
     }
 
@@ -269,8 +269,8 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
         if ( region.region.contains( e->pos() ) ) {
             if ( e->button() == Qt::LeftButton ) {
                 m_movingIndex = region.index;
-                m_insertStopOver = QPoint();
-                m_dragStopOver = false;
+                m_dropStopOver = QPoint();
+                m_dragStopOver = QPoint();
                 return true;
             } else if ( e->button() == Qt::RightButton ) {
                 m_removeViaPointAction->setEnabled( true );
@@ -291,8 +291,8 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
                     command = QItemSelectionModel::Clear;
                 }
                 m_selectionModel->select( index, command );
-                m_insertStopOver = QPoint();
-                m_dragStopOver = false;
+                m_dropStopOver = e->pos();
+                m_dragStopOver = e->pos();
                 return true;
             } else if ( e->button() == Qt::RightButton ) {
                 m_removeViaPointAction->setEnabled( false );
@@ -306,8 +306,8 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
     if ( m_routeRegion.contains( e->pos() ) ) {
         if ( e->button() == Qt::LeftButton ) {
             /** @todo: Determine the neighbored via points and insert in order */
-            m_insertStopOver = e->pos();
-            m_dragStopOver = true;
+            m_dropStopOver = e->pos();
+            m_dragStopOver = e->pos();
             return true;
         } else if ( e->button() == Qt::RightButton ) {
             m_removeViaPointAction->setEnabled( false );
@@ -357,9 +357,14 @@ bool RoutingLayerPrivate::handleMouseButtonRelease( QMouseEvent *e )
         return true;
     }
 
-    if ( !m_insertStopOver.isNull() ) {
+    if ( !m_dropStopOver.isNull() && !m_dragStopOver.isNull() ) {
+        QPoint moved = e->pos() - m_dragStopOver;
+        if ( moved.manhattanLength() < 10 ) {
+            return false;
+        }
+
         qreal lon( 0.0 ), lat( 0.0 );
-        if ( m_marbleWidget->geoCoordinates( m_insertStopOver.x(), m_insertStopOver.y(), lon, lat, GeoDataCoordinates::Radian ) ) {
+        if ( m_marbleWidget->geoCoordinates( m_dropStopOver.x(), m_dropStopOver.y(), lon, lat, GeoDataCoordinates::Radian ) ) {
             GeoDataCoordinates position( lon, lat );
             m_routeSkeleton->addVia( position );
             clearStopOver();
@@ -390,16 +395,21 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
             GeoDataCoordinates moved( lon, lat );
             m_routeSkeleton->setPosition( m_movingIndex, moved );
             m_marbleWidget->setCursor( Qt::ArrowCursor );
-        } else if ( m_dragStopOver ) {
-            m_insertStopOver = e->pos();
+        } else if ( !m_dragStopOver.isNull() ) {
+            if ( e->buttons() & Qt::LeftButton ) {
+                m_dropStopOver = e->pos();
+            } else {
+                m_dragStopOver = QPoint();
+                m_dropStopOver = QPoint();
+            }
             m_marbleWidget->setCursor( Qt::ArrowCursor );
         } else if ( isInfoPoint( e->pos() ) ) {
             clearStopOver();
             m_marbleWidget->setCursor( Qt::ArrowCursor );
         } else if ( m_routeRegion.contains( e->pos() ) ) {
-            m_insertStopOver = e->pos();
+            m_dropStopOver = e->pos();
             m_marbleWidget->setCursor( Qt::ArrowCursor );
-        } else if ( !m_insertStopOver.isNull() ) {
+        } else if ( !m_dropStopOver.isNull() ) {
             clearStopOver();
         } else {
             return false;
@@ -453,8 +463,8 @@ void RoutingLayerPrivate::paintStopOver( QRect dirty )
 
 void RoutingLayerPrivate::clearStopOver()
 {
-    m_insertStopOver = QPoint();
-    m_dragStopOver = false;
+    m_dropStopOver = QPoint();
+    m_dragStopOver = QPoint();
     m_marbleWidget->repaint( m_movingIndexDirtyRect );
 }
 
