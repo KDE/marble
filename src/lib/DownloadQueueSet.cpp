@@ -75,18 +75,18 @@ bool DownloadQueueSet::canAcceptJob( const QUrl& sourceUrl,
 
 void DownloadQueueSet::addJob( HttpJob * const job )
 {
-    m_jobQueue.push( job );
-    mDebug() << "addJob: new job queue size:" << m_jobQueue.count();
+    m_jobs.push( job );
+    mDebug() << "addJob: new job queue size:" << m_jobs.count();
     emit jobAdded();
     activateJobs();
 }
 
 void DownloadQueueSet::activateJobs()
 {
-    while ( !m_jobQueue.isEmpty()
+    while ( !m_jobs.isEmpty()
             && m_activeJobs.count() < m_downloadPolicy.maximumConnections() )
     {
-        HttpJob * const job = m_jobQueue.pop();
+        HttpJob * const job = m_jobs.pop();
         activateJob( job );
     }
 }
@@ -195,7 +195,7 @@ bool DownloadQueueSet::jobIsActive( QString const & destinationFileName ) const
 
 inline bool DownloadQueueSet::jobIsQueued( QString const & destinationFileName ) const
 {
-    return m_jobQueue.contains( destinationFileName );
+    return m_jobs.contains( destinationFileName );
 }
 
 bool DownloadQueueSet::jobIsWaitingForRetry( QString const & destinationFileName ) const

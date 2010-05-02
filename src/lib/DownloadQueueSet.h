@@ -127,7 +127,7 @@ class DownloadQueueSet: public QObject
         QStack<HttpJob*> m_jobs;
         QSet<QString> m_jobsContent;
     };
-    JobStack m_jobQueue;
+    JobStack m_jobs;
 
     /// Contains the jobs which are currently being downloaded.
     QList<HttpJob*> m_activeJobs;
