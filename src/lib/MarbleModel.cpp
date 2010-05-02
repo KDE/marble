@@ -928,6 +928,8 @@ void MarbleModel::downloadRegion( QString const & mapThemeId,
                                   TileCoordsPyramid const & pyramid ) const
 {
     Q_ASSERT( d->m_tileLoader );
+    QTime t;
+    t.start();
     // When downloading a region (the author of these lines thinks) most users probably expect
     // the download to begin with the low resolution tiles and then procede level-wise to
     // higher resolution tiles. In order to achieve this, we start requesting downloads of
@@ -944,6 +946,8 @@ void MarbleModel::downloadRegion( QString const & mapThemeId,
                 d->m_tileLoader->reloadTile( tileId, DownloadBulk );
             }
     }
+    int const elapsedMs = t.elapsed();
+    mDebug() << "MarbleModel::downloadRegion:" << pyramid.tilesCount() << "tiles, " << elapsedMs << "ms";
 }
 
 void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
