@@ -74,8 +74,8 @@ class DownloadQueueSet: public QObject
     Q_OBJECT
 
  public:
-    explicit DownloadQueueSet( QObject * parent = 0 );
-    explicit DownloadQueueSet( const DownloadPolicy& policy, QObject * parent = 0 );
+    explicit DownloadQueueSet( QObject * const parent = 0 );
+    explicit DownloadQueueSet( const DownloadPolicy& policy, QObject * const parent = 0 );
     ~DownloadQueueSet();
 
     DownloadPolicy downloadPolicy() const;
