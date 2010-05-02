@@ -221,14 +221,19 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         painter->drawPixmap( center, m_targetPixmap );
 
         if ( !m_dragStopOver.isNull() && m_dragStopOverRightIndex > 0 && m_dragStopOverRightIndex < m_routeSkeleton->size() ) {
-            qreal lon( 0.0 ), lat( 0.0 );
-            if ( m_marbleWidget->geoCoordinates( m_dropStopOver.x(), m_dropStopOver.y(),
-                                                 lon, lat, GeoDataCoordinates::Radian ) ) {
-                GeoDataCoordinates drag( lon, lat );
-                bluePen.setStyle( Qt::DotLine );
-                painter->setPen( bluePen );
-                painter->drawLine( drag, m_routeSkeleton->at( m_dragStopOverRightIndex-1 ) );
-                painter->drawLine( drag, m_routeSkeleton->at( m_dragStopOverRightIndex ) );
+            QPoint moved = m_dropStopOver - m_dragStopOver;
+            if ( moved.manhattanLength() > 10 ) {
+                qreal lon( 0.0 ), lat( 0.0 );
+                if ( m_marbleWidget->geoCoordinates( m_dropStopOver.x(), m_dropStopOver.y(),
+                                                     lon, lat, GeoDataCoordinates::Radian ) ) {
+                    GeoDataCoordinates drag( lon, lat );
+                    bluePen.setStyle( Qt::DotLine );
+                    painter->setPen( bluePen );
+                    painter->drawLine( drag, m_routeSkeleton->at( m_dragStopOverRightIndex-1 ) );
+                    painter->drawLine( drag, m_routeSkeleton->at( m_dragStopOverRightIndex ) );
+                    bluePen.setStyle( Qt::SolidLine );
+                    painter->setPen( bluePen );
+                }
             }
         }
     }
@@ -322,6 +327,8 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
                 m_selectionModel->select( index, command );
                 m_dropStopOver = e->pos();
                 storeDragPosition( e->pos() );
+                // annotation and old annotation are dirty, large region
+                m_marbleWidget->repaint();
                 return true;
             } else if ( e->button() == Qt::RightButton ) {
                 m_removeViaPointAction->setEnabled( false );
