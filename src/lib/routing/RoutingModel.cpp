@@ -12,10 +12,12 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
+#include "MarbleMath.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
+#include "RouteSkeleton.h"
 
 #include <QtCore/QBuffer>
 #include <QtCore/QRegExp>
@@ -285,6 +287,67 @@ void RoutingModel::clear()
 {
     d->m_route.clear();
     reset();
+}
+
+int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteSkeleton const *const route ) const
+{
+    Q_ASSERT( route && "Must not pass a null route ");
+
+    // Quick result for trivial cases
+    if ( route->size() < 3 ) {
+        return route->size() - 1;
+    }
+
+    // Generate an ordered list of all waypoints
+    QVector<GeoDataCoordinates> waypoints;
+    QMap<int,int> mapping;
+    foreach( const RouteElement& element, d->m_route ) {
+        if ( element.type == WayPoint ) {
+            waypoints << element.position;
+        }
+    }
+
+    // Force first mapping point to match the route start
+    mapping[0] = 0;
+
+    // Calculate the mapping between waypoints and via points
+    // Need two for loops to avoid getting stuck in local minima
+    for ( int j=1; j<route->size()-1; ++j ) {
+        qreal minDistance = -1.0;
+        for ( int i=mapping[j-1]; i<waypoints.size(); ++i ) {
+            qreal distance = distanceSphere( waypoints[i], route->at(j) );
+            if (minDistance < 0.0 || distance < minDistance ) {
+                mapping[j] = i;
+                minDistance = distance;
+            }
+        }
+    }
+
+    // Determine waypoint with minimum distance to the provided position
+    qreal minWaypointDistance = -1.0;
+    int waypoint=0;
+    for ( int i=0; i<waypoints.size(); ++i ) {
+        qreal waypointDistance = distanceSphere( waypoints[i], position );
+        if ( minWaypointDistance < 0.0 || waypointDistance < minWaypointDistance ) {
+            minWaypointDistance = waypointDistance;
+            waypoint = i;
+        }
+    }
+
+    // Force last mapping point to match the route destination
+    mapping[route->size()-1] = waypoints.size()-1;
+
+    // Determine neighbor based on the mapping
+    QMap<int, int>::const_iterator iter = mapping.constBegin();
+    for ( ; iter != mapping.constEnd(); ++iter ) {
+        if ( iter.value() > waypoint ) {
+            int index = iter.key();
+            Q_ASSERT( index >= 0 && index <= route->size() );
+            return index;
+        }
+    }
+
+    return route->size()-1;
 }
 
 } // namespace Marble

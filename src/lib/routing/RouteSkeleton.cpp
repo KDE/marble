@@ -193,6 +193,7 @@ void RouteSkeleton::clear()
 void RouteSkeleton::insert( int index, const GeoDataCoordinates &coordinates )
 {
     d->m_route.insert( index, coordinates );
+    emit positionAdded( index );
 }
 
 void RouteSkeleton::append( const GeoDataCoordinates &coordinates )

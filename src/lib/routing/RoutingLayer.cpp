@@ -69,11 +69,13 @@ public:
 
     QPixmap m_viaPixmap;
 
-    QRect m_movingIndexDirtyRect;
+    QRect m_dirtyRect;
 
     QPoint m_dropStopOver;
 
     QPoint m_dragStopOver;
+
+    int m_dragStopOverRightIndex;
 
     bool m_pointSelection;
 
@@ -100,6 +102,8 @@ public:
 
     /** Show a context menu at the specified position */
     void showContextMenu( const QPoint &position );
+
+    void storeDragPosition( const QPoint &position );
 
     // The following methods are mostly only called at one place in the code, but often
     // Inlined to avoid the function call overhead. Having functions here is just to
@@ -138,7 +142,7 @@ public:
 
 RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget ) :
         q( parent ), m_proxyModel( 0 ), m_movingIndex( -1 ), m_marbleWidget( widget ), m_targetPixmap( ":/data/bitmaps/routing_pick.png" ),
-        m_viaPixmap( ":/data/bitmaps/routing_via.png" ), m_pointSelection( false ),
+        m_viaPixmap( ":/data/bitmaps/routing_via.png" ), m_dragStopOverRightIndex( -1 ), m_pointSelection( false ),
         m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ), m_routeDirty( false ), m_pixmapSize( 22, 22 ),
         m_routeSkeleton( 0 ), m_activeMenuIndex( -1 )
 {
@@ -215,6 +219,18 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         int dy = 1 + m_pixmapSize.height() / 2;
         QPoint center = m_dropStopOver - QPoint( dx, dy );
         painter->drawPixmap( center, m_targetPixmap );
+
+        if ( !m_dragStopOver.isNull() && m_dragStopOverRightIndex > 0 && m_dragStopOverRightIndex < m_routeSkeleton->size() ) {
+            qreal lon( 0.0 ), lat( 0.0 );
+            if ( m_marbleWidget->geoCoordinates( m_dropStopOver.x(), m_dropStopOver.y(),
+                                                 lon, lat, GeoDataCoordinates::Radian ) ) {
+                GeoDataCoordinates drag( lon, lat );
+                bluePen.setStyle( Qt::DotLine );
+                painter->setPen( bluePen );
+                painter->drawLine( drag, m_routeSkeleton->at( m_dragStopOverRightIndex-1 ) );
+                painter->drawLine( drag, m_routeSkeleton->at( m_dragStopOverRightIndex ) );
+            }
+        }
     }
 
     for ( int i = 0; i < m_routingModel->rowCount(); ++i ) {
@@ -259,6 +275,19 @@ void RoutingLayerPrivate::renderSkeleton( GeoPainter *painter )
     }
 }
 
+void RoutingLayerPrivate::storeDragPosition( const QPoint &pos )
+{
+    m_dragStopOver = pos;
+    m_dragStopOverRightIndex = -1;
+
+    qreal lon( 0.0 ), lat( 0.0 );
+    if ( m_routeSkeleton && !pos.isNull()
+        && m_marbleWidget->geoCoordinates( pos.x(), pos.y(), lon, lat, GeoDataCoordinates::Radian ) ) {
+        GeoDataCoordinates waypoint( lon, lat );
+        m_dragStopOverRightIndex = m_routingModel->rightNeighbor( waypoint, m_routeSkeleton );
+    }
+}
+
 bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
 {
     if ( m_pointSelection ) {
@@ -292,7 +321,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
                 }
                 m_selectionModel->select( index, command );
                 m_dropStopOver = e->pos();
-                m_dragStopOver = e->pos();
+                storeDragPosition( e->pos() );
                 return true;
             } else if ( e->button() == Qt::RightButton ) {
                 m_removeViaPointAction->setEnabled( false );
@@ -307,7 +336,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
         if ( e->button() == Qt::LeftButton ) {
             /** @todo: Determine the neighbored via points and insert in order */
             m_dropStopOver = e->pos();
-            m_dragStopOver = e->pos();
+            storeDragPosition( e->pos() );
             return true;
         } else if ( e->button() == Qt::RightButton ) {
             m_removeViaPointAction->setEnabled( false );
@@ -364,9 +393,10 @@ bool RoutingLayerPrivate::handleMouseButtonRelease( QMouseEvent *e )
         }
 
         qreal lon( 0.0 ), lat( 0.0 );
-        if ( m_marbleWidget->geoCoordinates( m_dropStopOver.x(), m_dropStopOver.y(), lon, lat, GeoDataCoordinates::Radian ) ) {
+        if ( m_dragStopOverRightIndex > 0 && m_dragStopOverRightIndex < m_routeSkeleton->size()
+                && m_marbleWidget->geoCoordinates( m_dropStopOver.x(), m_dropStopOver.y(), lon, lat, GeoDataCoordinates::Radian ) ) {
             GeoDataCoordinates position( lon, lat );
-            m_routeSkeleton->addVia( position );
+            m_routeSkeleton->insert( m_dragStopOverRightIndex, position );
             clearStopOver();
             emit q->routeDirty();
             return true;
@@ -397,7 +427,12 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
             m_marbleWidget->setCursor( Qt::ArrowCursor );
         } else if ( !m_dragStopOver.isNull() ) {
             if ( e->buttons() & Qt::LeftButton ) {
+                // Repaint only that region of the map that is affected by the change
+                QRect dirty = m_routeRegion.boundingRect();
+                dirty |= QRect( m_dropStopOver, QSize( 22, 22 ) );
+                dirty |= QRect( e->pos(), QSize( 22, 22 ) );
                 m_dropStopOver = e->pos();
+                m_marbleWidget->repaint( dirty );
             } else {
                 m_dragStopOver = QPoint();
                 m_dropStopOver = QPoint();
@@ -453,19 +488,19 @@ bool RoutingLayerPrivate::isInfoPoint( const QPoint &point )
 
 void RoutingLayerPrivate::paintStopOver( QRect dirty )
 {
-    m_marbleWidget->repaint( m_movingIndexDirtyRect );
+    m_marbleWidget->repaint( m_dirtyRect );
     int dx = 1 + m_pixmapSize.width() / 2;
     int dy = 1 + m_pixmapSize.height() / 2;
     dirty.adjust( -dx, -dy, -dx, -dy );
     m_marbleWidget->repaint( dirty );
-    m_movingIndexDirtyRect = dirty;
+    m_dirtyRect = dirty;
 }
 
 void RoutingLayerPrivate::clearStopOver()
 {
     m_dropStopOver = QPoint();
     m_dragStopOver = QPoint();
-    m_marbleWidget->repaint( m_movingIndexDirtyRect );
+    m_marbleWidget->repaint( m_dirtyRect );
 }
 
 RoutingLayer::RoutingLayer( MarbleWidget *widget, QWidget *parent ) :
