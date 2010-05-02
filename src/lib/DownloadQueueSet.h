@@ -115,7 +115,19 @@ class DownloadQueueSet: public QObject
     /** This is the first stage a job enters, from this queue it will get
      *  into the activatedJobs container.
      */
-    QStack<HttpJob*> m_jobQueue;
+    class JobStack
+    {
+    public:
+        bool contains( const QString& destinationFileName ) const;
+        int count() const;
+        bool isEmpty() const;
+        HttpJob * pop();
+        void push( HttpJob * const );
+    private:
+        QStack<HttpJob*> m_jobs;
+        QSet<QString> m_jobsContent;
+    };
+    JobStack m_jobQueue;
 
     /// Contains the jobs which are currently being downloaded.
     QList<HttpJob*> m_activeJobs;

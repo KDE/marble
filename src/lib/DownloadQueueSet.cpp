@@ -193,16 +193,9 @@ bool DownloadQueueSet::jobIsActive( QString const & destinationFileName ) const
     return false;
 }
 
-bool DownloadQueueSet::jobIsQueued( QString const & destinationFileName ) const
+inline bool DownloadQueueSet::jobIsQueued( QString const & destinationFileName ) const
 {
-    QStack<HttpJob*>::const_iterator pos = m_jobQueue.constBegin();
-    QStack<HttpJob*>::const_iterator const end = m_jobQueue.constEnd();
-    for (; pos != end; ++pos) {
-        if ( (*pos)->destinationFileName() == destinationFileName ) {
-            return true;
-        }
-    }
-    return false;
+    return m_jobQueue.contains( destinationFileName );
 }
 
 bool DownloadQueueSet::jobIsWaitingForRetry( QString const & destinationFileName ) const
@@ -223,6 +216,37 @@ bool DownloadQueueSet::jobIsBlackListed( const QUrl& sourceUrl ) const
         m_jobBlackList.constFind( sourceUrl.toString() );
     return pos != m_jobBlackList.constEnd();
 }
+
+
+inline bool DownloadQueueSet::JobStack::contains( const QString& destinationFileName ) const
+{
+    return m_jobsContent.contains( destinationFileName );
+}
+
+inline int DownloadQueueSet::JobStack::count() const
+{
+    return m_jobs.count();
+}
+
+inline bool DownloadQueueSet::JobStack::isEmpty() const
+{
+    return m_jobs.isEmpty();
+}
+
+inline HttpJob * DownloadQueueSet::JobStack::pop()
+{
+    HttpJob * const job = m_jobs.pop();
+    bool const removed = m_jobsContent.remove( job->destinationFileName() );
+    Q_ASSERT( removed );
+    return job;
+}
+
+inline void DownloadQueueSet::JobStack::push( HttpJob * const job )
+{
+    m_jobs.push( job );
+    m_jobsContent.insert( job->destinationFileName() );
+}
+
 
 }
 
