@@ -101,7 +101,7 @@ void DownloadQueueSet::retryJobs()
     }
 }
 
-void DownloadQueueSet::finishJob( HttpJob * job, QByteArray data )
+void DownloadQueueSet::finishJob( HttpJob * job, const QByteArray& data )
 {
     mDebug() << "finishJob: " << job->sourceUrl() << job->destinationFileName();
 
@@ -112,7 +112,7 @@ void DownloadQueueSet::finishJob( HttpJob * job, QByteArray data )
     activateJobs();
 }
 
-void DownloadQueueSet::redirectJob( HttpJob * job, QUrl newSourceUrl )
+void DownloadQueueSet::redirectJob( HttpJob * job, const QUrl& newSourceUrl )
 {
     mDebug() << "jobRedirected:" << job->sourceUrl() << " -> " << newSourceUrl;
 
