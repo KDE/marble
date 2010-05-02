@@ -426,17 +426,17 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
             m_routeSkeleton->setPosition( m_movingIndex, moved );
             m_marbleWidget->setCursor( Qt::ArrowCursor );
         } else if ( !m_dragStopOver.isNull() ) {
+            // Repaint only that region of the map that is affected by the change
+            QRect dirty = m_routeRegion.boundingRect();
+            dirty |= QRect( m_dropStopOver, QSize( 22, 22 ) );
+            dirty |= QRect( e->pos(), QSize( 22, 22 ) );
             if ( e->buttons() & Qt::LeftButton ) {
-                // Repaint only that region of the map that is affected by the change
-                QRect dirty = m_routeRegion.boundingRect();
-                dirty |= QRect( m_dropStopOver, QSize( 22, 22 ) );
-                dirty |= QRect( e->pos(), QSize( 22, 22 ) );
                 m_dropStopOver = e->pos();
-                m_marbleWidget->repaint( dirty );
             } else {
                 m_dragStopOver = QPoint();
                 m_dropStopOver = QPoint();
             }
+            m_marbleWidget->repaint( dirty );
             m_marbleWidget->setCursor( Qt::ArrowCursor );
         } else if ( isInfoPoint( e->pos() ) ) {
             clearStopOver();
