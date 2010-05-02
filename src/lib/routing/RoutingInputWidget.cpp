@@ -91,7 +91,7 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteSkeleton *skeleton, i
     m_removeButton->setMaximumWidth( 12 );
 
     m_pickButton = new QPushButton( parent );
-    m_pickButton->setIcon( QIcon( ":/data/bitmaps/routing_select.png" ) );
+    m_pickButton->setIcon( QIcon( m_route->pixmap( m_index ) ) );
     m_pickButton->setToolTip( "Choose position from the map" );
     m_pickButton->setCheckable( true );
     m_pickButton->setFlat( true );
@@ -240,12 +240,6 @@ void RoutingInputWidget::requestRemoval()
     emit removalRequest( this );
 }
 
-void RoutingInputWidget::setSimple( bool simple )
-{
-    d->m_removeButton->setVisible( !simple );
-    //d->m_pickButton->setVisible( !simple );
-}
-
 bool RoutingInputWidget::hasInput() const
 {
     return !d->m_lineEdit->text().isEmpty();
@@ -267,6 +261,7 @@ void RoutingInputWidget::finishSearch()
 {
     d->m_progressTimer.stop();
     d->m_stateButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
+    d->m_pickButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
     d->m_pickButton->setVisible( false );
     d->m_stateButton->setVisible( true );
     emit searchFinished( this );
@@ -289,6 +284,7 @@ void RoutingInputWidget::setIndex( int index )
     d->m_index = index;
     d->m_stateButton->setVisible( hasTargetPosition() );
     d->m_stateButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
+    d->m_pickButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
 }
 
 void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates &position )
@@ -297,6 +293,7 @@ void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates &po
         d->m_lineEdit->setText( position.toString() );
         d->m_stateButton->setVisible( hasTargetPosition() );
         d->m_stateButton->setIcon( d->m_route->pixmap( d->m_index ) );
+        d->m_pickButton->setIcon( d->m_route->pixmap( d->m_index ) );
         emit targetValidityChanged( hasTargetPosition() );
         d->adjustText();
     }

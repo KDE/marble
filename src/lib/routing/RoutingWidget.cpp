@@ -88,9 +88,7 @@ RoutingWidgetPrivate::RoutingWidgetPrivate() :
 
 void RoutingWidgetPrivate::adjustInputWidgets()
 {
-    bool simple = m_inputWidgets.size() <= 2;
     for ( int i = 0; i < m_inputWidgets.size(); ++i ) {
-        m_inputWidgets[i]->setSimple( simple );
         m_inputWidgets[i]->setIndex( i );
     }
 

@@ -61,11 +61,6 @@ public:
     MarblePlacemarkModel *searchResultModel();
 
     /**
-      * @brief Hide all buttons iff simple is true
-      */
-    void setSimple( bool simple );
-
-    /**
       * Returns false iff the input text is empty
       */
     bool hasInput() const;
