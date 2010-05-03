@@ -32,8 +32,9 @@ namespace Marble
 
 GeoSceneTexture::GeoSceneTexture( const QString& name )
     : GeoSceneAbstractDataset( name ),
-      m_sourceDir( "" ),
-      m_installMap( "" ),
+      m_sourceDir(),
+      m_installMap(),
+      m_storageLayoutMode(Marble),
       m_serverLayout( new MarbleServerLayout( this ) ),
       m_levelZeroColumns( defaultLevelZeroColumns ),
       m_levelZeroRows( defaultLevelZeroRows ),
@@ -154,6 +155,8 @@ QString GeoSceneTexture::relativeTileFileName( const TileId &id ) const
     QString relFileName;
 
     switch ( m_storageLayoutMode ) {
+    default:
+        mDebug() << Q_FUNC_INFO << "Invalid storage layout mode! Falling back to default.";
     case GeoSceneTexture::Marble:
         relFileName = QString( "%1/%2/%3/%3_%4.%5" )
             .arg( themeStr() )
