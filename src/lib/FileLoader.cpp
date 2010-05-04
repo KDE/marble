@@ -54,15 +54,15 @@ QString FileLoader::path() const
 
 void FileLoader::run()
 {
-    if( m_contents.isEmpty() ) {
+    if ( m_contents.isEmpty() ) {
         QString defaultcachename;
         QString defaultsrcname;
 
         mDebug() << "starting parser for" << m_filepath;
 
-        QFileInfo fileinfo(m_filepath);
+        QFileInfo fileinfo( m_filepath );
         QString path = fileinfo.path();
-        if (path == ".") path.clear();
+        if ( path == "." ) path.clear();
         QString name = fileinfo.completeBaseName();
         QString suffix = fileinfo.suffix();
 
@@ -75,7 +75,7 @@ void FileLoader::run()
             if ( m_filepath.contains( '/' ) ) {
                 // _relative_ path: "maps/mars/viking/patrick.kml"
                 // defaultcachename = MarbleDirs::path( path + '/' + name + ".cache" );
-                defaultsrcname   = MarbleDirs::path( path + '/' + name + '.' + suffix);
+                defaultsrcname   = MarbleDirs::path( path + '/' + name + '.' + suffix );
             }
             else {
                 // _standard_ shared placemarks: "placemarks/patrick.kml"
@@ -91,8 +91,7 @@ void FileLoader::run()
             QDateTime sourceLastModified;
             QDateTime cacheLastModified;
 
-            if ( QFile::exists( defaultsrcname ) )
-            {
+            if ( QFile::exists( defaultsrcname ) ) {
                 sourceLastModified = QFileInfo( defaultsrcname ).lastModified();
                 cacheLastModified  = QFileInfo( defaultcachename ).lastModified();
 
@@ -102,31 +101,25 @@ void FileLoader::run()
 
             bool loadok = false;
 
-            if ( !cacheoutdated )
-            {
+            if ( !cacheoutdated ) {
                 loadok = loadFile( defaultcachename );
                 if ( loadok )
                     emit newGeoDataDocumentAdded( m_document );
             }
             mDebug() << "Loading ended" << loadok;
-            if ( loadok )
-            {
+            if ( loadok ) {
                 mDebug() << "placemarksLoaded";
             }
         }
-        else
-        {
-            if ( QFile::exists( defaultsrcname ) )
-            {
+        else {
+            if ( QFile::exists( defaultsrcname ) ) {
                 // Read the KML file.
                 importKml( defaultsrcname );
-                if ( ! defaultcachename.isEmpty() )
-                {
+                if ( !defaultcachename.isEmpty() ) {
                     saveFile( defaultcachename );
                 }
             }
-            else
-            {
+            else {
                 mDebug() << "No Default Placemark Source File for " << defaultsrcname;
             }
         }
@@ -290,8 +283,7 @@ void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *contai
     const QVector<GeoDataPlacemark> placemarks = container->placemarks();
     QVector<GeoDataPlacemark>::const_iterator it = placemarks.constBegin();
     QVector<GeoDataPlacemark>::const_iterator const end = placemarks.constEnd();
-    for (; it != end; ++it )
-    {
+    for (; it != end; ++it ) {
         out << it->name();
         it->coordinate( lon, lat, alt );
 
@@ -307,10 +299,8 @@ void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *contai
     const QVector<GeoDataFolder> folders = container->folders();
     QVector<GeoDataFolder>::const_iterator cont = folders.constBegin();
     QVector<GeoDataFolder>::const_iterator endcont = folders.constEnd();
-    for (; cont != endcont; ++cont )
-    {
-        if (GeoDataFolderId == cont->featureId() )
-        {
+    for (; cont != endcont; ++cont ) {
+        if (GeoDataFolderId == cont->featureId() ) {
             const GeoDataContainer *subcontainer = & (*cont);
             savePlacemarks(out, subcontainer);
         }

@@ -30,16 +30,16 @@ namespace Marble
 {
 class FileManagerPrivate
 {
-    public:
-        FileManagerPrivate( )
+public:
+    FileManagerPrivate( )
         : m_datafacade( 0 )
-        {
-        }
+    {
+    }
 
-        MarbleDataFacade* m_datafacade;
-        QList<FileLoader*> m_loaderList;
-        QStringList m_pathList;
-        QList < AbstractFileViewItem* > m_fileItemList;
+    MarbleDataFacade* m_datafacade;
+    QList<FileLoader*> m_loaderList;
+    QStringList m_pathList;
+    QList < AbstractFileViewItem* > m_fileItemList;
 };
 }
 
@@ -52,14 +52,13 @@ FileManager::FileManager( QObject *parent )
 
 FileManager::~FileManager()
 {
-    foreach( FileLoader *loader, d->m_loaderList ) {
+    foreach ( FileLoader *loader, d->m_loaderList ) {
         if ( loader ) {
             loader->wait();
         }
     }
 
-    foreach( AbstractFileViewItem *file, d->m_fileItemList)
-    {
+    foreach ( AbstractFileViewItem *file, d->m_fileItemList ) {
         delete file;
     }
 
@@ -69,7 +68,7 @@ FileManager::~FileManager()
 void FileManager::setDataFacade( MarbleDataFacade *facade )
 {
     d->m_datafacade = facade;
-    d->m_datafacade->fileViewModel()->setFileManager(this);
+    d->m_datafacade->fileViewModel()->setFileManager( this );
 }
 
 MarbleDataFacade *FileManager::dataFacade()
@@ -80,7 +79,7 @@ MarbleDataFacade *FileManager::dataFacade()
 QStringList FileManager::containers() const
 {
     QStringList retList;
-    for( int line = 0; line < d->m_fileItemList.count(); ++line ) {
+    for ( int line = 0; line < d->m_fileItemList.count(); ++line ) {
         retList << d->m_fileItemList.at( line )->name();
     }
     return retList + d->m_pathList;
@@ -88,14 +87,14 @@ QStringList FileManager::containers() const
 
 QString FileManager::toRegularName( QString name )
 {
-    QFileInfo fileinfo(name);
+    QFileInfo fileinfo( name );
     return fileinfo.completeBaseName();
 }
 
 void FileManager::addFile( const QString& filepath )
 {
     QString regularName = toRegularName( filepath );
-    if( ! containers().contains( regularName ) ) {
+    if ( !containers().contains( regularName ) ) {
         mDebug() << "adding container:" << regularName;
         FileLoader* loader = new FileLoader( this, filepath );
         appendLoader( loader );
@@ -111,11 +110,11 @@ void FileManager::addData( const QString &name, const QString &data )
 
 void FileManager::appendLoader( FileLoader *loader )
 {
-    connect (   loader, SIGNAL( loaderFinished( FileLoader* ) ),
-                this, SLOT( cleanupLoader( FileLoader* ) ) );
+    connect( loader, SIGNAL( loaderFinished( FileLoader* ) ),
+             this, SLOT( cleanupLoader( FileLoader* ) ) );
 
-    connect (   loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ),
-                this, SLOT( addGeoDataDocument( GeoDataDocument* ) ) );
+    connect( loader, SIGNAL( newGeoDataDocumentAdded( GeoDataDocument* ) ),
+             this, SLOT( addGeoDataDocument( GeoDataDocument* ) ) );
 
     d->m_loaderList.append( loader );
     loader->start();
@@ -123,10 +122,9 @@ void FileManager::appendLoader( FileLoader *loader )
 
 void FileManager::removeFile( const QString& key )
 {
-    for( int i = 0; i < d->m_fileItemList.size(); ++i )
-    {
-        if( toRegularName( key ) == toRegularName( d->m_fileItemList.at(i)->name() ) ) {
-            closeFile(i);
+    for ( int i = 0; i < d->m_fileItemList.size(); ++i ) {
+        if ( toRegularName( key ) == toRegularName( d->m_fileItemList.at(i)->name() ) ) {
+            closeFile( i );
             break;
         }
     }
@@ -136,13 +134,12 @@ void FileManager::addFile ( AbstractFileViewItem * item )
 {
     mDebug() << "FileManager::addFile";
     d->m_fileItemList.append( item );
-    emit fileAdded(d->m_fileItemList.indexOf( item ) );
+    emit fileAdded( d->m_fileItemList.indexOf( item ) );
 }
 
 void FileManager::saveFile( int index )
 {
-    if (index < d->m_fileItemList.size() )
-    {
+    if ( index < d->m_fileItemList.size() ) {
         d->m_fileItemList.at( index )->saveFile();
     }
 }
@@ -150,18 +147,14 @@ void FileManager::saveFile( int index )
 void FileManager::closeFile( int index )
 {
     mDebug() << "FileManager::closeFile";
-    if (index < d->m_fileItemList.size() )
-    {
+    if ( index < d->m_fileItemList.size() ) {
         emit fileRemoved( index );
         KmlFileViewItem *file =
-                static_cast<KmlFileViewItem*>(d->m_fileItemList.at(index));
-        if (file)
-        {
-            MarbleGeometryModel *geometryModel =
-                    d->m_datafacade->geometryModel();
-            if (geometryModel->geoDataRoot() == file->document())
-            {
-                geometryModel->setGeoDataRoot(0);
+                static_cast<KmlFileViewItem*>( d->m_fileItemList.at( index ));
+        if ( file ) {
+            MarbleGeometryModel *geometryModel = d->m_datafacade->geometryModel();
+            if ( geometryModel->geoDataRoot() == file->document() ) {
+                geometryModel->setGeoDataRoot( 0 );
             }
         }
         delete d->m_fileItemList.at( index );
@@ -176,8 +169,7 @@ int FileManager::size() const
 
 AbstractFileViewItem * FileManager::at( int index )
 {
-    if (index < d->m_fileItemList.size() )
-    {
+    if ( index < d->m_fileItemList.size() ) {
         return d->m_fileItemList.at( index );
     }
     return 0;
@@ -200,7 +192,7 @@ void FileManager::addGeoDataDocument( GeoDataDocument* document )
     }
 
     // do not set this file if it only contains points
-    if( doc->isVisible() && d->m_datafacade->geometryModel() )
+    if ( doc->isVisible() && d->m_datafacade->geometryModel() )
         d->m_datafacade->geometryModel()->setGeoDataRoot( doc );
 }
 
@@ -208,8 +200,8 @@ void FileManager::cleanupLoader( FileLoader* loader )
 {
     d->m_loaderList.removeAll( loader );
     if ( loader->isFinished() ) {
-         d->m_pathList.removeAll( loader->path() );
-         delete loader;
+        d->m_pathList.removeAll( loader->path() );
+        delete loader;
     }
 }
 
