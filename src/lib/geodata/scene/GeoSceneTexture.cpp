@@ -79,9 +79,7 @@ void GeoSceneTexture::setStorageLayout( const StorageLayout layout )
 
 void GeoSceneTexture::setServerLayout( const ServerLayout *layout )
 {
-    if (m_serverLayout != 0)
-        delete m_serverLayout;
-
+    delete m_serverLayout;
     m_serverLayout = layout;
 }
 
