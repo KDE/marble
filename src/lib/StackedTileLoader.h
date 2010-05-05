@@ -88,8 +88,8 @@ class StackedTileLoader : public QObject
          */
         StackedTile* loadTile( TileId const &stackedTileId, DownloadUsage const,
                                bool const forMergedLayerDecorator = false );
-
         StackedTile* reloadTile( TileId const & stackedTileId, DownloadUsage const );
+        void downloadTile( TileId const & stackedTileId );
 
         /**
          * Resets the internal tile hash.

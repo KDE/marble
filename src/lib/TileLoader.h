@@ -47,6 +47,7 @@ class TileLoader: public QObject
     QSharedPointer<TextureTile> reloadTile( TileId const & stackedTileId, TileId const & tileId,
                                             DownloadUsage const );
     void reloadTile( QSharedPointer<TextureTile> const & tile, DownloadUsage const );
+    void downloadTile( TileId const & tileId );
 
     void setTextureLayers( QHash<uint, GeoSceneTexture*> const & );
 

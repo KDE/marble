@@ -287,6 +287,19 @@ StackedTile* StackedTileLoader::reloadTile( TileId const & stackedTileId,
     return stackedTile;
 }
 
+void StackedTileLoader::downloadTile( TileId const & stackedTileId )
+{
+    QVector<GeoSceneTexture const *> const textureLayers = findRelevantTextureLayers( stackedTileId );
+    QVector<GeoSceneTexture const *>::const_iterator pos = textureLayers.constBegin();
+    QVector<GeoSceneTexture const *>::const_iterator const end = textureLayers.constEnd();
+    for (; pos != end; ++pos ) {
+        GeoSceneTexture const * const textureLayer = *pos;
+        TileId const tileId( textureLayer->sourceDir(), stackedTileId.zoomLevel(),
+                             stackedTileId.x(), stackedTileId.y() );
+        d->m_tileLoader->downloadTile( tileId );
+    }
+}
+
 quint64 StackedTileLoader::volatileCacheLimit() const
 {
     return d->m_tileCache.maxCost() / 1024;

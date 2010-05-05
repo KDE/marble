@@ -145,6 +145,11 @@ void TileLoader::reloadTile( QSharedPointer<TextureTile> const & tile, DownloadU
     triggerDownload( tile->id(), usage );
 }
 
+void TileLoader::downloadTile( TileId const & tileId )
+{
+    triggerDownload( tileId, DownloadBulk );
+}
+
 void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
 {
     TileId const id = TileId::fromString( tileId );
