@@ -62,7 +62,7 @@ using namespace Marble;
 
 #ifdef Q_CC_MSVC
 # ifndef KDEWIN_MATH_H
-   static long double sqrt(int a) { return sqrt((long double)a); }
+   static long double sqrt( int a ) { return sqrt( (long double)a ); }
 # endif
 #endif
 
@@ -71,7 +71,7 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent )
         : m_parent( parent ),
           m_persistentTileCacheLimit( 0 ), // No limit
           m_volatileTileCacheLimit( 1024*1024*30 ), // 30 MB
-          m_viewAngle(110.0)
+          m_viewAngle( 110.0 )
 {
 }
 
@@ -129,7 +129,7 @@ void MarbleMapPrivate::construct()
 // Used to be resizeEvent()
 void MarbleMapPrivate::doResize()
 {
-    QSize size(m_parent->width(), m_parent->height());
+    QSize size( m_parent->width(), m_parent->height() );
     m_viewParams.viewport()->setSize( size );
 
     // If the globe covers fully the screen then we can use the faster
@@ -316,9 +316,9 @@ void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect )
     m_measureTool->paint( &painter, m_viewParams.viewport(), antialiased );
 }
 
-void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps)
+void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps )
 {
-    Q_UNUSED(dirtyRect);
+    Q_UNUSED( dirtyRect );
 
     if ( m_showFrameRate ) {
         QString fpsString = QString( "Speed: %1 fps" ).arg( fps, 5, 'f', 1, QChar(' ') );
@@ -400,7 +400,7 @@ MeasureTool *MarbleMap::measureTool()
 }
 
 
-void MarbleMap::setSize(int width, int height)
+void MarbleMap::setSize( int width, int height )
 {
     d->m_width  = width;
     d->m_height = height;
@@ -408,7 +408,7 @@ void MarbleMap::setSize(int width, int height)
     d->doResize();
 }
 
-void MarbleMap::setSize(QSize size)
+void MarbleMap::setSize( QSize size )
 {
     d->m_width  = size.width();
     d->m_height = size.height();
@@ -442,7 +442,7 @@ int MarbleMap::radius() const
     return d->m_viewParams.radius();
 }
 
-void MarbleMap::setRadius(int radius)
+void MarbleMap::setRadius( int radius )
 {
     d->m_viewParams.setRadius( radius );
 
@@ -450,9 +450,9 @@ void MarbleMap::setRadius(int radius)
         setNeedsUpdate();
     }
 
-    d->m_logzoom = d->zoom(radius);
+    d->m_logzoom = d->zoom( radius );
     emit zoomChanged( d->m_logzoom );
-    emit distanceChanged(distanceString());
+    emit distanceChanged( distanceString() );
 }
 
 
@@ -499,7 +499,7 @@ qreal MarbleMap::distance() const
     return distanceFromRadius(radius());
 }
 
-qreal MarbleMap::distanceFromRadius(qreal radius) const
+qreal MarbleMap::distanceFromRadius( qreal radius ) const
 {
     // Due to Marble's orthographic projection ("we have no focus")
     // it's actually not possible to calculate a "real" distance.
@@ -515,7 +515,7 @@ qreal MarbleMap::distanceFromRadius(qreal radius) const
             / radius / tan( 0.5 * d->m_viewAngle * DEG2RAD ) );
 }
 
-qreal MarbleMap::radiusFromDistance(qreal distance) const
+qreal MarbleMap::radiusFromDistance( qreal distance ) const
 {      
     return  model()->planet()->radius() /
             ( distance * tan( 0.5 * d->m_viewAngle * DEG2RAD ) / 0.4 );
@@ -530,8 +530,8 @@ void MarbleMap::setDistance( qreal newDistance )
         newDistance = minDistance;
     }    
 
-    int newRadius = radiusFromDistance(newDistance);
-    setRadius(newRadius);
+    int newRadius = radiusFromDistance( newDistance );
+    setRadius( newRadius );
 }
 
 qreal MarbleMap::centerLatitude() const
@@ -550,7 +550,7 @@ qreal MarbleMap::centerLongitude() const
     qreal  centerLon;
     qreal  centerLat;
 
-    d->m_viewParams.centerCoordinates(centerLon, centerLat);
+    d->m_viewParams.centerCoordinates( centerLon, centerLat );
     return centerLon * RAD2DEG;
 }
 
@@ -729,7 +729,7 @@ quint64 MarbleMap::volatileTileCacheLimit() const
     return d->m_volatileTileCacheLimit;
 }
 
-void MarbleMap::zoomView(int newZoom)
+void MarbleMap::zoomView( int newZoom )
 {
     // Check for under and overflow.
     if ( newZoom < minimumZoom() )
@@ -767,12 +767,12 @@ void MarbleMap::zoomOut()
     zoomViewBy( -d->m_zoomStep );
 }
 
-void MarbleMap::rotateBy(const Quaternion& incRot)
+void MarbleMap::rotateBy( const Quaternion& incRot )
 {
     d->m_viewParams.setPlanetAxis( incRot * d->m_viewParams.planetAxis() );
 }
 
-void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat)
+void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat )
 {
     Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );
     Quaternion  rotTheta( 1.0, 0.0, deltaLon / 180.0, 0.0 );
@@ -785,14 +785,14 @@ void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat)
 }
 
 
-void MarbleMap::centerOn(const qreal& lon, const qreal& lat)
+void MarbleMap::centerOn( const qreal& lon, const qreal& lat )
 {
     Quaternion  quat;
     quat.createFromEuler( -lat * DEG2RAD, lon * DEG2RAD, 0.0 );
     d->m_viewParams.setPlanetAxis( quat );
 }
 
-void MarbleMap::centerOn(const QModelIndex& index)
+void MarbleMap::centerOn( const QModelIndex& index )
 {
     QItemSelectionModel *selectionModel = d->m_model->placemarkSelectionModel();
     Q_ASSERT( selectionModel );
@@ -851,13 +851,13 @@ void MarbleMap::home( qreal &lon, qreal &lat, int& zoom )
     zoom = d->m_homeZoom;
 }
 
-void MarbleMap::setHome( qreal lon, qreal lat, int zoom)
+void MarbleMap::setHome( qreal lon, qreal lat, int zoom )
 {
     d->m_homePoint = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree );
     d->m_homeZoom = zoom;
 }
 
-void MarbleMap::setHome(const GeoDataCoordinates& homePoint, int zoom)
+void MarbleMap::setHome( const GeoDataCoordinates& homePoint, int zoom )
 {
     d->m_homePoint = homePoint;
     d->m_homeZoom = zoom;
@@ -923,7 +923,7 @@ bool MarbleMap::geoCoordinates( int x, int y,
 }
 
 // Used to be paintEvent()
-void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
+void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
 {
     QTime t;
     t.start();
@@ -937,7 +937,7 @@ void MarbleMap::paint(GeoPainter &painter, QRect &dirtyRect)
     emit framesPerSecond( fps );
 }
 
-void MarbleMap::customPaint(GeoPainter *painter)
+void MarbleMap::customPaint( GeoPainter *painter )
 {
     Q_UNUSED( painter );
 
@@ -970,7 +970,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     d->m_viewParams.setMapThemeId( mapThemeId );
     GeoSceneDocument *mapTheme = d->m_viewParams.mapTheme();
 
-    if (mapTheme) {
+    if ( mapTheme ) {
         d->m_model->setMapTheme( mapTheme, d->m_viewParams.projection() );
 
         // We don't do this on every paintEvent to improve performance.
@@ -1115,12 +1115,12 @@ void MarbleMap::setShowGps( bool visible )
     d->m_viewParams.setShowGps( visible );
 }
 
-void MarbleMap::changeCurrentPosition( qreal lon, qreal lat)
+void MarbleMap::changeCurrentPosition( qreal lon, qreal lat )
 {
     d->m_model->gpsLayer()->changeCurrentPosition( lat, lon );
 }
 
-void MarbleMap::notifyMouseClick( int x, int y)
+void MarbleMap::notifyMouseClick( int x, int y )
 {
     qreal  lon   = 0;
     qreal  lat   = 0;
@@ -1128,7 +1128,7 @@ void MarbleMap::notifyMouseClick( int x, int y)
     const bool valid = geoCoordinates( x, y, lon, lat, GeoDataCoordinates::Radian );
 
     if ( valid ) {
-        emit mouseClickGeoPosition( lon, lat, GeoDataCoordinates::Radian);
+        emit mouseClickGeoPosition( lon, lat, GeoDataCoordinates::Radian );
     }
 }
 
@@ -1144,7 +1144,7 @@ void MarbleMap::updateGps()
 #endif
 }
 
-void MarbleMap::openGpxFile(const QString &filename)
+void MarbleMap::openGpxFile( const QString &filename )
 {
     d->m_model->openGpxFile( filename );
 }
@@ -1300,7 +1300,7 @@ void MarbleMap::flyTo( const GeoDataLookAt &lookAt )
 
     setDistance( lookAt.range() * METER2KM );
     GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
-    centerOn( lookAt.longitude(deg), lookAt.latitude(deg) );
+    centerOn( lookAt.longitude( deg ), lookAt.latitude( deg ) );
 }
 
 GeoDataLookAt MarbleMap::lookAt() const

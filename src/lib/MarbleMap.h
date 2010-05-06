@@ -128,8 +128,8 @@ class MARBLE_EXPORT MarbleMap : public QObject
     ViewParams   *viewParams();
     MeasureTool  *measureTool();
 
-    void  setSize(int width, int height);
-    void  setSize(QSize size);
+    void  setSize( int width, int height );
+    void  setSize( QSize size );
     QSize size()   const;
     int   width()  const;
     int   height() const;
@@ -143,7 +143,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief  Set the radius of the globe in pixels.
      * @param  radius  The new globe radius value in pixels.
      */
-    void        setRadius(int radius);
+    void        setRadius( int radius );
 
     /**
      * @brief Return the current zoom level.
@@ -278,7 +278,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief  Return the property value by name.
      * @return The property value (usually: visibility).
      */
-    bool  propertyValue( const QString& name) const;
+    bool  propertyValue( const QString& name ) const;
 
     /**
      * @brief  Return whether the overview map is visible.
@@ -429,22 +429,22 @@ class MARBLE_EXPORT MarbleMap : public QObject
     /**
       * @brief Return the distance (km) at the given globe radius (pixel)
       */
-    qreal      radiusFromDistance(qreal distance) const;
+    qreal      radiusFromDistance( qreal distance ) const;
 
     /**
       * @brief Return the distance (km) at the given globe radius (pixel)
       */
-    qreal      distanceFromRadius(qreal radius) const;
+    qreal      distanceFromRadius( qreal radius ) const;
 
     /**
       * Returns the zoom value (no unit) corresponding to the given camera distance (km)
       */
-    qreal zoomFromDistance(qreal distance) const;
+    qreal zoomFromDistance( qreal distance ) const;
 
     /**
       * Returns the distance (km) corresponding to the given zoom value
       */
-    qreal distanceFromZoom(qreal zoom) const;
+    qreal distanceFromZoom( qreal zoom ) const;
 
  public Q_SLOTS:
 
@@ -456,7 +456,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param painter  The painter to use.
      * @param dirtyRect the rectangle that actually needs repainting.
      */
-    void  paint( GeoPainter &painter, QRect &dirtyRect);
+    void  paint( GeoPainter &painter, QRect &dirtyRect );
 
     /**
      * @brief  Zoom the view to a certain zoomlevel
@@ -466,13 +466,13 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * interpretation.  A zoom value around 1000 lets the viewer see
      * all of the earth in the default window.
      */
-    void  zoomView(int zoom);
+    void  zoomView( int zoom );
 
     /**
      * @brief  Zoom the view by a certain step
      * @param  zoomStep  the difference between the old zoom and the new
      */
-    void  zoomViewBy(int zoomStep);
+    void  zoomViewBy( int zoomStep );
 
     /**
      * @brief  Zoom in by the amount zoomStep.
@@ -549,20 +549,20 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  lat  the latitude of the home point.
      * @param  zoom the default zoom level of the home point.
      */
-    void  home(qreal &lon, qreal &lat, int& zoom);
+    void  home( qreal &lon, qreal &lat, int& zoom );
     /**
      * @brief  Set the home point
      * @param  lon  the longitude of the new home point.
      * @param  lat  the latitude of the new home point.
      * @param  zoom the default zoom level for the new home point.
      */
-    void  setHome(qreal lon, qreal lat, int zoom = 1050);
+    void  setHome( qreal lon, qreal lat, int zoom = 1050 );
     /**
      * @brief  Set the home point
      * @param  homePoint  the new home point.
      * @param  zoom       the default zoom level for the new home point.
      */
-    void  setHome(const GeoDataCoordinates& homePoint, int zoom = 1050);
+    void  setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
 
     /**
      * @brief  Move left by the moveStep.

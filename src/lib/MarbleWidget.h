@@ -152,7 +152,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * MarbleWidget.  The widget will create its own MarbleModel when
      * created.
      */
-    explicit MarbleWidget( QWidget *parent = 0);
+    explicit MarbleWidget( QWidget *parent = 0 );
 
     /**
      * @brief Construct a new MarbleWidget.
@@ -163,7 +163,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * one MarbleWidget for the same MarbleModel (not yet supported,
      * but will be soon).
      */
-    explicit MarbleWidget(MarbleMap *map, QWidget *parent = 0);
+    explicit MarbleWidget( MarbleMap *map, QWidget *parent = 0 );
 
     virtual ~MarbleWidget();
 
@@ -185,7 +185,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Set the input handler
      */
-    void setInputHandler(MarbleWidgetInputHandler *handler);
+    void setInputHandler( MarbleWidgetInputHandler *handler );
 
     /**
      * @brief Return the active region in which it's possible to drag the view using the mouse.
@@ -206,7 +206,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the radius of the globe in pixels.
      * @param  radius  The new globe radius value in pixels.
      */
-    void        setRadius(int radius);
+    void        setRadius( int radius );
 
     /**
      * @brief Return the current zoom amount.
@@ -541,7 +541,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Retrieve the view context (i.e. still or animated map) 
      */
-    ViewContext viewContext( ) const;
+    ViewContext viewContext() const;
 
     /**
      * @brief Retrieve whether travels to a point should get animated 
@@ -569,22 +569,22 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * interpretation.  A zoom value around 1000 lets the viewer see
      * all of the earth in the default window.
      */
-    void  zoomView(int zoom, FlyToMode mode = Instant);
+    void  zoomView( int zoom, FlyToMode mode = Instant );
 
     /**
      * @brief  Zoom the view by a certain step
      * @param  zoomStep  the difference between the old zoom and the new
      */
-    void  zoomViewBy(int zoomStep, FlyToMode mode = Instant);
+    void  zoomViewBy( int zoomStep, FlyToMode mode = Instant );
 
     /**
      * @brief  Zoom in by the amount zoomStep.
      */
-    void  zoomIn(FlyToMode mode = Automatic);
+    void  zoomIn( FlyToMode mode = Automatic );
     /**
      * @brief  Zoom out by the amount zoomStep.
      */
-    void  zoomOut(FlyToMode mode = Automatic);
+    void  zoomOut( FlyToMode mode = Automatic );
 
     /**
      * @brief  Rotate the view by the two angles phi and theta.
@@ -603,7 +603,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Rotate the view by the angle specified by a Quaternion.
      * @param  incRot a quaternion specifying the rotation
      */
-    void  rotateBy(const Quaternion& incRot);
+    void  rotateBy( const Quaternion& incRot );
 
     /**
      * @brief  Center the view on a geographical point
@@ -645,13 +645,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the latitude for the center point
      * @param  lat  the new value for the latitude
      */
-    void setCenterLatitude( qreal lat, FlyToMode mode = Instant);
+    void setCenterLatitude( qreal lat, FlyToMode mode = Instant );
 
     /**
      * @brief  Set the longitude for the center point
      * @param  lon  the new value for the longitude
      */
-    void setCenterLongitude( qreal lon, FlyToMode mode = Instant);
+    void setCenterLongitude( qreal lon, FlyToMode mode = Instant );
 
     /**
      * @brief  Set the Projection used for the map
@@ -666,42 +666,42 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  lat  the latitude of the home point.
      * @param  zoom the default zoom level of the home point.
      */
-    void  home(qreal &lon, qreal &lat, int& zoom);
+    void  home( qreal &lon, qreal &lat, int& zoom );
     /**
      * @brief  Set the home point
      * @param  lon  the longitude of the new home point.
      * @param  lat  the latitude of the new home point.
      * @param  zoom the default zoom level for the new home point.
      */
-    void  setHome(qreal lon, qreal lat, int zoom = 1050);
+    void  setHome( qreal lon, qreal lat, int zoom = 1050 );
     /**
      * @brief  Set the home point
      * @param  homePoint  the new home point.
      * @param  zoom       the default zoom level for the new home point.
      */
-    void  setHome(const GeoDataCoordinates& homePoint, int zoom = 1050);
+    void  setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
 
     /**
      * @brief  Move left by the moveStep.
      */
-    void  moveLeft(FlyToMode mode = Automatic);
+    void  moveLeft( FlyToMode mode = Automatic );
     /**
      * @brief  Move right by the moveStep.
      */
-    void  moveRight(FlyToMode mode = Automatic);
+    void  moveRight( FlyToMode mode = Automatic );
     /**
      * @brief  Move up by the moveStep.
      */
-    void  moveUp(FlyToMode mode = Automatic);
+    void  moveUp( FlyToMode mode = Automatic );
     /**
      * @brief  Move down by the moveStep.
      */
-    void  moveDown(FlyToMode mode = Automatic);
+    void  moveDown( FlyToMode mode = Automatic );
 
     /**
      * @brief Center the view on the default start point with the default zoom.
      */
-    void  goHome(FlyToMode mode = Automatic);
+    void  goHome( FlyToMode mode = Automatic );
 
     /**
      * @brief Set a new map theme
@@ -927,7 +927,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void setAnimationsEnabled( bool enabled );
 
-    void setSelection(const QRect& region);
+    void setSelection( const QRect& region );
     
     /**
       * @brief Change the camera position to the given position.
@@ -972,7 +972,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *  The list of double values include coordinates in degrees using this order:
      *  lon1, lat1, lon2, lat2 (or West, North, East, South) as left/top, right/bottom rectangle.
      */
-    void  regionSelected(const QList<double>&);
+    void  regionSelected( const QList<double>& );
 
     /**
      * This signal is emit when the settings of a plugin changed.
@@ -1007,14 +1007,14 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void  resizeEvent( QResizeEvent* );
 
-    void  connectNotify ( const char * signal );
-    void  disconnectNotify ( const char * signal );
+    void  connectNotify( const char * signal );
+    void  disconnectNotify( const char * signal );
 
     /**
       * @brief Reimplementation of the changeEvent() function in QWidget to
       * react to changes of the enabled state
       */
-    void changeEvent ( QEvent * event );
+    void changeEvent( QEvent * event );
 
 private Q_SLOTS:
     /**
@@ -1026,7 +1026,7 @@ private Q_SLOTS:
       * @brief Updates zoom and position during animations
       * @see flyTo
       */
-    void updateAnimation(const GeoDataLookAt &lookAt);
+    void updateAnimation( const GeoDataLookAt &lookAt );
 
  private:
     Q_DISABLE_COPY( MarbleWidget )
