@@ -408,7 +408,7 @@ void MarbleMap::setSize( int width, int height )
     d->doResize();
 }
 
-void MarbleMap::setSize( QSize size )
+void MarbleMap::setSize( const QSize& size )
 {
     d->m_width  = size.width();
     d->m_height = size.height();
@@ -785,7 +785,7 @@ void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat )
 }
 
 
-void MarbleMap::centerOn( const qreal& lon, const qreal& lat )
+void MarbleMap::centerOn( const qreal lon, const qreal lat )
 {
     Quaternion  quat;
     quat.createFromEuler( -lat * DEG2RAD, lon * DEG2RAD, 0.0 );

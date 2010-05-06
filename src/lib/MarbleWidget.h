@@ -190,12 +190,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Return the active region in which it's possible to drag the view using the mouse.
      */
-    const QRegion  activeRegion();
+    QRegion  activeRegion();
 
     /**
      * @brief Return the projected region which describes the (shape of the) projected surface.
      */
-    const QRegion  mapRegion();
+    QRegion  mapRegion();
 
     /**
      * @brief  Return the radius of the globe in pixels.
@@ -597,7 +597,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * of (lon, lat), otherwise the resulting angle will be the sum of
      * the previous position and the two offsets.
      */
-    void  rotateBy( const qreal &deltaLon, const qreal &deltaLat, FlyToMode mode = Instant );
+    void  rotateBy( const qreal deltaLon, const qreal deltaLat, FlyToMode mode = Instant );
 
     /**
      * @brief  Rotate the view by the angle specified by a Quaternion.
@@ -612,7 +612,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  lon  an angle in degrees parallel to the longitude lines
      *              +180(W) - -180(E)
      */
-    void  centerOn( const qreal &lon, const qreal &lat, bool animated = false );
+    void  centerOn( const qreal lon, const qreal lat, bool animated = false );
 
     /**
      * @brief  Center the view on a point
@@ -910,7 +910,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * Schedule repaint
      */
-    void scheduleRepaint( QRegion dirtyRegion );
+    void scheduleRepaint( const QRegion& dirtyRegion );
 
     /**
      * @brief Set the map quality depending on the view context 
@@ -958,11 +958,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Signal that the theme has changed
      * @param theme  Name of the new theme.
      */
-    void  themeChanged( QString theme );
+    void  themeChanged( const QString& theme );
 
     void  projectionChanged( Projection );
 
-    void  mouseMoveGeoPosition( QString );
+    void  mouseMoveGeoPosition( const QString& );
 
     void  mouseClickGeoPosition( qreal lon, qreal lat, GeoDataCoordinates::Unit );
 

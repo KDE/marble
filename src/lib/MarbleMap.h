@@ -129,7 +129,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     MeasureTool  *measureTool();
 
     void  setSize( int width, int height );
-    void  setSize( QSize size );
+    void  setSize( const QSize& size );
     QSize size()   const;
     int   width()  const;
     int   height() const;
@@ -509,7 +509,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  lon  an angle parallel to the longitude lines
      *              +180(W) - -180(E)
      */
-    void  centerOn( const qreal &lon, const qreal &lat );
+    void  centerOn( const qreal lon, const qreal lat );
 
     /**
      * @brief  Center the view on a point
@@ -817,11 +817,11 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief Signal that the theme has changed
      * @param theme  Name of the new theme.
      */
-    void  themeChanged( QString theme );
+    void  themeChanged( const QString& theme );
 
     void  projectionChanged( Projection );
 
-    void  mouseMoveGeoPosition( QString );
+    void  mouseMoveGeoPosition( const QString& );
 
     void  mouseClickGeoPosition( qreal lon, qreal lat, GeoDataCoordinates::Unit );
 
@@ -832,7 +832,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * If available with the @p dirtyRegion which is the region the view will change in.
      * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
      */
-    void repaintNeeded( QRegion dirtyRegion );
+    void repaintNeeded( const QRegion& dirtyRegion );
 
  protected:
 

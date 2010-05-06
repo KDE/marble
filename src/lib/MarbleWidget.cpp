@@ -570,7 +570,7 @@ void MarbleWidget::rotateBy( const Quaternion& incRot )
     d->repaint();
 }
 
-void MarbleWidget::rotateBy( const qreal& deltaLon, const qreal& deltaLat, FlyToMode mode )
+void MarbleWidget::rotateBy( const qreal deltaLon, const qreal deltaLat, FlyToMode mode )
 {
     Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );
     Quaternion  rotTheta( 1.0, 0.0, deltaLon / 180.0, 0.0 );
@@ -591,7 +591,7 @@ void MarbleWidget::rotateBy( const qreal& deltaLon, const qreal& deltaLat, FlyTo
 }
 
 
-void MarbleWidget::centerOn( const qreal& lon, const qreal& lat, bool animated )
+void MarbleWidget::centerOn( const qreal lon, const qreal lat, bool animated )
 {
     GeoDataCoordinates target( lon, lat, 0.0, GeoDataCoordinates::Degree );
     centerOn( target, animated );
@@ -765,12 +765,12 @@ qreal MarbleWidget::centerLongitude() const
     return d->m_map->centerLongitude();
 }
 
-const QRegion MarbleWidget::activeRegion()
+QRegion MarbleWidget::activeRegion()
 {
     return d->m_map->viewParams()->viewport()->activeRegion();
 }
 
-const QRegion MarbleWidget::mapRegion()
+QRegion MarbleWidget::mapRegion()
 {
     return d->m_map->viewParams()->currentProjection()->mapRegion( d->m_map->viewParams()->viewport() );
 }
@@ -1129,7 +1129,7 @@ void MarbleWidget::updateChangedMap()
     update();
 }
 
-void MarbleWidget::scheduleRepaint( QRegion dirtyRegion )
+void MarbleWidget::scheduleRepaint( const QRegion& dirtyRegion )
 {
     Q_UNUSED( dirtyRegion );
     if ( !d->m_repaintTimer.isActive() ) {
