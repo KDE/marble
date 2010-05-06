@@ -69,6 +69,7 @@ class GeoDataRegionPrivate
     GeoDataRegionPrivate &operator=( const GeoDataRegionPrivate other )
     {
         m_parent = other.m_parent;
+        delete m_latLonAltBox;
         if ( other.m_latLonAltBox ) {
             m_latLonAltBox = new GeoDataLatLonAltBox( *other.m_latLonAltBox );
         }
@@ -76,6 +77,7 @@ class GeoDataRegionPrivate
             m_latLonAltBox = 0;
         }
 
+        delete m_lod;
         if ( other.m_lod ) {
             m_lod = new GeoDataLod( *other.m_lod );
         }
