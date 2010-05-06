@@ -38,18 +38,18 @@ class MarbleMapPrivate
     inline static qreal zoom( qreal radius ) { return (200.0 * log( radius ) ); }
     inline static qreal radius( qreal zoom ) { return pow( M_E, ( zoom / 200.0 ) ); }
 
-    void  construct();
+    void construct();
 
-    void  paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect );
+    void paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect );
 
-    void  drawAtmosphere();
-    void  drawFog(QPainter &painter);
-    void  setBoundingBox();
-    void  doResize();
+    void drawAtmosphere();
+    void drawFog(QPainter &painter);
+    void setBoundingBox();
+    void doResize();
 
-    void  paintGround( GeoPainter &painter, QRect &dirtyRect);
-    void  paintOverlay( GeoPainter &painter, QRect &dirtyRect);
-    void  paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps);
+    void paintGround( GeoPainter &painter, QRect &dirtyRect);
+    void paintOverlay( GeoPainter &painter, QRect &dirtyRect);
+    void paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps);
 
     MarbleMap       *m_parent;
 

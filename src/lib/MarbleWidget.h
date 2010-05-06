@@ -170,12 +170,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Return the map that this view shows.
      */
-    MarbleMap  *map() const;
+    MarbleMap *map() const;
 
     /**
      * @brief Return the model that this view shows.
      */
-    MarbleModel  *model() const;
+    MarbleModel *model() const;
 
     /**
      * Returns the current input handler
@@ -190,54 +190,54 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Return the active region in which it's possible to drag the view using the mouse.
      */
-    QRegion  activeRegion();
+    QRegion activeRegion();
 
     /**
      * @brief Return the projected region which describes the (shape of the) projected surface.
      */
-    QRegion  mapRegion();
+    QRegion mapRegion();
 
     /**
      * @brief  Return the radius of the globe in pixels.
      */
-    int         radius() const;
+    int radius() const;
 
     /**
      * @brief  Set the radius of the globe in pixels.
      * @param  radius  The new globe radius value in pixels.
      */
-    void        setRadius( int radius );
+    void setRadius( int radius );
 
     /**
      * @brief Return the current zoom amount.
      */
-    int         zoom() const;
+    int zoom() const;
 
     /**
      * @brief Return the current distance.
      */
-    qreal      distance() const;
+    qreal distance() const;
 
     /**
      * @brief  Set the distance of the observer to the globe in km.
      * @param  distance  The new distance in km.
      */
-    void        setDistance( qreal distance );
+    void setDistance( qreal distance );
 
     /**
      * @brief Return the current distance string.
      */
-    QString     distanceString() const;
+    QString distanceString() const;
 
     /**
      * @brief Return the minimum zoom value for the current map theme.
      */
-    int         minimumZoom() const;
+    int minimumZoom() const;
 
     /**
      * @brief Return the minimum zoom value for the current map theme.
      */
-    int         maximumZoom() const;
+    int maximumZoom() const;
 
     /**
      * @brief Return if the widget needs to be updated.
@@ -282,12 +282,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Return the longitude of the center point.
      */
-    qreal  centerLongitude() const;
+    qreal centerLongitude() const;
 
     /**
      * @brief Return the latitude of the center point.
      */
-    qreal  centerLatitude()  const;
+    qreal centerLatitude() const;
 
     /**
      * @brief Returns the model for all the placemarks on the globe.
@@ -303,7 +303,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Return how much the map will move if one of the move slots are called.
      * @return The move step.
      */
-    qreal  moveStep();
+    qreal moveStep();
 
     /**
      * @brief  Add a GeoDataPlacemark file to the model.
@@ -328,7 +328,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Return the quaternion that specifies the rotation of the globe.
      * @return The quaternion that describes the rotation of the globe.
      */
-    Quaternion  planetAxis() const;
+    Quaternion planetAxis() const;
 
     /**
      * @brief  Return a QPixmap with the current contents of the widget.
@@ -339,127 +339,127 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Return whether the overview map is visible.
      * @return The overview map visibility.
      */
-    bool  showOverviewMap() const;
+    bool showOverviewMap() const;
 
     /**
      * @brief  Return whether the scale bar is visible.
      * @return The scale bar visibility.
      */
-    bool  showScaleBar() const;
+    bool showScaleBar() const;
 
     /**
      * @brief  Return whether the compass bar is visible.
      * @return The compass visibility.
      */
-    bool  showCompass() const;
+    bool showCompass() const;
 
     /**
      * @brief  Return whether the cloud cover is visible.
      * @return The cloud cover visibility.
      */
-    bool  showClouds() const;
+    bool showClouds() const;
 
     /**
      * @brief  Return whether the atmospheric glow is visible.
      * @return The cloud cover visibility.
      */
-    bool  showAtmosphere() const;
+    bool showAtmosphere() const;
 
     /**
      * @brief  Return whether the crosshairs are visible.
      * @return The crosshairs' visibility.
      */
-    bool  showCrosshairs() const;
+    bool showCrosshairs() const;
 
     /**
      * @brief  Return whether the coordinate grid is visible.
      * @return The coordinate grid visibility.
      */
-    bool  showGrid() const;
+    bool showGrid() const;
 
     /**
      * @brief  Return whether the place marks are visible.
      * @return The place mark visibility.
      */
-    bool  showPlaces() const;
+    bool showPlaces() const;
 
     /**
      * @brief  Return whether the city place marks are visible.
      * @return The city place mark visibility.
      */
-    bool  showCities() const;
+    bool showCities() const;
 
     /**
      * @brief  Return whether the terrain place marks are visible.
      * @return The terrain place mark visibility.
      */
-    bool  showTerrain() const;
+    bool showTerrain() const;
 
     /**
      * @brief  Return whether other places are visible.
      * @return The visibility of other places.
      */
-    bool  showOtherPlaces() const;
+    bool showOtherPlaces() const;
 
     /**
      * @brief  Return whether the relief is visible.
      * @return The relief visibility.
      */
-    bool  showRelief() const;
+    bool showRelief() const;
 
     /**
      * @brief  Return whether the elevation model is visible.
      * @return The elevation model visibility.
      */
-    bool  showElevationModel() const;
+    bool showElevationModel() const;
 
     /**
      * @brief  Return whether the ice layer is visible.
      * @return The ice layer visibility.
      */
-    bool  showIceLayer() const;
+    bool showIceLayer() const;
 
     /**
      * @brief  Return whether the borders are visible.
      * @return The border visibility.
      */
-    bool  showBorders() const;
+    bool showBorders() const;
 
     /**
      * @brief  Return whether the rivers are visible.
      * @return The rivers' visibility.
      */
-    bool  showRivers() const;
+    bool showRivers() const;
 
     /**
      * @brief  Return whether the lakes are visible.
      * @return The lakes' visibility.
      */
-    bool  showLakes() const;
+    bool showLakes() const;
 
     /**
      * @brief Return whether Gps Data is visible.
      * @return The Gps Data's visibility.
      */
-    bool  showGps() const;
+    bool showGps() const;
 
     /**
      * @brief  Return whether the frame rate gets displayed.
      * @return the frame rates visibility
      */
-    bool  showFrameRate() const;
+    bool showFrameRate() const;
 
     /**
      * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
      * @return the limit of persistent tile cache
      */
-    quint64  persistentTileCacheLimit() const;
+    quint64 persistentTileCacheLimit() const;
 
     /**
      * @brief  Returns the limit in kilobytes of the volatile (in RAM) tile cache.
      * @return the limit of volatile tile cache
      */
-    quint64  volatileTileCacheLimit() const;
+    quint64 volatileTileCacheLimit() const;
 
     SunLocator* sunLocator();
 
@@ -475,12 +475,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Returns a list of all RenderPlugins on the widget, this includes float items
      * @return the list of RenderPlugins
      */
-    QList<RenderPlugin *>      renderPlugins() const;
+    QList<RenderPlugin *> renderPlugins() const;
     /**
      * @brief Returns a list of all FloatItems on the widget
      * @return the list of the floatItems
      */
-    QList<AbstractFloatItem *> floatItems()    const;
+    QList<AbstractFloatItem *> floatItems() const;
 
     /**
      * Reads the plugin settings from the passed QSettings.
@@ -504,8 +504,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return @c Equirectangular   a flat map
      * @return @c Mercator          another flat map
      */
-    Projection  projection() const;
-//    int         projection() const;
+    Projection projection() const;
+//    int projection() const;
 
     /**
      * @brief Get the ID of the current map theme
@@ -569,22 +569,22 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * interpretation.  A zoom value around 1000 lets the viewer see
      * all of the earth in the default window.
      */
-    void  zoomView( int zoom, FlyToMode mode = Instant );
+    void zoomView( int zoom, FlyToMode mode = Instant );
 
     /**
      * @brief  Zoom the view by a certain step
      * @param  zoomStep  the difference between the old zoom and the new
      */
-    void  zoomViewBy( int zoomStep, FlyToMode mode = Instant );
+    void zoomViewBy( int zoomStep, FlyToMode mode = Instant );
 
     /**
      * @brief  Zoom in by the amount zoomStep.
      */
-    void  zoomIn( FlyToMode mode = Automatic );
+    void zoomIn( FlyToMode mode = Automatic );
     /**
      * @brief  Zoom out by the amount zoomStep.
      */
-    void  zoomOut( FlyToMode mode = Automatic );
+    void zoomOut( FlyToMode mode = Automatic );
 
     /**
      * @brief  Rotate the view by the two angles phi and theta.
@@ -597,13 +597,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * of (lon, lat), otherwise the resulting angle will be the sum of
      * the previous position and the two offsets.
      */
-    void  rotateBy( const qreal deltaLon, const qreal deltaLat, FlyToMode mode = Instant );
+    void rotateBy( const qreal deltaLon, const qreal deltaLat, FlyToMode mode = Instant );
 
     /**
      * @brief  Rotate the view by the angle specified by a Quaternion.
      * @param  incRot a quaternion specifying the rotation
      */
-    void  rotateBy( const Quaternion& incRot );
+    void rotateBy( const Quaternion& incRot );
 
     /**
      * @brief  Center the view on a geographical point
@@ -612,13 +612,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  lon  an angle in degrees parallel to the longitude lines
      *              +180(W) - -180(E)
      */
-    void  centerOn( const qreal lon, const qreal lat, bool animated = false );
+    void centerOn( const qreal lon, const qreal lat, bool animated = false );
 
     /**
      * @brief  Center the view on a point
      * @param  index  an index for a QModel, indicating a city
      */
-    void  centerOn( const QModelIndex& index, bool animated = false );
+    void centerOn( const QModelIndex& index, bool animated = false );
 
     /**
      * @brief  Center the view on a point
@@ -630,7 +630,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param point the point in 3 dimensions above the globe to move the view
      *              to. It will always be looking vertically down.
      */
-    void  centerOn( const GeoDataCoordinates &point, bool animated = false );
+    void centerOn( const GeoDataCoordinates &point, bool animated = false );
 
     /**
      * @brief Center the view on a bounding box so that it completely fills the viewport
@@ -657,8 +657,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief  Set the Projection used for the map
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
-    void  setProjection( int        projection );
-    void  setProjection( Projection projection );
+    void setProjection( int        projection );
+    void setProjection( Projection projection );
 
     /**
      * @brief  Get the home point
@@ -666,42 +666,42 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  lat  the latitude of the home point.
      * @param  zoom the default zoom level of the home point.
      */
-    void  home( qreal &lon, qreal &lat, int& zoom );
+    void home( qreal &lon, qreal &lat, int& zoom );
     /**
      * @brief  Set the home point
      * @param  lon  the longitude of the new home point.
      * @param  lat  the latitude of the new home point.
      * @param  zoom the default zoom level for the new home point.
      */
-    void  setHome( qreal lon, qreal lat, int zoom = 1050 );
+    void setHome( qreal lon, qreal lat, int zoom = 1050 );
     /**
      * @brief  Set the home point
      * @param  homePoint  the new home point.
      * @param  zoom       the default zoom level for the new home point.
      */
-    void  setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
+    void setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
 
     /**
      * @brief  Move left by the moveStep.
      */
-    void  moveLeft( FlyToMode mode = Automatic );
+    void moveLeft( FlyToMode mode = Automatic );
     /**
      * @brief  Move right by the moveStep.
      */
-    void  moveRight( FlyToMode mode = Automatic );
+    void moveRight( FlyToMode mode = Automatic );
     /**
      * @brief  Move up by the moveStep.
      */
-    void  moveUp( FlyToMode mode = Automatic );
+    void moveUp( FlyToMode mode = Automatic );
     /**
      * @brief  Move down by the moveStep.
      */
-    void  moveDown( FlyToMode mode = Automatic );
+    void moveDown( FlyToMode mode = Automatic );
 
     /**
      * @brief Center the view on the default start point with the default zoom.
      */
-    void  goHome( FlyToMode mode = Automatic );
+    void goHome( FlyToMode mode = Automatic );
 
     /**
      * @brief Set a new map theme
@@ -712,7 +712,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * Example: 
      *    maptheme = "earth/bluemarble/bluemarble.dgml" 
      */
-    void  setMapThemeId( const QString& maptheme );
+    void setMapThemeId( const QString& maptheme );
 
     /**
      * @brief  Sets the value of a map theme property
@@ -843,7 +843,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      *       and might be subject to changes until Marble 0.8
      * @param visible visibility of the tile
      */
-    void setShowTileId( bool visible);
+    void setShowTileId( bool visible );
 
     /**
      * @brief Set the current Gps position
@@ -951,28 +951,28 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param zoom  The new zoom value.
      * @see  zoomView()
      */
-    void  zoomChanged( int zoom );
-    void  distanceChanged( const QString& distanceString );
+    void zoomChanged( int zoom );
+    void distanceChanged( const QString& distanceString );
 
     /**
      * @brief Signal that the theme has changed
      * @param theme  Name of the new theme.
      */
-    void  themeChanged( const QString& theme );
+    void themeChanged( const QString& theme );
 
-    void  projectionChanged( Projection );
+    void projectionChanged( Projection );
 
-    void  mouseMoveGeoPosition( const QString& );
+    void mouseMoveGeoPosition( const QString& );
 
-    void  mouseClickGeoPosition( qreal lon, qreal lat, GeoDataCoordinates::Unit );
+    void mouseClickGeoPosition( qreal lon, qreal lat, GeoDataCoordinates::Unit );
 
-    void  framesPerSecond( qreal fps );
+    void framesPerSecond( qreal fps );
 
     /** This signal is emit when a new rectangle region is selected over the map 
      *  The list of double values include coordinates in degrees using this order:
      *  lon1, lat1, lon2, lat2 (or West, North, East, South) as left/top, right/bottom rectangle.
      */
-    void  regionSelected( const QList<double>& );
+    void regionSelected( const QList<double>& );
 
     /**
      * This signal is emit when the settings of a plugin changed.
@@ -988,27 +988,27 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     /**
      * @brief Reimplementation of the leaveEvent() function in QWidget.
      */
-    void  leaveEvent( QEvent *event );
+    void leaveEvent( QEvent *event );
 
     /**
      * @brief Reimplementation of the paintEvent() function in QWidget.
      */
-    void  paintEvent( QPaintEvent *event );
+    void paintEvent( QPaintEvent *event );
 
     /**
      * @brief Enables custom drawing onto the MarbleWidget straight after
      * @brief the globe and before all other layers has been rendered.
      * @param painter 
      */
-    virtual void  customPaint( GeoPainter *painter );
+    virtual void customPaint( GeoPainter *painter );
 
     /**
      * @brief Reimplementation of the resizeEvent() function in QWidget.
      */
-    void  resizeEvent( QResizeEvent* );
+    void resizeEvent( QResizeEvent* );
 
-    void  connectNotify( const char * signal );
-    void  disconnectNotify( const char * signal );
+    void connectNotify( const char * signal );
+    void disconnectNotify( const char * signal );
 
     /**
       * @brief Reimplementation of the changeEvent() function in QWidget to
