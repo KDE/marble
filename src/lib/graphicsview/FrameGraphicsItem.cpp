@@ -173,9 +173,7 @@ void FrameGraphicsItem::setBackground( const QBrush &background )
 QRectF FrameGraphicsItem::contentRect( const QPointF& position ) const
 {
     qreal marginTop = ( d->m_marginTop == 0.0 ) ? d->m_margin : d->m_marginTop;
-    qreal marginBottom = ( d->m_marginBottom == 0.0 ) ? d->m_margin : d->m_marginBottom;
     qreal marginLeft = ( d->m_marginLeft == 0.0 ) ? d->m_margin : d->m_marginLeft;
-    qreal marginRight = ( d->m_marginRight == 0.0 ) ? d->m_margin : d->m_marginRight;
 
     QSizeF size = this->size();
 
