@@ -62,13 +62,13 @@ class ExtDateTime : public QObject
     /**
      * @brief Returns the speed of the timer
      **/
-    int getSpeed() const;
+    int speed() const;
     
     /**
      * @brief Sets the speed of the timer
      * @param speed The new speed (integer)
      **/
-    void setSpeed(int speed);
+    void setSpeed( int speed );
 
  private Q_SLOTS:
     void timerTimeout();
@@ -95,7 +95,7 @@ inline QDateTime ExtDateTime::datetime() const
     return m_datetime;
 }
 
-inline int ExtDateTime::getSpeed() const
+inline int ExtDateTime::speed() const
 {
     return m_speed;
 }

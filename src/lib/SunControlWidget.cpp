@@ -162,7 +162,7 @@ void SunControlWidget::showEvent(QShowEvent* event)
 {
     if( !event->spontaneous() ) {
         // Loading all options
-        m_uiWidget->speedSlider->setValue( m_sunLocator->datetime()->getSpeed() );
+        m_uiWidget->speedSlider->setValue( m_sunLocator->datetime()->speed() );
         updateDateTime();
         if( m_sunLocator->getCitylights() )
             m_uiWidget->sunShadingComboBox->setCurrentIndex(1);
