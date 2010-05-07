@@ -23,8 +23,8 @@ namespace Marble
 class NullDevice : public QIODevice
 {
     public:
-        qint64 readData ( char * /*data*/, qint64 /*maxSize*/ ) { return -1; };
-        qint64 writeData ( const char * /*data*/, qint64 maxSize ) { return maxSize; };
+        qint64 readData( char * /*data*/, qint64 /*maxSize*/ ) { return -1; };
+        qint64 writeData( const char * /*data*/, qint64 maxSize ) { return maxSize; };
 };
 
 /**
@@ -44,10 +44,10 @@ class MARBLE_EXPORT MarbleDebug
 
 inline QDebug mDebug()
 {
-    if(MarbleDebug::enable) 
-        return QDebug(QtDebugMsg); 
-    else 
-        return QDebug(MarbleDebug::nullDevice()); 
+    if ( MarbleDebug::enable )
+        return QDebug( QtDebugMsg );
+    else
+        return QDebug( MarbleDebug::nullDevice() );
 }
 
 } // namespace Marble
