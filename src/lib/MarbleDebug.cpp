@@ -9,6 +9,7 @@
 //
 
 #include "MarbleDebug.h"
-namespace Marble {
+namespace Marble
+{
     bool MarbleDebug::enable = false;
 } // namespace Marble

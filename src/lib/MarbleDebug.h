@@ -15,11 +15,13 @@
 
 #include "marble_export.h"
 
-namespace Marble {
+namespace Marble
+{
 /**
   * a simple null device
   */
-class NullDevice : public QIODevice {
+class NullDevice : public QIODevice
+{
     public:
         qint64 readData ( char * /*data*/, qint64 /*maxSize*/ ) { return -1; };
         qint64 writeData ( const char * /*data*/, qint64 maxSize ) { return maxSize; };
@@ -29,7 +31,8 @@ class NullDevice : public QIODevice {
   * a class which takes all the settings and exposes them
   */
 
-class MARBLE_EXPORT MarbleDebug {
+class MARBLE_EXPORT MarbleDebug
+{
     public:
         static bool enable;
         static QIODevice* nullDevice() { static QIODevice *device = new NullDevice; return device; };
@@ -39,7 +42,8 @@ class MARBLE_EXPORT MarbleDebug {
   * an inline function which should replace qDebug()
   */
 
-inline QDebug mDebug() { 
+inline QDebug mDebug()
+{
     if(MarbleDebug::enable) 
         return QDebug(QtDebugMsg); 
     else 
