@@ -46,12 +46,12 @@ class ExtDateTime : public QObject
     /**
      * @brief Sets the internal date and time with the current one
      **/
-    void setNow() {m_datetime = QDateTime::currentDateTime().toUTC();}
+    void setNow();
 
     /**
      * @brief Returns the internal date and time
      **/
-    QDateTime datetime() {return m_datetime;}
+    QDateTime datetime();
 
     /**
      * @brief Sets the internal date and time a custom one
@@ -62,13 +62,13 @@ class ExtDateTime : public QObject
     /**
      * @brief Returns the speed of the timer
      **/
-    int getSpeed() {return m_speed;};
+    int getSpeed();
     
     /**
      * @brief Sets the speed of the timer
      * @param speed The new speed (integer)
      **/
-    void setSpeed(int speed) {m_speed = speed;}
+    void setSpeed(int speed);
 
  private Q_SLOTS:
     void timerTimeout();
@@ -83,6 +83,27 @@ class ExtDateTime : public QObject
     QDateTime  m_datetime;
     int        m_lastmin;
 };
+
+
+inline void ExtDateTime::setNow()
+{
+    m_datetime = QDateTime::currentDateTime().toUTC();
+}
+
+inline QDateTime ExtDateTime::datetime()
+{
+    return m_datetime;
+}
+
+inline int ExtDateTime::getSpeed()
+{
+    return m_speed;
+}
+
+inline void ExtDateTime::setSpeed( int speed )
+{
+    m_speed = speed;
+}
 
 }
 
