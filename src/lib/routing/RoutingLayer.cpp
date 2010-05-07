@@ -103,11 +103,18 @@ public:
     /** Show a context menu at the specified position */
     void showContextMenu( const QPoint &position );
 
+    /** Update the cached drag position. Use an empty point to clear it. */
     void storeDragPosition( const QPoint &position );
 
     // The following methods are mostly only called at one place in the code, but often
     // Inlined to avoid the function call overhead. Having functions here is just to
     // keep the code clean
+
+    /**
+      * Returns the start or destination position if Ctrl key is among the
+      * provided modifiers, the cached insert position otherwise
+      */
+    inline int viaInsertPosition( Qt::KeyboardModifiers modifiers ) const;
 
     /** Paint icons for each placemark in the placemark model */
     inline void renderPlacemarks( GeoPainter *painter );
@@ -158,6 +165,20 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
 void RoutingLayerPrivate::showContextMenu( const QPoint &pos )
 {
     m_contextMenu->showRmbMenu( pos.x(), pos.y() );
+}
+
+int RoutingLayerPrivate::viaInsertPosition( Qt::KeyboardModifiers modifiers ) const
+{
+    if ( modifiers & Qt::ControlModifier ) {
+        bool leftHand = m_routeSkeleton->size() / 2 >= m_dragStopOverRightIndex;
+        if ( leftHand && m_routeSkeleton->size() > 2 ) {
+            return 0;
+        } else {
+            return m_routeSkeleton->size();
+        }
+    } else {
+        return m_dragStopOverRightIndex;
+    }
 }
 
 void RoutingLayerPrivate::renderPlacemarks( GeoPainter *painter )
@@ -220,7 +241,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         QPoint center = m_dropStopOver - QPoint( dx, dy );
         painter->drawPixmap( center, m_targetPixmap );
 
-        if ( !m_dragStopOver.isNull() && m_dragStopOverRightIndex > 0 && m_dragStopOverRightIndex < m_routeSkeleton->size() ) {
+        if ( !m_dragStopOver.isNull() && m_dragStopOverRightIndex >= 0 && m_dragStopOverRightIndex <= m_routeSkeleton->size() ) {
             QPoint moved = m_dropStopOver - m_dragStopOver;
             if ( moved.manhattanLength() > 10 ) {
                 qreal lon( 0.0 ), lat( 0.0 );
@@ -229,8 +250,12 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
                     GeoDataCoordinates drag( lon, lat );
                     bluePen.setStyle( Qt::DotLine );
                     painter->setPen( bluePen );
-                    painter->drawLine( drag, m_routeSkeleton->at( m_dragStopOverRightIndex-1 ) );
-                    painter->drawLine( drag, m_routeSkeleton->at( m_dragStopOverRightIndex ) );
+                    if ( m_dragStopOverRightIndex > 0 ) {
+                        painter->drawLine( drag, m_routeSkeleton->at( m_dragStopOverRightIndex-1 ) );
+                    }
+                    if ( m_dragStopOverRightIndex < m_routeSkeleton->size() ) {
+                        painter->drawLine( drag, m_routeSkeleton->at( m_dragStopOverRightIndex ) );
+                    }
                     bluePen.setStyle( Qt::SolidLine );
                     painter->setPen( bluePen );
                 }
@@ -400,9 +425,10 @@ bool RoutingLayerPrivate::handleMouseButtonRelease( QMouseEvent *e )
         }
 
         qreal lon( 0.0 ), lat( 0.0 );
-        if ( m_dragStopOverRightIndex > 0 && m_dragStopOverRightIndex < m_routeSkeleton->size()
+        if ( m_dragStopOverRightIndex >= 0 && m_dragStopOverRightIndex <= m_routeSkeleton->size()
                 && m_marbleWidget->geoCoordinates( m_dropStopOver.x(), m_dropStopOver.y(), lon, lat, GeoDataCoordinates::Radian ) ) {
             GeoDataCoordinates position( lon, lat );
+            m_dragStopOverRightIndex = viaInsertPosition( e->modifiers() );
             m_routeSkeleton->insert( m_dragStopOverRightIndex, position );
             clearStopOver();
             emit q->routeDirty();
@@ -434,6 +460,7 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
             m_marbleWidget->setCursor( Qt::ArrowCursor );
         } else if ( !m_dragStopOver.isNull() ) {
             // Repaint only that region of the map that is affected by the change
+            m_dragStopOverRightIndex = viaInsertPosition( e->modifiers() );
             QRect dirty = m_routeRegion.boundingRect();
             dirty |= QRect( m_dropStopOver, QSize( 22, 22 ) );
             dirty |= QRect( e->pos(), QSize( 22, 22 ) );
