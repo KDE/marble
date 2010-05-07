@@ -102,7 +102,7 @@ void ExtDateTime::timerTimeout()
 }
 
 
-void ExtDateTime::setDateTime(QDateTime datetime)
+void ExtDateTime::setDateTime( const QDateTime& datetime )
 {
     m_datetime = datetime;
     m_lastmin = m_datetime.time().minute();

@@ -57,7 +57,7 @@ class ExtDateTime : public QObject
      * @brief Sets the internal date and time a custom one
      * @param datetime The custom date and time
      **/
-    void setDateTime(QDateTime datetime);
+    void setDateTime( const QDateTime& datetime );
 
     /**
      * @brief Returns the speed of the timer
