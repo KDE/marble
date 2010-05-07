@@ -41,7 +41,7 @@ ExtDateTime::~ExtDateTime()
 }
 
 
-int ExtDateTime::year0()
+int ExtDateTime::year0() const
 {
     int year = m_datetime.date().year();
     if ( year < 0 )
@@ -50,7 +50,7 @@ int ExtDateTime::year0()
 }
 
 
-long ExtDateTime::toJDN()
+long ExtDateTime::toJDN() const
 {
     const int EPOCH_G = 32045; // 29 February 4801BCE in gregorian calendar
     const int EPOCH_J = 32083; // 29 February 4801BCE in julian calendar
@@ -78,7 +78,7 @@ long ExtDateTime::toJDN()
 }
 
 
-qreal ExtDateTime::dayFraction()
+qreal ExtDateTime::dayFraction() const
 {
     qreal f;
     f = m_datetime.time().second();

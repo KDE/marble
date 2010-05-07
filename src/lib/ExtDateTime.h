@@ -35,13 +35,13 @@ class ExtDateTime : public QObject
     /**
      * @brief Convert 1BCE to year 0, etc.
      **/
-    int year0();
+    int year0() const;
 
     /**
      * @brief Convert to julian day number. Adapted from http://en.wikipedia.org/wiki/Julian_day#Calculation
      **/
-    long toJDN();
-    qreal dayFraction();
+    long toJDN() const;
+    qreal dayFraction() const;
 
     /**
      * @brief Sets the internal date and time with the current one
@@ -51,7 +51,7 @@ class ExtDateTime : public QObject
     /**
      * @brief Returns the internal date and time
      **/
-    QDateTime datetime();
+    QDateTime datetime() const;
 
     /**
      * @brief Sets the internal date and time a custom one
@@ -62,7 +62,7 @@ class ExtDateTime : public QObject
     /**
      * @brief Returns the speed of the timer
      **/
-    int getSpeed();
+    int getSpeed() const;
     
     /**
      * @brief Sets the speed of the timer
@@ -90,12 +90,12 @@ inline void ExtDateTime::setNow()
     m_datetime = QDateTime::currentDateTime().toUTC();
 }
 
-inline QDateTime ExtDateTime::datetime()
+inline QDateTime ExtDateTime::datetime() const
 {
     return m_datetime;
 }
 
-inline int ExtDateTime::getSpeed()
+inline int ExtDateTime::getSpeed() const
 {
     return m_speed;
 }
