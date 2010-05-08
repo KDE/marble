@@ -15,6 +15,7 @@
 #include "MarblePlacemarkModel.h"
 
 #include <QtCore/QAbstractListModel>
+#include <QtCore/QTime>
 
 /**
   * A QAbstractItemModel that contains a list of routing instructions.
@@ -34,6 +35,18 @@ class RoutingModel : public QAbstractListModel
     Q_OBJECT
 
 public:
+    struct Duration
+    {
+        unsigned int days;
+        QTime time;
+
+        explicit Duration( unsigned int days_ = 0, const QTime &time_ = QTime() )
+            :days(days_), time(time_)
+        {
+            // nothing to do
+        }
+    };
+
     enum RoutingItemDataRole {
         CoordinateRole = MarblePlacemarkModel::CoordinateRole, // synchronized with MarblePlacemarkModel
         TypeRole = CoordinateRole + 24 // avoid conflict with MarblePlacemarkModel
@@ -82,9 +95,9 @@ public:
 
     /**
       * Returns the total (estimated) time it takes to travel from
-      * source to destination
+-     * source to destination
       */
-    QTime totalTime() const;
+    Duration duration() const;
 
     /**
       * Returns the total route distance (kilometer)

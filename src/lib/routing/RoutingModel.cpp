@@ -21,7 +21,6 @@
 
 #include <QtCore/QBuffer>
 #include <QtCore/QRegExp>
-#include <QtCore/QTime>
 #include <QtCore/QVector>
 #include <QtGui/QPixmap>
 #include <QtXml/QDomDocument>
@@ -43,7 +42,7 @@ class RoutingModelPrivate
 public:
     RouteElements m_route;
 
-    QTime m_totalTime;
+    RoutingModel::Duration m_totalDuration;
 
     qreal m_totalDistance;
 
@@ -168,11 +167,14 @@ void RoutingModel::importOpenGis( const QByteArray &content )
         QDomNodeList time = summary.item( 0 ).toElement().elementsByTagName( "xls:TotalTime" );
         QDomNodeList distance = summary.item( 0 ).toElement().elementsByTagName( "xls:TotalDistance" );
         if ( time.size() == 1 && distance.size() == 1 ) {
-            QRegExp regexp = QRegExp( "^PT(?:(\\d+)H)?(?:(\\d+)M)?(\\d+)S" );
+            QRegExp regexp = QRegExp( "^P(?:(\\d+)D)?T(?:(\\d+)H)?(?:(\\d+)M)?(\\d+)S" );
             if ( regexp.indexIn( time.item( 0 ).toElement().text() ) == 0 ) {
                 QStringList matches = regexp.capturedTexts();
-                int hours( 0 ), minutes( 0 ), seconds( 0 );
+                int days( 0 ), hours( 0 ), minutes( 0 ), seconds( 0 );
                 switch ( matches.size() ) {
+                case 5:
+                    days    = regexp.cap( matches.size() - 4 ).toInt();
+                    // Intentionally no break
                 case 4:
                     hours   = regexp.cap( matches.size() - 3 ).toInt();
                     // Intentionally no break
@@ -186,7 +188,8 @@ void RoutingModel::importOpenGis( const QByteArray &content )
                     mDebug() << "Unable to parse time string " << time.item( 0 ).toElement().text();
                 }
 
-                d->m_totalTime = QTime( hours, minutes, seconds, 0 );
+                d->m_totalDuration.days = days;
+                d->m_totalDuration.time = QTime( hours, minutes, seconds, 0 );
                 d->m_totalDistance = distance.item( 0 ).attributes().namedItem( "value" ).nodeValue().toDouble();
                 QString unit = distance.item( 0 ).attributes().namedItem( "uom" ).nodeValue();
                 if ( unit == "M" ) {
@@ -236,9 +239,9 @@ void RoutingModel::importOpenGis( const QByteArray &content )
     reset();
 }
 
-QTime RoutingModel::totalTime() const
+RoutingModel::Duration RoutingModel::duration() const
 {
-    return d->m_totalTime;
+    return d->m_totalDuration;
 }
 
 qreal RoutingModel::totalDistance() const

@@ -373,11 +373,17 @@ void RoutingWidget::updateRouteState( RoutingManager::State state, RouteSkeleton
         }
 
         if ( bbox.size() > 1 ) {
-            QString label = tr( "Estimated travel time: %1 (%2 km)" );
             qreal distance = d->m_routingManager->routingModel()->totalDistance();
-            QTime time = d->m_routingManager->routingModel()->totalTime();
+            unsigned int days = d->m_routingManager->routingModel()->duration().days;
+            QTime time = d->m_routingManager->routingModel()->duration().time;
             QString timeString = time.toString( Qt::DefaultLocaleShortDate );
-            d->m_ui.descriptionLabel->setText( label.arg( timeString ).arg( distance, 0, 'f', 1 ) );
+            if ( days ) {
+                QString label = tr( "Estimated travel time: %1 days, %2 (%3 km)", 0, days );
+                d->m_ui.descriptionLabel->setText( label.arg( days ).arg( timeString ).arg( distance, 0, 'f', 1 ) );
+            } else {
+                QString label = tr( "Estimated travel time: %1 (%2 km)" );
+                d->m_ui.descriptionLabel->setText( label.arg( timeString ).arg( distance, 0, 'f', 1 ) );
+            }
             d->m_ui.descriptionLabel->setVisible( true );
 
             if ( d->m_zoomRouteAfterDownload ) {
