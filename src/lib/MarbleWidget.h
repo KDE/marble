@@ -40,6 +40,7 @@ namespace Marble
 
 class AbstractFloatItem;
 class FileViewModel;
+class GeoDataLatLonAltBox;
 class GeoDataLatLonBox;
 class GeoPainter;
 class GeoSceneDocument;
@@ -983,6 +984,12 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Signal that a render item has been initialized
      */
     void renderPluginInitialized( RenderPlugin *renderPlugin );
+
+    /**
+     * This signal is emitted when the visible region of the map changes. This typically happens
+     * when the user moves the map around or zooms.
+     */
+    void visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox& visibleLatLonAltBox );
 
  protected:
     /**

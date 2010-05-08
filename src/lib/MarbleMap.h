@@ -48,6 +48,7 @@ namespace Marble
 class MarbleMapPrivate;
 
 // Marble
+class GeoDataLatLonAltBox;
 class MarbleModel;
 class ViewParams;
 class MeasureTool;
@@ -833,6 +834,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * If dirtyRegion.isEmpty() returns true, the whole viewport has to be repainted.
      */
     void repaintNeeded( const QRegion& dirtyRegion );
+
+    /**
+     * This signal is emitted when the visible region of the map changes. This typically happens
+     * when the user moves the map around or zooms.
+     */
+    void visibleLatLonAltBoxChanged( const GeoDataLatLonAltBox& visibleLatLonAltBox );
 
  protected:
 

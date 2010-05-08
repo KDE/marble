@@ -31,6 +31,7 @@
 #include "AbstractProjection.h"
 #include "DataMigration.h"
 #include "FileViewModel.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoPainter.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
@@ -212,6 +213,8 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SIGNAL( zoomChanged( int ) ) );
     m_widget->connect( m_map,    SIGNAL( distanceChanged( QString ) ),
                        m_widget, SIGNAL( distanceChanged( QString ) ) );
+    m_widget->connect( m_map,    SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
+                       m_widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )));
 
     // Set background: black.
     m_widget->setPalette( QPalette ( Qt::black ) );

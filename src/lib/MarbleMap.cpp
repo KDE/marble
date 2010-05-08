@@ -36,6 +36,7 @@
 #include "FileStorageWatcher.h"
 #include "FileViewModel.h"
 #include "GeoDataFeature.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
@@ -406,6 +407,7 @@ void MarbleMap::setSize( int width, int height )
     d->m_height = height;
 
     d->doResize();
+    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
 void MarbleMap::setSize( const QSize& size )
@@ -414,6 +416,7 @@ void MarbleMap::setSize( const QSize& size )
     d->m_height = size.height();
 
     d->doResize();
+    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
 QSize MarbleMap::size() const
@@ -453,6 +456,7 @@ void MarbleMap::setRadius( int radius )
     d->m_logzoom = d->zoom( radius );
     emit zoomChanged( d->m_logzoom );
     emit distanceChanged( distanceString() );
+    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
 
@@ -770,6 +774,7 @@ void MarbleMap::zoomOut()
 void MarbleMap::rotateBy( const Quaternion& incRot )
 {
     d->m_viewParams.setPlanetAxis( incRot * d->m_viewParams.planetAxis() );
+    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
 void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat )
@@ -782,6 +787,7 @@ void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat )
     axis *= rotPhi;
     axis.normalize();
     d->m_viewParams.setPlanetAxis( axis );
+    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
 
@@ -790,6 +796,7 @@ void MarbleMap::centerOn( const qreal lon, const qreal lat )
     Quaternion  quat;
     quat.createFromEuler( -lat * DEG2RAD, lon * DEG2RAD, 0.0 );
     d->m_viewParams.setPlanetAxis( quat );
+    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
 void MarbleMap::centerOn( const QModelIndex& index )
@@ -843,6 +850,7 @@ void MarbleMap::setProjection( Projection projection )
 
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
+    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
 void MarbleMap::home( qreal &lon, qreal &lat, int& zoom )
