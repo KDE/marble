@@ -561,8 +561,7 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( layer )
 
     painter->save();
-    bool antialising = d->m_marbleWidget->viewContext() == Still;
-    painter->setRenderHint( QPainter::Antialiasing, antialising );
+    painter->autoMapQuality();
 
     if ( d->m_placemarkModel) {
         d->renderPlacemarks( painter );
