@@ -129,7 +129,10 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
             || e->type() == QEvent::MouseButtonRelease )
         {
             QMouseEvent *event = static_cast<QMouseEvent*>( e );
-            QRectF floatItemRect = QRectF( positivePosition(), size() + QSize( 1, 1 ) );
+            // The rect the item was painted on before. We add one pixel as antialiasing could
+            // result into painting on these pixels to.
+            QRectF floatItemRect = QRectF( positivePosition() - QPoint( 1, 1 ),
+                                           size() + QSize( 2, 2 ) );
 
             // Click and move above a float item triggers moving the float item
             if ( contains( event->pos() ) ) {
@@ -168,7 +171,10 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
                     }
 
                     setPosition( QPointF( newX,newY ) );
-                    QRect newFloatItemRect = QRectF( positivePosition(), size() + QSize( 1, 1 ) ).toRect();
+                    // The rect the item will be painted on now. We add one pixel as
+                    // antialiasing could result into painting on these pixels to.
+                    QRect newFloatItemRect = QRectF( positivePosition() - QPoint( 1, 1 ),
+                                                     size() + QSize( 2, 2 ) ).toRect();
                     p()->m_floatItemMoveStartPos = event->pos();
                     QRegion dirtyRegion( floatItemRect.toRect() );
                     dirtyRegion = dirtyRegion.united( newFloatItemRect );
