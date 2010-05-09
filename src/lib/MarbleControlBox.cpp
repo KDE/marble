@@ -539,6 +539,17 @@ void MarbleControlBox::setCurrentLocationTabShown( bool show )
 {
     QString  title = tr( "Current Location" );
     setWidgetTabShown( d->m_currentLocation2Widget, 4, show, title );
+    if ( d->m_widget ) {
+        bool enabled = d->m_widget->mapTheme()->head()->target() == "earth";
+        int locationIndex = d->uiWidget.toolBox->indexOf( d->m_currentLocation2Widget );
+        if ( locationIndex >= 0 ) {
+            d->uiWidget.toolBox->setItemEnabled( locationIndex, enabled );
+        }
+
+        if ( !enabled ) {
+            d->m_widget->map()->model()->gpsLayer()->setVisible( false );
+        }
+    }
 }
 
 
@@ -628,6 +639,12 @@ void MarbleControlBox::selectTheme( const QString &theme )
 
         QString selectedId = d->m_widget->mapTheme()->head()->target();
         d->m_runnerManager->setCelestialBodyId( selectedId );
+        int routingIndex = d->uiWidget.toolBox->indexOf( d->m_routingWidget );
+        d->uiWidget.toolBox->setItemEnabled( routingIndex, selectedId == "earth" );
+        int locationIndex = d->uiWidget.toolBox->indexOf( d->m_currentLocation2Widget );
+        if ( locationIndex >= 0 ) {
+            d->uiWidget.toolBox->setItemEnabled( locationIndex, selectedId == "earth" );
+        }
 
         QList<QStandardItem*> itemList = d->m_celestialList->findItems( selectedId, Qt::MatchExactly, 1 );
 

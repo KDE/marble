@@ -13,6 +13,8 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "GeoPainter.h"
+#include "GeoSceneDocument.h"
+#include "GeoSceneHead.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidget.h"
 #include "MarbleWidgetPopupMenu.h"
@@ -554,6 +556,10 @@ QStringList RoutingLayer::renderPosition() const
 bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
                            const QString& renderPos, GeoSceneLayer *layer )
 {
+    if ( d->m_marbleWidget->mapTheme()->head()->target() != "earth" ) {
+        return false;
+    }
+
     Q_UNUSED( viewport )
     Q_UNUSED( renderPos )
     Q_UNUSED( layer )
