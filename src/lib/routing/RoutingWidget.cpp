@@ -353,6 +353,10 @@ void RoutingWidget::removeInputWidget( int index )
         d->m_inputWidgets.remove( index );
         d->m_ui.routingLayout->removeWidget( widget );
         widget->deleteLater();
+        if ( widget == d->m_activeInput ) {
+            d->m_activeInput = 0;
+            d->m_routingLayer->setModel( d->m_routingManager->routingModel() );
+        }
         d->adjustInputWidgets();
     }
 
