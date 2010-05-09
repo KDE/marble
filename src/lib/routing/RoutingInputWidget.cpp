@@ -326,6 +326,19 @@ void RoutingInputWidget::setWorkOffline( bool offline )
     d->m_workOffline = offline;
 }
 
+void RoutingInputWidget::clear()
+{
+    d->m_nominatimTimer.stop();
+    d->m_progressTimer.stop();
+    d->m_pickButton->setChecked( false );
+    d->m_pickButton->setVisible( true );
+    d->m_stateButton->setVisible( false );
+    d->m_stateButton->setIcon( d->m_route->pixmap( d->m_index ) );
+    d->m_route->setPosition( d->m_index, GeoDataCoordinates() );
+    d->m_lineEdit->clear();
+    emit targetValidityChanged( false );
+}
+
 } // namespace Marble
 
 #include "RoutingInputWidget.moc"

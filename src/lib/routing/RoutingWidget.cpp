@@ -337,7 +337,11 @@ void RoutingWidget::removeInputWidget( RoutingInputWidget *widget )
 {
     int index = d->m_inputWidgets.indexOf( widget );
     if ( index >= 0 ) {
-        d->m_routeSkeleton->remove( index );
+        if ( d->m_inputWidgets.size() < 3 ) {
+            widget->clear();
+        } else {
+            d->m_routeSkeleton->remove( index );
+        }
         d->m_routingManager->updateRoute();
     }
 }

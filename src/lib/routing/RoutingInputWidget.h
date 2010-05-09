@@ -75,6 +75,11 @@ public:
       */
     void setWorkOffline( bool offline );
 
+    /**
+      * Remove target position and user input, if any
+      */
+    void clear();
+
 public Q_SLOTS:
     /**
       * Search for placemarks matching the current input text. Does nothing
