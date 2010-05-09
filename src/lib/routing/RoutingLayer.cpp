@@ -67,8 +67,6 @@ public:
 
     QPixmap m_targetPixmap;
 
-    QPixmap m_viaPixmap;
-
     QRect m_dirtyRect;
 
     QPoint m_dropStopOver;
@@ -148,10 +146,10 @@ public:
 };
 
 RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget ) :
-        q( parent ), m_proxyModel( 0 ), m_movingIndex( -1 ), m_marbleWidget( widget ), m_targetPixmap( ":/data/bitmaps/routing_pick.png" ),
-        m_viaPixmap( ":/data/bitmaps/routing_via.png" ), m_dragStopOverRightIndex( -1 ), m_pointSelection( false ),
-        m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ), m_routeDirty( false ), m_pixmapSize( 22, 22 ),
-        m_routeSkeleton( 0 ), m_activeMenuIndex( -1 )
+        q( parent ), m_proxyModel( 0 ), m_movingIndex( -1 ), m_marbleWidget( widget ),
+        m_targetPixmap( ":/data/bitmaps/routing_pick.png" ), m_dragStopOverRightIndex( -1 ),
+        m_pointSelection( false ), m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ),
+        m_routeDirty( false ), m_pixmapSize( 22, 22 ), m_routeSkeleton( 0 ), m_activeMenuIndex( -1 )
 {
     m_contextMenu = new MarbleWidgetPopupMenu( m_marbleWidget, m_marbleWidget->model() );
     m_removeViaPointAction = new QAction( QObject::tr( "&Remove this destination" ), q );

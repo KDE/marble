@@ -1,8 +1,8 @@
 <RCC>
   <qresource>
-    <file>../../data/bitmaps/routing_select.png</file>
+    <file>../../data/bitmaps/routing_remove.png</file>
     <file>../../data/bitmaps/routing_pick.png</file>
-    <file>../../data/bitmaps/routing_via.png</file>
+    <file>../../data/bitmaps/routing_step.png</file>
     <file>../../data/bitmaps/progress.mng</file>
     <file>../../data/bitmaps/cursor_bc.xpm</file>
     <file>../../data/bitmaps/cursor_bl.xpm</file>

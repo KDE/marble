@@ -84,11 +84,10 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteSkeleton *skeleton, i
     m_lineEdit = new QLineEdit( parent );
 
     m_removeButton = new QPushButton( parent );
-    /** @todo: Use an icon instead */
-    m_removeButton->setText( "X" );
-    m_removeButton->setToolTip( "Remove this input field" );
+    m_removeButton->setIcon( QIcon( ":/data/bitmaps/routing_remove.png" ) );
+    m_removeButton->setToolTip( "Remove this position" );
     m_removeButton->setFlat( true );
-    m_removeButton->setMaximumWidth( 12 );
+    m_removeButton->setMaximumWidth( 22 );
 
     m_pickButton = new QPushButton( parent );
     m_pickButton->setIcon( QIcon( m_route->pixmap( m_index ) ) );
@@ -196,6 +195,7 @@ void RoutingInputWidget::setTargetPosition( const GeoDataCoordinates &position )
     d->m_route->setPosition( d->m_index, position );
     d->m_progressTimer.stop();
     d->m_stateButton->setVisible( true );
+    d->m_stateButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
     emit targetValidityChanged( true );
 }
 
