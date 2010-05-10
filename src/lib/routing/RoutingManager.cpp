@@ -10,10 +10,13 @@
 
 #include "RoutingManager.h"
 
+#include "MarbleDebug.h"
 #include "MarbleWidget.h"
 #include "OrsRoutingProvider.h"
 #include "RouteSkeleton.h"
 #include "RoutingModel.h"
+
+#include <QtGui/QMessageBox>
 
 namespace Marble
 {
@@ -70,8 +73,14 @@ void RoutingManager::setRouteData( AbstractRoutingProvider::Format format, const
     /** @todo: switch to using GeoDataDocument* */
     Q_UNUSED( format );
 
-    d->m_routingModel->importOpenGis( data );
-    d->m_marbleWidget->repaint();
+    if ( data.size() ) {
+        d->m_routingModel->importOpenGis( data );
+        d->m_marbleWidget->repaint();
+    } else {
+        mDebug() << "Got an empty result instead of route data";
+        QString message = tr("Sorry, the route could not be retrieved. Please try again later.");
+        QMessageBox::warning( d->m_marbleWidget, "Route Error", message );
+    }
 
     emit stateChanged( Retrieved, d->m_route );
 }

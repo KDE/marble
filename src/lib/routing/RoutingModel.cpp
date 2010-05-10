@@ -20,8 +20,10 @@
 #include "RouteSkeleton.h"
 
 #include <QtCore/QBuffer>
+#include <QtCore/QPointer>
 #include <QtCore/QRegExp>
 #include <QtCore/QVector>
+#include <QtGui/QMessageBox>
 #include <QtGui/QPixmap>
 #include <QtXml/QDomDocument>
 
@@ -158,6 +160,11 @@ void RoutingModel::importOpenGis( const QByteArray &content )
                 }
             } else {
                 mDebug() << "Error message " << errorMessage << " not parsable.";
+                QString message = tr( "Sorry, a problem occurred when calculating the route. Try adjusting start and destination points." );
+                QPointer<QMessageBox> messageBox = new QMessageBox( QMessageBox::Warning, "Route Error", message );
+                messageBox->setDetailedText( errorMessage );
+                messageBox->exec();
+                delete messageBox;
             }
         }
     }
