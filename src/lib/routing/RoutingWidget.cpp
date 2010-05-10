@@ -24,8 +24,10 @@
 #include "RoutingProxyModel.h"
 
 #include <QtCore/QTime>
+#include <QtCore/QTimer>
 #include <QtGui/QFileDialog>
 #include <QtGui/QSortFilterProxyModel>
+#include <QtGui/QMovie>
 
 #include "ui_RoutingWidget.h"
 
@@ -57,6 +59,10 @@ public:
 
     bool m_workOffline;
 
+    QMovie m_progress;
+
+    QTimer m_progressTimer;
+
     /** Constructor */
     RoutingWidgetPrivate();
 
@@ -81,9 +87,9 @@ RoutingWidgetPrivate::RoutingWidgetPrivate() :
         m_widget( 0 ), m_routingManager( 0 ), m_routingLayer( 0 ),
         m_activeInput( 0 ), m_inputRequest( 0 ), m_routingProxyModel( 0 ),
         m_routeSkeleton( 0 ), m_zoomRouteAfterDownload( false ),
-        m_workOffline( false )
+        m_workOffline( false ), m_progress( ":/data/bitmaps/progress.mng" )
 {
-    // nothing to do
+    m_progressTimer.setInterval( 100 );
 }
 
 void RoutingWidgetPrivate::adjustInputWidgets()
@@ -159,6 +165,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( insertInputWidget( int ) ) );
     connect( d->m_routeSkeleton, SIGNAL( positionRemoved( int ) ),
              this, SLOT( removeInputWidget( int ) ) );
+    connect( &d->m_progressTimer, SIGNAL( timeout() ),
+             this, SLOT( updateProgress() ) );
 
     d->m_routingProxyModel = new RoutingProxyModel( this );
     d->m_routingProxyModel->setSourceModel( d->m_routingManager->routingModel() );
@@ -402,6 +410,13 @@ void RoutingWidget::updateRouteState( RoutingManager::State state, RouteSkeleton
     }
 
     d->m_routingLayer->setRouteDirty( state == RoutingManager::Downloading );
+
+    if ( state == RoutingManager::Downloading ) {
+        d->m_progressTimer.start();
+    } else {
+        d->m_progressTimer.stop();
+        d->m_ui.searchButton->setIcon( QIcon() );
+    }
 }
 
 void RoutingWidget::requestMapPosition( RoutingInputWidget *widget, bool enabled )
@@ -473,6 +488,13 @@ void RoutingWidget::setWorkOffline( bool offline )
 
     d->m_workOffline = offline;
     d->m_routingManager->setWorkOffline( offline );
+}
+
+void RoutingWidget::updateProgress()
+{
+    d->m_progress.jumpToNextFrame();
+    QPixmap frame = d->m_progress.currentPixmap();
+    d->m_ui.searchButton->setIcon( frame );
 }
 
 } // namespace Marble

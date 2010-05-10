@@ -100,6 +100,9 @@ private Q_SLOTS:
     /** Export route to a file */
     void exportRoute();
 
+    /** Progress animation update */
+    void updateProgress();
+
 private:
     RoutingWidgetPrivate *const d;
 };
