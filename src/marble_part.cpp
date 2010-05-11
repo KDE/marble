@@ -142,7 +142,6 @@ MarblePart::~MarblePart()
 {
     writeSettings();
 
-    delete m_downloadRegionDialog;
     // Check whether this delete is really needed.
     delete m_configDialog;
 }
@@ -993,7 +992,7 @@ void MarblePart::showDownloadRegionDialog()
     ViewportParams * const viewport = m_controlView->marbleWidget()->map()->viewParams()->viewport();
     MarbleModel * const model = m_controlView->marbleWidget()->map()->model();
     if ( !m_downloadRegionDialog ) {
-        m_downloadRegionDialog = new DownloadRegionDialog( viewport, model );
+        m_downloadRegionDialog = new DownloadRegionDialog( viewport, model, widget() );
         connectDownloadRegionDialog();
     }
     // FIXME: get allowed range from current map theme
