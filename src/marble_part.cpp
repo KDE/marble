@@ -972,18 +972,29 @@ void MarblePart::showNewStuffDialog()
     //m_controlView->marbleControl()->updateMapThemes();
 }
 
+void MarblePart::connectDownloadRegionDialog()
+{
+    connect( m_downloadRegionDialog, SIGNAL( accepted() ), SLOT( downloadRegion() ));
+    connect( m_downloadRegionDialog, SIGNAL( applied() ), SLOT( downloadRegion() ));
+    connect( m_controlView->marbleWidget(), SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
+             m_downloadRegionDialog, SLOT( setVisibleLatLonAltBox( GeoDataLatLonAltBox )));
+    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
+             m_downloadRegionDialog, SLOT( updateTextureLayer() ));
+}
+
+void MarblePart::disconnectDownloadRegionDialog()
+{
+    disconnect( m_downloadRegionDialog, 0, this, 0 );
+    disconnect( m_controlView->marbleWidget(), 0, m_downloadRegionDialog, 0 );
+}
+
 void MarblePart::showDownloadRegionDialog()
 {
     ViewportParams * const viewport = m_controlView->marbleWidget()->map()->viewParams()->viewport();
     MarbleModel * const model = m_controlView->marbleWidget()->map()->model();
     if ( !m_downloadRegionDialog ) {
         m_downloadRegionDialog = new DownloadRegionDialog( viewport, model );
-        connect( m_downloadRegionDialog, SIGNAL( accepted() ), SLOT( downloadRegion() ));
-        connect( m_downloadRegionDialog, SIGNAL( applied() ), SLOT( downloadRegion() ));
-        connect( m_controlView->marbleWidget(), SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
-                 m_downloadRegionDialog, SLOT( setVisibleLatLonAltBox( GeoDataLatLonAltBox )));
-        connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
-                 m_downloadRegionDialog, SLOT( updateTextureLayer() ));
+        connectDownloadRegionDialog();
     }
     // FIXME: get allowed range from current map theme
     m_downloadRegionDialog->setAllowedTileLevelRange( 0, 18 );
