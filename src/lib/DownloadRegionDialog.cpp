@@ -316,8 +316,15 @@ void DownloadRegionDialog::toggleSelectionMethod()
 
 void DownloadRegionDialog::updateTilesCount()
 {
-    TileCoordsPyramid const pyramid = region();
-    qint64 const tilesCount = pyramid.tilesCount();
+    qint64 tilesCount;
+    if ( d->m_textureLayer ) {
+        TileCoordsPyramid const pyramid = region();
+        tilesCount = pyramid.tilesCount();
+    }
+    else {
+        tilesCount = 0;
+    }
+
     if ( tilesCount > maxTilesCount ) {
         d->m_tilesCountLimitInfo->setText( tr( "There is a limit of %n tiles to download.", "",
                                                maxTilesCount ));
