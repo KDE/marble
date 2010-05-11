@@ -21,3 +21,4 @@ add_subdirectory( navigation )
 
 # add_subdirectory( dataview )
 # add_subdirectory( fileview )
+add_subdirectory(aprs)
