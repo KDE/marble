@@ -50,8 +50,13 @@ PluginManager::PluginManager( QObject *parent )
 
 PluginManager::~PluginManager()
 {
-    qDeleteAll( d->m_renderPluginTemplates );
-    qDeleteAll( d->m_networkPluginTemplates );
+    // The plugin instances returned by QPluginLoader are shared by all QPluginLoaders.
+    // If more than one MarbleWidget is used, deleting them here leads to dangling
+    // pointers and double deletions in the other PluginManagers.
+    // TODO: According to QPluginLoader::unload deletion happens automatically on application
+    // termination, but it should be checked that this really is the case (and remove this TODO)
+    //qDeleteAll( d->m_renderPluginTemplates );
+    //qDeleteAll( d->m_networkPluginTemplates );
     delete d;
 }
 
