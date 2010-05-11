@@ -294,6 +294,11 @@ TileCoordsPyramid DownloadRegionDialog::region() const
 void DownloadRegionDialog::setVisibleLatLonAltBox( GeoDataLatLonAltBox const & region )
 {
     d->m_visibleRegion = region;
+    // update lat/lon widget only if not active to prevent that users unintentionally loose
+    // entered values
+    if ( !d->m_latLonBoxWidget->isEnabled() ) {
+        d->m_latLonBoxWidget->setLatLonBox( region );
+    }
     updateTilesCount();
 }
 
