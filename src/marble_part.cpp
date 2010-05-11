@@ -57,6 +57,7 @@
 #include "AbstractDataPlugin.h"
 #include "DownloadRegionDialog.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataLatLonAltBox.h"
 #include "HttpDownloadManager.h"
 #include "MarbleCacheSettingsWidget.h"
 #include "MarbleDirs.h"
@@ -979,7 +980,8 @@ void MarblePart::showDownloadRegionDialog()
         m_downloadRegionDialog = new DownloadRegionDialog( viewport, model->textureMapper() );
         connect( m_downloadRegionDialog, SIGNAL( accepted() ), SLOT( downloadRegion() ));
         //connect( m_downloadRegionDialog, SIGNAL( applied() ), SLOT( downloadRegion() ));
-        //connect( widget, SIGNAL( viewportChanged() ), m_downloadRegionDialog, SLOT( updateViewport() ));
+        connect( m_controlView->marbleWidget(), SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
+                 m_downloadRegionDialog, SLOT( setVisibleLatLonAltBox( GeoDataLatLonAltBox )));
         //connect( this, SIGNAL( mapThemeChanged() ),
     }
     // FIXME: get allowed range from current map theme

@@ -274,7 +274,7 @@ TileCoordsPyramid DownloadRegionDialog::region() const
     return coordsPyramid;
 }
 
-void DownloadRegionDialog::setVisibleRegion( GeoDataLatLonBox const & region )
+void DownloadRegionDialog::setVisibleLatLonAltBox( GeoDataLatLonAltBox const & region )
 {
     d->m_visibleRegion = region;
     updateTilesCount();
