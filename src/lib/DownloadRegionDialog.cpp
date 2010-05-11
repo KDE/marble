@@ -28,6 +28,7 @@
 #include "GeoSceneTexture.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
+#include "MarbleModel.h"
 #include "LatLonBoxWidget.h"
 #include "TileId.h"
 #include "TileLevelRangeWidget.h"
@@ -43,7 +44,7 @@ class DownloadRegionDialog::Private
 {
 public:
     Private( ViewportParams const * const viewport,
-             AbstractScanlineTextureMapper const * const textureMapper,
+             MarbleModel const * const model,
              QDialog * const dialog );
     QWidget * createSelectionMethodBox();
     QLayout * createTilesCounter();
@@ -51,6 +52,7 @@ public:
 
     int rad2PixelX( qreal const lon ) const;
     int rad2PixelY( qreal const lat ) const;
+    AbstractScanlineTextureMapper const * textureMapper() const;
 
     QDialog * m_dialog;
     LatLonBoxWidget * m_latLonBoxWidget;
@@ -63,13 +65,13 @@ public:
     int m_minimumAllowedTileLevel;
     int m_maximumAllowedTileLevel;
     ViewportParams const * const m_viewport;
-    AbstractScanlineTextureMapper const * const m_textureMapper;
-    GeoSceneTexture const * const m_textureLayer;
+    MarbleModel const * const m_model;
+    GeoSceneTexture const * m_textureLayer;
     GeoDataLatLonBox m_visibleRegion;
 };
 
 DownloadRegionDialog::Private::Private( ViewportParams const * const viewport,
-                                        AbstractScanlineTextureMapper const * const textureMapper,
+                                        MarbleModel const * const model,
                                         QDialog * const dialog )
     : m_dialog( dialog ),
       m_latLonBoxWidget( new LatLonBoxWidget ),
@@ -78,12 +80,12 @@ DownloadRegionDialog::Private::Private( ViewportParams const * const viewport,
       m_tilesCountLimitInfo( 0 ),
       m_okButton( 0 ),
       m_applyButton( 0 ),
-      m_originatingTileLevel( textureMapper->tileZoomLevel() ),
+      m_originatingTileLevel( model->textureMapper()->tileZoomLevel() ),
       m_minimumAllowedTileLevel( -1 ),
       m_maximumAllowedTileLevel( -1 ),
       m_viewport( viewport ),
-      m_textureMapper( textureMapper ),
-      m_textureLayer( textureMapper->textureLayer() ),
+      m_model( model ),
+      m_textureLayer( model->textureMapper()->textureLayer() ),
       m_visibleRegion( viewport->viewLatLonAltBox() )
 {
     m_latLonBoxWidget->setEnabled( false );
@@ -140,7 +142,7 @@ QWidget * DownloadRegionDialog::Private::createOkCancelButtonBox()
 // copied from AbstractScanlineTextureMapper and slightly adjusted
 int DownloadRegionDialog::Private::rad2PixelX( qreal const lon ) const
 {
-    qreal const globalWidth = m_textureMapper->tileSize().width()
+    qreal const globalWidth = textureMapper()->tileSize().width()
         * TileLoaderHelper::levelToColumn( m_textureLayer->levelZeroColumns(),
                                            m_originatingTileLevel );
     return static_cast<int>( globalWidth * 0.5 + lon * ( globalWidth / ( 2.0 * M_PI ) ));
@@ -149,7 +151,7 @@ int DownloadRegionDialog::Private::rad2PixelX( qreal const lon ) const
 // copied from AbstractScanlineTextureMapper and slightly adjusted
 int DownloadRegionDialog::Private::rad2PixelY( qreal const lat ) const
 {
-    qreal const globalHeight = m_textureMapper->tileSize().height()
+    qreal const globalHeight = textureMapper()->tileSize().height()
         * TileLoaderHelper::levelToRow( m_textureLayer->levelZeroRows(), m_originatingTileLevel );
     qreal const normGlobalHeight = globalHeight / M_PI;
     switch ( m_textureLayer->projection() ) {
@@ -168,11 +170,19 @@ int DownloadRegionDialog::Private::rad2PixelY( qreal const lat ) const
     return 0;
 }
 
+AbstractScanlineTextureMapper const * DownloadRegionDialog::Private::textureMapper() const
+{
+    AbstractScanlineTextureMapper const * const result = m_model->textureMapper();
+    Q_ASSERT( result );
+    return result;
+}
+
+
 DownloadRegionDialog::DownloadRegionDialog( ViewportParams const * const viewport,
-                                            AbstractScanlineTextureMapper const * const textureMapper,
+                                            MarbleModel const * const model,
                                             QWidget * const parent, Qt::WindowFlags const f )
     : QDialog( parent, f ),
-      d( new Private( viewport, textureMapper, this ))
+      d( new Private( viewport, model, this ))
 {
     setWindowTitle( tr( "Download Region" ));
 
@@ -226,8 +236,9 @@ TileCoordsPyramid DownloadRegionDialog::region() const
     mDebug() << "north/west (x/y):" << westX << northY;
     mDebug() << "south/east (x/y):" << eastX << southY;
 
-    int const tileWidth = d->m_textureMapper->tileSize().width();
-    int const tileHeight = d->m_textureMapper->tileSize().height();
+    int const tileWidth = d->textureMapper()->tileSize().width();
+    int const tileHeight = d->textureMapper()->tileSize().height();
+    mDebug() << "DownloadRegionDialog downloadRegion: tileSize:" << tileWidth << tileHeight;
 
     int const visibleLevelX1 = qMin( westX, eastX );
     int const visibleLevelY1 = qMin( northY, southY );
@@ -278,14 +289,23 @@ TileCoordsPyramid DownloadRegionDialog::region() const
     return coordsPyramid;
 }
 
-void DownloadRegionDialog::setMapTheme( QString const & mapThemeId )
-{
-    mDebug() << "DownloadRegionDialog::setMapTheme" << mapThemeId;
-}
-
 void DownloadRegionDialog::setVisibleLatLonAltBox( GeoDataLatLonAltBox const & region )
 {
     d->m_visibleRegion = region;
+    updateTilesCount();
+}
+
+void DownloadRegionDialog::updateTextureLayer()
+{
+    mDebug() << "DownloadRegionDialog::updateTextureLayer";
+    AbstractScanlineTextureMapper const * const textureMapper = d->m_model->textureMapper();
+    if ( textureMapper ) {
+        d->m_textureLayer = textureMapper->textureLayer();
+    }
+    else {
+        d->m_textureLayer = 0;
+        mDebug() << "DownloadRegionDialog::updateTextureLayer: no texture mapper";
+    }
     updateTilesCount();
 }
 

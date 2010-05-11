@@ -21,8 +21,8 @@
 
 namespace Marble
 {
-class AbstractScanlineTextureMapper;
 class GeoDataLatLonAltBox;
+class MarbleModel;
 class ViewportParams;
 
 class MARBLE_EXPORT DownloadRegionDialog: public QDialog
@@ -31,7 +31,7 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
 
  public:
     DownloadRegionDialog( ViewportParams const * const viewport,
-                          AbstractScanlineTextureMapper const * const textureMapper,
+                          MarbleModel const * const model,
                           QWidget * const parent = 0, Qt::WindowFlags const f = 0 );
 
     void setAllowedTileLevelRange( int const minimumTileLevel,
@@ -41,8 +41,8 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
     TileCoordsPyramid region() const;
 
  public Q_SLOTS:
-    void setMapTheme( QString const & );
     void setVisibleLatLonAltBox( GeoDataLatLonAltBox const & );
+    void updateTextureLayer();
 
  Q_SIGNALS:
     /// This signal is emitted when the "Apply" button is pressed.
