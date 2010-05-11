@@ -41,6 +41,7 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
     TileCoordsPyramid region() const;
 
  public Q_SLOTS:
+    void setMapTheme( QString const & );
     void setVisibleLatLonAltBox( GeoDataLatLonAltBox const & );
 
  private Q_SLOTS:

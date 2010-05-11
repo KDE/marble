@@ -982,7 +982,8 @@ void MarblePart::showDownloadRegionDialog()
         //connect( m_downloadRegionDialog, SIGNAL( applied() ), SLOT( downloadRegion() ));
         connect( m_controlView->marbleWidget(), SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
                  m_downloadRegionDialog, SLOT( setVisibleLatLonAltBox( GeoDataLatLonAltBox )));
-        //connect( this, SIGNAL( mapThemeChanged() ),
+        connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
+                 m_downloadRegionDialog, SLOT( setMapTheme( QString )));
     }
     // FIXME: get allowed range from current map theme
     m_downloadRegionDialog->setAllowedTileLevelRange( 0, 18 );

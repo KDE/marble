@@ -274,6 +274,11 @@ TileCoordsPyramid DownloadRegionDialog::region() const
     return coordsPyramid;
 }
 
+void DownloadRegionDialog::setMapTheme( QString const & mapThemeId )
+{
+    mDebug() << "DownloadRegionDialog::setMapTheme" << mapThemeId;
+}
+
 void DownloadRegionDialog::setVisibleLatLonAltBox( GeoDataLatLonAltBox const & region )
 {
     d->m_visibleRegion = region;
