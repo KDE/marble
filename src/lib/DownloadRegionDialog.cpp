@@ -331,6 +331,11 @@ void DownloadRegionDialog::showEvent( QShowEvent * event )
 void DownloadRegionDialog::toggleSelectionMethod()
 {
     d->m_latLonBoxWidget->setEnabled( !d->m_latLonBoxWidget->isEnabled() );
+    // when selection method changes from "specify region" to "visible region",
+    // update the (now read only) lat/lon values
+    if ( !d->m_latLonBoxWidget->isEnabled() ) {
+        d->m_latLonBoxWidget->setLatLonBox( d->m_visibleRegion );
+    }
 }
 
 void DownloadRegionDialog::updateTilesCount()
