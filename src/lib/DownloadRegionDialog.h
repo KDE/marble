@@ -44,6 +44,10 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
     void setMapTheme( QString const & );
     void setVisibleLatLonAltBox( GeoDataLatLonAltBox const & );
 
+ Q_SIGNALS:
+    /// This signal is emitted when the "Apply" button is pressed.
+    void applied();
+
  private Q_SLOTS:
     void toggleSelectionMethod();
     void updateTilesCount();

@@ -58,6 +58,7 @@ public:
     QLabel * m_tilesCountLabel;
     QLabel * m_tilesCountLimitInfo;
     QPushButton * m_okButton;
+    QPushButton * m_applyButton;
     int m_originatingTileLevel;
     int m_minimumAllowedTileLevel;
     int m_maximumAllowedTileLevel;
@@ -76,6 +77,7 @@ DownloadRegionDialog::Private::Private( ViewportParams const * const viewport,
       m_tilesCountLabel( 0 ),
       m_tilesCountLimitInfo( 0 ),
       m_okButton( 0 ),
+      m_applyButton( 0 ),
       m_originatingTileLevel( textureMapper->tileZoomLevel() ),
       m_minimumAllowedTileLevel( -1 ),
       m_maximumAllowedTileLevel( -1 ),
@@ -127,9 +129,11 @@ QWidget * DownloadRegionDialog::Private::createOkCancelButtonBox()
 {
     QDialogButtonBox * const buttonBox = new QDialogButtonBox;
     m_okButton = buttonBox->addButton( QDialogButtonBox::Ok );
+    m_applyButton = buttonBox->addButton( QDialogButtonBox::Apply );
     buttonBox->addButton( QDialogButtonBox::Cancel );
     connect( buttonBox, SIGNAL( accepted() ), m_dialog, SLOT( accept() ));
     connect( buttonBox, SIGNAL( rejected() ), m_dialog, SLOT( reject() ));
+    connect( m_applyButton, SIGNAL( clicked() ), m_dialog, SIGNAL( applied() ));
     return buttonBox;
 }
 
@@ -301,7 +305,9 @@ void DownloadRegionDialog::updateTilesCount()
         d->m_tilesCountLimitInfo->clear();
     }
     d->m_tilesCountLabel->setText( QString::number( tilesCount ));
-    d->m_okButton->setEnabled( tilesCount > 0 && tilesCount <= maxTilesCount );
+    bool const tilesCountWithinLimits = tilesCount > 0 && tilesCount <= maxTilesCount;
+    d->m_okButton->setEnabled( tilesCountWithinLimits );
+    d->m_applyButton->setEnabled( tilesCountWithinLimits );
 }
 
 }

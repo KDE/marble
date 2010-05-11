@@ -979,7 +979,7 @@ void MarblePart::showDownloadRegionDialog()
     if ( !m_downloadRegionDialog ) {
         m_downloadRegionDialog = new DownloadRegionDialog( viewport, model->textureMapper() );
         connect( m_downloadRegionDialog, SIGNAL( accepted() ), SLOT( downloadRegion() ));
-        //connect( m_downloadRegionDialog, SIGNAL( applied() ), SLOT( downloadRegion() ));
+        connect( m_downloadRegionDialog, SIGNAL( applied() ), SLOT( downloadRegion() ));
         connect( m_controlView->marbleWidget(), SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
                  m_downloadRegionDialog, SLOT( setVisibleLatLonAltBox( GeoDataLatLonAltBox )));
         connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
