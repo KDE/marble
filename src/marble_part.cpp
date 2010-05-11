@@ -971,20 +971,22 @@ void MarblePart::showNewStuffDialog()
     //m_controlView->marbleControl()->updateMapThemes();
 }
 
+// connect to expensive slots, only needed when the non modal dialog is show
 void MarblePart::connectDownloadRegionDialog()
 {
-    connect( m_downloadRegionDialog, SIGNAL( accepted() ), SLOT( downloadRegion() ));
-    connect( m_downloadRegionDialog, SIGNAL( applied() ), SLOT( downloadRegion() ));
     connect( m_controlView->marbleWidget(), SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
              m_downloadRegionDialog, SLOT( setVisibleLatLonAltBox( GeoDataLatLonAltBox )));
     connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
              m_downloadRegionDialog, SLOT( updateTextureLayer() ));
 }
 
+// disconnect from expensive slots, not needed when dialog is hidden
 void MarblePart::disconnectDownloadRegionDialog()
 {
-    disconnect( m_downloadRegionDialog, 0, this, 0 );
-    disconnect( m_controlView->marbleWidget(), 0, m_downloadRegionDialog, 0 );
+    disconnect( m_controlView->marbleWidget(), SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
+                m_downloadRegionDialog, SLOT( setVisibleLatLonAltBox( GeoDataLatLonAltBox )));
+    disconnect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
+                m_downloadRegionDialog, SLOT( updateTextureLayer() ));
 }
 
 void MarblePart::showDownloadRegionDialog()
@@ -993,7 +995,14 @@ void MarblePart::showDownloadRegionDialog()
     MarbleModel * const model = m_controlView->marbleWidget()->map()->model();
     if ( !m_downloadRegionDialog ) {
         m_downloadRegionDialog = new DownloadRegionDialog( viewport, model, widget() );
-        connectDownloadRegionDialog();
+        // it might be tempting to move the connects to DownloadRegionDialog's "accepted" and
+        // "applied" signals, be aware that the "hidden" signal might be come before the "accepted"
+        // signal, leading to a too early disconnect.
+        connect( m_downloadRegionDialog, SIGNAL( accepted() ), SLOT( downloadRegion() ));
+        connect( m_downloadRegionDialog, SIGNAL( applied() ), SLOT( downloadRegion() ));
+        connect( m_downloadRegionDialog, SIGNAL( shown() ), SLOT( connectDownloadRegionDialog() ));
+        connect( m_downloadRegionDialog, SIGNAL( hidden() ),
+                 SLOT( disconnectDownloadRegionDialog() ));
     }
     // FIXME: get allowed range from current map theme
     m_downloadRegionDialog->setAllowedTileLevelRange( 0, 18 );

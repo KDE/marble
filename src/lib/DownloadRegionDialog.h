@@ -19,6 +19,9 @@
 #include "TileCoordsPyramid.h"
 #include "marble_export.h"
 
+class QHideEvent;
+class QShowEvent;
+
 namespace Marble
 {
 class GeoDataLatLonAltBox;
@@ -47,6 +50,14 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
  Q_SIGNALS:
     /// This signal is emitted when the "Apply" button is pressed.
     void applied();
+    /// This signal is emitted when the dialog receives a QHideEvent.
+    void hidden();
+    /// This signal is emitted when the dialog receives a QShowEvent
+    void shown();
+
+ protected:
+    virtual void hideEvent( QHideEvent * event );
+    virtual void showEvent( QShowEvent * event );
 
  private Q_SLOTS:
     void toggleSelectionMethod();

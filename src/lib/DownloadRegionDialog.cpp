@@ -18,9 +18,11 @@
 #include <QtGui/QDialogButtonBox>
 #include <QtGui/QGroupBox>
 #include <QtGui/QHBoxLayout>
+#include <QtGui/QHideEvent>
 #include <QtGui/QLabel>
 #include <QtGui/QPushButton>
 #include <QtGui/QRadioButton>
+#include <QtGui/QShowEvent>
 #include <QtGui/QVBoxLayout>
 
 #include "AbstractScanlineTextureMapper.h"
@@ -307,6 +309,18 @@ void DownloadRegionDialog::updateTextureLayer()
         mDebug() << "DownloadRegionDialog::updateTextureLayer: no texture mapper";
     }
     updateTilesCount();
+}
+
+void DownloadRegionDialog::hideEvent( QHideEvent * event )
+{
+    emit hidden();
+    event->accept();
+}
+
+void DownloadRegionDialog::showEvent( QShowEvent * event )
+{
+    emit shown();
+    event->accept();
 }
 
 void DownloadRegionDialog::toggleSelectionMethod()
