@@ -22,6 +22,7 @@
 namespace Marble
 {
 class AbstractScanlineTextureMapper;
+class GeoDataLatLonBox;
 class ViewportParams;
 
 class MARBLE_EXPORT DownloadRegionDialog: public QDialog
@@ -38,6 +39,9 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
     void setOriginatingTileLevel( int const tileLevel );
 
     TileCoordsPyramid region() const;
+
+ public Q_SLOTS:
+    void setVisibleRegion( GeoDataLatLonBox const & );
 
  private Q_SLOTS:
     void toggleSelectionMethod();
