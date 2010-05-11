@@ -95,6 +95,7 @@ K_EXPORT_COMPONENT_FACTORY( libmarble_part, MarblePartFactory )
 MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringList &arguments )
   : KParts::ReadOnlyPart( parent ),
     m_sunControlDialog( 0 ),
+    m_downloadRegionDialog( 0 ),
     m_pluginModel( 0 ),
     m_configDialog( 0 ),
     m_positionLabel( 0 ),
@@ -140,6 +141,7 @@ MarblePart::~MarblePart()
 {
     writeSettings();
 
+    delete m_downloadRegionDialog;
     // Check whether this delete is really needed.
     delete m_configDialog;
 }
@@ -973,23 +975,33 @@ void MarblePart::showDownloadRegionDialog()
 {
     ViewportParams * const viewport = m_controlView->marbleWidget()->map()->viewParams()->viewport();
     MarbleModel * const model = m_controlView->marbleWidget()->map()->model();
-    QPointer<DownloadRegionDialog> dialog = new DownloadRegionDialog( viewport,
-                                                                      model->textureMapper() );
+    if ( !m_downloadRegionDialog ) {
+        m_downloadRegionDialog = new DownloadRegionDialog( viewport, model->textureMapper() );
+        connect( m_downloadRegionDialog, SIGNAL( accepted() ), SLOT( downloadRegion() ));
+        //connect( m_downloadRegionDialog, SIGNAL( applied() ), SLOT( downloadRegion() ));
+        //connect( widget, SIGNAL( viewportChanged() ), m_downloadRegionDialog, SLOT( updateViewport() ));
+        //connect( this, SIGNAL( mapThemeChanged() ),
+    }
     // FIXME: get allowed range from current map theme
-    dialog->setAllowedTileLevelRange( 0, 18 );
+    m_downloadRegionDialog->setAllowedTileLevelRange( 0, 18 );
+
+    m_downloadRegionDialog->show();
+    m_downloadRegionDialog->raise();
+    m_downloadRegionDialog->activateWindow();
+}
+
+void MarblePart::downloadRegion()
+{
+    Q_ASSERT( m_downloadRegionDialog );
     QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
     QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
-    kDebug() << "showDownloadRegionDialog mapThemeId:" << mapThemeId << sourceDir;
-
-    if ( dialog->exec() == QDialog::Accepted ) {
-        // FIXME: use lazy evaluation to not generate up to 100k tiles in one go
-        // this can take considerable time even on very fast systems
-        // in contrast generating the TileIds on the fly when they are needed
-        // does not seem to affect download speed.
-        TileCoordsPyramid const pyramid = dialog->region();
-        model->downloadRegion( sourceDir, pyramid );
-    }
-    delete dialog;
+    kDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
+    // FIXME: use lazy evaluation to not generate up to 100k tiles in one go
+    // this can take considerable time even on very fast systems
+    // in contrast generating the TileIds on the fly when they are needed
+    // does not seem to affect download speed.
+    TileCoordsPyramid const pyramid = m_downloadRegionDialog->region();
+    m_controlView->marbleWidget()->map()->model()->downloadRegion( sourceDir, pyramid );
 }
 
 void MarblePart::showStatusBarContextMenu( const QPoint& pos )

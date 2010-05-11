@@ -35,6 +35,7 @@ namespace Marble
 {
 
 class ControlView;
+class DownloadRegionDialog;
 class SunControlWidget;
 
 class MarblePart: public KParts::ReadOnlyPart
@@ -116,6 +117,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  setupStatusBar();
     void  showNewStuffDialog();
     void  showDownloadRegionDialog();
+    void  downloadRegion();
     void  showStatusBarContextMenu( const QPoint& pos );
 
     void  editSettings();
@@ -166,6 +168,7 @@ class MarblePart: public KParts::ReadOnlyPart
     // All the functionality is provided by this widget.
     ControlView       *m_controlView; // MarbleControlBox and MarbleWidget
     SunControlWidget  *m_sunControlDialog;
+    DownloadRegionDialog *m_downloadRegionDialog;
 
     // Actions for the GUI.
     KAction      *m_exportMapAction;
