@@ -875,8 +875,7 @@ void MainWindow::showDownloadRegionDialog()
 {
     ViewportParams *const viewport = m_controlView->marbleWidget()->map()->viewParams()->viewport();
     MarbleModel *const model = m_controlView->marbleWidget()->map()->model();
-    QPointer<DownloadRegionDialog> dialog = new DownloadRegionDialog( viewport,
-                                                                      model->textureMapper() );
+    QPointer<DownloadRegionDialog> dialog = new DownloadRegionDialog( model, m_controlView );
     // FIXME: get allowed range from current map theme
     dialog->setAllowedTileLevelRange( 0, 18 );
     QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
