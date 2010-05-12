@@ -991,10 +991,9 @@ void MarblePart::disconnectDownloadRegionDialog()
 
 void MarblePart::showDownloadRegionDialog()
 {
-    ViewportParams * const viewport = m_controlView->marbleWidget()->map()->viewParams()->viewport();
     MarbleModel * const model = m_controlView->marbleWidget()->map()->model();
     if ( !m_downloadRegionDialog ) {
-        m_downloadRegionDialog = new DownloadRegionDialog( viewport, model, widget() );
+        m_downloadRegionDialog = new DownloadRegionDialog( model, widget() );
         // it might be tempting to move the connects to DownloadRegionDialog's "accepted" and
         // "applied" signals, be aware that the "hidden" signal might be come before the "accepted"
         // signal, leading to a too early disconnect.
@@ -1006,6 +1005,9 @@ void MarblePart::showDownloadRegionDialog()
     }
     // FIXME: get allowed range from current map theme
     m_downloadRegionDialog->setAllowedTileLevelRange( 0, 18 );
+    ViewportParams const * const viewport =
+        m_controlView->marbleWidget()->map()->viewParams()->viewport();
+    m_downloadRegionDialog->setVisibleLatLonAltBox( viewport->viewLatLonAltBox() );
 
     m_downloadRegionDialog->show();
     m_downloadRegionDialog->raise();

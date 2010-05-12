@@ -26,7 +26,7 @@
 #include <QtGui/QVBoxLayout>
 
 #include "AbstractScanlineTextureMapper.h"
-#include "GeoDataLatLonBox.h"
+#include "GeoDataLatLonAltBox.h"
 #include "GeoSceneTexture.h"
 #include "MarbleDebug.h"
 #include "MarbleMath.h"
@@ -35,7 +35,6 @@
 #include "TileId.h"
 #include "TileLevelRangeWidget.h"
 #include "TileLoaderHelper.h"
-#include "ViewportParams.h"
 
 namespace Marble
 {
@@ -45,9 +44,7 @@ int const maxTilesCount = 100000;
 class DownloadRegionDialog::Private
 {
 public:
-    Private( ViewportParams const * const viewport,
-             MarbleModel const * const model,
-             QDialog * const dialog );
+    Private( MarbleModel const * const model, QDialog * const dialog );
     QWidget * createSelectionMethodBox();
     QLayout * createTilesCounter();
     QWidget * createOkCancelButtonBox();
@@ -66,14 +63,12 @@ public:
     int m_originatingTileLevel;
     int m_minimumAllowedTileLevel;
     int m_maximumAllowedTileLevel;
-    ViewportParams const * const m_viewport;
     MarbleModel const * const m_model;
     GeoSceneTexture const * m_textureLayer;
     GeoDataLatLonBox m_visibleRegion;
 };
 
-DownloadRegionDialog::Private::Private( ViewportParams const * const viewport,
-                                        MarbleModel const * const model,
+DownloadRegionDialog::Private::Private( MarbleModel const * const model,
                                         QDialog * const dialog )
     : m_dialog( dialog ),
       m_latLonBoxWidget( new LatLonBoxWidget ),
@@ -85,10 +80,9 @@ DownloadRegionDialog::Private::Private( ViewportParams const * const viewport,
       m_originatingTileLevel( model->textureMapper()->tileZoomLevel() ),
       m_minimumAllowedTileLevel( -1 ),
       m_maximumAllowedTileLevel( -1 ),
-      m_viewport( viewport ),
       m_model( model ),
       m_textureLayer( model->textureMapper()->textureLayer() ),
-      m_visibleRegion( viewport->viewLatLonAltBox() )
+      m_visibleRegion()
 {
     m_latLonBoxWidget->setEnabled( false );
     m_latLonBoxWidget->setLatLonBox( m_visibleRegion );
@@ -180,11 +174,10 @@ AbstractScanlineTextureMapper const * DownloadRegionDialog::Private::textureMapp
 }
 
 
-DownloadRegionDialog::DownloadRegionDialog( ViewportParams const * const viewport,
-                                            MarbleModel const * const model,
-                                            QWidget * const parent, Qt::WindowFlags const f )
+DownloadRegionDialog::DownloadRegionDialog( MarbleModel const * const model, QWidget * const parent,
+                                            Qt::WindowFlags const f )
     : QDialog( parent, f ),
-      d( new Private( viewport, model, this ))
+      d( new Private( model, this ))
 {
     setWindowTitle( tr( "Download Region" ));
 
