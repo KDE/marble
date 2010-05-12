@@ -1018,10 +1018,6 @@ void MarblePart::downloadRegion()
     QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
     QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
     kDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
-    // FIXME: use lazy evaluation to not generate up to 100k tiles in one go
-    // this can take considerable time even on very fast systems
-    // in contrast generating the TileIds on the fly when they are needed
-    // does not seem to affect download speed.
     TileCoordsPyramid const pyramid = m_downloadRegionDialog->region();
     m_controlView->marbleWidget()->map()->model()->downloadRegion( sourceDir, pyramid );
 }

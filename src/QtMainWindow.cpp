@@ -884,10 +884,6 @@ void MainWindow::showDownloadRegionDialog()
     mDebug() << "showDownloadRegionDialog mapThemeId:" << mapThemeId << sourceDir;
 
     if ( dialog->exec() == QDialog::Accepted ) {
-        // FIXME: use lazy evaluation to not generate up to 100k tiles in one go
-        // this can take considerable time even on very fast systems
-        // in contrast generating the TileIds on the fly when they are needed
-        // does not seem to affect download speed.
         TileCoordsPyramid const pyramid = dialog->region();
         model->downloadRegion( sourceDir, pyramid );
     }

@@ -943,6 +943,10 @@ void MarbleModel::downloadRegion( QString const & mapThemeId,
         for ( int x = x1; x <= x2; ++x )
             for ( int y = y1; y <= y2; ++y ) {
                 TileId const tileId( mapThemeId, level, x, y );
+                // FIXME: use lazy evaluation to not generate up to 100k tiles in one go
+                // this can take considerable time even on very fast systems
+                // in contrast generating the TileIds on the fly when they are needed
+                // does not seem to affect download speed.
                 d->m_tileLoader->downloadTile( tileId );
             }
     }
