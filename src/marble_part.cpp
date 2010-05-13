@@ -390,7 +390,7 @@ void MarblePart::setShowCurrentLocation( bool show )
 
 void MarblePart::readSettings()
 {
-    qDebug() << "Start: MarblePart::readSettings()";
+    kDebug() << "Start: MarblePart::readSettings()";
     // Last location on quit
     if ( MarbleSettings::onStartup() == LastLocationVisited ) {
         m_controlView->marbleWidget()->centerOn(
@@ -1152,7 +1152,7 @@ void MarblePart::retrievePluginState()
 
 void MarblePart::slotUpdateSettings()
 {
-    qDebug() << "Updating Settings ...";
+    kDebug() << "Updating Settings ...";
 
     // FIXME: Font doesn't get updated instantly.
     m_controlView->marbleWidget()->setDefaultFont( MarbleSettings::mapFont() );
@@ -1199,7 +1199,7 @@ void MarblePart::slotUpdateSettings()
             proxy.setType( QNetworkProxy::HttpProxy );
         }
         else {
-            qDebug() << "Unknown proxy type! Using Http Proxy instead.";
+            kDebug() << "Unknown proxy type! Using Http Proxy instead.";
             proxy.setType( QNetworkProxy::HttpProxy );
         }
     }
@@ -1320,7 +1320,7 @@ void MarblePart::downloadJobAdded()
         m_downloadProgressBar->setMaximum( m_downloadProgressBar->maximum() + 1 );
     }
 
-//     qDebug() << "downloadProgressJobAdded: value/maximum: "
+//     kDebug() << "downloadProgressJobAdded: value/maximum: "
 //              << m_downloadProgressBar->value() << '/' << m_downloadProgressBar->maximum();
 
     m_downloadProgressBar->setUpdatesEnabled( true );
@@ -1335,7 +1335,7 @@ void MarblePart::downloadJobRemoved()
         m_downloadProgressBar->setVisible( false );
     }
 
-//     qDebug() << "downloadProgressJobCompleted: value/maximum: "
+//     kDebug() << "downloadProgressJobCompleted: value/maximum: "
 //              << m_downloadProgressBar->value() << '/' << m_downloadProgressBar->maximum();
 
     m_downloadProgressBar->setUpdatesEnabled( true );
