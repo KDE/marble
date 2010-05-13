@@ -476,7 +476,7 @@ void MarblePart::readSettings()
 
     readStatusBarSettings();
 
-    slotUpdateSettings();
+    updateSettings();
     readPluginSettings();
     disconnect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
                 this,                          SLOT( writePluginSettings() ) );
@@ -1103,9 +1103,9 @@ void MarblePart::editSettings()
     w_pluginSettings->setAboutIcon( KIcon( "help-about" ) );
 
     connect( w_pluginSettings, SIGNAL( pluginListViewClicked() ),
-                               SLOT( slotEnableButtonApply() ) );
+                               SLOT( enableApplyButton() ) );
     connect( m_configDialog,   SIGNAL( settingsChanged( const QString &) ),
-	                       SLOT( slotUpdateSettings() ) );
+	                       SLOT( updateSettings() ) );
     connect( m_configDialog,   SIGNAL( applyClicked() ),
 	                       SLOT( applyPluginState() ) );
     connect( m_configDialog,   SIGNAL( okClicked() ),
@@ -1120,9 +1120,9 @@ void MarblePart::editSettings()
     m_configDialog->show();
 }
 
-void MarblePart::slotEnableButtonApply()
+void MarblePart::enableApplyButton()
 {
-        m_configDialog->enableButtonApply( true );
+    m_configDialog->enableButtonApply( true );
 }
 
 void MarblePart::applyPluginState()
@@ -1145,7 +1145,7 @@ void MarblePart::retrievePluginState()
     }
 }
 
-void MarblePart::slotUpdateSettings()
+void MarblePart::updateSettings()
 {
     kDebug() << "Updating Settings ...";
 
