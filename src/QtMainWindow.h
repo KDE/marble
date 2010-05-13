@@ -30,6 +30,7 @@ namespace Marble
 class MarbleWidget;
 class SunControlWidget;
 class QtMarbleConfigDialog;
+class DownloadRegionDialog;
 
 class MainWindow : public QMainWindow
 {
@@ -99,10 +100,16 @@ class MainWindow : public QMainWindow
     void  aboutMarble();
     void  handbook();
 
+    // Download region dialog
+    void  connectDownloadRegionDialog();
+    void  disconnectDownloadRegionDialog();
+    void  downloadRegion();
+
  private:
     ControlView *m_controlView;
     SunControlWidget* m_sunControlDialog;
     QtMarbleConfigDialog *m_configDialog;
+    DownloadRegionDialog* m_downloadRegionDialog;
 
     /// Store plugin toolbar pointers so that they can be removed/updated later
     QList<QToolBar*> m_pluginToolbars;

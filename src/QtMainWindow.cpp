@@ -46,6 +46,7 @@
 #include "MarbleLocale.h"
 #include "DownloadRegionDialog.h"
 #include "ViewParams.h"
+#include "ViewportParams.h"
 #include "AbstractDataPlugin.h"
 #include "AbstractFloatItem.h"
 #include "MarbleMap.h"
@@ -61,7 +62,8 @@ namespace
 using namespace Marble;
 
 MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
-        QMainWindow(parent), m_sunControlDialog(0), m_downloadRegionAction( 0 )
+        QMainWindow(parent), m_sunControlDialog(0), m_downloadRegionAction( 0 ),
+        m_downloadRegionDialog( 0 )
 {
     MarbleGlobal::getInstance()->setProfiles( MarbleGlobal::detectProfiles() );
 
@@ -873,20 +875,57 @@ void MainWindow::updateSettings()
 
 void MainWindow::showDownloadRegionDialog()
 {
-    ViewportParams *const viewport = m_controlView->marbleWidget()->map()->viewParams()->viewport();
     MarbleModel *const model = m_controlView->marbleWidget()->map()->model();
-    QPointer<DownloadRegionDialog> dialog = new DownloadRegionDialog( model, m_controlView );
+    if ( !m_downloadRegionDialog ) {
+        m_downloadRegionDialog = new DownloadRegionDialog( model, m_controlView );
+        // it might be tempting to move the connects to DownloadRegionDialog's "accepted" and
+        // "applied" signals, be aware that the "hidden" signal might be come before the "accepted"
+        // signal, leading to a too early disconnect.
+        connect( m_downloadRegionDialog, SIGNAL( accepted() ), SLOT( downloadRegion() ));
+        connect( m_downloadRegionDialog, SIGNAL( applied() ), SLOT( downloadRegion() ));
+        connect( m_downloadRegionDialog, SIGNAL( shown() ), SLOT( connectDownloadRegionDialog() ));
+        connect( m_downloadRegionDialog, SIGNAL( hidden() ),
+                 SLOT( disconnectDownloadRegionDialog() ));
+    }
     // FIXME: get allowed range from current map theme
-    dialog->setAllowedTileLevelRange( 0, 18 );
+    m_downloadRegionDialog->setAllowedTileLevelRange( 0, 18 );
+    m_downloadRegionDialog->setSelectionMethod( DownloadRegionDialog::VisibleRegionMethod );
+    ViewportParams const * const viewport =
+        m_controlView->marbleWidget()->map()->viewParams()->viewport();
+    m_downloadRegionDialog->setSpecifiedLatLonAltBox( viewport->viewLatLonAltBox() );
+    m_downloadRegionDialog->setVisibleLatLonAltBox( viewport->viewLatLonAltBox() );
+
+    m_downloadRegionDialog->show();
+    m_downloadRegionDialog->raise();
+    m_downloadRegionDialog->activateWindow();
+}
+
+// connect to expensive slots, only needed when the non modal dialog is show
+void MainWindow::connectDownloadRegionDialog()
+{
+    connect( m_controlView->marbleWidget(), SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
+             m_downloadRegionDialog, SLOT( setVisibleLatLonAltBox( GeoDataLatLonAltBox )));
+    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
+             m_downloadRegionDialog, SLOT( updateTextureLayer() ));
+}
+
+// disconnect from expensive slots, not needed when dialog is hidden
+void MainWindow::disconnectDownloadRegionDialog()
+{
+    disconnect( m_controlView->marbleWidget(), SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox )),
+                m_downloadRegionDialog, SLOT( setVisibleLatLonAltBox( GeoDataLatLonAltBox )));
+    disconnect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString )),
+                m_downloadRegionDialog, SLOT( updateTextureLayer() ));
+}
+
+void MainWindow::downloadRegion()
+{
+    Q_ASSERT( m_downloadRegionDialog );
     QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
     QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
-    mDebug() << "showDownloadRegionDialog mapThemeId:" << mapThemeId << sourceDir;
-
-    if ( dialog->exec() == QDialog::Accepted ) {
-        TileCoordsPyramid const pyramid = dialog->region();
-        model->downloadRegion( sourceDir, pyramid );
-    }
-    delete dialog;
+    mDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
+    TileCoordsPyramid const pyramid = m_downloadRegionDialog->region();
+    m_controlView->marbleWidget()->map()->model()->downloadRegion( sourceDir, pyramid );
 }
 
 #include "QtMainWindow.moc"
