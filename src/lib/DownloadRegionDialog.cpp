@@ -54,6 +54,8 @@ public:
     AbstractScanlineTextureMapper const * textureMapper() const;
 
     QDialog * m_dialog;
+    QRadioButton * m_visibleRegionMethodButton;
+    QRadioButton * m_specifiedRegionMethodButton;
     LatLonBoxWidget * m_latLonBoxWidget;
     TileLevelRangeWidget * m_tileLevelRangeWidget;
     QLabel * m_tilesCountLabel;
@@ -65,12 +67,15 @@ public:
     int m_maximumAllowedTileLevel;
     MarbleModel const * const m_model;
     GeoSceneTexture const * m_textureLayer;
+    SelectionMethod m_selectionMethod;
     GeoDataLatLonBox m_visibleRegion;
 };
 
 DownloadRegionDialog::Private::Private( MarbleModel const * const model,
                                         QDialog * const dialog )
     : m_dialog( dialog ),
+      m_visibleRegionMethodButton( 0 ),
+      m_specifiedRegionMethodButton( 0 ),
       m_latLonBoxWidget( new LatLonBoxWidget ),
       m_tileLevelRangeWidget( new TileLevelRangeWidget ),
       m_tilesCountLabel( 0 ),
@@ -82,6 +87,7 @@ DownloadRegionDialog::Private::Private( MarbleModel const * const model,
       m_maximumAllowedTileLevel( -1 ),
       m_model( model ),
       m_textureLayer( model->textureMapper()->textureLayer() ),
+      m_selectionMethod( VisibleRegionMethod ),
       m_visibleRegion()
 {
     m_latLonBoxWidget->setEnabled( false );
@@ -91,15 +97,14 @@ DownloadRegionDialog::Private::Private( MarbleModel const * const model,
 
 QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
 {
-    QRadioButton * const visibleRegionMethodButton = new QRadioButton( tr( "Visible region" ));
-    visibleRegionMethodButton->setChecked( true );
-    QRadioButton * const latLonBoxMethodButton = new QRadioButton( tr( "Specify region" ));
-    connect( latLonBoxMethodButton, SIGNAL( toggled( bool )),
+    m_visibleRegionMethodButton = new QRadioButton( tr( "Visible region" ));
+    m_specifiedRegionMethodButton = new QRadioButton( tr( "Specify region" ));
+    connect( m_specifiedRegionMethodButton, SIGNAL( toggled( bool )),
              m_dialog, SLOT( toggleSelectionMethod() ));
 
     QVBoxLayout * const layout = new QVBoxLayout;
-    layout->addWidget( visibleRegionMethodButton );
-    layout->addWidget( latLonBoxMethodButton );
+    layout->addWidget( m_visibleRegionMethodButton );
+    layout->addWidget( m_specifiedRegionMethodButton );
     layout->addWidget( m_latLonBoxWidget );
 
     QGroupBox * const selectionMethodBox = new QGroupBox( tr( "Selection method" ));
@@ -210,12 +215,43 @@ void DownloadRegionDialog::setOriginatingTileLevel( int const tileLevel )
     d->m_tileLevelRangeWidget->setDefaultLevel( tileLevel );
 }
 
+void DownloadRegionDialog::setSelectionMethod( SelectionMethod const selectionMethod )
+{
+    // block signals to prevent infinite recursion:
+    // radioButton->setChecked() -> toggleSelectionMethod() -> setSelectionMethod()
+    //     -> radioButton->setChecked() -> ...
+    d->m_visibleRegionMethodButton->blockSignals( true );
+    d->m_specifiedRegionMethodButton->blockSignals( true );
+
+    d->m_selectionMethod = selectionMethod;
+    switch ( selectionMethod ) {
+    case VisibleRegionMethod:
+        d->m_visibleRegionMethodButton->setChecked( true );
+        d->m_latLonBoxWidget->setEnabled( false );
+        setSpecifiedLatLonAltBox( d->m_visibleRegion );
+        break;
+    case SpecifiedRegionMethod:
+        d->m_specifiedRegionMethodButton->setChecked( true );
+        d->m_latLonBoxWidget->setEnabled( true );
+        break;
+    }
+
+    d->m_visibleRegionMethodButton->blockSignals( false );
+    d->m_specifiedRegionMethodButton->blockSignals( false );
+}
+
 TileCoordsPyramid DownloadRegionDialog::region() const
 {
     // check whether "visible region" or "lat/lon region" is selection method
-    GeoDataLatLonBox downloadRegion = d->m_visibleRegion;
-    if ( d->m_latLonBoxWidget->isEnabled() )
+    GeoDataLatLonBox downloadRegion;
+    switch ( d->m_selectionMethod ) {
+    case VisibleRegionMethod:
+        downloadRegion = d->m_visibleRegion;
+        break;
+    case SpecifiedRegionMethod:
         downloadRegion = d->m_latLonBoxWidget->latLonBox();
+        break;
+    }
 
     int const westX = d->rad2PixelX( downloadRegion.west() );
     int const northY = d->rad2PixelY( downloadRegion.north() );
@@ -284,13 +320,18 @@ TileCoordsPyramid DownloadRegionDialog::region() const
     return coordsPyramid;
 }
 
+void DownloadRegionDialog::setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const & region )
+{
+    d->m_latLonBoxWidget->setLatLonBox( region );
+}
+
 void DownloadRegionDialog::setVisibleLatLonAltBox( GeoDataLatLonAltBox const & region )
 {
     d->m_visibleRegion = region;
     // update lat/lon widget only if not active to prevent that users unintentionally loose
     // entered values
-    if ( !d->m_latLonBoxWidget->isEnabled() ) {
-        d->m_latLonBoxWidget->setLatLonBox( region );
+    if ( d->m_selectionMethod == VisibleRegionMethod ) {
+        setSpecifiedLatLonAltBox( region );
     }
     updateTilesCount();
 }
@@ -323,11 +364,13 @@ void DownloadRegionDialog::showEvent( QShowEvent * event )
 
 void DownloadRegionDialog::toggleSelectionMethod()
 {
-    d->m_latLonBoxWidget->setEnabled( !d->m_latLonBoxWidget->isEnabled() );
-    // when selection method changes from "specify region" to "visible region",
-    // update the (now read only) lat/lon values
-    if ( !d->m_latLonBoxWidget->isEnabled() ) {
-        d->m_latLonBoxWidget->setLatLonBox( d->m_visibleRegion );
+    switch ( d->m_selectionMethod ) {
+    case VisibleRegionMethod:
+        setSelectionMethod( SpecifiedRegionMethod );
+        break;
+    case SpecifiedRegionMethod:
+        setSelectionMethod( VisibleRegionMethod );
+        break;
     }
 }
 

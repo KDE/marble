@@ -33,16 +33,20 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
     Q_OBJECT
 
  public:
+    enum SelectionMethod { VisibleRegionMethod, SpecifiedRegionMethod };
+
     explicit DownloadRegionDialog( MarbleModel const * const model, QWidget * const parent = 0,
                                    Qt::WindowFlags const f = 0 );
 
     void setAllowedTileLevelRange( int const minimumTileLevel,
                                    int const maximumTileLevel );
     void setOriginatingTileLevel( int const tileLevel );
+    void setSelectionMethod( SelectionMethod const );
 
     TileCoordsPyramid region() const;
 
  public Q_SLOTS:
+    void setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const & );
     void setVisibleLatLonAltBox( GeoDataLatLonAltBox const & );
     void updateTextureLayer();
 
