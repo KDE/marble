@@ -501,18 +501,11 @@ void MarbleControlBox::enableFileViewActions()
     d->uiWidget.m_saveButton->setEnabled( tmp );
     d->uiWidget.m_closeButton->setEnabled( tmp );
 
-#ifndef KML_GSOC
     if ( tmp ) {
         QModelIndex tmpIndex =
             d->uiWidget.m_fileView->selectionModel()->currentIndex();
         d->m_widget->gpxFileModel()->setSelectedIndex( tmpIndex );
     }
-#else
-    if ( tmp ) {
-        FileViewModel& model = ( FileViewModel& ) *d->uiWidget.m_fileView->model();
-        model.setSelectedIndex( d->uiWidget.m_fileView->selectionModel()->currentIndex() );
-    }
-#endif
 }
 
 void MarbleControlBox::setNavigationTabShown( bool show )
