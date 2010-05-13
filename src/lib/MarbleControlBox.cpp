@@ -323,7 +323,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     foreach( const PositionProviderPlugin *plugin, d->m_positionProviderPlugins ) {
        d->uiWidget.positionTrackingComboBox->addItem( plugin->guiString() );
     }
-    if ( !d->m_positionProviderPlugins.size() ) {
+    if ( d->m_positionProviderPlugins.isEmpty() ) {
         d->uiWidget.positionTrackingComboBox->setEnabled( false );
         QString html = "<p>No Position Tracking Plugin installed.</p>";
         d->uiWidget.locationLabel->setText( html );
