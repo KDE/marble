@@ -918,8 +918,7 @@ void MarblePart::setupDownloadProgressBar()
 
     HttpDownloadManager * const downloadManager =
         m_controlView->marbleWidget()->map()->model()->downloadManager();
-    kDebug() << "got download manager:" << downloadManager;
-
+    Q_ASSERT( downloadManager );
     connect( downloadManager, SIGNAL( jobAdded() ), SLOT( downloadJobAdded() ) );
     connect( downloadManager, SIGNAL( jobRemoved() ), SLOT( downloadJobRemoved() ) );
 }
