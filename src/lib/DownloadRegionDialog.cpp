@@ -63,8 +63,6 @@ public:
     QPushButton * m_okButton;
     QPushButton * m_applyButton;
     int m_originatingTileLevel;
-    int m_minimumAllowedTileLevel;
-    int m_maximumAllowedTileLevel;
     MarbleModel const * const m_model;
     GeoSceneTexture const * m_textureLayer;
     SelectionMethod m_selectionMethod;
@@ -83,8 +81,6 @@ DownloadRegionDialog::Private::Private( MarbleModel const * const model,
       m_okButton( 0 ),
       m_applyButton( 0 ),
       m_originatingTileLevel( model->textureMapper()->tileZoomLevel() ),
-      m_minimumAllowedTileLevel( -1 ),
-      m_maximumAllowedTileLevel( -1 ),
       m_model( model ),
       m_textureLayer( model->textureMapper()->textureLayer() ),
       m_selectionMethod( VisibleRegionMethod ),
@@ -204,8 +200,6 @@ DownloadRegionDialog::DownloadRegionDialog( MarbleModel const * const model, QWi
 void DownloadRegionDialog::setAllowedTileLevelRange( int const minimumTileLevel,
                                                      int const maximumTileLevel )
 {
-    d->m_minimumAllowedTileLevel = minimumTileLevel;
-    d->m_maximumAllowedTileLevel = maximumTileLevel;
     d->m_tileLevelRangeWidget->setAllowedLevelRange( minimumTileLevel, maximumTileLevel );
 }
 
