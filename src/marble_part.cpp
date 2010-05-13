@@ -847,9 +847,7 @@ void MarblePart::updateTileZoomLevel()
     if ( tileZoomLevel == -1 )
         m_tileZoomLevel = NOT_AVAILABLE;
     else {
-        QString s;
-        s.setNum( tileZoomLevel );
-        m_tileZoomLevel = s;
+        m_tileZoomLevel.setNum( tileZoomLevel );
     }
 }
 
