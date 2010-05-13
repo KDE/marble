@@ -62,7 +62,7 @@ public:
     QLabel * m_tilesCountLimitInfo;
     QPushButton * m_okButton;
     QPushButton * m_applyButton;
-    int m_originatingTileLevel;
+    int m_visibleTileLevel;
     MarbleModel const * const m_model;
     GeoSceneTexture const * m_textureLayer;
     SelectionMethod m_selectionMethod;
@@ -80,7 +80,7 @@ DownloadRegionDialog::Private::Private( MarbleModel const * const model,
       m_tilesCountLimitInfo( 0 ),
       m_okButton( 0 ),
       m_applyButton( 0 ),
-      m_originatingTileLevel( model->textureMapper()->tileZoomLevel() ),
+      m_visibleTileLevel( model->textureMapper()->tileZoomLevel() ),
       m_model( model ),
       m_textureLayer( model->textureMapper()->textureLayer() ),
       m_selectionMethod( VisibleRegionMethod ),
@@ -88,7 +88,7 @@ DownloadRegionDialog::Private::Private( MarbleModel const * const model,
 {
     m_latLonBoxWidget->setEnabled( false );
     m_latLonBoxWidget->setLatLonBox( m_visibleRegion );
-    m_tileLevelRangeWidget->setDefaultLevel( m_originatingTileLevel );
+    m_tileLevelRangeWidget->setDefaultLevel( m_visibleTileLevel );
 }
 
 QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
@@ -141,7 +141,7 @@ int DownloadRegionDialog::Private::rad2PixelX( qreal const lon ) const
 {
     qreal const globalWidth = textureMapper()->tileSize().width()
         * TileLoaderHelper::levelToColumn( m_textureLayer->levelZeroColumns(),
-                                           m_originatingTileLevel );
+                                           m_visibleTileLevel );
     return static_cast<int>( globalWidth * 0.5 + lon * ( globalWidth / ( 2.0 * M_PI ) ));
 }
 
@@ -149,7 +149,7 @@ int DownloadRegionDialog::Private::rad2PixelX( qreal const lon ) const
 int DownloadRegionDialog::Private::rad2PixelY( qreal const lat ) const
 {
     qreal const globalHeight = textureMapper()->tileSize().height()
-        * TileLoaderHelper::levelToRow( m_textureLayer->levelZeroRows(), m_originatingTileLevel );
+        * TileLoaderHelper::levelToRow( m_textureLayer->levelZeroRows(), m_visibleTileLevel );
     qreal const normGlobalHeight = globalHeight / M_PI;
     switch ( m_textureLayer->projection() ) {
     case GeoSceneTexture::Equirectangular:
@@ -203,9 +203,9 @@ void DownloadRegionDialog::setAllowedTileLevelRange( int const minimumTileLevel,
     d->m_tileLevelRangeWidget->setAllowedLevelRange( minimumTileLevel, maximumTileLevel );
 }
 
-void DownloadRegionDialog::setOriginatingTileLevel( int const tileLevel )
+void DownloadRegionDialog::setVisibleTileLevel( int const tileLevel )
 {
-    d->m_originatingTileLevel = tileLevel;
+    d->m_visibleTileLevel = tileLevel;
     d->m_tileLevelRangeWidget->setDefaultLevel( tileLevel );
 }
 
@@ -270,21 +270,21 @@ TileCoordsPyramid DownloadRegionDialog::region() const
     int const visibleLevelX2 = qMax( westX, eastX );
     int const visibleLevelY2 = qMax( northY, southY );
 
-    mDebug() << "visible level pixel coords (level/x1/y1/x2/y2):" << d->m_originatingTileLevel
+    mDebug() << "visible level pixel coords (level/x1/y1/x2/y2):" << d->m_visibleTileLevel
              << visibleLevelX1 << visibleLevelY1 << visibleLevelX2 << visibleLevelY2;
 
     int bottomLevelX1, bottomLevelY1, bottomLevelX2, bottomLevelY2;
-    // the pixel coords calculated above are referring to the originating ("visible") tile level,
+    // the pixel coords calculated above are referring to the visible tile level,
     // if the bottom level is a different level, we have to take it into account
-    if ( d->m_originatingTileLevel > d->m_tileLevelRangeWidget->bottomLevel() ) {
-        int const deltaLevel = d->m_originatingTileLevel - d->m_tileLevelRangeWidget->bottomLevel();
+    if ( d->m_visibleTileLevel > d->m_tileLevelRangeWidget->bottomLevel() ) {
+        int const deltaLevel = d->m_visibleTileLevel - d->m_tileLevelRangeWidget->bottomLevel();
         bottomLevelX1 = visibleLevelX1 >> deltaLevel;
         bottomLevelY1 = visibleLevelY1 >> deltaLevel;
         bottomLevelX2 = visibleLevelX2 >> deltaLevel;
         bottomLevelY2 = visibleLevelY2 >> deltaLevel;
     }
-    else if ( d->m_originatingTileLevel < d->m_tileLevelRangeWidget->bottomLevel() ) {
-        int const deltaLevel = d->m_tileLevelRangeWidget->bottomLevel() - d->m_originatingTileLevel;
+    else if ( d->m_visibleTileLevel < d->m_tileLevelRangeWidget->bottomLevel() ) {
+        int const deltaLevel = d->m_tileLevelRangeWidget->bottomLevel() - d->m_visibleTileLevel;
         bottomLevelX1 = visibleLevelX1 << deltaLevel;
         bottomLevelY1 = visibleLevelY1 << deltaLevel;
         bottomLevelX2 = visibleLevelX2 << deltaLevel;

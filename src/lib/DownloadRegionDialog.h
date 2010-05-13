@@ -40,7 +40,7 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
 
     void setAllowedTileLevelRange( int const minimumTileLevel,
                                    int const maximumTileLevel );
-    void setOriginatingTileLevel( int const tileLevel );
+    void setVisibleTileLevel( int const tileLevel );
     void setSelectionMethod( SelectionMethod const );
 
     TileCoordsPyramid region() const;
