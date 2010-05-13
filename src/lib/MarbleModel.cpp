@@ -526,6 +526,8 @@ void MarbleModel::setupTextureMapper( Projection projection )
             d->m_texmapper = new MercatorScanlineTextureMapper( textureLayer(), d->m_tileLoader,
                                                                 this );
             break;
+        default:
+            d->m_texmapper = 0;
     }
 
     connect( d->m_texmapper, SIGNAL( mapChanged() ),
