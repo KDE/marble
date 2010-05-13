@@ -57,7 +57,7 @@ class MarblePart: public KParts::ReadOnlyPart
     bool  openFile();
     void  showPosition( const QString& position);
     void  showDistance( const QString& position);
-    void  showZoomLevel( int zoomLevel );
+    void  showZoomLevel();
     void  mapThemeChanged( const QString& newMapTheme );
     void  createPluginMenus();
 
