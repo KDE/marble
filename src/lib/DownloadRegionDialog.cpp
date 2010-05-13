@@ -340,13 +340,7 @@ void DownloadRegionDialog::updateTextureLayer()
 {
     mDebug() << "DownloadRegionDialog::updateTextureLayer";
     AbstractScanlineTextureMapper const * const textureMapper = d->m_model->textureMapper();
-    if ( textureMapper ) {
-        d->m_textureLayer = textureMapper->textureLayer();
-    }
-    else {
-        d->m_textureLayer = 0;
-        mDebug() << "DownloadRegionDialog::updateTextureLayer: no texture mapper";
-    }
+    d->m_textureLayer = textureMapper ? textureMapper->textureLayer() : 0;
     updateTilesCount();
 }
 
