@@ -961,10 +961,6 @@ void MarblePart::showNewStuffDialog()
     QPointer<KNS3::DownloadDialog> dialog(new KNS3::DownloadDialog(newStuffConfig));
     dialog->exec();
     delete dialog;
-
-    // Update the map theme widget by updating the model.
-    // Shouldn't be needed anymore ...
-    //m_controlView->marbleControl()->updateMapThemes();
 }
 
 // connect to expensive slots, only needed when the non modal dialog is show
