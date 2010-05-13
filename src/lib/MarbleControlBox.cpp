@@ -404,21 +404,19 @@ void MarbleControlBox::changeZoom(int zoom)
 {
     // There exists a circular signal/slot connection between MarbleWidget and this widget's
     // zoom slider. MarbleWidget prevents recursion, but it still loops one time unless
-    // disconnected here. Note that it would be possible to only connect the sliders
+    // blocked here. Note that it would be possible to only connect the sliders
     // sliderMoved signal instead of its valueChanged signal above to break up the loop.
     // This however means that the slider cannot be operated with the mouse wheel, as this
-    // does not emit the sliderMoved signal for some reason. Therefore the signal is disconnected
+    // does not emit the sliderMoved signal for some reason. Therefore the signal is blocked
     // below before calling setValue on the slider to avoid that it calls back to MarbleWidget,
-    // and then connected again to make user interaction possible.
+    // and then un-blocked again to make user interaction possible.
 
-    disconnect( d->uiWidget.zoomSlider,    SIGNAL( valueChanged( int ) ),
-             this,                      SIGNAL( zoomChanged( int ) ) );
+    d->uiWidget.zoomSlider->blockSignals( true );
 
     d->uiWidget.zoomSlider->setValue( zoom );
     d->uiWidget.zoomSlider->setMinimum( minimumZoom() );
 
-    connect( d->uiWidget.zoomSlider,    SIGNAL( valueChanged( int ) ),
-             this,                      SIGNAL( zoomChanged( int ) ) );
+    d->uiWidget.zoomSlider->blockSignals( false );
 }
 
 void MarbleControlBox::adjustPositionTrackingStatus( PositionProviderStatus status )
