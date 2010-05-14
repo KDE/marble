@@ -34,10 +34,6 @@ MarbleAbstractRunner::MarbleAbstractRunner(QObject *parent)
 {
 }
 
-MarbleAbstractRunner::~MarbleAbstractRunner()
-{
-}
-
 GeoDataFeature::GeoDataVisualCategory MarbleAbstractRunner::category() const
 {
     return GeoDataFeature::Default;

@@ -49,10 +49,6 @@ public:
      */
     explicit MarbleAbstractRunner(QObject *parent = 0);
     /**
-     * Destructor.
-     */
-    virtual ~MarbleAbstractRunner();
-    /**
      * This function gives the  icon for this runner
      * @return the icon of the runner
      */
