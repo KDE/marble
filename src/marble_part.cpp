@@ -1006,6 +1006,7 @@ void MarblePart::showDownloadRegionDialog()
         m_controlView->marbleWidget()->map()->viewParams()->viewport();
     m_downloadRegionDialog->setSpecifiedLatLonAltBox( viewport->viewLatLonAltBox() );
     m_downloadRegionDialog->setVisibleLatLonAltBox( viewport->viewLatLonAltBox() );
+    m_downloadRegionDialog->setVisibleTileLevel( model->tileZoomLevel() );
 
     m_downloadRegionDialog->show();
     m_downloadRegionDialog->raise();
