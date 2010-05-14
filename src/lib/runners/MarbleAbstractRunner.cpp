@@ -54,11 +54,6 @@ void MarbleAbstractRunner::parse(const QString &input)
     m_input = input;
 }
 
-void MarbleAbstractRunner::run()
-{
-    exec();
-}
-
 }
 
 #include "MarbleAbstractRunner.moc"

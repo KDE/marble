@@ -68,8 +68,6 @@ public slots:
     virtual void parse(const QString &input);
 
 protected:
-    virtual void run();
-
     QString m_input;
     QAbstractItemModel * m_placemarkModel;
     MarbleMap * m_map;
