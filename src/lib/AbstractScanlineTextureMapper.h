@@ -53,6 +53,7 @@ public:
 
  Q_SIGNALS:
     void mapChanged();
+    void tileLevelChanged( int newTileLevel );
 
  private Q_SLOTS:
     void notifyMapChanged();
@@ -129,7 +130,6 @@ public:
 
     StackedTile *m_tile;
 
-    int          m_tileLevel;
     int          m_maxTileLevel;
 
     int          m_previousRadius;
@@ -149,6 +149,7 @@ public:
     void initGlobalHeight();
     void initTileSize();
 
+    int         m_tileLevel;
     int         m_globalWidth;
     int         m_globalHeight;
     qreal       m_normGlobalWidth;

@@ -529,7 +529,8 @@ void MarbleModel::setupTextureMapper( Projection projection )
         default:
             d->m_texmapper = 0;
     }
-
+    Q_ASSERT( d->m_texmapper );
+    connect( d->m_texmapper, SIGNAL( tileLevelChanged( int )), SIGNAL( tileLevelChanged( int )));
     connect( d->m_texmapper, SIGNAL( mapChanged() ),
              this,           SLOT( notifyModelChanged() ) );
 }

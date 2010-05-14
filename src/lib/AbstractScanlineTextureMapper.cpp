@@ -38,11 +38,11 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture *t
       m_textureLayer( textureLayer ),
       m_tileLoader( tileLoader ),
       m_tile( 0 ),
-      m_tileLevel( 0 ),
       m_maxTileLevel( 0 ),
       m_tilePosX( 0 ),
       m_tilePosY( 0 ),
       m_nBest( 0 ),
+      m_tileLevel( 0 ),
       m_globalWidth( 0 ),
       m_globalHeight( 0 ),
       m_normGlobalWidth( 0.0 ),
@@ -123,9 +123,10 @@ void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
     // the center to the upper left corner and subtract the tile position 
     // in that coordinate system. In total this equals a coordinate 
     // transformation to tile coordinates.
-  
     m_toTileCoordinatesLon = (qreal)(m_globalWidth / 2 - m_tilePosX);
     m_toTileCoordinatesLat = (qreal)(m_globalHeight / 2 - m_tilePosY);
+
+    emit tileLevelChanged( m_tileLevel );
 }
 
 

@@ -804,9 +804,13 @@ void MarblePart::showDistance( const QString& distance )
     updateStatusBar();
 }
 
-void MarblePart::showZoomLevel()
+void MarblePart::showZoomLevel( const int tileLevel )
 {
-    updateTileZoomLevel();
+    if ( tileLevel == -1 )
+        m_tileZoomLevel = NOT_AVAILABLE;
+    else {
+        m_tileZoomLevel.setNum( tileLevel );
+    }
     updateStatusBar();
 }
 
@@ -882,8 +886,8 @@ void MarblePart::setupStatusBar()
              this,                          SLOT( showPosition( QString ) ) );
     connect( m_controlView->marbleWidget(), SIGNAL( distanceChanged( QString ) ),
              this,                          SLOT( showDistance( QString ) ) );
-    connect( m_controlView->marbleWidget(), SIGNAL( zoomChanged( int ) ),
-             this,                          SLOT( showZoomLevel() ) );
+    connect( m_controlView->marbleWidget()->model(), SIGNAL( tileLevelChanged( int )),
+             SLOT( showZoomLevel( int )));
     connect( m_controlView->marbleWidget()->model(), SIGNAL( themeChanged( QString )),
              this, SLOT( mapThemeChanged( QString )), Qt::QueuedConnection );
 

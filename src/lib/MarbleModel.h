@@ -334,7 +334,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @see  zoomView()
      */
     void creatingTilesStart( TileCreator*, const QString& name, const QString& description );
-
+    void tileLevelChanged( int newTileLevel );
 
     /**
      * @brief Signal that the map theme has changed, and to which theme.
