@@ -101,7 +101,7 @@ public:
     // maximum values for global texture coordinates
     // ( with origin in upper left corner, measured in pixel) 
     int     m_maxGlobalX;
-    int     m_maxGlobalY;
+    int     m_maxGlobalY; // could be private also
 
     int     m_imageHeight;
     int     m_imageWidth;
@@ -120,28 +120,12 @@ public:
 
     bool m_interlaced;
 
-    // ------------------------
-    // Tile stuff
-    GeoSceneTexture *m_textureLayer;
-    /// size of the tiles of of the current texture layer
-    QSize m_tileSize;
     StackedTileLoader *m_tileLoader;
-    GeoSceneTexture::Projection m_tileProjection;
-
-    StackedTile *m_tile;
-
-    int          m_maxTileLevel;
-
-    int          m_previousRadius;
 
     // Position of the tile in global Texture Coordinates
     // ( with origin in upper left corner, measured in pixel) 
     int          m_tilePosX;
     int          m_tilePosY;
-
-    int          m_n;
-    qreal        m_nInverse;
-    int          m_nBest;
 
  private:
     Q_DISABLE_COPY( AbstractScanlineTextureMapper )
@@ -149,7 +133,19 @@ public:
     void initGlobalHeight();
     void initTileSize();
 
+    GeoSceneTexture *m_textureLayer;
+    /// size of the tiles of of the current texture layer
+    QSize m_tileSize;
+    GeoSceneTexture::Projection m_tileProjection;
+    StackedTile *m_tile;
+    int         m_previousRadius;
+
+    int         m_n;
+    qreal       m_nInverse;
+    int         m_nBest;
+
     int         m_tileLevel;
+    int         m_maxTileLevel;
     int         m_globalWidth;
     int         m_globalHeight;
     qreal       m_normGlobalWidth;
