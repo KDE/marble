@@ -1233,7 +1233,7 @@ void MarblePart::reload()
     m_controlView->marbleWidget()->map()->reload();
 }
 
-void MarblePart::showPluginAboutDialog( QString nameId )
+void MarblePart::showPluginAboutDialog( const QString& nameId )
 {
     QList<RenderPlugin *> renderItemList = m_controlView->marbleWidget()->renderPlugins();
 
@@ -1247,7 +1247,7 @@ void MarblePart::showPluginAboutDialog( QString nameId )
     }
 }
 
-void MarblePart::showPluginConfigDialog( QString nameId )
+void MarblePart::showPluginConfigDialog( const QString& nameId )
 {
     QList<RenderPlugin *> renderItemList = m_controlView->marbleWidget()->renderPlugins();
 

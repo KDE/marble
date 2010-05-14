@@ -134,12 +134,12 @@ class MarblePart: public KParts::ReadOnlyPart
     /**
      * Shows the about dialog for the plugin with the corresponding @p nameId.
      */
-    void  showPluginAboutDialog( QString nameId );
+    void  showPluginAboutDialog( const QString& nameId );
 
     /**
      * Shows the configuration dialog for the plugin with the corresponding @p nameId.
      */
-    void  showPluginConfigDialog( QString nameId );
+    void  showPluginConfigDialog( const QString& nameId );
 
     /**
      * Saves the settings of all plugins.
