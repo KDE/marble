@@ -15,11 +15,10 @@
 
 #include <QtCore/QObject>
 
-class MarblePhysicsPrivate;
-
 namespace Marble
-{    
+{
 
+class MarblePhysicsPrivate;
 class ViewportParams;
 
 class MarblePhysics : public QObject

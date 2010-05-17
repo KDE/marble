@@ -18,7 +18,8 @@
 
 #include <QtCore/QTimeLine>
 
-using namespace Marble;
+namespace Marble
+{
 
 class MarblePhysicsPrivate {
 public:
@@ -192,6 +193,8 @@ void MarblePhysics::updateProgress(qreal progress)
     intermediate.setRange(range);
     
     emit positionReached(intermediate);
+}
+
 }
 
 #include "MarblePhysics.moc"
