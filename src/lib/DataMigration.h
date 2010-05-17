@@ -11,7 +11,10 @@
 #ifndef MARBLE_DATAMIGRATION_H
 #define MARBLE_DATAMIGRATION_H
 
-#include<QtCore/QObject>
+#include <QtCore/QObject>
+
+namespace Marble
+{
 
 class DataMigration : public QObject
 {
@@ -27,5 +30,7 @@ class DataMigration : public QObject
  private:
     static void moveFiles( const QString& source, const QString& target );
 };
+
+}
 
 #endif // MARBLE_DATAMIGRATION_H

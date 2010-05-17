@@ -29,7 +29,8 @@
 // std
 #include <limits>
 
-using namespace Marble;
+namespace Marble
+{
 
 DataMigration::DataMigration( QObject *parent )
     : QObject( parent )
@@ -186,6 +187,8 @@ void DataMigration::moveFiles( const QString& source, const QString& target )
             }
         }
     }
+}
+
 }
 
 #include "DataMigration.moc"
