@@ -15,18 +15,20 @@
 #include "global.h"
 #include "TileId.h"
 
+namespace Marble
+{
 
 ServerLayout::~ServerLayout()
 {
 }
 
 
-MarbleServerLayout::MarbleServerLayout( Marble::GeoSceneTexture *textureLayer )
+MarbleServerLayout::MarbleServerLayout( GeoSceneTexture *textureLayer )
     : m_textureLayer( textureLayer )
 {
 }
 
-QUrl MarbleServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &id ) const
+QUrl MarbleServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
 {
     QUrl url = prototypeUrl;
     url.setPath( url.path() + m_textureLayer->relativeTileFileName( id ) );
@@ -35,12 +37,12 @@ QUrl MarbleServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::Ti
 }
 
 
-OsmServerLayout::OsmServerLayout( Marble::GeoSceneTexture *textureLayer )
+OsmServerLayout::OsmServerLayout( GeoSceneTexture *textureLayer )
     : m_textureLayer( textureLayer )
 {
 }
 
-QUrl OsmServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &id ) const
+QUrl OsmServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
 {
     const QString suffix = m_textureLayer->fileFormat().toLower();
     const QString path = QString( "%1/%2/%3.%4" ).arg( id.zoomLevel() )
@@ -55,7 +57,7 @@ QUrl OsmServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileI
 }
 
 
-QUrl CustomServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &id ) const
+QUrl CustomServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const
 {
     QString urlStr = prototypeUrl.toString();
 
@@ -64,4 +66,6 @@ QUrl CustomServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::Ti
     urlStr.replace( "{y}", QString::number( id.y() ) );
 
     return QUrl( urlStr );
+}
+
 }

@@ -35,12 +35,12 @@
  * @short Texture dataset stored in a layer.
  */
 
-class ServerLayout;
 
 namespace Marble
 {
 class Blending;
 class DownloadPolicy;
+class ServerLayout;
 class TileId;
 
 class GeoSceneTexture : public GeoSceneAbstractDataset

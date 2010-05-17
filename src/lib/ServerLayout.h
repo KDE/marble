@@ -15,9 +15,8 @@
 
 namespace Marble
 {
-    class GeoSceneTexture;
-    class TileId;
-}
+class GeoSceneTexture;
+class TileId;
 
 class ServerLayout
 {
@@ -32,36 +31,36 @@ public:
      * @param id Marble-specific ID of requested tile
      * @return completed URL for requested tile id
      */
-    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &id ) const = 0;
+    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const = 0;
 };
 
 class MarbleServerLayout : public ServerLayout
 {
 public:
-    explicit MarbleServerLayout( Marble::GeoSceneTexture *textureLayer );
+    explicit MarbleServerLayout( GeoSceneTexture *textureLayer );
 
     /**
      * Completes the path of the @p prototypeUrl and returns it.
      */
-    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId & ) const;
+    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const;
 
 private:
-    Marble::GeoSceneTexture *const m_textureLayer;
+    GeoSceneTexture *const m_textureLayer;
 };
 
 class OsmServerLayout : public ServerLayout
 {
 public:
-    explicit OsmServerLayout( Marble::GeoSceneTexture *textureLayer );
+    explicit OsmServerLayout( GeoSceneTexture *textureLayer );
 
     /**
      * Appends %zoomLevel/%x/%y.%suffix to the path of the @p prototypeUrl and returns
      * the result.
      */
-    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId & ) const;
+    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const;
 
 private:
-    Marble::GeoSceneTexture *const m_textureLayer;
+    GeoSceneTexture *const m_textureLayer;
 };
 
 class CustomServerLayout : public ServerLayout
@@ -73,7 +72,9 @@ public:
      *
      * Escape sequences are: {zoomLevel}, {x}, and {y}.
      */
-    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &id ) const;
+    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const;
 };
+
+}
 
 #endif
