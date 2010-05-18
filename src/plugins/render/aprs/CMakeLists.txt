@@ -24,11 +24,14 @@ set( aprs_SRCS AprsPlugin.cpp
 	       AprsFile.cpp
 
                qextserialport.cpp
-	       posix_qextserialport.cpp )
+	       ${serial_src} )
 
 set( aprs_UI AprsConfigWidget.ui )
 qt4_wrap_ui( aprs_SRCS ${aprs_UI} )
 
+if (QTONLY)
+qt4_automoc( ${aprs_SRCS} )
+endif (QTONLY)
+
 marble_add_plugin( AprsPlugin ${aprs_SRCS} )
 #target_link_libraries( Aprs ${QT_QTWEBKIT_LIBRARY} )
-PROJECT(AprsPlugin)

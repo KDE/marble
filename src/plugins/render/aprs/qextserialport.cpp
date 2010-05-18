@@ -258,3 +258,5 @@ QextSerialPort::~QextSerialPort()
     platformSpecificDestruct();
     delete mutex;
 }
+
+#include "qextserialport.moc"
