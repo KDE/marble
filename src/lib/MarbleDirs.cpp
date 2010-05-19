@@ -28,7 +28,8 @@
 
 #ifdef Q_OS_WIN
 //for getting appdata path
-#define _WIN32_IE 0x0400
+//mingw-w64 Internet Explorer 5.01
+#define _WIN32_IE 0x0501
 #include <shlobj.h>
 #endif
 
