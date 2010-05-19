@@ -185,7 +185,7 @@ No guarantees are made as to the quality of POSIX support under NT/2000 however.
 
 \author Stefan Sander, Michal Policht, Brandon Fosdick, Liam Staskawicz
 */
-class QEXTSERIALPORT_EXPORT QextSerialPort: public QIODevice
+class QextSerialPort: public QIODevice
 {
     Q_OBJECT
     public:
