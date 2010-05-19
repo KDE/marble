@@ -9,6 +9,7 @@ INCLUDE(${QT_USE_FILE})
 
 if (WIN32)
   set (serial_src win_qextserialport.cpp)
+  ADD_DEFINITIONS(-DQEXTSERIALPORT_LIB)
 else (WIN32)
   set (serial_src posix_qextserialport.cpp)
 endif (WIN32)
