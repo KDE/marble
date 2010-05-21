@@ -87,10 +87,11 @@ GeoDataLatLonAltBox& GeoDataRegion::latLonAltBox() const
 
                 d->m_latLonAltBox = new GeoDataLatLonAltBox( placemark->coordinate() );
             }
-
-            // If the parent is not a placemark then create a default LatLonAltBox
-            // FIXME: reference a shared object instead
-            d->m_latLonAltBox = new GeoDataLatLonAltBox();
+            else {
+                // If the parent is not a placemark then create a default LatLonAltBox
+                // FIXME: reference a shared object instead
+                d->m_latLonAltBox = new GeoDataLatLonAltBox();
+            }
         }
         else {
             // If there is no parent then create a default LatLonAltBox
