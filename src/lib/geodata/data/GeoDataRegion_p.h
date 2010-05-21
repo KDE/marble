@@ -71,34 +71,17 @@ class GeoDataRegionPrivate
         return GeoDataTypes::GeoDataRegionType;
     }
 
-    GeoDataRegionPrivate &operator=( const GeoDataRegionPrivate other )
-    {
-        QMutexLocker locker( &m_mutex );
-        m_parent = other.m_parent;
-        delete m_latLonAltBox;
-        if ( other.m_latLonAltBox ) {
-            m_latLonAltBox = new GeoDataLatLonAltBox( *other.m_latLonAltBox );
-        }
-        else {
-            m_latLonAltBox = 0;
-        }
-
-        delete m_lod;
-        if ( other.m_lod ) {
-            m_lod = new GeoDataLod( *other.m_lod );
-        }
-        else {
-            m_lod = 0;
-        }
-
-        return *this;
-    }
-
     GeoDataFeature * m_parent;
     GeoDataLatLonAltBox * m_latLonAltBox;
     GeoDataLod * m_lod;
 
     QMutex m_mutex;
+
+  private:
+    GeoDataRegionPrivate &operator=( const GeoDataRegionPrivate& )
+    {
+        return *this;
+    }
 };
 
 } // namespace Marble

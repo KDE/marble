@@ -22,6 +22,9 @@
 
 #include "GeoDataTypes.h"
 
+// std
+#include <algorithm>
+
 
 namespace Marble
 {
@@ -148,8 +151,14 @@ void GeoDataRegion::unpack( QDataStream& stream )
 
 GeoDataRegion &GeoDataRegion::operator=( const GeoDataRegion& other )
 {
-    *d = *other.d;
+    GeoDataRegion temp( other );
+    swap( temp );
     return *this;
+}
+
+void GeoDataRegion::swap( GeoDataRegion & other )
+{
+    std::swap( d, other.d );
 }
 
 }

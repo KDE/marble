@@ -144,8 +144,9 @@ class GEODATA_EXPORT GeoDataRegion : public GeoDataObject
 
     GeoDataRegion &operator=( const GeoDataRegion& other );
 
- protected:
-    GeoDataRegionPrivate  * const d;
+ private:
+    void swap( GeoDataRegion & other );
+    GeoDataRegionPrivate  *d;
 };
 
 }
