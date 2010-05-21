@@ -78,10 +78,8 @@ class GeoDataRegionPrivate
     QMutex m_mutex;
 
   private:
-    GeoDataRegionPrivate &operator=( const GeoDataRegionPrivate& )
-    {
-        return *this;
-    }
+    // Preventing usage of operator=
+    GeoDataRegionPrivate &operator=( const GeoDataRegionPrivate& );
 };
 
 } // namespace Marble
