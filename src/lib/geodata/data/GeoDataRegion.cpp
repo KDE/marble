@@ -152,7 +152,12 @@ void GeoDataRegion::unpack( QDataStream& stream )
 
 GeoDataRegion &GeoDataRegion::operator=( const GeoDataRegion& other )
 {
+    // Self assignment
+    if ( this == &other ) return *this;
+
+    other.d->m_mutex.lock();
     GeoDataRegion temp( other );
+    other.d->m_mutex.unlock();
     swap( temp );
     return *this;
 }
