@@ -206,9 +206,14 @@ uint StackedTilePrivate::pixelF( qreal x, qreal y, const QRgb& topLeftValue ) co
     return topLeftValue;
 }
 
-inline void StackedTilePrivate::mergeCopyToResult( QSharedPointer<TextureTile> const & other )
+inline void StackedTilePrivate::setResultTile( QSharedPointer<TextureTile> const & tile,
+                                               bool const withConversion )
 {
-    m_resultTile = other->image()->copy();
+    if ( withConversion ) {
+        m_resultTile = tile->image()->convertToFormat( QImage::Format_ARGB32_Premultiplied );
+    } else {
+        m_resultTile = tile->image()->copy();
+    }
 }
 
 void StackedTilePrivate::calcByteCount()
@@ -364,6 +369,9 @@ bool StackedTile::hasTiles() const
 void StackedTile::initResultTile()
 {
     Q_ASSERT( hasTiles() );
+    // if there are more than one active texture layers, we have to convert the
+    // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
+    const bool withConversion = d->m_tiles.count() > 1;
     QVector<QSharedPointer<TextureTile> >::const_iterator pos = d->m_tiles.constBegin();
     QVector<QSharedPointer<TextureTile> >::const_iterator const end = d->m_tiles.constEnd();
     for (; pos != end; ++pos )
@@ -375,7 +383,7 @@ void StackedTile::initResultTile()
             }
             else {
                 mDebug() << "StackedTile::initResultTile: no blending defined => copying top over bottom image";
-                d->mergeCopyToResult( *pos );
+                d->setResultTile( *pos, withConversion );
             }
         }
 
