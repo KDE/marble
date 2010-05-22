@@ -24,7 +24,8 @@
 namespace Marble
 {
 
-void IndependentChannelBlending::blend( QImage * const bottom, QSharedPointer<TextureTile> const & top ) const
+void IndependentChannelBlending::blend( QImage * const bottom,
+                                        QSharedPointer<TextureTile> const & top ) const
 {
     QImage const * const topImage = top->image();
     Q_ASSERT( topImage );
