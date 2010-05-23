@@ -79,6 +79,11 @@ GeoNode* DgmlDownloadUrlTagHandler::parse( GeoParser& parser ) const
     if ( !pathStr.isEmpty() )
         url.setPath( pathStr );
 
+    // Attribute query, optional
+    const QString queryStr = parser.attribute( dgmlAttr_query ).trimmed();
+    if ( !queryStr.isEmpty() )
+        url.setEncodedQuery( queryStr.toLatin1() );
+
     parentItem.nodeAs<GeoSceneTexture>()->addDownloadUrl( url );
     return 0;
 }
