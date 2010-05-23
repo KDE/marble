@@ -31,8 +31,8 @@ class RenderPluginPrivate
         : m_dataFacade(0),
           m_action(0),
           m_item(0),
-          m_enabled(false),
-          m_visible(false)
+          m_enabled(true),
+          m_visible(true)
     {
     }
 
