@@ -15,6 +15,8 @@
 #include "global.h"
 #include "TileId.h"
 
+#include <math.h>
+
 namespace Marble
 {
 
@@ -66,6 +68,27 @@ QUrl CustomServerLayout::downloadUrl( const QUrl &prototypeUrl, const TileId &id
     urlStr.replace( "{y}", QString::number( id.y() ) );
 
     return QUrl( urlStr );
+}
+
+QUrl LatLonBoxServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const
+{
+    const qint64 radius = ( 1 << ( tileId.zoomLevel() - 1 ) );
+    const qint64 x = tileId.x();
+    const qint64 y = tileId.y();
+
+    const qreal latBottom = atan( sinh( ( radius - y - 1 ) / (double)radius * M_PI ) ) * 180.0 / M_PI;
+    const qreal latTop    = atan( sinh( ( radius - y     ) / (double)radius * M_PI ) ) * 180.0 / M_PI;
+    const qreal lonLeft   =             ( x - radius     ) / (double)radius            * 180.0;
+    const qreal lonRight  =             ( x - radius + 1 ) / (double)radius            * 180.0;
+
+    QString strUrl = prototypeUrl.toString();
+
+    strUrl.replace( "{lonLeft}",   QString::number( lonLeft   ) );
+    strUrl.replace( "{latBottom}", QString::number( latBottom ) );
+    strUrl.replace( "{lonRight}",  QString::number( lonRight  ) );
+    strUrl.replace( "{latTop}",    QString::number( latTop    ) );
+
+    return QUrl::fromEncoded( strUrl.toLatin1() );
 }
 
 }

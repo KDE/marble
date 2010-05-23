@@ -75,6 +75,18 @@ public:
     virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const;
 };
 
+class LatLonBoxServerLayout : public ServerLayout
+{
+public:
+    /**
+     * Replaces escape sequences in the @p prototypeUrl according to the lat-lon box
+     * covered by the given @p tileId and returns the result.
+     *
+     * Escape sequences are: {latTop}, {latBottom}, {lonLeft}, and {lonRight}.
+     */
+    virtual QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const;
+};
+
 }
 
 #endif
