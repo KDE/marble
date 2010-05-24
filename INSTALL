@@ -9,12 +9,9 @@ NOTE: This file describes how to build Marble as a stand-alone
 
 
 Prerequisites for building Marble are:
- - Qt 4.2 or newer
+ - Qt 4.5 or newer
  - cmake version 2.4 or newer
  - (optional): kdelibs from the KDE subversion repositories.
-    We have found that revision 701967 (Marble v.0.4.0)
-    works fine. Note that kdelibs is under heavy development, 
-    and some revisions might not work.
  - gpsd-2.37 or newer. Older versions of gpsd had C++ bindings
     removed, how far back I don't know but 2.36 was one of them.
     Great thanks to the gpsd developers for adding them back.
@@ -122,7 +119,7 @@ drawing it's data from:
 
 3.1 At Compiletime
 
-Use the cmake option -DMARBLE_DATA_PATH to specify the 
+Use the cmake option -DMARBLE_DATA_PATH to specify the
 built-in system path that Marble gathers its data from:
 
 Example:
@@ -137,8 +134,8 @@ a) Enter a key and a value
 
 marbleDataPath="/smb/marble/data"
 
-to the config file "marblerc" or 
-"~/.config/KDE/Marble\ Desktop\ Globe.conf" and (re)start the 
+to the config file "marblerc" or
+"~/.config/KDE/Marble\ Desktop\ Globe.conf" and (re)start the
 application.
 
 b) Start Marble using the command line option --marbleDataPath:
@@ -148,16 +145,7 @@ marble --marbleDataPath ~/marble/data
 
 4. Known Issues:
 
-- Due to a bug in the cmake files you might have to move the installed
-data under certain circumstances:
-
-  mkdir -p /usr/local/share/apps/marble
-  cp -a /marble/data /usr/local/share/apps/marble
-  rm -r /marble
-
 - If you don't specify any install path using cmake then Marble will probably install under /usr/local.
 If your distribution doesn't include /usr/local/lib in your LD_LIBRARY_PATH you might need to add that directory via:
 
   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-
-- The integrated Wikipedia browser doesn't load images
