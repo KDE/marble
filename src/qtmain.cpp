@@ -84,18 +84,32 @@ int main(int argc, char *argv[])
 
     QString marbleDataPath;
     int dataPathIndex=0;
+    MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
 
     for ( int i = 1; i < argc; ++i ) {
         if ( strcmp( argv[ i ], "--debug-info" ) == 0 )
         {
             MarbleDebug::enable = true;
         }
-        if ( strcmp( argv[ i ], "--marbleDataPath" ) == 0 && i + 1 < argc )
+        else if ( strcmp( argv[ i ], "--marbledatapath" ) == 0 && i + 1 < argc )
         {
             dataPathIndex = i + 1;
             marbleDataPath = argv[ dataPathIndex ];
         }
+        else if ( strcmp( argv[ i ], "--smallscreen" ) == 0 ) {
+            profiles |= MarbleGlobal::SmallScreen;
+        }
+        else if ( strcmp( argv[ i ], "--nosmallscreen" ) == 0 ) {
+            profiles &= ~MarbleGlobal::SmallScreen;
+        }
+        else if ( strcmp( argv[ i ], "--highresolution" ) == 0 ) {
+            profiles |= MarbleGlobal::HighResolution;
+        }
+        else if ( strcmp( argv[ i ], "--nohighresolution" ) == 0 ) {
+            profiles &= ~MarbleGlobal::HighResolution;
+        }
     }
+    MarbleGlobal::getInstance()->setProfiles( profiles );
 
     MainWindow *window = new MainWindow( marbleDataPath );
     window->setAttribute( Qt::WA_DeleteOnClose, true );

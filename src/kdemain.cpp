@@ -224,7 +224,9 @@ int main ( int argc, char *argv[] )
 
     KCmdLineArgs::init( argc, argv, &aboutData );
 
-    
+    // Autodetect profiles
+    MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
+
     KCmdLineOptions  options;
     options.add( "debug-info", ki18n( "Enable debug output" ) );
     options.add( "timedemo", ki18n( "Make a time measurement to check performance" ) );
@@ -234,11 +236,28 @@ int main ( int argc, char *argv[] )
     options.add( "enableFileView",
                  ki18n( "Enable tab to see gpxFileView" ) );
     options.add( "tile-id", ki18n( "Show tile id's" ) );
+    options.add( "marbledatapath \<data path>", ki18n( "Use a different directory which contains map data" ) );
+    if( profiles & MarbleGlobal::SmallScreen ) {
+        options.add( "nosmallscreen", ki18n( "Do not use the interface optimized for small screens" ) );
+    }
+    else {
+        options.add( "smallscreen", ki18n( "Use the interface optimized for small screens" ) );
+    }
+    if( profiles & MarbleGlobal::HighResolution ) {
+        options.add( "nohighresolution", ki18n( "Do not use the interface optimized for high resolutions" ) );
+    }
+    else {
+        options.add( "highresolution", ki18n( "Use the interface optimized for high resolutions" ) );
+    }
+    options.add( "+[file]", ki18n( "One or more placemark files to be opened" ) );
+
     KCmdLineArgs::addCmdLineOptions( options );
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
     KApplication app;
     KGlobal::locale()->insertCatalog( "marble_qt" );
+
+    
 
     if ( args->isSet( "debug-info" ) ) {
         MarbleDebug::enable = true;
@@ -246,7 +265,27 @@ int main ( int argc, char *argv[] )
         MarbleDebug::enable = false;
     }
 
-    MainWindow *window = new MainWindow();
+    if ( args->isSet( "smallscreen" ) ) {
+        profiles |= MarbleGlobal::SmallScreen;
+    }
+    else {
+        profiles &= ~MarbleGlobal::SmallScreen;
+    }
+
+    if ( args->isSet( "highresolution" ) ) {
+        profiles |= MarbleGlobal::HighResolution;
+    }
+    else {
+        profiles &= ~MarbleGlobal::HighResolution;
+    }
+
+    MarbleGlobal::getInstance()->setProfiles( profiles );
+
+    QString marbleDataPath = args->getOption( "marbledatapath" );
+    if( marbleDataPath.isEmpty() ) {
+        marbleDataPath = QString();
+    }
+    MainWindow *window = new MainWindow( marbleDataPath );
     window->setAttribute( Qt::WA_DeleteOnClose, true );
     window->show();
 

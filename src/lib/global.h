@@ -244,7 +244,8 @@ class  MARBLE_EXPORT MarbleGlobal
     
     enum Profile {
         Default = 0x0,
-        SmallScreen = 0x1
+        SmallScreen = 0x1,
+        HighResolution = 0x2
     };
     
     Q_DECLARE_FLAGS( Profiles, Profile )
