@@ -62,8 +62,8 @@ namespace
 using namespace Marble;
 
 MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
-        QMainWindow(parent), m_sunControlDialog(0), m_downloadRegionAction( 0 ),
-        m_downloadRegionDialog( 0 )
+        QMainWindow(parent), m_sunControlDialog(0),
+        m_downloadRegionDialog( 0 ), m_downloadRegionAction( 0 )
 {
     setUpdatesEnabled( false );
     

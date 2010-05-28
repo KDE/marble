@@ -119,6 +119,7 @@ StackedTileLoader::~StackedTileLoader()
 
 void StackedTileLoader::setDownloadManager( HttpDownloadManager *downloadManager )
 {
+    Q_UNUSED(downloadManager);
 }
 
 void StackedTileLoader::setTextureLayerSettings( GeoSceneGroup * const textureLayerSettings )
@@ -389,6 +390,7 @@ void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 
 void StackedTileLoader::updateTile( TileId const & stackedTileId, TileId const & tileId )
 {
+    Q_UNUSED(tileId);
     StackedTile * const displayedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
     if ( displayedTile ) {
         displayedTile->deriveCompletionState();

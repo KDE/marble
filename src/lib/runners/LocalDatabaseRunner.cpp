@@ -43,7 +43,6 @@ LocalDatabaseRunner::~LocalDatabaseRunner()
 
 void LocalDatabaseRunner::run()
 {
-    bool successful = false;
 
     QVector<GeoDataPlacemark> vector;
 

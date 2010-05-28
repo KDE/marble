@@ -88,6 +88,8 @@ qreal OverlayBlending::blendChannel( qreal const bottomColorIntensity,
 qreal ParallelBlending::blendChannel( qreal const bottomColorIntensity,
                                       qreal const topColorIntensity ) const
 {
+    Q_UNUSED(bottomColorIntensity);
+    Q_UNUSED(topColorIntensity);
     // FIXME:    return qMin( qMax( 2.0 / ( 1.0 / bottomColorIntensity + 1.0 / topColorIntensity )), 0.0, 1.0 );
     return 0.0;
 }
@@ -95,6 +97,8 @@ qreal ParallelBlending::blendChannel( qreal const bottomColorIntensity,
 qreal TextureBlending::blendChannel( qreal const bottomColorIntensity,
                                      qreal const topColorIntensity ) const
 {
+    Q_UNUSED(bottomColorIntensity);
+    Q_UNUSED(topColorIntensity);
     // FIXME: return qMax( qMin( topColorIntensity + bottomColorIntensity ) - 0.5 ), 1.0 ), 0.0 );
     return 0.0;
 }
@@ -105,6 +109,8 @@ qreal TextureBlending::blendChannel( qreal const bottomColorIntensity,
 qreal ColorBurnBlending::blendChannel( qreal const bottomColorIntensity,
                                        qreal const topColorIntensity ) const
 {
+    Q_UNUSED(bottomColorIntensity);
+    Q_UNUSED(topColorIntensity);
     // FIXME: check if this formula makes sense
     return qMin( 1.0, qMax( 0.0, 1.0 - ( 1.0 - bottomColorIntensity ) / topColorIntensity ));
 }
@@ -227,6 +233,8 @@ qreal VividLightBlending::blendChannel( qreal const bottomColorIntensity,
 qreal AdditiveSubtractiveBlending::blendChannel( qreal const bottomColorIntensity,
                                                  qreal const topColorIntensity ) const
 {
+    Q_UNUSED(bottomColorIntensity);
+    Q_UNUSED(topColorIntensity);
     // FIXME:
     //    return qMin( 1.0, qMax( 0.0, abs( bottomColorIntensity * bottomColorIntensity
     //                                      - topColorIntensity * topColorIntensity )));
