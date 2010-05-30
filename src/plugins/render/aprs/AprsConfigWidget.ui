@@ -59,7 +59,7 @@
             </size>
            </property>
            <property name="text">
-            <string>Don't show data older than (minutes)</string>
+            <string>Do not show data older than (minutes)</string>
            </property>
           </widget>
          </item>
@@ -91,10 +91,10 @@
           <item>
            <widget class="QCheckBox" name="m_internetBox">
             <property name="toolTip">
-             <string>Should information be gathered from the internet APRS data source?</string>
+             <string>Should information be gathered from the Internet APRS data source?</string>
             </property>
             <property name="text">
-             <string>Collect data from an APRS internet server</string>
+             <string>Collect data from an APRS Internet server</string>
             </property>
             <property name="checked">
              <bool>true</bool>
