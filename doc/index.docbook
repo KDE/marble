@@ -19,6 +19,13 @@
 					 <address>&Torsten.Rahn.mail;</address>
 				 </affiliation>
 			 </author>
+			 <author>
+				 <firstname>Dennis</firstname>
+				 <surname>Nienhüser</surname>
+				 <affiliation>
+					 <address><email>earthwings@gentoo.org</email></address>
+				 </affiliation>				 
+			 </author>
 
 			 <!-- TRANS:ROLES_OF_TRANSLATORS -->
 		 </authorgroup>
@@ -29,11 +36,15 @@
              <year>2007</year>
 			 <holder>&Torsten.Rahn;</holder>
 		 </copyright>
+		 <copyright>
+			 <year>2010</year>
+			 <holder>Dennis Nienhüser</holder>
+		 </copyright>
 
 		 <legalnotice>&FDLNotice;</legalnotice>
 
-		 <date>2009-08-04</date>
-		 <releaseinfo>0.8</releaseinfo>
+		 <date>2010-05-27</date>
+		 <releaseinfo>0.10</releaseinfo>
 
 		 <abstract>
 			<para>&marble; is a geographical atlas and a virtual desktop globe 
@@ -99,7 +110,7 @@
             To navigate and to control the view you can use the tools on the <guilabel>Navigation</guilabel> tab at the left: Press the arrow buttons to rotate the globe. The <guilabel>Up</guilabel> and <guilabel>Down</guilabel> arrow buttons will tilt the earth axis back and forth. The <guilabel>Left</guilabel> and <guilabel>Right</guilabel> arrow buttons will make the earth spin around its physical axis.
 		 </para>
          <para>
-            You can accomplish the same behaviour by pressing the &LMB; somewhere on the globe and by moving the mouse while keeping the &LMB; pressed. Using this drag and drop style navigation will allow you to adjust the viewing angle much easier and more precisely. The cursor keys on your keyboard offer another alternative way to quickly change directions.
+            You can accomplish the same behavior by pressing the &LMB; somewhere on the globe and by moving the mouse while keeping the &LMB; pressed. Using this drag and drop style navigation will allow you to adjust the viewing angle much easier and more precisely. The cursor keys on your keyboard offer another alternative way to quickly change directions.
          </para>
          <para>
             Zoom in and out by moving the vertical slider up and down. If your mouse has got a mouse 
@@ -226,6 +237,95 @@
          </para>
      </chapter>
 
+     <chapter id="routing">
+         <title>Find your way with &marble;</title>
+         <para>
+             Besides searching for places, &marble; can display possible routes between two or more of them. Do you want to plan a bicycle tour in the nearby wood? Need driving instructions to get to an address in a foreign city? Click on the <guilabel>Routing</guilabel> tab on the bottom of &marble;'s toolbox to start planning your trip.
+         </para>
+         <sect1 id="routing-route-new">
+         <title>Creating a new Route</title>
+         <para>
+             In the <guilabel>Routing</guilabel> tab you'll see two green buttons <guilabel>A</guilabel> and <guilabel>B</guilabel>. Enter the start address in the input field next to the <guilabel>A</guilabel> button, the route start input field. Press &Enter; or click on the <guilabel>Search</guilabel> button to find matching placemarks. A small progress animation will shorten your waiting time while the search is running. Using the search term <quote>Weavers Lane, London</quote>, the result will look similar to the screenshot below:
+         </para>
+         <screenshot>
+             <screeninfo>&marble; address search</screeninfo>
+             <mediaobject>
+                 <imageobject><imagedata fileref="routing-1.png" format="PNG" /></imageobject>
+                 <textobject><phrase>&marble; Searching Addresses</phrase></textobject>
+             </mediaobject>
+         </screenshot>
+         <para>
+             Matching placemarks line up in the list below the input fields. They're also shown in the map. The first result is automatically selected as the route start. In the map, this position is indicated using the same <guilabel>A</guilabel> icon as the button next to the route start input field. If the first result is not your desired route start, click on any other result to make that the new start position. You can either click on it in the result list or on its icon in the map to achieve that. The currently chosen route start is always indicated using the <guilabel>A</guilabel> icon.
+         </para>
+         <para>
+             With the route start at hand, let's move on to enter the destination of our trip. The procedure is the same: Enter the destination address in the input field next to the <guilabel>B</guilabel> button, press &Enter; and select the desired item among the result list.
+         </para>
+         <para>
+             Did you notice that the <guilabel>Search</guilabel> button is now gone and replaced by a <guilabel>Get Directions</guilabel> button? &marble; is signalizing that all information needed to calculate a route has been entered correctly. Click on the <guilabel>Get Directions</guilabel> button to retrieve a suitable route now. If your destination search term is <quote>Sun Walk, London</quote>, the result will resemble this screenshot:
+         </para>
+         <screenshot>
+             <screeninfo>&marble; route result</screeninfo>
+             <mediaobject>
+                 <imageobject><imagedata fileref="routing-2.png" format="PNG" /></imageobject>
+                 <textobject><phrase>&marble; Displaying a Route</phrase></textobject>
+             </mediaobject>
+         </screenshot>
+         <para>
+             If the start (or destination) position is already visible on the screen, you may find it more convenient to select it directly in the map. To do that, click on the <guilabel>A</guilabel> (or <guilabel>B</guilabel>) button next to the input field. Once clicked, the map input mode is activated: The next click on a position in the map will become the start (or end) of your trip. The mouse cursor turns into a cross to ease an accurate selection. The selected position will be included in the route and marked in the map. Please note that you need to clear any previous placemark using the <guilabel>Remove</guilabel> button right to the input field in order to be able to activate the map input mode. To abort the selection, either click on the button again or press &Esc;.
+         </para>
+         <para>
+	     The best route to take depends on the type of vehicle you plan to use (if any). You can tell &marble; about this and other settings in the routing <guilabel>Options</guilabel>. Clicking on the <guilabel>Options</guilabel> next to the <guilabel>Get Directions</guilabel> button, you can choose between car, bicycle and pedestrian routing. Car routing is subdivided into a fastest and a shortest mode. The former minimizes the route duration and the latter minimizes the route length. Furthermore you can specify to avoid highways or toll roads (only applicable to car routing). Clicking on the <guilabel>Options</guilabel> link a second time hides the route preferences. Make sure to click on the <guilabel>Get Directions</guilabel> button to update the route after changing settings.
+         </para>
+         </sect1>
+         <sect1 id="routing-route-adjustments">
+         <title>Adjusting Routes</title>
+         <para>
+             &marble; let's you modify several aspects of the route for fine-tuning: Change route options, insert via points, move or remove existing points. The modification of route options has been discussed in the previous section already; we'll concentrate on point management now.
+         </para>
+         <para>
+	     Inserting via points is done by drag-and-drop in the map. Every time you move the mouse pointer above any part of the route (except above existing trip points), a green flag icon appears to indicate that it is possible to insert a via point. To start the insert operation, click with the &LMB;. Move the mouse pointer to the desired new position while keeping the &LMB; pressed. Blue lines from the neighboring via points to the new position will appear:
+         </para>
+         <screenshot>
+             <screeninfo>&marble; route adding via points</screeninfo>
+             <mediaobject>
+                 <imageobject><imagedata fileref="routing-3.png" format="PNG" /></imageobject>
+                 <textobject><phrase>&marble; Inserting a via point</phrase></textobject>
+             </mediaobject>
+         </screenshot>
+         <para>
+             The new via point will be inserted between the existing neighbor via points once you release the &LMB;. At the same time the existing route is painted dotted to indicate that it contains outdated information. In the background, a new route is prepared which will replace the outdated one automatically.
+         </para>
+         <para>
+             It is also possible to add via points before the start or after the end of the route. To do that, follow the instructions above for inserting a new via point, but press &Ctrl; while moving the mouse. One blue line from the start or the end of the route appears. Its origin indicates where the new via point will be appended.
+         </para>
+         <para>
+             Existing via points can be moved freely across the map. Move the mouse pointer above a via point and drag it to its new location. Once released, the route will be updated automatically.	     
+         </para>
+         <para>
+             To exclude via points from the route, remove them. This can be done using either the <guilabel>Remove</guilabel> button next to the via point input field or by clicking with the &RMB; on the via point in the map. In the context menu, choose <guilabel>Remove this destination</guilabel>. To start an entirely new route, remove all via points.
+         </para>
+         </sect1>
+         <sect1 id="routing-route-export">
+         <title>Exporting Routes</title>
+         <para>
+             Routes planned in &marble; can be used in other applications or navigation devices which support <acronym>gpx</acronym> (GPS eXchange Format) or equivalent formats. If your navigation device does not support <acronym>gpx</acronym> directly, you can use a conversion utility like gpsbabel to convert a <acronym>gpx</acronym> file exported by &marble; to a suitable format.
+         </para>
+         <para>             
+             The export of a route in &marble; is initiated from the routing context menu in the map. Click with the &RMB; on any point of the route in the map. In the context menu that appears, choose <guilabel>Export route...</guilabel>:
+         </para>
+         <screenshot>
+             <screeninfo>&marble; route export</screeninfo>
+             <mediaobject>
+                 <imageobject><imagedata fileref="routing-4.png" format="PNG" /></imageobject>
+                 <textobject><phrase>&marble; Exporting a Route</phrase></textobject>
+             </mediaobject>
+         </screenshot>
+         <para>
+             Enter the desired filename in the upcoming save dialog. The filename extension should be gpx.
+         </para>
+         </sect1>
+     </chapter>
+
      <chapter id="measure-distances">
          <title>Measuring distances with &marble;</title>
          <para>
@@ -242,6 +342,58 @@
          </screenshot>
          <para>
             Once you have added at least two measure points, the total distance will be displayed in the top left corner of the map. &marble; will assume a spherical earth for all measurements which should be accurate enough for most cases.
+         </para>
+     </chapter>
+     
+     <chapter id="download-region">
+         <title>Download Map Regions</title>
+         <para>
+             Pre-installed with a set of maps, &marble; is ready to use. When you zoom in at places, more detailed parts of the current map theme are downloaded in the background. This works excellent whenever an Internet connection is available. What to do, however, when traveling to a foreign city where no constant Internet connection is available to download maps? Plan ahead and download those map regions you are going to use.
+         </para>
+         <para>
+             To understand what needs to be downloaded to display certain parts of the map offline, let's briefly look into the concept of tiles which &marble; uses internally. A tile is an image which corresponds to a certain part of the map. Tiles are arranged by &marble; next to each other to form the map image that is displayed to you. Depending on the selected projection mode, tiles are arranged to form a rectangle (Flat Map Projection, left) or a sphere (Globe Projection, right):
+         </para>
+         <screenshot>
+             <screeninfo>&marble; projections</screeninfo>
+             <mediaobject>
+                 <imageobject><imagedata fileref="download-region-1.png" format="PNG" /></imageobject>
+                 <textobject><phrase>Tiles at Level 1 in Flat Map (left) and Globe Projection (right)</phrase></textobject>
+             </mediaobject>
+         </screenshot>
+         <para>
+             Zooming in at this view, more details need to be displayed. The tiles shown in the two screenshots above are too coarse then; &marble; automatically recognizes this and changes to the next tile level where images provide more details. This keeps going: The more you zoom in, the higher the tile level. The following sketch illustrates the different number of tiles (colored) corresponding to the same map region at different tile levels:
+         </para>
+         <screenshot>
+             <screeninfo>&marble; tile levels</screeninfo>
+             <mediaobject>
+                 <imageobject><imagedata fileref="download-region-2.png" format="PNG" /></imageobject>
+                 <textobject><phrase>Different Tile Levels in &marble;</phrase></textobject>
+             </mediaobject>
+         </screenshot>
+         <para>
+            When downloading a map region for offline usage, you need to download all tiles in the desired region for all tile levels you plan to use. Because of the connection between tile levels and zoom levels, you can think of it as downloading all tiles in the zoom levels you plan to use.
+         </para>
+         <para>
+            To accomplish this for a certain region, make that region visible in the screen by zooming and moving the Globe. Now open the <guilabel>Download Region...</guilabel> dialog in the <guilabel>File</guilabel> menu. Keep the <guilabel>Visible region</guilabel> option selected to download those tiles that correspond to the map region visible in the screen. Next, select the tile level range (zoom range) you wish to download. The first field corresponds to the smallest, the second field corresponds to the largest tile level that will be downloaded. Tile levels in between will be downloaded as well. &marble; shows how many tiles (images) need to be downloaded and updates this number whenever you change the region or tile level range.
+         </para>
+         <screenshot>
+             <screeninfo>&marble; Download Region dialog</screeninfo>
+             <mediaobject>
+                 <imageobject><imagedata fileref="download-region-3.png" format="PNG" /></imageobject>
+                 <textobject><phrase>&marble;'s Download Region dialog</phrase></textobject>
+             </mediaobject>
+         </screenshot>
+         <para>
+           The tile level corresponding to the current zoom level is shown in the status bar on the bottom. Please note that you may have to configure Marble to show that information: Click with the &RMB; on the status bar and select <guilabel>Show Tile Zoom Level</guilabel>.
+         </para>
+         <para>
+           Select <guilabel>OK</guilabel> to trigger the map region download. The progress bar of &marble; will show the download progress (if activated).
+         </para>
+         <para>
+         In case you do know the coordinates of the map region to download, you can enter them by clicking on the <guilabel>Specify region</guilabel> option. The map region visible in the screen will be ignored in that case.
+         </para>
+         <para>
+           You can keep using &marble; while the <guilabel>Download Region</guilabel> dialog is open. This is useful to queue several downloads for different regions or different tile ranges. Just select <guilabel>Apply</guilabel> instead of <guilabel>OK</guilabel> to trigger the map region download.
          </para>
      </chapter>
 
@@ -277,6 +429,13 @@
                      </varlistentry>
                      <varlistentry>
                          <term><menuchoice>
+                                 <guimenu>File</guimenu>
+                                 <guimenuitem>Download Region...</guimenuitem>
+                         </menuchoice></term>
+                         <listitem><para><action>Displays</action> the <guilabel>Download Region</guilabel> dialog to download map data in different zoom levels for offline usage. See <link linkend="download-region">Download Map Regions</link> for details.</para></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term><menuchoice>
                                  <shortcut>
                                      <keycombo action="simul">&Ctrl;<keycap>S</keycap></keycombo>
                                  </shortcut>
@@ -300,7 +459,7 @@
                                  <guimenu>File</guimenu>
                                  <guimenuitem>Work Offline</guimenuitem>
                          </menuchoice></term>
-                         <listitem><para>If this option is selected &marble; will no longer download map data from the Internet</para></listitem>
+                         <listitem><para>If this option is selected &marble; will no longer download map data from the Internet. The search feature gets restricted to the local database. New routes cannot be retrieved.</para></listitem>
                      </varlistentry>
 					 <varlistentry>
 						 <term><menuchoice>
@@ -335,7 +494,7 @@
                                  <guimenu>Edit</guimenu>
                                  <guimenuitem>Copy Coordinates</guimenuitem>
                          </menuchoice></term>
-                         <listitem><para><action>Copies</action> the current coordinates the global clipboard.</para></listitem>
+                         <listitem><para><action>Copies</action> the current coordinates to the global clipboard.</para></listitem>
                      </varlistentry>
                  </variablelist>
 
@@ -555,7 +714,7 @@ the system's graphics drivers. </para>
 <varlistentry>
 <term><guilabel>Drag location</guilabel></term>
 <listitem>
-<para>While dragging the mouse there are two standard behaviours when dealing with a virtual globe: The location below mouse pointer will follow the cursor exactly: As a result &eg; the north pole will not stay at the top which can lead to confusion. By default Marble makes sure that north is always up which results in a dragging behaviour where the location below the mouse pointer slightly "detaches" from the cursor.</para>
+<para>While dragging the mouse there are two standard behaviors when dealing with a virtual globe: The location below mouse pointer will follow the cursor exactly: As a result &eg; the north pole will not stay at the top which can lead to confusion. By default Marble makes sure that north is always up which results in a dragging behavior where the location below the mouse pointer slightly "detaches" from the cursor.</para>
 </listitem>
 </varlistentry>
 
@@ -610,6 +769,9 @@ the system's graphics drivers. </para>
 
 <sect1 id="configplugins">
 <title>Plugins Configuration</title>
+<para>
+  The <guilabel>Plugin Configuration</guilabel> widget is the place to activate (or deactivate) Info Boxes, Online Services and other plugins that affect the look of &marble;. Active plugins appear in the <guilabel>View</guilabel> menu where you can toggle their visibility.
+</para>
 <screenshot>
 <screeninfo>The Plugins configuration dialog</screeninfo>
 <mediaobject>
@@ -621,12 +783,23 @@ the system's graphics drivers. </para>
 </textobject>
 </mediaobject>
 </screenshot>
+<para>
+  Each plugin can be activated and deactivated using the checkbox on the left. Some plugins provide further configuration options which are accessible by clicking on the tool icon on the right.
+</para>
 
 <variablelist>
+
+<varlistentry>
+<term><guilabel>Amateur Radio Aprs Plugin</guilabel></term>
+<listitem>
+<para>Retrieves data from the Automatic Packet Reporting System via the Internet, a file or a serial device. The position and status of data senders is displayed in the map and updated in real-time.</para>
+</listitem>
+</varlistentry>
+
 <varlistentry>
 <term><guilabel>Compass</guilabel></term>
 <listitem>
-<para>This is a float item that provides a compass.</para>
+<para>Shows a compass in the map</para>
 </listitem>
 </varlistentry>
 
@@ -637,21 +810,20 @@ the system's graphics drivers. </para>
 </listitem>
 </varlistentry>
 
+<!-- Not enabled in released version
 <varlistentry>
 <term><guilabel>File view</guilabel></term>
 <listitem>
 <para>Displays a list of currently opened files.</para>
 </listitem>
-</varlistentry>
+</varlistentry>-->
 
-<!-- enabled in released version?
 <varlistentry>
 <term><guilabel>GeoRenderer Plugin</guilabel></term>
 <listitem>
 <para>This plugin draws the map content (e.g. provided via a KML file).</para>
 </listitem>
 </varlistentry>
--->
 
 <varlistentry>
 <term><guilabel>Coordinate Grid</guilabel></term>
@@ -689,9 +861,23 @@ the system's graphics drivers. </para>
 </varlistentry>
 
 <varlistentry>
+<term><guilabel>Download Progress Indicator</guilabel></term>
+<listitem>
+<para>A pie chart on top of the map that shows the progress of ongoing downloads.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
 <term><guilabel>Stars Plugin</guilabel></term>
 <listitem>
 <para>A plugin that shows the Starry Sky.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Weather</guilabel></term>
+<listitem>
+<para>Downloads current weather information of cities and displays them in the map.</para>
 </listitem>
 </varlistentry>
 
@@ -717,7 +903,7 @@ the system's graphics drivers. </para>
                  </question>
                  <answer>
                      <para>
-                        &marble; aims to be a lightweight fast educational geographical browser that easily runs on any plattform that is supported by &Qt;. While higher resolution maps would be nice to have they aren't necessary for every user and every use case (just like you don't use a full blown text processor each time you just need a simple editor).
+                        &marble; aims to be a lightweight fast educational geographical browser that easily runs on any platform that is supported by &Qt;. While higher resolution maps would be nice to have they aren't necessary for every user and every use case (just like you don't use a full blown text processor each time you just need a simple editor).
                         Also notice &marble; is free software and is based on data that can be freely redistributed in the same way that applies to Free Software.
                      </para>
                  </answer>
@@ -730,7 +916,7 @@ the system's graphics drivers. </para>
                      <para> 
                         Despite depicting the earth as a globe &marble; doesn't make use of any 
                         3D hardware acceleration. This has the advantage of running 
-                        at a decent speed on any plattform and hardware supported by &Qt;.
+                        at a decent speed on any platform and hardware supported by &Qt;.
                         However it has the disadvantage that it doesn't run as smoothly as
                         it could if it used hardware accelerated OpenGL.
                         &marble; just uses plain 2D graphics and therefore 
