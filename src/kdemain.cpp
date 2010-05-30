@@ -236,7 +236,7 @@ int main ( int argc, char *argv[] )
     options.add( "enableFileView",
                  ki18n( "Enable tab to see gpxFileView" ) );
     options.add( "tile-id", ki18n( "Show tile id's" ) );
-    options.add( "marbledatapath \<data path>", ki18n( "Use a different directory which contains map data" ) );
+    options.add( "marbledatapath <data path>", ki18n( "Use a different directory which contains map data" ) );
     if( profiles & MarbleGlobal::SmallScreen ) {
         options.add( "nosmallscreen", ki18n( "Do not use the interface optimized for small screens" ) );
     }
