@@ -63,6 +63,9 @@ void GpsdPositionProviderPlugin::update( gps_data_t data )
         m_status = PositionProviderStatusAvailable;
         m_position.set( data.fix.longitude, data.fix.latitude,
                         data.fix.altitude, GeoDataCoordinates::Degree );
+        if (data.fix.mode == MODE_2D) {
+            m_position.setAltitude(0);
+        }
         m_accuracy.level = GeoDataAccuracy::Detailed;
         // FIXME: Add real values here
         m_accuracy.horizontal = 5;
@@ -70,9 +73,9 @@ void GpsdPositionProviderPlugin::update( gps_data_t data )
     }
     if (m_status != oldStatus)
         emit statusChanged( m_status );
-    // FIXME: Check whether position has changed first
-    if ( m_status == PositionProviderStatusAvailable )
+    if (!(oldPosition == m_position)) {
         emit positionChanged( m_position, m_accuracy );
+    }
 }
 
 bool GpsdPositionProviderPlugin::isInitialized() const
