@@ -90,9 +90,6 @@ public:
 
     QString error() const;
 
- public slots:
-    void  notifyPosition( GeoDataCoordinates );
-
 Q_SIGNALS:
     void  gpsLocation( GeoDataCoordinates, qreal );
 
@@ -108,7 +105,6 @@ Q_SIGNALS:
     QPointF             m_relativeRight;
     QPolygonF           m_currentDraw;
     QPolygonF           m_previousDraw;
-    QPointF             m_previousDistancePosition;
 
     Waypoint            *m_currentPosition;
     TrackPoint          *m_gpsCurrentPosition;
@@ -117,10 +113,6 @@ Q_SIGNALS:
     TrackPoint          *m_gpsTracking;
     Track               *m_gpsTrack;
     TrackSegment        *m_gpsTrackSeg;
-
-    int                 m_updateDelay;
-    QTemporaryFile      m_tempFile;
-    QString             m_data;
 
     PositionProviderPlugin* m_positionProvider;
 };

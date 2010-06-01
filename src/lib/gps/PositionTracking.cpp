@@ -37,7 +37,6 @@ PositionTracking::PositionTracking( GpxFile *currentGpx,
     m_gpsTrack    = new Track();
     currentGpx->addTrack( m_gpsTrack );
     m_gpsTrackSeg = 0;
-    m_updateDelay = 0;
 }
 
 
@@ -108,13 +107,6 @@ QRegion PositionTracking::genRegion( const QSize &canvasSize,
         return dirty;
 }
 
-void PositionTracking::notifyPosition( GeoDataCoordinates pos )
-{
-    //mDebug() << "Position from gpsd: " << pos.toString();
-    // FIXME: Unused parameters should get fixed during refactoring of this class
-    Q_UNUSED( pos )
-}
-
 void PositionTracking::updateSpeed( TrackPoint* previous, TrackPoint* next )
 {
     //This function makes the assumption that the update stage happens once
@@ -152,7 +144,6 @@ bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
         if ( !( m_gpsPreviousPosition->position() ==
                 m_gpsTracking->position() ) )
         {
-            notifyPosition( m_gpsTracking->position() );
             m_gpsTrackSeg->append( m_gpsPreviousPosition );
             m_gpsPreviousPosition = m_gpsCurrentPosition;
             m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking );
