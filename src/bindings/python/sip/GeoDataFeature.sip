@@ -122,10 +122,11 @@ public:
     void                    setDescriptionCDATA (bool cdata);
     Marble::GeoDataRegion&  region () const;
     void                    setRegion (const Marble::GeoDataRegion& region);
-    Marble::GeoDataLookAt*  lookAt () const;
-    void                    setLookAt (Marble::GeoDataLookAt* lookAt);
 protected:
 //ig                            GeoDataFeature (GeoDataFeaturePrivate* priv);
+public:
+    Marble::GeoDataAbstractView  abstractView () const;
+    void                    setAbstractView (const Marble::GeoDataAbstractView& abstractView);
 };
 // GeoDataFeature
 

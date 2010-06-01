@@ -38,7 +38,6 @@ public:
         ItemIsMovable
     };
     typedef QFlags<Marble::ScreenGraphicsItem::GraphicsItemFlag> GraphicsItemFlags;
-                            ScreenGraphicsItem (const QPointF& position, const QSizeF& size, Marble::MarbleGraphicsItem* parent = 0);
     virtual ~ScreenGraphicsItem ();
     void                    setPosition (const QPointF& position);
     QPointF                 positivePosition () const;
@@ -48,6 +47,8 @@ public:
 protected:
 //ig                            ScreenGraphicsItem (const QPointF& position, const QSizeF& size, ScreenGraphicsItemPrivate* d_ptr);
     virtual bool            eventFilter (QObject*, QEvent*);
+public:
+    QList<QPointF>          absolutePositions () const;
 };
 // ScreenGraphicsItem
 

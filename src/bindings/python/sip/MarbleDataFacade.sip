@@ -37,6 +37,7 @@ public:
 //ig    MarbleGeometryModel*    geometryModel ();
 //ig    MarblePlacemarkModel*   placemarkModel ();
 //ig    FileViewModel*          fileViewModel () const;
+    Marble::PluginManager*          pluginManager ();
 };
 // MarbleDataFacade
 

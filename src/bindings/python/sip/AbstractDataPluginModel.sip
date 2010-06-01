@@ -28,7 +28,6 @@ class AbstractDataPluginModel : QObject
 %End
 
 public:
-    explicit                AbstractDataPluginModel (const QString& name, QObject* parent /TransferThis/ = 0);
     QList<Marble::AbstractDataPluginItem*>  items (Marble::ViewportParams* viewport, Marble::MarbleDataFacade* facade, qint32 number = 10);
     QList<Marble::AbstractDataPluginItem*>  whichItemAt (const QPoint& curpos);
 
@@ -52,6 +51,8 @@ protected:
     bool                    itemExists (const QString& id) const;
 signals:
     void                    itemsUpdated ();
+public:
+    explicit                AbstractDataPluginModel (const QString& name, Marble::PluginManager* pluginManager, QObject* parent /TransferThis/ = 0);
 };
 // AbstractDataPluginModel
 

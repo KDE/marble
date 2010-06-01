@@ -45,7 +45,6 @@ signals:
     void                    projectionSelected (Marble::Projection /Constrained/);
     void                    gpsInputDisabled (bool);
     void                    gpsPositionChanged (qreal lat, qreal lon);
-    void                    updateGps ();
 
 public:
     void                    selectTheme (const QString&);
@@ -53,7 +52,6 @@ public:
 // FIXME PlacemarkModel header isn't installed
 //ig    void                    setLocations (MarblePlacemarkModel* locations);
     void                    changeZoom (int zoom);
-    void                    receiveGpsCoordinates (Marble::GeoDataCoordinates in, qreal speed);
     void                    enableFileViewActions ();
     void                    setNavigationTabShown (bool show);
     void                    setLegendTabShown (bool show);
@@ -69,6 +67,8 @@ protected:
 public:
     ~MarbleControlBox ();
     void                    selectCurrentMapTheme (const QString&);
+    void                    setWorkOffline (bool offline);
+    void                    receiveGpsCoordinates (const Marble::GeoDataCoordinates& in, qreal speed);
 };
 // MarbleControlBox
 

@@ -85,6 +85,8 @@ private:
             if (dynamic_cast<Marble::LabelGraphicsItem*>(sipCpp))
                 sipType = sipType_Marble_LabelGraphicsItem;
             }
+        else if (dynamic_cast<Marble::WidgetGraphicsItem*>(sipCpp))
+            sipType = sipType_Marble_WidgetGraphicsItem;
         }
 %End
 };
@@ -101,4 +103,5 @@ private:
 #include <LabelGraphicsItem.h>
 #include <MarbleGraphicsItem.h>
 #include <ScreenGraphicsItem.h>
+#include <WidgetGraphicsItem.h>
 %End

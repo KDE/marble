@@ -20,6 +20,7 @@
 
 namespace Marble
 {
+class PluginManager;
 
 class AbstractDataPlugin : Marble::RenderPlugin
 {
@@ -45,6 +46,8 @@ public:
     bool                    render (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos = "NONE", Marble::GeoSceneLayer* layer = 0);
 signals:
     void                    changedNumberOfItems (quint32 number);
+public:
+    Marble::PluginManager*          pluginManager () const;
 };
 // AbstractDataPlugin
 

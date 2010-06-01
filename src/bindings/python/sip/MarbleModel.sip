@@ -54,7 +54,6 @@ public:
     void                    clearVolatileTileCache ();
     void                    setVolatileTileCacheLimit (quint64 kiloBytes);
     void                    clearPersistentTileCache ();
-//ig    void                    paintTile (TextureTile* tile, int x, int y, int level, Marble::GeoSceneTexture* textureLayer, bool requestTileUpdate);
     void                    update ();
 
 signals:
@@ -66,10 +65,8 @@ signals:
 public:
     virtual ~MarbleModel ();
 //ig    Marble::GeoSceneDocument*  mapTheme () const;
-//ig    void                    setMapTheme (Marble::GeoSceneDocument* mapTheme, Marble::Projection currentProjection);
     void                    setupVectorComposer ();
 //ig    HttpDownloadManager*    downloadManager () const;
-//ig    void                    setDownloadManager (HttpDownloadManager* downloadManager);
     void                    openGpxFile (const QString& filename);
 //ig    PlacemarkLayout*        placemarkLayout () const;
 //ig    VectorComposer*         vectorComposer () const;
@@ -82,8 +79,16 @@ public:
 signals:
     void                    pluginSettingsChanged ();
     void                    repaintNeeded (QRegion dirtyRegion = QRegion());
-    void                    downloadTile (const QUrl& sourceUrl, const QString& destinationFileName, const QString& id) const;
     void                    renderPluginInitialized (Marble::RenderPlugin* renderPlugin);
+public:
+//ig    void                    setMapTheme (Marble::GeoSceneDocument* mapTheme, Marble::Projection currentProjection);
+    Marble::PluginManager*          pluginManager () const;
+    void                    addLayer (Marble::LayerInterface* layer);
+    void                    removeLayer (Marble::LayerInterface* layer);
+    void                    downloadRegion (const QString& mapThemeId, const Marble::TileCoordsPyramid&) const;
+//ig    void                    paintTile (StackedTile* tile, GeoSceneTexture* textureLayer);
+signals:
+    void                    tileLevelChanged (int newTileLevel);
 };
 // MarbleModel
 

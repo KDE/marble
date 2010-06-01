@@ -33,6 +33,9 @@ public:
 
     ~MapThemeManager ();
 //ig    static Marble::GeoSceneDocument*  loadMapTheme (const QString& mapThemeStringID);
+//ig    QList<const Marble::GeoSceneDocument*>  mapThemes () const;
+signals:
+    void                    themesChanged ();
 };
 // MapThemeManager
 

@@ -26,6 +26,8 @@
 #include <AbstractDataPluginModel.h>
 #include <AbstractFloatItem.h>
 #include <AbstractWorkerThread.h>
+#include <DownloadRegionDialog.h>
+#include <LatLonBoxWidget.h>
 #include <LatLonEdit.h>
 #include <MapThemeManager.h>
 #include <MarbleAboutDialog.h>
@@ -39,6 +41,7 @@
 #include <RenderPlugin.h>
 #include <SunLocator.h>
 #include <TileCreator.h>
+#include <TileLevelRangeWidget.h>
 #include <TinyWebBrowser.h>
 #include <qobject.h>
 %End
@@ -64,7 +67,8 @@ public:
     virtual QString         itemType () const=0;
     virtual bool            initialized ()=0;
     virtual void            addDownloadedFile (const QString& url, const QString& type)=0;
-    virtual bool            operator < (const Marble::AbstractDataPluginItem* other) const =0;
+//Doesn't seem to be implemented.
+//ig    virtual bool            operator < (const Marble::AbstractDataPluginItem* other) const;
 
 
 //  Subclasses of QObject
@@ -97,6 +101,8 @@ public:
         sipType = sipType_Marble_AbstractWorkerThread;
     else if (dynamic_cast<Marble::TileCreator*>(sipCpp))
         sipType = sipType_Marble_TileCreator;
+    else if (dynamic_cast<Marble::LatLonBoxWidget*>(sipCpp))
+        sipType = sipType_Marble_LatLonBoxWidget;
     else if (dynamic_cast<Marble::LatLonEdit*>(sipCpp))
         sipType = sipType_Marble_LatLonEdit;
     else if (dynamic_cast<Marble::MarbleControlBox*>(sipCpp))
@@ -105,6 +111,10 @@ public:
         sipType = sipType_Marble_MarbleNavigator;
     else if (dynamic_cast<Marble::MarbleWidget*>(sipCpp))
         sipType = sipType_Marble_MarbleWidget;
+    else if (dynamic_cast<Marble::TileLevelRangeWidget*>(sipCpp))
+        sipType = sipType_Marble_TileLevelRangeWidget;
+    else if (dynamic_cast<Marble::DownloadRegionDialog*>(sipCpp))
+        sipType = sipType_Marble_DownloadRegionDialog;
     else if (dynamic_cast<Marble::MarbleAboutDialog*>(sipCpp))
         sipType = sipType_Marble_MarbleAboutDialog;
     else if (dynamic_cast<Marble::PluginAboutDialog*>(sipCpp))
@@ -116,10 +126,11 @@ public:
 %End
 
     virtual ~AbstractDataPluginItem ();
-    virtual void            setSettings (QHash<QString,QVariant> settings);
     virtual bool            isGeoProjected ();
 signals:
     void                    updated ();
+public:
+    virtual void            setSettings (const QHash<QString,QVariant>& settings);
 };
 // AbstractDataPluginItem
 

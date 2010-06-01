@@ -34,6 +34,10 @@ public:
     qreal                   latitude (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
     void                    setLongitude (qreal longitude, Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian);
     qreal                   longitude (Marble::GeoDataCoordinates::Unit unit = Marble::GeoDataCoordinates::Radian) const;
-    Marble::GeoDataCoordinates*  coordinate () const;
+                            GeoDataLookAt (const Marble::GeoDataLookAt& other);
+    Marble::GeoDataCoordinates  coordinates () const;
+    void                    setRange (qreal range);
+    qreal                   range () const;
+    void                    detach ();
 };
 };

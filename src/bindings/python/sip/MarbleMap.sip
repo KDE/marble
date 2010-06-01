@@ -30,7 +30,6 @@ public:
     Marble::MarbleModel*    model () const;
     Marble::ViewParams*     viewParams ();
     void                    setSize (int width, int height);
-    void                    setSize (QSize size);
     QSize                   size () const;
     int                     width () const;
     int                     height () const;
@@ -91,7 +90,6 @@ public:
     void                    zoomOut ();
     void                    rotateBy (const qreal& deltaLon /in/, const qreal& deltaLat /in/);
     void                    rotateBy (const Marble::Quaternion& incRot);
-    void                    centerOn (const qreal& lon /in/, const qreal& lat /in/);
     void                    centerOn (const QModelIndex& index);
     void                    setCenterLatitude (qreal lat);
     void                    setCenterLongitude (qreal lon);
@@ -131,7 +129,6 @@ public:
     void                    changeCurrentPosition (qreal lon, qreal lat);
     void                    notifyMouseClick (int x, int y);
     void                    updateGps ();
-    void                    openGpxFile (QString& filename);
 //ig    FileViewModel*          fileViewModel () const;
     void                    clearPersistentTileCache ();
     void                    setPersistentTileCacheLimit (quint64 kiloBytes);
@@ -147,11 +144,8 @@ public:
 signals:
     void                    zoomChanged (int zoom);
     void                    distanceChanged (const QString& distanceString);
-    void                    themeChanged (QString theme);
     void                    projectionChanged (Marble::Projection);
-    void                    mouseMoveGeoPosition (QString);
     void                    mouseClickGeoPosition (qreal lon, qreal lat, Marble::GeoDataCoordinates::Unit);
-    void                    timeout ();
     void                    framesPerSecond (qreal fps);
 
 protected:
@@ -162,8 +156,20 @@ public:
 //ig    MeasureTool*            measureTool ();
     void                    reload () const;
 //ig    GpxFileModel*           gpxFileModel ();
+    void                    setSize (const QSize& size);
+    void                    flyTo (const Marble::GeoDataLookAt& lookAt);
+    Marble::GeoDataLookAt   lookAt () const;
+    qreal                   radiusFromDistance (qreal distance) const;
+    qreal                   distanceFromRadius (qreal radius) const;
+    qreal                   zoomFromDistance (qreal distance) const;
+    qreal                   distanceFromZoom (qreal zoom) const;
+    void                    centerOn (const qreal lon, const qreal lat);
+    void                    openGpxFile (const QString& filename);
 signals:
-    void                    repaintNeeded (QRegion dirtyRegion);
+    void                    themeChanged (const QString& theme);
+    void                    mouseMoveGeoPosition (const QString&);
+    void                    repaintNeeded (const QRegion& dirtyRegion);
+    void                    visibleLatLonAltBoxChanged (const Marble::GeoDataLatLonAltBox& visibleLatLonAltBox);
 };
 // MarbleMap
 

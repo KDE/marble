@@ -159,6 +159,15 @@ private:
 public:
     ~MarbleGlobal ();
 //ig    MarbleLocale*           locale () const;
+    enum Profile
+    {
+        Default,
+        SmallScreen
+    };
+    typedef QFlags<Marble::MarbleGlobal::Profile> Profiles;
+    Marble::MarbleGlobal::Profiles  profiles () const;
+    void                    setProfiles (Marble::MarbleGlobal::Profiles profiles);
+    static Marble::MarbleGlobal::Profiles  detectProfiles ();
 };
 // MarbleGlobal
 
@@ -176,6 +185,13 @@ enum DownloadUsage
 {
     DownloadBulk,
     DownloadBrowse
+};
+enum FlyToMode
+{
+    Automatic,
+    Instant,
+    Linear,
+    Jump
 };
 };
 // Marble

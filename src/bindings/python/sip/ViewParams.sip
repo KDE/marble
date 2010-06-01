@@ -31,7 +31,6 @@ public:
     Marble::Projection      projection () const;
 //ig    Marble::AbstractProjection*  currentProjection () const;
     void                    setProjection (Marble::Projection newProjection);
-    Marble::MapQuality      mapQuality ();
     void                    setMapQuality (Marble::MapQuality);
     void                    setPropertyValue (const QString& name, bool value);
     void                    propertyAvailable (const QString& name, bool& available /out/);
@@ -60,19 +59,21 @@ public:
     int                     radiusUpdated () const;
     void                    setRadiusUpdated (const int);
     Marble::Quaternion      planetAxisUpdated () const;
-    void                    setPlanetAxisUpdated (const Marble::Quaternion &x);
+    void                    setPlanetAxisUpdated (const Marble::Quaternion&);
 
     ~ViewParams ();
 //FIXME implementation is missing.
-//ig    QString                 mapThemeId ();
 //ig    Marble::GeoSceneDocument*  mapTheme ();
 private:
 //force
                             ViewParams (const Marble::ViewParams&);
 //end
 public:
+    Marble::MapQuality      mapQuality () const;
     void                    setCanvasImage (QImage*);
     void                    setCoastImage (QImage*);
+    bool                    showClouds () const;
+    void                    setShowClouds (const bool);
 };
 // ViewParams
 

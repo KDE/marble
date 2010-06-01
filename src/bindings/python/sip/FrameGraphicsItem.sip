@@ -33,7 +33,6 @@ public:
         RoundedRectFrame
     };
     explicit                FrameGraphicsItem (Marble::MarbleGraphicsItem* parent = 0);
-                            FrameGraphicsItem (const QPointF& position, const QSizeF& size, Marble::MarbleGraphicsItem* parent = 0);
     virtual ~FrameGraphicsItem ();
     Marble::FrameGraphicsItem::FrameType  frame ();
     void                    setFrame (Marble::FrameGraphicsItem::FrameType type);
