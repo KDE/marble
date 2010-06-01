@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -181,7 +181,23 @@ GeoDataPoint and is simply derived from GeoDataCoordinates.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="altitude"></a>
+<div class="memdoc"><p>create a geocoordinate from longitude and latitude
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>_lon</em>&nbsp;</td><td> longitude
+
+<tr><td></td><td valign="top"><em>_lat</em>&nbsp;</td><td> latitude
+
+<tr><td></td><td valign="top"><em>alt</em>&nbsp;</td><td> altitude (default: 0)
+
+<tr><td></td><td valign="top"><em>_unit</em>&nbsp;</td><td> units that lon and lat get measured in
+(default for Radian: north pole at pi/2, southpole at -pi/2)
+
+<tr><td></td><td valign="top"><em>_detail</em>&nbsp;</td><td> detail (default: 0)
+</td></tr>
+</table></dl>
+<p>
+</p></div></div><a class="anchor" name="altitude"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -346,7 +362,7 @@ you should check whether
 bool AbstractProjection.exceedsLatitudeRange() const
 </p>
 <p>
-isn't what you're looking for ... .
+isn't what you're looking for ...
 </p></div></div><a class="anchor" name="latToString"></a>
 <div class="memitem">
 <div class="memproto">
@@ -1034,8 +1050,17 @@ increase the number of digits after the arc second decimal point.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>enum used to specify the notation / numerical system
+</p>
+<p>
+For degrees there exist two notations:
+"Decimal" (base-10) and the "Sexagesimal DMS" (base-60) which is
+traditionally used in cartography. Decimal notation
+uses floating point numbers to specify parts of a degree. The
+Sexagesimal DMS notation uses integer based
+Degrees-(Arc)Minutes-(Arc)Seconds to describe parts of a degree.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Decimal</em>&nbsp;</td><td><tr><td valign="top"><em>DMS</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p><a class="anchor" name="Unit"></a>
 <div class="memitem">
@@ -1045,8 +1070,14 @@ increase the number of digits after the arc second decimal point.
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
-<table border="0" cellspacing="2" cellpadding="0"></table>
+<div class="memdoc"><p>enum used constructor to specify the units used
+</p>
+<p>
+Internally we always use radian for mathematical convenience.
+However the Marble's interfaces to the outside should default
+to degrees.
+</p><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Radian</em>&nbsp;</td><td><tr><td valign="top"><em>Degree</em>&nbsp;</td><td></table>
 </dl>
 </div></div><p>
 </div>

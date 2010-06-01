@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -168,7 +168,12 @@ the western one.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="altitudeMode"></a>
+<div class="memdoc"><p>A LatLonAltBox with the data from a GeoDataCoordinate
+This way of creating a GeoDataLatLonAltBox sets the north and south
+values of this box to the Latitude value in the GeoDataCoordinate,
+resulting in a Box that has a 0 Area. This is useful for building
+LatLonAltBoxes from GeoDataCoordinates.
+</p></div></div><a class="anchor" name="altitudeMode"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>

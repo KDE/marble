@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
-  <title>Marble.LatLonEdit</title>
+  <title>Marble.TileLevelRangeWidget</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
@@ -45,27 +45,29 @@
 <div id="main">
 <div class="clearer">&nbsp;</div>
 
-<h1>LatLonEdit Class Reference</h1>
+<h1>TileLevelRangeWidget Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
 Inherits: <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> &#x2192; <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a><br />
 
-Namespace: Marble.LatLonEdit<br />
+Namespace: Marble.TileLevelRangeWidget<br />
 <h2>Detailed Description</h2>
 
 
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dimensionChanged">dimensionChanged</a> (, <a href="../marble/Marble.html#Dimension">Marble.Dimension</a> dimension)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#valueChanged">valueChanged</a> (, float value)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#bottomLevelChanged">bottomLevelChanged</a> (, int a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#topLevelChanged">topLevelChanged</a> (, int a0)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#LatLonEdit">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0, <a href="../marble/Marble.html#Dimension">Marble.Dimension</a> dimension=Marble.Longitude)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#dimensionChanged">dimensionChanged</a> (self, <a href="../marble/Marble.html#Dimension">Marble.Dimension</a> dimension)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDimension">setDimension</a> (self, <a href="../marble/Marble.html#Dimension">Marble.Dimension</a> dimension)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setValue">setValue</a> (self, float newvalue)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#value">value</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#valueChanged">valueChanged</a> (self, float value)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#TileLevelRangeWidget">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qwidget.html">QWidget</a> parent=0, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::WindowFlags</a> f=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#bottomLevel">bottomLevel</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#bottomLevelChanged">bottomLevelChanged</a> (self, int a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setAllowedLevelRange">setAllowedLevelRange</a> (self, int minimumLevel, int maximumLevel)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setDefaultLevel">setDefaultLevel</a> (self, int a0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsize.html">QSize</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#sizeHint">sizeHint</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#topLevel">topLevel</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#topLevelChanged">topLevelChanged</a> (self, int a0)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="LatLonEdit"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="TileLevelRangeWidget"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -82,8 +84,8 @@ Namespace: Marble.LatLonEdit<br />
 <tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype"><a href="../marble/Marble.html#Dimension">Marble.Dimension</a>&nbsp;</td>
-<td class="paramname"><em>dimension=Marble.Longitude</em></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qt.html">Qt::WindowFlags</a>&nbsp;</td>
+<td class="paramname"><em>f=0</em></td>
 </tr>
 <tr>
 <td></td>
@@ -93,77 +95,11 @@ Namespace: Marble.LatLonEdit<br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="dimensionChanged"></a>
+<div class="memdoc"></div></div><a class="anchor" name="bottomLevel"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> dimensionChanged</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.html#Dimension">Marble.Dimension</a>&nbsp;</td>
-<td class="paramname"><em>dimension</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("dimensionChanged(Marble::Dimension)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="setDimension"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setDimension</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype"><a href="../marble/Marble.html#Dimension">Marble.Dimension</a>&nbsp;</td>
-<td class="paramname"><em>dimension</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="setValue"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"> setValue</td>
-<td>(</td>
-<td class="paramtype">&nbsp;<em>self</em>, </td>
-<td class="paramname"></td>
-</tr><tr>
-<td class="memname"></td>
-<td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>newvalue</em></td>
-</tr>
-<tr>
-<td></td>
-<td>)</td>
-<td></td>
-<td></td>
-<td width="100%"> </td>
-</tr></table>
-</div>
-<div class="memdoc"></div></div><a class="anchor" name="value"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname">float value</td>
+<td class="memname">int bottomLevel</td>
 <td>(</td>
 <td class="paramtype">&nbsp;</td>
 <td class="paramname"><em>self</em>&nbsp;)</td>
@@ -171,19 +107,19 @@ Namespace: Marble.LatLonEdit<br />
 </tr>
 </table>
 </div>
-<div class="memdoc"></div></div><a class="anchor" name="valueChanged"></a>
+<div class="memdoc"></div></div><a class="anchor" name="bottomLevelChanged"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname"> valueChanged</td>
+<td class="memname"> bottomLevelChanged</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
 </tr><tr>
 <td class="memname"></td>
 <td></td>
-<td class="paramtype">float&nbsp;</td>
-<td class="paramname"><em>value</em></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
 </tr>
 <tr>
 <td></td>
@@ -193,7 +129,103 @@ Namespace: Marble.LatLonEdit<br />
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("valueChanged(qreal)"), target_slot)</code></dd></dl></div></div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("bottomLevelChanged(int)"), target_slot)</code></dd></dl></div></div><a class="anchor" name="setAllowedLevelRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setAllowedLevelRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>minimumLevel</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>maximumLevel</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setDefaultLevel"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setDefaultLevel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="sizeHint"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qsize.html">QSize</a> sizeHint</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="topLevel"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">int topLevel</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="topLevelChanged"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> topLevelChanged</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>a0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Signal syntax:</b></dt><dd><code>QObject.connect(source, SIGNAL("topLevelChanged(int)"), target_slot)</code></dd></dl></div></div>
 </div>
 </div>
 </div>

@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+  <title>Marble.AbstractProjection</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
+  <link rel="stylesheet" media="screen" type="text/css" title="KDE Colors" href="../common/kde.css" />
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="header_top">
+    <div>
+      <div>
+        <img alt ="" src="../common/top-kde.jpg"/>
+        KDE 4.5 PyKDE API Reference
+      </div>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="location">
+      <ul>
+        <li>KDE's Python API</li>
+      </ul>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><a href="../modules.html">Overview</a></li>
+<li><a href="http://techbase.kde.org/Development/Languages/Python">PyKDE Home</a></li>
+<li><a href="http://kde.org/family/">Sitemap</a></li>
+<li><a href="http://kde.org/contact/">Contact Us</a></li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div id="body_wrapper">
+<div id="body">
+<div id="right">
+<div class="content">
+<div id="main">
+<div class="clearer">&nbsp;</div>
+
+<h1>AbstractProjection Class Reference</h1>
+<code>from PyKDE4.marble import *</code>
+<p>
+
+
+Namespace: Marble.AbstractProjection<br />
+<h2>Detailed Description</h2>
+<dl class="abstract" compact><dt><b>Abstract class:</b></dt>
+<dd>This class can be used as a base class for new classes, but can not be instantiated directly.</dd></dl>
+<p>A base class for all projections in Marble.
+</p>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#PreservationType">PreservationType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;NoPreservation, Conformal, EqualArea&nbsp;}</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="#SurfaceType">SurfaceType</a>&nbsp;</td><td class="memItemRight" valign="bottom">{&nbsp;Cylindrical, Pseudocylindrical, Hybrid, Conical, Pseudoconical, Azimuthal&nbsp;}</td></tr>
+<tr><td colspan="2"><br><h2>Methods</h2></td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#AbstractProjection">__init__</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#exceedsLatitudeRange">exceedsLatitudeRange</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> coords)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#exceedsLatitudeRange">exceedsLatitudeRange</a> (self, <a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a> lineString)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#geoCoordinates">geoCoordinates</a> (self, int x, int y, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, float lon, float lat, <a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a> unit=Marble.GeoDataCoordinates.Degree)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#horizonToPolygon">horizonToPolygon</a> (self, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> disappearCoords, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> reappearCoords, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpolygonf.html">QPolygonF</a> a3)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#isOrientedNormal">isOrientedNormal</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#latLonAltBox">latLonAltBox</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qrect.html">QRect</a> screenRect, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapCoversViewport">mapCoversViewport</a> (self, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregion.html">QRegion</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapRegion">mapRegion</a> (self, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpainterpath.html">QPainterPath</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#mapShape">mapShape</a> (self, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#maxLat">maxLat</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#maxValidLat">maxValidLat</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#minLat">minLat</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">float&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#minValidLat">minValidLat</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.AbstractProjection.html#PreservationType">Marble.AbstractProjection.PreservationType</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#preservationType">preservationType</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#repeatX">repeatX</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#repeatableX">repeatableX</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#screenCoordinates">screenCoordinates</a> (self, float lon, float lat, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, float x, float y)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#screenCoordinates">screenCoordinates</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> geopoint, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, float x, float y, bool globeHidesPoint)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMaxLat">setMaxLat</a> (self, float maxLat)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setMinLat">setMinLat</a> (self, float minLat)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setRepeatX">setRepeatX</a> (self, bool repeatX)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.AbstractProjection.html#SurfaceType">Marble.AbstractProjection.SurfaceType</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#surfaceType">surfaceType</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#tessellateLineSegment">tessellateLineSegment</a> (self, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> aCoords, float ax, float ay, <a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a> bCoords, float bx, float by, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpolygonf.html">QPolygonF</a> polygon, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, <a href="../marble/Marble.TessellationFlags.html">Marble.TessellationFlags</a> f=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#traversableDateLine">traversableDateLine</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#traversablePoles">traversablePoles</a> (self)</td></tr>
+</table>
+<hr><h2>Method Documentation</h2><a class="anchor" name="AbstractProjection"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">__init__</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><p>Construct a new AbstractProjection.
+</p></div></div><a class="anchor" name="exceedsLatitudeRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool exceedsLatitudeRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>coords</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="exceedsLatitudeRange"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool exceedsLatitudeRange</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataLineString.html">Marble.GeoDataLineString</a>&nbsp;</td>
+<td class="paramname"><em>lineString</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="geoCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool geoCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">int&nbsp;</td>
+<td class="paramname"><em>y</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
+<td class="paramname"><em>viewport</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html#Unit">Marble.GeoDataCoordinates.Unit</a>&nbsp;</td>
+<td class="paramname"><em>unit=Marble.GeoDataCoordinates.Degree</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Get the earth coordinates corresponding to a pixel in the map.
+</p><dl compact><dt><b>Parameters:</b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr><td></td><td valign="top"><em>x</em>&nbsp;</td><td> the x coordinate of the pixel
+
+<tr><td></td><td valign="top"><em>y</em>&nbsp;</td><td> the y coordinate of the pixel
+
+<tr><td></td><td valign="top"><em>viewport</em>&nbsp;</td><td> the viewport parameters
+
+<tr><td></td><td valign="top"><em>lon</em>&nbsp;</td><td> the longitude angle is returned through this parameter
+
+<tr><td></td><td valign="top"><em>lat</em>&nbsp;</td><td> the latitude angle is returned through this parameter
+
+<tr><td></td><td valign="top"><em>unit</em>&nbsp;</td><td> the unit of the angles for lon and lat.
+</td></tr> </table></dl>
+<p> <dl class="return" compact><dt><b>Returns:</b></dt><dd> true if the pixel (x, y) is within the globe
+</dd></dl> false if the pixel (x, y) is outside the globe, i.e. in space.
+</p></div></div><a class="anchor" name="horizonToPolygon"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> horizonToPolygon</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
+<td class="paramname"><em>viewport</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>disappearCoords</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>reappearCoords</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpolygonf.html">QPolygonF</a>&nbsp;</td>
+<td class="paramname"><em>a3</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="isOrientedNormal"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool isOrientedNormal</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="latLonAltBox"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> latLonAltBox</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qrect.html">QRect</a>&nbsp;</td>
+<td class="paramname"><em>screenRect</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
+<td class="paramname"><em>viewport</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="mapCoversViewport"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool mapCoversViewport</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
+<td class="paramname"><em>viewport</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="mapRegion"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qregion.html">QRegion</a> mapRegion</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
+<td class="paramname"><em>viewport</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="mapShape"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpainterpath.html">QPainterPath</a> mapShape</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
+<td class="paramname"><em>viewport</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="maxLat"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float maxLat</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="maxValidLat"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float maxValidLat</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="minLat"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float minLat</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="minValidLat"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">float minValidLat</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="preservationType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.AbstractProjection.html#PreservationType">Marble.AbstractProjection.PreservationType</a> preservationType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="repeatX"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool repeatX</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="repeatableX"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool repeatableX</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="screenCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool screenCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>lat</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
+<td class="paramname"><em>viewport</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>y</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd>
+use <dl class="see" compact><dt><b>See also:</b></dt><dd> screenCoordinates(qreal,qreal,const ViewportParams*,qreal&amp;,qreal&amp;)
+</dd></dl>
+</p></div></div><a class="anchor" name="screenCoordinates"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool screenCoordinates</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>geopoint</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
+<td class="paramname"><em>viewport</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>x</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>y</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>globeHidesPoint</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p><dl class="deprecated" compact><dt><b>Deprecated:</b></dt><dd>
+use <dl class="see" compact><dt><b>See also:</b></dt><dd> screenCoordinates(qreal,qreal,const ViewportParams*,qreal&amp;,qreal&amp;)
+</dd></dl>
+</p></div></div><a class="anchor" name="setMaxLat"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setMaxLat</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>maxLat</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setMinLat"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setMinLat</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>minLat</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="setRepeatX"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> setRepeatX</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">bool&nbsp;</td>
+<td class="paramname"><em>repeatX</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="surfaceType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.AbstractProjection.html#SurfaceType">Marble.AbstractProjection.SurfaceType</a> surfaceType</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="tessellateLineSegment"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"> tessellateLineSegment</td>
+<td>(</td>
+<td class="paramtype">&nbsp;<em>self</em>, </td>
+<td class="paramname"></td>
+</tr><tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>aCoords</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>ax</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>ay</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.GeoDataCoordinates.html">Marble.GeoDataCoordinates</a>&nbsp;</td>
+<td class="paramname"><em>bCoords</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>bx</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype">float&nbsp;</td>
+<td class="paramname"><em>by</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpolygonf.html">QPolygonF</a>&nbsp;</td>
+<td class="paramname"><em>polygon</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a>&nbsp;</td>
+<td class="paramname"><em>viewport</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.TessellationFlags.html">Marble.TessellationFlags</a>&nbsp;</td>
+<td class="paramname"><em>f=0</em></td>
+</tr>
+<tr>
+<td></td>
+<td>)</td>
+<td></td>
+<td></td>
+<td width="100%"> </td>
+</tr></table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="traversableDateLine"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool traversableDateLine</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="traversablePoles"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname">bool traversablePoles</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><hr><h2>Enumeration Documentation</h2><a class="anchor" name="PreservationType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">PreservationType</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>NoPreservation</em>&nbsp;</td><td><tr><td valign="top"><em>Conformal</em>&nbsp;</td><td><tr><td valign="top"><em>EqualArea</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p><a class="anchor" name="SurfaceType"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname">
+<tr><td class="memname">SurfaceType</td>
+</tr>
+</table>
+</div>
+<div class="memdoc"><dl compact><dt><b>Enumerator: </b></dt><dd>
+<table border="0" cellspacing="2" cellpadding="0"><tr><td valign="top"><em>Cylindrical</em>&nbsp;</td><td><tr><td valign="top"><em>Pseudocylindrical</em>&nbsp;</td><td><tr><td valign="top"><em>Hybrid</em>&nbsp;</td><td><tr><td valign="top"><em>Conical</em>&nbsp;</td><td><tr><td valign="top"><em>Pseudoconical</em>&nbsp;</td><td><tr><td valign="top"><em>Azimuthal</em>&nbsp;</td><td></table>
+</dl>
+</div></div><p>
+</div>
+</div>
+</div>
+
+<div id="left">
+
+<div class="menu_box">
+<div class="nav_list">
+<ul>
+<li><a href="../allclasses.html">Full Index</a></li>
+</ul>
+</div>
+
+<a name="cp-menu" /><div class="menutitle"><div>
+  <h2 id="cp-menu-project">Modules</h2>
+</div></div>
+<div class="nav_list">
+<ul><li><a href="../marble/index.html">marble</a></li>
+</ul></div></div>
+
+</div>
+
+</div>
+  <div class="clearer"/>
+</div>
+
+<div id="end_body"></div>
+</div>
+<div id="footer"><div id="footer_text">
+This documentation is maintained by <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;simon&#64;simonzone&#46;com">Simon Edwards</a>.<br />
+        KDE<sup>&#174;</sup> and <a href="../images/kde_gear_black.png">the K Desktop Environment<sup>&#174;</sup> logo</a> are registered trademarks of <a href="http://ev.kde.org/" title="Homepage of the KDE non-profit Organization">KDE e.V.</a> |
+        <a href="http://www.kde.org/contact/impressum.php">Legal</a>
+    </div></div>
+</body>
+</html>

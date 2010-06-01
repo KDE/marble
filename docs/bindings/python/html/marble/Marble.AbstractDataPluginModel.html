@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -67,7 +67,7 @@ a subclass.
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsUpdated">itemsUpdated</a> ()</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#AbstractDataPluginModel">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#AbstractDataPluginModel">__init__</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name, <a href="../marble/Marble.PluginManager.html">Marble.PluginManager</a> pluginManager, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qobject.html">QObject</a> parent=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addItemToList">addItemToList</a> (self, <a href="../marble/Marble.AbstractDataPluginItem.html">Marble.AbstractDataPluginItem</a> item)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#downloadDescriptionFile">downloadDescriptionFile</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qurl.html">QUrl</a> url)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#downloadItemData">downloadItemData</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qurl.html">QUrl</a> url, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type, <a href="../marble/Marble.AbstractDataPluginItem.html">Marble.AbstractDataPluginItem</a> item)</td></tr>
@@ -78,13 +78,13 @@ a subclass.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#generateFilepath">generateFilepath</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> type)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#getAdditionalItems">getAdditionalItems</a> (self, <a href="../marble/Marble.GeoDataLatLonAltBox.html">Marble.GeoDataLatLonAltBox</a> box, <a href="../marble/Marble.MarbleDataFacade.html">Marble.MarbleDataFacade</a> facade, int number=10)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemExists">itemExists</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> id)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[Marble::AbstractDataPluginIte]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#items">items</a> (self, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, <a href="../marble/Marble.MarbleDataFacade.html">Marble.MarbleDataFacade</a> facade, int number=10)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.AbstractDataPluginItem.html">Marble.AbstractDataPluginItem</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#items">items</a> (self, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, <a href="../marble/Marble.MarbleDataFacade.html">Marble.MarbleDataFacade</a> facade, int number=10)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#itemsUpdated">itemsUpdated</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#name">name</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#parseFile">parseFile</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qbytearray.html">QByteArray</a> file)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setItemSettings">setItemSettings</a> (self, {<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>:<a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qvariant.html">QVariant</a>} itemSettings)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setName">setName</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[Marble::AbstractDataPluginIte]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#whichItemAt">whichItemAt</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> curpos)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.AbstractDataPluginItem.html">Marble.AbstractDataPluginItem</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#whichItemAt">whichItemAt</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> curpos)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="AbstractDataPluginModel"></a>
 <div class="memitem">
@@ -99,6 +99,12 @@ a subclass.
 <td></td>
 <td class="paramtype"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td>
 <td class="paramname"><em>name</em>, </td>
+</tr>
+<tr>
+<td class="memname"></td>
+<td></td>
+<td class="paramtype"><a href="../marble/Marble.PluginManager.html">Marble.PluginManager</a>&nbsp;</td>
+<td class="paramname"><em>pluginManager</em>, </td>
 </tr>
 <tr>
 <td class="memname"></td>
@@ -399,7 +405,7 @@ This method has to be implemented in a subclass.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">[Marble::AbstractDataPluginIte] items</td>
+<td class="memname">[<a href="../marble/Marble.AbstractDataPluginItem.html">Marble.AbstractDataPluginItem</a>] items</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>
@@ -537,7 +543,7 @@ changed settings.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">[Marble::AbstractDataPluginIte] whichItemAt</td>
+<td class="memname">[<a href="../marble/Marble.AbstractDataPluginItem.html">Marble.AbstractDataPluginItem</a>] whichItemAt</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>

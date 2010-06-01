@@ -16,7 +16,7 @@
     <div>
       <div>
         <img alt ="" src="../common/top-kde.jpg"/>
-        KDE 4.4 PyKDE API Reference
+        KDE 4.5 PyKDE API Reference
       </div>
     </div>
   </div>
@@ -66,7 +66,7 @@ Additionally it should be useful to set standard values via setEnabled (often tr
 and setVisible (often false) in the constructor of a subclass.
 </p>
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Signals</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changedNumberOfItems">changedNumberOfItems</a> (long number)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#changedNumberOfItems">changedNumberOfItems</a> (, long number)</td></tr>
 <tr><td colspan="2"><br><h2>Methods</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#AbstractDataPlugin">__init__</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#backendTypes">backendTypes</a> (self)</td></tr>
@@ -76,13 +76,14 @@ and setVisible (often false) in the constructor of a subclass.
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.AbstractDataPluginModel.html">Marble.AbstractDataPluginModel</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#model">model</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#nameId">nameId</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">long&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#numberOfItems">numberOfItems</a> (self)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.PluginManager.html">Marble.PluginManager</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pluginManager">pluginManager</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#render">render</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> renderPos="NONE", <a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a> layer=0)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPolicy">renderPolicy</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPosition">renderPosition</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setModel">setModel</a> (self, <a href="../marble/Marble.AbstractDataPluginModel.html">Marble.AbstractDataPluginModel</a> model)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setNameId">setNameId</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> name)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#setNumberOfItems">setNumberOfItems</a> (self, long number)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">[Marble::AbstractDataPluginIte]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#whichItemAt">whichItemAt</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> curpos)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">[<a href="../marble/Marble.AbstractDataPluginItem.html">Marble.AbstractDataPluginItem</a>]&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#whichItemAt">whichItemAt</a> (self, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qpoint.html">QPoint</a> curpos)</td></tr>
 </table>
 <hr><h2>Method Documentation</h2><a class="anchor" name="AbstractDataPlugin"></a>
 <div class="memitem">
@@ -198,7 +199,19 @@ and setVisible (often false) in the constructor of a subclass.
 </div>
 <div class="memdoc"><p><dl class="return" compact><dt><b>Returns:</b></dt><dd> The number of items to be shown at the same time.
 </dd></dl>
-</p></div></div><a class="anchor" name="render"></a>
+</p></div></div><a class="anchor" name="pluginManager"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="memname"><tr>
+<td class="memname"><a href="../marble/Marble.PluginManager.html">Marble.PluginManager</a> pluginManager</td>
+<td>(</td>
+<td class="paramtype">&nbsp;</td>
+<td class="paramname"><em>self</em>&nbsp;)</td>
+<td width="100%"> </td>
+</tr>
+</table>
+</div>
+<div class="memdoc"></div></div><a class="anchor" name="render"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -340,7 +353,7 @@ and setVisible (often false) in the constructor of a subclass.
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
-<td class="memname">[Marble::AbstractDataPluginIte] whichItemAt</td>
+<td class="memname">[<a href="../marble/Marble.AbstractDataPluginItem.html">Marble.AbstractDataPluginItem</a>] whichItemAt</td>
 <td>(</td>
 <td class="paramtype">&nbsp;<em>self</em>, </td>
 <td class="paramname"></td>

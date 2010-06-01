@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
 <head>
-  <title>Marble.RenderPluginInterface</title>
+  <title>Marble.LayerInterface</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <link rel="stylesheet" type="text/css" href="../common/doxygen.css" />
@@ -45,59 +45,20 @@
 <div id="main">
 <div class="clearer">&nbsp;</div>
 
-<h1>RenderPluginInterface Class Reference</h1>
+<h1>LayerInterface Class Reference</h1>
 <code>from PyKDE4.marble import *</code>
 <p>
-Inherits: Marble.PluginInterface<br />
-Subclasses: <a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a><br />
-Namespace: Marble.RenderPluginInterface<br />
+
+
+Namespace: Marble.LayerInterface<br />
 <h2>Detailed Description</h2>
-<dl class="abstract" compact><dt><b>Abstract class:</b></dt>
-<dd>This class can be used as a base class for new classes, but can not be instantiated directly.</dd></dl>
-<p>The class that specifies the Marble layer interface of a plugin.
-</p>
+
+
 <table border="0" cellpadding="0" cellspacing="0"><tr><td colspan="2"><br><h2>Methods</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#backendTypes">backendTypes</a> (self)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#pluginInstance">pluginInstance</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#render">render</a> (self, <a href="../marble/Marble.GeoPainter.html">Marble.GeoPainter</a> painter, <a href="../marble/Marble.ViewportParams.html">Marble.ViewportParams</a> viewport, <a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> renderPos="NONE", <a href="../marble/Marble.GeoSceneLayer.html">Marble.GeoSceneLayer</a> layer=0)</td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPolicy">renderPolicy</a> (self)</td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a>&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="#renderPosition">renderPosition</a> (self)</td></tr>
 </table>
-<hr><h2>Method Documentation</h2><a class="anchor" name="backendTypes"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstringlist.html">QStringList</a> backendTypes</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns the name(s) of the backend that the plugin can render
-.
-This method should return the name of the backend that the plugin
-can render. The string has to be the same one that is given
-for the attribute in the layer element of the DGML file that
-backend is able to process.
-Examples to replace available default backends would be "vector" or
-"texture". To provide a completely new kind of functionality please
-choose your own unique string.
-</p></div></div><a class="anchor" name="pluginInstance"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="../marble/Marble.RenderPlugin.html">Marble.RenderPlugin</a> pluginInstance</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Returns a new object of the plugin
-</p></div></div><a class="anchor" name="render"></a>
+<hr><h2>Method Documentation</h2><a class="anchor" name="render"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="memname"><tr>
@@ -137,31 +98,9 @@ choose your own unique string.
 <td width="100%"> </td>
 </tr></table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div><a class="anchor" name="renderPolicy"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="memname"><tr>
-<td class="memname"><a href="http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/html/qstring.html">QString</a> renderPolicy</td>
-<td>(</td>
-<td class="paramtype">&nbsp;</td>
-<td class="paramname"><em>self</em>&nbsp;)</td>
-<td width="100%"> </td>
-</tr>
-</table>
-</div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Return how the plugin settings should be used.
-</p>
-<p>
-FIXME: Document this
-.
-Possible Values:
-"ALWAYS" -- the plugin renders at the preferred position
-no matter what got specified in the DGML file.
-"SPECIFIED" -- renders only in case it got specified in the
-DGML file.
-"SPECIFIED_ALWAYS" -- In case it got specified in the DGML file
-render according to the specification
-otherwise choose the preferred position
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Renders the content provided by the layer on the viewport.
+<dl class="return" compact><dt><b>Returns:</b></dt><dd> true Returns whether the rendering has been successful
+</dd></dl>
 </p></div></div><a class="anchor" name="renderPosition"></a>
 <div class="memitem">
 <div class="memproto">
@@ -174,7 +113,24 @@ otherwise choose the preferred position
 </tr>
 </table>
 </div>
-<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl></div></div>
+<div class="memdoc"><dl compact><dt><b>Abstract method:</b></dt><dd>This method is abstract and can be overridden but not called directly.</dd></dl><p>Preferred level in the layer stack for the rendering
+</p>
+<p>
+Gives a preferred level in the existing layer stack where
+the render() method of this plugin should get executed.
+.
+Possible Values:
+"NONE"
+"STARS"
+"BEHIND_TARGET"
+"SURFACE"
+"HOVERS_ABOVE_SURFACE"
+"ATMOSPHERE"
+"ORBIT"
+"ALWAYS_ON_TOP"
+"FLOAT_ITEM"
+"USER_TOOLS"
+</p></div></div>
 </div>
 </div>
 </div>
