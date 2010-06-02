@@ -21,7 +21,7 @@ GpsdConnection::GpsdConnection( QObject* parent )
     gps_data_t* data = m_gpsd.open();
     if ( data ) {
 #if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 3 ) && defined( WATCH_ENABLE )
-        m_gpsd.stream( WATCH_ENABLE | WATCH_NMEA );
+        m_gpsd.stream( WATCH_ENABLE );
 #endif
         connect( &m_timer, SIGNAL( timeout() ), this, SLOT( update() ) );
         m_timer.start( 1000 );
