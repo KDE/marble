@@ -28,10 +28,8 @@ INCLUDE(${QT_USE_FILE})
 INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
 
-if (QTONLY)
-  set(GENERIC_LIB_VERSION "0.10.0")
-  set(GENERIC_LIB_SOVERSION "10")
-endif (QTONLY)
+set(GENERIC_LIB_VERSION "0.10.0")
+set(GENERIC_LIB_SOVERSION "10")
 
 if (QTONLY)
   # ce: don't know why this is needed here - on win32 'O2' is activated by default in release mode
