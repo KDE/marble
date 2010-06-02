@@ -587,7 +587,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 int deltay = event->y() - d->m_leftpressedy;
 
                 if ( abs( deltax ) > d->m_dragThreshold
-                     && abs( deltay ) > d->m_dragThreshold ) {
+                     || abs( deltay ) > d->m_dragThreshold ) {
 
                     qreal direction = 1;
                     // Choose spin direction by taking into account whether we
