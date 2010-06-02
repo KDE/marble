@@ -429,7 +429,6 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
          || e->type() == QEvent::MouseButtonPress
          || e->type() == QEvent::MouseButtonRelease )
     {
-
         QMouseEvent *event = static_cast<QMouseEvent*>( e );
         QRegion activeRegion = MarbleWidgetInputHandler::d->m_widget->activeRegion();
 
@@ -587,32 +586,32 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 int deltax = event->x() - d->m_leftpressedx;
                 int deltay = event->y() - d->m_leftpressedy;
 
-                if ( abs( deltax ) <= d->m_dragThreshold
-                     && abs( deltay ) <= d->m_dragThreshold )
-                    return true;
+                if ( abs( deltax ) > d->m_dragThreshold
+                     || abs( deltay ) > d->m_dragThreshold ) {
 
-                qreal direction = 1;
-                // Choose spin direction by taking into account whether we
-                // drag above or below the visible pole.
-                if ( MarbleWidgetInputHandler::d->m_widget->projection() == Spherical ) {
-                    if ( polarity > 0 ) {
+                    qreal direction = 1;
+                    // Choose spin direction by taking into account whether we
+                    // drag above or below the visible pole.
+                    if ( MarbleWidgetInputHandler::d->m_widget->projection() == Spherical ) {
+                        if ( polarity > 0 ) {
 
-                        if ( event->y() < ( - MarbleWidgetInputHandler::d->m_widget->northPoleY()
-                                            + MarbleWidgetInputHandler::d->m_widget->height() / 2 ) )
-                            direction = -1;
+                            if ( event->y() < ( - MarbleWidgetInputHandler::d->m_widget->northPoleY()
+                                                + MarbleWidgetInputHandler::d->m_widget->height() / 2 ) )
+                                direction = -1;
+                        }
+                        else {
+                            if ( event->y() > ( + MarbleWidgetInputHandler::d->m_widget->northPoleY()
+                                                + MarbleWidgetInputHandler::d->m_widget->height() / 2 ) )
+                                direction = -1;
+                        }
                     }
-                    else {
-                        if ( event->y() > ( + MarbleWidgetInputHandler::d->m_widget->northPoleY()
-                                            + MarbleWidgetInputHandler::d->m_widget->height() / 2 ) )
-                            direction = -1;
-                    }
+
+                    d->m_lmbTimer.stop();
+                    MarbleWidgetInputHandler::d->m_widget->centerOn( RAD2DEG * ( qreal )( d->m_leftpresseda )
+                                                                     - 90.0 * direction * deltax / radius,
+                                                                     RAD2DEG * ( qreal )( d->m_leftpressedb )
+                                                                     + 90.0 * deltay / radius );
                 }
-                
-                d->m_lmbTimer.stop();                
-                MarbleWidgetInputHandler::d->m_widget->centerOn( RAD2DEG * ( qreal )( d->m_leftpresseda )
-                                                                 - 90.0 * direction * deltax / radius,
-                                                                 RAD2DEG * ( qreal )( d->m_leftpressedb )
-                                                                 + 90.0 * deltay / radius );
             }
 
 
