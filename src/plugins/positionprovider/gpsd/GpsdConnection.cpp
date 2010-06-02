@@ -32,7 +32,7 @@ void GpsdConnection::initialize()
         emit statusChanged( m_status );
 
 #if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 3 ) && defined( WATCH_ENABLE )
-        m_gpsd.stream( WATCH_ENABLE | WATCH_NMEA );
+        m_gpsd.stream( WATCH_ENABLE );
 #endif
         m_timer.start( 1000 );
     }
