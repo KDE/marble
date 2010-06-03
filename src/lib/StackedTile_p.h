@@ -48,7 +48,8 @@ class StackedTilePrivate : AbstractTilePrivate
 
     inline uint pixel( int x, int y ) const;
     inline uint pixelF( qreal x, qreal y, const QRgb& pixel ) const;
-    void mergeCopyToResult( QSharedPointer<TextureTile> const & tile );
+    void setResultTile( QSharedPointer<TextureTile> const & tile,
+                        const bool withConversion = true );
     void calcByteCount();
 };
 
