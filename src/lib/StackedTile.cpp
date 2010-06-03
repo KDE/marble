@@ -382,7 +382,8 @@ void StackedTile::initResultTile()
                 blending->blend( &d->m_resultTile, *pos );
             }
             else {
-                mDebug() << "StackedTile::initResultTile: no blending defined => copying top over bottom image";
+                mDebug() << "StackedTile::initResultTile: "
+                    "no blending defined => copying top over bottom image";
                 d->setResultTile( *pos, withConversion );
             }
         }
