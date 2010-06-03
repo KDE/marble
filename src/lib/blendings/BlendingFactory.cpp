@@ -48,8 +48,8 @@ BlendingFactory::BlendingFactory()
     m_blendings.insert( "LinearLightBlending", new LinearLightBlending );
     //m_blendings.insert( "NoiseBlending", new NoiseBlending );
     m_blendings.insert( "OverlayBlending", new OverlayBlending );
-    m_blendings.insert( "ParallelBlending", new ParallelBlending );
-    m_blendings.insert( "TextureBlending", new TextureBlending );
+    //m_blendings.insert( "ParallelBlending", new ParallelBlending );
+    //m_blendings.insert( "TextureBlending", new TextureBlending );
 
     // Darkening blendings
     m_blendings.insert( "ColorBurnBlending", new ColorBurnBlending );
@@ -74,7 +74,7 @@ BlendingFactory::BlendingFactory()
     m_blendings.insert( "VividLightBlending", new VividLightBlending );
 
     // Inverter blendings
-    m_blendings.insert( "AdditiveSubtractiveBlending", new AdditiveSubtractiveBlending );
+    //m_blendings.insert( "AdditiveSubtractiveBlending", new AdditiveSubtractiveBlending );
     m_blendings.insert( "BleachBlending", new BleachBlending );
     m_blendings.insert( "DifferenceBlending", new DifferenceBlending );
     m_blendings.insert( "EquivalenceBlending", new EquivalenceBlending );
