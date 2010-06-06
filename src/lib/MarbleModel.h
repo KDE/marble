@@ -53,6 +53,7 @@ class TileCoordsPyramid;
 class FileViewModel;
 class GpsLayer;
 class GpxFileModel;
+class PositionTracking;
 class HttpDownloadManager;
 class MarbleModelPrivate;
 class PlacemarkLayout;
@@ -220,6 +221,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     GpsLayer           *gpsLayer()           const;
     GpxFileModel       *gpxFileModel()       const;
     FileViewModel      *fileViewModel()   const;
+    PositionTracking   *positionTracking() const;
 
     /**
      * @brief Return whether the Gps Data is visible.

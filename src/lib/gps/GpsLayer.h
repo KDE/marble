@@ -31,6 +31,7 @@ class GpsLayer : public AbstractLayer
 
  public:
     explicit GpsLayer( GpxFileModel *fileModel,
+                       PositionTracking *positionTracking,
                        QObject *parent =0 );
     ~GpsLayer();
     virtual void paintLayer( ClipPainter *painter, 
@@ -53,9 +54,6 @@ public slots:
  private:
     Waypoint            *m_currentPosition;
 
-//     QVector<GpxFile*>   *m_files;
-
-    GpxFile             *m_currentGpx;
     PositionTracking         *m_tracking;
 };
 

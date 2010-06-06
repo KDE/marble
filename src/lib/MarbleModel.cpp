@@ -52,6 +52,7 @@
 #include "MercatorScanlineTextureMapper.h"
 #include "gps/GpxFileModel.h"
 #include "gps/GpxFile.h"
+#include "gps/PositionTracking.h"
 #include "HttpDownloadManager.h"
 #include "KmlFileViewItem.h"
 #include "LayerManager.h"
@@ -143,6 +144,7 @@ class MarbleModelPrivate
 
     //Gps Stuff
     GpsLayer                *m_gpsLayer;
+    PositionTracking        *m_positionTracking;
     GpxFileModel            *m_gpxFileModel;
 
     QTimer                  *m_timer;
@@ -211,7 +213,10 @@ MarbleModel::MarbleModel( QObject *parent )
              this,            SIGNAL( modelChanged() ) );
 
     d->m_gpxFileModel = new GpxFileModel( this );
-    d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel );
+    GpxFile *gpxFile = new GpxFile();
+    d->m_gpxFileModel->addFile(gpxFile);
+    d->m_positionTracking = new PositionTracking(gpxFile, this);
+    d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel, d->m_positionTracking );
 
     connect( d->m_dataFacade->fileViewModel(), SIGNAL(layoutChanged()),
              d->m_gpsLayer, SLOT(clearModel() ) );
@@ -716,6 +721,11 @@ GpsLayer *MarbleModel::gpsLayer() const
 GpxFileModel *MarbleModel::gpxFileModel() const
 {
     return d->m_gpxFileModel;
+}
+
+PositionTracking *MarbleModel::positionTracking() const
+{
+    return d->m_positionTracking;
 }
 
 FileViewModel *MarbleModel::fileViewModel() const

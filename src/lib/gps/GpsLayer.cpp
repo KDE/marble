@@ -23,6 +23,7 @@
 using namespace Marble;
 
 GpsLayer::GpsLayer( GpxFileModel *fileModel,
+                    PositionTracking *positionTracking,
                     QObject *parent )
                 :AbstractLayer( parent )
 {
@@ -35,10 +36,7 @@ GpsLayer::GpsLayer( GpxFileModel *fileModel,
 //     m_files = new QVector<GpxFile*>();
     m_fileModel = fileModel;
 
-//     m_gpsTrack = new Track();
-    m_currentGpx = new GpxFile();
-    m_fileModel->addFile( m_currentGpx );
-    m_tracking = new PositionTracking( m_currentGpx, this );
+    m_tracking = positionTracking;
 
 }
 
@@ -46,7 +44,6 @@ GpsLayer::~GpsLayer()
 {
     // leaks m_fileModel, see comment in clearModel()
     delete m_currentPosition;
-    delete m_currentGpx;
 }
 
 bool GpsLayer::updateGps( const QSize &canvasSize, ViewParams *viewParams,
@@ -71,16 +68,13 @@ void GpsLayer::paintLayer( ClipPainter *painter,
         QRegion temp; // useless variable
         updateGps( canvasSize, viewParams, temp );
         paintCurrentPosition( painter, canvasSize, viewParams );
-        m_currentGpx->draw( painter, canvasSize, viewParams );
     }
 
     const QVector<GpxFile*> * const allFiles = m_fileModel->allFiles();
     QVector<GpxFile*>::const_iterator it;
     for( it = allFiles->constBegin();
          it != allFiles->constEnd(); ++it ) {
-             if( (*it) != m_currentGpx ) {
-                 (*it)->draw( painter, canvasSize, viewParams );
-             }
+             (*it)->draw( painter, canvasSize, viewParams );
     }
     painter->restore();
 }
