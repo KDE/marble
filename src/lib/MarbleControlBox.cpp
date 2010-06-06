@@ -331,8 +331,6 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     }
 
     //connect CurrentLoctaion signals
-    connect( this, SIGNAL( gpsPositionChanged( qreal, qreal ) ),
-             d->m_widget, SLOT( changeCurrentPosition( qreal, qreal ) ) );
     connect( d->m_widget->model()->positionTracking(),
              SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
              this, SLOT( receiveGpsCoordinates( GeoDataCoordinates, qreal ) ) );

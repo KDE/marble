@@ -846,14 +846,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     void setShowTileId( bool visible );
 
-    /**
-     * @brief Set the current Gps position
-     * @param lat the new latitude value
-     * @param lon the new longitude value
-     */
-    
-    void changeCurrentPosition( qreal lon, qreal lat );
-
      /**
      * @brief Used to notify about the position of the mouse click
       */

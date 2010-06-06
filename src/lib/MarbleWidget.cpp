@@ -1049,12 +1049,6 @@ void MarbleWidget::setShowTileId( bool visible )
     d->m_model->layerDecorator()->setShowTileId( visible );
 }
 
-void MarbleWidget::changeCurrentPosition( qreal lon, qreal lat)
-{
-    d->m_model->gpsLayer()->changeCurrentPosition( lat, lon );
-    repaint();
-}
-
 void MarbleWidget::notifyMouseClick( int x, int y)
 {
     qreal  lon   = 0;

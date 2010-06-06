@@ -1124,11 +1124,6 @@ void MarbleMap::setShowGps( bool visible )
     d->m_viewParams.setShowGps( visible );
 }
 
-void MarbleMap::changeCurrentPosition( qreal lon, qreal lat )
-{
-    d->m_model->gpsLayer()->changeCurrentPosition( lat, lon );
-}
-
 void MarbleMap::notifyMouseClick( int x, int y )
 {
     qreal  lon   = 0;

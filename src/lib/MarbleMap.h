@@ -739,13 +739,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void setShowFrameRate( bool visible );
 
-    /**
-     * @brief Set the current Gps position
-     * @param lat the new latitude value
-     * @param lon the new longitude value
-     */
-    void changeCurrentPosition( qreal lon, qreal lat );
-
      /**
      * @brief used to notify about the position of the mouse click
       */

@@ -27,13 +27,6 @@ GpsLayer::GpsLayer( GpxFileModel *fileModel,
                     QObject *parent )
                 :AbstractLayer( parent )
 {
-    m_currentPosition = new Waypoint( 0,0 );
-
-    /*
-    m_waypoints = new WaypointContainer();
-    m_tracks = new TrackContainer();*/
-
-//     m_files = new QVector<GpxFile*>();
     m_fileModel = fileModel;
 
     m_tracking = positionTracking;
@@ -43,7 +36,6 @@ GpsLayer::GpsLayer( GpxFileModel *fileModel,
 GpsLayer::~GpsLayer()
 {
     // leaks m_fileModel, see comment in clearModel()
-    delete m_currentPosition;
 }
 
 void GpsLayer::paintLayer( ClipPainter *painter,
@@ -51,8 +43,6 @@ void GpsLayer::paintLayer( ClipPainter *painter,
 {
     painter->save();
     if ( visible() ) {
-        m_currentPosition->draw( painter, canvasSize,
-                                 viewParams );
         QRegion temp; // useless variable
         m_tracking->update( canvasSize, viewParams, temp );
         m_tracking->draw( painter, canvasSize, viewParams );
@@ -65,11 +55,6 @@ void GpsLayer::paintLayer( ClipPainter *painter,
              (*it)->draw( painter, canvasSize, viewParams );
     }
     painter->restore();
-}
-
-void GpsLayer::changeCurrentPosition( qreal lat, qreal lon )
-{
-    m_currentPosition->setPosition( lat, lon );
 }
 
 void GpsLayer::clearModel()
