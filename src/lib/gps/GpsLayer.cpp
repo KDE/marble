@@ -53,11 +53,6 @@ bool GpsLayer::updateGps( const QSize &canvasSize, ViewParams *viewParams,
 //     return QRegion();
 }
 
-PositionTracking* GpsLayer::getPositionTracking()
-{
-    return m_tracking;
-}
-
 void GpsLayer::paintLayer( ClipPainter *painter,
                           const QSize &canvasSize, ViewParams *viewParams )
 {

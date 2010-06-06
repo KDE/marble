@@ -333,14 +333,14 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     //connect CurrentLoctaion signals
     connect( this, SIGNAL( gpsPositionChanged( qreal, qreal ) ),
              d->m_widget, SLOT( changeCurrentPosition( qreal, qreal ) ) );
-    connect( d->m_widget->model()->gpsLayer()->getPositionTracking(),
+    connect( d->m_widget->model()->positionTracking(),
              SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
              this, SLOT( receiveGpsCoordinates( GeoDataCoordinates, qreal ) ) );
     connect( d->uiWidget.positionTrackingComboBox, SIGNAL( currentIndexChanged( QString ) ),
              this, SLOT( changePositionProvider( QString ) ) );
     connect( d->uiWidget.locationLabel, SIGNAL( linkActivated( QString ) ),
              this, SLOT( centerOnCurrentLocation() ) );
-    connect( d->m_widget->model()->gpsLayer()->getPositionTracking(),
+    connect( d->m_widget->model()->positionTracking(),
              SIGNAL( statusChanged( PositionProviderStatus) ), this,
              SLOT( adjustPositionTrackingStatus( PositionProviderStatus) ) );
 }
@@ -437,7 +437,7 @@ void MarbleControlBox::adjustPositionTrackingStatus( PositionProviderStatus stat
             break;
         case PositionProviderStatusError:
             html += tr( "Error when determining current location: " );
-            html += d->m_widget->model()->gpsLayer()->getPositionTracking()->error();
+            html += d->m_widget->model()->positionTracking()->error();
             break;
     }
 
@@ -743,7 +743,7 @@ void MarbleControlBox::changePositionProvider( const QString &provider )
     if ( provider == tr("Disabled") ) {
         d->uiWidget.locationLabel->setEnabled( false );
         d->m_widget->map()->model()->gpsLayer()->setVisible( false );
-        d->m_widget->model()->gpsLayer()->getPositionTracking()->setPositionProviderPlugin( 0 );
+        d->m_widget->model()->positionTracking()->setPositionProviderPlugin( 0 );
         d->m_widget->update();
     }
     else {
@@ -751,7 +751,7 @@ void MarbleControlBox::changePositionProvider( const QString &provider )
             if ( plugin->guiString() == provider ) {
                d->uiWidget.locationLabel->setEnabled( true );
                PositionProviderPlugin* instance = plugin->newInstance();
-               PositionTracking *tracking = d->m_widget->model()->gpsLayer()->getPositionTracking();
+               PositionTracking *tracking = d->m_widget->model()->positionTracking();
                tracking->setPositionProviderPlugin( instance );
                d->m_widget->map()->model()->gpsLayer()->setVisible( true );
                d->m_widget->update();

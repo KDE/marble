@@ -48,7 +48,6 @@ class GpsLayer : public AbstractLayer
                    QRegion &reg);
 
     GpxFileModel        *m_fileModel;
-    PositionTracking*   getPositionTracking();
 public slots:
     virtual void clearModel();
  private:
