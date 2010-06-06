@@ -58,6 +58,7 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "gps/GpsLayer.h"
+#include "gps/PositionTracking.h"
 
 using namespace Marble;
 
@@ -1144,7 +1145,7 @@ void MarbleMap::updateGps()
 {
     QRegion temp;
 //    const bool draw = 
-    d->m_model->gpsLayer()->updateGps( size(),&d->m_viewParams, temp );
+    d->m_model->positionTracking()->update( size(),&d->m_viewParams, temp );
 #if 0  // FIXME: move to MarbleWidget?
     if ( draw ) {
         update(temp);

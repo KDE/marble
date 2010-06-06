@@ -48,6 +48,7 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "gps/GpsLayer.h"
+#include "gps/PositionTracking.h"
 
 
 namespace Marble
@@ -1069,7 +1070,7 @@ void MarbleWidget::notifyMouseClick( int x, int y)
 void MarbleWidget::updateGps()
 {
     QRegion temp;
-    const bool draw = d->m_model->gpsLayer()->updateGps( size(),
+    const bool draw = d->m_model->positionTracking()->update( size(),
                                                          d->m_map->viewParams(),
                                                          temp );
     if ( draw ) {

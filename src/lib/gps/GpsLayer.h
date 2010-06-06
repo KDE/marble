@@ -37,15 +37,7 @@ class GpsLayer : public AbstractLayer
     virtual void paintLayer( ClipPainter *painter, 
                              const QSize &canvasSize,
                              ViewParams *viewParams );
-    virtual void paintCurrentPosition( ClipPainter *painter, 
-                                       const QSize &canvasSize, 
-                                       ViewParams *viewParams );
-
     void changeCurrentPosition( qreal lat, qreal lon );
-
-//  public slots:
-    bool updateGps(const QSize &canvasSize, ViewParams *viewParams,
-                   QRegion &reg);
 
     GpxFileModel        *m_fileModel;
 public slots:
