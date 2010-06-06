@@ -9,7 +9,6 @@
 //
 
 #include "TrackSegment.h"
-#include "AbstractLayer/AbstractLayer.h"
 #include "ClipPainter.h"
 #include "MarbleDirs.h"
 

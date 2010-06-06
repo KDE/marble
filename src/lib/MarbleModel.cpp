@@ -26,7 +26,6 @@
 #include "MapThemeManager.h"
 #include "global.h"
 #include "MarbleDebug.h"
-#include "gps/GpsLayer.h"
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneFilter.h"
@@ -143,7 +142,6 @@ class MarbleModelPrivate
     QItemSelectionModel     *m_placemarkselectionmodel;
 
     //Gps Stuff
-    GpsLayer                *m_gpsLayer;
     PositionTracking        *m_positionTracking;
     GpxFileModel            *m_gpxFileModel;
 
@@ -216,10 +214,6 @@ MarbleModel::MarbleModel( QObject *parent )
     GpxFile *gpxFile = new GpxFile();
     d->m_gpxFileModel->addFile(gpxFile);
     d->m_positionTracking = new PositionTracking(gpxFile, this);
-    d->m_gpsLayer = new GpsLayer( d->m_gpxFileModel, d->m_positionTracking );
-
-    connect( d->m_dataFacade->fileViewModel(), SIGNAL(layoutChanged()),
-             d->m_gpsLayer, SLOT(clearModel() ) );
 
     d->m_layerManager = new LayerManager( d->m_dataFacade, d->m_pluginManager, this );
 
@@ -267,7 +261,6 @@ MarbleModel::~MarbleModel()
     delete d->m_popSortModel;
     delete d->m_placemarkmanager;
     delete d->m_fileManager;
-    delete d->m_gpsLayer;
     delete d->m_mapTheme;
     delete d->m_timer;
     delete d->m_layerManager;
@@ -649,11 +642,22 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     }
 
     // Paint the Gps Layer
-//    d->m_gpsLayer->setVisible( viewParams->showGps() );
-    //FIXME:We might just send ViewParams instead of this bunch of parameters
-    d->m_gpsLayer->paintLayer( painter,
-                               viewParams->canvasImage()->size(),
-                               viewParams );
+    painter->save();
+    QSize canvasSize = viewParams->canvasImage()->size();
+    if ( viewParams->showGps() ) {
+        QRegion temp; // useless variable
+        d->m_positionTracking->update( canvasSize, viewParams, temp );
+        d->m_positionTracking->draw( painter, canvasSize, viewParams );
+
+        const QVector<GpxFile*> * const allFiles = d->m_gpxFileModel->allFiles();
+        QVector<GpxFile*>::const_iterator it;
+        for( it = allFiles->constBegin();
+        it != allFiles->constEnd(); ++it ) {
+            (*it)->draw( painter, canvasSize, viewParams );
+        }
+    }
+    painter->restore();
+
 
     renderPositions.clear();
     renderPositions << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"

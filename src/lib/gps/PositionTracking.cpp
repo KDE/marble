@@ -11,7 +11,6 @@
 
 #include "PositionTracking.h"
 
-#include "AbstractLayer.h"
 #include "ClipPainter.h"
 #include "GpxFile.h"
 #include "Track.h"

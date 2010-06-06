@@ -154,12 +154,10 @@ set(marblewidget_SRCS
     gps/WaypointContainer.cpp
     gps/TrackContainer.cpp
     gps/RouteContainer.cpp
-    gps/GpsLayer.cpp
     gps/GpxSax.cpp
     gps/GpxFile.cpp
     gps/GpxFileModel.cpp
     AbstractLayer/AbstractLayerInterface.cpp
-    AbstractLayer/AbstractLayer.cpp
     AbstractLayer/AbstractLayerContainer.cpp
     AbstractLayer/AbstractLayerData.cpp
     DataMigration.cpp
