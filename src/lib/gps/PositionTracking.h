@@ -64,19 +64,6 @@ public:
 
     void construct ( const QSize &canvasSize,
                      ViewParams *viewParams );
-    /**
-     * generates the region of the view that needs to be updated when 
-     * the provided position changes. it is a union of the old 
-     * position with the new one. 
-     * 
-     * @param canvasSize current size of view. 
-     * @param radius    current radius
-     * @param invRotAxis current Quaternion representation of globe.
-     * @return QRegion representation of where on the view needs to be
-     *         updated.
-     */
-    QRegion     genRegion( const QSize &canvasSize, 
-                           ViewParams *viewParams );
 
     void draw( ClipPainter *painter,
                 const QSize &canvasSize, 
@@ -94,6 +81,10 @@ Q_SIGNALS:
     void  gpsLocation( GeoDataCoordinates, qreal );
 
     void statusChanged( PositionProviderStatus status );
+
+public slots:
+    void setPosition( GeoDataCoordinates position,
+                          GeoDataAccuracy accuracy );
 
  private:
     void updateSpeed( TrackPoint* previous, TrackPoint* next );

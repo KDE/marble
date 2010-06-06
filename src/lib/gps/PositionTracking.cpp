@@ -56,15 +56,6 @@ void PositionTracking::construct( const QSize &canvasSize,
     QPointF position;
     QPointF previousPosition;
 
-    //FIXME: this is a workaround for dealing with NAN values. we need to protect against that in the future
-    m_gpsCurrentPosition->setPosition( GeoDataCoordinates ( m_gpsCurrentPosition->position().longitude(GeoDataCoordinates::Degree),
-                                       m_gpsCurrentPosition->position().latitude( GeoDataCoordinates::Degree ),
-                                       m_gpsCurrentPosition->position().altitude(), GeoDataCoordinates::Degree ) );
-    m_gpsPreviousPosition->setPosition( GeoDataCoordinates ( m_gpsPreviousPosition->position().longitude(GeoDataCoordinates::Degree),
-                                       m_gpsPreviousPosition->position().latitude( GeoDataCoordinates::Degree ),
-                                       m_gpsPreviousPosition->position().altitude(), GeoDataCoordinates::Degree) );
-
-
     m_gpsCurrentPosition->getPixelPos( canvasSize, viewParams, &position );
     m_gpsPreviousPosition->getPixelPos( canvasSize, viewParams, &previousPosition );
 
@@ -89,24 +80,6 @@ void PositionTracking::construct( const QSize &canvasSize,
 }
 
 
-QRegion PositionTracking::genRegion( const QSize &canvasSize,
-                                ViewParams *viewParams )
-{
-        construct( canvasSize, viewParams );
-
-        QRegion dirty;
-        QList<QPolygonF> items;
-        items << m_previousDraw << m_currentDraw;
-        foreach(const QPolygonF &polygon, items)
-        {
-            QRect rect = polygon.boundingRect().toRect();
-            rect.adjust( -5, -5, 10, 10 );
-            dirty |= rect ;
-        }
-
-        return dirty;
-}
-
 void PositionTracking::updateSpeed( TrackPoint* previous, TrackPoint* next )
 {
     //This function makes the assumption that the update stage happens once
@@ -118,16 +91,16 @@ void PositionTracking::updateSpeed( TrackPoint* previous, TrackPoint* next )
     m_speed = distance * 60 * 60;
 }
 
-bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
-                         QRegion &reg) 
+void PositionTracking::setPosition( GeoDataCoordinates position,
+                                    GeoDataAccuracy accuracy )
 {
     if ( m_positionProvider && m_positionProvider->status() ==
         PositionProviderStatusAvailable )
     {
-        m_gpsTracking->setPosition( m_positionProvider->position() );
+        m_gpsTracking->setPosition( position );
         m_gpsTracking->setPosition( GeoDataCoordinates ( m_gpsTracking->position().longitude(GeoDataCoordinates::Degree),
-                                    m_gpsTracking->position().latitude( GeoDataCoordinates::Degree ),
-                                    m_gpsTracking->position().altitude(), GeoDataCoordinates::Degree ) );
+                                                         m_gpsTracking->position().latitude( GeoDataCoordinates::Degree ),
+                                                         m_gpsTracking->position().altitude(), GeoDataCoordinates::Degree ) );
 
 
         if (m_gpsTrackSeg == 0 ) {
@@ -135,6 +108,28 @@ bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
             m_gpsTrack->append( m_gpsTrackSeg );
         }
 
+        //if the position has moved then update the current position
+        if ( !( m_gpsPreviousPosition->position() ==
+                m_gpsTracking->position() ) )
+        {
+            m_gpsTrackSeg->append( m_gpsPreviousPosition );
+            m_gpsPreviousPosition = m_gpsCurrentPosition;
+            m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking );
+            emit gpsLocation( m_gpsTracking->position(), m_speed );
+        }
+    } else {
+        if ( m_gpsTrackSeg && m_gpsTrackSeg->count() > 0 ) {
+            m_gpsTrackSeg = 0;
+        }
+    }
+}
+
+bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
+                         QRegion &reg) 
+{
+    if ( m_positionProvider && m_positionProvider->status() ==
+        PositionProviderStatusAvailable )
+    {
         //updateSpeed updates the speed to radians and needs
         //to be multiplied by the radius
         updateSpeed( m_gpsPreviousPosition, m_gpsTracking );
@@ -144,22 +139,22 @@ bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
         if ( !( m_gpsPreviousPosition->position() ==
                 m_gpsTracking->position() ) )
         {
-            m_gpsTrackSeg->append( m_gpsPreviousPosition );
-            m_gpsPreviousPosition = m_gpsCurrentPosition;
-            m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking );
-            reg = genRegion( canvasSize, viewParams );
-            // mDebug() << "Dirty region: " << reg;
-            emit gpsLocation( m_gpsTracking->position(), m_speed );
+            construct( canvasSize, viewParams );
+
+            QList<QPolygonF> items;
+            items << m_previousDraw << m_currentDraw;
+            foreach(const QPolygonF &polygon, items)
+            {
+                QRect rect = polygon.boundingRect().toRect();
+                rect.adjust( -5, -5, 10, 10 );
+                reg |= rect ;
+            }
+
             return true;
         } else {
             return false;
         }
-    } else {
-        if ( m_gpsTrackSeg && m_gpsTrackSeg->count() > 0 ) {
-            m_gpsTrackSeg = 0;
-        }
     }
-
     return false;
 }
 
@@ -192,6 +187,8 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
         mDebug() << "Initializing position provider:" << m_positionProvider->name();
         connect( m_positionProvider, SIGNAL( statusChanged( PositionProviderStatus ) ),
                 this, SIGNAL( statusChanged(PositionProviderStatus ) ) );
+        connect( m_positionProvider, SIGNAL(positionChanged(GeoDataCoordinates,GeoDataAccuracy)),
+                 this, SLOT(setPosition(GeoDataCoordinates,GeoDataAccuracy)));
         m_positionProvider->initialize();
     }
 }
