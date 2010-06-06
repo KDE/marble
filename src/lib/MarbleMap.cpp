@@ -57,7 +57,6 @@
 #include "TextureColorizer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
-#include "gps/GpsLayer.h"
 #include "gps/PositionTracking.h"
 
 using namespace Marble;
@@ -716,7 +715,7 @@ bool MarbleMap::showLakes() const
 
 bool MarbleMap::showGps() const
 {
-    return d->m_model->gpsLayer()->visible();
+    return d->m_viewParams.showGps();
 }
 
 bool MarbleMap::showFrameRate() const

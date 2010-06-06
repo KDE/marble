@@ -17,6 +17,7 @@
 
 #include <QtCore/QString>
 #include "MarbleDebug.h"
+#include "ViewParams.h"
 #include <QtGui/QRegion>
 #include <cmath>
 
@@ -42,7 +43,7 @@ void GpsLayer::paintLayer( ClipPainter *painter,
                           const QSize &canvasSize, ViewParams *viewParams )
 {
     painter->save();
-    if ( visible() ) {
+    if ( viewParams->showGps() ) {
         QRegion temp; // useless variable
         m_tracking->update( canvasSize, viewParams, temp );
         m_tracking->draw( painter, canvasSize, viewParams );

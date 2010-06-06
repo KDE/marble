@@ -35,7 +35,6 @@
 #include "MarbleModel.h"
 #include "FileViewModel.h"
 #include "gps/GpxFileModel.h"
-#include "gps/GpsLayer.h"
 #include "gps/PositionTracking.h"
 #include "MarbleLocale.h"
 #include "MarblePlacemarkModel.h"
@@ -540,7 +539,7 @@ void MarbleControlBox::setCurrentLocationTabShown( bool show )
         }
 
         if ( !enabled ) {
-            d->m_widget->map()->model()->gpsLayer()->setVisible( false );
+            d->m_widget->map()->setShowGps( false );
         }
     }
 }
@@ -740,7 +739,7 @@ void MarbleControlBox::changePositionProvider( const QString &provider )
 {
     if ( provider == tr("Disabled") ) {
         d->uiWidget.locationLabel->setEnabled( false );
-        d->m_widget->map()->model()->gpsLayer()->setVisible( false );
+        d->m_widget->map()->setShowGps( false );
         d->m_widget->model()->positionTracking()->setPositionProviderPlugin( 0 );
         d->m_widget->update();
     }
@@ -751,7 +750,7 @@ void MarbleControlBox::changePositionProvider( const QString &provider )
                PositionProviderPlugin* instance = plugin->newInstance();
                PositionTracking *tracking = d->m_widget->model()->positionTracking();
                tracking->setPositionProviderPlugin( instance );
-               d->m_widget->map()->model()->gpsLayer()->setVisible( true );
+               d->m_widget->map()->setShowGps( true );
                d->m_widget->update();
                return;
             }

@@ -47,7 +47,6 @@
 #include "TileCreatorDialog.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
-#include "gps/GpsLayer.h"
 #include "gps/PositionTracking.h"
 
 

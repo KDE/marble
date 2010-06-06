@@ -281,26 +281,6 @@ MarbleModel::~MarbleModel()
     mDebug() << "Model deleted:" << this;
 }
 
-bool MarbleModel::showGps() const
-{
-    return d->m_gpsLayer->visible();
-}
-
-void MarbleModel::setShowGps( bool visible )
-{
-    d->m_gpsLayer->setVisible( visible );
-}
-
-void MarbleModel::startPolling( int time )
-{
-    d->m_timer->start( time );
-}
-
-void MarbleModel::stopPolling()
-{
-    d->m_timer->stop();
-}
-
 QString MarbleModel::mapThemeId() const
 {
     QString mapThemeId = "";
@@ -711,11 +691,6 @@ AbstractScanlineTextureMapper *MarbleModel::textureMapper() const
 PlacemarkLayout *MarbleModel::placemarkLayout() const
 {
     return d->m_placemarkLayout;
-}
-
-GpsLayer *MarbleModel::gpsLayer() const
-{
-    return d->m_gpsLayer;
 }
 
 GpxFileModel *MarbleModel::gpxFileModel() const

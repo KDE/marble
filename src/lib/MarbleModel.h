@@ -51,7 +51,6 @@ class AbstractScanlineTextureMapper;
 class GeoPainter;
 class TileCoordsPyramid;
 class FileViewModel;
-class GpsLayer;
 class GpxFileModel;
 class PositionTracking;
 class HttpDownloadManager;
@@ -218,36 +217,9 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     AbstractScanlineTextureMapper  *textureMapper() const;
 
-    GpsLayer           *gpsLayer()           const;
     GpxFileModel       *gpxFileModel()       const;
     FileViewModel      *fileViewModel()   const;
     PositionTracking   *positionTracking() const;
-
-    /**
-     * @brief Return whether the Gps Data is visible.
-     * @return The Gps Data visibility.
-     */
-    bool showGps() const;
-
-    /**
-     * @brief Set whether the Gps Data is visible.
-     * @param visible visibility of the Gps Data.
-     */
-    void setShowGps( bool visible );
-
-    /**
-     * @brief Start the model's timer polling
-     * @param time the amount of milliseconds between each poll
-     *
-     * This is default behaviour so does not need to be started unless
-     * it was previously stopped
-     */
-    void startPolling( int time = 1000 );
-
-    /**
-     * @brief stop the model from polling
-     */
-    void stopPolling();
 
     qreal                 planetRadius()   const;
     QString               planetName()     const;
