@@ -103,7 +103,7 @@ QString AprsPlugin::nameId() const
 
 QString AprsPlugin::description() const
 {
-    return tr( "This plugin displays APRS data gleaned from the internet.  APRS is a Amateur Radio protocol for broadcasting location and other information." );
+    return tr( "This plugin displays APRS data gleaned from the Internet.  APRS is an Amateur Radio protocol for broadcasting location and other information." );
 }
 
 QIcon AprsPlugin::icon () const
