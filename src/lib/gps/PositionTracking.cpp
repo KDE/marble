@@ -20,9 +20,6 @@
 #include "MarbleDebug.h"
 #include "ViewParams.h"
 
-#include <QtXml/QXmlInputSource>
-#include <QtXml/QXmlSimpleReader>
-
 using namespace Marble;
 
 PositionTracking::PositionTracking( GpxFile *currentGpx,
@@ -186,8 +183,8 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
         mDebug() << "Initializing position provider:" << m_positionProvider->name();
         connect( m_positionProvider, SIGNAL( statusChanged( PositionProviderStatus ) ),
                 this, SIGNAL( statusChanged(PositionProviderStatus ) ) );
-        connect( m_positionProvider, SIGNAL(positionChanged(GeoDataCoordinates,GeoDataAccuracy)),
-                 this, SLOT(setPosition(GeoDataCoordinates,GeoDataAccuracy)));
+        connect( m_positionProvider, SIGNAL( positionChanged( GeoDataCoordinates,GeoDataAccuracy ) ),
+                 this, SLOT( setPosition( GeoDataCoordinates,GeoDataAccuracy ) ) );
         m_positionProvider->initialize();
     }
 }

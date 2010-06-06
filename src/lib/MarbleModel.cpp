@@ -212,8 +212,8 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_gpxFileModel = new GpxFileModel( this );
     GpxFile *gpxFile = new GpxFile();
-    d->m_gpxFileModel->addFile(gpxFile);
-    d->m_positionTracking = new PositionTracking(gpxFile, this);
+    d->m_gpxFileModel->addFile( gpxFile );
+    d->m_positionTracking = new PositionTracking( gpxFile, this );
 
     d->m_layerManager = new LayerManager( d->m_dataFacade, d->m_pluginManager, this );
 
@@ -229,7 +229,7 @@ MarbleModel::MarbleModel( QObject *parent )
               this,              SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
 
     d->m_timer = new QTimer( this );
-    d->m_timer->start( 200 );
+    d->m_timer->start( 1000 );
 
     connect( d->m_timer, SIGNAL( timeout() ),
              this,       SIGNAL( timeout() ) );

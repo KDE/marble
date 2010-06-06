@@ -84,8 +84,6 @@ void MarbleTest::gpsDemo()
     //
     //set up for the test
     //
-    qDebug("stopping polling now");
-    
     m_marbleWidget->centerOn( -15.2325, 58.3723 );
     
     m_marbleWidget->setShowGps( true );
