@@ -55,8 +55,8 @@ QString FileLoader::path() const
 void FileLoader::run()
 {
     if ( m_contents.isEmpty() ) {
-        QString defaultcachename;
-        QString defaultsrcname;
+        QString defaultCacheName;
+        QString defaultSourceName;
 
         mDebug() << "starting parser for" << m_filepath;
 
@@ -65,35 +65,41 @@ void FileLoader::run()
         if ( path == "." ) path.clear();
         QString name = fileinfo.completeBaseName();
         QString suffix = fileinfo.suffix();
+	if( suffix.isEmpty() ) {
+            suffix = "kml";
+	}
 
         if ( fileinfo.isAbsolute() ) {
             // We got an _absolute_ path now: e.g. "/patrick.kml"
-            // defaultcachename = path + '/' + name + ".cache";
-            defaultsrcname   = path + '/' + name + '.' + suffix;
+            // defaultCacheName = path + '/' + name + ".cache";
+            defaultSourceName   = path + '/' + name + '.' + suffix;
         }
         else {
             if ( m_filepath.contains( '/' ) ) {
                 // _relative_ path: "maps/mars/viking/patrick.kml"
-                // defaultcachename = MarbleDirs::path( path + '/' + name + ".cache" );
-                defaultsrcname   = MarbleDirs::path( path + '/' + name + '.' + suffix );
+                // defaultCacheName = MarbleDirs::path( path + '/' + name + ".cache" );
+                defaultSourceName   = MarbleDirs::path( path + '/' + name + '.' + suffix );
             }
             else {
                 // _standard_ shared placemarks: "placemarks/patrick.kml"
-                defaultcachename = MarbleDirs::path( "placemarks/" + path + name + ".cache" );
-                defaultsrcname   = MarbleDirs::path( "placemarks/" + path + name + '.' + suffix );
+                defaultCacheName = MarbleDirs::path( "placemarks/" + path + name + ".cache" );
+		if (defaultCacheName.isEmpty()) {
+			defaultCacheName = MarbleDirs::localPath() + "/placemarks/" + path + name + ".cache";
+		}
+		defaultSourceName   = MarbleDirs::path( "placemarks/" + path + name + '.' + suffix );
             }
         }
 
-        if ( QFile::exists( defaultcachename ) ) {
-            mDebug() << "Loading Cache File:" + defaultcachename;
+        if ( QFile::exists( defaultCacheName ) ) {
+            mDebug() << "Loading Cache File:" + defaultCacheName;
 
             bool      cacheoutdated = false;
             QDateTime sourceLastModified;
             QDateTime cacheLastModified;
 
-            if ( QFile::exists( defaultsrcname ) ) {
-                sourceLastModified = QFileInfo( defaultsrcname ).lastModified();
-                cacheLastModified  = QFileInfo( defaultcachename ).lastModified();
+            if ( QFile::exists( defaultSourceName ) ) {
+                sourceLastModified = QFileInfo( defaultSourceName ).lastModified();
+                cacheLastModified  = QFileInfo( defaultCacheName ).lastModified();
 
                 if ( cacheLastModified < sourceLastModified )
                     cacheoutdated = true;
@@ -102,7 +108,7 @@ void FileLoader::run()
             bool loadok = false;
 
             if ( !cacheoutdated ) {
-                loadok = loadFile( defaultcachename );
+                loadok = loadFile( defaultCacheName );
                 if ( loadok )
                     emit newGeoDataDocumentAdded( m_document );
             }
@@ -112,15 +118,17 @@ void FileLoader::run()
             }
         }
         else {
-            if ( QFile::exists( defaultsrcname ) ) {
+	    mDebug() << "No recent Default Placemark Cache File available!";
+            if ( QFile::exists( defaultSourceName ) ) {
                 // Read the KML file.
-                importKml( defaultsrcname );
-                if ( !defaultcachename.isEmpty() ) {
-                    saveFile( defaultcachename );
+                importKml( defaultSourceName );
+
+                if (!defaultCacheName.isEmpty() ) {
+                    saveFile(defaultCacheName);
                 }
             }
             else {
-                mDebug() << "No Default Placemark Source File for " << defaultsrcname;
+                mDebug() << "No Default Placemark Source File for " << name;
             }
         }
     } else {
@@ -238,7 +246,7 @@ bool FileLoader::loadFile( const QString &filename )
         in >> lon >> lat >> alt;
         mark.setCoordinate( (qreal)(lon), (qreal)(lat), (qreal)(alt) );
         in >> tmpstr;
-        mark.setRole( tmpstr.at(0) );
+        mark.setRole( tmpstr );
         in >> tmpstr;
         mark.setDescription( tmpstr );
         in >> tmpstr;
@@ -257,8 +265,11 @@ bool FileLoader::loadFile( const QString &filename )
 
 void FileLoader::saveFile( const QString& filename )
 {
+
     if ( !QDir( MarbleDirs::localPath() + "/placemarks/" ).exists() )
         ( QDir::root() ).mkpath( MarbleDirs::localPath() + "/placemarks/" );
+   
+    mDebug() << "Creating cache at " << filename ;
 
     QFile file( filename );
     file.open( QIODevice::WriteOnly );
@@ -276,6 +287,7 @@ void FileLoader::saveFile( const QString& filename )
 
 void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *container)
 {
+
     qreal lon;
     qreal lat;
     qreal alt;

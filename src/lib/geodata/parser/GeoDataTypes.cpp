@@ -52,7 +52,7 @@ const char* GeoDataPolyStyleType = "GeoDataPolyStyle";
 const char* GeoDataRegionType = "GeoDataRegion";
 const char* GeoDataStyleSelectorType = "GeoDataStyleSelector";
 const char* GeoDataStyleType = "GeoDataStyle";
-const char* GeoDataSyleMapType = "GeoDataStyleMap";
+const char* GeoDataStyleMapType = "GeoDataStyleMap";
 }
 
 }

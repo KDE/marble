@@ -6,27 +6,27 @@ All other steps are optional and can be done by one of our programmers:
 1. Compile marble/tools/asc2kml by executing "qmake-qt4 && make"
 2. Then execute the resulting binary:
 
-tackat@tackat-laptop:~/marble/tools/asc2kml$ ./asc2kml -o ~/marble/data/placemarks/cityplacemarks.kml ~/marble/data/placemarks/cities.txt
+tackat@tackat-laptop:~/marble/tools/asc2kml$ ./asc2kml -o ~/marble/data/placemarks/cityplacemarks.kml ~/marble/data/placemarks/cities.txt  ~/marble/data/placemarks/statecodes.txt
 
 3. Create the placemark-directory in your home directory if it doesn't exist already.
 
-tackat@tackat-laptop:~$ mkdir ~/.marble/data/placemarks
+tackat@tackat-laptop:~$ mkdir ~/.local/share/marble/placemarks
 
 4. Copy the new KML file over
 
-tackat@tackat-laptop:~$ cp ~/marble/data/placemarks/cityplacemarks.kml ~/.marble/data/placemarks/cityplacemarks.kml
+tackat@tackat-laptop:~$ cp ~/marble/data/placemarks/cityplacemarks.kml ~/.local/share/marble/placemarks/cityplacemarks.kml
 
 5. Delete the cityplacemarks cache file in the system directory:
 
-tackat@tackat-laptop:~$ sudo rm /usr/share/apps/marble/data/placemarks/cityplacemarks.cache
+tackat@tackat-laptop:~$ sudo rm /usr/local/share/apps/marble/data/placemarks/cityplacemarks.cache
 
 6. Run Marble. Check that Marble will import the new data and generate a cache file. Look for the message:
 
 No recent Default Placemark Cache File available!
-Starting KML-Import
+Making cache for "cityplacemarks"
 
 7. Copy the resulting cache file over to your sources:
 
-tackat@tackat-laptop:~$ cp ~/.marble/data/placemarks/cityplacemarks.cache ~/marble/data/placemarks/cityplacemarks.cache
+tackat@tackat-laptop:~$ cp ~/.local/share/marble/placemarks/cityplacemarks.cache ~/marble/data/placemarks/cityplacemarks.cache
 
 8. Commit the new cityplacemarks.cache to SVN.

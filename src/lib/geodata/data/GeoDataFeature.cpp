@@ -504,12 +504,12 @@ void GeoDataFeature::setVisualCategory( GeoDataFeature::GeoDataVisualCategory in
     d->m_visualCategory = index;
 }
 
-const QChar GeoDataFeature::role() const
+const QString GeoDataFeature::role() const
 {
     return d->m_role;
 }
 
-void GeoDataFeature::setRole( const QChar &role )
+void GeoDataFeature::setRole( const QString &role )
 {
     detach();
     d->m_role = role;

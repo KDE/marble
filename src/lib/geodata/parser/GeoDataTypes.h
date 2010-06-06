@@ -59,7 +59,7 @@ extern const char* GeoDataPolyStyleType;
 extern const char* GeoDataRegionType;
 extern const char* GeoDataStyleSelectorType;
 extern const char* GeoDataStyleType;
-extern const char* GeoDataSyleMapType;
+extern const char* GeoDataStyleMapType;
 }
 
 }

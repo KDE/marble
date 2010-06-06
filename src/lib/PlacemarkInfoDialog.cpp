@@ -67,65 +67,49 @@ void PlacemarkInfoDialog::showContent()
     name_val_lbl->setText( "<H1><b>" + m_index.data().toString() + "</b></H1>" );
     altername_val_lbl->setText( "" );
     QString  rolestring;
-    switch ( m_index.data( MarblePlacemarkModel::GeoTypeRole ).toChar().toLatin1() ) {
-    case 'C':
+    const QString role = m_index.data( MarblePlacemarkModel::GeoTypeRole ).toString();
+     if(role=="PPLC")
+        rolestring = tr("National Capital");
+    else if(role=="PPL")
+        rolestring = tr("City");
+    else if(role=="PPLA")
+        rolestring = tr("State Capital");
+    else if(role=="PPLA2")
+        rolestring = tr("County Capital");
+    else if(role=="PPLA3" || role=="PPLA4" )
         rolestring = tr("Capital");
-        break;
-    case 'B':
-        rolestring = tr("Capital");
-        break;
-    case 'R':
-        rolestring = tr("Regional Capital");
-        break;
-    case 'P':
+    else if(role=="PPLF" || role=="PPLG" || role=="PPLL" || role=="PPLQ" || role=="PPLR" || role=="PPLS" || role=="PPLW" )
+        rolestring = tr("Village");
+    else if(role=="P" || role=="M" )
         rolestring = tr("Location");
-        break;
-    case 'M':
-        rolestring = tr("Location");
-        break;
-    case 'H':
+    else if(role=="H")
+    {    
         if ( m_index.data( MarblePlacemarkModel::PopularityRole ).toInt() > 0 )
             rolestring = tr("Mountain");
         else
             rolestring = tr("Elevation extreme");
-        break;
-    case 'V':
-        rolestring = tr("Volcano");
-        break;
-    case 'W':
-        rolestring = tr("Shipwreck");
-        break;
-    case 'N':
-        rolestring = tr("City");
-        break;
-    case 'O':
-        rolestring = tr("Ocean");
-        break;
-    case 'S':
-        rolestring = tr("Nation");
-        break;
-    case 'K':
-        rolestring = tr("Continent");
-        break;
-    case 'A':
-        rolestring = tr("Astronomical observatory");
-        break;
-    case 'a':
-        rolestring = tr("Maria");
-        break;
-    case 'c':
-        rolestring = tr("Crater");
-        break;
-    case 'h':
-    case 'r':
-    case 'u':
-    case 'i':
-        rolestring = tr("Landing Site");
-        break;
-    default:
-        rolestring = tr("Other Place");
     }
-
+    else if(role=="V")
+        rolestring = tr("Volcano");
+    else if(role=="W")
+        rolestring = tr("Shipwreck");
+    else if(role=="O")
+        rolestring = tr("Ocean");
+    else if(role=="S")
+        rolestring = tr("Nation");
+    else if(role=="K")
+        rolestring = tr("Continent");
+    else if(role=="A")
+        rolestring = tr("Astronomical observatory");
+    else if(role=="a")
+        rolestring = tr("Maria");
+    else if(role=="c")
+        rolestring = tr("Crater");
+    else if(role=="h" || role=="r" || role=="u" || role=="i")
+        rolestring = tr("Landing Site");
+    else 
+	rolestring = tr("Other Place");
+	
     role_val_lbl->setText( rolestring );
 
     m_flagcreator = new DeferredFlag( this );
@@ -163,7 +147,6 @@ void PlacemarkInfoDialog::showContent()
     elevation_val_lbl->setText( tr("%1 m").arg( QLocale::system().toString( altitude ) ) );
     diameter_val_lbl->setText( tr("%1 km").arg( QLocale::system().toString( population / 1000.0, 'g', 4 ) ) );
 
-    const QChar role = m_index.data( MarblePlacemarkModel::GeoTypeRole ).toChar();
 
     country_lbl->setVisible( true );
     country_val_lbl->setVisible( true );
@@ -181,15 +164,15 @@ void PlacemarkInfoDialog::showContent()
     if ( altitude <= 0 )
         elevation_val_lbl->setText( tr("-") );
 
-    if (    role == 'O' ||  role == 'o' || role == 'v' || role == 'h' || role == 'u'
-         || role == 'i' || role == 'r' || role == 'a' || role == 'c' || role == 'm' ) {
+    if (    role == "O" ||  role == "o" || role == "v" || role == "h" || role == "u"
+         || role == "i" || role == "r" || role == "a" || role == "c" || role == "m" ) {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
         country_lbl->setVisible( false );
         country_val_lbl->setVisible( false );
     }
 
-    if ( role == 'A' ) {
+    if ( role == "A" ) {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
         country_lbl->setVisible( false );
@@ -198,23 +181,23 @@ void PlacemarkInfoDialog::showContent()
         elevation_lbl->setVisible( false );
     }
 
-    if ( role == 'K' )
+    if ( role == "K" )
     {
         country_lbl->setVisible( false );
         country_val_lbl->setVisible( false );
     }
-    if ( (role == 'a' || role == 'c' || role == 'm') && m_index.data( MarblePlacemarkModel::PopularityRole ).toInt() > 0) {
+    if ( (role == "a" || role == "c" || role == "m") && m_index.data( MarblePlacemarkModel::PopularityRole ).toInt() > 0) {
         diameter_lbl->setVisible( true );
         diameter_val_lbl->setVisible( true );
     }
 
-    if ( role == 'H' || role == 'V' || role == 'W') {
+    if ( role == "H" || role == "V" || role == "W") {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
         area_val_lbl->setVisible( false );
         area_lbl->setVisible( false );
     }
-    else if ( role == 'P' || role == 'M' ) {
+    else if ( role == "P" || role == "M" ) {
         population_val_lbl->setVisible( false );
         population_lbl->setVisible( false );
         elevation_val_lbl->setVisible( false );
@@ -222,7 +205,7 @@ void PlacemarkInfoDialog::showContent()
         area_val_lbl->setVisible( false );
         area_lbl->setVisible( false );
     }
-    else if ( role == 'O' || role == 'K' || role == 'S'  )
+    else if ( role == "O" || role == "K" || role == "S"  )
     {
         elevation_lbl->setVisible( false );
         elevation_val_lbl->setVisible( false );

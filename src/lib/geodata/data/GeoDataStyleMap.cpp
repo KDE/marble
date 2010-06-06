@@ -22,7 +22,7 @@ class GeoDataStyleMapPrivate
   public:
     QString nodeType() const
     {
-        return GeoDataTypes::GeoDataSyleMapType;
+        return GeoDataTypes::GeoDataStyleMapType;
     }
 
     QString lastKey;

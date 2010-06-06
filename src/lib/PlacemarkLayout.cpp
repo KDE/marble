@@ -332,7 +332,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     const int firstPopularity = firstIndex.data( MarblePlacemarkModel::PopularityRole ).toInt();
     const bool  noFilter = ( firstPopularity == 0 
                              || ( firstPopularity != 0
-                             && firstIndex.data( MarblePlacemarkModel::GeoTypeRole ).toChar().isNull() ) ) 
+                             && firstIndex.data( MarblePlacemarkModel::GeoTypeRole ).toString().isEmpty() ) ) 
                            ? true : false;
     const QItemSelection selection = selectionModel->selection();
 

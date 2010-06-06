@@ -250,13 +250,12 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      *
      * FIXME: describe roles here!
      */
-    const QChar role() const;
+    const QString role() const;
     /**
      * Sets the role of the placemark.
      * @param  role  the new role to be used.
      */
-    void setRole( const QChar &role );
-
+    void setRole( const QString &role );
 
     /**
      * @brief Return the popularity index of the placemark.

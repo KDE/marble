@@ -1,28 +1,21 @@
 CITIES:
 
-The data in the cities.txt file consists of data that was available in 
+The file "cities.txt" and "statecodes.txt" are data dumps from Geonames.org:
+http://geonames.org
 
-http://www.world-gazetteer.com/st/popdata.zip
+The file "cities.txt" contains all cities with a population of
+more than 15000 people. It is contained in the cities15000.zip file at Geonames.org.
 
-and is now available in a more recent version at:
+The file "statecodes.txt" contains the names for the administrative subdivision.
+It is admin1Codes.txt at Geonames.org.
 
-http://www.world-gazetteer.com/dataen.zip
+"cityplacemarks.kml" and "cityplacemarks.cache" are generated from these files as described in the file "HOWTO-cities.txt".
 
-It's reduced down to all entries which provide lat/long data and which describe places with > 15.000 habitants with simplified names. License from
 
-http://bevoelkerungsstatistik.de/wg.php?x=&men=ipge&lng=de&dat=32&srt=npan&col=aohdq#copyright
+This work is licensed under a Creative Commons Attribution 3.0 License,
+see http://creativecommons.org/licenses/by/3.0/
+The Data is provided "as is" without warranty or any representation of accuracy, timeliness or completeness.
 
-Informationen zum Copyright
-alle Daten © 2005 by Stefan Helders
-Dieses Projekt soll als frei verfügbarer Datenlieferant dienen. Einige Anfragen veranlassen mich dazu, die Informationen zum Copyright zu präzisieren. Wer die Daten oder Grafiken auf seiner eigenen Website oder in einem Buch benutzen will, sollte nach Möglichkeit folgenden Hinweis unter den Daten oder im Quellennachweis verwenden: © by Stefan Helders www.world-gazetteer.com
-
-Translation:
-Copyright information
-all data © 2005 by Stefan Helders
-This project is meant to be a freely available data provider. Some requests make me specify the copyright information more precisely. If you want to use the data or pictures on your own website or in a book, please add a note as follows if possible: © by Stefan Helders www.world-gazetteer.com
-
-The data for the Czech Republic were updated using the public database of the Czech Statistical Office which holds the copyright on them. It is permitted to reuse the data as long as the CzSO is mentioned as the source.
-See http://www.czso.cz/eng/redakce.nsf/i/home
 
 OCEANS:
 

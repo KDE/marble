@@ -19,7 +19,6 @@
 
 // Qt
 #include <QtCore/QDataStream>
-
 #include "MarbleDebug.h"
 
 namespace Marble
@@ -190,7 +189,6 @@ void GeoDataPlacemark::pack( QDataStream& stream ) const
     stream << p()->m_countrycode;
     stream << p()->m_area;
     stream << p()->m_population;
-
     stream << p()->m_geometry->geometryId();
     p()->m_geometry->pack( stream );
     p()->m_coordinate.pack( stream );
@@ -218,7 +216,6 @@ void GeoDataPlacemark::unpack( QDataStream& stream )
     stream >> p()->m_countrycode;
     stream >> p()->m_area;
     stream >> p()->m_population;
-
     int geometryId;
     stream >> geometryId;
     switch( geometryId ) {

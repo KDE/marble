@@ -38,7 +38,7 @@ class GeoDataFeaturePrivate
         m_popularityIndex( 19 ),
         m_visible( true ),
         m_visualCategory( GeoDataFeature::Default ),
-        m_role(' '),
+        m_role(" "),
         m_style( 0 ),
         m_styleMap( 0 ),
         m_region(),
@@ -118,7 +118,7 @@ class GeoDataFeaturePrivate
     GeoDataFeature::GeoDataVisualCategory  m_visualCategory; // the visual category
 
 
-    QChar       m_role;
+    QString       m_role;
 
     GeoDataStyle*    m_style;
     GeoDataStyleMap* m_styleMap;

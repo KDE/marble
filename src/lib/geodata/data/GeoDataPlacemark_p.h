@@ -87,7 +87,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
 
     // Data for a Placemark in addition to those in GeoDataFeature.
     GeoDataGeometry    *m_geometry;     // any GeoDataGeometry entry like locations
-    GeoDataPoint        m_coordinate;     // The geographic position
+    GeoDataPoint        m_coordinate;   // The geographic position
     QString             m_countrycode;  // Country code.
     qreal               m_area;         // Area in square kilometer
     qint64              m_population;   // population in number of inhabitants

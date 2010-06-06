@@ -155,7 +155,7 @@ void PlacemarkManager::createFilterProperties( QVector<GeoDataPlacemark> &contai
         bool hasPopularity = false;
 
         // Mountain (H), Volcano (V), Shipwreck (W)
-        if ( placemark.role() == 'H' || placemark.role() == 'V' || placemark.role() == 'W' )
+        if ( placemark.role() == "H" || placemark.role() == "V" || placemark.role() == "W" )
         {
             qreal altitude = placemark.coordinate().altitude();
             if ( altitude != 0.0 )
@@ -166,7 +166,7 @@ void PlacemarkManager::createFilterProperties( QVector<GeoDataPlacemark> &contai
             }
         }
         // Continent (K), Ocean (O), Nation (S)
-        else if ( placemark.role() == 'K' || placemark.role() == 'O' || placemark.role() == 'S' )
+        else if ( placemark.role() == "K" || placemark.role() == "O" || placemark.role() == "S" )
         {
             qreal area = placemark.area();
             if ( area >= 0.0 )
@@ -178,52 +178,52 @@ void PlacemarkManager::createFilterProperties( QVector<GeoDataPlacemark> &contai
             }
         }
         // Pole (P)
-        else if ( placemark.role() == 'P' )
+        else if ( placemark.role() == "P" )
         {
             placemark.setPopularity( 1000000000 );
             placemark.setPopularityIndex( 18 );
         }
         // Magnetic Pole (M)
-        else if ( placemark.role() == 'M' )
+        else if ( placemark.role() == "M" )
         {
             placemark.setPopularity( 10000000 );
             placemark.setPopularityIndex( 13 );
         }
         // MannedLandingSite (h)
-        else if ( placemark.role() == 'h' )
+        else if ( placemark.role() == "h" )
         {
             placemark.setPopularity( 1000000000 );
             placemark.setPopularityIndex( 18 );
         }
         // RoboticRover (r)
-        else if ( placemark.role() == 'r' )
+        else if ( placemark.role() == "r" )
         {
             placemark.setPopularity( 10000000 );
             placemark.setPopularityIndex( 16 );
         }
         // UnmannedSoftLandingSite (u)
-        else if ( placemark.role() == 'u' )
+        else if ( placemark.role() == "u" )
         {
             placemark.setPopularity( 1000000 );
             placemark.setPopularityIndex( 14 );
         }
         // UnmannedSoftLandingSite (i)
-        else if ( placemark.role() == 'i' )
+        else if ( placemark.role() == "i" )
         {
             placemark.setPopularity( 1000000 );
             placemark.setPopularityIndex( 14 );
         }
         // Space Terrain: Craters, Maria, Montes, Valleys, etc.
-        else if (    placemark.role() == 'm' || placemark.role() == 'v'
-                  || placemark.role() == 'o' || placemark.role() == 'c'
-                  || placemark.role() == 'a' )
+        else if (    placemark.role() == "m" || placemark.role() == "v"
+                  || placemark.role() == "o" || placemark.role() == "c"
+                  || placemark.role() == "a" )
         {
             qint64 diameter = placemark.population();
             if ( diameter >= 0 )
             {
                 hasPopularity = true;
                 placemark.setPopularity( diameter );
-                if ( placemark.role() == 'c' ) {
+                if ( placemark.role() == "c" ) {
                     placemark.setPopularityIndex( spacePopIdx( diameter ) );
                     if ( placemark.name() == "Tycho" || placemark.name() == "Copernicus" ) {
                         placemark.setPopularityIndex( 17 );
@@ -233,7 +233,7 @@ void PlacemarkManager::createFilterProperties( QVector<GeoDataPlacemark> &contai
                     placemark.setPopularityIndex( spacePopIdx( diameter ) );
                 }
 
-                if ( placemark.role() == 'a' && diameter == 0 ) {
+                if ( placemark.role() == "a" && diameter == 0 ) {
                     placemark.setPopularity( 1000000000 );
                     placemark.setPopularityIndex( 18 );
                 }
@@ -252,47 +252,50 @@ void PlacemarkManager::createFilterProperties( QVector<GeoDataPlacemark> &contai
 
 //  Then we set the visual category:
 
-        if ( placemark.role() == 'H' )      placemark.setVisualCategory( GeoDataPlacemark::Mountain );
-        else if ( placemark.role() == 'V' ) placemark.setVisualCategory( GeoDataPlacemark::Volcano );
+        if ( placemark.role() == "H" )      placemark.setVisualCategory( GeoDataPlacemark::Mountain );
+        else if ( placemark.role() == "V" ) placemark.setVisualCategory( GeoDataPlacemark::Volcano );
 
-        else if ( placemark.role() == 'm' ) placemark.setVisualCategory( GeoDataPlacemark::Mons );
-        else if ( placemark.role() == 'v' ) placemark.setVisualCategory( GeoDataPlacemark::Valley );
-        else if ( placemark.role() == 'o' ) placemark.setVisualCategory( GeoDataPlacemark::OtherTerrain );
-        else if ( placemark.role() == 'c' ) placemark.setVisualCategory( GeoDataPlacemark::Crater );
-        else if ( placemark.role() == 'a' ) placemark.setVisualCategory( GeoDataPlacemark::Mare );
+        else if ( placemark.role() == "m" ) placemark.setVisualCategory( GeoDataPlacemark::Mons );
+        else if ( placemark.role() == "v" ) placemark.setVisualCategory( GeoDataPlacemark::Valley );
+        else if ( placemark.role() == "o" ) placemark.setVisualCategory( GeoDataPlacemark::OtherTerrain );
+        else if ( placemark.role() == "c" ) placemark.setVisualCategory( GeoDataPlacemark::Crater );
+        else if ( placemark.role() == "a" ) placemark.setVisualCategory( GeoDataPlacemark::Mare );
 
-        else if ( placemark.role() == 'P' ) placemark.setVisualCategory( GeoDataPlacemark::GeographicPole );
-        else if ( placemark.role() == 'M' ) placemark.setVisualCategory( GeoDataPlacemark::MagneticPole );
-        else if ( placemark.role() == 'W' ) placemark.setVisualCategory( GeoDataPlacemark::ShipWreck );
-        else if ( placemark.role() == 'F' ) placemark.setVisualCategory( GeoDataPlacemark::AirPort );
-        else if ( placemark.role() == 'A' ) placemark.setVisualCategory( GeoDataPlacemark::Observatory );
-        else if ( placemark.role() == 'K' ) placemark.setVisualCategory( GeoDataPlacemark::Continent );
-        else if ( placemark.role() == 'O' ) placemark.setVisualCategory( GeoDataPlacemark::Ocean );
-        else if ( placemark.role() == 'S' ) placemark.setVisualCategory( GeoDataPlacemark::Nation );
-        else if ( placemark.role() == 'N' ) placemark.setVisualCategory(
+        else if ( placemark.role() == "P" ) placemark.setVisualCategory( GeoDataPlacemark::GeographicPole );
+        else if ( placemark.role() == "M" ) placemark.setVisualCategory( GeoDataPlacemark::MagneticPole );
+        else if ( placemark.role() == "W" ) placemark.setVisualCategory( GeoDataPlacemark::ShipWreck );
+        else if ( placemark.role() == "F" ) placemark.setVisualCategory( GeoDataPlacemark::AirPort );
+        else if ( placemark.role() == "A" ) placemark.setVisualCategory( GeoDataPlacemark::Observatory );
+        else if ( placemark.role() == "K" ) placemark.setVisualCategory( GeoDataPlacemark::Continent );
+        else if ( placemark.role() == "O" ) placemark.setVisualCategory( GeoDataPlacemark::Ocean );
+        else if ( placemark.role() == "S" ) placemark.setVisualCategory( GeoDataPlacemark::Nation );
+        else 
+	if ( placemark.role()=="PPL" ) placemark.setVisualCategory(
             ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallCity )
                 + ( placemark.popularityIndex() -1 ) / 4 * 4 ) ) );
-        else if ( placemark.role() == 'R' ) placemark.setVisualCategory(
+        else if ( placemark.role() == "PPLA" ) placemark.setVisualCategory(
             ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallStateCapital )
                 + ( placemark.popularityIndex() -1 ) / 4 * 4 ) ) );
-        else if ( placemark.role() == 'C' || placemark.role() == 'B' ) placemark.setVisualCategory(
+        else if ( placemark.role()=="PPLC" ) placemark.setVisualCategory(
             ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallNationCapital )
                 + ( placemark.popularityIndex() -1 ) / 4 * 4 ) ) );
-
-        else if ( placemark.role() == ' ' && !hasPopularity && placemark.visualCategory() == GeoDataPlacemark::Unknown ) {
+        else if ( placemark.role()=="PPLA2" || placemark.role()=="PPLA3" ) placemark.setVisualCategory(
+            ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallCountyCapital )
+                + ( placemark.popularityIndex() -1 ) / 4 * 4 ) ) );
+        else if ( placemark.role()==" " && !hasPopularity && placemark.visualCategory() == GeoDataPlacemark::Unknown ) {
             placemark.setVisualCategory( GeoDataPlacemark::Unknown ); // default location
             placemark.setPopularityIndex(0);
         }
-        else if ( placemark.role() == 'h' ) placemark.setVisualCategory( GeoDataPlacemark::MannedLandingSite );
-        else if ( placemark.role() == 'r' ) placemark.setVisualCategory( GeoDataPlacemark::RoboticRover );
-        else if ( placemark.role() == 'u' ) placemark.setVisualCategory( GeoDataPlacemark::UnmannedSoftLandingSite );
-        else if ( placemark.role() == 'i' ) placemark.setVisualCategory( GeoDataPlacemark::UnmannedHardLandingSite );
+        else if ( placemark.role() == "h" ) placemark.setVisualCategory( GeoDataPlacemark::MannedLandingSite );
+        else if ( placemark.role() == "r" ) placemark.setVisualCategory( GeoDataPlacemark::RoboticRover );
+        else if ( placemark.role() == "u" ) placemark.setVisualCategory( GeoDataPlacemark::UnmannedSoftLandingSite );
+        else if ( placemark.role() == "i" ) placemark.setVisualCategory( GeoDataPlacemark::UnmannedHardLandingSite );
 
-        if ( placemark.role() == 'W' && placemark.popularityIndex() > 12 )
+        if ( placemark.role() == "W" && placemark.popularityIndex() > 12 )
             placemark.setPopularityIndex( 12 );
-        if ( placemark.role() == 'O' )
+        if ( placemark.role() == "O" )
             placemark.setPopularityIndex( 16 );
-        if ( placemark.role() == 'K' )
+        if ( placemark.role() == "K" )
             placemark.setPopularityIndex( 19 );
         if ( !placemark.isVisible() ) {
             placemark.setPopularityIndex( -1 );

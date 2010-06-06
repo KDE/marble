@@ -60,7 +60,6 @@ QString MarbleDirs::path( const QString& relativePath )
     if ( QFile::exists( localpath ) ) {
         fullpath = localpath;
     }
-
     return QDir( fullpath ).canonicalPath(); 
 }
 
