@@ -40,18 +40,18 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
 {
     GeoDataDocument* doc = geoDataDoc( parser );
 
-    GeoDataStyle *style = new GeoDataStyle();
+    GeoDataStyle style;
     GeoDataLineStyle lineStyle;
     lineStyle.setColor(Qt::green);
     lineStyle.setWidth(2);
-    style->setLineStyle(lineStyle);
-    style->setStyleId("track");
+    style.setLineStyle(lineStyle);
+    style.setStyleId("track");
 
     GeoDataStyleMap *styleMap = new GeoDataStyleMap();
     styleMap->setStyleId("map-track");
-    styleMap->insert("normal", QString("#").append(style->styleId()));
+    styleMap->insert("normal", QString("#").append(style.styleId()));
     doc->addStyleMap(*styleMap);
-    doc->addStyle(*style);
+    doc->addStyle(style);
 
 #ifdef DEBUG_TAGS
     mDebug() << "Parsed <" << gpxTag_gpx << "> document: " << doc;
