@@ -27,6 +27,8 @@
 #include "GeoDataParser.h"
 
 #include "GeoDataDocument.h"
+#include "GeoDataStyle.h"
+#include "GeoDataStyleMap.h"
 
 namespace Marble
 {
@@ -37,6 +39,20 @@ GPX_DEFINE_TAG_HANDLER(gpx)
 GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
 {
     GeoDataDocument* doc = geoDataDoc( parser );
+
+    GeoDataStyle *style = new GeoDataStyle();
+    GeoDataLineStyle lineStyle;
+    lineStyle.setColor(Qt::green);
+    lineStyle.setWidth(2);
+    style->setLineStyle(lineStyle);
+    style->setStyleId("track");
+
+    GeoDataStyleMap *styleMap = new GeoDataStyleMap();
+    styleMap->setStyleId("map-track");
+    styleMap->insert("normal", QString("#").append(style->styleId()));
+    doc->addStyleMap(*styleMap);
+    doc->addStyle(*style);
+
 #ifdef DEBUG_TAGS
     mDebug() << "Parsed <" << gpxTag_gpx << "> document: " << doc;
 #endif
