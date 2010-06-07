@@ -47,10 +47,10 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
     style.setLineStyle(lineStyle);
     style.setStyleId("track");
 
-    GeoDataStyleMap *styleMap = new GeoDataStyleMap();
-    styleMap->setStyleId("map-track");
-    styleMap->insert("normal", QString("#").append(style.styleId()));
-    doc->addStyleMap(*styleMap);
+    GeoDataStyleMap styleMap;
+    styleMap.setStyleId("map-track");
+    styleMap.insert("normal", QString("#").append(style.styleId()));
+    doc->addStyleMap(styleMap);
     doc->addStyle(style);
 
 #ifdef DEBUG_TAGS
