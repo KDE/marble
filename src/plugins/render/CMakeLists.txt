@@ -21,6 +21,10 @@ add_subdirectory( navigation )
 
 # add_subdirectory( dataview )
 # add_subdirectory( fileview )
+
+# FIXME: this is disabled for now because it uses private
+# Qt headers which currently don't get installed by emerge
+# (see Bug 241125)
 if (NOT WIN32)
   add_subdirectory( aprs )
 endif (NOT WIN32)
