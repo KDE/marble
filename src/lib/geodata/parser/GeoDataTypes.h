@@ -35,7 +35,9 @@ namespace GeoDataTypes
  */
 extern const char* GeoDataColorStyleType;
 extern const char* GeoDataContainerType;
+extern const char* GeoDataDataType;
 extern const char* GeoDataDocumentType;
+extern const char* GeoDataExtendedDataType;
 extern const char* GeoDataFeatureType;
 extern const char* GeoDataFolderType;
 extern const char* GeoDataGeometryType;

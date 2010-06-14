@@ -49,13 +49,16 @@ namespace kml
     extern const char* kmlTag_cookie;
     extern const char* kmlTag_coordinates;
     extern const char* kmlTag_Create;
+    extern const char* kmlTag_Data;
     extern const char* kmlTag_Delete;
     extern const char* kmlTag_description;
+    extern const char* kmlTag_displayName;
     extern const char* kmlTag_Document;
     extern const char* kmlTag_drawOrder;
     extern const char* kmlTag_east;
     extern const char* kmlTag_end;
     extern const char* kmlTag_expires;
+    extern const char* kmlTag_ExtendedData;
     extern const char* kmlTag_extrude;
     extern const char* kmlTag_Feature;
     extern const char* kmlTag_fill;
@@ -162,6 +165,7 @@ namespace kml
     extern const char* kmlTag_TimeStamp;
     extern const char* kmlTag_Update;
     extern const char* kmlTag_Url;
+    extern const char* kmlTag_value;
     extern const char* kmlTag_viewBoundScale;
     extern const char* kmlTag_viewFormat;
     extern const char* kmlTag_viewRefreshMode;

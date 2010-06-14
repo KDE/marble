@@ -1,0 +1,75 @@
+//
+// This file is part of the Marble Desktop Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// Copyright 2010      Harshit Jain <hjain.itbhu@gmail.com>
+//
+
+#ifndef MARBLE_GEODATADATA_H
+#define MARBLE_GEODATADATA_H
+
+#include <QtCore/QString>
+#include <QtCore/QVariant>
+
+#include "GeoDataObject.h"
+
+#include "geodata_export.h"
+
+namespace Marble
+{
+
+class GeoDataDataPrivate;
+
+class GEODATA_EXPORT GeoDataData : public GeoDataObject
+{
+  public:
+    GeoDataData();
+    GeoDataData( const GeoDataData& other );
+    virtual ~GeoDataData();
+
+    /**
+     * @brief assignment operator
+     */
+    GeoDataData& operator=( const GeoDataData& other );
+
+    /// Provides type information for downcasting a GeoData
+    virtual QString nodeType() const;
+    
+    /**
+    * @brief return the value of data
+    */
+    QVariant value() const;
+
+    /**
+    * @brief set the value of data
+    * @param value the value to be set
+    */
+    void setValue( const QVariant& value );
+
+    /**
+    * @brief return the displayName of data
+    */
+    QString displayName() const;
+
+    /**
+    * @brief set the displayName of data
+    * @param value the displayName to be set
+    */
+    void setDisplayName( const QString& displayName );
+
+    /// Serialize the contents of the feature to @p stream.
+    virtual void pack( QDataStream& stream ) const;
+
+    /// Unserialize the contents of the feature from @p stream.
+    virtual void unpack( QDataStream& stream );
+
+  private:
+    GeoDataDataPrivate * const d;
+};
+
+}
+
+#endif //MARBLE_GEODATADATA_H

@@ -28,7 +28,9 @@ namespace GeoDataTypes
 {
 const char* GeoDataColorStyleType = "GeoDataColorStyle";
 const char* GeoDataContainerType = "GeoDataContainer";
+const char* GeoDataDataType = "GeoDataData";
 const char* GeoDataDocumentType = "GeoDataDocument";
+const char* GeoDataExtendedDataType = "GeoDataExtendedData";
 const char* GeoDataFeatureType = "GeoDataFeature";
 const char* GeoDataFolderType = "GeoDataFolder";
 const char* GeoDataGeometryType = "GeoDataGeometry";

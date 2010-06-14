@@ -482,6 +482,17 @@ void GeoDataFeature::setStyle( GeoDataStyle* style )
     d->m_style = style;
 }
 
+GeoDataExtendedData& GeoDataFeature::extendedData() const
+{
+    return d->m_extendedData;
+}
+
+void GeoDataFeature::setExtendedData( const GeoDataExtendedData& extendedData )
+{
+    detach();
+    d->m_extendedData = extendedData;
+}
+
 GeoDataRegion& GeoDataFeature::region() const
 {
     return d->m_region;

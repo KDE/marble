@@ -38,6 +38,7 @@ class GeoDataAbstractView;
 class GeoDataStyle;
 class GeoDataStyleMap;
 
+class GeoDataExtendedData;
 
 class GeoDataFeaturePrivate;
 
@@ -222,6 +223,17 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * @param  style  the new style to be used.
      */
     void setStyle( GeoDataStyle* style );
+
+    /**
+     * Return the ExtendedData assigned to the feature.
+     */
+    GeoDataExtendedData& extendedData() const;
+
+    /**
+     * Sets the ExtendedData of the feature.
+     * @param  extendedData  the new ExtendedData to be used.
+     */
+    void setExtendedData( const GeoDataExtendedData& extendedData );
 
     /**
      * Return the region assigned to the placemark.

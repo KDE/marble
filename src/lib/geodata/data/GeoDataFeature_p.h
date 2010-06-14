@@ -14,6 +14,7 @@
 #include <QtCore/QString>
 #include <QtCore/QAtomicInt>
 
+#include "GeoDataExtendedData.h"
 #include "GeoDataAbstractView.h"
 #include "GeoDataFeature.h"
 #include "GeoDataRegion.h"
@@ -41,6 +42,7 @@ class GeoDataFeaturePrivate
         m_role(" "),
         m_style( 0 ),
         m_styleMap( 0 ),
+        m_extendedData(),
         m_region(),
         ref( 0 )
     {
@@ -60,6 +62,7 @@ class GeoDataFeaturePrivate
         m_role( other.m_role ),
         m_style( other.m_style ),               //FIXME: both style and stylemap need to be reworked internally!!!!
         m_styleMap( other.m_styleMap ),
+        m_extendedData( other.m_extendedData ),
         m_region( other.m_region ),
         ref( 0 )
     {
@@ -80,6 +83,7 @@ class GeoDataFeaturePrivate
         m_style = other.m_style;
         m_styleMap = other.m_styleMap;
         m_visualCategory = other.m_visualCategory;
+        m_extendedData = other.m_extendedData;
         m_region = other.m_region;
     }
     
@@ -122,6 +126,8 @@ class GeoDataFeaturePrivate
 
     GeoDataStyle*    m_style;
     GeoDataStyleMap* m_styleMap;
+
+    GeoDataExtendedData m_extendedData;
 
     GeoDataRegion m_region;
     
