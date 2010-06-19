@@ -223,10 +223,6 @@ void MarbleWidgetPrivate::construct()
     // displayed on the widget background.
     m_widget->setAutoFillBackground( true );
 
-    // Track the GPS current point at timely intervals.
-    m_widget->connect( m_model, SIGNAL( timeout() ),
-                       m_widget, SLOT( updateGps() ) );
-
     // Show a progress dialog when the model calculates new map tiles.
     m_widget->connect( m_model, SIGNAL( creatingTilesStart( TileCreator*, const QString&,
                                                             const QString& ) ),
@@ -1058,11 +1054,6 @@ void MarbleWidget::notifyMouseClick( int x, int y)
     if ( valid ) {
         emit mouseClickGeoPosition( lon, lat, GeoDataCoordinates::Radian );
     }
-}
-
-void MarbleWidget::updateGps()
-{
-    update();
 }
 
 void MarbleWidget::openGpxFile( const QString &filename )

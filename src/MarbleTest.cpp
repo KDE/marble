@@ -128,7 +128,7 @@ void MarbleTest::gpsDemo()
                 m_marbleWidget->moveRight();
             }
             t.start();
-            m_marbleWidget->updateGps();
+//            m_marbleWidget->updateGps();
             temp = t.elapsed();
 //             qDebug("time elapsed moving %d",temp);
             totalMoving += temp;
@@ -138,7 +138,7 @@ void MarbleTest::gpsDemo()
         
         for( int i = 0; i< 10 ;i++ ){
             t.start();
-            m_marbleWidget->updateGps();
+//            m_marbleWidget->updateGps();
             temp=t.elapsed();
 //             qDebug("time elapsed static %d",t.elapsed());
             totalStatic+=temp;

@@ -100,6 +100,11 @@ QString MarbleDataFacade::target() const
     return QString();
 }
 
+PositionTracking* MarbleDataFacade::positionTracking() const
+{
+    return d->m_model->positionTracking();
+}
+
 MarbleGeoDataModel* MarbleDataFacade::geoDataModel()
 {
     return d->m_geodatamodel;

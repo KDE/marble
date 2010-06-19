@@ -323,14 +323,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void modelChanged();
 
     /**
-     * @brief Signal that a timer has gone off.
-     *
-     * This is currently used only for GPS things right now, but will
-     * likely be used for more things in the future.
-     */
-    void timeout();
-
-    /**
      * This signal is emit when the settings of a plugin changed.
      */
     void pluginSettingsChanged();

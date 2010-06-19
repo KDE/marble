@@ -44,6 +44,7 @@ class FileViewModel;
 class MarbleDataFacadePrivate;
 class Planet;
 class PluginManager;
+class PositionTracking;
 
 /**
  * @short A read-only interface to internal Marble data.
@@ -75,6 +76,8 @@ class MARBLE_EXPORT MarbleDataFacade
     QDateTime dateTime() const;
 
     QString target() const;
+
+    PositionTracking* positionTracking() const;
 
     MarbleGeoDataModel* geoDataModel();
     

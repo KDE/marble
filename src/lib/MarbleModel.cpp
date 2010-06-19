@@ -145,9 +145,6 @@ class MarbleModelPrivate
     PositionTracking        *m_positionTracking;
     GpxFileModel            *m_gpxFileModel;
 
-    QTimer                  *m_timer;
-
-
     Planet                  *m_planet;
 };
 
@@ -226,12 +223,6 @@ MarbleModel::MarbleModel( QObject *parent )
     connect ( d->m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
               this,              SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
 
-    d->m_timer = new QTimer( this );
-    d->m_timer->start( 1000 );
-
-    connect( d->m_timer, SIGNAL( timeout() ),
-             this,       SIGNAL( timeout() ) );
-
     d->m_dateTime       = new ExtDateTime();
     /* Assume we are dealing with the earth */
     d->m_planet = new Planet( "earth" );
@@ -260,7 +251,6 @@ MarbleModel::~MarbleModel()
     delete d->m_placemarkmanager;
     delete d->m_fileManager;
     delete d->m_mapTheme;
-    delete d->m_timer;
     delete d->m_layerManager;
     delete d->m_dataFacade;
     delete d->m_layerDecorator;
@@ -643,10 +633,6 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     painter->save();
     QSize canvasSize = viewParams->canvasImage()->size();
     if ( viewParams->showGps() ) {
-        QRegion temp; // useless variable
-        d->m_positionTracking->update( canvasSize, viewParams, temp );
-        d->m_positionTracking->draw( painter, canvasSize, viewParams );
-
         const QVector<GpxFile*> * const allFiles = d->m_gpxFileModel->allFiles();
         QVector<GpxFile*>::const_iterator it;
         for( it = allFiles->constBegin();

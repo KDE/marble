@@ -852,11 +852,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void notifyMouseClick( int x, int y );
 
     /**
-     * @brief Updates the gps tracking point by polling
-     */
-    void updateGps();
-
-    /**
      * @brief Opens a gpx file for viewing on the Marble Widget
      */
     void openGpxFile( const QString &filename );

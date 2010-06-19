@@ -745,11 +745,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void notifyMouseClick( int x, int y );
 
     /**
-     * @brief updates the gps tracking point by polling
-     */
-    void updateGps();
-
-    /**
      * @brief Opens a gpx file for viewing on the Marble Map
      */
     void openGpxFile( const QString &filename );

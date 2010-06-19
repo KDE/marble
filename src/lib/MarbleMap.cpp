@@ -91,9 +91,6 @@ void MarbleMapPrivate::construct()
     
     m_measureTool = new MeasureTool( m_model, m_parent );
 
-    m_parent->connect( m_model, SIGNAL( timeout() ),
-                       m_parent, SLOT( updateGps() ) );
-
 
     m_logzoom  = 0;
     m_zoomStep = 40;
@@ -1133,18 +1130,6 @@ void MarbleMap::notifyMouseClick( int x, int y )
     if ( valid ) {
         emit mouseClickGeoPosition( lon, lat, GeoDataCoordinates::Radian );
     }
-}
-
-void MarbleMap::updateGps()
-{
-    QRegion temp;
-//    const bool draw = 
-    d->m_model->positionTracking()->update( size(),&d->m_viewParams, temp );
-#if 0  // FIXME: move to MarbleWidget?
-    if ( draw ) {
-        update(temp);
-    }
-#endif
 }
 
 void MarbleMap::openGpxFile( const QString &filename )
