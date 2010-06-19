@@ -141,6 +141,10 @@ class MARBLE_EXPORT AbstractProjection
                             const ViewportParams *viewport,
                             qreal &x, qreal &y );
 
+    bool screenCoordinates( const GeoDataCoordinates &geopoint,
+                            const ViewportParams *viewport,
+                            QPointF &screenpoint );
+
     /**
      * @brief Get the coordinates of screen points for geographical coordinates in the map.
      *

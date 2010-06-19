@@ -23,15 +23,12 @@
 namespace Marble
 {
 
+class GeoDataDocument;
 class ClipPainter;
-class GpxFile;
-class Track;
-class TrackPoint;
-class TrackSegment;
 class ViewParams;
-class Waypoint;
 class GeoDataCoordinates;
 class PluginManager;
+class MarbleGeometryModel;
 
 class PositionTracking : public QObject 
 {
@@ -39,7 +36,7 @@ class PositionTracking : public QObject
 
 public:
 
-    explicit PositionTracking( GpxFile *currentGpx,
+    explicit PositionTracking( MarbleGeometryModel *geometryModel,
                           QObject *parent = 0 );
     ~PositionTracking();
 
@@ -87,7 +84,7 @@ public slots:
                           GeoDataAccuracy accuracy );
 
  private:
-    void updateSpeed( TrackPoint* previous, TrackPoint* next );
+    void updateSpeed( GeoDataCoordinates& previous, GeoDataCoordinates next );
 
     qreal               m_speed;
     //used to draw the arrow in gps tracking
@@ -97,13 +94,11 @@ public slots:
     QPolygonF           m_currentDraw;
     QPolygonF           m_previousDraw;
 
-    Waypoint            *m_currentPosition;
-    TrackPoint          *m_gpsCurrentPosition;
-    TrackPoint          *m_gpsPreviousPosition;
+    GeoDataDocument     *m_document;
+    MarbleGeometryModel *m_geometryModel;
 
-    TrackPoint          *m_gpsTracking;
-    Track               *m_gpsTrack;
-    TrackSegment        *m_gpsTrackSeg;
+    GeoDataCoordinates  m_gpsCurrentPosition;
+    GeoDataCoordinates  m_gpsPreviousPosition;
 
     PositionProviderPlugin* m_positionProvider;
 };

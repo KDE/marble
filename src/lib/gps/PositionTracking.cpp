@@ -11,38 +11,39 @@
 
 #include "PositionTracking.h"
 
+#include "GeoDataDocument.h"
+#include "GeoDataPlacemark.h"
 #include "ClipPainter.h"
-#include "GpxFile.h"
-#include "Track.h"
-#include "TrackPoint.h"
-#include "TrackSegment.h"
+#include "AbstractProjection.h"
 #include "MarbleMath.h"
 #include "MarbleDebug.h"
+#include "MarbleGeometryModel.h"
 #include "ViewParams.h"
 
 using namespace Marble;
 
-PositionTracking::PositionTracking( GpxFile *currentGpx,
+PositionTracking::PositionTracking( MarbleGeometryModel *geometryModel,
                           QObject *parent ) 
-     : QObject( parent ), m_positionProvider(0)
+     : QObject( parent ), m_geometryModel(geometryModel), m_positionProvider(0)
 {
-    m_gpsCurrentPosition  = new TrackPoint( 0,0 );
-    m_gpsPreviousPosition = new TrackPoint( 0,0 );
-    m_gpsTracking         = new TrackPoint( 0,0 );
+    m_document     = new GeoDataDocument();
 
-    m_gpsTrack    = new Track();
-    currentGpx->addTrack( m_gpsTrack );
-    m_gpsTrackSeg = 0;
+    GeoDataPlacemark placemark;
+    GeoDataMultiGeometry multiGeometry;
+    GeoDataLineString lineString;
+
+    multiGeometry.append(lineString);
+    placemark.setGeometry(multiGeometry);
+    m_document->append(placemark);
+
+    m_geometryModel->setGeoDataRoot(m_document);
+    connect(this, SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
+            m_geometryModel, SLOT(update()));
 }
 
 
 PositionTracking::~PositionTracking()
 {
-    delete m_gpsCurrentPosition;
-    delete m_gpsPreviousPosition;
-    delete m_gpsTracking;
-
-    delete m_gpsTrack;
 }
 
 
@@ -52,9 +53,12 @@ void PositionTracking::construct( const QSize &canvasSize,
     QPointF position;
     QPointF previousPosition;
 
-    m_gpsCurrentPosition->getPixelPos( canvasSize, viewParams, &position );
-    m_gpsPreviousPosition->getPixelPos( canvasSize, viewParams, &previousPosition );
-
+    viewParams->currentProjection()->screenCoordinates(m_gpsCurrentPosition,
+                                                       viewParams->viewport(),
+                                                       position);
+    viewParams->currentProjection()->screenCoordinates(m_gpsPreviousPosition,
+                                                       viewParams->viewport(),
+                                                       previousPosition);
 
     QPointF unitVector = ( position - previousPosition  ) ;
 
@@ -76,14 +80,12 @@ void PositionTracking::construct( const QSize &canvasSize,
 }
 
 
-void PositionTracking::updateSpeed( TrackPoint* previous, TrackPoint* next )
+void PositionTracking::updateSpeed( GeoDataCoordinates& previous, GeoDataCoordinates next )
 {
     //This function makes the assumption that the update stage happens once
     //every second.
-    qreal distance = distanceSphere( previous->position().longitude(),
-                                     previous->position().latitude(),
-                                     next->position().longitude(),
-                                     next->position().latitude() );
+    qreal distance = distanceSphere( previous,
+                                     next );
     m_speed = distance * 60 * 60;
 }
 
@@ -93,29 +95,25 @@ void PositionTracking::setPosition( GeoDataCoordinates position,
     if ( m_positionProvider && m_positionProvider->status() ==
         PositionProviderStatusAvailable )
     {
-        m_gpsTracking->setPosition( position );
-        m_gpsTracking->setPosition( GeoDataCoordinates ( m_gpsTracking->position().longitude(GeoDataCoordinates::Degree),
-                                                         m_gpsTracking->position().latitude( GeoDataCoordinates::Degree ),
-                                                         m_gpsTracking->position().altitude(), GeoDataCoordinates::Degree ) );
 
+        GeoDataPlacemark placemark = m_document->features().last();
+        GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>(placemark.geometry());
+        GeoDataLineString &lineString = static_cast<GeoDataLineString&>(geometry->last());
+        lineString.append(position);
 
-        if (m_gpsTrackSeg == 0 ) {
-            m_gpsTrackSeg = new TrackSegment();
-            m_gpsTrack->append( m_gpsTrackSeg );
+        if (m_geometryModel->geoDataRoot() != m_document) {
+            mDebug() << "setting geometrymodel";
+            m_geometryModel->setGeoDataRoot(m_document);
         }
+        mDebug() << "geometry size " << lineString.size();
 
         //if the position has moved then update the current position
-        if ( !( m_gpsPreviousPosition->position() ==
-                m_gpsTracking->position() ) )
+        if ( !( m_gpsCurrentPosition ==
+                position ) )
         {
-            m_gpsTrackSeg->append( m_gpsPreviousPosition );
-            m_gpsPreviousPosition = m_gpsCurrentPosition;
-            m_gpsCurrentPosition = new TrackPoint( *m_gpsTracking );
-            emit gpsLocation( m_gpsTracking->position(), m_speed );
-        }
-    } else {
-        if ( m_gpsTrackSeg && m_gpsTrackSeg->count() > 0 ) {
-            m_gpsTrackSeg = 0;
+
+            m_gpsCurrentPosition = position;
+            emit gpsLocation( position, m_speed );
         }
     }
 }
@@ -128,12 +126,12 @@ bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
     {
         //updateSpeed updates the speed to radians and needs
         //to be multiplied by the radius
-        updateSpeed( m_gpsPreviousPosition, m_gpsTracking );
+        updateSpeed( m_gpsPreviousPosition, m_gpsCurrentPosition );
         m_speed *= viewParams->radius();
 
         //if the position has moved then update the current position
-        if ( !( m_gpsPreviousPosition->position() ==
-                m_gpsTracking->position() ) )
+        if ( !( m_gpsPreviousPosition ==
+                m_gpsCurrentPosition ) )
         {
             construct( canvasSize, viewParams );
 
@@ -145,7 +143,7 @@ bool PositionTracking::update(const QSize &canvasSize, ViewParams *viewParams,
                 rect.adjust( -5, -5, 10, 10 );
                 reg |= rect ;
             }
-
+            m_gpsPreviousPosition = m_gpsCurrentPosition;
             return true;
         } else {
             return false;
