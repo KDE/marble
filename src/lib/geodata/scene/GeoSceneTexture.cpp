@@ -163,7 +163,7 @@ QString GeoSceneTexture::relativeTileFileName( const TileId &id ) const
             .arg( id.x(), tileDigits, 10, QChar('0') )
             .arg( suffix );
         break;
-    case GeoSceneTexture::Other:
+    case GeoSceneTexture::OpenStreetMap:
         relFileName = QString( "%1/%2/%3/%4.%5" )
             .arg( themeStr() )
             .arg( id.zoomLevel() )

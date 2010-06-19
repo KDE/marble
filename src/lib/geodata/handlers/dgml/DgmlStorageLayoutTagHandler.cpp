@@ -67,7 +67,7 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
         GeoSceneTexture *texture = parentItem.nodeAs<GeoSceneTexture>();
 
         // Attribute mode
-        GeoSceneTexture::StorageLayout storageLayout = GeoSceneTexture::Other;
+        GeoSceneTexture::StorageLayout storageLayout = GeoSceneTexture::OpenStreetMap;
         ServerLayout *serverLayout = 0;
         const QString modeStr = parser.attribute(dgmlAttr_mode).trimmed();
         if ( modeStr == "OpenStreetMap" )
