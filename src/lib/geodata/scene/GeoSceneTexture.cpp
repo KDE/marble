@@ -118,9 +118,16 @@ GeoSceneTexture::Projection GeoSceneTexture::projection() const
     return m_projection;
 }
 
-void GeoSceneTexture::setProjection( const Projection projection )
+bool GeoSceneTexture::setProjection( const QString &name )
 {
-    m_projection = projection;
+    if ( name == "Equirectangular" )
+        m_projection = GeoSceneTexture::Equirectangular;
+    else if ( name == "Mercator" )
+        m_projection = GeoSceneTexture::Mercator;
+    else
+        return false;
+
+    return true;
 }
 
 QUrl GeoSceneTexture::downloadUrl( const TileId &id )
