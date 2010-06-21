@@ -24,18 +24,24 @@
 namespace Marble
 {
 
+// pre-conditions:
+// - bottom and top image have the same size
+// - bottom image format is ARGB32_Premultiplied
 void IndependentChannelBlending::blend( QImage * const bottom,
                                         QSharedPointer<TextureTile> const & top ) const
 {
     QImage const * const topImage = top->image();
     Q_ASSERT( topImage );
     Q_ASSERT( bottom->size() == topImage->size() );
+    Q_ASSERT( bottom->format() == QImage::Format_ARGB32_Premultiplied );
+
     int const width = bottom->width();
     int const height = bottom->height();
+    QImage const topImagePremult = topImage->convertToFormat( QImage::Format_ARGB32_Premultiplied );
     for ( int y = 0; y < height; ++y ) {
         for ( int x = 0; x < width; ++x ) {
             QRgb const bottomPixel = bottom->pixel( x, y );
-            QRgb const topPixel = topImage->pixel( x, y );
+            QRgb const topPixel = topImagePremult.pixel( x, y );
             qreal const resultRed = blendChannel( qRed( bottomPixel ) / 255.0,
                                                   qRed( topPixel ) / 255.0 );
             qreal const resultGreen = blendChannel( qGreen( bottomPixel ) / 255.0,
