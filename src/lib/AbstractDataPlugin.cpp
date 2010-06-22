@@ -159,6 +159,11 @@ QList<AbstractDataPluginItem *> AbstractDataPlugin::whichItemAt( const QPoint& c
     }
 }
 
+RenderPlugin::RenderType AbstractDataPlugin::renderType() const
+{
+    return Online;
+}
+
 void AbstractDataPlugin::requestRepaint()
 {
     emit repaintNeeded( QRegion() );

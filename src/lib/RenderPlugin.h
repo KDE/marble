@@ -53,6 +53,11 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
         BackendTypes                     // a QStringList
     };
 
+    enum RenderType {
+        Unknown,
+        Online
+    };
+
     RenderPlugin();
     virtual ~RenderPlugin();
 
@@ -108,6 +113,14 @@ class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
      * Set the settings of the item.
      */
     virtual void setSettings( QHash<QString,QVariant> settings );
+
+    /**
+     * Function for returning the type of plugin this is for.
+     * This affects where in the menu tree the action() is placed.
+     *
+     * @return: The type of render plugin this is.
+     */
+    virtual RenderType renderType() const;
 
  public Q_SLOTS:
     void    setEnabled( bool enabled );

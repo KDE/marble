@@ -115,6 +115,14 @@ class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
      */
     QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos );
 
+    /**
+     * Function for returning the type of plugin this is for.
+     * This affects where in the menu tree the action() is placed.
+     *
+     * @return: The type of render plugin this is.
+     */
+    virtual RenderType renderType() const;
+    
  private Q_SLOTS:
     void requestRepaint();
 

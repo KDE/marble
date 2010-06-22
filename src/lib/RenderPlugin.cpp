@@ -179,6 +179,11 @@ void RenderPlugin::setSettings( QHash<QString,QVariant> settings )
     Q_UNUSED( settings );
 }
 
+RenderPlugin::RenderType RenderPlugin::renderType() const
+{
+    return Unknown;
+}
+
 bool RenderPlugin::eventFilter( QObject *, QEvent * )
 {
     return false;

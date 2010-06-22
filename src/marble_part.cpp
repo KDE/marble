@@ -780,9 +780,8 @@ void MarblePart::createOnlineServicesMenu()
     QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
     for (; i != end; ++i ) {
         // FIXME: This will go into the layer manager when AbstractDataPlugin is an interface
-        AbstractDataPlugin *dataPlugin = qobject_cast<AbstractDataPlugin *>(*i);
         
-        if( dataPlugin ) {
+        if( (*i)->renderType() == RenderPlugin::Online ) {
             actionList.append( (*i)->action() );
         }
     }
