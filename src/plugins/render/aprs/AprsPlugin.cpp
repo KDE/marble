@@ -41,6 +41,7 @@ AprsPlugin::AprsPlugin()
       m_tcpipGatherer( 0 ),
       m_ttyGatherer( 0 ),
       m_fileGatherer( 0 ),
+      m_action( 0 ),
       m_configDialog( 0 ),
       ui_configWidget( 0 )
 {
@@ -48,6 +49,14 @@ AprsPlugin::AprsPlugin()
     setVisible( true );
     
     setSettings( QHash<QString,QVariant>() );
+
+    connect( this, SIGNAL( visibilityChanged( QString, bool ) ),
+             this, SLOT( updateVisibility( QString, bool ) ) );
+
+    m_action = new QAction( this );
+    connect( m_action,    SIGNAL( toggled( bool ) ),
+	     this,        SLOT( setVisible( bool ) ) );
+
 }
 
 AprsPlugin::~AprsPlugin()
@@ -69,6 +78,20 @@ AprsPlugin::~AprsPlugin()
     m_objects.clear();
 
     delete m_mutex;
+}
+
+void AprsPlugin::updateVisibility( QString nameId, bool visible )
+{
+    Q_UNUSED( nameId );
+    if ( visible )
+        restartGatherers();
+    else
+        stopGatherers();
+}
+
+RenderPlugin::RenderType AprsPlugin::renderType() const
+{
+    return Online;
 }
 
 QStringList AprsPlugin::backendTypes() const
@@ -387,6 +410,16 @@ bool AprsPlugin::render( GeoPainter *painter, ViewportParams *viewport, const QS
     painter->restore();
 
     return true;
+}
+
+QAction* AprsPlugin::action() const
+{
+    m_action->setCheckable( true );
+    m_action->setChecked( visible() );
+    m_action->setIcon( icon() );
+    m_action->setText( guiString() );
+    m_action->setToolTip( description() );
+    return m_action;
 }
 
 Q_EXPORT_PLUGIN2( AprsPlugin, Marble::AprsPlugin )

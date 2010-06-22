@@ -59,6 +59,7 @@ namespace Marble
         bool render( GeoPainter *painter, ViewportParams *viewport, const QString& renderPos, GeoSceneLayer * layer = 0 );
 
         QDialog *configDialog() const;
+        QAction       *action() const;
 
         QHash<QString,QVariant> settings() const;
         void setSettings( QHash<QString,QVariant> settings );
@@ -66,12 +67,12 @@ namespace Marble
         void stopGatherers();
         void restartGatherers();
 
+
         private Q_SLOTS: 
         void readSettings() const;
         void writeSettings();
-
-/*  Q_SIGNALS: */
-/*     void changedSettings(); */
+        void updateVisibility( QString nameId, bool visible );
+        virtual RenderType renderType() const;
 
       private:
 
@@ -83,6 +84,7 @@ namespace Marble
                                       *m_ttyGatherer,
                                       *m_fileGatherer;
         QString                        m_filter;
+        QAction                       *m_action;
 
         mutable QDialog               *m_configDialog;
         mutable Ui::AprsConfigWidget  *ui_configWidget;
