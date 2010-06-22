@@ -73,7 +73,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     void setMaximumTileLevel( const int );
 
     Projection projection() const;
-    bool setProjection( const QString &name );
+    void setProjection( const Projection );
 
     Blending const * blending() const;
     void setBlending( Blending const * const );

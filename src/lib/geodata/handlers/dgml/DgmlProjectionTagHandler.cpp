@@ -46,9 +46,17 @@ GeoNode* DgmlProjectionTagHandler::parse( GeoParser& parser ) const
 
     // Attribute name, default to "Equirectangular"
     const QString nameStr = parser.attribute( dgmlAttr_name ).trimmed();
-    if ( !parentItem.nodeAs<GeoSceneTexture>()->setProjection( nameStr ) )
-        parser.raiseWarning( QString( "Value not allowed for attribute name: %1" ).arg( nameStr ));
+    if ( !nameStr.isEmpty() ) {
+        GeoSceneTexture::Projection projection = GeoSceneTexture::Equirectangular;
+        if ( nameStr == "Equirectangular" )
+            projection = GeoSceneTexture::Equirectangular;
+        else if ( nameStr == "Mercator" )
+            projection = GeoSceneTexture::Mercator;
+        else
+            parser.raiseWarning( QString( "Value not allowed for attribute name: %1" ).arg( nameStr ));
 
+        parentItem.nodeAs<GeoSceneTexture>()->setProjection( projection );
+    }
     return 0;
 }
 
