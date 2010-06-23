@@ -73,11 +73,6 @@ class StackedTileLoader : public QObject
                            HttpDownloadManager * const downloadManager, MarbleModel * const model );
         virtual ~StackedTileLoader();
 
-        /**
-         * Sets the download manager that shall be used to fetch the
-         * tiles from a remote resource.
-         */
-        void setDownloadManager( HttpDownloadManager *downloadManager );
         void setTextureLayerSettings( GeoSceneGroup * const textureLayerSettings );
 
         /**

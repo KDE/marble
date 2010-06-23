@@ -106,7 +106,6 @@ StackedTileLoader::StackedTileLoader( MapThemeManager const * const mapThemeMana
     updateTextureLayers();
     connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId, TileId )),
              SLOT( updateTile( TileId, TileId )));
-    setDownloadManager( downloadManager );
 }
 
 StackedTileLoader::~StackedTileLoader()
@@ -115,11 +114,6 @@ StackedTileLoader::~StackedTileLoader()
     d->m_tileCache.clear();
     delete d->m_tileLoader;
     delete d;
-}
-
-void StackedTileLoader::setDownloadManager( HttpDownloadManager *downloadManager )
-{
-    Q_UNUSED(downloadManager);
 }
 
 void StackedTileLoader::setTextureLayerSettings( GeoSceneGroup * const textureLayerSettings )
