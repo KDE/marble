@@ -342,7 +342,7 @@ void MainWindow::createOnlineServicesMenu()
     for (; i != end; ++i ) {
         // FIXME: This will go into the layer manager when AbstractDataPlugin is an interface
         
-        if( i->renderType() == Online ) {
+        if( (*i)->renderType() == RenderPlugin::Online ) {
             m_onlineServicesMenu->addAction( (*i)->action() );
         }
     }
