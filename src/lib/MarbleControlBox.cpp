@@ -53,7 +53,11 @@
 
 using namespace Marble;
 
-#include "ui_MarbleControlBox.h"
+#include "ui_NavigationWidget.h"
+#include "ui_LegendWidget.h"
+#include "ui_MapViewWidget.h"
+#include "ui_CurrentLocationWidget.h"
+#include "ui_FileViewWidget.h"
 
 namespace Marble
 {
@@ -67,12 +71,16 @@ class MarbleControlBoxPrivate
     bool           m_searchTriggered;
     QStandardItemModel *m_celestialList;
 
-    Ui::MarbleControlBox  uiWidget;
-    QWidget              *m_navigationWidget;
-    QWidget              *m_legendWidget;
-    QWidget              *m_mapViewWidget;
-    QWidget              *m_currentLocation2Widget;
-    QWidget              *m_fileViewWidget;
+    QWidget                     *m_navigationWidget;
+    Ui::NavigationWidget        m_navigationUi;
+    QWidget                     *m_legendWidget;
+    Ui::LegendWidget            m_legendUi;
+    QWidget                     *m_mapViewWidget;
+    Ui::MapViewWidget           m_mapViewUi;
+    QWidget                     *m_currentLocation2Widget;
+    Ui::CurrentLocationWidget   m_currentLocation2Ui;
+    QWidget                     *m_fileViewWidget;
+    Ui::FileViewWidget          m_fileViewUi;
 
     QStandardItemModel     *m_mapThemeModel;
     QSortFilterProxyModel  *m_sortproxy;
@@ -95,39 +103,43 @@ MarbleControlBoxPrivate::MarbleControlBoxPrivate() : m_routingWidget(0)
 
 
 MarbleControlBox::MarbleControlBox(QWidget *parent)
-    : QWidget( parent ),
+    : QToolBox( parent ),
       d( new MarbleControlBoxPrivate )
 {
     d->m_widget = 0;
     d->m_searchTerm.clear();
     d->m_searchTriggered = false;
-    d->uiWidget.setupUi( this );
 
     setFocusPolicy( Qt::NoFocus );
 //    setFocusProxy( d->uiWidget.searchLineEdit );
 
     //  Iterate through all of the Side Widget values  //
-    d->uiWidget.toolBox->setCurrentIndex( 0 );
-    d->m_navigationWidget = d->uiWidget.toolBox->currentWidget();
+    d->m_navigationWidget = new QWidget( this );
+    d->m_navigationUi.setupUi( d->m_navigationWidget );
+    addItem( d->m_navigationWidget, d->m_navigationWidget->windowTitle() );
 
-    d->uiWidget.toolBox->setCurrentIndex( 1 );
-    d->m_legendWidget = d->uiWidget.toolBox->currentWidget();
+    d->m_legendWidget = new QWidget( this );
+    d->m_legendUi.setupUi( d->m_legendWidget );
+    addItem( d->m_legendWidget, d->m_legendWidget->windowTitle() );
 
-    d->uiWidget.toolBox->setCurrentIndex( 2 );
-    d->m_mapViewWidget = d->uiWidget.toolBox->currentWidget();
+    d->m_mapViewWidget = new QWidget( this );
+    d->m_mapViewUi.setupUi( d->m_mapViewWidget );
+    addItem( d->m_mapViewWidget, d->m_mapViewWidget->windowTitle() );
 
-    d->uiWidget.toolBox->setCurrentIndex( 3 );
-    d->m_fileViewWidget = d->uiWidget.toolBox->currentWidget();
+    d->m_fileViewWidget = new QWidget( this );
+    d->m_fileViewUi.setupUi( d->m_fileViewWidget );
+    addItem( d->m_fileViewWidget, d->m_fileViewWidget->windowTitle() );
 
-    d->uiWidget.toolBox->setCurrentIndex( 4 );
-    d->m_currentLocation2Widget = d->uiWidget.toolBox->currentWidget();
+    d->m_currentLocation2Widget = new QWidget( this );
+    d->m_currentLocation2Ui.setupUi( d->m_currentLocation2Widget );
+    addItem( d->m_currentLocation2Widget, d->m_currentLocation2Widget->windowTitle() );
 
-    d->m_sortproxy = new QSortFilterProxyModel( d->uiWidget.locationListView );
-    d->uiWidget.locationListView->setModel( d->m_sortproxy );
+    d->m_sortproxy = new QSortFilterProxyModel( d->m_navigationUi.locationListView );
+    d->m_navigationUi.locationListView->setModel( d->m_sortproxy );
 
     d->m_mapSortProxy = new MapThemeSortFilterProxyModel( this );
 
-    d->uiWidget.toolBox->setCurrentIndex(0);
+    setCurrentIndex(0);
 
     d->m_locale = MarbleGlobal::getInstance()->locale();
 
@@ -135,58 +147,61 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     setCurrentLocationTabShown( true );
     setFileViewTabShown( false );
 
-    connect( d->uiWidget.goHomeButton,  SIGNAL( clicked() ),
-             this,                      SIGNAL( goHome() ) );
-    connect( d->uiWidget.zoomSlider,    SIGNAL( valueChanged( int ) ),
-             this,                      SIGNAL( zoomChanged( int ) ) );
-    connect( d->uiWidget.zoomInButton,  SIGNAL( clicked() ),
-             this,                      SIGNAL( zoomIn() ) );
-    connect( d->uiWidget.zoomOutButton, SIGNAL( clicked() ),
-             this,                      SIGNAL( zoomOut() ) );
+    // Navigation
+    connect( d->m_navigationUi.goHomeButton,  SIGNAL( clicked() ),
+             this,                            SIGNAL( goHome() ) );
+    connect( d->m_navigationUi.zoomSlider,    SIGNAL( valueChanged( int ) ),
+             this,                            SIGNAL( zoomChanged( int ) ) );
+    connect( d->m_navigationUi.zoomInButton,  SIGNAL( clicked() ),
+             this,                            SIGNAL( zoomIn() ) );
+    connect( d->m_navigationUi.zoomOutButton, SIGNAL( clicked() ),
+             this,                            SIGNAL( zoomOut() ) );
 
-    connect( d->uiWidget.zoomSlider,  SIGNAL( valueChanged( int ) ),
-             this,                      SLOT( updateButtons( int ) ) );
+    connect( d->m_navigationUi.zoomSlider,  SIGNAL( valueChanged( int ) ),
+             this,                          SLOT( updateButtons( int ) ) );
 
-    connect( d->uiWidget.moveLeftButton,  SIGNAL( clicked() ),
-             this,                        SIGNAL( moveLeft() ) );
-    connect( d->uiWidget.moveRightButton, SIGNAL( clicked() ),
-             this,                        SIGNAL( moveRight() ) );
-    connect( d->uiWidget.moveUpButton,    SIGNAL( clicked() ),
-             this,                        SIGNAL( moveUp() ) );
-    connect( d->uiWidget.moveDownButton,  SIGNAL( clicked() ),
-             this,                        SIGNAL (moveDown() ) );
+    connect( d->m_navigationUi.moveLeftButton,  SIGNAL( clicked() ),
+             this,                              SIGNAL( moveLeft() ) );
+    connect( d->m_navigationUi.moveRightButton, SIGNAL( clicked() ),
+             this,                              SIGNAL( moveRight() ) );
+    connect( d->m_navigationUi.moveUpButton,    SIGNAL( clicked() ),
+             this,                              SIGNAL( moveUp() ) );
+    connect( d->m_navigationUi.moveDownButton,  SIGNAL( clicked() ),
+             this,                              SIGNAL (moveDown() ) );
 
-    connect( d->uiWidget.locationListView, SIGNAL( centerOn( const QModelIndex& ) ),
-             this,                         SLOT( mapCenterOnSignal( const QModelIndex& ) ) );
+    connect( d->m_navigationUi.locationListView, SIGNAL( centerOn( const QModelIndex& ) ),
+             this,                               SLOT( mapCenterOnSignal( const QModelIndex& ) ) );
+
+    connect( d->m_navigationUi.searchLineEdit,  SIGNAL( textChanged( const QString& ) ),
+             this,                              SLOT( searchLineChanged( const QString& ) ) );
+    connect( d->m_navigationUi.searchLineEdit,  SIGNAL( returnPressed() ),
+             this,                              SLOT( searchReturnPressed() ) );
+
+    connect( d->m_navigationUi.zoomSlider,  SIGNAL( sliderPressed() ),
+             this,                          SLOT( adjustForAnimation() ) );
+    connect( d->m_navigationUi.zoomSlider,  SIGNAL( sliderReleased() ),
+             this,                          SLOT( adjustForStill() ) );
 
     d->m_mapThemeModel = 0;
 
-    connect( d->uiWidget.marbleThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
-             this,                              SIGNAL( selectMapTheme( const QString& ) ) );
-    connect( d->uiWidget.projectionComboBox,    SIGNAL( activated( int ) ),
-             this,                              SLOT( projectionSelected( int ) ) );
-    connect( d->uiWidget.zoomSlider,  SIGNAL( sliderPressed() ),
-             this,                      SLOT( adjustForAnimation() ) );
-    connect( d->uiWidget.zoomSlider,  SIGNAL( sliderReleased() ),
-             this,                      SLOT( adjustForStill() ) );
+    // MapView
+    connect( d->m_mapViewUi.marbleThemeSelectView, SIGNAL( selectMapTheme( const QString& ) ),
+             this,                                 SIGNAL( selectMapTheme( const QString& ) ) );
+    connect( d->m_mapViewUi.projectionComboBox,    SIGNAL( activated( int ) ),
+             this,                                 SLOT( projectionSelected( int ) ) );
 
-    d->uiWidget.projectionComboBox->setEnabled( true );
+    d->m_mapViewUi.projectionComboBox->setEnabled( true );
 
     d->m_runnerManager = new MarbleRunnerManager( this );
 
     connect( d->m_runnerManager, SIGNAL( modelChanged(  MarblePlacemarkModel* ) ),
              this,               SLOT( setLocations( MarblePlacemarkModel* ) ) );
 
-    connect( d->uiWidget.searchLineEdit,  SIGNAL( textChanged( const QString& ) ),
-             this,                        SLOT( searchLineChanged( const QString& ) ) );
-    connect( d->uiWidget.searchLineEdit,  SIGNAL( returnPressed() ),
-             this,                        SLOT( searchReturnPressed() ) );
-
     // Setting up the celestial combobox
     d->m_celestialList = new QStandardItemModel();
-    d->uiWidget.celestialBodyComboBox->setModel( d->m_celestialList );
-    connect( d->uiWidget.celestialBodyComboBox, SIGNAL( activated( const QString& ) ),
-             this,                              SLOT( selectCurrentMapTheme( const QString& ) ) );
+    d->m_mapViewUi.celestialBodyComboBox->setModel( d->m_celestialList );
+    connect( d->m_mapViewUi.celestialBodyComboBox, SIGNAL( activated( const QString& ) ),
+             this,                                 SLOT( selectCurrentMapTheme( const QString& ) ) );
 }
 
 MarbleControlBox::~MarbleControlBox()
@@ -203,7 +218,7 @@ void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel )
 
     d->m_mapThemeModel = mapThemeModel;
     d->m_mapSortProxy->setSourceModel( d->m_mapThemeModel );
-    int currentIndex = d->uiWidget.celestialBodyComboBox->currentIndex();
+    int currentIndex = d->m_mapViewUi.celestialBodyComboBox->currentIndex();
     QStandardItem * selectedItem = d->m_celestialList->item( currentIndex, 1 );
 
     if ( selectedItem ) {
@@ -213,7 +228,7 @@ void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel )
     }
 
     d->m_mapSortProxy->sort( 0 );
-    d->uiWidget.marbleThemeSelectView->setModel( d->m_mapSortProxy );
+    d->m_mapViewUi.marbleThemeSelectView->setModel( d->m_mapSortProxy );
     connect( d->m_mapThemeModel,       SIGNAL( rowsInserted( QModelIndex, int, int ) ),
             this,                     SLOT( updateMapThemeView() ) );
 }
@@ -238,15 +253,15 @@ void MarbleControlBox::updateCelestialModel()
 
 void MarbleControlBox::updateButtons( int value )
 {
-    if ( value <= d->uiWidget.zoomSlider->minimum() ) {
-        d->uiWidget.zoomInButton->setEnabled( true );
-        d->uiWidget.zoomOutButton->setEnabled( false );
-    } else if ( value >= d->uiWidget.zoomSlider->maximum() ) {
-        d->uiWidget.zoomInButton->setEnabled( false );
-        d->uiWidget.zoomOutButton->setEnabled( true );
+    if ( value <= d->m_navigationUi.zoomSlider->minimum() ) {
+        d->m_navigationUi.zoomInButton->setEnabled( true );
+        d->m_navigationUi.zoomOutButton->setEnabled( false );
+    } else if ( value >= d->m_navigationUi.zoomSlider->maximum() ) {
+        d->m_navigationUi.zoomInButton->setEnabled( false );
+        d->m_navigationUi.zoomOutButton->setEnabled( true );
     } else {
-        d->uiWidget.zoomInButton->setEnabled( true );
-        d->uiWidget.zoomOutButton->setEnabled( true );
+        d->m_navigationUi.zoomInButton->setEnabled( true );
+        d->m_navigationUi.zoomOutButton->setEnabled( true );
     }
 }
 
@@ -257,31 +272,31 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     d->m_runnerManager->setMap( d->m_widget->map() );
 
     d->m_routingWidget = new RoutingWidget( widget, this );
-    d->uiWidget.toolBox->addItem( d->m_routingWidget, tr( "Routing" ) );
+    addItem( d->m_routingWidget, tr( "Routing" ) );
 
     // Make us aware of all the Placemarks in the MarbleModel so that
     // we can search them.
     setLocations( static_cast<MarblePlacemarkModel*>(d->m_widget->placemarkModel()) );
 
 //    FIXME: Why does this fail: "selection model works on a different model than the view..." ?
-//    d->uiWidget.locationListView->setSelectionModel( d->m_widget->placemarkSelectionModel() );
+//    d->m_navigationUi.locationListView->setSelectionModel( d->m_widget->placemarkSelectionModel() );
 
     //set up everything for the FileModel
-    d->uiWidget.m_fileView->setModel( widget->fileViewModel() );
-    delete d->uiWidget.m_fileView->selectionModel();
-    d->uiWidget.m_fileView->setSelectionModel(
+    d->m_fileViewUi.m_fileView->setModel( widget->fileViewModel() );
+    delete d->m_fileViewUi.m_fileView->selectionModel();
+    d->m_fileViewUi.m_fileView->setSelectionModel(
             widget->fileViewModel()->selectionModel());
-    connect( d->uiWidget.m_fileView->selectionModel(),
+    connect( d->m_fileViewUi.m_fileView->selectionModel(),
 	     SIGNAL( selectionChanged( QItemSelection, QItemSelection )),
 	     this,
 	     SLOT( enableFileViewActions() ) );
-    connect( d->uiWidget.m_saveButton,  SIGNAL( clicked() ) ,
-             widget->fileViewModel(),    SLOT( saveFile() ) );
-    connect( d->uiWidget.m_closeButton, SIGNAL( clicked() ) ,
+    connect( d->m_fileViewUi.m_saveButton,  SIGNAL( clicked() ) ,
+             widget->fileViewModel(),       SLOT( saveFile() ) );
+    connect( d->m_fileViewUi.m_closeButton, SIGNAL( clicked() ) ,
              widget->fileViewModel(),    SLOT( closeFile() ) );
 
     // Initialize the MarbleLegendBrowser
-    d->uiWidget.marbleLegendBrowser->setMarbleWidget( d->m_widget );
+    d->m_legendUi.marbleLegendBrowser->setMarbleWidget( d->m_widget );
 
     // Connect necessary signals.
     connect( this, SIGNAL(goHome()),         d->m_widget, SLOT(goHome()) );
@@ -314,28 +329,28 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 
     // connect signals for the Legend
 
-    connect( d->uiWidget.marbleLegendBrowser, SIGNAL( toggledShowProperty( QString, bool ) ),
+    connect( d->m_legendUi.marbleLegendBrowser, SIGNAL( toggledShowProperty( QString, bool ) ),
              d->m_widget,                     SLOT( setPropertyValue( QString, bool ) ) );
 
     PluginManager* pluginManager = d->m_widget->model()->pluginManager();
     d->m_positionProviderPlugins = pluginManager->createPositionProviderPlugins();
     foreach( const PositionProviderPlugin *plugin, d->m_positionProviderPlugins ) {
-       d->uiWidget.positionTrackingComboBox->addItem( plugin->guiString() );
+       d->m_currentLocation2Ui.positionTrackingComboBox->addItem( plugin->guiString() );
     }
     if ( d->m_positionProviderPlugins.isEmpty() ) {
-        d->uiWidget.positionTrackingComboBox->setEnabled( false );
+        d->m_currentLocation2Ui.positionTrackingComboBox->setEnabled( false );
         QString html = "<p>No Position Tracking Plugin installed.</p>";
-        d->uiWidget.locationLabel->setText( html );
-        d->uiWidget.locationLabel->setEnabled ( true );
+        d->m_currentLocation2Ui.locationLabel->setText( html );
+        d->m_currentLocation2Ui.locationLabel->setEnabled ( true );
     }
 
     //connect CurrentLoctaion signals
     connect( d->m_widget->model()->positionTracking(),
              SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
              this, SLOT( receiveGpsCoordinates( GeoDataCoordinates, qreal ) ) );
-    connect( d->uiWidget.positionTrackingComboBox, SIGNAL( currentIndexChanged( QString ) ),
+    connect( d->m_currentLocation2Ui.positionTrackingComboBox, SIGNAL( currentIndexChanged( QString ) ),
              this, SLOT( changePositionProvider( QString ) ) );
-    connect( d->uiWidget.locationLabel, SIGNAL( linkActivated( QString ) ),
+    connect( d->m_currentLocation2Ui.locationLabel, SIGNAL( linkActivated( QString ) ),
              this, SLOT( centerOnCurrentLocation() ) );
     connect( d->m_widget->model()->positionTracking(),
              SIGNAL( statusChanged( PositionProviderStatus) ), this,
@@ -346,23 +361,21 @@ void MarbleControlBox::setWidgetTabShown( QWidget * widget,
                                           int insertIndex, bool show,
                                           QString &text )
 {
-    int index = d->uiWidget.toolBox->indexOf( widget );
+    int index = indexOf( widget );
 
     if( show ) {
         if ( !(index >= 0) ){
-            if ( insertIndex < d->uiWidget.toolBox->count() ) {
-                d->uiWidget.toolBox->insertItem( insertIndex,
-                                                 widget,
-                                                 text );
+            if ( insertIndex < count() ) {
+                insertItem( insertIndex, widget, text );
             } else {
-                d->uiWidget.toolBox->insertItem( 3 ,widget, text );
+                insertItem( 3 ,widget, text );
             }
             widget->show();
         }
     } else {
         if ( index >= 0 ) {
             widget->hide();
-            d->uiWidget.toolBox->removeItem( index );
+            removeItem( index );
         }
     }
 }
@@ -406,12 +419,12 @@ void MarbleControlBox::changeZoom(int zoom)
     // below before calling setValue on the slider to avoid that it calls back to MarbleWidget,
     // and then un-blocked again to make user interaction possible.
 
-    d->uiWidget.zoomSlider->blockSignals( true );
+    d->m_navigationUi.zoomSlider->blockSignals( true );
 
-    d->uiWidget.zoomSlider->setValue( zoom );
-    d->uiWidget.zoomSlider->setMinimum( minimumZoom() );
+    d->m_navigationUi.zoomSlider->setValue( zoom );
+    d->m_navigationUi.zoomSlider->setMinimum( minimumZoom() );
 
-    d->uiWidget.zoomSlider->blockSignals( false );
+    d->m_navigationUi.zoomSlider->blockSignals( false );
 }
 
 void MarbleControlBox::adjustPositionTrackingStatus( PositionProviderStatus status )
@@ -439,8 +452,8 @@ void MarbleControlBox::adjustPositionTrackingStatus( PositionProviderStatus stat
     }
 
     html += "</p></body></html>";
-    d->uiWidget.locationLabel->setEnabled( true );
-    d->uiWidget.locationLabel->setText( html );
+    d->m_currentLocation2Ui.locationLabel->setEnabled( true );
+    d->m_currentLocation2Ui.locationLabel->setText( html );
 }
 
 void MarbleControlBox::receiveGpsCoordinates( const GeoDataCoordinates &position, qreal speed )
@@ -485,20 +498,20 @@ void MarbleControlBox::receiveGpsCoordinates( const GeoDataCoordinates &position
 
     html = html.arg( position.lonToString() ).arg( position.latToString() );
     html = html.arg( distanceString ).arg( speedString + ' ' + unitString );
-    d->uiWidget.locationLabel->setText( html );
+    d->m_currentLocation2Ui.locationLabel->setText( html );
 }
 
 
 void MarbleControlBox::enableFileViewActions()
 {
-    bool tmp = d->uiWidget.m_fileView->selectionModel()
+    bool tmp = d->m_fileViewUi.m_fileView->selectionModel()
             ->selectedIndexes().count() ==1;
-    d->uiWidget.m_saveButton->setEnabled( tmp );
-    d->uiWidget.m_closeButton->setEnabled( tmp );
+    d->m_fileViewUi.m_saveButton->setEnabled( tmp );
+    d->m_fileViewUi.m_closeButton->setEnabled( tmp );
 
     if ( tmp ) {
         QModelIndex tmpIndex =
-            d->uiWidget.m_fileView->selectionModel()->currentIndex();
+            d->m_fileViewUi.m_fileView->selectionModel()->currentIndex();
         d->m_widget->gpxFileModel()->setSelectedIndex( tmpIndex );
     }
 }
@@ -533,9 +546,9 @@ void MarbleControlBox::setCurrentLocationTabShown( bool show )
     setWidgetTabShown( d->m_currentLocation2Widget, 4, show, title );
     if ( d->m_widget ) {
         bool enabled = d->m_widget->mapTheme()->head()->target() == "earth";
-        int locationIndex = d->uiWidget.toolBox->indexOf( d->m_currentLocation2Widget );
+        int locationIndex = indexOf( d->m_currentLocation2Widget );
         if ( locationIndex >= 0 ) {
-            d->uiWidget.toolBox->setItemEnabled( locationIndex, enabled );
+            setItemEnabled( locationIndex, enabled );
         }
 
         if ( !enabled ) {
@@ -549,18 +562,18 @@ void MarbleControlBox::setCurrentLocationTabShown( bool show )
 void MarbleControlBox::resizeEvent ( QResizeEvent * )
 {
     if ( height() < 500 ) {
-        if ( !d->uiWidget.zoomSlider->isHidden() ) {
+        if ( !d->m_navigationUi.zoomSlider->isHidden() ) {
             setUpdatesEnabled(false);
-            d->uiWidget.zoomSlider->hide();
-            d->uiWidget.m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
-                                                       QSizePolicy::Expanding );
+            d->m_navigationUi.zoomSlider->hide();
+            d->m_navigationUi.m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
+                                                             QSizePolicy::Expanding );
             setUpdatesEnabled(true);
         }
     } else {
-        if ( d->uiWidget.zoomSlider->isHidden() ) {
+        if ( d->m_navigationUi.zoomSlider->isHidden() ) {
             setUpdatesEnabled(false);
-            d->uiWidget.zoomSlider->show();
-            d->uiWidget.m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
+            d->m_navigationUi.zoomSlider->show();
+            d->m_navigationUi.m_pSpacerFrame->setSizePolicy( QSizePolicy::Preferred,
                                                        QSizePolicy::Fixed );
             setUpdatesEnabled(true);
         }
@@ -591,10 +604,10 @@ void MarbleControlBox::searchReturnPressed()
 void MarbleControlBox::search()
 {
     d->m_searchTriggered = false;
-    int  currentSelected = d->uiWidget.locationListView->currentIndex().row();
-    d->uiWidget.locationListView->selectItem( d->m_searchTerm );
-    if ( currentSelected != d->uiWidget.locationListView->currentIndex().row() )
-        d->uiWidget.locationListView->activate();
+    int  currentSelected = d->m_navigationUi.locationListView->currentIndex().row();
+    d->m_navigationUi.locationListView->selectItem( d->m_searchTerm );
+    if ( currentSelected != d->m_navigationUi.locationListView->currentIndex().row() )
+        d->m_navigationUi.locationListView->activate();
 }
 
 void MarbleControlBox::selectTheme( const QString &theme )
@@ -602,13 +615,13 @@ void MarbleControlBox::selectTheme( const QString &theme )
     if ( !d->m_mapSortProxy || !d->m_widget )
         return;
     // Check if the new selected theme is different from the current one
-    QModelIndex currentIndex = d->uiWidget.marbleThemeSelectView->currentIndex();
+    QModelIndex currentIndex = d->m_mapViewUi.marbleThemeSelectView->currentIndex();
     QString indexTheme = d->m_mapSortProxy->data( d->m_mapSortProxy->index(
                          currentIndex.row(), 1, QModelIndex() ) ).toString();
 
 
-    d->uiWidget.zoomSlider->setMaximum( d->m_widget->map()->maximumZoom() );
-    updateButtons( d->uiWidget.zoomSlider->value() );
+    d->m_navigationUi.zoomSlider->setMaximum( d->m_widget->map()->maximumZoom() );
+    updateButtons( d->m_navigationUi.zoomSlider->value() );
 
     if ( theme != indexTheme ) {
         /* indexTheme would be empty if the chosen map has not been set yet. As
@@ -623,19 +636,19 @@ void MarbleControlBox::selectTheme( const QString &theme )
                 QModelIndex iterIndex = items.first()->index();
                 QModelIndex iterIndexName = d->m_mapSortProxy->mapFromSource( iterIndex.sibling( iterIndex.row(), 0 ) );
 
-                d->uiWidget.marbleThemeSelectView->setCurrentIndex( iterIndexName );
+                d->m_mapViewUi.marbleThemeSelectView->setCurrentIndex( iterIndexName );
 
-                d->uiWidget.marbleThemeSelectView->scrollTo( iterIndexName );
+                d->m_mapViewUi.marbleThemeSelectView->scrollTo( iterIndexName );
             }
         }
 
         QString selectedId = d->m_widget->mapTheme()->head()->target();
         d->m_runnerManager->setCelestialBodyId( selectedId );
-        int routingIndex = d->uiWidget.toolBox->indexOf( d->m_routingWidget );
-        d->uiWidget.toolBox->setItemEnabled( routingIndex, selectedId == "earth" );
-        int locationIndex = d->uiWidget.toolBox->indexOf( d->m_currentLocation2Widget );
+        int routingIndex = indexOf( d->m_routingWidget );
+        setItemEnabled( routingIndex, selectedId == "earth" );
+        int locationIndex = indexOf( d->m_currentLocation2Widget );
         if ( locationIndex >= 0 ) {
-            d->uiWidget.toolBox->setItemEnabled( locationIndex, selectedId == "earth" );
+            setItemEnabled( locationIndex, selectedId == "earth" );
         }
 
         QList<QStandardItem*> itemList = d->m_celestialList->findItems( selectedId, Qt::MatchExactly, 1 );
@@ -645,7 +658,7 @@ void MarbleControlBox::selectTheme( const QString &theme )
 
             if ( selectedItem ) {
                 int selectedIndex = selectedItem->row();
-                d->uiWidget.celestialBodyComboBox->setCurrentIndex( selectedIndex );
+                d->m_mapViewUi.celestialBodyComboBox->setCurrentIndex( selectedIndex );
                 d->m_mapSortProxy->setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
             }
 
@@ -656,8 +669,8 @@ void MarbleControlBox::selectTheme( const QString &theme )
 
 void MarbleControlBox::selectProjection( Projection projection )
 {
-    if ( (int)projection != d->uiWidget.projectionComboBox->currentIndex() )
-        d->uiWidget.projectionComboBox->setCurrentIndex( (int) projection );
+    if ( (int)projection != d->m_mapViewUi.projectionComboBox->currentIndex() )
+        d->m_mapViewUi.projectionComboBox->setCurrentIndex( (int) projection );
 }
 
 void MarbleControlBox::selectCurrentMapTheme( const QString& celestialBodyId )
@@ -738,7 +751,7 @@ void MarbleControlBox::setWorkOffline(bool offline)
 void MarbleControlBox::changePositionProvider( const QString &provider )
 {
     if ( provider == tr("Disabled") ) {
-        d->uiWidget.locationLabel->setEnabled( false );
+        d->m_currentLocation2Ui.locationLabel->setEnabled( false );
         d->m_widget->map()->setShowGps( false );
         d->m_widget->model()->positionTracking()->setPositionProviderPlugin( 0 );
         d->m_widget->update();
@@ -746,7 +759,7 @@ void MarbleControlBox::changePositionProvider( const QString &provider )
     else {
         foreach( PositionProviderPlugin* plugin, d->m_positionProviderPlugins ) {
             if ( plugin->guiString() == provider ) {
-               d->uiWidget.locationLabel->setEnabled( true );
+               d->m_currentLocation2Ui.locationLabel->setEnabled( true );
                PositionProviderPlugin* instance = plugin->newInstance();
                PositionTracking *tracking = d->m_widget->model()->positionTracking();
                tracking->setPositionProviderPlugin( instance );

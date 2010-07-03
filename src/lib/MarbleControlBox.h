@@ -17,7 +17,7 @@
 #include "marble_export.h"
 #include "PositionProviderPlugin.h"
 
-#include <QtGui/QWidget>
+#include <QtGui/QToolBox>
 
 #include "global.h"
 
@@ -71,7 +71,7 @@ class MarblePlacemarkModel;
  * @see MarbleNavigator
  */
 
-class MARBLE_EXPORT MarbleControlBox : public QWidget
+class MARBLE_EXPORT MarbleControlBox : public QToolBox
 {
     Q_OBJECT
 

@@ -211,7 +211,11 @@ set(marblewidget_SRCS
 
 set (marblewidget_UI
     LatLonBoxWidget.ui
-    MarbleControlBox.ui
+    NavigationWidget.ui
+    LegendWidget.ui
+    MapViewWidget.ui
+    CurrentLocationWidget.ui
+    FileViewWidget.ui
     MarbleNavigator.ui
     MarbleViewSettingsWidget.ui
     MarbleNavigationSettingsWidget.ui

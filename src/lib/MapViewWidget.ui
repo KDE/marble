@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MapViewWidget</class>
+ <widget class="QWidget" name="MapViewWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>222</width>
+    <height>592</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Map View</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="projectionLabel_2">
+     <property name="text">
+      <string>&amp;Projection</string>
+     </property>
+     <property name="buddy">
+      <cstring>projectionComboBox</cstring>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="projectionComboBox">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <item>
+      <property name="text">
+       <string>Globe</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../marble.qrc">
+        <normaloff>:/icons/map-globe.png</normaloff>:/icons/map-globe.png</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Flat Map</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../marble.qrc">
+        <normaloff>:/icons/map-flat.png</normaloff>:/icons/map-flat.png</iconset>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Mercator</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../marble.qrc">
+        <normaloff>:/icons/map-mercator.png</normaloff>:/icons/map-mercator.png</iconset>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="celestialBodyLabel">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>&amp;Celestial Body</string>
+     </property>
+     <property name="buddy">
+      <cstring>projectionComboBox</cstring>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="celestialBodyComboBox">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="spacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>164</width>
+       <height>7</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="mapThemeLabel">
+     <property name="text">
+      <string>&amp;Theme</string>
+     </property>
+     <property name="buddy">
+      <cstring>marbleThemeSelectView</cstring>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="MarbleThemeSelectView" name="marbleThemeSelectView">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="whatsThis">
+      <string>Here you can choose the preferred map view from different topics.</string>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="verticalScrollMode">
+      <enum>QAbstractItemView::ScrollPerPixel</enum>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MarbleThemeSelectView</class>
+   <extends>QListView</extends>
+   <header>MarbleThemeSelectView.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../marble.qrc"/>
+ </resources>
+ <connections/>
+</ui>
