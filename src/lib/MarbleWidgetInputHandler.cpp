@@ -717,7 +717,10 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
         MarbleWidgetInputHandler::d->m_widget->setCursor( d->m_arrowcur[dirX+1][dirY+1] );
 
-        return false; // let others, especially float items, still process the event
+        // let others, especially float items, still process the event
+        // Mouse move events need to be eaten to avoid the default oxygen behavior of
+        // moving the window around when we don't handle the event. See bug 242414.
+        return event->type() != QEvent::MouseMove;
     }
     else {
         if ( e->type() == QEvent::Wheel ) {
