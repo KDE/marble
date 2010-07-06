@@ -225,43 +225,6 @@ void MarbleMapPrivate::drawAtmosphere()
                          (int)( 2.1 * (qreal)(m_parent->radius()) ) );
 }
 
-void MarbleMapPrivate::drawFog( QPainter &painter )
-{
-    if ( m_viewParams.projection() != Spherical)
-        return;
-
-    // No use to draw the fog if it's not visible in the area. 
-    if ( m_viewParams.viewport()->mapCoversViewport() )
-        return;
-
-    int  imgWidth2  = m_parent->width() / 2;
-    int  imgHeight2 = m_parent->height() / 2;
-
-    // Recalculate the atmosphere effect and paint it to canvasImage.
-    QRadialGradient grad1( QPointF( imgWidth2, imgHeight2 ), m_parent->radius() );
-
-    // FIXME: Add a cosine relationship
-    grad1.setColorAt( 0.85, QColor( 255, 255, 255, 0 ) );
-    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 64 ) );
-
-    QBrush    brush1( grad1 );
-    QPen      pen1( Qt::NoPen );
-
-    painter.save();
-
-    painter.setBrush( brush1 );
-    painter.setPen( pen1 );
-    painter.setRenderHint( QPainter::Antialiasing, false );
-
-    // FIXME: Cut out what's really needed
-    painter.drawEllipse( imgWidth2  - m_parent->radius(),
-                         imgHeight2 - m_parent->radius(),
-                         2 * m_parent->radius(),
-                         2 * m_parent->radius() );
-
-    painter.restore();
-}
-
 void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
 {
     if ( !m_viewParams.mapTheme() ) {
@@ -284,13 +247,6 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
     // FIXME: this is ugly, add method updateRadius() to ViewParams
     m_viewParams.setRadiusUpdated( m_viewParams.radius() );
     m_justModified = false;
-
-    // FIXME: This is really slow. That's why we defer this to
-    //        PrintQuality. Either cache on a pixmap - or maybe
-    //        better: Add to GlobeScanlineTextureMapper.
-
-    if ( m_viewParams.mapQuality() == PrintQuality )
-        drawFog( painter );
 }
 
 void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect )

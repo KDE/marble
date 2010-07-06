@@ -69,7 +69,7 @@ QString AbstractDataPlugin::renderPolicy() const
 
 QStringList AbstractDataPlugin::renderPosition() const
 {
-    return QStringList( "HOVERS_ABOVE_SURFACE" );
+    return QStringList( "ALWAYS_ON_TOP" );
 }
 
 bool AbstractDataPlugin::isInitialized() const
@@ -84,7 +84,7 @@ bool AbstractDataPlugin::render( GeoPainter *painter, ViewportParams *viewport,
         return true;
     }
     
-    if ( renderPos != "HOVERS_ABOVE_SURFACE" ) {
+    if ( renderPos != "ALWAYS_ON_TOP" ) {
         return true;
     }
 

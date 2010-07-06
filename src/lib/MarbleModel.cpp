@@ -108,6 +108,8 @@ class MarbleModelPrivate
     void notifyModelChanged();
     GeoSceneGroup * textureLayerProperties() const;
 
+    void drawFog( QPainter *painter, ViewParams *viewParams, int width, int height );
+
     static QAtomicInt       refCounter;
     MarbleModel             *m_parent;
     MarbleDataFacade        *m_dataFacade;
@@ -644,7 +646,19 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
 
 
     renderPositions.clear();
-    renderPositions << "HOVERS_ABOVE_SURFACE" << "ATMOSPHERE"
+    renderPositions << "HOVERS_ABOVE_SURFACE";
+    d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
+
+    // FIXME: This is really slow. That's why we defer this to
+    //        PrintQuality. Either cache on a pixmap - or maybe
+    //        better: Add to GlobeScanlineTextureMapper.
+
+    if ( viewParams->mapQuality() == PrintQuality )
+        d->drawFog( painter, viewParams,
+                    width, height );
+
+    renderPositions.clear();
+    renderPositions << "ATMOSPHERE"
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
                                
     d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
@@ -732,6 +746,48 @@ QVector<QModelIndex> MarbleModel::whichFeatureAt( const QPoint& curpos ) const
 void MarbleModelPrivate::notifyModelChanged()
 {
     emit m_parent->modelChanged();
+}
+
+void MarbleModelPrivate::drawFog( QPainter *painter,
+                                  ViewParams *viewParams,
+                                  int width,
+                                  int height )
+{
+    if ( viewParams->projection() != Spherical)
+        return;
+
+    // No use to draw the fog if it's not visible in the area.
+    if ( viewParams->viewport()->mapCoversViewport() )
+        return;
+
+    int imgWidth2  = width / 2;
+    int imgHeight2 = height / 2;
+
+    int radius = viewParams->radius();
+
+    // Recalculate the atmosphere effect and paint it to canvasImage.
+    QRadialGradient grad1( QPointF( imgWidth2, imgHeight2 ), radius );
+
+    // FIXME: Add a cosine relationship
+    grad1.setColorAt( 0.85, QColor( 255, 255, 255, 0 ) );
+    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 64 ) );
+
+    QBrush    brush1( grad1 );
+    QPen      pen1( Qt::NoPen );
+
+    painter->save();
+
+    painter->setBrush( brush1 );
+    painter->setPen( pen1 );
+    painter->setRenderHint( QPainter::Antialiasing, false );
+
+    // FIXME: Cut out what's really needed
+    painter->drawEllipse( imgWidth2  - radius,
+                         imgHeight2 - radius,
+                         2 * radius,
+                         2 * radius );
+
+    painter->restore();
 }
 
 void MarbleModel::update()
