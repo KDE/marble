@@ -1,5 +1,8 @@
 PROJECT(AprsPlugin)
 
+INCLUDE (CheckFunctionExists)
+CHECK_FUNCTION_EXISTS(cfmakeraw HAVE_CFMAKERAW)
+
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/aprs
  ${CMAKE_BINARY_DIR}/src/plugins/render/aprs
@@ -36,3 +39,6 @@ endif (QTONLY)
 
 marble_add_plugin( AprsPlugin ${aprs_SRCS} )
 #target_link_libraries( Aprs ${QT_QTWEBKIT_LIBRARY} )
+
+CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/aprsconfig.h.in
+	       ${CMAKE_CURRENT_BINARY_DIR}/aprsconfig.h)

@@ -694,7 +694,19 @@ bool QextSerialPort::open(OpenMode mode)
             setOpenMode(mode);              // Flag the port as opened
             tcgetattr(fd, &old_termios);    // Save the old termios
             Posix_CommConfig = old_termios; // Make a working copy
+
+
+            /* the equivelent of cfmakeraw() to enable raw access */
+#ifdef HAVE_CFMAKERAW
             cfmakeraw(&Posix_CommConfig);   // Enable raw access
+#else
+            Posix_CommConfig.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP
+                                    | INLCR | IGNCR | ICRNL | IXON);
+            Posix_CommConfig.c_oflag &= ~OPOST;
+            Posix_CommConfig.c_lflag &= ~(ECHO | ECHONL | ICANON | ISIG | IEXTEN);
+            Posix_CommConfig.c_cflag &= ~(CSIZE | PARENB);
+            Posix_CommConfig.c_cflag |= CS8;
+#endif
 
             /*set up other port settings*/
             Posix_CommConfig.c_cflag|=CREAD|CLOCAL;
