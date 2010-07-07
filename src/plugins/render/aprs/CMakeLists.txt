@@ -3,6 +3,9 @@ PROJECT(AprsPlugin)
 INCLUDE (CheckFunctionExists)
 CHECK_FUNCTION_EXISTS(cfmakeraw HAVE_CFMAKERAW)
 
+INCLUDE (CheckIncludeFiles)
+CHECK_INCLUDE_FILES(sys/filio.h HAVE_SYS_FILIO_H)
+
 INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/src/plugins/render/aprs
  ${CMAKE_BINARY_DIR}/src/plugins/render/aprs

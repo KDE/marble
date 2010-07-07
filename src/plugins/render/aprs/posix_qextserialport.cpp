@@ -11,6 +11,9 @@
 #include "qextserialport.h"
 #include <QMutexLocker>
 #include <QDebug>
+#ifdef HAVE_SYS_FILIO_H
+#include <sys/filio.h>
+#endif /* HAVE_SYS_FILIO_H */
 
 void QextSerialPort::platformSpecificInit()
 {
