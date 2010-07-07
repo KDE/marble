@@ -20,7 +20,7 @@
       <string>Position Tracking</string>
      </property>
      <property name="buddy">
-      <cstring>projectionComboBox</cstring>
+      <cstring>positionTrackingComboBox</cstring>
      </property>
     </widget>
    </item>
