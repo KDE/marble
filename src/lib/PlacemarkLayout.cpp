@@ -251,6 +251,12 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
 
+        GeoDataGeometry geometry
+                = qvariant_cast<GeoDataGeometry>( index.data( MarblePlacemarkModel::GeometryRole ) );
+        if( geometry.geometryId() != GeoDataPointId ) {
+            continue;
+        }
+
         GeoDataCoordinates geopoint = qvariant_cast<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
 
         if ( !latLonAltBox.contains( geopoint ) ||
@@ -343,6 +349,12 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         const QModelIndex& index = model->index( i, 0 );
         if( !index.isValid() ) {
             mDebug() << "invalid index!!!";
+            continue;
+        }
+
+        GeoDataGeometry geometry
+                = qvariant_cast<GeoDataGeometry>( index.data( MarblePlacemarkModel::GeometryRole ) );
+        if( geometry.geometryId() != GeoDataPointId ) {
             continue;
         }
 
