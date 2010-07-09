@@ -102,8 +102,12 @@ void GeoRendererView::renderIndex( QModelIndex &index )
      * then call the real render function. For the rest iterate through the
      * children and recurse.
      */
-    GeoDataObject* indexObject = model()->data( rootIndex(), Qt::UserRole + 11 ).value<Marble::GeoDataObject*>();
-    if( !( dynamic_cast<GeoDataFeature*>( indexObject ) && dynamic_cast<GeoDataFeature*>( indexObject )->isVisible() ) ) return;
+    QVariant indexObjectVariant = model()->data( rootIndex(), Qt::UserRole + 11 );
+    GeoDataObject* indexObject = indexObjectVariant.value<Marble::GeoDataObject*>();
+    if( !( dynamic_cast<GeoDataFeature*>( indexObject )
+           && dynamic_cast<GeoDataFeature*>( indexObject )->isVisible() ) ) {
+        return;
+    }
 
     int rowCount = model()->rowCount( index );
    
@@ -111,7 +115,8 @@ void GeoRendererView::renderIndex( QModelIndex &index )
     {
         QModelIndex childIndex = model()->index( row, 0, index );
         QString output = model()->data( childIndex ).toString();
-        GeoDataObject* object = model()->data( childIndex, Qt::UserRole + 11 ).value<Marble::GeoDataObject*>();
+        QVariant objectVariant = model()->data( childIndex, Qt::UserRole + 11 );
+        GeoDataObject* object = objectVariant.value<Marble::GeoDataObject*>();
 
         if( dynamic_cast<GeoDataGeometry*>( object ) ) {
             if( static_cast<GeoDataGeometry*>( object )->geometryId() != GeoDataMultiGeometryId ) {
