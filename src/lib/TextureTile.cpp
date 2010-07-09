@@ -22,35 +22,20 @@
 namespace Marble
 {
 
-TextureTile::TextureTile( TileId const & tileId )
-    : m_id( tileId ),
-      m_state( StateEmpty ),
-      m_blending( 0 ),
-      m_expireSecs( std::numeric_limits<int>::max() ),
-      m_image( 0 )
-{
-}
-
-TextureTile::TextureTile( TileId const & tileId, QString const & fileName )
+TextureTile::TextureTile( TileId const & tileId, QImage const * image )
     : m_id( tileId ),
       m_state( StateExpired ),
       m_blending( 0 ),
       m_expireSecs( std::numeric_limits<int>::max() ),
-      m_image( new QImage( fileName ))
+      m_image( image )
 {
+    Q_ASSERT( image );
+    Q_ASSERT( !image->isNull() );
 }
 
 TextureTile::~TextureTile()
 {
     delete m_image;
-}
-
-void TextureTile::setImage( QByteArray const & data )
-{
-    if ( !m_image )
-        m_image = new QImage( QImage::fromData( data ));
-    else
-        m_image->loadFromData( data );
 }
 
 }

@@ -48,14 +48,14 @@ QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & stackedTileId,
                                                   DownloadUsage const usage )
 {
     QString const fileName = tileFileName( tileId );
-    QFileInfo const fileInfo( fileName );
-    if ( fileInfo.exists() ) {
+    QImage const image( fileName );
+    if ( !image.isNull() ) {
         // file is there, so create and return a tile object in any case,
         // but check if an update should be triggered
         GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
-        QSharedPointer<TextureTile> const tile( new TextureTile( tileId, fileName ));
+        QSharedPointer<TextureTile> const tile( new TextureTile( tileId, new QImage( image ) ));
         tile->setStackedTileId( stackedTileId );
-        tile->setLastModified( fileInfo.lastModified() );
+        tile->setLastModified( QFileInfo( fileName ).lastModified() );
         tile->setExpireSecs( textureLayer->expire() );
 
         if ( !tile->isExpired() ) {
@@ -71,18 +71,14 @@ QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & stackedTileId,
 
     // tile was not locally available => trigger download and look for tiles in other levels
     // for scaling
-    QSharedPointer<TextureTile> const tile( new TextureTile( tileId ));
+    QImage * replacementTile = scaledLowerLevelTile( tileId );
+    QSharedPointer<TextureTile> const tile( new TextureTile( tileId, replacementTile ));
     tile->setStackedTileId( stackedTileId );
+    tile->setState( TextureTile::StateScaled );
+
     m_waitingForUpdate.insert( tileId, tile );
     triggerDownload( tileId, usage );
-    QImage * const replacementTile = scaledLowerLevelTile( tileId );
-    if ( replacementTile ) {
-        mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateScaled";
-        tile->setImage( replacementTile );
-        tile->setState( TextureTile::StateScaled );
-    } else {
-        mDebug() << "TileLoader::loadTile" << tileId.toString() << "No tiles found";
-    }
+
     return tile;
 }
 
@@ -108,18 +104,15 @@ QSharedPointer<TextureTile> TileLoader::reloadTile( TileId const & stackedTileId
         return tile;
 
     QString const fileName = tileFileName( tileId );
-    QFileInfo const fileInfo( fileName );
-    if ( fileInfo.exists() ) {
-        tile = QSharedPointer<TextureTile>( new TextureTile( tileId, fileName ));
-        tile->setLastModified( fileInfo.lastModified() );
+    QImage const image( fileName );
+    if ( !image.isNull() ) {
+        tile = QSharedPointer<TextureTile>( new TextureTile( tileId, new QImage( image ) ));
+        tile->setLastModified( QFileInfo( fileName ).lastModified() );
     }
     else {
-        tile = QSharedPointer<TextureTile>( new TextureTile( tileId ));
         QImage * const replacementTile = scaledLowerLevelTile( tileId );
-        if ( replacementTile ) {
-            tile->setImage( replacementTile );
-            tile->setState( TextureTile::StateScaled );
-        }
+        tile = QSharedPointer<TextureTile>( new TextureTile( tileId, replacementTile ));
+        tile->setState( TextureTile::StateScaled );
     }
 
     GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
@@ -162,7 +155,11 @@ void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
         return;
     Q_ASSERT( tile );
     m_waitingForUpdate.remove( id );
-    tile->setImage( data );
+    QImage *image( new QImage( QImage::fromData( data ) ) );
+    if ( image->isNull() )
+        return;
+
+    tile->setImage( image );
     tile->setState( TextureTile::StateUptodate );
     tile->setLastModified( QDateTime::currentDateTime() );
     emit tileCompleted( tile->stackedTileId(), id );
@@ -200,17 +197,15 @@ void TileLoader::triggerDownload( TileId const & id, DownloadUsage const usage )
 QImage * TileLoader::scaledLowerLevelTile( TileId const & id )
 {
     mDebug() << "TileLoader::scaledLowerLevelTile" << id.toString();
-    QImage * result = 0;
-    int level = id.zoomLevel() - 1;
-    while ( !result && level >= 0 ) {
+
+    for ( int level = id.zoomLevel() - 1; level >= 0; --level ) {
         int const deltaLevel = id.zoomLevel() - level;
         TileId const replacementTileId( id.mapThemeIdHash(), level,
                                         id.x() >> deltaLevel, id.y() >> deltaLevel );
         mDebug() << "TileLoader::scaledLowerLevelTile" << "trying" << replacementTileId.toString();
         QString const fileName = tileFileName( replacementTileId );
-        QFileInfo const fileInfo( fileName );
-        if ( fileInfo.exists() ) {
-            QImage const toScale( fileName );
+        QImage const toScale( fileName );
+        if ( !toScale.isNull() ) {
             // which rect to scale?
             QSize const size = toScale.size();
             int const restTileX = id.x() % ( 1 << deltaLevel );
@@ -222,11 +217,12 @@ QImage * TileLoader::scaledLowerLevelTile( TileId const & id )
             mDebug() << "QImage::copy:" << startX << startY << partWidth << partHeight;
             QImage const part = toScale.copy( startX, startY, partWidth, partHeight );
             mDebug() << "QImage::scaled:" << toScale.size();
-            result = new QImage( part.scaled( toScale.size() ));
+            return new QImage( part.scaled( toScale.size() ) );
         }
-        --level;
     }
-    return result;
+
+    Q_ASSERT_X( false, "scaled image", "level zero image missing" ); // not reached
+    return new QImage();
 }
 
 }

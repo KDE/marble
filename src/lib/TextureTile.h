@@ -43,8 +43,7 @@ class TextureTile
         StateUptodate
     };
 
-    explicit TextureTile( TileId const & );
-    TextureTile( TileId const & tileId, QString const & fileName );
+    TextureTile( TileId const & tileId, QImage const * image );
     ~TextureTile();
 
     TileId const & id() const;
@@ -52,7 +51,6 @@ class TextureTile
     QDateTime const & lastModified() const;
     bool isExpired() const;
     QImage const * image() const;
-    QImage * image();
     State state() const;
     Blending const * blending() const;
     int byteCount() const;
@@ -61,7 +59,6 @@ class TextureTile
     Q_DISABLE_COPY( TextureTile )
 
     void setState( State const );
-    void setImage( QByteArray const & data );
     void setImage( QImage * const );
     void setBlending( Blending const * const );
     void setStackedTileId( TileId const & );
@@ -74,7 +71,7 @@ class TextureTile
     Blending const * m_blending;
     QDateTime m_lastModified;
     int m_expireSecs;
-    QImage * m_image;
+    QImage const * m_image;
 };
 
 
@@ -105,11 +102,6 @@ inline QImage const * TextureTile::image() const
     return m_image;
 }
 
-inline QImage * TextureTile::image()
-{
-    return m_image;
-}
-
 inline TextureTile::State TextureTile::state() const
 {
     return m_state;
@@ -122,8 +114,10 @@ inline Blending const * TextureTile::blending() const
 
 inline int TextureTile::byteCount() const
 {
+    Q_ASSERT( m_image );
+
     // FIXME: once Qt 4.6 is required for Marble, use QImage::byteCount()
-    return m_image ? m_image->numBytes() : 0;
+    return m_image->numBytes();
 }
 
 inline void TextureTile::setState( State const state )
@@ -133,6 +127,11 @@ inline void TextureTile::setState( State const state )
 
 inline void TextureTile::setImage( QImage * const image )
 {
+    Q_ASSERT( image );
+    Q_ASSERT( !image->isNull() );
+
+    delete m_image;
+
     m_image = image;
 }
 
