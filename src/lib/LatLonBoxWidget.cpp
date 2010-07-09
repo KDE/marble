@@ -48,6 +48,11 @@ LatLonBoxWidget::LatLonBoxWidget( QWidget * const parent, Qt::WindowFlags const 
     connect( d->m_ui.westSpinBox, SIGNAL( valueChanged( double )), SLOT( updateLonSingleStep() ));
 }
 
+LatLonBoxWidget::~LatLonBoxWidget()
+{
+    delete d;
+}
+
 GeoDataLatLonBox LatLonBoxWidget::latLonBox() const
 {
     return GeoDataLatLonBox( d->m_ui.northSpinBox->value(), d->m_ui.southSpinBox->value(),
