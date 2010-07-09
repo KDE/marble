@@ -37,7 +37,7 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
 
     explicit DownloadRegionDialog( MarbleModel const * const model, QWidget * const parent = 0,
                                    Qt::WindowFlags const f = 0 );
-
+    ~DownloadRegionDialog();
     void setAllowedTileLevelRange( int const minimumTileLevel,
                                    int const maximumTileLevel );
     void setVisibleTileLevel( int const tileLevel );

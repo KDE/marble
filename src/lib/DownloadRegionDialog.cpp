@@ -197,6 +197,11 @@ DownloadRegionDialog::DownloadRegionDialog( MarbleModel const * const model, QWi
     updateTilesCount();
 }
 
+DownloadRegionDialog::~DownloadRegionDialog()
+{
+    delete d;
+}
+
 void DownloadRegionDialog::setAllowedTileLevelRange( int const minimumTileLevel,
                                                      int const maximumTileLevel )
 {
