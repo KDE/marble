@@ -16,6 +16,7 @@
 
 
 #include "GeoDataObject.h"
+#include "Serializable.h"
 #include "global.h"
 
 #include "geodata_export.h"
