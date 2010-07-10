@@ -41,14 +41,12 @@ public:
 
     virtual void mapTexture( ViewParams *viewParams ) = 0;
 
-    void setLayer( GeoSceneLayer * layer );
     void setMaxTileLevel( int level );
     virtual void resizeMap( int width, int height );
     void selectTileLevel( ViewParams* viewParams );
     bool interlaced() const;
     void setInterlaced( bool enabled );
     int tileZoomLevel() const;
-    QSize tileSize() const;
     GeoSceneTexture const * textureLayer() const;
 
  Q_SIGNALS:
@@ -131,11 +129,10 @@ public:
     Q_DISABLE_COPY( AbstractScanlineTextureMapper )
     void initGlobalWidth();
     void initGlobalHeight();
-    void initTileSize();
 
-    GeoSceneTexture *m_textureLayer;
+    GeoSceneTexture const * const m_textureLayer;
     /// size of the tiles of of the current texture layer
-    QSize m_tileSize;
+    QSize const m_tileSize;
     GeoSceneTexture::Projection m_tileProjection;
     StackedTile *m_tile;
     int         m_previousRadius;
@@ -166,11 +163,6 @@ inline bool AbstractScanlineTextureMapper::interlaced() const
 inline void AbstractScanlineTextureMapper::setInterlaced( bool enabled )
 {
     m_interlaced = enabled;
-}
-
-inline QSize AbstractScanlineTextureMapper::tileSize() const
-{
-    return m_tileSize;
 }
 
 inline GeoSceneTexture const * AbstractScanlineTextureMapper::textureLayer() const

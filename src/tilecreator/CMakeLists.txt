@@ -9,6 +9,7 @@ include( ${QT_USE_FILE} )
 set( tilecreator_SRCS
             ../lib/DownloadPolicy.cpp
             ../lib/TileCreator.cpp
+            ../lib/TileId.cpp
             ../lib/TileLoaderHelper.cpp
             ../lib/ServerLayout.cpp
             ../lib/geodata/parser/GeoDocument.cpp

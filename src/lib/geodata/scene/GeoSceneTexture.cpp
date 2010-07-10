@@ -24,8 +24,11 @@
 
 #include "DownloadPolicy.h"
 #include "MarbleDebug.h"
+#include "MarbleDirs.h"
 #include "ServerLayout.h"
 #include "TileId.h"
+
+#include <QtGui/QImage>
 
 namespace Marble
 {
@@ -111,6 +114,22 @@ int GeoSceneTexture::maximumTileLevel() const
 void GeoSceneTexture::setMaximumTileLevel( const int maximumTileLevel )
 {
     m_maximumTileLevel = maximumTileLevel;
+}
+
+const QSize GeoSceneTexture::tileSize() const
+{
+    if ( !m_tileSize.isValid() ) {
+        const TileId id( sourceDir(), 0, 0, 0 );
+        const QString path = MarbleDirs::path( relativeTileFileName( id ));
+
+        QImage testTile( path );
+        Q_ASSERT( !testTile.isNull() );
+
+        m_tileSize = testTile.size();
+        Q_ASSERT( !tileSize().isEmpty() );
+    }
+
+    return m_tileSize;
 }
 
 GeoSceneTexture::Projection GeoSceneTexture::projection() const

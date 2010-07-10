@@ -39,6 +39,7 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture *t
       m_tilePosX( 0 ),
       m_tilePosY( 0 ),
       m_textureLayer( textureLayer ),
+      m_tileSize( textureLayer->tileSize() ),  // cache tile size
       m_tile( 0 ),
       m_previousRadius( 0 ),
       m_n( 0 ),
@@ -59,24 +60,12 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture *t
              this,         SLOT( notifyMapChanged() ) );
 
     detectMaxTileLevel();
-    initTileSize();
 }
 
 
 AbstractScanlineTextureMapper::~AbstractScanlineTextureMapper()
 {
       m_tileLoader->disconnect();
-}
-
-
-void AbstractScanlineTextureMapper::setLayer( GeoSceneLayer * layer )
-{
-    m_textureLayer = static_cast<GeoSceneTexture *>( layer->groundDataset() );
-    m_tileProjection = m_textureLayer->projection();
-    m_mapThemeIdHash = qHash( m_textureLayer->sourceDir() );
-    m_tileLevel = -1;
-    detectMaxTileLevel();
-    initTileSize();
 }
 
 
@@ -88,7 +77,7 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
     // the tile level from tilesize and the globe radius via log(2)
 
     qreal  linearLevel = ( 2.0 * (qreal)( radius )
-			    / (qreal) ( m_tileSize.width() ) );
+                               / (qreal)( m_tileSize.width() ) );
     int     tileLevel   = 0;
 
     if ( linearLevel < 1.0 )
@@ -170,7 +159,7 @@ void AbstractScanlineTextureMapper::pixelValueF(qreal lon,
     // same tile. However at the tile border we might "fall off". If that 
     // happens we need to find out the next tile that needs to be loaded.
 
-    if ( posX  >= (qreal)( m_tileSize.width() ) 
+    if ( posX  >= (qreal)( m_tileSize.width() )
          || posX < 0.0
          || posY >= (qreal)( m_tileSize.height() )
          || posY < 0.0 )
@@ -606,20 +595,6 @@ void AbstractScanlineTextureMapper::initGlobalHeight()
 {
     m_globalHeight = m_tileSize.height()
         * TileLoaderHelper::levelToRow( m_textureLayer->levelZeroRows(), m_tileLevel );
-}
-
-void AbstractScanlineTextureMapper::initTileSize()
-{
-    if ( !m_textureLayer || !m_tileLoader )
-        return;
-
-    Q_ASSERT( m_textureLayer );
-    Q_ASSERT( m_tileLoader );
-    TileId id( m_textureLayer->sourceDir(), 0, 0, 0 );
-    StackedTile * const testTile = m_tileLoader->loadTile( id, DownloadBrowse );
-    Q_ASSERT( testTile );
-    m_tileSize = testTile->resultTile()->size();
-    Q_ASSERT( !m_tileSize.isEmpty() );
 }
 
 #include "AbstractScanlineTextureMapper.moc"

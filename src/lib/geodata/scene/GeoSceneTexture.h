@@ -27,6 +27,7 @@
 #include <QtCore/QStringList>
 #include <QtCore/QUrl>
 #include <QtCore/QVector>
+#include <QtCore/QSize>
 
 #include "GeoSceneLayer.h"
 #include "global.h"
@@ -72,6 +73,8 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     int maximumTileLevel() const;
     void setMaximumTileLevel( const int );
 
+    const QSize tileSize() const;
+
     Projection projection() const;
     void setProjection( const Projection );
 
@@ -104,6 +107,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     int m_levelZeroColumns;
     int m_levelZeroRows;
     int m_maximumTileLevel;
+    mutable QSize m_tileSize;
     Projection m_projection;
     Blending const * m_blending;
 

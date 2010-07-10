@@ -139,7 +139,7 @@ QWidget * DownloadRegionDialog::Private::createOkCancelButtonBox()
 // copied from AbstractScanlineTextureMapper and slightly adjusted
 int DownloadRegionDialog::Private::rad2PixelX( qreal const lon ) const
 {
-    qreal const globalWidth = textureMapper()->tileSize().width()
+    qreal const globalWidth = m_textureLayer->tileSize().width()
         * TileLoaderHelper::levelToColumn( m_textureLayer->levelZeroColumns(),
                                            m_visibleTileLevel );
     return static_cast<int>( globalWidth * 0.5 + lon * ( globalWidth / ( 2.0 * M_PI ) ));
@@ -148,7 +148,7 @@ int DownloadRegionDialog::Private::rad2PixelX( qreal const lon ) const
 // copied from AbstractScanlineTextureMapper and slightly adjusted
 int DownloadRegionDialog::Private::rad2PixelY( qreal const lat ) const
 {
-    qreal const globalHeight = textureMapper()->tileSize().height()
+    qreal const globalHeight = m_textureLayer->tileSize().height()
         * TileLoaderHelper::levelToRow( m_textureLayer->levelZeroRows(), m_visibleTileLevel );
     qreal const normGlobalHeight = globalHeight / M_PI;
     switch ( m_textureLayer->projection() ) {
@@ -266,8 +266,8 @@ TileCoordsPyramid DownloadRegionDialog::region() const
     mDebug() << "north/west (x/y):" << westX << northY;
     mDebug() << "south/east (x/y):" << eastX << southY;
 
-    int const tileWidth = d->textureMapper()->tileSize().width();
-    int const tileHeight = d->textureMapper()->tileSize().height();
+    int const tileWidth = d->m_textureLayer->tileSize().width();
+    int const tileHeight = d->m_textureLayer->tileSize().height();
     mDebug() << "DownloadRegionDialog downloadRegion: tileSize:" << tileWidth << tileHeight;
 
     int const visibleLevelX1 = qMin( westX, eastX );
