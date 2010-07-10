@@ -15,6 +15,8 @@
 #include "MarbleMath.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataDocument.h"
+#include "GeoDataGeometry.h"
+#include "GeoDataFolder.h"
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
 #include "RouteSkeleton.h"
@@ -129,20 +131,27 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
     return QVariant();
 }
 
-void RoutingModel::importOpenGis( const QByteArray &content )
+bool RoutingModel::importOpenGis( const QByteArray &content )
 {
     d->m_route.clear();
 
     QDomDocument xml;
     if ( !xml.setContent( content ) ) {
         mDebug() << "Cannot parse xml file with routing instructions.";
-        return;
+        reset();
+        return false;
     }
 
     QDomElement root = xml.documentElement();
 
     QDomNodeList errors = root.elementsByTagName( "xls:Error" );
     if ( errors.size() > 0 ) {
+        reset();
+        return false;
+        // Returning early because fallback routing providers are used now
+        // The code below can be used to parse OpenGis errors reported by ORS
+        // and may be useful in the future
+
         for ( unsigned int i = 0; i < errors.length(); ++i ) {
             QDomNode node = errors.item( i );
             QString errorMessage = node.attributes().namedItem( "message" ).nodeValue();
@@ -244,6 +253,48 @@ void RoutingModel::importOpenGis( const QByteArray &content )
     }
 
     reset();
+    return true;
+}
+
+bool RoutingModel::importKml( const QByteArray &content )
+{
+    d->m_route.clear();
+    GeoDataParser parser( GeoData_UNKNOWN );
+
+    // Open file in right mode
+    QBuffer buffer;
+    buffer.setData( content );
+    buffer.open( QIODevice::ReadOnly );
+
+    if ( !parser.read( &buffer ) ) {
+        qDebug() << "Cannot parse kml data! Input is " << content ;
+        reset();
+        return false;
+    }
+    GeoDataDocument* document = static_cast<GeoDataDocument*>( parser.releaseDocument() );
+    Q_ASSERT( document );
+
+    QVector<GeoDataFolder> folders = document->folders();
+    foreach( const GeoDataFolder &folder, folders ) {
+        foreach( const GeoDataPlacemark &placemark, folder.placemarks() ) {
+            GeoDataGeometry* geometry = placemark.geometry();
+            if ( geometry->geometryId() == GeoDataLineStringId ) {
+                GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
+                Q_ASSERT( lineString && "Internal error: geometry ID does not match class type" );
+                if ( lineString ) {
+                    for ( int i=0; i<lineString->size(); ++i ) {
+                        RouteElement element;
+                        element.type = WayPoint;
+                        element.position = lineString->at( i );
+                        d->m_route.push_back( element );
+                    }
+                }
+            }
+        }
+    }
+
+    reset();
+    return true;
 }
 
 RoutingModel::Duration RoutingModel::duration() const

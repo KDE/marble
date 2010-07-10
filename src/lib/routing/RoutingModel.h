@@ -91,7 +91,15 @@ public:
       * @todo: Add geodata/handlers/opengis, use it in the route provider and use a
       * parsed GeoDocument here
       */
-    void importOpenGis( const QByteArray &xmlData );
+    bool importOpenGis( const QByteArray &xmlData );
+
+    /**
+      * @brief Parse the provided data in kml format.
+      *
+      * Old data in the model is discarded, the parsed content of the provided xml data
+      * in kml format is used as the new model data and a model reset is done
+      */
+    bool importKml( const QByteArray &content );
 
     /**
       * Returns the total (estimated) time it takes to travel from

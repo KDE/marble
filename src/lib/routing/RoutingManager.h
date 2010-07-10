@@ -83,6 +83,7 @@ private Q_SLOTS:
     void setRouteData( AbstractRoutingProvider::Format format, const QByteArray &data );
 
 private:
+    friend class RoutingManagerPrivate;
     RoutingManagerPrivate *const d;
 };
 
