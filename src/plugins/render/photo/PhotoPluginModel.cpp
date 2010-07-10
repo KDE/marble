@@ -121,12 +121,12 @@ void PhotoPluginModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
 
 void PhotoPluginModel::parseFile( const QByteArray& file )
 {
-    QList<AbstractDataPluginItem*> list;
+    QList<PhotoPluginItem*> list;
     FlickrParser parser( &list, this );
     
     parser.read( file );
     
-    QList<AbstractDataPluginItem*>::iterator it;
+    QList<PhotoPluginItem*>::iterator it;
     
     for( it = list.begin(); it != list.end(); ++it ) {
         if( itemExists( (*it)->id() ) ) {
@@ -136,8 +136,8 @@ void PhotoPluginModel::parseFile( const QByteArray& file )
         
         // Currently all Flickr images with geotags are on earth
         (*it)->setTarget( "earth" );
-        downloadItemData( ((PhotoPluginItem*) (*it))->photoUrl(), "thumbnail", (*it) );
-        downloadItemData( ((PhotoPluginItem*) (*it))->infoUrl(),  "info",      (*it) );
+        downloadItemData( (*it)->photoUrl(), "thumbnail", (*it) );
+        downloadItemData( (*it)->infoUrl(),  "info",      (*it) );
     }
 }
 

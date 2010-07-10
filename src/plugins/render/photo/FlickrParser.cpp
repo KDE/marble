@@ -20,7 +20,7 @@
 
 using namespace Marble;
 
-FlickrParser::FlickrParser( QList<AbstractDataPluginItem *> *list,
+FlickrParser::FlickrParser( QList<PhotoPluginItem *> *list,
                             QObject *parent )
     : m_list( list ),
       m_parent( parent )

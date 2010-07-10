@@ -20,12 +20,12 @@ class QObject;
 namespace Marble
 {
     
-class AbstractDataPluginItem;
+class PhotoPluginItem;
 
 class FlickrParser : public QXmlStreamReader
 {
 public:
-    FlickrParser( QList<AbstractDataPluginItem *> *list,
+    FlickrParser( QList<PhotoPluginItem *> *list,
                   QObject *parent );
 
     bool read( QByteArray data );
@@ -36,7 +36,7 @@ private:
     void readPhotos();
     void readPhoto();
 
-    QList<AbstractDataPluginItem *> *m_list;
+    QList<PhotoPluginItem *> *m_list;
     QObject *m_parent;
 };
 
