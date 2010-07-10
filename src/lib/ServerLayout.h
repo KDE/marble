@@ -75,16 +75,23 @@ public:
     virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const;
 };
 
-class LatLonBoxServerLayout : public ServerLayout
+class WmsServerLayout : public ServerLayout
 {
 public:
+    WmsServerLayout( GeoSceneTexture *texture );
+
     /**
-     * Replaces escape sequences in the @p prototypeUrl according to the lat-lon box
-     * covered by the given @p tileId and returns the result.
+     * Adds WMS query items to the @p prototypeUrl and returns the result.
      *
-     * Escape sequences are: {latTop}, {latBottom}, {lonLeft}, and {lonRight}.
+     * The following items are added: service, request, version, width, height, bbox.
+     *
+     * The following items are only added if they are not already specified in the dgml file:
+     * styles, format, srs, layers.
      */
     virtual QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const;
+
+private:
+    GeoSceneTexture *const m_textureLayer;
 };
 
 }

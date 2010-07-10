@@ -74,8 +74,8 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
             serverLayout = new OsmServerLayout( texture );
         else if ( modeStr == "Custom" )
             serverLayout = new CustomServerLayout();
-        else if ( modeStr == "LatLonBox" )
-            serverLayout = new LatLonBoxServerLayout();
+        else if ( modeStr == "WebMapService" )
+            serverLayout = new WmsServerLayout( texture );
         else {
             storageLayout = GeoSceneTexture::Marble;
             serverLayout = new MarbleServerLayout( texture );
