@@ -202,9 +202,24 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     /**
      * @brief Get the Y coordinate of the North Pole.
-     * @return the pixel address of the geographical north pole.
+     * @return the pixel address of the geographical north pole relative to the center of the widget.
+     * This method is deprecated because it returns an unintuitive result.
+     * Use @see northPolePosition()
+     * or @see southPolePosition()
      */
-    int northPoleY();
+    MARBLE_DEPRECATED(int northPoleY());
+
+    /**
+     * @brief Get the pixel position of the North Pole.
+     * @return The pixel position of the geographical north pole.
+     */
+    QPoint northPolePosition();
+
+    /**
+     * @brief Get the pixel position of the South Pole.
+     * @return The pixel position of the geographical south pole.
+     */
+    QPoint southPolePosition();
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.

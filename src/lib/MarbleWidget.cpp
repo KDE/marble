@@ -738,7 +738,17 @@ void MarbleWidget::disconnectNotify( const char * signal )
 
 int MarbleWidget::northPoleY()
 {
-    return d->m_map->northPoleY();
+    return northPolePosition().y();
+}
+
+QPoint MarbleWidget::northPolePosition()
+{
+    return d->m_map->northPolePosition();
+}
+
+QPoint MarbleWidget::southPolePosition()
+{
+    return d->m_map->southPolePosition();
 }
 
 bool MarbleWidget::screenCoordinates( qreal lon, qreal lat,

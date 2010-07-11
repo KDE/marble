@@ -858,11 +858,21 @@ void MarbleMap::moveDown()
 
 int MarbleMap::northPoleY()
 {
-    Quaternion  northPole     = GeoDataCoordinates( 0.0, M_PI * 0.5 ).quaternion();
-    Quaternion  invPlanetAxis = d->m_viewParams.planetAxis().inverse();
+    return northPolePosition().y();
+}
 
-    northPole.rotateAroundAxis( invPlanetAxis );
-    return (int)( d->m_viewParams.radius() * northPole.v[Q_Y] );
+QPoint MarbleMap::northPolePosition()
+{
+    qreal x, y;
+    screenCoordinates( 0.0, 90.0, x, y );
+    return QPoint( (int) x, (int) y );
+}
+
+QPoint MarbleMap::southPolePosition()
+{
+    qreal x, y;
+    screenCoordinates( 0.0, -90.0, x, y );
+    return QPoint( (int) x, (int) y );
 }
 
 bool MarbleMap::screenCoordinates( qreal lon, qreal lat,

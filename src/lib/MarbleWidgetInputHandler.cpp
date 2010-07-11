@@ -521,14 +521,12 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 if ( MarbleWidgetInputHandler::d->m_widget->projection() == Spherical ) {
                     if ( d->m_leftPressedLat >= 0 ) {
                         // The visible pole is the north pole
-                        if ( event->y() < ( - MarbleWidgetInputHandler::d->m_widget->northPoleY()
-                                            + MarbleWidgetInputHandler::d->m_widget->height() / 2 ) )
+                        if ( event->y() < MarbleWidgetInputHandler::d->m_widget->northPolePosition().y() )
                             d->m_leftPressedDirection = -1;
                     }
                     else {
                         // The visible pole is the south pole
-                        if ( event->y() > ( + MarbleWidgetInputHandler::d->m_widget->northPoleY()
-                                            + MarbleWidgetInputHandler::d->m_widget->height() / 2 ) )
+                        if ( event->y() > MarbleWidgetInputHandler::d->m_widget->southPolePosition().y() )
                             d->m_leftPressedDirection = -1;
                     }
                 }
