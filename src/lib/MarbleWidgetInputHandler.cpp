@@ -511,12 +511,14 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 // Choose spin direction by taking into account whether we
                 // drag above or below the visible pole.
                 if ( MarbleWidgetInputHandler::d->m_widget->projection() == Spherical ) {
-                    if ( polarity > 0 ) {
+                    if ( d->m_leftpressedb >= 0 ) {
+                        // The visible pole is the north pole
                         if ( event->y() < ( - MarbleWidgetInputHandler::d->m_widget->northPoleY()
                                             + MarbleWidgetInputHandler::d->m_widget->height() / 2 ) )
                             d->m_leftpresseddirection = -1;
                     }
                     else {
+                        // The visible pole is the south pole
                         if ( event->y() > ( + MarbleWidgetInputHandler::d->m_widget->northPoleY()
                                             + MarbleWidgetInputHandler::d->m_widget->height() / 2 ) )
                             d->m_leftpresseddirection = -1;
