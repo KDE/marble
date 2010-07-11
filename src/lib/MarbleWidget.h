@@ -282,11 +282,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /**
      * @brief Return the longitude of the center point.
+     * @return The longitude of the center point in degree.
      */
     qreal centerLongitude() const;
 
     /**
      * @brief Return the latitude of the center point.
+     * @return The latitude of the center point in degree.
      */
     qreal centerLatitude() const;
 
@@ -644,13 +646,15 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     /**
      * @brief  Set the latitude for the center point
-     * @param  lat  the new value for the latitude
+     * @param  lat  the new value for the latitude in degree.
+     * @param  mode the FlyToMode that will be used.
      */
     void setCenterLatitude( qreal lat, FlyToMode mode = Instant );
 
     /**
      * @brief  Set the longitude for the center point
-     * @param  lon  the new value for the longitude
+     * @param  lon  the new value for the longitude in degree.
+     * @param  mode the FlyToMode that will be used.
      */
     void setCenterLongitude( qreal lon, FlyToMode mode = Instant );
 
