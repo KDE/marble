@@ -62,6 +62,9 @@ extern const char* GeoDataRegionType;
 extern const char* GeoDataStyleSelectorType;
 extern const char* GeoDataStyleType;
 extern const char* GeoDataStyleMapType;
+extern const char* GeoDataTimePrimitiveType;
+extern const char* GeoDataTimeStampType;
+extern const char* GeoDataTimeSpanType;
 }
 
 }

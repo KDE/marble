@@ -160,7 +160,6 @@ namespace kml
     extern const char* kmlTag_text;
     extern const char* kmlTag_textcolor;
     extern const char* kmlTag_tilt;
-    extern const char* kmlTag_TimePrimitive;
     extern const char* kmlTag_TimeSpan;
     extern const char* kmlTag_TimeStamp;
     extern const char* kmlTag_Update;

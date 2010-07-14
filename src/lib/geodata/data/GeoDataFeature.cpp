@@ -453,6 +453,28 @@ void GeoDataFeature::setVisible( bool value )
     d->m_visible = value;
 }
 
+GeoDataTimeSpan& GeoDataFeature::timeSpan() const
+{
+    return d->m_timeSpan;
+}
+
+void GeoDataFeature::setTimeSpan( GeoDataTimeSpan timeSpan )
+{
+    detach();
+    d->m_timeSpan = timeSpan;
+}
+
+GeoDataTimeStamp&  GeoDataFeature::timeStamp() const
+{
+    return d->m_timeStamp;
+}
+
+void GeoDataFeature::setTimeStamp( GeoDataTimeStamp timeStamp )
+{
+    detach();
+    d->m_timeStamp = timeStamp;
+}
+
 GeoDataStyle* GeoDataFeature::style() const
 {
     if ( s_defaultStyleInitialized == false )

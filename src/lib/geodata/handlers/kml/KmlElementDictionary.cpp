@@ -160,7 +160,6 @@ const char* kmlTag_tessellate = "tessellate";
 const char* kmlTag_text = "text";
 const char* kmlTag_textcolor = "textcolor";
 const char* kmlTag_tilt = "tilt";
-const char* kmlTag_TimePrimitive = "TimePrimitive";
 const char* kmlTag_TimeSpan = "TimeSpan";
 const char* kmlTag_TimeStamp = "TimeStamp";
 const char* kmlTag_Update = "Update";

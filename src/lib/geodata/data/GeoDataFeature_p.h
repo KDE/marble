@@ -18,6 +18,8 @@
 #include "GeoDataAbstractView.h"
 #include "GeoDataFeature.h"
 #include "GeoDataRegion.h"
+#include "GeoDataTimeStamp.h"
+#include "GeoDataTimeSpan.h"
 
 #include "GeoDataTypes.h"
 
@@ -43,6 +45,8 @@ class GeoDataFeaturePrivate
         m_style( 0 ),
         m_styleMap( 0 ),
         m_extendedData(),
+        m_timeSpan(),
+        m_timeStamp(),
         m_region(),
         ref( 0 )
     {
@@ -63,6 +67,8 @@ class GeoDataFeaturePrivate
         m_style( other.m_style ),               //FIXME: both style and stylemap need to be reworked internally!!!!
         m_styleMap( other.m_styleMap ),
         m_extendedData( other.m_extendedData ),
+        m_timeSpan( other.m_timeSpan ),
+        m_timeStamp( other.m_timeStamp ),
         m_region( other.m_region ),
         ref( 0 )
     {
@@ -82,6 +88,8 @@ class GeoDataFeaturePrivate
         m_role = other.m_role;
         m_style = other.m_style;
         m_styleMap = other.m_styleMap;
+        m_timeSpan = other.m_timeSpan;
+        m_timeStamp = other.m_timeStamp;
         m_visualCategory = other.m_visualCategory;
         m_extendedData = other.m_extendedData;
         m_region = other.m_region;
@@ -128,6 +136,9 @@ class GeoDataFeaturePrivate
     GeoDataStyleMap* m_styleMap;
 
     GeoDataExtendedData m_extendedData;
+
+    GeoDataTimeSpan  m_timeSpan;
+    GeoDataTimeStamp m_timeStamp;
 
     GeoDataRegion m_region;
     

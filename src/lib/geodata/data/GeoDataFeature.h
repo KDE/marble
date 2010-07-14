@@ -40,6 +40,9 @@ class GeoDataStyleMap;
 
 class GeoDataExtendedData;
 
+class GeoDataTimeSpan;
+class GeoDataTimeStamp;
+
 class GeoDataFeaturePrivate;
 
 /**
@@ -213,6 +216,28 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
      * or through some action of the program.
      */ 
     void setVisible( bool value );
+
+    /**
+     * Return the timespan of the feature.
+     */
+    GeoDataTimeSpan& timeSpan() const;
+
+    /**
+     * Set the timespan of the feature.
+     * @param timeSpan new of timespan.	
+     */
+    void setTimeSpan( GeoDataTimeSpan timeSpan );
+
+    /**
+     * Return the timestamp of the feature.
+     */
+    GeoDataTimeStamp& timeStamp() const;
+
+    /**
+     * Set the timestamp of the feature.
+     * @param timeStamp new of the timestamp.
+     */
+    void setTimeStamp( GeoDataTimeStamp timeStamp );
 
     /**
      * Return the style assigned to the placemark.

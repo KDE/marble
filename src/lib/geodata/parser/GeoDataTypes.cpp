@@ -55,6 +55,9 @@ const char* GeoDataRegionType = "GeoDataRegion";
 const char* GeoDataStyleSelectorType = "GeoDataStyleSelector";
 const char* GeoDataStyleType = "GeoDataStyle";
 const char* GeoDataStyleMapType = "GeoDataStyleMap";
+const char* GeoDataTimePrimitiveType = "GeoDataTimePrimitive";
+const char* GeoDataTimeSpanType = "GeoDataTimeSpan";
+const char* GeoDataTimeStampType = "GeoDataTimeStamp";
 }
 
 }
