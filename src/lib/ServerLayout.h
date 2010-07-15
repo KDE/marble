@@ -21,6 +21,7 @@ class TileId;
 class ServerLayout
 {
 public:
+    ServerLayout( GeoSceneTexture *textureLayer );
     virtual ~ServerLayout();
 
     /**
@@ -32,6 +33,13 @@ public:
      * @return completed URL for requested tile id
      */
     virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId &id ) const = 0;
+
+protected:
+    qint64 numTilesX( const Marble::TileId &tileId ) const;
+    qint64 numTilesY( const Marble::TileId &tileId ) const;
+
+protected:
+    GeoSceneTexture *const m_textureLayer;
 };
 
 class MarbleServerLayout : public ServerLayout
@@ -43,9 +51,6 @@ public:
      * Completes the path of the @p prototypeUrl and returns it.
      */
     virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const;
-
-private:
-    GeoSceneTexture *const m_textureLayer;
 };
 
 class OsmServerLayout : public ServerLayout
@@ -58,14 +63,13 @@ public:
      * the result.
      */
     virtual QUrl downloadUrl( const QUrl &prototypeUrl, const TileId & ) const;
-
-private:
-    GeoSceneTexture *const m_textureLayer;
 };
 
 class CustomServerLayout : public ServerLayout
 {
 public:
+    CustomServerLayout( GeoSceneTexture *texture );
+
     /**
      * Replaces escape sequences in the @p prototypeUrl by the values in @p id
      * and returns the result.
@@ -91,7 +95,9 @@ public:
     virtual QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const;
 
 private:
-    GeoSceneTexture *const m_textureLayer;
+    qreal latBottom( const Marble::TileId &tileId ) const;
+    qreal latTop( const Marble::TileId &tileId ) const;
+    QString epsgCode() const;
 };
 
 }

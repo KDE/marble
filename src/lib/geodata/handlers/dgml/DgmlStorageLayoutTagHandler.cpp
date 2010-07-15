@@ -73,7 +73,7 @@ GeoNode* DgmlStorageLayoutTagHandler::parse(GeoParser& parser) const
         if ( modeStr == "OpenStreetMap" )
             serverLayout = new OsmServerLayout( texture );
         else if ( modeStr == "Custom" )
-            serverLayout = new CustomServerLayout();
+            serverLayout = new CustomServerLayout( texture );
         else if ( modeStr == "WebMapService" )
             serverLayout = new WmsServerLayout( texture );
         else {
