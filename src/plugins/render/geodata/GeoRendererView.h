@@ -60,7 +60,7 @@ class GeoRendererView : public QAbstractItemView
  private:
     GeoPainter *m_painter;
     GeoDataDocument *m_root;
-    QString styleUrl;
+    QString m_styleUrl;
 
     void setBrushStyle( QString styleId );
     void setPenStyle( QString styleId );

@@ -24,6 +24,7 @@
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
 #include "MarbleDebug.h"
+#include "GeoDataTypes.h"
 
 #include "GeoPainter.h"
 
@@ -102,11 +103,16 @@ void GeoRendererView::renderIndex( QModelIndex &index )
      * then call the real render function. For the rest iterate through the
      * children and recurse.
      */
-    QVariant indexObjectVariant = model()->data( rootIndex(), Qt::UserRole + 11 );
-    GeoDataObject* indexObject = indexObjectVariant.value<Marble::GeoDataObject*>();
-    if( !( dynamic_cast<GeoDataFeature*>( indexObject )
-           && dynamic_cast<GeoDataFeature*>( indexObject )->isVisible() ) ) {
-        return;
+    if (index.isValid())
+    {
+        GeoDataObject* indexObject = static_cast<GeoDataObject*>(index.internalPointer());
+        if (indexObject->nodeType() == GeoDataTypes::GeoDataDocumentType) {
+            m_root = static_cast<GeoDataDocument*>(indexObject);
+            if (!m_root->isVisible())
+            {
+                return;
+            }
+        }
     }
 
     int rowCount = model()->rowCount( index );
@@ -114,13 +120,11 @@ void GeoRendererView::renderIndex( QModelIndex &index )
     for ( int row = 0; row < rowCount; ++row )
     {
         QModelIndex childIndex = model()->index( row, 0, index );
-        QString output = model()->data( childIndex ).toString();
-        QVariant objectVariant = model()->data( childIndex, Qt::UserRole + 11 );
-        GeoDataObject* object = objectVariant.value<Marble::GeoDataObject*>();
+        GeoDataObject* object = static_cast<GeoDataObject*>(childIndex.internalPointer());
 
         if( dynamic_cast<GeoDataGeometry*>( object ) ) {
             if( static_cast<GeoDataGeometry*>( object )->geometryId() != GeoDataMultiGeometryId ) {
-                renderGeoDataGeometry( reinterpret_cast<GeoDataGeometry*>( object ), styleUrl );
+                renderGeoDataGeometry( static_cast<GeoDataGeometry*>( object ), m_styleUrl );
             } else {
                 if( childIndex.isValid() && model()->rowCount( childIndex ) > 0 ) {
                     renderIndex( childIndex );
@@ -129,8 +133,8 @@ void GeoRendererView::renderIndex( QModelIndex &index )
         }
         else if( dynamic_cast<GeoDataFeature*>( object ) ) {
             if( dynamic_cast<GeoDataFeature*>( object )->featureId() == GeoDataPlacemarkId ) {
-                GeoDataPlacemark placemark( *static_cast<GeoDataFeature*>( object ) );
-                styleUrl = placemark.styleUrl();
+                GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
+                m_styleUrl = placemark->styleUrl();
             }
 
             if( childIndex.isValid() && model()->rowCount( childIndex ) > 0 ) {
@@ -208,9 +212,6 @@ bool GeoRendererView::renderGeoDataGeometry( GeoDataGeometry *object, QString st
     m_painter->save();
     m_painter->autoMapQuality();
 
-    m_root = dynamic_cast<GeoDataDocument*>( model()->data( rootIndex(), 
-                 Qt::UserRole + 11 ).value<Marble::GeoDataObject*>() );
-
     if( !m_root ) {
         qWarning() << "root seems to be 0!!!";
         return false;
@@ -230,18 +231,18 @@ bool GeoRendererView::renderGeoDataGeometry( GeoDataGeometry *object, QString st
         setBrushStyle( mapped );
         setPenStyle( mapped );
         // geometries are implicitly shared, this shouldn't hurt
-        GeoDataPolygon polygon( *static_cast<GeoDataPolygon*>( object ) );
+        GeoDataPolygon polygon( *object );
         m_painter->drawPolygon( polygon );
     }
     if( object->geometryId() == GeoDataLinearRingId ) {
         m_painter->setBrush( QColor( 0, 0, 0, 0 ) );
         setPenStyle( mapped );
-        GeoDataLinearRing linearRing( *static_cast<GeoDataLinearRing*>( object ) );
+        GeoDataLinearRing linearRing( *object );
         m_painter->drawPolygon( linearRing );
     }
     if( object->geometryId() == GeoDataLineStringId ) {
         setPenStyle( mapped );
-        GeoDataLineString lineString( *static_cast<GeoDataLineString*>( object ) );
+        GeoDataLineString lineString( *object );
         m_painter->drawPolyline( lineString );
     }
     /* Note: GeoDataMultiGeometry is handled within the model */
