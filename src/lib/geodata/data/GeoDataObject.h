@@ -57,6 +57,12 @@ public:
     /// Provides type information for downcasting a GeoNode
     virtual QString nodeType() const;
 
+    /// Provides the parent of the object in GeoDataContainers
+    virtual GeoDataObject *parent() const;
+
+    /// Sets the parent of the object
+    virtual void setParent(GeoDataObject *parent);
+
     /**
      * @brief Get the id of the object.
      */

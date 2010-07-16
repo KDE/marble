@@ -27,7 +27,8 @@ class GeoDataObjectPrivate
   public:
     GeoDataObjectPrivate()
         : m_id(0),
-          m_targetId(0)
+          m_targetId(0),
+          m_parent(0)
     {
     }
 
@@ -38,6 +39,7 @@ class GeoDataObjectPrivate
 
     int  m_id;
     int  m_targetId;
+    GeoDataObject *m_parent;
 };
 
 GeoDataObject::GeoDataObject()
@@ -66,6 +68,16 @@ GeoDataObject::~GeoDataObject()
 QString GeoDataObject::nodeType() const
 {
     return d->nodeType();
+}
+
+GeoDataObject *GeoDataObject::parent() const
+{
+    return d->m_parent;
+}
+
+void GeoDataObject::setParent(GeoDataObject *parent)
+{
+    d->m_parent = parent;
 }
 
 int GeoDataObject::id() const
