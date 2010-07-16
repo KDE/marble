@@ -42,7 +42,7 @@ void GeoRendererView::setGeoPainter( GeoPainter* painter )
 {
     m_painter = painter;
     /* the paintEvent function has to called by hand as the view is not 
-     * connected to a widget (where you normally would get the event from) */
+     * connected to a widget ( where you normally would get the event from ) */
     if( model() ) paintEvent( 0 );
 }
 
@@ -99,17 +99,15 @@ void GeoRendererView::renderIndex( QModelIndex &index )
 {
     /*
      * "render" a specific index - this means going through all children and if
-     * one can be rendered (if it is a Geometry object which is not a container)
+     * one can be rendered ( if it is a Geometry object which is not a container )
      * then call the real render function. For the rest iterate through the
      * children and recurse.
      */
-    if (index.isValid())
-    {
-        GeoDataObject* indexObject = static_cast<GeoDataObject*>(index.internalPointer());
-        if (indexObject->nodeType() == GeoDataTypes::GeoDataDocumentType) {
-            m_root = static_cast<GeoDataDocument*>(indexObject);
-            if (!m_root->isVisible())
-            {
+    if ( index.isValid() ) {
+        GeoDataObject* indexObject = static_cast<GeoDataObject*>( index.internalPointer() );
+        if ( dynamic_cast<GeoDataDocument*>( indexObject ) ) {
+            m_root = static_cast<GeoDataDocument*>( indexObject );
+            if ( !m_root->isVisible() ) {
                 return;
             }
         }
@@ -120,7 +118,7 @@ void GeoRendererView::renderIndex( QModelIndex &index )
     for ( int row = 0; row < rowCount; ++row )
     {
         QModelIndex childIndex = model()->index( row, 0, index );
-        GeoDataObject* object = static_cast<GeoDataObject*>(childIndex.internalPointer());
+        GeoDataObject* object = static_cast<GeoDataObject*>( childIndex.internalPointer() );
 
         if( dynamic_cast<GeoDataGeometry*>( object ) ) {
             if( static_cast<GeoDataGeometry*>( object )->geometryId() != GeoDataMultiGeometryId ) {

@@ -96,7 +96,6 @@ void TestGeoData::parentingTest()
     GeoDataPlacemark *placemarkPtr;
     QCOMPARE(document->child(0)->nodeType(), placemark->nodeType());
     placemarkPtr = static_cast<GeoDataPlacemark*>(document->child(0));
-    QCOMPARE(placemarkPtr->p(), placemark->p());
     QCOMPARE(placemarkPtr, placemark);
 
     /// check retrieved placemark matches intented child
@@ -107,7 +106,6 @@ void TestGeoData::parentingTest()
     GeoDataFolder *folderPtr;
     QCOMPARE(document->child(1)->nodeType(), folder->nodeType());
     folderPtr = static_cast<GeoDataFolder*>(document->child(1));
-    QCOMPARE(folderPtr->p(), folder->p());
     QCOMPARE(folderPtr, folder);
 
     /// check retrieved folder matches intended child
@@ -118,7 +116,6 @@ void TestGeoData::parentingTest()
     QCOMPARE(folderPtr->size(), 1);
     placemarkPtr = static_cast<GeoDataPlacemark*>(folderPtr->child(0));
     QCOMPARE(placemarkPtr->nodeType(), placemark2->nodeType());
-    QCOMPARE(placemarkPtr->p(), placemark2->p());
     QCOMPARE(placemarkPtr, placemark2);
 
 

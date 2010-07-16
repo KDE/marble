@@ -30,7 +30,7 @@ class GeoDataTreeModel : public QAbstractItemModel
  public:
 
     /**
-     * Creates a new GeoDataModel.
+     * Creates a new GeoDataTreeModel.
      *
      * @param parent The parent object.
      */
