@@ -52,7 +52,7 @@ class MarbleGeometryModel::Private
         if( !geometry ) return;
 
         GeoDataMultiGeometry* multiGeometry = static_cast<GeoDataMultiGeometry*>( geometry );
-        QVector<GeoDataGeometry> & vec = multiGeometry->vector();
+        QVector<GeoDataGeometry> vec = multiGeometry->vector();
         QVector<GeoDataGeometry>::iterator iterator = vec.begin();
         QVector<GeoDataGeometry>::iterator end = vec.end();
         for(; iterator != end; ++iterator ) {

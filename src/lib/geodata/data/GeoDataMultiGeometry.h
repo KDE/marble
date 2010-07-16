@@ -52,19 +52,34 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
     GeoDataGeometry& last();
     const GeoDataGeometry& last() const;
 
+    /**
+     * @brief  returns the requested child item
+     */
+    GeoDataGeometry* child( int );
+
+    /**
+     * @brief returns the position of an item in the list
+     */
+    int childPosition( GeoDataGeometry *child);
+
+    /**
+    * @brief add an element
+    */
+    void append( GeoDataGeometry *other );
+
     void append ( const GeoDataGeometry& value );
     GeoDataMultiGeometry& operator << ( const GeoDataGeometry& value );
     
-    QVector<GeoDataGeometry>::Iterator begin();
-    QVector<GeoDataGeometry>::Iterator end();
-    QVector<GeoDataGeometry>::ConstIterator constBegin() const;
-    QVector<GeoDataGeometry>::ConstIterator constEnd() const;
+    QVector<GeoDataGeometry*>::Iterator begin();
+    QVector<GeoDataGeometry*>::Iterator end();
+    QVector<GeoDataGeometry*>::ConstIterator constBegin() const;
+    QVector<GeoDataGeometry*>::ConstIterator constEnd() const;
     void clear();
-    QVector<GeoDataGeometry>& vector() const;
+    QVector<GeoDataGeometry> vector() const;
 
-    QVector<GeoDataGeometry>::Iterator erase ( QVector<GeoDataGeometry>::Iterator pos );
-    QVector<GeoDataGeometry>::Iterator erase ( QVector<GeoDataGeometry>::Iterator begin,
-                                                  QVector<GeoDataGeometry>::Iterator end );
+    QVector<GeoDataGeometry*>::Iterator erase ( QVector<GeoDataGeometry*>::Iterator pos );
+    QVector<GeoDataGeometry*>::Iterator erase ( QVector<GeoDataGeometry*>::Iterator begin,
+                                                  QVector<GeoDataGeometry*>::Iterator end );
 
     // Serialize the Placemark to @p stream
     virtual void pack( QDataStream& stream ) const;

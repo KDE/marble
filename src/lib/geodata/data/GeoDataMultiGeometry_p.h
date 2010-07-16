@@ -25,6 +25,11 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
     {
     }
 
+     ~GeoDataMultiGeometryPrivate()
+     {
+         qDeleteAll(m_vector);
+     }
+
     virtual GeoDataGeometryPrivate* copy()
     { 
          GeoDataMultiGeometryPrivate* copy = new GeoDataMultiGeometryPrivate;
@@ -41,7 +46,7 @@ class GeoDataMultiGeometryPrivate : public GeoDataGeometryPrivate
     {
         return GeoDataMultiGeometryId;
     }
-    QVector<GeoDataGeometry>  m_vector;
+    QVector<GeoDataGeometry*>  m_vector;
 };
 
 } // namespace Marble
