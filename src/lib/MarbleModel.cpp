@@ -189,7 +189,7 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_popSortModel->setSourceModel( d->m_dataFacade->placemarkModel() );
 //    d->m_popSortModel->setSortLocaleAware( true );
-//    d->m_popSortModel->setDynamicSortFilter( true );
+    d->m_popSortModel->setDynamicSortFilter( true );
     d->m_popSortModel->setSortRole( MarblePlacemarkModel::PopularityIndexRole );
     d->m_popSortModel->sort( 0, Qt::DescendingOrder );
     
@@ -199,7 +199,7 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( d->m_placemarkselectionmodel,  SIGNAL( selectionChanged( QItemSelection,
                                                                       QItemSelection) ),
              d->m_placemarkLayout,          SLOT( requestStyleReset() ) );
-    connect( d->m_dataFacade->placemarkModel(),           SIGNAL( layoutChanged() ),
+    connect( d->m_popSortModel,           SIGNAL( layoutChanged() ),
              d->m_placemarkLayout,          SLOT( requestStyleReset() ) );
 
     /*

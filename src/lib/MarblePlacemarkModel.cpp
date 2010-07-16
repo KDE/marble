@@ -182,6 +182,7 @@ void  MarblePlacemarkModel::removePlacemarks( const QString &containerName,
     beginRemoveRows( QModelIndex(), start, start + length );
     d->m_size -= length;
     endRemoveRows();
+    emit layoutChanged();
     mDebug() << "removePlacemarks(" << containerName << "): Time elapsed:" << t.elapsed() << "ms for" << length << "Placemarks.";
 }
 
