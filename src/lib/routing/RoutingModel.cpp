@@ -276,8 +276,8 @@ bool RoutingModel::importKml( const QByteArray &content )
 
     QVector<GeoDataFolder> folders = document->folders();
     foreach( const GeoDataFolder &folder, folders ) {
-        foreach( const GeoDataPlacemark &placemark, folder.placemarks() ) {
-            GeoDataGeometry* geometry = placemark.geometry();
+        foreach( const GeoDataPlacemark *placemark, folder.placemarkList() ) {
+            GeoDataGeometry* geometry = placemark->geometry();
             if ( geometry->geometryId() == GeoDataLineStringId ) {
                 GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
                 Q_ASSERT( lineString && "Internal error: geometry ID does not match class type" );

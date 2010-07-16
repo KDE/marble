@@ -81,7 +81,6 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      * @see GeoDataPlacemark
      */
     QVector<GeoDataPlacemark*> placemarkList() const;
-    QVector<GeoDataPlacemark> placemarks() const;
     
     /**
      * @brief  returns the requested child item

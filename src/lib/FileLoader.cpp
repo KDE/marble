@@ -239,21 +239,21 @@ bool FileLoader::loadFile( const QString &filename )
     qint64   tmpint64;
 
     while ( !in.atEnd() ) {
-        GeoDataPlacemark mark;
+        GeoDataPlacemark *mark = new GeoDataPlacemark;
         in >> tmpstr;
-        mark.setName( tmpstr );
+        mark->setName( tmpstr );
         in >> lon >> lat >> alt;
-        mark.setCoordinate( (qreal)(lon), (qreal)(lat), (qreal)(alt) );
+        mark->setCoordinate( (qreal)(lon), (qreal)(lat), (qreal)(alt) );
         in >> tmpstr;
-        mark.setRole( tmpstr );
+        mark->setRole( tmpstr );
         in >> tmpstr;
-        mark.setDescription( tmpstr );
+        mark->setDescription( tmpstr );
         in >> tmpstr;
-        mark.setCountryCode( tmpstr );
+        mark->setCountryCode( tmpstr );
         in >> area;
-        mark.setArea( (qreal)(area) );
+        mark->setArea( (qreal)(area) );
         in >> tmpint64;
-        mark.setPopulation( tmpint64 );
+        mark->setPopulation( tmpint64 );
 
         m_document->append( mark );
     }
@@ -291,20 +291,20 @@ void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *contai
     qreal lat;
     qreal alt;
 
-    const QVector<GeoDataPlacemark> placemarks = container->placemarks();
-    QVector<GeoDataPlacemark>::const_iterator it = placemarks.constBegin();
-    QVector<GeoDataPlacemark>::const_iterator const end = placemarks.constEnd();
+    const QVector<GeoDataPlacemark*> placemarks = container->placemarkList();
+    QVector<GeoDataPlacemark*>::const_iterator it = placemarks.constBegin();
+    QVector<GeoDataPlacemark*>::const_iterator const end = placemarks.constEnd();
     for (; it != end; ++it ) {
-        out << it->name();
-        it->coordinate( lon, lat, alt );
+        out << (*it)->name();
+        (*it)->coordinate( lon, lat, alt );
 
         // Use double to provide a single cache file format across architectures
         out << (double)(lon) << (double)(lat) << (double)(alt);
-        out << QString( it->role() );
-        out << QString( it->description() );
-        out << QString( it->countryCode() );
-        out << (double) it->area();
-        out << (qint64) it->population();
+        out << QString( (*it)->role() );
+        out << QString( (*it)->description() );
+        out << QString( (*it)->countryCode() );
+        out << (double) (*it)->area();
+        out << (qint64) (*it)->population();
     }
 
     const QVector<GeoDataFolder> folders = container->folders();

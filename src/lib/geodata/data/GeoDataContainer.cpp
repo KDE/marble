@@ -94,23 +94,6 @@ QVector<GeoDataPlacemark*> GeoDataContainer::placemarkList() const
     return results;
 }
 
-QVector<GeoDataPlacemark> GeoDataContainer::placemarks() const
-{
-    QVector<GeoDataPlacemark> results;
-
-    QVector<GeoDataFeature*>::const_iterator it = p()->m_vector.constBegin();
-    QVector<GeoDataFeature*>::const_iterator end = p()->m_vector.constEnd();
-
-    for (; it != end; ++it) {
-        if ( GeoDataPlacemarkId == (*it)->featureId() ) {
-            GeoDataPlacemark placemark = **it;
-            results.append( placemark );
-        }
-    }
-
-    return results;
-}
-
 QVector<GeoDataFeature*> GeoDataContainer::featureList() const
 {
     return p()->m_vector;
