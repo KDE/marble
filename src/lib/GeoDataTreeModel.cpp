@@ -22,6 +22,7 @@
 #include "GeoDataContainer.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
+#include "GeoDataStyle.h"
 #include "GeoDataTypes.h"
 #include "FileManager.h"
 #include "KmlFileViewItem.h"
@@ -114,20 +115,35 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
     if ( !index.isValid() )
         return QVariant();
 
-    if ( role != Qt::DisplayRole )
-        return QVariant();
+    GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
+    if ( role == Qt::DisplayRole ) {
 
-    GeoDataFeature *feature = static_cast<GeoDataFeature*>( index.internalPointer() );
-    if ( feature )
-        return QVariant( feature->nodeType() );
+        GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
+        if ( feature )
+            return QVariant( feature->nodeType().append("-").append(feature->name()) );
 
-    GeoDataGeometry *geometry = static_cast<GeoDataGeometry*>( index.internalPointer() );
-    if ( geometry )
-        return QVariant( geometry->nodeType() );
+        GeoDataGeometry *geometry = dynamic_cast<GeoDataGeometry*>( object );
+        if ( geometry )
+            return QVariant( geometry->nodeType() );
 
-    GeoDataObject *item = static_cast<GeoDataObject*>( index.internalPointer() );
-    if ( item )
-        return QVariant( item->nodeType() );
+        GeoDataObject *item = dynamic_cast<GeoDataObject*>( object );
+        if ( item )
+            return QVariant( item->nodeType() );
+
+    }
+    else if ( role == Qt::CheckStateRole ) {
+        GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
+        if ( feature )
+            if ( feature->isVisible() )
+                return QVariant( Qt::Checked );
+            else
+                return QVariant( Qt::Unchecked );
+    }
+    else if ( role == Qt::DecorationRole ) {
+        GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
+        if ( feature )
+            return QVariant(feature->style()->iconStyle().icon());
+    }
 
     return QVariant();
 }
@@ -257,6 +273,37 @@ int GeoDataTreeModel::columnCount( const QModelIndex &node ) const
         return 1;
     }
 }
+
+bool GeoDataTreeModel::setData ( const QModelIndex & index, const QVariant & value, int role )
+{
+    if ( !index.isValid() )
+        return false;
+
+    GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
+    if ( role == Qt::CheckStateRole ) {
+        GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
+        if ( feature ) {
+            feature->setVisible( value.toBool() );
+            mDebug() << "setData " << feature->name() << " " << value.toBool();
+            emit dataChanged( index, index );
+            return true;
+        }
+    }
+}
+
+Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
+{
+    if ( !index.isValid() )
+        return Qt::NoItemFlags;
+
+    GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
+    GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
+    if ( feature ) {
+        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsUserCheckable;
+    }
+    return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+}
+
 
 void GeoDataTreeModel::setFileManager( FileManager *fileManager )
 {

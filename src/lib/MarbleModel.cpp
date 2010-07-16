@@ -174,6 +174,8 @@ MarbleModel::MarbleModel( QObject *parent )
     t.start();
     MarbleModelPrivate::refCounter.ref();
     d->m_dataFacade = new MarbleDataFacade( this );
+    connect(d->m_dataFacade->treeModel(), SIGNAL( dataChanged(QModelIndex,QModelIndex) ),
+            this, SIGNAL( modelChanged() ) );
 
     d->m_tileLoader = new StackedTileLoader( d->m_mapThemeManager, d->textureLayerProperties(),
                                              d->m_downloadManager, this );

@@ -55,6 +55,10 @@ class GeoDataTreeModel : public QAbstractItemModel
 
     int columnCount( const QModelIndex &parent = QModelIndex() ) const;
 
+    Qt::ItemFlags flags ( const QModelIndex & index ) const;
+
+    bool setData ( const QModelIndex & index, const QVariant & value, int role = Qt::EditRole );
+
     void reset() { QAbstractItemModel::reset(); }
 
     /**

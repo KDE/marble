@@ -104,12 +104,16 @@ void GeoRendererView::renderIndex( QModelIndex &index )
      * children and recurse.
      */
     if ( index.isValid() ) {
-        GeoDataObject* indexObject = static_cast<GeoDataObject*>( index.internalPointer() );
+        GeoDataObject* indexObject = static_cast<GeoDataObject*>( index.internalPointer() );        
         if ( dynamic_cast<GeoDataDocument*>( indexObject ) ) {
             m_root = static_cast<GeoDataDocument*>( indexObject );
             if ( !m_root->isVisible() ) {
                 return;
             }
+        }
+        GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( indexObject );
+        if ( feature && !feature->isVisible() ) {
+            return;
         }
     }
 
