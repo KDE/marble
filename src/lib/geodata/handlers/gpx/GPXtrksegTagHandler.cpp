@@ -42,13 +42,13 @@ GeoNode* GPXtrksegTagHandler::parse(GeoParser& parser) const
     {
         GeoDataPlacemark* placemark = parentItem.nodeAs<GeoDataPlacemark>();
         GeoDataMultiGeometry *multigeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
-        GeoDataLineString linestring;
+        GeoDataLineString *linestring = new GeoDataLineString;
 
         multigeometry->append(linestring);
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << gpxTag_trkseg << "> trkseg: " << multigeometry->size();
 #endif
-        return static_cast<GeoDataLineString*>(&multigeometry->last());
+        return linestring;
     }
     mDebug() << "trkseg parsing with parentitem" << parentItem.qualifiedName();
     return 0;

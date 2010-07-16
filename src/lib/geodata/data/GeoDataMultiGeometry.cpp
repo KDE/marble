@@ -168,15 +168,6 @@ void GeoDataMultiGeometry::append( GeoDataGeometry *other )
 }
 
 
-
-void GeoDataMultiGeometry::append ( const GeoDataGeometry& value )
-{
-    detach();
-    GeoDataGeometry *g = new GeoDataGeometry( value );
-    g->setParent( this );
-    p()->m_vector.append( g );
-}
-
 GeoDataMultiGeometry& GeoDataMultiGeometry::operator << ( const GeoDataGeometry& value )
 {
     detach();

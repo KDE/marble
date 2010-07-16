@@ -67,7 +67,6 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
     */
     void append( GeoDataGeometry *other );
 
-    void append ( const GeoDataGeometry& value );
     GeoDataMultiGeometry& operator << ( const GeoDataGeometry& value );
     
     QVector<GeoDataGeometry*>::Iterator begin();

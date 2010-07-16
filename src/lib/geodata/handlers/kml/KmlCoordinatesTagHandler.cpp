@@ -81,12 +81,12 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
                 } else if ( parentItem.represents( kmlTag_LinearRing ) ) {
                     parentItem.nodeAs<GeoDataLinearRing>()->append( coord );
                 } else if ( parentItem.represents( kmlTag_MultiGeometry ) ) {
-                    GeoDataPoint point;
+                    GeoDataPoint *point = new GeoDataPoint;
                     if ( coordinates.size() == 2 ) {
-                        point.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                        point->set( DEG2RAD * coordinates.at( 0 ).toDouble(),
 				    DEG2RAD * coordinates.at( 1 ).toDouble() );
                     } else if ( coordinates.size() == 3 ) {
-                        point.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
+                        point->set( DEG2RAD * coordinates.at( 0 ).toDouble(),
 				    DEG2RAD * coordinates.at( 1 ).toDouble(),
 				    coordinates.at( 2 ).toDouble() );
                     }

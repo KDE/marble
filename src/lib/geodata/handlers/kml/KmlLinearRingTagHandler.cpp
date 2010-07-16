@@ -42,21 +42,25 @@ GeoNode* KmlLinearRingTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    GeoDataLinearRing linearRing;
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << kmlTag_LinearRing << ">"
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
 
     if( parentItem.represents( kmlTag_outerBoundaryIs ) ) {
+        GeoDataLinearRing linearRing;
         parentItem.nodeAs<GeoDataPolygon>()->setOuterBoundary( linearRing );
         return &parentItem.nodeAs<GeoDataPolygon>()->outerBoundary();
+
     } else if( parentItem.represents( kmlTag_innerBoundaryIs ) ) {
+        GeoDataLinearRing linearRing;
         parentItem.nodeAs<GeoDataPolygon>()->appendInnerBoundary( linearRing );
         return &parentItem.nodeAs<GeoDataPolygon>()->innerBoundaries().last();
+
     } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
+        GeoDataLinearRing *linearRing = new GeoDataLinearRing;
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( linearRing );
-        return &parentItem.nodeAs<GeoDataMultiGeometry>()->last();
+        return linearRing;
     } else
         return 0;
 }
