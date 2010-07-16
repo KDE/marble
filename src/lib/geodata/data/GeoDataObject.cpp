@@ -100,27 +100,6 @@ void GeoDataObject::setTargetId( int value )
     d->m_targetId = value;
 }
 
-GeoDataObject* GeoDataObject::child(int /* pos */ )
-{
-    return 0;
-}
-
-int GeoDataObject::row()
-{
-    return 0;
-}
-
-int GeoDataObject::childPosition( GeoDataObject *child )
-{
-    Q_UNUSED( child );
-    return 0;
-}
-
-int GeoDataObject::childCount()
-{
-    return 0;
-}
-
 void GeoDataObject::pack( QDataStream& stream ) const
 {
     stream << d->m_id;

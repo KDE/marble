@@ -83,26 +83,6 @@ public:
      */
     void setTargetId( int value );
 
-    /**
-     * @brief returns the requested child item
-     */
-    virtual GeoDataObject* child( int );
-
-    /**
-     * @brief returns this items position in the parents list
-     */
-    int row();
-
-    /**
-     * @brief returns the position of an item in the list
-     */
-    virtual int childPosition( GeoDataObject* );
-
-    /**
-     * @brief returns the number of items in the list
-     */
-    virtual int childCount();
-
     /// Reimplemented from Serializable
     virtual void pack( QDataStream& stream ) const;
     /// Reimplemented from Serializable

@@ -187,7 +187,6 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      */
     virtual void unpack( QDataStream& stream );
 
-    virtual bool isPlacemark() const { return true; }
 // private:
     GeoDataPlacemarkPrivate *p() const;
 };

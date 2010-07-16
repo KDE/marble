@@ -84,8 +84,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     /// Provides type information for downcasting a GeoData
     virtual QString nodeType() const;
-    virtual bool isFolder() const { return false; }
-    virtual bool isPlacemark() const { return false; }
 
     EnumFeatureId featureId() const;
     /**
