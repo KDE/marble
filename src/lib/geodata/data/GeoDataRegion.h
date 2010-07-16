@@ -83,11 +83,6 @@ class GEODATA_EXPORT GeoDataRegion : public GeoDataObject
     virtual QString nodeType() const;
 
 
-/*!
-    \brief Assigns a feature associated as a parent
-*/
-    void setParent( GeoDataFeature * feature );
-
     
 /*!
     \brief Returns a geodesic bounding box ("latLonAltBox") of the region.

@@ -59,12 +59,6 @@ QString GeoDataRegion::nodeType() const
 }
 
 
-void GeoDataRegion::setParent( GeoDataFeature * feature )
-{
-    d->m_parent = feature;
-}
-
-
 GeoDataLatLonAltBox& GeoDataRegion::latLonAltBox() const
 {
     QMutexLocker locker( &d->m_mutex );
