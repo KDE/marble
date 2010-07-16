@@ -71,12 +71,6 @@ class GEODATA_EXPORT GeoDataFeature : public GeoDataObject
 
     GeoDataFeature( const GeoDataFeature& other );
 
-    // copy ctors for derived classes
-    GeoDataFeature( const GeoDataContainer& other );
-    GeoDataFeature( const GeoDataFolder& other );
-    GeoDataFeature( const GeoDataDocument& other );
-    GeoDataFeature( const GeoDataPlacemark& other );
-
     virtual ~GeoDataFeature();
 
     GeoDataFeature& operator=( const GeoDataFeature& other );

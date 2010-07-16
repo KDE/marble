@@ -33,11 +33,6 @@ GeoDataPlacemark::GeoDataPlacemark( const GeoDataPlacemark& other )
 {
 }
 
-GeoDataPlacemark::GeoDataPlacemark( const GeoDataFeature& other )
-: GeoDataFeature( other )
-{
-}
-
 GeoDataPlacemark::GeoDataPlacemark( const QString& name )
     : GeoDataFeature( new GeoDataPlacemarkPrivate )
 {

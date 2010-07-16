@@ -60,11 +60,6 @@ GeoDataFolder::GeoDataFolder( const GeoDataFolder& other )
 {
 }
 
-GeoDataFolder::GeoDataFolder( const GeoDataFeature& other )
-    : GeoDataContainer( other )
-{
-}
-
 GeoDataFolder::~GeoDataFolder()
 {
 }

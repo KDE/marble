@@ -52,7 +52,6 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer
  public:
     GeoDataFolder();
     GeoDataFolder( const GeoDataFolder& other );
-    GeoDataFolder( const GeoDataFeature& other );
     ~GeoDataFolder();
 
     /// Provides type information for downcasting a GeoData

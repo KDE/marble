@@ -39,11 +39,6 @@ GeoDataDocument::GeoDataDocument()
 {
 }
 
-GeoDataDocument::GeoDataDocument( const GeoDataFeature& other )
-    : GeoDataContainer( other )
-{
-}
-
 GeoDataDocument::GeoDataDocument( const GeoDataDocument& other )
     : GeoDocument(), GeoDataContainer( other )
 {

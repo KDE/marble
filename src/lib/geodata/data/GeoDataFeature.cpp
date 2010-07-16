@@ -51,34 +51,6 @@ GeoDataFeature::GeoDataFeature( const GeoDataFeature& other )
     d->ref.ref();
 }
 
-GeoDataFeature::GeoDataFeature( const GeoDataContainer& other )
-    : GeoDataObject( other ),
-      d( other.GeoDataFeature::d )
-{
-    d->ref.ref();
-}
-
-GeoDataFeature::GeoDataFeature( const GeoDataFolder& other )
-    : GeoDataObject( other ),
-      d( other.GeoDataFeature::d )
-{
-    d->ref.ref();
-}
-
-GeoDataFeature::GeoDataFeature( const GeoDataDocument& other )
-    : GeoDataObject( other ),
-      d( other.GeoDataFeature::d )
-{
-    d->ref.ref();
-}
-
-GeoDataFeature::GeoDataFeature( const GeoDataPlacemark& other )
-    : GeoDataObject( other ),
-      d( other.GeoDataFeature::d )
-{
-    d->ref.ref();
-}
-
 GeoDataFeature::GeoDataFeature( const QString& name )
     : d( new GeoDataFeaturePrivate() )
 {

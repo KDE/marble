@@ -41,11 +41,6 @@ GeoDataContainer::GeoDataContainer( const GeoDataContainer& other )
 {
 }
 
-GeoDataContainer::GeoDataContainer( const GeoDataFeature& other )
-    : GeoDataFeature( other )
-{
-}
-
 GeoDataContainer::~GeoDataContainer()
 {
 }
