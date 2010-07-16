@@ -63,7 +63,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      *
      * @see GeoDataFolder
      */
-    QVector<GeoDataFolder> folders() const;
+    QVector<GeoDataFolder*> folderList() const;
 
     /**
      * @brief A convenience function that returns all features in this container.

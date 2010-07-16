@@ -274,9 +274,9 @@ bool RoutingModel::importKml( const QByteArray &content )
     GeoDataDocument* document = static_cast<GeoDataDocument*>( parser.releaseDocument() );
     Q_ASSERT( document );
 
-    QVector<GeoDataFolder> folders = document->folders();
-    foreach( const GeoDataFolder &folder, folders ) {
-        foreach( const GeoDataPlacemark *placemark, folder.placemarkList() ) {
+    QVector<GeoDataFolder*> folders = document->folderList();
+    foreach( const GeoDataFolder *folder, folders ) {
+        foreach( const GeoDataPlacemark *placemark, folder->placemarkList() ) {
             GeoDataGeometry* geometry = placemark->geometry();
             if ( geometry->geometryId() == GeoDataLineStringId ) {
                 GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );

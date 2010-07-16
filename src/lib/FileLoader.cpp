@@ -307,12 +307,12 @@ void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *contai
         out << (qint64) (*it)->population();
     }
 
-    const QVector<GeoDataFolder> folders = container->folders();
-    QVector<GeoDataFolder>::const_iterator cont = folders.constBegin();
-    QVector<GeoDataFolder>::const_iterator endcont = folders.constEnd();
+    const QVector<GeoDataFolder*> folders = container->folderList();
+    QVector<GeoDataFolder*>::const_iterator cont = folders.constBegin();
+    QVector<GeoDataFolder*>::const_iterator endcont = folders.constEnd();
     for (; cont != endcont; ++cont ) {
-        if (GeoDataFolderId == cont->featureId() ) {
-            const GeoDataContainer *subcontainer = & (*cont);
+        if (GeoDataFolderId == (*cont)->featureId() ) {
+            GeoDataContainer *subcontainer = *cont;
             savePlacemarks(out, subcontainer);
         }
     }

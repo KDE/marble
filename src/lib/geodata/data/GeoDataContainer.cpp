@@ -60,18 +60,16 @@ QString GeoDataContainer::nodeType() const
     return p()->nodeType();
 }
 
-QVector<GeoDataFolder> GeoDataContainer::folders() const
+QVector<GeoDataFolder*> GeoDataContainer::folderList() const
 {
-    QVector<GeoDataFolder> results;
+    QVector<GeoDataFolder*> results;
 
     QVector<GeoDataFeature*>::const_iterator it = p()->m_vector.constBegin();
     QVector<GeoDataFeature*>::const_iterator end = p()->m_vector.constEnd();
 
     for (; it != end; ++it) {
-
         if ( (*it)->featureId() == GeoDataFolderId ) {
-            GeoDataFeature feature = **it;
-            results.append( feature );
+            results.append( static_cast<GeoDataFolder*>( *it ) );
         }
     }
 
