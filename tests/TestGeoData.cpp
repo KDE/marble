@@ -40,9 +40,9 @@ class TestGeoData : public QObject
 void TestGeoData::nodeTypeTest()
 {
     /// basic testing of nodeType
-    GeoDataFolder folder;
+    GeoDataFolder *folder = new GeoDataFolder;
     QString folderType(GeoDataTypes::GeoDataFolderType );
-    QCOMPARE( folder.nodeType(), folderType );
+    QCOMPARE( folder->nodeType(), folderType );
 
     /// testing the nodeType of an object appended to a container
     GeoDataDocument document;
@@ -51,23 +51,6 @@ void TestGeoData::nodeTypeTest()
     QCOMPARE( featureRef.nodeType(), folderType );
     QCOMPARE( static_cast<GeoDataObject*>(&featureRef)->nodeType(), folderType );
 
-    /// testing the nodeType of an object assigned to a super type object
-    GeoDataFeature featureAssign;
-    featureAssign = folder;
-    QCOMPARE( featureAssign.nodeType(), folderType);
-
-    /// testing the nodeType of an object copied into a super type object
-    GeoDataFeature featureCopy( folder );
-    QCOMPARE( featureCopy.nodeType(), folderType );
-
-    /// testing the nodeType of an object assigned to a non shared data object
-    GeoDataObject objectAssign;
-    objectAssign = folder;
-    QCOMPARE( objectAssign.nodeType(), folderType );
-
-    /// testing the nodeType of an object copied to a non shared data object
-    GeoDataObject objectCopy(folder);
-    QCOMPARE( objectCopy.nodeType(), folderType );
 }
 
 void TestGeoData::parentingTest()

@@ -40,7 +40,7 @@ GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_Placemark ) );
 
-    GeoDataPlacemark placemark;
+    GeoDataPlacemark *placemark = new GeoDataPlacemark;
 
     GeoStackItem parentItem = parser.parentElement();
 #ifdef DEBUG_TAGS
@@ -50,8 +50,9 @@ GeoNode* KmlPlacemarkTagHandler::parse( GeoParser& parser ) const
 
     if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
         parentItem.nodeAs<GeoDataContainer>()->append( placemark );
-        return static_cast<GeoDataPlacemark*>(&parentItem.nodeAs<GeoDataContainer>()->last());
+        return placemark;
     } else {
+        delete placemark;
         return 0;
     }
 }

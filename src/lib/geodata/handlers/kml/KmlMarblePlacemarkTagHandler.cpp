@@ -41,17 +41,18 @@ GeoNode* KmlMarblePlacemarkTagHandler::parse( GeoParser& parser ) const
 {
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_MarblePlacemark ) );
 
-    GeoDataPlacemark placemark;
 
     GeoStackItem parentItem = parser.parentElement();
 #ifdef DEBUG_TAGS
-    mDebug() << "Parsed <" << kmlTag_MarblePlacemark << "> containing: " << &placemark
+    mDebug() << "Parsed <" << kmlTag_MarblePlacemark << ">"
              << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
 
     if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
+        GeoDataPlacemark *placemark = new GeoDataPlacemark;
         parentItem.nodeAs<GeoDataContainer>()->append( placemark );
-        return &parentItem.nodeAs<GeoDataContainer>()->last();
+        return placemark;
+
     } else {
         return 0;
     }

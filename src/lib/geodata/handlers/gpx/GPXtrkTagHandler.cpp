@@ -41,16 +41,16 @@ GeoNode* GPXtrkTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(gpxTag_gpx))
     {
         GeoDataDocument* doc = parentItem.nodeAs<GeoDataDocument>();
-        GeoDataPlacemark placemark;
+        GeoDataPlacemark *placemark = new GeoDataPlacemark;
         GeoDataMultiGeometry multigeometry;
-        placemark.setGeometry(multigeometry);
-        placemark.setStyleUrl("#map-track");
+        placemark->setGeometry(multigeometry);
+        placemark->setStyleUrl("#map-track");
 
         doc->append(placemark);
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << gpxTag_trk << "> trk: " << doc->size();
 #endif
-        return static_cast<GeoDataPlacemark*>(&doc->last());
+        return placemark;
     }
     mDebug() << "trk parsing with parentitem" << parentItem.qualifiedName();
     return 0;

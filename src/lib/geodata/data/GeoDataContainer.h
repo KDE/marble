@@ -99,11 +99,6 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     void remove( int index );
 
     /**
-    * @brief add an element
-    */
-    void append( const GeoDataFeature& other );
-
-    /**
     * @brief size of the container
     */
     int size() const;

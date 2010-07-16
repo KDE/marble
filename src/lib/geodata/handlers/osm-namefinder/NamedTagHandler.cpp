@@ -47,7 +47,7 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     mDebug() << "parentItem:" << parentItem.qualifiedName().first;
 
     // FIXME: better check tags before?
-    GeoDataPlacemark named;
+    GeoDataPlacemark *named = new GeoDataPlacemark;
 
     // FIXME: attribute type
 //     const ItemType type = getItemType( parser.attribute( attr_type ).trimmed() );
@@ -58,7 +58,7 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     const QString idStr = parser.attribute( attr_id ).trimmed();
     if ( !idStr.isEmpty() )
         id = idStr.toInt();
-    named.setId( id );
+    named->setId( id );
 
     // attributes lat and lon
     qreal lat = 0.0;
@@ -70,11 +70,11 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     const QString lonStr = parser.attribute( attr_lon ).trimmed();
     if ( !lonStr.isEmpty() )
         lon = lonStr.toDouble();
-    named.setCoordinate( GeoDataPoint( lon, lat, 0.0, GeoDataPoint::Degree, 0 ));
+    named->setCoordinate( GeoDataPoint( lon, lat, 0.0, GeoDataPoint::Degree, 0 ));
 
     // attribute name
     const QString name = parser.attribute( attr_name ).trimmed();
-    named.setName( name );
+    named->setName( name );
 
     // attribute rank
     int rank = 0;
@@ -89,9 +89,9 @@ GeoNode * NamedTagHandler::parse( GeoParser & parser ) const
     const QString zoomStr = parser.attribute( attr_zoom ).trimmed();
     if ( !zoomStr.isEmpty() )
         suggestedZoomLevel = zoomStr.toInt();
-    named.setPopularityIndex( suggestedZoomLevel );
+    named->setPopularityIndex( suggestedZoomLevel );
 
-    mDebug() << "parsed named:" << named.name() << " lon:" << lon << " lat:" << lat;
+    mDebug() << "parsed named:" << named->name() << " lon:" << lon << " lat:" << lat;
 
     if ( parentItem.represents( tag_searchresults )) {
         mDebug() << "added via parent searchresults";

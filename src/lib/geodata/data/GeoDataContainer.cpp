@@ -129,14 +129,6 @@ void GeoDataContainer::append( GeoDataFeature *other )
 }
 
 
-void GeoDataContainer::append( const GeoDataFeature& other )
-{
-    detach();
-    GeoDataFeature *f = new GeoDataFeature(other);
-    f->setParent(this);
-    p()->m_vector.append( f );
-}
-
 void GeoDataContainer::remove( int index )
 {
     detach();

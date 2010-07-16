@@ -38,19 +38,17 @@ GeoNode* KmlFolderTagHandler::parse(GeoParser& parser) const
 {
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Folder));
 
-    GeoDataFolder folder;
-
     GeoStackItem parentItem = parser.parentElement();
     if ( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
-        GeoDataFolder folder;
+        GeoDataFolder *folder = new GeoDataFolder;
         GeoDataContainer *parentPtr = parentItem.nodeAs<GeoDataContainer>();
         parentPtr->append( folder );
 
 #ifdef DEBUG_TAGS
-        mDebug() << "Parsed <" << kmlTag_Folder << "> containing: " << &parentItem.nodeAs<GeoDataContainer>()->last()
+        mDebug() << "Parsed <" << kmlTag_Folder << "> containing: " << folder
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
-        return static_cast<GeoDataFolder*>(&parentPtr->last());
+        return folder;
     } else {
         return 0;
     }

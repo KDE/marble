@@ -41,7 +41,7 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
     if (parentItem.represents(gpxTag_gpx))
     {
         GeoDataDocument* doc = parentItem.nodeAs<GeoDataDocument>();
-        GeoDataPlacemark placemark;
+        GeoDataPlacemark *placemark = new GeoDataPlacemark;
 
         QXmlStreamAttributes attributes = parser.attributes();
         QStringRef tmp;
@@ -57,12 +57,12 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
         {
             lon = tmp.toString().toFloat();
         }
-        placemark.setCoordinate(lat, lon);
+        placemark->setCoordinate(lat, lon);
         doc->append(placemark);
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << gpxTag_wpt << "> waypoint: " << doc->size();
 #endif
-        return static_cast<GeoDataPlacemark*>(&doc->last());
+        return placemark;
     }
     mDebug() << "wpt parsing with parentitem" << parentItem.qualifiedName();
     return 0;

@@ -43,14 +43,14 @@ GeoNode* KmlDocumentTagHandler::parse(GeoParser& parser) const
         // this happens if there is a parent element to the Document tag. We can work around that and simply expect that
         // the new Document tag works like a Folder
         if( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
-            GeoDataDocument document;
+            GeoDataDocument *document = new GeoDataDocument;
             parentItem.nodeAs<GeoDataContainer>()->append( document );
 
 #ifdef DEBUG_TAGS
             mDebug() << "Parsed <" << kmlTag_Document << "> containing: " << &parentItem.nodeAs<GeoDataContainer>()->last()
                      << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
-            return static_cast<GeoDataDocument*>(&parentItem.nodeAs<GeoDataContainer>()->last());
+            return document;
         }
         else if ( parentItem.first.first == kmlTag_kml)
         {
