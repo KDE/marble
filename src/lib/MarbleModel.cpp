@@ -60,6 +60,7 @@
 #include "MarblePlacemarkModel.h"
 #include "MergedLayerDecorator.h"
 #include "FileManager.h"
+#include "GeoDataTreeModel.h"
 #include "PlacemarkManager.h"
 #include "PlacemarkLayout.h"
 #include "PlacemarkPainter.h"
@@ -662,6 +663,11 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
 }
 
+
+QAbstractItemModel *MarbleModel::treeModel() const
+{
+    return d->m_dataFacade->treeModel();
+}
 
 QAbstractItemModel *MarbleModel::placemarkModel() const
 {
