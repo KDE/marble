@@ -99,21 +99,6 @@ QVector<GeoDataFeature*> GeoDataContainer::featureList() const
     return p()->m_vector;
 }
 
-QVector<GeoDataFeature> GeoDataContainer::features() const
-{
-    QVector<GeoDataFeature> results;
-
-    QVector<GeoDataFeature*>::const_iterator it = p()->m_vector.constBegin();
-    QVector<GeoDataFeature*>::const_iterator end = p()->m_vector.constEnd();
-
-    for (; it != end; ++it) {
-            GeoDataFeature f = **it;
-            results.append( f );
-    }
-
-    return results;
-}
-
 /**
  * @brief  returns the requested child item
  */

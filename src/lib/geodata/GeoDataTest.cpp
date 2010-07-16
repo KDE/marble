@@ -117,11 +117,11 @@ int main(int argc, char** argv)
 
     if (document->isGeoDataDocument()) {
         GeoDataDocument *dataDocument = static_cast<GeoDataDocument*>(document);
-        QVector<GeoDataFeature>::const_iterator it = dataDocument->features().constBegin();
-        QVector<GeoDataFeature>::const_iterator end = dataDocument->features().constEnd();
+        QVector<GeoDataFeature*>::const_iterator it = dataDocument->featureList().constBegin();
+        QVector<GeoDataFeature*>::const_iterator end = dataDocument->featureList().constEnd();
         qDebug() << "---------------------------------------------------------";
         for (; it != end; ++it) {
-            qDebug() << "Name: " << it->name();
+            qDebug() << "Name: " << (*it)->name();
         }
         dumpGeoDataDocument(static_cast<GeoDataDocument*>(document));
     } else if (document->isGeoSceneDocument()) {
