@@ -59,7 +59,7 @@ signals:
     void searchFinished(const QString &text);
 
 private slots:
-    void slotRunnerFinished(MarbleAbstractRunner* runner, QVector<GeoDataPlacemark> result);
+    void slotRunnerFinished(MarbleAbstractRunner* runner, QVector<GeoDataPlacemark*> result);
 
 private:
     QString m_lastString;
@@ -69,7 +69,7 @@ private:
     QString m_previousString;
     MarblePlacemarkModel *m_model;
     QList<MarbleAbstractRunner*> m_runners;
-    QVector<GeoDataPlacemark> m_placemarkContainer;
+    QVector<GeoDataPlacemark*> m_placemarkContainer;
     QString m_celestialBodyId;
     bool m_workOffline;
 };

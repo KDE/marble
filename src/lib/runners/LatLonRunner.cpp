@@ -55,17 +55,17 @@ void LatLonRunner::run()
     bool successful = false;
     GeoDataCoordinates coord = GeoDataCoordinates::fromString( m_input, successful );
 
-    GeoDataPlacemark placemark;
-    placemark.setName( m_input );
+    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    placemark->setName( m_input );
     qreal lon, lat;
     coord.geoCoordinates( lon, lat );
-    placemark.setCoordinate( lon, lat );
-    QVector<GeoDataPlacemark> vector;
+    placemark->setCoordinate( lon, lat );
+    QVector<GeoDataPlacemark*> vector;
 
     if( successful ) {
-        placemark.setVisualCategory( category() ); 
-        placemark.setPopularity( 1000000000 );
-        placemark.setPopularityIndex( 18 );
+        placemark->setVisualCategory( category() );
+        placemark->setPopularity( 1000000000 );
+        placemark->setPopularityIndex( 18 );
         vector.append( placemark );
     }
 

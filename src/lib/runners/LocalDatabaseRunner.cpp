@@ -44,7 +44,7 @@ LocalDatabaseRunner::~LocalDatabaseRunner()
 void LocalDatabaseRunner::run()
 {
 
-    QVector<GeoDataPlacemark> vector;
+    QVector<GeoDataPlacemark*> vector;
 
     if (m_map) {
         MarblePlacemarkModel * placemarkModel =
@@ -64,20 +64,20 @@ void LocalDatabaseRunner::run()
                     continue;
                 }
                 QString name = index.data( Qt::DisplayRole ).toString();
-                GeoDataPlacemark placemark;
-                placemark.setName( name );
+                GeoDataPlacemark *placemark = new GeoDataPlacemark;
+                placemark->setName( name );
                 GeoDataCoordinates coordinates =
                     qvariant_cast<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
-                placemark.setCoordinate( coordinates.longitude(),
+                placemark->setCoordinate( coordinates.longitude(),
                                             coordinates.latitude() );
 
                 int visualCategory = qvariant_cast<int>(
                     index.data( MarblePlacemarkModel::VisualCategoryRole ) );
-                placemark.setVisualCategory( static_cast<GeoDataFeature::GeoDataVisualCategory>(visualCategory) );
+                placemark->setVisualCategory( static_cast<GeoDataFeature::GeoDataVisualCategory>(visualCategory) );
 
                 // FIXME: We don't always want to have it this prominent
-                placemark.setPopularity( 1000000000 );
-                placemark.setPopularityIndex( 18 );
+                placemark->setPopularity( 1000000000 );
+                placemark->setPopularityIndex( 18 );
 
                 vector.append( placemark );
             }

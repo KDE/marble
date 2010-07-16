@@ -56,7 +56,7 @@ GeoDataFeature::GeoDataVisualCategory HostipRunner::category() const
 
 void HostipRunner::slotNoResults()
 {
-    emit runnerFinished( this, QVector<GeoDataPlacemark>() );
+    emit runnerFinished( this, QVector<GeoDataPlacemark*>() );
 }
 
 void HostipRunner::run()
@@ -107,20 +107,20 @@ void HostipRunner::slotRequestFinished( QNetworkReply* reply )
         }
     }
 
-    QVector<GeoDataPlacemark> placemarks;
+    QVector<GeoDataPlacemark*> placemarks;
 
     if (lon != 0.0 && lat != 0.0) {
-        GeoDataPlacemark placemark;
+        GeoDataPlacemark *placemark = new GeoDataPlacemark;
 
-        placemark.setName(m_hostInfo.hostName());
+        placemark->setName(m_hostInfo.hostName());
 
         QString description("%1 (%2)");
-        placemark.setDescription(description.
+        placemark->setDescription(description.
                                  arg(m_hostInfo.hostName()).
                                  arg(m_hostInfo.addresses().first().toString()));
 
-        placemark.setCoordinate(lon * DEG2RAD, lat * DEG2RAD);
-        placemark.setVisualCategory( category() );
+        placemark->setCoordinate(lon * DEG2RAD, lat * DEG2RAD);
+        placemark->setVisualCategory( category() );
         placemarks << placemark;
     }
     

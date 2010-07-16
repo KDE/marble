@@ -76,8 +76,8 @@ public Q_SLOTS:
     void removeGeoDataDocument( int index );
 
  private:
-    QVector<GeoDataPlacemark> recurseContainer(GeoDataContainer container);
-    void createFilterProperties( QVector<GeoDataPlacemark> &container );
+    QVector<GeoDataPlacemark*> recurseContainer(GeoDataContainer *container);
+    void createFilterProperties( QVector<GeoDataPlacemark*> &container );
     int cityPopIdx( qint64 population ) const;
     int spacePopIdx( qint64 diameter ) const;
     int areaPopIdx( qreal area ) const;

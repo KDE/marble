@@ -37,7 +37,7 @@ class MarblePlacemarkModel::Private
     }
 
     int m_size;
-    QVector<GeoDataPlacemark>     *m_placemarkContainer;
+    QVector<GeoDataPlacemark*>     *m_placemarkContainer;
 };
 
 
@@ -55,7 +55,7 @@ MarblePlacemarkModel::~MarblePlacemarkModel()
     delete d;
 }
 
-void MarblePlacemarkModel::setPlacemarkContainer( QVector<GeoDataPlacemark> *container )
+void MarblePlacemarkModel::setPlacemarkContainer( QVector<GeoDataPlacemark*> *container )
 {
     d->m_placemarkContainer = container;
 }
@@ -85,33 +85,33 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
         return QVariant();
 
     if ( role == Qt::DisplayRole ) {
-        return d->m_placemarkContainer->at( index.row() ).name();
+        return d->m_placemarkContainer->at( index.row() )->name();
     } else if ( role == Qt::DecorationRole ) {
-          return qVariantFromValue( d->m_placemarkContainer->at( index.row() ).style()->iconStyle().icon() );
+          return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->style()->iconStyle().icon() );
     } else if ( role == PopularityIndexRole ) {
-        return d->m_placemarkContainer->at( index.row() ).popularityIndex();
+        return d->m_placemarkContainer->at( index.row() )->popularityIndex();
     } else if ( role == VisualCategoryRole ) {
-        return d->m_placemarkContainer->at( index.row() ).visualCategory();
+        return d->m_placemarkContainer->at( index.row() )->visualCategory();
     } else if ( role == AreaRole ) {
-        return d->m_placemarkContainer->at( index.row() ).area();
+        return d->m_placemarkContainer->at( index.row() )->area();
     } else if ( role == PopulationRole ) {
-        return d->m_placemarkContainer->at( index.row() ).population();
+        return d->m_placemarkContainer->at( index.row() )->population();
     } else if ( role == CountryCodeRole ) {
-        return d->m_placemarkContainer->at( index.row() ).countryCode();
+        return d->m_placemarkContainer->at( index.row() )->countryCode();
     } else if ( role == PopularityRole ) {
-        return d->m_placemarkContainer->at( index.row() ).popularity();
+        return d->m_placemarkContainer->at( index.row() )->popularity();
     } else if ( role == DescriptionRole ) {
-        return d->m_placemarkContainer->at( index.row() ).description();
+        return d->m_placemarkContainer->at( index.row() )->description();
     } else if ( role == Qt::ToolTipRole ) {
-        return d->m_placemarkContainer->at( index.row() ).description();
+        return d->m_placemarkContainer->at( index.row() )->description();
     } else if ( role == GeoTypeRole ) {
-        return d->m_placemarkContainer->at( index.row() ).role();
+        return d->m_placemarkContainer->at( index.row() )->role();
     } else if ( role == CoordinateRole ) {
-        return qVariantFromValue( d->m_placemarkContainer->at( index.row() ).coordinate() );
+        return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->coordinate() );
     } else if ( role == StyleRole ) {
-        return qVariantFromValue( d->m_placemarkContainer->at( index.row() ).style() );
+        return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->style() );
     } else if ( role == GeometryRole ) {
-        return qVariantFromValue( *d->m_placemarkContainer->at( index.row() ).geometry() );
+        return qVariantFromValue( *d->m_placemarkContainer->at( index.row() )->geometry() );
 /*    } else if ( role == ObjectPointerRole ) {
         return qVariantFromValue( dynamic_cast<GeoDataObject*>( d->m_placemarkContainer->at( index.row() ) ) );*/
     } else

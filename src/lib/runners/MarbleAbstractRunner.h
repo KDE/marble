@@ -84,7 +84,7 @@ signals:
      * @param result the result of the parsing.
      * @see parse()
      */
-    void runnerFinished(MarbleAbstractRunner* runner, QVector<GeoDataPlacemark> result);
+    void runnerFinished(MarbleAbstractRunner* runner, QVector<GeoDataPlacemark*> result);
 };
 
 }

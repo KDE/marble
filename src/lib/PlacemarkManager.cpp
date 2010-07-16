@@ -44,7 +44,7 @@ class PlacemarkManagerPrivate
 
         MarbleDataFacade* m_datafacade;
         FileManager *m_fileManager;
-        QVector<GeoDataPlacemark> m_placemarkContainer;
+        QVector<GeoDataPlacemark*> m_placemarkContainer;
         QVector<int> m_sizeForDocument;
 };
 }
@@ -88,7 +88,7 @@ void PlacemarkManager::addGeoDataDocument( int index )
     if (file)
     {
         const GeoDataDocument &document = *file->document();
-        QVector<GeoDataPlacemark> result = recurseContainer(document);
+        QVector<GeoDataPlacemark*> result = recurseContainer(file->document());
         if (!result.isEmpty())
         {
             createFilterProperties( result );
@@ -127,30 +127,30 @@ void PlacemarkManager::removeGeoDataDocument( int index )
     }
 }
 
-QVector<GeoDataPlacemark> PlacemarkManager::recurseContainer(GeoDataContainer container)
+QVector<GeoDataPlacemark*> PlacemarkManager::recurseContainer(GeoDataContainer *container)
 {
-    QVector<GeoDataPlacemark> results;
+    QVector<GeoDataPlacemark*> results;
 
-    const QVector<GeoDataFeature> features = container.features();
-    QVector<GeoDataFeature>::const_iterator it = features.constBegin();
-    QVector<GeoDataFeature>::const_iterator end = features.constEnd();
+    const QVector<GeoDataFeature*> features = container->featureList();
+    QVector<GeoDataFeature*>::const_iterator it = features.constBegin();
+    QVector<GeoDataFeature*>::const_iterator end = features.constEnd();
 
-    results += container.placemarks();
+    results += container->placemarkList();
     for (; it != end; ++it) {
-        if ( GeoDataFolderId == it->featureId() ) {
-            results += recurseContainer(*it);
+        if ( GeoDataFolderId == (*it)->featureId() ) {
+            results += recurseContainer(static_cast<GeoDataContainer*>(*it));
         }
     }
     return results;
 }
 
-void PlacemarkManager::createFilterProperties( QVector<GeoDataPlacemark> &container )
+void PlacemarkManager::createFilterProperties( QVector<GeoDataPlacemark*> &container )
 {
 
-    QVector<GeoDataPlacemark>::Iterator i = container.begin();
-    QVector<GeoDataPlacemark>::Iterator const end = container.end();
+    QVector<GeoDataPlacemark*>::Iterator i = container.begin();
+    QVector<GeoDataPlacemark*>::Iterator const end = container.end();
     for (; i != end; ++i ) {
-        GeoDataPlacemark& placemark = *i;
+        GeoDataPlacemark& placemark = **i;
 
         bool hasPopularity = false;
 

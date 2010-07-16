@@ -47,7 +47,7 @@ MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
       m_workOffline(false)
 {
     m_model->setPlacemarkContainer(&m_placemarkContainer);
-    qRegisterMetaType<QVector<GeoDataPlacemark> >("QVector<GeoDataPlacemark>");
+    qRegisterMetaType<QVector<GeoDataPlacemark*> >("QVector<GeoDataPlacemark*>");
 }
 
 MarbleRunnerManager::~MarbleRunnerManager()
@@ -75,43 +75,44 @@ void MarbleRunnerManager::newText(const QString& text)
 
     m_modelMutex.lock();
     m_model->removePlacemarks("MarbleRunnerManager", 0, m_placemarkContainer.size());
+    qDeleteAll(m_placemarkContainer);
     m_placemarkContainer.clear();
     m_modelMutex.unlock();
     emit modelChanged( m_model );
 
     LatLonRunner* llrunner = new LatLonRunner;
     m_runners << llrunner;
-    connect( llrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
-             this,     SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
+    connect( llrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ),
+             this,     SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ));
     llrunner->parse(text);
 
     if (m_celestialBodyId == "earth" && !m_workOffline) {
         LocalDatabaseRunner * localDatabaseRunner = new LocalDatabaseRunner;
         m_runners << localDatabaseRunner;
-        connect( localDatabaseRunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
-                this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
+        connect( localDatabaseRunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ),
+                this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ));
         localDatabaseRunner->parse(text);
         localDatabaseRunner->setMap(m_map);
         localDatabaseRunner->start();
 
         OnfRunner* onfrunner = new OnfRunner;
         m_runners << onfrunner;
-        connect( onfrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
-                 this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
+        connect( onfrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ),
+                 this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ));
         onfrunner->parse(text);
         onfrunner->start();
 
         OsmNominatimRunner* nominatim = new OsmNominatimRunner;
         m_runners << nominatim;
-        connect( nominatim, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
-                 this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
+        connect( nominatim, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ),
+                 this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ));
         nominatim->parse(text);
         nominatim->start();
 
         HostipRunner* iprunner = new HostipRunner;
         m_runners << iprunner;
-        connect( iprunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
-                 this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
+        connect( iprunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ),
+                 this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ));
         iprunner->parse(text);
         iprunner->start();
     }
@@ -119,7 +120,7 @@ void MarbleRunnerManager::newText(const QString& text)
     llrunner->start();
 }
 
-void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVector<GeoDataPlacemark> result )
+void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVector<GeoDataPlacemark*> result )
 {
     m_runners.removeOne(runner);
     if ( runner ) {

@@ -50,7 +50,7 @@ GeoDataFeature::GeoDataVisualCategory OsmNominatimRunner::category() const
 
 void OsmNominatimRunner::returnNoResults()
 {
-    emit runnerFinished( this, QVector<GeoDataPlacemark>() );
+    emit runnerFinished( this, QVector<GeoDataPlacemark*>() );
 }
 
 void OsmNominatimRunner::run()
@@ -84,7 +84,7 @@ void OsmNominatimRunner::handleHttpReply( QNetworkReply* reply )
         return;
     }
 
-    QVector<GeoDataPlacemark> placemarks;
+    QVector<GeoDataPlacemark*> placemarks;
     QDomElement root = xml.documentElement();
     QDomNodeList places = root.elementsByTagName("place");
     for (int i=0; i<places.size(); ++i) {
@@ -94,11 +94,11 @@ void OsmNominatimRunner::handleHttpReply( QNetworkReply* reply )
         QString desc = attributes.namedItem("display_name").nodeValue();
 
         if (!lon.isEmpty() && !lat.isEmpty() && !desc.isEmpty()) {
-            GeoDataPlacemark placemark;
-            placemark.setName(desc);
-            placemark.setDescription(desc);
-            placemark.setCoordinate(lon.toDouble() * DEG2RAD, lat.toDouble() * DEG2RAD);
-            placemark.setVisualCategory( category() );
+            GeoDataPlacemark *placemark = new GeoDataPlacemark;
+            placemark->setName(desc);
+            placemark->setDescription(desc);
+            placemark->setCoordinate(lon.toDouble() * DEG2RAD, lat.toDouble() * DEG2RAD);
+            placemark->setVisualCategory( category() );
             placemarks << placemark;
         }
     }
