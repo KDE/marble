@@ -44,7 +44,6 @@ FileLoader::FileLoader( QObject* parent, const QString& contents, const QString&
 
 FileLoader::~FileLoader()
 {
-    delete m_document;
 }
 
 QString FileLoader::path() const

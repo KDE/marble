@@ -156,6 +156,7 @@ void FileManager::closeFile( int index )
             if ( geometryModel->geoDataRoot() == file->document() ) {
                 geometryModel->setGeoDataRoot( 0 );
             }
+            delete file->document();
         }
         delete d->m_fileItemList.at( index );
         d->m_fileItemList.removeAt( index );
@@ -177,7 +178,7 @@ AbstractFileViewItem * FileManager::at( int index )
 
 void FileManager::addGeoDataDocument( GeoDataDocument* document )
 {
-    KmlFileViewItem* item = new KmlFileViewItem( *this, *document );
+    KmlFileViewItem* item = new KmlFileViewItem( *this, document );
     addFile( item );
 
     // now get the document that will be preserved throughout the life time
