@@ -21,7 +21,6 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleDataFacade.h"
-#include "MarbleGeoDataModel.h"
 #include "GeoPainter.h"
 
 #include "GeoDataCoordinates.h"

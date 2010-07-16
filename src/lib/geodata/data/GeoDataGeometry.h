@@ -30,7 +30,6 @@ class GeoDataPoint;
 class GeoDataPolygon;
 class GeoDataLineString; // LinearRing is the same!
 class GeoDataMultiGeometry;
-class GeoDataModel; // not implemented yet
 
 /**
  * @short A base class for all geodata features
@@ -49,7 +48,6 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     friend class GeoDataPolygon;
     friend class GeoDataLineString;
     friend class GeoDataMultiGeometry;
-    friend class GeoDataModel;
  public:
     GeoDataGeometry();
     GeoDataGeometry( const GeoDataGeometry& other );
@@ -57,7 +55,6 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
     GeoDataGeometry( const GeoDataPoint& other );
     GeoDataGeometry( const GeoDataLineString& other );
     GeoDataGeometry( const GeoDataMultiGeometry& other );
-//    GeoDataGeometry( const GeoDataModel& other );
     virtual bool operator==( const GeoDataGeometry& other ) const { Q_UNUSED(other); return false; };
     GeoDataGeometry& operator=( const GeoDataGeometry& other );
     

@@ -78,8 +78,6 @@ class MARBLE_EXPORT MarbleDataFacade
     QString target() const;
 
     PositionTracking* positionTracking() const;
-
-    MarbleGeoDataModel* geoDataModel();
     
     MarblePlacemarkModel* placemarkModel();
 

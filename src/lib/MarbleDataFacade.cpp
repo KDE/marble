@@ -21,7 +21,6 @@
 #include "ExtDateTime.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
-#include "MarbleGeoDataModel.h"
 #include "MarblePlacemarkModel.h"
 #include "Planet.h"
 
@@ -42,7 +41,6 @@ class MarbleDataFacadePrivate
     MarbleDataFacadePrivate( MarbleModel *model )
         : m_model( model ),
         m_fileviewmodel( new FileViewModel() ),
-        m_geodatamodel( new MarbleGeoDataModel() ),
         m_placemarkmodel( new MarblePlacemarkModel ),
         m_treemodel( new GeoDataTreeModel)
     {
@@ -51,14 +49,12 @@ class MarbleDataFacadePrivate
     ~MarbleDataFacadePrivate()
     {
         delete m_fileviewmodel;
-        delete m_geodatamodel;
         delete m_placemarkmodel;
         delete m_treemodel;
     }
 
     MarbleModel  *m_model;
     FileViewModel *m_fileviewmodel;
-    MarbleGeoDataModel *m_geodatamodel;
     MarblePlacemarkModel *m_placemarkmodel;
     GeoDataTreeModel *m_treemodel;
 };
@@ -103,11 +99,6 @@ QString MarbleDataFacade::target() const
 PositionTracking* MarbleDataFacade::positionTracking() const
 {
     return d->m_model->positionTracking();
-}
-
-MarbleGeoDataModel* MarbleDataFacade::geoDataModel()
-{
-    return d->m_geodatamodel;
 }
 
 MarblePlacemarkModel* MarbleDataFacade::placemarkModel()

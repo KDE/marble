@@ -20,7 +20,6 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleDataFacade.h"
-#include "MarbleGeoDataModel.h"
 #include "GeoDataTreeModel.h"
 #include "GeoPainter.h"
 
