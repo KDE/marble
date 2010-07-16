@@ -334,12 +334,6 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     /**
      * Now handle all other placemarks...
      */
-    const QModelIndex firstIndex = model->index( 0, 0 );
-    const int firstPopularity = firstIndex.data( MarblePlacemarkModel::PopularityRole ).toInt();
-    const bool  noFilter = ( firstPopularity == 0 
-                             || ( firstPopularity != 0
-                             && firstIndex.data( MarblePlacemarkModel::GeoTypeRole ).toString().isEmpty() ) ) 
-                           ? true : false;
     const QItemSelection selection = selectionModel->selection();
 
     const int rowCount = model->rowCount();
@@ -365,7 +359,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         }
 
         // Skip the places that are too small.
-        if ( !noFilter && m_weightfilter.at( popularityIndex ) > viewParams->radius() ) {
+        if ( m_weightfilter.at( popularityIndex ) > viewParams->radius() ) {
             break;
         }
 
