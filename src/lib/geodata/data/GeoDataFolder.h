@@ -59,7 +59,7 @@ class GEODATA_EXPORT GeoDataFolder : public GeoDataContainer
     virtual QString nodeType() const;
     virtual bool isFolder() const { return true; }
 
-private:
+//private:
     GeoDataFolderPrivate *p() const;
 };
 

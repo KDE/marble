@@ -13,6 +13,7 @@
 #include <QtCore/QDebug>
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
+#include "GeoDataPlacemark.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataTypes.h"
@@ -25,6 +26,7 @@ class TestGeoData : public QObject
     Q_OBJECT
  private slots:
     void nodeTypeTest();
+    void parentingTest();
     void normalizeLatTest_data();
     void normalizeLatTest();
     void normalizeLonTest_data();
@@ -66,6 +68,62 @@ void TestGeoData::nodeTypeTest()
     /// testing the nodeType of an object copied to a non shared data object
     GeoDataObject objectCopy(folder);
     QCOMPARE( objectCopy.nodeType(), folderType );
+}
+
+void TestGeoData::parentingTest()
+{
+    GeoDataDocument *document = new GeoDataDocument;
+    GeoDataFolder *folder = new GeoDataFolder;
+
+    /// simple parenting test
+    GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    placemark->setParent(document);
+    QCOMPARE(placemark->parent(), document);
+
+    /// simple append and child count test
+    document->append(placemark);
+
+    /// appending folder to document before feeding folder
+    document->append(folder);
+    QCOMPARE(document->size(), 2);
+
+    GeoDataPlacemark *placemark2 = new GeoDataPlacemark;
+    folder->append(placemark2);
+    QCOMPARE(folder->size(), 1);
+
+
+    /// retrieve child and check it matches placemark
+    GeoDataPlacemark *placemarkPtr;
+    QCOMPARE(document->child(0)->nodeType(), placemark->nodeType());
+    placemarkPtr = static_cast<GeoDataPlacemark*>(document->child(0));
+    QCOMPARE(placemarkPtr->p(), placemark->p());
+    QCOMPARE(placemarkPtr, placemark);
+
+    /// check retrieved placemark matches intented child
+    int position = document->childPosition(placemarkPtr);
+    QCOMPARE(position, 0);
+
+    /// retrieve child two and check it matches folder
+    GeoDataFolder *folderPtr;
+    QCOMPARE(document->child(1)->nodeType(), folder->nodeType());
+    folderPtr = static_cast<GeoDataFolder*>(document->child(1));
+    QCOMPARE(folderPtr->p(), folder->p());
+    QCOMPARE(folderPtr, folder);
+
+    /// check retrieved folder matches intended child
+    position = document->childPosition(folderPtr);
+    QCOMPARE(position, 1);
+
+    /// retrieve child three and check it matches placemark
+    QCOMPARE(folderPtr->size(), 1);
+    placemarkPtr = static_cast<GeoDataPlacemark*>(folderPtr->child(0));
+    QCOMPARE(placemarkPtr->nodeType(), placemark2->nodeType());
+    QCOMPARE(placemarkPtr->p(), placemark2->p());
+    QCOMPARE(placemarkPtr, placemark2);
+
+
+    /// check retrieved placemark matches intended child
+    QCOMPARE(folderPtr->childPosition(placemarkPtr), 0);
 }
 
 void TestGeoData::normalizeLatTest_data()
