@@ -26,8 +26,8 @@ namespace Marble
 
 class GeoDataDocument;
 class GeoDataCoordinates;
+class FileManager;
 class PluginManager;
-class MarbleGeometryModel;
 
 class PositionTracking : public QObject 
 {
@@ -35,7 +35,7 @@ class PositionTracking : public QObject
 
 public:
 
-    explicit PositionTracking( MarbleGeometryModel *geometryModel,
+    explicit PositionTracking( FileManager *fileManager,
                           QObject *parent = 0 );
     ~PositionTracking();
 
@@ -62,7 +62,7 @@ public slots:
     qreal               m_speed;
 
     GeoDataDocument     *m_document;
-    MarbleGeometryModel *m_geometryModel;
+    FileManager         *m_fileManager;
 
     GeoDataCoordinates  m_gpsCurrentPosition;
     GeoDataCoordinates  m_gpsPreviousPosition;

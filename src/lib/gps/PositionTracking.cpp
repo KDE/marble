@@ -15,29 +15,28 @@
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
 #include "AbstractProjection.h"
+#include "FileManager.h"
 #include "MarbleMath.h"
 #include "MarbleDebug.h"
-#include "MarbleGeometryModel.h"
 
 using namespace Marble;
 
-PositionTracking::PositionTracking( MarbleGeometryModel *geometryModel,
+PositionTracking::PositionTracking( FileManager *fileManager,
                           QObject *parent ) 
-     : QObject( parent ), m_geometryModel(geometryModel), m_positionProvider(0)
+     : QObject( parent ), m_fileManager(fileManager), m_positionProvider(0)
 {
     m_document     = new GeoDataDocument();
+    m_document->setName("Position Tracking");
 
-    GeoDataPlacemark placemark;
+    GeoDataPlacemark *placemark = new GeoDataPlacemark;
     GeoDataMultiGeometry multiGeometry;
-    GeoDataLineString lineString;
+    GeoDataLineString *lineString = new GeoDataLineString;
 
     multiGeometry.append(lineString);
-    placemark.setGeometry(multiGeometry);
+    placemark->setGeometry(multiGeometry);
     m_document->append(placemark);
 
-    m_geometryModel->setGeoDataRoot(m_document);
-    connect(this, SIGNAL(gpsLocation(GeoDataCoordinates,qreal)),
-            m_geometryModel, SLOT(update()));
+    m_fileManager->addGeoDataDocument(m_document);
 }
 
 
@@ -61,16 +60,10 @@ void PositionTracking::setPosition( GeoDataCoordinates position,
         PositionProviderStatusAvailable )
     {
 
-        GeoDataPlacemark placemark = m_document->features().last();
-        GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>(placemark.geometry());
-        GeoDataLineString &lineString = static_cast<GeoDataLineString&>(geometry->last());
-        lineString.append(position);
-
-        if (m_geometryModel->geoDataRoot() != m_document) {
-            mDebug() << "setting geometrymodel";
-            m_geometryModel->setGeoDataRoot(m_document);
-        }
-        mDebug() << "geometry size " << lineString.size();
+        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(m_document->child(m_document->size()-1));
+        GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
+        GeoDataLineString *lineString = static_cast<GeoDataLineString*>(geometry->child(geometry->size()-1));
+        lineString->append(position);
 
         //if the position has moved then update the current position
         if ( !( m_gpsCurrentPosition ==

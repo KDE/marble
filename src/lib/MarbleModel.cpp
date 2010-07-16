@@ -210,7 +210,7 @@ MarbleModel::MarbleModel( QObject *parent )
              this,            SIGNAL( modelChanged() ) );
 
     d->m_gpxFileModel = new GpxFileModel( this );
-    d->m_positionTracking = new PositionTracking( d->m_dataFacade->geometryModel(), this );
+    d->m_positionTracking = new PositionTracking( d->m_fileManager, this );
 
     d->m_layerManager = new LayerManager( d->m_dataFacade, d->m_pluginManager, this );
 
@@ -422,10 +422,10 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         }
     }
     // unload old standard Placemarks which are not part of the new map
-    foreach(const QString& container, loadedContainers) {
-        loadedContainers.pop_front();
-        d->m_fileManager->removeFile( container );
-    }
+//    foreach(const QString& container, loadedContainers) {
+//        loadedContainers.pop_front();
+//        d->m_fileManager->removeFile( container );
+//    }
     // load new standard Placemarks
     foreach(const QString& container, loadList) {
         loadList.pop_front();
