@@ -97,6 +97,7 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     */
     void append( GeoDataFeature *other );
 
+    void remove( int index );
 
     /**
     * @brief add an element

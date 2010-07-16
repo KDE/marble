@@ -28,6 +28,7 @@
 
 #include "FileViewModel.h"
 #include "PluginManager.h"
+#include "GeoDataTreeModel.h"
 #include "GeoDataParser.h"
 
 #include "GeoSceneDocument.h"
@@ -44,7 +45,8 @@ class MarbleDataFacadePrivate
         m_fileviewmodel( new FileViewModel() ),
         m_geodatamodel( new MarbleGeoDataModel() ),
         m_geometrymodel( new MarbleGeometryModel() ),
-        m_placemarkmodel( new MarblePlacemarkModel )
+        m_placemarkmodel( new MarblePlacemarkModel ),
+        m_treemodel( new GeoDataTreeModel)
     {
     }
 
@@ -54,6 +56,7 @@ class MarbleDataFacadePrivate
         delete m_geodatamodel;
         delete m_geometrymodel;
         delete m_placemarkmodel;
+        delete m_treemodel;
     }
 
     MarbleModel  *m_model;
@@ -61,6 +64,7 @@ class MarbleDataFacadePrivate
     MarbleGeoDataModel *m_geodatamodel;
     MarbleGeometryModel *m_geometrymodel;
     MarblePlacemarkModel *m_placemarkmodel;
+    GeoDataTreeModel *m_treemodel;
 };
 
 
@@ -128,6 +132,11 @@ FileViewModel* MarbleDataFacade::fileViewModel() const
 PluginManager* MarbleDataFacade::pluginManager()
 {
     return d->m_model->pluginManager();
+}
+
+GeoDataTreeModel* MarbleDataFacade::treeModel() const
+{
+    return d->m_treemodel;
 }
 
 }

@@ -20,6 +20,7 @@
 #include "MarbleDebug.h"
 #include "MarbleDataFacade.h"
 #include "MarbleGeometryModel.h"
+#include "GeoDataTreeModel.h"
 
 #include "GeoDataDocument.h"
 
@@ -69,6 +70,7 @@ void FileManager::setDataFacade( MarbleDataFacade *facade )
 {
     d->m_datafacade = facade;
     d->m_datafacade->fileViewModel()->setFileManager( this );
+    d->m_datafacade->treeModel()->setFileManager( this );
 }
 
 MarbleDataFacade *FileManager::dataFacade()

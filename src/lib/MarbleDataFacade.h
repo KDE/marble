@@ -40,6 +40,7 @@ class MarbleModel;
 class MarbleGeoDataModel;
 class MarbleGeometryModel;
 class MarblePlacemarkModel;
+class GeoDataTreeModel;
 class FileViewModel;
 class MarbleDataFacadePrivate;
 class Planet;
@@ -84,10 +85,14 @@ class MARBLE_EXPORT MarbleDataFacade
     MarbleGeometryModel* geometryModel();
 
     MarblePlacemarkModel* placemarkModel();
+
     FileViewModel* fileViewModel() const;
+
     PluginManager* pluginManager();
 
- private:
+    GeoDataTreeModel* treeModel() const;
+
+private:
     MarbleDataFacadePrivate  * const d;
 };
 

@@ -27,12 +27,7 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
     
     ~GeoDataContainerPrivate()
     {
-        QVector<GeoDataFeature*>::Iterator i = m_vector.begin();
-        QVector<GeoDataFeature*>::Iterator end = m_vector.end();
-        for( ; i != end; ++i )
-        {
-            delete *i;
-        }
+        qDeleteAll(m_vector);
     }
 
     virtual void* copy() 

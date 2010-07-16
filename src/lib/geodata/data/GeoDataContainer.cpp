@@ -142,6 +142,7 @@ int GeoDataContainer::childPosition( GeoDataFeature* object )
 void GeoDataContainer::append( GeoDataFeature *other )
 {
     detach();
+    other->setParent(this);
     p()->m_vector.append( other );
 }
 
@@ -150,7 +151,14 @@ void GeoDataContainer::append( const GeoDataFeature& other )
 {
     detach();
     GeoDataFeature *f = new GeoDataFeature(other);
+    f->setParent(this);
     p()->m_vector.append( f );
+}
+
+void GeoDataContainer::remove( int index )
+{
+    detach();
+    p()->m_vector.remove( index );
 }
 
 int GeoDataContainer::size() const
@@ -194,6 +202,7 @@ const GeoDataFeature& GeoDataContainer::first() const
 void GeoDataContainer::clear()
 {
     GeoDataContainer::detach();
+    qDeleteAll(p()->m_vector);
     p()->m_vector.clear();
 }
 

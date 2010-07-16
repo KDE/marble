@@ -77,6 +77,7 @@ set(marblewidget_SRCS
     MarblePlacemarkModel.cpp
     MarbleGeoDataModel.cpp
     MarbleGeometryModel.cpp
+    GeoDataTreeModel.cpp
     MarbleDataFacade.cpp
     MarbleDebug.cpp
     TextureTile.cpp
