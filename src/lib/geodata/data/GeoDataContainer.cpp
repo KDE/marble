@@ -64,14 +64,15 @@ QVector<GeoDataFolder> GeoDataContainer::folders() const
 {
     QVector<GeoDataFolder> results;
 
-    QVector<GeoDataFeature>::const_iterator it = p()->m_vector.constBegin();
-    QVector<GeoDataFeature>::const_iterator end = p()->m_vector.constEnd();
+    QVector<GeoDataFeature*>::const_iterator it = p()->m_vector.constBegin();
+    QVector<GeoDataFeature*>::const_iterator end = p()->m_vector.constEnd();
 
     for (; it != end; ++it) {
-        GeoDataFeature feature = *it;
 
-        if ( feature.featureId() == GeoDataFolderId )
+        if ( (*it)->featureId() == GeoDataFolderId ) {
+            GeoDataFeature feature = **it;
             results.append( feature );
+        }
     }
 
     return results;
@@ -81,12 +82,12 @@ QVector<GeoDataPlacemark> GeoDataContainer::placemarks() const
 {
     QVector<GeoDataPlacemark> results;
 
-    QVector<GeoDataFeature>::const_iterator it = p()->m_vector.constBegin();
-    QVector<GeoDataFeature>::const_iterator end = p()->m_vector.constEnd();
+    QVector<GeoDataFeature*>::const_iterator it = p()->m_vector.constBegin();
+    QVector<GeoDataFeature*>::const_iterator end = p()->m_vector.constEnd();
 
     for (; it != end; ++it) {
-        if ( GeoDataPlacemarkId == it->featureId() ) {
-            GeoDataPlacemark placemark = *it;
+        if ( GeoDataPlacemarkId == (*it)->featureId() ) {
+            GeoDataPlacemark placemark = **it;
             results.append( placemark );
         }
     }
@@ -94,15 +95,62 @@ QVector<GeoDataPlacemark> GeoDataContainer::placemarks() const
     return results;
 }
 
-QVector<GeoDataFeature>& GeoDataContainer::features() const
+QVector<GeoDataFeature*> GeoDataContainer::featureList() const
 {
     return p()->m_vector;
 }
 
-void GeoDataContainer::append( const GeoDataFeature& other )
+QVector<GeoDataFeature> GeoDataContainer::features() const
+{
+    QVector<GeoDataFeature> results;
+
+    QVector<GeoDataFeature*>::const_iterator it = p()->m_vector.constBegin();
+    QVector<GeoDataFeature*>::const_iterator end = p()->m_vector.constEnd();
+
+    for (; it != end; ++it) {
+            GeoDataFeature f = **it;
+            results.append( f );
+    }
+
+    return results;
+}
+
+/**
+ * @brief  returns the requested child item
+ */
+GeoDataFeature* GeoDataContainer::child( int i )
+{
+    return p()->m_vector.at(i);
+}
+
+/**
+ * @brief returns the position of an item in the list
+ */
+int GeoDataContainer::childPosition( GeoDataFeature* object )
+{
+    for ( int i=0; i< p()->m_vector.size(); i++ )
+    {
+        if ( p()->m_vector.at( i ) == object )
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+void GeoDataContainer::append( GeoDataFeature *other )
 {
     detach();
     p()->m_vector.append( other );
+}
+
+
+void GeoDataContainer::append( const GeoDataFeature& other )
+{
+    detach();
+    GeoDataFeature *f = new GeoDataFeature(other);
+    p()->m_vector.append( f );
 }
 
 int GeoDataContainer::size() const
@@ -113,34 +161,34 @@ int GeoDataContainer::size() const
 GeoDataFeature& GeoDataContainer::at( int pos )
 {
     detach();
-    return p()->m_vector[ pos ];
+    return *(p()->m_vector[ pos ]);
 }
 
 const GeoDataFeature& GeoDataContainer::at( int pos ) const
 {
-    return p()->m_vector.at( pos );
+    return *(p()->m_vector.at( pos ));
 }
 
 GeoDataFeature& GeoDataContainer::last()
 {
     detach();
-    return p()->m_vector.last();
+    return *(p()->m_vector.last());
 }
 
 const GeoDataFeature& GeoDataContainer::last() const
 {
-    return p()->m_vector.last();
+    return *(p()->m_vector.last());
 }
 
 GeoDataFeature& GeoDataContainer::first()
 {
     detach();
-    return p()->m_vector.first();
+    return *(p()->m_vector.first());
 }
 
 const GeoDataFeature& GeoDataContainer::first() const
 {
-    return p()->m_vector.first();
+    return *(p()->m_vector.first());
 }
 
 void GeoDataContainer::clear()
@@ -149,24 +197,22 @@ void GeoDataContainer::clear()
     p()->m_vector.clear();
 }
 
-QVector<GeoDataFeature>::Iterator GeoDataContainer::begin()
+QVector<GeoDataFeature*>::Iterator GeoDataContainer::begin()
 {
-    GeoDataContainer::detach();
     return p()->m_vector.begin();
 }
 
-QVector<GeoDataFeature>::Iterator GeoDataContainer::end()
+QVector<GeoDataFeature*>::Iterator GeoDataContainer::end()
 {
-    GeoDataContainer::detach();
     return p()->m_vector.end();
 }
 
-QVector<GeoDataFeature>::ConstIterator GeoDataContainer::constBegin() const
+QVector<GeoDataFeature*>::ConstIterator GeoDataContainer::constBegin() const
 {
     return p()->m_vector.constBegin();
 }
 
-QVector<GeoDataFeature>::ConstIterator GeoDataContainer::constEnd() const
+QVector<GeoDataFeature*>::ConstIterator GeoDataContainer::constEnd() const
 {
     return p()->m_vector.constEnd();
 }
@@ -177,13 +223,13 @@ void GeoDataContainer::pack( QDataStream& stream ) const
 
     stream << p()->m_vector.count();
 
-    for ( QVector <GeoDataFeature>::const_iterator iterator = p()->m_vector.constBegin();
+    for ( QVector <GeoDataFeature*>::const_iterator iterator = p()->m_vector.constBegin();
           iterator != p()->m_vector.constEnd();
           ++iterator )
     {
-        const GeoDataFeature& feature = *iterator;
-        stream << feature.featureId();
-        feature.pack( stream );
+        const GeoDataFeature *feature = *iterator;
+        stream << feature->featureId();
+        feature->pack( stream );
     }
 }
 
@@ -203,15 +249,15 @@ void GeoDataContainer::unpack( QDataStream& stream )
                 /* not usable!!!! */ break;
             case GeoDataFolderId:
                 {
-                GeoDataFolder folder;
-                folder.unpack( stream );
+                GeoDataFolder *folder = new GeoDataFolder;
+                folder->unpack( stream );
                 p()->m_vector.append( folder );
                 }
                 break;
             case GeoDataPlacemarkId:
                 {
-                GeoDataPlacemark placemark;
-                placemark.unpack( stream );
+                GeoDataPlacemark *placemark = new GeoDataPlacemark;
+                placemark->unpack( stream );
                 p()->m_vector.append( placemark );
                 }
                 break;

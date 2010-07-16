@@ -34,11 +34,11 @@ bool KmlDocumentTagWriter::write( const GeoDataObject &node, GeoWriter& writer )
 
     writer.writeStartElement( kml::kmlTag_Document );
 
-    QVector<GeoDataFeature>::ConstIterator it =  document.constBegin();
-    QVector<GeoDataFeature>::ConstIterator const end = document.constEnd();
+    QVector<GeoDataFeature*>::ConstIterator it =  document.constBegin();
+    QVector<GeoDataFeature*>::ConstIterator const end = document.constEnd();
 
     for ( ; it != end; ++it ) {
-        writeElement( (*it), writer );
+        writeElement( (**it), writer );
     }
 
     //Write the actual important stuff!

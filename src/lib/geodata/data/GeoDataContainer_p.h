@@ -25,6 +25,16 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
     {
     }
     
+    ~GeoDataContainerPrivate()
+    {
+        QVector<GeoDataFeature*>::Iterator i = m_vector.begin();
+        QVector<GeoDataFeature*>::Iterator end = m_vector.end();
+        for( ; i != end; ++i )
+        {
+            delete *i;
+        }
+    }
+
     virtual void* copy() 
     { 
         GeoDataContainerPrivate* copy = new GeoDataContainerPrivate;
@@ -42,7 +52,7 @@ class GeoDataContainerPrivate : public GeoDataFeaturePrivate
         return GeoDataFolderId;
     }
 
-    QVector<GeoDataFeature> m_vector;
+    QVector<GeoDataFeature*> m_vector;
 };
 
 } // namespace Marble

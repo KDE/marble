@@ -71,7 +71,8 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
      *
      * @see GeoDataFeature
      */
-    QVector<GeoDataFeature>& features() const;
+    QVector<GeoDataFeature*> featureList() const;
+    QVector<GeoDataFeature> features() const;
 
     /**
      * @brief A convenience function that returns all placemarks in this container.
@@ -84,17 +85,18 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     /**
      * @brief  returns the requested child item
      */
-//    virtual GeoDataObject* child( int );
+    GeoDataFeature* child( int );
     
     /**
      * @brief returns the position of an item in the list
      */
-//    virtual int childPosition( GeoDataObject* );
+    int childPosition( GeoDataFeature *child);
     
     /**
-     * @brief returns the number of items in the list
-     */
-//    virtual int childCount();
+    * @brief add an element
+    */
+    void append( GeoDataFeature *other );
+
 
     /**
     * @brief add an element
@@ -123,10 +125,10 @@ class GEODATA_EXPORT GeoDataContainer : public GeoDataFeature
     GeoDataFeature& first();
     const GeoDataFeature& first() const;
 
-    QVector<GeoDataFeature>::Iterator begin();
-    QVector<GeoDataFeature>::Iterator end();
-    QVector<GeoDataFeature>::ConstIterator constBegin() const;
-    QVector<GeoDataFeature>::ConstIterator constEnd() const;
+    QVector<GeoDataFeature*>::Iterator begin();
+    QVector<GeoDataFeature*>::Iterator end();
+    QVector<GeoDataFeature*>::ConstIterator constBegin() const;
+    QVector<GeoDataFeature*>::ConstIterator constEnd() const;
     void clear();
 
     /**
