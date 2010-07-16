@@ -19,7 +19,6 @@
 #include "KmlFileViewItem.h"
 #include "MarbleDebug.h"
 #include "MarbleDataFacade.h"
-#include "MarbleGeometryModel.h"
 #include "GeoDataTreeModel.h"
 
 #include "GeoDataDocument.h"
@@ -154,10 +153,6 @@ void FileManager::closeFile( int index )
         KmlFileViewItem *file =
                 static_cast<KmlFileViewItem*>( d->m_fileItemList.at( index ));
         if ( file ) {
-            MarbleGeometryModel *geometryModel = d->m_datafacade->geometryModel();
-            if ( geometryModel->geoDataRoot() == file->document() ) {
-                geometryModel->setGeoDataRoot( 0 );
-            }
             delete file->document();
         }
         delete d->m_fileItemList.at( index );
@@ -197,9 +192,6 @@ void FileManager::addGeoDataDocument( GeoDataDocument* document )
         }
     }
 
-    // do not set this file if it only contains points
-    if ( doc->isVisible() && d->m_datafacade->geometryModel() )
-        d->m_datafacade->geometryModel()->setGeoDataRoot( doc );
 }
 
 void FileManager::cleanupLoader( FileLoader* loader )

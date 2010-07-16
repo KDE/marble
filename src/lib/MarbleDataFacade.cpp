@@ -22,7 +22,6 @@
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "MarbleGeoDataModel.h"
-#include "MarbleGeometryModel.h"
 #include "MarblePlacemarkModel.h"
 #include "Planet.h"
 
@@ -44,7 +43,6 @@ class MarbleDataFacadePrivate
         : m_model( model ),
         m_fileviewmodel( new FileViewModel() ),
         m_geodatamodel( new MarbleGeoDataModel() ),
-        m_geometrymodel( new MarbleGeometryModel() ),
         m_placemarkmodel( new MarblePlacemarkModel ),
         m_treemodel( new GeoDataTreeModel)
     {
@@ -54,7 +52,6 @@ class MarbleDataFacadePrivate
     {
         delete m_fileviewmodel;
         delete m_geodatamodel;
-        delete m_geometrymodel;
         delete m_placemarkmodel;
         delete m_treemodel;
     }
@@ -62,7 +59,6 @@ class MarbleDataFacadePrivate
     MarbleModel  *m_model;
     FileViewModel *m_fileviewmodel;
     MarbleGeoDataModel *m_geodatamodel;
-    MarbleGeometryModel *m_geometrymodel;
     MarblePlacemarkModel *m_placemarkmodel;
     GeoDataTreeModel *m_treemodel;
 };
@@ -112,11 +108,6 @@ PositionTracking* MarbleDataFacade::positionTracking() const
 MarbleGeoDataModel* MarbleDataFacade::geoDataModel()
 {
     return d->m_geodatamodel;
-}
-
-MarbleGeometryModel* MarbleDataFacade::geometryModel()
-{
-    return d->m_geometrymodel;
 }
 
 MarblePlacemarkModel* MarbleDataFacade::placemarkModel()

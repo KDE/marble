@@ -38,7 +38,6 @@ namespace Marble
 
 class MarbleModel;
 class MarbleGeoDataModel;
-class MarbleGeometryModel;
 class MarblePlacemarkModel;
 class GeoDataTreeModel;
 class FileViewModel;
@@ -82,8 +81,6 @@ class MARBLE_EXPORT MarbleDataFacade
 
     MarbleGeoDataModel* geoDataModel();
     
-    MarbleGeometryModel* geometryModel();
-
     MarblePlacemarkModel* placemarkModel();
 
     FileViewModel* fileViewModel() const;

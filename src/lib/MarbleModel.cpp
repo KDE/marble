@@ -58,7 +58,6 @@
 #include "MarbleDataFacade.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
-#include "MarbleGeometryModel.h"
 #include "MergedLayerDecorator.h"
 #include "FileManager.h"
 #include "PlacemarkManager.h"
@@ -397,7 +396,6 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             }
         }
     }
-    d->m_dataFacade->geometryModel()->setGeoDataRoot( 0 );
     QStringList loadedContainers = d->m_fileManager->containers();
     QStringList loadList;
     const QVector<GeoSceneLayer*> & layers = d->m_mapTheme->map()->layers();
