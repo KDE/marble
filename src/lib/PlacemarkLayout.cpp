@@ -251,9 +251,9 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
 
-        GeoDataGeometry geometry
-                = qvariant_cast<GeoDataGeometry>( index.data( MarblePlacemarkModel::GeometryRole ) );
-        if( geometry.geometryId() != GeoDataPointId ) {
+        GeoDataGeometry *geometry
+                = qvariant_cast<GeoDataGeometry*>( index.data( MarblePlacemarkModel::GeometryRole ) );
+        if( !dynamic_cast<GeoDataPoint*>(geometry) ) {
             continue;
         }
 
@@ -346,9 +346,9 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
             continue;
         }
 
-        GeoDataGeometry geometry
-                = qvariant_cast<GeoDataGeometry>( index.data( MarblePlacemarkModel::GeometryRole ) );
-        if( geometry.geometryId() != GeoDataPointId ) {
+        GeoDataGeometry *geometry
+                = qvariant_cast<GeoDataGeometry*>( index.data( MarblePlacemarkModel::GeometryRole ) );
+        if( !dynamic_cast<GeoDataPoint*>(geometry) ) {
             continue;
         }
 

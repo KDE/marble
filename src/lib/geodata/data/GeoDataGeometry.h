@@ -84,6 +84,6 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 
 }
 
-Q_DECLARE_METATYPE( Marble::GeoDataGeometry )
+Q_DECLARE_METATYPE( Marble::GeoDataGeometry* )
 
 #endif

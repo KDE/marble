@@ -125,7 +125,7 @@ void GeoRendererView::renderIndex( QModelIndex &index )
         GeoDataObject* object = static_cast<GeoDataObject*>( childIndex.internalPointer() );
 
         if( dynamic_cast<GeoDataGeometry*>( object ) ) {
-            if( static_cast<GeoDataGeometry*>( object )->geometryId() != GeoDataMultiGeometryId ) {
+            if( !dynamic_cast<GeoDataMultiGeometry*>( object ) ) {
                 renderGeoDataGeometry( static_cast<GeoDataGeometry*>( object ), m_styleUrl );
             } else {
                 if( childIndex.isValid() && model()->rowCount( childIndex ) > 0 ) {
@@ -229,20 +229,20 @@ bool GeoRendererView::renderGeoDataGeometry( GeoDataGeometry *object, QString st
 
     mapped.remove( '#' );
 
-    if( object->geometryId() == GeoDataPolygonId ) {
+    if( dynamic_cast<GeoDataPolygon*>( object ) ) {
         setBrushStyle( mapped );
         setPenStyle( mapped );
         // geometries are implicitly shared, this shouldn't hurt
         GeoDataPolygon polygon( *object );
         m_painter->drawPolygon( polygon );
     }
-    if( object->geometryId() == GeoDataLinearRingId ) {
+    if( dynamic_cast<GeoDataLinearRing*>( object ) ) {
         m_painter->setBrush( QColor( 0, 0, 0, 0 ) );
         setPenStyle( mapped );
         GeoDataLinearRing linearRing( *object );
         m_painter->drawPolygon( linearRing );
     }
-    if( object->geometryId() == GeoDataLineStringId ) {
+    if( dynamic_cast<GeoDataLineString*>( object ) ) {
         setPenStyle( mapped );
         GeoDataLineString lineString( *object );
         m_painter->drawPolyline( lineString );

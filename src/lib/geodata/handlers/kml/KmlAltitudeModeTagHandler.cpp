@@ -62,8 +62,7 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
     {
          parentItem.nodeAs<GeoDataPlacemark>()->geometry()->setAltitudeMode( mode );
     }
-    else if ( parentItem.is<GeoDataGeometry>()
-              && parentItem.nodeAs<GeoDataPoint>()->geometryId() == GeoDataPointId )
+    else if ( parentItem.is<GeoDataPoint>() )
     {
         parentItem.nodeAs<GeoDataPoint>()->setAltitudeMode( mode );
     }

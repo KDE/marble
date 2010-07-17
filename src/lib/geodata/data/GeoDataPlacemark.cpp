@@ -68,11 +68,9 @@ GeoDataGeometry* GeoDataPlacemark::geometry() const
 
 GeoDataCoordinates GeoDataPlacemark::coordinate() const
 {    
-    if( p()->m_geometry && 
-      ( p()->m_geometry->geometryId() == GeoDataLineStringId || 
-        p()->m_geometry->geometryId() == GeoDataLinearRingId ) ) {
+    if( dynamic_cast<GeoDataLineString*>( p()->m_geometry ) ) {
         return GeoDataLatLonAltBox::fromLineString( *p()->m_geometry ).center();
-    } else if( p()->m_geometry && p()->m_geometry->geometryId() == GeoDataPolygonId ) {
+    } else if( dynamic_cast<GeoDataPolygon*>( p()->m_geometry ) ) {
         return GeoDataLatLonAltBox::fromLineString( static_cast<GeoDataPolygon*>(p()->m_geometry)->outerBoundary() ).center();
     } else {
         return static_cast<GeoDataCoordinates>( p()->m_coordinate );
@@ -81,13 +79,11 @@ GeoDataCoordinates GeoDataPlacemark::coordinate() const
 
 void GeoDataPlacemark::coordinate( qreal& lon, qreal& lat, qreal& alt ) const
 {
-    if( p()->m_geometry && 
-      ( p()->m_geometry->geometryId() == GeoDataLineStringId || 
-        p()->m_geometry->geometryId() == GeoDataLinearRingId ) ) {
+    if( dynamic_cast<GeoDataLineString*>( p()->m_geometry ) ) {
         const GeoDataCoordinates coord = GeoDataLatLonAltBox::fromLineString( *p()->m_geometry ).center();
         coord.geoCoordinates( lon, lat );
         alt = coord.altitude();
-    } else if( p()->m_geometry && p()->m_geometry->geometryId() == GeoDataPolygonId ) {
+    } else if( dynamic_cast<GeoDataPolygon*>( p()->m_geometry ) ) {
         const GeoDataCoordinates coord = GeoDataLatLonAltBox::fromLineString( static_cast<GeoDataPolygon*>(p()->m_geometry)->outerBoundary() ).center();
         coord.geoCoordinates( lon, lat );
         alt = coord.altitude();

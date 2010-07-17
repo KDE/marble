@@ -278,16 +278,13 @@ bool RoutingModel::importKml( const QByteArray &content )
     foreach( const GeoDataFolder *folder, folders ) {
         foreach( const GeoDataPlacemark *placemark, folder->placemarkList() ) {
             GeoDataGeometry* geometry = placemark->geometry();
-            if ( geometry->geometryId() == GeoDataLineStringId ) {
-                GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
-                Q_ASSERT( lineString && "Internal error: geometry ID does not match class type" );
-                if ( lineString ) {
-                    for ( int i=0; i<lineString->size(); ++i ) {
-                        RouteElement element;
-                        element.type = WayPoint;
-                        element.position = lineString->at( i );
-                        d->m_route.push_back( element );
-                    }
+            GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
+            if ( lineString ) {
+                for ( int i=0; i<lineString->size(); ++i ) {
+                    RouteElement element;
+                    element.type = WayPoint;
+                    element.position = lineString->at( i );
+                    d->m_route.push_back( element );
                 }
             }
         }
