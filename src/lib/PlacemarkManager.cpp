@@ -75,6 +75,8 @@ void PlacemarkManager::setDataFacade( MarbleDataFacade *facade )
 
 void PlacemarkManager::setFileManager( FileManager *fileManager )
 {
+    disconnect( this, SLOT(addGeoDataDocument(int)) );
+    disconnect( this, SLOT(removeGeoDataDocument(int)) );
     d->m_fileManager = fileManager;
     connect( d->m_fileManager, SIGNAL( fileAdded(int)),
              this,          SLOT(addGeoDataDocument(int)) );

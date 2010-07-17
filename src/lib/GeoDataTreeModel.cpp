@@ -33,6 +33,8 @@ using namespace Marble;
 class GeoDataTreeModel::Private {
  public:
     Private() : m_rootDocument( new GeoDataDocument ) {}
+    ~Private() { delete m_rootDocument; }
+
     GeoDataDocument* m_rootDocument;
     FileManager     *m_fileManager;
 };
@@ -352,6 +354,8 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
 
 void GeoDataTreeModel::setFileManager( FileManager *fileManager )
 {
+    disconnect( this, SLOT(addDocument(int)) );
+    disconnect( this, SLOT(removeDocument(int)) );
     d->m_fileManager = fileManager;
     connect( d->m_fileManager, SIGNAL( fileAdded(int)),
              this,          SLOT(addDocument(int)) );

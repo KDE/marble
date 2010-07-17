@@ -115,6 +115,8 @@ void FileViewModel::closeFile()
 }
 void FileViewModel::setFileManager( FileManager *fileManager)
 {
+    disconnect( this, SLOT(append(int)) );
+    disconnect( this, SLOT(remove(int)) );
     m_manager = fileManager;
     connect (m_manager, SIGNAL(fileAdded(int)),
              this, SLOT(append(int)));
