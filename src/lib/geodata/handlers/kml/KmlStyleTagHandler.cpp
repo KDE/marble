@@ -53,7 +53,7 @@ GeoNode* KmlStyleTagHandler::parse( GeoParser& parser ) const
 #endif // DEBUG_TAGS
         return &parentItem.nodeAs<GeoDataDocument>()->style( styleId );
     }
-    else if ( parentItem.nodeAs<GeoDataFeature>() ) {
+    else if ( parentItem.is<GeoDataFeature>() ) {
 /*        style = new GeoDataStyle;
         style->setStyleId( parser.attribute( "id" ).trimmed() );
         parentItem.nodeAs<GeoDataFeature>()->setStyle( style );*/

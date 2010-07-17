@@ -38,7 +38,7 @@ GeoNode* KmlnameTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_name ) );
 
     GeoStackItem parentItem = parser.parentElement();
-    if( parentItem.nodeAs<GeoDataFeature>() ) {
+    if( parentItem.is<GeoDataFeature>() ) {
         QString name = parser.readElementText().trimmed();
         
         parentItem.nodeAs<GeoDataFeature>()->setName( name );

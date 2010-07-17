@@ -41,7 +41,7 @@ GeoNode* KmlareaTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
+    if( parentItem.is<GeoDataPlacemark>() ) {
         QString area = parser.readElementText().trimmed();
         qreal ar = area.toDouble();
         if( ar < 0.0 ) ar = 0.0;

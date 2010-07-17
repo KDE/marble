@@ -57,7 +57,7 @@ GeoNode* KmlLinearRingTagHandler::parse( GeoParser& parser ) const
         parentItem.nodeAs<GeoDataPolygon>()->appendInnerBoundary( linearRing );
         return &parentItem.nodeAs<GeoDataPolygon>()->innerBoundaries().last();
 
-    } else if( parentItem.nodeAs<GeoDataMultiGeometry>() ) {
+    } else if( parentItem.is<GeoDataMultiGeometry>() ) {
         GeoDataLinearRing *linearRing = new GeoDataLinearRing;
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( linearRing );
         return linearRing;

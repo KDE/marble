@@ -53,7 +53,7 @@ GeoNode* KmlStyleMapTagHandler::parse( GeoParser& parser ) const
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif
         return &parentItem.nodeAs<GeoDataDocument>()->styleMap( styleId );
-    } else if( parentItem.nodeAs<GeoDataFeature>() ) {
+    } else if( parentItem.is<GeoDataFeature>() ) {
 /*        GeoDataStyleMap styleMap;
         styleMap.setStyleId( parser.attribute( "id" ).trimmed() );
         parentItem.nodeAs<GeoDataFeature>()->setStyleMap( styleMap );*/

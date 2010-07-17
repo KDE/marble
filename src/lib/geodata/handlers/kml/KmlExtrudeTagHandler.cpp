@@ -46,7 +46,7 @@ GeoNode* KmlextrudeTagHandler::parse( GeoParser& parser ) const
     GeoDataGeometry* geometry;
     bool validParents = false;
 
-    if( parentItem.nodeAs<GeoDataPlacemark>() && parentItem.represents( kmlTag_Point ) ) {
+    if( parentItem.is<GeoDataPlacemark>() && parentItem.represents( kmlTag_Point ) ) {
         geometry = parentItem.nodeAs<GeoDataPlacemark>()->geometry();
         validParents = true;
     } else if( parentItem.nodeAs<GeoDataGeometry>() ) {

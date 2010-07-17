@@ -40,7 +40,7 @@ GeoNode* KmldescriptionTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if( parentItem.nodeAs<GeoDataFeature>() ) {
+    if( parentItem.is<GeoDataFeature>() ) {
         QString description = parser.readElementText().trimmed();
         
         parentItem.nodeAs<GeoDataFeature>()->setDescription( description );

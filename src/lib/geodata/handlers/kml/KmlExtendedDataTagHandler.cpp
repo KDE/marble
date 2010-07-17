@@ -30,7 +30,7 @@ GeoNode* KmlExtendedDataTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if( parentItem.nodeAs<GeoDataFeature>() ) {
+    if( parentItem.is<GeoDataFeature>() ) {
         GeoDataExtendedData extendedData;
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << kmlTag_ExtendedData << ">"

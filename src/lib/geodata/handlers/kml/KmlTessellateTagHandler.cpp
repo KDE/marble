@@ -47,7 +47,7 @@ GeoNode* KmltessellateTagHandler::parse( GeoParser& parser ) const
 
     QString content = parser.readElementText().trimmed();
 
-    if( parentItem.nodeAs<GeoDataLineString>() ) {
+    if( parentItem.is<GeoDataLineString>() ) {
         GeoDataLineString* lineString = parentItem.nodeAs<GeoDataLineString>();
 
         if( content == QString( "1" ) ) {
@@ -58,7 +58,7 @@ GeoNode* KmltessellateTagHandler::parse( GeoParser& parser ) const
 
         validParents = true;
 
-    } else if( parentItem.nodeAs<GeoDataLinearRing>() ) {
+    } else if( parentItem.is<GeoDataLinearRing>() ) {
         GeoDataLinearRing* linearRing = parentItem.nodeAs<GeoDataLinearRing>();
 
         if( content == QString( "1" ) ) {
@@ -69,7 +69,7 @@ GeoNode* KmltessellateTagHandler::parse( GeoParser& parser ) const
 
         validParents = true;
 
-    } else if( parentItem.nodeAs<GeoDataPolygon>() ) {
+    } else if( parentItem.is<GeoDataPolygon>() ) {
         GeoDataPolygon* polygon = parentItem.nodeAs<GeoDataPolygon>();
 
         if( content == QString( "1" ) ) {

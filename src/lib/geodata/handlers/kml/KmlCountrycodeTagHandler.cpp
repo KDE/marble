@@ -41,7 +41,7 @@ GeoNode* KmlcountrycodeTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
+    if( parentItem.is<GeoDataPlacemark>() ) {
         QString countrycode = parser.readElementText().trimmed();
         
         parentItem.nodeAs<GeoDataPlacemark>()->setCountryCode( countrycode );

@@ -40,7 +40,7 @@ GeoNode* KmlopenTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if( parentItem.nodeAs<GeoDataFeature>() ) {
+    if( parentItem.is<GeoDataFeature>() ) {
         QString open = parser.readElementText().trimmed();
 /*        if( open == QString( "1" ) )
             parentItem.nodeAs<GeoDataFeature>()->setOpen( true );

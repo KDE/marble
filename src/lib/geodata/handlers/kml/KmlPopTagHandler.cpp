@@ -41,7 +41,7 @@ GeoNode* KmlpopTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
+    if( parentItem.is<GeoDataPlacemark>() ) {
         QString population = parser.readElementText().trimmed();
         qint64 pop = population.toLongLong();
         if( pop < 0 ) pop = 0;

@@ -40,7 +40,7 @@ GeoNode* KmlcolorTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
     
-    if ( parentItem.nodeAs<GeoDataColorStyle>() ) {
+    if ( parentItem.is<GeoDataColorStyle>() ) {
         bool ok;
         QRgb abgr = parser.readElementText().trimmed().toUInt( &ok, 16 );
         unsigned a = abgr >> 24; abgr = abgr << 8; //"rgb0"

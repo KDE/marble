@@ -41,7 +41,7 @@ GeoNode* KmlroleTagHandler::parse( GeoParser& parser ) const
     Q_ASSERT( parser.isStartElement() && parser.isValidElement( kmlTag_role ) );
 
     GeoStackItem parentItem = parser.parentElement();
-    if( parentItem.nodeAs<GeoDataPlacemark>() ) {
+    if( parentItem.is<GeoDataPlacemark>() ) {
         QString role = parser.readElementText().trimmed();
         if ( role.isEmpty() ) {
             role = ' ';
