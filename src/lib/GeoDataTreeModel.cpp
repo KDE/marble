@@ -208,21 +208,11 @@ QModelIndex GeoDataTreeModel::index( int row, int column, const QModelIndex &par
     GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( parentItem );
     if ( placemark ) {
         childItem = placemark->geometry();
-        // TODO: this parenting is needed because the parser doesn't use
-        // the pointer-based API. This should happen there.
-        if (childItem->parent() != placemark) {
-            childItem->setParent(placemark);
-        }
     }
 
     GeoDataMultiGeometry *geometry = dynamic_cast<GeoDataMultiGeometry*>( parentItem );
     if ( geometry ) {
         childItem = geometry->child( row );
-        // TODO: this parenting is needed because the parser doesn't use
-        // the pointer-based API. This should happen there.
-        if (childItem->parent() != geometry) {
-            childItem->setParent(geometry);
-        }
     }
 
 
