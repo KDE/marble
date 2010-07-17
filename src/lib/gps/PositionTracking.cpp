@@ -29,10 +29,10 @@ PositionTracking::PositionTracking( FileManager *fileManager,
     m_document->setName("Position Tracking");
 
     GeoDataPlacemark *placemark = new GeoDataPlacemark;
-    GeoDataMultiGeometry multiGeometry;
+    GeoDataMultiGeometry *multiGeometry = new GeoDataMultiGeometry;
     GeoDataLineString *lineString = new GeoDataLineString;
 
-    multiGeometry.append(lineString);
+    multiGeometry->append(lineString);
     placemark->setGeometry(multiGeometry);
     m_document->append(placemark);
 

@@ -42,8 +42,8 @@ GeoNode* KmlMultiGeometryTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
+    GeoDataMultiGeometry *geom = new GeoDataMultiGeometry;
     if( parentItem.represents( kmlTag_Placemark ) ) {
-        GeoDataMultiGeometry geom;
         parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( geom );
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << kmlTag_MultiGeometry << ">"
@@ -52,7 +52,6 @@ GeoNode* KmlMultiGeometryTagHandler::parse( GeoParser& parser ) const
         return parentItem.nodeAs<GeoDataPlacemark>()->geometry();
 
     } else if( parentItem.represents( kmlTag_MultiGeometry ) ) {
-        GeoDataMultiGeometry *geom = new GeoDataMultiGeometry;
         parentItem.nodeAs<GeoDataMultiGeometry>()->append( geom );
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << kmlTag_MultiGeometry << ">"
@@ -60,6 +59,7 @@ GeoNode* KmlMultiGeometryTagHandler::parse( GeoParser& parser ) const
 #endif
         return geom;
     } else {
+        delete geom;
         return 0;
     }
 }

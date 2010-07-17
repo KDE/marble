@@ -42,7 +42,7 @@ GeoNode* GPXtrkTagHandler::parse(GeoParser& parser) const
     {
         GeoDataDocument* doc = parentItem.nodeAs<GeoDataDocument>();
         GeoDataPlacemark *placemark = new GeoDataPlacemark;
-        GeoDataMultiGeometry multigeometry;
+        GeoDataMultiGeometry *multigeometry = new GeoDataMultiGeometry;
         placemark->setGeometry(multigeometry);
         placemark->setStyleUrl("#map-track");
 

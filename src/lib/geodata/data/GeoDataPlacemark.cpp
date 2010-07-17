@@ -107,43 +107,11 @@ void GeoDataPlacemark::setCoordinate( const GeoDataPoint &point )
     p()->m_coordinate.setParent( this );
 }
 
-void GeoDataPlacemark::setGeometry( const GeoDataPoint& point )
+void GeoDataPlacemark::setGeometry( GeoDataGeometry *entry )
 {
     detach();
     delete p()->m_geometry;
-    p()->m_geometry = new GeoDataPoint( point );
-    p()->m_geometry->setParent( this );
-}
-
-void GeoDataPlacemark::setGeometry( const GeoDataLineString& point )
-{
-    detach();
-    delete p()->m_geometry;
-    p()->m_geometry = new GeoDataLineString( point );
-    p()->m_geometry->setParent( this );
-}
-
-void GeoDataPlacemark::setGeometry( const GeoDataLinearRing& point )
-{
-    detach();
-    delete p()->m_geometry;
-    p()->m_geometry = new GeoDataLinearRing( point );
-    p()->m_geometry->setParent( this );
-}
-
-void GeoDataPlacemark::setGeometry( const GeoDataPolygon& point )
-{
-    detach();
-    delete p()->m_geometry;
-    p()->m_geometry = new GeoDataPolygon( point );
-    p()->m_geometry->setParent( this );
-}
-
-void GeoDataPlacemark::setGeometry( const GeoDataMultiGeometry& point )
-{
-    detach();
-    delete p()->m_geometry;
-    p()->m_geometry = new GeoDataMultiGeometry( point );
+    p()->m_geometry = entry;
     p()->m_geometry->setParent( this );
 }
 

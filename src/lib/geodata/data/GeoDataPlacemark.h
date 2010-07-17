@@ -116,11 +116,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * to any @see GeoDataGeometry like @see GeoDataPoint,@see GeoDataLineString,
      * @see GeoDataLinearRing and @see GeoDataMultiGeometry
      */
-    void setGeometry( const GeoDataPoint& entry );
-    void setGeometry( const GeoDataLineString& entry );
-    void setGeometry( const GeoDataLinearRing& entry );
-    void setGeometry( const GeoDataMultiGeometry& entry );
-    void setGeometry( const GeoDataPolygon& entry );
+    void setGeometry( GeoDataGeometry *entry );
 
     /**
      * Return the area size of the feature in square km.
