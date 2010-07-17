@@ -134,6 +134,30 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
     return 0;//parentItem->childCount();
 }
 
+QVariant GeoDataTreeModel::headerData(int section, Qt::Orientation orientation,
+                            int role) const
+{
+    if (role != Qt::DisplayRole)
+         return QVariant();
+
+    if ( orientation == Qt::Horizontal )
+    {
+        switch ( section ) {
+        case 0:
+            return QString("Name");
+            break;
+        case 1:
+             return QString("Type");
+             break;
+        case 2:
+            return QString("Popularity");
+            break;
+        case 3:
+            return QString("PopIndex");
+            break;
+        }
+    }
+}
 
 QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
 {
@@ -145,23 +169,35 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
     if ( role == Qt::DisplayRole ) {
 
         GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( object );
-        if ( placemark )
-            return QVariant( placemark->nodeType().append("-").append(placemark->name()).append(QString::number(placemark->popularity())) );
-
+        if ( placemark ) {
+            if ( index.column() == 0 )
+                return QVariant( placemark->name() );
+            else if ( index.column() == 1 )
+                return QVariant( placemark->nodeType() );
+            else if ( index.column() == 2 )
+                return QVariant( placemark->popularity() );
+            else if ( index.column() == 3 )
+                return QVariant( placemark->popularityIndex() );
+        }
         GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
-        if ( feature )
-            return QVariant( feature->nodeType().append("-").append(feature->name()) );
+        if ( feature ) {
+            if ( index.column() == 0 )
+                return QVariant( feature->name() );
+            else if ( index.column() == 1 )
+                return QVariant( feature->nodeType() );
+        }
 
         GeoDataGeometry *geometry = dynamic_cast<GeoDataGeometry*>( object );
-        if ( geometry )
+        if ( geometry && index.column() == 1 )
             return QVariant( geometry->nodeType() );
 
         GeoDataObject *item = dynamic_cast<GeoDataObject*>( object );
-        if ( item )
+        if ( item && index.column() == 1 )
             return QVariant( item->nodeType() );
 
     }
-    else if ( role == Qt::CheckStateRole ) {
+    else if ( role == Qt::CheckStateRole
+              && index.column() == 0 ) {
         GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
         if ( feature )
             if ( feature->isVisible() )
@@ -169,7 +205,8 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
             else
                 return QVariant( Qt::Unchecked );
     }
-    else if ( role == Qt::DecorationRole ) {
+    else if ( role == Qt::DecorationRole
+              && index.column() == 0 ) {
         GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
         if ( feature )
             return QVariant(feature->style()->iconStyle().icon());
@@ -277,16 +314,9 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
     return QModelIndex();
 }
 
-int GeoDataTreeModel::columnCount( const QModelIndex &node ) const
+int GeoDataTreeModel::columnCount( const QModelIndex &index ) const
 {
-//    mDebug() << "columncount";
-    if ( node.isValid() ) {
-//        mDebug() << "columncount valid";
-        return 1;
-    } else {
-//        mDebug() << "columncount invalid";
-        return 1;
-    }
+    return 4;
 }
 
 bool GeoDataTreeModel::setData ( const QModelIndex & index, const QVariant & value, int role )

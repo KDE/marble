@@ -48,6 +48,9 @@ class GeoDataTreeModel : public QAbstractItemModel
      */
     int rowCount( const QModelIndex &parent = QModelIndex() ) const;
 
+    QVariant headerData(int section, Qt::Orientation orientation,
+                                int role = Qt::DisplayRole) const;
+
     QVariant data( const QModelIndex &index, int role ) const;
 
     QModelIndex index( int row, int column,

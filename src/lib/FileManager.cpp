@@ -180,6 +180,10 @@ void FileManager::addGeoDataDocument( GeoDataDocument* document )
 
     // now get the document that will be preserved throughout the life time
     GeoDataDocument* doc = item->document();
+    if ( doc->name().isEmpty() && !doc->fileName().isEmpty() )
+    {
+        doc->setName( doc->fileName() );
+    }
     // remove the hashes in front of the styles.
     QVector<GeoDataFeature*>::Iterator end = doc->end();
     QVector<GeoDataFeature*>::Iterator itr = doc->begin();

@@ -294,7 +294,11 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              widget->fileViewModel(),       SLOT( saveFile() ) );
     connect( d->m_fileViewUi.m_closeButton, SIGNAL( clicked() ) ,
              widget->fileViewModel(),    SLOT( closeFile() ) );
-    d->m_fileViewUi.m_treeView->setModel(widget->model()->treeModel());
+    QSortFilterProxyModel *sortModel = new QSortFilterProxyModel(this);
+    sortModel->setSourceModel( widget->model()->treeModel() );
+    sortModel->setDynamicSortFilter( true );
+    d->m_fileViewUi.m_treeView->setModel( sortModel );
+    d->m_fileViewUi.m_treeView->setSortingEnabled( true );
 
     // Initialize the MarbleLegendBrowser
     d->m_legendUi.marbleLegendBrowser->setMarbleWidget( d->m_widget );
