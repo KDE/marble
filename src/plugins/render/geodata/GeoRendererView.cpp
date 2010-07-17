@@ -134,7 +134,7 @@ void GeoRendererView::renderIndex( QModelIndex &index )
             }
         }
         else if( dynamic_cast<GeoDataFeature*>( object ) ) {
-            if( dynamic_cast<GeoDataFeature*>( object )->featureId() == GeoDataPlacemarkId ) {
+            if( dynamic_cast<GeoDataPlacemark*>( object ) ) {
                 GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( object );
                 m_styleUrl = placemark->styleUrl();
             }

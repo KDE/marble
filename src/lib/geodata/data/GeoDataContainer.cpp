@@ -63,8 +63,9 @@ QVector<GeoDataFolder*> GeoDataContainer::folderList() const
     QVector<GeoDataFeature*>::const_iterator end = p()->m_vector.constEnd();
 
     for (; it != end; ++it) {
-        if ( (*it)->featureId() == GeoDataFolderId ) {
-            results.append( static_cast<GeoDataFolder*>( *it ) );
+        GeoDataFolder *folder = dynamic_cast<GeoDataFolder*>(*it);
+        if ( folder ) {
+            results.append( folder );
         }
     }
 
@@ -79,8 +80,9 @@ QVector<GeoDataPlacemark*> GeoDataContainer::placemarkList() const
     QVector<GeoDataFeature*>::const_iterator end = p()->m_vector.constEnd();
 
     for (; it != end; ++it) {
-        if ( GeoDataPlacemarkId == (*it)->featureId() ) {
-            results.append( static_cast<GeoDataPlacemark*>( *it ) );
+        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( *it );
+        if ( placemark ) {
+            results.append( placemark );
         }
     }
 

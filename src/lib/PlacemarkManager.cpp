@@ -26,6 +26,7 @@
 #include "MarbleDataFacade.h"
 
 #include "GeoDataDocument.h"
+#include "GeoDataFolder.h"
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
 
@@ -137,8 +138,9 @@ QVector<GeoDataPlacemark*> PlacemarkManager::recurseContainer(GeoDataContainer *
 
     results += container->placemarkList();
     for (; it != end; ++it) {
-        if ( GeoDataFolderId == (*it)->featureId() ) {
-            results += recurseContainer(static_cast<GeoDataContainer*>(*it));
+        GeoDataFolder *folder = dynamic_cast<GeoDataFolder*>(*it);
+        if ( folder ) {
+            results += recurseContainer( folder );
         }
     }
     return results;

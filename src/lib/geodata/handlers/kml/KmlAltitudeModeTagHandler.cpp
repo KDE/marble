@@ -57,8 +57,7 @@ GeoNode* KmlaltitudeModeTagHandler::parse( GeoParser& parser ) const
 
     GeoStackItem parentItem = parser.parentElement();
 
-    if ( parentItem.is<GeoDataFeature>()
-         && parentItem.nodeAs<GeoDataFeature>()->featureId() == GeoDataPlacemarkId
+    if ( parentItem.is<GeoDataPlacemark>()
          && parentItem.represents( kmlTag_Point ) )
     {
          parentItem.nodeAs<GeoDataPlacemark>()->geometry()->setAltitudeMode( mode );

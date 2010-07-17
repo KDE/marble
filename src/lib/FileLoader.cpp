@@ -311,10 +311,7 @@ void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *contai
     QVector<GeoDataFolder*>::const_iterator cont = folders.constBegin();
     QVector<GeoDataFolder*>::const_iterator endcont = folders.constEnd();
     for (; cont != endcont; ++cont ) {
-        if (GeoDataFolderId == (*cont)->featureId() ) {
-            GeoDataContainer *subcontainer = *cont;
-            savePlacemarks(out, subcontainer);
-        }
+            savePlacemarks(out, *cont);
     }
 }
 
