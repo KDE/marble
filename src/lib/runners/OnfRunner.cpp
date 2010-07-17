@@ -107,15 +107,19 @@ void OnfRunner::slotRequestFinished( int id, bool error )
     
     GeoDataDocument *results = static_cast<GeoDataDocument*>( parser.releaseDocument() );
     Q_ASSERT( results );
-
     QVector<GeoDataPlacemark*> placemarks = results->placemarkList();
+
+    // feed a new vector, because docPlacemarks and its placemarks will get
+    // deleted along with results
+    QVector<GeoDataPlacemark*> returnPlacemarks;
 
     QVector<GeoDataPlacemark*>::iterator it = placemarks.begin();
     QVector<GeoDataPlacemark*>::iterator end = placemarks.end();
     for(; it != end; ++it ) {
         (*it)->setVisualCategory( category() );
+        returnPlacemarks.append( new GeoDataPlacemark( **it ) );
     }
-    emit runnerFinished( this, placemarks );
+    emit runnerFinished( this, returnPlacemarks );
     delete results;
     return;
 }
