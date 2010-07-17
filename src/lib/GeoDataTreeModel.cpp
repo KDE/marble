@@ -48,6 +48,41 @@ GeoDataTreeModel::~GeoDataTreeModel()
     delete d;
 }
 
+bool GeoDataTreeModel::hasChildren( const QModelIndex &parent ) const
+{
+    GeoDataObject *parentItem;
+    if ( parent.column() > 0 ) {
+        return false;
+    }
+
+    if ( !parent.isValid() ) {
+        parentItem = d->m_rootDocument;
+    } else {
+        parentItem = static_cast<GeoDataObject*>( parent.internalPointer() );
+    }
+
+    if ( !parentItem ) {
+        return false;
+    }
+
+    GeoDataContainer *container = dynamic_cast<GeoDataContainer*>( parentItem );
+    if ( container ) {
+        return container->size();
+    }
+
+    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( parentItem );
+    if ( placemark ) {
+        return placemark->geometry();
+    }
+
+    GeoDataMultiGeometry *geometry = dynamic_cast<GeoDataMultiGeometry*>( parentItem );
+    if ( geometry ) {
+        return geometry->size();
+    }
+
+    return false;
+}
+
 int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
 {
 //    mDebug() << "rowCount";
@@ -69,39 +104,30 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
         return 0;
     }
 
-    QString type = parentItem->nodeType();
-    if ( type == GeoDataTypes::GeoDataContainerType
-        || type == GeoDataTypes::GeoDataDocumentType
-        || type == GeoDataTypes::GeoDataFolderType ) {
-        GeoDataContainer *container = static_cast<GeoDataContainer*>( parentItem );
-        if ( container ) {
-//            mDebug() << "rowCount " << type << "(" << parentItem << ") =" << container->size();
-            return container->size();
-        } else {
-//            mDebug() << "rowCount bad container " << container;
-        }
+    GeoDataContainer *container = dynamic_cast<GeoDataContainer*>( parentItem );
+    if ( container ) {
+//        mDebug() << "rowCount " << type << "(" << parentItem << ") =" << container->size();
+        return container->size();
+//    } else {
+//        mDebug() << "rowCount bad container " << container;
     }
 
-    if ( type == GeoDataTypes::GeoDataPlacemarkType ) {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( parentItem );
-        if ( placemark ) {
-            if ( placemark->geometry() ) {
-//                mDebug() << "rowCount " << type << "(" << parentItem << ") = 1";
-                return 1;
-            }
-//            mDebug() << "rowCount " << type << "(" << parentItem << ") = 0";
-            return 0;
+    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( parentItem );
+    if ( placemark ) {
+        if ( placemark->geometry() ) {
+//            mDebug() << "rowCount " << type << "(" << parentItem << ") = 1";
+            return 1;
         }
+//        mDebug() << "rowCount " << type << "(" << parentItem << ") = 0";
+        return 0;
     }
 
-    if ( type == GeoDataTypes::GeoDataMultiGeometryType ) {
-        GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>( parentItem );
-        if ( geometry ) {
-//            mDebug() << "rowCount " << parent << " " << type << " " << geometry->size();
-            return geometry->size();
-        } else {
-//            mDebug() << "rowCount bad geometry " << geometry;
-        }
+    GeoDataMultiGeometry *geometry = dynamic_cast<GeoDataMultiGeometry*>( parentItem );
+    if ( geometry ) {
+//        mDebug() << "rowCount " << parent << " " << type << " " << geometry->size();
+        return geometry->size();
+//    } else {
+//        mDebug() << "rowCount bad geometry " << geometry;
     }
 
 //    mDebug() << "rowcount end";
@@ -117,6 +143,10 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
 
     GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
     if ( role == Qt::DisplayRole ) {
+
+        GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( object );
+        if ( placemark )
+            return QVariant( placemark->nodeType().append("-").append(placemark->name()).append(QString::number(placemark->popularity())) );
 
         GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
         if ( feature )
@@ -170,16 +200,13 @@ QModelIndex GeoDataTreeModel::index( int row, int column, const QModelIndex &par
 
     GeoDataObject *childItem = 0;
 
-    QString type = parentItem->nodeType();
-    if ( type == GeoDataTypes::GeoDataContainerType
-        || type == GeoDataTypes::GeoDataDocumentType
-        || type == GeoDataTypes::GeoDataFolderType ) {
-        GeoDataContainer *container = static_cast<GeoDataContainer*>( parentItem );
+    GeoDataContainer *container = dynamic_cast<GeoDataContainer*>( parentItem );
+    if ( container ) {
         childItem = container->child( row );
     }
 
-    if ( type == GeoDataTypes::GeoDataPlacemarkType ) {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( parentItem );
+    GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( parentItem );
+    if ( placemark ) {
         childItem = placemark->geometry();
         // TODO: this parenting is needed because the parser doesn't use
         // the pointer-based API. This should happen there.
@@ -188,8 +215,8 @@ QModelIndex GeoDataTreeModel::index( int row, int column, const QModelIndex &par
         }
     }
 
-    if ( type == GeoDataTypes::GeoDataMultiGeometryType ) {
-        GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>( parentItem );
+    GeoDataMultiGeometry *geometry = dynamic_cast<GeoDataMultiGeometry*>( parentItem );
+    if ( geometry ) {
         childItem = geometry->child( row );
         // TODO: this parenting is needed because the parser doesn't use
         // the pointer-based API. This should happen there.
@@ -227,33 +254,31 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
         }
 
         GeoDataObject *greatParentObject = parentObject->parent();
-        QString greatParentType = greatParentObject->nodeType();
 
         // greatParent can be a container
-        if ( greatParentType == GeoDataTypes::GeoDataContainerType
-             || greatParentType == GeoDataTypes::GeoDataDocumentType
-             || greatParentType == GeoDataTypes::GeoDataFolderType ) {
+        GeoDataContainer *greatparentContainer = dynamic_cast<GeoDataContainer*>( greatParentObject );
+        if ( greatparentContainer ) {
             GeoDataFeature *parentFeature = static_cast<GeoDataFeature*>( parentObject );
-            GeoDataContainer * greatparentContainer = static_cast<GeoDataContainer*>( greatParentObject );
 //            mDebug() << "parent " << childObject->nodeType() << "(" << childObject << ") = "
 //                    << parentObject->nodeType() << "[" << greatparentContainer->childPosition( parentFeature ) << "](" << parentObject << ")";
             return createIndex( greatparentContainer->childPosition( parentFeature ), 0, parentObject );
         }
 
         // greatParent can be a placemark
-        if ( greatParentType == GeoDataTypes::GeoDataPlacemarkType ) {
+        GeoDataPlacemark *greatparentPlacemark = dynamic_cast<GeoDataPlacemark*>( greatParentObject );
+        if ( greatparentPlacemark ) {
 //                mDebug() << "parent " << childObject->nodeType() << "(" << childObject << ") = "
 //                        << parentObject->nodeType() << "[0](" << parentObject << ")";
             return createIndex( 0, 0, parentObject );
         }
 
         // greatParent can be a multigeometry
-        if ( greatParentType == GeoDataTypes::GeoDataMultiGeometryType ) {
+        GeoDataMultiGeometry *greatparentMultiGeo = dynamic_cast<GeoDataMultiGeometry*>( greatParentObject );
+        if ( greatparentMultiGeo ) {
             GeoDataGeometry *parentGeometry = static_cast<GeoDataGeometry*>( parentObject );
-            GeoDataMultiGeometry * greatParentItem = static_cast<GeoDataMultiGeometry*>( greatParentObject );
 //                mDebug() << "parent " << childObject->nodeType() << "(" << childObject << ") = "
 //                        << parentObject->nodeType() << "[" << greatParentItem->childPosition( parentGeometry ) << "](" << parentObject << ")";
-            return createIndex( greatParentItem->childPosition( parentGeometry ), 0, parentObject );
+            return createIndex( greatparentMultiGeo->childPosition( parentGeometry ), 0, parentObject );
         }
 
     }

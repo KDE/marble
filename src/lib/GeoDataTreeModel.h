@@ -41,6 +41,8 @@ class GeoDataTreeModel : public QAbstractItemModel
      */
     ~GeoDataTreeModel();
 
+    virtual bool hasChildren( const QModelIndex &parent ) const;
+
     /**
      * Return the number of Items in the Model.
      */
