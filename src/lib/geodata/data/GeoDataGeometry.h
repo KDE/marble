@@ -28,6 +28,7 @@ class GeoDataGeometryPrivate;
 
 class GeoDataPoint;
 class GeoDataPolygon;
+class GeoDataLatLonAltBox;
 class GeoDataLineString; // LinearRing is the same!
 class GeoDataMultiGeometry;
 
@@ -69,6 +70,8 @@ class GEODATA_EXPORT GeoDataGeometry : public GeoDataObject
 
     AltitudeMode altitudeMode() const;
     void setAltitudeMode( const AltitudeMode altitudeMode );
+
+    virtual GeoDataLatLonAltBox latLonAltBox() const;
 
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;

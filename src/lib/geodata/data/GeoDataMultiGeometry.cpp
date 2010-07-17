@@ -47,6 +47,19 @@ QString GeoDataMultiGeometry::nodeType() const
     return p()->nodeType();
 }
 
+
+GeoDataLatLonAltBox GeoDataMultiGeometry::latLonAltBox() const
+{
+    QVector<GeoDataGeometry*>::const_iterator it = p()->m_vector.constBegin();
+    QVector<GeoDataGeometry*>::const_iterator end = p()->m_vector.constEnd();
+
+    GeoDataLatLonAltBox box( (*it)->latLonAltBox() );
+    for (; it != end; ++it) {
+        box += (*it)->latLonAltBox();
+    }
+    return box;
+}
+
 int GeoDataMultiGeometry::size() const
 {
     return p()->m_vector.size();

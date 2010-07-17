@@ -156,6 +156,12 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
      */
     virtual bool isNull() const;
 
+    /**
+     * @brief Unites this bounding box with the given one.
+     * @return Returns a reference to self.
+     */
+    GeoDataLatLonBox& operator +=( const GeoDataLatLonBox& other) ;
+
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
     /// Unserialize the contents of the feature from @p stream.

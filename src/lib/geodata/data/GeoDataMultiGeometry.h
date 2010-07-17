@@ -41,6 +41,8 @@ class GEODATA_EXPORT GeoDataMultiGeometry : public GeoDataGeometry
     /// Provides type information for downcasting a GeoData
     virtual QString nodeType() const;
 
+    virtual GeoDataLatLonAltBox latLonAltBox() const;
+
     int size() const;
     GeoDataGeometry& at( int pos );
     const GeoDataGeometry& at( int pos ) const;

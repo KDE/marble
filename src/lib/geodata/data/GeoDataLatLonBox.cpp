@@ -473,6 +473,16 @@ GeoDataLatLonBox& GeoDataLatLonBox::operator=( const GeoDataLatLonBox &other )
     return *this;
 }
 
+GeoDataLatLonBox& GeoDataLatLonBox::operator+=( const GeoDataLatLonBox& other )
+{
+    d->m_north = qMax(d->m_north, other.north());
+    d->m_south = qMin(d->m_south, other.south());
+    d->m_east = qMax(d->m_east, other.east());
+    d->m_west = qMin(d->m_west, other.west());
+    return *this;
+}
+
+
 void GeoDataLatLonBox::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );

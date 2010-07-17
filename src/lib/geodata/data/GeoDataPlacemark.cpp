@@ -17,6 +17,8 @@
 // Private
 #include "GeoDataPlacemark_p.h"
 
+#include "GeoDataMultiGeometry.h"
+
 // Qt
 #include <QtCore/QDataStream>
 #include "MarbleDebug.h"
@@ -68,10 +70,8 @@ GeoDataGeometry* GeoDataPlacemark::geometry() const
 
 GeoDataCoordinates GeoDataPlacemark::coordinate() const
 {    
-    if( dynamic_cast<GeoDataLineString*>( p()->m_geometry ) ) {
-        return GeoDataLatLonAltBox::fromLineString( *p()->m_geometry ).center();
-    } else if( dynamic_cast<GeoDataPolygon*>( p()->m_geometry ) ) {
-        return GeoDataLatLonAltBox::fromLineString( static_cast<GeoDataPolygon*>(p()->m_geometry)->outerBoundary() ).center();
+    if( p()->m_geometry ) {
+        return p()->m_geometry->latLonAltBox().center();
     } else {
         return static_cast<GeoDataCoordinates>( p()->m_coordinate );
     }

@@ -143,6 +143,11 @@ void GeoDataGeometry::setAltitudeMode( const AltitudeMode altitudeMode )
     d->m_altitudeMode = altitudeMode;
 }
 
+GeoDataLatLonAltBox GeoDataGeometry::latLonAltBox() const
+{
+    return GeoDataLatLonAltBox();
+}
+
 void GeoDataGeometry::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );

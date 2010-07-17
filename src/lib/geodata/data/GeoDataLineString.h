@@ -146,7 +146,7 @@ class GEODATA_EXPORT GeoDataLineString : public GeoDataGeometry
 
     \see GeoDataLatLonAltBox
 */
-    GeoDataLatLonAltBox latLonAltBox() const;
+    virtual GeoDataLatLonAltBox latLonAltBox() const;
 
     
 /*!
