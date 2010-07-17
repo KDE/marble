@@ -211,13 +211,14 @@ void GeoRendererView::setPenStyle( QString mapped )
 
 bool GeoRendererView::renderGeoDataGeometry( GeoDataGeometry *object, QString styleUrl )
 {
-    m_painter->save();
-    m_painter->autoMapQuality();
-
     if( !m_root ) {
         qWarning() << "root seems to be 0!!!";
         return false;
     }
+
+    m_painter->save();
+    m_painter->autoMapQuality();
+
 
     QString mapped = styleUrl;
     const GeoDataStyleMap& styleMap = m_root->styleMap( styleUrl.remove( '#' ) );
@@ -229,23 +230,23 @@ bool GeoRendererView::renderGeoDataGeometry( GeoDataGeometry *object, QString st
 
     mapped.remove( '#' );
 
-    if( dynamic_cast<GeoDataPolygon*>( object ) ) {
-        setBrushStyle( mapped );
-        setPenStyle( mapped );
-        // geometries are implicitly shared, this shouldn't hurt
-        GeoDataPolygon polygon( *object );
-        m_painter->drawPolygon( polygon );
-    }
     if( dynamic_cast<GeoDataLinearRing*>( object ) ) {
         m_painter->setBrush( QColor( 0, 0, 0, 0 ) );
         setPenStyle( mapped );
         GeoDataLinearRing linearRing( *object );
         m_painter->drawPolygon( linearRing );
     }
-    if( dynamic_cast<GeoDataLineString*>( object ) ) {
+    else if( dynamic_cast<GeoDataLineString*>( object ) ) {
         setPenStyle( mapped );
         GeoDataLineString lineString( *object );
         m_painter->drawPolyline( lineString );
+    }
+    else if( dynamic_cast<GeoDataPolygon*>( object ) ) {
+        setBrushStyle( mapped );
+        setPenStyle( mapped );
+        // geometries are implicitly shared, this shouldn't hurt
+        GeoDataPolygon polygon( *object );
+        m_painter->drawPolygon( polygon );
     }
     /* Note: GeoDataMultiGeometry is handled within the model */
     m_painter->restore();
