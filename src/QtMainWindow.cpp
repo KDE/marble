@@ -650,7 +650,7 @@ void MainWindow::openFile()
 {
     QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Open File"),
                             QString(), 
-                            tr("All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*.kml)"));
+                            tr("All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth KML (*.kml);; Micro World Database II (*.pnt)"));
 
     foreach( const QString &fileName, fileNames ) {
         QString extension = fileName.section( '.', -1 );
@@ -658,8 +658,7 @@ void MainWindow::openFile()
         if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
             m_controlView->marbleWidget()->openGpxFile( fileName );
         }
-        else if ( extension.compare( "kml", Qt::CaseInsensitive )
-                  == 0 ) 
+        else
         {
             m_controlView->marbleWidget()->addPlacemarkFile( fileName );
         }
