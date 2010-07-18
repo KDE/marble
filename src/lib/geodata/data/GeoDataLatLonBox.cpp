@@ -25,8 +25,8 @@ class GeoDataLatLonBoxPrivate
 {
  public:
     GeoDataLatLonBoxPrivate()
-        : m_north( +M_PI / 2.0),
-          m_south( -M_PI / 2.0),
+        : m_north( +M_PI / 2.0 ),
+          m_south( -M_PI / 2.0 ),
           m_east(  +M_PI ),
           m_west(  -M_PI ),
           m_rotation( 0.0 )
@@ -69,7 +69,7 @@ GeoDataLatLonBox::GeoDataLatLonBox( qreal north, qreal south, qreal east, qreal 
 
 GeoDataLatLonBox::GeoDataLatLonBox( const GeoDataLatLonBox & other )
     : GeoDataObject( other ),
-      d( new GeoDataLatLonBoxPrivate( *other.d ))
+      d( new GeoDataLatLonBoxPrivate( *other.d ) )
 {
 }
 
@@ -268,12 +268,15 @@ bool GeoDataLatLonBox::crossesDateLine() const
 
 GeoDataCoordinates GeoDataLatLonBox::center() const
 {
+    if( isEmpty() )
+        return GeoDataCoordinates();
+
     if( crossesDateLine() )
-        return GeoDataCoordinates( east() + 2 * M_PI - (east() + 2 * M_PI - west()) / 2,
-                                north() - (north() - south()) / 2 );
+        return GeoDataCoordinates( GeoDataCoordinates::normalizeLon( east() + 2 * M_PI - ( east() + 2 * M_PI - west() ) / 2 ) ,
+                                north() - ( north() - south() ) / 2 );
     else
-        return GeoDataCoordinates( east() - (east() - west()) / 2,
-                                north() - (north() - south()) / 2 );
+        return GeoDataCoordinates( east() - ( east() - west() ) / 2,
+                                north() - ( north() - south() ) / 2 );
 }
 
 bool GeoDataLatLonBox::containsPole( Pole pole ) const
@@ -447,6 +450,59 @@ bool GeoDataLatLonBox::intersects( const GeoDataLatLonBox &other ) const
     return false;
 }
 
+GeoDataLatLonBox GeoDataLatLonBox::united( const GeoDataLatLonBox& other ) const
+{
+    GeoDataLatLonBox result;
+
+    // use the position of the centers of the boxes to determine the "smallest"
+    // box (i.e. should the total box go through IDL or not). this
+    // determination does not depend on one box or the other crossing IDL too
+    GeoDataCoordinates c1 = center();
+    GeoDataCoordinates c2 = other.center();
+
+    // do latitude first, quite simple
+    result.setNorth(qMax( d->m_north, other.north() ) );
+    result.setSouth( qMin( d->m_south, other.south() ) );
+
+    qreal w1 = d->m_west;
+    qreal w2 = other.west();
+    qreal e1 = d->m_east;
+    qreal e2 = other.east();
+
+    bool idl1 = crossesDateLine();
+    bool idl2 = other.crossesDateLine();
+
+    if ( idl1 ) {
+        w1 += 2* M_PI;
+        e1 += 2* M_PI;
+    }
+    if ( idl2 ) {
+        w2 += 2* M_PI;
+        e2 += 2* M_PI;
+    }
+
+    // in the usual case, we take the maximum of east bounds, and
+    // the minimum of west bounds. The exceptions are:
+    // - centers of boxes are more than 180 apart
+    //    (so the smallest box should go around the IDL)
+    //
+    // - 1 but not 2 boxes are crossing IDL
+    if ( fabs( c2.longitude()-c1.longitude() ) > M_PI
+         || ( idl1 ^ idl2 ) ) {
+        // exceptions, we go the unusual way:
+        // min of east, max of west
+        result.setEast( qMin( e1, e2 ) );
+        result.setWest( qMax( w1, w2 ) );
+    }
+    else {
+        // normal case, max of east, min of west
+        result.setEast( qMax( e1, e2 ) );
+        result.setWest( qMin( w1, w2 ) );
+    }
+    return result;
+}
+
+
 QString GeoDataLatLonBox::toString( GeoDataCoordinates::Unit unit ) const
 {
     switch( unit ){
@@ -473,12 +529,14 @@ GeoDataLatLonBox& GeoDataLatLonBox::operator=( const GeoDataLatLonBox &other )
     return *this;
 }
 
-GeoDataLatLonBox& GeoDataLatLonBox::operator+=( const GeoDataLatLonBox& other )
+GeoDataLatLonBox GeoDataLatLonBox::operator|( const GeoDataLatLonBox& other ) const
 {
-    d->m_north = qMax(d->m_north, other.north());
-    d->m_south = qMin(d->m_south, other.south());
-    d->m_east = qMax(d->m_east, other.east());
-    d->m_west = qMin(d->m_west, other.west());
+    return united( other );
+}
+
+GeoDataLatLonBox& GeoDataLatLonBox::operator|=( const GeoDataLatLonBox& other )
+{
+    *this = united( other );
     return *this;
 }
 
@@ -628,4 +686,8 @@ bool GeoDataLatLonBox::isNull() const
     return false;
 }
 
+bool GeoDataLatLonBox::isEmpty() const
+{
+    return *this == GeoDataLatLonBox();
+}
 }

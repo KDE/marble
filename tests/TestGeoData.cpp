@@ -17,6 +17,7 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoDataTypes.h"
+#include "MarbleDebug.h"
 
 namespace Marble
 {
@@ -34,6 +35,10 @@ class TestGeoData : public QObject
     
     void latLonAltBoxIntersects_data();
     void latLonAltBoxIntersects();
+    void latLonBoxCenter_data();
+    void latLonBoxCenter();
+    void latLonBoxUnited_data();
+    void latLonBoxUnited();
 };
 
 /// test the nodeType function through various construction tests
@@ -236,6 +241,164 @@ void TestGeoData::latLonAltBoxIntersects()
     box2.setMinAltitude( box2minAltitude );
     box2.setMaxAltitude( box2maxAltitude );
     QCOMPARE( box1.intersects( box2 ), intersects );
+}
+
+void TestGeoData::latLonBoxCenter_data()
+{
+    QTest::addColumn<qreal>( "boxnorth" );
+    QTest::addColumn<qreal>( "boxsouth" );
+    QTest::addColumn<qreal>( "boxwest" );
+    QTest::addColumn<qreal>( "boxeast" );
+    QTest::addColumn<qreal>( "centerlat" );
+    QTest::addColumn<qreal>( "centerlon" );
+
+    QTest::newRow( "N-E" ) << 60.0 << 40.0 << 10.0 << 30.0
+                          << 50.0 << 20.0;
+
+    QTest::newRow( "N-GW" ) << 60.0 << 40.0 << -30.0 << 10.0
+                          << 50.0 << -10.0;
+
+    QTest::newRow( "N-W" ) << 60.0 << 40.0 << -30.0 << -10.0
+                          << 50.0 << -20.0;
+
+    QTest::newRow( "NS-W" ) << 30.0 << -30.0 << -30.0 << -10.0
+                           << 0.0  << -20.0;
+
+    QTest::newRow( "N-IDL" ) << 30.0 << -30.0 << 170.0 << -150.0
+                            << 0.0  << -170.0;
+}
+
+void TestGeoData::latLonBoxCenter()
+{
+    QFETCH( qreal, boxnorth );
+    QFETCH( qreal, boxsouth );
+    QFETCH( qreal, boxwest );
+    QFETCH( qreal, boxeast );
+    QFETCH( qreal, centerlat );
+    QFETCH( qreal, centerlon );
+
+    MarbleDebug::enable = true;
+
+    GeoDataLatLonAltBox box;
+    box.setNorth( boxnorth, GeoDataCoordinates::Degree );
+    box.setSouth( boxsouth, GeoDataCoordinates::Degree );
+    box.setWest( boxwest, GeoDataCoordinates::Degree );
+    box.setEast( boxeast, GeoDataCoordinates::Degree );
+
+    GeoDataCoordinates center = box.center();
+    QCOMPARE( center.latitude(GeoDataCoordinates::Degree), centerlat );
+    QCOMPARE( center.longitude(GeoDataCoordinates::Degree), centerlon );
+}
+
+void TestGeoData::latLonBoxUnited_data()
+{
+    QTest::addColumn<qreal>( "box1north" );
+    QTest::addColumn<qreal>( "box1south" );
+    QTest::addColumn<qreal>( "box1west" );
+    QTest::addColumn<qreal>( "box1east" );
+    QTest::addColumn<qreal>( "box2north" );
+    QTest::addColumn<qreal>( "box2south" );
+    QTest::addColumn<qreal>( "box2west" );
+    QTest::addColumn<qreal>( "box2east" );
+    QTest::addColumn<qreal>( "box3north" );
+    QTest::addColumn<qreal>( "box3south" );
+    QTest::addColumn<qreal>( "box3west" );
+    QTest::addColumn<qreal>( "box3east" );
+
+    QTest::newRow( "same" ) << 56.0 << 40.0 << 0.0 << 11.0
+                            << 56.0 << 40.0 << 0.0 << 11.0
+                            << 56.0 << 40.0 << 0.0 << 11.0;
+
+    // 2 boxes in West, result stays west
+    QTest::newRow( "bigWest" ) << 30.0 << -30.0 << -30.0 << -10.0   // -20
+                               << 30.0 << -30.0 << -170.0 << -150.0 // -160
+                               << 30.0 << -30.0 << -170.0 << -10.0;
+
+    // 2 boxes each side of greenwich, result crosses greenwich
+    QTest::newRow( "aroundGreenwich" ) << 30.0 << -30.0 << -30.0 << -10.0 // -20
+                                 << 30.0 << -30.0 << 10.0 << 30.0         // -160
+                                 << 30.0 << -30.0 << -30.0 << 30.0;
+
+    // 2 boxes crossing greenwich, result crosses greenwich
+    QTest::newRow( "aroundGreenwich" ) << 30.0 << -30.0 << -30.0 << 10.0  // -20
+                                 << 30.0 << -30.0 << -10.0 << 30.0        // 20
+                                 << 30.0 << -30.0 << -30.0 << 30.0;
+
+    // 2 boxes each side of IDL, result crosses IDL as smaller box
+    QTest::newRow( "aroundIDL" ) << 30.0 << -30.0 << -170.0 << -150.0     // -160
+                                 << 30.0 << -30.0 << 150.0 << 170.0       // 160
+                                 << 30.0 << -30.0 << 150.0 << -150.0;
+
+    // reciprocical, so independent of side
+    QTest::newRow( "aroundIDL2" ) << 30.0 << -30.0 << 150.0 << 170.0     // 160
+                                  << 30.0 << -30.0 << -170.0 << -150.0   // -160
+                                  << 30.0 << -30.0 << 150.0 << -150.0;
+
+    // 1 box crossing IDL, the 2 centers are close together, result crosses IDL
+    QTest::newRow( "crossingIDLclose" ) << 30.0 << -30.0 << -150.0 << -130.0  // -140
+                                        << 30.0 << -30.0 << 170.0 << -150.0   // -170
+                                        << 30.0 << -30.0 << 170.0 << -130.0;
+
+    // reciprocical
+    QTest::newRow( "crossingIDLclose2" ) << 30.0 << -30.0 << 170.0 << -160.0   // -175
+                                         << 30.0 << -30.0 << -150.0 << -140.0  // -145
+                                         << 30.0 << -30.0 << 170.0 << -140.0;
+
+    // 1 box crossing IDL, the 2 centers are across IDL, result crosses IDL
+    QTest::newRow( "crossingIDLfar" ) << 30.0 << -30.0 << -170.0 << -150.0    // -160
+                                      << 30.0 << -30.0 << 150.0 << -170.0          // 170
+                                      << 30.0 << -30.0 << 150.0 << -150.0;
+
+    // reciprocical
+    QTest::newRow( "crossingIDLfar2" ) << 30.0 << -30.0 << 150.0 << -170.0          // 170
+                                       << 30.0 << -30.0 << -170.0 << -150.0    // -160
+                                       << 30.0 << -30.0 << 150.0 << -150.0;
+
+    // 2 box crossing IDL, the 2 centers are close together, result crosses IDL
+    QTest::newRow( "crossingsIDLclose" ) << 30.0 << -30.0 << 160.0 << -140.0   // -170
+                                        << 30.0 << -30.0 << 170.0 << -160.0   // -175
+                                        << 30.0 << -30.0 << 160.0 << -140.0;
+
+    // 2 box crossing IDL, the 2 centers are across IDL, result crosses IDL
+    QTest::newRow( "crossingsIDLfar" ) << 30.0 << -30.0 << -170.0 << -150.0    // -160
+                                      << 30.0 << -30.0 << 150.0 << -170.0     // 170
+                                      << 30.0 << -30.0 << 150.0 << -150.0;
+
+}
+
+void TestGeoData::latLonBoxUnited()
+{
+    QFETCH( qreal, box1north );
+    QFETCH( qreal, box1south );
+    QFETCH( qreal, box1west );
+    QFETCH( qreal, box1east );
+    QFETCH( qreal, box2north );
+    QFETCH( qreal, box2south );
+    QFETCH( qreal, box2west );
+    QFETCH( qreal, box2east );
+    QFETCH( qreal, box3north );
+    QFETCH( qreal, box3south );
+    QFETCH( qreal, box3west );
+    QFETCH( qreal, box3east );
+
+    MarbleDebug::enable = true;
+
+    GeoDataLatLonAltBox box1;
+    GeoDataLatLonAltBox box2;
+    GeoDataLatLonAltBox box3;
+    box1.setNorth( box1north, GeoDataCoordinates::Degree );
+    box1.setSouth( box1south, GeoDataCoordinates::Degree );
+    box1.setWest( box1west, GeoDataCoordinates::Degree );
+    box1.setEast( box1east, GeoDataCoordinates::Degree );
+    box2.setNorth( box2north, GeoDataCoordinates::Degree );
+    box2.setSouth( box2south, GeoDataCoordinates::Degree );
+    box2.setWest( box2west, GeoDataCoordinates::Degree );
+    box2.setEast( box2east, GeoDataCoordinates::Degree );
+    box3 = box1 | box2;
+    QCOMPARE( box3.north( GeoDataCoordinates::Degree ), box3north );
+    QCOMPARE( box3.south( GeoDataCoordinates::Degree ), box3south );
+    QCOMPARE( box3.west( GeoDataCoordinates::Degree ), box3west );
+    QCOMPARE( box3.east( GeoDataCoordinates::Degree ), box3east );
 }
 
 }

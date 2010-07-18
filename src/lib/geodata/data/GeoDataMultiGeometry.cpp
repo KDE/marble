@@ -53,9 +53,16 @@ GeoDataLatLonAltBox GeoDataMultiGeometry::latLonAltBox() const
     QVector<GeoDataGeometry*>::const_iterator it = p()->m_vector.constBegin();
     QVector<GeoDataGeometry*>::const_iterator end = p()->m_vector.constEnd();
 
-    GeoDataLatLonAltBox box( (*it)->latLonAltBox() );
+    GeoDataLatLonAltBox box;
     for (; it != end; ++it) {
-        box += (*it)->latLonAltBox();
+        if ( !(*it)->latLonAltBox().isEmpty() ) {
+            if ( box.isEmpty() ) {
+                box = (*it)->latLonAltBox();
+            }
+            else {
+                box |= (*it)->latLonAltBox();
+            }
+        }
     }
     return box;
 }

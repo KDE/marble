@@ -140,6 +140,11 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     virtual bool intersects( const GeoDataLatLonBox & ) const;
 
     /**
+     * @brief Returns the bounding LatLonBox of this box with the given one.
+     */
+    GeoDataLatLonBox united( const GeoDataLatLonBox& other) const;
+
+    /**
      * @brief Create the smallest bounding box from a line string.
      * @return the smallest bounding box that contains the linestring.
      */
@@ -157,10 +162,18 @@ class GEODATA_EXPORT GeoDataLatLonBox : public GeoDataObject
     virtual bool isNull() const;
 
     /**
+     * @brief Indicates whether the bounding box is not initialised (and contains all).
+     * @return Return value is true if bounding box is not initialised.
+     */
+    virtual bool isEmpty() const;
+
+    GeoDataLatLonBox operator|( const GeoDataLatLonBox& other ) const;
+
+    /**
      * @brief Unites this bounding box with the given one.
      * @return Returns a reference to self.
      */
-    GeoDataLatLonBox& operator +=( const GeoDataLatLonBox& other) ;
+    GeoDataLatLonBox& operator |=( const GeoDataLatLonBox& other) ;
 
     /// Serialize the contents of the feature to @p stream.
     virtual void pack( QDataStream& stream ) const;
