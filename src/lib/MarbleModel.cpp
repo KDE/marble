@@ -357,12 +357,12 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             qDebug("Tile creation completed");
             delete tileCreatorDlg;
         }
+        
+        setupTextureMapper( currentProjection );
     }
     else {
         d->m_tileLoader->flush();
     }
-
-    setupTextureMapper( currentProjection );
 
     // Set all the colors for the vector layers
     if ( d->m_mapTheme->map()->hasVectorLayers() && d->m_veccomposer ) {
@@ -479,6 +479,8 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 
 void MarbleModel::setupTextureMapper( Projection projection )
 {
+    if ( !d->m_mapTheme->map()->hasTextureLayers() )
+        return;
   // FIXME: replace this with an approach based on the factory method pattern.
     delete d->m_texmapper;
 
