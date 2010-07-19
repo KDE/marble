@@ -139,10 +139,7 @@ int GeoDataTreeModel::rowCount( const QModelIndex &parent ) const
 QVariant GeoDataTreeModel::headerData(int section, Qt::Orientation orientation,
                             int role) const
 {
-    if (role != Qt::DisplayRole)
-         return QVariant();
-
-    if ( orientation == Qt::Horizontal )
+    if ( role == Qt::DisplayRole && orientation == Qt::Horizontal )
     {
         switch ( section ) {
         case 0:
@@ -159,6 +156,7 @@ QVariant GeoDataTreeModel::headerData(int section, Qt::Orientation orientation,
             break;
         }
     }
+    return QVariant();
 }
 
 QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
@@ -336,6 +334,8 @@ bool GeoDataTreeModel::setData ( const QModelIndex & index, const QVariant & val
             return true;
         }
     }
+
+    return false;
 }
 
 Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
