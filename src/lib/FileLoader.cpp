@@ -323,7 +323,7 @@ void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *contai
     }
 }
 
-bool FileLoader::loadPntFile( const QString &fileName )
+void FileLoader::loadPntFile( const QString &fileName )
 {
     QFile  file( fileName );
 

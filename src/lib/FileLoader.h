@@ -38,7 +38,7 @@ class FileLoader : public QThread
         bool loadFile(const QString &filename );
         void saveFile(const QString& filename );
         void savePlacemarks(QDataStream &out, const GeoDataContainer *container);
-        bool loadPntFile( const QString &fileName );
+        void loadPntFile( const QString &fileName );
 
         QString m_filepath;
         QString m_contents;
