@@ -891,7 +891,7 @@ void MarbleModel::clearPersistentTileCache()
     }
 }
 
-void MarbleModel::paintTile( StackedTile* tile, GeoSceneTexture *textureLayer )
+void MarbleModel::paintTile( StackedTile* tile, const GeoSceneTexture *textureLayer )
 {
 //    mDebug() << "MarbleModel::paintTile: " << "x: " << x << "y:" << y << "level: " << level
 //             << "requestTileUpdate" << requestTileUpdate;

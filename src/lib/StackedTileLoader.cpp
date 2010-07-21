@@ -196,8 +196,6 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId, Download
         }
     }
 
-    GeoSceneTexture * const texture = d->m_textureLayers[ stackedTileId.mapThemeIdHash() ];
-
     // tile (valid) has not been found in hash or cache, so load it from disk
     // and place it in the hash from where it will get transferred to the cache
 
@@ -227,7 +225,7 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId, Download
 
     if ( stackedTile->state() != StackedTile::TileEmpty ) {
         stackedTile->initResultTile();
-        mergeDecorations( stackedTile, texture );
+        mergeDecorations( stackedTile );
     }
     return stackedTile;
 }
@@ -389,7 +387,7 @@ void StackedTileLoader::updateTile( TileId const & stackedTileId, TileId const &
     if ( displayedTile ) {
         displayedTile->deriveCompletionState();
         displayedTile->initResultTile();
-        mergeDecorations( displayedTile, findTextureLayer( stackedTileId ));
+        mergeDecorations( displayedTile );
         emit tileUpdateAvailable();
     }
     else {
@@ -397,7 +395,7 @@ void StackedTileLoader::updateTile( TileId const & stackedTileId, TileId const &
         if ( cachedTile ) {
             cachedTile->deriveCompletionState();
             cachedTile->initResultTile();
-            mergeDecorations( cachedTile, findTextureLayer( stackedTileId ));
+            mergeDecorations( cachedTile );
         }
     }
 }
@@ -421,13 +419,6 @@ inline GeoSceneLayer const * StackedTileLoader::findSceneLayer( TileId const & s
 inline GeoSceneTexture const * StackedTileLoader::findTextureLayer( TileId const & id ) const
 {
     GeoSceneTexture const * const textureLayer = d->m_textureLayers.value( id.mapThemeIdHash(), 0 );
-    Q_ASSERT( textureLayer );
-    return textureLayer;
-}
-
-inline GeoSceneTexture * StackedTileLoader::findTextureLayer( TileId const & id )
-{
-    GeoSceneTexture * const textureLayer = d->m_textureLayers.value( id.mapThemeIdHash(), 0 );
     Q_ASSERT( textureLayer );
     return textureLayer;
 }
@@ -507,12 +498,11 @@ void StackedTileLoader::updateTextureLayers()
     d->m_tileLoader->setTextureLayers( d->m_textureLayers );
 }
 
-void StackedTileLoader::mergeDecorations( StackedTile * const tile,
-                                          GeoSceneTexture * const textureLayer ) const
+void StackedTileLoader::mergeDecorations( StackedTile * const tile ) const
 {
     Q_ASSERT( tile->state() != StackedTile::TileEmpty );
     if ( !tile->forMergedLayerDecorator() )
-        m_parent->paintTile( tile, textureLayer );
+        m_parent->paintTile( tile, findTextureLayer( tile->id() ) );
 }
 
 // This method should not alter m_tileCache, as the given tile is managed
@@ -530,7 +520,7 @@ void StackedTileLoader::reloadCachedTile( StackedTile * const cachedTile,
     }
     cachedTile->deriveCompletionState();
     cachedTile->initResultTile();
-    mergeDecorations( cachedTile, findTextureLayer( cachedTile->id() ));
+    mergeDecorations( cachedTile );
     emit tileUpdateAvailable();
 }
 
