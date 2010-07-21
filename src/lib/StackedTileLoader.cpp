@@ -102,7 +102,7 @@ StackedTileLoader::StackedTileLoader( MapThemeManager const * const mapThemeMana
     connect( d->m_mapThemeManager, SIGNAL( themesChanged() ),
              this, SLOT( updateTextureLayers() ) );
     setTextureLayerSettings( textureLayerSettings );
-    d->m_tileLoader = new TileLoader( mapThemeManager, downloadManager );
+    d->m_tileLoader = new TileLoader( downloadManager );
     updateTextureLayers();
     connect( d->m_tileLoader, SIGNAL( tileCompleted( TileId, TileId )),
              SLOT( updateTile( TileId, TileId )));
