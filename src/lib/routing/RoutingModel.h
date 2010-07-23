@@ -77,29 +77,13 @@ public:
 
     // Model data filling
 
+    // importGeoDataDocument() will probably become setModel(GeoDataDocument*) in the future and
+    // the internal representation using a QVector<RouteElement> may go away
     /**
-      * @brief Parse the provided data in opengis xml format.
-      *
-      * Old data in the model is discarded, the parsed content of the provided xml data
-      * in opengis format is used as the new model data and a model reset is done
-      * @param xmlData Route instructions, xml. See document 03-006r3:
-      *  "OpenGIS Location Services (OpenLS): Core Services [Parts 5 Route Service]" at
-      *  http://www.opengeospatial.org/standards/ols
-      * @param route The route points (ordered, first is source, last is destination)
-      * that were used to generate the xml data
-      *
-      * @todo: Add geodata/handlers/opengis, use it in the route provider and use a
-      * parsed GeoDocument here
+      * Old data in the model is discarded, the parsed content of the provided document
+      * is used as the new model data and a model reset is done
       */
-    bool importOpenGis( const QByteArray &xmlData );
-
-    /**
-      * @brief Parse the provided data in kml format.
-      *
-      * Old data in the model is discarded, the parsed content of the provided xml data
-      * in kml format is used as the new model data and a model reset is done
-      */
-    bool importKml( const QByteArray &content );
+    bool importGeoDataDocument( GeoDataDocument* document );
 
     /**
       * Returns the total (estimated) time it takes to travel from

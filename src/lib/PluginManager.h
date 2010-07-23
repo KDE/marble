@@ -25,6 +25,7 @@ class NetworkPlugin;
 class PositionProviderPlugin;
 class AbstractFloatItem;
 class PluginManagerPrivate;
+class RunnerPlugin;
 
 /**
  * @short The class that handles Marble's plugins.
@@ -70,6 +71,12 @@ class MARBLE_EXPORT PluginManager : public QObject
      * of them to the client.
      */
     QList<PositionProviderPlugin *> createPositionProviderPlugins() const;
+
+    /**
+     * Returns all runner plugins.
+     * @note: Runner plugins are owned by the PluginManager, do not delete them
+     */
+    QList<RunnerPlugin *> runnerPlugins() const;
 
  private:
     Q_DISABLE_COPY( PluginManager )

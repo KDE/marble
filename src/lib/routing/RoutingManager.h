@@ -11,7 +11,6 @@
 #ifndef MARBLE_ROUTINGMANAGER_H
 #define MARBLE_ROUTINGMANAGER_H
 
-#include "AbstractRoutingProvider.h"
 #include "GeoDataCoordinates.h"
 
 #include <QtCore/QAbstractItemModel>
@@ -23,6 +22,7 @@ class RoutingManagerPrivate;
 class MarbleWidget;
 class RoutingModel;
 class RouteSkeleton;
+class GeoDataDocument;
 
 /**
   * Delegates data retrieval and model updates to the appropriate
@@ -78,9 +78,10 @@ Q_SIGNALS:
       */
     void stateChanged( RoutingManager::State newState, RouteSkeleton *route );
 
+    void routeRetrieved( GeoDataDocument* route );
+
 private Q_SLOTS:
-    /** Routing provider has finished downloading data */
-    void setRouteData( AbstractRoutingProvider::Format format, const QByteArray &data );
+    void retrieveRoute( GeoDataDocument* route );
 
 private:
     friend class RoutingManagerPrivate;

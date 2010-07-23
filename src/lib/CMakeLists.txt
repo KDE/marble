@@ -11,7 +11,6 @@ INCLUDE_DIRECTORIES(
  ${CMAKE_CURRENT_SOURCE_DIR}/AbstractLayer
  ${CMAKE_CURRENT_SOURCE_DIR}/Projections
  ${CMAKE_CURRENT_SOURCE_DIR}/routing
- ${CMAKE_CURRENT_SOURCE_DIR}/runners
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/data
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata/graphicsitem
@@ -195,17 +194,11 @@ set(marblewidget_SRCS
     routing/RoutingLayer.cpp
     routing/RoutingInputWidget.cpp
     routing/RoutingWidget.cpp
-    routing/OrsRoutingProvider.cpp
-    routing/YoursRoutingProvider.cpp
-    routing/AbstractRoutingProvider.cpp
 
     MarbleRunnerManager.cpp
-    runners/MarbleAbstractRunner.cpp
-    runners/LatLonRunner.cpp
-    runners/LocalDatabaseRunner.cpp
-    runners/OnfRunner.cpp
-    runners/OsmNominatimRunner.cpp
-    runners/HostipRunner.cpp
+    RunnerPlugin.cpp
+    MarbleAbstractRunner.cpp
+    RunnerTask.cpp
 )
 
 set (marblewidget_UI
@@ -360,6 +353,8 @@ else (APPLE AND QTONLY)
     PluginInterface.h
     RenderPlugin.h
     RenderPluginInterface.h
+    MarbleAbstractRunner.h
+    RunnerPlugin.h
     LayerInterface.h
     PluginAboutDialog.h
     marble_export.h

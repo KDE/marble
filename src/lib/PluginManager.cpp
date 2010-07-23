@@ -25,6 +25,7 @@
 #include "NetworkPlugin.h"
 #include "PositionProviderPlugin.h"
 #include "AbstractFloatItem.h"
+#include "RunnerPlugin.h"
 
 namespace Marble
 {
@@ -43,6 +44,7 @@ class PluginManagerPrivate
     QList<RenderPlugin *> m_renderPluginTemplates;
     QList<NetworkPlugin *> m_networkPluginTemplates;
     QList<PositionProviderPlugin *> m_positionProviderPluginTemplates;
+    QList<RunnerPlugin *> m_runnerPlugins;
 };
 
 PluginManager::PluginManager( QObject *parent )
@@ -125,6 +127,12 @@ QList<PositionProviderPlugin *> PluginManager::createPositionProviderPlugins() c
     return result;
 }
 
+QList<RunnerPlugin *> PluginManager::runnerPlugins() const
+{
+    d->loadPlugins();
+    return d->m_runnerPlugins;
+}
+
 void PluginManagerPrivate::loadPlugins()
 {
     if (m_pluginsLoaded)
@@ -149,6 +157,8 @@ void PluginManagerPrivate::loadPlugins()
     qDeleteAll( m_positionProviderPluginTemplates );
     m_positionProviderPluginTemplates.clear();
 
+    // No need to delete runner plugins
+
     foreach( const QString &fileName, pluginFileNameList ) {
         // mDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
         QPluginLoader loader( MarbleDirs::pluginPath( fileName ) );
@@ -158,6 +168,7 @@ void PluginManagerPrivate::loadPlugins()
         RenderPlugin * renderPlugin = 0;
         NetworkPlugin * networkPlugin = 0;
         PositionProviderPlugin * positionProviderPlugin = 0;
+        RunnerPlugin * runnerPlugin = 0;
         if ( obj ) {
             if ( obj->inherits( "Marble::RenderPlugin" ) ) {
                 mDebug() << "render plugin found" << MarbleDirs::pluginPath( fileName );
@@ -173,10 +184,17 @@ void PluginManagerPrivate::loadPlugins()
                 mDebug() << "position provider plugin found" << MarbleDirs::pluginPath( fileName );
                 positionProviderPlugin = qobject_cast<PositionProviderPlugin *>( obj );
                 m_positionProviderPluginTemplates.append( positionProviderPlugin );
+            } else if ( obj->inherits( "Marble::RunnerPlugin" ) ) {
+                mDebug() << "runner plugin found" << MarbleDirs::pluginPath( fileName );
+                runnerPlugin = qobject_cast<RunnerPlugin *>( obj );
+                Q_ASSERT( runnerPlugin && "Unexpected cast failure when loading RunnerPlugin" );
+                m_runnerPlugins.append( runnerPlugin );
+            } else {
+                mDebug() << "Unknown file or plugin type in plugin directoy: " << fileName;
             }
         }
 
-        if( !renderPlugin && !networkPlugin && !positionProviderPlugin) {
+        if( !renderPlugin && !networkPlugin && !positionProviderPlugin && !runnerPlugin ) {
             mDebug() << "Plugin Failure: " << fileName << " is not a valid Marble Plugin:";
             mDebug() << loader.errorString();
         }

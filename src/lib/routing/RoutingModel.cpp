@@ -52,7 +52,7 @@ public:
 
     RoutingModelPrivate();
 
-    RouteElement parseGmlPos( const QStringList &content ) const;
+    void importPlacemark( const GeoDataPlacemark *placemark );
 };
 
 RoutingModelPrivate::RoutingModelPrivate() : m_totalDistance( 0.0 )
@@ -60,17 +60,24 @@ RoutingModelPrivate::RoutingModelPrivate() : m_totalDistance( 0.0 )
     // nothing to do
 }
 
-RouteElement RoutingModelPrivate::parseGmlPos( const QStringList &content ) const
+void RoutingModelPrivate::importPlacemark( const GeoDataPlacemark *placemark )
 {
-    Q_ASSERT( content.length() == 2 );
-
-    RouteElement element;
-    GeoDataCoordinates position;
-    position.setLongitude( content.at( 0 ).toDouble(), GeoDataCoordinates::Degree );
-    position.setLatitude( content.at( 1 ).toDouble(), GeoDataCoordinates::Degree );
-    element.position = position;
-
-    return element;
+    GeoDataGeometry* geometry = placemark->geometry();
+    GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
+    if ( lineString ) {
+        for ( int i=0; i<lineString->size(); ++i ) {
+            RouteElement element;
+            element.type = RoutingModel::WayPoint;
+            element.position = lineString->at( i );
+            m_route.push_back( element );
+        }
+    } else if ( !placemark->name().isEmpty() && placemark->name() != "Route" ) {
+        RouteElement element;
+        element.type = RoutingModel::Instruction;
+        element.description = placemark->name();
+        element.position = placemark->coordinate();
+        m_route.push_back( element );
+    }
 }
 
 RoutingModel::RoutingModel( QObject *parent ) :
@@ -131,163 +138,19 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
     return QVariant();
 }
 
-bool RoutingModel::importOpenGis( const QByteArray &content )
+bool RoutingModel::importGeoDataDocument( GeoDataDocument* document )
 {
     d->m_route.clear();
-
-    QDomDocument xml;
-    if ( !xml.setContent( content ) ) {
-        mDebug() << "Cannot parse xml file with routing instructions.";
-        reset();
-        return false;
-    }
-
-    QDomElement root = xml.documentElement();
-
-    QDomNodeList errors = root.elementsByTagName( "xls:Error" );
-    if ( errors.size() > 0 ) {
-        reset();
-        return false;
-        // Returning early because fallback routing providers are used now
-        // The code below can be used to parse OpenGis errors reported by ORS
-        // and may be useful in the future
-
-        for ( unsigned int i = 0; i < errors.length(); ++i ) {
-            QDomNode node = errors.item( i );
-            QString errorMessage = node.attributes().namedItem( "message" ).nodeValue();
-            QRegExp regexp = QRegExp( "^(.*) Please Check your Position: (-?[0-9]+.[0-9]+) (-?[0-9]+.[0-9]+) !" );
-            if ( regexp.indexIn( errorMessage ) == 0 ) {
-                RouteElement element;
-                GeoDataCoordinates position;
-                if ( regexp.capturedTexts().size() == 4 ) {
-                    element.description = regexp.capturedTexts().at( 1 );
-                    position.setLongitude( regexp.capturedTexts().at( 2 ).toDouble(), GeoDataCoordinates::Degree );
-                    position.setLatitude( regexp.capturedTexts().at( 3 ).toDouble(), GeoDataCoordinates::Degree );
-                    element.position = position;
-                    element.type = Error;
-                    d->m_route.push_back( element );
-                }
-            } else {
-                mDebug() << "Error message " << errorMessage << " not parsable.";
-                QString message = tr( "Sorry, a problem occurred when calculating the route. Try adjusting start and destination points." );
-                QPointer<QMessageBox> messageBox = new QMessageBox( QMessageBox::Warning, "Route Error", message );
-                messageBox->setDetailedText( errorMessage );
-                messageBox->exec();
-                delete messageBox;
-            }
-        }
-    }
-
-    QDomNodeList summary = root.elementsByTagName( "xls:RouteSummary" );
-    if ( summary.size() > 0 ) {
-        QDomNodeList time = summary.item( 0 ).toElement().elementsByTagName( "xls:TotalTime" );
-        QDomNodeList distance = summary.item( 0 ).toElement().elementsByTagName( "xls:TotalDistance" );
-        if ( time.size() == 1 && distance.size() == 1 ) {
-            QRegExp regexp = QRegExp( "^P(?:(\\d+)D)?T(?:(\\d+)H)?(?:(\\d+)M)?(\\d+)S" );
-            if ( regexp.indexIn( time.item( 0 ).toElement().text() ) == 0 ) {
-                QStringList matches = regexp.capturedTexts();
-                int days( 0 ), hours( 0 ), minutes( 0 ), seconds( 0 );
-                switch ( matches.size() ) {
-                case 5:
-                    days    = regexp.cap( matches.size() - 4 ).toInt();
-                    // Intentionally no break
-                case 4:
-                    hours   = regexp.cap( matches.size() - 3 ).toInt();
-                    // Intentionally no break
-                case 3:
-                    minutes = regexp.cap( matches.size() - 2 ).toInt();
-                    // Intentionally no break
-                case 2:
-                    seconds = regexp.cap( matches.size() - 1 ).toInt();
-                    break;
-                default:
-                    mDebug() << "Unable to parse time string " << time.item( 0 ).toElement().text();
-                }
-
-                d->m_totalDuration.days = days;
-                d->m_totalDuration.time = QTime( hours, minutes, seconds, 0 );
-                d->m_totalDistance = distance.item( 0 ).attributes().namedItem( "value" ).nodeValue().toDouble();
-                QString unit = distance.item( 0 ).attributes().namedItem( "uom" ).nodeValue();
-                if ( unit == "M" ) {
-                    d->m_totalDistance *= METER2KM;
-                } else if ( unit != "KM" ) {
-                    mDebug() << "Cannot parse distance unit " << unit << ", treated as km.";
-                }
-            }
-        }
-    }
-
-    QDomNodeList geometry = root.elementsByTagName( "xls:RouteGeometry" );
-    if ( geometry.size() > 0 ) {
-        QDomNodeList waypoints = geometry.item( 0 ).toElement().elementsByTagName( "gml:pos" );
-        for ( unsigned int i = 0; i < waypoints.length(); ++i ) {
-            QDomNode node = waypoints.item( i );
-            QStringList content = node.toElement().text().split( ' ' );
-            if ( content.length() == 2 ) {
-                RouteElement element = d->parseGmlPos( content );
-                element.type = WayPoint;
-                d->m_route.push_back( element );
-            }
-        }
-    }
-
-    QDomNodeList instructionList = root.elementsByTagName( "xls:RouteInstructionsList" );
-    if ( instructionList.size() > 0 ) {
-        QDomNodeList instructions = instructionList.item( 0 ).toElement().elementsByTagName( "xls:RouteInstruction" );
-        for ( unsigned int i = 0; i < instructions.length(); ++i ) {
-            QDomElement node = instructions.item( i ).toElement();
-
-            QDomNodeList textNodes = node.elementsByTagName( "xls:Instruction" );
-            QDomNodeList positions = node.elementsByTagName( "gml:pos" );
-
-            if ( textNodes.size() > 0 && positions.size() > 0 ) {
-                QStringList content = positions.at( 0 ).toElement().text().split( ' ' );
-                if ( content.length() == 2 ) {
-                    RouteElement element = d->parseGmlPos( content );
-                    element.description = textNodes.item( 0 ).toElement().text();
-                    element.type = Instruction;
-                    d->m_route.push_back( element );
-                }
-            }
-        }
-    }
-
-    reset();
-    return true;
-}
-
-bool RoutingModel::importKml( const QByteArray &content )
-{
-    d->m_route.clear();
-    GeoDataParser parser( GeoData_UNKNOWN );
-
-    // Open file in right mode
-    QBuffer buffer;
-    buffer.setData( content );
-    buffer.open( QIODevice::ReadOnly );
-
-    if ( !parser.read( &buffer ) ) {
-        qDebug() << "Cannot parse kml data! Input is " << content ;
-        reset();
-        return false;
-    }
-    GeoDataDocument* document = static_cast<GeoDataDocument*>( parser.releaseDocument() );
-    Q_ASSERT( document );
 
     QVector<GeoDataFolder*> folders = document->folderList();
     foreach( const GeoDataFolder *folder, folders ) {
         foreach( const GeoDataPlacemark *placemark, folder->placemarkList() ) {
-            GeoDataGeometry* geometry = placemark->geometry();
-            GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
-            if ( lineString ) {
-                for ( int i=0; i<lineString->size(); ++i ) {
-                    RouteElement element;
-                    element.type = WayPoint;
-                    element.position = lineString->at( i );
-                    d->m_route.push_back( element );
-                }
-            }
+            d->importPlacemark( placemark );
         }
+    }
+
+    foreach( const GeoDataPlacemark *placemark, document->placemarkList() ) {
+        d->importPlacemark( placemark );
     }
 
     reset();

@@ -6,6 +6,7 @@
 // the source code.
 //
 // Copyright 2008 Henry de Valence <hdevalence@gmail.com>
+// Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
 
 #include "MarbleRunnerManager.h"
 
@@ -13,139 +14,203 @@
 #include "MarbleDebug.h"
 #include "PlacemarkManager.h"
 #include "GeoDataPlacemark.h"
-
-#include "HostipRunner.h"
-#include "LatLonRunner.h"
-#include "OnfRunner.h"
-#include "OsmNominatimRunner.h"
-#include "LocalDatabaseRunner.h"
+#include "PluginManager.h"
+#include "RunnerPlugin.h"
+#include "RunnerTask.h"
+#include "routing/RouteSkeleton.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
 #include <QtCore/QVector>
+#include <QtCore/QThreadPool>
 
 namespace Marble
 {
 
-MarbleRunnerManager::MarbleRunnerManager( QObject *parent )
-    : QObject(parent),
-      m_map(0),
-      m_activeRunners(0),
-      m_model(new MarblePlacemarkModel),
-      m_celestialBodyId("earth"),
-      m_workOffline(false)
+class MarbleRunnerManagerPrivate
 {
-    m_model->setPlacemarkContainer(&m_placemarkContainer);
-    qRegisterMetaType<QVector<GeoDataPlacemark*> >("QVector<GeoDataPlacemark*>");
+public:
+    QString m_lastSearchTerm;
+    QMutex m_modelMutex;
+    MarbleMap * m_map;
+    MarblePlacemarkModel *m_model;
+    int m_searchTasks;
+    QVector<GeoDataPlacemark*> m_placemarkContainer;
+    bool m_haveReverseGeocodingResult;
+    QVector<GeoDataDocument*> m_routingResult;
+    RouteSkeleton* m_routeSkeleton;
+    QString m_celestialBodyId;
+    bool m_workOffline;
+    PluginManager* m_pluginManager;
+
+    MarbleRunnerManagerPrivate( PluginManager* pluginManager );
+
+    ~MarbleRunnerManagerPrivate();
+
+    QList<RunnerPlugin*> plugins( RunnerPlugin::Capability capability );
+};
+MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( PluginManager* pluginManager ) :
+        m_map( 0 ),
+        m_model( new MarblePlacemarkModel ),
+        m_haveReverseGeocodingResult( false ),
+        m_celestialBodyId( "earth" ),
+        m_workOffline( false ),
+        m_pluginManager( pluginManager ),
+        m_routeSkeleton( 0 ),
+        m_searchTasks( 0 )
+{
+    m_model->setPlacemarkContainer( &m_placemarkContainer );
+    qRegisterMetaType<GeoDataPlacemark>( "GeoDataPlacemark" );
+    qRegisterMetaType<QVector<GeoDataPlacemark*> >( "QVector<GeoDataPlacemark*>" );
+}
+
+MarbleRunnerManagerPrivate::~MarbleRunnerManagerPrivate()
+{
+    delete m_model;
+}
+
+QList<RunnerPlugin*> MarbleRunnerManagerPrivate::plugins( RunnerPlugin::Capability capability )
+{
+    QList<RunnerPlugin*> result;
+    QList<RunnerPlugin*> plugins = m_pluginManager->runnerPlugins();
+    foreach( RunnerPlugin* plugin, plugins ) {
+        if ( !plugin->supports( capability ) ) {
+            continue;
+        }
+
+        if ( ( m_workOffline && !plugin->canWorkOffline() ) ) {
+            continue;
+        }
+
+        if ( !plugin->supportsCelestialBody( m_celestialBodyId ) )
+        {
+            continue;
+        }
+
+        result << plugin;
+    }
+
+    return result;
+}
+
+MarbleRunnerManager::MarbleRunnerManager( PluginManager* pluginManager, QObject *parent )
+    : QObject( parent ), d( new MarbleRunnerManagerPrivate( pluginManager ) )
+{
+    // nothing to do
 }
 
 MarbleRunnerManager::~MarbleRunnerManager()
 {
-    foreach(MarbleAbstractRunner* runner, m_runners)
-    {
-        runner->quit();
-        runner->wait();
-        m_runners.removeOne(runner);
-        delete runner;
-    }
-
-    delete m_model;
+    delete d;
 }
 
-void MarbleRunnerManager::newText(const QString& text)
+void MarbleRunnerManager::reverseGeocoding( const GeoDataCoordinates &coordinates )
 {
-    if (text == m_lastString) {
-      emit searchFinished(text);
-      emit modelChanged( m_model );
+    d->m_haveReverseGeocodingResult = false;
+    QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::ReverseGeocoding );
+    foreach( RunnerPlugin* plugin, plugins ) {
+        MarbleAbstractRunner* runner = plugin->newRunner();
+        connect( runner, SIGNAL( reverseGeocodingFinished(GeoDataPlacemark) ),
+                 this, SLOT( addReverseGeocodingResult(GeoDataPlacemark) ) );
+        runner->setMap( d->m_map );
+        QThreadPool::globalInstance()->start( new ReverseGeocodingTask( runner, coordinates ) );
+    }
+}
+
+void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
+{
+    if ( searchTerm == d->m_lastSearchTerm ) {
+      emit searchFinished( searchTerm );
+      emit searchResultChanged( d->m_model );
       return;
     }
 
-    m_lastString = text;
+    d->m_lastSearchTerm = searchTerm;
 
-    m_modelMutex.lock();
-    m_model->removePlacemarks("MarbleRunnerManager", 0, m_placemarkContainer.size());
-    qDeleteAll(m_placemarkContainer);
-    m_placemarkContainer.clear();
-    m_modelMutex.unlock();
-    emit modelChanged( m_model );
+    d->m_modelMutex.lock();
+    d->m_searchTasks = 0;
+    d->m_model->removePlacemarks( "MarbleRunnerManager", 0, d->m_placemarkContainer.size() );
+    qDeleteAll( d->m_placemarkContainer );
+    d->m_placemarkContainer.clear();
+    d->m_modelMutex.unlock();
+    emit searchResultChanged( d->m_model );
 
-    LatLonRunner* llrunner = new LatLonRunner;
-    m_runners << llrunner;
-    connect( llrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ),
-             this,     SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ));
-    llrunner->parse(text);
-
-    if (m_celestialBodyId == "earth" && !m_workOffline) {
-        LocalDatabaseRunner * localDatabaseRunner = new LocalDatabaseRunner;
-        m_runners << localDatabaseRunner;
-        connect( localDatabaseRunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ),
-                this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ));
-        localDatabaseRunner->parse(text);
-        localDatabaseRunner->setMap(m_map);
-        localDatabaseRunner->start();
-
-        OnfRunner* onfrunner = new OnfRunner;
-        m_runners << onfrunner;
-        connect( onfrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ),
-                 this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ));
-        onfrunner->parse(text);
-        onfrunner->start();
-
-        OsmNominatimRunner* nominatim = new OsmNominatimRunner;
-        m_runners << nominatim;
-        connect( nominatim, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ),
-                 this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ));
-        nominatim->parse(text);
-        nominatim->start();
-
-        HostipRunner* iprunner = new HostipRunner;
-        m_runners << iprunner;
-        connect( iprunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ),
-                 this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark*> ) ));
-        iprunner->parse(text);
-        iprunner->start();
+    QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Search );
+    foreach( RunnerPlugin* plugin, plugins ) {
+        MarbleAbstractRunner* runner = plugin->newRunner();
+        connect( runner, SIGNAL( searchFinished( QVector<GeoDataPlacemark*> ) ),
+                 this, SLOT( addSearchResult( QVector<GeoDataPlacemark*> ) ) );
+        runner->setMap( d->m_map );
+        QThreadPool::globalInstance()->start( new SearchTask( runner, searchTerm ) );
     }
-
-    llrunner->start();
 }
 
-void MarbleRunnerManager::slotRunnerFinished( MarbleAbstractRunner* runner, QVector<GeoDataPlacemark*> result )
+void MarbleRunnerManager::addSearchResult( QVector<GeoDataPlacemark*> result )
 {
-    m_runners.removeOne(runner);
-    if ( runner ) {
-        runner->deleteLater();
-    }
-    mDebug() << "Runner finished, active runners: " << m_runners.size();
-    mDebug() << "Runner reports" << result.size() << "results";
+    mDebug() << "Runner reports" << result.size() << " search results";
     if( result.isEmpty() )
         return;
 
-    m_modelMutex.lock();
-    int start = m_placemarkContainer.size();
-    m_placemarkContainer << result;
-    m_model->addPlacemarks( start, result.size() );
-    m_modelMutex.unlock();
-    emit modelChanged( m_model );
+    d->m_modelMutex.lock();
+    --d->m_searchTasks;
+    int start = d->m_placemarkContainer.size();
+    d->m_placemarkContainer << result;
+    d->m_model->addPlacemarks( start, result.size() );
+    d->m_modelMutex.unlock();
+    emit searchResultChanged( d->m_model );
 
-    if (m_runners.size() == 0) {
-        emit searchFinished(m_lastString);
+    if ( d->m_searchTasks <= 0 ) {
+        emit searchFinished( d->m_lastSearchTerm );
     }
 }
 
-void MarbleRunnerManager::setMap(MarbleMap * map)
+void MarbleRunnerManager::setMap( MarbleMap * map )
 {
     // TODO: Terminate runners which are making use of the map.
-    m_map = map;
+    d->m_map = map;
 }
 
-void MarbleRunnerManager::setCelestialBodyId(const QString &celestialBodyId)
+void MarbleRunnerManager::setCelestialBodyId( const QString &celestialBodyId )
 {
-    m_celestialBodyId = celestialBodyId;
+    d->m_celestialBodyId = celestialBodyId;
 }
 
 void MarbleRunnerManager::setWorkOffline( bool offline )
 {
-    m_workOffline = offline;
+    d->m_workOffline = offline;
+}
+
+void MarbleRunnerManager::addReverseGeocodingResult( const GeoDataPlacemark &placemark )
+{
+    if ( !d->m_haveReverseGeocodingResult ) {
+        d->m_haveReverseGeocodingResult = true;
+        emit reverseGeocodingFinished( placemark );
+    }
+}
+
+void MarbleRunnerManager::retrieveRoute( RouteSkeleton *skeleton )
+{
+    d->m_routingResult.clear();
+    d->m_routeSkeleton = skeleton;
+    QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Routing );
+    foreach( RunnerPlugin* plugin, plugins ) {
+        MarbleAbstractRunner* runner = plugin->newRunner();
+        connect( runner, SIGNAL( routeCalculated( GeoDataDocument* ) ),
+                 this, SLOT( addRoutingResult( GeoDataDocument* ) ) );
+        runner->setMap( d->m_map );
+        QThreadPool::globalInstance()->start( new RoutingTask( runner, skeleton ) );
+    }
+
+    if ( plugins.isEmpty() ) {
+        mDebug() << "No routing plugins found, cannot retrieve a route";
+    }
+}
+
+void MarbleRunnerManager::addRoutingResult( GeoDataDocument* route )
+{
+    if ( route ) {
+        emit routeRetrieved( route );
+    }
 }
 
 }

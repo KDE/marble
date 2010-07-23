@@ -61,14 +61,14 @@ public:
     bool m_workOffline;
 
     /** Constructor */
-    RoutingInputWidgetPrivate( RouteSkeleton *skeleton, int index, QWidget *parent );
+    RoutingInputWidgetPrivate( RouteSkeleton *skeleton, int index, PluginManager* manager, QWidget *parent );
 
     /** Initiate reverse geocoding request to download address */
     void adjustText();
 };
 
-RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteSkeleton *skeleton, int index, QWidget *parent ) :
-        m_lineEdit( 0 ), m_runnerManager( new MarbleRunnerManager( parent ) ),
+RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteSkeleton *skeleton, int index, PluginManager* manager, QWidget *parent ) :
+        m_lineEdit( 0 ), m_runnerManager( new MarbleRunnerManager( manager, parent ) ),
         m_placemarkModel( 0 ), m_progress( ":/data/bitmaps/progress.mng" ),
         m_route( skeleton ), m_index( index ), m_manager( new QNetworkAccessManager( parent ) ),
         m_workOffline( false )
@@ -114,8 +114,8 @@ void RoutingInputWidgetPrivate::adjustText()
     m_nominatimTimer.start();
 }
 
-RoutingInputWidget::RoutingInputWidget( RouteSkeleton *skeleton, int index, QWidget *parent ) :
-        QWidget( parent ), d( new RoutingInputWidgetPrivate( skeleton, index, this ) )
+RoutingInputWidget::RoutingInputWidget( RouteSkeleton *skeleton, int index, PluginManager* manager, QWidget *parent ) :
+        QWidget( parent ), d( new RoutingInputWidgetPrivate( skeleton, index, manager, this ) )
 {
     QHBoxLayout *layout = new QHBoxLayout( this );
     layout->setSpacing( 0 );
@@ -133,8 +133,10 @@ RoutingInputWidget::RoutingInputWidget( RouteSkeleton *skeleton, int index, QWid
     connect( d->m_removeButton, SIGNAL( clicked() ),
              this, SLOT( requestRemoval() ) );
 
-    connect( d->m_runnerManager, SIGNAL( modelChanged( MarblePlacemarkModel * ) ),
+    connect( d->m_runnerManager, SIGNAL( searchResultChanged( MarblePlacemarkModel * ) ),
              this, SLOT( setPlacemarkModel( MarblePlacemarkModel * ) ) );
+    connect( d->m_runnerManager, SIGNAL( reverseGeocodingFinished( GeoDataPlacemark )),
+             this, SLOT(retrieveReverseGeocodingResult( GeoDataPlacemark ) ) );
     connect( d->m_lineEdit, SIGNAL( returnPressed() ),
              this, SLOT( findPlacemarks() ) );
     connect( d->m_lineEdit, SIGNAL( textChanged( QString ) ),
@@ -146,7 +148,7 @@ RoutingInputWidget::RoutingInputWidget( RouteSkeleton *skeleton, int index, QWid
     connect( skeleton, SIGNAL( positionChanged( int, GeoDataCoordinates ) ),
              this, SLOT( updatePosition( int, GeoDataCoordinates ) ) );
     connect( &d->m_nominatimTimer, SIGNAL( timeout() ),
-             this, SLOT( startHttpRequest() ) );
+             this, SLOT( reverseGeocoding() ) );
 
     d->adjustText();
 }
@@ -156,28 +158,13 @@ RoutingInputWidget::~RoutingInputWidget()
     delete d;
 }
 
-void RoutingInputWidget::startHttpRequest()
+void RoutingInputWidget::reverseGeocoding()
 {
     if ( d->m_workOffline || !hasTargetPosition() ) {
         return;
     }
 
-    GeoDataCoordinates position = targetPosition();
-    QString base = "http://nominatim.openstreetmap.org/reverse?format=xml&addressdetails=0";
-    // @todo: Alternative URI with addressdetails=1 could be used for shorther placemark name
-    QString query = "&lon=%1&lat=%2&accept-language=%3";
-    double lon = position.longitude( GeoDataCoordinates::Degree );
-    double lat = position.latitude( GeoDataCoordinates::Degree );
-    QString url = QString( base + query ).arg( lon ).arg( lat ).arg( MarbleLocale::languageCode() );
-
-    QObject::connect( d->m_manager, SIGNAL( finished( QNetworkReply * ) ),
-                      this, SLOT( handleHttpReply( QNetworkReply * ) ) );
-
-    QNetworkRequest request;
-    request.setUrl( QUrl( url ) );
-    request.setRawHeader( "User-Agent", TinyWebBrowser::userAgent( "Browser", "RoutingInputWidget" ) );
-
-    d->m_manager->get( QNetworkRequest( request ) );
+    d->m_runnerManager->reverseGeocoding( targetPosition() );
 }
 
 void RoutingInputWidget::setPlacemarkModel( MarblePlacemarkModel *model )
@@ -219,7 +206,7 @@ void RoutingInputWidget::findPlacemarks()
         d->m_pickButton->setVisible( false );
         d->m_stateButton->setVisible( true );
         d->m_progressTimer.start();
-        d->m_runnerManager->newText( text );
+        d->m_runnerManager->findPlacemarks( text );
     }
 }
 
@@ -299,28 +286,6 @@ void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates &po
     }
 }
 
-void RoutingInputWidget::handleHttpReply( QNetworkReply *reply )
-{
-    if ( !reply->bytesAvailable() ) {
-        return;
-    }
-
-    QDomDocument xml;
-    if ( !xml.setContent( reply->readAll() ) ) {
-        mDebug() << "Cannot parse osm nominatim result " << xml.toString();
-        return;
-    }
-
-    QVector<GeoDataPlacemark> placemarks;
-    QDomElement root = xml.documentElement();
-    QDomNodeList places = root.elementsByTagName( "result" );
-    if ( places.size() == 1 ) {
-        QString address = places.item( 0 ).toElement().text();
-        d->m_lineEdit->setText( address );
-        d->m_lineEdit->setCursorPosition( 0 );
-    }
-}
-
 void RoutingInputWidget::setWorkOffline( bool offline )
 {
     d->m_workOffline = offline;
@@ -337,6 +302,12 @@ void RoutingInputWidget::clear()
     d->m_route->setPosition( d->m_index, GeoDataCoordinates() );
     d->m_lineEdit->clear();
     emit targetValidityChanged( false );
+}
+
+void RoutingInputWidget::retrieveReverseGeocodingResult( const GeoDataPlacemark &placemark )
+{
+    d->m_lineEdit->setText( placemark.address() );
+    d->m_lineEdit->setCursorPosition( 0 );
 }
 
 } // namespace Marble

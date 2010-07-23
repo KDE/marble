@@ -22,12 +22,14 @@
 #include "RoutingManager.h"
 #include "RoutingModel.h"
 #include "RoutingProxyModel.h"
+#include "GeoDataDocument.h"
 
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
 #include <QtGui/QFileDialog>
 #include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QMovie>
+#include <QtGui/QComboBox>
 
 #include "ui_RoutingWidget.h"
 
@@ -141,6 +143,7 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
         QWidget( parent ), d( new RoutingWidgetPrivate )
 {
     d->m_ui.setupUi( this );
+    d->m_ui.routeComboBox->setVisible( false );
     d->m_widget = marbleWidget;
 
     d->m_routeSkeleton = new RouteSkeleton( this );
@@ -161,6 +164,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( exportRoute() ) );
     connect( d->m_routingManager, SIGNAL( stateChanged( RoutingManager::State, RouteSkeleton* ) ),
              this, SLOT( updateRouteState( RoutingManager::State, RouteSkeleton* ) ) );
+    connect( d->m_routingManager, SIGNAL( routeRetrieved( GeoDataDocument* ) ),
+             this, SLOT( displayRoute( GeoDataDocument* ) ) );
     connect( d->m_routeSkeleton, SIGNAL( positionAdded( int ) ),
              this, SLOT( insertInputWidget( int ) ) );
     connect( d->m_routeSkeleton, SIGNAL( positionRemoved( int ) ),
@@ -182,6 +187,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( retrieveRoute () ) );
     connect( d->m_ui.optionsLabel, SIGNAL( linkActivated( QString ) ),
              this, SLOT( toggleOptionsVisibility() ) );
+    connect( d->m_ui.routeComboBox, SIGNAL( currentIndexChanged( int ) ),
+             this, SLOT( switchRoute( int ) ) );
 
     addInputWidget();
     addInputWidget(); // Start with source and destination
@@ -190,7 +197,7 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     d->m_ui.tollWaysCheckBox->setVisible( false );
     d->m_ui.preferenceLabel->setVisible( false );
     d->m_ui.avoidLabel->setVisible( false );
-    d->m_ui.descriptionLabel->setVisible( false );
+    //d->m_ui.descriptionLabel->setVisible( false );
 }
 
 RoutingWidget::~RoutingWidget()
@@ -289,7 +296,7 @@ void RoutingWidget::handleSearchResult( RoutingInputWidget *widget )
 
     if ( placemarks.size() > 1 ) {
         d->m_widget->centerOn( GeoDataLatLonBox::fromLineString( placemarks ) );
-        d->m_ui.descriptionLabel->setVisible( false );
+        //d->m_ui.descriptionLabel->setVisible( false );
     }
 }
 
@@ -322,7 +329,7 @@ void RoutingWidget::addInputWidget()
 void RoutingWidget::insertInputWidget( int index )
 {
     if ( index >= 0 && index <= d->m_inputWidgets.size() ) {
-        RoutingInputWidget *input = new RoutingInputWidget( d->m_routeSkeleton, index, this );
+        RoutingInputWidget *input = new RoutingInputWidget( d->m_routeSkeleton, index, d->m_widget->model()->pluginManager(), this );
         input->setWorkOffline( d->m_workOffline );
         d->m_inputWidgets.insert( index, input );
         connect( input, SIGNAL( searchFinished( RoutingInputWidget* ) ),
@@ -388,25 +395,29 @@ void RoutingWidget::updateRouteState( RoutingManager::State state, RouteSkeleton
             }
         }
 
-        if ( bbox.size() > 1 ) {
-            qreal distance = d->m_routingManager->routingModel()->totalDistance();
-            unsigned int days = d->m_routingManager->routingModel()->duration().days;
-            QTime time = d->m_routingManager->routingModel()->duration().time;
-            QString timeString = time.toString( Qt::DefaultLocaleShortDate );
-            if ( days ) {
-                QString label = tr( "Estimated travel time: %1 days, %2 (%3 km)", 0, days );
-                d->m_ui.descriptionLabel->setText( label.arg( days ).arg( timeString ).arg( distance, 0, 'f', 1 ) );
-            } else {
-                QString label = tr( "Estimated travel time: %1 (%2 km)" );
-                d->m_ui.descriptionLabel->setText( label.arg( timeString ).arg( distance, 0, 'f', 1 ) );
-            }
-            d->m_ui.descriptionLabel->setVisible( true );
+//        if ( bbox.size() > 1 ) {
+//            qreal distance = d->m_routingManager->routingModel()->totalDistance();
+//            unsigned int days = d->m_routingManager->routingModel()->duration().days;
+//            QTime time = d->m_routingManager->routingModel()->duration().time;
+//            QString timeString = time.toString( Qt::DefaultLocaleShortDate );
+//            if ( days ) {
+//                QString label = tr( "Estimated travel time: %1 days, %2 (%3 km)", 0, days );
+//                d->m_ui.descriptionLabel->setText( label.arg( days ).arg( timeString ).arg( distance, 0, 'f', 1 ) );
+//            } else {
+//                QString label = tr( "Estimated travel time: %1 (%2 km)" );
+//                d->m_ui.descriptionLabel->setText( label.arg( timeString ).arg( distance, 0, 'f', 1 ) );
+//            }
+//            d->m_ui.descriptionLabel->setVisible( true );
 
-            if ( d->m_zoomRouteAfterDownload ) {
-                d->m_zoomRouteAfterDownload = false;
-                d->m_widget->centerOn( GeoDataLatLonBox::fromLineString( bbox ) );
-            }
-        }
+//            if ( d->m_zoomRouteAfterDownload ) {
+//                d->m_zoomRouteAfterDownload = false;
+//                d->m_widget->centerOn( GeoDataLatLonBox::fromLineString( bbox ) );
+//            }
+//        }
+    }
+    else {
+        d->m_ui.routeComboBox->setVisible( false );
+        d->m_ui.routeComboBox->clear();
     }
 
     d->m_routingLayer->setRouteDirty( state == RoutingManager::Downloading );
@@ -495,6 +506,29 @@ void RoutingWidget::updateProgress()
     d->m_progress.jumpToNextFrame();
     QPixmap frame = d->m_progress.currentPixmap();
     d->m_ui.searchButton->setIcon( frame );
+}
+
+void RoutingWidget::displayRoute( GeoDataDocument* route )
+{
+    /** @todo: Scoring for routes, delayed display in the combo box,
+      * better route description than the plugin name as label */
+    QVariant data = qVariantFromValue<GeoDataDocument*>( route );
+    d->m_ui.routeComboBox->addItem( route->name(), data );
+    d->m_ui.routeComboBox->setVisible( d->m_ui.routeComboBox->count() > 1 );
+}
+
+void RoutingWidget::switchRoute( int index )
+{
+    if ( index >= 0 )
+    {
+        Q_ASSERT( index < d->m_ui.routeComboBox->count() );
+        QVariant data = d->m_ui.routeComboBox->itemData( index );
+        GeoDataDocument* route = qVariantValue<GeoDataDocument*>( data );
+        if ( route ) {
+            d->m_routingManager->routingModel()->importGeoDataDocument( route );
+            d->m_widget->repaint();
+        }
+    }
 }
 
 } // namespace Marble

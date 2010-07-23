@@ -12,6 +12,7 @@
 #define MARBLE_ROUTINGINPUTWIDGET_H
 
 #include "GeoDataCoordinates.h"
+#include "GeoDataPlacemark.h"
 
 #include <QtGui/QWidget>
 
@@ -23,6 +24,7 @@ namespace Marble
 class RoutingInputWidgetPrivate;
 class MarblePlacemarkModel;
 class RouteSkeleton;
+class PluginManager;
 
 /**
   * Combines a line edit for input and a couple of buttons to let
@@ -37,7 +39,7 @@ class RoutingInputWidget : public QWidget
 public:
 
     /** Constructor */
-    explicit RoutingInputWidget( RouteSkeleton *skeleton, int index, QWidget *parent = 0 );
+    explicit RoutingInputWidget( RouteSkeleton *skeleton, int index, PluginManager* manager, QWidget *parent = 0 );
 
     /** Destructor */
     ~RoutingInputWidget();
@@ -137,12 +139,9 @@ private Q_SLOTS:
     /** Set the target position (dragging) */
     void updatePosition( int index, const GeoDataCoordinates &position );
 
-    /** Start reverse geocoding request */
-    void startHttpRequest();
+    void reverseGeocoding();
 
-    /** Http request with nominatim.openstreetmap.org done */
-    void handleHttpReply( QNetworkReply * );
-
+    void retrieveReverseGeocodingResult( const GeoDataPlacemark &placemark );
 private:
     RoutingInputWidgetPrivate *const d;
 };

@@ -6,9 +6,12 @@
 // the source code.
 //
 // Copyright 2008 Henry de Valence <hdevalence@gmail.com>
+// Copyright 2010 Dennis Nienhüser <earthwings@gentoo.org>
 
 #ifndef MARBLE_MARBLERUNNERMANAGER_H
 #define MARBLE_MARBLERUNNERMANAGER_H
+
+#include "GeoDataCoordinates.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QVector>
@@ -18,21 +21,39 @@
 namespace Marble
 {
 
+class GeoDataDocument;
+class GeoDataPlacemark;
 class MarbleMap;
 class MarblePlacemarkModel;
-class GeoDataPlacemark;
+class PluginManager;
+class RouteSkeleton;
 
-class MarbleAbstractRunner;
-
+class MarbleRunnerManagerPrivate;
 class MarbleRunnerManager : public QObject
 {
     Q_OBJECT
+
 public:
-    explicit MarbleRunnerManager( QObject *parent = 0 );
+    /**
+      * Constructor.
+      * @param pluginManager The plugin manager that gives access to RunnerPlugins
+      * @param parent Optional parent object
+      */
+    explicit MarbleRunnerManager( PluginManager* pluginManager, QObject *parent = 0 );
+
+    /** Destructor */
     ~MarbleRunnerManager();
 
+    /**
+      * Set the currently used planet used to decide whether MarbleAbstractRunner instances
+      * can be run or not
+      */
     void setCelestialBodyId(const QString &celestialBodyId);
-    void setMap(MarbleMap * map);
+
+    /**
+      * Set a pointer to the map instance to be passed to MarbleAbstractRunner instances
+      */
+    void setMap( MarbleMap * map );
 
     /**
       * Toggle offline mode. In offline mode, runners shall not try to access
@@ -40,27 +61,65 @@ public:
       */
     void setWorkOffline( bool offline );
 
-public slots:
-    void newText(const QString& text);
-signals:
-    void modelChanged( MarblePlacemarkModel *model );
+    /**
+      * Search for placemarks matching the given search term. Results are returned
+      * using the @see searchResultChanged and the @see searchFinished signals
+      */
+    void findPlacemarks( const QString& searchTerm );
 
-    void searchFinished(const QString &text);
+    /**
+      * Find the address and other meta information for a given geoposition.
+      * The result is returned through the @see reverseGeocodingFinished signal
+      */
+    void reverseGeocoding( const GeoDataCoordinates &coordinates );
+
+    /**
+      * Download routes traversing the stopover points in the given route skeleton
+      * Each route found is returned through the @see routeRetrieved signal
+      */
+    void retrieveRoute( RouteSkeleton *skeleton );
+
+signals:
+    /**
+      * Placemarks were added to or removed from the model
+      * @todo FIXME: this sounds like a duplication of QAbstractItemModel signals
+      */
+    void searchResultChanged( MarblePlacemarkModel *model );
+
+    /**
+      * The search request for the given search term has finished, i.e. all
+      * runners are finished and reported their results via the
+      * @see searchResultChanged signal
+      */
+    void searchFinished( const QString &searchTerm );
+
+    /**
+      * The reverse geocoding request is finished, the result is stored
+      * in the given placemark. This signal is emitted when the first
+      * runner found a result, subsequent results are discarded and do not
+      * emit further signals. If no result is found, this signal is emitted
+      * with an empty (default constructed) placemark.
+      */
+    void reverseGeocodingFinished( const GeoDataPlacemark &placemark );
+
+    /**
+      * A route was retrieved
+      */
+    void routeRetrieved( GeoDataDocument* route );
+
+    /** @todo: add signals that reverse geocoding and routing have finished
+      * to be able to cope with misbehaving runners
+      */
 
 private slots:
-    void slotRunnerFinished(MarbleAbstractRunner* runner, QVector<GeoDataPlacemark*> result);
+    void addSearchResult( QVector<GeoDataPlacemark*> result );
+
+    void addReverseGeocodingResult( const GeoDataPlacemark &placemark );
+
+    void addRoutingResult( GeoDataDocument* route );
 
 private:
-    QString m_lastString;
-    QMutex m_modelMutex;
-    MarbleMap * m_map;
-    int m_activeRunners;
-    QString m_previousString;
-    MarblePlacemarkModel *m_model;
-    QList<MarbleAbstractRunner*> m_runners;
-    QVector<GeoDataPlacemark*> m_placemarkContainer;
-    QString m_celestialBodyId;
-    bool m_workOffline;
+    MarbleRunnerManagerPrivate* const d;
 };
 
 }

@@ -192,11 +192,6 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     d->m_mapViewUi.projectionComboBox->setEnabled( true );
 
-    d->m_runnerManager = new MarbleRunnerManager( this );
-
-    connect( d->m_runnerManager, SIGNAL( modelChanged(  MarblePlacemarkModel* ) ),
-             this,               SLOT( setLocations( MarblePlacemarkModel* ) ) );
-
     // Setting up the celestial combobox
     d->m_celestialList = new QStandardItemModel();
     d->m_mapViewUi.celestialBodyComboBox->setModel( d->m_celestialList );
@@ -268,6 +263,10 @@ void MarbleControlBox::updateButtons( int value )
 
 void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 {
+    d->m_runnerManager = new MarbleRunnerManager( widget->model()->pluginManager(), this );
+    connect( d->m_runnerManager, SIGNAL( searchResultChanged(  MarblePlacemarkModel* ) ),
+             this,               SLOT( setLocations( MarblePlacemarkModel* ) ) );
+
     d->m_widget = widget;
     d->m_runnerManager->setMap( d->m_widget->map() );
 
@@ -601,7 +600,7 @@ void MarbleControlBox::searchReturnPressed()
 {
     // do nothing if search term empty
     if ( !d->m_searchTerm.isEmpty() ) {
-        d->m_runnerManager->newText( d->m_searchTerm );
+        d->m_runnerManager->findPlacemarks( d->m_searchTerm );
     }
 }
 

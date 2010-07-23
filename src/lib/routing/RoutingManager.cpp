@@ -10,12 +10,11 @@
 
 #include "RoutingManager.h"
 
-#include "MarbleDebug.h"
 #include "MarbleWidget.h"
-#include "OrsRoutingProvider.h"
-#include "YoursRoutingProvider.h"
+#include "MarbleModel.h"
 #include "RouteSkeleton.h"
 #include "RoutingModel.h"
+#include "MarbleRunnerManager.h"
 
 #include <QtGui/QMessageBox>
 
@@ -29,58 +28,33 @@ public:
 
     RoutingModel *m_routingModel;
 
-    AbstractRoutingProvider *m_orsProvider;
-
-    AbstractRoutingProvider *m_yoursProvider;
-
     MarbleWidget *m_marbleWidget;
 
     RouteSkeleton *m_route;
 
     bool m_workOffline;
 
-    RoutingManagerPrivate( MarbleWidget *widget, RoutingManager* manager, QObject *parent );
+    MarbleRunnerManager* m_runnerManager;
 
-    void updateRoute( AbstractRoutingProvider* provider );
+    bool m_haveRoute;
+
+    RoutingManagerPrivate( MarbleWidget *widget, RoutingManager* manager, QObject *parent );
 };
 
 RoutingManagerPrivate::RoutingManagerPrivate( MarbleWidget *widget, RoutingManager* manager, QObject *parent ) :
         q( manager ), m_routingModel( new RoutingModel( parent ) ),
-        m_orsProvider( new OrsRoutingProvider( parent ) ),
-        m_yoursProvider( new YoursRoutingProvider( parent ) ),
-        m_marbleWidget( widget ), m_route( 0 ), m_workOffline( false )
+        m_marbleWidget( widget ), m_route( 0 ), m_workOffline( false ),
+        m_runnerManager( new MarbleRunnerManager( widget->model()->pluginManager(), q ) ),
+        m_haveRoute( false )
 {
     // nothing to do
-}
-
-void RoutingManagerPrivate::updateRoute( AbstractRoutingProvider* provider )
-{
-    if ( !m_workOffline && m_route && m_route->size() > 1 ) {
-        int realSize = 0;
-        for ( int i = 0; i < m_route->size(); ++i ) {
-            // Sort out dummy targets
-            if ( m_route->at( i ).longitude() != 0.0 && m_route->at( i ).latitude() != 0.0 ) {
-                ++realSize;
-            }
-        }
-
-        if ( realSize > 1 ) {
-            emit q->stateChanged( RoutingManager::Downloading, m_route );
-            provider->retrieveDirections( m_route );
-        } else {
-            m_routingModel->clear();
-            emit q->stateChanged( RoutingManager::Retrieved, m_route );
-        }
-    }
 }
 
 RoutingManager::RoutingManager( MarbleWidget *widget, QObject *parent ) : QObject( parent ),
         d( new RoutingManagerPrivate( widget, this, this ) )
 {
-    connect( d->m_orsProvider, SIGNAL( routeRetrieved( AbstractRoutingProvider::Format, QByteArray ) ),
-             this, SLOT( setRouteData( AbstractRoutingProvider::Format, QByteArray ) ) );
-    connect( d->m_yoursProvider, SIGNAL( routeRetrieved( AbstractRoutingProvider::Format, QByteArray ) ),
-             this, SLOT( setRouteData( AbstractRoutingProvider::Format, QByteArray ) ) );
+    connect( d->m_runnerManager, SIGNAL( routeRetrieved( GeoDataDocument* ) ),
+             this, SLOT( retrieveRoute( GeoDataDocument* ) ) );
 }
 
 RoutingManager::~RoutingManager()
@@ -99,39 +73,42 @@ void RoutingManager::retrieveRoute( RouteSkeleton *route )
     updateRoute();
 }
 
-void RoutingManager::setRouteData( AbstractRoutingProvider::Format format, const QByteArray &data )
-{
-    /** @todo: switch to using GeoDataDocument* */
-
-    if ( data.size() ) {
-        if ( format == AbstractRoutingProvider::OpenGIS ) {
-            if ( !d->m_routingModel->importOpenGis( data ) ) {
-                mDebug() << " Invalid ORS route, trying YOURS instead";
-                d->updateRoute( d->m_yoursProvider );
-            }
-        } else if ( format == AbstractRoutingProvider::KML ) {
-            d->m_routingModel->importKml( data );
-        } else {
-            mDebug() << "Gpx format import for routing is not implemented yet";
-        }
-        d->m_marbleWidget->repaint();
-    } else {
-        mDebug() << "Got an empty result instead of route data";
-        QString message = tr("Sorry, the route could not be retrieved. Please try again later.");
-        QMessageBox::warning( d->m_marbleWidget, "Route Error", message );
-    }
-
-    emit stateChanged( Retrieved, d->m_route );
-}
-
 void RoutingManager::updateRoute()
 {
-    d->updateRoute( d->m_orsProvider );
+    Q_ASSERT( d->m_route );
+    d->m_haveRoute = false;
+
+    int realSize = 0;
+    for ( int i = 0; i < d->m_route->size(); ++i ) {
+        // Sort out dummy targets
+        if ( d->m_route->at( i ).longitude() != 0.0 && d->m_route->at( i ).latitude() != 0.0 ) {
+            ++realSize;
+        }
+    }
+
+    if ( realSize > 1 ) {
+        emit stateChanged( RoutingManager::Downloading, d->m_route );
+        d->m_runnerManager->setWorkOffline( d->m_workOffline );
+        d->m_runnerManager->retrieveRoute( d->m_route );
+    } else {
+        d->m_routingModel->clear();
+        emit stateChanged( RoutingManager::Retrieved, d->m_route );
+    }
 }
 
 void RoutingManager::setWorkOffline( bool offline )
 {
     d->m_workOffline = offline;
+}
+
+void RoutingManager::retrieveRoute( GeoDataDocument* route )
+{
+    if ( !d->m_haveRoute ) {
+        d->m_haveRoute = true;
+        emit stateChanged( Retrieved, d->m_route );
+    }
+
+    emit routeRetrieved( route );
 }
 
 } // namespace Marble

@@ -103,6 +103,12 @@ private Q_SLOTS:
     /** Progress animation update */
     void updateProgress();
 
+    /** Show the given route in the drop down list */
+    void displayRoute( GeoDataDocument* route );
+
+    /** Switch to an alternative route */
+    void switchRoute( int index );
+
 private:
     RoutingWidgetPrivate *const d;
 };

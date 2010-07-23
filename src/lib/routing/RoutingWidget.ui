@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>234</width>
-    <height>320</height>
+    <height>319</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="routingLayout">
@@ -137,12 +137,9 @@ p, li { white-space: pre-wrap; }
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="descriptionLabel">
-     <property name="text">
-      <string>Route Summary</string>
-     </property>
-     <property name="wordWrap">
-      <bool>true</bool>
+    <widget class="QComboBox" name="routeComboBox">
+     <property name="toolTip">
+      <string>Choose alternative routes</string>
      </property>
     </widget>
    </item>
