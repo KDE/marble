@@ -11,6 +11,7 @@
 #ifndef MARBLE_MARBLEABSTRACTRUNNER_H
 #define MARBLE_MARBLEABSTRACTRUNNER_H
 
+#include "marble_export.h"
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
 
@@ -26,7 +27,7 @@ class RouteSkeleton;
 /**
  * This class is the base class for all Marble Runners.
  */
-class MarbleAbstractRunner : public QObject
+class MARBLE_EXPORT MarbleAbstractRunner : public QObject
 {
     Q_OBJECT
 

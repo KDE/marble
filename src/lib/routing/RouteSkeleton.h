@@ -11,6 +11,7 @@
 #ifndef MARBLE_ROUTESKELETON_H
 #define MARBLE_ROUTESKELETON_H
 
+#include "marble_export.h"
 #include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
 
@@ -26,7 +27,7 @@ class RouteSkeletonPrivate;
   * GeoDataCoordinates with change notification and Pixmap access, similar
   * to QAbstractItemModel.
   */
-class RouteSkeleton: public QObject
+class MARBLE_EXPORT RouteSkeleton: public QObject
 {
     Q_OBJECT
 
