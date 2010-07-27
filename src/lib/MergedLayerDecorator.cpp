@@ -131,8 +131,6 @@ void MergedLayerDecorator::paintSunShading()
     if ( m_sunLocator->getCitylights() && m_sunLocator->planet()->id() == "earth" ) {
 
         StackedTile * tile = loadDataset( m_cityLightsTextureLayer );
-        if ( !tile->hasTiles() )
-            return;
 
         QImage * nighttile = tile->resultTile();
 

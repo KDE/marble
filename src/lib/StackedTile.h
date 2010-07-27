@@ -39,13 +39,12 @@ class StackedTile : public AbstractTile
     friend class StackedTileLoader;
 
  public:
-    explicit StackedTile( TileId const& tid, QObject * parent = 0 );
+    explicit StackedTile( TileId const& tid, QVector<QSharedPointer<TextureTile> > const &tiles );
     virtual ~StackedTile();
 
     int depth() const;
     int numBytes() const;
     bool isExpired() const;
-    bool hasTiles() const;
 
     bool forMergedLayerDecorator() const;
     void setForMergedLayerDecorator();
@@ -68,14 +67,10 @@ class StackedTile : public AbstractTile
     uint pixelF( qreal x, qreal y ) const;
     uint pixelF( qreal x, qreal y, const QRgb& pixel ) const;
 
- protected:
-    StackedTile( StackedTilePrivate &dd, QObject *parent );
-
  private:
     Q_DECLARE_PRIVATE( StackedTile )
     Q_DISABLE_COPY( StackedTile )
 
-    void addTile( QSharedPointer<TextureTile> const & );
     void initJumpTables();
     void initResultTile();
 

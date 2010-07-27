@@ -227,20 +227,17 @@ void StackedTilePrivate::calcByteCount()
 }
 
 
-StackedTile::StackedTile( TileId const& id, QObject * parent )
-    : AbstractTile( *new StackedTilePrivate( id ), parent ), d(0)
+StackedTile::StackedTile( TileId const& id, QVector<QSharedPointer<TextureTile> > const &tiles )
+    : AbstractTile( *new StackedTilePrivate( id ), 0 ), d(0)
 {
+    Q_ASSERT( !tiles.isEmpty() );
+
     // The d-ptr is cached as a member to avoid having to use d_func()
     // or the Q_D macro in the pixel() function. Otherwise it leads
     // to measurable runtime overhead because pixel() is called frequently.
     d = d_func();
-}
 
-StackedTile::StackedTile( StackedTilePrivate &dd, QObject * parent )
-    : AbstractTile( dd, parent ), d(0)
-{
-    // See comment above
-    d = d_func();
+    d->m_tiles = tiles;
 }
 
 StackedTile::~StackedTile()
@@ -265,11 +262,6 @@ bool StackedTile::forMergedLayerDecorator() const
 void StackedTile::setForMergedLayerDecorator()
 {
     d->m_forMergedLayerDecorator = true;
-}
-
-void StackedTile::addTile( QSharedPointer<TextureTile> const & tile )
-{
-    d->m_tiles.append( tile );
 }
 
 void StackedTile::initJumpTables()
@@ -344,14 +336,9 @@ QImage * StackedTile::resultTile()
     return &d->m_resultTile;
 }
 
-bool StackedTile::hasTiles() const
-{
-    return !d->m_tiles.isEmpty();
-}
-
 void StackedTile::initResultTile()
 {
-    Q_ASSERT( hasTiles() );
+    Q_ASSERT( !d->m_tiles.isEmpty() );
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
     const bool withConversion = d->m_tiles.count() > 1;
