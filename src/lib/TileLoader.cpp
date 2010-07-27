@@ -170,13 +170,6 @@ inline GeoSceneTexture const * TileLoader::findTextureLayer( TileId const & id )
     return textureLayer;
 }
 
-inline GeoSceneTexture * TileLoader::findTextureLayer( TileId const & id )
-{
-    GeoSceneTexture * const textureLayer = m_textureLayers.value( id.mapThemeIdHash(), 0 );
-    Q_ASSERT( textureLayer );
-    return textureLayer;
-}
-
 QString TileLoader::tileFileName( TileId const & tileId ) const
 {
     GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
@@ -185,7 +178,7 @@ QString TileLoader::tileFileName( TileId const & tileId ) const
 
 void TileLoader::triggerDownload( TileId const & id, DownloadUsage const usage )
 {
-    GeoSceneTexture * const textureLayer = findTextureLayer( id );
+    GeoSceneTexture const * const textureLayer = findTextureLayer( id );
     QUrl const sourceUrl = textureLayer->downloadUrl( id );
     QString const destFileName = textureLayer->relativeTileFileName( id );
     emit downloadTile( sourceUrl, destFileName, id.toString(), usage );

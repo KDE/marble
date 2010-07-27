@@ -74,7 +74,7 @@ public:
     MapThemeManager const *m_mapThemeManager;
     // TODO: comment about uint hash key
     QHash<uint, GeoSceneLayer const *> m_sceneLayers;
-    QHash<uint, GeoSceneTexture*> m_textureLayers;
+    QHash<uint, GeoSceneTexture const *> m_textureLayers;
     TileLoader *m_tileLoader;
     QHash <TileId, StackedTile*>  m_tilesOnDisplay;
     QCache <TileId, StackedTile>  m_tileCache;
@@ -484,7 +484,7 @@ void StackedTileLoader::updateTextureLayers()
         QVector<GeoSceneAbstractDataset *>::const_iterator pos = layers.constBegin();
         QVector<GeoSceneAbstractDataset *>::const_iterator const end = layers.constEnd();
         for (; pos != end; ++pos ) {
-            GeoSceneTexture * const textureLayer = dynamic_cast<GeoSceneTexture *>( *pos );
+            GeoSceneTexture const * const textureLayer = dynamic_cast<GeoSceneTexture *>( *pos );
             if ( !textureLayer ) {
                 mDebug() << "ignoring dataset, is not a texture layer";
                 continue;

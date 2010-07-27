@@ -48,7 +48,7 @@ class TileLoader: public QObject
     void reloadTile( QSharedPointer<TextureTile> const & tile, DownloadUsage const );
     void downloadTile( TileId const & tileId );
 
-    void setTextureLayers( QHash<uint, GeoSceneTexture*> const & );
+    void setTextureLayers( QHash<uint, GeoSceneTexture const *> const & );
 
  public Q_SLOTS:
     void updateTile( QByteArray const & imageData, QString const & tileId );
@@ -63,20 +63,19 @@ class TileLoader: public QObject
 
  private:
     GeoSceneTexture const * findTextureLayer( TileId const & ) const;
-    GeoSceneTexture * findTextureLayer( TileId const & );
     QString tileFileName( TileId const & ) const;
     void triggerDownload( TileId const &, DownloadUsage const );
     QImage * scaledLowerLevelTile( TileId const & );
 
     // TODO: comment about uint hash key
-    QHash<uint, GeoSceneTexture*> m_textureLayers;
+    QHash<uint, GeoSceneTexture const *> m_textureLayers;
 
     // contains tiles, for which a download has been triggered
     // because the tile was not there at all or is expired.
     QHash<TileId, QSharedPointer<TextureTile> > m_waitingForUpdate;
 };
 
-inline void TileLoader::setTextureLayers( QHash<uint, GeoSceneTexture*> const & layers )
+inline void TileLoader::setTextureLayers( QHash<uint, GeoSceneTexture const *> const & layers )
 {
     m_textureLayers = layers;
 }
