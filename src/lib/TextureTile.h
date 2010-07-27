@@ -36,13 +36,6 @@ class TextureTile
     friend class StackedTileLoader;
 
  public:
-    enum State {
-        StateEmpty,
-        StateScaled,
-        StateExpired,
-        StateUptodate
-    };
-
     TextureTile( TileId const & tileId, QImage const * image );
     ~TextureTile();
 
@@ -51,14 +44,12 @@ class TextureTile
     QDateTime const & lastModified() const;
     bool isExpired() const;
     QImage const * image() const;
-    State state() const;
     Blending const * blending() const;
     int byteCount() const;
 
  private:
     Q_DISABLE_COPY( TextureTile )
 
-    void setState( State const );
     void setImage( QImage * const );
     void setBlending( Blending const * const );
     void setStackedTileId( TileId const & );
@@ -67,7 +58,6 @@ class TextureTile
 
     TileId const m_id;
     TileId m_stackedTileId;
-    State m_state;
     Blending const * m_blending;
     QDateTime m_lastModified;
     int m_expireSecs;
@@ -102,11 +92,6 @@ inline QImage const * TextureTile::image() const
     return m_image;
 }
 
-inline TextureTile::State TextureTile::state() const
-{
-    return m_state;
-}
-
 inline Blending const * TextureTile::blending() const
 {
     return m_blending;
@@ -118,11 +103,6 @@ inline int TextureTile::byteCount() const
 
     // FIXME: once Qt 4.6 is required for Marble, use QImage::byteCount()
     return m_image->numBytes();
-}
-
-inline void TextureTile::setState( State const state )
-{
-    m_state = state;
 }
 
 inline void TextureTile::setImage( QImage * const image )

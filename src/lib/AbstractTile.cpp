@@ -20,8 +20,7 @@ namespace Marble
 
 AbstractTilePrivate::AbstractTilePrivate( const TileId& id )
     : m_id( id ),
-      m_used( false ),
-      m_state( AbstractTile::TileEmpty )
+      m_used( false )
 {
 }
 
@@ -61,12 +60,6 @@ void AbstractTile::setUsed( bool used )
 {
     Q_D( AbstractTile );
     d->m_used = used;
-}
-
-AbstractTile::TileState AbstractTile::state() const
-{
-    Q_D( const AbstractTile );
-    return d->m_state;
 }
 
 }

@@ -28,7 +28,6 @@ class AbstractTilePrivate
 
     TileId    m_id;
     bool      m_used;
-    AbstractTile::TileState m_state;
 
     AbstractTile * q_ptr;
 };

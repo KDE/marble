@@ -45,6 +45,7 @@ class StackedTile : public AbstractTile
     int depth() const;
     int numBytes() const;
     bool isExpired() const;
+    bool hasTiles() const;
 
     bool forMergedLayerDecorator() const;
     void setForMergedLayerDecorator();
@@ -75,9 +76,7 @@ class StackedTile : public AbstractTile
     Q_DISABLE_COPY( StackedTile )
 
     void addTile( QSharedPointer<TextureTile> const & );
-    void deriveCompletionState();
     void initJumpTables();
-    bool hasTiles() const;
     void initResultTile();
 
     StackedTilePrivate *d;

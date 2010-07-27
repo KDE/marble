@@ -58,7 +58,6 @@ QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & stackedTileId,
 
         if ( !tile->isExpired() ) {
             mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateUptodate";
-            tile->setState( TextureTile::StateUptodate );
         } else {
             mDebug() << "TileLoader::loadTile" << tileId.toString() << "StateExpired";
             m_waitingForUpdate.insert( tileId, tile );
@@ -72,7 +71,6 @@ QSharedPointer<TextureTile> TileLoader::loadTile( TileId const & stackedTileId,
     QImage * replacementTile = scaledLowerLevelTile( tileId );
     QSharedPointer<TextureTile> const tile( new TextureTile( tileId, replacementTile ));
     tile->setStackedTileId( stackedTileId );
-    tile->setState( TextureTile::StateScaled );
 
     m_waitingForUpdate.insert( tileId, tile );
     triggerDownload( tileId, usage );
@@ -110,7 +108,6 @@ QSharedPointer<TextureTile> TileLoader::reloadTile( TileId const & stackedTileId
     else {
         QImage * const replacementTile = scaledLowerLevelTile( tileId );
         tile = QSharedPointer<TextureTile>( new TextureTile( tileId, replacementTile ));
-        tile->setState( TextureTile::StateScaled );
     }
 
     GeoSceneTexture const * const textureLayer = findTextureLayer( tileId );
@@ -132,7 +129,6 @@ void TileLoader::reloadTile( QSharedPointer<TextureTile> const & tile, DownloadU
 {
     if ( m_waitingForUpdate.contains( tile->id() ))
         return;
-    tile->setState( TextureTile::StateExpired );
     m_waitingForUpdate.insert( tile->id(), tile );
     triggerDownload( tile->id(), usage );
 }
@@ -158,7 +154,6 @@ void TileLoader::updateTile( QByteArray const & data, QString const & tileId )
         return;
 
     tile->setImage( image );
-    tile->setState( TextureTile::StateUptodate );
     tile->setLastModified( QDateTime::currentDateTime() );
     emit tileCompleted( tile->stackedTileId(), id );
 }

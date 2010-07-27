@@ -223,7 +223,7 @@ StackedTile* StackedTileLoader::loadTile( TileId const & stackedTileId, Download
     }
     Q_ASSERT( stackedTile->hasTiles() );
 
-    if ( stackedTile->state() != StackedTile::TileEmpty ) {
+    if ( stackedTile->hasTiles() ) {
         stackedTile->initResultTile();
         mergeDecorations( stackedTile );
     }
@@ -274,7 +274,7 @@ StackedTile* StackedTileLoader::reloadTile( TileId const & stackedTileId,
     }
     Q_ASSERT( stackedTile->hasTiles() );
 
-    if ( stackedTile->state() != StackedTile::TileEmpty ) {
+    if ( stackedTile->hasTiles() ) {
         stackedTile->initResultTile();
     }
     return stackedTile;
@@ -385,7 +385,6 @@ void StackedTileLoader::updateTile( TileId const & stackedTileId, TileId const &
     Q_UNUSED(tileId);
     StackedTile * const displayedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
     if ( displayedTile ) {
-        displayedTile->deriveCompletionState();
         displayedTile->initResultTile();
         mergeDecorations( displayedTile );
         emit tileUpdateAvailable();
@@ -393,7 +392,6 @@ void StackedTileLoader::updateTile( TileId const & stackedTileId, TileId const &
     else {
         StackedTile * const cachedTile = d->m_tileCache.object( stackedTileId );
         if ( cachedTile ) {
-            cachedTile->deriveCompletionState();
             cachedTile->initResultTile();
             mergeDecorations( cachedTile );
         }
@@ -500,7 +498,8 @@ void StackedTileLoader::updateTextureLayers()
 
 void StackedTileLoader::mergeDecorations( StackedTile * const tile ) const
 {
-    Q_ASSERT( tile->state() != StackedTile::TileEmpty );
+    Q_ASSERT( tile->hasTiles() );
+    Q_ASSERT( !tile->resultTile()->isNull() );
     if ( !tile->forMergedLayerDecorator() )
         m_parent->paintTile( tile, findTextureLayer( tile->id() ) );
 }
@@ -518,7 +517,6 @@ void StackedTileLoader::reloadCachedTile( StackedTile * const cachedTile,
     for (; pos != end; ++pos ) {
         d->m_tileLoader->reloadTile( *pos, usage );
     }
-    cachedTile->deriveCompletionState();
     cachedTile->initResultTile();
     mergeDecorations( cachedTile );
     emit tileUpdateAvailable();

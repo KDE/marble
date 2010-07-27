@@ -33,26 +33,11 @@ class AbstractTile : public QObject
     explicit AbstractTile( TileId const& tid, QObject * parent = 0 );
     virtual ~AbstractTile();
 
-    enum TileState {
-        TileEmpty,
-        TilePartial,
-        TileComplete
-    };
-
-    enum DatasetState {
-        DatasetEmpty,
-        DatasetZeroLevel,
-        DatasetScaled,
-        DatasetComplete
-    };
-
  public:
     TileId const& id() const;
 
     bool used() const;
     void setUsed( bool used );
-
-    TileState state() const;
 
 protected:
     AbstractTilePrivate * const d_ptr;

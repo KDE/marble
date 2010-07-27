@@ -24,7 +24,6 @@ namespace Marble
 
 TextureTile::TextureTile( TileId const & tileId, QImage const * image )
     : m_id( tileId ),
-      m_state( StateExpired ),
       m_blending( 0 ),
       m_expireSecs( std::numeric_limits<int>::max() ),
       m_image( image )

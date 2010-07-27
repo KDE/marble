@@ -270,23 +270,6 @@ void StackedTile::setForMergedLayerDecorator()
 void StackedTile::addTile( QSharedPointer<TextureTile> const & tile )
 {
     d->m_tiles.append( tile );
-    deriveCompletionState();
-}
-
-void StackedTile::deriveCompletionState()
-{
-    QMap<TextureTile::State, int> count;
-    QVector<QSharedPointer<TextureTile> >::const_iterator pos = d->m_tiles.constBegin();
-    QVector<QSharedPointer<TextureTile> >::const_iterator const end = d->m_tiles.constEnd();
-    for (; pos != end; ++pos )
-        ++count[ (*pos)->state() ];
-
-    if ( count[ TextureTile::StateUptodate ] == d->m_tiles.size() )
-        d->m_state = TileComplete;
-    else if ( count[ TextureTile::StateEmpty ] == d->m_tiles.size() )
-        d->m_state = TileEmpty;
-    else
-        d->m_state = TilePartial;
 }
 
 void StackedTile::initJumpTables()
@@ -374,8 +357,7 @@ void StackedTile::initResultTile()
     const bool withConversion = d->m_tiles.count() > 1;
     QVector<QSharedPointer<TextureTile> >::const_iterator pos = d->m_tiles.constBegin();
     QVector<QSharedPointer<TextureTile> >::const_iterator const end = d->m_tiles.constEnd();
-    for (; pos != end; ++pos )
-        if ( (*pos)->state() != TextureTile::StateEmpty ) {
+    for (; pos != end; ++pos ) {
             Blending const * const blending = (*pos)->blending();
             if ( blending ) {
                 mDebug() << "StackedTile::initResultTile: blending";
@@ -386,7 +368,7 @@ void StackedTile::initResultTile()
                     "no blending defined => copying top over bottom image";
                 d->setResultTile( *pos, withConversion );
             }
-        }
+    }
 
     initJumpTables();
 
