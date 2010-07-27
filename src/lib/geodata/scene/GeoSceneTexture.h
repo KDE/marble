@@ -81,10 +81,13 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     Blending const * blending() const;
     void setBlending( Blending const * const );
 
-    // this method is a little more than just a stupid getter,
-    // it implements the round robin for the tile servers.
-    // on each invocation the next url is returned
-    QUrl downloadUrl( const TileId & );
+    /**
+     * Creates a download URL for the given tile id.
+     *
+     * It implements the round robin for the tile servers.
+     * On each invocation the next url is returned.
+     */
+    QUrl downloadUrl( const TileId & ) const;
     void addDownloadUrl( const QUrl & );
 
     QString relativeTileFileName( const TileId & ) const;
@@ -115,7 +118,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     QVector<QUrl> m_downloadUrls;
 
     /// Points to next Url for the round robin algorithm
-    QVector<QUrl>::const_iterator m_nextUrl;
+    mutable QVector<QUrl>::const_iterator m_nextUrl;
     QList<DownloadPolicy *> m_downloadPolicies;
 };
 

@@ -142,7 +142,9 @@ void GeoSceneTexture::setProjection( const Projection projection )
     m_projection = projection;
 }
 
-QUrl GeoSceneTexture::downloadUrl( const TileId &id )
+// Even though this method changes the internal state, it may be const
+// because the compiler is forced to invoke this method for different TileIds.
+QUrl GeoSceneTexture::downloadUrl( const TileId &id ) const
 {
     // default download url
     if ( m_downloadUrls.empty() )
