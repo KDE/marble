@@ -20,6 +20,7 @@
 #include "MarbleWidgetPopupMenu.h"
 #include "RoutingModel.h"
 #include "RouteSkeleton.h"
+#include "AlternativeRoutesModel.h"
 
 #include <QtCore/QMap>
 #include <QtGui/QAbstractProxyModel>
@@ -29,6 +30,7 @@
 #include <QtGui/QMenu>
 #include <QtGui/QMouseEvent>
 #include <QtGui/QPixmap>
+#include <QtGui/QComboBox>
 
 namespace Marble
 {
@@ -56,6 +58,8 @@ public:
     QList<ModelRegion> m_instructionRegions;
 
     QList<SkeletonRegion> m_regions;
+
+    QList<SkeletonRegion> m_alternativeRouteRegions;
 
     QList<ModelRegion> m_placemarks;
 
@@ -97,6 +101,10 @@ public:
 
     int m_activeMenuIndex;
 
+    QComboBox *m_alternativeRoutesView;
+
+    AlternativeRoutesModel* m_alternativeRoutesModel;
+
     /** Constructor */
     explicit RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *widget );
 
@@ -122,6 +130,8 @@ public:
     /** Paint waypoint polygon */
     inline void renderRoute( GeoPainter *painter );
 
+    inline void renderAlternativeRoutes( GeoPainter *painter );
+
     /** Paint icons for trip points etc */
     inline void renderSkeleton( GeoPainter *painter );
 
@@ -140,6 +150,9 @@ public:
     /** True if the given point (screen coordinates) is among the route instruction points */
     inline bool isInfoPoint( const QPoint &point );
 
+    /** True if the given point (screen coordinates) is above an alternative route */
+    inline bool isAlternativeRoutePoint( const QPoint &point );
+
     /** Paint the stopover indicator pixmap at the given position. Also repaints the old position */
     inline void paintStopOver( QRect position );
 
@@ -151,7 +164,8 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
         q( parent ), m_proxyModel( 0 ), m_movingIndex( -1 ), m_marbleWidget( widget ),
         m_targetPixmap( ":/data/bitmaps/routing_pick.png" ), m_dragStopOverRightIndex( -1 ),
         m_pointSelection( false ), m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ),
-        m_routeDirty( false ), m_pixmapSize( 22, 22 ), m_routeSkeleton( 0 ), m_activeMenuIndex( -1 )
+        m_routeDirty( false ), m_pixmapSize( 22, 22 ), m_routeSkeleton( 0 ), m_activeMenuIndex( -1 ),
+        m_alternativeRoutesView( 0 ), m_alternativeRoutesModel( 0 )
 {
     m_contextMenu = new MarbleWidgetPopupMenu( m_marbleWidget, m_marbleWidget->model() );
     m_removeViaPointAction = new QAction( QObject::tr( "&Remove this destination" ), q );
@@ -202,6 +216,25 @@ void RoutingLayerPrivate::renderPlacemarks( GeoPainter *painter )
 
             QRegion region = painter->regionFromRect( pos, m_targetPixmap.width(), m_targetPixmap.height() );
             m_placemarks.push_back( ModelRegion( index, region ) );
+        }
+    }
+}
+
+void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
+{
+    m_alternativeRouteRegions.clear();
+
+    QPen grayPen( QColor::fromRgb( 136, 138, 133, 200 ) ); // gray, oxygen palette
+    grayPen.setWidth( 5 );
+    painter->setPen( grayPen );
+
+    for ( int i=0; i<m_alternativeRoutesModel->rowCount(); ++i ) {
+        GeoDataDocument* route = m_alternativeRoutesModel->route( i );
+        if ( route ) {
+            GeoDataLineString* points = AlternativeRoutesModel::waypoints( route );
+            painter->drawPolyline( *points );
+            QRegion region = painter->regionFromPolyline( *points, 8 );
+            m_alternativeRouteRegions.push_back( SkeletonRegion( i, region ) );
         }
     }
 }
@@ -382,6 +415,13 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
         return false;
     }
 
+    foreach( const SkeletonRegion &region, m_alternativeRouteRegions ) {
+        if ( region.region.contains( e->pos() ) ) {
+            m_alternativeRoutesView->setCurrentIndex( region.index );
+            return true;
+        }
+    }
+
     foreach( const ModelRegion &region, m_placemarks ) {
         if ( region.region.contains( e->pos() ) ) {
             emit q->placemarkSelected( region.index );
@@ -480,7 +520,10 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
             m_marbleWidget->setCursor( Qt::ArrowCursor );
         } else if ( !m_dropStopOver.isNull() ) {
             clearStopOver();
-        } else {
+        } else if ( isAlternativeRoutePoint( e->pos() ) ) {
+            m_marbleWidget->setCursor( Qt::ArrowCursor );
+        }
+        else {
             return false;
         }
 
@@ -519,6 +562,17 @@ bool RoutingLayerPrivate::isInfoPoint( const QPoint &point )
 
     return false;
 }
+
+ bool RoutingLayerPrivate::isAlternativeRoutePoint( const QPoint &point )
+ {
+     foreach( const SkeletonRegion &region, m_alternativeRouteRegions ) {
+         if ( region.region.contains( point ) ) {
+             return true;
+         }
+     }
+
+     return false;
+ }
 
 void RoutingLayerPrivate::paintStopOver( QRect dirty )
 {
@@ -569,6 +623,10 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     if ( d->m_placemarkModel) {
         d->renderPlacemarks( painter );
+    }
+
+    if ( d->m_alternativeRoutesModel ) {
+        d->renderAlternativeRoutes( painter );
     }
 
     if ( d->m_routingModel) {
@@ -628,6 +686,15 @@ void RoutingLayer::synchronizeWith( QAbstractProxyModel *model, QItemSelectionMo
     d->m_proxyModel = model;
 }
 
+void RoutingLayer::synchronizeAlternativeRoutesWith( AlternativeRoutesModel* model, QComboBox *view )
+{
+    d->m_alternativeRoutesModel = model;
+    d->m_alternativeRoutesView = view;
+
+    connect( d->m_alternativeRoutesModel, SIGNAL( rowsInserted( QModelIndex, int, int) ),
+             this, SLOT( showAlternativeRoads() ) );
+}
+
 void RoutingLayer::setPointSelectionEnabled( bool enabled )
 {
     d->m_pointSelection = enabled;
@@ -658,6 +725,11 @@ void RoutingLayer::removeViaPoint()
         setRouteDirty( true );
         emit routeDirty();
     }
+}
+
+void RoutingLayer::showAlternativeRoads()
+{
+    d->m_marbleWidget->repaint();
 }
 
 } // namespace Marble

@@ -10,6 +10,7 @@
 
 #include "RoutingManager.h"
 
+#include "AlternativeRoutesModel.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
 #include "RouteSkeleton.h"
@@ -28,6 +29,8 @@ public:
 
     RoutingModel *m_routingModel;
 
+    AlternativeRoutesModel* m_alternativeRoutesModel;
+
     MarbleWidget *m_marbleWidget;
 
     RouteSkeleton *m_route;
@@ -43,6 +46,7 @@ public:
 
 RoutingManagerPrivate::RoutingManagerPrivate( MarbleWidget *widget, RoutingManager* manager, QObject *parent ) :
         q( manager ), m_routingModel( new RoutingModel( parent ) ),
+        m_alternativeRoutesModel(new AlternativeRoutesModel( widget->model(), parent ) ),
         m_marbleWidget( widget ), m_route( 0 ), m_workOffline( false ),
         m_runnerManager( new MarbleRunnerManager( widget->model()->pluginManager(), q ) ),
         m_haveRoute( false )
@@ -86,6 +90,7 @@ void RoutingManager::updateRoute()
         }
     }
 
+    d->m_alternativeRoutesModel->newRequest( d->m_route );
     if ( realSize > 1 ) {
         emit stateChanged( RoutingManager::Downloading, d->m_route );
         d->m_runnerManager->setWorkOffline( d->m_workOffline );
@@ -103,12 +108,19 @@ void RoutingManager::setWorkOffline( bool offline )
 
 void RoutingManager::retrieveRoute( GeoDataDocument* route )
 {
+    d->m_alternativeRoutesModel->addRoute( route );
+
     if ( !d->m_haveRoute ) {
         d->m_haveRoute = true;
         emit stateChanged( Retrieved, d->m_route );
     }
 
     emit routeRetrieved( route );
+}
+
+AlternativeRoutesModel* RoutingManager::alternativeRoutesModel()
+{
+    return d->m_alternativeRoutesModel;
 }
 
 } // namespace Marble

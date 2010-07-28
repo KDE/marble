@@ -135,8 +135,8 @@ RoutingInputWidget::RoutingInputWidget( RouteSkeleton *skeleton, int index, Plug
 
     connect( d->m_runnerManager, SIGNAL( searchResultChanged( MarblePlacemarkModel * ) ),
              this, SLOT( setPlacemarkModel( MarblePlacemarkModel * ) ) );
-    connect( d->m_runnerManager, SIGNAL( reverseGeocodingFinished( GeoDataPlacemark )),
-             this, SLOT(retrieveReverseGeocodingResult( GeoDataPlacemark ) ) );
+    connect( d->m_runnerManager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark )),
+             this, SLOT(retrieveReverseGeocodingResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
     connect( d->m_lineEdit, SIGNAL( returnPressed() ),
              this, SLOT( findPlacemarks() ) );
     connect( d->m_lineEdit, SIGNAL( textChanged( QString ) ),
@@ -304,7 +304,7 @@ void RoutingInputWidget::clear()
     emit targetValidityChanged( false );
 }
 
-void RoutingInputWidget::retrieveReverseGeocodingResult( const GeoDataPlacemark &placemark )
+void RoutingInputWidget::retrieveReverseGeocodingResult( const GeoDataCoordinates &, const GeoDataPlacemark &placemark )
 {
     d->m_lineEdit->setText( placemark.address() );
     d->m_lineEdit->setCursorPosition( 0 );

@@ -15,9 +15,10 @@
 #include "LayerInterface.h"
 
 #include <QtCore/QModelIndex>
+#include <QtGui/QItemSelection>
 
 class QAbstractProxyModel;
-class QItemSelectionModel;
+class QComboBox;
 
 namespace Marble
 {
@@ -27,6 +28,7 @@ class RoutingModel;
 class MarblePlacemarkModel;
 class RoutingLayerPrivate;
 class RouteSkeleton;
+class AlternativeRoutesModel;
 
 /**
   * @brief A paint layer that serves as a view on a route model
@@ -60,6 +62,14 @@ public:
       * model which has different indices than a filtered one.
       */
     void synchronizeWith( QAbstractProxyModel *model, QItemSelectionModel *selection );
+
+    /**
+      * Stores the alternative routes model and a view working on this model to synchronize
+      * the selection with.
+      * @todo: Should use a QAbstractItemView instead, but working on this instead of the
+      * QComboBox does not work (changing the selection is not reflected by the combo box)
+      */
+    void synchronizeAlternativeRoutesWith( AlternativeRoutesModel* model, QComboBox *view );
 
     /**
       * Set the routing model to use. Implicitly removes the placemark model.
@@ -123,6 +133,8 @@ protected:
 
 private Q_SLOTS:
     void removeViaPoint();
+
+    void showAlternativeRoads();
 
 private:
     RoutingLayerPrivate *const d;

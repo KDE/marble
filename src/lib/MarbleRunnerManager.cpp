@@ -36,8 +36,8 @@ public:
     MarblePlacemarkModel *m_model;
     int m_searchTasks;
     QVector<GeoDataPlacemark*> m_placemarkContainer;
-    bool m_haveReverseGeocodingResult;
     QVector<GeoDataDocument*> m_routingResult;
+    QList<GeoDataCoordinates> m_reverseGeocodingResults;
     RouteSkeleton* m_routeSkeleton;
     QString m_celestialBodyId;
     bool m_workOffline;
@@ -52,7 +52,6 @@ public:
 MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( PluginManager* pluginManager ) :
         m_map( 0 ),
         m_model( new MarblePlacemarkModel ),
-        m_haveReverseGeocodingResult( false ),
         m_celestialBodyId( "earth" ),
         m_workOffline( false ),
         m_pluginManager( pluginManager ),
@@ -61,6 +60,7 @@ MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( PluginManager* pluginMan
 {
     m_model->setPlacemarkContainer( &m_placemarkContainer );
     qRegisterMetaType<GeoDataPlacemark>( "GeoDataPlacemark" );
+    qRegisterMetaType<GeoDataCoordinates>( "GeoDataCoordinates" );
     qRegisterMetaType<QVector<GeoDataPlacemark*> >( "QVector<GeoDataPlacemark*>" );
 }
 
@@ -106,12 +106,12 @@ MarbleRunnerManager::~MarbleRunnerManager()
 
 void MarbleRunnerManager::reverseGeocoding( const GeoDataCoordinates &coordinates )
 {
-    d->m_haveReverseGeocodingResult = false;
+    d->m_reverseGeocodingResults.removeAll( coordinates );
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::ReverseGeocoding );
     foreach( RunnerPlugin* plugin, plugins ) {
         MarbleAbstractRunner* runner = plugin->newRunner();
-        connect( runner, SIGNAL( reverseGeocodingFinished(GeoDataPlacemark) ),
-                 this, SLOT( addReverseGeocodingResult(GeoDataPlacemark) ) );
+        connect( runner, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
+                 this, SLOT( addReverseGeocodingResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
         runner->setMap( d->m_map );
         QThreadPool::globalInstance()->start( new ReverseGeocodingTask( runner, coordinates ) );
     }
@@ -180,11 +180,11 @@ void MarbleRunnerManager::setWorkOffline( bool offline )
     d->m_workOffline = offline;
 }
 
-void MarbleRunnerManager::addReverseGeocodingResult( const GeoDataPlacemark &placemark )
+void MarbleRunnerManager::addReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark )
 {
-    if ( !d->m_haveReverseGeocodingResult ) {
-        d->m_haveReverseGeocodingResult = true;
-        emit reverseGeocodingFinished( placemark );
+    if ( !d->m_reverseGeocodingResults.contains( coordinates ) ) {
+        d->m_reverseGeocodingResults.push_back( coordinates );
+        emit reverseGeocodingFinished( coordinates, placemark );
     }
 }
 

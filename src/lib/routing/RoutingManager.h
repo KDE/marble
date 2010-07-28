@@ -23,6 +23,7 @@ class MarbleWidget;
 class RoutingModel;
 class RouteSkeleton;
 class GeoDataDocument;
+class AlternativeRoutesModel;
 
 /**
   * Delegates data retrieval and model updates to the appropriate
@@ -51,6 +52,12 @@ public:
       * @see retrieveDirections
       */
     RoutingModel *routingModel();
+
+    /**
+      * Provides access to the model which contains a list of
+      * alternative routes
+      */
+    AlternativeRoutesModel* alternativeRoutesModel();
 
     /**
       * Forward the source and destination locations to the current routing

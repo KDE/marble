@@ -141,7 +141,7 @@ private Q_SLOTS:
 
     void reverseGeocoding();
 
-    void retrieveReverseGeocodingResult( const GeoDataPlacemark &placemark );
+    void retrieveReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
 private:
     RoutingInputWidgetPrivate *const d;
 };

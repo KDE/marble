@@ -23,6 +23,7 @@
 #include "RoutingModel.h"
 #include "RoutingProxyModel.h"
 #include "GeoDataDocument.h"
+#include "AlternativeRoutesModel.h"
 
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
@@ -148,8 +149,10 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
 
     d->m_routeSkeleton = new RouteSkeleton( this );
     d->m_routingManager = new RoutingManager( d->m_widget, this );
+    d->m_ui.routeComboBox->setModel( d->m_routingManager->alternativeRoutesModel() );
     d->m_routingLayer = new RoutingLayer( d->m_widget, this );
     d->m_routingLayer->setRouteSkeleton( d->m_routeSkeleton );
+    d->m_routingLayer->synchronizeAlternativeRoutesWith( d->m_routingManager->alternativeRoutesModel(), d->m_ui.routeComboBox );
     d->m_widget->map()->model()->addLayer( d->m_routingLayer );
 
     connect( d->m_routingLayer, SIGNAL( routeDirty() ),
@@ -164,14 +167,16 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( exportRoute() ) );
     connect( d->m_routingManager, SIGNAL( stateChanged( RoutingManager::State, RouteSkeleton* ) ),
              this, SLOT( updateRouteState( RoutingManager::State, RouteSkeleton* ) ) );
-    connect( d->m_routingManager, SIGNAL( routeRetrieved( GeoDataDocument* ) ),
-             this, SLOT( displayRoute( GeoDataDocument* ) ) );
     connect( d->m_routeSkeleton, SIGNAL( positionAdded( int ) ),
              this, SLOT( insertInputWidget( int ) ) );
     connect( d->m_routeSkeleton, SIGNAL( positionRemoved( int ) ),
              this, SLOT( removeInputWidget( int ) ) );
     connect( &d->m_progressTimer, SIGNAL( timeout() ),
              this, SLOT( updateProgress() ) );
+    connect( d->m_ui.routeComboBox, SIGNAL( currentIndexChanged( int ) ),
+             this, SLOT( switchRoute( int ) ) );
+    connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL( rowsInserted( QModelIndex, int, int ) ),
+             this, SLOT( updateAlternativeRoutes() ) );
 
     d->m_routingProxyModel = new RoutingProxyModel( this );
     d->m_routingProxyModel->setSourceModel( d->m_routingManager->routingModel() );
@@ -508,26 +513,24 @@ void RoutingWidget::updateProgress()
     d->m_ui.searchButton->setIcon( frame );
 }
 
-void RoutingWidget::displayRoute( GeoDataDocument* route )
-{
-    /** @todo: Scoring for routes, delayed display in the combo box,
-      * better route description than the plugin name as label */
-    QVariant data = qVariantFromValue<GeoDataDocument*>( route );
-    d->m_ui.routeComboBox->addItem( route->name(), data );
-    d->m_ui.routeComboBox->setVisible( d->m_ui.routeComboBox->count() > 1 );
-}
-
 void RoutingWidget::switchRoute( int index )
 {
     if ( index >= 0 )
     {
         Q_ASSERT( index < d->m_ui.routeComboBox->count() );
-        QVariant data = d->m_ui.routeComboBox->itemData( index );
-        GeoDataDocument* route = qVariantValue<GeoDataDocument*>( data );
+        GeoDataDocument* route = d->m_routingManager->alternativeRoutesModel()->route( index );
         if ( route ) {
             d->m_routingManager->routingModel()->importGeoDataDocument( route );
             d->m_widget->repaint();
         }
+    }
+}
+
+void RoutingWidget::updateAlternativeRoutes()
+{
+    d->m_ui.routeComboBox->setVisible( d->m_ui.routeComboBox->count() > 1 );
+    if ( d->m_ui.routeComboBox->currentIndex() < 0 && d->m_ui.routeComboBox->count() > 0 ) {
+        d->m_ui.routeComboBox->setCurrentIndex( 0 );
     }
 }
 

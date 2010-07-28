@@ -187,6 +187,8 @@ set(marblewidget_SRCS
 
     MapThemeSortFilterProxyModel.cpp
 
+    routing/AlternativeRoutesModel.cpp
+    routing/RouteAnnotator.cpp
     routing/RouteSkeleton.cpp
     routing/RoutingModel.cpp
     routing/RoutingProxyModel.cpp

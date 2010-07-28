@@ -85,7 +85,7 @@ Q_SIGNALS:
       * Reverse geocoding is finished, result in the given placemark.
       * To be emitted by runners after a @see reverseGeocoding call.
       */
-    void reverseGeocodingFinished( const GeoDataPlacemark &placemark );
+    void reverseGeocodingFinished( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
 
     /**
       * Route download/calculation is finished, result in the given route object.

@@ -15,6 +15,7 @@
 #include "MarbleLocale.h"
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataExtendedData.h"
 #include "TinyWebBrowser.h"
 
 #include <QtCore/QString>
@@ -139,7 +140,32 @@ void OsmNominatimRunner::handleReverseGeocodingResult( QNetworkReply* reply )
         GeoDataPlacemark placemark;
         placemark.setAddress( address );
         placemark.setCoordinate( GeoDataPoint( m_coordinates ) );
-        emit reverseGeocodingFinished( placemark );
+
+        QDomNodeList details = root.elementsByTagName( "addressparts" );
+        if ( details.size() == 1 ) {
+            GeoDataExtendedData extendedData;
+            addData( details, "road", &extendedData );
+            addData( details, "house_number", &extendedData );
+            addData( details, "village", &extendedData );
+            addData( details, "city", &extendedData );
+            addData( details, "county", &extendedData );
+            addData( details, "state", &extendedData );
+            addData( details, "postcode", &extendedData );
+            placemark.setExtendedData( extendedData );
+        }
+
+        emit reverseGeocodingFinished( m_coordinates, placemark );
+    }
+}
+
+void OsmNominatimRunner::addData( const QDomNodeList &node, const QString &key, GeoDataExtendedData *extendedData )
+{
+    QDomNodeList child = node.item( 0 ).toElement().elementsByTagName( key );
+    if ( child.size() > 0 ) {
+        QString text = child.item( 0 ).toElement().text();
+        GeoDataData data;
+        data.setValue( text );
+        extendedData->addValue( key, data );
     }
 }
 

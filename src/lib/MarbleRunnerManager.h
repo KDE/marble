@@ -100,7 +100,7 @@ signals:
       * emit further signals. If no result is found, this signal is emitted
       * with an empty (default constructed) placemark.
       */
-    void reverseGeocodingFinished( const GeoDataPlacemark &placemark );
+    void reverseGeocodingFinished( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
 
     /**
       * A route was retrieved
@@ -114,7 +114,7 @@ signals:
 private slots:
     void addSearchResult( QVector<GeoDataPlacemark*> result );
 
-    void addReverseGeocodingResult( const GeoDataPlacemark &placemark );
+    void addReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
 
     void addRoutingResult( GeoDataDocument* route );
 

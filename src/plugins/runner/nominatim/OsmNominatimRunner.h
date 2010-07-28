@@ -19,6 +19,7 @@
 
 class QNetworkReply;
 class QNetworkAccessManager;
+class QDomNodeList;
 
 namespace Marble
 {
@@ -50,6 +51,8 @@ private Q_SLOTS:
     void returnNoResults();
 
 private:
+    void addData( const QDomNodeList &node, const QString &key, GeoDataExtendedData *extendedData );
+
     QNetworkAccessManager* m_manager;
 
     GeoDataCoordinates m_coordinates;

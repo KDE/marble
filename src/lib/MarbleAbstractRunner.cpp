@@ -44,10 +44,10 @@ void MarbleAbstractRunner::search( const QString & )
     emit searchFinished( QVector<GeoDataPlacemark*>() );
 }
 
-void MarbleAbstractRunner::reverseGeocoding( const GeoDataCoordinates & )
+void MarbleAbstractRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
 {
     // dummy implementation
-    emit reverseGeocodingFinished( GeoDataPlacemark() );
+    emit reverseGeocodingFinished( coordinates, GeoDataPlacemark() );
 }
 
 void MarbleAbstractRunner::retrieveRoute( RouteSkeleton* )

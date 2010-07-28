@@ -62,7 +62,7 @@ ReverseGeocodingTask::ReverseGeocodingTask( MarbleAbstractRunner* runner, const 
 
 void ReverseGeocodingTask::runTask( QEventLoop *localEventLoop )
 {
-    QObject::connect( runner(), SIGNAL( reverseGeocodingFinished( GeoDataPlacemark) ),
+    QObject::connect( runner(), SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark) ),
             localEventLoop, SLOT( quit() ) );
     runner()->reverseGeocoding( m_coordinates );
 }
