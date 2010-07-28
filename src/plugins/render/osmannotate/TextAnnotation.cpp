@@ -26,18 +26,18 @@ TextAnnotation::~TextAnnotation()
 {
 }
 
-GeoDataPlacemark TextAnnotation::toGeoData() const
+GeoDataPlacemark* TextAnnotation::toGeoData() const
 {
-    GeoDataPlacemark placemark;
+    GeoDataPlacemark* placemark = new GeoDataPlacemark;
 
-    placemark.setName( name() );
-    placemark.setDescription( description() );
+    placemark->setName( name() );
+    placemark->setDescription( description() );
     //allow for HTML in the description
-    placemark.setDescriptionCDATA( true );
+    placemark->setDescriptionCDATA( true );
 
     //FIXME: make this work for all geometries and not just points
 //    FIXME change the geometry() to return a GeoDataGeometry and this won't work
-    placemark.setGeometry( geometry() );
+    placemark->setGeometry( new GeoDataPoint( geometry() ) );
 
     return placemark;
 }

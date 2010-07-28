@@ -234,7 +234,7 @@ void OsmAnnotatePlugin::loadOsmFile()
 
         QFile file( filename );
         if ( !file.exists() ) {
-            qWarning( "File does not exist!" );
+            qDebug( "File does not exist!" );
             return;
         }
 
@@ -338,7 +338,7 @@ void OsmAnnotatePlugin::saveAnnotationFile()
         file.open( QIODevice::ReadWrite );
 
         if ( !writer.write( &file, document ) ) {
-            qWarning( "Could not write the file." );
+            qDebug( "Could not write the file." );
         }
     }
 }
@@ -357,7 +357,7 @@ void OsmAnnotatePlugin::loadAnnotationFile()
 
         QFile file( filename );
         if ( !file.exists() ) {
-            qWarning( "File does not exist!" );
+            qDebug( "File does not exist!" );
             return;
         }
 
@@ -365,21 +365,27 @@ void OsmAnnotatePlugin::loadAnnotationFile()
         file.open( QIODevice::ReadOnly );
 
         if ( !parser.read( &file ) ) {
-            qWarning( "Could not parse file!" );
-            //do not quit on a failed read!
-            //return
+            qDebug( "Could not parse file!" );
+            return;
         }
+
         GeoDataDocument* document = dynamic_cast<GeoDataDocument*>(parser.releaseDocument() );
         Q_ASSERT( document );
 
         file.close();
 
-        QVector<GeoDataFeature>::ConstIterator it = document->constBegin();
+        QVector<GeoDataFeature*>::ConstIterator it = document->constBegin();
         for( ; it < document->constEnd(); ++it ) {
             PlacemarkTextAnnotation* annotation = new PlacemarkTextAnnotation();
-            annotation->setName( (*it).name() );
-            annotation->setDescription( (*it).description() );
-            annotation->setCoordinate( GeoDataPlacemark((*it)).coordinate() );
+            annotation->setName( (*it)->name() );
+            annotation->setDescription( (*it)->description() );
+            // annotation->setCoordinate( GeoDataPlacemark((*it)).coordinate() );
+            /** @todo: line above replaced with the four below to have it compile.
+                Needs verification that behavior stays the same */
+            GeoDataPlacemark* placemark = dynamic_cast<GeoDataPlacemark*>(*it);
+            if ( placemark ) {
+                annotation->setCoordinate( placemark->coordinate() );
+            }
             model.append( annotation );
         }
 
@@ -636,9 +642,8 @@ void OsmAnnotatePlugin::readOsmFile( QIODevice *device, bool flyToFile )
     GeoDataParser parser( GeoData_OSM );
 
     if ( !parser.read( device ) ) {
-        qWarning( "Could not parse file!" );
-        //do not quit on a failed read!
-        //return
+        qDebug( "Could not parse file!" );
+        return;
     }
     QList<GeoGraphicsItem*>* model = parser.releaseModel();
     Q_ASSERT( model );

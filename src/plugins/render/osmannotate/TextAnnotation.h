@@ -33,7 +33,7 @@ public:
     virtual GeoDataPoint geometry() const = 0;
     virtual void setGeometry( const GeoDataGeometry &geometry ) = 0;
 
-    GeoDataPlacemark toGeoData() const;
+    GeoDataPlacemark* toGeoData() const;
 
 };
 

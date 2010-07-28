@@ -25,7 +25,7 @@ OsmWayGraphicsItem::OsmWayGraphicsItem()
         : GeoGraphicsItem()
 {
     m_placemark = new GeoDataPlacemark();
-    m_placemark->setGeometry( GeoDataLineString() );
+    m_placemark->setGeometry( new GeoDataLineString() );
 }
 
 OsmWayGraphicsItem::~OsmWayGraphicsItem()
