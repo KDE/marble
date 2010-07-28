@@ -269,12 +269,12 @@ AlternativeRoutesModel::~AlternativeRoutesModel()
     delete d;
 }
 
-int AlternativeRoutesModel::rowCount ( const QModelIndex &parent ) const
+int AlternativeRoutesModel::rowCount ( const QModelIndex & ) const
 {
     return d->m_routes.size();
 }
 
-QVariant AlternativeRoutesModel::headerData ( int section, Qt::Orientation orientation, int role ) const
+QVariant AlternativeRoutesModel::headerData ( int, Qt::Orientation, int ) const
 {
     return QVariant();
 }
@@ -299,7 +299,7 @@ GeoDataDocument* AlternativeRoutesModel::route( int index )
     return 0;
 }
 
-void AlternativeRoutesModel::newRequest( RouteSkeleton *request )
+void AlternativeRoutesModel::newRequest( RouteSkeleton * )
 {
     d->m_routes.clear();
     d->m_responseTime.start();
@@ -315,7 +315,7 @@ void AlternativeRoutesModel::addRestrainedRoutes()
         if ( !d->filter( route ) ) {
             int affected = d->m_routes.size();
             beginInsertRows( QModelIndex(), affected, affected );
-            GeoDataDocument* base = d->m_routes.isEmpty() ? 0 : d->m_routes.first();
+//            GeoDataDocument* base = d->m_routes.isEmpty() ? 0 : d->m_routes.first();
             d->m_routes.push_back( route );
             endInsertRows();
 //            RouteAnnotator* task = new RouteAnnotator( d->m_marbleModel, this, route, base );

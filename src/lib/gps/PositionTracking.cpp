@@ -56,6 +56,7 @@ void PositionTracking::updateSpeed( GeoDataCoordinates& previous, GeoDataCoordin
 void PositionTracking::setPosition( GeoDataCoordinates position,
                                     GeoDataAccuracy accuracy )
 {
+    Q_UNUSED( accuracy );
     if ( m_positionProvider && m_positionProvider->status() ==
         PositionProviderStatusAvailable )
     {

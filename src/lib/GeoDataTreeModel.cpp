@@ -199,11 +199,14 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
     else if ( role == Qt::CheckStateRole
               && index.column() == 0 ) {
         GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
-        if ( feature )
-            if ( feature->isVisible() )
+        if ( feature ) {
+            if ( feature->isVisible() ) {
                 return QVariant( Qt::Checked );
-            else
+            }
+            else {
                 return QVariant( Qt::Unchecked );
+            }
+        }
     }
     else if ( role == Qt::DecorationRole
               && index.column() == 0 ) {
@@ -314,7 +317,7 @@ QModelIndex GeoDataTreeModel::parent( const QModelIndex &index ) const
     return QModelIndex();
 }
 
-int GeoDataTreeModel::columnCount( const QModelIndex &index ) const
+int GeoDataTreeModel::columnCount( const QModelIndex & ) const
 {
     return 4;
 }

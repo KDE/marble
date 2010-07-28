@@ -52,11 +52,11 @@ public:
 MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( PluginManager* pluginManager ) :
         m_map( 0 ),
         m_model( new MarblePlacemarkModel ),
+        m_searchTasks( 0 ),
+        m_routeSkeleton( 0 ),
         m_celestialBodyId( "earth" ),
         m_workOffline( false ),
-        m_pluginManager( pluginManager ),
-        m_routeSkeleton( 0 ),
-        m_searchTasks( 0 )
+        m_pluginManager( pluginManager )
 {
     m_model->setPlacemarkContainer( &m_placemarkContainer );
     qRegisterMetaType<GeoDataPlacemark>( "GeoDataPlacemark" );

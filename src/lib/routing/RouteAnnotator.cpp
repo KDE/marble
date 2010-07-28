@@ -104,11 +104,12 @@ void RouteAnnotator::run()
 
 void RouteAnnotator::retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark )
 {
+    Q_UNUSED( coordinates );
     d->m_placemarks.push_back( placemark );
     if ( d->m_placemarks.size() == d->m_requests ) {
         QMap<QString,int> counter;
         foreach( const GeoDataPlacemark &placemark, d->m_placemarks ) {
-            GeoDataExtendedData extended = d->m_placemarks.first().extendedData();
+            GeoDataExtendedData extended = placemark.extendedData();
             ++counter[extended.value("road").value().toString()];
         }
 
