@@ -359,7 +359,7 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
         //if there is no route but source and destination are specified
         if( wayPoints.size() != 0 ) {
             if( !( wayPoints[waypointIndex] == wayPoints[wayPoints.size()-1] ) ) {
-                qreal currentWaypointOffset;
+                int currentWaypointOffset = 0;
                 for( int i = 0; i<instructions.size(); ++i ) {
                     int instructionSize = instructions[i].instructionPointSet.size();
                     for ( int j = 0; j<instructionSize; ++j ) {
