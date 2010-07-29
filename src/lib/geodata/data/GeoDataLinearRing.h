@@ -109,7 +109,7 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
     This method can be used as an approximation for the circumference of a
     LinearRing.
 */
-    virtual qreal length( qreal planetRadius ) const;
+    virtual qreal length( qreal planetRadius, int offset = 0 ) const;
 
     
 /*!

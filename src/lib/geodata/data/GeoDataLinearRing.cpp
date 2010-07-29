@@ -42,9 +42,9 @@ bool GeoDataLinearRing::isClosed() const
     return true;
 }
 
-qreal GeoDataLinearRing::length( qreal planetRadius ) const
+qreal GeoDataLinearRing::length( qreal planetRadius, int offset ) const
 {
-    qreal  length = GeoDataLineString::length( planetRadius );
+    qreal  length = GeoDataLineString::length( planetRadius, offset );
 
     return length + planetRadius * distanceSphere( last(), first() );
 }
