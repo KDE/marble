@@ -521,91 +521,92 @@ void DownloadRegionDialog::updateTilesCount()
 
 QVector<TileCoordsPyramid> DownloadRegionDialog::routeRegion() const
 {
+    if( d->m_routingModel->rowCount() == 0 ) {
+         return QVector<TileCoordsPyramid>();
+    }
     GeoDataLineString waypoints;
-    if( d->m_routingModel->rowCount() != 0 ) {
-        for( int i = 0; i < d->m_routingModel->rowCount(); ++i ) {
-            QModelIndex index = d->m_routingModel->index( i, 0 );
-            GeoDataCoordinates position = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
-            RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
+    for( int i = 0; i < d->m_routingModel->rowCount(); ++i ) {
+        QModelIndex index = d->m_routingModel->index( i, 0 );
+        GeoDataCoordinates position = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
+        RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
 
-            if ( type == RoutingModel::WayPoint ) {
-                waypoints << position;
-            }
+        if ( type == RoutingModel::WayPoint ) {
+            waypoints << position;
         }
-        int const topLevel = d->m_tileLevelRangeWidget->topLevel();
-        int const bottomLevel = d->m_tileLevelRangeWidget->bottomLevel();
-        TileCoordsPyramid coordsPyramid( topLevel, bottomLevel );
+    }
+    int const topLevel = d->m_tileLevelRangeWidget->topLevel();
+    int const bottomLevel = d->m_tileLevelRangeWidget->bottomLevel();
+    TileCoordsPyramid coordsPyramid( topLevel, bottomLevel );
 
-        int const tileWidth = d->m_textureLayer->tileSize().width();
-        int const tileHeight = d->m_textureLayer->tileSize().height();
+    int const tileWidth = d->m_textureLayer->tileSize().width();
+    int const tileHeight = d->m_textureLayer->tileSize().height();
 
-        qreal offset = d->m_routeOffsetSpinBox->value();
-        if( d->m_routeOffsetSpinBox->suffix() == "KM") {
-            offset *= KM2METER;
+    qreal offset = d->m_routeOffsetSpinBox->value();
+    if( d->m_routeOffsetSpinBox->suffix() == "KM") {
+        offset *= KM2METER;
+    }
+    qreal radius = d->m_model->planetRadius();
+    QVector<TileCoordsPyramid> pyramid;
+    qreal radianOffset = offset / radius;
+
+    for( int i = 1; i < waypoints.size(); ++i ) {
+        GeoDataCoordinates position = waypoints[i];
+        qreal lonCenter = position.longitude();
+        qreal latCenter = position.latitude();
+
+        // coordinates of the of the vertices of the square(topleft and bottomright) at an offset distance from the waypoint
+        qreal latNorth = asin( sin( latCenter ) *  cos( radianOffset ) +  cos( latCenter ) * sin( radianOffset )  * cos( 7*M_PI/4 ) );
+        qreal dlonWest = atan2( sin( 7*M_PI/4 ) * sin( radianOffset ) * cos( latCenter ),  cos( radianOffset ) -  sin( latCenter ) * sin( latNorth ) );
+        qreal lonWest  = fmod( lonCenter - dlonWest + M_PI, 2*M_PI ) - M_PI;
+        qreal latSouth = asin( sin( latCenter ) * cos( radianOffset ) + cos( latCenter ) * sin( radianOffset ) * cos( 3*M_PI/4 ) );
+        qreal dlonEast =  atan2( sin( 3*M_PI/4 ) * sin( radianOffset ) * cos( latCenter ),  cos( radianOffset ) -  sin( latCenter ) * sin( latSouth ) );
+        qreal lonEast  = fmod( lonCenter - dlonEast+M_PI, 2*M_PI ) - M_PI;
+
+        int const northY = d->rad2PixelY( latNorth );
+        int const southY = d->rad2PixelY( latSouth );
+        int const eastX =  d->rad2PixelX( lonEast );
+        int const westX =  d->rad2PixelX( lonWest );
+
+        int const west  = qMin( westX, eastX );
+        int const north = qMin( northY, southY );
+        int const east  = qMax( westX, eastX );
+        int const south = qMax( northY, southY );
+
+        int bottomLevelTileX1 = 0;
+        int bottomLevelTileY1 = 0;
+        int bottomLevelTileX2 = 0;
+        int bottomLevelTileY2 = 0;
+
+        if ( d->m_visibleTileLevel > d->m_tileLevelRangeWidget->bottomLevel() ) {
+            int const deltaLevel = d->m_visibleTileLevel - d->m_tileLevelRangeWidget->bottomLevel();
+            bottomLevelTileX1 = west  >> deltaLevel;
+            bottomLevelTileY1 = north >> deltaLevel;
+            bottomLevelTileX2 = east  >> deltaLevel;
+            bottomLevelTileY2 = south >> deltaLevel;
         }
-        qreal radius = d->m_model->planetRadius();
-        QVector<TileCoordsPyramid> pyramid;
-        qreal radianOffset = offset / radius;
+        else if ( d->m_visibleTileLevel < bottomLevel ) {
+            int const deltaLevel = bottomLevel - d->m_visibleTileLevel;
+            bottomLevelTileX1 = west  << deltaLevel;
+            bottomLevelTileY1 = north << deltaLevel;
+            bottomLevelTileX2 = east  << deltaLevel;
+            bottomLevelTileY2 = south << deltaLevel;
+        }
+        else {
+            bottomLevelTileX1 = west;
+            bottomLevelTileY1 = north;
+            bottomLevelTileX2 = east;
+            bottomLevelTileY2 = south;
+        }
 
-        for( int i = 1; i < waypoints.size(); ++i ) {
-            GeoDataCoordinates position = waypoints[i];
-            qreal lonCenter = position.longitude();
-            qreal latCenter = position.latitude();
-
-            // coordinates of the of the vertices of the square(topleft and bottomright) at an offset distance from the waypoint
-            qreal latNorth = asin( sin( latCenter ) *  cos( radianOffset ) +  cos( latCenter ) * sin( radianOffset )  * cos( 7*M_PI/4 ) );
-            qreal dlonWest = atan2( sin( 7*M_PI/4 ) * sin( radianOffset ) * cos( latCenter ),  cos( radianOffset ) -  sin( latCenter ) * sin( latNorth ) );
-            qreal lonWest  = fmod( lonCenter - dlonWest + M_PI, 2*M_PI ) - M_PI;
-            qreal latSouth = asin( sin( latCenter ) * cos( radianOffset ) + cos( latCenter ) * sin( radianOffset ) * cos( 3*M_PI/4 ) );
-            qreal dlonEast =  atan2( sin( 3*M_PI/4 ) * sin( radianOffset ) * cos( latCenter ),  cos( radianOffset ) -  sin( latCenter ) * sin( latSouth ) );
-            qreal lonEast  = fmod( lonCenter - dlonEast+M_PI, 2*M_PI ) - M_PI;
-
-            int const northY = d->rad2PixelY( latNorth );
-            int const southY = d->rad2PixelY( latSouth );
-            int const eastX =  d->rad2PixelX( lonEast );
-            int const westX =  d->rad2PixelX( lonWest );
-
-            int const west  = qMin( westX, eastX );
-            int const north = qMin( northY, southY );
-            int const east  = qMax( westX, eastX );
-            int const south = qMax( northY, southY );
-
-            int bottomLevelTileX1 = 0;
-            int bottomLevelTileY1 = 0;
-            int bottomLevelTileX2 = 0;
-            int bottomLevelTileY2 = 0;
-
-            if ( d->m_visibleTileLevel > d->m_tileLevelRangeWidget->bottomLevel() ) {
-                int const deltaLevel = d->m_visibleTileLevel - d->m_tileLevelRangeWidget->bottomLevel();
-                bottomLevelTileX1 = west  >> deltaLevel;
-                bottomLevelTileY1 = north >> deltaLevel;
-                bottomLevelTileX2 = east  >> deltaLevel;
-                bottomLevelTileY2 = south >> deltaLevel;
-            }
-            else if ( d->m_visibleTileLevel < bottomLevel ) {
-                int const deltaLevel = bottomLevel - d->m_visibleTileLevel;
-                bottomLevelTileX1 = west  << deltaLevel;
-                bottomLevelTileY1 = north << deltaLevel;
-                bottomLevelTileX2 = east  << deltaLevel;
-                bottomLevelTileY2 = south << deltaLevel;
-            }
-            else {
-                bottomLevelTileX1 = west;
-                bottomLevelTileY1 = north;
-                bottomLevelTileX2 = east;
-                bottomLevelTileY2 = south;
-            }
-
-            QRect waypointRegion;
-            //square region around the waypoint
-            waypointRegion.setCoords( bottomLevelTileX1/tileWidth, bottomLevelTileY1/tileHeight,
-                                      bottomLevelTileX2/tileWidth, bottomLevelTileY2/tileHeight );
-            coordsPyramid.setBottomLevelCoords( waypointRegion );
-            pyramid << coordsPyramid;
+        QRect waypointRegion;
+        //square region around the waypoint
+        waypointRegion.setCoords( bottomLevelTileX1/tileWidth, bottomLevelTileY1/tileHeight,
+                                  bottomLevelTileX2/tileWidth, bottomLevelTileY2/tileHeight );
+        coordsPyramid.setBottomLevelCoords( waypointRegion );
+        pyramid << coordsPyramid;
         }
 
         return pyramid;
-    }
 }
 
 

@@ -96,17 +96,13 @@ QString PositionTracking::error() const
 //get speed from provider
 qreal PositionTracking::speed() const
 {
-    if( error().isEmpty() ) {
-        return m_positionProvider->speed();
-    }
+    return m_positionProvider ? m_positionProvider->speed() : 0 ;
 }
 
 //get direction from provider
 qreal PositionTracking::direction() const
 {
-    if( error().isEmpty() ) {
-        return m_positionProvider->direction();
-    }
+    return m_positionProvider ? m_positionProvider->direction() : 0 ;
 }
 
 #include "PositionTracking.moc"
