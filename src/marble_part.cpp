@@ -1018,7 +1018,7 @@ void MarblePart::downloadRegion()
     QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
     QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
     kDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
-    TileCoordsPyramid const pyramid = m_downloadRegionDialog->region();
+    QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
     m_controlView->marbleWidget()->map()->model()->downloadRegion( sourceDir, pyramid );
 }
 
