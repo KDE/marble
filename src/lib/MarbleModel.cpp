@@ -20,6 +20,7 @@
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
 #include <QtCore/QAbstractItemModel>
+#include <QtCore/QSet>
 #include <QtGui/QItemSelectionModel>
 #include <QtGui/QSortFilterProxyModel>
 
@@ -77,6 +78,7 @@
 #include "VectorComposer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
+#include "routing/RoutingManager.h"
 
 namespace Marble
 {
@@ -95,7 +97,17 @@ class MarbleModelPrivate
                                                                    MarbleDirs::localPath() ),
                                                       m_pluginManager ) ),
           m_fileManager( 0 ),
-          m_placemarkmanager( 0 )
+          m_tileLoader( 0 ),
+          m_texmapper( 0 ),
+          m_placemarkmanager( 0 ),
+          m_placemarkLayout( 0 ),
+          m_dateTime( 0 ),
+          m_sunLocator( 0 ),
+          m_layerDecorator( 0 ),
+          m_positionTracking( 0 ),
+          m_gpxFileModel( 0 ),
+          m_planet( 0 ),
+          m_routingManager( 0 )
     {
     }
 
@@ -148,6 +160,8 @@ class MarbleModelPrivate
     GpxFileModel            *m_gpxFileModel;
 
     Planet                  *m_planet;
+
+    RoutingManager          *m_routingManager;
 };
 
 VectorComposer      *MarbleModelPrivate::m_veccomposer = 0;
@@ -173,6 +187,7 @@ MarbleModel::MarbleModel( QObject *parent )
     QTime t;
     t.start();
     MarbleModelPrivate::refCounter.ref();
+
     d->m_dataFacade = new MarbleDataFacade( this );
     connect(d->m_dataFacade->treeModel(), SIGNAL( dataChanged(QModelIndex,QModelIndex) ),
             this, SIGNAL( modelChanged() ) );
@@ -180,7 +195,7 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_tileLoader = new StackedTileLoader( d->m_mapThemeManager, d->textureLayerProperties(),
                                              d->m_downloadManager, this );
     d->m_texmapper = 0;
-    
+
     d->m_fileManager = new FileManager();
     d->m_fileManager->setDataFacade(d->m_dataFacade);
 
@@ -195,7 +210,7 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_popSortModel->setDynamicSortFilter( true );
     d->m_popSortModel->setSortRole( MarblePlacemarkModel::PopularityIndexRole );
     d->m_popSortModel->sort( 0, Qt::DescendingOrder );
-    
+
     d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_popSortModel );
 
     d->m_placemarkLayout = new PlacemarkLayout( this );
@@ -233,6 +248,8 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_sunLocator     = new SunLocator( d->m_dateTime, d->m_planet );
     d->m_layerDecorator = new MergedLayerDecorator( d->m_tileLoader, d->m_sunLocator );
 
+    d->m_routingManager = new RoutingManager( d->m_parent, this );
+
     connect(d->m_dateTime,   SIGNAL( timeChanged() ),
             d->m_sunLocator, SLOT( update() ) );
     connect( d->m_layerDecorator, SIGNAL( repaintMap() ),
@@ -242,7 +259,7 @@ MarbleModel::MarbleModel( QObject *parent )
 MarbleModel::~MarbleModel()
 {
 //    mDebug() << "MarbleModel::~MarbleModel";
-    
+
     delete d->m_texmapper;
 
     delete d->m_tileLoader; // disconnects from downloadManager in dtor
@@ -285,7 +302,7 @@ GeoSceneDocument* MarbleModel::mapTheme() const
 // If the tiles (for the lowest tile level) haven't been created already
 // then create them here and now.
 //
-// FIXME: Move the tile creation dialogs out of this function.  Change 
+// FIXME: Move the tile creation dialogs out of this function.  Change
 //        them into signals instead.
 // FIXME: Get rid of 'currentProjection' here.  It's totally misplaced.
 //
@@ -298,9 +315,9 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     d->m_tileLoader->setTextureLayerSettings( d->textureLayerProperties() );
 
     // Some output to show how to use this stuff ...
-    mDebug() << "DGML2 Name       : " << d->m_mapTheme->head()->name(); 
+    mDebug() << "DGML2 Name       : " << d->m_mapTheme->head()->name();
 /*
-    mDebug() << "DGML2 Description: " << d->m_mapTheme->head()->description(); 
+    mDebug() << "DGML2 Description: " << d->m_mapTheme->head()->description();
 
     if ( d->m_mapTheme->map()->hasTextureLayers() )
         mDebug() << "Contains texture layers! ";
@@ -325,13 +342,13 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         // If the tiles aren't already there, put up a progress dialog
         // while creating them.
 
-        // As long as we don't have an Layer Management Class we just lookup 
+        // As long as we don't have an Layer Management Class we just lookup
         // the name of the layer that has the same name as the theme ID
         QString themeID = d->m_mapTheme->head()->theme();
 
-        GeoSceneLayer *layer = 
+        GeoSceneLayer *layer =
             static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
-        GeoSceneTexture *texture = 
+        GeoSceneTexture *texture =
             static_cast<GeoSceneTexture*>( layer->groundDataset() );
 
         QString sourceDir = texture->sourceDir();
@@ -357,7 +374,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             qDebug("Tile creation completed");
             delete tileCreatorDlg;
         }
-        
+
         setupTextureMapper( currentProjection );
     }
     else {
@@ -367,7 +384,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     // Set all the colors for the vector layers
     if ( d->m_mapTheme->map()->hasVectorLayers() && d->m_veccomposer ) {
         d->m_veccomposer->setOceanColor( d->m_mapTheme->map()->backgroundColor() );
-        
+
         // Just as with textures, this is a workaround for DGML2 to
         // emulate the old behaviour.
 
@@ -444,7 +461,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 
         if( filter->type() == "colorize" ) {
              //no need to look up with MarbleDirs twice so they are left null for now
-            QString seafile, landfile; 
+            QString seafile, landfile;
             QList<GeoScenePalette*> palette = filter->palette();
             foreach ( GeoScenePalette *curPalette, palette ) {
                 if( curPalette->type() == "sea" ) {
@@ -516,7 +533,7 @@ void MarbleModel::setupVectorComposer()
            to create the palette and it might not even be used. Instead it's created
            in setMapTheme if the theme being loaded does need it. If the theme
            doesn't need it, it's left as is. */
-    }    
+    }
 }
 
 HttpDownloadManager* MarbleModel::downloadManager() const
@@ -548,13 +565,13 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     // FIXME: Remove this once the LMC is there:
     QString themeID = d->m_mapTheme->head()->theme();
 
-    GeoSceneLayer *layer = 
+    GeoSceneLayer *layer =
         static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
 
     QStringList renderPositions;
     renderPositions << "STARS" << "BEHIND_TARGET";
     d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
-        
+
     if ( redrawBackground ) {
         if ( d->m_mapTheme->map()->hasTextureLayers() ) {
 
@@ -615,7 +632,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
         d->m_veccomposer->paintVectorMap( painter, viewParams );
     }
     else {
-        d->m_layerManager->renderLayers( painter, viewParams, renderPositions );        
+        d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
     }
 
     // Paint the GeoDataPlacemark layer
@@ -663,7 +680,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     renderPositions.clear();
     renderPositions << "ATMOSPHERE"
                     << "ORBIT" << "ALWAYS_ON_TOP" << "FLOAT_ITEM" << "USER_TOOLS";
-                               
+
     d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
 }
 
@@ -856,13 +873,13 @@ void MarbleModel::clearPersistentTileCache()
         // If the tiles aren't already there, put up a progress dialog
         // while creating them.
 
-        // As long as we don't have an Layer Management Class we just lookup 
+        // As long as we don't have an Layer Management Class we just lookup
         // the name of the layer that has the same name as the theme ID
         QString themeID = d->m_mapTheme->head()->theme();
 
-        GeoSceneLayer *layer = 
+        GeoSceneLayer *layer =
             static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
-        GeoSceneTexture *texture = 
+        GeoSceneTexture *texture =
             static_cast<GeoSceneTexture*>( layer->groundDataset() );
 
         QString sourceDir = texture->sourceDir();
@@ -965,33 +982,51 @@ void MarbleModel::reloadMap() const
 }
 
 void MarbleModel::downloadRegion( QString const & mapThemeId,
-                                  TileCoordsPyramid const & pyramid ) const
+                                  QVector<TileCoordsPyramid> const & pyramid ) const
 {
     Q_ASSERT( d->m_tileLoader );
+    Q_ASSERT( !pyramid.isEmpty() );
     QTime t;
     t.start();
+
     // When downloading a region (the author of these lines thinks) most users probably expect
     // the download to begin with the low resolution tiles and then procede level-wise to
     // higher resolution tiles. In order to achieve this, we start requesting downloads of
     // high resolution tiles and request the low resolution tiles at the end because
     // DownloadQueueSet (silly name) is implemented as stack.
-    for ( int level = pyramid.bottomLevel(); level >= pyramid.topLevel(); --level ) {
-        QRect const coords = pyramid.coords( level );
-        mDebug() << "MarbleModel::downloadRegion level:" << level << "tile coords:" << coords;
-        int x1, y1, x2, y2;
-        coords.getCoords( &x1, &y1, &x2, &y2 );
-        for ( int x = x1; x <= x2; ++x )
-            for ( int y = y1; y <= y2; ++y ) {
-                TileId const tileId( mapThemeId, level, x, y );
-                // FIXME: use lazy evaluation to not generate up to 100k tiles in one go
-                // this can take considerable time even on very fast systems
-                // in contrast generating the TileIds on the fly when they are needed
-                // does not seem to affect download speed.
-                d->m_tileLoader->downloadTile( tileId );
+
+
+    int const first = 0;
+    int tilesCount = 0;
+
+     for ( int level = pyramid[first].bottomLevel(); level >= pyramid[first].topLevel(); --level ) {
+         QSet<TileId> tileIdSet;
+          for( int i = 0; i < pyramid.size(); ++i ) {
+            QRect const coords = pyramid[i].coords( level );
+            mDebug() << "MarbleModel::downloadRegion level:" << level << "tile coords:" << coords;
+            int x1, y1, x2, y2;
+            coords.getCoords( &x1, &y1, &x2, &y2 );
+            for ( int x = x1; x <= x2; ++x ) {
+                for ( int y = y1; y <= y2; ++y ) {
+                    TileId const tileId( mapThemeId, level, x, y );
+                    tileIdSet.insert( tileId );
+                    // FIXME: use lazy evaluation to not generate up to 100k tiles in one go
+                    // this can take considerable time even on very fast systems
+                    // in contrast generating the TileIds on the fly when they are needed
+                    // does not seem to affect download speed.
+                }
             }
-    }
+         }
+         QSetIterator<TileId> i( tileIdSet );
+         while( i.hasNext() ) {
+              d->m_tileLoader->downloadTile( i.next() );
+         }
+         tilesCount += tileIdSet.count();
+     }
+    // Needed for downloading unique tiles only. Much faster than if tiles for each level is downloaded separately
+
     int const elapsedMs = t.elapsed();
-    mDebug() << "MarbleModel::downloadRegion:" << pyramid.tilesCount() << "tiles, " << elapsedMs << "ms";
+    mDebug() << "MarbleModel::downloadRegion:" << tilesCount << "tiles, " << elapsedMs << "ms";
 }
 
 void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
@@ -1001,7 +1036,7 @@ void MarbleModel::addDownloadPolicies( GeoSceneDocument *mapTheme )
     if ( !mapTheme->map()->hasTextureLayers() )
         return;
 
-    // As long as we don't have an Layer Management Class we just lookup 
+    // As long as we don't have an Layer Management Class we just lookup
     // the name of the layer that has the same name as the theme ID
     const QString themeId = mapTheme->head()->theme();
     GeoSceneLayer * const layer = static_cast<GeoSceneLayer*>( mapTheme->map()->layer( themeId ));
@@ -1036,6 +1071,11 @@ GeoSceneTexture * MarbleModel::textureLayer() const
         return 0;
 
     return static_cast<GeoSceneTexture*>( layer->groundDataset() );
+}
+
+RoutingManager* MarbleModel::routingManager()
+{
+    return d->m_routingManager;
 }
 
 }

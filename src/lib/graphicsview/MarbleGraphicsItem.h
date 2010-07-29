@@ -24,7 +24,7 @@ class QObject;
 
 namespace Marble
 {
-    
+
 class AbstractMarbleGraphicsLayout;
 class GeoPainter;
 class GeoSceneLayer;
@@ -42,18 +42,18 @@ class MARBLE_EXPORT MarbleGraphicsItem
         ItemCoordinateCache,
         DeviceCoordinateCache
     };
-     
+
     explicit MarbleGraphicsItem( MarbleGraphicsItem *parent = 0 );
-    
+
     virtual ~MarbleGraphicsItem();
-    
+
     /**
      * Paints the item on the screen in view coordinates.
-     * It is not save to call this function from a thread other than the gui thread.
+     * It is not safe to call this function from a thread other than the gui thread.
      */
-    bool paintEvent( GeoPainter *painter, ViewportParams *viewport, 
+    bool paintEvent( GeoPainter *painter, ViewportParams *viewport,
                      const QString& renderPos, GeoSceneLayer *layer = 0 );
-                        
+
     /**
      * Returns true if the Item contains @p point in parent coordinates.
      */
@@ -79,12 +79,12 @@ class MARBLE_EXPORT MarbleGraphicsItem
      * items. The MarbleGraphicsItem takes ownership of the layout.
      */
     void setLayout( AbstractMarbleGraphicsLayout *layout );
-    
+
     /**
      * Returns the cache mode of the item
      */
     CacheMode cacheMode() const;
-    
+
     /**
      * Set the cache mode of the item
      */
@@ -116,12 +116,12 @@ class MARBLE_EXPORT MarbleGraphicsItem
      * Shows the item. Equivalent to setVisible( true )
      */
     void show();
-    
+
     /**
      * Returns the items tool tip or, if no tool tip has been set, an empty string.
      */
     QString toolTip() const;
-    
+
     /**
      * Set the tool tip for this GraphicItem.
      */
@@ -162,11 +162,11 @@ class MARBLE_EXPORT MarbleGraphicsItem
 
  protected:
     explicit MarbleGraphicsItem( MarbleGraphicsItemPrivate *d_ptr );
-     
+
     virtual bool eventFilter( QObject *object, QEvent *e );
-    
+
     MarbleGraphicsItemPrivate * const d;
-    
+
  private:
     MarbleGraphicsItemPrivate* p() const;
 };

@@ -17,7 +17,7 @@
    <string>Select a geographic region</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0">
+   <item row="0" column="1">
     <spacer name="horizontalSpacer_5">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -30,7 +30,7 @@
      </property>
     </spacer>
    </item>
-   <item row="0" column="1">
+   <item row="0" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QDoubleSpinBox" name="northSpinBox">
@@ -69,7 +69,7 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="2">
+   <item row="0" column="3">
     <spacer name="horizontalSpacer_2">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -82,7 +82,7 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="0">
+   <item row="1" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
       <widget class="QDoubleSpinBox" name="westSpinBox">
@@ -118,7 +118,7 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="1">
+   <item row="1" column="2">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -131,7 +131,7 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="2">
+   <item row="1" column="3">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
       <widget class="QDoubleSpinBox" name="eastSpinBox">
@@ -167,7 +167,7 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="0">
+   <item row="2" column="1">
     <spacer name="horizontalSpacer_4">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -180,7 +180,7 @@
      </property>
     </spacer>
    </item>
-   <item row="2" column="1">
+   <item row="2" column="2">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QDoubleSpinBox" name="southSpinBox">
@@ -216,7 +216,7 @@
      </item>
     </layout>
    </item>
-   <item row="2" column="2">
+   <item row="2" column="3">
     <spacer name="horizontalSpacer_3">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -225,6 +225,19 @@
       <size>
        <width>13</width>
        <height>13</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="0" rowspan="3">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
       </size>
      </property>
     </spacer>

@@ -72,6 +72,7 @@ class GeoSceneDocument;
 class GeoSceneTexture;
 class Planet;
 class LayerInterface;
+class RoutingManager;
 
 /**
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -147,11 +148,11 @@ class MARBLE_EXPORT MarbleModel : public QObject
     /**
      * @brief Return the name of the current map theme.
      * @return the identifier of the current MapTheme.
-     * To ensure that a unique identifier is being used the theme does NOT 
-     * get represented by its name but the by relative location of the file 
+     * To ensure that a unique identifier is being used the theme does NOT
+     * get represented by its name but the by relative location of the file
      * that specifies the theme:
      *
-     * Example: 
+     * Example:
      *    maptheme = "earth/bluemarble/bluemarble.dgml"
      */
     QString mapThemeId() const;
@@ -171,15 +172,15 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * NOTE: The currentProjection parameters will
      *       disappear soon.
      *
-     * The ID of the new maptheme. To ensure that a unique 
-     * identifier is being used the theme does NOT get represented by its 
+     * The ID of the new maptheme. To ensure that a unique
+     * identifier is being used the theme does NOT get represented by its
      * name but the by relative location of the file that specifies the theme:
      *
-     * Example: 
-     *    maptheme = "earth/bluemarble/bluemarble.dgml" 
+     * Example:
+     *    maptheme = "earth/bluemarble/bluemarble.dgml"
      */
     void setMapTheme( GeoSceneDocument* mapTheme,
-		      Projection currentProjection );
+                      Projection currentProjection );
 
     /**
      * @brief  Set the Projection used for the map
@@ -191,7 +192,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief  Setup the Vector Composer
      */
     void  setupVectorComposer();
-    
+
     /**
      * @brief Return the downloadmanager to load missing tiles
      * @return the HttpDownloadManager instance.
@@ -241,7 +242,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Returns a list of all RenderPlugins in the model, this includes float items
      * @return the list of RenderPlugins
      */
-    QList<RenderPlugin *>      renderPlugins() const;
+    QList<RenderPlugin *> renderPlugins() const;
     /**
      * @brief Returns a list of all FloatItems in the model
      * @return the list of the floatItems
@@ -252,9 +253,9 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @return the list of DataPlugins
      */
     QList<AbstractDataPlugin *> dataPlugins()  const;
-    
+
     /**
-     * @brief Returns all widgets of dataPlugins on the position curpos 
+     * @brief Returns all widgets of dataPlugins on the position curpos
      */
     QList<AbstractDataPluginItem *> whichItemAt( const QPoint& curpos ) const;
 
@@ -281,7 +282,9 @@ class MARBLE_EXPORT MarbleModel : public QObject
     int tileZoomLevel() const;
 
     void reloadMap() const;
-    void downloadRegion( QString const & mapThemeId, TileCoordsPyramid const & ) const;
+    void downloadRegion( QString const & mapThemeId, QVector<TileCoordsPyramid> const & ) const;
+
+    RoutingManager* routingManager();
 
  public Q_SLOTS:
     void clearVolatileTileCache();
@@ -305,7 +308,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     /**
      * @brief Signal that the MarbleModel has started to create a new set of tiles.
-     * @param 
+     * @param
      * @see  zoomView()
      */
     void creatingTilesStart( TileCreator*, const QString& name, const QString& description );

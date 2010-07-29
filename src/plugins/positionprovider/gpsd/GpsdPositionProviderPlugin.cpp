@@ -70,6 +70,16 @@ void GpsdPositionProviderPlugin::update( gps_data_t data )
         // FIXME: Add real values here
         m_accuracy.horizontal = 5;
         m_accuracy.vertical = 5;
+
+        if( !isnan(data.fix.speed ) )
+        {
+            m_speed = data.fix.speed;
+        }
+
+        if( !isnan( data.fix.track ) )
+        {
+            m_track = data.fix.track;
+        }
     }
     if (m_status != oldStatus)
         emit statusChanged( m_status );
@@ -103,7 +113,9 @@ GeoDataAccuracy GpsdPositionProviderPlugin::accuracy() const
     return m_accuracy;
 }
 
-GpsdPositionProviderPlugin::GpsdPositionProviderPlugin() : m_thread( 0 )
+GpsdPositionProviderPlugin::GpsdPositionProviderPlugin() : m_thread( 0 ),
+    m_speed( 0.0 ),
+    m_track( 0.0 )
 {
 }
 
@@ -121,10 +133,22 @@ GpsdPositionProviderPlugin::~GpsdPositionProviderPlugin()
     }
 }
 
+qreal GpsdPositionProviderPlugin::speed() const
+{
+    return m_speed;
+}
+
+qreal GpsdPositionProviderPlugin::direction() const
+{
+    return m_track;
+}
+
+
 QString GpsdPositionProviderPlugin::error() const
 {
     return m_thread->error();
 }
+
 
 Q_EXPORT_PLUGIN2( GpsdPositionProviderPlugin, Marble::GpsdPositionProviderPlugin )
 

@@ -32,7 +32,7 @@ class TestGeoData : public QObject
     void normalizeLatTest();
     void normalizeLonTest_data();
     void normalizeLonTest();
-    
+
     void latLonAltBoxIntersects_data();
     void latLonAltBoxIntersects();
     void latLonBoxCenter_data();
@@ -55,7 +55,6 @@ void TestGeoData::nodeTypeTest()
     GeoDataFeature &featureRef = document.last();
     QCOMPARE( featureRef.nodeType(), folderType );
     QCOMPARE( static_cast<GeoDataObject*>(&featureRef)->nodeType(), folderType );
-
 }
 
 void TestGeoData::parentingTest()
@@ -148,6 +147,7 @@ void TestGeoData::normalizeLonTest_data()
     QTest::newRow( "somewhere" ) << 1.0;
     QTest::newRow( "date line east" ) << M_PI;
     QTest::newRow( "date line west" ) << - M_PI;
+
 }
 
 void TestGeoData::normalizeLonTest()
@@ -198,7 +198,7 @@ void TestGeoData::latLonAltBoxIntersects_data()
     QTest::addColumn<qreal>( "box2minAltitude" );
     QTest::addColumn<qreal>( "box2maxAltitude" );
     QTest::addColumn<bool>( "intersects" );
-    
+
     QTest::newRow( "same" ) << 56.0 << 40.0 << 0.0 << 11.0 << 10.0 << 12.0
                             << 56.0 << 40.0 << 0.0 << 11.0 << 10.0 << 12.0
                             << true;
@@ -225,7 +225,7 @@ void TestGeoData::latLonAltBoxIntersects()
     QFETCH( qreal, box2minAltitude );
     QFETCH( qreal, box2maxAltitude );
     QFETCH( bool, intersects );
-    
+
     GeoDataLatLonAltBox box1;
     GeoDataLatLonAltBox box2;
     box1.setNorth( box1north, GeoDataCoordinates::Degree );

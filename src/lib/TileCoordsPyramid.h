@@ -25,13 +25,19 @@ class MARBLE_EXPORT TileCoordsPyramid
  public:
     TileCoordsPyramid( int const topLevel, int const bottomLevel );
     TileCoordsPyramid( TileCoordsPyramid const & other );
+    TileCoordsPyramid();
     TileCoordsPyramid & operator=( TileCoordsPyramid const & rhs );
+    TileCoordsPyramid & operator<<( TileCoordsPyramid const & other );
     ~TileCoordsPyramid();
 
     int topLevel() const;
     int bottomLevel() const;
     void setBottomLevelCoords( QRect const & coords );
     QRect coords( int const level ) const;
+
+    /**
+      * @brief returns the number of tiles covered by one pyramid
+      **/
     qint64 tilesCount() const;
 
  private:

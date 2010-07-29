@@ -29,7 +29,8 @@ class GeoDataCoordinates;
 class FileManager;
 class PluginManager;
 
-class PositionTracking : public QObject 
+
+class PositionTracking : public QObject
 {
     Q_OBJECT
 
@@ -47,6 +48,16 @@ public:
 
     QString error() const;
 
+    /**
+     * @brief provides speed of the gps device
+     */
+    qreal speed() const;
+
+    /**
+     * @brief provides direction of the gps device in degrees with geographical north
+     */
+    qreal direction() const;
+
 Q_SIGNALS:
     void  gpsLocation( GeoDataCoordinates, qreal );
 
@@ -57,9 +68,6 @@ public slots:
                           GeoDataAccuracy accuracy );
 
  private:
-    void updateSpeed( GeoDataCoordinates& previous, GeoDataCoordinates next );
-
-    qreal               m_speed;
 
     GeoDataDocument     *m_document;
     FileManager         *m_fileManager;

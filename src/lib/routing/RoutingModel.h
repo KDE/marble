@@ -29,7 +29,7 @@ namespace Marble
 class RoutingModelPrivate;
 class RouteSkeleton;
 class GeoDataDocument;
-
+class MarbleModel;
 class RoutingModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -49,7 +49,8 @@ public:
 
     enum RoutingItemDataRole {
         CoordinateRole = MarblePlacemarkModel::CoordinateRole, // synchronized with MarblePlacemarkModel
-        TypeRole = CoordinateRole + 24 // avoid conflict with MarblePlacemarkModel
+        TypeRole = CoordinateRole + 24 ,// avoid conflict with MarblePlacemarkModel
+        InstructionWayPointRole = TypeRole + 1,
     };
 
     enum RoutingItemType {
@@ -59,7 +60,7 @@ public:
     };
 
     /** Constructor */
-    explicit RoutingModel( QObject *parent = 0 );
+    explicit RoutingModel( MarbleModel *model, QObject *parent = 0 );
 
     /** Destructor */
     ~RoutingModel();
@@ -92,7 +93,7 @@ public:
     Duration duration() const;
 
     /**
-      * Returns the total route distance (kilometer)
+      * Returns the total route distance ( meters )
       */
     qreal totalDistance() const;
 
@@ -116,6 +117,44 @@ public:
       * index in that case)
       */
     int rightNeighbor( const GeoDataCoordinates &position, RouteSkeleton const *const route ) const;
+
+    /**
+      * returns the time remaining( minutes ) to reach the next instruction point
+      */
+    qreal remainingTime() const;
+
+    /**
+      * returns index of the next instruction to be shown
+      */
+    int showInstructionIndex() const;
+
+    /**
+      * returns the position of next instruction point
+      */
+    GeoDataCoordinates instructionPoint() const;
+
+    /**
+      * returns the next valid instruction
+      */
+    QString instructionText() const;
+
+    /**
+      * returns the total time remaining to reach the destination ( minutes )
+      */
+    qreal totalTimeRemaining() const;
+
+    ///returns whether the gpsLocation is on route
+    bool deviatedFromRoute() const;
+
+public Q_SLOTS:
+    void currentInstruction( GeoDataCoordinates, qreal );
+
+Q_SIGNALS:
+    /**
+     * emits a signal regarding information about total time( minutes ) and distance( metres ) remaining to reach destination
+     */
+    void nextInstruction( qreal totalTimeRemaining, qreal totalDistanceRemaining);
+    void routeCalculated( int );
 
 private:
     RoutingModelPrivate *const d;

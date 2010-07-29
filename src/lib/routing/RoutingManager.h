@@ -19,9 +19,9 @@ namespace Marble
 {
 
 class RoutingManagerPrivate;
-class MarbleWidget;
 class RoutingModel;
 class RouteSkeleton;
+class MarbleModel;
 class GeoDataDocument;
 class AlternativeRoutesModel;
 
@@ -40,7 +40,7 @@ public:
     };
 
     /** Constructor */
-    explicit RoutingManager( MarbleWidget *widget, QObject *parent = 0 );
+    explicit RoutingManager( MarbleModel *marbleModel, QObject *parent = 0 );
 
     /** Destructor */
     ~RoutingManager();

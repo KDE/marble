@@ -198,6 +198,9 @@ set(marblewidget_SRCS
     routing/RoutingWidget.cpp
 
     MarbleRunnerManager.cpp
+
+    routing/AdjustNavigation.cpp
+
     RunnerPlugin.cpp
     MarbleAbstractRunner.cpp
     RunnerTask.cpp

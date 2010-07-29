@@ -148,8 +148,11 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     d->m_widget = marbleWidget;
 
     d->m_routeSkeleton = new RouteSkeleton( this );
-    d->m_routingManager = new RoutingManager( d->m_widget, this );
+
+    //d->m_routingManager = new RoutingManager( d->m_widget, this );
+    d->m_routingManager = d->m_widget->map()->model()->routingManager();
     d->m_ui.routeComboBox->setModel( d->m_routingManager->alternativeRoutesModel() );
+
     d->m_routingLayer = new RoutingLayer( d->m_widget, this );
     d->m_routingLayer->setRouteSkeleton( d->m_routeSkeleton );
     d->m_routingLayer->synchronizeAlternativeRoutesWith( d->m_routingManager->alternativeRoutesModel(), d->m_ui.routeComboBox );

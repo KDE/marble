@@ -20,7 +20,11 @@
 #include "MarbleWidgetPopupMenu.h"
 #include "RoutingModel.h"
 #include "RouteSkeleton.h"
+#include "gps/PositionTracking.h"
+#include "MarbleMap.h"
+#include "MarbleModel.h"
 #include "AlternativeRoutesModel.h"
+
 
 #include <QtCore/QMap>
 #include <QtGui/QAbstractProxyModel>
@@ -174,6 +178,7 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
     QAction *exportAction = new QAction( QObject::tr( "&Export route..." ), q );
     QObject::connect( exportAction, SIGNAL( triggered() ), q, SIGNAL( exportRequested() ) );
     m_contextMenu->addAction( Qt::RightButton, exportAction );
+
 }
 
 void RoutingLayerPrivate::showContextMenu( const QPoint &pos )
@@ -302,12 +307,24 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
 
         if ( type == RoutingModel::Instruction ) {
+
             painter->setBrush( QBrush( QColor::fromRgb( 136, 138, 133, 200 ) ) ); // gray, oxygen palette
             QModelIndex proxyIndex = m_proxyModel->mapFromSource( index );
             if ( m_selectionModel->selection().contains( proxyIndex ) ) {
                 painter->setPen( QColor( Qt::black ) );
                 painter->setBrush( QBrush( QColor::fromRgb( 227, 173, 0, 200 ) ) ); // yellow, oxygen palette
                 painter->drawAnnotation( pos, index.data().toString(), QSize( 120, 60 ), 10, 30, 15, 15 );
+
+                GeoDataLineString currentRoutePoints = qVariantValue<GeoDataLineString>( index.data( RoutingModel::InstructionWayPointRole ) );
+
+                QPen orangePen( QColor::fromRgb(  255, 140, 0, 200 ) ); // dark orange, oxygen palette
+                orangePen.setWidth( 6 );
+                if ( m_routeDirty ) {
+                    orangePen.setStyle( Qt::DotLine );
+                }
+                painter->setPen( orangePen );
+
+                painter->drawPolyline( currentRoutePoints );
 
                 painter->setPen( bluePen );
                 painter->setBrush( QBrush( QColor::fromRgb( 236, 115, 49, 200 ) ) ); // orange, oxygen palette
@@ -316,10 +333,26 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
             QRegion region = painter->regionFromEllipse( pos, 12, 12 );
             m_instructionRegions.push_front( ModelRegion( index, region ) );
             painter->drawEllipse( pos, 8, 8 );
+
         } else if ( !m_routeDirty && type == RoutingModel::Error ) {
             painter->setPen( QColor( Qt::white ) );
             painter->setBrush( QBrush( QColor::fromRgb( 226, 8, 0, 200 ) ) ); // red, oxygen palette
             painter->drawAnnotation( pos, index.data().toString(), QSize( 180, 80 ), 10, 30, 15, 15 );
+        }
+
+        if( !m_routingModel->deviatedFromRoute() ) {
+            qreal timeRemaining = m_routingModel->remainingTime();
+            qreal thresholdMinimum = 1.0;
+
+            if( timeRemaining < thresholdMinimum ) {
+                GeoDataCoordinates location = m_routingModel->instructionPoint();
+                QString nextInstruction = m_routingModel->instructionText();
+                if( !nextInstruction.isNull() ) {
+                    painter->setPen( QColor( Qt::black ) );
+                    painter->setBrush( QBrush( QColor::fromRgb( 227, 173, 0, 200 ) ) ); // yellow, oxygen palette
+                    painter->drawAnnotation( location, nextInstruction, QSize( 120, 60 ), 10, 30, 15, 15 );
+                }
+            }
         }
     }
 }

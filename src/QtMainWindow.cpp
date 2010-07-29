@@ -17,6 +17,7 @@
 #include <QtCore/QUrl>
 #include <QtGui/QCloseEvent>
 #include <QtCore/QTimer>
+#include <QtCore/QVector>
 
 #include <QtGui/QAction>
 #include <QtGui/QLabel>
@@ -66,7 +67,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
         m_downloadRegionDialog( 0 ), m_downloadRegionAction( 0 )
 {
     setUpdatesEnabled( false );
-    
+
     QString selectedPath = marbleDataPath.isEmpty() ? readMarbleDataPath() : marbleDataPath;
     if ( !selectedPath.isEmpty() )
         MarbleDirs::setMarbleDataPath( selectedPath );
@@ -76,15 +77,15 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
     setWindowTitle( tr("Marble - Desktop Globe") );
     setWindowIcon( QIcon(":/icons/marble.png") );
     setCentralWidget( m_controlView );
-    
+
     // Initializing config dialog
     m_configDialog = new QtMarbleConfigDialog( m_controlView->marbleWidget(), this );
     connect( m_configDialog, SIGNAL( settingsChanged() ),
-	     this, SLOT( updateSettings() ) );
+             this, SLOT( updateSettings() ) );
     connect( m_configDialog, SIGNAL( clearVolatileCacheClicked() ),
-	     m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
+             m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
     connect( m_configDialog, SIGNAL( clearPersistentCacheClicked() ),
-	     m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
+             m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
 
     createActions();
     createMenus();
@@ -115,12 +116,12 @@ void MainWindow::createActions()
 
      m_downloadAct = new QAction( QIcon(":/icons/get-hot-new-stuff.png"), tr("Download Maps..."), this);
      connect(m_downloadAct, SIGNAL(triggered()), this, SLOT(openMapSite()));
-              
+
      m_exportMapAct = new QAction( QIcon(":/icons/document-save-as.png"), tr("&Export Map..."), this);
      m_exportMapAct->setShortcut(tr("Ctrl+S"));
      m_exportMapAct->setStatusTip(tr("Save a screenshot of the map"));
      connect(m_exportMapAct, SIGNAL(triggered()), this, SLOT(exportMapScreenShot()));
-     
+
      // Action: Download Region
      m_downloadRegionAction = new QAction( tr( "Download Region..." ), this );
      m_downloadRegionAction->setStatusTip( tr( "Download a map region in different zoom levels for offline usage" ) );
@@ -134,7 +135,7 @@ void MainWindow::createActions()
      m_printPreviewAct = new QAction( QIcon(":/icons/document-printpreview.png"), tr("Print Previe&w ..."), this);
      m_printPreviewAct->setStatusTip(tr("Print a screenshot of the map"));
      connect(m_printPreviewAct, SIGNAL(triggered()), this, SLOT(printPreview()));
-     
+
      m_quitAct = new QAction( QIcon(":/icons/application-exit.png"), tr("&Quit"), this);
      m_quitAct->setShortcut(tr("Ctrl+Q"));
      m_quitAct->setStatusTip(tr("Quit the Application"));
@@ -144,7 +145,7 @@ void MainWindow::createActions()
      m_copyMapAct->setShortcut(tr("Ctrl+C"));
      m_copyMapAct->setStatusTip(tr("Copy a screenshot of the map"));
      connect(m_copyMapAct, SIGNAL(triggered()), this, SLOT(copyMap()));
-     
+
      m_configDialogAct = new QAction( tr("&Configure Marble"), this);
      m_configDialogAct->setStatusTip(tr("Show the configuration dialog"));
      connect(m_configDialogAct, SIGNAL(triggered()), this, SLOT(editSettings()));
@@ -199,7 +200,7 @@ void MainWindow::createActions()
      m_reloadAct->setShortcut(tr("F5"));
      m_reloadAct->setStatusTip(tr("Reload Current Map"));
      connect(m_reloadAct, SIGNAL(triggered()), this, SLOT(reload()));
-     
+
      m_handbookAct = new QAction( QIcon(":/icons/help-contents.png"), tr("Marble Desktop Globe &Handbook"), this);
      m_handbookAct->setShortcut(tr("F1"));
      m_handbookAct->setStatusTip(tr("Show the Handbook for Marble Desktop Globe"));
@@ -232,7 +233,7 @@ void MainWindow::createMenus()
         menuBar()->addAction( m_aboutMarbleAct );
         return;
     }
-    
+
     m_fileMenu = menuBar()->addMenu(tr("&File"));
     m_fileMenu->addAction(m_openAct);
     m_fileMenu->addAction(m_downloadAct);
@@ -259,7 +260,7 @@ void MainWindow::createMenus()
             m_fileMenu->addAction( (*i)->action() );
         }
     }
-    m_fileMenu->addAction(m_reloadAct); 
+    m_fileMenu->addAction(m_reloadAct);
 
     m_fileMenu->addSeparator();
     m_infoBoxesMenu = m_fileMenu->addMenu("&Info Boxes");
@@ -288,10 +289,10 @@ void MainWindow::createMenus()
     m_helpMenu->addSeparator();
     m_helpMenu->addAction(m_aboutMarbleAct);
     m_helpMenu->addAction(m_aboutQtAct);
-    
 
-    connect( m_infoBoxesMenu, SIGNAL( aboutToShow() ), this, SLOT( createInfoBoxesMenu() ) ); 
-    connect( m_onlineServicesMenu, SIGNAL( aboutToShow() ), this, SLOT( createOnlineServicesMenu() ) ); 
+
+    connect( m_infoBoxesMenu, SIGNAL( aboutToShow() ), this, SLOT( createInfoBoxesMenu() ) );
+    connect( m_onlineServicesMenu, SIGNAL( aboutToShow() ), this, SLOT( createOnlineServicesMenu() ) );
 
 //    FIXME: Discuss if this is the best place to put this
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
@@ -303,15 +304,15 @@ void MainWindow::createMenus()
 }
 
 void MainWindow::createInfoBoxesMenu()
-{    
+{
     m_infoBoxesMenu->clear();
-    
+
     // Do not create too many menu entries on a MID
     // FIXME: Set up another way of switching the plugins on and off.
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         return;
     }
-    
+
     m_infoBoxesMenu->addAction(m_lockFloatItemsAct);
     m_infoBoxesMenu->addSeparator();
 
@@ -328,20 +329,20 @@ void MainWindow::createInfoBoxesMenu()
 void MainWindow::createOnlineServicesMenu()
 {
     m_onlineServicesMenu->clear();
-    
+
     // Do not create too many menu entries on a MID
     // FIXME: Set up another way of switching the plugins on and off.
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         return;
     }
-    
+
     QList<RenderPlugin *> renderPluginList = m_controlView->marbleWidget()->renderPlugins();
-    
+
     QList<RenderPlugin *>::const_iterator i = renderPluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
     for (; i != end; ++i ) {
         // FIXME: This will go into the layer manager when AbstractDataPlugin is an interface
-        
+
         if( (*i)->renderType() == RenderPlugin::Online ) {
             m_onlineServicesMenu->addAction( (*i)->action() );
         }
@@ -349,14 +350,14 @@ void MainWindow::createOnlineServicesMenu()
 }
 
 void MainWindow::createPluginMenus()
-{    
+{
     // Remove and delete toolbars if they exist
     while( !m_pluginToolbars.isEmpty() ) {
         QToolBar* tb = m_pluginToolbars.takeFirst();
         this->removeToolBar(tb);
         delete tb;
     }
-    
+
     // Do not create too many menu entries on a MID
     // FIXME: Set up another way of switching the plugins on and off.
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
@@ -417,7 +418,7 @@ void MainWindow::exportMapScreenShot()
     {
         // Take the case into account where no file format is indicated
         const char * format = 0;
-        if ( !fileName.endsWith("png", Qt::CaseInsensitive) 
+        if ( !fileName.endsWith("png", Qt::CaseInsensitive)
            | !fileName.endsWith("jpg", Qt::CaseInsensitive) )
         {
             format = "JPG";
@@ -445,14 +446,14 @@ void MainWindow::printMapScreenShot()
         printPixmap( &printer, mapPixmap );
     }
     delete printDialog;
-#endif    
+#endif
 }
 
 void MainWindow::printPixmap( QPrinter * printer, const QPixmap& pixmap  )
 {
 #ifndef QT_NO_PRINTER
     QSize printSize = pixmap.size();
-    
+
     QRect mapPageRect = printer->pageRect();
 
     printSize.scale( printer->pageRect().size(), Qt::KeepAspectRatio );
@@ -570,8 +571,8 @@ void MainWindow::lockPosition( bool isChecked )
     QList<AbstractFloatItem *>::const_iterator const end = floatItemList.constEnd();
     for (; i != end; ++i )
     {
-        // Locking one would suffice as it affects all. 
-	// Nevertheless go through all.
+        // Locking one would suffice as it affects all.
+        // Nevertheless go through all.
         (*i)->setPositionLocked(isChecked);
     }
 }
@@ -591,7 +592,7 @@ void MainWindow::controlSun()
 
 void MainWindow::showSun( bool active )
 {
-    m_controlView->marbleWidget()->sunLocator()->setShow( active ); 
+    m_controlView->marbleWidget()->sunLocator()->setShow( active );
 }
 
 void MainWindow::reload()
@@ -639,17 +640,17 @@ void MainWindow::updateStatusBar()
 {
     if ( m_positionLabel )
         m_positionLabel->setText( QString( "%1 %2" ).
-        arg( tr( POSITION_STRING ) ).arg( m_position ) ); 
+        arg( tr( POSITION_STRING ) ).arg( m_position ) );
 
     if ( m_distanceLabel )
         m_distanceLabel->setText( QString( "%1 %2" )
-        .arg( tr( DISTANCE_STRING ) ).arg( m_distance ) ); 
+        .arg( tr( DISTANCE_STRING ) ).arg( m_distance ) );
 }
 
 void MainWindow::openFile()
 {
     QStringList fileNames = QFileDialog::getOpenFileNames(this, tr("Open File"),
-                            QString(), 
+                            QString(),
                             tr("All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth KML (*.kml);; Micro World Database II (*.pnt)"));
 
     foreach( const QString &fileName, fileNames ) {
@@ -671,7 +672,7 @@ void MainWindow::setupStatusBar()
 
     m_positionLabel = new QLabel( );
     m_positionLabel->setIndent( 5 );
-    QString templatePositionString = 
+    QString templatePositionString =
         QString( "%1 000\xb0 00\' 00\"_, 000\xb0 00\' 00\"_" ).arg(POSITION_STRING);
     int maxPositionWidth = fontMetrics().boundingRect(templatePositionString).width()
                             + 2 * m_positionLabel->margin() + 2 * m_positionLabel->indent();
@@ -680,7 +681,7 @@ void MainWindow::setupStatusBar()
 
     m_distanceLabel = new QLabel( );
     m_distanceLabel->setIndent( 5 );
-    QString templateDistanceString = 
+    QString templateDistanceString =
         QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING);
     int maxDistanceWidth = fontMetrics().boundingRect(templateDistanceString).width()
                             + 2 * m_distanceLabel->margin() + 2 * m_distanceLabel->indent();
@@ -707,7 +708,7 @@ QString MainWindow::readMarbleDataPath()
 
      settings.beginGroup("MarbleWidget");
          QString marbleDataPath;
-         marbleDataPath = settings.value("marbleDataPath", "").toString(), 
+         marbleDataPath = settings.value("marbleDataPath", "").toString(),
      settings.endGroup();
 
      return marbleDataPath;
@@ -743,30 +744,30 @@ void MainWindow::readSettings()
          m_controlView->marbleWidget()->setProjection(
             (Projection)(settings.value("projection", 0 ).toInt())
          );
-     
-         // Last location on quit
-	 if ( m_configDialog->onStartup() == Marble::LastLocationVisited ) {
-	    m_controlView->marbleWidget()->centerOn(
-		settings.value("quitLongitude", 0.0).toDouble(),
-		settings.value("quitLatitude", 0.0).toDouble() );
-	    m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
-	 }
 
-	 // Set home position
-         m_controlView->marbleWidget()->setHome( 
-            settings.value("homeLongitude", 9.4).toDouble(), 
+         // Last location on quit
+         if ( m_configDialog->onStartup() == Marble::LastLocationVisited ) {
+            m_controlView->marbleWidget()->centerOn(
+                settings.value("quitLongitude", 0.0).toDouble(),
+                settings.value("quitLatitude", 0.0).toDouble() );
+            m_controlView->marbleWidget()->zoomView( settings.value("quitZoom", 1000).toInt() );
+         }
+
+         // Set home position
+         m_controlView->marbleWidget()->setHome(
+            settings.value("homeLongitude", 9.4).toDouble(),
             settings.value("homeLatitude", 54.8).toDouble(),
             settings.value("homeZoom", 1050 ).toInt()
          );
-	 if ( m_configDialog->onStartup() == Marble::ShowHomeLocation ) {
-	    m_controlView->marbleWidget()->goHome();
-	 }
-         
+         if ( m_configDialog->onStartup() == Marble::ShowHomeLocation ) {
+            m_controlView->marbleWidget()->goHome();
+         }
+
          bool isLocked = settings.value( "lockFloatItemPositions", false ).toBool();
          m_lockFloatItemsAct->setChecked( isLocked );
          lockPosition(isLocked);
      settings.endGroup();
-     
+
      settings.beginGroup( "Sun" );
          m_controlView->sunLocator()->setShow( settings.value( "showSun", false ).toBool() );
          m_controlView->sunLocator()->setCitylights( settings.value( "showCitylights", false ).toBool() );
@@ -774,7 +775,7 @@ void MainWindow::readSettings()
      settings.endGroup();
 
      setUpdatesEnabled(true);
-     
+
      // The config dialog has to read settings.
      m_configDialog->readSettings();
 }
@@ -807,9 +808,9 @@ void MainWindow::writeSettings()
          settings.setValue( "homeLatitude",  homeLat );
          settings.setValue( "homeZoom",      homeZoom );
 
-         settings.setValue( "mapTheme",   mapTheme ); 
-         settings.setValue( "projection", projection ); 
-	 
+         settings.setValue( "mapTheme",   mapTheme );
+         settings.setValue( "projection", projection );
+
          // Get the 'quit' values from the widget and store them in the settings.
          qreal  quitLon = m_controlView->marbleWidget()->centerLongitude();
          qreal  quitLat = m_controlView->marbleWidget()->centerLatitude();
@@ -818,16 +819,16 @@ void MainWindow::writeSettings()
          settings.setValue( "quitLongitude", quitLon );
          settings.setValue( "quitLatitude", quitLat );
          settings.setValue( "quitZoom", quitZoom );
-         
+
          settings.setValue( "lockFloatItemPositions", m_lockFloatItemsAct->isChecked() );
      settings.endGroup();
-     
+
      settings.beginGroup( "Sun" );
          settings.setValue( "showSun",        m_controlView->sunLocator()->getShow() );
          settings.setValue( "showCitylights", m_controlView->sunLocator()->getCitylights() );
          settings.setValue( "centerOnSun",    m_controlView->sunLocator()->getCentered() );
      settings.endGroup();
-     
+
      // The config dialog has to write settings.
      m_configDialog->writeSettings();
 }
@@ -861,7 +862,7 @@ void MainWindow::updateSettings()
     // Cache
     m_controlView->marbleWidget()->setPersistentTileCacheLimit( m_configDialog->persistentTileCacheLimit() * 1024 );
     m_controlView->marbleWidget()->setVolatileTileCacheLimit( m_configDialog->volatileTileCacheLimit() * 1024 );
-    
+
     /*
     m_controlView->marbleWidget()->setProxy( m_configDialog->proxyUrl(), m_configDialog->proxyPort(), m_configDialog->user(), m_configDialog->password() );
     */
@@ -920,7 +921,7 @@ void MainWindow::downloadRegion()
     QString const mapThemeId = m_controlView->marbleWidget()->mapThemeId();
     QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
     mDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
-    TileCoordsPyramid const pyramid = m_downloadRegionDialog->region();
+    QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
     m_controlView->marbleWidget()->map()->model()->downloadRegion( sourceDir, pyramid );
 }
 

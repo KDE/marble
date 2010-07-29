@@ -32,6 +32,8 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 
+#include "routing/RoutingManager.h"
+
 namespace Marble
 {
 
@@ -114,6 +116,11 @@ FileViewModel* MarbleDataFacade::fileViewModel() const
 PluginManager* MarbleDataFacade::pluginManager()
 {
     return d->m_model->pluginManager();
+}
+
+RoutingManager* MarbleDataFacade::routingManager()
+{
+    return d->m_model->routingManager();
 }
 
 GeoDataTreeModel* MarbleDataFacade::treeModel() const

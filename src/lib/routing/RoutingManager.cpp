@@ -29,33 +29,34 @@ public:
 
     RoutingModel *m_routingModel;
 
-    AlternativeRoutesModel* m_alternativeRoutesModel;
+    MarbleModel *m_marbleModel;
 
-    MarbleWidget *m_marbleWidget;
+    AlternativeRoutesModel* m_alternativeRoutesModel;
 
     RouteSkeleton *m_route;
 
     bool m_workOffline;
 
+    RoutingManagerPrivate( MarbleModel *marbleModel, RoutingManager* manager, QObject *parent );
+
     MarbleRunnerManager* m_runnerManager;
 
     bool m_haveRoute;
 
-    RoutingManagerPrivate( MarbleWidget *widget, RoutingManager* manager, QObject *parent );
 };
 
-RoutingManagerPrivate::RoutingManagerPrivate( MarbleWidget *widget, RoutingManager* manager, QObject *parent ) :
-        q( manager ), m_routingModel( new RoutingModel( parent ) ),
-        m_alternativeRoutesModel(new AlternativeRoutesModel( widget->model(), parent ) ),
-        m_marbleWidget( widget ), m_route( 0 ), m_workOffline( false ),
-        m_runnerManager( new MarbleRunnerManager( widget->model()->pluginManager(), q ) ),
+RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager* manager, QObject *parent ) :
+        q( manager ), m_routingModel( new RoutingModel( model ) ),
+        m_alternativeRoutesModel(new AlternativeRoutesModel( model, parent ) ),
+        m_marbleModel( model ), m_route( 0 ), m_workOffline( false ),
+        m_runnerManager( new MarbleRunnerManager( model->pluginManager(), q ) ),
         m_haveRoute( false )
 {
     // nothing to do
 }
 
-RoutingManager::RoutingManager( MarbleWidget *widget, QObject *parent ) : QObject( parent ),
-        d( new RoutingManagerPrivate( widget, this, this ) )
+RoutingManager::RoutingManager( MarbleModel *marbleModel, QObject *parent ) : QObject( parent ),
+        d( new RoutingManagerPrivate( marbleModel, this, this ) )
 {
     connect( d->m_runnerManager, SIGNAL( routeRetrieved( GeoDataDocument* ) ),
              this, SLOT( retrieveRoute( GeoDataDocument* ) ) );

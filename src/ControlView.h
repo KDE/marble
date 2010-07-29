@@ -77,7 +77,6 @@ class ControlView : public QWidget
     MarbleWidget      *m_marbleWidget;
     MarbleControlBox  *m_control;
     QSplitter         *m_splitter;
-
     MapThemeManager   *m_mapThemeManager;
 };
 

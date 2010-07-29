@@ -324,12 +324,20 @@ GeoDataDocument* OpenRouteServiceRunner::parse( const QByteArray &content ) cons
             if ( textNodes.size() > 0 && positions.size() > 0 ) {
                 QStringList content = positions.at( 0 ).toElement().text().split( ' ' );
                 if ( content.length() == 2 ) {
-                    GeoDataCoordinates position;
-                    position.setLongitude( content.at( 0 ).toDouble(), GeoDataCoordinates::Degree );
-                    position.setLatitude( content.at( 1 ).toDouble(), GeoDataCoordinates::Degree );
+                    GeoDataLineString *lineString = new GeoDataLineString;
+
+                    for( int i = 0; i < positions.count(); ++i ) {
+                         QStringList pointList = positions.at( i ).toElement().text().split( ' ' );
+                         GeoDataCoordinates position;
+                         position.setLongitude( pointList.at( 0 ).toDouble(), GeoDataCoordinates::Degree );
+                         position.setLatitude( pointList.at( 1 ).toDouble(), GeoDataCoordinates::Degree );
+                         lineString->append( position );
+                    }
+
                     GeoDataPlacemark* instruction = new GeoDataPlacemark;
                     instruction->setName( textNodes.item( 0 ).toElement().text() );
-                    instruction->setCoordinate( GeoDataPoint( position ) );
+                    //instruction->setCoordinate( GeoDataPoint( position ) );
+                    instruction->setGeometry( lineString );
                     result->append( instruction );
                 }
             }

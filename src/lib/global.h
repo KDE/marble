@@ -203,9 +203,21 @@ const qreal FT2M = 1.0 / M2FT;
 const qreal DEG2RAD = M_PI / 180.0;
 const qreal RAD2DEG = 180.0 / M_PI;
 
-// Converstion meter vs kilometer
+// Conversion meter vs kilometer
 const qreal KM2METER = 1000.0;
 const qreal METER2KM = 1.0 / KM2METER;
+
+//Conversion hour vs minute
+const qreal HOUR2MIN = 60.0;
+const qreal MIN2HOUR = 1.0 / HOUR2MIN;
+
+//Conversion (time) minute vs second
+const qreal MIN2SEC = 60.0;
+const qreal SEC2MIN = 1.0 / MIN2SEC;
+
+//Conversion hour vs second
+const qreal HOUR2SEC = 3600.0;
+const qreal SEC2HOUR = 1.0 / HOUR2SEC;
 
 // Version definitions to use with an external application (as digiKam)
 

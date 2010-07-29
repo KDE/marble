@@ -46,10 +46,22 @@ TileCoordsPyramid::TileCoordsPyramid( TileCoordsPyramid const & other )
 {
 }
 
+TileCoordsPyramid::TileCoordsPyramid()
+    :d( new Private( 0, 0 ) )
+{
+
+}
+
 TileCoordsPyramid & TileCoordsPyramid::operator=( TileCoordsPyramid const & rhs )
 {
     TileCoordsPyramid temp( rhs );
     swap( temp );
+    return *this;
+}
+
+TileCoordsPyramid& TileCoordsPyramid::operator <<( TileCoordsPyramid const & other )
+{
+    *d = *other.d;
     return *this;
 }
 

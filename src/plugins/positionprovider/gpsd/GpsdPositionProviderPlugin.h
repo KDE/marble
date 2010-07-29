@@ -44,19 +44,21 @@ class GpsdPositionProviderPlugin: public PositionProviderPlugin
     virtual GeoDataCoordinates position() const;
     virtual GeoDataAccuracy accuracy() const;
     virtual QString error() const;
-    
+    virtual qreal speed() const;
+    virtual qreal direction() const;
+
  private:
     GpsdThread* m_thread;
     PositionProviderStatus m_status;
     GeoDataCoordinates m_position;
     GeoDataAccuracy m_accuracy;
-    
+    qreal m_speed;
+    qreal m_track;
+
  private slots:
     void update(gps_data_t data);
 };
 
 }
-
-
 
 #endif

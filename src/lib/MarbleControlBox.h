@@ -24,7 +24,7 @@
 
 /** @file
  * This file contains the header for MarbleControlBox.
- * 
+ *
  * @author Torsten Rahn <tackat@kde.org>
  * @author Inge Wallin  <inge@lysator.liu.se>
  */
@@ -41,8 +41,8 @@ class GeoDataCoordinates;
 class MarbleWidget;
 class MarbleControlBoxPrivate;
 class MarblePlacemarkModel;
-
-/** 
+class AdjustNavigation;
+/**
  * @short A widget class that contains advanced controls for a
  * MarbleWidget.
  *
@@ -82,7 +82,7 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
      */
     explicit MarbleControlBox( QWidget *parent = 0 );
     ~MarbleControlBox();
- 
+
     /**
      * @brief Add a MarbleWidget to be controlled by this widget.
      * @param widget  the MarbleWidget to be added.
@@ -101,7 +101,7 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
     int minimumZoom() const;
 
     void setMapThemeModel( QStandardItemModel *mapThemeModel );
-  
+
     void updateCelestialModel();
 
     /**
@@ -158,15 +158,13 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
 
     void selectMapTheme( const QString& );
 
-   
-
     void projectionSelected( Projection );
-    
+
  public Q_SLOTS:
 
     void selectTheme( const QString & );
 
-    void selectCurrentMapTheme( const QString& ); 
+    void selectCurrentMapTheme( const QString& );
 
     void selectProjection( Projection projection );
 
@@ -193,7 +191,7 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
     void changeZoom( int zoom );
     void receiveGpsCoordinates( const GeoDataCoordinates& in, qreal speed );
     void enableFileViewActions();
-    
+
     /**
      * @brief Control whether the Navigation tab is shown.
      * @param show  boolean that controls if the Navigation tab is shown.
@@ -225,17 +223,23 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
 
     void projectionSelected( int projectionIndex );
 
+     /// Slot that decides whether recentering should be done
+    void setRecenter( int activate );
+
+    ///Slot for Auto Zooming while navigating
+    void setAutoZoom( bool activate );
+
  private Q_SLOTS:
 
     /// called whenever the user types something new in the search box
     void searchLineChanged( const QString &search );
-    
+
     /// called the Return or Enter key is pressed in the search box.
     void searchReturnPressed();
 
     /// called by the singleShot to initiate a search based on the searchLine
     void search();
-    
+
     void updateButtons( int );
     void mapCenterOnSignal( const QModelIndex & );
 
@@ -247,12 +251,12 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
     void centerOnCurrentLocation();
 
  private:
-    void setWidgetTabShown( QWidget * widget, int insertIndex, 
+    void setWidgetTabShown( QWidget * widget, int insertIndex,
                             bool show, QString &text );
 
 protected:
     /**
-     * @brief Reimplementation of the resizeEvent() of the widget.  
+     * @brief Reimplementation of the resizeEvent() of the widget.
      *
      * If the MarbleControlBox gets shrunk enough, the slider in the
      * Navigation tab will be hidden, leaving only the Zoom Up and

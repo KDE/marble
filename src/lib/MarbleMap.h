@@ -445,7 +445,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
     GeoDataLookAt lookAt() const;
 
     /**
-      * @brief Return the distance (km) at the given globe radius (pixel)
+      * @brief Return the globe radius (pixel) for the given distance (km)
       */
     qreal radiusFromDistance( qreal distance ) const;
 

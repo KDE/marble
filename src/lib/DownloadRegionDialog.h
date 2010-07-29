@@ -15,6 +15,7 @@
 #define MARBLE_DOWNLOADREGIONDIALOG_H
 
 #include <QtGui/QDialog>
+#include <QtCore/QVector>
 
 #include "TileCoordsPyramid.h"
 #include "marble_export.h"
@@ -27,15 +28,14 @@ namespace Marble
 class GeoDataLatLonAltBox;
 class MarbleModel;
 class ViewportParams;
-
 class MARBLE_EXPORT DownloadRegionDialog: public QDialog
 {
     Q_OBJECT
 
  public:
-    enum SelectionMethod { VisibleRegionMethod, SpecifiedRegionMethod };
+    enum SelectionMethod { VisibleRegionMethod, SpecifiedRegionMethod, RouteDownloadMethod };
 
-    explicit DownloadRegionDialog( MarbleModel const * const model, QWidget * const parent = 0,
+    explicit DownloadRegionDialog( MarbleModel *const model, QWidget * const parent = 0,
                                    Qt::WindowFlags const f = 0 );
     ~DownloadRegionDialog();
     void setAllowedTileLevelRange( int const minimumTileLevel,
@@ -43,7 +43,12 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
     void setVisibleTileLevel( int const tileLevel );
     void setSelectionMethod( SelectionMethod const );
 
-    TileCoordsPyramid region() const;
+    QVector<TileCoordsPyramid> region() const;
+
+    /**
+      * @brief calculates the region to be downloaded around a route
+      */
+    QVector<TileCoordsPyramid> routeRegion() const;
 
  public Q_SLOTS:
     void setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const & );
@@ -66,10 +71,16 @@ class MARBLE_EXPORT DownloadRegionDialog: public QDialog
     void toggleSelectionMethod();
     void updateTilesCount();
 
+    /// This slot is called upon to update the route download UI when a route exists
+    void updateRouteDialog();
+    /// This slot sets the unit of the offset(m or km) in the spinbox
+    void setOffsetUnit();
+
  private:
     Q_DISABLE_COPY( DownloadRegionDialog )
     class Private;
     Private * const d;
+
 };
 
 }

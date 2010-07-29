@@ -44,6 +44,10 @@ namespace Marble
 /**
  * @brief This method calculates the shortest distance between two points on a sphere.
  * @brief See: http://en.wikipedia.org/wiki/Great-circle_distance
+ * @param lon1 longitude of first point in radians
+ * @param lat1 latitude of first point in radians
+ * @param lon2 longitude of second point in radians
+ * @param lat2 latitude of second point in radians
  */
 inline qreal distanceSphere( qreal lon1, qreal lat1, qreal lon2, qreal lat2 ) {
 

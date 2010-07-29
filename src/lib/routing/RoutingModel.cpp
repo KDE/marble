@@ -20,6 +20,11 @@
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
 #include "RouteSkeleton.h"
+#include "gps/PositionTracking.h"
+#include "MarbleMap.h"
+#include "MarbleModel.h"
+#include "MarbleWidget.h"
+#include "global.h"
 
 #include <QtCore/QBuffer>
 #include <QtCore/QPointer>
@@ -36,6 +41,8 @@ struct RouteElement {
     GeoDataCoordinates position;
     RoutingModel::RoutingItemType type;
     QString description;
+    GeoDataLineString instructionPointSet;
+    qreal instructionDistance;
 };
 
 /** @todo: Eventually switch to GeoDataDocument as the underlying storage */
@@ -44,18 +51,33 @@ typedef QVector<RouteElement> RouteElements;
 class RoutingModelPrivate
 {
 public:
+    RoutingModelPrivate();
+
     RouteElements m_route;
 
     RoutingModel::Duration m_totalDuration;
 
     qreal m_totalDistance;
-
-    RoutingModelPrivate();
+    qreal m_totalTimeRemaining;
+    qreal m_timeRemaining;
+    qreal m_totalDistanceRemaining;
+    int m_instructionSize;
+    int m_nextInstructionIndex;
+    GeoDataCoordinates m_location;
+    QString m_nextDescription;
+    bool m_routeLeft;
 
     void importPlacemark( const GeoDataPlacemark *placemark );
 };
 
-RoutingModelPrivate::RoutingModelPrivate() : m_totalDistance( 0.0 )
+RoutingModelPrivate::RoutingModelPrivate()
+    : m_totalDistance( 0.0 ),
+      m_timeRemaining( 0.0 ),
+      m_nextInstructionIndex(0),
+      m_instructionSize( 0 ),
+      m_totalTimeRemaining( 0.0 ),
+      m_totalDistanceRemaining( 0.0 ),
+      m_routeLeft( false )
 {
     // nothing to do
 }
@@ -64,26 +86,38 @@ void RoutingModelPrivate::importPlacemark( const GeoDataPlacemark *placemark )
 {
     GeoDataGeometry* geometry = placemark->geometry();
     GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
-    if ( lineString ) {
+    if ( !placemark->name().isEmpty() && placemark->name() != "Route" ) {
+            if( lineString ) {
+                RouteElement element;
+                element.type = RoutingModel::Instruction;
+                element.description = placemark->name();
+                element.position = lineString->at( 0 );
+                for( int i = 0; i<lineString->size(); ++i ) {
+                   element.instructionPointSet << lineString->at( i );
+                }
+                element.instructionDistance = element.instructionPointSet.length( EARTH_RADIUS );
+                m_route.push_back( element );
+            }
+        }
+    else if ( lineString ) {
         for ( int i=0; i<lineString->size(); ++i ) {
             RouteElement element;
             element.type = RoutingModel::WayPoint;
             element.position = lineString->at( i );
             m_route.push_back( element );
         }
-    } else if ( !placemark->name().isEmpty() && placemark->name() != "Route" ) {
-        RouteElement element;
-        element.type = RoutingModel::Instruction;
-        element.description = placemark->name();
-        element.position = placemark->coordinate();
-        m_route.push_back( element );
     }
 }
 
-RoutingModel::RoutingModel( QObject *parent ) :
-        QAbstractListModel( parent ), d( new RoutingModelPrivate )
+RoutingModel::RoutingModel( MarbleModel *model, QObject *parent ) :
+        QAbstractListModel( parent ), d( new RoutingModelPrivate() )
 {
-    // nothing to do
+   if( model )
+    {
+        PositionTracking *tracking = model->positionTracking();
+        QObject::connect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
+                 this, SLOT( currentInstruction( GeoDataCoordinates, qreal ) ) );
+    }
 }
 
 RoutingModel::~RoutingModel()
@@ -130,6 +164,9 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
         case TypeRole:
             return QVariant::fromValue( d->m_route.at( index.row() ).type );
             break;
+        case InstructionWayPointRole:
+            return QVariant::fromValue( d->m_route.at( index.row() ).instructionPointSet );
+            break;
         default:
             return QVariant();
         }
@@ -164,6 +201,14 @@ RoutingModel::Duration RoutingModel::duration() const
 
 qreal RoutingModel::totalDistance() const
 {
+    GeoDataLineString wayPoints;
+    foreach( const RouteElement &element, d->m_route ) {
+        if ( element.type == WayPoint ) {
+            wayPoints << element.position;
+        }
+    }
+    d->m_totalDistance = wayPoints.length( EARTH_RADIUS );
+
     return d->m_totalDistance;
 }
 
@@ -269,6 +314,130 @@ int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteSkelet
     }
 
     return route->size()-1;
+}
+
+void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed )
+{
+    if( rowCount() != 0 ) {
+
+        QList<RouteElement> instructions;
+        QVector<GeoDataCoordinates> wayPoints;
+        QVector<GeoDataCoordinates> instructionPoints;
+
+        foreach( const RouteElement &element, d->m_route ) {
+            if ( element.type == Instruction ) {
+                instructions << element;
+                instructionPoints << element.position;
+            }
+
+            if( element.type == WayPoint ) {
+                wayPoints << element.position;
+            }
+        }
+
+        qreal minimumWaypointDistance = 0.0;
+        int waypointIndex = 0;
+        //closest waypoint to the current geolocation
+        for( int i = 0; i< wayPoints.size(); ++i ) {
+            qreal waypointDistance = distanceSphere( location, wayPoints[i] );
+            if( i == 0 ) {
+                minimumWaypointDistance = waypointDistance;
+                waypointIndex = i;
+            }
+            else if( waypointDistance < minimumWaypointDistance ) {
+                minimumWaypointDistance = waypointDistance;
+                waypointIndex = i;
+            }
+        }
+
+        d->m_instructionSize = instructions.size();
+
+        qreal totalTimeRemaining = 0.0;
+        qreal totalDistanceRemaining = 0.0;
+        qreal distanceRemaining = 0.0;
+        //if there is no route but source and destination are specified
+        if( wayPoints.size() != 0 ) {
+            if( !( wayPoints[waypointIndex] == wayPoints[wayPoints.size()-1] ) ) {
+                qreal currentWaypointOffset;
+                for( int i = 0; i<instructions.size(); ++i ) {
+                    int instructionSize = instructions[i].instructionPointSet.size();
+                    for ( int j = 0; j<instructionSize; ++j ) {
+                       if( wayPoints[waypointIndex] ==  instructions[i].instructionPointSet.at(j) ) {
+                           d->m_nextInstructionIndex = i + 1;
+                           currentWaypointOffset = j;
+                       }
+                    }
+                }
+
+                if( d->m_nextInstructionIndex != instructions.size() ) {
+                    d->m_location = instructions[d->m_nextInstructionIndex].position;
+                    d->m_nextDescription = instructions[d->m_nextInstructionIndex].description;
+                }
+
+                qreal radius = EARTH_RADIUS;
+                //distance between current position and next instruction point
+                distanceRemaining = instructions[d->m_nextInstructionIndex-1].instructionPointSet.length( radius, currentWaypointOffset );
+
+                GeoDataLineString remainingInstructionPoints;
+                for( int i = waypointIndex; i < wayPoints.size(); ++i ) {
+                    remainingInstructionPoints << wayPoints[i];
+                }
+
+                totalDistanceRemaining = remainingInstructionPoints.length( radius );
+                if( speed != 0 ) {
+                    d->m_timeRemaining = ( distanceRemaining / speed ) * SEC2MIN;
+                    totalTimeRemaining = ( totalDistanceRemaining / speed ) * SEC2MIN;
+                }
+            }
+            else {
+                totalTimeRemaining = 0.0;
+                totalDistanceRemaining = 0.0;
+            }
+
+            if( distanceRemaining < instructions[d->m_nextInstructionIndex-1].instructionDistance * KM2METER ) {
+                d->m_routeLeft = false;
+            }
+            else {
+                d->m_routeLeft = true;
+            }
+        }
+
+        d->m_totalTimeRemaining = totalTimeRemaining;
+        d->m_totalDistanceRemaining = totalDistanceRemaining;
+
+        emit nextInstruction( d->m_totalTimeRemaining, d->m_totalDistanceRemaining );
+    }
+
+}
+
+qreal RoutingModel::remainingTime() const
+{
+   return d->m_timeRemaining;
+}
+
+qreal RoutingModel::totalTimeRemaining() const
+{
+    return d->m_totalTimeRemaining;
+}
+
+GeoDataCoordinates RoutingModel::instructionPoint() const
+{
+    return d->m_location;
+}
+
+QString RoutingModel::instructionText() const
+{
+    if( d->m_nextInstructionIndex < d->m_instructionSize ) {
+        return d->m_nextDescription;
+    }
+    else {
+        return QString::null;
+    }
+}
+
+bool RoutingModel::deviatedFromRoute() const
+{
+    return d->m_routeLeft;
 }
 
 } // namespace Marble

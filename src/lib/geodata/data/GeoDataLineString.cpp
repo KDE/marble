@@ -99,7 +99,7 @@ GeoDataCoordinates GeoDataLineStringPrivate::findDateLine( const GeoDataCoordina
                           + fabs( currentSign * M_PI - currentCoords.longitude() );
 
     if ( longitudeDiff < 0.001 || recursionCounter == 100 ) {
-//        mDebug() << "stopped at recursion" << recursionCounter << " and longitude difference " << longitudeDiff; 
+//        mDebug() << "stopped at recursion" << recursionCounter << " and longitude difference " << longitudeDiff;
         return currentCoords;
     }
     ++recursionCounter;
@@ -267,17 +267,17 @@ bool GeoDataLineString::tessellate() const
 void GeoDataLineString::setTessellate( bool tessellate )
 {
     GeoDataGeometry::detach();
-    // According to the KML reference the tesselation of line strings in Google Earth 
-    // is generally done along great circles. However for subsequent points that share 
+    // According to the KML reference the tesselation of line strings in Google Earth
+    // is generally done along great circles. However for subsequent points that share
     // the same latitude the latitude circles are followed. Our Tesselate and RespectLatitude
-    // Flags provide this behaviour. For true polygons the latitude circles don't get considered. 
+    // Flags provide this behaviour. For true polygons the latitude circles don't get considered.
 
     if ( tessellate ) {
-        p()->m_tessellationFlags |= Tessellate; 
-        p()->m_tessellationFlags |= RespectLatitudeCircle; 
+        p()->m_tessellationFlags |= Tessellate;
+        p()->m_tessellationFlags |= RespectLatitudeCircle;
     } else {
-        p()->m_tessellationFlags ^= Tessellate; 
-        p()->m_tessellationFlags ^= RespectLatitudeCircle; 
+        p()->m_tessellationFlags ^= Tessellate;
+        p()->m_tessellationFlags ^= RespectLatitudeCircle;
     }
 }
 
@@ -313,7 +313,7 @@ GeoDataLineString GeoDataLineString::toNormalized() const
 
         GeoDataCoordinates normalizedCoords( *itCoords );
         normalizedCoords.set( lon, lat, alt );
-        normalizedLineString << normalizedCoords;        
+        normalizedLineString << normalizedCoords;
     }
 
     return normalizedLineString;
@@ -326,7 +326,7 @@ QVector<GeoDataLineString*> GeoDataLineString::toRangeCorrected() const
         qDeleteAll( p()->m_rangeCorrected ); // This shouldn't be needed
 
         GeoDataLineString poleCorrected;
-        
+
         if ( latLonAltBox().crossesDateLine() )
         {
             GeoDataLineString normalizedLineString = toNormalized();
@@ -441,7 +441,7 @@ void GeoDataLineStringPrivate::toDateLineCorrected(
     QVector<GeoDataCoordinates>::const_iterator itPoint = itStartPoint;
     QVector<GeoDataCoordinates>::const_iterator itPreviousPoint = itPoint;
 
-    TessellationFlags f = q.tessellationFlags();   
+    TessellationFlags f = q.tessellationFlags();
 
     GeoDataLineString * unfinishedLineString = 0;
 
@@ -495,7 +495,7 @@ void GeoDataLineStringPrivate::toDateLineCorrected(
                     delete dateLineCorrected;
                 }
 
-                // If it's a finished linear ring restore the "remembered" unfinished String 
+                // If it's a finished linear ring restore the "remembered" unfinished String
                 if ( isClosed && !unfinished && unfinishedLineString ) {
                     dateLineCorrected = unfinishedLineString;
                 }
@@ -507,7 +507,7 @@ void GeoDataLineStringPrivate::toDateLineCorrected(
 
             *dateLineCorrected << currentTemp;
             *dateLineCorrected << *itPoint;
-            
+
         }
         else {
             *dateLineCorrected << *itPoint;
@@ -542,28 +542,33 @@ GeoDataLatLonAltBox GeoDataLineString::latLonAltBox() const
     return p()->m_latLonAltBox;
 }
 
-qreal GeoDataLineString::length( qreal planetRadius ) const
+qreal GeoDataLineString::length( qreal planetRadius, int offset ) const
 {
-    GeoDataCoordinates previousCoords;
-    qreal  length = 0.0;
 
-    GeoDataLineString::ConstIterator itBegin = constBegin();
+    if( offset < 0 || offset >= size() ) {
+        return 0;
+    }
+
+    GeoDataCoordinates previousCoords;
+    qreal length = 0.0;
+
+    GeoDataLineString::ConstIterator itBegin = constBegin() + offset;
     GeoDataLineString::ConstIterator itEnd = constEnd();
 
     GeoDataLineString::ConstIterator it = itBegin;
 
-    for (; it != itEnd; ++it )
+    for(; it != itEnd; ++it )
     {
-        if ( it != itBegin ) {
+        if( it != itBegin )
+        {
             length += distanceSphere( previousCoords, *it );
         }
-
         previousCoords = *it;
     }
 
     return planetRadius * length;
-}
 
+}
 QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator pos )
 {
     GeoDataGeometry::detach();
@@ -573,7 +578,7 @@ QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoData
     return p()->m_vector.erase( pos );
 }
 
-QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator begin, 
+QVector<GeoDataCoordinates>::Iterator GeoDataLineString::erase ( QVector<GeoDataCoordinates>::Iterator begin,
                                                                  QVector<GeoDataCoordinates>::Iterator end )
 {
     GeoDataGeometry::detach();
@@ -597,16 +602,16 @@ void GeoDataLineString::pack( QDataStream& stream ) const
 
     stream << size();
     stream << (qint32)(p()->m_tessellationFlags);
-    
-    for( QVector<GeoDataCoordinates>::const_iterator iterator 
-          = p()->m_vector.constBegin(); 
+
+    for( QVector<GeoDataCoordinates>::const_iterator iterator
+          = p()->m_vector.constBegin();
          iterator != p()->m_vector.constEnd();
          ++iterator ) {
         mDebug() << "innerRing: size" << p()->m_vector.size();
         GeoDataCoordinates coord = ( *iterator );
         coord.pack( stream );
     }
-    
+
 }
 
 void GeoDataLineString::unpack( QDataStream& stream )

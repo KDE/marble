@@ -9,7 +9,7 @@
 //
 
 #include "PositionProviderPlugin.h"
-
+using namespace Marble;
 
 
 Marble::PositionProviderPlugin::PositionProviderPlugin()
@@ -20,6 +20,15 @@ Marble::PositionProviderPlugin::~PositionProviderPlugin()
 {
 }
 
+qreal Marble::PositionProviderPlugin::speed() const
+{
+    return 0;
+}
+
+qreal Marble::PositionProviderPlugin::direction() const
+{
+    return 0;
+}
 
 
 #include "PositionProviderPlugin.moc"

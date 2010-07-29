@@ -24,6 +24,8 @@
 #include <QtGui/QRadioButton>
 #include <QtGui/QShowEvent>
 #include <QtGui/QVBoxLayout>
+#include <QtGui/QSpinBox>
+#include <QtCore/QSet>
 
 #include "AbstractScanlineTextureMapper.h"
 #include "GeoDataLatLonAltBox.h"
@@ -35,16 +37,22 @@
 #include "TileId.h"
 #include "TileLevelRangeWidget.h"
 #include "TileLoaderHelper.h"
+#include "routing/RoutingManager.h"
+#include "routing/RoutingModel.h"
+#include "GeoDataCoordinates.h"
+#include "GeoDataLineString.h"
 
 namespace Marble
 {
 
 int const maxTilesCount = 100000;
+int const minimumRouteOffset = 0;
+int const maximumRouteOffset = 10000;
 
 class DownloadRegionDialog::Private
 {
 public:
-    Private( MarbleModel const * const model, QDialog * const dialog );
+    Private( MarbleModel *const model, QDialog * const dialog );
     QWidget * createSelectionMethodBox();
     QLayout * createTilesCounter();
     QWidget * createOkCancelButtonBox();
@@ -52,30 +60,35 @@ public:
     int rad2PixelX( qreal const lon ) const;
     int rad2PixelY( qreal const lat ) const;
     AbstractScanlineTextureMapper const * textureMapper() const;
-
+    bool hasRoute() const;
     QDialog * m_dialog;
     QRadioButton * m_visibleRegionMethodButton;
     QRadioButton * m_specifiedRegionMethodButton;
     LatLonBoxWidget * m_latLonBoxWidget;
     TileLevelRangeWidget * m_tileLevelRangeWidget;
+    QRadioButton *m_routeDownloadMethodButton;
+    QDoubleSpinBox *m_routeOffsetSpinBox;
     QLabel * m_tilesCountLabel;
     QLabel * m_tilesCountLimitInfo;
     QPushButton * m_okButton;
     QPushButton * m_applyButton;
     int m_visibleTileLevel;
-    MarbleModel const * const m_model;
+    MarbleModel const*const m_model;
     GeoSceneTexture const * m_textureLayer;
     SelectionMethod m_selectionMethod;
     GeoDataLatLonBox m_visibleRegion;
+    RoutingModel *m_routingModel;
 };
 
-DownloadRegionDialog::Private::Private( MarbleModel const * const model,
+DownloadRegionDialog::Private::Private( MarbleModel * const model,
                                         QDialog * const dialog )
     : m_dialog( dialog ),
       m_visibleRegionMethodButton( 0 ),
       m_specifiedRegionMethodButton( 0 ),
       m_latLonBoxWidget( new LatLonBoxWidget ),
       m_tileLevelRangeWidget( new TileLevelRangeWidget ),
+      m_routeDownloadMethodButton( 0 ),
+      m_routeOffsetSpinBox( 0 ),
       m_tilesCountLabel( 0 ),
       m_tilesCountLimitInfo( 0 ),
       m_okButton( 0 ),
@@ -84,7 +97,8 @@ DownloadRegionDialog::Private::Private( MarbleModel const * const model,
       m_model( model ),
       m_textureLayer( model->textureMapper()->textureLayer() ),
       m_selectionMethod( VisibleRegionMethod ),
-      m_visibleRegion()
+      m_visibleRegion(),
+      m_routingModel( model->routingManager()->routingModel() )
 {
     m_latLonBoxWidget->setEnabled( false );
     m_latLonBoxWidget->setLatLonBox( m_visibleRegion );
@@ -93,18 +107,56 @@ DownloadRegionDialog::Private::Private( MarbleModel const * const model,
 
 QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
 {
-    m_visibleRegionMethodButton = new QRadioButton( tr( "Visible region" ));
-    m_specifiedRegionMethodButton = new QRadioButton( tr( "Specify region" ));
-    connect( m_specifiedRegionMethodButton, SIGNAL( toggled( bool )),
+    m_visibleRegionMethodButton = new QRadioButton( tr( "Visible region" ) );
+    m_specifiedRegionMethodButton = new QRadioButton( tr( "Specify region" ) );
+
+    m_routeDownloadMethodButton = new QRadioButton( tr( "Download Route" ) );
+    m_routeDownloadMethodButton->setToolTip( tr( "Enabled when a route exists" ) );
+    m_routeDownloadMethodButton->setEnabled( hasRoute() );
+    m_routeDownloadMethodButton->setChecked( hasRoute() );
+    m_routeOffsetSpinBox = new QDoubleSpinBox();
+    m_routeOffsetSpinBox->setEnabled( hasRoute() );
+    m_routeOffsetSpinBox->setRange( minimumRouteOffset, maximumRouteOffset );
+    int defaultOffset = 500;
+    m_routeOffsetSpinBox->setValue( defaultOffset );
+    m_routeOffsetSpinBox->setSingleStep( 100 );
+    m_routeOffsetSpinBox->setSuffix( tr( "m" ) );
+    m_routeOffsetSpinBox->setDecimals( 0 );
+    m_routeOffsetSpinBox->setAlignment( Qt::AlignRight );
+
+    QLabel * const offsetLabel = new QLabel( tr( "Offset from route:" ) );
+    offsetLabel->setAlignment( Qt::AlignHCenter );
+
+    connect( m_visibleRegionMethodButton, SIGNAL( toggled( bool ) ),
+             m_dialog, SLOT( toggleSelectionMethod() ) );
+    connect( m_specifiedRegionMethodButton, SIGNAL( toggled( bool ) ),
              m_dialog, SLOT( toggleSelectionMethod() ));
+    connect( m_routeDownloadMethodButton, SIGNAL( toggled( bool ) ),
+             m_dialog, SLOT( toggleSelectionMethod() ) );
+    connect( m_routingModel, SIGNAL( modelReset() ), m_dialog, SLOT( updateRouteDialog() ) );
+    connect( m_routingModel, SIGNAL( rowsInserted( QModelIndex, int, int ) ),
+             m_dialog, SLOT( updateRouteDialog() ) );
+    connect( m_routingModel, SIGNAL( rowsRemoved( QModelIndex, int, int ) ),
+             m_dialog, SLOT( updateRouteDialog() ) );
+
+    QHBoxLayout *routeOffsetLayout = new QHBoxLayout;
+    routeOffsetLayout->addWidget( offsetLabel );
+    routeOffsetLayout->insertSpacing( 0, 25 );
+    routeOffsetLayout->addWidget( m_routeOffsetSpinBox );
+
+    QVBoxLayout * const routeLayout = new QVBoxLayout;
+    routeLayout->addWidget( m_routeDownloadMethodButton );
+    routeLayout->addLayout( routeOffsetLayout );
 
     QVBoxLayout * const layout = new QVBoxLayout;
     layout->addWidget( m_visibleRegionMethodButton );
+    layout->addLayout( routeLayout );
     layout->addWidget( m_specifiedRegionMethodButton );
     layout->addWidget( m_latLonBoxWidget );
 
     QGroupBox * const selectionMethodBox = new QGroupBox( tr( "Selection method" ));
     selectionMethodBox->setLayout( layout );
+
     return selectionMethodBox;
 }
 
@@ -130,9 +182,9 @@ QWidget * DownloadRegionDialog::Private::createOkCancelButtonBox()
     m_okButton = buttonBox->addButton( QDialogButtonBox::Ok );
     m_applyButton = buttonBox->addButton( QDialogButtonBox::Apply );
     buttonBox->addButton( QDialogButtonBox::Cancel );
-    connect( buttonBox, SIGNAL( accepted() ), m_dialog, SLOT( accept() ));
-    connect( buttonBox, SIGNAL( rejected() ), m_dialog, SLOT( reject() ));
-    connect( m_applyButton, SIGNAL( clicked() ), m_dialog, SIGNAL( applied() ));
+    connect( buttonBox, SIGNAL( accepted() ), m_dialog, SLOT( accept() ) );
+    connect( buttonBox, SIGNAL( rejected() ), m_dialog, SLOT( reject() ) );
+    connect( m_applyButton, SIGNAL( clicked() ), m_dialog, SIGNAL( applied() ) );
     return buttonBox;
 }
 
@@ -142,7 +194,7 @@ int DownloadRegionDialog::Private::rad2PixelX( qreal const lon ) const
     qreal const globalWidth = m_textureLayer->tileSize().width()
         * TileLoaderHelper::levelToColumn( m_textureLayer->levelZeroColumns(),
                                            m_visibleTileLevel );
-    return static_cast<int>( globalWidth * 0.5 + lon * ( globalWidth / ( 2.0 * M_PI ) ));
+    return static_cast<int>( globalWidth * 0.5 + lon * ( globalWidth / ( 2.0 * M_PI ) ) );
 }
 
 // copied from AbstractScanlineTextureMapper and slightly adjusted
@@ -174,14 +226,28 @@ AbstractScanlineTextureMapper const * DownloadRegionDialog::Private::textureMapp
     return result;
 }
 
+bool DownloadRegionDialog::Private::hasRoute() const
+{
+    GeoDataLineString waypoints;
 
-DownloadRegionDialog::DownloadRegionDialog( MarbleModel const * const model, QWidget * const parent,
+    for( int i = 0; i < m_routingModel->rowCount(); ++i ) {
+        QModelIndex index = m_routingModel->index( i, 0 );
+        GeoDataCoordinates position = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
+        RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
+
+        if ( type == RoutingModel::WayPoint ) {
+            return true;
+        }
+    }
+    return false;
+}
+
+DownloadRegionDialog::DownloadRegionDialog( MarbleModel *const model, QWidget * const parent,
                                             Qt::WindowFlags const f )
     : QDialog( parent, f ),
       d( new Private( model, this ))
 {
     setWindowTitle( tr( "Download Region" ));
-
     QVBoxLayout * const layout = new QVBoxLayout;
     layout->addWidget( d->createSelectionMethodBox() );
     layout->addWidget( d->m_tileLevelRangeWidget );
@@ -189,12 +255,13 @@ DownloadRegionDialog::DownloadRegionDialog( MarbleModel const * const model, QWi
     layout->addWidget( d->createOkCancelButtonBox() );
     setLayout( layout );
 
-    connect( d->m_latLonBoxWidget, SIGNAL( valueChanged() ), SLOT( updateTilesCount() ));
-    connect( d->m_tileLevelRangeWidget, SIGNAL( topLevelChanged( int )),
-             SLOT( updateTilesCount() ));
+    connect( d->m_latLonBoxWidget, SIGNAL( valueChanged() ), SLOT( updateTilesCount() ) );
+    connect( d->m_tileLevelRangeWidget, SIGNAL( topLevelChanged( int ) ),
+             SLOT( updateTilesCount() ) );
     connect( d->m_tileLevelRangeWidget, SIGNAL( bottomLevelChanged( int )),
-             SLOT( updateTilesCount() ));
-    updateTilesCount();
+             SLOT( updateTilesCount() ) );
+    connect( d->m_routeOffsetSpinBox, SIGNAL( valueChanged( double ) ), SLOT( updateTilesCount() ) );
+    connect( d->m_routeOffsetSpinBox, SIGNAL( valueChanged( double ) ), SLOT( setOffsetUnit() ) );
 }
 
 DownloadRegionDialog::~DownloadRegionDialog()
@@ -221,26 +288,36 @@ void DownloadRegionDialog::setSelectionMethod( SelectionMethod const selectionMe
     //     -> radioButton->setChecked() -> ...
     d->m_visibleRegionMethodButton->blockSignals( true );
     d->m_specifiedRegionMethodButton->blockSignals( true );
+    d->m_routeDownloadMethodButton->blockSignals( true );
 
     d->m_selectionMethod = selectionMethod;
     switch ( selectionMethod ) {
     case VisibleRegionMethod:
         d->m_visibleRegionMethodButton->setChecked( true );
+        d->m_routeOffsetSpinBox->setEnabled( false );
         d->m_latLonBoxWidget->setEnabled( false );
         setSpecifiedLatLonAltBox( d->m_visibleRegion );
         break;
     case SpecifiedRegionMethod:
         d->m_specifiedRegionMethodButton->setChecked( true );
+        d->m_routeOffsetSpinBox->setEnabled( false );
         d->m_latLonBoxWidget->setEnabled( true );
         break;
+    case RouteDownloadMethod:
+        d->m_routeDownloadMethodButton->setChecked( true );
+        d->m_routeOffsetSpinBox->setEnabled( true );
+        d->m_latLonBoxWidget->setEnabled( false );
     }
 
+    updateTilesCount();
     d->m_visibleRegionMethodButton->blockSignals( false );
     d->m_specifiedRegionMethodButton->blockSignals( false );
+    d->m_routeDownloadMethodButton->blockSignals( false );
 }
 
-TileCoordsPyramid DownloadRegionDialog::region() const
+QVector<TileCoordsPyramid> DownloadRegionDialog::region() const
 {
+
     // check whether "visible region" or "lat/lon region" is selection method
     GeoDataLatLonBox downloadRegion;
     switch ( d->m_selectionMethod ) {
@@ -249,6 +326,13 @@ TileCoordsPyramid DownloadRegionDialog::region() const
         break;
     case SpecifiedRegionMethod:
         downloadRegion = d->m_latLonBoxWidget->latLonBox();
+        break;
+   case RouteDownloadMethod:
+        QVector<TileCoordsPyramid> pyramid;
+        pyramid =  routeRegion();
+        if( !pyramid.isEmpty() ) {
+            return pyramid;
+        }
         break;
     }
 
@@ -315,8 +399,10 @@ TileCoordsPyramid DownloadRegionDialog::region() const
           bottomLevelY2 / tileHeight + ( bottomLevelY2 % tileHeight > 0 ? 1 : 0 ));
     mDebug() << "bottom level tile coords: (x1/y1/size):" << bottomLevelTileCoords;
     coordsPyramid.setBottomLevelCoords( bottomLevelTileCoords );
-    mDebug() << "tiles count:" << coordsPyramid.tilesCount();
-    return coordsPyramid;
+    mDebug() << "tiles count:" << coordsPyramid.tilesCount( );
+    QVector<TileCoordsPyramid> pyramid;
+    pyramid << coordsPyramid;
+    return pyramid;
 }
 
 void DownloadRegionDialog::setSpecifiedLatLonAltBox( GeoDataLatLonAltBox const & region )
@@ -357,22 +443,65 @@ void DownloadRegionDialog::showEvent( QShowEvent * event )
 
 void DownloadRegionDialog::toggleSelectionMethod()
 {
+    // TODO:QButtonGroup would be easier to handle
     switch ( d->m_selectionMethod ) {
     case VisibleRegionMethod:
-        setSelectionMethod( SpecifiedRegionMethod );
+        if( d->m_specifiedRegionMethodButton->isChecked() ) {
+            setSelectionMethod( SpecifiedRegionMethod );
+        }
+        else if( d->m_routeDownloadMethodButton->isChecked() ) {
+            setSelectionMethod( RouteDownloadMethod );
+        }
+
         break;
     case SpecifiedRegionMethod:
-        setSelectionMethod( VisibleRegionMethod );
+        if( d->m_visibleRegionMethodButton->isChecked() ) {
+            setSelectionMethod( VisibleRegionMethod );
+        }
+        else if ( d->m_routeDownloadMethodButton->isChecked() ) {
+            setSelectionMethod( RouteDownloadMethod );
+        }
         break;
+    case RouteDownloadMethod:
+        if( d->m_specifiedRegionMethodButton->isChecked() ) {
+            setSelectionMethod( SpecifiedRegionMethod );
+        }
+        else if ( d->m_visibleRegionMethodButton->isChecked() ) {
+            setSelectionMethod( VisibleRegionMethod );
+        }
+        break;
+
     }
 }
 
 void DownloadRegionDialog::updateTilesCount()
 {
-    qint64 tilesCount;
+    qint64 tilesCount = 0;
+    QString themeId( d->m_model->mapThemeId() );
     if ( d->m_textureLayer ) {
-        TileCoordsPyramid const pyramid = region();
-        tilesCount = pyramid.tilesCount();
+        QVector<TileCoordsPyramid> const pyramid = region();
+        Q_ASSERT( !pyramid.isEmpty() );
+        if( pyramid.size() == 1 ) {
+            tilesCount = pyramid[0].tilesCount();
+        }
+        else {
+            for( int level = pyramid[0].bottomLevel(); level>= pyramid[0].topLevel(); --level ) {
+                QSet<TileId> tileIdSet;
+                for( int i = 0; i < pyramid.size(); ++i ) {
+                    QRect const coords = pyramid[i].coords( level );
+                    int x1, y1, x2, y2;
+                    coords.getCoords( &x1, &y1, &x2, &y2 );
+                    for ( int x = x1; x <= x2; ++x ) {
+                        for ( int y = y1; y <= y2; ++y ) {
+                            TileId const tileId( themeId, level, x, y );
+                            tileIdSet.insert( tileId );
+                        }
+                    }
+                }
+                tilesCount += tileIdSet.count();
+            }
+        }
+
     }
     else {
         tilesCount = 0;
@@ -380,14 +509,133 @@ void DownloadRegionDialog::updateTilesCount()
 
     if ( tilesCount > maxTilesCount ) {
         d->m_tilesCountLimitInfo->setText( tr( "There is a limit of %n tiles to download.", "",
-                                               maxTilesCount ));
+                                               maxTilesCount ) );
     } else {
         d->m_tilesCountLimitInfo->clear();
     }
-    d->m_tilesCountLabel->setText( QString::number( tilesCount ));
+    d->m_tilesCountLabel->setText( QString::number( tilesCount ) );
     bool const tilesCountWithinLimits = tilesCount > 0 && tilesCount <= maxTilesCount;
     d->m_okButton->setEnabled( tilesCountWithinLimits );
     d->m_applyButton->setEnabled( tilesCountWithinLimits );
+}
+
+QVector<TileCoordsPyramid> DownloadRegionDialog::routeRegion() const
+{
+    GeoDataLineString waypoints;
+    if( d->m_routingModel->rowCount() != 0 ) {
+        for( int i = 0; i < d->m_routingModel->rowCount(); ++i ) {
+            QModelIndex index = d->m_routingModel->index( i, 0 );
+            GeoDataCoordinates position = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
+            RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
+
+            if ( type == RoutingModel::WayPoint ) {
+                waypoints << position;
+            }
+        }
+        int const topLevel = d->m_tileLevelRangeWidget->topLevel();
+        int const bottomLevel = d->m_tileLevelRangeWidget->bottomLevel();
+        TileCoordsPyramid coordsPyramid( topLevel, bottomLevel );
+
+        int const tileWidth = d->m_textureLayer->tileSize().width();
+        int const tileHeight = d->m_textureLayer->tileSize().height();
+
+        qreal offset = d->m_routeOffsetSpinBox->value();
+        if( d->m_routeOffsetSpinBox->suffix() == "KM") {
+            offset *= KM2METER;
+        }
+        qreal radius = d->m_model->planetRadius();
+        QVector<TileCoordsPyramid> pyramid;
+        qreal radianOffset = offset / radius;
+
+        for( int i = 1; i < waypoints.size(); ++i ) {
+            GeoDataCoordinates position = waypoints[i];
+            qreal lonCenter = position.longitude();
+            qreal latCenter = position.latitude();
+
+            // coordinates of the of the vertices of the square(topleft and bottomright) at an offset distance from the waypoint
+            qreal latNorth = asin( sin( latCenter ) *  cos( radianOffset ) +  cos( latCenter ) * sin( radianOffset )  * cos( 7*M_PI/4 ) );
+            qreal dlonWest = atan2( sin( 7*M_PI/4 ) * sin( radianOffset ) * cos( latCenter ),  cos( radianOffset ) -  sin( latCenter ) * sin( latNorth ) );
+            qreal lonWest  = fmod( lonCenter - dlonWest + M_PI, 2*M_PI ) - M_PI;
+            qreal latSouth = asin( sin( latCenter ) * cos( radianOffset ) + cos( latCenter ) * sin( radianOffset ) * cos( 3*M_PI/4 ) );
+            qreal dlonEast =  atan2( sin( 3*M_PI/4 ) * sin( radianOffset ) * cos( latCenter ),  cos( radianOffset ) -  sin( latCenter ) * sin( latSouth ) );
+            qreal lonEast  = fmod( lonCenter - dlonEast+M_PI, 2*M_PI ) - M_PI;
+
+            int const northY = d->rad2PixelY( latNorth );
+            int const southY = d->rad2PixelY( latSouth );
+            int const eastX =  d->rad2PixelX( lonEast );
+            int const westX =  d->rad2PixelX( lonWest );
+
+            int const west  = qMin( westX, eastX );
+            int const north = qMin( northY, southY );
+            int const east  = qMax( westX, eastX );
+            int const south = qMax( northY, southY );
+
+            int bottomLevelTileX1 = 0;
+            int bottomLevelTileY1 = 0;
+            int bottomLevelTileX2 = 0;
+            int bottomLevelTileY2 = 0;
+
+            if ( d->m_visibleTileLevel > d->m_tileLevelRangeWidget->bottomLevel() ) {
+                int const deltaLevel = d->m_visibleTileLevel - d->m_tileLevelRangeWidget->bottomLevel();
+                bottomLevelTileX1 = west  >> deltaLevel;
+                bottomLevelTileY1 = north >> deltaLevel;
+                bottomLevelTileX2 = east  >> deltaLevel;
+                bottomLevelTileY2 = south >> deltaLevel;
+            }
+            else if ( d->m_visibleTileLevel < bottomLevel ) {
+                int const deltaLevel = bottomLevel - d->m_visibleTileLevel;
+                bottomLevelTileX1 = west  << deltaLevel;
+                bottomLevelTileY1 = north << deltaLevel;
+                bottomLevelTileX2 = east  << deltaLevel;
+                bottomLevelTileY2 = south << deltaLevel;
+            }
+            else {
+                bottomLevelTileX1 = west;
+                bottomLevelTileY1 = north;
+                bottomLevelTileX2 = east;
+                bottomLevelTileY2 = south;
+            }
+
+            QRect waypointRegion;
+            //square region around the waypoint
+            waypointRegion.setCoords( bottomLevelTileX1/tileWidth, bottomLevelTileY1/tileHeight,
+                                      bottomLevelTileX2/tileWidth, bottomLevelTileY2/tileHeight );
+            coordsPyramid.setBottomLevelCoords( waypointRegion );
+            pyramid << coordsPyramid;
+        }
+
+        return pyramid;
+    }
+}
+
+
+void DownloadRegionDialog::updateRouteDialog()
+{
+    d->m_routeDownloadMethodButton->setEnabled( d->hasRoute() );
+    d->m_routeDownloadMethodButton->setChecked( d->hasRoute() );
+    if( !d->hasRoute() ) {
+        setSelectionMethod( VisibleRegionMethod );
+    }
+}
+
+void DownloadRegionDialog::setOffsetUnit()
+{
+    qreal offset = d->m_routeOffsetSpinBox->value();
+
+    if( offset >= 1100 ) {
+        d->m_routeOffsetSpinBox->setSuffix( tr( "KM" ) );
+        d->m_routeOffsetSpinBox->setRange( minimumRouteOffset * METER2KM, maximumRouteOffset * METER2KM );
+        d->m_routeOffsetSpinBox->setDecimals( 1 );
+        d->m_routeOffsetSpinBox->setValue( offset * METER2KM );
+        d->m_routeOffsetSpinBox->setSingleStep( 0.1 );
+    }
+    else if( offset <= 1 && d->m_routeOffsetSpinBox->suffix() == "KM" ) {
+        d->m_routeOffsetSpinBox->setSuffix( tr( "m" ) );
+        d->m_routeOffsetSpinBox->setRange( minimumRouteOffset, maximumRouteOffset );
+        d->m_routeOffsetSpinBox->setDecimals( 0 );
+        d->m_routeOffsetSpinBox->setValue( offset * KM2METER );
+        d->m_routeOffsetSpinBox->setSingleStep( 100 );
+    }
 }
 
 }

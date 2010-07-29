@@ -22,7 +22,7 @@
 using namespace Marble;
 
 PositionTracking::PositionTracking( FileManager *fileManager,
-                          QObject *parent ) 
+                          QObject *parent )
      : QObject( parent ), m_fileManager(fileManager), m_positionProvider(0)
 {
     m_document     = new GeoDataDocument();
@@ -44,15 +44,6 @@ PositionTracking::~PositionTracking()
 {
 }
 
-void PositionTracking::updateSpeed( GeoDataCoordinates& previous, GeoDataCoordinates next )
-{
-    //This function makes the assumption that the update stage happens once
-    //every second.
-    qreal distance = distanceSphere( previous,
-                                     next );
-    m_speed = distance * 60 * 60;
-}
-
 void PositionTracking::setPosition( GeoDataCoordinates position,
                                     GeoDataAccuracy accuracy )
 {
@@ -70,10 +61,8 @@ void PositionTracking::setPosition( GeoDataCoordinates position,
         if ( !( m_gpsCurrentPosition ==
                 position ) )
         {
-
-            updateSpeed( m_gpsCurrentPosition, position );
             m_gpsCurrentPosition = position;
-            emit gpsLocation( position, m_speed );
+            emit gpsLocation( position, speed() );
         }
     }
 }
@@ -93,6 +82,7 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
                 this, SIGNAL( statusChanged(PositionProviderStatus ) ) );
         connect( m_positionProvider, SIGNAL( positionChanged( GeoDataCoordinates,GeoDataAccuracy ) ),
                  this, SLOT( setPosition( GeoDataCoordinates,GeoDataAccuracy ) ) );
+
         m_positionProvider->initialize();
     }
 }
@@ -100,6 +90,23 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
 QString PositionTracking::error() const
 {
     return m_positionProvider ? m_positionProvider->error() : QString();
+}
+
+
+//get speed from provider
+qreal PositionTracking::speed() const
+{
+    if( error().isEmpty() ) {
+        return m_positionProvider->speed();
+    }
+}
+
+//get direction from provider
+qreal PositionTracking::direction() const
+{
+    if( error().isEmpty() ) {
+        return m_positionProvider->direction();
+    }
 }
 
 #include "PositionTracking.moc"
