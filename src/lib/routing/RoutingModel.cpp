@@ -351,6 +351,10 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
             }
         }
 
+        if ( instructions.isEmpty() ) {
+            return;
+        }
+
         d->m_instructionSize = instructions.size();
 
         qreal totalTimeRemaining = 0.0;
