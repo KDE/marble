@@ -11,6 +11,7 @@
 #ifndef MARBLE_ROUTINGMANAGER_H
 #define MARBLE_ROUTINGMANAGER_H
 
+#include "marble_export.h"
 #include "GeoDataCoordinates.h"
 
 #include <QtCore/QAbstractItemModel>
@@ -29,7 +30,7 @@ class AlternativeRoutesModel;
   * Delegates data retrieval and model updates to the appropriate
   * routing provider -- always openrouteservice.org for now.
   */
-class RoutingManager : public QObject
+class MARBLE_EXPORT RoutingManager : public QObject
 {
     Q_OBJECT
 

@@ -11,6 +11,7 @@
 #ifndef MARBLE_ROUTINGMODEL_H
 #define MARBLE_ROUTINGMODEL_H
 
+#include "marble_export.h"
 #include "GeoDataLineString.h"
 #include "MarblePlacemarkModel.h"
 
@@ -30,7 +31,7 @@ class RoutingModelPrivate;
 class RouteSkeleton;
 class GeoDataDocument;
 class MarbleModel;
-class RoutingModel : public QAbstractListModel
+class MARBLE_EXPORT RoutingModel : public QAbstractListModel
 {
     Q_OBJECT
 
