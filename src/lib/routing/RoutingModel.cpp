@@ -72,11 +72,11 @@ public:
 
 RoutingModelPrivate::RoutingModelPrivate()
     : m_totalDistance( 0.0 ),
-      m_timeRemaining( 0.0 ),
-      m_nextInstructionIndex(0),
-      m_instructionSize( 0 ),
       m_totalTimeRemaining( 0.0 ),
+      m_timeRemaining( 0.0 ),
       m_totalDistanceRemaining( 0.0 ),
+      m_instructionSize( 0 ),
+      m_nextInstructionIndex(0),
       m_routeLeft( false )
 {
     // nothing to do
@@ -86,7 +86,8 @@ void RoutingModelPrivate::importPlacemark( const GeoDataPlacemark *placemark )
 {
     GeoDataGeometry* geometry = placemark->geometry();
     GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
-    if ( !placemark->name().isEmpty() && placemark->name() != "Route" ) {
+    QStringList blacklist = QStringList() << "" << "Route" << "Tessellated";
+    if ( !blacklist.contains( placemark->name() ) ) {
             if( lineString ) {
                 RouteElement element;
                 element.type = RoutingModel::Instruction;
