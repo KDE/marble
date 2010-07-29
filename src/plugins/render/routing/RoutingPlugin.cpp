@@ -37,12 +37,12 @@ using namespace Marble;
 
 RoutingPlugin::RoutingPlugin( const QPointF &point )
       :AbstractFloatItem( point ),
-       m_routingModel( 0 ),
        m_routingManager( 0 ),
+       m_routingModel( 0 ),
        m_remainingTime( 0.0 ),
        m_remainingDistance( 0.0 ),
-       m_routingItem( 0 ),
-       m_widgetItem( 0 )
+       m_widgetItem( 0 ),
+       m_routingItem( 0 )
 {
     setEnabled( true );
     setVisible( false );
@@ -128,6 +128,7 @@ bool RoutingPlugin::eventFilter(QObject *object, QEvent *e)
 
 void RoutingPlugin::setCurrentLocation( GeoDataCoordinates position, qreal speed )
 {
+    Q_UNUSED(speed);
     m_currentPosition = position;
     bool hasRoute = m_routingModel->rowCount() != 0;
     setVisible( hasRoute );
