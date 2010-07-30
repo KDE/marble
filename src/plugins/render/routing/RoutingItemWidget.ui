@@ -134,7 +134,7 @@ p, li { white-space: pre-wrap; }
    <item row="2" column="2">
     <widget class="QLabel" name="distanceUnitLabel">
      <property name="text">
-      <string>Metres</string>
+      <string>Meters</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

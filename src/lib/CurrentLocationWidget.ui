@@ -61,10 +61,10 @@
    <item>
     <widget class="QLabel" name="recenterLabel">
      <property name="toolTip">
-      <string extracomment="Select the method to recenter your gps location on map ">Select the method to recenter your gps location on map </string>
+      <string extracomment="Select the method to use to recenter your GPS location on map.">Select the method to use to re-center your GPS location on map.</string>
      </property>
      <property name="text">
-      <string>Recenter</string>
+      <string>Re-center</string>
      </property>
     </widget>
    </item>
