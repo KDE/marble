@@ -42,9 +42,6 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture *t
       m_tileSize( textureLayer->tileSize() ),  // cache tile size
       m_tile( 0 ),
       m_previousRadius( 0 ),
-      m_n( 0 ),
-      m_nInverse( 0.0 ),
-      m_nBest( 0 ),
       m_tileLevel( 0 ),
       m_maxTileLevel( 0 ),
       m_globalWidth( 0 ),

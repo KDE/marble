@@ -41,9 +41,7 @@ public:
 
     virtual void mapTexture( ViewParams *viewParams ) = 0;
 
-    void setMaxTileLevel( int level );
     virtual void resizeMap( int width, int height );
-    void selectTileLevel( ViewParams* viewParams );
     bool interlaced() const;
     void setInterlaced( bool enabled );
     int tileZoomLevel() const;
@@ -75,6 +73,7 @@ public:
     // method for precise interpolation
     void nextTile( qreal& posx, qreal& posy );
 
+    void selectTileLevel( ViewParams* viewParams );
     void detectMaxTileLevel();
     void tileLevelInit( int tileLevel );
 
@@ -137,8 +136,6 @@ public:
     StackedTile *m_tile;
     int         m_previousRadius;
 
-    int         m_n;
-    qreal       m_nInverse;
     int         m_nBest;
 
     int         m_tileLevel;
@@ -149,11 +146,6 @@ public:
     qreal       m_normGlobalHeight;
     uint        m_mapThemeIdHash;
 };
-
-inline void AbstractScanlineTextureMapper::setMaxTileLevel( int level )
-{
-    m_maxTileLevel = level;
-}
 
 inline bool AbstractScanlineTextureMapper::interlaced() const
 {
