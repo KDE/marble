@@ -28,8 +28,6 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture *t
     : QObject( parent ),
       m_maxGlobalX( 0 ),
       m_maxGlobalY( 0 ),
-      m_imageHeight( 0 ),
-      m_imageWidth( 0 ),
       m_prevLat( 0.0 ),
       m_prevLon( 0.0 ),
       m_toTileCoordinatesLon( 0.0 ),
@@ -117,25 +115,6 @@ void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
     emit tileLevelChanged( m_tileLevel );
 }
 
-
-void AbstractScanlineTextureMapper::resizeMap(int width, int height)
-{
-    m_imageHeight = height;
-    m_imageWidth  = width;
-
-    // Find the optimal interpolation interval m_nBest for the 
-    // current image canvas width
-    m_nBest = 2;
-
-    int  nEvalMin = m_imageWidth - 1;
-    for ( int it = 1; it < 48; ++it ) {
-        int nEval = ( m_imageWidth - 1 ) / it + ( m_imageWidth - 1 ) % it;
-        if ( nEval < nEvalMin ) {
-            nEvalMin = nEval;
-            m_nBest = it; 
-        }
-    }
-}
 
 void AbstractScanlineTextureMapper::pixelValueF(qreal lon,
                                                qreal lat, 
@@ -480,7 +459,7 @@ bool AbstractScanlineTextureMapper::isOutOfTileRange( int itLon, int itLat,
 }
 
 
-int AbstractScanlineTextureMapper::interpolationStep( ViewParams *viewParams ) const
+int AbstractScanlineTextureMapper::interpolationStep( ViewParams *viewParams )
 {
     if ( viewParams->mapQuality() == PrintQuality ) {
         return 1;    // Don't interpolate for print quality.
@@ -490,7 +469,21 @@ int AbstractScanlineTextureMapper::interpolationStep( ViewParams *viewParams ) c
         return 8;
     }
 
-    return m_nBest;
+    // Find the optimal interpolation interval m_nBest for the 
+    // current image canvas width
+    const int width = viewParams->canvasImage()->width();
+
+    int nBest = 2;
+    int nEvalMin = width - 1;
+    for ( int it = 1; it < 48; ++it ) {
+        int nEval = ( width - 1 ) / it + ( width - 1 ) % it;
+        if ( nEval < nEvalMin ) {
+            nEvalMin = nEval;
+            nBest = it; 
+        }
+    }
+
+    return nBest;
 }
 
 

@@ -40,7 +40,9 @@ EquirectScanlineTextureMapper::EquirectScanlineTextureMapper( GeoSceneTexture *t
 
 void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 {
-    QImage       *canvasImage = viewParams->canvasImage();
+    QImage  *canvasImage = viewParams->canvasImage();
+    const int imageHeight = canvasImage->height();
+    const int imageWidth  = canvasImage->width();
     const qint64  radius      = viewParams->radius();
 
     const bool highQuality  = ( viewParams->mapQuality() == HighQuality
@@ -85,17 +87,17 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     // Calculate y-range the represented by the center point, yTop and
     // what actually can be painted
-    yPaintedTop    = yTop = m_imageHeight / 2 - radius + yCenterOffset;
-    yPaintedBottom = m_imageHeight / 2 + radius + yCenterOffset;
+    yPaintedTop    = yTop = imageHeight / 2 - radius + yCenterOffset;
+    yPaintedBottom = imageHeight / 2 + radius + yCenterOffset;
  
     if (yPaintedTop < 0)                yPaintedTop = 0;
-    if (yPaintedTop > m_imageHeight)    yPaintedTop = m_imageHeight;
+    if (yPaintedTop > imageHeight)    yPaintedTop = imageHeight;
     if (yPaintedBottom < 0)             yPaintedBottom = 0;
-    if (yPaintedBottom > m_imageHeight) yPaintedBottom = m_imageHeight;
+    if (yPaintedBottom > imageHeight) yPaintedBottom = imageHeight;
 
     const qreal pixel2Rad = 1.0/rad2Pixel;
 
-    qreal leftLon = + centerLon - ( m_imageWidth / 2 * pixel2Rad );
+    qreal leftLon = + centerLon - ( imageWidth / 2 * pixel2Rad );
     while ( leftLon < -M_PI ) leftLon += 2 * M_PI;
     while ( leftLon >  M_PI ) leftLon -= 2 * M_PI;
 
@@ -149,7 +151,7 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
                 scanLine += ( n - 1 );
             }
 
-            if ( x < m_imageWidth ) {
+            if ( x < imageWidth ) {
                 if ( highQuality )
                     pixelValueF( lon, lat, scanLine );
                 else
@@ -165,7 +167,7 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         // copy scanline to improve performance
         if ( interlaced && y + 1 < yPaintedBottom ) { 
 
-            int pixelByteSize = canvasImage->bytesPerLine() / m_imageWidth;
+            int pixelByteSize = canvasImage->bytesPerLine() / imageWidth;
 
             memcpy( canvasImage->scanLine( y + 1 ) + xLeft * pixelByteSize, 
                     canvasImage->scanLine( y ) + xLeft * pixelByteSize, 
@@ -176,7 +178,7 @@ void EquirectScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
     // Remove unused lines
     const int clearStart = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? yPaintedBottom : 0;
-    const int clearStop  = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? m_imageHeight  : yTop;
+    const int clearStop  = ( yPaintedTop - m_oldYPaintedTop <= 0 ) ? imageHeight  : yTop;
 
     QRgb * const clearBegin = (QRgb*)( canvasImage->scanLine( clearStart ) );
     QRgb * const clearEnd = (QRgb*)( canvasImage->scanLine( clearStop ) );

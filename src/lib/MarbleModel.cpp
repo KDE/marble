@@ -543,9 +543,6 @@ HttpDownloadManager* MarbleModel::downloadManager() const
 
 void MarbleModelPrivate::resize( int width, int height )
 {
-    if ( m_mapTheme->map()->hasTextureLayers() ) {
-        m_texmapper->resizeMap( width, height );
-    }
     if ( m_veccomposer ) {
         m_veccomposer->resizeMap( width, height );
     }

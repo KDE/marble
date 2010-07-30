@@ -41,7 +41,6 @@ public:
 
     virtual void mapTexture( ViewParams *viewParams ) = 0;
 
-    virtual void resizeMap( int width, int height );
     bool interlaced() const;
     void setInterlaced( bool enabled );
     int tileZoomLevel() const;
@@ -65,7 +64,7 @@ public:
     void pixelValueApprox(const qreal& lon, const qreal& lat,
                           QRgb *scanLine, int n );
 
-    int interpolationStep( ViewParams *viewParams ) const;
+    static int interpolationStep( ViewParams *viewParams );
 
     // method for fast integer calculation
     void nextTile( int& posx, int& posy );
@@ -100,9 +99,6 @@ public:
     int     m_maxGlobalX;
     int     m_maxGlobalY; // could be private also
 
-    int     m_imageHeight;
-    int     m_imageWidth;
-
     // Previous coordinates
     qreal  m_prevLat;
     qreal  m_prevLon;
@@ -134,8 +130,6 @@ public:
     QSize const m_tileSize;
     StackedTile *m_tile;
     int         m_previousRadius;
-
-    int         m_nBest;
 
     int         m_tileLevel;
     int         m_maxTileLevel;

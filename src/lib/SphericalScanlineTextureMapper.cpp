@@ -38,6 +38,8 @@ SphericalScanlineTextureMapper::SphericalScanlineTextureMapper( GeoSceneTexture 
 void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 {
     QImage       *canvasImage = viewParams->canvasImage();
+    const int imageHeight = canvasImage->height();
+    const int imageWidth  = canvasImage->width();
     const qint64  radius      = viewParams->radius();
 
     const bool highQuality  = ( viewParams->mapQuality() == HighQuality
@@ -80,22 +82,22 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
     int skip = interlaced ? 1 : 0;
 
     // Calculate the actual y-range of the map on the screen 
-    const int yTop = ( ( m_imageHeight / 2 - radius < 0 )
-                       ? 0 : m_imageHeight / 2 - radius );
+    const int yTop = ( ( imageHeight / 2 - radius < 0 )
+                       ? 0 : imageHeight / 2 - radius );
     const int yBottom = ( (yTop == 0)
-                          ? m_imageHeight - skip
+                          ? imageHeight - skip
                           : yTop + radius + radius - skip );
 
     for ( int y = yTop; y < yBottom ; ++y ) {
 
         // Evaluate coordinates for the 3D position vector of the current pixel
-        const qreal qy = inverseRadius * (qreal)( m_imageHeight / 2 - y );
+        const qreal qy = inverseRadius * (qreal)( imageHeight / 2 - y );
         const qreal qr = 1.0 - qy * qy;
 
         // rx is the radius component in x direction
         int rx = (int)sqrt( (qreal)( radius * radius 
-                                      - ( ( y - m_imageHeight / 2 )
-                                          * ( y - m_imageHeight / 2 ) ) ) );
+                                      - ( ( y - imageHeight / 2 )
+                                          * ( y - imageHeight / 2 ) ) ) );
 
         // Calculate the actual x-range of the map within the current scanline.
         // 
@@ -109,9 +111,9 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         // In that situation xLeft equals zero.
         // For xRight the situation is similar.
 
-        const int xLeft  = ( ( m_imageWidth / 2 - rx > 0 )
-                             ? m_imageWidth / 2 - rx : 0 ); 
-        const int xRight = ( ( m_imageWidth / 2 - rx > 0 )
+        const int xLeft  = ( ( imageWidth / 2 - rx > 0 )
+                             ? imageWidth / 2 - rx : 0 ); 
+        const int xRight = ( ( imageWidth / 2 - rx > 0 )
                              ? xLeft + rx + rx : canvasImage->width() );
 
         QRgb * scanLine = (QRgb*)( canvasImage->scanLine( y ) ) + xLeft;
@@ -119,14 +121,14 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         int  xIpLeft  = 1;
         int  xIpRight = n * (int)( xRight / n - 1 ) + 1; 
 
-        if ( m_imageWidth / 2 - rx > 0 ) {
+        if ( imageWidth / 2 - rx > 0 ) {
             xIpLeft  = n * (int)( xLeft  / n + 1 );
             xIpRight = n * (int)( xRight / n - 1 );
         }
 
         // Decrease pole distortion due to linear approximation ( y-axis )
         bool crossingPoleArea = false;
-        int northPoleY = m_imageHeight / 2 - (int)( radius * northPole.v[Q_Y] );
+        int northPoleY = imageHeight / 2 - (int)( radius * northPole.v[Q_Y] );
         if ( northPole.v[Q_Z] > 0
              && northPoleY - ( n * 0.75 ) <= y
              && northPoleY + ( n * 0.75 ) >= y ) 
@@ -145,7 +147,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
             if ( x >= xIpLeft && x <= xIpRight ) {
 
                 // Decrease pole distortion due to linear approximation ( x-axis )
-                int northPoleX = m_imageWidth / 2 + (int)( radius * northPole.v[Q_X] );
+                int northPoleX = imageWidth / 2 + (int)( radius * northPole.v[Q_X] );
 
 //                mDebug() << QString("NorthPole X: %1, LeftInterval: %2").arg( northPoleX ).arg( leftInterval );
                 if ( crossingPoleArea
@@ -166,7 +168,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 
             // Evaluate more coordinates for the 3D position vector of
             // the current pixel.
-            const qreal qx = (qreal)( x - m_imageWidth / 2 ) * inverseRadius;
+            const qreal qx = (qreal)( x - imageWidth / 2 ) * inverseRadius;
 
             const qreal qr2z = qr - qx * qx;
             const qreal qz = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
@@ -197,7 +199,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
 //          rendering around north pole:
 
 //            if ( !crossingPoleArea )
-            if ( x < m_imageWidth ) {
+            if ( x < imageWidth ) {
                 if ( highQuality )
                     pixelValueF( lon, lat, scanLine );
                 else
@@ -212,7 +214,7 @@ void SphericalScanlineTextureMapper::mapTexture( ViewParams *viewParams )
         // copy scanline to improve performance
         if ( interlaced && y + 1 < yBottom ) { 
 
-            int pixelByteSize = canvasImage->bytesPerLine() / m_imageWidth;
+            int pixelByteSize = canvasImage->bytesPerLine() / imageWidth;
 
             memcpy( canvasImage->scanLine( y + 1 ) + xLeft * pixelByteSize, 
                     canvasImage->scanLine( y ) + xLeft * pixelByteSize, 
