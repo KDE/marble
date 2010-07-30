@@ -19,10 +19,10 @@ NominatimPlugin::NominatimPlugin( QObject *parent ) : RunnerPlugin( parent )
     setCapabilities( Search | ReverseGeocoding );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
-    setName( "OSM Nominatim" );
+    setName( tr( "OSM Nominatim" ) );
     setNameId( "nominatim" );
-    setDescription( "Searches for placemarks using the OpenStreetMap Nominatim service" );
-    setGuiString( "OpenStreetMap Nominatim Search" );
+    setDescription( tr( "Searches for placemarks using the OpenStreetMap Nominatim service" ) );
+    setGuiString( tr( "OpenStreetMap Nominatim Search" ) );
 }
 
 MarbleAbstractRunner* NominatimPlugin::newRunner() const

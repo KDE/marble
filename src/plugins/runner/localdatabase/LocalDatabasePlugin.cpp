@@ -17,10 +17,10 @@ namespace Marble
 LocalDatabasePlugin::LocalDatabasePlugin( QObject *parent ) : RunnerPlugin( parent )
 {
     setCapabilities( Search );
-    setName( "Local Database" );
+    setName( tr( "Local Database" ) );
     setNameId( "localdatabase" );
-    setDescription( "Searches the internal Marble database for placemarks" );
-    setGuiString( "Local database Search" );
+    setDescription( tr( "Searches the internal Marble database for placemarks" ) );
+    setGuiString( tr( "Local Database Search" ) );
 }
 
 MarbleAbstractRunner* LocalDatabasePlugin::newRunner() const

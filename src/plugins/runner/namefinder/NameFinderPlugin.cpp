@@ -19,10 +19,10 @@ NameFinderPlugin::NameFinderPlugin( QObject *parent ) : RunnerPlugin( parent )
     setCapabilities( Search );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
-    setName( "OSM Namefinder" );
+    setName( tr( "OSM Namefinder" ) );
     setNameId( "namefinder" );
-    setDescription( "Searches for placemarks using the OpenStreetMap NameFinder service" );
-    setGuiString( "OpenStreetMap NameFinder Search" );
+    setDescription( tr( "Searches for placemarks using the OpenStreetMap NameFinder service" ) );
+    setGuiString( tr( "OpenStreetMap NameFinder Search" ) );
 }
 
 MarbleAbstractRunner* NameFinderPlugin::newRunner() const

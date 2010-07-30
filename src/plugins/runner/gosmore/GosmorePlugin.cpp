@@ -19,10 +19,10 @@ GosmorePlugin::GosmorePlugin( QObject *parent ) : RunnerPlugin( parent )
     setCapabilities( Routing );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
-    setName( "Gosmore" );
+    setName( tr( "Gosmore" ) );
     setNameId( "gosmore" );
-    setDescription( "Retrieves routes from gosmore" );
-    setGuiString( "Gosmore Routing" );
+    setDescription( tr( "Retrieves routes from gosmore" ) );
+    setGuiString( tr( "Gosmore Routing" ) );
 }
 
 MarbleAbstractRunner* GosmorePlugin::newRunner() const

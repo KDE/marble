@@ -19,10 +19,10 @@ HostipPlugin::HostipPlugin( QObject *parent ) : RunnerPlugin( parent )
     setCapabilities( Search );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
-    setName( "Hostip.info" );
+    setName( tr( "Hostip.info" ) );
     setNameId( "hostip" );
-    setDescription( "Host name and IP geolocation search using the hostip.info service" );
-    setGuiString( "Hostip.info Search" );
+    setDescription( tr( "Host name and IP geolocation search using the hostip.info service" ) );
+    setGuiString( tr( "Hostip.info Search")  );
 }
 
 MarbleAbstractRunner* HostipPlugin::newRunner() const

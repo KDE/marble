@@ -19,10 +19,10 @@ YoursPlugin::YoursPlugin( QObject *parent ) : RunnerPlugin( parent )
     setCapabilities( Routing );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
-    setName( "Yours" );
+    setName( tr( "Yours" ) );
     setNameId( "yours" );
-    setDescription( "Retrieves routes from a yours server" );
-    setGuiString( "Yours Routing" );
+    setDescription( tr( "Retrieves routes from a yours server" ) );
+    setGuiString( tr( "Yours Routing" ) );
 }
 
 MarbleAbstractRunner* YoursPlugin::newRunner() const

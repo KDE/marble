@@ -17,10 +17,10 @@ namespace Marble
 LatLonPlugin::LatLonPlugin( QObject *parent ) : RunnerPlugin( parent )
 {
     setCapabilities( Search );
-    setName( "Geographic Coordinates" );
+    setName( tr( "Geographic Coordinates" ) );
     setNameId( "latlon" );
-    setDescription( "Direct input of geographic coordinates" );
-    setGuiString( "Geographic Coordinates" );
+    setDescription( tr( "Direct input of geographic coordinates" ) );
+    setGuiString( tr( "Geographic Coordinates" ) );
 }
 
 MarbleAbstractRunner* LatLonPlugin::newRunner() const

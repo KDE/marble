@@ -19,10 +19,10 @@ OpenRouteServicePlugin::OpenRouteServicePlugin( QObject *parent ) : RunnerPlugin
     setCapabilities( Routing );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( false );
-    setName( "OpenRouteService" );
+    setName( tr( "OpenRouteService" ) );
     setNameId( "openrouteservice" );
-    setDescription( "Retrieves routes from openrouteservice.org" );
-    setGuiString( "OpenRouteService Routing" );
+    setDescription( tr( "Retrieves routes from openrouteservice.org" ) );
+    setGuiString( tr( "OpenRouteService Routing" ) );
 }
 
 MarbleAbstractRunner* OpenRouteServicePlugin::newRunner() const
