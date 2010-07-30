@@ -132,7 +132,6 @@ public:
     GeoSceneTexture const * const m_textureLayer;
     /// size of the tiles of of the current texture layer
     QSize const m_tileSize;
-    GeoSceneTexture::Projection m_tileProjection;
     StackedTile *m_tile;
     int         m_previousRadius;
 
@@ -179,7 +178,7 @@ inline qreal AbstractScanlineTextureMapper::rad2PixelX( qreal longitude ) const
 
 inline qreal AbstractScanlineTextureMapper::rad2PixelY( qreal lat ) const
 {
-    switch ( m_tileProjection ) {
+    switch ( m_textureLayer->projection() ) {
     case GeoSceneTexture::Equirectangular:
         return -lat * m_normGlobalHeight;
     case GeoSceneTexture::Mercator:

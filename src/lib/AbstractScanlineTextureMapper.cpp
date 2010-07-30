@@ -48,12 +48,11 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture *t
       m_globalHeight( 0 ),
       m_normGlobalWidth( 0.0 ),
       m_normGlobalHeight( 0.0 ),
-      m_mapThemeIdHash( textureLayer ? qHash( textureLayer->sourceDir() ) : 0 )
+      m_mapThemeIdHash( qHash( textureLayer->sourceDir() ) )
 {
-    m_tileProjection = textureLayer ? textureLayer->projection()
-        : GeoSceneTexture::Equirectangular;
+    Q_ASSERT( textureLayer );  // just for documentation
 
-    connect( m_tileLoader, SIGNAL( tileUpdateAvailable() ), 
+    connect( m_tileLoader, SIGNAL( tileUpdateAvailable() ),
              this,         SLOT( notifyMapChanged() ) );
 
     detectMaxTileLevel();
