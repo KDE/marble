@@ -149,7 +149,7 @@ void RoutingPlugin::showRoutingItem()
     }
 
     if( m_remainingDistance < 1000 ) {
-        m_routingItem->distanceUnitLabel->setText( tr( "Metres" ) );
+        m_routingItem->distanceUnitLabel->setText( tr( "Meters" ) );
         m_routingItem->remainingDistanceLabel->setText( QString::number( m_remainingDistance, 'f', 3 ) );
     }
     else {
