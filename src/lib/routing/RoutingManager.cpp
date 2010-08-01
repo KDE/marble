@@ -80,7 +80,10 @@ void RoutingManager::retrieveRoute( RouteSkeleton *route )
 
 void RoutingManager::updateRoute()
 {
-    Q_ASSERT( d->m_route );
+    if ( !d->m_route ) {
+        return;
+    }
+
     d->m_haveRoute = false;
 
     int realSize = 0;
