@@ -72,7 +72,7 @@ public:
     /**
       * (Primitive) scoring for routes
       */
-    static bool lessThan( const GeoDataDocument* one, const GeoDataDocument* two );
+    static bool higherScore( const GeoDataDocument* one, const GeoDataDocument* two );
 
     /**
       * Returns true if the given route contains instructions (placemarks with turn instructions)
@@ -191,7 +191,7 @@ qreal AlternativeRoutesModelPrivate::unidirectionalSimilarity( const GeoDataDocu
     return 1 - distance / lengthA;
 }
 
-bool AlternativeRoutesModelPrivate::lessThan( const GeoDataDocument* one, const GeoDataDocument* two )
+bool AlternativeRoutesModelPrivate::higherScore( const GeoDataDocument* one, const GeoDataDocument* two )
 {
     bool hasInstructonsA = hasInstructions( one );
     bool hasInstructonsB = hasInstructions( two );
@@ -211,21 +211,18 @@ bool AlternativeRoutesModelPrivate::lessThan( const GeoDataDocument* one, const 
 
 bool AlternativeRoutesModelPrivate::hasInstructions( const GeoDataDocument* document )
 {
+    QStringList blacklist = QStringList() << "" << "Route" << "Tessellated";
     QVector<GeoDataFolder*> folders = document->folderList();
     foreach( const GeoDataFolder *folder, folders ) {
         foreach( const GeoDataPlacemark *placemark, folder->placemarkList() ) {
-            GeoDataGeometry* geometry = placemark->geometry();
-            GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
-            if ( !lineString && !placemark->name().isEmpty() && placemark->name() != "Route" ) {
+            if ( !blacklist.contains( placemark->name() ) ) {
                 return true;
             }
         }
     }
 
     foreach( const GeoDataPlacemark *placemark, document->placemarkList() ) {
-        GeoDataGeometry* geometry = placemark->geometry();
-        GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
-        if ( !lineString && !placemark->name().isEmpty() && placemark->name() != "Route" ) {
+        if ( !blacklist.contains( placemark->name() ) ) {
             return true;
         }
     }
@@ -309,7 +306,7 @@ void AlternativeRoutesModel::newRequest( RouteSkeleton * )
 void AlternativeRoutesModel::addRestrainedRoutes()
 {
     Q_ASSERT( d->m_routes.isEmpty() );
-    qSort( d->m_restrainedRoutes.begin(), d->m_restrainedRoutes.end(), AlternativeRoutesModelPrivate::lessThan );
+    qSort( d->m_restrainedRoutes.begin(), d->m_restrainedRoutes.end(), AlternativeRoutesModelPrivate::higherScore );
 
     foreach( GeoDataDocument* route, d->m_restrainedRoutes ) {
         if ( !d->filter( route ) ) {
@@ -339,7 +336,20 @@ void AlternativeRoutesModel::addRoute( GeoDataDocument* document )
         return;
     } else if ( d->m_routes.isEmpty() && !d->m_restrainedRoutes.isEmpty() ) {
         d->m_restrainedRoutes.push_back( document );
-    } else if ( !d->filter( document ) )  {
+    } else {
+        for ( int i=0; i<d->m_routes.size(); ++i ) {
+            qreal similarity = AlternativeRoutesModelPrivate::similarity( document, d->m_routes.at( i ) );
+            if ( similarity > 0.8 ) {
+                if ( AlternativeRoutesModelPrivate::higherScore( document, d->m_routes.at( i ) ) ) {
+                    d->m_routes[i] = document;
+                    QModelIndex changed = index( i );
+                    emit dataChanged( changed, changed );
+                }
+
+                return;
+            }
+        }
+
         Q_ASSERT( !d->m_routes.isEmpty() );
         int affected = d->m_routes.size();
         beginInsertRows( QModelIndex(), affected, affected );
