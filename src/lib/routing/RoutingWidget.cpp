@@ -392,38 +392,7 @@ void RoutingWidget::updateRouteState( RoutingManager::State state, RouteSkeleton
 {
     Q_UNUSED( route );
 
-    if ( state == RoutingManager::Retrieved ) {
-        // Parts of the route may lie outside the route trip points
-        GeoDataLineString bbox;
-        for ( int i = 0; i < d->m_routingManager->routingModel()->rowCount(); ++i ) {
-            QModelIndex index = d->m_routingManager->routingModel()->index( i, 0 );
-            QVariant pos = index.data( RoutingModel::CoordinateRole );
-            if ( !pos.isNull() ) {
-                bbox << qVariantValue<GeoDataCoordinates>( pos );
-            }
-        }
-
-//        if ( bbox.size() > 1 ) {
-//            qreal distance = d->m_routingManager->routingModel()->totalDistance();
-//            unsigned int days = d->m_routingManager->routingModel()->duration().days;
-//            QTime time = d->m_routingManager->routingModel()->duration().time;
-//            QString timeString = time.toString( Qt::DefaultLocaleShortDate );
-//            if ( days ) {
-//                QString label = tr( "Estimated travel time: %1 days, %2 (%3 km)", 0, days );
-//                d->m_ui.descriptionLabel->setText( label.arg( days ).arg( timeString ).arg( distance, 0, 'f', 1 ) );
-//            } else {
-//                QString label = tr( "Estimated travel time: %1 (%2 km)" );
-//                d->m_ui.descriptionLabel->setText( label.arg( timeString ).arg( distance, 0, 'f', 1 ) );
-//            }
-//            d->m_ui.descriptionLabel->setVisible( true );
-
-//            if ( d->m_zoomRouteAfterDownload ) {
-//                d->m_zoomRouteAfterDownload = false;
-//                d->m_widget->centerOn( GeoDataLatLonBox::fromLineString( bbox ) );
-//            }
-//        }
-    }
-    else {
+    if ( state != RoutingManager::Retrieved ) {
         d->m_ui.routeComboBox->setVisible( false );
         d->m_ui.routeComboBox->clear();
     }
@@ -531,6 +500,38 @@ void RoutingWidget::switchRoute( int index )
 
 void RoutingWidget::updateAlternativeRoutes()
 {
+    if ( d->m_ui.routeComboBox->count() == 1) {
+        // Parts of the route may lie outside the route trip points
+        GeoDataLineString bbox;
+        for ( int i = 0; i < d->m_routingManager->routingModel()->rowCount(); ++i ) {
+            QModelIndex index = d->m_routingManager->routingModel()->index( i, 0 );
+            QVariant pos = index.data( RoutingModel::CoordinateRole );
+            if ( !pos.isNull() ) {
+                bbox << qVariantValue<GeoDataCoordinates>( pos );
+            }
+        }
+
+        if ( bbox.size() > 1 ) {
+//            qreal distance = d->m_routingManager->routingModel()->totalDistance();
+//            unsigned int days = d->m_routingManager->routingModel()->duration().days;
+//            QTime time = d->m_routingManager->routingModel()->duration().time;
+//            QString timeString = time.toString( Qt::DefaultLocaleShortDate );
+//            if ( days ) {
+//                QString label = tr( "Estimated travel time: %1 days, %2 (%3 km)", 0, days );
+//                d->m_ui.descriptionLabel->setText( label.arg( days ).arg( timeString ).arg( distance, 0, 'f', 1 ) );
+//            } else {
+//                QString label = tr( "Estimated travel time: %1 (%2 km)" );
+//                d->m_ui.descriptionLabel->setText( label.arg( timeString ).arg( distance, 0, 'f', 1 ) );
+//            }
+//            d->m_ui.descriptionLabel->setVisible( true );
+
+            if ( d->m_zoomRouteAfterDownload ) {
+                d->m_zoomRouteAfterDownload = false;
+                d->m_widget->centerOn( GeoDataLatLonBox::fromLineString( bbox ) );
+            }
+        }
+    }
+
     d->m_ui.routeComboBox->setVisible( d->m_ui.routeComboBox->count() > 1 );
     if ( d->m_ui.routeComboBox->currentIndex() < 0 && d->m_ui.routeComboBox->count() > 0 ) {
         d->m_ui.routeComboBox->setCurrentIndex( 0 );
