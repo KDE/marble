@@ -51,7 +51,7 @@ public:
     enum RoutingItemDataRole {
         CoordinateRole = MarblePlacemarkModel::CoordinateRole, // synchronized with MarblePlacemarkModel
         TypeRole = CoordinateRole + 24 ,// avoid conflict with MarblePlacemarkModel
-        InstructionWayPointRole = TypeRole + 1,
+        InstructionWayPointRole = TypeRole + 1
     };
 
     enum RoutingItemType {
