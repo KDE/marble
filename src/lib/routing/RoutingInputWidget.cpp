@@ -74,7 +74,7 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteSkeleton *skeleton, i
         m_workOffline( false )
 {
     m_stateButton = new QPushButton( parent );
-    m_stateButton->setToolTip( "Center Map here" );
+    m_stateButton->setToolTip(QObject::tr( "Center Map here" ) );
     m_stateButton->setVisible( false );
     m_stateButton->setIcon( QIcon( m_route->pixmap( m_index ) ) );
     m_stateButton->setFlat( true );
@@ -85,13 +85,13 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteSkeleton *skeleton, i
 
     m_removeButton = new QPushButton( parent );
     m_removeButton->setIcon( QIcon( ":/data/bitmaps/routing_remove.png" ) );
-    m_removeButton->setToolTip( "Remove this position" );
+    m_removeButton->setToolTip( QObject::tr( "Remove this position" ) );
     m_removeButton->setFlat( true );
     m_removeButton->setMaximumWidth( 22 );
 
     m_pickButton = new QPushButton( parent );
     m_pickButton->setIcon( QIcon( m_route->pixmap( m_index ) ) );
-    m_pickButton->setToolTip( "Choose position from the map" );
+    m_pickButton->setToolTip( QObject::tr( "Choose position from the map" ) );
     m_pickButton->setCheckable( true );
     m_pickButton->setFlat( true );
     m_pickButton->setMaximumWidth( 22 );
