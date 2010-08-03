@@ -532,7 +532,7 @@ void RoutingWidget::updateAlternativeRoutes()
         }
     }
 
-    d->m_ui.routeComboBox->setVisible( d->m_ui.routeComboBox->count() > 1 );
+    d->m_ui.routeComboBox->setVisible( d->m_ui.routeComboBox->count() > 0 );
     if ( d->m_ui.routeComboBox->currentIndex() < 0 && d->m_ui.routeComboBox->count() > 0 ) {
         d->m_ui.routeComboBox->setCurrentIndex( 0 );
     }
