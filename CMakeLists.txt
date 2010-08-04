@@ -265,7 +265,6 @@ include( MarbleMacros )
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib
-  ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/AbstractLayer
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/Projections
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/geodata
   ${CMAKE_CURRENT_SOURCE_DIR}/src/lib/geodata/data

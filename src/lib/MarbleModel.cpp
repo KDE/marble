@@ -50,8 +50,6 @@
 #include "SphericalScanlineTextureMapper.h"
 #include "EquirectScanlineTextureMapper.h"
 #include "MercatorScanlineTextureMapper.h"
-#include "gps/GpxFileModel.h"
-#include "gps/GpxFile.h"
 #include "gps/PositionTracking.h"
 #include "HttpDownloadManager.h"
 #include "KmlFileViewItem.h"
@@ -105,7 +103,6 @@ class MarbleModelPrivate
           m_sunLocator( 0 ),
           m_layerDecorator( 0 ),
           m_positionTracking( 0 ),
-          m_gpxFileModel( 0 ),
           m_planet( 0 ),
           m_routingManager( 0 )
     {
@@ -157,7 +154,6 @@ class MarbleModelPrivate
 
     //Gps Stuff
     PositionTracking        *m_positionTracking;
-    GpxFileModel            *m_gpxFileModel;
 
     Planet                  *m_planet;
 
@@ -226,7 +222,6 @@ MarbleModel::MarbleModel( QObject *parent )
     connect( d->m_dataFacade->fileViewModel(), SIGNAL( modelChanged() ),
              this,            SIGNAL( modelChanged() ) );
 
-    d->m_gpxFileModel = new GpxFileModel( this );
     d->m_positionTracking = new PositionTracking( d->m_fileManager, this );
 
     d->m_layerManager = new LayerManager( d->m_dataFacade, d->m_pluginManager, this );
@@ -651,14 +646,6 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     // Paint the Gps Layer
     painter->save();
     QSize canvasSize = viewParams->canvasImage()->size();
-    if ( viewParams->showGps() ) {
-        const QVector<GpxFile*> * const allFiles = d->m_gpxFileModel->allFiles();
-        QVector<GpxFile*>::const_iterator it;
-        for( it = allFiles->constBegin();
-        it != allFiles->constEnd(); ++it ) {
-            (*it)->draw( painter, canvasSize, viewParams );
-        }
-    }
     painter->restore();
 
 
@@ -717,11 +704,6 @@ PlacemarkLayout *MarbleModel::placemarkLayout() const
     return d->m_placemarkLayout;
 }
 
-GpxFileModel *MarbleModel::gpxFileModel() const
-{
-    return d->m_gpxFileModel;
-}
-
 PositionTracking *MarbleModel::positionTracking() const
 {
     return d->m_positionTracking;
@@ -734,9 +716,7 @@ FileViewModel *MarbleModel::fileViewModel() const
 
 void MarbleModel::openGpxFile( const QString& filename )
 {
-    GpxFile* gpxFile = new GpxFile( filename );
     d->m_fileManager->addFile( filename );
-    d->m_gpxFileModel->addFile( gpxFile );
 }
 
 void MarbleModel::addPlacemarkFile( const QString& filename )

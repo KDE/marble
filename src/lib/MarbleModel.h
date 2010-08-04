@@ -51,7 +51,6 @@ class AbstractScanlineTextureMapper;
 class GeoPainter;
 class TileCoordsPyramid;
 class FileViewModel;
-class GpxFileModel;
 class PositionTracking;
 class HttpDownloadManager;
 class MarbleModelPrivate;
@@ -219,7 +218,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     AbstractScanlineTextureMapper  *textureMapper() const;
 
-    GpxFileModel       *gpxFileModel()       const;
     FileViewModel      *fileViewModel()   const;
     PositionTracking   *positionTracking() const;
 

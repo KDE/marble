@@ -8,7 +8,6 @@ endif (QTONLY)
 INCLUDE_DIRECTORIES(
  ${CMAKE_SOURCE_DIR}/src/lib
  ${CMAKE_BINARY_DIR}/src/lib
- ${CMAKE_CURRENT_SOURCE_DIR}/AbstractLayer
  ${CMAKE_CURRENT_SOURCE_DIR}/Projections
  ${CMAKE_CURRENT_SOURCE_DIR}/routing
  ${CMAKE_CURRENT_SOURCE_DIR}/geodata
@@ -143,21 +142,6 @@ set(marblewidget_SRCS
     FileViewModel.cpp
     KmlFileViewItem.cpp
     gps/PositionTracking.cpp
-    gps/GpsElement.cpp
-    gps/Waypoint.cpp
-    gps/TrackPoint.cpp
-    gps/Route.cpp
-    gps/Track.cpp
-    gps/TrackSegment.cpp
-    gps/WaypointContainer.cpp
-    gps/TrackContainer.cpp
-    gps/RouteContainer.cpp
-    gps/GpxSax.cpp
-    gps/GpxFile.cpp
-    gps/GpxFileModel.cpp
-    AbstractLayer/AbstractLayerInterface.cpp
-    AbstractLayer/AbstractLayerContainer.cpp
-    AbstractLayer/AbstractLayerData.cpp
     DataMigration.cpp
 
     AbstractDataPlugin.cpp

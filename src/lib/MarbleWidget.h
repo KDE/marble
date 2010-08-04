@@ -44,7 +44,6 @@ class GeoDataLatLonAltBox;
 class GeoDataLatLonBox;
 class GeoPainter;
 class GeoSceneDocument;
-class GpxFileModel;
 class MarbleMap;
 class MarbleModel;
 class MarbleWidgetInputHandler;
@@ -538,11 +537,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Get the GeoSceneDocument object of the current map theme
      */
     GeoSceneDocument * mapTheme() const;
-
-    /**
-     * @brief Return a QAbstractItemModel containing GPX files.
-     */
-    GpxFileModel * gpxFileModel();
 
     /**
      * @brief Return a QAbstractItemModel containing files.

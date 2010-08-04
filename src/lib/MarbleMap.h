@@ -53,7 +53,6 @@ class MarbleModel;
 class ViewParams;
 class MeasureTool;
 class SunLocator;
-class GpxFileModel;
 class FileViewModel;
 class GeoPainter;
 class RenderPlugin;
@@ -765,11 +764,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief Opens a gpx file for viewing on the Marble Map
      */
     void openGpxFile( const QString &filename );
-
-    /**
-     * @brief Return a QAbstractItemModel containing GPX files.
-     */
-    GpxFileModel *gpxFileModel();
 
     /**
      * @brief Return a QAbstractItemModel containing files.

@@ -1103,11 +1103,6 @@ void MarbleMap::openGpxFile( const QString &filename )
     d->m_model->openGpxFile( filename );
 }
 
-GpxFileModel *MarbleMap::gpxFileModel()
-{
-    return d->m_model->gpxFileModel();
-}
-
 FileViewModel* MarbleMap::fileViewModel() const
 {
     return d->m_model->fileViewModel();

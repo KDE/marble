@@ -1071,11 +1071,6 @@ void MarbleWidget::openGpxFile( const QString &filename )
     d->m_map->openGpxFile( filename );
 }
 
-GpxFileModel *MarbleWidget::gpxFileModel()
-{
-    return d->m_model->gpxFileModel();
-}
-
 FileViewModel* MarbleWidget::fileViewModel() const
 {
     return d->m_model->fileViewModel();

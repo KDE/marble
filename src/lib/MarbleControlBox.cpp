@@ -33,7 +33,6 @@
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "FileViewModel.h"
-#include "gps/GpxFileModel.h"
 #include "gps/PositionTracking.h"
 #include "MarbleLocale.h"
 #include "MarblePlacemarkModel.h"
@@ -525,12 +524,6 @@ void MarbleControlBox::enableFileViewActions()
             ->selectedIndexes().count() ==1;
     d->m_fileViewUi.m_saveButton->setEnabled( tmp );
     d->m_fileViewUi.m_closeButton->setEnabled( tmp );
-
-    if ( tmp ) {
-        QModelIndex tmpIndex =
-            d->m_fileViewUi.m_fileView->selectionModel()->currentIndex();
-        d->m_widget->gpxFileModel()->setSelectedIndex( tmpIndex );
-    }
 }
 
 void MarbleControlBox::setNavigationTabShown( bool show )
