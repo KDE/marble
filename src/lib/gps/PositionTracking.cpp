@@ -28,12 +28,20 @@ PositionTracking::PositionTracking( FileManager *fileManager,
     m_document     = new GeoDataDocument();
     m_document->setName("Position Tracking");
 
+    // First point is current position
     GeoDataPlacemark *placemark = new GeoDataPlacemark;
+    placemark->setName("Current Position");
+    placemark->setVisible(false);
+    m_document->append(placemark);
+
+    // Second point is position track
+    placemark = new GeoDataPlacemark;
     GeoDataMultiGeometry *multiGeometry = new GeoDataMultiGeometry;
     GeoDataLineString *lineString = new GeoDataLineString;
 
     multiGeometry->append(lineString);
     placemark->setGeometry(multiGeometry);
+    placemark->setName("Current Track");
     m_document->append(placemark);
 
     m_fileManager->addGeoDataDocument(m_document);
@@ -51,7 +59,6 @@ void PositionTracking::setPosition( GeoDataCoordinates position,
     if ( m_positionProvider && m_positionProvider->status() ==
         PositionProviderStatusAvailable )
     {
-
         GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(m_document->child(m_document->size()-1));
         GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
         GeoDataLineString *lineString = static_cast<GeoDataLineString*>(geometry->child(geometry->size()-1));
@@ -61,10 +68,25 @@ void PositionTracking::setPosition( GeoDataCoordinates position,
         if ( !( m_gpsCurrentPosition ==
                 position ) )
         {
+            placemark = static_cast<GeoDataPlacemark*>(m_document->child(0));
+            placemark->setCoordinate(position);
             m_gpsCurrentPosition = position;
             emit gpsLocation( position, speed() );
         }
     }
+}
+
+
+void PositionTracking::setStatus( PositionProviderStatus status )
+{
+    if (status == PositionProviderStatusAvailable) {
+        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(m_document->child(m_document->size()-1));
+        GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
+        GeoDataLineString *lineString = new GeoDataLineString;
+        multiGeometry->append(lineString);
+    }
+
+    emit statusChanged( status );
 }
 
 void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin )
@@ -79,7 +101,7 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
         m_positionProvider->setParent( this );
         mDebug() << "Initializing position provider:" << m_positionProvider->name();
         connect( m_positionProvider, SIGNAL( statusChanged( PositionProviderStatus ) ),
-                this, SIGNAL( statusChanged(PositionProviderStatus ) ) );
+                this, SLOT( setStatus(PositionProviderStatus) ) );
         connect( m_positionProvider, SIGNAL( positionChanged( GeoDataCoordinates,GeoDataAccuracy ) ),
                  this, SLOT( setPosition( GeoDataCoordinates,GeoDataAccuracy ) ) );
 

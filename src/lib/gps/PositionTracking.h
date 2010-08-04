@@ -67,6 +67,8 @@ public slots:
     void setPosition( GeoDataCoordinates position,
                           GeoDataAccuracy accuracy );
 
+    void setStatus( PositionProviderStatus status );
+
  private:
 
     GeoDataDocument     *m_document;
