@@ -11,7 +11,6 @@
 #ifndef MARBLE_KMLFILEVIEWITEM_H
 #define MARBLE_KMLFILEVIEWITEM_H
 
-#include "AbstractFileViewItem.h"
 #include "GeoDataDocument.h"
 
 namespace Marble
@@ -19,24 +18,23 @@ namespace Marble
 
 class FileManager;
 
-class KmlFileViewItem : public AbstractFileViewItem
+class KmlFileViewItem
 {
   public:
-    KmlFileViewItem( FileManager &manager, GeoDataDocument *document );
+    KmlFileViewItem( const GeoDataDocument &document );
     ~KmlFileViewItem();
 
     /*
      * AbstractFileViewItem methods
      */
-    virtual void saveFile();
-    virtual bool isShown() const;
-    virtual void setShown( bool value );
-    virtual QString name() const;
+    void saveFile();
+    bool isShown() const;
+    void setShown( bool value );
+    QString name() const;
 
     GeoDataDocument* document();
   private:
-    FileManager  &m_fileManager;
-    GeoDataDocument    *m_document;
+    GeoDataDocument    m_document;
 };
 
 }

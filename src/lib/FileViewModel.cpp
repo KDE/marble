@@ -14,7 +14,7 @@
 
 #include <QtGui/QItemSelectionModel>
 
-#include "AbstractFileViewItem.h"
+#include "KmlFileViewItem.h"
 #include "FileManager.h"
 
 using namespace Marble;
@@ -46,7 +46,7 @@ QVariant FileViewModel::data( const QModelIndex & index, int role ) const
 
     if ( row < m_manager->size() ) {
         if ( index.column() == 0 ) {
-            const AbstractFileViewItem& item = *m_manager->at( row );
+            const KmlFileViewItem& item = *m_manager->at( row );
 
             if ( role == Qt::CheckStateRole ) {
                 return item.isShown () ? Qt::Checked : Qt::Unchecked;
@@ -81,7 +81,7 @@ bool FileViewModel::setData( const QModelIndex& index, const QVariant& value, in
         if ( index.column() == 0 ) {
             if ( role == Qt::CheckStateRole ) {
 
-                AbstractFileViewItem& item = *m_manager->at( row );
+                KmlFileViewItem& item = *m_manager->at( row );
                 bool newValue = value.toBool ();
 
                 if ( item.isShown() != newValue ) {

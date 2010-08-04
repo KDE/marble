@@ -86,8 +86,7 @@ void PlacemarkManager::setFileManager( FileManager *fileManager )
 
 void PlacemarkManager::addGeoDataDocument( int index )
 {
-    KmlFileViewItem *file =
-            static_cast<KmlFileViewItem*>(d->m_fileManager->at(index));
+    KmlFileViewItem *file = d->m_fileManager->at(index);
     if (file)
     {
         const GeoDataDocument &document = *file->document();
@@ -109,8 +108,7 @@ void PlacemarkManager::addGeoDataDocument( int index )
 
 void PlacemarkManager::removeGeoDataDocument( int index )
 {
-    KmlFileViewItem *file =
-            static_cast<KmlFileViewItem*>(d->m_fileManager->at(index));
+    KmlFileViewItem *file = d->m_fileManager->at(index);
     if (file)
     {
         const GeoDataDocument &document = *file->document();

@@ -19,7 +19,7 @@
 namespace Marble
 {
 
-class AbstractFileViewItem;
+class KmlFileViewItem;
 class FileManagerPrivate;
 class GeoDataDocument;
 class MarbleDataFacade;
@@ -78,12 +78,12 @@ class FileManager : public QObject
     */
     void addData( const QString &name, const QString &data );
 
-    void addFile( AbstractFileViewItem *item );
+    void addFile( KmlFileViewItem *item );
     void saveFile( int index );
     void closeFile( int index );
 
     int size() const;
-    AbstractFileViewItem *at( int index );
+    KmlFileViewItem *at( int index );
 
 
  Q_SIGNALS:

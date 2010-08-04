@@ -52,7 +52,6 @@
 #include "MercatorScanlineTextureMapper.h"
 #include "gps/PositionTracking.h"
 #include "HttpDownloadManager.h"
-#include "KmlFileViewItem.h"
 #include "LayerManager.h"
 #include "MarbleDataFacade.h"
 #include "MarbleDirs.h"

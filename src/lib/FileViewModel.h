@@ -22,7 +22,6 @@ class QItemSelectionModel;
 namespace Marble
 {
 
-class AbstractFileViewItem;
 class FileManager;
 
 class MARBLE_EXPORT FileViewModel : public QAbstractListModel

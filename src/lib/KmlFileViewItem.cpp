@@ -15,8 +15,7 @@
 
 using namespace Marble;
 
-KmlFileViewItem::KmlFileViewItem( FileManager& manager, GeoDataDocument* document ) :
-    m_fileManager( manager ),
+KmlFileViewItem::KmlFileViewItem( const GeoDataDocument &document ) :
     m_document( document )
 {
 }
@@ -33,25 +32,25 @@ void KmlFileViewItem::saveFile()
 
 GeoDataDocument* KmlFileViewItem::document()
 {
-    return m_document;
+    return &m_document;
 }
 
 bool KmlFileViewItem::isShown() const
 {
-    return m_document->isVisible();
+    return m_document.isVisible();
 }
 
 void KmlFileViewItem::setShown( bool value )
 {
-    m_document->setVisible( value );
+    m_document.setVisible( value );
 }
 
 QString KmlFileViewItem::name() const
 {
-    if(!m_document->name().isEmpty())
-        return m_document->name();
-    else if(!m_document->fileName().isEmpty())
-        return m_document->fileName();
+    if(!m_document.name().isEmpty())
+        return m_document.name();
+    else if(!m_document.fileName().isEmpty())
+        return m_document.fileName();
     else
         return QString("KML Document");
 

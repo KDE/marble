@@ -39,7 +39,7 @@ public:
     MarbleDataFacade* m_datafacade;
     QList<FileLoader*> m_loaderList;
     QStringList m_pathList;
-    QList < AbstractFileViewItem* > m_fileItemList;
+    QList < KmlFileViewItem* > m_fileItemList;
 };
 }
 
@@ -58,7 +58,7 @@ FileManager::~FileManager()
         }
     }
 
-    foreach ( AbstractFileViewItem *file, d->m_fileItemList ) {
+    foreach ( KmlFileViewItem *file, d->m_fileItemList ) {
         delete file;
     }
 
@@ -131,7 +131,7 @@ void FileManager::removeFile( const QString& key )
     }
 }
 
-void FileManager::addFile ( AbstractFileViewItem * item )
+void FileManager::addFile ( KmlFileViewItem * item )
 {
     mDebug() << "FileManager::addFile";
     d->m_fileItemList.append( item );
@@ -150,8 +150,7 @@ void FileManager::closeFile( int index )
     mDebug() << "FileManager::closeFile";
     if ( index < d->m_fileItemList.size() ) {
         emit fileRemoved( index );
-        KmlFileViewItem *file =
-                static_cast<KmlFileViewItem*>( d->m_fileItemList.at( index ));
+        KmlFileViewItem *file = d->m_fileItemList.at( index );
         if ( file ) {
             delete file->document();
         }
@@ -165,7 +164,7 @@ int FileManager::size() const
     return d->m_fileItemList.size();
 }
 
-AbstractFileViewItem * FileManager::at( int index )
+KmlFileViewItem * FileManager::at( int index )
 {
     if ( index < d->m_fileItemList.size() ) {
         return d->m_fileItemList.at( index );
@@ -175,7 +174,7 @@ AbstractFileViewItem * FileManager::at( int index )
 
 void FileManager::addGeoDataDocument( GeoDataDocument* document )
 {
-    KmlFileViewItem* item = new KmlFileViewItem( *this, document );
+    KmlFileViewItem* item = new KmlFileViewItem( *document );
     addFile( item );
 
     // now get the document that will be preserved throughout the life time
