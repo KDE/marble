@@ -304,6 +304,7 @@ GeoSceneDocument* MarbleModel::mapTheme() const
 void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
                                Projection currentProjection )
 {
+    GeoSceneDocument *oldTheme = d->m_mapTheme;
     d->m_mapTheme = mapTheme;
     addDownloadPolicies( d->m_mapTheme );
     d->m_tileLoader->setTextureLayerSettings( d->textureLayerProperties() );
@@ -410,11 +411,36 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             }
         }
     }
-    QStringList loadedContainers = d->m_fileManager->containers();
+
+    // find the list of previous theme's geodata
+    QStringList loadedContainers;
+    QVector<GeoSceneLayer*>::const_iterator it;
+    QVector<GeoSceneLayer*>::const_iterator end;
+    if (oldTheme) {
+        it = oldTheme->map()->layers().constBegin();
+        end = oldTheme->map()->layers().constEnd();
+        for (; it != end; ++it) {
+            GeoSceneLayer* layer = *it;
+            if ( layer->backend() == dgml::dgmlValue_geodata && layer->datasets().count() > 0 ) {
+                // look for documents
+                const QVector<GeoSceneAbstractDataset*> & datasets = layer->datasets();
+                QVector<GeoSceneAbstractDataset*>::const_iterator itds = datasets.constBegin();
+                QVector<GeoSceneAbstractDataset*>::const_iterator endds = datasets.constEnd();
+                for (; itds != endds; ++itds) {
+                    GeoSceneAbstractDataset* dataset = *itds;
+                    if( dataset->fileFormat() == "KML" ) {
+                        QString containername = reinterpret_cast<GeoSceneXmlDataSource*>(dataset)->filename();
+                        if( containername.endsWith(".kml") ) containername.remove(".kml");
+                        loadedContainers <<  containername;
+                    }
+                }
+            }
+        }
+    }
     QStringList loadList;
     const QVector<GeoSceneLayer*> & layers = d->m_mapTheme->map()->layers();
-    QVector<GeoSceneLayer*>::const_iterator it = layers.constBegin();
-    QVector<GeoSceneLayer*>::const_iterator end = layers.constEnd();
+    it = layers.constBegin();
+    end = layers.constEnd();
     for (; it != end; ++it) {
         GeoSceneLayer* layer = *it;
         if ( layer->backend() == dgml::dgmlValue_geodata && layer->datasets().count() > 0 ) {
@@ -434,10 +460,10 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
         }
     }
     // unload old standard Placemarks which are not part of the new map
-//    foreach(const QString& container, loadedContainers) {
-//        loadedContainers.pop_front();
-//        d->m_fileManager->removeFile( container );
-//    }
+    foreach(const QString& container, loadedContainers) {
+        loadedContainers.pop_front();
+        d->m_fileManager->removeFile( container );
+    }
     // load new standard Placemarks
     foreach(const QString& container, loadList) {
         loadList.pop_front();

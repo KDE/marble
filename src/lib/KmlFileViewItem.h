@@ -21,12 +21,9 @@ class FileManager;
 class KmlFileViewItem
 {
   public:
-    KmlFileViewItem( const GeoDataDocument &document );
+    KmlFileViewItem( GeoDataDocument *document );
     ~KmlFileViewItem();
 
-    /*
-     * AbstractFileViewItem methods
-     */
     void saveFile();
     bool isShown() const;
     void setShown( bool value );
@@ -34,7 +31,7 @@ class KmlFileViewItem
 
     GeoDataDocument* document();
   private:
-    GeoDataDocument    m_document;
+    GeoDataDocument    *m_document;
 };
 
 }

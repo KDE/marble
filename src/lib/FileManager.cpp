@@ -174,7 +174,7 @@ KmlFileViewItem * FileManager::at( int index )
 
 void FileManager::addGeoDataDocument( GeoDataDocument* document )
 {
-    KmlFileViewItem* item = new KmlFileViewItem( *document );
+    KmlFileViewItem* item = new KmlFileViewItem( document );
     addFile( item );
 
     // now get the document that will be preserved throughout the life time
