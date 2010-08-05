@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>203</width>
-    <height>477</height>
+    <width>137</width>
+    <height>190</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,6 +16,12 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="projectionLabel_3">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>Position Tracking</string>
      </property>
@@ -60,6 +66,12 @@
    </item>
    <item>
     <widget class="QLabel" name="recenterLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="toolTip">
       <string extracomment="Select the method to use to recenter your GPS location on map.">Select the method to use to re-center your GPS location on map.</string>
      </property>
@@ -104,8 +116,8 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>164</width>
-       <height>393</height>
+       <width>20</width>
+       <height>20</height>
       </size>
      </property>
     </spacer>
