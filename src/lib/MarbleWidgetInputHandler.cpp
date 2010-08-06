@@ -25,7 +25,7 @@
 #include <QtGui/QToolTip>
 
 #if QT_VERSION >= 0x40600
-  #include <QTouchEvent>
+  #include <QtGui/QTouchEvent>
 #endif
 
 #include "global.h"

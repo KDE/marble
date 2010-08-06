@@ -11,7 +11,7 @@
 #ifndef MARBLE_SERVERLAYOUT_H
 #define MARBLE_SERVERLAYOUT_H
 
-#include <QUrl>
+#include <QtCore/QUrl>
 
 namespace Marble
 {

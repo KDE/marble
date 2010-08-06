@@ -22,7 +22,7 @@
 #ifndef MATHHELPER_H
 #define MATHHELPER_H
 
-#include <qglobal.h>
+#include <QtCore/qglobal.h>
 
 #ifdef Q_CC_MSVC
 #include <math.h>

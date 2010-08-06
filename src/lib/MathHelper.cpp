@@ -21,8 +21,6 @@
 
 #include "MathHelper.h"
 
-#include <qglobal.h>
-
 #ifdef Q_CC_MSVC
 #include <float.h>
 

@@ -9,8 +9,8 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include "qextserialport.h"
-#include <QMutexLocker>
-#include <QDebug>
+#include <QtCore/QMutexLocker>
+#include <QtCore/QDebug>
 #ifdef HAVE_SYS_FILIO_H
 #include <sys/filio.h>
 #endif /* HAVE_SYS_FILIO_H */

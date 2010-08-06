@@ -16,7 +16,7 @@
 #include "AbstractFloatItem.h"
 #include "GeoDataCoordinates.h"
 
-#include <QObject>
+#include <QtCore/QObject>
 
 namespace Ui
 {
