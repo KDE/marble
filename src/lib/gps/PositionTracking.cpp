@@ -14,6 +14,8 @@
 
 #include "GeoDataDocument.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataStyle.h"
+#include "GeoDataStyleMap.h"
 #include "AbstractProjection.h"
 #include "FileManager.h"
 #include "MarbleMath.h"
@@ -42,6 +44,21 @@ PositionTracking::PositionTracking( FileManager *fileManager,
     multiGeometry->append(lineString);
     placemark->setGeometry(multiGeometry);
     placemark->setName("Current Track");
+
+    GeoDataStyle style;
+    GeoDataLineStyle lineStyle;
+    lineStyle.setColor(QColor("#E20700")); // Oxygen Red
+    lineStyle.setWidth(2);
+    style.setLineStyle(lineStyle);
+    style.setStyleId("track");
+
+    GeoDataStyleMap styleMap;
+    styleMap.setStyleId("map-track");
+    styleMap.insert("normal", QString("#").append(style.styleId()));
+    m_document->addStyleMap(styleMap);
+    m_document->addStyle(style);
+
+    placemark->setStyleUrl(QString("#").append(styleMap.styleId()));
     m_document->append(placemark);
 
     m_fileManager->addGeoDataDocument(m_document);

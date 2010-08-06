@@ -42,7 +42,7 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
 
     GeoDataStyle style;
     GeoDataLineStyle lineStyle;
-    lineStyle.setColor(Qt::green);
+    lineStyle.setColor(QColor("#37A42C")); // Oxygen green
     lineStyle.setWidth(2);
     style.setLineStyle(lineStyle);
     style.setStyleId("track");
