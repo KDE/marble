@@ -8,4 +8,5 @@ add_subdirectory( nominatim )
 # Routing
 add_subdirectory( gosmore )
 add_subdirectory( openrouteservice )
+add_subdirectory( routino )
 add_subdirectory( yours )
