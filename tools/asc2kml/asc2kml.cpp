@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
     QString  sourcefilename;
     QString  targetfilename;
     QString  supportfilename;
+    QString  timezonefilename;
 
     QCoreApplication  app( argc, argv );
 
@@ -44,13 +45,15 @@ int main(int argc, char *argv[])
         if ( strcmp( argv[ i ], "-o" ) != 0 )
             continue;
 
-        targetfilename = QString(argv[i+1]);
-        sourcefilename = QString(argv[i+2]);
-	supportfilename = QString(argv[i+3]);
+        targetfilename   = QString( argv[i+1] );
+        sourcefilename   = QString( argv[i+2] );
+        supportfilename  = QString( argv[i+3] );
+        timezonefilename = QString( argv[i+4] );
 
         qDebug() << "Source: " << sourcefilename;
-	qDebug() << "Support: " << supportfilename;
+        qDebug() << "Support: " << supportfilename;
         qDebug() << "Target: " << targetfilename;
+        qDebug() << "Timezone: " << timezonefilename;
 
         QFile  sourcefile( sourcefilename );
         sourcefile.open( QIODevice::ReadOnly );
@@ -68,8 +71,14 @@ int main(int argc, char *argv[])
         QFile  supportfile( supportfilename );
         supportfile.open( QIODevice::ReadOnly );
 
-	QTextStream  supportstream( &supportfile );
+        QTextStream  supportstream( &supportfile );
         supportstream.setCodec("UTF-8");
+
+        QFile  timezonefile( timezonefilename );
+        timezonefile.open( QIODevice::ReadOnly );
+
+        QTextStream  timezonestream( &timezonefile );
+        timezonestream.setCodec("UTF-8");
 
         // gzFile gzDoc = gzopen( targetfilename.toLatin1(), "w");
         // QTextStream targetstream( new QString() );
@@ -87,10 +96,11 @@ int main(int argc, char *argv[])
         QString  popstring;
         QString  latstring;
         QString  lngstring;
-        float    lat;
-        float    lng;
-        int      population;
-	int      elevation;
+        QString  timezone;
+        QString  gmt;
+        QString	 dst;
+        int      dstoffset;
+        int      gmtoffset;
         QStringList  splitline;
 
         while ( !sourcestream.atEnd() ) {
@@ -106,57 +116,71 @@ int main(int argc, char *argv[])
             statecode  = splitline[10];
             popstring  = splitline[14];
             elestring  = splitline[16];
-
-	    supportstream.seek(0);
-	    while ( !supportstream.atEnd() ) {
-
-		    QString supportrawline;
-		    QStringList supportsplitline;
-	            supportrawline = supportstream.readLine();
-	            supportsplitline = supportrawline.split('\t');
-
-		    if(supportsplitline[0] == (country + "." +statecode))
-		    {
-			state = supportsplitline[1];
-			break;
-		    }
-	    }
+            timezone   = splitline[17];
 	
-            population = (int) ( popstring.toFloat() );
-            elevation  = (int) ( elestring.toFloat() );
+            supportstream.seek(0);
+            while ( !supportstream.atEnd() ) {
+                QString supportrawline;
+                QStringList supportsplitline;
+                supportrawline = supportstream.readLine();
+                supportsplitline = supportrawline.split('\t');
+                if(supportsplitline[0] == (country + "." +statecode))
+                {
+                    state = supportsplitline[1];
+                    break;
+                }
+            }   
 
-          /*
-            lng = lngstring.left( lngstring.size() - 2 ).toFloat();
-            if ( lngstring.contains( "W" ) )
-                lng=-lng;
+            timezonestream.seek(0);
+            timezonestream.readLine();
+            while ( !timezonestream.atEnd() ) {
+                    QString timezonerawline;
+                    QStringList timezonesplitline;
+                    timezonerawline = timezonestream.readLine();
+                    timezonesplitline = timezonerawline.split('\t');
 
-            lat = latstring.left( latstring.size() - 2 ).toFloat();
-            if ( latstring.contains( "S" ) )
-                lat=-lat;
-          */
+                    if( timezonesplitline[0] == timezone )
+                    {
+                        gmt = timezonesplitline[1];
+                        dst = timezonesplitline[2];
+                        break;
+                    }
+            }
 
-            lng = lngstring.toFloat();
-	        lat = latstring.toFloat();
-		if(role != "PPLX")
-		{          
+            gmtoffset = ( int ) ( gmt.toFloat() * 100 );
+            dstoffset = ( int ) ( dst.toFloat() * 100 ) - gmtoffset;
+	
+            if(role != "PPLX")
+            {          
 	            targetstream << "    <Placemark> \n";
          	    targetstream << "        <name>" << escapeXml( name ) << "</name> \n";
-       	            targetstream << "        <state>" << escapeXml( state ) << "</state> \n";
-		    targetstream << "        <CountryNameCode>" << escapeXml( country.toUpper() ) << "</CountryNameCode>\n";
+                    targetstream << "        <state>" << escapeXml( state ) << "</state> \n";
+      	        targetstream << "        <CountryNameCode>" << escapeXml( country.toUpper() ) << "</CountryNameCode>\n";
         	    targetstream << "        <role>" << escapeXml( role ) << "</role> \n";
         	    targetstream << "        <pop>"
-				 << escapeXml( QString::number( population ) ) << "</pop> \n";
+                             << escapeXml( popstring ) << "</pop> \n";
            	    targetstream << "        <Point>\n"
                         	 << "            <coordinates>"
-                      		 << escapeXml( QString::number( lng ) )
+                      		 << escapeXml( lngstring )
                         	 << ","
-                        	 << escapeXml( QString::number( lat ) )
-			         << ","
-			 	 << escapeXml( QString::number( elevation ) )
+                        	 << escapeXml( latstring )
+				<< ","
+                             << escapeXml( elestring )
 	                         << "</coordinates> \n"
 	                         << "        </Point> \n";
+		        targetstream << "        <ExtendedData>\n"
+                                 << "            <Data name=\"gmt\">\n"
+                                 << "                <value>" << escapeXml( QString::number( gmtoffset ) ) << "</value>\n"
+                                 << "            </Data>\n";
+                    if( dstoffset )
+                    {
+                        targetstream << "            <Data name=\"dst\">\n"
+                                 << "                <value>" << escapeXml( QString::number( dstoffset) ) << "</value>\n"
+                                 << "            </Data>\n";
+                    }
+                    targetstream << "        </ExtendedData>\n";  
 	            targetstream << "    </Placemark> \n";
-		}
+            }
         }
 
         targetstream << "</Document> \n"
@@ -168,11 +192,12 @@ int main(int argc, char *argv[])
 
         sourcefile.close();
         targetfile.close();
-	supportfile.close();
+        supportfile.close();
+        timezonefile.close();
         qDebug("Finished!");
         return 0;
     }
 
-    qDebug(" asc2kml -o targetfile sourcefile supporfile");
+    qDebug(" asc2kml -o targetfile sourcefile supporfile timezonefile");
     app.exit();
 }

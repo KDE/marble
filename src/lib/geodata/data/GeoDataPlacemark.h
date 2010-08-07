@@ -143,6 +143,16 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     void setPopulation( qint64 population );
 
     /**
+     * Return the state of the placemark.
+     */
+    const QString state() const;
+
+    /**
+     * Set the state @p state of the placemark.
+     */
+    void setState( const QString &state );
+
+    /**
      * Return the country code of the placemark.
      */
     const QString countryCode() const;

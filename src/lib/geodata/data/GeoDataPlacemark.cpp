@@ -137,6 +137,17 @@ void GeoDataPlacemark::setPopulation( qint64 population )
     p()->m_population = population;
 }
 
+const QString GeoDataPlacemark::state() const
+{
+    return p()->m_state;
+}
+
+void GeoDataPlacemark::setState( const QString &state )
+{
+    detach();
+    p()->m_state = state;
+}
+
 const QString GeoDataPlacemark::countryCode() const
 {
     return p()->m_countrycode;

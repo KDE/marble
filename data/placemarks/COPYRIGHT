@@ -1,10 +1,13 @@
 CITIES:
 
-The file "cities.txt" and "statecodes.txt" are data dumps from Geonames.org:
+The file "cities.txt", "timeZones.txt" and "statecodes.txt" are data dumps from Geonames.org:
 http://geonames.org
 
 The file "cities.txt" contains all cities with a population of
 more than 15000 people. It is contained in the cities15000.zip file at Geonames.org.
+
+The file "timeZones.txt" contains the names of timezones and their GMT and DST offsets.
+It is timeZones.txt at Geonames.org.
 
 The file "statecodes.txt" contains the names for the administrative subdivision.
 It is admin1Codes.txt at Geonames.org.

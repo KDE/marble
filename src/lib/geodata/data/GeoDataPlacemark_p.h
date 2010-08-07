@@ -40,6 +40,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         m_countrycode = other.m_countrycode;
         m_area = other.m_area;
         m_population = other.m_population;
+        m_state = other.m_state;
 
         delete m_geometry;
         if( !other.m_geometry ) return;
@@ -91,6 +92,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
     QString             m_countrycode;  // Country code.
     qreal               m_area;         // Area in square kilometer
     qint64              m_population;   // population in number of inhabitants
+    QString             m_state;        // State
 
 };
 

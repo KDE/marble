@@ -126,6 +126,10 @@ void PlacemarkInfoDialog::showContent()
     }
     coordinates_val_lbl->setText( m_index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>().toString() );
     country_val_lbl->setText( m_index.data( MarblePlacemarkModel::CountryCodeRole ).toString() );
+    QString gmt = QString( "%1" ).arg( m_index.data( MarblePlacemarkModel::GmtRole ).toInt()/( double ) 100, 0, 'f', 1 );
+    QString dst = QString( "%1" ).arg( ( m_index.data( MarblePlacemarkModel::GmtRole ).toInt() + m_index.data( MarblePlacemarkModel::DstRole ).toInt() )/( double ) 100, 0, 'f', 1 );
+    gmtdst_val_lbl->setText( gmt + " / " + dst );
+    state_val_lbl->setText( m_index.data( MarblePlacemarkModel::StateRole ).toString() );
 
     const qint64 population = m_index.data( MarblePlacemarkModel::PopulationRole ).toLongLong();
     const qreal area = m_index.data( MarblePlacemarkModel::AreaRole ).toDouble();
@@ -147,7 +151,6 @@ void PlacemarkInfoDialog::showContent()
     elevation_val_lbl->setText( tr("%1 m").arg( QLocale::system().toString( altitude ) ) );
     diameter_val_lbl->setText( tr("%1 km").arg( QLocale::system().toString( population / 1000.0, 'g', 4 ) ) );
 
-
     country_lbl->setVisible( true );
     country_val_lbl->setVisible( true );
     elevation_lbl->setVisible( true );
@@ -158,8 +161,10 @@ void PlacemarkInfoDialog::showContent()
     population_val_lbl->setVisible( true );
     diameter_lbl->setVisible( false );
     diameter_val_lbl->setVisible( false );
-    timezone_lbl->setVisible( false );
-    timezone_val_lbl->setVisible( false );
+    gmtdst_lbl->setVisible( true );
+    gmtdst_val_lbl->setVisible( true );
+    state_lbl->setVisible( true );
+    state_val_lbl->setVisible( true );
 
     if ( altitude <= 0 )
         elevation_val_lbl->setText( tr("-") );
@@ -170,6 +175,10 @@ void PlacemarkInfoDialog::showContent()
         population_lbl->setVisible( false );
         country_lbl->setVisible( false );
         country_val_lbl->setVisible( false );
+        gmtdst_lbl->setVisible( false );
+        gmtdst_val_lbl->setVisible( false );
+        state_lbl->setVisible( false );
+        state_val_lbl->setVisible( false );
     }
 
     if ( role == "A" ) {
@@ -179,16 +188,28 @@ void PlacemarkInfoDialog::showContent()
         country_val_lbl->setVisible( false );
         elevation_val_lbl->setVisible( false );
         elevation_lbl->setVisible( false );
+        gmtdst_lbl->setVisible( false );
+        gmtdst_val_lbl->setVisible( false );
+        state_lbl->setVisible( false );
+        state_val_lbl->setVisible( false );
     }
 
     if ( role == "K" )
     {
         country_lbl->setVisible( false );
         country_val_lbl->setVisible( false );
+        gmtdst_lbl->setVisible( false );
+        gmtdst_val_lbl->setVisible( false );
+        state_lbl->setVisible( false );
+        state_val_lbl->setVisible( false );
     }
     if ( (role == "a" || role == "c" || role == "m") && m_index.data( MarblePlacemarkModel::PopularityRole ).toInt() > 0) {
         diameter_lbl->setVisible( true );
         diameter_val_lbl->setVisible( true );
+        gmtdst_lbl->setVisible( false );
+        gmtdst_val_lbl->setVisible( false );
+        state_lbl->setVisible( false );
+        state_val_lbl->setVisible( false );
     }
 
     if ( role == "H" || role == "V" || role == "W") {
@@ -196,6 +217,10 @@ void PlacemarkInfoDialog::showContent()
         population_lbl->setVisible( false );
         area_val_lbl->setVisible( false );
         area_lbl->setVisible( false );
+        gmtdst_lbl->setVisible( false );
+        gmtdst_val_lbl->setVisible( false );
+        state_lbl->setVisible( false );
+        state_val_lbl->setVisible( false );
     }
     else if ( role == "P" || role == "M" ) {
         population_val_lbl->setVisible( false );
@@ -204,11 +229,19 @@ void PlacemarkInfoDialog::showContent()
         elevation_lbl->setVisible( false );
         area_val_lbl->setVisible( false );
         area_lbl->setVisible( false );
+        gmtdst_lbl->setVisible( false );
+        gmtdst_val_lbl->setVisible( false );
+        state_lbl->setVisible( false );
+        state_val_lbl->setVisible( false );
     }
     else if ( role == "O" || role == "K" || role == "S"  )
     {
         elevation_lbl->setVisible( false );
         elevation_val_lbl->setVisible( false );
+        gmtdst_lbl->setVisible( false );
+        gmtdst_val_lbl->setVisible( false );
+        state_lbl->setVisible( false );
+        state_val_lbl->setVisible( false );
     }
     else{
         area_val_lbl->setVisible( false );

@@ -6,7 +6,7 @@ All other steps are optional and can be done by one of our programmers:
 1. Compile marble/tools/asc2kml by executing "qmake-qt4 && make"
 2. Then execute the resulting binary:
 
-tackat@tackat-laptop:~/marble/tools/asc2kml$ ./asc2kml -o ~/marble/data/placemarks/cityplacemarks.kml ~/marble/data/placemarks/cities.txt  ~/marble/data/placemarks/statecodes.txt
+tackat@tackat-laptop:~/marble/tools/asc2kml$ ./asc2kml -o ~/marble/data/placemarks/cityplacemarks.kml ~/marble/data/placemarks/cities.txt  ~/marble/data/placemarks/statecodes.txt ~/marble/data/placemarks/timeZones.txt
 
 3. Create the placemark-directory in your home directory if it doesn't exist already.
 

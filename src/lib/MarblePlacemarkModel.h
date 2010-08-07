@@ -52,11 +52,14 @@ class MARBLE_EXPORT MarblePlacemarkModel : public QAbstractListModel
       PopulationRole,                  ///< The population
       AreaRole,                        ///< The area size
       CountryCodeRole,                 ///< The country code
+      StateRole,                       ///< The state
       VisualCategoryRole,              ///< The category
       StyleRole,                       ///< The style
       PopularityIndexRole,             ///< The popularity index
       PopularityRole,                  ///< The popularity
       ObjectPointerRole,               ///< The pointer to a specific object
+      GmtRole,                         ///< The Greenwich Mean Time
+      DstRole,                         ///< The Daylight Saving Time
       GeometryRole                     ///< The GeoDataGeometry geometry
     };
 

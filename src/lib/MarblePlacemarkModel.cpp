@@ -19,6 +19,7 @@
 
 // Marble
 #include "MarbleDebug.h"
+#include "GeoDataExtendedData.h"
 #include "GeoDataStyle.h"       // In geodata/data/
 
 using namespace Marble;
@@ -98,6 +99,8 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
         return d->m_placemarkContainer->at( index.row() )->population();
     } else if ( role == CountryCodeRole ) {
         return d->m_placemarkContainer->at( index.row() )->countryCode();
+    } else if ( role == StateRole ) {
+        return d->m_placemarkContainer->at( index.row() )->state();
     } else if ( role == PopularityRole ) {
         return d->m_placemarkContainer->at( index.row() )->popularity();
     } else if ( role == DescriptionRole ) {
@@ -110,6 +113,10 @@ QVariant MarblePlacemarkModel::data( const QModelIndex &index, int role ) const
         return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->coordinate() );
     } else if ( role == StyleRole ) {
         return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->style() );
+    } else if ( role == GmtRole ) {
+        return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->extendedData().value("gmt").value() );
+    } else if ( role == DstRole ) {
+        return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->extendedData().value("dst").value() );
     } else if ( role == GeometryRole ) {
         return qVariantFromValue( d->m_placemarkContainer->at( index.row() )->geometry() );
 /*    } else if ( role == ObjectPointerRole ) {

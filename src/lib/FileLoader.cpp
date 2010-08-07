@@ -20,6 +20,8 @@
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataData.h"
+#include "GeoDataExtendedData.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 
@@ -220,7 +222,7 @@ bool FileLoader::loadFile( const QString &filename )
     // Read the version
     qint32 version;
     in >> version;
-    if ( version < 014 ) {
+    if ( version < 015 ) {
         qDebug( "Bad file - too old!" );
         return false;
     }
@@ -245,9 +247,14 @@ bool FileLoader::loadFile( const QString &filename )
 
     QString  tmpstr;
     qint64   tmpint64;
+    qint8    tmpint8;
+    qint16   tmpint16;
+    GeoDataData tmpdata;
 
     while ( !in.atEnd() ) {
         GeoDataPlacemark *mark = new GeoDataPlacemark;
+        GeoDataData tmpgmt;
+        GeoDataData tmpdst;
         in >> tmpstr;
         mark->setName( tmpstr );
         in >> lon >> lat >> alt;
@@ -258,10 +265,18 @@ bool FileLoader::loadFile( const QString &filename )
         mark->setDescription( tmpstr );
         in >> tmpstr;
         mark->setCountryCode( tmpstr );
+        in >> tmpstr;
+        mark->setState( tmpstr );
         in >> area;
         mark->setArea( (qreal)(area) );
         in >> tmpint64;
         mark->setPopulation( tmpint64 );
+        in >> tmpint16;
+        tmpgmt.setValue( QVariant( ( int ) tmpint16 ) );
+        mark->extendedData().addValue("gmt", tmpgmt );
+        in >> tmpint8;
+        tmpdst.setValue( QVariant( ( int ) tmpint8 ) );
+        mark->extendedData().addValue("dst", tmpdst );
 
         m_document->append( mark );
     }
@@ -285,7 +300,7 @@ void FileLoader::saveFile( const QString& filename )
     // Write a header with a "magic number" and a version
     // out << (quint32)0xA0B0C0D0;
     out << (quint32)MarbleMagicNumber;
-    out << (qint32)014;
+    out << (qint32)015;
 
     out.setVersion( QDataStream::Qt_4_2 );
 
@@ -311,8 +326,11 @@ void FileLoader::savePlacemarks(QDataStream &out, const GeoDataContainer *contai
         out << QString( (*it)->role() );
         out << QString( (*it)->description() );
         out << QString( (*it)->countryCode() );
+        out << QString( (*it)->state() );
         out << (double) (*it)->area();
         out << (qint64) (*it)->population();
+        out << ( qint16 ) ( (*it)->extendedData().value("gmt").value().toInt() );
+        out << ( qint8 ) ( (*it)->extendedData().value("dst").value().toInt() );
     }
 
     const QVector<GeoDataFolder*> folders = container->folderList();
