@@ -349,7 +349,7 @@ Qt::ItemFlags GeoDataTreeModel::flags ( const QModelIndex & index ) const
     GeoDataObject *object = static_cast<GeoDataObject*>( index.internalPointer() );
     GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
     if ( feature ) {
-        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable | Qt::ItemIsUserCheckable;
+        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable;
     }
     return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
 }
