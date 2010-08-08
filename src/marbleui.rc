@@ -24,6 +24,8 @@
     <Separator/>
     <Action name="control_sun"/>
   </Menu>
+  <Menu name="bookmarks" noMerge="1"><text>&amp;Bookmarks</text>
+  </Menu>
   <Menu name="settings" noMerge="1"><text>&amp;Settings</text>
     <Action name="fullscreen"/>
   </Menu>
