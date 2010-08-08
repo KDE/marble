@@ -72,6 +72,7 @@ class GeoSceneTexture;
 class Planet;
 class LayerInterface;
 class RoutingManager;
+class BookmarkManager;
 
 /**
  * @short The data model (not based on QAbstractModel) for a MarbleWidget.
@@ -284,6 +285,10 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     RoutingManager* routingManager();
 
+    /**
+     * return instance of BookmarkManager
+    */
+    BookmarkManager *bookmarkManager() const;
  public Q_SLOTS:
     void clearVolatileTileCache();
     /**

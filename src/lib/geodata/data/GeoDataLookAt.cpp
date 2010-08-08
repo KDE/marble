@@ -43,6 +43,16 @@ GeoDataLookAt::~GeoDataLookAt()
         delete d;
 }
 
+void GeoDataLookAt::setCoordinates( const GeoDataCoordinates& coordinates )
+{
+        d->m_coordinates = coordinates;
+}
+
+QString GeoDataLookAt::nodeType() const
+{
+        return d->nodeType();
+}
+
 void GeoDataLookAt::setAltitude( qreal altitude )
 {
     detach();

@@ -14,6 +14,7 @@
 
 // Marble
 #include "GeoDataCoordinates.h"
+#include "GeoDataTypes.h"
 
 // Qt
 #include <QtCore/QAtomicInt>
@@ -29,6 +30,11 @@ class GeoDataLookAtPrivate
           m_range( 0.0 ),
           ref( 1 )
     {
+    }
+    
+    virtual QString nodeType() const
+    {
+        return GeoDataTypes::GeoDataLookAtType;
     }
 
     GeoDataCoordinates m_coordinates;

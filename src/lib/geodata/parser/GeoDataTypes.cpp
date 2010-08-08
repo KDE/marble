@@ -44,6 +44,7 @@ const char* GeoDataLinearRingType = "GeoDataLinearRing";
 const char* GeoDataLineStringType = "GeoDataLineString";
 const char* GeoDataLineStyleType = "GeoDataLineStyle";
 const char* GeoDataLodType = "GeoDataLod";
+const char* GeoDataLookAtType = "GeoDataLoookAt";
 const char* GeoDataMultiGeometryType = "GeoDataMultyGeometry";
 const char* GeoDataObjectType = "GeoDataObject";
 const char* GeoDataOuterBoundaryType = "GeoDataOuterBoundary";

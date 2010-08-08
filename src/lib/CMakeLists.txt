@@ -188,6 +188,10 @@ set(marblewidget_SRCS
     RunnerPlugin.cpp
     MarbleAbstractRunner.cpp
     RunnerTask.cpp
+
+    BookmarkManager.cpp
+    BookmarkInfoDialog.cpp
+    NewFolderInfoDialog.cpp
 )
 
 set (marblewidget_UI
@@ -210,6 +214,8 @@ set (marblewidget_UI
     LatLonEdit.ui
     routing/RoutingWidget.ui
     DataMigrationWidget.ui
+    BookmarkInfoDialog.ui
+    NameDialog.ui
 )
 
 # FIXME: cleaner approach of src/lib/MarbleControlBox.* vs. marble.qrc

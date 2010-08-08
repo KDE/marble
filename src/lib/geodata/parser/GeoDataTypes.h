@@ -51,6 +51,7 @@ extern const char* GeoDataLinearRingType;
 extern const char* GeoDataLineStringType;
 extern const char* GeoDataLineStyleType;
 extern const char* GeoDataLodType;
+extern const char* GeoDataLookAtType;
 extern const char* GeoDataMultiGeometryType;
 extern const char* GeoDataObjectType;
 extern const char* GeoDataOuterBoundaryType;

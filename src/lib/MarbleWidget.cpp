@@ -48,8 +48,7 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "gps/PositionTracking.h"
-
-
+#include "BookmarkManager.h"
 namespace Marble
 {
 
@@ -1403,6 +1402,37 @@ void MarbleWidget::startStillMode()
     d->repaint();
 }
 
+GeoDataLookAt MarbleWidget::lookAt() const
+{
+    return d->m_map->lookAt();
+}
+
+void MarbleWidget::addBookmark( const GeoDataPlacemark &bookmark, const QString &folderName ) const
+{
+    d->m_model->bookmarkManager()->addBookmark( bookmark, folderName );
+}
+
+
+bool MarbleWidget::loadBookmarkFile( const QString &relativeFileName )
+{
+    return d->m_model->bookmarkManager()->loadFile( relativeFileName );
+}
+
+QVector<GeoDataFolder*> MarbleWidget::folders()
+{
+    return d->m_model->bookmarkManager()->folders();
+}
+
+void MarbleWidget::removeAllBookmarks()
+{
+    d->m_model->bookmarkManager()->removeAllBookmarks();
+}
+
+void MarbleWidget::addNewBookmarkFolder( const QString &name ) const
+{
+    d->m_model->bookmarkManager()->addNewBookmarkFolder( name );
+}
+             
 }
 
 #include "MarbleWidget.moc"

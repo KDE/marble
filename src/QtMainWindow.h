@@ -100,6 +100,15 @@ class MainWindow : public QMainWindow
     void  aboutMarble();
     void  handbook();
 
+    //Bookmark Menu
+    void  openBookmarkInfoDialog();
+    void  createBookmarksListMenu(QMenu *m_bookmarksListMenu, const GeoDataFolder &folder);
+    void  lookAtBookmark( QAction * action );
+    void  removeAllBookmarks();
+    void  openNewBookmarkFolderDialog();
+    void  createBookmarkMenu();
+    void  createFolderList();
+
     // Download region dialog
     void  connectDownloadRegionDialog();
     void  disconnectDownloadRegionDialog();
@@ -121,8 +130,9 @@ class MainWindow : public QMainWindow
     QMenu *m_settingsMenu;
     QMenu *m_infoBoxesMenu;
     QMenu *m_onlineServicesMenu;
-
+	QMenu *m_bookmarkMenu;
     // File Menu
+    QAction *m_openAct;
     QAction *m_exportMapAct;
     QAction *m_downloadAct;
     QAction *m_downloadRegionAction;
@@ -151,7 +161,6 @@ class MainWindow : public QMainWindow
     QAction *m_whatsThisAct;
     QAction *m_aboutMarbleAct;
     QAction *m_aboutQtAct;
-    QAction *m_openAct;
     QAction *m_lockFloatItemsAct;
     QAction *m_handbookAct;
 
@@ -161,6 +170,11 @@ class MainWindow : public QMainWindow
     QLabel      *m_positionLabel;
     QLabel      *m_distanceLabel;    
     void updateStatusBar();
+
+	//Bookmark Menu
+    QAction *m_addBookmarkAct;
+    QAction *m_removeAllBookmarksAct;
+    QAction *m_addBookmarkFolderAct;
 };
 
 } // namespace Marble

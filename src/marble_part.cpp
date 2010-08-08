@@ -55,16 +55,23 @@
 // Marble library classes
 #include "AbstractFloatItem.h"
 #include "AbstractDataPlugin.h"
+#include "BookmarkInfoDialog.h"
+#include "BookmarkManager.h"
 #include "DownloadRegionDialog.h"
 #include "GeoDataCoordinates.h"
+#include "GeoDataFolder.h"
 #include "GeoDataLatLonAltBox.h"
+#include "GeoDataLookAt.h"
+#include "GeoDataPlacemark.h"
 #include "HttpDownloadManager.h"
 #include "MarbleCacheSettingsWidget.h"
 #include "MarbleDirs.h"
+#include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarblePluginSettingsWidget.h"
+#include "NewFolderInfoDialog.h"
 #include "SunControlWidget.h"
 #include "SunLocator.h"
 #include "TileCoordsPyramid.h"
@@ -134,6 +141,11 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     m_position = NOT_AVAILABLE;
     m_distance = m_controlView->marbleWidget()->distanceString();
     m_tileZoomLevel = NOT_AVAILABLE;
+
+    //Load Bookmark File, First time read from system path then once bookmark is used 
+    //a copy of bookmarks.kml will be created in local path 
+    if( m_controlView->marbleWidget()->loadBookmarkFile( "bookmarks/bookmarks.kml" ) )
+        mDebug() << "Bookmark File Loaded Successfully";
 
     QTimer::singleShot( 0, this, SLOT( initObject() ) );
 }
@@ -752,6 +764,69 @@ void MarblePart::setupActions()
         connect( (*it), SIGNAL( actionGroupsChanged() ),
                  this, SLOT( createPluginMenus() ) );
     }
+
+    m_addBookmarkAction = new KAction( this );
+    actionCollection()->addAction( "add_bookmark", m_addBookmarkAction );
+    m_addBookmarkAction->setText( i18nc( "Add Bookmark", "&Add Bookmark" ) );
+    m_addBookmarkAction->setShortcut( Qt::CTRL + Qt::Key_B );
+    connect( m_addBookmarkAction, SIGNAL( triggered( ) ),
+             this,                SLOT( openBookmarkInfoDialog() ) );
+
+    
+    m_removeAllBookmarksAction = new KAction( this );
+    actionCollection()->addAction( "remove_all_bookmark", m_removeAllBookmarksAction );
+    m_removeAllBookmarksAction->setText( i18nc( "Remove All Bookmarks", "&Remove All Bookmarks" ) );
+    connect( m_removeAllBookmarksAction, SIGNAL( triggered( ) ),
+             this,                SLOT( removeAllBookmarks() ) );
+
+    
+    m_addBookmarkFolderAction = new KAction( this );
+    actionCollection()->addAction( "new_bookmark_folder", m_addBookmarkFolderAction );
+    m_addBookmarkFolderAction->setText( i18nc( "New Bookmark Folder", "&New Bookmark Folder" ) );
+    connect( m_addBookmarkFolderAction, SIGNAL( triggered( ) ),
+             this,                SLOT( openNewBookmarkFolderDialog() ) );
+
+
+}
+
+void MarblePart::createFolderList()
+{
+
+    QList<QAction*> actionList;
+
+   QVector<GeoDataFolder*> folders = m_controlView->marbleWidget()->folders();
+   QVector<GeoDataFolder*>::const_iterator i = folders.constBegin();
+   QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
+
+   for (; i != end; ++i ) {
+       QMenu *m_bookmarksListMenu = new QMenu( (*i)->name() );
+   
+       createBookmarksListMenu( m_bookmarksListMenu, *(*i) );
+       connect( m_bookmarksListMenu, SIGNAL( triggered ( QAction *) ),
+            this, SLOT( lookAtBookmark( QAction *) ) );
+   
+       actionList.append( m_bookmarksListMenu->menuAction() ); 
+   }
+   unplugActionList("folders");
+   plugActionList( "folders", actionList );
+}
+
+void MarblePart::createBookmarksListMenu( QMenu *m_bookmarksListMenu, const GeoDataFolder &folder )
+{
+    m_bookmarksListMenu->clear();
+    QVector<GeoDataPlacemark*> bookmarks = folder.placemarkList();
+    
+    QVector<GeoDataPlacemark*>::const_iterator i = bookmarks.constBegin();
+    QVector<GeoDataPlacemark*>::const_iterator end = bookmarks.constEnd();
+    
+    for (; i != end; ++i ) {
+        QAction *bookmarkAct = new QAction( (*i)->name(), this );
+        QVariant var;
+        var.setValue( *( (*i)->lookAt() ) );
+        bookmarkAct->setData( var );
+        m_bookmarksListMenu->addAction( bookmarkAct );
+    }
+
 }
 
 void MarblePart::createInfoBoxesMenu()
@@ -1339,6 +1414,41 @@ void MarblePart::downloadJobRemoved()
 
     m_downloadProgressBar->setUpdatesEnabled( true );
 }
+
+void MarblePart::openBookmarkInfoDialog()
+{
+
+    QPointer<BookmarkInfoDialog> m_bookmarkInfoDialog = new BookmarkInfoDialog( m_controlView->marbleWidget() );
+    m_bookmarkInfoDialog->exec();
+    delete m_bookmarkInfoDialog;
+    createFolderList();
+       mDebug() <<" Open Bookmark Info Dialog ";
+}
+
+void MarblePart::removeAllBookmarks()
+{
+        m_controlView->marbleWidget()->removeAllBookmarks();
+        createFolderList();
+}
+
+void MarblePart::openNewBookmarkFolderDialog()
+{
+    QPointer<NewFolderInfoDialog> dialog = new NewFolderInfoDialog( m_controlView->marbleWidget());
+    dialog->exec();
+    delete dialog;
+    createFolderList();
+
+}
+
+void MarblePart::lookAtBookmark( QAction *action)
+{
+        GeoDataLookAt temp = qvariant_cast<GeoDataLookAt>( action->data() ) ;
+        m_controlView->marbleWidget()->flyTo( temp ) ;
+                mDebug() << " looking at bookmark having longitude : "<< temp.longitude(GeoDataCoordinates::Degree)
+                         << " latitude :  "<< temp.latitude(GeoDataCoordinates::Degree)
+                         << " distance : " << temp.range();
+}
+
 
 }
 

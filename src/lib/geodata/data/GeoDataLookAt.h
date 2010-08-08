@@ -96,6 +96,16 @@ namespace Marble
           * @see setRange
           */
         qreal range() const;
+        
+        /**
+        * @brief set the GeoDataCoordinates object
+        * @param GeoDataCoordinates
+        * @see GeoDataCoordinates
+        */
+        void setCoordinates( const GeoDataCoordinates& coordinates );
+
+        /// Provides type information for downcasting a GeoNode
+        virtual QString nodeType() const;
 
         void detach();
     private:
@@ -103,4 +113,5 @@ namespace Marble
 
     };
 }
+Q_DECLARE_METATYPE( Marble::GeoDataLookAt )
 #endif

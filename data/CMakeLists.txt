@@ -215,6 +215,10 @@ mwdbii/PUSA48.DIFF.PNT
 mwdbii/RIVER.PNT
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/mwdbii)
 
+install (FILES
+bookmarks/bookmarks.kml
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/bookmarks)
+
 FILE (GLOB STAR_FILES stars/*.dat)
 install (FILES
   ${STAR_FILES}

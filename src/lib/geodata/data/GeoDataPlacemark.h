@@ -21,6 +21,7 @@
 #include "GeoDataPoint.h"
 #include "GeoDataLineString.h"
 #include "GeoDataLinearRing.h"
+#include "GeoDataLookAt.h"
 #include "GeoDataPolygon.h"
 #include "GeoDataMultiGeometry.h"
 #include "GeoDataFeature.h"
@@ -187,6 +188,19 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * @param stream the QDataStream to deserialise from.
      */
     virtual void unpack( QDataStream& stream );
+
+    /**
+     * Returns GeoDataLookAt object if lookAt is setup earlier
+     * otherwise It will convert GeoDataCoordinates of Placemark
+     * to GeoDataLookAt with range equals to altitude of 
+     * GeoDataCoordinate
+     */
+    GeoDataLookAt *lookAt() const;
+
+    /**
+     * Set lookAt @p GeoDataLookAt 
+     */
+    void setLookAt( GeoDataLookAt *lookAt );
 
  private:
     GeoDataPlacemarkPrivate *p() const;

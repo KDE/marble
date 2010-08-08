@@ -15,6 +15,7 @@
 
 #include <kparts/part.h>
 #include <QtCore/QHash>
+#include <kmenu.h>
 #include "global.h"
 
 class KAboutData;
@@ -37,6 +38,7 @@ namespace Marble
 class ControlView;
 class DownloadRegionDialog;
 class SunControlWidget;
+class GeoDataFolder;
 
 class MarblePart: public KParts::ReadOnlyPart
 {
@@ -51,7 +53,7 @@ class MarblePart: public KParts::ReadOnlyPart
     static KAboutData* createAboutData();
     void  createInfoBoxesMenu();
     void createOnlineServicesMenu();
-
+	void  createFolderList();
   public Q_SLOTS:
     bool  openUrl( const KUrl &url );
     bool  openFile();
@@ -151,6 +153,15 @@ class MarblePart: public KParts::ReadOnlyPart
      */
     void readPluginSettings();
 
+    //Bookmark Menu
+    void  openBookmarkInfoDialog();
+    void  createBookmarksListMenu( QMenu *, const GeoDataFolder& );
+    void  lookAtBookmark( QAction * );
+    void  removeAllBookmarks();
+    void  openNewBookmarkFolderDialog();
+//    void  createBookmarkMenu();
+
+
   private:
     void  setupActions();
     void  setupDownloadProgressBar();
@@ -190,6 +201,10 @@ class MarblePart: public KParts::ReadOnlyPart
     KAction      *m_controlSunAction;
     KAction      *m_lockFloatItemsAct;
 
+    //Bookmark Menu
+    KAction *m_addBookmarkAction;
+    KAction *m_removeAllBookmarksAction;
+    KAction *m_addBookmarkFolderAction;
     // Actions for the status bar
     KAction      *m_showPositionAction;
     KAction      *m_showAltitudeAction;

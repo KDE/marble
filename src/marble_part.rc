@@ -1,5 +1,6 @@
+
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="marble_part" version="12">
+<kpartgui name="marble_part" version="13">
 
 <MenuBar>
   <Menu name="file" noMerge="1">
@@ -52,6 +53,14 @@
     <Action name="fullscreen"/>
     <Separator/>
     <Action name="options_configure" append="configure_merge"/>
+  </Menu>
+  <Menu name="bookmarks" noMerge="1">
+      <text>&amp;Bookmarks</text>
+      <Action name="add_bookmark"/>
+      <Action name="new_bookmark_folder"/>
+      <Action name="remove_all_bookmark"/>
+      <Separator/>
+      <ActionList name="folders"/>
   </Menu>
 </MenuBar>
 

@@ -76,6 +76,7 @@
 #include "ViewParams.h"
 #include "ViewportParams.h"
 #include "routing/RoutingManager.h"
+#include "BookmarkManager.h"
 
 namespace Marble
 {
@@ -103,7 +104,8 @@ class MarbleModelPrivate
           m_layerDecorator( 0 ),
           m_positionTracking( 0 ),
           m_planet( 0 ),
-          m_routingManager( 0 )
+          m_routingManager( 0 ),
+          m_bookmarkManager( 0 )
     {
     }
 
@@ -155,6 +157,7 @@ class MarbleModelPrivate
     PositionTracking        *m_positionTracking;
 
     Planet                  *m_planet;
+    BookmarkManager         *m_bookmarkManager; 
 
     RoutingManager          *m_routingManager;
 };
@@ -248,6 +251,8 @@ MarbleModel::MarbleModel( QObject *parent )
             d->m_sunLocator, SLOT( update() ) );
     connect( d->m_layerDecorator, SIGNAL( repaintMap() ),
                                   SIGNAL( modelChanged() ) );
+     //Initializing Bookmark manager
+    d->m_bookmarkManager = new BookmarkManager();
 }
 
 MarbleModel::~MarbleModel()
@@ -255,7 +260,7 @@ MarbleModel::~MarbleModel()
 //    mDebug() << "MarbleModel::~MarbleModel";
 
     delete d->m_texmapper;
-
+    delete d->m_bookmarkManager;
     delete d->m_tileLoader; // disconnects from downloadManager in dtor
 
     if( MarbleModelPrivate::refCounter == 1 ) {
@@ -275,6 +280,11 @@ MarbleModel::~MarbleModel()
     delete d;
     MarbleModelPrivate::refCounter.deref();
     mDebug() << "Model deleted:" << this;
+}
+
+BookmarkManager * MarbleModel::bookmarkManager() const
+{
+    return d->m_bookmarkManager;
 }
 
 QString MarbleModel::mapThemeId() const

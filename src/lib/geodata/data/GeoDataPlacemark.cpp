@@ -18,6 +18,7 @@
 #include "GeoDataPlacemark_p.h"
 
 #include "GeoDataMultiGeometry.h"
+#include "GeoDataCoordinates.h"
 
 // Qt
 #include <QtCore/QDataStream>
@@ -66,6 +67,26 @@ GeoDataGeometry* GeoDataPlacemark::geometry() const
         return p()->m_geometry;
     else
         return &( p()->m_coordinate );
+}
+
+GeoDataLookAt *GeoDataPlacemark::lookAt() const
+{
+    if( p()->m_lookAt == 0 ){
+        GeoDataCoordinates tempCoordinate = coordinate();
+        GeoDataLookAt *coordinateToLookAt = new GeoDataLookAt();
+        coordinateToLookAt->setCoordinates( tempCoordinate );
+        coordinateToLookAt->setRange( tempCoordinate.altitude() ); 
+        return coordinateToLookAt;
+    }
+    else {
+        return p()->m_lookAt;
+    
+    }
+}
+
+void GeoDataPlacemark::setLookAt( GeoDataLookAt *lookAt)
+{
+    p()->m_lookAt = lookAt;
 }
 
 GeoDataCoordinates GeoDataPlacemark::coordinate() const

@@ -28,7 +28,7 @@
 #include "Quaternion.h"
 #include "global.h"             // types needed in all of marble.
 #include "marble_export.h"
-
+#include "GeoDataFolder.h"
 // Qt
 class QAbstractItemModel;
 class QModelIndex;
@@ -51,6 +51,7 @@ class MarbleWidgetPrivate;
 class RenderPlugin;
 class SunLocator;
 class TileCreator;
+class GeoDataPlacemark;
 
 /**
  * @short A widget class that displays a view of the earth.
@@ -303,7 +304,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return The latitude of the center point in degree.
      */
     qreal centerLatitude() const;
-
+    /**
+    * @brief Return the lookAt
+    */
+    GeoDataLookAt lookAt() const;
     /**
      * @brief Returns the model for all the placemarks on the globe.
      */
@@ -563,6 +567,16 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     QFont defaultFont() const;
     void setDefaultFont( const QFont& font );
+    
+    void addBookmark( const GeoDataPlacemark &bookmark, const QString &folderName ) const;
+ 
+    bool loadBookmarkFile( const QString& relativeFileName);
+
+    QVector<GeoDataFolder*> folders();
+    
+    void removeAllBookmarks();
+
+    void addNewBookmarkFolder( const QString& name ) const;
 
  public Q_SLOTS:
 

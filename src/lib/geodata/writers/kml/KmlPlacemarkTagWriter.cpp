@@ -53,6 +53,10 @@ bool KmlPlacemarkTagWriter::write( const GeoDataObject &node,
         writeElement( *placemark.geometry(), writer );
     }
 
+    if( placemark.lookAt() ){
+        writeElement( *placemark.lookAt(), writer );
+    }
+
     writer.writeEndElement();
     return true;
 }
