@@ -92,8 +92,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
     connect( m_configDialog, SIGNAL( clearPersistentCacheClicked() ),
              m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
 
-	//Load Bookmark File, First time read from system path then once bookmark is used 
-    //a copy of bookmarks.kml will be created in local path 
+	//Load Bookmark File, First time read from system path then once bookmark is used
+    //a copy of bookmarks.kml will be created in local path
     if( m_controlView->marbleWidget()->loadBookmarkFile( "bookmarks/bookmarks.kml" ) )
         mDebug() << "Bookmark File Loaded Successfully";
 
@@ -231,7 +231,7 @@ void MainWindow::createActions()
      connect(m_aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 
      //Bookmark Actions
-     m_addBookmarkAct = new QAction(tr("Add Bookmark"),this);     
+     m_addBookmarkAct = new QAction(tr("Add Bookmark"),this);
      m_addBookmarkAct->setShortcut(tr("Ctrl+B"));
      m_addBookmarkAct->setStatusTip(tr("Add Bookmark"));
      connect( m_addBookmarkAct, SIGNAL( triggered() ), this, SLOT( openBookmarkInfoDialog() ) );
@@ -299,6 +299,10 @@ void MainWindow::createMenus()
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_controlSunAct);
 
+    m_bookmarkMenu = menuBar()->addMenu(tr("&Bookmarks"));
+    createBookmarkMenu();
+    connect( m_bookmarkMenu, SIGNAL( aboutToShow() ), this, SLOT( createBookmarkMenu() ) );
+
     m_fileMenu = menuBar()->addMenu(tr("&Settings"));
     m_fileMenu->addAction(m_statusBarAct);
     m_fileMenu->addAction(m_sideBarAct);
@@ -317,10 +321,6 @@ void MainWindow::createMenus()
 
     connect( m_infoBoxesMenu, SIGNAL( aboutToShow() ), this, SLOT( createInfoBoxesMenu() ) );
     connect( m_onlineServicesMenu, SIGNAL( aboutToShow() ), this, SLOT( createOnlineServicesMenu() ) );
-
-    m_bookmarkMenu = menuBar()->addMenu(tr("&Bookmarks"));
-    createBookmarkMenu();
-    connect( m_bookmarkMenu, SIGNAL( aboutToShow() ), this, SLOT( createBookmarkMenu() ) );
 
 //    FIXME: Discuss if this is the best place to put this
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
@@ -391,7 +391,7 @@ void MainWindow::createBookmarksListMenu( QMenu *m_bookmarksListMenu, const GeoD
         var.setValue( *( (*i)->lookAt() ) );
         bookmarkAct->setData( var );
         m_bookmarksListMenu->addAction( bookmarkAct );
-        
+
     }
 
 }
@@ -403,8 +403,8 @@ void MainWindow::createBookmarkMenu()
     m_bookmarkMenu->addAction( m_addBookmarkFolderAct );
 
     m_bookmarkMenu->addSeparator();
-   
-    createFolderList(); 
+
+    createFolderList();
 }
 
 void MainWindow::createFolderList()
@@ -413,10 +413,10 @@ void MainWindow::createFolderList()
 
     QVector<GeoDataFolder*>::const_iterator i = folders.constBegin();
     QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
-    
+
     for (; i != end; ++i ) {
         QMenu *m_bookmarksListMenu = m_bookmarkMenu->addMenu( (*i)->name() );
-        
+
         createBookmarksListMenu( m_bookmarksListMenu, *(*i) );
         connect( m_bookmarksListMenu, SIGNAL( triggered ( QAction *) ),
                                   this, SLOT( lookAtBookmark( QAction *) ) );
@@ -428,12 +428,12 @@ void MainWindow::createFolderList()
 void MainWindow::lookAtBookmark( QAction *action)
 {
     GeoDataLookAt temp = qvariant_cast<GeoDataLookAt>( action->data() ) ;
-    m_controlView->marbleWidget()->flyTo( temp ) ; 
-    mDebug() << " looking at bookmark having longitude : "<< temp.longitude(GeoDataCoordinates::Degree) 
+    m_controlView->marbleWidget()->flyTo( temp ) ;
+    mDebug() << " looking at bookmark having longitude : "<< temp.longitude(GeoDataCoordinates::Degree)
              << " latitude :  "<< temp.latitude(GeoDataCoordinates::Degree)
              << " distance : " << temp.range();
 
-    
+
 }
 
 void MainWindow::removeAllBookmarks()
@@ -441,7 +441,7 @@ void MainWindow::removeAllBookmarks()
     m_controlView->marbleWidget()->removeAllBookmarks();
 }
 
-void MainWindow::openNewBookmarkFolderDialog() 
+void MainWindow::openNewBookmarkFolderDialog()
 {
     QPointer<NewFolderInfoDialog> dialog = new NewFolderInfoDialog( m_controlView->marbleWidget());
     dialog->exec();
@@ -450,7 +450,7 @@ void MainWindow::openNewBookmarkFolderDialog()
 
 void MainWindow::openBookmarkInfoDialog()
 {
-    
+
     QPointer<BookmarkInfoDialog> dialog = new BookmarkInfoDialog( m_controlView->marbleWidget());
     dialog->exec();
     delete dialog;
