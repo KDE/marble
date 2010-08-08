@@ -231,15 +231,15 @@ void MainWindow::createActions()
      connect(m_aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 
      //Bookmark Actions
-     m_addBookmarkAct = new QAction(tr("Add Bookmark"),this);
+     m_addBookmarkAct = new QAction(tr("&Add Bookmark"),this);
      m_addBookmarkAct->setShortcut(tr("Ctrl+B"));
      m_addBookmarkAct->setStatusTip(tr("Add Bookmark"));
      connect( m_addBookmarkAct, SIGNAL( triggered() ), this, SLOT( openBookmarkInfoDialog() ) );
 
-     m_removeAllBookmarksAct = new QAction(tr("Remove all bookmarks"),this);
-     m_removeAllBookmarksAct->setStatusTip(tr("Remove all bookmarks"));
+     m_removeAllBookmarksAct = new QAction(tr("&Remove all Bookmarks"),this);
+     m_removeAllBookmarksAct->setStatusTip(tr("Remove all Bookmarks"));
      connect( m_removeAllBookmarksAct, SIGNAL( triggered() ), this, SLOT( removeAllBookmarks() ) );
-     m_addBookmarkFolderAct = new QAction( tr("New Bookmark Folder"),this);
+     m_addBookmarkFolderAct = new QAction( tr("&New Bookmark Folder"),this);
      m_addBookmarkFolderAct->setStatusTip(tr("New Bookmark Folder"));
      connect( m_addBookmarkFolderAct, SIGNAL( triggered() ), this, SLOT( openNewBookmarkFolderDialog() ) );
 
