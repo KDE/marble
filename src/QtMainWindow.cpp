@@ -661,6 +661,8 @@ void MainWindow::showClouds( bool isChecked )
 void MainWindow::workOffline( bool offline )
 {
     m_controlView->marbleControl()->setWorkOffline( offline );
+
+    m_workOfflineAct->setChecked( offline ); // Sync state with the GUI
 }
 
 void MainWindow::showAtmosphere( bool isChecked )
