@@ -59,6 +59,7 @@ GeoDataLineString GosmoreRunnerPrivate::retrieveWaypoints( const QString &query 
 
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     env.insert("QUERY_STRING", query);
+    env.insert("LC_ALL", "C");
     QProcess gosmore;
     gosmore.setProcessEnvironment(env);
 
