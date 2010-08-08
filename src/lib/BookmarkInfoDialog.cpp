@@ -15,9 +15,10 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataFolder.h"
 #include "NewFolderInfoDialog.h"
-#include <QLineEdit>
-#include <QString>
-#include <QPointer>
+
+#include <QtGui/QLineEdit>
+#include <QtCore/QString>
+#include <QtCore/QPointer>
 
 using namespace Marble;
 

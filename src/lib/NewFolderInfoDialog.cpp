@@ -11,7 +11,9 @@
 
 #include "NewFolderInfoDialog.h"
 #include "MarbleDebug.h"
-#include <QLineEdit>
+
+#include <QtGui/QLineEdit>
+
 using namespace Marble;
 
 NewFolderInfoDialog::NewFolderInfoDialog(MarbleWidget *parent)
