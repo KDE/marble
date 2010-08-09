@@ -3,6 +3,7 @@
  * Copyright 2004-2007 Torsten Rahn  <tackat@kde.org>
  * Copyright 2007      Inge Wallin   <ingwa@kde.org>
  * Copyright 2007      Thomas Zander <zander@kde.org>
+ * Copyright 2010      Bastian Holst <bastianholst@gmx.de>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -34,6 +35,7 @@
 #include "MarbleModel.h"
 #include "FileViewModel.h"
 #include "gps/PositionTracking.h"
+#include "LegendWidget.h"
 #include "MarbleLocale.h"
 #include "MarblePlacemarkModel.h"
 #include "RoutingWidget.h"
@@ -53,7 +55,6 @@
 using namespace Marble;
 
 #include "ui_NavigationWidget.h"
-#include "ui_LegendWidget.h"
 #include "ui_MapViewWidget.h"
 #include "ui_CurrentLocationWidget.h"
 #include "ui_FileViewWidget.h"
@@ -73,8 +74,7 @@ class MarbleControlBoxPrivate
 
     QWidget                     *m_navigationWidget;
     Ui::NavigationWidget        m_navigationUi;
-    QWidget                     *m_legendWidget;
-    Ui::LegendWidget            m_legendUi;
+    LegendWidget                *m_legendWidget;
     QWidget                     *m_mapViewWidget;
     Ui::MapViewWidget           m_mapViewUi;
     QWidget                     *m_currentLocation2Widget;
@@ -118,8 +118,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->m_navigationUi.setupUi( d->m_navigationWidget );
     addItem( d->m_navigationWidget, d->m_navigationWidget->windowTitle() );
 
-    d->m_legendWidget = new QWidget( this );
-    d->m_legendUi.setupUi( d->m_legendWidget );
+    d->m_legendWidget = new LegendWidget( this );
     addItem( d->m_legendWidget, d->m_legendWidget->windowTitle() );
 
     d->m_mapViewWidget = new QWidget( this );
@@ -311,8 +310,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     d->m_fileViewUi.m_treeView->setModel( sortModel );
     d->m_fileViewUi.m_treeView->setSortingEnabled( true );
 
-    // Initialize the MarbleLegendBrowser
-    d->m_legendUi.marbleLegendBrowser->setMarbleWidget( d->m_widget );
+    d->m_legendWidget->setMarbleWidget( widget );
 
     // Connect necessary signals.
     connect( this, SIGNAL(goHome()),         d->m_widget, SLOT(goHome()) );
@@ -342,11 +340,6 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              d->m_widget, SLOT( centerOn( const QModelIndex&, bool ) ) );
     connect( this,        SIGNAL( selectMapTheme( const QString& ) ),
              d->m_widget, SLOT( setMapThemeId( const QString& ) ) );
-
-    // connect signals for the Legend
-
-    connect( d->m_legendUi.marbleLegendBrowser, SIGNAL( toggledShowProperty( QString, bool ) ),
-             d->m_widget,                     SLOT( setPropertyValue( QString, bool ) ) );
 
     PluginManager* pluginManager = d->m_widget->model()->pluginManager();
     d->m_positionProviderPlugins = pluginManager->createPositionProviderPlugins();
