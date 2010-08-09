@@ -30,13 +30,12 @@
 #include <QtGui/QCheckBox>
 #include "global.h"
 
+#include "CurrentLocationWidget.h"
+#include "LegendWidget.h"
 #include "MarbleWidget.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "FileViewModel.h"
-#include "gps/PositionTracking.h"
-#include "LegendWidget.h"
-#include "MarbleLocale.h"
 #include "MarblePlacemarkModel.h"
 #include "RoutingWidget.h"
 #include "MarbleRunnerManager.h"
@@ -46,10 +45,6 @@
 #include "GeoSceneHead.h"
 #include "Planet.h"
 #include "HttpDownloadManager.h"
-#include "PositionProviderPlugin.h"
-#include "PluginManager.h"
-#include "GeoDataCoordinates.h"
-#include "AdjustNavigation.h"
 #include "MarbleDebug.h"
 
 using namespace Marble;
@@ -70,15 +65,13 @@ class MarbleControlBoxPrivate
     QString        m_searchTerm;
     bool           m_searchTriggered;
     QStandardItemModel *m_celestialList;
-    AdjustNavigation *m_adjustNavigation;
 
     QWidget                     *m_navigationWidget;
     Ui::NavigationWidget        m_navigationUi;
     LegendWidget                *m_legendWidget;
     QWidget                     *m_mapViewWidget;
     Ui::MapViewWidget           m_mapViewUi;
-    QWidget                     *m_currentLocation2Widget;
-    Ui::CurrentLocationWidget   m_currentLocationUi;
+    CurrentLocationWidget       *m_currentLocationWidget;
     QWidget                     *m_fileViewWidget;
     Ui::FileViewWidget          m_fileViewUi;
 
@@ -89,10 +82,6 @@ class MarbleControlBoxPrivate
     MarbleRunnerManager  *m_runnerManager;
     RoutingWidget  *m_routingWidget;
     GeoSceneDocument      *mapTheme;
-
-    MarbleLocale* m_locale;
-    QList<PositionProviderPlugin*> m_positionProviderPlugins;
-    GeoDataCoordinates m_currentPosition;
 };
 
 MarbleControlBoxPrivate::MarbleControlBoxPrivate() : m_routingWidget(0)
@@ -129,9 +118,8 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->m_fileViewUi.setupUi( d->m_fileViewWidget );
     addItem( d->m_fileViewWidget, d->m_fileViewWidget->windowTitle() );
 
-    d->m_currentLocation2Widget = new QWidget( this );
-    d->m_currentLocationUi.setupUi( d->m_currentLocation2Widget );
-    addItem( d->m_currentLocation2Widget, d->m_currentLocation2Widget->windowTitle() );
+    d->m_currentLocationWidget = new CurrentLocationWidget( this );
+    addItem( d->m_currentLocationWidget, d->m_currentLocationWidget->windowTitle() );
 
     d->m_sortproxy = new QSortFilterProxyModel( d->m_navigationUi.locationListView );
     d->m_navigationUi.locationListView->setModel( d->m_sortproxy );
@@ -139,8 +127,6 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     d->m_mapSortProxy = new MapThemeSortFilterProxyModel( this );
 
     setCurrentIndex(0);
-
-    d->m_locale = MarbleGlobal::getInstance()->locale();
 
     //default
     setCurrentLocationTabShown( true );
@@ -193,12 +179,6 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     // Setting up the celestial combobox
     d->m_celestialList = new QStandardItemModel();
-
-    connect( d->m_currentLocationUi.recenterComboBox, SIGNAL ( activated ( int ) ),
-            this, SLOT( setRecenter( int ) ) );
-
-    connect(  d->m_currentLocationUi.autoZoomCheckBox, SIGNAL( clicked( bool ) ),
-             this, SLOT( setAutoZoom( bool ) ) );
 
     d->m_mapViewUi.celestialBodyComboBox->setModel( d->m_celestialList );
     connect( d->m_mapViewUi.celestialBodyComboBox, SIGNAL( activated( const QString& ) ),
@@ -282,8 +262,6 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 
     addItem( d->m_routingWidget, tr( "Routing" ) );
 
-    d->m_adjustNavigation = new AdjustNavigation( d->m_widget, this );
-
     // Make us aware of all the Placemarks in the MarbleModel so that
     // we can search them.
     setLocations( static_cast<MarblePlacemarkModel*>(d->m_widget->placemarkModel()) );
@@ -341,29 +319,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
     connect( this,        SIGNAL( selectMapTheme( const QString& ) ),
              d->m_widget, SLOT( setMapThemeId( const QString& ) ) );
 
-    PluginManager* pluginManager = d->m_widget->model()->pluginManager();
-    d->m_positionProviderPlugins = pluginManager->createPositionProviderPlugins();
-    foreach( const PositionProviderPlugin *plugin, d->m_positionProviderPlugins ) {
-       d->m_currentLocationUi.positionTrackingComboBox->addItem( plugin->guiString() );
-    }
-    if ( d->m_positionProviderPlugins.isEmpty() ) {
-        d->m_currentLocationUi.positionTrackingComboBox->setEnabled( false );
-        QString html = "<p>No Position Tracking Plugin installed.</p>";
-        d->m_currentLocationUi.locationLabel->setText( html );
-        d->m_currentLocationUi.locationLabel->setEnabled ( true );
-    }
-
-    //connect CurrentLoctaion signals
-    connect( d->m_widget->model()->positionTracking(),
-             SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-             this, SLOT( receiveGpsCoordinates( GeoDataCoordinates, qreal ) ) );
-    connect( d->m_currentLocationUi.positionTrackingComboBox, SIGNAL( currentIndexChanged( QString ) ),
-             this, SLOT( changePositionProvider( QString ) ) );
-    connect( d->m_currentLocationUi.locationLabel, SIGNAL( linkActivated( QString ) ),
-             this, SLOT( centerOnCurrentLocation() ) );
-    connect( d->m_widget->model()->positionTracking(),
-             SIGNAL( statusChanged( PositionProviderStatus) ), this,
-             SLOT( adjustPositionTrackingStatus( PositionProviderStatus) ) );
+    d->m_currentLocationWidget->setMarbleWidget( widget );
 }
 
 void MarbleControlBox::setWidgetTabShown( QWidget * widget,
@@ -436,80 +392,6 @@ void MarbleControlBox::changeZoom(int zoom)
     d->m_navigationUi.zoomSlider->blockSignals( false );
 }
 
-void MarbleControlBox::adjustPositionTrackingStatus( PositionProviderStatus status )
-{
-    if ( status == PositionProviderStatusAvailable ) {
-        return;
-    }
-
-    QString html = "<html><body><p>";
-
-    switch ( status ) {
-        case PositionProviderStatusUnavailable:
-            html += tr( "Waiting for current location information..." );
-            break;
-        case PositionProviderStatusAcquiring:
-            html += tr( "Initializing current location service..." );
-            break;
-        case PositionProviderStatusAvailable:
-            Q_ASSERT( false );
-            break;
-        case PositionProviderStatusError:
-            html += tr( "Error when determining current location: " );
-            html += d->m_widget->model()->positionTracking()->error();
-            break;
-    }
-
-    html += "</p></body></html>";
-    d->m_currentLocationUi.locationLabel->setEnabled( true );
-    d->m_currentLocationUi.locationLabel->setText( html );
-}
-
-void MarbleControlBox::receiveGpsCoordinates( const GeoDataCoordinates &position, qreal speed )
-{
-    d->m_currentPosition = position;
-    QString unitString;
-    QString speedString;
-    QString distanceUnitString;
-    QString distanceString;
-    qreal unitSpeed = 0.0;
-    qreal distance = 0.0;
-
-    QString html = "<html><body>";
-    html += "<table cellspacing=\"2\" cellpadding=\"2\">";
-    html += "<tr><td>Longitude</td><td><a href=\"http://edu.kde.org/marble\">%1</a></td></tr>";
-    html += "<tr><td>Latitude</td><td><a href=\"http://edu.kde.org/marble\">%2</a></td></tr>";
-    html += "<tr><td>Altitude</td><td>%3</td></tr>";
-    html += "<tr><td>Speed</td><td>%4</td></tr>";
-    html += "</table>";
-    html += "</body></html>";
-
-    switch ( d->m_locale->measureSystem() ) {
-        case Metric:
-        //kilometers per hour
-        unitString = tr("km/h");
-        unitSpeed = speed * HOUR2SEC * METER2KM;
-        distanceUnitString = tr("m");
-        distance = position.altitude();
-        break;
-
-        case Imperial:
-        //miles per hour
-        unitString = tr("m/h");
-        unitSpeed = speed * HOUR2SEC * METER2KM * KM2MI;
-        distanceUnitString = tr("ft");
-        distance = position.altitude() * M2FT;
-        break;
-    }
-    // TODO read this value from the incoming signal
-    speedString = QLocale::system().toString( unitSpeed, 'f', 1);
-    distanceString = QString( "%1 %2" ).arg( distance, 0, 'f', 1, QChar(' ') ).arg( distanceUnitString );
-
-    html = html.arg( position.lonToString() ).arg( position.latToString() );
-    html = html.arg( distanceString ).arg( speedString + ' ' + unitString );
-    d->m_currentLocationUi.locationLabel->setText( html );
-}
-
 
 void MarbleControlBox::enableFileViewActions()
 {
@@ -546,10 +428,10 @@ void MarbleControlBox::setFileViewTabShown( bool show )
 void MarbleControlBox::setCurrentLocationTabShown( bool show )
 {
     QString  title = tr( "Current Location" );
-    setWidgetTabShown( d->m_currentLocation2Widget, 4, show, title );
+    setWidgetTabShown( d->m_currentLocationWidget, 4, show, title );
     if ( d->m_widget ) {
         bool enabled = d->m_widget->mapTheme()->head()->target() == "earth";
-        int locationIndex = indexOf( d->m_currentLocation2Widget );
+        int locationIndex = indexOf( d->m_currentLocationWidget );
         if ( locationIndex >= 0 ) {
             setItemEnabled( locationIndex, enabled );
         }
@@ -649,7 +531,7 @@ void MarbleControlBox::selectTheme( const QString &theme )
         d->m_runnerManager->setCelestialBodyId( selectedId );
         int routingIndex = indexOf( d->m_routingWidget );
         setItemEnabled( routingIndex, selectedId == "earth" );
-        int locationIndex = indexOf( d->m_currentLocation2Widget );
+        int locationIndex = indexOf( d->m_currentLocationWidget );
         if ( locationIndex >= 0 ) {
             setItemEnabled( locationIndex, selectedId == "earth" );
         }
@@ -750,45 +632,6 @@ void MarbleControlBox::setWorkOffline(bool offline)
         d->m_routingWidget->setWorkOffline( offline );
     }
 }
-
-void MarbleControlBox::changePositionProvider( const QString &provider )
-{
-    if ( provider == tr("Disabled") ) {
-        d->m_currentLocationUi.locationLabel->setEnabled( false );
-        d->m_widget->map()->setShowGps( false );
-        d->m_widget->model()->positionTracking()->setPositionProviderPlugin( 0 );
-        d->m_widget->update();
-    }
-    else {
-        foreach( PositionProviderPlugin* plugin, d->m_positionProviderPlugins ) {
-            if ( plugin->guiString() == provider ) {
-               d->m_currentLocationUi.locationLabel->setEnabled( true );
-               PositionProviderPlugin* instance = plugin->newInstance();
-               PositionTracking *tracking = d->m_widget->model()->positionTracking();
-               tracking->setPositionProviderPlugin( instance );
-               d->m_widget->map()->setShowGps( true );
-               d->m_widget->update();
-               return;
-            }
-        }
-    }
-}
-
-void MarbleControlBox::centerOnCurrentLocation()
-{
-    d->m_widget->centerOn(d->m_currentPosition, true);
-}
-
-void MarbleControlBox::setRecenter( int centerMode )
-{
-    d->m_adjustNavigation->setRecenter( centerMode );
-}
-
-void MarbleControlBox::setAutoZoom( bool autoZoom )
-{
-    d->m_adjustNavigation->setAutoZoom( autoZoom );
-}
-
 
 }
 

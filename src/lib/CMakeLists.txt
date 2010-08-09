@@ -66,6 +66,7 @@ set(marblewidget_SRCS
     MarbleMap.cpp
     MarbleControlBox.cpp
     LegendWidget.cpp
+    CurrentLocationWidget.cpp
     MarbleNavigator.cpp
     MarbleLegendBrowser.cpp
     MarbleThemeSelectView.cpp
@@ -291,6 +292,7 @@ else (APPLE AND QTONLY)
     MarbleModel.h
     MarbleControlBox.h
     LegendWidget.h
+    CurrentLocationWidget.h
     MarbleNavigator.h
     MarbleDataFacade.h
     AbstractFloatItem.h

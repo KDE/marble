@@ -15,7 +15,6 @@
 
 
 #include "marble_export.h"
-#include "PositionProviderPlugin.h"
 
 #include <QtGui/QToolBox>
 
@@ -37,7 +36,6 @@ class QString;
 namespace Marble
 {
 
-class GeoDataCoordinates;
 class MarbleWidget;
 class MarbleControlBoxPrivate;
 class MarblePlacemarkModel;
@@ -189,7 +187,6 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
      * doesn't emit the zoomChanged signal.
      */
     void changeZoom( int zoom );
-    void receiveGpsCoordinates( const GeoDataCoordinates& in, qreal speed );
     void enableFileViewActions();
 
     /**
@@ -223,12 +220,6 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
 
     void projectionSelected( int projectionIndex );
 
-     /// Slot that decides whether recentering should be done
-    void setRecenter( int activate );
-
-    ///Slot for Auto Zooming while navigating
-    void setAutoZoom( bool activate );
-
  private Q_SLOTS:
 
     /// called whenever the user types something new in the search box
@@ -245,10 +236,6 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
 
     void adjustForAnimation();
     void adjustForStill();
-
-    void changePositionProvider( const QString &provider );
-    void adjustPositionTrackingStatus( PositionProviderStatus status );
-    void centerOnCurrentLocation();
 
  private:
     void setWidgetTabShown( QWidget * widget, int insertIndex,
