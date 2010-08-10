@@ -24,6 +24,10 @@ NewFolderInfoDialog::NewFolderInfoDialog(MarbleWidget *parent)
     connect( m_save, SIGNAL( clicked() ), this, SLOT( addNewBookmarkFolder() ) );
 }
 
+NewFolderInfoDialog::~NewFolderInfoDialog()
+{
+}
+
 void NewFolderInfoDialog::addNewBookmarkFolder()
 {
     mDebug() << " Adding New Bookmark Folder "<< m_name->text() ;

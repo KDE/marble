@@ -14,6 +14,7 @@
 #include "ui_BookmarkInfoDialog.h"
 #include "MarbleWidget.h"
 #include "marble_export.h"
+#include "MarbleRunnerManager.h"
 
 namespace Marble
 {
@@ -27,6 +28,8 @@ class MARBLE_EXPORT BookmarkInfoDialog : public QDialog, private Ui::BookmarkInf
 
     explicit BookmarkInfoDialog( MarbleWidget *parent = 0);
 
+    ~BookmarkInfoDialog();
+
     void initComboBox();
 
 
@@ -36,10 +39,14 @@ class MARBLE_EXPORT BookmarkInfoDialog : public QDialog, private Ui::BookmarkInf
     
     void openNewFolderDialog();
 
+    void retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark);
+
+    QString append( const QString &bookmark, const QString &text);
 
  private:
     Q_DISABLE_COPY( BookmarkInfoDialog )
     MarbleWidget *m_widget;
+    MarbleRunnerManager* m_manager;
 };
 
 }
