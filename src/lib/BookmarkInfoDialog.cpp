@@ -67,13 +67,13 @@ void BookmarkInfoDialog::retrieveGeocodeResult( const GeoDataCoordinates &coordi
         bookmarkName = extended.value("country").value().toString() ;
     }
     else if( distance >= 200 ){
-        bookmarkName = append( extended.value("town").value().toString()
+        bookmarkName = append( extended.value("city").value().toString()
                 , extended.value("state").value().toString() );
         bookmarkName = append( bookmarkName, extended.value("country").value().toString() ) ;
     }
     else{ 
         bookmarkName = append( extended.value("road").value().toString()
-            , extended.value("town").value().toString());
+            , extended.value("city").value().toString());
         bookmarkName = append( bookmarkName, extended.value("country").value().toString() ) ;
     }
 
@@ -110,7 +110,7 @@ QString BookmarkInfoDialog::append( const QString &bookmark, const QString &text
     else if( text.isEmpty() ){
         return bookmark;
     }
-    return bookmark + "," + text;
+    return bookmark + ", " + text;
 }
 
 void BookmarkInfoDialog::initComboBox()
