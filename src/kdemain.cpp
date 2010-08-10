@@ -104,6 +104,9 @@ int main ( int argc, char *argv[] )
     aboutData.addAuthor( ki18n( "Eckhart Wörner" ),
                          ki18n( "Bugfixes" ),
                          "kde@ewsoftware.de" );
+    aboutData.addAuthor( ki18n( "Wes Hardaker" ),
+                         ki18n( "APRS Plugin" ),
+                         "marble@hardakers.net" );
 
     // Google Summer of Code
     aboutData.addAuthor( ki18n( "Andrew Manson" ),

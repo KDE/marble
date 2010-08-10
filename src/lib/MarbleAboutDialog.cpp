@@ -115,6 +115,8 @@ void MarbleAboutDialog::loadPageContents( int idx )
         tr("<p> Magnus Valle<br /><i>Historical Maps</i></p>")+
         tr("<p>Eckhart W&ouml;rner <a href=\"mailto:kde@ewsoftware.de\">kde@ewsoftware.de</a><br />"
            "<i>Bugfixes</i></p>")+
+        tr("<p>Wes Hardaker <a href=\"mailto:marble@hardakers.net\">marble@hardakers.net</a><br />"
+           "<i>APRS Plugin</i>")+
         tr("<b>Join us</b>")+
         tr("<p>You can reach the developers of the Marble Project at <a href=\"mailto:marble-devel@kde.org\">marble-devel@kde.org</a></p>")+
         tr("<b>Google Summer of Code</b>")+
