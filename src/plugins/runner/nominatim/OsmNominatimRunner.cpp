@@ -72,7 +72,7 @@ void OsmNominatimRunner::search( const QString &searchTerm )
 void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
 {
     m_coordinates = coordinates;
-    QString base = "http://nominatim.openstreetmap.org/reverse?format=xml&addressdetails=0";
+    QString base = "http://nominatim.openstreetmap.org/reverse?format=xml&addressdetails=1";
     // @todo: Alternative URI with addressdetails=1 could be used for shorther placemark name
     QString query = "&lon=%1&lat=%2&accept-language=%3";
     double lon = coordinates.longitude( GeoDataCoordinates::Degree );
@@ -151,6 +151,7 @@ void OsmNominatimRunner::handleReverseGeocodingResult( QNetworkReply* reply )
             addData( details, "county", &extendedData );
             addData( details, "state", &extendedData );
             addData( details, "postcode", &extendedData );
+            addData( details, "country", &extendedData );
             placemark.setExtendedData( extendedData );
         }
 
