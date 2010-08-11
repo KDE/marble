@@ -188,7 +188,7 @@ p, li { white-space: pre-wrap; }
         <item>
          <widget class="QLabel" name="label_proxyUrl">
           <property name="text">
-           <string>&amp;Url:</string>
+           <string>&amp;Proxy:</string>
           </property>
           <property name="buddy">
            <cstring>kcfg_proxyUrl</cstring>
@@ -198,7 +198,7 @@ p, li { white-space: pre-wrap; }
         <item>
          <widget class="QLineEdit" name="kcfg_proxyUrl">
           <property name="text">
-           <string>http://</string>
+           <string></string>
           </property>
          </widget>
         </item>
