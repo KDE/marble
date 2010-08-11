@@ -11,20 +11,23 @@
 #include "StarsPlugin.h"
 
 #include <QtCore/QRectF>
+#include <QtCore/QSize>
 #include <QtCore/QDateTime>
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleDataFacade.h"
 #include "GeoPainter.h"
-
+#include "SunLocator.h"
 #include "ViewportParams.h"
+#include "MarbleWidget.h"
 
 namespace Marble
 {
 
 StarsPlugin::StarsPlugin()
     : m_isInitialized( false ),
-      m_starsLoaded( false )
+      m_starsLoaded( false ),
+      m_marbleWidget( 0 )
 {
 }
 
@@ -40,7 +43,8 @@ QString StarsPlugin::renderPolicy() const
 
 QStringList StarsPlugin::renderPosition() const
 {
-    return QStringList( "STARS" );
+    QStringList layers = QStringList() << "STARS" << "ALWAYS_ON_TOP";
+    return layers;
 }
 
 QString StarsPlugin::name() const
@@ -121,101 +125,115 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 {
     Q_UNUSED( layer )
 
-    if ( renderPos != "STARS" ) {
+    if ( !(renderPos == "STARS" || renderPos == "ALWAYS_ON_TOP") ) {
         return true;
     }
 
-    QString target = dataFacade()->target();
-
-    // So far this starry sky plugin only supports displaying stars on earth.
-    if ( target != "earth" ) {
-        return true;
-    }
-
-    painter->save();
-
-    painter->autoMapQuality();
-
-    QPen starPen( Qt::NoPen );
-    QBrush starBrush( Qt::white );
-
-    painter->setPen( starPen );
-    painter->setBrush( starBrush );
-
-    QDateTime currentDateTime = dataFacade()->dateTime();
-
-    qreal gmst = siderealTime( currentDateTime );
-    qreal skyRotationAngle = gmst / 12.0 * M_PI;
-
-    qreal centerLon, centerLat;
-    viewport->centerCoordinates( centerLon, centerLat );
-
-    Quaternion  skyAxis;
-    skyAxis.createFromEuler( -centerLat , centerLon + skyRotationAngle, 0.0 );
-
-    matrix       skyAxisMatrix;
-    skyAxis.inverse().toMatrix( skyAxisMatrix );
-
-    if ( !viewport->globeCoversViewport() && viewport->projection() == Spherical )
+    if( renderPos=="STARS" )
     {
-        // Delayed initialization: 
-        // Load the star database only if the sky is actually being painted...
-        if ( !m_starsLoaded ) {
-            loadStars();
-            m_starsLoaded = true;
+        QString target = dataFacade()->target();
+
+        // So far this starry sky plugin only supports displaying stars on earth.
+        if ( target != "earth" ) {
+            return true;
         }
 
-        int x, y;
+        painter->save();
 
-        const qreal  skyRadius      = 0.6 * sqrt( (qreal)viewport->width() * viewport->width() + viewport->height() * viewport->height() );
-        const qreal  earthRadius    = viewport->radius();
+        painter->autoMapQuality();
 
-        QVector<StarPoint>::const_iterator i = m_stars.constBegin();
-        QVector<StarPoint>::const_iterator itEnd = m_stars.constEnd();
-        for (; i != itEnd; ++i)
+        QPen starPen( Qt::NoPen );
+        QBrush starBrush( Qt::white );
+
+        painter->setPen( starPen );
+        painter->setBrush( starBrush );
+
+        QDateTime currentDateTime = dataFacade()->dateTime();
+
+        qreal gmst = siderealTime( currentDateTime );
+        qreal skyRotationAngle = gmst / 12.0 * M_PI;
+
+        qreal centerLon, centerLat;
+        viewport->centerCoordinates( centerLon, centerLat );
+
+        Quaternion  skyAxis;
+        skyAxis.createFromEuler( -centerLat , centerLon + skyRotationAngle, 0.0 );
+
+        matrix       skyAxisMatrix;
+        skyAxis.inverse().toMatrix( skyAxisMatrix );
+
+        if ( !viewport->globeCoversViewport() && viewport->projection() == Spherical )
         {
-            Quaternion  qpos = (*i).quaternion();
-
-            qpos.rotateAroundAxis( skyAxisMatrix );
-
-            if ( qpos.v[Q_Z] > 0 ) {
-                continue;
+            // Delayed initialization: 
+            // Load the star database only if the sky is actually being painted...
+            if ( !m_starsLoaded ) {
+                loadStars();
+                m_starsLoaded = true;
             }
+    
+            int x, y;
+    
+            const qreal  skyRadius      = 0.6 * sqrt( (qreal)viewport->width() * viewport->width() + viewport->height() * viewport->height() );
+            const qreal  earthRadius    = viewport->radius();
 
-            qreal  earthCenteredX = qpos.v[Q_X] * skyRadius;
-            qreal  earthCenteredY = qpos.v[Q_Y] * skyRadius;
+            QVector<StarPoint>::const_iterator i = m_stars.constBegin();
+            QVector<StarPoint>::const_iterator itEnd = m_stars.constEnd();
+            for (; i != itEnd; ++i)
+            {
+                Quaternion  qpos = (*i).quaternion();
+    
+                qpos.rotateAroundAxis( skyAxisMatrix );
+    
+                if ( qpos.v[Q_Z] > 0 ) {
+                   continue;
+                }
 
-            // Don't draw high placemarks (e.g. satellites) that aren't visible.
-            if ( qpos.v[Q_Z] < 0
-                && ( ( earthCenteredX * earthCenteredX
-                        + earthCenteredY * earthCenteredY )
-                    < earthRadius * earthRadius ) ) {
-                continue;
+                qreal  earthCenteredX = qpos.v[Q_X] * skyRadius;
+                qreal  earthCenteredY = qpos.v[Q_Y] * skyRadius;
+
+                // Don't draw high placemarks (e.g. satellites) that aren't visible.
+                if ( qpos.v[Q_Z] < 0
+                    && ( ( earthCenteredX * earthCenteredX
+                            + earthCenteredY * earthCenteredY )
+                        < earthRadius * earthRadius ) ) {
+                    continue;
+                }
+    
+                // Let (x, y) be the position on the screen of the placemark..
+                x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
+                y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
+    
+                // Skip placemarks that are outside the screen area
+                if ( x < 0 || x >= viewport->width()
+    		 || y < 0 || y >= viewport->height() )
+                    continue;
+    
+                qreal size;
+                if ( (*i).magnitude() < -1 ) size = 6.5;
+                else if ( (*i).magnitude() < 0 ) size = 5.5;
+                else if ( (*i).magnitude() < 1 ) size = 4.5;
+                else if ( (*i).magnitude() < 2 ) size = 4.0;
+                else if ( (*i).magnitude() < 3 ) size = 3.0;
+                else if ( (*i).magnitude() < 4 ) size = 2.0;
+                else if ( (*i).magnitude() < 5 ) size = 1.0;
+                else size = 0.5;
+                painter->drawEllipse( QRectF( x, y, size, size ) );
             }
-
-            // Let (x, y) be the position on the screen of the placemark..
-            x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
-            y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
-
-            // Skip placemarks that are outside the screen area
-            if ( x < 0 || x >= viewport->width()
-		 || y < 0 || y >= viewport->height() )
-                continue;
-
-            qreal size;
-            if ( (*i).magnitude() < -1 ) size = 6.5;
-            else if ( (*i).magnitude() < 0 ) size = 5.5;
-            else if ( (*i).magnitude() < 1 ) size = 4.5;
-            else if ( (*i).magnitude() < 2 ) size = 4.0;
-            else if ( (*i).magnitude() < 3 ) size = 3.0;
-            else if ( (*i).magnitude() < 4 ) size = 2.0;
-            else if ( (*i).magnitude() < 5 ) size = 1.0;
-            else size = 0.5;
-            painter->drawEllipse( QRectF( x, y, size, size ) );
         }
+
+        painter->restore();
     }
 
-    painter->restore();
+    if( renderPos == "ALWAYS_ON_TOP" )
+    {
+        m_marbleWidget = ( MarbleWidget* )painter->device();
+        if( m_marbleWidget->sunLocator()->getCentered() == true )
+        {
+            GeoDataCoordinates point( m_marbleWidget->sunLocator()->getLon(), m_marbleWidget->sunLocator()->getLat(), 0, GeoDataCoordinates::Degree );
+            QImage image( MarbleDirs::path( "svg/sunshine.png" ) );
+            painter->drawImage( point, image.scaled( QSize( 30, 30 ) ) );
+        }
+    }
 
     return true;
 }

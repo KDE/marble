@@ -15,7 +15,7 @@
 
 #include "SunLightBlending.h"
 
-#include "ExtDateTime.h"
+#include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "Planet.h"
 #include "SunLocator.h"
@@ -31,7 +31,7 @@ namespace Marble
 
 SunLightBlending::SunLightBlending()
     : Blending(),
-      m_sunLocator( new SunLocator( new ExtDateTime, new Planet( "earth" )))
+      m_sunLocator( new SunLocator( new MarbleClock, new Planet( "earth" )))
 {
 }
 

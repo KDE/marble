@@ -18,7 +18,7 @@
 #include <QtCore/QAbstractItemModel>
 
 #include "global.h"
-#include "ExtDateTime.h"
+#include "MarbleClock.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "MarblePlacemarkModel.h"
@@ -84,7 +84,7 @@ const Planet* MarbleDataFacade::planet() const
 
 QDateTime MarbleDataFacade::dateTime() const
 {
-    return d->m_model->dateTime()->datetime();
+    return d->m_model->clock()->dateTime();
 }
 
 QString MarbleDataFacade::target() const

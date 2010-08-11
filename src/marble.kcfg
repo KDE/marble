@@ -50,6 +50,35 @@
    <default></default>
   </entry>
  </group>
+ <group name="Time" >
+  <entry key="dateTime" type="DateTime" >
+   <label>The date and time of marble clock</label>
+  </entry>
+  <entry key="speedSlider" type="Int" >
+   <label>The speed of marble clock</label>
+   <default>1</default>
+   <min>-100</min>
+   <max>100</max>
+  </entry>
+  <entry key="systemTime" type="Bool" >
+   <default>true</default>
+  </entry>
+  <entry key="lastSessionTime" type="Bool" >
+   <default>false</default>
+  </entry>
+  <entry key="systemTimezone" type="Bool" >
+   <default>true</default>
+  </entry>
+  <entry key="utc" type="Bool" >
+   <default>false</default>
+  </entry>
+  <entry key="customTimezone" type="Bool" >
+   <default>false</default>
+  </entry>
+  <entry key="chosenTimezone" type="Int" >
+   <default>0</default>
+  </entry>
+ </group>
  <group name="View" >
   <entry key="distanceUnit" type="Enum" >
    <label>The unit chosen to measure distances.</label>
@@ -217,6 +246,9 @@
    <default>false</default>
   </entry>
   <entry key="showDownloadProgressBar" type="Bool" >
+   <default>true</default>
+  </entry>
+  <entry key="showDateTimeLabel" type="Bool" >
    <default>true</default>
   </entry>
  </group>

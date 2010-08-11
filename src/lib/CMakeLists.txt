@@ -94,6 +94,7 @@ set(marblewidget_SRCS
     LayerManager.cpp
     PluginManager.cpp
     MarbleCacheSettingsWidget.cpp
+    TimeControlWidget.cpp
     AbstractFloatItem.cpp
     global.cpp
     MarbleDirs.cpp
@@ -163,7 +164,7 @@ set(marblewidget_SRCS
     PluginItemDelegate.cpp
 
     SunLocator.cpp
-    ExtDateTime.cpp
+    MarbleClock.cpp
     SunControlWidget.cpp
     MergedLayerDecorator.cpp
 
@@ -207,6 +208,8 @@ set (marblewidget_UI
     MarbleViewSettingsWidget.ui
     MarbleNavigationSettingsWidget.ui
     MarbleCacheSettingsWidget.ui
+    TimeControlWidget.ui
+    MarbleTimeSettingsWidget.ui
     MarblePluginSettingsWidget.ui
     TileCreatorDialog.ui
     TileLevelRangeWidget.ui

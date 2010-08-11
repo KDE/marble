@@ -7,6 +7,7 @@
 //
 // Copyright 2008      David Roberts  <dvdr18@gmail.com>
 // Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
+// Copyright 2010      Harshit Jain   <hjain.itbhu@gmail.com>
 //
 
 // Own
@@ -16,39 +17,27 @@
 // Qt
 #include <QtGui/QShowEvent>
 
-#include "ExtDateTime.h"
+// Marble
 #include "SunLocator.h"
+#include "MarbleDebug.h"
 
 using namespace Marble;
 
-SunControlWidget::SunControlWidget(QWidget* parent, SunLocator* sunLocator)
+SunControlWidget::SunControlWidget( SunLocator* sunLocator, QWidget* parent )
     : QDialog( parent ),
       m_uiWidget( new Ui::SunControlWidget ),
-      m_sunLocator( sunLocator )
+      m_sunLocator( sunLocator ),
+      m_shadow( "shadow" )
 {
     m_uiWidget->setupUi( this );
 	
-    connect( m_uiWidget->showToolButton,   SIGNAL( clicked( bool ) ),
-             this,                        SLOT( showSunClicked( bool ) ) );
-    connect( m_uiWidget->centerToolButton, SIGNAL( clicked( bool ) ),
-             this,                        SLOT( centerSunClicked( bool ) ) );
-    connect( m_uiWidget->nowToolButton,    SIGNAL( clicked( bool ) ), 
-             this,                        SLOT( nowClicked( bool ) ) );
-    connect( m_uiWidget->sunShadingComboBox, SIGNAL(  currentIndexChanged ( int ) ), 
-             this,                          SLOT( showSunShadingClicked( int ) ) );
-    connect( m_uiWidget->calendarWidget,   SIGNAL( selectionChanged() ),
-             this,                        SLOT( dateChanged() ) );
-    connect( m_uiWidget->timeEdit,         SIGNAL( timeChanged( const QTime& ) ),
-             this,                        SLOT( timeChanged( const QTime& ) ) );
-    connect( m_uiWidget->timeSlider,       SIGNAL( sliderMoved( int ) ),
-             this,                        SLOT( hourChanged( int ) ) );
-    connect(m_uiWidget->speedSlider, SIGNAL(sliderMoved(int)), this, SLOT(speedChanged(int)));
-
+    connect( m_uiWidget->applyButton, SIGNAL( clicked() ), this, SLOT( apply() ) );
+    connect( m_uiWidget->cancelButton, SIGNAL( clicked() ), this, SLOT( reject() ) );
+    connect( m_uiWidget->okButton, SIGNAL( clicked() ), this, SLOT( apply() ) );
+    connect( m_uiWidget->okButton, SIGNAL( clicked() ), this, SLOT( accept() ) );
+    
     setModal( false );
 
-    updateDateTime();
-    connect( m_sunLocator->datetime(), SIGNAL( timeChanged() ),
-             this,                     SLOT( updateDateTime() ) );
 }
 
 SunControlWidget::~SunControlWidget()
@@ -56,120 +45,74 @@ SunControlWidget::~SunControlWidget()
     delete m_uiWidget;
 }
 
-void SunControlWidget::showSunClicked(bool checked)
+void SunControlWidget::apply()
 {
-    if ( checked )
-        m_uiWidget->showToolButton->setText( tr("&Hide") );
+    if( m_uiWidget->sunShading->isChecked() )
+    {
+        if( m_uiWidget->showShadow->isChecked() )
+        {
+            emit showSun( true );
+            m_sunLocator->setCitylights( false );
+            m_sunLocator->update();
+            m_shadow = "shadow";
+        }
+        else if( m_uiWidget->showNightMap->isChecked() )
+        {
+            emit showSun( true );
+            m_sunLocator->setCitylights( true );
+            m_sunLocator->update();
+            m_shadow = "nightmap";
+        }
+    }
     else
-        m_uiWidget->showToolButton->setText( tr("Sh&ow") );
-
-    //m_sunLocator->setShow( checked );
-    emit showSun( checked );
-}
-
-void SunControlWidget::nowClicked(bool checked)
-{
-    Q_UNUSED( checked )
-
-    m_sunLocator->datetime()->setNow();
-    m_sunLocator->update();
-    updateDateTime();
-}
-
-void SunControlWidget::showSunShadingClicked( int index )
-{
-    // Control whether the dark side should be a shadow or the
-    // Citylights theme.
-    if ( index == 0 )
+    {
+        emit showSun( false );
         m_sunLocator->setCitylights( false );
-    else if ( index == 1 )
-        m_sunLocator->setCitylights( true );
-    m_sunLocator->update();
+        m_sunLocator->update();
+    }
+
+    if( m_uiWidget->showZenith->isChecked() )
+    {
+        m_sunLocator->setCentered( true );
+        emit showSunInZenith( true );
+    }
+    else if( m_uiWidget->hideZenith->isChecked() )
+    {
+        m_sunLocator->setCentered( false );
+        emit showSunInZenith( false );
+    }
 }
 
-void SunControlWidget::centerSunClicked(bool checked)
+void SunControlWidget::setSunShading( bool active )
 {
-    m_sunLocator->setCentered(checked);
+    m_uiWidget->sunShading->setChecked( active );
 }
 
-void SunControlWidget::updateDateTime()
+void SunControlWidget::showEvent( QShowEvent* event )
 {
-    QDateTime datetime = m_sunLocator->datetime()->datetime().toLocalTime();
-	
-    QDate  date     = datetime.date();
-    QDate  cur_date = m_uiWidget->calendarWidget->selectedDate();
-	
-    QTime  time     = datetime.time();
-    time = time.addSecs( -time.second() ); // remove seconds
-    QTime  cur_time = m_uiWidget->timeEdit->time();
-	
-    int hour = time.hour();
-    int cur_hour = m_uiWidget->timeSlider->value();
-	
-    // 	mDebug() << "date:" << date << cur_date;
-    // 	mDebug() << "time:" << time << cur_time;
-	
-    if ( date != cur_date )
-        m_uiWidget->calendarWidget->setSelectedDate( date );
-    if ( time != cur_time )
-        m_uiWidget->timeEdit->setTime( time );
-    if ( hour != cur_hour )
-        m_uiWidget->timeSlider->setValue( time.hour() );
-}
-
-void SunControlWidget::timeChanged(const QTime& time)
-{
-    QDate date = m_uiWidget->calendarWidget->selectedDate();
-    m_uiWidget->timeSlider->setValue( time.hour() );
-    datetimeChanged( QDateTime( date, time ) );
-}
-
-void SunControlWidget::dateChanged()
-{
-    QDate date = m_uiWidget->calendarWidget->selectedDate();
-    QTime time = m_uiWidget->timeEdit->time();
-    datetimeChanged( QDateTime( date, time ) );
-}
-
-void SunControlWidget::hourChanged(int hour)
-{
-    QTime time( hour, m_uiWidget->timeEdit->time().minute() );
-    m_uiWidget->timeEdit->setTime( time );
-}
-
-void SunControlWidget::datetimeChanged(QDateTime datetime)
-{
-    datetime = datetime.toUTC();
-	
-    QDateTime cur_datetime = m_sunLocator->datetime()->datetime();
-    cur_datetime = cur_datetime.addSecs(-cur_datetime.time().second()); // remove seconds
-	
-    // 	mDebug() << cur_datetime << datetime;
-    if ( cur_datetime == datetime )
-        return;
-	
-    m_sunLocator->datetime()->setDateTime(datetime);
-    m_sunLocator->update();
-}
-
-void SunControlWidget::speedChanged(int speed)
-{
-    m_sunLocator->datetime()->setSpeed( speed );
-    m_uiWidget->speedLabel->setText( QString( "%1x" ).arg( speed ) );
-}
-
-void SunControlWidget::showEvent(QShowEvent* event)
-{
-    if( !event->spontaneous() ) {
+    if( !event->spontaneous() ) 
+    {
         // Loading all options
-        m_uiWidget->speedSlider->setValue( m_sunLocator->datetime()->speed() );
-        updateDateTime();
-        if( m_sunLocator->getCitylights() )
-            m_uiWidget->sunShadingComboBox->setCurrentIndex(1);
+        if( m_sunLocator->getShow() )
+        {
+            m_uiWidget->sunShading->setChecked( true );
+            m_uiWidget->showShadow->setChecked( m_sunLocator->getShow() );
+            m_uiWidget->showNightMap->setChecked( m_sunLocator->getCitylights() );
+        }
         else
-            m_uiWidget->sunShadingComboBox->setCurrentIndex(0);
-        m_uiWidget->centerToolButton->setChecked( m_sunLocator->getCentered() );
-        m_uiWidget->showToolButton->setChecked( m_sunLocator->getShow() );
+        {   
+            m_uiWidget->showShadow->setChecked( false );
+            if( m_shadow == "shadow" )
+            {
+                m_uiWidget->showShadow->setChecked( true );
+            }
+            else
+            {
+                m_uiWidget->showNightMap->setChecked( true );
+            }
+        }
+        m_uiWidget->showZenith->setChecked( m_sunLocator->getCentered() );
+        m_uiWidget->hideZenith->setChecked( !m_sunLocator->getCentered() );
     }
 }
 

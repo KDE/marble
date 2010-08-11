@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MarbleTimeSettingsWidget</class>
+ <widget class="QWidget" name="MarbleTimeSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>485</width>
+    <height>305</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QGroupBox" name="timeZone">
+     <property name="title">
+      <string>Time Zone</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QRadioButton" name="kcfg_utc">
+        <property name="text">
+         <string>UTC</string>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="kcfg_systemTimezone">
+        <property name="text">
+         <string>System time zone</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout">
+        <item>
+         <widget class="QRadioButton" name="kcfg_customTimezone">
+          <property name="text">
+           <string>Choose Time zone</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="kcfg_chosenTimezone">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <item>
+           <property name="text">
+            <string>Greenwich Mean Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>European Central Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Eastern European Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Egypt Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Eastern African Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Middle East Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Near East Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Pakistan Lahore Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>India Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Bangladesh Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Vietnam Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>China Taiwan Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Japan Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Australia Central Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Australia Eastern Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Solomon Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>New Zealand Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Midway Islands Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Hawaii Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Alaska Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Pacific Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Phoenix Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Mountain Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Central Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Eastern Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Indiana Eastern Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Puerto Rico and US Virgin Islands Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Canada Newfoundland Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Argentina Standard Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Brazil Eastern Time</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Central African Time</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="whenMarbleStarts">
+     <property name="title">
+      <string>When Marble starts</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QRadioButton" name="kcfg_systemTime">
+        <property name="text">
+         <string>Load system time</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="kcfg_lastSessionTime">
+        <property name="text">
+         <string>Load last session time</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>kcfg_customTimezone</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>kcfg_chosenTimezone</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>120</x>
+     <y>211</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>314</x>
+     <y>212</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

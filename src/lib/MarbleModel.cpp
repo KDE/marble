@@ -43,7 +43,7 @@
 #include "GeoDataStyle.h"
 
 #include "DgmlAuxillaryDictionary.h"
-#include "ExtDateTime.h"
+#include "MarbleClock.h"
 #include "FileStoragePolicy.h"
 #include "GeoPainter.h"
 #include "FileViewModel.h"
@@ -94,12 +94,12 @@ class MarbleModelPrivate
           m_downloadManager( new HttpDownloadManager( new FileStoragePolicy(
                                                                    MarbleDirs::localPath() ),
                                                       m_pluginManager ) ),
-          m_fileManager( 0 ),
           m_tileLoader( 0 ),
           m_texmapper( 0 ),
+          m_fileManager( 0 ),
           m_placemarkmanager( 0 ),
           m_placemarkLayout( 0 ),
-          m_dateTime( 0 ),
+          m_clock( 0 ),
           m_sunLocator( 0 ),
           m_layerDecorator( 0 ),
           m_positionTracking( 0 ),
@@ -146,7 +146,7 @@ class MarbleModelPrivate
     QSortFilterProxyModel   *m_popSortModel;
 
     // Misc stuff.
-    ExtDateTime             *m_dateTime;
+    MarbleClock             *m_clock;
     SunLocator              *m_sunLocator;
     MergedLayerDecorator    *m_layerDecorator;
 
@@ -239,15 +239,15 @@ MarbleModel::MarbleModel( QObject *parent )
     connect ( d->m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
               this,              SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
 
-    d->m_dateTime       = new ExtDateTime();
+    d->m_clock       = new MarbleClock();
     /* Assume we are dealing with the earth */
     d->m_planet = new Planet( "earth" );
-    d->m_sunLocator     = new SunLocator( d->m_dateTime, d->m_planet );
+    d->m_sunLocator     = new SunLocator( d->m_clock, d->m_planet );
     d->m_layerDecorator = new MergedLayerDecorator( d->m_tileLoader, d->m_sunLocator );
 
     d->m_routingManager = new RoutingManager( d->m_parent, this );
 
-    connect(d->m_dateTime,   SIGNAL( timeChanged() ),
+    connect(d->m_clock,   SIGNAL( timeChanged() ),
             d->m_sunLocator, SLOT( update() ) );
     connect( d->m_layerDecorator, SIGNAL( repaintMap() ),
                                   SIGNAL( modelChanged() ) );
@@ -275,7 +275,7 @@ MarbleModel::~MarbleModel()
     delete d->m_dataFacade;
     delete d->m_layerDecorator;
     delete d->m_sunLocator;
-    delete d->m_dateTime;
+    delete d->m_clock;
     delete d->m_planet;
     delete d;
     MarbleModelPrivate::refCounter.deref();
@@ -843,11 +843,11 @@ QString MarbleModel::planetName()   const
     return d->m_planet->name();
 }
 
-ExtDateTime* MarbleModel::dateTime() const
+MarbleClock* MarbleModel::clock() const
 {
 //    mDebug() << "In dateTime, model:" << this;
-//    mDebug() << d << ":" << d->m_dateTime;
-    return d->m_dateTime;
+//    mDebug() << d << ":" << d->m_clock;
+    return d->m_clock;
 }
 
 SunLocator* MarbleModel::sunLocator() const
@@ -1088,6 +1088,36 @@ GeoSceneTexture * MarbleModel::textureLayer() const
 RoutingManager* MarbleModel::routingManager()
 {
     return d->m_routingManager;
+}
+
+void MarbleModel::setClockDateTime( const QDateTime& datetime )
+{
+    d->m_clock->setDateTime( datetime );
+}
+
+QDateTime MarbleModel::clockDateTime() const
+{
+    return d->m_clock->dateTime();
+}
+
+int MarbleModel::clockSpeed() const
+{
+    return d->m_clock->speed();
+}
+
+void MarbleModel::setClockSpeed( int speed )
+{
+    d->m_clock->setSpeed( speed );
+}
+
+void MarbleModel::setClockTimezone( int timeInSec )
+{
+    d->m_clock->setTimezone( timeInSec );
+}
+
+int MarbleModel::clockTimezone() const
+{
+    return d->m_clock->timezone();
 }
 
 }

@@ -36,7 +36,7 @@ public:
     bool                    getCentered () const;
     qreal                   getLon () const;
     qreal                   getLat () const;
-//ig    Marble::ExtDateTime*    datetime () const;
+//ig    Marble::MarbleClock*    datetime () const;
     Marble::Planet*         planet () const;
     void                    update ();
 
@@ -46,7 +46,7 @@ signals:
     void                    centerSun ();
 
 public:
-//ig                            SunLocator (ExtDateTime* dateTime, Marble::Planet* planet);
+//ig                            SunLocator (MarbleClock* dateTime, Marble::Planet* planet);
     virtual ~SunLocator ();
     void                    shadePixel (QRgb& pixcol, qreal shade) const;
     void                    shadePixelComposite (QRgb& pixcol, QRgb& dpixcol, qreal shade) const;

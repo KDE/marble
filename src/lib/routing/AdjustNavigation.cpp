@@ -34,10 +34,10 @@ AdjustNavigation::AdjustNavigation( MarbleWidget *widget, QObject *parent )
     :QObject( parent ),
      m_widget( widget ),
      m_tracking( 0 ),
-     m_recenterMode( 0 ),
-     m_adjustZoom( 0 ),
      m_gpsSpeed( 0 ),
-     m_gpsDirection( 0 )
+     m_gpsDirection( 0 ),
+     m_recenterMode( 0 ),
+     m_adjustZoom( 0 )
 {
 }
 
@@ -84,7 +84,7 @@ void AdjustNavigation::setRecenter( int recenterMode )
     }
 }
 
-void AdjustNavigation::moveOnBorderToCenter( GeoDataCoordinates position, qreal speed )
+void AdjustNavigation::moveOnBorderToCenter( GeoDataCoordinates position, qreal )
 {
     qreal lon = 0.0;
     qreal lat = 0.0;

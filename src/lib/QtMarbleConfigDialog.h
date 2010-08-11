@@ -18,6 +18,7 @@
 
 #include "ui_MarbleViewSettingsWidget.h"
 #include "ui_MarbleNavigationSettingsWidget.h"
+#include "ui_MarbleTimeSettingsWidget.h"
 
 
 namespace Marble
@@ -63,6 +64,39 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     QString proxyPass() const;
     bool proxyType() const;
     bool proxyAuth() const;
+
+    // Time Settings
+    /**
+     * Read the value of 'Time/systemTime' key from settings
+     */
+    bool systemTime() const;
+
+    /**
+     * Read the value of 'Time/lastSessionTime' key from settings
+     */
+    bool lastSessionTime() const;
+
+    /**
+     * Read the value of 'Time/systemTimezone' key from settings
+     */
+    bool systemTimezone() const;
+
+    /**
+     * Read the value of 'Time/UTC' key from settings
+     */
+    bool UTC() const;
+
+    /**
+     * Read the value of 'Time/customTimezone' key from settings
+     */
+    bool customTimezone() const;
+
+    /**
+     * Read the value of 'Time/chosenTimezone' key from settings
+     */
+    int chosenTimezone() const;
+    
+    void initializeCustomTimezone();
 
     Q_SIGNALS:
     /**

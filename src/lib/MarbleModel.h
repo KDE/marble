@@ -55,7 +55,7 @@ class PositionTracking;
 class HttpDownloadManager;
 class MarbleModelPrivate;
 class PlacemarkLayout;
-class ExtDateTime;
+class MarbleClock;
 class SunLocator;
 class TextureColorizer;
 class TileCreator;
@@ -225,7 +225,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     qreal                 planetRadius()   const;
     QString               planetName()     const;
 
-    ExtDateTime*          dateTime()       const;
+    MarbleClock*          clock()       const;
     SunLocator*           sunLocator()     const;
     MergedLayerDecorator* layerDecorator() const;
 
@@ -284,6 +284,18 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void downloadRegion( QString const & mapThemeId, QVector<TileCoordsPyramid> const & ) const;
 
     RoutingManager* routingManager();
+
+    void setClockDateTime( const QDateTime& datetime );
+
+    QDateTime clockDateTime() const;
+
+    int clockSpeed() const;
+
+    void setClockSpeed( int speed );
+
+    void setClockTimezone( int timeInSec );
+
+    int clockTimezone() const;
 
     /**
      * return instance of BookmarkManager

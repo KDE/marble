@@ -26,7 +26,7 @@
 
 namespace Marble
 {
-class ExtDateTime;
+class MarbleClock;
 class SunLocatorPrivate;
 class Planet;
 
@@ -40,7 +40,7 @@ class MARBLE_EXPORT SunLocator : public QObject
 	So strictly Q_DISABLE_COPY is not necessary in this class.
 	FIXME: clarify this issue.
     */
-    SunLocator(ExtDateTime *dateTime, Planet *planet);
+    SunLocator(MarbleClock *clock, Planet *planet);
     virtual ~SunLocator();
 
     qreal shading(qreal lon, qreal a, qreal c) const;
@@ -58,7 +58,7 @@ class MARBLE_EXPORT SunLocator : public QObject
     qreal getLon() const;
     qreal getLat() const;
 
-    ExtDateTime* datetime() const;
+    MarbleClock* clock() const;
 
     Planet* planet() const;
 

@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<gui name="marble" version="6">
+<gui name="marble" version="7">
 
 <MenuBar>
   <Menu name="file" noMerge="1"><text>&amp;File</text>
@@ -23,6 +23,7 @@
     <Action name="show_atmosphere"/>
     <Separator/>
     <Action name="control_sun"/>
+    <Action name="control_time"/>
   </Menu>
   <Menu name="bookmarks" noMerge="1"><text>&amp;Bookmarks</text>
   </Menu>
@@ -36,6 +37,11 @@
   <Action name="file_print"/>
   <Separator/>
   <Action name="edit_copy"/>
+  <Separator/>
+<!--
+  <Action name="sun_shadow"/>
+-->
+  <Action name="sun_zenith"/>
 </ToolBar>
 
 </gui>

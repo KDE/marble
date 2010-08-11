@@ -112,7 +112,7 @@ QList<AbstractDataPlugin *> LayerManager::dataPlugins() const
 QList<AbstractDataPluginItem *> LayerManager::whichItemAt( const QPoint& curpos ) const
 {
     QList<AbstractDataPluginItem *> itemList;
-    
+
     foreach( AbstractDataPlugin *plugin, d->m_dataPlugins ) {
         itemList.append( plugin->whichItemAt( curpos ) );
     }

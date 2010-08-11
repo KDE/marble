@@ -42,7 +42,7 @@ public:
     void                    stopPolling ();
     qreal                   planetRadius () const;
     QString                 planetName () const;
-//ig    Marble::ExtDateTime*    dateTime () const;
+//ig    Marble::MarbleClock*    dateTime () const;
     Marble::SunLocator*     sunLocator () const;
     quint64                 volatileTileCacheLimit () const;
     QList<Marble::RenderPlugin*>  renderPlugins () const;

@@ -16,7 +16,7 @@
 #include "SunLocator.h"
 
 #include "global.h"
-#include "ExtDateTime.h"
+#include "MarbleClock.h"
 #include "Planet.h"
 #include "MarbleMath.h"
  
@@ -51,10 +51,10 @@ const int update_interval = 60000;
 class SunLocatorPrivate
 {
 public:
-    SunLocatorPrivate(ExtDateTime *dateTime, Planet *planet)
+    SunLocatorPrivate(MarbleClock *clock, Planet *planet)
         : m_lon( 0.0 ),
           m_lat( 0.0 ),
-          m_datetime( dateTime ),
+          m_clock( clock ),
           m_show( false ),
           m_citylights( false ),
           m_centered( false ),
@@ -65,7 +65,7 @@ public:
     qreal m_lon;
     qreal m_lat;
 
-    ExtDateTime* m_datetime;
+    MarbleClock* m_clock;
     bool m_show;
     bool m_citylights;
     bool m_centered;
@@ -73,9 +73,9 @@ public:
 };
 
 
-SunLocator::SunLocator(ExtDateTime *dateTime, Planet *planet)
+SunLocator::SunLocator(MarbleClock *clock, Planet *planet)
   : QObject(),
-    d( new SunLocatorPrivate( dateTime, planet ))
+    d( new SunLocatorPrivate( clock, planet ))
 {
 }
 
@@ -88,7 +88,7 @@ void SunLocator::updatePosition()
 {
     if( d->m_planet->id() == "moon" ) {
         // days since the first full moon of the 20th century
-        qreal days = (qreal)d->m_datetime->toJDN() + d->m_datetime->dayFraction() - MOON_EPOCH;
+        qreal days = (qreal)d->m_clock->toJulianDayNumber() + d->m_clock->dayFraction() - MOON_EPOCH;
 
         // number of orbits the moon has made (relative to the sun as observed from earth)
         days /= MOON_SYNODIC_PERIOD;
@@ -112,7 +112,7 @@ void SunLocator::updatePosition()
     }
 
     // find current Julian day number relative to epoch J2000
-    long day = d->m_datetime->toJDN() - J2000;
+    long day = d->m_clock->toJulianDayNumber() - J2000;
 
     // from http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html
     // mean anomaly
@@ -140,7 +140,7 @@ void SunLocator::updatePosition()
 
     // convert sidereal time to geographic longitude
     d->m_lon = M_PI - (d->m_planet->theta_0() + d->m_planet->theta_1()
-                       * (day + d->m_datetime->dayFraction()) - theta);
+                       * (day + d->m_clock->dayFraction()) - theta);
 
     while(d->m_lon < 0)
         d->m_lon += 2*M_PI;
@@ -328,9 +328,9 @@ qreal SunLocator::getLat() const
     return d->m_lat * RAD2DEG;
 }
 
-ExtDateTime* SunLocator::datetime() const
+MarbleClock* SunLocator::clock() const
 {
-    return d->m_datetime;
+    return d->m_clock;
 }
 
 Planet* SunLocator::planet() const

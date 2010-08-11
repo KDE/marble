@@ -1,6 +1,6 @@
 
 <!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
-<kpartgui name="marble_part" version="13">
+<kpartgui name="marble_part" version="12">
 
 <MenuBar>
   <Menu name="file" noMerge="1">
@@ -43,6 +43,7 @@
     <Action name="show_atmosphere"/>
     <Separator/>
     <Action name="control_sun"/>
+    <Action name="control_time"/>
   </Menu>
   <Menu name="settings" noMerge="1">
     <text>&amp;Settings</text>
@@ -70,6 +71,11 @@
   <Action name="file_print"/>
   <Separator/>
   <Action name="edit_copy"/>
+  <Separator/>
+<!--
+  <Action name="sun_shadow"/>
+-->
+  <Action name="sun_zenith"/>
 </ToolBar>
 <!--
 <ToolBar position="Top" hidden="true" name="pluginToolBar">

@@ -22,6 +22,7 @@
 #include <QtGui/QTabWidget>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
+#include <QtCore/QDateTime>
 
 // Marble
 #include "global.h"
@@ -31,7 +32,9 @@
 #include "MarblePluginSettingsWidget.h"
 #include "MarbleLocale.h"
 #include "MarbleWidget.h"
+#include "MarbleModel.h"
 #include "RenderPlugin.h"
+#include "MarbleClock.h"
 
 namespace Marble
 {
@@ -42,6 +45,7 @@ class QtMarbleConfigDialogPrivate
     QtMarbleConfigDialogPrivate( MarbleWidget *marbleWidget )
         : ui_viewSettings(),
           ui_navigationSettings(),
+          ui_timeSettings(),
           m_marbleWidget( marbleWidget )
     {
     }
@@ -58,6 +62,7 @@ class QtMarbleConfigDialogPrivate
 
     Ui::MarbleViewSettingsWidget       ui_viewSettings;
     Ui::MarbleNavigationSettingsWidget ui_navigationSettings;
+    Ui::MarbleTimeSettingsWidget       ui_timeSettings;
     MarbleCacheSettingsWidget          *w_cacheSettings;
     MarblePluginSettingsWidget         *w_pluginSettings;
 
@@ -66,6 +71,8 @@ class QtMarbleConfigDialogPrivate
     MarbleWidget *m_marbleWidget;
 
     QStandardItemModel* m_pluginModel;
+
+    QHash< int, int > m_timezone;            
 
     // Information about the graphics system
     Marble::GraphicsSystem m_initialGraphicsSystem;
@@ -129,6 +136,11 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     connect( d->w_cacheSettings, SIGNAL( clearPersistentCache() ),
              this,               SIGNAL( clearPersistentCacheClicked() ) );
 
+    // time page
+    QWidget *w_timeSettings = new QWidget( this );
+    d->ui_timeSettings.setupUi( w_timeSettings );
+    tabWidget->addTab( w_timeSettings, tr( "Date and Time" ) );
+
     // plugin page
     d->m_pluginModel = new QStandardItemModel( this );
     QStandardItem  *parentItem = d->m_pluginModel->invisibleRootItem();
@@ -155,7 +167,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
                                   SLOT( showPluginConfigDialog( QString ) ) );
     connect( this, SIGNAL( rejected() ), this, SLOT( retrievePluginState() ) );
     connect( this, SIGNAL( accepted() ), this, SLOT( applyPluginState() ) );
-    
+
     // Layout
     QVBoxLayout *layout = new QVBoxLayout( this );
     layout->addWidget( tabWidget );
@@ -170,6 +182,7 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
              this,              SLOT( writePluginSettings() ) );
     
     d->initSettings();
+    initializeCustomTimezone();
 }
 
 QtMarbleConfigDialog::~QtMarbleConfigDialog()
@@ -281,7 +294,31 @@ void QtMarbleConfigDialog::readSettings()
     } else {
         d->w_cacheSettings->kcfg_proxyAuth->setCheckState( Qt::Unchecked );
     }
-    
+ 
+    // Time
+    d->ui_timeSettings.kcfg_systemTimezone->setChecked( systemTimezone() );
+    d->ui_timeSettings.kcfg_customTimezone->setChecked( customTimezone() );
+    d->ui_timeSettings.kcfg_chosenTimezone->setCurrentIndex( chosenTimezone() );
+    d->ui_timeSettings.kcfg_utc->setChecked( UTC() );
+    d->ui_timeSettings.kcfg_systemTime->setChecked( systemTime() );
+    d->ui_timeSettings.kcfg_lastSessionTime->setChecked( lastSessionTime() );
+    if( systemTimezone() == true  )
+    {
+        QDateTime localTime = QDateTime::currentDateTime().toLocalTime();
+        localTime.setTimeSpec( Qt::UTC );
+        d->m_marbleWidget->model()->setClockTimezone( QDateTime::currentDateTime().toUTC().secsTo( localTime ) );
+    }
+    else if( UTC() == true )
+    {
+        d->m_marbleWidget->model()->setClockTimezone( 0 );
+    }
+    else if( customTimezone() == true )
+    {
+        d->m_marbleWidget->model()->setClockTimezone( d->m_timezone.value( chosenTimezone() ) );
+    }
+
+
+
     // Plugins
     QList<QVariant> pluginNameIdList;
     QList<QVariant> pluginEnabledList;
@@ -386,7 +423,16 @@ void QtMarbleConfigDialog::writeSettings()
         d->m_settings->setValue( "proxyAuth", false );
     }
     d->m_settings->endGroup();
-    
+
+    d->m_settings->beginGroup( "Time" );
+    d->m_settings->setValue( "systemTimezone", d->ui_timeSettings.kcfg_systemTimezone->isChecked() );
+    d->m_settings->setValue( "UTC", d->ui_timeSettings.kcfg_utc->isChecked() );
+    d->m_settings->setValue( "customTimezone", d->ui_timeSettings.kcfg_customTimezone->isChecked() );
+    d->m_settings->setValue( "systemTime", d->ui_timeSettings.kcfg_systemTime->isChecked() );
+    d->m_settings->setValue( "lastSessionTime", d->ui_timeSettings.kcfg_lastSessionTime->isChecked() );
+    d->m_settings->setValue( "chosenTimezone", d->ui_timeSettings.kcfg_chosenTimezone->currentIndex() );
+    d->m_settings->endGroup();
+
     // Plugins
     QList<QVariant>   pluginEnabled;
     QList<QVariant>   pluginVisible;
@@ -548,6 +594,75 @@ bool QtMarbleConfigDialog::proxyAuth() const
 {
     return d->m_settings->value( "Cache/proxyAuth", false ).toBool();
 }
+
+bool QtMarbleConfigDialog::systemTimezone() const
+{
+    return d->m_settings->value( "Time/systemTimezone", true ).toBool();
+}
+
+bool QtMarbleConfigDialog::customTimezone() const
+{
+    return d->m_settings->value( "Time/customTimezone", false ).toBool();
+}
+
+bool QtMarbleConfigDialog::UTC() const
+{
+    return d->m_settings->value( "Time/UTC", false ).toBool();
+}
+
+bool QtMarbleConfigDialog::systemTime() const
+{
+    return d->m_settings->value( "Time/systemTime", true ).toBool();
+}
+
+bool QtMarbleConfigDialog::lastSessionTime() const
+{
+    return d->m_settings->value( "Time/lastSessionTime", false ).toBool();
+}
+    
+int QtMarbleConfigDialog::chosenTimezone() const
+{
+    return d->m_settings->value( "Time/chosenTimezone", 0 ).toInt();
+}
+
+void QtMarbleConfigDialog::initializeCustomTimezone()
+{
+    if( d->m_timezone.count() == 0)
+    {
+        d->m_timezone.insert( 0, 0 );
+        d->m_timezone.insert( 1, 3600 );
+        d->m_timezone.insert( 2, 7200 );
+        d->m_timezone.insert( 3, 7200 );
+        d->m_timezone.insert( 4, 10800 );
+        d->m_timezone.insert( 5, 12600 );
+        d->m_timezone.insert( 6, 14400 );
+        d->m_timezone.insert( 7, 18000 );
+        d->m_timezone.insert( 8, 19800 );
+        d->m_timezone.insert( 9, 21600 );
+        d->m_timezone.insert( 10, 25200 );
+        d->m_timezone.insert( 11, 28800 );
+        d->m_timezone.insert( 12, 32400 );
+        d->m_timezone.insert( 13, 34200 );
+        d->m_timezone.insert( 14, 36000 );
+        d->m_timezone.insert( 15, 39600 );
+        d->m_timezone.insert( 16, 43200 );
+        d->m_timezone.insert( 17, -39600 );
+        d->m_timezone.insert( 18, -36000 );
+        d->m_timezone.insert( 19, -32400 );
+        d->m_timezone.insert( 20, -28800 );
+        d->m_timezone.insert( 21, -25200 );
+        d->m_timezone.insert( 22, -25200 );
+        d->m_timezone.insert( 23, -21600 );
+        d->m_timezone.insert( 24, -18000 );
+        d->m_timezone.insert( 25, -18000 );
+        d->m_timezone.insert( 26, -14400 );
+        d->m_timezone.insert( 27, -12600 );
+        d->m_timezone.insert( 28, -10800 );
+        d->m_timezone.insert( 29, -10800 );
+        d->m_timezone.insert( 30, -3600 );
+    }
+}
+
 
 }
 

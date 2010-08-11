@@ -46,6 +46,7 @@
 #include "MarbleAboutDialog.h"
 #include "QtMarbleConfigDialog.h"
 #include "SunControlWidget.h"
+#include "TimeControlWidget.h"
 #include "MarbleLocale.h"
 #include "DownloadRegionDialog.h"
 #include "ViewParams.h"
@@ -63,13 +64,17 @@ namespace
 {
     const char* POSITION_STRING = "Position:";
     const char* DISTANCE_STRING = "Altitude:";
+    const char* DATETIME_STRING = "Time:";
 }
 
 using namespace Marble;
 
 MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
-        QMainWindow(parent), m_sunControlDialog(0),
-        m_downloadRegionDialog( 0 ), m_downloadRegionAction( 0 )
+        QMainWindow(parent),
+        m_sunControlDialog( 0 ),
+        m_timeControlDialog( 0 ),
+        m_downloadRegionDialog( 0 ),
+        m_downloadRegionAction( 0 )
 {
     setUpdatesEnabled( false );
 
@@ -106,7 +111,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
 
     m_position = NOT_AVAILABLE;
     m_distance = marbleWidget()->distanceString();
-
+    m_clock = QLocale().toString( m_controlView->marbleWidget()->model()->clockDateTime().addSecs( m_controlView->marbleWidget()->model()->clockTimezone() ), QLocale::ShortFormat );
     QTimer::singleShot( 0, this, SLOT( initObject() ) );
 }
 
@@ -203,9 +208,13 @@ void MainWindow::createActions()
      m_showAtmosphereAct->setStatusTip(tr("Show Atmosphere"));
      connect(m_showAtmosphereAct, SIGNAL(triggered( bool )), this, SLOT( showAtmosphere( bool )));
 
-     m_controlSunAct = new QAction( tr("S&un Control..."), this);
-     m_controlSunAct->setStatusTip(tr("Configure Sun Control"));
-     connect(m_controlSunAct, SIGNAL(triggered()), this, SLOT( controlSun()));
+     m_controlTimeAct = new QAction( tr( "&Time Control..." ), this );
+     m_controlTimeAct->setStatusTip( tr( "Configure Time Control " ) );
+     connect( m_controlTimeAct, SIGNAL( triggered() ), this, SLOT( controlTime() ) );
+
+     m_controlSunAct = new QAction( tr( "S&un Control..." ), this );
+     m_controlSunAct->setStatusTip( tr( "Configure Sun Control" ) );
+     connect( m_controlSunAct, SIGNAL( triggered() ), this, SLOT( controlSun() ) );
 
      m_reloadAct = new QAction( tr("&Redisplay"), this);
      m_reloadAct->setShortcut(tr("F5"));
@@ -298,6 +307,7 @@ void MainWindow::createMenus()
     m_fileMenu->addAction(m_showAtmosphereAct);
     m_fileMenu->addSeparator();
     m_fileMenu->addAction(m_controlSunAct);
+    m_fileMenu->addAction(m_controlTimeAct);
 
     m_bookmarkMenu = menuBar()->addMenu(tr("&Bookmarks"));
     createBookmarkMenu();
@@ -689,7 +699,7 @@ void MainWindow::lockPosition( bool isChecked )
 void MainWindow::controlSun()
 {
     if (!m_sunControlDialog) {
-        m_sunControlDialog = new SunControlWidget( this, m_controlView->sunLocator() );
+        m_sunControlDialog = new SunControlWidget( m_controlView->sunLocator() );
         connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
                  this,               SLOT ( showSun( bool ) ) );
     }
@@ -698,6 +708,19 @@ void MainWindow::controlSun()
      m_sunControlDialog->raise();
      m_sunControlDialog->activateWindow();
 }
+
+void MainWindow::controlTime()
+{
+    if ( !m_timeControlDialog ) 
+    {
+        m_timeControlDialog = new TimeControlWidget( m_controlView->marbleWidget()->model()->clock() );
+    }
+    /* m_timeControlDialog is a modeless dialog so that user may adjust time and interact with main application simultaneously.*/
+    m_timeControlDialog->show();
+    m_timeControlDialog->raise();
+    m_timeControlDialog->activateWindow();
+}
+
 
 void MainWindow::showSun( bool active )
 {
@@ -745,6 +768,12 @@ void MainWindow::showDistance( const QString& distance )
     updateStatusBar();
 }
 
+void MainWindow::showDateTime()
+{
+    m_clock = QLocale().toString( m_controlView->marbleWidget()->model()->clockDateTime().addSecs( m_controlView->marbleWidget()->model()->clockTimezone() ), QLocale::ShortFormat );
+    updateStatusBar();
+}
+
 void MainWindow::updateStatusBar()
 {
     if ( m_positionLabel )
@@ -754,6 +783,10 @@ void MainWindow::updateStatusBar()
     if ( m_distanceLabel )
         m_distanceLabel->setText( QString( "%1 %2" )
         .arg( tr( DISTANCE_STRING ) ).arg( m_distance ) );
+
+    if ( m_clockLabel )
+        m_clockLabel->setText( QString( "%1 %2" )
+        .arg( tr( DATETIME_STRING ) ).arg( m_clock ) );
 }
 
 void MainWindow::openFile()
@@ -797,10 +830,20 @@ void MainWindow::setupStatusBar()
     m_distanceLabel->setFixedWidth( maxDistanceWidth );
     statusBar()->addPermanentWidget ( m_distanceLabel );
 
+    m_clockLabel = new QLabel( );
+    m_clockLabel->setIndent( 5 );
+    QString templateDateTimeString = QString( "%1 %2" ).arg( DATETIME_STRING , QLocale().toString( QDateTime::fromString ( "01:01:1000", "dd:mm:yyyy"), QLocale::ShortFormat ) );
+    int maxDateTimeWidth = fontMetrics().boundingRect( templateDateTimeString ).width()
+                            + 2 * m_clockLabel->margin() + 2 * m_clockLabel->indent();
+    m_clockLabel->setFixedWidth( maxDateTimeWidth );
+    statusBar()->addPermanentWidget ( m_clockLabel );
+
     connect( marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
               this, SLOT( showPosition( QString ) ) );
     connect( marbleWidget(), SIGNAL( distanceChanged( QString ) ),
               this, SLOT( showDistance( QString ) ) );
+    connect( m_controlView->marbleWidget()->model()->clock(), SIGNAL( timeChanged() ),
+              this, SLOT( showDateTime() ) );
 
     updateStatusBar();
 }
@@ -883,6 +926,19 @@ void MainWindow::readSettings()
          m_controlView->sunLocator()->setCentered( settings.value( "centerOnSun", false ).toBool() );
      settings.endGroup();
 
+     settings.beginGroup( "Time" );
+        if( settings.value( "systemTime", "true" ).toBool() == true  )
+        {
+            m_controlView->marbleWidget()->model()->setClockDateTime( QDateTime::currentDateTime().toUTC() );
+            m_controlView->marbleWidget()->model()->setClockSpeed( 1 );
+        }
+        else if( settings.value( "lastSessionTime", "true" ).toBool() == true )
+        {
+            m_controlView->marbleWidget()->model()->setClockDateTime( settings.value( "dateTime" ).toDateTime() );
+            m_controlView->marbleWidget()->model()->setClockSpeed( settings.value( "speedSlider", 1 ).toInt() );
+        }
+     settings.endGroup();
+
      setUpdatesEnabled(true);
 
      // The config dialog has to read settings.
@@ -936,6 +992,11 @@ void MainWindow::writeSettings()
          settings.setValue( "showSun",        m_controlView->sunLocator()->getShow() );
          settings.setValue( "showCitylights", m_controlView->sunLocator()->getCitylights() );
          settings.setValue( "centerOnSun",    m_controlView->sunLocator()->getCentered() );
+     settings.endGroup();
+
+      settings.beginGroup( "Time" );
+         settings.setValue( "dateTime", m_controlView->marbleWidget()->model()->clockDateTime() );
+         settings.setValue( "speedSlider", m_controlView->marbleWidget()->model()->clockSpeed() );
      settings.endGroup();
 
      // The config dialog has to write settings.

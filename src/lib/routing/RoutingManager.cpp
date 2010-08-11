@@ -46,9 +46,12 @@ public:
 };
 
 RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager* manager, QObject *parent ) :
-        q( manager ), m_routingModel( new RoutingModel( model ) ),
+        q( manager ), 
+        m_routingModel( new RoutingModel( model ) ),
+        m_marbleModel( model ), 
         m_alternativeRoutesModel(new AlternativeRoutesModel( model, parent ) ),
-        m_marbleModel( model ), m_route( 0 ), m_workOffline( false ),
+        m_route( 0 ), 
+        m_workOffline( false ),
         m_runnerManager( new MarbleRunnerManager( model->pluginManager(), q ) ),
         m_haveRoute( false )
 {

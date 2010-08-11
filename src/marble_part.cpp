@@ -8,8 +8,8 @@
 // Copyright 2007      Tobias Koenig  <tokoe@kde.org>
 // Copyright 2008      Inge Wallin    <inge@lysator.liu.se>
 // Copyright 2009      Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2010      Harshit Jain   <hjain.itbhu@gmail.com>
 //
-
 
 // Own
 #include "marble_part.h"
@@ -73,10 +73,12 @@
 #include "MarblePluginSettingsWidget.h"
 #include "NewFolderInfoDialog.h"
 #include "SunControlWidget.h"
+#include "TimeControlWidget.h"
 #include "SunLocator.h"
 #include "TileCoordsPyramid.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
+#include "MarbleClock.h"
 
 // Marble non-library classes
 #include "ControlView.h"
@@ -86,6 +88,7 @@ using namespace Marble;
 
 #include "ui_MarbleViewSettingsWidget.h"
 #include "ui_MarbleNavigationSettingsWidget.h"
+#include "ui_MarbleTimeSettingsWidget.h"
 
 namespace Marble
 {
@@ -95,6 +98,7 @@ namespace
     const char* POSITION_STRING = I18N_NOOP( "Position: %1" );
     const char* DISTANCE_STRING = I18N_NOOP( "Altitude: %1" );
     const char* TILEZOOMLEVEL_STRING = I18N_NOOP( "Tile Zoom Level: %1" );
+    const char* DATETIME_STRING =  "Time: %1";
 }
 
 typedef KParts::GenericFactory< MarblePart > MarblePartFactory;
@@ -103,6 +107,7 @@ K_EXPORT_COMPONENT_FACTORY( libmarble_part, MarblePartFactory )
 MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringList &arguments )
   : KParts::ReadOnlyPart( parent ),
     m_sunControlDialog( 0 ),
+    m_timeControlDialog( 0 ),
     m_downloadRegionDialog( 0 ),
     m_pluginModel( 0 ),
     m_configDialog( 0 ),
@@ -148,6 +153,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
         mDebug() << "Bookmark File Loaded Successfully";
 
     QTimer::singleShot( 0, this, SLOT( initObject() ) );
+
+    initializeCustomTimezone();
 }
 
 MarblePart::~MarblePart()
@@ -320,6 +327,11 @@ void MarblePart::showTileZoomLevelLabel( bool isChecked )
     m_tileZoomLevelLabel->setVisible( isChecked );
 }
 
+void MarblePart::showDateTimeLabel( bool isChecked )
+{
+    m_clockLabel->setVisible( isChecked );
+}
+
 void MarblePart::showDownloadProgressBar( bool isChecked )
 {
     MarbleSettings::setShowDownloadProgressBar( isChecked );
@@ -353,9 +365,13 @@ void MarblePart::showStatusBar( bool isChecked )
 void MarblePart::controlSun()
 {
     if ( !m_sunControlDialog ) {
-        m_sunControlDialog = new SunControlWidget( NULL, m_controlView->sunLocator() );
+        m_sunControlDialog = new SunControlWidget( m_controlView->sunLocator() );
         connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
                  this,               SLOT ( showSun( bool ) ) );
+        connect( m_sunControlDialog, SIGNAL( showSun( bool ) ),
+                 m_showShadow,               SLOT ( setChecked( bool ) ) );
+        connect( m_sunControlDialog, SIGNAL( showSunInZenith( bool ) ),
+                 m_showSunInZenith,               SLOT ( setChecked( bool ) ) );
     }
 
     m_sunControlDialog->show();
@@ -363,10 +379,27 @@ void MarblePart::controlSun()
     m_sunControlDialog->activateWindow();
 }
 
+void MarblePart::controlTime()
+{
+    if ( !m_timeControlDialog ) 
+    {
+        m_timeControlDialog = new TimeControlWidget( m_controlView->marbleWidget()->model()->clock() );
+    }
+    m_timeControlDialog->show();
+    m_timeControlDialog->raise();
+    m_timeControlDialog->activateWindow();
+}
+
 
 void MarblePart::showSun( bool active )
 {
     m_controlView->marbleWidget()->sunLocator()->setShow( active ); 
+    m_sunControlDialog->setSunShading( active );
+}
+
+void MarblePart::showSunInZenith( bool active )
+{
+    m_controlView->marbleWidget()->sunLocator()->setCentered( active );
 }
 
 void MarblePart::workOffline( bool offline )
@@ -443,8 +476,10 @@ void MarblePart::readSettings()
     
     // Sun
     m_controlView->sunLocator()->setShow( MarbleSettings::showSun() );
+    m_showShadow->setChecked( MarbleSettings::showSun() );
     m_controlView->sunLocator()->setCitylights( MarbleSettings::showCitylights() );
     m_controlView->sunLocator()->setCentered( MarbleSettings::centerOnSun() );
+    m_showSunInZenith->setChecked( MarbleSettings::centerOnSun() );
 
     // View
     m_initialGraphicsSystem = (GraphicsSystem) MarbleSettings::graphicsSystem();
@@ -489,6 +524,19 @@ void MarblePart::readSettings()
     readStatusBarSettings();
 
     updateSettings();
+
+    // Time
+    if( MarbleSettings::systemTime() == true  )
+    {
+        m_controlView->marbleWidget()->model()->setClockDateTime( QDateTime::currentDateTime().toUTC() );
+        m_controlView->marbleWidget()->model()->setClockSpeed( 1 );
+    }
+    else if( MarbleSettings::lastSessionTime() == true )
+    {
+        m_controlView->marbleWidget()->model()->setClockDateTime( MarbleSettings::dateTime() );
+        m_controlView->marbleWidget()->model()->setClockSpeed( MarbleSettings::speedSlider() );
+    }
+
     readPluginSettings();
     disconnect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
                 this,                          SLOT( writePluginSettings() ) );
@@ -509,6 +557,10 @@ void MarblePart::readStatusBarSettings()
     const bool showTileZoom = MarbleSettings::showTileZoomLevelLabel();
     m_showTileZoomLevelAction->setChecked( showTileZoom );
     showTileZoomLevelLabel( showTileZoom );
+
+    const bool showDateTime = MarbleSettings::showDateTimeLabel();
+    m_showDateTimeAction->setChecked( showDateTime );
+    showDateTimeLabel( showDateTime );
 
     const bool showProgress = MarbleSettings::showDownloadProgressBar();
     m_showDownloadProgressAction->setChecked( showProgress );
@@ -578,6 +630,10 @@ void MarblePart::writeSettings()
     MarbleSettings::setPersistentTileCacheLimit( m_controlView->marbleWidget()->
                                                  persistentTileCacheLimit() / 1024 );
     
+    // Time
+    MarbleSettings::setDateTime( m_controlView->marbleWidget()->model()->clockDateTime() );
+    MarbleSettings::setSpeedSlider( m_controlView->marbleWidget()->model()->clockSpeed() );
+
     // Plugins
     QList<int>   pluginEnabled;
     QList<int>   pluginVisible;
@@ -607,6 +663,7 @@ void MarblePart::writeStatusBarSettings()
     MarbleSettings::setShowPositionLabel( m_showPositionAction->isChecked() );
     MarbleSettings::setShowAltitudeLabel( m_showAltitudeAction->isChecked() );
     MarbleSettings::setShowTileZoomLevelLabel( m_showTileZoomLevelAction->isChecked() );
+    MarbleSettings::setShowDateTimeLabel( m_showDateTimeAction->isChecked() );
     MarbleSettings::setShowDownloadProgressBar( m_showDownloadProgressAction->isChecked() );
 }
 
@@ -743,6 +800,13 @@ void MarblePart::setupActions()
 
     KStandardAction::redisplay( this, SLOT( reload() ), actionCollection() );
 
+    // Action: Show Time options
+    m_controlTimeAction = new KAction( this );
+    actionCollection()->addAction( "control_time", m_controlTimeAction );
+    m_controlTimeAction->setText( i18nc( "Action for time control dialog", "&Time Control..." ) );
+    connect( m_controlTimeAction, SIGNAL( triggered( bool ) ),
+         this,               SLOT( controlTime() ) );
+
     // Action: Lock float items
     m_lockFloatItemsAct = new KAction ( this );
     actionCollection()->addAction( "options_lock_floatitems",
@@ -757,6 +821,22 @@ void MarblePart::setupActions()
     KStandardAction::preferences( this, SLOT( editSettings() ),
 				  actionCollection() );
 
+    //Toggle Action: Show sun shadow
+    m_showShadow = new KToggleAction( i18n( "Show Shadow" ), this );
+    m_showShadow->setIcon( KIcon( "" ) );        // Fixme: Add Icon
+    actionCollection()->addAction( "sun_shadow", m_showShadow );
+    m_showShadow->setCheckedState( KGuiItem( i18n( "Hide Shadow" ) ) );
+    m_showShadow->setToolTip(i18n("Shows and hides the shadow of the sun"));
+    connect( m_showShadow, SIGNAL( triggered( bool ) ), this, SLOT( showSun( bool ) ));
+
+    //Toggle Action: Show sun zenith
+    m_showSunInZenith = new KToggleAction( i18n( "Show Zenith" ), this );
+    m_showSunInZenith->setIcon( KIcon( MarbleDirs::path( "svg/sunshine.png" ) ) );
+    actionCollection()->addAction( "sun_zenith", m_showSunInZenith );
+    m_showSunInZenith->setCheckedState( KGuiItem( i18n( "Hide Zenith" ) ) );
+    m_showSunInZenith->setToolTip( i18n( "Shows and hides the zenith location of the sun" ) );
+    connect( m_showSunInZenith, SIGNAL( triggered( bool ) ), this, SLOT( showSunInZenith( bool ) ));
+    
     //    FIXME: Discuss if this is the best place to put this
     QList<RenderPlugin *>::const_iterator it = pluginList.constBegin();
     QList<RenderPlugin *>::const_iterator const itEnd = pluginList.constEnd();
@@ -855,7 +935,7 @@ void MarblePart::createOnlineServicesMenu()
     QList<RenderPlugin *>::const_iterator const end = renderPluginList.constEnd();
     for (; i != end; ++i ) {
         // FIXME: This will go into the layer manager when AbstractDataPlugin is an interface
-        
+       
         if( (*i)->renderType() == RenderPlugin::Online ) {
             actionList.append( (*i)->action() );
         }
@@ -865,6 +945,11 @@ void MarblePart::createOnlineServicesMenu()
     plugActionList( "onlineservices_actionlist", actionList );
 }
 
+void MarblePart::showDateTime()
+{
+    m_clock = QLocale().toString( m_controlView->marbleWidget()->model()->clockDateTime().addSecs( m_controlView->marbleWidget()->model()->clockTimezone() ), QLocale::ShortFormat );
+    updateStatusBar();
+}
 
 void MarblePart::showPosition( const QString& position )
 {
@@ -939,6 +1024,9 @@ void MarblePart::updateStatusBar()
     if ( m_tileZoomLevelLabel )
         m_tileZoomLevelLabel->setText( i18n( TILEZOOMLEVEL_STRING,
                                              m_tileZoomLevel ) );
+
+    if ( m_clockLabel )
+        m_clockLabel->setText( i18n( DATETIME_STRING, m_clock ) );
 }
 
 void MarblePart::setupStatusBar()
@@ -953,6 +1041,10 @@ void MarblePart::setupStatusBar()
         QString( "%1 00.000,0 mu" ).arg(DISTANCE_STRING);
     m_distanceLabel = setupStatusBarLabel( templateDistanceString );
 
+    QString templateDateTimeString = QString( "%1 %2" ).arg( DATETIME_STRING , QLocale().toString( QDateTime::fromString ( "01:01:1000", "dd:mm:yyyy"), QLocale::ShortFormat ) );
+
+    m_clockLabel = setupStatusBarLabel( templateDateTimeString );
+
     const QString templateTileZoomLevelString = i18n( TILEZOOMLEVEL_STRING );
     m_tileZoomLevelLabel = setupStatusBarLabel( templateTileZoomLevelString );
 
@@ -964,6 +1056,9 @@ void MarblePart::setupStatusBar()
              SLOT( showZoomLevel( int )));
     connect( m_controlView->marbleWidget()->model(), SIGNAL( themeChanged( QString )),
              this, SLOT( mapThemeChanged( QString )), Qt::QueuedConnection );
+    connect( m_controlView->marbleWidget()->model()->clock(), SIGNAL( timeChanged() ),
+             this,                          SLOT( showDateTime() ) );
+
 
     setupDownloadProgressBar();
 
@@ -1013,6 +1108,8 @@ void MarblePart::setupStatusBarActions()
 
     m_showPositionAction = new KToggleAction( i18nc( "Action for toggling", "Show Position" ),
                                               this );
+    m_showDateTimeAction = new KToggleAction( i18nc( "Action for toggling", "Show Date and Time" ),
+                                              this );
     m_showAltitudeAction = new KToggleAction( i18nc( "Action for toggling", "Show Altitude" ),
                                               this );
     m_showTileZoomLevelAction = new KToggleAction( i18nc( "Action for toggling",
@@ -1026,6 +1123,8 @@ void MarblePart::setupStatusBarActions()
              this, SLOT( showAltitudeLabel( bool ) ) );
     connect( m_showTileZoomLevelAction, SIGNAL( triggered( bool ) ),
              this, SLOT( showTileZoomLevelLabel( bool ) ) );
+    connect( m_showDateTimeAction, SIGNAL( triggered( bool ) ),
+             this, SLOT( showDateTimeLabel( bool ) ) );
     connect( m_showDownloadProgressAction, SIGNAL( triggered( bool ) ),
              this, SLOT( showDownloadProgressBar( bool ) ) );
 }
@@ -1104,6 +1203,7 @@ void MarblePart::showStatusBarContextMenu( const QPoint& pos )
 
     KMenu statusBarContextMenu( m_controlView->marbleWidget() );
     statusBarContextMenu.addAction( m_showPositionAction );
+    statusBarContextMenu.addAction( m_showDateTimeAction );
     statusBarContextMenu.addAction( m_showAltitudeAction );
     statusBarContextMenu.addAction( m_showTileZoomLevelAction );
     statusBarContextMenu.addAction( m_showDownloadProgressAction );
@@ -1160,6 +1260,14 @@ void MarblePart::editSettings()
 	     m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
     connect( w_cacheSettings,               SIGNAL( clearPersistentCache() ),
 	     m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
+
+    // time page
+    Ui_MarbleTimeSettingsWidget ui_timeSettings;
+    QWidget *w_timeSettings = new QWidget( 0 );
+
+    w_timeSettings->setObjectName( "time_page" );
+    ui_timeSettings.setupUi( w_timeSettings );
+    m_configDialog->addPage( w_timeSettings, i18n( "Date & Time" ), "clock" );
 
     // plugin page
     m_pluginModel = new QStandardItemModel( this );
@@ -1300,6 +1408,22 @@ void MarblePart::updateSettings()
                                 i18n("Graphics System Change") );
     }    
     m_previousGraphicsSystem = graphicsSystem;
+
+    // Time
+    if( MarbleSettings::systemTimezone() == true  )
+    {
+        QDateTime localTime = QDateTime::currentDateTime().toLocalTime();
+        localTime.setTimeSpec( Qt::UTC );
+        m_controlView->marbleWidget()->model()->setClockTimezone( QDateTime::currentDateTime().toUTC().secsTo( localTime ) );
+    }
+    else if( MarbleSettings::utc() == true )
+    {
+        m_controlView->marbleWidget()->model()->setClockTimezone( 0 );
+    }
+    else if( MarbleSettings::customTimezone() == true )
+    {
+        m_controlView->marbleWidget()->model()->setClockTimezone( m_timezone.value( MarbleSettings::chosenTimezone() ) );
+    }
 }
 
 void MarblePart::reload()
@@ -1449,6 +1573,44 @@ void MarblePart::lookAtBookmark( QAction *action)
                          << " distance : " << temp.range();
 }
 
+
+void MarblePart::initializeCustomTimezone()
+{
+    if( m_timezone.count() == 0)
+    {
+        m_timezone.insert( 0, 0 );
+        m_timezone.insert( 1, 3600 );
+        m_timezone.insert( 2, 7200 );
+        m_timezone.insert( 3, 7200 );
+        m_timezone.insert( 4, 10800 );
+        m_timezone.insert( 5, 12600 );
+        m_timezone.insert( 6, 14400 );
+        m_timezone.insert( 7, 18000 );
+        m_timezone.insert( 8, 19800 );
+        m_timezone.insert( 9, 21600 );
+        m_timezone.insert( 10, 25200 );
+        m_timezone.insert( 11, 28800 );
+        m_timezone.insert( 12, 32400 );
+        m_timezone.insert( 13, 34200 );
+        m_timezone.insert( 14, 36000 );
+        m_timezone.insert( 15, 39600 );
+        m_timezone.insert( 16, 43200 );
+        m_timezone.insert( 17, -39600 );
+        m_timezone.insert( 18, -36000 );
+        m_timezone.insert( 19, -32400 );
+        m_timezone.insert( 20, -28800 );
+        m_timezone.insert( 21, -25200 );
+        m_timezone.insert( 22, -25200 );
+        m_timezone.insert( 23, -21600 );
+        m_timezone.insert( 24, -18000 );
+        m_timezone.insert( 25, -18000 );
+        m_timezone.insert( 26, -14400 );
+        m_timezone.insert( 27, -12600 );
+        m_timezone.insert( 28, -10800 );
+        m_timezone.insert( 29, -10800 );
+        m_timezone.insert( 30, -3600 );
+    }
+}
 
 }
 

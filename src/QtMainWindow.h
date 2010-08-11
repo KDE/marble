@@ -15,7 +15,7 @@
  
 
 #include <QtGui/QMainWindow>
-
+#include <QtCore/QDateTime>
 #include "ControlView.h"
 
 
@@ -29,6 +29,7 @@ namespace Marble
 
 class MarbleWidget;
 class SunControlWidget;
+class TimeControlWidget;
 class QtMarbleConfigDialog;
 class DownloadRegionDialog;
 
@@ -58,6 +59,7 @@ class MainWindow : public QMainWindow
  private Q_SLOTS:
     void  showPosition( const QString& position);
     void  showDistance( const QString& position);
+    void  showDateTime();
 
     void  initObject();
     void  editSettings();
@@ -86,6 +88,7 @@ class MainWindow : public QMainWindow
     void  showClouds( bool );
     void  showAtmosphere( bool );
     void  controlSun();
+    void  controlTime();
     void  showSun( bool );
     void  reload();
     
@@ -117,6 +120,7 @@ class MainWindow : public QMainWindow
  private:
     ControlView *m_controlView;
     SunControlWidget* m_sunControlDialog;
+    TimeControlWidget* m_timeControlDialog;
     QtMarbleConfigDialog *m_configDialog;
     DownloadRegionDialog* m_downloadRegionDialog;
 
@@ -149,6 +153,7 @@ class MainWindow : public QMainWindow
     QAction *m_showCloudsAct;
     QAction *m_showAtmosphereAct;
     QAction *m_controlSunAct;
+    QAction *m_controlTimeAct;
     QAction *m_reloadAct;
 
     // Settings Menu
@@ -167,8 +172,10 @@ class MainWindow : public QMainWindow
     // Status Bar
     QString     m_position;
     QString     m_distance;
+    QString     m_clock;
     QLabel      *m_positionLabel;
     QLabel      *m_distanceLabel;    
+    QLabel      *m_clockLabel;
     void updateStatusBar();
 
 	//Bookmark Menu
