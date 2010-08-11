@@ -33,7 +33,7 @@ enum PositionProviderStatus {
  * @short The interface for position provider plugins.
  *
  */
-class PositionProviderPluginInterface: public PluginInterface
+class MARBLE_EXPORT PositionProviderPluginInterface: public PluginInterface
 {
   public:
     virtual ~PositionProviderPluginInterface();
