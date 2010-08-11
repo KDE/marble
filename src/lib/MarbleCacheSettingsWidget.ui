@@ -198,7 +198,7 @@ p, li { white-space: pre-wrap; }
         <item>
          <widget class="QLineEdit" name="kcfg_proxyUrl">
           <property name="text">
-           <string>http://</string>
+           <string></string>
           </property>
          </widget>
         </item>
