@@ -55,9 +55,9 @@ class MarblePart: public KParts::ReadOnlyPart
     ControlView *controlView() const;
 
     static KAboutData* createAboutData();
-    void  createInfoBoxesMenu();
+    void createInfoBoxesMenu();
     void createOnlineServicesMenu();
-	void  createFolderList();
+    void createFolderList();
 
     void initializeCustomTimezone();
 
