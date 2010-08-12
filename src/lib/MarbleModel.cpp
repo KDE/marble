@@ -59,6 +59,7 @@
 #include "MergedLayerDecorator.h"
 #include "FileManager.h"
 #include "GeoDataTreeModel.h"
+#include "GeometryLayer.h"
 #include "PlacemarkManager.h"
 #include "PlacemarkLayout.h"
 #include "PlacemarkPainter.h"
@@ -144,6 +145,7 @@ class MarbleModelPrivate
     PlacemarkManager        *m_placemarkmanager;
     PlacemarkLayout         *m_placemarkLayout;
     QSortFilterProxyModel   *m_popSortModel;
+    GeometryLayer           *m_geometryLayer;
 
     // Misc stuff.
     MarbleClock             *m_clock;
@@ -238,6 +240,11 @@ MarbleModel::MarbleModel( QObject *parent )
               this,              SIGNAL( repaintNeeded( QRegion ) ) );
     connect ( d->m_layerManager, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
               this,              SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
+
+    GeoDataObject *object = static_cast<GeoDataObject*>(d->m_dataFacade->treeModel()->index(0, 0, QModelIndex()).internalPointer());
+    GeoDataDocument *document = dynamic_cast<GeoDataDocument*>( object->parent() );
+    d->m_geometryLayer = new GeometryLayer( document );
+    d->m_layerManager->addLayer( d->m_geometryLayer );
 
     d->m_clock       = new MarbleClock();
     /* Assume we are dealing with the earth */

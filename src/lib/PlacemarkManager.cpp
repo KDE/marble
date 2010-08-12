@@ -29,6 +29,7 @@
 #include "GeoDataFolder.h"
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataStyleMap.h"
 
 
 using namespace Marble;
@@ -94,6 +95,7 @@ void PlacemarkManager::addGeoDataDocument( int index )
         if (!result.isEmpty())
         {
             createFilterProperties( result );
+            setupStyle( file->document(), result );
             int start = d->m_placemarkContainer.size();
             d->m_placemarkContainer << result;
             d->m_sizeForDocument.resize(index+1);
@@ -144,6 +146,28 @@ QVector<GeoDataPlacemark*> PlacemarkManager::recurseContainer(GeoDataContainer *
         }
     }
     return results;
+}
+
+void PlacemarkManager::setupStyle( GeoDataDocument *doc, QVector<GeoDataPlacemark*> &container )
+{
+    // remove the hashes in front of the styles.
+    QVector<GeoDataPlacemark*>::Iterator itr = container.begin();
+    QVector<GeoDataPlacemark*>::Iterator end = container.end();
+    for ( ; itr != end; ++itr ) {
+        GeoDataPlacemark *placemark = *itr;
+        QString styleUrl = placemark->styleUrl().remove('#');
+        if ( ! styleUrl.isEmpty() )
+        {
+            const GeoDataStyleMap& styleMap = doc->styleMap( styleUrl );
+            /// hard coded to use only the "normal" style
+            if( !styleMap.value( QString( "normal" ) ).isEmpty() ) {
+                styleUrl = styleMap.value( QString( "normal" ) );
+            }
+            styleUrl.remove( '#' );
+            mDebug() << "feature " << placemark->name() << " " << styleUrl;
+            placemark->setStyle( &doc->style( styleUrl ) );
+        }
+    }
 }
 
 void PlacemarkManager::createFilterProperties( QVector<GeoDataPlacemark*> &container )

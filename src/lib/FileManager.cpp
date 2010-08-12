@@ -183,18 +183,6 @@ void FileManager::addGeoDataDocument( GeoDataDocument* document )
     {
         doc->setName( doc->fileName() );
     }
-    // remove the hashes in front of the styles.
-    QVector<GeoDataFeature*>::Iterator end = doc->end();
-    QVector<GeoDataFeature*>::Iterator itr = doc->begin();
-    for ( ; itr != end; ++itr ) {
-        // use *itr (or itr.value()) here
-        QString styleUrl = (*itr)->styleUrl().remove('#');
-        if ( ! styleUrl.isEmpty() )
-        {
-            (*itr)->setStyle( &doc->style( styleUrl ) );
-        }
-    }
-
 }
 
 void FileManager::cleanupLoader( FileLoader* loader )

@@ -120,7 +120,7 @@ void GeoDataFeature::initializeDefaultStyles()
 
     s_defaultStyle[Default]
         = new GeoDataStyle( QPixmap( MarbleDirs::path( "bitmaps/default_location.png" ) ), 
-              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::black ) );
+              QFont( defaultFamily, defaultSize, 50, false ), QColor( Qt::white ) );
 
     s_defaultStyle[Unknown]
         = new GeoDataStyle( QPixmap(), 
@@ -449,23 +449,23 @@ void GeoDataFeature::setTimeStamp( GeoDataTimeStamp timeStamp )
 
 GeoDataStyle* GeoDataFeature::style() const
 {
-    if ( s_defaultStyleInitialized == false )
-        initializeDefaultStyles();
+    if ( d->m_style != 0 ) {
+        return d->m_style;
+    } else
+    {
+        if ( s_defaultStyleInitialized == false )
+            initializeDefaultStyles();
 
-    if ( d->m_visualCategory != None )
-    {
-        return s_defaultStyle[ d->m_visualCategory ];
-    }
-    else
-    {
-        if ( d->m_style != 0 ) {
-            return d->m_style;
-        } else
+        if ( d->m_visualCategory != None )
+        {
+            return s_defaultStyle[ d->m_visualCategory ];
+        }
+        else
         {
             // This should not happen
             mDebug() << "No Style got assigned!";
             return new GeoDataStyle( QPixmap(), 
-              QFont( "Sans Serif",  8, 50, false ), QColor( Qt::black ) );
+                                     QFont( "Sans Serif",  8, 50, false ), QColor( Qt::black ) );
         }
     }
 }

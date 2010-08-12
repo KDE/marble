@@ -77,6 +77,7 @@ public Q_SLOTS:
 
  private:
     QVector<GeoDataPlacemark*> recurseContainer(GeoDataContainer *container);
+    void setupStyle( GeoDataDocument *doc, QVector<GeoDataPlacemark*> &container );
     void createFilterProperties( QVector<GeoDataPlacemark*> &container );
     int cityPopIdx( qint64 population ) const;
     int spacePopIdx( qint64 diameter ) const;

@@ -98,8 +98,6 @@ class FileManager : public QObject
 
  private:
 
-    int indexStart( int index );
-
     void appendLoader( FileLoader *loader );
 
     /**
