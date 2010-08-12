@@ -55,6 +55,7 @@
 #include "AbstractFloatItem.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
+#include "MarbleClock.h"
 #include "SunLocator.h"
 #include "BookmarkManager.h"
 #include "NewFolderInfoDialog.h"
