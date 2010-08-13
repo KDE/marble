@@ -27,21 +27,20 @@ namespace kml
     GeoNode *KmllatitudeTagHandler::parse( GeoParser & parser ) const
     {
         Q_ASSERT( parser.isStartElement()
-		    && parser.isValidElement( kmlTag_latitude ) );
-        
+                  && parser.isValidElement( kmlTag_latitude ) );
+
         GeoStackItem parentItem = parser.parentElement();
-        
-        if ( parentItem.nodeAs<GeoDataLookAt>() ){
+
+        if ( parentItem.is<GeoDataLookAt>() ){
             QString latitudeTemp = parser.readElementText().trimmed ();
             qreal latitude = latitudeTemp.toDouble();
-            
+
             parentItem.nodeAs<GeoDataLookAt>()->setLatitude(latitude,
-								 GeoDataCoordinates::
-								 Degree);
+                                                            GeoDataCoordinates::Degree);
 #ifdef DEBUG_TAGS
-	    mDebug () << "Parsed <" << kmlTag_latitude << "> containing: " <<
-	    latitude << " parent item name: " << parentItem.qualifiedName ().
-	    first;
+            mDebug () << "Parsed <" << kmlTag_latitude << "> containing: " <<
+            latitude << " parent item name: " << parentItem.qualifiedName ().
+            first;
 #endif				// DEBUG_TAGS
         }
 

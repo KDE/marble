@@ -18,20 +18,20 @@ KML_DEFINE_TAG_HANDLER (range)
     GeoNode *KmlrangeTagHandler::parse (GeoParser & parser) const
     {
         Q_ASSERT (parser.isStartElement ()
-		    && parser.isValidElement (kmlTag_range));
-        
+                  && parser.isValidElement (kmlTag_range));
+
         GeoStackItem parentItem = parser.parentElement ();
-        
-        if ( parentItem.nodeAs<GeoDataLookAt>() ){
-            
+
+        if ( parentItem.is<GeoDataLookAt>() ){
+
             QString rangeTemp = parser.readElementText().trimmed();
             qreal range = rangeTemp.toDouble();
 
-            parentItem.nodeAs<GeoDataLookAt>()->setRange( range ); 
+            parentItem.nodeAs<GeoDataLookAt>()->setRange( range );
 #ifdef DEBUG_TAGS
-	    mDebug () << "Parsed <" << kmlTag_range << "> containing: " <<
-	    range << " parent item name: " << parentItem.qualifiedName().first;
-#endif				// DEBUG_TAGS
+            mDebug () << "Parsed <" << kmlTag_range << "> containing: " <<
+            range << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
         }
 
       return 0;

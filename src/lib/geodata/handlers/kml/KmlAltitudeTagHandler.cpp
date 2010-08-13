@@ -27,20 +27,20 @@ KML_DEFINE_TAG_HANDLER( altitude )
     GeoNode *KmlaltitudeTagHandler::parse(GeoParser & parser) const
     {
         Q_ASSERT ( parser.isStartElement()
-		    && parser.isValidElement( kmlTag_altitude ) );
-        
+                   && parser.isValidElement( kmlTag_altitude ) );
+
         GeoStackItem parentItem = parser.parentElement();
-        
-        if ( parentItem.nodeAs<GeoDataLookAt>() ){
-            
+
+        if ( parentItem.is<GeoDataLookAt>() ){
+
             QString altitudeTemp = parser.readElementText().trimmed ();
             qreal altitude = altitudeTemp.toDouble();
             parentItem.nodeAs<GeoDataLookAt>()->setAltitude( altitude );
 #ifdef DEBUG_TAGS
-	    mDebug () << "Parsed <" << kmlTag_altitude << "> containing: " <<
-	    altitude << " parent item name: " << parentItem.qualifiedName().first;
-#endif				// DEBUG_TAGS
-	}
+            mDebug () << "Parsed <" << kmlTag_altitude << "> containing: " <<
+            altitude << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
+        }
 
       return 0;
     }

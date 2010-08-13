@@ -10,6 +10,7 @@
 
 
 #include "GeoDataIconStyle.h"
+#include "MarbleDirs.h"
 #include "MarbleDebug.h"
 
 #include "GeoDataTypes.h"
@@ -21,7 +22,8 @@ class GeoDataIconStylePrivate
 {
   public:
     GeoDataIconStylePrivate()
-        : m_scale( 1.0 )
+        : m_scale( 1.0 ),
+        m_iconPath( MarbleDirs::path( "bitmaps/default_location.png" ) )
     {
     }
 
@@ -91,13 +93,15 @@ QPixmap GeoDataIconStyle::icon() const
 {
     if(!d->m_icon.isNull())
         return d->m_icon;
-    else if(!d->m_iconPath.isEmpty())
-        return QPixmap(d->m_iconPath);
+    else if(!d->m_iconPath.isEmpty()) {
+        d->m_icon = QPixmap(d->m_iconPath);
+        return d->m_icon;
+    }
     else
         return QPixmap();
 }
 
-void GeoDataIconStyle::setHotSpot( const QPointF& hotSpot, 
+void GeoDataIconStyle::setHotSpot( const QPointF& hotSpot,
                                    GeoDataHotSpot::Units xunits,
                                    GeoDataHotSpot::Units yunits )
 {

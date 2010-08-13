@@ -26,22 +26,23 @@ namespace kml
     GeoNode *KmlLookAtTagHandler::parse( GeoParser & parser ) const
     {
         Q_ASSERT (parser.isStartElement()
-                && parser.isValidElement( kmlTag_LookAt ) );
-        
+                  && parser.isValidElement( kmlTag_LookAt ) );
+
         GeoDataLookAt *lookAt = new GeoDataLookAt();
         GeoStackItem parentItem = parser.parentElement();
 #ifdef DEBUG_TAGS
         mDebug () << "Parsed <" << kmlTag_LookAt << ">"
-	              << " parent item name: " << parentItem.qualifiedName().first;
-#endif				// DEBUG_TAGS
+                      << " parent item name: " << parentItem.qualifiedName().first;
+#endif // DEBUG_TAGS
       if ( parentItem.represents( kmlTag_Placemark ) ) {
           GeoDataPlacemark *placemark = parentItem.nodeAs<GeoDataPlacemark>();
           placemark->setLookAt( lookAt );
-          
-          return static_cast <GeoDataLookAt*>( ( placemark->lookAt() ) );
+
+          return lookAt;
       }
       else {
-    	  return 0;
+          delete lookAt;
+          return 0;
       }
     }
 }

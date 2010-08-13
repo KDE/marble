@@ -64,16 +64,15 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
                                 coordinates.at( 2 ).toDouble() );
                 }
                 parentItem.nodeAs<GeoDataPlacemark>()->setCoordinate( *coord );
-                parentItem.nodeAs<GeoDataPlacemark>()->setGeometry( coord );
             } else {
                 GeoDataCoordinates coord;
                 if ( coordinates.size() == 2 ) {
-                    coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
-				DEG2RAD * coordinates.at( 1 ).toDouble() );
+                    coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(),
+                                DEG2RAD * coordinates.at( 1 ).toDouble() );
                 } else if( coordinates.size() == 3 ) {
-                    coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(), 
-				DEG2RAD * coordinates.at( 1 ).toDouble(),
-				coordinates.at( 2 ).toDouble() );
+                    coord.set( DEG2RAD * coordinates.at( 0 ).toDouble(),
+                                DEG2RAD * coordinates.at( 1 ).toDouble(),
+                                coordinates.at( 2 ).toDouble() );
                 }
 
                 if ( parentItem.represents( kmlTag_LineString ) ) {
@@ -84,11 +83,11 @@ GeoNode* KmlcoordinatesTagHandler::parse( GeoParser& parser ) const
                     GeoDataPoint *point = new GeoDataPoint;
                     if ( coordinates.size() == 2 ) {
                         point->set( DEG2RAD * coordinates.at( 0 ).toDouble(),
-				    DEG2RAD * coordinates.at( 1 ).toDouble() );
+                                    DEG2RAD * coordinates.at( 1 ).toDouble() );
                     } else if ( coordinates.size() == 3 ) {
                         point->set( DEG2RAD * coordinates.at( 0 ).toDouble(),
-				    DEG2RAD * coordinates.at( 1 ).toDouble(),
-				    coordinates.at( 2 ).toDouble() );
+                                    DEG2RAD * coordinates.at( 1 ).toDouble(),
+                                    coordinates.at( 2 ).toDouble() );
                     }
                     parentItem.nodeAs<GeoDataMultiGeometry>()->append( point );
                 } else if ( parentItem.represents( kmlTag_Point ) ) {
