@@ -23,7 +23,8 @@ namespace Marble
 
 OrsRoutingProvider::OrsRoutingProvider( QObject *parent ) :
         AbstractRoutingProvider( parent ),
-        m_networkAccessManager( new QNetworkAccessManager( this ) )
+        m_networkAccessManager( new QNetworkAccessManager( this ) ),
+        m_route( 0 )
 {
     connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
              this, SLOT( retrieveData( QNetworkReply * ) ) );
@@ -31,18 +32,28 @@ OrsRoutingProvider::OrsRoutingProvider( QObject *parent ) :
 
 void OrsRoutingProvider::retrieveDirections( RouteSkeleton *route )
 {
-    if ( route->size() < 2 ) {
+    m_route = route;
+    if ( m_languageCode.isEmpty() ) {
+        m_languageCode = MarbleLocale::languageCode();
+    }
+    retrieveDirections();
+}
+
+void OrsRoutingProvider::retrieveDirections()
+{
+    Q_ASSERT( m_route );
+    if ( m_route->size() < 2 ) {
         return;
     }
 
-    GeoDataCoordinates source = route->source();
-    GeoDataCoordinates destination = route->destination();
+    GeoDataCoordinates source = m_route->source();
+    GeoDataCoordinates destination = m_route->destination();
 
     QString request = xmlHeader();
     QString unit = "KM";
     QString preference = "Fastest";
 
-    switch ( route->routePreference() ) {
+    switch ( m_route->routePreference() ) {
     case RouteSkeleton::CarFastest:
         unit = "KM";
         preference = "Fastest";
@@ -64,14 +75,14 @@ void OrsRoutingProvider::retrieveDirections( RouteSkeleton *route )
     request += requestHeader( unit, preference );
     request += requestPoint( StartPoint, source );
 
-    if ( route->size() > 2 ) {
-        for ( int i = 1; i < route->size() - 1; ++i ) {
-            request += requestPoint( ViaPoint, route->at( i ) );
+    if ( m_route->size() > 2 ) {
+        for ( int i = 1; i < m_route->size() - 1; ++i ) {
+            request += requestPoint( ViaPoint, m_route->at( i ) );
         }
     }
 
     request += requestPoint( EndPoint, destination );
-    request += requestFooter( route->avoidFeatures() );
+    request += requestFooter( m_route->avoidFeatures() );
     request += xmlFooter();
     //mDebug() << "POST: " << request;
 
@@ -89,7 +100,17 @@ void OrsRoutingProvider::retrieveData( QNetworkReply *reply )
     QByteArray data = reply->readAll();
     reply->deleteLater();
     //mDebug() << "Download completed: " << data;
-    emit routeRetrieved( AbstractRoutingProvider::OpenGIS, data );
+
+    QByteArray languageError = "xls:Error errorCode=\"NotSupported\" severity=\"Error\" locationPath=\"Language\"";
+    if ( data.contains( languageError ) && m_languageCode != "en" ) {
+        Q_ASSERT( m_route );
+        mDebug() << "ORS routing instructions not available for language code" << m_languageCode << ", falling back to english.";
+        m_languageCode = "en";
+        retrieveDirections();
+    }
+    else {
+        emit routeRetrieved( AbstractRoutingProvider::OpenGIS, data );
+    }
 }
 
 void OrsRoutingProvider::handleError( QNetworkReply::NetworkError error )
@@ -106,7 +127,8 @@ QString OrsRoutingProvider::xmlHeader() const
     result += "xsi:schemaLocation=\"http://www.opengis.net/xls ";
     result += "http://schemas.opengis.net/ols/1.1.0/RouteService.xsd\" version=\"1.1\" xls:lang=\"%1\">\n";
     result += "<xls:RequestHeader/>\n";
-    return result.arg( MarbleLocale::languageCode() );
+    Q_ASSERT( !m_languageCode.isEmpty() );
+    return result.arg( m_languageCode );
 }
 
 QString OrsRoutingProvider::requestHeader( const QString &unit, const QString &routePreference ) const

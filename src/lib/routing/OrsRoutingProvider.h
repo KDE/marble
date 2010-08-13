@@ -50,6 +50,8 @@ private Q_SLOTS:
     void handleError( QNetworkReply::NetworkError );
 
 private:
+    void retrieveDirections();
+
     /** Builds the xml request header. */
     QString xmlHeader() const;
 
@@ -66,6 +68,10 @@ private:
     QString xmlFooter() const;
 
     QNetworkAccessManager *m_networkAccessManager;
+    
+    RouteSkeleton *m_route;
+
+    QString m_languageCode;
 };
 
 } // namespace Marble
