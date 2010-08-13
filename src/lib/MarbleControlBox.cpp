@@ -77,6 +77,7 @@ class MarbleControlBoxPrivate
 
     QStandardItemModel     *m_mapThemeModel;
     QSortFilterProxyModel  *m_sortproxy;
+    QSortFilterProxyModel  *m_treeSortProxy;
     MapThemeSortFilterProxyModel *m_mapSortProxy;
 
     MarbleRunnerManager  *m_runnerManager;
@@ -282,11 +283,13 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              widget->fileViewModel(),       SLOT( saveFile() ) );
     connect( d->m_fileViewUi.m_closeButton, SIGNAL( clicked() ) ,
              widget->fileViewModel(),    SLOT( closeFile() ) );
-    QSortFilterProxyModel *sortModel = new QSortFilterProxyModel(this);
-    sortModel->setSourceModel( widget->model()->treeModel() );
-    sortModel->setDynamicSortFilter( true );
-    d->m_fileViewUi.m_treeView->setModel( sortModel );
+    d->m_treeSortProxy = new QSortFilterProxyModel(this);
+    d->m_treeSortProxy->setSourceModel( widget->model()->treeModel() );
+    d->m_treeSortProxy->setDynamicSortFilter( true );
+    d->m_fileViewUi.m_treeView->setModel( d->m_treeSortProxy );
     d->m_fileViewUi.m_treeView->setSortingEnabled( true );
+    connect( d->m_fileViewUi.m_treeView, SIGNAL(activated(QModelIndex)),
+            this, SLOT(mapCenterOnTreeViewModel(QModelIndex)) );
 
     d->m_legendWidget->setMarbleWidget( widget );
 
@@ -596,6 +599,19 @@ void MarbleControlBox::projectionSelected( int projectionIndex )
 void MarbleControlBox::mapCenterOnSignal( const QModelIndex &index )
 {
     emit centerOn( d->m_sortproxy->mapToSource( index ), true );
+}
+
+void MarbleControlBox::mapCenterOnTreeViewModel( const QModelIndex &index )
+{
+    if (!index.isValid()) {
+        return;
+    }
+    GeoDataObject *object = static_cast<GeoDataObject*>(d->m_treeSortProxy->mapToSource(index).internalPointer());
+    if (dynamic_cast<GeoDataPlacemark*>(object))
+    {
+        GeoDataCoordinates coord = (dynamic_cast<GeoDataPlacemark*>(object))->coordinate();
+        d->m_widget->centerOn( coord, true );
+    }
 }
 
 void MarbleControlBox::adjustForAnimation()

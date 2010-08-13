@@ -233,6 +233,7 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
 
     void updateButtons( int );
     void mapCenterOnSignal( const QModelIndex & );
+    void mapCenterOnTreeViewModel( const QModelIndex & );
 
     void adjustForAnimation();
     void adjustForStill();
