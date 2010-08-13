@@ -164,7 +164,6 @@ void PlacemarkManager::setupStyle( GeoDataDocument *doc, QVector<GeoDataPlacemar
                 styleUrl = styleMap.value( QString( "normal" ) );
             }
             styleUrl.remove( '#' );
-            mDebug() << "feature " << placemark->name() << " " << styleUrl;
             placemark->setStyle( &doc->style( styleUrl ) );
         }
     }
@@ -295,8 +294,8 @@ void PlacemarkManager::createFilterProperties( QVector<GeoDataPlacemark*> &conta
         else if ( placemark.role() == "K" ) placemark.setVisualCategory( GeoDataPlacemark::Continent );
         else if ( placemark.role() == "O" ) placemark.setVisualCategory( GeoDataPlacemark::Ocean );
         else if ( placemark.role() == "S" ) placemark.setVisualCategory( GeoDataPlacemark::Nation );
-        else 
-	if ( placemark.role()=="PPL" ) placemark.setVisualCategory(
+        else
+        if ( placemark.role()=="PPL" ) placemark.setVisualCategory(
             ( ( GeoDataPlacemark::GeoDataVisualCategory )( (int)( GeoDataPlacemark::SmallCity )
                 + ( placemark.popularityIndex() -1 ) / 4 * 4 ) ) );
         else if ( placemark.role() == "PPLA" ) placemark.setVisualCategory(
