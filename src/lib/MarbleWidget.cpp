@@ -1364,6 +1364,11 @@ QList<AbstractFloatItem *> MarbleWidget::floatItems() const
     return d->m_model->floatItems();
 }
 
+AbstractFloatItem * MarbleWidget::floatItem( const QString &nameId ) const
+{
+    return d->m_map->floatItem( nameId );
+}
+
 void MarbleWidget::changeEvent( QEvent * event )
 {
     if ( event->type() == QEvent::EnabledChange )

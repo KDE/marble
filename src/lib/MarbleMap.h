@@ -431,6 +431,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     QList<RenderPlugin *> renderPlugins() const;
     QList<AbstractFloatItem *> floatItems() const;
+    AbstractFloatItem * floatItem( const QString &nameId ) const;
 
     /**
       * @brief Move camera to the given position. This can change

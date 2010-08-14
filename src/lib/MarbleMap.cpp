@@ -31,6 +31,7 @@
 #endif
 
 // Marble
+#include "AbstractFloatItem.h"
 #include "AbstractProjection.h"
 #include "AbstractScanlineTextureMapper.h"
 #include "FileStorageWatcher.h"
@@ -1239,6 +1240,17 @@ QList<RenderPlugin *> MarbleMap::renderPlugins() const
 QList<AbstractFloatItem *> MarbleMap::floatItems() const
 {
     return d->m_model->floatItems();
+}
+
+AbstractFloatItem * MarbleMap::floatItem( const QString &nameId ) const
+{
+    foreach ( AbstractFloatItem * floatItem, floatItems() ) {
+        if ( floatItem && floatItem->nameId() == nameId ) {
+            return floatItem;
+        }
+    }
+
+    return 0; // No item found
 }
 
 void MarbleMap::flyTo( const GeoDataLookAt &lookAt )

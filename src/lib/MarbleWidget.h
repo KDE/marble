@@ -500,6 +500,13 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @return the list of the floatItems
      */
     QList<AbstractFloatItem *> floatItems() const;
+    /**
+     * @brief Returns the FloatItem with the given id
+     * @return The pointer to the requested floatItem,
+     *
+     * If no item is found the null pointer is returned.
+     */
+    AbstractFloatItem * floatItem( const QString &nameId ) const;
 
     /**
      * Reads the plugin settings from the passed QSettings.
