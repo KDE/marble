@@ -93,7 +93,7 @@ void MarbleAboutDialog::loadPageContents( int idx )
     {
         d->authorsLoaded = true;
         browser = d->uiWidget.m_pMarbleAuthorsBrowser;
-        browser->setHtml( tr("<b>Active Development Team of Marble 0.10</b>")+
+        browser->setHtml( tr("<b>Active Development Team of Marble 0.11</b>")+
         tr("<p>Torsten Rahn <a href=\"mailto:rahn@kde.org\">rahn@kde.org</a><br />"
            "<i>Core Developer and Original Author</i></p>")+
         tr("<p>Patrick Spendrin <a href=\"pspendrin@gmail.com\">pspendrin@gmail.com</a><br />"
@@ -116,7 +116,9 @@ void MarbleAboutDialog::loadPageContents( int idx )
         tr("<p>Eckhart W&ouml;rner <a href=\"mailto:kde@ewsoftware.de\">kde@ewsoftware.de</a><br />"
            "<i>Bugfixes</i></p>")+
         tr("<p>Wes Hardaker <a href=\"mailto:marble@hardakers.net\">marble@hardakers.net</a><br />"
-           "<i>APRS Plugin</i>")+
+           "<i>APRS Plugin</i></p>")+
+        tr("<p>Dennis Nienh&uuml;ser <a href=\"mailto:earthwings@gentoo.org\">earthwings@gentoo.org</a><br />"
+           "<i>Routing</i></p>")+
         tr("<b>Join us</b>")+
         tr("<p>You can reach the developers of the Marble Project at <a href=\"mailto:marble-devel@kde.org\">marble-devel@kde.org</a></p>")+
         tr("<b>Google Summer of Code</b>")+
