@@ -114,10 +114,10 @@ void GeoDataPlacemark::coordinate( qreal& lon, qreal& lat, qreal& alt ) const
     }
 }
 
-void GeoDataPlacemark::setCoordinate( qreal lon, qreal lat, qreal alt )
+void GeoDataPlacemark::setCoordinate( qreal lon, qreal lat, qreal alt, GeoDataPoint::Unit _unit)
 {
     detach();
-    p()->m_coordinate = GeoDataPoint( lon, lat, alt );
+    p()->m_coordinate = GeoDataPoint( lon, lat, alt, _unit );
     p()->m_coordinate.setParent( this );
 }
 

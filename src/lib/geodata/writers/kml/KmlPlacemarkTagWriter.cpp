@@ -11,6 +11,7 @@
 #include "KmlPlacemarkTagWriter.h"
 
 #include "KmlElementDictionary.h"
+#include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
@@ -47,6 +48,10 @@ bool KmlPlacemarkTagWriter::write( const GeoDataObject &node,
             writer.writeCharacters( placemark.description() );
         }
         writer.writeEndElement();
+    }
+
+    if( !placemark.extendedData().isEmpty() ){
+		writeElement( placemark.extendedData(), writer );
     }
 
     if( placemark.geometry() ) {

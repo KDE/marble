@@ -10,7 +10,6 @@
 
 #include "GeoDataExtendedData.h"
 #include "GeoDataExtendedData_p.h"
-
 #include <QtCore/QDataStream>
 
 #include "GeoDataTypes.h"
@@ -60,6 +59,25 @@ void GeoDataExtendedData::addValue( const QString& key, const GeoDataData& data 
     d->hash.insert( key , data );
 }
 
+QHash< QString, GeoDataData >::const_iterator GeoDataExtendedData::constBegin( ) const
+{
+	return d->hash.constBegin();
+}
+
+QHash< QString, GeoDataData >::const_iterator GeoDataExtendedData::constEnd( ) const
+{
+	return d->hash.constEnd();
+}
+
+int GeoDataExtendedData::size() const
+{
+    return d->hash.size();
+}
+
+bool GeoDataExtendedData::isEmpty( ) const
+{
+    return d->hash.empty();
+}
 void GeoDataExtendedData::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );

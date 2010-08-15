@@ -104,7 +104,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * Set the coordinate of the placemark in @p longitude and
      * @p latitude.
      */
-    void setCoordinate( qreal longitude, qreal latitude, qreal altitude = 0 );
+    void setCoordinate( qreal longitude, qreal latitude, qreal altitude = 0, GeoDataPoint::Unit _unit = GeoDataPoint::Radian );
     
     /**
     * Set the coordinate of the placemark with an @p GeoDataPoint.

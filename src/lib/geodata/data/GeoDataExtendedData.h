@@ -17,6 +17,7 @@
 #include "GeoDataData.h"
 
 #include "geodata_export.h"
+#include <QHash>
 
 namespace Marble
 {
@@ -52,11 +53,34 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
      * @brief add a data object to the GeoDataExtendedData with the @p key 
      */
     void addValue( const QString& key, const GeoDataData& data );
+    
+    /**
+      * @brief return const Begin iterator for QHash
+      */
+    QHash< QString, GeoDataData >::const_iterator constBegin( ) const;
+
+    /**
+     * @brief return const End iterator for QHash
+     */
+
+	QHash< QString, GeoDataData >::const_iterator constEnd( ) const;
+    
+    /**
+     * @brief return size of QHash
+     */
+
+    int size( ) const;
+
+    /**
+      * @brief return wthethe QHash is empty or not
+      */
+    bool isEmpty( ) const;
 
     /**
      * @brief return value of GeoDataExtendedData object associated with the given @p key as a modifiable reference
      */
     GeoDataData& valueRef( const QString& key ) const;
+    
 
     /**
      * @brief Serialize the ExtendedData to a stream

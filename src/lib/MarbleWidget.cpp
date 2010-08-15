@@ -1417,6 +1417,10 @@ void MarbleWidget::addBookmark( const GeoDataPlacemark &bookmark, const QString 
     d->m_model->bookmarkManager()->addBookmark( bookmark, folderName );
 }
 
+QString MarbleWidget::bookmarkFile() const
+{
+    return d->m_model->bookmarkManager()->bookmarkFile();
+}
 
 bool MarbleWidget::loadBookmarkFile( const QString &relativeFileName )
 {

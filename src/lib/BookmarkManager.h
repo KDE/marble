@@ -33,19 +33,47 @@ class BookmarkManager
     BookmarkManager();
 
     ~BookmarkManager();
-
-    bool loadFile( const QString &relativeFilePath );
     
+    /**
+      * @brief load bookmark file as GeoDataDocument and return true
+      * if loaded successfully else false
+      * @param relativeFilePath relative path of bookmark file
+      */
+    bool loadFile( const QString &relativeFilePath );
+
+    /**
+      * @brief return bookmark file path
+      */
+    QString bookmarkFile() const;
+
+    /**
+      * @brief add bookmark in a folder
+      * @param bookmark bookmark to be added
+      * @param folderName folder name in which bookmark to be added
+      */
     void addBookmark( const GeoDataPlacemark &bookmark, const QString &folderName ) ;
 
+    /**
+      * @brief return Vector of folders
+      */
     QVector<GeoDataFolder*> folders() const;
 
+    /**
+      * @brief add a folder
+      * @param folder name of folder to be created
+      */
     void addNewBookmarkFolder( const QString &folder );
-
+    
+    /**
+      * @brief remove all folders and bookmarks except default folder
+      */
     void removeAllBookmarks();
     
  private:
-    
+   
+   /**
+    * @brief updates bookmark file and return true if updated successfully
+    */ 
     bool updateBookmarkFile() const;    
 
     BookmarkManagerPrivate *d;

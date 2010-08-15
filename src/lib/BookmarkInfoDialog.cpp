@@ -13,6 +13,7 @@
 #include "MarbleDebug.h"
 #include "BookmarkManager.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataPoint.h"
 #include "GeoDataFolder.h"
 #include "GeoDataCoordinates.h"
 #include "NewFolderInfoDialog.h"
@@ -81,19 +82,6 @@ void BookmarkInfoDialog::retrieveGeocodeResult( const GeoDataCoordinates &coordi
         bookmarkName = placemark.address();
     }
 
-  /*  if( !extended.value("country").value().toString().isEmpty() )
-        bookmarkName = extended.value("country").value().toString() ;
-    else if( !extended.value("state").value().toString().isEmpty() )
-        bookmarkName = extended.value("state").value().toString() ;
-    else if( !extended.value("county").value().toString().isEmpty() )
-        bookmarkName = extended.value("county").value().toString() ;
-    else if( !extended.value("village").value().toString().isEmpty() )
-        bookmarkName = extended.value("village").value().toString() ;
-    else if( !extended.value("suburb").value().toString().isEmpty() )
-        bookmarkName = extended.value("suburb").value().toString() ;
-    else if( !extended.value("road").value().toString().isEmpty() )
-        bookmarkName = extended.value("road").value().toString() ;
-    */
     name->setText( bookmarkName );
     
     name->selectAll();
@@ -151,6 +139,12 @@ void BookmarkInfoDialog::addBookmark()
     bookmark.setDescription( description->toPlainText() );
     //allow for HTML in the description
     bookmark.setDescriptionCDATA( true );
+    bookmark.setCoordinate( m_widget->centerLongitude(), m_widget->centerLatitude(), 0, GeoDataPoint::Degree );
+
+    GeoDataData data;
+    data.setValue(true);
+    data.setDisplayName("isBookmark");
+    bookmark.extendedData().addValue("isBookmark",data );
     GeoDataLookAt *lookAt = new GeoDataLookAt( m_widget->lookAt() ) ;
     bookmark.setLookAt( lookAt );
 

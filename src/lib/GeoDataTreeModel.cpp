@@ -20,6 +20,7 @@
 // Marble
 #include "GeoDataDocument.h"
 #include "GeoDataContainer.h"
+#include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataParser.h"
 #include "GeoDataStyle.h"
@@ -169,31 +170,40 @@ QVariant GeoDataTreeModel::data( const QModelIndex &index, int role ) const
     if ( role == Qt::DisplayRole ) {
 
         GeoDataPlacemark *placemark = dynamic_cast<GeoDataPlacemark*>( object );
+        
         if ( placemark ) {
-            if ( index.column() == 0 )
-                return QVariant( placemark->name() );
-            else if ( index.column() == 1 )
-                return QVariant( placemark->nodeType() );
-            else if ( index.column() == 2 )
-                return QVariant( placemark->popularity() );
-            else if ( index.column() == 3 )
-                return QVariant( placemark->popularityIndex() );
+                if ( index.column() == 0 ){
+                    return QVariant( placemark->name() );
+                }
+                else if ( index.column() == 1 ){
+                    return QVariant( placemark->nodeType() );
+                }
+                else if ( index.column() == 2 ){
+                    return QVariant( placemark->popularity() );
+                }
+                else if ( index.column() == 3 ){
+                    return QVariant( placemark->popularityIndex() );
+                }
         }
         GeoDataFeature *feature = dynamic_cast<GeoDataFeature*>( object );
         if ( feature ) {
-            if ( index.column() == 0 )
+            if ( index.column() == 0 ){
                 return QVariant( feature->name() );
-            else if ( index.column() == 1 )
+            }
+            else if ( index.column() == 1 ){
                 return QVariant( feature->nodeType() );
+            }
         }
 
         GeoDataGeometry *geometry = dynamic_cast<GeoDataGeometry*>( object );
-        if ( geometry && index.column() == 1 )
+        if ( geometry && index.column() == 1 ){
             return QVariant( geometry->nodeType() );
+        }
 
         GeoDataObject *item = dynamic_cast<GeoDataObject*>( object );
-        if ( item && index.column() == 1 )
+        if ( item && index.column() == 1 ){
             return QVariant( item->nodeType() );
+        }
 
     }
     else if ( role == Qt::CheckStateRole

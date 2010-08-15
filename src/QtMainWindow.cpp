@@ -42,6 +42,7 @@
 #include <QtNetwork/QNetworkProxy>
 
 #include "BookmarkInfoDialog.h"
+//#include "EditBookmarkDialog.h"
 #include "MarbleDirs.h"
 #include "MarbleAboutDialog.h"
 #include "QtMarbleConfigDialog.h"
@@ -241,15 +242,15 @@ void MainWindow::createActions()
      connect(m_aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 
      //Bookmark Actions
-     m_addBookmarkAct = new QAction(tr("&Add Bookmark"),this);
+     m_addBookmarkAct = new QAction( QIcon(":/icons/bookmarkNew.png"), tr("&Add Bookmark"),this);
      m_addBookmarkAct->setShortcut(tr("Ctrl+B"));
      m_addBookmarkAct->setStatusTip(tr("Add Bookmark"));
      connect( m_addBookmarkAct, SIGNAL( triggered() ), this, SLOT( openBookmarkInfoDialog() ) );
 
-     m_removeAllBookmarksAct = new QAction(tr("&Remove all Bookmarks"),this);
+     m_removeAllBookmarksAct = new QAction( QIcon(":/icons/bookmarkRemove.png"), tr("&Remove all Bookmarks"),this);
      m_removeAllBookmarksAct->setStatusTip(tr("Remove all Bookmarks"));
      connect( m_removeAllBookmarksAct, SIGNAL( triggered() ), this, SLOT( removeAllBookmarks() ) );
-     m_addBookmarkFolderAct = new QAction( tr("&New Bookmark Folder"),this);
+     m_addBookmarkFolderAct = new QAction( QIcon(":/icons/bookmarkAddFolder.png"), tr("&New Bookmark Folder"),this);
      m_addBookmarkFolderAct->setStatusTip(tr("New Bookmark Folder"));
      connect( m_addBookmarkFolderAct, SIGNAL( triggered() ), this, SLOT( openNewBookmarkFolderDialog() ) );
 
@@ -466,7 +467,6 @@ void MainWindow::openBookmarkInfoDialog()
     dialog->exec();
     delete dialog;
 }
-
 void MainWindow::createPluginMenus()
 {
     // Remove and delete toolbars if they exist
