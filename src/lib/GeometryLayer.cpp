@@ -74,6 +74,8 @@ bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
         d->renderGeoDataObject( painter, d->m_root );
     }
 //    mDebug() << "rendering geometry: " << t.elapsed();
+
+    return true;
 }
 
 void GeometryLayerPrivate::setBrushStyle( GeoPainter *painter, GeoDataStyle *style )
