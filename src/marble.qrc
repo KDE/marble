@@ -5,10 +5,10 @@
         <file>icons/arrow-left.png</file>
         <file>icons/arrow-right.png</file>
         <file>icons/arrow-up.png</file>
-        <file>icons/bookmarkAddFolder.png</file>
-        <file>icons/bookmarkEdit.png</file>
-        <file>icons/bookmarkNew.png</file>
-        <file>icons/bookmarkRemove.png</file>
+        <file>icons/bookmark-add-folder.png</file>
+        <file>icons/bookmark-edit.png</file>
+        <file>icons/bookmark-new.png</file>
+        <file>icons/bookmark-remove.png</file>
         <file>icons/document-open.png</file>
         <file>icons/document-print.png</file>
         <file>icons/document-save-as.png</file>

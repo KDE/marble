@@ -848,6 +848,7 @@ void MarblePart::setupActions()
     m_addBookmarkAction = new KAction( this );
     actionCollection()->addAction( "add_bookmark", m_addBookmarkAction );
     m_addBookmarkAction->setText( i18nc( "Add Bookmark", "&Add Bookmark" ) );
+    m_addBookmarkAction->setIcon( KIcon( ":/icons/bookmark-new.png" ) );
     m_addBookmarkAction->setShortcut( Qt::CTRL + Qt::Key_B );
     connect( m_addBookmarkAction, SIGNAL( triggered( ) ),
              this,                SLOT( openBookmarkInfoDialog() ) );
@@ -855,6 +856,7 @@ void MarblePart::setupActions()
     
     m_removeAllBookmarksAction = new KAction( this );
     actionCollection()->addAction( "remove_all_bookmark", m_removeAllBookmarksAction );
+    m_removeAllBookmarksAction->setIcon( KIcon( ":/icons/bookmark-remove.png" ) );
     m_removeAllBookmarksAction->setText( i18nc( "Remove All Bookmarks", "&Remove All Bookmarks" ) );
     connect( m_removeAllBookmarksAction, SIGNAL( triggered( ) ),
              this,                SLOT( removeAllBookmarks() ) );
@@ -862,6 +864,7 @@ void MarblePart::setupActions()
     
     m_addBookmarkFolderAction = new KAction( this );
     actionCollection()->addAction( "new_bookmark_folder", m_addBookmarkFolderAction );
+    m_addBookmarkFolderAction->setIcon( KIcon( ":/icons/bookmark-add-folder.png" ) );
     m_addBookmarkFolderAction->setText( i18nc( "New Bookmark Folder", "&New Bookmark Folder" ) );
     connect( m_addBookmarkFolderAction, SIGNAL( triggered( ) ),
              this,                SLOT( openNewBookmarkFolderDialog() ) );
