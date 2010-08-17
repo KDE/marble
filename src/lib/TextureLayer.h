@@ -19,6 +19,7 @@
 #include <QtCore/QSize>
 #include <QtGui/QRegion>
 
+class QGLContext;
 class QImage;
 class QRegion;
 class QRect;

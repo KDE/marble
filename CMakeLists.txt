@@ -27,6 +27,10 @@ if( NOT QTONLY AND NOT KDE4_FOUND )
     include (MacroLibrary)
 endif( NOT QTONLY AND NOT KDE4_FOUND) 
 
+###################################################
+# Check if OpenGL is available
+find_package(OpenGL REQUIRED)
+
 ####################################################
 # build unit tests
 

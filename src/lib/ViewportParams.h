@@ -31,6 +31,7 @@ namespace Marble
 {
 
 class AbstractProjection;
+class TileLoader;
 class ViewportParamsPrivate;
 
 /** 
@@ -43,6 +44,8 @@ class MARBLE_EXPORT ViewportParams
  public:
     ViewportParams( );
     ~ViewportParams();
+
+    void activateRelief( TileLoader *tileLoader );
 
     // Getters and setters
     Projection projection() const;
@@ -78,6 +81,7 @@ class MARBLE_EXPORT ViewportParams
     
     bool resolves ( const GeoDataCoordinates &coord1, const GeoDataCoordinates &coord2 ) const;
 
+    int  radius( qreal lon, qreal lat ) const;
     int  radius() const;
     void setRadius(int newRadius);
 
@@ -97,6 +101,12 @@ class MARBLE_EXPORT ViewportParams
 
     // Other functions
     void centerCoordinates( qreal &centerLon, qreal &centerLat ) const;
+
+    void setHeading( qreal heading );
+    qreal heading() const;
+
+    void setTilt( qreal tilt );
+    qreal tilt() const;
 
     bool  mapCoversViewport() const;
 

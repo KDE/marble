@@ -103,6 +103,11 @@ class MARBLE_EXPORT ViewParams
 
     void centerCoordinates( qreal &centerLon, qreal &centerLat );
 
+    qreal heading() const;
+
+    void setTilt( const qreal tilt );
+    qreal tilt() const;
+
     int width() const;
     int height() const;
 

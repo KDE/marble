@@ -56,6 +56,9 @@ class SphericalProjection : public AbstractProjection
 
     virtual PreservationType preservationType() const { return NoPreservation; }
 
+    virtual void vertexCoordinates( const qreal lon, const qreal lat,
+                                    qreal &x, qreal &y, qreal &z ) const;
+
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
      * @param lon    the lon coordinate of the requested pixel position

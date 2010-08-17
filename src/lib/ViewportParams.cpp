@@ -19,6 +19,7 @@
 #include <QtGui/QRegion>
 
 #include "MarbleDebug.h"
+#include "MarbleHeight.h"
 #include "SphericalProjection.h"
 #include "EquirectProjection.h"
 #include "MercatorProjection.h"
@@ -42,6 +43,7 @@ public:
     mutable matrix       m_planetAxisMatrix;
     int                  m_radius;       // Zoom level (pixels / globe radius)
     qreal                m_angularResolution;
+    qreal                m_tilt;
 
     QSize                m_size;         // width, height
 
@@ -58,6 +60,7 @@ public:
     GeoDataCoordinates   m_focusPoint;
     bool                 m_hasFocusPoint;
 
+    MarbleHeight         m_height;
 };
 
 ViewportParamsPrivate::ViewportParamsPrivate()
@@ -66,12 +69,14 @@ ViewportParamsPrivate::ViewportParamsPrivate()
       m_planetAxis(),
       m_planetAxisMatrix(),
       m_radius( 2000 ),
+      m_tilt( 0 ),
       m_size( 100, 100 ),
       m_dirtyBox( true ),
       m_viewLatLonAltBox(),
       m_dirtyRegion( true ),
       m_activeRegion(),
-      m_hasFocusPoint(false)
+      m_hasFocusPoint(false),
+      m_height( 0 )
 {
 } 
 
@@ -98,6 +103,11 @@ ViewportParams::~ViewportParams()
 // ================================================================
 //                    Getters and setters
 
+
+void ViewportParams::activateRelief( TileLoader *tileLoader )
+{
+    d->m_height.setTileLoader( tileLoader );
+}
 
 Projection ViewportParams::projection() const
 {
@@ -180,6 +190,14 @@ int ViewportParams::polarity() const
     return polarity;
 }
 
+int ViewportParams::radius( qreal lon, qreal lat ) const
+{
+//    qreal centerLon, centerLat;
+//    centerCoordinates( centerLon, centerLat );
+
+    return d->m_radius; // - d->m_height.altitude( centerLon, centerLat ) + d->m_height.altitude( lon, lat );
+}
+
 int ViewportParams::radius() const
 {
     return d->m_radius;
@@ -192,6 +210,8 @@ void ViewportParams::setRadius(int newRadius)
 
     d->m_radius = newRadius;
     d->m_angularResolution = 0.25 * M_PI / fabs( (qreal)(d->m_radius) );
+
+    d->m_height.setRadius( newRadius );
 }
 
 bool ViewportParams::globeCoversViewport() const
@@ -309,14 +329,42 @@ void ViewportParams::setSize(QSize newSize)
 
 void ViewportParams::centerCoordinates( qreal &centerLon, qreal &centerLat ) const
 {
-    // Calculate translation of center point
-    centerLat = - d->m_planetAxis.pitch();
-    if ( centerLat > M_PI )
-        centerLat -= 2 * M_PI;
+    Quaternion  qpos( 0, 0, 0, 1 );
+    qpos.rotateAroundAxis( planetAxis() );
+    qpos.getSpherical( centerLon, centerLat );
+}
 
-    centerLon = + d->m_planetAxis.yaw();
-    if ( centerLon > M_PI )
-        centerLon -= 2 * M_PI;
+void ViewportParams::setHeading( qreal heading )
+{
+    Quaternion roll;
+    roll.createFromEuler( 0, 0, heading * DEG2RAD );
+
+    qreal centerLon, centerLat;
+    centerCoordinates( centerLon, centerLat );
+
+    Quaternion  quat;
+    quat.createFromEuler( -centerLat, centerLon, 0 );
+
+    setPlanetAxis( quat * roll );
+}
+
+qreal ViewportParams::heading() const
+{
+    Quaternion quat( 0, 0, 1, 0 );
+    quat.rotateAroundAxis( d->m_planetAxis.inverse() );
+    const qreal angle = 90 - atan2( quat.v[Q_Y], quat.v[Q_X] ) * RAD2DEG;
+
+    return angle;
+}
+
+void ViewportParams::setTilt( qreal tilt )
+{
+    d->m_tilt = tilt;
+}
+
+qreal ViewportParams::tilt() const
+{
+    return d->m_tilt;
 }
 
 GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const

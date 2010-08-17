@@ -40,6 +40,7 @@
 #include "MarbleModel.h"
 #include "MarblePhysics.h"
 #include "MarbleView.h"
+#include "MarbleGLView.h"
 #include "MarbleWidgetInputHandler.h"
 #include "Planet.h"
 #include "RenderPlugin.h"
@@ -69,6 +70,7 @@ class MarbleWidgetPrivate
         : m_widget( parent ),
           m_map( map ),
           m_model( map->model() ),
+          m_view( 0 ),
           m_viewContext( Still ),
           m_stillQuality( HighQuality ),
           m_animationQuality( LowQuality ),
@@ -115,6 +117,8 @@ class MarbleWidgetPrivate
     // The model we are showing.
     MarbleMap       *m_map;
     MarbleModel     *m_model;   // Owned by m_map.  Don't delete.
+
+    QWidget         *m_view;
 
     ViewContext     m_viewContext;
 
@@ -169,8 +173,8 @@ MarbleWidget::MarbleWidget(QWidget *parent)
     QVBoxLayout *vlayout = new QVBoxLayout( this );
     vlayout->setMargin( 0 );
 
-    QWidget *w = new MarbleView( d->m_map, this );
-    vlayout->addWidget( w );
+    d->m_view = new MarbleGLView( d->m_map, this );
+    vlayout->addWidget( d->m_view );
 
     d->construct();
 }
@@ -217,7 +221,7 @@ void MarbleWidgetPrivate::construct()
     m_widget->connect( m_model,  SIGNAL( themeChanged( QString ) ),
 		       m_widget, SIGNAL( themeChanged( QString ) ) );
     m_widget->connect( m_model, SIGNAL( modelChanged() ),
-                       m_widget, SLOT( update() ) );
+                       m_view, SLOT( update() ) );
 
     // Repaint scheduling
     m_widget->connect( m_map,    SIGNAL( repaintNeeded( QRegion ) ),
@@ -225,7 +229,7 @@ void MarbleWidgetPrivate::construct()
     m_repaintTimer.setSingleShot( true );
     m_repaintTimer.setInterval( REPAINT_SCHEDULING_INTERVAL );
     m_widget->connect( &m_repaintTimer, SIGNAL( timeout() ),
-                       m_widget, SLOT( update() ) );
+                       m_view, SLOT( update() ) );
 
     // When some fundamental things change in the map, we got to show
     // this in the view, i.e. here.
@@ -254,7 +258,7 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SLOT( setInputEnabled( bool ) ) );
 
     m_widget->connect( m_model->sunLocator(), SIGNAL( updateStars() ),
-                       m_widget, SLOT( update() ) );
+                       m_view, SLOT( update() ) );
 
     m_widget->connect( m_model->sunLocator(), SIGNAL( centerSun( qreal, qreal ) ),
                        m_widget, SLOT( centerOn( qreal, qreal ) ) );
@@ -271,7 +275,7 @@ void MarbleWidgetPrivate::construct()
                        m_model->routingManager(), SLOT( updateRoute() ) );
     m_widget->connect( m_model->routingManager()->alternativeRoutesModel(),
                        SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
-                       m_widget, SLOT( repaint() ) );
+                       m_view, SLOT( repaint() ) );
 
     m_map->addLayer( new CustomPaintLayer( m_widget ) );
 }
@@ -288,10 +292,10 @@ void MarbleWidgetPrivate::repaint()
 {
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
-    m_widget->setAttribute( Qt::WA_NoSystemBackground,
+    m_view->setAttribute( Qt::WA_NoSystemBackground,
                   m_widget->viewport()->mapCoversViewport() && !m_model->mapThemeId().isEmpty() );
 
-    m_widget->repaint();
+    m_view->repaint();
 }
 
 
@@ -700,6 +704,20 @@ void MarbleWidget::setCenterLongitude( qreal lon, FlyToMode mode )
     centerOn( lon, centerLatitude(), mode );
 }
 
+void MarbleWidget::setHeading( qreal heading )
+{
+    d->m_map->viewport()->setHeading( heading );
+
+    d->repaint();
+}
+
+void MarbleWidget::setTilt( qreal tilt )
+{
+    d->m_map->viewport()->setTilt( tilt );
+
+    d->repaint();
+}
+
 Projection MarbleWidget::projection() const
 {
     return d->m_map->projection();
@@ -779,6 +797,16 @@ qreal MarbleWidget::centerLatitude() const
 qreal MarbleWidget::centerLongitude() const
 {
     return d->m_map->centerLongitude();
+}
+
+qreal MarbleWidget::heading() const
+{
+    return viewport()->heading();
+}
+
+qreal MarbleWidget::tilt() const
+{
+    return viewport()->tilt();
 }
 
 QRegion MarbleWidget::activeRegion()

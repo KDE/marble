@@ -143,6 +143,7 @@ if (QTONLY)
       marble 
       ${QT_QTCORE_LIBRARY} 
       ${QT_QTDBUS_LIBRARY} 
+      ${QT_QTOPENGL_LIBRARY} 
       ${QT_QTGUI_LIBRARY} 
       ${QT_QTXML_LIBRARY} 
       ${QT_QTSVG_LIBRARY} 

@@ -364,6 +364,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      */
     qreal centerLatitude() const;
 
+    qreal heading() const;
+
+    qreal tilt() const;
+
     /**
      * @brief  Return how much the map will move if one of the move slots are called.
      * @return The move step.
@@ -660,6 +664,10 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @param  mode the FlyToMode that will be used.
      */
     void setCenterLongitude( qreal lon, FlyToMode mode = Instant );
+
+    void setHeading( qreal heading );
+
+    void setTilt( qreal tilt );
 
     /**
      * @brief  Move left by the moveStep.

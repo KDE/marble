@@ -15,11 +15,13 @@
 
 #include <QtCore/QCache>
 #include <QtCore/QTimer>
+#include <QtOpenGL/QGLContext>
 
 #include "SphericalScanlineTextureMapper.h"
 #include "EquirectScanlineTextureMapper.h"
 #include "MercatorScanlineTextureMapper.h"
 #include "TileScalingTextureMapper.h"
+#include "GLTextureMapper.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneFilter.h"
@@ -173,15 +175,27 @@ void TextureLayer::setupTextureMapper( Projection projection )
   // FIXME: replace this with an approach based on the factory method pattern.
     delete d->m_texmapper;
 
+    QGLContext *glContext = const_cast<QGLContext*>( QGLContext::currentContext() );
+
     switch( projection ) {
         case Spherical:
-            d->m_texmapper = new SphericalScanlineTextureMapper( &d->m_tileLoader, this );
+            if ( glContext ) {
+                d->m_texmapper = new GLTextureMapper( &d->m_tileLoader, glContext, &d->m_loader, this );
+            } else {
+                d->m_texmapper = new SphericalScanlineTextureMapper( &d->m_tileLoader, this );
+            }
             break;
         case Equirectangular:
-            d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader, this );
+            if ( glContext ) {
+                d->m_texmapper = new GLTextureMapper( &d->m_tileLoader, glContext, &d->m_loader, this );
+            } else {
+                d->m_texmapper = new EquirectScanlineTextureMapper( &d->m_tileLoader, this );
+            }
             break;
         case Mercator:
-            if ( d->m_tileLoader.tileProjection() == GeoSceneTexture::Mercator ) {
+            if ( glContext ) {
+                d->m_texmapper = new GLTextureMapper( &d->m_tileLoader, glContext, &d->m_loader, this );
+            } else if ( d->m_tileLoader.tileProjection() == GeoSceneTexture::Mercator ) {
                 d->m_texmapper = new TileScalingTextureMapper( &d->m_tileLoader, &d->m_pixmapCache, this );
             } else {
                 d->m_texmapper = new MercatorScanlineTextureMapper( &d->m_tileLoader, this );

@@ -52,6 +52,14 @@ qreal MercatorProjection::minValidLat() const
     return -85.05113 * DEG2RAD;
 }
 
+void MercatorProjection::vertexCoordinates( const qreal lon, const qreal lat,
+                                            qreal &x, qreal &y, qreal &z ) const
+{
+    x = ( lon / 360.0 ) * M_PI;
+    y = 0.5 * atanh( sin( lat * DEG2RAD ) );
+    z = 1;
+}
+
 bool MercatorProjection::screenCoordinates( const qreal lon, const qreal _lat,
                                             const ViewportParams *viewport,
                                             qreal& x, qreal& y )
@@ -69,7 +77,7 @@ bool MercatorProjection::screenCoordinates( const qreal lon, const qreal _lat,
     }
 
     // Convenience variables
-    int  radius = viewport->radius();
+    int  radius = viewport->radius( lon, lat );
     qreal  width  = (qreal)(viewport->width());
     qreal  height = (qreal)(viewport->height());
 

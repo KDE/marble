@@ -40,7 +40,6 @@
 #include "MeasureTool.h"
 #include "MarbleWidgetPopupMenu.h"
 #include "AbstractProjection.h"
-#include "Planet.h"
 
 namespace Marble {
 
@@ -154,8 +153,6 @@ class MarbleWidgetDefaultInputHandler::Private
 
     // Indicates if the left mouse button has been pressed already.
     bool m_leftPressed;
-    // Indicates whether the drag was started by a click above or below the visible pole.
-    int m_leftPressedDirection;
     // Indicates if the middle mouse button has been pressed already.
     bool m_midPressed;
     // The mouse pointer x position when the left mouse button has been pressed.
@@ -165,6 +162,10 @@ class MarbleWidgetDefaultInputHandler::Private
     // The mouse pointer y position when the middle mouse button has been pressed.
     int m_midPressedY;
     int m_radiusWhenPressed;
+    bool m_rightPressed;
+    QPoint m_rightOrigin;
+    qreal m_headingWhenPressed;
+    qreal m_tiltWhenPressed;
     // The center longitude in radian when the left mouse button has been pressed.
     qreal m_leftPressedLon;
     // The center latitude in radian when the left mouse button has been pressed.
@@ -190,6 +191,7 @@ class MarbleWidgetDefaultInputHandler::Private
 MarbleWidgetDefaultInputHandler::Private::Private()
     : m_leftPressed( false ),
       m_midPressed( false ),
+      m_rightPressed( false ),
       m_dragThreshold( 3 ),
       m_popupmenu( 0 )
 {
@@ -495,27 +497,6 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_leftPressedLon = MarbleWidgetInputHandler::d->m_widget->centerLongitude() * DEG2RAD;
                 d->m_leftPressedLat = MarbleWidgetInputHandler::d->m_widget->centerLatitude() * DEG2RAD;
 
-                d->m_leftPressedDirection = 1;
-
-                // Choose spin direction by taking into account whether we
-                // drag above or below the visible pole.
-                if ( MarbleWidgetInputHandler::d->m_widget->projection() == Spherical ) {
-                    if ( d->m_leftPressedLat >= 0 ) {
-                        // The visible pole is the north pole
-                        qreal northPoleX, northPoleY;
-                        MarbleWidgetInputHandler::d->m_widget->screenCoordinates( 0.0, 90.0, northPoleX, northPoleY );
-                        if ( event->y() < northPoleY )
-                            d->m_leftPressedDirection = -1;
-                    }
-                    else {
-                        // The visible pole is the south pole
-                        qreal southPoleX, southPoleY;
-                        MarbleWidgetInputHandler::d->m_widget->screenCoordinates( 0.0, -90.0, southPoleX, southPoleY );
-                        if ( event->y() > southPoleY )
-                            d->m_leftPressedDirection = -1;
-                    }
-                }
-
                 MarbleWidgetInputHandler::d->m_widget->setViewContext( Animation );
             }
 
@@ -532,7 +513,10 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
             if ( e->type() == QEvent::MouseButtonPress
                  && event->button() == Qt::RightButton ) {
-                emit rmbRequest( event->x(), event->y() );
+                d->m_rightPressed = true;
+                d->m_rightOrigin = event->pos();
+                d->m_headingWhenPressed = MarbleWidgetInputHandler::d->m_widget->heading();
+                d->m_tiltWhenPressed = MarbleWidgetInputHandler::d->m_widget->tilt();
             }
 
             if ( e->type() == QEvent::MouseButtonPress
@@ -569,6 +553,10 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
 
             if ( e->type() == QEvent::MouseButtonRelease
                  && event->button() == Qt::RightButton) {
+                if ( d->m_rightOrigin == event->pos() ) {
+                    emit rmbRequest( event->x(), event->y() );
+                }
+                d->m_rightPressed = false;
             }
 
             if ( e->type() == QEvent::MouseButtonRelease
@@ -585,17 +573,20 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             // Regarding all kinds of mouse moves:
             if ( d->m_leftPressed && !d->m_selectionRubber->isVisible() ) {
                 qreal radius = ( qreal )( MarbleWidgetInputHandler::d->m_widget->radius() );
-                int deltax = event->x() - d->m_leftPressedX;
-                int deltay = event->y() - d->m_leftPressedY;
+                qreal deltax = event->x() - d->m_leftPressedX;
+                qreal deltay = event->y() - d->m_leftPressedY;
 
                 if ( abs( deltax ) > d->m_dragThreshold
                      || abs( deltay ) > d->m_dragThreshold ) {
 
                     d->m_lmbTimer.stop();
-                    MarbleWidgetInputHandler::d->m_widget->centerOn( RAD2DEG * ( qreal )( d->m_leftPressedLon )
-                                                                     - 90.0 * d->m_leftPressedDirection * deltax / radius,
-                                                                     RAD2DEG * ( qreal )( d->m_leftPressedLat )
-                                                                     + 90.0 * deltay / radius );
+                    Quaternion rotation;
+                    rotation.createFromEuler( 0, 0, MarbleWidgetInputHandler::d->m_widget->heading() * DEG2RAD );
+                    Quaternion quat( - M_PI/2 * deltax / radius, + M_PI/2 * deltay / radius );
+                    quat.rotateAroundAxis( rotation );
+                    quat.getSpherical( deltax, deltay );
+                    MarbleWidgetInputHandler::d->m_widget->centerOn( RAD2DEG * ( qreal )( d->m_leftPressedLon + deltax ),
+                                                                     RAD2DEG * ( qreal )( d->m_leftPressedLat + deltay ) );
                 }
             }
 
@@ -604,6 +595,18 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 int eventy = event->y();
                 int dy = d->m_midPressedY - eventy;
                 MarbleWidgetInputHandler::d->m_widget->setRadius( d->m_radiusWhenPressed * pow( 1.005, dy ) );
+            }
+
+            if ( d->m_rightPressed ) {
+                const int dx = event->x() - d->m_rightOrigin.x();
+                MarbleWidgetInputHandler::d->m_widget->setHeading( d->m_headingWhenPressed + dx );
+
+                int tilt = d->m_tiltWhenPressed + event->y() - d->m_rightOrigin.y();
+                if ( tilt < 0 )
+                    tilt = 0;
+                if ( tilt > 90 )
+                    tilt = 90;
+                MarbleWidgetInputHandler::d->m_widget->setTilt( tilt );
             }
 
             if ( d->m_selectionRubber->isVisible() ) 

@@ -101,6 +101,9 @@ class MARBLE_EXPORT AbstractProjection
 
     virtual bool   isOrientedNormal() const        { return true; }
 
+    virtual void vertexCoordinates( const qreal lon, const qreal lat,
+                                    qreal &x, qreal &y, qreal &z ) const = 0;
+
     /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
      * @param lon    the lon coordinate of the requested pixel position in radians

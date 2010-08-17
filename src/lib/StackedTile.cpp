@@ -211,7 +211,7 @@ inline void StackedTilePrivate::setResultTile( QSharedPointer<TextureTile> const
     if ( withConversion ) {
         m_resultTile = tile->image()->convertToFormat( QImage::Format_ARGB32_Premultiplied );
     } else {
-        m_resultTile = tile->image()->copy();
+        m_resultTile = tile->image()->convertToFormat( QImage::Format_ARGB32_Premultiplied );
     }
 }
 

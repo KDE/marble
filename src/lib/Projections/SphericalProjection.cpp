@@ -62,6 +62,16 @@ qreal SphericalProjection::minValidLat() const
     return -90.0 * DEG2RAD;
 }
 
+void SphericalProjection::vertexCoordinates( const qreal lon, const qreal lat,
+                                             qreal &x, qreal &y, qreal &z ) const
+{
+    Quaternion  p( lon * DEG2RAD, lat * DEG2RAD );
+
+    x = p.v[Q_X];
+    y = p.v[Q_Y];
+    z = p.v[Q_Z];
+}
+
 bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
                                              const ViewportParams *viewport,
                                              qreal& x, qreal& y )
@@ -69,8 +79,8 @@ bool SphericalProjection::screenCoordinates( const qreal lon, const qreal lat,
     Quaternion  p( lon, lat );
     p.rotateAroundAxis( viewport->planetAxis().inverse() );
  
-    x = ( viewport->width()  / 2 + (qreal)( viewport->radius() ) * p.v[Q_X] );
-    y = ( viewport->height() / 2 - (qreal)( viewport->radius() ) * p.v[Q_Y] );
+    x = ( viewport->width()  / 2 + (qreal)( viewport->radius( lon, lat ) ) * p.v[Q_X] );
+    y = ( viewport->height() / 2 - (qreal)( viewport->radius( lon, lat ) ) * p.v[Q_Y] );
  
     return (    ( 0 <= y && y < viewport->height() )
              && ( 0 <= x && x < viewport->width() ) 
