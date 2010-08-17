@@ -232,7 +232,7 @@ MarbleModel::MarbleModel( QObject *parent )
               this,              SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
 
     d->m_timer = new QTimer( this );
-    d->m_timer->start( 200 );
+    d->m_timer->start( 1500 );
 
     connect( d->m_timer, SIGNAL( timeout() ),
              this,       SIGNAL( timeout() ) );
