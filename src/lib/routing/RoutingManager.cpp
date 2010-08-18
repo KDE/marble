@@ -36,8 +36,6 @@ public:
 
     RouteSkeleton *m_route;
 
-    AdjustNavigation *m_adjustNavigation;
-
     bool m_workOffline;
 
     RoutingManagerPrivate( MarbleModel *marbleModel, RoutingManager* manager, QObject *parent );
@@ -46,6 +44,7 @@ public:
 
     bool m_haveRoute;
 
+    AdjustNavigation *m_adjustNavigation;
 };
 
 RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager* manager, QObject *parent ) :

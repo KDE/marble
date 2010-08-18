@@ -105,8 +105,8 @@ class MarbleModelPrivate
           m_layerDecorator( 0 ),
           m_positionTracking( 0 ),
           m_planet( 0 ),
-          m_routingManager( 0 ),
-          m_bookmarkManager( 0 )
+          m_bookmarkManager( 0 ),
+          m_routingManager( 0 )
     {
     }
 
