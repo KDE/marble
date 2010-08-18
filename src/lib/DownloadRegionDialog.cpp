@@ -48,6 +48,7 @@ namespace Marble
 int const maxTilesCount = 100000;
 int const minimumRouteOffset = 0;
 int const maximumRouteOffset = 10000;
+int averageTileSize = 13; //The average size of a tile in kilobytes
 
 class DownloadRegionDialog::Private
 {
@@ -69,7 +70,7 @@ public:
     QRadioButton *m_routeDownloadMethodButton;
     QDoubleSpinBox *m_routeOffsetSpinBox;
     QLabel * m_tilesCountLabel;
-    QLabel * m_tilesCountLimitInfo;
+    QLabel * m_tileSizeInfo;
     QPushButton * m_okButton;
     QPushButton * m_applyButton;
     int m_visibleTileLevel;
@@ -90,7 +91,7 @@ DownloadRegionDialog::Private::Private( MarbleModel * const model,
       m_routeDownloadMethodButton( 0 ),
       m_routeOffsetSpinBox( 0 ),
       m_tilesCountLabel( 0 ),
-      m_tilesCountLimitInfo( 0 ),
+      m_tileSizeInfo( 0 ),
       m_okButton( 0 ),
       m_applyButton( 0 ),
       m_visibleTileLevel( model->textureMapper()->tileZoomLevel() ),
@@ -154,7 +155,7 @@ QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
     layout->addWidget( m_specifiedRegionMethodButton );
     layout->addWidget( m_latLonBoxWidget );
 
-    QGroupBox * const selectionMethodBox = new QGroupBox( tr( "Selection method" ));
+    QGroupBox * const selectionMethodBox = new QGroupBox( tr( "Selection Method" ) );
     selectionMethodBox->setLayout( layout );
 
     return selectionMethodBox;
@@ -162,17 +163,17 @@ QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
 
 QLayout * DownloadRegionDialog::Private::createTilesCounter()
 {
-    QLabel * const description = new QLabel( tr( "Number of tiles to download:" ));
+    QLabel * const description = new QLabel( tr( "Number of tiles to download:" ) );
     m_tilesCountLabel = new QLabel;
-    m_tilesCountLimitInfo = new QLabel;
+    m_tileSizeInfo = new QLabel;
 
     QHBoxLayout * const tilesCountLayout = new QHBoxLayout;
     tilesCountLayout->addWidget( description );
     tilesCountLayout->addWidget( m_tilesCountLabel );
-
+    //tilesCountLayout->insertSpacing( 0, 5 );
     QVBoxLayout * const layout = new QVBoxLayout;
     layout->addLayout( tilesCountLayout );
-    layout->addWidget( m_tilesCountLimitInfo );
+    layout->addWidget( m_tileSizeInfo );
     return layout;
 }
 
@@ -262,6 +263,7 @@ DownloadRegionDialog::DownloadRegionDialog( MarbleModel *const model, QWidget * 
              SLOT( updateTilesCount() ) );
     connect( d->m_routeOffsetSpinBox, SIGNAL( valueChanged( double ) ), SLOT( updateTilesCount() ) );
     connect( d->m_routeOffsetSpinBox, SIGNAL( valueChanged( double ) ), SLOT( setOffsetUnit() ) );
+    connect( d->m_model, SIGNAL( themeChanged() ), SLOT( updateTileCount() ) );
 }
 
 DownloadRegionDialog::~DownloadRegionDialog()
@@ -501,18 +503,36 @@ void DownloadRegionDialog::updateTilesCount()
                 tilesCount += tileIdSet.count();
             }
         }
-
     }
     else {
         tilesCount = 0;
     }
 
     if ( tilesCount > maxTilesCount ) {
-        d->m_tilesCountLimitInfo->setText( tr( "There is a limit of %n tiles to download.", "",
+        d->m_tileSizeInfo->setToolTip( QString::null  );
+        d->m_tileSizeInfo->setText( tr( "There is a limit of %n tiles to download.", "",
                                                maxTilesCount ) );
-    } else {
-        d->m_tilesCountLimitInfo->clear();
+    } else if ( themeId == "earth/openstreetmap/openstreetmap.dgml" ) {
+        qreal tileDownloadSize = tilesCount * averageTileSize;
+
+        d->m_tileSizeInfo->setToolTip( tr( "Approximate size of the tiles to be downloaded" ) );
+
+        if( tileDownloadSize > 1024 ) {
+            tileDownloadSize = tileDownloadSize / 1024;
+            d->m_tileSizeInfo->setText( tr( "Estimated Download Size:" ) %
+                                          QString::number( ceil( tileDownloadSize ) ) % " MB " );
+        }
+        else {
+            d->m_tileSizeInfo->setText( tr( "Estimated Download Size:" ) %
+                                           QString::number( tileDownloadSize ) % " KB " );
+        }
+
     }
+    else {
+        d->m_tileSizeInfo->setToolTip( QString::null );
+        d->m_tileSizeInfo->clear();
+    }
+
     d->m_tilesCountLabel->setText( QString::number( tilesCount ) );
     bool const tilesCountWithinLimits = tilesCount > 0 && tilesCount <= maxTilesCount;
     d->m_okButton->setEnabled( tilesCountWithinLimits );

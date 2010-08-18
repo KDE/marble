@@ -79,12 +79,12 @@ MARBLE_PLUGIN( NavigationFloatItem )
     void adjustForStill();
 
     /** Enable/disable zoom in/out buttons */
-    void updateButtons( int value );
+    void updateButtons( int zoomValue );
 
  private:
     /** MarbleWidget this float item is installed as event filter for */
     MarbleWidget *m_marbleWidget;
-    
+
     /** The GraphicsItem presenting the widgets. NavigationFloatItem doesn't take direct ownership
         of this */
     WidgetGraphicsItem *m_widgetItem;
@@ -92,7 +92,7 @@ MARBLE_PLUGIN( NavigationFloatItem )
     /** Navigation controls */
     Ui::NavigationSmall *m_navigationWidgetSmall;
     Ui::Navigation *m_navigationWidget;
-    
+
     /** Used Profile */
     MarbleGlobal::Profiles m_profiles;
 

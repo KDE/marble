@@ -44,20 +44,34 @@ class MARBLE_EXPORT CurrentLocationWidget : public QWidget
     void receiveGpsCoordinates( const GeoDataCoordinates& in, qreal speed );
 
      /// Slot that decides whether recentering should be done
-    void setRecenter( int activate );
+    void setRecenterMode( int activate );
 
-    ///Slot for Auto Zooming while navigating
+    /// Slot for Auto Zooming while navigating
     void setAutoZoom( bool activate );
 
- private Q_SLOTS:
-    void adjustPositionTrackingStatus( PositionProviderStatus status );
-    void changePositionProvider( const QString &provider );
-    void centerOnCurrentLocation();
 
  private:
     Q_DISABLE_COPY( CurrentLocationWidget )
 
     CurrentLocationWidgetPrivate * const d;
+
+    Q_PRIVATE_SLOT( d, void adjustPositionTrackingStatus( PositionProviderStatus status ) )
+    Q_PRIVATE_SLOT( d, void changePositionProvider( const QString &provider ) )
+    Q_PRIVATE_SLOT( d, void centerOnCurrentLocation() )
+
+    /**
+     * @brief Slot for setting re-center combobox if re-centering is enabled other than from CurrentLocationWidget
+     * @see RoutingPlugin
+     */
+     Q_PRIVATE_SLOT( d, void updateRecenterComboBox( int centerMode ) )
+
+    /**
+     * @brief Slot for toggling auto zoom checkbox if auto zooming is enabled other than from CurrentLocationWidget
+     * @see RoutingPlugin
+     */
+     Q_PRIVATE_SLOT( d, void updateAutoZoomCheckBox( bool autoZoom ) )
+
+
 };
 
 }

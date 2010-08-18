@@ -25,6 +25,7 @@ class RouteSkeleton;
 class MarbleModel;
 class GeoDataDocument;
 class AlternativeRoutesModel;
+class AdjustNavigation;
 
 /**
   * Delegates data retrieval and model updates to the appropriate
@@ -74,6 +75,16 @@ public:
       * Toggle offline mode. In offline mode, new routes cannot be downloaded
       */
     void setWorkOffline( bool offline );
+
+
+    // This is a temporary location for AdjustNavigation. The code would be refactored soon.
+    void setAdjustNavigation( AdjustNavigation * adjustNavigation );
+
+    /**
+     * returns the instance of AdjustNavigation
+     * This is a temporary location for AdjustNavigation. The code would be refactored soon.
+     */
+    AdjustNavigation* adjustNavigation();
 
 public Q_SLOTS:
     /** Update the route */

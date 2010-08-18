@@ -29,24 +29,24 @@ class MARBLE_EXPORT WidgetGraphicsItem : public ScreenGraphicsItem
 {
  public:
     explicit WidgetGraphicsItem( MarbleGraphicsItem *parent = 0 );
-    
+
     virtual ~WidgetGraphicsItem();
-    
+
     void setWidget( QWidget *widget );
     QWidget *widget() const;
-    
+
     /**
      * Paints the item in item coordinates.
      */
     virtual void paint( GeoPainter *painter, ViewportParams *viewport,
                         const QString& renderPos, GeoSceneLayer * layer = 0 );
- 
+
  protected:
     virtual bool eventFilter( QObject *, QEvent * );
-                        
+
  private:
     Q_DISABLE_COPY( WidgetGraphicsItem )
-     
+
     WidgetGraphicsItemPrivate * const d;
 };
 

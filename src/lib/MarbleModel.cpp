@@ -162,6 +162,7 @@ class MarbleModelPrivate
     BookmarkManager         *m_bookmarkManager; 
 
     RoutingManager          *m_routingManager;
+
 };
 
 VectorComposer      *MarbleModelPrivate::m_veccomposer = 0;

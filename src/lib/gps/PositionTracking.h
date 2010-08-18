@@ -63,6 +63,12 @@ Q_SIGNALS:
 
     void statusChanged( PositionProviderStatus status );
 
+    /**
+     * @brief emits positionProviderPluginChanged(0) when provider is disabled
+     */
+
+    void positionProviderPluginChanged( PositionProviderPlugin *activePlugin );
+
 public slots:
     void setPosition( GeoDataCoordinates position,
                           GeoDataAccuracy accuracy );

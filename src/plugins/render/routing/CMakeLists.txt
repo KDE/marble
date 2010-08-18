@@ -7,9 +7,11 @@ INCLUDE_DIRECTORIES(
 )
 INCLUDE(${QT_USE_FILE})
 
-set( routing_SRCS RoutingPlugin.cpp )
+set( routing_SRCS RoutingPlugin.cpp )		 
 
-set( routing_UI RoutingItemWidget.ui )
+set( routing_UI RoutingWidgetSmall.ui
+		RoutingInformationWidget.ui
+		RoutingInformationWidgetSmall.ui )
 
 qt4_wrap_ui( routing_SRCS ${routing_UI} )
 

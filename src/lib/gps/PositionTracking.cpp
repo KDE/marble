@@ -97,10 +97,10 @@ void PositionTracking::setPosition( GeoDataCoordinates position,
 void PositionTracking::setStatus( PositionProviderStatus status )
 {
     if (status == PositionProviderStatusAvailable) {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(m_document->child(m_document->size()-1));
-        GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
+        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( m_document->child(m_document->size()-1 ) );
+        GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>( placemark->geometry() );
         GeoDataLineString *lineString = new GeoDataLineString;
-        multiGeometry->append(lineString);
+        multiGeometry->append( lineString );
     }
 
     emit statusChanged( status );
@@ -124,6 +124,7 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
 
         m_positionProvider->initialize();
     }
+    emit positionProviderPluginChanged( plugin );
 }
 
 QString PositionTracking::error() const

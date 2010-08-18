@@ -317,12 +317,13 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
                 GeoDataLineString currentRoutePoints = qVariantValue<GeoDataLineString>( index.data( RoutingModel::InstructionWayPointRole ) );
 
-                QPen orangePen( QColor::fromRgb(  255, 140, 0, 200 ) ); // dark orange, oxygen palette
-                orangePen.setWidth( 6 );
+                QPen brightBluePen( QColor::fromRgb( 102, 255, 255, 200 ) ); // bright blue, oxygen palette
+
+                brightBluePen.setWidth( 6 );
                 if ( m_routeDirty ) {
-                    orangePen.setStyle( Qt::DotLine );
+                    brightBluePen.setStyle( Qt::DotLine );
                 }
-                painter->setPen( orangePen );
+                painter->setPen( brightBluePen );
 
                 painter->drawPolyline( currentRoutePoints );
 
@@ -342,15 +343,15 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
         if( !m_routingModel->deviatedFromRoute() ) {
             qreal timeRemaining = m_routingModel->remainingTime();
-            qreal thresholdMinimum = 1.0;
-
+            qreal thresholdMinimum = 3.0;
+            GeoDataCoordinates location = m_routingModel->instructionPoint();
+            painter->setBrush( QBrush( QColor::fromRgb( 227, 173, 0, 200 ) ) ); //yellow, oxygen palette
+            painter->drawEllipse( location, 12, 12 );
             if( timeRemaining < thresholdMinimum ) {
-                GeoDataCoordinates location = m_routingModel->instructionPoint();
                 QString nextInstruction = m_routingModel->instructionText();
                 if( !nextInstruction.isNull() ) {
-                    painter->setPen( QColor( Qt::black ) );
-                    painter->setBrush( QBrush( QColor::fromRgb( 227, 173, 0, 200 ) ) ); // yellow, oxygen palette
-                    painter->drawAnnotation( location, nextInstruction, QSize( 120, 60 ), 10, 30, 15, 15 );
+                    painter->setBrush( QBrush( QColor::fromRgb( 204, 51, 0, 200 ) ) ); // brown, oxygen palette
+                    painter->drawEllipse( location, 20, 20 );
                 }
             }
         }

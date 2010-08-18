@@ -42,8 +42,7 @@ NavigationFloatItem::NavigationFloatItem( const QPointF &point )
 {
     // Plugin is enabled by default
     setEnabled( true );
-    // Plugin is visible by default on devices with small screens only
-    setVisible( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen );
+    setVisible( false );
 
     if( m_profiles & MarbleGlobal::SmallScreen ) {
         setFrame( FrameGraphicsItem::RectFrame );
@@ -201,10 +200,10 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
     return AbstractFloatItem::eventFilter(object, e);
 }
 
-void NavigationFloatItem::setZoomSliderValue(int level)
+void NavigationFloatItem::setZoomSliderValue( int level )
 {
     if( !( m_profiles & MarbleGlobal::SmallScreen ) ) {
-        m_navigationWidget->zoomSlider->setValue(level);
+        m_navigationWidget->zoomSlider->setValue( level );
     }
 }
 
@@ -268,12 +267,12 @@ void NavigationFloatItem::adjustForStill()
     }
 }
 
-void NavigationFloatItem::updateButtons( int value )
+void NavigationFloatItem::updateButtons( int zoomValue )
 {
     int minZoom = defaultMinZoom;
     int maxZoom = defaultMaxZoom;
-    QToolButton *zoomInButton;
-    QToolButton *zoomOutButton;
+    QToolButton *zoomInButton = 0;
+    QToolButton *zoomOutButton = 0;
 
     if( m_profiles & MarbleGlobal::SmallScreen ) {
         if ( m_marbleWidget ) {
@@ -292,10 +291,10 @@ void NavigationFloatItem::updateButtons( int value )
         zoomOutButton = m_navigationWidget->zoomOutButton;
     }
 
-    if ( value <= minZoom ) {
+    if ( zoomValue <= minZoom ) {
         zoomInButton->setEnabled( true );
         zoomOutButton->setEnabled( false );
-    } else if ( value >= maxZoom ) {
+    } else if ( zoomValue >= maxZoom ) {
         zoomInButton->setEnabled( false );
         zoomOutButton->setEnabled( true );
     } else {

@@ -120,41 +120,48 @@ public:
     int rightNeighbor( const GeoDataCoordinates &position, RouteSkeleton const *const route ) const;
 
     /**
-      * returns the time remaining( minutes ) to reach the next instruction point
-      */
+     * returns the time remaining( minutes ) to reach the next instruction point
+     */
     qreal remainingTime() const;
 
     /**
-      * returns index of the next instruction to be shown
-      */
-    int showInstructionIndex() const;
-
-    /**
-      * returns the position of next instruction point
-      */
+     * returns the position of next instruction point
+     */
     GeoDataCoordinates instructionPoint() const;
 
     /**
-      * returns the next valid instruction
-      */
+     * returns the next valid instruction
+     */
     QString instructionText() const;
 
     /**
-      * returns the total time remaining to reach the destination ( minutes )
-      */
-    qreal totalTimeRemaining() const;
+     * returns the total time remaining to reach the destination ( seconds )
+     */
+    qint32 totalTimeRemaining() const;
 
-    ///returns whether the gpsLocation is on route
+    /**
+     * returns whether the gps location is on route
+     */
     bool deviatedFromRoute() const;
+
+    /**
+     * returns distance( in meters ) to the next instruction from the current location on the route
+     */
+    qreal nextInstructionDistance() const;
+
+    /**
+     * returns length( in meters ) of the current instruction
+     */
+    qreal currentInstructionLength() const;
 
 public Q_SLOTS:
     void currentInstruction( GeoDataCoordinates, qreal );
 
 Q_SIGNALS:
-    /**
-     * emits a signal regarding information about total time( minutes ) and distance( metres ) remaining to reach destination
-     */
-    void nextInstruction( qreal totalTimeRemaining, qreal totalDistanceRemaining);
+   /**
+    * emits a signal regarding information about total time( seconds ) and distance( metres ) remaining to reach destination
+    */
+    void nextInstruction( qint32 totalTimeRemaining, qreal totalDistanceRemaining );
     void routeCalculated( int );
 
 private:

@@ -15,21 +15,30 @@
 
 #include "AbstractFloatItem.h"
 #include "GeoDataCoordinates.h"
+#include "PositionProviderPlugin.h"
+#include "global.h"
 
 #include <QtCore/QObject>
+#include <QtGui/QAction>
+#include <QtGui/QMenu>
+#include <QtGui/QLabel>
 
 namespace Ui
 {
-  class RoutingItemWidget;
+    class RoutingWidgetSmall;
+    class RoutingInformationWidget;
+    class RoutingInformationWidgetSmall;
 }
 
 namespace Marble
 {
-class RoutingManager;
+class MarbleWidget;
+class AdjustNavigation;
 class RoutingModel;
 class WidgetGraphicsItem;
 class RoutingPlugin : public AbstractFloatItem
 {
+
 Q_OBJECT
 Q_INTERFACES( Marble::RenderPluginInterface )
 MARBLE_PLUGIN( RoutingPlugin )
@@ -37,7 +46,18 @@ MARBLE_PLUGIN( RoutingPlugin )
 public:
     explicit RoutingPlugin( const QPointF &point = QPointF( -10, -10 ) );
 
-     ~RoutingPlugin ();
+    ~RoutingPlugin();
+
+    /**
+    * An enum type
+    * Represents which recentering method is selected
+    */
+    enum CenterMode{
+            Disabled = 0,          /**< Enum Value Disabled. Disable Re-Centering */
+            AlwaysRecenter = 1,    /**< Enum Value AlwaysRecenter. Re-center always to the map center */
+            RecenterOnBorder = 2   /**< Enum Value RecenterOnBorder. Re-center when reaching map border */
+    };
+
 
     QStringList backendTypes() const;
 
@@ -57,26 +77,124 @@ public:
 
     bool eventFilter(QObject *object, QEvent *e);
 
-    void showRoutingItem();
+private Q_SLOTS:
 
-public slots:
-    void setDestinationInformation( qreal, qreal );
+    /**
+     * Enable/Disable Navigation Menu depending on the status of the position provider
+     */
+     void setNavigationMenu( PositionProviderStatus status );
 
-    void setCurrentLocation( GeoDataCoordinates, qreal );
+    /**
+     * @brief sets the re-center mode to "Always Recenter"
+     * @see AdjustNavigation
+     */
+     void setAlwaysRecenter();
+
+    /**
+     * @brief sets the re-center mode to "When Required"
+     * @see AdjustNavigation
+     */
+     void setRecenterWhenRequired();
+
+    /**
+     * @brief toggles Auto Zoom
+     * @see AdjustNavigation
+     */
+     void setAutoZoom();
+
+    /**
+     * update controls when map theme is changed
+     */
+     void selectTheme( const QString &theme);
+
+    /**
+     * shows routing item for small screen devices
+     */
+     void showRoutingItem( bool show );
+
+    /**
+     * sets time and distance remaining to reach the destination
+     */
+     void setDestinationInformation( qint32, qreal );
+
+    /**
+     * sets current position of the gps device
+     */
+     void setCurrentLocation( GeoDataCoordinates, qreal );
+
+    /**
+     * shows the navigation menu on the plugin
+     */
+     void showNavigationMenu();
+
+    /**
+     * synchronizes selection in navigation menu(recenter) with corresponding selection of
+     * re-centering method in Current Location Tab
+     * @see CurrentLocationWidget
+     */
+     void setRecenterMenu( int centerMode );
+
+    /**
+     * synchronizes selection in navigation menu(auto zoom) with Auto Zoom in CurrentLocation Tab
+     * @see CurrentLocationWidget
+     */
+     void setAutoZoomMenu( bool autoZoom );
+
+    /**
+     * turns off re-centering
+     */
+     void setRecenteringDisabled();
+
+    /**
+     * disables the navigation menu if Position Tracking is disabled
+     */
+     void setNavigationMenuDisabled( PositionProviderPlugin *activePlugin );
 
 private:
-    Q_DISABLE_COPY( RoutingPlugin )
 
-    RoutingManager             *m_routingManager;
-    RoutingModel               *m_routingModel;
-    GeoDataCoordinates          m_currentPosition;
-    qreal                       m_remainingTime;
-    qreal                       m_remainingDistance;
-    WidgetGraphicsItem          *m_widgetItem;
-    Ui::RoutingItemWidget       *m_routingItem;
+    /**
+     * Enable/disable zoom in/out buttons
+     */
+     void updateButtons( int zoomValue );
 
+    /**
+     * updates the information in the routing item with relevant information
+     */
+     void updateRoutingItem();
 
+    /**
+     * creates the Navigation Menu(Recenter, Auto Zoom)
+     */
+     void createNavigationMenu();
+
+    /**
+     * sets the distance of the next instruction as well as the next instruction text on the
+     * routing information item
+     */
+     void updateInstructionLabel( QLabel *label );
+
+     MarbleWidget                        *m_marbleWidget;
+     WidgetGraphicsItem                  *m_widgetItem;
+     WidgetGraphicsItem                  *m_widgetItemRouting;
+     MarbleGlobal::Profiles               m_profiles;
+     RoutingModel                        *m_routingModel;
+     AdjustNavigation                    *m_adjustNavigation;
+     GeoDataCoordinates                   m_currentPosition;
+     QMenu                               *m_navigationMenu;
+     QAction                             *m_alwaysRecenterAction;
+     QAction                             *m_whenRequiredAction;
+     QAction                             *m_autoZoomAction;
+     QAction                             *m_disableRecenterAction;
+     qreal                                m_currentSpeed;
+     qint32                               m_remainingTime;
+     qreal                                m_remainingDistance;
+     bool                                 m_alwaysRecenter;
+     bool                                 m_recenterWhenRequired;
+     Ui::RoutingWidgetSmall              *m_routingWidgetSmall;
+     Ui::RoutingInformationWidget        *m_routingInformationWidget;
+     Ui::RoutingInformationWidgetSmall   *m_routingInformationWidgetSmall;
 };
 
 }
+
 #endif // ROUTINGPLUGIN_H

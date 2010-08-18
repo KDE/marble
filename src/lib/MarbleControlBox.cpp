@@ -71,7 +71,9 @@ class MarbleControlBoxPrivate
     LegendWidget                *m_legendWidget;
     QWidget                     *m_mapViewWidget;
     Ui::MapViewWidget           m_mapViewUi;
+
     CurrentLocationWidget       *m_currentLocationWidget;
+
     QWidget                     *m_fileViewWidget;
     Ui::FileViewWidget          m_fileViewUi;
 
@@ -120,6 +122,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     addItem( d->m_fileViewWidget, d->m_fileViewWidget->windowTitle() );
 
     d->m_currentLocationWidget = new CurrentLocationWidget( this );
+
     addItem( d->m_currentLocationWidget, d->m_currentLocationWidget->windowTitle() );
 
     d->m_sortproxy = new QSortFilterProxyModel( d->m_navigationUi.locationListView );
@@ -394,7 +397,6 @@ void MarbleControlBox::changeZoom(int zoom)
 
     d->m_navigationUi.zoomSlider->blockSignals( false );
 }
-
 
 void MarbleControlBox::enableFileViewActions()
 {

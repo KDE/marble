@@ -72,6 +72,8 @@ void AdjustNavigation::adjust( GeoDataCoordinates position, qreal speed )
 void AdjustNavigation::setRecenter( int recenterMode )
 {
     m_recenterMode = recenterMode;
+    emit recenterModeChanged( recenterMode );
+
     PositionTracking * tracking = m_widget->map()->model()->positionTracking();
     if( recenterMode ) {
         m_tracking = tracking;
@@ -121,6 +123,8 @@ void AdjustNavigation::moveOnBorderToCenter( GeoDataCoordinates position, qreal 
 void AdjustNavigation::setAutoZoom( bool autoZoom )
 {
     m_adjustZoom = autoZoom;
+    emit autoZoomToggled( autoZoom );
+
     PositionTracking * tracking = m_widget->map()->model()->positionTracking();
     if( autoZoom ) {
         m_tracking = tracking;

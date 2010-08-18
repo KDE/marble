@@ -11,10 +11,10 @@
 #ifndef ADJUSTNAVIGATION_H
 #define ADJUSTNAVIGATION_H
 
+#include "marble_export.h"
 #include "MarbleWidget.h"
 #include "GeoDataCoordinates.h"
 
-#include <QtGui/QPixmap>
 #include <QtGui/QWidget>
 
 namespace Marble
@@ -23,7 +23,7 @@ namespace Marble
 class GeoDataCoordinates;
 class MarbleWidget;
 class PositionTracking;
-class AdjustNavigation : public QObject
+class MARBLE_EXPORT AdjustNavigation : public QObject
 {
     Q_OBJECT
 
@@ -46,50 +46,62 @@ public:
     };
 
     /**
-      * @brief For Auto Centering adjustment of map in Navigation Mode
-      * @param recenterMode toggles among the recenteing method chosen
-      * @see CenterMode
-      */
-      void setRecenter( int recenterMode );
+     * @brief For Auto Centering adjustment of map in Navigation Mode
+     * @param recenterMode toggles among the recenteing method chosen
+     * @see CenterMode
+     */
+    void setRecenter( int recenterMode );
 
     /**
-      * @brief For Auto Zooming adjustment of map in Navigation Mode
-      * @param activate true to enable auto zooming
-      */
-      void setAutoZoom( bool activate );
+     * @brief For Auto Zooming adjustment of map in Navigation Mode
+     * @param activate true to enable auto zooming
+     */
+     void setAutoZoom( bool activate );
 
 public Q_SLOTS:
 
     /**
-      * @brief For adjusting the gps location (recentering) or map(autozooming)
-      * @param position current gps location
-      * @param speed of the gps device
-      */
-      void adjust( GeoDataCoordinates position, qreal speed );
+     * @brief For adjusting the gps location (recentering) or map(autozooming)
+     * @param position current gps location
+     * @param speed of the gps device
+     */
+     void adjust( GeoDataCoordinates position, qreal speed );
+
+Q_SIGNALS:
+    /**
+     * signal emitted when auto center is turned on (Always re-center, re-center when required ) or off(Disabled)
+     * @param recenterMode the mode for re-centering selected
+     */
+     void recenterModeChanged( int mode );
+
+    /**
+     * signal emitted when auto zoom is toggled
+     */
+     void autoZoomToggled( bool enabled );
 
 private:
 
     /**
-    * @brief To center on when reaching custom defined border
-    * @param position current gps location
-    * @param speed optional speed argument
-    */
-    void moveOnBorderToCenter( GeoDataCoordinates position, qreal speed );
+     * @brief To center on when reaching custom defined border
+     * @param position current gps location
+     * @param speed optional speed argument
+     */
+     void moveOnBorderToCenter( GeoDataCoordinates position, qreal speed );
 
     /**
-    * For calculating intersection point of projected LineString from
-    * current gps location with the map border
-    * @param position current gps location
-    */
-    void findIntersection( GeoDataCoordinates position );
+     * For calculating intersection point of projected LineString from
+     * current gps location with the map border
+     * @param position current gps location
+     */
+     void findIntersection( GeoDataCoordinates position );
 
     /**
-    * @brief Adjust the zoom value of the map
-    * @param currentPosition current location of the gps device
-    * @param destination geoCoordinates of the point on the screen border where the gps device
-    * would reach if allowed to move in that direction
-    */
-    void adjustZoom( GeoDataCoordinates currentPosition , GeoDataCoordinates destination );
+     * @brief Adjust the zoom value of the map
+     * @param currentPosition current location of the gps device
+     * @param destination geoCoordinates of the point on the screen border where the gps device
+     * would reach if allowed to move in that direction
+     */
+     void adjustZoom( GeoDataCoordinates currentPosition , GeoDataCoordinates destination );
 
     MarbleWidget        *m_widget;
     PositionTracking    *m_tracking;

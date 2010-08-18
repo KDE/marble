@@ -58,11 +58,13 @@ public:
     RoutingModel::Duration m_totalDuration;
 
     qreal m_totalDistance;
-    qreal m_totalTimeRemaining;
+    qint32 m_totalTimeRemaining;
     qreal m_timeRemaining;
     qreal m_totalDistanceRemaining;
     int m_instructionSize;
     int m_nextInstructionIndex;
+    qreal m_nextInstructionDistance;
+    qreal m_currentInstructionLength;
     GeoDataCoordinates m_location;
     QString m_nextDescription;
     bool m_routeLeft;
@@ -72,11 +74,13 @@ public:
 
 RoutingModelPrivate::RoutingModelPrivate()
     : m_totalDistance( 0.0 ),
-      m_totalTimeRemaining( 0.0 ),
+      m_totalTimeRemaining( 0 ),
       m_timeRemaining( 0.0 ),
       m_totalDistanceRemaining( 0.0 ),
       m_instructionSize( 0 ),
-      m_nextInstructionIndex(0),
+      m_nextInstructionIndex( 0 ),
+      m_nextInstructionDistance( 0.0 ),
+      m_currentInstructionLength( 0.0 ),
       m_routeLeft( false )
 {
     // nothing to do
@@ -88,18 +92,18 @@ void RoutingModelPrivate::importPlacemark( const GeoDataPlacemark *placemark )
     GeoDataLineString* lineString = dynamic_cast<GeoDataLineString*>( geometry );
     QStringList blacklist = QStringList() << "" << "Route" << "Tessellated";
     if ( !blacklist.contains( placemark->name() ) ) {
-            if( lineString ) {
-                RouteElement element;
-                element.type = RoutingModel::Instruction;
-                element.description = placemark->name();
-                element.position = lineString->at( 0 );
-                for( int i = 0; i<lineString->size(); ++i ) {
-                   element.instructionPointSet << lineString->at( i );
-                }
-                element.instructionDistance = element.instructionPointSet.length( EARTH_RADIUS );
-                m_route.push_back( element );
+        if( lineString ) {
+            RouteElement element;
+            element.type = RoutingModel::Instruction;
+            element.description = placemark->name();
+            element.position = lineString->at( 0 );
+            for( int i = 0; i<lineString->size(); ++i ) {
+                element.instructionPointSet << lineString->at( i );
             }
+            element.instructionDistance = element.instructionPointSet.length( EARTH_RADIUS );
+            m_route.push_back( element );
         }
+    }
     else if ( lineString ) {
         for ( int i=0; i<lineString->size(); ++i ) {
             RouteElement element;
@@ -108,6 +112,7 @@ void RoutingModelPrivate::importPlacemark( const GeoDataPlacemark *placemark )
             m_route.push_back( element );
         }
     }
+
 }
 
 RoutingModel::RoutingModel( MarbleModel *model, QObject *parent ) :
@@ -357,7 +362,7 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
 
         d->m_instructionSize = instructions.size();
 
-        qreal totalTimeRemaining = 0.0;
+        qint32 totalTimeRemaining = 0;
         qreal totalDistanceRemaining = 0.0;
         qreal distanceRemaining = 0.0;
         //if there is no route but source and destination are specified
@@ -374,14 +379,25 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
                     }
                 }
 
+                qreal radius = EARTH_RADIUS;
+
                 if( d->m_nextInstructionIndex != instructions.size() ) {
                     d->m_location = instructions[d->m_nextInstructionIndex].position;
                     d->m_nextDescription = instructions[d->m_nextInstructionIndex].description;
+                    //distance between current position and next instruction point
+                    distanceRemaining = distanceSphere( location, d->m_location ) * radius;
+                }
+                else {
+                    GeoDataCoordinates destinationCoord =  instructions[d->m_nextInstructionIndex-1].instructionPointSet.last();
+                    if( !(instructions[d->m_nextInstructionIndex-1].instructionPointSet.at( currentWaypointOffset ) == destinationCoord ) ) {
+                        distanceRemaining = distanceSphere( location, destinationCoord ) * radius;
+                    }
+                    else {
+                        distanceRemaining = 0.0;
+                    }
                 }
 
-                qreal radius = EARTH_RADIUS;
-                //distance between current position and next instruction point
-                distanceRemaining = instructions[d->m_nextInstructionIndex-1].instructionPointSet.length( radius, currentWaypointOffset );
+                d->m_currentInstructionLength = instructions[d->m_nextInstructionIndex-1].instructionDistance;
 
                 GeoDataLineString remainingInstructionPoints;
                 for( int i = waypointIndex; i < wayPoints.size(); ++i ) {
@@ -391,7 +407,7 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
                 totalDistanceRemaining = remainingInstructionPoints.length( radius );
                 if( speed != 0 ) {
                     d->m_timeRemaining = ( distanceRemaining / speed ) * SEC2MIN;
-                    totalTimeRemaining = ( totalDistanceRemaining / speed ) * SEC2MIN;
+                    totalTimeRemaining = qint32( totalDistanceRemaining / speed );
                 }
             }
             else {
@@ -399,20 +415,19 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
                 totalDistanceRemaining = 0.0;
             }
 
-            if( distanceRemaining < instructions[d->m_nextInstructionIndex-1].instructionDistance * KM2METER ) {
+            if( distanceRemaining < instructions[d->m_nextInstructionIndex-1].instructionDistance ) {
                 d->m_routeLeft = false;
             }
             else {
                 d->m_routeLeft = true;
             }
         }
-
+        d->m_nextInstructionDistance = distanceRemaining;
         d->m_totalTimeRemaining = totalTimeRemaining;
         d->m_totalDistanceRemaining = totalDistanceRemaining;
 
         emit nextInstruction( d->m_totalTimeRemaining, d->m_totalDistanceRemaining );
     }
-
 }
 
 qreal RoutingModel::remainingTime() const
@@ -420,7 +435,7 @@ qreal RoutingModel::remainingTime() const
    return d->m_timeRemaining;
 }
 
-qreal RoutingModel::totalTimeRemaining() const
+qint32 RoutingModel::totalTimeRemaining() const
 {
     return d->m_totalTimeRemaining;
 }
@@ -443,6 +458,16 @@ QString RoutingModel::instructionText() const
 bool RoutingModel::deviatedFromRoute() const
 {
     return d->m_routeLeft;
+}
+
+qreal RoutingModel::nextInstructionDistance() const
+{
+    return d->m_nextInstructionDistance;
+}
+
+qreal RoutingModel::currentInstructionLength() const
+{
+    return d->m_currentInstructionLength;
 }
 
 } // namespace Marble

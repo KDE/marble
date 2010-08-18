@@ -63,16 +63,16 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
 
         return position;
     }
-    
+
     QList<QPointF> absolutePositions() const
     {
         if( m_parent == 0 ) {
             return positions();
         }
-        
-        QList<QPointF> parentPositions;        
+
+        QList<QPointF> parentPositions;
         ScreenGraphicsItem *screenItem = dynamic_cast<ScreenGraphicsItem*>( m_parent );
-        
+
         if( screenItem ) {
             parentPositions = screenItem->absolutePositions();
         }
@@ -82,14 +82,14 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
                 parentPositions = geoItem->positions();
             }
         }
-        
+
         QPointF relativePosition = positivePosition();
-        
+
         QList<QPointF> absolutePositions;
         foreach( QPointF point, parentPositions ) {
             absolutePositions.append( point + relativePosition );
         }
-        
+
         return absolutePositions;
     }
 

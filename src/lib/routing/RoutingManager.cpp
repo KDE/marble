@@ -16,6 +16,7 @@
 #include "RouteSkeleton.h"
 #include "RoutingModel.h"
 #include "MarbleRunnerManager.h"
+#include "AdjustNavigation.h"
 
 #include <QtGui/QMessageBox>
 
@@ -35,6 +36,8 @@ public:
 
     RouteSkeleton *m_route;
 
+    AdjustNavigation *m_adjustNavigation;
+
     bool m_workOffline;
 
     RoutingManagerPrivate( MarbleModel *marbleModel, RoutingManager* manager, QObject *parent );
@@ -46,14 +49,14 @@ public:
 };
 
 RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager* manager, QObject *parent ) :
-        q( manager ), 
+        q( manager ),
         m_routingModel( new RoutingModel( model ) ),
-        m_marbleModel( model ), 
+        m_marbleModel( model ),
         m_alternativeRoutesModel(new AlternativeRoutesModel( model, parent ) ),
-        m_route( 0 ), 
+        m_route( 0 ),
         m_workOffline( false ),
         m_runnerManager( new MarbleRunnerManager( model->pluginManager(), q ) ),
-        m_haveRoute( false )
+        m_haveRoute( false ), m_adjustNavigation( 0 )
 {
     // nothing to do
 }
@@ -128,6 +131,16 @@ void RoutingManager::retrieveRoute( GeoDataDocument* route )
 AlternativeRoutesModel* RoutingManager::alternativeRoutesModel()
 {
     return d->m_alternativeRoutesModel;
+}
+
+void RoutingManager::setAdjustNavigation( AdjustNavigation* adjustNavigation )
+{
+    d->m_adjustNavigation = adjustNavigation;
+}
+
+AdjustNavigation* RoutingManager::adjustNavigation()
+{
+    return d->m_adjustNavigation;
 }
 
 } // namespace Marble
