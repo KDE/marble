@@ -348,7 +348,7 @@ void MarbleWidgetDefaultInputHandler::init( MarbleWidget *w )
 
     // The interface to the measure tool consists of a RMB popup menu
     // and some signals.
-    MeasureTool *measureTool = MarbleWidgetInputHandler::d->m_widget->map()->measureTool();
+    MeasureTool *measureTool = MarbleWidgetInputHandler::d->m_model->measureTool();
 
     // Connect the inputHandler and the measure tool to the popup menu
     if ( !d->m_popupmenu ) {
@@ -844,7 +844,7 @@ void MarbleWidgetDefaultInputHandler::addMeasurePoint()
     qreal  lon;
 
     MarbleWidgetInputHandler::d->m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
-    MeasureTool *measureTool = MarbleWidgetInputHandler::d->m_widget->map()->measureTool();
+    MeasureTool *measureTool = MarbleWidgetInputHandler::d->m_model->measureTool();
     measureTool->addMeasurePoint( lon, lat );
 }
 

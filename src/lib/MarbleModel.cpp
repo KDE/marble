@@ -57,6 +57,7 @@
 #include "MarbleDataFacade.h"
 #include "MarbleDirs.h"
 #include "MarblePlacemarkModel.h"
+#include "MeasureTool.h"
 #include "MergedLayerDecorator.h"
 #include "FileManager.h"
 #include "GeoDataTreeModel.h"
@@ -144,6 +145,9 @@ class MarbleModelPrivate
 
     static VectorComposer   *m_veccomposer; // FIXME: Make not a pointer.
 
+    // Tools
+    MeasureTool             *m_measureTool;
+
     // Places on the map
     FileManager             *m_fileManager;
     PlacemarkManager        *m_placemarkmanager;
@@ -222,6 +226,8 @@ MarbleModel::MarbleModel( QObject *parent )
     d->m_placemarkmanager = new PlacemarkManager();
     d->m_placemarkmanager->setDataFacade(d->m_dataFacade);
     d->m_placemarkmanager->setFileManager(d->m_fileManager);
+
+    d->m_measureTool = new MeasureTool( this );
 
     d->m_popSortModel = new QSortFilterProxyModel( this );
 
@@ -1012,6 +1018,11 @@ void MarbleModel::addLayer( LayerInterface *layer )
 void MarbleModel::removeLayer( LayerInterface *layer )
 {
     d->m_layerManager->removeLayer(layer);
+}
+
+MeasureTool *MarbleModel::measureTool()
+{
+    return d->m_measureTool;
 }
 
 Planet* MarbleModel::planet() const

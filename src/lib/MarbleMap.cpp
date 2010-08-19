@@ -83,9 +83,6 @@ void MarbleMapPrivate::construct()
 
     m_justModified = false;
     m_dirtyAtmosphere = false;
-    
-    m_measureTool = new MeasureTool( m_model, m_parent );
-
 
     m_logzoom  = 0;
     m_zoomStep = 40;
@@ -248,7 +245,7 @@ void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect )
             antialiased = true;
     }
 
-    m_measureTool->paint( &painter, m_viewParams.viewport(), antialiased );
+    m_model->measureTool()->paint( &painter, m_viewParams.viewport(), antialiased );
 }
 
 void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps )
@@ -327,11 +324,6 @@ MarbleModel *MarbleMap::model() const
 ViewParams *MarbleMap::viewParams()
 {
     return &d->m_viewParams;
-}
-
-MeasureTool *MarbleMap::measureTool()
-{
-    return d->m_measureTool;
 }
 
 

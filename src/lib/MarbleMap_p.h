@@ -76,9 +76,6 @@ class MarbleMapPrivate
 
     bool             m_showFrameRate;
 
-    // Tools
-    MeasureTool     *m_measureTool;
-
     const qreal      m_viewAngle;
 
 };

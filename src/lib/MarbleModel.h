@@ -49,6 +49,7 @@ class AbstractDataPlugin;
 class AbstractDataPluginItem;
 class AbstractScanlineTextureMapper;
 class GeoPainter;
+class MeasureTool;
 class TileCoordsPyramid;
 class FileViewModel;
 class PositionTracking;
@@ -274,6 +275,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Remove a layer from being included in rendering.
      */
     void removeLayer( LayerInterface *layer );
+
+    MeasureTool *measureTool();
 
     /**
      * @brief Returns the planet object for the current map.

@@ -51,7 +51,6 @@ class MarbleMapPrivate;
 class GeoDataLatLonAltBox;
 class MarbleModel;
 class ViewParams;
-class MeasureTool;
 class SunLocator;
 class FileViewModel;
 class GeoPainter;
@@ -126,7 +125,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     // Accessors to internal objects;
     ViewParams *viewParams();
-    MeasureTool *measureTool();
 
     void setSize( int width, int height );
     void setSize( const QSize& size );
