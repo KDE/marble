@@ -17,7 +17,6 @@
 // Marble
 #include "AdjustNavigation.h"
 #include "MarbleLocale.h"
-#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "GeoDataCoordinates.h"
@@ -78,7 +77,7 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     d->m_widget = widget;
 
     d->m_adjustNavigation = new AdjustNavigation( d->m_widget, this );
-    d->m_widget->map()->model()->routingManager()->setAdjustNavigation( d->m_adjustNavigation );
+    d->m_widget->model()->routingManager()->setAdjustNavigation( d->m_adjustNavigation );
 
     PluginManager* pluginManager = d->m_widget->model()->pluginManager();
     d->m_positionProviderPlugins = pluginManager->createPositionProviderPlugins();
@@ -208,7 +207,7 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
 {
     if ( provider == QObject::tr("Disabled") ) {
         m_currentLocationUi.locationLabel->setEnabled( false );
-        m_widget->map()->setShowGps( false );
+        m_widget->setShowGps( false );
         m_widget->model()->positionTracking()->setPositionProviderPlugin( 0 );
         m_currentLocationUi.recenterLabel->setEnabled( false );
         m_currentLocationUi.recenterComboBox->setEnabled( false );
@@ -222,7 +221,7 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
                 PositionProviderPlugin* instance = plugin->newInstance();
                 PositionTracking *tracking = m_widget->model()->positionTracking();
                 tracking->setPositionProviderPlugin( instance );
-                m_widget->map()->setShowGps( true );
+                m_widget->setShowGps( true );
                 m_widget->update();
                 return;
             }
