@@ -235,7 +235,7 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
         return;
     }
 
-    ViewportParams* now = marbleWidget->map()->viewParams()->viewport();
+    ViewportParams* now = marbleWidget->map()->viewport();
 
     qreal x(0), y(0);
     if (!now->currentProjection()->screenCoordinates(destLon, destLat, now, x, y)) {
@@ -267,7 +267,7 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
     lookAt.setAltitude( 0.0 );
     lookAt.setRange( newDistance * KM2METER );
     
-    marbleWidget->map()->viewParams()->viewport()->setFocusPoint( GeoDataCoordinates( destLon,
+    marbleWidget->map()->viewport()->setFocusPoint( GeoDataCoordinates( destLon,
                                                                                       destLat ) );
     marbleWidget->flyTo( lookAt, Linear );
 }
@@ -333,7 +333,7 @@ void MarbleWidgetInputHandler::restoreViewContext()
         d->m_widget->updateChangedMap();
     }
 
-    d->m_widget->map()->viewParams()->viewport()->resetFocusPoint();
+    d->m_widget->map()->viewport()->resetFocusPoint();
     d->m_wheelZoomTargetDistance = 0.0;
 }
 
@@ -432,7 +432,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
         return true;
     }
 
-    int polarity = MarbleWidgetInputHandler::d->m_widget->map()->viewParams()->viewport()->polarity();
+    int polarity = MarbleWidgetInputHandler::d->m_widget->map()->viewport()->polarity();
 
     if ( e->type() == QEvent::MouseMove
          || e->type() == QEvent::MouseButtonPress
@@ -783,7 +783,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                              destLon, destLat, GeoDataCoordinates::Radian );
 
                 if (isValid) {
-                    marbleWidget->map()->viewParams()->viewport()->setFocusPoint(GeoDataCoordinates(destLon, destLat));
+                    marbleWidget->map()->viewport()->setFocusPoint(GeoDataCoordinates(destLon, destLat));
                 }
 
                 //convert the scaleFactor to be 0: the same: < 0: smaller, > 0: bigger and make it bigger by multiplying for an arbitrary big value

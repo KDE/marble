@@ -232,8 +232,8 @@ void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 QString WorldClock::getZone()
 {
     qreal lat, lon;
-    bool ok = m_map->viewParams()->viewport()->currentProjection()->geoCoordinates(
-                m_hover.x(), m_hover.y(), m_map->viewParams()->viewport(), lon, lat );
+    bool ok = m_map->viewport()->currentProjection()->geoCoordinates(
+                m_hover.x(), m_hover.y(), m_map->viewport(), lon, lat );
 
     QString timezone;
     if( !ok ) {
@@ -355,7 +355,7 @@ void WorldClock::paintInterface(QPainter *p,
     //p->drawRect( m_lastRect );
     QPixmap pixmap( m_map->width(), m_map->height() );
     pixmap.fill( Qt::transparent );
-    GeoPainter gp( &pixmap, m_map->viewParams()->viewport(),
+    GeoPainter gp( &pixmap, m_map->viewport(),
                    Marble::NormalQuality, true );
     QRect mapRect( 0, 0, m_map->width(), m_map->height() );
     m_map->paint(gp, mapRect );
@@ -370,8 +370,8 @@ void WorldClock::paintInterface(QPainter *p,
     qreal tzy = 0;
     qreal lon = m_locations.value(m_locationkey).longitude() * DEG2RAD;
     qreal lat = m_locations.value(m_locationkey).latitude() * DEG2RAD;
-    bool ok = m_map->viewParams()->viewport()->currentProjection()
-              ->screenCoordinates(lon, lat, m_map->viewParams()->viewport(), tzx, tzy);
+    bool ok = m_map->viewport()->currentProjection()
+              ->screenCoordinates(lon, lat, m_map->viewport(), tzx, tzy);
     if ( ok /*&& m_isHovered*/ ) {
         QPoint tz( tzx, tzy );
         tz += m_t;

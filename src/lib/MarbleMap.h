@@ -50,7 +50,7 @@ class MarbleMapPrivate;
 // Marble
 class GeoDataLatLonAltBox;
 class MarbleModel;
-class ViewParams;
+class ViewportParams;
 class SunLocator;
 class FileViewModel;
 class GeoPainter;
@@ -124,7 +124,10 @@ class MARBLE_EXPORT MarbleMap : public QObject
     MarbleModel *model() const;
 
     // Accessors to internal objects;
-    ViewParams *viewParams();
+    ViewportParams *viewport();
+
+    void setMapQuality( MapQuality quality );
+    MapQuality mapQuality() const;
 
     void setSize( int width, int height );
     void setSize( const QSize& size );

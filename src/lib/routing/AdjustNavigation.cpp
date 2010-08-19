@@ -156,7 +156,7 @@ void AdjustNavigation::findIntersection( GeoDataCoordinates position )
         m_widget->centerOn( position, false );
     }
     else {
-        ViewportParams const * const viewparams = m_widget->map()->viewParams()->viewport();
+        ViewportParams const * const viewparams = m_widget->map()->viewport();
 
         qreal width = viewparams->width();
         qreal height = viewparams->height();

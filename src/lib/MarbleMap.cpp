@@ -321,9 +321,20 @@ MarbleModel *MarbleMap::model() const
     return d->m_model;
 }
 
-ViewParams *MarbleMap::viewParams()
+ViewportParams *MarbleMap::viewport()
 {
-    return &d->m_viewParams;
+    return d->m_viewParams.viewport();
+}
+
+
+void MarbleMap::setMapQuality( MapQuality quality )
+{
+    d->m_viewParams.setMapQuality( quality );
+}
+
+MapQuality MarbleMap::mapQuality() const
+{
+    return d->m_viewParams.mapQuality();
 }
 
 
@@ -521,7 +532,7 @@ QPixmap MarbleMap::mapScreenShot()
     QPixmap screenshotPixmap( size() );
     screenshotPixmap.fill( Qt::transparent );
 
-    GeoPainter painter( &screenshotPixmap, viewParams()->viewport(),
+    GeoPainter painter( &screenshotPixmap, viewport(),
                         PrintQuality );
     painter.begin( &screenshotPixmap );
     QRect dirtyRect( QPoint(), size() );
@@ -800,7 +811,7 @@ void MarbleMap::setHome( const GeoDataCoordinates& homePoint, int zoom )
 
 void MarbleMap::moveLeft()
 {
-    int polarity = viewParams()->viewport()->polarity();
+    int polarity = viewport()->polarity();
 
     if ( polarity < 0 )
         rotateBy( +moveStep(), 0 );
@@ -810,7 +821,7 @@ void MarbleMap::moveLeft()
 
 void MarbleMap::moveRight()
 {
-    int polarity = viewParams()->viewport()->polarity();
+    int polarity = viewport()->polarity();
 
     if ( polarity < 0 )
         rotateBy( -moveStep(), 0 );
@@ -885,7 +896,7 @@ void MarbleMap::customPaint( GeoPainter *painter )
 {
     Q_UNUSED( painter );
 
-    if ( !viewParams()->mapTheme() ) {
+    if ( !d->m_viewParams.mapTheme() ) {
         return;
     }
 }
