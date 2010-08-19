@@ -442,7 +442,7 @@ void MarbleControlBox::setCurrentLocationTabShown( bool show )
         }
 
         if ( !enabled ) {
-            d->m_widget->map()->setShowGps( false );
+            d->m_widget->setShowGps( false );
         }
     }
 }
@@ -510,7 +510,7 @@ void MarbleControlBox::selectTheme( const QString &theme )
                          currentIndex.row(), 1, QModelIndex() ) ).toString();
 
 
-    d->m_navigationUi.zoomSlider->setMaximum( d->m_widget->map()->maximumZoom() );
+    d->m_navigationUi.zoomSlider->setMaximum( d->m_widget->maximumZoom() );
     updateButtons( d->m_navigationUi.zoomSlider->value() );
 
     if ( theme != indexTheme ) {
@@ -643,7 +643,7 @@ void MarbleControlBox::adjustForStill()
 void MarbleControlBox::setWorkOffline(bool offline)
 {
     HttpDownloadManager * const downloadManager =
-        d->m_widget->map()->model()->downloadManager();
+        d->m_widget->model()->downloadManager();
     downloadManager->setDownloadEnabled( !offline );
     d->m_runnerManager->setWorkOffline( offline );
     if ( d->m_routingWidget ) {
