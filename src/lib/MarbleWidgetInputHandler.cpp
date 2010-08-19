@@ -280,7 +280,7 @@ void MarbleWidgetDefaultInputHandler::Private::MoveTo( MarbleWidget* marbleWidge
 
     qreal  destLat;
     qreal  destLon;
-    qreal distance = marbleWidget->map()->distance();
+    qreal distance = marbleWidget->distance();
     marbleWidget->geoCoordinates( pos.x(), pos.y(), destLon, destLat, GeoDataCoordinates::Radian );
     
     GeoDataLookAt lookAt;
@@ -740,7 +740,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             marbleWidget->setViewContext( Animation );
 
             int steps = wheelevt->delta() / 3;
-            qreal zoom = marbleWidget->map()->zoom();
+            qreal zoom = marbleWidget->zoom();
             qreal target = MarbleWidgetInputHandler::d->m_wheelZoomTargetDistance;
             if ( marbleWidget->animationsEnabled() && target > 0.0 ) {
                 // Do not use intermediate (interpolated) distance values caused by animations

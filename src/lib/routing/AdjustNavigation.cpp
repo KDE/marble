@@ -74,7 +74,7 @@ void AdjustNavigation::setRecenter( int recenterMode )
     m_recenterMode = recenterMode;
     emit recenterModeChanged( recenterMode );
 
-    PositionTracking * tracking = m_widget->map()->model()->positionTracking();
+    PositionTracking * tracking = m_widget->model()->positionTracking();
     if( recenterMode ) {
         m_tracking = tracking;
         QObject::connect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
@@ -125,7 +125,7 @@ void AdjustNavigation::setAutoZoom( bool autoZoom )
     m_adjustZoom = autoZoom;
     emit autoZoomToggled( autoZoom );
 
-    PositionTracking * tracking = m_widget->map()->model()->positionTracking();
+    PositionTracking * tracking = m_widget->model()->positionTracking();
     if( autoZoom ) {
         m_tracking = tracking;
         QObject::connect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
@@ -307,7 +307,7 @@ void AdjustNavigation::findIntersection( GeoDataCoordinates position )
 void AdjustNavigation::adjustZoom( GeoDataCoordinates currentPosition, GeoDataCoordinates destination )
 {
     qreal greatCircleDistance = distanceSphere( currentPosition, destination );
-    qreal radius = m_widget->map()->model()->planetRadius();
+    qreal radius = m_widget->model()->planetRadius();
     qreal distance = greatCircleDistance *  radius;
 
     if( m_gpsSpeed != 0 ) {

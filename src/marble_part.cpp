@@ -1008,7 +1008,7 @@ void MarblePart::createPluginMenus()
 void MarblePart::updateTileZoomLevel()
 {
     const int tileZoomLevel =
-        m_controlView->marbleWidget()->map()->model()->tileZoomLevel();
+        m_controlView->marbleWidget()->model()->tileZoomLevel();
     if ( tileZoomLevel == -1 )
         m_tileZoomLevel = NOT_AVAILABLE;
     else {
@@ -1093,7 +1093,7 @@ void MarblePart::setupDownloadProgressBar()
     statusBar->addPermanentWidget( m_downloadProgressBar );
 
     HttpDownloadManager * const downloadManager =
-        m_controlView->marbleWidget()->map()->model()->downloadManager();
+        m_controlView->marbleWidget()->model()->downloadManager();
     Q_ASSERT( downloadManager );
     connect( downloadManager, SIGNAL( jobAdded() ), SLOT( downloadJobAdded() ) );
     connect( downloadManager, SIGNAL( jobRemoved() ), SLOT( downloadJobRemoved() ) );
@@ -1163,7 +1163,7 @@ void MarblePart::disconnectDownloadRegionDialog()
 
 void MarblePart::showDownloadRegionDialog()
 {
-    MarbleModel * const model = m_controlView->marbleWidget()->map()->model();
+    MarbleModel * const model = m_controlView->marbleWidget()->model();
     if ( !m_downloadRegionDialog ) {
         m_downloadRegionDialog = new DownloadRegionDialog( model, widget() );
         // it might be tempting to move the connects to DownloadRegionDialog's "accepted" and
@@ -1196,7 +1196,7 @@ void MarblePart::downloadRegion()
     QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
     kDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
     QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
-    m_controlView->marbleWidget()->map()->model()->downloadRegion( sourceDir, pyramid );
+    m_controlView->marbleWidget()->model()->downloadRegion( sourceDir, pyramid );
 }
 
 void MarblePart::showStatusBarContextMenu( const QPoint& pos )

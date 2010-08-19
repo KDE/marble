@@ -12,7 +12,6 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "GeoPainter.h"
@@ -179,7 +178,7 @@ bool ProgressFloatItem::eventFilter(QObject *object, QEvent *e)
 
     MarbleWidget *widget = dynamic_cast<MarbleWidget*> (object);
     if ( !m_marbleWidget && widget ) {
-        HttpDownloadManager* manager = widget->map()->model()->downloadManager();
+        HttpDownloadManager* manager = widget->model()->downloadManager();
         if ( manager ) {
             m_marbleWidget = widget;
             connect( manager, SIGNAL( jobAdded() ), this, SLOT( addProgressItem() ) );

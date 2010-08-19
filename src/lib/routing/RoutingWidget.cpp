@@ -11,7 +11,6 @@
 #include "RoutingWidget.h"
 
 #include "GeoDataLineString.h"
-#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidget.h"
@@ -150,13 +149,13 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     d->m_routeSkeleton = new RouteSkeleton( this );
 
     //d->m_routingManager = new RoutingManager( d->m_widget, this );
-    d->m_routingManager = d->m_widget->map()->model()->routingManager();
+    d->m_routingManager = d->m_widget->model()->routingManager();
     d->m_ui.routeComboBox->setModel( d->m_routingManager->alternativeRoutesModel() );
 
     d->m_routingLayer = new RoutingLayer( d->m_widget, this );
     d->m_routingLayer->setRouteSkeleton( d->m_routeSkeleton );
     d->m_routingLayer->synchronizeAlternativeRoutesWith( d->m_routingManager->alternativeRoutesModel(), d->m_ui.routeComboBox );
-    d->m_widget->map()->model()->addLayer( d->m_routingLayer );
+    d->m_widget->model()->addLayer( d->m_routingLayer );
 
     connect( d->m_routingLayer, SIGNAL( routeDirty() ),
              d->m_routingManager, SLOT( updateRoute() ) );

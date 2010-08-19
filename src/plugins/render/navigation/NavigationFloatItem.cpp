@@ -153,8 +153,8 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
     if ( m_marbleWidget != widget ) {
         // Delayed initialization
         m_marbleWidget = widget;
-        int minZoom = m_marbleWidget->map()->minimumZoom();
-        int maxZoom = m_marbleWidget->map()->maximumZoom();
+        int minZoom = m_marbleWidget->minimumZoom();
+        int maxZoom = m_marbleWidget->maximumZoom();
         //m_navigationWidget->zoomSlider->setRange(minZoom, maxZoom);
 
         if( m_profiles & MarbleGlobal::SmallScreen ) {
@@ -168,7 +168,7 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
         else {
             m_navigationWidget->zoomSlider->setMinimum(minZoom);
             m_navigationWidget->zoomSlider->setMaximum(maxZoom);
-            m_navigationWidget->zoomSlider->setValue(m_marbleWidget->map()->zoom());
+            m_navigationWidget->zoomSlider->setValue(m_marbleWidget->zoom());
             m_navigationWidget->zoomSlider->setTickInterval((maxZoom - minZoom) / 15);
 
             connect( m_navigationWidget->zoomInButton, SIGNAL( clicked() ),
@@ -189,12 +189,12 @@ bool NavigationFloatItem::eventFilter( QObject *object, QEvent *e )
                      m_marbleWidget, SLOT( goHome() ) );
         }
 
-        connect( m_marbleWidget->map(), SIGNAL( zoomChanged(int) ),
+        connect( m_marbleWidget, SIGNAL( zoomChanged(int) ),
                  this, SLOT( setZoomSliderValue( int ) ) );
         connect( m_marbleWidget, SIGNAL( themeChanged( QString ) ),
                  this, SLOT( selectTheme( QString ) ) );
 
-        updateButtons( m_marbleWidget->map()->zoom() );
+        updateButtons( m_marbleWidget->zoom() );
     }
 
     return AbstractFloatItem::eventFilter(object, e);
@@ -219,10 +219,10 @@ void NavigationFloatItem::setMarbleZoomValue( int level )
         return;
     }
 
-    disconnect( m_marbleWidget->map(), SIGNAL( zoomChanged(int) ),
+    disconnect( m_marbleWidget, SIGNAL( zoomChanged(int) ),
                 this, SLOT( setZoomSliderValue( int ) ) );
     m_marbleWidget->zoomView( level );
-    connect( m_marbleWidget->map(), SIGNAL( zoomChanged(int) ),
+    connect( m_marbleWidget, SIGNAL( zoomChanged(int) ),
                 this, SLOT( setZoomSliderValue( int ) ) );
 }
 
@@ -232,13 +232,13 @@ void NavigationFloatItem::selectTheme( QString theme )
 
     if ( m_marbleWidget ) {
         if( m_profiles & MarbleGlobal::SmallScreen ) {
-            updateButtons( m_marbleWidget->map()->zoom() );
+            updateButtons( m_marbleWidget->zoom() );
         }
         else {
-            int minZoom = m_marbleWidget->map()->minimumZoom();
-            int maxZoom = m_marbleWidget->map()->maximumZoom();
+            int minZoom = m_marbleWidget->minimumZoom();
+            int maxZoom = m_marbleWidget->maximumZoom();
             m_navigationWidget->zoomSlider->setRange( minZoom, maxZoom );
-            m_navigationWidget->zoomSlider->setValue( m_marbleWidget->map()->zoom() );
+            m_navigationWidget->zoomSlider->setValue( m_marbleWidget->zoom() );
             updateButtons( m_navigationWidget->zoomSlider->value() );
         }
     }
@@ -276,8 +276,8 @@ void NavigationFloatItem::updateButtons( int zoomValue )
 
     if( m_profiles & MarbleGlobal::SmallScreen ) {
         if ( m_marbleWidget ) {
-            minZoom = m_marbleWidget->map()->minimumZoom();
-            maxZoom = m_marbleWidget->map()->maximumZoom();
+            minZoom = m_marbleWidget->minimumZoom();
+            maxZoom = m_marbleWidget->maximumZoom();
         }
 
         zoomInButton = m_navigationWidgetSmall->zoomInButton;
