@@ -970,6 +970,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
       */
     void flyTo( const GeoDataLookAt &lookAt, FlyToMode mode = Automatic );
 
+    /**
+     * @brief Re-download all visible tiles.
+     */
+    void reloadMap();
+
  Q_SIGNALS:
     /**
      * @brief Signal that the zoom has changed, and to what.

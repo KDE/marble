@@ -798,7 +798,7 @@ void MarblePart::setupActions()
     connect( m_controlSunAction, SIGNAL( triggered( bool ) ),
 	     this,               SLOT( controlSun() ) );
 
-    KStandardAction::redisplay( this, SLOT( reload() ), actionCollection() );
+    KStandardAction::redisplay( m_controlView->marbleWidget(), SLOT( reloadMap() ), actionCollection() );
 
     // Action: Show Time options
     m_controlTimeAction = new KAction( this );
@@ -1427,11 +1427,6 @@ void MarblePart::updateSettings()
     {
         m_controlView->marbleWidget()->model()->setClockTimezone( m_timezone.value( MarbleSettings::chosenTimezone() ) );
     }
-}
-
-void MarblePart::reload()
-{
-    m_controlView->marbleWidget()->map()->reload();
 }
 
 void MarblePart::showPluginAboutDialog( const QString& nameId )

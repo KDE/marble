@@ -1393,6 +1393,11 @@ void MarbleWidget::flyTo( const GeoDataLookAt &lookAt, FlyToMode mode )
     }
 }
 
+void MarbleWidget::reloadMap()
+{
+    d->m_model->reloadMap();
+}
+
 void MarbleWidget::updateAnimation( const GeoDataLookAt &lookAt )
 {
     setViewContext( Marble::Animation );
