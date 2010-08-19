@@ -163,8 +163,8 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
 
     if ( m_marbleWidget != widget ) {
         m_marbleWidget = widget;
-        m_adjustNavigation = m_marbleWidget->map()->model()->routingManager()->adjustNavigation();
-        m_routingModel = m_marbleWidget->map()->model()->routingManager()->routingModel();
+        m_adjustNavigation = m_marbleWidget->model()->routingManager()->adjustNavigation();
+        m_routingModel = m_marbleWidget->model()->routingManager()->routingModel();
 
         if( m_profiles & MarbleGlobal::SmallScreen ) {
 
@@ -224,7 +224,7 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
             connect( m_adjustNavigation, SIGNAL( autoZoomToggled( bool ) ),
                     this, SLOT( setAutoZoomMenu( bool ) ) );
 
-            updateButtons( m_marbleWidget->map()->zoom() );
+            updateButtons( m_marbleWidget->zoom() );
         }
         else {
             disconnect( m_routingModel, SIGNAL( nextInstruction( qint32, qreal ) ),
@@ -232,7 +232,7 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
             connect( m_routingModel, SIGNAL( nextInstruction( qint32, qreal ) ),
                     this, SLOT( setDestinationInformation( qint32, qreal ) ), Qt::UniqueConnection );
 
-            PositionTracking *tracking = m_marbleWidget->map()->model()->positionTracking();
+            PositionTracking *tracking = m_marbleWidget->model()->positionTracking();
             disconnect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
                      this, SLOT( setCurrentLocation( GeoDataCoordinates, qreal ) ) );
             connect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
@@ -348,8 +348,8 @@ void RoutingPlugin::updateButtons( int zoomValue )
     QToolButton *zoomOutButton = 0;
 
     if ( m_marbleWidget ) {
-        minZoom = m_marbleWidget->map()->minimumZoom();
-        maxZoom = m_marbleWidget->map()->maximumZoom();
+        minZoom = m_marbleWidget->minimumZoom();
+        maxZoom = m_marbleWidget->maximumZoom();
     }
 
     zoomInButton = m_routingWidgetSmall->zoomInButton;
@@ -387,7 +387,7 @@ void RoutingPlugin::selectTheme( const QString &theme )
     Q_UNUSED( theme );
 
     if ( m_marbleWidget ) {
-            updateButtons( m_marbleWidget->map()->zoom() );
+            updateButtons( m_marbleWidget->zoom() );
     }
 }
 
@@ -397,7 +397,7 @@ void RoutingPlugin::showRoutingItem( bool show )
         return;
     }
 
-    PositionTracking *tracking = m_marbleWidget->map()->model()->positionTracking();
+    PositionTracking *tracking = m_marbleWidget->model()->positionTracking();
 
     if( show ) {
         MarbleGraphicsGridLayout *gridLayout = new MarbleGraphicsGridLayout( 2, 1 );
