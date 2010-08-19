@@ -287,6 +287,17 @@ MarbleModel *MarbleWidget::model() const
 }
 
 
+ViewportParams* MarbleWidget::viewport()
+{
+    return d->m_map->viewport();
+}
+
+const ViewportParams* MarbleWidget::viewport() const
+{
+    return d->m_map->viewport();
+}
+
+
 void MarbleWidget::setInputHandler( MarbleWidgetInputHandler *handler )
 {
     delete d->m_inputhandler;

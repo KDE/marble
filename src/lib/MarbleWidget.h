@@ -52,6 +52,7 @@ class RenderPlugin;
 class SunLocator;
 class TileCreator;
 class GeoDataPlacemark;
+class ViewportParams;
 
 /**
  * @short A widget class that displays a view of the earth.
@@ -177,6 +178,9 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * @brief Return the model that this view shows.
      */
     MarbleModel *model() const;
+
+    ViewportParams *viewport();
+    const ViewportParams *viewport() const;
 
     /**
      * Returns the current input handler

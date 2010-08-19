@@ -14,7 +14,6 @@
 
 // Marble
 #include "MarbleDebug.h"
-#include "MarbleMap.h"
 #include "MarbleWidget.h"
 
 // Qt
@@ -181,8 +180,7 @@ bool ScreenGraphicsItem::eventFilter( QObject *object, QEvent *e )
 
                     widget->setAttribute( Qt::WA_NoSystemBackground,  false );
                     widget->repaint(dirtyRegion);
-                    widget->setAttribute( Qt::WA_NoSystemBackground,
-                                          widget->map()->mapCoversViewport() );
+                    widget->setAttribute( Qt::WA_NoSystemBackground, widget->viewport()->mapCoversViewport() );
                     return true;
                 }
             }

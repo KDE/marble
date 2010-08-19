@@ -15,10 +15,8 @@
 #include "GeoDataCoordinates.h"
 #include "gps/PositionTracking.h"
 #include "MarbleDebug.h"
-#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "ViewportParams.h"
-#include "ViewParams.h"
 #include "MarbleMath.h"
 #include "global.h"
 
@@ -156,7 +154,7 @@ void AdjustNavigation::findIntersection( GeoDataCoordinates position )
         m_widget->centerOn( position, false );
     }
     else {
-        ViewportParams const * const viewparams = m_widget->map()->viewport();
+        ViewportParams const * const viewparams = m_widget->viewport();
 
         qreal width = viewparams->width();
         qreal height = viewparams->height();

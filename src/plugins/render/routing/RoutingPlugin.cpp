@@ -17,7 +17,6 @@
 #include "WidgetGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
 #include "MarbleWidget.h"
-#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "routing/AdjustNavigation.h"
 #include "routing/RoutingManager.h"
@@ -378,7 +377,7 @@ void RoutingPlugin::updateButtons( int zoomValue )
         update();
 
         m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,
-                                      m_marbleWidget->map()->mapCoversViewport() );
+                                      m_marbleWidget->viewport()->mapCoversViewport() );
     }
 }
 

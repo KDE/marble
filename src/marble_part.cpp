@@ -68,7 +68,6 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "MarbleLocale.h"
-#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarblePluginSettingsWidget.h"
 #include "NewFolderInfoDialog.h"
@@ -1179,7 +1178,7 @@ void MarblePart::showDownloadRegionDialog()
     m_downloadRegionDialog->setAllowedTileLevelRange( 0, 18 );
     m_downloadRegionDialog->setSelectionMethod( DownloadRegionDialog::VisibleRegionMethod );
     ViewportParams const * const viewport =
-        m_controlView->marbleWidget()->map()->viewport();
+        m_controlView->marbleWidget()->viewport();
     m_downloadRegionDialog->setSpecifiedLatLonAltBox( viewport->viewLatLonAltBox() );
     m_downloadRegionDialog->setVisibleLatLonAltBox( viewport->viewLatLonAltBox() );
     m_downloadRegionDialog->setVisibleTileLevel( model->tileZoomLevel() );

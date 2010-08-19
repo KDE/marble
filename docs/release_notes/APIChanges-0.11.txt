@@ -9,3 +9,7 @@
   Access to the current AbstractProjection is still possible using MarbleMap::viewport()->currentProjection().
   MarbleMap::viewParams()->propertyAvailable() can now be reached under MarbleMap::model()->mapTheme()->settings()->propertyAvailable().
   The canvas and coast images are not accessible any longer by inention. Use MarbleMap::mapScreenShot() to access the resulting map, or implement a plugin to draw onto the map.
+
+* Introduce MarbleWidget::viewport().
+  Use MarbleWidget::viewport() rather than MarbleWidget::map()->viewport().
+  Use MarbleWidget::viewport()->mapCoversViewport() rahter than MarbleWidget::map()->mapCoversViewport().

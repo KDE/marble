@@ -314,7 +314,7 @@ void NavigationFloatItem::updateButtons( int zoomValue )
         update();
 
         m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground,
-                                      m_marbleWidget->map()->mapCoversViewport() );
+                                      m_marbleWidget->viewport()->mapCoversViewport() );
     }
 }
 
