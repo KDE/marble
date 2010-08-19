@@ -486,14 +486,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     SunLocator* sunLocator();
 
-    //These methods should all be removed
-    // what does this do to binary compatibility?
-    void setProxy( const QString& proxyHost, const quint16 proxyPort, const QString& user, const QString& password );
-    QString proxyHost() const;
-    quint16 proxyPort() const;
-    QString user() const;
-    QString password() const;
-
     /**
      * @brief Returns a list of all RenderPlugins on the widget, this includes float items
      * @return the list of RenderPlugins

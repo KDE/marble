@@ -74,10 +74,6 @@ class MarbleWidgetPrivate
           m_animationsEnabled( false ),
           m_inputhandler( 0 ),
           m_physics( new MarblePhysics( parent ) ),
-          m_proxyHost(),
-          m_proxyPort( 0 ),
-          m_user(),
-          m_password(),
           m_repaintTimer()
     {
     }
@@ -124,12 +120,6 @@ class MarbleWidgetPrivate
     MarbleWidgetInputHandler  *m_inputhandler;
 
     MarblePhysics    *m_physics;
-
-    //This stuff is NEVER used. Needs to be deleted
-    QString          m_proxyHost;
-    qint16           m_proxyPort;
-    QString          m_user;
-    QString          m_password;
 
     // For scheduling repaints
     QTimer           m_repaintTimer;
@@ -1291,44 +1281,6 @@ void MarbleWidget::setInputEnabled( bool enabled )
         removeEventFilter( d->m_inputhandler );
         setCursor( Qt::ArrowCursor );
     }
-}
-
-void MarbleWidget::setProxy( const QString& proxyHost, const quint16 proxyPort, const QString& user, const QString& password  )
-{
-    d->m_proxyHost = proxyHost;
-    d->m_proxyPort = proxyPort;
-    d->m_user = user;
-    d->m_password = password;
-
-    QNetworkProxy::ProxyType type = QNetworkProxy::HttpProxy;
-
-    // Make sure that no proxy is used for an empty string or the default value: 
-    if ( proxyHost.isEmpty() || proxyHost == "http://" )
-        type = QNetworkProxy::NoProxy;
-
-    QNetworkProxy proxy( type, d->m_proxyHost, d->m_proxyPort, d->m_user, d->m_password );
-    QNetworkProxy::setApplicationProxy( proxy );
-    mDebug() << "MarbleWidget::setProxy" << type << d->m_proxyHost << d->m_proxyPort << d->m_user << d->m_password;
-}
-
-QString MarbleWidget::proxyHost() const
-{
-    return d->m_proxyHost;
-}
-
-quint16 MarbleWidget::proxyPort() const
-{
-    return d->m_proxyPort;
-}
-
-QString MarbleWidget::user() const
-{
-    return d->m_user;
-}
-
-QString MarbleWidget::password() const
-{
-    return d->m_password;
 }
 
 QList<RenderPlugin *> MarbleWidget::renderPlugins() const

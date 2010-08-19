@@ -13,3 +13,6 @@
 * Introduce MarbleWidget::viewport().
   Use MarbleWidget::viewport() rather than MarbleWidget::map()->viewport().
   Use MarbleWidget::viewport()->mapCoversViewport() rahter than MarbleWidget::map()->mapCoversViewport().
+
+* From MarbleWidget remove setProxy(), proxyHost(), proxyPort(), user(), password().
+  These methods haven't been meaningful to MarbleWidget and have been commented to be removed a long time ago.
