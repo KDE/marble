@@ -417,7 +417,7 @@ QItemSelectionModel *MarbleMap::placemarkSelectionModel() const
     return d->m_model->placemarkSelectionModel();
 }
 
-qreal MarbleMap::moveStep()
+qreal MarbleMap::moveStep() const
 {
     if ( radius() < sqrt( (qreal)(width() * width() + height() * height()) ) )
 	return 180.0 * 0.1;
@@ -842,14 +842,14 @@ int MarbleMap::northPoleY()
     return northPolePosition().y();
 }
 
-QPoint MarbleMap::northPolePosition()
+QPoint MarbleMap::northPolePosition() const
 {
     qreal x, y;
     screenCoordinates( 0.0, 90.0, x, y );
     return QPoint( (int) x, (int) y );
 }
 
-QPoint MarbleMap::southPolePosition()
+QPoint MarbleMap::southPolePosition() const
 {
     qreal x, y;
     screenCoordinates( 0.0, -90.0, x, y );
@@ -857,7 +857,7 @@ QPoint MarbleMap::southPolePosition()
 }
 
 bool MarbleMap::screenCoordinates( qreal lon, qreal lat,
-                                   qreal& x, qreal& y )
+                                   qreal& x, qreal& y ) const
 {
     return d->m_viewParams.currentProjection()
         ->screenCoordinates( lon * DEG2RAD, lat * DEG2RAD,
@@ -867,7 +867,7 @@ bool MarbleMap::screenCoordinates( qreal lon, qreal lat,
 
 bool MarbleMap::geoCoordinates( int x, int y,
                                 qreal& lon, qreal& lat,
-                                GeoDataCoordinates::Unit unit )
+                                GeoDataCoordinates::Unit unit ) const
 {
     return d->m_viewParams.currentProjection()
         ->geoCoordinates( x, y, d->m_viewParams.viewport(),

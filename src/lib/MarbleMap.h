@@ -197,7 +197,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      *         @c false if the geographical coordinates are not visible on the screen
      */
     bool screenCoordinates( qreal lon, qreal lat,
-                            qreal& x, qreal& y );
+                            qreal& x, qreal& y ) const;
 
     /**
      * @brief Get the Y coordinate of the North Pole.
@@ -212,13 +212,13 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief Get the pixel position of the North Pole.
      * @return The pixel position of the geographical north pole.
      */
-    QPoint northPolePosition();
+    QPoint northPolePosition() const;
 
     /**
      * @brief Get the pixel position of the South Pole.
      * @return The pixel position of the geographical south pole.
      */
-    QPoint southPolePosition();
+    QPoint southPolePosition() const;
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
@@ -231,7 +231,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     bool geoCoordinates( int x, int y,
                          qreal& lon, qreal& lat,
-                         GeoDataCoordinates::Unit = GeoDataCoordinates::Degree );
+                         GeoDataCoordinates::Unit = GeoDataCoordinates::Degree ) const;
 
     /**
      * @brief Return the longitude of the center point.
@@ -259,7 +259,7 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief  Return how much the map will move if one of the move slots are called.
      * @return The move step.
      */
-    qreal moveStep();
+    qreal moveStep() const;
 
     /**
      * @brief  Add a GeoDataPlacemark file to the model.
