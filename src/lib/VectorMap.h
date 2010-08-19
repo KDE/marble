@@ -45,8 +45,6 @@ class VectorMap : public ScreenPolygon::Vector
     void drawMap( QPaintDevice *paintDevice, bool antialiasing,
 		  ViewportParams *viewport, MapQuality mapQuality );
 
-    void resizeMap( int width, int height );
-
     void setPen ( const QPen & p )     { m_pen   = p; }
     void setBrush ( const QBrush & b ) { m_brush = b; }
 
@@ -76,9 +74,9 @@ class VectorMap : public ScreenPolygon::Vector
 				 GeoDataCoordinates::Vector::ConstIterator const &,
 				 const int detail, ViewportParams *viewport );
 
-    void           manageCrossHorizon();
-    const QPointF  horizonPoint();
-    void           createArc();
+    void           manageCrossHorizon(ViewportParams *viewport);
+    const QPointF  horizonPoint(ViewportParams *viewport);
+    void           createArc(ViewportParams *viewport);
 
     int            getDetailLevel( int radius ) const;
 
@@ -94,11 +92,6 @@ class VectorMap : public ScreenPolygon::Vector
     //	int m_debugNodeCount;
 
     ScreenPolygon     m_polygon;
-
-    int               m_imgrx;
-    int               m_imgry;
-    int               m_imgwidth;
-    int               m_imgheight;
 
     QPointF           m_currentPoint;
     QPointF           m_lastPoint; 

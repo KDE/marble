@@ -35,10 +35,6 @@ VectorMap::VectorMap()
       m_plimit( 0.0 ),
       m_zBoundingBoxLimit( 0.0 ),
       m_zPointLimit( 0.0 ),
-      m_imgrx( 0 ),
-      m_imgry( 0 ),
-      m_imgwidth( 0 ),
-      m_imgheight( 0 ),
       m_brush( QBrush( QColor( 0, 0, 0 ) ) ),
       // Initialising booleans for horizoncrossing
       m_firsthorizon( false ),
@@ -81,7 +77,7 @@ void VectorMap::sphericalCreateFromPntMap( const PntMap* pntmap,
     // square radius sometimes below, and it may cause an overflow. We
     // choose qreal because of some sqrt() calculations.
     qreal   radius     = viewport->radius();
-    qreal   imgradius2 = m_imgrx * m_imgrx + m_imgry * m_imgry;
+    qreal   imgradius2 = ( viewport->width()  / 2 ) * ( viewport->width()  / 2 ) + ( viewport->height() / 2 ) * ( viewport->height() / 2 );
 
     // zlimit: describes the lowest z value of the sphere that is
     //         visible on the screen.  This should happen in the
@@ -160,7 +156,7 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
     ScreenPolygon  boundingPolygon;
-    QRectF         visibleArea ( 0, 0, m_imgwidth, m_imgheight );
+    QRectF         visibleArea ( 0, 0, viewport->width(), viewport->height() );
     const int      detail = getDetailLevel( radius );
 
     for (; itPolyLine != itEndPolyLine; ++itPolyLine )
@@ -179,8 +175,8 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 
         for ( int i = 1; i < 3; ++i ) {
             boundary[i]->geoCoordinates(lon, lat);
-            x = (qreal)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon);
-            y = (qreal)(m_imgheight) / 2.0 + rad2Pixel * (centerLat - lat);
+            x = (qreal)(viewport->width())  / 2.0 - rad2Pixel * (centerLon - lon);
+            y = (qreal)(viewport->height()) / 2.0 + rad2Pixel * (centerLat - lat);
             boundingPolygon << QPointF( x, y );
         }
 
@@ -198,11 +194,11 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 		   && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
 		 || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even
 		      && ( visibleArea.intersects( QRectF( boundingPolygon.at(1),
-                                                           QPointF( (qreal)(m_imgwidth) / 2.0
+                                                           QPointF( (qreal)(viewport->width()) / 2.0
                                                                     - rad2Pixel * ( centerLon - M_PI )
                                                                     + m_offset,
                                                                     boundingPolygon.at(0).y() ) ) )
-                           || visibleArea.intersects( QRectF( QPointF( (qreal)(m_imgwidth) / 2.0
+                           || visibleArea.intersects( QRectF( QPointF( (qreal)(viewport->width()) / 2.0
                                                                        - rad2Pixel * ( centerLon
                                                                                        + M_PI )
                                                                        + m_offset,
@@ -218,12 +214,12 @@ void VectorMap::rectangularCreateFromPntMap( const PntMap* pntmap,
 		|| ( (*itPolyLine)->getDateLine() == GeoPolygon::Even 
 		     && ( visibleArea.intersects(
 			    QRectF( boundingPolygon.at(1),
-				    QPointF( (qreal)(m_imgwidth) / 2.0
+				    QPointF( (qreal)(viewport->width()) / 2.0
 					     - rad2Pixel * ( centerLon - M_PI )
 					     + m_offset, 
 					     boundingPolygon.at(0).y() ) ) ) 
 			  || visibleArea.intersects(
-			         QRectF( QPointF( (qreal)(m_imgwidth) / 2.0
+			         QRectF( QPointF( (qreal)(viewport->width()) / 2.0
 						  - rad2Pixel * ( centerLon + M_PI )
 						  + m_offset,
 						  boundingPolygon.at(1).y() ),
@@ -264,7 +260,7 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
     GeoPolygon::PtrVector::ConstIterator  itEndPolyLine = pntmap->constEnd();
 
     ScreenPolygon  boundingPolygon;
-    QRectF         visibleArea ( 0, 0, m_imgwidth, m_imgheight );
+    QRectF         visibleArea ( 0, 0, viewport->width(), viewport->height() );
     const int      detail = getDetailLevel( radius );
 
     for (; itPolyLine != itEndPolyLine; ++itPolyLine )
@@ -283,8 +279,8 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
 
         for ( int i = 1; i < 3; ++i ) {
             boundary[i]->geoCoordinates(lon, lat);
-            x = (qreal)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon);
-            y = (qreal)(m_imgheight) / 2.0 - rad2Pixel * ( atanh( sin( lat ) )
+            x = (qreal)(viewport->width())  / 2.0 + rad2Pixel * (lon - centerLon);
+            y = (qreal)(viewport->height()) / 2.0 - rad2Pixel * ( atanh( sin( lat ) )
                                                            - atanh( sin( centerLat ) ) );
 
             boundingPolygon << QPointF( x, y );
@@ -304,12 +300,12 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
 		   && visibleArea.intersects( (QRectF)( boundingPolygon.boundingRect() ) ) )
 		 || ( (*itPolyLine)->getDateLine() == GeoPolygon::Even
 		      && ( visibleArea.intersects( QRectF( boundingPolygon.at(1),
-                                                           QPointF( (qreal)(m_imgwidth) / 2.0
+                                                           QPointF( (qreal)(viewport->width()) / 2.0
                                                                     - rad2Pixel * ( centerLon
                                                                                     - M_PI )
                                                                     + m_offset,
                                                                     boundingPolygon.at(0).y() ) ) )
-                           || visibleArea.intersects( QRectF( QPointF( (qreal)(m_imgwidth) / 2.0
+                           || visibleArea.intersects( QRectF( QPointF( (qreal)(viewport->width()) / 2.0
                                                                        - rad2Pixel * ( centerLon
                                                                                        + M_PI )
                                                                        + m_offset,
@@ -325,12 +321,12 @@ void VectorMap::mercatorCreateFromPntMap( const PntMap* pntmap,
 		|| ( (*itPolyLine)->getDateLine() == GeoPolygon::Even 
 		     && ( visibleArea.intersects(
 			    QRectF( boundingPolygon.at(1),
-				    QPointF( (qreal)(m_imgwidth) / 2.0
+				    QPointF( (qreal)(viewport->width()) / 2.0
 					     - rad2Pixel * ( centerLon - M_PI )
 					     + m_offset, 
 					     boundingPolygon.at(0).y() ) ) ) 
 			  || visibleArea.intersects(
-			         QRectF( QPointF( (qreal)(m_imgwidth) / 2.0
+			         QRectF( QPointF( (qreal)(viewport->width()) / 2.0
 						  - rad2Pixel * ( centerLon + M_PI )
 						  + m_offset,
 						  boundingPolygon.at(1).y() ),
@@ -393,8 +389,8 @@ const int detail, ViewportParams *viewport )
 #endif
 	qpos = itPoint->quaternion();
 	qpos.rotateAroundAxis( m_rotMatrix );
-	m_currentPoint = QPointF( m_imgrx + radius * qpos.v[Q_X] + 1.0,
-				  m_imgry - radius * qpos.v[Q_Y] + 1.0 );
+	m_currentPoint = QPointF( ( viewport->width()  / 2 ) + radius * qpos.v[Q_X] + 1.0,
+				  ( viewport->height() / 2 ) - radius * qpos.v[Q_Y] + 1.0 );
 			
 	// Take care of horizon crossings if horizon is visible
 	m_lastvisible = m_currentlyvisible;			
@@ -411,7 +407,7 @@ const int detail, ViewportParams *viewport )
 	    m_firsthorizon = false;
 	}
 	if ( m_currentlyvisible != m_lastvisible )
-	    manageCrossHorizon();
+	    manageCrossHorizon( viewport );
 
 	// Take care of screencrossing crossings if horizon is visible.
 	// Filter Points which aren't on the visible Hemisphere.
@@ -437,7 +433,7 @@ const int detail, ViewportParams *viewport )
     if ( m_firsthorizon ) {
         m_horizonb = m_firstHorizonPoint;
         if (m_polygon.closed())
-            createArc();
+            createArc(viewport);
 
         m_firsthorizon = false;
     }
@@ -481,8 +477,8 @@ void VectorMap::rectangularCreatePolyLine(
 #endif
 
 	itPoint->geoCoordinates( lon, lat);
-	qreal x = (qreal)(m_imgwidth)  / 2.0 - rad2Pixel * (centerLon - lon) + m_offset;
-	qreal y = (qreal)(m_imgheight) / 2.0 + rad2Pixel * (centerLat - lat);
+	qreal x = (qreal)(viewport->width())  / 2.0 - rad2Pixel * (centerLon - lon) + m_offset;
+	qreal y = (qreal)(viewport->height()) / 2.0 + rad2Pixel * (centerLat - lat);
 	int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
 	if ( firstPoint ) {
 	    firstPoint = false;
@@ -496,13 +492,13 @@ void VectorMap::rectangularCreatePolyLine(
 
 	    // X coordinate on the screen for the points on the
 	    // dateline on both sides of the flat map.
-	    qreal lastXAtDateLine = (qreal)(m_imgwidth) / 2.0
+	    qreal lastXAtDateLine = (qreal)(viewport->width()) / 2.0
                 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
-	    qreal xAtDateLine = (qreal)(m_imgwidth) / 2.0
+	    qreal xAtDateLine = (qreal)(viewport->width()) / 2.0
                 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
-	    qreal lastYAtDateLine = (qreal)(m_imgheight) / 2.0
+	    qreal lastYAtDateLine = (qreal)(viewport->height()) / 2.0
                 - ( m_lastLat - centerLat ) * rad2Pixel;
-	    qreal yAtSouthPole = (qreal)(m_imgheight) / 2.0
+	    qreal yAtSouthPole = (qreal)(viewport->height()) / 2.0
                 - ( -viewport->currentProjection()->maxLat() - centerLat ) * rad2Pixel;
 
 	    //If the "jump" occurs in the Anctartica's latitudes
@@ -511,12 +507,12 @@ void VectorMap::rectangularCreatePolyLine(
 		// FIXME: This should actually need to get investigated
 		//        in GeoPainter.  For now though we just help
 		//        GeoPainter to get the clipping right.
-		if ( lastXAtDateLine > (qreal)(m_imgwidth) - 1.0 )
-		    lastXAtDateLine = (qreal)(m_imgwidth) - 1.0;
+		if ( lastXAtDateLine > (qreal)(viewport->width()) - 1.0 )
+		    lastXAtDateLine = (qreal)(viewport->width()) - 1.0;
 		if ( lastXAtDateLine < 0.0 )
 		    lastXAtDateLine = 0.0; 
-		if ( xAtDateLine > (qreal)(m_imgwidth) - 1.0 )
-		    xAtDateLine = (qreal)(m_imgwidth) - 1.0;
+		if ( xAtDateLine > (qreal)(viewport->width()) - 1.0 )
+		    xAtDateLine = (qreal)(viewport->width()) - 1.0;
 		if ( xAtDateLine < 0.0 )
 		    xAtDateLine = 0.0; 
 
@@ -602,8 +598,8 @@ void VectorMap::mercatorCreatePolyLine(
     if ( fabs( lat ) > viewport->currentProjection()->maxLat() )
         continue;
 
-	qreal x = (qreal)(m_imgwidth)  / 2.0 + rad2Pixel * (lon - centerLon) + m_offset;
-	qreal y = (qreal)(m_imgheight) / 2.0
+	qreal x = (qreal)(viewport->width())  / 2.0 + rad2Pixel * (lon - centerLon) + m_offset;
+	qreal y = (qreal)(viewport->height()) / 2.0
             - rad2Pixel * ( atanh( sin( lat ) ) - atanh( sin( centerLat ) ) );
 	int currentSign = ( lon > 0.0 ) ? 1 : -1 ;
 	if ( firstPoint ) {
@@ -620,9 +616,9 @@ void VectorMap::mercatorCreatePolyLine(
 	    // x coordinate on the screen for the points on the dateline on both
 	    // sides of the flat map.
 	    // FIXME: mercator projection here too.
-	    qreal lastXAtDateLine = (qreal)(m_imgwidth) / 2.0
+	    qreal lastXAtDateLine = (qreal)(viewport->width()) / 2.0
                 + rad2Pixel * ( m_lastSign * M_PI - centerLon ) + m_offset;
-	    qreal xAtDateLine = (qreal)(m_imgwidth) / 2.0
+	    qreal xAtDateLine = (qreal)(viewport->width()) / 2.0
                 + rad2Pixel * ( -m_lastSign * M_PI - centerLon ) + m_offset;
         qreal lastYAtDateLine = (qreal)( viewport->height() / 2 - rad2Pixel
                                          * ( atanh( sin( m_lastLat ) )
@@ -638,12 +634,12 @@ void VectorMap::mercatorCreatePolyLine(
 		// FIXME: This should actually need to get investigated
 		//        in GeoPainter.  For now though we just help
 		//        GeoPainter to get the clipping right.
-		if ( lastXAtDateLine > (qreal)(m_imgwidth) - 1.0 )
-		    lastXAtDateLine = (qreal)(m_imgwidth) - 1.0;
+		if ( lastXAtDateLine > (qreal)(viewport->width()) - 1.0 )
+		    lastXAtDateLine = (qreal)(viewport->width()) - 1.0;
 		if ( lastXAtDateLine < 0.0 )
 		    lastXAtDateLine = 0.0; 
-		if ( xAtDateLine > (qreal)(m_imgwidth) - 1.0 )
-		    xAtDateLine = (qreal)(m_imgwidth) - 1.0;
+		if ( xAtDateLine > (qreal)(viewport->width()) - 1.0 )
+		    xAtDateLine = (qreal)(viewport->width()) - 1.0;
 		if ( xAtDateLine < 0.0 )
 		    xAtDateLine = 0.0; 
 
@@ -709,8 +705,8 @@ void VectorMap::drawMap( QPaintDevice *origimg, bool antialiasing,
     bool doClip = false; //assume false
     switch( viewport->projection() ) {
         case Spherical:
-            doClip = ( viewport->radius() > m_imgrx
-		       || viewport->radius() > m_imgry );
+            doClip = ( viewport->radius() > ( viewport->width()  / 2 )
+		       || viewport->radius() > ( viewport->height() / 2 ) );
             break;
         case Equirectangular:
             doClip = true; // clipping should always be enabled
@@ -761,7 +757,7 @@ void VectorMap::paintMap(GeoPainter * painter, bool antialiasing)
 }
 
 
-void VectorMap::manageCrossHorizon()
+void VectorMap::manageCrossHorizon(ViewportParams *viewport)
 {
     // qDebug("Crossing horizon line");
     // if (!currentlyvisible) qDebug("Leaving visible hemisphere");
@@ -771,54 +767,54 @@ void VectorMap::manageCrossHorizon()
         // qDebug("Point A");
 
         if ( !m_currentlyvisible ) {
-            m_horizona    = horizonPoint();
+            m_horizona    = horizonPoint(viewport);
             m_horizonpair = true;
         }
         else {
             // qDebug("Orphaned");
-            m_firstHorizonPoint = horizonPoint();
+            m_firstHorizonPoint = horizonPoint(viewport);
             m_firsthorizon      = true;
         }
     }
     else {
         // qDebug("Point B");
-        m_horizonb = horizonPoint();
+        m_horizonb = horizonPoint(viewport);
 
-        createArc();
+        createArc(viewport);
         m_horizonpair = false;
     }
 }
 
 
-const QPointF VectorMap::horizonPoint()
+const QPointF VectorMap::horizonPoint(ViewportParams *viewport)
 {
     // qDebug("Interpolating");
     qreal  xa;
     qreal  ya;
 
-    xa = m_currentPoint.x() - ( m_imgrx + 1 );
+    xa = m_currentPoint.x() - ( ( viewport->width()  / 2 ) + 1 );
 
     // Move the currentPoint along the y-axis to match the horizon.
     //	ya = sqrt( ((qreal)m_radius + 1) * ( (qreal)m_radius + 1) - xa*xa);
     ya = ( m_rlimit > xa * xa )
         ? sqrt( (qreal)(m_rlimit) - (qreal)( xa * xa ) ) : 0;
     // mDebug() << " m_rlimit" << m_rlimit << " xa*xa" << xa*xa << " ya: " << ya;
-    if ( ( m_currentPoint.y() - ( m_imgry + 1 ) ) < 0 )
+    if ( ( m_currentPoint.y() - ( ( viewport->height() / 2 ) + 1 ) ) < 0 )
         ya = -ya; 
 
-    return QPointF( m_imgrx + xa + 1, m_imgry + ya + 1 );
+    return QPointF( ( viewport->width()  / 2 ) + xa + 1, ( viewport->height() / 2 ) + ya + 1 );
 }
 
 
-void VectorMap::createArc()
+void VectorMap::createArc(ViewportParams *viewport)
 {
 
     qreal  beta  = (qreal)( RAD2DEG 
-			      * atan2( m_horizonb.y() - m_imgry - 1,
-				       m_horizonb.x() - m_imgrx - 1 ) );
+			      * atan2( m_horizonb.y() - ( viewport->height() / 2 ) - 1,
+				       m_horizonb.x() - ( viewport->width()  / 2 ) - 1 ) );
     qreal  alpha = (qreal)( RAD2DEG
-			      * atan2( m_horizona.y() - m_imgry - 1,
-				       m_horizona.x() - m_imgrx - 1 ) );
+			      * atan2( m_horizona.y() - ( viewport->height() / 2 ) - 1,
+				       m_horizona.x() - ( viewport->width()  / 2 ) - 1 ) );
 
     qreal diff = beta - alpha;
 
@@ -844,24 +840,14 @@ void VectorMap::createArc()
 
         for ( int it = 1; it < fabs(diff); ++it ) {
             qreal angle = DEG2RAD * (qreal)( alpha + (sgndiff * it) );
-            itx = (int)( m_imgrx +  arcradius * cos( angle ) + 1 );
-            ity = (int)( m_imgry +  arcradius * sin( angle ) + 1 );
+            itx = (int)( ( viewport->width()  / 2 ) +  arcradius * cos( angle ) + 1 );
+            ity = (int)( ( viewport->height() / 2 ) +  arcradius * sin( angle ) + 1 );
             // mDebug() << " ity: " << ity;
             m_polygon.append( QPoint( itx, ity ) );		
         }
 
         m_polygon.append( m_horizonb );
     }
-}
-
-
-void VectorMap::resizeMap( int width, int height )
-{
-    m_imgwidth  = width;
-    m_imgheight = height;
-
-    m_imgrx = ( m_imgwidth  / 2 );
-    m_imgry = ( m_imgheight / 2 );
 }
 
 

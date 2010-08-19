@@ -117,11 +117,10 @@ class MarbleModelPrivate
         delete m_downloadManager;
     }
 
-    void resize( int width, int height );
     void notifyModelChanged();
     GeoSceneGroup * textureLayerProperties() const;
 
-    void drawFog( QPainter *painter, ViewParams *viewParams, int width, int height );
+    void drawFog( QPainter *painter, ViewParams *viewParams );
 
     static QAtomicInt       refCounter;
     MarbleModel             *m_parent;
@@ -604,23 +603,13 @@ HttpDownloadManager* MarbleModel::downloadManager() const
     return d->m_downloadManager;
 }
 
-void MarbleModelPrivate::resize( int width, int height )
-{
-    if ( m_veccomposer ) {
-        m_veccomposer->resizeMap( width, height );
-    }
-}
-
 
 void MarbleModel::paintGlobe( GeoPainter *painter,
-                              int width, int height,
                               ViewParams *viewParams,
                               bool redrawBackground,
                               const QRect& dirtyRect )
 {
     if ( !d->m_texmapper ) return;
-
-    d->resize( width, height );
 
     // FIXME: Remove this once the LMC is there:
     QString themeID = d->m_mapTheme->head()->theme();
@@ -664,7 +653,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
 
     if ( d->m_mapTheme->map()->hasTextureLayers() ) {
         if ( viewParams->projection() == Spherical ) {
-            QRect rect( width / 2 - radius, height / 2 - radius,
+            QRect rect( viewParams->width() / 2 - radius, viewParams->height() / 2 - radius,
                         2 * radius, 2 * radius);
             rect = rect.intersect( dirtyRect );
             painter->drawImage( rect, *viewParams->canvasImage(), rect );
@@ -726,8 +715,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     //        better: Add to GlobeScanlineTextureMapper.
 
     if ( viewParams->mapQuality() == PrintQuality )
-        d->drawFog( painter, viewParams,
-                    width, height );
+        d->drawFog( painter, viewParams );
 
     renderPositions.clear();
     renderPositions << "ATMOSPHERE"
@@ -819,9 +807,7 @@ void MarbleModelPrivate::notifyModelChanged()
 }
 
 void MarbleModelPrivate::drawFog( QPainter *painter,
-                                  ViewParams *viewParams,
-                                  int width,
-                                  int height )
+                                  ViewParams *viewParams )
 {
     if ( viewParams->projection() != Spherical)
         return;
@@ -830,8 +816,8 @@ void MarbleModelPrivate::drawFog( QPainter *painter,
     if ( viewParams->viewport()->mapCoversViewport() )
         return;
 
-    int imgWidth2  = width / 2;
-    int imgHeight2 = height / 2;
+    int imgWidth2  = viewParams->width() / 2;
+    int imgHeight2 = viewParams->height() / 2;
 
     int radius = viewParams->radius();
 

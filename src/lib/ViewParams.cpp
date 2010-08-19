@@ -270,6 +270,16 @@ void ViewParams::centerCoordinates( qreal &centerLon, qreal &centerLat )
     d->m_viewport.centerCoordinates( centerLon, centerLat );
 }
 
+int ViewParams::width() const
+{
+    return d->m_canvasImage->width();
+}
+
+int ViewParams::height() const
+{
+    return d->m_canvasImage->height();
+}
+
 QImage * ViewParams::canvasImage() const
 {
     return d->m_canvasImage;

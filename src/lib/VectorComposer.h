@@ -53,7 +53,6 @@ class VectorComposer : public QObject
     void  drawTextureMap( ViewParams *viewParams );
     void  paintBaseVectorMap( GeoPainter*, ViewParams* );
     void  paintVectorMap(GeoPainter*, ViewParams* );
-    void  resizeMap( int width, int height );
 
     /**
      * @brief  Set color of the oceans

@@ -216,8 +216,7 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
         m_dirtyAtmosphere = false;
     }
 
-    m_model->paintGlobe( &painter,
-                         m_parent->width(), m_parent->height(), &m_viewParams,
+    m_model->paintGlobe( &painter, &m_viewParams,
                          m_parent->needsUpdate() || m_viewParams.canvasImage()->isNull(),
                          dirtyRect );
     // FIXME: this is ugly, add method updatePlanetAxis() to ViewParams

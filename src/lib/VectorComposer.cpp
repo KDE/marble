@@ -438,10 +438,4 @@ void VectorComposer::paintVectorMap( GeoPainter *painter,
     // mDebug() << "M_VectorMap calculated nodes: " << m_vectorMap->nodeCount();
 }
 
-
-void VectorComposer::resizeMap( int width, int height )
-{
-    m_vectorMap->resizeMap( width, height );
-}
-
 #include "VectorComposer.moc"

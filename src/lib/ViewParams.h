@@ -102,6 +102,9 @@ class MARBLE_EXPORT ViewParams
 
     void centerCoordinates( qreal &centerLon, qreal &centerLat );
 
+    int width() const;
+    int height() const;
+
     QImage * canvasImage() const;
     void setCanvasImage( QImage * const );
 

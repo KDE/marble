@@ -134,7 +134,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * 4.1, making the MarbleModel/MarbleWidget pair truly follow the
      * Model/View paradigm.
      */
-    void  paintGlobe(GeoPainter *painter, int width, int height,
+    void  paintGlobe(GeoPainter *painter,
                      ViewParams *viewParams,
                      bool redrawBackground, const QRect& dirtyRect);
 
