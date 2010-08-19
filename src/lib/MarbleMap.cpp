@@ -34,15 +34,12 @@
 #include "AbstractFloatItem.h"
 #include "AbstractProjection.h"
 #include "AbstractScanlineTextureMapper.h"
-#include "FileStorageWatcher.h"
-#include "FileViewModel.h"
 #include "GeoDataFeature.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "GeoSceneZoom.h"
-#include "HttpDownloadManager.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
@@ -53,7 +50,6 @@
 #include "PlacemarkLayout.h"
 #include "Planet.h"
 #include "RenderPlugin.h"
-#include "StoragePolicy.h"
 #include "SunLocator.h"
 #include "TextureColorizer.h"
 #include "ViewParams.h"
@@ -71,8 +67,6 @@ using namespace Marble;
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent )
         : m_parent( parent ),
-          m_persistentTileCacheLimit( 0 ), // No limit
-          m_volatileTileCacheLimit( 1024*1024*30 ), // 30 MB
           m_viewAngle( 110.0 )
 {
 }
@@ -109,20 +103,6 @@ void MarbleMapPrivate::construct()
 
     m_parent->connect( m_model,               SIGNAL( repaintNeeded( QRegion ) ),
                        m_parent,              SIGNAL( repaintNeeded( QRegion ) ) );
-
-    // A new instance of FileStorageWatcher.
-    // The thread will be started at setting persistent tile cache size.
-    m_storageWatcher = new FileStorageWatcher( MarbleDirs::localPath(), m_parent );
-    m_parent->connect( m_parent, SIGNAL( themeChanged( QString ) ),
-		       m_storageWatcher, SLOT( updateTheme( QString ) ) );
-    // Setting the theme to the current theme.
-    m_storageWatcher->updateTheme( m_parent->mapThemeId() );
-    // connect the StoragePolicy used by the download manager to the FileStorageWatcher
-    StoragePolicy * const storagePolicy = m_model->downloadManager()->storagePolicy();
-    QObject::connect( storagePolicy, SIGNAL( cleared() ),
-                      m_storageWatcher, SLOT( resetCurrentSize() ) );
-    QObject::connect( storagePolicy, SIGNAL( sizeChanged( qint64 ) ),
-                      m_storageWatcher, SLOT( addToCurrentSize( qint64 ) ) );
 }
 
 // Used to be resizeEvent()
@@ -679,12 +659,12 @@ bool MarbleMap::showFrameRate() const
 
 quint64 MarbleMap::persistentTileCacheLimit() const
 {
-    return d->m_persistentTileCacheLimit;
+    return d->m_model->persistentTileCacheLimit();
 }
 
 quint64 MarbleMap::volatileTileCacheLimit() const
 {
-    return d->m_volatileTileCacheLimit;
+    return d->m_model->volatileTileCacheLimit();
 }
 
 void MarbleMap::zoomView( int newZoom )
@@ -1116,19 +1096,7 @@ void MarbleMap::clearPersistentTileCache()
 
 void MarbleMap::setPersistentTileCacheLimit( quint64 kiloBytes )
 {
-    d->m_persistentTileCacheLimit = kiloBytes;
-    d->m_storageWatcher->setCacheLimit( kiloBytes * 1024 );
-    
-    if( kiloBytes != 0 )
-    {
-	if( !d->m_storageWatcher->isRunning() )
-	    d->m_storageWatcher->start( QThread::IdlePriority );
-    }
-    else
-    {
-	d->m_storageWatcher->quit();
-    }
-    // TODO: trigger update
+    d->m_model->setPersistentTileCacheLimit( kiloBytes );
 }
 
 void MarbleMap::clearVolatileTileCache()
@@ -1139,7 +1107,6 @@ void MarbleMap::clearVolatileTileCache()
 void MarbleMap::setVolatileTileCacheLimit( quint64 kilobytes )
 {
     mDebug() << "kiloBytes" << kilobytes;
-    d->m_volatileTileCacheLimit = kilobytes;
     d->m_model->setVolatileTileCacheLimit( kilobytes );
 }
 

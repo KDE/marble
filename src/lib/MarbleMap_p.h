@@ -22,7 +22,6 @@ class QRect;
 namespace Marble
 {
 
-class FileStorageWatcher;
 class MarbleMap;
 class MarbleModel;
 class TextureColorizer;
@@ -79,11 +78,6 @@ class MarbleMapPrivate
 
     // Tools
     MeasureTool     *m_measureTool;
-
-    // Cache related
-    FileStorageWatcher  *m_storageWatcher;
-    quint64          m_persistentTileCacheLimit;
-    quint64          m_volatileTileCacheLimit;
 
     const qreal      m_viewAngle;
 

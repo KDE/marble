@@ -229,6 +229,13 @@ class MARBLE_EXPORT MarbleModel : public QObject
     SunLocator*           sunLocator()     const;
     MergedLayerDecorator* layerDecorator() const;
 
+
+    /**
+     * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
+     * @return the limit of persistent tile cache in kilobytes.
+     */
+    quint64 persistentTileCacheLimit() const;
+
     /**
      * @brief  Returns the limit of the volatile (in RAM) tile cache.
      * @return the cache limit in kilobytes
@@ -303,6 +310,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     BookmarkManager *bookmarkManager() const;
  public Q_SLOTS:
     void clearVolatileTileCache();
+
     /**
      * @brief Set the limit of the volatile (in RAM) tile cache.
      * @param kilobytes The limit in kilobytes.
@@ -310,6 +318,12 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void setVolatileTileCacheLimit( quint64 kiloBytes );
 
     void clearPersistentTileCache();
+
+    /**
+     * @brief  Set the limit of the persistent (on hard disc) tile cache.
+     * @param  bytes The limit in kilobytes, 0 means no limit.
+     */
+    void setPersistentTileCacheLimit( quint64 kiloBytes );
 
     void paintTile( StackedTile* tile, const GeoSceneTexture *textureLayer );
 

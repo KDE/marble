@@ -45,6 +45,7 @@
 #include "DgmlAuxillaryDictionary.h"
 #include "MarbleClock.h"
 #include "FileStoragePolicy.h"
+#include "FileStorageWatcher.h"
 #include "GeoPainter.h"
 #include "FileViewModel.h"
 #include "SphericalScanlineTextureMapper.h"
@@ -134,8 +135,11 @@ class MarbleModelPrivate
     static TextureColorizer *m_texcolorizer; //left as null if unused
 
     HttpDownloadManager     *m_downloadManager;
-
     StackedTileLoader       *m_tileLoader;
+
+    // Cache related
+    FileStorageWatcher      *m_storageWatcher;
+
     AbstractScanlineTextureMapper   *m_texmapper;
 
     static VectorComposer   *m_veccomposer; // FIXME: Make not a pointer.
@@ -195,6 +199,21 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_tileLoader = new StackedTileLoader( d->m_mapThemeManager, d->textureLayerProperties(),
                                              d->m_downloadManager, this );
+
+    // A new instance of FileStorageWatcher.
+    // The thread will be started at setting persistent tile cache size.
+    d->m_storageWatcher = new FileStorageWatcher( MarbleDirs::localPath(), this );
+    connect( this, SIGNAL( themeChanged( QString ) ),
+             d->m_storageWatcher, SLOT( updateTheme( QString ) ) );
+    // Setting the theme to the current theme.
+    d->m_storageWatcher->updateTheme( mapThemeId() );
+    // connect the StoragePolicy used by the download manager to the FileStorageWatcher
+    StoragePolicy * const storagePolicy = d->m_downloadManager->storagePolicy();
+    connect( storagePolicy, SIGNAL( cleared() ),
+             d->m_storageWatcher, SLOT( resetCurrentSize() ) );
+    connect( storagePolicy, SIGNAL( sizeChanged( qint64 ) ),
+             d->m_storageWatcher, SLOT( addToCurrentSize( qint64 ) ) );
+
     d->m_texmapper = 0;
 
     d->m_fileManager = new FileManager();
@@ -868,6 +887,11 @@ MergedLayerDecorator* MarbleModel::layerDecorator() const
     return d->m_layerDecorator;
 }
 
+quint64 MarbleModel::persistentTileCacheLimit() const
+{
+    return d->m_storageWatcher->cacheLimit() / 1024;
+}
+
 void MarbleModel::clearVolatileTileCache()
 {
     d->m_tileLoader->update();
@@ -926,6 +950,22 @@ void MarbleModel::clearPersistentTileCache()
             delete tileCreatorDlg;
         }
     }
+}
+
+void MarbleModel::setPersistentTileCacheLimit(quint64 kiloBytes)
+{
+    d->m_storageWatcher->setCacheLimit( kiloBytes * 1024 );
+
+    if( kiloBytes != 0 )
+    {
+        if( !d->m_storageWatcher->isRunning() )
+            d->m_storageWatcher->start( QThread::IdlePriority );
+    }
+    else
+    {
+        d->m_storageWatcher->quit();
+    }
+    // TODO: trigger update
 }
 
 void MarbleModel::paintTile( StackedTile* tile, const GeoSceneTexture *textureLayer )
