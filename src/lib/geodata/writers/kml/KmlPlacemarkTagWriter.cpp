@@ -11,8 +11,8 @@
 #include "KmlPlacemarkTagWriter.h"
 
 #include "KmlElementDictionary.h"
-#include "GeoDataExtendedData.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataExtendedData.h"
 #include "GeoDataTypes.h"
 #include "GeoWriter.h"
 
