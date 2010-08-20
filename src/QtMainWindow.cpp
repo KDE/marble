@@ -98,6 +98,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
              m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
     connect( m_configDialog, SIGNAL( clearPersistentCacheClicked() ),
              m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
+    connect( m_controlView->marbleWidget(), SIGNAL( regionSelected( GeoDataLatLonBox ) ),
+             m_controlView->marbleWidget(), SLOT( centerOn( GeoDataLatLonBox ) ) );
 
 	//Load Bookmark File, First time read from system path then once bookmark is used
     //a copy of bookmarks.kml will be created in local path
@@ -712,7 +714,7 @@ void MainWindow::controlSun()
 
 void MainWindow::controlTime()
 {
-    if ( !m_timeControlDialog ) 
+    if ( !m_timeControlDialog )
     {
         m_timeControlDialog = new TimeControlWidget( m_controlView->marbleWidget()->model()->clock() );
     }
@@ -1059,7 +1061,7 @@ void MainWindow::showDownloadRegionDialog()
     m_downloadRegionDialog->setAllowedTileLevelRange( 0, 18 );
     m_downloadRegionDialog->setSelectionMethod( DownloadRegionDialog::VisibleRegionMethod );
     ViewportParams const * const viewport =
-        m_controlView->marbleWidget()->map()->viewParams()->viewport();
+        m_controlView->marbleWidget()->map()->viewport();
     m_downloadRegionDialog->setSpecifiedLatLonAltBox( viewport->viewLatLonAltBox() );
     m_downloadRegionDialog->setVisibleLatLonAltBox( viewport->viewLatLonAltBox() );
 
