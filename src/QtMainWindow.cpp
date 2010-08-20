@@ -50,7 +50,6 @@
 #include "TimeControlWidget.h"
 #include "MarbleLocale.h"
 #include "DownloadRegionDialog.h"
-#include "ViewParams.h"
 #include "ViewportParams.h"
 #include "AbstractDataPlugin.h"
 #include "AbstractFloatItem.h"

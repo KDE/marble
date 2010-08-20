@@ -45,7 +45,6 @@
 #include "RenderPlugin.h"
 #include "SunLocator.h"
 #include "TileCreatorDialog.h"
-#include "ViewParams.h"
 #include "ViewportParams.h"
 #include "gps/PositionTracking.h"
 #include "BookmarkManager.h"

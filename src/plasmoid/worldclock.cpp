@@ -48,7 +48,6 @@
 #include "MarbleModel.h"
 #include "AbstractFloatItem.h"
 #include "SunLocator.h"
-#include "ViewParams.h"
 #include "GeoPainter.h"
 #include "LatLonEdit.h"
 #include "ViewportParams.h"

@@ -75,7 +75,6 @@
 #include "TimeControlWidget.h"
 #include "SunLocator.h"
 #include "TileCoordsPyramid.h"
-#include "ViewParams.h"
 #include "ViewportParams.h"
 #include "MarbleClock.h"
 

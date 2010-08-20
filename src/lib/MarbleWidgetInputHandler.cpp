@@ -35,7 +35,6 @@
 #include "MarbleWidget.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
-#include "ViewParams.h"
 #include "ViewportParams.h"
 #include "AbstractFloatItem.h"
 #include "AbstractDataPluginItem.h"
