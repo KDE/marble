@@ -98,8 +98,6 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
              m_controlView->marbleWidget(), SLOT( clearVolatileTileCache() ) );
     connect( m_configDialog, SIGNAL( clearPersistentCacheClicked() ),
              m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
-    connect( m_controlView->marbleWidget(), SIGNAL( regionSelected( GeoDataLatLonBox ) ),
-             m_controlView->marbleWidget(), SLOT( centerOn( GeoDataLatLonBox ) ) );
 
 	//Load Bookmark File, First time read from system path then once bookmark is used
     //a copy of bookmarks.kml will be created in local path
