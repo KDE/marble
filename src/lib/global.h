@@ -223,7 +223,7 @@ const qreal SEC2HOUR = 1.0 / HOUR2SEC;
 
 // String for about dialog and http user agent
 // FIXME: check if blanks are allowed in user agent version numbers
-const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.11.0 SVN" );
+const QString MARBLE_VERSION_STRING = QString::fromLatin1( "PRE-0.11.0 SVN" );
 
 // API Version id:
 // form : 0xMMmmpp
