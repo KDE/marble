@@ -5,13 +5,9 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2007-2009  Torsten Rahn <tackat@kde.org>
+// Copyright 2007-2010  Torsten Rahn <tackat@kde.org>
 // Copyright 2007       Inge Wallin  <ingwa@kde.org>
-//
-
-//
-// Description: StackedTile contains a single image quadtile 
-// and jumptables for faster access to the pixel data
+// Copyright 2010       Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 #ifndef MARBLE_STACKEDTILE_H
@@ -36,9 +32,9 @@ class StackedTileLoader;
 
 /*!
     \class StackedTile
-    \brief A single tile that is composed one or more different tile layers.
+    \brief A single tile that consists of a stack of TextureTile layers.
 
-    The StackedTile is a tile that covers a certain area and is used 
+    The StackedTile is a tile container that covers a certain area and is used 
     for a particular zoom level. It consists of a <b>stack of several
     individual thematic TextureTiles</b> that cover the very same area and 
     are used for the very same zoom level: This stack of TextureTiles is
@@ -48,9 +44,9 @@ class StackedTileLoader;
     
     For rendering the whole stack of tiles gets merged and blended into a 
     single QImage. This merging/blending operation is usually only performed 
-    once the stack of tiles changes. As a result access to the visual 
+    once the stack of tiles changes visually. As a result access to the visual 
     composition of all TextureTile layers is very fast since it is reduced to 
-    a single QImage that also covers very little memory.
+    a single QImage that also consumes very little memory.
 
     The whole mechanism is comparable to layers in applications like
     Gimp or Photoshop (TM) which can be blended on top of each other via 

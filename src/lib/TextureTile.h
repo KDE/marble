@@ -30,6 +30,31 @@ class Blending;
 class TileLoader;
 class StackedTileLoader;
 
+/*!
+    \class TextureTile
+    \brief A class that resembles a texture tile .
+
+    A texture tile provides a bitmap image for a certain (geographic) area and 
+    for a given zoom level. Each TextureTile can be identified via a unique 
+    TileId.
+    
+    A stack of TextureTiles that cover the same area and the same 
+    zoom level can be stored (and painted) layer by layer in a StackedTile object. 
+    For this purpose each TextureTile specifies a blending type. 
+
+    Usually the tiles are organized in so called quad tiles: This means that
+    with increasing zoom level four other tiles cover the same area as a 
+    single "parent" tile in the previous zoom level. These four tiles have 
+    the same pixel size as the "parent" tile.
+    
+    The process of "filling the tile with data is done in stages: The 
+    State describes the current progress of loading the data (Empty, Scaled, 
+    Expired, StateUptodate).
+    
+    The life time cycle of a TextureTile can also be influenced by its
+    expiration time which will trigger a reload of the tile data.
+*/
+
 class TextureTile
 {
     friend class TileLoader;
@@ -47,13 +72,49 @@ class TextureTile
     TextureTile( TileId const & tileId, QString const & fileName );
     ~TextureTile();
 
+/*!
+    \brief Returns a unique ID for the tile.
+    \return A TileId object that encodes zoom level, position and map theme.
+*/     
     TileId const & id() const;
+    
+/*!
+    \brief Returns a unique ID for the StackedTile that contains this tile.
+    \return A TileId object that encodes zoom level, position and map theme.
+*/         
     TileId const & stackedTileId() const;
+    
+/*!
+    \brief Returns the time at which the tile was previously loaded onto the harddisc.
+    \return A QDateTime object that holds the modification time of the tile.
+*/         
     QDateTime const & lastModified() const;
+    
+/*!
+    \brief Returns whether the tile is considered outdated.
+    \return Whether the tile needs to be reloaded according to its last modification time.
+*/         
     bool isExpired() const;
+    
+/*!
+    \brief Returns the QImage that describes the look of the TextureTile
+    \return A non-zero pointer to a QImage associated with the tile.
+*/
     QImage const * image() const;
     QImage * image();
+    
+/*!
+    \brief Returns the state of tile construction/loading.
+    \return An enum that describes the tile state: empty, scaled, expired, uptodate.
+*/     
     State state() const;
+    
+/*!
+    \brief Returns the kind of blending used for the tile.
+    \return A pointer to the blending object used for painting/merging the TextureTile.
+    
+    If no blending is set the pointer returned will be zero.
+*/     
     Blending const * blending() const;
     int byteCount() const;
 
