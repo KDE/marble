@@ -338,6 +338,9 @@ QImage * StackedTile::resultTile()
 
 void StackedTile::initResultTile()
 {
+    // TODO: Free all the TextureTiles once the completion status is reached 
+    // to save memory.
+    
     Q_ASSERT( !d->m_tiles.isEmpty() );
     // if there are more than one active texture layers, we have to convert the
     // result tile into QImage::Format_ARGB32_Premultiplied to make blending possible
