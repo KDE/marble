@@ -12,15 +12,20 @@
         <file>icons/go-home.png</file>
         <file>icons/go-home-large.png</file>
         <file>icons/get-hot-new-stuff.png</file>
+        <file>icons/help-about.png</file>
         <file>icons/help-contents.png</file>
         <file>icons/help-whatsthis.png</file>
         <file>icons/map-flat.png</file>
         <file>icons/map-globe.png</file>
         <file>icons/map-mercator.png</file>
         <file>icons/marble.png</file>
-        <file>icons/wikipedia.png</file>
+        <file>icons/settings-configure.png</file>
         <file>icons/user-online.png</file>
         <file>icons/user-offline.png</file>
+        <file>icons/view-fullscreen.png</file>
+        <file>icons/view-sidetree.png</file>
+        <file>icons/view-refresh.png</file>
+        <file>icons/wikipedia.png</file>
         <file>icons/zoom-in.png</file>
         <file>icons/zoom-out.png</file>
         <file>icons/zoom-in-large.png</file>

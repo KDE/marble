@@ -146,8 +146,8 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     tabWidget->addTab( d->w_pluginSettings, tr( "Plugins" ) );
 
     // Setting the icons for the plugin dialog.
-    d->w_pluginSettings->setAboutIcon( QIcon( MarbleDirs::path( "svg/help-about.svgz" ) ) );
-    d->w_pluginSettings->setConfigIcon( QIcon( MarbleDirs::path( "svg/configure.svgz" ) ) );
+    d->w_pluginSettings->setAboutIcon( QIcon(":/icons/help-about.png") );
+    d->w_pluginSettings->setConfigIcon(  QIcon(":/icons/settings-configure.png") );
 
     connect( d->w_pluginSettings, SIGNAL( aboutPluginClicked( QString ) ),
                                   SLOT( showPluginAboutDialog( QString ) ) );
