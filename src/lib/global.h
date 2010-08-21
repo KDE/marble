@@ -211,7 +211,7 @@ const qreal METER2KM = 1.0 / KM2METER;
 
 // String for about dialog and http user agent
 // FIXME: check if blanks are allowed in user agent version numbers
-const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.10.0 SVN" );
+const QString MARBLE_VERSION_STRING = QString::fromLatin1( "0.10.0" );
 
 // API Version id:
 // form : 0xMMmmpp
