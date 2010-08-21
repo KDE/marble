@@ -5,9 +5,9 @@
 // find a copy of this license in LICENSE.txt in the top directory of
 // the source code.
 //
-// Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
+// Copyright 2006-2010 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
-// Copyright 2008      Jens-Michael Hoffmann <jensmh@gmx.de>
+// Copyright 2008-2010 Jens-Michael Hoffmann <jensmh@gmx.de>
 //
 
 #include "StackedTile.h"
