@@ -163,7 +163,7 @@ void MainWindow::createActions()
      m_copyMapAct->setStatusTip(tr("Copy a screenshot of the map"));
      connect(m_copyMapAct, SIGNAL(triggered()), this, SLOT(copyMap()));
 
-     m_configDialogAct = new QAction( tr("&Configure Marble"), this);
+     m_configDialogAct = new QAction( QIcon(":/icons/settings-configure.png"),tr("&Configure Marble"), this);
      m_configDialogAct->setStatusTip(tr("Show the configuration dialog"));
      connect(m_configDialogAct, SIGNAL(triggered()), this, SLOT(editSettings()));
 
@@ -171,14 +171,14 @@ void MainWindow::createActions()
      m_copyCoordinatesAct->setStatusTip(tr("Copy the center coordinates as text"));
      connect(m_copyCoordinatesAct, SIGNAL(triggered()), this, SLOT(copyCoordinates()));
 
-     m_sideBarAct = new QAction( tr("Show &Navigation Panel"), this);
+     m_sideBarAct = new QAction( QIcon(":/icons/view-sidetree.png"), tr("Show &Navigation Panel"), this);
      m_sideBarAct->setShortcut(tr("F9"));
      m_sideBarAct->setCheckable( true );
      m_sideBarAct->setChecked( true );
      m_sideBarAct->setStatusTip(tr("Show Navigation Panel"));
      connect(m_sideBarAct, SIGNAL(triggered( bool )), this, SLOT( showSideBar( bool )));
 
-     m_fullScreenAct = new QAction( tr("&Full Screen Mode"), this);
+     m_fullScreenAct = new QAction( QIcon(":/icons/view-fullscreen.png"), tr("&Full Screen Mode"), this);
      m_fullScreenAct->setShortcut(tr("Ctrl+Shift+F"));
      m_fullScreenAct->setCheckable( true );
      m_fullScreenAct->setStatusTip(tr("Full Screen Mode"));
@@ -217,7 +217,7 @@ void MainWindow::createActions()
      m_controlSunAct->setStatusTip( tr( "Configure Sun Control" ) );
      connect( m_controlSunAct, SIGNAL( triggered() ), this, SLOT( controlSun() ) );
 
-     m_reloadAct = new QAction( tr("&Redisplay"), this);
+     m_reloadAct = new QAction( QIcon(":/icons/view-refresh.png"), tr("&Redisplay"), this);
      m_reloadAct->setShortcut(tr("F5"));
      m_reloadAct->setStatusTip(tr("Reload Current Map"));
      connect(m_reloadAct, SIGNAL(triggered()), this, SLOT(reload()));
