@@ -27,6 +27,8 @@ cat data/legend.html \
 egrep -B1 'i18nc?\(".*[^ ].*"\)' rc.cpp > rc.cpp.1
 mv rc.cpp.1 rc.cpp
 
-$EXTRACTRC `find . -name '*.ui' -o -name '*.rc' -o -name '*.kcfg'` >> rc.cpp
+$EXTRACTRC `find . -name '*.ui' \
+            -o -name '*.rc' -a ! -name marble.rc \
+            -o -name '*.kcfg'` >> rc.cpp
 $XGETTEXT src/kdemain.cpp src/marble_part.cpp rc.cpp -o $podir/marble.pot
 $XGETTEXT_QT src/QtMainWindow.cpp src/qtmain.cpp `find src/plugins -name '*.cpp'` `find src/lib -name '*.cpp'` src/lib/global.h -o $podir/marble_qt.pot
