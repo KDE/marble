@@ -65,25 +65,15 @@ void PluginItemDelegate::paint( QPainter *painter,
     // The point at the top right of the available drawing area.
     QPoint topRight( rect.topRight() );
 
+    QRect nameRect = rect;
+    
     // Painting the checkbox
     QStyleOptionButton checkBox = checkboxOption( option, index, topLeft.x(), Qt::AlignLeft );
     painter->save();
     style->drawControl( QStyle::CE_CheckBox, &checkBox, painter );
     painter->restore();
-    topLeft += QPoint( checkBox.rect.width(), 0 );
 
-    // Painting the Name string
-    QString name = index.data( Qt::DisplayRole ).toString();
-    QRect nameRect( QPoint( 0, 0 ), nameSize( index ) );
-    nameRect.setHeight( rect.height() );
-    nameRect.moveTopLeft( topLeft );
-    style->drawItemText( painter,
-                         nameRect,
-                         Qt::AlignLeft | Qt::AlignVCenter,
-                         option.palette,
-                         true,
-                         name );
-    topLeft += QPoint( nameRect.width(), 0 );
+    nameRect.setLeft( checkBox.rect.right() + 1 );
     
     // Painting the About Button
     if ( index.data( RenderPlugin::AboutDialogAvailable ).toBool() ) {
@@ -99,7 +89,19 @@ void PluginItemDelegate::paint( QPainter *painter,
                                                   topRight.x(), Qt::AlignRight );
         style->drawControl( QStyle::CE_PushButton, &button, painter );
         topRight -= QPoint( button.rect.width(), 0 );
+        
+        nameRect.setRight( button.rect.left() -1 );
     }
+
+    // Painting the Name string
+    QString name = index.data( Qt::DisplayRole ).toString();
+    
+    style->drawItemText( painter,
+                         nameRect,
+                         Qt::AlignLeft | Qt::AlignVCenter,
+                         option.palette,
+                         true,
+                         name );
 
     painter->restore();
 }
@@ -383,6 +385,7 @@ QStyleOptionButton PluginItemDelegate::buttonOption( const QStyleOptionViewItem&
 QSize PluginItemDelegate::nameSize( const QModelIndex& index ) const
 {
     QString name = index.data( Qt::DisplayRole ).toString();
+    // FIXME: QApplication::fontMetrics() doesn't work for non-application fonts
     QSize nameSize( QApplication::fontMetrics().size( 0, name ) );
     return nameSize;
 }
