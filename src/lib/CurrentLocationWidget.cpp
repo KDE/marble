@@ -129,9 +129,6 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
 void CurrentLocationWidgetPrivate::adjustPositionTrackingStatus( PositionProviderStatus status )
 {
     if ( status == PositionProviderStatusAvailable ) {
-        m_currentLocationUi.recenterLabel->setEnabled( true );
-        m_currentLocationUi.recenterComboBox->setEnabled( true );
-        m_currentLocationUi.autoZoomCheckBox->setEnabled( true );
         return;
     }
 
@@ -205,16 +202,12 @@ void CurrentLocationWidget::receiveGpsCoordinates( const GeoDataCoordinates &pos
 
 void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provider )
 {
-    if ( provider == QObject::tr("Disabled") ) {
-        m_currentLocationUi.locationLabel->setEnabled( false );
-        m_widget->setShowGps( false );
-        m_widget->model()->positionTracking()->setPositionProviderPlugin( 0 );
-        m_currentLocationUi.recenterLabel->setEnabled( false );
-        m_currentLocationUi.recenterComboBox->setEnabled( false );
-        m_currentLocationUi.autoZoomCheckBox->setEnabled( false );
-        m_widget->update();
-    }
-    else {
+    bool hasProvider = ( provider != QObject::tr("Disabled") );
+    m_currentLocationUi.recenterLabel->setEnabled( hasProvider );
+    m_currentLocationUi.recenterComboBox->setEnabled( hasProvider );
+    m_currentLocationUi.autoZoomCheckBox->setEnabled( hasProvider );
+
+    if ( hasProvider ) {
         foreach( PositionProviderPlugin* plugin, m_positionProviderPlugins ) {
             if ( plugin->guiString() == provider ) {
                 m_currentLocationUi.locationLabel->setEnabled( true );
@@ -226,6 +219,12 @@ void CurrentLocationWidgetPrivate::changePositionProvider( const QString &provid
                 return;
             }
         }
+    }
+    else {
+        m_currentLocationUi.locationLabel->setEnabled( false );
+        m_widget->setShowGps( false );
+        m_widget->model()->positionTracking()->setPositionProviderPlugin( 0 );
+        m_widget->update();
     }
 }
 

@@ -80,11 +80,6 @@ public:
 private Q_SLOTS:
 
     /**
-     * Enable/Disable Navigation Menu depending on the status of the position provider
-     */
-     void setNavigationMenu( PositionProviderStatus status );
-
-    /**
      * @brief sets the re-center mode to "Always Recenter"
      * @see AdjustNavigation
      */

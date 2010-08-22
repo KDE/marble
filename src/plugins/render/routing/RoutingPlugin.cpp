@@ -168,8 +168,6 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
         if( m_profiles & MarbleGlobal::SmallScreen ) {
 
             // disconnect signals
-            disconnect( m_marbleWidget->model()->positionTracking(), SIGNAL( statusChanged( PositionProviderStatus ) ),
-                         this, SLOT( setNavigationMenu( PositionProviderStatus ) ) );
             disconnect( m_marbleWidget->model()->positionTracking(), SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
                                     this, SLOT( setNavigationMenuDisabled( PositionProviderPlugin* ) ) );
             disconnect( m_routingWidgetSmall->navigationButton, SIGNAL( clicked( bool ) ),
@@ -195,8 +193,6 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
                      this, SLOT( setAutoZoomMenu( bool ) ) );
 
 
-            connect( m_marbleWidget->model()->positionTracking(), SIGNAL( statusChanged( PositionProviderStatus ) ),
-                        this, SLOT( setNavigationMenu( PositionProviderStatus ) ) );
             connect( m_marbleWidget->model()->positionTracking(), SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
                                    this, SLOT( setNavigationMenuDisabled( PositionProviderPlugin* ) ) );
             connect( m_routingWidgetSmall->navigationButton, SIGNAL( clicked( bool ) ),
@@ -574,21 +570,9 @@ void RoutingPlugin::setRecenteringDisabled()
     m_adjustNavigation->setRecenter( Disabled );
 }
 
-void RoutingPlugin::setNavigationMenu( PositionProviderStatus status )
-{
-    if( status == PositionProviderStatusAvailable ) {
-        m_navigationMenu->setEnabled( true );
-    }
-    else {
-        m_navigationMenu->setEnabled( false );
-    }
-}
-
 void RoutingPlugin::setNavigationMenuDisabled( PositionProviderPlugin *activePlugin )
 {
-    if( !activePlugin ) {
-        m_navigationMenu->setEnabled( false );
-    }
+    m_navigationMenu->setEnabled( activePlugin != 0 );
 }
 
 Q_EXPORT_PLUGIN2( RoutingPlugin, Marble::RoutingPlugin )
