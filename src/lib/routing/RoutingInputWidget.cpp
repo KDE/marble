@@ -10,7 +10,6 @@
 
 #include "RoutingInputWidget.h"
 
-#include "MarbleDebug.h"
 #include "MarbleLocale.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleRunnerManager.h"
@@ -23,7 +22,6 @@
 #include <QtGui/QIcon>
 #include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
-#include <QtGui/QMovie>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
@@ -46,8 +44,6 @@ public:
 
     MarblePlacemarkModel *m_placemarkModel;
 
-    QMovie m_progress;
-
     QTimer m_progressTimer;
 
     RouteSkeleton *m_route;
@@ -60,6 +56,10 @@ public:
 
     bool m_workOffline;
 
+    QVector<QIcon> m_progressAnimation;
+
+    int m_currentFrame;
+
     /** Constructor */
     RoutingInputWidgetPrivate( RouteSkeleton *skeleton, int index, PluginManager* manager, QWidget *parent );
 
@@ -69,9 +69,9 @@ public:
 
 RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteSkeleton *skeleton, int index, PluginManager* manager, QWidget *parent ) :
         m_lineEdit( 0 ), m_runnerManager( new MarbleRunnerManager( manager, parent ) ),
-        m_placemarkModel( 0 ), m_progress( ":/data/bitmaps/progress.mng" ),
-        m_route( skeleton ), m_index( index ), m_manager( new QNetworkAccessManager( parent ) ),
-        m_workOffline( false )
+        m_placemarkModel( 0 ), m_route( skeleton ), m_index( index ),
+        m_manager( new QNetworkAccessManager( parent ) ), m_workOffline( false ),
+        m_currentFrame( 0 )
 {
     m_stateButton = new QPushButton( parent );
     m_stateButton->setToolTip( QObject::tr( "Center Map here" ) );
@@ -205,6 +205,7 @@ void RoutingInputWidget::findPlacemarks()
     } else {
         d->m_pickButton->setVisible( false );
         d->m_stateButton->setVisible( true );
+        updateProgress();
         d->m_progressTimer.start();
         d->m_runnerManager->findPlacemarks( text );
     }
@@ -239,9 +240,11 @@ void RoutingInputWidget::setMapInputModeEnabled( bool enabled )
 
 void RoutingInputWidget::updateProgress()
 {
-    d->m_progress.jumpToNextFrame();
-    QPixmap frame = d->m_progress.currentPixmap();
-    d->m_stateButton->setIcon( frame );
+    if ( !d->m_progressAnimation.isEmpty() ) {
+        d->m_currentFrame = ( d->m_currentFrame + 1 ) % d->m_progressAnimation.size();
+        QIcon frame = d->m_progressAnimation[d->m_currentFrame];
+        d->m_stateButton->setIcon( frame );
+    }
 }
 
 void RoutingInputWidget::finishSearch()
@@ -308,6 +311,11 @@ void RoutingInputWidget::retrieveReverseGeocodingResult( const GeoDataCoordinate
 {
     d->m_lineEdit->setText( placemark.address() );
     d->m_lineEdit->setCursorPosition( 0 );
+}
+
+void RoutingInputWidget::setProgressAnimation( const QVector<QIcon> &animation )
+{
+    d->m_progressAnimation = animation;
 }
 
 } // namespace Marble

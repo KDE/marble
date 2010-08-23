@@ -28,8 +28,8 @@
 #include <QtCore/QTimer>
 #include <QtGui/QFileDialog>
 #include <QtGui/QSortFilterProxyModel>
-#include <QtGui/QMovie>
 #include <QtGui/QComboBox>
+#include <QtGui/QPainter>
 
 #include "ui_RoutingWidget.h"
 
@@ -61,9 +61,11 @@ public:
 
     bool m_workOffline;
 
-    QMovie m_progress;
-
     QTimer m_progressTimer;
+
+    QVector<QIcon> m_progressAnimation;
+
+    int m_currentFrame;
 
     /** Constructor */
     RoutingWidgetPrivate();
@@ -83,14 +85,18 @@ public:
       * a runner search result or the current route
       */
     void setActiveInput( RoutingInputWidget* widget );
+
+private:
+    void createProgressAnimation();
 };
 
 RoutingWidgetPrivate::RoutingWidgetPrivate() :
         m_widget( 0 ), m_routingManager( 0 ), m_routingLayer( 0 ),
         m_activeInput( 0 ), m_inputRequest( 0 ), m_routingProxyModel( 0 ),
         m_routeSkeleton( 0 ), m_zoomRouteAfterDownload( false ),
-        m_workOffline( false ), m_progress( ":/data/bitmaps/progress.mng" )
+        m_workOffline( false ), m_currentFrame( 0 )
 {
+    createProgressAnimation();
     m_progressTimer.setInterval( 100 );
 }
 
@@ -137,6 +143,33 @@ void RoutingWidgetPrivate::setActiveInput( RoutingInputWidget *widget )
     m_ui.directionsListView->setModel( model );
     m_routingLayer->setModel( model );
     m_routingLayer->synchronizeWith( m_routingProxyModel, m_ui.directionsListView->selectionModel() );
+}
+
+void RoutingWidgetPrivate::createProgressAnimation()
+{
+    // Size parameters
+    int const iconSize = 16;
+    qreal const h = iconSize / 2.0; // Half of the icon size
+    qreal const q = h / 2.0; // Quarter of the icon size
+    qreal const d = 7.5; // Circle diameter
+    qreal const r = d / 2.0; // Circle radius
+
+    // Canvas parameters
+    QImage canvas( iconSize, iconSize, QImage::Format_ARGB32 );
+    QPainter painter( &canvas );
+    painter.setRenderHint( QPainter::Antialiasing, true );
+    painter.setPen( QColor ( Qt::gray ) );
+    painter.setBrush( QColor( Qt::white ) );
+
+    // Create all frames
+    for( double t = 0.0; t < 2 * M_PI; t += M_PI / 8.0 ) {
+        canvas.fill( Qt::transparent );
+        QRectF firstCircle( h - r + q * cos( t ), h - r + q * sin( t ), d, d );
+        QRectF secondCircle( h - r + q * cos( t + M_PI ), h - r + q * sin( t + M_PI ), d, d );
+        painter.drawEllipse( firstCircle );
+        painter.drawEllipse( secondCircle );
+        m_progressAnimation.push_back( QIcon( QPixmap::fromImage( canvas ) ) );
+    }
 }
 
 RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
@@ -337,6 +370,7 @@ void RoutingWidget::insertInputWidget( int index )
 {
     if ( index >= 0 && index <= d->m_inputWidgets.size() ) {
         RoutingInputWidget *input = new RoutingInputWidget( d->m_routeSkeleton, index, d->m_widget->model()->pluginManager(), this );
+        input->setProgressAnimation( d->m_progressAnimation );
         input->setWorkOffline( d->m_workOffline );
         d->m_inputWidgets.insert( index, input );
         connect( input, SIGNAL( searchFinished( RoutingInputWidget* ) ),
@@ -399,6 +433,7 @@ void RoutingWidget::updateRouteState( RoutingManager::State state, RouteSkeleton
     d->m_routingLayer->setRouteDirty( state == RoutingManager::Downloading );
 
     if ( state == RoutingManager::Downloading ) {
+        updateProgress();
         d->m_progressTimer.start();
     } else {
         d->m_progressTimer.stop();
@@ -479,9 +514,11 @@ void RoutingWidget::setWorkOffline( bool offline )
 
 void RoutingWidget::updateProgress()
 {
-    d->m_progress.jumpToNextFrame();
-    QPixmap frame = d->m_progress.currentPixmap();
-    d->m_ui.searchButton->setIcon( frame );
+    if ( !d->m_progressAnimation.isEmpty() ) {
+        d->m_currentFrame = ( d->m_currentFrame + 1 ) % d->m_progressAnimation.size();
+        QIcon frame = d->m_progressAnimation[d->m_currentFrame];
+        d->m_ui.searchButton->setIcon( frame );
+    }
 }
 
 void RoutingWidget::switchRoute( int index )
