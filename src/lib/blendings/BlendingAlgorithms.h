@@ -139,6 +139,12 @@ class SubtractiveBlending: public IndependentChannelBlending
 
 // Lightening blendings
 
+class AlphaBlending: public Blending
+{
+ public:
+    virtual void blend( QImage * const bottom, QSharedPointer<TextureTile> const & top ) const;
+};
+
 class AdditiveBlending: public IndependentChannelBlending
 {
     virtual qreal blendChannel( qreal const bottomColorIntensity,
