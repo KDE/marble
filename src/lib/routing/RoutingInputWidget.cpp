@@ -54,8 +54,6 @@ public:
 
     QTimer m_nominatimTimer;
 
-    bool m_workOffline;
-
     QVector<QIcon> m_progressAnimation;
 
     int m_currentFrame;
@@ -70,8 +68,7 @@ public:
 RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteSkeleton *skeleton, int index, PluginManager* manager, QWidget *parent ) :
         m_lineEdit( 0 ), m_runnerManager( new MarbleRunnerManager( manager, parent ) ),
         m_placemarkModel( 0 ), m_route( skeleton ), m_index( index ),
-        m_manager( new QNetworkAccessManager( parent ) ), m_workOffline( false ),
-        m_currentFrame( 0 )
+        m_manager( new QNetworkAccessManager( parent ) ), m_currentFrame( 0 )
 {
     m_stateButton = new QPushButton( parent );
     m_stateButton->setToolTip( QObject::tr( "Center Map here" ) );
@@ -160,7 +157,7 @@ RoutingInputWidget::~RoutingInputWidget()
 
 void RoutingInputWidget::reverseGeocoding()
 {
-    if ( d->m_workOffline || !hasTargetPosition() ) {
+    if ( !hasTargetPosition() ) {
         return;
     }
 
@@ -291,7 +288,7 @@ void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates &po
 
 void RoutingInputWidget::setWorkOffline( bool offline )
 {
-    d->m_workOffline = offline;
+    d->m_runnerManager->setWorkOffline( offline );
 }
 
 void RoutingInputWidget::clear()
