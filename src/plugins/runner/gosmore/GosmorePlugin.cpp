@@ -16,7 +16,7 @@ namespace Marble
 
 GosmorePlugin::GosmorePlugin( QObject *parent ) : RunnerPlugin( parent )
 {
-    setCapabilities( Routing );
+    setCapabilities( ReverseGeocoding | Routing );
     setSupportedCelestialBodies( QStringList() << "earth" );
     setCanWorkOffline( true );
     setName( tr( "Gosmore" ) );

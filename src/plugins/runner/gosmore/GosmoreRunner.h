@@ -33,6 +33,9 @@ public:
     // Overriding MarbleAbstractRunner
     virtual void retrieveRoute( RouteSkeleton *skeleton );
 
+    // Overriding MarbleAbstractRunner
+    virtual void reverseGeocoding( const GeoDataCoordinates &coordinates );
+
 private:
     GosmoreRunnerPrivate* const d;
 };

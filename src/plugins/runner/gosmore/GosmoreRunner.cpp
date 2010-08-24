@@ -14,6 +14,7 @@
 #include "MarbleDirs.h"
 #include "routing/RouteSkeleton.h"
 #include "GeoDataDocument.h"
+#include "GeoDataExtendedData.h"
 
 #include <QtCore/QProcess>
 #include <QtCore/QMap>
@@ -26,7 +27,7 @@ class GosmoreRunnerPrivate
 public:
     QFileInfo m_gosmoreMapFile;
 
-    GeoDataLineString retrieveWaypoints( const QString &query ) const;
+    QByteArray retrieveWaypoints( const QString &query ) const;
 
     GeoDataDocument* createDocument( GeoDataLineString* routeWaypoints ) const;
 
@@ -35,10 +36,10 @@ public:
     void merge( GeoDataLineString* one, const GeoDataLineString& two ) const;
 
     /** Static to share the cache among all instances */
-    static QMap<QString, GeoDataLineString> m_partialRoutes;
+    static QMap<QString, QByteArray> m_partialRoutes;
 };
 
-QMap<QString, GeoDataLineString> GosmoreRunnerPrivate::m_partialRoutes;
+QMap<QString, QByteArray> GosmoreRunnerPrivate::m_partialRoutes;
 
 void GosmoreRunnerPrivate::merge( GeoDataLineString* one, const GeoDataLineString& two ) const
 {
@@ -51,7 +52,7 @@ void GosmoreRunnerPrivate::merge( GeoDataLineString* one, const GeoDataLineStrin
     }
 }
 
-GeoDataLineString GosmoreRunnerPrivate::retrieveWaypoints( const QString &query ) const
+QByteArray GosmoreRunnerPrivate::retrieveWaypoints( const QString &query ) const
 {
     if ( m_partialRoutes.contains(query) ) {
         return m_partialRoutes[query];
@@ -66,18 +67,18 @@ GeoDataLineString GosmoreRunnerPrivate::retrieveWaypoints( const QString &query 
     gosmore.start("gosmore", QStringList() << m_gosmoreMapFile.absoluteFilePath() );
     if (!gosmore.waitForStarted(5000)) {
         mDebug() << "Couldn't start gosmore from the current PATH. Install it to retrieve routing results from gosmore.";
-        return GeoDataLineString();
+        return QByteArray();
     }
 
     if ( gosmore.waitForFinished(15000) ) {
-        m_partialRoutes[query] = parseGosmoreOutput( gosmore.readAllStandardOutput() );
+        m_partialRoutes[query] = gosmore.readAllStandardOutput();
         return m_partialRoutes[query];
     }
     else {
         mDebug() << "Couldn't stop gosmore";
     }
 
-    return GeoDataLineString();
+    return QByteArray();
 }
 
 GeoDataLineString GosmoreRunnerPrivate::parseGosmoreOutput( const QByteArray &content ) const
@@ -162,11 +163,39 @@ void GosmoreRunner::retrieveRoute( RouteSkeleton *route )
         double tLat = destination.latitude( GeoDataCoordinates::Degree );
         queryString = queryString.arg(tLat, 0, 'f', 8).arg(tLon, 0, 'f', 8);
 
-        d->merge( wayPoints, d->retrieveWaypoints( queryString ) );
+        d->merge( wayPoints, d->parseGosmoreOutput( d->retrieveWaypoints( queryString ) ) );
     }
 
     GeoDataDocument* result = d->createDocument( wayPoints );
     emit routeCalculated( result );
+}
+
+void GosmoreRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
+{
+    QString queryString = "flat=%1&flon=%2&tlat=%1&tlon=%2&fastest=1&v=motorcar";
+    double lon = coordinates.longitude( GeoDataCoordinates::Degree );
+    double lat = coordinates.latitude( GeoDataCoordinates::Degree );
+    queryString = queryString.arg( lat, 0, 'f', 8).arg(lon, 0, 'f', 8 );
+    QByteArray output = d->retrieveWaypoints( queryString );
+
+    GeoDataPlacemark placemark;
+    placemark.setCoordinate( GeoDataPoint( coordinates ) );
+
+    QStringList lines = QString::fromUtf8( output ).split( '\r' );
+    if ( lines.size() > 2 ) {
+        QStringList fields = lines.at( lines.size()-2 ).split(',');
+        if ( fields.size() >= 5 ) {
+            QString road = fields.last();
+            placemark.setAddress( road );
+            GeoDataExtendedData extendedData;
+            GeoDataData data;
+            data.setValue( road );
+            extendedData.addValue( "road", data );
+            placemark.setExtendedData( extendedData );
+        }
+    }
+
+    emit reverseGeocodingFinished( coordinates, placemark );
 }
 
 } // namespace Marble
