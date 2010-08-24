@@ -1,10 +1,10 @@
 [KNewStuff2]
-ProvidersUrl=http://edu.kde.org/marble/newstuff/providers.xml
+ProvidersUrl=http://edu.kde.org/marble/newstuff/providers-4.5.xml
 InstallPath=.marble/data/maps
 Uncompress=true
 
 [KNewStuff3]
-ProvidersUrl=http://edu.kde.org/marble/newstuff/providers.xml
+ProvidersUrl=http://edu.kde.org/marble/newstuff/providers-4.5.xml
 Categories=Marble,Maps
 XdgTargetDir=marble/maps
 Uncompress=archive
