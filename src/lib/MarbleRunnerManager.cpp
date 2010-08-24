@@ -27,12 +27,14 @@
 namespace Marble
 {
 
+class MarbleModel;
+
 class MarbleRunnerManagerPrivate
 {
 public:
     QString m_lastSearchTerm;
     QMutex m_modelMutex;
-    MarbleMap * m_map;
+    MarbleModel * m_marbleModel;
     MarblePlacemarkModel *m_model;
     int m_searchTasks;
     QVector<GeoDataPlacemark*> m_placemarkContainer;
@@ -50,7 +52,7 @@ public:
     QList<RunnerPlugin*> plugins( RunnerPlugin::Capability capability );
 };
 MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( PluginManager* pluginManager ) :
-        m_map( 0 ),
+        m_marbleModel( 0 ),
         m_model( new MarblePlacemarkModel ),
         m_searchTasks( 0 ),
         m_routeSkeleton( 0 ),
@@ -112,7 +114,7 @@ void MarbleRunnerManager::reverseGeocoding( const GeoDataCoordinates &coordinate
         MarbleAbstractRunner* runner = plugin->newRunner();
         connect( runner, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
                  this, SLOT( addReverseGeocodingResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
-        runner->setMap( d->m_map );
+        runner->setModel( d->m_marbleModel );
         QThreadPool::globalInstance()->start( new ReverseGeocodingTask( runner, coordinates ) );
     }
 }
@@ -140,7 +142,7 @@ void MarbleRunnerManager::findPlacemarks( const QString &searchTerm )
         MarbleAbstractRunner* runner = plugin->newRunner();
         connect( runner, SIGNAL( searchFinished( QVector<GeoDataPlacemark*> ) ),
                  this, SLOT( addSearchResult( QVector<GeoDataPlacemark*> ) ) );
-        runner->setMap( d->m_map );
+        runner->setModel( d->m_marbleModel );
         QThreadPool::globalInstance()->start( new SearchTask( runner, searchTerm ) );
     }
 }
@@ -164,10 +166,10 @@ void MarbleRunnerManager::addSearchResult( QVector<GeoDataPlacemark*> result )
     }
 }
 
-void MarbleRunnerManager::setMap( MarbleMap * map )
+void MarbleRunnerManager::setModel( MarbleModel * model )
 {
     // TODO: Terminate runners which are making use of the map.
-    d->m_map = map;
+    d->m_marbleModel = model;
 }
 
 void MarbleRunnerManager::setCelestialBodyId( const QString &celestialBodyId )
@@ -197,7 +199,7 @@ void MarbleRunnerManager::retrieveRoute( RouteSkeleton *skeleton )
         MarbleAbstractRunner* runner = plugin->newRunner();
         connect( runner, SIGNAL( routeCalculated( GeoDataDocument* ) ),
                  this, SLOT( addRoutingResult( GeoDataDocument* ) ) );
-        runner->setMap( d->m_map );
+        runner->setModel( d->m_marbleModel );
         QThreadPool::globalInstance()->start( new RoutingTask( runner, skeleton ) );
     }
 

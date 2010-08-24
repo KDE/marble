@@ -33,7 +33,6 @@
 #include "CurrentLocationWidget.h"
 #include "LegendWidget.h"
 #include "MarbleWidget.h"
-#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "FileViewModel.h"
 #include "MarblePlacemarkModel.h"
@@ -258,7 +257,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
              this,               SLOT( setLocations( MarblePlacemarkModel* ) ) );
 
     d->m_widget = widget;
-    d->m_runnerManager->setMap( d->m_widget->map() );
+    d->m_runnerManager->setModel( widget->model() );
 
     d->m_routingWidget = new RoutingWidget( widget, this );
 

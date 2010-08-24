@@ -11,7 +11,7 @@
 #include "LocalDatabaseRunner.h"
 
 #include "MarbleAbstractRunner.h"
-#include "MarbleMap.h"
+#include "MarbleModel.h"
 #include "MarblePlacemarkModel.h"
 #include "GeoDataFeature.h"
 #include "GeoDataPlacemark.h"
@@ -45,9 +45,9 @@ void LocalDatabaseRunner::search( const QString &searchTerm )
 {
     QVector<GeoDataPlacemark*> vector;
 
-    if (map()) {
+    if (model()) {
         MarblePlacemarkModel * placemarkModel =
-            qobject_cast<MarblePlacemarkModel*>( map()->placemarkModel() );
+            qobject_cast<MarblePlacemarkModel*>( model()->placemarkModel() );
 
         if (placemarkModel) {
             QModelIndexList resultList;

@@ -23,7 +23,7 @@ namespace Marble
 
 class GeoDataDocument;
 class GeoDataPlacemark;
-class MarbleMap;
+class MarbleModel;
 class MarblePlacemarkModel;
 class PluginManager;
 class RouteSkeleton;
@@ -53,7 +53,7 @@ public:
     /**
       * Set a pointer to the map instance to be passed to MarbleAbstractRunner instances
       */
-    void setMap( MarbleMap * map );
+    void setModel( MarbleModel * model );
 
     /**
       * Toggle offline mode. In offline mode, runners shall not try to access

@@ -8,7 +8,6 @@
 // Copyright 2008 Henry de Valence <hdevalence@gmail.com>
 
 #include "MarbleAbstractRunner.h"
-#include "MarbleMap.h"
 
 #include <QtCore/QThread>
 #include <QtCore/QString>
@@ -18,7 +17,7 @@ namespace Marble
 
 MarbleAbstractRunner::MarbleAbstractRunner( QObject *parent )
     : QObject( parent ),
-      m_map( 0 )
+      m_model( 0 )
 {
     // nothing to do
 }
@@ -28,14 +27,14 @@ GeoDataFeature::GeoDataVisualCategory MarbleAbstractRunner::category() const
     return GeoDataFeature::Default;
 }
 
-void MarbleAbstractRunner::setMap( MarbleMap* map )
+void MarbleAbstractRunner::setModel( MarbleModel* model )
 {
-    m_map = map;
+    m_model = model;
 }
 
-MarbleMap * MarbleAbstractRunner::map()
+MarbleModel * MarbleAbstractRunner::model()
 {
-    return m_map;
+    return m_model;
 }
 
 void MarbleAbstractRunner::search( const QString & )

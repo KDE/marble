@@ -21,7 +21,7 @@
 namespace Marble
 {
 
-class MarbleMap;
+class MarbleModel;
 class RouteSkeleton;
 
 /**
@@ -41,7 +41,7 @@ public:
     /**
       * Stores a pointer to the currently used map
       */
-    void setMap( MarbleMap * map );
+    void setModel( MarbleModel * model );
 
     /**
      * This function gives the  icon for this runner
@@ -97,10 +97,10 @@ protected:
     /**
       * Access to the currently used map, or null if no was set with @see setMap
       */
-    MarbleMap * map();
+    MarbleModel * model();
 
 private:
-    MarbleMap *m_map;
+    MarbleModel *m_model;
 };
 
 }
