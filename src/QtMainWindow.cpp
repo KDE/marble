@@ -521,7 +521,7 @@ void MainWindow::createStatusBar()
 
 void MainWindow::openMapSite()
 {
-    if( !QDesktopServices::openUrl( QUrl( "http://edu.kde.org/marble/maps.php" ) ) )
+    if( !QDesktopServices::openUrl( QUrl( "http://edu.kde.org/marble/maps-4.5.php" ) ) )
     qDebug() << "URL not opened";
 }
 
