@@ -519,12 +519,10 @@ void DownloadRegionDialog::updateTilesCount()
 
         if( tileDownloadSize > 1024 ) {
             tileDownloadSize = tileDownloadSize / 1024;
-            d->m_tileSizeInfo->setText( tr( "Estimated Download Size:" ) %
-                                          QString::number( ceil( tileDownloadSize ) ) % " MB " );
+            d->m_tileSizeInfo->setText( tr( "Estimated download size: %1 MB" ).arg( ceil( tileDownloadSize ) ) );
         }
         else {
-            d->m_tileSizeInfo->setText( tr( "Estimated Download Size:" ) %
-                                           QString::number( tileDownloadSize ) % " KB " );
+            d->m_tileSizeInfo->setText( tr( "Estimated download size: %1 kB" ).arg( tileDownloadSize ) );
         }
 
     }
