@@ -185,7 +185,7 @@ void GosmoreRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
     if ( lines.size() > 2 ) {
         QStringList fields = lines.at( lines.size()-2 ).split(',');
         if ( fields.size() >= 5 ) {
-            QString road = fields.last();
+            QString road = fields.last().trimmed();
             placemark.setAddress( road );
             GeoDataExtendedData extendedData;
             GeoDataData data;
