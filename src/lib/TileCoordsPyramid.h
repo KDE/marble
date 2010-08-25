@@ -27,7 +27,6 @@ class MARBLE_EXPORT TileCoordsPyramid
     TileCoordsPyramid( TileCoordsPyramid const & other );
     TileCoordsPyramid();
     TileCoordsPyramid & operator=( TileCoordsPyramid const & rhs );
-    TileCoordsPyramid & operator<<( TileCoordsPyramid const & other );
     ~TileCoordsPyramid();
 
     int topLevel() const;

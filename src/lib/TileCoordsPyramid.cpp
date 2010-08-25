@@ -59,12 +59,6 @@ TileCoordsPyramid & TileCoordsPyramid::operator=( TileCoordsPyramid const & rhs 
     return *this;
 }
 
-TileCoordsPyramid& TileCoordsPyramid::operator <<( TileCoordsPyramid const & other )
-{
-    *d = *other.d;
-    return *this;
-}
-
 TileCoordsPyramid::~TileCoordsPyramid()
 {
     delete d;
