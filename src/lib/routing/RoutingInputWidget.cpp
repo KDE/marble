@@ -219,7 +219,6 @@ void RoutingInputWidget::findPlacemarks()
     } else {
         d->m_pickButton->setVisible( false );
         d->m_stateButton->setVisible( true );
-        updateProgress();
         d->m_progressTimer.start();
         d->m_runnerManager->newText( text );
     }
