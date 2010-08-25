@@ -154,7 +154,7 @@ QPixmap RouteSkeleton::pixmap( int position ) const
     QPainter painter( &result );
     painter.setRenderHint( QPainter::Antialiasing, true );
     painter.setPen( QColor( Qt::black ) );
-    painter.setBrush( QBrush( QColor::fromRgb( 55, 164, 44 ) ) );  // green, oxygen palette
+    painter.setBrush( QBrush( oxygenForestGreen4 ) );
     painter.drawEllipse( 1, 1, 13, 13 );
     painter.setBrush( QColor( Qt::black ) );
 

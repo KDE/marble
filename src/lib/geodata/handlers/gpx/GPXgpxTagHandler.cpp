@@ -29,6 +29,7 @@
 #include "GeoDataDocument.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "global.h"
 
 namespace Marble
 {
@@ -42,7 +43,7 @@ GeoNode* GPXgpxTagHandler::parse(GeoParser& parser) const
 
     GeoDataStyle style;
     GeoDataLineStyle lineStyle;
-    lineStyle.setColor(QColor("#37A42C")); // Oxygen green
+    lineStyle.setColor( oxygenForestGreen4 );
     lineStyle.setWidth(2);
     style.setLineStyle(lineStyle);
     style.setStyleId("track");

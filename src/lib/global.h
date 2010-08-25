@@ -16,6 +16,7 @@
 #include <math.h>
 
 #include <QtCore/QString>
+#include <QtGui/QColor>
 
 #include "marble_export.h"
 
@@ -218,6 +219,18 @@ const qreal SEC2MIN = 1.0 / MIN2SEC;
 //Conversion hour vs second
 const qreal HOUR2SEC = 3600.0;
 const qreal SEC2HOUR = 1.0 / HOUR2SEC;
+
+// Colors taken from the oxygen palette
+// When extending, please use the names and rgb values as defined in
+// http://websvn.kde.org/*checkout*/trunk/playground/artwork/Oxygen/utils/oxygen.gpl
+QColor const oxygenBrownOrange4 = QColor::fromRgb( 191, 94, 0 );
+QColor const oxygenAluminumGray4 = QColor::fromRgb( 136, 138, 133 );
+QColor const oxygenSkyBlue4 = QColor::fromRgb( 0, 87, 174 );
+QColor const oxygenSunYellow6 = QColor::fromRgb( 227, 173, 0 );
+QColor const oxygenSeaBlue2 = QColor::fromRgb( 0, 196, 204 );
+QColor const oxygenHotOrange4 = QColor::fromRgb( 236, 115, 49 );
+QColor const oxygenBrickRed4 = QColor::fromRgb( 226, 8, 0 );
+QColor const oxygenForestGreen4 = QColor::fromRgb( 55, 164, 44 );
 
 // Version definitions to use with an external application (as digiKam)
 

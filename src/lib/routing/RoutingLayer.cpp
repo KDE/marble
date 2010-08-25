@@ -39,17 +39,6 @@
 namespace Marble
 {
 
-namespace
-{
-    QColor const oxygenBrown = QColor::fromRgb( 204, 51, 0 );
-    QColor const oxygenGray = QColor::fromRgb( 136, 138, 133, 200 );
-    QColor const oxygenBlue = QColor::fromRgb( 0, 87, 174, 200 );
-    QColor const oxygenYellow = QColor::fromRgb( 227, 173, 0 );
-    QColor const oxygenBrightBlue = QColor::fromRgb( 102, 255, 255, 200 );
-    QColor const oxygenOrange = QColor::fromRgb( 236, 115, 49, 200 );
-    QColor const oxygenRed = QColor::fromRgb( 226, 8, 0, 200 );
-}
-
 class RoutingLayerPrivate
 {
     template<class T>
@@ -132,6 +121,9 @@ public:
     // The following methods are mostly only called at one place in the code, but often
     // Inlined to avoid the function call overhead. Having functions here is just to
     // keep the code clean
+
+    /** Returns the same color as the given one with its alpha channel adjusted to the given value */
+    inline QColor alphaAdjusted( const QColor &color, int alpha ) const;
 
     /**
       * Returns the start or destination position if Ctrl key is among the
@@ -240,7 +232,7 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
 {
     m_alternativeRouteRegions.clear();
 
-    QPen grayPen( oxygenGray );
+    QPen grayPen( alphaAdjusted( oxygenAluminumGray4, 200 ) );
     grayPen.setWidth( 5 );
     painter->setPen( grayPen );
 
@@ -270,7 +262,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         }
     }
 
-    QPen bluePen( oxygenBlue );
+    QPen bluePen( alphaAdjusted( oxygenSkyBlue4, 200 ) );
     bluePen.setWidth( 5 );
     if ( m_routeDirty ) {
         bluePen.setStyle( Qt::DotLine );
@@ -282,7 +274,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
     bluePen.setWidth( 2 );
     painter->setPen( bluePen );
-    painter->setBrush( QBrush( oxygenGray ) );
+    painter->setBrush( QBrush( alphaAdjusted( oxygenAluminumGray4, 200 ) ) );
 
     if ( !m_dropStopOver.isNull() ) {
         int dx = 1 + m_pixmapSize.width() / 2;
@@ -319,16 +311,16 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
         if ( type == RoutingModel::Instruction ) {
 
-            painter->setBrush( QBrush( oxygenGray ) );
+            painter->setBrush( QBrush( alphaAdjusted( oxygenAluminumGray4, 200 ) ) );
             QModelIndex proxyIndex = m_proxyModel->mapFromSource( index );
             if ( m_selectionModel->selection().contains( proxyIndex ) ) {
                 painter->setPen( QColor( Qt::black ) );
-                painter->setBrush( QBrush( oxygenYellow ) );
+                painter->setBrush( QBrush( oxygenSunYellow6 ) );
                 painter->drawAnnotation( pos, index.data().toString(), QSize( 120, 60 ), 10, 30, 15, 15 );
 
                 GeoDataLineString currentRoutePoints = qVariantValue<GeoDataLineString>( index.data( RoutingModel::InstructionWayPointRole ) );
 
-                QPen brightBluePen( oxygenBrightBlue );
+                QPen brightBluePen( alphaAdjusted( oxygenSeaBlue2, 200 ) );
 
                 brightBluePen.setWidth( 6 );
                 if ( m_routeDirty ) {
@@ -339,7 +331,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
                 painter->drawPolyline( currentRoutePoints );
 
                 painter->setPen( bluePen );
-                painter->setBrush( QBrush( oxygenOrange ) );
+                painter->setBrush( QBrush( alphaAdjusted( oxygenHotOrange4, 200 ) ) );
             }
 
             QRegion region = painter->regionFromEllipse( pos, 12, 12 );
@@ -348,7 +340,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
         } else if ( !m_routeDirty && type == RoutingModel::Error ) {
             painter->setPen( QColor( Qt::white ) );
-            painter->setBrush( QBrush( oxygenRed ) );
+            painter->setBrush( QBrush( alphaAdjusted( oxygenBrickRed4, 200 ) ) );
             painter->drawAnnotation( pos, index.data().toString(), QSize( 180, 80 ), 10, 30, 15, 15 );
         }
 
@@ -358,10 +350,10 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
             GeoDataCoordinates location = m_routingModel->instructionPoint();
             QString nextInstruction = m_routingModel->instructionText();
             if( timeRemaining < thresholdMinimum && !nextInstruction.isEmpty() ) {
-                painter->setBrush( QBrush( oxygenBrown ) );
+                painter->setBrush( QBrush( oxygenBrownOrange4 ) );
                 painter->drawEllipse( location, 20, 20 );
             } else {
-                painter->setBrush( QBrush( oxygenYellow ) );
+                painter->setBrush( QBrush( oxygenSunYellow6 ) );
                 painter->drawEllipse( location, 12, 12 );
             }
         }
@@ -393,6 +385,13 @@ void RoutingLayerPrivate::storeDragPosition( const QPoint &pos )
         GeoDataCoordinates waypoint( lon, lat );
         m_dragStopOverRightIndex = m_routingModel->rightNeighbor( waypoint, m_routeSkeleton );
     }
+}
+
+QColor RoutingLayerPrivate::alphaAdjusted( const QColor &color, int alpha ) const
+{
+    QColor result( color );
+    result.setAlpha( alpha );
+    return result;
 }
 
 bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
