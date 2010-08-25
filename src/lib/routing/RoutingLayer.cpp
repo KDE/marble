@@ -39,6 +39,17 @@
 namespace Marble
 {
 
+namespace
+{
+    QColor const oxygenBrown = QColor::fromRgb( 204, 51, 0 );
+    QColor const oxygenGray = QColor::fromRgb( 136, 138, 133, 200 );
+    QColor const oxygenBlue = QColor::fromRgb( 0, 87, 174, 200 );
+    QColor const oxygenYellow = QColor::fromRgb( 227, 173, 0 );
+    QColor const oxygenBrightBlue = QColor::fromRgb( 102, 255, 255, 200 );
+    QColor const oxygenOrange = QColor::fromRgb( 236, 115, 49, 200 );
+    QColor const oxygenRed = QColor::fromRgb( 226, 8, 0, 200 );
+}
+
 class RoutingLayerPrivate
 {
     template<class T>
@@ -229,7 +240,7 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
 {
     m_alternativeRouteRegions.clear();
 
-    QPen grayPen( QColor::fromRgb( 136, 138, 133, 200 ) ); // gray, oxygen palette
+    QPen grayPen( oxygenGray );
     grayPen.setWidth( 5 );
     painter->setPen( grayPen );
 
@@ -259,7 +270,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         }
     }
 
-    QPen bluePen( QColor::fromRgb( 0, 87, 174, 200 ) ); // blue, oxygen palette
+    QPen bluePen( oxygenBlue );
     bluePen.setWidth( 5 );
     if ( m_routeDirty ) {
         bluePen.setStyle( Qt::DotLine );
@@ -271,7 +282,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
     bluePen.setWidth( 2 );
     painter->setPen( bluePen );
-    painter->setBrush( QBrush( QColor::fromRgb( 136, 138, 133, 200 ) ) ); // gray, oxygen palette
+    painter->setBrush( QBrush( oxygenGray ) );
 
     if ( !m_dropStopOver.isNull() ) {
         int dx = 1 + m_pixmapSize.width() / 2;
@@ -308,16 +319,16 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
         if ( type == RoutingModel::Instruction ) {
 
-            painter->setBrush( QBrush( QColor::fromRgb( 136, 138, 133, 200 ) ) ); // gray, oxygen palette
+            painter->setBrush( QBrush( oxygenGray ) );
             QModelIndex proxyIndex = m_proxyModel->mapFromSource( index );
             if ( m_selectionModel->selection().contains( proxyIndex ) ) {
                 painter->setPen( QColor( Qt::black ) );
-                painter->setBrush( QBrush( QColor::fromRgb( 227, 173, 0, 200 ) ) ); // yellow, oxygen palette
+                painter->setBrush( QBrush( oxygenYellow ) );
                 painter->drawAnnotation( pos, index.data().toString(), QSize( 120, 60 ), 10, 30, 15, 15 );
 
                 GeoDataLineString currentRoutePoints = qVariantValue<GeoDataLineString>( index.data( RoutingModel::InstructionWayPointRole ) );
 
-                QPen brightBluePen( QColor::fromRgb( 102, 255, 255, 200 ) ); // bright blue, oxygen palette
+                QPen brightBluePen( oxygenBrightBlue );
 
                 brightBluePen.setWidth( 6 );
                 if ( m_routeDirty ) {
@@ -328,7 +339,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
                 painter->drawPolyline( currentRoutePoints );
 
                 painter->setPen( bluePen );
-                painter->setBrush( QBrush( QColor::fromRgb( 236, 115, 49, 200 ) ) ); // orange, oxygen palette
+                painter->setBrush( QBrush( oxygenOrange ) );
             }
 
             QRegion region = painter->regionFromEllipse( pos, 12, 12 );
@@ -337,7 +348,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
 
         } else if ( !m_routeDirty && type == RoutingModel::Error ) {
             painter->setPen( QColor( Qt::white ) );
-            painter->setBrush( QBrush( QColor::fromRgb( 226, 8, 0, 200 ) ) ); // red, oxygen palette
+            painter->setBrush( QBrush( oxygenRed ) );
             painter->drawAnnotation( pos, index.data().toString(), QSize( 180, 80 ), 10, 30, 15, 15 );
         }
 
@@ -345,14 +356,13 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
             qreal timeRemaining = m_routingModel->remainingTime();
             qreal thresholdMinimum = 3.0;
             GeoDataCoordinates location = m_routingModel->instructionPoint();
-            painter->setBrush( QBrush( QColor::fromRgb( 227, 173, 0, 200 ) ) ); //yellow, oxygen palette
-            painter->drawEllipse( location, 12, 12 );
-            if( timeRemaining < thresholdMinimum ) {
-                QString nextInstruction = m_routingModel->instructionText();
-                if( !nextInstruction.isNull() ) {
-                    painter->setBrush( QBrush( QColor::fromRgb( 204, 51, 0, 200 ) ) ); // brown, oxygen palette
-                    painter->drawEllipse( location, 20, 20 );
-                }
+            QString nextInstruction = m_routingModel->instructionText();
+            if( timeRemaining < thresholdMinimum && !nextInstruction.isEmpty() ) {
+                painter->setBrush( QBrush( oxygenBrown ) );
+                painter->drawEllipse( location, 20, 20 );
+            } else {
+                painter->setBrush( QBrush( oxygenYellow ) );
+                painter->drawEllipse( location, 12, 12 );
             }
         }
     }
