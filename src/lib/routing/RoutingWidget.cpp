@@ -433,7 +433,6 @@ void RoutingWidget::updateRouteState( RoutingManager::State state, RouteSkeleton
     d->m_routingLayer->setRouteDirty( state == RoutingManager::Downloading );
 
     if ( state == RoutingManager::Downloading ) {
-        updateProgress();
         d->m_progressTimer.start();
     } else {
         d->m_progressTimer.stop();
