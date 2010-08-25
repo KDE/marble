@@ -184,7 +184,7 @@ void MarbleRunnerManager::setWorkOffline( bool offline )
 
 void MarbleRunnerManager::addReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark )
 {
-    if ( !d->m_reverseGeocodingResults.contains( coordinates ) ) {
+    if ( !d->m_reverseGeocodingResults.contains( coordinates ) && !placemark.address().isEmpty() ) {
         d->m_reverseGeocodingResults.push_back( coordinates );
         emit reverseGeocodingFinished( coordinates, placemark );
     }
