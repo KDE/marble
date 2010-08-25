@@ -104,6 +104,8 @@ class MainWindow : public QMainWindow
     void  connectDownloadRegionDialog();
     void  disconnectDownloadRegionDialog();
     void  downloadRegion();
+    
+    void  setMapTitle();
 
  private:
     ControlView *m_controlView;

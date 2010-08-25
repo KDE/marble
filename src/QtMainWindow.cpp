@@ -39,6 +39,10 @@
 
 #include <QtNetwork/QNetworkProxy>
 
+// GeoData
+#include <GeoSceneDocument.h>
+#include <GeoSceneHead.h>
+
 #include "MarbleDirs.h"
 #include "MarbleAboutDialog.h"
 #include "QtMarbleConfigDialog.h"
@@ -75,7 +79,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
 
     m_controlView = new ControlView( this );
 
-    setWindowTitle( tr("Marble - Desktop Globe") );
+    setMapTitle();
     setWindowIcon( QIcon(":/icons/marble.png") );
     setCentralWidget( m_controlView );
     
@@ -98,6 +102,10 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
     m_distance = marbleWidget()->distanceString();
 
     QTimer::singleShot( 0, this, SLOT( initObject() ) );
+
+    
+    connect( marbleWidget(), SIGNAL( themeChanged( QString ) ), 
+         this, SLOT( setMapTitle() ) );
 }
 
 void MainWindow::initObject()
@@ -928,6 +936,18 @@ void MainWindow::downloadRegion()
     mDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
     TileCoordsPyramid const pyramid = m_downloadRegionDialog->region();
     m_controlView->marbleWidget()->map()->model()->downloadRegion( sourceDir, pyramid );
+}
+
+void MainWindow::setMapTitle()
+{
+    QString documentTitle;
+    
+    GeoSceneDocument *mapTheme = marbleWidget()->mapTheme();
+    if ( mapTheme ) {
+        documentTitle = tr( mapTheme->head()->name().toLatin1() );
+    }
+    
+    setWindowTitle( documentTitle + "  -  " + tr("Marble - Desktop Globe") );
 }
 
 #include "QtMainWindow.moc"
