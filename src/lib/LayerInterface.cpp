@@ -18,4 +18,11 @@ LayerInterface::~LayerInterface()
     // nothing to do
 }
 
+
+qreal LayerInterface::zValue() const
+{
+    return 0.0;
+}
+
+
 } // namespace Marble

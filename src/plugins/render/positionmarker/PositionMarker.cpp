@@ -151,6 +151,7 @@ bool PositionMarker::render( GeoPainter *painter,
         }
         update();
         painter->save();
+        painter->autoMapQuality();
         painter->setPen( Qt::black );
         painter->setBrush( Qt::white );
         painter->drawPolygon( m_arrow );
@@ -168,6 +169,11 @@ void PositionMarker::setPosition( const GeoDataCoordinates &position )
     {
         emit repaintNeeded( m_dirtyRegion );
     }
+}
+
+qreal PositionMarker::zValue() const
+{
+    return 1.0;
 }
 
 }

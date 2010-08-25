@@ -56,6 +56,12 @@ public:
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
        const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 ) = 0;
 
+    /**
+      * @brief Returns the z value of the layer (default: 0.0). If two layers are painted
+      * at the same render position, the one with the higher z value is painted on top.
+      * If both have the same z value, their paint order is undefined.
+      */
+    virtual qreal zValue() const;
 };
 
 } // namespace Marble

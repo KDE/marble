@@ -55,6 +55,9 @@ class PositionMarker  : public RenderPlugin
 
     void update();
 
+    // Overriding LayerInterface to paint on top of the route
+    virtual qreal zValue() const;
+
  public slots:
     void setPosition( const GeoDataCoordinates &position );
 

@@ -33,6 +33,16 @@
 namespace Marble
 {
 
+/**
+  * Returns true if the zValue of one is lower than that of two. Null must not be passed
+  * as parameter.
+  */
+bool zValueLessThan( const LayerInterface * const one, const LayerInterface * const two )
+{
+    Q_ASSERT( one && two );
+    return one->zValue() < two->zValue();
+}
+
 class LayerManagerPrivate
 {
  public:
@@ -137,6 +147,8 @@ void LayerManager::renderLayer( GeoPainter *painter, ViewParams *viewParams,
 
     ViewportParams* viewport = viewParams->viewport();
 
+    QList<LayerInterface*> layers;
+
     foreach( RenderPlugin *renderPlugin, d->m_renderPlugins ) {
         if ( renderPlugin && renderPlugin->renderPosition().contains( renderPosition )  ){
             if ( renderPlugin->enabled() && renderPlugin->visible() ) {
@@ -145,15 +157,20 @@ void LayerManager::renderLayer( GeoPainter *painter, ViewParams *viewParams,
                     renderPlugin->initialize();
                     emit renderPluginInitialized( renderPlugin );
                 }
-                renderPlugin->render( painter, viewport, renderPosition );
+                layers.push_back( renderPlugin );
             }
         }
     }
 
-    foreach( LayerInterface *layer, d->m_internalLayers) {
-        if ( layer && layer->renderPosition().contains( renderPosition )) {
-            layer->render(painter, viewport, renderPosition);
+    foreach( LayerInterface *layer, d->m_internalLayers ) {
+        if ( layer && layer->renderPosition().contains( renderPosition ) ) {
+            layers.push_back( layer );
         }
+    }
+
+    qSort( layers.begin(), layers.end(), zValueLessThan );
+    foreach( LayerInterface *layer, layers ) {
+        layer->render( painter, viewport, renderPosition );
     }
 }
 
