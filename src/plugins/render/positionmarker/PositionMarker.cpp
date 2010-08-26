@@ -19,7 +19,7 @@
 #include "AbstractProjection.h"
 #include "MarbleDataFacade.h"
 #include "GeoPainter.h"
-#include "gps/PositionTracking.h"
+#include "PositionTracking.h"
 #include "ViewportParams.h"
 
 namespace Marble

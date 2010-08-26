@@ -20,6 +20,7 @@
 #include "FileManager.h"
 #include "MarbleMath.h"
 #include "MarbleDebug.h"
+#include "PositionProviderPlugin.h"
 
 using namespace Marble;
 

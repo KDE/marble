@@ -13,7 +13,7 @@
 
 #include "MarbleWidget.h"
 #include "GeoDataCoordinates.h"
-#include "gps/PositionTracking.h"
+#include "PositionTracking.h"
 #include "MarbleDebug.h"
 #include "MarbleModel.h"
 #include "ViewportParams.h"

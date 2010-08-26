@@ -145,7 +145,7 @@ set(marblewidget_SRCS
     FileManager.cpp
     FileViewModel.cpp
     KmlFileViewItem.cpp
-    gps/PositionTracking.cpp
+    PositionTracking.cpp
     DataMigration.cpp
 
     AbstractDataPlugin.cpp
@@ -317,6 +317,7 @@ else (APPLE AND QTONLY)
     Projections/SphericalProjection.h
     Projections/EquirectProjection.h
     Projections/MercatorProjection.h
+    PositionTracking.h
     Quaternion.h
     SunLocator.h
     ClipPainter.h

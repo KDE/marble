@@ -20,7 +20,7 @@
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
 #include "RouteSkeleton.h"
-#include "gps/PositionTracking.h"
+#include "PositionTracking.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"

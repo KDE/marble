@@ -54,7 +54,6 @@
 #include "TextureColorizer.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
-#include "gps/PositionTracking.h"
 
 using namespace Marble;
 

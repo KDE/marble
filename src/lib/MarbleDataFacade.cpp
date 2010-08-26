@@ -28,6 +28,7 @@
 #include "PluginManager.h"
 #include "GeoDataTreeModel.h"
 #include "GeoDataParser.h"
+#include "PositionTracking.h"
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"

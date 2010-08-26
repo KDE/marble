@@ -22,7 +22,7 @@
 #include "GeoDataCoordinates.h"
 #include "PositionProviderPlugin.h"
 #include "PluginManager.h"
-#include "gps/PositionTracking.h"
+#include "PositionTracking.h"
 #include "routing/RoutingManager.h"
 
 using namespace Marble;

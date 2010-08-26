@@ -20,7 +20,6 @@
 #include "MarbleWidgetPopupMenu.h"
 #include "RoutingModel.h"
 #include "RouteSkeleton.h"
-#include "gps/PositionTracking.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "AlternativeRoutesModel.h"

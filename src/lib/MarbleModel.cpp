@@ -51,7 +51,7 @@
 #include "SphericalScanlineTextureMapper.h"
 #include "EquirectScanlineTextureMapper.h"
 #include "MercatorScanlineTextureMapper.h"
-#include "gps/PositionTracking.h"
+#include "PositionTracking.h"
 #include "HttpDownloadManager.h"
 #include "LayerManager.h"
 #include "MarbleDataFacade.h"

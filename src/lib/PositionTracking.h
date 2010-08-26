@@ -13,24 +13,21 @@
 #ifndef MARBLE_POSITIONTRACKING_H
 #define MARBLE_POSITIONTRACKING_H
 
-#include "PositionProviderPlugin.h"
+#include "marble_export.h"
+#include "PositionProviderPluginInterface.h"
 
-#include <QtGui/QRegion>
-#include <QtGui/QPolygonF>
 #include <QtCore/QObject>
-#include <QtCore/QTemporaryFile>
-#include <QtNetwork/QHttp>
 
 namespace Marble
 {
 
+class FileManager;
+class GeoDataAccuracy;
 class GeoDataDocument;
 class GeoDataCoordinates;
-class FileManager;
-class PluginManager;
+class PositionProviderPlugin;
 
-
-class PositionTracking : public QObject
+class MARBLE_EXPORT PositionTracking : public QObject
 {
     Q_OBJECT
 

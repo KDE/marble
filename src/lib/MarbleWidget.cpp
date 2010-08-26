@@ -46,7 +46,6 @@
 #include "SunLocator.h"
 #include "TileCreatorDialog.h"
 #include "ViewportParams.h"
-#include "gps/PositionTracking.h"
 #include "BookmarkManager.h"
 namespace Marble
 {
