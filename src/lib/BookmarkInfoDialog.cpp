@@ -58,7 +58,7 @@ BookmarkInfoDialog::~BookmarkInfoDialog()
 
 void BookmarkInfoDialog::retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark)
 {
-    
+    Q_UNUSED(coordinates)
     GeoDataExtendedData extended = placemark.extendedData();
     QString bookmarkName = "";
     qreal distance = m_widget->distance() * KM2METER;        

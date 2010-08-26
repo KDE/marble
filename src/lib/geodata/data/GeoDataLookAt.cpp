@@ -45,12 +45,12 @@ GeoDataLookAt::~GeoDataLookAt()
 
 void GeoDataLookAt::setCoordinates( const GeoDataCoordinates& coordinates )
 {
-        d->m_coordinates = coordinates;
+    d->m_coordinates = coordinates;
 }
 
 QString GeoDataLookAt::nodeType() const
 {
-        return d->nodeType();
+    return GeoDataTypes::GeoDataLookAtType;
 }
 
 void GeoDataLookAt::setAltitude( qreal altitude )

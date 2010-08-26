@@ -32,11 +32,6 @@ class GeoDataLookAtPrivate
     {
     }
     
-    virtual QString nodeType() const
-    {
-        return GeoDataTypes::GeoDataLookAtType;
-    }
-
     GeoDataCoordinates m_coordinates;
     qreal m_range;
 

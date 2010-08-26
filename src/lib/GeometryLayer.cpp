@@ -66,6 +66,9 @@ QStringList GeometryLayer::renderPosition() const
 bool GeometryLayer::render( GeoPainter *painter, ViewportParams *viewport,
    const QString& renderPos, GeoSceneLayer * layer )
 {
+    Q_UNUSED(viewport)
+    Q_UNUSED(renderPos)
+    Q_UNUSED(layer)
 //    QTime t;
 //    t.start();
 //    mDebug() << "rendering " << m_root;
