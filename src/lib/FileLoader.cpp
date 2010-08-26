@@ -281,6 +281,7 @@ bool FileLoader::loadFile( const QString &filename )
         m_document->append( mark );
     }
 
+    m_document->setVisible( false );
     return true;
 }
 
