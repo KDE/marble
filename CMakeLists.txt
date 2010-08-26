@@ -227,7 +227,7 @@ ADD_CUSTOM_TARGET(svnversion
 
 
 #############################################################
-if (not MSVC)
+if (NOT MSVC)
     # Its good programming practice to build with no warnings...
     add_definitions( -Wall -Wextra -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Wno-long-long
                      -Wchar-subscripts -Wcast-align -Wpointer-arith -Wformat-security )
@@ -236,7 +236,7 @@ if (not MSVC)
     if (PEDANTIC)
         add_definitions( -Werror )
     endif (PEDANTIC)
-endif (not MSVC)
+endif (NOT MSVC)
 
 #############################################################
 # Add a compiler def so that we can conditionally compile
