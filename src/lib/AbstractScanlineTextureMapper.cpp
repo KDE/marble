@@ -59,7 +59,6 @@ AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture *t
 
 AbstractScanlineTextureMapper::~AbstractScanlineTextureMapper()
 {
-      m_tileLoader->disconnect();
 }
 
 
