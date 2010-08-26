@@ -22,27 +22,73 @@
 #include "MarbleDebug.h"
 #include "PositionProviderPlugin.h"
 
+#include "PositionTracking_p.h"
+
 using namespace Marble;
+
+void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
+                                           GeoDataAccuracy accuracy )
+{
+    Q_UNUSED( accuracy );
+    if ( m_positionProvider && m_positionProvider->status() ==
+        PositionProviderStatusAvailable )
+    {
+        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(m_document->child(m_document->size()-1));
+        GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
+        m_currentLineString->append(position);
+
+        //if the position has moved then update the current position
+        if ( !( m_gpsCurrentPosition ==
+                position ) )
+        {
+            placemark = static_cast<GeoDataPlacemark*>(m_document->child(0));
+            placemark->setCoordinate(position);
+            m_gpsCurrentPosition = position;
+            qreal speed = m_positionProvider->speed();
+            emit gpsLocation( position, speed );
+        }
+    }
+}
+
+
+void PositionTrackingPrivate::setStatus( PositionProviderStatus status )
+{
+    if (status == PositionProviderStatusAvailable) {
+        Q_ASSERT(m_document);
+        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(m_document->child(m_document->size()-1));
+        GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
+        m_currentLineString = new GeoDataLineString;
+        multiGeometry->append(m_currentLineString);
+    }
+
+    emit statusChanged( status );
+}
 
 PositionTracking::PositionTracking( FileManager *fileManager,
                           QObject *parent )
-     : QObject( parent ), m_fileManager(fileManager), m_positionProvider(0)
+     : QObject( parent ), d (new PositionTrackingPrivate(fileManager, parent))
 {
-    m_document     = new GeoDataDocument();
-    m_document->setName("Position Tracking");
+
+    connect( d, SIGNAL( gpsLocation(GeoDataCoordinates,qreal) ),
+             this, SIGNAL( gpsLocation(GeoDataCoordinates,qreal) ));
+    connect( d, SIGNAL( statusChanged(PositionProviderStatus)),
+             this, SIGNAL( statusChanged(PositionProviderStatus) ) );
+
+    d->m_document     = new GeoDataDocument();
+    d->m_document->setName("Position Tracking");
 
     // First point is current position
     GeoDataPlacemark *placemark = new GeoDataPlacemark;
     placemark->setName("Current Position");
     placemark->setVisible(false);
-    m_document->append(placemark);
+    d->m_document->append(placemark);
 
     // Second point is position track
     placemark = new GeoDataPlacemark;
     GeoDataMultiGeometry *multiGeometry = new GeoDataMultiGeometry;
-    GeoDataLineString *lineString = new GeoDataLineString;
+    d->m_currentLineString = new GeoDataLineString;
 
-    multiGeometry->append(lineString);
+    multiGeometry->append(d->m_currentLineString);
     placemark->setGeometry(multiGeometry);
     placemark->setName("Current Track");
 
@@ -56,94 +102,79 @@ PositionTracking::PositionTracking( FileManager *fileManager,
     GeoDataStyleMap styleMap;
     styleMap.setStyleId("map-track");
     styleMap.insert("normal", QString("#").append(style.styleId()));
-    m_document->addStyleMap(styleMap);
-    m_document->addStyle(style);
+    d->m_document->addStyleMap(styleMap);
+    d->m_document->addStyle(style);
 
     placemark->setStyleUrl(QString("#").append(styleMap.styleId()));
-    m_document->append(placemark);
+    d->m_document->append(placemark);
 
-    m_fileManager->addGeoDataDocument(m_document);
+    d->m_fileManager->addGeoDataDocument(d->m_document);
 }
 
 
 PositionTracking::~PositionTracking()
 {
-}
-
-void PositionTracking::setPosition( GeoDataCoordinates position,
-                                    GeoDataAccuracy accuracy )
-{
-    Q_UNUSED( accuracy );
-    if ( m_positionProvider && m_positionProvider->status() ==
-        PositionProviderStatusAvailable )
-    {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(m_document->child(m_document->size()-1));
-        GeoDataMultiGeometry *geometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
-        GeoDataLineString *lineString = static_cast<GeoDataLineString*>(geometry->child(geometry->size()-1));
-        lineString->append(position);
-
-        //if the position has moved then update the current position
-        if ( !( m_gpsCurrentPosition ==
-                position ) )
-        {
-            placemark = static_cast<GeoDataPlacemark*>(m_document->child(0));
-            placemark->setCoordinate(position);
-            m_gpsCurrentPosition = position;
-            emit gpsLocation( position, speed() );
-        }
-    }
-}
-
-
-void PositionTracking::setStatus( PositionProviderStatus status )
-{
-    if (status == PositionProviderStatusAvailable) {
-        GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>( m_document->child(m_document->size()-1 ) );
-        GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>( placemark->geometry() );
-        GeoDataLineString *lineString = new GeoDataLineString;
-        multiGeometry->append( lineString );
-    }
-
-    emit statusChanged( status );
+    delete d;
 }
 
 void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin )
 {
-    if ( m_positionProvider ) {
-        m_positionProvider->deleteLater();
+    if ( d->m_positionProvider ) {
+        d->m_positionProvider->deleteLater();
     }
 
-    m_positionProvider = plugin;
+    d->m_positionProvider = plugin;
 
-    if ( m_positionProvider ) {
-        m_positionProvider->setParent( this );
-        mDebug() << "Initializing position provider:" << m_positionProvider->name();
-        connect( m_positionProvider, SIGNAL( statusChanged( PositionProviderStatus ) ),
-                this, SLOT( setStatus(PositionProviderStatus) ) );
-        connect( m_positionProvider, SIGNAL( positionChanged( GeoDataCoordinates,GeoDataAccuracy ) ),
-                 this, SLOT( setPosition( GeoDataCoordinates,GeoDataAccuracy ) ) );
+    if ( d->m_positionProvider ) {
+        d->m_positionProvider->setParent( this );
+        mDebug() << "Initializing position provider:" << d->m_positionProvider->name();
+        connect( d->m_positionProvider, SIGNAL( statusChanged( PositionProviderStatus ) ),
+                d, SLOT( setStatus(PositionProviderStatus) ) );
+        connect( d->m_positionProvider, SIGNAL( positionChanged( GeoDataCoordinates,GeoDataAccuracy ) ),
+                 d, SLOT( setPosition( GeoDataCoordinates,GeoDataAccuracy ) ) );
 
-        m_positionProvider->initialize();
+        d->m_positionProvider->initialize();
     }
     emit positionProviderPluginChanged( plugin );
 }
 
 QString PositionTracking::error() const
 {
-    return m_positionProvider ? m_positionProvider->error() : QString();
+    return d->m_positionProvider ? d->m_positionProvider->error() : QString();
 }
 
 
 //get speed from provider
 qreal PositionTracking::speed() const
 {
-    return m_positionProvider ? m_positionProvider->speed() : 0 ;
+    return d->m_positionProvider ? d->m_positionProvider->speed() : 0 ;
 }
 
 //get direction from provider
 qreal PositionTracking::direction() const
 {
-    return m_positionProvider ? m_positionProvider->direction() : 0 ;
+    return d->m_positionProvider ? d->m_positionProvider->direction() : 0 ;
+}
+
+bool PositionTracking::trackVisible() const
+{
+    return d->m_document->isVisible();
+}
+
+void PositionTracking::setTrackVisible( bool visible )
+{
+    d->m_document->setVisible( visible );
+}
+
+void PositionTracking::clearTrack()
+{
+    GeoDataPlacemark *placemark = static_cast<GeoDataPlacemark*>(d->m_document->child(d->m_document->size()-1));
+    GeoDataMultiGeometry *multiGeometry = static_cast<GeoDataMultiGeometry*>(placemark->geometry());
+    d->m_currentLineString = new GeoDataLineString;
+    multiGeometry->clear();
+    multiGeometry->append(d->m_currentLineString);
+
 }
 
 #include "PositionTracking.moc"
+#include "PositionTracking_p.moc"

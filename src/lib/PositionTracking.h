@@ -26,6 +26,7 @@ class GeoDataAccuracy;
 class GeoDataDocument;
 class GeoDataCoordinates;
 class PositionProviderPlugin;
+class PositionTrackingPrivate;
 
 class MARBLE_EXPORT PositionTracking : public QObject
 {
@@ -43,6 +44,9 @@ public:
       */
     void setPositionProviderPlugin( PositionProviderPlugin* plugin );
 
+    /**
+      * @brief gives the error message from the current position provider
+      */
     QString error() const;
 
     /**
@@ -55,6 +59,22 @@ public:
      */
     qreal direction() const;
 
+    /**
+     * @brief provides the visibility of the Position Tracking document
+     */
+    bool trackVisible() const;
+
+public Q_SLOTS:
+    /**
+      * Toggles the visibility of the Position Tracking document
+      */
+    void setTrackVisible ( bool visible );
+
+    /**
+      * Removes all track segments which were recorded
+      */
+    void clearTrack();
+
 Q_SIGNALS:
     void  gpsLocation( GeoDataCoordinates, qreal );
 
@@ -66,21 +86,8 @@ Q_SIGNALS:
 
     void positionProviderPluginChanged( PositionProviderPlugin *activePlugin );
 
-public slots:
-    void setPosition( GeoDataCoordinates position,
-                          GeoDataAccuracy accuracy );
-
-    void setStatus( PositionProviderStatus status );
-
  private:
-
-    GeoDataDocument     *m_document;
-    FileManager         *m_fileManager;
-
-    GeoDataCoordinates  m_gpsCurrentPosition;
-    GeoDataCoordinates  m_gpsPreviousPosition;
-
-    PositionProviderPlugin* m_positionProvider;
+    PositionTrackingPrivate *d;
 };
 
 }
