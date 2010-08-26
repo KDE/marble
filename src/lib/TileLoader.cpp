@@ -32,6 +32,7 @@ namespace Marble
 TileLoader::TileLoader( MapThemeManager const * const mapThemeManager,
                         HttpDownloadManager * const downloadManager )
 {
+    Q_UNUSED( mapThemeManager )
     connect( this, SIGNAL( downloadTile( QUrl, QString, QString, DownloadUsage )),
              downloadManager, SLOT( addJob( QUrl, QString, QString, DownloadUsage )));
     connect( downloadManager, SIGNAL( downloadComplete( QByteArray, QString )),

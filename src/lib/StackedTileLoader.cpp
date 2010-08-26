@@ -117,7 +117,7 @@ StackedTileLoader::~StackedTileLoader()
     delete d;
 }
 
-void StackedTileLoader::setDownloadManager( HttpDownloadManager *downloadManager )
+void StackedTileLoader::setDownloadManager( HttpDownloadManager * )
 {
 }
 
@@ -389,6 +389,7 @@ void StackedTileLoader::setVolatileCacheLimit( quint64 kiloBytes )
 
 void StackedTileLoader::updateTile( TileId const & stackedTileId, TileId const & tileId )
 {
+    Q_UNUSED(tileId)
     StackedTile * const displayedTile = d->m_tilesOnDisplay.value( stackedTileId, 0 );
     if ( displayedTile ) {
         displayedTile->deriveCompletionState();

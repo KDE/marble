@@ -177,8 +177,10 @@ void DownloadQueueSet::deactivateJob( HttpJob * const job )
 {
     const bool disconnected = job->disconnect();
     Q_ASSERT( disconnected );
+    Q_UNUSED( disconnected ) // for release mode
     const bool removed = m_activeJobs.removeOne( job );
     Q_ASSERT( removed );
+    Q_UNUSED( removed ) // for release mode
 }
 
 bool DownloadQueueSet::jobIsActive( QString const & destinationFileName ) const
@@ -238,6 +240,7 @@ inline HttpJob * DownloadQueueSet::JobStack::pop()
     HttpJob * const job = m_jobs.pop();
     bool const removed = m_jobsContent.remove( job->destinationFileName() );
     Q_ASSERT( removed );
+    Q_UNUSED( removed ) // for release mode
     return job;
 }
 
