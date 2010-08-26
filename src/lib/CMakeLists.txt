@@ -28,7 +28,7 @@ INCLUDE(${QT_USE_FILE})
 INCLUDE(geodata/CMakeLists.txt)
 INCLUDE(graphicsview/CMakeLists.txt)
 
-set(GENERIC_LIB_VERSION "0.10.0")
+set(GENERIC_LIB_VERSION "0.10.1")
 set(GENERIC_LIB_SOVERSION "10")
 
 if (QTONLY)
