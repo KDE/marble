@@ -20,6 +20,8 @@ namespace Marble
 class RoutinoPlugin : public RunnerPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::RunnerPlugin )
+
 public:
     explicit RoutinoPlugin( QObject *parent = 0 );
 

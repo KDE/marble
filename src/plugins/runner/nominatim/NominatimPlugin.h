@@ -20,6 +20,8 @@ namespace Marble
 class NominatimPlugin : public RunnerPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::RunnerPlugin )
+
 public:
     explicit NominatimPlugin( QObject *parent = 0 );
 

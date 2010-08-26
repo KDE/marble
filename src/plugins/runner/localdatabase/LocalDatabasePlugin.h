@@ -20,6 +20,8 @@ namespace Marble
 class LocalDatabasePlugin : public RunnerPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::RunnerPlugin )
+
 public:
     explicit LocalDatabasePlugin(QObject *parent = 0);
 

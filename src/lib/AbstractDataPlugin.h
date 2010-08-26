@@ -40,7 +40,6 @@ class PluginManager;
 class MARBLE_EXPORT AbstractDataPlugin : public RenderPlugin
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RenderPluginInterface )
     
  public:    
     AbstractDataPlugin();

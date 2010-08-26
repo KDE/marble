@@ -20,6 +20,7 @@ namespace Marble
 class HostipPlugin : public RunnerPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::RunnerPlugin )
 
 public:
     explicit HostipPlugin( QObject *parent = 0 );

@@ -20,6 +20,7 @@ namespace Marble
 class NameFinderPlugin : public RunnerPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::RunnerPlugin )
 
 public:
     explicit NameFinderPlugin( QObject *parent = 0 );

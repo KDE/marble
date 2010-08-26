@@ -20,6 +20,8 @@ namespace Marble
 class LatLonPlugin : public RunnerPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::RunnerPlugin )
+
 public:
     explicit LatLonPlugin( QObject *parent = 0 );
 

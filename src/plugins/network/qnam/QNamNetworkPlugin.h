@@ -20,6 +20,7 @@ namespace Marble
 class QNamNetworkPlugin: public NetworkPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::NetworkPluginInterface )
 
  public:
     QNamNetworkPlugin();

@@ -26,8 +26,6 @@ class MARBLE_EXPORT RunnerPlugin : public QObject, public PluginInterface
 {
     Q_OBJECT
 
-    Q_INTERFACES( Marble::PluginInterface )
-
 public:
     enum Capability {
         None = 0x0, // The plugin is useless
@@ -103,5 +101,7 @@ private:
 }
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Marble::RunnerPlugin::Capabilities)
+
+Q_DECLARE_INTERFACE( Marble::RunnerPlugin, "org.kde.Marble.RunnerPlugin/1.00" )
 
 #endif // MARBLE_RUNNERPLUGIN_H

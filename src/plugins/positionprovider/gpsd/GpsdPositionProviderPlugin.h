@@ -25,6 +25,7 @@ class GpsdThread;
 class GpsdPositionProviderPlugin: public PositionProviderPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
  public:
     GpsdPositionProviderPlugin();

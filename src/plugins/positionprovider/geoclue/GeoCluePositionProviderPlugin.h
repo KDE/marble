@@ -29,6 +29,7 @@ namespace Marble
 class GeoCluePositionProviderPlugin: public PositionProviderPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
  public:
     GeoCluePositionProviderPlugin();

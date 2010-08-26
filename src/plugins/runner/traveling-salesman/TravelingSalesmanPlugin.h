@@ -20,6 +20,8 @@ namespace Marble
 class TravelingSalesmanPlugin : public RunnerPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::RunnerPlugin )
+
 public:
     explicit TravelingSalesmanPlugin( QObject *parent = 0 );
 

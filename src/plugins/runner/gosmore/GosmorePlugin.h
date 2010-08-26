@@ -20,6 +20,8 @@ namespace Marble
 class GosmorePlugin : public RunnerPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::RunnerPlugin )
+
 public:
     explicit GosmorePlugin( QObject *parent = 0 );
 

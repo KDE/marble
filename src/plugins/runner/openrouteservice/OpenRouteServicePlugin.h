@@ -20,6 +20,8 @@ namespace Marble
 class OpenRouteServicePlugin : public RunnerPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::RunnerPlugin )
+
 public:
     explicit OpenRouteServicePlugin( QObject *parent = 0 );
 

@@ -39,7 +39,6 @@ class MarbleDataFacade;
 class MARBLE_EXPORT RenderPlugin : public QObject, public RenderPluginInterface
 {
     Q_OBJECT
-    Q_INTERFACES( Marble::RenderPluginInterface )
 
  public:
     /**
