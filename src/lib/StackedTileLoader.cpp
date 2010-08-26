@@ -466,15 +466,15 @@ void StackedTileLoader::updateTextureLayers()
             continue;
         }
 
-        uint hash = qHash( mapThemeId );
-        if ( d->m_sceneLayers.contains( hash ) ) {
+        uint const mapThemeIdHash = qHash( mapThemeId );
+        if ( d->m_sceneLayers.contains( mapThemeIdHash ) ) {
             mDebug() << "StackedTileLoader::updateTextureLayers:"
-                     << hash << mapThemeId
+                     << mapThemeIdHash << mapThemeId
                      << "already exists";
             continue;
         }
 
-        d->m_sceneLayers.insert( qHash( mapThemeId ), sceneLayer );
+        d->m_sceneLayers.insert( mapThemeIdHash, sceneLayer );
 
         // find all texture layers
         QVector<GeoSceneAbstractDataset *> layers = sceneLayer->datasets();
