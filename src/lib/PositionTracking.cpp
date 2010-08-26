@@ -94,8 +94,10 @@ PositionTracking::PositionTracking( FileManager *fileManager,
 
     GeoDataStyle style;
     GeoDataLineStyle lineStyle;
-    lineStyle.setColor( oxygenBrickRed4 );
-    lineStyle.setWidth(2);
+    QColor transparentRed = oxygenBrickRed4;
+    transparentRed.setAlpha( 200 );
+    lineStyle.setColor( transparentRed );
+    lineStyle.setWidth( 4 );
     style.setLineStyle(lineStyle);
     style.setStyleId("track");
 
