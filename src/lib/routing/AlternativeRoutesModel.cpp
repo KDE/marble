@@ -331,7 +331,7 @@ void AlternativeRoutesModel::addRoute( GeoDataDocument* document )
         // First
         int responseTime = d->m_responseTime.elapsed();
         d->m_restrainedRoutes.push_back( document );
-        int timeout = qMax<int>(1000,  responseTime * 2);
+        int timeout = qMin<int>( 2000, qMax<int>( 500,  responseTime * 2 ) );
         QTimer::singleShot( timeout, this, SLOT( addRestrainedRoutes() ) );
         return;
     } else if ( d->m_routes.isEmpty() && !d->m_restrainedRoutes.isEmpty() ) {
