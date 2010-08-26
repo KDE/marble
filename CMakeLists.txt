@@ -227,14 +227,16 @@ ADD_CUSTOM_TARGET(svnversion
 
 
 #############################################################
-# In pedantic mode, enable warnings, halt compile on warnings
-# Its good programming practice to build with no warnings....
-if (PEDANTIC)
-  ADD_DEFINITIONS( -W -Wall -Werror -Wundef
-                   -Wnon-virtual-dtor -Woverloaded-virtual
-                   -Wno-long-long -Wchar-subscripts
-                   -Wcast-align -Wpointer-arith -Wformat-security )
-endif (PEDANTIC)
+if (not MSVC)
+    # Its good programming practice to build with no warnings...
+    add_definitions( -Wall -Wextra -Wundef -Wnon-virtual-dtor -Woverloaded-virtual -Wno-long-long
+                     -Wchar-subscripts -Wcast-align -Wpointer-arith -Wformat-security )
+
+    # In pedantic mode, treat warnings as errors
+    if (PEDANTIC)
+        add_definitions( -Werror )
+    endif (PEDANTIC)
+endif (not MSVC)
 
 #############################################################
 # Add a compiler def so that we can conditionally compile
