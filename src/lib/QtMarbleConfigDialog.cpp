@@ -557,7 +557,8 @@ bool QtMarbleConfigDialog::animateTargetVoyage() const
 
 int QtMarbleConfigDialog::volatileTileCacheLimit() const
 {
-    return d->m_settings->value( "Cache/volatileTileCacheLimit", 30 ).toInt();
+    int defaultValue = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 6 : 30;
+    return d->m_settings->value( "Cache/volatileTileCacheLimit", defaultValue ).toInt();
 }
 
 int QtMarbleConfigDialog::persistentTileCacheLimit() const
