@@ -21,6 +21,7 @@ class MaemoPositionProviderPluginPrivate;
 class MaemoPositionProviderPlugin: public PositionProviderPlugin
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::PositionProviderPluginInterface )
 
 public:
     MaemoPositionProviderPlugin();

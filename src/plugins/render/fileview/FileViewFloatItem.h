@@ -31,6 +31,7 @@ class MarbleWidget;
 class FileViewFloatItem: public AbstractFloatItem
 {
     Q_OBJECT
+    Q_INTERFACES( Marble::RenderPluginInterface )
     MARBLE_PLUGIN(FileViewFloatItem)
 
  public:
