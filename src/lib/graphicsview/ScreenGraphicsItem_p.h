@@ -12,12 +12,11 @@
 #define MARBLE_SCREENGRAPHICSITEMPRIVATE_H
 
 #include "MarbleGraphicsItem_p.h"
+#include "MarbleDebug.h"
 
 #include "GeoGraphicsItem.h"
 #include "ScreenGraphicsItem.h"
 #include "ViewportParams.h"
-
-#include <QtCore/QDebug>
 
 namespace Marble
 {
@@ -51,7 +50,9 @@ class ScreenGraphicsItemPrivate : public MarbleGraphicsItemPrivate
     QPointF positivePosition() const
     {
         if ( !m_parentSize.isValid() ) {
-            qDebug() << "Invalid parent size";
+            if ( m_parent ) {
+                mDebug() << "Invalid parent size";
+            }
             return m_position;
         }
         QPointF position;
