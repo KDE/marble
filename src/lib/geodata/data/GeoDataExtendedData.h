@@ -77,6 +77,11 @@ class GEODATA_EXPORT GeoDataExtendedData : public GeoDataObject
     bool isEmpty( ) const;
 
     /**
+      * @brief Returns true if there exists a value for the given key
+      */
+    bool contains( const QString &key ) const;
+
+    /**
      * @brief return value of GeoDataExtendedData object associated with the given @p key as a modifiable reference
      */
     GeoDataData& valueRef( const QString& key ) const;

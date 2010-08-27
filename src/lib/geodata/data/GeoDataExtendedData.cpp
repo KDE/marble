@@ -78,6 +78,12 @@ bool GeoDataExtendedData::isEmpty( ) const
 {
     return d->hash.empty();
 }
+
+bool GeoDataExtendedData::contains( const QString &key ) const
+{
+    return d->hash.contains( key );
+}
+
 void GeoDataExtendedData::pack( QDataStream& stream ) const
 {
     GeoDataObject::pack( stream );
