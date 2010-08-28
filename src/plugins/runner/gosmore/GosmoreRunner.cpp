@@ -172,6 +172,12 @@ void GosmoreRunner::retrieveRoute( RouteSkeleton *route )
 
 void GosmoreRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
 {
+    if ( !d->m_gosmoreMapFile.exists() )
+    {
+        emit reverseGeocodingFinished( coordinates, GeoDataPlacemark() );
+        return;
+    }
+
     QString queryString = "flat=%1&flon=%2&tlat=%1&tlon=%2&fastest=1&v=motorcar";
     double lon = coordinates.longitude( GeoDataCoordinates::Degree );
     double lat = coordinates.latitude( GeoDataCoordinates::Degree );
