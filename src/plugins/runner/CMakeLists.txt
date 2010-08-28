@@ -9,6 +9,11 @@ add_subdirectory( nominatim )
 add_subdirectory( gosmore )
 add_subdirectory( openrouteservice )
 add_subdirectory( routino )
+
 # traveling-salesman works, but it is quite slow (tested version 1.0.3-RC1)
 #add_subdirectory( traveling-salesman )
+
+# monav works, but you need a custom shell client
+#add_subdirectory( monav )
+
 add_subdirectory( yours )
