@@ -82,7 +82,7 @@ GeoDataLineString* RoutinoRunnerPrivate::retrieveWaypoints( const QStringList &p
         return 0;
     }
 
-    if ( routinoProcess.waitForFinished(15000) ) {
+    if ( routinoProcess.waitForFinished(60 * 1000) ) {
         mDebug() << routinoProcess.readAll();
         mDebug() << "routino finished";
         QFile file( routinoProcess.workingDirectory() + "/shortest-all.txt" );
