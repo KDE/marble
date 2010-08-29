@@ -40,6 +40,7 @@
 #include "AbstractDataPluginItem.h"
 #include "MeasureTool.h"
 #include "MarbleWidgetPopupMenu.h"
+#include "AbstractProjection.h"
 #include "Planet.h"
 
 using namespace Marble;
@@ -236,7 +237,7 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
     ViewportParams* now = marbleWidget->viewport();
 
     qreal x(0), y(0);
-    if (!now->screenCoordinates(destLon, destLat, x, y)) {
+    if (!now->currentProjection()->screenCoordinates(destLon, destLat, now, x, y)) {
         return;
     }
 
@@ -249,7 +250,7 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
     soon.setRadius( newRadius );
 
     qreal mouseLon, mouseLat;
-    if (!soon.geoCoordinates(int(x), int(y), mouseLon, mouseLat, GeoDataCoordinates::Radian )) {
+    if (!soon.currentProjection()->geoCoordinates(int(x), int(y), &soon, mouseLon, mouseLat, GeoDataCoordinates::Radian )) {
         return;
     }
 

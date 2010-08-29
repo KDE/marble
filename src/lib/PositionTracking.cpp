@@ -16,6 +16,7 @@
 #include "GeoDataPlacemark.h"
 #include "GeoDataStyle.h"
 #include "GeoDataStyleMap.h"
+#include "AbstractProjection.h"
 #include "FileManager.h"
 #include "MarbleMath.h"
 #include "MarbleDebug.h"

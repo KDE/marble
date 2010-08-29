@@ -12,6 +12,7 @@
 #include "AbstractDataPluginItem.h"
 
 // Marble
+#include "AbstractProjection.h"
 #include "GeoDataCoordinates.h"
 #include "ViewportParams.h"
 #include "MarbleDebug.h"

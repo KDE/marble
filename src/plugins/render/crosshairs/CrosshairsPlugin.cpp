@@ -10,6 +10,7 @@
 
 #include "CrosshairsPlugin.h"
 
+#include "AbstractProjection.h"
 #include "MarbleDebug.h"
 #include "GeoPainter.h"
 
@@ -82,7 +83,7 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
         GeoDataCoordinates focusPoint = viewport->focusPoint();
         if (!viewport->focusPointIsCenter()) {
-            viewport->screenCoordinates(focusPoint, centerx, centery);
+            viewport->currentProjection()->screenCoordinates(focusPoint, viewport, centerx, centery);
         }
 
         painter->save();

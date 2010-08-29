@@ -27,9 +27,6 @@
 #include "global.h"
 #include "marble_export.h"
 
-class QPolygonF;
-class QRegion;
-
 namespace Marble
 {
 
@@ -55,8 +52,6 @@ class MARBLE_EXPORT ViewportParams
     int polarity() const;
 
     GeoDataLatLonAltBox viewLatLonAltBox() const;
-
-    GeoDataLatLonAltBox latLonAltBox( const QRect &rect ) const;
 
     // Calculates an educated guess for the average angle in radians covered per pixel.
     // Given a certain resolution it doesn't make much sense
@@ -103,82 +98,7 @@ class MARBLE_EXPORT ViewportParams
     // Other functions
     void centerCoordinates( qreal &centerLon, qreal &centerLat ) const;
 
-    /**
-     * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
-     * @param lon    the lon coordinate of the requested pixel position in radians
-     * @param lat    the lat coordinate of the requested pixel position in radians
-     * @param x      the x coordinate of the pixel is returned through this parameter
-     * @param y      the y coordinate of the pixel is returned through this parameter
-     * @return @c true  if the geographical coordinates are visible on the screen
-     *         @c false if the geographical coordinates are not visible on the screen
-     */
-    bool screenCoordinates( const qreal lon, const qreal lat,
-                            qreal &x, qreal &y ) const;
-
-    /**
-     * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
-     *
-     * @param geopoint the point on earth, including altitude, that we want the coordinates for.
-     * @param x      the x coordinate of the pixel is returned through this parameter
-     * @param y      the y coordinate of the pixel is returned through this parameter
-     * @param globeHidesPoint  whether the point gets hidden on the far side of the earth
-     *
-     * @return @c true  if the geographical coordinates are visible on the screen
-     *         @c false if the geographical coordinates are not visible on the screen
-     */
-    bool screenCoordinates( const GeoDataCoordinates &geopoint,
-                            qreal &x, qreal &y,
-                            bool &globeHidesPoint ) const;
-
-    bool screenCoordinates( const GeoDataCoordinates &geopoint,
-                            qreal &x, qreal &y ) const;
-
-    bool screenCoordinates( const GeoDataCoordinates &geopoint,
-                            QPointF &screenpoint ) const;
-
-    /**
-     * @brief Get the coordinates of screen points for geographical coordinates in the map.
-     *
-     * @param coordinates the point on earth, including altitude, that we want the coordinates for.
-     * @param x      the x coordinates of the pixels are returned through this parameter
-     * @param y      the y coordinate of the pixel is returned through this parameter
-     * @param pointRepeatNum      the amount of times that a single geographical
-                                  point gets represented on the map
-     * @param globeHidesPoint  whether the point gets hidden on the far side of the earth
-     *
-     * @return @c true  if the geographical coordinates are visible on the screen
-     *         @c false if the geographical coordinates are not visible on the screen
-     */
-    bool screenCoordinates( const GeoDataCoordinates &coordinates,
-                            qreal *x, qreal &y, int &pointRepeatNum,
-                            bool &globeHidesPoint ) const;
-
-    bool screenCoordinates( const GeoDataCoordinates &coordinates,
-                            qreal *x, qreal &y, int &pointRepeatNum,
-                            const QSizeF &size,
-                            bool &globeHidesPoint ) const;
-
-
-    bool screenCoordinates( const GeoDataLineString &lineString,
-                            QVector<QPolygonF*> &polygons ) const;
-
-   /**
-     * @brief Get the earth coordinates corresponding to a pixel in the map.
-     * @param x      the x coordinate of the pixel
-     * @param y      the y coordinate of the pixel
-     * @param lon    the longitude angle is returned through this parameter
-     * @param lat    the latitude angle is returned through this parameter
-     * @param unit   the unit of the angles for lon and lat.
-     * @return @c true  if the pixel (x, y) is within the globe
-     *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
-     */
-    bool geoCoordinates( int x, int y,
-                         qreal &lon, qreal &lat,
-                         GeoDataCoordinates::Unit = GeoDataCoordinates::Degree ) const;
-
     bool  mapCoversViewport() const;
-
-    QRegion mapRegion() const;
 
     QRegion activeRegion() const;
 

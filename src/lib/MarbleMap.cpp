@@ -32,6 +32,7 @@
 
 // Marble
 #include "AbstractFloatItem.h"
+#include "AbstractProjection.h"
 #include "AbstractScanlineTextureMapper.h"
 #include "GeoDataFeature.h"
 #include "GeoDataLatLonAltBox.h"
@@ -859,8 +860,9 @@ QPoint MarbleMap::southPolePosition() const
 bool MarbleMap::screenCoordinates( qreal lon, qreal lat,
                                    qreal& x, qreal& y ) const
 {
-    return d->m_viewParams.viewport()
+    return d->m_viewParams.currentProjection()
         ->screenCoordinates( lon * DEG2RAD, lat * DEG2RAD,
+                             d->m_viewParams.viewport(),
                              x, y );
 }
 
@@ -868,8 +870,9 @@ bool MarbleMap::geoCoordinates( int x, int y,
                                 qreal& lon, qreal& lat,
                                 GeoDataCoordinates::Unit unit ) const
 {
-    return d->m_viewParams.viewport()
-        ->geoCoordinates( x, y, lon, lat, unit );
+    return d->m_viewParams.currentProjection()
+        ->geoCoordinates( x, y, d->m_viewParams.viewport(),
+                          lon, lat, unit );
 }
 
 // Used to be paintEvent()

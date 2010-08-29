@@ -28,6 +28,7 @@
 #include <QtDBus/QDBusConnection>
 #endif
 
+#include "AbstractProjection.h"
 #include "DataMigration.h"
 #include "FileViewModel.h"
 #include "GeoDataLatLonAltBox.h"
@@ -778,7 +779,7 @@ QRegion MarbleWidget::activeRegion()
 
 QRegion MarbleWidget::mapRegion()
 {
-    return d->m_map->viewport()->mapRegion();
+    return d->m_map->viewport()->currentProjection()->mapRegion( d->m_map->viewport() );
 }
 
 void MarbleWidget::paintEvent( QPaintEvent *evt )
@@ -1200,7 +1201,8 @@ void MarbleWidget::setSelection( const QRect& region )
     mDebug() << "Selection region: (" << tl.x() << ", " <<  tl.y() << ") (" 
              << br.x() << ", " << br.y() << ")" << endl;
 
-    GeoDataLatLonAltBox box = d->m_map->viewport()->latLonAltBox( region );
+    AbstractProjection *proj = d->m_map->viewport()->currentProjection();
+    GeoDataLatLonAltBox box  = proj->latLonAltBox( region, d->m_map->viewport() );
 
     // NOTE: coordinates as lon1, lat1, lon2, lat2 (or West, North, East, South)
     // as left/top, right/bottom rectangle.

@@ -32,6 +32,7 @@
 #include "MarbleDirs.h"
 #include "ViewParams.h"
 #include "ViewportParams.h"
+#include "AbstractProjection.h"
 #include "VisiblePlacemark.h"
 #include "MathHelper.h"
 
@@ -259,7 +260,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         GeoDataCoordinates geopoint = qvariant_cast<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
 
         if ( !latLonAltBox.contains( geopoint ) ||
-             ! viewParams->viewport()->screenCoordinates( geopoint, x, y ))
+             ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
             {
                 delete m_visiblePlacemarks.take( index );
                 continue;
@@ -365,7 +366,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
         GeoDataCoordinates geopoint = qvariant_cast<GeoDataCoordinates>( index.data( MarblePlacemarkModel::CoordinateRole ) );
 
         if ( !latLonAltBox.contains( geopoint ) ||
-             ! viewParams->viewport()->screenCoordinates( geopoint, x, y ))
+             ! viewParams->currentProjection()->screenCoordinates( geopoint, viewParams->viewport(), x, y ))
             {
                 delete m_visiblePlacemarks.take( index );
                 continue;

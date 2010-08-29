@@ -51,6 +51,7 @@
 #include "GeoPainter.h"
 #include "LatLonEdit.h"
 #include "ViewportParams.h"
+#include "AbstractProjection.h"
 
 namespace Marble
 {
@@ -230,8 +231,8 @@ void WorldClock::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 QString WorldClock::getZone()
 {
     qreal lat, lon;
-    bool ok = m_map->viewport()->geoCoordinates(
-                m_hover.x(), m_hover.y(), lon, lat );
+    bool ok = m_map->viewport()->currentProjection()->geoCoordinates(
+                m_hover.x(), m_hover.y(), m_map->viewport(), lon, lat );
 
     QString timezone;
     if( !ok ) {
@@ -368,7 +369,8 @@ void WorldClock::paintInterface(QPainter *p,
     qreal tzy = 0;
     qreal lon = m_locations.value(m_locationkey).longitude() * DEG2RAD;
     qreal lat = m_locations.value(m_locationkey).latitude() * DEG2RAD;
-    bool ok = m_map->viewport()->screenCoordinates(lon, lat, tzx, tzy);
+    bool ok = m_map->viewport()->currentProjection()
+              ->screenCoordinates(lon, lat, m_map->viewport(), tzx, tzy);
     if ( ok /*&& m_isHovered*/ ) {
         QPoint tz( tzx, tzy );
         tz += m_t;

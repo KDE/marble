@@ -26,6 +26,7 @@
 #include "MarbleMath.h"
 #include "MarbleModel.h"
 #include "MarbleLocale.h"
+#include "AbstractProjection.h"
 #include "GeoPainter.h"
 #include "Planet.h"
 #include "ViewportParams.h"
@@ -95,7 +96,7 @@ void MeasureTool::drawMeasurePoints( GeoPainter *painter,
         bool globeHidesPoint = false;
         qreal * x  = new qreal[100];
 
-        bool visible = viewport->screenCoordinates( GeoDataCoordinates( lon, lat ), x, y, pointRepeatNum, globeHidesPoint );
+        bool visible = viewport->currentProjection()->screenCoordinates( GeoDataCoordinates( lon, lat ), viewport, x, y, pointRepeatNum, globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
