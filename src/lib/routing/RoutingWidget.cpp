@@ -67,6 +67,8 @@ public:
 
     int m_currentFrame;
 
+    int m_iconSize;
+
     /** Constructor */
     RoutingWidgetPrivate();
 
@@ -94,10 +96,14 @@ RoutingWidgetPrivate::RoutingWidgetPrivate() :
         m_widget( 0 ), m_routingManager( 0 ), m_routingLayer( 0 ),
         m_activeInput( 0 ), m_inputRequest( 0 ), m_routingProxyModel( 0 ),
         m_routeSkeleton( 0 ), m_zoomRouteAfterDownload( false ),
-        m_workOffline( false ), m_currentFrame( 0 )
+        m_workOffline( false ), m_currentFrame( 0 ),
+        m_iconSize( 16 )
 {
     createProgressAnimation();
     m_progressTimer.setInterval( 100 );
+    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        m_iconSize = 32;
+    }
 }
 
 void RoutingWidgetPrivate::adjustInputWidgets()
@@ -148,14 +154,13 @@ void RoutingWidgetPrivate::setActiveInput( RoutingInputWidget *widget )
 void RoutingWidgetPrivate::createProgressAnimation()
 {
     // Size parameters
-    int const iconSize = 16;
-    qreal const h = iconSize / 2.0; // Half of the icon size
+    qreal const h = m_iconSize / 2.0; // Half of the icon size
     qreal const q = h / 2.0; // Quarter of the icon size
     qreal const d = 7.5; // Circle diameter
     qreal const r = d / 2.0; // Circle radius
 
     // Canvas parameters
-    QImage canvas( iconSize, iconSize, QImage::Format_ARGB32 );
+    QImage canvas( m_iconSize, m_iconSize, QImage::Format_ARGB32 );
     QPainter painter( &canvas );
     painter.setRenderHint( QPainter::Antialiasing, true );
     painter.setPen( QColor ( Qt::gray ) );

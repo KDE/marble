@@ -70,12 +70,16 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteSkeleton *skeleton, i
         m_placemarkModel( 0 ), m_route( skeleton ), m_index( index ),
         m_manager( new QNetworkAccessManager( parent ) ), m_currentFrame( 0 )
 {
+    bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    int const iconSize = smallScreen ? 32 : 16;
+
     m_stateButton = new QPushButton( parent );
     m_stateButton->setToolTip( QObject::tr( "Center Map here" ) );
     m_stateButton->setVisible( false );
     m_stateButton->setIcon( QIcon( m_route->pixmap( m_index ) ) );
     m_stateButton->setFlat( true );
-    m_stateButton->setMaximumWidth( 22 );
+    m_stateButton->setMaximumWidth( iconSize + 6 );
+    m_stateButton->setIconSize( QSize( iconSize, iconSize ) );
     m_stateButton->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
 
     m_lineEdit = new QLineEdit( parent );
@@ -91,8 +95,9 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteSkeleton *skeleton, i
     m_pickButton->setToolTip( QObject::tr( "Choose position from the map" ) );
     m_pickButton->setCheckable( true );
     m_pickButton->setFlat( true );
-    m_pickButton->setMaximumWidth( 22 );
+    m_pickButton->setMaximumWidth( iconSize + 6 );
     m_pickButton->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
+    m_pickButton->setIconSize( QSize( iconSize, iconSize ) );
 
     m_progressTimer.setInterval( 100 );
     m_nominatimTimer.setInterval( 1000 );

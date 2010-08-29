@@ -180,6 +180,9 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
     QAction *exportAction = new QAction( QObject::tr( "&Export route..." ), q );
     QObject::connect( exportAction, SIGNAL( triggered() ), q, SIGNAL( exportRequested() ) );
     m_contextMenu->addAction( Qt::RightButton, exportAction );
+    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        m_pixmapSize = QSize( 38, 38 );
+    }
 
 }
 
@@ -544,8 +547,8 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
             // Repaint only that region of the map that is affected by the change
             m_dragStopOverRightIndex = viaInsertPosition( e->modifiers() );
             QRect dirty = m_routeRegion.boundingRect();
-            dirty |= QRect( m_dropStopOver, QSize( 22, 22 ) );
-            dirty |= QRect( e->pos(), QSize( 22, 22 ) );
+            dirty |= QRect( m_dropStopOver, m_pixmapSize );
+            dirty |= QRect( e->pos(), m_pixmapSize );
             if ( e->buttons() & Qt::LeftButton ) {
                 m_dropStopOver = e->pos();
             } else {

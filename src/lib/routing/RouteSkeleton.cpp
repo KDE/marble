@@ -147,7 +147,9 @@ QPixmap RouteSkeleton::pixmap( int position ) const
     }
 
     // Transparent background
-    QImage result( 16, 16, QImage::Format_ARGB32_Premultiplied );
+    bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    int const iconSize = smallScreen ? 32 : 16;
+    QImage result( iconSize, iconSize, QImage::Format_ARGB32_Premultiplied );
     result.fill( qRgba( 0, 0, 0, 0 ) );
 
     // Paint a green circle
@@ -155,7 +157,7 @@ QPixmap RouteSkeleton::pixmap( int position ) const
     painter.setRenderHint( QPainter::Antialiasing, true );
     painter.setPen( QColor( Qt::black ) );
     painter.setBrush( QBrush( oxygenForestGreen4 ) );
-    painter.drawEllipse( 1, 1, 13, 13 );
+    painter.drawEllipse( 1, 1, iconSize-2, iconSize-2 );
     painter.setBrush( QColor( Qt::black ) );
 
     char text = char( 'A' + position );
@@ -167,7 +169,7 @@ QPixmap RouteSkeleton::pixmap( int position ) const
         while ( d->m_fontSize-- > 0 ) {
             font.setPointSize( d->m_fontSize );
             QFontMetrics fontMetric( font );
-            if ( fontMetric.width( text ) <= 12 && fontMetric.height( ) <= 12 ) {
+            if ( fontMetric.width( text ) <= iconSize-3 && fontMetric.height( ) <= iconSize-3 ) {
                 break;
             }
         }
@@ -179,7 +181,7 @@ QPixmap RouteSkeleton::pixmap( int position ) const
     painter.setFont( font );
 
     // Paint a character denoting the position (0=A, 1=B, 2=C, ...)
-    painter.drawText( 2, 2, 12, 12, Qt::AlignCenter, QString( text ) );
+    painter.drawText( 2, 2, iconSize-3, iconSize-3, Qt::AlignCenter, QString( text ) );
 
     d->m_pixmapCache.insert( position, QPixmap::fromImage( result ) );
     return pixmap( position );
