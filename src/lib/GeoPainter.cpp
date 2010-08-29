@@ -15,7 +15,6 @@
 #include <QtGui/QPainterPath>
 #include <QtGui/QRegion>
 
-#include "AbstractProjection.h"
 #include "MarbleDebug.h"
 
 #include "GeoDataCoordinates.h"
@@ -46,17 +45,13 @@ GeoPainterPrivate::~GeoPainterPrivate()
 void GeoPainterPrivate::createPolygonsFromLineString( const GeoDataLineString & lineString,
                                                       QVector<QPolygonF *> &polygons )
 {
-    AbstractProjection *projection = m_viewport->currentProjection();
-
-    projection->screenCoordinates( lineString, m_viewport, polygons );
+    m_viewport->screenCoordinates( lineString, polygons );
 }
 
 void GeoPainterPrivate::createPolygonsFromLinearRing( const GeoDataLinearRing & linearRing,
                                                       QVector<QPolygonF *> &polygons )
 {
-    AbstractProjection *projection = m_viewport->currentProjection();
-
-    projection->screenCoordinates( linearRing, m_viewport, polygons );
+    m_viewport->screenCoordinates( linearRing, polygons );
 }
 
 void GeoPainterPrivate::createAnnotationLayout (  qreal x, qreal y,
@@ -217,9 +212,8 @@ void GeoPainter::drawAnnotation( const GeoDataCoordinates & position,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    bool visible = projection->screenCoordinates( position, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+    bool visible = d->m_viewport->screenCoordinates( position, d->m_x, y, pointRepeatNum, globeHidesPoint );
 
     if ( visible ) {
         // Draw all the x-repeat-instances of the point on the screen
@@ -239,9 +233,8 @@ void GeoPainter::drawPoint (  const GeoDataCoordinates & position )
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
 
-    bool visible = projection->screenCoordinates( position, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+    bool visible = d->m_viewport->screenCoordinates( position, d->m_x, y, pointRepeatNum, globeHidesPoint );
 
     if ( visible ) {
         // Draw all the x-repeat-instances of the point on the screen
@@ -278,11 +271,10 @@ void GeoPainter::drawPoints (  const GeoDataCoordinates * positions,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
 
     const GeoDataCoordinates * itPoint = positions;
     while( itPoint < positions + pointCount ) {
-        bool visible = projection->screenCoordinates( *itPoint, d->m_viewport, d->m_x, y, pointRepeatNum, globeHidesPoint );
+        bool visible = d->m_viewport->screenCoordinates( *itPoint, d->m_x, y, pointRepeatNum, globeHidesPoint );
     
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -307,11 +299,10 @@ void GeoPainter::drawText ( const GeoDataCoordinates & position,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
 
     QSizeF textSize( fontMetrics().width( text ), fontMetrics().height() );  
 
-    bool visible = projection->screenCoordinates( position, d->m_viewport, d->m_x, y, pointRepeatNum, textSize, globeHidesPoint );
+    bool visible = d->m_viewport->screenCoordinates( position, d->m_x, y, pointRepeatNum, textSize, globeHidesPoint );
 
     if ( visible ) {
         // Draw all the x-repeat-instances of the point on the screen
@@ -329,10 +320,9 @@ void GeoPainter::drawEllipse ( const GeoDataCoordinates & centerPosition,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( !isGeoProjected ) {
-        bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
+        bool visible = d->m_viewport->screenCoordinates( centerPosition, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -403,12 +393,11 @@ QRegion GeoPainter::regionFromEllipse ( const GeoDataCoordinates & centerPositio
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( !isGeoProjected ) {
         QRegion regions;
 
-        bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
+        bool visible = d->m_viewport->screenCoordinates( centerPosition, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -483,10 +472,9 @@ void GeoPainter::drawImage ( const GeoDataCoordinates & centerPosition,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
 
 //    if ( !isGeoProjected ) {
-        bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, image.size(), globeHidesPoint );
+        bool visible = d->m_viewport->screenCoordinates( centerPosition, d->m_x, y, pointRepeatNum, image.size(), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -504,11 +492,10 @@ void GeoPainter::drawPixmap ( const GeoDataCoordinates & centerPosition,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
 
 //    if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, pixmap.size(), globeHidesPoint );
+        bool visible = d->m_viewport->screenCoordinates( centerPosition, d->m_x, y, pointRepeatNum, pixmap.size(), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -782,11 +769,10 @@ void GeoPainter::drawRect ( const GeoDataCoordinates & centerCoordinates,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( !isGeoProjected ) {
-        bool visible = projection->screenCoordinates( centerCoordinates, 
-                       d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
+        bool visible = d->m_viewport->screenCoordinates( centerCoordinates,
+                       d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -810,15 +796,14 @@ QRegion GeoPainter::regionFromRect ( const GeoDataCoordinates & centerCoordinate
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
 
 
     if ( !isGeoProjected ) {
 
         QRegion regions;
 
-        bool visible = projection->screenCoordinates( centerCoordinates,
-                       d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
+        bool visible = d->m_viewport->screenCoordinates( centerCoordinates,
+                       d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen
@@ -846,11 +831,10 @@ void GeoPainter::drawRoundRect ( const GeoDataCoordinates &centerPosition,
     int pointRepeatNum;
     qreal y;
     bool globeHidesPoint;
-    AbstractProjection *projection = d->m_viewport->currentProjection();
 
     if ( !isGeoProjected ) {
         // FIXME: Better visibility detection that takes the circle geometry into account
-        bool visible = projection->screenCoordinates( centerPosition, d->m_viewport, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
+        bool visible = d->m_viewport->screenCoordinates( centerPosition, d->m_x, y, pointRepeatNum, QSizeF( width, height ), globeHidesPoint );
 
         if ( visible ) {
             // Draw all the x-repeat-instances of the point on the screen

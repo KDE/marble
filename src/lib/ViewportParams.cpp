@@ -319,6 +319,54 @@ void ViewportParams::centerCoordinates( qreal &centerLon, qreal &centerLat ) con
         centerLon -= 2 * M_PI;
 }
 
+bool ViewportParams::screenCoordinates( qreal lon, qreal lat,
+                                        qreal &x, qreal &y ) const
+{
+    return d->m_currentProjection->screenCoordinates( lon, lat, this, x, y );
+}
+
+bool ViewportParams::screenCoordinates( const GeoDataCoordinates &coordinates,
+                                        qreal *x, qreal &y, int &pointRepeatNum, bool &globeHidesPoint ) const
+{
+    return d->m_currentProjection->screenCoordinates( coordinates, this, x, y, pointRepeatNum, globeHidesPoint );
+}
+
+bool ViewportParams::screenCoordinates( const GeoDataCoordinates &geopoint,
+                                        qreal &x, qreal &y, bool &globeHidesPoint ) const
+{
+    return d->m_currentProjection->screenCoordinates( geopoint, this, x, y, globeHidesPoint );
+}
+
+bool ViewportParams::screenCoordinates( const GeoDataCoordinates &geopoint,
+                                        qreal &x, qreal &y ) const
+{
+    return d->m_currentProjection->screenCoordinates( geopoint, this, x, y );
+}
+
+bool ViewportParams::screenCoordinates( const GeoDataCoordinates &geopoint,
+                                        QPointF &screenpoint ) const
+{
+    return d->m_currentProjection->screenCoordinates( geopoint, this, screenpoint );
+}
+
+bool ViewportParams::screenCoordinates( const GeoDataCoordinates &coordinates,
+                                        qreal *x, qreal &y, int &pointRepeatNum,
+                                        const QSizeF &size, bool &globeHidesPoint ) const
+{
+    return d->m_currentProjection->screenCoordinates( coordinates, this, x, y, pointRepeatNum, size, globeHidesPoint );
+}
+
+bool ViewportParams::screenCoordinates( const GeoDataLineString &lineString, QVector< QPolygonF* > &polygons ) const
+{
+    return d->m_currentProjection->screenCoordinates( lineString, this, polygons );
+}
+
+bool ViewportParams::geoCoordinates( int x, int y,
+                                     qreal &lon, qreal &lat, GeoDataCoordinates::Unit unit ) const
+{
+    return d->m_currentProjection->geoCoordinates( x, y, this, lon, lat, unit );
+}
+
 GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
 {
     if (d->m_dirtyBox) {
@@ -329,6 +377,11 @@ GeoDataLatLonAltBox ViewportParams::viewLatLonAltBox() const
     }
 
     return d->m_viewLatLonAltBox;
+}
+
+GeoDataLatLonAltBox ViewportParams::latLonAltBox( const QRect &rect ) const
+{
+    return d->m_currentProjection->latLonAltBox( rect, this );
 }
 
 qreal ViewportParams::angularResolution() const
@@ -368,6 +421,11 @@ bool ViewportParams::resolves ( const GeoDataCoordinates &coord1,
 bool  ViewportParams::mapCoversViewport() const
 {
     return d->m_currentProjection->mapCoversViewport( this );
+}
+
+QRegion ViewportParams::mapRegion() const
+{
+    return d->m_currentProjection->mapRegion( this );
 }
 
 QRegion ViewportParams::activeRegion() const

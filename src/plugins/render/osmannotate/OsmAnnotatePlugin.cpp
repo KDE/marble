@@ -21,7 +21,6 @@
 #include <QtNetwork/QNetworkRequest>
 
 #include "MarbleDebug.h"
-#include "AbstractProjection.h"
 #include "AreaAnnotation.h"
 #include "GeoDataDocument.h"
 #include "GeoDataLatLonBox.h"

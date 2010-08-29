@@ -16,7 +16,6 @@
 #include <QtCore/QRect>
 #include <QtGui/QColor>
 
-#include "AbstractProjection.h"
 #include "MarbleDataFacade.h"
 #include "GeoPainter.h"
 #include "PositionTracking.h"
@@ -101,12 +100,8 @@ void PositionMarker::update()
         QPointF position;
         QPointF previousPosition;
 
-        m_viewport->currentProjection()->screenCoordinates( m_currentPosition,
-                                                            m_viewport,
-                                                            position );
-        m_viewport->currentProjection()->screenCoordinates( m_previousPosition,
-                                                            m_viewport,
-                                                            previousPosition );
+        m_viewport->screenCoordinates( m_currentPosition, position );
+        m_viewport->screenCoordinates( m_previousPosition, previousPosition );
 
         // calculate the arrow shape, oriented by the heading
         // and with constant size

@@ -11,7 +11,6 @@
 #include "PlacemarkTextAnnotation.h"
 
 
-#include "AbstractProjection.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDocument.h"
 #include "GeoPainter.h"
@@ -76,7 +75,7 @@ void PlacemarkTextAnnotation::paint( GeoPainter *painter,
 
     qreal x, y;
     bool hidden;
-    bool visable = viewport->currentProjection()->screenCoordinates( coordinate(), viewport, x, y, hidden );
+    bool visable = viewport->screenCoordinates( coordinate(), x, y, hidden );
 
     if( renderPos == "HOVERS_ABOVE_SURFACE" ) {
         painter->drawPixmap( coordinate(),
