@@ -12,6 +12,7 @@
 #define MARBLE_SERVERLAYOUT_H
 
 #include <QtCore/QUrl>
+#include <QtCore/QPointF>
 
 namespace Marble
 {
@@ -95,8 +96,8 @@ public:
     virtual QUrl downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const;
 
 private:
-    qreal latBottom( const Marble::TileId &tileId ) const;
-    qreal latTop( const Marble::TileId &tileId ) const;
+    QPointF bottomLeft( const Marble::TileId &tileId ) const;
+    QPointF topRight( const Marble::TileId &tileId ) const;
     QString epsgCode() const;
 };
 
