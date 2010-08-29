@@ -84,16 +84,24 @@ class EquirectProjection : public AbstractProjection
                             const ViewportParams *viewport,
                             QVector<QPolygonF*> &polygons );
 
+    virtual QPointF projectionCoordinates( qreal lon, qreal lat ) const;
+
+    virtual bool geoCoordinates( qreal normalizedX, qreal normalizedY,
+                                 qreal& lon, qreal& lat,
+                                 GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree ) const;
+
     /**
-     * @brief Get the earth coordinates corresponding to a pixel in the map.
-     * @param x      the x coordinate of the pixel
-     * @param y      the y coordinate of the pixel
-     * @param lon    the longitude angle is returned through this parameter
-     * @param lat    the latitude angle is returned through this parameter
+     * @brief Get the earth coordinates corresponding to a pixel on the screen.
+     * @param viewportX the x coordinate of the pixel relative to the origin of the viewport
+     * @param viewportY the y coordinate of the pixel relative to the origin of the viewport
+     * @param viewport  the viewport parameters
+     * @param lon       the longitude angle is returned through this parameter
+     * @param lat       the latitude angle is returned through this parameter
+     * @param unit      the unit of the angles for lon and lat.
      * @return @c true  if the pixel (x, y) is within the globe
      *         @c false if the pixel (x, y) is outside the globe, i.e. in space.
      */
-    bool geoCoordinates( const int x, const int y,
+    bool geoCoordinates( const int viewportX, const int viewportY,
                          const ViewportParams *params,
                          qreal& lon, qreal& lat,
                          GeoDataCoordinates::Unit unit = GeoDataCoordinates::Degree );

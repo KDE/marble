@@ -244,7 +244,48 @@ bool MercatorProjection::screenCoordinates( const GeoDataLineString &lineString,
 }
 
 
-bool MercatorProjection::geoCoordinates( const int x, const int y,
+QPointF MercatorProjection::projectionCoordinates( qreal lon, qreal lat ) const
+{
+    if ( lat > maxLat() ) {
+        lat = maxLat();
+    }
+    if ( lat < minLat() ) {
+        lat = minLat();
+    }
+
+    const qreal x = ( 0.5 + 0.5 *             lon     / M_PI );
+    const qreal y = ( 0.5 - 0.5 * atanh( sin( lat ) ) / M_PI );
+
+    return QPointF( x, y );
+}
+
+
+bool MercatorProjection::geoCoordinates( qreal normalizedX, qreal normalizedY,
+                                         qreal& lon, qreal& lat,
+                                         GeoDataCoordinates::Unit unit) const
+{
+    bool          noerr              = false;
+
+    if ( 0 <= normalizedY && normalizedY < 1 ) {
+        lat = atan( sinh( ( 0.5 - normalizedY ) * 2 * M_PI ) );
+        lon =             ( normalizedX - 0.5 ) * 2 * M_PI;
+
+        while ( lon > M_PI )  lon -= 2*M_PI;
+        while ( lon < -M_PI ) lon += 2*M_PI;
+
+        noerr = true;
+    }
+
+    if ( unit == GeoDataCoordinates::Degree ) {
+        lon *= RAD2DEG;
+        lat *= RAD2DEG;
+    }
+
+    return noerr;
+}
+
+
+bool MercatorProjection::geoCoordinates( const int viewportX, const int viewportY,
                                          const ViewportParams *viewport,
                                          qreal& lon, qreal& lat,
                                          GeoDataCoordinates::Unit unit )
@@ -266,11 +307,11 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
     int yTop          = halfImageHeight - 2 * radius + yCenterOffset;
     int yBottom       = yTop + 4 * radius;
 
-    if ( y >= yTop && y < yBottom ) {
-        int    const  xPixels   = x - halfImageWidth;
+    if ( viewportY >= yTop && viewportY < yBottom ) {
+        int    const  xPixels   = viewportX - halfImageWidth;
         qreal const  pixel2Rad = M_PI / (2 * radius);
 
-        lat = atan( sinh( ( ( halfImageHeight + yCenterOffset ) - y)
+        lat = atan( sinh( ( ( halfImageHeight + yCenterOffset ) - viewportY)
                           * pixel2Rad ) );
         lon = xPixels * pixel2Rad + centerLon;
 

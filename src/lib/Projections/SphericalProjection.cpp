@@ -189,7 +189,50 @@ bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString
 }
 
 
-bool SphericalProjection::geoCoordinates( const int x, const int y,
+QPointF SphericalProjection::projectionCoordinates( qreal lon, qreal lat ) const
+{
+    const Quaternion p( lon, lat );
+
+    const qreal x = ( 0.5 + 0.5 * p.v[Q_X] );
+    const qreal y = ( 0.5 - 0.5 * p.v[Q_Y] );
+
+    return QPointF( x, y );
+}
+
+
+bool SphericalProjection::geoCoordinates( qreal normalizedX, qreal normalizedY,
+                                          qreal& lon, qreal& lat,
+                                          GeoDataCoordinates::Unit unit ) const
+{
+    bool noerr = false;
+
+    qreal centerX = normalizedX - 0.5;
+    qreal centerY = normalizedY - 0.5;
+
+    if ( 1 > centerX * centerX + centerY * centerY ) {
+        qreal qx = 2 * +centerX;
+        qreal qy = 2 * -centerY;
+        qreal qr = 1.0 - qy * qy;
+
+        qreal qr2z = qr - qx * qx;
+        qreal qz   = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
+
+        Quaternion  qpos( 0.0, qx, qy, qz );
+        qpos.getSpherical( lon, lat );
+
+        noerr = true;
+    }
+
+    if ( unit == GeoDataCoordinates::Degree ) {
+        lon *= RAD2DEG;
+        lat *= RAD2DEG;
+    }
+
+    return noerr;
+}
+
+
+bool SphericalProjection::geoCoordinates( const int viewportX, const int viewportY,
                                           const ViewportParams *viewport,
                                           qreal& lon, qreal& lat,
                                           GeoDataCoordinates::Unit unit )
@@ -198,8 +241,8 @@ bool SphericalProjection::geoCoordinates( const int x, const int y,
     bool          noerr         = false;
 
     qreal radius  = (qreal)( viewport->radius() );
-    qreal centerX = (qreal)( x - viewport->width() / 2 );
-    qreal centerY = (qreal)( y - viewport->height() / 2 );
+    qreal centerX = (qreal)( viewportX - viewport->width() / 2 );
+    qreal centerY = (qreal)( viewportY - viewport->height() / 2 );
 
     if ( radius * radius > centerX * centerX + centerY * centerY ) {
         qreal qx = inverseRadius * +centerX;
