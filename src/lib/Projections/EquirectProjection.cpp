@@ -198,35 +198,7 @@ bool EquirectProjection::screenCoordinates( const GeoDataLineString &lineString,
 }
 
 
-QPointF EquirectProjection::projectionCoordinates( qreal lon, qreal lat ) const
-{
-    const qreal x = ( 0.5 + 0.5 * lon / M_PI );
-    const qreal y = ( 0.5 -       lat / M_PI );
-
-    return QPointF( x, y );
-}
-
-
-bool EquirectProjection::geoCoordinates( qreal normalizedX, qreal normalizedY,
-                                         qreal& lon, qreal& lat,
-                                         GeoDataCoordinates::Unit unit) const
-{
-    lat = ( 0.5 - normalizedY ) * M_PI;
-    lon = ( normalizedX - 0.5 ) * 2 * M_PI;
-
-    while ( lon > M_PI )  lon -= 2.0 * M_PI;
-    while ( lon < -M_PI ) lon += 2.0 * M_PI;
-
-    if ( unit == GeoDataCoordinates::Degree ) {
-        lon *= RAD2DEG;
-        lat *= RAD2DEG;
-    }
-
-    return true;
-}
-
-
-bool EquirectProjection::geoCoordinates( const int viewportX, const int viewportY,
+bool EquirectProjection::geoCoordinates( const int x, const int y,
                                          const ViewportParams *viewport,
                                          qreal& lon, qreal& lat,
                                          GeoDataCoordinates::Unit unit )
@@ -246,11 +218,11 @@ bool EquirectProjection::geoCoordinates( const int viewportX, const int viewport
     int yBottom       = yTop + 2 * radius;
 
     // Return here if the y coordinate is outside the map
-    if ( viewportY < yTop || viewportY >= yBottom )
+    if ( y < yTop || y >= yBottom )
         return false;
 
-    int const xPixels = viewportX - halfImageWidth;
-    int const yPixels = viewportY - halfImageHeight;
+    int const xPixels = x - halfImageWidth;
+    int const yPixels = y - halfImageHeight;
 
     qreal const pixel2Rad = M_PI / (2.0 * radius);
     lat = - yPixels * pixel2Rad + centerLat;

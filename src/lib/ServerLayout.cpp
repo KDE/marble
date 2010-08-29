@@ -12,8 +12,6 @@
 #include "ServerLayout.h"
 
 #include "GeoSceneTexture.h"
-#include "EquirectProjection.h"
-#include "MercatorProjection.h"
 #include "global.h"
 #include "TileId.h"
 
@@ -98,8 +96,11 @@ WmsServerLayout::WmsServerLayout( GeoSceneTexture *texture )
 
 QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileId &tileId ) const
 {
-    const QPointF bottomLeft = this->bottomLeft( tileId );
-    const QPointF topRight = this->topRight( tileId );
+    const qint64 radius = numTilesX( tileId ) / 2;
+    const qint64 x = tileId.x();
+
+    const qreal lonLeft   = ( x - radius     ) / (double)radius * 180.0;
+    const qreal lonRight  = ( x - radius + 1 ) / (double)radius * 180.0;
 
     QUrl url = prototypeUrl;
     url.addQueryItem( "service", "WMS" );
@@ -120,70 +121,44 @@ QUrl WmsServerLayout::downloadUrl( const QUrl &prototypeUrl, const Marble::TileI
         url.addQueryItem( "layers", m_textureLayer->name() );
     url.addQueryItem( "width", QString::number( m_textureLayer->tileSize().width() ) );
     url.addQueryItem( "height", QString::number( m_textureLayer->tileSize().height() ) );
-    url.addQueryItem( "bbox", QString( "%1,%2,%3,%4" ).arg( QString::number( bottomLeft.x(), 'f', 14 ) )
-                                                      .arg( QString::number( bottomLeft.y(), 'f', 14 ) )
-                                                      .arg( QString::number( topRight.x(), 'f', 14 ) )
-                                                      .arg( QString::number( topRight.y(), 'f', 14 ) ) );
+    url.addQueryItem( "bbox", QString( "%1,%2,%3,%4" ).arg( QString::number( lonLeft, 'f', 12 ) )
+                                                      .arg( QString::number( latBottom( tileId ), 'f', 12 ) )
+                                                      .arg( QString::number( lonRight, 'f', 12 ) )
+                                                      .arg( QString::number( latTop( tileId ), 'f', 12 ) ) );
 
     return url;
 }
 
-QPointF WmsServerLayout::bottomLeft( const Marble::TileId &tileId ) const
+qreal WmsServerLayout::latBottom( const Marble::TileId &tileId ) const
 {
-    static const EquirectProjection equirectangular;
-    static const MercatorProjection mercator;
-
-    const AbstractProjection *projection = 0;
+    const qint64 radius = numTilesY( tileId ) / 2;
 
     switch( m_textureLayer->projection() )
     {
     case GeoSceneTexture::Equirectangular:
-        projection = &equirectangular;
-        break;
+        return ( radius - tileId.y() - 1 ) / (double)radius *  90.0;
     case GeoSceneTexture::Mercator:
-        projection = &mercator;
-        break;
+        return atan( sinh( ( radius - tileId.y() - 1 ) / (double)radius * M_PI ) ) * 180.0 / M_PI;
     }
 
-    Q_ASSERT( projection != 0 );
-
-    const qreal x = ( tileId.x()     ) / (qreal)numTilesX( tileId );
-    const qreal y = ( tileId.y() + 1 ) / (qreal)numTilesY( tileId );
-
-    qreal lon;
-    qreal lat;
-    projection->geoCoordinates( x, y, lon, lat, GeoDataCoordinates::Degree );
-
-    return QPointF( lon, lat );
+    Q_ASSERT( false ); // not reached
+    return 0.0;
 }
 
-QPointF WmsServerLayout::topRight( const Marble::TileId &tileId ) const
+qreal WmsServerLayout::latTop( const Marble::TileId &tileId ) const
 {
-    static const EquirectProjection equirectangular;
-    static const MercatorProjection mercator;
-
-    const AbstractProjection *projection = 0;
+    const qint64 radius = numTilesY( tileId ) / 2;
 
     switch( m_textureLayer->projection() )
     {
     case GeoSceneTexture::Equirectangular:
-        projection = &equirectangular;
-        break;
+        return ( radius - tileId.y() ) / (double)radius *  90.0;
     case GeoSceneTexture::Mercator:
-        projection = &mercator;
-        break;
+        return atan( sinh( ( radius - tileId.y() ) / (double)radius * M_PI ) ) * 180.0 / M_PI;
     }
 
-    Q_ASSERT( projection != 0 );
-
-    const qreal x = ( tileId.x() + 1  ) / (qreal)numTilesX( tileId );
-    const qreal y = ( tileId.y()      ) / (qreal)numTilesY( tileId );
-
-    qreal lon;
-    qreal lat;
-    projection->geoCoordinates( x, y, lon, lat, GeoDataCoordinates::Degree );
-
-    return QPointF( lon, lat );
+    Q_ASSERT( false ); // not reached
+    return 0.0;
 }
 
 QString WmsServerLayout::epsgCode() const
