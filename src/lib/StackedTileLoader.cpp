@@ -466,6 +466,9 @@ StackedTileLoader::findRelevantTextureLayers( TileId const & stackedTileId ) con
 
 void StackedTileLoader::updateTextureLayers()
 {
+    d->m_sceneLayers.clear();
+    d->m_textureLayers.clear();
+
     QList<GeoSceneDocument const *> const & mapThemes = d->m_mapThemeManager->mapThemes();
     QList<GeoSceneDocument const *>::const_iterator pos = mapThemes.constBegin();
     QList<GeoSceneDocument const *>::const_iterator const end = mapThemes.constEnd();
