@@ -16,6 +16,8 @@
 namespace Marble
 {
 
+class MonavPluginPrivate;
+
 class MonavPlugin : public RunnerPlugin
 {
     Q_OBJECT
@@ -24,7 +26,15 @@ class MonavPlugin : public RunnerPlugin
 public:
     explicit MonavPlugin( QObject *parent = 0 );
 
+    ~MonavPlugin();
+
     virtual MarbleAbstractRunner* newRunner() const;
+
+private Q_SLOTS:
+    void killProcess();
+
+private:
+    MonavPluginPrivate* const d;
 };
 
 }

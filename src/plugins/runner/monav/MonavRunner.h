@@ -14,6 +14,8 @@
 #include "MarbleAbstractRunner.h"
 #include "routing/RouteSkeleton.h"
 
+class QProcess;
+
 namespace Marble
 {
 
@@ -23,7 +25,7 @@ class MonavRunner : public MarbleAbstractRunner
 {
     Q_OBJECT
 public:
-    explicit MonavRunner( QObject *parent = 0 );
+    explicit MonavRunner( QProcess* monav, QObject *parent = 0 );
 
     ~MonavRunner();
 

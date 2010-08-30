@@ -10,7 +10,6 @@
 
 #include "MonavRunner.h"
 
-#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "routing/RouteSkeleton.h"
 #include "GeoDataDocument.h"
@@ -23,37 +22,42 @@ namespace Marble
 class MonavRunnerPrivate
 {
 public:
-    QDir m_mapDir;
+    QProcess* m_monavProcess;
 
-    GeoDataLineString* retrieveWaypoints( const QStringList &params ) const;
+    MonavRunnerPrivate( QProcess* monav );
+
+    GeoDataLineString* retrieveWaypoints( const QString &params );
 
     GeoDataDocument* createDocument( GeoDataLineString* routeWaypoints ) const;
 
     GeoDataLineString* parseMonavOutput( const QByteArray &content ) const;
 };
 
-GeoDataLineString* MonavRunnerPrivate::retrieveWaypoints( const QStringList &params ) const
+MonavRunnerPrivate::MonavRunnerPrivate( QProcess* monav ) :
+        m_monavProcess( monav )
 {
-    QStringList monavParams;
-    monavParams << params << m_mapDir.absolutePath();
-    QProcess monavProcess;
-    monavProcess.start( "monav", monavParams );
+    // nothing to do
+}
 
-    if ( !monavProcess.waitForStarted( 5000 ) )
-    {
-        mDebug() << "Couldn't start monav from the current PATH. Install it to retrieve routing results from monav.";
-        return 0;
+GeoDataLineString* MonavRunnerPrivate::retrieveWaypoints( const QString &params )
+{
+    Q_ASSERT( m_monavProcess );
+    m_monavProcess->write( params.toAscii() );
+    QByteArray data;
+    for ( int i=1; i<15; ++i ) {
+        if ( m_monavProcess->bytesAvailable() ) {
+            data += m_monavProcess->readAllStandardOutput();
+            bool haveRoute = data.endsWith("\n\n");
+            if ( haveRoute ) {
+                return parseMonavOutput( data );
+            }
+        } else {
+            ++i;
+            usleep( 1000 * pow( 2, i ) );
+        }
     }
 
-    if ( monavProcess.waitForFinished( 60 * 1000 ) )
-    {
-        return parseMonavOutput( monavProcess.readAllStandardOutput() );
-    }
-    else
-    {
-        mDebug() << "Couldn't stop monav";
-        return 0;
-    }
+    return 0;
 }
 
 GeoDataLineString* MonavRunnerPrivate::parseMonavOutput( const QByteArray &content ) const
@@ -101,12 +105,10 @@ GeoDataDocument* MonavRunnerPrivate::createDocument( GeoDataLineString* routeWay
     return result;
 }
 
-MonavRunner::MonavRunner( QObject *parent ) :
+MonavRunner::MonavRunner( QProcess* monav, QObject *parent ) :
         MarbleAbstractRunner( parent ),
-        d( new MonavRunnerPrivate )
+        d( new MonavRunnerPrivate( monav ) )
 {
-    // Check installation
-    d->m_mapDir = QDir( MarbleDirs::localPath() + "/maps/earth/monav/" );
 }
 
 MonavRunner::~MonavRunner()
@@ -121,23 +123,16 @@ GeoDataFeature::GeoDataVisualCategory MonavRunner::category() const
 
 void MonavRunner::retrieveRoute( RouteSkeleton *route )
 {
-    if ( ! QFileInfo( d->m_mapDir, "Contraction Hierarchies" ).exists() )
-    {
-        emit routeCalculated( 0 );
-        return;
-    }
-
-    QStringList params;
-
+    QString params;
     for ( int i = 0; i < route->size(); ++i )
     {
         double lon = route->at( i ).longitude( GeoDataCoordinates::Degree );
         double lat = route->at( i ).latitude( GeoDataCoordinates::Degree );
-        params << QString( "--lat%1=%2" ).arg( i + 1 ).arg( lat, 0, 'f', 8 );
-        params << QString( "--lon%1=%2" ).arg( i + 1 ).arg( lon, 0, 'f', 8 );
+        params += QString( " --lat%1=%2" ).arg( i + 1 ).arg( lat, 0, 'f', 8 );
+        params += QString( " --lon%1=%2" ).arg( i + 1 ).arg( lon, 0, 'f', 8 );
     }
-    GeoDataLineString* wayPoints = d->retrieveWaypoints( params );
 
+    GeoDataLineString* wayPoints = d->retrieveWaypoints( params.trimmed() + "\n" );
     GeoDataDocument* result = d->createDocument( wayPoints );
     emit routeCalculated( result );
 }
