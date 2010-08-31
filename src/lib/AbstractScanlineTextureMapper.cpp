@@ -190,9 +190,8 @@ void AbstractScanlineTextureMapper::pixelValue( const qreal lon, const qreal lat
 // This method will do by far most of the calculations for the 
 // texturemapping, so we move towards integer math to improve speed.
 
-void AbstractScanlineTextureMapper::pixelValueApproxF(const qreal& lon,
-                              const qreal& lat, QRgb *scanLine,
-                              int n )
+void AbstractScanlineTextureMapper::pixelValueApproxF( const qreal lon, const qreal lat,
+                                                       QRgb *scanLine, int n )
 {
     // stepLon/Lat: Distance between two subsequent approximated positions
 
@@ -332,9 +331,8 @@ bool AbstractScanlineTextureMapper::isOutOfTileRangeF( qreal itLon, qreal itLat,
 }
 
 
-void AbstractScanlineTextureMapper::pixelValueApprox(const qreal& lon,
-                              const qreal& lat, QRgb *scanLine,
-                              int n )
+void AbstractScanlineTextureMapper::pixelValueApprox( const qreal lon, const qreal lat,
+                                                      QRgb *scanLine, int n )
 {
     // stepLon/Lat: Distance between two subsequent approximated positions
 

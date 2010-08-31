@@ -59,10 +59,10 @@ public:
     void pixelValue( const qreal lon, const qreal lat,
                      QRgb* scanLine );
 
-    void pixelValueApproxF(const qreal& lon, const qreal& lat,
-                          QRgb *scanLine, int n );
-    void pixelValueApprox(const qreal& lon, const qreal& lat,
-                          QRgb *scanLine, int n );
+    void pixelValueApproxF( const qreal lon, const qreal lat,
+                            QRgb *scanLine, int n );
+    void pixelValueApprox( const qreal lon, const qreal lat,
+                           QRgb *scanLine, int n );
 
     static int interpolationStep( ViewParams *viewParams );
 
