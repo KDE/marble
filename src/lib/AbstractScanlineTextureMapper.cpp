@@ -488,12 +488,16 @@ void AbstractScanlineTextureMapper::nextTile( int &posX, int &posY )
     // ( with origin in upper left corner, measured in pixel) 
 
     int lon = posX + m_tilePosX;
-    if ( lon > m_maxGlobalX ) lon -= m_maxGlobalX;
-    if ( lon < 0 ) lon += m_maxGlobalX;
+    if ( lon > m_maxGlobalX )
+        lon -= m_maxGlobalX;
+    else if ( lon < 0 )
+        lon += m_maxGlobalX;
 
     int lat = posY + m_tilePosY;
-    if ( lat > m_maxGlobalY ) lat -= m_maxGlobalY;
-    if ( lat < 0 ) lat += m_maxGlobalY;
+    if ( lat > m_maxGlobalY )
+        lat -= m_maxGlobalY;
+    else if ( lat < 0 )
+        lat += m_maxGlobalY;
 
     // tileCol counts the tile columns left from the current tile.
     // tileRow counts the tile rows on the top from the current tile.
@@ -525,12 +529,16 @@ void AbstractScanlineTextureMapper::nextTile( qreal &posX, qreal &posY )
     // ( with origin in upper left corner, measured in pixel) 
 
     int lon = (int)(posX + m_tilePosX);
-    if ( lon > m_maxGlobalX ) lon -= m_maxGlobalX;
-    if ( lon < 0 ) lon += m_maxGlobalX;
+    if ( lon > m_maxGlobalX )
+        lon -= m_maxGlobalX;
+    else if ( lon < 0 )
+        lon += m_maxGlobalX;
 
     int lat = (int)(posY + m_tilePosY);
-    if ( lat > m_maxGlobalY ) lat -= m_maxGlobalY;
-    if ( lat < 0 ) lat += m_maxGlobalY;
+    if ( lat > m_maxGlobalY )
+        lat -= m_maxGlobalY;
+    else if ( lat < 0 )
+        lat += m_maxGlobalY;
 
     // tileCol counts the tile columns left from the current tile.
     // tileRow counts the tile rows on the top from the current tile.
