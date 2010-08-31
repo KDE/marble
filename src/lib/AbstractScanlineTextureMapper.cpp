@@ -316,14 +316,14 @@ void AbstractScanlineTextureMapper::pixelValueApproxF( const qreal lon, const qr
 }
 
 
-bool AbstractScanlineTextureMapper::isOutOfTileRangeF( qreal itLon, qreal itLat,
-                                                       qreal itStepLon, qreal itStepLat,
-                                                       int n ) const
+bool AbstractScanlineTextureMapper::isOutOfTileRangeF( const qreal itLon, const qreal itLat,
+                                                       const qreal itStepLon, const qreal itStepLat,
+                                                       const int n ) const
 {
-    qreal minIPosX = itLon + itStepLon;
-    qreal minIPosY = itLat + itStepLat;
-    qreal maxIPosX = itLon + itStepLon * ( n - 1 );
-    qreal maxIPosY = itLat + itStepLat * ( n - 1 );
+    const qreal minIPosX = itLon + itStepLon;
+    const qreal minIPosY = itLat + itStepLat;
+    const qreal maxIPosX = itLon + itStepLon * ( n - 1 );
+    const qreal maxIPosY = itLat + itStepLat * ( n - 1 );
     return (    maxIPosX >= m_tileSize.width()  || maxIPosX < 0
              || maxIPosY >= m_tileSize.height() || maxIPosY < 0
              || minIPosX >= m_tileSize.width()  || minIPosX < 0
@@ -439,14 +439,14 @@ void AbstractScanlineTextureMapper::pixelValueApprox( const qreal lon, const qre
 }
 
 
-bool AbstractScanlineTextureMapper::isOutOfTileRange( int itLon, int itLat,
-                                                      int itStepLon, int itStepLat,
-                                                      int n ) const
+bool AbstractScanlineTextureMapper::isOutOfTileRange( const int itLon, const int itLat,
+                                                      const int itStepLon, const int itStepLat,
+                                                      const int n ) const
 {
-    int minIPosX = ( itLon + itStepLon ) >> 7;
-    int minIPosY = ( itLat + itStepLat ) >> 7;
-    int maxIPosX = ( itLon + itStepLon * ( n - 1 ) ) >> 7;
-    int maxIPosY = ( itLat + itStepLat * ( n - 1 ) ) >> 7;
+    const int minIPosX = ( itLon + itStepLon ) >> 7;
+    const int minIPosY = ( itLat + itStepLat ) >> 7;
+    const int maxIPosX = ( itLon + itStepLon * ( n - 1 ) ) >> 7;
+    const int maxIPosY = ( itLat + itStepLat * ( n - 1 ) ) >> 7;
     return (    maxIPosX >= m_tileSize.width()  || maxIPosX < 0
              || maxIPosY >= m_tileSize.height() || maxIPosY < 0
              || minIPosX >= m_tileSize.width()  || minIPosX < 0

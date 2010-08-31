@@ -86,13 +86,13 @@ public:
 
     // Checks whether the pixelValueApprox method will make use of more than
     // one tile
-    bool isOutOfTileRange( int itLon, int itLat,
-                           int itStepLon, int itStepLat,
-                           int n ) const;
+    bool isOutOfTileRange( const int itLon, const int itLat,
+                           const int itStepLon, const int itStepLat,
+                           const int n ) const;
 
-    bool isOutOfTileRangeF( qreal itLon, qreal itLat,
-                            qreal itStepLon, qreal itStepLat,
-                            int n ) const;
+    bool isOutOfTileRangeF( const qreal itLon, const qreal itLat,
+                            const qreal itStepLon, const qreal itStepLat,
+                            const int n ) const;
                            
     // maximum values for global texture coordinates
     // ( with origin in upper left corner, measured in pixel) 
