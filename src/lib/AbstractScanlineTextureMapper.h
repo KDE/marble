@@ -42,7 +42,7 @@ public:
     virtual void mapTexture( ViewParams *viewParams ) = 0;
 
     bool interlaced() const;
-    void setInterlaced( bool enabled );
+    void setInterlaced( const bool enabled );
     int tileZoomLevel() const;
     GeoSceneTexture const * textureLayer() const;
 
@@ -74,7 +74,7 @@ public:
 
     void selectTileLevel( ViewParams* viewParams );
     void detectMaxTileLevel();
-    void tileLevelInit( int tileLevel );
+    void tileLevelInit( const int tileLevel );
 
     int globalWidth() const;
     int globalHeight() const;
@@ -145,7 +145,7 @@ inline bool AbstractScanlineTextureMapper::interlaced() const
     return m_interlaced;
 }
 
-inline void AbstractScanlineTextureMapper::setInterlaced( bool enabled )
+inline void AbstractScanlineTextureMapper::setInterlaced( const bool enabled )
 {
     m_interlaced = enabled;
 }

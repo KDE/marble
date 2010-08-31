@@ -91,7 +91,7 @@ void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
 }
 
 
-void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
+void AbstractScanlineTextureMapper::tileLevelInit( const int tileLevel )
 {
     //    mDebug() << "Texture Level was set to: " << tileLevel;
     m_tileLevel = tileLevel;
