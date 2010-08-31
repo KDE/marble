@@ -29,7 +29,7 @@ using namespace Marble;
 void PositionTrackingPrivate::setPosition( GeoDataCoordinates position,
                                            GeoDataAccuracy accuracy )
 {
-    Q_UNUSED( accuracy );
+    m_accuracy = accuracy;
     if ( m_positionProvider && m_positionProvider->status() ==
         PositionProviderStatusAvailable )
     {
@@ -176,6 +176,11 @@ void PositionTracking::clearTrack()
     multiGeometry->clear();
     multiGeometry->append(d->m_currentLineString);
 
+}
+
+GeoDataAccuracy PositionTracking::accuracy() const
+{
+    return d->m_accuracy;
 }
 
 #include "PositionTracking.moc"

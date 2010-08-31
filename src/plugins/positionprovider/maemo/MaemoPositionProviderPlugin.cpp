@@ -98,12 +98,10 @@ GeoDataAccuracy MaemoPositionProviderPlugin::accuracy() const
 {
     GeoDataAccuracy result;
 
-    // FIXME: I'm not sure what is expected here, the documentation in
-    // Marble is a bit coarse and I did not find any class using it
     if ( status() == PositionProviderStatusAvailable ) {
         result.level = GeoDataAccuracy::Detailed;
-        result.horizontal = d->m_device->fix->eph; // horizontal position accuracy in centimeter
-        result.vertical = d->m_device->fix->epv; // vertical position accuracy in meter
+        result.horizontal = d->m_device->fix->eph / 100.0; // cm => meter
+        result.vertical = d->m_device->fix->epv; // meter
     }
     else {
         result.level = GeoDataAccuracy::none;

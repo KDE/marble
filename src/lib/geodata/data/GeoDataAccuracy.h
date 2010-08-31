@@ -44,6 +44,12 @@ class GeoDataAccuracy
      * @brief Vertical accuracy in meters.
      */
     qreal vertical;
+
+    GeoDataAccuracy() {
+        level = none;
+        horizontal = 0;
+        vertical = 0;
+    }
 };
 
 }

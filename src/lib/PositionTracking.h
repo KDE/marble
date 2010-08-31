@@ -59,6 +59,7 @@ public:
      */
     qreal direction() const;
 
+    GeoDataAccuracy accuracy() const;
     /**
      * @brief provides the visibility of the Position Tracking document
      */

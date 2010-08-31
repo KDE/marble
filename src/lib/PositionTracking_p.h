@@ -60,6 +60,8 @@ class PositionTrackingPrivate : public QObject
     GeoDataLineString  *m_currentLineString;
 
     PositionProviderPlugin* m_positionProvider;
+
+    GeoDataAccuracy m_accuracy;
 };
 }
 

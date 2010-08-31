@@ -66,10 +66,15 @@ void GpsdPositionProviderPlugin::update( gps_data_t data )
         if (data.fix.mode == MODE_2D) {
             m_position.setAltitude(0);
         }
+
         m_accuracy.level = GeoDataAccuracy::Detailed;
-        // FIXME: Add real values here
-        m_accuracy.horizontal = 5;
-        m_accuracy.vertical = 5;
+        if ( !isnan( data.fix.epx ) && !isnan( data.fix.epy ) ) {
+            m_accuracy.horizontal = qMax( data.fix.epx, data.fix.epy );
+        }
+
+        if ( !isnan( data.fix.epv ) ) {
+            m_accuracy.vertical = data.fix.epv;
+        }
 
         if( !isnan(data.fix.speed ) )
         {

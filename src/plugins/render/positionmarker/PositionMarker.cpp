@@ -132,6 +132,7 @@ void PositionMarker::update()
                 << position + relativeLeft
                 << position + relativeTip
                 << position + relativeRight;
+
         m_dirtyRegion = QRegion();
         m_dirtyRegion += ( m_arrow.boundingRect().toRect() );
         m_dirtyRegion += ( m_previousArrow.boundingRect().toRect() );
@@ -152,9 +153,29 @@ bool PositionMarker::render( GeoPainter *painter,
         update();
         painter->save();
         painter->autoMapQuality();
+
+        GeoDataAccuracy accuracy = dataFacade()->positionTracking()->accuracy();
+        if ( accuracy.horizontal > 0 && accuracy.horizontal < 1000 ) {
+            // Paint a red circle indicating the position accuracy
+            painter->setPen( Qt::transparent );
+            QColor transparentRed = oxygenBrickRed4;
+            int width = qRound( accuracy.horizontal * viewport->radius() / EARTH_RADIUS );
+            if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+                transparentRed.setAlpha( 80 );
+                int arrowSize = qMax<int>( m_arrow.boundingRect().width(), m_arrow.boundingRect().height() );
+                width = qMax<int>( width, arrowSize + 10 );
+            } else {
+                transparentRed.setAlpha( 40 );
+            }
+
+            painter->setBrush( transparentRed );
+            painter->drawEllipse( m_currentPosition, width, width );
+        }
+
         painter->setPen( Qt::black );
         painter->setBrush( Qt::white );
         painter->drawPolygon( m_arrow );
+
         painter->restore();
         m_previousArrow = m_arrow;
     }
