@@ -22,9 +22,9 @@
 
 using namespace Marble;
 
-AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture *textureLayer,
-                                                              StackedTileLoader *tileLoader,
-                                                              QObject *parent )
+AbstractScanlineTextureMapper::AbstractScanlineTextureMapper( GeoSceneTexture * const textureLayer,
+                                                              StackedTileLoader * const tileLoader,
+                                                              QObject * const parent )
     : QObject( parent ),
       m_maxGlobalX( 0 ),
       m_maxGlobalY( 0 ),
@@ -62,7 +62,7 @@ AbstractScanlineTextureMapper::~AbstractScanlineTextureMapper()
 }
 
 
-void AbstractScanlineTextureMapper::selectTileLevel( ViewParams* viewParams )
+void AbstractScanlineTextureMapper::selectTileLevel( ViewParams * const viewParams )
 {
     const int radius = viewParams->radius();
 
@@ -116,7 +116,7 @@ void AbstractScanlineTextureMapper::tileLevelInit( const int tileLevel )
 
 
 void AbstractScanlineTextureMapper::pixelValueF( const qreal lon, const qreal lat,
-                                                 QRgb* scanLine )
+                                                 QRgb* const scanLine )
 {
     // The same method using integers performs about 33% faster.
     // However we need the qreal version to create the high quality mode.
@@ -148,7 +148,7 @@ void AbstractScanlineTextureMapper::pixelValueF( const qreal lon, const qreal la
 }
 
 void AbstractScanlineTextureMapper::pixelValue( const qreal lon, const qreal lat,
-                                                QRgb* scanLine )
+                                                QRgb* const scanLine )
 {
     // The same method using integers performs about 33% faster.
     // However we need the qreal version to create the high quality mode.
@@ -191,7 +191,7 @@ void AbstractScanlineTextureMapper::pixelValue( const qreal lon, const qreal lat
 // texturemapping, so we move towards integer math to improve speed.
 
 void AbstractScanlineTextureMapper::pixelValueApproxF( const qreal lon, const qreal lat,
-                                                       QRgb *scanLine, int n )
+                                                       QRgb *scanLine, const int n )
 {
     // stepLon/Lat: Distance between two subsequent approximated positions
 
@@ -332,7 +332,7 @@ bool AbstractScanlineTextureMapper::isOutOfTileRangeF( const qreal itLon, const 
 
 
 void AbstractScanlineTextureMapper::pixelValueApprox( const qreal lon, const qreal lat,
-                                                      QRgb *scanLine, int n )
+                                                      QRgb *scanLine, const int n )
 {
     // stepLon/Lat: Distance between two subsequent approximated positions
 
@@ -454,7 +454,7 @@ bool AbstractScanlineTextureMapper::isOutOfTileRange( const int itLon, const int
 }
 
 
-int AbstractScanlineTextureMapper::interpolationStep( ViewParams *viewParams )
+int AbstractScanlineTextureMapper::interpolationStep( ViewParams * const viewParams )
 {
     if ( viewParams->mapQuality() == PrintQuality ) {
         return 1;    // Don't interpolate for print quality.

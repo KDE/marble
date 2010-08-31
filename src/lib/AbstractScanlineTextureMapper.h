@@ -35,8 +35,9 @@ class AbstractScanlineTextureMapper : public QObject
     Q_OBJECT
 
 public:
-    AbstractScanlineTextureMapper( GeoSceneTexture *textureLayer, StackedTileLoader *tileLoader,
-                                   QObject *parent = 0 );
+    AbstractScanlineTextureMapper( GeoSceneTexture * const textureLayer,
+                                   StackedTileLoader * const tileLoader,
+                                   QObject * const parent = 0 );
     ~AbstractScanlineTextureMapper();
 
     virtual void mapTexture( ViewParams *viewParams ) = 0;
@@ -55,16 +56,16 @@ public:
     
  protected:
     void pixelValueF( const qreal lon, const qreal lat,
-                      QRgb* scanLine );
+                      QRgb* const scanLine );
     void pixelValue( const qreal lon, const qreal lat,
-                     QRgb* scanLine );
+                     QRgb* const scanLine );
 
     void pixelValueApproxF( const qreal lon, const qreal lat,
-                            QRgb *scanLine, int n );
+                            QRgb *scanLine, const int n );
     void pixelValueApprox( const qreal lon, const qreal lat,
-                           QRgb *scanLine, int n );
+                           QRgb *scanLine, const int n );
 
-    static int interpolationStep( ViewParams *viewParams );
+    static int interpolationStep( ViewParams * const viewParams );
 
     // method for fast integer calculation
     void nextTile( int& posx, int& posy );
@@ -72,7 +73,7 @@ public:
     // method for precise interpolation
     void nextTile( qreal& posx, qreal& posy );
 
-    void selectTileLevel( ViewParams* viewParams );
+    void selectTileLevel( ViewParams * const viewParams );
     void detectMaxTileLevel();
     void tileLevelInit( const int tileLevel );
 
@@ -165,12 +166,12 @@ inline int AbstractScanlineTextureMapper::globalHeight() const
     return m_globalHeight;
 }
 
-inline qreal AbstractScanlineTextureMapper::rad2PixelX( qreal longitude ) const
+inline qreal AbstractScanlineTextureMapper::rad2PixelX( const qreal longitude ) const
 {
     return longitude * m_normGlobalWidth;
 }
 
-inline qreal AbstractScanlineTextureMapper::rad2PixelY( qreal lat ) const
+inline qreal AbstractScanlineTextureMapper::rad2PixelY( const qreal lat ) const
 {
     switch ( m_textureLayer->projection() ) {
     case GeoSceneTexture::Equirectangular:
