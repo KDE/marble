@@ -82,8 +82,8 @@ public:
 
     // Converts Radian to global texture coordinates 
     // ( with origin in center, measured in pixel) 
-    qreal rad2PixelX( const qreal longitude ) const;
-    qreal rad2PixelY( const qreal latitude ) const;
+    qreal rad2PixelX( const qreal lon ) const;
+    qreal rad2PixelY( const qreal lat ) const;
 
     // Checks whether the pixelValueApprox method will make use of more than
     // one tile
@@ -166,9 +166,9 @@ inline int AbstractScanlineTextureMapper::globalHeight() const
     return m_globalHeight;
 }
 
-inline qreal AbstractScanlineTextureMapper::rad2PixelX( const qreal longitude ) const
+inline qreal AbstractScanlineTextureMapper::rad2PixelX( const qreal lon ) const
 {
-    return longitude * m_normGlobalWidth;
+    return lon * m_normGlobalWidth;
 }
 
 inline qreal AbstractScanlineTextureMapper::rad2PixelY( const qreal lat ) const
