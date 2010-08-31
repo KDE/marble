@@ -57,7 +57,8 @@ GeoNode* GPXwptTagHandler::parse(GeoParser& parser) const
         {
             lon = tmp.toString().toFloat();
         }
-        placemark.setCoordinate(lat, lon);
+        GeoDataCoordinates coordinate( lon, lat, 0, GeoDataCoordinates::Degree );
+        placemark.setCoordinate( coordinate.longitude(), coordinate.latitude() );
         doc->append(placemark);
 #ifdef DEBUG_TAGS
         mDebug() << "Parsed <" << gpxTag_wpt << "> waypoint: " << doc->size();
