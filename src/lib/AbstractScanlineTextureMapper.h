@@ -54,9 +54,9 @@ public:
     void notifyMapChanged();
     
  protected:
-    void pixelValueF( qreal lon, qreal lat, 
-                     QRgb* scanLine );
-    void pixelValue( qreal lon, qreal lat, 
+    void pixelValueF( const qreal lon, const qreal lat,
+                      QRgb* scanLine );
+    void pixelValue( const qreal lon, const qreal lat,
                      QRgb* scanLine );
 
     void pixelValueApproxF(const qreal& lon, const qreal& lat,

@@ -115,9 +115,8 @@ void AbstractScanlineTextureMapper::tileLevelInit( int tileLevel )
 }
 
 
-void AbstractScanlineTextureMapper::pixelValueF(qreal lon,
-                                               qreal lat, 
-                                               QRgb* scanLine )
+void AbstractScanlineTextureMapper::pixelValueF( const qreal lon, const qreal lat,
+                                                 QRgb* scanLine )
 {
     // The same method using integers performs about 33% faster.
     // However we need the qreal version to create the high quality mode.
@@ -148,9 +147,8 @@ void AbstractScanlineTextureMapper::pixelValueF(qreal lon,
     }
 }
 
-void AbstractScanlineTextureMapper::pixelValue(qreal lon,
-                                               qreal lat, 
-                                               QRgb* scanLine )
+void AbstractScanlineTextureMapper::pixelValue( const qreal lon, const qreal lat,
+                                                QRgb* scanLine )
 {
     // The same method using integers performs about 33% faster.
     // However we need the qreal version to create the high quality mode.
