@@ -91,7 +91,7 @@ void BookmarkManager::addBookmark( const GeoDataPlacemark &bookmark, const QStri
 
 QVector<GeoDataFolder*> BookmarkManager::folders() const
 {
-        return d->m_bookmarkDocument->folderList();
+    return d->m_bookmarkDocument ? d->m_bookmarkDocument->folderList() : QVector<GeoDataFolder*>();
 }
 
 void BookmarkManager::addNewBookmarkFolder( const QString &folder)
