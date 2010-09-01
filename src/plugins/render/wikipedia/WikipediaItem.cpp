@@ -173,7 +173,7 @@ QAction *WikipediaItem::action()
 
 void WikipediaItem::openBrowser( )
 {
-    if( !m_browser ) {
+    if ( !m_browser ) {
         m_browser = new TinyWebBrowser();
     }
     m_browser->load( url() );

@@ -58,7 +58,7 @@ void WikipediaModel::getAdditionalItems( const GeoDataLatLonAltBox& box,
                                          qint32 number )
 {
     // Geonames only supports wikipedia articles for earth
-    if( facade->target() != "earth" ) {
+    if ( facade->target() != "earth" ) {
         return;
     }
         
@@ -88,8 +88,8 @@ void WikipediaModel::parseFile( const QByteArray& file )
     
     QList<WikipediaItem*>::iterator it;
     
-    for( it = list.begin(); it != list.end(); ++it ) {
-        if( itemExists( (*it)->id() ) ) {
+    for ( it = list.begin(); it != list.end(); ++it ) {
+        if ( itemExists( (*it)->id() ) ) {
             delete *it;
             continue;
         }

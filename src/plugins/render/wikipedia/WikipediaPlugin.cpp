@@ -192,7 +192,7 @@ void WikipediaPlugin::updateSettings()
     setNumberOfItems( m_settings.value( "numberOfItems" ).toUInt() );
     
     AbstractDataPluginModel *abstractModel = model();
-    if( abstractModel != 0 ) {
+    if ( abstractModel != 0 ) {
         abstractModel->setItemSettings( m_settings );
     }
     
@@ -203,7 +203,7 @@ void WikipediaPlugin::updateSettings()
 }
 
 void WikipediaPlugin::checkNumberOfItems( quint32 number ) {
-    if( number > maximumNumberOfItems ) {
+    if ( number > maximumNumberOfItems ) {
         setNumberOfItems( maximumNumberOfItems );
     }
     else {

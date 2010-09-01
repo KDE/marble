@@ -53,10 +53,10 @@ void GeonamesParser::readUnknownElement()
     while ( !atEnd() ) {
         readNext();
 
-        if( isEndElement() )
+        if ( isEndElement() )
             break;
 
-        if( isStartElement() )
+        if ( isStartElement() )
             readUnknownElement();
     }
 }
@@ -69,11 +69,11 @@ void GeonamesParser::readGeonames()
     while ( !atEnd() ) {
         readNext();
         
-        if( isEndElement() )
+        if ( isEndElement() )
             break;
         
-        if( isStartElement() ) {
-            if( name() == "entry" )
+        if ( isStartElement() ) {
+            if ( name() == "entry" )
                 readEntry();
             else
                 readUnknownElement();
@@ -89,24 +89,24 @@ void GeonamesParser::readEntry()
     WikipediaItem *item = new WikipediaItem( m_parent );
     m_list->append( item );
     
-    while( !atEnd() ) {
+    while ( !atEnd() ) {
         readNext();
         
-        if( isEndElement() )
+        if ( isEndElement() )
             break;
             
-        if( isStartElement() ) {
-            if( name() == "title" )
+        if ( isStartElement() ) {
+            if ( name() == "title" )
                 readTitle( item );
-            else if( name() == "lng" )
+            else if ( name() == "lng" )
                 readLongitude( item );
-            else if( name() == "lat" )
+            else if ( name() == "lat" )
                 readLatitude( item );
-            else if( name() == "wikipediaUrl" )
+            else if ( name() == "wikipediaUrl" )
                 readUrl( item );
-            else if( name() == "summary" )
+            else if ( name() == "summary" )
                 readSummary( item );
-            else if( name() == "thumbnailImg" )
+            else if ( name() == "thumbnailImg" )
                 readThumbnailImage( item );
             else
                 readUnknownElement();
@@ -119,13 +119,13 @@ void GeonamesParser::readTitle( WikipediaItem *item )
     Q_ASSERT( isStartElement()
               && name() == "title" );
               
-    while( !atEnd() ) {
+    while ( !atEnd() ) {
         readNext();
         
-        if( isEndElement() )
+        if ( isEndElement() )
             break;
         
-        if( isCharacters() ) {
+        if ( isCharacters() ) {
             item->setName( text().toString() );
         }
     }
@@ -136,13 +136,13 @@ void GeonamesParser::readLongitude( WikipediaItem *item )
     Q_ASSERT( isStartElement()
               && name() == "lng" );
               
-    while( !atEnd() ) {
+    while ( !atEnd() ) {
         readNext();
         
-        if( isEndElement() )
+        if ( isEndElement() )
             break;
         
-        if( isCharacters() ) {
+        if ( isCharacters() ) {
             item->setLongitude( text().toString().toDouble() * DEG2RAD );
         }
     }
@@ -153,13 +153,13 @@ void GeonamesParser::readLatitude( WikipediaItem *item )
     Q_ASSERT( isStartElement()
               && name() == "lat" );
               
-    while( !atEnd() ) {
+    while ( !atEnd() ) {
         readNext();
         
-        if( isEndElement() )
+        if ( isEndElement() )
             break;
         
-        if( isCharacters() ) {
+        if ( isCharacters() ) {
             item->setLatitude( text().toString().toDouble() * DEG2RAD );
         }
     }
@@ -170,13 +170,13 @@ void GeonamesParser::readUrl( WikipediaItem *item )
     Q_ASSERT( isStartElement()
               && name() == "wikipediaUrl" );
               
-    while( !atEnd() ) {
+    while ( !atEnd() ) {
         readNext();
         
-        if( isEndElement() )
+        if ( isEndElement() )
             break;
         
-        if( isCharacters() ) {
+        if ( isCharacters() ) {
             item->setUrl( QUrl::fromEncoded( text().toString().toUtf8() ) );
         }
     }
@@ -187,13 +187,13 @@ void GeonamesParser::readSummary( WikipediaItem *item )
     Q_ASSERT( isStartElement()
               && name() == "summary" );
 
-    while( !atEnd() ) {
+    while ( !atEnd() ) {
         readNext();
 
-        if( isEndElement() )
+        if ( isEndElement() )
             break;
 
-        if( isCharacters() ) {
+        if ( isCharacters() ) {
             item->setSummary( text().toString() );
         }
     }
@@ -204,13 +204,13 @@ void GeonamesParser::readThumbnailImage( WikipediaItem *item )
     Q_ASSERT( isStartElement()
               && name() == "thumbnailImg" );
              
-    while( !atEnd() ) {
+    while ( !atEnd() ) {
         readNext();
         
-        if( isEndElement() )
+        if ( isEndElement() )
             break;
         
-        if( isCharacters() ) {
+        if ( isCharacters() ) {
             item->setThumbnailImageUrl( QUrl( text().toString() ) );
         }
     }
