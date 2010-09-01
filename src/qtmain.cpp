@@ -86,26 +86,34 @@ int main(int argc, char *argv[])
     int dataPathIndex=0;
     MarbleGlobal::Profiles profiles = MarbleGlobal::detectProfiles();
 
-    for ( int i = 1; i < argc; ++i ) {
-        if ( strcmp( argv[ i ], "--debug-info" ) == 0 )
+    QStringList args = QApplication::arguments();
+
+    for ( int i = 1; i < args.count(); ++i ) {
+        const QString arg = args.at(i);
+
+        if ( arg == "--debug-info" )
         {
             MarbleDebug::enable = true;
         }
-        else if ( strcmp( argv[ i ], "--marbledatapath" ) == 0 && i + 1 < argc )
+        else if ( arg.startsWith( "--marbledatapath=", Qt::CaseInsensitive ) )
         {
-            dataPathIndex = i + 1;
-            marbleDataPath = argv[ dataPathIndex ];
+            marbleDataPath = args.at(i).mid(17);
         }
-        else if ( strcmp( argv[ i ], "--smallscreen" ) == 0 ) {
+        else if ( arg.compare( "--marbledatapath", Qt::CaseInsensitive ) ) {
+            dataPathIndex = i + 1;
+            marbleDataPath = args.value( dataPathIndex );
+            ++i;
+        }
+        else if ( arg == "--smallscreen" ) {
             profiles |= MarbleGlobal::SmallScreen;
         }
-        else if ( strcmp( argv[ i ], "--nosmallscreen" ) == 0 ) {
+        else if ( arg == "--nosmallscreen" ) {
             profiles &= ~MarbleGlobal::SmallScreen;
         }
-        else if ( strcmp( argv[ i ], "--highresolution" ) == 0 ) {
+        else if ( arg == "--highresolution" ) {
             profiles |= MarbleGlobal::HighResolution;
         }
-        else if ( strcmp( argv[ i ], "--nohighresolution" ) == 0 ) {
+        else if ( arg == "--nohighresolution" ) {
             profiles &= ~MarbleGlobal::HighResolution;
         }
     }
@@ -116,40 +124,39 @@ int main(int argc, char *argv[])
 
     MarbleTest *marbleTest = new MarbleTest( window->marbleWidget() );
 
-
 //    window->marbleWidget()->rotateTo( 0, 0, -90 );
 //    window->show();
 
-    for ( int i = 1; i < argc; ++i ) {
-        if ( strcmp( argv[ i ], "--timedemo" ) == 0 )
+    for ( int i = 1; i < args.count(); ++i ) {
+        const QString arg = args.at(i);
+        if ( arg == "--timedemo" )
         {
             window->resize(900, 640);
             marbleTest->timeDemo();
             return 0;
         }
-        else if( strcmp( argv[ i ], "--gpsdemo" ) == 0 ) {
+        else if( arg == "--gpsdemo" ) {
             window->resize( 900, 640 );
             marbleTest->gpsDemo();
             return 0;
         }
-        else if( strcmp( argv[ i ], "--fps" ) == 0 ) {
+        else if( arg == "--fps" ) {
             window->marbleControl()->marbleWidget()->setShowFrameRate( true );
         }
-        else if( strcmp( argv[ i ], "--enableCurrentLocation" ) ==0 )
+        else if( arg == "--enableCurrentLocation" )
         {
             window->marbleControl()->setCurrentLocationTabShown(true);
         }
-        else if( strcmp( argv[ i ], "--enableFileView" ) ==0 )
+        else if( arg == "--enableFileView" )
         {
             window->marbleControl()->setFileViewTabShown(true);
         }
-        else if (strcmp( argv[ i ],"--tile-id" ) ==0 ) 
+        else if ( arg == "--tile-id" )
         {
 	    window->marbleControl()->marbleWidget()->setShowTileId(true);
         }
-        else if ( QFile::exists( app.arguments().at( i ) ) 
-                && i != dataPathIndex )
-            ( window->marbleControl() )->addPlacemarkFile( argv[i] );
+        else if ( i != dataPathIndex && QFile::exists( arg ) )
+            ( window->marbleControl() )->addPlacemarkFile( arg );
     }
 
     delete marbleTest;
