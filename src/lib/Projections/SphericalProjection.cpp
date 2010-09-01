@@ -197,12 +197,10 @@ bool SphericalProjection::geoCoordinates( const int x, const int y,
     const qreal  inverseRadius = 1.0 / (qreal)(viewport->radius());
     bool          noerr         = false;
 
-    qreal centerX = +(qreal)( x - viewport->width()  / 2 ) * inverseRadius;
-    qreal centerY = -(qreal)( y - viewport->height() / 2 ) * inverseRadius;
+    const qreal qx = +(qreal)( x - viewport->width()  / 2 ) * inverseRadius;
+    const qreal qy = -(qreal)( y - viewport->height() / 2 ) * inverseRadius;
 
-    if ( 1 > centerX * centerX + centerY * centerY ) {
-        qreal qx = centerX;
-        qreal qy = centerY;
+    if ( 1 > qx * qx + qy * qy ) {
         qreal qr = 1.0 - qy * qy;
 
         qreal qr2z = qr - qx * qx;
