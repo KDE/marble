@@ -25,6 +25,8 @@
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "global.h"
+#include "routing/instructions/RoutingInstruction.h"
+#include "GeoDataExtendedData.h"
 
 #include <QtCore/QBuffer>
 #include <QtCore/QPointer>
@@ -43,6 +45,9 @@ struct RouteElement {
     QString description;
     GeoDataLineString instructionPointSet;
     qreal instructionDistance;
+    RoutingInstruction::TurnType turnType;
+
+    RouteElement() : turnType( RoutingInstruction::Unknown ) {}
 };
 
 /** @todo: Eventually switch to GeoDataDocument as the underlying storage */
@@ -68,6 +73,7 @@ public:
     GeoDataCoordinates m_location;
     QString m_nextDescription;
     bool m_routeLeft;
+    QMap<RoutingInstruction::TurnType,QPixmap> m_turnTypePixmaps;
 
     void importPlacemark( const GeoDataPlacemark *placemark );
 };
@@ -83,7 +89,19 @@ RoutingModelPrivate::RoutingModelPrivate()
       m_currentInstructionLength( 0.0 ),
       m_routeLeft( false )
 {
-    // nothing to do
+    m_turnTypePixmaps[RoutingInstruction::Unknown] = QPixmap( MarbleDirs::path( "bitmaps/routing_step.png" ) );
+    m_turnTypePixmaps[RoutingInstruction::Straight] = QPixmap( ":/data/bitmaps/turn-continue.png");
+    m_turnTypePixmaps[RoutingInstruction::SlightRight] = QPixmap( ":/data/bitmaps/turn-slight-right.png");
+    m_turnTypePixmaps[RoutingInstruction::Right] = QPixmap( ":/data/bitmaps/turn-right.png");
+    m_turnTypePixmaps[RoutingInstruction::SharpRight] = QPixmap( ":/data/bitmaps/turn-sharp-right.png");
+    m_turnTypePixmaps[RoutingInstruction::TurnAround] = QPixmap( ":/data/bitmaps/turn-around.png");
+    m_turnTypePixmaps[RoutingInstruction::SharpLeft] = QPixmap( ":/data/bitmaps/turn-sharp-left.png");
+    m_turnTypePixmaps[RoutingInstruction::Left] = QPixmap( ":/data/bitmaps/turn-left.png");
+    m_turnTypePixmaps[RoutingInstruction::SlightLeft] = QPixmap( ":/data/bitmaps/turn-slight-left.png");
+    m_turnTypePixmaps[RoutingInstruction::RoundaboutFirstExit] = QPixmap( ":/data/bitmaps/turn-roundabout-first.png");
+    m_turnTypePixmaps[RoutingInstruction::RoundaboutSecondExit] = QPixmap( ":/data/bitmaps/turn-roundabout-second.png");
+    m_turnTypePixmaps[RoutingInstruction::RoundaboutThirdExit] = QPixmap( ":/data/bitmaps/turn-roundabout-third.png");
+    m_turnTypePixmaps[RoutingInstruction::RoundaboutExit] = QPixmap( ":/data/bitmaps/turn-roundabout-far.png");
 }
 
 void RoutingModelPrivate::importPlacemark( const GeoDataPlacemark *placemark )
@@ -99,6 +117,10 @@ void RoutingModelPrivate::importPlacemark( const GeoDataPlacemark *placemark )
             element.position = lineString->at( 0 );
             for( int i = 0; i<lineString->size(); ++i ) {
                 element.instructionPointSet << lineString->at( i );
+            }
+            if ( placemark->extendedData().contains( "turnType" ) ) {
+                QVariant turnType = placemark->extendedData().value( "turnType" ).value();
+                element.turnType = qVariantValue<RoutingInstruction::TurnType>( turnType );
             }
             element.instructionDistance = element.instructionPointSet.length( EARTH_RADIUS );
             m_route.push_back( element );
@@ -159,8 +181,9 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
             return element.description;
             break;
         case Qt::DecorationRole:
-            if ( element.type == Instruction )
-                return QPixmap( MarbleDirs::path( "bitmaps/routing_step.png" ) );
+            if ( element.type == Instruction ) {
+               return d->m_turnTypePixmaps[element.turnType];
+            }
 
             return QVariant();
             break;

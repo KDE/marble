@@ -11,5 +11,17 @@
     <file>../../data/bitmaps/cursor_tc.xpm</file>
     <file>../../data/bitmaps/cursor_tl.xpm</file>
     <file>../../data/bitmaps/cursor_tr.xpm</file>
+    <file>../../data/bitmaps/turn-around.png</file>
+    <file>../../data/bitmaps/turn-continue.png</file>
+    <file>../../data/bitmaps/turn-left.png</file>
+    <file>../../data/bitmaps/turn-right.png</file>
+    <file>../../data/bitmaps/turn-roundabout-far.png</file>
+    <file>../../data/bitmaps/turn-roundabout-first.png</file>
+    <file>../../data/bitmaps/turn-roundabout-second.png</file>
+    <file>../../data/bitmaps/turn-roundabout-third.png</file>
+    <file>../../data/bitmaps/turn-sharp-left.png</file>
+    <file>../../data/bitmaps/turn-sharp-right.png</file>
+    <file>../../data/bitmaps/turn-slight-left.png</file>
+    <file>../../data/bitmaps/turn-slight-right.png</file>
   </qresource>
 </RCC>

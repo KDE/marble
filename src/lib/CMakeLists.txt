@@ -184,6 +184,11 @@ set(marblewidget_SRCS
     routing/RoutingLayer.cpp
     routing/RoutingInputWidget.cpp
     routing/RoutingWidget.cpp
+    routing/instructions/InstructionTransformation.cpp
+    routing/instructions/RoutingInstruction.cpp
+    routing/instructions/RoutingPoint.cpp
+    routing/instructions/RoutingWaypoint.cpp
+    routing/instructions/WaypointParser.cpp
 
     MarbleRunnerManager.cpp
 

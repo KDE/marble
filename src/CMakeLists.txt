@@ -9,6 +9,7 @@ add_definitions(-DMARBLE_DBUS)
 endif(BUILD_WITH_DBUS)
 
 add_subdirectory( tilecreator )
+add_subdirectory( routing-instructions )
 add_subdirectory( lib )
 add_subdirectory( plugins )
 add_subdirectory( bindings )

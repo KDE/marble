@@ -13,6 +13,8 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "routing/RouteSkeleton.h"
+#include "routing/instructions/WaypointParser.h"
+#include "routing/instructions/InstructionTransformation.h"
 #include "GeoDataDocument.h"
 #include "GeoDataExtendedData.h"
 
@@ -27,17 +29,31 @@ class GosmoreRunnerPrivate
 public:
     QFileInfo m_gosmoreMapFile;
 
+    WaypointParser m_parser;
+
+    /** Static to share the cache among all instances */
+    static QMap<QString, QByteArray> m_partialRoutes;
+
     QByteArray retrieveWaypoints( const QString &query ) const;
 
-    GeoDataDocument* createDocument( GeoDataLineString* routeWaypoints ) const;
+    GeoDataDocument* createDocument( GeoDataLineString* routeWaypoints, const QVector<GeoDataPlacemark*> instructions ) const;
 
     GeoDataLineString parseGosmoreOutput( const QByteArray &content ) const;
 
     void merge( GeoDataLineString* one, const GeoDataLineString& two ) const;
 
-    /** Static to share the cache among all instances */
-    static QMap<QString, QByteArray> m_partialRoutes;
+    QVector<GeoDataPlacemark*> parseGosmoreInstructions( const QByteArray &content );
+
+    GosmoreRunnerPrivate();
 };
+
+GosmoreRunnerPrivate::GosmoreRunnerPrivate()
+{
+    m_parser.setLineSeparator("\r");
+    m_parser.setFieldSeparator(',');
+    m_parser.setFieldIndex( WaypointParser::RoadName, 4 );
+    m_parser.addJunctionTypeMapping( "Jr", RoutingWaypoint::Roundabout );
+}
 
 QMap<QString, QByteArray> GosmoreRunnerPrivate::m_partialRoutes;
 
@@ -54,10 +70,6 @@ void GosmoreRunnerPrivate::merge( GeoDataLineString* one, const GeoDataLineStrin
 
 QByteArray GosmoreRunnerPrivate::retrieveWaypoints( const QString &query ) const
 {
-    if ( m_partialRoutes.contains(query) ) {
-        return m_partialRoutes[query];
-    }
-
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     env.insert("QUERY_STRING", query);
     env.insert("LC_ALL", "C");
@@ -71,8 +83,7 @@ QByteArray GosmoreRunnerPrivate::retrieveWaypoints( const QString &query ) const
     }
 
     if ( gosmore.waitForFinished(15000) ) {
-        m_partialRoutes[query] = gosmore.readAllStandardOutput();
-        return m_partialRoutes[query];
+        return gosmore.readAllStandardOutput();
     }
     else {
         mDebug() << "Couldn't stop gosmore";
@@ -99,7 +110,49 @@ GeoDataLineString GosmoreRunnerPrivate::parseGosmoreOutput( const QByteArray &co
     return routeWaypoints;
 }
 
-GeoDataDocument* GosmoreRunnerPrivate::createDocument( GeoDataLineString* routeWaypoints ) const
+QVector<GeoDataPlacemark*> GosmoreRunnerPrivate::parseGosmoreInstructions( const QByteArray &content )
+{
+    // Determine gosmore version
+    QStringList lines = QString::fromUtf8( content ).split( '\r' );
+    if ( lines.size() > 2 ) {
+        QStringList fields = lines.at( lines.size()-2 ).split(',');
+        m_parser.setFieldIndex( WaypointParser::RoadName, fields.size()-1 );
+        if ( fields.size() < 5 || fields.size() > 6 ) {
+            // Can happen when gosmore changes the output format, returns garbage
+            // or the last street name contains a comma. We may still parse it correctly, just try.
+            mDebug() << "Unexpected number of fields. This gosmore version may be unsupported.";
+        }
+    }
+
+    QVector<GeoDataPlacemark*> result;
+    QTextStream stream( content );
+    stream.setCodec("UTF8");
+    stream.setAutoDetectUnicode( true );
+
+    RoutingInstructions directions = InstructionTransformation::process( m_parser.parse( stream ) );
+    for( int i=0; i<directions.size(); ++i ) {
+        GeoDataPlacemark* placemark = new GeoDataPlacemark( directions[i].instructionText() );
+        GeoDataExtendedData extendedData;
+        GeoDataData turnType;
+        turnType.setValue( qVariantFromValue<RoutingInstruction::TurnType>( directions[i].turnType() ) );
+        extendedData.addValue( "turnType", turnType );
+        placemark->setExtendedData( extendedData );
+        Q_ASSERT( !directions[i].points().isEmpty() );
+        GeoDataLineString* geometry = new GeoDataLineString;
+        QVector<RoutingWaypoint> items = directions[i].points();
+        for (int j=0; j<items.size(); ++j ) {
+            RoutingPoint point = items[j].point();
+            GeoDataCoordinates coordinates( point.lon(), point.lat(), 0.0, GeoDataCoordinates::Degree );
+            geometry->append( coordinates );
+        }
+        placemark->setGeometry( geometry );
+        result.push_back( placemark );
+    }
+
+    return result;
+}
+
+GeoDataDocument* GosmoreRunnerPrivate::createDocument( GeoDataLineString* routeWaypoints, const QVector<GeoDataPlacemark*> instructions ) const
 {
     if ( !routeWaypoints || routeWaypoints->isEmpty() ) {
         return 0;
@@ -119,6 +172,12 @@ GeoDataDocument* GosmoreRunnerPrivate::createDocument( GeoDataLineString* routeW
         unit = "km";
     }
     result->setName( name.arg( length, 0, 'f', 1 ).arg( unit ) );
+
+    foreach( GeoDataPlacemark* placemark, instructions )
+    {
+        result->append( placemark );
+    }
+
     return result;
 }
 
@@ -150,6 +209,7 @@ void GosmoreRunner::retrieveRoute( RouteSkeleton *route )
     }
 
     GeoDataLineString* wayPoints = new GeoDataLineString;
+    QByteArray completeOutput;
 
     for( int i=0; i<route->size()-1; ++i )
     {
@@ -163,10 +223,22 @@ void GosmoreRunner::retrieveRoute( RouteSkeleton *route )
         double tLat = destination.latitude( GeoDataCoordinates::Degree );
         queryString = queryString.arg(tLat, 0, 'f', 8).arg(tLon, 0, 'f', 8);
 
-        d->merge( wayPoints, d->parseGosmoreOutput( d->retrieveWaypoints( queryString ) ) );
+        QByteArray output;
+        if ( d->m_partialRoutes.contains( queryString ) ) {
+            output = d->m_partialRoutes[queryString];
+        }
+        else {
+            output = d->retrieveWaypoints( queryString );
+        }
+
+        GeoDataLineString points = d->parseGosmoreOutput( output );
+        d->merge( wayPoints, points );
+        completeOutput.append( output );
     }
 
-    GeoDataDocument* result = d->createDocument( wayPoints );
+    QVector<GeoDataPlacemark*> instructions = d->parseGosmoreInstructions( completeOutput );
+
+    GeoDataDocument* result = d->createDocument( wayPoints, instructions );
     emit routeCalculated( result );
 }
 

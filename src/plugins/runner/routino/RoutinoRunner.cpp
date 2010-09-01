@@ -14,7 +14,10 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "routing/RouteSkeleton.h"
+#include "routing/instructions/WaypointParser.h"
+#include "routing/instructions/InstructionTransformation.h"
 #include "GeoDataDocument.h"
+#include "GeoDataExtendedData.h"
 
 #include <QtCore/QProcess>
 #include <QtCore/QMap>
@@ -28,12 +31,25 @@ class RoutinoRunnerPrivate
 public:
     QDir m_mapDir;
 
-    GeoDataLineString* retrieveWaypoints( const QStringList &params ) const;
+    WaypointParser m_parser;
 
-    GeoDataDocument* createDocument( GeoDataLineString* routeWaypoints ) const;
+    QByteArray retrieveWaypoints( const QStringList &params ) const;
+
+    GeoDataDocument* createDocument( GeoDataLineString* routeWaypoints, const QVector<GeoDataPlacemark*> instructions ) const;
 
     GeoDataLineString* parseRoutinoOutput( const QByteArray &content ) const;
+
+    QVector<GeoDataPlacemark*> parseRoutinoInstructions( const QByteArray &content ) const;
+
+    RoutinoRunnerPrivate();
 };
+
+RoutinoRunnerPrivate::RoutinoRunnerPrivate()
+{
+    m_parser.setLineSeparator("\n");
+    m_parser.setFieldSeparator('\t');
+    m_parser.setFieldIndex( WaypointParser::RoadName, 10 );
+}
 
 class TemporaryDir
 {
@@ -65,7 +81,7 @@ private:
     QString m_dirName;
 };
 
-GeoDataLineString* RoutinoRunnerPrivate::retrieveWaypoints( const QStringList &params ) const
+QByteArray RoutinoRunnerPrivate::retrieveWaypoints( const QStringList &params ) const
 {
     TemporaryDir dir;
     QProcess routinoProcess;
@@ -93,7 +109,7 @@ GeoDataLineString* RoutinoRunnerPrivate::retrieveWaypoints( const QStringList &p
             mDebug() << "Can't get results";
         } else {
             file.open( QIODevice::ReadOnly );
-            return parseRoutinoOutput( file.readAll() );
+            return file.readAll();
         }
     }
     else {
@@ -125,7 +141,37 @@ GeoDataLineString* RoutinoRunnerPrivate::parseRoutinoOutput( const QByteArray &c
     return routeWaypoints;
 }
 
-GeoDataDocument* RoutinoRunnerPrivate::createDocument( GeoDataLineString* routeWaypoints ) const
+QVector<GeoDataPlacemark*> RoutinoRunnerPrivate::parseRoutinoInstructions( const QByteArray &content ) const
+{
+    QVector<GeoDataPlacemark*> result;
+    QTextStream stream( content );
+    stream.setCodec("UTF8");
+    stream.setAutoDetectUnicode( true );
+
+    RoutingInstructions directions = InstructionTransformation::process( m_parser.parse( stream ) );
+    for( int i=0; i<directions.size(); ++i ) {
+        GeoDataPlacemark* placemark = new GeoDataPlacemark( directions[i].instructionText() );
+        GeoDataExtendedData extendedData;
+        GeoDataData turnType;
+        turnType.setValue( qVariantFromValue<RoutingInstruction::TurnType>( directions[i].turnType() ) );
+        extendedData.addValue( "turnType", turnType );
+        placemark->setExtendedData( extendedData );
+        Q_ASSERT( !directions[i].points().isEmpty() );
+        GeoDataLineString* geometry = new GeoDataLineString;
+        QVector<RoutingWaypoint> items = directions[i].points();
+        for (int j=0; j<items.size(); ++j ) {
+            RoutingPoint point = items[j].point();
+            GeoDataCoordinates coordinates( point.lon(), point.lat(), 0.0, GeoDataCoordinates::Degree );
+            geometry->append( coordinates );
+        }
+        placemark->setGeometry( geometry );
+        result.push_back( placemark );
+    }
+
+    return result;
+}
+
+GeoDataDocument* RoutinoRunnerPrivate::createDocument( GeoDataLineString* routeWaypoints, const QVector<GeoDataPlacemark*> instructions ) const
 {
     if ( !routeWaypoints || routeWaypoints->isEmpty() ) {
         return 0;
@@ -145,6 +191,12 @@ GeoDataDocument* RoutinoRunnerPrivate::createDocument( GeoDataLineString* routeW
         unit = "km";
     }
     result->setName( name.arg( length, 0, 'f', 1 ).arg( unit ) );
+
+    foreach( GeoDataPlacemark* placemark, instructions )
+    {
+        result->append( placemark );
+    }
+
     return result;
 }
 
@@ -177,6 +229,13 @@ void RoutinoRunner::retrieveRoute( RouteSkeleton *route )
     }
 
     QStringList params;
+    for( int i=0; i<route->size(); ++i )
+    {
+        double fLon = route->at(i).longitude( GeoDataCoordinates::Degree );
+        double fLat = route->at(i).latitude( GeoDataCoordinates::Degree );
+        params << QString("--lat%1=%2").arg(i+1).arg(fLat, 0, 'f', 8);
+        params << QString("--lon%1=%2").arg(i+1).arg(fLon, 0, 'f', 8);
+    }
 
     switch( route->routePreference() ) {
     case RouteSkeleton::CarFastest:
@@ -202,16 +261,11 @@ void RoutinoRunner::retrieveRoute( RouteSkeleton *route )
         params << "--highway-motorway=0";
     }
 
-    for( int i=0; i<route->size(); ++i )
-    {
-        double fLon = route->at(i).longitude( GeoDataCoordinates::Degree );
-        double fLat = route->at(i).latitude( GeoDataCoordinates::Degree );
-        params << QString("--lat%1=%2").arg(i+1).arg(fLat, 0, 'f', 8);
-        params << QString("--lon%1=%2").arg(i+1).arg(fLon, 0, 'f', 8);
-    }
-    GeoDataLineString* wayPoints = d->retrieveWaypoints( params );
+    QByteArray output = d->retrieveWaypoints( params );
+    GeoDataLineString* wayPoints = d->parseRoutinoOutput( output );
+    QVector<GeoDataPlacemark*> instructions = d->parseRoutinoInstructions( output );
 
-    GeoDataDocument* result = d->createDocument( wayPoints );
+    GeoDataDocument* result = d->createDocument( wayPoints, instructions );
     mDebug() << this << "routeCalculated";
     emit routeCalculated( result );
 }
