@@ -71,9 +71,6 @@ bool WikipediaItem::initialized()
     
 void WikipediaItem::addDownloadedFile( const QString& url, const QString& type )
 {
-    Q_UNUSED( url )
-    Q_UNUSED( type )
-
     if ( type == "thumbnail" ) {
         m_thumbnail.load( url );
         updateSize();
