@@ -24,6 +24,7 @@
 #include <QtGui/QRadioButton>
 #include <QtGui/QShowEvent>
 #include <QtGui/QVBoxLayout>
+#include <QtGui/QScrollArea>
 
 #include "AbstractScanlineTextureMapper.h"
 #include "GeoDataLatLonAltBox.h"
@@ -186,8 +187,21 @@ DownloadRegionDialog::DownloadRegionDialog( MarbleModel const * const model, QWi
     layout->addWidget( d->createSelectionMethodBox() );
     layout->addWidget( d->m_tileLevelRangeWidget );
     layout->addLayout( d->createTilesCounter() );
-    layout->addWidget( d->createOkCancelButtonBox() );
-    setLayout( layout );
+    
+    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        QWidget* widget = new QWidget( this );
+        widget->setLayout( layout );
+        QScrollArea* scrollArea = new QScrollArea( this );
+        scrollArea->setFrameShape( QFrame::NoFrame );
+        scrollArea->setWidget( widget );
+        QVBoxLayout * const mainLayout = new QVBoxLayout;
+        mainLayout->addWidget( scrollArea );
+        mainLayout->addWidget( d->createOkCancelButtonBox() );
+        setLayout( mainLayout );
+    } else {
+        layout->addWidget( d->createOkCancelButtonBox() );
+        setLayout( layout );
+    }  
 
     connect( d->m_latLonBoxWidget, SIGNAL( valueChanged() ), SLOT( updateTilesCount() ));
     connect( d->m_tileLevelRangeWidget, SIGNAL( topLevelChanged( int )),
