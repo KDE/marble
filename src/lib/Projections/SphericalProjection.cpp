@@ -195,27 +195,26 @@ bool SphericalProjection::geoCoordinates( const int x, const int y,
                                           GeoDataCoordinates::Unit unit )
 {
     const qreal  inverseRadius = 1.0 / (qreal)(viewport->radius());
-    bool          noerr         = false;
 
     const qreal qx = +(qreal)( x - viewport->width()  / 2 ) * inverseRadius;
     const qreal qy = -(qreal)( y - viewport->height() / 2 ) * inverseRadius;
 
-    if ( 1 > qx * qx + qy * qy ) {
-        const qreal qz = sqrt( 1 - qx * qx - qy * qy );
-
-        Quaternion  qpos( 0.0, qx, qy, qz );
-        qpos.rotateAroundAxis( viewport->planetAxis() );
-        qpos.getSpherical( lon, lat );
-
-        noerr = true;
+    if ( 1 <= qx * qx + qy * qy ) {
+        return false;
     }
+
+    const qreal qz = sqrt( 1 - qx * qx - qy * qy );
+
+    Quaternion  qpos( 0.0, qx, qy, qz );
+    qpos.rotateAroundAxis( viewport->planetAxis() );
+    qpos.getSpherical( lon, lat );
 
     if ( unit == GeoDataCoordinates::Degree ) {
         lon *= RAD2DEG;
         lat *= RAD2DEG;
     }
 
-    return noerr;
+    return true;
 }
 
 GeoDataLatLonAltBox SphericalProjection::latLonAltBox( const QRect& screenRect,
