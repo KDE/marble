@@ -201,10 +201,7 @@ bool SphericalProjection::geoCoordinates( const int x, const int y,
     const qreal qy = -(qreal)( y - viewport->height() / 2 ) * inverseRadius;
 
     if ( 1 > qx * qx + qy * qy ) {
-        qreal qr = 1.0 - qy * qy;
-
-        qreal qr2z = qr - qx * qx;
-        qreal qz   = ( qr2z > 0.0 ) ? sqrt( qr2z ) : 0.0;
+        const qreal qz = sqrt( 1 - qx * qx - qy * qy );
 
         Quaternion  qpos( 0.0, qx, qy, qz );
         qpos.rotateAroundAxis( viewport->planetAxis() );
