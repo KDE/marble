@@ -264,6 +264,12 @@ QString RoutingInstruction::nextDistanceInstruction() const
         length /= 1000;
         distanceUnit = "km";
         precision = 1;
+    } else if ( length >= 200 ) {
+        length = 50 * qRound( length / 50 );
+    } else if ( length >= 100 ) {
+        length = 25 * qRound( length / 25 );
+    } else {
+        length = 10 * qRound( length / 10 );
     }
 
     if ( length == 0 ) {
