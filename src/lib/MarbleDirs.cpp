@@ -289,7 +289,7 @@ QString MarbleDirs::marbleDataPath()
 
 QString MarbleDirs::marblePluginPath()
 {
-    return runTimeMarbleDataPath;
+    return runTimeMarblePluginPath;
 }
 
 void MarbleDirs::setMarbleDataPath( const QString& adaptedPath )
