@@ -20,11 +20,13 @@
 
 #include <QtGui/QWidget>
 #include <QtGui/QPixmap>
+#include <QtCore/QPointer>
 
 #include "MarbleWidget.h"
 #include "MarbleControlBox.h"
 
 class QSplitter;
+class QPrintDialog;
 
 namespace Marble
 {
@@ -71,6 +73,10 @@ class ControlView : public QWidget
     void setMapViewTabShown( bool );
     void setCurrentLocationTabShown( bool );
     void setFileViewTabShown( bool );
+    void printMapScreenShot( QPointer<QPrintDialog> dialog );
+    void printPixmap( QPrinter * printer, const QPixmap& pixmap );
+    void printPreview();
+    void paintPrintPreview( QPrinter * printer );
 
  private:
     //MarbleModel       *m_marbleModel;

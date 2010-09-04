@@ -71,9 +71,6 @@ class MainWindow : public QMainWindow
     void  exportMapScreenShot();
     void  showDownloadRegionDialog();
     void  printMapScreenShot();
-    void  printPixmap( QPrinter * printer, const QPixmap& pixmap );
-    void  printPreview();
-    void  paintPrintPreview( QPrinter * printer );
     void  workOffline( bool );
     
     // Edit Menu

@@ -15,6 +15,11 @@
 #include <QtGui/QLayout>
 #include <QtGui/QSplitter>
 #include <QtGui/QStringListModel>
+#include <QtGui/QPrintDialog>
+#include <QtGui/QPrintPreviewDialog>
+#include <QtGui/QPrinter>
+#include <QtGui/QPainter>
+#include <QtCore/QPointer>
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
@@ -149,6 +154,56 @@ QString ControlView::defaultMapThemeId() const
     }
 
     return QString();
+}
+
+void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
+{
+#ifndef QT_NO_PRINTER
+    if (printDialog->exec() == QDialog::Accepted) {
+        QPixmap mapPixmap = mapScreenShot();
+        printPixmap( printDialog->printer(), mapPixmap );
+    }
+#endif
+}
+
+void ControlView::printPixmap( QPrinter * printer, const QPixmap& pixmap  )
+{
+#ifndef QT_NO_PRINTER
+    QSize printSize = pixmap.size();
+    QRect mapPageRect = printer->pageRect();
+    printSize.scale( printer->pageRect().size(), Qt::KeepAspectRatio );
+    QPoint printTopLeft( ( mapPageRect.width() - printSize.width() ) / 2 ,
+                         ( mapPageRect.height() - printSize.height() ) / 2 );
+    QRect mapPrintRect( printTopLeft, printSize );
+
+    QPainter painter;
+    if (!painter.begin(printer))
+        return;
+    painter.drawPixmap( mapPrintRect, pixmap, pixmap.rect() );
+    painter.end();
+#endif
+}
+
+// QPointer is used because of issues described in http://www.kdedevelopers.org/node/3919
+void ControlView::printPreview()
+{
+#ifndef QT_NO_PRINTER
+    QPrinter printer( QPrinter::HighResolution );
+
+    QPointer<QPrintPreviewDialog> preview = new QPrintPreviewDialog( &printer, this );
+    preview->setWindowFlags ( Qt::Window );
+    connect( preview, SIGNAL( paintRequested( QPrinter * ) ), SLOT( paintPrintPreview( QPrinter * ) ) );
+    preview->exec();
+    delete preview;
+#endif
+}
+
+void ControlView::paintPrintPreview( QPrinter * printer )
+{
+#ifndef QT_NO_PRINTER
+    QPixmap mapPixmap = mapScreenShot();
+    printPixmap( printer, mapPixmap );
+#endif
 }
 
 }

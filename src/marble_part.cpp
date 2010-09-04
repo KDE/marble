@@ -24,9 +24,7 @@
 #include <QtGui/QFontMetrics>
 #include <QtGui/QPrinter>
 #include <QtGui/QPrintDialog>
-#include <QtGui/QPrintPreviewDialog>
 #include <QtGui/QProgressBar>
-#include <QtGui/QPainter>
 #include <QtGui/QStandardItemModel>
 #include <QtNetwork/QNetworkProxy>
 
@@ -237,64 +235,6 @@ void MarblePart::exportMapScreenShot()
 }
 
 
-void MarblePart::printMapScreenShot()
-{
-#ifndef QT_NO_PRINTER
-    QPrinter printer( QPrinter::HighResolution );
-    QPrintDialog *printDialog = KdePrint::createPrintDialog(&printer, widget());
-
-    if (printDialog->exec()) {
-        QPixmap mapPixmap = m_controlView->mapScreenShot();
-        printPixmap( &printer, mapPixmap );
-    }
-    
-    delete printDialog;
-#endif
-}
-
-void MarblePart::printPixmap( QPrinter * printer, const QPixmap& pixmap  )
-{
-#ifndef QT_NO_PRINTER
-    QSize printSize = pixmap.size();
-
-    QRect mapPageRect = printer->pageRect();
-
-    printSize.scale( printer->pageRect().size(), Qt::KeepAspectRatio );
-
-    QPoint printTopLeft( ( mapPageRect.width() - printSize.width() ) / 2 ,
-                         ( mapPageRect.height() - printSize.height() ) / 2 );
-
-    QRect mapPrintRect( printTopLeft, printSize );
-
-    QPainter painter;
-    if (!painter.begin(printer))
-        return;
-    painter.drawPixmap( mapPrintRect, pixmap, pixmap.rect() );
-    painter.end();
-#endif
-}
-
-// QPointer is used because of issues described in http://www.kdedevelopers.org/node/3919
-void MarblePart::printPreview()
-{
-#ifndef QT_NO_PRINTER
-    QPrinter printer( QPrinter::HighResolution );
-
-    QPointer<QPrintPreviewDialog> preview = new QPrintPreviewDialog( &printer, widget() );
-    preview->setWindowFlags( Qt::Window );
-    connect( preview, SIGNAL( paintRequested( QPrinter * ) ), SLOT( paintPrintPreview( QPrinter * ) ) );
-    preview->exec();
-    delete preview;
-#endif
-}
-
-void MarblePart::paintPrintPreview( QPrinter * printer )
-{
-#ifndef QT_NO_PRINTER
-    QPixmap mapPixmap = m_controlView->mapScreenShot();
-    printPixmap( printer, mapPixmap );
-#endif
-}
 
 void MarblePart::setShowClouds( bool isChecked )
 {
@@ -678,7 +618,7 @@ void MarblePart::setupActions()
     m_printMapAction = KStandardAction::print( this, SLOT( printMapScreenShot() ),
                                                actionCollection() );
 
-    m_printPreviewAction = KStandardAction::printPreview( this, SLOT( printPreview() ),
+    m_printPreviewAction = KStandardAction::printPreview( m_controlView, SLOT( printPreview() ),
                                                actionCollection() );
                                                
     // Action: Export Map
@@ -1606,6 +1546,16 @@ void MarblePart::initializeCustomTimezone()
         m_timezone.insert( 29, -10800 );
         m_timezone.insert( 30, -3600 );
     }
+}
+
+void MarblePart::printMapScreenShot()
+{
+#ifndef QT_NO_PRINTER
+    QPrinter printer( QPrinter::HighResolution );
+    QPointer<QPrintDialog> printDialog = KdePrint::createPrintDialog(&printer, widget());
+    m_controlView->printMapScreenShot( printDialog );
+    delete printDialog;
+#endif
 }
 
 }

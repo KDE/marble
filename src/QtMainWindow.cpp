@@ -31,11 +31,8 @@
 #include <QtGui/QDesktopServices>
 #include <QtGui/QFileDialog>
 #include <QtGui/QMessageBox>
-
 #include <QtGui/QPrintDialog>
-#include <QtGui/QPrintPreviewDialog>
 #include <QtGui/QPrinter>
-#include <QtGui/QPainter>
 
 #include <QtGui/QClipboard>
 
@@ -151,7 +148,7 @@ void MainWindow::createActions()
 
      m_printPreviewAct = new QAction( QIcon(":/icons/document-printpreview.png"), tr("Print Previe&w ..."), this);
      m_printPreviewAct->setStatusTip(tr("Print a screenshot of the map"));
-     connect(m_printPreviewAct, SIGNAL(triggered()), this, SLOT(printPreview()));
+     connect(m_printPreviewAct, SIGNAL(triggered()), m_controlView, SLOT(printPreview()));
 
      m_quitAct = new QAction( QIcon(":/icons/application-exit.png"), tr("&Quit"), this);
      m_quitAct->setShortcut(tr("Ctrl+Q"));
@@ -552,62 +549,6 @@ void MainWindow::exportMapScreenShot()
     }
 }
 
-void MainWindow::printMapScreenShot()
-{
-#ifndef QT_NO_PRINTER
-    QPrinter printer( QPrinter::HighResolution );
-    QPointer<QPrintDialog> printDialog = new QPrintDialog( &printer, this );
-
-    if (printDialog->exec() == QDialog::Accepted) {
-        QPixmap mapPixmap = m_controlView->mapScreenShot();
-        printPixmap( &printer, mapPixmap );
-    }
-    delete printDialog;
-#endif
-}
-
-void MainWindow::printPixmap( QPrinter * printer, const QPixmap& pixmap  )
-{
-#ifndef QT_NO_PRINTER
-    QSize printSize = pixmap.size();
-
-    QRect mapPageRect = printer->pageRect();
-
-    printSize.scale( printer->pageRect().size(), Qt::KeepAspectRatio );
-
-    QPoint printTopLeft( ( mapPageRect.width() - printSize.width() ) / 2 ,
-                         ( mapPageRect.height() - printSize.height() ) / 2 );
-
-    QRect mapPrintRect( printTopLeft, printSize );
-
-    QPainter painter;
-    if (!painter.begin(printer))
-        return;
-    painter.drawPixmap( mapPrintRect, pixmap, pixmap.rect() );
-    painter.end();
-#endif
-}
-
-void MainWindow::printPreview()
-{
-#ifndef QT_NO_PRINTER
-    QPrinter printer( QPrinter::HighResolution );
-
-    QPointer<QPrintPreviewDialog> preview = new QPrintPreviewDialog( &printer, this );
-    preview->setWindowFlags ( Qt::Window );
-    connect( preview, SIGNAL( paintRequested( QPrinter * ) ), SLOT( paintPrintPreview( QPrinter * ) ) );
-    preview->exec();
-    delete preview;
-#endif
-}
-
-void MainWindow::paintPrintPreview( QPrinter * printer )
-{
-#ifndef QT_NO_PRINTER
-    QPixmap mapPixmap = m_controlView->mapScreenShot();
-    printPixmap( printer, mapPixmap );
-#endif
-}
 
 void MainWindow::showFullScreen( bool isChecked )
 {
@@ -1093,6 +1034,16 @@ void MainWindow::downloadRegion()
     mDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
     QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
     m_controlView->marbleWidget()->map()->model()->downloadRegion( sourceDir, pyramid );
+}
+
+void MainWindow::printMapScreenShot()
+{
+#ifndef QT_NO_PRINTER
+    QPrinter printer( QPrinter::HighResolution );
+    QPointer<QPrintDialog> printDialog = new QPrintDialog( &printer, this );
+    m_controlView->printMapScreenShot( printDialog );
+    delete printDialog;
+#endif
 }
 
 #include "QtMainWindow.moc"

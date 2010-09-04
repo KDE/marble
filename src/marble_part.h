@@ -76,9 +76,6 @@ class MarblePart: public KParts::ReadOnlyPart
 
     void  exportMapScreenShot();
     void  printMapScreenShot();
-    void  printPixmap( QPrinter * printer, const QPixmap& pixmap );
-    void  printPreview();
-    void  paintPrintPreview( QPrinter * printer );
     void  copyMap();
     void  copyCoordinates();
     void  setShowClouds( bool );
