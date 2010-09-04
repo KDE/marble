@@ -11,6 +11,7 @@
 #include "RouteRequest.h"
 
 #include "GeoDataLineString.h"
+#include "GeoDataPlacemark.h"
 #include "MarbleDirs.h"
 
 #include <QtCore/QMap>
@@ -22,7 +23,7 @@ namespace Marble
 class RouteRequestPrivate
 {
 public:
-    QVector<GeoDataCoordinates> m_route;
+    QVector<GeoDataPlacemark> m_route;
 
     QMap<int, QPixmap> m_pixmapCache;
 
@@ -72,8 +73,8 @@ int RouteRequestPrivate::viaIndex( const GeoDataCoordinates &position ) const
             viaFirst.append( position );
         }
 
-        viaFirst.append( m_route[i] );
-        viaSecond.append( m_route[i] );
+        viaFirst.append( m_route[i].coordinate() );
+        viaSecond.append( m_route[i].coordinate() );
 
         if ( viaSecond.size() == 2 ) {
             viaSecond.append( position );
@@ -121,7 +122,7 @@ GeoDataCoordinates RouteRequest::source() const
 {
     GeoDataCoordinates result;
     if ( d->m_route.size() ) {
-        result = d->m_route.first();
+        result = d->m_route.first().coordinate();
     }
     return result;
 }
@@ -130,14 +131,14 @@ GeoDataCoordinates RouteRequest::destination() const
 {
     GeoDataCoordinates result;
     if ( d->m_route.size() ) {
-        result = d->m_route.last();
+        result = d->m_route.last().coordinate();
     }
     return result;
 }
 
 GeoDataCoordinates RouteRequest::at( int position ) const
 {
-    return d->m_route.at( position );
+    return d->m_route.at( position ).coordinate();
 }
 
 QPixmap RouteRequest::pixmap( int position ) const
@@ -194,13 +195,17 @@ void RouteRequest::clear()
 
 void RouteRequest::insert( int index, const GeoDataCoordinates &coordinates )
 {
-    d->m_route.insert( index, coordinates );
+    GeoDataPlacemark placemark;
+    placemark.setCoordinate( GeoDataPoint( coordinates ) );
+    d->m_route.insert( index, placemark );
     emit positionAdded( index );
 }
 
 void RouteRequest::append( const GeoDataCoordinates &coordinates )
 {
-    d->m_route.append( coordinates );
+    GeoDataPlacemark placemark;
+    placemark.setCoordinate( GeoDataPoint( coordinates ) );
+    d->m_route.append( placemark );
 }
 
 void RouteRequest::remove( int index )
@@ -214,14 +219,18 @@ void RouteRequest::remove( int index )
 void RouteRequest::addVia( const GeoDataCoordinates &position )
 {
     int index = d->viaIndex( position );
-    d->m_route.insert( index, position );
+    GeoDataPlacemark placemark;
+    placemark.setCoordinate( GeoDataPoint( position ) );
+    d->m_route.insert( index, placemark );
     emit positionAdded( index );
 }
 
 void RouteRequest::setPosition( int index, const GeoDataCoordinates &position )
 {
     if ( index >= 0 && index < d->m_route.size() ) {
-        d->m_route[index] = position;
+        GeoDataPlacemark placemark;
+        placemark.setCoordinate( GeoDataPoint( position ) );
+        d->m_route[index] = placemark;
         emit positionChanged( index, position );
     }
 }
@@ -244,6 +253,22 @@ void RouteRequest::setRoutePreference( RouteRequest::RoutePreference preference 
 RouteRequest::RoutePreference RouteRequest::routePreference() const
 {
     return d->m_routePreference;
+}
+
+void RouteRequest::setName( int index, const QString &name )
+{
+    if ( index >= 0 && index < d->m_route.size() ) {
+        d->m_route[index].setName( name );
+    }
+}
+
+QString RouteRequest::name( int index ) const
+{
+    QString result;
+    if ( index >= 0 && index < d->m_route.size() ) {
+        result = d->m_route[index].name();
+    }
+    return result;
 }
 
 } // namespace Marble

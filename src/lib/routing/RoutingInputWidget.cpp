@@ -310,6 +310,7 @@ void RoutingInputWidget::clear()
 
 void RoutingInputWidget::retrieveReverseGeocodingResult( const GeoDataCoordinates &, const GeoDataPlacemark &placemark )
 {
+    d->m_route->setName( d->m_index, placemark.address() );
     d->m_lineEdit->setText( placemark.address() );
     d->m_lineEdit->setCursorPosition( 0 );
 }

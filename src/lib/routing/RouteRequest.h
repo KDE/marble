@@ -102,6 +102,10 @@ public:
 
     RoutePreference routePreference() const;
 
+    void setName( int index, const QString &name );
+
+    QString name( int index ) const;
+
 Q_SIGNALS:
     /** The value of the n-th element was changed */
     void positionChanged( int index, const GeoDataCoordinates &position );
