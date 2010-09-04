@@ -1,10 +1,10 @@
 find_package(libgps)
-if(libgps_FOUND)
+if(LIBGPS_FOUND)
      message( STATUS "Building with gpsd position provider")
      add_subdirectory( gpsd )
-else(libgps_FOUND)
+else(LIBGPS_FOUND)
      message( STATUS "Not building with gpsd position provider")
-endif(libgps_FOUND)
+endif(LIBGPS_FOUND)
 
 find_package(liblocation)
 if(liblocation_FOUND)
