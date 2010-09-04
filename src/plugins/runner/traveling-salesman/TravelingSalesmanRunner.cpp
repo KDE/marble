@@ -12,7 +12,7 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "routing/RouteSkeleton.h"
+#include "routing/RouteRequest.h"
 #include "GeoDataDocument.h"
 #include "GeoDataParser.h"
 
@@ -156,7 +156,7 @@ GeoDataFeature::GeoDataVisualCategory TravelingSalesmanRunner::category() const
     return GeoDataFeature::OsmSite;
 }
 
-void TravelingSalesmanRunner::retrieveRoute( RouteSkeleton *route )
+void TravelingSalesmanRunner::retrieveRoute( RouteRequest *route )
 {
     if ( !d->m_travelingsalesmanJar.exists() ) {
         emit routeCalculated( 0 );

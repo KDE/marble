@@ -27,7 +27,7 @@ namespace Marble
 {
 
 class AlternativeRoutesModelPrivate;
-class RouteSkeleton;
+class RouteRequest;
 class MarbleModel;
 
 class AlternativeRoutesModel : public QAbstractListModel
@@ -57,7 +57,7 @@ public:
     // Model data filling
 
     /** Invalidate the current alternative routes and prepare for new ones to arrive */
-    void newRequest( RouteSkeleton *request );
+    void newRequest( RouteRequest *request );
 
     /**
       * Old data in the model is discarded, the parsed content of the provided document

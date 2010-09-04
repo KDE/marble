@@ -13,7 +13,7 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "routing/RouteSkeleton.h"
+#include "routing/RouteRequest.h"
 #include "routing/instructions/WaypointParser.h"
 #include "routing/instructions/InstructionTransformation.h"
 #include "GeoDataDocument.h"
@@ -218,7 +218,7 @@ GeoDataFeature::GeoDataVisualCategory RoutinoRunner::category() const
     return GeoDataFeature::OsmSite;
 }
 
-void RoutinoRunner::retrieveRoute( RouteSkeleton *route )
+void RoutinoRunner::retrieveRoute( RouteRequest *route )
 {
     mDebug();
 
@@ -238,26 +238,26 @@ void RoutinoRunner::retrieveRoute( RouteSkeleton *route )
     }
 
     switch( route->routePreference() ) {
-    case RouteSkeleton::CarFastest:
+    case RouteRequest::CarFastest:
         params << "--transport=motorcar";
         break;
-    case RouteSkeleton::CarShortest:
+    case RouteRequest::CarShortest:
         params << "--transport=motorcar";
         break;
-    case RouteSkeleton::Bicycle:
+    case RouteRequest::Bicycle:
         params << "--transport=bicycle";
         break;
-    case RouteSkeleton::Pedestrian:
+    case RouteRequest::Pedestrian:
         params << "--transport=foot";
         break;
     }
-    if ( route->routePreference() ==  RouteSkeleton::CarShortest ) {
+    if ( route->routePreference() ==  RouteRequest::CarShortest ) {
         params << "--shortest";
     } else {
         params << "--quickest";
     }
 
-    if ( route->avoidFeatures() & RouteSkeleton::AvoidHighway ) {
+    if ( route->avoidFeatures() & RouteRequest::AvoidHighway ) {
         params << "--highway-motorway=0";
     }
 

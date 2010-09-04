@@ -50,7 +50,7 @@ GeoDataFeature::GeoDataVisualCategory YoursRunner::category() const
     return GeoDataFeature::OsmSite;
 }
 
-void YoursRunner::retrieveRoute( RouteSkeleton *route )
+void YoursRunner::retrieveRoute( RouteRequest *route )
 {
     if ( route->size() < 2 ) {
         return;

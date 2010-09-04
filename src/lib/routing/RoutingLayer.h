@@ -27,7 +27,7 @@ class MarbleWidget;
 class RoutingModel;
 class MarblePlacemarkModel;
 class RoutingLayerPrivate;
-class RouteSkeleton;
+class RouteRequest;
 class AlternativeRoutesModel;
 
 /**
@@ -95,9 +95,9 @@ public:
     void setRouteDirty( bool dirty );
 
     /**
-      * Change the route skeleton used for painting and dragging route points
+      * Change the route request used for painting and dragging route points
       */
-    void setRouteSkeleton( RouteSkeleton *skeleton );
+    void setRouteRequest( RouteRequest *request );
 
 Q_SIGNALS:
     /**
@@ -117,7 +117,7 @@ Q_SIGNALS:
     void pointSelectionAborted();
 
     /**
-      * The route skeleton was changed permanently (no dragging),
+      * The route request was changed permanently (no dragging),
       * new route instructions should be downloaded
       */
     void routeDirty();

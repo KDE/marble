@@ -22,7 +22,7 @@ namespace Marble
 {
 
 class MarbleModel;
-class RouteSkeleton;
+class RouteRequest;
 
 /**
  * This class is the base class for all Marble Runners.
@@ -63,7 +63,7 @@ public:
       * If implemented in a plugin, make sure to include Routing in the
       * plugin capabilities, otherwise MarbleRunnerManager will ignore the plugin
       */
-    virtual void retrieveRoute( RouteSkeleton *skeleton );
+    virtual void retrieveRoute( RouteRequest *request );
 
     /**
       * Start a placemark search. Called by MarbleRunnerManager, runners

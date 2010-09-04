@@ -47,7 +47,7 @@ GeoDataFeature::GeoDataVisualCategory OpenRouteServiceRunner::category() const
     return GeoDataFeature::OsmSite;
 }
 
-void OpenRouteServiceRunner::retrieveRoute( RouteSkeleton *route )
+void OpenRouteServiceRunner::retrieveRoute( RouteRequest *route )
 {
     if ( route->size() < 2 ) {
         return;
@@ -67,19 +67,19 @@ void OpenRouteServiceRunner::retrieveRoute( RouteSkeleton *route )
     QString preference = "Fastest";
 
     switch ( route->routePreference() ) {
-    case RouteSkeleton::CarFastest:
+    case RouteRequest::CarFastest:
         unit = "KM";
         preference = "Fastest";
         break;
-    case RouteSkeleton::CarShortest:
+    case RouteRequest::CarShortest:
         unit = "KM";
         preference = "Shortest";
         break;
-    case RouteSkeleton::Bicycle:
+    case RouteRequest::Bicycle:
         unit = 'M';
         preference = "Bicycle";
         break;
-    case RouteSkeleton::Pedestrian:
+    case RouteRequest::Pedestrian:
         unit = 'M';
         preference = "Pedestrian";
         break;
@@ -165,16 +165,16 @@ QString OpenRouteServiceRunner::requestPoint( PointType pointType, const GeoData
     return result;
 }
 
-QString OpenRouteServiceRunner::requestFooter( RouteSkeleton::AvoidFeatures avoidFeatures ) const
+QString OpenRouteServiceRunner::requestFooter( RouteRequest::AvoidFeatures avoidFeatures ) const
 {
     QString result = "</xls:WayPointList>\n";
 
-    if ( avoidFeatures != RouteSkeleton::AvoidNone ) {
+    if ( avoidFeatures != RouteRequest::AvoidNone ) {
         result += "<xls:AvoidList>\n"; {
-            if ( avoidFeatures & RouteSkeleton::AvoidTollWay )
+            if ( avoidFeatures & RouteRequest::AvoidTollWay )
                 result += "<xls:AvoidFeature>Tollway</xls:AvoidFeature>";
         }
-        if ( avoidFeatures & RouteSkeleton::AvoidHighway ) {
+        if ( avoidFeatures & RouteRequest::AvoidHighway ) {
             result += "<xls:AvoidFeature>Highway</xls:AvoidFeature>";
         }
         result += "</xls:AvoidList>\n";

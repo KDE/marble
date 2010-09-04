@@ -13,7 +13,7 @@
 #define MARBLE_ROUTINORUNNER_H
 
 #include "MarbleAbstractRunner.h"
-#include "routing/RouteSkeleton.h"
+#include "routing/RouteRequest.h"
 
 namespace Marble
 {
@@ -32,7 +32,7 @@ public:
     GeoDataFeature::GeoDataVisualCategory category() const;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( RouteSkeleton *skeleton );
+    virtual void retrieveRoute( RouteRequest *request );
 
 private:
     RoutinoRunnerPrivate* const d;

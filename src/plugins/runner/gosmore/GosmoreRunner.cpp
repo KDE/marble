@@ -12,7 +12,7 @@
 
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
-#include "routing/RouteSkeleton.h"
+#include "routing/RouteRequest.h"
 #include "routing/instructions/WaypointParser.h"
 #include "routing/instructions/InstructionTransformation.h"
 #include "GeoDataDocument.h"
@@ -200,7 +200,7 @@ GeoDataFeature::GeoDataVisualCategory GosmoreRunner::category() const
     return GeoDataFeature::OsmSite;
 }
 
-void GosmoreRunner::retrieveRoute( RouteSkeleton *route )
+void GosmoreRunner::retrieveRoute( RouteRequest *route )
 {
     if ( !d->m_gosmoreMapFile.exists() )
     {

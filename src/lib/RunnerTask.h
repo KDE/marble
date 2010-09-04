@@ -19,7 +19,7 @@
 namespace Marble
 {
 
-class RouteSkeleton;
+class RouteRequest;
 class MarbleAbstractRunner;
 
 /**
@@ -76,12 +76,12 @@ private:
 class RoutingTask : public RunnerTask
 {
 public:
-    RoutingTask( MarbleAbstractRunner* runner, RouteSkeleton* routeSkeleton );
+    RoutingTask( MarbleAbstractRunner* runner, RouteRequest* routeRequest );
 
     virtual void runTask( QEventLoop *localEventLoop );
 
 private:
-  RouteSkeleton* m_routeSkeleton;
+  RouteRequest* m_routeRequest;
 };
 
 }

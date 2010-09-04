@@ -17,7 +17,7 @@
 #include "PluginManager.h"
 #include "RunnerPlugin.h"
 #include "RunnerTask.h"
-#include "routing/RouteSkeleton.h"
+#include "routing/RouteRequest.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -40,7 +40,7 @@ public:
     QVector<GeoDataPlacemark*> m_placemarkContainer;
     QVector<GeoDataDocument*> m_routingResult;
     QList<GeoDataCoordinates> m_reverseGeocodingResults;
-    RouteSkeleton* m_routeSkeleton;
+    RouteRequest* m_routeRequest;
     QString m_celestialBodyId;
     bool m_workOffline;
     PluginManager* m_pluginManager;
@@ -55,7 +55,7 @@ MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( PluginManager* pluginMan
         m_marbleModel( 0 ),
         m_model( new MarblePlacemarkModel ),
         m_searchTasks( 0 ),
-        m_routeSkeleton( 0 ),
+        m_routeRequest( 0 ),
         m_celestialBodyId( "earth" ),
         m_workOffline( false ),
         m_pluginManager( pluginManager )
@@ -190,17 +190,17 @@ void MarbleRunnerManager::addReverseGeocodingResult( const GeoDataCoordinates &c
     }
 }
 
-void MarbleRunnerManager::retrieveRoute( RouteSkeleton *skeleton )
+void MarbleRunnerManager::retrieveRoute( RouteRequest *request )
 {
     d->m_routingResult.clear();
-    d->m_routeSkeleton = skeleton;
+    d->m_routeRequest = request;
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Routing );
     foreach( RunnerPlugin* plugin, plugins ) {
         MarbleAbstractRunner* runner = plugin->newRunner();
         connect( runner, SIGNAL( routeCalculated( GeoDataDocument* ) ),
                  this, SLOT( addRoutingResult( GeoDataDocument* ) ) );
         runner->setModel( d->m_marbleModel );
-        QThreadPool::globalInstance()->start( new RoutingTask( runner, skeleton ) );
+        QThreadPool::globalInstance()->start( new RoutingTask( runner, request ) );
     }
 
     if ( plugins.isEmpty() ) {

@@ -19,7 +19,7 @@
 #include "GeoDataFolder.h"
 #include "GeoDataParser.h"
 #include "GeoDataPlacemark.h"
-#include "RouteSkeleton.h"
+#include "RouteRequest.h"
 #include "PositionTracking.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
@@ -284,7 +284,7 @@ void RoutingModel::clear()
     reset();
 }
 
-int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteSkeleton const *const route ) const
+int RoutingModel::rightNeighbor( const GeoDataCoordinates &position, RouteRequest const *const route ) const
 {
     Q_ASSERT( route && "Must not pass a null route ");
 

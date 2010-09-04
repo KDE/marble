@@ -13,7 +13,7 @@
 #define MARBLE_GOSMORERUNNER_H
 
 #include "MarbleAbstractRunner.h"
-#include "routing/RouteSkeleton.h"
+#include "routing/RouteRequest.h"
 
 namespace Marble
 {
@@ -31,7 +31,7 @@ public:
     GeoDataFeature::GeoDataVisualCategory category() const;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( RouteSkeleton *skeleton );
+    virtual void retrieveRoute( RouteRequest *request );
 
     // Overriding MarbleAbstractRunner
     virtual void reverseGeocoding( const GeoDataCoordinates &coordinates );

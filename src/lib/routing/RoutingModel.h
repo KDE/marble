@@ -28,7 +28,7 @@ namespace Marble
 {
 
 class RoutingModelPrivate;
-class RouteSkeleton;
+class RouteRequest;
 class GeoDataDocument;
 class MarbleModel;
 class MARBLE_EXPORT RoutingModel : public QAbstractListModel
@@ -109,15 +109,15 @@ public:
     void clear();
 
     /**
-      * Maps points from the provided route skeleton to waypoints in the model
+      * Maps points from the provided route request to waypoints in the model
       * according to their global minimal distance. Returns the right neighbor
-      * (next route skeleton item along the waypoints) of the provided position.
+      * (next route request item along the waypoints) of the provided position.
       * Provided route must not be null.
       * @return -1 If the provided route is empty, the index of the right
-      * neighbor along the waypoints otherwise (result is a valid RouteSkeleton
+      * neighbor along the waypoints otherwise (result is a valid RouteRequest
       * index in that case)
       */
-    int rightNeighbor( const GeoDataCoordinates &position, RouteSkeleton const *const route ) const;
+    int rightNeighbor( const GeoDataCoordinates &position, RouteRequest const *const route ) const;
 
     /**
      * returns the time remaining( minutes ) to reach the next instruction point

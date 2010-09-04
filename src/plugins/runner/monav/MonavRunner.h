@@ -12,7 +12,7 @@
 #define MARBLE_MONAVRUNNER_H
 
 #include "MarbleAbstractRunner.h"
-#include "routing/RouteSkeleton.h"
+#include "routing/RouteRequest.h"
 
 class QProcess;
 
@@ -33,7 +33,7 @@ public:
     GeoDataFeature::GeoDataVisualCategory category() const;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( RouteSkeleton *skeleton );
+    virtual void retrieveRoute( RouteRequest *request );
 
 private:
     MonavRunnerPrivate* const d;

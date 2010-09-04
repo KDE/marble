@@ -21,7 +21,7 @@ namespace Marble
 
 class RoutingManagerPrivate;
 class RoutingModel;
-class RouteSkeleton;
+class RouteRequest;
 class MarbleModel;
 class GeoDataDocument;
 class AlternativeRoutesModel;
@@ -69,7 +69,7 @@ public:
       * @param destination Destination location. Any string the routing provider supports as input.
       * @see directionModel
       */
-    void retrieveRoute( RouteSkeleton *route );
+    void retrieveRoute( RouteRequest *route );
 
     /**
       * Toggle offline mode. In offline mode, new routes cannot be downloaded
@@ -95,7 +95,7 @@ Q_SIGNALS:
       * Directions and waypoints for the given route are being downloaded or have
       * been retrieved -- newState tells which of both
       */
-    void stateChanged( RoutingManager::State newState, RouteSkeleton *route );
+    void stateChanged( RoutingManager::State newState, RouteRequest *route );
 
     void routeRetrieved( GeoDataDocument* route );
 

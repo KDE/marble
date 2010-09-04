@@ -13,7 +13,7 @@
 #include "MarbleLocale.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleRunnerManager.h"
-#include "RouteSkeleton.h"
+#include "RouteRequest.h"
 #include "TinyWebBrowser.h"
 
 #include <QtCore/QTimer>
@@ -46,7 +46,7 @@ public:
 
     QTimer m_progressTimer;
 
-    RouteSkeleton *m_route;
+    RouteRequest *m_route;
 
     int m_index;
 
@@ -59,15 +59,15 @@ public:
     int m_currentFrame;
 
     /** Constructor */
-    RoutingInputWidgetPrivate( RouteSkeleton *skeleton, int index, PluginManager* manager, QWidget *parent );
+    RoutingInputWidgetPrivate( RouteRequest *request, int index, PluginManager* manager, QWidget *parent );
 
     /** Initiate reverse geocoding request to download address */
     void adjustText();
 };
 
-RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteSkeleton *skeleton, int index, PluginManager* manager, QWidget *parent ) :
+RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteRequest *request, int index, PluginManager* manager, QWidget *parent ) :
         m_lineEdit( 0 ), m_runnerManager( new MarbleRunnerManager( manager, parent ) ),
-        m_placemarkModel( 0 ), m_route( skeleton ), m_index( index ),
+        m_placemarkModel( 0 ), m_route( request ), m_index( index ),
         m_manager( new QNetworkAccessManager( parent ) ), m_currentFrame( 0 )
 {
     bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
@@ -116,8 +116,8 @@ void RoutingInputWidgetPrivate::adjustText()
     m_nominatimTimer.start();
 }
 
-RoutingInputWidget::RoutingInputWidget( RouteSkeleton *skeleton, int index, PluginManager* manager, QWidget *parent ) :
-        QWidget( parent ), d( new RoutingInputWidgetPrivate( skeleton, index, manager, this ) )
+RoutingInputWidget::RoutingInputWidget( RouteRequest *request, int index, PluginManager* manager, QWidget *parent ) :
+        QWidget( parent ), d( new RoutingInputWidgetPrivate( request, index, manager, this ) )
 {
     QHBoxLayout *layout = new QHBoxLayout( this );
     layout->setSpacing( 0 );
@@ -147,7 +147,7 @@ RoutingInputWidget::RoutingInputWidget( RouteSkeleton *skeleton, int index, Plug
              this, SLOT( updateProgress() ) );
     connect( d->m_runnerManager, SIGNAL( searchFinished( QString ) ),
              this, SLOT( finishSearch() ) );
-    connect( skeleton, SIGNAL( positionChanged( int, GeoDataCoordinates ) ),
+    connect( request, SIGNAL( positionChanged( int, GeoDataCoordinates ) ),
              this, SLOT( updatePosition( int, GeoDataCoordinates ) ) );
     connect( &d->m_nominatimTimer, SIGNAL( timeout() ),
              this, SLOT( reverseGeocoding() ) );

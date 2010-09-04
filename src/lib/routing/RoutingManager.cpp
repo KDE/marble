@@ -13,7 +13,7 @@
 #include "AlternativeRoutesModel.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
-#include "RouteSkeleton.h"
+#include "RouteRequest.h"
 #include "RoutingModel.h"
 #include "MarbleRunnerManager.h"
 #include "AdjustNavigation.h"
@@ -34,7 +34,7 @@ public:
 
     AlternativeRoutesModel* m_alternativeRoutesModel;
 
-    RouteSkeleton *m_route;
+    RouteRequest *m_route;
 
     bool m_workOffline;
 
@@ -77,7 +77,7 @@ RoutingModel *RoutingManager::routingModel()
     return d->m_routingModel;
 }
 
-void RoutingManager::retrieveRoute( RouteSkeleton *route )
+void RoutingManager::retrieveRoute( RouteRequest *route )
 {
     d->m_route = route;
     updateRoute();

@@ -2,7 +2,7 @@
 
 #include "MarbleAbstractRunner.h"
 #include "MarbleDebug.h"
-#include "routing/RouteSkeleton.h"
+#include "routing/RouteRequest.h"
 
 #include <QtCore/QTimer>
 
@@ -67,8 +67,8 @@ void ReverseGeocodingTask::runTask( QEventLoop *localEventLoop )
     runner()->reverseGeocoding( m_coordinates );
 }
 
-RoutingTask::RoutingTask( MarbleAbstractRunner* runner, RouteSkeleton* routeSkeleton ) :
-        RunnerTask( runner ), m_routeSkeleton( routeSkeleton )
+RoutingTask::RoutingTask( MarbleAbstractRunner* runner, RouteRequest* routeRequest ) :
+        RunnerTask( runner ), m_routeRequest( routeRequest )
 {
     // nothing to do
 }
@@ -77,7 +77,7 @@ void RoutingTask::runTask( QEventLoop *localEventLoop )
 {
     QObject::connect( runner(), SIGNAL( routeCalculated( GeoDataDocument*) ),
             localEventLoop, SLOT( quit() ) );
-    runner()->retrieveRoute( m_routeSkeleton );
+    runner()->retrieveRoute( m_routeRequest );
 }
 
 }

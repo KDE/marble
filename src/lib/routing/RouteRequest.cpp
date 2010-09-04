@@ -8,7 +8,7 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#include "RouteSkeleton.h"
+#include "RouteRequest.h"
 
 #include "GeoDataLineString.h"
 #include "MarbleDirs.h"
@@ -19,34 +19,34 @@
 namespace Marble
 {
 
-class RouteSkeletonPrivate
+class RouteRequestPrivate
 {
 public:
     QVector<GeoDataCoordinates> m_route;
 
     QMap<int, QPixmap> m_pixmapCache;
 
-    RouteSkeleton::RoutePreference m_routePreference;
+    RouteRequest::RoutePreference m_routePreference;
 
-    RouteSkeleton::AvoidFeatures m_avoidFeatures;
+    RouteRequest::AvoidFeatures m_avoidFeatures;
 
     int m_fontSize;
 
     /** Determines a suitable index for inserting a via point */
     int viaIndex( const GeoDataCoordinates &position ) const;
 
-    RouteSkeletonPrivate();
+    RouteRequestPrivate();
 };
 
-RouteSkeletonPrivate::RouteSkeletonPrivate() :
-        m_routePreference( RouteSkeleton::CarFastest ),
-        m_avoidFeatures( RouteSkeleton::AvoidNone ),
+RouteRequestPrivate::RouteRequestPrivate() :
+        m_routePreference( RouteRequest::CarFastest ),
+        m_avoidFeatures( RouteRequest::AvoidNone ),
         m_fontSize( 0 )
 {
     // nothing to do
 }
 
-int RouteSkeletonPrivate::viaIndex( const GeoDataCoordinates &position ) const
+int RouteRequestPrivate::viaIndex( const GeoDataCoordinates &position ) const
 {
     /** @todo: Works, but does not look elegant at all */
 
@@ -101,23 +101,23 @@ int RouteSkeletonPrivate::viaIndex( const GeoDataCoordinates &position ) const
     return result;
 }
 
-RouteSkeleton::RouteSkeleton( QObject *parent ) :
-        QObject( parent ), d( new RouteSkeletonPrivate )
+RouteRequest::RouteRequest( QObject *parent ) :
+        QObject( parent ), d( new RouteRequestPrivate )
 {
     // nothing to do
 }
 
-RouteSkeleton::~RouteSkeleton()
+RouteRequest::~RouteRequest()
 {
     delete d;
 }
 
-int RouteSkeleton::size() const
+int RouteRequest::size() const
 {
     return d->m_route.size();
 }
 
-GeoDataCoordinates RouteSkeleton::source() const
+GeoDataCoordinates RouteRequest::source() const
 {
     GeoDataCoordinates result;
     if ( d->m_route.size() ) {
@@ -126,7 +126,7 @@ GeoDataCoordinates RouteSkeleton::source() const
     return result;
 }
 
-GeoDataCoordinates RouteSkeleton::destination() const
+GeoDataCoordinates RouteRequest::destination() const
 {
     GeoDataCoordinates result;
     if ( d->m_route.size() ) {
@@ -135,12 +135,12 @@ GeoDataCoordinates RouteSkeleton::destination() const
     return result;
 }
 
-GeoDataCoordinates RouteSkeleton::at( int position ) const
+GeoDataCoordinates RouteRequest::at( int position ) const
 {
     return d->m_route.at( position );
 }
 
-QPixmap RouteSkeleton::pixmap( int position ) const
+QPixmap RouteRequest::pixmap( int position ) const
 {
     if ( d->m_pixmapCache.contains( position ) ) {
         return d->m_pixmapCache[position];
@@ -187,23 +187,23 @@ QPixmap RouteSkeleton::pixmap( int position ) const
     return pixmap( position );
 }
 
-void RouteSkeleton::clear()
+void RouteRequest::clear()
 {
     d->m_route.clear();
 }
 
-void RouteSkeleton::insert( int index, const GeoDataCoordinates &coordinates )
+void RouteRequest::insert( int index, const GeoDataCoordinates &coordinates )
 {
     d->m_route.insert( index, coordinates );
     emit positionAdded( index );
 }
 
-void RouteSkeleton::append( const GeoDataCoordinates &coordinates )
+void RouteRequest::append( const GeoDataCoordinates &coordinates )
 {
     d->m_route.append( coordinates );
 }
 
-void RouteSkeleton::remove( int index )
+void RouteRequest::remove( int index )
 {
     if ( index >= 0 && index < d->m_route.size() ) {
         d->m_route.remove( index );
@@ -211,14 +211,14 @@ void RouteSkeleton::remove( int index )
     }
 }
 
-void RouteSkeleton::addVia( const GeoDataCoordinates &position )
+void RouteRequest::addVia( const GeoDataCoordinates &position )
 {
     int index = d->viaIndex( position );
     d->m_route.insert( index, position );
     emit positionAdded( index );
 }
 
-void RouteSkeleton::setPosition( int index, const GeoDataCoordinates &position )
+void RouteRequest::setPosition( int index, const GeoDataCoordinates &position )
 {
     if ( index >= 0 && index < d->m_route.size() ) {
         d->m_route[index] = position;
@@ -226,26 +226,26 @@ void RouteSkeleton::setPosition( int index, const GeoDataCoordinates &position )
     }
 }
 
-void RouteSkeleton::setAvoidFeatures( RouteSkeleton::AvoidFeatures features )
+void RouteRequest::setAvoidFeatures( RouteRequest::AvoidFeatures features )
 {
     d->m_avoidFeatures = features;
 }
 
-RouteSkeleton::AvoidFeatures RouteSkeleton::avoidFeatures() const
+RouteRequest::AvoidFeatures RouteRequest::avoidFeatures() const
 {
     return d->m_avoidFeatures;
 }
 
-void RouteSkeleton::setRoutePreference( RouteSkeleton::RoutePreference preference )
+void RouteRequest::setRoutePreference( RouteRequest::RoutePreference preference )
 {
     d->m_routePreference = preference;
 }
 
-RouteSkeleton::RoutePreference RouteSkeleton::routePreference() const
+RouteRequest::RoutePreference RouteRequest::routePreference() const
 {
     return d->m_routePreference;
 }
 
 } // namespace Marble
 
-#include "RouteSkeleton.moc"
+#include "RouteRequest.moc"

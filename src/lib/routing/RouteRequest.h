@@ -8,8 +8,8 @@
 // Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef MARBLE_ROUTESKELETON_H
-#define MARBLE_ROUTESKELETON_H
+#ifndef MARBLE_ROUTEREQUEST_H
+#define MARBLE_ROUTEREQUEST_H
 
 #include "marble_export.h"
 #include "GeoDataCoordinates.h"
@@ -20,14 +20,14 @@
 namespace Marble
 {
 
-class RouteSkeletonPrivate;
+class RouteRequestPrivate;
 
 /**
   * @brief Points to be included in a route. An ordered list of
   * GeoDataCoordinates with change notification and Pixmap access, similar
   * to QAbstractItemModel.
   */
-class MARBLE_EXPORT RouteSkeleton: public QObject
+class MARBLE_EXPORT RouteRequest: public QObject
 {
     Q_OBJECT
 
@@ -48,10 +48,10 @@ public:
     Q_DECLARE_FLAGS( AvoidFeatures, AvoidFeature )
 
     /** Constructor */
-    explicit RouteSkeleton( QObject *parent = 0 );
+    explicit RouteRequest( QObject *parent = 0 );
 
     /** Destructor */
-    ~RouteSkeleton();
+    ~RouteRequest();
 
     /** The first point, or a default constructed if empty */
     GeoDataCoordinates source() const;
@@ -113,11 +113,11 @@ Q_SIGNALS:
     void positionRemoved( int index );
 
 private:
-    RouteSkeletonPrivate *const d;
+    RouteRequestPrivate *const d;
 };
 
 } // namespace Marble
 
-Q_DECLARE_OPERATORS_FOR_FLAGS( Marble::RouteSkeleton::AvoidFeatures )
+Q_DECLARE_OPERATORS_FOR_FLAGS( Marble::RouteRequest::AvoidFeatures )
 
 #endif

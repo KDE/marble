@@ -80,7 +80,7 @@ private Q_SLOTS:
     void removeInputWidget( int index );
 
     /** Route state changed */
-    void updateRouteState( RoutingManager::State state, RouteSkeleton *route );
+    void updateRouteState( RoutingManager::State state, RouteRequest *route );
 
     /** An input field requests a position input from the map */
     void requestMapPosition( RoutingInputWidget *widget, bool enabled );

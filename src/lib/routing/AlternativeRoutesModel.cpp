@@ -296,7 +296,7 @@ GeoDataDocument* AlternativeRoutesModel::route( int index )
     return 0;
 }
 
-void AlternativeRoutesModel::newRequest( RouteSkeleton * )
+void AlternativeRoutesModel::newRequest( RouteRequest * )
 {
     d->m_routes.clear();
     d->m_responseTime.start();

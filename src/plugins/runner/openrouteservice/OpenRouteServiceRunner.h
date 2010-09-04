@@ -13,7 +13,7 @@
 #define MARBLE_OSMOPENROUTESERVICERUNNER_H
 
 #include "MarbleAbstractRunner.h"
-#include "routing/RouteSkeleton.h"
+#include "routing/RouteRequest.h"
 
 #include <QtCore/QString>
 #include <QtNetwork/QNetworkReply>
@@ -43,7 +43,7 @@ public:
     GeoDataFeature::GeoDataVisualCategory category() const;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( RouteSkeleton *skeleton );
+    virtual void retrieveRoute( RouteRequest *request );
 
 private Q_SLOTS:
     /** Route data was retrieved via http */
@@ -63,7 +63,7 @@ private:
     QString requestPoint( PointType pointType, const GeoDataCoordinates &coordinates ) const;
 
     /** Builds the route request footer in the xml request. */
-    QString requestFooter( RouteSkeleton::AvoidFeatures avoidFeatures ) const;
+    QString requestFooter( RouteRequest::AvoidFeatures avoidFeatures ) const;
 
     /** Builds the xml request footer. */
     QString xmlFooter() const;

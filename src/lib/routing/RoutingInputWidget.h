@@ -23,7 +23,7 @@ namespace Marble
 
 class RoutingInputWidgetPrivate;
 class MarblePlacemarkModel;
-class RouteSkeleton;
+class RouteRequest;
 class PluginManager;
 
 /**
@@ -39,7 +39,7 @@ class RoutingInputWidget : public QWidget
 public:
 
     /** Constructor */
-    explicit RoutingInputWidget( RouteSkeleton *skeleton, int index, PluginManager* manager, QWidget *parent = 0 );
+    explicit RoutingInputWidget( RouteRequest *request, int index, PluginManager* manager, QWidget *parent = 0 );
 
     /** Destructor */
     ~RoutingInputWidget();
@@ -68,7 +68,7 @@ public:
     bool hasInput() const;
 
     /**
-      * Change the data index in the route skeleton model
+      * Change the data index in the route request model
       */
     void setIndex( int index );
 

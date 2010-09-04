@@ -13,7 +13,7 @@
 #define MARBLE_YOURSRUNNER_H
 
 #include "MarbleAbstractRunner.h"
-#include "routing/RouteSkeleton.h"
+#include "routing/RouteRequest.h"
 
 #include <QtNetwork/QNetworkReply>
 
@@ -35,7 +35,7 @@ public:
     GeoDataFeature::GeoDataVisualCategory category() const;
 
     // Overriding MarbleAbstractRunner
-    virtual void retrieveRoute( RouteSkeleton *skeleton );
+    virtual void retrieveRoute( RouteRequest *request );
 
 private Q_SLOTS:
     /** Route data was retrieved via http */

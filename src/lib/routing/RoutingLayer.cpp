@@ -19,7 +19,7 @@
 #include "MarbleWidget.h"
 #include "MarbleWidgetPopupMenu.h"
 #include "RoutingModel.h"
-#include "RouteSkeleton.h"
+#include "RouteRequest.h"
 #include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "AlternativeRoutesModel.h"
@@ -53,16 +53,16 @@ class RoutingLayerPrivate
     };
 
     typedef PaintRegion<QModelIndex> ModelRegion;
-    typedef PaintRegion<int> SkeletonRegion;
+    typedef PaintRegion<int> RequestRegion;
 
 public:
     RoutingLayer *q;
 
     QList<ModelRegion> m_instructionRegions;
 
-    QList<SkeletonRegion> m_regions;
+    QList<RequestRegion> m_regions;
 
-    QList<SkeletonRegion> m_alternativeRouteRegions;
+    QList<RequestRegion> m_alternativeRouteRegions;
 
     QList<ModelRegion> m_placemarks;
 
@@ -96,7 +96,7 @@ public:
 
     QSize m_pixmapSize;
 
-    RouteSkeleton *m_routeSkeleton;
+    RouteRequest *m_routeRequest;
 
     MarbleWidgetPopupMenu *m_contextMenu;
 
@@ -139,7 +139,7 @@ public:
     inline void renderAlternativeRoutes( GeoPainter *painter );
 
     /** Paint icons for trip points etc */
-    inline void renderSkeleton( GeoPainter *painter );
+    inline void renderRequest( GeoPainter *painter );
 
     /** Insert via points or emit position signal, if appropriate */
     inline bool handleMouseButtonRelease( QMouseEvent *e );
@@ -170,7 +170,7 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
         q( parent ), m_proxyModel( 0 ), m_movingIndex( -1 ), m_marbleWidget( widget ),
         m_targetPixmap( ":/data/bitmaps/routing_pick.png" ), m_dragStopOverRightIndex( -1 ),
         m_pointSelection( false ), m_routingModel( 0 ), m_placemarkModel( 0 ), m_selectionModel( 0 ),
-        m_routeDirty( false ), m_pixmapSize( 22, 22 ), m_routeSkeleton( 0 ), m_activeMenuIndex( -1 ),
+        m_routeDirty( false ), m_pixmapSize( 22, 22 ), m_routeRequest( 0 ), m_activeMenuIndex( -1 ),
         m_alternativeRoutesView( 0 ), m_alternativeRoutesModel( 0 )
 {
     m_contextMenu = new MarbleWidgetPopupMenu( m_marbleWidget, m_marbleWidget->model() );
@@ -194,11 +194,11 @@ void RoutingLayerPrivate::showContextMenu( const QPoint &pos )
 int RoutingLayerPrivate::viaInsertPosition( Qt::KeyboardModifiers modifiers ) const
 {
     if ( modifiers & Qt::ControlModifier ) {
-        bool leftHand = m_routeSkeleton->size() / 2 >= m_dragStopOverRightIndex;
-        if ( leftHand && m_routeSkeleton->size() > 2 ) {
+        bool leftHand = m_routeRequest->size() / 2 >= m_dragStopOverRightIndex;
+        if ( leftHand && m_routeRequest->size() > 2 ) {
             return 0;
         } else {
-            return m_routeSkeleton->size();
+            return m_routeRequest->size();
         }
     } else {
         return m_dragStopOverRightIndex;
@@ -244,7 +244,7 @@ void RoutingLayerPrivate::renderAlternativeRoutes( GeoPainter *painter )
             GeoDataLineString* points = AlternativeRoutesModel::waypoints( route );
             painter->drawPolyline( *points );
             QRegion region = painter->regionFromPolyline( *points, 8 );
-            m_alternativeRouteRegions.push_back( SkeletonRegion( i, region ) );
+            m_alternativeRouteRegions.push_back( RequestRegion( i, region ) );
         }
     }
 }
@@ -284,7 +284,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         QPoint center = m_dropStopOver - QPoint( dx, dy );
         painter->drawPixmap( center, m_targetPixmap );
 
-        if ( !m_dragStopOver.isNull() && m_dragStopOverRightIndex >= 0 && m_dragStopOverRightIndex <= m_routeSkeleton->size() ) {
+        if ( !m_dragStopOver.isNull() && m_dragStopOverRightIndex >= 0 && m_dragStopOverRightIndex <= m_routeRequest->size() ) {
             QPoint moved = m_dropStopOver - m_dragStopOver;
             if ( moved.manhattanLength() > 10 ) {
                 qreal lon( 0.0 ), lat( 0.0 );
@@ -294,10 +294,10 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
                     bluePen.setStyle( Qt::DotLine );
                     painter->setPen( bluePen );
                     if ( m_dragStopOverRightIndex > 0 ) {
-                        painter->drawLine( drag, m_routeSkeleton->at( m_dragStopOverRightIndex-1 ) );
+                        painter->drawLine( drag, m_routeRequest->at( m_dragStopOverRightIndex-1 ) );
                     }
-                    if ( m_dragStopOverRightIndex < m_routeSkeleton->size() ) {
-                        painter->drawLine( drag, m_routeSkeleton->at( m_dragStopOverRightIndex ) );
+                    if ( m_dragStopOverRightIndex < m_routeRequest->size() ) {
+                        painter->drawLine( drag, m_routeRequest->at( m_dragStopOverRightIndex ) );
                     }
                     bluePen.setStyle( Qt::SolidLine );
                     painter->setPen( bluePen );
@@ -362,16 +362,16 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
     }
 }
 
-void RoutingLayerPrivate::renderSkeleton( GeoPainter *painter )
+void RoutingLayerPrivate::renderRequest( GeoPainter *painter )
 {
     m_regions.clear();
-    for ( int i = 0; i < m_routeSkeleton->size(); ++i ) {
-        GeoDataCoordinates pos = m_routeSkeleton->at( i );
+    for ( int i = 0; i < m_routeRequest->size(); ++i ) {
+        GeoDataCoordinates pos = m_routeRequest->at( i );
         if ( pos.longitude() != 0.0 && pos.latitude() != 0.0 ) {
-            QPixmap pixmap = m_routeSkeleton->pixmap( i );
+            QPixmap pixmap = m_routeRequest->pixmap( i );
             painter->drawPixmap( pos, pixmap );
             QRegion region = painter->regionFromRect( pos, pixmap.width(), pixmap.height() );
-            m_regions.push_front( SkeletonRegion( i, region ) );
+            m_regions.push_front( RequestRegion( i, region ) );
         }
     }
 }
@@ -382,10 +382,10 @@ void RoutingLayerPrivate::storeDragPosition( const QPoint &pos )
     m_dragStopOverRightIndex = -1;
 
     qreal lon( 0.0 ), lat( 0.0 );
-    if ( m_routeSkeleton && !pos.isNull()
+    if ( m_routeRequest && !pos.isNull()
         && m_marbleWidget->geoCoordinates( pos.x(), pos.y(), lon, lat, GeoDataCoordinates::Radian ) ) {
         GeoDataCoordinates waypoint( lon, lat );
-        m_dragStopOverRightIndex = m_routingModel->rightNeighbor( waypoint, m_routeSkeleton );
+        m_dragStopOverRightIndex = m_routingModel->rightNeighbor( waypoint, m_routeRequest );
     }
 }
 
@@ -402,7 +402,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
         return e->button() == Qt::LeftButton;
     }
 
-    foreach( const SkeletonRegion &region, m_regions ) {
+    foreach( const RequestRegion &region, m_regions ) {
         if ( region.region.contains( e->pos() ) ) {
             if ( e->button() == Qt::LeftButton ) {
                 m_movingIndex = region.index;
@@ -460,7 +460,7 @@ bool RoutingLayerPrivate::handleMouseButtonPress( QMouseEvent *e )
         return false;
     }
 
-    foreach( const SkeletonRegion &region, m_alternativeRouteRegions ) {
+    foreach( const RequestRegion &region, m_alternativeRouteRegions ) {
         if ( region.region.contains( e->pos() ) ) {
             m_alternativeRoutesView->setCurrentIndex( region.index );
             return true;
@@ -510,11 +510,11 @@ bool RoutingLayerPrivate::handleMouseButtonRelease( QMouseEvent *e )
         }
 
         qreal lon( 0.0 ), lat( 0.0 );
-        if ( m_dragStopOverRightIndex >= 0 && m_dragStopOverRightIndex <= m_routeSkeleton->size()
+        if ( m_dragStopOverRightIndex >= 0 && m_dragStopOverRightIndex <= m_routeRequest->size()
                 && m_marbleWidget->geoCoordinates( m_dropStopOver.x(), m_dropStopOver.y(), lon, lat, GeoDataCoordinates::Radian ) ) {
             GeoDataCoordinates position( lon, lat );
             m_dragStopOverRightIndex = viaInsertPosition( e->modifiers() );
-            m_routeSkeleton->insert( m_dragStopOverRightIndex, position );
+            m_routeRequest->insert( m_dragStopOverRightIndex, position );
             clearStopOver();
             emit q->routeDirty();
             return true;
@@ -541,7 +541,7 @@ bool RoutingLayerPrivate::handleMouseMove( QMouseEvent *e )
 
         if ( m_movingIndex >= 0 ) {
             GeoDataCoordinates moved( lon, lat );
-            m_routeSkeleton->setPosition( m_movingIndex, moved );
+            m_routeRequest->setPosition( m_movingIndex, moved );
             m_marbleWidget->setCursor( Qt::ArrowCursor );
         } else if ( !m_dragStopOver.isNull() ) {
             // Repaint only that region of the map that is affected by the change
@@ -593,7 +593,7 @@ bool RoutingLayerPrivate::handleKeyEvent( QKeyEvent *e )
 
 bool RoutingLayerPrivate::isInfoPoint( const QPoint &point )
 {
-    foreach( const SkeletonRegion &region, m_regions ) {
+    foreach( const RequestRegion &region, m_regions ) {
         if ( region.region.contains( point ) ) {
             return true;
         }
@@ -610,7 +610,7 @@ bool RoutingLayerPrivate::isInfoPoint( const QPoint &point )
 
  bool RoutingLayerPrivate::isAlternativeRoutePoint( const QPoint &point )
  {
-     foreach( const SkeletonRegion &region, m_alternativeRouteRegions ) {
+     foreach( const RequestRegion &region, m_alternativeRouteRegions ) {
          if ( region.region.contains( point ) ) {
              return true;
          }
@@ -678,8 +678,8 @@ bool RoutingLayer::render( GeoPainter *painter, ViewportParams *viewport,
         d->renderRoute( painter );
     }
 
-    if ( d->m_routeSkeleton) {
-        d->renderSkeleton( painter );
+    if ( d->m_routeRequest) {
+        d->renderRequest( painter );
     }
 
     painter->restore();
@@ -757,15 +757,15 @@ void RoutingLayer::setRouteDirty( bool dirty )
     d->m_marbleWidget->repaint();
 }
 
-void RoutingLayer::setRouteSkeleton( RouteSkeleton *skeleton )
+void RoutingLayer::setRouteRequest( RouteRequest *request )
 {
-    d->m_routeSkeleton = skeleton;
+    d->m_routeRequest = request;
 }
 
 void RoutingLayer::removeViaPoint()
 {
     if ( d->m_activeMenuIndex >= 0 ) {
-        d->m_routeSkeleton->remove( d->m_activeMenuIndex );
+        d->m_routeRequest->remove( d->m_activeMenuIndex );
         d->m_activeMenuIndex = -1;
         setRouteDirty( true );
         emit routeDirty();

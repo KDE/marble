@@ -15,7 +15,7 @@
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidget.h"
 #include "MarbleWidgetInputHandler.h"
-#include "RouteSkeleton.h"
+#include "RouteRequest.h"
 #include "RoutingInputWidget.h"
 #include "RoutingLayer.h"
 #include "RoutingManager.h"
@@ -55,7 +55,7 @@ public:
 
     QSortFilterProxyModel *m_routingProxyModel;
 
-    RouteSkeleton *m_routeSkeleton;
+    RouteRequest *m_routeRequest;
 
     bool m_zoomRouteAfterDownload;
 
@@ -95,7 +95,7 @@ private:
 RoutingWidgetPrivate::RoutingWidgetPrivate() :
         m_widget( 0 ), m_routingManager( 0 ), m_routingLayer( 0 ),
         m_activeInput( 0 ), m_inputRequest( 0 ), m_routingProxyModel( 0 ),
-        m_routeSkeleton( 0 ), m_zoomRouteAfterDownload( false ),
+        m_routeRequest( 0 ), m_zoomRouteAfterDownload( false ),
         m_workOffline( false ), m_currentFrame( 0 ),
         m_iconSize( 16 )
 {
@@ -184,14 +184,14 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     d->m_ui.routeComboBox->setVisible( false );
     d->m_widget = marbleWidget;
 
-    d->m_routeSkeleton = new RouteSkeleton( this );
+    d->m_routeRequest = new RouteRequest( this );
 
     //d->m_routingManager = new RoutingManager( d->m_widget, this );
     d->m_routingManager = d->m_widget->model()->routingManager();
     d->m_ui.routeComboBox->setModel( d->m_routingManager->alternativeRoutesModel() );
 
     d->m_routingLayer = new RoutingLayer( d->m_widget, this );
-    d->m_routingLayer->setRouteSkeleton( d->m_routeSkeleton );
+    d->m_routingLayer->setRouteRequest( d->m_routeRequest );
     d->m_routingLayer->synchronizeAlternativeRoutesWith( d->m_routingManager->alternativeRoutesModel(), d->m_ui.routeComboBox );
     d->m_widget->model()->addLayer( d->m_routingLayer );
 
@@ -205,11 +205,11 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( pointSelectionCanceled() ) );
     connect( d->m_routingLayer, SIGNAL( exportRequested() ),
              this, SLOT( exportRoute() ) );
-    connect( d->m_routingManager, SIGNAL( stateChanged( RoutingManager::State, RouteSkeleton* ) ),
-             this, SLOT( updateRouteState( RoutingManager::State, RouteSkeleton* ) ) );
-    connect( d->m_routeSkeleton, SIGNAL( positionAdded( int ) ),
+    connect( d->m_routingManager, SIGNAL( stateChanged( RoutingManager::State, RouteRequest* ) ),
+             this, SLOT( updateRouteState( RoutingManager::State, RouteRequest* ) ) );
+    connect( d->m_routeRequest, SIGNAL( positionAdded( int ) ),
              this, SLOT( insertInputWidget( int ) ) );
-    connect( d->m_routeSkeleton, SIGNAL( positionRemoved( int ) ),
+    connect( d->m_routeRequest, SIGNAL( positionRemoved( int ) ),
              this, SLOT( removeInputWidget( int ) ) );
     connect( &d->m_progressTimer, SIGNAL( timeout() ),
              this, SLOT( updateProgress() ) );
@@ -259,28 +259,28 @@ void RoutingWidget::retrieveRoute()
     }
 
     int index = d->m_ui.routePreferenceComboBox->currentIndex();
-    RouteSkeleton::RoutePreference pref = RouteSkeleton::CarFastest;
+    RouteRequest::RoutePreference pref = RouteRequest::CarFastest;
     if ( index == 1 ) {
-        pref = RouteSkeleton::CarShortest;
+        pref = RouteRequest::CarShortest;
     }
     if ( index == 2 ) {
-        pref = RouteSkeleton::Bicycle;
+        pref = RouteRequest::Bicycle;
     }
     if ( index == 3 ) {
-        pref = RouteSkeleton::Pedestrian;
+        pref = RouteRequest::Pedestrian;
     }
-    RouteSkeleton::AvoidFeatures avoid = RouteSkeleton::AvoidNone;
+    RouteRequest::AvoidFeatures avoid = RouteRequest::AvoidNone;
     if ( d->m_ui.highwaysCheckBox->isChecked() ) {
-        avoid |= RouteSkeleton::AvoidHighway;
+        avoid |= RouteRequest::AvoidHighway;
     }
     if ( d->m_ui.tollWaysCheckBox->isChecked() ) {
-        avoid |= RouteSkeleton::AvoidTollWay;
+        avoid |= RouteRequest::AvoidTollWay;
     }
 
-    d->m_routeSkeleton->setRoutePreference( pref );
-    d->m_routeSkeleton->setAvoidFeatures( avoid );
+    d->m_routeRequest->setRoutePreference( pref );
+    d->m_routeRequest->setAvoidFeatures( avoid );
 
-    Q_ASSERT( d->m_routeSkeleton->size() == d->m_inputWidgets.size() );
+    Q_ASSERT( d->m_routeRequest->size() == d->m_inputWidgets.size() );
     for ( int i = 0; i < d->m_inputWidgets.size(); ++i ) {
         RoutingInputWidget *widget = d->m_inputWidgets.at( i );
         if ( !widget->hasTargetPosition() && widget->hasInput() ) {
@@ -290,10 +290,10 @@ void RoutingWidget::retrieveRoute()
     }
 
     d->m_activeInput = 0;
-    if ( d->m_routeSkeleton->size() > 1 ) {
+    if ( d->m_routeRequest->size() > 1 ) {
         d->m_zoomRouteAfterDownload = true;
         d->m_routingLayer->setModel( d->m_routingManager->routingModel() );
-        d->m_routingManager->retrieveRoute( d->m_routeSkeleton );
+        d->m_routingManager->retrieveRoute( d->m_routeRequest );
         d->m_ui.directionsListView->setModel( d->m_routingProxyModel );
         d->m_routingLayer->synchronizeWith( d->m_routingProxyModel,
                                             d->m_ui.directionsListView->selectionModel() );
@@ -367,14 +367,14 @@ void RoutingWidget::activatePlacemark( const QModelIndex &index )
 void RoutingWidget::addInputWidget()
 {
     int index = d->m_ui.routingLayout->count() - 4;
-    d->m_routeSkeleton->append( GeoDataCoordinates() );
+    d->m_routeRequest->append( GeoDataCoordinates() );
     insertInputWidget( index );
 }
 
 void RoutingWidget::insertInputWidget( int index )
 {
     if ( index >= 0 && index <= d->m_inputWidgets.size() ) {
-        RoutingInputWidget *input = new RoutingInputWidget( d->m_routeSkeleton, index, d->m_widget->model()->pluginManager(), this );
+        RoutingInputWidget *input = new RoutingInputWidget( d->m_routeRequest, index, d->m_widget->model()->pluginManager(), this );
         input->setProgressAnimation( d->m_progressAnimation );
         input->setWorkOffline( d->m_workOffline );
         d->m_inputWidgets.insert( index, input );
@@ -401,7 +401,7 @@ void RoutingWidget::removeInputWidget( RoutingInputWidget *widget )
         if ( d->m_inputWidgets.size() < 3 ) {
             widget->clear();
         } else {
-            d->m_routeSkeleton->remove( index );
+            d->m_routeRequest->remove( index );
         }
         d->m_routingManager->updateRoute();
     }
@@ -426,7 +426,7 @@ void RoutingWidget::removeInputWidget( int index )
     }
 }
 
-void RoutingWidget::updateRouteState( RoutingManager::State state, RouteSkeleton *route )
+void RoutingWidget::updateRouteState( RoutingManager::State state, RouteRequest *route )
 {
     Q_UNUSED( route );
 

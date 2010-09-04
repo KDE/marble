@@ -11,7 +11,7 @@
 #include "MonavRunner.h"
 
 #include "MarbleDirs.h"
-#include "routing/RouteSkeleton.h"
+#include "routing/RouteRequest.h"
 #include "GeoDataDocument.h"
 
 #include <QtCore/QProcess>
@@ -121,7 +121,7 @@ GeoDataFeature::GeoDataVisualCategory MonavRunner::category() const
     return GeoDataFeature::OsmSite;
 }
 
-void MonavRunner::retrieveRoute( RouteSkeleton *route )
+void MonavRunner::retrieveRoute( RouteRequest *route )
 {
     QString params;
     for ( int i = 0; i < route->size(); ++i )

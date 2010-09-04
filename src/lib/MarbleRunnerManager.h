@@ -26,7 +26,7 @@ class GeoDataPlacemark;
 class MarbleModel;
 class MarblePlacemarkModel;
 class PluginManager;
-class RouteSkeleton;
+class RouteRequest;
 
 class MarbleRunnerManagerPrivate;
 class MarbleRunnerManager : public QObject
@@ -74,10 +74,10 @@ public:
     void reverseGeocoding( const GeoDataCoordinates &coordinates );
 
     /**
-      * Download routes traversing the stopover points in the given route skeleton
+      * Download routes traversing the stopover points in the given route request
       * Each route found is returned through the @see routeRetrieved signal
       */
-    void retrieveRoute( RouteSkeleton *skeleton );
+    void retrieveRoute( RouteRequest *request );
 
 signals:
     /**
