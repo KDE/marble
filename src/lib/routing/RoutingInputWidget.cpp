@@ -284,6 +284,7 @@ void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates &po
         d->m_lineEdit->setText( position.toString() );
         d->m_stateButton->setVisible( hasTargetPosition() );
         d->m_stateButton->setIcon( d->m_route->pixmap( d->m_index ) );
+        d->m_pickButton->setVisible( !hasTargetPosition() );
         d->m_pickButton->setIcon( d->m_route->pixmap( d->m_index ) );
         emit targetValidityChanged( hasTargetPosition() );
         d->adjustText();

@@ -34,7 +34,7 @@ public:
 
     AlternativeRoutesModel* m_alternativeRoutesModel;
 
-    RouteRequest *m_route;
+    RouteRequest *m_routeRequest;
 
     bool m_workOffline;
 
@@ -52,7 +52,7 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         m_routingModel( new RoutingModel( model ) ),
         m_marbleModel( model ),
         m_alternativeRoutesModel(new AlternativeRoutesModel( model, parent ) ),
-        m_route( 0 ),
+        m_routeRequest( new RouteRequest( manager ) ),
         m_workOffline( false ),
         m_runnerManager( new MarbleRunnerManager( model->pluginManager(), q ) ),
         m_haveRoute( false ), m_adjustNavigation( 0 )
@@ -79,34 +79,34 @@ RoutingModel *RoutingManager::routingModel()
 
 void RoutingManager::retrieveRoute( RouteRequest *route )
 {
-    d->m_route = route;
+    d->m_routeRequest = route;
     updateRoute();
 }
 
 void RoutingManager::updateRoute()
 {
-    if ( !d->m_route ) {
+    if ( !d->m_routeRequest ) {
         return;
     }
 
     d->m_haveRoute = false;
 
     int realSize = 0;
-    for ( int i = 0; i < d->m_route->size(); ++i ) {
+    for ( int i = 0; i < d->m_routeRequest->size(); ++i ) {
         // Sort out dummy targets
-        if ( d->m_route->at( i ).longitude() != 0.0 && d->m_route->at( i ).latitude() != 0.0 ) {
+        if ( d->m_routeRequest->at( i ).longitude() != 0.0 && d->m_routeRequest->at( i ).latitude() != 0.0 ) {
             ++realSize;
         }
     }
 
-    d->m_alternativeRoutesModel->newRequest( d->m_route );
+    d->m_alternativeRoutesModel->newRequest( d->m_routeRequest );
     if ( realSize > 1 ) {
-        emit stateChanged( RoutingManager::Downloading, d->m_route );
+        emit stateChanged( RoutingManager::Downloading, d->m_routeRequest );
         d->m_runnerManager->setWorkOffline( d->m_workOffline );
-        d->m_runnerManager->retrieveRoute( d->m_route );
+        d->m_runnerManager->retrieveRoute( d->m_routeRequest );
     } else {
         d->m_routingModel->clear();
-        emit stateChanged( RoutingManager::Retrieved, d->m_route );
+        emit stateChanged( RoutingManager::Retrieved, d->m_routeRequest );
     }
 }
 
@@ -121,7 +121,7 @@ void RoutingManager::retrieveRoute( GeoDataDocument* route )
 
     if ( !d->m_haveRoute ) {
         d->m_haveRoute = true;
-        emit stateChanged( Retrieved, d->m_route );
+        emit stateChanged( Retrieved, d->m_routeRequest );
     }
 
     emit routeRetrieved( route );
@@ -140,6 +140,11 @@ void RoutingManager::setAdjustNavigation( AdjustNavigation* adjustNavigation )
 AdjustNavigation* RoutingManager::adjustNavigation()
 {
     return d->m_adjustNavigation;
+}
+
+RouteRequest* RoutingManager::routeRequest()
+{
+    return d->m_routeRequest;
 }
 
 } // namespace Marble

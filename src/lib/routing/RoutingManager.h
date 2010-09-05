@@ -86,6 +86,8 @@ public:
      */
     AdjustNavigation* adjustNavigation();
 
+    RouteRequest* routeRequest();
+
 public Q_SLOTS:
     /** Update the route */
     void updateRoute();
