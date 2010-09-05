@@ -121,17 +121,14 @@ void RoutingWidgetPrivate::adjustSearchButton()
     QString text = QObject::tr( "Get Directions" );
     QString tooltip = QObject::tr( "Retrieve routing instructions for the selected destinations." );
 
-    bool search = m_inputWidgets.size() < 2;
-    if ( m_inputWidgets.size() > 1 ) {
-        for ( int i = 0; i < m_inputWidgets.size(); ++i ) {
-            if ( !m_inputWidgets[i]->hasInput() ||
-                    ( m_inputWidgets[i]->hasInput() && !m_inputWidgets[i]->hasTargetPosition() ) ) {
-                search = true;
-            }
+    int validInputs = 0;
+    for ( int i = 0; i < m_inputWidgets.size(); ++i ) {
+        if ( m_inputWidgets[i]->hasTargetPosition() ) {
+            ++validInputs;
         }
     }
 
-    if ( search ) {
+    if ( validInputs < 2 ) {
         text = QObject::tr( "Search" );
         tooltip = QObject::tr( "Find places matching the search term" );
     }

@@ -105,7 +105,6 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteRequest *request, int
 
     GeoDataCoordinates pos = m_route->at( m_index );
     if ( pos.longitude() != 0.0 && pos.latitude() != 0.0 ) {
-        m_lineEdit->setText( pos.toString() );
         m_pickButton->setVisible( false );
         m_stateButton->setVisible( true );
     }
@@ -176,10 +175,6 @@ void RoutingInputWidget::setPlacemarkModel( MarblePlacemarkModel *model )
 
 void RoutingInputWidget::setTargetPosition( const GeoDataCoordinates &position )
 {
-    if ( !hasInput() || d->m_pickButton->isChecked() ) {
-        d->m_lineEdit->setText( position.toString() );
-    }
-
     d->m_pickButton->setVisible( false );
     d->m_route->setPosition( d->m_index, position );
     d->m_progressTimer.stop();
@@ -278,10 +273,9 @@ void RoutingInputWidget::setIndex( int index )
     d->m_pickButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
 }
 
-void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates &position )
+void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates & )
 {
     if ( index == d->m_index ) {
-        d->m_lineEdit->setText( position.toString() );
         d->m_stateButton->setVisible( hasTargetPosition() );
         d->m_stateButton->setIcon( d->m_route->pixmap( d->m_index ) );
         d->m_pickButton->setVisible( !hasTargetPosition() );
