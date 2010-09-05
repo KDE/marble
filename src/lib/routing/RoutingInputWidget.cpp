@@ -140,7 +140,7 @@ RoutingInputWidget::RoutingInputWidget( RouteRequest *request, int index, Plugin
              this, SLOT(retrieveReverseGeocodingResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
     connect( d->m_lineEdit, SIGNAL( returnPressed() ),
              this, SLOT( findPlacemarks() ) );
-    connect( d->m_lineEdit, SIGNAL( textChanged( QString ) ),
+    connect( d->m_lineEdit, SIGNAL( textEdited( QString ) ),
              this, SLOT( setInvalid() ) );
     connect( &d->m_progressTimer, SIGNAL( timeout() ),
              this, SLOT( updateProgress() ) );
@@ -255,9 +255,8 @@ void RoutingInputWidget::finishSearch()
 
 void RoutingInputWidget::setInvalid()
 {
-    if ( !hasTargetPosition() ) {
-        emit targetValidityChanged( false );
-    }
+    d->m_route->setPosition( d->m_index, GeoDataCoordinates() );
+    emit targetValidityChanged( false );
 }
 
 void RoutingInputWidget::abortMapInputRequest()
