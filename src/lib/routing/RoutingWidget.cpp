@@ -126,6 +126,7 @@ void RoutingWidgetPrivate::adjustSearchButton()
     if ( search ) {
         text = QObject::tr( "Search" );
         tooltip = QObject::tr( "Find places matching the search term" );
+        m_ui.descriptionLabel->setVisible( false );
     }
 
     m_ui.searchButton->setText( text );
@@ -426,7 +427,7 @@ void RoutingWidget::updateRouteState( RoutingManager::State state, RouteSkeleton
             qreal distance = d->m_routingManager->routingModel()->totalDistance();
             unsigned int days = d->m_routingManager->routingModel()->duration().days;
             QTime time = d->m_routingManager->routingModel()->duration().time;
-            QString timeString = time.toString( Qt::DefaultLocaleShortDate );
+            QString timeString = time.toString( "HH:mm" );
             if ( days ) {
                 QString label = tr( "Estimated travel time: %1 days, %2 (%3 km)", 0, days );
                 d->m_ui.descriptionLabel->setText( label.arg( days ).arg( timeString ).arg( distance, 0, 'f', 1 ) );
