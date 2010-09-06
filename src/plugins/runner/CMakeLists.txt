@@ -2,7 +2,6 @@
 add_subdirectory( hostip )
 add_subdirectory( latlon )
 add_subdirectory( localdatabase )
-add_subdirectory( namefinder )
 add_subdirectory( nominatim )
 
 # Routing
