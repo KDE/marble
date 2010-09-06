@@ -9,12 +9,16 @@
 //
 
 #include "MonavRunner.h"
+#include "signals.h"
 
+#include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "routing/RouteRequest.h"
 #include "GeoDataDocument.h"
 
 #include <QtCore/QProcess>
+#include <QtCore/QTime>
+#include <QtNetwork/QLocalSocket>
 
 namespace Marble
 {
@@ -22,80 +26,88 @@ namespace Marble
 class MonavRunnerPrivate
 {
 public:
-    QProcess* m_monavProcess;
+    QDir m_mapDir;
 
-    MonavRunnerPrivate( QProcess* monav );
+    MonavRunnerPrivate();
 
-    GeoDataLineString* retrieveWaypoints( const QString &params );
+    GeoDataLineString* retrieveRoute( RouteRequest *route ) const;
 
-    GeoDataDocument* createDocument( GeoDataLineString* routeWaypoints ) const;
-
-    GeoDataLineString* parseMonavOutput( const QByteArray &content ) const;
+    GeoDataDocument* createDocument( GeoDataLineString* geometry ) const;
 };
 
-MonavRunnerPrivate::MonavRunnerPrivate( QProcess* monav ) :
-        m_monavProcess( monav )
+MonavRunnerPrivate::MonavRunnerPrivate() :
+        m_mapDir( MarbleDirs::localPath() + "/maps/earth/monav/" )
 {
     // nothing to do
 }
 
-GeoDataLineString* MonavRunnerPrivate::retrieveWaypoints( const QString &params )
+GeoDataLineString* MonavRunnerPrivate::retrieveRoute( RouteRequest *route ) const
 {
-    Q_ASSERT( m_monavProcess );
-    m_monavProcess->write( params.toAscii() );
-    QByteArray data;
-    for ( int i=1; i<15; ++i ) {
-        if ( m_monavProcess->bytesAvailable() ) {
-            data += m_monavProcess->readAllStandardOutput();
-            bool haveRoute = data.endsWith("\n\n");
-            if ( haveRoute ) {
-                return parseMonavOutput( data );
-            }
-        } else {
-            ++i;
-            usleep( 1000 * pow( 2, i ) );
-        }
-    }
+    GeoDataLineString* geometry = new GeoDataLineString;
 
-    return 0;
-}
+    QLocalSocket socket;
+    socket.connectToServer( "MoNavD" );
+    if ( socket.waitForConnected() ) {
+        RoutingDaemonCommand command;
+        QVector<RoutingDaemonCoordinate> waypoints;
 
-GeoDataLineString* MonavRunnerPrivate::parseMonavOutput( const QByteArray &content ) const
-{
-    GeoDataLineString* routeWaypoints = new GeoDataLineString;
-
-    QStringList lines = QString::fromUtf8( content ).split( '\n' );
-    foreach( const QString &line, lines )
-    {
-        QStringList fields = line.split( ';' );
-        if ( fields.size() >= 2 )
+        for ( int i = 0; i < route->size(); ++i )
         {
-            qreal lat = fields.at( 0 ).trimmed().toDouble();
-            qreal lon = fields.at( 1 ).trimmed().toDouble();
-            GeoDataCoordinates coordinates( lon, lat, 0.0, GeoDataCoordinates::Degree );
-            routeWaypoints->append( coordinates );
+            RoutingDaemonCoordinate coordinate;
+            coordinate.longitude = route->at( i ).longitude( GeoDataCoordinates::Degree );
+            coordinate.latitude = route->at( i ).latitude( GeoDataCoordinates::Degree );
+            waypoints << coordinate;
+        }
+
+        command.dataDirectory = m_mapDir.absolutePath();
+        command.lookupRadius = 1500;
+        command.waypoints = waypoints;
+
+        command.post( &socket );
+        socket.flush();
+
+        RoutingDaemonResult reply;
+        if ( reply.read( &socket ) )
+        {
+            switch (reply.type)
+            {
+            case RoutingDaemonResult::LoadFail:
+                mDebug() << "failed to load monav map from " << m_mapDir.absolutePath();
+                break;
+            case RoutingDaemonResult::RouteFail:
+                mDebug() << "failed to retrieve route from monav daemon";
+                break;
+            case RoutingDaemonResult::Success:
+                /** @todo: make use of reply.seconds, the estimated travel time */
+                for ( int i = 0; i < reply.path.size(); i++ ) {
+                    qreal lon = reply.path[i].longitude;
+                    qreal lat = reply.path[i].latitude;
+                    GeoDataCoordinates coordinates( lon, lat, 0, GeoDataCoordinates::Degree );
+                    geometry->append( coordinates );
+                }
+                break;
+            }
         }
     }
 
-    return routeWaypoints;
+    return geometry;
 }
 
-GeoDataDocument* MonavRunnerPrivate::createDocument( GeoDataLineString* routeWaypoints ) const
+GeoDataDocument* MonavRunnerPrivate::createDocument( GeoDataLineString *geometry ) const
 {
-    if ( !routeWaypoints || routeWaypoints->isEmpty() )
-    {
+    if ( !geometry || geometry->isEmpty() ) {
         return 0;
     }
 
-    GeoDataDocument* result = new GeoDataDocument();
+    GeoDataDocument* result = new GeoDataDocument;
     GeoDataPlacemark* routePlacemark = new GeoDataPlacemark;
     routePlacemark->setName( "Route" );
-    routePlacemark->setGeometry( routeWaypoints );
+    routePlacemark->setGeometry( geometry );
     result->append( routePlacemark );
 
     QString name = "%1 %2 (Monav)";
     QString unit = "m";
-    qreal length = routeWaypoints->length( EARTH_RADIUS );
+    qreal length = geometry->length( EARTH_RADIUS );
     if ( length >= 1000 )
     {
         length /= 1000.0;
@@ -105,10 +117,11 @@ GeoDataDocument* MonavRunnerPrivate::createDocument( GeoDataLineString* routeWay
     return result;
 }
 
-MonavRunner::MonavRunner( QProcess* monav, QObject *parent ) :
+MonavRunner::MonavRunner( QObject *parent ) :
         MarbleAbstractRunner( parent ),
-        d( new MonavRunnerPrivate( monav ) )
+        d( new MonavRunnerPrivate )
 {
+    // nothing to do
 }
 
 MonavRunner::~MonavRunner()
@@ -123,17 +136,8 @@ GeoDataFeature::GeoDataVisualCategory MonavRunner::category() const
 
 void MonavRunner::retrieveRoute( RouteRequest *route )
 {
-    QString params;
-    for ( int i = 0; i < route->size(); ++i )
-    {
-        double lon = route->at( i ).longitude( GeoDataCoordinates::Degree );
-        double lat = route->at( i ).latitude( GeoDataCoordinates::Degree );
-        params += QString( " --lat%1=%2" ).arg( i + 1 ).arg( lat, 0, 'f', 8 );
-        params += QString( " --lon%1=%2" ).arg( i + 1 ).arg( lon, 0, 'f', 8 );
-    }
-
-    GeoDataLineString* wayPoints = d->retrieveWaypoints( params.trimmed() + "\n" );
-    GeoDataDocument* result = d->createDocument( wayPoints );
+    GeoDataLineString* waypoints = d->retrieveRoute( route );
+    GeoDataDocument* result = d->createDocument( waypoints );
     emit routeCalculated( result );
 }
 

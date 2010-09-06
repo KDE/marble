@@ -30,9 +30,6 @@ public:
 
     virtual MarbleAbstractRunner* newRunner() const;
 
-private Q_SLOTS:
-    void killProcess();
-
 private:
     MonavPluginPrivate* const d;
 };

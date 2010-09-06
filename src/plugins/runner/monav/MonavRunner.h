@@ -25,7 +25,7 @@ class MonavRunner : public MarbleAbstractRunner
 {
     Q_OBJECT
 public:
-    explicit MonavRunner( QProcess* monav, QObject *parent = 0 );
+    explicit MonavRunner( QObject *parent = 0 );
 
     ~MonavRunner();
 

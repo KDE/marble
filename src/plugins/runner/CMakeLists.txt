@@ -14,6 +14,6 @@ add_subdirectory( routino )
 #add_subdirectory( traveling-salesman )
 
 # monav works, but you need a custom shell client
-#add_subdirectory( monav )
+add_subdirectory( monav )
 
 add_subdirectory( yours )
