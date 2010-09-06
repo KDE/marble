@@ -27,7 +27,6 @@
 
 #include "HostipRunner.h"
 #include "LatLonRunner.h"
-#include "OnfRunner.h"
 #include "OsmNominatimRunner.h"
 #include "LocalDatabaseRunner.h"
 
@@ -93,13 +92,6 @@ void MarbleRunnerManager::newText(const QString& text)
         localDatabaseRunner->parse(text);
         localDatabaseRunner->setMap(m_map);
         localDatabaseRunner->start();
-
-        OnfRunner* onfrunner = new OnfRunner;
-        m_runners << onfrunner;
-        connect( onfrunner, SIGNAL( runnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ),
-                 this,      SLOT( slotRunnerFinished( MarbleAbstractRunner*, QVector<GeoDataPlacemark> ) ));
-        onfrunner->parse(text);
-        onfrunner->start();
 
         OsmNominatimRunner* nominatim = new OsmNominatimRunner;
         m_runners << nominatim;
