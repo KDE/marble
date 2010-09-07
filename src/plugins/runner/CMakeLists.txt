@@ -13,6 +13,6 @@ add_subdirectory( routino )
 #add_subdirectory( traveling-salesman )
 
 # waiting for signals.h being released under lgpl-2
-#add_subdirectory( monav )
+add_subdirectory( monav )
 
 add_subdirectory( yours )
