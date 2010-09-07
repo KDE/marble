@@ -91,4 +91,18 @@ void GeoWriter::setDocumentType( const QString &documentType )
     m_documentType = documentType;
 }
 
+void GeoWriter::writeElement( const QString &key, const QString &value )
+{
+    writeStartElement( key );
+    writeCharacters( value );
+    writeEndElement();
+}
+
+void GeoWriter::writeOptionalElement( const QString &key, const QString &value )
+{
+    if( !value.isEmpty() ) {
+        writeElement( key, value );
+    }
+}
+
 }

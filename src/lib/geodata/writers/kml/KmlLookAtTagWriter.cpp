@@ -31,21 +31,10 @@ bool KmlLookAtTagWriter::write( const GeoDataObject &node,
 
     writer.writeStartElement( kml::kmlTag_LookAt );
 
-    writer.writeStartElement( "longitude" );
-    writer.writeCharacters( QString::number( lookAt.longitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
-    writer.writeEndElement();
-
-    writer.writeStartElement( "latitude" );
-    writer.writeCharacters( QString::number( lookAt.latitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
-    writer.writeEndElement();
-
-    writer.writeStartElement( "altitude" );
-    writer.writeCharacters( QString::number( lookAt.altitude(), 'f', 10 ) );
-    writer.writeEndElement();
-    
-    writer.writeStartElement( "range" );
-    writer.writeCharacters( QString::number( lookAt.range(), 'f', 10 ) );
-    writer.writeEndElement();
+    writer.writeElement( "longitude", QString::number( lookAt.longitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
+    writer.writeElement( "latitude", QString::number( lookAt.latitude( GeoDataCoordinates::Degree ), 'f', 10 ) );
+    writer.writeElement( "altitude", QString::number( lookAt.altitude(), 'f', 10 ) );
+    writer.writeElement( "range", QString::number( lookAt.range(), 'f', 10 ) );
     
     writer.writeEndElement();
 

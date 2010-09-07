@@ -34,11 +34,7 @@ bool KmlFolderTagWriter::write( const GeoDataObject &node, GeoWriter& writer ) c
     writer.writeStartElement( kml::kmlTag_Folder );
 
     //Writing folder name
-    if( !folder.name().isEmpty() ) {
-        writer.writeStartElement( "name" );
-        writer.writeCharacters( folder.name() );
-        writer.writeEndElement();
-    }
+    writer.writeOptionalElement( "name", folder.name() );
 
     //Write all containing features
     QVector<GeoDataFeature*>::ConstIterator it =  folder.constBegin();

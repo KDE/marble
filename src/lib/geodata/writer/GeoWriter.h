@@ -57,6 +57,20 @@ public:
      * string used to register the required Tag Writers in @see GeoTagWriter
      */
     void setDocumentType( const QString& documentType );
+
+    /**
+     * @brief Convenience method to write <key>value</key>
+     *
+     **/
+    void writeElement( const QString &key, const QString &value );
+
+    /**
+     * @brief Convenience method to write <key>value</key> if value is
+     *   not empty. Otherwise, nothing is written.
+     *
+     **/
+    void writeOptionalElement( const QString &key, const QString &value );
+
 private:
     friend class GeoTagWriter;
     bool writeElement( const GeoDataObject& object );

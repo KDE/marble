@@ -33,6 +33,8 @@ bool KmlDocumentTagWriter::write( const GeoDataObject &node, GeoWriter& writer )
     const GeoDataDocument &document = static_cast<const GeoDataDocument&>(node);
 
     writer.writeStartElement( kml::kmlTag_Document );
+    writer.writeOptionalElement( "name", document.name() );
+    writer.writeOptionalElement( "address", document.address() );
 
     QVector<GeoDataFeature*>::ConstIterator it =  document.constBegin();
     QVector<GeoDataFeature*>::ConstIterator const end = document.constEnd();
