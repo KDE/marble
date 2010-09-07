@@ -27,6 +27,7 @@
 #include "GeoDataContainer.h"
 #include "GeoDataFolder.h"
 #include "GeoDataParser.h"
+#include "GeoDataDocument.h"
 
 namespace Marble
 {
@@ -39,8 +40,8 @@ GeoNode* KmlFolderTagHandler::parse(GeoParser& parser) const
     Q_ASSERT(parser.isStartElement() && parser.isValidElement(kmlTag_Folder));
 
     GeoStackItem parentItem = parser.parentElement();
+    GeoDataFolder *folder = new GeoDataFolder;
     if ( parentItem.represents( kmlTag_Folder ) || parentItem.represents( kmlTag_Document ) ) {
-        GeoDataFolder *folder = new GeoDataFolder;
         GeoDataContainer *parentPtr = parentItem.nodeAs<GeoDataContainer>();
         parentPtr->append( folder );
 
@@ -49,7 +50,12 @@ GeoNode* KmlFolderTagHandler::parse(GeoParser& parser) const
                  << " parent item name: " << parentItem.qualifiedName().first;
 #endif // DEBUG_TAGS
         return folder;
+    } else if ( parentItem.first.first == kmlTag_kml) {
+        GeoDataDocument* doc = geoDataDoc( parser );
+        doc->append( folder );
+        return folder;
     } else {
+        delete folder;
         return 0;
     }
 }
