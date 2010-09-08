@@ -18,6 +18,9 @@
 #include <QtCore/QDir>
 #include <QtCore/QTimer>
 #include <QtNetwork/QLocalSocket>
+#include <unistd.h>
+
+
 
 namespace Marble
 {
