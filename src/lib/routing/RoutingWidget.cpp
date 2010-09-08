@@ -191,6 +191,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     d->m_routingLayer->synchronizeAlternativeRoutesWith( d->m_routingManager->alternativeRoutesModel(), d->m_ui.routeComboBox );
     d->m_widget->model()->addLayer( d->m_routingLayer );
 
+    connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
+             d->m_widget, SLOT( repaint() ) );
     connect( d->m_routingLayer, SIGNAL( routeDirty() ),
              d->m_routingManager, SLOT( updateRoute() ) );
     connect( d->m_routingLayer, SIGNAL( placemarkSelected( QModelIndex ) ),
@@ -231,8 +233,14 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     connect( d->m_ui.routeComboBox, SIGNAL( currentIndexChanged( int ) ),
              this, SLOT( switchRoute( int ) ) );
 
-    addInputWidget();
-    addInputWidget(); // Start with source and destination
+    for( int i=0; i<d->m_routeRequest->size(); ++i ) {
+        insertInputWidget( i );
+    }
+
+    for ( int i=0; i<2 && d->m_inputWidgets.size()<2; ++i ) {
+        // Start with source and destination if the route is empty yet
+        addInputWidget();
+    }
     d->m_ui.routePreferenceComboBox->setVisible( false );
     d->m_ui.highwaysCheckBox->setVisible( false );
     d->m_ui.tollWaysCheckBox->setVisible( false );
@@ -362,9 +370,7 @@ void RoutingWidget::activatePlacemark( const QModelIndex &index )
 
 void RoutingWidget::addInputWidget()
 {
-    int index = d->m_ui.routingLayout->count() - 4;
     d->m_routeRequest->append( GeoDataCoordinates() );
-    insertInputWidget( index );
 }
 
 void RoutingWidget::insertInputWidget( int index )
@@ -526,11 +532,7 @@ void RoutingWidget::switchRoute( int index )
     if ( index >= 0 )
     {
         Q_ASSERT( index < d->m_ui.routeComboBox->count() );
-        GeoDataDocument* route = d->m_routingManager->alternativeRoutesModel()->route( index );
-        if ( route ) {
-            d->m_routingManager->routingModel()->importGeoDataDocument( route );
-            d->m_widget->repaint();
-        }
+        d->m_routingManager->alternativeRoutesModel()->setCurrentRoute( index );
     }
 }
 

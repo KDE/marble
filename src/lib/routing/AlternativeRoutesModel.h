@@ -65,7 +65,9 @@ public:
       */
     void addRoute( GeoDataDocument* document );
 
-    // Convenience methods
+    void setCurrentRoute( int index );
+
+    GeoDataDocument* currentRoute();
 
     /** Returns the waypoints contained in the route as a linestring */
     static GeoDataLineString* waypoints( const GeoDataDocument* document );
@@ -75,6 +77,9 @@ public:
 
     /** Returns the minimal distance of each waypoint of routeA to routeB */
     static QVector<qreal> deviation( const GeoDataDocument* routeA, const GeoDataDocument* routeB );
+
+Q_SIGNALS:
+    void currentRouteChanged( GeoDataDocument* newRoute );
 
 private Q_SLOTS:
     void addRestrainedRoutes();

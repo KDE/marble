@@ -24,6 +24,7 @@ class RoutingModel;
 class RouteRequest;
 class MarbleModel;
 class GeoDataDocument;
+class GeoDataFolder;
 class AlternativeRoutesModel;
 class AdjustNavigation;
 
@@ -86,7 +87,20 @@ public:
      */
     AdjustNavigation* adjustNavigation();
 
+    /**
+      * Returns the current route request
+      */
     RouteRequest* routeRequest();
+
+    /**
+      * Saves the current route request and the current route to disk
+      */
+    void saveSettings() const;
+
+    /**
+      * Restores a previously saved route request and route from disk, if any
+      */
+    void restoreSettings();
 
 public Q_SLOTS:
     /** Update the route */

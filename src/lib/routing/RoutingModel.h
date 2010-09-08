@@ -81,11 +81,6 @@ public:
 
     // importGeoDataDocument() will probably become setModel(GeoDataDocument*) in the future and
     // the internal representation using a QVector<RouteElement> may go away
-    /**
-      * Old data in the model is discarded, the parsed content of the provided document
-      * is used as the new model data and a model reset is done
-      */
-    bool importGeoDataDocument( GeoDataDocument* document );
 
     /**
       * Returns the total (estimated) time it takes to travel from
@@ -155,6 +150,12 @@ public:
     qreal currentInstructionLength() const;
 
 public Q_SLOTS:
+    /**
+      * Old data in the model is discarded, the parsed content of the provided document
+      * is used as the new model data and a model reset is done
+      */
+    bool setCurrentRoute( GeoDataDocument* document );
+
     void currentInstruction( GeoDataCoordinates, qreal );
 
 Q_SIGNALS:

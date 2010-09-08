@@ -206,6 +206,7 @@ void RouteRequest::append( const GeoDataCoordinates &coordinates )
     GeoDataPlacemark placemark;
     placemark.setCoordinate( GeoDataPoint( coordinates ) );
     d->m_route.append( placemark );
+    emit positionAdded( d->m_route.size()-1 );
 }
 
 void RouteRequest::remove( int index )

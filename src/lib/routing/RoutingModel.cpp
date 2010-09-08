@@ -204,7 +204,7 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
     return QVariant();
 }
 
-bool RoutingModel::importGeoDataDocument( GeoDataDocument* document )
+bool RoutingModel::setCurrentRoute( GeoDataDocument* document )
 {
     d->m_route.clear();
 

@@ -25,6 +25,8 @@ public:
 
     MarbleModel* m_marbleModel;
 
+    int m_currentIndex;
+
     AlternativeRoutesModelPrivate( MarbleModel* marbleModel );
 
     /**
@@ -85,7 +87,7 @@ public:
 
 
 AlternativeRoutesModelPrivate::AlternativeRoutesModelPrivate( MarbleModel* marbleModel ) :
-        m_marbleModel( marbleModel )
+        m_marbleModel( marbleModel ), m_currentIndex( 0 )
 {
     // nothing to do
 }
@@ -392,6 +394,25 @@ GeoDataLineString* AlternativeRoutesModel::waypoints( const GeoDataDocument* doc
 {
     return AlternativeRoutesModelPrivate::waypoints( document );
 }
+
+void AlternativeRoutesModel::setCurrentRoute( int index )
+{
+    if ( index >= 0 && index < rowCount() ) {
+        d->m_currentIndex = index;
+        emit currentRouteChanged( currentRoute() );
+    }
+}
+
+GeoDataDocument * AlternativeRoutesModel::currentRoute()
+{
+    GeoDataDocument* result = 0;
+    if ( d->m_currentIndex >= 0 && d->m_currentIndex < rowCount() ) {
+        result = d->m_routes[d->m_currentIndex];
+    }
+
+    return result;
+}
+
 
 } // namespace Marble
 
