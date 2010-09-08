@@ -114,7 +114,7 @@ QList<WeatherData> BBCParser::read( QIODevice *device )
             if ( name() == "rss" )
                 readBBC();
             else
-                raiseError( "The file is not an valid BBC answer." );
+                raiseError( QObject::tr("The file is not an valid BBC answer.") );
         }
     }
 
