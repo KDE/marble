@@ -126,9 +126,9 @@ GeoStackItem GeoParser::parentElement( unsigned int depth )
 void GeoParser::parseDocument()
 {
     if( !isStartElement() ) {
-        raiseError( QString("Error parsing file at line: %1 and column %2 . ")
+        raiseError( QObject::tr("Error parsing file at line: %1 and column %2 . ")
                     .arg( lineNumber() ).arg( columnNumber() )
-                    +  QString("This is an Invalid File") );
+                    +  QObject::tr("This is an Invalid File") );
         return;
     }
 
