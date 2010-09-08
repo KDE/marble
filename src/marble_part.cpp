@@ -843,7 +843,14 @@ void MarblePart::createBookmarksListMenu( QMenu *m_bookmarksListMenu, const GeoD
     for (; i != end; ++i ) {
         QAction *bookmarkAct = new QAction( (*i)->name(), this );
         QVariant var;
-        var.setValue( *( (*i)->lookAt() ) );
+        GeoDataLookAt* lookAt = (*i)->lookAt();
+        if ( !lookAt ) {
+            GeoDataLookAt coordinateToLookAt;
+            coordinateToLookAt.setCoordinates( (*i)->coordinate() );
+            coordinateToLookAt.setRange( (*i)->coordinate().altitude() );
+        } else {
+            var.setValue( *lookAt );
+        }
         bookmarkAct->setData( var );
         m_bookmarksListMenu->addAction( bookmarkAct );
     }

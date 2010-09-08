@@ -71,17 +71,7 @@ GeoDataGeometry* GeoDataPlacemark::geometry() const
 
 GeoDataLookAt *GeoDataPlacemark::lookAt() const
 {
-    if( p()->m_lookAt == 0 ){
-        GeoDataCoordinates tempCoordinate = coordinate();
-        GeoDataLookAt *coordinateToLookAt = new GeoDataLookAt();
-        coordinateToLookAt->setCoordinates( tempCoordinate );
-        coordinateToLookAt->setRange( tempCoordinate.altitude() ); 
-        return coordinateToLookAt;
-    }
-    else {
-        return p()->m_lookAt;
-    
-    }
+    return p()->m_lookAt;
 }
 
 void GeoDataPlacemark::setLookAt( GeoDataLookAt *lookAt)
