@@ -141,10 +141,7 @@ void BookmarkInfoDialog::addBookmark()
     bookmark.setDescriptionCDATA( true );
     bookmark.setCoordinate( m_widget->centerLongitude(), m_widget->centerLatitude(), 0, GeoDataPoint::Degree );
 
-    GeoDataData data;
-    data.setValue(true);
-    data.setDisplayName("isBookmark");
-    bookmark.extendedData().addValue("isBookmark",data );
+    bookmark.extendedData().addValue( GeoDataData( "isBookmark", true ) );
     GeoDataLookAt *lookAt = new GeoDataLookAt( m_widget->lookAt() ) ;
     bookmark.setLookAt( lookAt );
 

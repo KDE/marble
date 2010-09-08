@@ -30,7 +30,10 @@ bool KmlDataTagWriter::write( const GeoDataObject &node,
     const GeoDataData &data = static_cast<const GeoDataData&>( node );
 
     writer.writeStartElement( kml::kmlTag_Data );
-    writer.writeAttribute( "name", data.displayName() );
+    writer.writeAttribute( "name", data.name() );
+    if ( !data.displayName().isEmpty() ) {
+        writer.writeAttribute( "displayName", data.displayName() );
+    }
     writer.writeElement( "value", data.value().toString() );
     writer.writeEndElement();
 

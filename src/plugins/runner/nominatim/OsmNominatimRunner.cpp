@@ -164,9 +164,7 @@ void OsmNominatimRunner::addData( const QDomNodeList &node, const QString &key, 
     QDomNodeList child = node.item( 0 ).toElement().elementsByTagName( key );
     if ( child.size() > 0 ) {
         QString text = child.item( 0 ).toElement().text();
-        GeoDataData data;
-        data.setValue( text );
-        extendedData->addValue( key, data );
+        extendedData->addValue( GeoDataData( key, text ) );
     }
 }
 

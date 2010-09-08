@@ -249,12 +249,9 @@ bool FileLoader::loadFile( const QString &filename )
     qint64   tmpint64;
     qint8    tmpint8;
     qint16   tmpint16;
-    GeoDataData tmpdata;
 
     while ( !in.atEnd() ) {
         GeoDataPlacemark *mark = new GeoDataPlacemark;
-        GeoDataData tmpgmt;
-        GeoDataData tmpdst;
         in >> tmpstr;
         mark->setName( tmpstr );
         in >> lon >> lat >> alt;
@@ -272,11 +269,9 @@ bool FileLoader::loadFile( const QString &filename )
         in >> tmpint64;
         mark->setPopulation( tmpint64 );
         in >> tmpint16;
-        tmpgmt.setValue( QVariant( ( int ) tmpint16 ) );
-        mark->extendedData().addValue("gmt", tmpgmt );
+        mark->extendedData().addValue( GeoDataData( "gmt", int( tmpint16 ) ) );
         in >> tmpint8;
-        tmpdst.setValue( QVariant( ( int ) tmpint8 ) );
-        mark->extendedData().addValue("dst", tmpdst );
+        mark->extendedData().addValue( GeoDataData( "dst", int( tmpint8 ) ) );
 
         m_document->append( mark );
     }

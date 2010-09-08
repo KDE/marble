@@ -54,9 +54,9 @@ GeoDataData GeoDataExtendedData::value( const QString& key ) const
     return d->hash.value( key );
 }
 
-void GeoDataExtendedData::addValue( const QString& key, const GeoDataData& data )
+void GeoDataExtendedData::addValue( const GeoDataData& data )
 {
-    d->hash.insert( key , data );
+    d->hash.insert( data.name(), data );
 }
 
 QHash< QString, GeoDataData >::const_iterator GeoDataExtendedData::constBegin( ) const

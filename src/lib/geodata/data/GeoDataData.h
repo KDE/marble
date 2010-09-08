@@ -27,6 +27,10 @@ class GEODATA_EXPORT GeoDataData : public GeoDataObject
 {
   public:
     GeoDataData();
+
+    /** Convenience constructor that sets name and value directly */
+    GeoDataData( const QString &name, const QVariant &value );
+
     GeoDataData( const GeoDataData& other );
     virtual ~GeoDataData();
 
@@ -48,6 +52,17 @@ class GEODATA_EXPORT GeoDataData : public GeoDataObject
     * @param value the value to be set
     */
     void setValue( const QVariant& value );
+
+    /**
+    * @brief return the name of data
+    */
+    QString name() const;
+
+    /**
+    * @brief set the name of data
+    * @param name the name to be set
+    */
+    void setName( const QString& name );
 
     /**
     * @brief return the displayName of data

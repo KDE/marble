@@ -40,6 +40,13 @@ GeoDataData& GeoDataData::operator=( const GeoDataData& other )
     return *this;
 }
 
+GeoDataData::GeoDataData( const QString &name, const QVariant &value )
+    : d( new GeoDataDataPrivate )
+{
+    d->m_name = name;
+    d->m_value = value;
+}
+
 QString GeoDataData::nodeType() const
 {
     return d->nodeType();
@@ -53,6 +60,16 @@ QVariant GeoDataData::value() const
 void GeoDataData::setValue( const QVariant& value )
 {
     d->m_value = value;
+}
+
+QString GeoDataData::name() const
+{
+    return d->m_name;
+}
+
+void GeoDataData::setName( const QString& name )
+{
+    d->m_name = name;
 }
 
 QString GeoDataData::displayName() const

@@ -134,8 +134,9 @@ QVector<GeoDataPlacemark*> GosmoreRunnerPrivate::parseGosmoreInstructions( const
         GeoDataPlacemark* placemark = new GeoDataPlacemark( directions[i].instructionText() );
         GeoDataExtendedData extendedData;
         GeoDataData turnType;
+        turnType.setName( "turnType" );
         turnType.setValue( qVariantFromValue<RoutingInstruction::TurnType>( directions[i].turnType() ) );
-        extendedData.addValue( "turnType", turnType );
+        extendedData.addValue( turnType );
         placemark->setExtendedData( extendedData );
         Q_ASSERT( !directions[i].points().isEmpty() );
         GeoDataLineString* geometry = new GeoDataLineString;
@@ -266,9 +267,7 @@ void GosmoreRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
             QString road = fields.last().trimmed();
             placemark.setAddress( road );
             GeoDataExtendedData extendedData;
-            GeoDataData data;
-            data.setValue( road );
-            extendedData.addValue( "road", data );
+            extendedData.addValue( GeoDataData( "road", road ) );
             placemark.setExtendedData( extendedData );
         }
     }
