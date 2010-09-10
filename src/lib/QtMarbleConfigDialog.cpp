@@ -568,7 +568,7 @@ int QtMarbleConfigDialog::persistentTileCacheLimit() const
 
 QString QtMarbleConfigDialog::proxyUrl() const
 {
-    return d->m_settings->value( "Cache/proxyUrl", "http://" ).toString();
+    return d->m_settings->value( "Cache/proxyUrl", "" ).toString();
 }
 
 int QtMarbleConfigDialog::proxyPort() const

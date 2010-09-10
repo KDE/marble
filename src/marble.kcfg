@@ -190,7 +190,7 @@
   </entry>
   <entry name="proxyUrl" type="String">
    <label>URL for the proxy server.</label>
-   <default>http://</default>
+   <default></default>
   </entry>
   <entry key="proxyPort" type="Int" >
    <label>Port for the proxy server.</label>
