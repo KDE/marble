@@ -68,10 +68,15 @@ void GpsdPositionProviderPlugin::update( gps_data_t data )
         }
 
         m_accuracy.level = GeoDataAccuracy::Detailed;
+#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 3 )
         if ( !isnan( data.fix.epx ) && !isnan( data.fix.epy ) ) {
             m_accuracy.horizontal = qMax( data.fix.epx, data.fix.epy );
         }
-
+#else
+        if ( !isnan( data.fix.eph ) ) {
+            m_accuracy.horizontal = data.fix.eph;
+        }
+#endif
         if ( !isnan( data.fix.epv ) ) {
             m_accuracy.vertical = data.fix.epv;
         }
