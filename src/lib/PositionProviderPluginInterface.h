@@ -54,6 +54,6 @@ class MARBLE_EXPORT PositionProviderPluginInterface: public PluginInterface
 
 Q_DECLARE_INTERFACE( Marble::PositionProviderPluginInterface, "org.kde.Marble.PositionProviderPluginInterface/1.01" )
 
-Q_DECLARE_METATYPE( Marble::PositionProviderStatus );
+Q_DECLARE_METATYPE( Marble::PositionProviderStatus )
 
 #endif

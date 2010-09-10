@@ -32,7 +32,7 @@ public:
         JunctionType,
         RoadName,
         TotalSecondsRemaining,
-        RoadType,
+        RoadType
     };
 
     /** Constructor */
@@ -72,7 +72,7 @@ private:
 
     QMap<QString, RoutingWaypoint::JunctionType> m_junctionTypeMapping;
 
-    Q_DISABLE_COPY( WaypointParser );
+    Q_DISABLE_COPY( WaypointParser )
 };
 
 } // namespace Marble

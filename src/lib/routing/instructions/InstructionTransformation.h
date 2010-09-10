@@ -30,7 +30,7 @@ public:
 private:
     // Pure static usage
     InstructionTransformation();
-    Q_DISABLE_COPY( InstructionTransformation );
+    Q_DISABLE_COPY( InstructionTransformation )
 };
 
 } // namespace Marble
