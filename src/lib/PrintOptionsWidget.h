@@ -11,6 +11,8 @@
 #ifndef MARBLE_PRINTOPTIONSWIDGET_H
 #define MARBLE_PRINTOPTIONSWIDGET_H
 
+#include "marble_export.h"
+
 #include <QtGui/QWidget>
 
 #include "ui_PrintOptions.h"
@@ -18,7 +20,7 @@
 namespace Marble
 {
 
-class PrintOptionsWidget: public QWidget, private Ui::PrintOptions
+class MARBLE_EXPORT PrintOptionsWidget: public QWidget, private Ui::PrintOptions
 {
     Q_OBJECT
 
