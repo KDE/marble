@@ -215,6 +215,12 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
      */
     void setFileViewTabShown( bool show );
 
+    /**
+     * @brief Control whether the Routing tab is shown.
+     * @param show  boolean that controls if the Routing tab is shown.
+     */
+    void setRoutingTabShown( bool show );
+
     /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
     void updateMapThemeView();
 

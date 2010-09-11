@@ -433,7 +433,7 @@ void MarbleControlBox::setCurrentLocationTabShown( bool show )
 {
     QString  title = tr( "Current Location" );
     setWidgetTabShown( d->m_currentLocationWidget, 4, show, title );
-    if ( d->m_widget ) {
+    if ( d->m_widget && d->m_widget->mapTheme() ) {
         bool enabled = d->m_widget->mapTheme()->head()->target() == "earth";
         int locationIndex = indexOf( d->m_currentLocationWidget );
         if ( locationIndex >= 0 ) {
@@ -446,7 +446,11 @@ void MarbleControlBox::setCurrentLocationTabShown( bool show )
     }
 }
 
-
+void MarbleControlBox::setRoutingTabShown( bool show )
+{
+    QString  title = tr( "Routing" );
+    setWidgetTabShown( d->m_routingWidget, 5, show, title );
+}
 
 void MarbleControlBox::resizeEvent ( QResizeEvent * )
 {
