@@ -57,6 +57,7 @@
 #include "BookmarkManager.h"
 #include "NewFolderInfoDialog.h"
 #include "GeoDataPlacemark.h"
+#include "routing/RoutingManager.h"
 
 namespace
 {
@@ -892,6 +893,9 @@ void MainWindow::readSettings()
 
      // The config dialog has to read settings.
      m_configDialog->readSettings();
+
+     // Load previous route settings
+     m_controlView->marbleWidget()->model()->routingManager()->readSettings();
 }
 
 void MainWindow::writeSettings()
@@ -950,6 +954,9 @@ void MainWindow::writeSettings()
 
      // The config dialog has to write settings.
      m_configDialog->writeSettings();
+
+     // Store current route settings
+     m_controlView->marbleWidget()->model()->routingManager()->writeSettings();
 }
 
 void MainWindow::editSettings()

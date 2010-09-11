@@ -327,8 +327,16 @@ void AlternativeRoutesModel::addRestrainedRoutes()
     d->m_restrainedRoutes.clear();
 }
 
-void AlternativeRoutesModel::addRoute( GeoDataDocument* document )
+void AlternativeRoutesModel::addRoute( GeoDataDocument* document, WritePolicy policy )
 {
+    if ( policy == Instant ) {
+        int affected = d->m_routes.size();
+        beginInsertRows( QModelIndex(), affected, affected );
+        d->m_routes.push_back( document );
+        endInsertRows();
+        return;
+    }
+
     if ( d->m_routes.isEmpty() && d->m_restrainedRoutes.isEmpty() ) {
         // First
         int responseTime = d->m_responseTime.elapsed();

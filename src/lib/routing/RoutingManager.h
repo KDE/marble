@@ -95,12 +95,12 @@ public:
     /**
       * Saves the current route request and the current route to disk
       */
-    void saveSettings() const;
+    void writeSettings() const;
 
     /**
       * Restores a previously saved route request and route from disk, if any
       */
-    void restoreSettings();
+    void readSettings();
 
 public Q_SLOTS:
     /** Update the route */

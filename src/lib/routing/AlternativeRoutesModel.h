@@ -35,6 +35,11 @@ class AlternativeRoutesModel : public QAbstractListModel
     Q_OBJECT
 
 public:
+    enum WritePolicy {
+        Instant,
+        Lazy
+    };
+
     /** Constructor */
     explicit AlternativeRoutesModel( MarbleModel* model, QObject *parent = 0 );
 
@@ -62,8 +67,12 @@ public:
     /**
       * Old data in the model is discarded, the parsed content of the provided document
       * is used as the new model data and a model reset is done
+      * @param document The route to add
+      * @param policy In lazy mode (default), a short amount of time is waited for
+      *   other addRoute() calls before adding the route to the model. Otherwise, the
+      *   model is changed immediately.
       */
-    void addRoute( GeoDataDocument* document );
+    void addRoute( GeoDataDocument* document, WritePolicy policy = Lazy );
 
     void setCurrentRoute( int index );
 

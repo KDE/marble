@@ -195,7 +195,7 @@ AdjustNavigation* RoutingManager::adjustNavigation()
     return d->m_adjustNavigation;
 }
 
-void RoutingManager::saveSettings() const
+void RoutingManager::writeSettings() const
 {
     GeoWriter writer;
     writer.setDocumentType( "http://earth.google.com/kml/2.2" );
@@ -225,7 +225,7 @@ void RoutingManager::saveSettings() const
     file.close();
 }
 
-void RoutingManager::restoreSettings()
+void RoutingManager::readSettings()
 {
     QFile file( d->stateFile() );
     if ( !file.open( QIODevice::ReadOnly ) ) {
@@ -259,7 +259,8 @@ void RoutingManager::restoreSettings()
 
         GeoDataDocument* route = dynamic_cast<GeoDataDocument*>(&container->last());
         if ( route ) {
-            routingModel()->setCurrentRoute( route );
+            alternativeRoutesModel()->addRoute( route, AlternativeRoutesModel::Instant );
+            alternativeRoutesModel()->setCurrentRoute( 0 );
         } else {
             mDebug() << "Expected a GeoDataDocument, didn't get one though";
         }

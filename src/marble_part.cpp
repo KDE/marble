@@ -75,6 +75,7 @@
 #include "TileCoordsPyramid.h"
 #include "ViewportParams.h"
 #include "MarbleClock.h"
+#include "routing/RoutingManager.h"
 
 // Marble non-library classes
 #include "ControlView.h"
@@ -476,6 +477,9 @@ void MarblePart::readSettings()
     }
 
     readPluginSettings();
+    // Load previous route settings
+    m_controlView->marbleWidget()->model()->routingManager()->readSettings();
+
     disconnect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
                 this,                          SLOT( writePluginSettings() ) );
     connect( m_controlView->marbleWidget(), SIGNAL( pluginSettingsChanged() ),
@@ -594,6 +598,9 @@ void MarblePart::writeSettings()
     writeStatusBarSettings();
 
     MarbleSettings::self()->writeConfig();
+
+    // Store current route settings
+    m_controlView->marbleWidget()->model()->routingManager()->writeSettings();
 }
 
 void MarblePart::writeStatusBarSettings()

@@ -154,7 +154,7 @@ QVector<GeoDataPlacemark*> RoutinoRunnerPrivate::parseRoutinoInstructions( const
         GeoDataExtendedData extendedData;
         GeoDataData turnType;
         turnType.setName( "turnType" );
-        turnType.setValue( qVariantFromValue<RoutingInstruction::TurnType>( directions[i].turnType() ) );
+        turnType.setValue( qVariantFromValue<int>( int( directions[i].turnType() ) ) );
         extendedData.addValue( turnType );
         placemark->setExtendedData( extendedData );
         Q_ASSERT( !directions[i].points().isEmpty() );

@@ -120,7 +120,10 @@ void RoutingModelPrivate::importPlacemark( const GeoDataPlacemark *placemark )
             }
             if ( placemark->extendedData().contains( "turnType" ) ) {
                 QVariant turnType = placemark->extendedData().value( "turnType" ).value();
-                element.turnType = qVariantValue<RoutingInstruction::TurnType>( turnType );
+                // The enum value is converted to/from an int in the QVariant
+                // because only a limited set of data types can be serialized with QVariant's
+                // toString() method (which is used to serialize <ExtendedData>/<Data> values)
+                element.turnType = RoutingInstruction::TurnType( qVariantValue<int>( turnType ) );
             }
             element.instructionDistance = element.instructionPointSet.length( EARTH_RADIUS );
             m_route.push_back( element );
