@@ -21,7 +21,6 @@
 #include "GeoDataPlacemark.h"
 #include "RouteRequest.h"
 #include "PositionTracking.h"
-#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarbleWidget.h"
 #include "global.h"

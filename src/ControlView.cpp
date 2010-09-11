@@ -26,10 +26,10 @@
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "MarbleWidget.h"
-#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MapThemeManager.h"
 #include "PrintOptionsWidget.h"
+#include "ViewportParams.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
 #include "routing/RouteRequest.h"
@@ -167,7 +167,7 @@ void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
 {
 #ifndef QT_NO_PRINTER
         PrintOptionsWidget* printOptions = new PrintOptionsWidget( this );
-        bool const mapCoversViewport = m_marbleWidget->map()->mapCoversViewport();
+        bool const mapCoversViewport = m_marbleWidget->viewport()->mapCoversViewport();
         printOptions->setBackgroundControlsEnabled( !mapCoversViewport );
         bool hasLegend = m_marbleWidget->model()->legend() != 0;
         printOptions->setLegendControlsEnabled( hasLegend );
@@ -264,7 +264,7 @@ void ControlView::printMap( QTextDocument &document, QString &text, QPrinter *pr
 #ifndef QT_NO_PRINTER
     QPixmap image = mapScreenShot();
 
-    if ( m_marbleWidget->map()->mapCoversViewport() ) {
+    if ( m_marbleWidget->viewport()->mapCoversViewport() ) {
         // Paint a black frame. Looks better.
         QPainter painter(&image);
         painter.setPen( Qt::black );

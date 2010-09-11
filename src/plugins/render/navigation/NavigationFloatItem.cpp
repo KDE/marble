@@ -22,7 +22,6 @@
 #include "ViewportParams.h"
 #include "MarbleDebug.h"
 #include "MarbleWidget.h"
-#include "MarbleMap.h"
 #include "WidgetGraphicsItem.h"
 #include "MarbleGraphicsGridLayout.h"
 

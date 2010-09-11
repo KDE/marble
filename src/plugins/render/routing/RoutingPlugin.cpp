@@ -24,7 +24,6 @@
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
-#include "MarbleMap.h"
 #include "MarbleDataFacade.h"
 #include "PositionTracking.h"
 #include "GeoPainter.h"

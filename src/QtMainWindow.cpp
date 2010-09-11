@@ -50,7 +50,6 @@
 #include "ViewportParams.h"
 #include "AbstractDataPlugin.h"
 #include "AbstractFloatItem.h"
-#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MarbleClock.h"
 #include "SunLocator.h"
@@ -679,7 +678,7 @@ void MainWindow::showSun( bool active )
 
 void MainWindow::reload()
 {
-    m_controlView->marbleWidget()->map()->reload();
+    m_controlView->marbleWidget()->reloadMap();
 }
 
 void MainWindow::enterWhatsThis()
@@ -998,7 +997,7 @@ void MainWindow::updateSettings()
 
 void MainWindow::showDownloadRegionDialog()
 {
-    MarbleModel *const model = m_controlView->marbleWidget()->map()->model();
+    MarbleModel *const model = m_controlView->marbleWidget()->model();
     if ( !m_downloadRegionDialog ) {
         m_downloadRegionDialog = new DownloadRegionDialog( model, m_controlView );
         // it might be tempting to move the connects to DownloadRegionDialog's "accepted" and
@@ -1014,7 +1013,7 @@ void MainWindow::showDownloadRegionDialog()
     m_downloadRegionDialog->setAllowedTileLevelRange( 0, 18 );
     m_downloadRegionDialog->setSelectionMethod( DownloadRegionDialog::VisibleRegionMethod );
     ViewportParams const * const viewport =
-        m_controlView->marbleWidget()->map()->viewport();
+        m_controlView->marbleWidget()->viewport();
     m_downloadRegionDialog->setSpecifiedLatLonAltBox( viewport->viewLatLonAltBox() );
     m_downloadRegionDialog->setVisibleLatLonAltBox( viewport->viewLatLonAltBox() );
 
@@ -1048,7 +1047,7 @@ void MainWindow::downloadRegion()
     QString const sourceDir = mapThemeId.left( mapThemeId.lastIndexOf( '/' ));
     mDebug() << "downloadRegion mapThemeId:" << mapThemeId << sourceDir;
     QVector<TileCoordsPyramid> const pyramid = m_downloadRegionDialog->region();
-    m_controlView->marbleWidget()->map()->model()->downloadRegion( sourceDir, pyramid );
+    m_controlView->marbleWidget()->model()->downloadRegion( sourceDir, pyramid );
 }
 
 void MainWindow::printMapScreenShot()
