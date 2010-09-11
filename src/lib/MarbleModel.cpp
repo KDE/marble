@@ -108,7 +108,9 @@ class MarbleModelPrivate
           m_positionTracking( 0 ),
           m_planet( 0 ),
           m_bookmarkManager( 0 ),
-          m_routingManager( 0 )
+          m_routingManager( 0 ),
+          m_legend( 0 ),
+          m_backgroundVisible( true )
     {
     }
 
@@ -167,8 +169,9 @@ class MarbleModelPrivate
 
     Planet                  *m_planet;
     BookmarkManager         *m_bookmarkManager; 
-
     RoutingManager          *m_routingManager;
+    QTextDocument           *m_legend;
+    bool                     m_backgroundVisible;
 
 };
 
@@ -618,8 +621,10 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
         static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
 
     QStringList renderPositions;
-    renderPositions << "STARS" << "BEHIND_TARGET";
-    d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
+    if ( d->m_backgroundVisible ) {
+        renderPositions << "STARS" << "BEHIND_TARGET";
+        d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
+    }
 
     if ( redrawBackground ) {
         if ( d->m_mapTheme->map()->hasTextureLayers() ) {
@@ -1163,6 +1168,26 @@ void MarbleModel::setClockTimezone( int timeInSec )
 int MarbleModel::clockTimezone() const
 {
     return d->m_clock->timezone();
+}
+
+QTextDocument * MarbleModel::legend()
+{
+    return d->m_legend;
+}
+
+void MarbleModel::setLegend( QTextDocument * legend )
+{
+    d->m_legend = legend;
+}
+
+bool MarbleModel::backgroundVisible() const
+{
+    return d->m_backgroundVisible;
+}
+
+void MarbleModel::setBackgroundVisible( bool visible )
+{
+    d->m_backgroundVisible = visible;
 }
 
 }

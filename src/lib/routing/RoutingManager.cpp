@@ -131,6 +131,11 @@ void RoutingManager::retrieveRoute( RouteRequest *route )
     updateRoute();
 }
 
+RouteRequest* RoutingManager::routeRequest()
+{
+    return d->m_routeRequest;
+}
+
 void RoutingManager::updateRoute()
 {
     if ( !d->m_routeRequest ) {
@@ -188,11 +193,6 @@ void RoutingManager::setAdjustNavigation( AdjustNavigation* adjustNavigation )
 AdjustNavigation* RoutingManager::adjustNavigation()
 {
     return d->m_adjustNavigation;
-}
-
-RouteRequest* RoutingManager::routeRequest()
-{
-    return d->m_routeRequest;
 }
 
 void RoutingManager::saveSettings() const

@@ -175,6 +175,10 @@ void MarbleLegendBrowser::loadLegend()
 
     d->m_isLegendLoaded = true;
     qDebug("loadLegend: Time elapsed: %d ms", t.elapsed());
+
+    if ( d->m_marbleWidget ) {
+        d->m_marbleWidget->model()->setLegend( document() );
+    }
 }
 
 bool MarbleLegendBrowser::event( QEvent * event )

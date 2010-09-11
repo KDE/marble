@@ -19,13 +19,20 @@
 #include <QtGui/QPrintPreviewDialog>
 #include <QtGui/QPrinter>
 #include <QtGui/QPainter>
+#include <QtGui/QTextDocument>
 #include <QtCore/QPointer>
+#include <QtCore/QUrl>
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "MarbleWidget.h"
+#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "MapThemeManager.h"
+#include "PrintOptionsWidget.h"
+#include "routing/RoutingManager.h"
+#include "routing/RoutingModel.h"
+#include "routing/RouteRequest.h"
 
 namespace Marble
 {
@@ -159,9 +166,55 @@ QString ControlView::defaultMapThemeId() const
 void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
 {
 #ifndef QT_NO_PRINTER
-    if (printDialog->exec() == QDialog::Accepted) {
-        QPixmap mapPixmap = mapScreenShot();
-        printPixmap( printDialog->printer(), mapPixmap );
+        PrintOptionsWidget* printOptions = new PrintOptionsWidget( this );
+        bool const mapCoversViewport = m_marbleWidget->map()->mapCoversViewport();
+        printOptions->setBackgroundControlsEnabled( !mapCoversViewport );
+        bool hasLegend = m_marbleWidget->model()->legend() != 0;
+        printOptions->setLegendControlsEnabled( hasLegend );
+        bool hasRoute = marbleWidget()->model()->routingManager()->routingModel()->rowCount() > 0;
+        printOptions->setPrintRouteSummary( hasRoute );
+        printOptions->setPrintDrivingInstructions( hasRoute );
+        printOptions->setRouteControlsEnabled( hasRoute );
+        printDialog->setOptionTabs( QList<QWidget*>() << printOptions );
+
+        if ( printDialog->exec() == QDialog::Accepted ) {
+            QTextDocument document;
+            QString text = "<html><head><title>Marble Printout</title></head><body>";
+            QPalette const originalPalette = m_marbleWidget->palette();
+            bool const wasBackgroundVisible = m_marbleWidget->model()->backgroundVisible();
+            bool const hideBackground = !mapCoversViewport && !printOptions->printBackground();
+            if ( hideBackground ) {
+                // Temporarily remove the black background and layers painting on it
+                m_marbleWidget->model()->setBackgroundVisible( false );
+                m_marbleWidget->setPalette( QPalette ( Qt::white ) );
+                m_marbleWidget->repaint();
+            }
+
+            if ( printOptions->printMap() ) {
+                printMap( document, text, printDialog->printer() );
+            }
+
+            if ( printOptions->printLegend() ) {
+                printLegend( document, text );
+            }
+
+            if ( printOptions->printRouteSummary() ) {
+                printRouteSummary( document, text );
+            }
+
+            if ( printOptions->printDrivingInstructions() ) {
+                printDrivingInstructions( document, text );
+            }
+
+            text += "</body></html>";
+            document.setHtml( text );
+            document.print( printDialog->printer() );
+
+            if ( hideBackground ) {
+                m_marbleWidget->model()->setBackgroundVisible( wasBackgroundVisible );
+                m_marbleWidget->setPalette( originalPalette );
+                m_marbleWidget->repaint();
+            }
     }
 #endif
 }
@@ -203,6 +256,155 @@ void ControlView::paintPrintPreview( QPrinter * printer )
 #ifndef QT_NO_PRINTER
     QPixmap mapPixmap = mapScreenShot();
     printPixmap( printer, mapPixmap );
+#endif
+}
+
+void ControlView::printMap( QTextDocument &document, QString &text, QPrinter *printer )
+{
+#ifndef QT_NO_PRINTER
+    QPixmap image = mapScreenShot();
+
+    if ( m_marbleWidget->map()->mapCoversViewport() ) {
+        // Paint a black frame. Looks better.
+        QPainter painter(&image);
+        painter.setPen( Qt::black );
+        painter.drawRect( 0, 0, image.width() - 2, image.height() - 2 );
+    }
+
+    QString uri = "marble://screenshot.png";
+    document.addResource( QTextDocument::ImageResource, QUrl( uri ), QVariant( image) );
+    QString img = "<img src=\"%1\" width=\"%2\" align=\"center\">";
+    int width = qRound( printer->pageRect( QPrinter::Point ).width() );
+    text += img.arg( uri ).arg( width );
+#endif
+}
+
+void ControlView::printLegend( QTextDocument &document, QString &text )
+{
+#ifndef QT_NO_PRINTER
+    QTextDocument *legend = m_marbleWidget->model()->legend();
+    if ( legend ) {
+        legend->adjustSize();
+        QSize size = legend->size().toSize();
+        QSize imageSize = size + QSize( 4, 4 );
+        QImage image( imageSize, QImage::Format_ARGB32);
+        QPainter painter( &image );
+        painter.setRenderHint( QPainter::Antialiasing, true );
+        painter.drawRoundedRect( QRect( QPoint( 0, 0 ), size ), 5, 5 );
+        legend->drawContents( &painter );
+        document.addResource( QTextDocument::ImageResource, QUrl( "marble://legend.png" ), QVariant(image) );
+        QString img = "<p><img src=\"%1\" align=\"center\"></p>";
+        text += img.arg( "marble://legend.png" );
+    }
+#endif
+}
+
+void ControlView::printRouteSummary( QTextDocument &document, QString &text)
+{
+#ifndef QT_NO_PRINTER
+    RoutingModel* routingModel = m_marbleWidget->model()->routingManager()->routingModel();
+
+    if ( !routingModel ) {
+        return;
+    }
+
+    RouteRequest* routeRequest = m_marbleWidget->model()->routingManager()->routeRequest();
+    if ( routeRequest ) {
+        QString summary = "<h3>Route to %1: %2 %3</h3>";
+        QString destination;
+        if ( routeRequest->size() ) {
+            destination = routeRequest->name( routeRequest->size()-1 );
+        }
+
+        QString label = "<p>%1 %2</p>";
+        qreal distance = routingModel->totalDistance();
+        QString unit = distance > 1000 ? "km" : "m";
+        int precision = distance > 1000 ? 1 : 0;
+        if ( distance > 1000 ) {
+            distance /= 1000;
+        }
+        summary = summary.arg(destination).arg( distance, 0, 'f', precision ).arg( unit );
+        text += summary;
+
+        text += "<table cellpadding=\"2\">";
+        QString pixmapTemplate = "marble://viaPoint-%1.png";
+        for ( int i=0; i<routeRequest->size(); ++i ) {
+            text += "<tr><td>";
+            QPixmap pixmap = routeRequest->pixmap(i);
+            QString pixmapResource = pixmapTemplate.arg( i );
+            document.addResource(QTextDocument::ImageResource,
+                                          QUrl( pixmapResource ), QVariant( pixmap ) );
+            QString myimg = "<img src=\"%1\">";
+            text += myimg.arg( pixmapResource );
+            text += "</td><td>";
+            text += routeRequest->name( i );
+            text += "</td></tr>";
+        }
+        text += "</table>";
+    }
+#endif
+}
+
+void ControlView::printDrivingInstructions( QTextDocument &document, QString &text )
+{
+#ifndef QT_NO_PRINTER
+    RoutingModel* routingModel = m_marbleWidget->model()->routingManager()->routingModel();
+
+    if (!routingModel) {
+        return;
+    }
+
+    GeoDataLineString total;
+    for ( int i=0; i<routingModel->rowCount(); ++i ) {
+        QModelIndex index = routingModel->index(i, 0);
+        RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>(index.data(RoutingModel::TypeRole));
+        if ( type == RoutingModel::WayPoint ) {
+            GeoDataCoordinates coordinates = qVariantValue<GeoDataCoordinates>(index.data(RoutingModel::CoordinateRole));
+            total.append(coordinates);
+        }
+    }
+
+    text += "<table cellpadding=\"4\">";
+    text += "<tr><th>No.</th><th>Distance</th><th>Instruction</th></tr>";
+    for ( int i=0, j=0; i<routingModel->rowCount(); ++i ) {
+        QModelIndex index = routingModel->index(i, 0);
+        RoutingModel::RoutingItemType type = qVariantValue<RoutingModel::RoutingItemType>( index.data( RoutingModel::TypeRole ) );
+        if ( type == RoutingModel::Instruction ) {
+            ++j;
+            GeoDataCoordinates coordinates = qVariantValue<GeoDataCoordinates>( index.data( RoutingModel::CoordinateRole ) );
+            GeoDataLineString accumulator;
+            for (int k=0; k<total.size(); ++k) {
+                accumulator << total.at(k);
+
+                if (total.at(k) == coordinates)
+                    break;
+            }
+
+            if ( i%2 == 0 ) {
+                text += "<tr bgcolor=\"lightGray\"><td align=\"right\" valign=\"middle\">";
+            }
+            else {
+                text += "<tr><td align=\"right\" valign=\"middle\">";
+            }
+            text += QString::number( j );
+            text += "</td><td align=\"right\" valign=\"middle\">";
+
+            text += QString::number( accumulator.length( EARTH_RADIUS ) * METER2KM, 'f', 1 );
+            /** @todo: support localization */
+            text += " km</td><td valign=\"middle\">";
+
+            QPixmap instructionIcon = qVariantValue<QPixmap>( index.data( Qt::DecorationRole ) );
+            if ( !instructionIcon.isNull() ) {
+                QString uri = QString("marble://turnIcon%1.png").arg(i);
+                document.addResource( QTextDocument::ImageResource, QUrl( uri ), QVariant( instructionIcon ) );
+                text += QString("<img src=\"%1\">").arg(uri);
+            }
+
+            text += routingModel->data( index ).toString();
+            text += "</td></tr>";
+        }
+    }
+    text += "</table>";
 #endif
 }
 

@@ -41,6 +41,7 @@ class QItemSelectionModel;
 class QAbstractItemModel;
 class QPoint;
 class QRect;
+class QTextDocument;
 
 namespace Marble
 {
@@ -311,6 +312,15 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * return instance of BookmarkManager
     */
     BookmarkManager *bookmarkManager() const;
+
+    QTextDocument * legend();
+
+    void setLegend( QTextDocument * document );
+
+    bool backgroundVisible() const;
+
+    void setBackgroundVisible( bool visible );
+
  public Q_SLOTS:
     void clearVolatileTileCache();
 

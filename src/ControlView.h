@@ -27,6 +27,7 @@
 
 class QSplitter;
 class QPrintDialog;
+class QTextDocument;
 
 namespace Marble
 {
@@ -79,6 +80,11 @@ class ControlView : public QWidget
     void paintPrintPreview( QPrinter * printer );
 
  private:
+    void printMap( QTextDocument &document, QString &text, QPrinter *printer );
+    void printLegend( QTextDocument &document, QString &text );
+    void printRouteSummary( QTextDocument &document, QString &text );
+    void printDrivingInstructions( QTextDocument &document, QString &text );
+
     //MarbleModel       *m_marbleModel;
     MarbleWidget      *m_marbleWidget;
     MarbleControlBox  *m_control;

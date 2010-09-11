@@ -201,6 +201,8 @@ set(marblewidget_SRCS
     BookmarkManager.cpp
     BookmarkInfoDialog.cpp
     NewFolderInfoDialog.cpp
+
+    PrintOptionsWidget.cpp
 )
 
 set (marblewidget_UI
@@ -227,6 +229,7 @@ set (marblewidget_UI
     DataMigrationWidget.ui
     BookmarkInfoDialog.ui
     NameDialog.ui
+    PrintOptions.ui
 )
 
 # FIXME: cleaner approach of src/lib/MarbleControlBox.* vs. marble.qrc

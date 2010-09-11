@@ -812,7 +812,6 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
     // Create a painter that will do the painting.
     GeoPainter painter( paintDevice, map()->viewport(),
                         map()->mapQuality(), doClip );
-
     QRect  dirtyRect = evt->rect();
 
     // Draws the map like MarbleMap::paint does, but adds our customPaint in between
