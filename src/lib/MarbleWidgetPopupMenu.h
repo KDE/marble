@@ -31,6 +31,9 @@ namespace Marble
 class AbstractDataPluginItem;
 class MarbleWidget;
 class MarbleModel;
+class GeoDataCoordinates;
+class GeoDataPlacemark;
+class MarbleRunnerManager;
 
 
 class MarbleWidgetPopupMenu  : public QObject 
@@ -57,7 +60,19 @@ class MarbleWidgetPopupMenu  : public QObject
     void  slotCopyCoordinates();
     void  slotAboutDialog();
 
+private Q_SLOTS:
+    void directionsFromHere();
+    void directionsToHere();
+    void startReverseGeocoding();
+    void showAddressInformation( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
+
  private:
+    /**
+      * Returns the geo coordinates of the mouse pointer at the last right button menu.
+      * You must not pass 0 as coordinates parameter. The result indicates whether the
+      * coordinates are valid, which will be true if the right button menu was opened at least once.
+      */
+    bool mouseCoordinates( GeoDataCoordinates* coordinates, QAction* dataContainer );
     void createActions();
 
  private:
@@ -77,6 +92,8 @@ class MarbleWidgetPopupMenu  : public QObject
     QAction  *m_aboutDialogAction;
 
     QAction  *m_rmbExtensionPoint;
+
+    MarbleRunnerManager* m_runnerManager;
 };
 
 }

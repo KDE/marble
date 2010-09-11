@@ -21,6 +21,9 @@
 #include "PlacemarkInfoDialog.h"
 #include "MarbleDebug.h"
 #include "Planet.h"
+#include "routing/RoutingManager.h"
+#include "routing/RouteRequest.h"
+#include "MarbleRunnerManager.h"
 
 // Qt
 #include <QtCore/QMimeData>
@@ -28,6 +31,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QClipboard>
 #include <QtGui/QMenu>
+#include <QtGui/QMessageBox>
 
 using namespace Marble;
 
@@ -37,7 +41,8 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
       m_model(model),
       m_widget(widget),
       m_lmbMenu( new QMenu( m_widget ) ),
-      m_rmbMenu( new QMenu( m_widget ) )
+      m_rmbMenu( new QMenu( m_widget ) ),
+      m_runnerManager( 0 )
 {
     connect( m_lmbMenu, SIGNAL( triggered( QAction* ) ),
              this,      SLOT( showFeatureInfo( QAction* ) ) );
@@ -54,6 +59,9 @@ void MarbleWidgetPopupMenu::createActions()
 
     //	Tool actions (Right mouse button)
     m_rmbExtensionPoint = m_rmbMenu->addSeparator();
+    m_rmbMenu->addAction( tr( "Directions &from here" ), this, SLOT( directionsFromHere() ) );
+    m_rmbMenu->addAction( tr( "Directions &to here" ), this, SLOT( directionsToHere() ) );
+    m_rmbMenu->addSeparator();
     m_setHomePointAction  = new QAction( tr( "&Set Home Location" ), this);
     m_rmbMenu->addAction( m_setHomePointAction );
     m_rmbMenu->addSeparator();
@@ -130,6 +138,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     QMenu *positionMenu = m_lmbMenu->addMenu( GeoDataCoordinates( lon, lat, GeoDataCoordinates::Radian ).toString() );
     positionMenu->menuAction()->setFont( QFont( "Sans Serif", 7, 50, false ) );
     positionMenu->addAction( m_copyCoordinateAction );
+    positionMenu->addAction( "&Address Details", this, SLOT( startReverseGeocoding() ) );
 
     m_lmbMenu->popup( m_widget->mapToGlobal( curpos ) );
 }
@@ -159,30 +168,16 @@ void MarbleWidgetPopupMenu::showFeatureInfo( QAction* action )
 
 void MarbleWidgetPopupMenu::slotSetHomePoint()
 {
-    QPoint  p = m_setHomePointAction->data().toPoint();
-
-    qreal  lat;
-    qreal  lon;
-
-    bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Degree );
-    if ( valid )
-    {
-//        mDebug() << "Setting Home Location: " << lon << ", " << lat;   
-        m_widget->setHome( lon, lat, m_widget->zoom() );
+    GeoDataCoordinates coordinates;
+    if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
+        m_widget->setHome( coordinates, m_widget->zoom() );
     }
 }
 
 void MarbleWidgetPopupMenu::slotCopyCoordinates()
 {
-    QPoint  p = m_copyCoordinateAction->data().toPoint();
-
-    qreal  lon;
-    qreal  lat;
-
-    bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
-    if ( valid )
-    {
-	const GeoDataCoordinates coordinates = GeoDataCoordinates( lon, lat, 0.0, GeoDataCoordinates::Radian );
+    GeoDataCoordinates coordinates;
+    if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
 	const qreal longitude_degrees = coordinates.longitude(GeoDataCoordinates::Degree);
 	const qreal latitude_degrees = coordinates.latitude(GeoDataCoordinates::Degree);
 
@@ -241,5 +236,71 @@ void MarbleWidgetPopupMenu::addAction( Qt::MouseButton button, QAction* action )
     }
 }
 
-#include "MarbleWidgetPopupMenu.moc"
+void MarbleWidgetPopupMenu::directionsFromHere()
+{
+    RouteRequest* request = m_widget->model()->routingManager()->routeRequest();
+    if ( request && request->size() > 0 )
+    {
+        GeoDataCoordinates coordinates;
+        if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
+            request->setPosition( 0, coordinates );
+            m_widget->model()->routingManager()->updateRoute();
+        }
+    }
+}
 
+void MarbleWidgetPopupMenu::directionsToHere()
+{
+    RouteRequest* request = m_widget->model()->routingManager()->routeRequest();
+    if ( request && request->size() > 1 )
+    {
+        GeoDataCoordinates coordinates;
+        if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
+            request->setPosition( request->size()-1, coordinates );
+            m_widget->model()->routingManager()->updateRoute();
+        }
+    }
+}
+
+bool MarbleWidgetPopupMenu::mouseCoordinates( GeoDataCoordinates* coordinates, QAction* dataContainer )
+{
+    Q_ASSERT( coordinates && "You must not pass 0 as coordinates parameter");
+    if ( !dataContainer ) {
+        return false;
+    }
+
+    QPoint p = dataContainer->data().toPoint();
+    qreal lat( 0.0 ), lon( 0.0 );
+    bool valid = m_widget->geoCoordinates( p.x(), p.y(), lon, lat, GeoDataCoordinates::Radian );
+    if ( valid )
+    {
+        *coordinates = GeoDataCoordinates( lon, lat );
+    }
+
+    return valid;
+}
+
+void MarbleWidgetPopupMenu::startReverseGeocoding()
+{
+    if ( !m_runnerManager ) {
+        m_runnerManager = new MarbleRunnerManager( m_model->pluginManager(), this );
+        connect( m_runnerManager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
+                 this, SLOT(showAddressInformation( GeoDataCoordinates, GeoDataPlacemark) ) );
+    }
+
+    GeoDataCoordinates coordinates;
+    if ( mouseCoordinates( &coordinates, m_copyCoordinateAction ) ) {
+        m_runnerManager->reverseGeocoding( coordinates );
+    }
+}
+
+void MarbleWidgetPopupMenu::showAddressInformation(const GeoDataCoordinates &, const GeoDataPlacemark &placemark)
+{
+    QString text = placemark.address();
+    if ( !text.isEmpty() ) {
+        QMessageBox::information( m_widget, "Address Details", text, QMessageBox::Ok );
+    }
+}
+
+
+#include "MarbleWidgetPopupMenu.moc"
