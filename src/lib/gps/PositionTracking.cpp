@@ -20,6 +20,8 @@
 #include "MarbleMath.h"
 #include "MarbleDebug.h"
 #include "ViewParams.h"
+#include "ViewportParams.h"
+#include "AbstractProjection.h"
 
 #include <QtXml/QXmlInputSource>
 #include <QtXml/QXmlSimpleReader>
@@ -105,6 +107,7 @@ QRegion PositionTracking::genRegion( const QSize &canvasSize,
             dirty |= rect ;
         }
 
+        dirty |= accuracyIndicatorRegion( viewParams ).toRect();
         return dirty;
 }
 
@@ -181,11 +184,37 @@ void PositionTracking::draw( ClipPainter *painter,
     construct( canvasSize, viewParams );
 
     painter->save();
+    
+    QRectF accuracyIndicator;
+    if ( m_gpsCurrentPosition && accuracy().horizontal > 0 && accuracy().horizontal < 1000 ) {
+        // Paint a red circle indicating the position accuracy
+        QColor transparentRed = QColor::fromRgb( 226, 8, 0 );
+        if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+            transparentRed.setAlpha( 80 );
+        } else {
+            transparentRed.setAlpha( 40 );
+        }
+
+        painter->setPen( transparentRed );
+        painter->setBrush( transparentRed );
+        accuracyIndicator = accuracyIndicatorRegion( viewParams );
+        painter->drawEllipse( accuracyIndicator );
+    }
+    
+    
     painter->setPen( Qt::black );
     painter->setBrush( Qt::white );
     painter->drawPolygon( m_currentDraw );
     painter->restore();
     m_previousDraw = m_currentDraw;
+    
+    // Make a combined polygon of the previous position and the accuracy indicator circle
+    // This is ok as they are painted at the same position. It avoids adding another class
+    // member (which had to be static for ABI compatibility)
+    if ( !accuracyIndicator.isNull() ) {
+        m_previousDraw << accuracyIndicator.topLeft() << accuracyIndicator.topRight();
+        m_previousDraw << accuracyIndicator.bottomLeft() << accuracyIndicator.bottomRight();
+    }
 }
 
 void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin )
@@ -209,5 +238,30 @@ QString PositionTracking::error() const
 {
     return m_positionProvider ? m_positionProvider->error() : QString();
 }
+
+GeoDataAccuracy PositionTracking::accuracy() const
+{
+    return m_positionProvider ? m_positionProvider->accuracy() : GeoDataAccuracy();
+}
+
+QRectF PositionTracking::accuracyIndicatorRegion( ViewParams *viewParams ) const
+{
+    QRectF result;
+    if ( m_gpsCurrentPosition ) {
+        qreal width = qRound( accuracy().horizontal * viewParams->viewport()->radius() / EARTH_RADIUS );
+        if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+            qreal arrowSize = qMax<qreal>( m_currentDraw.boundingRect().width(), m_currentDraw.boundingRect().height() );
+            width = qMax<qreal>( width, arrowSize + 10 );
+        }
+        
+        qreal x(0), y(0);
+        AbstractProjection * projection = viewParams->viewport()->currentProjection();
+        if ( projection->screenCoordinates( m_gpsCurrentPosition->position(), viewParams->viewport(), x, y ) ) {
+            result = QRectF( x - width / 2.0, y - width / 2.0, width, width );
+        }
+    }
+    
+    return result;
+}  
 
 #include "PositionTracking.moc"

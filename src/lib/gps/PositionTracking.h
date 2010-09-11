@@ -90,6 +90,8 @@ public:
 
     QString error() const;
 
+    GeoDataAccuracy accuracy() const;
+
  public slots:
     void  notifyPosition( GeoDataCoordinates );
 
@@ -100,6 +102,8 @@ Q_SIGNALS:
 
  private:
     void updateSpeed( TrackPoint* previous, TrackPoint* next );
+    
+    QRectF accuracyIndicatorRegion( ViewParams *viewParams ) const;
 
     qreal               m_speed;
     //used to draw the arrow in gps tracking

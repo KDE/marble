@@ -64,9 +64,18 @@ void GpsdPositionProviderPlugin::update( gps_data_t data )
         m_position.set( data.fix.longitude, data.fix.latitude,
                         data.fix.altitude, GeoDataCoordinates::Degree );
         m_accuracy.level = GeoDataAccuracy::Detailed;
-        // FIXME: Add real values here
-        m_accuracy.horizontal = 5;
-        m_accuracy.vertical = 5;
+#if defined( GPSD_API_MAJOR_VERSION ) && ( GPSD_API_MAJOR_VERSION >= 3 )
+         if ( !isnan( data.fix.epx ) && !isnan( data.fix.epy ) ) {
+             m_accuracy.horizontal = qMax( data.fix.epx, data.fix.epy );
+         }
+#else
+        if ( !isnan( data.fix.eph ) ) {
+            m_accuracy.horizontal = data.fix.eph;
+        }
+#endif
+        if ( !isnan( data.fix.epv ) ) {
+            m_accuracy.vertical = data.fix.epv;
+        }
     }
     if (m_status != oldStatus)
         emit statusChanged( m_status );
