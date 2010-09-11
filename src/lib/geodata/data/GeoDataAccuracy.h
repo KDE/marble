@@ -12,14 +12,14 @@
 #ifndef MARBLE_GEODATAACCURACY_H
 #define MARBLE_GEODATAACCURACY_H
 
+#include <marble_export.h>
+
 #include <QtCore/QObject>
-
-
 
 namespace Marble
 {
 
-class GeoDataAccuracy
+class MARBLE_EXPORT GeoDataAccuracy
 {
  public:
     /**
@@ -45,15 +45,9 @@ class GeoDataAccuracy
      */
     qreal vertical;
 
-    GeoDataAccuracy() {
-        level = none;
-        horizontal = 0;
-        vertical = 0;
-    }
+    GeoDataAccuracy();
 };
 
 }
-
-
 
 #endif
