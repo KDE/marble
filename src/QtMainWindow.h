@@ -114,6 +114,11 @@ class MainWindow : public QMainWindow
     void  disconnectDownloadRegionDialog();
     void  downloadRegion();
 
+    // Small screen devices specific slots
+    void showMapViewTab( bool enabled );
+    void showLegendTab( bool enabled );
+    void showRoutingTab( bool enabled );
+
  private:
     ControlView *m_controlView;
     SunControlWidget* m_sunControlDialog;
@@ -179,6 +184,11 @@ class MainWindow : public QMainWindow
     QAction *m_addBookmarkAct;
     QAction *m_removeAllBookmarksAct;
     QAction *m_addBookmarkFolderAct;
+
+    // Small screen devices
+    QAction *m_toggleMapViewTabAction;
+    QAction *m_toggleLegendTabAction;
+    QAction *m_toggleRoutingTabAction;
 };
 
 } // namespace Marble

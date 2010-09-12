@@ -257,10 +257,31 @@ void MainWindow::createMenus()
     // Do not create too many menu entries on a MID
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         menuBar()->addAction( m_workOfflineAct );
-        menuBar()->addAction( m_sideBarAct );
+        //menuBar()->addAction( m_sideBarAct );
         /** @todo: Full screen cannot be left on Maemo currently (shortcuts not working) */
         //menuBar()->addAction( m_fullScreenAct );
         menuBar()->addAction( m_downloadRegionAction );
+
+        m_toggleMapViewTabAction = menuBar()->addAction( tr( "Map View" ) );
+        m_toggleMapViewTabAction->setCheckable( true );
+        connect( m_toggleMapViewTabAction, SIGNAL( triggered( bool ) ),
+                 this, SLOT( showMapViewTab( bool ) ) );
+        m_toggleLegendTabAction = menuBar()->addAction( tr( "Legend" ) );
+        m_toggleLegendTabAction->setCheckable( true );
+        connect( m_toggleLegendTabAction, SIGNAL( triggered( bool ) ),
+                 this, SLOT( showLegendTab( bool ) ) );
+        m_toggleRoutingTabAction = menuBar()->addAction( tr( "Routing" ) );
+        m_toggleRoutingTabAction->setCheckable( true );
+        connect( m_toggleRoutingTabAction, SIGNAL( triggered( bool ) ),
+                 this, SLOT( showRoutingTab( bool) ) );
+
+        m_controlView->marbleControl()->setNavigationTabShown( false );
+        m_controlView->marbleControl()->setLegendTabShown( false );
+        m_controlView->marbleControl()->setMapViewTabShown( false );
+        m_controlView->marbleControl()->setCurrentLocationTabShown( false );
+        m_controlView->marbleControl()->setRoutingTabShown( true );
+        m_toggleRoutingTabAction->setChecked( true );
+
         menuBar()->addAction( m_aboutMarbleAct );
         return;
     }
@@ -1058,6 +1079,42 @@ void MainWindow::printMapScreenShot()
     m_controlView->printMapScreenShot( printDialog );
     delete printDialog;
 #endif
+}
+
+void MainWindow::showMapViewTab( bool enabled )
+{
+    m_toggleLegendTabAction->setChecked( false );
+    m_toggleRoutingTabAction->setChecked( false );
+    m_controlView->marbleControl()->setNavigationTabShown( false );
+    m_controlView->marbleControl()->setLegendTabShown( false );
+    m_controlView->marbleControl()->setMapViewTabShown( true );
+    m_controlView->marbleControl()->setCurrentLocationTabShown( false );
+    m_controlView->marbleControl()->setRoutingTabShown( false );
+    m_controlView->setSideBarShown( enabled );
+}
+
+void MainWindow::showLegendTab( bool enabled )
+{
+    m_toggleMapViewTabAction->setChecked( false );
+    m_toggleRoutingTabAction->setChecked( false );
+    m_controlView->marbleControl()->setNavigationTabShown( false );
+    m_controlView->marbleControl()->setLegendTabShown( true );
+    m_controlView->marbleControl()->setMapViewTabShown( false );
+    m_controlView->marbleControl()->setCurrentLocationTabShown( false );
+    m_controlView->marbleControl()->setRoutingTabShown( false );
+    m_controlView->setSideBarShown( enabled );
+}
+
+void MainWindow::showRoutingTab( bool enabled )
+{
+    m_toggleMapViewTabAction->setChecked( false );
+    m_toggleLegendTabAction->setChecked( false );
+    m_controlView->marbleControl()->setNavigationTabShown( false );
+    m_controlView->marbleControl()->setLegendTabShown( false );
+    m_controlView->marbleControl()->setMapViewTabShown( false );
+    m_controlView->marbleControl()->setCurrentLocationTabShown( false );
+    m_controlView->marbleControl()->setRoutingTabShown( true );
+    m_controlView->setSideBarShown( enabled );
 }
 
 #include "QtMainWindow.moc"
