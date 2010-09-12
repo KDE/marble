@@ -561,7 +561,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 
 void MarbleModel::setupTextureMapper( Projection projection )
 {
-    if ( !d->m_mapTheme->map()->hasTextureLayers() )
+    if ( !d->m_mapTheme || !d->m_mapTheme->map()->hasTextureLayers() )
         return;
   // FIXME: replace this with an approach based on the factory method pattern.
     delete d->m_texmapper;
