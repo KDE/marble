@@ -119,14 +119,17 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>140</height>
+      </size>
+     </property>
      <property name="whatsThis">
       <string>Here you can choose the preferred map view from different topics.</string>
      </property>
      <property name="autoFillBackground">
       <bool>true</bool>
-     </property>
-     <property name="verticalScrollMode">
-      <enum>QAbstractItemView::ScrollPerPixel</enum>
      </property>
     </widget>
    </item>

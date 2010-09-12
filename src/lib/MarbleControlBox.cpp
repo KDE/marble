@@ -114,6 +114,12 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
 
     d->m_mapViewWidget = new QWidget( this );
     d->m_mapViewUi.setupUi( d->m_mapViewWidget );
+    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        d->m_mapViewUi.projectionLabel_2->setVisible( false );
+        d->m_mapViewUi.line->setVisible( false );
+        d->m_mapViewUi.celestialBodyLabel->setVisible( false );
+        d->m_mapViewUi.mapThemeLabel->setVisible( false );
+    }
     addItem( d->m_mapViewWidget, d->m_mapViewWidget->windowTitle() );
 
     d->m_fileViewWidget = new QWidget( this );
