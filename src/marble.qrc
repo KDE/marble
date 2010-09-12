@@ -41,5 +41,6 @@
         <file>icons/instruction-near.png</file>
         <file>icons/instruction-next.png</file>
         <file>icons/flag.png</file>
+        <file>icons/gps.png</file>
     </qresource>
 </RCC>
