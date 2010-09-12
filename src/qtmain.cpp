@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
         {
             marbleDataPath = args.at(i).mid(17);
         }
-        else if ( arg.compare( "--marbledatapath", Qt::CaseInsensitive ) ) {
+        else if ( arg.compare( "--marbledatapath", Qt::CaseInsensitive ) == 0 ) {
             dataPathIndex = i + 1;
             marbleDataPath = args.value( dataPathIndex );
             ++i;
