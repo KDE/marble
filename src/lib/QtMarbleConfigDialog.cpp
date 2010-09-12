@@ -547,7 +547,9 @@ int QtMarbleConfigDialog::dragLocation() const
 
 int QtMarbleConfigDialog::onStartup() const
 {
-    return d->m_settings->value( "Navigation/onStartup", Marble::ShowHomeLocation ).toInt();
+    bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    int defaultValue = smallScreen ? Marble::LastLocationVisited : Marble::ShowHomeLocation;
+    return d->m_settings->value( "Navigation/onStartup", defaultValue ).toInt();
 }
 
 bool QtMarbleConfigDialog::animateTargetVoyage() const
