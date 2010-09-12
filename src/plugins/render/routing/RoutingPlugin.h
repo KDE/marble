@@ -143,7 +143,10 @@ private Q_SLOTS:
     /**
      * disables the navigation menu if Position Tracking is disabled
      */
-     void setNavigationMenuDisabled( PositionProviderPlugin *activePlugin );
+     void updateButtonStates( PositionProviderPlugin *activePlugin );
+
+     /** Activate or deactivate position tracking */
+     void togglePositionTracking( bool enabled );
 
 private:
 

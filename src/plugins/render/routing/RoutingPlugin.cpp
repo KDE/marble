@@ -30,6 +30,7 @@
 #include "ViewportParams.h"
 #include "MarbleDataFacade.h"
 #include "GeoDataCoordinates.h"
+#include "PluginManager.h"
 
 #include <QtGui/QWidget>
 #include <QtCore/QRect>
@@ -174,7 +175,7 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
 
             // disconnect signals
             disconnect( m_marbleWidget->model()->positionTracking(), SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
-                                    this, SLOT( setNavigationMenuDisabled( PositionProviderPlugin* ) ) );
+                                    this, SLOT( updateButtonStates( PositionProviderPlugin* ) ) );
             disconnect( m_routingWidgetSmall->navigationButton, SIGNAL( clicked( bool ) ),
                          this, SLOT( showNavigationMenu() ) );
 
@@ -199,7 +200,7 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
 
 
             connect( m_marbleWidget->model()->positionTracking(), SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
-                                   this, SLOT( setNavigationMenuDisabled( PositionProviderPlugin* ) ) );
+                                   this, SLOT( updateButtonStates( PositionProviderPlugin* ) ) );
             connect( m_routingWidgetSmall->navigationButton, SIGNAL( clicked( bool ) ),
                         this, SLOT( showNavigationMenu() ) );
 
@@ -210,6 +211,8 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
 
             connect( m_routingWidgetSmall->routingButton, SIGNAL( clicked( bool ) ),
                     this, SLOT( showRoutingItem( bool ) ) );
+            connect( m_routingWidgetSmall->gpsButton, SIGNAL( clicked( bool ) ),
+                    this, SLOT( togglePositionTracking( bool ) ) );
             connect( m_routingWidgetSmall->zoomInButton, SIGNAL( clicked() ),
                     m_marbleWidget, SLOT( zoomIn() ) );
             connect( m_routingWidgetSmall->zoomOutButton, SIGNAL( clicked() ),
@@ -575,9 +578,24 @@ void RoutingPlugin::setRecenteringDisabled()
     m_adjustNavigation->setRecenter( Disabled );
 }
 
-void RoutingPlugin::setNavigationMenuDisabled( PositionProviderPlugin *activePlugin )
+void RoutingPlugin::updateButtonStates( PositionProviderPlugin *activePlugin )
 {
     m_navigationMenu->setEnabled( activePlugin != 0 );
+    m_routingWidgetSmall->gpsButton->setChecked( activePlugin != 0 );
+}
+
+void RoutingPlugin::togglePositionTracking( bool enabled )
+{
+    PositionProviderPlugin* plugin = 0;
+    if ( enabled ) {
+        PluginManager* pluginManager = m_marbleWidget->model()->pluginManager();
+        QList<PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
+        if ( plugins.size() > 0 ) {
+            plugin = plugins.takeFirst();
+        }
+        qDeleteAll( plugins );
+    }
+    dataFacade()->positionTracking()->setPositionProviderPlugin( plugin );
 }
 
 Q_EXPORT_PLUGIN2( RoutingPlugin, Marble::RoutingPlugin )

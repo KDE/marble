@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>208</width>
-    <height>54</height>
+    <width>213</width>
+    <height>45</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>RoutingWidget</string>
@@ -16,16 +22,16 @@
   <widget class="QToolButton" name="navigationButton">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>41</width>
+     <x>44</x>
+     <y>2</y>
+     <width>39</width>
      <height>41</height>
     </rect>
    </property>
    <property name="sizePolicy">
     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
+     <horstretch>32</horstretch>
+     <verstretch>32</verstretch>
     </sizepolicy>
    </property>
    <property name="mouseTracking">
@@ -72,11 +78,17 @@
   <widget class="QToolButton" name="routingButton">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>10</y>
-     <width>41</width>
+     <x>87</x>
+     <y>2</y>
+     <width>40</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>32</horstretch>
+     <verstretch>32</verstretch>
+    </sizepolicy>
    </property>
    <property name="toolTip">
     <string>Routing Information</string>
@@ -101,11 +113,17 @@
   <widget class="QToolButton" name="zoomInButton">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>10</y>
-     <width>41</width>
+     <x>174</x>
+     <y>2</y>
+     <width>39</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>32</horstretch>
+     <verstretch>32</verstretch>
+    </sizepolicy>
    </property>
    <property name="toolTip">
     <string>zoom in</string>
@@ -133,11 +151,17 @@
   <widget class="QToolButton" name="zoomOutButton">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>10</y>
-     <width>41</width>
+     <x>131</x>
+     <y>2</y>
+     <width>39</width>
      <height>41</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>32</horstretch>
+     <verstretch>32</verstretch>
+    </sizepolicy>
    </property>
    <property name="toolTip">
     <string>zoom out</string>
@@ -159,6 +183,44 @@
     <bool>false</bool>
    </property>
    <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="gpsButton">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>2</y>
+     <width>40</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>32</horstretch>
+     <verstretch>32</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="toolTip">
+    <string>Toggle GPS</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="../../../marble.qrc">
+     <normaloff>:/icons/gps.png</normaloff>:/icons/gps.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>32</width>
+     <height>32</height>
+    </size>
+   </property>
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
     <bool>false</bool>
    </property>
   </widget>
