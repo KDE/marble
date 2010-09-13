@@ -122,7 +122,7 @@ void MainWindow::initObject()
 
 void MainWindow::createActions()
  {
-     m_openAct = new QAction( QIcon(":/icons/document-open.png"), tr( "&Open Map..."), this );
+     m_openAct = new QAction( QIcon(":/icons/document-open.png"), tr( "&Open..."), this );
      m_openAct->setShortcut( tr( "Ctrl+O" ) );
      m_openAct->setStatusTip( tr( "Open a file for viewing on Marble"));
      connect( m_openAct, SIGNAL( triggered() ),
