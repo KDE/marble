@@ -265,7 +265,7 @@ void RoutingPlugin::createNavigationMenu()
 
     m_alwaysRecenterAction = new QAction( object );
     m_alwaysRecenterAction->setText( tr( "Keep At Center" ) );
-    m_alwaysRecenterAction->setToolTip( tr( "Always keep the gps location at the center of the map" ) );
+    m_alwaysRecenterAction->setToolTip( tr( "Always keep the GPS location at the center of the map" ) );
     m_alwaysRecenterAction->setCheckable( true );
 
     m_whenRequiredAction = new QAction( object );

@@ -40,7 +40,7 @@ bool FlickrParser::read( QByteArray data )
             else if ( name() == "rsp" )
                 raiseError( QObject::tr("Query failed") );
             else
-                raiseError( QObject::tr("The file is not an valid Flickr answer.") );
+                raiseError( QObject::tr("The file is not a valid Flickr answer.") );
         }
     }
 

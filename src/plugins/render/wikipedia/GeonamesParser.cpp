@@ -39,7 +39,7 @@ bool GeonamesParser::read( const QByteArray& data )
             if ( name() == "geonames" )
                 readGeonames();
             else
-                raiseError( QObject::tr("The file is not an valid Geonames answer.") );
+                raiseError( QObject::tr("The file is not a valid Geonames answer.") );
         }
     }
 

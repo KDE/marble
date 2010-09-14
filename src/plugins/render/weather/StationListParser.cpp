@@ -45,7 +45,7 @@ void StationListParser::read()
             if ( name() == "StationList" )
                 readStationList();
             else
-                raiseError( QObject::tr("The file is not an valid file.") );
+                raiseError( QObject::tr("The file is not a valid file.") );
         }
     }
 }
