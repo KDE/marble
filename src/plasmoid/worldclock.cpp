@@ -77,11 +77,6 @@ void WorldClock::init()
     KConfigGroup cg = config();
     m_map = new MarbleMap();
 
-    if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Mercator)
-        m_map->setProjection(Mercator);
-    else
-        m_map->setProjection(Equirectangular);
-
     //Set how we want the map to look
     m_map->centerOn( cg.readEntry("rotation", -20), 0 );
     m_map->setMapThemeId( "earth/bluemarble/bluemarble.dgml" );
@@ -92,6 +87,11 @@ void WorldClock::init()
     m_map->setShowPlaces     ( false );
     m_map->setShowCities     ( false );
     m_map->setShowOtherPlaces( false );
+
+    if(cg.readEntry("projection", static_cast<int>(Equirectangular)) == Mercator)
+        m_map->setProjection(Mercator);
+    else
+        m_map->setProjection(Equirectangular);
 
     foreach( RenderPlugin* item, m_map->model()->renderPlugins() )
         item->setVisible( false );
@@ -108,7 +108,7 @@ void WorldClock::init()
     m_map->setNeedsUpdate();
 
     m_customTz = cg.readEntry("customtz", false );
-    m_locationkey = QString(KSystemTimeZones::local().name());
+    m_locationkey = KSystemTimeZones::local().name();
     if(m_customTz) {
         QStringList tzlist = cg.readEntry("tzlist", QStringList());
         m_locations = QMap<QString, KTimeZone>();
@@ -235,10 +235,8 @@ QString WorldClock::getZone()
     bool ok = m_map->viewParams()->viewport()->currentProjection()->geoCoordinates(
                 m_hover.x(), m_hover.y(), m_map->viewParams()->viewport(), lon, lat );
 
-    QString timezone;
     if( !ok ) {
-        timezone = KSystemTimeZones::local().name();
-        return i18n( timezone.toUtf8().data() );
+        return KSystemTimeZones::local().name();
         }
     QList<QString> zones = m_locations.keys();
 
@@ -253,8 +251,7 @@ QString WorldClock::getZone()
             closest = zones.at( i );
         }
     }
-    timezone = m_locations.value( closest ).name();
-    return i18n( timezone.toUtf8().data() );
+    return m_locations.value( closest ).name();
 }
 
 void WorldClock::setTz( QString newtz )
@@ -288,7 +285,7 @@ void WorldClock::recalculateFonts( )
     else
         timestr = KGlobal::locale()->formatTime( m_time.time() );
 
-    QString locstr = m_locationkey;
+    QString locstr = i18n( m_locationkey.toUtf8().data() );
     locstr.remove( 0, locstr.lastIndexOf( '/' ) + 1 ).replace( '_', ' ' );
     QRect timeRect( m_points.value( "topleft" ), m_points.value( "middleright" ) );
     QRect locationRect( m_points.value( "middleleft" ), m_points.value( "bottomright" ) );
@@ -387,7 +384,7 @@ void WorldClock::paintInterface(QPainter *p,
 
     p->setPen( QColor( 0xFF, 0xFF, 0xFF ) );
 
-    QString locstr = m_locationkey;
+    QString locstr = i18n( m_locationkey.toUtf8().data() );
     locstr.remove( 0, locstr.lastIndexOf( '/' ) + 1 ).replace( '_', ' ' );
 
     QString timestr;
