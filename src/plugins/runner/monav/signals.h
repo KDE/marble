@@ -25,28 +25,49 @@ any later version.
 #ifndef SIGNALS_H
 #define SIGNALS_H
 
-#include <QtCore/QIODevice>
 #include <QtCore/QString>
 #include <QtCore/QVector>
 #include <QtCore/QDataStream>
-#include <QtCore/QBuffer>
+#include <QtCore/QStringList>
 #include <QtNetwork/QLocalSocket>
 
-struct RoutingDaemonCoordinate {
+struct RoutingDaemonNode {
 	double latitude;
 	double longitude;
 
-	friend QDataStream& operator<< ( QDataStream& out, const RoutingDaemonCoordinate& coordinate )
+	friend QDataStream& operator<< ( QDataStream& out, const RoutingDaemonNode& node )
 	{
-		out << coordinate.latitude;
-		out << coordinate.longitude;
+		out << node.latitude;
+		out << node.longitude;
 		return out;
 	}
 
-	friend QDataStream& operator>> ( QDataStream& in, RoutingDaemonCoordinate& coordinate )
+	friend QDataStream& operator>> ( QDataStream& in, RoutingDaemonNode& node )
 	{
-		in >> coordinate.latitude;
-		in >> coordinate.longitude;
+		in >> node.latitude;
+		in >> node.longitude;
+		return in;
+	}
+};
+
+struct RoutingDaemonEdge {
+	unsigned length;
+	unsigned name;
+	unsigned type;
+
+	friend QDataStream& operator<< ( QDataStream& out, const RoutingDaemonEdge& edge )
+	{
+		out << edge.length;
+		out << edge.name;
+		out << edge.type;
+		return out;
+	}
+
+	friend QDataStream& operator>> ( QDataStream& in, RoutingDaemonEdge& edge )
+	{
+		in >> edge.length;
+		in >> edge.name;
+		in >> edge.type;
 		return in;
 	}
 };
@@ -55,15 +76,23 @@ class RoutingDaemonCommand {
 
 public:
 
+	RoutingDaemonCommand()
+	{
+		lookupRadius = 10000; // 10km should suffice for most applications
+		lookupStrings = false;
+	}
+
 	double lookupRadius;
+	bool lookupStrings;
 	QString dataDirectory;
-	QVector< RoutingDaemonCoordinate > waypoints;
+	QVector< RoutingDaemonNode > waypoints;
 
 	void post( QIODevice* out )
 	{
 		QByteArray buffer;
 		QDataStream stream( &buffer, QIODevice::WriteOnly );
 		stream << lookupRadius;
+		stream << lookupStrings;
 		stream << dataDirectory;
 		stream << waypoints;
 		qint32 size = buffer.size();
@@ -91,6 +120,7 @@ public:
 		QByteArray buffer= in->read( size );
 		QDataStream stream( buffer );
 		stream >> lookupRadius;
+		stream >> lookupStrings;
 		stream >> dataDirectory;
 		stream >> waypoints;
 
@@ -104,11 +134,14 @@ class RoutingDaemonResult {
 public:
 
 	enum ResultType {
-		LoadFail = 1, RouteFail = 2, Success = 3
+		LoadFailed = 1, RouteFailed = 2, NameLookupFailed = 3, TypeLookupFailed = 4, Success = 5
 	} type;
 
 	double seconds;
-	QVector< RoutingDaemonCoordinate > path;
+	QVector< RoutingDaemonNode > pathNodes;
+	QVector< RoutingDaemonEdge > pathEdges;
+	QStringList nameStrings;
+	QStringList typeStrings;
 
 	void post( QIODevice* out )
 	{
@@ -116,7 +149,10 @@ public:
 		QDataStream stream( &buffer, QIODevice::WriteOnly );
 		stream << qint32( type );
 		stream << seconds;
-		stream << path;
+		stream << pathNodes;
+		stream << pathEdges;
+		stream << nameStrings;
+		stream << typeStrings;
 		qint32 size = buffer.size();
 		out->write( ( const char* ) &size, sizeof( qint32 ) );
 		out->write( buffer.data(), size );
@@ -145,7 +181,10 @@ public:
 		stream >> temp;
 		type = ( ResultType ) temp;
 		stream >> seconds;
-		stream >> path;
+		stream >> pathNodes;
+		stream >> pathEdges;
+		stream >> nameStrings;
+		stream >> typeStrings;
 
 		return true;
 	}
