@@ -252,7 +252,6 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
     int           radius             = viewport->radius();
     int           halfImageWidth     = viewport->width() / 2;
     int           halfImageHeight    = viewport->height() / 2;
-    bool          noerr              = false;
 
     // Calculate translation of center point
     qreal  centerLon;
@@ -266,26 +265,26 @@ bool MercatorProjection::geoCoordinates( const int x, const int y,
     int yTop          = halfImageHeight - 2 * radius + yCenterOffset;
     int yBottom       = yTop + 4 * radius;
 
-    if ( y >= yTop && y < yBottom ) {
-        int    const  xPixels   = x - halfImageWidth;
-        qreal const  pixel2Rad = M_PI / (2 * radius);
-
-        lat = atan( sinh( ( ( halfImageHeight + yCenterOffset ) - y)
-                          * pixel2Rad ) );
-        lon = xPixels * pixel2Rad + centerLon;
-
-        while ( lon > M_PI )  lon -= 2*M_PI;
-        while ( lon < -M_PI ) lon += 2*M_PI;
-
-        noerr = true;
+    if ( y < yTop || yBottom <= y ) {
+        return false;
     }
+
+    int    const  xPixels   = x - halfImageWidth;
+    qreal const  pixel2Rad = M_PI / (2 * radius);
+
+    lat = atan( sinh( ( ( halfImageHeight + yCenterOffset ) - y)
+                        * pixel2Rad ) );
+    lon = xPixels * pixel2Rad + centerLon;
+
+    while ( lon > M_PI )  lon -= 2*M_PI;
+    while ( lon < -M_PI ) lon += 2*M_PI;
 
     if ( unit == GeoDataCoordinates::Degree ) {
         lon *= RAD2DEG;
         lat *= RAD2DEG;
     }
 
-    return noerr;
+    return true;
 }
 
 
