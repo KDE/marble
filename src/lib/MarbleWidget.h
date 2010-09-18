@@ -245,6 +245,30 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     int maximumZoom() const;
 
     /**
+      * @brief Return the globe radius (pixel) for the given distance (km)
+      */
+    qreal radiusFromDistance( qreal distance ) const;
+
+    qreal radiusFromZoom( qreal zoom ) const;
+
+    /**
+      * @brief Return the distance (km) at the given globe radius (pixel)
+      */
+    qreal distanceFromRadius( qreal radius ) const;
+
+    /**
+      * Returns the zoom value (no unit) corresponding to the given camera distance (km)
+      */
+    qreal zoomFromDistance( qreal distance ) const;
+
+    qreal zoomFromRadius( qreal radius ) const;
+
+    /**
+      * Returns the distance (km) corresponding to the given zoom value
+      */
+    qreal distanceFromZoom( qreal zoom ) const;
+
+    /**
      * @brief Return if the widget needs to be updated.
      */
     bool needsUpdate() const;

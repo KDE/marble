@@ -64,16 +64,12 @@ using namespace Marble;
 
 
 MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent )
-        : m_parent( parent ),
-          m_viewAngle( 110.0 )
+        : m_parent( parent )
 {
 }
 
 void MarbleMapPrivate::construct()
 {
-    // Some point that tackat defined. :-)
-    m_parent->setHome( -9.4, 54.8, 1050 );
-
     m_parent->connect( m_model, SIGNAL( themeChanged( QString ) ),
                        m_parent, SIGNAL( themeChanged( QString ) ) );
     m_parent->connect( m_model, SIGNAL( modelChanged() ),
@@ -81,11 +77,6 @@ void MarbleMapPrivate::construct()
 
     m_justModified = false;
     m_dirtyAtmosphere = false;
-
-    m_logzoom  = 0;
-    m_zoomStep = 40;
-
-    m_parent->goHome();
 
     // FloatItems
     m_showFrameRate = false;
@@ -387,9 +378,13 @@ void MarbleMap::setRadius( int radius )
         setNeedsUpdate();
     }
 
-    d->m_logzoom = d->zoom( radius );
-    emit zoomChanged( d->m_logzoom );
-    emit distanceChanged( distanceString() );
+    // We don't do this on every paintEvent to improve performance.
+    // Redrawing the atmosphere is only needed if the size of the
+    // globe changes.
+    if ( d->m_viewParams.showAtmosphere() ) {
+        d->m_dirtyAtmosphere=true;
+    }
+
     emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
@@ -426,52 +421,6 @@ qreal MarbleMap::moveStep() const
 		     / (qreal)( 2 * radius() ) ) * 0.2;
 }
 
-int MarbleMap::zoom() const
-{
-    return d->m_logzoom;
-}
-
-
-qreal MarbleMap::distance() const
-{
-    return distanceFromRadius(radius());
-}
-
-qreal MarbleMap::distanceFromRadius( qreal radius ) const
-{
-    // Due to Marble's orthographic projection ("we have no focus")
-    // it's actually not possible to calculate a "real" distance.
-    // Additionally the viewing angle of the earth doesn't adjust to
-    // the window's size.
-    //
-    // So the only possible workaround is to come up with a distance
-    // definition which gives a reasonable approximation of
-    // reality. Therefore we assume that the average window width
-    // (about 800 pixels) equals the viewing angle of a human being.
-
-    return ( model()->planet()->radius() * 0.4
-            / radius / tan( 0.5 * d->m_viewAngle * DEG2RAD ) );
-}
-
-qreal MarbleMap::radiusFromDistance( qreal distance ) const
-{      
-    return  model()->planet()->radius() /
-            ( distance * tan( 0.5 * d->m_viewAngle * DEG2RAD ) / 0.4 );
-}
-
-void MarbleMap::setDistance( qreal newDistance )
-{
-    qreal minDistance = 0.001;
-
-    if ( newDistance <= minDistance ) {
-        mDebug() << "Invalid distance: 0 m";
-        newDistance = minDistance;
-    }    
-
-    int newRadius = radiusFromDistance( newDistance );
-    setRadius( newRadius );
-}
-
 qreal MarbleMap::centerLatitude() const
 {
     // Calculate translation of center point
@@ -490,16 +439,6 @@ qreal MarbleMap::centerLongitude() const
 
     d->m_viewParams.centerCoordinates( centerLon, centerLat );
     return centerLon * RAD2DEG;
-}
-
-int  MarbleMap::minimumZoom() const
-{
-    return d->m_model->minimumZoom();
-}
-
-int  MarbleMap::maximumZoom() const
-{
-    return d->m_model->maximumZoom();
 }
 
 void MarbleMap::addPlacemarkFile( const QString &filename )
@@ -661,43 +600,6 @@ quint64 MarbleMap::volatileTileCacheLimit() const
     return d->m_model->volatileTileCacheLimit();
 }
 
-void MarbleMap::zoomView( int newZoom )
-{
-    // Check for under and overflow.
-    if ( newZoom < minimumZoom() )
-        newZoom = minimumZoom();
-    else if ( newZoom > maximumZoom() )
-        newZoom = maximumZoom();
-
-    // Prevent infinite loops.
-    if ( newZoom  == d->m_logzoom )
-        return;
-    setRadius( d->radius( newZoom ) );
-
-    // We don't do this on every paintEvent to improve performance.
-    // Redrawing the atmosphere is only needed if the size of the
-    // globe changes.
-    if ( d->m_viewParams.showAtmosphere() ) {
-        d->m_dirtyAtmosphere=true;
-    }
-}
-
-
-void MarbleMap::zoomViewBy( int zoomStep )
-{
-    zoomView( zoom() + zoomStep );
-}
-
-
-void MarbleMap::zoomIn()
-{
-    zoomViewBy( d->m_zoomStep );
-}
-
-void MarbleMap::zoomOut()
-{
-    zoomViewBy( -d->m_zoomStep );
-}
 
 void MarbleMap::rotateBy( const Quaternion& incRot )
 {
@@ -779,24 +681,6 @@ void MarbleMap::setProjection( Projection projection )
     // Update texture map during the repaint that follows:
     setNeedsUpdate();
     emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
-}
-
-void MarbleMap::home( qreal &lon, qreal &lat, int& zoom )
-{
-    d->m_homePoint.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
-    zoom = d->m_homeZoom;
-}
-
-void MarbleMap::setHome( qreal lon, qreal lat, int zoom )
-{
-    d->m_homePoint = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree );
-    d->m_homeZoom = zoom;
-}
-
-void MarbleMap::setHome( const GeoDataCoordinates& homePoint, int zoom )
-{
-    d->m_homePoint = homePoint;
-    d->m_homeZoom = zoom;
 }
 
 
@@ -890,17 +774,6 @@ void MarbleMap::customPaint( GeoPainter *painter )
     if ( !d->m_viewParams.mapTheme() ) {
         return;
     }
-}
-
-void MarbleMap::goHome()
-{
-    qreal  homeLon = 0;
-    qreal  homeLat = 0;
-    d->m_homePoint.geoCoordinates( homeLon, homeLat );
-
-    centerOn( homeLon * RAD2DEG, homeLat * RAD2DEG );
-
-    zoomView( d->m_homeZoom ); // default 1050
 }
 
 QString MarbleMap::mapThemeId() const
@@ -1110,24 +983,6 @@ void MarbleMap::updateChangedMap()
     setNeedsUpdate();
 }
 
-QString MarbleMap::distanceString() const
-{
-    qreal dist = distance();
-    QString distanceUnitString;
-
-    const DistanceUnit distanceUnit = MarbleGlobal::getInstance()->locale()->distanceUnit();
-
-    if ( distanceUnit == Meter ) {
-        distanceUnitString = tr("km");
-    }
-    else {
-        dist *= KM2MI;
-        distanceUnitString = tr("mi");
-    }
-
-    return QString( "%L1 %2" ).arg( dist, 8, 'f', 1, QChar(' ') ).arg( distanceUnitString );
-}
-
 
 bool MarbleMap::mapCoversViewport()
 {
@@ -1212,41 +1067,6 @@ AbstractFloatItem * MarbleMap::floatItem( const QString &nameId ) const
     }
 
     return 0; // No item found
-}
-
-void MarbleMap::flyTo( const GeoDataLookAt &lookAt )
-{
-    int zoom = zoomFromDistance( lookAt.range() * METER2KM );
-    if ( zoom < minimumZoom() || zoom > maximumZoom() )
-        return; // avoid moving when zooming is impossible
-
-    setDistance( lookAt.range() * METER2KM );
-    GeoDataCoordinates::Unit deg = GeoDataCoordinates::Degree;
-    centerOn( lookAt.longitude( deg ), lookAt.latitude( deg ) );
-}
-
-GeoDataLookAt MarbleMap::lookAt() const
-{
-    GeoDataLookAt result;
-    qreal lon( 0.0 ), lat( 0.0 );
-
-    d->m_viewParams.centerCoordinates( lon, lat );
-    result.setLongitude( lon );
-    result.setLatitude( lat );
-    result.setAltitude( 0.0 );
-    result.setRange( distance() * KM2METER );
-
-    return result;
-}
-
-qreal MarbleMap::distanceFromZoom( qreal zoom ) const
-{
-    return distanceFromRadius( d->radius( zoom ) );
-}
-
-qreal MarbleMap::zoomFromDistance( qreal distance ) const
-{
-    return d->zoom( radiusFromDistance( distance ) );
 }
 
 

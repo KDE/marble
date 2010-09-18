@@ -147,38 +147,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void setRadius( int radius );
 
     /**
-     * @brief Return the current zoom level.
-     */
-    int zoom() const;
-
-    /**
-     * @brief Return the current distance. Convenience function calling distance(radius())
-     * @see distance(qreal) radius
-     */
-    qreal distance() const;
-
-    /**
-     * @brief  Set the distance of the observer to the globe in km.
-     * @param  distance  The new distance in km.
-     */
-    void setDistance( qreal distance );
-
-    /**
-     * @brief Return the current distance string.
-     */
-    QString distanceString() const;
-
-    /**
-     * @brief return the minimum zoom value for the current map theme.
-     */
-    int minimumZoom() const;
-
-    /**
-     * @brief return the minimum zoom value for the current map theme.
-     */
-    int maximumZoom() const;
-
-    /**
      * @brief return if the map needs to be updated.
      */
     bool needsUpdate() const;
@@ -434,37 +402,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     QList<AbstractFloatItem *> floatItems() const;
     AbstractFloatItem * floatItem( const QString &nameId ) const;
 
-    /**
-      * @brief Move camera to the given position. This can change
-      * both the zoom value and the position
-      */
-    void flyTo( const GeoDataLookAt &lookAt );
-
-    /**
-      * @brief Return the current camera position
-      */
-    GeoDataLookAt lookAt() const;
-
-    /**
-      * @brief Return the globe radius (pixel) for the given distance (km)
-      */
-    qreal radiusFromDistance( qreal distance ) const;
-
-    /**
-      * @brief Return the distance (km) at the given globe radius (pixel)
-      */
-    qreal distanceFromRadius( qreal radius ) const;
-
-    /**
-      * Returns the zoom value (no unit) corresponding to the given camera distance (km)
-      */
-    qreal zoomFromDistance( qreal distance ) const;
-
-    /**
-      * Returns the distance (km) corresponding to the given zoom value
-      */
-    qreal distanceFromZoom( qreal zoom ) const;
-
  public Q_SLOTS:
 
     void updateSun();
@@ -476,31 +413,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param dirtyRect the rectangle that actually needs repainting.
      */
     void paint( GeoPainter &painter, QRect &dirtyRect );
-
-    /**
-     * @brief  Zoom the view to a certain zoomlevel
-     * @param  zoom  the new zoom level.
-     *
-     * The zoom level is an abstract value without physical
-     * interpretation.  A zoom value around 1000 lets the viewer see
-     * all of the earth in the default window.
-     */
-    void zoomView( int zoom );
-
-    /**
-     * @brief  Zoom the view by a certain step
-     * @param  zoomStep  the difference between the old zoom and the new
-     */
-    void zoomViewBy( int zoomStep );
-
-    /**
-     * @brief  Zoom in by the amount zoomStep.
-     */
-    void zoomIn();
-    /**
-     * @brief  Zoom out by the amount zoomStep.
-     */
-    void zoomOut();
 
     /**
      * @brief  Rotate the view by the two angles phi and theta.
@@ -563,27 +475,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void setProjection( Projection projection );
 
     /**
-     * @brief  get the home point
-     * @param  lon  the longitude of the home point.
-     * @param  lat  the latitude of the home point.
-     * @param  zoom the default zoom level of the home point.
-     */
-    void home( qreal &lon, qreal &lat, int& zoom );
-    /**
-     * @brief  Set the home point
-     * @param  lon  the longitude of the new home point.
-     * @param  lat  the latitude of the new home point.
-     * @param  zoom the default zoom level for the new home point.
-     */
-    void setHome( qreal lon, qreal lat, int zoom = 1050 );
-    /**
-     * @brief  Set the home point
-     * @param  homePoint  the new home point.
-     * @param  zoom       the default zoom level for the new home point.
-     */
-    void setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
-
-    /**
      * @brief  Move left by the moveStep.
      */
     void moveLeft();
@@ -599,11 +490,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @brief  Move down by the moveStep.
      */
     void moveDown();
-
-    /**
-     * @brief Center the view on the default start point with the default zoom.
-     */
-    void goHome();
 
     /**
      * @brief Get the ID of the current map theme
@@ -807,14 +693,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void reload() const;
     
  Q_SIGNALS:
-    /**
-     * @brief Signal that the zoom has changed, and to what.
-     * @param zoom  The new zoom value.
-     * @see  zoomView()
-     */
-    void zoomChanged( int zoom );
-    void distanceChanged( const QString& distanceString );
-
     /**
      * @brief Signal that the theme has changed
      * @param theme  Name of the new theme.

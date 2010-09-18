@@ -34,9 +34,6 @@ class MarbleMapPrivate
  public:
     explicit MarbleMapPrivate( MarbleMap *parent );
 
-    inline static qreal zoom( qreal radius ) { return (200.0 * log( radius ) ); }
-    inline static qreal radius( qreal zoom ) { return pow( M_E, ( zoom / 200.0 ) ); }
-
     void construct();
 
     void paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect );
@@ -62,21 +59,11 @@ class MarbleMapPrivate
     bool             m_justModified; // FIXME: Rename to isDirty
     bool             m_dirtyAtmosphere;
 
-    // The home position
-    GeoDataCoordinates     m_homePoint;
-    int              m_homeZoom;
-
-    // zoom related
-    int              m_logzoom;
-    int              m_zoomStep;
-
     TextureColorizer  *m_sealegend;
 
     // Parameters for the maps appearance.
 
     bool             m_showFrameRate;
-
-    const qreal      m_viewAngle;
 
 };
 
