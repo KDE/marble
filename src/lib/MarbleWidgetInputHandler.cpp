@@ -171,6 +171,7 @@ class MarbleWidgetDefaultInputHandler::Private
     int m_leftPressedY;
     // The mouse pointer y position when the middle mouse button has been pressed.
     int m_midPressedY;
+    int m_radiusWhenPressed;
     // The center longitude in radian when the left mouse button has been pressed.
     qreal m_leftPressedLon;
     // The center latitude in radian when the left mouse button has been pressed.
@@ -536,6 +537,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                  && event->button() == Qt::MidButton ) {
                 d->m_midPressed = true;
                 d->m_leftPressed = false;
+                d->m_radiusWhenPressed = MarbleWidgetInputHandler::d->m_widget->radius();
                 d->m_midPressedY = event->y();
 
                 d->m_selectionRubber->hide();
@@ -625,8 +627,7 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             if ( d->m_midPressed ) {
                 int eventy = event->y();
                 int dy = d->m_midPressedY - eventy;
-                d->m_midPressed = eventy;
-                MarbleWidgetInputHandler::d->m_widget->zoomViewBy( (int)( 2 * dy / 3 ) );
+                MarbleWidgetInputHandler::d->m_widget->setRadius( d->m_radiusWhenPressed * pow( 1.005, dy ) );
             }
 
             if ( d->m_selectionRubber->isVisible() ) 
