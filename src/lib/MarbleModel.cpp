@@ -38,6 +38,7 @@
 #include "GeoSceneTexture.h"
 #include "GeoSceneVector.h"
 #include "GeoSceneXmlDataSource.h"
+#include "GeoSceneZoom.h"
 
 #include "GeoDataDocument.h"
 #include "GeoDataStyle.h"
@@ -335,6 +336,22 @@ QString MarbleModel::mapThemeId() const
 GeoSceneDocument* MarbleModel::mapTheme() const
 {
     return d->m_mapTheme;
+}
+
+int MarbleModel::minimumZoom() const
+{
+    if ( d->m_mapTheme )
+        return d->m_mapTheme->head()->zoom()->minimum();
+
+    return 950;
+}
+
+int MarbleModel::maximumZoom() const
+{
+    if ( d->m_mapTheme )
+        return d->m_mapTheme->head()->zoom()->maximum();
+
+    return 2100;
 }
 
 // Set a particular theme for the map and load the appropriate tile level.

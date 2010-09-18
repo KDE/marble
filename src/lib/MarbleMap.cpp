@@ -39,7 +39,6 @@
 #include "GeoPainter.h"
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
-#include "GeoSceneZoom.h"
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include "MarbleLocale.h"
@@ -495,18 +494,12 @@ qreal MarbleMap::centerLongitude() const
 
 int  MarbleMap::minimumZoom() const
 {
-    if ( d->m_viewParams.mapTheme() )
-        return d->m_viewParams.mapTheme()->head()->zoom()->minimum();
-
-    return 950;
+    return d->m_model->minimumZoom();
 }
 
 int  MarbleMap::maximumZoom() const
 {
-    if ( d->m_viewParams.mapTheme() )
-        return d->m_viewParams.mapTheme()->head()->zoom()->maximum();
-
-    return 2100;
+    return d->m_model->maximumZoom();
 }
 
 void MarbleMap::addPlacemarkFile( const QString &filename )
