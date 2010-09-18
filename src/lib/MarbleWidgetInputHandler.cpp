@@ -33,6 +33,7 @@
 #include "GeoDataCoordinates.h"
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
+#include "MarbleMap.h"
 #include "MarbleModel.h"
 #include "ViewportParams.h"
 #include "AbstractFloatItem.h"
@@ -245,7 +246,7 @@ void MarbleWidgetDefaultInputHandler::Private::ZoomAt(MarbleWidget* marbleWidget
     soon.setPlanetAxis(now->planetAxis());
     soon.setSize(now->size());
 
-    qreal newRadius = marbleWidget->radiusFromDistance(newDistance);
+    qreal newRadius = marbleWidget->map()->radiusFromDistance(newDistance);
     soon.setRadius( newRadius );
 
     qreal mouseLon, mouseLat;
@@ -741,9 +742,9 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
             qreal target = MarbleWidgetInputHandler::d->m_wheelZoomTargetDistance;
             if ( marbleWidget->animationsEnabled() && target > 0.0 ) {
                 // Do not use intermediate (interpolated) distance values caused by animations
-                zoom = marbleWidget->zoomFromDistance( target );
+                zoom = marbleWidget->map()->zoomFromDistance( target );
             }
-            qreal newDistance = marbleWidget->distanceFromZoom( zoom + steps );
+            qreal newDistance = marbleWidget->map()->distanceFromZoom( zoom + steps );
             MarbleWidgetInputHandler::d->m_wheelZoomTargetDistance = newDistance;
             d->ZoomAt(MarbleWidgetInputHandler::d->m_widget, wheelevt->pos(), newDistance);
 

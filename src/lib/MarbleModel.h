@@ -162,16 +162,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
     GeoSceneDocument *mapTheme() const;
 
     /**
-     * @brief return the minimum zoom value for the current map theme.
-     */
-    int minimumZoom() const;
-
-    /**
-     * @brief return the minimum zoom value for the current map theme.
-     */
-    int maximumZoom() const;
-
-    /**
      * @brief Set a new map theme to use.
      * @param selectedMap  the identifier of the selected map theme
      * @param currentProjection  the current projection
