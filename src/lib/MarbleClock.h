@@ -23,20 +23,11 @@ namespace Marble
 class MarbleClock : public QObject
 {
     Q_OBJECT
-	
+
  public:
     MarbleClock();
     ~MarbleClock();
 
-    /**
-     * @brief Convert 1BCE to year 0, etc.
-     **/
-    int year0() const;
-
-    /**
-     * @brief Convert to julian day number. Adapted from http://en.wikipedia.org/wiki/Julian_day#Calculation
-     **/
-    long toJulianDayNumber() const;
     qreal dayFraction() const;
 
  Q_SIGNALS:
@@ -66,18 +57,18 @@ public:
      * @brief Returns the speed of the timer
      **/
     int speed() const;
-    
+
     /**
      * @brief Sets the timezone of the clock
      * @param timeInSec The new timezone ( in seconds w.r.t. UTC )
      **/
     void setTimezone( int timeInSec );
-    
+
     /**
      * @brief Returns the timezone of the clock
      **/
     int timezone() const;
-    
+
  private Q_SLOTS:
     void timerTimeout();
 

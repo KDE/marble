@@ -34,43 +34,6 @@ MarbleClock::~MarbleClock()
 }
 
 
-int MarbleClock::year0() const
-{
-    int year = m_datetime.date().year();
-    if ( year < 0 )
-        year++;
-    return year;
-}
-
-
-long MarbleClock::toJulianDayNumber() const
-{
-    const int EPOCH_G = 32045; // 29 February 4801BCE in gregorian calendar
-    const int EPOCH_J = 32083; // 29 February 4801BCE in julian calendar
-
-    int y = year0() + 4800;
-    int m = m_datetime.date().month() - 3;
-
-    if ( m_datetime.date().month() <= 2 ) {
-        y--;
-        m += 12;
-    }
-
-    long jdn = m_datetime.date().day() + ((153*m + 2) / 5) + 365*y + y/4;
-
-    if ( jdn >= 2331254 ) {
-        // If the date is >= 1582-10-15, then assume gregorian
-        // calendar is being used
-        jdn += -y/100 + y/400 - EPOCH_G;
-    } else {
-        // Assume julian calendar is being used.
-        jdn -= EPOCH_J;
-    }
-
-    return jdn;
-}
-
-
 qreal MarbleClock::dayFraction() const
 {
     qreal f;

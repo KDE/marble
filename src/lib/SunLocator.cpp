@@ -88,7 +88,7 @@ void SunLocator::updatePosition()
 {
     if( d->m_planet->id() == "moon" ) {
         // days since the first full moon of the 20th century
-        qreal days = (qreal)d->m_clock->toJulianDayNumber() + d->m_clock->dayFraction() - MOON_EPOCH;
+        qreal days = (qreal)d->m_clock->dateTime().date().toJulianDay() + d->m_clock->dayFraction() - MOON_EPOCH;
 
         // number of orbits the moon has made (relative to the sun as observed from earth)
         days /= MOON_SYNODIC_PERIOD;
@@ -112,7 +112,7 @@ void SunLocator::updatePosition()
     }
 
     // find current Julian day number relative to epoch J2000
-    long day = d->m_clock->toJulianDayNumber() - J2000;
+    long day = d->m_clock->dateTime().date().toJulianDay() - J2000;
 
     // from http://www.astro.uu.nl/~strous/AA/en/reken/zonpositie.html
     // mean anomaly
