@@ -518,8 +518,7 @@ void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
     }
     else {
         GeoDataLookAt target = d->m_map->lookAt();
-        int radius = d->m_map->d->radius( newZoom );
-        target.setRange( 1000 * d->m_map->distanceFromRadius( radius ) );
+        target.setRange( 1000 * d->m_map->distanceFromZoom( newZoom ) );
         flyTo( target, mode == Automatic ? Instant : mode );
     }
 }
@@ -540,8 +539,7 @@ void MarbleWidget::zoomIn( FlyToMode mode )
     else {
         GeoDataLookAt target = d->m_map->lookAt();
         MarbleMap *map = d->m_map;
-        int newRadius = map->d->radius( map->zoom() + map->d->m_zoomStep );
-        target.setRange( 1000 * d->m_map->distanceFromRadius( newRadius ) );
+        target.setRange( 1000 * d->m_map->distanceFromZoom( map->zoom() + map->d->m_zoomStep ) );
         flyTo( target, mode );
     }
 }
@@ -555,8 +553,7 @@ void MarbleWidget::zoomOut( FlyToMode mode )
     else {
         GeoDataLookAt target = d->m_map->lookAt();
         MarbleMap *map = d->m_map;
-        int newRadius = map->d->radius( map->zoom() - map->d->m_zoomStep );
-        target.setRange( 1000 * d->m_map->distanceFromRadius( newRadius ) );
+        target.setRange( 1000 * d->m_map->distanceFromZoom( map->zoom() - map->d->m_zoomStep ) );
         flyTo( target, mode );
     }
 }
@@ -867,8 +864,7 @@ void MarbleWidget::goHome( FlyToMode mode )
         GeoDataLookAt target;
         target.setLongitude( homeLon, GeoDataCoordinates::Degree );
         target.setLatitude( homeLat, GeoDataCoordinates::Degree );
-        int radius = d->m_map->d->radius( homeZoom );
-        target.setRange( 1000 * d->m_map->distanceFromRadius( radius ) );
+        target.setRange( 1000 * d->m_map->distanceFromZoom( homeZoom ) );
 
         flyTo( target, mode );
     }
