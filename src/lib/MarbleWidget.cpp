@@ -803,6 +803,7 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
                                      : QImage::Format_ARGB32_Premultiplied;
         // Paint to an intermediate image
         image = QImage( rect().size(), imageFormat );
+        image.fill( Qt::transparent );
         paintDevice = &image;
     }
 
