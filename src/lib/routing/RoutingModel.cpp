@@ -75,6 +75,8 @@ public:
     QMap<RoutingInstruction::TurnType,QPixmap> m_turnTypePixmaps;
 
     void importPlacemark( const GeoDataPlacemark *placemark );
+
+    bool deviatedFromRoute( const GeoDataCoordinates &position, const QVector<GeoDataCoordinates> &waypoints ) const;
 };
 
 RoutingModelPrivate::RoutingModelPrivate()
@@ -101,6 +103,21 @@ RoutingModelPrivate::RoutingModelPrivate()
     m_turnTypePixmaps[RoutingInstruction::RoundaboutSecondExit] = QPixmap( ":/data/bitmaps/turn-roundabout-second.png");
     m_turnTypePixmaps[RoutingInstruction::RoundaboutThirdExit] = QPixmap( ":/data/bitmaps/turn-roundabout-third.png");
     m_turnTypePixmaps[RoutingInstruction::RoundaboutExit] = QPixmap( ":/data/bitmaps/turn-roundabout-far.png");
+}
+
+bool RoutingModelPrivate::deviatedFromRoute( const GeoDataCoordinates &position, const QVector<GeoDataCoordinates> &waypoints ) const
+{
+    /** @todo: It might make sense to take other factors into account here:
+      * Position accuracy, speed, transport type */
+    /** @todo: Cache bounding box / expected next target for a quicker check */
+    qreal const threshold = 250.0 / EARTH_RADIUS;
+    foreach( const GeoDataCoordinates &coordinate, waypoints ) {
+        if ( distanceSphere( position, coordinate ) < threshold ) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 void RoutingModelPrivate::importPlacemark( const GeoDataPlacemark *placemark )
@@ -438,19 +455,18 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
                 totalTimeRemaining = 0.0;
                 totalDistanceRemaining = 0.0;
             }
-
-            if( d->m_nextInstructionIndex > 0 && distanceRemaining < instructions[d->m_nextInstructionIndex-1].instructionDistance ) {
-                d->m_routeLeft = false;
-            }
-            else {
-                d->m_routeLeft = true;
-            }
         }
         d->m_nextInstructionDistance = distanceRemaining;
         d->m_totalTimeRemaining = totalTimeRemaining;
         d->m_totalDistanceRemaining = totalDistanceRemaining;
 
         emit nextInstruction( d->m_totalTimeRemaining, d->m_totalDistanceRemaining );
+
+        bool const deviated = d->deviatedFromRoute( location, wayPoints );
+        if ( deviated != d->m_routeLeft ) {
+            d->m_routeLeft = deviated;
+            emit deviatedFromRoute( d->m_routeLeft );
+        }
     }
 }
 

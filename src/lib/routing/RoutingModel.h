@@ -35,6 +35,8 @@ class MARBLE_EXPORT RoutingModel : public QAbstractListModel
 {
     Q_OBJECT
 
+    Q_PROPERTY( bool deviatedFromRoute READ deviatedFromRoute NOTIFY deviatedFromRoute )
+
 public:
     struct Duration
     {
@@ -164,6 +166,7 @@ Q_SIGNALS:
     */
     void nextInstruction( qint32 totalTimeRemaining, qreal totalDistanceRemaining );
     void routeCalculated( int );
+    void deviatedFromRoute( bool deviated );
 
 private:
     RoutingModelPrivate *const d;
