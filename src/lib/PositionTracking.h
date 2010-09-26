@@ -32,8 +32,9 @@ class MARBLE_EXPORT PositionTracking : public QObject
 {
     Q_OBJECT
 
-public:
+    Q_PROPERTY( PositionProviderPlugin* positionProviderPlugin READ positionProviderPlugin WRITE setPositionProviderPlugin NOTIFY positionProviderPluginChanged )
 
+public:
     explicit PositionTracking( FileManager *fileManager,
                           QObject *parent = 0 );
     ~PositionTracking();
@@ -43,6 +44,9 @@ public:
       * position tracking. Ownership of the provided plugin is taken.
       */
     void setPositionProviderPlugin( PositionProviderPlugin* plugin );
+
+    /** @brief Returns the current position provider plugin, or 0 if none is in use */
+    PositionProviderPlugin* positionProviderPlugin();
 
     /**
       * @brief gives the error message from the current position provider
@@ -59,11 +63,16 @@ public:
      */
     qreal direction() const;
 
+    /** @brief Returns the estimated accuracy of the current position */
     GeoDataAccuracy accuracy() const;
+
     /**
      * @brief provides the visibility of the Position Tracking document
      */
     bool trackVisible() const;
+
+    /** @brief Returns the current position, if any */
+    GeoDataCoordinates currentLocation() const;
 
 public Q_SLOTS:
     /**

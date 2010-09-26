@@ -140,6 +140,11 @@ void PositionTracking::setPositionProviderPlugin( PositionProviderPlugin* plugin
     emit positionProviderPluginChanged( plugin );
 }
 
+PositionProviderPlugin* PositionTracking::positionProviderPlugin()
+{
+    return d->m_positionProvider;
+}
+
 QString PositionTracking::error() const
 {
     return d->m_positionProvider ? d->m_positionProvider->error() : QString();
@@ -181,6 +186,11 @@ void PositionTracking::clearTrack()
 GeoDataAccuracy PositionTracking::accuracy() const
 {
     return d->m_accuracy;
+}
+
+GeoDataCoordinates PositionTracking::currentLocation() const
+{
+    return d->m_gpsCurrentPosition;
 }
 
 #include "PositionTracking.moc"
