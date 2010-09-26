@@ -286,7 +286,7 @@ void RoutingLayerPrivate::renderRoute( GeoPainter *painter )
         } else if ( !m_routeDirty && type == RoutingModel::Error ) {
             painter->setPen( QColor( Qt::white ) );
             painter->setBrush( QBrush( QColor::fromRgb( 226, 8, 0, 200 ) ) ); // red, oxygen palette
-            painter->drawAnnotation( pos, index.data().toString(), QSize( 180, 80 ), 10, 30, 15, 15 );
+            painter->drawAnnotation( pos, index.data().toString(), QSize( 240, 100 ), 10, 30, 15, 15 );
         }
     }
 }

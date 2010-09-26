@@ -47,13 +47,15 @@ public:
     RoutingModel::Duration m_totalDuration;
 
     qreal m_totalDistance;
+    
+    int m_consecutiveErrors;
 
     RoutingModelPrivate();
 
     RouteElement parseGmlPos( const QStringList &content ) const;
 };
 
-RoutingModelPrivate::RoutingModelPrivate() : m_totalDistance( 0.0 )
+RoutingModelPrivate::RoutingModelPrivate() : m_totalDistance( 0.0 ), m_consecutiveErrors( 0 )
 {
     // nothing to do
 }
@@ -143,6 +145,7 @@ void RoutingModel::importOpenGis( const QByteArray &content )
 
     QDomNodeList errors = root.elementsByTagName( "xls:Error" );
     if ( errors.size() > 0 ) {
+        ++d->m_consecutiveErrors;
         for ( unsigned int i = 0; i < errors.length(); ++i ) {
             QDomNode node = errors.item( i );
             QString errorMessage = node.attributes().namedItem( "message" ).nodeValue();
@@ -151,7 +154,11 @@ void RoutingModel::importOpenGis( const QByteArray &content )
                 RouteElement element;
                 GeoDataCoordinates position;
                 if ( regexp.capturedTexts().size() == 4 ) {
-                    element.description = regexp.capturedTexts().at( 1 );
+                    //element.description = regexp.capturedTexts().at( 1 );
+                    element.description = "Sorry, found no streets nearby. Try moving this point closer to a street.";
+                    if ( d->m_consecutiveErrors > 1 ) {
+                        element.description = "Sorry, still found no streets nearby. Please check http://openrouteservice.org to see whether routing in this country is supported yet.";
+                    }
                     position.setLongitude( regexp.capturedTexts().at( 2 ).toDouble(), GeoDataCoordinates::Degree );
                     position.setLatitude( regexp.capturedTexts().at( 3 ).toDouble(), GeoDataCoordinates::Degree );
                     element.position = position;
@@ -167,6 +174,8 @@ void RoutingModel::importOpenGis( const QByteArray &content )
                 delete messageBox;
             }
         }
+    } else {
+        d->m_consecutiveErrors = 0;
     }
 
     QDomNodeList summary = root.elementsByTagName( "xls:RouteSummary" );
