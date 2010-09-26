@@ -155,9 +155,9 @@ void RoutingModel::importOpenGis( const QByteArray &content )
                 GeoDataCoordinates position;
                 if ( regexp.capturedTexts().size() == 4 ) {
                     //element.description = regexp.capturedTexts().at( 1 );
-                    element.description = "Sorry, found no streets nearby. Try moving this point closer to a street.";
+                    element.description = tr( "Sorry, found no streets nearby. Try moving this point closer to a street." );
                     if ( d->m_consecutiveErrors > 1 ) {
-                        element.description = "Sorry, still found no streets nearby. Please check http://openrouteservice.org to see whether routing in this country is supported yet.";
+                        element.description = tr( "Sorry, still found no streets nearby. Please check http://openrouteservice.org to see whether routing in this country is supported yet." );
                     }
                     position.setLongitude( regexp.capturedTexts().at( 2 ).toDouble(), GeoDataCoordinates::Degree );
                     position.setLatitude( regexp.capturedTexts().at( 3 ).toDouble(), GeoDataCoordinates::Degree );
