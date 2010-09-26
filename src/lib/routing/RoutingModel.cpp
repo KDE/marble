@@ -253,28 +253,27 @@ void RoutingModel::exportGpx( QIODevice *device ) const
     content += "<metadata>\n  <link href=\"http://edu.kde.org/marble\">\n    ";
     content += "<text>Marble Virtual Globe</text>\n  </link>\n</metadata>\n";
 
-    QList<RouteElement> instructions;
-    content += "<trk>\n  <name>Route</name>\n    <trkseg>\n";
+    QList<RouteElement> waypoints;
+    content += "  <rte>\n    <name>Route</name>\n";
     foreach( const RouteElement &element, d->m_route ) {
-        if ( element.type == WayPoint ) {
+        if ( element.type == Instruction ) {
             qreal lon = element.position.longitude( GeoDataCoordinates::Degree );
             qreal lat = element.position.latitude( GeoDataCoordinates::Degree );
-            content += QString( "      <trkpt lat=\"%1\" lon=\"%2\"></trkpt>\n" ).arg( lat, 0, 'f', 7 ).arg( lon, 0, 'f', 7 );
-        } else {
-            instructions << element;
+            content += QString( "    <rtept lat=\"%1\" lon=\"%2\"><name>%3</name></rtept>\n" ).arg( lat, 0, 'f', 7 ).arg( lon, 0, 'f', 7 ).arg( element.description );
+        } else if ( element.type == WayPoint ) {
+            waypoints << element;
         }
     }
-    content += "    </trkseg>\n  </trk>\n";
+    content += "  </rte>\n";
 
-    content += "  <rte>\n    <name>Route</name>\n";
-    foreach( const RouteElement &element, instructions ) {
-        Q_ASSERT( element.type == Instruction );
+    content += "<trk>\n  <name>Route</name>\n    <trkseg>\n";
+    foreach( const RouteElement &element, waypoints ) {
+        Q_ASSERT( element.type == WayPoint );
         qreal lon = element.position.longitude( GeoDataCoordinates::Degree );
         qreal lat = element.position.latitude( GeoDataCoordinates::Degree );
-        content += QString( "    <rtept lat=\"%1\" lon=\"%2\">%3</rtept>\n" ).arg( lat, 0, 'f', 7 ).arg( lon, 0, 'f', 7 ).arg( element.description );
+        content += QString( "      <trkpt lat=\"%1\" lon=\"%2\"></trkpt>\n" ).arg( lat, 0, 'f', 7 ).arg( lon, 0, 'f', 7 );
     }
-
-    content += "  </rte>\n";
+    content += "    </trkseg>\n  </trk>\n";
     content += "</gpx>\n";
 
     device->write( content.toUtf8() );
