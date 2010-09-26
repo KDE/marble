@@ -226,8 +226,8 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
     if( renderPos == "ALWAYS_ON_TOP" )
     {
-        m_marbleWidget = ( MarbleWidget* )painter->device();
-        if( m_marbleWidget->sunLocator()->getCentered() == true )
+        m_marbleWidget = dynamic_cast<MarbleWidget*>( painter->device() );
+        if( m_marbleWidget && m_marbleWidget->sunLocator()->getCentered() == true )
         {
             GeoDataCoordinates point( m_marbleWidget->sunLocator()->getLon(), m_marbleWidget->sunLocator()->getLat(), 0, GeoDataCoordinates::Degree );
             QImage image( MarbleDirs::path( "svg/sunshine.png" ) );
