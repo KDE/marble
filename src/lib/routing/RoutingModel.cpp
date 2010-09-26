@@ -439,7 +439,7 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
                 totalDistanceRemaining = 0.0;
             }
 
-            if( distanceRemaining < instructions[d->m_nextInstructionIndex-1].instructionDistance ) {
+            if( d->m_nextInstructionIndex > 0 && distanceRemaining < instructions[d->m_nextInstructionIndex-1].instructionDistance ) {
                 d->m_routeLeft = false;
             }
             else {
