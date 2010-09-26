@@ -23,6 +23,8 @@ namespace Marble
 class GeoDataCoordinates;
 class MarbleWidget;
 class PositionTracking;
+class AdjustNavigationPrivate;
+
 class MARBLE_EXPORT AdjustNavigation : public QObject
 {
     Q_OBJECT
@@ -35,6 +37,9 @@ public:
      * @param parent optional parent object
      */
     explicit AdjustNavigation( MarbleWidget *widget, QObject *parent = 0 );
+
+    /** Destructor */
+    ~AdjustNavigation();
 
     /**
     * An enum type
@@ -79,37 +84,15 @@ Q_SIGNALS:
      */
      void autoZoomToggled( bool enabled );
 
+ private Q_SLOTS:
+
+     /**
+       * Temporarily inhibits auto-centering and auto-zooming
+       */
+     void inhibitAutoAdjustments();
+
 private:
-
-    /**
-     * @brief To center on when reaching custom defined border
-     * @param position current gps location
-     * @param speed optional speed argument
-     */
-     void moveOnBorderToCenter( GeoDataCoordinates position, qreal speed );
-
-    /**
-     * For calculating intersection point of projected LineString from
-     * current gps location with the map border
-     * @param position current gps location
-     */
-     void findIntersection( GeoDataCoordinates position );
-
-    /**
-     * @brief Adjust the zoom value of the map
-     * @param currentPosition current location of the gps device
-     * @param destination geoCoordinates of the point on the screen border where the gps device
-     * would reach if allowed to move in that direction
-     */
-     void adjustZoom( GeoDataCoordinates currentPosition , GeoDataCoordinates destination );
-
-    MarbleWidget        *m_widget;
-    PositionTracking    *m_tracking;
-    qreal                m_gpsSpeed;
-    qreal                m_gpsDirection;
-    int                  m_recenterMode;
-    bool                 m_adjustZoom;
-
+    AdjustNavigationPrivate * const d;
 };
 } //namespace marble
 

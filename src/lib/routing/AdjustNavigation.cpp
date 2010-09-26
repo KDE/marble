@@ -24,67 +24,68 @@
 #include <QtGui/QWidget>
 #include <QtCore/QRect>
 #include <QtCore/QPointF>
+#include <QtCore/QTime>
 #include <math.h>
 
-using namespace Marble;
+namespace Marble {
 
-AdjustNavigation::AdjustNavigation( MarbleWidget *widget, QObject *parent )
-    :QObject( parent ),
-     m_widget( widget ),
-     m_tracking( 0 ),
-     m_gpsSpeed( 0 ),
-     m_gpsDirection( 0 ),
-     m_recenterMode( 0 ),
-     m_adjustZoom( 0 )
+class AdjustNavigationPrivate
 {
+public:
+
+    MarbleWidget        *m_widget;
+    PositionTracking    *m_tracking;
+    qreal                m_gpsSpeed;
+    qreal                m_gpsDirection;
+    int                  m_recenterMode;
+    bool                 m_adjustZoom;
+    QTime                m_lastWidgetInteraction;
+    bool                 m_selfInteraction;
+
+    /** Constructor */
+    AdjustNavigationPrivate( MarbleWidget *widget );
+
+    /**
+     * @brief To center on when reaching custom defined border
+     * @param position current gps location
+     * @param speed optional speed argument
+     */
+     void moveOnBorderToCenter( GeoDataCoordinates position, qreal speed );
+
+    /**
+     * For calculating intersection point of projected LineString from
+     * current gps location with the map border
+     * @param position current gps location
+     */
+     void findIntersection( GeoDataCoordinates position );
+
+    /**
+     * @brief Adjust the zoom value of the map
+     * @param currentPosition current location of the gps device
+     * @param destination geoCoordinates of the point on the screen border where the gps device
+     * would reach if allowed to move in that direction
+     */
+     void adjustZoom( GeoDataCoordinates currentPosition , GeoDataCoordinates destination );
+
+     /**
+       * Center the widget on the given position unless recentering is currently inhibited
+       */
+     void centerOn( const GeoDataCoordinates &position );
+};
+
+AdjustNavigationPrivate::AdjustNavigationPrivate( MarbleWidget *widget ) :
+        m_widget( widget ),
+        m_tracking( 0 ),
+        m_gpsSpeed( 0 ),
+        m_gpsDirection( 0 ),
+        m_recenterMode( 0 ),
+        m_adjustZoom( 0 ),
+        m_selfInteraction( false )
+{
+    m_lastWidgetInteraction.start();
 }
 
-void AdjustNavigation::adjust( GeoDataCoordinates position, qreal speed )
-{
-    if( !m_widget) {
-        return;
-    }
-
-    m_gpsDirection = m_tracking->direction();
-    m_gpsSpeed = speed;
-    if( m_recenterMode && m_adjustZoom ) {
-        if( m_recenterMode == AlwaysRecenter ) {
-            m_widget->centerOn( position, false );
-        }
-        else if( m_recenterMode == RecenterOnBorder ) {
-            moveOnBorderToCenter( position, speed );
-        }
-        findIntersection( position );
-    }
-    else if( m_recenterMode == AlwaysRecenter ) {
-        m_widget->centerOn( position, false );
-    }
-    else if( m_recenterMode == RecenterOnBorder ) {
-        moveOnBorderToCenter( position, speed );
-    }
-    else if( m_adjustZoom ) {
-        findIntersection( position );
-    }
-}
-
-void AdjustNavigation::setRecenter( int recenterMode )
-{
-    m_recenterMode = recenterMode;
-    emit recenterModeChanged( recenterMode );
-
-    PositionTracking * tracking = m_widget->model()->positionTracking();
-    if( recenterMode ) {
-        m_tracking = tracking;
-        QObject::connect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-                  this, SLOT( adjust( GeoDataCoordinates, qreal ) ), Qt::UniqueConnection );
-    }
-    else {
-        QObject::disconnect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-                  this, SLOT( adjust( GeoDataCoordinates, qreal ) ) );
-    }
-}
-
-void AdjustNavigation::moveOnBorderToCenter( GeoDataCoordinates position, qreal )
+void AdjustNavigationPrivate::moveOnBorderToCenter( GeoDataCoordinates position, qreal )
 {
     qreal lon = 0.0;
     qreal lat = 0.0;
@@ -95,7 +96,7 @@ void AdjustNavigation::moveOnBorderToCenter( GeoDataCoordinates position, qreal 
     qreal y = 0.0;
     //recenter if initially the gps location is not visible on the screen
     if(!( m_widget->screenCoordinates( lon, lat, x, y ) ) ) {
-         m_widget->centerOn( position, false );
+         centerOn( position );
     }
     qreal centerLon = m_widget->centerLongitude();
     qreal centerLat = m_widget->centerLatitude();
@@ -114,28 +115,11 @@ void AdjustNavigation::moveOnBorderToCenter( GeoDataCoordinates position, qreal 
     recenterBorderBound.setCoords( centerX-shiftX, centerY-shiftY, centerX+shiftX,  centerY+shiftY );
 
     if( !recenterBorderBound.contains( x,y ) ) {
-        m_widget->centerOn( position, false );
+        centerOn( position );
     }
 }
 
-void AdjustNavigation::setAutoZoom( bool autoZoom )
-{
-    m_adjustZoom = autoZoom;
-    emit autoZoomToggled( autoZoom );
-
-    PositionTracking * tracking = m_widget->model()->positionTracking();
-    if( autoZoom ) {
-        m_tracking = tracking;
-        QObject::connect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-                this, SLOT( adjust( GeoDataCoordinates, qreal ) ), Qt::UniqueConnection );
-    }
-    else {
-        QObject::disconnect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-                 this, SLOT( adjust( GeoDataCoordinates, qreal ) ) );
-    }
-}
-
-void AdjustNavigation::findIntersection( GeoDataCoordinates position )
+void AdjustNavigationPrivate::findIntersection( GeoDataCoordinates position )
 {
     qreal track = m_gpsDirection;
 
@@ -151,7 +135,7 @@ void AdjustNavigation::findIntersection( GeoDataCoordinates position )
     qreal currentY = 0;
 
     if( !m_widget->screenCoordinates( lon, lat, currentX, currentY ) ) {
-        m_widget->centerOn( position, false );
+        centerOn( position );
     }
     else {
         ViewportParams const * const viewparams = m_widget->viewport();
@@ -302,7 +286,7 @@ void AdjustNavigation::findIntersection( GeoDataCoordinates position )
     }
 }
 
-void AdjustNavigation::adjustZoom( GeoDataCoordinates currentPosition, GeoDataCoordinates destination )
+void AdjustNavigationPrivate::adjustZoom( GeoDataCoordinates currentPosition, GeoDataCoordinates destination )
 {
     qreal greatCircleDistance = distanceSphere( currentPosition, destination );
     qreal radius = m_widget->model()->planetRadius();
@@ -320,7 +304,7 @@ void AdjustNavigation::adjustZoom( GeoDataCoordinates currentPosition, GeoDataCo
         qreal thresholdExtreme = 4.0 * thresholdVeryHigh;
 
         int zoom = 0;
-
+        m_selfInteraction = true;
         if ( remainingTime <= thresholdVeryLow ) {
             zoom = 3100;
             m_widget->zoomView( zoom );
@@ -343,7 +327,100 @@ void AdjustNavigation::adjustZoom( GeoDataCoordinates currentPosition, GeoDataCo
              zoom = 3000;
              m_widget->zoomView( zoom );
         }
+        m_selfInteraction = false;
     }
 }
+
+void AdjustNavigationPrivate::centerOn( const GeoDataCoordinates &position )
+{
+    if ( m_widget && m_lastWidgetInteraction.elapsed() > 10 * 1000 ) {
+        m_selfInteraction = true;
+        m_widget->centerOn( position, false );
+        m_selfInteraction = false;
+    }
+}
+
+AdjustNavigation::AdjustNavigation( MarbleWidget *widget, QObject *parent )
+    :QObject( parent ), d( new AdjustNavigationPrivate( widget ) )
+{
+    connect( widget, SIGNAL( visibleLatLonAltBoxChanged( GeoDataLatLonAltBox ) ),
+             this, SLOT( inhibitAutoAdjustments() ) );
+}
+
+AdjustNavigation::~AdjustNavigation()
+{
+    delete d;
+}
+
+void AdjustNavigation::adjust( GeoDataCoordinates position, qreal speed )
+{
+    if( !d->m_widget) {
+        return;
+    }
+
+    d->m_gpsDirection = d->m_tracking->direction();
+    d->m_gpsSpeed = speed;
+    if( d->m_recenterMode && d->m_adjustZoom ) {
+        if( d->m_recenterMode == AlwaysRecenter ) {
+            d->centerOn( position );
+        }
+        else if( d->m_recenterMode == RecenterOnBorder ) {
+            d->moveOnBorderToCenter( position, speed );
+        }
+        d->findIntersection( position );
+    }
+    else if( d->m_recenterMode == AlwaysRecenter ) {
+        d->centerOn( position );
+    }
+    else if( d->m_recenterMode == RecenterOnBorder ) {
+        d->moveOnBorderToCenter( position, speed );
+    }
+    else if( d->m_adjustZoom ) {
+        d->findIntersection( position );
+    }
+}
+
+void AdjustNavigation::setAutoZoom( bool autoZoom )
+{
+    d->m_adjustZoom = autoZoom;
+    emit autoZoomToggled( autoZoom );
+
+    PositionTracking * tracking = d->m_widget->model()->positionTracking();
+    if( autoZoom ) {
+        d->m_tracking = tracking;
+        QObject::connect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
+                this, SLOT( adjust( GeoDataCoordinates, qreal ) ), Qt::UniqueConnection );
+    }
+    else {
+        QObject::disconnect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
+                 this, SLOT( adjust( GeoDataCoordinates, qreal ) ) );
+    }
+}
+
+void AdjustNavigation::setRecenter( int recenterMode )
+{
+    d->m_recenterMode = recenterMode;
+    emit recenterModeChanged( recenterMode );
+
+    PositionTracking * tracking = d->m_widget->model()->positionTracking();
+    if( recenterMode ) {
+        d->m_tracking = tracking;
+        QObject::connect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
+                  this, SLOT( adjust( GeoDataCoordinates, qreal ) ), Qt::UniqueConnection );
+    }
+    else {
+        QObject::disconnect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
+                  this, SLOT( adjust( GeoDataCoordinates, qreal ) ) );
+    }
+}
+
+void AdjustNavigation::inhibitAutoAdjustments()
+{
+    if ( !d->m_selfInteraction ) {
+        d->m_lastWidgetInteraction.restart();
+    }
+}
+
+} // namespace Marble
 
 #include "AdjustNavigation.moc"
