@@ -57,7 +57,6 @@ class MarblePart: public KParts::ReadOnlyPart
     static KAboutData* createAboutData();
     void createInfoBoxesMenu();
     void createOnlineServicesMenu();
-    void createFolderList();
 
     void initializeCustomTimezone();
 
@@ -70,6 +69,7 @@ class MarblePart: public KParts::ReadOnlyPart
     void  showDateTime();
     void  mapThemeChanged( const QString& newMapTheme );
     void  createPluginMenus();
+    void createFolderList();
 
   private Q_SLOTS:
     void  initObject();

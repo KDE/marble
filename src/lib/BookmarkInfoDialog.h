@@ -8,8 +8,8 @@
 // Copyright 2010      Gaurav Gupta <1989.gaurav@googlemail.com>     
 //
 
-#ifndef MARBLE_INFODIALOG_H
-#define MARBLE_INFODIALOG_H
+#ifndef MARBLE_BOOKMARKINFODIALOG_H
+#define MARBLE_BOOKMARKINFODIALOG_H
 
 #include "ui_BookmarkInfoDialog.h"
 #include "MarbleWidget.h"
@@ -19,22 +19,23 @@
 namespace Marble
 {
 
+class BookmarkInfoDialogPrivate;
+
 class MARBLE_EXPORT BookmarkInfoDialog : public QDialog, private Ui::BookmarkInfoDialog
 {
-
     Q_OBJECT
 
  public:
+    /** Constructor that uses the widget's center as the bookmark location */
+    explicit BookmarkInfoDialog( MarbleWidget *marbleWidget );
 
-    explicit BookmarkInfoDialog( MarbleWidget *parent = 0);
+    /** Constructor that uses the given coordinates as the bookmark location */
+    BookmarkInfoDialog( const GeoDataCoordinates &coordinates, MarbleWidget *marbleWidget );
 
+    /** Destructor */
     ~BookmarkInfoDialog();
 
-    void initComboBox();
-
-
- public Q_SLOTS:
-
+ private Q_SLOTS:
     void addBookmark();
     
     void openNewFolderDialog();
@@ -45,10 +46,9 @@ class MARBLE_EXPORT BookmarkInfoDialog : public QDialog, private Ui::BookmarkInf
 
  private:
     Q_DISABLE_COPY( BookmarkInfoDialog )
-    MarbleWidget *m_widget;
-    MarbleRunnerManager* m_manager;
+    BookmarkInfoDialogPrivate* const d;
+    friend class BookmarkInfoDialogPrivate;
 };
 
 }
 #endif
-

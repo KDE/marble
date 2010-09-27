@@ -11,6 +11,7 @@
 #ifndef MARBLE_BOOKMARKMANAGER_H
 #define MARBLE_BOOKMARKMANAGER_H
 
+#include <QtCore/QObject>
 #include <QtCore/QString>
 #include "BookmarkManager_p.h"
 
@@ -25,12 +26,13 @@ namespace Marble
  * book mark operations
  */
 
-class BookmarkManager
+class BookmarkManager : public QObject
 {
+    Q_OBJECT
 
  public:
 
-    BookmarkManager();
+    explicit BookmarkManager( QObject *parent = 0 );
 
     ~BookmarkManager();
     
@@ -69,12 +71,16 @@ class BookmarkManager
       */
     void removeAllBookmarks();
     
+Q_SIGNALS:
+    /** One or more bookmarks were added or removed */
+    void bookmarksChanged();
+
  private:
    
    /**
     * @brief updates bookmark file and return true if updated successfully
     */ 
-    bool updateBookmarkFile() const;    
+    bool updateBookmarkFile();
 
     BookmarkManagerPrivate *d;
 

@@ -814,7 +814,9 @@ void MarblePart::setupActions()
     connect( m_addBookmarkFolderAction, SIGNAL( triggered( ) ),
              this,                SLOT( openNewBookmarkFolderDialog() ) );
 
-
+    createFolderList();
+    connect( m_controlView->marbleWidget()->model()->bookmarkManager(),
+             SIGNAL( bookmarksChanged() ), this, SLOT( createFolderList() ) );
 }
 
 void MarblePart::createFolderList()
@@ -1491,18 +1493,14 @@ void MarblePart::downloadJobRemoved()
 
 void MarblePart::openBookmarkInfoDialog()
 {
-
     QPointer<BookmarkInfoDialog> m_bookmarkInfoDialog = new BookmarkInfoDialog( m_controlView->marbleWidget() );
     m_bookmarkInfoDialog->exec();
     delete m_bookmarkInfoDialog;
-    createFolderList();
-       mDebug() <<" Open Bookmark Info Dialog ";
 }
 
 void MarblePart::removeAllBookmarks()
 {
         m_controlView->marbleWidget()->removeAllBookmarks();
-        createFolderList();
 }
 
 void MarblePart::openNewBookmarkFolderDialog()
@@ -1510,8 +1508,6 @@ void MarblePart::openNewBookmarkFolderDialog()
     QPointer<NewFolderInfoDialog> dialog = new NewFolderInfoDialog( m_controlView->marbleWidget());
     dialog->exec();
     delete dialog;
-    createFolderList();
-
 }
 
 void MarblePart::lookAtBookmark( QAction *action)

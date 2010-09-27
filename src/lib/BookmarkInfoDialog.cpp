@@ -10,100 +10,63 @@
 //
 
 #include "BookmarkInfoDialog.h"
-#include "MarbleDebug.h"
 #include "BookmarkManager.h"
 #include "GeoDataPlacemark.h"
 #include "GeoDataPoint.h"
 #include "GeoDataFolder.h"
 #include "GeoDataCoordinates.h"
-#include "NewFolderInfoDialog.h"
 #include "GeoDataExtendedData.h"
-#include <QtGui/QLineEdit>
-#include <QtCore/QString>
-#include <QtCore/QPointer>
-#include <QtCore/QDebug>
 #include "MarbleModel.h"
-using namespace Marble;
+#include "NewFolderInfoDialog.h"
 
-BookmarkInfoDialog::BookmarkInfoDialog(MarbleWidget *parent)
-    : QDialog( parent ), 
-      m_widget( parent ), 
-      m_manager( 0 )
+#include <QtCore/QPointer>
+
+namespace Marble {
+
+class BookmarkInfoDialogPrivate {
+public:
+    MarbleWidget *m_widget;
+    MarbleRunnerManager* m_manager;
+    GeoDataCoordinates m_bookmarkCoordinate;
+
+    BookmarkInfoDialogPrivate( BookmarkInfoDialog* q, MarbleWidget *parent );
+
+    void initComboBox();
+
+    void initialize( const GeoDataCoordinates &coordinates );
+
+private:
+    BookmarkInfoDialog* const q;
+};
+
+BookmarkInfoDialogPrivate::BookmarkInfoDialogPrivate( BookmarkInfoDialog* q_, MarbleWidget *parent ) :
+        m_widget( parent ), m_manager( 0 ), q( q_ )
 {
-    setupUi(this);
-    setWindowTitle( tr("Add Bookmark") );
-    connect( m_saveButton, SIGNAL( clicked() ), this, SLOT( addBookmark() ) );
-    connect( m_newFolderButton, SIGNAL( clicked() ), this, SLOT( openNewFolderDialog() ) );
+    // nothing to do
+}
 
-    m_manager = new MarbleRunnerManager( m_widget->model()->pluginManager(), this );
+void BookmarkInfoDialogPrivate::initialize( const GeoDataCoordinates &coordinates )
+{
+    m_bookmarkCoordinate = coordinates;
+    q->setupUi( q );
+    q->setWindowTitle( QObject::tr("Add Bookmark") );
+    QObject::connect( q->m_saveButton, SIGNAL( clicked() ), q, SLOT( addBookmark() ) );
+    QObject::connect( q->m_newFolderButton, SIGNAL( clicked() ), q, SLOT( openNewFolderDialog() ) );
 
-    //reverse geocode the bookmark point for better user experience    
-    connect( m_manager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
-            this, SLOT( retrieveGeocodeResult( GeoDataCoordinates, GeoDataPlacemark ) ) );  
-
-    GeoDataCoordinates coordinates( m_widget->centerLongitude(), m_widget->centerLatitude(), 0, GeoDataCoordinates::Degree, 0 ) ;
+    //reverse geocode the bookmark point for better user experience
+    m_manager = new MarbleRunnerManager( m_widget->model()->pluginManager(), q );
+    QObject::connect( m_manager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
+            q, SLOT( retrieveGeocodeResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
     m_manager->reverseGeocoding( coordinates );
-    
 
-     name->setText(coordinates.toString() );
-     name->selectAll();
-    //Initialzing ComboBox
+    q->name->setText(coordinates.toString() );
+    q->name->selectAll();
     initComboBox();
 }
 
-BookmarkInfoDialog::~BookmarkInfoDialog()
+void BookmarkInfoDialogPrivate::initComboBox()
 {
-    delete m_manager;
-}
-
-void BookmarkInfoDialog::retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark)
-{
-    Q_UNUSED(coordinates)
-    GeoDataExtendedData extended = placemark.extendedData();
-    QString bookmarkName = "";
-    qreal distance = m_widget->distance() * KM2METER;        
-    //FIXME : Optimal logic for suggestion with distance consideration is required
-
-    if( distance >= 3500 ){
-        bookmarkName = extended.value("country").value().toString() ;
-    }
-    else if( distance >= 200 ){
-        bookmarkName = append( extended.value("city").value().toString()
-                , extended.value("state").value().toString() );
-        bookmarkName = append( bookmarkName, extended.value("country").value().toString() ) ;
-    }
-    else{ 
-        bookmarkName = append( extended.value("road").value().toString()
-            , extended.value("city").value().toString());
-        bookmarkName = append( bookmarkName, extended.value("country").value().toString() ) ;
-    }
-
-    if( bookmarkName.isEmpty() ){
-        bookmarkName = placemark.address();
-    }
-
-    name->setText( bookmarkName );
-    
-    name->selectAll();
-}
-
-QString BookmarkInfoDialog::append( const QString &bookmark, const QString &text)
-{
-    if( bookmark.isEmpty() && text.isEmpty() ){
-        return "";
-    }
-    else if( bookmark.isEmpty() ){
-        return text;
-    }
-    else if( text.isEmpty() ){
-        return bookmark;
-    }
-    return bookmark + ", " + text;
-}
-
-void BookmarkInfoDialog::initComboBox()
-{
-    m_folders->clear();
+    q->m_folders->clear();
     QVector<GeoDataFolder*> folders =  m_widget->folders();
     QVector<GeoDataFolder*>::const_iterator i = folders.constBegin();
     QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
@@ -113,43 +76,100 @@ void BookmarkInfoDialog::initComboBox()
         folderNames.append( (*i)->name() );
     }
 
-    m_folders->insertItems( 0, folderNames );
+    q->m_folders->insertItems( 0, folderNames );
+}
+
+BookmarkInfoDialog::BookmarkInfoDialog(MarbleWidget *parent)
+    : QDialog( parent ), d( new BookmarkInfoDialogPrivate( this, parent ) )
+{
+    GeoDataCoordinates coordinates( d->m_widget->centerLongitude(),
+                                    d->m_widget->centerLatitude(), 0,
+                                    GeoDataCoordinates::Degree, 0 ) ;
+    d->initialize( coordinates );
+}
+
+BookmarkInfoDialog::BookmarkInfoDialog( const GeoDataCoordinates &coordinates, MarbleWidget *parent )
+    : QDialog( parent ), d( new BookmarkInfoDialogPrivate( this, parent ) )
+{
+    d->initialize( coordinates );
+}
+
+BookmarkInfoDialog::~BookmarkInfoDialog()
+{
+    delete d;
+}
+
+void BookmarkInfoDialog::retrieveGeocodeResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark)
+{
+    Q_UNUSED(coordinates)
+    GeoDataExtendedData data = placemark.extendedData();
+    QString bookmarkName;
+    qreal distance = d->m_widget->distance() * KM2METER;
+    //FIXME : Optimal logic for suggestion with distance consideration is required
+
+    if( distance >= 3500 ) {
+        bookmarkName = data.value("country").value().toString() ;
+    }
+    else if( distance >= 200 ) {
+        bookmarkName = append( data.value("city").value().toString()
+                , data.value("state").value().toString() );
+        bookmarkName = append( bookmarkName, data.value("country").value().toString() ) ;
+    }
+    else {
+        bookmarkName = append( data.value("road").value().toString()
+            , data.value("city").value().toString());
+        bookmarkName = append( bookmarkName, data.value("country").value().toString() ) ;
+    }
+
+    if( bookmarkName.isEmpty() ) {
+        bookmarkName = placemark.address();
+    }
+
+    name->setText( bookmarkName );
+    name->selectAll();
+}
+
+QString BookmarkInfoDialog::append( const QString &bookmark, const QString &text)
+{
+    if( bookmark.isEmpty() && text.isEmpty() ) {
+        return "";
+    }
+    else if( bookmark.isEmpty() ) {
+        return text;
+    }
+    else if( text.isEmpty() ) {
+        return bookmark;
+    }
+    return bookmark + ", " + text;
 }
 
 void BookmarkInfoDialog::openNewFolderDialog()
 {
-    QPointer<NewFolderInfoDialog> dialog = new NewFolderInfoDialog( m_widget );
+    QPointer<NewFolderInfoDialog> dialog = new NewFolderInfoDialog( d->m_widget );
     dialog->exec();
     delete dialog;
-    initComboBox(); 
+    d->initComboBox();
 }
 
 void BookmarkInfoDialog::addBookmark()
 {
-
-    mDebug() << "Adding Bookmark with "
-             << " longitude : " <<  m_widget->centerLongitude()
-             << " latitude : " <<  m_widget->centerLatitude()
-             << " distance : " <<  m_widget->distance() * KM2METER;
-
-
     //Create a bookmark object 
     GeoDataPlacemark bookmark;
     bookmark.setName( name->text() );
     bookmark.setDescription( description->toPlainText() );
     //allow for HTML in the description
     bookmark.setDescriptionCDATA( true );
-    bookmark.setCoordinate( m_widget->centerLongitude(), m_widget->centerLatitude(), 0, GeoDataPoint::Degree );
+    bookmark.setCoordinate( d->m_bookmarkCoordinate );
 
     bookmark.extendedData().addValue( GeoDataData( "isBookmark", true ) );
-    GeoDataLookAt *lookAt = new GeoDataLookAt( m_widget->lookAt() ) ;
+    GeoDataLookAt *lookAt = new GeoDataLookAt( d->m_widget->lookAt() ) ;
+    lookAt->setLatitude( d->m_bookmarkCoordinate.latitude() );
+    lookAt->setLongitude( d->m_bookmarkCoordinate.longitude() );
     bookmark.setLookAt( lookAt );
 
-
-    mDebug()<<"Selected Folder for bookmark addition : "<<m_folders->currentText();
-    
-    m_widget->addBookmark( bookmark, m_folders->currentText() );
+    d->m_widget->addBookmark( bookmark, m_folders->currentText() );
 }
 
+}
 
 #include "BookmarkInfoDialog.moc"

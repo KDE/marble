@@ -24,6 +24,7 @@
 #include "routing/RoutingManager.h"
 #include "routing/RouteRequest.h"
 #include "MarbleRunnerManager.h"
+#include "BookmarkInfoDialog.h"
 
 // Qt
 #include <QtCore/QMimeData>
@@ -62,6 +63,7 @@ void MarbleWidgetPopupMenu::createActions()
     m_rmbMenu->addAction( tr( "Directions &from here" ), this, SLOT( directionsFromHere() ) );
     m_rmbMenu->addAction( tr( "Directions &to here" ), this, SLOT( directionsToHere() ) );
     m_rmbMenu->addSeparator();
+    m_rmbMenu->addAction( QIcon(":/icons/bookmark-new.png"), tr( "Add &Bookmark" ), this, SLOT( addBookmark() ) );
     m_setHomePointAction  = new QAction( tr( "&Set Home Location" ), this);
     m_rmbMenu->addAction( m_setHomePointAction );
     m_rmbMenu->addSeparator();
@@ -138,7 +140,7 @@ void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
     QMenu *positionMenu = m_lmbMenu->addMenu( GeoDataCoordinates( lon, lat, GeoDataCoordinates::Radian ).toString() );
     positionMenu->menuAction()->setFont( QFont( "Sans Serif", 7, 50, false ) );
     positionMenu->addAction( m_copyCoordinateAction );
-    positionMenu->addAction( "&Address Details", this, SLOT( startReverseGeocoding() ) );
+    positionMenu->addAction( tr( "&Address Details" ), this, SLOT( startReverseGeocoding() ) );
 
     m_lmbMenu->popup( m_widget->mapToGlobal( curpos ) );
 }
@@ -298,9 +300,18 @@ void MarbleWidgetPopupMenu::showAddressInformation(const GeoDataCoordinates &, c
 {
     QString text = placemark.address();
     if ( !text.isEmpty() ) {
-        QMessageBox::information( m_widget, "Address Details", text, QMessageBox::Ok );
+        QMessageBox::information( m_widget, tr( "Address Details" ), text, QMessageBox::Ok );
     }
 }
 
+void MarbleWidgetPopupMenu::addBookmark()
+{
+    GeoDataCoordinates coordinates;
+    if ( mouseCoordinates( &coordinates, m_setHomePointAction ) ) {
+        QPointer<BookmarkInfoDialog> dialog = new BookmarkInfoDialog( coordinates, m_widget );
+        dialog->exec();
+        delete dialog;
+    }
+}
 
 #include "MarbleWidgetPopupMenu.moc"

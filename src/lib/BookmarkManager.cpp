@@ -18,10 +18,12 @@
 #include "MarbleDebug.h"
 #include "MarbleDirs.h"
 #include <QtCore/QFile>
-using namespace Marble;
 
-BookmarkManager::BookmarkManager()
-     : d( new BookmarkManagerPrivate() )
+namespace Marble
+{
+
+BookmarkManager::BookmarkManager( QObject *parent )
+     : QObject( parent ), d( new BookmarkManagerPrivate() )
 {
 }
 
@@ -135,7 +137,7 @@ void BookmarkManager::removeAllBookmarks()
      updateBookmarkFile();
 }
 
-bool BookmarkManager::updateBookmarkFile() const
+bool BookmarkManager::updateBookmarkFile()
 {
     QString absoluteLocalFilePath = MarbleDirs::localPath()+ '/'+d->m_bookmarkFileRelativePath ;
 
@@ -167,9 +169,13 @@ bool BookmarkManager::updateBookmarkFile() const
             qWarning( "Could not write the file." );
             return false;
         }
+        emit bookmarksChanged();
         return true;
     }
     return false;
     
 }
 
+}
+
+#include "BookmarkManager.moc"
