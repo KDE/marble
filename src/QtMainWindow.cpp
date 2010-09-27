@@ -844,6 +844,8 @@ void MainWindow::readSettings()
          resize(settings.value("size", QSize(640, 480)).toSize());
          move(settings.value("pos", QPoint(200, 200)).toPoint());
          showFullScreen(settings.value("fullScreen", false ).toBool());
+         QByteArray sideBarState = settings.value( "sideBarState", QByteArray() ).toByteArray();
+         m_controlView->setSideBarState( sideBarState );
          if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
              showSideBar(settings.value("sideBar", false ).toBool());
          }
@@ -927,6 +929,7 @@ void MainWindow::writeSettings()
          settings.setValue( "pos", pos() );
          settings.setValue( "fullScreen", m_fullScreenAct->isChecked() );
          settings.setValue( "sideBar", m_sideBarAct->isChecked() );
+         settings.setValue( "sideBarState", m_controlView->sideBarState() );
          settings.setValue( "statusBar", m_statusBarAct->isChecked() );
          settings.setValue( "showClouds", m_showCloudsAct->isChecked() );
          settings.setValue( "workOffline", m_workOfflineAct->isChecked() );

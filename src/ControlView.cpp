@@ -408,6 +408,16 @@ void ControlView::printDrivingInstructions( QTextDocument &document, QString &te
 #endif
 }
 
+QByteArray ControlView::sideBarState() const
+{
+    return m_splitter ? m_splitter->saveState() : QByteArray();
+}
+
+bool ControlView::setSideBarState( const QByteArray &state )
+{
+    return m_splitter ? m_splitter->restoreState( state ) : false;
+}
+
 }
 
 #include "ControlView.moc"
