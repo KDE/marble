@@ -72,7 +72,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
         m_sunControlDialog( 0 ),
         m_timeControlDialog( 0 ),
         m_downloadRegionDialog( 0 ),
-        m_downloadRegionAction( 0 )
+        m_downloadRegionAction( 0 ),
+        m_osmEditAction( 0 )
 {
     setUpdatesEnabled( false );
 
@@ -104,6 +105,9 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
     createActions();
     createMenus();
     createStatusBar();
+
+    connect( m_controlView->marbleWidget(), SIGNAL( themeChanged( QString ) ),
+             this, SLOT( updateMapEditButtonVisibility( QString ) ) );
 
     setUpdatesEnabled( true );
 
@@ -159,6 +163,12 @@ void MainWindow::createActions()
      m_copyMapAct->setShortcut(tr("Ctrl+C"));
      m_copyMapAct->setStatusTip(tr("Copy a screenshot of the map"));
      connect(m_copyMapAct, SIGNAL(triggered()), this, SLOT(copyMap()));
+
+     m_osmEditAction = new QAction( tr( "&Edit Map" ), this );
+     m_osmEditAction->setShortcut(tr( "Ctrl+E" ) );
+     m_osmEditAction->setStatusTip(tr( "Edit the current map region in an external editor" ) );
+     updateMapEditButtonVisibility( m_controlView->marbleWidget()->mapThemeId() );
+     connect( m_osmEditAction, SIGNAL( triggered() ), m_controlView, SLOT( launchExternalMapEditor() ) );
 
      m_configDialogAct = new QAction( QIcon(":/icons/settings-configure.png"),tr("&Configure Marble"), this);
      m_configDialogAct->setStatusTip(tr("Show the configuration dialog"));
@@ -301,6 +311,7 @@ void MainWindow::createMenus()
     m_fileMenu = menuBar()->addMenu(tr("&Edit"));
     m_fileMenu->addAction(m_copyMapAct);
     m_fileMenu->addAction(m_copyCoordinatesAct);
+    m_fileMenu->addAction( m_osmEditAction );
 
     m_fileMenu = menuBar()->addMenu(tr("&View"));
 
@@ -857,6 +868,7 @@ void MainWindow::readSettings()
          showClouds(settings.value("showClouds", true ).toBool());
          workOffline(settings.value("workOffline", false ).toBool());
          showAtmosphere(settings.value("showAtmosphere", true ).toBool());
+         m_controlView->setExternalMapEditor( settings.value( "externalMapEditor", "" ).toString() );
      settings.endGroup();
 
      setUpdatesEnabled(false);
@@ -934,6 +946,7 @@ void MainWindow::writeSettings()
          settings.setValue( "showClouds", m_showCloudsAct->isChecked() );
          settings.setValue( "workOffline", m_workOfflineAct->isChecked() );
          settings.setValue( "showAtmosphere", m_showAtmosphereAct->isChecked() );
+         settings.setValue( "externalMapEditor", m_controlView->externalMapEditor() );
      settings.endGroup();
 
      settings.beginGroup( "MarbleWidget" );
@@ -1007,6 +1020,7 @@ void MainWindow::updateSettings()
     updateStatusBar();
 
     m_controlView->marbleWidget()->setAnimationsEnabled( m_configDialog->animateTargetVoyage() );
+    m_controlView->setExternalMapEditor( m_configDialog->externalMapEditor() );
 
     // Cache
     m_controlView->marbleWidget()->setPersistentTileCacheLimit( m_configDialog->persistentTileCacheLimit() * 1024 );
@@ -1118,6 +1132,13 @@ void MainWindow::showRoutingTab( bool enabled )
     m_controlView->marbleControl()->setCurrentLocationTabShown( false );
     m_controlView->marbleControl()->setRoutingTabShown( true );
     m_controlView->setSideBarShown( enabled );
+}
+
+
+void MainWindow::updateMapEditButtonVisibility( const QString &mapTheme )
+{
+    Q_ASSERT( m_osmEditAction );
+    m_osmEditAction->setVisible( mapTheme == "earth/openstreetmap/openstreetmap.dgml" );
 }
 
 #include "QtMainWindow.moc"

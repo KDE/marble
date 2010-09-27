@@ -280,7 +280,9 @@ void QtMarbleConfigDialog::readSettings()
     d->ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Checked );
     else
     d->ui_navigationSettings.kcfg_animateTargetVoyage->setCheckState( Qt::Unchecked );
-    
+    int editorIndex = externalMapEditor() == "merkaartor" ? 2 : externalMapEditor() == "josm" ? 1 : 0;
+    d->ui_navigationSettings.kcfg_externalEditor->setCurrentIndex( editorIndex );
+
     // Cache
     d->w_cacheSettings->kcfg_volatileTileCacheLimit->setValue( volatileTileCacheLimit() );
     d->w_cacheSettings->kcfg_persistentTileCacheLimit->setValue( persistentTileCacheLimit() );
@@ -407,6 +409,15 @@ void QtMarbleConfigDialog::writeSettings()
         d->m_settings->setValue( "animateTargetVoyage", true );
     else
         d->m_settings->setValue( "animateTargetVoyage", false );
+    if( d->ui_navigationSettings.kcfg_externalEditor->currentIndex() == 0 ) {
+        d->m_settings->setValue( "externalMapEditor", "" );
+    } else if( d->ui_navigationSettings.kcfg_externalEditor->currentIndex() == 1 ) {
+        d->m_settings->setValue( "externalMapEditor", "josm" );
+    } else if( d->ui_navigationSettings.kcfg_externalEditor->currentIndex() == 2 ) {
+        d->m_settings->setValue( "externalMapEditor", "merkaartor" );
+    } else {
+        Q_ASSERT( false && "Unexpected index of the external editor setting" );
+    }
     d->m_settings->endGroup();
     
     d->m_settings->beginGroup( "Cache" );
@@ -550,6 +561,11 @@ int QtMarbleConfigDialog::onStartup() const
     bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     int defaultValue = smallScreen ? Marble::LastLocationVisited : Marble::ShowHomeLocation;
     return d->m_settings->value( "Navigation/onStartup", defaultValue ).toInt();
+}
+
+QString QtMarbleConfigDialog::externalMapEditor() const
+{
+    return d->m_settings->value( "Navigation/externalMapEditor", "" ).toString();
 }
 
 bool QtMarbleConfigDialog::animateTargetVoyage() const

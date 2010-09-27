@@ -22,17 +22,29 @@
 #include <QtGui/QTextDocument>
 #include <QtCore/QPointer>
 #include <QtCore/QUrl>
+#include <QtGui/QDesktopServices>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkRequest>
+#include <QtCore/QProcess>
+#include <QtCore/QTimer>
+#include <QtCore/QUrl>
+#include <QtGui/QMessageBox>
 
 #include "GeoSceneDocument.h"
 #include "GeoSceneHead.h"
 #include "MarbleWidget.h"
+#include "MarbleDebug.h"
 #include "MarbleModel.h"
+#include "MarbleMap.h"
 #include "MapThemeManager.h"
 #include "PrintOptionsWidget.h"
 #include "ViewportParams.h"
+#include "ViewParams.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
 #include "routing/RouteRequest.h"
+#include "ExternalEditorDialog.h"
 
 namespace Marble
 {
@@ -406,6 +418,98 @@ void ControlView::printDrivingInstructions( QTextDocument &document, QString &te
     }
     text += "</table>";
 #endif
+}
+
+void ControlView::launchExternalMapEditor()
+{
+    QString editor = m_externalEditor;
+    if ( editor.isEmpty() ) {
+        QPointer<ExternalEditorDialog> dialog = new ExternalEditorDialog( this );
+        if( dialog->exec() == QDialog::Accepted ) {
+            editor = dialog->externalEditor();
+            if ( dialog->saveDefault() ) {
+                m_externalEditor = editor;
+            }
+        } else {
+            return;
+        }
+    }
+
+    if ( editor == "josm" )
+    {
+        // JOSM, the java based editor
+        synchronizeWithExternalMapEditor( editor, "--download=%1,%4,%3,%2" );
+    }
+    else if ( editor == "merkaartor" )
+    {
+        // Merkaartor, a Qt based editor
+        QString argument = "osm://download/load_and_zoom?top=%1&right=%2&bottom=%3&left=%4";
+        synchronizeWithExternalMapEditor( editor, argument );
+    }
+    else {
+        // Potlatch, the flash based editor running at the osm main website
+        QString url = "http://www.openstreetmap.org/edit?lat=%1&lon=%2&zoom=%3";
+        qreal lat = m_marbleWidget->centerLatitude();
+        qreal lon = m_marbleWidget->centerLongitude();
+        int zoom = m_marbleWidget->model()->tileZoomLevel();
+        url = url.arg( lat, 0, 'f', 8 ).arg( lon, 0, 'f', 8 ).arg( zoom );
+        QDesktopServices::openUrl( url );
+    }
+}
+
+void ControlView::synchronizeWithExternalMapEditor( const QString &application, const QString &argument )
+{
+    QTimer watchdog; // terminates network connection after a short timeout
+    watchdog.setSingleShot( true );
+    QEventLoop localEventLoop;
+    connect( &watchdog, SIGNAL( timeout() ), &localEventLoop, SLOT( quit() ) );
+    QNetworkAccessManager manager;
+    connect( &manager, SIGNAL( finished( QNetworkReply* ) ), &localEventLoop, SLOT( quit() ) );
+
+    // Wait at most two seconds for the local server to respond
+    QNetworkReply *reply = manager.get( QNetworkRequest( QUrl( "http://localhost:8111/") ) );
+    watchdog.start( 2000 );
+    localEventLoop.exec();
+
+    GeoDataLatLonAltBox box = m_marbleWidget->viewport()->viewLatLonAltBox();
+    qreal north = box.north( GeoDataCoordinates::Degree );
+    qreal east  = box.east( GeoDataCoordinates::Degree );
+    qreal south = box.south( GeoDataCoordinates::Degree );
+    qreal west  = box.west( GeoDataCoordinates::Degree );
+
+    if( watchdog.isActive() && reply->bytesAvailable() > 0 ) {
+        // The local server is alive. Tell it to download the current region
+        watchdog.stop();
+        QString serverUrl = "http://localhost:8111/load_and_zoom?top=%1&right=%2&bottom=%3&left=%4";
+        serverUrl = serverUrl.arg( north, 0, 'f', 8 ).arg( east, 0, 'f', 8 );
+        serverUrl = serverUrl.arg( south, 0, 'f', 8 ).arg( west, 0, 'f', 8 );
+        mDebug() << "Connecting to local server URL " << serverUrl;
+        manager.get( QNetworkRequest( QUrl( serverUrl ) ) );
+
+        // Give it five seconds to process the request
+        watchdog.start( 5000 );
+        localEventLoop.exec();
+    } else {
+        // The local server is not alive. Start the application
+        QString applicationArgument = argument.arg( north, 0, 'f', 8 ).arg( east, 0, 'f', 8 );
+        applicationArgument = applicationArgument.arg( south, 0, 'f', 8 ).arg( west, 0, 'f', 8 );
+        mDebug() << "No local server found. Launching " << application << " with argument " << applicationArgument;
+        if ( !QProcess::startDetached( application, QStringList() << applicationArgument ) ) {
+            QString text = tr( "Unable to start the external editor. Check that %1 is installed or choose a different external editor in the settings dialog." );
+            text = text.arg( application );
+            QMessageBox::warning( this, tr( "Cannot start external editor" ), text );
+        }
+    }
+}
+
+void ControlView::setExternalMapEditor( const QString &editor )
+{
+    m_externalEditor = editor;
+}
+
+QString ControlView::externalMapEditor() const
+{
+    return m_externalEditor;
 }
 
 QByteArray ControlView::sideBarState() const

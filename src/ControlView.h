@@ -71,6 +71,17 @@ class ControlView : public QWidget
       */
     QString defaultMapThemeId() const;
 
+    /**
+      * Returns the editor used to launch a map editor application
+      */
+    QString externalMapEditor() const;
+
+    /**
+      * Change the editor to launch via @see launchExternalMapEditor. Recognized values
+      * are 'potlatch', 'josm', 'merkaartor'
+      */
+    void setExternalMapEditor( const QString &editor );
+
  public slots:
     void setSideBarShown( bool );    
     void setNavigationTabShown( bool );
@@ -83,7 +94,20 @@ class ControlView : public QWidget
     void printPreview();
     void paintPrintPreview( QPrinter * printer );
 
+    /**
+      * Start the configured external map editor (or update it if it is already running)
+      */
+    void launchExternalMapEditor();
  private:
+    /**
+      * Try to reach an external application server at localhost:8111. If none is running,
+      * start the given application
+      * @param application Executable to start when no server is running
+      * @param argument Argument to set the download region for the external application.
+      * Use placeholders %1-%4 for the borders
+      */
+    void synchronizeWithExternalMapEditor( const QString &application, const QString &argument );
+
     void printMap( QTextDocument &document, QString &text, QPrinter *printer );
     void printLegend( QTextDocument &document, QString &text );
     void printRouteSummary( QTextDocument &document, QString &text );
@@ -94,6 +118,7 @@ class ControlView : public QWidget
     MarbleControlBox  *m_control;
     QSplitter         *m_splitter;
     MapThemeManager   *m_mapThemeManager;
+    QString            m_externalEditor;
 };
 
 }

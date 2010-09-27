@@ -53,6 +53,7 @@ class MARBLE_EXPORT QtMarbleConfigDialog : public QDialog
     int dragLocation() const;
     int onStartup() const;
     bool animateTargetVoyage() const;
+    QString externalMapEditor() const;
 
     // Cache Settings
     int volatileTileCacheLimit() const;

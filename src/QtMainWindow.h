@@ -76,7 +76,8 @@ class MainWindow : public QMainWindow
     // Edit Menu
     void  copyMap();
     void  copyCoordinates();
-    
+    void  updateMapEditButtonVisibility( const QString &mapTheme );
+
     // View Menu
     void  lockPosition( bool );
     void  createInfoBoxesMenu();
@@ -150,6 +151,7 @@ class MainWindow : public QMainWindow
     // Edit Menu
     QAction *m_copyMapAct;
     QAction *m_copyCoordinatesAct;
+    QAction *m_osmEditAction;
 
     // View Menu
     QAction *m_showCloudsAct;

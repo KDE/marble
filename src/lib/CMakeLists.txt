@@ -203,6 +203,7 @@ set(marblewidget_SRCS
     NewFolderInfoDialog.cpp
 
     PrintOptionsWidget.cpp
+    ExternalEditorDialog.cpp
 )
 
 set (marblewidget_UI
@@ -230,6 +231,7 @@ set (marblewidget_UI
     BookmarkInfoDialog.ui
     NameDialog.ui
     PrintOptions.ui
+    ExternalEditor.ui
 )
 
 # FIXME: cleaner approach of src/lib/MarbleControlBox.* vs. marble.qrc

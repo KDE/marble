@@ -42,5 +42,8 @@
         <file>icons/instruction-next.png</file>
         <file>icons/flag.png</file>
         <file>icons/gps.png</file>
+        <file>../data/editors/potlatch.png</file>
+        <file>../data/editors/merkaartor.png</file>
+        <file>../data/editors/josm.png</file>
     </qresource>
 </RCC>
