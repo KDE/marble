@@ -73,6 +73,7 @@ public:
     QString m_nextDescription;
     bool m_routeLeft;
     QMap<RoutingInstruction::TurnType,QPixmap> m_turnTypePixmaps;
+    PositionTracking* m_positionTracking;
 
     void importPlacemark( const GeoDataPlacemark *placemark );
 
@@ -88,7 +89,8 @@ RoutingModelPrivate::RoutingModelPrivate()
       m_nextInstructionIndex( 0 ),
       m_nextInstructionDistance( 0.0 ),
       m_currentInstructionLength( 0.0 ),
-      m_routeLeft( false )
+      m_routeLeft( false ),
+      m_positionTracking( 0 )
 {
     m_turnTypePixmaps[RoutingInstruction::Unknown] = QPixmap( MarbleDirs::path( "bitmaps/routing_step.png" ) );
     m_turnTypePixmaps[RoutingInstruction::Straight] = QPixmap( ":/data/bitmaps/turn-continue.png");
@@ -107,10 +109,12 @@ RoutingModelPrivate::RoutingModelPrivate()
 
 bool RoutingModelPrivate::deviatedFromRoute( const GeoDataCoordinates &position, const QVector<GeoDataCoordinates> &waypoints ) const
 {
-    /** @todo: It might make sense to take other factors into account here:
-      * Position accuracy, speed, transport type */
     /** @todo: Cache bounding box / expected next target for a quicker check */
-    qreal const threshold = 250.0 / EARTH_RADIUS;
+    qreal deviation = 0.0;
+    if ( m_positionTracking && m_positionTracking->accuracy().vertical > 0.0 ) {
+        deviation = qMax<qreal>( m_positionTracking->accuracy().vertical, m_positionTracking->accuracy().horizontal );
+    }
+    qreal const threshold = ( deviation + 100.0 ) / EARTH_RADIUS;
     foreach( const GeoDataCoordinates &coordinate, waypoints ) {
         if ( distanceSphere( position, coordinate ) < threshold ) {
             return false;
@@ -161,8 +165,8 @@ RoutingModel::RoutingModel( MarbleModel *model, QObject *parent ) :
 {
    if( model )
     {
-        PositionTracking *tracking = model->positionTracking();
-        QObject::connect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
+        d->m_positionTracking = model->positionTracking();
+        QObject::connect( d->m_positionTracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
                  this, SLOT( currentInstruction( GeoDataCoordinates, qreal ) ) );
     }
 }
