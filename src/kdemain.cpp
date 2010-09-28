@@ -93,7 +93,7 @@ int main ( int argc, char *argv[] )
                          ki18n( "Marble Python Bindings" ),
                          "simon@simonzone.com" );
     aboutData.addAuthor( ki18n( "Dennis Nienhüser" ),
-                         ki18n( "Navigator Float Item" ),
+                         ki18n( "Routing" ),
                          "earthwings@gentoo.org" );
     aboutData.addAuthor( ki18n( "Magnus Valle" ),
                          ki18n( "Historical Maps" ),
@@ -109,6 +109,18 @@ int main ( int argc, char *argv[] )
                          "marble@hardakers.net" );
 
     // Google Summer of Code
+    aboutData.addAuthor( ki18n( "Gaurav Gupta" ),
+                         ki18n( "Google Summer of Code 2010 Project:"
+                                " Bookmarks" ),
+                         "1989.gaurav@gmail.com" );
+    aboutData.addAuthor( ki18n( "Harshit Jain " ),
+                         ki18n( "Google Summer of Code 2010 Project:"
+                                " Time Support" ),
+                         "hjain.itbhu@gmail.com" );
+    aboutData.addAuthor( ki18n( "Siddharth Srivastava" ),
+                         ki18n( "Google Summer of Code 2010 Project:"
+                                " Turn-by-turn Navigation" ),
+                         "akssps011@gmail.com" );
     aboutData.addAuthor( ki18n( "Andrew Manson" ),
                          ki18n( "Google Summer of Code 2009 Project:"
                                 " OSM Annotation" ),
