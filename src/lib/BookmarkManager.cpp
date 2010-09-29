@@ -68,6 +68,7 @@ bool BookmarkManager::loadFile( const QString &relativeFilePath)
         Q_ASSERT( d->m_bookmarkDocument );
 
         file.close();
+        emit bookmarksChanged();
         return true;
     }
 
