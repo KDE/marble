@@ -419,7 +419,7 @@ void MainWindow::createOnlineServicesMenu()
 
 void MainWindow::createBookmarksListMenu( QMenu *m_bookmarksListMenu, const GeoDataFolder &folder )
 {
-    m_bookmarksListMenu->clear();
+    //m_bookmarksListMenu->clear();
 
     QVector<GeoDataPlacemark*> bookmarks = folder.placemarkList();
     QVector<GeoDataPlacemark*>::const_iterator i = bookmarks.constBegin();
@@ -464,19 +464,29 @@ void MainWindow::createFolderList()
     QVector<GeoDataFolder*>::const_iterator i = folders.constBegin();
     QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
 
-    for (; i != end; ++i ) {
-        QMenu *m_bookmarksListMenu = m_bookmarkMenu->addMenu( QIcon( ":/icons/folder-bookmark.png" ), (*i)->name() );
-
-        createBookmarksListMenu( m_bookmarksListMenu, *(*i) );
-        connect( m_bookmarksListMenu, SIGNAL( triggered ( QAction *) ),
+    if ( folders.size() == 1 ) {
+        createBookmarksListMenu( m_bookmarkMenu, *folders.first() );
+        connect( m_bookmarkMenu, SIGNAL( triggered ( QAction *) ),
                                   this, SLOT( lookAtBookmark( QAction *) ) );
     }
+    else {
+        for (; i != end; ++i ) {
+            QMenu *m_bookmarksListMenu = m_bookmarkMenu->addMenu( QIcon( ":/icons/folder-bookmark.png" ), (*i)->name() );
 
+            createBookmarksListMenu( m_bookmarksListMenu, *(*i) );
+            connect( m_bookmarksListMenu, SIGNAL( triggered ( QAction *) ),
+                                      this, SLOT( lookAtBookmark( QAction *) ) );
+        }
+    }
 }
 
 
 void MainWindow::lookAtBookmark( QAction *action)
 {
+    if ( action->data().isNull() ) {
+        return;
+    }
+
     GeoDataLookAt temp = qvariant_cast<GeoDataLookAt>( action->data() ) ;
     m_controlView->marbleWidget()->flyTo( temp ) ;
     mDebug() << " looking at bookmark having longitude : "<< temp.longitude(GeoDataCoordinates::Degree)
