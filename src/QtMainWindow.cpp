@@ -452,6 +452,8 @@ void MainWindow::createBookmarkMenu()
 
     m_bookmarkMenu->addSeparator();
 
+    m_bookmarkMenu->addAction( QIcon( ":/icons/go-home.png" ), "&Home",
+                               m_controlView->marbleWidget(), SLOT( goHome() ) );
     createFolderList();
 }
 
@@ -463,7 +465,7 @@ void MainWindow::createFolderList()
     QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
 
     for (; i != end; ++i ) {
-        QMenu *m_bookmarksListMenu = m_bookmarkMenu->addMenu( (*i)->name() );
+        QMenu *m_bookmarksListMenu = m_bookmarkMenu->addMenu( QIcon( ":/icons/folder-bookmark.png" ), (*i)->name() );
 
         createBookmarksListMenu( m_bookmarksListMenu, *(*i) );
         connect( m_bookmarksListMenu, SIGNAL( triggered ( QAction *) ),

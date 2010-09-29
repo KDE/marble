@@ -5,6 +5,7 @@
         <file>icons/arrow-left.png</file>
         <file>icons/arrow-right.png</file>
         <file>icons/arrow-up.png</file>
+        <file>icons/bookmarks.png</file>
         <file>icons/bookmark-add-folder.png</file>
         <file>icons/bookmark-edit.png</file>
         <file>icons/bookmark-new.png</file>
@@ -13,6 +14,7 @@
         <file>icons/document-print.png</file>
         <file>icons/document-save-as.png</file>
         <file>icons/edit-copy.png</file>
+        <file>icons/folder-bookmark.png</file>
         <file>icons/go-home.png</file>
         <file>icons/go-home-large.png</file>
         <file>icons/get-hot-new-stuff.png</file>
@@ -42,6 +44,7 @@
         <file>icons/instruction-next.png</file>
         <file>icons/flag.png</file>
         <file>icons/gps.png</file>
+        <file>icons/crosshairs.png</file>
         <file>../data/editors/potlatch.png</file>
         <file>../data/editors/merkaartor.png</file>
         <file>../data/editors/josm.png</file>

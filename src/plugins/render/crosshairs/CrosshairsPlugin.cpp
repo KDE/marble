@@ -56,7 +56,7 @@ QString CrosshairsPlugin::description() const
 
 QIcon CrosshairsPlugin::icon () const
 {
-    return QIcon();
+    return QIcon( ":/icons/crosshairs.png" );
 }
 
 void CrosshairsPlugin::initialize ()
