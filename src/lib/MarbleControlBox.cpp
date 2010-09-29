@@ -25,16 +25,15 @@
 
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
-#include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QCheckBox>
 #include "global.h"
 
 #include "CurrentLocationWidget.h"
+#include "FileViewWidget.h"
 #include "LegendWidget.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
-#include "FileViewModel.h"
 #include "MarblePlacemarkModel.h"
 #include "RoutingWidget.h"
 #include "MarbleRunnerManager.h"
@@ -51,7 +50,6 @@ using namespace Marble;
 #include "ui_NavigationWidget.h"
 #include "ui_MapViewWidget.h"
 #include "ui_CurrentLocationWidget.h"
-#include "ui_FileViewWidget.h"
 
 namespace Marble
 {
@@ -73,12 +71,10 @@ class MarbleControlBoxPrivate
 
     CurrentLocationWidget       *m_currentLocationWidget;
 
-    QWidget                     *m_fileViewWidget;
-    Ui::FileViewWidget          m_fileViewUi;
+    FileViewWidget              *m_fileViewWidget;
 
     QStandardItemModel     *m_mapThemeModel;
     QSortFilterProxyModel  *m_sortproxy;
-    QSortFilterProxyModel  *m_treeSortProxy;
     MapThemeSortFilterProxyModel *m_mapSortProxy;
 
     MarbleRunnerManager  *m_runnerManager;
@@ -122,8 +118,7 @@ MarbleControlBox::MarbleControlBox(QWidget *parent)
     }
     addItem( d->m_mapViewWidget, d->m_mapViewWidget->windowTitle() );
 
-    d->m_fileViewWidget = new QWidget( this );
-    d->m_fileViewUi.setupUi( d->m_fileViewWidget );
+    d->m_fileViewWidget = new FileViewWidget( this );
     addItem( d->m_fileViewWidget, d->m_fileViewWidget->windowTitle() );
 
     d->m_currentLocationWidget = new CurrentLocationWidget( this );
@@ -278,27 +273,7 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 //    FIXME: Why does this fail: "selection model works on a different model than the view..." ?
 //    d->m_navigationUi.locationListView->setSelectionModel( d->m_widget->placemarkSelectionModel() );
 
-    //set up everything for the FileModel
-    d->m_fileViewUi.m_fileView->setModel( widget->fileViewModel() );
-    delete d->m_fileViewUi.m_fileView->selectionModel();
-    d->m_fileViewUi.m_fileView->setSelectionModel(
-            widget->fileViewModel()->selectionModel());
-    connect( d->m_fileViewUi.m_fileView->selectionModel(),
-             SIGNAL( selectionChanged( QItemSelection, QItemSelection )),
-             this,
-             SLOT( enableFileViewActions() ) );
-    connect( d->m_fileViewUi.m_saveButton,  SIGNAL( clicked() ) ,
-             widget->fileViewModel(),       SLOT( saveFile() ) );
-    connect( d->m_fileViewUi.m_closeButton, SIGNAL( clicked() ) ,
-             widget->fileViewModel(),    SLOT( closeFile() ) );
-    d->m_treeSortProxy = new QSortFilterProxyModel(this);
-    d->m_treeSortProxy->setSourceModel( widget->model()->treeModel() );
-    d->m_treeSortProxy->setDynamicSortFilter( true );
-    d->m_fileViewUi.m_treeView->setModel( d->m_treeSortProxy );
-    d->m_fileViewUi.m_treeView->setSortingEnabled( true );
-    connect( d->m_fileViewUi.m_treeView, SIGNAL(activated(QModelIndex)),
-            this, SLOT(mapCenterOnTreeViewModel(QModelIndex)) );
-
+    d->m_fileViewWidget->setMarbleWidget( widget );
     d->m_legendWidget->setMarbleWidget( widget );
 
     // Connect necessary signals.
@@ -401,14 +376,6 @@ void MarbleControlBox::changeZoom(int zoom)
     d->m_navigationUi.zoomSlider->setMinimum( minimumZoom() );
 
     d->m_navigationUi.zoomSlider->blockSignals( false );
-}
-
-void MarbleControlBox::enableFileViewActions()
-{
-    bool tmp = d->m_fileViewUi.m_fileView->selectionModel()
-            ->selectedIndexes().count() ==1;
-    d->m_fileViewUi.m_saveButton->setEnabled( tmp );
-    d->m_fileViewUi.m_closeButton->setEnabled( tmp );
 }
 
 void MarbleControlBox::setNavigationTabShown( bool show )
@@ -610,19 +577,6 @@ void MarbleControlBox::projectionSelected( int projectionIndex )
 void MarbleControlBox::mapCenterOnSignal( const QModelIndex &index )
 {
     emit centerOn( d->m_sortproxy->mapToSource( index ), true );
-}
-
-void MarbleControlBox::mapCenterOnTreeViewModel( const QModelIndex &index )
-{
-    if (!index.isValid()) {
-        return;
-    }
-    GeoDataObject *object = static_cast<GeoDataObject*>(d->m_treeSortProxy->mapToSource(index).internalPointer());
-    if (dynamic_cast<GeoDataPlacemark*>(object))
-    {
-        GeoDataCoordinates coord = (dynamic_cast<GeoDataPlacemark*>(object))->coordinate();
-        d->m_widget->centerOn( coord, true );
-    }
 }
 
 void MarbleControlBox::adjustForAnimation()

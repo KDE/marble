@@ -187,7 +187,6 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
      * doesn't emit the zoomChanged signal.
      */
     void changeZoom( int zoom );
-    void enableFileViewActions();
 
     /**
      * @brief Control whether the Navigation tab is shown.
@@ -239,7 +238,6 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
 
     void updateButtons( int );
     void mapCenterOnSignal( const QModelIndex & );
-    void mapCenterOnTreeViewModel( const QModelIndex & );
 
     void adjustForAnimation();
     void adjustForStill();
