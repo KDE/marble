@@ -38,14 +38,27 @@ class PluginManagerPrivate
     {
     }
 
+    ~PluginManagerPrivate();
+
     void loadPlugins();
 
     bool m_pluginsLoaded;
-    QList<RenderPlugin *> m_renderPluginTemplates;
-    QList<NetworkPlugin *> m_networkPluginTemplates;
-    QList<PositionProviderPlugin *> m_positionProviderPluginTemplates;
-    QList<RunnerPlugin *> m_runnerPlugins;
+    QMap<QPluginLoader*, RenderPlugin *> m_renderPluginTemplates;
+    QMap<QPluginLoader*, NetworkPlugin *> m_networkPluginTemplates;
+    QMap<QPluginLoader*, PositionProviderPlugin *> m_positionProviderPluginTemplates;
+    QMap<QPluginLoader*, RunnerPlugin *> m_runnerPlugins;
 };
+
+PluginManagerPrivate::~PluginManagerPrivate()
+{
+    QMap<QPluginLoader*, RunnerPlugin *>::const_iterator i = m_runnerPlugins.constBegin();
+    for ( ; i != m_runnerPlugins.constEnd(); ++i ) {
+        i.key()->unload();
+        delete i.key();
+    }
+
+    /** @todo: unload other plugin types as well */
+}
 
 PluginManager::PluginManager( QObject *parent )
     : QObject(parent),
@@ -72,8 +85,8 @@ QList<AbstractFloatItem *> PluginManager::createFloatItems() const
 
     d->loadPlugins();
 
-    QList<RenderPlugin *>::const_iterator i = d->m_renderPluginTemplates.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = d->m_renderPluginTemplates.constEnd();
+    QMap<QPluginLoader*, RenderPlugin *>::const_iterator i = d->m_renderPluginTemplates.constBegin();
+    QMap<QPluginLoader*, RenderPlugin *>::const_iterator const end = d->m_renderPluginTemplates.constEnd();
     for (; i != end; ++i) {
         AbstractFloatItem * const floatItem = qobject_cast<AbstractFloatItem *>(*i);
         if ( floatItem ) {
@@ -91,8 +104,8 @@ QList<RenderPlugin *> PluginManager::createRenderPlugins() const
 
     d->loadPlugins();
 
-    QList<RenderPlugin *>::const_iterator i = d->m_renderPluginTemplates.constBegin();
-    QList<RenderPlugin *>::const_iterator const end = d->m_renderPluginTemplates.constEnd();
+    QMap<QPluginLoader*, RenderPlugin *>::const_iterator i = d->m_renderPluginTemplates.constBegin();
+    QMap<QPluginLoader*, RenderPlugin *>::const_iterator const end = d->m_renderPluginTemplates.constEnd();
     for (; i != end; ++i) {
         result.append( (*i)->pluginInstance() );
     }
@@ -105,8 +118,8 @@ QList<NetworkPlugin *> PluginManager::createNetworkPlugins() const
 
     d->loadPlugins();
 
-    QList<NetworkPlugin *>::const_iterator pos = d->m_networkPluginTemplates.constBegin();
-    QList<NetworkPlugin *>::const_iterator const end = d->m_networkPluginTemplates.constEnd();
+    QMap<QPluginLoader*, NetworkPlugin *>::const_iterator pos = d->m_networkPluginTemplates.constBegin();
+    QMap<QPluginLoader*, NetworkPlugin *>::const_iterator const end = d->m_networkPluginTemplates.constEnd();
     for (; pos != end; ++pos ) {
         result.append( (*pos)->newInstance() );
     }
@@ -119,8 +132,8 @@ QList<PositionProviderPlugin *> PluginManager::createPositionProviderPlugins() c
 
     d->loadPlugins();
 
-    QList<PositionProviderPlugin *>::const_iterator pos = d->m_positionProviderPluginTemplates.constBegin();
-    QList<PositionProviderPlugin *>::const_iterator const end = d->m_positionProviderPluginTemplates.constEnd();
+    QMap<QPluginLoader*, PositionProviderPlugin *>::const_iterator pos = d->m_positionProviderPluginTemplates.constBegin();
+    QMap<QPluginLoader*, PositionProviderPlugin *>::const_iterator const end = d->m_positionProviderPluginTemplates.constEnd();
     for (; pos != end; ++pos ) {
         result.append( (*pos)->newInstance() );
     }
@@ -130,20 +143,20 @@ QList<PositionProviderPlugin *> PluginManager::createPositionProviderPlugins() c
 QList<RunnerPlugin *> PluginManager::runnerPlugins() const
 {
     d->loadPlugins();
-    return d->m_runnerPlugins;
+    return d->m_runnerPlugins.values();
 }
 
 /** Append obj to the given plugins list if it inherits both T and U */
 template<class T, class U>
-bool appendPlugin( QObject * obj, const QString &fileName, QList<T*> &plugins )
+bool appendPlugin( QObject * obj, QPluginLoader* &loader, QMap<QPluginLoader*,T*> &plugins )
 {
     if ( qobject_cast<T*>( obj ) && qobject_cast<U*>( obj ) ) {
         Q_ASSERT( obj->metaObject()->superClass() ); // all our plugins have a super class
         mDebug() <<  obj->metaObject()->superClass()->className()
-                << "plugin loaded from" << MarbleDirs::pluginPath( fileName );
+                << "plugin loaded from" << loader->fileName();
         T* plugin = qobject_cast<T*>( obj );
         Q_ASSERT( plugin ); // checked above
-        plugins.append( plugin );
+        plugins[loader] = plugin;
         return true;
     }
 
@@ -178,26 +191,27 @@ void PluginManagerPrivate::loadPlugins()
 
     foreach( const QString &fileName, pluginFileNameList ) {
         // mDebug() << fileName << " - " << MarbleDirs::pluginPath( fileName );
-        QPluginLoader loader( MarbleDirs::pluginPath( fileName ) );
+        QString const path = MarbleDirs::pluginPath( fileName );
+        QPluginLoader* loader = new QPluginLoader( path );
 
-        QObject * obj = loader.instance();
+        QObject * obj = loader->instance();
 
         if ( obj ) {
             bool isPlugin = appendPlugin<RenderPlugin, RenderPluginInterface>
-                       ( obj, fileName, m_renderPluginTemplates );
+                       ( obj, loader, m_renderPluginTemplates );
             isPlugin = isPlugin || appendPlugin<NetworkPlugin, NetworkPluginInterface>
-                       ( obj, fileName, m_networkPluginTemplates );
+                       ( obj, loader, m_networkPluginTemplates );
             isPlugin = isPlugin || appendPlugin<PositionProviderPlugin, PositionProviderPluginInterface>
-                       ( obj, fileName, m_positionProviderPluginTemplates );
+                       ( obj, loader, m_positionProviderPluginTemplates );
             isPlugin = isPlugin || appendPlugin<RunnerPlugin, RunnerPlugin>
-                       ( obj, fileName, m_runnerPlugins ); // intentionally T==U
+                       ( obj, loader, m_runnerPlugins ); // intentionally T==U
             if ( !isPlugin ) {
                 mDebug() << "Plugin failure:" << fileName << "is a plugin, but it does not implement the "
                         << "right interfaces or it was compiled against an old version of Marble. Ignoring it.";
             }
         } else {
             mDebug() << "Plugin failure:" << fileName << "is not a valid Marble Plugin:"
-                     << loader.errorString();
+                     << loader->errorString();
         }
     }
 
