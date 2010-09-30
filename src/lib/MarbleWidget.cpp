@@ -1389,7 +1389,7 @@ bool MarbleWidget::loadBookmarkFile( const QString &relativeFileName )
     return d->m_model->bookmarkManager()->loadFile( relativeFileName );
 }
 
-QVector<GeoDataFolder*> MarbleWidget::folders()
+QVector<GeoDataFolder*> MarbleWidget::bookmarkFolders()
 {
     return d->m_model->bookmarkManager()->folders();
 }

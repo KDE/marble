@@ -67,7 +67,7 @@ void BookmarkInfoDialogPrivate::initialize( const GeoDataCoordinates &coordinate
 void BookmarkInfoDialogPrivate::initComboBox()
 {
     q->m_folders->clear();
-    QVector<GeoDataFolder*> folders =  m_widget->folders();
+    QVector<GeoDataFolder*> folders =  m_widget->bookmarkFolders();
     QVector<GeoDataFolder*>::const_iterator i = folders.constBegin();
     QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
 

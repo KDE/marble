@@ -580,7 +580,7 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
 
     bool loadBookmarkFile( const QString& relativeFileName);
 
-    QVector<GeoDataFolder*> folders();
+    QVector<GeoDataFolder*> bookmarkFolders();
     
     void removeAllBookmarks();
 

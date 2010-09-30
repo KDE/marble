@@ -824,7 +824,7 @@ void MarblePart::createFolderList()
 
     QList<QAction*> actionList;
 
-   QVector<GeoDataFolder*> folders = m_controlView->marbleWidget()->folders();
+   QVector<GeoDataFolder*> folders = m_controlView->marbleWidget()->bookmarkFolders();
    QVector<GeoDataFolder*>::const_iterator i = folders.constBegin();
    QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
 
