@@ -1,3 +1,17 @@
+//
+// This file is part of the Marble Desktop Globe.
+//
+// This program is free software licensed under the GNU LGPL. You can
+// find a copy of this license in LICENSE.txt in the top directory of
+// the source code.
+//
+// The code in this file is largely based on KDE's KLineEdit class
+// as included in KDE 4.5. See there for its authors:
+// http://api.kde.org/4.x-api/kdelibs-apidocs/kdeui/html/klineedit_8cpp.html
+//
+// Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
+//
+
 #include "RoutingLineEdit.h"
 
 #include <QtGui/QApplication>
