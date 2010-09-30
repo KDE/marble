@@ -13,6 +13,7 @@
 
 #include "GeoDataCoordinates.h"
 #include "GeoDataPlacemark.h"
+#include "PositionProviderPluginInterface.h"
 
 #include <QtGui/QWidget>
 
@@ -25,6 +26,7 @@ class RoutingInputWidgetPrivate;
 class MarblePlacemarkModel;
 class RouteRequest;
 class PluginManager;
+class MarbleMap;
 
 /**
   * Combines a line edit for input and a couple of buttons to let
@@ -39,7 +41,7 @@ class RoutingInputWidget : public QWidget
 public:
 
     /** Constructor */
-    explicit RoutingInputWidget( RouteRequest *request, int index, PluginManager* manager, QWidget *parent = 0 );
+    explicit RoutingInputWidget( MarbleMap* map, int index, QWidget *parent = 0 );
 
     /** Destructor */
     ~RoutingInputWidget();
@@ -104,6 +106,9 @@ public Q_SLOTS:
     /** Cancel a started input request from the map */
     void abortMapInputRequest();
 
+    /** Reload the bookmarks menu */
+    void reloadBookmarks();
+
 Q_SIGNALS:
     /** All runners are finished */
     void searchFinished( RoutingInputWidget * );
@@ -148,6 +153,17 @@ private Q_SLOTS:
     void reverseGeocoding();
 
     void retrieveReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark );
+
+    void setHomePosition();
+
+    void setCurrentLocation();
+
+    void updateCurrentLocationButton( PositionProviderStatus status );
+
+    void updateCenterButton( bool hasPosition );
+
+    void setBookmarkPosition( QAction* bookmark );
+
 private:
     RoutingInputWidgetPrivate *const d;
 };

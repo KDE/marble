@@ -15,13 +15,21 @@
 #include "MarbleRunnerManager.h"
 #include "RouteRequest.h"
 #include "TinyWebBrowser.h"
+#include "BookmarkManager.h"
+#include "MarbleModel.h"
+#include "MarbleMap.h"
+#include "routing/RoutingManager.h"
+#include "GeoDataFolder.h"
+#include "PositionTracking.h"
+#include "RoutingLineEdit.h"
 
 #include <QtCore/QTimer>
 #include <QtCore/QUrl>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QIcon>
-#include <QtGui/QLineEdit>
 #include <QtGui/QPushButton>
+#include <QtGui/QMenu>
+#include <QtGui/QToolButton>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
@@ -32,13 +40,13 @@ namespace Marble
 class RoutingInputWidgetPrivate
 {
 public:
-    QPushButton *m_stateButton;
+    MarbleModel* m_marbleModel;
 
-    QLineEdit *m_lineEdit;
+    MarbleMap* m_marbleMap;
 
-    QPushButton *m_removeButton;
+    RoutingLineEdit *m_lineEdit;
 
-    QPushButton *m_pickButton;
+    QToolButton *m_menuButton;
 
     MarbleRunnerManager *m_runnerManager;
 
@@ -58,56 +66,48 @@ public:
 
     int m_currentFrame;
 
+    QAction* m_bookmarkAction;
+
+    QAction* m_mapInput;
+
+    QAction* m_currentLocationAction;
+
+    QAction* m_centerAction;
+
     /** Constructor */
-    RoutingInputWidgetPrivate( RouteRequest *request, int index, PluginManager* manager, QWidget *parent );
+    RoutingInputWidgetPrivate( MarbleMap* map, int index, QWidget *parent );
 
     /** Initiate reverse geocoding request to download address */
     void adjustText();
+
+    QMenu* createMenu( RoutingInputWidget *parent );
+
+    QMenu* createBookmarkMenu( RoutingInputWidget *parent );
+
+    void createBookmarkActions( QMenu* menu, GeoDataFolder* bookmarksFolder, QObject *parent );
 };
 
-RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( RouteRequest *request, int index, PluginManager* manager, QWidget *parent ) :
-        m_lineEdit( 0 ), m_runnerManager( new MarbleRunnerManager( manager, parent ) ),
-        m_placemarkModel( 0 ), m_route( request ), m_index( index ),
-        m_manager( new QNetworkAccessManager( parent ) ), m_currentFrame( 0 )
+RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleMap* map, int index, QWidget *parent ) :
+        m_marbleModel( map->model() ), m_marbleMap( map ), m_lineEdit( 0 ),
+        m_runnerManager( new MarbleRunnerManager( m_marbleModel->pluginManager(), parent ) ),
+        m_placemarkModel( 0 ), m_route( m_marbleModel->routingManager()->routeRequest() ), m_index( index ),
+        m_manager( new QNetworkAccessManager( parent ) ), m_currentFrame( 0 ),
+        m_bookmarkAction( 0 ), m_mapInput( 0 ), m_currentLocationAction( 0 ),
+        m_centerAction( 0 )
 {
     bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     int const iconSize = smallScreen ? 32 : 16;
 
-    m_stateButton = new QPushButton( parent );
-    m_stateButton->setToolTip( QObject::tr( "Center Map here" ) );
-    m_stateButton->setVisible( false );
-    m_stateButton->setIcon( QIcon( m_route->pixmap( m_index ) ) );
-    m_stateButton->setFlat( true );
-    m_stateButton->setMaximumWidth( iconSize + 6 );
-    m_stateButton->setIconSize( QSize( iconSize, iconSize ) );
-    m_stateButton->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
+    m_menuButton = new QToolButton( parent );
+    m_menuButton->setIcon( QIcon( m_route->pixmap( m_index ) ) );
+    m_menuButton->setPopupMode( QToolButton::InstantPopup );
+    m_menuButton->setIconSize( QSize( iconSize, iconSize ) );
 
-    m_lineEdit = new QLineEdit( parent );
-
-    m_removeButton = new QPushButton( parent );
-    m_removeButton->setIcon( QIcon( ":/data/bitmaps/routing_remove.png" ) );
-    m_removeButton->setToolTip( QObject::tr( "Remove this position" ) );
-    m_removeButton->setFlat( true );
-    m_removeButton->setMaximumWidth( 22 );
-
-    m_pickButton = new QPushButton( parent );
-    m_pickButton->setIcon( QIcon( m_route->pixmap( m_index ) ) );
-    m_pickButton->setToolTip( QObject::tr( "Choose position from the map" ) );
-    m_pickButton->setCheckable( true );
-    m_pickButton->setFlat( true );
-    m_pickButton->setMaximumWidth( iconSize + 6 );
-    m_pickButton->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Fixed );
-    m_pickButton->setIconSize( QSize( iconSize, iconSize ) );
+    m_lineEdit = new RoutingLineEdit( parent );
 
     m_progressTimer.setInterval( 100 );
     m_nominatimTimer.setInterval( 1000 );
     m_nominatimTimer.setSingleShot( true );
-
-    GeoDataCoordinates pos = m_route->at( m_index );
-    if ( pos.longitude() != 0.0 && pos.latitude() != 0.0 ) {
-        m_pickButton->setVisible( false );
-        m_stateButton->setVisible( true );
-    }
 }
 
 void RoutingInputWidgetPrivate::adjustText()
@@ -115,25 +115,79 @@ void RoutingInputWidgetPrivate::adjustText()
     m_nominatimTimer.start();
 }
 
-RoutingInputWidget::RoutingInputWidget( RouteRequest *request, int index, PluginManager* manager, QWidget *parent ) :
-        QWidget( parent ), d( new RoutingInputWidgetPrivate( request, index, manager, this ) )
+QMenu* RoutingInputWidgetPrivate::createMenu( RoutingInputWidget *parent )
+{
+    QMenu* result = new QMenu( parent );
+
+    m_centerAction = result->addAction( QIcon( m_route->pixmap( m_index ) ), QObject::tr( "&Center Map here" ),
+                       parent, SLOT( requestActivity() ) );
+    result->addSeparator();
+
+    m_currentLocationAction = result->addAction( QIcon( ":/icons/gps.png" ), "Current &Location",
+                                                 parent, SLOT( setCurrentLocation() ) );
+    m_currentLocationAction->setEnabled( false );
+
+    m_mapInput = result->addAction( QIcon( ":/icons/crosshairs.png" ), QObject::tr( "From &Map..." ) );
+    m_mapInput->setCheckable( true );
+    QObject::connect( m_mapInput, SIGNAL( triggered( bool ) ), parent, SLOT( setMapInputModeEnabled( bool ) ) );
+
+    m_bookmarkAction = result->addAction( QIcon( ":/icons/bookmarks.png" ), QObject::tr( "From &Bookmark" ) );
+    m_bookmarkAction->setMenu( createBookmarkMenu( parent ) );
+    QObject::connect( m_lineEdit, SIGNAL( clearButtonClicked() ), parent, SLOT( requestRemoval() ) );
+    return result;
+}
+
+QMenu* RoutingInputWidgetPrivate::createBookmarkMenu( RoutingInputWidget *parent )
+{
+    QMenu* result = new QMenu( parent );
+    result->addAction( QIcon( ":/icons/go-home.png" ), "&Home", parent, SLOT( setHomePosition() ) );
+
+    QVector<GeoDataFolder*> folders = m_marbleModel->bookmarkManager()->folders();
+
+    if ( folders.size() == 1 ) {
+        createBookmarkActions( result, folders.first(), parent );
+    } else {
+        QVector<GeoDataFolder*>::const_iterator i = folders.constBegin();
+        QVector<GeoDataFolder*>::const_iterator end = folders.constEnd();
+
+        for (; i != end; ++i ) {
+            QMenu* menu = result->addMenu( QIcon( ":/icons/folder-bookmark.png" ), (*i)->name() );
+            createBookmarkActions( menu, *i, parent );
+        }
+    }
+
+    return result;
+}
+
+void RoutingInputWidgetPrivate::createBookmarkActions( QMenu* menu, GeoDataFolder* bookmarksFolder, QObject *parent )
+{
+    QVector<GeoDataPlacemark*> bookmarks = bookmarksFolder->placemarkList();
+    QVector<GeoDataPlacemark*>::const_iterator i = bookmarks.constBegin();
+    QVector<GeoDataPlacemark*>::const_iterator end = bookmarks.constEnd();
+
+    for (; i != end; ++i ) {
+        QAction *bookmarkAction = new QAction( (*i)->name(), parent );
+        bookmarkAction->setData( qVariantFromValue( (*i)->coordinate() ) );
+        menu->addAction( bookmarkAction );
+        QObject::connect( menu, SIGNAL( triggered( QAction* ) ), parent, SLOT( setBookmarkPosition( QAction* ) ) );
+    }
+}
+
+RoutingInputWidget::RoutingInputWidget( MarbleMap* map, int index, QWidget *parent ) :
+        QWidget( parent ), d( new RoutingInputWidgetPrivate( map, index, this ) )
 {
     QHBoxLayout *layout = new QHBoxLayout( this );
     layout->setSpacing( 0 );
     layout->setMargin( 0 );
 
-    layout->addWidget( d->m_pickButton );
-    layout->addWidget( d->m_stateButton );
+    layout->addWidget( d->m_menuButton );
     layout->addWidget( d->m_lineEdit );
-    layout->addWidget( d->m_removeButton );
+    d->m_menuButton->setMenu( d->createMenu( this ) );
 
-    connect( d->m_stateButton, SIGNAL( clicked() ),
-             this, SLOT( requestActivity() ) );
-    connect( d->m_pickButton, SIGNAL( clicked( bool ) ),
-             this, SLOT( setMapInputModeEnabled( bool ) ) );
-    connect( d->m_removeButton, SIGNAL( clicked() ),
-             this, SLOT( requestRemoval() ) );
-
+    connect( d->m_marbleModel->bookmarkManager(), SIGNAL( bookmarksChanged() ),
+             this, SLOT( reloadBookmarks() ) );
+    connect( d->m_marbleModel->positionTracking(), SIGNAL( statusChanged( PositionProviderStatus ) ),
+             this, SLOT( updateCurrentLocationButton( PositionProviderStatus ) ) );
     connect( d->m_runnerManager, SIGNAL( searchResultChanged( MarblePlacemarkModel * ) ),
              this, SLOT( setPlacemarkModel( MarblePlacemarkModel * ) ) );
     connect( d->m_runnerManager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark )),
@@ -146,10 +200,12 @@ RoutingInputWidget::RoutingInputWidget( RouteRequest *request, int index, Plugin
              this, SLOT( updateProgress() ) );
     connect( d->m_runnerManager, SIGNAL( searchFinished( QString ) ),
              this, SLOT( finishSearch() ) );
-    connect( request, SIGNAL( positionChanged( int, GeoDataCoordinates ) ),
+    connect( d->m_marbleModel->routingManager()->routeRequest(), SIGNAL( positionChanged( int, GeoDataCoordinates ) ),
              this, SLOT( updatePosition( int, GeoDataCoordinates ) ) );
     connect( &d->m_nominatimTimer, SIGNAL( timeout() ),
              this, SLOT( reverseGeocoding() ) );
+    connect( this, SIGNAL( targetValidityChanged( bool ) ), this, SLOT( updateCenterButton( bool ) ) );
+    updateCenterButton( hasTargetPosition() );
 
     d->adjustText();
 }
@@ -175,11 +231,8 @@ void RoutingInputWidget::setPlacemarkModel( MarblePlacemarkModel *model )
 
 void RoutingInputWidget::setTargetPosition( const GeoDataCoordinates &position )
 {
-    d->m_pickButton->setVisible( false );
     d->m_route->setPosition( d->m_index, position );
     d->m_progressTimer.stop();
-    d->m_stateButton->setVisible( true );
-    d->m_stateButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
     emit targetValidityChanged( true );
 }
 
@@ -200,8 +253,6 @@ void RoutingInputWidget::findPlacemarks()
     if ( text.isEmpty() ) {
         setInvalid();
     } else {
-        d->m_pickButton->setVisible( false );
-        d->m_stateButton->setVisible( true );
         d->m_progressTimer.start();
         d->m_runnerManager->findPlacemarks( text );
     }
@@ -239,17 +290,14 @@ void RoutingInputWidget::updateProgress()
     if ( !d->m_progressAnimation.isEmpty() ) {
         d->m_currentFrame = ( d->m_currentFrame + 1 ) % d->m_progressAnimation.size();
         QIcon frame = d->m_progressAnimation[d->m_currentFrame];
-        d->m_stateButton->setIcon( frame );
+        d->m_menuButton->setIcon( frame );
     }
 }
 
 void RoutingInputWidget::finishSearch()
 {
     d->m_progressTimer.stop();
-    d->m_stateButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
-    d->m_pickButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
-    d->m_pickButton->setVisible( false );
-    d->m_stateButton->setVisible( true );
+    d->m_menuButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
     emit searchFinished( this );
 }
 
@@ -261,24 +309,19 @@ void RoutingInputWidget::setInvalid()
 
 void RoutingInputWidget::abortMapInputRequest()
 {
-    d->m_pickButton->setChecked( false );
+    d->m_mapInput->setChecked( false );
 }
 
 void RoutingInputWidget::setIndex( int index )
 {
     d->m_index = index;
-    d->m_stateButton->setVisible( hasTargetPosition() );
-    d->m_stateButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
-    d->m_pickButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
+    d->m_menuButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
 }
 
 void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates & )
 {
     if ( index == d->m_index ) {
-        d->m_stateButton->setVisible( hasTargetPosition() );
-        d->m_stateButton->setIcon( d->m_route->pixmap( d->m_index ) );
-        d->m_pickButton->setVisible( !hasTargetPosition() );
-        d->m_pickButton->setIcon( d->m_route->pixmap( d->m_index ) );
+        d->m_menuButton->setIcon( d->m_route->pixmap( d->m_index ) );
         emit targetValidityChanged( hasTargetPosition() );
         d->adjustText();
     }
@@ -293,10 +336,7 @@ void RoutingInputWidget::clear()
 {
     d->m_nominatimTimer.stop();
     d->m_progressTimer.stop();
-    d->m_pickButton->setChecked( false );
-    d->m_pickButton->setVisible( true );
-    d->m_stateButton->setVisible( false );
-    d->m_stateButton->setIcon( d->m_route->pixmap( d->m_index ) );
+    d->m_menuButton->setIcon( d->m_route->pixmap( d->m_index ) );
     d->m_route->setPosition( d->m_index, GeoDataCoordinates() );
     d->m_lineEdit->clear();
     emit targetValidityChanged( false );
@@ -312,6 +352,45 @@ void RoutingInputWidget::retrieveReverseGeocodingResult( const GeoDataCoordinate
 void RoutingInputWidget::setProgressAnimation( const QVector<QIcon> &animation )
 {
     d->m_progressAnimation = animation;
+}
+
+void RoutingInputWidget::reloadBookmarks()
+{
+    d->m_bookmarkAction->setMenu( d->createBookmarkMenu( this ) );
+}
+
+void RoutingInputWidget::setHomePosition()
+{
+    qreal lon( 0.0 ), lat( 0.0 );
+    int zoom( 0 );
+    d->m_marbleMap->home( lon, lat, zoom );
+    GeoDataCoordinates home( lon, lat, 0.0, GeoDataCoordinates::Degree );
+    setTargetPosition( home );
+    requestActivity();
+}
+
+void RoutingInputWidget::updateCurrentLocationButton( PositionProviderStatus status )
+{
+    d->m_currentLocationAction->setEnabled( status == PositionProviderStatusAvailable );
+}
+
+void RoutingInputWidget::setCurrentLocation()
+{
+    setTargetPosition( d->m_marbleModel->positionTracking()->currentLocation() );
+    requestActivity();
+}
+
+void RoutingInputWidget::updateCenterButton( bool hasPosition )
+{
+    d->m_centerAction->setEnabled( hasPosition );
+}
+
+void RoutingInputWidget::setBookmarkPosition( QAction* bookmark )
+{
+    if ( !bookmark->data().isNull() ) {
+        setTargetPosition( qVariantValue<GeoDataCoordinates>( bookmark->data() ) );
+        requestActivity();
+    }
 }
 
 } // namespace Marble
