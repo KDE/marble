@@ -17,7 +17,7 @@
 #include "TinyWebBrowser.h"
 #include "BookmarkManager.h"
 #include "MarbleModel.h"
-#include "MarbleMap.h"
+#include "MarbleWidget.h"
 #include "routing/RoutingManager.h"
 #include "GeoDataFolder.h"
 #include "PositionTracking.h"
@@ -42,7 +42,7 @@ class RoutingInputWidgetPrivate
 public:
     MarbleModel* m_marbleModel;
 
-    MarbleMap* m_marbleMap;
+    MarbleWidget* m_marbleWidget;
 
     RoutingLineEdit *m_lineEdit;
 
@@ -75,7 +75,7 @@ public:
     QAction* m_centerAction;
 
     /** Constructor */
-    RoutingInputWidgetPrivate( MarbleMap* map, int index, QWidget *parent );
+    RoutingInputWidgetPrivate( MarbleWidget* widget, int index, QWidget *parent );
 
     /** Initiate reverse geocoding request to download address */
     void adjustText();
@@ -87,8 +87,8 @@ public:
     void createBookmarkActions( QMenu* menu, GeoDataFolder* bookmarksFolder, QObject *parent );
 };
 
-RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleMap* map, int index, QWidget *parent ) :
-        m_marbleModel( map->model() ), m_marbleMap( map ), m_lineEdit( 0 ),
+RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleWidget* widget, int index, QWidget *parent ) :
+        m_marbleModel( widget->model() ), m_marbleWidget( widget ), m_lineEdit( 0 ),
         m_runnerManager( new MarbleRunnerManager( m_marbleModel->pluginManager(), parent ) ),
         m_placemarkModel( 0 ), m_route( m_marbleModel->routingManager()->routeRequest() ), m_index( index ),
         m_manager( new QNetworkAccessManager( parent ) ), m_currentFrame( 0 ),
@@ -173,8 +173,8 @@ void RoutingInputWidgetPrivate::createBookmarkActions( QMenu* menu, GeoDataFolde
     }
 }
 
-RoutingInputWidget::RoutingInputWidget( MarbleMap* map, int index, QWidget *parent ) :
-        QWidget( parent ), d( new RoutingInputWidgetPrivate( map, index, this ) )
+RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget *parent ) :
+        QWidget( parent ), d( new RoutingInputWidgetPrivate( widget, index, this ) )
 {
     QHBoxLayout *layout = new QHBoxLayout( this );
     layout->setSpacing( 0 );

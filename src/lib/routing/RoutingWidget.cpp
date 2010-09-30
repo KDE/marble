@@ -376,7 +376,7 @@ void RoutingWidget::addInputWidget()
 void RoutingWidget::insertInputWidget( int index )
 {
     if ( index >= 0 && index <= d->m_inputWidgets.size() ) {
-        RoutingInputWidget *input = new RoutingInputWidget( d->m_widget->map(), index, this );
+        RoutingInputWidget *input = new RoutingInputWidget( d->m_widget, index, this );
         input->setProgressAnimation( d->m_progressAnimation );
         input->setWorkOffline( d->m_workOffline );
         d->m_inputWidgets.insert( index, input );

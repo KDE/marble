@@ -26,7 +26,7 @@ class RoutingInputWidgetPrivate;
 class MarblePlacemarkModel;
 class RouteRequest;
 class PluginManager;
-class MarbleMap;
+class MarbleWidget;
 
 /**
   * Combines a line edit for input and a couple of buttons to let
@@ -41,7 +41,7 @@ class RoutingInputWidget : public QWidget
 public:
 
     /** Constructor */
-    explicit RoutingInputWidget( MarbleMap* map, int index, QWidget *parent = 0 );
+    explicit RoutingInputWidget( MarbleWidget* widget, int index, QWidget *parent = 0 );
 
     /** Destructor */
     ~RoutingInputWidget();
