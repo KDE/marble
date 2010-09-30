@@ -72,9 +72,6 @@ MarbleMapPrivate::MarbleMapPrivate( MarbleMap *parent )
 
 void MarbleMapPrivate::construct()
 {
-    // Some point that tackat defined. :-)
-    m_parent->setHome( -9.4, 54.8, 1050 );
-
     m_parent->connect( m_model, SIGNAL( themeChanged( QString ) ),
                        m_parent, SIGNAL( themeChanged( QString ) ) );
     m_parent->connect( m_model, SIGNAL( modelChanged() ),
@@ -788,24 +785,6 @@ void MarbleMap::setProjection( Projection projection )
     emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
-void MarbleMap::home( qreal &lon, qreal &lat, int& zoom )
-{
-    d->m_homePoint.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
-    zoom = d->m_homeZoom;
-}
-
-void MarbleMap::setHome( qreal lon, qreal lat, int zoom )
-{
-    d->m_homePoint = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree );
-    d->m_homeZoom = zoom;
-}
-
-void MarbleMap::setHome( const GeoDataCoordinates& homePoint, int zoom )
-{
-    d->m_homePoint = homePoint;
-    d->m_homeZoom = zoom;
-}
-
 
 void MarbleMap::moveLeft()
 {
@@ -903,11 +882,12 @@ void MarbleMap::goHome()
 {
     qreal  homeLon = 0;
     qreal  homeLat = 0;
-    d->m_homePoint.geoCoordinates( homeLon, homeLat );
+    int homeZoom = 1050;
+    d->m_model->home( homeLon, homeLat, homeZoom );
 
     centerOn( homeLon * RAD2DEG, homeLat * RAD2DEG );
 
-    zoomView( d->m_homeZoom ); // default 1050
+    zoomView( homeZoom ); // default 1050
 }
 
 QString MarbleMap::mapThemeId() const

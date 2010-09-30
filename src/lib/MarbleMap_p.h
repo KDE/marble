@@ -62,10 +62,6 @@ class MarbleMapPrivate
     bool             m_justModified; // FIXME: Rename to isDirty
     bool             m_dirtyAtmosphere;
 
-    // The home position
-    GeoDataCoordinates     m_homePoint;
-    int              m_homeZoom;
-
     // zoom related
     int              m_logzoom;
     int              m_zoomStep;

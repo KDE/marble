@@ -92,6 +92,8 @@ class MarbleModelPrivate
           m_dataFacade( 0 ),
           m_pluginManager( new PluginManager( parent ) ),
           m_mapThemeManager( new MapThemeManager( parent )),
+          m_homePoint( -9.4, 54.8 ),  // Some point that tackat defined. :-)
+          m_homeZoom( 1050 ),
           m_mapTheme( 0 ),
           m_layerManager( 0 ),
           m_downloadManager( new HttpDownloadManager( new FileStoragePolicy(
@@ -130,6 +132,10 @@ class MarbleModelPrivate
 
     PluginManager           *m_pluginManager;
     MapThemeManager         *m_mapThemeManager;
+
+    // The home position
+    GeoDataCoordinates       m_homePoint;
+    int                      m_homeZoom;
 
     // View and paint stuff
     GeoSceneDocument        *m_mapTheme;
@@ -557,6 +563,24 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     d->m_layerManager->syncViewParamsAndPlugins( mapTheme );
 
     d->notifyModelChanged();
+}
+
+void MarbleModel::home( qreal &lon, qreal &lat, int& zoom )
+{
+    d->m_homePoint.geoCoordinates( lon, lat, GeoDataCoordinates::Degree );
+    zoom = d->m_homeZoom;
+}
+
+void MarbleModel::setHome( qreal lon, qreal lat, int zoom )
+{
+    d->m_homePoint = GeoDataCoordinates( lon, lat, 0, GeoDataCoordinates::Degree );
+    d->m_homeZoom = zoom;
+}
+
+void MarbleModel::setHome( const GeoDataCoordinates& homePoint, int zoom )
+{
+    d->m_homePoint = homePoint;
+    d->m_homeZoom = zoom;
 }
 
 void MarbleModel::setupTextureMapper( Projection projection )

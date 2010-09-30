@@ -16,3 +16,5 @@
 
 * From MarbleWidget remove setProxy(), proxyHost(), proxyPort(), user(), password().
   These methods haven't been meaningful to MarbleWidget and have been commented to be removed a long time ago.
+
+* Move MarbleMap::home(...) and MarbleMap::setHome(...) to MarbleModel.

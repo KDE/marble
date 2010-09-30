@@ -363,7 +363,7 @@ void RoutingInputWidget::setHomePosition()
 {
     qreal lon( 0.0 ), lat( 0.0 );
     int zoom( 0 );
-    d->m_marbleMap->home( lon, lat, zoom );
+    d->m_marbleModel->home( lon, lat, zoom );
     GeoDataCoordinates home( lon, lat, 0.0, GeoDataCoordinates::Degree );
     setTargetPosition( home );
     requestActivity();

@@ -667,17 +667,17 @@ void MarbleWidget::setProjection( int projection )
 
 void MarbleWidget::home( qreal &lon, qreal &lat, int& zoom )
 {
-    d->m_map->home( lon, lat, zoom );
+    d->m_model->home( lon, lat, zoom );
 }
 
 void MarbleWidget::setHome( qreal lon, qreal lat, int zoom )
 {
-    d->m_map->setHome( lon, lat, zoom );
+    d->m_model->setHome( lon, lat, zoom );
 }
 
 void MarbleWidget::setHome( const GeoDataCoordinates& homePoint, int zoom )
 {
-    d->m_map->setHome( homePoint, zoom );
+    d->m_model->setHome( homePoint, zoom );
 }
 
 
@@ -860,7 +860,7 @@ void MarbleWidget::goHome( FlyToMode mode )
         qreal  homeLon = 0;
         qreal  homeLat = 0;
         int homeZoom = 0;
-        d->m_map->home( homeLon, homeLat, homeZoom );
+        d->m_model->home( homeLon, homeLat, homeZoom );
 
         GeoDataLookAt target;
         target.setLongitude( homeLon, GeoDataCoordinates::Degree );

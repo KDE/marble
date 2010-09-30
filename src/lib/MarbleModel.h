@@ -68,6 +68,7 @@ class MergedLayerDecorator;
 class RenderPlugin;
 class PluginManager;
 class AbstractFloatItem;
+class GeoDataCoordinates;
 class GeoDataDocument;
 class GeoSceneDocument;
 class GeoSceneTexture;
@@ -183,6 +184,27 @@ class MARBLE_EXPORT MarbleModel : public QObject
      */
     void setMapTheme( GeoSceneDocument* mapTheme,
                       Projection currentProjection );
+
+    /**
+     * @brief  get the home point
+     * @param  lon  the longitude of the home point.
+     * @param  lat  the latitude of the home point.
+     * @param  zoom the default zoom level of the home point.
+     */
+    void home( qreal &lon, qreal &lat, int& zoom );
+    /**
+     * @brief  Set the home point
+     * @param  lon  the longitude of the new home point.
+     * @param  lat  the latitude of the new home point.
+     * @param  zoom the default zoom level for the new home point.
+     */
+    void setHome( qreal lon, qreal lat, int zoom = 1050 );
+    /**
+     * @brief  Set the home point
+     * @param  homePoint  the new home point.
+     * @param  zoom       the default zoom level for the new home point.
+     */
+    void setHome( const GeoDataCoordinates& homePoint, int zoom = 1050 );
 
     /**
      * @brief  Set the Projection used for the map
