@@ -34,6 +34,8 @@ public:
 
     MonavPluginPrivate();
 
+    ~MonavPluginPrivate();
+
     bool startDaemon();
 
     void stopDaemon();
@@ -44,6 +46,11 @@ public:
 MonavPluginPrivate::MonavPluginPrivate() : m_ownsServer( false )
 {
     // nothing to do
+}
+
+MonavPluginPrivate::~MonavPluginPrivate()
+{
+    stopDaemon();
 }
 
 bool MonavPluginPrivate::isDaemonRunning() const
