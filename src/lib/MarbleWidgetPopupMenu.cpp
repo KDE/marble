@@ -43,6 +43,7 @@ MarbleWidgetPopupMenu::MarbleWidgetPopupMenu(MarbleWidget *widget,
       m_widget(widget),
       m_lmbMenu( new QMenu( m_widget ) ),
       m_rmbMenu( new QMenu( m_widget ) ),
+      m_smallScreenMenu( new QMenu( m_widget ) ),
       m_runnerManager( 0 )
 {
     connect( m_lmbMenu, SIGNAL( triggered( QAction* ) ),
@@ -59,37 +60,56 @@ void MarbleWidgetPopupMenu::createActions()
     m_copyCoordinateAction = new QAction( tr( "0 N 0 W" ), this );
 
     //	Tool actions (Right mouse button)
-    m_rmbExtensionPoint = m_rmbMenu->addSeparator();
-    m_rmbMenu->addAction( tr( "Directions &from here" ), this, SLOT( directionsFromHere() ) );
-    m_rmbMenu->addAction( tr( "Directions &to here" ), this, SLOT( directionsToHere() ) );
-    m_rmbMenu->addSeparator();
-    m_rmbMenu->addAction( QIcon(":/icons/bookmark-new.png"), tr( "Add &Bookmark" ), this, SLOT( addBookmark() ) );
+    QAction* fromHere = new QAction( tr( "Directions &from here" ), this );
+    QAction* toHere = new QAction( tr( "Directions &to here" ), this );
     m_setHomePointAction  = new QAction( tr( "&Set Home Location" ), this);
-    m_rmbMenu->addAction( m_setHomePointAction );
-    m_rmbMenu->addSeparator();
-    
-    QAction *reloadAction  = new QAction( tr( "Rel&oad Map" ), this);
-    m_rmbMenu->addAction( reloadAction );
-    m_rmbMenu->addSeparator();    
+    QAction* addBookmark = new QAction( QIcon(":/icons/bookmark-new.png"),
+                                        tr( "Add &Bookmark" ), this );
 
+    QAction *reloadAction  = new QAction( tr( "Rel&oad Map" ), this);
     m_aboutDialogAction = new QAction( tr( "&About" ), this );
+
+    m_rmbExtensionPoint = m_rmbMenu->addSeparator();
+    m_rmbMenu->addAction( fromHere );
+    m_rmbMenu->addAction( toHere );
+    m_rmbMenu->addSeparator();
+    m_rmbMenu->addAction( m_setHomePointAction );
+    m_rmbMenu->addAction( addBookmark );
+    m_rmbMenu->addSeparator();
+    m_rmbMenu->addAction( reloadAction );
+    m_rmbMenu->addSeparator();
     m_rmbMenu->addAction( m_aboutDialogAction );
 
-    connect( m_setHomePointAction,    SIGNAL( triggered() ),
-                                       SLOT( slotSetHomePoint() ) );
-    connect( m_aboutDialogAction, SIGNAL( triggered() ), 
-                                   SLOT( slotAboutDialog() ) );
-    connect( m_copyCoordinateAction,SIGNAL( triggered() ),
-                         SLOT( slotCopyCoordinates() ) );
+    m_smallScreenMenu->addAction( fromHere );
+    m_smallScreenMenu->addAction( toHere );
+    m_smallScreenMenu->addSeparator();
+    m_smallScreenMenu->addAction( m_setHomePointAction );
+    m_smallScreenMenu->addAction( addBookmark );
+    m_smallScreenMenu->addSeparator();
+    m_smallScreenMenu->addAction( reloadAction );
+    m_smallScreenMenu->addSeparator();
+
+    connect( fromHere, SIGNAL( triggered( ) ), SLOT( directionsFromHere() ) );
+    connect( toHere, SIGNAL( triggered( ) ), SLOT( directionsToHere() ) );
+    connect( m_setHomePointAction, SIGNAL( triggered() ), SLOT( slotSetHomePoint() ) );
+    connect( addBookmark, SIGNAL( triggered( ) ), SLOT( addBookmark() ) );
+    connect( m_aboutDialogAction, SIGNAL( triggered() ), SLOT( slotAboutDialog() ) );
+    connect( m_copyCoordinateAction,SIGNAL( triggered() ), SLOT( slotCopyCoordinates() ) );
     connect( reloadAction, SIGNAL(triggered()), m_widget, SLOT(reloadMap()));
 }
 
 
 void MarbleWidgetPopupMenu::showLmbMenu( int xpos, int ypos )
 {
-    m_lmbMenu->clear();
-
     QPoint  curpos = QPoint( xpos, ypos ); 
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( smallScreen ) {
+        m_setHomePointAction->setData( curpos );
+        m_smallScreenMenu->popup( m_widget->mapToGlobal( curpos ) );
+        return;
+    }
+
+    m_lmbMenu->clear();
     m_featurelist = m_model->whichFeatureAt( curpos );
 
     int  actionidx = 1;

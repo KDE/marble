@@ -86,6 +86,7 @@ private Q_SLOTS:
 
     QMenu    *m_lmbMenu;
     QMenu    *m_rmbMenu;
+    QMenu    *m_smallScreenMenu;
     QAction  *m_planetAction;	
 
     QAction  *m_copyCoordinateAction;
