@@ -35,6 +35,9 @@ public:
     // Overriding MarbleAbstractRunner
     virtual void retrieveRoute( RouteRequest *request );
 
+    // Overriding MarbleAbstractRunner
+    void reverseGeocoding( const GeoDataCoordinates &coordinates );
+
 private:
     MonavRunnerPrivate* const d;
 };
