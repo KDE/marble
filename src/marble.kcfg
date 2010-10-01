@@ -174,6 +174,9 @@
    <label>Display animation on voyage to target.</label>
    <default>false</default>
   </entry>
+  <entry key="externalEditor" type="String" >
+   <label>The external OpenStreetMap editor application</label>
+  </entry>
  </group>
  <group name="Cache" >
   <entry key="volatileTileCacheLimit" type="Int" >
