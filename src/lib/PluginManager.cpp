@@ -47,17 +47,26 @@ class PluginManagerPrivate
     QMap<QPluginLoader*, NetworkPlugin *> m_networkPluginTemplates;
     QMap<QPluginLoader*, PositionProviderPlugin *> m_positionProviderPluginTemplates;
     QMap<QPluginLoader*, RunnerPlugin *> m_runnerPlugins;
+
+private:
+    void cleanup( const QList<QPluginLoader*> loaders );
 };
 
 PluginManagerPrivate::~PluginManagerPrivate()
 {
     QMap<QPluginLoader*, RunnerPlugin *>::const_iterator i = m_runnerPlugins.constBegin();
-    for ( ; i != m_runnerPlugins.constEnd(); ++i ) {
-        i.key()->unload();
-        delete i.key();
-    }
+    cleanup( m_renderPluginTemplates.keys() );
+    cleanup( m_networkPluginTemplates.keys() );
+    cleanup( m_positionProviderPluginTemplates.keys() );
+    cleanup( m_runnerPlugins.keys() );
+}
 
-    /** @todo: unload other plugin types as well */
+void PluginManagerPrivate::cleanup( const QList<QPluginLoader*> loaders )
+{
+    foreach( QPluginLoader* loader, loaders ) {
+        loader->unload();
+        delete loader;
+    }
 }
 
 PluginManager::PluginManager( QObject *parent )
@@ -68,14 +77,6 @@ PluginManager::PluginManager( QObject *parent )
 
 PluginManager::~PluginManager()
 {
-    // The plugin instances returned by QPluginLoader are shared by all QPluginLoaders.
-    // If more than one MarbleWidget is used, deleting them here leads to dangling
-    // pointers and double deletions in the other PluginManagers.
-    // TODO: According to QPluginLoader::unload deletion happens automatically on application
-    // termination, but it should be checked that this really is the case (and remove this TODO)
-    // qDeleteAll( d->m_renderPluginTemplates );
-    // qDeleteAll( d->m_networkPluginTemplates );
-    // qDeleteAll( d->m_positionProviderPluginTemplates );
     delete d;
 }
 
@@ -91,53 +92,39 @@ QList<AbstractFloatItem *> PluginManager::createFloatItems() const
         AbstractFloatItem * const floatItem = qobject_cast<AbstractFloatItem *>(*i);
         if ( floatItem ) {
             floatItemList.append( qobject_cast<AbstractFloatItem *>( floatItem->
-                                                                     pluginInstance() ));
+                                                                     newInstance() ));
         }
     }
 
     return floatItemList;
 }
 
-QList<RenderPlugin *> PluginManager::createRenderPlugins() const
+template<class T>
+QList<T*> createPlugins( PluginManagerPrivate* d, const QMap<QPluginLoader*, T*> &loaders )
 {
-    QList<RenderPlugin *> result;
-
+    QList<T*> result;
     d->loadPlugins();
-
-    QMap<QPluginLoader*, RenderPlugin *>::const_iterator i = d->m_renderPluginTemplates.constBegin();
-    QMap<QPluginLoader*, RenderPlugin *>::const_iterator const end = d->m_renderPluginTemplates.constEnd();
+    typename QMap<QPluginLoader*, T*>::const_iterator i = loaders.constBegin();
+    typename QMap<QPluginLoader*, T*>::const_iterator const end = loaders.constEnd();
     for (; i != end; ++i) {
-        result.append( (*i)->pluginInstance() );
+        result.append( (*i)->newInstance() );
     }
     return result;
+}
+
+QList<RenderPlugin *> PluginManager::createRenderPlugins() const
+{
+    return createPlugins( d, d->m_renderPluginTemplates );
 }
 
 QList<NetworkPlugin *> PluginManager::createNetworkPlugins() const
 {
-    QList<NetworkPlugin *> result;
-
-    d->loadPlugins();
-
-    QMap<QPluginLoader*, NetworkPlugin *>::const_iterator pos = d->m_networkPluginTemplates.constBegin();
-    QMap<QPluginLoader*, NetworkPlugin *>::const_iterator const end = d->m_networkPluginTemplates.constEnd();
-    for (; pos != end; ++pos ) {
-        result.append( (*pos)->newInstance() );
-    }
-    return result;
+    return createPlugins( d, d->m_networkPluginTemplates );
 }
 
 QList<PositionProviderPlugin *> PluginManager::createPositionProviderPlugins() const
 {
-    QList<PositionProviderPlugin *> result;
-
-    d->loadPlugins();
-
-    QMap<QPluginLoader*, PositionProviderPlugin *>::const_iterator pos = d->m_positionProviderPluginTemplates.constBegin();
-    QMap<QPluginLoader*, PositionProviderPlugin *>::const_iterator const end = d->m_positionProviderPluginTemplates.constEnd();
-    for (; pos != end; ++pos ) {
-        result.append( (*pos)->newInstance() );
-    }
-    return result;
+    return createPlugins( d, d->m_positionProviderPluginTemplates );
 }
 
 QList<RunnerPlugin *> PluginManager::runnerPlugins() const
@@ -208,6 +195,7 @@ void PluginManagerPrivate::loadPlugins()
             if ( !isPlugin ) {
                 mDebug() << "Plugin failure:" << fileName << "is a plugin, but it does not implement the "
                         << "right interfaces or it was compiled against an old version of Marble. Ignoring it.";
+                delete loader;
             }
         } else {
             mDebug() << "Plugin failure:" << fileName << "is not a valid Marble Plugin:"

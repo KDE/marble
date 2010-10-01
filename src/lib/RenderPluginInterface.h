@@ -35,7 +35,7 @@ class RenderPluginInterface: public PluginInterface, public LayerInterface
     /**
     * @brief Returns a new object of the plugin
     */
-    virtual RenderPlugin * pluginInstance() = 0;
+    virtual RenderPlugin * newInstance() = 0;
 
     /**
      * @brief Returns the name(s) of the backend that the plugin can render
@@ -69,6 +69,6 @@ class RenderPluginInterface: public PluginInterface, public LayerInterface
 
 }
 
-Q_DECLARE_INTERFACE( Marble::RenderPluginInterface, "org.kde.Marble.RenderPluginInterface/1.06" )
+Q_DECLARE_INTERFACE( Marble::RenderPluginInterface, "org.kde.Marble.RenderPluginInterface/1.07" )
 
 #endif

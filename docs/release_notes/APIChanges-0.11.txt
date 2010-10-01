@@ -1,8 +1,8 @@
 
 2010-08-19  Bernhard Beschow    <bbeschow@cs.tu-berlin.de>
 
-* The medhod measureTool() has been moved from MarbleMap to MarbleModel.
-  You can continue accessing the measure tool from MarbleMap using MarbleMapp::model()->measureTool().
+* The method measureTool() has been moved from MarbleMap to MarbleModel.
+  You can continue accessing the measure tool from MarbleMap using MarbleMap::model()->measureTool().
 
 * The method ViewParams *viewParams() has been removed from MarbleMap in favor of ViewportParams *viewport().
   Setting and getting the MapQuality can now be done using MarbleMap::setMapQuality() and MarbleMap::mapQuality().
@@ -21,3 +21,8 @@
 
 * Remove MarbleMap::goHome().
   Use MarbleMap::flyTo(home), where home is the home position.
+
+2010-10-01 Dennis Nienhüser <earthwings@gentoo.org>
+
+* RenderPlugin::pluginInstance() has been renamed RenderPlugin::newInstance to be consistent with other plugin types.
+  You only need to change your code if you're not using the MARBLE_PLUGIN macro in custom RenderPlugins.
