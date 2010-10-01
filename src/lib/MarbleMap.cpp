@@ -83,8 +83,6 @@ void MarbleMapPrivate::construct()
     m_logzoom  = 0;
     m_zoomStep = 40;
 
-    m_parent->goHome();
-
     // FloatItems
     m_showFrameRate = false;
 
@@ -876,18 +874,6 @@ void MarbleMap::customPaint( GeoPainter *painter )
     if ( !d->m_viewParams.mapTheme() ) {
         return;
     }
-}
-
-void MarbleMap::goHome()
-{
-    qreal  homeLon = 0;
-    qreal  homeLat = 0;
-    int homeZoom = 1050;
-    d->m_model->home( homeLon, homeLat, homeZoom );
-
-    centerOn( homeLon * RAD2DEG, homeLat * RAD2DEG );
-
-    zoomView( homeZoom ); // default 1050
 }
 
 QString MarbleMap::mapThemeId() const

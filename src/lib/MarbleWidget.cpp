@@ -849,26 +849,17 @@ void MarbleWidget::customPaint( GeoPainter *painter )
 
 void MarbleWidget::goHome( FlyToMode mode )
 {
-    if ( !d->m_animationsEnabled || mode == Instant )
-    {
-        d->m_map->goHome();
+    qreal  homeLon = 0;
+    qreal  homeLat = 0;
+    int homeZoom = 0;
+    d->m_model->home( homeLon, homeLat, homeZoom );
 
-         // not obsolete in case the zoomlevel stays unaltered
-        d->repaint();
-    }
-    else {
-        qreal  homeLon = 0;
-        qreal  homeLat = 0;
-        int homeZoom = 0;
-        d->m_model->home( homeLon, homeLat, homeZoom );
+    GeoDataLookAt target;
+    target.setLongitude( homeLon, GeoDataCoordinates::Degree );
+    target.setLatitude( homeLat, GeoDataCoordinates::Degree );
+    target.setRange( 1000 * d->m_map->distanceFromZoom( homeZoom ) );
 
-        GeoDataLookAt target;
-        target.setLongitude( homeLon, GeoDataCoordinates::Degree );
-        target.setLatitude( homeLat, GeoDataCoordinates::Degree );
-        target.setRange( 1000 * d->m_map->distanceFromZoom( homeZoom ) );
-
-        flyTo( target, mode );
-    }
+    flyTo( target, mode );
 }
 
 QString MarbleWidget::mapThemeId() const

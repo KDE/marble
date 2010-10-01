@@ -580,11 +580,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void moveDown();
 
     /**
-     * @brief Center the view on the default start point with the default zoom.
-     */
-    void goHome();
-
-    /**
      * @brief Get the ID of the current map theme
      * To ensure that a unique identifier is being used the theme does NOT 
      * get represented by its name but the by relative location of the file 
