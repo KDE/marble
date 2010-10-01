@@ -415,6 +415,7 @@ void MarbleControlBox::changeZoom(int zoom)
 
     d->uiWidget.zoomSlider->setValue( zoom );
     d->uiWidget.zoomSlider->setMinimum( minimumZoom() );
+    updateButtons( zoom );
 
     d->uiWidget.zoomSlider->blockSignals( false );
 }
