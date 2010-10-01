@@ -50,6 +50,7 @@ FileViewWidget::~FileViewWidget()
 
 void FileViewWidget::setMarbleWidget( MarbleWidget *widget )
 {
+    d->m_widget = widget;
     //set up everything for the FileModel
     d->m_fileViewUi.m_fileView->setModel( widget->fileViewModel() );
     delete d->m_fileViewUi.m_fileView->selectionModel();
