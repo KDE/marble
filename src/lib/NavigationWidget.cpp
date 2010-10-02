@@ -96,6 +96,7 @@ NavigationWidget::NavigationWidget( QWidget *parent, Qt::WindowFlags f )
 
 NavigationWidget::~NavigationWidget()
 {
+    delete d;
 }
 
 void NavigationWidget::setMarbleWidget( MarbleWidget *widget )

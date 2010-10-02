@@ -29,8 +29,8 @@
  */
 
 class QResizeEvent;
-class QStandardItemModel;
 class QString;
+class QStandardItemModel;
 
 namespace Marble
 {
@@ -90,27 +90,17 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
      */
     void addMarbleWidget( MarbleWidget *widget );
 
-    void setMapThemeModel( QStandardItemModel *mapThemeModel );
-
-    void updateCelestialModel();
-
     /**
       * Toggle offline mode of download manager and runners.
       */
     void setWorkOffline(bool offline);
 
- Q_SIGNALS:
-    void selectMapTheme( const QString& );
-
-    void projectionSelected( Projection );
+    void setMapThemeModel( QStandardItemModel *mapThemeModel );
 
  public Q_SLOTS:
-
     void selectTheme( const QString & );
 
-    void selectCurrentMapTheme( const QString& );
-
-    void selectProjection( Projection projection );
+    void updateMapThemeView();
 
     /**
      * @brief Control whether the Navigation tab is shown.
@@ -143,11 +133,6 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
      * @param show  boolean that controls if the Routing tab is shown.
      */
     void setRoutingTabShown( bool show );
-
-    /// whenever a new map gets inserted, the following slot will adapt the ListView accordingly
-    void updateMapThemeView();
-
-    void projectionSelected( int projectionIndex );
 
  private:
     void setWidgetTabShown( QWidget * widget, int insertIndex,
