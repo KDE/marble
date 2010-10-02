@@ -30,7 +30,7 @@ class NavigationWidgetPrivate;
 class MarbleWidget;
 class MarblePlacemarkModel;
 
-class NavigationWidget : public QWidget
+class MARBLE_EXPORT NavigationWidget : public QWidget
 {
     Q_OBJECT
 
