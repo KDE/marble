@@ -277,7 +277,7 @@ DownloadRegionDialog::DownloadRegionDialog( MarbleModel *const model, QWidget * 
              SLOT( updateTilesCount() ) );
     connect( d->m_routeOffsetSpinBox, SIGNAL( valueChanged( double ) ), SLOT( updateTilesCount() ) );
     connect( d->m_routeOffsetSpinBox, SIGNAL( valueChanged( double ) ), SLOT( setOffsetUnit() ) );
-    connect( d->m_model, SIGNAL( themeChanged() ), SLOT( updateTileCount() ) );
+    connect( d->m_model, SIGNAL( themeChanged( QString ) ), SLOT( updateTilesCount() ) );
 }
 
 DownloadRegionDialog::~DownloadRegionDialog()
