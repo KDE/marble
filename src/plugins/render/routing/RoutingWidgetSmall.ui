@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>213</width>
-    <height>45</height>
+    <width>318</width>
+    <height>77</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,91 +19,35 @@
   <property name="windowTitle">
    <string>RoutingWidget</string>
   </property>
-  <widget class="QToolButton" name="navigationButton">
-   <property name="geometry">
-    <rect>
-     <x>44</x>
-     <y>2</y>
-     <width>39</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>32</horstretch>
-     <verstretch>32</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="mouseTracking">
-    <bool>false</bool>
-   </property>
-   <property name="contextMenuPolicy">
-    <enum>Qt::DefaultContextMenu</enum>
-   </property>
-   <property name="toolTip">
-    <string>Provides options for adjusting navigation</string>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>N</string>
-   </property>
-   <property name="icon">
-    <iconset resource="../../../marble.qrc">
-     <normaloff>:/icons/globe.png</normaloff>:/icons/globe.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>32</width>
-     <height>32</height>
-    </size>
-   </property>
-   <property name="checkable">
-    <bool>false</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <property name="autoRepeat">
-    <bool>false</bool>
-   </property>
-   <property name="popupMode">
-    <enum>QToolButton::InstantPopup</enum>
-   </property>
-   <property name="autoRaise">
-    <bool>false</bool>
-   </property>
-  </widget>
   <widget class="QToolButton" name="routingButton">
    <property name="geometry">
     <rect>
-     <x>87</x>
-     <y>2</y>
-     <width>40</width>
-     <height>41</height>
+     <x>80</x>
+     <y>0</y>
+     <width>78</width>
+     <height>78</height>
     </rect>
    </property>
    <property name="sizePolicy">
     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>32</horstretch>
-     <verstretch>32</verstretch>
+     <horstretch>64</horstretch>
+     <verstretch>64</verstretch>
     </sizepolicy>
    </property>
    <property name="toolTip">
-    <string>Routing Information</string>
+    <string>Guidance Mode</string>
    </property>
    <property name="text">
     <string>R</string>
    </property>
    <property name="icon">
     <iconset resource="../../../marble.qrc">
-     <normaloff>:/icons/routing.png</normaloff>:/icons/routing.png</iconset>
+     <normaloff>:/icons/route-guidance.png</normaloff>:/icons/route-guidance.png</iconset>
    </property>
    <property name="iconSize">
     <size>
-     <width>32</width>
-     <height>32</height>
+     <width>64</width>
+     <height>64</height>
     </size>
    </property>
    <property name="checkable">
@@ -113,16 +57,16 @@
   <widget class="QToolButton" name="zoomInButton">
    <property name="geometry">
     <rect>
-     <x>174</x>
-     <y>2</y>
-     <width>39</width>
-     <height>41</height>
+     <x>240</x>
+     <y>0</y>
+     <width>78</width>
+     <height>78</height>
     </rect>
    </property>
    <property name="sizePolicy">
     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>32</horstretch>
-     <verstretch>32</verstretch>
+     <horstretch>64</horstretch>
+     <verstretch>64</verstretch>
     </sizepolicy>
    </property>
    <property name="toolTip">
@@ -137,8 +81,8 @@
    </property>
    <property name="iconSize">
     <size>
-     <width>32</width>
-     <height>32</height>
+     <width>64</width>
+     <height>64</height>
     </size>
    </property>
    <property name="checkable">
@@ -151,16 +95,16 @@
   <widget class="QToolButton" name="zoomOutButton">
    <property name="geometry">
     <rect>
-     <x>131</x>
-     <y>2</y>
-     <width>39</width>
-     <height>41</height>
+     <x>160</x>
+     <y>0</y>
+     <width>78</width>
+     <height>78</height>
     </rect>
    </property>
    <property name="sizePolicy">
     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>32</horstretch>
-     <verstretch>32</verstretch>
+     <horstretch>64</horstretch>
+     <verstretch>64</verstretch>
     </sizepolicy>
    </property>
    <property name="toolTip">
@@ -175,8 +119,8 @@
    </property>
    <property name="iconSize">
     <size>
-     <width>32</width>
-     <height>32</height>
+     <width>64</width>
+     <height>64</height>
     </size>
    </property>
    <property name="checkable">
@@ -190,15 +134,15 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>2</y>
-     <width>40</width>
-     <height>41</height>
+     <y>0</y>
+     <width>78</width>
+     <height>78</height>
     </rect>
    </property>
    <property name="sizePolicy">
     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>32</horstretch>
-     <verstretch>32</verstretch>
+     <horstretch>64</horstretch>
+     <verstretch>64</verstretch>
     </sizepolicy>
    </property>
    <property name="toolTip">
@@ -213,20 +157,16 @@
    </property>
    <property name="iconSize">
     <size>
-     <width>32</width>
-     <height>32</height>
+     <width>64</width>
+     <height>64</height>
     </size>
    </property>
    <property name="checkable">
     <bool>true</bool>
    </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
   </widget>
  </widget>
  <resources>
-  <include location="routing.qrc"/>
   <include location="../../../marble.qrc"/>
  </resources>
  <connections/>

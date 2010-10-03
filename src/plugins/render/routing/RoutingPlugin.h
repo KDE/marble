@@ -80,24 +80,6 @@ public:
 private Q_SLOTS:
 
     /**
-     * @brief sets the re-center mode to "Always Recenter"
-     * @see AdjustNavigation
-     */
-     void setAlwaysRecenter();
-
-    /**
-     * @brief sets the re-center mode to "When Required"
-     * @see AdjustNavigation
-     */
-     void setRecenterWhenRequired();
-
-    /**
-     * @brief toggles Auto Zoom
-     * @see AdjustNavigation
-     */
-     void setAutoZoom();
-
-    /**
      * update controls when map theme is changed
      */
      void selectTheme( const QString &theme);
@@ -116,29 +98,6 @@ private Q_SLOTS:
      * sets current position of the gps device
      */
      void setCurrentLocation( GeoDataCoordinates, qreal );
-
-    /**
-     * shows the navigation menu on the plugin
-     */
-     void showNavigationMenu();
-
-    /**
-     * synchronizes selection in navigation menu(recenter) with corresponding selection of
-     * re-centering method in Current Location Tab
-     * @see CurrentLocationWidget
-     */
-     void setRecenterMenu( int centerMode );
-
-    /**
-     * synchronizes selection in navigation menu(auto zoom) with Auto Zoom in CurrentLocation Tab
-     * @see CurrentLocationWidget
-     */
-     void setAutoZoomMenu( bool autoZoom );
-
-    /**
-     * turns off re-centering
-     */
-     void setRecenteringDisabled();
 
     /**
      * disables the navigation menu if Position Tracking is disabled
@@ -161,11 +120,6 @@ private:
      void updateRoutingItem();
 
     /**
-     * creates the Navigation Menu(Recenter, Auto Zoom)
-     */
-     void createNavigationMenu();
-
-    /**
      * sets the distance of the next instruction as well as the next instruction text on the
      * routing information item
      */
@@ -178,16 +132,9 @@ private:
      RoutingModel                        *m_routingModel;
      AdjustNavigation                    *m_adjustNavigation;
      GeoDataCoordinates                   m_currentPosition;
-     QMenu                               *m_navigationMenu;
-     QAction                             *m_alwaysRecenterAction;
-     QAction                             *m_whenRequiredAction;
-     QAction                             *m_autoZoomAction;
-     QAction                             *m_disableRecenterAction;
      qreal                                m_currentSpeed;
      qint32                               m_remainingTime;
      qreal                                m_remainingDistance;
-     bool                                 m_alwaysRecenter;
-     bool                                 m_recenterWhenRequired;
      Ui::RoutingWidgetSmall              *m_routingWidgetSmall;
      Ui::RoutingInformationWidget        *m_routingInformationWidget;
      Ui::RoutingInformationWidgetSmall   *m_routingInformationWidgetSmall;

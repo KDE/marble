@@ -53,16 +53,9 @@ RoutingPlugin::RoutingPlugin( const QPointF &point )
           m_profiles( MarbleGlobal::getInstance()->profiles() ),
           m_routingModel( 0 ),
           m_adjustNavigation( 0 ),
-          m_navigationMenu( 0 ),
-          m_alwaysRecenterAction( 0 ),
-          m_whenRequiredAction( 0 ),
-          m_autoZoomAction( 0 ),
-          m_disableRecenterAction( 0 ),
           m_currentSpeed( 0 ),
           m_remainingTime( 0 ),
           m_remainingDistance( 0 ),
-          m_alwaysRecenter( false ),
-          m_recenterWhenRequired( false ),
           m_routingWidgetSmall( 0 ),
           m_routingInformationWidget( 0 ),
           m_routingInformationWidgetSmall( 0 )
@@ -134,7 +127,6 @@ void RoutingPlugin::initialize()
         m_widgetItemRouting = new WidgetGraphicsItem( this );
         m_widgetItemRouting->setWidget( widgetSmall );
         m_widgetItemRouting->setVisible( false );
-        createNavigationMenu();
     }
     else {
         m_routingInformationWidget = new Ui::RoutingInformationWidget;
@@ -176,13 +168,6 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
             // disconnect signals
             disconnect( m_marbleWidget->model()->positionTracking(), SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
                                     this, SLOT( updateButtonStates( PositionProviderPlugin* ) ) );
-            disconnect( m_routingWidgetSmall->navigationButton, SIGNAL( clicked( bool ) ),
-                         this, SLOT( showNavigationMenu() ) );
-
-            disconnect( m_alwaysRecenterAction, SIGNAL( triggered() ), this, SLOT( setAlwaysRecenter() ) );
-            disconnect( m_whenRequiredAction, SIGNAL( triggered() ), this, SLOT( setRecenterWhenRequired() ) );
-            disconnect( m_disableRecenterAction, SIGNAL( triggered() ), this, SLOT( setRecenteringDisabled() ) );
-            disconnect( m_autoZoomAction, SIGNAL( triggered() ), this, SLOT( setAutoZoom() ) );
 
             disconnect( m_routingWidgetSmall->routingButton, SIGNAL( clicked( bool ) ),
                      this, SLOT( showRoutingItem( bool ) ) );
@@ -193,21 +178,8 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
             disconnect( m_marbleWidget, SIGNAL( themeChanged( QString ) ),
                      this, SLOT( selectTheme( QString ) ) );
 
-            disconnect( m_adjustNavigation, SIGNAL( recenterModeChanged( int ) ),
-                     this, SLOT( setRecenterMenu( int ) ) );
-            disconnect( m_adjustNavigation, SIGNAL( autoZoomToggled( bool ) ),
-                     this, SLOT( setAutoZoomMenu( bool ) ) );
-
-
             connect( m_marbleWidget->model()->positionTracking(), SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
                                    this, SLOT( updateButtonStates( PositionProviderPlugin* ) ) );
-            connect( m_routingWidgetSmall->navigationButton, SIGNAL( clicked( bool ) ),
-                        this, SLOT( showNavigationMenu() ) );
-
-            connect( m_alwaysRecenterAction, SIGNAL( triggered() ), this, SLOT( setAlwaysRecenter() ) );
-            connect( m_whenRequiredAction, SIGNAL( triggered() ), this, SLOT( setRecenterWhenRequired() ) );
-            connect( m_disableRecenterAction, SIGNAL( triggered() ), this, SLOT( setRecenteringDisabled() ) );
-            connect( m_autoZoomAction, SIGNAL( triggered() ), this, SLOT( setAutoZoom() ) );
 
             connect( m_routingWidgetSmall->routingButton, SIGNAL( clicked( bool ) ),
                     this, SLOT( showRoutingItem( bool ) ) );
@@ -219,13 +191,6 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
                     m_marbleWidget, SLOT( zoomOut() ) );
             connect( m_marbleWidget, SIGNAL( themeChanged( QString ) ),
                     this, SLOT( selectTheme( QString ) ) );
-
-            // connect statements below set the navigation menu if the action(re-center, autozoom) are
-            // performed from CurrentLocation UI
-            connect( m_adjustNavigation, SIGNAL( recenterModeChanged( int ) ),
-                    this, SLOT( setRecenterMenu( int ) ) );
-            connect( m_adjustNavigation, SIGNAL( autoZoomToggled( bool ) ),
-                    this, SLOT( setAutoZoomMenu( bool ) ) );
 
             updateButtons( m_marbleWidget->zoom() );
         }
@@ -243,103 +208,6 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
         }
     }
     return AbstractFloatItem::eventFilter( object, e );
-}
-
-void RoutingPlugin::showNavigationMenu()
-{
-    QPointF floatItemPosition = positivePosition();
-    floatItemPosition += m_routingWidgetSmall->navigationButton->mapToParent( QPoint( 0, 0 ) );
-    floatItemPosition.ry() += m_routingWidgetSmall->navigationButton->height();
-    m_navigationMenu->exec( m_marbleWidget->mapToGlobal( floatItemPosition.toPoint() ) );
-}
-
-void RoutingPlugin::createNavigationMenu()
-{
-    QObject *object = this;
-
-    m_disableRecenterAction = new QAction( object );
-    m_disableRecenterAction->setText( tr( "Auto Center Disabled" ) );
-    m_disableRecenterAction->setToolTip( tr( "Disable Auto Centering" ) );
-    m_disableRecenterAction->setCheckable( true );
-    m_disableRecenterAction->setChecked( true );
-
-    m_alwaysRecenterAction = new QAction( object );
-    m_alwaysRecenterAction->setText( tr( "Keep At Center" ) );
-    m_alwaysRecenterAction->setToolTip( tr( "Always keep the GPS location at the center of the map" ) );
-    m_alwaysRecenterAction->setCheckable( true );
-
-    m_whenRequiredAction = new QAction( object );
-    m_whenRequiredAction->setText( tr( "Auto Center When Required" ) );
-    m_whenRequiredAction->setToolTip( tr( "Re-center when required" ) );
-    m_whenRequiredAction->setCheckable( true );
-
-    m_autoZoomAction = new QAction( object );
-    m_autoZoomAction->setText( tr( "Auto Zoom" ) );
-    m_autoZoomAction->setToolTip( tr( "Auto Zoom to appropriate zoom level" ) );
-    m_autoZoomAction->setCheckable( true );
-
-    QActionGroup *recenterGroup = new QActionGroup( object );
-    recenterGroup->addAction( m_disableRecenterAction );
-    recenterGroup->addAction( m_alwaysRecenterAction );
-    recenterGroup->addAction( m_whenRequiredAction );
-
-    QList<QAction*> recenterMenu = recenterGroup->actions();
-    m_navigationMenu = new QMenu();
-    m_navigationMenu->addActions( recenterMenu );
-    m_navigationMenu->addSeparator();
-    m_navigationMenu->addAction( m_autoZoomAction );
-    m_navigationMenu->setEnabled( false );
-}
-
-void RoutingPlugin::setAlwaysRecenter()
-{
-    if( !m_marbleWidget ) {
-        return;
-    }
-
-    if( m_recenterWhenRequired ) {
-        m_adjustNavigation->setRecenter( Disabled );
-        m_recenterWhenRequired = false;
-    }
-
-    m_alwaysRecenter = true;
-
-    if( m_alwaysRecenterAction->isChecked() ) {
-        m_adjustNavigation->setRecenter( AlwaysRecenter );
-    }
-}
-
-void RoutingPlugin::setRecenterWhenRequired()
-{
-    if( !m_marbleWidget ) {
-        return;
-    }
-
-    if( m_alwaysRecenter ) {
-        m_adjustNavigation->setRecenter( Disabled );
-        m_alwaysRecenter = false;
-    }
-
-    m_recenterWhenRequired = true;
-
-    if( m_whenRequiredAction->isChecked() ) {
-        m_adjustNavigation->setRecenter( RecenterOnBorder );
-    }
-}
-
-void RoutingPlugin::setAutoZoom()
-{
-    if( !m_marbleWidget ) {
-        return;
-    }
-
-    if( m_autoZoomAction->isChecked() ) {
-        m_adjustNavigation->setAutoZoom( true );
-    }
-    else {
-        m_adjustNavigation->setAutoZoom( false );
-        m_autoZoomAction->setChecked( false );
-    }
 }
 
 //similar to updateButtons(int value) in navigation plugin
@@ -425,6 +293,8 @@ void RoutingPlugin::showRoutingItem( bool show )
         disconnect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
                  this, SLOT( setCurrentLocation( GeoDataCoordinates, qreal ) ) );
     }
+
+    m_marbleWidget->model()->routingManager()->setGuidanceModeEnabled( show );
 }
 
 void RoutingPlugin::setDestinationInformation( qint32 remainingTime, qreal remainingDistance )
@@ -555,32 +425,8 @@ void RoutingPlugin::updateInstructionLabel( QLabel *label )
     }
 }
 
-void RoutingPlugin::setRecenterMenu( int centerMode )
-{
-    if( centerMode == AlwaysRecenter ) {
-        m_alwaysRecenterAction->setChecked( true );
-    }
-    else if ( centerMode == RecenterOnBorder ) {
-        m_whenRequiredAction->setChecked( true );
-    }
-    else {
-        m_disableRecenterAction->setChecked( true );
-    }
-}
-
-void RoutingPlugin::setAutoZoomMenu( bool autoZoom )
-{
-    m_autoZoomAction->setChecked( autoZoom );
-}
-
-void RoutingPlugin::setRecenteringDisabled()
-{
-    m_adjustNavigation->setRecenter( Disabled );
-}
-
 void RoutingPlugin::updateButtonStates( PositionProviderPlugin *activePlugin )
 {
-    m_navigationMenu->setEnabled( activePlugin != 0 );
     m_routingWidgetSmall->gpsButton->setChecked( activePlugin != 0 );
 }
 
