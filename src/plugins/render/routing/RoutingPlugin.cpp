@@ -271,9 +271,9 @@ void RoutingPlugin::showRoutingItem( bool show )
     PositionTracking *tracking = m_marbleWidget->model()->positionTracking();
 
     if( show ) {
-        MarbleGraphicsGridLayout *gridLayout = new MarbleGraphicsGridLayout( 2, 1 );
+        MarbleGraphicsGridLayout *gridLayout = new MarbleGraphicsGridLayout( 1, 2 );
         gridLayout->addItem( m_widgetItemRouting, 0, 0 );
-        gridLayout->addItem( m_widgetItem, 1, 0 );
+        gridLayout->addItem( m_widgetItem, 0, 1 );
         setLayout( gridLayout );
         m_widgetItemRouting->setVisible( show );
         m_marbleWidget->repaint();
@@ -331,35 +331,36 @@ void RoutingPlugin::updateRoutingItem()
     }
 
     if( m_profiles & MarbleGlobal::SmallScreen ) {
-       m_routingInformationWidgetSmall->remainingTimeLabel->setAlignment( Qt::AlignCenter );
+       m_routingInformationWidgetSmall->destinationDistanceLabel->setAlignment( Qt::AlignCenter );
 
        if( remainingTimeHours ) {
-           m_routingInformationWidgetSmall->remainingTimeLabel->setText( QString::number( remainingTimeHours ) % " hr " %
-                                                                         QString::number( remainingTimeMinutes ) % " min " );
+           m_routingInformationWidgetSmall->destinationDistanceLabel->setText( QString( "<font size=\"-1\" color=\"black\">%1:%2</font>" ).arg( remainingTimeHours ).arg( remainingTimeMinutes ) );
        }
        else if( remainingTimeMinutes ) {
-           m_routingInformationWidgetSmall->remainingTimeLabel->setText( tr( "%n minutes", "", remainingTimeMinutes ) );
+           m_routingInformationWidgetSmall->destinationDistanceLabel->setText( tr( "<font size=\"-1\" color=\"black\">%n min</font>", "", remainingTimeMinutes ) );
        }
        else {
-           m_routingInformationWidgetSmall->remainingTimeLabel->setText( "Less than a minute." );
+           m_routingInformationWidgetSmall->destinationDistanceLabel->setText( "<font size=\"-1\" color=\"black\">Very soon.</font>" );
        }
 
-       if( remainingTimeMinutes < thresholdTime ) {
-           m_routingInformationWidgetSmall->instructionIconLabel->setPixmap( instructionIconNear );
-       }
-       else {
-           m_routingInformationWidgetSmall->instructionIconLabel->setPixmap( instructionIconNext );
-       }
+//       if( remainingTimeMinutes < thresholdTime ) {
+//           m_routingInformationWidgetSmall->instructionIconLabel->setPixmap( instructionIconNear );
+//       }
+//       else {
+//           m_routingInformationWidgetSmall->instructionIconLabel->setPixmap( instructionIconNext );
+//       }
+       m_routingInformationWidgetSmall->instructionIconLabel->setPixmap( m_routingModel->nextInstructionPixmap().scaled( 64, 64, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) );
+       m_routingInformationWidgetSmall->followingInstructionIconLabel->setPixmap( m_routingModel->followingInstructionPixmap() );
 
        updateInstructionLabel( m_routingInformationWidgetSmall->distanceAndInstructionLabel );
 
        if( !m_routingModel->deviatedFromRoute() && remainingInstructionDistance != 0 ) {
-           m_routingInformationWidgetSmall->distanceCoveredProgressBar->setRange( 0, qRound( instructionLength ) );
-           m_routingInformationWidgetSmall->distanceCoveredProgressBar->setValue( qRound ( instructionLength - remainingInstructionDistance ) );
+           //m_routingInformationWidgetSmall->distanceCoveredProgressBar->setRange( 0, qRound( instructionLength ) );
+           //m_routingInformationWidgetSmall->distanceCoveredProgressBar->setValue( qRound ( instructionLength - remainingInstructionDistance ) );
         }
 
         if ( remainingInstructionDistance == 0 && remainingInstructionTime == 0 ) {
-            m_routingInformationWidgetSmall->distanceCoveredProgressBar->setValue( qRound( instructionLength ) );
+            //m_routingInformationWidgetSmall->distanceCoveredProgressBar->setValue( qRound( instructionLength ) );
         }
 
     }
@@ -367,10 +368,10 @@ void RoutingPlugin::updateRoutingItem()
         m_routingInformationWidget->remainingTimeLabel->setAlignment( Qt::AlignCenter );
 
         if( remainingTimeHours ) {
-            m_routingInformationWidget->remainingTimeLabel->setText( tr( "%n hours", "",  remainingTimeHours) % tr( " %n minutes", "", remainingTimeMinutes ) );
+            m_routingInformationWidget->remainingTimeLabel->setText( tr( "%n hours", "",  remainingTimeHours) % tr( " %n min", "", remainingTimeMinutes ) );
         }
         else if ( remainingTimeMinutes ) {
-            m_routingInformationWidget->remainingTimeLabel->setText( tr( "%n minutes", "", remainingTimeMinutes ) );
+            m_routingInformationWidget->remainingTimeLabel->setText( tr( "%n min", "", remainingTimeMinutes ) );
         }
         else {
             m_routingInformationWidget->remainingTimeLabel->setText( "Less than a minute." );
@@ -401,7 +402,7 @@ void RoutingPlugin::updateInstructionLabel( QLabel *label )
     if( m_routingModel->remainingTime() < thresholdTime && !m_routingModel->instructionText().isEmpty() ) {
         QLabel *instructionLabel = label;
         instructionLabel->setAlignment( Qt::AlignCenter );
-        instructionLabel->setText( m_routingModel->instructionText() );
+        instructionLabel->setText( QString( "<font size=\"-1\" color=\"black\">%1</font>" ).arg( m_routingModel->instructionText() ) );
     }
     else {
         QLabel *nextInstructionDistanceLabel = label;
@@ -409,14 +410,14 @@ void RoutingPlugin::updateInstructionLabel( QLabel *label )
 
         qreal instructionDistance = m_routingModel->nextInstructionDistance();
 
-        QString indicatorText = m_routingModel->instructionText().isEmpty() ? "<b>Destination: </b>" : "<b>Next Turn at: </b>";
+        QString indicatorText = m_routingModel->instructionText().isEmpty() ? "<font size=\"-1\" color=\"black\">Destination reached in %1 %2</font>" : "<font size=\"-1\" color=\"black\">Next turn in %1 %2</font>";
 
         if( m_remainingDistance ) {
             if( instructionDistance < 1000 ) {
-                nextInstructionDistanceLabel->setText( indicatorText % QString::number( int( instructionDistance ) ) % " Meters " );
+                nextInstructionDistanceLabel->setText( indicatorText.arg( int( instructionDistance ) ).arg( "meters") );
             }
             else {
-                nextInstructionDistanceLabel->setText( indicatorText % QString::number( instructionDistance * METER2KM , 'f', 1 ) % " KM " );
+                nextInstructionDistanceLabel->setText( indicatorText.arg( instructionDistance * METER2KM, 0, 'f', 1 ).arg( " km " ) );
             }
         }
         else {

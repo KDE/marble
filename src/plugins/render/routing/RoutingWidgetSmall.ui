@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>318</width>
-    <height>77</height>
+    <height>78</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,7 +22,7 @@
   <widget class="QToolButton" name="routingButton">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>0</x>
      <y>0</y>
      <width>78</width>
      <height>78</height>
@@ -133,7 +133,7 @@
   <widget class="QToolButton" name="gpsButton">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>80</x>
      <y>0</y>
      <width>78</width>
      <height>78</height>
