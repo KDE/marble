@@ -40,6 +40,7 @@
 
 #include "BookmarkInfoDialog.h"
 //#include "EditBookmarkDialog.h"
+#include "MapViewWidget.h"
 #include "MarbleDirs.h"
 #include "MarbleAboutDialog.h"
 #include "QtMarbleConfigDialog.h"
@@ -73,7 +74,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
         m_timeControlDialog( 0 ),
         m_downloadRegionDialog( 0 ),
         m_downloadRegionAction( 0 ),
-        m_osmEditAction( 0 )
+        m_osmEditAction( 0 ),
+        m_mapViewDialog( 0 )
 {
     setUpdatesEnabled( false );
 
@@ -272,10 +274,9 @@ void MainWindow::createMenus()
         //menuBar()->addAction( m_fullScreenAct );
         menuBar()->addAction( m_downloadRegionAction );
 
-        m_toggleMapViewTabAction = menuBar()->addAction( tr( "Map View" ) );
-        m_toggleMapViewTabAction->setCheckable( true );
-        connect( m_toggleMapViewTabAction, SIGNAL( triggered( bool ) ),
-                 this, SLOT( showMapViewTab( bool ) ) );
+        m_showMapViewDialogAction = menuBar()->addAction( tr( "Map View" ) );
+        connect( m_showMapViewDialogAction, SIGNAL( triggered( bool ) ),
+                 this, SLOT( showMapViewDialog() ) );
         m_toggleLegendTabAction = menuBar()->addAction( tr( "Legend" ) );
         m_toggleLegendTabAction->setCheckable( true );
         connect( m_toggleLegendTabAction, SIGNAL( triggered( bool ) ),
@@ -1110,21 +1111,21 @@ void MainWindow::printMapScreenShot()
 #endif
 }
 
-void MainWindow::showMapViewTab( bool enabled )
+void MainWindow::showMapViewDialog()
 {
-    m_toggleLegendTabAction->setChecked( false );
-    m_toggleRoutingTabAction->setChecked( false );
-    m_controlView->marbleControl()->setNavigationTabShown( false );
-    m_controlView->marbleControl()->setLegendTabShown( false );
-    m_controlView->marbleControl()->setMapViewTabShown( true );
-    m_controlView->marbleControl()->setCurrentLocationTabShown( false );
-    m_controlView->marbleControl()->setRoutingTabShown( false );
-    m_controlView->setSideBarShown( enabled );
+    if( !m_mapViewDialog ) {
+        m_mapViewDialog = new QDialog( this );
+        MapViewWidget *mapViewWidget = new MapViewWidget( m_mapViewDialog );
+        mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
+    }
+
+    m_mapViewDialog->show();
+    m_mapViewDialog->raise();
+    m_mapViewDialog->activateWindow();
 }
 
 void MainWindow::showLegendTab( bool enabled )
 {
-    m_toggleMapViewTabAction->setChecked( false );
     m_toggleRoutingTabAction->setChecked( false );
     m_controlView->marbleControl()->setNavigationTabShown( false );
     m_controlView->marbleControl()->setLegendTabShown( true );
@@ -1136,7 +1137,6 @@ void MainWindow::showLegendTab( bool enabled )
 
 void MainWindow::showRoutingTab( bool enabled )
 {
-    m_toggleMapViewTabAction->setChecked( false );
     m_toggleLegendTabAction->setChecked( false );
     m_controlView->marbleControl()->setNavigationTabShown( false );
     m_controlView->marbleControl()->setLegendTabShown( false );

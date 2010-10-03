@@ -116,7 +116,7 @@ class MainWindow : public QMainWindow
     void  downloadRegion();
 
     // Small screen devices specific slots
-    void showMapViewTab( bool enabled );
+    void showMapViewDialog();
     void showLegendTab( bool enabled );
     void showRoutingTab( bool enabled );
 
@@ -188,9 +188,11 @@ class MainWindow : public QMainWindow
     QAction *m_addBookmarkFolderAct;
 
     // Small screen devices
-    QAction *m_toggleMapViewTabAction;
+    QAction *m_showMapViewDialogAction;
     QAction *m_toggleLegendTabAction;
     QAction *m_toggleRoutingTabAction;
+
+    QDialog *m_mapViewDialog;
 };
 
 } // namespace Marble
