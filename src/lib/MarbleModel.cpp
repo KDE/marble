@@ -92,7 +92,7 @@ class MarbleModelPrivate
           m_dataFacade( 0 ),
           m_pluginManager( new PluginManager( parent ) ),
           m_mapThemeManager( new MapThemeManager( parent )),
-          m_homePoint( -9.4, 54.8, GeoDataCoordinates::Degree ),  // Some point that tackat defined. :-)
+          m_homePoint( -9.4, 54.8, 0.0, GeoDataCoordinates::Degree ),  // Some point that tackat defined. :-)
           m_homeZoom( 1050 ),
           m_mapTheme( 0 ),
           m_layerManager( 0 ),
