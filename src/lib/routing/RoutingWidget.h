@@ -109,6 +109,9 @@ private Q_SLOTS:
     /** Toggle visibility of alternative routes */
     void updateAlternativeRoutes();
 
+    /** Toggle turn by turn navigation mode */
+    void setGuidanceModeEnabled( bool enabled );
+
 private:
     RoutingWidgetPrivate *const d;
 };

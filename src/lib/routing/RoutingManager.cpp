@@ -23,6 +23,9 @@
 #include "GeoDataFolder.h"
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
+#include "PositionTracking.h"
+#include "PluginManager.h"
+#include "PositionProviderPlugin.h"
 
 #include <QtCore/QFile>
 #include <QtGui/QMessageBox>
@@ -36,13 +39,13 @@ class RoutingManagerPrivate
 public:
     RoutingManager* q;
 
+    RouteRequest *m_routeRequest;
+
     RoutingModel *m_routingModel;
 
     MarbleModel *m_marbleModel;
 
     AlternativeRoutesModel* m_alternativeRoutesModel;
-
-    RouteRequest *m_routeRequest;
 
     bool m_workOffline;
 
@@ -52,24 +55,31 @@ public:
 
     AdjustNavigation *m_adjustNavigation;
 
+    bool m_guidanceModeEnabled;
+
     QMutex m_fileMutex;
 
     RoutingManagerPrivate( MarbleModel *marbleModel, RoutingManager* manager, QObject *parent );
 
     GeoDataFolder* routeRequest() const;
 
-    QString stateFile() const;
+    QString stateFile( const QString &name = QString( "route.kml" ) ) const;
+
+    void saveRoute( const QString &filename );
+
+    void loadRoute( const QString &filename );
 };
 
 RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager* manager, QObject *parent ) :
         q( manager ),
-        m_routingModel( new RoutingModel( model ) ),
+        m_routeRequest( new RouteRequest( manager ) ),
+        m_routingModel( new RoutingModel( m_routeRequest, model ) ),
         m_marbleModel( model ),
         m_alternativeRoutesModel(new AlternativeRoutesModel( model, parent ) ),
-        m_routeRequest( new RouteRequest( manager ) ),
         m_workOffline( false ),
         m_runnerManager( new MarbleRunnerManager( model->pluginManager(), q ) ),
-        m_haveRoute( false ), m_adjustNavigation( 0 )
+        m_haveRoute( false ), m_adjustNavigation( 0 ),
+        m_guidanceModeEnabled( false )
 {
     // nothing to do
 }
@@ -88,7 +98,7 @@ GeoDataFolder* RoutingManagerPrivate::routeRequest() const
     return result;
 }
 
-QString RoutingManagerPrivate::stateFile() const
+QString RoutingManagerPrivate::stateFile( const QString &name) const
 {
     QString const subdir = "routing";
     QDir dir( MarbleDirs::localPath() );
@@ -103,7 +113,83 @@ QString RoutingManagerPrivate::stateFile() const
         mDebug() << "Cannot change into " << dir.absoluteFilePath( subdir );
     }
 
-    return dir.absoluteFilePath( "route.kml" );
+    return dir.absoluteFilePath( name );
+}
+
+void RoutingManagerPrivate::saveRoute(const QString &filename)
+{
+    GeoWriter writer;
+    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
+
+    QMutexLocker locker( &m_fileMutex );
+    QFile file( filename );
+    if ( !file.open( QIODevice::WriteOnly | QIODevice::Truncate ) )
+    {
+        mDebug() << "Cannot write to " << file.fileName();
+        return;
+    }
+
+    GeoDataDocument container;
+    GeoDataFolder* request = routeRequest();
+    if ( request ) {
+        container.append( request );
+    }
+
+    GeoDataDocument *route = m_alternativeRoutesModel->currentRoute();
+    if ( route ) {
+        container.append( new GeoDataDocument( *route ) );
+    }
+
+    if ( !writer.write( &file, container ) ) {
+        mDebug() << "Can not write route state to " << file.fileName();
+    }
+    file.close();
+}
+
+void RoutingManagerPrivate::loadRoute(const QString &filename)
+{
+    QFile file( filename );
+    if ( !file.open( QIODevice::ReadOnly ) ) {
+        mDebug() << "Can not read route state from " << file.fileName();
+        return;
+    }
+
+    GeoDataParser parser( GeoData_KML );
+    if ( !parser.read( &file ) ) {
+        mDebug() << "Could not parse file: " << parser.errorString();
+        return;
+    }
+
+    GeoDocument *doc = parser.releaseDocument();
+    GeoDataDocument* container = dynamic_cast<GeoDataDocument*>( doc );
+    if ( container && container->size() == 2 ) {
+        GeoDataFolder* viaPoints = dynamic_cast<GeoDataFolder*>( &container->first() );
+        if ( viaPoints ) {
+            QVector<GeoDataPlacemark*> placemarks = viaPoints->placemarkList();
+            for( int i=0; i<placemarks.size(); ++i ) {
+                if ( i < m_routeRequest->size() ) {
+                    m_routeRequest->setPosition( i, placemarks[i]->coordinate() );
+                } else {
+                    m_routeRequest->append( placemarks[i]->coordinate() );
+                }
+                m_routeRequest->setName( m_routeRequest->size()-1, placemarks[i]->name() );
+            }
+        } else {
+            mDebug() << "Expected a GeoDataDocument, didn't get one though";
+        }
+
+        GeoDataDocument* route = dynamic_cast<GeoDataDocument*>(&container->last());
+        if ( route ) {
+            m_alternativeRoutesModel->addRoute( route, AlternativeRoutesModel::Instant );
+            m_alternativeRoutesModel->setCurrentRoute( 0 );
+        } else {
+            mDebug() << "Expected a GeoDataDocument, didn't get one though";
+        }
+    } else {
+        mDebug() << "Expected a GeoDataDocument, didn't get one though";
+    }
+
+    file.close();
 }
 
 RoutingManager::RoutingManager( MarbleModel *marbleModel, QObject *parent ) : QObject( parent ),
@@ -113,6 +199,8 @@ RoutingManager::RoutingManager( MarbleModel *marbleModel, QObject *parent ) : QO
              this, SLOT( retrieveRoute( GeoDataDocument* ) ) );
     connect( d->m_alternativeRoutesModel, SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
              d->m_routingModel, SLOT( setCurrentRoute( GeoDataDocument* ) ) );
+    connect( d->m_routingModel, SIGNAL( deviatedFromRoute( bool ) ),
+             this, SLOT( recalculateRoute( bool ) ) );
 }
 
 RoutingManager::~RoutingManager()
@@ -197,78 +285,56 @@ AdjustNavigation* RoutingManager::adjustNavigation()
 
 void RoutingManager::writeSettings() const
 {
-    GeoWriter writer;
-    writer.setDocumentType( "http://earth.google.com/kml/2.2" );
-
-    QMutexLocker locker( &d->m_fileMutex );
-    QFile file( d->stateFile() );
-    if ( !file.open( QIODevice::WriteOnly | QIODevice::Truncate ) )
-    {
-        mDebug() << "Cannot write to " << file.fileName();
-        return;
-    }
-
-    GeoDataDocument container;
-    GeoDataFolder* request = d->routeRequest();
-    if ( request ) {
-        container.append( request );
-    }
-
-    GeoDataDocument *route = d->m_alternativeRoutesModel->currentRoute();
-    if ( route ) {
-        container.append( new GeoDataDocument( *route ) );
-    }
-
-    if ( !writer.write( &file, container ) ) {
-        mDebug() << "Can not write route state to " << file.fileName();
-    }
-    file.close();
+    d->saveRoute( d->stateFile() );
 }
 
 void RoutingManager::readSettings()
 {
-    QFile file( d->stateFile() );
-    if ( !file.open( QIODevice::ReadOnly ) ) {
-        mDebug() << "Can not read route state from " << file.fileName();
-        return;
-    }
+    d->loadRoute( d->stateFile() );
+}
 
-    GeoDataParser parser( GeoData_KML );
-    if ( !parser.read( &file ) ) {
-        mDebug() << "Could not parse file: " << parser.errorString();
-        return;
-    }
+void RoutingManager::setGuidanceModeEnabled( bool enabled )
+{
+    d->m_guidanceModeEnabled = enabled;
 
-    GeoDocument *doc = parser.releaseDocument();
-    GeoDataDocument* container = dynamic_cast<GeoDataDocument*>( doc );
-    if ( container && container->size() == 2 ) {
-        GeoDataFolder* viaPoints = dynamic_cast<GeoDataFolder*>( &container->first() );
-        if ( viaPoints ) {
-            QVector<GeoDataPlacemark*> placemarks = viaPoints->placemarkList();
-            for( int i=0; i<placemarks.size(); ++i ) {
-                if ( i < d->m_routeRequest->size() ) {
-                    d->m_routeRequest->setPosition( i, placemarks[i]->coordinate() );
-                } else {
-                    d->m_routeRequest->append( placemarks[i]->coordinate() );
-                }
-                d->m_routeRequest->setName( d->m_routeRequest->size()-1, placemarks[i]->name() );
-            }
-        } else {
-            mDebug() << "Expected a GeoDataDocument, didn't get one though";
-        }
-
-        GeoDataDocument* route = dynamic_cast<GeoDataDocument*>(&container->last());
-        if ( route ) {
-            alternativeRoutesModel()->addRoute( route, AlternativeRoutesModel::Instant );
-            alternativeRoutesModel()->setCurrentRoute( 0 );
-        } else {
-            mDebug() << "Expected a GeoDataDocument, didn't get one though";
-        }
+    if ( enabled ) {
+        d->saveRoute( d->stateFile( "guidance.kml" ) );
     } else {
-        mDebug() << "Expected a GeoDataDocument, didn't get one though";
+        d->loadRoute( d->stateFile( "guidance.kml" ) );
     }
 
-    file.close();
+    PositionTracking* tracking = d->m_marbleModel->positionTracking();
+    PositionProviderPlugin* plugin = tracking->positionProviderPlugin();
+    if ( !plugin && enabled ) {
+        PluginManager* pluginManager = d->m_marbleModel->pluginManager();
+        QList<PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
+        if ( plugins.size() > 0 ) {
+            plugin = plugins.takeFirst();
+        }
+        qDeleteAll( plugins );
+        tracking->setPositionProviderPlugin( plugin );
+    }
+
+    adjustNavigation()->setAutoZoom( enabled );
+    adjustNavigation()->setRecenter( enabled ? AdjustNavigation::AlwaysRecenter : 0 );
+}
+
+void RoutingManager::recalculateRoute( bool deviated )
+{
+    if ( d->m_guidanceModeEnabled && deviated && d->m_routeRequest ) {
+        for ( int i=d->m_routeRequest->size()-3; i>=0; --i ) {
+            if ( d->m_routeRequest->visited( i ) ) {
+                d->m_routeRequest->remove( i );
+            }
+        }
+
+        if ( d->m_routeRequest->size() == 2 && d->m_routeRequest->visited( 0 ) && !d->m_routeRequest->visited( 1 ) ) {
+            d->m_routeRequest->setPosition( 0, d->m_marbleModel->positionTracking()->currentLocation() );
+        } else if ( d->m_routeRequest->size() != 0 && !d->m_routeRequest->visited( d->m_routeRequest->size()-1 ) ) {
+            d->m_routeRequest->insert( 0, d->m_marbleModel->positionTracking()->currentLocation() );
+        }
+        updateRoute();
+    }
 }
 
 } // namespace Marble

@@ -106,6 +106,10 @@ public:
 
     QString name( int index ) const;
 
+    void setVisited( int index, bool visited );
+
+    bool visited( int index ) const;
+
 Q_SIGNALS:
     /** The value of the n-th element was changed */
     void positionChanged( int index, const GeoDataCoordinates &position );

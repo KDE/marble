@@ -63,7 +63,7 @@ public:
     };
 
     /** Constructor */
-    explicit RoutingModel( MarbleModel *model, QObject *parent = 0 );
+    explicit RoutingModel( RouteRequest* request, MarbleModel *model, QObject *parent = 0 );
 
     /** Destructor */
     ~RoutingModel();

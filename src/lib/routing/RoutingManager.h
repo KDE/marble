@@ -106,6 +106,9 @@ public Q_SLOTS:
     /** Update the route */
     void updateRoute();
 
+    /** Toggle turn by turn navigation mode */
+    void setGuidanceModeEnabled( bool enabled );
+
 Q_SIGNALS:
     /**
       * Directions and waypoints for the given route are being downloaded or have
@@ -117,6 +120,8 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void retrieveRoute( GeoDataDocument* route );
+
+    void recalculateRoute( bool deviated );
 
 private:
     friend class RoutingManagerPrivate;

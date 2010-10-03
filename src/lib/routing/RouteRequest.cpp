@@ -12,6 +12,8 @@
 
 #include "GeoDataLineString.h"
 #include "GeoDataPlacemark.h"
+#include "GeoDataData.h"
+#include "GeoDataExtendedData.h"
 #include "MarbleDirs.h"
 
 #include <QtCore/QMap>
@@ -153,13 +155,15 @@ QPixmap RouteRequest::pixmap( int position ) const
     QImage result( iconSize, iconSize, QImage::Format_ARGB32_Premultiplied );
     result.fill( qRgba( 0, 0, 0, 0 ) );
 
-    // Paint a green circle
+    // Paint a colored circle
     QPainter painter( &result );
     painter.setRenderHint( QPainter::Antialiasing, true );
     painter.setPen( QColor( Qt::black ) );
-    painter.setBrush( QBrush( oxygenForestGreen4 ) );
+    bool const isVisited = visited( position );
+    QColor const backgroundColor = isVisited ? oxygenAluminumGray4 : oxygenForestGreen4;
+    painter.setBrush( QBrush( backgroundColor ) );
+    painter.setPen( Qt::black );
     painter.drawEllipse( 1, 1, iconSize-2, iconSize-2 );
-    painter.setBrush( QColor( Qt::black ) );
 
     char text = char( 'A' + position );
 
@@ -232,6 +236,7 @@ void RouteRequest::setPosition( int index, const GeoDataCoordinates &position )
         GeoDataPlacemark placemark;
         placemark.setCoordinate( GeoDataPoint( position ) );
         d->m_route[index] = placemark;
+        setVisited( index, false );
         emit positionChanged( index, position );
     }
 }
@@ -271,6 +276,27 @@ QString RouteRequest::name( int index ) const
     }
     return result;
 }
+
+void RouteRequest::setVisited( int index, bool visited )
+{
+    if ( index >= 0 && index < d->m_route.size() ) {
+        d->m_route[index].extendedData().addValue( GeoDataData( "routingVisited", visited ) );
+        d->m_pixmapCache.remove( index );
+        emit positionChanged( index, d->m_route[index].coordinate() );
+    }
+}
+
+bool RouteRequest::visited( int index ) const
+{
+    bool visited = false;
+    if ( index >= 0 && index < d->m_route.size() ) {
+        if ( d->m_route[index].extendedData().contains( "routingVisited" ) ) {
+            visited = d->m_route[index].extendedData().value( "routingVisited" ).value().toBool();
+        }
+    }
+    return visited;
+}
+
 
 } // namespace Marble
 

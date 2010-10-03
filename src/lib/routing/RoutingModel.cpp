@@ -55,7 +55,7 @@ typedef QVector<RouteElement> RouteElements;
 class RoutingModelPrivate
 {
 public:
-    RoutingModelPrivate();
+    RoutingModelPrivate( RouteRequest* request );
 
     RouteElements m_route;
 
@@ -74,13 +74,16 @@ public:
     bool m_routeLeft;
     QMap<RoutingInstruction::TurnType,QPixmap> m_turnTypePixmaps;
     PositionTracking* m_positionTracking;
+    RouteRequest* m_request;
 
     void importPlacemark( const GeoDataPlacemark *placemark );
 
     bool deviatedFromRoute( const GeoDataCoordinates &position, const QVector<GeoDataCoordinates> &waypoints ) const;
+
+    void updateViaPoints( const GeoDataCoordinates &position );
 };
 
-RoutingModelPrivate::RoutingModelPrivate()
+RoutingModelPrivate::RoutingModelPrivate( RouteRequest* request )
     : m_totalDistance( 0.0 ),
       m_totalTimeRemaining( 0 ),
       m_timeRemaining( 0.0 ),
@@ -90,7 +93,8 @@ RoutingModelPrivate::RoutingModelPrivate()
       m_nextInstructionDistance( 0.0 ),
       m_currentInstructionLength( 0.0 ),
       m_routeLeft( false ),
-      m_positionTracking( 0 )
+      m_positionTracking( 0 ),
+      m_request( request )
 {
     m_turnTypePixmaps[RoutingInstruction::Unknown] = QPixmap( MarbleDirs::path( "bitmaps/routing_step.png" ) );
     m_turnTypePixmaps[RoutingInstruction::Straight] = QPixmap( ":/data/bitmaps/turn-continue.png");
@@ -122,6 +126,19 @@ bool RoutingModelPrivate::deviatedFromRoute( const GeoDataCoordinates &position,
     }
 
     return true;
+}
+
+void RoutingModelPrivate::updateViaPoints( const GeoDataCoordinates &position )
+{
+    // Mark via points visited after approaching them in a range of 500m or less
+    qreal const threshold = 500 / EARTH_RADIUS;
+    for( int i=0; i<m_request->size(); ++i ) {
+        if ( !m_request->visited( i ) ) {
+            if ( distanceSphere( position, m_request->at( i ) ) < threshold ) {
+                m_request->setVisited( i, true );
+            }
+        }
+    }
 }
 
 void RoutingModelPrivate::importPlacemark( const GeoDataPlacemark *placemark )
@@ -160,8 +177,8 @@ void RoutingModelPrivate::importPlacemark( const GeoDataPlacemark *placemark )
 
 }
 
-RoutingModel::RoutingModel( MarbleModel *model, QObject *parent ) :
-        QAbstractListModel( parent ), d( new RoutingModelPrivate() )
+RoutingModel::RoutingModel( RouteRequest* request, MarbleModel *model, QObject *parent ) :
+        QAbstractListModel( parent ), d( new RoutingModelPrivate( request ) )
 {
    if( model )
     {
@@ -471,6 +488,8 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
             d->m_routeLeft = deviated;
             emit deviatedFromRoute( d->m_routeLeft );
         }
+
+        d->updateViaPoints( location );
     }
 }
 

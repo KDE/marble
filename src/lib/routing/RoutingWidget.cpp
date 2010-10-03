@@ -228,6 +228,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
 
     connect( d->m_ui.searchButton, SIGNAL( clicked( ) ),
              this, SLOT( retrieveRoute () ) );
+    connect( d->m_ui.guideButton, SIGNAL( clicked( bool ) ),
+             this, SLOT( setGuidanceModeEnabled( bool ) ) );
     connect( d->m_ui.optionsLabel, SIGNAL( linkActivated( QString ) ),
              this, SLOT( toggleOptionsVisibility() ) );
     connect( d->m_ui.routeComboBox, SIGNAL( currentIndexChanged( int ) ),
@@ -574,6 +576,11 @@ void RoutingWidget::updateAlternativeRoutes()
     if ( d->m_ui.routeComboBox->currentIndex() < 0 && d->m_ui.routeComboBox->count() > 0 ) {
         d->m_ui.routeComboBox->setCurrentIndex( 0 );
     }
+}
+
+void RoutingWidget::setGuidanceModeEnabled( bool enabled )
+{
+    d->m_routingManager->setGuidanceModeEnabled( enabled );
 }
 
 } // namespace Marble
