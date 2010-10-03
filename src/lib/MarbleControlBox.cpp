@@ -224,11 +224,6 @@ void MarbleControlBox::setWorkOffline(bool offline)
     }
 }
 
-void MarbleControlBox::setMapThemeModel( QStandardItemModel *mapThemeModel )
-{
-    d->m_mapViewWidget->setMapThemeModel( mapThemeModel );
-}
-
 void MarbleControlBox::updateMapThemeView()
 {
     d->m_mapViewWidget->updateMapThemeView();

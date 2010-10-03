@@ -44,8 +44,6 @@ class MARBLE_EXPORT MapViewWidget : public QWidget
      */
     void setMarbleWidget( MarbleWidget *widget );
 
-    void setMapThemeModel( QStandardItemModel *mapThemeModel );
-
     void updateCelestialModel();
 
  public Q_SLOTS:

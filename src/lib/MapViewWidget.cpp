@@ -16,6 +16,7 @@
 
 // Marble
 #include "MarbleWidget.h"
+#include "MapThemeManager.h"
 #include "MapThemeSortFilterProxyModel.h"
 #include "Planet.h"
 #include "GeoSceneDocument.h"
@@ -33,9 +34,41 @@ namespace Marble
 
 class MapViewWidgetPrivate {
  public:
+    MapViewWidgetPrivate( MapViewWidget *parent )
+        : m_parent( parent ),
+          m_mapThemeManager( 0 )
+    {
+    }
+
+    void setMapThemeModel( QStandardItemModel *mapThemeModel )
+    {
+        if ( mapThemeModel != m_mapThemeModel ) {
+            delete m_mapThemeModel;
+        }
+
+        m_mapThemeModel = mapThemeModel;
+        m_mapSortProxy->setSourceModel( m_mapThemeModel );
+        int currentIndex = m_mapViewUi.celestialBodyComboBox->currentIndex();
+        QStandardItem * selectedItem = m_celestialList->item( currentIndex, 1 );
+
+        if ( selectedItem ) {
+            QString selectedId;
+            selectedId = selectedItem->text();
+            m_mapSortProxy->setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
+        }
+
+        m_mapSortProxy->sort( 0 );
+        m_mapViewUi.marbleThemeSelectView->setModel( m_mapSortProxy );
+        QObject::connect( m_mapThemeModel,       SIGNAL( rowsInserted( QModelIndex, int, int ) ),
+                          m_parent,              SLOT( updateMapThemeView() ) );
+    }
+
+    MapViewWidget *m_parent;
+
     Ui::MapViewWidget  m_mapViewUi;
     MarbleWidget      *m_widget;
 
+    MapThemeManager        *m_mapThemeManager;
     QStandardItemModel     *m_mapThemeModel;
     MapThemeSortFilterProxyModel *m_mapSortProxy;
 
@@ -44,7 +77,7 @@ class MapViewWidgetPrivate {
 
 MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
     : QWidget( parent, f ),
-      d( new MapViewWidgetPrivate() )
+      d( new MapViewWidgetPrivate( this ) )
 {
     d->m_mapViewUi.setupUi( this );
 
@@ -77,29 +110,6 @@ MapViewWidget::~MapViewWidget()
 {
     delete d;
     delete d->m_celestialList;
-}
-
-void MapViewWidget::setMapThemeModel( QStandardItemModel *mapThemeModel )
-{
-    if ( mapThemeModel != d->m_mapThemeModel ) {
-        delete d->m_mapThemeModel;
-    }
-
-    d->m_mapThemeModel = mapThemeModel;
-    d->m_mapSortProxy->setSourceModel( d->m_mapThemeModel );
-    int currentIndex = d->m_mapViewUi.celestialBodyComboBox->currentIndex();
-    QStandardItem * selectedItem = d->m_celestialList->item( currentIndex, 1 );
-
-    if ( selectedItem ) {
-        QString selectedId;
-        selectedId = selectedItem->text();
-        d->m_mapSortProxy->setFilterRegExp( QRegExp( selectedId, Qt::CaseInsensitive,QRegExp::FixedString ) );
-    }
-
-    d->m_mapSortProxy->sort( 0 );
-    d->m_mapViewUi.marbleThemeSelectView->setModel( d->m_mapSortProxy );
-    connect( d->m_mapThemeModel,       SIGNAL( rowsInserted( QModelIndex, int, int ) ),
-            this,                     SLOT( updateMapThemeView() ) );
 }
 
 void MapViewWidget::updateCelestialModel()
@@ -136,6 +146,14 @@ void MapViewWidget::setMarbleWidget( MarbleWidget *widget )
 
     connect( this,        SIGNAL( selectMapTheme( const QString& ) ),
              d->m_widget, SLOT( setMapThemeId( const QString& ) ) );
+
+    // TODO: Creating a second MapThemeManager may not be the best solution here.
+    // MarbleModel also holds one with a QFileSystemWatcher.
+    if( !d->m_mapThemeManager ) {
+        d->m_mapThemeManager = new MapThemeManager();
+        d->setMapThemeModel( d->m_mapThemeManager->mapThemeModel() );
+        updateMapThemeView();
+    }
 }
 
 void MapViewWidget::updateMapThemeView()
@@ -205,7 +223,7 @@ void MapViewWidget::selectCurrentMapTheme( const QString& celestialBodyId )
 {
     Q_UNUSED( celestialBodyId )
 
-    setMapThemeModel( d->m_mapThemeModel );
+    d->setMapThemeModel( d->m_mapThemeModel );
 
     bool foundMapTheme = false;
 

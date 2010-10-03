@@ -95,8 +95,6 @@ class MARBLE_EXPORT MarbleControlBox : public QToolBox
       */
     void setWorkOffline(bool offline);
 
-    void setMapThemeModel( QStandardItemModel *mapThemeModel );
-
  public Q_SLOTS:
     void selectTheme( const QString & );
 
