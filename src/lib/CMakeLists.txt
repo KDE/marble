@@ -370,6 +370,8 @@ else (APPLE AND QTONLY)
     geodata/data/Serializable.h
     geodata/geodata_export.h
     geodata/parser/GeoDocument.h
+    routing/RoutingWidget.h
+    routing/RoutingManager.h
     TileCreator.h
     PluginInterface.h
     RenderPlugin.h

@@ -14,6 +14,7 @@
 #include "GeoDataCoordinates.h"
 #include "GeoDataLineString.h"
 #include "RoutingManager.h"
+#include "marble_export.h"
 
 #include <QtCore/QModelIndex>
 #include <QtGui/QWidget>
@@ -30,7 +31,7 @@ class RoutingWidgetPrivate;
   * a list view showing routing instructions and a interactive paint layer
   * showing placemarks and the route
   */
-class RoutingWidget : public QWidget
+class MARBLE_EXPORT RoutingWidget : public QWidget
 {
     Q_OBJECT
 
