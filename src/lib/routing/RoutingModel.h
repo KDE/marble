@@ -151,6 +151,16 @@ public:
      */
     qreal currentInstructionLength() const;
 
+    /**
+      * Returns an icon indicating the turn type for the next driving instruction
+      */
+    QPixmap nextInstructionPixmap() const;
+
+    /**
+      * Returns an icon indicating the turn type for the next but one driving instruction
+      */
+    QPixmap followingInstructionPixmap() const;
+
 public Q_SLOTS:
     /**
       * Old data in the model is discarded, the parsed content of the provided document

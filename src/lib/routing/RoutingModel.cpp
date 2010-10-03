@@ -55,6 +55,13 @@ typedef QVector<RouteElement> RouteElements;
 class RoutingModelPrivate
 {
 public:
+    enum RouteDeviation
+    {
+        Unknown,
+        OnRoute,
+        OffRoute
+    };
+
     RoutingModelPrivate( RouteRequest* request );
 
     RouteElements m_route;
@@ -69,9 +76,11 @@ public:
     int m_nextInstructionIndex;
     qreal m_nextInstructionDistance;
     qreal m_currentInstructionLength;
+    QPixmap m_nextInstructionPixmap;
+    QPixmap m_followingInstructionPixmap;
     GeoDataCoordinates m_location;
     QString m_nextDescription;
-    bool m_routeLeft;
+    RouteDeviation m_deviation;
     QMap<RoutingInstruction::TurnType,QPixmap> m_turnTypePixmaps;
     PositionTracking* m_positionTracking;
     RouteRequest* m_request;
@@ -92,7 +101,7 @@ RoutingModelPrivate::RoutingModelPrivate( RouteRequest* request )
       m_nextInstructionIndex( 0 ),
       m_nextInstructionDistance( 0.0 ),
       m_currentInstructionLength( 0.0 ),
-      m_routeLeft( false ),
+      m_deviation( Unknown ),
       m_positionTracking( 0 ),
       m_request( request )
 {
@@ -259,6 +268,7 @@ bool RoutingModel::setCurrentRoute( GeoDataDocument* document )
         d->importPlacemark( placemark );
     }
 
+    d->m_deviation = RoutingModelPrivate::Unknown;
     reset();
     return true;
 }
@@ -446,6 +456,12 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
                 if( d->m_nextInstructionIndex != instructions.size() ) {
                     d->m_location = instructions[d->m_nextInstructionIndex].position;
                     d->m_nextDescription = instructions[d->m_nextInstructionIndex].description;
+                    d->m_nextInstructionPixmap = d->m_turnTypePixmaps[instructions[d->m_nextInstructionIndex].turnType];
+                    if ( d->m_nextInstructionIndex+1 < instructions.size() ) {
+                        d->m_followingInstructionPixmap = d->m_turnTypePixmaps[instructions[d->m_nextInstructionIndex+1].turnType];
+                    } else if ( d->m_request->size() > 0 ) {
+                        d->m_followingInstructionPixmap = d->m_request->pixmap( d->m_request->size()-1 );
+                    }
                     //distance between current position and next instruction point
                     distanceRemaining = distanceSphere( location, d->m_location ) * radius;
                 }
@@ -484,9 +500,10 @@ void RoutingModel::currentInstruction( GeoDataCoordinates location, qreal speed 
         emit nextInstruction( d->m_totalTimeRemaining, d->m_totalDistanceRemaining );
 
         bool const deviated = d->deviatedFromRoute( location, wayPoints );
-        if ( deviated != d->m_routeLeft ) {
-            d->m_routeLeft = deviated;
-            emit deviatedFromRoute( d->m_routeLeft );
+        RoutingModelPrivate::RouteDeviation const deviation = deviated ? RoutingModelPrivate::OffRoute : RoutingModelPrivate::OnRoute;
+        if ( d->m_deviation != deviation ) {
+            d->m_deviation = deviation;
+            emit deviatedFromRoute( deviated );
         }
 
         d->updateViaPoints( location );
@@ -520,7 +537,7 @@ QString RoutingModel::instructionText() const
 
 bool RoutingModel::deviatedFromRoute() const
 {
-    return d->m_routeLeft;
+    return d->m_deviation != RoutingModelPrivate::OnRoute;
 }
 
 qreal RoutingModel::nextInstructionDistance() const
@@ -531,6 +548,16 @@ qreal RoutingModel::nextInstructionDistance() const
 qreal RoutingModel::currentInstructionLength() const
 {
     return d->m_currentInstructionLength;
+}
+
+QPixmap RoutingModel::nextInstructionPixmap() const
+{
+    return d->m_nextInstructionPixmap;
+}
+
+QPixmap RoutingModel::followingInstructionPixmap() const
+{
+    return d->m_followingInstructionPixmap;
 }
 
 } // namespace Marble

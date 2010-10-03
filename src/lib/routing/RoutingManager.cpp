@@ -330,10 +330,11 @@ void RoutingManager::recalculateRoute( bool deviated )
 
         if ( d->m_routeRequest->size() == 2 && d->m_routeRequest->visited( 0 ) && !d->m_routeRequest->visited( 1 ) ) {
             d->m_routeRequest->setPosition( 0, d->m_marbleModel->positionTracking()->currentLocation() );
+            updateRoute();
         } else if ( d->m_routeRequest->size() != 0 && !d->m_routeRequest->visited( d->m_routeRequest->size()-1 ) ) {
             d->m_routeRequest->insert( 0, d->m_marbleModel->positionTracking()->currentLocation() );
+            updateRoute();
         }
-        updateRoute();
     }
 }
 
