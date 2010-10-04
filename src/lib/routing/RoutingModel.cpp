@@ -231,7 +231,12 @@ QVariant RoutingModel::data ( const QModelIndex & index, int role ) const
             break;
         case Qt::DecorationRole:
             if ( element.type == Instruction ) {
-               return d->m_turnTypePixmaps[element.turnType];
+                bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+                if ( smallScreen ) {
+                    return d->m_turnTypePixmaps[element.turnType];
+                } else {
+                    return d->m_turnTypePixmaps[element.turnType].scaled( 32, 32 );
+                }
             }
 
             return QVariant();

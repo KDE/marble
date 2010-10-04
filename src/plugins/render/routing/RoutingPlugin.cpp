@@ -237,6 +237,11 @@ void RoutingPlugin::updateButtons( int zoomValue )
         zoomOutButton->setEnabled( true );
     }
 
+    updateWidget();
+}
+
+void RoutingPlugin::updateWidget()
+{
     if ( m_marbleWidget )
     {
         // Trigger a repaint of the float item. Otherwise button state updates
@@ -295,6 +300,7 @@ void RoutingPlugin::showRoutingItem( bool show )
     }
 
     m_marbleWidget->model()->routingManager()->setGuidanceModeEnabled( show );
+    updateWidget();
 }
 
 void RoutingPlugin::setDestinationInformation( qint32 remainingTime, qreal remainingDistance )
@@ -340,7 +346,7 @@ void RoutingPlugin::updateRoutingItem()
            m_routingInformationWidgetSmall->destinationDistanceLabel->setText( tr( "<font size=\"-1\" color=\"black\">%n min</font>", "", remainingTimeMinutes ) );
        }
        else {
-           m_routingInformationWidgetSmall->destinationDistanceLabel->setText( "<font size=\"-1\" color=\"black\">Very soon.</font>" );
+           m_routingInformationWidgetSmall->destinationDistanceLabel->setText( "<font size=\"-1\" color=\"black\">Soon</font>" );
        }
 
 //       if( remainingTimeMinutes < thresholdTime ) {
@@ -421,7 +427,7 @@ void RoutingPlugin::updateInstructionLabel( QLabel *label )
             }
         }
         else {
-            nextInstructionDistanceLabel->setText( "Arrived at Destination" );
+            nextInstructionDistanceLabel->setText( "<font size=\"-1\" color=\"black\">Arrived at Destination</font>" );
         }
     }
 }
@@ -429,6 +435,7 @@ void RoutingPlugin::updateInstructionLabel( QLabel *label )
 void RoutingPlugin::updateButtonStates( PositionProviderPlugin *activePlugin )
 {
     m_routingWidgetSmall->gpsButton->setChecked( activePlugin != 0 );
+    updateWidget();
 }
 
 void RoutingPlugin::togglePositionTracking( bool enabled )

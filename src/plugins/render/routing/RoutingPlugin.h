@@ -125,6 +125,8 @@ private:
      */
      void updateInstructionLabel( QLabel *label );
 
+     void updateWidget();
+
      MarbleWidget                        *m_marbleWidget;
      WidgetGraphicsItem                  *m_widgetItem;
      WidgetGraphicsItem                  *m_widgetItemRouting;
