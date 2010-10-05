@@ -17,7 +17,11 @@
 * From MarbleWidget remove setProxy(), proxyHost(), proxyPort(), user(), password().
   These methods haven't been meaningful to MarbleWidget and have been commented to be removed a long time ago.
 
+2010-09-30  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+
 * Move MarbleMap::home(...) and MarbleMap::setHome(...) to MarbleModel.
+
+2010-10-01  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
 
 * Remove MarbleMap::goHome().
   Use MarbleMap::flyTo(home), where home is the home position.
@@ -26,3 +30,17 @@
 
 * RenderPlugin::pluginInstance() has been renamed RenderPlugin::newInstance to be consistent with other plugin types.
   You only need to change your code if you're not using the MARBLE_PLUGIN macro in custom RenderPlugins.
+
+2010-10-05  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+
+* Remove MarbleMap::zoom{In, Out}().
+  For applications using MarbleWidget, using its zoomIn() and zoomOut() slots is preferred.
+  For applications that need to operate on MarbleMap directly, there is still MarbleMap::zoomViewBy( zoomAmount ).
+
+* Remove MarbleMap::moveStep() and MarbleMap::move{Left, Right, Up, Down}().
+  For applications using MarbleWidget, using its corresponding methods and slots is preferred.
+  For applications that need to operate on MarbleMap directly, use MarbleMap::rotateBy( ... ). See MarbleWidgetPrivate::moveByStep() for an example.
+
+* Remove Marble{Map, Widget}::{north,south}PolePosition().
+  Use Marble{Map, Widget}::screenCoordinates( 0.0, poleLat, ... ) instead, where poleLat is +90 for the north pole and -90 for the south pole.
+  Feel free to request constants like Marble::NorthPole and Marble::SouthPole if you use the screen coordinates of the poles in your application.
