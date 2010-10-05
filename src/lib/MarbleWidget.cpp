@@ -242,7 +242,7 @@ void MarbleWidgetPrivate::construct()
 
 void MarbleWidgetPrivate::moveByStep( int stepsRight, int stepsDown, FlyToMode mode )
 {
-    int polarity = m_map->viewport()->polarity();
+    int polarity = m_widget->viewport()->polarity();
     qreal left = polarity * stepsRight * m_widget->moveStep();
     qreal down = stepsDown * m_widget->moveStep();
     m_widget->rotateBy( left, down, mode );
@@ -253,7 +253,7 @@ void MarbleWidgetPrivate::repaint()
     // We only have to repaint the background every time if the earth
     // doesn't cover the whole image.
     m_widget->setAttribute( Qt::WA_NoSystemBackground,
-                  m_map->mapCoversViewport() && !m_model->mapThemeId().isEmpty() );
+                  m_widget->viewport()->mapCoversViewport() && !m_model->mapThemeId().isEmpty() );
 
     m_widget->repaint();
 }
@@ -307,7 +307,7 @@ MarbleWidgetInputHandler *MarbleWidget::inputHandler() const
 
 Quaternion MarbleWidget::planetAxis() const
 {
-    return d->m_map->planetAxis();
+    return viewport()->planetAxis();
 }
 
 
@@ -501,7 +501,7 @@ quint64 MarbleWidget::volatileTileCacheLimit() const
 
 void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
 {
-    GeoDataLookAt target = d->m_map->lookAt();
+    GeoDataLookAt target = lookAt();
     target.setRange( KM2METER * d->m_map->distanceFromZoom( newZoom ) );
 
     flyTo( target, mode );
@@ -535,7 +535,7 @@ void MarbleWidget::rotateBy( const qreal deltaLon, const qreal deltaLat, FlyToMo
     Quaternion  rotPhi( 1.0, deltaLat / 180.0, 0.0, 0.0 );
     Quaternion  rotTheta( 1.0, 0.0, deltaLon / 180.0, 0.0 );
 
-    Quaternion  axis = d->m_map->planetAxis();
+    Quaternion  axis = planetAxis();
     qreal lon( 0.0 ), lat( 0.0 );
     axis.getSpherical( lon, lat );
     axis = rotTheta * axis;
@@ -544,7 +544,7 @@ void MarbleWidget::rotateBy( const qreal deltaLon, const qreal deltaLat, FlyToMo
     lat = -axis.pitch();
     lon = axis.yaw();
     
-    GeoDataLookAt target = d->m_map->lookAt();
+    GeoDataLookAt target = lookAt();
     target.setLongitude( lon );
     target.setLatitude( lat );
     flyTo( target, mode );
@@ -559,7 +559,7 @@ void MarbleWidget::centerOn( const qreal lon, const qreal lat, bool animated )
 
 void MarbleWidget::centerOn( const QModelIndex& index, bool animated )
 {
-    QItemSelectionModel *selectionModel = d->m_map->model()->placemarkSelectionModel();
+    QItemSelectionModel *selectionModel = d->m_model->placemarkSelectionModel();
     Q_ASSERT( selectionModel );
 
     selectionModel->clear();
@@ -568,7 +568,7 @@ void MarbleWidget::centerOn( const QModelIndex& index, bool animated )
         const GeoDataCoordinates targetPosition =
             index.data( MarblePlacemarkModel::CoordinateRole ).value<GeoDataCoordinates>();
 
-        GeoDataLookAt target = d->m_map->lookAt();
+        GeoDataLookAt target = lookAt();
         target.setLongitude( targetPosition.longitude() );
         target.setLatitude( targetPosition.latitude() );
         flyTo( target, animated ? Automatic : Instant );
@@ -579,7 +579,7 @@ void MarbleWidget::centerOn( const QModelIndex& index, bool animated )
 
 void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
 {
-    GeoDataLookAt target = d->m_map->lookAt();
+    GeoDataLookAt target = lookAt();
     target.setLongitude( position.longitude() );
     target.setLatitude( position.latitude() );
     flyTo( target, animated ? Automatic : Instant );
@@ -587,9 +587,7 @@ void MarbleWidget::centerOn( const GeoDataCoordinates &position, bool animated )
 
 void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
 {
-    Q_UNUSED( animated );
-
-    ViewportParams* viewparams = d->m_map->viewport();
+    ViewportParams* viewparams = viewport();
     //prevent divide by zero
     if( box.height() && box.width() ) {
         //work out the needed zoom level
@@ -599,8 +597,9 @@ void MarbleWidget::centerOn( const GeoDataLatLonBox &box, bool animated )
     }
 
     //move the map
-    d->m_map->centerOn( box.center().longitude( GeoDataCoordinates::Degree ),
-                        box.center().latitude( GeoDataCoordinates::Degree ) );
+    centerOn( box.center().longitude( GeoDataCoordinates::Degree ),
+              box.center().latitude( GeoDataCoordinates::Degree ),
+              animated );
 
     repaint();
 }
@@ -737,12 +736,12 @@ qreal MarbleWidget::centerLongitude() const
 
 QRegion MarbleWidget::activeRegion()
 {
-    return d->m_map->viewport()->activeRegion();
+    return viewport()->activeRegion();
 }
 
 QRegion MarbleWidget::mapRegion()
 {
-    return d->m_map->viewport()->currentProjection()->mapRegion( d->m_map->viewport() );
+    return viewport()->currentProjection()->mapRegion( viewport() );
 }
 
 void MarbleWidget::paintEvent( QPaintEvent *evt )
@@ -754,9 +753,9 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
 
     // FIXME: Better way to get the GeoPainter
     bool  doClip = true;
-    if ( d->m_map->projection() == Spherical )
-        doClip = ( d->m_map->radius() > width() / 2
-                   || d->m_map->radius() > height() / 2 );
+    if ( projection() == Spherical )
+        doClip = ( radius() > width() / 2
+                   || radius() > height() / 2 );
 
     QPaintDevice *paintDevice = this;
     QImage image;
@@ -798,7 +797,7 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
         widgetPainter.drawImage( rect(), image );
     }
 
-    if ( d->m_map->showFrameRate() )
+    if ( showFrameRate() )
     {
         qreal fps = 1000.0 / (qreal)( t.elapsed() + 1 );
         d->m_map->d->paintFps( painter, dirtyRect, fps );
@@ -1154,8 +1153,8 @@ void MarbleWidget::setSelection( const QRect& region )
     mDebug() << "Selection region: (" << tl.x() << ", " <<  tl.y() << ") (" 
              << br.x() << ", " << br.y() << ")" << endl;
 
-    AbstractProjection *proj = d->m_map->viewport()->currentProjection();
-    GeoDataLatLonAltBox box  = proj->latLonAltBox( region, d->m_map->viewport() );
+    AbstractProjection *proj = viewport()->currentProjection();
+    GeoDataLatLonAltBox box  = proj->latLonAltBox( region, viewport() );
 
     // NOTE: coordinates as lon1, lat1, lon2, lat2 (or West, North, East, South)
     // as left/top, right/bottom rectangle.
@@ -1293,17 +1292,15 @@ void MarbleWidget::changeEvent( QEvent * event )
     QWidget::changeEvent(event);
 }
 
-void MarbleWidget::flyTo( const GeoDataLookAt &lookAt, FlyToMode mode )
+void MarbleWidget::flyTo( const GeoDataLookAt &newLookAt, FlyToMode mode )
 {
     if ( !d->m_animationsEnabled || mode == Instant ) {
-        d->m_map->flyTo( lookAt );
+        d->m_map->flyTo( newLookAt );
         d->repaint();
     }
     else {
-        GeoDataLookAt source = d->m_map->lookAt();
         setViewContext( Marble::Animation );
-        ViewportParams *viewport = d->m_map->viewport();
-        d->m_physics->flyTo( source, lookAt, viewport, mode );
+        d->m_physics->flyTo( lookAt(), newLookAt, viewport(), mode );
     }
 }
 
