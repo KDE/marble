@@ -764,25 +764,6 @@ void MarbleMap::setProjection( Projection projection )
 }
 
 
-int MarbleMap::northPoleY()
-{
-    return northPolePosition().y();
-}
-
-QPoint MarbleMap::northPolePosition() const
-{
-    qreal x, y;
-    screenCoordinates( 0.0, 90.0, x, y );
-    return QPoint( (int) x, (int) y );
-}
-
-QPoint MarbleMap::southPolePosition() const
-{
-    qreal x, y;
-    screenCoordinates( 0.0, -90.0, x, y );
-    return QPoint( (int) x, (int) y );
-}
-
 bool MarbleMap::screenCoordinates( qreal lon, qreal lat,
                                    qreal& x, qreal& y ) const
 {
