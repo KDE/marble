@@ -90,7 +90,7 @@ class MarbleWidgetPrivate
       * @param stepsDown Number of steps to go down. Negative values go up.
       * @param mode Interpolation mode to use when traveling to the target
       */
-    void moveByStep( MarbleWidget* widget, int stepsRight, int stepsDown, FlyToMode mode );
+    void moveByStep( int stepsRight, int stepsDown, FlyToMode mode );
 
     /**
       * @brief Update widget flags and cause a full repaint
@@ -240,12 +240,12 @@ void MarbleWidgetPrivate::construct()
                        m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
 }
 
-void MarbleWidgetPrivate::moveByStep( MarbleWidget* widget, int stepsRight, int stepsDown, FlyToMode mode )
+void MarbleWidgetPrivate::moveByStep( int stepsRight, int stepsDown, FlyToMode mode )
 {
     int polarity = m_map->viewport()->polarity();
     qreal left = polarity * stepsRight * m_widget->moveStep();
     qreal down = stepsDown * m_widget->moveStep();
-    widget->rotateBy( left, down, mode );
+    m_widget->rotateBy( left, down, mode );
 }
 
 void MarbleWidgetPrivate::repaint()
@@ -649,23 +649,23 @@ void MarbleWidget::setHome( const GeoDataCoordinates& homePoint, int zoom )
 
 void MarbleWidget::moveLeft( FlyToMode mode )
 {
-    d->moveByStep( this, -1, 0, mode );
+    d->moveByStep( -1, 0, mode );
 }
 
 void MarbleWidget::moveRight( FlyToMode mode )
 {
-    d->moveByStep( this, 1, 0, mode );
+    d->moveByStep( 1, 0, mode );
 }
 
 
 void MarbleWidget::moveUp( FlyToMode mode )
 {
-    d->moveByStep( this, 0, -1, mode );
+    d->moveByStep( 0, -1, mode );
 }
 
 void MarbleWidget::moveDown( FlyToMode mode )
 {
-    d->moveByStep( this, 0, 1, mode );
+    d->moveByStep( 0, 1, mode );
 }
 
 void MarbleWidget::leaveEvent( QEvent* )
