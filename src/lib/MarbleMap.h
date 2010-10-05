@@ -257,12 +257,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     QItemSelectionModel *placemarkSelectionModel() const;
 
     /**
-     * @brief  Return how much the map will move if one of the move slots are called.
-     * @return The move step.
-     */
-    qreal moveStep() const;
-
-    /**
      * @brief  Add a GeoDataPlacemark file to the model.
      * @param  filename  the filename of the file containing the Placemarks.
      */
@@ -552,23 +546,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param  projection projection type (e.g. Spherical, Equirectangular, Mercator)
      */
     void setProjection( Projection projection );
-
-    /**
-     * @brief  Move left by the moveStep.
-     */
-    void moveLeft();
-    /**
-     * @brief  Move right by the moveStep.
-     */
-    void moveRight();
-    /**
-     * @brief  Move up by the moveStep.
-     */
-    void moveUp();
-    /**
-     * @brief  Move down by the moveStep.
-     */
-    void moveDown();
 
     /**
      * @brief Get the ID of the current map theme

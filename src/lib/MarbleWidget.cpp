@@ -243,8 +243,8 @@ void MarbleWidgetPrivate::construct()
 void MarbleWidgetPrivate::moveByStep( MarbleWidget* widget, int stepsRight, int stepsDown, FlyToMode mode )
 {
     int polarity = m_map->viewport()->polarity();
-    qreal left = polarity * stepsRight * m_map->moveStep();
-    qreal down = stepsDown * m_map->moveStep();
+    qreal left = polarity * stepsRight * m_widget->moveStep();
+    qreal down = stepsDown * m_widget->moveStep();
     widget->rotateBy( left, down, mode );
 }
 
@@ -350,7 +350,11 @@ QItemSelectionModel *MarbleWidget::placemarkSelectionModel() const
 
 qreal MarbleWidget::moveStep()
 {
-    return d->m_map->moveStep();
+    if ( radius() < sqrt( (qreal)(width() * width() + height() * height()) ) )
+        return 180.0 * 0.1;
+    else
+        return 180.0 * atan( (qreal)width()
+                     / (qreal)( 2 * radius() ) ) * 0.2;
 }
 
 int MarbleWidget::zoom() const

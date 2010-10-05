@@ -412,15 +412,6 @@ QItemSelectionModel *MarbleMap::placemarkSelectionModel() const
     return d->m_model->placemarkSelectionModel();
 }
 
-qreal MarbleMap::moveStep() const
-{
-    if ( radius() < sqrt( (qreal)(width() * width() + height() * height()) ) )
-	return 180.0 * 0.1;
-    else
-	return 180.0 * atan( (qreal)width()
-		     / (qreal)( 2 * radius() ) ) * 0.2;
-}
-
 int MarbleMap::zoom() const
 {
     return d->m_logzoom;
@@ -772,37 +763,6 @@ void MarbleMap::setProjection( Projection projection )
     emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
-
-void MarbleMap::moveLeft()
-{
-    int polarity = viewport()->polarity();
-
-    if ( polarity < 0 )
-        rotateBy( +moveStep(), 0 );
-    else
-        rotateBy( -moveStep(), 0 );
-}
-
-void MarbleMap::moveRight()
-{
-    int polarity = viewport()->polarity();
-
-    if ( polarity < 0 )
-        rotateBy( -moveStep(), 0 );
-    else
-        rotateBy( +moveStep(), 0 );
-}
-
-
-void MarbleMap::moveUp()
-{
-    rotateBy( 0, -moveStep() );
-}
-
-void MarbleMap::moveDown()
-{
-    rotateBy( 0, +moveStep() );
-}
 
 int MarbleMap::northPoleY()
 {
