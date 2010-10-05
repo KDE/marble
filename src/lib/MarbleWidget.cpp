@@ -70,6 +70,7 @@ class MarbleWidgetPrivate
           m_stillQuality( HighQuality ),
           m_animationQuality( LowQuality ),
           m_animationsEnabled( false ),
+          m_zoomStep( 40 ),
           m_inputhandler( 0 ),
           m_physics( new MarblePhysics( parent ) ),
           m_repaintTimer()
@@ -111,9 +112,7 @@ class MarbleWidgetPrivate
 
     bool m_animationsEnabled;
 
-    // Some values from m_map, as they were last time we repainted.
-    // To store them here will save some repaintings.
-    int              m_logZoom;
+    int              m_zoomStep;
 
     MarbleWidgetInputHandler  *m_inputhandler;
 
@@ -215,8 +214,6 @@ void MarbleWidgetPrivate::construct()
                                                             const QString& ) ),
                        m_widget, SLOT( creatingTilesStart( TileCreator*, const QString&,
                                                            const QString& ) ) );
-
-    m_logZoom  = 0;
 
     m_widget->connect( m_model->sunLocator(), SIGNAL( enableWidgetInput( bool ) ),
                        m_widget, SLOT( setInputEnabled( bool ) ) );
@@ -500,27 +497,10 @@ quint64 MarbleWidget::volatileTileCacheLimit() const
 
 void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
 {
-    if ( mode == Instant || !d->m_animationsEnabled ) {
-        // This function is tricky since it needs to be possible to call
-        // both from above as an ordinary function, and "from below",
-        // i.e. as a slot.  That's why we need to save m_logZoom from when
-        // we repainted last time.
+    GeoDataLookAt target = d->m_map->lookAt();
+    target.setRange( KM2METER * d->m_map->distanceFromZoom( newZoom ) );
 
-        // Make all the internal changes to the map.
-        d->m_map->zoomView( newZoom );
-
-        // If no change, we don't need to repainting or anything else.
-        if ( d->m_logZoom == newZoom )
-            return;
-
-        d->m_logZoom = newZoom;
-        d->repaint();
-    }
-    else {
-        GeoDataLookAt target = d->m_map->lookAt();
-        target.setRange( 1000 * d->m_map->distanceFromZoom( newZoom ) );
-        flyTo( target, mode == Automatic ? Instant : mode );
-    }
+    flyTo( target, mode );
 }
 
 
@@ -532,30 +512,12 @@ void MarbleWidget::zoomViewBy( int zoomStep, FlyToMode mode )
 
 void MarbleWidget::zoomIn( FlyToMode mode )
 {
-    if ( mode == Instant || !d->m_animationsEnabled ) {
-        d->m_map->zoomIn();
-        d->repaint();
-    }
-    else {
-        GeoDataLookAt target = d->m_map->lookAt();
-        MarbleMap *map = d->m_map;
-        target.setRange( 1000 * d->m_map->distanceFromZoom( map->zoom() + map->d->m_zoomStep ) );
-        flyTo( target, mode );
-    }
+    zoomViewBy( d->m_zoomStep, mode );
 }
 
 void MarbleWidget::zoomOut( FlyToMode mode )
 {
-    if ( mode == Instant || !d->m_animationsEnabled ) {
-        d->m_map->zoomOut();
-        d->repaint();
-    }
-    else {
-        GeoDataLookAt target = d->m_map->lookAt();
-        MarbleMap *map = d->m_map;
-        target.setRange( 1000 * d->m_map->distanceFromZoom( map->zoom() - map->d->m_zoomStep ) );
-        flyTo( target, mode );
-    }
+    zoomViewBy( -d->m_zoomStep, mode );
 }
 
 void MarbleWidget::rotateBy( const Quaternion& incRot )

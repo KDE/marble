@@ -64,7 +64,6 @@ class MarbleMapPrivate
 
     // zoom related
     int              m_logzoom;
-    int              m_zoomStep;
 
     TextureColorizer  *m_sealegend;
 

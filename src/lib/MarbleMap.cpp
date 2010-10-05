@@ -81,7 +81,6 @@ void MarbleMapPrivate::construct()
     m_dirtyAtmosphere = false;
 
     m_logzoom  = 0;
-    m_zoomStep = 40;
 
     // FloatItems
     m_showFrameRate = false;
@@ -690,16 +689,6 @@ void MarbleMap::zoomViewBy( int zoomStep )
     zoomView( zoom() + zoomStep );
 }
 
-
-void MarbleMap::zoomIn()
-{
-    zoomViewBy( d->m_zoomStep );
-}
-
-void MarbleMap::zoomOut()
-{
-    zoomViewBy( -d->m_zoomStep );
-}
 
 void MarbleMap::rotateBy( const Quaternion& incRot )
 {

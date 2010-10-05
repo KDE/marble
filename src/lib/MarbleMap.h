@@ -494,15 +494,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void zoomViewBy( int zoomStep );
 
     /**
-     * @brief  Zoom in by the amount zoomStep.
-     */
-    void zoomIn();
-    /**
-     * @brief  Zoom out by the amount zoomStep.
-     */
-    void zoomOut();
-
-    /**
      * @brief  Rotate the view by the two angles phi and theta.
      * @param  deltaLon  an angle that specifies the change in terms of longitude
      * @param  deltaLat  an angle that specifies the change in terms of latitude
