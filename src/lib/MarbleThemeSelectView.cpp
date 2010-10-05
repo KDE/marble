@@ -7,6 +7,7 @@
 //
 // Copyright 2006-2007 Torsten Rahn <tackat@kde.org>
 // Copyright 2007      Inge Wallin  <ingwa@kde.org>
+// Copyright 2010      Bastian Holst <bastianholst@gmx.de>
 //
 
 #include "MarbleThemeSelectView.h"
@@ -21,8 +22,8 @@ MarbleThemeSelectView::MarbleThemeSelectView(QWidget *parent)
       d( 0 )                    // No private data yet.
 {
     setViewMode( QListView::IconMode );
-    setFlow( QListView::TopToBottom ); 
-    setWrapping( false ); 
+    setFlow( QListView::LeftToRight );
+    setWrapping( true ); 
     setMovement( QListView::Static );
     setResizeMode( QListView::Fixed );
     setUniformItemSizes ( true );
