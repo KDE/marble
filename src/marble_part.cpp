@@ -108,6 +108,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     m_downloadRegionDialog( 0 ),
     m_pluginModel( 0 ),
     m_configDialog( 0 ),
+    m_position( NOT_AVAILABLE ),
+    m_tileZoomLevel( NOT_AVAILABLE ),
     m_positionLabel( 0 ),
     m_distanceLabel( 0 )
 {
@@ -140,18 +142,31 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     m_statusBarExtension = new KParts::StatusBarExtension( this );
     m_statusBarExtension->statusBar()->setUpdatesEnabled( false );
 
-    m_position = NOT_AVAILABLE;
-    m_distance = m_controlView->marbleWidget()->distanceString();
-    m_tileZoomLevel = NOT_AVAILABLE;
-
     //Load Bookmark File, First time read from system path then once bookmark is used 
     //a copy of bookmarks.kml will be created in local path 
     if( m_controlView->marbleWidget()->loadBookmarkFile( "bookmarks/bookmarks.kml" ) )
         mDebug() << "Bookmark File Loaded Successfully";
 
-    QTimer::singleShot( 0, this, SLOT( initObject() ) );
-
     initializeCustomTimezone();
+
+    setupStatusBar();
+    readSettings();
+    m_statusBarExtension->statusBar()->setUpdatesEnabled( true );
+
+    // Show startup location
+    switch ( MarbleSettings::onStartup() ) {
+    case LastLocationVisited: {
+            GeoDataLookAt target;
+            target.setLongitude( MarbleSettings::quitLongitude() );
+            target.setLatitude( MarbleSettings::quitLatitude() );
+            target.setRange( MarbleSettings::quitRange() );
+            m_controlView->marbleWidget()->flyTo( target, Instant );
+        }
+        break;
+    case ShowHomeLocation:
+        m_controlView->marbleWidget()->goHome( Instant );
+        break;
+    }
 }
 
 MarblePart::~MarblePart()
@@ -160,14 +175,6 @@ MarblePart::~MarblePart()
 
     // Check whether this delete is really needed.
     delete m_configDialog;
-}
-
-void MarblePart::initObject()
-{
-    QCoreApplication::processEvents ();
-    setupStatusBar();
-    readSettings();
-    m_statusBarExtension->statusBar()->setUpdatesEnabled( true );
 }
 
 ControlView* MarblePart::controlView() const
@@ -375,21 +382,10 @@ void MarblePart::setShowCurrentLocation( bool show )
 void MarblePart::readSettings()
 {
     kDebug() << "Start: MarblePart::readSettings()";
-    // Last location on quit
-    if ( MarbleSettings::onStartup() == LastLocationVisited ) {
-        m_controlView->marbleWidget()->centerOn(
-            MarbleSettings::quitLongitude(),
-            MarbleSettings::quitLatitude() );
-        m_controlView->marbleWidget()->zoomView( MarbleSettings::quitZoom() );
-    }
-
     // Set home position
     m_controlView->marbleWidget()->setHome( MarbleSettings::homeLongitude(),
                                             MarbleSettings::homeLatitude(),
                                             MarbleSettings::homeZoom() );
-    if ( MarbleSettings::onStartup() == ShowHomeLocation ) {
-        m_controlView->marbleWidget()->goHome();
-    }
 
     // Map theme and projection
     QString mapTheme = MarbleSettings::mapTheme();
@@ -512,13 +508,13 @@ void MarblePart::readStatusBarSettings()
 void MarblePart::writeSettings()
 {
     // Get the 'quit' values from the widget and store them in the settings.
-    qreal  quitLon = m_controlView->marbleWidget()->centerLongitude();
-    qreal  quitLat = m_controlView->marbleWidget()->centerLatitude();
-    int     quitZoom = m_controlView->marbleWidget()->zoom();
+    qreal  quitLon = m_controlView->marbleWidget()->lookAt().longitude();
+    qreal  quitLat = m_controlView->marbleWidget()->lookAt().latitude();
+    qreal  quitRange = m_controlView->marbleWidget()->lookAt().range();
 
     MarbleSettings::setQuitLongitude( quitLon );
     MarbleSettings::setQuitLatitude( quitLat );
-    MarbleSettings::setQuitZoom( quitZoom );
+    MarbleSettings::setQuitRange( quitRange );
 
     // Get the 'home' values from the widget and store them in the settings.
     qreal  homeLon = 0;
@@ -914,12 +910,6 @@ void MarblePart::showPosition( const QString& position )
     updateStatusBar();
 }
 
-void MarblePart::showDistance( const QString& distance )
-{
-    m_distance = distance;
-    updateStatusBar();
-}
-
 void MarblePart::showZoomLevel( const int tileLevel )
 {
     if ( tileLevel == -1 )
@@ -976,7 +966,7 @@ void MarblePart::updateStatusBar()
         m_positionLabel->setText( i18n( POSITION_STRING, m_position ) );
 
     if ( m_distanceLabel )
-        m_distanceLabel->setText( i18n( DISTANCE_STRING, m_distance ) );
+        m_distanceLabel->setText( i18n( DISTANCE_STRING, m_controlView->marbleWidget()->distanceString() ) );
 
     if ( m_tileZoomLevelLabel )
         m_tileZoomLevelLabel->setText( i18n( TILEZOOMLEVEL_STRING,
@@ -1008,7 +998,7 @@ void MarblePart::setupStatusBar()
     connect( m_controlView->marbleWidget(), SIGNAL( mouseMoveGeoPosition( QString ) ),
              this,                          SLOT( showPosition( QString ) ) );
     connect( m_controlView->marbleWidget(), SIGNAL( distanceChanged( QString ) ),
-             this,                          SLOT( showDistance( QString ) ) );
+             this,                          SLOT( updateStatusBar() ) );
     connect( m_controlView->marbleWidget()->model(), SIGNAL( tileLevelChanged( int )),
              SLOT( showZoomLevel( int )));
     connect( m_controlView->marbleWidget()->model(), SIGNAL( themeChanged( QString )),
@@ -1310,7 +1300,6 @@ void MarblePart::updateSettings()
     MarbleGlobal::getInstance()->locale()->
         setDistanceUnit( (DistanceUnit) MarbleSettings::distanceUnit() );
 
-    m_distance = m_controlView->marbleWidget()->distanceString();
     updateStatusBar();
 
     m_controlView->marbleWidget()->setAnimationsEnabled( MarbleSettings::animateTargetVoyage() );

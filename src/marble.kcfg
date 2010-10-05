@@ -22,8 +22,8 @@
   <entry key="quitLatitude" type="Double" >
    <default>0.0</default>
   </entry>
-  <entry key="quitZoom" type="Int" >
-   <default>1000</default>
+  <entry key="quitRange" type="Double" >
+   <default>11564500</default><!-- roughly zoom level of 1000 -->
   </entry>
   <entry key="mapTheme" type="String" >
    <default></default>

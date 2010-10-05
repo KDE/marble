@@ -64,7 +64,6 @@ class MarblePart: public KParts::ReadOnlyPart
     bool  openUrl( const KUrl &url );
     bool  openFile();
     void  showPosition( const QString& position);
-    void  showDistance( const QString& position);
     void  showZoomLevel( const int );
     void  showDateTime();
     void  mapThemeChanged( const QString& newMapTheme );
@@ -72,8 +71,6 @@ class MarblePart: public KParts::ReadOnlyPart
     void createFolderList();
 
   private Q_SLOTS:
-    void  initObject();
-
     void  exportMapScreenShot();
     void  printMapScreenShot();
     void  copyMap();
@@ -145,6 +142,8 @@ class MarblePart: public KParts::ReadOnlyPart
     void  retrievePluginState();
 
     void  updateSettings();
+
+    void  updateStatusBar();
 
     /**
      * Shows the about dialog for the plugin with the corresponding @p nameId.
@@ -239,7 +238,6 @@ class MarblePart: public KParts::ReadOnlyPart
 
     QString m_position;
     QString m_clock;
-    QString m_distance;
     QString m_tileZoomLevel;
 
     // Items for the statusbar.
@@ -248,8 +246,6 @@ class MarblePart: public KParts::ReadOnlyPart
     QLabel       *m_distanceLabel;
     QLabel       *m_tileZoomLevelLabel;
     QProgressBar *m_downloadProgressBar;
-
-    void updateStatusBar();
 
     KParts::StatusBarExtension *m_statusBarExtension;
 
