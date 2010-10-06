@@ -107,7 +107,7 @@ MonavPlugin::MonavPlugin( QObject *parent ) : RunnerPlugin( parent ), d( new Mon
     // Check installation
     d->m_mapDir = QDir( MarbleDirs::localPath() + "/maps/earth/monav/" );
     bool haveMap = QFileInfo( d->m_mapDir, "plugins.ini" ).exists();
-    setCapabilities( haveMap ? Routing | ReverseGeocoding : None );
+    setCapabilities( haveMap ? Routing /*| ReverseGeocoding */ : None );
 }
 
 MonavPlugin::~MonavPlugin()
