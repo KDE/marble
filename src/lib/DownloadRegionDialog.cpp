@@ -156,10 +156,19 @@ QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
     layout->addWidget( m_specifiedRegionMethodButton );
     layout->addWidget( m_latLonBoxWidget );
 
-    QGroupBox * const selectionMethodBox = new QGroupBox( tr( "Selection Method" ) );
-    selectionMethodBox->setLayout( layout );
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    m_specifiedRegionMethodButton->setVisible( !smallScreen );
+    m_latLonBoxWidget->setVisible( !smallScreen );
 
-    return selectionMethodBox;
+    if ( smallScreen ) {
+        QWidget * const selectionMethodWidget = new QWidget;
+        selectionMethodWidget->setLayout( layout );
+        return selectionMethodWidget;
+    } else {
+        QGroupBox * const selectionMethodBox = new QGroupBox( tr( "Selection Method" ) );
+        selectionMethodBox->setLayout( layout );
+        return selectionMethodBox;
+    }
 }
 
 QLayout * DownloadRegionDialog::Private::createTilesCounter()
