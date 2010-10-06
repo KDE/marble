@@ -37,7 +37,8 @@ class MapViewWidgetPrivate {
  public:
     MapViewWidgetPrivate( MapViewWidget *parent )
         : m_parent( parent ),
-          m_mapThemeManager( 0 )
+          m_mapThemeManager( 0 ),
+          m_celestialList( 0 )
     {
     }
 
@@ -113,8 +114,8 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
 
 MapViewWidget::~MapViewWidget()
 {
-    delete d;
     delete d->m_celestialList;
+    delete d;
 }
 
 void MapViewWidget::updateCelestialModel()
