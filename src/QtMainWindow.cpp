@@ -34,7 +34,7 @@
 #include <QtGui/QPrintDialog>
 #include <QtGui/QPrinter>
 #include <QtGui/QDialogButtonBox>
-#include <QtGui/QVBoxLayout>
+#include <QtGui/QHBoxLayout>
 
 #include <QtGui/QClipboard>
 
@@ -1122,10 +1122,10 @@ void MainWindow::showMapViewDialog()
         MapViewWidget *mapViewWidget = new MapViewWidget( m_mapViewDialog );
         mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
 
-        QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Horizontal, m_mapViewDialog );
+        QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Vertical, m_mapViewDialog );
         connect(buttonBox, SIGNAL( accepted() ), m_mapViewDialog, SLOT( accept() ) );
 
-        QVBoxLayout* layout = new QVBoxLayout;
+        QHBoxLayout* layout = new QHBoxLayout;
         layout->addWidget( mapViewWidget );
         layout->addWidget( buttonBox );
         m_mapViewDialog->setLayout( layout );
@@ -1155,10 +1155,10 @@ void MainWindow::showRoutingDialog()
         m_routingDialog->setWindowTitle( tr( "Routing - Marble" ) );
         RoutingWidget *routingWidget = new RoutingWidget( m_controlView->marbleWidget(), m_routingDialog );
 
-        QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Horizontal, m_routingDialog );
+        QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Vertical, m_routingDialog );
         connect(buttonBox, SIGNAL( accepted() ), m_routingDialog, SLOT( accept() ) );
 
-        QVBoxLayout* layout = new QVBoxLayout;
+        QHBoxLayout* layout = new QHBoxLayout;
         layout->addWidget( routingWidget );
         layout->addWidget( buttonBox );
         m_routingDialog->setLayout( layout );
