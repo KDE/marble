@@ -13,6 +13,7 @@
 //
 
 #include "RoutingLineEdit.h"
+#include "global.h"
 
 #include <QtGui/QApplication>
 #include <QtGui/QClipboard>
@@ -48,7 +49,9 @@ RoutingLineEdit::RoutingLineEdit( QWidget *parent ) :
 
     // Padding for clear button to avoid text underflow
     QString const direction = layoutDirection() == Qt::LeftToRight ? "right" : "left";
-    setStyleSheet( QString( ":enabled { padding-%1: %2; }").arg( direction).arg( 18 ) );
+    if ( !MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        setStyleSheet( QString( ":enabled { padding-%1: %2; }").arg( direction).arg( 18 ) );
+    }
 
     connect( this, SIGNAL( textChanged( QString ) ), SLOT( updateClearButtonIcon( QString ) ) );
 }
