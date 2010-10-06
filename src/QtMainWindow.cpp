@@ -60,6 +60,7 @@
 #include "NewFolderInfoDialog.h"
 #include "GeoDataPlacemark.h"
 #include "routing/RoutingManager.h"
+#include "routing/RoutingWidget.h"
 
 namespace
 {
@@ -77,7 +78,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
         m_downloadRegionDialog( 0 ),
         m_downloadRegionAction( 0 ),
         m_osmEditAction( 0 ),
-        m_mapViewDialog( 0 )
+        m_mapViewDialog( 0 ),
+        m_routingDialog( 0 )
 {
     setUpdatesEnabled( false );
 
@@ -284,18 +286,17 @@ void MainWindow::createMenus()
         connect( m_toggleLegendTabAction, SIGNAL( triggered( bool ) ),
                  this, SLOT( showLegendTab( bool ) ) );
         m_toggleRoutingTabAction = menuBar()->addAction( tr( "Routing" ) );
-        m_toggleRoutingTabAction->setCheckable( true );
         connect( m_toggleRoutingTabAction, SIGNAL( triggered( bool ) ),
-                 this, SLOT( showRoutingTab( bool) ) );
+                 this, SLOT( showRoutingDialog() ) );
 
         m_controlView->marbleControl()->setNavigationTabShown( false );
         m_controlView->marbleControl()->setLegendTabShown( false );
         m_controlView->marbleControl()->setMapViewTabShown( false );
         m_controlView->marbleControl()->setCurrentLocationTabShown( false );
-        m_controlView->marbleControl()->setRoutingTabShown( true );
-        m_toggleRoutingTabAction->setChecked( true );
+        m_controlView->marbleControl()->setRoutingTabShown( false );
 
         menuBar()->addAction( m_aboutMarbleAct );
+        m_controlView->setSideBarShown( false );
         return;
     }
 
@@ -1147,15 +1148,26 @@ void MainWindow::showLegendTab( bool enabled )
     m_controlView->setSideBarShown( enabled );
 }
 
-void MainWindow::showRoutingTab( bool enabled )
+void MainWindow::showRoutingDialog()
 {
-    m_toggleLegendTabAction->setChecked( false );
-    m_controlView->marbleControl()->setNavigationTabShown( false );
-    m_controlView->marbleControl()->setLegendTabShown( false );
-    m_controlView->marbleControl()->setMapViewTabShown( false );
-    m_controlView->marbleControl()->setCurrentLocationTabShown( false );
-    m_controlView->marbleControl()->setRoutingTabShown( true );
-    m_controlView->setSideBarShown( enabled );
+    if( !m_routingDialog ) {
+        m_routingDialog = new QDialog( this );
+        m_routingDialog->setWindowTitle( tr( "Routing - Marble" ) );
+        RoutingWidget *routingWidget = new RoutingWidget( m_controlView->marbleWidget(), m_routingDialog );
+
+        QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Horizontal, m_routingDialog );
+        connect(buttonBox, SIGNAL( accepted() ), m_routingDialog, SLOT( accept() ) );
+
+        QVBoxLayout* layout = new QVBoxLayout( this );
+        layout->addWidget( routingWidget );
+        layout->addWidget( buttonBox );
+        m_routingDialog->setLayout( layout );
+        m_routingDialog->resize( 640, 420 );
+    }
+
+    m_routingDialog->show();
+    m_routingDialog->raise();
+    m_routingDialog->activateWindow();
 }
 
 

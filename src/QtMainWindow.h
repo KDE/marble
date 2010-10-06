@@ -118,7 +118,7 @@ class MainWindow : public QMainWindow
     // Small screen devices specific slots
     void showMapViewDialog();
     void showLegendTab( bool enabled );
-    void showRoutingTab( bool enabled );
+    void showRoutingDialog();
 
  private:
     ControlView *m_controlView;
@@ -193,6 +193,7 @@ class MainWindow : public QMainWindow
     QAction *m_toggleRoutingTabAction;
 
     QDialog *m_mapViewDialog;
+    QDialog *m_routingDialog;
 };
 
 } // namespace Marble
