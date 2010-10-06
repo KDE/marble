@@ -142,10 +142,8 @@ MarblePart::MarblePart( QWidget *parentWidget, QObject *parent, const QStringLis
     m_statusBarExtension = new KParts::StatusBarExtension( this );
     m_statusBarExtension->statusBar()->setUpdatesEnabled( false );
 
-    //Load Bookmark File, First time read from system path then once bookmark is used 
-    //a copy of bookmarks.kml will be created in local path 
-    if( m_controlView->marbleWidget()->loadBookmarkFile( "bookmarks/bookmarks.kml" ) )
-        mDebug() << "Bookmark File Loaded Successfully";
+    // Load bookmark file. If it does not exist, a default one will be used.
+    m_controlView->marbleWidget()->loadBookmarkFile( "bookmarks/bookmarks.kml" );
 
     initializeCustomTimezone();
 

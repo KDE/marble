@@ -102,11 +102,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
     connect( m_configDialog, SIGNAL( clearPersistentCacheClicked() ),
              m_controlView->marbleWidget(), SLOT( clearPersistentTileCache() ) );
 
-	//Load Bookmark File, First time read from system path then once bookmark is used
-    //a copy of bookmarks.kml will be created in local path
-    if( m_controlView->marbleWidget()->loadBookmarkFile( "bookmarks/bookmarks.kml" ) )
-        mDebug() << "Bookmark File Loaded Successfully";
-
+    // Load bookmark file. If it does not exist, a default one will be used.
+    m_controlView->marbleWidget()->loadBookmarkFile( "bookmarks/bookmarks.kml" );
 
     createActions();
     createMenus();

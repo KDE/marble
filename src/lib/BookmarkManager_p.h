@@ -19,24 +19,23 @@ namespace Marble
 class GeoDataDocument;
 class BookmarkManagerPrivate
 {
+public:
+    BookmarkManagerPrivate();
 
+    ~BookmarkManagerPrivate();
 
- public:
+    GeoDataDocument* bookmarkDocument();
 
-    BookmarkManagerPrivate()
-      : m_bookmarkDocument( 0 ),
-      m_bookmarkFileRelativePath()
-    {
-    }
-
-    ~BookmarkManagerPrivate()
-    {
-    }
-    
+    void resetBookmarks();
 
     GeoDataDocument *m_bookmarkDocument;
 
-    QString m_bookmarkFileRelativePath;    
+    QString m_bookmarkFileRelativePath;
+
+private:
+    GeoDataDocument* createEmptyBookmarkDocument();
 };
+
 }
+
 #endif
