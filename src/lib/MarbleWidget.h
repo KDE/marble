@@ -49,6 +49,7 @@ class MarbleModel;
 class MarbleWidgetInputHandler;
 class MarbleWidgetPrivate;
 class RenderPlugin;
+class RoutingLayer;
 class SunLocator;
 class TileCreator;
 class GeoDataPlacemark;
@@ -566,6 +567,8 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void removeAllBookmarks();
 
     void addNewBookmarkFolder( const QString& name ) const;
+
+    RoutingLayer* routingLayer();
 
  public Q_SLOTS:
 

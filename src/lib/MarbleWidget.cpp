@@ -47,6 +47,9 @@
 #include "TileCreatorDialog.h"
 #include "ViewportParams.h"
 #include "BookmarkManager.h"
+#include "routing/RoutingLayer.h"
+#include "routing/RoutingManager.h"
+
 namespace Marble
 {
 
@@ -73,7 +76,8 @@ class MarbleWidgetPrivate
           m_zoomStep( 40 ),
           m_inputhandler( 0 ),
           m_physics( new MarblePhysics( parent ) ),
-          m_repaintTimer()
+          m_repaintTimer(),
+          m_routingLayer( 0 )
     {
     }
 
@@ -120,6 +124,8 @@ class MarbleWidgetPrivate
 
     // For scheduling repaints
     QTimer           m_repaintTimer;
+
+    RoutingLayer     *m_routingLayer;
 };
 
 
@@ -238,6 +244,13 @@ void MarbleWidgetPrivate::construct()
                        
     m_widget->connect( m_model, SIGNAL( renderPluginInitialized( RenderPlugin * ) ),
                        m_widget, SIGNAL( renderPluginInitialized( RenderPlugin * ) ) );
+
+    m_routingLayer = new RoutingLayer( m_widget, m_widget );
+    m_routingLayer->setRouteRequest( m_model->routingManager()->routeRequest() );
+    m_model->addLayer( m_routingLayer );
+
+    m_widget->connect( m_routingLayer, SIGNAL( routeDirty() ),
+                       m_model->routingManager(), SLOT( updateRoute() ) );
 }
 
 void MarbleWidgetPrivate::moveByStep( int stepsRight, int stepsDown, FlyToMode mode )
@@ -1341,6 +1354,11 @@ void MarbleWidget::removeAllBookmarks()
 void MarbleWidget::addNewBookmarkFolder( const QString &name ) const
 {
     d->m_model->bookmarkManager()->addNewBookmarkFolder( name );
+}
+
+RoutingLayer* MarbleWidget::routingLayer()
+{
+    return d->m_routingLayer;
 }
              
 }
