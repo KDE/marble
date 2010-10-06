@@ -415,9 +415,4 @@ void ViewportParams::resetFocusPoint()
     d->m_hasFocusPoint = false;
 }
 
-bool ViewportParams::focusPointIsCenter() const
-{
-    return !d->m_hasFocusPoint;
-}
-
 }

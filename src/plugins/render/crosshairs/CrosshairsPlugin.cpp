@@ -75,16 +75,13 @@ bool CrosshairsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
     Q_UNUSED( layer )
 
     if ( renderPos == "ALWAYS_ON_TOP" ) {
-        qreal  centerx  = viewport->width() / 2;
-        qreal  centery  = viewport->height() / 2;
-        int  boxwidth = 6;
-        int  boxheight = 2;
-        int  boxoffset = 4;
+        const int  boxwidth = 6;
+        const int  boxheight = 2;
+        const int  boxoffset = 4;
 
-        GeoDataCoordinates focusPoint = viewport->focusPoint();
-        if (!viewport->focusPointIsCenter()) {
-            viewport->currentProjection()->screenCoordinates(focusPoint, viewport, centerx, centery);
-        }
+        qreal centerx = 0.0;
+        qreal centery = 0.0;
+        viewport->currentProjection()->screenCoordinates(viewport->focusPoint(), viewport, centerx, centery);
 
         painter->save();
 

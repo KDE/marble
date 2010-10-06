@@ -123,14 +123,6 @@ class MARBLE_EXPORT ViewportParams
       */
     void resetFocusPoint();
 
-    /**
-      * @brief Determine whether the focus point is different from the center point
-      * @return False iff an explicit focus point was set with @ref setFocusPoint
-      * and @ref resetFocusPoint has not been called afterwards
-      * @see focusPoint setFocusPoint resetFocusPoint
-      */
-    bool focusPointIsCenter() const;
-
  private:
     Q_DISABLE_COPY( ViewportParams )
     ViewportParamsPrivate * const d;
