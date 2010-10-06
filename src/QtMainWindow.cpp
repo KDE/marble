@@ -33,6 +33,8 @@
 #include <QtGui/QMessageBox>
 #include <QtGui/QPrintDialog>
 #include <QtGui/QPrinter>
+#include <QtGui/QDialogButtonBox>
+#include <QtGui/QVBoxLayout>
 
 #include <QtGui/QClipboard>
 
@@ -1115,8 +1117,18 @@ void MainWindow::showMapViewDialog()
 {
     if( !m_mapViewDialog ) {
         m_mapViewDialog = new QDialog( this );
+        m_mapViewDialog->setWindowTitle( tr( "Map View - Marble" ) );
         MapViewWidget *mapViewWidget = new MapViewWidget( m_mapViewDialog );
         mapViewWidget->setMarbleWidget( m_controlView->marbleWidget() );
+
+        QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Horizontal, m_mapViewDialog );
+        connect(buttonBox, SIGNAL( accepted() ), m_mapViewDialog, SLOT( accept() ) );
+
+        QVBoxLayout* layout = new QVBoxLayout( this );
+        layout->addWidget( mapViewWidget );
+        layout->addWidget( buttonBox );
+        m_mapViewDialog->setLayout( layout );
+        m_mapViewDialog->resize( 640, 420 );
     }
 
     m_mapViewDialog->show();

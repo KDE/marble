@@ -81,13 +81,6 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
 {
     d->m_mapViewUi.setupUi( this );
 
-    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-        d->m_mapViewUi.projectionLabel_2->setVisible( false );
-        d->m_mapViewUi.line->setVisible( false );
-        d->m_mapViewUi.celestialBodyLabel->setVisible( false );
-        d->m_mapViewUi.mapThemeLabel->setVisible( false );
-    }
-
     d->m_mapSortProxy = new MapThemeSortFilterProxyModel( this );
     d->m_mapThemeModel = 0;
 
