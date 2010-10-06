@@ -24,6 +24,7 @@
 
 // Qt
 #include <QtGui/QStandardItemModel>
+#include <QtGui/QGridLayout>
 
 using namespace Marble;
 // Ui
@@ -80,6 +81,17 @@ MapViewWidget::MapViewWidget( QWidget *parent, Qt::WindowFlags f )
       d( new MapViewWidgetPrivate( this ) )
 {
     d->m_mapViewUi.setupUi( this );
+
+    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        QGridLayout* layout = new QGridLayout;
+        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 0 ), 0, 0 );
+        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 0 ), 0, 1 );
+        d->m_mapViewUi.line->setVisible( false );
+        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 1 ), 1, 0 );
+        layout->addItem( d->m_mapViewUi.verticalLayout->takeAt( 1 ), 1, 1 );
+        d->m_mapViewUi.verticalLayout->insertLayout( 0, layout );
+        d->m_mapViewUi.mapThemeLabel->setVisible( false );
+    }
 
     d->m_mapSortProxy = new MapThemeSortFilterProxyModel( this );
     d->m_mapThemeModel = 0;

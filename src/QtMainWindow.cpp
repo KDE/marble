@@ -1125,7 +1125,7 @@ void MainWindow::showMapViewDialog()
         QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Horizontal, m_mapViewDialog );
         connect(buttonBox, SIGNAL( accepted() ), m_mapViewDialog, SLOT( accept() ) );
 
-        QVBoxLayout* layout = new QVBoxLayout( this );
+        QVBoxLayout* layout = new QVBoxLayout;
         layout->addWidget( mapViewWidget );
         layout->addWidget( buttonBox );
         m_mapViewDialog->setLayout( layout );
@@ -1158,7 +1158,7 @@ void MainWindow::showRoutingDialog()
         QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Horizontal, m_routingDialog );
         connect(buttonBox, SIGNAL( accepted() ), m_routingDialog, SLOT( accept() ) );
 
-        QVBoxLayout* layout = new QVBoxLayout( this );
+        QVBoxLayout* layout = new QVBoxLayout;
         layout->addWidget( routingWidget );
         layout->addWidget( buttonBox );
         m_routingDialog->setLayout( layout );
