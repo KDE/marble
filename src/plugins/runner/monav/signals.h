@@ -51,15 +51,19 @@ struct RoutingDaemonNode {
 };
 
 struct RoutingDaemonEdge {
-	unsigned length;
-	unsigned name;
-	unsigned type;
+	unsigned length; // length of the edge == number of edges it represents == number of nodes - 1
+	unsigned name; // name ID of the edge
+	unsigned type; // type ID of the edge
+	unsigned seconds; // travel time metric for the edge
+	bool branchingPossible; // is it possible to choose between more than one subsequent edge ( turning around on bidirectional edges does not count )
 
 	friend QDataStream& operator<< ( QDataStream& out, const RoutingDaemonEdge& edge )
 	{
 		out << edge.length;
 		out << edge.name;
 		out << edge.type;
+		out << edge.seconds;
+		out << edge.branchingPossible;
 		return out;
 	}
 
@@ -68,6 +72,8 @@ struct RoutingDaemonEdge {
 		in >> edge.length;
 		in >> edge.name;
 		in >> edge.type;
+		in >> edge.seconds;
+		in >> edge.branchingPossible;
 		return in;
 	}
 };
