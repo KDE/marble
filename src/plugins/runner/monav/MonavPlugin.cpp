@@ -186,7 +186,8 @@ void MonavPluginPrivate::loadMaps()
     QString base = MarbleDirs::localPath() + "/maps/earth/monav/";
     loadMap( base );
     QDir::Filters filters = QDir::AllDirs | QDir::Readable | QDir::NoDotAndDotDot;
-    QDirIterator iter( base, filters, QDirIterator::Subdirectories );
+    QDirIterator::IteratorFlags flags = QDirIterator::Subdirectories | QDirIterator::FollowSymlinks;
+    QDirIterator iter( base, filters, flags );
     while ( iter.hasNext() ) {
         iter.next();
         loadMap( iter.filePath() );
@@ -250,18 +251,22 @@ MarbleAbstractRunner* MonavPlugin::newRunner() const
 
 QString MonavPlugin::mapDirectoryForRequest( RouteRequest* request ) const
 {
-    foreach( const MonavMap &map, d->m_maps ) {
+    for ( int j=0; j<d->m_maps.size(); ++j ) {
         bool containsAllPoints = true;
         for ( int i = 0; i < request->size(); ++i ) {
             GeoDataCoordinates via = request->at( i );
-            if ( !map.containsPoint( via ) ) {
+            if ( !d->m_maps[j].containsPoint( via ) ) {
                 containsAllPoints = false;
                 break;
             }
         }
 
         if ( containsAllPoints ) {
-            return map.m_directory.absolutePath();
+            if ( j ) {
+                // Subsequent route requests will likely be in the same country
+                qSwap( d->m_maps[0], d->m_maps[j] );
+            }
+            return d->m_maps.first().m_directory.absolutePath();
         }
     }
 
