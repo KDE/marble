@@ -30,6 +30,8 @@ public:
 
     virtual MarbleAbstractRunner* newRunner() const;
 
+    QString mapDirectoryForRequest( RouteRequest* request ) const;
+
 private:
     MonavPluginPrivate* const d;
 };

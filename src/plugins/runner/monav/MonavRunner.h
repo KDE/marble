@@ -20,12 +20,13 @@ namespace Marble
 {
 
 class MonavRunnerPrivate;
+class MonavPlugin;
 
 class MonavRunner : public MarbleAbstractRunner
 {
     Q_OBJECT
 public:
-    explicit MonavRunner( QObject *parent = 0 );
+    explicit MonavRunner( const MonavPlugin* plugin, QObject *parent = 0 );
 
     ~MonavRunner();
 

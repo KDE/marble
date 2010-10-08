@@ -9,6 +9,7 @@
 //
 
 #include "MonavRunner.h"
+#include "MonavPlugin.h"
 #include "signals.h"
 
 #include "MarbleDebug.h"
@@ -29,9 +30,9 @@ namespace Marble
 class MonavRunnerPrivate
 {
 public:
-    QDir m_mapDir;
+    const MonavPlugin* m_plugin;
 
-    MonavRunnerPrivate();
+    MonavRunnerPrivate( const MonavPlugin* plugin );
 
     bool retrieveData( RouteRequest *route, RoutingDaemonResult* result ) const;
 
@@ -40,14 +41,19 @@ public:
     GeoDataDocument* createDocument( GeoDataLineString* geometry, const QVector<GeoDataPlacemark*> &instructions  ) const;
 };
 
-MonavRunnerPrivate::MonavRunnerPrivate() :
-        m_mapDir( MarbleDirs::localPath() + "/maps/earth/monav/" )
+MonavRunnerPrivate::MonavRunnerPrivate( const MonavPlugin* plugin ) :
+        m_plugin( plugin )
 {
     // nothing to do
 }
 
 bool MonavRunnerPrivate::retrieveData( RouteRequest *route, RoutingDaemonResult* reply ) const
 {
+    QString mapDir = m_plugin->mapDirectoryForRequest( route );
+    if ( mapDir.isEmpty() ) {
+        return false;
+    }
+
     QLocalSocket socket;
     socket.connectToServer( "MoNavD" );
     if ( socket.waitForConnected() ) {
@@ -61,7 +67,7 @@ bool MonavRunnerPrivate::retrieveData( RouteRequest *route, RoutingDaemonResult*
             waypoints << coordinate;
         }
 
-        command.dataDirectory = m_mapDir.absolutePath();
+        command.dataDirectory = mapDir;
         command.lookupRadius = 1500;
         command.waypoints = waypoints;
         command.lookupStrings = true;
@@ -72,7 +78,7 @@ bool MonavRunnerPrivate::retrieveData( RouteRequest *route, RoutingDaemonResult*
         if ( reply->read( &socket ) ) {
             switch ( reply->type ) {
             case RoutingDaemonResult::LoadFailed:
-                mDebug() << "failed to load monav map from " << m_mapDir.absolutePath();
+                mDebug() << "failed to load monav map from " << mapDir;
                 return false;
                 break;
             case RoutingDaemonResult::RouteFailed:
@@ -180,9 +186,9 @@ GeoDataDocument* MonavRunnerPrivate::createDocument( GeoDataLineString *geometry
     return result;
 }
 
-MonavRunner::MonavRunner( QObject *parent ) :
+MonavRunner::MonavRunner( const MonavPlugin* plugin, QObject *parent ) :
         MarbleAbstractRunner( parent ),
-        d( new MonavRunnerPrivate )
+        d( new MonavRunnerPrivate( plugin ) )
 {
     // nothing to do
 }
