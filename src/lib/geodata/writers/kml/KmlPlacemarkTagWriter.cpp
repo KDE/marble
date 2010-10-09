@@ -35,6 +35,7 @@ bool KmlPlacemarkTagWriter::write( const GeoDataObject &node,
     writer.writeStartElement( kml::kmlTag_Placemark );
 
     writer.writeOptionalElement( "name", placemark.name() );
+    writer.writeOptionalElement( kml::kmlTag_styleUrl, placemark.styleUrl() );
 
     if( !placemark.description().isEmpty() ) {
         writer.writeStartElement( "description" );

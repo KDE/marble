@@ -15,6 +15,8 @@
 #include "GeoWriter.h"
 #include "KmlElementDictionary.h"
 #include "GeoDataObject.h"
+#include "GeoDataStyle.h"
+#include "GeoDataStyleMap.h"
 #include "MarbleDebug.h"
 
 #include "GeoDataTypes.h"
@@ -31,6 +33,13 @@ static GeoTagWriterRegistrar s_writerDocument( GeoTagWriter::QualifiedName(GeoDa
 bool KmlDocumentTagWriter::write( const GeoDataObject &node, GeoWriter& writer ) const
 {
     const GeoDataDocument &document = static_cast<const GeoDataDocument&>(node);
+
+    foreach( const GeoDataStyle &style, document.styles() ) {
+        writeElement( style, writer );
+    }
+    foreach( const GeoDataStyleMap &map, document.styleMaps() ) {
+        writeElement( map, writer );
+    }
 
     writer.writeStartElement( kml::kmlTag_Document );
     writer.writeOptionalElement( "name", document.name() );
