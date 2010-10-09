@@ -135,7 +135,7 @@ void MainWindow::createActions()
      connect( m_openAct, SIGNAL( triggered() ),
               this, SLOT( openFile() ) );
 
-     m_downloadAct = new QAction( QIcon(":/icons/get-hot-new-stuff.png"), tr("Download Maps..."), this);
+     m_downloadAct = new QAction( QIcon(":/icons/get-hot-new-stuff.png"), tr("&Download Maps..."), this);
      connect(m_downloadAct, SIGNAL(triggered()), this, SLOT(openMapSite()));
 
      m_exportMapAct = new QAction( QIcon(":/icons/document-save-as.png"), tr("&Export Map..."), this);
@@ -144,7 +144,7 @@ void MainWindow::createActions()
      connect(m_exportMapAct, SIGNAL(triggered()), this, SLOT(exportMapScreenShot()));
 
      // Action: Download Region
-     m_downloadRegionAction = new QAction( tr( "Download Region..." ), this );
+     m_downloadRegionAction = new QAction( tr( "Download &Region..." ), this );
      m_downloadRegionAction->setStatusTip( tr( "Download a map region in different zoom levels for offline usage" ) );
      connect( m_downloadRegionAction, SIGNAL( triggered() ), SLOT( showDownloadRegionDialog() ) );
 
@@ -210,7 +210,7 @@ void MainWindow::createActions()
      m_showCloudsAct->setStatusTip(tr("Show Real Time Cloud Cover"));
      connect(m_showCloudsAct, SIGNAL(triggered( bool )), this, SLOT( showClouds( bool )));
 
-     m_workOfflineAct = new QAction( QIcon(":/icons/user-offline.png"), tr("&Work Offline"), this);
+     m_workOfflineAct = new QAction( QIcon(":/icons/user-offline.png"), tr("Work Off&line"), this);
      m_workOfflineAct->setCheckable( true );
      connect(m_workOfflineAct, SIGNAL(triggered( bool )), this, SLOT( workOffline( bool )));
 
