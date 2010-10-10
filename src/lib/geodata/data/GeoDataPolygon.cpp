@@ -150,4 +150,21 @@ void GeoDataPolygon::unpack( QDataStream& stream )
     }
 }
 
+bool GeoDataPolygon::contains( const GeoDataCoordinates &coordinates ) const
+{
+    if ( !outerBoundary().contains( coordinates ) ) {
+        // Not inside the polygon at all
+        return false;
+    }
+
+    foreach( const GeoDataLinearRing &ring, innerBoundaries() ) {
+        if ( ring.contains( coordinates ) ) {
+            // Inside the polygon, but in one of its holes
+            return false;
+        }
+    }
+
+    return true;
+}
+
 }

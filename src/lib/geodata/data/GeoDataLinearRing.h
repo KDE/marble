@@ -120,6 +120,13 @@ class GEODATA_EXPORT GeoDataLinearRing : public GeoDataLineString
     Deprecation Warning: This method will likely be removed from the public API.
 */
     virtual QVector<GeoDataLineString*> toRangeCorrected() const;
+
+/*!
+    \brief Returns whether the given coordinates lie within the polygon.
+
+    \return <code>true</code> if the coordinates lie within the polygon, false otherwise.
+*/
+    virtual bool contains( const GeoDataCoordinates &coordinates ) const;
 };
 
 }

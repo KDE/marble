@@ -73,5 +73,32 @@ QVector<GeoDataLineString*> GeoDataLinearRing::toRangeCorrected() const
     return p()->m_rangeCorrected;
 }
 
+bool GeoDataLinearRing::contains( const GeoDataCoordinates &coordinates ) const
+{
+    // Quick bounding box check
+    if ( !latLonAltBox().contains( coordinates ) ) {
+        return false;
+    }
+
+    int const points = size();
+    bool inside = false; // also true for points = 0
+    int j = points - 1;
+
+    for ( int i=0; i<points; ++i ) {
+        GeoDataCoordinates one = at( i );
+        GeoDataCoordinates two = at( j );
+
+        if ( ( one.longitude() < coordinates.longitude() && two.longitude() >= coordinates.longitude() ) ||
+             ( two.longitude() < coordinates.longitude() && one.longitude() >= coordinates.longitude() ) ) {
+            if ( one.latitude() + ( coordinates.longitude() - one.longitude()) / ( two.longitude() - one.longitude()) * ( two.latitude()-one.latitude() ) < coordinates.latitude() ) {
+                inside = !inside;
+            }
+        }
+
+        j = i;
+    }
+
+    return inside;
 }
 
+}

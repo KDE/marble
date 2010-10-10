@@ -179,6 +179,13 @@ class GEODATA_EXPORT GeoDataPolygon : public GeoDataGeometry
 */
     void appendInnerBoundary( const GeoDataLinearRing& boundary );
 
+/*!
+    \brief Returns whether the given coordinates lie within the polygon.
+
+    \return <code>true</code> if the coordinates lie within the polygon
+    (and not in its holes), false otherwise.
+*/
+    virtual bool contains( const GeoDataCoordinates &coordinates ) const;
 
     // Serialization
 /*!
