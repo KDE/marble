@@ -32,10 +32,10 @@ bool KmlLineStyleTagWriter::write( const GeoDataObject &node, GeoWriter& writer 
     QColor color = style.color();
     QChar fill = QChar( '0' );
     QString colorString = QString( "%1%2%3%4" )
-                             .arg( color.red(), 2, 16, fill )
-                             .arg( color.green(), 2, 16, fill )
+                             .arg( color.alpha(), 2, 16, fill )
                              .arg( color.blue(), 2, 16, fill )
-                             .arg( color.alpha(), 2, 16, fill );
+                             .arg( color.green(), 2, 16, fill )
+                             .arg( color.red(), 2, 16, fill );
     writer.writeElement( "color", colorString );
     writer.writeElement( "width", QString::number( style.width() ) );
 

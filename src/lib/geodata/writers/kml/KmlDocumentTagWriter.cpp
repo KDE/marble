@@ -34,6 +34,8 @@ bool KmlDocumentTagWriter::write( const GeoDataObject &node, GeoWriter& writer )
 {
     const GeoDataDocument &document = static_cast<const GeoDataDocument&>(node);
 
+    writer.writeStartElement( kml::kmlTag_Document );
+
     foreach( const GeoDataStyle &style, document.styles() ) {
         writeElement( style, writer );
     }
@@ -41,7 +43,6 @@ bool KmlDocumentTagWriter::write( const GeoDataObject &node, GeoWriter& writer )
         writeElement( map, writer );
     }
 
-    writer.writeStartElement( kml::kmlTag_Document );
     writer.writeOptionalElement( "name", document.name() );
     writer.writeOptionalElement( "address", document.address() );
 
