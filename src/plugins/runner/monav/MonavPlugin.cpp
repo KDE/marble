@@ -66,7 +66,7 @@ public:
 
     void loadMaps();
 
-    static bool bordersFirst( const MonavMap &first, const MonavMap &second );
+    static bool areaLessThan( const MonavMap &first, const MonavMap &second );
 
 private:
     void loadMap( const QString &path );
@@ -200,7 +200,7 @@ void MonavPluginPrivate::loadMaps()
         loadMap( iter.filePath() );
     }
     // Prefer maps where bounding boxes are known
-    qSort( m_maps.begin(), m_maps.end(), MonavPluginPrivate::bordersFirst );
+    qSort( m_maps.begin(), m_maps.end(), MonavPluginPrivate::areaLessThan );
 }
 
 void MonavPluginPrivate::loadMap( const QString &path )
@@ -214,7 +214,7 @@ void MonavPluginPrivate::loadMap( const QString &path )
     }
 }
 
-bool MonavPluginPrivate::bordersFirst( const MonavMap &first, const MonavMap &second )
+bool MonavPluginPrivate::areaLessThan( const MonavMap &first, const MonavMap &second )
 {
     if ( !first.m_tiles.isEmpty() && second.m_tiles.isEmpty() ) {
         return true;
@@ -224,7 +224,9 @@ bool MonavPluginPrivate::bordersFirst( const MonavMap &first, const MonavMap &se
         return false;
     }
 
-    return first.m_directory.absolutePath() < second.m_directory.absolutePath();
+    qreal const areaOne = first.m_boundingBox.width() * first.m_boundingBox.height();
+    qreal const areaTwo = second.m_boundingBox.width() * second.m_boundingBox.height();
+    return areaOne < areaTwo;
 }
 
 MonavPlugin::MonavPlugin( QObject *parent ) : RunnerPlugin( parent ), d( new MonavPluginPrivate )
