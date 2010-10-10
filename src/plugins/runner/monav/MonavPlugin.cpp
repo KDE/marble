@@ -14,6 +14,8 @@
 #include "MarbleDirs.h"
 #include "MarbleDebug.h"
 #include "GeoDataLatLonBox.h"
+#include "GeoDataParser.h"
+#include "GeoDataDocument.h"
 
 #include <QtCore/QProcess>
 #include <QtCore/QDir>
@@ -33,7 +35,7 @@ public:
 
     GeoDataLatLonBox m_boundingBox;
 
-    QVector<GeoDataLatLonBox> m_tiles;
+    QVector<GeoDataLinearRing> m_tiles;
 
     void setDirectory( const QDir &dir );
 
@@ -73,7 +75,7 @@ private:
 void MonavMap::setDirectory( const QDir &dir )
 {
     m_directory = dir;
-    QFileInfo boundingBox( dir, dir.dirName() + ".poly" );
+    QFileInfo boundingBox( dir, dir.dirName() + ".kml" );
     if ( boundingBox.exists() ) {
         parseBoundingBox( boundingBox );
     } else {
@@ -83,30 +85,35 @@ void MonavMap::setDirectory( const QDir &dir )
 
 void MonavMap::parseBoundingBox( const QFileInfo &file )
 {
+    GeoDataLineString points;
     QFile input( file.absoluteFilePath() );
     if ( input.open( QFile::ReadOnly ) ) {
-        GeoDataLineString boundingBox;
-        QTextStream stream( &input );
-        stream.readLine();
-        qreal lat( 0.0 ), lon( 0.0 );
-        while ( !stream.atEnd() ) {
-            if ( stream.readLine() == "END" ) {
-                continue;
-            }
-            GeoDataLineString box;
-            for ( int i = 0; i < 5; ++i ) {
-                stream >> lon;
-                stream >> lat;
-                GeoDataCoordinates point( lon, lat, 0.0, GeoDataCoordinates::Degree );
-                box << point;
-                boundingBox << point;
-            }
-            m_tiles.append( box.latLonAltBox() );
-            stream.readLine();
+        GeoDataParser parser( GeoData_KML );
+        if ( !parser.read( &input ) ) {
+            mDebug() << "Could not parse file: " << parser.errorString();
+            return;
         }
-        stream.readLine();
-        m_boundingBox = boundingBox.latLonAltBox();
+
+        GeoDocument *doc = parser.releaseDocument();
+        GeoDataDocument *document = dynamic_cast<GeoDataDocument*>( doc );
+        QVector<GeoDataPlacemark*> placemarks = document->placemarkList();
+        if ( placemarks.size() == 1 ) {
+            GeoDataPlacemark* placemark = placemarks.first();
+            GeoDataMultiGeometry* geometry = dynamic_cast<GeoDataMultiGeometry*>( placemark->geometry() );
+            for ( int i=0; geometry && i<geometry->size(); ++i ) {
+                GeoDataLinearRing* poly = dynamic_cast<GeoDataLinearRing*>( geometry->child( i ) );
+                if ( poly ) {
+                    for ( int j=0; j<poly->size(); ++j ) {
+                        points << poly->at( j );
+                    }
+                    m_tiles.push_back( *poly );
+                }
+            }
+        } else {
+            mDebug() << "File " << file.absoluteFilePath() << " does not contain one placemark, but " << placemarks.size();
+        }
     }
+    m_boundingBox = points.latLonAltBox();
 }
 
 bool MonavMap::containsPoint( const GeoDataCoordinates &point ) const
@@ -121,7 +128,7 @@ bool MonavMap::containsPoint( const GeoDataCoordinates &point ) const
         return false;
     }
 
-    foreach( const GeoDataLatLonBox &box, m_tiles ) {
+    foreach( const GeoDataLinearRing &box, m_tiles ) {
         if ( box.contains( point ) ) {
             return true;
         }
@@ -266,6 +273,7 @@ QString MonavPlugin::mapDirectoryForRequest( RouteRequest* request ) const
                 // Subsequent route requests will likely be in the same country
                 qSwap( d->m_maps[0], d->m_maps[j] );
             }
+            // mDebug() << "Using " << d->m_maps.first().m_directory.dirName() << " as monav map";
             return d->m_maps.first().m_directory.absolutePath();
         }
     }
