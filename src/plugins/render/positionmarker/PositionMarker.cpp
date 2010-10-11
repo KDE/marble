@@ -111,10 +111,6 @@ void PositionMarker::update()
         // calculate the arrow shape, oriented by the heading
         // and with constant size
         QPointF unitVector = position - previousPosition;
-        QPointF relativeLeft;
-        QPointF relativeRight;
-        QPointF relativeTip;
-
         // check that some screen progress was made
         if( unitVector.x() || unitVector.y() ) {
             // magnitude should be >0
@@ -122,20 +118,20 @@ void PositionMarker::update()
                                     + ( unitVector.y() * unitVector.y() ) );
             unitVector = unitVector / magnitude;
             QPointF unitVector2 = QPointF ( -unitVector.y(), unitVector.x() );
-            relativeLeft = - ( unitVector * 9   ) + ( unitVector2 * 9 );
-            relativeRight = - ( unitVector * 9 ) - ( unitVector2 * 9 );
-            relativeTip =  unitVector * 19.0 ;
+            QPointF relativeLeft = - ( unitVector * 9   ) + ( unitVector2 * 9 );
+            QPointF relativeRight = - ( unitVector * 9 ) - ( unitVector2 * 9 );
+            QPointF relativeTip =  unitVector * 19.0 ;
+
+            m_arrow.clear();
+            m_arrow << position
+                    << position + relativeLeft
+                    << position + relativeTip
+                    << position + relativeRight;
+
+            m_dirtyRegion = QRegion();
+            m_dirtyRegion += ( m_arrow.boundingRect().toRect() );
+            m_dirtyRegion += ( m_previousArrow.boundingRect().toRect() );
         }
-
-        m_arrow.clear();
-        m_arrow << position
-                << position + relativeLeft
-                << position + relativeTip
-                << position + relativeRight;
-
-        m_dirtyRegion = QRegion();
-        m_dirtyRegion += ( m_arrow.boundingRect().toRect() );
-        m_dirtyRegion += ( m_previousArrow.boundingRect().toRect() );
     }
 }
 
