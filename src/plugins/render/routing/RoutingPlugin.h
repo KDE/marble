@@ -107,6 +107,9 @@ private Q_SLOTS:
      /** Activate or deactivate position tracking */
      void togglePositionTracking( bool enabled );
 
+     /** Switch source/destination of the route and recalculate it */
+     void reverseRoute();
+
 private:
 
     /**

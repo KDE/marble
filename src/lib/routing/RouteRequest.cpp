@@ -297,6 +297,16 @@ bool RouteRequest::visited( int index ) const
     return visited;
 }
 
+void RouteRequest::reverse()
+{
+    int const total = d->m_route.size();
+    int const upper = total / 2;
+    for( int i=0; i<upper; ++i ) {
+        qSwap( d->m_route[i], d->m_route[total-i-1] );
+        setVisited( i, false );
+        setVisited( total-i-1, false );
+    }
+}
 
 } // namespace Marble
 

@@ -121,6 +121,8 @@ void RoutingPlugin::initialize()
         m_routingWidgetSmall->setupUi( widget );
         m_routingInformationWidgetSmall = new Ui::RoutingInformationWidgetSmall;
         m_routingInformationWidgetSmall->setupUi( widgetSmall );
+        connect( m_routingInformationWidgetSmall->distanceAndInstructionLabel, SIGNAL( linkActivated( QString ) ),
+                 this, SLOT( reverseRoute() ) );
 
         m_widgetItem = new WidgetGraphicsItem( this );
         m_widgetItem->setWidget( widget );
@@ -131,6 +133,8 @@ void RoutingPlugin::initialize()
     else {
         m_routingInformationWidget = new Ui::RoutingInformationWidget;
         m_routingInformationWidget->setupUi( widget );
+        connect( m_routingInformationWidget->distanceAndInstructionLabel, SIGNAL( linkActivated( QString ) ),
+                 this, SLOT( reverseRoute() ) );
 
         m_widgetItem = new WidgetGraphicsItem( this );
         m_widgetItem->setWidget( widget );
@@ -427,7 +431,9 @@ void RoutingPlugin::updateInstructionLabel( QLabel *label )
             }
         }
         else {
-            nextInstructionDistanceLabel->setText( "<font size=\"-1\" color=\"black\">Arrived at Destination</font>" );
+            QString content = "Arrived at Destination. <a href=\"#reverse\">Calculate the way back.</a>";
+            QString text = "<font size=\"-1\" color=\"black\">%1</font>";
+            nextInstructionDistanceLabel->setText( text.arg( content ) );
         }
     }
 }
@@ -450,6 +456,13 @@ void RoutingPlugin::togglePositionTracking( bool enabled )
         qDeleteAll( plugins );
     }
     dataFacade()->positionTracking()->setPositionProviderPlugin( plugin );
+}
+
+void RoutingPlugin::reverseRoute()
+{
+    if ( m_marbleWidget ) {
+        m_marbleWidget->model()->routingManager()->reverseRoute();
+    }
 }
 
 Q_EXPORT_PLUGIN2( RoutingPlugin, Marble::RoutingPlugin )

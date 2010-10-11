@@ -338,6 +338,12 @@ void RoutingManager::recalculateRoute( bool deviated )
     }
 }
 
+void RoutingManager::reverseRoute()
+{
+    d->m_routeRequest->reverse();
+    updateRoute();
+}
+
 } // namespace Marble
 
 #include "RoutingManager.moc"

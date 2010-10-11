@@ -72,6 +72,9 @@ public:
       */
     void retrieveRoute( RouteRequest *route );
 
+    /** Reverse the previously requested route, i.e. swap start and destination (and via points, if any) */
+    void reverseRoute();
+
     /**
       * Toggle offline mode. In offline mode, new routes cannot be downloaded
       */
