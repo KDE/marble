@@ -128,8 +128,13 @@ bool MonavMap::containsPoint( const GeoDataCoordinates &point ) const
         return false;
     }
 
+    // GeoDataLinearRing does a 3D check, but we only have 2D data for
+    // the map bounding box. Therefore the 3D info of e.g. the GPS position
+    // must be ignored.
+    GeoDataCoordinates flatPosition = point;
+    flatPosition.setAltitude( 0.0 );
     foreach( const GeoDataLinearRing &box, m_tiles ) {
-        if ( box.contains( point ) ) {
+        if ( box.contains( flatPosition ) ) {
             return true;
         }
     }
