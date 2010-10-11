@@ -23,12 +23,9 @@ namespace Marble
 class WidgetGraphicsItemPrivate
 {
  public:
-    WidgetGraphicsItemPrivate() {
-    }
+    WidgetGraphicsItemPrivate();
     
-    ~WidgetGraphicsItemPrivate() {
-        delete m_widget;
-    }
+    ~WidgetGraphicsItemPrivate();
     
     QWidget *m_widget;
     QWidget *m_marbleWidget;

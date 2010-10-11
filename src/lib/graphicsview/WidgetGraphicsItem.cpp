@@ -24,6 +24,17 @@
 
 using namespace Marble;
 
+WidgetGraphicsItemPrivate::WidgetGraphicsItemPrivate() :
+        m_widget(0), m_marbleWidget(0)
+{
+    // nothing to do
+}
+
+WidgetGraphicsItemPrivate::~WidgetGraphicsItemPrivate()
+{
+    delete m_widget;
+}
+
 WidgetGraphicsItem::WidgetGraphicsItem( MarbleGraphicsItem *parent )
     : ScreenGraphicsItem( parent ),
       d( new WidgetGraphicsItemPrivate() )
