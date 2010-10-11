@@ -19,7 +19,8 @@ using namespace Marble;
 MarbleClock::MarbleClock()
     : QObject(),
       m_speed( 1 ),
-      m_lastmin( -1 )
+      m_lastmin( -1 ),
+      m_timezoneInSec( 0 )
 {
 
     m_timer = new QTimer( this );
