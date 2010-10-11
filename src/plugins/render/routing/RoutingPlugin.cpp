@@ -153,35 +153,19 @@ bool RoutingPlugin::isInitialized() const
 bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
 {
     if ( !enabled() || !visible() ) {
-        return false;
+        return AbstractFloatItem::eventFilter( object, e );
     }
 
     MarbleWidget *widget = dynamic_cast<MarbleWidget*> (object);
 
     if ( !widget ) {
        return AbstractFloatItem::eventFilter( object, e );
-    }
-
-    if ( m_marbleWidget != widget ) {
+    } else if ( !m_marbleWidget ) {
         m_marbleWidget = widget;
         m_adjustNavigation = m_marbleWidget->model()->routingManager()->adjustNavigation();
         m_routingModel = m_marbleWidget->model()->routingManager()->routingModel();
 
         if( m_profiles & MarbleGlobal::SmallScreen ) {
-
-            // disconnect signals
-            disconnect( m_marbleWidget->model()->positionTracking(), SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
-                                    this, SLOT( updateButtonStates( PositionProviderPlugin* ) ) );
-
-            disconnect( m_routingWidgetSmall->routingButton, SIGNAL( clicked( bool ) ),
-                     this, SLOT( showRoutingItem( bool ) ) );
-            disconnect( m_routingWidgetSmall->zoomInButton, SIGNAL( clicked() ),
-                     m_marbleWidget, SLOT( zoomIn() ) );
-            disconnect( m_routingWidgetSmall->zoomOutButton, SIGNAL( clicked() ),
-                     m_marbleWidget, SLOT( zoomOut() ) );
-            disconnect( m_marbleWidget, SIGNAL( themeChanged( QString ) ),
-                     this, SLOT( selectTheme( QString ) ) );
-
             connect( m_marbleWidget->model()->positionTracking(), SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
                                    this, SLOT( updateButtonStates( PositionProviderPlugin* ) ) );
 
@@ -199,14 +183,10 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
             updateButtons( m_marbleWidget->zoom() );
         }
         else {
-            disconnect( m_routingModel, SIGNAL( nextInstruction( qint32, qreal ) ),
-                    this, SLOT( setDestinationInformation( qint32, qreal ) ) );
             connect( m_routingModel, SIGNAL( nextInstruction( qint32, qreal ) ),
                     this, SLOT( setDestinationInformation( qint32, qreal ) ), Qt::UniqueConnection );
 
             PositionTracking *tracking = m_marbleWidget->model()->positionTracking();
-            disconnect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
-                     this, SLOT( setCurrentLocation( GeoDataCoordinates, qreal ) ) );
             connect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
                      this, SLOT( setCurrentLocation( GeoDataCoordinates, qreal ) ) );
         }
