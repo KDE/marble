@@ -95,7 +95,7 @@ void ExternalEditorDialog::updateDefaultEditor( int index )
         break;
     case 2:
         d->m_defaultEditor = josm;
-        description = tr( "JOSM is a powerful OpenStreetMap editor which is more complex to use that other editors. It is built on the Java platform and therefor runs on all systems for which Java is available but does not integrate well into the workspace. A Java SE-compatible runtime is required." );
+        description = tr( "JOSM is a powerful OpenStreetMap editor which is more complex to use than other editors. It is built on the Java platform and therefor runs on all systems for which Java is available but does not integrate well into the workspace. A Java SE-compatible runtime is required." );
         if ( !d->m_installedEditors[d->m_defaultEditor] ) {
             description += " <b>" + tr( "Please ask your system administrator to install %1 on your system." ).arg( "JOSM" ) + "</b>";
         }
