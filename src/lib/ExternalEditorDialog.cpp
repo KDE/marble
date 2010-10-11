@@ -88,21 +88,21 @@ void ExternalEditorDialog::updateDefaultEditor( int index )
     switch( index ) {
     case 1:
         d->m_defaultEditor = merkaartor;
-        description = tr( "Merkaartor is an OpenStreetMap editor using the WYSIWYG (what you see is what you get) principle." );
+        description = tr( "Merkaartor is an OpenStreetMap editor that is powerful and easy to use. It integrates well into the used workspace." );
         if ( !d->m_installedEditors[d->m_defaultEditor] ) {
             description += " <b>" + tr( "Please ask your system administrator to install %1 on your system." ).arg( "Merkaartor") + "</b>";
         }
         break;
     case 2:
         d->m_defaultEditor = josm;
-        description = tr( "JOSM is a versatile OpenStreetMap editor for offline editing." );
+        description = tr( "JOSM is a powerful OpenStreetMap editor which is more complex to use that other editors. It is built on the Java platform and therefor runs on all systems for which Java is available but does not integrate well into the workspace. A Java SE-compatible runtime is required." );
         if ( !d->m_installedEditors[d->m_defaultEditor] ) {
             description += " <b>" + tr( "Please ask your system administrator to install %1 on your system." ).arg( "JOSM" ) + "</b>";
         }
         break;
     default:
         d->m_defaultEditor = potlatch;
-        description = tr( "Potlatch is an OpenStreetMap editor for quick editing tasks targeted at beginners. It requires a web browser with flash support." );
+        description = tr( "Potlatch is a very easy to use OpenStreetMap editor, though lacks the power of Merkaartor and JOSM. It runs on all platforms for which web browsers with Flash support are available. Performance of Potlatch is depending on the quality of the installed Flash version." );
         break;
     }
 
