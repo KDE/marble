@@ -44,7 +44,7 @@ public:
 
         ui_configWidget->preference->addItem( tr( "Car (fastest way)" ), "Fastest" );
         ui_configWidget->preference->addItem( tr( "Car (shortest way)" ), "Shortest" );
-        ui_configWidget->preference->addItem( tr( "Pedestrian (shortest way)" ), "Pededestrian" );
+        ui_configWidget->preference->addItem( tr( "Pedestrian (shortest way)" ), "Pedestrian" );
         ui_configWidget->preference->addItem( tr( "Bicycle (shortest track)" ), "Bicycle" );
         ui_configWidget->preference->addItem( tr( "Bicycle (Mountainbike)" ), "BicycleMTB" );
         ui_configWidget->preference->addItem( tr( "Bicycle (Racer)" ), "BicycleRacer" );
@@ -111,7 +111,7 @@ QHash< QString, QVariant > OpenRouteServicePlugin::templateSettings( RoutingProf
             result["preference"] = "Bicycle";
             break;
         case RoutingProfilesModel::PedestrianTemplate:
-            result["preference"] = "Pededestrian";
+            result["preference"] = "Pedestrian";
             break;
         case RoutingProfilesModel::LastTemplate:
             Q_ASSERT( false );
