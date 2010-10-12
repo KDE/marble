@@ -105,6 +105,8 @@ QHash< QString, QVariant > OpenRouteServicePlugin::templateSettings( RoutingProf
         case RoutingProfilesModel::CarShortestTemplate:
             result["preference"] = "Shortest";
             break;
+        case RoutingProfilesModel::CarEcologicalTemplate:
+            break;
         case RoutingProfilesModel::BicycleTemplate:
             result["preference"] = "Bicycle";
             break;

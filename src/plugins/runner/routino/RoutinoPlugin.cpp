@@ -109,6 +109,8 @@ QHash< QString, QVariant > RoutinoPlugin::templateSettings(RoutingProfilesModel:
             result["transport"] = "motorcar";
             result["method"] = "shortest";
             break;
+        case RoutingProfilesModel::CarEcologicalTemplate:
+            break;
         case RoutingProfilesModel::BicycleTemplate:
             result["transport"] = "bicycle";
             result["method"] = "shortest";

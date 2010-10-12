@@ -42,9 +42,9 @@ public:
 
     RouteRequest *m_routeRequest;
 
-    RoutingProfilesModel *m_profilesModel;
-
     RoutingModel *m_routingModel;
+
+    RoutingProfilesModel *m_profilesModel;
 
     MarbleModel *m_marbleModel;
 
