@@ -22,6 +22,11 @@
 #include <QtCore/QProcess>
 #include <QtCore/QMap>
 #include <QtCore/QTemporaryFile>
+#include <MarbleMap.h>
+#include <MarbleModel.h>
+#include <routing/RoutingManager.h>
+#include <routing/RoutingModel.h>
+#include <routing/RoutingProfilesModel.h>
 
 namespace Marble
 {
@@ -238,29 +243,20 @@ void RoutinoRunner::retrieveRoute( RouteRequest *route )
         params << QString("--lon%1=%2").arg(i+1).arg(fLon, 0, 'f', 8);
     }
 
-    switch( route->routePreference() ) {
-    case RouteRequest::CarFastest:
-        params << "--transport=motorcar";
-        break;
-    case RouteRequest::CarShortest:
-        params << "--transport=motorcar";
-        break;
-    case RouteRequest::Bicycle:
-        params << "--transport=bicycle";
-        break;
-    case RouteRequest::Pedestrian:
-        params << "--transport=foot";
-        break;
-    }
-    if ( route->routePreference() ==  RouteRequest::CarShortest ) {
+    QHash<QString, QVariant> settings = route->routingProfile().pluginSettings["routino"];
+    QString transport = settings["transport"].toString();
+    params << QString( "--transport=%0" ).arg( transport );
+
+    if ( settings["method"] == "shortest" ) {
         params << "--shortest";
     } else {
         params << "--quickest";
     }
-
+    /*
     if ( route->avoidFeatures() & RouteRequest::AvoidHighway ) {
         params << "--highway-motorway=0";
     }
+    */
 
     QByteArray output = d->retrieveWaypoints( params );
     GeoDataLineString* wayPoints = d->parseRoutinoOutput( output );

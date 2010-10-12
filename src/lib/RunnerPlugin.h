@@ -14,6 +14,11 @@
 #include "PluginInterface.h"
 #include "MarbleAbstractRunner.h"
 
+#include <QWidget>
+#include <QSettings>
+
+#include "routing/RoutingProfilesModel.h"
+
 namespace Marble
 {
 
@@ -75,6 +80,26 @@ public:
     virtual void initialize();
 
     virtual bool isInitialized() const;
+
+
+    class ConfigWidget : public QWidget
+    {
+    public:
+        virtual void loadSettings( const QHash<QString, QVariant> &settings ) = 0;
+        virtual QHash<QString, QVariant> settings() const = 0;
+    };
+    /**
+     * Function for getting a pointer to the configuration widget of the plugin.
+     *
+     * @return: The configuration widget or, if no configuration widget exists, 0.
+     */
+    virtual ConfigWidget *configWidget() const;
+
+    /** True if the plugin supports the given routing profile template */
+    virtual bool supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const;
+
+    /** Settings for the given routing profile template */
+    virtual QHash<QString, QVariant> templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const;
 
 protected:
     // Convenience methods for plugins to use

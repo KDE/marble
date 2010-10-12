@@ -18,6 +18,7 @@
 #include "RunnerPlugin.h"
 #include "RunnerTask.h"
 #include "routing/RouteRequest.h"
+#include "routing/RoutingProfilesModel.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -192,10 +193,13 @@ void MarbleRunnerManager::addReverseGeocodingResult( const GeoDataCoordinates &c
 
 void MarbleRunnerManager::retrieveRoute( RouteRequest *request )
 {
+    RoutingProfilesModel::Profile profile = request->routingProfile();
+
     d->m_routingResult.clear();
     d->m_routeRequest = request;
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Routing );
     foreach( RunnerPlugin* plugin, plugins ) {
+        if ( !profile.pluginSettings.contains( plugin->nameId() ) ) continue;
         MarbleAbstractRunner* runner = plugin->newRunner();
         connect( runner, SIGNAL( routeCalculated( GeoDataDocument* ) ),
                  this, SLOT( addRoutingResult( GeoDataDocument* ) ) );

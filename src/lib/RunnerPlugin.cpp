@@ -144,6 +144,21 @@ bool RunnerPlugin::canWorkOffline() const
     return d->m_canWorkOffline;
 }
 
+RunnerPlugin::ConfigWidget *RunnerPlugin::configWidget() const
+{
+    return 0;
+}
+
+bool RunnerPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate ) const
+{
+    return false;
+}
+
+QHash< QString, QVariant > RunnerPlugin::templateSettings( RoutingProfilesModel::ProfileTemplate ) const
+{
+    return QHash< QString, QVariant >();
+}
+
 }
 
 #include "RunnerPlugin.moc"

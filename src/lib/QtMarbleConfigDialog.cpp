@@ -35,6 +35,7 @@
 #include "MarbleModel.h"
 #include "RenderPlugin.h"
 #include "MarbleClock.h"
+#include "routing/RoutingProfilesWidget.h"
 
 namespace Marble
 {
@@ -140,6 +141,10 @@ QtMarbleConfigDialog::QtMarbleConfigDialog( MarbleWidget *marbleWidget, QWidget 
     QWidget *w_timeSettings = new QWidget( this );
     d->ui_timeSettings.setupUi( w_timeSettings );
     tabWidget->addTab( w_timeSettings, tr( "Date and Time" ) );
+
+    // routing page
+    QWidget *w_routingSettings = new RoutingProfilesWidget( marbleWidget );
+    tabWidget->addTab( w_routingSettings, tr( "Routing" ) );
 
     // plugin page
     d->m_pluginModel = new QStandardItemModel( this );
@@ -319,7 +324,7 @@ void QtMarbleConfigDialog::readSettings()
         d->m_marbleWidget->model()->setClockTimezone( d->m_timezone.value( chosenTimezone() ) );
     }
 
-
+    // Routing
 
     // Plugins
     QList<QVariant> pluginNameIdList;

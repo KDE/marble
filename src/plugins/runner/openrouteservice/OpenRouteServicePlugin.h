@@ -26,6 +26,12 @@ public:
     explicit OpenRouteServicePlugin( QObject *parent = 0 );
 
     virtual MarbleAbstractRunner* newRunner() const;
+
+    ConfigWidget* configWidget() const;
+
+    virtual bool supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const;
+    virtual QHash<QString, QVariant> templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const;
+
 };
 
 }

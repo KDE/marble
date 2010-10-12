@@ -6,25 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>234</width>
+    <width>282</width>
     <height>319</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="routingLayout">
    <item>
-    <layout class="QFormLayout" name="formLayout">
-     <property name="fieldGrowthPolicy">
-      <enum>QFormLayout::ExpandingFieldsGrow</enum>
-     </property>
-     <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
       <widget class="QLabel" name="preferenceLabel">
        <property name="text">
-        <string>Preference</string>
+        <string>Profile</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QComboBox" name="routePreferenceComboBox">
+     <item>
+      <widget class="QComboBox" name="routingProfileComboBox">
        <item>
         <property name="text">
          <string>Car (fastest)</string>
@@ -47,36 +44,33 @@
        </item>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="avoidLabel">
-       <property name="text">
-        <string>Avoid</string>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-      </widget>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
-     <item row="1" column="1">
-      <widget class="QCheckBox" name="highwaysCheckBox">
+     <item>
+      <widget class="QLabel" name="optionsLabel">
        <property name="toolTip">
-        <string>When checked, highways will be avoided in car routing</string>
+        <string>Show or hide routing options</string>
        </property>
        <property name="text">
-        <string>Highways</string>
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://edu.kde.org/marble&quot;&gt;&lt;span style=&quot; font-family:'DejaVu Sans'; font-size:8pt; text-decoration: underline; color:#0057ae;&quot;&gt;Configure&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QCheckBox" name="tollWaysCheckBox">
-       <property name="toolTip">
-        <string>When checked, toll roads will be avoided</string>
-       </property>
-       <property name="text">
-        <string>Toll Roads</string>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
        </property>
       </widget>
      </item>
@@ -113,23 +107,6 @@
         </size>
        </property>
       </spacer>
-     </item>
-     <item>
-      <widget class="QLabel" name="optionsLabel">
-       <property name="toolTip">
-        <string>Show or hide routing options</string>
-       </property>
-       <property name="text">
-        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://edu.kde.org/marble&quot;&gt;&lt;span style=&quot; font-family:'DejaVu Sans'; font-size:8pt; text-decoration: underline; color:#0057ae;&quot;&gt;Options&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::RichText</enum>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>

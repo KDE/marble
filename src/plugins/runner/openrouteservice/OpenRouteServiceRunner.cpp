@@ -62,27 +62,16 @@ void OpenRouteServiceRunner::retrieveRoute( RouteRequest *route )
     GeoDataCoordinates source = route->source();
     GeoDataCoordinates destination = route->destination();
 
+    QHash<QString, QVariant> settings = route->routingProfile().pluginSettings["openrouteservice"];
+
     QString request = xmlHeader();
     QString unit = "KM";
     QString preference = "Fastest";
-
-    switch ( route->routePreference() ) {
-    case RouteRequest::CarFastest:
-        unit = "KM";
-        preference = "Fastest";
-        break;
-    case RouteRequest::CarShortest:
-        unit = "KM";
-        preference = "Shortest";
-        break;
-    case RouteRequest::Bicycle:
+    if ( settings.contains( "preference" ) ) {
+        preference = settings["preference"].toString();
+    }
+    if ( preference == "Pedestrian" ) {
         unit = 'M';
-        preference = "Bicycle";
-        break;
-    case RouteRequest::Pedestrian:
-        unit = 'M';
-        preference = "Pedestrian";
-        break;
     }
 
     request += requestHeader( unit, preference );
@@ -95,7 +84,7 @@ void OpenRouteServiceRunner::retrieveRoute( RouteRequest *route )
     }
 
     request += requestPoint( EndPoint, destination );
-    request += requestFooter( route->avoidFeatures() );
+    request += requestFooter( settings );
     request += xmlFooter();
     //mDebug() << "POST: " << request;
 
@@ -165,16 +154,16 @@ QString OpenRouteServiceRunner::requestPoint( PointType pointType, const GeoData
     return result;
 }
 
-QString OpenRouteServiceRunner::requestFooter( RouteRequest::AvoidFeatures avoidFeatures ) const
+QString OpenRouteServiceRunner::requestFooter( const QHash<QString, QVariant>& settings ) const
 {
     QString result = "</xls:WayPointList>\n";
 
-    if ( avoidFeatures != RouteRequest::AvoidNone ) {
-        result += "<xls:AvoidList>\n"; {
-            if ( avoidFeatures & RouteRequest::AvoidTollWay )
-                result += "<xls:AvoidFeature>Tollway</xls:AvoidFeature>";
+    if (settings["noMotorways"].toInt() || settings["noTollways"].toInt() ) {
+        result += "<xls:AvoidList>\n";
+        if ( settings["noTollways"].toInt() ) {
+            result += "<xls:AvoidFeature>Tollway</xls:AvoidFeature>";
         }
-        if ( avoidFeatures & RouteRequest::AvoidHighway ) {
+        if ( settings["noMotorways"].toInt() ) {
             result += "<xls:AvoidFeature>Highway</xls:AvoidFeature>";
         }
         result += "</xls:AvoidList>\n";

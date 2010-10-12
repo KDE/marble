@@ -27,6 +27,7 @@ class GeoDataDocument;
 class GeoDataFolder;
 class AlternativeRoutesModel;
 class AdjustNavigation;
+class RoutingProfilesModel;
 
 /**
   * Delegates data retrieval and model updates to the appropriate
@@ -47,6 +48,11 @@ public:
 
     /** Destructor */
     ~RoutingManager();
+
+    /**
+      * Provides access to the model which contains all possible routing profiles
+      */
+    RoutingProfilesModel *profilesModel();
 
     /**
       * Provides access to the routing model which contains a list

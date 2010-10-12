@@ -29,9 +29,7 @@ public:
 
     QMap<int, QPixmap> m_pixmapCache;
 
-    RouteRequest::RoutePreference m_routePreference;
-
-    RouteRequest::AvoidFeatures m_avoidFeatures;
+    RoutingProfilesModel::Profile m_routingProfile;
 
     int m_fontSize;
 
@@ -42,8 +40,6 @@ public:
 };
 
 RouteRequestPrivate::RouteRequestPrivate() :
-        m_routePreference( RouteRequest::CarFastest ),
-        m_avoidFeatures( RouteRequest::AvoidNone ),
         m_fontSize( 0 )
 {
     // nothing to do
@@ -241,26 +237,6 @@ void RouteRequest::setPosition( int index, const GeoDataCoordinates &position )
     }
 }
 
-void RouteRequest::setAvoidFeatures( RouteRequest::AvoidFeatures features )
-{
-    d->m_avoidFeatures = features;
-}
-
-RouteRequest::AvoidFeatures RouteRequest::avoidFeatures() const
-{
-    return d->m_avoidFeatures;
-}
-
-void RouteRequest::setRoutePreference( RouteRequest::RoutePreference preference )
-{
-    d->m_routePreference = preference;
-}
-
-RouteRequest::RoutePreference RouteRequest::routePreference() const
-{
-    return d->m_routePreference;
-}
-
 void RouteRequest::setName( int index, const QString &name )
 {
     if ( index >= 0 && index < d->m_route.size() ) {
@@ -306,6 +282,16 @@ void RouteRequest::reverse()
         setVisited( i, false );
         setVisited( total-i-1, false );
     }
+}
+
+void RouteRequest::setRoutingProfile( const RoutingProfilesModel::Profile &index )
+{
+    d->m_routingProfile = index;
+}
+
+RoutingProfilesModel::Profile RouteRequest::routingProfile() const
+{
+    return d->m_routingProfile;
 }
 
 } // namespace Marble

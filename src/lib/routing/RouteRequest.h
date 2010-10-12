@@ -16,6 +16,7 @@
 #include "GeoDataPlacemark.h"
 
 #include <QtCore/QFlags>
+#include "RoutingProfilesModel.h"
 
 namespace Marble
 {
@@ -32,20 +33,6 @@ class MARBLE_EXPORT RouteRequest: public QObject
     Q_OBJECT
 
 public:
-    enum RoutePreference {
-        CarFastest,
-        CarShortest,
-        Bicycle,
-        Pedestrian
-    };
-
-    enum AvoidFeature {
-        AvoidNone = 0x0,
-        AvoidHighway = 0x1,
-        AvoidTollWay = 0x2
-    };
-
-    Q_DECLARE_FLAGS( AvoidFeatures, AvoidFeature )
 
     /** Constructor */
     explicit RouteRequest( QObject *parent = 0 );
@@ -94,14 +81,6 @@ public:
     /** Returns a pixmap which indicates the position of the element */
     QPixmap pixmap( int index ) const;
 
-    void setAvoidFeatures( AvoidFeatures features );
-
-    AvoidFeatures avoidFeatures() const;
-
-    void setRoutePreference( RoutePreference preference );
-
-    RoutePreference routePreference() const;
-
     void setName( int index, const QString &name );
 
     QString name( int index ) const;
@@ -111,6 +90,10 @@ public:
     bool visited( int index ) const;
 
     void reverse();
+
+    void setRoutingProfile( const RoutingProfilesModel::Profile &profile );
+
+    RoutingProfilesModel::Profile routingProfile() const;
 
 Q_SIGNALS:
     /** The value of the n-th element was changed */
@@ -127,7 +110,5 @@ private:
 };
 
 } // namespace Marble
-
-Q_DECLARE_OPERATORS_FOR_FLAGS( Marble::RouteRequest::AvoidFeatures )
 
 #endif

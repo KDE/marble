@@ -63,7 +63,7 @@ private:
     QString requestPoint( PointType pointType, const GeoDataCoordinates &coordinates ) const;
 
     /** Builds the route request footer in the xml request. */
-    QString requestFooter( RouteRequest::AvoidFeatures avoidFeatures ) const;
+    QString requestFooter( const QHash<QString, QVariant> &settings ) const;
 
     /** Builds the xml request footer. */
     QString xmlFooter() const;

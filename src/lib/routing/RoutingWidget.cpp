@@ -20,6 +20,8 @@
 #include "RoutingLayer.h"
 #include "RoutingManager.h"
 #include "RoutingModel.h"
+#include "RoutingProfilesModel.h"
+#include "RoutingProfileSettingsDialog.h"
 #include "RoutingProxyModel.h"
 #include "GeoDataDocument.h"
 #include "AlternativeRoutesModel.h"
@@ -188,6 +190,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     d->m_routingLayer = d->m_widget->routingLayer();
     d->m_routingLayer->synchronizeAlternativeRoutesWith( d->m_routingManager->alternativeRoutesModel(), d->m_ui.routeComboBox );
 
+    d->m_ui.routingProfileComboBox->setModel( d->m_routingManager->profilesModel() );
+
     connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
              d->m_widget, SLOT( repaint() ) );
     connect( d->m_routingLayer, SIGNAL( placemarkSelected( QModelIndex ) ),
@@ -226,7 +230,7 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
     connect( d->m_ui.guideButton, SIGNAL( clicked( bool ) ),
              this, SLOT( setGuidanceModeEnabled( bool ) ) );
     connect( d->m_ui.optionsLabel, SIGNAL( linkActivated( QString ) ),
-             this, SLOT( toggleOptionsVisibility() ) );
+             this, SLOT( configureProfile() ) );
     connect( d->m_ui.routeComboBox, SIGNAL( currentIndexChanged( int ) ),
              this, SLOT( switchRoute( int ) ) );
 
@@ -238,11 +242,6 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
         // Start with source and destination if the route is empty yet
         addInputWidget();
     }
-    d->m_ui.routePreferenceComboBox->setVisible( false );
-    d->m_ui.highwaysCheckBox->setVisible( false );
-    d->m_ui.tollWaysCheckBox->setVisible( false );
-    d->m_ui.preferenceLabel->setVisible( false );
-    d->m_ui.avoidLabel->setVisible( false );
     //d->m_ui.descriptionLabel->setVisible( false );
 }
 
@@ -259,27 +258,11 @@ void RoutingWidget::retrieveRoute()
         return;
     }
 
-    int index = d->m_ui.routePreferenceComboBox->currentIndex();
-    RouteRequest::RoutePreference pref = RouteRequest::CarFastest;
-    if ( index == 1 ) {
-        pref = RouteRequest::CarShortest;
+    int index = d->m_ui.routingProfileComboBox->currentIndex();
+    if ( index == -1 ) {
+        return;
     }
-    if ( index == 2 ) {
-        pref = RouteRequest::Bicycle;
-    }
-    if ( index == 3 ) {
-        pref = RouteRequest::Pedestrian;
-    }
-    RouteRequest::AvoidFeatures avoid = RouteRequest::AvoidNone;
-    if ( d->m_ui.highwaysCheckBox->isChecked() ) {
-        avoid |= RouteRequest::AvoidHighway;
-    }
-    if ( d->m_ui.tollWaysCheckBox->isChecked() ) {
-        avoid |= RouteRequest::AvoidTollWay;
-    }
-
-    d->m_routeRequest->setRoutePreference( pref );
-    d->m_routeRequest->setAvoidFeatures( avoid );
+    d->m_routeRequest->setRoutingProfile( d->m_routingManager->profilesModel()->profiles().at( index ) );
 
     Q_ASSERT( d->m_routeRequest->size() == d->m_inputWidgets.size() );
     for ( int i = 0; i < d->m_inputWidgets.size(); ++i ) {
@@ -480,14 +463,12 @@ void RoutingWidget::pointSelectionCanceled()
     }
 }
 
-void RoutingWidget::toggleOptionsVisibility()
+void RoutingWidget::configureProfile()
 {
-    bool visible = !d->m_ui.routePreferenceComboBox->isVisible();
-    d->m_ui.routePreferenceComboBox->setVisible( visible );
-    d->m_ui.highwaysCheckBox->setVisible( visible );
-    d->m_ui.tollWaysCheckBox->setVisible( visible );
-    d->m_ui.preferenceLabel->setVisible( visible );
-    d->m_ui.avoidLabel->setVisible( visible );
+    if ( d->m_ui.routingProfileComboBox->currentIndex() != -1) {
+        RoutingProfileSettingsDialog dialog( d->m_widget->model()->pluginManager(), d->m_routingManager->profilesModel() );
+        dialog.editProfile( d->m_ui.routingProfileComboBox->currentIndex() );
+    }
 }
 
 void RoutingWidget::exportRoute()

@@ -15,6 +15,7 @@
 #include "MarbleModel.h"
 #include "RouteRequest.h"
 #include "RoutingModel.h"
+#include "RoutingProfilesModel.h"
 #include "MarbleRunnerManager.h"
 #include "AdjustNavigation.h"
 #include "GeoWriter.h"
@@ -40,6 +41,8 @@ public:
     RoutingManager* q;
 
     RouteRequest *m_routeRequest;
+
+    RoutingProfilesModel *m_profilesModel;
 
     RoutingModel *m_routingModel;
 
@@ -74,6 +77,7 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         q( manager ),
         m_routeRequest( new RouteRequest( manager ) ),
         m_routingModel( new RoutingModel( m_routeRequest, model ) ),
+        m_profilesModel( new RoutingProfilesModel( model->pluginManager() ) ),
         m_marbleModel( model ),
         m_alternativeRoutesModel(new AlternativeRoutesModel( model, parent ) ),
         m_workOffline( false ),
@@ -206,6 +210,11 @@ RoutingManager::RoutingManager( MarbleModel *marbleModel, QObject *parent ) : QO
 RoutingManager::~RoutingManager()
 {
     delete d;
+}
+
+RoutingProfilesModel *RoutingManager::profilesModel()
+{
+    return d->m_profilesModel;
 }
 
 RoutingModel *RoutingManager::routingModel()

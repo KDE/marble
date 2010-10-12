@@ -60,6 +60,7 @@
 #include "NewFolderInfoDialog.h"
 #include "GeoDataPlacemark.h"
 #include "routing/RoutingManager.h"
+#include "routing/RoutingProfilesModel.h"
 #include "routing/RoutingWidget.h"
 
 namespace
@@ -938,6 +939,33 @@ void MainWindow::readSettings()
 
      setUpdatesEnabled(true);
 
+    settings.beginGroup( "Routing Profile" );
+    if ( settings.contains( "Num" ) ) {
+        QList<RoutingProfilesModel::Profile> profiles;
+        int numProfiles = settings.value( "Num", 0 ).toInt();
+        for ( int i = 0; i < numProfiles; ++i ) {
+            settings.beginGroup( QString( "Profile %0" ).arg(i) );
+            RoutingProfilesModel::Profile profile;
+            profile.name = settings.value( "Name", tr( "Unnamed" ) ).toString();
+            foreach ( const QString& pluginName, settings.childGroups() ) {
+                settings.beginGroup( pluginName );
+                profile.pluginSettings.insert( pluginName, QHash<QString, QVariant>() );
+                foreach ( const QString& key, settings.childKeys() ) {
+                    if ( key != "Enabled" ) {
+                        profile.pluginSettings[ pluginName ].insert( key, settings.value( key ) );
+                    }
+                }
+                settings.endGroup();
+            }
+            profiles << profile;
+            settings.endGroup();
+        }
+        m_controlView->marbleWidget()->model()->routingManager()->profilesModel()->setProfiles( profiles );
+    } else {
+        m_controlView->marbleWidget()->model()->routingManager()->profilesModel()->loadDefaultProfiles();
+    }
+    settings.endGroup();
+
      // The config dialog has to read settings.
      m_configDialog->readSettings();
 
@@ -999,6 +1027,32 @@ void MainWindow::writeSettings()
       settings.beginGroup( "Time" );
          settings.setValue( "dateTime", m_controlView->marbleWidget()->model()->clockDateTime() );
          settings.setValue( "speedSlider", m_controlView->marbleWidget()->model()->clockSpeed() );
+     settings.endGroup();
+
+     settings.beginGroup( "Routing Profile" );
+     QList<RoutingProfilesModel::Profile>  profiles = m_controlView->marbleWidget()
+                         ->model()->routingManager()->profilesModel()->profiles();
+     settings.setValue( "Num", profiles.count() );
+     for ( int i = 0; i < profiles.count(); ++i ) {
+         settings.beginGroup( QString( "Profile %0" ).arg(i) );
+         RoutingProfilesModel::Profile profile = profiles.at( i );
+         settings.setValue( "Name", profile.name );
+         foreach ( const QString& pluginName, settings.childGroups() ) {
+             settings.beginGroup( pluginName );
+             settings.remove( "" ); //remove all keys
+             settings.endGroup();
+         }
+         foreach ( const QString &key, profile.pluginSettings.keys() ) {
+             settings.beginGroup( key );
+             settings.setValue( "Enabled", true );
+             foreach ( const QString& settingKey, profile.pluginSettings[ key ].keys() ) {
+                 Q_ASSERT( settingKey != "Enabled" );
+                 settings.setValue( settingKey, profile.pluginSettings[ key ][ settingKey ] );
+             }
+             settings.endGroup();
+         }
+         settings.endGroup();
+     }
      settings.endGroup();
 
      // The config dialog has to write settings.

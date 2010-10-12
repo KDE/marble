@@ -188,6 +188,9 @@ set(marblewidget_SRCS
     routing/RoutingLineEdit.cpp
     routing/RoutingInputWidget.cpp
     routing/RoutingWidget.cpp
+    routing/RoutingProfilesWidget.cpp
+    routing/RoutingProfilesModel.cpp
+    routing/RoutingProfileSettingsDialog.cpp
     routing/instructions/InstructionTransformation.cpp
     routing/instructions/RoutingInstruction.cpp
     routing/instructions/RoutingPoint.cpp
@@ -236,6 +239,8 @@ set (marblewidget_UI
     NameDialog.ui
     PrintOptions.ui
     ExternalEditor.ui
+    routing/RoutingSettingsWidget.ui
+    routing/RoutingProfileSettingsDialog.ui
 )
 
 # FIXME: cleaner approach of src/lib/MarbleControlBox.* vs. marble.qrc

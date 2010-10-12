@@ -95,8 +95,8 @@ private Q_SLOTS:
     /** The user canceled point selection from the map */
     void pointSelectionCanceled();
 
-    /** Show or hide routing options */
-    void toggleOptionsVisibility();
+    /** show profile configuration dialog */
+    void configureProfile();
 
     /** Export route to a file */
     void exportRoute();

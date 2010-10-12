@@ -14,6 +14,9 @@
 
 #include "RunnerPlugin.h"
 
+namespace Ui {
+    class RoutinoConfigWidget;
+}
 namespace Marble
 {
 
@@ -26,6 +29,13 @@ public:
     explicit RoutinoPlugin( QObject *parent = 0 );
 
     virtual MarbleAbstractRunner* newRunner() const;
+
+    ConfigWidget* configWidget() const;
+
+    bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
+
+    QHash< QString, QVariant > templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
+
 };
 
 }

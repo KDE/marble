@@ -40,6 +40,7 @@ namespace Marble
 
 class ControlView;
 class DownloadRegionDialog;
+class RoutingProfilesWidget;
 class SunControlWidget;
 class TimeControlWidget;
 class GeoDataFolder;
@@ -254,7 +255,6 @@ class MarblePart: public KParts::ReadOnlyPart
     GraphicsSystem m_previousGraphicsSystem;
 
     QHash< int, int > m_timezone;
-
 };
 
 }
