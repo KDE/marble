@@ -246,15 +246,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     int maximumZoom() const;
 
     /**
-     * @brief Return if the widget needs to be updated.
-     */
-    bool needsUpdate() const;
-    /**
-     * @brief Mark the widget as needing an update.
-     */
-    void setNeedsUpdate();
-
-    /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the widget.
      * @param lon    the lon coordinate of the requested pixel position
      * @param lat    the lat coordinate of the requested pixel position
@@ -906,11 +897,6 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
      * closed.
      */
     void creatingTilesStart( TileCreator *creator, const QString& name, const QString& description );
-
-    /**
-     * @brief Update the widget because the model changed.
-     */
-    void updateChangedMap();
 
     /**
      * Schedule repaint

@@ -179,16 +179,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
     int maximumZoom() const;
 
     /**
-     * @brief return if the map needs to be updated.
-     */
-    bool needsUpdate() const;
-
-    /**
-     * @brief Mark the map as needing an update.
-     */
-    void setNeedsUpdate();
-
-    /**
      * @brief Get the screen coordinates corresponding to geographical coordinates in the map.
      * @param lon    the lon coordinate of the requested pixel position
      * @param lat    the lat coordinate of the requested pixel position
@@ -707,11 +697,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      */
     void setVolatileTileCacheLimit( quint64 kiloBytes );
 
-    /**
-     * @brief Update the map because the model changed.
-     */
-    void updateChangedMap();
-
     bool mapCoversViewport();
 
     AngleUnit defaultAngleUnit() const;
@@ -771,6 +756,12 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param painter 
      */
     virtual void customPaint( GeoPainter *painter );
+
+ private:
+    /**
+     * @brief Request a full repaint of the map during next update.
+     */
+    Q_PRIVATE_SLOT( d, void setNeedsUpdate() )
 
  private:
     Q_DISABLE_COPY( MarbleMap )

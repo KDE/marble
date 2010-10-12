@@ -1043,7 +1043,7 @@ void MainWindow::updateSettings()
     m_controlView->marbleWidget()->setProxy( m_configDialog->proxyUrl(), m_configDialog->proxyPort(), m_configDialog->user(), m_configDialog->password() );
     */
 
-    m_controlView->marbleWidget()->updateChangedMap();
+    m_controlView->marbleWidget()->update();
 }
 
 void MainWindow::showDownloadRegionDialog()

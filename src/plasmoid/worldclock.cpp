@@ -104,7 +104,6 @@ void WorldClock::init()
 
     m_sun->update();
     m_map->updateSun();
-    m_map->setNeedsUpdate();
 
     m_customTz = cg.readEntry("customtz", false );
     m_locationkey = KSystemTimeZones::local().name();
@@ -182,7 +181,6 @@ void WorldClock::resizeMap(bool changeAspect)
 
     m_map->setSize(width, height);
     m_map->setRadius( radius );
-    m_map->setNeedsUpdate();
     update();
     if(changeAspect) {
         QRectF curGeo = geometry();
@@ -202,7 +200,6 @@ void WorldClock::dataUpdated(const QString &source,
     //kDebug() << "Adjusted Time = " << m_time;
     m_sun->update();
     m_map->updateSun();
-    m_map->setNeedsUpdate();
     update();
 }
 
@@ -475,7 +472,7 @@ void WorldClock::configAccepted()
             case 1:
                 //kDebug() << "case 1, setting proj to mercator";
                 m_map->setProjection(Mercator);
-                m_map->setNeedsUpdate(); update();
+                update();
                 resizeMap(true);
                 cg.writeEntry("projection", static_cast<int>(Mercator));
                 break;
@@ -483,7 +480,7 @@ void WorldClock::configAccepted()
             default:
                 //kDebug() << "case default, setting proj to Equirectangular";
                 m_map->setProjection(Equirectangular);
-                m_map->setNeedsUpdate(); update();
+                update();
                 resizeMap(true);
                 cg.writeEntry("projection", static_cast<int>(Equirectangular));
                 break;

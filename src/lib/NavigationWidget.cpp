@@ -246,12 +246,6 @@ void NavigationWidget::adjustForStill()
         return;
 
     d->m_widget->setViewContext( Still );
-
-    if ( d->m_widget->mapQuality( Still )
-        != d->m_widget->mapQuality( Animation ) )
-    {
-        d->m_widget->updateChangedMap();
-    }
 }
 
 void NavigationWidget::resizeEvent ( QResizeEvent * )

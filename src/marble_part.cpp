@@ -1340,7 +1340,7 @@ void MarblePart::updateSettings()
     
     QNetworkProxy::setApplicationProxy(proxy);
     
-    m_controlView->marbleWidget()->updateChangedMap();
+    m_controlView->marbleWidget()->update();
 
     // Show message box
     if (    m_initialGraphicsSystem != graphicsSystem 

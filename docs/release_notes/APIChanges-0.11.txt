@@ -44,3 +44,9 @@
 * Remove Marble{Map, Widget}::{north,south}PolePosition().
   Use Marble{Map, Widget}::screenCoordinates( 0.0, poleLat, ... ) instead, where poleLat is +90 for the north pole and -90 for the south pole.
   Feel free to request constants like Marble::NorthPole and Marble::SouthPole if you use the screen coordinates of the poles in your application.
+
+2010-10-05  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+
+* Remove or make private Marble{Map, Widget}::{needsUpdate(), setNeedsUpdate(), updateChangedMap()}.
+  There is no need to call these methods any more since they are invoked internally when needed.
+  It should be safe to remove any code that calls these methods from outside MarbleMap/MarbleWidget.

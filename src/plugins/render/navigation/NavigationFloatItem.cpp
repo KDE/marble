@@ -259,11 +259,6 @@ void NavigationFloatItem::adjustForStill()
     }
 
     m_marbleWidget->setViewContext( Still );
-
-    if ( m_marbleWidget->mapQuality( Still )
-        != m_marbleWidget->mapQuality( Animation ) ) {
-        m_marbleWidget->updateChangedMap();
-    }
 }
 
 void NavigationFloatItem::updateButtons( int zoomValue )

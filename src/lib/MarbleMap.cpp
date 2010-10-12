@@ -75,7 +75,7 @@ void MarbleMapPrivate::construct()
     m_parent->connect( m_model, SIGNAL( themeChanged( QString ) ),
                        m_parent, SIGNAL( themeChanged( QString ) ) );
     m_parent->connect( m_model, SIGNAL( modelChanged() ),
-                       m_parent, SLOT( updateChangedMap() ) );
+                       m_parent, SLOT( setNeedsUpdate() ) );
 
     m_justModified = false;
     m_dirtyAtmosphere = false;
@@ -210,7 +210,7 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
     }
 
     m_model->paintGlobe( &painter, &m_viewParams,
-                         m_parent->needsUpdate() || m_viewParams.canvasImage()->isNull(),
+                         needsUpdate() || m_viewParams.canvasImage()->isNull(),
                          dirtyRect );
     // FIXME: this is ugly, add method updatePlanetAxis() to ViewParams
     m_viewParams.setPlanetAxisUpdated( m_viewParams.planetAxis() );
@@ -322,6 +322,8 @@ ViewportParams *MarbleMap::viewport()
 void MarbleMap::setMapQuality( MapQuality quality )
 {
     d->m_viewParams.setMapQuality( quality );
+    // Update texture map during the repaint that follows:
+    d->setNeedsUpdate();
 }
 
 MapQuality MarbleMap::mapQuality() const
@@ -378,9 +380,7 @@ void MarbleMap::setRadius( int radius )
 {
     d->m_viewParams.setRadius( radius );
 
-    if ( !mapCoversViewport() ) {
-        setNeedsUpdate();
-    }
+    d->setNeedsUpdate();
 
     d->m_logzoom = d->zoom( radius );
     emit zoomChanged( d->m_logzoom );
@@ -389,16 +389,16 @@ void MarbleMap::setRadius( int radius )
 }
 
 
-bool MarbleMap::needsUpdate() const
+bool MarbleMapPrivate::needsUpdate() const
 {
-    return ( d->m_justModified
-             || d->m_viewParams.radius() != d->m_viewParams.radiusUpdated()
-             || !( d->m_viewParams.planetAxis() == d->m_viewParams.planetAxisUpdated() ) );
+    return ( m_justModified
+             || m_viewParams.radius() != m_viewParams.radiusUpdated()
+             || !( m_viewParams.planetAxis() == m_viewParams.planetAxisUpdated() ) );
 }
 
-void MarbleMap::setNeedsUpdate()
+void MarbleMapPrivate::setNeedsUpdate()
 {
-    d->m_justModified = true;
+    m_justModified = true;
 }
 
 
@@ -759,7 +759,7 @@ void MarbleMap::setProjection( Projection projection )
     d->m_model->setupTextureMapper( projection );
 
     // Update texture map during the repaint that follows:
-    setNeedsUpdate();
+    d->setNeedsUpdate();
     emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
@@ -829,16 +829,17 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
         d->m_dirtyAtmosphere=true;
 
         centerSun();
-
-        // Update texture map during the repaint that follows:
-        setNeedsUpdate();
     }
+
+    // Update texture map during the repaint that follows:
+    d->setNeedsUpdate();
 }
 
 void MarbleMap::setPropertyValue( const QString& name, bool value )
 {
     mDebug() << "In MarbleMap the property " << name << "was set to " << value;
     d->m_viewParams.setPropertyValue( name, value );
+    d->setNeedsUpdate();
 }
 
 void MarbleMap::setShowOverviewMap( bool visible )
@@ -883,7 +884,7 @@ void MarbleMap::setShowCrosshairs( bool visible )
 void MarbleMap::setShowClouds( bool visible )
 {
     d->m_viewParams.setShowClouds( visible );
-    setNeedsUpdate();
+    d->setNeedsUpdate();
 }
 
 void MarbleMap::setShowTileId( bool visible )
@@ -920,21 +921,21 @@ void MarbleMap::setShowRelief( bool visible )
 {
     setPropertyValue( "relief", visible );
     // Update texture map during the repaint that follows:
-    setNeedsUpdate();
+    d->setNeedsUpdate();
 }
 
 void MarbleMap::setShowElevationModel( bool visible )
 {
     d->m_viewParams.setShowElevationModel( visible );
     // Update texture map during the repaint that follows:
-    setNeedsUpdate();
+    d->setNeedsUpdate();
 }
 
 void MarbleMap::setShowIceLayer( bool visible )
 {
     setPropertyValue( "ice", visible );
     // Update texture map during the repaint that follows:
-    setNeedsUpdate();
+    d->setNeedsUpdate();
 }
 
 void MarbleMap::setShowBorders( bool visible )
@@ -951,7 +952,7 @@ void MarbleMap::setShowLakes( bool visible )
 {
     setPropertyValue( "lakes", visible );
     // Update texture map during the repaint that follows:
-    setNeedsUpdate();
+    d->setNeedsUpdate();
 }
 
 void MarbleMap::setShowFrameRate( bool visible )
@@ -1005,12 +1006,6 @@ void MarbleMap::setVolatileTileCacheLimit( quint64 kilobytes )
 {
     mDebug() << "kiloBytes" << kilobytes;
     d->m_model->setVolatileTileCacheLimit( kilobytes );
-}
-
-void MarbleMap::updateChangedMap()
-{
-    // Update texture map during the repaint that follows:
-    setNeedsUpdate();
 }
 
 QString MarbleMap::distanceString() const
@@ -1074,7 +1069,7 @@ void MarbleMap::updateSun()
 
     mDebug() << "MarbleMap: Updating the sun shading map...";
     d->m_model->update();
-    setNeedsUpdate();
+    d->setNeedsUpdate();
     //mDebug() << "Finished updating the sun shading map";
 }
 

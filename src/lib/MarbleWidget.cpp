@@ -188,8 +188,6 @@ void MarbleWidgetPrivate::construct()
     // show this in the view, i.e. here.
     m_widget->connect( m_model,  SIGNAL( themeChanged( QString ) ),
 		       m_widget, SIGNAL( themeChanged( QString ) ) );
-    m_widget->connect( m_model,  SIGNAL( modelChanged() ),
-		       m_widget, SLOT( updateChangedMap() ) );
 
     // Repaint scheduling
     m_widget->connect( m_map,    SIGNAL( repaintNeeded( QRegion ) ),
@@ -337,17 +335,6 @@ void MarbleWidget::setRadius( int radius )
         
     d->m_map->setRadius( radius );
     d->repaint();
-}
-
-
-bool MarbleWidget::needsUpdate() const
-{
-    return d->m_map->needsUpdate();
-}
-
-void MarbleWidget::setNeedsUpdate()
-{
-    d->m_map->setNeedsUpdate();
 }
 
 
@@ -836,9 +823,6 @@ void MarbleWidget::setMapThemeId( const QString& mapThemeId )
         return;
     
     d->m_map->setMapThemeId( mapThemeId );
-    
-    // Update texture map during the repaint that follows:
-    setNeedsUpdate();
 
     // Now we want a full repaint as the atmosphere might differ
     setAttribute( Qt::WA_NoSystemBackground,
@@ -859,8 +843,6 @@ void MarbleWidget::setPropertyValue( const QString& name, bool value )
     mDebug() << "In MarbleWidget the property " << name << "was set to " << value;
     d->m_map->setPropertyValue( name, value );
 
-    // Update texture map during the repaint that follows:
-    setNeedsUpdate();
     repaint();
 }
 
@@ -1056,13 +1038,6 @@ void MarbleWidget::creatingTilesStart( TileCreator *creator,
     dlg.exec();
 }
 
-void MarbleWidget::updateChangedMap()
-{
-    // Update texture map during the repaint that follows:
-    setNeedsUpdate();
-    update();
-}
-
 void MarbleWidget::scheduleRepaint( const QRegion& dirtyRegion )
 {
     Q_UNUSED( dirtyRegion );
@@ -1080,14 +1055,16 @@ MapQuality MarbleWidget::mapQuality( ViewContext viewContext )
     return d->m_animationQuality; 
 }
 
-void MarbleWidget::setMapQuality( MapQuality mapQuality, ViewContext changedViewContext )
+void MarbleWidget::setMapQuality( MapQuality quality, ViewContext changedViewContext )
 {
+    const MapQuality oldQuality = mapQuality( viewContext() );
+
     // FIXME: Rewrite as a switch
     if ( changedViewContext == Still ) {
-        d->m_stillQuality = mapQuality;
+        d->m_stillQuality = quality;
     }
     else if ( changedViewContext == Animation ) {
-        d->m_animationQuality = mapQuality;
+        d->m_animationQuality = quality;
     }
 
     if ( viewContext() == Still ) {
@@ -1097,6 +1074,9 @@ void MarbleWidget::setMapQuality( MapQuality mapQuality, ViewContext changedView
     {
         map()->setMapQuality( d->m_animationQuality ); 
     }
+
+    if ( mapQuality( viewContext() ) != oldQuality )
+        d->repaint();
 }
 
 ViewContext MarbleWidget::viewContext() const
@@ -1112,6 +1092,9 @@ void MarbleWidget::setViewContext( ViewContext viewContext )
         map()->setMapQuality( d->m_stillQuality ); 
     if ( viewContext == Animation )
         map()->setMapQuality( d->m_animationQuality ); 
+
+    if ( mapQuality( viewContext ) != mapQuality( Animation ) )
+        d->repaint();
 }
 
 bool MarbleWidget::animationsEnabled() const
@@ -1183,13 +1166,7 @@ QString MarbleWidget::distanceString() const
 
 void MarbleWidget::updateSun()
 {
-    // Update the sun shading.
-    //SunLocator  *sunLocator = d->m_model->sunLocator();
-
-    mDebug() << "MarbleWidget: Updating the sun shading map...";
-    d->m_model->update();
-    setNeedsUpdate();
-    //mDebug() << "Finished updating the sun shading map";
+    d->m_map->updateSun();
 }
 
 void MarbleWidget::centerSun()
@@ -1317,7 +1294,6 @@ void MarbleWidget::updateAnimation( const GeoDataLookAt &lookAt )
 void MarbleWidget::startStillMode()
 {
     setViewContext( Marble::Still );
-    setNeedsUpdate();
     d->repaint();
 }
 

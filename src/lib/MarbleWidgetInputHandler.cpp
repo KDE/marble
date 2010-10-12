@@ -326,12 +326,6 @@ void MarbleWidgetInputHandler::restoreViewContext()
 
     // Redraw the map with the quality set for Still (if necessary).
     d->m_widget->setViewContext( Still );
-    if ( d->m_widget->mapQuality( Still )
-        != d->m_widget->mapQuality( Animation ) )
-    {
-        d->m_widget->updateChangedMap();
-    }
-
     d->m_widget->viewport()->resetFocusPoint();
     d->m_wheelZoomTargetDistance = 0.0;
 }
@@ -574,11 +568,6 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 emit mouseClickScreenPosition( d->m_leftPressedX, d->m_leftPressedY );
 
                 MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
-                if ( MarbleWidgetInputHandler::d->m_widget->mapQuality( Still )
-                    != MarbleWidgetInputHandler::d->m_widget->mapQuality( Animation ) )
-                {
-                    MarbleWidgetInputHandler::d->m_widget->updateChangedMap();
-                }
 
                 d->m_leftPressed = false;
             }
@@ -588,11 +577,6 @@ bool MarbleWidgetDefaultInputHandler::eventFilter( QObject* o, QEvent* e )
                 d->m_midPressed = false;
 
                 MarbleWidgetInputHandler::d->m_widget->setViewContext( Still );
-                if ( MarbleWidgetInputHandler::d->m_widget->mapQuality( Still )
-                    != MarbleWidgetInputHandler::d->m_widget->mapQuality( Animation ) )
-                {
-                    MarbleWidgetInputHandler::d->m_widget->updateChangedMap();
-                }
             }
 
             if ( e->type() == QEvent::MouseButtonRelease
