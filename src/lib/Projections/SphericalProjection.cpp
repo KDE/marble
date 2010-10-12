@@ -181,14 +181,6 @@ bool SphericalProjection::screenCoordinates( const GeoDataCoordinates &coordinat
 }
 
 
-bool SphericalProjection::screenCoordinates( const GeoDataLineString &lineString,
-                                             const ViewportParams *viewport,
-                                             QVector<QPolygonF *> &polygons )
-{
-    return AbstractProjection::screenCoordinates( lineString, viewport, polygons );
-}
-
-
 bool SphericalProjection::geoCoordinates( const int x, const int y,
                                           const ViewportParams *viewport,
                                           qreal& lon, qreal& lat,

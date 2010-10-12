@@ -173,9 +173,9 @@ class MARBLE_EXPORT AbstractProjection
                                     bool &globeHidesPoint ) = 0;
 
 
-    virtual bool screenCoordinates( const GeoDataLineString &lineString, 
-                                    const ViewportParams *viewport,
-                                    QVector<QPolygonF*> &polygons );
+    bool screenCoordinates( const GeoDataLineString &lineString,
+                            const ViewportParams *viewport,
+                            QVector<QPolygonF*> &polygons );
 
     /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.

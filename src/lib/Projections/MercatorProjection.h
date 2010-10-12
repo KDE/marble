@@ -79,10 +79,6 @@ class MercatorProjection : public AbstractProjection
                             const QSizeF& size,
                             bool &globeHidesPoint );
 
-    bool screenCoordinates( const GeoDataLineString &lineString,
-                            const ViewportParams *viewport,
-                            QVector<QPolygonF*> &polygons );
-
    /**
      * @brief Get the earth coordinates corresponding to a pixel in the map.
      * @param x      the x coordinate of the pixel
