@@ -22,11 +22,23 @@
 #include <QtCore/QDirIterator>
 #include <QtCore/QTimer>
 #include <QtNetwork/QLocalSocket>
-
-#include <unistd.h>
+#include <QtCore/QThread>
 
 namespace Marble
 {
+
+/** A helper class to have a portable sleep call */
+class MonavWaiter : private QThread
+{
+public:
+    static void msleep( unsigned long milliSeconds ) {
+        QThread::msleep( milliSeconds );
+    }
+
+private:
+    MonavWaiter();
+    Q_DISABLE_COPY( MonavWaiter );
+};
 
 class MonavMap
 {
@@ -172,7 +184,7 @@ bool MonavPluginPrivate::startDaemon()
                 if ( isDaemonRunning() ) {
                     break;
                 }
-                usleep( 100 * 1000 );
+                MonavWaiter::msleep( 100 );
             }
 
             return true;
