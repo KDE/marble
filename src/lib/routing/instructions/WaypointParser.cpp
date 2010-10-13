@@ -70,14 +70,14 @@ RoutingWaypoints WaypointParser::parse( QTextStream &stream ) const
                 qreal lon = readField<qreal>( Longitude, entries );
                 qreal lat = readField<qreal>( Latitude, entries );
                 RoutingPoint point( lon, lat );
-                QString junctionTypeRaw = readField<QString>( JunctionType, entries );
+                QString junctionTypeRaw = readField<QString>( JunctionType, entries, QString() );
                 RoutingWaypoint::JunctionType junctionType = RoutingWaypoint::Other;
                 if ( m_junctionTypeMapping.contains( junctionTypeRaw ) ) {
                   junctionType = m_junctionTypeMapping[junctionTypeRaw];
                 }
-                QString roadType = readField<QString>( RoadType, entries );
+                QString roadType = readField<QString>( RoadType, entries, QString() );
                 int secondsRemaining = readField<int>( TotalSecondsRemaining, entries, -1 );
-                QString roadName = readField<QString>( RoadName, entries );
+                QString roadName = readField<QString>( RoadName, entries, QString() );
 
                 // Road names may contain the field separator
                 for (int i = 2 + m_fieldIndices[RoadName]; i<entries.size(); ++i)
