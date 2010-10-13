@@ -504,6 +504,7 @@ void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
     // It won't fly anyway. So we should do everything to keep the zoom value.
     if ( !d->m_animationsEnabled || mode == Instant ) {
         d->m_map->zoomView( newZoom );
+        d->repaint();
     }
     else {
         GeoDataLookAt target = lookAt();
