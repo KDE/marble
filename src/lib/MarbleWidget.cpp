@@ -501,10 +501,16 @@ quint64 MarbleWidget::volatileTileCacheLimit() const
 
 void MarbleWidget::zoomView( int newZoom, FlyToMode mode )
 {
-    GeoDataLookAt target = lookAt();
-    target.setRange( KM2METER * d->m_map->distanceFromZoom( newZoom ) );
+    // It won't fly anyway. So we should do everything to keep the zoom value.
+    if ( !d->m_animationsEnabled || mode == Instant ) {
+        d->m_map->zoomView( newZoom );
+    }
+    else {
+        GeoDataLookAt target = lookAt();
+        target.setRange( KM2METER * d->m_map->distanceFromZoom( newZoom ) );
 
-    flyTo( target, mode );
+        flyTo( target, mode );
+    }
 }
 
 

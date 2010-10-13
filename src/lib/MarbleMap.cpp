@@ -388,7 +388,6 @@ void MarbleMap::setRadius( int radius )
     emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
-
 bool MarbleMapPrivate::needsUpdate() const
 {
     return ( m_justModified
@@ -664,7 +663,15 @@ void MarbleMap::zoomView( int newZoom )
     // Prevent infinite loops.
     if ( newZoom  == d->m_logzoom )
         return;
-    setRadius( d->radius( newZoom ) );
+
+    d->m_viewParams.setRadius( d->radius( newZoom ) );
+
+    d->setNeedsUpdate();
+
+    d->m_logzoom = newZoom;
+    emit zoomChanged( d->m_logzoom );
+    emit distanceChanged( distanceString() );
+    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 
     // We don't do this on every paintEvent to improve performance.
     // Redrawing the atmosphere is only needed if the size of the
