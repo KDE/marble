@@ -12,6 +12,8 @@
 #ifndef MARBLE_ROUTINGPROFILE_H
 #define MARBLE_ROUTINGPROFILE_H
 
+#include "marble_export.h"
+
 #include <QtCore/QString>
 #include <QtCore/QHash>
 #include <QtCore/QVariant>
@@ -19,7 +21,7 @@
 namespace Marble
 {
 
-class RoutingProfile {
+class MARBLE_EXPORT RoutingProfile {
 public:
     explicit RoutingProfile( const QString &name = QString() );
 

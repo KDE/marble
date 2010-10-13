@@ -459,19 +459,19 @@ void MarblePart::readSettings()
 
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
     if ( sharedConfig->hasGroup( "Routing Profiles" ) ) {
-        QList<RoutingProfilesModel::Profile> profiles;
+        QList<RoutingProfile> profiles;
         KConfigGroup profilesGroup = sharedConfig->group( "Routing Profiles" );
         int numProfiles = profilesGroup.readEntry( "Num", 0 );
         for ( int i = 0; i < numProfiles; ++i ) {
             KConfigGroup profileGroup = profilesGroup.group( QString( "Profile %0" ).arg(i) );
-            RoutingProfilesModel::Profile profile;
-            profile.name = profileGroup.readEntry( "Name", tr( "Unnamed" ) );
+            QString name = profileGroup.readEntry( "Name", tr( "Unnamed" ) );
+            RoutingProfile profile( name );
             foreach ( const QString& pluginName, profileGroup.groupList() ) {
                 KConfigGroup pluginGroup = profileGroup.group( pluginName );
-                profile.pluginSettings.insert( pluginName, QHash<QString, QVariant>() );
+                profile.pluginSettings().insert( pluginName, QHash<QString, QVariant>() );
                 foreach ( const QString& key, pluginGroup.keyList() ) {
                     if ( key != "Enabled" ) {
-                        profile.pluginSettings[ pluginName ].insert( key, pluginGroup.readEntry( key ) );
+                        profile.pluginSettings()[ pluginName ].insert( key, pluginGroup.readEntry( key ) );
                     }
                 }
             }
@@ -1299,24 +1299,24 @@ void MarblePart::applyPluginState()
         (*i)->applyItemState();
     }
 
-    QList<RoutingProfilesModel::Profile>  profiles = m_controlView->marbleWidget()
+    QList<RoutingProfile>  profiles = m_controlView->marbleWidget()
                         ->model()->routingManager()->profilesModel()->profiles();
     KSharedConfig::Ptr sharedConfig = KSharedConfig::openConfig( KGlobal::mainComponent() );
     KConfigGroup profilesGroup = sharedConfig->group( "Routing Profiles" );
     profilesGroup.writeEntry( "Num", profiles.count() );
     for ( int i = 0; i < profiles.count(); ++i ) {
         KConfigGroup profileGroup = profilesGroup.group( QString( "Profile %0" ).arg(i) );
-        RoutingProfilesModel::Profile profile = profiles.at( i );
-        profileGroup.writeEntry( "Name", profile.name );
+        RoutingProfile profile = profiles.at( i );
+        profileGroup.writeEntry( "Name", profile.name() );
         foreach ( const QString &pluginName, profileGroup.groupList() ) {
             profileGroup.group( pluginName ).deleteGroup();
         }
-        foreach ( const QString &key, profile.pluginSettings.keys() ) {
+        foreach ( const QString &key, profile.pluginSettings().keys() ) {
             KConfigGroup pluginGroup = profileGroup.group( key );
             pluginGroup.writeEntry( "Enabled", true );
-            foreach ( const QString& settingKey, profile.pluginSettings[ key ].keys() ) {
+            foreach ( const QString& settingKey, profile.pluginSettings()[ key ].keys() ) {
                 Q_ASSERT( settingKey != "Enabled" );
-                pluginGroup.writeEntry( settingKey, profile.pluginSettings[ key ][ settingKey ] );
+                pluginGroup.writeEntry( settingKey, profile.pluginSettings()[ key ][ settingKey ] );
             }
         }
     }
