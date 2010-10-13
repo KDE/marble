@@ -29,7 +29,7 @@ public:
 
     QMap<int, QPixmap> m_pixmapCache;
 
-    RoutingProfilesModel::Profile m_routingProfile;
+    RoutingProfile m_routingProfile;
 
     int m_fontSize;
 
@@ -284,12 +284,12 @@ void RouteRequest::reverse()
     }
 }
 
-void RouteRequest::setRoutingProfile( const RoutingProfilesModel::Profile &index )
+void RouteRequest::setRoutingProfile( const RoutingProfile &index )
 {
     d->m_routingProfile = index;
 }
 
-RoutingProfilesModel::Profile RouteRequest::routingProfile() const
+RoutingProfile RouteRequest::routingProfile() const
 {
     return d->m_routingProfile;
 }

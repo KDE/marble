@@ -13,6 +13,7 @@
 #define MARBLE_ROUTINGPROFILESMODEL_H
 
 #include "marble_export.h"
+#include "RoutingProfile.h"
 
 #include <QAbstractListModel>
 
@@ -41,15 +42,8 @@ public:
         LastTemplate
     };
 
-    struct Profile {
-        Profile( const QString &name_ ) : name( name_ ) {}
-        Profile() {}
-        QString name;
-        //icon
-        QHash<QString, QHash<QString, QVariant> > pluginSettings;
-    };
-    void setProfiles( const QList<Profile> &profiles );
-    QList<Profile> profiles() const;
+    void setProfiles( const QList<RoutingProfile> &profiles );
+    QList<RoutingProfile> profiles() const;
 
     void loadDefaultProfiles();
 
@@ -61,7 +55,7 @@ public:
     bool setProfilePluginSettings( int row, const QHash<QString, QHash<QString, QVariant> > &pluginSettings );
 
 private:
-    QList<Profile> m_profiles;
+    QList<RoutingProfile> m_profiles;
     PluginManager* m_pluginManager;
 };
 

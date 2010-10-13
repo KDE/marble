@@ -91,9 +91,9 @@ public:
 
     void reverse();
 
-    void setRoutingProfile( const RoutingProfilesModel::Profile &profile );
+    void setRoutingProfile( const RoutingProfile &profile );
 
-    RoutingProfilesModel::Profile routingProfile() const;
+    RoutingProfile routingProfile() const;
 
 Q_SIGNALS:
     /** The value of the n-th element was changed */

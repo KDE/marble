@@ -193,13 +193,13 @@ void MarbleRunnerManager::addReverseGeocodingResult( const GeoDataCoordinates &c
 
 void MarbleRunnerManager::retrieveRoute( RouteRequest *request )
 {
-    RoutingProfilesModel::Profile profile = request->routingProfile();
+    RoutingProfile profile = request->routingProfile();
 
     d->m_routingResult.clear();
     d->m_routeRequest = request;
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Routing );
     foreach( RunnerPlugin* plugin, plugins ) {
-        if ( !profile.pluginSettings.contains( plugin->nameId() ) ) continue;
+        if ( !profile.pluginSettings().contains( plugin->nameId() ) ) continue;
         MarbleAbstractRunner* runner = plugin->newRunner();
         connect( runner, SIGNAL( routeCalculated( GeoDataDocument* ) ),
                  this, SLOT( addRoutingResult( GeoDataDocument* ) ) );

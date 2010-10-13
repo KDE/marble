@@ -243,7 +243,7 @@ void RoutinoRunner::retrieveRoute( RouteRequest *route )
         params << QString("--lon%1=%2").arg(i+1).arg(fLon, 0, 'f', 8);
     }
 
-    QHash<QString, QVariant> settings = route->routingProfile().pluginSettings["routino"];
+    QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()["routino"];
     QString transport = settings["transport"].toString();
     params << QString( "--transport=%0" ).arg( transport );
 

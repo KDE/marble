@@ -183,6 +183,7 @@ set(marblewidget_SRCS
     routing/RouteRequest.cpp
     routing/RoutingModel.cpp
     routing/RoutingProxyModel.cpp
+    routing/RoutingProfile.cpp
     routing/RoutingManager.cpp
     routing/RoutingLayer.cpp
     routing/RoutingLineEdit.cpp

@@ -27,7 +27,7 @@ QVariant RoutingProfilesModel::data( const QModelIndex& index, int role ) const
     if ( index.parent().isValid() ) { return QVariant(); }
     if ( index.row() >= m_profiles.count() ) { return QVariant(); }
     if ( ( role == Qt::DisplayRole || role == Qt::EditRole ) && index.column() == 0 ) {
-        return m_profiles.at( index.row() ).name;
+        return m_profiles.at( index.row() ).name();
     }
     return QVariant();
 }
@@ -50,14 +50,14 @@ bool RoutingProfilesModel::removeRows( int row, int count, const QModelIndex& pa
     return true;
 }
 
-void RoutingProfilesModel::setProfiles( const QList<Profile>& profiles )
+void RoutingProfilesModel::setProfiles( const QList<RoutingProfile>& profiles )
 { 
     beginResetModel();
     m_profiles = profiles;
     endResetModel();
 }
 
-QList<RoutingProfilesModel::Profile> RoutingProfilesModel::profiles() const
+QList<RoutingProfile> RoutingProfilesModel::profiles() const
 {
     return m_profiles;
 }
@@ -65,7 +65,7 @@ QList<RoutingProfilesModel::Profile> RoutingProfilesModel::profiles() const
 void RoutingProfilesModel::addProfile( const QString& name )
 {
     beginInsertRows( QModelIndex(), m_profiles.count(), m_profiles.count() );
-    m_profiles << Profile( name );
+    m_profiles << RoutingProfile( name );
     endInsertRows();
 }
 
@@ -91,7 +91,7 @@ bool RoutingProfilesModel::setProfileName( int row, const QString& name)
 {
     if ( row < 0 ) { return false; }
     if ( row >= m_profiles.count() ) { return false; }
-    m_profiles[row].name = name;
+    m_profiles[row].setName( name );
     emit dataChanged( index( row, 0 ), index( row, 0 ) );
     return true;
 }
@@ -100,7 +100,7 @@ bool RoutingProfilesModel::setProfilePluginSettings( int row, const QHash< QStri
 {
     if ( row < 0 ) { return false; }
     if ( row >= m_profiles.count() ) { return false; }
-    m_profiles[row].pluginSettings = pluginSettings;
+    m_profiles[row].pluginSettings() = pluginSettings;
     return true;
 }
 
@@ -128,7 +128,7 @@ void RoutingProfilesModel::loadDefaultProfiles()
     beginInsertRows( QModelIndex(), m_profiles.count(), m_profiles.count() + int( LastTemplate ) - 1 );
     for ( int i=0; i < LastTemplate; ++i) {
         ProfileTemplate tpl = static_cast<ProfileTemplate>( i );
-        Profile profile( templateName( tpl ) );
+        RoutingProfile profile( templateName( tpl ) );
         bool profileSupportedByAtLeastOnePlugin = false;
         foreach( RunnerPlugin* plugin, m_pluginManager->runnerPlugins() ) {
             if ( !plugin->supports( RunnerPlugin::Routing ) ) {
@@ -147,7 +147,7 @@ void RoutingProfilesModel::loadDefaultProfiles()
                 continue;
             }
             if ( plugin->supportsTemplate( tpl ) ) {
-                profile.pluginSettings[plugin->nameId()] = plugin->templateSettings( tpl );
+                profile.pluginSettings()[plugin->nameId()] = plugin->templateSettings( tpl );
             }
         }
         m_profiles << profile;

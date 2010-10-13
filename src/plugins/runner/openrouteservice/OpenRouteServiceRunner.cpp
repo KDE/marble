@@ -62,7 +62,7 @@ void OpenRouteServiceRunner::retrieveRoute( RouteRequest *route )
     GeoDataCoordinates source = route->source();
     GeoDataCoordinates destination = route->destination();
 
-    QHash<QString, QVariant> settings = route->routingProfile().pluginSettings["openrouteservice"];
+    QHash<QString, QVariant> settings = route->routingProfile().pluginSettings()["openrouteservice"];
 
     QString request = xmlHeader();
     QString unit = "KM";

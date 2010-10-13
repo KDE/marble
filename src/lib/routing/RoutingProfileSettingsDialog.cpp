@@ -79,16 +79,16 @@ void RoutingProfileSettingsDialog::updateConfigWidget( )
 
 void RoutingProfileSettingsDialog::editProfile( int profileIndex )
 {
-    QList<RoutingProfilesModel::Profile> profiles = m_profilesModel->profiles();
-    m_ui->name->setText( profiles.at( profileIndex ).name );
+    QList<RoutingProfile> profiles = m_profilesModel->profiles();
+    m_ui->name->setText( profiles.at( profileIndex ).name() );
 
     m_servicesModel->clear();
     foreach( RunnerPlugin *plugin,  m_plugins ) {
         QStandardItem *item = new QStandardItem( plugin->name() );
         item->setCheckable( true );
-        if ( profiles[ profileIndex ].pluginSettings.contains( plugin->nameId() ) ) {
+        if ( profiles[ profileIndex ].pluginSettings().contains( plugin->nameId() ) ) {
             item->setCheckState( Qt::Checked );
-            QHash<QString, QVariant> settings = profiles[ profileIndex ].pluginSettings[ plugin->nameId() ];
+            QHash<QString, QVariant> settings = profiles[ profileIndex ].pluginSettings()[ plugin->nameId() ];
             mDebug() << settings;
             if ( m_configWidgets[plugin] ) {
                 m_configWidgets[plugin]->loadSettings( settings );

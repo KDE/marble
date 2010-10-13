@@ -941,18 +941,18 @@ void MainWindow::readSettings()
 
     settings.beginGroup( "Routing Profile" );
     if ( settings.contains( "Num" ) ) {
-        QList<RoutingProfilesModel::Profile> profiles;
+        QList<RoutingProfile> profiles;
         int numProfiles = settings.value( "Num", 0 ).toInt();
         for ( int i = 0; i < numProfiles; ++i ) {
             settings.beginGroup( QString( "Profile %0" ).arg(i) );
-            RoutingProfilesModel::Profile profile;
-            profile.name = settings.value( "Name", tr( "Unnamed" ) ).toString();
+            QString name = settings.value( "Name", tr( "Unnamed" ) ).toString();
+            RoutingProfile profile( name );
             foreach ( const QString& pluginName, settings.childGroups() ) {
                 settings.beginGroup( pluginName );
-                profile.pluginSettings.insert( pluginName, QHash<QString, QVariant>() );
+                profile.pluginSettings().insert( pluginName, QHash<QString, QVariant>() );
                 foreach ( const QString& key, settings.childKeys() ) {
                     if ( key != "Enabled" ) {
-                        profile.pluginSettings[ pluginName ].insert( key, settings.value( key ) );
+                        profile.pluginSettings()[ pluginName ].insert( key, settings.value( key ) );
                     }
                 }
                 settings.endGroup();
@@ -1030,24 +1030,24 @@ void MainWindow::writeSettings()
      settings.endGroup();
 
      settings.beginGroup( "Routing Profile" );
-     QList<RoutingProfilesModel::Profile>  profiles = m_controlView->marbleWidget()
+     QList<RoutingProfile>  profiles = m_controlView->marbleWidget()
                          ->model()->routingManager()->profilesModel()->profiles();
      settings.setValue( "Num", profiles.count() );
      for ( int i = 0; i < profiles.count(); ++i ) {
          settings.beginGroup( QString( "Profile %0" ).arg(i) );
-         RoutingProfilesModel::Profile profile = profiles.at( i );
-         settings.setValue( "Name", profile.name );
+         const RoutingProfile& profile = profiles.at( i );
+         settings.setValue( "Name", profile.name() );
          foreach ( const QString& pluginName, settings.childGroups() ) {
              settings.beginGroup( pluginName );
              settings.remove( "" ); //remove all keys
              settings.endGroup();
          }
-         foreach ( const QString &key, profile.pluginSettings.keys() ) {
+         foreach ( const QString &key, profile.pluginSettings().keys() ) {
              settings.beginGroup( key );
              settings.setValue( "Enabled", true );
-             foreach ( const QString& settingKey, profile.pluginSettings[ key ].keys() ) {
+             foreach ( const QString& settingKey, profile.pluginSettings()[ key ].keys() ) {
                  Q_ASSERT( settingKey != "Enabled" );
-                 settings.setValue( settingKey, profile.pluginSettings[ key ][ settingKey ] );
+                 settings.setValue( settingKey, profile.pluginSettings()[ key ][ settingKey ] );
              }
              settings.endGroup();
          }
