@@ -113,6 +113,9 @@ private Q_SLOTS:
     /** Toggle turn by turn navigation mode */
     void setGuidanceModeEnabled( bool enabled );
 
+    /** Select the first routing profile if none is selected yet */
+    void selectFirstProfile();
+
 private:
     RoutingWidgetPrivate *const d;
 };

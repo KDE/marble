@@ -192,6 +192,10 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
 
     d->m_ui.routingProfileComboBox->setModel( d->m_routingManager->profilesModel() );
 
+    connect( d->m_routingManager->profilesModel(), SIGNAL( rowsInserted( QModelIndex, int, int ) ),
+             this, SLOT( selectFirstProfile() ) );
+    connect( d->m_routingManager->profilesModel(), SIGNAL( modelReset() ),
+             this, SLOT( selectFirstProfile() ) );
     connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL( currentRouteChanged( GeoDataDocument* ) ),
              d->m_widget, SLOT( repaint() ) );
     connect( d->m_routingLayer, SIGNAL( placemarkSelected( QModelIndex ) ),
@@ -557,6 +561,14 @@ void RoutingWidget::updateAlternativeRoutes()
 void RoutingWidget::setGuidanceModeEnabled( bool enabled )
 {
     d->m_routingManager->setGuidanceModeEnabled( enabled );
+}
+
+void RoutingWidget::selectFirstProfile()
+{
+    int count = d->m_routingManager->profilesModel()->rowCount();
+    if ( count && d->m_ui.routingProfileComboBox->currentIndex() < 0 ) {
+        d->m_ui.routingProfileComboBox->setCurrentIndex( 0 );
+    }
 }
 
 } // namespace Marble
