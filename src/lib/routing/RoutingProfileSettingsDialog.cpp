@@ -55,6 +55,7 @@ RoutingProfileSettingsDialog::RoutingProfileSettingsDialog( PluginManager *plugi
 RoutingProfileSettingsDialog::~RoutingProfileSettingsDialog()
 {
     qDeleteAll( m_configWidgets );
+    delete m_ui;
 }
 
 void RoutingProfileSettingsDialog::updateConfigWidget( )
