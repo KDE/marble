@@ -32,6 +32,7 @@ class SunControlWidget;
 class TimeControlWidget;
 class QtMarbleConfigDialog;
 class DownloadRegionDialog;
+class RoutingWidget;
 
 class MainWindow : public QMainWindow
 {
@@ -194,6 +195,8 @@ class MainWindow : public QMainWindow
 
     QDialog *m_mapViewDialog;
     QDialog *m_routingDialog;
+
+    RoutingWidget *m_routingWidget;
 };
 
 } // namespace Marble

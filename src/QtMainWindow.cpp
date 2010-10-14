@@ -80,7 +80,8 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
         m_downloadRegionAction( 0 ),
         m_osmEditAction( 0 ),
         m_mapViewDialog( 0 ),
-        m_routingDialog( 0 )
+        m_routingDialog( 0 ),
+        m_routingWidget( 0 )
 {
     setUpdatesEnabled( false );
 
@@ -668,6 +669,9 @@ void MainWindow::workOffline( bool offline )
     m_controlView->marbleControl()->setWorkOffline( offline );
 
     m_workOfflineAct->setChecked( offline ); // Sync state with the GUI
+    if ( m_routingWidget ) {
+        m_routingWidget->setWorkOffline( offline );
+    }
 }
 
 void MainWindow::showAtmosphere( bool isChecked )
@@ -1204,13 +1208,14 @@ void MainWindow::showRoutingDialog()
     if( !m_routingDialog ) {
         m_routingDialog = new QDialog( this );
         m_routingDialog->setWindowTitle( tr( "Routing - Marble" ) );
-        RoutingWidget *routingWidget = new RoutingWidget( m_controlView->marbleWidget(), m_routingDialog );
+        m_routingWidget = new RoutingWidget( m_controlView->marbleWidget(), m_routingDialog );
+        m_routingWidget->setWorkOffline( m_workOfflineAct->isChecked() );
 
         QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Vertical, m_routingDialog );
         connect(buttonBox, SIGNAL( accepted() ), m_routingDialog, SLOT( accept() ) );
 
         QHBoxLayout* layout = new QHBoxLayout;
-        layout->addWidget( routingWidget );
+        layout->addWidget( m_routingWidget );
         layout->addWidget( buttonBox );
         m_routingDialog->setLayout( layout );
         m_routingDialog->resize( 640, 420 );
