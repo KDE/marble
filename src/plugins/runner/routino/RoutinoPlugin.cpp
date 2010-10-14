@@ -48,6 +48,10 @@ public:
             ui_configWidget->transport->addItem(transport, transport);
         }
     }
+    virtual ~RoutinoConfigWidget()
+    {
+        delete ui_configWidget;
+    }
     virtual void loadSettings( const QHash<QString, QVariant> &settings_ )
     {
         QHash<QString, QVariant> settings = settings_;
