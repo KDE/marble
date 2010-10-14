@@ -108,6 +108,7 @@ class MarbleModelPrivate
     void notifyModelChanged();
     GeoSceneGroup * textureLayerProperties() const;
 
+    void drawAtmosphere( QPainter *painter, ViewParams *viewParams, int width, int height );
     void drawFog( QPainter *painter, ViewParams *viewParams, int width, int height );
 
     static QAtomicInt       refCounter;
@@ -583,9 +584,12 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
         static_cast<GeoSceneLayer*>( d->m_mapTheme->map()->layer( themeID ) );
 
     QStringList renderPositions;
+
     renderPositions << "STARS" << "BEHIND_TARGET";
     d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
-        
+
+    d->drawAtmosphere( painter, viewParams, width, height );
+
     if ( redrawBackground ) {
         if ( d->m_mapTheme->map()->hasTextureLayers() ) {
 
@@ -815,6 +819,55 @@ void MarbleModelPrivate::drawFog( QPainter *painter,
                          2 * radius );
 
     painter->restore();
+}
+
+void MarbleModelPrivate::drawAtmosphere( QPainter *painter,
+                                         ViewParams *viewParams,
+                                         int width, int height )
+{
+    if( !viewParams->showAtmosphere() ) {
+        return;
+    }
+
+    // Only draw an atmosphere if planet is earth
+    GeoSceneDocument *mapTheme = viewParams->mapTheme();
+    if ( mapTheme ) {
+        if ( mapTheme->head()->target() != "earth" )
+            return;
+    }
+
+    // Only draw an atmosphere if projection is spherical
+    if ( viewParams->projection() != Spherical )
+        return;
+
+    // No use to draw atmosphere if it's not visible in the area.
+    if ( viewParams->viewport()->mapCoversViewport() )
+        return;
+
+    // Ok, now we know that at least a little of the atmosphere is
+    // visible, if nothing else in the corners.  Draw the atmosphere
+    // by using a circular gradient.  This is a pure visual effect and
+    // has nothing to do with real physics.
+
+    int  imageHalfWidth  = width / 2;
+    int  imageHalfHeight = height / 2;
+
+    // Recalculate the atmosphere effect and paint it to canvasImage.
+    QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
+                           1.05 * viewParams->radius() );
+    grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
+    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
+
+    QBrush    brush1( grad1 );
+    QPen      pen1( Qt::NoPen );
+
+    painter->setBrush( brush1 );
+    painter->setPen( pen1 );
+    painter->setRenderHint( QPainter::Antialiasing, false );
+    painter->drawEllipse( imageHalfWidth  - (int) ( (qreal) ( viewParams->radius() ) * 1.05 ),
+                          imageHalfHeight - (int) ( (qreal) ( viewParams->radius() ) * 1.05 ),
+                          (int) ( 2.1 * (qreal) ( viewParams->radius()) ),
+                          (int) ( 2.1 * (qreal) ( viewParams->radius()) ) );
 }
 
 void MarbleModel::update()

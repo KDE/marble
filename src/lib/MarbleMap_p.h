@@ -42,8 +42,6 @@ class MarbleMapPrivate
 
     void paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect );
 
-    void drawAtmosphere();
-    void drawFog(QPainter &painter);
     void setBoundingBox();
     void doResize();
 
@@ -61,7 +59,6 @@ class MarbleMapPrivate
     int              m_height;
     ViewParams       m_viewParams;
     bool             m_justModified; // FIXME: Rename to isDirty
-    bool             m_dirtyAtmosphere;
 
     // The home position
     GeoDataCoordinates     m_homePoint;
