@@ -188,6 +188,8 @@ void MarbleWidgetPrivate::construct()
     // show this in the view, i.e. here.
     m_widget->connect( m_model,  SIGNAL( themeChanged( QString ) ),
 		       m_widget, SIGNAL( themeChanged( QString ) ) );
+    m_widget->connect( m_model, SIGNAL( modelChanged() ),
+                       m_widget, SLOT( updateChangedMap() ) );
 
     // Repaint scheduling
     m_widget->connect( m_map,    SIGNAL( repaintNeeded( QRegion ) ),
@@ -1043,6 +1045,13 @@ void MarbleWidget::creatingTilesStart( TileCreator *creator,
     TileCreatorDialog dlg( creator, this );
     dlg.setSummary( name, description );
     dlg.exec();
+}
+
+void MarbleWidget::updateChangedMap()
+{
+    d->m_map->setNeedsUpdate();
+
+    update();
 }
 
 void MarbleWidget::scheduleRepaint( const QRegion& dirtyRegion )

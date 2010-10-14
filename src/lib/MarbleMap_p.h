@@ -53,11 +53,6 @@ class MarbleMapPrivate
      */
     bool needsUpdate() const;
 
-    /**
-     * @brief Mark the map as needing an update.
-     */
-    void setNeedsUpdate();
-
     MarbleMap       *m_parent;
 
     // The model we are showing.

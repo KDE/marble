@@ -899,6 +899,11 @@ class MARBLE_EXPORT MarbleWidget : public QWidget
     void creatingTilesStart( TileCreator *creator, const QString& name, const QString& description );
 
     /**
+     * @brief Invalidate the map and update the widget.
+     */
+    void updateChangedMap();
+
+    /**
      * Schedule repaint
      */
     void scheduleRepaint( const QRegion& dirtyRegion );

@@ -434,6 +434,11 @@ class MARBLE_EXPORT MarbleMap : public QObject
     void centerSun();
 
     /**
+     * @brief Mark the map as needing an update.
+     */
+    void setNeedsUpdate();
+
+    /**
      * @brief Paint the map using a give painter.
      * @param painter  The painter to use.
      * @param dirtyRect the rectangle that actually needs repainting.
@@ -756,12 +761,6 @@ class MARBLE_EXPORT MarbleMap : public QObject
      * @param painter 
      */
     virtual void customPaint( GeoPainter *painter );
-
- private:
-    /**
-     * @brief Request a full repaint of the map during next update.
-     */
-    Q_PRIVATE_SLOT( d, void setNeedsUpdate() )
 
  private:
     Q_DISABLE_COPY( MarbleMap )
