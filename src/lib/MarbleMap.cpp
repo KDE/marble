@@ -78,7 +78,6 @@ void MarbleMapPrivate::construct()
                        m_parent, SLOT( setNeedsUpdate() ) );
 
     m_justModified = false;
-    m_dirtyAtmosphere = false;
 
     m_logzoom  = 0;
 
@@ -110,10 +109,6 @@ void MarbleMapPrivate::doResize()
     // Recreate the canvas image with the new size.
     m_viewParams.setCanvasImage( new QImage( m_parent->width(), m_parent->height(),
                                              imageFormat ));
-
-    if ( m_viewParams.showAtmosphere() ) {
-        m_dirtyAtmosphere=true;
-    }
 
     // Recreate the coastline detection offscreen image
     m_viewParams.setCoastImage( new QImage( m_parent->width(), m_parent->height(),
@@ -153,60 +148,12 @@ void  MarbleMapPrivate::paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect
     painter.restore();
 }
 
-void MarbleMapPrivate::drawAtmosphere()
-{
-    // Only draw an atmosphere if planet is earth
-    GeoSceneDocument * mapTheme = m_viewParams.mapTheme();
-    if ( mapTheme ) {
-        if ( mapTheme->head()->target() != "earth" )
-            return;
-    }
-
-    // Only draw an atmosphere if projection is spherical
-    if ( m_viewParams.projection() != Spherical )
-        return;
-
-    // No use to draw atmosphere if it's not visible in the area. 
-    if ( m_viewParams.viewport()->mapCoversViewport() )
-        return;
-
-    // Ok, now we know that at least a little of the atmosphere is
-    // visible, if nothing else in the corners.  Draw the atmosphere
-    // by using a circular gradient.  This is a pure visual effect and
-    // has nothing to do with real physics.
-
-    int  imageHalfWidth  = m_parent->width() / 2;
-    int  imageHalfHeight = m_parent->height() / 2;
-
-    // Recalculate the atmosphere effect and paint it to canvasImage.
-    QRadialGradient grad1( QPointF( imageHalfWidth, imageHalfHeight ),
-                           1.05 * m_parent->radius() );
-    grad1.setColorAt( 0.91, QColor( 255, 255, 255, 255 ) );
-    grad1.setColorAt( 1.00, QColor( 255, 255, 255, 0 ) );
-
-    QBrush    brush1( grad1 );
-    QPen      pen1( Qt::NoPen );
-    QPainter  painter( m_viewParams.canvasImage() );
-    painter.setBrush( brush1 );
-    painter.setPen( pen1 );
-    painter.setRenderHint( QPainter::Antialiasing, false );
-    painter.drawEllipse( imageHalfWidth  - (int)( (qreal)(m_parent->radius()) * 1.05 ),
-                         imageHalfHeight - (int)( (qreal)(m_parent->radius()) * 1.05 ),
-                         (int)( 2.1 * (qreal)(m_parent->radius()) ),
-                         (int)( 2.1 * (qreal)(m_parent->radius()) ) );
-}
-
 void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
 {
     if ( !m_viewParams.mapTheme() ) {
         mDebug() << "No theme yet!";
         paintMarbleSplash( painter, dirtyRect );
         return;
-    }
-
-    if ( m_dirtyAtmosphere ) {
-        drawAtmosphere();
-        m_dirtyAtmosphere = false;
     }
 
     m_model->paintGlobe( &painter, &m_viewParams,
@@ -672,13 +619,6 @@ void MarbleMap::zoomView( int newZoom )
     emit zoomChanged( d->m_logzoom );
     emit distanceChanged( distanceString() );
     emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
-
-    // We don't do this on every paintEvent to improve performance.
-    // Redrawing the atmosphere is only needed if the size of the
-    // globe changes.
-    if ( d->m_viewParams.showAtmosphere() ) {
-        d->m_dirtyAtmosphere=true;
-    }
 }
 
 
@@ -758,10 +698,6 @@ void MarbleMap::setProjection( Projection projection )
     emit projectionChanged( projection );
 
     d->m_viewParams.setProjection( projection );
- 
-    if ( d->m_viewParams.showAtmosphere() ) {
-        d->m_dirtyAtmosphere=true;
-    }
 
     d->m_model->setupTextureMapper( projection );
 
@@ -829,11 +765,7 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     if ( mapTheme ) {
         d->m_model->setMapTheme( mapTheme, d->m_viewParams.projection() );
 
-        // We don't do this on every paintEvent to improve performance.
-        // Redrawing the atmosphere is only needed if the size of the
-        // globe changes.
         d->doResize();
-        d->m_dirtyAtmosphere=true;
 
         centerSun();
     }
