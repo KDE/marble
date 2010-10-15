@@ -122,6 +122,8 @@ class MainWindow : public QMainWindow
     void showRoutingDialog();
 
  private:
+    void setupZoomButtons();
+
     ControlView *m_controlView;
     SunControlWidget* m_sunControlDialog;
     TimeControlWidget* m_timeControlDialog;

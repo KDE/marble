@@ -63,6 +63,13 @@
 #include "routing/RoutingProfilesModel.h"
 #include "routing/RoutingWidget.h"
 
+// For zoom buttons on Maemo
+#ifdef Q_WS_MAEMO_5
+#include <QtGui/QX11Info>
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+#endif // Q_WS_MAEMO_5
+
 namespace
 {
     const char* POSITION_STRING = "Position:";
@@ -293,6 +300,8 @@ void MainWindow::createMenus()
         m_controlView->marbleControl()->setMapViewTabShown( false );
         m_controlView->marbleControl()->setCurrentLocationTabShown( false );
         m_controlView->marbleControl()->setRoutingTabShown( false );
+
+        setupZoomButtons();
 
         menuBar()->addAction( m_aboutMarbleAct );
         m_controlView->setSideBarShown( false );
@@ -1231,6 +1240,30 @@ void MainWindow::updateMapEditButtonVisibility( const QString &mapTheme )
 {
     Q_ASSERT( m_osmEditAction );
     m_osmEditAction->setVisible( mapTheme == "earth/openstreetmap/openstreetmap.dgml" );
+}
+
+void MainWindow::setupZoomButtons()
+{
+#ifdef Q_WS_MAEMO_5
+    if ( winId() ) {
+        Atom atom = XInternAtom( QX11Info::display(), "_HILDON_ZOOM_KEY_ATOM", False );
+        if ( atom ) {
+            unsigned long val = 1;
+            XChangeProperty ( QX11Info::display(), winId(), atom, XA_INTEGER, 32,
+                             PropModeReplace, reinterpret_cast<unsigned char *>( &val ), 1 );
+
+            QAction* zoomIn = new QAction( tr( "Zoom &In" ), this );
+            zoomIn->setShortcut( Qt::Key_F7 );
+            connect( zoomIn, SIGNAL( triggered() ), m_controlView->marbleWidget(), SLOT( zoomIn() ) );
+            addAction( zoomIn );
+
+            QAction* zoomOut = new QAction( tr( "Zoom &Out" ), this );
+            zoomOut->setShortcut( Qt::Key_F8 );
+            connect( zoomOut, SIGNAL( triggered() ), m_controlView->marbleWidget(), SLOT( zoomOut() ) );
+            addAction( zoomOut );
+        }
+    }
+#endif // Q_WS_MAEMO_5
 }
 
 #include "QtMainWindow.moc"
