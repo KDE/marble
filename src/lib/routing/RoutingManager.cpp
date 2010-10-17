@@ -300,6 +300,9 @@ void RoutingManager::writeSettings() const
 void RoutingManager::readSettings()
 {
     d->loadRoute( d->stateFile() );
+    if ( d->m_routeRequest && d->m_profilesModel->rowCount() ) {
+        d->m_routeRequest->setRoutingProfile( d->m_profilesModel->profiles().at( 0 ) );
+    }
 }
 
 void RoutingManager::setGuidanceModeEnabled( bool enabled )
