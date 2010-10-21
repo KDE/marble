@@ -98,9 +98,6 @@ private Q_SLOTS:
     /** show profile configuration dialog */
     void configureProfile();
 
-    /** Export route to a file */
-    void exportRoute();
-
     /** Progress animation update */
     void updateProgress();
 

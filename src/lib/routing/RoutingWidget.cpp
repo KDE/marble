@@ -28,7 +28,6 @@
 
 #include <QtCore/QTime>
 #include <QtCore/QTimer>
-#include <QtGui/QFileDialog>
 #include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QComboBox>
 #include <QtGui/QPainter>
@@ -472,21 +471,6 @@ void RoutingWidget::configureProfile()
     if ( d->m_ui.routingProfileComboBox->currentIndex() != -1) {
         RoutingProfileSettingsDialog dialog( d->m_widget->model()->pluginManager(), d->m_routingManager->profilesModel() );
         dialog.editProfile( d->m_ui.routingProfileComboBox->currentIndex() );
-    }
-}
-
-void RoutingWidget::exportRoute()
-{
-    QString fileName = QFileDialog::getSaveFileName( this, tr( "Export Route" ), // krazy:exclude=qclasses
-                       QDir::homePath(),
-                       tr( "GPX files (*.gpx)" ) );
-
-    if ( !fileName.isEmpty() ) {
-        QFile gpx( fileName );
-        if ( gpx.open( QFile::WriteOnly) ) {
-            d->m_routingManager->routingModel()->exportGpx( &gpx );
-            gpx.close();
-        }
     }
 }
 

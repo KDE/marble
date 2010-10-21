@@ -23,7 +23,6 @@
 #include "MarbleModel.h"
 #include "AlternativeRoutesModel.h"
 
-
 #include <QtCore/QMap>
 #include <QtGui/QAbstractProxyModel>
 #include <QtGui/QIcon>
@@ -33,6 +32,7 @@
 #include <QtGui/QMouseEvent>
 #include <QtGui/QPixmap>
 #include <QtGui/QComboBox>
+#include <QtGui/QFileDialog>
 
 namespace Marble
 {
@@ -177,7 +177,7 @@ RoutingLayerPrivate::RoutingLayerPrivate( RoutingLayer *parent, MarbleWidget *wi
     QObject::connect( m_removeViaPointAction, SIGNAL( triggered() ), q, SLOT( removeViaPoint() ) );
     m_contextMenu->addAction( Qt::RightButton, m_removeViaPointAction );
     QAction *exportAction = new QAction( QObject::tr( "&Export route..." ), q );
-    QObject::connect( exportAction, SIGNAL( triggered() ), q, SIGNAL( exportRequested() ) );
+    QObject::connect( exportAction, SIGNAL( triggered() ), q, SLOT( exportRoute() ) );
     m_contextMenu->addAction( Qt::RightButton, exportAction );
     if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         m_pixmapSize = QSize( 38, 38 );
@@ -774,6 +774,22 @@ void RoutingLayer::removeViaPoint()
 void RoutingLayer::showAlternativeRoads()
 {
     d->m_marbleWidget->repaint();
+}
+
+void RoutingLayer::exportRoute()
+{
+    QString fileName = QFileDialog::getSaveFileName( d->m_marbleWidget,
+                       tr( "Export Route" ), // krazy:exclude=qclasses
+                       QDir::homePath(),
+                       tr( "GPX files (*.gpx)" ) );
+
+    if ( d->m_routingModel && !fileName.isEmpty() ) {
+        QFile gpx( fileName );
+        if ( gpx.open( QFile::WriteOnly) ) {
+            d->m_routingModel->exportGpx( &gpx );
+            gpx.close();
+        }
+    }
 }
 
 } // namespace Marble

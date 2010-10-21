@@ -122,11 +122,6 @@ Q_SIGNALS:
       */
     void routeDirty();
 
-    /**
-      * Route should be exported
-      */
-    void exportRequested();
-
 protected:
     /** Overriding QWidget, used to make the layer interactive */
     bool eventFilter( QObject *obj, QEvent *event );
@@ -135,6 +130,9 @@ private Q_SLOTS:
     void removeViaPoint();
 
     void showAlternativeRoads();
+
+    /** Export route to a file */
+    void exportRoute();
 
 private:
     RoutingLayerPrivate *const d;
