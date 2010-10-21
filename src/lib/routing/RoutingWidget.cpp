@@ -203,8 +203,6 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( retrieveSelectedPoint( GeoDataCoordinates ) ) );
     connect( d->m_routingLayer, SIGNAL( pointSelectionAborted() ),
              this, SLOT( pointSelectionCanceled() ) );
-    connect( d->m_routingLayer, SIGNAL( exportRequested() ),
-             this, SLOT( exportRoute() ) );
     connect( d->m_routingManager, SIGNAL( stateChanged( RoutingManager::State, RouteRequest* ) ),
              this, SLOT( updateRouteState( RoutingManager::State, RouteRequest* ) ) );
     connect( d->m_routeRequest, SIGNAL( positionAdded( int ) ),
