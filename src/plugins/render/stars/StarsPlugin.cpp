@@ -49,7 +49,7 @@ QStringList StarsPlugin::renderPosition() const
 
 QString StarsPlugin::name() const
 {
-    return tr( "Stars Plugin" );
+    return tr( "Stars" );
 }
 
 QString StarsPlugin::guiString() const
@@ -164,15 +164,15 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
 
         if ( !viewport->globeCoversViewport() && viewport->projection() == Spherical )
         {
-            // Delayed initialization: 
+            // Delayed initialization:
             // Load the star database only if the sky is actually being painted...
             if ( !m_starsLoaded ) {
                 loadStars();
                 m_starsLoaded = true;
             }
-    
+
             int x, y;
-    
+
             const qreal  skyRadius      = 0.6 * sqrt( (qreal)viewport->width() * viewport->width() + viewport->height() * viewport->height() );
             const qreal  earthRadius    = viewport->radius();
 
@@ -181,9 +181,9 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
             for (; i != itEnd; ++i)
             {
                 Quaternion  qpos = (*i).quaternion();
-    
+
                 qpos.rotateAroundAxis( skyAxisMatrix );
-    
+
                 if ( qpos.v[Q_Z] > 0 ) {
                    continue;
                 }
@@ -198,16 +198,16 @@ bool StarsPlugin::render( GeoPainter *painter, ViewportParams *viewport,
                         < earthRadius * earthRadius ) ) {
                     continue;
                 }
-    
+
                 // Let (x, y) be the position on the screen of the placemark..
                 x = (int)(viewport->width()  / 2 + skyRadius * qpos.v[Q_X]);
                 y = (int)(viewport->height() / 2 - skyRadius * qpos.v[Q_Y]);
-    
+
                 // Skip placemarks that are outside the screen area
                 if ( x < 0 || x >= viewport->width()
     		 || y < 0 || y >= viewport->height() )
                     continue;
-    
+
                 qreal size;
                 if ( (*i).magnitude() < -1 ) size = 6.5;
                 else if ( (*i).magnitude() < 0 ) size = 5.5;
@@ -248,12 +248,12 @@ qreal StarsPlugin::siderealTime( const QDateTime& localDateTime )
     qreal d = d_days + ( offsetUtcSecs / ( 24.0 * 3600 ) );
 
     //  Appendix A of USNO Circular No. 163 (1981):
-    //  Approximate value for Greenwich mean sidereal time in hours: 
+    //  Approximate value for Greenwich mean sidereal time in hours:
     //  (Loss of precision: 0.1 secs per century)
     qreal gmst = 18.697374558 + 24.06570982441908 * d;
 
-    // Range (0..24) for gmst: 
-    return gmst - (int)( gmst / 24.0 ) * 24.0; 
+    // Range (0..24) for gmst:
+    return gmst - (int)( gmst / 24.0 ) * 24.0;
 }
 
 }
