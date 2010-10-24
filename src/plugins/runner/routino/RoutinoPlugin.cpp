@@ -86,7 +86,7 @@ private:
     Ui::RoutinoConfigWidget *ui_configWidget;
 };
 
-RunnerPlugin::ConfigWidget *RoutinoPlugin::configWidget() const
+RunnerPlugin::ConfigWidget *RoutinoPlugin::configWidget()
 {
     return new RoutinoConfigWidget();
 }

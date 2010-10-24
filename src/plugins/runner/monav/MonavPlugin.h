@@ -16,6 +16,7 @@
 namespace Marble
 {
 
+class MonavMapsModel;
 class MonavPluginPrivate;
 
 class MonavPlugin : public RunnerPlugin
@@ -30,7 +31,13 @@ public:
 
     virtual MarbleAbstractRunner* newRunner() const;
 
+    virtual ConfigWidget *configWidget();
+
     QString mapDirectoryForRequest( RouteRequest* request ) const;
+
+    MonavMapsModel* installedMapsModel();
+
+    void reloadMaps();
 
 private:
     MonavPluginPrivate* const d;

@@ -30,7 +30,7 @@ public:
 
     virtual MarbleAbstractRunner* newRunner() const;
 
-    ConfigWidget* configWidget() const;
+    ConfigWidget* configWidget();
 
     bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
 

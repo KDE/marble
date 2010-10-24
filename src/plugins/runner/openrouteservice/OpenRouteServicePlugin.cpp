@@ -79,7 +79,7 @@ private:
     Ui::OpenRouteServiceConfigWidget *ui_configWidget;
 };
 
-RunnerPlugin::ConfigWidget *OpenRouteServicePlugin::configWidget() const
+RunnerPlugin::ConfigWidget *OpenRouteServicePlugin::configWidget()
 {
     return new OpenRouteServiceConfigWidget();
 }

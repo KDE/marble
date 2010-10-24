@@ -27,7 +27,7 @@ public:
 
     virtual MarbleAbstractRunner* newRunner() const;
 
-    ConfigWidget* configWidget() const;
+    ConfigWidget* configWidget();
 
     virtual bool supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const;
     virtual QHash<QString, QVariant> templateSettings( RoutingProfilesModel::ProfileTemplate profileTemplate ) const;

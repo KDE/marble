@@ -87,21 +87,23 @@ void YoursRunner::retrieveRoute( RouteRequest *route )
 
 void YoursRunner::retrieveData( QNetworkReply *reply )
 {
-    QByteArray data = reply->readAll();
-    reply->deleteLater();
-    //mDebug() << "Download completed: " << data;
-    GeoDataDocument* result = parse( data );
-    if ( result ) {
-        QString name = "%1 %2 (Yours)";
-        QString unit = "m";
-        qreal length = distance( result );
-        if (length >= 1000) {
-            length /= 1000.0;
-            unit = "km";
+    if ( reply->isFinished() ) {
+        QByteArray data = reply->readAll();
+        reply->deleteLater();
+        //mDebug() << "Download completed: " << data;
+        GeoDataDocument* result = parse( data );
+        if ( result ) {
+            QString name = "%1 %2 (Yours)";
+            QString unit = "m";
+            qreal length = distance( result );
+            if (length >= 1000) {
+                length /= 1000.0;
+                unit = "km";
+            }
+            result->setName( name.arg( length, 0, 'f', 1 ).arg( unit ) );
         }
-        result->setName( name.arg( length, 0, 'f', 1 ).arg( unit ) );
+        emit routeCalculated( result );
     }
-    emit routeCalculated( result );
 }
 
 void YoursRunner::handleError( QNetworkReply::NetworkError error )

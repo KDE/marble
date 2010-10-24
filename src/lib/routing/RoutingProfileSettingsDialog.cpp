@@ -63,7 +63,7 @@ void RoutingProfileSettingsDialog::updateConfigWidget( )
     QModelIndex current = m_ui->services->selectionModel()->currentIndex();
 
     if ( !current.isValid() ) {
-        m_ui->settings->setEnabled( false );
+        m_ui->settingsStack->setEnabled( false );
     }
 
     RunnerPlugin *plugin = m_plugins.at( current.row() );
@@ -71,9 +71,9 @@ void RoutingProfileSettingsDialog::updateConfigWidget( )
     if ( configWidget ) {
         m_ui->settingsStack->setCurrentWidget( configWidget );
         QStandardItem *item = m_servicesModel->invisibleRootItem()->child( current.row() );
-        m_ui->settings->setEnabled( item->checkState() == Qt::Checked );
+        m_ui->settingsStack->setEnabled( item->checkState() == Qt::Checked );
     } else {
-        m_ui->settings->setEnabled( false );
+        m_ui->settingsStack->setEnabled( false );
         m_ui->settingsStack->setCurrentWidget( m_ui->noConfigAvailablePage );
     }
 }
@@ -98,7 +98,7 @@ void RoutingProfileSettingsDialog::editProfile( int profileIndex )
         m_servicesModel->invisibleRootItem()->appendRow( item );
     }
     m_ui->settingsStack->setCurrentWidget( m_ui->selectServicePage );
-    m_ui->settings->setEnabled( false );
+    m_ui->settingsStack->setEnabled( false );
 
     if ( exec() != QDialog::Accepted) return;
 

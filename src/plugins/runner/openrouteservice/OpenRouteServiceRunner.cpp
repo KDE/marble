@@ -99,16 +99,18 @@ void OpenRouteServiceRunner::retrieveRoute( RouteRequest *route )
 
 void OpenRouteServiceRunner::retrieveData( QNetworkReply *reply )
 {
-    QByteArray data = reply->readAll();
-    reply->deleteLater();
-    //mDebug() << "Download completed: " << data;
-    GeoDataDocument* document = parse( data );
+    if ( reply->isFinished() ) {
+        QByteArray data = reply->readAll();
+        reply->deleteLater();
+        //mDebug() << "Download completed: " << data;
+        GeoDataDocument* document = parse( data );
 
-    if ( !document ) {
-        mDebug() << "Failed to parse the downloaded route data" << data;
+        if ( !document ) {
+            mDebug() << "Failed to parse the downloaded route data" << data;
+        }
+
+        emit routeCalculated( document );
     }
-
-    emit routeCalculated( document );
 }
 
 void OpenRouteServiceRunner::handleError( QNetworkReply::NetworkError error )

@@ -93,7 +93,7 @@ public:
      *
      * @return: The configuration widget or, if no configuration widget exists, 0.
      */
-    virtual ConfigWidget *configWidget() const;
+    virtual ConfigWidget *configWidget();
 
     /** True if the plugin supports the given routing profile template */
     virtual bool supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const;

@@ -144,7 +144,7 @@ bool RunnerPlugin::canWorkOffline() const
     return d->m_canWorkOffline;
 }
 
-RunnerPlugin::ConfigWidget *RunnerPlugin::configWidget() const
+RunnerPlugin::ConfigWidget *RunnerPlugin::configWidget()
 {
     return 0;
 }

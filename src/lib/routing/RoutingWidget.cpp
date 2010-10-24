@@ -191,6 +191,10 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
 
     d->m_ui.routingProfileComboBox->setModel( d->m_routingManager->profilesModel() );
 
+    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        d->m_ui.directionsListView->setVisible( false );
+    }
+
     connect( d->m_routingManager->profilesModel(), SIGNAL( rowsInserted( QModelIndex, int, int ) ),
              this, SLOT( selectFirstProfile() ) );
     connect( d->m_routingManager->profilesModel(), SIGNAL( modelReset() ),
@@ -467,7 +471,7 @@ void RoutingWidget::pointSelectionCanceled()
 void RoutingWidget::configureProfile()
 {
     if ( d->m_ui.routingProfileComboBox->currentIndex() != -1) {
-        RoutingProfileSettingsDialog dialog( d->m_widget->model()->pluginManager(), d->m_routingManager->profilesModel() );
+        RoutingProfileSettingsDialog dialog( d->m_widget->model()->pluginManager(), d->m_routingManager->profilesModel(), d->m_widget );
         dialog.editProfile( d->m_ui.routingProfileComboBox->currentIndex() );
     }
 }
