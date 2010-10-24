@@ -30,12 +30,26 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QMenu>
 #include <QtGui/QToolButton>
+#include <QtGui/QKeyEvent>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
 
 namespace Marble
 {
+
+/**
+  * A RoutingLineEdit that swallows enter/return pressed
+  * key events
+  */
+class RoutingInputLineEdit : public RoutingLineEdit
+{
+public:
+    RoutingInputLineEdit( QWidget *parent = 0 );
+
+protected:
+    virtual void keyPressEvent(QKeyEvent *);
+};
 
 class RoutingInputWidgetPrivate
 {
@@ -44,7 +58,7 @@ public:
 
     MarbleWidget* m_marbleWidget;
 
-    RoutingLineEdit *m_lineEdit;
+    RoutingInputLineEdit *m_lineEdit;
 
     QToolButton *m_menuButton;
 
@@ -85,7 +99,23 @@ public:
     QMenu* createBookmarkMenu( RoutingInputWidget *parent );
 
     void createBookmarkActions( QMenu* menu, GeoDataFolder* bookmarksFolder, QObject *parent );
+
+    void setProgressAnimationEnabled( bool enabled );
 };
+
+RoutingInputLineEdit::RoutingInputLineEdit( QWidget *parent ) : RoutingLineEdit( parent )
+{
+    // nothing to do
+}
+
+void RoutingInputLineEdit::keyPressEvent(QKeyEvent *event)
+{
+    RoutingLineEdit::keyPressEvent( event );
+    bool const returnPressed = event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter;
+    if ( returnPressed ) {
+        event->accept();
+    }
+}
 
 RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleWidget* widget, int index, QWidget *parent ) :
         m_marbleModel( widget->model() ), m_marbleWidget( widget ), m_lineEdit( 0 ),
@@ -95,7 +125,7 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleWidget* widget, int 
         m_bookmarkAction( 0 ), m_mapInput( 0 ), m_currentLocationAction( 0 ),
         m_centerAction( 0 )
 {
-    bool smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     int const iconSize = smallScreen ? 32 : 16;
 
     m_menuButton = new QToolButton( parent );
@@ -103,7 +133,7 @@ RoutingInputWidgetPrivate::RoutingInputWidgetPrivate( MarbleWidget* widget, int 
     m_menuButton->setPopupMode( QToolButton::InstantPopup );
     m_menuButton->setIconSize( QSize( iconSize, iconSize ) );
 
-    m_lineEdit = new RoutingLineEdit( parent );
+    m_lineEdit = new RoutingInputLineEdit( parent );
 
     m_progressTimer.setInterval( 100 );
     m_nominatimTimer.setInterval( 1000 );
@@ -173,6 +203,20 @@ void RoutingInputWidgetPrivate::createBookmarkActions( QMenu* menu, GeoDataFolde
     }
 }
 
+void RoutingInputWidgetPrivate::setProgressAnimationEnabled( bool enabled )
+{
+    if ( enabled ) {
+        m_menuButton->setArrowType( Qt::NoArrow );
+    } else {
+        bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+        if ( smallScreen ) {
+            m_menuButton->setArrowType( Qt::DownArrow );
+        } else {
+          m_menuButton->setIcon( QIcon( m_route->pixmap( m_index ) ) );
+        }
+    }
+}
+
 RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget *parent ) :
         QWidget( parent ), d( new RoutingInputWidgetPrivate( widget, index, this ) )
 {
@@ -180,8 +224,15 @@ RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget
     layout->setSpacing( 0 );
     layout->setMargin( 0 );
 
-    layout->addWidget( d->m_menuButton );
-    layout->addWidget( d->m_lineEdit );
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( smallScreen ) {
+        layout->addWidget( d->m_lineEdit );
+        d->m_menuButton->setArrowType( Qt::DownArrow );
+        layout->addWidget( d->m_menuButton );
+    } else {
+        layout->addWidget( d->m_menuButton );
+        layout->addWidget( d->m_lineEdit );
+    }
     d->m_menuButton->setMenu( d->createMenu( this ) );
 
     connect( d->m_marbleModel->bookmarkManager(), SIGNAL( bookmarksChanged() ),
@@ -253,6 +304,7 @@ void RoutingInputWidget::findPlacemarks()
     if ( text.isEmpty() ) {
         setInvalid();
     } else {
+        d->setProgressAnimationEnabled( true );
         d->m_progressTimer.start();
         d->m_runnerManager->findPlacemarks( text );
     }
@@ -297,7 +349,7 @@ void RoutingInputWidget::updateProgress()
 void RoutingInputWidget::finishSearch()
 {
     d->m_progressTimer.stop();
-    d->m_menuButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
+    d->setProgressAnimationEnabled( false );
     emit searchFinished( this );
 }
 
@@ -315,13 +367,13 @@ void RoutingInputWidget::abortMapInputRequest()
 void RoutingInputWidget::setIndex( int index )
 {
     d->m_index = index;
-    d->m_menuButton->setIcon( QIcon( d->m_route->pixmap( d->m_index ) ) );
+    d->setProgressAnimationEnabled( false );
 }
 
 void RoutingInputWidget::updatePosition( int index, const GeoDataCoordinates & )
 {
     if ( index == d->m_index ) {
-        d->m_menuButton->setIcon( d->m_route->pixmap( d->m_index ) );
+        d->setProgressAnimationEnabled( false );
         emit targetValidityChanged( hasTargetPosition() );
         d->adjustText();
     }
@@ -336,7 +388,7 @@ void RoutingInputWidget::clear()
 {
     d->m_nominatimTimer.stop();
     d->m_progressTimer.stop();
-    d->m_menuButton->setIcon( d->m_route->pixmap( d->m_index ) );
+    d->setProgressAnimationEnabled( false );
     d->m_route->setPosition( d->m_index, GeoDataCoordinates() );
     d->m_lineEdit->clear();
     emit targetValidityChanged( false );
