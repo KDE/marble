@@ -23,6 +23,7 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QShowEvent>
 #include <QtGui/QSortFilterProxyModel>
+#include <QtGui/QMessageBox>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
@@ -284,17 +285,25 @@ bool MonavConfigWidgetPrivate::updateStates( const QString &continent, QComboBox
 bool MonavConfigWidgetPrivate::updateRegions( const QString &continent, const QString &state, QComboBox* comboBox )
 {
     comboBox->clear();
+    QMap<QString,QString> regions;
     foreach( const MonavStuffEntry &map, m_remoteMaps ) {
         Q_ASSERT( map.isValid() );
         if ( map.continent() == continent && map.state() == state ) {
             QString item = "%1 - %2";
             if ( map.region().isEmpty() ) {
                 item = item.arg( map.state() );
+                comboBox->addItem( item.arg( map.transport() ), map.payload() );
             } else {
-                item = item.arg( map.region() );
+                item = item.arg( map.region(), map.transport() );
+                regions.insert( item, map.payload() );
             }
-            comboBox->addItem( item.arg( map.transport() ), map.payload() );
         }
+    }
+
+    QMapIterator<QString, QString> iter( regions );
+    while ( iter.hasNext() ) {
+        iter.next();
+        comboBox->addItem( iter.key(), iter.value() );
     }
 
     return true;
@@ -578,6 +587,9 @@ void MonavConfigWidgetPrivate::updateInstalledMapsViewButtons()
             m_upgradeMapSignalMapper.setMapping( button, origin.row() );
             QObject::connect( button, SIGNAL( clicked() ), &m_upgradeMapSignalMapper, SLOT( map() ) );
             bool upgradable = m_mapsModel->data( origin ).toBool();
+            QString canUpgradeText = QObject::tr( "An update is available. Click to install it." );
+            QString isLatestText = QObject::tr( "No update available. You are running the latest version." );
+            button->setToolTip( upgradable ? canUpgradeText : isLatestText );
             button->setEnabled( upgradable );
         }
         {
@@ -607,9 +619,13 @@ void MonavConfigWidget::updateTransportTypeFilter( const QString &filter )
 
 void MonavConfigWidget::removeMap( int index )
 {
-    d->m_mapsModel->deleteMapFiles( index );
-    d->m_plugin->reloadMaps();
-    d->updateInstalledMapsViewButtons();
+    QMessageBox::StandardButtons buttons = QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel;
+    QString text = tr( "Are you sure you want to delete this map from the system?" );
+    if ( QMessageBox::question( this, "Remove Map", text, buttons, QMessageBox::No ) == QMessageBox::Yes ) {
+        d->m_mapsModel->deleteMapFiles( index );
+        d->m_plugin->reloadMaps();
+        d->updateInstalledMapsViewButtons();
+    }
 }
 
 void MonavConfigWidget::upgradeMap( int index )
@@ -633,6 +649,7 @@ void MonavConfigWidget::setManageMapsModeEnabled( bool enabled )
     m_installedMapsListView->setColumnHidden( 2, !enabled );
     m_installedMapsListView->setColumnHidden( 3, !enabled );
     m_installedMapsListView->setColumnHidden( 4, !enabled );
+    m_installedMapsListView->resizeColumnsToContents();
 }
 
 void MonavConfigWidgetPrivate::setBusy( bool busy, const QString &message ) const
