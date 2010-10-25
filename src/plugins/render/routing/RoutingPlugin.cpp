@@ -21,6 +21,7 @@
 #include "routing/AdjustNavigation.h"
 #include "routing/RoutingManager.h"
 #include "routing/RoutingModel.h"
+#include "routing/RouteRequest.h"
 #include "MarbleDirs.h"
 #include "MarbleWidget.h"
 #include "MarbleModel.h"
@@ -281,6 +282,17 @@ void RoutingPlugin::showRoutingItem( bool show )
                 this, SLOT( setDestinationInformation( qint32, qreal ) ) );
         disconnect( tracking, SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
                  this, SLOT( setCurrentLocation( GeoDataCoordinates, qreal ) ) );
+    }
+
+    if ( show && !tracking->positionProviderPlugin() ) {
+        RouteRequest* request = m_marbleWidget->model()->routingManager()->routeRequest();
+        if ( request && request->size() > 0 ) {
+            GeoDataCoordinates source = request->source();
+            GeoDataLookAt view;
+            view.setCoordinates( source );
+            view.setRange( 750 );
+            m_marbleWidget->flyTo( view );
+        }
     }
 
     m_marbleWidget->model()->routingManager()->setGuidanceModeEnabled( show );
