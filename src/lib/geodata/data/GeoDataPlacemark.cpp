@@ -177,8 +177,15 @@ void GeoDataPlacemark::pack( QDataStream& stream ) const
     stream << p()->m_countrycode;
     stream << p()->m_area;
     stream << p()->m_population;
-    stream << p()->m_geometry->geometryId();
-    p()->m_geometry->pack( stream );
+    if ( p()->m_geometry )
+    {
+        stream << p()->m_geometry->geometryId();
+        p()->m_geometry->pack( stream );
+    }
+    else
+    {
+        stream << InvalidGeometryId;
+    }
     p()->m_coordinate.pack( stream );
 }
 
