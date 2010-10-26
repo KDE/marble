@@ -62,6 +62,9 @@
 #include "routing/RoutingManager.h"
 #include "routing/RoutingProfilesModel.h"
 #include "routing/RoutingWidget.h"
+#include "PositionTracking.h"
+#include "PositionProviderPlugin.h"
+#include "PluginManager.h"
 
 // For zoom buttons on Maemo
 #ifdef Q_WS_MAEMO_5
@@ -979,6 +982,23 @@ void MainWindow::readSettings()
     }
     settings.endGroup();
 
+    settings.beginGroup( "Plugins");
+    QString positionProvider = settings.value( "activePositionTrackingPlugin", QString() ).toString();
+    if ( !positionProvider.isEmpty() ) {
+        PositionTracking* tracking = m_controlView->marbleWidget()->model()->positionTracking();
+        PluginManager* pluginManager = m_controlView->marbleWidget()->model()->pluginManager();
+        QList<PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
+        foreach( PositionProviderPlugin* plugin, plugins ) {
+            if ( plugin->nameId() == positionProvider ) {
+                plugins.removeOne( plugin );
+                tracking->setPositionProviderPlugin( plugin );
+                break;
+            }
+            qDeleteAll( plugins );
+        }
+    }
+    settings.endGroup();
+
      // The config dialog has to read settings.
      m_configDialog->readSettings();
 
@@ -1067,6 +1087,14 @@ void MainWindow::writeSettings()
          settings.endGroup();
      }
      settings.endGroup();
+
+     settings.beginGroup( "Plugins");
+     QString positionProvider;
+     PositionTracking* tracking = m_controlView->marbleWidget()->model()->positionTracking();
+     if ( tracking && tracking->positionProviderPlugin() ) {
+         positionProvider = tracking->positionProviderPlugin()->nameId();
+     }
+     settings.setValue( "activePositionTrackingPlugin", positionProvider );
 
      // The config dialog has to write settings.
      m_configDialog->writeSettings();

@@ -237,6 +237,9 @@
   <entry name="pluginVisible" type="IntList">
    <label>List of toggles for making plugins visible.</label>
   </entry>
+  <entry name="activePositionTrackingPlugin" type="String">
+   <label>The position tracking plugin used to determine the current location</label>
+  </entry>
  </group>
  <group name="StatusBar">
   <entry key="showPositionLabel" type="Bool" >

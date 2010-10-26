@@ -79,6 +79,9 @@
 #include "ViewportParams.h"
 #include "MarbleClock.h"
 #include "routing/RoutingManager.h"
+#include "PositionTracking.h"
+#include "PositionProviderPlugin.h"
+#include "PluginManager.h"
 
 // Marble non-library classes
 #include "ControlView.h"
@@ -482,6 +485,21 @@ void MarblePart::readSettings()
         m_controlView->marbleWidget()->model()->routingManager()->profilesModel()->loadDefaultProfiles();
     }
 
+    QString positionProvider = MarbleSettings::activePositionTrackingPlugin();
+    if ( !positionProvider.isEmpty() ) {
+        PositionTracking* tracking = m_controlView->marbleWidget()->model()->positionTracking();
+        PluginManager* pluginManager = m_controlView->marbleWidget()->model()->pluginManager();
+        QList<PositionProviderPlugin*> plugins = pluginManager->createPositionProviderPlugins();
+        foreach( PositionProviderPlugin* plugin, plugins ) {
+            if ( plugin->nameId() == positionProvider ) {
+                plugins.removeOne( plugin );
+                tracking->setPositionProviderPlugin( plugin );
+                break;
+            }
+            qDeleteAll( plugins );
+        }
+    }
+
     readStatusBarSettings();
 
     updateSettings();
@@ -614,6 +632,13 @@ void MarblePart::writeSettings()
     MarbleSettings::setPluginEnabled( pluginEnabled );
     MarbleSettings::setPluginVisible( pluginVisible );
     MarbleSettings::setPluginNameId(  pluginNameId );
+
+    QString positionProvider;
+    PositionTracking* tracking = m_controlView->marbleWidget()->model()->positionTracking();
+    if ( tracking && tracking->positionProviderPlugin() ) {
+        positionProvider = tracking->positionProviderPlugin()->nameId();
+    }
+    MarbleSettings::setActivePositionTrackingPlugin( positionProvider );
 
     MarbleSettings::setLockFloatItemPositions( m_lockFloatItemsAct->isChecked() );
 

@@ -49,7 +49,7 @@ class CurrentLocationWidgetPrivate
     void centerOnCurrentLocation();
     void updateRecenterComboBox( int centerMode );
     void updateAutoZoomCheckBox( bool autoZoom );
-
+    void updateActivePositionProvider( PositionProviderPlugin* );
 };
 
 CurrentLocationWidget::CurrentLocationWidget( QWidget *parent, Qt::WindowFlags f )
@@ -95,6 +95,9 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     disconnect( d->m_widget->model()->positionTracking(),
              SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
              this, SLOT( receiveGpsCoordinates( GeoDataCoordinates, qreal ) ) );
+    disconnect( d->m_widget->model()->positionTracking(),
+             SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
+             this, SLOT( updateActivePositionProvider( PositionProviderPlugin* ) ) );
     disconnect( d->m_currentLocationUi.positionTrackingComboBox, SIGNAL( currentIndexChanged( QString ) ),
              this, SLOT( changePositionProvider( QString ) ) );
     disconnect( d->m_currentLocationUi.locationLabel, SIGNAL( linkActivated( QString ) ),
@@ -112,6 +115,9 @@ void CurrentLocationWidget::setMarbleWidget( MarbleWidget *widget )
     connect( d->m_widget->model()->positionTracking(),
              SIGNAL( gpsLocation( GeoDataCoordinates, qreal ) ),
              this, SLOT( receiveGpsCoordinates( GeoDataCoordinates, qreal ) ) );
+    connect( d->m_widget->model()->positionTracking(),
+             SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
+             this, SLOT( updateActivePositionProvider( PositionProviderPlugin* ) ) );
     connect( d->m_currentLocationUi.positionTrackingComboBox, SIGNAL( currentIndexChanged( QString ) ),
              this, SLOT( changePositionProvider( QString ) ) );
     connect( d->m_currentLocationUi.locationLabel, SIGNAL( linkActivated( QString ) ),
@@ -153,6 +159,22 @@ void CurrentLocationWidgetPrivate::adjustPositionTrackingStatus( PositionProvide
     html += "</p></body></html>";
     m_currentLocationUi.locationLabel->setEnabled( true );
     m_currentLocationUi.locationLabel->setText( html );
+}
+
+void CurrentLocationWidgetPrivate::updateActivePositionProvider( PositionProviderPlugin *plugin )
+{
+    m_currentLocationUi.positionTrackingComboBox->blockSignals( true );
+    if ( !plugin ) {
+        m_currentLocationUi.positionTrackingComboBox->setCurrentIndex( 0 );
+    } else {
+        for( int i=0; i<m_currentLocationUi.positionTrackingComboBox->count(); ++i ) {
+            if ( m_currentLocationUi.positionTrackingComboBox->itemText( i ) == plugin->guiString() ) {
+                m_currentLocationUi.positionTrackingComboBox->setCurrentIndex( i );
+                break;
+            }
+        }
+    }
+    m_currentLocationUi.positionTrackingComboBox->blockSignals( false );
 }
 
 void CurrentLocationWidget::receiveGpsCoordinates( const GeoDataCoordinates &position, qreal speed )
