@@ -22,6 +22,7 @@
 #include "RouteRequest.h"
 #include "MarbleModel.h"
 #include "AlternativeRoutesModel.h"
+#include "RoutingManager.h"
 
 #include <QtCore/QMap>
 #include <QtGui/QAbstractProxyModel>
@@ -781,13 +782,17 @@ void RoutingLayer::exportRoute()
     QString fileName = QFileDialog::getSaveFileName( d->m_marbleWidget,
                        tr( "Export Route" ), // krazy:exclude=qclasses
                        QDir::homePath(),
-                       tr( "GPX files (*.gpx)" ) );
+                       tr( "GPX and KML files (*.gpx *.kml)" ) );
 
     if ( d->m_routingModel && !fileName.isEmpty() ) {
-        QFile gpx( fileName );
-        if ( gpx.open( QFile::WriteOnly) ) {
-            d->m_routingModel->exportGpx( &gpx );
-            gpx.close();
+        if ( fileName.endsWith( ".gpx", Qt::CaseInsensitive ) ) {
+            QFile gpx( fileName );
+            if ( gpx.open( QFile::WriteOnly) ) {
+                d->m_routingModel->exportGpx( &gpx );
+                gpx.close();
+            }
+        } else {
+            d->m_marbleWidget->model()->routingManager()->saveRoute( fileName );
         }
     }
 }

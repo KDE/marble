@@ -111,6 +111,12 @@ public:
       */
     void readSettings();
 
+    /**
+      * Saves the current route to the file with the given filename. Existing files
+      * will be overwritten. The route is saved in kml format.
+      */
+    void saveRoute( const QString &filename ) const;
+
 public Q_SLOTS:
     /** Update the route */
     void updateRoute();

@@ -297,6 +297,11 @@ void RoutingManager::writeSettings() const
     d->saveRoute( d->stateFile() );
 }
 
+void RoutingManager::saveRoute( const QString &filename ) const
+{
+    d->saveRoute( filename );
+}
+
 void RoutingManager::readSettings()
 {
     d->loadRoute( d->stateFile() );
