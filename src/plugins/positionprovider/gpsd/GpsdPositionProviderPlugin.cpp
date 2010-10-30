@@ -12,8 +12,10 @@
 
 #include "GpsdThread.h"
 #include "MarbleDebug.h"
+#include <math.h>
 
 using namespace Marble;
+using namespace std;
 
 QString GpsdPositionProviderPlugin::name() const
 {
