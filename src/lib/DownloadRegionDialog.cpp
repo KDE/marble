@@ -192,6 +192,10 @@ QWidget * DownloadRegionDialog::Private::createOkCancelButtonBox()
     QDialogButtonBox * const buttonBox = new QDialogButtonBox;
     m_okButton = buttonBox->addButton( QDialogButtonBox::Ok );
     m_applyButton = buttonBox->addButton( QDialogButtonBox::Apply );
+    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        buttonBox->removeButton( m_applyButton );
+        m_applyButton->setVisible( false );
+    }
     buttonBox->addButton( QDialogButtonBox::Cancel );
     connect( buttonBox, SIGNAL( accepted() ), m_dialog, SLOT( accept() ) );
     connect( buttonBox, SIGNAL( rejected() ), m_dialog, SLOT( reject() ) );
