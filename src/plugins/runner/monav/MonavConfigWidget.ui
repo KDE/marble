@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>280</width>
+    <width>286</width>
     <height>277</height>
    </rect>
   </property>
@@ -28,7 +28,7 @@
          </property>
          <widget class="QWidget" name="tab">
           <attribute name="title">
-           <string>Installed Maps</string>
+           <string>Configure</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout">
            <item row="0" column="0">
@@ -50,18 +50,8 @@
              </item>
             </widget>
            </item>
-           <item row="0" column="2">
-            <widget class="QPushButton" name="m_manageMapsButton">
-             <property name="text">
-              <string>Manage Maps</string>
-             </property>
-             <property name="checkable">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0" colspan="3">
-            <widget class="QTableView" name="m_installedMapsListView">
+            <widget class="QTableView" name="m_configureMapsListView">
              <property name="horizontalScrollBarPolicy">
               <enum>Qt::ScrollBarAlwaysOff</enum>
              </property>
@@ -84,9 +74,38 @@
            </item>
           </layout>
          </widget>
+         <widget class="QWidget" name="tab_3">
+          <attribute name="title">
+           <string>Manage Maps</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <widget class="QTableView" name="m_installedMapsListView">
+             <property name="horizontalScrollBarPolicy">
+              <enum>Qt::ScrollBarAlwaysOff</enum>
+             </property>
+             <property name="alternatingRowColors">
+              <bool>true</bool>
+             </property>
+             <attribute name="horizontalHeaderVisible">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="horizontalHeaderStretchLastSection">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="verticalHeaderVisible">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="verticalHeaderStretchLastSection">
+              <bool>false</bool>
+             </attribute>
+            </widget>
+           </item>
+          </layout>
+         </widget>
          <widget class="QWidget" name="tab_2">
           <attribute name="title">
-           <string>Get New Maps</string>
+           <string>Install New</string>
           </attribute>
           <layout class="QFormLayout" name="formLayout">
            <property name="fieldGrowthPolicy">
@@ -178,7 +197,7 @@
           <number>0</number>
          </property>
          <property name="value">
-          <number>140915</number>
+          <number>140958</number>
          </property>
          <property name="format">
           <string>%v/%m MB</string>

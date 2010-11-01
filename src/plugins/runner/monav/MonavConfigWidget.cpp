@@ -97,8 +97,6 @@ public:
 
     QString m_transport;
 
-    bool m_manageMapsModeEnabled;
-
     MonavConfigWidgetPrivate( MonavConfigWidget* parent, MonavPlugin* plugin );
 
     void parseNewStuff( const QByteArray &data );
@@ -199,7 +197,7 @@ bool MonavStuffEntry::isValid() const
 MonavConfigWidgetPrivate::MonavConfigWidgetPrivate( MonavConfigWidget* parent, MonavPlugin* plugin ) :
         m_parent( parent ), m_plugin( plugin ), m_networkAccessManager( 0 ),
         m_currentReply( 0 ), m_unpackProcess( 0 ), m_filteredModel( new QSortFilterProxyModel( parent) ),
-        m_mapsModel( 0 ), m_initialized( false ), m_manageMapsModeEnabled( false )
+        m_mapsModel( 0 ), m_initialized( false )
 {
     m_filteredModel->setFilterKeyColumn( 1 );
 }
@@ -326,8 +324,9 @@ MonavConfigWidget::MonavConfigWidget( MonavPlugin* plugin ) :
     setupUi( this );
     d->setBusy( false );
     m_installedMapsListView->setModel( d->m_filteredModel );
+    m_configureMapsListView->setModel( d->m_mapsModel );
+
     updateComboBoxes();
-    setManageMapsModeEnabled( false );
 
     connect( m_continentComboBox, SIGNAL( currentIndexChanged( int ) ),
              this, SLOT( updateStates() ) );
@@ -337,8 +336,6 @@ MonavConfigWidget::MonavConfigWidget( MonavPlugin* plugin ) :
              this, SLOT( updateRegions() ) );
     connect( m_installButton, SIGNAL( clicked() ), this, SLOT( downloadMap() ) );
     connect( m_cancelButton, SIGNAL( clicked() ), this, SLOT( cancelOperation() ) );
-    connect( m_manageMapsButton, SIGNAL( clicked( bool) ),
-             this, SLOT( setManageMapsModeEnabled( bool ) ) );
     connect( &d->m_removeMapSignalMapper, SIGNAL( mapped( int ) ),
              this, SLOT( removeMap( int ) ) );
     connect( &d->m_upgradeMapSignalMapper, SIGNAL( mapped( int ) ),
@@ -403,7 +400,6 @@ void MonavConfigWidget::retrieveData( QNetworkReply *reply )
         } else {
             d->parseNewStuff( reply->readAll() );
             updateComboBoxes();
-            setManageMapsModeEnabled( false );
         }
     }
 }
@@ -567,7 +563,15 @@ void MonavConfigWidgetPrivate::updateInstalledMapsView()
 {
     m_mapsModel = m_plugin->installedMapsModel();
     m_filteredModel->setSourceModel( m_mapsModel );
-    m_parent->setManageMapsModeEnabled( m_manageMapsModeEnabled );
+    m_parent->m_configureMapsListView->setModel( m_mapsModel );
+
+    m_parent->m_installedMapsListView->setColumnHidden( 1, true );
+    m_parent->m_configureMapsListView->setColumnHidden( 2, true );
+    m_parent->m_configureMapsListView->setColumnHidden( 3, true );
+    m_parent->m_configureMapsListView->setColumnHidden( 4, true );
+
+    m_parent->m_configureMapsListView->horizontalHeader()->setVisible( true );
+    m_parent->m_installedMapsListView->horizontalHeader()->setVisible( true );
 
     updateTransportPreference();
     updateInstalledMapsViewButtons();
@@ -614,7 +618,8 @@ void MonavConfigWidget::updateTransportTypeFilter( const QString &filter )
         d->m_filteredModel->setFilterFixedString( filter );
         d->m_transport = filter;
     }
-    d->updateInstalledMapsViewButtons();
+
+    m_configureMapsListView->resizeColumnsToContents();
 }
 
 void MonavConfigWidget::removeMap( int index )
@@ -640,16 +645,6 @@ void MonavConfigWidget::upgradeMap( int index )
             }
         }
     }
-}
-
-void MonavConfigWidget::setManageMapsModeEnabled( bool enabled )
-{
-    d->m_manageMapsModeEnabled = enabled;
-    m_installedMapsListView->setColumnHidden( 1, enabled );
-    m_installedMapsListView->setColumnHidden( 2, !enabled );
-    m_installedMapsListView->setColumnHidden( 3, !enabled );
-    m_installedMapsListView->setColumnHidden( 4, !enabled );
-    m_installedMapsListView->resizeColumnsToContents();
 }
 
 void MonavConfigWidgetPrivate::setBusy( bool busy, const QString &message ) const
