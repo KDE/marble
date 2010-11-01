@@ -207,14 +207,7 @@ bool MarblePart::openFile()
                                             widget(), i18n("Open File")
                                            );
     foreach( const QString &fileName, fileNames ) {
-        QString extension = fileName.section( '.', -1 );
-
-        if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
-            m_controlView->marbleWidget()->openGpxFile( fileName );
-        }
-        else if ( extension.compare( "kml", Qt::CaseInsensitive ) == 0 ) {
-            m_controlView->marbleWidget()->addPlacemarkFile( fileName );
-        }
+        m_controlView->marbleWidget()->addGeoDataFile( fileName );
     }
 
     return true;

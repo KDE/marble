@@ -94,11 +94,7 @@ void MarbleTest::gpsDemo()
             "GPS Data (*.gpx);;KML (*.kml)");
     
     if ( ! fileName.isNull() ) {
-        QString extension = fileName.section( '.', -1 );
-
-        if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
-            m_marbleWidget->openGpxFile( fileName );
-        }
+        m_marbleWidget->addGeoDataFile( fileName );
     }
    
     QTime t;

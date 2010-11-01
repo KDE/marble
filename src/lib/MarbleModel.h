@@ -224,10 +224,29 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     HttpDownloadManager* downloadManager() const;
 
-    void openGpxFile( const QString& filename );
-    void addPlacemarkFile( const QString& filename );
-    void addPlacemarkData( const QString& data, const QString& key = "data" );
-    void removePlacemarkKey( const QString& key );
+    /**
+      * @deprecated Please use addGeoDataFile instead
+      */
+    MARBLE_DEPRECATED( void openGpxFile( const QString& filename ) );
+
+    /**
+      * @deprecated Please use addGeoDataFile instead
+      */
+    MARBLE_DEPRECATED( void addPlacemarkFile( const QString& filename ) );
+
+    /**
+      * @deprecated Please use addGeoDataString instead
+      */
+    MARBLE_DEPRECATED( void addPlacemarkData( const QString& data, const QString& key = "data" ) );
+
+    /**
+      * @deprecated Please use removeGeoData instead
+      */
+    MARBLE_DEPRECATED( void removePlacemarkKey( const QString& key ) );
+
+    void addGeoDataFile( const QString& filename );
+    void addGeoDataString( const QString& data, const QString& key = "data" );
+    void removeGeoData( const QString& key );
 
     QVector<QModelIndex> whichFeatureAt( const QPoint& ) const;
 

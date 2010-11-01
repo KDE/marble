@@ -58,7 +58,7 @@ class ControlView : public QWidget
 
     bool setSideBarState( const QByteArray &state );
 
-    void addPlacemarkFile( QString filename ) { m_marbleWidget->addPlacemarkFile( filename ); }
+    void addGeoDataFile( QString filename ) { m_marbleWidget->addGeoDataFile( filename ); }
 
     QPixmap mapScreenShot() { return m_marbleWidget->mapScreenShot(); }
     

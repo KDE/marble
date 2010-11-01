@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
 	    window->marbleControl()->marbleWidget()->setShowTileId(true);
         }
         else if ( i != dataPathIndex && QFile::exists( arg ) )
-            ( window->marbleControl() )->addPlacemarkFile( arg );
+            ( window->marbleControl() )->addGeoDataFile( arg );
     }
 
     delete marbleTest;

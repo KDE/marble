@@ -376,18 +376,17 @@ int  MarbleWidget::maximumZoom() const
 
 void MarbleWidget::addPlacemarkFile( const QString &filename )
 {
-    d->m_map->addPlacemarkFile( filename );
-    //d->m_model->addPlacemarkFile( filename );
+    addGeoDataFile( filename );
 }
 
 void MarbleWidget::addPlacemarkData( const QString &data, const QString &key )
 {
-    d->m_map->addPlacemarkData( data, key );
+    addGeoDataString( data, key );
 }
 
 void MarbleWidget::removePlacemarkKey( const QString &key )
 {
-    d->m_map->removePlacemarkKey( key );
+    removeGeoData( key );
 }
 
 QPixmap MarbleWidget::mapScreenShot()
@@ -1007,7 +1006,7 @@ void MarbleWidget::notifyMouseClick( int x, int y)
 
 void MarbleWidget::openGpxFile( const QString &filename )
 {
-    d->m_map->openGpxFile( filename );
+    addGeoDataFile( filename );
 }
 
 FileViewModel* MarbleWidget::fileViewModel() const
@@ -1352,7 +1351,23 @@ RoutingLayer* MarbleWidget::routingLayer()
 {
     return d->m_routingLayer;
 }
-             
+
+void MarbleWidget::addGeoDataFile( const QString &filename )
+{
+    d->m_map->addGeoDataFile( filename );
+    //d->m_model->addGeoDataFile( filename );
+}
+
+void MarbleWidget::addGeoDataString( const QString &data, const QString &key )
+{
+    d->m_map->addGeoDataString( data, key );
+}
+
+void MarbleWidget::removeGeoData( const QString &key )
+{
+    d->m_map->removeGeoData( key );
+}
+
 }
 
 #include "MarbleWidget.moc"

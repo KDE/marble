@@ -19,6 +19,7 @@
 #include <QtGui/QMenu>
 #include <QtGui/QPixmap>
 #include <QtGui/QSlider>
+#include <QtGui/QMouseEvent>
 
 #include "MarbleDebug.h"
 #include "FileViewModel.h"
@@ -215,9 +216,9 @@ void FileViewFloatItem::contextMenu( const QPoint& pos )
     // We need the global position to move the menu.
     // pos contains the relative position.
     test->move( m_itemPosition );
-    connect( test->addAction( tr( "Open new kml file..." ) ), SIGNAL( triggered() ),
+    connect( test->addAction( tr( "Open file..." ) ), SIGNAL( triggered() ),
              this, SLOT( addFile() ) );
-    connect( test->addAction( tr( "close this kml file..." ) ), SIGNAL( triggered() ),
+    connect( test->addAction( tr( "Close this file" ) ), SIGNAL( triggered() ),
              this, SLOT( removeFile() ) );
     m_persIndex = new QPersistentModelIndex( m_fileView->indexAt( pos ) );
     test->exec();
@@ -227,25 +228,17 @@ void FileViewFloatItem::addFile()
 {
     QString fileName;
     fileName = QFileDialog::getOpenFileName(m_marbleWidget, tr("Open File"),
-                            QString(), 
-                            tr("All Supported Files (*.gpx *.kml);;GPS Data (*.gpx);;Google Earth KML (*.kml)"));
+                                            QString(),
+                                            tr("All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth KML (*.kml);PNT Data (*.pnt)"));
 
-    if ( ! fileName.isNull() ) {
-        QString extension = fileName.section( '.', -1 );
-
-/*        if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
-            m_marbleWidget->openGpxFile( fileName );
-        }
-        else */
-        if ( extension.compare( "kml", Qt::CaseInsensitive ) == 0 ) {
-            m_marbleWidget->addPlacemarkFile( fileName );
-        }
+    if ( ! fileName.isEmpty() ) {
+        m_marbleWidget->addGeoDataFile( fileName );
     }
 }
 
 void FileViewFloatItem::removeFile()
 {
-    reinterpret_cast<FileViewModel*>(m_fileView->model())->setSelectedIndex( *m_persIndex );
+    //reinterpret_cast<FileViewModel*>(m_fileView->model())->setSelectedIndex( *m_persIndex );
     mDebug() << m_fileView->model()->data( *m_persIndex, Qt::DisplayRole ).toString();
     // close selected file
     reinterpret_cast<FileViewModel*>(m_fileView->model())->closeFile();

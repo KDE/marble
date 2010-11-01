@@ -226,23 +226,26 @@ class MARBLE_EXPORT MarbleMap : public QObject
     QItemSelectionModel *placemarkSelectionModel() const;
 
     /**
-     * @brief  Add a GeoDataPlacemark file to the model.
+     * @brief  Add a GeoData file to the model. Supported file types are .pnt, .gpx and .kml
      * @param  filename  the filename of the file containing the Placemarks.
+     * @deprecated This method has been renamed addGeoDataFile
      */
-    void addPlacemarkFile( const QString &filename );
+    MARBLE_DEPRECATED( void addPlacemarkFile( const QString &filename ) );
 
     /**
-     * @brief  Add GeoDataPlacemark data as string to the model.
+     * @brief  Add GeoData data as string to the model.
      * @param  data  the string containing the Placemarks.
      * @param key  the string needed to identify the data
+     * @deprecated This method has been renamed addGeoDataString
      */
-    void addPlacemarkData( const QString& data, const QString& key = "data" );
-    
+    MARBLE_DEPRECATED( void addPlacemarkData( const QString& data, const QString& key = "data" ) );
+
     /**
      * @brief  remove data or files from the model.
      * @param key  either the filename or the string used to identify the data in addPlacemarkFile and addPlacemarkData
+     * @deprecated This method has been renamed removeGeoData
      */
-    void removePlacemarkKey( const QString& key );
+    MARBLE_DEPRECATED( void removePlacemarkKey( const QString& key ) );
 
     /**
      * @brief  Return the quaternion that specifies the rotation of the globe.
@@ -680,8 +683,28 @@ class MARBLE_EXPORT MarbleMap : public QObject
 
     /**
      * @brief Opens a gpx file for viewing on the Marble Map
+     * @deprecated Please use addGeoDataFile instead
      */
     void openGpxFile( const QString &filename );
+
+    /**
+     * @brief  Add a GeoData file to the model. Supported file types are .pnt, .gpx and .kml
+     * @param  filename  the filename of the file containing the data to be loaded.
+     */
+    void addGeoDataFile( const QString &filename );
+
+    /**
+     * @brief  Add GeoData data as string to the model.
+     * @param  data  the string containing the Placemarks.
+     * @param key  the string needed to identify the data
+     */
+    void addGeoDataString( const QString& data, const QString& key = "data" );
+
+    /**
+     * @brief  remove data or files from the model.
+     * @param key  either the filename or the string used to identify the data in addGeoDataFile and addGeoDataString
+     */
+    void removeGeoData( const QString& key );
 
     /**
      * @brief Return a QAbstractItemModel containing files.

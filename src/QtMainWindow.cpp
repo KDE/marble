@@ -807,15 +807,7 @@ void MainWindow::openFile()
                             tr("All Supported Files (*.gpx *.kml *.pnt);;GPS Data (*.gpx);;Google Earth KML (*.kml);; Micro World Database II (*.pnt)"));
 
     foreach( const QString &fileName, fileNames ) {
-        QString extension = fileName.section( '.', -1 );
-
-        if ( extension.compare( "gpx", Qt::CaseInsensitive ) == 0 ) {
-            m_controlView->marbleWidget()->openGpxFile( fileName );
-        }
-        else
-        {
-            m_controlView->marbleWidget()->addPlacemarkFile( fileName );
-        }
+        m_controlView->marbleWidget()->addGeoDataFile( fileName );
     }
 }
 

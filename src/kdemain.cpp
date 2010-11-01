@@ -339,7 +339,7 @@ int main ( int argc, char *argv[] )
 
         // FIXME: Use openUrl( args->url(i) ) instead?
         if ( QFile::exists( args->arg( i ) ) )
-            window->marbleControl()->addPlacemarkFile( args->arg( i ) );
+            window->marbleControl()->addGeoDataFile( args->arg( i ) );
     }
 
     return app.exec();

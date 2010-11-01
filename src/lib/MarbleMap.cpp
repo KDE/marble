@@ -442,17 +442,17 @@ int  MarbleMap::maximumZoom() const
 
 void MarbleMap::addPlacemarkFile( const QString &filename )
 {
-    d->m_model->addPlacemarkFile( filename );
+    addGeoDataFile( filename );
 }
 
 void MarbleMap::addPlacemarkData( const QString &data, const QString &key )
 {
-    d->m_model->addPlacemarkData( data, key );
+    addGeoDataString( data, key );
 }
 
 void MarbleMap::removePlacemarkKey( const QString &key )
 {
-    d->m_model->removePlacemarkKey( key );
+    removeGeoData( key );
 }
 
 
@@ -918,7 +918,7 @@ void MarbleMap::notifyMouseClick( int x, int y )
 
 void MarbleMap::openGpxFile( const QString &filename )
 {
-    d->m_model->openGpxFile( filename );
+    addGeoDataFile( filename );
 }
 
 FileViewModel* MarbleMap::fileViewModel() const
@@ -1086,5 +1086,19 @@ qreal MarbleMap::zoomFromDistance( qreal distance ) const
     return d->zoom( radiusFromDistance( distance ) );
 }
 
+void MarbleMap::addGeoDataFile( const QString &filename )
+{
+    d->m_model->addGeoDataFile( filename );
+}
+
+void MarbleMap::addGeoDataString( const QString& data, const QString& key )
+{
+    d->m_model->addGeoDataString( data, key );
+}
+
+void MarbleMap::removeGeoData( const QString& key )
+{
+    d->m_model->removeGeoData( key );
+}
 
 #include "MarbleMap.moc"

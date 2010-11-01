@@ -804,28 +804,22 @@ FileViewModel *MarbleModel::fileViewModel() const
 
 void MarbleModel::openGpxFile( const QString& filename )
 {
-    d->m_fileManager->addFile( filename );
+    addGeoDataFile( filename );
 }
 
 void MarbleModel::addPlacemarkFile( const QString& filename )
 {
-    d->m_fileManager->addFile( filename );
-
-    d->notifyModelChanged();
+    addGeoDataFile( filename );
 }
 
 void MarbleModel::addPlacemarkData( const QString& data, const QString& key )
 {
-    d->m_fileManager->addData( key, data );
-
-    d->notifyModelChanged();
+    addGeoDataString( data, key );
 }
 
-void MarbleModel::removePlacemarkKey( const QString& fileName )
+void MarbleModel::removePlacemarkKey( const QString& key )
 {
-    d->m_fileManager->removeFile( fileName );
-
-    d->notifyModelChanged();
+    removeGeoData( key );
 }
 
 QVector<QModelIndex> MarbleModel::whichFeatureAt( const QPoint& curpos ) const
@@ -1263,6 +1257,27 @@ bool MarbleModel::backgroundVisible() const
 void MarbleModel::setBackgroundVisible( bool visible )
 {
     d->m_backgroundVisible = visible;
+}
+
+void MarbleModel::addGeoDataFile( const QString& filename )
+{
+    d->m_fileManager->addFile( filename );
+
+    d->notifyModelChanged();
+}
+
+void MarbleModel::addGeoDataString( const QString& data, const QString& key )
+{
+    d->m_fileManager->addData( key, data );
+
+    d->notifyModelChanged();
+}
+
+void MarbleModel::removeGeoData( const QString& fileName )
+{
+    d->m_fileManager->removeFile( fileName );
+
+    d->notifyModelChanged();
 }
 
 }
