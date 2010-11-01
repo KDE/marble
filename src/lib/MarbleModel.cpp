@@ -732,12 +732,6 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
                                                 d->m_placemarkselectionmodel );
     }
 
-    // Paint the Gps Layer
-    painter->save();
-    QSize canvasSize = viewParams->canvasImage()->size();
-    painter->restore();
-
-
     renderPositions.clear();
     renderPositions << "HOVERS_ABOVE_SURFACE";
     d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
