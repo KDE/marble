@@ -122,6 +122,8 @@ void RoutingPlugin::initialize()
         m_routingWidgetSmall->setupUi( widget );
         m_routingInformationWidgetSmall = new Ui::RoutingInformationWidgetSmall;
         m_routingInformationWidgetSmall->setupUi( widgetSmall );
+        PositionProviderPlugin* activePlugin = dataFacade()->positionTracking()->positionProviderPlugin();
+        m_routingWidgetSmall->gpsButton->setChecked( activePlugin != 0 );
         connect( m_routingInformationWidgetSmall->distanceAndInstructionLabel, SIGNAL( linkActivated( QString ) ),
                  this, SLOT( reverseRoute() ) );
 
