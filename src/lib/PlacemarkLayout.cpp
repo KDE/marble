@@ -41,8 +41,6 @@ using namespace Marble;
 PlacemarkLayout::PlacemarkLayout( QObject* parent )
     : QObject( parent ),
       m_placemarkPainter( 0 ),
-      m_placemarkModel( 0 ),
-      m_selectionModel( 0 ),
       m_maxLabelHeight( 0 ),
       m_styleResetRequested( true )
 {
@@ -184,19 +182,9 @@ int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
 
 void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
                                         ViewParams *viewParams,
-                                        bool firstTime )
-{
-    paintPlaceFolder( painter, viewParams, model(), selectionModel(), firstTime );
-}
-
-void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
-                                        ViewParams *viewParams,
                                         const QAbstractItemModel  *model,
-                                        const QItemSelectionModel *selectionModel,
-                                        bool firstTime )
+                                        const QItemSelectionModel *selectionModel )
 {
-    Q_UNUSED( firstTime );
-
     if( 0 == selectionModel )
         return;
     if( 0 == model )
@@ -575,26 +563,6 @@ int PlacemarkLayout::placemarksOnScreenLimit() const
     // we should replace this static value by a dynamic value
     // that takes the area that gets displayed into account.
     return 100;
-}
-
-void PlacemarkLayout::setModel( QAbstractItemModel *model )
-{
-    m_placemarkModel = model;
-}
-
-QAbstractItemModel * PlacemarkLayout::model() const
-{
-    return m_placemarkModel;
-}
-
-void PlacemarkLayout::setSelectionModel( QItemSelectionModel * selectionModel )
-{
-    m_selectionModel = selectionModel;
-}
-
-QItemSelectionModel * PlacemarkLayout::selectionModel() const
-{
-    return m_selectionModel;
 }
 
 #include "PlacemarkLayout.moc"
