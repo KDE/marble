@@ -63,8 +63,6 @@ private Q_SLOTS:
 
     void cancelOperation();
 
-    void setManageMapsModeEnabled( bool );
-
 private:
     friend class MonavConfigWidgetPrivate;
     MonavConfigWidgetPrivate* const d;
