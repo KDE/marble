@@ -31,4 +31,4 @@ $EXTRACTRC `find . -name '*.ui' \
             -o -name '*.rc' -a ! -name marble.rc \
             -o -name '*.kcfg'` >> rc.cpp
 $XGETTEXT src/kdemain.cpp src/marble_part.cpp rc.cpp -o $podir/marble.pot
-$XGETTEXT_QT src/QtMainWindow.cpp src/qtmain.cpp `find src/plugins -name '*.cpp'` `find src/lib -name '*.cpp'` src/lib/global.h -o $podir/marble_qt.pot
+$XGETTEXT_QT src/QtMainWindow.cpp src/qtmain.cpp `find src/plugins -name '*.cpp' | grep -v '/test/'` `find src/lib -name '*.cpp'` src/lib/global.h -o $podir/marble_qt.pot
