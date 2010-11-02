@@ -89,6 +89,7 @@ void InhibitScreensaverPlugin::initialize()
     PositionTracking *tracking = dataFacade()->positionTracking();
     connect( tracking, SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
              this, SLOT( updateScreenSaverState( PositionProviderPlugin* ) ) );
+    updateScreenSaverState( tracking->positionProviderPlugin() );
     d->m_initialized = true;
 }
 
