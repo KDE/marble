@@ -6,58 +6,31 @@
 // the source code.
 //
 // Copyright 2010      Siddharth Srivastava <akssps011@gmail.com>
+// Copyright 2010      Dennis Nienhüser <earthwings@gentoo.org>
 //
 
-#ifndef ROUTINGPLUGIN_H
-#define ROUTINGPLUGIN_H
-
-#define QT_USE_FAST_CONCATENATION
+#ifndef MARBLE_ROUTINGPLUGIN_H
+#define MARBLE_ROUTINGPLUGIN_H
 
 #include "AbstractFloatItem.h"
-#include "GeoDataCoordinates.h"
-#include "PositionProviderPlugin.h"
-#include "global.h"
-
-#include <QtCore/QObject>
-#include <QtGui/QAction>
-#include <QtGui/QMenu>
-#include <QtGui/QLabel>
-
-namespace Ui
-{
-    class RoutingWidgetSmall;
-    class RoutingInformationWidget;
-    class RoutingInformationWidgetSmall;
-}
 
 namespace Marble
 {
-class MarbleWidget;
-class AdjustNavigation;
-class RoutingModel;
-class WidgetGraphicsItem;
+class RoutingPluginPrivate;
+class PositionProviderPlugin;
+
 class RoutingPlugin : public AbstractFloatItem
 {
+    Q_OBJECT
 
-Q_OBJECT
-Q_INTERFACES( Marble::RenderPluginInterface )
-MARBLE_PLUGIN( RoutingPlugin )
+    Q_INTERFACES( Marble::RenderPluginInterface )
+
+    MARBLE_PLUGIN( RoutingPlugin )
 
 public:
     explicit RoutingPlugin( const QPointF &point = QPointF( -10, -10 ) );
 
     ~RoutingPlugin();
-
-    /**
-    * An enum type
-    * Represents which recentering method is selected
-    */
-    enum CenterMode{
-            Disabled = 0,          /**< Enum Value Disabled. Disable Re-Centering */
-            AlwaysRecenter = 1,    /**< Enum Value AlwaysRecenter. Re-center always to the map center */
-            RecenterOnBorder = 2   /**< Enum Value RecenterOnBorder. Re-center when reaching map border */
-    };
-
 
     QStringList backendTypes() const;
 
@@ -75,76 +48,33 @@ public:
 
     QIcon icon() const;
 
-    bool eventFilter(QObject *object, QEvent *e);
+    bool eventFilter( QObject *object, QEvent *event );
 
-private Q_SLOTS:
+private:    
+    /** Disable zoom buttons if needed */
+    Q_PRIVATE_SLOT( d, void updateZoomButtons() );
 
-    /**
-     * update controls when map theme is changed
-     */
-     void selectTheme( const QString &theme);
+    /** Disable zoom buttons if needed */
+    Q_PRIVATE_SLOT( d, void updateZoomButtons( int ) );
 
-    /**
-     * shows routing item for small screen devices
-     */
-     void showRoutingItem( bool show );
+    /** Switch source/destination of the route and recalculate it */
+    Q_PRIVATE_SLOT( d, void reverseRoute() );
 
-    /**
-     * sets time and distance remaining to reach the destination
-     */
-     void setDestinationInformation( qint32, qreal );
+    /** Toggles guidance mode */
+    Q_PRIVATE_SLOT( d, void toggleGuidanceMode( bool enabled ) );
 
-    /**
-     * sets current position of the gps device
-     */
-     void setCurrentLocation( GeoDataCoordinates, qreal );
+    /** sets time and distance remaining to reach the destination */
+    Q_PRIVATE_SLOT( d, void updateDestinationInformation( qint32, qreal ) );
 
-    /**
-     * disables the navigation menu if Position Tracking is disabled
-     */
-     void updateButtonStates( PositionProviderPlugin *activePlugin );
+    /** Update the checked state of the position tracking button */
+    Q_PRIVATE_SLOT( d, void updateGpsButton( PositionProviderPlugin *activePlugin ) );
 
-     /** Activate or deactivate position tracking */
-     void togglePositionTracking( bool enabled );
+    /** Activate or deactivate position tracking */
+    Q_PRIVATE_SLOT( d, void togglePositionTracking( bool enabled ) );
 
-     /** Switch source/destination of the route and recalculate it */
-     void reverseRoute();
-
-private:
-
-    /**
-     * Enable/disable zoom in/out buttons
-     */
-     void updateButtons( int zoomValue );
-
-    /**
-     * updates the information in the routing item with relevant information
-     */
-     void updateRoutingItem();
-
-    /**
-     * sets the distance of the next instruction as well as the next instruction text on the
-     * routing information item
-     */
-     void updateInstructionLabel( QLabel *label );
-
-     void updateWidget();
-
-     MarbleWidget                        *m_marbleWidget;
-     WidgetGraphicsItem                  *m_widgetItem;
-     WidgetGraphicsItem                  *m_widgetItemRouting;
-     MarbleGlobal::Profiles               m_profiles;
-     RoutingModel                        *m_routingModel;
-     AdjustNavigation                    *m_adjustNavigation;
-     GeoDataCoordinates                   m_currentPosition;
-     qreal                                m_currentSpeed;
-     qint32                               m_remainingTime;
-     qreal                                m_remainingDistance;
-     Ui::RoutingWidgetSmall              *m_routingWidgetSmall;
-     Ui::RoutingInformationWidget        *m_routingInformationWidget;
-     Ui::RoutingInformationWidgetSmall   *m_routingInformationWidgetSmall;
+    RoutingPluginPrivate* const d;
 };
 
 }
 
-#endif // ROUTINGPLUGIN_H
+#endif // MARBLE_ROUTINGPLUGIN_H
