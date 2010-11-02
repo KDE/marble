@@ -766,16 +766,6 @@ QItemSelectionModel *MarbleModel::placemarkSelectionModel() const
     return d->m_placemarkselectionmodel;
 }
 
-VectorComposer *MarbleModel::vectorComposer() const
-{
-    return d->m_veccomposer;
-}
-
-TextureColorizer *MarbleModel::textureColorizer() const
-{
-    return d->m_texcolorizer;
-}
-
 AbstractScanlineTextureMapper *MarbleModel::textureMapper() const
 {
     return d->m_texmapper;
