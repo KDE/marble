@@ -41,7 +41,9 @@ protected:
     virtual void showEvent ( QShowEvent * event );
 
 private Q_SLOTS:
-    void retrieveData( QNetworkReply *reply );
+    void retrieveMapList( QNetworkReply *reply );
+
+    void retrieveData();
 
     void updateComboBoxes();
 

@@ -385,21 +385,26 @@ QHash<QString, QVariant> MonavConfigWidget::settings() const
     return settings;
 }
 
-void MonavConfigWidget::retrieveData( QNetworkReply *reply )
+void MonavConfigWidget::retrieveMapList( QNetworkReply *reply )
 {
-    if ( reply->isReadable() ) {
-        if ( !d->m_currentDownload.isEmpty() ) {
-            d->m_currentFile.write( reply->readAll() );
-            if ( reply->isFinished() ) {
-                reply->deleteLater();
-                d->m_currentReply = 0;
-                d->m_currentFile.close();
-                d->installMap();
-                d->m_currentDownload = QString();
-            }
-        } else {
-            d->parseNewStuff( reply->readAll() );
-            updateComboBoxes();
+    if ( reply->isReadable() && d->m_currentDownload.isEmpty() ) {
+        disconnect( d->m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
+                     this, SLOT( retrieveMapList( QNetworkReply * ) ) );
+        d->parseNewStuff( reply->readAll() );
+        updateComboBoxes();
+    }
+}
+
+void MonavConfigWidget::retrieveData()
+{
+    if ( d->m_currentReply && d->m_currentReply->isReadable() && !d->m_currentDownload.isEmpty() ) {
+        d->m_currentFile.write( d->m_currentReply->readAll() );
+        if ( d->m_currentReply->isFinished() ) {
+            d->m_currentReply->deleteLater();
+            d->m_currentReply = 0;
+            d->m_currentFile.close();
+            d->installMap();
+            d->m_currentDownload = QString();
         }
     }
 }
@@ -468,6 +473,10 @@ void MonavConfigWidgetPrivate::install()
             QString message = QObject::tr( "Downloading %1" ).arg( file.fileName() );
             setBusy( true, message );
             m_currentReply = m_networkAccessManager->get( QNetworkRequest( m_currentDownload ) );
+            QObject::connect( m_currentReply, SIGNAL( readyRead() ),
+                         m_parent, SLOT( retrieveData() ) );
+            QObject::connect( m_currentReply, SIGNAL( readChannelFinished() ),
+                         m_parent, SLOT( retrieveData() ) );
             QObject::connect( m_currentReply, SIGNAL( downloadProgress( qint64, qint64 ) ),
                      m_parent, SLOT( updateProgressBar( qint64, qint64 ) ) );
         } else {
@@ -552,8 +561,7 @@ void MonavConfigWidget::showEvent ( QShowEvent * event )
         d->updateInstalledMapsView();
         d->m_networkAccessManager = new QNetworkAccessManager( this );
         connect( d->m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
-                     this, SLOT( retrieveData( QNetworkReply * ) ) );
-
+                     this, SLOT( retrieveMapList( QNetworkReply * ) ) );
         QUrl url = QUrl( "http://edu.kde.org/marble/newstuff/maps-monav.xml" );
         d->m_networkAccessManager->get( QNetworkRequest( url ) );
     }
