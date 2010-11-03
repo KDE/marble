@@ -212,6 +212,7 @@ set(marblewidget_SRCS
 
     PrintOptionsWidget.cpp
     ExternalEditorDialog.cpp
+    GoToDialog.cpp
 )
 
 set (marblewidget_UI
@@ -240,6 +241,7 @@ set (marblewidget_UI
     NameDialog.ui
     PrintOptions.ui
     ExternalEditor.ui
+    GoToDialog.ui
     routing/RoutingSettingsWidget.ui
     routing/RoutingProfileSettingsDialog.ui
 )

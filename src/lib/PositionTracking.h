@@ -74,6 +74,9 @@ public:
     /** @brief Returns the current position, if any */
     GeoDataCoordinates currentLocation() const;
 
+    /** @brief Returns the status of the current position provider plugin, if any */
+    PositionProviderStatus status() const;
+
 public Q_SLOTS:
     /**
       * Toggles the visibility of the Position Tracking document

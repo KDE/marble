@@ -193,5 +193,10 @@ GeoDataCoordinates PositionTracking::currentLocation() const
     return d->m_gpsCurrentPosition;
 }
 
+PositionProviderStatus PositionTracking::status() const
+{
+    return d->m_positionProvider ? d->m_positionProvider->status() : PositionProviderStatusUnavailable;
+}
+
 #include "PositionTracking.moc"
 #include "PositionTracking_p.moc"

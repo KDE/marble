@@ -25,6 +25,7 @@
 #include "routing/RouteRequest.h"
 #include "MarbleRunnerManager.h"
 #include "BookmarkInfoDialog.h"
+#include "GoToDialog.h"
 
 // Qt
 #include <QtCore/QMimeData>
@@ -68,6 +69,7 @@ void MarbleWidgetPopupMenu::createActions()
 
     QAction *reloadAction  = new QAction( tr( "Rel&oad Map" ), this);
     m_aboutDialogAction = new QAction( tr( "&About" ), this );
+    QAction *goToAction = new QAction( tr( "&Go to..."), this );
 
     m_rmbExtensionPoint = m_rmbMenu->addSeparator();
     m_rmbMenu->addAction( fromHere );
@@ -86,7 +88,7 @@ void MarbleWidgetPopupMenu::createActions()
     m_smallScreenMenu->addAction( m_setHomePointAction );
     m_smallScreenMenu->addAction( addBookmark );
     m_smallScreenMenu->addSeparator();
-    m_smallScreenMenu->addAction( reloadAction );
+    m_smallScreenMenu->addAction( goToAction );
     m_smallScreenMenu->addSeparator();
 
     connect( fromHere, SIGNAL( triggered( ) ), SLOT( directionsFromHere() ) );
@@ -96,6 +98,7 @@ void MarbleWidgetPopupMenu::createActions()
     connect( m_aboutDialogAction, SIGNAL( triggered() ), SLOT( slotAboutDialog() ) );
     connect( m_copyCoordinateAction,SIGNAL( triggered() ), SLOT( slotCopyCoordinates() ) );
     connect( reloadAction, SIGNAL(triggered()), m_widget, SLOT(reloadMap()));
+    connect( goToAction, SIGNAL(triggered()), this, SLOT( openGoToDialog() ) );
 }
 
 
@@ -332,6 +335,13 @@ void MarbleWidgetPopupMenu::addBookmark()
         dialog->exec();
         delete dialog;
     }
+}
+
+void MarbleWidgetPopupMenu::openGoToDialog()
+{
+    QPointer<GoToDialog> dialog = new GoToDialog( m_widget, m_widget );
+    dialog->exec();
+    delete dialog;
 }
 
 #include "MarbleWidgetPopupMenu.moc"
