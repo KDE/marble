@@ -357,7 +357,7 @@ bool RoutingPlugin::eventFilter( QObject *object, QEvent *e )
 
         connect( d->m_marbleWidget->model()->positionTracking(),
                  SIGNAL( positionProviderPluginChanged( PositionProviderPlugin* ) ),
-                 this, SLOT( updateButtonStates( PositionProviderPlugin* ) ) );
+                 this, SLOT( updateGpsButton( PositionProviderPlugin* ) ) );
 
         connect( d->m_widget.routingButton, SIGNAL( clicked( bool ) ),
                  this, SLOT( toggleGuidanceMode( bool ) ) );
