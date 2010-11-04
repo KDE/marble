@@ -76,6 +76,14 @@
             </property>
             <group name="Places">
                 <property name="places">
+                    <value>true</value>
+                    <available>true</available>
+                </property>
+                <property name="cities">
+                    <value>false</value>
+                    <available>false</available>
+                </property>
+                <property name="terrain">
                     <value>false</value>
                     <available>false</available>
                 </property>
@@ -254,7 +262,7 @@
                     <text>Military area</text>
                 </item>
             </section>
-            <section name="places" checkable="false" spacing="12">
+            <section name="places" checkable="true" connect="places" spacing="12">
                 <heading>Places of Interest</heading>
                 <item name="school_university">
                     <icon color="#f0f0d8"/>

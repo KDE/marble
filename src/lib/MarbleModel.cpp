@@ -695,7 +695,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     viewParams->propertyValue( "terrain", showTerrain );
     viewParams->propertyValue( "otherplaces", showOtherPlaces );
 
-    if ( showPlaces && ( showCities || showTerrain || showOtherPlaces )
+    if ( ( showPlaces || showCities || showTerrain || showOtherPlaces )
          && d->m_popSortModel->rowCount() > 0 )
     {
         d->m_placemarkLayout->paintPlaceFolder( painter, viewParams,
