@@ -30,27 +30,27 @@
 #include "AbstractProjection.h"
 #include "MathHelper.h"
 
-using namespace Marble;
-
-uint TextureColorizer::texturepalette[16][512];
-
-TextureColorizer::TextureColorizer( const QString& seafile, 
-                                    const QString& landfile )
+namespace Marble
 {
-    QTime t;
-    t.start();
-    generatePalette(seafile, landfile);
-    qDebug("TextureColorizer: Time elapsed: %d ms", t.elapsed());
-}
 
-QString TextureColorizer::seafile() const
+typedef struct
 {
-    return m_seafile;
-}
+    uchar  x1;
+    uchar  x2;
+    uchar  x3;
+    uchar  x4;
+} GpUint;
 
-QString TextureColorizer::landfile() const
+
+typedef union
 {
-    return m_landfile;
+    uint    buffer;
+    GpUint  gpuint;
+} GpFifo;
+
+
+TextureColorizer::TextureColorizer()
+{
 }
 
 // This function takes two images, both in viewParams:
@@ -291,9 +291,16 @@ void TextureColorizer::colorize(ViewParams *viewParams)
     }
 }
 
-void TextureColorizer::generatePalette(const QString& seafile,
-                                       const QString& landfile)
+void TextureColorizer::setSeaFileLandFile(const QString& seafile,
+                                          const QString& landfile)
 {
+    if( m_seafile == seafile && m_landfile == landfile ) {
+        return;
+    }
+
+    QTime t;
+    t.start();
+
     QImage   gradientImage ( 256, 1, QImage::Format_RGB32 );
     QPainter  gradientPainter;
     gradientPainter.begin( &gradientImage );
@@ -364,4 +371,8 @@ void TextureColorizer::generatePalette(const QString& seafile,
 
     m_seafile = seafile;
     m_landfile = landfile;
+
+    qDebug("TextureColorizer::setSeaFileLandFile: Time elapsed: %d ms", t.elapsed());
+}
+
 }

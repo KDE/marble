@@ -23,39 +23,20 @@ namespace Marble
 
 class ViewParams;
 
-typedef struct
-{
-    uchar  x1;
-    uchar  x2;
-    uchar  x3;
-    uchar  x4;
-} GpUint;
-
-
-typedef union
-{
-    uint    buffer;
-    GpUint  gpuint;
-} GpFifo;
-
-
 class TextureColorizer
 {
  public:
-    TextureColorizer(const QString&, const QString&);
+    TextureColorizer();
     virtual ~TextureColorizer(){}
 
     void colorize(ViewParams *viewParams);
 
-    QString seafile() const;
-    QString landfile() const;
-
-    void generatePalette( const QString& seafile,
-                          const QString& landfile );
+    void setSeaFileLandFile( const QString& seafile,
+                             const QString& landfile );
  private:
     QString m_seafile;
     QString m_landfile;
-    static uint texturepalette[16][512];
+    uint texturepalette[16][512];
 };
 
 }

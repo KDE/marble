@@ -141,7 +141,7 @@ class MarbleModelPrivate
     // View and paint stuff
     GeoSceneDocument        *m_mapTheme;
     LayerManager            *m_layerManager;
-    static TextureColorizer *m_texcolorizer; //left as null if unused
+    TextureColorizer         m_texcolorizer;
 
     HttpDownloadManager     *m_downloadManager;
     StackedTileLoader       *m_tileLoader;
@@ -183,7 +183,6 @@ class MarbleModelPrivate
 };
 
 VectorComposer      *MarbleModelPrivate::m_veccomposer = 0;
-TextureColorizer    *MarbleModelPrivate::m_texcolorizer = 0;
 QAtomicInt           MarbleModelPrivate::refCounter(0);
 
 GeoSceneGroup * MarbleModelPrivate::textureLayerProperties() const
@@ -208,11 +207,6 @@ MarbleModel::MarbleModel( QObject *parent )
     MarbleModelPrivate::refCounter.ref();
     if( MarbleModelPrivate::refCounter == 1 ) {
         d->m_veccomposer = new VectorComposer();
-        d->m_texcolorizer = 0;
-        /* d->m_texcolorizer is not initialized here since it takes a long time
-           to create the palette and it might not even be used. Instead it's created
-           in setMapTheme if the theme being loaded does need it. If the theme
-           doesn't need it, it's left as is. */
     }
     connect( d->m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( modelChanged() ) );
 
@@ -317,7 +311,6 @@ MarbleModel::~MarbleModel()
 
     if( MarbleModelPrivate::refCounter == 1 ) {
         delete d->m_veccomposer;
-        delete d->m_texcolorizer;
     }
     delete d->m_popSortModel;
     delete d->m_placemarkmanager;
@@ -558,14 +551,7 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
             if(landfile.isEmpty())
                 landfile = MarbleDirs::path( "landcolors.leg" );
 
-            if( !d->m_texcolorizer ) {
-                /* This is where the TextureColorizer is created if it's needed
-                   by the new map theme. */
-                d->m_texcolorizer = new TextureColorizer( seafile, landfile );
-            } else if( d->m_texcolorizer->seafile() != seafile ||
-                       d->m_texcolorizer->landfile() != landfile ) {
-                d->m_texcolorizer->generatePalette( seafile, landfile );
-            }
+            d->m_texcolorizer.setSeaFileLandFile( seafile, landfile );
         }
     }
     mDebug() << "THEME CHANGED: ***" << mapTheme->head()->mapThemeId();
@@ -669,7 +655,7 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
                 // Colorize using settings from when the map was loaded
                 // there's no need to check the palette because it's set with the map theme
                 if( filter->type() == "colorize" ) {
-                    d->m_texcolorizer->colorize( viewParams );
+                    d->m_texcolorizer.colorize( viewParams );
                 }
             } //else { mDebug() << "No filters to act on..."; }
         }
