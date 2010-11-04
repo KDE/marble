@@ -44,12 +44,6 @@ class VectorComposer : public QObject
     VectorComposer( QObject * parent = 0 );
     virtual ~VectorComposer();
 
-    // This method contains all the polygons that define the coast lines.
-    void loadCoastlines();
-
-    // This method contains all the other polygons
-    void loadOverlays();
-
     void  drawTextureMap( ViewParams *viewParams );
     void  paintBaseVectorMap( GeoPainter*, ViewParams* );
     void  paintVectorMap(GeoPainter*, ViewParams* );
@@ -120,21 +114,30 @@ class VectorComposer : public QObject
     void datasetLoaded();
 
  private:
+    // This method contains all the polygons that define the coast lines.
+    static inline void loadCoastlines();
+
+    // This method contains all the other polygons
+    static inline void loadOverlays();
+
+ private:
     Q_DISABLE_COPY( VectorComposer )
     VectorMap  *m_vectorMap;
 
-    PntMap     *m_coastLines;
+    static QAtomicInt refCounter;
 
-    PntMap     *m_islands;
-    PntMap     *m_lakeislands;
-    PntMap     *m_lakes;
-    PntMap     *m_glaciers;
-    PntMap     *m_rivers;
+    static PntMap *s_coastLines;
 
-    PntMap     *m_countries;    // The country borders
-    PntMap     *m_usaStates;    // The states of the USA
+    static PntMap *s_islands;
+    static PntMap *s_lakeislands;
+    static PntMap *s_lakes;
+    static PntMap *s_glaciers;
+    static PntMap *s_rivers;
 
-    PntMap     *m_dateLine;
+    static PntMap *s_countries;    // The country borders
+    static PntMap *s_usaStates;    // The states of the USA
+
+    static PntMap *s_dateLine;
 
     QPen        m_oceanPen;
     QBrush      m_oceanBrush;
@@ -165,8 +168,8 @@ class VectorComposer : public QObject
 
     QVector<qreal> m_dashes;
 
-    bool        m_coastLinesLoaded;
-    bool        m_overlaysLoaded;
+    static bool s_coastLinesLoaded;
+    static bool s_overlaysLoaded;
 };
 
 }

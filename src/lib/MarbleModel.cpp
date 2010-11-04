@@ -127,7 +127,6 @@ class MarbleModelPrivate
     void drawAtmosphere( QPainter *painter, ViewParams *viewParams );
     void drawFog( QPainter *painter, ViewParams *viewParams );
 
-    static QAtomicInt       refCounter;
     MarbleModel             *m_parent;
     MarbleDataFacade        *m_dataFacade;
 
@@ -151,7 +150,7 @@ class MarbleModelPrivate
 
     AbstractScanlineTextureMapper   *m_texmapper;
 
-    static VectorComposer   *m_veccomposer; // FIXME: Make not a pointer.
+    VectorComposer           m_veccomposer;
 
     // Tools
     MeasureTool             *m_measureTool;
@@ -182,9 +181,6 @@ class MarbleModelPrivate
 
 };
 
-VectorComposer      *MarbleModelPrivate::m_veccomposer = 0;
-QAtomicInt           MarbleModelPrivate::refCounter(0);
-
 GeoSceneGroup * MarbleModelPrivate::textureLayerProperties() const
 {
     if ( !m_mapTheme )
@@ -204,11 +200,7 @@ MarbleModel::MarbleModel( QObject *parent )
     QTime t;
     t.start();
 
-    MarbleModelPrivate::refCounter.ref();
-    if( MarbleModelPrivate::refCounter == 1 ) {
-        d->m_veccomposer = new VectorComposer();
-    }
-    connect( d->m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( modelChanged() ) );
+    connect( &d->m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( modelChanged() ) );
 
     d->m_dataFacade = new MarbleDataFacade( this );
     connect(d->m_dataFacade->treeModel(), SIGNAL( dataChanged(QModelIndex,QModelIndex) ),
@@ -309,9 +301,6 @@ MarbleModel::~MarbleModel()
     delete d->m_bookmarkManager;
     delete d->m_tileLoader; // disconnects from downloadManager in dtor
 
-    if( MarbleModelPrivate::refCounter == 1 ) {
-        delete d->m_veccomposer;
-    }
     delete d->m_popSortModel;
     delete d->m_placemarkmanager;
     delete d->m_fileManager;
@@ -323,7 +312,7 @@ MarbleModel::~MarbleModel()
     delete d->m_clock;
     delete d->m_planet;
     delete d;
-    MarbleModelPrivate::refCounter.deref();
+
     mDebug() << "Model deleted:" << this;
 }
 
@@ -432,8 +421,8 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
     }
 
     // Set all the colors for the vector layers
-    if ( d->m_mapTheme->map()->hasVectorLayers() && d->m_veccomposer ) {
-        d->m_veccomposer->setOceanColor( d->m_mapTheme->map()->backgroundColor() );
+    if ( d->m_mapTheme->map()->hasVectorLayers() ) {
+        d->m_veccomposer.setOceanColor( d->m_mapTheme->map()->backgroundColor() );
 
         // Just as with textures, this is a workaround for DGML2 to
         // emulate the old behaviour.
@@ -444,25 +433,25 @@ void MarbleModel::setMapTheme( GeoSceneDocument* mapTheme,
 
             vector = static_cast<GeoSceneVector*>( layer->dataset("pdiffborder") );
             if ( vector )
-                d->m_veccomposer->setCountryBorderColor( vector->pen().color() );
+                d->m_veccomposer.setCountryBorderColor( vector->pen().color() );
 
             vector = static_cast<GeoSceneVector*>( layer->dataset("rivers") );
             if ( vector )
-                d->m_veccomposer->setRiverColor( vector->pen().color() );
+                d->m_veccomposer.setRiverColor( vector->pen().color() );
 
             vector = static_cast<GeoSceneVector*>( layer->dataset("pusa48") );
             if ( vector )
-                d->m_veccomposer->setStateBorderColor( vector->pen().color() );
+                d->m_veccomposer.setStateBorderColor( vector->pen().color() );
 
             vector = static_cast<GeoSceneVector*>( layer->dataset("plake") );
             if ( vector )
-                d->m_veccomposer->setLakeColor( vector->pen().color() );
+                d->m_veccomposer.setLakeColor( vector->pen().color() );
 
             vector = static_cast<GeoSceneVector*>( layer->dataset("pcoast") );
             if ( vector )
             {
-                d->m_veccomposer->setLandColor( vector->brush().color() );
-                d->m_veccomposer->setCoastColor( vector->pen().color() );
+                d->m_veccomposer.setLandColor( vector->brush().color() );
+                d->m_veccomposer.setCoastColor( vector->pen().color() );
             }
         }
     }
@@ -642,15 +631,14 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
             // Create the height map image a.k.a viewParams->m_canvasImage.
             d->m_texmapper->mapTexture( viewParams );
 
-            if ( d->m_veccomposer
-                && !viewParams->showElevationModel()
+            if ( !viewParams->showElevationModel()
                 && layer->role() == "dem"
                 && !d->m_mapTheme->map()->filters().isEmpty() ) {
 
                 GeoSceneFilter *filter= d->m_mapTheme->map()->filters().first();
                 viewParams->coastImage()->fill( Qt::transparent );
                 // Create VectorMap
-                d->m_veccomposer->drawTextureMap( viewParams );
+                d->m_veccomposer.drawTextureMap( viewParams );
 
                 // Colorize using settings from when the map was loaded
                 // there's no need to check the palette because it's set with the map theme
@@ -684,16 +672,16 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     renderPositions << "SURFACE";
 
     // Paint the vector layer.
-    if ( d->m_veccomposer && d->m_mapTheme->map()->hasVectorLayers() ) {
+    if ( d->m_mapTheme->map()->hasVectorLayers() ) {
 
         if ( !d->m_mapTheme->map()->hasTextureLayers() ) {
-            d->m_veccomposer->paintBaseVectorMap( painter, viewParams );
+            d->m_veccomposer.paintBaseVectorMap( painter, viewParams );
         }
 
         d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
 
         // Add further Vectors
-        d->m_veccomposer->paintVectorMap( painter, viewParams );
+        d->m_veccomposer.paintVectorMap( painter, viewParams );
     }
     else {
         d->m_layerManager->renderLayers( painter, viewParams, renderPositions );
