@@ -52,25 +52,25 @@ public:
 
 private:    
     /** Disable zoom buttons if needed */
-    Q_PRIVATE_SLOT( d, void updateZoomButtons() );
+    Q_PRIVATE_SLOT( d, void updateZoomButtons() )
 
     /** Disable zoom buttons if needed */
-    Q_PRIVATE_SLOT( d, void updateZoomButtons( int ) );
+    Q_PRIVATE_SLOT( d, void updateZoomButtons( int ) )
 
     /** Switch source/destination of the route and recalculate it */
-    Q_PRIVATE_SLOT( d, void reverseRoute() );
+    Q_PRIVATE_SLOT( d, void reverseRoute() )
 
     /** Toggles guidance mode */
-    Q_PRIVATE_SLOT( d, void toggleGuidanceMode( bool enabled ) );
+    Q_PRIVATE_SLOT( d, void toggleGuidanceMode( bool enabled ) )
 
     /** sets time and distance remaining to reach the destination */
-    Q_PRIVATE_SLOT( d, void updateDestinationInformation( qint32, qreal ) );
+    Q_PRIVATE_SLOT( d, void updateDestinationInformation( qint32, qreal ) )
 
     /** Update the checked state of the position tracking button */
-    Q_PRIVATE_SLOT( d, void updateGpsButton( PositionProviderPlugin *activePlugin ) );
+    Q_PRIVATE_SLOT( d, void updateGpsButton( PositionProviderPlugin *activePlugin ) )
 
     /** Activate or deactivate position tracking */
-    Q_PRIVATE_SLOT( d, void togglePositionTracking( bool enabled ) );
+    Q_PRIVATE_SLOT( d, void togglePositionTracking( bool enabled ) )
 
     RoutingPluginPrivate* const d;
 };
