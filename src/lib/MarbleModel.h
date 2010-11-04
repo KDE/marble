@@ -211,11 +211,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
     void  setupTextureMapper( Projection projection );
 
     /**
-     * @brief  Setup the Vector Composer
-     */
-    void  setupVectorComposer();
-
-    /**
      * @brief Return the downloadmanager to load missing tiles
      * @return the HttpDownloadManager instance.
      */

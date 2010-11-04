@@ -204,7 +204,17 @@ MarbleModel::MarbleModel( QObject *parent )
 {
     QTime t;
     t.start();
+
     MarbleModelPrivate::refCounter.ref();
+    if( MarbleModelPrivate::refCounter == 1 ) {
+        d->m_veccomposer = new VectorComposer();
+        d->m_texcolorizer = 0;
+        /* d->m_texcolorizer is not initialized here since it takes a long time
+           to create the palette and it might not even be used. Instead it's created
+           in setMapTheme if the theme being loaded does need it. If the theme
+           doesn't need it, it's left as is. */
+    }
+    connect( d->m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( modelChanged() ) );
 
     d->m_dataFacade = new MarbleDataFacade( this );
     connect(d->m_dataFacade->treeModel(), SIGNAL( dataChanged(QModelIndex,QModelIndex) ),
@@ -611,19 +621,6 @@ void MarbleModel::setupTextureMapper( Projection projection )
     connect( d->m_texmapper, SIGNAL( tileLevelChanged( int )), SIGNAL( tileLevelChanged( int )));
     connect( d->m_texmapper, SIGNAL( mapChanged() ),
              this,           SLOT( notifyModelChanged() ) );
-}
-
-void MarbleModel::setupVectorComposer()
-{
-    if( MarbleModelPrivate::refCounter == 1 ) {
-        d->m_veccomposer = new VectorComposer();
-        connect( d->m_veccomposer, SIGNAL( datasetLoaded() ), SIGNAL( modelChanged() ) );
-        d->m_texcolorizer = 0;
-        /* d->m_texcolorizer is not initialized here since it takes a long time
-           to create the palette and it might not even be used. Instead it's created
-           in setMapTheme if the theme being loaded does need it. If the theme
-           doesn't need it, it's left as is. */
-    }
 }
 
 HttpDownloadManager* MarbleModel::downloadManager() const
