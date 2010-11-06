@@ -325,6 +325,7 @@ MonavConfigWidget::MonavConfigWidget( MonavPlugin* plugin ) :
     d->setBusy( false );
     m_installedMapsListView->setModel( d->m_filteredModel );
     m_configureMapsListView->setModel( d->m_mapsModel );
+    m_configureMapsListView->resizeColumnsToContents();
 
     updateComboBoxes();
 
@@ -580,6 +581,7 @@ void MonavConfigWidgetPrivate::updateInstalledMapsView()
 
     m_parent->m_configureMapsListView->horizontalHeader()->setVisible( true );
     m_parent->m_installedMapsListView->horizontalHeader()->setVisible( true );
+    m_parent->m_configureMapsListView->resizeColumnsToContents();
 
     updateTransportPreference();
     updateInstalledMapsViewButtons();
