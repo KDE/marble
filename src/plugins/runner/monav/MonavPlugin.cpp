@@ -42,7 +42,7 @@ public:
 
 private:
     MonavWaiter();
-    Q_DISABLE_COPY( MonavWaiter );
+    Q_DISABLE_COPY( MonavWaiter )
 };
 
 class MonavPluginPrivate
