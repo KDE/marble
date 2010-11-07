@@ -63,6 +63,7 @@ int main(int argc, char *argv[])
         + QDir::separator() + "plugins" );
 #endif
 #ifdef Q_OS_MACX
+    QApplication::instance()->setAttribute(Qt::AA_DontShowIconsInMenus);
     qDebug("Adding qt image plugins to plugin search path...");
     CFURLRef myBundleRef = CFBundleCopyBundleURL(CFBundleGetMainBundle());
     CFStringRef myMacPath = CFURLCopyFileSystemPath(myBundleRef, kCFURLPOSIXPathStyle);
