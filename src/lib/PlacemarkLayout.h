@@ -51,7 +51,9 @@ class PlacemarkLayout : public QObject
     /**
      * Creates a new place mark layout.
      */
-    explicit PlacemarkLayout( QObject *parent = 0 );
+    explicit PlacemarkLayout( const QAbstractItemModel  *placemarkModel,
+                              const QItemSelectionModel *selectionModel,
+                              QObject *parent = 0 );
 
     /**
      * Destroys the place mark painter.
@@ -68,9 +70,7 @@ class PlacemarkLayout : public QObject
      * @param planetAxis The position of the planet axis.
      * @param firstTime Whether the map is painted the first time.
      */
-    void paintPlaceFolder( QPainter *painter, ViewParams *viewParams,
-                           const QAbstractItemModel  *placemarkModel,
-                           const QItemSelectionModel *selectionModel );
+    void paintPlaceFolder( QPainter *painter, ViewParams *viewParams );
 
     /**
      * Returns a the maximum height of all possible labels.
@@ -106,6 +106,8 @@ class PlacemarkLayout : public QObject
 
  private:
     Q_DISABLE_COPY( PlacemarkLayout )
+    const QAbstractItemModel  *const m_placemarkModel;
+    const QItemSelectionModel *const m_selectionModel;
 
     PlacemarkPainter *m_placemarkPainter;
 

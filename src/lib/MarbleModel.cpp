@@ -106,9 +106,11 @@ class MarbleModelPrivate
           m_fileManager( 0 ),
           m_placemarkmanager( 0 ),
           m_placemarkLayout( 0 ),
+          m_popSortModel( parent ),
           m_clock( 0 ),
           m_sunLocator( 0 ),
           m_layerDecorator( 0 ),
+          m_placemarkselectionmodel( &m_popSortModel ),
           m_positionTracking( 0 ),
           m_planet( 0 ),
           m_bookmarkManager( 0 ),
@@ -158,7 +160,7 @@ class MarbleModelPrivate
     FileManager             *m_fileManager;
     PlacemarkManager        *m_placemarkmanager;
     PlacemarkLayout         *m_placemarkLayout;
-    QSortFilterProxyModel   *m_popSortModel;
+    QSortFilterProxyModel    m_popSortModel;
     GeometryLayer           *m_geometryLayer;
     AtmosphereLayer          m_atmosphereLayer;
     FogLayer                 m_fogLayer;
@@ -169,7 +171,7 @@ class MarbleModelPrivate
     MergedLayerDecorator    *m_layerDecorator;
 
     // Selection handling
-    QItemSelectionModel     *m_placemarkselectionmodel;
+    QItemSelectionModel      m_placemarkselectionmodel;
 
     //Gps Stuff
     PositionTracking        *m_positionTracking;
@@ -235,21 +237,17 @@ MarbleModel::MarbleModel( QObject *parent )
 
     d->m_measureTool = new MeasureTool( this );
 
-    d->m_popSortModel = new QSortFilterProxyModel( this );
-
-    d->m_popSortModel->setSourceModel( d->m_dataFacade->placemarkModel() );
+    d->m_popSortModel.setSourceModel( d->m_dataFacade->placemarkModel() );
 //    d->m_popSortModel->setSortLocaleAware( true );
-    d->m_popSortModel->setDynamicSortFilter( true );
-    d->m_popSortModel->setSortRole( MarblePlacemarkModel::PopularityIndexRole );
-    d->m_popSortModel->sort( 0, Qt::DescendingOrder );
+    d->m_popSortModel.setDynamicSortFilter( true );
+    d->m_popSortModel.setSortRole( MarblePlacemarkModel::PopularityIndexRole );
+    d->m_popSortModel.sort( 0, Qt::DescendingOrder );
 
-    d->m_placemarkselectionmodel = new QItemSelectionModel( d->m_popSortModel );
-
-    d->m_placemarkLayout = new PlacemarkLayout( this );
-    connect( d->m_placemarkselectionmodel,  SIGNAL( selectionChanged( QItemSelection,
+    d->m_placemarkLayout = new PlacemarkLayout( &d->m_popSortModel, &d->m_placemarkselectionmodel, this );
+    connect( &d->m_placemarkselectionmodel,  SIGNAL( selectionChanged( QItemSelection,
                                                                       QItemSelection) ),
              d->m_placemarkLayout,          SLOT( requestStyleReset() ) );
-    connect( d->m_popSortModel,           SIGNAL( layoutChanged() ),
+    connect( &d->m_popSortModel,           SIGNAL( layoutChanged() ),
              d->m_placemarkLayout,          SLOT( requestStyleReset() ) );
 
     /*
@@ -302,7 +300,6 @@ MarbleModel::~MarbleModel()
     delete d->m_bookmarkManager;
     delete d->m_tileLoader; // disconnects from downloadManager in dtor
 
-    delete d->m_popSortModel;
     delete d->m_placemarkmanager;
     delete d->m_fileManager;
     delete d->m_mapTheme;
@@ -699,11 +696,9 @@ void MarbleModel::paintGlobe( GeoPainter *painter,
     viewParams->propertyValue( "otherplaces", showOtherPlaces );
 
     if ( ( showPlaces || showCities || showTerrain || showOtherPlaces )
-         && d->m_popSortModel->rowCount() > 0 )
+         && d->m_popSortModel.rowCount() > 0 )
     {
-        d->m_placemarkLayout->paintPlaceFolder( painter, viewParams,
-                                                d->m_popSortModel,
-                                                d->m_placemarkselectionmodel );
+        d->m_placemarkLayout->paintPlaceFolder( painter, viewParams );
     }
 
     renderPositions.clear();
@@ -737,7 +732,7 @@ QAbstractItemModel *MarbleModel::placemarkModel() const
 
 QItemSelectionModel *MarbleModel::placemarkSelectionModel() const
 {
-    return d->m_placemarkselectionmodel;
+    return &d->m_placemarkselectionmodel;
 }
 
 AbstractScanlineTextureMapper *MarbleModel::textureMapper() const

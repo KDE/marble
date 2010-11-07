@@ -38,8 +38,12 @@
 
 using namespace Marble;
 
-PlacemarkLayout::PlacemarkLayout( QObject* parent )
+PlacemarkLayout::PlacemarkLayout( const QAbstractItemModel  *placemarkModel,
+                                  const QItemSelectionModel *selectionModel,
+                                  QObject* parent )
     : QObject( parent ),
+      m_placemarkModel( placemarkModel ),
+      m_selectionModel( selectionModel ),
       m_placemarkPainter( 0 ),
       m_maxLabelHeight( 0 ),
       m_styleResetRequested( true )
@@ -181,23 +185,17 @@ int PlacemarkLayout::maxLabelHeight( const QAbstractItemModel* model,
 }
 
 void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
-                                        ViewParams *viewParams,
-                                        const QAbstractItemModel  *model,
-                                        const QItemSelectionModel *selectionModel )
+                                        ViewParams *viewParams )
 {
-    if( 0 == selectionModel )
-        return;
-    if( 0 == model )
-        return;
-        
+
     // const int imgwidth  = viewParams->canvasImage()->width();
     const int imgheight = viewParams->canvasImage()->height();
 
     if ( m_styleResetRequested ) {
         m_styleResetRequested = false;
         styleReset();
-        
-        m_maxLabelHeight = maxLabelHeight( model, selectionModel );
+
+        m_maxLabelHeight = maxLabelHeight( m_placemarkModel, m_selectionModel );
     }
     const int   secnumber         = imgheight / m_maxLabelHeight + 1;
 
@@ -234,7 +232,7 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
      * First handle the selected placemarks, as they have the highest priority.
      */
 
-    const QModelIndexList selectedIndexes = selectionModel->selection().indexes();
+    const QModelIndexList selectedIndexes = m_selectionModel->selection().indexes();
 
     for ( int i = 0; i < selectedIndexes.count(); ++i ) {
         const QModelIndex index = selectedIndexes.at( i );
@@ -322,13 +320,13 @@ void PlacemarkLayout::paintPlaceFolder( QPainter   *painter,
     /**
      * Now handle all other placemarks...
      */
-    const QItemSelection selection = selectionModel->selection();
+    const QItemSelection selection = m_selectionModel->selection();
 
-    const int rowCount = model->rowCount();
+    const int rowCount = m_placemarkModel->rowCount();
 
     for ( int i = 0; i != rowCount; ++i )
     {
-        const QModelIndex& index = model->index( i, 0 );
+        const QModelIndex& index = m_placemarkModel->index( i, 0 );
         if( !index.isValid() ) {
             mDebug() << "invalid index!!!";
             continue;
