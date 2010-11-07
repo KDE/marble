@@ -296,6 +296,7 @@ MarbleModel::~MarbleModel()
 {
 //    mDebug() << "MarbleModel::~MarbleModel";
 
+    delete d->m_positionTracking;
     delete d->m_texmapper;
     delete d->m_bookmarkManager;
     delete d->m_tileLoader; // disconnects from downloadManager in dtor
