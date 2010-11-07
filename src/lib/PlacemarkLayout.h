@@ -51,9 +51,9 @@ class PlacemarkLayout : public QObject
     /**
      * Creates a new place mark layout.
      */
-    explicit PlacemarkLayout( const QAbstractItemModel  *placemarkModel,
-                              const QItemSelectionModel *selectionModel,
-                              QObject *parent = 0 );
+    PlacemarkLayout( const QAbstractItemModel  *placemarkModel,
+                     const QItemSelectionModel *selectionModel,
+                     QObject *parent = 0 );
 
     /**
      * Destroys the place mark painter.
