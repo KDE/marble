@@ -29,6 +29,9 @@ bool FogLayer::render( GeoPainter *painter,
                        const QString &renderPos,
                        GeoSceneLayer *layer )
 {
+    Q_UNUSED(renderPos)
+    Q_UNUSED(layer)
+
     if ( viewParams->projection() != Spherical)
         return true;
 

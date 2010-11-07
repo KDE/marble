@@ -29,6 +29,9 @@ bool AtmosphereLayer::render( GeoPainter *painter,
                               const QString &renderPos,
                               GeoSceneLayer *layer )
 {
+    Q_UNUSED(renderPos)
+    Q_UNUSED(layer)
+
     // Only draw an atmosphere if projection is spherical
     if ( viewParams->projection() != Spherical )
         return true;

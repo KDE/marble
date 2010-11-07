@@ -56,6 +56,9 @@ bool MeasureTool::render( GeoPainter *painter,
                           const QString& renderPos,
                           GeoSceneLayer * layer )
 {
+    Q_UNUSED(renderPos)
+    Q_UNUSED(layer)
+
     // FIXME: Add this stuff into the Layermanager as something to be 
     // called before the float items.
 
