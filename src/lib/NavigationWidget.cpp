@@ -1,4 +1,4 @@
-//
+///
 // This file is part of the Marble Desktop Globe.
 //
 // This program is free software licensed under the GNU LGPL. You can
@@ -206,9 +206,6 @@ void NavigationWidget::selectTheme( const QString &theme )
 
     d->m_navigationUi.zoomSlider->setMaximum( d->m_widget->maximumZoom() );
     updateButtons( d->m_navigationUi.zoomSlider->value() );
-
-    QString selectedId = d->m_widget->mapTheme()->head()->target();
-    d->m_runnerManager->setCelestialBodyId( selectedId );
 }
 
 void NavigationWidget::updateButtons( int value )

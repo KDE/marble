@@ -45,12 +45,6 @@ public:
     ~MarbleRunnerManager();
 
     /**
-      * Set the currently used planet used to decide whether MarbleAbstractRunner instances
-      * can be run or not
-      */
-    void setCelestialBodyId(const QString &celestialBodyId);
-
-    /**
       * Set a pointer to the map instance to be passed to MarbleAbstractRunner instances
       */
     void setModel( MarbleModel * model );

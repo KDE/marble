@@ -12,7 +12,9 @@
 
 #include "MarblePlacemarkModel.h"
 #include "MarbleDebug.h"
+#include "MarbleModel.h"
 #include "PlacemarkManager.h"
+#include "Planet.h"
 #include "GeoDataPlacemark.h"
 #include "PluginManager.h"
 #include "RunnerPlugin.h"
@@ -42,7 +44,6 @@ public:
     QVector<GeoDataDocument*> m_routingResult;
     QList<GeoDataCoordinates> m_reverseGeocodingResults;
     RouteRequest* m_routeRequest;
-    QString m_celestialBodyId;
     bool m_workOffline;
     PluginManager* m_pluginManager;
 
@@ -57,7 +58,6 @@ MarbleRunnerManagerPrivate::MarbleRunnerManagerPrivate( PluginManager* pluginMan
         m_model( new MarblePlacemarkModel ),
         m_searchTasks( 0 ),
         m_routeRequest( 0 ),
-        m_celestialBodyId( "earth" ),
         m_workOffline( false ),
         m_pluginManager( pluginManager )
 {
@@ -85,7 +85,7 @@ QList<RunnerPlugin*> MarbleRunnerManagerPrivate::plugins( RunnerPlugin::Capabili
             continue;
         }
 
-        if ( !plugin->supportsCelestialBody( m_celestialBodyId ) )
+        if ( m_marbleModel && !plugin->supportsCelestialBody( m_marbleModel->planet()->id() ) )
         {
             continue;
         }
@@ -171,11 +171,6 @@ void MarbleRunnerManager::setModel( MarbleModel * model )
 {
     // TODO: Terminate runners which are making use of the map.
     d->m_marbleModel = model;
-}
-
-void MarbleRunnerManager::setCelestialBodyId( const QString &celestialBodyId )
-{
-    d->m_celestialBodyId = celestialBodyId;
 }
 
 void MarbleRunnerManager::setWorkOffline( bool offline )

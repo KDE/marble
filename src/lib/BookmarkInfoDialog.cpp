@@ -55,6 +55,7 @@ void BookmarkInfoDialogPrivate::initialize( const GeoDataCoordinates &coordinate
 
     //reverse geocode the bookmark point for better user experience
     m_manager = new MarbleRunnerManager( m_widget->model()->pluginManager(), q );
+    m_manager->setModel( m_widget->model() );
     QObject::connect( m_manager, SIGNAL( reverseGeocodingFinished( GeoDataCoordinates, GeoDataPlacemark ) ),
             q, SLOT( retrieveGeocodeResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
     m_manager->reverseGeocoding( coordinates );
