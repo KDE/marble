@@ -48,11 +48,6 @@ class MarbleMapPrivate
     void paintOverlay( GeoPainter &painter, QRect &dirtyRect);
     void paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps);
 
-    /**
-     * @brief return if the map needs to be updated.
-     */
-    bool needsUpdate() const;
-
     MarbleMap       *m_parent;
 
     // The model we are showing.

@@ -157,12 +157,8 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
     }
 
     m_model->paintGlobe( &painter, &m_viewParams,
-                         needsUpdate() || m_viewParams.canvasImage()->isNull(),
+                         m_justModified || m_viewParams.canvasImage()->isNull(),
                          dirtyRect );
-    // FIXME: this is ugly, add method updatePlanetAxis() to ViewParams
-    m_viewParams.setPlanetAxisUpdated( m_viewParams.planetAxis() );
-    // FIXME: this is ugly, add method updateRadius() to ViewParams
-    m_viewParams.setRadiusUpdated( m_viewParams.radius() );
     m_justModified = false;
 }
 
@@ -331,13 +327,6 @@ void MarbleMap::setRadius( int radius )
     emit zoomChanged( d->m_logzoom );
     emit distanceChanged( distanceString() );
     emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
-}
-
-bool MarbleMapPrivate::needsUpdate() const
-{
-    return ( m_justModified
-             || m_viewParams.radius() != m_viewParams.radiusUpdated()
-             || !( m_viewParams.planetAxis() == m_viewParams.planetAxisUpdated() ) );
 }
 
 void MarbleMap::setNeedsUpdate()
@@ -629,6 +618,7 @@ void MarbleMap::zoomViewBy( int zoomStep )
 void MarbleMap::rotateBy( const Quaternion& incRot )
 {
     d->m_viewParams.setPlanetAxis( incRot * d->m_viewParams.planetAxis() );
+    setNeedsUpdate();
     emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
@@ -642,6 +632,7 @@ void MarbleMap::rotateBy( const qreal& deltaLon, const qreal& deltaLat )
     axis *= rotPhi;
     axis.normalize();
     d->m_viewParams.setPlanetAxis( axis );
+    setNeedsUpdate();
     emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 
@@ -651,6 +642,7 @@ void MarbleMap::centerOn( const qreal lon, const qreal lat )
     Quaternion  quat;
     quat.createFromEuler( -lat * DEG2RAD, lon * DEG2RAD, 0.0 );
     d->m_viewParams.setPlanetAxis( quat );
+    setNeedsUpdate();
     emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
 }
 

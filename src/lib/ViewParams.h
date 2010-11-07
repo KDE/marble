@@ -123,12 +123,6 @@ class MARBLE_EXPORT ViewParams
     bool showClouds() const;
     void setShowClouds( bool const );
 
-    // FIXME: We should try to get rid of these
-    int radiusUpdated() const;
-    void setRadiusUpdated( const int );
-    Quaternion planetAxisUpdated() const;
-    void setPlanetAxisUpdated( const Quaternion & );
-
  private:
     Q_DISABLE_COPY( ViewParams )
     ViewParamsPrivate * const d;

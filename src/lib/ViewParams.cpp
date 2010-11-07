@@ -42,10 +42,6 @@ public:
     MapQuality           m_mapQuality;
 
 
-    // FIXME: We should try to get rid of these two:    
-    Quaternion  m_planetAxisUpdated;
-    int         m_radiusUpdated;
-
     // Parameters that determine the painting
     // Show/don't show options
 
@@ -75,8 +71,6 @@ ViewParamsPrivate::ViewParamsPrivate()
     : m_mapTheme( 0 ),
       m_viewport(),
       m_mapQuality( NormalQuality ),
-      m_planetAxisUpdated(),
-      m_radiusUpdated( 0 ),
       // Show / don't show parameters
       m_showAtmosphere( true ),
       m_showElevationModel( false ),
@@ -307,16 +301,6 @@ void ViewParams::setCoastImage( QImage * const image )
     d->m_coastImage = image;
 }
 
-int ViewParams::radiusUpdated() const
-{
-    return d->m_radiusUpdated;
-}
-
-void ViewParams::setRadiusUpdated( const int radiusUpdated )
-{
-    d->m_radiusUpdated = radiusUpdated;
-}
-
 bool ViewParams::showGps() const
 {
     return d->m_showGps;
@@ -359,16 +343,6 @@ void ViewParams::setShowClouds( bool const showClouds )
 {
     d->m_globalSettings.setPropertyValue( showCloudsPropertyName, showClouds );
     d->propagateGlobalToLocalSettings();
-}
-
-Quaternion ViewParams::planetAxisUpdated() const
-{
-    return d->m_planetAxisUpdated;
-}
-
-void ViewParams::setPlanetAxisUpdated( const Quaternion & planetAxisUpdated )
-{
-    d->m_planetAxisUpdated = planetAxisUpdated;
 }
 
 }
