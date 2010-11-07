@@ -797,7 +797,7 @@ void MarbleMap::setShowClouds( bool visible )
 
 void MarbleMap::setShowTileId( bool visible )
 {
-    d->m_model->layerDecorator()->setShowTileId( visible );
+    d->m_model->setShowTileId( visible );
 }
 
 void MarbleMap::setShowGrid( bool visible )

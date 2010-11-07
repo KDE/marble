@@ -818,9 +818,9 @@ SunLocator* MarbleModel::sunLocator() const
     return d->m_sunLocator;
 }
 
-MergedLayerDecorator* MarbleModel::layerDecorator() const
+void MarbleModel::setShowTileId( bool show )
 {
-    return d->m_layerDecorator;
+    d->m_layerDecorator->setShowTileId( show );
 }
 
 quint64 MarbleModel::persistentTileCacheLimit() const

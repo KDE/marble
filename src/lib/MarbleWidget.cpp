@@ -990,7 +990,7 @@ void MarbleWidget::setShowGps( bool visible )
 
 void MarbleWidget::setShowTileId( bool visible )
 {
-    d->m_model->layerDecorator()->setShowTileId( visible );
+    d->m_map->setShowTileId( visible );
 }
 
 void MarbleWidget::notifyMouseClick( int x, int y)

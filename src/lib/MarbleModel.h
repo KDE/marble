@@ -62,7 +62,6 @@ class SunLocator;
 class TileCreator;
 class ViewParams;
 class StackedTile;
-class MergedLayerDecorator;
 class RenderPlugin;
 class PluginManager;
 class AbstractFloatItem;
@@ -254,8 +253,8 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     MarbleClock*          clock()       const;
     SunLocator*           sunLocator()     const;
-    MergedLayerDecorator* layerDecorator() const;
 
+    void setShowTileId( bool show );
 
     /**
      * @brief  Returns the limit in kilobytes of the persistent (on hard disc) tile cache.
