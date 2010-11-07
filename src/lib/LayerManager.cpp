@@ -55,6 +55,8 @@ class LayerManagerPrivate
         m_renderPlugins = pluginManager->createRenderPlugins();
     }
 
+    ~LayerManagerPrivate();
+
     GeoSceneDocument *m_mapTheme;
 
     MarbleDataFacade *m_dataFacade;
@@ -64,6 +66,13 @@ class LayerManagerPrivate
     QList<AbstractDataPlugin *> m_dataPlugins;
     QList<LayerInterface *> m_internalLayers;
 };
+
+LayerManagerPrivate::~LayerManagerPrivate()
+{
+    foreach( RenderPlugin * renderPlugin, m_renderPlugins )
+        renderPlugin->setDataFacade( 0 );
+    qDeleteAll( m_renderPlugins );
+}
 
 
 LayerManager::LayerManager( MarbleDataFacade* dataFacade,
@@ -98,9 +107,6 @@ LayerManager::LayerManager( MarbleDataFacade* dataFacade,
 
 LayerManager::~LayerManager()
 {
-    foreach( RenderPlugin * renderPlugin, d->m_renderPlugins )
-        renderPlugin->setDataFacade( 0 );
-    qDeleteAll( d->m_renderPlugins );
     delete d;
 }
 
