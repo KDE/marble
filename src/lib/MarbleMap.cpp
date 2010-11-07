@@ -162,27 +162,6 @@ void MarbleMapPrivate::paintGround( GeoPainter &painter, QRect &dirtyRect )
     m_justModified = false;
 }
 
-void MarbleMapPrivate::paintOverlay( GeoPainter &painter, QRect &dirtyRect )
-{
-    Q_UNUSED( dirtyRect )
-
-    if ( !m_viewParams.mapTheme() ) {
-        return;
-    }
-
-    // FIXME: Add this stuff into the Layermanager as something to be 
-    // called before the float items.
-
-    bool antialiased = false;
-
-    if (   m_viewParams.mapQuality() == HighQuality
-        || m_viewParams.mapQuality() == PrintQuality ) {
-            antialiased = true;
-    }
-
-    m_model->measureTool()->paint( &painter, m_viewParams.viewport(), antialiased );
-}
-
 void MarbleMapPrivate::paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps )
 {
     Q_UNUSED( dirtyRect );
@@ -723,7 +702,7 @@ void MarbleMap::paint( GeoPainter &painter, QRect &dirtyRect )
     
     d->paintGround( painter, dirtyRect );
     customPaint( &painter );
-    d->paintOverlay( painter, dirtyRect );
+    d->m_model->measureTool()->render( &painter, viewport() );
 
     qreal fps = 1000.0 / (qreal)( t.elapsed() );
     d->paintFps( painter, dirtyRect, fps );

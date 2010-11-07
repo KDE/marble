@@ -23,6 +23,7 @@
 #include <GeoDataLineString.h>
 
 #include "global.h"
+#include "LayerInterface.h"
 
 namespace Marble
 {
@@ -31,15 +32,17 @@ class MarbleModel;
 class GeoPainter;
 class ViewportParams;
 
-class MeasureTool : public QObject
+class MeasureTool : public QObject, public LayerInterface
 {
     Q_OBJECT
 
  public:
     explicit MeasureTool( MarbleModel *model, QObject *parent = 0 );
 
-    void  paint( GeoPainter *painter, ViewportParams *viewport,
-                 bool antialiasing );
+    virtual QStringList renderPosition() const { return QStringList(); }
+
+    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
+       const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
 
  Q_SIGNALS:
     void  numberOfMeasurePointsChanged( int newNumber );

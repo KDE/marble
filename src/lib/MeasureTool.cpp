@@ -51,13 +51,24 @@ MeasureTool::MeasureTool( MarbleModel *model, QObject* parent )
 }
 
 
-void MeasureTool::paint( GeoPainter *painter, 
-                         ViewportParams *viewport,
-                         bool antialiasing )
+bool MeasureTool::render( GeoPainter *painter, 
+                          ViewportParams *viewport,
+                          const QString& renderPos,
+                          GeoSceneLayer * layer )
 {
+    // FIXME: Add this stuff into the Layermanager as something to be 
+    // called before the float items.
+
+    bool antialiasing = false;
+
+    if (   painter->mapQuality() == HighQuality
+        || painter->mapQuality() == PrintQuality ) {
+            antialiasing = true;
+    }
+
     // No way to paint anything if the list is empty.
     if ( m_measureLineString.isEmpty() )
-        return;
+        return true;
 
     // Prepare for painting the measure line string and paint it.
     painter->setRenderHint( QPainter::Antialiasing, antialiasing );
@@ -73,6 +84,8 @@ void MeasureTool::paint( GeoPainter *painter,
 
     if ( m_measureLineString.size() > 1 )
         drawTotalDistanceLabel( painter, totalDistance );
+
+    return true;
 }
 
 void MeasureTool::drawMeasurePoints( GeoPainter *painter,

@@ -41,6 +41,7 @@
 #include "MarblePhysics.h"
 #include "MarblePlacemarkModel.h"
 #include "MarbleWidgetInputHandler.h"
+#include "MeasureTool.h"
 #include "MergedLayerDecorator.h"
 #include "RenderPlugin.h"
 #include "SunLocator.h"
@@ -774,7 +775,7 @@ void MarbleWidget::paintEvent( QPaintEvent *evt )
     d->m_map->d->paintGround( painter, dirtyRect );
     d->m_map->customPaint( &painter );
     customPaint( &painter );
-    d->m_map->d->paintOverlay( painter, dirtyRect );
+    d->m_model->measureTool()->render( &painter, viewport() );
 
     if ( !isEnabled() )
     {
