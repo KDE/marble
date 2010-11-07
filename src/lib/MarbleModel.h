@@ -214,7 +214,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
      * @brief Return the downloadmanager to load missing tiles
      * @return the HttpDownloadManager instance.
      */
-
     HttpDownloadManager* downloadManager() const;
 
     /**
