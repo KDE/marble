@@ -47,14 +47,7 @@ class LayerManagerPrivate
 {
  public:
     LayerManagerPrivate( MarbleDataFacade* dataFacade,
-                         PluginManager* pluginManager )
-        : m_mapTheme(0),
-          m_dataFacade( dataFacade ),
-          m_pluginManager( pluginManager )
-    {
-        m_renderPlugins = pluginManager->createRenderPlugins();
-    }
-
+                         PluginManager* pluginManager );
     ~LayerManagerPrivate();
 
     GeoSceneDocument *m_mapTheme;
@@ -66,6 +59,15 @@ class LayerManagerPrivate
     QList<AbstractDataPlugin *> m_dataPlugins;
     QList<LayerInterface *> m_internalLayers;
 };
+
+LayerManagerPrivate::LayerManagerPrivate( MarbleDataFacade* dataFacade,
+                                          PluginManager* pluginManager )
+    : m_mapTheme( 0 ),
+      m_dataFacade( dataFacade ),
+      m_pluginManager( pluginManager ),
+      m_renderPlugins( pluginManager->createRenderPlugins() )
+{
+}
 
 LayerManagerPrivate::~LayerManagerPrivate()
 {
