@@ -6,8 +6,8 @@
 #include "RoutingModel.h"
 #include "RouteAnnotator.h"
 
-#include <QtCore/QTime>
 #include <QtCore/QTimer>
+#include <QtGui/QPainter>
 
 namespace Marble {
 
@@ -83,6 +83,9 @@ public:
 
     static GeoDataLineString* waypoints( const GeoDataDocument* document );
 
+    static int nonZero( const QImage &image );
+
+    static QPolygonF polygon( const GeoDataLineString* lineString, qreal x, qreal y, qreal sx, qreal sy );
 };
 
 
@@ -90,6 +93,30 @@ AlternativeRoutesModelPrivate::AlternativeRoutesModelPrivate( MarbleModel* marbl
         m_marbleModel( marbleModel ), m_currentIndex( 0 )
 {
     // nothing to do
+}
+
+int AlternativeRoutesModelPrivate::nonZero( const QImage &image )
+{
+  QRgb* destLine = 0;
+  QRgb const black = qRgb( 0, 0, 0 );
+  int count = 0;
+  for ( int y = 0; y < image.height(); ++y ) {
+      destLine = (QRgb*) image.scanLine( y );
+      for ( int x = 0; x < image.width(); ++x ) {
+          count += destLine[x] == black ? 0 : 1;
+      }
+  }
+  return count;
+}
+
+QPolygonF AlternativeRoutesModelPrivate::polygon( const GeoDataLineString* lineString, qreal x, qreal y, qreal sx, qreal sy )
+{
+    QPolygonF poly;
+    for ( int i=0; i<lineString->size(); ++i ) {
+        poly << QPointF( qAbs( ( *lineString)[i].longitude() - x ) * sx,
+                         qAbs( ( *lineString)[i].latitude()  - y ) * sy );
+    }
+    return poly;
 }
 
 bool AlternativeRoutesModelPrivate::filter( const GeoDataDocument* document ) const
@@ -163,34 +190,34 @@ qreal AlternativeRoutesModelPrivate::distance( const GeoDataCoordinates &satelli
 
 qreal AlternativeRoutesModelPrivate::unidirectionalSimilarity( const GeoDataDocument* routeA, const GeoDataDocument* routeB )
 {
-    qreal similarity = 0.0;
-
     GeoDataLineString* waypointsA = waypoints( routeA );
     GeoDataLineString* waypointsB = waypoints( routeB );
     if ( !waypointsA || !waypointsB )
     {
-        return similarity;
+        return 0.0;
     }
 
-    QMap<int,qreal> mapping;
-    for ( int a=0; a<waypointsA->size(); ++a ) {
-        mapping[a] = AlternativeRoutesModelPrivate::distance( waypointsB, waypointsA->at( a ) );
+    QImage image( 64, 64, QImage::Format_ARGB32_Premultiplied );
+    image.fill( qRgb( 0, 0, 0 ) );
+    GeoDataLatLonBox box = GeoDataLatLonBox::fromLineString( *waypointsA );
+    box = box.united( GeoDataLatLonBox::fromLineString( *waypointsB ) );
+    if ( !box.width() || !box.height() ) {
+      return 0.0;
     }
 
-    qreal lengthA = waypointsA->length( EARTH_RADIUS );
+    qreal const sw = image.width() / box.width();
+    qreal const sh = image.height() / box.height();
 
-    qreal nearThreshold = 100.0 / EARTH_RADIUS;
-    qreal distance = 0.0;
-    for ( int a=1; a<waypointsA->size(); ++a ) {
-        if ( mapping[a] > nearThreshold ) {
-            distance += distanceSphere( waypointsA->at(a-1), waypointsA->at(a) );
-        }
-    }
+    QPainter painter( &image );
+    painter.setPen( QColor( Qt::white ) );
 
-    distance *= EARTH_RADIUS;
+    painter.drawPoints( AlternativeRoutesModelPrivate::polygon( waypointsA, box.west(), box.north(), sw, sh ) );
+    int const countA = AlternativeRoutesModelPrivate::nonZero( image );
 
-    Q_ASSERT( distance >= 0 && distance <= lengthA );
-    return 1 - distance / lengthA;
+    painter.drawPoints( AlternativeRoutesModelPrivate::polygon( waypointsB, box.west(), box.north(), sw, sh ) );
+    int const countB = AlternativeRoutesModelPrivate::nonZero( image );
+    Q_ASSERT( countA <= countB );
+    return countB ? 1.0 - qreal( countB - countA ) / countB : 0;
 }
 
 bool AlternativeRoutesModelPrivate::higherScore( const GeoDataDocument* one, const GeoDataDocument* two )
