@@ -72,6 +72,10 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         m_area = other.m_area;
         m_population = other.m_population;
         m_state = other.m_state;
+
+        GeoDataLookAt * const lookAt = other.m_lookAt ? new GeoDataLookAt( *other.m_lookAt ) : 0;
+        delete m_lookAt;
+        m_lookAt = lookAt;
     }
 
     virtual void* copy()
