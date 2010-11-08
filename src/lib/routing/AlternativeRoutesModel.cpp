@@ -327,9 +327,8 @@ GeoDataDocument* AlternativeRoutesModel::route( int index )
 
 void AlternativeRoutesModel::newRequest( RouteRequest * )
 {
-    d->m_routes.clear();
     d->m_responseTime.start();
-    reset();
+    clear();
 }
 
 void AlternativeRoutesModel::addRestrainedRoutes()
@@ -448,6 +447,11 @@ GeoDataDocument * AlternativeRoutesModel::currentRoute()
     return result;
 }
 
+void AlternativeRoutesModel::clear()
+{
+    d->m_routes.clear();
+    reset();
+}
 
 } // namespace Marble
 

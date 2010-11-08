@@ -31,6 +31,7 @@
 #include <QtGui/QSortFilterProxyModel>
 #include <QtGui/QComboBox>
 #include <QtGui/QPainter>
+#include <QtGui/QFileDialog>
 
 #include "ui_RoutingWidget.h"
 
@@ -232,8 +233,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
 
     connect( d->m_ui.searchButton, SIGNAL( clicked( ) ),
              this, SLOT( retrieveRoute () ) );
-    connect( d->m_ui.guideButton, SIGNAL( clicked( bool ) ),
-             this, SLOT( setGuidanceModeEnabled( bool ) ) );
+    connect( d->m_ui.openButton, SIGNAL( clicked( bool ) ),
+             this, SLOT( openRouteFile() ) );
     connect( d->m_ui.optionsLabel, SIGNAL( linkActivated( QString ) ),
              this, SLOT( configureProfile() ) );
     connect( d->m_ui.routeComboBox, SIGNAL( currentIndexChanged( int ) ),
@@ -248,6 +249,7 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
         addInputWidget();
     }
     //d->m_ui.descriptionLabel->setVisible( false );
+    setOpenFileButtonVisible( false );
 }
 
 RoutingWidget::~RoutingWidget()
@@ -544,9 +546,19 @@ void RoutingWidget::updateAlternativeRoutes()
     }
 }
 
-void RoutingWidget::setGuidanceModeEnabled( bool enabled )
+void RoutingWidget::setOpenFileButtonVisible( bool visible )
 {
-    d->m_routingManager->setGuidanceModeEnabled( enabled );
+    d->m_ui.openButton->setVisible( visible );
+}
+
+void RoutingWidget::openRouteFile()
+{
+    QString const file = QFileDialog::getOpenFileName( this, tr( "Open Route" ),
+                            QString(), tr("KML Files (*.kml)") );
+    if ( !file.isEmpty() ) {
+        d->m_routingManager->alternativeRoutesModel()->clear();
+        d->m_routingManager->loadRoute( file );
+    }
 }
 
 void RoutingWidget::selectFirstProfile()

@@ -117,6 +117,11 @@ public:
       */
     void saveRoute( const QString &filename ) const;
 
+    /**
+      * Opens the given filename (kml format) and loads the route contained in it
+      */
+    void loadRoute( const QString &filename );
+
 public Q_SLOTS:
     /** Update the route */
     void updateRoute();

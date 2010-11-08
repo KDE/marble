@@ -63,7 +63,7 @@
         <string>Show or hide routing options</string>
        </property>
        <property name="text">
-        <string>&lt;a href="http://edu.kde.org"&gt;Configure&lt;/a&gt;</string>
+        <string>&lt;a href=&quot;http://edu.kde.org&quot;&gt;Configure&lt;/a&gt;</string>
        </property>
        <property name="textFormat">
         <enum>Qt::RichText</enum>
@@ -82,16 +82,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="guideButton">
-       <property name="text">
-        <string>Guidance Mode</string>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -103,6 +93,16 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="openButton">
+       <property name="text">
+        <string>Open File...</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

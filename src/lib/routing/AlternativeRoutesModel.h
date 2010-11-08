@@ -76,6 +76,9 @@ public:
 
     void setCurrentRoute( int index );
 
+    /** Remove all alternative routes from the model */
+    void clear();
+
     GeoDataDocument* currentRoute();
 
     /** Returns the waypoints contained in the route as a linestring */

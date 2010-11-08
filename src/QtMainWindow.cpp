@@ -1239,6 +1239,7 @@ void MainWindow::showRoutingDialog()
         m_routingDialog->setWindowTitle( tr( "Routing - Marble" ) );
         m_routingWidget = new RoutingWidget( m_controlView->marbleWidget(), m_routingDialog );
         m_routingWidget->setWorkOffline( m_workOfflineAct->isChecked() );
+        m_routingWidget->setOpenFileButtonVisible( true );
 
         QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Vertical, m_routingDialog );
         connect(buttonBox, SIGNAL( accepted() ), m_routingDialog, SLOT( accept() ) );

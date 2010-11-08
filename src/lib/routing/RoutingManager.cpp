@@ -178,6 +178,10 @@ void RoutingManagerPrivate::loadRoute(const QString &filename)
                 }
                 m_routeRequest->setName( m_routeRequest->size()-1, placemarks[i]->name() );
             }
+
+            for ( int i=placemarks.size(); i<m_routeRequest->size(); ++i ) {
+                m_routeRequest->remove( i );
+            }
         } else {
             mDebug() << "Expected a GeoDataDocument, didn't get one though";
         }
@@ -300,6 +304,11 @@ void RoutingManager::writeSettings() const
 void RoutingManager::saveRoute( const QString &filename ) const
 {
     d->saveRoute( filename );
+}
+
+void RoutingManager::loadRoute( const QString &filename )
+{
+    d->loadRoute( filename );
 }
 
 void RoutingManager::readSettings()

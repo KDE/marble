@@ -295,7 +295,11 @@ bool RoutingInputWidget::hasTargetPosition() const
 
 GeoDataCoordinates RoutingInputWidget::targetPosition() const
 {
-    return d->m_route->at( d->m_index );
+    if ( d->m_index < d->m_route->size() ) {
+        return d->m_route->at( d->m_index );
+    } else {
+        return GeoDataCoordinates();
+    }
 }
 
 void RoutingInputWidget::findPlacemarks()

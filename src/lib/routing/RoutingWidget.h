@@ -52,6 +52,9 @@ public:
       */
     void setWorkOffline( bool offline );
 
+    /** Show or hide the "open file..." button. Default is false (not visible) */
+    void setOpenFileButtonVisible( bool visible );
+
 private Q_SLOTS:
     /** Retrieve route directions */
     void retrieveRoute();
@@ -107,11 +110,11 @@ private Q_SLOTS:
     /** Toggle visibility of alternative routes */
     void updateAlternativeRoutes();
 
-    /** Toggle turn by turn navigation mode */
-    void setGuidanceModeEnabled( bool enabled );
-
     /** Select the first routing profile if none is selected yet */
     void selectFirstProfile();
+
+    /** Ask the user for a kml file to open */
+    void openRouteFile();
 
 private:
     RoutingWidgetPrivate *const d;
