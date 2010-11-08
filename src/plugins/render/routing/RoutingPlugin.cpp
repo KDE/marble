@@ -170,6 +170,13 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
                     m_parent, SLOT( updateDestinationInformation( qint32, qreal ) ) );
     }
 
+    if ( enabled ) {
+        bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+        int fontSize = smallScreen ? -1 : 1;
+        QString const text = QObject::tr( "Determining current location, please wait..." );
+        m_widget.instructionLabel->setText( richText( "%1", fontSize ).arg( text ) );
+    }
+
     PositionTracking *tracking = m_marbleWidget->model()->positionTracking();
     if ( enabled && !tracking->positionProviderPlugin() ) {
         RouteRequest* request = m_marbleWidget->model()->routingManager()->routeRequest();

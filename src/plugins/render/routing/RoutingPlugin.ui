@@ -74,9 +74,6 @@
      <property name="text">
       <string/>
      </property>
-     <property name="pixmap">
-      <pixmap resource="../../../lib/libmarble.qrc">:/data/bitmaps/turn-right.png</pixmap>
-     </property>
     </widget>
    </item>
    <item row="0" column="2">
@@ -117,9 +114,6 @@
      </property>
      <property name="text">
       <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="../../../lib/libmarble.qrc">:/data/bitmaps/turn-right.png</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
