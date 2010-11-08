@@ -38,11 +38,6 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
     void operator=( const GeoDataPlacemarkPrivate& other )
     {
         GeoDataFeaturePrivate::operator=( other );
-        m_coordinate = other.m_coordinate;
-        m_countrycode = other.m_countrycode;
-        m_area = other.m_area;
-        m_population = other.m_population;
-        m_state = other.m_state;
 
         GeoDataGeometry * geometry = 0;
         if ( other.m_geometry ) {
@@ -71,6 +66,12 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         }
         delete m_geometry;
         m_geometry = geometry;
+
+        m_coordinate = other.m_coordinate;
+        m_countrycode = other.m_countrycode;
+        m_area = other.m_area;
+        m_population = other.m_population;
+        m_state = other.m_state;
     }
 
     virtual void* copy()
