@@ -28,7 +28,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         m_lookAt( 0 )
     {
     }
-    
+
     virtual ~GeoDataPlacemarkPrivate()
     {
         delete m_geometry;
@@ -71,8 +71,8 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         };
     }
 
-    virtual void* copy() 
-    { 
+    virtual void* copy()
+    {
         GeoDataPlacemarkPrivate* copy = new GeoDataPlacemarkPrivate;
         *copy = *this;
         return copy;
@@ -95,7 +95,7 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
     qreal               m_area;         // Area in square kilometer
     qint64              m_population;   // population in number of inhabitants
     QString             m_state;        // State
-	GeoDataLookAt      *m_lookAt;       // lookAt
+    GeoDataLookAt      *m_lookAt;       // lookAt
 };
 
 } // namespace Marble

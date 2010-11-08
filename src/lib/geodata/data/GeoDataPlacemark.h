@@ -72,7 +72,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     * Delete the placemark
     */
     ~GeoDataPlacemark();
-    
+
     /**
     * comparison operator is implemented slightly different than one would expect.
     * Only Placemarks that are copies of each other are assumed to be equal.
@@ -80,7 +80,7 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     bool operator==( const GeoDataPlacemark& other ) const;
 
     /// Provides type information for downcasting a GeoNode
-        virtual QString nodeType() const;
+    virtual QString nodeType() const;
 
     /**
      * Return the coordinate of the placemark as a GeoDataCoordinates
@@ -104,8 +104,9 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * Set the coordinate of the placemark in @p longitude and
      * @p latitude.
      */
-    void setCoordinate( qreal longitude, qreal latitude, qreal altitude = 0, GeoDataPoint::Unit _unit = GeoDataPoint::Radian );
-    
+    void setCoordinate( qreal longitude, qreal latitude, qreal altitude = 0,
+                        GeoDataPoint::Unit _unit = GeoDataPoint::Radian );
+
     /**
     * Set the coordinate of the placemark with an @p GeoDataPoint.
     */
@@ -123,8 +124,8 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
      * Return the area size of the feature in square km.
      *
      * FIXME: Once we make Marble more area-aware we need to 
-     * move this into the GeoDataArea class which will get 
-     * inherited from GeoDataPlacemark (or GeoDataFeature). 
+     * move this into the GeoDataArea class which will get
+     * inherited from GeoDataPlacemark (or GeoDataFeature).
      */
     qreal area() const;
 
@@ -192,13 +193,13 @@ class GEODATA_EXPORT GeoDataPlacemark: public GeoDataFeature
     /**
      * Returns GeoDataLookAt object if lookAt is setup earlier
      * otherwise It will convert GeoDataCoordinates of Placemark
-     * to GeoDataLookAt with range equals to altitude of 
+     * to GeoDataLookAt with range equals to altitude of
      * GeoDataCoordinate
      */
     GeoDataLookAt *lookAt() const;
 
     /**
-     * Set lookAt @p GeoDataLookAt 
+     * Set lookAt @p GeoDataLookAt
      */
     void setLookAt( GeoDataLookAt *lookAt );
 
