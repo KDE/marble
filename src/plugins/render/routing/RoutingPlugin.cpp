@@ -117,6 +117,7 @@ void RoutingPluginPrivate::forceRepaint()
         // Trigger a repaint of the float item. Otherwise button state updates are delayed
         m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, false );
         m_parent->update();
+        m_marbleWidget->repaint();
         bool const mapCoversViewport = m_marbleWidget->viewport()->mapCoversViewport();
         m_marbleWidget->setAttribute( Qt::WA_NoSystemBackground, mapCoversViewport );
     }
@@ -182,10 +183,12 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
         RouteRequest* request = m_marbleWidget->model()->routingManager()->routeRequest();
         if ( request && request->size() > 0 ) {
             GeoDataCoordinates source = request->source();
-            GeoDataLookAt view;
-            view.setCoordinates( source );
-            view.setRange( 750 );
-            m_marbleWidget->flyTo( view );
+            if ( source.longitude() != 0.0 || source.latitude() != 0.0 ) {
+                GeoDataLookAt view;
+                view.setCoordinates( source );
+                view.setRange( 750 );
+                m_marbleWidget->flyTo( view );
+            }
         }
     }
 
