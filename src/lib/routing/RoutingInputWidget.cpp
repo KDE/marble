@@ -105,7 +105,9 @@ public:
 
 RoutingInputLineEdit::RoutingInputLineEdit( QWidget *parent ) : RoutingLineEdit( parent )
 {
-    // nothing to do
+#if QT_VERSION >= 0x40700
+    setPlaceholderText( "Address or search term..." );
+#endif
 }
 
 void RoutingInputLineEdit::keyPressEvent(QKeyEvent *event)
