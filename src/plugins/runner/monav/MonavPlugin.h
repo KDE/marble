@@ -33,6 +33,8 @@ public:
 
     virtual ConfigWidget *configWidget();
 
+    virtual bool canWork( Capability capability ) const;
+
     QString mapDirectoryForRequest( RouteRequest* request ) const;
 
     MonavMapsModel* installedMapsModel();

@@ -85,6 +85,10 @@ QList<RunnerPlugin*> MarbleRunnerManagerPrivate::plugins( RunnerPlugin::Capabili
             continue;
         }
 
+        if ( !plugin->canWork( capability ) ) {
+            continue;
+        }
+
         if ( m_marbleModel && !plugin->supportsCelestialBody( m_marbleModel->planet()->id() ) )
         {
             continue;
@@ -117,6 +121,10 @@ void MarbleRunnerManager::reverseGeocoding( const GeoDataCoordinates &coordinate
                  this, SLOT( addReverseGeocodingResult( GeoDataCoordinates, GeoDataPlacemark ) ) );
         runner->setModel( d->m_marbleModel );
         QThreadPool::globalInstance()->start( new ReverseGeocodingTask( runner, coordinates ) );
+    }
+
+    if ( plugins.isEmpty() ) {
+        emit reverseGeocodingFinished( coordinates, GeoDataPlacemark() );
     }
 }
 
@@ -194,7 +202,10 @@ void MarbleRunnerManager::retrieveRoute( RouteRequest *request )
     d->m_routeRequest = request;
     QList<RunnerPlugin*> plugins = d->plugins( RunnerPlugin::Routing );
     foreach( RunnerPlugin* plugin, plugins ) {
-        if ( !profile.pluginSettings().contains( plugin->nameId() ) ) continue;
+        if ( !profile.pluginSettings().contains( plugin->nameId() ) ) {
+            continue;
+        }
+
         MarbleAbstractRunner* runner = plugin->newRunner();
         connect( runner, SIGNAL( routeCalculated( GeoDataDocument* ) ),
                  this, SLOT( addRoutingResult( GeoDataDocument* ) ) );

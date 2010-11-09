@@ -36,6 +36,7 @@ public:
 
     QHash< QString, QVariant > templateSettings(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
 
+    virtual bool canWork( Capability capability ) const;
 };
 
 }

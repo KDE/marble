@@ -65,6 +65,13 @@ public:
     /** True if the plugin can execute its tasks without network access */
     bool canWorkOffline() const;
 
+    /** Returns true if the plugin can execute a task for the given capability
+      * The default implementation returns true iff the plugin supports
+      * the given capability. This method can be overriden for example to
+      * indicate an incomplete installation.
+      */
+    virtual bool canWork( Capability capability ) const;
+
     // Overridden methods with default implementations
 
     virtual QString name() const;

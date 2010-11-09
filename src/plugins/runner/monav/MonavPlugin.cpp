@@ -240,6 +240,16 @@ void MonavPlugin::reloadMaps()
     d->loadMaps();
 }
 
+bool MonavPlugin::canWork( Capability capability ) const
+{
+    if ( supports( capability ) ) {
+        d->initialize();
+        return !d->m_maps.isEmpty();
+    } else {
+       return false;
+    }
+}
+
 }
 
 Q_EXPORT_PLUGIN2( MonavPlugin, Marble::MonavPlugin )

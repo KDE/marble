@@ -26,6 +26,8 @@ public:
     explicit GosmorePlugin( QObject *parent = 0 );
 
     virtual MarbleAbstractRunner* newRunner() const;
+
+    virtual bool canWork( Capability capability ) const;
 };
 
 }

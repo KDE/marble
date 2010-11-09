@@ -10,6 +10,7 @@
 
 #include "RoutinoPlugin.h"
 #include "RoutinoRunner.h"
+#include "MarbleDirs.h"
 
 #include "ui_RoutinoConfigWidget.h"
 
@@ -128,6 +129,16 @@ QHash< QString, QVariant > RoutinoPlugin::templateSettings(RoutingProfilesModel:
             break;
     }
     return result;
+}
+
+bool RoutinoPlugin::canWork( Capability capability ) const
+{
+    if ( supports( capability ) ) {
+        QDir mapDir = QDir( MarbleDirs::localPath() + "/maps/earth/routino/" );
+        return mapDir.exists();
+    } else {
+        return false;
+    }
 }
 
 }

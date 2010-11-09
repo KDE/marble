@@ -10,6 +10,10 @@
 
 #include "GosmorePlugin.h"
 #include "GosmoreRunner.h"
+#include "MarbleDirs.h"
+
+#include <QtCore/QDir>
+#include <QtCore/QFileInfo>
 
 namespace Marble
 {
@@ -28,6 +32,17 @@ GosmorePlugin::GosmorePlugin( QObject *parent ) : RunnerPlugin( parent )
 MarbleAbstractRunner* GosmorePlugin::newRunner() const
 {
     return new GosmoreRunner;
+}
+
+bool GosmorePlugin::canWork( Capability capability ) const
+{
+    if ( supports( capability ) ) {
+        QDir mapDir( MarbleDirs::localPath() + "/maps/earth/gosmore/" );
+        QFileInfo mapFile = QFileInfo ( mapDir, "gosmore.pak" );
+        return mapFile.exists();
+    } else {
+        return false;
+    }
 }
 
 }

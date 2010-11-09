@@ -398,10 +398,11 @@ void RoutingInputWidget::clear()
     emit targetValidityChanged( false );
 }
 
-void RoutingInputWidget::retrieveReverseGeocodingResult( const GeoDataCoordinates &, const GeoDataPlacemark &placemark )
+void RoutingInputWidget::retrieveReverseGeocodingResult( const GeoDataCoordinates &coordinates, const GeoDataPlacemark &placemark )
 {
-    d->m_route->setName( d->m_index, placemark.address() );
-    d->m_lineEdit->setText( placemark.address() );
+    QString description = placemark.address().isEmpty() ? coordinates.toString() : placemark.address();
+    d->m_route->setName( d->m_index, description );
+    d->m_lineEdit->setText( description );
     d->m_lineEdit->setCursorPosition( 0 );
 }
 

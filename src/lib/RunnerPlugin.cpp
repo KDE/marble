@@ -159,6 +159,11 @@ QHash< QString, QVariant > RunnerPlugin::templateSettings( RoutingProfilesModel:
     return QHash< QString, QVariant >();
 }
 
+bool RunnerPlugin::canWork( Capability capability ) const
+{
+    return supports( capability );
+}
+
 }
 
 #include "RunnerPlugin.moc"
