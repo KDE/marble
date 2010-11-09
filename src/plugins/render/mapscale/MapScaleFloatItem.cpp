@@ -41,6 +41,10 @@ MapScaleFloatItem::MapScaleFloatItem( const QPointF &point, const QSizeF &size )
       m_unit(tr("km")),
       m_scaleInitDone( false )
 {
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( smallScreen ) {
+        setPosition( QPointF( 220.0, 10.5 ) );
+    }
 }
 
 MapScaleFloatItem::~MapScaleFloatItem()
