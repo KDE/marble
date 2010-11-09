@@ -41,31 +41,33 @@ class GeoDataPlacemarkPrivate : public GeoDataFeaturePrivate
         m_area = other.m_area;
         m_population = other.m_population;
 
-        delete m_geometry;
-        if( !other.m_geometry ) return;
-
-        switch( other.m_geometry->geometryId() ) {
+        GeoDataGeometry * geometry = 0;
+        if ( other.m_geometry ) {
+            switch( other.m_geometry->geometryId() ) {
             case InvalidGeometryId:
                 break;
             case GeoDataPointId:
-                m_geometry = new GeoDataPoint( *static_cast<GeoDataPoint*>( other.m_geometry ) );
+                geometry = new GeoDataPoint( *static_cast<GeoDataPoint*>( other.m_geometry ) );
                 break;
             case GeoDataLineStringId:
-                m_geometry = new GeoDataLineString( *static_cast<GeoDataLineString*>( other.m_geometry ) );
+                geometry = new GeoDataLineString( *static_cast<GeoDataLineString*>( other.m_geometry ) );
                 break;
             case GeoDataLinearRingId:
-                m_geometry = new GeoDataLinearRing( *static_cast<GeoDataLinearRing*>( other.m_geometry ) );
+                geometry = new GeoDataLinearRing( *static_cast<GeoDataLinearRing*>( other.m_geometry ) );
                 break;
             case GeoDataPolygonId:
-                m_geometry = new GeoDataPolygon( *static_cast<GeoDataPolygon*>( other.m_geometry ) );
+                geometry = new GeoDataPolygon( *static_cast<GeoDataPolygon*>( other.m_geometry ) );
                 break;
             case GeoDataMultiGeometryId:
-                m_geometry = new GeoDataMultiGeometry( *static_cast<GeoDataMultiGeometry*>( other.m_geometry ) );
+                geometry = new GeoDataMultiGeometry( *static_cast<GeoDataMultiGeometry*>( other.m_geometry ) );
                 break;
             case GeoDataModelId:
                 break;
             default: break;
-        };
+            }
+        }
+        delete m_geometry;
+        m_geometry = geometry;
     }
 
     virtual void* copy() 
