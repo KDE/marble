@@ -97,7 +97,7 @@
      <item>
       <widget class="QPushButton" name="openButton">
        <property name="text">
-        <string>Open File...</string>
+        <string>Open...</string>
        </property>
        <property name="checkable">
         <bool>false</bool>
