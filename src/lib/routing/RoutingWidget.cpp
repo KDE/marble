@@ -334,6 +334,11 @@ void RoutingWidget::handleSearchResult( RoutingInputWidget *widget )
         d->m_widget->centerOn( GeoDataLatLonBox::fromLineString( placemarks ) );
         //d->m_ui.descriptionLabel->setVisible( false );
     }
+
+    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        d->m_ui.directionsListView->setVisible( placemarks.size() > 1 );
+        d->m_ui.directionsListView->setMinimumHeight( 200 );
+    }
 }
 
 void RoutingWidget::centerOnInputWidget( RoutingInputWidget *widget )
