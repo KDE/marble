@@ -142,8 +142,15 @@ void RoutingPluginPrivate::updateButtonVisibility()
     m_widgetItem->widget()->resize( size );
     m_widgetItem->setContentSize( size );
 
-    if ( m_marbleWidget ) {
-        m_marbleWidget->repaint();
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( smallScreen ) {
+        qreal const pluginWidth = size.width();
+        int x = -10;
+        if ( m_guidanceModeEnabled ) {
+            int const parentWidth = m_marbleWidget->width();
+            x = qRound( ( parentWidth - pluginWidth ) / 2.0 );
+        }
+        m_parent->setPosition( QPointF( x, m_parent->position().y() ) );
     }
 }
 
