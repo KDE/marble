@@ -12,7 +12,7 @@
 #define MARBLE_GOTODIALOG_H
 
 #include "marble_export.h"
-#include "GeoDataCoordinates.h"
+#include "GeoDataLookAt.h"
 
 #include <QtGui/QDialog>
 
@@ -40,7 +40,9 @@ public:
 
     ~GoToDialog();
 
-    Q_PRIVATE_SLOT( d, void goTo( const QModelIndex &index ) )
+    GeoDataLookAt lookAt() const;
+
+    Q_PRIVATE_SLOT( d, void saveSelection( const QModelIndex &index ) )
 
 private:
     GoToDialogPrivate * const d;

@@ -340,7 +340,10 @@ void MarbleWidgetPopupMenu::addBookmark()
 void MarbleWidgetPopupMenu::openGoToDialog()
 {
     QPointer<GoToDialog> dialog = new GoToDialog( m_widget, m_widget );
-    dialog->exec();
+    if ( dialog->exec() == QDialog::Accepted ) {
+        GeoDataLookAt lookAt = dialog->lookAt();
+        m_widget->flyTo( lookAt );
+    }
     delete dialog;
 }
 

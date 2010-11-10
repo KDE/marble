@@ -22,6 +22,7 @@
 #include "GeoDataFolder.h"
 #include "PositionTracking.h"
 #include "RoutingLineEdit.h"
+#include "GoToDialog.h"
 
 #include <QtCore/QTimer>
 #include <QtCore/QUrl>
@@ -231,11 +232,12 @@ RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget
         layout->addWidget( d->m_lineEdit );
         d->m_menuButton->setArrowType( Qt::DownArrow );
         layout->addWidget( d->m_menuButton );
+        connect( d->m_menuButton, SIGNAL( clicked() ), this, SLOT( openTargetSelectionDialog() ) );
     } else {
+        d->m_menuButton->setMenu( d->createMenu( this ) );
         layout->addWidget( d->m_menuButton );
         layout->addWidget( d->m_lineEdit );
     }
-    d->m_menuButton->setMenu( d->createMenu( this ) );
 
     connect( d->m_marbleModel->bookmarkManager(), SIGNAL( bookmarksChanged() ),
              this, SLOT( reloadBookmarks() ) );
@@ -367,7 +369,9 @@ void RoutingInputWidget::setInvalid()
 
 void RoutingInputWidget::abortMapInputRequest()
 {
-    d->m_mapInput->setChecked( false );
+    if ( d->m_mapInput ) {
+        d->m_mapInput->setChecked( false );
+    }
 }
 
 void RoutingInputWidget::setIndex( int index )
@@ -415,7 +419,9 @@ void RoutingInputWidget::setProgressAnimation( const QVector<QIcon> &animation )
 
 void RoutingInputWidget::reloadBookmarks()
 {
-    d->m_bookmarkAction->setMenu( d->createBookmarkMenu( this ) );
+    if ( d->m_bookmarkAction ) {
+        d->m_bookmarkAction->setMenu( d->createBookmarkMenu( this ) );
+    }
 }
 
 void RoutingInputWidget::setHomePosition()
@@ -430,7 +436,9 @@ void RoutingInputWidget::setHomePosition()
 
 void RoutingInputWidget::updateCurrentLocationButton( PositionProviderStatus status )
 {
-    d->m_currentLocationAction->setEnabled( status == PositionProviderStatusAvailable );
+    if ( d->m_currentLocationAction ) {
+        d->m_currentLocationAction->setEnabled( status == PositionProviderStatusAvailable );
+    }
 }
 
 void RoutingInputWidget::setCurrentLocation()
@@ -441,7 +449,9 @@ void RoutingInputWidget::setCurrentLocation()
 
 void RoutingInputWidget::updateCenterButton( bool hasPosition )
 {
-    d->m_centerAction->setEnabled( hasPosition );
+    if ( d->m_centerAction ) {
+        d->m_centerAction->setEnabled( hasPosition );
+    }
 }
 
 void RoutingInputWidget::setBookmarkPosition( QAction* bookmark )
@@ -450,6 +460,17 @@ void RoutingInputWidget::setBookmarkPosition( QAction* bookmark )
         setTargetPosition( qVariantValue<GeoDataCoordinates>( bookmark->data() ) );
         requestActivity();
     }
+}
+
+void RoutingInputWidget::openTargetSelectionDialog()
+{
+    QPointer<GoToDialog> dialog = new GoToDialog( d->m_marbleWidget, this );
+    dialog->setWindowTitle( tr( "Choose Placemark" ) );
+    if ( dialog->exec() == QDialog::Accepted ) {
+        GeoDataLookAt lookAt = dialog->lookAt();
+        setTargetPosition( lookAt.coordinates() );
+    }
+    delete dialog;
 }
 
 } // namespace Marble

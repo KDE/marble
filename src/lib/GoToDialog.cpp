@@ -59,11 +59,15 @@ private:
 class GoToDialogPrivate
 {
 public:
+    GoToDialog* m_parent;
+
     MarbleWidget* m_marbleWidget;
 
-    GoToDialogPrivate( MarbleWidget* marbleWidget );
+    GeoDataLookAt m_lookAt;
 
-    void goTo( const QModelIndex &index );
+    GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget );
+
+    void saveSelection( const QModelIndex &index );
 };
 
 TargetModel::TargetModel( MarbleWidget* marbleWidget, QObject * parent ) :
@@ -219,22 +223,27 @@ QVariant TargetModel::data ( const QModelIndex & index, int role ) const
     return QVariant();
 }
 
-GoToDialogPrivate::GoToDialogPrivate( MarbleWidget* marbleWidget ) :
-    m_marbleWidget( marbleWidget )
+GoToDialogPrivate::GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget ) :
+    m_parent( parent), m_marbleWidget( marbleWidget )
 {
     // nothing to do
 }
 
+void GoToDialogPrivate::saveSelection( const QModelIndex &index )
+{
+    QVariant data = index.data( GeoDataLookAtRole );
+    m_lookAt = qVariantValue<GeoDataLookAt>( data );
+    m_parent->accept();
+}
+
 GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::WindowFlags flags ) :
-    QDialog( parent, flags ), d( new GoToDialogPrivate( marbleWidget ) )
+    QDialog( parent, flags ), d( new GoToDialogPrivate( this, marbleWidget ) )
 {
     setupUi( this );
 
     bookmarkListView->setModel( new TargetModel( marbleWidget ) );
     connect( bookmarkListView, SIGNAL( activated( QModelIndex ) ),
-             this, SLOT( goTo ( QModelIndex ) ) );
-    connect( bookmarkListView, SIGNAL( activated( QModelIndex ) ),
-             this, SLOT( accept() ) );
+             this, SLOT( saveSelection ( QModelIndex ) ) );
 }
 
 GoToDialog::~GoToDialog()
@@ -242,11 +251,9 @@ GoToDialog::~GoToDialog()
     delete d;
 }
 
-void GoToDialogPrivate::goTo( const QModelIndex &index )
+GeoDataLookAt GoToDialog::lookAt() const
 {
-    QVariant data = index.data( GeoDataLookAtRole );
-    GeoDataLookAt lookat = qVariantValue<GeoDataLookAt>( data );
-    m_marbleWidget->flyTo( lookat );
+    return d->m_lookAt;
 }
 
 }

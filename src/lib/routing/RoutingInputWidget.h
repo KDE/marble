@@ -164,6 +164,8 @@ private Q_SLOTS:
 
     void setBookmarkPosition( QAction* bookmark );
 
+    void openTargetSelectionDialog();
+
 private:
     RoutingInputWidgetPrivate *const d;
 };
