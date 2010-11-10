@@ -34,6 +34,7 @@
 #include <QtGui/QFont>
 #include <QtGui/QActionGroup>
 #include <QtGui/QPixmap>
+#include <QtGui/QPlastiqueStyle>
 #include <QtCore/QDebug>
 
 namespace Marble
@@ -348,6 +349,16 @@ void RoutingPlugin::initialize()
 
     d->m_widgetItem = new WidgetGraphicsItem( this );
     d->m_widgetItem->setWidget( widget );
+
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( smallScreen ) {
+        /** @todo: The maemo styling of the progressbar adds a black background and some frame
+          * which are even painted when no background painting is requested like WidgetItem does.
+          * This looks really bad on a float item. Using a different style here, but that is only
+          * a workaround.
+          */
+        d->m_widget.progressBar->setStyle( new QPlastiqueStyle );
+    }
 
     MarbleGraphicsGridLayout *layout = new MarbleGraphicsGridLayout( 1, 1 );
     layout->addItem( d->m_widgetItem, 0, 0 );
