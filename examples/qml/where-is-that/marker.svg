@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="marker.svg"
+   inkscape:version="0.47 r22583"
+   version="1.1"
+   id="svg4173"
+   height="32.04203"
+   width="33.473938">
+  <defs
+     id="defs4175">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective4181" />
+    <inkscape:perspective
+       id="perspective4750"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       inkscape:collect="always"
+       id="filter4932"
+       x="-0.040642168"
+       width="1.0812843"
+       y="-0.14422782"
+       height="1.2884556"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.42422844"
+         id="feGaussianBlur4934" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="22.776482"
+     inkscape:cx="17.601174"
+     inkscape:cy="15.775276"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1672"
+     inkscape:window-height="988"
+     inkscape:window-x="0"
+     inkscape:window-y="35"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       orientation="1,0"
+       position="2.2413838,1.9189815"
+       id="guide4696" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="13.491384,-4.8310188"
+       id="guide4698" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="8.5628162,39.774677"
+       id="guide4936" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4178">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-13.008617,-1011.2391)">
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:0.42595485;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dashoffset:0"
+       d="m 30.259786,1022.1617 c 0,2.9575 -1.306214,1.7101 -3.407945,5.9178 -5.414657,10.8403 -4.332261,14.7629 -5.232853,14.7716 -0.772307,0.012 -0.181804,-3.9313 -5.111151,-14.7716 -1.93863,-4.2633 -3.286243,-2.9603 -3.286243,-5.9178 0,-5.9147 3.814128,-10.7096 8.519097,-10.7096 4.704966,0 8.519095,4.7949 8.519095,10.7096 z"
+       id="path4183"
+       sodipodi:nodetypes="csssssc" />
+    <path
+       style="fill:#787878;fill-opacity:1;stroke:none;filter:url(#filter4932)"
+       d="m 42.544708,1041.0406 c -2.230329,0.5715 -2.009603,-0.014 -6.341193,0.2424 -11.159458,0.6633 -14.003388,1.4905 -14.023946,1.4712 -0.02042,-0.019 2.864488,-0.8079 8.322436,-4.2062 2.146512,-1.3364 0.421094,-1.4409 2.651422,-2.0125 4.460431,-1.143 10.1787,-1.0611 12.772032,0.1828 2.593328,1.2441 1.079679,3.1792 -3.380751,4.3223 z"
+       id="path4183-1"
+       sodipodi:nodetypes="csssssc"
+       transform="matrix(0.97187417,-0.23550074,0.23550074,0.97187417,-244.90869,34.060341)" />
+  </g>
+</svg>
