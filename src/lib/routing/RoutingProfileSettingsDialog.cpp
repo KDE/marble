@@ -28,6 +28,10 @@ RoutingProfileSettingsDialog::RoutingProfileSettingsDialog( PluginManager *plugi
 {
     m_ui = new Ui_RoutingProfileSettingsDialog();
     m_ui->setupUi( this );
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( smallScreen ) {
+      setMaximumWidth( 800 );
+    }
 
     QList<RunnerPlugin*> allPlugins = pluginManager->runnerPlugins();
     foreach( RunnerPlugin* plugin, allPlugins ) {
