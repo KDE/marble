@@ -33,10 +33,12 @@ public:
     QDateTime               dateTime () const;
     QString                 target () const;
     ~MarbleDataFacade ();
-//ig    MarbleGeoDataModel*     geoDataModel ();
-//ig    MarbleGeometryModel*    geometryModel ();
 //ig    MarblePlacemarkModel*   placemarkModel ();
 //ig    FileViewModel*          fileViewModel () const;
+    Marble::PositionTracking*  positionTracking () const;
+//ig    PluginManager*          pluginManager ();
+//ig    Marble::RoutingManager*  routingManager ();
+//ig    GeoDataTreeModel*       treeModel () const;
 };
 // MarbleDataFacade
 

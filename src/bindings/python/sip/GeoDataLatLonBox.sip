@@ -61,6 +61,10 @@ public:
     virtual QString         nodeType () const;
     virtual Marble::GeoDataCoordinates  center () const;
     bool                    containsPole (Marble::Pole pole = Marble::AnyPole) const;
+    Marble::GeoDataLatLonBox  united (const Marble::GeoDataLatLonBox& other) const;
+    virtual bool            isEmpty () const;
+    Marble::GeoDataLatLonBox  operator | (const Marble::GeoDataLatLonBox& other) const;
+    Marble::GeoDataLatLonBox&  operator |= (const Marble::GeoDataLatLonBox& other);
 };
 // GeoDataLatLonBox
 

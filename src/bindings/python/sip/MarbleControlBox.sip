@@ -27,48 +27,21 @@ class MarbleControlBox : QWidget
 public:
     explicit                MarbleControlBox (QWidget* parent /TransferThis/ = 0);
     void                    addMarbleWidget (Marble::MarbleWidget* widget);
-    int                     minimumZoom () const;
-    void                    setMapThemeModel (QStandardItemModel* mapThemeModel);
-    void                    updateCelestialModel ();
 
-signals:
-    void                    goHome ();
-    void                    zoomIn ();
-    void                    zoomOut ();
-    void                    zoomChanged (int zoom);
-    void                    moveLeft ();
-    void                    moveRight ();
-    void                    moveUp ();
-    void                    moveDown ();
-    void                    centerOn (const QModelIndex&, bool);
-    void                    selectMapTheme (const QString&);
-    void                    projectionSelected (Marble::Projection /Constrained/);
-    void                    gpsInputDisabled (bool);
-    void                    gpsPositionChanged (qreal lat, qreal lon);
-    void                    updateGps ();
 
-public:
     void                    selectTheme (const QString&);
-    void                    selectProjection (Marble::Projection projection);
 // FIXME PlacemarkModel header isn't installed
-//ig    void                    setLocations (MarblePlacemarkModel* locations);
-    void                    changeZoom (int zoom);
-    void                    receiveGpsCoordinates (Marble::GeoDataCoordinates in, qreal speed);
-    void                    enableFileViewActions ();
     void                    setNavigationTabShown (bool show);
     void                    setLegendTabShown (bool show);
     void                    setMapViewTabShown (bool show);
     void                    setCurrentLocationTabShown (bool show);
     void                    setFileViewTabShown (bool show);
     void                    updateMapThemeView ();
-    void                    projectionSelected (int projectionIndex);
 
-protected:
-    void                    resizeEvent (QResizeEvent*);
 
-public:
     ~MarbleControlBox ();
-    void                    selectCurrentMapTheme (const QString&);
+    void                    setWorkOffline (bool offline);
+    void                    setRoutingTabShown (bool show);
 };
 // MarbleControlBox
 

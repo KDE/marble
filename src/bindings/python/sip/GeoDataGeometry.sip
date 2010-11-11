@@ -33,7 +33,6 @@ public:
                             GeoDataGeometry (const Marble::GeoDataLineString& other);
                             GeoDataGeometry (const Marble::GeoDataMultiGeometry& other);
     bool                    operator == (const Marble::GeoDataGeometry& other) const;
-    virtual bool            isFolder () const;
     virtual EnumGeometryId  geometryId () const;
     bool                    extrude () const;
     void                    setExtrude (bool extrude);
@@ -47,6 +46,8 @@ public:
     virtual QString         nodeType () const;
 private:
 //ig                            GeoDataGeometry (GeoDataGeometryPrivate* priv);
+public:
+    virtual Marble::GeoDataLatLonAltBox  latLonAltBox () const;
 };
 // GeoDataGeometry
 

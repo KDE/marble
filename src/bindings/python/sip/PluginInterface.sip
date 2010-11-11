@@ -48,6 +48,8 @@ public:
         else if (dynamic_cast<Marble::AbstractFloatItem*>(sipCpp))
             sipType = sipType_Marble_AbstractFloatItem;
         }
+    else if (dynamic_cast<Marble::RunnerPlugin*>(sipCpp))
+        sipType = sipType_Marble_RunnerPlugin;
 %End
 };
 // PluginInterface
@@ -62,4 +64,5 @@ public:
 #include <AbstractFloatItem.h>
 #include <PluginInterface.h>
 #include <RenderPlugin.h>
+#include <RunnerPlugin.h>
 %End

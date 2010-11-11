@@ -53,5 +53,13 @@ signals:
 public:
     void                    readSettings ();
     void                    writeSettings ();
+    QString                 externalMapEditor () const;
+    bool                    systemTime () const;
+    bool                    lastSessionTime () const;
+    bool                    systemTimezone () const;
+    bool                    UTC () const;
+    bool                    customTimezone () const;
+    int                     chosenTimezone () const;
+    void                    initializeCustomTimezone ();
 };
 };

@@ -31,7 +31,6 @@ public:
     Marble::Projection      projection () const;
 //ig    Marble::AbstractProjection*  currentProjection () const;
     void                    setProjection (Marble::Projection newProjection);
-    Marble::MapQuality      mapQuality ();
     void                    setMapQuality (Marble::MapQuality);
     void                    setPropertyValue (const QString& name, bool value);
     void                    propertyAvailable (const QString& name, bool& available /out/);
@@ -42,10 +41,7 @@ public:
     void                    setPlanetAxis (const Marble::Quaternion& newAxis);
     void                    centerCoordinates (qreal& centerLon /out/, qreal& centerLat /out/);
     QImage*                 canvasImage () const;
-
-// FIXME const here causes trouble
-//    void                    setCanvasImage (QImage * const);
-
+    void                    setCanvasImage (QImage *);
     QImage*                 coastImage () const;
 
 // FIXME const here causes trouble
@@ -57,21 +53,20 @@ public:
     void                    setShowElevationModel (bool);
     bool                    showAtmosphere () const;
     void                    setShowAtmosphere (bool);
-    int                     radiusUpdated () const;
-    void                    setRadiusUpdated (const int);
-    Marble::Quaternion      planetAxisUpdated () const;
-    void                    setPlanetAxisUpdated (const Marble::Quaternion &x);
 
     ~ViewParams ();
 //FIXME implementation is missing.
-//ig    QString                 mapThemeId ();
 //ig    Marble::GeoSceneDocument*  mapTheme ();
 private:
 //force
                             ViewParams (const Marble::ViewParams&);
 //end
 public:
-    void                    setCanvasImage (QImage*);
+    Marble::MapQuality      mapQuality () const;
+    int                     width () const;
+    int                     height () const;
+    bool                    showClouds () const;
+    void                    setShowClouds (const bool);
     void                    setCoastImage (QImage*);
 };
 // ViewParams

@@ -28,12 +28,7 @@ class GeoDataContainer : Marble::GeoDataFeature
 public:
                             GeoDataContainer ();
                             GeoDataContainer (const Marble::GeoDataContainer& other);
-                            GeoDataContainer (const Marble::GeoDataFeature& other);
 //ig    Marble::GeoDataContainerPrivate*  p () const;
-    QVector<Marble::GeoDataFolder>  folders () const;
-    QVector<Marble::GeoDataFeature>&  features () const;
-    QVector<Marble::GeoDataPlacemark>  placemarks () const;
-    void                    append (const Marble::GeoDataFeature& other);
     int                     size () const;
 //ig    Marble::GeoDataFeature&  at (int pos);
     const Marble::GeoDataFeature&  at (int pos) const;
@@ -54,6 +49,14 @@ public:
     virtual QString         nodeType () const;
 private:
 //ig                            GeoDataContainer (GeoDataContainerPrivate* priv);
+public:
+//ig    QVector<Marble::GeoDataFolder*>  folderList () const;
+//ig    QVector<Marble::GeoDataFeature*>  featureList () const;
+//ig    QVector<Marble::GeoDataPlacemark*>  placemarkList () const;
+    Marble::GeoDataFeature*  child (int);
+    int                     childPosition (Marble::GeoDataFeature* child);
+    void                    append (Marble::GeoDataFeature* other);
+    void                    remove (int index);
 };
 // GeoDataContainer
 

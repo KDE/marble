@@ -27,19 +27,13 @@ class GeoDataPlacemark : Marble::GeoDataFeature
 public:
                             GeoDataPlacemark ();
                             GeoDataPlacemark (const Marble::GeoDataPlacemark& placemark);
-                            GeoDataPlacemark (const Marble::GeoDataFeature& feature);
                             GeoDataPlacemark (const QString& name);
     bool                    operator == (const Marble::GeoDataPlacemark& other) const;
     Marble::GeoDataCoordinates  coordinate () const;
     Marble::GeoDataGeometry*  geometry () const;
 //ig    void                    coordinate (qreal& longitude, qreal& latitude, qreal& altitude) const;
-    void                    setCoordinate (qreal longitude, qreal latitude, qreal altitude = 0);
+    void                    setCoordinate (qreal longitude, qreal latitude, qreal altitude = 0, Marble::GeoDataPoint::Unit _unit = Marble::GeoDataPoint::Radian);
     void                    setCoordinate (const Marble::GeoDataPoint& point);
-    void                    setGeometry (const Marble::GeoDataPoint& entry);
-    void                    setGeometry (const Marble::GeoDataLineString& entry);
-    void                    setGeometry (const Marble::GeoDataLinearRing& entry);
-    void                    setGeometry (const Marble::GeoDataMultiGeometry& entry);
-    void                    setGeometry (const Marble::GeoDataPolygon& entry);
     qreal                   area () const;
     void                    setArea (qreal area);
     qint64                  population () const;
@@ -48,12 +42,16 @@ public:
     void                    setCountryCode (const QString& code);
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-    virtual bool            isPlacemark () const;
 
     ~GeoDataPlacemark ();
     virtual QString         nodeType () const;
     virtual QXmlStreamWriter&  pack (QXmlStreamWriter& stream) const;
     virtual QXmlStreamWriter&  operator << (QXmlStreamWriter& stream) const;
+    void                    setGeometry (Marble::GeoDataGeometry* entry);
+    const QString           state () const;
+    void                    setState (const QString& state);
+    Marble::GeoDataLookAt*  lookAt () const;
+    void                    setLookAt (Marble::GeoDataLookAt* lookAt);
 };
 // GeoDataPlacemark
 

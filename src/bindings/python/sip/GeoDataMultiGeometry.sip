@@ -36,7 +36,6 @@ public:
     const Marble::GeoDataGeometry&  first () const;
 //ig    Marble::GeoDataGeometry&  last ();
     const Marble::GeoDataGeometry&  last () const;
-    void                    append (const Marble::GeoDataGeometry& value);
     Marble::GeoDataMultiGeometry&  operator << (const Marble::GeoDataGeometry& value);
 //ig    QVector<Marble::GeoDataGeometry>::Iterator  begin ();
 //ig    QVector<Marble::GeoDataGeometry>::Iterator  end ();
@@ -48,8 +47,12 @@ public:
     virtual void            unpack (QDataStream& stream);
     virtual ~GeoDataMultiGeometry ();
     virtual QString         nodeType () const;
-//ig    QVector<GeoDataGeometry>::Iterator  erase (QVector<GeoDataGeometry>::Iterator pos);
-//ig    QVector<GeoDataGeometry>::Iterator  erase (QVector<GeoDataGeometry>::Iterator begin, QVector<GeoDataGeometry>::Iterator end);
+    virtual Marble::GeoDataLatLonAltBox  latLonAltBox () const;
+    Marble::GeoDataGeometry*  child (int);
+    int                     childPosition (Marble::GeoDataGeometry* child);
+    void                    append (Marble::GeoDataGeometry* other);
+//ig    QVector<GeoDataGeometry*>::Iterator  erase (QVector<GeoDataGeometry*>::Iterator pos);
+//ig    QVector<GeoDataGeometry*>::Iterator  erase (QVector<GeoDataGeometry*>::Iterator begin, QVector<GeoDataGeometry*>::Iterator end);
 };
 // GeoDataMultiGeometry
 

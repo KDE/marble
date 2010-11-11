@@ -26,7 +26,6 @@ class MarbleModel : QObject
 
 public:
     explicit                MarbleModel (QObject* parent /TransferThis/);
-    void                    paintGlobe (Marble::GeoPainter* painter, int width, int height, Marble::ViewParams* viewParams, bool redrawBackground, const QRect& dirtyRect);
     QAbstractItemModel*     placemarkModel () const;
     QItemSelectionModel*    placemarkSelectionModel () const;
     QString                 mapThemeId () const;
@@ -36,13 +35,8 @@ public:
     void                    removePlacemarkKey (const QString& key);
     QVector<QModelIndex>    whichFeatureAt (const QPoint&) const;
 //ig    FileViewModel*          fileViewModel () const;
-    bool                    showGps () const;
-    void                    setShowGps (bool visible);
-    void                    startPolling (int time = 1000);
-    void                    stopPolling ();
     qreal                   planetRadius () const;
     QString                 planetName () const;
-//ig    Marble::MarbleClock*    dateTime () const;
     Marble::SunLocator*     sunLocator () const;
     quint64                 volatileTileCacheLimit () const;
     QList<Marble::RenderPlugin*>  renderPlugins () const;
@@ -54,36 +48,60 @@ public:
     void                    clearVolatileTileCache ();
     void                    setVolatileTileCacheLimit (quint64 kiloBytes);
     void                    clearPersistentTileCache ();
-//ig    void                    paintTile (TextureTile* tile, int x, int y, int level, Marble::GeoSceneTexture* textureLayer, bool requestTileUpdate);
     void                    update ();
 
 signals:
     void                    creatingTilesStart (Marble::TileCreator*, const QString& name, const QString& description);
     void                    themeChanged (QString mapTheme);
     void                    modelChanged ();
-    void                    timeout ();
 
 public:
     virtual ~MarbleModel ();
 //ig    Marble::GeoSceneDocument*  mapTheme () const;
-//ig    void                    setMapTheme (Marble::GeoSceneDocument* mapTheme, Marble::Projection currentProjection);
-    void                    setupVectorComposer ();
 //ig    HttpDownloadManager*    downloadManager () const;
-//ig    void                    setDownloadManager (HttpDownloadManager* downloadManager);
     void                    openGpxFile (const QString& filename);
 //ig    PlacemarkLayout*        placemarkLayout () const;
-//ig    VectorComposer*         vectorComposer () const;
-//ig    TextureColorizer*       textureColorizer () const;
 //ig    AbstractScanlineTextureMapper*  textureMapper () const;
-//ig    GpsLayer*               gpsLayer () const;
-//ig    GpxFileModel*           gpxFileModel () const;
-//ig    MergedLayerDecorator*   layerDecorator () const;
     void                    reloadMap () const;
 signals:
     void                    pluginSettingsChanged ();
     void                    repaintNeeded (QRegion dirtyRegion = QRegion());
-    void                    downloadTile (const QUrl& sourceUrl, const QString& destinationFileName, const QString& id) const;
     void                    renderPluginInitialized (Marble::RenderPlugin* renderPlugin);
+public:
+    void                    paintGlobe (Marble::GeoPainter* painter, Marble::ViewParams* viewParams, bool redrawBackground, const QRect& dirtyRect);
+    QAbstractItemModel*     treeModel () const;
+//ig    void                    setMapTheme (GeoSceneDocument* mapTheme, Marble::Projection currentProjection);
+    void                    home (qreal& lon, qreal& lat, int& zoom);
+    void                    setHome (qreal lon, qreal lat, int zoom = 1050);
+    void                    setHome (const Marble::GeoDataCoordinates& homePoint, int zoom = 1050);
+    void                    addGeoDataFile (const QString& filename);
+    void                    addGeoDataString (const QString& data, const QString& key = "data");
+    void                    removeGeoData (const QString& key);
+    Marble::PositionTracking*  positionTracking () const;
+//ig    MarbleClock*            clock () const;
+    void                    setShowTileId (bool show);
+    quint64                 persistentTileCacheLimit () const;
+//ig    PluginManager*          pluginManager () const;
+    void                    addLayer (Marble::LayerInterface* layer);
+    void                    removeLayer (Marble::LayerInterface* layer);
+//ig    MeasureTool*            measureTool ();
+    void                    downloadRegion (const QString& mapThemeId, const QVector<Marble::TileCoordsPyramid>&) const;
+//ig    Marble::RoutingManager*  routingManager ();
+    void                    setClockDateTime (const QDateTime& datetime);
+    QDateTime               clockDateTime () const;
+    int                     clockSpeed () const;
+    void                    setClockSpeed (int speed);
+    void                    setClockTimezone (int timeInSec);
+    int                     clockTimezone () const;
+//ig    BookmarkManager*        bookmarkManager () const;
+    QTextDocument*          legend ();
+    void                    setLegend (QTextDocument* document);
+    bool                    backgroundVisible () const;
+    void                    setBackgroundVisible (bool visible);
+    void                    setPersistentTileCacheLimit (quint64 kiloBytes);
+//ig    void                    paintTile (StackedTile* tile, const GeoSceneTexture* textureLayer);
+signals:
+    void                    tileLevelChanged (int newTileLevel);
 };
 // MarbleModel
 

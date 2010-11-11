@@ -26,19 +26,30 @@
 #include <AbstractDataPluginModel.h>
 #include <AbstractFloatItem.h>
 #include <AbstractWorkerThread.h>
+#include <CurrentLocationWidget.h>
+#include <DownloadRegionDialog.h>
+#include <FileViewWidget.h>
+#include <LatLonBoxWidget.h>
 #include <LatLonEdit.h>
+#include <LegendWidget.h>
 #include <MapThemeManager.h>
+#include <MapViewWidget.h>
 #include <MarbleAboutDialog.h>
+#include <MarbleAbstractRunner.h>
 #include <MarbleControlBox.h>
 #include <MarbleMap.h>
 #include <MarbleModel.h>
 #include <MarbleNavigator.h>
 #include <MarbleWidget.h>
+#include <NavigationWidget.h>
 #include <PluginAboutDialog.h>
+#include <PositionTracking.h>
 #include <QtMarbleConfigDialog.h>
 #include <RenderPlugin.h>
+#include <RunnerPlugin.h>
 #include <SunLocator.h>
 #include <TileCreator.h>
+#include <TileLevelRangeWidget.h>
 #include <TinyWebBrowser.h>
 #include <qobject.h>
 %End
@@ -64,7 +75,7 @@ public:
     virtual QString         itemType () const=0;
     virtual bool            initialized ()=0;
     virtual void            addDownloadedFile (const QString& url, const QString& type)=0;
-    virtual bool            operator < (const Marble::AbstractDataPluginItem* other) const =0;
+//ig    virtual bool            operator < (const Marble::AbstractDataPluginItem* other) const;
 
 
 //  Subclasses of QObject
@@ -79,10 +90,14 @@ public:
         sipType = sipType_Marble_AbstractDataPluginModel;
     else if (dynamic_cast<Marble::MapThemeManager*>(sipCpp))
         sipType = sipType_Marble_MapThemeManager;
+    else if (dynamic_cast<Marble::MarbleAbstractRunner*>(sipCpp))
+        sipType = sipType_Marble_MarbleAbstractRunner;
     else if (dynamic_cast<Marble::MarbleMap*>(sipCpp))
         sipType = sipType_Marble_MarbleMap;
     else if (dynamic_cast<Marble::MarbleModel*>(sipCpp))
         sipType = sipType_Marble_MarbleModel;
+    else if (dynamic_cast<Marble::PositionTracking*>(sipCpp))
+        sipType = sipType_Marble_PositionTracking;
     else if (dynamic_cast<Marble::RenderPlugin*>(sipCpp))
         {
         sipType = sipType_Marble_RenderPlugin;
@@ -91,20 +106,38 @@ public:
         else if (dynamic_cast<Marble::AbstractFloatItem*>(sipCpp))
             sipType = sipType_Marble_AbstractFloatItem;
         }
+    else if (dynamic_cast<Marble::RunnerPlugin*>(sipCpp))
+        sipType = sipType_Marble_RunnerPlugin;
     else if (dynamic_cast<Marble::SunLocator*>(sipCpp))
         sipType = sipType_Marble_SunLocator;
     else if (dynamic_cast<Marble::AbstractWorkerThread*>(sipCpp))
         sipType = sipType_Marble_AbstractWorkerThread;
     else if (dynamic_cast<Marble::TileCreator*>(sipCpp))
         sipType = sipType_Marble_TileCreator;
+    else if (dynamic_cast<Marble::CurrentLocationWidget*>(sipCpp))
+        sipType = sipType_Marble_CurrentLocationWidget;
+    else if (dynamic_cast<Marble::FileViewWidget*>(sipCpp))
+        sipType = sipType_Marble_FileViewWidget;
+    else if (dynamic_cast<Marble::LatLonBoxWidget*>(sipCpp))
+        sipType = sipType_Marble_LatLonBoxWidget;
     else if (dynamic_cast<Marble::LatLonEdit*>(sipCpp))
         sipType = sipType_Marble_LatLonEdit;
+    else if (dynamic_cast<Marble::LegendWidget*>(sipCpp))
+        sipType = sipType_Marble_LegendWidget;
+    else if (dynamic_cast<Marble::MapViewWidget*>(sipCpp))
+        sipType = sipType_Marble_MapViewWidget;
     else if (dynamic_cast<Marble::MarbleControlBox*>(sipCpp))
         sipType = sipType_Marble_MarbleControlBox;
     else if (dynamic_cast<Marble::MarbleNavigator*>(sipCpp))
         sipType = sipType_Marble_MarbleNavigator;
     else if (dynamic_cast<Marble::MarbleWidget*>(sipCpp))
         sipType = sipType_Marble_MarbleWidget;
+    else if (dynamic_cast<Marble::NavigationWidget*>(sipCpp))
+        sipType = sipType_Marble_NavigationWidget;
+    else if (dynamic_cast<Marble::TileLevelRangeWidget*>(sipCpp))
+        sipType = sipType_Marble_TileLevelRangeWidget;
+    else if (dynamic_cast<Marble::DownloadRegionDialog*>(sipCpp))
+        sipType = sipType_Marble_DownloadRegionDialog;
     else if (dynamic_cast<Marble::MarbleAboutDialog*>(sipCpp))
         sipType = sipType_Marble_MarbleAboutDialog;
     else if (dynamic_cast<Marble::PluginAboutDialog*>(sipCpp))
@@ -116,10 +149,11 @@ public:
 %End
 
     virtual ~AbstractDataPluginItem ();
-    virtual void            setSettings (QHash<QString,QVariant> settings);
     virtual bool            isGeoProjected ();
 signals:
     void                    updated ();
+public:
+    virtual void            setSettings (const QHash<QString,QVariant>& settings);
 };
 // AbstractDataPluginItem
 

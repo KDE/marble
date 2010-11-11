@@ -28,8 +28,6 @@ class GeoDataFolder : Marble::GeoDataContainer
 public:
                             GeoDataFolder ();
                             GeoDataFolder (const Marble::GeoDataFolder& other);
-                            GeoDataFolder (const Marble::GeoDataFeature& other);
-    virtual bool            isFolder () const;
     ~GeoDataFolder ();
     virtual QString         nodeType () const;
 };

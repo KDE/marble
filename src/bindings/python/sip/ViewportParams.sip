@@ -60,7 +60,6 @@ public:
     Marble::GeoDataCoordinates  focusPoint () const;
     void                    setFocusPoint (const Marble::GeoDataCoordinates& focusPoint);
     void                    resetFocusPoint ();
-    bool                    focusPointIsCenter () const;
 };
 // ViewportParams
 

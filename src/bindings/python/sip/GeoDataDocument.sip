@@ -41,7 +41,6 @@ public:
     QList<Marble::GeoDataStyleMap>  styleMaps () const;
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& stream);
-                            GeoDataDocument (const Marble::GeoDataFeature& other);
     ~GeoDataDocument ();
     virtual QString         nodeType () const;
 };

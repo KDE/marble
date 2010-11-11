@@ -28,13 +28,7 @@ public:
                             GeoDataFeature ();
                             GeoDataFeature (const QString& name);
                             GeoDataFeature (const Marble::GeoDataFeature& other);
-                            GeoDataFeature (const Marble::GeoDataContainer& other);
-                            GeoDataFeature (const Marble::GeoDataFolder& other);
-                            GeoDataFeature (const Marble::GeoDataDocument& other);
-                            GeoDataFeature (const Marble::GeoDataPlacemark& other);
     bool                    operator == (const Marble::GeoDataFeature&) const;
-    virtual bool            isFolder () const;
-    virtual bool            isPlacemark () const;
     EnumFeatureId           featureId () const;
 
     enum GeoDataVisualCategory
@@ -99,8 +93,7 @@ public:
     void                    setStyle (Marble::GeoDataStyle* style);
     Marble::GeoDataFeature::GeoDataVisualCategory  visualCategory () const;
     void                    setVisualCategory (Marble::GeoDataFeature::GeoDataVisualCategory category);
-    const QChar             role () const;
-    void                    setRole (const QChar& role);
+//ig    const QChar             role () const;
     int                     popularityIndex () const;
     void                    setPopularityIndex (int index);
     qint64                  popularity () const;
@@ -122,10 +115,18 @@ public:
     void                    setDescriptionCDATA (bool cdata);
     Marble::GeoDataRegion&  region () const;
     void                    setRegion (const Marble::GeoDataRegion& region);
-    Marble::GeoDataLookAt*  lookAt () const;
-    void                    setLookAt (Marble::GeoDataLookAt* lookAt);
 protected:
 //ig                            GeoDataFeature (GeoDataFeaturePrivate* priv);
+public:
+    Marble::GeoDataAbstractView  abstractView () const;
+    void                    setAbstractView (const Marble::GeoDataAbstractView& abstractView);
+//ig    Marble::GeoDataTimeSpan&  timeSpan () const;
+//ig    GeoDataTimeStamp&       timeStamp () const;
+//ig    void                    setTimeStamp (GeoDataTimeStamp timeStamp);
+//ig    GeoDataExtendedData&    extendedData () const;
+//ig    void                    setExtendedData (const GeoDataExtendedData& extendedData);
+    void                    setRole (const QString& role);
+//ig    void                    setTimeSpan (GeoDataTimeSpan timeSpan);
 };
 // GeoDataFeature
 

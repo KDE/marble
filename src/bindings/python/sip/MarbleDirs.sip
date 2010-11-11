@@ -43,6 +43,8 @@ private:
 //force
                             MarbleDirs (const Marble::MarbleDirs& other);
 //end
+public:
+    static QStringList      oldLocalPaths ();
 };
 // MarbleDirs
 

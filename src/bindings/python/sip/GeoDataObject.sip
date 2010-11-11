@@ -31,14 +31,12 @@ public:
     void                    setId (int value);
     int                     targetId () const;
     void                    setTargetId (int value);
-    virtual Marble::GeoDataObject*  child (int);
-    int                     row ();
-    virtual int             childPosition (Marble::GeoDataObject*);
-    virtual int             childCount ();
     virtual void            pack (QDataStream& stream) const;
     virtual void            unpack (QDataStream& steam);
     virtual ~GeoDataObject ();
     virtual QString         nodeType () const;
+    virtual Marble::GeoDataObject*  parent () const;
+    virtual void            setParent (Marble::GeoDataObject* parent);
 };
 // GeoDataObject
 

@@ -44,6 +44,8 @@ public:
     virtual QString         nodeType () const;
 protected:
 //ig    GeoDataPolygonPrivate*  p () const;
+public:
+    virtual bool            contains (const Marble::GeoDataCoordinates& coordinates) const;
 };
 // GeoDataPolygon
 

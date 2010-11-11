@@ -21,7 +21,7 @@
 namespace Marble
 {
 
-class RenderPlugin : QObject, Marble::RenderPluginInterface
+class RenderPlugin : QObject, Marble::RenderPluginInterface /Abstract/
 {
 %TypeHeaderCode
 #include <RenderPlugin.h>
@@ -64,6 +64,13 @@ signals:
     void                    settingsChanged (QString nameId);
     void                    actionGroupsChanged ();
     void                    repaintNeeded (QRegion dirtyRegion);
+public:
+    enum RenderType
+    {
+        Unknown,
+        Online
+    };
+    virtual Marble::RenderPlugin::RenderType  renderType () const;
 };
 // RenderPlugin
 

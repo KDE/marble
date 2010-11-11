@@ -21,7 +21,7 @@
 namespace Marble
 {
 
-class AbstractFloatItem : Marble::RenderPlugin
+class AbstractFloatItem : Marble::RenderPlugin /Abstract/
 {
 %TypeHeaderCode
 #include <AbstractFloatItem.h>

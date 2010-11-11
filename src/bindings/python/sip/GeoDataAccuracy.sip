@@ -28,8 +28,12 @@ class GeoDataAccuracy
 %End
 
 
+
 public:
-    enum
+//ig    Marble::GeoDataAccuracy::anonymous level;
+    qreal horizontal;
+    qreal vertical;
+    enum Level
     {
         none,
         Country,
@@ -39,10 +43,7 @@ public:
         Street,
         Detailed
     };
-
-//ig    Marble::GeoDataAccuracy::anonymous level;
-    qreal horizontal;
-    qreal vertical;
+                            GeoDataAccuracy ();
 };
 // GeoDataAccuracy
 

@@ -21,7 +21,7 @@
 namespace Marble
 {
 
-class AbstractDataPlugin : Marble::RenderPlugin
+class AbstractDataPlugin : Marble::RenderPlugin /Abstract/
 {
 %TypeHeaderCode
 #include <AbstractDataPlugin.h>
@@ -45,6 +45,9 @@ public:
     bool                    render (Marble::GeoPainter* painter, Marble::ViewportParams* viewport, const QString& renderPos = "NONE", Marble::GeoSceneLayer* layer = 0);
 signals:
     void                    changedNumberOfItems (quint32 number);
+public:
+//ig    PluginManager*          pluginManager () const;
+    virtual Marble::RenderPlugin::RenderType  renderType () const;
 };
 // AbstractDataPlugin
 

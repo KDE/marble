@@ -29,7 +29,6 @@ class RenderPluginInterface : Marble::PluginInterface /Abstract/
 %End
 
 public:
-    virtual Marble::RenderPlugin*  pluginInstance ()=0;
     virtual QStringList     backendTypes () const=0;
     virtual QString         renderPolicy () const=0;
     virtual QStringList     renderPosition () const=0;
