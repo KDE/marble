@@ -85,6 +85,46 @@ set_target_properties( ${_target_name} PROPERTIES
 
 endmacro( marble_add_designer_plugin _target_name )
 
+macro( marble_add_declarative_plugin _target_name )
+set( _src ${ARGN} )
+if( QTONLY )
+    qt4_automoc( ${_src} )
+    add_library( ${_target_name} MODULE ${_src} )
+    target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
+                                           ${QT_QTDBUS_LIBRARY}
+                                           ${QT_QTGUI_LIBRARY}
+                                           ${QT_QTXML_LIBRARY}
+                                           ${QT_QTSVG_LIBRARY}
+                                           ${QT_QTNETWORK_LIBRARY}
+                                           ${QT_QTMAIN_LIBRARY}
+                                           ${${_target_name}_LIBS}
+                                           marblewidget )
+    install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH}/org/kde/edu/marble )
+else( QTONLY )
+    kde4_add_plugin( ${_target_name} ${_src} )
+    target_link_libraries( ${_target_name} ${QT_QTCORE_LIBRARY}
+                                           ${QT_QTDBUS_LIBRARY}
+                                           ${QT_QTGUI_LIBRARY}
+                                           ${QT_QTXML_LIBRARY}
+                                           ${QT_QTSVG_LIBRARY}
+                                           ${QT_QTNETWORK_LIBRARY}
+                                           ${KDE4_KDECORE_LIBRARY}
+                                           ${KDE4_KDEUI_LIBRARY}
+                                           ${KDE4_KIO_LIBRARY}
+                                           ${QT_QTMAIN_LIBRARY}
+                                           ${${_target_name}_LIBS}
+                                           marblewidget )
+    install( TARGETS ${_target_name} DESTINATION ${MARBLE_PLUGIN_INSTALL_PATH}/org/kde/edu/marble )
+endif( QTONLY )
+
+set_target_properties( ${_target_name} PROPERTIES
+                       INSTALL_RPATH_USE_LINK_PATH TRUE
+                       SKIP_BUILD_RPATH TRUE
+                       BUILD_WITH_INSTALL_RPATH TRUE
+                     )
+
+endmacro( marble_add_declarative_plugin _target_name )
+
 if( WIN32 )
     set( DATA_PATH ${CMAKE_INSTALL_PREFIX}/${MARBLE_DATA_PATH} )
     set( PLUGIN_PATH ${CMAKE_INSTALL_PREFIX}/${MARBLE_PLUGIN_PATH} )
