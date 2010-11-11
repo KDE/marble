@@ -19,7 +19,8 @@ namespace Marble
 {
 
 RoutingInstruction::RoutingInstruction( const RoutingWaypoint &item ) :
-        m_roadName( item.roadName() ), m_secondsLeft( item.secondsRemaining() ),
+        m_roadName( item.roadName() ), m_roadType( item.roadType() ),
+        m_secondsLeft( item.secondsRemaining() ),
         m_angleToPredecessor( 0.0 ), m_roundaboutExit( 0 ),
         m_predecessor( 0 ), m_successor( 0 )
 {
@@ -41,6 +42,11 @@ bool RoutingInstruction::append( const RoutingWaypoint &item )
 QString RoutingInstruction::roadName() const
 {
     return m_roadName;
+}
+
+QString RoutingInstruction::roadType() const
+{
+    return m_roadType;
 }
 
 int RoutingInstruction::secondsLeft() const
@@ -218,37 +224,90 @@ qreal RoutingInstruction::distanceToEnd() const
 
 QString RoutingInstruction::nextRoadInstruction() const
 {
-    if ( predecessor() && predecessor()->roundaboutExitNumber() ) {
-        QString text = QObject::tr( "Take the %1. exit in the roundabout into %2." );
-        int exit = predecessor()->roundaboutExitNumber();
-        return text.arg( exit ).arg( roadName() );
+    // Unused so far, but may come in handy after string freeze.
+    QObject::tr( "Enter the roundabout." );
+
+    if ( roadType() == "motorway_link" ) {
+        QStringList motorways = QStringList() << "motorway" << "motorway_link";
+        bool const leaving = predecessor() && motorways.contains( predecessor()->roadType() );
+        if ( leaving ) {
+            if ( roadName().isEmpty() ) {
+                return QObject::tr( "Take the exit." );
+            } else {
+                return QObject::tr( "Take the exit towards %1." ).arg( roadName() );
+            }
+        }
+        if ( roadName().isEmpty() ) {
+            return QObject::tr( "Take the ramp." );
+        } else {
+            return QObject::tr( "Take the ramp towards %1." ).arg( roadName() );
+        }
     }
 
-    switch( m_turnType ) {
-    case TurnAround:
-        return QObject::tr( "Turn around onto %1." ).arg( roadName() );
-    case SharpLeft:
-        return QObject::tr( "Turn sharp left on %1." ).arg( roadName() );
-    case Left:
-        return QObject::tr( "Turn left into %1." ).arg( roadName() );
-    case SlightLeft:
-        return QObject::tr( "Keep slightly left on %1." ).arg( roadName() );
-    case Straight:
-        return QObject::tr( "Continue on %1." ).arg( roadName() );
-    case SlightRight:
-        return QObject::tr( "Keep slightly right on %1." ).arg( roadName() );
-    case Right:
-        return QObject::tr( "Turn right into %1." ).arg( roadName() );
-    case SharpRight:
-        return QObject::tr( "Turn sharp right into %1." ).arg( roadName() );
-    case Unknown:
-    case RoundaboutExit:
-    case RoundaboutFirstExit:
-    case RoundaboutSecondExit:
-    case RoundaboutThirdExit:
-        Q_ASSERT( false && "Internal error: Unknown/Roundabout should have been handled earlier." );
-        return QString();
-        break;
+    if ( predecessor() && predecessor()->roundaboutExitNumber() ) {
+        int exit = predecessor()->roundaboutExitNumber();
+        if ( roadName().isEmpty() ) {
+            return QObject::tr( "Take the %1. exit in the roundabout." ).arg( exit );
+        } else {
+            QString text = QObject::tr( "Take the %1. exit in the roundabout into %2." );
+            return text.arg( exit ).arg( roadName() );
+        }
+    }
+
+    if ( roadName().isEmpty() ) {
+        switch( m_turnType ) {
+        case TurnAround:
+            return QObject::tr( "Turn around." );
+        case SharpLeft:
+            return QObject::tr( "Turn sharp left." );
+        case Left:
+            return QObject::tr( "Turn left." );
+        case SlightLeft:
+            return QObject::tr( "Keep slightly left." );
+        case Straight:
+            return QObject::tr( "Go straight ahead." );
+        case SlightRight:
+            return QObject::tr( "Keep slightly right." );
+        case Right:
+            return QObject::tr( "Turn right." );
+        case SharpRight:
+            return QObject::tr( "Turn sharp right." );
+        case Unknown:
+        case RoundaboutExit:
+        case RoundaboutFirstExit:
+        case RoundaboutSecondExit:
+        case RoundaboutThirdExit:
+            Q_ASSERT( false && "Internal error: Unknown/Roundabout should have been handled earlier." );
+            return QString();
+            break;
+        }
+    } else {
+        switch( m_turnType ) {
+        case TurnAround:
+            return QObject::tr( "Turn around onto %1." ).arg( roadName() );
+        case SharpLeft:
+            return QObject::tr( "Turn sharp left on %1." ).arg( roadName() );
+        case Left:
+            return QObject::tr( "Turn left into %1." ).arg( roadName() );
+        case SlightLeft:
+            return QObject::tr( "Keep slightly left on %1." ).arg( roadName() );
+        case Straight:
+            return QObject::tr( "Continue on %1." ).arg( roadName() );
+        case SlightRight:
+            return QObject::tr( "Keep slightly right on %1." ).arg( roadName() );
+        case Right:
+            return QObject::tr( "Turn right into %1." ).arg( roadName() );
+        case SharpRight:
+            return QObject::tr( "Turn sharp right into %1." ).arg( roadName() );
+        case Unknown:
+        case RoundaboutExit:
+        case RoundaboutFirstExit:
+        case RoundaboutSecondExit:
+        case RoundaboutThirdExit:
+            Q_ASSERT( false && "Internal error: Unknown/Roundabout should have been handled earlier." );
+            return QString();
+            break;
+        }
     }
 
     Q_ASSERT( false && "Internal error: Switch did not handle all cases.");

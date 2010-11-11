@@ -57,7 +57,7 @@ int RoutingWaypoint::secondsRemaining() const
 
 QString RoutingWaypoint::roadName() const
 {
-    return m_roadName.isEmpty() ? QObject::tr( "unknown road" ) : m_roadName;
+    return m_roadName;
 }
 
 } // namespace Marble

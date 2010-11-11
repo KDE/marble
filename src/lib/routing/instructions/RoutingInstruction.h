@@ -57,6 +57,9 @@ public:
     /** Name of the road to turn into */
     QString roadName() const;
 
+    /** OSM type of the road to turn into */
+    QString roadType() const;
+
     /** Estimated number of seconds to the route destination */
     int secondsLeft() const;
 
@@ -127,6 +130,8 @@ private:
     QVector<RoutingPoint> m_intersectionPoints;
 
     QString m_roadName;
+
+    QString m_roadType;
 
     int m_secondsLeft;
 
