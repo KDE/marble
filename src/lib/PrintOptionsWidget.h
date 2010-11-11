@@ -47,6 +47,10 @@ public:
 
     void setPrintDrivingInstructions( bool print );
 
+    bool printDrivingInstructionsAdvice() const;
+
+    void setPrintDrivingInstructionsAdvice( bool print );
+
     void setBackgroundControlsEnabled( bool enabled );
 
     void setRouteControlsEnabled( bool enabled );

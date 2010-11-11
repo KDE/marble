@@ -84,6 +84,16 @@ void PrintOptionsWidget::setRouteControlsEnabled( bool enabled )
     routeGroupBox->setEnabled( enabled );
 }
 
+bool PrintOptionsWidget::printDrivingInstructionsAdvice() const
+{
+    return drivingInstructionsAdviceCheckBox->isChecked();
+}
+
+void PrintOptionsWidget::setPrintDrivingInstructionsAdvice( bool enabled )
+{
+    drivingInstructionsAdviceCheckBox->setChecked( enabled );
+}
+
 }
 
 #include "PrintOptionsWidget.moc"

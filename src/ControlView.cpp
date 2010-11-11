@@ -183,6 +183,7 @@ void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
         bool hasRoute = marbleWidget()->model()->routingManager()->routingModel()->rowCount() > 0;
         printOptions->setPrintRouteSummary( hasRoute );
         printOptions->setPrintDrivingInstructions( hasRoute );
+        printOptions->setPrintDrivingInstructionsAdvice( hasRoute );
         printOptions->setRouteControlsEnabled( hasRoute );
         printDialog->setOptionTabs( QList<QWidget*>() << printOptions );
 
@@ -213,6 +214,10 @@ void ControlView::printMapScreenShot( QPointer<QPrintDialog> printDialog)
 
             if ( printOptions->printDrivingInstructions() ) {
                 printDrivingInstructions( document, text );
+            }
+
+            if ( printOptions->printDrivingInstructionsAdvice() ) {
+                printDrivingInstructionsAdvice( document, text );
             }
 
             text += "</body></html>";
@@ -416,6 +421,17 @@ void ControlView::printDrivingInstructions( QTextDocument &document, QString &te
     text += "</table>";
 #endif
 }
+
+void ControlView::printDrivingInstructionsAdvice( QTextDocument &, QString &text )
+{
+#ifndef QT_NO_PRINTER
+    text += "<p>" + tr( "The Marble development team wishes you a pleasant and safe journey." ) + "</p>";
+    text += "<p>" + tr( "Caution: Driving instructions may be incomplete or inaccurate." );
+    text += " " + tr( "Road construction, weather and other unforeseen variables can result in this suggested route not to be the most expedient or safest route to your destination." );
+    text += " " + tr( "Please use common sense while navigating." ) + "</p>";
+#endif
+}
+
 
 void ControlView::launchExternalMapEditor()
 {

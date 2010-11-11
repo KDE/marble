@@ -112,6 +112,7 @@ class ControlView : public QWidget
     void printLegend( QTextDocument &document, QString &text );
     void printRouteSummary( QTextDocument &document, QString &text );
     void printDrivingInstructions( QTextDocument &document, QString &text );
+    void printDrivingInstructionsAdvice( QTextDocument &document, QString &text );
 
     //MarbleModel       *m_marbleModel;
     MarbleWidget      *m_marbleWidget;
