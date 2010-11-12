@@ -21,4 +21,6 @@ add_subdirectory( navigation )
 
 # add_subdirectory( dataview )
 # add_subdirectory( fileview )
-add_subdirectory( aprs )
+if (NOT WIN32)
+  add_subdirectory( aprs )
+endif (NOT WIN32)
