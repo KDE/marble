@@ -166,7 +166,6 @@ QMenu* RoutingInputWidgetPrivate::createMenu( RoutingInputWidget *parent )
 
     m_bookmarkAction = result->addAction( QIcon( ":/icons/bookmarks.png" ), QObject::tr( "From &Bookmark" ) );
     m_bookmarkAction->setMenu( createBookmarkMenu( parent ) );
-    QObject::connect( m_lineEdit, SIGNAL( clearButtonClicked() ), parent, SLOT( requestRemoval() ) );
     return result;
 }
 
@@ -239,6 +238,7 @@ RoutingInputWidget::RoutingInputWidget( MarbleWidget* widget, int index, QWidget
         layout->addWidget( d->m_lineEdit );
     }
 
+    connect( d->m_lineEdit, SIGNAL( clearButtonClicked() ), this, SLOT( requestRemoval() ) );
     connect( d->m_marbleModel->bookmarkManager(), SIGNAL( bookmarksChanged() ),
              this, SLOT( reloadBookmarks() ) );
     connect( d->m_marbleModel->positionTracking(), SIGNAL( statusChanged( PositionProviderStatus ) ),
