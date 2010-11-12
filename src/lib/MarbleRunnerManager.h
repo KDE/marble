@@ -29,7 +29,7 @@ class PluginManager;
 class RouteRequest;
 
 class MarbleRunnerManagerPrivate;
-class MarbleRunnerManager : public QObject
+class MARBLE_EXPORT MarbleRunnerManager : public QObject
 {
     Q_OBJECT
 
