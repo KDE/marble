@@ -26,6 +26,8 @@ public:
     explicit YoursPlugin( QObject *parent = 0 );
 
     virtual MarbleAbstractRunner* newRunner() const;
+
+    virtual bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
 };
 
 }

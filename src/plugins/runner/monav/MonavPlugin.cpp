@@ -250,6 +250,13 @@ bool MonavPlugin::canWork( Capability capability ) const
     }
 }
 
+bool MonavPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
+{
+    // Since we support multiple maps, pretty much anything can be installed, but ecological is
+    // not supported by monav
+    return profileTemplate != RoutingProfilesModel::CarEcologicalTemplate;
+}
+
 }
 
 Q_EXPORT_PLUGIN2( MonavPlugin, Marble::MonavPlugin )

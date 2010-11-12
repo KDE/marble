@@ -31,6 +31,8 @@ public:
 
     virtual MarbleAbstractRunner* newRunner() const;
 
+    virtual bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
+
     virtual ConfigWidget *configWidget();
 
     virtual bool canWork( Capability capability ) const;

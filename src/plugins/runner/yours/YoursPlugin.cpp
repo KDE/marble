@@ -30,6 +30,11 @@ MarbleAbstractRunner* YoursPlugin::newRunner() const
     return new YoursRunner;
 }
 
+bool YoursPlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
+{
+    return profileTemplate == RoutingProfilesModel::CarFastestTemplate;
+}
+
 }
 
 Q_EXPORT_PLUGIN2( YoursPlugin, Marble::YoursPlugin )

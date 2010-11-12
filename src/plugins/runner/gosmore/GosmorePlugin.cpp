@@ -45,6 +45,11 @@ bool GosmorePlugin::canWork( Capability capability ) const
     }
 }
 
+bool GosmorePlugin::supportsTemplate( RoutingProfilesModel::ProfileTemplate profileTemplate ) const
+{
+    return profileTemplate == RoutingProfilesModel::CarFastestTemplate;
+}
+
 }
 
 Q_EXPORT_PLUGIN2( GosmorePlugin, Marble::GosmorePlugin )

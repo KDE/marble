@@ -27,6 +27,8 @@ public:
 
     virtual MarbleAbstractRunner* newRunner() const;
 
+    virtual bool supportsTemplate(RoutingProfilesModel::ProfileTemplate profileTemplate) const;
+
     virtual bool canWork( Capability capability ) const;
 };
 
