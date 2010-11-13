@@ -44,8 +44,10 @@
     <file>icons/flag.png</file>
     <file>icons/gps.png</file>
     <file>icons/crosshairs.png</file>
-    <file>icons/edit-clear-locationbar-rtl.png</file>
-    <file>icons/edit-clear-locationbar-ltr.png</file>
+    <file>icons/16x16/edit-clear-locationbar-ltr.png</file>
+    <file>icons/16x16/edit-clear-locationbar-rtl.png</file>
+    <file>icons/22x22/edit-clear-locationbar-ltr.png</file>
+    <file>icons/22x22/edit-clear-locationbar-rtl.png</file>
     <file>../data/editors/potlatch.png</file>
     <file>../data/editors/merkaartor.png</file>
     <file>../data/editors/josm.png</file>
