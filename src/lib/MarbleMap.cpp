@@ -767,14 +767,7 @@ void MarbleMap::setShowCompass( bool visible )
 
 void MarbleMap::setShowAtmosphere( bool visible )
 {
-    bool previousVisible = showAtmosphere();
-
-    if ( visible != previousVisible ) {
-        d->m_viewParams.setShowAtmosphere( visible );
-
-        // Quick and dirty way to force a whole update of the view
-        d->doResize();
-    }
+    d->m_viewParams.setShowAtmosphere( visible );
 }
 
 void MarbleMap::setShowCrosshairs( bool visible )
