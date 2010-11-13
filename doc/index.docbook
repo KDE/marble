@@ -43,11 +43,11 @@
 
 		 <legalnotice>&FDLNotice;</legalnotice>
 
-		 <date>2010-05-27</date>
-		 <releaseinfo>0.10</releaseinfo>
+		 <date>2010-11-13</date>
+		 <releaseinfo>1.0</releaseinfo>
 
 		 <abstract>
-			<para>&marble; is a geographical atlas and a virtual desktop globe 
+			<para>&marble; is a geographical atlas and a virtual globe 
                 which lets you quickly explore other places on our home planet.
                 You can use &marble; to look up places, to easily create maps, 
                 measure distances and to retrieve detail information about locations that you have just heard about in the news or on the Internet. The user interface is clean, simple and easy to use.
@@ -271,10 +271,65 @@
              </mediaobject>
          </screenshot>
          <para>
-             If the start (or destination) position is already visible on the screen, you may find it more convenient to select it directly in the map. To do that, click on the <guilabel>A</guilabel> (or <guilabel>B</guilabel>) button next to the input field. Once clicked, the map input mode is activated: The next click on a position in the map will become the start (or end) of your trip. The mouse cursor turns into a cross to ease an accurate selection. The selected position will be included in the route and marked in the map. Please note that you need to clear any previous placemark using the <guilabel>Remove</guilabel> button right to the input field in order to be able to activate the map input mode. To abort the selection, either click on the button again or press &Esc;.
+           If the start (or destination) position is already visible on the screen, you may find it more convenient to select it directly in the map. To do that, click on the <guilabel>A</guilabel> (or <guilabel>B</guilabel>) button next to the input field. Select <guilabel>From Map</guilabel> in the upcoming menu. Once clicked, the map input mode is activated: The next click on a position in the map will become the start (or end) of your trip. The mouse cursor turns into a cross to ease an accurate selection. The selected position will be included in the route and marked in the map. To abort the selection, either click on the button again or press &Esc;.
          </para>
          <para>
-	     The best route to take depends on the type of vehicle you plan to use (if any). You can tell &marble; about this and other settings in the routing <guilabel>Options</guilabel>. Clicking on the <guilabel>Options</guilabel> next to the <guilabel>Get Directions</guilabel> button, you can choose between car, bicycle and pedestrian routing. Car routing is subdivided into a fastest and a shortest mode. The former minimizes the route duration and the latter minimizes the route length. Furthermore you can specify to avoid highways or toll roads (only applicable to car routing). Clicking on the <guilabel>Options</guilabel> link a second time hides the route preferences. Make sure to click on the <guilabel>Get Directions</guilabel> button to update the route after changing settings.
+           An alternative selection of the route start and destination is provided via the context menu of the map: Click with the &RMB; on the desired location and select <guilabel>Directions from here</guilabel> or <guilabel>Directions to here</guilabel>, respectively.
+         </para>
+         </sect1>
+         <sect1 id="routing-profiles">
+         <title>Route Profiles</title>
+         <para>
+           Which route to choose depends on the type of vehicle you plan to use (if any). You can tell &marble; about this and other preferences using route profiles. Each profile contains the settings for a certain routing scenario. On the first start, &marble; creates four common profiles for you: <guilabel>Car (fastest)</guilabel>, <guilabel>Car (shortest)</guilabel>, <guilabel>Bike</guilabel> and <guilabel>Pedestrian</guilabel>.
+         </para>             
+         <para>
+           The examples in the previous sections used the <guilabel>Car (fastest)</guilabel> profile. Let's revisit the last route with a different profile: Select the <guilabel>Pedestrian</guilabel> option in the <guilabel>Profile</guilabel> combo box. The route now looks like this:
+         </para>                       
+         <screenshot>
+             <screeninfo>&marble; pedestrian routing</screeninfo>
+             <mediaobject>
+                 <imageobject><imagedata fileref="routing-5.png" format="PNG" /></imageobject>
+                 <textobject><phrase>&marble; Pedestrian routing</phrase></textobject>
+             </mediaobject>
+         </screenshot>
+         <para>
+             The proposed route has become shorter because footways are now also included when calculating the best route.
+         </para>
+         <para>
+             If you want to tweak one of the default profiles further, select it in the <guilabel>Profile</guilabel> combo box and click on the <guilabel>Configure</guilabel> link. A new window opens.
+         </para>
+         <screenshot>
+             <screeninfo>&marble; route profile configuration</screeninfo>
+             <mediaobject>
+                 <imageobject><imagedata fileref="routing-6.png" format="PNG" /></imageobject>
+                 <textobject><phrase>&marble; Route Profile configuration</phrase></textobject>
+             </mediaobject>
+         </screenshot>         
+         <para>
+             The left side let's you configure which routing backends are queried for routes. Up to five backends are supported by &marble;, two online routers and three offline routers. Online routing requires an Internet connection to query a route. Offline routing works without an Internet connection, but requires you to download and install offline routing maps in advance. The supported routing backends are
+         </para>
+         <itemizedlist>
+             <listitem>
+               <para>Gosmore: An offline router that also serves as the backend for the Yours online router</para>
+             </listitem>
+             <listitem>
+               <para>Monav: An offline router that is very fast even when calculating very large routes</para>
+             </listitem>
+             <listitem>
+               <para>OpenRouteService: An online router that also generates driving instructions, limited to Europe</para>
+             </listitem>
+             <listitem>
+               <para>Routino: An offline router with a very flexible configuration</para>
+             </listitem>
+             <listitem>
+               <para>Yours: An online router that operates world-wide, but lacks driving instructions</para>
+             </listitem>
+         </itemizedlist>
+         <para>
+             Once you select and enable a routing backend on the left to include it in routing queries, you can modify its settings on the right side. The settings are specific to each backend.
+         </para>
+         <para>
+             Besides configuring the four default profiles, you can add new profiles and remove existing ones in the &marble; settings in the <guilabel>File</guilabel> menu.
          </para>
          </sect1>
          <sect1 id="routing-route-adjustments">
@@ -321,7 +376,7 @@
              </mediaobject>
          </screenshot>
          <para>
-             Enter the desired filename in the upcoming save dialog. The filename extension should be gpx.
+             Enter the desired filename in the upcoming save dialog. The filename extension should be <filename class="extension">gpx</filename> to store in <acronym>gpx</acronym> format or <filename class="extension">kml</filename> to store in <acronym>kml</acronym> (Keyhole Markup Language) format.
          </para>
          </sect1>
      </chapter>
@@ -457,6 +512,13 @@
                      <varlistentry>
                          <term><menuchoice>
                                  <guimenu>File</guimenu>
+                                 <guimenuitem>Print Preview</guimenuitem>
+                         </menuchoice></term>
+                         <listitem><para>Opens a window that shows a preview of the printed map.</para></listitem>
+                     </varlistentry>
+                     <varlistentry>
+                         <term><menuchoice>
+                                 <guimenu>File</guimenu>
                                  <guimenuitem>Work Offline</guimenuitem>
                          </menuchoice></term>
                          <listitem><para>If this option is selected &marble; will no longer download map data from the Internet. The search feature gets restricted to the local database. New routes cannot be retrieved.</para></listitem>
@@ -520,6 +582,17 @@ If a GPS device is connected with your computer, &marble; displays longitude and
 <guimenuitem>Crosshairs</guimenuitem>
 </menuchoice></term>
 <listitem><para><action>Toggle</action> the display of a simple crosshair in the center of the map.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycap>F5</keycap>
+</shortcut>
+<guimenu>View</guimenu>
+<guimenuitem>Redisplay</guimenuitem>
+</menuchoice></term>
+<listitem><para>The currently visible part of the map is downloaded again and refreshed on the screen.</para></listitem>
 </varlistentry>
 
 <varlistentry>
@@ -765,6 +838,61 @@ the system's graphics drivers. </para>
 </varlistentry>
 
 </variablelist>
+</sect1>
+
+<sect1 id="configrouting">
+<title>Routing Configuration</title>
+<screenshot>
+<screeninfo>The Routing configuration dialog</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="configure-routing.png" format="PNG" />
+</imageobject>
+<textobject>
+<phrase>The Routing configuration dialog</phrase>
+</textobject>
+</mediaobject>
+</screenshot>
+
+<variablelist>
+
+<varlistentry>
+<term><guilabel>Add</guilabel></term>
+<listitem>
+<para>Opens a window where you can add a new routing profile.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Configure</guilabel></term>
+<listitem>
+<para>Opens a window where the currently selected routing profile can be configured.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Remove</guilabel></term>
+<listitem>
+<para>Deletes the selected routing profile.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Move Up</guilabel></term>
+<listitem>
+<para>The selected routing profile is moved up one step. It will appear before the one that was previously on top of it.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Move Down</guilabel></term>
+<listitem>
+<para>The selected routing profile is moved down one step. It will appear after the one that was previously below of it.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
 </sect1>
 
 <sect1 id="configplugins">
