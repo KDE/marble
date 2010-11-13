@@ -49,24 +49,31 @@ class PluginManagerPrivate
     QMap<QPluginLoader*, RunnerPlugin *> m_runnerPlugins;
 
 private:
-    void cleanup( const QList<QPluginLoader*> loaders );
+    bool cleanup( const QList<QPluginLoader*> loaders );
 };
 
 PluginManagerPrivate::~PluginManagerPrivate()
 {
     QMap<QPluginLoader*, RunnerPlugin *>::const_iterator i = m_runnerPlugins.constBegin();
-    cleanup( m_renderPluginTemplates.keys() );
-    cleanup( m_networkPluginTemplates.keys() );
-    cleanup( m_positionProviderPluginTemplates.keys() );
-    cleanup( m_runnerPlugins.keys() );
+    bool allUnloaded = cleanup( m_renderPluginTemplates.keys() );
+    allUnloaded = allUnloaded && cleanup( m_networkPluginTemplates.keys() );
+    allUnloaded = allUnloaded && cleanup( m_positionProviderPluginTemplates.keys() );
+    allUnloaded = allUnloaded && cleanup( m_runnerPlugins.keys() );
+
+    if ( allUnloaded ) {
+        mDebug() << "All plugins unloaded. Plugin instances still alive will crash now.";
+    }
 }
 
-void PluginManagerPrivate::cleanup( const QList<QPluginLoader*> loaders )
+bool PluginManagerPrivate::cleanup( const QList<QPluginLoader*> loaders )
 {
+    bool allUnloaded = true;
     foreach( QPluginLoader* loader, loaders ) {
-        loader->unload();
+        allUnloaded = allUnloaded && loader->unload();
         delete loader;
     }
+
+    return allUnloaded;
 }
 
 PluginManager::PluginManager( QObject *parent )
