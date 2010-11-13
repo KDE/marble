@@ -38,6 +38,8 @@ public:
 
     virtual QVariant data ( const QModelIndex & index, int role = Qt::DisplayRole ) const;
 
+    void setShowRoutingItems( bool show );
+
 private:
     QVariant currentLocationData ( int role ) const;
 
@@ -54,6 +56,8 @@ private:
     QVector<GeoDataPlacemark*> m_bookmarks;
 
     bool m_hasCurrentLocation;
+
+    bool m_showRoutingItems;
 };
 
 class GoToDialogPrivate
@@ -65,6 +69,8 @@ public:
 
     GeoDataLookAt m_lookAt;
 
+    TargetModel* m_targetModel;
+
     GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget );
 
     void saveSelection( const QModelIndex &index );
@@ -72,7 +78,8 @@ public:
 
 TargetModel::TargetModel( MarbleWidget* marbleWidget, QObject * parent ) :
     QAbstractListModel( parent ),
-    m_marbleWidget( marbleWidget ), m_hasCurrentLocation( false )
+    m_marbleWidget( marbleWidget ), m_hasCurrentLocation( false ),
+    m_showRoutingItems( true )
 {
     BookmarkManager* manager = marbleWidget->model()->bookmarkManager();
     foreach( GeoDataFolder * folder, manager->folders() ) {
@@ -91,6 +98,10 @@ TargetModel::TargetModel( MarbleWidget* marbleWidget, QObject * parent ) :
 
 QVector<GeoDataPlacemark> TargetModel::viaPoints() const
 {
+    if ( !m_showRoutingItems ) {
+        return QVector<GeoDataPlacemark>();
+    }
+
     RouteRequest* request = m_marbleWidget->model()->routingManager()->routeRequest();
     QVector<GeoDataPlacemark> result;
     for ( int i = 0; i < request->size(); ++i ) {
@@ -223,8 +234,14 @@ QVariant TargetModel::data ( const QModelIndex & index, int role ) const
     return QVariant();
 }
 
+void TargetModel::setShowRoutingItems( bool show )
+{
+    m_showRoutingItems = show;
+    reset();
+}
+
 GoToDialogPrivate::GoToDialogPrivate( GoToDialog* parent, MarbleWidget* marbleWidget ) :
-    m_parent( parent), m_marbleWidget( marbleWidget )
+    m_parent( parent), m_marbleWidget( marbleWidget ), m_targetModel( 0 )
 {
     // nothing to do
 }
@@ -241,7 +258,8 @@ GoToDialog::GoToDialog( MarbleWidget* marbleWidget, QWidget * parent, Qt::Window
 {
     setupUi( this );
 
-    bookmarkListView->setModel( new TargetModel( marbleWidget ) );
+    d->m_targetModel = new TargetModel( marbleWidget, this );
+    bookmarkListView->setModel( d->m_targetModel );
     connect( bookmarkListView, SIGNAL( activated( QModelIndex ) ),
              this, SLOT( saveSelection ( QModelIndex ) ) );
 }
@@ -254,6 +272,11 @@ GoToDialog::~GoToDialog()
 GeoDataLookAt GoToDialog::lookAt() const
 {
     return d->m_lookAt;
+}
+
+void GoToDialog::setShowRoutingItems( bool show )
+{
+    d->m_targetModel->setShowRoutingItems( show );
 }
 
 }

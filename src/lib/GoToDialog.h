@@ -40,6 +40,13 @@ public:
 
     ~GoToDialog();
 
+    /** Toggle whether routing items (source, destination and via points) are visible */
+    void setShowRoutingItems( bool show );
+
+    /**
+      * Returns the position of the item selected by the user, or a default
+      * constructed GeoDataLookAt if the dialog was cancelled by the user
+      */
     GeoDataLookAt lookAt() const;
 
     Q_PRIVATE_SLOT( d, void saveSelection( const QModelIndex &index ) )
