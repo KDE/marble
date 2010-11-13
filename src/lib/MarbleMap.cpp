@@ -734,8 +734,6 @@ void MarbleMap::setMapThemeId( const QString& mapThemeId )
     if ( mapTheme ) {
         d->m_model->setMapTheme( mapTheme, d->m_viewParams.projection() );
 
-        d->doResize();
-
         centerSun();
     }
 
