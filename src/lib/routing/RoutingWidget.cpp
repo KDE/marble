@@ -477,9 +477,11 @@ void RoutingWidget::pointSelectionCanceled()
 
 void RoutingWidget::configureProfile()
 {
-    if ( d->m_ui.routingProfileComboBox->currentIndex() != -1) {
+    int index = d->m_ui.routingProfileComboBox->currentIndex();
+    if ( index != -1 ) {
         RoutingProfileSettingsDialog dialog( d->m_widget->model()->pluginManager(), d->m_routingManager->profilesModel(), d->m_widget );
         dialog.editProfile( d->m_ui.routingProfileComboBox->currentIndex() );
+        d->m_routeRequest->setRoutingProfile( d->m_routingManager->profilesModel()->profiles().at( index ) );
     }
 }
 
