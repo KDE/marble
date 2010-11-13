@@ -218,6 +218,8 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
              this, SLOT( updateProgress() ) );
     connect( d->m_ui.routeComboBox, SIGNAL( currentIndexChanged( int ) ),
              this, SLOT( switchRoute( int ) ) );
+    connect( d->m_ui.routingProfileComboBox, SIGNAL( currentIndexChanged( int ) ),
+             this, SLOT( setRoutingProfile( int ) ) );
     connect( d->m_routingManager->alternativeRoutesModel(), SIGNAL( rowsInserted( QModelIndex, int, int ) ),
              this, SLOT( updateAlternativeRoutes() ) );
 
@@ -573,6 +575,13 @@ void RoutingWidget::selectFirstProfile()
     int count = d->m_routingManager->profilesModel()->rowCount();
     if ( count && d->m_ui.routingProfileComboBox->currentIndex() < 0 ) {
         d->m_ui.routingProfileComboBox->setCurrentIndex( 0 );
+    }
+}
+
+void RoutingWidget::setRoutingProfile( int index )
+{
+    if ( index >= 0 && index < d->m_routingManager->profilesModel()->rowCount() ) {
+        d->m_routeRequest->setRoutingProfile( d->m_routingManager->profilesModel()->profiles().at( index ) );
     }
 }
 

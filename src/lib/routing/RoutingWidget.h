@@ -116,6 +116,9 @@ private Q_SLOTS:
     /** Ask the user for a kml file to open */
     void openRouteFile();
 
+    /** Update the route request with the given profile */
+    void setRoutingProfile( int index );
+
 private:
     RoutingWidgetPrivate *const d;
 };
