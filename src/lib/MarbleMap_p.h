@@ -42,7 +42,6 @@ class MarbleMapPrivate
     void paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect );
 
     void setBoundingBox();
-    void doResize();
 
     void paintGround( GeoPainter &painter, QRect &dirtyRect);
     void paintFps( GeoPainter &painter, QRect &dirtyRect, qreal fps);
@@ -53,8 +52,6 @@ class MarbleMapPrivate
     MarbleModel     *m_model;
     bool             m_modelIsOwned;
 
-    int              m_width;
-    int              m_height;
     ViewParams       m_viewParams;
     bool             m_justModified; // FIXME: Rename to isDirty
 

@@ -274,31 +274,38 @@ int ViewParams::height() const
     return d->m_canvasImage->height();
 }
 
-QImage * ViewParams::canvasImage() const
+void ViewParams::setSize( int width, int height )
 {
-    return d->m_canvasImage;
-}
+    d->m_viewport.setSize( QSize( width, height ) );
 
-void ViewParams::setCanvasImage( QImage * const image )
-{
+    // If the globe covers fully the screen then we can use the faster
+    // RGB32 as there are no translucent areas involved.
+    QImage::Format imageFormat = ( d->m_viewport.mapCoversViewport() )
+                                 ? QImage::Format_RGB32
+                                 : QImage::Format_ARGB32_Premultiplied;
+
+    // Recreate the canvas image with the new size.
     delete d->m_canvasImage;
-    d->m_canvasImage = image;
+    d->m_canvasImage = new QImage( width, height, imageFormat );
 
     // Repaint the background if necessary
     if ( !currentProjection()->mapCoversViewport( viewport() ) ) {
         d->m_canvasImage->fill(0); // Using Qt::transparent is wrong here (equals "18")!
     }
+
+    // Recreate the coastline detection offscreen image
+    delete d->m_coastImage;
+    d->m_coastImage = new QImage( width, height, QImage::Format_RGB32 );
+}
+
+QImage * ViewParams::canvasImage() const
+{
+    return d->m_canvasImage;
 }
 
 QImage * ViewParams::coastImage() const
 {
     return d->m_coastImage;
-}
-
-void ViewParams::setCoastImage( QImage * const image )
-{
-    delete d->m_coastImage;
-    d->m_coastImage = image;
 }
 
 bool ViewParams::showGps() const

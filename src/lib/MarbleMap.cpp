@@ -94,29 +94,6 @@ void MarbleMapPrivate::construct()
                        m_parent,              SIGNAL( repaintNeeded( QRegion ) ) );
 }
 
-// Used to be resizeEvent()
-void MarbleMapPrivate::doResize()
-{
-    QSize size( m_parent->width(), m_parent->height() );
-    m_viewParams.viewport()->setSize( size );
-
-    // If the globe covers fully the screen then we can use the faster
-    // RGB32 as there are no translucent areas involved.
-    QImage::Format imageFormat = ( m_parent->mapCoversViewport() )
-                                 ? QImage::Format_RGB32
-                                 : QImage::Format_ARGB32_Premultiplied;
-
-    // Recreate the canvas image with the new size.
-    m_viewParams.setCanvasImage( new QImage( m_parent->width(), m_parent->height(),
-                                             imageFormat ));
-
-    // Recreate the coastline detection offscreen image
-    m_viewParams.setCoastImage( new QImage( m_parent->width(), m_parent->height(),
-                                            QImage::Format_RGB32 ));
-
-    m_justModified = true;
-}
-
 void  MarbleMapPrivate::paintMarbleSplash( GeoPainter &painter, QRect &dirtyRect )
 {
     Q_UNUSED( dirtyRect )
@@ -219,10 +196,6 @@ MarbleMap::MarbleMap(MarbleModel *model)
 
 MarbleMap::~MarbleMap()
 {
-    // Some basic initializations.
-    d->m_width  = 0;
-    d->m_height = 0;
-
     if ( d->m_modelIsOwned )
         delete d->m_model;
     delete d;
@@ -254,35 +227,30 @@ MapQuality MarbleMap::mapQuality() const
 
 void MarbleMap::setSize( int width, int height )
 {
-    d->m_width  = width;
-    d->m_height = height;
-
-    d->doResize();
+    d->m_viewParams.setSize( width, height );
     emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
+
+    setNeedsUpdate();
 }
 
 void MarbleMap::setSize( const QSize& size )
 {
-    d->m_width  = size.width();
-    d->m_height = size.height();
-
-    d->doResize();
-    emit visibleLatLonAltBoxChanged( d->m_viewParams.viewport()->viewLatLonAltBox() );
+    setSize( size.width(), size.height() );
 }
 
 QSize MarbleMap::size() const
 {
-    return QSize( d->m_width, d->m_height );
+    return QSize( d->m_viewParams.width(), d->m_viewParams.height() );
 }
 
 int  MarbleMap::width() const
 {
-    return d->m_width;
+    return d->m_viewParams.width();
 }
 
 int  MarbleMap::height() const
 {
-    return d->m_height;
+    return d->m_viewParams.height();
 }
 
 Quaternion MarbleMap::planetAxis() const

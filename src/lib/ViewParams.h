@@ -105,11 +105,18 @@ class MARBLE_EXPORT ViewParams
     int width() const;
     int height() const;
 
+    /**
+     * @brief Sets the size of the viewport and the sizes of
+     * canvasImage and coastImage.
+     *
+     * @param width new width of viewport
+     * @param height new height of viewport
+     */
+    void setSize( int width, int height );
+
     QImage * canvasImage() const;
-    void setCanvasImage( QImage * const );
 
     QImage * coastImage() const;
-    void setCoastImage( QImage * const );
 
     bool showGps() const;
     void setShowGps( bool );
