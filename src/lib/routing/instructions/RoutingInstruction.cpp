@@ -382,7 +382,7 @@ QTextStream& operator<<( QTextStream& stream, const RoutingInstruction &i )
         for ( int j = 0; j < maxElement; ++j ) {
             stream << points[j].point().lat() << ',';
             stream << points[j].point().lon() << ',';
-            stream << points[j].junctionType() << ',';
+            stream << points[j].junctionTypeRaw() << ',';
             stream << points[j].roadType() << ',';
             stream << points[j].secondsRemaining() << ',';
             if ( !j ) {
