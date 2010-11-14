@@ -42,6 +42,12 @@ class ControlView : public QWidget
     explicit ControlView( QWidget * = 0 );
     virtual ~ControlView();
 
+    /**
+      * Returns the version of the Marble applications (which differs from
+      * the Marble library version).
+      */
+    static QString applicationVersion();
+
     MarbleWidget      *marbleWidget()  const { return m_marbleWidget; }
     MarbleControlBox  *marbleControl() const { return m_control;      }
 

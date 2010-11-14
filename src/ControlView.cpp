@@ -86,6 +86,11 @@ ControlView::~ControlView()
     delete m_mapThemeManager;
 }
 
+QString ControlView::applicationVersion()
+{
+    return "PRE-0.11.0 SVN";
+}
+
 void ControlView::zoomIn()
 {
     m_marbleWidget->zoomIn();

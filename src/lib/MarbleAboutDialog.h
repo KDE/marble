@@ -35,6 +35,12 @@ class MARBLE_EXPORT MarbleAboutDialog : public QDialog
     explicit MarbleAboutDialog(QWidget *parent = 0);
     ~MarbleAboutDialog();
 
+    /**
+      * Set the application title (usually name and version) to show
+      * The default application title is 'Marble Virtual Globe'
+      */
+    void setApplicationTitle( const QString &title );
+
  private Q_SLOTS:
     void loadPageContents( int idx );
 

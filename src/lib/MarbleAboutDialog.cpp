@@ -47,7 +47,6 @@ public:
     bool licenseLoaded;
 };
 
-
 MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
     : QDialog( parent ),
       d( new MarbleAboutDialogPrivate )
@@ -66,7 +65,8 @@ MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
         d->uiWidget.m_pMarbleLogoLabel->setPixmap( 
                 QPixmap( MarbleDirs::path("svg/marble-logo-72dpi.png") ) );
     }
-    d->uiWidget.m_pMarbleVersionLabel->setText( tr("Version %1").arg(MARBLE_VERSION_STRING) );
+    setApplicationTitle( QObject::tr( "Marble Virtual Globe" ) );
+    d->uiWidget.m_pMarbleVersionLabel->setText( tr( "Using Marble Library version %1" ).arg( MARBLE_VERSION_STRING ) );
 
     connect( d->uiWidget.tabWidget, SIGNAL( currentChanged( int ) ), 
              this, SLOT( loadPageContents( int ) ) );
@@ -256,6 +256,11 @@ void MarbleAboutDialog::loadPageContents( int idx )
         format.setMargin(12);
         browser->document()->rootFrame()->setFrameFormat( format );
     }
+}
+
+void MarbleAboutDialog::setApplicationTitle( const QString &title )
+{
+    d->uiWidget.m_pMarbleTitleLabel->setText( "<b>" + title + "</b>" );
 }
 
 }

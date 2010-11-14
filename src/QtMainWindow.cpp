@@ -751,6 +751,7 @@ void MainWindow::enterWhatsThis()
 void MainWindow::aboutMarble()
 {
     MarbleAboutDialog dlg(this);
+    dlg.setApplicationTitle( tr( "Marble Virtual Globe %1" ).arg( ControlView::applicationVersion() ) );
     dlg.exec();
 }
 
