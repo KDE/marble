@@ -280,7 +280,7 @@
          <sect1 id="routing-profiles">
          <title>Route Profiles</title>
          <para>
-           Which route to choose depends on the type of vehicle you plan to use (if any). You can tell &marble; about this and other preferences using route profiles. Each profile contains the settings for a certain routing scenario. On the first start, &marble; creates four common profiles for you: <guilabel>Car (fastest)</guilabel>, <guilabel>Car (shortest)</guilabel>, <guilabel>Bike</guilabel> and <guilabel>Pedestrian</guilabel>.
+           Which route to choose depends on the type of vehicle you plan to use (if any). You can tell &marble; about this and other preferences using route profiles. Each profile contains the settings for a certain routing scenario. On the first start, &marble; creates four common profiles for you: <guilabel>Car (fastest)</guilabel>, <guilabel>Car (shortest)</guilabel>, <guilabel>Bike</guilabel>, and <guilabel>Pedestrian</guilabel>.
          </para>             
          <para>
            The examples in the previous sections used the <guilabel>Car (fastest)</guilabel> profile. Let's revisit the last route with a different profile: Select the <guilabel>Pedestrian</guilabel> option in the <guilabel>Profile</guilabel> combo box. The route now looks like this:
@@ -306,7 +306,7 @@
              </mediaobject>
          </screenshot>         
          <para>
-             The left side let's you configure which routing backends are queried for routes. Up to five backends are supported by &marble;, two online routers and three offline routers. Online routing requires an Internet connection to query a route. Offline routing works without an Internet connection, but requires you to download and install offline routing maps in advance. The supported routing backends are
+             The left side lets you to configure which routing backends are queried for routes. Up to five backends are supported by &marble;, two online routers and three offline routers. Online routing requires an Internet connection to query a route. Offline routing works without an Internet connection, but requires you to download and install offline routing maps in advance. The supported routing backends are
          </para>
          <itemizedlist>
              <listitem>
