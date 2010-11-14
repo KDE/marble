@@ -1,5 +1,5 @@
 //
-// This file is part of the Marble Desktop Globe.
+// This file is part of the Marble Virtual Globe.
 //
 // the source code.
 //

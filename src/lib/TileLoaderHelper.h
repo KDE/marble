@@ -1,5 +1,5 @@
 /**
- * This file is part of the Marble Desktop Globe.
+ * This file is part of the Marble Virtual Globe.
  *
  * Copyright 2005-2007 Torsten Rahn <tackat@kde.org>
  * Copyright 2007      Inge Wallin  <ingwa@kde.org>

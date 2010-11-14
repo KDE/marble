@@ -1,7 +1,7 @@
 // Copyright 2009 Henry de Valence <hdevalence@gmail.com>
 // Copyright 2009 David Roberts <dvdr18@gmail.com>
 //
-// This file is part of the Marble Desktop Globe.
+// This file is part of the Marble Virtual Globe.
 //
 // This program is free software licensed under the GNU LGPL. You can
 // find a copy of this license in LICENSE.txt in the top directory of

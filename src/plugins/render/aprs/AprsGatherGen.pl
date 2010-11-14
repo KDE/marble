@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# This file is part of the Marble Desktop Globe.
+# This file is part of the Marble Virtual Globe.
 #
 # This program is free software licensed under the GNU LGPL. You can
 # find a copy of this license in LICENSE.txt in the top directory of
@@ -11,7 +11,7 @@
 
 print "
 //
-// This file is part of the Marble Desktop Globe.
+// This file is part of the Marble Virtual Globe.
 //
 // This program is free software licensed under the GNU LGPL. You can
 // find a copy of this license in LICENSE.txt in the top directory of
@@ -100,7 +100,7 @@ foreach my $chr (ord('!') .. ord('~')) {
 }
 #!/usr/bin/perl
 
-# This file is part of the Marble Desktop Globe.
+# This file is part of the Marble Virtual Globe.
 #
 # This program is free software licensed under the GNU LGPL. You can
 # find a copy of this license in LICENSE.txt in the top directory of
@@ -111,7 +111,7 @@ foreach my $chr (ord('!') .. ord('~')) {
 
 print "
 //
-// This file is part of the Marble Desktop Globe.
+// This file is part of the Marble Virtual Globe.
 //
 // This program is free software licensed under the GNU LGPL. You can
 // find a copy of this license in LICENSE.txt in the top directory of
