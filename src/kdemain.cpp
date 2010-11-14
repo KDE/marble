@@ -59,8 +59,8 @@ QString readGraphicsSystem( int argc, char *argv[], const KAboutData& aboutData 
 
 int main ( int argc, char *argv[] )
 {
-    KAboutData aboutData( "marble", 0, 
-                          ki18n( "Marble Desktop Globe" ),
+    KAboutData aboutData( "marble", 0,
+                          ki18n( "Marble Virtual Globe" ),
                           ControlView::applicationVersion().toLatin1(),
                           ki18n( "A World Atlas." ),
                           KAboutData::License_LGPL, ki18n( "(c) 2007, 2008, 2009, 2010" ),

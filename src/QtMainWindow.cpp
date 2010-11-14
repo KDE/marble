@@ -101,7 +101,7 @@ MainWindow::MainWindow(const QString& marbleDataPath, QWidget *parent) :
 
     m_controlView = new ControlView( this );
 
-    setWindowTitle( tr("Marble - Desktop Globe") );
+    setWindowTitle( tr("Marble - Virtual Globe") );
     setWindowIcon( QIcon(":/icons/marble.png") );
     setCentralWidget( m_controlView );
 
@@ -244,9 +244,9 @@ void MainWindow::createActions()
      m_reloadAct->setStatusTip(tr("Reload Current Map"));
      connect(m_reloadAct, SIGNAL(triggered()), this, SLOT(reload()));
 
-     m_handbookAct = new QAction( QIcon(":/icons/help-contents.png"), tr("Marble Desktop Globe &Handbook"), this);
+     m_handbookAct = new QAction( QIcon(":/icons/help-contents.png"), tr("Marble Virtual Globe &Handbook"), this);
      m_handbookAct->setShortcut(tr("F1"));
-     m_handbookAct->setStatusTip(tr("Show the Handbook for Marble Desktop Globe"));
+     m_handbookAct->setStatusTip(tr("Show the Handbook for Marble Virtual Globe"));
      connect(m_handbookAct, SIGNAL(triggered()), this, SLOT(handbook()));
 
      m_whatsThisAct = new QAction( QIcon(":/icons/help-whatsthis.png"), tr("What's &This"), this);
@@ -254,7 +254,7 @@ void MainWindow::createActions()
      m_whatsThisAct->setStatusTip(tr("Show a detailed explanation of the action."));
      connect(m_whatsThisAct, SIGNAL(triggered()), this, SLOT(enterWhatsThis()));
 
-     m_aboutMarbleAct = new QAction( QIcon(":/icons/marble.png"), tr("&About Marble Desktop Globe"), this);
+     m_aboutMarbleAct = new QAction( QIcon(":/icons/marble.png"), tr("&About Marble Virtual Globe"), this);
      m_aboutMarbleAct->setStatusTip(tr("Show the application's About Box"));
      connect(m_aboutMarbleAct, SIGNAL(triggered()), this, SLOT(aboutMarble()));
 

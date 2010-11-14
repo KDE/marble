@@ -52,7 +52,7 @@ namespace Marble
 ControlView::ControlView( QWidget *parent )
    : QWidget( parent )
 {
-    setWindowTitle( tr( "Marble - Desktop Globe" ) );
+    setWindowTitle( tr( "Marble - Virtual Globe" ) );
 
     resize( 680, 640 );
 
