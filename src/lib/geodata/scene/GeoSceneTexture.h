@@ -59,7 +59,7 @@ class GeoSceneTexture : public GeoSceneAbstractDataset
     QString installMap() const;
     void setInstallMap( const QString& installMap );
 
-    void setStorageLayout( StorageLayout );
+    void setStorageLayout( const StorageLayout );
 
     void setServerLayout( const ServerLayout * );
 
