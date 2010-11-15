@@ -24,13 +24,14 @@ namespace Marble {
 
 
 RoutingProfileSettingsDialog::RoutingProfileSettingsDialog( PluginManager *pluginManager, RoutingProfilesModel *profilesModel, QWidget* parent )
-    : QDialog( parent ), m_pluginManager( pluginManager ), m_profilesModel ( profilesModel )
+    : QDialog( parent ), m_pluginManager( pluginManager ), 
+    m_profilesModel ( profilesModel ), m_dialog( 0 ), m_dialogLayout( 0 )
 {
     m_ui = new Ui_RoutingProfileSettingsDialog();
     m_ui->setupUi( this );
     bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
     if ( smallScreen ) {
-      setMaximumWidth( 800 );
+      setMinimumHeight( 480 );
     }
 
     QList<RunnerPlugin*> allPlugins = pluginManager->runnerPlugins();
@@ -54,6 +55,7 @@ RoutingProfileSettingsDialog::RoutingProfileSettingsDialog( PluginManager *plugi
     connect ( m_ui->buttonBox, SIGNAL( accepted() ), this, SLOT( accept() ) );
     connect ( m_ui->buttonBox, SIGNAL( rejected() ), this, SLOT( reject() ) );
 
+    connect( m_ui->configureButton, SIGNAL( clicked() ), this, SLOT( openConfigDialog() ) );
 }
 
 RoutingProfileSettingsDialog::~RoutingProfileSettingsDialog()
@@ -73,7 +75,8 @@ void RoutingProfileSettingsDialog::updateConfigWidget( )
     RunnerPlugin *plugin = m_plugins.at( current.row() );
     QWidget* configWidget = m_configWidgets[plugin];
     if ( configWidget ) {
-        m_ui->settingsStack->setCurrentWidget( configWidget );
+        bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+        m_ui->settingsStack->setCurrentWidget( smallScreen ? m_ui->configurePage : configWidget );
         QStandardItem *item = m_servicesModel->invisibleRootItem()->child( current.row() );
         m_ui->settingsStack->setEnabled( item->checkState() == Qt::Checked );
     } else {
@@ -125,6 +128,35 @@ void RoutingProfileSettingsDialog::editProfile( int profileIndex )
     m_profilesModel->setProfilePluginSettings( profileIndex, pluginSettings );
 }
 
+void RoutingProfileSettingsDialog::openConfigDialog()
+{
+    QModelIndex current = m_ui->services->selectionModel()->currentIndex();
+    if ( current.isValid() ) {
+        RunnerPlugin *plugin = m_plugins.at( current.row() );
+
+        if ( !m_dialog ) {
+            m_dialog = new QDialog( this );
+
+            QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok );
+            connect( buttonBox, SIGNAL( accepted() ), m_dialog, SLOT( accept() ) );
+
+            m_dialogLayout = new QHBoxLayout();
+            m_dialogLayout->addWidget( m_configWidgets[plugin] );
+            m_dialogLayout->addWidget( buttonBox );
+
+            m_dialog->setLayout( m_dialogLayout );
+            m_dialog->setMinimumHeight( 480 );
+        } else {
+            m_dialogLayout->insertWidget( 0, m_configWidgets[plugin] );
+        }
+
+        m_configWidgets[plugin]->show();
+        m_dialog->setWindowTitle( plugin->name() );
+        m_dialog->exec();
+        m_configWidgets[plugin]->hide();
+        m_dialogLayout->removeWidget( m_configWidgets[plugin] );
+    }
+}
 
 }
 

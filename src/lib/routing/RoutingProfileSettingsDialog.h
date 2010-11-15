@@ -18,6 +18,7 @@
 
 class QModelIndex;
 class QStandardItemModel;
+class QHBoxLayout;
 class Ui_RoutingProfileSettingsDialog;
 
 namespace Marble {
@@ -38,6 +39,8 @@ public:
 private slots:
     void updateConfigWidget();
 
+    void openConfigDialog();
+
 private:
     PluginManager *m_pluginManager;
     RoutingProfilesModel *m_profilesModel;
@@ -47,6 +50,9 @@ private:
 
     Ui_RoutingProfileSettingsDialog *m_ui;
     QStandardItemModel *m_servicesModel;
+
+    QDialog* m_dialog;
+    QHBoxLayout* m_dialogLayout;
 };
 
 }
