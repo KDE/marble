@@ -124,7 +124,7 @@ QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
     int defaultOffset = 500;
     m_routeOffsetSpinBox->setValue( defaultOffset );
     m_routeOffsetSpinBox->setSingleStep( 100 );
-    m_routeOffsetSpinBox->setSuffix( tr( "m" ) );
+    m_routeOffsetSpinBox->setSuffix( " m" );
     m_routeOffsetSpinBox->setDecimals( 0 );
     m_routeOffsetSpinBox->setAlignment( Qt::AlignRight );
 
@@ -592,7 +592,7 @@ QVector<TileCoordsPyramid> DownloadRegionDialog::routeRegion() const
     int const tileHeight = d->m_textureLayer->tileSize().height();
 
     qreal offset = d->m_routeOffsetSpinBox->value();
-    if( d->m_routeOffsetSpinBox->suffix() == "KM") {
+    if( d->m_routeOffsetSpinBox->suffix() == " km") {
         offset *= KM2METER;
     }
     qreal radius = d->m_model->planetRadius();
@@ -674,14 +674,14 @@ void DownloadRegionDialog::setOffsetUnit()
     qreal offset = d->m_routeOffsetSpinBox->value();
 
     if( offset >= 1100 ) {
-        d->m_routeOffsetSpinBox->setSuffix( tr( "KM" ) );
+        d->m_routeOffsetSpinBox->setSuffix( " km" );
         d->m_routeOffsetSpinBox->setRange( minimumRouteOffset * METER2KM, maximumRouteOffset * METER2KM );
         d->m_routeOffsetSpinBox->setDecimals( 1 );
         d->m_routeOffsetSpinBox->setValue( offset * METER2KM );
         d->m_routeOffsetSpinBox->setSingleStep( 0.1 );
     }
-    else if( offset <= 1 && d->m_routeOffsetSpinBox->suffix() == "KM" ) {
-        d->m_routeOffsetSpinBox->setSuffix( tr( "m" ) );
+    else if( offset <= 1 && d->m_routeOffsetSpinBox->suffix() == " km" ) {
+        d->m_routeOffsetSpinBox->setSuffix( " m" );
         d->m_routeOffsetSpinBox->setRange( minimumRouteOffset, maximumRouteOffset );
         d->m_routeOffsetSpinBox->setDecimals( 0 );
         d->m_routeOffsetSpinBox->setValue( offset * KM2METER );
