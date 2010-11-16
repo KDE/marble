@@ -69,6 +69,7 @@ public:
     LatLonBoxWidget * m_latLonBoxWidget;
     TileLevelRangeWidget * m_tileLevelRangeWidget;
     QRadioButton *m_routeDownloadMethodButton;
+    QLabel* m_routeOffsetLabel;
     QDoubleSpinBox *m_routeOffsetSpinBox;
     QLabel * m_tilesCountLabel;
     QLabel * m_tileSizeInfo;
@@ -90,6 +91,7 @@ DownloadRegionDialog::Private::Private( MarbleModel * const model,
       m_latLonBoxWidget( new LatLonBoxWidget ),
       m_tileLevelRangeWidget( new TileLevelRangeWidget ),
       m_routeDownloadMethodButton( 0 ),
+      m_routeOffsetLabel( 0 ),
       m_routeOffsetSpinBox( 0 ),
       m_tilesCountLabel( 0 ),
       m_tileSizeInfo( 0 ),
@@ -126,8 +128,8 @@ QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
     m_routeOffsetSpinBox->setDecimals( 0 );
     m_routeOffsetSpinBox->setAlignment( Qt::AlignRight );
 
-    QLabel * const offsetLabel = new QLabel( tr( "Offset from route:" ) );
-    offsetLabel->setAlignment( Qt::AlignHCenter );
+    m_routeOffsetLabel = new QLabel( tr( "Offset from route:" ) );
+    m_routeOffsetLabel->setAlignment( Qt::AlignHCenter );
 
     connect( m_visibleRegionMethodButton, SIGNAL( toggled( bool ) ),
              m_dialog, SLOT( toggleSelectionMethod() ) );
@@ -142,7 +144,7 @@ QWidget * DownloadRegionDialog::Private::createSelectionMethodBox()
              m_dialog, SLOT( updateRouteDialog() ) );
 
     QHBoxLayout *routeOffsetLayout = new QHBoxLayout;
-    routeOffsetLayout->addWidget( offsetLabel );
+    routeOffsetLayout->addWidget( m_routeOffsetLabel );
     routeOffsetLayout->insertSpacing( 0, 25 );
     routeOffsetLayout->addWidget( m_routeOffsetSpinBox );
 
@@ -323,17 +325,20 @@ void DownloadRegionDialog::setSelectionMethod( SelectionMethod const selectionMe
     switch ( selectionMethod ) {
     case VisibleRegionMethod:
         d->m_visibleRegionMethodButton->setChecked( true );
+        d->m_routeOffsetLabel->setEnabled( false );
         d->m_routeOffsetSpinBox->setEnabled( false );
         d->m_latLonBoxWidget->setEnabled( false );
         setSpecifiedLatLonAltBox( d->m_visibleRegion );
         break;
     case SpecifiedRegionMethod:
         d->m_specifiedRegionMethodButton->setChecked( true );
+        d->m_routeOffsetLabel->setEnabled( false );
         d->m_routeOffsetSpinBox->setEnabled( false );
         d->m_latLonBoxWidget->setEnabled( true );
         break;
     case RouteDownloadMethod:
         d->m_routeDownloadMethodButton->setChecked( true );
+        d->m_routeOffsetLabel->setEnabled( true );
         d->m_routeOffsetSpinBox->setEnabled( true );
         d->m_latLonBoxWidget->setEnabled( false );
     }
