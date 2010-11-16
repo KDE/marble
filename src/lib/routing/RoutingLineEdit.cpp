@@ -69,7 +69,7 @@ void RoutingLineEdit::updateClearButtonIcon( const QString& text )
     }
 
     QString const direction = layoutDirection() == Qt::LeftToRight ? "rtl" : "ltr";
-    int const size = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 22 : 16;
+    int const size = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ? 32 : 16;
     QPixmap pixmap = QPixmap( QString( ":/icons/%1x%1/edit-clear-locationbar-%2.png").arg( size ).arg( direction ) );
     d->m_clearButton->setPixmap( pixmap );
 }
