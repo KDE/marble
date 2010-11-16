@@ -80,6 +80,8 @@ public:
 
     QString richText( const QString &source, int fontSize ) const;
 
+    QString fuzzyDistance( qreal distanceMeter ) const;
+
 private:
     RoutingPlugin* m_parent;
 };
@@ -99,6 +101,25 @@ QString RoutingPluginPrivate::richText( const QString &source, int size ) const
 {
     QString const fontSize = size > 0 ? "+" + fontSize : QString::number( size );
     return QString( "<font size=\"%1\" color=\"black\">%2</font>" ).arg( fontSize ).arg( source );
+}
+
+QString RoutingPluginPrivate::fuzzyDistance( qreal length ) const
+{
+    QString distanceUnit = "m";
+    int precision = 0;
+    if ( length >= 1000 ) {
+        length /= 1000;
+        distanceUnit = "km";
+        precision = 1;
+    } else if ( length >= 200 ) {
+        length = 50 * qRound( length / 50 );
+    } else if ( length >= 100 ) {
+        length = 25 * qRound( length / 25 );
+    } else {
+        length = 10 * qRound( length / 10 );
+    }
+
+    return QString( "%1 %2" ).arg( length, 0, 'f', precision ).arg( distanceUnit );
 }
 
 void RoutingPluginPrivate::updateZoomButtons( int zoomValue )
@@ -206,10 +227,10 @@ void RoutingPluginPrivate::toggleGuidanceMode( bool enabled )
 
 void RoutingPluginPrivate::updateDestinationInformation( qint32 remainingTime, qreal remainingDistance )
 {
+    Q_UNUSED( remainingTime );
+
     if ( m_routingModel->rowCount() != 0 ) {
         qreal distanceLeft = m_routingModel->nextInstructionDistance();
-        qint32 minutesLeft =  qint32( remainingTime * SEC2MIN ) % 60;
-        qint32 hoursLeft =  qint32( remainingTime * SEC2HOUR );
 
         m_nearNextInstruction = distanceLeft < thresholdDistance;
         int fontSize = 1;
@@ -217,15 +238,7 @@ void RoutingPluginPrivate::updateDestinationInformation( qint32 remainingTime, q
             fontSize = m_nearNextInstruction ? 1 : -1;
         }
 
-        if( hoursLeft ) {
-            QString text = richText( "%1:%2", -1 ).arg( hoursLeft ).arg( minutesLeft );
-            m_widget.destinationDistanceLabel->setText( text );
-        } else if( minutesLeft ) {
-            QString text = richText( "%1 min", -1 ).arg( minutesLeft );
-            m_widget.destinationDistanceLabel->setText( text );
-        } else {
-            m_widget.destinationDistanceLabel->setText( richText( "Soon", -1 ) );
-        }
+        m_widget.destinationDistanceLabel->setText( richText( fuzzyDistance( remainingDistance ), -1 ) );
 
         m_widget.instructionIconLabel->setEnabled( m_nearNextInstruction );
         m_widget.progressBar->setMaximum( thresholdDistance );
