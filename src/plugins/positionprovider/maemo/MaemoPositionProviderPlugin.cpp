@@ -129,7 +129,7 @@ void MaemoPositionProviderPlugin::initialize()
     d->m_control = location_gpsd_control_get_default();
     d->m_device = reinterpret_cast<LocationGPSDevice*>( g_object_new( LOCATION_TYPE_GPS_DEVICE, NULL ) );
     g_object_set( G_OBJECT( d->m_control ),
-                 "preferred-method", LOCATION_METHOD_GNSS,
+                 "preferred-method", LOCATION_METHOD_USER_SELECTED,
                  "preferred-interval", LOCATION_INTERVAL_1S,
                  NULL);
     location_gpsd_control_start( d->m_control );
