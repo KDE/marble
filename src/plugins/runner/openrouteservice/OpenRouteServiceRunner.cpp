@@ -56,7 +56,7 @@ void OpenRouteServiceRunner::retrieveRoute( RouteRequest *route )
     if ( !m_networkAccessManager ) {
         m_networkAccessManager = new QNetworkAccessManager;
         connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
-                 this, SLOT( retrieveData( QNetworkReply * ) ) );
+                 this, SLOT( retrieveData( QNetworkReply * ) ), Qt::DirectConnection );
     }
 
     GeoDataCoordinates source = route->source();
@@ -94,7 +94,7 @@ void OpenRouteServiceRunner::retrieveRoute( RouteRequest *route )
 
     QNetworkReply *reply = m_networkAccessManager->post( QNetworkRequest( url ), request.toLatin1() );
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-             this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
+             this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
 }
 
 void OpenRouteServiceRunner::retrieveData( QNetworkReply *reply )

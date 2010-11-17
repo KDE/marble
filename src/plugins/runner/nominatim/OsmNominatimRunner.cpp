@@ -58,7 +58,7 @@ void OsmNominatimRunner::search( const QString &searchTerm )
 
     m_manager = new QNetworkAccessManager;
     connect(m_manager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(handleSearchResult(QNetworkReply*)));
+            this, SLOT(handleSearchResult(QNetworkReply*)), Qt::DirectConnection);
 
     QNetworkRequest request;
     request.setUrl(QUrl(url));
@@ -66,7 +66,7 @@ void OsmNominatimRunner::search( const QString &searchTerm )
 
     QNetworkReply *reply = m_manager->get(QNetworkRequest(request));
     connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
-            this, SLOT(returnNoResults()));
+            this, SLOT(returnNoResults()), Qt::DirectConnection);
 }
 
 void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
@@ -81,7 +81,7 @@ void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates
 
     m_manager = new QNetworkAccessManager;
     connect(m_manager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(handleReverseGeocodingResult(QNetworkReply*)));
+            this, SLOT(handleReverseGeocodingResult(QNetworkReply*)), Qt::DirectConnection);
 
     QNetworkRequest request;
     request.setUrl(QUrl(url));

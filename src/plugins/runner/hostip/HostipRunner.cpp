@@ -65,10 +65,10 @@ void HostipRunner::slotLookupFinished(const QHostInfo &info)
 
         QNetworkAccessManager *manager = new QNetworkAccessManager( this );
         connect(manager, SIGNAL( finished( QNetworkReply* ) ),
-                this, SLOT( slotRequestFinished( QNetworkReply* ) ) );
+                this, SLOT( slotRequestFinished( QNetworkReply* ) ), Qt::DirectConnection );
         QNetworkReply *reply = manager->get( QNetworkRequest(QUrl( query) ) );
         connect(reply, SIGNAL( error( QNetworkReply::NetworkError) ),
-                this, SLOT( slotNoResults() ) );
+                this, SLOT( slotNoResults() ), Qt::DirectConnection );
     }
     else
       slotNoResults();

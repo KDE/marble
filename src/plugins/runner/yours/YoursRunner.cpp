@@ -60,7 +60,7 @@ void YoursRunner::retrieveRoute( RouteRequest *route )
     {
         m_networkAccessManager = new QNetworkAccessManager;
         connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),
-                 this, SLOT( retrieveData( QNetworkReply* ) ) );
+                 this, SLOT( retrieveData( QNetworkReply* ) ), Qt::DirectConnection );
     }
 
     GeoDataCoordinates source = route->source();
@@ -82,7 +82,7 @@ void YoursRunner::retrieveRoute( RouteRequest *route )
 
     QNetworkReply *reply = m_networkAccessManager->get( QNetworkRequest( QUrl( request ) ) );
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-             this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
+             this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
 }
 
 void YoursRunner::retrieveData( QNetworkReply *reply )
