@@ -137,7 +137,7 @@ void RoutingProfileSettingsDialog::openConfigDialog()
         if ( !m_dialog ) {
             m_dialog = new QDialog( this );
 
-            QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok );
+            QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Vertical );
             connect( buttonBox, SIGNAL( accepted() ), m_dialog, SLOT( accept() ) );
 
             m_dialogLayout = new QHBoxLayout();
