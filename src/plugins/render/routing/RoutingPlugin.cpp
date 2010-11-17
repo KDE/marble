@@ -238,7 +238,8 @@ void RoutingPluginPrivate::updateDestinationInformation( qint32 remainingTime, q
             fontSize = m_nearNextInstruction ? 1 : -1;
         }
 
-        m_widget.destinationDistanceLabel->setText( richText( fuzzyDistance( remainingDistance ), -1 ) );
+        QString pixmapHtml = "<img src=\":/icons/flag.png\" /><br />";
+        m_widget.destinationDistanceLabel->setText( pixmapHtml + richText( fuzzyDistance( remainingDistance ), -1 ) );
 
         m_widget.instructionIconLabel->setEnabled( m_nearNextInstruction );
         m_widget.progressBar->setMaximum( thresholdDistance );
