@@ -18,15 +18,22 @@
 ;       misrepresented as being the original software.
  
 ;    3. This notice may not be removed or altered from any source distribution.
- 
-!define setup "marble-setup-0.6.0.exe"
+
+!ifndef setup
+!define setup "marble-setup-0.10.3.exe"
+!endif
  
 ; change this to wherever the files to be packaged reside
+!ifndef srcdir
 !define srcdir "C:\Programme\marble"
+!endif
  
 !define company "KDE"
  
-!define prodname "Marble 0.6.0"
+!ifndef prodname
+!define prodname "Marble 0.10.3"
+!endif
+
 !define exec "marble.exe"
  
 ; optional stuff
