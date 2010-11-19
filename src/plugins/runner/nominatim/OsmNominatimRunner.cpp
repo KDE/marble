@@ -29,14 +29,21 @@ namespace Marble
 {
 
 OsmNominatimRunner::OsmNominatimRunner( QObject *parent ) :
-        MarbleAbstractRunner( parent ), m_manager(0)
+    MarbleAbstractRunner( parent ), m_searchManager( 0 ),
+    m_reverseGeocodingManager( 0 )
 {
     // nothing to do
 }
 
 OsmNominatimRunner::~OsmNominatimRunner()
 {
-    m_manager->deleteLater();
+    if ( m_searchManager ) {
+        m_searchManager->deleteLater();
+    }
+
+    if ( m_reverseGeocodingManager ) {
+        m_reverseGeocodingManager->deleteLater();
+    }
 }
 
 GeoDataFeature::GeoDataVisualCategory OsmNominatimRunner::category() const
@@ -56,15 +63,17 @@ void OsmNominatimRunner::search( const QString &searchTerm )
     QString query = "q=%1&format=xml&addressdetails=0&accept-language=%2";
     QString url = QString(base + query).arg(searchTerm).arg(MarbleLocale::languageCode());
 
-    m_manager = new QNetworkAccessManager;
-    connect(m_manager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(handleSearchResult(QNetworkReply*)), Qt::DirectConnection);
+    if ( !m_searchManager ) {
+        m_searchManager = new QNetworkAccessManager;
+        connect(m_searchManager, SIGNAL(finished(QNetworkReply*)),
+                this, SLOT(handleSearchResult(QNetworkReply*)), Qt::DirectConnection);
+    }
 
     QNetworkRequest request;
     request.setUrl(QUrl(url));
     request.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
 
-    QNetworkReply *reply = m_manager->get(QNetworkRequest(request));
+    QNetworkReply *reply = m_searchManager->get(request);
     connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
             this, SLOT(returnNoResults()), Qt::DirectConnection);
 }
@@ -79,15 +88,17 @@ void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates
     double lat = coordinates.latitude( GeoDataCoordinates::Degree );
     QString url = QString( base + query ).arg( lon ).arg( lat ).arg( MarbleLocale::languageCode() );
 
-    m_manager = new QNetworkAccessManager;
-    connect(m_manager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(handleReverseGeocodingResult(QNetworkReply*)), Qt::DirectConnection);
+    if ( !m_reverseGeocodingManager ) {
+        m_reverseGeocodingManager = new QNetworkAccessManager;
+        connect(m_reverseGeocodingManager, SIGNAL(finished(QNetworkReply*)),
+                this, SLOT(handleReverseGeocodingResult(QNetworkReply*)), Qt::DirectConnection);
+    }
 
     QNetworkRequest request;
     request.setUrl(QUrl(url));
     request.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
 
-    m_manager->get(QNetworkRequest(request));
+    m_reverseGeocodingManager->get(request);
 }
 
 void OsmNominatimRunner::handleSearchResult( QNetworkReply* reply )

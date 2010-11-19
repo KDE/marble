@@ -53,7 +53,9 @@ private Q_SLOTS:
 private:
     void addData( const QDomNodeList &node, const QString &key, GeoDataExtendedData *extendedData );
 
-    QNetworkAccessManager* m_manager;
+    QNetworkAccessManager* m_searchManager;
+
+    QNetworkAccessManager* m_reverseGeocodingManager;
 
     GeoDataCoordinates m_coordinates;
 };
