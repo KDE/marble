@@ -27,22 +27,22 @@
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
 #include <QtCore/QBuffer>
+#include <QtCore/QTimer>
 
 namespace Marble
 {
 
 YoursRunner::YoursRunner( QObject *parent ) :
         MarbleAbstractRunner( parent ),
-        m_networkAccessManager( 0 )
+        m_networkAccessManager( new QNetworkAccessManager( this ) )
 {
-    // nothing to do
+    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),
+             this, SLOT( retrieveData( QNetworkReply* ) ) );
 }
 
 YoursRunner::~YoursRunner()
 {
-    if ( m_networkAccessManager ) {
-        m_networkAccessManager->deleteLater();
-    }
+    // nothing to do
 }
 
 GeoDataFeature::GeoDataVisualCategory YoursRunner::category() const
@@ -54,13 +54,6 @@ void YoursRunner::retrieveRoute( RouteRequest *route )
 {
     if ( route->size() < 2 ) {
         return;
-    }
-
-    if ( !m_networkAccessManager )
-    {
-        m_networkAccessManager = new QNetworkAccessManager;
-        connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply* ) ),
-                 this, SLOT( retrieveData( QNetworkReply* ) ), Qt::DirectConnection );
     }
 
     GeoDataCoordinates source = route->source();
@@ -80,9 +73,16 @@ void YoursRunner::retrieveRoute( RouteRequest *route )
     QString request = base + args + preferences;
     // mDebug() << "GET: " << request;
 
-    QNetworkReply *reply = m_networkAccessManager->get( QNetworkRequest( QUrl( request ) ) );
+    m_request = QNetworkRequest( QUrl( request ) );
+    // @todo FIXME Must currently be done in the main thread, see bug 257376
+    QTimer::singleShot( 0, this, SLOT( get() ) );
+}
+
+void YoursRunner::get()
+{
+    QNetworkReply *reply = m_networkAccessManager->get( m_request );
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
-             this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
+             this, SLOT( handleError( QNetworkReply::NetworkError ) ) );
 }
 
 void YoursRunner::retrieveData( QNetworkReply *reply )

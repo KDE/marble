@@ -44,12 +44,16 @@ private Q_SLOTS:
     /** A network error occurred */
     void handleError( QNetworkReply::NetworkError );
 
+    void get();
+
 private:
     GeoDataDocument* parse( const QByteArray &input ) const;
 
     qreal distance( const GeoDataDocument* document ) const;
 
     QNetworkAccessManager *m_networkAccessManager;
+
+    QNetworkRequest m_request;
 };
 
 }

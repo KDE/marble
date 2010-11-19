@@ -16,6 +16,7 @@
 
 #include <QtCore/QString>
 #include <QtNetwork/QHostInfo>
+#include <QtNetwork/QNetworkRequest>
 
 class QNetworkReply;
 class QNetworkAccessManager;
@@ -50,12 +51,22 @@ private Q_SLOTS:
     // No results (or an error)
     void returnNoResults();
 
+    void returnNoReverseGeocodingResult();
+
+    void startSearch();
+
+    void startReverseGeocoding();
+
 private:
     void addData( const QDomNodeList &node, const QString &key, GeoDataExtendedData *extendedData );
 
     QNetworkAccessManager* m_searchManager;
 
     QNetworkAccessManager* m_reverseGeocodingManager;
+
+    QNetworkRequest m_reverseGeocodingRequest;
+
+    QNetworkRequest m_searchRequest;
 
     GeoDataCoordinates m_coordinates;
 };

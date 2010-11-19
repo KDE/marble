@@ -21,6 +21,7 @@
 #include <QtCore/QString>
 #include <QtCore/QVector>
 #include <QtCore/QUrl>
+#include <QtCore/QTimer>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
@@ -29,21 +30,18 @@ namespace Marble
 {
 
 OsmNominatimRunner::OsmNominatimRunner( QObject *parent ) :
-    MarbleAbstractRunner( parent ), m_searchManager( 0 ),
-    m_reverseGeocodingManager( 0 )
+    MarbleAbstractRunner( parent ), m_searchManager( new QNetworkAccessManager (this ) ),
+    m_reverseGeocodingManager( new QNetworkAccessManager ( this ) )
 {
-    // nothing to do
+    connect(m_searchManager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(handleSearchResult(QNetworkReply*)));
+    connect(m_reverseGeocodingManager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(handleReverseGeocodingResult(QNetworkReply*)));
 }
 
 OsmNominatimRunner::~OsmNominatimRunner()
 {
-    if ( m_searchManager ) {
-        m_searchManager->deleteLater();
-    }
-
-    if ( m_reverseGeocodingManager ) {
-        m_reverseGeocodingManager->deleteLater();
-    }
+    // nothing to do
 }
 
 GeoDataFeature::GeoDataVisualCategory OsmNominatimRunner::category() const
@@ -56,6 +54,11 @@ void OsmNominatimRunner::returnNoResults()
     emit searchFinished( QVector<GeoDataPlacemark*>() );
 }
 
+void OsmNominatimRunner::returnNoReverseGeocodingResult()
+{
+    emit reverseGeocodingFinished( m_coordinates, GeoDataPlacemark() );
+}
+
 void OsmNominatimRunner::search( const QString &searchTerm )
 {    
     QString base = "http://nominatim.openstreetmap.org/search?q=%1&format=xml";
@@ -63,19 +66,11 @@ void OsmNominatimRunner::search( const QString &searchTerm )
     QString query = "q=%1&format=xml&addressdetails=0&accept-language=%2";
     QString url = QString(base + query).arg(searchTerm).arg(MarbleLocale::languageCode());
 
-    if ( !m_searchManager ) {
-        m_searchManager = new QNetworkAccessManager;
-        connect(m_searchManager, SIGNAL(finished(QNetworkReply*)),
-                this, SLOT(handleSearchResult(QNetworkReply*)), Qt::DirectConnection);
-    }
+    m_searchRequest.setUrl(QUrl(url));
+    m_searchRequest.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
 
-    QNetworkRequest request;
-    request.setUrl(QUrl(url));
-    request.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
-
-    QNetworkReply *reply = m_searchManager->get(request);
-    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
-            this, SLOT(returnNoResults()), Qt::DirectConnection);
+    // @todo FIXME Must currently be done in the main thread, see bug 257376
+    QTimer::singleShot( 0, this, SLOT( startSearch() ) );
 }
 
 void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates )
@@ -88,17 +83,25 @@ void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates
     double lat = coordinates.latitude( GeoDataCoordinates::Degree );
     QString url = QString( base + query ).arg( lon ).arg( lat ).arg( MarbleLocale::languageCode() );
 
-    if ( !m_reverseGeocodingManager ) {
-        m_reverseGeocodingManager = new QNetworkAccessManager;
-        connect(m_reverseGeocodingManager, SIGNAL(finished(QNetworkReply*)),
-                this, SLOT(handleReverseGeocodingResult(QNetworkReply*)), Qt::DirectConnection);
-    }
+    m_reverseGeocodingRequest.setUrl(QUrl(url));
+    m_reverseGeocodingRequest.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
 
-    QNetworkRequest request;
-    request.setUrl(QUrl(url));
-    request.setRawHeader("User-Agent", TinyWebBrowser::userAgent("Browser", "OsmNominatimRunner") );
+    // @todo FIXME Must currently be done in the main thread, see bug 257376
+    QTimer::singleShot( 0, this, SLOT( startReverseGeocoding() ) );
+}
 
-    m_reverseGeocodingManager->get(request);
+void OsmNominatimRunner::startSearch()
+{
+    QNetworkReply *reply = m_searchManager->get(m_searchRequest);
+    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
+            this, SLOT(returnNoResults()));
+}
+
+void OsmNominatimRunner::startReverseGeocoding()
+{
+    QNetworkReply *reply = m_reverseGeocodingManager->get( m_reverseGeocodingRequest );
+    connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
+            this, SLOT(returnNoReverseGeocodingResult()));
 }
 
 void OsmNominatimRunner::handleSearchResult( QNetworkReply* reply )

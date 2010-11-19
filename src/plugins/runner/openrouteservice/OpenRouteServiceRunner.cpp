@@ -21,6 +21,7 @@
 #include <QtCore/QVector>
 #include <QtCore/QUrl>
 #include <QtCore/QTime>
+#include <QtCore/QTimer>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtXml/QDomDocument>
@@ -30,16 +31,15 @@ namespace Marble
 
 OpenRouteServiceRunner::OpenRouteServiceRunner( QObject *parent ) :
         MarbleAbstractRunner( parent ),
-        m_networkAccessManager( 0 )
+        m_networkAccessManager( new QNetworkAccessManager( this ) )
 {
-    // nothing to do
+    connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
+             this, SLOT( retrieveData( QNetworkReply * ) ) );
 }
 
 OpenRouteServiceRunner::~OpenRouteServiceRunner()
 {
-    if (m_networkAccessManager) {
-        m_networkAccessManager->deleteLater();
-    }
+    // nothing to do
 }
 
 GeoDataFeature::GeoDataVisualCategory OpenRouteServiceRunner::category() const
@@ -51,12 +51,6 @@ void OpenRouteServiceRunner::retrieveRoute( RouteRequest *route )
 {
     if ( route->size() < 2 ) {
         return;
-    }
-
-    if ( !m_networkAccessManager ) {
-        m_networkAccessManager = new QNetworkAccessManager;
-        connect( m_networkAccessManager, SIGNAL( finished( QNetworkReply * ) ),
-                 this, SLOT( retrieveData( QNetworkReply * ) ), Qt::DirectConnection );
     }
 
     GeoDataCoordinates source = route->source();
@@ -91,8 +85,16 @@ void OpenRouteServiceRunner::retrieveRoute( RouteRequest *route )
     // Please refrain from making this URI public. To use it outside the scope
     // of marble you need permission from the openrouteservice.org team.
     QUrl url = QUrl( "http://openls.geog.uni-heidelberg.de/osm/eu/routing" );
+    m_request = QNetworkRequest( url );
+    m_requestData = request.toLatin1();
 
-    QNetworkReply *reply = m_networkAccessManager->post( QNetworkRequest( url ), request.toLatin1() );
+    // @todo FIXME Must currently be done in the main thread, see bug 257376
+    QTimer::singleShot( 0, this, SLOT( get() ) );
+}
+
+void OpenRouteServiceRunner::get()
+{
+    QNetworkReply *reply = m_networkAccessManager->post( m_request, m_requestData );
     connect( reply, SIGNAL( error( QNetworkReply::NetworkError ) ),
              this, SLOT( handleError( QNetworkReply::NetworkError ) ), Qt::DirectConnection );
 }
