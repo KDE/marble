@@ -23,6 +23,7 @@ void RunnerTask::run()
     QObject::connect( &watchdog, SIGNAL( timeout() ), &localEventLoop, SLOT( quit() ) );
     runTask( &localEventLoop );
     watchdog.start( 30 * 1000 );
+    QObject::connect( QCoreApplication::instance(), SIGNAL( aboutToQuit() ), &localEventLoop, SLOT( quit() ) );
     localEventLoop.exec();
 
     if( watchdog.isActive() ) {
