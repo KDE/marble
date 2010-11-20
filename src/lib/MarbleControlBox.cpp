@@ -111,11 +111,11 @@ void MarbleControlBox::addMarbleWidget(MarbleWidget *widget)
 {
     d->m_widget = widget;
 
-    d->m_routingWidget = new RoutingWidget( widget, this );
-
-    //d->uiWidget.toolBox->addItem( d->m_routingWidget, tr( "Routing" ) );
-
-    addItem( d->m_routingWidget, tr( "Routing" ) );
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( !smallScreen ) {
+        d->m_routingWidget = new RoutingWidget( widget, this );
+        addItem( d->m_routingWidget, tr( "Routing" ) );
+    }
 
     d->m_fileViewWidget->setMarbleWidget( widget );
     d->m_legendWidget->setMarbleWidget( widget );
@@ -193,8 +193,10 @@ void MarbleControlBox::setCurrentLocationTabShown( bool show )
 
 void MarbleControlBox::setRoutingTabShown( bool show )
 {
-    QString  title = tr( "Routing" );
-    setWidgetTabShown( d->m_routingWidget, 5, show, title );
+    if ( d->m_routingWidget ) {
+        QString  title = tr( "Routing" );
+        setWidgetTabShown( d->m_routingWidget, 5, show, title );
+    }
 }
 
 void MarbleControlBox::selectTheme( const QString &theme )
@@ -205,8 +207,10 @@ void MarbleControlBox::selectTheme( const QString &theme )
         return;
 
     QString selectedId = d->m_widget->mapTheme()->head()->target();
-    int routingIndex = indexOf( d->m_routingWidget );
-    setItemEnabled( routingIndex, selectedId == "earth" );
+    if ( d->m_routingWidget ) {
+        int routingIndex = indexOf( d->m_routingWidget );
+        setItemEnabled( routingIndex, selectedId == "earth" );
+    }
     int locationIndex = indexOf( d->m_currentLocationWidget );
     if ( locationIndex >= 0 ) {
         setItemEnabled( locationIndex, selectedId == "earth" );
