@@ -58,7 +58,7 @@ void OsmNominatimRunner::returnNoReverseGeocodingResult()
 
 void OsmNominatimRunner::search( const QString &searchTerm )
 {    
-    QString base = "http://nominatim.openstreetmap.org/search?q=%1&format=xml";
+    QString base = "http://nominatim.openstreetmap.org/search?";
     // @todo: Alternative URI with addressdetails=1 could be used for shorther placemark name
     QString query = "q=%1&format=xml&addressdetails=0&accept-language=%2";
     QString url = QString(base + query).arg(searchTerm).arg(MarbleLocale::languageCode());
