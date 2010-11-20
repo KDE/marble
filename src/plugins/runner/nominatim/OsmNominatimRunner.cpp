@@ -30,13 +30,10 @@ namespace Marble
 {
 
 OsmNominatimRunner::OsmNominatimRunner( QObject *parent ) :
-    MarbleAbstractRunner( parent ), m_searchManager( new QNetworkAccessManager (this ) ),
-    m_reverseGeocodingManager( new QNetworkAccessManager ( this ) )
+    MarbleAbstractRunner( parent ), m_manager( new QNetworkAccessManager (this ) )
 {
-    connect(m_searchManager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(handleSearchResult(QNetworkReply*)));
-    connect(m_reverseGeocodingManager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(handleReverseGeocodingResult(QNetworkReply*)));
+    connect(m_manager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(handleResult(QNetworkReply*)));
 }
 
 OsmNominatimRunner::~OsmNominatimRunner()
@@ -92,17 +89,28 @@ void OsmNominatimRunner::reverseGeocoding( const GeoDataCoordinates &coordinates
 
 void OsmNominatimRunner::startSearch()
 {
-    QNetworkReply *reply = m_searchManager->get(m_searchRequest);
+    QNetworkReply *reply = m_manager->get(m_searchRequest);
     connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
             this, SLOT(returnNoResults()));
 }
 
 void OsmNominatimRunner::startReverseGeocoding()
 {
-    QNetworkReply *reply = m_reverseGeocodingManager->get( m_reverseGeocodingRequest );
+    QNetworkReply *reply = m_manager->get( m_reverseGeocodingRequest );
     connect(reply, SIGNAL(error(QNetworkReply::NetworkError)),
             this, SLOT(returnNoReverseGeocodingResult()));
 }
+
+void OsmNominatimRunner::handleResult( QNetworkReply* reply )
+{
+    bool const isSearch = reply->url().path().endsWith( "search" );
+    if ( isSearch ) {
+        handleSearchResult( reply );
+    } else {
+        handleReverseGeocodingResult( reply );
+    }
+}
+
 
 void OsmNominatimRunner::handleSearchResult( QNetworkReply* reply )
 {   

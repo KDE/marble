@@ -42,6 +42,9 @@ public:
     virtual void search( const QString &searchTerm );
 
 private Q_SLOTS:
+    // Forward a result to the search or reverse geocoding handler
+    void handleResult( QNetworkReply* );
+
     // Http search request with nominatim.openstreetmap.org done
     void handleSearchResult( QNetworkReply* );
 
@@ -60,9 +63,7 @@ private Q_SLOTS:
 private:
     void addData( const QDomNodeList &node, const QString &key, GeoDataExtendedData *extendedData );
 
-    QNetworkAccessManager* m_searchManager;
-
-    QNetworkAccessManager* m_reverseGeocodingManager;
+    QNetworkAccessManager* m_manager;
 
     QNetworkRequest m_reverseGeocodingRequest;
 
