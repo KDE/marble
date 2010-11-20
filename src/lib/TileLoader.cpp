@@ -188,8 +188,8 @@ QImage * TileLoader::scaledLowerLevelTile( TileId const & id )
         int const deltaLevel = id.zoomLevel() - level;
         TileId const replacementTileId( id.mapThemeIdHash(), level,
                                         id.x() >> deltaLevel, id.y() >> deltaLevel );
-        mDebug() << "TileLoader::scaledLowerLevelTile" << "trying" << replacementTileId.toString();
         QString const fileName = tileFileName( replacementTileId );
+        mDebug() << "TileLoader::scaledLowerLevelTile" << "trying" << fileName;
         QImage const toScale( fileName );
         if ( !toScale.isNull() ) {
             // which rect to scale?

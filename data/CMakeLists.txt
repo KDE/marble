@@ -58,6 +58,10 @@ maps/earth/citylights/legend/water.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/citylights/legend)
 
 install (FILES
+maps/earth/clouds/0/000000/000000_000000.jpg
+DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/clouds/0/000000)
+
+install (FILES
 maps/earth/srtm/srtm.dgml
 maps/earth/srtm/srtm-preview.png
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/srtm)
