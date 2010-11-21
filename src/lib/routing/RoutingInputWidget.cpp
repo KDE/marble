@@ -286,6 +286,9 @@ void RoutingInputWidget::setPlacemarkModel( MarblePlacemarkModel *model )
 
 void RoutingInputWidget::setTargetPosition( const GeoDataCoordinates &position )
 {
+    if ( d->m_mapInput ) {
+        d->m_mapInput->setChecked( false );
+    }
     d->m_route->setPosition( d->m_index, position );
     d->m_progressTimer.stop();
     emit targetValidityChanged( true );
