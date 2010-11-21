@@ -146,12 +146,14 @@ void OsmNominatimRunner::handleSearchResult( QNetworkReply* reply )
 void OsmNominatimRunner::handleReverseGeocodingResult( QNetworkReply* reply )
 {
     if ( !reply->bytesAvailable() ) {
+        returnNoReverseGeocodingResult();
         return;
     }
 
     QDomDocument xml;
     if ( !xml.setContent( reply->readAll() ) ) {
         mDebug() << "Cannot parse osm nominatim result " << xml.toString();
+        returnNoReverseGeocodingResult();
         return;
     }
 
@@ -178,6 +180,8 @@ void OsmNominatimRunner::handleReverseGeocodingResult( QNetworkReply* reply )
         }
 
         emit reverseGeocodingFinished( m_coordinates, placemark );
+    } else {
+        returnNoReverseGeocodingResult();
     }
 }
 
