@@ -62,6 +62,8 @@ public:
 
     QMutex m_fileMutex;
 
+    bool m_shutdownPositionTracking;
+
     RoutingManagerPrivate( MarbleModel *marbleModel, RoutingManager* manager, QObject *parent );
 
     GeoDataFolder* routeRequest() const;
@@ -83,7 +85,8 @@ RoutingManagerPrivate::RoutingManagerPrivate( MarbleModel *model, RoutingManager
         m_workOffline( false ),
         m_runnerManager( new MarbleRunnerManager( model->pluginManager(), q ) ),
         m_haveRoute( false ), m_adjustNavigation( 0 ),
-        m_guidanceModeEnabled( false )
+        m_guidanceModeEnabled( false ),
+        m_shutdownPositionTracking( false )
 {
     // nothing to do
 }
@@ -339,6 +342,10 @@ void RoutingManager::setGuidanceModeEnabled( bool enabled )
         }
         qDeleteAll( plugins );
         tracking->setPositionProviderPlugin( plugin );
+        d->m_shutdownPositionTracking = true;
+    } else if ( plugin && !enabled && d->m_shutdownPositionTracking ) {
+        d->m_shutdownPositionTracking = false;
+        tracking->setPositionProviderPlugin( 0 );
     }
 
     adjustNavigation()->setAutoZoom( enabled );
