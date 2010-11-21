@@ -120,7 +120,14 @@ bool MonavPluginPrivate::startDaemon()
 
 void MonavPluginPrivate::stopDaemon()
 {
-    if ( m_ownsServer ) {
+    // So far Marble is the only application using monav-routingdaemon on Maemo.
+    // Always shut down the monav server there, since monav-routingdaemon will
+    // survive a crash of Marble and later block mounting a N900 via USB because
+    // it has loaded some data from it. This way if Marble crashed and monav blocks
+    // USB mounting (which the user will not be aware of), another start and shutdown
+    // of Marble will at least fix the USB mount block.
+    bool const smallScreen = MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen;
+    if ( smallScreen || m_ownsServer ) {
         m_ownsServer = false;
         QProcess process;
         process.startDetached( "MoNavD", QStringList() << "-t" );
