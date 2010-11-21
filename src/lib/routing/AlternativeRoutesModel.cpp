@@ -2,6 +2,7 @@
 
 #include "GeoDataDocument.h"
 #include "GeoDataFolder.h"
+#include "GeoDataExtendedData.h"
 #include "MarbleMath.h"
 #include "RoutingModel.h"
 #include "RouteAnnotator.h"
@@ -79,7 +80,7 @@ public:
     /**
       * Returns true if the given route contains instructions (placemarks with turn instructions)
       */
-    static bool hasInstructions( const GeoDataDocument* document );
+    static qreal instructionScore( const GeoDataDocument* document );
 
     static GeoDataLineString* waypoints( const GeoDataDocument* document );
 
@@ -222,14 +223,10 @@ qreal AlternativeRoutesModelPrivate::unidirectionalSimilarity( const GeoDataDocu
 
 bool AlternativeRoutesModelPrivate::higherScore( const GeoDataDocument* one, const GeoDataDocument* two )
 {
-    bool hasInstructonsA = hasInstructions( one );
-    bool hasInstructonsB = hasInstructions( two );
-    if ( hasInstructonsA && !hasInstructonsB ) {
-        return true;
-    }
-
-    if ( hasInstructonsB && !hasInstructonsA ) {
-        return false;
+    qreal instructionScoreA = instructionScore( one );
+    qreal instructionScoreB = instructionScore( two );
+    if ( instructionScoreA != instructionScoreB ) {
+        return instructionScoreA > instructionScoreB;
     }
 
     qreal lengthA = waypoints( one )->length( EARTH_RADIUS );
@@ -238,25 +235,32 @@ bool AlternativeRoutesModelPrivate::higherScore( const GeoDataDocument* one, con
     return lengthA < lengthB;
 }
 
-bool AlternativeRoutesModelPrivate::hasInstructions( const GeoDataDocument* document )
+qreal AlternativeRoutesModelPrivate::instructionScore( const GeoDataDocument* document )
 {
+    bool hasInstructions = false;
+
     QStringList blacklist = QStringList() << "" << "Route" << "Tessellated";
     QVector<GeoDataFolder*> folders = document->folderList();
     foreach( const GeoDataFolder *folder, folders ) {
         foreach( const GeoDataPlacemark *placemark, folder->placemarkList() ) {
             if ( !blacklist.contains( placemark->name() ) ) {
-                return true;
+                hasInstructions = true;
+                break;
             }
         }
     }
 
     foreach( const GeoDataPlacemark *placemark, document->placemarkList() ) {
         if ( !blacklist.contains( placemark->name() ) ) {
-            return true;
+            hasInstructions = true;
+
+            if ( placemark->extendedData().contains( "turnType" ) ) {
+                return 1.0;
+            }
         }
     }
 
-    return false;
+    return hasInstructions ? 0.5 : 0.0;
 }
 
 GeoDataLineString* AlternativeRoutesModelPrivate::waypoints( const GeoDataDocument* document )
