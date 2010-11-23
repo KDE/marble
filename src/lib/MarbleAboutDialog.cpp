@@ -59,25 +59,19 @@ MarbleAboutDialog::MarbleAboutDialog(QWidget *parent)
 
     if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
         d->uiWidget.m_pMarbleTitleLabel->hide();
+        d->uiWidget.m_pMarbleVersionLabel->hide();
         d->uiWidget.m_pMarbleLogoLabel->hide();
     }
     else {
         d->uiWidget.m_pMarbleLogoLabel->setPixmap( 
                 QPixmap( MarbleDirs::path("svg/marble-logo-72dpi.png") ) );
     }
-    setApplicationTitle( QObject::tr( "Marble Virtual Globe" ) );
-    d->uiWidget.m_pMarbleVersionLabel->setText( tr( "Using Marble Library version %1" ).arg( MARBLE_VERSION_STRING ) );
+
+    QString const applicationTitle = QObject::tr( "Marble Virtual Globe" );
+    setApplicationTitle( applicationTitle );
 
     connect( d->uiWidget.tabWidget, SIGNAL( currentChanged( int ) ), 
              this, SLOT( loadPageContents( int ) ) );
-
-    QTextBrowser* browser = d->uiWidget.m_pMarbleAboutBrowser;
-    browser->setHtml( tr("<br />(c) 2007, 2008, 2009, 2010 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>") );
-
-    QTextFrameFormat  format = browser->document()->rootFrame()->frameFormat();
-    format.setMargin(12);
-    browser->document()->rootFrame()->setFrameFormat( format );
-
 }
 
 MarbleAboutDialog::~MarbleAboutDialog()
@@ -260,7 +254,19 @@ void MarbleAboutDialog::loadPageContents( int idx )
 
 void MarbleAboutDialog::setApplicationTitle( const QString &title )
 {
-    d->uiWidget.m_pMarbleTitleLabel->setText( "<b>" + title + "</b>" );
+    QString const titleHtml = "<b>" + title + "</b>";
+    d->uiWidget.m_pMarbleTitleLabel->setText( titleHtml );
+    QString const applicationVersion = tr( "Using Marble Library version %1" ).arg( MARBLE_VERSION_STRING );
+    d->uiWidget.m_pMarbleVersionLabel->setText( applicationVersion );
+    QTextBrowser* browser = d->uiWidget.m_pMarbleAboutBrowser;
+    QString text;
+    if( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
+        text = titleHtml + "<br />" + applicationVersion + "<br />";
+    }
+    browser->setHtml( text + tr("<br />(c) 2007, 2008, 2009, 2010 The Marble Project<br /><br /><a href=\"http://edu.kde.org/marble\">http://edu.kde.org/marble</a>") );
+    QTextFrameFormat  format = browser->document()->rootFrame()->frameFormat();
+    format.setMargin(12);
+    browser->document()->rootFrame()->setFrameFormat( format );
 }
 
 }
