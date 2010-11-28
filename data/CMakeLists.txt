@@ -59,6 +59,7 @@ DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/citylights/legend)
 
 install (FILES
 maps/earth/clouds/0/000000/000000_000000.jpg
+maps/earth/clouds/0/000000/000000_000001.jpg
 DESTINATION ${MARBLE_DATA_INSTALL_PATH}/maps/earth/clouds/0/000000)
 
 install (FILES
