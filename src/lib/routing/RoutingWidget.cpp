@@ -192,10 +192,6 @@ RoutingWidget::RoutingWidget( MarbleWidget *marbleWidget, QWidget *parent ) :
 
     d->m_ui.routingProfileComboBox->setModel( d->m_routingManager->profilesModel() );
 
-    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-        d->m_ui.directionsListView->setVisible( false );
-    }
-
     connect( d->m_routingManager->profilesModel(), SIGNAL( rowsInserted( QModelIndex, int, int ) ),
              this, SLOT( selectFirstProfile() ) );
     connect( d->m_routingManager->profilesModel(), SIGNAL( modelReset() ),
@@ -335,11 +331,6 @@ void RoutingWidget::handleSearchResult( RoutingInputWidget *widget )
     if ( placemarks.size() > 1 ) {
         d->m_widget->centerOn( GeoDataLatLonBox::fromLineString( placemarks ) );
         //d->m_ui.descriptionLabel->setVisible( false );
-    }
-
-    if ( MarbleGlobal::getInstance()->profiles() & MarbleGlobal::SmallScreen ) {
-        d->m_ui.directionsListView->setVisible( placemarks.size() > 1 );
-        d->m_ui.directionsListView->setMinimumHeight( 200 );
     }
 }
 

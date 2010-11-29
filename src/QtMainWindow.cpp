@@ -35,7 +35,7 @@
 #include <QtGui/QPrinter>
 #include <QtGui/QDialogButtonBox>
 #include <QtGui/QHBoxLayout>
-
+#include <QtGui/QScrollArea>
 #include <QtGui/QClipboard>
 
 #include <QtNetwork/QNetworkProxy>
@@ -1245,8 +1245,12 @@ void MainWindow::showRoutingDialog()
         QDialogButtonBox *buttonBox = new QDialogButtonBox( QDialogButtonBox::Ok, Qt::Vertical, m_routingDialog );
         connect(buttonBox, SIGNAL( accepted() ), m_routingDialog, SLOT( accept() ) );
 
+        QScrollArea* scrollArea = new QScrollArea;
+        m_routingWidget->setMinimumWidth( 560 );
+        scrollArea->setWidget( m_routingWidget );
+
         QHBoxLayout* layout = new QHBoxLayout;
-        layout->addWidget( m_routingWidget );
+        layout->addWidget( scrollArea );
         layout->addWidget( buttonBox );
         m_routingDialog->setLayout( layout );
         m_routingDialog->resize( 640, 420 );
