@@ -28,7 +28,6 @@
 #include <QtGui/QScrollArea>
 #include <QtCore/QSet>
 
-#include "AbstractScanlineTextureMapper.h"
 #include "GeoDataLatLonAltBox.h"
 #include "GeoSceneTexture.h"
 #include "MarbleDebug.h"
@@ -61,7 +60,6 @@ public:
 
     int rad2PixelX( qreal const lon ) const;
     int rad2PixelY( qreal const lat ) const;
-    AbstractScanlineTextureMapper const * textureMapper() const;
     bool hasRoute() const;
     QDialog * m_dialog;
     QRadioButton * m_visibleRegionMethodButton;
@@ -97,9 +95,9 @@ DownloadRegionDialog::Private::Private( MarbleModel * const model,
       m_tileSizeInfo( 0 ),
       m_okButton( 0 ),
       m_applyButton( 0 ),
-      m_visibleTileLevel( model->textureMapper()->tileZoomLevel() ),
+      m_visibleTileLevel( model->tileZoomLevel() ),
       m_model( model ),
-      m_textureLayer( model->textureMapper()->textureLayer() ),
+      m_textureLayer( model->textureLayer() ),
       m_selectionMethod( VisibleRegionMethod ),
       m_visibleRegion(),
       m_routingModel( model->routingManager()->routingModel() )
@@ -234,13 +232,6 @@ int DownloadRegionDialog::Private::rad2PixelY( qreal const lat ) const
 
     // Dummy value to avoid a warning.
     return 0;
-}
-
-AbstractScanlineTextureMapper const * DownloadRegionDialog::Private::textureMapper() const
-{
-    AbstractScanlineTextureMapper const * const result = m_model->textureMapper();
-    Q_ASSERT( result );
-    return result;
 }
 
 bool DownloadRegionDialog::Private::hasRoute() const
@@ -458,8 +449,7 @@ void DownloadRegionDialog::setVisibleLatLonAltBox( GeoDataLatLonAltBox const & r
 void DownloadRegionDialog::updateTextureLayer()
 {
     mDebug() << "DownloadRegionDialog::updateTextureLayer";
-    AbstractScanlineTextureMapper const * const textureMapper = d->m_model->textureMapper();
-    d->m_textureLayer = textureMapper ? textureMapper->textureLayer() : 0;
+    d->m_textureLayer = d->m_model->textureLayer();
     updateTilesCount();
 }
 

@@ -48,7 +48,6 @@ namespace Marble
 
 class AbstractDataPlugin;
 class AbstractDataPluginItem;
-class AbstractScanlineTextureMapper;
 class GeoPainter;
 class MeasureTool;
 class TileCoordsPyramid;
@@ -243,8 +242,6 @@ class MARBLE_EXPORT MarbleModel : public QObject
 
     PlacemarkLayout    *placemarkLayout()   const;
 
-    AbstractScanlineTextureMapper  *textureMapper() const;
-
     FileViewModel      *fileViewModel()   const;
     PositionTracking   *positionTracking() const;
 
@@ -413,6 +410,7 @@ class MARBLE_EXPORT MarbleModel : public QObject
     Q_PRIVATE_SLOT( d, void notifyModelChanged() )
 
     void addDownloadPolicies( GeoSceneDocument *mapTheme );
+    friend class DownloadRegionDialog;
     GeoSceneTexture * textureLayer() const;
 
     MarbleModelPrivate  * const d;

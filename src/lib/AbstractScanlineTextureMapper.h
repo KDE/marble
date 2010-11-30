@@ -45,7 +45,6 @@ public:
     bool interlaced() const;
     void setInterlaced( const bool enabled );
     int tileZoomLevel() const;
-    GeoSceneTexture const * textureLayer() const;
 
  Q_SIGNALS:
     void mapChanged();
@@ -149,11 +148,6 @@ inline bool AbstractScanlineTextureMapper::interlaced() const
 inline void AbstractScanlineTextureMapper::setInterlaced( const bool enabled )
 {
     m_interlaced = enabled;
-}
-
-inline GeoSceneTexture const * AbstractScanlineTextureMapper::textureLayer() const
-{
-    return m_textureLayer;
 }
 
 inline int AbstractScanlineTextureMapper::globalWidth() const

@@ -736,11 +736,6 @@ QItemSelectionModel *MarbleModel::placemarkSelectionModel() const
     return &d->m_placemarkselectionmodel;
 }
 
-AbstractScanlineTextureMapper *MarbleModel::textureMapper() const
-{
-    return d->m_texmapper;
-}
-
 PlacemarkLayout *MarbleModel::placemarkLayout() const
 {
     return d->m_placemarkLayout;

@@ -56,3 +56,8 @@
 * Remove ViewParams::set{Canvas, Coast}Image. Introduce ViewParams::setSize().
   Instead of manually setting the canvas and coast images to the same size already specified in ViewParams::ViewportParams (using setCanvasImage and setCoastImage),
   calling setSize will update the viewportParam's and the images sizes and keep them synchronized.
+
+2010-11-29  Bernhard Beschow <bbeschow@cs.tu-berlin.de>
+
+* Remove MarbleModel::textureMapper().
+  AbstractScanlineTextureMapper isn't exported, so there shouldn't have been any usages outside libmarblewidget.
